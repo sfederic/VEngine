@@ -46,14 +46,16 @@ void UIContext::renderEnd()
 
 bool UIContext::button(D2D1_RECT_F rect)
 {
+	d2dRenderTarget->DrawRectangle(rect, brush);
+
 	if (mousePos.x > rect.left && mousePos.x < rect.right)
 	{
 		if (mousePos.y > rect.top && mousePos.y < rect.bottom)
 		{
-			d2dRenderTarget->DrawRectangle(rect, brush);
-
-			if (msg.wParam == MK_LBUTTON)
+			//if (GetKeyState(VK_LBUTTON) == 0)
+			if(mouseUp)
 			{
+				mouseUp = false;
 				return true;
 			}
 		}

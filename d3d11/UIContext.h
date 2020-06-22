@@ -13,6 +13,8 @@ public:
 	void update();
 	void renderStart();
 	void renderEnd();
+
+	//Create UI functions
 	bool button(D2D1_RECT_F rect);
 
 	POINT mousePos;

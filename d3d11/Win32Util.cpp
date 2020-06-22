@@ -5,6 +5,7 @@ HWND mainWindow;
 const int windowWidth = 800;
 const int windowHeight = 600;
 MSG msg;
+bool mouseUp;
 
 void Win32Util::SetupWindow(HINSTANCE instance, int cmdShow)
 {
@@ -72,6 +73,10 @@ LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam
 			return 0;
 		}
 
+		break;
+
+	case WM_LBUTTONUP:
+		mouseUp = true;
 		break;
 	}
 

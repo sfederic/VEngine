@@ -6,6 +6,7 @@ extern HWND mainWindow;
 extern const int windowWidth;
 extern const int windowHeight;
 extern MSG msg;
+extern bool mouseUp;
 
 LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam);
 
