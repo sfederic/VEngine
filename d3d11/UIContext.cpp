@@ -52,7 +52,6 @@ bool UIContext::button(D2D1_RECT_F rect)
 	{
 		if (mousePos.y > rect.top && mousePos.y < rect.bottom)
 		{
-			//if (GetKeyState(VK_LBUTTON) == 0)
 			if(mouseUp)
 			{
 				mouseUp = false;

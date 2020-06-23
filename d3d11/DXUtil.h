@@ -32,7 +32,7 @@ public:
 	void CreateShaders();
 	void CreateInputLayout();
 	void CreateRasterizerState();
-	void CreateVertexBuffer();
+	void CreateVertexBuffer(UINT size, const void* data);
 
 	void Render();
 

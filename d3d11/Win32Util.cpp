@@ -26,6 +26,7 @@ void Win32Util::SetTimerFrequency()
 {
 	QueryPerformanceFrequency((LARGE_INTEGER*)&freq);
 	ticks = 1.0 / (double)freq;
+	deltaAccum = 0.0;
 }
 
 void Win32Util::StartTimer()
@@ -37,6 +38,7 @@ void Win32Util::EndTimer()
 {
 	QueryPerformanceCounter((LARGE_INTEGER*)&end);
 	delta = ticks * (double)(end - start);
+	if (delta < 0.0) { delta = 0.0; }
 	deltaAccum += delta;
 	frameAccum++;
 	if (deltaAccum > 1.0)

@@ -3,13 +3,13 @@
 #include "DXUtil.h"
 #include "Win32Util.h"
 #include "UIContext.h"
-
-UIContext ui;
+#include "Obj.h"
 
 int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine, int cmdShow)
 {
 	Win32Util* win32 = new Win32Util;
 	DXUtil* dx = new DXUtil;
+	UIContext* ui = new UIContext;
 
 	win32->SetupWindow(instance, cmdShow);
 	win32->SetTimerFrequency();
@@ -20,11 +20,18 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	dx->CreateShaders();
 	dx->CreateInputLayout();
 	dx->CreateRasterizerState();
-	dx->CreateVertexBuffer();
+	//dx->CreateVertexBuffer();
 
-	ui.init(dx->swapchain);
+	ui->init(dx->swapchain);
 
-	MSG msg = {};
+	OBJData model;
+	if (loadOBJFile("Models/cube.obj", model))
+	{
+		UINT byteWidth = model.verts.size() * sizeof(float);
+		dx->CreateVertexBuffer(byteWidth, model.verts.data());
+	}
+
+
 	while (msg.message != WM_QUIT) 
 	{
 		win32->StartTimer();
@@ -35,16 +42,14 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 			DispatchMessage(&msg);
 		}
 
-		ui.update();
+		ui->update();
 		dx->Render();
 
-		ui.d2dRenderTarget->BeginDraw();
-		if (ui.button({ 0.f, 0.f, 100.f, 100.f }))
-		{
-			//ui.d2dRenderTarget->DrawLine({ 0.f, 0.f }, { 600.f, 100.f }, ui.brush);
-			OutputDebugString("Test");
-		}
-		ui.d2dRenderTarget->EndDraw();
+		ui->d2dRenderTarget->BeginDraw();
+
+		ui->d2dRenderTarget->EndDraw();
+
+		dx->context->Draw(model.verts.size() / 3, 0);
 
 		HR(dx->swapchain->Present(1, 0));
 

@@ -85,17 +85,11 @@ void DXUtil::CreateRasterizerState()
 	context->RSSetState(rastState);
 }
 
-void DXUtil::CreateVertexBuffer()
+void DXUtil::CreateVertexBuffer(UINT size, const void* data)
 {
-	Vertex triangle[] = {
-		{XMFLOAT3(-0.5f, -0.5f, 0.f)},
-		{XMFLOAT3(0.5f, -0.5f, 0.f)},
-		{XMFLOAT3(0.f, 0.5f, 0.f)}
-	};
-
 	ID3D11Buffer* vertexBuffer;
-	vertexBuffer = CreateDefaultBuffer(sizeof(triangle), D3D11_BIND_VERTEX_BUFFER, triangle);
-	UINT stride = sizeof(Vertex);
+	vertexBuffer = CreateDefaultBuffer(size, D3D11_BIND_VERTEX_BUFFER, data);
+	UINT stride = sizeof(float) * 3;
 	UINT offset = 0;
 	context->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, &offset);
 }
