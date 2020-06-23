@@ -3,9 +3,9 @@
 
 bool loadOBJFile(const char* filename, OBJData& data)
 {
-	std::vector<float> v; //Vertices
-	std::vector<float> vt; //Texcoords
-	std::vector<float> vn; //Normals
+	std::vector<XMFLOAT3> v; //Vertex posisitons
+	std::vector<XMFLOAT2> vt; //Texcoords
+	std::vector<XMFLOAT3> vn; //Normals
 	std::vector<uint16_t> vf; //Faces
 	std::vector<uint16_t> vtf;
 	std::vector<uint16_t> vnf; 
@@ -16,7 +16,7 @@ bool loadOBJFile(const char* filename, OBJData& data)
 	{
 		char errmsg[512];
 		snprintf(errmsg, sizeof(errmsg), "%s not found.", filename);
-		OutputDebugString(errmsg);
+		MessageBox(0, errmsg, "loadOBJFile", 0);
 		return false;
 	}
 
@@ -34,24 +34,19 @@ bool loadOBJFile(const char* filename, OBJData& data)
 		{
 			float v1, v2, v3;
 			fscanf_s(file, "%f %f %f\n", &v1, &v2, &v3);
-			v.push_back(v1);
-			v.push_back(v2);
-			v.push_back(v3);
+			v.push_back(XMFLOAT3(v1, v2, v3));
 		}
 		else if (strcmp(line, "vt") == 0) //Texcoords
 		{
 			float v1, v2;
 			fscanf_s(file, "%f %f\n", &v1, &v2);
-			vt.push_back(v1);
-			vt.push_back(v2);
+			vt.push_back(XMFLOAT2(v1, v2));
 		}
 		else if (strcmp(line, "vn") == 0) //Normals
 		{
 			float v1, v2, v3;
 			fscanf_s(file, "%f %f %f\n", &v1, &v2, &v3);
-			vn.push_back(v1);
-			vn.push_back(v2);
-			vn.push_back(v3);
+			vn.push_back(XMFLOAT3(v1, v2, v3));
 		}
 		else if (strcmp(line, "f") == 0) //Faces
 		{
@@ -61,9 +56,9 @@ bool loadOBJFile(const char* filename, OBJData& data)
 				&f[3], &f[4], &f[5],
 				&f[6], &f[7], &f[8]);
 
-			vf.push_back(f[0]); vf.push_back(f[1]); vf.push_back(f[2]);
-			vtf.push_back(f[3]); vtf.push_back(f[4]); vtf.push_back(f[5]);
-			vnf.push_back(f[6]); vnf.push_back(f[7]); vnf.push_back(f[8]);
+			vf.push_back(f[0]); vtf.push_back(f[1]); vnf.push_back(f[2]);
+			vf.push_back(f[3]); vtf.push_back(f[4]); vnf.push_back(f[5]);
+			vf.push_back(f[6]); vtf.push_back(f[7]); vnf.push_back(f[8]);
 		}
 	}
 
@@ -73,11 +68,25 @@ bool loadOBJFile(const char* filename, OBJData& data)
 	if (vt.size() > 0) { data.uvs.reserve(reserveSize); }
 	if (vn.size() > 0) { data.normals.reserve(reserveSize); }
 
-	for (int i = 0; i < reserveSize; i++)
+	for (int i = 0; i < vf.size(); i++)
 	{
-		data.verts.push_back(v[vf[i] - 1]);
-		data.uvs.push_back(vt[vtf[i] - 1]);
-		data.normals.push_back(vn[vnf[i] - 1]);
+		int index = vf[i] - 1;
+		assert(index < v.size());
+		data.verts.push_back(v[index]);
+	}
+
+	for (int i = 0; i < vtf.size(); i++)
+	{
+		int index = vtf[i] - 1;
+		assert(index < vt.size());
+		data.uvs.push_back(vt[index]);
+	}
+
+	for (int i = 0; i < vnf.size(); i++)
+	{
+		int index = vnf[i] - 1;
+		assert(index < vn.size());
+		data.normals.push_back(vn[index]);
 	}
 
 	fclose(file);

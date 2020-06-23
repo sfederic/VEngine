@@ -5,6 +5,7 @@ void DXUtil::CreateDevice()
 {
 	D3D_FEATURE_LEVEL featureLevels[] = { D3D_FEATURE_LEVEL_11_1, D3D_FEATURE_LEVEL_11_0 };
 
+	//BGRA support needed for DirectWrite and Direct2D
 	HR(D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, 0, D3D11_CREATE_DEVICE_DEBUG | D3D11_CREATE_DEVICE_BGRA_SUPPORT,
 		featureLevels, _countof(featureLevels), D3D11_SDK_VERSION, &device, &featureLevel, &context));
 }
@@ -89,7 +90,7 @@ void DXUtil::CreateVertexBuffer(UINT size, const void* data)
 {
 	ID3D11Buffer* vertexBuffer;
 	vertexBuffer = CreateDefaultBuffer(size, D3D11_BIND_VERTEX_BUFFER, data);
-	UINT stride = sizeof(float) * 3;
+	UINT stride = sizeof(Vertex);
 	UINT offset = 0;
 	context->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, &offset);
 }
@@ -106,8 +107,6 @@ void DXUtil::Render()
 
 	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-	context->Draw(3, 0);
 }
 
 ID3DBlob* DXUtil::CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target)

@@ -5,11 +5,15 @@
 
 #include <d2d1_1.h>
 #include <dwrite_1.h>
+#include <wrl.h>
+
+using namespace Microsoft::WRL;
 
 class UIContext
 {
 public:
 	void init(IDXGISwapChain* swapchain);
+	void cleanup(); //D2D1 Actually throws errors if no cleanup
 	void update();
 	void renderStart();
 	void renderEnd();

@@ -18,6 +18,7 @@ public:
 	void StartTimer();
 	void EndTimer();
 	void HandleMessages(MSG msg);
+	float GetAspectRatio();
 
 	__int64 start, end, freq;
 	double delta, deltaAccum, ticks;

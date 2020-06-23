@@ -28,6 +28,15 @@ void UIContext::init(IDXGISwapChain* swapchain)
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::AliceBlue), &brush));
 }
 
+void UIContext::cleanup()
+{
+	d2dFactory->Release();
+	d2dRenderTarget->Release();
+	writeFactory->Release();
+	brush->Release();
+	textFormat->Release();
+}
+
 void UIContext::update()
 {
 	GetCursorPos(&mousePos);
