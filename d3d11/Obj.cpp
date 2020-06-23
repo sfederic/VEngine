@@ -64,29 +64,27 @@ bool loadOBJFile(const char* filename, OBJData& data)
 
 	int reserveSize = vf.size();
 
-	if (v.size() > 0) { data.verts.reserve(reserveSize); }
-	if (vt.size() > 0) { data.uvs.reserve(reserveSize); }
-	if (vn.size() > 0) { data.normals.reserve(reserveSize); }
+	//if (v.size() > 0) { data.verts.reserve(reserveSize); }
+	//if (vt.size() > 0) { data.uvs.reserve(reserveSize); }
+	//if (vn.size() > 0) { data.normals.reserve(reserveSize); }
 
 	for (int i = 0; i < vf.size(); i++)
 	{
-		int index = vf[i] - 1;
-		assert(index < v.size());
-		data.verts.push_back(v[index]);
-	}
+		Vertex vertex = {};
 
-	for (int i = 0; i < vtf.size(); i++)
-	{
-		int index = vtf[i] - 1;
-		assert(index < vt.size());
-		data.uvs.push_back(vt[index]);
-	}
+		int vf_index = vf[i] - 1;
+		assert(vf_index < v.size());
+		vertex.pos = v[vf_index];
 
-	for (int i = 0; i < vnf.size(); i++)
-	{
-		int index = vnf[i] - 1;
-		assert(index < vn.size());
-		data.normals.push_back(vn[index]);
+		int vtf_index = vtf[i] - 1;
+		assert(vtf_index < vt.size());
+		vertex.uv = vt[vtf_index];
+
+		int vnf_index = vnf[i] - 1;
+		assert(vnf_index < vn.size());
+		vertex.normal = vn[vnf_index];
+
+		data.verts.push_back(vertex);
 	}
 
 	fclose(file);

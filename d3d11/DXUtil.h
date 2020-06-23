@@ -17,6 +17,8 @@ using namespace DirectX;
 struct Vertex
 {
 	XMFLOAT3 pos;
+	XMFLOAT2 uv;
+	XMFLOAT3 normal;
 };
 
 void DXTrace(HRESULT hr, const char* filename, const char* func, int line);

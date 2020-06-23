@@ -1,30 +1,40 @@
 cbuffer cbPerObject
 {
-	row_major float4x4 model;
-	row_major float4x4 view;
-	row_major float4x4 proj;
-	row_major float4x4 mvp;
+	float4x4 model;
+	float4x4 view;
+	float4x4 proj;
+	float4x4 mvp;
 };
 
 struct VS_IN
 {
-	float3 pos: POSITION;
+	float3 pos : POSITION;
+	float2 uv : TEXCOORD;
+	float3 normal : NORMAL;
 };
 
 struct VS_OUT
 {
 	float4 pos: SV_POSITION;
+	float2 uv : TEXCOORD;
+	float3 normal : NORMAL;
 };
 
 VS_OUT VSMain(VS_IN i)
 {
 	VS_OUT o;
-	o.pos = mul(float4(i.pos, 1.0f), mvp);
+	o.pos = mul(mvp, float4(i.pos, 1.0f));
+	o.uv = i.uv;
+	o.normal = i.normal;
 
 	return o;
 }
 
 float4 PSMain(VS_OUT i) : SV_Target
 {
-	return float4(1.0f, 1.0f, 0.f, 1.f);
+	float3 lightDir = float3(0.3f, 0.1f, 0.9f);
+
+	float diffuse = dot(-lightDir, i.normal);
+
+	return float4(0.8f, 0.2f, 0.05f, 1.f) * diffuse;
 }

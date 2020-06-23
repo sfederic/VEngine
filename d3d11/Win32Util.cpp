@@ -62,7 +62,7 @@ void Win32Util::HandleMessages(MSG msg)
 
 float Win32Util::GetAspectRatio()
 {
-	return (float)(windowWidth / windowHeight);
+	return (float)((float)windowWidth / (float)windowHeight);
 }
 
 LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam)

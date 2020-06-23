@@ -43,7 +43,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 	matrices.model = XMMatrixIdentity();
 	matrices.view = XMMatrixLookAtLH(camera.location, camera.focusPoint, camera.worldUp);
-	matrices.proj = XMMatrixPerspectiveFovLH(0.25f * XM_PI, win32->GetAspectRatio(), 0.01f, 1000.f);
+	matrices.proj = XMMatrixPerspectiveFovLH(XM_PI / 3, win32->GetAspectRatio(), 0.01f, 1000.f);
 	matrices.mvp = matrices.model * matrices.view * matrices.proj;
 
 	ID3D11Buffer* cbMatrices = dx->CreateDefaultBuffer(sizeof(Matrices), D3D11_BIND_CONSTANT_BUFFER, &matrices);
@@ -52,12 +52,11 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	ui->init(dx->swapchain);
 
 	OBJData model;
-	if (loadOBJFile("Models/cube.obj", model))
+	if (loadOBJFile("Models/sphere.obj", model))
 	{
 		UINT byteWidth = model.verts.size() * sizeof(Vertex);
 		dx->CreateVertexBuffer(byteWidth, model.verts.data());
 	}
-
 
 	while (msg.message != WM_QUIT) 
 	{
@@ -72,6 +71,27 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		ui->update();
 		dx->Render();
 
+		if (GetAsyncKeyState(VK_UP))
+		{
+			camera.location.m128_f32[1] += 0.05f;
+		}
+		if (GetAsyncKeyState(VK_RIGHT))
+		{
+			camera.location.m128_f32[0] += 0.05f;
+		}
+		if (GetAsyncKeyState(VK_LEFT))
+		{
+			camera.location.m128_f32[0] -= 0.05f;
+		}
+		if (GetAsyncKeyState(VK_DOWN))
+		{
+			camera.location.m128_f32[1] -= 0.05f;
+		}
+
+
+		matrices.view = XMMatrixLookAtLH(camera.location, camera.focusPoint, camera.worldUp);
+		matrices.mvp = matrices.model * matrices.view * matrices.proj;
+		dx->context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 		//ui->d2dRenderTarget->BeginDraw();
 
 		//ui->d2dRenderTarget->EndDraw();

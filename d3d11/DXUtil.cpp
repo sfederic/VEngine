@@ -67,7 +67,9 @@ void DXUtil::CreateShaders()
 void DXUtil::CreateInputLayout()
 {
 	D3D11_INPUT_ELEMENT_DESC inputDesc[] = {
-	{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, pos), D3D11_INPUT_PER_VERTEX_DATA, 0}
+		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, pos), D3D11_INPUT_PER_VERTEX_DATA, 0},
+		{"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, offsetof(Vertex, uv), D3D11_INPUT_PER_VERTEX_DATA, 0},
+		{"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, normal), D3D11_INPUT_PER_VERTEX_DATA, 0}
 	};
 
 	HR(device->CreateInputLayout(inputDesc, _countof(inputDesc), vertexCode->GetBufferPointer(), vertexCode->GetBufferSize(), &inputLayout));
@@ -78,9 +80,9 @@ void DXUtil::CreateRasterizerState()
 {
 	D3D11_RASTERIZER_DESC rastDesc = {};
 	rastDesc.FillMode = D3D11_FILL_SOLID;
-	rastDesc.CullMode = D3D11_CULL_NONE;
+	rastDesc.CullMode = D3D11_CULL_BACK;
 	rastDesc.DepthClipEnable = TRUE;
-	rastDesc.FrontCounterClockwise = TRUE;
+	rastDesc.FrontCounterClockwise = FALSE;
 
 	HR(device->CreateRasterizerState(&rastDesc, &rastState));
 	context->RSSetState(rastState);
