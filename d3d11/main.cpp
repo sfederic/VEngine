@@ -51,12 +51,24 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	
 	ui->init(dx->swapchain);
 
+
+
+	__int64 s, e;
 	OBJData model;
+
+	QueryPerformanceCounter((LARGE_INTEGER*)&s);
+
 	if (loadOBJFile("Models/sphere.obj", model))
 	{
+		char m[128];
+		QueryPerformanceCounter((LARGE_INTEGER*)&e);
+		snprintf(m, sizeof(m), "%lld\n", (e - s));
+		OutputDebugString(m);
+
 		UINT byteWidth = model.verts.size() * sizeof(Vertex);
 		dx->CreateVertexBuffer(byteWidth, model.verts.data());
 	}
+
 
 	while (msg.message != WM_QUIT) 
 	{
@@ -92,9 +104,10 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		matrices.view = XMMatrixLookAtLH(camera.location, camera.focusPoint, camera.worldUp);
 		matrices.mvp = matrices.model * matrices.view * matrices.proj;
 		dx->context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
-		//ui->d2dRenderTarget->BeginDraw();
 
-		//ui->d2dRenderTarget->EndDraw();
+		ui->d2dRenderTarget->BeginDraw();
+
+		ui->d2dRenderTarget->EndDraw();
 
 		dx->context->Draw(model.verts.size(), 0);
 

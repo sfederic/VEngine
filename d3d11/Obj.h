@@ -9,10 +9,12 @@ using namespace DirectX;
 struct OBJData
 {
 	std::vector<Vertex> verts;
-
-	//std::vector<XMFLOAT3> verts;
-	//std::vector<XMFLOAT2> uvs;
-	//std::vector<XMFLOAT3> normals;
 };
 
+/*struct OBJDataRealloc
+{
+	Vertex* verts;
+};*/
+
 bool loadOBJFile(const char* filename, OBJData& data);
+//bool loadOBJFileRealloc(const char* filename, OBJDataRealloc* data);

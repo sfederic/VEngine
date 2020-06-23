@@ -5,9 +5,6 @@
 
 #include <d2d1_1.h>
 #include <dwrite_1.h>
-#include <wrl.h>
-
-using namespace Microsoft::WRL;
 
 class UIContext
 {

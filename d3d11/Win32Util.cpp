@@ -1,4 +1,5 @@
 #include "Win32Util.h"
+#include "UIContext.h"
 #include <stdio.h>
 
 HWND mainWindow;
