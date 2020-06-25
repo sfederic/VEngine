@@ -1,6 +1,13 @@
 #include "Camera.h"
 #include "Win32Util.h"
 
+Camera::Camera()
+{
+	forward = XMVectorSet(0.f, 0.f, 1.f, 0.f);
+	right = XMVectorSet(1.f, 0.f, 0.f, 0.f);
+	up = XMVectorSet(0.f, 1.f, 0.f, 0.f);
+}
+
 void Camera::UpdateViewMatrix()
 {
 	forward = XMVector3Normalize(forward);
@@ -11,21 +18,21 @@ void Camera::UpdateViewMatrix()
 	float y = XMVectorGetX(XMVector3Dot(location, up));
 	float z = XMVectorGetX(XMVector3Dot(location, forward));
 
-	//TODO: see if ASM generated is still SSE unrolled
+	//TODO: see if ASM generated is still SSE unrolled, otherwise use intrinsics
 	view.r[0].m128_f32[0] = right.m128_f32[0];
 	view.r[1].m128_f32[0] = right.m128_f32[1];
 	view.r[2].m128_f32[0] = right.m128_f32[2];
-	view.r[3].m128_f32[0] = x;
+	view.r[3].m128_f32[0] = -x;
 
 	view.r[0].m128_f32[1] = up.m128_f32[0];
 	view.r[1].m128_f32[1] = up.m128_f32[1];
 	view.r[2].m128_f32[1] = up.m128_f32[2];
-	view.r[3].m128_f32[1] = y;
+	view.r[3].m128_f32[1] = -y;
 
 	view.r[0].m128_f32[2] = forward.m128_f32[0];
 	view.r[1].m128_f32[2] = forward.m128_f32[1];
 	view.r[2].m128_f32[2] = forward.m128_f32[2];
-	view.r[3].m128_f32[2] = z;
+	view.r[3].m128_f32[2] = -z;
 
 	view.r[0].m128_f32[3] = 0.0f;
 	view.r[1].m128_f32[3] = 0.0f;
@@ -43,6 +50,12 @@ void Camera::MoveForward(float d)
 {
 	XMVECTOR s = XMVectorReplicate(d);
 	location = XMVectorMultiplyAdd(s, forward, location);	
+}
+
+void Camera::MoveUp(float d)
+{
+	XMVECTOR s = XMVectorReplicate(d);
+	location = XMVectorMultiplyAdd(s, up, location);
 }
 
 void Camera::Pitch(float angle)

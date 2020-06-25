@@ -3,6 +3,7 @@
 #include "UIContext.h"
 #include "Obj.h"
 #include "Camera.h"
+#include "Audio.h"
 
 //Temp constant buffer
 struct Matrices
@@ -45,6 +46,8 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	
 	ui->init(dx->swapchain);
 
+	playAudio("game01.wav");
+	
 	//Temp model loading
 	OBJData model;
 	if (loadOBJFile("Models/sphere.obj", model))
@@ -67,24 +70,32 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		ui->update();
 		dx->Render();
 
-		if (GetAsyncKeyState(VK_UP))
+		if (GetAsyncKeyState('W'))
 		{
-			//camera.
+			camera.MoveForward(5.f * win32->delta);
 		}
-		if (GetAsyncKeyState(VK_RIGHT))
+		if (GetAsyncKeyState('S'))
 		{
-			camera.location.m128_f32[0] += 0.05f;
+			camera.MoveForward(-5.f * win32->delta);
 		}
-		if (GetAsyncKeyState(VK_LEFT))
+		if (GetAsyncKeyState('D'))
 		{
-			camera.location.m128_f32[0] -= 0.05f;
+			camera.Strafe(5.f * win32->delta);
 		}
-		if (GetAsyncKeyState(VK_DOWN))
+		if (GetAsyncKeyState('A'))
 		{
-			camera.location.m128_f32[1] -= 0.05f;
+			camera.Strafe(-5.f * win32->delta);
+		}
+		if (GetAsyncKeyState('Q'))
+		{
+			camera.MoveUp(-5.f * win32->delta);
+		}
+		if (GetAsyncKeyState('E'))
+		{
+			camera.MoveUp(5.f * win32->delta);
 		}
 
-		//camera.MouseMove()
+		camera.MouseMove(ui->mousePos.x, ui->mousePos.y);
 
 		camera.UpdateViewMatrix();
 		//matrices.view = XMMatrixLookAtLH(camera.location, camera.focusPoint, camera.worldUp);
