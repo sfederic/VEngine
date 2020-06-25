@@ -4,6 +4,7 @@
 #include "Obj.h"
 #include "Camera.h"
 #include "Audio.h"
+#include "AudioContext.h"
 
 //Temp constant buffer
 struct Matrices
@@ -43,11 +44,10 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 	ID3D11Buffer* cbMatrices = dx->CreateDefaultBuffer(sizeof(Matrices), D3D11_BIND_CONSTANT_BUFFER, &matrices);
 	dx->context->VSSetConstantBuffers(0, 1, &cbMatrices);
-	
+
 	ui->init(dx->swapchain);
 
-	playAudio("game01.wav");
-	
+
 	//Temp model loading
 	OBJData model;
 	if (loadOBJFile("Models/sphere.obj", model))
@@ -56,10 +56,20 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		dx->CreateVertexBuffer(byteWidth, model.verts.data());
 	}
 
+	AudioContext* ac = new AudioContext;
+	ac->Init();
+
+	//Temp XAUDIO testing
+	AudioChunk chunk = {};
+	ac->CreateAudio("note.wav", &chunk);
+	ac->PlayAudio(&chunk);
+		
 	//MAIN LOOP
 	while (msg.message != WM_QUIT) 
 	{
 		win32->StartTimer();
+
+
 
 		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
 		{
