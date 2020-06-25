@@ -2,7 +2,9 @@
 #include "Win32Util.h"
 #include "UIContext.h"
 #include "Obj.h"
+#include "Camera.h"
 
+//Temp constant buffer
 struct Matrices
 {
 	XMMATRIX model;
@@ -10,15 +12,6 @@ struct Matrices
 	XMMATRIX proj;
 	XMMATRIX mvp;
 }matrices;
-
-class Camera
-{
-public:
-
-	XMVECTOR location;
-	XMVECTOR focusPoint;
-	XMVECTOR worldUp;
-};
 
 int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine, int cmdShow)
 {
@@ -42,7 +35,8 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	camera.worldUp = XMVectorSet(0.f, 1.f, 0.f, 0.f);
 
 	matrices.model = XMMatrixIdentity();
-	matrices.view = XMMatrixLookAtLH(camera.location, camera.focusPoint, camera.worldUp);
+	camera.view = XMMatrixLookAtLH(camera.location, camera.focusPoint, camera.worldUp);
+	matrices.view = camera.view;
 	matrices.proj = XMMatrixPerspectiveFovLH(XM_PI / 3, win32->GetAspectRatio(), 0.01f, 1000.f);
 	matrices.mvp = matrices.model * matrices.view * matrices.proj;
 
@@ -51,25 +45,15 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	
 	ui->init(dx->swapchain);
 
-
-
-	__int64 s, e;
+	//Temp model loading
 	OBJData model;
-
-	QueryPerformanceCounter((LARGE_INTEGER*)&s);
-
 	if (loadOBJFile("Models/sphere.obj", model))
 	{
-		char m[128];
-		QueryPerformanceCounter((LARGE_INTEGER*)&e);
-		snprintf(m, sizeof(m), "%lld\n", (e - s));
-		OutputDebugString(m);
-
-		UINT byteWidth = model.verts.size() * sizeof(Vertex);
+		UINT byteWidth = model.GetByteWidth();
 		dx->CreateVertexBuffer(byteWidth, model.verts.data());
 	}
 
-
+	//MAIN LOOP
 	while (msg.message != WM_QUIT) 
 	{
 		win32->StartTimer();
@@ -85,7 +69,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 		if (GetAsyncKeyState(VK_UP))
 		{
-			camera.location.m128_f32[1] += 0.05f;
+			//camera.
 		}
 		if (GetAsyncKeyState(VK_RIGHT))
 		{
@@ -100,8 +84,11 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 			camera.location.m128_f32[1] -= 0.05f;
 		}
 
+		//camera.MouseMove()
 
-		matrices.view = XMMatrixLookAtLH(camera.location, camera.focusPoint, camera.worldUp);
+		camera.UpdateViewMatrix();
+		//matrices.view = XMMatrixLookAtLH(camera.location, camera.focusPoint, camera.worldUp);
+		matrices.view = camera.view;
 		matrices.mvp = matrices.model * matrices.view * matrices.proj;
 		dx->context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 

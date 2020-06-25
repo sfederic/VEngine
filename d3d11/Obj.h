@@ -9,6 +9,11 @@ using namespace DirectX;
 struct OBJData
 {
 	std::vector<Vertex> verts;
+
+	UINT GetByteWidth()
+	{
+		return (UINT)(sizeof(Vertex) * verts.size());
+	}
 };
 
 /*struct OBJDataRealloc

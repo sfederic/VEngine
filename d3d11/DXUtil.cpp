@@ -13,7 +13,7 @@ void DXUtil::CreateDevice()
 void DXUtil::CreateSwapchain()
 {
 	DXGI_SWAP_CHAIN_DESC sd = {};
-	sd.BufferDesc = { 800, 600, {60, 1}, DXGI_FORMAT_R8G8B8A8_UNORM };
+	sd.BufferDesc = { (UINT)windowWidth, (UINT)windowHeight, {60, 1}, DXGI_FORMAT_R8G8B8A8_UNORM };
 	sd.Windowed = TRUE;
 	sd.SampleDesc.Count = 1;
 	sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
