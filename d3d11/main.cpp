@@ -62,13 +62,15 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	//Temp XAUDIO testing
 	AudioChunk chunk = {};
 	ac->CreateAudio("note.wav", &chunk);
-	ac->PlayAudio(&chunk);
+	chunk.SetPitch(1.5f);
 		
 	//MAIN LOOP
 	while (msg.message != WM_QUIT) 
 	{
 		win32->StartTimer();
 
+		ac->PlayAudio(&chunk);
+		WaitForSingleObject(chunk.callback.hBufferEndEvent, INFINITE);
 
 
 		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))

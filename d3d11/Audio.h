@@ -18,7 +18,7 @@ public:
     void OnVoiceProcessingPassEnd() { }
     void OnVoiceProcessingPassStart(UINT32 SamplesRequired) {    }
     void OnBufferEnd(void* pBufferContext) { }
-    void OnBufferStart(void* pBufferContext) {    }
+    void OnBufferStart(void* pBufferContext) { }
     void OnLoopEnd(void* pBufferContext) {    }
     void OnVoiceError(void* pBufferContext, HRESULT Error) { }
 };
@@ -26,6 +26,10 @@ public:
 class AudioBase
 {
 public:
+
+    VoiceCallback callback;
+
+    void SetPitch(float ratio);
 
 	WAVEFORMATEXTENSIBLE waveFormat;
 	XAUDIO2_BUFFER buffer;
