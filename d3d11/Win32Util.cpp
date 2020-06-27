@@ -1,12 +1,12 @@
 #include "Win32Util.h"
 #include "UIContext.h"
+#include "Input.h"
 #include <stdio.h>
 
 HWND mainWindow;
 const int windowWidth = 800;
 const int windowHeight = 600;
 MSG msg;
-bool mouseUp;
 
 void Win32Util::SetupWindow(HINSTANCE instance, int cmdShow)
 {
@@ -68,6 +68,9 @@ float Win32Util::GetAspectRatio()
 
 LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam)
 {
+	bool wasDown = (lparam & (1 << 38)) != 0;
+	bool isDown = (lparam & (1 << 31)) == 0;
+
 	switch (message)
 	{
 	case WM_DESTROY:
@@ -75,12 +78,18 @@ LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam
 		return 0;
 
 	case WM_KEYDOWN:
+		StoreKeyDownInput(wparam);
+
 		if (wparam == VK_RETURN)
 		{
 			DestroyWindow(window);
 			return 0;
 		}
 
+		break;
+
+	case WM_KEYUP:
+		StoreKeyUpInput(wparam);
 		break;
 
 	case WM_LBUTTONUP:

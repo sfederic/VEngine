@@ -76,7 +76,7 @@ void DXUtil::CreateInputLayout()
 	context->IASetInputLayout(inputLayout);
 }
 
-void DXUtil::CreateRasterizerState()
+void DXUtil::CreateRasterizerStates()
 {
 	D3D11_RASTERIZER_DESC rastDesc = {};
 	rastDesc.FillMode = D3D11_FILL_SOLID;
@@ -84,8 +84,12 @@ void DXUtil::CreateRasterizerState()
 	rastDesc.DepthClipEnable = TRUE;
 	rastDesc.FrontCounterClockwise = FALSE;
 
-	HR(device->CreateRasterizerState(&rastDesc, &rastState));
-	context->RSSetState(rastState);
+	HR(device->CreateRasterizerState(&rastDesc, &rastStateSolid));
+	context->RSSetState(rastStateSolid);
+
+	rastDesc.FillMode = D3D11_FILL_WIREFRAME;
+	rastDesc.CullMode = D3D11_CULL_NONE;
+	HR(device->CreateRasterizerState(&rastDesc, &rastStateWireframe));
 }
 
 void DXUtil::CreateVertexBuffer(UINT size, const void* data)

@@ -5,6 +5,7 @@
 #include "Camera.h"
 #include "Audio.h"
 #include "AudioContext.h"
+#include "Input.h"
 
 //Temp constant buffer
 struct Matrices
@@ -29,7 +30,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	dx->CreateRTVAndDSV();
 	dx->CreateShaders();
 	dx->CreateInputLayout();
-	dx->CreateRasterizerState();
+	dx->CreateRasterizerStates();
 
 	Camera camera = {};
 	camera.focusPoint = XMVectorSet(0.f, 0.f, 0.f, 1.f);
@@ -58,20 +59,11 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 	AudioContext* ac = new AudioContext;
 	ac->Init();
-
-	//Temp XAUDIO testing
-	AudioChunk chunk = {};
-	ac->CreateAudio("note.wav", &chunk);
-	chunk.SetPitch(1.5f);
 		
 	//MAIN LOOP
 	while (msg.message != WM_QUIT) 
 	{
 		win32->StartTimer();
-
-		ac->PlayAudio(&chunk);
-		WaitForSingleObject(chunk.callback.hBufferEndEvent, INFINITE);
-
 
 		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
 		{
@@ -81,6 +73,16 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 		ui->update();
 		dx->Render();
+
+		if (GetAsyncKeyState('1'))
+		{
+			dx->context->RSSetState(dx->rastStateWireframe);
+		}
+		if (GetAsyncKeyState('2'))
+		{
+			dx->context->RSSetState(dx->rastStateSolid);
+		}
+
 
 		if (GetAsyncKeyState('W'))
 		{

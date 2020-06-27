@@ -33,7 +33,7 @@ public:
 	void CreateRTVAndDSV();
 	void CreateShaders();
 	void CreateInputLayout();
-	void CreateRasterizerState();
+	void CreateRasterizerStates();
 	void CreateVertexBuffer(UINT size, const void* data);
 
 	void Render();
@@ -53,7 +53,8 @@ public:
 	ID3D11InputLayout* inputLayout;
 	ID3D11VertexShader* vertexShader;
 	ID3D11PixelShader* pixelShader;
-	ID3D11RasterizerState* rastState;
+	ID3D11RasterizerState* rastStateSolid;
+	ID3D11RasterizerState* rastStateWireframe;
 	IDXGIFactory* dxgiFactory;
 
 	ID3DBlob* vertexCode;

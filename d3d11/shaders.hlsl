@@ -32,9 +32,8 @@ VS_OUT VSMain(VS_IN i)
 
 float4 PSMain(VS_OUT i) : SV_Target
 {
-	float3 lightDir = float3(0.3f, 0.1f, 0.9f);
+	float3 lightDir = float3(0.0f, 0.0f, 1.0f);
 
 	float diffuse = dot(-lightDir, i.normal);
-
 	return float4(0.8f, 0.2f, 0.05f, 1.f) * diffuse;
 }

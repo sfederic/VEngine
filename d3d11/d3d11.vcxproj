@@ -144,6 +144,7 @@
     <ClCompile Include="AudioContext.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DXUtil.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="UIContext.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="AudioContext.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DXUtil.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="UIContext.h" />
     <ClInclude Include="Win32Util.h" />
