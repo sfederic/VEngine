@@ -30,6 +30,9 @@ VS_OUT VSMain(VS_IN i)
 	return o;
 }
 
+Texture2D t;
+SamplerState s : register(s0);
+
 float4 PSMain(VS_OUT i) : SV_Target
 {
 	float3 lightDir = float3(0.0f, 0.0f, 1.0f);
