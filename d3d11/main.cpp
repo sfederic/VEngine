@@ -6,6 +6,7 @@
 #include "Audio.h"
 #include "AudioContext.h"
 #include "Input.h"
+#include "WICTextureLoader.h"
 
 //Temp constant buffer
 struct Matrices
@@ -52,9 +53,24 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 	ui.init(dx.swapchain);
 
+	ID3D11Resource* testTexture;
+	ID3D11ShaderResourceView* testSrv;
+	HR(CreateWICTextureFromFile(dx.device, L"texture.png", &testTexture, &testSrv));
+	dx.context->PSSetShaderResources(0, 1, &testSrv);
+
+	D3D11_SAMPLER_DESC sampDesc = {};
+	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+
+	ID3D11SamplerState* testSampler;
+	dx.device->CreateSamplerState(&sampDesc, &testSampler);
+	dx.context->PSSetSamplers(0, 1, &testSampler);
+
 	//Temp model loading
 	OBJData model;
-	if (loadOBJFile("Models/sphere.obj", model))
+	if (loadOBJFile("Models/grid.obj", model))
 	{
 		UINT byteWidth = model.GetByteWidth();
 		dx.CreateVertexBuffer(byteWidth, model.verts.data());
