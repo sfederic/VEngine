@@ -11,6 +11,7 @@
 #include <d2d1_1.h>
 #include <comdef.h>
 #include <DirectXMath.h>
+//#include "Actor.h"
 
 using namespace DirectX;
 
@@ -34,7 +35,7 @@ public:
 	void CreateShaders();
 	void CreateInputLayout();
 	void CreateRasterizerStates();
-	void CreateVertexBuffer(UINT size, const void* data);
+	void CreateVertexBuffer(UINT size, const void* data, class Actor* actor);
 
 	void Render();
 

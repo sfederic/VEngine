@@ -1,5 +1,6 @@
 #include "DXUtil.h"
 #include "Win32Util.h"
+#include "Actor.h"
 
 void DXUtil::CreateDevice()
 {
@@ -92,10 +93,12 @@ void DXUtil::CreateRasterizerStates()
 	HR(device->CreateRasterizerState(&rastDesc, &rastStateWireframe));
 }
 
-void DXUtil::CreateVertexBuffer(UINT size, const void* data)
+void DXUtil::CreateVertexBuffer(UINT size, const void* data, Actor* actor)
 {
 	ID3D11Buffer* vertexBuffer;
 	vertexBuffer = CreateDefaultBuffer(size, D3D11_BIND_VERTEX_BUFFER, data);
+	actor->vertexBuffer = vertexBuffer; //Temp pointer to vertexbuffer in mem for actor
+
 	UINT stride = sizeof(Vertex);
 	UINT offset = 0;
 	context->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, &offset);

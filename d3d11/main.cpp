@@ -7,7 +7,9 @@
 #include "AudioContext.h"
 #include "Input.h"
 #include "WICTextureLoader.h"
+#include "Actor.h"
 
+//TODO: move into dxutil
 //Temp constant buffer
 struct Matrices
 {
@@ -20,13 +22,10 @@ struct Matrices
 Win32Util win32;
 DXUtil dx;
 UIContext ui;
+AudioContext ac;
 
 int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine, int cmdShow)
 {
-	//Win32Util* win32 = new Win32Util;
-	//DXUtil* dx = new DXUtil;
-	//UIContext* ui = new UIContext;
-
 	win32.SetupWindow(instance, cmdShow);
 	win32.SetTimerFrequency();
 
@@ -36,6 +35,8 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	dx.CreateShaders();
 	dx.CreateInputLayout();
 	dx.CreateRasterizerStates();
+
+	ac.Init();
 
 	Camera camera = {};
 	camera.focusPoint = XMVectorSet(0.f, 0.f, 0.f, 1.f);
@@ -58,6 +59,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	HR(CreateWICTextureFromFile(dx.device, L"texture.png", &testTexture, &testSrv));
 	dx.context->PSSetShaderResources(0, 1, &testSrv);
 
+	//TODO: move into dxutil
 	D3D11_SAMPLER_DESC sampDesc = {};
 	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
 	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -68,16 +70,12 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	dx.device->CreateSamplerState(&sampDesc, &testSampler);
 	dx.context->PSSetSamplers(0, 1, &testSampler);
 
-	//Temp model loading
-	OBJData model;
-	if (loadOBJFile("Models/grid.obj", model))
-	{
-		UINT byteWidth = model.GetByteWidth();
-		dx.CreateVertexBuffer(byteWidth, model.verts.data());
-	}
+	//Test actor
+	Actor actor = {};
+	actor.CreateActor("Models/sphere.obj", &dx);
+	actor.transform.r[3] = XMVectorSet(0.f, 0.f, 15.f, 1.f);
 
-	AudioContext* ac = new AudioContext;
-	ac->Init();
+
 		
 	//MAIN LOOP
 	while (msg.message != WM_QUIT) 
@@ -133,6 +131,9 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		camera.UpdateViewMatrix();
 		//matrices.view = XMMatrixLookAtLH(camera.location, camera.focusPoint, camera.worldUp);
 		matrices.view = camera.view;
+
+		matrices.model = actor.transform;
+
 		matrices.mvp = matrices.model * matrices.view * matrices.proj;
 		dx.context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 
@@ -141,7 +142,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 		ui.d2dRenderTarget->EndDraw();
 
-		dx.context->Draw(model.verts.size(), 0);
+		dx.context->Draw(actor.modelData.verts.size(), 0);
 
 		HR(dx.swapchain->Present(1, 0));
 
