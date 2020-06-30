@@ -17,8 +17,26 @@ void DXUtil::CreateDevice()
 {
 	D3D_FEATURE_LEVEL featureLevels[] = { D3D_FEATURE_LEVEL_11_1, D3D_FEATURE_LEVEL_11_0 };
 
+	IDXGIFactory* tmpFactory;
+	HR(CreateDXGIFactory(IID_PPV_ARGS(&tmpFactory)));
+	HR(tmpFactory->QueryInterface(&dxgiFactory));
+	tmpFactory->Release();
+
+	//Reference for EnumAdapterByGpuPerformance. Pretty gud, can use flags for different things 
+	//https://github.com/walbourn/directx-vs-templates/blob/master/d3d11game_win32_dr/DeviceResources.cpp
+
+	IDXGIAdapter1* adapter;
+	for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)
+	{
+		adapters.push_back(adapter);
+		DXGI_ADAPTER_DESC1 desc = {};
+		adapter->GetDesc1(&desc);
+		adaptersDesc.push_back(desc);
+	}
+
+	//TODO: adapters messing with me. Figure out
 	//BGRA support needed for DirectWrite and Direct2D
-	HR(D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, 0, D3D11_CREATE_DEVICE_DEBUG | D3D11_CREATE_DEVICE_BGRA_SUPPORT,
+	HR(D3D11CreateDevice(&adapter[0], D3D_DRIVER_TYPE_HARDWARE, 0, D3D11_CREATE_DEVICE_DEBUG | D3D11_CREATE_DEVICE_BGRA_SUPPORT,
 		featureLevels, _countof(featureLevels), D3D11_SDK_VERSION, &device, &featureLevel, &context));
 }
 
@@ -33,7 +51,6 @@ void DXUtil::CreateSwapchain()
 	sd.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
 	sd.BufferCount = frameCount;
 
-	HR(CreateDXGIFactory(IID_PPV_ARGS(&dxgiFactory)));
 	IDXGISwapChain* tmpSwapchain;
 	HR(dxgiFactory->CreateSwapChain(device, &sd, &tmpSwapchain));
 	HR(tmpSwapchain->QueryInterface(&swapchain));
@@ -66,8 +83,8 @@ void DXUtil::CreateRTVAndDSV()
 
 void DXUtil::CreateShaders()
 {
-	vertexCode = CreateShaderFromFile(L"./shaders/shaders.hlsl", "VSMain", "vs_5_0");
-	pixelCode = CreateShaderFromFile(L"./shaders/shaders.hlsl", "PSMain", "ps_5_0");
+	vertexCode = CreateShaderFromFile(L"Shaders/shaders.hlsl", "VSMain", "vs_5_0");
+	pixelCode = CreateShaderFromFile(L"Shaders/shaders.hlsl", "PSMain", "ps_5_0");
 
 	HR(device->CreateVertexShader(vertexCode->GetBufferPointer(), vertexCode->GetBufferSize(), nullptr, &vertexShader));
 	HR(device->CreatePixelShader(pixelCode->GetBufferPointer(), pixelCode->GetBufferSize(), nullptr, &pixelShader));
@@ -104,13 +121,9 @@ void DXUtil::CreateRasterizerStates()
 	HR(device->CreateRasterizerState(&rastDesc, &rastStateWireframe));
 }
 
-void DXUtil::CreateVertexBuffer(UINT size, const void* data, Actor* actor)
+void DXUtil::CreateVertexBuffer(UINT size, const void* data, ActorSystem* system)
 {
-	actor->vertexBuffer = CreateDefaultBuffer(size, D3D11_BIND_VERTEX_BUFFER, data);
-
-	UINT stride = sizeof(Vertex);
-	UINT offset = 0;
-	context->IASetVertexBuffers(0, 1, &actor->vertexBuffer, &stride, &offset);
+	system->vertexBuffer = CreateDefaultBuffer(size, D3D11_BIND_VERTEX_BUFFER, data);
 }
 
 void DXUtil::CreateConstantBuffer()
@@ -124,7 +137,7 @@ void DXUtil::CreateConstantBuffer()
 	cbMatrices = CreateDefaultBuffer(sizeof(Matrices), D3D11_BIND_CONSTANT_BUFFER, &matrices);
 }
 
-void DXUtil::Render(Camera* camera, UIContext* ui)
+void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem)
 {
 	context->Begin(disjointQuery);
 	context->End(startTimeQuery);
@@ -140,17 +153,22 @@ void DXUtil::Render(Camera* camera, UIContext* ui)
 	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	for (int i = 0; i < actors.size(); i++)
+	for (int i = 0; i < actorSystem->actors.size(); i++)
 	{
 		//Constant buffer work
 		matrices.view = camera->view;
-		matrices.model = actors[i].transform;
+		matrices.model = actorSystem->actors[i].transform;
 		matrices.mvp = matrices.model * matrices.view * matrices.proj;
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 		context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
 		//Draw all actors
-		DrawActor(&actors[i]);
+		//DrawActor(&actorSystem->actors[i]);
+
+		UINT strides = sizeof(Vertex);
+		UINT offsets = 0;
+		context->IASetVertexBuffers(0, 1, &actorSystem->vertexBuffer, &strides, &offsets);
+		context->Draw(actorSystem->modelData.verts.size(), 0);
 	}
 
 
@@ -160,7 +178,11 @@ void DXUtil::Render(Camera* camera, UIContext* ui)
 	ui->d2dRenderTarget->BeginDraw();
 	wchar_t renderTimeText[32];
 	_snwprintf_s(renderTimeText, sizeof(renderTimeText), L"Render: %f", renderTime);
-	ui->d2dRenderTarget->DrawTextA(renderTimeText, 16, ui->textFormat, { 0, 0, 1000, 1000 }, ui->brush);
+	ui->d2dRenderTarget->DrawTextA(renderTimeText, wcslen(renderTimeText), ui->textFormat, { 0, 0, 1000, 1000 }, ui->brush);
+
+	wchar_t gpuInfoText[128];
+	_snwprintf_s(gpuInfoText, sizeof(gpuInfoText), L"%ls", adaptersDesc[0].Description);
+	ui->d2dRenderTarget->DrawTextA(gpuInfoText, wcslen(gpuInfoText), ui->textFormat, { 0, 20, 1000, 1000 }, ui->brush);
 
 	ui->d2dRenderTarget->EndDraw();
 
@@ -207,8 +229,8 @@ void DXUtil::DrawActor(Actor* actor)
 {
 	UINT strides = sizeof(Vertex);
 	UINT offsets = 0;
-	context->IASetVertexBuffers(0, 1, &actor->vertexBuffer, &strides, &offsets);
-	context->Draw(actor->modelData.verts.size(), 0);
+	//context->IASetVertexBuffers(0, 1, &actor->vertexBuffer, &strides, &offsets);
+	//context->Draw(actor->modelData.verts.size(), 0);
 }
 
 ID3DBlob* DXUtil::CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target)

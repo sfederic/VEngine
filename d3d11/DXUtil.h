@@ -7,7 +7,7 @@
 
 #include <d3d11_1.h>
 #include <d3dcompiler.h>
-#include <dxgi1_4.h>
+#include <dxgi1_6.h>
 #include <d2d1_1.h>
 #include <comdef.h>
 #include <DirectXMath.h>
@@ -24,8 +24,8 @@ struct Vertex
 };
 
 void DXTrace(HRESULT hr, const char* filename, const char* func, int line);
-#define HR(hr) if(hr != S_OK) { DXTrace(hr, __FILE__, #hr, __LINE__); }
-#define HRThrow(hr) if(hr != S_OK) { DXTrace(hr, __FILE__, #hr, __LINE__); throw; }
+#define HR(hr) if(hr != S_OK) { DXTrace(hr, __FILE__, #hr, __LINE__); throw; }
+//#define HRThrow(hr) if(hr != S_OK) { DXTrace(hr, __FILE__, #hr, __LINE__); throw; }
 
 class DXUtil
 {
@@ -39,13 +39,16 @@ public:
 	void CreateShaders();
 	void CreateInputLayout();
 	void CreateRasterizerStates();
-	void CreateVertexBuffer(UINT size, const void* data, class Actor* actor);
+	void CreateVertexBuffer(UINT size, const void* data, class ActorSystem* actor);
 	void CreateConstantBuffer();
 
-	void Render(class Camera* camera, class UIContext* ui);
+	void Render(class Camera* camera, class UIContext* ui, class ActorSystem* actorSystem);
 
 	//TODO: put actor array in scene/world structure
-	std::vector<class Actor> actors;
+	//std::vector<class Actor> actors;
+
+	std::vector<IDXGIAdapter*> adapters;
+	std::vector<DXGI_ADAPTER_DESC1> adaptersDesc;
 
 	ID3DBlob* CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target);
 	ID3D11Buffer* CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, const void* initData);
@@ -64,7 +67,7 @@ public:
 	ID3D11PixelShader* pixelShader;
 	ID3D11RasterizerState* rastStateSolid;
 	ID3D11RasterizerState* rastStateWireframe;
-	IDXGIFactory* dxgiFactory;
+	IDXGIFactory6* dxgiFactory;
 
 	ID3D11Counter* gpuCounter;
 	ID3D11Query* disjointQuery;

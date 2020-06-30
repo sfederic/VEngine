@@ -65,15 +65,10 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	dx.device->CreateSamplerState(&sampDesc, &testSampler);
 	dx.context->PSSetSamplers(0, 1, &testSampler);
 
-	Actor actors[10] = {};
+	ActorSystem system;
 
-	for (int i = 0; i < 10; i++)
-	{
-		actors[i].CreateActor("Models/ico_sphere.obj", &dx);
-		actors[i].transform.r[3] = XMVectorSet(i, 0.f, i, 1.f);
-		dx.actors.push_back(actors[i]);
-	}
-		
+	system.CreateActors("Models/cube.obj", &dx, 100);
+
 	//dx.actors.push_back(actor);
 	//dx.actors.push_back(actor2);
 
@@ -133,7 +128,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 
 
-		dx.Render(&camera, &ui);
+		dx.Render(&camera, &ui, &system);
 
 		win32.EndTimer();
 	}
