@@ -11,7 +11,8 @@
 #include <d2d1_1.h>
 #include <comdef.h>
 #include <DirectXMath.h>
-//#include "Actor.h"
+#include "Win32Util.h"
+#include <vector>
 
 using namespace DirectX;
 
@@ -26,8 +27,13 @@ void DXTrace(HRESULT hr, const char* filename, const char* func, int line);
 #define HR(hr) if(hr != S_OK) { DXTrace(hr, __FILE__, #hr, __LINE__); }
 #define HRThrow(hr) if(hr != S_OK) { DXTrace(hr, __FILE__, #hr, __LINE__); throw; }
 
+
+
 class DXUtil
 {
+private:
+	void DrawActor(class Actor* actor);
+
 public:
 	void CreateDevice();
 	void CreateSwapchain();
@@ -36,15 +42,19 @@ public:
 	void CreateInputLayout();
 	void CreateRasterizerStates();
 	void CreateVertexBuffer(UINT size, const void* data, class Actor* actor);
+	void CreateConstantBuffer();
 
-	void Render();
+	void Render(class Camera* camera);
+
+	//TODO: put actor array in scene/world structure
+	std::vector<class Actor> actors;
 
 	ID3DBlob* CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target);
 	ID3D11Buffer* CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, const void* initData);
 
 	static const int frameCount = 2;
 
-	D3D11_VIEWPORT viewport = { 0.f, 0.f, 800.f, 600.f, 0.f, 1.f };
+	D3D11_VIEWPORT viewport = { 0.f, 0.f, (float)windowWidth, (float)windowHeight, 0.f, 1.f };
 
 	ID3D11Device* device;
 	ID3D11DeviceContext* context;
@@ -57,6 +67,8 @@ public:
 	ID3D11RasterizerState* rastStateSolid;
 	ID3D11RasterizerState* rastStateWireframe;
 	IDXGIFactory* dxgiFactory;
+
+	ID3D11Buffer* cbMatrices;
 
 	ID3DBlob* vertexCode;
 	ID3DBlob* pixelCode;

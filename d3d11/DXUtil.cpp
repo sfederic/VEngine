@@ -1,6 +1,15 @@
 #include "DXUtil.h"
 #include "Win32Util.h"
 #include "Actor.h"
+#include "Camera.h"
+
+struct Matrices
+{
+	XMMATRIX model;
+	XMMATRIX view;
+	XMMATRIX proj;
+	XMMATRIX mvp;
+}matrices;
 
 void DXUtil::CreateDevice()
 {
@@ -95,16 +104,26 @@ void DXUtil::CreateRasterizerStates()
 
 void DXUtil::CreateVertexBuffer(UINT size, const void* data, Actor* actor)
 {
-	ID3D11Buffer* vertexBuffer;
-	vertexBuffer = CreateDefaultBuffer(size, D3D11_BIND_VERTEX_BUFFER, data);
-	actor->vertexBuffer = vertexBuffer; //Temp pointer to vertexbuffer in mem for actor
+	actor->vertexBuffer = CreateDefaultBuffer(size, D3D11_BIND_VERTEX_BUFFER, data);
 
 	UINT stride = sizeof(Vertex);
 	UINT offset = 0;
-	context->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, &offset);
+	context->IASetVertexBuffers(0, 1, &actor->vertexBuffer, &stride, &offset);
 }
 
-void DXUtil::Render()
+void DXUtil::CreateConstantBuffer()
+{
+	//TODO: cleanup constant buffer code to work later with multiple shaders and buffers
+	matrices.model = XMMatrixIdentity();
+	matrices.view = XMMatrixIdentity();
+	matrices.proj = XMMatrixPerspectiveFovLH(XM_PI / 3, Win32Util::GetAspectRatio(), 0.01f, 1000.f);
+	matrices.mvp = matrices.model * matrices.view * matrices.proj;
+
+	cbMatrices = CreateDefaultBuffer(sizeof(Matrices), D3D11_BIND_CONSTANT_BUFFER, &matrices);
+	context->VSSetConstantBuffers(0, 1, &cbMatrices);
+}
+
+void DXUtil::Render(Camera* camera)
 {
 	context->RSSetViewports(1, &viewport);
 
@@ -116,6 +135,28 @@ void DXUtil::Render()
 
 	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	for (int i = 0; i < actors.size(); i++)
+	{
+		//Constant buffer work
+		matrices.view = camera->view;
+		matrices.model = actors[i].transform;
+		matrices.mvp = matrices.model * matrices.view * matrices.proj;
+		context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
+
+		//Draw all actors
+		DrawActor(&actors[i]);
+	}
+
+	HR(swapchain->Present(1, 0));
+}
+
+void DXUtil::DrawActor(Actor* actor)
+{
+	UINT strides = sizeof(Vertex);
+	UINT offsets = 0;
+	context->IASetVertexBuffers(0, 1, &actor->vertexBuffer, &strides, &offsets);
+	context->Draw(actor->modelData.verts.size(), 0);
 }
 
 ID3DBlob* DXUtil::CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target)

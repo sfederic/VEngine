@@ -7,7 +7,7 @@ using namespace DirectX;
 class Camera
 {
 public:
-	Camera(); //Set axis to default LH
+	Camera(XMVECTOR initialLocation); //Set axis to default LH
 
 	void UpdateViewMatrix();
 	void Strafe(float d);

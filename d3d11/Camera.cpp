@@ -1,11 +1,18 @@
 #include "Camera.h"
 #include "Win32Util.h"
 
-Camera::Camera()
+Camera::Camera(XMVECTOR initialLocation)
 {
 	forward = XMVectorSet(0.f, 0.f, 1.f, 0.f);
 	right = XMVectorSet(1.f, 0.f, 0.f, 0.f);
 	up = XMVectorSet(0.f, 1.f, 0.f, 0.f);
+
+	worldUp = XMVectorSet(0.f, 1.f, 0.f, 0.f);
+	focusPoint = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+
+	location = initialLocation;
+
+	UpdateViewMatrix();
 }
 
 void Camera::UpdateViewMatrix()
@@ -40,6 +47,7 @@ void Camera::UpdateViewMatrix()
 	view.r[3].m128_f32[3] = 1.0f;
 }
 
+//TODO: move all camera movement code to Actor
 void Camera::Strafe(float d)
 {
 	XMVECTOR s = XMVectorReplicate(d);
