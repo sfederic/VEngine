@@ -14,8 +14,6 @@ DXUtil dx;
 UIContext ui;
 AudioContext ac;
 
-
-
 int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine, int cmdShow)
 {
 	//WIN32 SETUP
@@ -30,6 +28,19 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	dx.CreateInputLayout();
 	dx.CreateRasterizerStates();
 	dx.CreateConstantBuffer();
+
+	//Create test profiling
+	D3D11_QUERY_DESC qd = {};
+	qd.Query = D3D11_QUERY_TIMESTAMP;
+	HR(dx.device->CreateQuery(&qd, &dx.startTimeQuery));
+	HR(dx.device->CreateQuery(&qd, &dx.endTimeQuery));
+
+	qd.Query = D3D11_QUERY_TIMESTAMP_DISJOINT;
+	HR(dx.device->CreateQuery(&qd, &dx.disjointQuery));
+
+	D3D11_COUNTER_DESC counterDesc = {};
+	counterDesc.Counter = D3D11_COUNTER_DEVICE_DEPENDENT_0;
+	HR(dx.device->CreateCounter(&counterDesc, &dx.gpuCounter));
 
 	//AUDIO SETUP
 	ac.Init();
@@ -54,18 +65,17 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	dx.device->CreateSamplerState(&sampDesc, &testSampler);
 	dx.context->PSSetSamplers(0, 1, &testSampler);
 
-	//Test actors
-	Actor actor = {};
-	actor.CreateActor("Models/sphere.obj", &dx);
-	actor.transform.r[3] = XMVectorSet(0.f, 0.f, 15.f, 1.f);
+	Actor actors[10] = {};
 
-	Actor actor2 = {};
-	actor2.CreateActor("Models/cube.obj", &dx);
-	actor2.transform.r[3] = XMVectorSet(5.f, 0.f, 10.f, 1.f);
-
+	for (int i = 0; i < 10; i++)
+	{
+		actors[i].CreateActor("Models/ico_sphere.obj", &dx);
+		actors[i].transform.r[3] = XMVectorSet(i, 0.f, i, 1.f);
+		dx.actors.push_back(actors[i]);
+	}
 		
-	dx.actors.push_back(actor);
-	dx.actors.push_back(actor2);
+	//dx.actors.push_back(actor);
+	//dx.actors.push_back(actor2);
 
 	//MAIN LOOP
 	while (msg.message != WM_QUIT) 
@@ -121,12 +131,9 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		camera.UpdateViewMatrix();
 
 
-		//TODO: Put render and d2d stuff into func for profiling
-		ui.d2dRenderTarget->BeginDraw();
-		ui.d2dRenderTarget->EndDraw();
 
-		//RENDER
-		dx.Render(&camera);
+
+		dx.Render(&camera, &ui);
 
 		win32.EndTimer();
 	}

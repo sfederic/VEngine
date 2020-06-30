@@ -1,10 +1,11 @@
 #pragma once
 
 #include <DirectXMath.h>
+//#include "Actor.h"
 
 using namespace DirectX;
 
-class Camera
+class Camera 
 {
 public:
 	Camera(XMVECTOR initialLocation); //Set axis to default LH

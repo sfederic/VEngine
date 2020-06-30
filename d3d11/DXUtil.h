@@ -27,8 +27,6 @@ void DXTrace(HRESULT hr, const char* filename, const char* func, int line);
 #define HR(hr) if(hr != S_OK) { DXTrace(hr, __FILE__, #hr, __LINE__); }
 #define HRThrow(hr) if(hr != S_OK) { DXTrace(hr, __FILE__, #hr, __LINE__); throw; }
 
-
-
 class DXUtil
 {
 private:
@@ -44,7 +42,7 @@ public:
 	void CreateVertexBuffer(UINT size, const void* data, class Actor* actor);
 	void CreateConstantBuffer();
 
-	void Render(class Camera* camera);
+	void Render(class Camera* camera, class UIContext* ui);
 
 	//TODO: put actor array in scene/world structure
 	std::vector<class Actor> actors;
@@ -68,11 +66,18 @@ public:
 	ID3D11RasterizerState* rastStateWireframe;
 	IDXGIFactory* dxgiFactory;
 
+	ID3D11Counter* gpuCounter;
+	ID3D11Query* disjointQuery;
+	ID3D11Query* startTimeQuery;
+	ID3D11Query* endTimeQuery;
+
 	ID3D11Buffer* cbMatrices;
 
 	ID3DBlob* vertexCode;
 	ID3DBlob* pixelCode;
 
 	D3D_FEATURE_LEVEL featureLevel;
+
+	double renderTime;
 };
 

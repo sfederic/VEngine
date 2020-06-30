@@ -2,6 +2,7 @@
 #include "Win32Util.h"
 #include "Actor.h"
 #include "Camera.h"
+#include "UIContext.h"
 
 //Temp constant buffer data for base shader
 struct Matrices
@@ -123,8 +124,11 @@ void DXUtil::CreateConstantBuffer()
 	cbMatrices = CreateDefaultBuffer(sizeof(Matrices), D3D11_BIND_CONSTANT_BUFFER, &matrices);
 }
 
-void DXUtil::Render(Camera* camera)
+void DXUtil::Render(Camera* camera, UIContext* ui)
 {
+	context->Begin(disjointQuery);
+	context->End(startTimeQuery);
+
 	context->RSSetViewports(1, &viewport);
 
 	const float clearColour[4] = { 0.2f, 0.2f, 0.2f, 1.f };
@@ -149,7 +153,54 @@ void DXUtil::Render(Camera* camera)
 		DrawActor(&actors[i]);
 	}
 
+
+	//TODO: FIX THIS TOO THIS IS AWFUL
+	//UI RENDERING 
+	//TODO: Put render and d2d stuff into func for profiling
+	ui->d2dRenderTarget->BeginDraw();
+	wchar_t renderTimeText[32];
+	_snwprintf_s(renderTimeText, sizeof(renderTimeText), L"Render: %f", renderTime);
+	ui->d2dRenderTarget->DrawTextA(renderTimeText, 16, ui->textFormat, { 0, 0, 1000, 1000 }, ui->brush);
+
+	ui->d2dRenderTarget->EndDraw();
+
 	HR(swapchain->Present(1, 0));
+
+	context->End(endTimeQuery);
+	context->End(disjointQuery);
+
+
+	while (context->GetData(disjointQuery, nullptr, 0, 0) == S_FALSE)
+	{
+		Sleep(1);
+	}
+
+	D3D11_QUERY_DATA_TIMESTAMP_DISJOINT freq = {};
+	HR(context->GetData(disjointQuery, &freq, sizeof(freq), 0));
+
+	//Is the thread polling necessary?
+	while (context->GetData(startTimeQuery, nullptr, 0, 0) == S_FALSE)
+	{
+		Sleep(1);
+	}
+
+	while (context->GetData(endTimeQuery, nullptr, 0, 0) == S_FALSE)
+	{
+		Sleep(1);
+	}
+
+	//TODO: fucking clean this up
+	UINT64 endTime = 0, startTime = 0;
+	HR(context->GetData(startTimeQuery, &startTime, sizeof(UINT64), 0));
+	HR(context->GetData(endTimeQuery, &endTime, sizeof(UINT64), 0));
+
+	UINT64 realTime = endTime - startTime;
+	double tick = 1.0 / freq.Frequency;
+	double time = tick * (realTime);
+
+	renderTime = time;
+
+	return;
 }
 
 void DXUtil::DrawActor(Actor* actor)
