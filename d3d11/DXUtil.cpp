@@ -3,6 +3,7 @@
 #include "Actor.h"
 #include "Camera.h"
 
+//Temp constant buffer data for base shader
 struct Matrices
 {
 	XMMATRIX model;
@@ -64,8 +65,8 @@ void DXUtil::CreateRTVAndDSV()
 
 void DXUtil::CreateShaders()
 {
-	vertexCode = CreateShaderFromFile(L"shaders.hlsl", "VSMain", "vs_5_0");
-	pixelCode = CreateShaderFromFile(L"shaders.hlsl", "PSMain", "ps_5_0");
+	vertexCode = CreateShaderFromFile(L"./shaders/shaders.hlsl", "VSMain", "vs_5_0");
+	pixelCode = CreateShaderFromFile(L"./shaders/shaders.hlsl", "PSMain", "ps_5_0");
 
 	HR(device->CreateVertexShader(vertexCode->GetBufferPointer(), vertexCode->GetBufferSize(), nullptr, &vertexShader));
 	HR(device->CreatePixelShader(pixelCode->GetBufferPointer(), pixelCode->GetBufferSize(), nullptr, &pixelShader));
@@ -120,7 +121,6 @@ void DXUtil::CreateConstantBuffer()
 	matrices.mvp = matrices.model * matrices.view * matrices.proj;
 
 	cbMatrices = CreateDefaultBuffer(sizeof(Matrices), D3D11_BIND_CONSTANT_BUFFER, &matrices);
-	context->VSSetConstantBuffers(0, 1, &cbMatrices);
 }
 
 void DXUtil::Render(Camera* camera)
@@ -143,6 +143,7 @@ void DXUtil::Render(Camera* camera)
 		matrices.model = actors[i].transform;
 		matrices.mvp = matrices.model * matrices.view * matrices.proj;
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
+		context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
 		//Draw all actors
 		DrawActor(&actors[i]);
