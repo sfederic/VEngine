@@ -16,17 +16,19 @@ class Actor
 public:
 	Actor();
 	void tick() {};
-	XMVECTOR GetActorPosition();
-	void SetActorPosition(XMVECTOR v);
-	void SetActorPosition(float x, float y, float z);
-	void SetActorRotation(XMVECTOR axis, float angle);
-	XMMATRIX GetActorRotation(); //Don't like this
+	XMVECTOR GetPositionVector();
+	XMFLOAT3 GetPositionFloat3();
+	void SetPosition(XMVECTOR v);
+	void SetPosition(float x, float y, float z);
+	void SetRotation(XMVECTOR axis, float angle);
+	XMMATRIX GetRotation(); //Don't like this
+	XMFLOAT3 GetScale();
 
 	//TODO: do actors need names later for the editor?
 
 	int vertexBufferOffset;
 	XMMATRIX transform = XMMatrixIdentity();
-	
+	bool bRender = true;
 };
 
 class ActorSystem

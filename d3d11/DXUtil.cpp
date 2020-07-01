@@ -26,7 +26,7 @@ void DXUtil::CreateDevice()
 	//https://github.com/walbourn/directx-vs-templates/blob/master/d3d11game_win32_dr/DeviceResources.cpp
 
 	IDXGIAdapter1* adapter;
-	for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_MINIMUM_POWER, IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)
+	for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)
 	{
 		adapters.push_back(adapter);
 		DXGI_ADAPTER_DESC1 desc = {};
@@ -125,12 +125,16 @@ void DXUtil::CreateVertexBuffer(UINT size, const void* data, ActorSystem* system
 	system->vertexBuffer = CreateDefaultBuffer(size, D3D11_BIND_VERTEX_BUFFER, data);
 }
 
-void DXUtil::CreateConstantBuffer()
+void DXUtil::CreateConstantBuffer(Camera& camera)
 {
 	//TODO: cleanup constant buffer code to work later with multiple shaders and buffers
 	matrices.model = XMMatrixIdentity();
 	matrices.view = XMMatrixIdentity();
 	matrices.proj = XMMatrixPerspectiveFovLH(XM_PI / 3, Win32Util::GetAspectRatio(), 0.01f, 1000.f);
+
+	//TODO: Get rid of this too. terrible
+	camera.proj = matrices.proj;
+
 	matrices.mvp = matrices.model * matrices.view * matrices.proj;
 
 	cbMatrices = CreateDefaultBuffer(sizeof(Matrices), D3D11_BIND_CONSTANT_BUFFER, &matrices);
@@ -154,21 +158,25 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem)
 
 	for (int i = 0; i < actorSystem->actors.size(); i++)
 	{
-		//Constant buffer work
-		matrices.view = camera->view;
-		matrices.model = actorSystem->actors[i].transform;
-		matrices.mvp = matrices.model * matrices.view * matrices.proj;
-		context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
-		context->VSSetConstantBuffers(0, 1, &cbMatrices);
+		if (actorSystem->actors[i].bRender)
+		{
+			//Constant buffer work
+			matrices.view = camera->view;
+			matrices.model = actorSystem->actors[i].transform;
+			matrices.mvp = matrices.model * matrices.view * matrices.proj;
+			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
+			context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
-		//Draw all actors
-		//DrawActor(&actorSystem->actors[i]);
+			//TODO: set other shaders 
+			//context->VSSetShaders()...
 
-		UINT strides = sizeof(Vertex);
-		UINT offsets = 0;
-		context->IASetVertexBuffers(0, 1, &actorSystem->vertexBuffer, &strides, &offsets);
-		context->IASetIndexBuffer(actorSystem->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
-		context->Draw(actorSystem->modelData.verts.size(), 0);
+			//Draw all actors of system
+			UINT strides = sizeof(Vertex);
+			UINT offsets = 0;
+			context->IASetVertexBuffers(0, 1, &actorSystem->vertexBuffer, &strides, &offsets);
+			//context->IASetIndexBuffer(actorSystem->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
+			context->Draw(actorSystem->modelData.verts.size(), 0);
+		}
 	}
 
 

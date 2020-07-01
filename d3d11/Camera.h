@@ -24,5 +24,5 @@ public:
 
 	XMVECTOR up, right, forward;
 
-	XMMATRIX view;
+	XMMATRIX view, proj;
 };

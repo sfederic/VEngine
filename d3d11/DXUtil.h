@@ -40,7 +40,7 @@ public:
 	void CreateInputLayout();
 	void CreateRasterizerStates();
 	void CreateVertexBuffer(UINT size, const void* data, class ActorSystem* actor);
-	void CreateConstantBuffer();
+	void CreateConstantBuffer(class Camera& camera);
 
 	void Render(class Camera* camera, class UIContext* ui, class ActorSystem* actorSystem);
 

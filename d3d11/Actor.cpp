@@ -6,30 +6,41 @@ Actor::Actor()
 	transform = XMMatrixIdentity();
 }
 
-XMVECTOR Actor::GetActorPosition()
+XMVECTOR Actor::GetPositionVector()
 {
 	return transform.r[3];
 }
 
-void Actor::SetActorPosition(XMVECTOR v)
+XMFLOAT3 Actor::GetPositionFloat3()
+{
+	XMVECTOR pos = transform.r[3];
+	return XMFLOAT3(pos.m128_f32[0], pos.m128_f32[1], pos.m128_f32[2]);
+}
+
+void Actor::SetPosition(XMVECTOR v)
 {
 	transform = XMMatrixTranslationFromVector(v);
 }
 
-void Actor::SetActorPosition(float x, float y, float z)
+void Actor::SetPosition(float x, float y, float z)
 {
 	XMVECTOR v = XMVectorSet(x, y, z, 1.0f);
 	transform = XMMatrixTranslationFromVector(v);
 }
 
-void Actor::SetActorRotation(XMVECTOR axis, float angle)
+void Actor::SetRotation(XMVECTOR axis, float angle)
 {
 	transform = XMMatrixRotationAxis(axis, angle);
 }
 
-XMMATRIX Actor::GetActorRotation()
+XMMATRIX Actor::GetRotation()
 {
 	return transform;
+}
+
+XMFLOAT3 Actor::GetScale()
+{
+	return XMFLOAT3(transform.r[0].m128_f32[0], transform.r[1].m128_f32[1], transform.r[2].m128_f32[2]);
 }
 
 void ActorSystem::CreateActors(const char* modelFilename, DXUtil* dx, int numActorsToSpawn)

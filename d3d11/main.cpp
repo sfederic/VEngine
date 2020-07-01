@@ -14,11 +14,27 @@ DXUtil dx;
 UIContext ui;
 AudioContext ac;
 
-void Raycast(int sx, int sy, Camera* camera)
+XMVECTOR rayOrigin;
+XMVECTOR rayDir;
+
+//TODO: where do I put this?
+void Raycast(int sx, int sy, Camera* camera, XMMATRIX& worldMatrix)
 {
-	//XMFLOAT4X4 P = XM
-	//float vx = (+2.0f * sx / windowWidth - 1.0f) / P(0, 0); 
-	//float vy = (-2.0f * sy / windowHeight + 1.0f) / P(1, 1);
+	XMMATRIX V = camera->view;
+	float vx = (+2.0f * sx / windowWidth - 1.0f) / V.r[0].m128_f32[0]; 
+	float vy = (-2.0f * sy / windowHeight + 1.0f) / V.r[1].m128_f32[1];
+
+	rayOrigin = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	rayDir = XMVectorSet(vx, vy, 1.f, 0.f);
+	
+	XMMATRIX invView = XMMatrixInverse(&XMMatrixDeterminant(V), V); 
+	XMMATRIX W = worldMatrix; 
+	XMMATRIX invWorld = XMMatrixInverse(&XMMatrixDeterminant(W), W);
+	XMMATRIX toLocal = XMMatrixMultiply(invView, invWorld);
+
+	rayOrigin = XMVector3TransformCoord(rayOrigin, toLocal);
+	rayDir = XMVector3TransformNormal(rayDir, toLocal);
+	rayDir = XMVector3Normalize(rayDir);
 }
 
 int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine, int cmdShow)
@@ -34,7 +50,10 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	dx.CreateShaders();
 	dx.CreateInputLayout();
 	dx.CreateRasterizerStates();
-	dx.CreateConstantBuffer();
+
+	Camera camera(XMVectorSet(0.f, 0.f, -5.f, 1.f));
+
+	dx.CreateConstantBuffer(camera);
 
 	//Create test profiling
 	D3D11_QUERY_DESC qd = {};
@@ -52,7 +71,6 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	//AUDIO SETUP
 	ac.Init();
 
-	Camera camera(XMVectorSet(0.f, 0.f, -5.f, 1.f));
 
 	ui.init(dx.swapchain);
 
@@ -73,7 +91,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	dx.context->PSSetSamplers(0, 1, &testSampler);
 
 	ActorSystem system;
-	system.CreateActors("Models/cube.obj", &dx, 5);
+	system.CreateActors("Models/cube.obj", &dx, 4000);
 
 
 	//MAIN LOOP
@@ -101,7 +119,62 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		}
 
 
-		//TODO: put in cammera Tick
+		if (GetMouseDownState())
+		{
+			Raycast(ui.mousePos.x, ui.mousePos.y, &camera, system.actors[0].transform);
+			float dist = 10000.f;
+			if (system.boundingBox.Intersects(rayOrigin, rayDir, dist))
+			{
+				OutputDebugString("hit");
+			}
+		}
+
+		if (GetAsyncKeyState(VK_RIGHT))
+		{
+			XMVECTOR pos = system.actors[0].GetPositionVector();
+			pos.m128_f32[0] += 0.15f;
+			system.actors[0].SetPosition(pos);
+		}
+		if (GetAsyncKeyState(VK_LEFT))
+		{
+			XMVECTOR pos = system.actors[0].GetPositionVector();
+			pos.m128_f32[0] -= 0.15f;
+			system.actors[0].SetPosition(pos);
+		}
+
+
+		//Frustum culling test (it's fucking slower than just drawing everything...)
+		{
+
+			for (int i = 0; i < system.actors.size(); i++)
+			{
+				XMMATRIX view = camera.view;
+				XMMATRIX invView = XMMatrixInverse(&XMMatrixDeterminant(view), view);
+
+				XMMATRIX world = system.actors[0].transform;
+				XMMATRIX invWorld = XMMatrixInverse(&XMMatrixDeterminant(world), world);
+
+				XMMATRIX viewToLocal = XMMatrixMultiply(invView, invWorld);
+
+				BoundingFrustum frustum, localSpaceFrustum;
+				BoundingFrustum::CreateFromMatrix(frustum, camera.proj);
+				frustum.Transform(localSpaceFrustum, viewToLocal);
+
+				system.boundingBox.Center = system.actors[i].GetPositionFloat3();
+				system.boundingBox.Extents = system.actors[i].GetScale();
+
+				if (localSpaceFrustum.Contains(system.boundingBox) == DISJOINT)
+				{
+					system.actors[i].bRender = false;
+				}
+				else
+				{
+					system.actors[i].bRender = true;
+				}
+			}
+		}
+
+		//TODO: move into cammera Tick
 		if (GetAsyncKeyState('W'))
 		{
 			camera.MoveForward(5.f * win32.delta);

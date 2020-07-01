@@ -93,7 +93,11 @@ LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam
 		break;
 
 	case WM_LBUTTONUP:
-		mouseUp = true;
+		StoreMouseUpInput(wparam);
+		break;
+
+	case WM_LBUTTONDOWN:
+		StoreMouseDownInput(wparam);
 		break;
 	}
 
