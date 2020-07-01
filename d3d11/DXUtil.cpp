@@ -265,6 +265,24 @@ ID3D11Buffer* DXUtil::CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, const 
 	return buffer;
 }
 
+ID3D11Buffer* DXUtil::CreateDyamicBuffer(UINT byteWidth, UINT bindFlags, const void* initData)
+{
+	ID3D11Buffer* buffer;
+
+	D3D11_BUFFER_DESC desc = {};
+	desc.ByteWidth = byteWidth;
+	desc.BindFlags = bindFlags;
+	desc.Usage = D3D11_USAGE_DYNAMIC;
+	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+
+	D3D11_SUBRESOURCE_DATA data = {};
+	data.pSysMem = initData;
+
+	HR(device->CreateBuffer(&desc, &data, &buffer));
+
+	return buffer;
+}
+
 void DXTrace(HRESULT hr, const char* filename, const char* func, int line)
 {
 	_com_error err(hr);

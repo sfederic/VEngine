@@ -14,6 +14,13 @@ DXUtil dx;
 UIContext ui;
 AudioContext ac;
 
+void Raycast(int sx, int sy, Camera* camera)
+{
+	//XMFLOAT4X4 P = XM
+	//float vx = (+2.0f * sx / windowWidth - 1.0f) / P(0, 0); 
+	//float vy = (-2.0f * sy / windowHeight + 1.0f) / P(1, 1);
+}
+
 int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine, int cmdShow)
 {
 	//WIN32 SETUP
@@ -66,13 +73,8 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	dx.context->PSSetSamplers(0, 1, &testSampler);
 
 	ActorSystem system;
-
 	system.CreateActors("Models/cube.obj", &dx, 5);
 
-	//dx.actors.push_back(actor);
-	//dx.actors.push_back(actor2);
-
-	float move = 0.f;
 
 	//MAIN LOOP
 	while (msg.message != WM_QUIT) 
@@ -88,7 +90,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		//UI UPDATE
 		ui.update();
 
-
+		//TODO: put into engine tick
 		if (GetKeyUpState('1'))
 		{
 			dx.context->RSSetState(dx.rastStateWireframe);
@@ -99,6 +101,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		}
 
 
+		//TODO: put in cammera Tick
 		if (GetAsyncKeyState('W'))
 		{
 			camera.MoveForward(5.f * win32.delta);
@@ -125,10 +128,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		}
 
 		camera.MouseMove(ui.mousePos.x, ui.mousePos.y);
-
 		camera.UpdateViewMatrix();
-
-
 
 
 		dx.Render(&camera, &ui, &system);

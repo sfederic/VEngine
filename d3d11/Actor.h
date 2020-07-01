@@ -19,11 +19,14 @@ public:
 	XMVECTOR GetActorPosition();
 	void SetActorPosition(XMVECTOR v);
 	void SetActorPosition(float x, float y, float z);
+	void SetActorRotation(XMVECTOR axis, float angle);
+	XMMATRIX GetActorRotation(); //Don't like this
 
 	//TODO: do actors need names later for the editor?
 
 	int vertexBufferOffset;
 	XMMATRIX transform = XMMatrixIdentity();
+	
 };
 
 class ActorSystem
@@ -43,4 +46,6 @@ public:
 	UINT64 numVertices; //Frustrum culling is going to make a mess of this 
 
 	std::vector<Actor> actors;
+
+	bool bInstancingActors; //bool for setting system to use instancing
 };

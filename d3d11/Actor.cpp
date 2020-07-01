@@ -22,6 +22,16 @@ void Actor::SetActorPosition(float x, float y, float z)
 	transform = XMMatrixTranslationFromVector(v);
 }
 
+void Actor::SetActorRotation(XMVECTOR axis, float angle)
+{
+	transform = XMMatrixRotationAxis(axis, angle);
+}
+
+XMMATRIX Actor::GetActorRotation()
+{
+	return transform;
+}
+
 void ActorSystem::CreateActors(const char* modelFilename, DXUtil* dx, int numActorsToSpawn)
 {
 	if (loadOBJFile(modelFilename, modelData))
@@ -42,6 +52,7 @@ void ActorSystem::CreateActors(const char* modelFilename, DXUtil* dx, int numAct
 
 		size_t stride = sizeof(Vertex);
 		//TODO: dislay debug rendering for box and sphere
+
 		BoundingBox::CreateFromPoints(boundingBox, modelData.verts.size(), &modelData.verts[0].pos, stride); 
 		BoundingSphere::CreateFromBoundingBox(boundingSphere, boundingBox);
 	}
