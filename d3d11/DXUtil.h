@@ -47,7 +47,7 @@ public:
 	//TODO: put actor array in scene/world structure
 	//std::vector<class Actor> actors;
 
-	std::vector<IDXGIAdapter*> adapters;
+	std::vector<IDXGIAdapter1*> adapters;
 	std::vector<DXGI_ADAPTER_DESC1> adaptersDesc;
 
 	ID3DBlob* CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target);

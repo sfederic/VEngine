@@ -8,7 +8,7 @@
 
 using namespace DirectX;
 
-
+//TODO: split up actor and actorsystem into files
 
 //Not liking the per actor basis for construction at the moment. Need to find a balance for batch rendering and ease of use
 class Actor
@@ -16,9 +16,14 @@ class Actor
 public:
 	Actor();
 	void tick() {};
+	XMVECTOR GetActorPosition();
+	void SetActorPosition(XMVECTOR v);
+	void SetActorPosition(float x, float y, float z);
+
+	//TODO: do actors need names later for the editor?
 
 	int vertexBufferOffset;
-	XMMATRIX transform;
+	XMMATRIX transform = XMMatrixIdentity();
 };
 
 class ActorSystem
@@ -31,11 +36,11 @@ public:
 	ID3D11Buffer* vertexBuffer;
 	ID3D11Buffer* indexBuffer;
 
-	//Wonder if I can make it so that only the system needs 1 cop of each and the uniform scaling does the rest
+	//Wonder if I can make it so that only the system needs 1 copy of each and the uniform scaling does the rest
 	BoundingBox boundingBox;
 	BoundingSphere boundingSphere;
 
-	UINT64 numVertices; //Frustrum culling is going to mess with this 
+	UINT64 numVertices; //Frustrum culling is going to make a mess of this 
 
 	std::vector<Actor> actors;
 };

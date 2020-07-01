@@ -67,10 +67,12 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 	ActorSystem system;
 
-	system.CreateActors("Models/cube.obj", &dx, 100);
+	system.CreateActors("Models/cube.obj", &dx, 5);
 
 	//dx.actors.push_back(actor);
 	//dx.actors.push_back(actor2);
+
+	float move = 0.f;
 
 	//MAIN LOOP
 	while (msg.message != WM_QUIT) 
@@ -86,11 +88,12 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		//UI UPDATE
 		ui.update();
 
-		if (GetAsyncKeyState('1'))
+
+		if (GetKeyUpState('1'))
 		{
 			dx.context->RSSetState(dx.rastStateWireframe);
 		}
-		if (GetAsyncKeyState('2'))
+		if (GetKeyUpState('2'))
 		{
 			dx.context->RSSetState(dx.rastStateSolid);
 		}

@@ -16,10 +16,4 @@ struct OBJData
 	}
 };
 
-/*struct OBJDataRealloc
-{
-	Vertex* verts;
-};*/
-
 bool loadOBJFile(const char* filename, OBJData& data);
-//bool loadOBJFileRealloc(const char* filename, OBJDataRealloc* data);

@@ -22,11 +22,11 @@ void DXUtil::CreateDevice()
 	HR(tmpFactory->QueryInterface(&dxgiFactory));
 	tmpFactory->Release();
 
-	//Reference for EnumAdapterByGpuPerformance. Pretty gud, can use flags for different things 
+	//Reference for EnumAdapterByGpuPerformance
 	//https://github.com/walbourn/directx-vs-templates/blob/master/d3d11game_win32_dr/DeviceResources.cpp
 
 	IDXGIAdapter1* adapter;
-	for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)
+	for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_MINIMUM_POWER, IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)
 	{
 		adapters.push_back(adapter);
 		DXGI_ADAPTER_DESC1 desc = {};
@@ -34,9 +34,8 @@ void DXUtil::CreateDevice()
 		adaptersDesc.push_back(desc);
 	}
 
-	//TODO: adapters messing with me. Figure out
 	//BGRA support needed for DirectWrite and Direct2D
-	HR(D3D11CreateDevice(&adapter[0], D3D_DRIVER_TYPE_HARDWARE, 0, D3D11_CREATE_DEVICE_DEBUG | D3D11_CREATE_DEVICE_BGRA_SUPPORT,
+	HR(D3D11CreateDevice(adapter, D3D_DRIVER_TYPE_HARDWARE, 0, D3D11_CREATE_DEVICE_DEBUG | D3D11_CREATE_DEVICE_BGRA_SUPPORT,
 		featureLevels, _countof(featureLevels), D3D11_SDK_VERSION, &device, &featureLevel, &context));
 }
 
@@ -168,6 +167,7 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem)
 		UINT strides = sizeof(Vertex);
 		UINT offsets = 0;
 		context->IASetVertexBuffers(0, 1, &actorSystem->vertexBuffer, &strides, &offsets);
+		context->IASetIndexBuffer(actorSystem->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 		context->Draw(actorSystem->modelData.verts.size(), 0);
 	}
 
