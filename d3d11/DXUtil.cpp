@@ -3,6 +3,8 @@
 #include "Actor.h"
 #include "Camera.h"
 #include "UIContext.h"
+#include "Input.h"
+#include "Console.h"
 
 //Temp constant buffer data for base shader
 struct Matrices
@@ -12,6 +14,8 @@ struct Matrices
 	XMMATRIX proj;
 	XMMATRIX mvp;
 }matrices;
+
+
 
 void DXUtil::CreateDevice()
 {
@@ -192,6 +196,9 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem)
 	wchar_t gpuInfoText[128];
 	_snwprintf_s(gpuInfoText, sizeof(gpuInfoText), L"%ls", adaptersDesc[0].Description);
 	ui->d2dRenderTarget->DrawTextA(gpuInfoText, wcslen(gpuInfoText), ui->textFormat, { 0, 20, 1000, 1000 }, ui->brush);
+
+	//Test console rendering and work. Might need to put it into a system
+	Console::Tick(ui);
 
 	ui->d2dRenderTarget->EndDraw();
 

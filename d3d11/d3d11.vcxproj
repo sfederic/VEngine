@@ -145,6 +145,7 @@
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="AudioContext.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Console.cpp" />
     <ClCompile Include="DXUtil.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="Audio.h" />
     <ClInclude Include="AudioContext.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Console.h" />
     <ClInclude Include="DXUtil.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Obj.h" />

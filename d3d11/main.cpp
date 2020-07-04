@@ -42,6 +42,7 @@ void Raycast(int sx, int sy, Camera* camera, XMMATRIX& worldMatrix)
 void FrustumCullTest(Camera& camera, ActorSystem& system)
 {
 	//Is openmp even doing anything here?
+	//is SIMD running in Debug build?
 	#pragma omp parallel for
 	for (int i = 0; i < system.actors.size(); i++)
 	{
@@ -81,7 +82,6 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	dx.CreateDevice();
 	dx.CreateSwapchain();
 	dx.CreateRTVAndDSV();
-
 	dx.CreateShaders();
 
 	//TODO: move to renderer. need to figure out shader generation per actor 
@@ -94,7 +94,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		cbuffer_data;
 	}
 	*/
-	{	
+	/*{	
 		ID3D11ShaderReflection* cbReflection;
 		HR(D3DReflect(dx.vertexCode->GetBufferPointer(), dx.vertexCode->GetBufferSize(), IID_ID3D11ShaderReflection, (void**)&cbReflection));
 		D3D11_SHADER_BUFFER_DESC shaderDesc = {};
@@ -112,7 +112,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 			type->GetDesc(&typeDesc);
 		}
 
-	}
+	}*/
 
 	dx.CreateInputLayout();
 	dx.CreateRasterizerStates();
@@ -137,9 +137,11 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	//AUDIO SETUP
 	ac.Init();
 
-
+	//UI SETUP
 	ui.init(dx.swapchain);
 
+	//TEXTURE TESTING
+	//still wondering if I should write WIC loader myself for texture struct
 	ID3D11Resource* testTexture;
 	ID3D11ShaderResourceView* testSrv;
 	HR(CreateWICTextureFromFile(dx.device, L"texture.png", &testTexture, &testSrv));
@@ -156,6 +158,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	dx.device->CreateSamplerState(&sampDesc, &testSampler);
 	dx.context->PSSetSamplers(0, 1, &testSampler);
 
+	//ACTOR SYSTEM TESTING
 	ActorSystem system;
 	//system.CreateActors("Models/cube.obj", &dx, 4000);
 	//See if threading is worthwhile
@@ -176,7 +179,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		//UI UPDATE
 		ui.update();
 
-		//TODO: put into engine tick
+		//TODO: put into engine tick or renderer tick or something
 		if (GetKeyUpState('1'))
 		{
 			dx.context->RSSetState(dx.rastStateWireframe);

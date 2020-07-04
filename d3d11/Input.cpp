@@ -4,15 +4,45 @@ WPARAM currentDownKey;
 WPARAM currentUpKey;
 bool mouseUp;
 bool mouseDown;
+bool keyDown;
+bool keyUp;
+
+bool GetAnyKeyUp()
+{
+	if (keyUp)
+	{
+		keyUp = false;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool GetAnyKeyDown()
+{
+	if (keyDown)
+	{
+		keyDown = false;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
 
 void StoreKeyDownInput(WPARAM key)
 {
 	currentDownKey = key;
+	keyDown = true;
 }
 
 void StoreKeyUpInput(WPARAM key)
 {
 	currentUpKey = key;
+	keyUp = true;
 }
 
 void StoreMouseDownInput(WPARAM key)

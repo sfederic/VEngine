@@ -6,6 +6,8 @@ extern WPARAM currentUpKey;
 extern WPARAM currentDownKey;
 extern bool mouseUp;
 
+bool GetAnyKeyUp();
+bool GetAnyKeyDown();
 void StoreKeyDownInput(WPARAM key);
 void StoreKeyUpInput(WPARAM key);
 void StoreMouseDownInput(WPARAM key);

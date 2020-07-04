@@ -68,8 +68,9 @@ float Win32Util::GetAspectRatio()
 
 LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam)
 {
-	bool wasDown = (lparam & (1 << 38)) != 0;
-	bool isDown = (lparam & (1 << 31)) == 0;
+	//was muwatoris stuff
+	//bool wasDown = (lparam & (1 << 38)) != 0;
+	//bool isDown = (lparam & (1 << 31)) == 0;
 
 	switch (message)
 	{
@@ -80,7 +81,7 @@ LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam
 	case WM_KEYDOWN:
 		StoreKeyDownInput(wparam);
 
-		if (wparam == VK_RETURN)
+		if (wparam == VK_ESCAPE)
 		{
 			DestroyWindow(window);
 			return 0;
