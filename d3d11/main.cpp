@@ -214,9 +214,12 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		}
 
 
-		FrustumCullTest(camera, system);
+		//TODO: move All below into cammera Tick
 
-		//TODO: move into cammera Tick
+		FrustumCullTest(camera, system);
+		camera.MouseMove(ui.mousePos.x, ui.mousePos.y);
+		camera.UpdateViewMatrix();
+
 		if (GetAsyncKeyState('W'))
 		{
 			camera.MoveForward(5.f * win32.delta);
@@ -242,11 +245,10 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 			camera.MoveUp(5.f * win32.delta);
 		}
 
-		camera.MouseMove(ui.mousePos.x, ui.mousePos.y);
-		camera.UpdateViewMatrix();
 
 
-		dx.Render(&camera, &ui, &system);
+		//RENDER
+		dx.Render(&camera, &ui, &system, &dx);
 
 		win32.EndTimer();
 	}

@@ -38,7 +38,7 @@ public:
 	void CreateVertexBuffer(UINT size, const void* data, class ActorSystem* actor);
 	void CreateConstantBuffer(class Camera& camera);
 
-	void Render(class Camera* camera, class UIContext* ui, class ActorSystem* actorSystem);
+	void Render(class Camera* camera, class UIContext* ui, class ActorSystem* actorSystem, DXUtil* dx);
 
 	//TODO: put actor array in scene/world structure
 	//std::vector<class Actor> actors;

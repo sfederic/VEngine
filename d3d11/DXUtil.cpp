@@ -144,7 +144,7 @@ void DXUtil::CreateConstantBuffer(Camera& camera)
 	cbMatrices = CreateDefaultBuffer(sizeof(Matrices), D3D11_BIND_CONSTANT_BUFFER, &matrices);
 }
 
-void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem)
+void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXUtil* dx)
 {
 	context->Begin(disjointQuery);
 	context->End(startTimeQuery);
@@ -189,16 +189,10 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem)
 	//UI RENDERING 
 	//TODO: Put render and d2d stuff into func for profiling
 	ui->d2dRenderTarget->BeginDraw();
-	wchar_t renderTimeText[32];
-	_snwprintf_s(renderTimeText, sizeof(renderTimeText), L"Render: %f", renderTime);
-	ui->d2dRenderTarget->DrawTextA(renderTimeText, wcslen(renderTimeText), ui->textFormat, { 0, 0, 1000, 1000 }, ui->brush);
-
-	wchar_t gpuInfoText[128];
-	_snwprintf_s(gpuInfoText, sizeof(gpuInfoText), L"%ls", adaptersDesc[0].Description);
-	ui->d2dRenderTarget->DrawTextA(gpuInfoText, wcslen(gpuInfoText), ui->textFormat, { 0, 20, 1000, 1000 }, ui->brush);
 
 	//Test console rendering and work. Might need to put it into a system
-	Console::Tick(ui);
+	Console::Tick(ui, dx);
+	Console::DrawViewItems(ui);
 
 	ui->d2dRenderTarget->EndDraw();
 
