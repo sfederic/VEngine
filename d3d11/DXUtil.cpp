@@ -26,7 +26,7 @@ void DXUtil::CreateDevice()
 	//https://github.com/walbourn/directx-vs-templates/blob/master/d3d11game_win32_dr/DeviceResources.cpp
 
 	IDXGIAdapter1* adapter;
-	for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)
+	for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_MINIMUM_POWER, IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)
 	{
 		adapters.push_back(adapter);
 		DXGI_ADAPTER_DESC1 desc = {};
@@ -156,6 +156,7 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem)
 	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
+	//Only a test system. End needs to go through different rasterizer passes
 	for (int i = 0; i < actorSystem->actors.size(); i++)
 	{
 		if (actorSystem->actors[i].bRender)
@@ -194,12 +195,15 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem)
 
 	ui->d2dRenderTarget->EndDraw();
 
+
+	//PRESENT
 	HR(swapchain->Present(1, 0));
 
+	//END QUERY
 	context->End(endTimeQuery);
 	context->End(disjointQuery);
 
-
+	//POLL QUERY
 	while (context->GetData(disjointQuery, nullptr, 0, 0) == S_FALSE)
 	{
 		Sleep(1);
@@ -229,16 +233,6 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem)
 	double time = tick * (realTime);
 
 	renderTime = time;
-
-	return;
-}
-
-void DXUtil::DrawActor(Actor* actor)
-{
-	UINT strides = sizeof(Vertex);
-	UINT offsets = 0;
-	//context->IASetVertexBuffers(0, 1, &actor->vertexBuffer, &strides, &offsets);
-	//context->Draw(actor->modelData.verts.size(), 0);
 }
 
 ID3DBlob* DXUtil::CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target)

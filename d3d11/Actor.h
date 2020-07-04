@@ -1,6 +1,5 @@
 #pragma once
 
-#include <d3d11.h> //TODO: fix up forward declarations
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
 #include <vector>
@@ -38,8 +37,8 @@ public:
 
 	OBJData modelData;
 
-	ID3D11Buffer* vertexBuffer;
-	ID3D11Buffer* indexBuffer;
+	struct ID3D11Buffer* vertexBuffer;
+	struct ID3D11Buffer* indexBuffer;
 
 	//Wonder if I can make it so that only the system needs 1 copy of each and the uniform scaling does the rest
 	BoundingBox boundingBox;

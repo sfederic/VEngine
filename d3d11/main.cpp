@@ -8,6 +8,8 @@
 #include "Input.h"
 #include "WICTextureLoader.h"
 #include "Actor.h"
+#include <thread>
+#include <omp.h>
 
 Win32Util win32;
 DXUtil dx;
@@ -37,6 +39,38 @@ void Raycast(int sx, int sy, Camera* camera, XMMATRIX& worldMatrix)
 	rayDir = XMVector3Normalize(rayDir);
 }
 
+void FrustumCullTest(Camera& camera, ActorSystem& system)
+{
+	//Is openmp even doing anything here?
+	#pragma omp parallel for
+	for (int i = 0; i < system.actors.size(); i++)
+	{
+		XMMATRIX view = camera.view;
+		XMMATRIX invView = XMMatrixInverse(&XMMatrixDeterminant(view), view);
+
+		XMMATRIX world = system.actors[0].transform;
+		XMMATRIX invWorld = XMMatrixInverse(&XMMatrixDeterminant(world), world);
+
+		XMMATRIX viewToLocal = XMMatrixMultiply(invView, invWorld);
+
+		BoundingFrustum frustum, localSpaceFrustum;
+		BoundingFrustum::CreateFromMatrix(frustum, camera.proj);
+		frustum.Transform(localSpaceFrustum, viewToLocal);
+
+		system.boundingBox.Center = system.actors[i].GetPositionFloat3();
+		system.boundingBox.Extents = system.actors[i].GetScale();
+
+		if (localSpaceFrustum.Contains(system.boundingBox) == DISJOINT)
+		{
+			system.actors[i].bRender = false;
+		}
+		else
+		{
+			system.actors[i].bRender = true;
+		}
+	}
+}
+
 int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine, int cmdShow)
 {
 	//WIN32 SETUP
@@ -47,7 +81,39 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	dx.CreateDevice();
 	dx.CreateSwapchain();
 	dx.CreateRTVAndDSV();
+
 	dx.CreateShaders();
+
+	//TODO: move to renderer. need to figure out shader generation per actor 
+	//Test shader reflection.
+	//No need to generate  or reflect buffers, just grab name as link to static struct name that holds the buffer inside of it and be done
+	/*
+	struct cbuffertest
+	{
+		name; //just make it an id
+		cbuffer_data;
+	}
+	*/
+	{	
+		ID3D11ShaderReflection* cbReflection;
+		HR(D3DReflect(dx.vertexCode->GetBufferPointer(), dx.vertexCode->GetBufferSize(), IID_ID3D11ShaderReflection, (void**)&cbReflection));
+		D3D11_SHADER_BUFFER_DESC shaderDesc = {};
+		ID3D11ShaderReflectionConstantBuffer* cb = cbReflection->GetConstantBufferByIndex(0);
+		cb->GetDesc(&shaderDesc);
+
+		for (int i = 0; i < shaderDesc.Variables; i++)
+		{
+			ID3D11ShaderReflectionVariable* var = cb->GetVariableByIndex(i);
+			D3D11_SHADER_VARIABLE_DESC varDesc;
+			var->GetDesc(&varDesc);
+
+			ID3D11ShaderReflectionType* type = var->GetType();
+			D3D11_SHADER_TYPE_DESC typeDesc;
+			type->GetDesc(&typeDesc);
+		}
+
+	}
+
 	dx.CreateInputLayout();
 	dx.CreateRasterizerStates();
 
@@ -91,8 +157,10 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	dx.context->PSSetSamplers(0, 1, &testSampler);
 
 	ActorSystem system;
-	system.CreateActors("Models/cube.obj", &dx, 4000);
-
+	//system.CreateActors("Models/cube.obj", &dx, 4000);
+	//See if threading is worthwhile
+	std::thread thread1(&ActorSystem::CreateActors, &system, "Models/sphere.obj", &dx, 4); //Did I get 96,000 draw calls in release build?
+	thread1.join();
 
 	//MAIN LOOP
 	while (msg.message != WM_QUIT) 
@@ -143,36 +211,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		}
 
 
-		//Frustum culling test (it's fucking slower than just drawing everything...)
-		{
-
-			for (int i = 0; i < system.actors.size(); i++)
-			{
-				XMMATRIX view = camera.view;
-				XMMATRIX invView = XMMatrixInverse(&XMMatrixDeterminant(view), view);
-
-				XMMATRIX world = system.actors[0].transform;
-				XMMATRIX invWorld = XMMatrixInverse(&XMMatrixDeterminant(world), world);
-
-				XMMATRIX viewToLocal = XMMatrixMultiply(invView, invWorld);
-
-				BoundingFrustum frustum, localSpaceFrustum;
-				BoundingFrustum::CreateFromMatrix(frustum, camera.proj);
-				frustum.Transform(localSpaceFrustum, viewToLocal);
-
-				system.boundingBox.Center = system.actors[i].GetPositionFloat3();
-				system.boundingBox.Extents = system.actors[i].GetScale();
-
-				if (localSpaceFrustum.Contains(system.boundingBox) == DISJOINT)
-				{
-					system.actors[i].bRender = false;
-				}
-				else
-				{
-					system.actors[i].bRender = true;
-				}
-			}
-		}
+		FrustumCullTest(camera, system);
 
 		//TODO: move into cammera Tick
 		if (GetAsyncKeyState('W'))

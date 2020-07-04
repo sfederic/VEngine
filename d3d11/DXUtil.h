@@ -25,13 +25,9 @@ struct Vertex
 
 void DXTrace(HRESULT hr, const char* filename, const char* func, int line);
 #define HR(hr) if(hr != S_OK) { DXTrace(hr, __FILE__, #hr, __LINE__); throw; }
-//#define HRThrow(hr) if(hr != S_OK) { DXTrace(hr, __FILE__, #hr, __LINE__); throw; }
 
 class DXUtil
 {
-private:
-	void DrawActor(class Actor* actor);
-
 public:
 	void CreateDevice();
 	void CreateSwapchain();
