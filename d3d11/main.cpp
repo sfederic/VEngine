@@ -1,3 +1,6 @@
+//putting here for malloc_dbg
+//#define _DEBUG 
+
 #include "DXUtil.h"
 #include "Win32Util.h"
 #include "UIContext.h"
@@ -160,11 +163,10 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 	//ACTOR SYSTEM TESTING
 	ActorSystem system;
-	//system.CreateActors("Models/cube.obj", &dx, 4000);
-	//See if threading is worthwhile
-	std::thread thread1(&ActorSystem::CreateActors, &system, "Models/sphere.obj", &dx, 4); //Did I get 96,000 draw calls in release build?
-	thread1.join();
-
+	system.CreateActors("Models/sphere.obj", &dx, 40);
+	//See if threading is worthwhile. Is is slowing down the main thread somehow?
+	//std::thread thread1(&ActorSystem::CreateActors, &system, "Models/sphere.obj", &dx, 4); //Did I get 96,000 draw calls in release build?
+	//thread1.join();
 
 	//MAIN LOOP
 	while (msg.message != WM_QUIT) 
@@ -217,7 +219,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 		//TODO: move All below into cammera Tick
 
-		FrustumCullTest(camera, system);
+		//FrustumCullTest(camera, system);
 		camera.MouseMove(ui.mousePos.x, ui.mousePos.y);
 		camera.UpdateViewMatrix();
 

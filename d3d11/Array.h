@@ -4,7 +4,8 @@
 #include <limits.h>
 #include <assert.h>
 
-//TODO: don't think I'll keep this. std::vector is fast enough for now, unless of course it beats it in compile time
+//TODO: don't think I'll keep this. std::vector is just as fast, unless of course it beats it in compile times
+//What's good is this gives all the byte size infomation. Maybe can just use  class that inherits from std::vector instead?
 template <class T>
 class Array
 {
@@ -16,9 +17,11 @@ public:
 		assert(elementSize < UINT_MAX);
 		sizeInBytes = initSize * elementSize;
 
-		if (sizeInBytes < 32)
+		const int smallestAllocSize = 32;
+
+		if (sizeInBytes < smallestAllocSize)
 		{
-			maxSizeInBytes = 32; //32 being smallest alloc on 64bit systems? MSVC included?
+			maxSizeInBytes = smallestAllocSize; //32 being smallest alloc on 64bit systems? MSVC included?
 			data = (T*)calloc(size, maxSizeInBytes);
 		}
 		else
@@ -33,7 +36,7 @@ public:
 		size++;
 		sizeInBytes = size * elementSize;
 
-		assert(data);
+		//assert(data); //Assert doing funny things with realloc?
 
 		if (sizeInBytes < maxSizeInBytes)
 		{
