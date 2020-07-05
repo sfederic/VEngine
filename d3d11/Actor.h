@@ -4,6 +4,7 @@
 #include <DirectXCollision.h>
 #include <vector>
 #include "Obj.h"
+#include "Array.h"
 
 using namespace DirectX;
 
@@ -33,6 +34,7 @@ public:
 class ActorSystem
 {
 public:
+	ActorSystem();
 	void CreateActors(const char* modelFilename, class DXUtil* dx, int numActorsToSpawn);
 
 	OBJData modelData;
@@ -46,7 +48,8 @@ public:
 
 	UINT64 numVertices; //Frustrum culling is going to make a mess of this 
 
-	std::vector<Actor> actors;
+	//std::vector<Actor> actors;
+	Array<Actor> actors;
 
 	bool bInstancingActors; //bool for setting system to use instancing
 };

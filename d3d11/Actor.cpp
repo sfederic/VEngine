@@ -1,5 +1,6 @@
 #include "Actor.h"
 #include "DXUtil.h"
+#include "Array.h"
 
 Actor::Actor()
 {
@@ -43,22 +44,27 @@ XMFLOAT3 Actor::GetScale()
 	return XMFLOAT3(transform.r[0].m128_f32[0], transform.r[1].m128_f32[1], transform.r[2].m128_f32[2]);
 }
 
+ActorSystem::ActorSystem()
+{
+}
+
 void ActorSystem::CreateActors(const char* modelFilename, DXUtil* dx, int numActorsToSpawn)
 {
 	if (loadOBJFile(modelFilename, modelData))
 	{
 		//TODO: gotta be a better way to do this. Don't make me make my own array 
-		actors.reserve(numActorsToSpawn);
+		//actors.reserve(numActorsToSpawn);
 		for (int i = 0; i < numActorsToSpawn; i++)
 		{
 			Actor actor;
 			actor.transform.r[3] = XMVectorSet(i, i, i, 1.f);
 			actor.vertexBufferOffset = i * modelData.GetByteWidth();
-			actors.push_back(actor);
+			//actors.push_back(actor);
+			actors.add(actor);
 		}
 
 		UINT byteWidth = modelData.GetByteWidth();
-		numVertices = (byteWidth * actors.size()) / sizeof(Vertex);
+		numVertices = (byteWidth * actors.size) / sizeof(Vertex);
 		dx->CreateVertexBuffer(byteWidth, modelData.verts.data(), this);
 
 		size_t stride = sizeof(Vertex);

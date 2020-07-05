@@ -44,12 +44,12 @@ void FrustumCullTest(Camera& camera, ActorSystem& system)
 	//Is openmp even doing anything here?
 	//is SIMD running in Debug build?
 	#pragma omp parallel for
-	for (int i = 0; i < system.actors.size(); i++)
+	for (int i = 0; i < system.actors.size; i++)
 	{
 		XMMATRIX view = camera.view;
 		XMMATRIX invView = XMMatrixInverse(&XMMatrixDeterminant(view), view);
 
-		XMMATRIX world = system.actors[0].transform;
+		XMMATRIX world = system.actors.data[0].transform;
 		XMMATRIX invWorld = XMMatrixInverse(&XMMatrixDeterminant(world), world);
 
 		XMMATRIX viewToLocal = XMMatrixMultiply(invView, invWorld);
@@ -58,16 +58,16 @@ void FrustumCullTest(Camera& camera, ActorSystem& system)
 		BoundingFrustum::CreateFromMatrix(frustum, camera.proj);
 		frustum.Transform(localSpaceFrustum, viewToLocal);
 
-		system.boundingBox.Center = system.actors[i].GetPositionFloat3();
-		system.boundingBox.Extents = system.actors[i].GetScale();
+		system.boundingBox.Center = system.actors.data[i].GetPositionFloat3();
+		system.boundingBox.Extents = system.actors.data[i].GetScale();
 
 		if (localSpaceFrustum.Contains(system.boundingBox) == DISJOINT)
 		{
-			system.actors[i].bRender = false;
+			system.actors.data[i].bRender = false;
 		}
 		else
 		{
-			system.actors[i].bRender = true;
+			system.actors.data[i].bRender = true;
 		}
 	}
 }
@@ -165,6 +165,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	std::thread thread1(&ActorSystem::CreateActors, &system, "Models/sphere.obj", &dx, 4); //Did I get 96,000 draw calls in release build?
 	thread1.join();
 
+
 	//MAIN LOOP
 	while (msg.message != WM_QUIT) 
 	{
@@ -192,7 +193,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 		if (GetMouseDownState())
 		{
-			Raycast(ui.mousePos.x, ui.mousePos.y, &camera, system.actors[0].transform);
+			Raycast(ui.mousePos.x, ui.mousePos.y, &camera, system.actors.data[0].transform);
 			float dist = 10000.f;
 			if (system.boundingBox.Intersects(rayOrigin, rayDir, dist))
 			{
@@ -202,15 +203,15 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 		if (GetAsyncKeyState(VK_RIGHT))
 		{
-			XMVECTOR pos = system.actors[0].GetPositionVector();
+			XMVECTOR pos = system.actors.data[0].GetPositionVector();
 			pos.m128_f32[0] += 0.15f;
-			system.actors[0].SetPosition(pos);
+			system.actors.data[0].SetPosition(pos);
 		}
 		if (GetAsyncKeyState(VK_LEFT))
 		{
-			XMVECTOR pos = system.actors[0].GetPositionVector();
+			XMVECTOR pos = system.actors.data[0].GetPositionVector();
 			pos.m128_f32[0] -= 0.15f;
-			system.actors[0].SetPosition(pos);
+			system.actors.data[0].SetPosition(pos);
 		}
 
 

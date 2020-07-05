@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="Array.cpp" />
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="AudioContext.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -155,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="Array.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="AudioContext.h" />
     <ClInclude Include="Camera.h" />
