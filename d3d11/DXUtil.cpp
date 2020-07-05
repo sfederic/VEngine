@@ -50,7 +50,7 @@ void DXUtil::CreateSwapchain()
 	sd.Windowed = TRUE;
 	sd.SampleDesc.Count = 1;
 	sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-	sd.OutputWindow = mainWindow;
+	sd.OutputWindow = renderWindow;
 	sd.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
 	sd.BufferCount = frameCount;
 

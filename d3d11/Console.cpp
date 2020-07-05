@@ -43,8 +43,8 @@ void Console::Tick(UIContext* ui, DXUtil* dx)
 	{
 		Console::ConsoleInput();
 
-		ui->d2dRenderTarget->DrawRectangle({ 0, (float)windowHeight - 20.f, (float)windowWidth, (float)windowHeight }, ui->brush);
-		ui->d2dRenderTarget->DrawText(consoleString, consoleStringIndex, ui->textFormat, { 0, (float)windowHeight - 20.f, 
+		ui->d2dRenderTarget->DrawRectangle({ 0, (float)windowHeight - 75.f, (float)windowWidth, (float)windowHeight }, ui->brush);
+		ui->d2dRenderTarget->DrawText(consoleString, consoleStringIndex, ui->textFormat, { 0, (float)windowHeight - 75.f, 
 			(float)windowWidth, (float)windowHeight }, ui->brush);
 	}
 

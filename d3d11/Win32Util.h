@@ -2,13 +2,15 @@
 
 #include <Windows.h>
 
-extern HWND mainWindow;
+extern HWND mainWindow; 
+extern HWND renderWindow; 
 extern const int windowWidth;
 extern const int windowHeight;
 extern MSG msg;
 extern bool mouseUp;
 
 LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam);
+HWND CreateSimpleToolbar(HWND hWndParent);
 
 class Win32Util
 {
