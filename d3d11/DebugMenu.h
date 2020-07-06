@@ -6,8 +6,10 @@
 enum class EMenuID
 {
 	ACTORS,
-	ACTORSYSTEMS
+	ACTORSYSTEMS,
+	RENDERING
 };
+
 
 struct MenuItem
 {
@@ -17,7 +19,7 @@ struct MenuItem
 		menuID = id;
 	}
 
-	std::vector<MenuItem> subMenuItems;
+	std::vector<const wchar_t*> subMenuItems;
 	wchar_t name[32];
 	EMenuID menuID;
 };
@@ -27,10 +29,9 @@ class DebugMenu
 public:
 	DebugMenu();
 
-	void Tick(class UIContext* ui);
+	void Tick(class UIContext* ui, class DXUtil* dx);
 
 	std::vector<MenuItem> menuItems;
 	bool bDebugMenuActive = false;
 	bool bSubMenuOpen = false;
 };
-

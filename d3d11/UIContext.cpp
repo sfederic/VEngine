@@ -1,6 +1,7 @@
 #include "UIContext.h"
 #include "DXUtil.h"
 #include "Win32Util.h"
+#include "Input.h"
 
 void UIContext::init(IDXGISwapChain* swapchain)
 {
@@ -58,19 +59,22 @@ void UIContext::renderEnd()
 
 bool UIContext::button(D2D1_RECT_F rect)
 {
-	d2dRenderTarget->DrawRectangle(rect, brushText);
-
 	if (mousePos.x > rect.left && mousePos.x < rect.right)
 	{
 		if (mousePos.y > rect.top && mousePos.y < rect.bottom)
 		{
-			if(mouseUp)
-			{
-				mouseUp = false;
+			d2dRenderTarget->DrawRectangle(rect, brushTransparentMenu);
+
+			if(GetMouseUpState())
+			{ 
 				return true;
 			}
+
+			return false;
 		}
 	}
 
+	d2dRenderTarget->DrawRectangle(rect, brushText);
 	return false;
+	
 }

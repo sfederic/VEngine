@@ -253,6 +253,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		//RENDER
 		dx.Render(&camera, &ui, &system, &dx);
 
+
 		win32.EndTimer();
 	}
 

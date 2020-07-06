@@ -5,6 +5,7 @@
 extern WPARAM currentUpKey;
 extern WPARAM currentDownKey;
 extern bool mouseUp;
+extern bool mouseDown;
 
 bool GetAnyKeyUp();
 bool GetAnyKeyDown();

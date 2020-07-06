@@ -197,7 +197,7 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 	Console::DrawViewItems(ui);
 
 	//Debug menu testing (really need to fix this d2d stuff in Render)
-	g_DebugMenu.Tick(ui);
+	g_DebugMenu.Tick(ui, dx);
 
 	ui->d2dRenderTarget->EndDraw();
 
