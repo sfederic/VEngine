@@ -60,11 +60,11 @@ void ActorSystem::CreateActors(const char* modelFilename, DXUtil* dx, int numAct
 			actor.transform.r[3] = XMVectorSet(i, i, i, 1.f);
 			actor.vertexBufferOffset = i * modelData.GetByteWidth();
 			//actors.push_back(actor);
-			actors.add(actor);
+			actors.push_back(actor);
 		}
 
 		UINT byteWidth = modelData.GetByteWidth();
-		numVertices = (byteWidth * actors.size) / sizeof(Vertex);
+		numVertices = (byteWidth * actors.size()) / sizeof(Vertex);
 		dx->CreateVertexBuffer(byteWidth, modelData.verts.data(), this);
 
 		size_t stride = sizeof(Vertex);

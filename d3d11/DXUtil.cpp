@@ -163,13 +163,13 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	//Only a test system. End needs to go through different rasterizer passes
-	for (int i = 0; i < actorSystem->actors.size; i++)
+	for (int i = 0; i < actorSystem->actors.size(); i++)
 	{
-		if (actorSystem->actors.data[i].bRender)
+		if (actorSystem->actors[i].bRender)
 		{
 			//Constant buffer work
 			matrices.view = camera->view;
-			matrices.model = actorSystem->actors.data[i].transform;
+			matrices.model = actorSystem->actors[i].transform;
 			matrices.mvp = matrices.model * matrices.view * matrices.proj;
 			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 			context->VSSetConstantBuffers(0, 1, &cbMatrices);
@@ -197,7 +197,8 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 	Console::DrawViewItems(ui);
 
 	//Debug menu testing (really need to fix this d2d stuff in Render)
-	g_DebugMenu.Tick(ui, dx);
+	g_DebugMenu.Tick(ui, dx, actorSystem);
+
 
 	ui->d2dRenderTarget->EndDraw();
 

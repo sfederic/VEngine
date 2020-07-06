@@ -9,6 +9,10 @@ struct ConsoleViewItem
 
 extern std::vector<ConsoleViewItem> viewItems;
 
+
+//TODO: need to work console away from DebugMenu features
+//i.e. static and dynamic variable views are no good (or at least open the appropriate DebugMenu windows)
+//Keep console on functionality (open levels, off/on switches?)
 class Console
 {
 public: 

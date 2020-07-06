@@ -5,6 +5,7 @@
 
 #include <d2d1_1.h>
 #include <dwrite_1.h>
+#include <vector>
 
 class UIContext
 {
@@ -17,6 +18,7 @@ public:
 
 	//Create UI functions
 	bool button(D2D1_RECT_F rect);
+	void Label(const wchar_t* text, D2D1_RECT_F layoutRect);
 
 	POINT mousePos;
 
@@ -28,3 +30,14 @@ public:
 	IDWriteTextFormat* textFormat;
 };
 
+//For testing
+struct UIView
+{
+	void Tick(UIContext* ui)
+	{
+
+	}
+
+	D2D1_RECT_F viewRect;
+	wchar_t title[32];
+};

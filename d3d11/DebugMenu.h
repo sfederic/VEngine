@@ -29,7 +29,7 @@ class DebugMenu
 public:
 	DebugMenu();
 
-	void Tick(class UIContext* ui, class DXUtil* dx);
+	void Tick(class UIContext* ui, class DXUtil* dx, class ActorSystem* actorSystem);
 
 	std::vector<MenuItem> menuItems;
 	bool bDebugMenuActive = false;

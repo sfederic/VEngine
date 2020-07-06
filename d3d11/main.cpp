@@ -47,12 +47,12 @@ void FrustumCullTest(Camera& camera, ActorSystem& system)
 	//Is openmp even doing anything here?
 	//is SIMD running in Debug build?
 	#pragma omp parallel for
-	for (int i = 0; i < system.actors.size; i++)
+	for (int i = 0; i < system.actors.size(); i++)
 	{
 		XMMATRIX view = camera.view;
 		XMMATRIX invView = XMMatrixInverse(&XMMatrixDeterminant(view), view);
 
-		XMMATRIX world = system.actors.data[0].transform;
+		XMMATRIX world = system.actors[i].transform;
 		XMMATRIX invWorld = XMMatrixInverse(&XMMatrixDeterminant(world), world);
 
 		XMMATRIX viewToLocal = XMMatrixMultiply(invView, invWorld);
@@ -61,16 +61,16 @@ void FrustumCullTest(Camera& camera, ActorSystem& system)
 		BoundingFrustum::CreateFromMatrix(frustum, camera.proj);
 		frustum.Transform(localSpaceFrustum, viewToLocal);
 
-		system.boundingBox.Center = system.actors.data[i].GetPositionFloat3();
-		system.boundingBox.Extents = system.actors.data[i].GetScale();
+		system.boundingBox.Center = system.actors[i].GetPositionFloat3();
+		system.boundingBox.Extents = system.actors[i].GetScale();
 
 		if (localSpaceFrustum.Contains(system.boundingBox) == DISJOINT)
 		{
-			system.actors.data[i].bRender = false;
+			system.actors[i].bRender = false;
 		}
 		else
 		{
-			system.actors.data[i].bRender = true;
+			system.actors[i].bRender = true;
 		}
 	}
 }
@@ -163,7 +163,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 	//ACTOR SYSTEM TESTING
 	ActorSystem system;
-	system.CreateActors("Models/sphere.obj", &dx, 40);
+	system.CreateActors("Models/cube.obj", &dx, 10);
 	//See if threading is worthwhile. Is is slowing down the main thread somehow?
 	//std::thread thread1(&ActorSystem::CreateActors, &system, "Models/sphere.obj", &dx, 4); //Did I get 96,000 draw calls in release build?
 	//thread1.join();
@@ -195,25 +195,31 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 		if (GetMouseDownState())
 		{
-			Raycast(ui.mousePos.x, ui.mousePos.y, &camera, system.actors.data[0].transform);
-			float dist = 10000.f;
-			if (system.boundingBox.Intersects(rayOrigin, rayDir, dist))
+			for (int i = 0; i < system.actors.size(); i++)
 			{
-				OutputDebugString("hit");
+				Raycast(ui.mousePos.x, ui.mousePos.y, &camera, system.actors[i].transform);
+				float dist = 10000.f;
+				system.boundingBox.Center = system.actors[i].GetPositionFloat3();
+				system.boundingBox.Extents = system.actors[i].GetScale();
+				if (system.boundingBox.Intersects(rayOrigin, rayDir, dist))
+				{
+					OutputDebugString("hit");
+					break;
+				}
 			}
 		}
 
 		if (GetAsyncKeyState(VK_RIGHT))
 		{
-			XMVECTOR pos = system.actors.data[0].GetPositionVector();
+			XMVECTOR pos = system.actors[0].GetPositionVector();
 			pos.m128_f32[0] += 0.15f;
-			system.actors.data[0].SetPosition(pos);
+			system.actors[0].SetPosition(pos);
 		}
 		if (GetAsyncKeyState(VK_LEFT))
 		{
-			XMVECTOR pos = system.actors.data[0].GetPositionVector();
+			XMVECTOR pos = system.actors[0].GetPositionVector();
 			pos.m128_f32[0] -= 0.15f;
-			system.actors.data[0].SetPosition(pos);
+			system.actors[0].SetPosition(pos);
 		}
 
 

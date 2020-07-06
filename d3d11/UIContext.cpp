@@ -28,6 +28,7 @@ void UIContext::init(IDXGISwapChain* swapchain)
 
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.5f, 0.5f, 0.5f, 0.5f), &brushTransparentMenu));
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.9f, 0.9f, 0.9f, 1.0f), &brushText));
+
 }
 
 void UIContext::cleanup()
@@ -57,6 +58,7 @@ void UIContext::renderEnd()
 	d2dRenderTarget->EndDraw();
 }
 
+
 bool UIContext::button(D2D1_RECT_F rect)
 {
 	if (mousePos.x > rect.left && mousePos.x < rect.right)
@@ -77,4 +79,10 @@ bool UIContext::button(D2D1_RECT_F rect)
 	d2dRenderTarget->DrawRectangle(rect, brushText);
 	return false;
 	
+}
+
+void UIContext::Label(const wchar_t* text, D2D1_RECT_F layoutRect)
+{
+	d2dRenderTarget->DrawRectangle(layoutRect, brushTransparentMenu);
+	d2dRenderTarget->DrawTextA(text, wcslen(text), textFormat, layoutRect, brushText);
 }
