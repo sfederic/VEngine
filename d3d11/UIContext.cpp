@@ -22,10 +22,11 @@ void UIContext::init(IDXGISwapChain* swapchain)
 	HR(DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED, __uuidof(writeFactory), (IUnknown**)(&writeFactory)));
 
 	//DirectWrite Init
-	HR(writeFactory->CreateTextFormat(L"Consolas", NULL, DWRITE_FONT_WEIGHT_NORMAL, DWRITE_FONT_STYLE_NORMAL,
-		DWRITE_FONT_STRETCH_NORMAL, 18.f, L"en-us", &textFormat));
+	HR(writeFactory->CreateTextFormat(L"Terminal", NULL, DWRITE_FONT_WEIGHT_NORMAL, DWRITE_FONT_STYLE_NORMAL,
+		DWRITE_FONT_STRETCH_NORMAL, 14.f, L"en-us", &textFormat));
 
-	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::AliceBlue), &brush));
+	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.5f, 0.5f, 0.5f, 0.5f), &brushTransparentMenu));
+	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.9f, 0.9f, 0.9f, 1.0f), &brushText));
 }
 
 void UIContext::cleanup()
@@ -33,7 +34,9 @@ void UIContext::cleanup()
 	d2dFactory->Release();
 	d2dRenderTarget->Release();
 	writeFactory->Release();
-	brush->Release();
+
+	brushTransparentMenu->Release();
+	brushText->Release();
 	textFormat->Release();
 }
 
@@ -55,7 +58,7 @@ void UIContext::renderEnd()
 
 bool UIContext::button(D2D1_RECT_F rect)
 {
-	d2dRenderTarget->DrawRectangle(rect, brush);
+	d2dRenderTarget->DrawRectangle(rect, brushText);
 
 	if (mousePos.x > rect.left && mousePos.x < rect.right)
 	{

@@ -5,6 +5,10 @@
 #include "UIContext.h"
 #include "Input.h"
 #include "Console.h"
+#include "DebugMenu.h"
+
+//GLOBALS
+DebugMenu g_DebugMenu;
 
 //Temp constant buffer data for base shader
 struct Matrices
@@ -14,8 +18,6 @@ struct Matrices
 	XMMATRIX proj;
 	XMMATRIX mvp;
 }matrices;
-
-
 
 void DXUtil::CreateDevice()
 {
@@ -50,7 +52,7 @@ void DXUtil::CreateSwapchain()
 	sd.Windowed = TRUE;
 	sd.SampleDesc.Count = 1;
 	sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-	sd.OutputWindow = renderWindow;
+	sd.OutputWindow = mainWindow;
 	sd.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
 	sd.BufferCount = frameCount;
 
@@ -193,6 +195,9 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 	//Test console rendering and work. Might need to put it into a system
 	Console::Tick(ui, dx);
 	Console::DrawViewItems(ui);
+
+	//Debug menu testing (really need to fix this d2d stuff in Render)
+	g_DebugMenu.Tick(ui);
 
 	ui->d2dRenderTarget->EndDraw();
 

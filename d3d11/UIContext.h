@@ -23,7 +23,8 @@ public:
 	ID2D1Factory* d2dFactory;
 	ID2D1RenderTarget* d2dRenderTarget;
 	IDWriteFactory1* writeFactory;
-	ID2D1SolidColorBrush* brush;
+	ID2D1SolidColorBrush* brushText;
+	ID2D1SolidColorBrush* brushTransparentMenu;
 	IDWriteTextFormat* textFormat;
 };
 

@@ -43,9 +43,9 @@ void Console::Tick(UIContext* ui, DXUtil* dx)
 	{
 		Console::ConsoleInput();
 
-		ui->d2dRenderTarget->DrawRectangle({ 0, (float)windowHeight - 75.f, (float)windowWidth, (float)windowHeight }, ui->brush);
-		ui->d2dRenderTarget->DrawText(consoleString, consoleStringIndex, ui->textFormat, { 0, (float)windowHeight - 75.f, 
-			(float)windowWidth, (float)windowHeight }, ui->brush);
+		ui->d2dRenderTarget->DrawRectangle({ 0, (float)windowHeight - 20.f, (float)windowWidth, (float)windowHeight }, ui->brushTransparentMenu);
+		ui->d2dRenderTarget->DrawText(consoleString, consoleStringIndex, ui->textFormat, { 0, (float)windowHeight - 20.f, 
+			(float)windowWidth, (float)windowHeight }, ui->brushText);
 	}
 
 	if (GetKeyUpState(VK_OEM_3)) //~ key, like doom and unreal
@@ -102,7 +102,7 @@ void Console::DrawViewItems(UIContext* ui)
 		const float yMarginIncrement = 20.f * i;
 
 		ui->d2dRenderTarget->DrawTextA(viewItems[i].text, wcslen(viewItems[i].text), ui->textFormat, 
-			{ 0, yMarginIncrement, (float)windowWidth, (float)windowHeight }, ui->brush);
+			{ 0, yMarginIncrement, (float)windowWidth, (float)windowHeight }, ui->brushText);
 
 	}
 }
