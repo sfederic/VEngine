@@ -12,12 +12,15 @@
 #include "WICTextureLoader.h"
 #include "Actor.h"
 #include <thread>
+#include "ShaderFactory.h"
 #include <omp.h>
 
 Win32Util win32;
 DXUtil dx;
 UIContext ui;
 AudioContext ac;
+ShaderFactory g_ShaderFactory;
+
 
 XMVECTOR rayOrigin;
 XMVECTOR rayDir;
@@ -88,6 +91,7 @@ void FrustumCullTest(Camera& camera, ActorSystem& system)
 	}
 }
 
+
 int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine, int cmdShow)
 {
 	//WIN32 SETUP
@@ -99,6 +103,8 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	dx.CreateSwapchain();
 	dx.CreateRTVAndDSV();
 	dx.CreateShaders();
+
+	g_ShaderFactory.CompileAllShadersFromFile();
 
 	//TODO: move to renderer. need to figure out shader generation per actor 
 	//Test shader reflection.

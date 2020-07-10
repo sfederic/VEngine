@@ -153,8 +153,8 @@ void DXUtil::CreateConstantBuffer(Camera& camera)
 
 void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXUtil* dx, ID3D11Buffer* debugBuffer)
 {
-	context->Begin(disjointQuery);
-	context->End(startTimeQuery);
+	//context->Begin(disjointQuery);
+	//context->End(startTimeQuery);
 
 	context->RSSetViewports(1, &viewport);
 
@@ -191,6 +191,8 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 		}
 	}
 
+	//TODO: the lines work fine, find a way to make them thicker? (Geom shader?)
+	//Lifetime fix (add a timer into the raycast func (this needs a global engine timer/clocl now))
 	//Draw debug shapes
 	for (int i = 0; i < debugLines.size(); i++)
 	{
@@ -227,8 +229,10 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 	//PRESENT
 	HR(swapchain->Present(1, 0));
 
+
+	//TODO: Queries were blocking the GPU. Find a way to poll the query states on a thread
 	//END QUERY
-	context->End(endTimeQuery);
+	/*context->End(endTimeQuery);
 	context->End(disjointQuery);
 
 	//POLL QUERY
@@ -260,7 +264,7 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 	double tick = 1.0 / freq.Frequency;
 	double time = tick * (realTime);
 
-	renderTime = time;
+	renderTime = time;*/
 }
 
 ID3DBlob* DXUtil::CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target)
@@ -268,6 +272,7 @@ ID3DBlob* DXUtil::CreateShaderFromFile(const wchar_t* filename, const char* entr
 	UINT flags = D3DCOMPILE_SKIP_OPTIMIZATION | D3DCOMPILE_DEBUG;
 	ID3DBlob* code;
 	ID3DBlob* error;
+	
 	D3DCompileFromFile(filename, nullptr, nullptr, entry, target, flags, 0, &code, &error);
 	if (error)
 	{

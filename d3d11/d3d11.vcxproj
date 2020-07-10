@@ -152,6 +152,7 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Obj.cpp" />
+    <ClCompile Include="ShaderFactory.cpp" />
     <ClCompile Include="UIContext.cpp" />
     <ClCompile Include="Win32Util.cpp" />
   </ItemGroup>
@@ -166,6 +167,7 @@
     <ClInclude Include="DXUtil.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Obj.h" />
+    <ClInclude Include="ShaderFactory.h" />
     <ClInclude Include="UIContext.h" />
     <ClInclude Include="Win32Util.h" />
   </ItemGroup>
