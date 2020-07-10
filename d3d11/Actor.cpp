@@ -52,17 +52,6 @@ void ActorSystem::CreateActors(const char* modelFilename, DXUtil* dx, int numAct
 {
 	if (loadOBJFile(modelFilename, modelData))
 	{
-		//TODO: gotta be a better way to do this. Don't make me make my own array 
-		//actors.reserve(numActorsToSpawn);
-		for (int i = 0; i < numActorsToSpawn; i++)
-		{
-			Actor actor;
-			actor.transform.r[3] = XMVectorSet(i, i, i, 1.f);
-			actor.vertexBufferOffset = i * modelData.GetByteWidth();
-			//actors.push_back(actor);
-			actors.push_back(actor);
-		}
-
 		UINT byteWidth = modelData.GetByteWidth();
 		numVertices = (byteWidth * actors.size()) / sizeof(Vertex);
 		dx->CreateVertexBuffer(byteWidth, modelData.verts.data(), this);
@@ -70,8 +59,23 @@ void ActorSystem::CreateActors(const char* modelFilename, DXUtil* dx, int numAct
 		size_t stride = sizeof(Vertex);
 		//TODO: dislay debug rendering for box and sphere
 
-		BoundingBox::CreateFromPoints(boundingBox, modelData.verts.size(), &modelData.verts[0].pos, stride); 
+		BoundingBox::CreateFromPoints(boundingBox, modelData.verts.size(), &modelData.verts[0].pos, stride);
 		BoundingSphere::CreateFromBoundingBox(boundingSphere, boundingBox);
+
+		//TODO: gotta be a better way to do this. Don't make me make my own array 
+		//actors.reserve(numActorsToSpawn);
+		for (int i = 0; i < numActorsToSpawn; i++)
+		{
+			Actor actor;
+			actor.transform.r[3] = XMVectorSet(i, i, i, 1.f);
+			actor.vertexBufferOffset = i * modelData.GetByteWidth();
+			actor.boundingBox = boundingBox;
+			actor.boundingSphere = boundingSphere;
+			//actors.push_back(actor);
+			actors.push_back(actor);
+		}
+
+
 	}
 	else
 	{

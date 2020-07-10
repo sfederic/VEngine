@@ -19,6 +19,8 @@ struct Matrices
 	XMMATRIX mvp;
 }matrices;
 
+Vertex debugLineData[2];
+
 void DXUtil::CreateDevice()
 {
 	D3D_FEATURE_LEVEL featureLevels[] = { D3D_FEATURE_LEVEL_11_1, D3D_FEATURE_LEVEL_11_0 };
@@ -43,6 +45,9 @@ void DXUtil::CreateDevice()
 	//BGRA support needed for DirectWrite and Direct2D
 	HR(D3D11CreateDevice(adapter, D3D_DRIVER_TYPE_HARDWARE, 0, D3D11_CREATE_DEVICE_DEBUG | D3D11_CREATE_DEVICE_BGRA_SUPPORT,
 		featureLevels, _countof(featureLevels), D3D11_SDK_VERSION, &device, &featureLevel, &context));
+
+	debugLineData[0].pos = XMFLOAT3(0.f, 0.f, 0.f);
+	debugLineData[1].pos = XMFLOAT3(0.f, 0.f, 100.f);
 }
 
 void DXUtil::CreateSwapchain()
@@ -146,7 +151,7 @@ void DXUtil::CreateConstantBuffer(Camera& camera)
 	cbMatrices = CreateDefaultBuffer(sizeof(Matrices), D3D11_BIND_CONSTANT_BUFFER, &matrices);
 }
 
-void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXUtil* dx)
+void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXUtil* dx, ID3D11Buffer* debugBuffer)
 {
 	context->Begin(disjointQuery);
 	context->End(startTimeQuery);
@@ -186,6 +191,22 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 		}
 	}
 
+	//Draw debug shapes
+	for (int i = 0; i < debugLines.size(); i++)
+	{
+		matrices.view = camera->view;
+		matrices.model = XMMatrixIdentity(); //See if debug shapes need their own model Matrix
+		matrices.mvp = matrices.model * matrices.view * matrices.proj;
+		context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
+		context->VSSetConstantBuffers(0, 1, &cbMatrices);
+
+		context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
+
+		UINT strides = sizeof(Vertex);
+		UINT offsets = 0;
+		context->IASetVertexBuffers(0, 1, &debugBuffer, &strides, &offsets);
+		context->Draw(debugLines.size(), 0);
+	}
 
 	//TODO: FIX THIS TOO THIS IS AWFUL
 	//UI RENDERING 

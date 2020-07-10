@@ -17,4 +17,4 @@ bool GetKeyUpState(int key);
 bool GetKeyDownState(int key);
 bool GetMouseDownState();
 bool GetMouseUpState();
-
+bool GetAsyncKey(WPARAM key); //Just a wrapper call to GetAsyncKeyState for portability purposes

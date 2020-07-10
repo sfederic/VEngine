@@ -24,7 +24,8 @@ public:
 	XMMATRIX GetRotation(); //Don't like this
 	XMFLOAT3 GetScale();
 
-	//TODO: do actors need names later for the editor?
+	BoundingBox boundingBox;
+	BoundingSphere boundingSphere;
 
 	int vertexBufferOffset;
 	XMMATRIX transform = XMMatrixIdentity();

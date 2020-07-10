@@ -23,6 +23,8 @@ struct Vertex
 	XMFLOAT3 normal;
 };
 
+extern Vertex debugLineData[2];
+
 void DXTrace(HRESULT hr, const char* filename, const char* func, int line);
 #define HR(hr) if(hr != S_OK) { DXTrace(hr, __FILE__, #hr, __LINE__); throw; }
 
@@ -38,13 +40,15 @@ public:
 	void CreateVertexBuffer(UINT size, const void* data, class ActorSystem* actor);
 	void CreateConstantBuffer(class Camera& camera);
 
-	void Render(class Camera* camera, class UIContext* ui, class ActorSystem* actorSystem, DXUtil* dx);
+	void Render(class Camera* camera, class UIContext* ui, class ActorSystem* actorSystem, DXUtil* dx, ID3D11Buffer* debugBuffer);
 
 	//TODO: put actor array in scene/world structure
 	//std::vector<class Actor> actors;
 
 	std::vector<IDXGIAdapter1*> adapters;
 	std::vector<DXGI_ADAPTER_DESC1> adaptersDesc;
+
+	std::vector<Vertex> debugLines;
 
 	ID3DBlob* CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target);
 	ID3D11Buffer* CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, const void* initData);

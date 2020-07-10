@@ -96,6 +96,18 @@ bool GetMouseUpState()
 	}
 }
 
+bool GetAsyncKey(WPARAM key)
+{
+	if (GetAsyncKeyState(key))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 bool GetKeyUpState(int key)
 {
 	if (currentUpKey == key)

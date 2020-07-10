@@ -22,6 +22,19 @@ AudioContext ac;
 XMVECTOR rayOrigin;
 XMVECTOR rayDir;
 
+void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, ID3D11Buffer* debugBuffer)
+{
+	Vertex v1 = {}, v2 = {};
+	XMStoreFloat3(&v1.pos, rayOrigin);
+	XMVECTOR rayEnd = rayOrigin + (rayDir * distance);
+	XMStoreFloat3(&v2.pos, rayEnd);
+
+	dx.debugLines.push_back(v1);
+	dx.debugLines.push_back(v2);
+
+	dx.context->UpdateSubresource(debugBuffer, 0, nullptr, dx.debugLines.data(), 0, 0);
+}
+
 //TODO: where do I put this?
 void Raycast(int sx, int sy, Camera* camera, XMMATRIX& worldMatrix)
 {
@@ -30,7 +43,7 @@ void Raycast(int sx, int sy, Camera* camera, XMMATRIX& worldMatrix)
 	float vy = (-2.0f * sy / windowHeight + 1.0f) / V.r[1].m128_f32[1];
 
 	rayOrigin = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-	rayDir = XMVectorSet(vx, vy, 1.f, 0.f);
+	rayDir = XMVectorSet(vx, vy, 1.f, 0.f); //TODO: need camera forward vector here in z?
 	
 	XMMATRIX invView = XMMatrixInverse(&XMMatrixDeterminant(V), V); 
 	XMMATRIX W = worldMatrix; 
@@ -163,10 +176,12 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 	//ACTOR SYSTEM TESTING
 	ActorSystem system;
-	system.CreateActors("Models/cube.obj", &dx, 10);
+	system.CreateActors("Models/cube.obj", &dx, 2);
 	//See if threading is worthwhile. Is is slowing down the main thread somehow?
 	//std::thread thread1(&ActorSystem::CreateActors, &system, "Models/sphere.obj", &dx, 4); //Did I get 96,000 draw calls in release build?
 	//thread1.join();
+
+	ID3D11Buffer* debugLinesBuffer = dx.CreateDefaultBuffer(sizeof(Vertex) * 32, D3D11_BIND_VERTEX_BUFFER, debugLineData);
 
 	//MAIN LOOP
 	while (msg.message != WM_QUIT) 
@@ -199,11 +214,13 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 			{
 				Raycast(ui.mousePos.x, ui.mousePos.y, &camera, system.actors[i].transform);
 				float dist = 10000.f;
-				system.boundingBox.Center = system.actors[i].GetPositionFloat3();
-				system.boundingBox.Extents = system.actors[i].GetScale();
-				if (system.boundingBox.Intersects(rayOrigin, rayDir, dist))
+				//system.boundingBox.Center = system.actors[i].GetPositionFloat3();
+				//system.boundingBox.Extents = system.actors[i].GetScale();
+				if (system.actors[i].boundingBox.Intersects(rayOrigin, rayDir, dist))
 				{
+					DrawRayDebug(rayOrigin, rayDir, dist, debugLinesBuffer);
 					OutputDebugString("hit");
+
 					break;
 				}
 			}
@@ -257,7 +274,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 
 		//RENDER
-		dx.Render(&camera, &ui, &system, &dx);
+		dx.Render(&camera, &ui, &system, &dx, debugLinesBuffer);
 
 
 		win32.EndTimer();
