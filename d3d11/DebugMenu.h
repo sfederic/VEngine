@@ -3,6 +3,9 @@
 #include <vector>
 #include "UIContext.h"
 
+int debugPrint(const char* format, ...);
+int print(const char* format, va_list args);
+
 enum class EMenuID
 {
 	ACTORS,

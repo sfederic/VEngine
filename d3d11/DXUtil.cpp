@@ -6,9 +6,11 @@
 #include "Input.h"
 #include "Console.h"
 #include "DebugMenu.h"
+#include "ShaderFactory.h"
 
 //GLOBALS
 DebugMenu g_DebugMenu;
+ShaderFactory g_ShaderFactory;
 
 //Temp constant buffer data for base shader
 struct Matrices
@@ -48,6 +50,10 @@ void DXUtil::CreateDevice()
 
 	debugLineData[0].pos = XMFLOAT3(0.f, 0.f, 0.f);
 	debugLineData[1].pos = XMFLOAT3(0.f, 0.f, 100.f);
+
+	//TODO: just doing it here for now
+	g_ShaderFactory.CompileAllShadersFromFile();
+	g_ShaderFactory.CreateAllShaders(device);
 }
 
 void DXUtil::CreateSwapchain()
@@ -99,8 +105,8 @@ void DXUtil::CreateShaders()
 	HR(device->CreateVertexShader(vertexCode->GetBufferPointer(), vertexCode->GetBufferSize(), nullptr, &vertexShader));
 	HR(device->CreatePixelShader(pixelCode->GetBufferPointer(), pixelCode->GetBufferSize(), nullptr, &pixelShader));
 
-	context->VSSetShader(vertexShader, nullptr, 0);
-	context->PSSetShader(pixelShader, nullptr, 0);
+	//context->VSSetShader(vertexShader, nullptr, 0);
+	//context->PSSetShader(pixelShader, nullptr, 0);
 }
 
 void DXUtil::CreateInputLayout()
@@ -180,7 +186,21 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 			context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
 			//TODO: set other shaders 
-			//context->VSSetShaders()...
+			auto vs = g_ShaderFactory.shadersMap.find(actorSystem->shaderName);
+			auto ps = g_ShaderFactory.shadersMap.find(actorSystem->shaderName);
+
+			//TODO: put this error checking into shader construction
+			if (vs == g_ShaderFactory.shadersMap.end())
+			{
+				debugPrint("vertex shader file name %ls not found\n", actorSystem->shaderName);
+			}
+			if (ps == g_ShaderFactory.shadersMap.end())
+			{
+				debugPrint("pixel shader file name %ls not found\n", actorSystem->shaderName);
+			}
+
+			context->VSSetShader(vs->second->vertexShader, nullptr, 0);
+			context->PSSetShader(ps->second->pixelShader, nullptr, 0);
 
 			//Draw all actors of system
 			UINT strides = sizeof(Vertex);

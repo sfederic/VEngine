@@ -1,8 +1,10 @@
 #pragma once
 
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include "DXUtil.h"
+
+//NOTE: All the stuff in these files assumes using joined shaders
 
 enum class EShaderType
 {
@@ -15,10 +17,16 @@ enum class EShaderType
 	UNKNOWN //For testing (creating 'empty' shaders)
 };
 
+enum class EShaderID
+{
+	DEBUG_DRAW,
+	SHADERS
+};
+
 struct ShaderItem
 {
 	ShaderItem() {};
-
+	
 	ShaderItem(const wchar_t* _filename, EShaderType _type)
 	{
 		wcscpy_s(filename, 64 * 2, _filename);
@@ -29,15 +37,18 @@ struct ShaderItem
 	EShaderType type;
 
 	ID3DBlob* vertexCode; //Can you do away with the interfaces and store the blobs contiguously?
-	ID3DBlob* pixelCode;
+	ID3DBlob* pixelCode; //TODO: make sure to free() after future work with InputLayout
+
+	ID3D11VertexShader* vertexShader;
+	ID3D11PixelShader* pixelShader;
 };
 
 class ShaderFactory
 {
 public:
-	void CreateAllShaders();
+	void CreateAllShaders(ID3D11Device* device);
 	void CompileAllShadersFromFile();
 
 	std::vector<ShaderItem> shaders;
-	std::map<const char*, ShaderItem> shadersMap;
+	std::unordered_map<std::wstring, ShaderItem*> shadersMap; //I'm watching you std::wstring. Always watching
 };

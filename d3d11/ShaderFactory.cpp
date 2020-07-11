@@ -1,14 +1,13 @@
 #include "ShaderFactory.h"
 #include <Windows.h>
 
-void ShaderFactory::CreateAllShaders()
+void ShaderFactory::CreateAllShaders(ID3D11Device* device)
 {
-    //shaders.push_back(ShaderItem(L"DefaultVertex.hlsl", EShaderType::VERTEX));
-    //shadersMap.insert(std::pair<const char*, ShaderItem>("DefaultPixel.hlsl", shaders[0]));
-
-    //shaders.push_back(ShaderItem(L"DefaultPixel.hlsl", EShaderType::PIXEL));
-    //ShaderItem item = shadersMap.find("DefaultVertex.hlsl")->second;
-
+    for (int i = 0; i < shaders.size(); i++)
+    {
+        HR(device->CreateVertexShader(shaders[i].vertexCode->GetBufferPointer(), shaders[i].vertexCode->GetBufferSize(), nullptr, &shaders[i].vertexShader));
+        HR(device->CreatePixelShader(shaders[i].pixelCode->GetBufferPointer(), shaders[i].pixelCode->GetBufferSize(), nullptr, &shaders[i].pixelShader));
+    }
 }
 
 void ShaderFactory::CompileAllShadersFromFile()
@@ -33,8 +32,6 @@ void ShaderFactory::CompileAllShadersFromFile()
     do
     {
         wcscpy_s(shaderItem.filename, data.cFileName);
-        //shaderItem.filename = data.cFileName;
-        //shaders.push_back(ShaderItem(data.cFileName, EShaderType::UNKNOWN));
         shaders.push_back(shaderItem);
     } while (FindNextFileW(file, &data) != 0);
 
@@ -48,6 +45,8 @@ void ShaderFactory::CompileAllShadersFromFile()
     //Right now its okay, shader input and output might be a problem if that changes
     for (int i = 0; i < shaders.size(); i++)
     {
+        shadersMap[shaders[i].filename] = &shaders[i];
+
         const char* vsEntry = "VSMain";
         const char* vsTarget = "vs_5_0";
 

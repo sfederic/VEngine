@@ -14,6 +14,22 @@ float textOffsetX = 20.f;
 int menuCursorIndex = 0;
 int subMenuCursorIndex = 0;
 
+int print(const char* format, va_list args)
+{
+	char buff[1024];
+	int charCount = vsnprintf(buff, sizeof(buff), format, args);
+	OutputDebugString(buff);
+	return charCount;
+}
+
+int debugPrint(const char* format, ...)
+{
+	va_list argList;
+	va_start(argList, format);
+	int charsWritten = print(format, argList);
+	return charsWritten;
+}
+
 DebugMenu::DebugMenu()
 {
 	menuItems.push_back(MenuItem(L"Actors", EMenuID::ACTORS));
@@ -152,4 +168,3 @@ void DebugMenu::Tick(UIContext* ui, DXUtil* dx, ActorSystem* actorSystem)
 		}
 	}
 }
-

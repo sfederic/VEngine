@@ -49,8 +49,9 @@ public:
 
 	UINT64 numVertices; //Frustrum culling is going to make a mess of this 
 
-	//std::vector<Actor> actors;
 	std::vector<Actor> actors;
+
+	const wchar_t* shaderName = L"shaders.hlsl";
 
 	bool bInstancingActors; //bool for setting system to use instancing
 };

@@ -14,13 +14,12 @@
 #include <thread>
 #include "ShaderFactory.h"
 #include <omp.h>
+#include "DebugMenu.h"
 
 Win32Util win32;
 DXUtil dx;
 UIContext ui;
 AudioContext ac;
-ShaderFactory g_ShaderFactory;
-
 
 XMVECTOR rayOrigin;
 XMVECTOR rayDir;
@@ -104,7 +103,6 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	dx.CreateRTVAndDSV();
 	dx.CreateShaders();
 
-	g_ShaderFactory.CompileAllShadersFromFile();
 
 	//TODO: move to renderer. need to figure out shader generation per actor 
 	//Test shader reflection.
