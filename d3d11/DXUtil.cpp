@@ -12,6 +12,11 @@
 DebugMenu g_DebugMenu;
 ShaderFactory g_ShaderFactory;
 
+UINT strides = sizeof(Vertex);
+UINT offsets = 0;
+
+ActorSystem debugBox;
+
 //Temp constant buffer data for base shader
 struct Matrices
 {
@@ -34,9 +39,9 @@ void DXUtil::CreateDevice()
 
 	//Reference for EnumAdapterByGpuPerformance
 	//https://github.com/walbourn/directx-vs-templates/blob/master/d3d11game_win32_dr/DeviceResources.cpp
-
+	
 	IDXGIAdapter1* adapter;
-	for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)
+	for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_MINIMUM_POWER, IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)
 	{
 		adapters.push_back(adapter);
 		DXGI_ADAPTER_DESC1 desc = {};
@@ -54,6 +59,9 @@ void DXUtil::CreateDevice()
 	//TODO: just doing it here for now
 	g_ShaderFactory.CompileAllShadersFromFile();
 	g_ShaderFactory.CreateAllShaders(device);
+
+	debugBox.CreateActors("Models/cube.obj", this, 1);
+	debugBox.shaderName = L"debugDraw.hlsl";
 }
 
 void DXUtil::CreateSwapchain()
@@ -173,7 +181,33 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	//Only a test system. End needs to go through different rasterizer passes
+	context->RSSetState(rastStateSolid);
+
+	//TODO: set other shaders 
+	auto vs = g_ShaderFactory.shadersMap.find(actorSystem->shaderName);
+	auto ps = g_ShaderFactory.shadersMap.find(actorSystem->shaderName);
+
+	//TODO: put this error checking into shader construction
+	if (vs == g_ShaderFactory.shadersMap.end())
+	{
+		debugPrint("vertex shader file name %ls not found\n", actorSystem->shaderName);
+		throw;
+	}
+	if (ps == g_ShaderFactory.shadersMap.end())
+	{
+		debugPrint("pixel shader file name %ls not found\n", actorSystem->shaderName);
+		throw;
+	}
+
+
+	//Keep in mind that with actor systems, only need once pass of setting all d3d11 state
+	context->VSSetShader(vs->second->vertexShader, nullptr, 0);
+	context->PSSetShader(ps->second->pixelShader, nullptr, 0);
+
+	context->IASetVertexBuffers(0, 1, &actorSystem->vertexBuffer, &strides, &offsets);
+	//context->IASetIndexBuffer(actorSystem->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
+
+	//Only a test system. End needs to go through different rasterizer passes and group actor systems together
 	for (int i = 0; i < actorSystem->actors.size(); i++)
 	{
 		if (actorSystem->actors[i].bRender)
@@ -185,48 +219,44 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 			context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
-			//TODO: set other shaders 
-			auto vs = g_ShaderFactory.shadersMap.find(actorSystem->shaderName);
-			auto ps = g_ShaderFactory.shadersMap.find(actorSystem->shaderName);
-
-			//TODO: put this error checking into shader construction
-			if (vs == g_ShaderFactory.shadersMap.end())
-			{
-				debugPrint("vertex shader file name %ls not found\n", actorSystem->shaderName);
-			}
-			if (ps == g_ShaderFactory.shadersMap.end())
-			{
-				debugPrint("pixel shader file name %ls not found\n", actorSystem->shaderName);
-			}
-
-			context->VSSetShader(vs->second->vertexShader, nullptr, 0);
-			context->PSSetShader(ps->second->pixelShader, nullptr, 0);
-
 			//Draw all actors of system
-			UINT strides = sizeof(Vertex);
-			UINT offsets = 0;
-			context->IASetVertexBuffers(0, 1, &actorSystem->vertexBuffer, &strides, &offsets);
-			//context->IASetIndexBuffer(actorSystem->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 			context->Draw(actorSystem->modelData.verts.size(), 0);
 		}
+	}
+
+	auto boxIt = g_ShaderFactory.shadersMap.find(debugBox.shaderName);
+	context->VSSetShader(boxIt->second->vertexShader, nullptr, 0);
+	context->PSSetShader(boxIt->second->pixelShader, nullptr, 0);
+
+	context->RSSetState(rastStateWireframe);
+
+	//Draw bounding boxes
+	for (int i = 0; i < debugBox.actors.size(); i++)
+	{
+		matrices.view = camera->view;
+		matrices.model = debugBox.actors[i].transform;
+		matrices.model = XMMatrixScaling(1.01f, 1.01f, 1.01f); //Trying to make the debug boxes slightly larger than the actor
+		matrices.mvp = matrices.model * matrices.view * matrices.proj;
+		context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
+		context->VSSetConstantBuffers(0, 1, &cbMatrices);
+
+		context->Draw(debugBox.modelData.verts.size(), 0);
 	}
 
 	//TODO: the lines work fine, find a way to make them thicker? (Geom shader?)
 	//Lifetime fix (add a timer into the raycast func (this needs a global engine timer/clocl now))
 	//Draw debug shapes
+	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
+	context->IASetVertexBuffers(0, 1, &debugBuffer, &strides, &offsets);
+
 	for (int i = 0; i < debugLines.size(); i++)
 	{
 		matrices.view = camera->view;
-		matrices.model = XMMatrixIdentity(); //See if debug shapes need their own model Matrix
+		matrices.model = XMMatrixIdentity(); //Lines don't need their own model matrix
 		matrices.mvp = matrices.model * matrices.view * matrices.proj;
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 		context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
-		context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
-
-		UINT strides = sizeof(Vertex);
-		UINT offsets = 0;
-		context->IASetVertexBuffers(0, 1, &debugBuffer, &strides, &offsets);
 		context->Draw(debugLines.size(), 0);
 	}
 
