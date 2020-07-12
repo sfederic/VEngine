@@ -28,7 +28,6 @@ void UIContext::init(IDXGISwapChain* swapchain)
 
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.5f, 0.5f, 0.5f, 0.5f), &brushTransparentMenu));
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.9f, 0.9f, 0.9f, 1.0f), &brushText));
-
 }
 
 void UIContext::cleanup()

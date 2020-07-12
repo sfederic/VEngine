@@ -40,7 +40,7 @@ void DXUtil::CreateDevice()
 
 	//Reference for EnumAdapterByGpuPerformance
 	//https://github.com/walbourn/directx-vs-templates/blob/master/d3d11game_win32_dr/DeviceResources.cpp
-	
+
 	IDXGIAdapter1* adapter;
 	for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_MINIMUM_POWER, IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)
 	{
@@ -50,9 +50,15 @@ void DXUtil::CreateDevice()
 		adaptersDesc.push_back(desc);
 	}
 
+	UINT createDeviceFlags = D3D11_CREATE_DEVICE_BGRA_SUPPORT;
+#ifdef _DEBUG
+	createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
+#endif
+
 	//BGRA support needed for DirectWrite and Direct2D
-	HR(D3D11CreateDevice(adapter, D3D_DRIVER_TYPE_HARDWARE, 0, D3D11_CREATE_DEVICE_DEBUG | D3D11_CREATE_DEVICE_BGRA_SUPPORT,
+	HR(D3D11CreateDevice(adapter, D3D_DRIVER_TYPE_HARDWARE, 0, createDeviceFlags,
 		featureLevels, _countof(featureLevels), D3D11_SDK_VERSION, &device, &featureLevel, &context));
+
 
 	debugLineData[0].pos = XMFLOAT3(0.f, 0.f, 0.f);
 	debugLineData[1].pos = XMFLOAT3(0.f, 0.f, 100.f);
@@ -321,11 +327,14 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 
 ID3DBlob* DXUtil::CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target)
 {
-	UINT flags = D3DCOMPILE_SKIP_OPTIMIZATION | D3DCOMPILE_DEBUG;
+	UINT compileFlags = 0;
+#ifdef _DEBUG
+	compileFlags = D3DCOMPILE_SKIP_OPTIMIZATION | D3DCOMPILE_DEBUG;
+#endif
 	ID3DBlob* code;
 	ID3DBlob* error;
 	
-	D3DCompileFromFile(filename, nullptr, nullptr, entry, target, flags, 0, &code, &error);
+	D3DCompileFromFile(filename, nullptr, nullptr, entry, target, compileFlags, 0, &code, &error);
 	if (error)
 	{
 		const char* errMsg = (char*)error->GetBufferPointer();
