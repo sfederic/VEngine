@@ -57,12 +57,11 @@ void ActorSystem::CreateActors(const char* modelFilename, DXUtil* dx, int numAct
 		dx->CreateVertexBuffer(byteWidth, modelData.verts.data(), this);
 
 		size_t stride = sizeof(Vertex);
-		//TODO: dislay debug rendering for box and sphere
+		//TODO: dislay debug rendering for sphere
 
 		BoundingBox::CreateFromPoints(boundingBox, modelData.verts.size(), &modelData.verts[0].pos, stride);
 		BoundingSphere::CreateFromBoundingBox(boundingSphere, boundingBox);
 
-		//TODO: gotta be a better way to do this. Don't make me make my own array 
 		//actors.reserve(numActorsToSpawn);
 		for (int i = 0; i < numActorsToSpawn; i++)
 		{

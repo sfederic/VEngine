@@ -8,9 +8,6 @@
 
 using namespace DirectX;
 
-//TODO: split up actor and actorsystem into files
-
-//Not liking the per actor basis for construction at the moment. Need to find a balance for batch rendering and ease of use
 class Actor
 {
 public:

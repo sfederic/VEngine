@@ -57,7 +57,7 @@ void DXUtil::CreateDevice()
 	debugLineData[0].pos = XMFLOAT3(0.f, 0.f, 0.f);
 	debugLineData[1].pos = XMFLOAT3(0.f, 0.f, 100.f);
 
-	//TODO: just doing it here for now
+
 	g_ShaderFactory.CompileAllShadersFromFile();
 	g_ShaderFactory.CreateAllShaders(device);
 	g_ShaderFactory.InitHotLoading();
@@ -154,14 +154,12 @@ void DXUtil::CreateVertexBuffer(UINT size, const void* data, ActorSystem* system
 
 void DXUtil::CreateConstantBuffer(Camera& camera)
 {
-	//TODO: cleanup constant buffer code to work later with multiple shaders and buffers
 	matrices.model = XMMatrixIdentity();
 	matrices.view = XMMatrixIdentity();
 	matrices.proj = XMMatrixPerspectiveFovLH(XM_PI / 3, Win32Util::GetAspectRatio(), 0.01f, 1000.f);
 
 	//TODO: Get rid of this too. terrible
 	camera.proj = matrices.proj;
-
 	matrices.mvp = matrices.model * matrices.view * matrices.proj;
 
 	cbMatrices = CreateDefaultBuffer(sizeof(Matrices), D3D11_BIND_CONSTANT_BUFFER, &matrices);
@@ -249,7 +247,6 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 		context->Draw(debugBox.modelData.verts.size(), 0);
 	}
 
-	//TODO: the lines work fine, find a way to make them thicker? (Geom shader?)
 	//Lifetime fix (add a timer into the raycast func (this needs a global engine timer/clocl now))
 	//Draw debug shapes
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
@@ -266,7 +263,6 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 		context->Draw(debugLines.size(), 0);
 	}
 
-	//TODO: FIX THIS TOO THIS IS AWFUL
 	//UI RENDERING 
 	//TODO: Put render and d2d stuff into func for profiling
 	ui->d2dRenderTarget->BeginDraw();

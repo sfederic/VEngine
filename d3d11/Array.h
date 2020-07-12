@@ -4,8 +4,6 @@
 #include <limits.h>
 #include <assert.h>
 
-//TODO: don't think I'll keep this. std::vector is just as fast, unless of course it beats it in compile times
-//What's good is this gives all the byte size infomation. Maybe can just use  class that inherits from std::vector instead?
 template <class T>
 class Array
 {
@@ -21,7 +19,7 @@ public:
 
 		if (sizeInBytes < smallestAllocSize)
 		{
-			maxSizeInBytes = smallestAllocSize; //32 being smallest alloc on 64bit systems? MSVC included?
+			maxSizeInBytes = smallestAllocSize; //32 being smallest alloc on 64bit systems (I think)
 			data = (T*)calloc(size, maxSizeInBytes);
 		}
 		else

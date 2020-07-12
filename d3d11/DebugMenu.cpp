@@ -42,7 +42,6 @@ DebugMenu::DebugMenu()
 		menuItems[(int)EMenuID::RENDERING].subMenuItems.push_back(L"GPU: ");
 }
 
-//TODO: remove actor system (only for testing)
 void DebugMenu::Tick(UIContext* ui, DXUtil* dx, ActorSystem* actorSystem, float deltaTime)
 {
 	//Handle notifications (eg. "Shaders recompiled", "ERROR: Not X", etc)
@@ -62,7 +61,7 @@ void DebugMenu::Tick(UIContext* ui, DXUtil* dx, ActorSystem* actorSystem, float 
 		}
 	}
 
-	//Open key
+	//Open key for menu
 	if(GetKeyUpState(VK_TAB))
 	{
 		bDebugMenuActive = !bDebugMenuActive;

@@ -134,7 +134,7 @@ HRESULT AudioContext::LoadWAV(const char* filename, WAVEFORMATEXTENSIBLE& waveFo
 
 bool AudioContext::CreateAudio(const char* filename, AudioChunk* chunk)
 {
-	//TODO: Initilization of audio is bad if nothing is zeroed out. Source voice fails
+	//Initilization of audio is bad if nothing is zeroed out. Source voice fails
 	HR(LoadWAV(filename, chunk->waveFormat, chunk->buffer));
 
 	HR(audioEngine->CreateSourceVoice(&chunk->sourceVoice, (WAVEFORMATEX*)&chunk->waveFormat, 0, 2.0f, &chunk->callback));

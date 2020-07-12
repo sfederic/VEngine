@@ -25,7 +25,6 @@ void Camera::UpdateViewMatrix()
 	float y = XMVectorGetX(XMVector3Dot(location, up));
 	float z = XMVectorGetX(XMVector3Dot(location, forward));
 
-	//TODO: see if ASM generated is still SSE unrolled, otherwise use intrinsics
 	view.r[0].m128_f32[0] = right.m128_f32[0];
 	view.r[1].m128_f32[0] = right.m128_f32[1];
 	view.r[2].m128_f32[0] = right.m128_f32[2];
