@@ -27,14 +27,27 @@ struct MenuItem
 	EMenuID menuID;
 };
 
+struct DebugNotification
+{
+	DebugNotification(const wchar_t* initText)
+	{
+		wcsncpy_s(text, initText, 256);
+		timeOnScreen = 0.f;
+	}
+
+	wchar_t text[256];
+	float timeOnScreen;
+};
+
 class DebugMenu
 {
 public:
 	DebugMenu();
 
-	void Tick(class UIContext* ui, class DXUtil* dx, class ActorSystem* actorSystem);
+	void Tick(class UIContext* ui, class DXUtil* dx, class ActorSystem* actorSystem, float deltaTime);
 
 	std::vector<MenuItem> menuItems;
+	std::vector<DebugNotification> notifications;
 	bool bDebugMenuActive = false;
 	bool bSubMenuOpen = false;
 };

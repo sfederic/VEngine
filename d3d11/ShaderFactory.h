@@ -48,8 +48,12 @@ class ShaderFactory
 public:
 	void CreateAllShaders(ID3D11Device* device);
 	void CompileAllShadersFromFile();
-	void HotReloadShaders(class ID3D11Device* device);
+	void InitHotLoading();
+	void CleanUpShaders();
+	void HotReloadShaders(ID3D11Device* device, class DebugMenu* debugMenu);
 
 	std::vector<ShaderItem> shaders;
 	std::unordered_map<std::wstring, ShaderItem*> shadersMap; //I'm watching you std::wstring. Always watching
+
+	HANDLE hotreloadHandle;
 };

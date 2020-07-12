@@ -277,7 +277,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 
 		//RENDER
-		dx.Render(&camera, &ui, &system, &dx, debugLinesBuffer);
+		dx.Render(&camera, &ui, &system, &dx, debugLinesBuffer, win32.delta);
 
 
 		win32.EndTimer();

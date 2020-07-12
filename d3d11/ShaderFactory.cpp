@@ -1,7 +1,6 @@
 #include "ShaderFactory.h"
 #include <Windows.h>
 #include "DebugMenu.h"
-#include <ShObjIdl.h>
 
 void ShaderFactory::CreateAllShaders(ID3D11Device* device)
 {
@@ -80,32 +79,49 @@ void ShaderFactory::CompileAllShadersFromFile()
     }
 }
 
-void ShaderFactory::HotReloadShaders(ID3D11Device* device)
+void ShaderFactory::InitHotLoading()
+{
+    hotreloadHandle = FindFirstChangeNotificationA("Shaders", false, FILE_NOTIFY_CHANGE_LAST_WRITE);
+    if (hotreloadHandle == INVALID_HANDLE_VALUE)
+    {
+        debugPrint("Handle for shader reload file tracking invalid\n");
+    }
+}
+
+void ShaderFactory::CleanUpShaders()
+{
+    //Seems to work for now. I'm sure there's a caveat in D3D11
+    for (int i = 0; i < shaders.size(); i++)
+    {
+        shaders[i].vertexCode->Release();
+        shaders[i].pixelCode->Release();
+
+        shaders[i].vertexShader->Release();
+        shaders[i].pixelShader->Release();
+    }
+}
+
+void ShaderFactory::HotReloadShaders(ID3D11Device* device, DebugMenu* debugMenu)
 {
     //TODO: right now Im stuck recompiling every single shader if I can't get the filename
+    //Reloading the shaders also pushes the camera back on the z-axis. Figure that one out (random negative val?)
+
+    //Potentially engine could let the previous vertex/shader object buffers be used until new compile is ready
+
     //https://docs.microsoft.com/en-us/windows/win32/fileio/obtaining-directory-change-notifications
-    //while (1)
+
+    BOOL nextChange = FindNextChangeNotification(hotreloadHandle);
+    if (nextChange)
     {
-        debugPrint("Shader HotReload Started.\n");
+        debugPrint("Shader reload start...\n");
+        CleanUpShaders();
+        CompileAllShadersFromFile();
+        CreateAllShaders(device);
+        debugPrint("Shader reload complete\n");
 
-        HANDLE handle;
-        handle = FindFirstChangeNotificationA("Shaders", false, FILE_NOTIFY_CHANGE_LAST_WRITE);
-        if (handle == INVALID_HANDLE_VALUE)
-        {
-            debugPrint("Handle for shader reload file tracking invalid\n");
-        }
-
-        WaitForSingleObject(handle, INFINITE);
-        BOOL nextChange = FindNextChangeNotification(handle);
-        if (nextChange)
-        {
-            debugPrint("Shader reload start...\n");
-            CompileAllShadersFromFile();
-            CreateAllShaders(device);
-            debugPrint("Shader reload complete\n");
-        }
-
-        FindCloseChangeNotification(handle);
-        return;
+        debugMenu->notifications.push_back(DebugNotification(L"Shader reload complete."));
     }
+
+    FindCloseChangeNotification(hotreloadHandle);
+    InitHotLoading();
 }

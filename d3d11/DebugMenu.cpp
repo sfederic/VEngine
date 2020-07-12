@@ -43,8 +43,25 @@ DebugMenu::DebugMenu()
 }
 
 //TODO: remove actor system (only for testing)
-void DebugMenu::Tick(UIContext* ui, DXUtil* dx, ActorSystem* actorSystem)
+void DebugMenu::Tick(UIContext* ui, DXUtil* dx, ActorSystem* actorSystem, float deltaTime)
 {
+	//Handle notifications (eg. "Shaders recompiled", "ERROR: Not X", etc)
+	const float notificationLifetime = 3.0f;
+	for (int i = 0; i < notifications.size(); i++)
+	{
+		if (notifications[i].timeOnScreen < notificationLifetime)
+		{
+			notifications[i].timeOnScreen += deltaTime;
+			float notificationOffsetY = 20.f * i;
+			ui->d2dRenderTarget->DrawTextA(notifications[i].text, wcslen(notifications[i].text), ui->textFormat,
+				{ 0.f, notificationOffsetY, 1000.f, 1000.f }, ui->brushText);
+		}
+		else
+		{
+			notifications.erase(notifications.begin() + i);
+		}
+	}
+
 	//Open key
 	if(GetKeyUpState(VK_TAB))
 	{

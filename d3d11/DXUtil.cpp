@@ -60,6 +60,7 @@ void DXUtil::CreateDevice()
 	//TODO: just doing it here for now
 	g_ShaderFactory.CompileAllShadersFromFile();
 	g_ShaderFactory.CreateAllShaders(device);
+	g_ShaderFactory.InitHotLoading();
 
 	debugBox.CreateActors("Models/cube.obj", this, 1);
 	debugBox.shaderName = L"debugDraw.hlsl";
@@ -166,7 +167,7 @@ void DXUtil::CreateConstantBuffer(Camera& camera)
 	cbMatrices = CreateDefaultBuffer(sizeof(Matrices), D3D11_BIND_CONSTANT_BUFFER, &matrices);
 }
 
-void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXUtil* dx, ID3D11Buffer* debugBuffer)
+void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXUtil* dx, ID3D11Buffer* debugBuffer, float deltaTime)
 {
 	//context->Begin(disjointQuery);
 	//context->End(startTimeQuery);
@@ -186,9 +187,7 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 
 	if (GetKeyUpState('3'))
 	{
-		std::thread reloadThread(&ShaderFactory::HotReloadShaders, &g_ShaderFactory, device);
-		reloadThread.join();
-		//g_ShaderFactory.HotReloadShaders(device);
+		g_ShaderFactory.HotReloadShaders(device, &g_DebugMenu);
 	}
 
 	//Using one shader per stage for now
@@ -277,7 +276,7 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 	Console::DrawViewItems(ui);
 
 	//Debug menu testing (really need to fix this d2d stuff in Render)
-	g_DebugMenu.Tick(ui, dx, actorSystem);
+	g_DebugMenu.Tick(ui, dx, actorSystem, deltaTime);
 
 
 	ui->d2dRenderTarget->EndDraw();
