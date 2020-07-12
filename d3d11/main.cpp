@@ -103,7 +103,6 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	dx.CreateRTVAndDSV();
 	dx.CreateShaders();
 
-
 	//TODO: move to renderer. need to figure out shader generation per actor 
 	//Test shader reflection.
 	//No need to generate  or reflect buffers, just grab name as link to static struct name that holds the buffer inside of it and be done

@@ -1,5 +1,7 @@
 #include "ShaderFactory.h"
 #include <Windows.h>
+#include "DebugMenu.h"
+#include <ShObjIdl.h>
 
 void ShaderFactory::CreateAllShaders(ID3D11Device* device)
 {
@@ -28,6 +30,9 @@ void ShaderFactory::CompileAllShadersFromFile()
     }
 
     ShaderItem shaderItem;
+
+    shaders.clear();
+    shadersMap.clear();
 
     do
     {
@@ -72,5 +77,35 @@ void ShaderFactory::CompileAllShadersFromFile()
             OutputDebugString(errMsg);
             MessageBox(0, errMsg, psEntry, 0);
         }
+    }
+}
+
+void ShaderFactory::HotReloadShaders(ID3D11Device* device)
+{
+    //TODO: right now Im stuck recompiling every single shader if I can't get the filename
+    //https://docs.microsoft.com/en-us/windows/win32/fileio/obtaining-directory-change-notifications
+    //while (1)
+    {
+        debugPrint("Shader HotReload Started.\n");
+
+        HANDLE handle;
+        handle = FindFirstChangeNotificationA("Shaders", false, FILE_NOTIFY_CHANGE_LAST_WRITE);
+        if (handle == INVALID_HANDLE_VALUE)
+        {
+            debugPrint("Handle for shader reload file tracking invalid\n");
+        }
+
+        WaitForSingleObject(handle, INFINITE);
+        BOOL nextChange = FindNextChangeNotification(handle);
+        if (nextChange)
+        {
+            debugPrint("Shader reload start...\n");
+            CompileAllShadersFromFile();
+            CreateAllShaders(device);
+            debugPrint("Shader reload complete\n");
+        }
+
+        FindCloseChangeNotification(handle);
+        return;
     }
 }

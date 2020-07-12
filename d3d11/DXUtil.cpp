@@ -7,6 +7,7 @@
 #include "Console.h"
 #include "DebugMenu.h"
 #include "ShaderFactory.h"
+#include <thread>
 
 //GLOBALS
 DebugMenu g_DebugMenu;
@@ -183,9 +184,16 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 
 	context->RSSetState(rastStateSolid);
 
-	//TODO: set other shaders 
+	if (GetKeyUpState('3'))
+	{
+		std::thread reloadThread(&ShaderFactory::HotReloadShaders, &g_ShaderFactory, device);
+		reloadThread.join();
+		//g_ShaderFactory.HotReloadShaders(device);
+	}
+
+	//Using one shader per stage for now
 	auto vs = g_ShaderFactory.shadersMap.find(actorSystem->shaderName);
-	auto ps = g_ShaderFactory.shadersMap.find(actorSystem->shaderName);
+	//auto ps = g_ShaderFactory.shadersMap.find(actorSystem->shaderName);
 
 	//TODO: put this error checking into shader construction
 	if (vs == g_ShaderFactory.shadersMap.end())
@@ -193,16 +201,15 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 		debugPrint("vertex shader file name %ls not found\n", actorSystem->shaderName);
 		throw;
 	}
-	if (ps == g_ShaderFactory.shadersMap.end())
+	/*if (ps == g_ShaderFactory.shadersMap.end())
 	{
 		debugPrint("pixel shader file name %ls not found\n", actorSystem->shaderName);
 		throw;
-	}
+	}*/
 
-
-	//Keep in mind that with actor systems, only need once pass of setting all d3d11 state
+		//Keep in mind that with actor systems, only need once pass of setting all d3d11 state
 	context->VSSetShader(vs->second->vertexShader, nullptr, 0);
-	context->PSSetShader(ps->second->pixelShader, nullptr, 0);
+	context->PSSetShader(vs->second->pixelShader, nullptr, 0);
 
 	context->IASetVertexBuffers(0, 1, &actorSystem->vertexBuffer, &strides, &offsets);
 	//context->IASetIndexBuffer(actorSystem->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
@@ -280,7 +287,7 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 	HR(swapchain->Present(1, 0));
 
 
-	//TODO: Queries were blocking the GPU. Find a way to poll the query states on a thread
+	//TODO: Queries blocking the GPU. Find a way to poll the query states on a thread?
 	//END QUERY
 	/*context->End(endTimeQuery);
 	context->End(disjointQuery);
