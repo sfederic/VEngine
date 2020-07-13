@@ -20,6 +20,8 @@ public:
 	void SetRotation(XMVECTOR axis, float angle);
 	XMMATRIX GetRotation(); //Don't like this
 	XMFLOAT3 GetScale();
+	void SetScale(float x, float y, float z);
+	void SetScale(XMVECTOR scale);
 
 	BoundingBox boundingBox;
 	BoundingSphere boundingSphere;

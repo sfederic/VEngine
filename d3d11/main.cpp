@@ -21,8 +21,13 @@ DXUtil dx;
 UIContext ui;
 AudioContext ac;
 
-XMVECTOR rayOrigin;
-XMVECTOR rayDir;
+int selectedActor;
+
+struct Ray
+{
+	XMVECTOR origin;
+	XMVECTOR direction;
+};
 
 void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, ID3D11Buffer* debugBuffer)
 {
@@ -37,26 +42,30 @@ void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, ID3D11Buf
 	dx.context->UpdateSubresource(debugBuffer, 0, nullptr, dx.debugLines.data(), 0, 0);
 }
 
-//TODO: where do I put this?
-void Raycast(int sx, int sy, Camera* camera, XMMATRIX& worldMatrix)
+//TODO: Raycast is juuuuust gently off on the y-axis. worth figuring out?
+void Raycast(Ray& ray, int sx, int sy, Camera* camera, XMMATRIX& worldMatrix)
 {
-	XMMATRIX P = camera->proj;
-	float vx = (+2.0f * sx / windowWidth - 1.0f) / P.r[0].m128_f32[0]; 
-	float vy = (-2.0f * sy / windowHeight + 1.0f) / P.r[1].m128_f32[1];
+	XMMATRIX proj = camera->proj;
+	float vx = (+2.0f * sx / windowWidth - 1.0f) / proj.r[0].m128_f32[0]; 
+	float vy = (-2.0f * sy / windowHeight + 1.0f) / proj.r[1].m128_f32[1];
 
-	rayOrigin = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-	rayDir = XMVectorSet(vx, vy, 1.f, 0.f); //TODO: need camera forward vector here in z?
+	ray.origin = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	ray.direction = XMVectorSet(vx, vy, 1.f, 0.f); //TODO: need camera forward vector here in z?
 	
-	XMMATRIX V = camera->view;
+	XMMATRIX view = camera->view;
 
-	XMMATRIX invView = XMMatrixInverse(&XMMatrixDeterminant(V), V); 
+	XMMATRIX invView = XMMatrixInverse(&XMMatrixDeterminant(view), view); 
 	XMMATRIX W = worldMatrix; 
 	XMMATRIX invWorld = XMMatrixInverse(&XMMatrixDeterminant(W), W);
 	XMMATRIX toLocal = XMMatrixMultiply(invView, invWorld);
 
-	rayOrigin = XMVector3TransformCoord(rayOrigin, toLocal);
-	rayDir = XMVector3TransformNormal(rayDir, toLocal);
-	rayDir = XMVector3Normalize(rayDir);
+	ray.origin = XMVector3TransformCoord(ray.origin, toLocal);
+	ray.direction = XMVector3TransformNormal(ray.direction, toLocal);
+
+	//This little offset here worries me. Without it, the ray is a few pixels off on the y-axis
+	ray.direction.m128_f32[1] -= 0.040f;
+
+	ray.direction = XMVector3Normalize(ray.direction);
 }
 
 void FrustumCullTest(Camera& camera, ActorSystem& system)
@@ -181,7 +190,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 	//ACTOR SYSTEM TESTING
 	ActorSystem system;
-	system.CreateActors("Models/ico_sphere.obj", &dx, 1);
+	system.CreateActors("Models/ico_sphere.obj", &dx, 5);
 	//See if threading is worthwhile. Is is slowing down the main thread somehow?
 	//std::thread thread1(&ActorSystem::CreateActors, &system, "Models/sphere.obj", &dx, 4); //Did I get 96,000 draw calls in release build?
 	//thread1.join();
@@ -218,16 +227,19 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		{
 			for (int i = 0; i < system.actors.size(); i++)
 			{
+				//TODO: make this all work off of one RAYCAST call
 				XMVECTOR scaleVec = XMLoadFloat3(&system.boundingBox.Extents);
 				XMMATRIX boundingBoxMatrixScale = XMMatrixScalingFromVector(scaleVec);
 				XMMATRIX m = system.actors[i].transform * boundingBoxMatrixScale;
-				Raycast(ui.mousePos.x, ui.mousePos.y, &camera, system.actors[i].transform);
+				Ray ray = {};
+				Raycast(ray, ui.mousePos.x, ui.mousePos.y, &camera, system.actors[i].transform);
 				float dist;
 				//system.boundingBox.Center = system.actors[i].GetPositionFloat3();
 				//system.boundingBox.Extents = system.actors[i].GetScale();
-				if (system.actors[i].boundingBox.Intersects(rayOrigin, rayDir, dist))
+				if (system.actors[i].boundingBox.Intersects(ray.origin, ray.direction, dist))
 				{
-					DrawRayDebug(rayOrigin, rayDir, dist, debugLinesBuffer);
+					selectedActor = i;
+					DrawRayDebug(ray.origin, ray.direction, dist, debugLinesBuffer);
 					OutputDebugString("hit");
 
 					break;
@@ -237,15 +249,15 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 		if (GetAsyncKeyState(VK_RIGHT))
 		{
-			XMVECTOR pos = system.actors[0].GetPositionVector();
+			XMVECTOR pos = system.actors[selectedActor].GetPositionVector();
 			pos.m128_f32[0] += 0.15f;
-			system.actors[0].SetPosition(pos);
+			system.actors[selectedActor].SetPosition(pos);
 		}
 		if (GetAsyncKeyState(VK_LEFT))
 		{
-			XMVECTOR pos = system.actors[0].GetPositionVector();
+			XMVECTOR pos = system.actors[selectedActor].GetPositionVector();
 			pos.m128_f32[0] -= 0.15f;
-			system.actors[0].SetPosition(pos);
+			system.actors[selectedActor].SetPosition(pos);
 		}
 
 

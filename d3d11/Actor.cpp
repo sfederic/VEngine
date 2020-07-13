@@ -44,6 +44,17 @@ XMFLOAT3 Actor::GetScale()
 	return XMFLOAT3(transform.r[0].m128_f32[0], transform.r[1].m128_f32[1], transform.r[2].m128_f32[2]);
 }
 
+void Actor::SetScale(float x, float y, float z)
+{
+	transform = XMMatrixScaling(x, y, z);
+}
+
+void Actor::SetScale(XMVECTOR scale)
+{
+	transform = XMMatrixScalingFromVector(scale);
+}
+
+
 ActorSystem::ActorSystem()
 {
 }

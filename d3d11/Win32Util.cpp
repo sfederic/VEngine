@@ -20,7 +20,7 @@ void Win32Util::SetupWindow(HINSTANCE instance, int cmdShow)
 	wc.lpszClassName = "Window";
 	wc.lpfnWndProc = WndProc;
 	wc.hInstance = instance;
-	wc.hCursor = LoadCursor(0, IDC_ARROW);
+	wc.hCursor = LoadCursor(0, IDC_CROSS);
 
 	RegisterClass(&wc);
 	mainWindow = CreateWindow("Window", "d3d11", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, windowWidth, windowHeight, 0, 0, instance, 0);
