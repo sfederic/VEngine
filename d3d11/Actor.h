@@ -36,6 +36,7 @@ class ActorSystem
 public:
 	ActorSystem();
 	void CreateActors(const char* modelFilename, class DXUtil* dx, int numActorsToSpawn);
+	void AddActor();
 
 	OBJData modelData;
 

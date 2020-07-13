@@ -151,6 +151,7 @@
     <ClCompile Include="DXUtil.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MathHelpers.cpp" />
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="ShaderFactory.cpp" />
     <ClCompile Include="UIContext.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="DebugMenu.h" />
     <ClInclude Include="DXUtil.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="MathHelpers.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="ShaderFactory.h" />
     <ClInclude Include="UIContext.h" />

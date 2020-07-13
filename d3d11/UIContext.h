@@ -10,14 +10,14 @@
 class UIContext
 {
 public:
-	void init(IDXGISwapChain* swapchain);
-	void cleanup(); //D2D1 Actually throws errors if no cleanup
-	void update();
-	void renderStart();
-	void renderEnd();
+	void Init(IDXGISwapChain* swapchain);
+	void Cleanup(); //D2D1 Actually throws errors if no cleanup
+	void Update();
+	void RenderStart();
+	void RenderEnd();
 
 	//Create UI functions
-	bool button(D2D1_RECT_F rect);
+	bool Button(D2D1_RECT_F rect);
 	void Label(const wchar_t* text, D2D1_RECT_F layoutRect);
 
 	POINT mousePos;

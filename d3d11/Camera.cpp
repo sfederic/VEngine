@@ -84,7 +84,7 @@ void Camera::MouseMove(int x, int y)
 {
 	static POINT lastMousePos;
 
-	if (GetAsyncKeyState(VK_LBUTTON) < 0)
+	if (GetAsyncKeyState(VK_RBUTTON) < 0)
 	{
 		SetCapture(mainWindow);
 

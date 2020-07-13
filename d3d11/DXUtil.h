@@ -49,6 +49,7 @@ public:
 	std::vector<DXGI_ADAPTER_DESC1> adaptersDesc;
 
 	std::vector<Vertex> debugLines;
+	std::vector<XMMATRIX> debugLineMatrices;
 
 	ID3DBlob* CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target);
 	ID3D11Buffer* CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, const void* initData);
@@ -83,5 +84,8 @@ public:
 	D3D_FEATURE_LEVEL featureLevel;
 
 	double renderTime;
+
+	bool bDrawBoundingBoxes = false;
+	bool bDrawBoundingSpheres = false;
 };
 

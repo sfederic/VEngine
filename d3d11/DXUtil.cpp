@@ -7,6 +7,7 @@
 #include "Console.h"
 #include "DebugMenu.h"
 #include "ShaderFactory.h"
+#include "MathHelpers.h"
 #include <thread>
 
 //GLOBALS
@@ -17,6 +18,7 @@ UINT strides = sizeof(Vertex);
 UINT offsets = 0;
 
 ActorSystem debugBox;
+ActorSystem debugSphere;
 
 //Temp constant buffer data for base shader
 struct Matrices
@@ -68,8 +70,12 @@ void DXUtil::CreateDevice()
 	g_ShaderFactory.CreateAllShaders(device);
 	g_ShaderFactory.InitHotLoading();
 
+
 	debugBox.CreateActors("Models/cube.obj", this, 1);
 	debugBox.shaderName = L"debugDraw.hlsl";
+
+	debugSphere.CreateActors("Models/ico_sphere.obj", this, 1);
+	debugSphere.shaderName = L"debugDraw.hlsl";
 }
 
 void DXUtil::CreateSwapchain()
@@ -121,9 +127,6 @@ void DXUtil::CreateShaders()
 
 	HR(device->CreateVertexShader(vertexCode->GetBufferPointer(), vertexCode->GetBufferSize(), nullptr, &vertexShader));
 	HR(device->CreatePixelShader(pixelCode->GetBufferPointer(), pixelCode->GetBufferSize(), nullptr, &pixelShader));
-
-	//context->VSSetShader(vertexShader, nullptr, 0);
-	//context->PSSetShader(pixelShader, nullptr, 0);
 }
 
 void DXUtil::CreateInputLayout()
@@ -235,35 +238,64 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 		}
 	}
 
-	auto boxIt = g_ShaderFactory.shadersMap.find(debugBox.shaderName);
-	context->VSSetShader(boxIt->second->vertexShader, nullptr, 0);
-	context->PSSetShader(boxIt->second->pixelShader, nullptr, 0);
-
-	context->IASetVertexBuffers(0, 1, &debugBox.vertexBuffer, &strides, &offsets);
-
-	context->RSSetState(rastStateWireframe);
-
-	//Draw bounding boxes
-	for (int i = 0; i < actorSystem->actors.size(); i++)
+	if (bDrawBoundingBoxes || bDrawBoundingSpheres)
 	{
-		matrices.view = camera->view;
-		matrices.model = actorSystem->actors[i].transform;
-		matrices.mvp = matrices.model * matrices.view * matrices.proj;
-		context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
-		context->VSSetConstantBuffers(0, 1, &cbMatrices);
+		context->RSSetState(rastStateWireframe);
+	}
 
-		context->Draw(debugBox.modelData.verts.size(), 0);
+	if (bDrawBoundingBoxes)
+	{
+		auto boxIt = g_ShaderFactory.shadersMap.find(debugBox.shaderName);
+		context->VSSetShader(boxIt->second->vertexShader, nullptr, 0);
+		context->PSSetShader(boxIt->second->pixelShader, nullptr, 0);
+
+		context->IASetVertexBuffers(0, 1, &debugBox.vertexBuffer, &strides, &offsets);
+
+		//Draw bounding boxes
+		for (int i = 0; i < actorSystem->actors.size(); i++)
+		{
+			matrices.view = camera->view;
+			matrices.model = actorSystem->actors[i].transform;
+			matrices.mvp = matrices.model * matrices.view * matrices.proj;
+			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
+			context->VSSetConstantBuffers(0, 1, &cbMatrices);
+
+			context->Draw(debugBox.modelData.verts.size(), 0);
+		}
+	}
+
+	if (bDrawBoundingSpheres)
+	{
+		auto sphereIt = g_ShaderFactory.shadersMap.find(debugSphere.shaderName);
+		context->VSSetShader(sphereIt->second->vertexShader, nullptr, 0);
+		context->PSSetShader(sphereIt->second->pixelShader, nullptr, 0);
+
+		context->IASetVertexBuffers(0, 1, &debugSphere.vertexBuffer, &strides, &offsets);
+
+		//Draw bounding spheres (or icospheres. gotta save them triangles)
+		for (int i = 0; i < actorSystem->actors.size(); i++)
+		{
+			matrices.view = camera->view;
+			matrices.model = actorSystem->actors[i].transform;
+			MatrixAddScale(1.001f, matrices.model);
+			matrices.mvp = matrices.model * matrices.view * matrices.proj;
+			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
+			context->VSSetConstantBuffers(0, 1, &cbMatrices);
+
+			context->Draw(debugSphere.modelData.verts.size(), 0);
+		}
 	}
 
 	//Lifetime fix (add a timer into the raycast func (this ndeeds a global engine timer/clocl now))
-	//Draw debug shapes
+	//TODO: debug lines aren't draing correctly for bounding spheres
+	//Draw debug Lines
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
 	context->IASetVertexBuffers(0, 1, &debugBuffer, &strides, &offsets);
 
 	for (int i = 0; i < debugLines.size(); i++)
 	{
 		matrices.view = camera->view;
-		matrices.model = XMMatrixIdentity(); //Lines don't need their own model matrix
+		matrices.model = this->debugLineMatrices[i];
 		matrices.mvp = matrices.model * matrices.view * matrices.proj;
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 		context->VSSetConstantBuffers(0, 1, &cbMatrices);
@@ -282,7 +314,7 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 	//Debug menu testing (really need to fix this d2d stuff in Render)
 	g_DebugMenu.Tick(ui, dx, actorSystem, deltaTime);
 
-
+	//END UI RENDERING
 	ui->d2dRenderTarget->EndDraw();
 
 

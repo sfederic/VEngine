@@ -16,10 +16,10 @@
 #include <omp.h>
 #include "DebugMenu.h"
 
-Win32Util win32;
+Win32Util g_win32;
 DXUtil dx;
-UIContext ui;
-AudioContext ac;
+UIContext g_UIContext;
+AudioContext g_AudioContext;
 
 int selectedActor;
 
@@ -33,7 +33,8 @@ void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, ID3D11Buf
 {
 	Vertex v1 = {}, v2 = {};
 	XMStoreFloat3(&v1.pos, rayOrigin);
-	XMVECTOR rayEnd = rayOrigin + (rayDir * distance);
+	XMVECTOR dist = rayDir * distance;
+	XMVECTOR rayEnd = rayOrigin + dist;
 	XMStoreFloat3(&v2.pos, rayEnd);
 
 	dx.debugLines.push_back(v1);
@@ -63,7 +64,7 @@ void Raycast(Ray& ray, int sx, int sy, Camera* camera, XMMATRIX& worldMatrix)
 	ray.direction = XMVector3TransformNormal(ray.direction, toLocal);
 
 	//This little offset here worries me. Without it, the ray is a few pixels off on the y-axis
-	ray.direction.m128_f32[1] -= 0.040f;
+	//ray.direction.m128_f32[1] -= 0.040f;
 
 	ray.direction = XMVector3Normalize(ray.direction);
 }
@@ -105,8 +106,8 @@ void FrustumCullTest(Camera& camera, ActorSystem& system)
 int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine, int cmdShow)
 {
 	//WIN32 SETUP
-	win32.SetupWindow(instance, cmdShow);
-	win32.SetTimerFrequency();
+	g_win32.SetupWindow(instance, cmdShow);
+	g_win32.SetTimerFrequency();
 
 	//D3D11 SETUP
 	dx.CreateDevice();
@@ -165,10 +166,10 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	HR(dx.device->CreateCounter(&counterDesc, &dx.gpuCounter));
 
 	//AUDIO SETUP
-	ac.Init();
+	g_AudioContext.Init();
 
 	//UI SETUP
-	ui.init(dx.swapchain);
+	g_UIContext.Init(dx.swapchain);
 
 	//TEXTURE TESTING
 	//still wondering if I should write WIC loader myself for texture struct
@@ -195,12 +196,12 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	//std::thread thread1(&ActorSystem::CreateActors, &system, "Models/sphere.obj", &dx, 4); //Did I get 96,000 draw calls in release build?
 	//thread1.join();
 
-	ID3D11Buffer* debugLinesBuffer = dx.CreateDefaultBuffer(sizeof(Vertex) * 32, D3D11_BIND_VERTEX_BUFFER, debugLineData);
+	ID3D11Buffer* debugLinesBuffer = dx.CreateDefaultBuffer(sizeof(Vertex) * 64, D3D11_BIND_VERTEX_BUFFER, debugLineData);
 
 	//MAIN LOOP
 	while (msg.message != WM_QUIT) 
 	{
-		win32.StartTimer();
+		g_win32.StartTimer();
 
 		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
 		{
@@ -209,7 +210,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		}
 
 		//UI UPDATE
-		ui.update();
+		g_UIContext.Update();
 
 		//TODO: put into engine tick or renderer tick or something
 		//Also fix, it's running against the debug draw calls
@@ -222,6 +223,10 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 			dx.context->RSSetState(dx.rastStateSolid);
 		}
 
+		if (GetKeyUpState('N'))
+		{
+			system.AddActor();
+		}
 
 		if (GetMouseDownState())
 		{
@@ -232,19 +237,41 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 				XMMATRIX boundingBoxMatrixScale = XMMatrixScalingFromVector(scaleVec);
 				XMMATRIX m = system.actors[i].transform * boundingBoxMatrixScale;
 				Ray ray = {};
-				Raycast(ray, ui.mousePos.x, ui.mousePos.y, &camera, system.actors[i].transform);
+				Raycast(ray, g_UIContext.mousePos.x, g_UIContext.mousePos.y, &camera, system.actors[i].transform);
 				float dist;
+
 				//system.boundingBox.Center = system.actors[i].GetPositionFloat3();
 				//system.boundingBox.Extents = system.actors[i].GetScale();
+				
 				if (system.actors[i].boundingBox.Intersects(ray.origin, ray.direction, dist))
+				{
+					selectedActor = i;
+					DrawRayDebug(ray.origin, ray.direction, dist, debugLinesBuffer);
+					dx.debugLineMatrices.push_back(system.actors[i].transform);
+					OutputDebugString("hit");
+
+					break;
+				}
+
+				/*if (system.actors[i].boundingSphere.Intersects(ray.origin, ray.direction, dist))
 				{
 					selectedActor = i;
 					DrawRayDebug(ray.origin, ray.direction, dist, debugLinesBuffer);
 					OutputDebugString("hit");
 
 					break;
-				}
+				}*/
 			}
+		}
+
+		
+		if (GetKeyUpState('B'))
+		{
+			dx.bDrawBoundingBoxes = !dx.bDrawBoundingBoxes;
+		}
+		if (GetKeyUpState('V'))
+		{
+			dx.bDrawBoundingSpheres = !dx.bDrawBoundingSpheres;
 		}
 
 		if (GetAsyncKeyState(VK_RIGHT))
@@ -264,44 +291,44 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		//TODO: move All below into cammera Tick
 
 		//FrustumCullTest(camera, system);
-		camera.MouseMove(ui.mousePos.x, ui.mousePos.y);
+		camera.MouseMove(g_UIContext.mousePos.x, g_UIContext.mousePos.y);
 		camera.UpdateViewMatrix();
 
 		if (GetAsyncKeyState('W'))
 		{
-			camera.MoveForward(5.f * win32.delta);
+			camera.MoveForward(5.f * g_win32.delta);
 		}
 		if (GetAsyncKeyState('S'))
 		{
-			camera.MoveForward(-5.f * win32.delta);
+			camera.MoveForward(-5.f * g_win32.delta);
 		}
 		if (GetAsyncKeyState('D'))
 		{
-			camera.Strafe(5.f * win32.delta);
+			camera.Strafe(5.f * g_win32.delta);
 		}
 		if (GetAsyncKeyState('A'))
 		{
-			camera.Strafe(-5.f * win32.delta);
+			camera.Strafe(-5.f * g_win32.delta);
 		}
 		if (GetAsyncKeyState('Q'))
 		{
-			camera.MoveUp(-5.f * win32.delta);
+			camera.MoveUp(-5.f * g_win32.delta);
 		}
 		if (GetAsyncKeyState('E'))
 		{
-			camera.MoveUp(5.f * win32.delta);
+			camera.MoveUp(5.f * g_win32.delta);
 		}
 
 
 
 		//RENDER
-		dx.Render(&camera, &ui, &system, &dx, debugLinesBuffer, win32.delta);
+		dx.Render(&camera, &g_UIContext, &system, &dx, debugLinesBuffer, g_win32.delta);
 
 
-		win32.EndTimer();
+		g_win32.EndTimer();
 	}
 
-	ui.cleanup();
+	g_UIContext.Cleanup();
 
 	return (int)msg.wParam;
 }

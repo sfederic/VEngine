@@ -3,7 +3,7 @@
 #include "Win32Util.h"
 #include "Input.h"
 
-void UIContext::init(IDXGISwapChain* swapchain)
+void UIContext::Init(IDXGISwapChain* swapchain)
 {
 	//Direct2D Init
 	IDXGISurface* surface;
@@ -30,7 +30,7 @@ void UIContext::init(IDXGISwapChain* swapchain)
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.9f, 0.9f, 0.9f, 1.0f), &brushText));
 }
 
-void UIContext::cleanup()
+void UIContext::Cleanup()
 {
 	d2dFactory->Release();
 	d2dRenderTarget->Release();
@@ -41,24 +41,24 @@ void UIContext::cleanup()
 	textFormat->Release();
 }
 
-void UIContext::update()
+void UIContext::Update()
 {
 	GetCursorPos(&mousePos);
 	ScreenToClient(mainWindow, &mousePos);
 }
 
-void UIContext::renderStart()
+void UIContext::RenderStart()
 {
 	d2dRenderTarget->BeginDraw();
 }
 
-void UIContext::renderEnd()
+void UIContext::RenderEnd()
 {
 	d2dRenderTarget->EndDraw();
 }
 
 
-bool UIContext::button(D2D1_RECT_F rect)
+bool UIContext::Button(D2D1_RECT_F rect)
 {
 	if (mousePos.x > rect.left && mousePos.x < rect.right)
 	{

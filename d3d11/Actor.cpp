@@ -68,7 +68,6 @@ void ActorSystem::CreateActors(const char* modelFilename, DXUtil* dx, int numAct
 		dx->CreateVertexBuffer(byteWidth, modelData.verts.data(), this);
 
 		size_t stride = sizeof(Vertex);
-		//TODO: dislay debug rendering for sphere
 
 		BoundingBox::CreateFromPoints(boundingBox, modelData.verts.size(), &modelData.verts[0].pos, stride);
 		BoundingSphere::CreateFromBoundingBox(boundingSphere, boundingBox);
@@ -81,7 +80,7 @@ void ActorSystem::CreateActors(const char* modelFilename, DXUtil* dx, int numAct
 			actor.vertexBufferOffset = i * modelData.GetByteWidth();
 			actor.boundingBox = boundingBox;
 			actor.boundingSphere = boundingSphere;
-			//actors.push_back(actor);
+
 			actors.push_back(actor);
 		}
 
@@ -91,4 +90,14 @@ void ActorSystem::CreateActors(const char* modelFilename, DXUtil* dx, int numAct
 	{
 		OutputDebugString("Actor failed to load");
 	}
+}
+
+void ActorSystem::AddActor()
+{
+	Actor actor = Actor();
+	actor.vertexBufferOffset = actors.size() * modelData.GetByteWidth();
+	actor.boundingBox = boundingBox;
+	actor.boundingSphere = boundingSphere;
+
+	actors.push_back(actor);
 }
