@@ -115,6 +115,7 @@ void DXUtil::CreateRTVAndDSV()
 
 void DXUtil::CreateShaders()
 {
+	//TODO: fix this for later. for now, all shaders are using the same Inputlayout so its fine
 	vertexCode = CreateShaderFromFile(L"Shaders/shaders.hlsl", "VSMain", "vs_5_0");
 	pixelCode = CreateShaderFromFile(L"Shaders/shaders.hlsl", "PSMain", "ps_5_0");
 
@@ -238,14 +239,15 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 	context->VSSetShader(boxIt->second->vertexShader, nullptr, 0);
 	context->PSSetShader(boxIt->second->pixelShader, nullptr, 0);
 
+	context->IASetVertexBuffers(0, 1, &debugBox.vertexBuffer, &strides, &offsets);
+
 	context->RSSetState(rastStateWireframe);
 
 	//Draw bounding boxes
-	for (int i = 0; i < debugBox.actors.size(); i++)
+	for (int i = 0; i < actorSystem->actors.size(); i++)
 	{
 		matrices.view = camera->view;
-		matrices.model = debugBox.actors[i].transform;
-		matrices.model = XMMatrixScaling(1.01f, 1.01f, 1.01f); //Trying to make the debug boxes slightly larger than the actor
+		matrices.model = actorSystem->actors[i].transform;
 		matrices.mvp = matrices.model * matrices.view * matrices.proj;
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 		context->VSSetConstantBuffers(0, 1, &cbMatrices);
@@ -253,7 +255,7 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 		context->Draw(debugBox.modelData.verts.size(), 0);
 	}
 
-	//Lifetime fix (add a timer into the raycast func (this needs a global engine timer/clocl now))
+	//Lifetime fix (add a timer into the raycast func (this ndeeds a global engine timer/clocl now))
 	//Draw debug shapes
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
 	context->IASetVertexBuffers(0, 1, &debugBuffer, &strides, &offsets);

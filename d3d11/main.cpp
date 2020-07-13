@@ -40,13 +40,15 @@ void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, ID3D11Buf
 //TODO: where do I put this?
 void Raycast(int sx, int sy, Camera* camera, XMMATRIX& worldMatrix)
 {
-	XMMATRIX V = camera->view;
-	float vx = (+2.0f * sx / windowWidth - 1.0f) / V.r[0].m128_f32[0]; 
-	float vy = (-2.0f * sy / windowHeight + 1.0f) / V.r[1].m128_f32[1];
+	XMMATRIX P = camera->proj;
+	float vx = (+2.0f * sx / windowWidth - 1.0f) / P.r[0].m128_f32[0]; 
+	float vy = (-2.0f * sy / windowHeight + 1.0f) / P.r[1].m128_f32[1];
 
 	rayOrigin = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	rayDir = XMVectorSet(vx, vy, 1.f, 0.f); //TODO: need camera forward vector here in z?
 	
+	XMMATRIX V = camera->view;
+
 	XMMATRIX invView = XMMatrixInverse(&XMMatrixDeterminant(V), V); 
 	XMMATRIX W = worldMatrix; 
 	XMMATRIX invWorld = XMMatrixInverse(&XMMatrixDeterminant(W), W);
@@ -179,7 +181,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 	//ACTOR SYSTEM TESTING
 	ActorSystem system;
-	system.CreateActors("Models/cube.obj", &dx, 2);
+	system.CreateActors("Models/ico_sphere.obj", &dx, 1);
 	//See if threading is worthwhile. Is is slowing down the main thread somehow?
 	//std::thread thread1(&ActorSystem::CreateActors, &system, "Models/sphere.obj", &dx, 4); //Did I get 96,000 draw calls in release build?
 	//thread1.join();
@@ -201,6 +203,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		ui.update();
 
 		//TODO: put into engine tick or renderer tick or something
+		//Also fix, it's running against the debug draw calls
 		if (GetKeyUpState('1'))
 		{
 			dx.context->RSSetState(dx.rastStateWireframe);
@@ -215,8 +218,11 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		{
 			for (int i = 0; i < system.actors.size(); i++)
 			{
+				XMVECTOR scaleVec = XMLoadFloat3(&system.boundingBox.Extents);
+				XMMATRIX boundingBoxMatrixScale = XMMatrixScalingFromVector(scaleVec);
+				XMMATRIX m = system.actors[i].transform * boundingBoxMatrixScale;
 				Raycast(ui.mousePos.x, ui.mousePos.y, &camera, system.actors[i].transform);
-				float dist = 10000.f;
+				float dist;
 				//system.boundingBox.Center = system.actors[i].GetPositionFloat3();
 				//system.boundingBox.Extents = system.actors[i].GetScale();
 				if (system.actors[i].boundingBox.Intersects(rayOrigin, rayDir, dist))
