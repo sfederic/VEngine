@@ -10,7 +10,7 @@ class Camera
 public:
 	Camera(XMVECTOR initialLocation); //Set axis to default LH
 
-	void Tick();
+	void Tick(class UIContext* ui, class Win32Util* win32);
 	void UpdateViewMatrix();
 	void Strafe(float d);
 	void MoveForward(float d);

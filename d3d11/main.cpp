@@ -22,7 +22,6 @@ DXUtil dx;
 UIContext g_UIContext;
 AudioContext g_AudioContext;
 
-
 int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine, int cmdShow)
 {
 	//WIN32 SETUP
@@ -66,16 +65,22 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	dx.context->PSSetSamplers(0, 1, &testSampler);
 
 	//ACTOR SYSTEM TESTING
-	ActorSystem system;
+	ActorSystem system, system2;
 	system.CreateActors("Models/ico_sphere.obj", &dx, 5);
+	system2.CreateActors("Models/cube.obj", &dx, 4);
+
+	std::vector<ActorSystem*> systems;
+	systems.push_back(&system);
+	systems.push_back(&system2);
 
 	ID3D11Buffer* debugLinesBuffer = dx.CreateDefaultBuffer(sizeof(Vertex) * 64, D3D11_BIND_VERTEX_BUFFER, debugLineData);
 
 	//MAIN LOOP
-	while (msg.message != WM_QUIT) 
+	while (msg.message != WM_QUIT)
 	{
 		g_win32.StartTimer();
 
+		//Win32 message handing
 		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
 		{
 			TranslateMessage(&msg);
@@ -85,38 +90,18 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		//UI UPDATE
 		g_UIContext.Update();
 
-		if (GetMouseDownState())
-		{
-			for (int i = 0; i < system.actors.size(); i++)
-			{
-				//TODO: make this all work off of one RAYCAST call
-				XMVECTOR scaleVec = XMLoadFloat3(&system.boundingBox.Extents);
-				XMMATRIX boundingBoxMatrixScale = XMMatrixScalingFromVector(scaleVec);
-				XMMATRIX m = system.actors[i].transform * boundingBoxMatrixScale;
-				Ray ray = {};
-				Raycast(ray, g_UIContext.mousePos.x, g_UIContext.mousePos.y, &camera, system.actors[i].transform);
-				float dist;
-
-				//system.boundingBox.Center = system.actors[i].GetPositionFloat3();
-				//system.boundingBox.Extents = system.actors[i].GetScale();
-				
-				if (system.actors[i].boundingBox.Intersects(ray.origin, ray.direction, dist))
-				{
-					selectedActor = i;
-					DrawRayDebug(ray.origin, ray.direction, dist, debugLinesBuffer);
-					dx.debugLineMatrices.push_back(system.actors[i].transform);
-					OutputDebugString("hit");
-
-					break;
-				}
-			}
-		}
-
+		camera.Tick(&g_UIContext, &g_win32);
 
 		//RENDER
 		dx.Tick();
-		dx.Render(&camera, &g_UIContext, &system, &dx, debugLinesBuffer, g_win32.delta);
+		dx.RenderSetup(&camera, &g_UIContext, &dx, debugLinesBuffer, g_win32.delta);
 
+		for (int i = 0; i < systems.size(); i++)
+		{
+			dx.RenderActorSystem(systems[i], &camera);
+		}
+
+		dx.RenderEnd(&g_UIContext);
 
 		g_win32.EndTimer();
 	}

@@ -1,6 +1,7 @@
 #include "Camera.h"
 #include "Win32Util.h"
 #include "Actor.h"
+#include "UIContext.h"
 #include <omp.h>
 
 Camera::Camera(XMVECTOR initialLocation)
@@ -17,34 +18,34 @@ Camera::Camera(XMVECTOR initialLocation)
 	UpdateViewMatrix();
 }
 
-void Camera::Tick()
+void Camera::Tick(UIContext* ui, Win32Util* win32)
 {
-	MouseMove(g_UIContext.mousePos.x, g_UIContext.mousePos.y);
+	MouseMove(ui->mousePos.x, ui->mousePos.y);
 	UpdateViewMatrix();
 
 	if (GetAsyncKeyState('W'))
 	{
-		MoveForward(5.f * g_win32.delta);
+		MoveForward(5.f * win32->delta);
 	}
 	if (GetAsyncKeyState('S'))
 	{
-		MoveForward(-5.f * g_win32.delta);
+		MoveForward(-5.f * win32->delta);
 	}
 	if (GetAsyncKeyState('D'))
 	{
-		Strafe(5.f * g_win32.delta);
+		Strafe(5.f * win32->delta);
 	}
 	if (GetAsyncKeyState('A'))
 	{
-		Strafe(-5.f * g_win32.delta);
+		Strafe(-5.f * win32->delta);
 	}
 	if (GetAsyncKeyState('Q'))
 	{
-		MoveUp(-5.f * g_win32.delta);
+		MoveUp(-5.f * win32->delta);
 	}
 	if (GetAsyncKeyState('E'))
 	{
-		MoveUp(5.f * g_win32.delta);
+		MoveUp(5.f * win32->delta);
 	}
 }
 

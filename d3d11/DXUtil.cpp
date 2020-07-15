@@ -203,65 +203,31 @@ void DXUtil::CreateConstantBuffer(Camera& camera)
 	cbMatrices = CreateDefaultBuffer(sizeof(Matrices), D3D11_BIND_CONSTANT_BUFFER, &matrices);
 }
 
-void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXUtil* dx, ID3D11Buffer* debugBuffer, float deltaTime)
+void DXUtil::RenderActorSystem(ActorSystem* actorSystem, Camera* camera)
 {
-	//context->Begin(disjointQuery);
-	//context->End(startTimeQuery);
-
-	context->RSSetViewports(1, &viewport);
-
-	const float clearColour[4] = { 0.2f, 0.2f, 0.2f, 1.f };
-	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
-
-	context->ClearRenderTargetView(rtvs[frameIndex], clearColour);
-	context->ClearDepthStencilView(dsv, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
-
-	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
-	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-	context->RSSetState(rastStateSolid);
-
-	if (GetKeyUpState('3'))
-	{
-		g_ShaderFactory.HotReloadShaders(device, &g_DebugMenu);
-	}
-
-	//Using one shader per stage for now
 	auto vs = g_ShaderFactory.shadersMap.find(actorSystem->shaderName);
-	//auto ps = g_ShaderFactory.shadersMap.find(actorSystem->shaderName);
 
-	//TODO: put this error checking into shader construction
 	if (vs == g_ShaderFactory.shadersMap.end())
 	{
 		debugPrint("vertex shader file name %ls not found\n", actorSystem->shaderName);
 		throw;
 	}
-	/*if (ps == g_ShaderFactory.shadersMap.end())
-	{
-		debugPrint("pixel shader file name %ls not found\n", actorSystem->shaderName);
-		throw;
-	}*/
 
-		//Keep in mind that with actor systems, only need once pass of setting all d3d11 state
 	context->VSSetShader(vs->second->vertexShader, nullptr, 0);
 	context->PSSetShader(vs->second->pixelShader, nullptr, 0);
 
 	context->IASetVertexBuffers(0, 1, &actorSystem->vertexBuffer, &strides, &offsets);
-	//context->IASetIndexBuffer(actorSystem->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
-	//Only a test system. End needs to go through different rasterizer passes and group actor systems together
 	for (int i = 0; i < actorSystem->actors.size(); i++)
 	{
 		if (actorSystem->actors[i].bRender)
 		{
-			//Constant buffer work
 			matrices.view = camera->view;
 			matrices.model = actorSystem->actors[i].transform;
 			matrices.mvp = matrices.model * matrices.view * matrices.proj;
 			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 			context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
-			//Draw all actors of system
 			context->Draw(actorSystem->modelData.verts.size(), 0);
 		}
 	}
@@ -271,7 +237,8 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 		context->RSSetState(rastStateWireframe);
 	}
 
-	if (bDrawBoundingBoxes)
+	//TODO: don't like that it's not batched now, switching rasterizer states per actor system isn't good.
+	/*if (bDrawBoundingBoxes)
 	{
 		auto boxIt = g_ShaderFactory.shadersMap.find(debugBox.shaderName);
 		context->VSSetShader(boxIt->second->vertexShader, nullptr, 0);
@@ -279,7 +246,6 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 
 		context->IASetVertexBuffers(0, 1, &debugBox.vertexBuffer, &strides, &offsets);
 
-		//Draw bounding boxes
 		for (int i = 0; i < actorSystem->actors.size(); i++)
 		{
 			matrices.view = camera->view;
@@ -300,7 +266,6 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 
 		context->IASetVertexBuffers(0, 1, &debugSphere.vertexBuffer, &strides, &offsets);
 
-		//Draw bounding spheres (or icospheres. gotta save them triangles)
 		for (int i = 0; i < actorSystem->actors.size(); i++)
 		{
 			matrices.view = camera->view;
@@ -312,12 +277,13 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 
 			context->Draw(debugSphere.modelData.verts.size(), 0);
 		}
-	}
+	}*/
+}
 
-	//Lifetime fix (add a timer into the raycast func (this ndeeds a global engine timer/clocl now))
-	//TODO: debug lines aren't draing correctly for bounding spheres
-	//Draw debug Lines
-	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
+void DXUtil::RenderEnd(UIContext* ui)
+{
+	//DRAW DEBUG LINES
+	/*context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
 	context->IASetVertexBuffers(0, 1, &debugBuffer, &strides, &offsets);
 
 	for (int i = 0; i < debugLines.size(); i++)
@@ -329,26 +295,24 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 		context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
 		context->Draw(debugLines.size(), 0);
-	}
+	}*/
 
 	//UI RENDERING 
 	//TODO: Put render and d2d stuff into func for profiling
 	ui->d2dRenderTarget->BeginDraw();
 
 	//Test console rendering and work. Might need to put it into a system
-	Console::Tick(ui, dx);
+	Console::Tick(ui, this);
 	Console::DrawViewItems(ui);
 
 	//Debug menu testing (really need to fix this d2d stuff in Render)
-	g_DebugMenu.Tick(ui, dx, actorSystem, deltaTime);
+	//g_DebugMenu.Tick(ui, dx, actorSystem, deltaTime);
 
 	//END UI RENDERING
 	ui->d2dRenderTarget->EndDraw();
 
-
 	//PRESENT
 	HR(swapchain->Present(1, 0));
-
 
 	//TODO: Queries blocking the GPU. Find a way to poll the query states on a thread?
 	//END QUERY
@@ -385,6 +349,32 @@ void DXUtil::Render(Camera* camera, UIContext* ui, ActorSystem* actorSystem, DXU
 	double time = tick * (realTime);
 
 	renderTime = time;*/
+}
+
+void DXUtil::RenderSetup(Camera* camera, UIContext* ui, DXUtil* dx, ID3D11Buffer* debugBuffer, float deltaTime)
+{
+	//context->Begin(disjointQuery);
+	//context->End(startTimeQuery);
+
+	context->RSSetViewports(1, &viewport);
+
+	const float clearColour[4] = { 0.2f, 0.2f, 0.2f, 1.f };
+	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
+
+	context->ClearRenderTargetView(rtvs[frameIndex], clearColour);
+	context->ClearDepthStencilView(dsv, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
+
+	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
+	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	context->RSSetState(rastStateSolid);
+
+	if (GetKeyUpState('3'))
+	{
+		g_ShaderFactory.HotReloadShaders(device, &g_DebugMenu);
+	}
+
+	
 }
 
 ID3DBlob* DXUtil::CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target)

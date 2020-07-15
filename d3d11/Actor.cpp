@@ -2,6 +2,7 @@
 #include "DXUtil.h"
 #include "Array.h"
 
+//ACTOR
 Actor::Actor()
 {
 	transform = XMMatrixIdentity();
@@ -54,9 +55,10 @@ void Actor::SetScale(XMVECTOR scale)
 	transform = XMMatrixScalingFromVector(scale);
 }
 
-
+//ACTOR SYSTEM
 ActorSystem::ActorSystem()
 {
+
 }
 
 void ActorSystem::CreateActors(const char* modelFilename, DXUtil* dx, int numActorsToSpawn)

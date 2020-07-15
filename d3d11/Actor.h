@@ -12,7 +12,7 @@ class Actor
 {
 public:
 	Actor();
-	void tick() {};
+	//virtual void Tick(float deltaTime) = 0;
 	XMVECTOR GetPositionVector();
 	XMFLOAT3 GetPositionFloat3();
 	void SetPosition(XMVECTOR v);
@@ -35,6 +35,7 @@ class ActorSystem
 {
 public:
 	ActorSystem();
+	//virtual void Tick(float deltaTime) = 0;
 	void CreateActors(const char* modelFilename, class DXUtil* dx, int numActorsToSpawn);
 	void AddActor();
 

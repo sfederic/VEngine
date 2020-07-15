@@ -41,10 +41,9 @@ public:
 	void CreateVertexBuffer(UINT size, const void* data, class ActorSystem* actor);
 	void CreateConstantBuffer(class Camera& camera);
 
-	void Render(class Camera* camera, class UIContext* ui, class ActorSystem* actorSystem, DXUtil* dx, ID3D11Buffer* debugBuffer, float deltaTime);
-
-	//TODO: put actor array in scene/world structure
-	//std::vector<class Actor> actors;
+	void RenderSetup(class Camera* camera, class UIContext* ui, class DXUtil* dx, struct ID3D11Buffer* debugBuffer, float deltaTime);
+	void RenderActorSystem(class ActorSystem* actorSystem, class Camera* camera);
+	void RenderEnd(class UIContext* ui);
 
 	std::vector<IDXGIAdapter1*> adapters;
 	std::vector<DXGI_ADAPTER_DESC1> adaptersDesc;

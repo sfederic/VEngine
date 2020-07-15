@@ -10,9 +10,5 @@ struct Ray
 	XMVECTOR direction;
 };
 
-namespace Physics
-{
-	void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, ID3D11Buffer* debugBuffer, DXUtil* dx);
-	void Raycast(Ray& ray, int sx, int sy, Camera* camera, XMMATRIX& worldMatrix);
-};
-
+void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, class ID3D11Buffer* debugBuffer, class DXUtil* dx);
+bool Raycast(Ray& ray, int sx, int sy, class Camera* camera, XMMATRIX& worldMatrix, class ActorSystem* actorSystem);
