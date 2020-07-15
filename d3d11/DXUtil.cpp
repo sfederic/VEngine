@@ -31,6 +31,27 @@ struct Matrices
 
 Vertex debugLineData[2];
 
+void DXUtil::Tick()
+{
+	if (GetKeyUpState('1'))
+	{
+		context->RSSetState(rastStateWireframe);
+	}
+	if (GetKeyUpState('2'))
+	{
+		context->RSSetState(rastStateSolid);
+	}
+
+	if (GetKeyUpState('B'))
+	{
+		bDrawBoundingBoxes = !bDrawBoundingBoxes;
+	}
+	if (GetKeyUpState('V'))
+	{
+		bDrawBoundingSpheres = !bDrawBoundingSpheres;
+	}
+}
+
 void DXUtil::CreateDevice()
 {
 	D3D_FEATURE_LEVEL featureLevels[] = { D3D_FEATURE_LEVEL_11_1, D3D_FEATURE_LEVEL_11_0 };
@@ -70,6 +91,13 @@ void DXUtil::CreateDevice()
 	g_ShaderFactory.CreateAllShaders(device);
 	g_ShaderFactory.InitHotLoading();
 
+	D3D11_QUERY_DESC qd = {};
+	qd.Query = D3D11_QUERY_TIMESTAMP;
+	HR(device->CreateQuery(&qd, &startTimeQuery));
+	HR(device->CreateQuery(&qd, &endTimeQuery));
+
+	qd.Query = D3D11_QUERY_TIMESTAMP_DISJOINT;
+	HR(device->CreateQuery(&qd, &disjointQuery));
 
 	debugBox.CreateActors("Models/cube.obj", this, 1);
 	debugBox.shaderName = L"debugDraw.hlsl";

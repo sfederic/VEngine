@@ -1,5 +1,7 @@
 #include "Camera.h"
 #include "Win32Util.h"
+#include "Actor.h"
+#include <omp.h>
 
 Camera::Camera(XMVECTOR initialLocation)
 {
@@ -13,6 +15,37 @@ Camera::Camera(XMVECTOR initialLocation)
 	location = initialLocation;
 
 	UpdateViewMatrix();
+}
+
+void Camera::Tick()
+{
+	MouseMove(g_UIContext.mousePos.x, g_UIContext.mousePos.y);
+	UpdateViewMatrix();
+
+	if (GetAsyncKeyState('W'))
+	{
+		MoveForward(5.f * g_win32.delta);
+	}
+	if (GetAsyncKeyState('S'))
+	{
+		MoveForward(-5.f * g_win32.delta);
+	}
+	if (GetAsyncKeyState('D'))
+	{
+		Strafe(5.f * g_win32.delta);
+	}
+	if (GetAsyncKeyState('A'))
+	{
+		Strafe(-5.f * g_win32.delta);
+	}
+	if (GetAsyncKeyState('Q'))
+	{
+		MoveUp(-5.f * g_win32.delta);
+	}
+	if (GetAsyncKeyState('E'))
+	{
+		MoveUp(5.f * g_win32.delta);
+	}
 }
 
 void Camera::UpdateViewMatrix()
@@ -99,4 +132,34 @@ void Camera::MouseMove(int x, int y)
 
 	lastMousePos.x = x;
 	lastMousePos.y = y;
+}
+
+void Camera::FrustumCullTest(ActorSystem& system)
+{
+	#pragma omp parallel for
+	for (int i = 0; i < system.actors.size(); i++)
+	{
+		XMMATRIX invView = XMMatrixInverse(&XMMatrixDeterminant(view), view);
+
+		XMMATRIX world = system.actors[i].transform;
+		XMMATRIX invWorld = XMMatrixInverse(&XMMatrixDeterminant(world), world);
+
+		XMMATRIX viewToLocal = XMMatrixMultiply(invView, invWorld);
+
+		BoundingFrustum frustum, localSpaceFrustum;
+		BoundingFrustum::CreateFromMatrix(frustum, proj);
+		frustum.Transform(localSpaceFrustum, viewToLocal);
+
+		system.boundingBox.Center = system.actors[i].GetPositionFloat3();
+		system.boundingBox.Extents = system.actors[i].GetScale();
+
+		if (localSpaceFrustum.Contains(system.boundingBox) == DISJOINT)
+		{
+			system.actors[i].bRender = false;
+		}
+		else
+		{
+			system.actors[i].bRender = true;
+		}
+	}
 }

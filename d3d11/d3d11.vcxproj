@@ -153,6 +153,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MathHelpers.cpp" />
     <ClCompile Include="Obj.cpp" />
+    <ClCompile Include="Physics.cpp" />
     <ClCompile Include="ShaderFactory.cpp" />
     <ClCompile Include="UIContext.cpp" />
     <ClCompile Include="Win32Util.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="MathHelpers.h" />
     <ClInclude Include="Obj.h" />
+    <ClInclude Include="Physics.h" />
     <ClInclude Include="ShaderFactory.h" />
     <ClInclude Include="UIContext.h" />
     <ClInclude Include="Win32Util.h" />

@@ -31,6 +31,7 @@ void DXTrace(HRESULT hr, const char* filename, const char* func, int line);
 class DXUtil
 {
 public:
+	void Tick();
 	void CreateDevice();
 	void CreateSwapchain();
 	void CreateRTVAndDSV();
@@ -71,7 +72,6 @@ public:
 	ID3D11RasterizerState* rastStateWireframe;
 	IDXGIFactory6* dxgiFactory;
 
-	ID3D11Counter* gpuCounter;
 	ID3D11Query* disjointQuery;
 	ID3D11Query* startTimeQuery;
 	ID3D11Query* endTimeQuery;
