@@ -4,6 +4,7 @@
 #include "Input.h"
 #include "DXUtil.h"
 #include "Actor.h"
+#include "World.h"
 
 float menuStartPosX = 10.f;
 float menuStartPosY = 10.f;
@@ -42,7 +43,7 @@ DebugMenu::DebugMenu()
 		menuItems[(int)EMenuID::RENDERING].subMenuItems.push_back(L"GPU: ");
 }
 
-void DebugMenu::Tick(UIContext* ui, DXUtil* dx, ActorSystem* actorSystem, float deltaTime)
+void DebugMenu::Tick(UIContext* ui, DXUtil* dx, World* world, float deltaTime)
 {
 	//Handle notifications (eg. "Shaders recompiled", "ERROR: Not X", etc)
 	const float notificationLifetime = 3.0f;
@@ -129,6 +130,8 @@ void DebugMenu::Tick(UIContext* ui, DXUtil* dx, ActorSystem* actorSystem, float 
 		if (GetKeyUpState(VK_RETURN))
 		{
 			//... On/Off code for various switches
+			dx->bQueryGPU = false;
+			dx->bQueryGPUInner = false;
 		}
 
 		float subMenuHeight = (menuItems[menuCursorIndex].subMenuItems.size() * 20.f) + 30.f;
@@ -143,11 +146,15 @@ void DebugMenu::Tick(UIContext* ui, DXUtil* dx, ActorSystem* actorSystem, float 
 		{
 		case EMenuID::ACTORS:
 			wchar_t actorCount[64];
-			_snwprintf_s(actorCount, sizeof(actorCount), L"Actor Count: %d", actorSystem->actors.size());
+			//TODO: make a better system that iterates over all actor systems in world
+			//_snwprintf_s(actorCount, sizeof(actorCount), L"Actor Count: %d", 
+				//world->actorSystems.size() * world->actorSystems);
 			menuItems[menuCursorIndex].subMenuItems[0] = actorCount;
 			break;
 
 		case EMenuID::RENDERING:
+			dx->bQueryGPU = true;
+
 			wchar_t renderText[64];
 			_snwprintf_s(renderText, sizeof(renderText), L"D3D11 Timer: %f", dx->renderTime);
 			menuItems[menuCursorIndex].subMenuItems[0] = renderText;
@@ -155,6 +162,10 @@ void DebugMenu::Tick(UIContext* ui, DXUtil* dx, ActorSystem* actorSystem, float 
 			wchar_t gpuText[64];
 			_snwprintf_s(gpuText, sizeof(gpuText), L"GPU: %ls", dx->adaptersDesc[0].Description);
 			menuItems[menuCursorIndex].subMenuItems[1] = gpuText;
+			break;
+
+		default:
+			dx->bQueryGPU = false;
 			break;
 		}
 

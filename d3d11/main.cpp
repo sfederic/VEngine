@@ -16,9 +16,10 @@
 #include <omp.h>
 #include "DebugMenu.h"
 #include "Physics.h"
+#include "World.h"
 
 Win32Util g_win32;
-DXUtil dx;
+//DXUtil dx;
 UIContext g_UIContext;
 AudioContext g_AudioContext;
 
@@ -50,7 +51,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	//TEXTURE TESTING
 	ID3D11Resource* testTexture;
 	ID3D11ShaderResourceView* testSrv;
-	HR(CreateWICTextureFromFile(dx.device, L"texture.png", &testTexture, &testSrv));
+	HR(CreateWICTextureFromFile(dx.device, L"Textures/texture.png", &testTexture, &testSrv));
 	dx.context->PSSetShaderResources(0, 1, &testSrv);
 
 	//TODO: move into dxutil
@@ -64,16 +65,19 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	dx.device->CreateSamplerState(&sampDesc, &testSampler);
 	dx.context->PSSetSamplers(0, 1, &testSampler);
 
-	//ACTOR SYSTEM TESTING
-	ActorSystem system, system2;
-	system.CreateActors("Models/ico_sphere.obj", &dx, 5);
-	system2.CreateActors("Models/cube.obj", &dx, 4);
-
-	std::vector<ActorSystem*> systems;
-	systems.push_back(&system);
-	systems.push_back(&system2);
-
 	ID3D11Buffer* debugLinesBuffer = dx.CreateDefaultBuffer(sizeof(Vertex) * 64, D3D11_BIND_VERTEX_BUFFER, debugLineData);
+
+	//ACTOR SYSTEM TESTING
+	ActorSystem system, system2, system3;
+	system.CreateActors("Models/ico_sphere.obj", &dx, 1);
+	system2.CreateActors("Models/cube.obj", &dx, 2);
+	system3.CreateActors("Models/cylinder.obj", &dx, 3);
+
+	//World data testing
+	World world = {};
+	world.actorSystems.push_back(&system);
+	world.actorSystems.push_back(&system2);
+	world.actorSystems.push_back(&system3);
 
 	//MAIN LOOP
 	while (msg.message != WM_QUIT)
@@ -96,12 +100,13 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		dx.Tick();
 		dx.RenderSetup(&camera, &g_UIContext, &dx, debugLinesBuffer, g_win32.delta);
 
-		for (int i = 0; i < systems.size(); i++)
+		for (int i = 0; i < world.actorSystems.size(); i++)
 		{
-			dx.RenderActorSystem(systems[i], &camera);
+			dx.RenderActorSystem(world.actorSystems[i], &camera);
 		}
 
-		dx.RenderEnd(&g_UIContext);
+		dx.RenderBounds(&world, &camera);
+		dx.RenderEnd(&g_UIContext, &world, g_win32.delta);
 
 		g_win32.EndTimer();
 	}

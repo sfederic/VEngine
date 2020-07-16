@@ -8,7 +8,7 @@
 #include "DebugMenu.h"
 #include "ShaderFactory.h"
 #include "MathHelpers.h"
-#include <thread>
+#include "World.h"
 
 //GLOBALS
 DebugMenu g_DebugMenu;
@@ -35,11 +35,11 @@ void DXUtil::Tick()
 {
 	if (GetKeyUpState('1'))
 	{
-		context->RSSetState(rastStateWireframe);
+		activeRastState = rastStateWireframe;
 	}
 	if (GetKeyUpState('2'))
 	{
-		context->RSSetState(rastStateSolid);
+		activeRastState = rastStateSolid;
 	}
 
 	if (GetKeyUpState('B'))
@@ -178,7 +178,8 @@ void DXUtil::CreateRasterizerStates()
 	rastDesc.FrontCounterClockwise = FALSE;
 
 	HR(device->CreateRasterizerState(&rastDesc, &rastStateSolid));
-	context->RSSetState(rastStateSolid);
+	activeRastState = rastStateSolid;
+	context->RSSetState(activeRastState);
 
 	rastDesc.FillMode = D3D11_FILL_WIREFRAME;
 	rastDesc.CullMode = D3D11_CULL_NONE;
@@ -231,14 +232,18 @@ void DXUtil::RenderActorSystem(ActorSystem* actorSystem, Camera* camera)
 			context->Draw(actorSystem->modelData.verts.size(), 0);
 		}
 	}
+}
 
+//TODO: don't like that it's not batched now, switching rasterizer states per actor system isn't good.
+//What I can do is make an actor collection per level so that the renderer can interatre over them and batch the rast state changes
+void DXUtil::RenderBounds(World* world, Camera* camera)
+{
 	if (bDrawBoundingBoxes || bDrawBoundingSpheres)
 	{
 		context->RSSetState(rastStateWireframe);
 	}
 
-	//TODO: don't like that it's not batched now, switching rasterizer states per actor system isn't good.
-	/*if (bDrawBoundingBoxes)
+	if (bDrawBoundingBoxes)
 	{
 		auto boxIt = g_ShaderFactory.shadersMap.find(debugBox.shaderName);
 		context->VSSetShader(boxIt->second->vertexShader, nullptr, 0);
@@ -246,15 +251,18 @@ void DXUtil::RenderActorSystem(ActorSystem* actorSystem, Camera* camera)
 
 		context->IASetVertexBuffers(0, 1, &debugBox.vertexBuffer, &strides, &offsets);
 
-		for (int i = 0; i < actorSystem->actors.size(); i++)
+		for (int systemIndex = 0; systemIndex < world->actorSystems.size(); systemIndex++)
 		{
-			matrices.view = camera->view;
-			matrices.model = actorSystem->actors[i].transform;
-			matrices.mvp = matrices.model * matrices.view * matrices.proj;
-			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
-			context->VSSetConstantBuffers(0, 1, &cbMatrices);
+			for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex]->actors.size(); actorIndex++)
+			{
+				matrices.view = camera->view;
+				matrices.model = world->actorSystems[systemIndex]->actors[actorIndex].transform;
+				matrices.mvp = matrices.model * matrices.view * matrices.proj;
+				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
+				context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
-			context->Draw(debugBox.modelData.verts.size(), 0);
+				context->Draw(debugBox.modelData.verts.size(), 0);
+			}
 		}
 	}
 
@@ -266,21 +274,23 @@ void DXUtil::RenderActorSystem(ActorSystem* actorSystem, Camera* camera)
 
 		context->IASetVertexBuffers(0, 1, &debugSphere.vertexBuffer, &strides, &offsets);
 
-		for (int i = 0; i < actorSystem->actors.size(); i++)
+		for (int systemIndex = 0; systemIndex < world->actorSystems.size(); systemIndex++)
 		{
-			matrices.view = camera->view;
-			matrices.model = actorSystem->actors[i].transform;
-			MatrixAddScale(1.001f, matrices.model);
-			matrices.mvp = matrices.model * matrices.view * matrices.proj;
-			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
-			context->VSSetConstantBuffers(0, 1, &cbMatrices);
+			for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex]->actors.size(); actorIndex++)
+			{
+				matrices.view = camera->view;
+				matrices.model = world->actorSystems[systemIndex]->actors[actorIndex].transform;
+				matrices.mvp = matrices.model * matrices.view * matrices.proj;
+				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
+				context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
-			context->Draw(debugSphere.modelData.verts.size(), 0);
+				context->Draw(debugSphere.modelData.verts.size(), 0);
+			}
 		}
-	}*/
+	}
 }
 
-void DXUtil::RenderEnd(UIContext* ui)
+void DXUtil::RenderEnd(UIContext* ui, World* world, float deltaTime)
 {
 	//DRAW DEBUG LINES
 	/*context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
@@ -306,7 +316,7 @@ void DXUtil::RenderEnd(UIContext* ui)
 	Console::DrawViewItems(ui);
 
 	//Debug menu testing (really need to fix this d2d stuff in Render)
-	//g_DebugMenu.Tick(ui, dx, actorSystem, deltaTime);
+	g_DebugMenu.Tick(ui, this, world, deltaTime);
 
 	//END UI RENDERING
 	ui->d2dRenderTarget->EndDraw();
@@ -314,47 +324,59 @@ void DXUtil::RenderEnd(UIContext* ui)
 	//PRESENT
 	HR(swapchain->Present(1, 0));
 
-	//TODO: Queries blocking the GPU. Find a way to poll the query states on a thread?
 	//END QUERY
-	/*context->End(endTimeQuery);
-	context->End(disjointQuery);
-
-	//POLL QUERY
-	while (context->GetData(disjointQuery, nullptr, 0, 0) == S_FALSE)
+	if (bQueryGPUInner)
 	{
-		Sleep(1);
+		context->End(endTimeQuery);
+		context->End(disjointQuery);
+
+		//POLL QUERY
+		while (context->GetData(disjointQuery, nullptr, 0, 0) == S_FALSE)
+		{
+			Sleep(1);
+		}
+
+
+		D3D11_QUERY_DATA_TIMESTAMP_DISJOINT freq = {};
+		HR(context->GetData(disjointQuery, &freq, sizeof(freq), 0));
+
+		//Is the thread polling necessary?
+		while (context->GetData(startTimeQuery, nullptr, 0, 0) == S_FALSE)
+		{
+			Sleep(1);
+		}
+
+		while (context->GetData(endTimeQuery, nullptr, 0, 0) == S_FALSE)
+		{
+			Sleep(1);
+		}
+
+
+		//TODO: fucking clean this up
+		UINT64 endTime = 0, startTime = 0;
+		HR(context->GetData(startTimeQuery, &startTime, sizeof(UINT64), 0));
+		HR(context->GetData(endTimeQuery, &endTime, sizeof(UINT64), 0));
+
+		UINT64 realTime = endTime - startTime;
+		double tick = 1.0 / freq.Frequency;
+		double time = tick * (realTime);
+
+		renderTime = time;
 	}
-
-	D3D11_QUERY_DATA_TIMESTAMP_DISJOINT freq = {};
-	HR(context->GetData(disjointQuery, &freq, sizeof(freq), 0));
-
-	//Is the thread polling necessary?
-	while (context->GetData(startTimeQuery, nullptr, 0, 0) == S_FALSE)
-	{
-		Sleep(1);
-	}
-
-	while (context->GetData(endTimeQuery, nullptr, 0, 0) == S_FALSE)
-	{
-		Sleep(1);
-	}
-
-	//TODO: fucking clean this up
-	UINT64 endTime = 0, startTime = 0;
-	HR(context->GetData(startTimeQuery, &startTime, sizeof(UINT64), 0));
-	HR(context->GetData(endTimeQuery, &endTime, sizeof(UINT64), 0));
-
-	UINT64 realTime = endTime - startTime;
-	double tick = 1.0 / freq.Frequency;
-	double time = tick * (realTime);
-
-	renderTime = time;*/
 }
 
 void DXUtil::RenderSetup(Camera* camera, UIContext* ui, DXUtil* dx, ID3D11Buffer* debugBuffer, float deltaTime)
 {
-	//context->Begin(disjointQuery);
-	//context->End(startTimeQuery);
+	if (bQueryGPU)
+	{
+		context->Begin(disjointQuery);
+		context->End(startTimeQuery);
+		bQueryGPUInner = true;
+	}
+	else
+	{
+		bQueryGPUInner = false;
+	}
 
 	context->RSSetViewports(1, &viewport);
 
@@ -367,14 +389,12 @@ void DXUtil::RenderSetup(Camera* camera, UIContext* ui, DXUtil* dx, ID3D11Buffer
 	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	context->RSSetState(rastStateSolid);
+	context->RSSetState(activeRastState);
 
 	if (GetKeyUpState('3'))
 	{
 		g_ShaderFactory.HotReloadShaders(device, &g_DebugMenu);
 	}
-
-	
 }
 
 ID3DBlob* DXUtil::CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target)

@@ -157,6 +157,7 @@
     <ClCompile Include="ShaderFactory.cpp" />
     <ClCompile Include="UIContext.cpp" />
     <ClCompile Include="Win32Util.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
@@ -174,6 +175,7 @@
     <ClInclude Include="ShaderFactory.h" />
     <ClInclude Include="UIContext.h" />
     <ClInclude Include="Win32Util.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

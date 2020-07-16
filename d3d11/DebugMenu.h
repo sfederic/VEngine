@@ -44,7 +44,7 @@ class DebugMenu
 public:
 	DebugMenu();
 
-	void Tick(class UIContext* ui, class DXUtil* dx, class ActorSystem* actorSystem, float deltaTime);
+	void Tick(class UIContext* ui, class DXUtil* dx, class World* world, float deltaTime);
 
 	std::vector<MenuItem> menuItems;
 	std::vector<DebugNotification> notifications;

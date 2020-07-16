@@ -43,7 +43,8 @@ public:
 
 	void RenderSetup(class Camera* camera, class UIContext* ui, class DXUtil* dx, struct ID3D11Buffer* debugBuffer, float deltaTime);
 	void RenderActorSystem(class ActorSystem* actorSystem, class Camera* camera);
-	void RenderEnd(class UIContext* ui);
+	void RenderBounds(class World* world, class Camera* camera);
+	void RenderEnd(class UIContext* ui, class World* world, float deltaTime);
 
 	std::vector<IDXGIAdapter1*> adapters;
 	std::vector<DXGI_ADAPTER_DESC1> adaptersDesc;
@@ -69,6 +70,7 @@ public:
 	ID3D11PixelShader* pixelShader;
 	ID3D11RasterizerState* rastStateSolid;
 	ID3D11RasterizerState* rastStateWireframe;
+	ID3D11RasterizerState* activeRastState;
 	IDXGIFactory6* dxgiFactory;
 
 	ID3D11Query* disjointQuery;
@@ -86,5 +88,8 @@ public:
 
 	bool bDrawBoundingBoxes = false;
 	bool bDrawBoundingSpheres = false;
+	bool bQueryGPU = false;
+	bool bQueryGPUInner = false;
 };
 
+static DXUtil dx;
