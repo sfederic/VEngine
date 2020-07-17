@@ -11,7 +11,6 @@
 #include "World.h"
 
 //GLOBALS
-DebugMenu g_DebugMenu;
 ShaderFactory g_ShaderFactory;
 
 UINT strides = sizeof(Vertex);
@@ -210,7 +209,7 @@ void DXUtil::RenderActorSystem(ActorSystem* actorSystem, Camera* camera)
 
 	if (vs == g_ShaderFactory.shadersMap.end())
 	{
-		debugPrint("vertex shader file name %ls not found\n", actorSystem->shaderName);
+		DebugPrint("vertex shader file name %ls not found\n", actorSystem->shaderName);
 		throw;
 	}
 

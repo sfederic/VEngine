@@ -18,7 +18,7 @@ void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, ID3D11Buf
 	dx->context->UpdateSubresource(debugBuffer, 0, nullptr, dx->debugLines.data(), 0, 0);
 }
 
-bool Raycast(Ray& ray, int sx, int sy, Camera* camera, XMMATRIX& worldMatrix, ActorSystem* actorSystem)
+bool Raycast(Ray& ray, int sx, int sy, Camera* camera, ActorSystem* actorSystem)
 {
 	XMMATRIX proj = camera->proj;
 	float vx = (+2.0f * sx / windowWidth - 1.0f) / proj.r[0].m128_f32[0];
@@ -30,26 +30,27 @@ bool Raycast(Ray& ray, int sx, int sy, Camera* camera, XMMATRIX& worldMatrix, Ac
 	XMMATRIX view = camera->view;
 
 	XMMATRIX invView = XMMatrixInverse(&XMMatrixDeterminant(view), view);
-	XMMATRIX W = worldMatrix;
-	XMMATRIX invWorld = XMMatrixInverse(&XMMatrixDeterminant(W), W);
-	XMMATRIX toLocal = XMMatrixMultiply(invView, invWorld);
 
-	ray.origin = XMVector3TransformCoord(ray.origin, toLocal);
-	ray.direction = XMVector3TransformNormal(ray.direction, toLocal);
-
-	//This little offset here worries me. Without it, the ray is a few pixels off on the y-axis
-	//ray.direction.m128_f32[1] -= 0.040f;
-
-	ray.direction = XMVector3Normalize(ray.direction);
-
-	//system.boundingBox.Center = system.actors[i].GetPositionFloat3();
-	//system.boundingBox.Extents = system.actors[i].GetScale();
-
-	float dist;
-
-	for (int i = 0; i < actorSystem->actors.size(); i++)
+	for (int actorIndex = 0; actorIndex < actorSystem->actors.size(); actorIndex++)
 	{
-		if (actorSystem->actors[i].boundingBox.Intersects(ray.origin, ray.direction, dist))
+		XMMATRIX model = actorSystem->actors[actorIndex].transform;
+		XMMATRIX invModel = XMMatrixInverse(&XMMatrixDeterminant(model), model);
+		XMMATRIX toLocal = XMMatrixMultiply(invView, invModel);
+
+		ray.origin = XMVector3TransformCoord(ray.origin, toLocal);
+		ray.direction = XMVector3TransformNormal(ray.direction, toLocal);
+
+		//This little offset here worries me. Without it, the ray is a few pixels off on the y-axis
+		//ray.direction.m128_f32[1] -= 0.040f;
+
+		ray.direction = XMVector3Normalize(ray.direction);
+
+		actorSystem->boundingBox.Center = actorSystem->actors[actorIndex].GetPositionFloat3();
+		actorSystem->boundingBox.Extents = actorSystem->actors[actorIndex].GetScale();
+
+		float dist;
+
+		if (actorSystem->boundingBox.Intersects(ray.origin, ray.direction, dist))
 		{
 			OutputDebugString("rayhit");
 			return true;

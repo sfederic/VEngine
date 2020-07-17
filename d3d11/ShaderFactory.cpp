@@ -84,7 +84,7 @@ void ShaderFactory::InitHotLoading()
     hotreloadHandle = FindFirstChangeNotificationA("Shaders", false, FILE_NOTIFY_CHANGE_LAST_WRITE);
     if (hotreloadHandle == INVALID_HANDLE_VALUE)
     {
-        debugPrint("Handle for shader reload file tracking invalid\n");
+        DebugPrint("Handle for shader reload file tracking invalid\n");
     }
 }
 
@@ -113,11 +113,11 @@ void ShaderFactory::HotReloadShaders(ID3D11Device* device, DebugMenu* debugMenu)
     BOOL nextChange = FindNextChangeNotification(hotreloadHandle);
     if (nextChange)
     {
-        debugPrint("Shader reload start...\n");
+        DebugPrint("Shader reload start...\n");
         CleanUpShaders();
         CompileAllShadersFromFile();
         CreateAllShaders(device);
-        debugPrint("Shader reload complete\n");
+        DebugPrint("Shader reload complete\n");
 
         debugMenu->notifications.push_back(DebugNotification(L"Shader reload complete."));
     }

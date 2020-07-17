@@ -17,11 +17,13 @@
 #include "DebugMenu.h"
 #include "Physics.h"
 #include "World.h"
+#include "FileSystem.h"
 
 Win32Util g_win32;
 //DXUtil dx;
 UIContext g_UIContext;
 AudioContext g_AudioContext;
+FileSystem g_FileSystem;
 
 int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine, int cmdShow)
 {
@@ -76,8 +78,6 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	//World data testing
 	World world = {};
 	world.actorSystems.push_back(&system);
-	world.actorSystems.push_back(&system2);
-	world.actorSystems.push_back(&system3);
 
 	//MAIN LOOP
 	while (msg.message != WM_QUIT)
@@ -91,10 +91,41 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 			DispatchMessage(&msg);
 		}
 
+		//Test actor file handling.
+		if (GetKeyUpState('4'))
+		{
+			g_FileSystem.WriteAllActorSystems(&world, "LevelSaves/test.sav");
+		}
+
+		if (GetKeyUpState('5'))
+		{
+			g_FileSystem.ReadAllActorSystems(&world, "LevelSaves/test.sav");
+		}
+
 		//UI UPDATE
 		g_UIContext.Update();
 
 		camera.Tick(&g_UIContext, &g_win32);
+
+		Ray ray = {};
+
+		if (GetMouseUpState())
+		{
+			Raycast(ray, g_UIContext.mousePos.x, g_UIContext.mousePos.y, &camera, world.actorSystems[0]);
+		}
+
+		if (GetAsyncKey(VK_RIGHT))
+		{
+			XMVECTOR pos = world.actorSystems[0]->actors[ray.actorIndex].GetPositionVector();
+			pos.m128_f32[0] += 0.15f;
+			world.actorSystems[0]->actors[ray.actorIndex].SetPosition(pos);
+		}
+		if (GetAsyncKey(VK_LEFT))
+		{
+			XMVECTOR pos = world.actorSystems[0]->actors[ray.actorIndex].GetPositionVector();
+			pos.m128_f32[0] -= 0.15f;
+			world.actorSystems[0]->actors[ray.actorIndex].SetPosition(pos);
+		}
 
 		//RENDER
 		dx.Tick();

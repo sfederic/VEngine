@@ -3,8 +3,8 @@
 #include <vector>
 #include "UIContext.h"
 
-int debugPrint(const char* format, ...);
-int print(const char* format, va_list args);
+int DebugPrint(const char* format, ...);
+int Print(const char* format, va_list args);
 
 enum class EMenuID
 {
@@ -12,7 +12,6 @@ enum class EMenuID
 	ACTORSYSTEMS,
 	RENDERING
 };
-
 
 struct MenuItem
 {
@@ -51,3 +50,5 @@ public:
 	bool bDebugMenuActive = false;
 	bool bSubMenuOpen = false;
 };
+
+static DebugMenu g_DebugMenu;
