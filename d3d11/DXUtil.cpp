@@ -289,22 +289,22 @@ void DXUtil::RenderBounds(World* world, Camera* camera)
 	}
 }
 
-void DXUtil::RenderEnd(UIContext* ui, World* world, float deltaTime)
+void DXUtil::RenderEnd(UIContext* ui, World* world, float deltaTime, ID3D11Buffer* debugBuffer, Camera* camera)
 {
 	//DRAW DEBUG LINES
-	/*context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
+	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
 	context->IASetVertexBuffers(0, 1, &debugBuffer, &strides, &offsets);
 
 	for (int i = 0; i < debugLines.size(); i++)
 	{
 		matrices.view = camera->view;
-		matrices.model = this->debugLineMatrices[i];
+		matrices.model = XMMatrixIdentity();
 		matrices.mvp = matrices.model * matrices.view * matrices.proj;
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 		context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
 		context->Draw(debugLines.size(), 0);
-	}*/
+	}
 
 	//UI RENDERING 
 	//TODO: Put render and d2d stuff into func for profiling

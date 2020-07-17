@@ -3,6 +3,7 @@
 #include "Camera.h"
 #include "UIContext.h"
 #include "Actor.h"
+#include "DebugMenu.h"
 
 void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, ID3D11Buffer* debugBuffer, DXUtil* dx)
 {
@@ -28,12 +29,12 @@ bool Raycast(Ray& ray, int sx, int sy, Camera* camera, ActorSystem* actorSystem)
 	ray.direction = XMVectorSet(vx, vy, 1.f, 0.f);
 
 	XMMATRIX view = camera->view;
-
 	XMMATRIX invView = XMMatrixInverse(&XMMatrixDeterminant(view), view);
 
 	for (int actorIndex = 0; actorIndex < actorSystem->actors.size(); actorIndex++)
 	{
 		XMMATRIX model = actorSystem->actors[actorIndex].transform;
+		//XMMATRIX model = XMMatrixIdentity();
 		XMMATRIX invModel = XMMatrixInverse(&XMMatrixDeterminant(model), model);
 		XMMATRIX toLocal = XMMatrixMultiply(invView, invModel);
 
@@ -48,11 +49,9 @@ bool Raycast(Ray& ray, int sx, int sy, Camera* camera, ActorSystem* actorSystem)
 		actorSystem->boundingBox.Center = actorSystem->actors[actorIndex].GetPositionFloat3();
 		actorSystem->boundingBox.Extents = actorSystem->actors[actorIndex].GetScale();
 
-		float dist;
-
-		if (actorSystem->boundingBox.Intersects(ray.origin, ray.direction, dist))
+		if (actorSystem->boundingBox.Intersects(ray.origin, ray.direction, ray.distance))
 		{
-			OutputDebugString("rayhit");
+			DebugPrint("Hit %f\n", ray.distance);
 			return true;
 		}
 	}

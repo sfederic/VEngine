@@ -74,23 +74,21 @@ void ActorSystem::CreateActors(const char* modelFilename, DXUtil* dx, int numAct
 		BoundingBox::CreateFromPoints(boundingBox, modelData.verts.size(), &modelData.verts[0].pos, stride);
 		BoundingSphere::CreateFromBoundingBox(boundingSphere, boundingBox);
 
-		//actors.reserve(numActorsToSpawn);
+		actors.reserve(numActorsToSpawn);
 		for (int i = 0; i < numActorsToSpawn; i++)
 		{
 			Actor actor;
 			actor.transform.r[3] = XMVectorSet(i, i, i, 1.f);
 			actor.vertexBufferOffset = i * modelData.GetByteWidth();
-			actor.boundingBox = boundingBox;
-			actor.boundingSphere = boundingSphere;
+			//actor.boundingBox = boundingBox;
+			//actor.boundingSphere = boundingSphere;
 
 			actors.push_back(actor);
 		}
-
-
 	}
 	else
 	{
-		OutputDebugString("Actor failed to load");
+		OutputDebugString("Actors failed to load");
 	}
 }
 
@@ -98,8 +96,8 @@ void ActorSystem::AddActor()
 {
 	Actor actor = Actor();
 	actor.vertexBufferOffset = actors.size() * modelData.GetByteWidth();
-	actor.boundingBox = boundingBox;
-	actor.boundingSphere = boundingSphere;
+	//actor.boundingBox = boundingBox;
+	//actor.boundingSphere = boundingSphere;
 
 	actors.push_back(actor);
 }

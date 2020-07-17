@@ -44,7 +44,7 @@ public:
 	void RenderSetup(class Camera* camera, class UIContext* ui, class DXUtil* dx, struct ID3D11Buffer* debugBuffer, float deltaTime);
 	void RenderActorSystem(class ActorSystem* actorSystem, class Camera* camera);
 	void RenderBounds(class World* world, class Camera* camera);
-	void RenderEnd(class UIContext* ui, class World* world, float deltaTime);
+	void RenderEnd(UIContext* ui, World* world, float deltaTime, ID3D11Buffer* debugBuffer, Camera* camera);
 
 	std::vector<IDXGIAdapter1*> adapters;
 	std::vector<DXGI_ADAPTER_DESC1> adaptersDesc;

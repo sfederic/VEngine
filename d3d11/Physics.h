@@ -9,6 +9,7 @@ struct Ray
 	XMVECTOR origin;
 	XMVECTOR direction;
 
+	float distance;
 	int actorIndex = 0;
 };
 

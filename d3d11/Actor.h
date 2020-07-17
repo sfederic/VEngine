@@ -23,8 +23,8 @@ public:
 	void SetScale(float x, float y, float z);
 	void SetScale(XMVECTOR scale);
 
-	BoundingBox boundingBox;
-	BoundingSphere boundingSphere;
+	//BoundingBox boundingBox;
+	//BoundingSphere boundingSphere;
 
 	XMMATRIX transform = XMMatrixIdentity();
 

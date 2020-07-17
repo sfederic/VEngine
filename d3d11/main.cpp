@@ -66,13 +66,13 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	dx.device->CreateSamplerState(&sampDesc, &testSampler);
 	dx.context->PSSetSamplers(0, 1, &testSampler);
 
-	ID3D11Buffer* debugLinesBuffer = dx.CreateDefaultBuffer(sizeof(Vertex) * 64, D3D11_BIND_VERTEX_BUFFER, debugLineData);
+	ID3D11Buffer* debugLinesBuffer = dx.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
 
 	//ACTOR SYSTEM TESTING
 	ActorSystem system, system2, system3;
-	system.CreateActors("Models/ico_sphere.obj", &dx, 1);
-	system2.CreateActors("Models/cube.obj", &dx, 2);
-	system3.CreateActors("Models/cylinder.obj", &dx, 3);
+	system.CreateActors("Models/cube.obj", &dx, 2);
+	//system2.CreateActors("Models/cube.obj", &dx, 2);
+	//system3.CreateActors("Models/cylinder.obj", &dx, 3);
 
 	//World data testing
 	World world = {};
@@ -108,9 +108,13 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 		Ray ray = {};
 
-		if (GetMouseUpState())
+		//if (GetMouseDownState())
+		if(GetMouseDownState())
 		{
-			Raycast(ray, g_UIContext.mousePos.x, g_UIContext.mousePos.y, &camera, world.actorSystems[0]);
+			if (Raycast(ray, g_UIContext.mousePos.x, g_UIContext.mousePos.y, &camera, world.actorSystems[0]))
+			{
+				DrawRayDebug(ray.origin, ray.direction, ray.distance, debugLinesBuffer, &dx);
+			}
 		}
 
 		if (GetAsyncKey(VK_RIGHT))
@@ -121,8 +125,8 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		}
 		if (GetAsyncKey(VK_LEFT))
 		{
-			XMVECTOR pos = world.actorSystems[0]->actors[ray.actorIndex].GetPositionVector();
-			pos.m128_f32[0] -= 0.15f;
+			XMVECTOR pos = world.actorSystems[ray.actorIndex]->actors[ray.actorIndex].GetPositionVector();
+			pos.m128_f32[ray.actorIndex] -= 0.15f;
 			world.actorSystems[0]->actors[ray.actorIndex].SetPosition(pos);
 		}
 
@@ -136,7 +140,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		}
 
 		dx.RenderBounds(&world, &camera);
-		dx.RenderEnd(&g_UIContext, &world, g_win32.delta);
+		dx.RenderEnd(&g_UIContext, &world, g_win32.delta, debugLinesBuffer, &camera);
 
 		g_win32.EndTimer();
 	}
