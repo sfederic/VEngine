@@ -14,3 +14,4 @@ public:
 	FILE* file;
 };
 
+static FileSystem g_FileSystem;

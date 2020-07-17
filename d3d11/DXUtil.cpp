@@ -311,7 +311,7 @@ void DXUtil::RenderEnd(UIContext* ui, World* world, float deltaTime)
 	ui->d2dRenderTarget->BeginDraw();
 
 	//Test console rendering and work. Might need to put it into a system
-	Console::Tick(ui, this);
+	Console::Tick(ui, this, world);
 	Console::DrawViewItems(ui);
 
 	//Debug menu testing (really need to fix this d2d stuff in Render)

@@ -23,7 +23,6 @@ Win32Util g_win32;
 //DXUtil dx;
 UIContext g_UIContext;
 AudioContext g_AudioContext;
-FileSystem g_FileSystem;
 
 int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine, int cmdShow)
 {

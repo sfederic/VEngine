@@ -4,6 +4,8 @@
 #include "Win32Util.h"
 #include "DXUtil.h"
 #include <vector>
+#include "FileSystem.h"
+#include "World.h"
 
 wchar_t consoleString[128];
 int consoleStringIndex = 0;
@@ -18,6 +20,12 @@ namespace ExecuteStrings
 	const wchar_t* D3D_TIME = L"D3D TIME";
 	const wchar_t* POP = L"POP";
 	const wchar_t* CLEAR = L"CLEAR";
+	const wchar_t* LEVEL = L"LEVEL";
+}
+
+namespace LevelNames
+{
+	const wchar_t* TestLevel = L"TESTLEVEL";
 }
 
 void Console::ConsoleInput()
@@ -37,7 +45,7 @@ void Console::ConsoleInput()
 }
 
 //Make sure D2D render target calls have been made (Begin/End Draw)
-void Console::Tick(UIContext* ui, DXUtil* dx)
+void Console::Tick(UIContext* ui, DXUtil* dx, World* world)
 {
 	if (bConsoleActive)
 	{
@@ -54,12 +62,12 @@ void Console::Tick(UIContext* ui, DXUtil* dx)
 	}
 	else if (GetKeyDownState(VK_RETURN) && bConsoleActive)
 	{
-		Console::ExecuteString(dx);
+		Console::ExecuteString(dx, world);
 	}
 }
 
 //Execute values need to be uppercase with WndProc
-void Console::ExecuteString(DXUtil* dx)
+void Console::ExecuteString(DXUtil* dx, World* world)
 {
 	ConsoleViewItem item = {};
 
@@ -85,9 +93,13 @@ void Console::ExecuteString(DXUtil* dx)
 			viewItems.pop_back();
 		}
 	}
-	else if (wcsncmp(consoleString, ExecuteStrings::CLEAR, wcslen(ExecuteStrings::CLEAR)) == 0)
+	else if (wcsncmp(consoleString, ExecuteStrings::CLEAR, wcslen(ExecuteStrings::CLEAR)) == 0) //CLEAR TEXT
 	{
 		viewItems.clear();
+	}
+	else if(wcsncmp(consoleString, LevelNames::TestLevel, wcslen(LevelNames::TestLevel)) == 0) //LEVEL LOADING
+	{
+		g_FileSystem.ReadAllActorSystems(world, "LevelSaves/test.sav");
 	}
 
 	//Reset console string and index

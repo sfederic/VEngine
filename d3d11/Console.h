@@ -17,8 +17,8 @@ class Console
 {
 public: 
 	static void ConsoleInput();
-	static void Tick(class UIContext* ui, class DXUtil* dx);
-	static void ExecuteString(class DXUtil* dx);
+	static void Tick(class UIContext* ui, class DXUtil* dx, class World* world);
+	static void ExecuteString(class DXUtil* dx, class World* world);
 
 	static void DrawViewItems(UIContext* ui);
 
