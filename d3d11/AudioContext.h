@@ -21,3 +21,5 @@ public:
 
 	std::vector<AudioChunk*> audioChunks;
 };
+
+static AudioContext g_AudioContext;

@@ -11,6 +11,7 @@ struct Ray
 
 	float distance;
 	int actorIndex = 0;
+	int actorSystemIndex = 0;
 };
 
 void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, class ID3D11Buffer* debugBuffer, class DXUtil* dx);

@@ -101,3 +101,8 @@ void ActorSystem::AddActor()
 
 	actors.push_back(actor);
 }
+
+void ActorSystem::RemoveActor(int index)
+{
+	actors.erase(actors.begin() + index);
+}

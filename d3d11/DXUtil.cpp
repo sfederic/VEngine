@@ -317,6 +317,26 @@ void DXUtil::RenderEnd(UIContext* ui, World* world, float deltaTime, ID3D11Buffe
 	//Debug menu testing (really need to fix this d2d stuff in Render)
 	g_DebugMenu.Tick(ui, this, world, deltaTime);
 
+
+	//UI View testing
+	for (int viewIndex = 0; viewIndex < ui->uiViews.size(); viewIndex++)
+	{
+		D2D1_RECT_F titleRect = { ui->uiViews[viewIndex].viewRect };
+		titleRect.bottom -= 80.f;
+		D2D1_RECT_F closeRect = { titleRect };
+		closeRect.left += 80.f;
+		ui->d2dRenderTarget->FillRectangle(ui->uiViews[viewIndex].viewRect, ui->brushTransparentMenu);
+		ui->d2dRenderTarget->FillRectangle(titleRect, ui->brushText);
+		ui->d2dRenderTarget->DrawTextA(ui->uiViews[viewIndex].title, wcslen(ui->uiViews[viewIndex].title), ui->textFormat, titleRect, ui->brushTextBlack);
+
+		if (ui->Button(closeRect, ui->brushCloseBox))
+		{
+			ui->uiViews.pop_back();
+			DebugPrint("Gone");
+		}
+	}
+
+
 	//END UI RENDERING
 	ui->d2dRenderTarget->EndDraw();
 

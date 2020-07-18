@@ -23,6 +23,7 @@ void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, ID3D11Buf
 	dx->context->UpdateSubresource(debugBuffer, 0, nullptr, dx->debugLines.data(), 0, 0);
 }
 
+//Just for bounding boxes for now
 bool Raycast(Ray& ray, int sx, int sy, Camera* camera, ActorSystem* actorSystem)
 {
 	float vx = (2.f * sx / windowWidth - 1.0f) / camera->proj.r[0].m128_f32[0];
@@ -39,7 +40,6 @@ bool Raycast(Ray& ray, int sx, int sy, Camera* camera, ActorSystem* actorSystem)
 	ray.origin = XMVector3TransformCoord(ray.origin, toLocal);
 	ray.direction = XMVector3TransformNormal(ray.direction, toLocal);
 	ray.direction = XMVector3Normalize(ray.direction);
-	ray.distance = 0.f;
 
 	for (int i = 0; i < actorSystem->actors.size(); i++)
 	{

@@ -19,11 +19,6 @@
 #include "World.h"
 #include "FileSystem.h"
 
-Win32Util g_win32;
-//DXUtil dx;
-UIContext g_UIContext;
-AudioContext g_AudioContext;
-
 int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine, int cmdShow)
 {
 	//WIN32 SETUP
@@ -70,7 +65,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 	//ACTOR SYSTEM TESTING
 	ActorSystem system, system2, system3;
-	system.CreateActors("Models/cube.obj", &dx, 20);
+	system.CreateActors("Models/cube.obj", &dx, 4);
 	//system2.CreateActors("Models/cube.obj", &dx, 2);
 	//system3.CreateActors("Models/cylinder.obj", &dx, 3);
 
@@ -104,18 +99,27 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		}
 
 		//UI UPDATE
-		g_UIContext.Update();
+		g_UIContext.Tick();
 
 		camera.Tick(&g_UIContext, &g_win32);
 
-
 		//if (GetMouseDownState())
-		if(GetMouseDownState())
+		if(GetMouseLeftDownState())
 		{
 			if(Raycast(ray, g_UIContext.mousePos.x, g_UIContext.mousePos.y, &camera, world.actorSystems[0]))
 			{
-				DrawRayDebug(ray.origin, ray.direction, ray.distance, debugLinesBuffer, &dx);
+				//DrawRayDebug(ray.origin, ray.direction, ray.distance, debugLinesBuffer, &dx);
+				ray.actorSystemIndex = 0;
+				wchar_t actorDetails[64];
+				swprintf(actorDetails, sizeof(actorDetails), L"Actor %d", ray.actorIndex);
+				g_UIContext.uiViews.push_back(UIView(actorDetails));
 			}
+		}
+
+		if (GetKeyUpState(VK_DELETE))
+		{
+			world.actorSystems[ray.actorSystemIndex]->RemoveActor(ray.actorIndex);
+			g_UIContext.uiViews.pop_back();
 		}
 
 		if (GetAsyncKey(VK_RIGHT))
@@ -142,6 +146,8 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 		dx.RenderBounds(&world, &camera);
 		dx.RenderEnd(&g_UIContext, &world, g_win32.delta, debugLinesBuffer, &camera);
+
+		InputEnd();
 
 		g_win32.EndTimer();
 	}

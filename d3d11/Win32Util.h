@@ -24,3 +24,5 @@ public:
 	double delta, deltaAccum, ticks;
 	int frameAccum;
 };
+
+static Win32Util g_win32;

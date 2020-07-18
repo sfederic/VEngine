@@ -2,8 +2,10 @@
 
 WPARAM currentDownKey;
 WPARAM currentUpKey;
-bool mouseUp;
-bool mouseDown;
+bool leftMouseUp;
+bool rightMouseUp;
+bool leftMouseDown;
+bool rightMouseDown;
 bool keyDown;
 bool keyUp;
 
@@ -45,16 +47,28 @@ void StoreKeyUpInput(WPARAM key)
 	keyUp = true;
 }
 
-void StoreMouseDownInput(WPARAM key)
+void StoreMouseLeftDownInput(WPARAM key)
 {
-	mouseDown = true;
-	mouseUp = false;
+	leftMouseDown = true;
+	leftMouseUp = false;
 }
 
-void StoreMouseUpInput(WPARAM key)
+void StoreMouseLeftUpInput(WPARAM key)
 {
-	mouseUp = true;
-	mouseDown = false;
+	leftMouseUp = true;
+	leftMouseDown = false;
+}
+
+void StoreMouseRightDownInput(WPARAM key)
+{
+	rightMouseDown = true;
+	rightMouseUp = false;
+}
+
+void StoreMouseRightUpInput(WPARAM key)
+{
+	rightMouseUp = true;
+	rightMouseDown = false;
 }
 
 bool GetKeyDownState(int key)
@@ -70,11 +84,10 @@ bool GetKeyDownState(int key)
 	}
 }
 
-bool GetMouseDownState()
+bool GetMouseLeftDownState()
 {
-	if (mouseDown)
+	if (leftMouseDown)
 	{
-		mouseDown = false;
 		return true;
 	}
 	else
@@ -83,11 +96,34 @@ bool GetMouseDownState()
 	}
 }
 
-bool GetMouseUpState()
+bool GetMouseLeftUpState()
 {
-	if (mouseUp)
+	if (leftMouseUp)
 	{
-		mouseUp = false;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool GetMouseRightDownState()
+{
+	if (rightMouseDown)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool GetMouseRightUpState()
+{
+	if (rightMouseUp)
+	{
 		return true;
 	}
 	else
@@ -119,4 +155,18 @@ bool GetKeyUpState(int key)
 	{
 		return false;
 	}
+}
+
+//Two consecutive mouseups for example were reseting. Had to throw this in before msg pump
+//TODO: throw in an input mananger
+void InputEnd()
+{
+	rightMouseDown = false;
+	rightMouseUp = false;
+	leftMouseDown = false;
+	leftMouseUp = false;
+	currentDownKey = 0;
+	currentUpKey = 0;
+	keyDown = false;
+	keyUp = false;
 }

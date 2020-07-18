@@ -27,7 +27,9 @@ void UIContext::Init(IDXGISwapChain* swapchain)
 		DWRITE_FONT_STRETCH_NORMAL, 14.f, L"en-us", &textFormat));
 
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.5f, 0.5f, 0.5f, 0.5f), &brushTransparentMenu));
+	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(1.0f, 1.0f, 1.0f, 1.0f), &brushCloseBox));
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.9f, 0.9f, 0.9f, 1.0f), &brushText));
+	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.f, 0.f, 0.f, 1.0f), &brushTextBlack));
 }
 
 void UIContext::Cleanup()
@@ -38,46 +40,56 @@ void UIContext::Cleanup()
 
 	brushTransparentMenu->Release();
 	brushText->Release();
+	brushTextBlack->Release();
+	brushCloseBox->Release();
 	textFormat->Release();
 }
 
-void UIContext::Update()
+void UIContext::Tick()
 {
 	GetCursorPos(&mousePos);
 	ScreenToClient(mainWindow, &mousePos);
+	//RenderStart();
+	//RenderEnd();
 }
 
 void UIContext::RenderStart()
 {
-	d2dRenderTarget->BeginDraw();
+	/*d2dRenderTarget->BeginDraw();
+
+	for (int viewIndex = 0; viewIndex < uiViews.size(); viewIndex++)
+	{
+
+	}*/
 }
 
 void UIContext::RenderEnd()
 {
-	d2dRenderTarget->EndDraw();
+	//d2dRenderTarget->EndDraw();
+}
+
+void UIContext::CreateActorUIView()
+{
+
 }
 
 
-bool UIContext::Button(D2D1_RECT_F rect)
+bool UIContext::Button(D2D1_RECT_F rect, ID2D1Brush* brush)
 {
+	d2dRenderTarget->FillRectangle(rect, brush);
+
 	if (mousePos.x > rect.left && mousePos.x < rect.right)
 	{
 		if (mousePos.y > rect.top && mousePos.y < rect.bottom)
 		{
-			d2dRenderTarget->DrawRectangle(rect, brushTransparentMenu);
-
-			if(GetMouseUpState())
+			if(GetMouseLeftDownState())
 			{ 
 				return true;
 			}
-
-			return false;
 		}
 	}
 
-	d2dRenderTarget->DrawRectangle(rect, brushText);
 	return false;
-	
 }
 
 void UIContext::Label(const wchar_t* text, D2D1_RECT_F layoutRect)

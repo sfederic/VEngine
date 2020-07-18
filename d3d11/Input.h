@@ -4,17 +4,24 @@
 
 extern WPARAM currentUpKey;
 extern WPARAM currentDownKey;
-extern bool mouseUp;
-extern bool mouseDown;
+extern bool leftMouseUp;
+extern bool leftMouseDown;
+extern bool rightMouseUp;
+extern bool rightMouseDown;
 
 bool GetAnyKeyUp();
 bool GetAnyKeyDown();
 void StoreKeyDownInput(WPARAM key);
 void StoreKeyUpInput(WPARAM key);
-void StoreMouseDownInput(WPARAM key);
-void StoreMouseUpInput(WPARAM key);
+void StoreMouseLeftDownInput(WPARAM key);
+void StoreMouseLeftUpInput(WPARAM key);
+void StoreMouseRightDownInput(WPARAM key);
+void StoreMouseRightUpInput(WPARAM key);
 bool GetKeyUpState(int key);
 bool GetKeyDownState(int key);
-bool GetMouseDownState();
-bool GetMouseUpState();
+bool GetMouseLeftDownState();
+bool GetMouseLeftUpState();
+bool GetMouseRightDownState();
+bool GetMouseRightUpState();
 bool GetAsyncKey(WPARAM key); //Just a wrapper call to GetAsyncKeyState for portability purposes
+void InputEnd();
