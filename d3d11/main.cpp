@@ -70,13 +70,15 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 	//ACTOR SYSTEM TESTING
 	ActorSystem system, system2, system3;
-	system.CreateActors("Models/cube.obj", &dx, 2);
+	system.CreateActors("Models/cube.obj", &dx, 20);
 	//system2.CreateActors("Models/cube.obj", &dx, 2);
 	//system3.CreateActors("Models/cylinder.obj", &dx, 3);
 
 	//World data testing
 	World world = {};
 	world.actorSystems.push_back(&system);
+
+	Ray ray = {};
 
 	//MAIN LOOP
 	while (msg.message != WM_QUIT)
@@ -106,12 +108,11 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 		camera.Tick(&g_UIContext, &g_win32);
 
-		Ray ray = {};
 
 		//if (GetMouseDownState())
 		if(GetMouseDownState())
 		{
-			if (Raycast(ray, g_UIContext.mousePos.x, g_UIContext.mousePos.y, &camera, world.actorSystems[0]))
+			if(Raycast(ray, g_UIContext.mousePos.x, g_UIContext.mousePos.y, &camera, world.actorSystems[0]))
 			{
 				DrawRayDebug(ray.origin, ray.direction, ray.distance, debugLinesBuffer, &dx);
 			}
