@@ -321,7 +321,7 @@ void DXUtil::RenderEnd(UIContext* ui, World* world, float deltaTime, ID3D11Buffe
 	//UI View testing
 	for (int viewIndex = 0; viewIndex < ui->uiViews.size(); viewIndex++)
 	{
-		ui->uiViews[viewIndex]->Tick(ui);
+		ui->uiViews[viewIndex].Tick(ui);
 	}
 
 

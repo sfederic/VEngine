@@ -104,7 +104,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		camera.Tick(&g_UIContext, &g_win32);
 
 		//if (GetMouseDownState())
-		if(GetMouseLeftDownState())
+		if(GetMouseLeftUpState())
 		{
 			if(Raycast(ray, g_UIContext.mousePos.x, g_UIContext.mousePos.y, &camera, world.actorSystems[0]))
 			{
@@ -112,7 +112,8 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 				ray.actorSystemIndex = 0;
 				wchar_t actorDetails[64];
 				swprintf(actorDetails, sizeof(actorDetails), L"Actor %d", ray.actorIndex);
-				g_UIContext.uiViews.push_back(&UIActorView(actorDetails, g_UIContext.mousePos.x, g_UIContext.mousePos.y));
+
+				g_UIContext.AddView(actorDetails, ray.actorSystemIndex, ray.actorIndex);
 			}
 		}
 
@@ -124,7 +125,10 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 		if (GetKeyUpState(VK_BACK))
 		{
-			g_UIContext.uiViews.pop_back();
+			if (g_UIContext.uiViews.size() > 0)
+			{
+				g_UIContext.uiViews.pop_back();
+			}
 		}
 
 		if (GetAsyncKey(VK_RIGHT))

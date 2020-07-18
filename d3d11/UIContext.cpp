@@ -78,18 +78,30 @@ bool UIContext::Button(D2D1_RECT_F rect, ID2D1Brush* brush)
 {
 	d2dRenderTarget->FillRectangle(rect, brush);
 
-	float size_x = rect.right - rect.left;
-	float size_y = rect.bottom - rect.top;
-
-	if ((mousePos.x > rect.left) && (mousePos.x < (rect.left + size_x)))
+	if ((mousePos.x > rect.left) && (mousePos.x < rect.right))
 	{
-		if ((mousePos.y > rect.top) && (mousePos.y < (rect.top + size_y)))
+		if ((mousePos.y > rect.top) && (mousePos.y < rect.bottom))
 		{
-			d2dRenderTarget->FillRectangle(rect, brushTextBlack);
-
-
-			if(GetMouseLeftDownState())
+			if(GetMouseLeftUpState())
 			{ 
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+bool UIContext::DragButton(D2D1_RECT_F rect, ID2D1Brush* brush)
+{
+	d2dRenderTarget->DrawRectangle(rect, brush);
+
+	if ((mousePos.x > rect.left) && (mousePos.x < rect.right))
+	{
+		if ((mousePos.y > rect.top) && (mousePos.y < rect.bottom))
+		{
+			//if (GetMouseLeftDownState())
+			{
 				return true;
 			}
 		}
@@ -102,4 +114,72 @@ void UIContext::Label(const wchar_t* text, D2D1_RECT_F layoutRect)
 {
 	d2dRenderTarget->DrawRectangle(layoutRect, brushTransparentMenu);
 	d2dRenderTarget->DrawTextA(text, wcslen(text), textFormat, layoutRect, brushText);
+}
+
+void UIContext::ResetAllActiveUIViews()
+{
+	for (int i = 0; i < g_UIContext.uiViews.size(); i++)
+	{
+		g_UIContext.uiViews[i].bIsActive = false;
+	}
+}
+
+void UIContext::AddView(const wchar_t* text, int actorSystemIndex, int actorIndex)
+{
+	ResetAllActiveUIViews();
+
+	for (int i = 0; i < uiViews.size(); i++)
+	{
+		if (uiViews[i].actorSystemIndex == actorSystemIndex)
+		{
+			if (uiViews[i].actorIndex == actorIndex)
+			{
+				DebugPrint("Cannot create UIView for actor. already exists.");
+				return;
+			}
+		}
+	}
+
+	uiViews.push_back(UIActorView(text, g_UIContext.mousePos.x, g_UIContext.mousePos.y, actorSystemIndex, actorIndex));
+}
+
+void UIActorView::Tick(UIContext* ui)
+{
+	viewRect.bottom = viewRect.top + 150.f;
+	viewRect.right = viewRect.left + 100.f;
+	D2D1_RECT_F titleRect = viewRect;
+	titleRect.bottom = viewRect.bottom - 130.f;
+	D2D1_RECT_F closeRect = { titleRect };
+	closeRect.left = titleRect.left + 80.f;
+	closeRect.bottom - titleRect.bottom;
+
+	ui->d2dRenderTarget->FillRectangle(viewRect, ui->brushTransparentMenu);
+	ui->d2dRenderTarget->FillRectangle(titleRect, ui->brushText);
+	ui->d2dRenderTarget->DrawTextA(title, wcslen(title), ui->textFormat, titleRect, ui->brushTextBlack);
+
+	if (ui->Button(viewRect, ui->brushTransparentMenu))
+	{
+		ui->ResetAllActiveUIViews();
+		this->bIsActive = true;
+	}
+
+	/*if (ui->Button(closeRect, ui->brushCloseBox))
+	{
+		ui->uiViews.pop_back();
+	}*/
+
+	//TODO: view positioning is sloppy. GetAsyncKey is reading in true for the entire frame regardless of previous mouse state functions
+	if (bIsActive)
+	{
+		if(ui->DragButton(viewRect, ui->brushTextBlack))
+		{
+			if (GetAsyncKey(VK_LBUTTON))
+			{
+				viewRect.left = (float)ui->mousePos.x - 50.f;
+				viewRect.top = (float)ui->mousePos.y - 75.f;
+				viewRect.right = viewRect.left + 100.f;
+				viewRect.bottom = viewRect.top + 150.f;
+			}
+		}
+	}
 }
