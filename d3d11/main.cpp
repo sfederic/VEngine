@@ -112,13 +112,18 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 				ray.actorSystemIndex = 0;
 				wchar_t actorDetails[64];
 				swprintf(actorDetails, sizeof(actorDetails), L"Actor %d", ray.actorIndex);
-				g_UIContext.uiViews.push_back(UIView(actorDetails));
+				g_UIContext.uiViews.push_back(&UIActorView(actorDetails, g_UIContext.mousePos.x, g_UIContext.mousePos.y));
 			}
 		}
 
 		if (GetKeyUpState(VK_DELETE))
 		{
 			world.actorSystems[ray.actorSystemIndex]->RemoveActor(ray.actorIndex);
+			g_UIContext.uiViews.pop_back();
+		}
+
+		if (GetKeyUpState(VK_BACK))
+		{
 			g_UIContext.uiViews.pop_back();
 		}
 

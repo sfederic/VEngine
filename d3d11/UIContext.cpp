@@ -78,10 +78,16 @@ bool UIContext::Button(D2D1_RECT_F rect, ID2D1Brush* brush)
 {
 	d2dRenderTarget->FillRectangle(rect, brush);
 
-	if (mousePos.x > rect.left && mousePos.x < rect.right)
+	float size_x = rect.right - rect.left;
+	float size_y = rect.bottom - rect.top;
+
+	if ((mousePos.x > rect.left) && (mousePos.x < (rect.left + size_x)))
 	{
-		if (mousePos.y > rect.top && mousePos.y < rect.bottom)
+		if ((mousePos.y > rect.top) && (mousePos.y < (rect.top + size_y)))
 		{
+			d2dRenderTarget->FillRectangle(rect, brushTextBlack);
+
+
 			if(GetMouseLeftDownState())
 			{ 
 				return true;
