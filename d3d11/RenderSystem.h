@@ -11,7 +11,7 @@
 #include <d2d1_1.h>
 #include <comdef.h>
 #include <DirectXMath.h>
-#include "Win32Util.h"
+#include "CoreSystem.h"
 #include <vector>
 
 using namespace DirectX;
@@ -28,10 +28,11 @@ extern Vertex debugLineData[2];
 void DXTrace(HRESULT hr, const char* filename, const char* func, int line);
 #define HR(hr) if(hr != S_OK) { DXTrace(hr, __FILE__, #hr, __LINE__); throw; }
 
-class DXUtil
+class RenderSystem
 {
 public:
 	void Tick();
+	void Init();
 	void CreateDevice();
 	void CreateSwapchain();
 	void CreateRTVAndDSV();
@@ -39,12 +40,12 @@ public:
 	void CreateInputLayout();
 	void CreateRasterizerStates();
 	void CreateVertexBuffer(UINT size, const void* data, class ActorSystem* actor);
-	void CreateConstantBuffer(class Camera& camera);
+	void CreateConstantBuffer();
 
-	void RenderSetup(class Camera* camera, class UIContext* ui, class DXUtil* dx, struct ID3D11Buffer* debugBuffer, float deltaTime);
+	void RenderSetup(class Camera* camera, class UISystem* ui, struct ID3D11Buffer* debugBuffer, float deltaTime);
 	void RenderActorSystem(class ActorSystem* actorSystem, class Camera* camera);
 	void RenderBounds(class World* world, class Camera* camera);
-	void RenderEnd(UIContext* ui, World* world, float deltaTime, ID3D11Buffer* debugBuffer, Camera* camera);
+	void RenderEnd(UISystem* ui, World* world, float deltaTime, ID3D11Buffer* debugBuffer, Camera* camera);
 
 	std::vector<IDXGIAdapter1*> adapters;
 	std::vector<DXGI_ADAPTER_DESC1> adaptersDesc;
@@ -58,7 +59,7 @@ public:
 
 	static const int frameCount = 2;
 
-	D3D11_VIEWPORT viewport = { 0.f, 0.f, (float)windowWidth, (float)windowHeight, 0.f, 1.f };
+	D3D11_VIEWPORT viewport = { 0.f, 0.f, (float)coreSystem.windowWidth, (float)coreSystem.windowHeight, 0.f, 1.f };
 
 	ID3D11Device* device;
 	ID3D11DeviceContext* context;
@@ -92,4 +93,4 @@ public:
 	bool bQueryGPUInner = false;
 };
 
-static DXUtil dx;
+static RenderSystem renderSystem;

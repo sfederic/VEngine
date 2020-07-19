@@ -144,11 +144,11 @@
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Array.cpp" />
     <ClCompile Include="Audio.cpp" />
-    <ClCompile Include="AudioContext.cpp" />
+    <ClCompile Include="AudioSystem.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="DebugMenu.cpp" />
-    <ClCompile Include="DXUtil.cpp" />
+    <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
@@ -156,27 +156,27 @@
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="ShaderFactory.cpp" />
-    <ClCompile Include="UIContext.cpp" />
-    <ClCompile Include="Win32Util.cpp" />
+    <ClCompile Include="UISystem.cpp" />
+    <ClCompile Include="CoreSystem.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Array.h" />
     <ClInclude Include="Audio.h" />
-    <ClInclude Include="AudioContext.h" />
+    <ClInclude Include="AudioSystem.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Console.h" />
     <ClInclude Include="DebugMenu.h" />
-    <ClInclude Include="DXUtil.h" />
+    <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="FileSystem.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="MathHelpers.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="ShaderFactory.h" />
-    <ClInclude Include="UIContext.h" />
-    <ClInclude Include="Win32Util.h" />
+    <ClInclude Include="UISystem.h" />
+    <ClInclude Include="CoreSystem.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>

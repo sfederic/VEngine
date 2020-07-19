@@ -3,6 +3,20 @@
 #include "World.h"
 #include "DebugMenu.h"
 
+void FileSystem::Tick()
+{
+	//Test world load file handling.
+	if (GetKeyUpState('4'))
+	{
+		g_FileSystem.WriteAllActorSystems(GetWorld(), "LevelSaves/test.sav");
+	}
+
+	if (GetKeyUpState('5'))
+	{
+		g_FileSystem.ReadAllActorSystems(GetWorld(), "LevelSaves/test.sav");
+	}
+}
+
 void FileSystem::WriteAllActorSystems(World* world, const char* filename)
 {
 	//TODO: make filename work with current World name

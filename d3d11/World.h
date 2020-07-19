@@ -2,8 +2,7 @@
 
 #include <vector>
 
-//TODO: need a GetWorld() equivalent on the ending backend, too muc to always be copying pointers to new functions
-
+//Class acts as the current game world, including all actors 
 class World
 {
 public:
@@ -11,3 +10,7 @@ public:
 	std::vector<class ActorSystem*> actorSystems;
 	char name[64];
 };
+
+static World g_CurrentWorld;
+
+World* GetWorld();

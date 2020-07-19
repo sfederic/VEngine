@@ -17,10 +17,10 @@ class Console
 {
 public: 
 	static void ConsoleInput();
-	static void Tick(class UIContext* ui, class DXUtil* dx, class World* world);
-	static void ExecuteString(class DXUtil* dx, class World* world);
+	static void Tick(class UISystem* ui, class RenderSystem* dx, class World* world);
+	static void ExecuteString(class RenderSystem* dx, class World* world);
 
-	static void DrawViewItems(UIContext* ui);
+	static void DrawViewItems(UISystem* ui);
 
 };
 

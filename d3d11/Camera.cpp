@@ -1,7 +1,7 @@
 #include "Camera.h"
-#include "Win32Util.h"
+#include "CoreSystem.h"
 #include "Actor.h"
-#include "UIContext.h"
+#include "UISystem.h"
 #include <omp.h>
 
 Camera::Camera(XMVECTOR initialLocation)
@@ -18,34 +18,40 @@ Camera::Camera(XMVECTOR initialLocation)
 	UpdateViewMatrix();
 }
 
-void Camera::Tick(UIContext* ui, Win32Util* win32)
+void Camera::Tick(UISystem* ui, CoreSystem* win32)
 {
+	if (actorAttachedTo)
+	{
+		location = actorAttachedTo->GetPositionVector();
+		location += attachedOffset;
+	}
+
 	MouseMove(ui->mousePos.x, ui->mousePos.y);
 	UpdateViewMatrix();
 
 	if (GetAsyncKeyState('W'))
 	{
-		MoveForward(5.f * win32->delta);
+		MoveForward(5.f * win32->deltaTime);
 	}
 	if (GetAsyncKeyState('S'))
 	{
-		MoveForward(-5.f * win32->delta);
+		MoveForward(-5.f * win32->deltaTime);
 	}
 	if (GetAsyncKeyState('D'))
 	{
-		Strafe(5.f * win32->delta);
+		Strafe(5.f * win32->deltaTime);
 	}
 	if (GetAsyncKeyState('A'))
 	{
-		Strafe(-5.f * win32->delta);
+		Strafe(-5.f * win32->deltaTime);
 	}
 	if (GetAsyncKeyState('Q'))
 	{
-		MoveUp(-5.f * win32->delta);
+		MoveUp(-5.f * win32->deltaTime);
 	}
 	if (GetAsyncKeyState('E'))
 	{
-		MoveUp(5.f * win32->delta);
+		MoveUp(5.f * win32->deltaTime);
 	}
 }
 
@@ -120,7 +126,7 @@ void Camera::MouseMove(int x, int y)
 
 	if (GetAsyncKeyState(VK_RBUTTON) < 0)
 	{
-		SetCapture(mainWindow);
+		SetCapture(coreSystem.mainWindow);
 
 		float dx = XMConvertToRadians(0.25f * (float)(x - lastMousePos.x));
 		float dy = XMConvertToRadians(0.25f * (float)(y - lastMousePos.y));
@@ -154,7 +160,7 @@ void Camera::FrustumCullTest(ActorSystem& system)
 		system.boundingBox.Center = system.actors[i].GetPositionFloat3();
 		system.boundingBox.Extents = system.actors[i].GetScale();
 
-		if (localSpaceFrustum.Contains(system.boundingBox) == DISJOINT)
+		if (localSpaceFrustum.Contains(system.boundingBox) == DirectX::DISJOINT)
 		{
 			system.actors[i].bRender = false;
 		}
@@ -163,4 +169,13 @@ void Camera::FrustumCullTest(ActorSystem& system)
 			system.actors[i].bRender = true;
 		}
 	}
+}
+
+void Camera::AttachTo(Actor* actor)
+{
+	actorAttachedTo = actor;
+	attachedOffset = this->location - actor->GetPositionVector();
+
+	location = actor->GetPositionVector();
+	location += attachedOffset;
 }

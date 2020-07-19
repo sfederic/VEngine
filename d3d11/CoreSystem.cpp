@@ -1,5 +1,5 @@
-#include "Win32Util.h"
-#include "UIContext.h"
+#include "CoreSystem.h"
+#include "UISystem.h"
 #include "Input.h"
 #include <stdio.h>
 
@@ -8,12 +8,7 @@
 #include <commctrl.h>
 #include <mshtmcid.h>
 
-HWND mainWindow;
-const int windowWidth = 800;
-const int windowHeight = 600;
-MSG msg;
-
-void Win32Util::SetupWindow(HINSTANCE instance, int cmdShow)
+void CoreSystem::SetupWindow(HINSTANCE instance, int cmdShow)
 {
 	WNDCLASS wc = {};
 	wc.style = CS_HREDRAW | CS_VREDRAW;
@@ -24,66 +19,47 @@ void Win32Util::SetupWindow(HINSTANCE instance, int cmdShow)
 
 	RegisterClass(&wc);
 	mainWindow = CreateWindow("Window", "d3d11", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, windowWidth, windowHeight, 0, 0, instance, 0);
-	if (mainWindow)
-	{
-		ShowWindow(mainWindow, cmdShow);
-		UpdateWindow(mainWindow);
-	}
-	else
-	{
-		throw;
-	}
-
-	//Adding sub/child window example. Win32 UI is unweildy
-	/*wc.style = CS_HREDRAW | CS_VREDRAW;
-	wc.lpszClassName = "RenderWindow";
-	wc.lpfnWndProc = WndProc;
-	wc.hInstance = instance;
-	wc.hCursor = LoadCursor(0, IDC_CROSS);
-
-	RegisterClass(&wc);
-	renderWindow = CreateWindow("RenderWindow", "render", WS_CHILD | WS_OVERLAPPED, 50, 50, 750, 550, mainWindow, 0, instance, 0);
-	if (renderWindow)
-	{
-		UpdateWindow(renderWindow);
-		ShowWindow(renderWindow, TRUE);
-	}
-	else
-	{
-		throw;
-	}*/
+	ShowWindow(mainWindow, cmdShow);
+	UpdateWindow(mainWindow);
 }
 
-void Win32Util::SetTimerFrequency()
+void CoreSystem::SetTimerFrequency()
 {
-	QueryPerformanceFrequency((LARGE_INTEGER*)&freq);
-	ticks = 1.0 / (double)freq;
+	QueryPerformanceFrequency((LARGE_INTEGER*)&tickFrequency);
+	ticks = 1.0 / (double)tickFrequency;
 	deltaAccum = 0.0;
 }
 
-void Win32Util::StartTimer()
+void CoreSystem::StartTimer()
 {
-	QueryPerformanceCounter((LARGE_INTEGER*)&start);
+	QueryPerformanceCounter((LARGE_INTEGER*)&frameStartTime);
 }
 
-void Win32Util::EndTimer()
+void CoreSystem::EndTimer()
 {
-	QueryPerformanceCounter((LARGE_INTEGER*)&end);
-	delta = ticks * (double)(end - start);
-	if (delta < 0.0) { delta = 0.0; }
-	deltaAccum += delta;
-	frameAccum++;
+	QueryPerformanceCounter((LARGE_INTEGER*)&frameEndTime);
+	deltaTime = ticks * (double)(frameEndTime - frameStartTime);
+
+	if (deltaTime < 0.0) 
+	{ 
+		deltaTime = 0.0; 
+	}
+
+	deltaAccum += deltaTime;
+	frameCount++;
+
 	if (deltaAccum > 1.0)
 	{
 		char fpsText[128];
-		snprintf(fpsText, sizeof(fpsText), "d3d11 | FPS: %d mspf %f.12", frameAccum, delta);
+		snprintf(fpsText, sizeof(fpsText), "d3d11 | FPS: %d mspf %f.12", frameCount, deltaTime);
 		SetWindowText(mainWindow, fpsText);
-		frameAccum = 0;
+
+		frameCount= 0;
 		deltaAccum = 0.0;
 	}
 }
 
-void Win32Util::HandleMessages(MSG msg)
+void CoreSystem::HandleMessages()
 {
 	if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
 	{
@@ -92,7 +68,7 @@ void Win32Util::HandleMessages(MSG msg)
 	}
 }
 
-float Win32Util::GetAspectRatio()
+float CoreSystem::GetAspectRatio()
 {
 	return (float)((float)windowWidth / (float)windowHeight);
 }

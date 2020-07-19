@@ -1,8 +1,8 @@
-#include "DXUtil.h"
-#include "Win32Util.h"
+#include "RenderSystem.h"
+#include "CoreSystem.h"
 #include "Actor.h"
 #include "Camera.h"
-#include "UIContext.h"
+#include "UISystem.h"
 #include "Input.h"
 #include "Console.h"
 #include "DebugMenu.h"
@@ -30,7 +30,7 @@ struct Matrices
 
 Vertex debugLineData[2];
 
-void DXUtil::Tick()
+void RenderSystem::Tick()
 {
 	if (GetKeyUpState('1'))
 	{
@@ -51,7 +51,18 @@ void DXUtil::Tick()
 	}
 }
 
-void DXUtil::CreateDevice()
+void RenderSystem::Init()
+{
+	CreateDevice();
+	CreateSwapchain();
+	CreateRTVAndDSV();
+	CreateShaders();
+	CreateInputLayout();
+	CreateRasterizerStates();
+	CreateConstantBuffer();
+}
+
+void RenderSystem::CreateDevice()
 {
 	D3D_FEATURE_LEVEL featureLevels[] = { D3D_FEATURE_LEVEL_11_1, D3D_FEATURE_LEVEL_11_0 };
 
@@ -105,14 +116,14 @@ void DXUtil::CreateDevice()
 	debugSphere.shaderName = L"debugDraw.hlsl";
 }
 
-void DXUtil::CreateSwapchain()
+void RenderSystem::CreateSwapchain()
 {
 	DXGI_SWAP_CHAIN_DESC sd = {};
-	sd.BufferDesc = { (UINT)windowWidth, (UINT)windowHeight, {60, 1}, DXGI_FORMAT_R8G8B8A8_UNORM };
+	sd.BufferDesc = { (UINT)coreSystem.windowWidth, (UINT)coreSystem.windowHeight, {60, 1}, DXGI_FORMAT_R8G8B8A8_UNORM };
 	sd.Windowed = TRUE;
 	sd.SampleDesc.Count = 1;
 	sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-	sd.OutputWindow = mainWindow;
+	sd.OutputWindow = coreSystem.mainWindow;
 	sd.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
 	sd.BufferCount = frameCount;
 
@@ -122,7 +133,7 @@ void DXUtil::CreateSwapchain()
 	tmpSwapchain->Release();
 }
 
-void DXUtil::CreateRTVAndDSV()
+void RenderSystem::CreateRTVAndDSV()
 {
 	for (int i = 0; i < frameCount; i++)
 	{
@@ -138,15 +149,15 @@ void DXUtil::CreateRTVAndDSV()
 	dsDesc.MipLevels = 1;
 	dsDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 	dsDesc.SampleDesc.Count = 1;
-	dsDesc.Width = windowWidth;
-	dsDesc.Height = windowHeight;
+	dsDesc.Width = coreSystem.windowWidth;
+	dsDesc.Height = coreSystem.windowHeight;
 
 	ID3D11Texture2D* depthStencilBuffer;
 	HR(device->CreateTexture2D(&dsDesc, nullptr, &depthStencilBuffer));
 	HR(device->CreateDepthStencilView(depthStencilBuffer, nullptr, &dsv));
 }
 
-void DXUtil::CreateShaders()
+void RenderSystem::CreateShaders()
 {
 	//TODO: fix this for later. for now, all shaders are using the same Inputlayout so its fine
 	vertexCode = CreateShaderFromFile(L"Shaders/shaders.hlsl", "VSMain", "vs_5_0");
@@ -156,7 +167,7 @@ void DXUtil::CreateShaders()
 	HR(device->CreatePixelShader(pixelCode->GetBufferPointer(), pixelCode->GetBufferSize(), nullptr, &pixelShader));
 }
 
-void DXUtil::CreateInputLayout()
+void RenderSystem::CreateInputLayout()
 {
 	D3D11_INPUT_ELEMENT_DESC inputDesc[] = {
 		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, pos), D3D11_INPUT_PER_VERTEX_DATA, 0},
@@ -168,7 +179,7 @@ void DXUtil::CreateInputLayout()
 	context->IASetInputLayout(inputLayout);
 }
 
-void DXUtil::CreateRasterizerStates()
+void RenderSystem::CreateRasterizerStates()
 {
 	D3D11_RASTERIZER_DESC rastDesc = {};
 	rastDesc.FillMode = D3D11_FILL_SOLID;
@@ -185,25 +196,25 @@ void DXUtil::CreateRasterizerStates()
 	HR(device->CreateRasterizerState(&rastDesc, &rastStateWireframe));
 }
 
-void DXUtil::CreateVertexBuffer(UINT size, const void* data, ActorSystem* system)
+void RenderSystem::CreateVertexBuffer(UINT size, const void* data, ActorSystem* system)
 {
 	system->vertexBuffer = CreateDefaultBuffer(size, D3D11_BIND_VERTEX_BUFFER, data);
 }
 
-void DXUtil::CreateConstantBuffer(Camera& camera)
+void RenderSystem::CreateConstantBuffer()
 {
 	matrices.model = XMMatrixIdentity();
 	matrices.view = XMMatrixIdentity();
-	matrices.proj = XMMatrixPerspectiveFovLH(XM_PI / 3, Win32Util::GetAspectRatio(), 0.01f, 1000.f);
+	matrices.proj = XMMatrixPerspectiveFovLH(XM_PI / 3, coreSystem.GetAspectRatio(), 0.01f, 1000.f);
 
 	//TODO: Get rid of this too. terrible
-	camera.proj = matrices.proj;
+	editorCamera.proj = matrices.proj;
 	matrices.mvp = matrices.model * matrices.view * matrices.proj;
 
 	cbMatrices = CreateDefaultBuffer(sizeof(Matrices), D3D11_BIND_CONSTANT_BUFFER, &matrices);
 }
 
-void DXUtil::RenderActorSystem(ActorSystem* actorSystem, Camera* camera)
+void RenderSystem::RenderActorSystem(ActorSystem* actorSystem, Camera* camera)
 {
 	auto vs = g_ShaderFactory.shadersMap.find(actorSystem->shaderName);
 
@@ -235,7 +246,7 @@ void DXUtil::RenderActorSystem(ActorSystem* actorSystem, Camera* camera)
 
 //TODO: don't like that it's not batched now, switching rasterizer states per actor system isn't good.
 //What I can do is make an actor collection per level so that the renderer can interatre over them and batch the rast state changes
-void DXUtil::RenderBounds(World* world, Camera* camera)
+void RenderSystem::RenderBounds(World* world, Camera* camera)
 {
 	if (bDrawBoundingBoxes || bDrawBoundingSpheres)
 	{
@@ -289,7 +300,7 @@ void DXUtil::RenderBounds(World* world, Camera* camera)
 	}
 }
 
-void DXUtil::RenderEnd(UIContext* ui, World* world, float deltaTime, ID3D11Buffer* debugBuffer, Camera* camera)
+void RenderSystem::RenderEnd(UISystem* ui, World* world, float deltaTime, ID3D11Buffer* debugBuffer, Camera* camera)
 {
 	//DRAW DEBUG LINES
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
@@ -372,7 +383,7 @@ void DXUtil::RenderEnd(UIContext* ui, World* world, float deltaTime, ID3D11Buffe
 	}
 }
 
-void DXUtil::RenderSetup(Camera* camera, UIContext* ui, DXUtil* dx, ID3D11Buffer* debugBuffer, float deltaTime)
+void RenderSystem::RenderSetup(Camera* camera, UISystem* ui, ID3D11Buffer* debugBuffer, float deltaTime)
 {
 	if (bQueryGPU)
 	{
@@ -404,7 +415,7 @@ void DXUtil::RenderSetup(Camera* camera, UIContext* ui, DXUtil* dx, ID3D11Buffer
 	}
 }
 
-ID3DBlob* DXUtil::CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target)
+ID3DBlob* RenderSystem::CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target)
 {
 	UINT compileFlags = 0;
 #ifdef _DEBUG
@@ -424,7 +435,7 @@ ID3DBlob* DXUtil::CreateShaderFromFile(const wchar_t* filename, const char* entr
 	return code;
 }
 
-ID3D11Buffer* DXUtil::CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, const void* initData)
+ID3D11Buffer* RenderSystem::CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, const void* initData)
 {
 	ID3D11Buffer* buffer;
 
@@ -440,7 +451,7 @@ ID3D11Buffer* DXUtil::CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, const 
 	return buffer;
 }
 
-ID3D11Buffer* DXUtil::CreateDyamicBuffer(UINT byteWidth, UINT bindFlags, const void* initData)
+ID3D11Buffer* RenderSystem::CreateDyamicBuffer(UINT byteWidth, UINT bindFlags, const void* initData)
 {
 	ID3D11Buffer* buffer;
 

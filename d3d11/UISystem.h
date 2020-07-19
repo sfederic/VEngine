@@ -20,7 +20,7 @@ struct UIView
 		actorIndex = actorInit;
 	}
 
-	virtual void Tick(class UIContext* ui) = 0;
+	virtual void Tick(class UISystem* ui) = 0;
 
 	D2D1_RECT_F viewRect;
 	wchar_t title[32];
@@ -33,11 +33,17 @@ struct UIView
 struct UIActorView : public UIView
 {
 	UIActorView(const wchar_t* titleInit, int x, int y, int actorSystemInit, int actorInit) : 
-		UIView(titleInit, x, y, actorSystemInit, actorInit) {}
-	virtual void Tick(class UIContext* ui) override;
+		UIView(titleInit, x, y, actorSystemInit, actorInit) 
+	{
+
+	}
+
+	virtual void Tick(class UISystem* ui) override;
+
+	wchar_t actorData[128];
 };
 
-class UIContext
+class UISystem
 {
 public:
 	void Init(IDXGISwapChain* swapchain);
@@ -70,5 +76,5 @@ public:
 	IDWriteTextFormat* textFormat;
 };
 
-static UIContext g_UIContext;
+static UISystem uiSystem;
 

@@ -1,8 +1,8 @@
 #include "Console.h"
 #include "Input.h"
-#include "UIContext.h"
-#include "Win32Util.h"
-#include "DXUtil.h"
+#include "UISystem.h"
+#include "CoreSystem.h"
+#include "RenderSystem.h"
 #include <vector>
 #include "FileSystem.h"
 #include "World.h"
@@ -45,15 +45,17 @@ void Console::ConsoleInput()
 }
 
 //Make sure D2D render target calls have been made (Begin/End Draw)
-void Console::Tick(UIContext* ui, DXUtil* dx, World* world)
+void Console::Tick(UISystem* ui, RenderSystem* dx, World* world)
 {
 	if (bConsoleActive)
 	{
 		Console::ConsoleInput();
 
-		ui->d2dRenderTarget->DrawRectangle({ 0, (float)windowHeight - 20.f, (float)windowWidth, (float)windowHeight }, ui->brushTransparentMenu);
-		ui->d2dRenderTarget->DrawText(consoleString, consoleStringIndex, ui->textFormat, { 0, (float)windowHeight - 20.f, 
-			(float)windowWidth, (float)windowHeight }, ui->brushText);
+		float width = (float)coreSystem.windowWidth;
+		float height = (float)coreSystem.windowHeight;
+
+		ui->d2dRenderTarget->DrawRectangle({ 0, height - 20.f, width, height }, ui->brushTransparentMenu);
+		ui->d2dRenderTarget->DrawText(consoleString, consoleStringIndex, ui->textFormat, { 0, height - 20.f, width, height }, ui->brushText);
 	}
 
 	if (GetKeyUpState(VK_OEM_3)) //~ key, like doom and unreal
@@ -67,13 +69,13 @@ void Console::Tick(UIContext* ui, DXUtil* dx, World* world)
 }
 
 //Execute values need to be uppercase with WndProc
-void Console::ExecuteString(DXUtil* dx, World* world)
+void Console::ExecuteString(RenderSystem* dx, World* world)
 {
 	ConsoleViewItem item = {};
 
 	if (wcsncmp(consoleString, ExecuteStrings::EXIT, wcslen(ExecuteStrings::EXIT)) == 0)
 	{
-		msg.message = WM_QUIT; //TODO: Terrible. Fix.
+		coreSystem.msg.message = WM_QUIT; //TODO: Terrible. Fix.
 	}
 	else if (wcsncmp(consoleString, ExecuteStrings::GPU, wcslen(ExecuteStrings::GPU)) == 0)
 	{
@@ -107,14 +109,17 @@ void Console::ExecuteString(DXUtil* dx, World* world)
 	consoleStringIndex = 0;
 }
 
-void Console::DrawViewItems(UIContext* ui)
+void Console::DrawViewItems(UISystem* ui)
 {
 	for (int i = 0; i < viewItems.size(); i++)
 	{
 		const float yMarginIncrement = 20.f * i;
 
+		const float width = (float)coreSystem.windowWidth;
+		const float height = (float)coreSystem.windowHeight;
+
 		ui->d2dRenderTarget->DrawTextA(viewItems[i].text, wcslen(viewItems[i].text), ui->textFormat, 
-			{ 0, yMarginIncrement, (float)windowWidth, (float)windowHeight }, ui->brushText);
+			{ 0, yMarginIncrement, width, height }, ui->brushText);
 
 	}
 }

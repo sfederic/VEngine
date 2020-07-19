@@ -1,9 +1,9 @@
-#include "UIContext.h"
-#include "DXUtil.h"
-#include "Win32Util.h"
+#include "UISystem.h"
+#include "RenderSystem.h"
+#include "CoreSystem.h"
 #include "Input.h"
 
-void UIContext::Init(IDXGISwapChain* swapchain)
+void UISystem::Init(IDXGISwapChain* swapchain)
 {
 	//Direct2D Init
 	IDXGISurface* surface;
@@ -32,7 +32,7 @@ void UIContext::Init(IDXGISwapChain* swapchain)
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.f, 0.f, 0.f, 1.0f), &brushTextBlack));
 }
 
-void UIContext::Cleanup()
+void UISystem::Cleanup()
 {
 	d2dFactory->Release();
 	d2dRenderTarget->Release();
@@ -45,15 +45,29 @@ void UIContext::Cleanup()
 	textFormat->Release();
 }
 
-void UIContext::Tick()
+void UISystem::Tick()
 {
 	GetCursorPos(&mousePos);
-	ScreenToClient(mainWindow, &mousePos);
+	ScreenToClient(coreSystem.mainWindow, &mousePos);
 	//RenderStart();
 	//RenderEnd();
+
+	if (GetKeyUpState(VK_DELETE))
+	{
+		//world.actorSystems[ray.actorSystemIndex]->RemoveActor(ray.actorIndex);
+		uiSystem.uiViews.pop_back();
+	}
+
+	if (GetKeyUpState(VK_BACK))
+	{
+		if (uiSystem.uiViews.size() > 0)
+		{
+			uiSystem.uiViews.pop_back();
+		}
+	}
 }
 
-void UIContext::RenderStart()
+void UISystem::RenderStart()
 {
 	/*d2dRenderTarget->BeginDraw();
 
@@ -63,18 +77,18 @@ void UIContext::RenderStart()
 	}*/
 }
 
-void UIContext::RenderEnd()
+void UISystem::RenderEnd()
 {
 	//d2dRenderTarget->EndDraw();
 }
 
-void UIContext::CreateActorUIView()
+void UISystem::CreateActorUIView()
 {
 
 }
 
 
-bool UIContext::Button(D2D1_RECT_F rect, ID2D1Brush* brush)
+bool UISystem::Button(D2D1_RECT_F rect, ID2D1Brush* brush)
 {
 	d2dRenderTarget->FillRectangle(rect, brush);
 
@@ -92,7 +106,7 @@ bool UIContext::Button(D2D1_RECT_F rect, ID2D1Brush* brush)
 	return false;
 }
 
-bool UIContext::DragButton(D2D1_RECT_F rect, ID2D1Brush* brush)
+bool UISystem::DragButton(D2D1_RECT_F rect, ID2D1Brush* brush)
 {
 	d2dRenderTarget->DrawRectangle(rect, brush);
 
@@ -110,21 +124,21 @@ bool UIContext::DragButton(D2D1_RECT_F rect, ID2D1Brush* brush)
 	return false;
 }
 
-void UIContext::Label(const wchar_t* text, D2D1_RECT_F layoutRect)
+void UISystem::Label(const wchar_t* text, D2D1_RECT_F layoutRect)
 {
 	d2dRenderTarget->DrawRectangle(layoutRect, brushTransparentMenu);
 	d2dRenderTarget->DrawTextA(text, wcslen(text), textFormat, layoutRect, brushText);
 }
 
-void UIContext::ResetAllActiveUIViews()
+void UISystem::ResetAllActiveUIViews()
 {
-	for (int i = 0; i < g_UIContext.uiViews.size(); i++)
+	for (int i = 0; i < uiSystem.uiViews.size(); i++)
 	{
-		g_UIContext.uiViews[i].bIsActive = false;
+		uiSystem.uiViews[i].bIsActive = false;
 	}
 }
 
-void UIContext::AddView(const wchar_t* text, int actorSystemIndex, int actorIndex)
+void UISystem::AddView(const wchar_t* text, int actorSystemIndex, int actorIndex)
 {
 	ResetAllActiveUIViews();
 
@@ -140,10 +154,10 @@ void UIContext::AddView(const wchar_t* text, int actorSystemIndex, int actorInde
 		}
 	}
 
-	uiViews.push_back(UIActorView(text, g_UIContext.mousePos.x, g_UIContext.mousePos.y, actorSystemIndex, actorIndex));
+	uiViews.push_back(UIActorView(text, uiSystem.mousePos.x, uiSystem.mousePos.y, actorSystemIndex, actorIndex));
 }
 
-void UIActorView::Tick(UIContext* ui)
+void UIActorView::Tick(UISystem* ui)
 {
 	viewRect.bottom = viewRect.top + 150.f;
 	viewRect.right = viewRect.left + 100.f;

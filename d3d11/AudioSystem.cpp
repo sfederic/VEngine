@@ -1,4 +1,4 @@
-#include "AudioContext.h"
+#include "AudioSystem.h"
 #include "Audio.h"
 
 //Little-Endian (Docs say that XBOX uses big endian)
@@ -9,14 +9,14 @@
 #define fourccXWMA 'AMWX'
 #define fourccDPDS 'sdpd'
 
-void AudioContext::Init()
+void AudioSystem::Init()
 {
 	HR(XAudio2Create(&audioEngine));
 	//CoInitialize(NULL); //Needs to be called before CreateMasteringVoice. Comdef throws an error.
 	HR(audioEngine->CreateMasteringVoice(&masteringVoice));
 }
 
-void AudioContext::PlayAudio(AudioChunk* chunk)
+void AudioSystem::PlayAudio(AudioChunk* chunk)
 {
 	if (!chunk->bIsPlaying)
 	{
@@ -25,7 +25,7 @@ void AudioContext::PlayAudio(AudioChunk* chunk)
 	}
 }
 
-HRESULT AudioContext::FindChunk(HANDLE file, DWORD fourcc, DWORD* dwChunkSize, DWORD* dwChunkDataPosition)
+HRESULT AudioSystem::FindChunk(HANDLE file, DWORD fourcc, DWORD* dwChunkSize, DWORD* dwChunkDataPosition)
 {
 	if (SetFilePointer(file, 0, NULL, FILE_BEGIN) == INVALID_SET_FILE_POINTER) {
 		return HRESULT_FROM_WIN32(GetLastError());
@@ -81,7 +81,7 @@ HRESULT AudioContext::FindChunk(HANDLE file, DWORD fourcc, DWORD* dwChunkSize, D
 	return S_OK;
 }
 
-HRESULT AudioContext::ReadChunkData(HANDLE file, void* buffer, DWORD bufferSize, DWORD bufferOffset)
+HRESULT AudioSystem::ReadChunkData(HANDLE file, void* buffer, DWORD bufferSize, DWORD bufferOffset)
 {
 	HRESULT hr = S_OK;
 	if (INVALID_SET_FILE_POINTER == SetFilePointer(file, bufferOffset, NULL, FILE_BEGIN)) {
@@ -96,7 +96,7 @@ HRESULT AudioContext::ReadChunkData(HANDLE file, void* buffer, DWORD bufferSize,
 	return hr;
 }
 
-HRESULT AudioContext::LoadWAV(const char* filename, WAVEFORMATEXTENSIBLE& waveFormat, XAUDIO2_BUFFER& buffer)
+HRESULT AudioSystem::LoadWAV(const char* filename, WAVEFORMATEXTENSIBLE& waveFormat, XAUDIO2_BUFFER& buffer)
 {
 	HANDLE file = CreateFile(filename, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
 
@@ -132,7 +132,7 @@ HRESULT AudioContext::LoadWAV(const char* filename, WAVEFORMATEXTENSIBLE& waveFo
 	return S_OK;
 }
 
-bool AudioContext::CreateAudio(const char* filename, AudioChunk* chunk)
+bool AudioSystem::CreateAudio(const char* filename, AudioChunk* chunk)
 {
 	//Initilization of audio is bad if nothing is zeroed out. Source voice fails
 	HR(LoadWAV(filename, chunk->waveFormat, chunk->buffer));

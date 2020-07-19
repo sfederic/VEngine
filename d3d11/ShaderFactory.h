@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <unordered_map>
-#include "DXUtil.h"
+#include "RenderSystem.h"
 
 //NOTE: All the stuff in these files assumes using joined shaders
 

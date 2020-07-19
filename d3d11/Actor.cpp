@@ -1,5 +1,5 @@
 #include "Actor.h"
-#include "DXUtil.h"
+#include "RenderSystem.h"
 #include "Array.h"
 
 //ACTOR
@@ -61,7 +61,7 @@ ActorSystem::ActorSystem()
 
 }
 
-void ActorSystem::CreateActors(const char* modelFilename, DXUtil* dx, int numActorsToSpawn)
+void ActorSystem::CreateActors(const char* modelFilename, RenderSystem* dx, int numActorsToSpawn)
 {
 	if (loadOBJFile(modelFilename, modelData))
 	{

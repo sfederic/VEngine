@@ -1,11 +1,11 @@
 #include "Physics.h"
-#include "DXUtil.h"
+#include "RenderSystem.h"
 #include "Camera.h"
-#include "UIContext.h"
+#include "UISystem.h"
 #include "Actor.h"
 #include "DebugMenu.h"
 
-void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, ID3D11Buffer* debugBuffer, DXUtil* dx)
+void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, ID3D11Buffer* debugBuffer, RenderSystem* dx)
 {
 	Vertex v1 = {}, v2 = {};
 	XMStoreFloat3(&v1.pos, rayOrigin);
@@ -26,8 +26,8 @@ void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, ID3D11Buf
 //Just for bounding boxes for now
 bool Raycast(Ray& ray, int sx, int sy, Camera* camera, ActorSystem* actorSystem)
 {
-	float vx = (2.f * sx / windowWidth - 1.0f) / camera->proj.r[0].m128_f32[0];
-	float vy = (-2.f * sy / windowHeight + 1.0f) / camera->proj.r[1].m128_f32[1];
+	float vx = (2.f * sx / coreSystem.windowWidth - 1.0f) / camera->proj.r[0].m128_f32[0];
+	float vy = (-2.f * sy / coreSystem.windowHeight + 1.0f) / camera->proj.r[1].m128_f32[1];
 
 	ray.origin = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	ray.direction = XMVectorSet(vx, vy, 1.f, 0.f);

@@ -1,14 +1,14 @@
 #include "DebugMenu.h"
-#include "UIContext.h"
-#include "Win32Util.h"
+#include "UISystem.h"
+#include "CoreSystem.h"
 #include "Input.h"
-#include "DXUtil.h"
+#include "RenderSystem.h"
 #include "Actor.h"
 #include "World.h"
 
 float menuStartPosX = 10.f;
 float menuStartPosY = 10.f;
-float menuWidth = (float)windowWidth / 2.f;
+float menuWidth = (float)coreSystem.windowWidth / 2.f;
 float textOffsetX = 20.f;
 
 //float menuHeight = (float)windowHeight - 100.f;
@@ -43,7 +43,7 @@ DebugMenu::DebugMenu()
 		menuItems[(int)EMenuID::RENDERING].subMenuItems.push_back(L"GPU: ");
 }
 
-void DebugMenu::Tick(UIContext* ui, DXUtil* dx, World* world, float deltaTime)
+void DebugMenu::Tick(UISystem* ui, RenderSystem* dx, World* world, float deltaTime)
 {
 	//Handle notifications (eg. "Shaders recompiled", "ERROR: Not X", etc)
 	const float notificationLifetime = 3.0f;

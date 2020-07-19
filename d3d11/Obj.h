@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "DXUtil.h"
+#include "RenderSystem.h"
 #include <DirectXMath.h>
 
 using namespace DirectX;

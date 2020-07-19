@@ -37,7 +37,7 @@ class ActorSystem
 public:
 	ActorSystem();
 	//virtual void Tick(float deltaTime) = 0;
-	void CreateActors(const char* modelFilename, class DXUtil* dx, int numActorsToSpawn);
+	void CreateActors(const char* modelFilename, class RenderSystem* dx, int numActorsToSpawn);
 	void AddActor();
 	void RemoveActor(int index);
 

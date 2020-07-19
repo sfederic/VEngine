@@ -1,11 +1,11 @@
 #pragma once
 
-#include "DXUtil.h"
+#include "RenderSystem.h"
 #include <xaudio2.h>
 #include "Audio.h"
 #include <vector>
 
-class AudioContext
+class AudioSystem
 {
 public:
 
@@ -22,4 +22,4 @@ public:
 	std::vector<AudioChunk*> audioChunks;
 };
 
-static AudioContext g_AudioContext;
+static AudioSystem audioSystem;

@@ -1,13 +1,10 @@
-//putting here for malloc_dbg
-//#define _DEBUG 
-
-#include "DXUtil.h"
-#include "Win32Util.h"
-#include "UIContext.h"
+#include "RenderSystem.h"
+#include "CoreSystem.h"
+#include "UISystem.h"
 #include "Obj.h"
 #include "Camera.h"
 #include "Audio.h"
-#include "AudioContext.h"
+#include "AudioSystem.h"
 #include "Input.h"
 #include "WICTextureLoader.h"
 #include "Actor.h"
@@ -22,35 +19,25 @@
 int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine, int cmdShow)
 {
 	//WIN32 SETUP
-	g_win32.SetupWindow(instance, cmdShow);
-	g_win32.SetTimerFrequency();
-
-	//D3D11 SETUP
-	dx.CreateDevice();
-	dx.CreateSwapchain();
-	dx.CreateRTVAndDSV();
-	dx.CreateShaders();
-
-	dx.CreateInputLayout();
-	dx.CreateRasterizerStates();
+	coreSystem.SetupWindow(instance, cmdShow);
+	coreSystem.SetTimerFrequency();
+	
+	renderSystem.Init();
 
 	Camera camera(XMVectorSet(0.f, 0.f, -5.f, 1.f));
 
-	dx.CreateConstantBuffer(camera);
-
 	//AUDIO SETUP
-	g_AudioContext.Init();
+	audioSystem.Init();
 
 	//UI SETUP
-	g_UIContext.Init(dx.swapchain);
+	uiSystem.Init(renderSystem.swapchain);
 
 	//TEXTURE TESTING
 	ID3D11Resource* testTexture;
 	ID3D11ShaderResourceView* testSrv;
-	HR(CreateWICTextureFromFile(dx.device, L"Textures/texture.png", &testTexture, &testSrv));
-	dx.context->PSSetShaderResources(0, 1, &testSrv);
+	HR(CreateWICTextureFromFile(renderSystem.device, L"Textures/texture.png", &testTexture, &testSrv));
+	renderSystem.context->PSSetShaderResources(0, 1, &testSrv);
 
-	//TODO: move into dxutil
 	D3D11_SAMPLER_DESC sampDesc = {};
 	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
 	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -58,110 +45,51 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
 
 	ID3D11SamplerState* testSampler;
-	dx.device->CreateSamplerState(&sampDesc, &testSampler);
-	dx.context->PSSetSamplers(0, 1, &testSampler);
+	renderSystem.device->CreateSamplerState(&sampDesc, &testSampler);
+	renderSystem.context->PSSetSamplers(0, 1, &testSampler);
 
-	ID3D11Buffer* debugLinesBuffer = dx.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
+	ID3D11Buffer* debugLinesBuffer = renderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
 
 	//ACTOR SYSTEM TESTING
 	ActorSystem system, system2, system3;
-	system.CreateActors("Models/cube.obj", &dx, 4);
-	//system2.CreateActors("Models/cube.obj", &dx, 2);
-	//system3.CreateActors("Models/cylinder.obj", &dx, 3);
+	system3.CreateActors("Models/cylinder.obj", &renderSystem, 3);
 
 	//World data testing
 	World world = {};
-	world.actorSystems.push_back(&system);
+	world.actorSystems.push_back(&system3);
 
 	Ray ray = {};
 
 	//MAIN LOOP
-	while (msg.message != WM_QUIT)
+	while (coreSystem.msg.message != WM_QUIT)
 	{
-		g_win32.StartTimer();
+		coreSystem.StartTimer();
 
-		//Win32 message handing
-		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
-		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-		}
+		coreSystem.HandleMessages();
 
-		//Test actor file handling.
-		if (GetKeyUpState('4'))
-		{
-			g_FileSystem.WriteAllActorSystems(&world, "LevelSaves/test.sav");
-		}
-
-		if (GetKeyUpState('5'))
-		{
-			g_FileSystem.ReadAllActorSystems(&world, "LevelSaves/test.sav");
-		}
-
-		//UI UPDATE
-		g_UIContext.Tick();
-
-		camera.Tick(&g_UIContext, &g_win32);
-
-		//if (GetMouseDownState())
-		if(GetMouseLeftUpState())
-		{
-			if(Raycast(ray, g_UIContext.mousePos.x, g_UIContext.mousePos.y, &camera, world.actorSystems[0]))
-			{
-				//DrawRayDebug(ray.origin, ray.direction, ray.distance, debugLinesBuffer, &dx);
-				ray.actorSystemIndex = 0;
-				wchar_t actorDetails[64];
-				swprintf(actorDetails, sizeof(actorDetails), L"Actor %d", ray.actorIndex);
-
-				g_UIContext.AddView(actorDetails, ray.actorSystemIndex, ray.actorIndex);
-			}
-		}
-
-		if (GetKeyUpState(VK_DELETE))
-		{
-			world.actorSystems[ray.actorSystemIndex]->RemoveActor(ray.actorIndex);
-			g_UIContext.uiViews.pop_back();
-		}
-
-		if (GetKeyUpState(VK_BACK))
-		{
-			if (g_UIContext.uiViews.size() > 0)
-			{
-				g_UIContext.uiViews.pop_back();
-			}
-		}
-
-		if (GetAsyncKey(VK_RIGHT))
-		{
-			XMVECTOR pos = world.actorSystems[0]->actors[ray.actorIndex].GetPositionVector();
-			pos.m128_f32[0] += 0.15f;
-			world.actorSystems[0]->actors[ray.actorIndex].SetPosition(pos);
-		}
-		if (GetAsyncKey(VK_LEFT))
-		{
-			XMVECTOR pos = world.actorSystems[ray.actorIndex]->actors[ray.actorIndex].GetPositionVector();
-			pos.m128_f32[ray.actorIndex] -= 0.15f;
-			world.actorSystems[0]->actors[ray.actorIndex].SetPosition(pos);
-		}
+		g_FileSystem.Tick();
+		uiSystem.Tick();
+		uiSystem.Tick();
+		camera.Tick(&uiSystem, &coreSystem);
 
 		//RENDER
-		dx.Tick();
-		dx.RenderSetup(&camera, &g_UIContext, &dx, debugLinesBuffer, g_win32.delta);
+		renderSystem.Tick();
+		renderSystem.RenderSetup(&camera, &uiSystem, debugLinesBuffer, coreSystem.deltaTime);
 
 		for (int i = 0; i < world.actorSystems.size(); i++)
 		{
-			dx.RenderActorSystem(world.actorSystems[i], &camera);
+			renderSystem.RenderActorSystem(world.actorSystems[i], &camera);
 		}
 
-		dx.RenderBounds(&world, &camera);
-		dx.RenderEnd(&g_UIContext, &world, g_win32.delta, debugLinesBuffer, &camera);
+		renderSystem.RenderBounds(&world, &camera);
+		renderSystem.RenderEnd(&uiSystem, &world, coreSystem.deltaTime, debugLinesBuffer, &camera);
 
 		InputEnd();
 
-		g_win32.EndTimer();
+		coreSystem.EndTimer();
 	}
 
-	g_UIContext.Cleanup();
+	uiSystem.Cleanup();
 
-	return (int)msg.wParam;
+	return (int)coreSystem.msg.wParam;
 }
