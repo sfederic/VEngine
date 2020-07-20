@@ -147,6 +147,7 @@
     <ClCompile Include="AudioSystem.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Console.cpp" />
+    <ClCompile Include="Debug.cpp" />
     <ClCompile Include="DebugMenu.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="FileSystem.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="AudioSystem.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Console.h" />
+    <ClInclude Include="Debug.h" />
     <ClInclude Include="DebugMenu.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="FileSystem.h" />

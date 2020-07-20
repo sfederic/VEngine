@@ -15,22 +15,6 @@ float textOffsetX = 20.f;
 int menuCursorIndex = 0;
 int subMenuCursorIndex = 0;
 
-int Print(const char* format, va_list args)
-{
-	char buff[1024];
-	int charCount = vsnprintf(buff, sizeof(buff), format, args);
-	OutputDebugString(buff);
-	return charCount;
-}
-
-int DebugPrint(const char* format, ...)
-{
-	va_list argList;
-	va_start(argList, format);
-	int charsWritten = Print(format, argList);
-	return charsWritten;
-}
-
 DebugMenu::DebugMenu()
 {
 	menuItems.push_back(MenuItem(L"Actors", EMenuID::ACTORS));
@@ -43,7 +27,7 @@ DebugMenu::DebugMenu()
 		menuItems[(int)EMenuID::RENDERING].subMenuItems.push_back(L"GPU: ");
 }
 
-void DebugMenu::Tick(UISystem* ui, RenderSystem* dx, World* world, float deltaTime)
+void DebugMenu::Tick(World* world, float deltaTime)
 {
 	//Handle notifications (eg. "Shaders recompiled", "ERROR: Not X", etc)
 	const float notificationLifetime = 3.0f;

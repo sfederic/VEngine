@@ -1,4 +1,5 @@
 #pragma once
+
 #include <corecrt_malloc.h>
 #include <stdint.h>
 #include <limits.h>
@@ -34,8 +35,6 @@ public:
 		size++;
 		sizeInBytes = size * elementSize;
 
-		//assert(data); //Assert doing funny things with realloc?
-
 		if (sizeInBytes < maxSizeInBytes)
 		{
 			data[size - 1] = element;
@@ -52,5 +51,5 @@ public:
 	uint64_t sizeInBytes;
 	uint64_t size;
 	uint64_t maxSizeInBytes;
-	unsigned int elementSize = sizeof(T);
+	const unsigned int elementSize = sizeof(T);
 };

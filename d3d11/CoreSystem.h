@@ -1,14 +1,12 @@
 #pragma once
 
-#include <Windows.h>
+#include <minwindef.h>
 
 LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam);
 
-//Handling all platform base functionality
 class CoreSystem
 {
 public:
-	CoreSystem() {};
 	void SetupWindow(HINSTANCE instance, int cmdShow);
 	void SetTimerFrequency();
 	void StartTimer();

@@ -1,15 +1,7 @@
 #pragma once
 
-#pragma comment(lib, "d2d1.lib")
-#pragma comment(lib, "dwrite.lib")
-
-#include <d2d1_1.h>
-#include <dwrite_1.h>
 #include <vector>
-#include "Input.h"
-#include "DebugMenu.h"
 
-//For testing
 struct UIView
 {
 	UIView(const wchar_t* titleInit, int x, int y, int actorSystemInit, int actorInit)
@@ -20,7 +12,7 @@ struct UIView
 		actorIndex = actorInit;
 	}
 
-	virtual void Tick(class UISystem* ui) = 0;
+	virtual void Tick() = 0;
 
 	D2D1_RECT_F viewRect;
 	wchar_t title[32];
@@ -32,13 +24,10 @@ struct UIView
 
 struct UIActorView : public UIView
 {
-	UIActorView(const wchar_t* titleInit, int x, int y, int actorSystemInit, int actorInit) : 
-		UIView(titleInit, x, y, actorSystemInit, actorInit) 
-	{
+	UIActorView(const wchar_t* titleInit, int x, int y, int actorSystemInit, int actorInit) :
+		UIView(titleInit, x, y, actorSystemInit, actorInit) {}
 
-	}
-
-	virtual void Tick(class UISystem* ui) override;
+	virtual void Tick() override;
 
 	wchar_t actorData[128];
 };
@@ -46,7 +35,7 @@ struct UIActorView : public UIView
 class UISystem
 {
 public:
-	void Init(IDXGISwapChain* swapchain);
+	void Init();
 	void Cleanup(); //D2D1 Actually throws errors if no cleanup
 	void Tick();
 	void RenderStart();
@@ -54,8 +43,8 @@ public:
 	void CreateActorUIView();
 
 	//Create UI functions
-	bool Button(D2D1_RECT_F rect, ID2D1Brush* brush);
-	bool DragButton(D2D1_RECT_F rect, ID2D1Brush* brush);
+	bool Button(D2D1_RECT_F rect, struct ID2D1Brush* brush);
+	bool DragButton(D2D1_RECT_F rect, struct ID2D1Brush* brush);
 	void Label(const wchar_t* text, D2D1_RECT_F layoutRect);
 
 	//UIView functions
@@ -66,14 +55,14 @@ public:
 
 	POINT mousePos;
 
-	ID2D1Factory* d2dFactory;
-	ID2D1RenderTarget* d2dRenderTarget;
-	IDWriteFactory1* writeFactory;
-	ID2D1SolidColorBrush* brushText;
-	ID2D1SolidColorBrush* brushTextBlack;
-	ID2D1SolidColorBrush* brushCloseBox;
-	ID2D1SolidColorBrush* brushTransparentMenu;
-	IDWriteTextFormat* textFormat;
+	struct ID2D1Factory* d2dFactory;
+	struct ID2D1RenderTarget* d2dRenderTarget;
+	struct IDWriteFactory1* writeFactory;
+	struct ID2D1SolidColorBrush* brushText;
+	struct ID2D1SolidColorBrush* brushTextBlack;
+	struct ID2D1SolidColorBrush* brushCloseBox;
+	struct ID2D1SolidColorBrush* brushTransparentMenu;
+	struct IDWriteTextFormat* textFormat;
 };
 
 static UISystem uiSystem;

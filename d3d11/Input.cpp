@@ -1,15 +1,7 @@
 #include "Input.h"
+#include <WinUser.h>
 
-WPARAM currentDownKey;
-WPARAM currentUpKey;
-bool leftMouseUp;
-bool rightMouseUp;
-bool leftMouseDown;
-bool rightMouseDown;
-bool keyDown;
-bool keyUp;
-
-bool GetAnyKeyUp()
+bool InputSystem::GetAnyKeyUp()
 {
 	if (keyUp)
 	{
@@ -22,7 +14,7 @@ bool GetAnyKeyUp()
 	}
 }
 
-bool GetAnyKeyDown()
+bool InputSystem::GetAnyKeyDown()
 {
 	if (keyDown)
 	{
@@ -35,43 +27,43 @@ bool GetAnyKeyDown()
 	}
 }
 
-void StoreKeyDownInput(WPARAM key)
+void InputSystem::StoreKeyDownInput(WPARAM key)
 {
 	currentDownKey = key;
 	keyDown = true;
 }
 
-void StoreKeyUpInput(WPARAM key)
+void InputSystem::StoreKeyUpInput(WPARAM key)
 {
 	currentUpKey = key;
 	keyUp = true;
 }
 
-void StoreMouseLeftDownInput(WPARAM key)
+void InputSystem::StoreMouseLeftDownInput(WPARAM key)
 {
 	leftMouseDown = true;
 	leftMouseUp = false;
 }
 
-void StoreMouseLeftUpInput(WPARAM key)
+void InputSystem::StoreMouseLeftUpInput(WPARAM key)
 {
 	leftMouseUp = true;
 	leftMouseDown = false;
 }
 
-void StoreMouseRightDownInput(WPARAM key)
+void InputSystem::StoreMouseRightDownInput(WPARAM key)
 {
 	rightMouseDown = true;
 	rightMouseUp = false;
 }
 
-void StoreMouseRightUpInput(WPARAM key)
+void InputSystem::StoreMouseRightUpInput(WPARAM key)
 {
 	rightMouseUp = true;
 	rightMouseDown = false;
 }
 
-bool GetKeyDownState(int key)
+bool InputSystem::GetKeyDownState(int key)
 {
 	if (currentDownKey == key)
 	{
@@ -84,7 +76,7 @@ bool GetKeyDownState(int key)
 	}
 }
 
-bool GetMouseLeftDownState()
+bool InputSystem::GetMouseLeftDownState()
 {
 	if (leftMouseDown)
 	{
@@ -96,7 +88,7 @@ bool GetMouseLeftDownState()
 	}
 }
 
-bool GetMouseLeftUpState()
+bool InputSystem::GetMouseLeftUpState()
 {
 	if (leftMouseUp)
 	{
@@ -108,7 +100,7 @@ bool GetMouseLeftUpState()
 	}
 }
 
-bool GetMouseRightDownState()
+bool InputSystem::GetMouseRightDownState()
 {
 	if (rightMouseDown)
 	{
@@ -120,7 +112,7 @@ bool GetMouseRightDownState()
 	}
 }
 
-bool GetMouseRightUpState()
+bool InputSystem::GetMouseRightUpState()
 {
 	if (rightMouseUp)
 	{
@@ -132,7 +124,7 @@ bool GetMouseRightUpState()
 	}
 }
 
-bool GetAsyncKey(WPARAM key)
+bool InputSystem::GetAsyncKey(WPARAM key)
 {
 	if (GetAsyncKeyState(key))
 	{
@@ -144,7 +136,7 @@ bool GetAsyncKey(WPARAM key)
 	}
 }
 
-bool GetKeyUpState(int key)
+bool InputSystem::GetKeyUpState(int key)
 {
 	if (currentUpKey == key)
 	{
@@ -159,7 +151,7 @@ bool GetKeyUpState(int key)
 
 //Two consecutive mouseups for example were reseting. Had to throw this in before msg pump
 //TODO: throw in an input mananger
-void InputEnd()
+void InputSystem::InputReset()
 {
 	rightMouseDown = false;
 	rightMouseUp = false;

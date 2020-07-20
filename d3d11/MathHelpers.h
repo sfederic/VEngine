@@ -5,9 +5,3 @@
 using namespace DirectX;
 
 void MatrixAddScale(float s, XMMATRIX& m);
-
-class MathHelpers
-{
-
-};
-

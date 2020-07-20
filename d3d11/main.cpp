@@ -15,6 +15,7 @@
 #include "Physics.h"
 #include "World.h"
 #include "FileSystem.h"
+#include "Debug.h"
 
 int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine, int cmdShow)
 {
@@ -30,7 +31,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	audioSystem.Init();
 
 	//UI SETUP
-	uiSystem.Init(renderSystem.swapchain);
+	uiSystem.Init();
 
 	//TEXTURE TESTING
 	ID3D11Resource* testTexture;
@@ -63,18 +64,19 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	//MAIN LOOP
 	while (coreSystem.msg.message != WM_QUIT)
 	{
+		const float deltaTime = coreSystem.deltaTime;
+
 		coreSystem.StartTimer();
 
 		coreSystem.HandleMessages();
 
 		g_FileSystem.Tick();
 		uiSystem.Tick();
-		uiSystem.Tick();
-		camera.Tick(&uiSystem, &coreSystem);
+		camera.Tick();
 
 		//RENDER
 		renderSystem.Tick();
-		renderSystem.RenderSetup(&camera, &uiSystem, debugLinesBuffer, coreSystem.deltaTime);
+		renderSystem.RenderSetup(&camera, debugLinesBuffer, coreSystem.deltaTime);
 
 		for (int i = 0; i < world.actorSystems.size(); i++)
 		{
@@ -82,9 +84,9 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		}
 
 		renderSystem.RenderBounds(&world, &camera);
-		renderSystem.RenderEnd(&uiSystem, &world, coreSystem.deltaTime, debugLinesBuffer, &camera);
+		renderSystem.RenderEnd(&world, deltaTime, debugLinesBuffer, &camera);
 
-		InputEnd();
+		inputSystem.InputReset();
 
 		coreSystem.EndTimer();
 	}

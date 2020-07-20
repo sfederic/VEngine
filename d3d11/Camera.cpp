@@ -18,7 +18,7 @@ Camera::Camera(XMVECTOR initialLocation)
 	UpdateViewMatrix();
 }
 
-void Camera::Tick(UISystem* ui, CoreSystem* win32)
+void Camera::Tick()
 {
 	if (actorAttachedTo)
 	{
@@ -26,7 +26,7 @@ void Camera::Tick(UISystem* ui, CoreSystem* win32)
 		location += attachedOffset;
 	}
 
-	MouseMove(ui->mousePos.x, ui->mousePos.y);
+	MouseMove(uiSystem->mousePos.x, uiSystem->mousePos.y);
 	UpdateViewMatrix();
 
 	if (GetAsyncKeyState('W'))

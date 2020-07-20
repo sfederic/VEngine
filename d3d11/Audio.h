@@ -3,8 +3,6 @@
 #include <xaudio2.h>
 #include <Windows.h>
 
-//TODO: Fix entire audio thing
-
 class VoiceCallback : public IXAudio2VoiceCallback
 {
 public: 

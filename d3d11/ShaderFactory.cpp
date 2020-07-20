@@ -1,5 +1,6 @@
 #include "ShaderFactory.h"
 #include <Windows.h>
+#include "RenderSystem.h"
 #include "DebugMenu.h"
 
 void ShaderFactory::CreateAllShaders(ID3D11Device* device)

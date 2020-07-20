@@ -1,6 +1,5 @@
 #pragma once
 
-#include "RenderSystem.h"
 #include <xaudio2.h>
 #include "Audio.h"
 #include <vector>

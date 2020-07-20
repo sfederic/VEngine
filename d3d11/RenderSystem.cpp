@@ -9,8 +9,8 @@
 #include "ShaderFactory.h"
 #include "MathHelpers.h"
 #include "World.h"
+#include "Debug.h"
 
-//GLOBALS
 ShaderFactory g_ShaderFactory;
 
 UINT strides = sizeof(Vertex);
@@ -19,7 +19,6 @@ UINT offsets = 0;
 ActorSystem debugBox;
 ActorSystem debugSphere;
 
-//Temp constant buffer data for base shader
 struct Matrices
 {
 	XMMATRIX model;
@@ -53,6 +52,8 @@ void RenderSystem::Tick()
 
 void RenderSystem::Init()
 {
+	viewport = { 0.f, 0.f, (float)coreSystem.windowWidth, (float)coreSystem.windowHeight, 0.f, 1.f };
+
 	CreateDevice();
 	CreateSwapchain();
 	CreateRTVAndDSV();
@@ -244,9 +245,7 @@ void RenderSystem::RenderActorSystem(ActorSystem* actorSystem, Camera* camera)
 	}
 }
 
-//TODO: don't like that it's not batched now, switching rasterizer states per actor system isn't good.
-//What I can do is make an actor collection per level so that the renderer can interatre over them and batch the rast state changes
-void RenderSystem::RenderBounds(World* world, Camera* camera)
+void RenderSystem::RenderBounds()
 {
 	if (bDrawBoundingBoxes || bDrawBoundingSpheres)
 	{
@@ -300,10 +299,10 @@ void RenderSystem::RenderBounds(World* world, Camera* camera)
 	}
 }
 
-void RenderSystem::RenderEnd(UISystem* ui, World* world, float deltaTime, ID3D11Buffer* debugBuffer, Camera* camera)
+void RenderSystem::RenderEnd(float deltaTime)
 {
 	//DRAW DEBUG LINES
-	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
+	/*context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
 	context->IASetVertexBuffers(0, 1, &debugBuffer, &strides, &offsets);
 
 	for (int i = 0; i < debugLines.size(); i++)
@@ -315,7 +314,7 @@ void RenderSystem::RenderEnd(UISystem* ui, World* world, float deltaTime, ID3D11
 		context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
 		context->Draw(debugLines.size(), 0);
-	}
+	}*/
 
 	//UI RENDERING 
 	//TODO: Put render and d2d stuff into func for profiling
@@ -469,10 +468,4 @@ ID3D11Buffer* RenderSystem::CreateDyamicBuffer(UINT byteWidth, UINT bindFlags, c
 	return buffer;
 }
 
-void DXTrace(HRESULT hr, const char* filename, const char* func, int line)
-{
-	_com_error err(hr);
-	char errmsg[1024];
-	snprintf(errmsg, sizeof(errmsg), "HR: %s\nFile: %s\nFunction: %s\nLine: %d", err.ErrorMessage(), filename, func, line);
-	MessageBox(0, errmsg, "Error", 0);
-}
+

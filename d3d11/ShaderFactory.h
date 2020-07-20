@@ -2,9 +2,8 @@
 
 #include <vector>
 #include <unordered_map>
-#include "RenderSystem.h"
 
-//NOTE: All the stuff in these files assumes using joined shaders
+//NOTE: All the stuff in these files assumes using joined shaders for now (eg. vert/pixel in same file)
 
 enum class EShaderType
 {
@@ -27,33 +26,32 @@ struct ShaderItem
 {
 	ShaderItem() {};
 	
-	ShaderItem(const wchar_t* _filename, EShaderType _type)
+	ShaderItem(const wchar_t* filenameInit, EShaderType typeInit)
 	{
-		wcscpy_s(filename, 64 * 2, _filename);
-		type = _type;
+		wcscpy_s(filename, 64 * 2, filenameInit);
+		type = typeInit;
 	}
 
 	wchar_t filename[64];
 	EShaderType type;
 
-	ID3DBlob* vertexCode; //Can you do away with the interfaces and store the blobs contiguously?
-	ID3DBlob* pixelCode; //TODO: make sure to free() after future work with InputLayout
+	struct ID3DBlob* vertexCode; 
+	struct ID3DBlob* pixelCode; 
 
-	ID3D11VertexShader* vertexShader;
-	ID3D11PixelShader* pixelShader;
+	struct ID3D11VertexShader* vertexShader;
+	struct ID3D11PixelShader* pixelShader;
 };
 
 class ShaderFactory
 {
 public:
-	void CreateAllShaders(ID3D11Device* device);
+	void CreateAllShaders(struct ID3D11Device* device);
 	void CompileAllShadersFromFile();
 	void InitHotLoading();
 	void CleanUpShaders();
-	void HotReloadShaders(ID3D11Device* device, class DebugMenu* debugMenu);
+	void HotReloadShaders();
 
-	std::vector<ShaderItem> shaders;
-	std::unordered_map<std::wstring, ShaderItem*> shadersMap; //I'm watching you std::wstring. Always watching
+	std::unordered_map<std::wstring, ShaderItem> shaders;
 
 	HANDLE hotreloadHandle;
 };

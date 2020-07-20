@@ -1,19 +1,19 @@
 #pragma once
 
-#include <vector>
 #include "RenderSystem.h"
+#include <vector>
 #include <DirectXMath.h>
 
 using namespace DirectX;
 
 struct OBJData
 {
-	std::vector<Vertex> verts;
-
 	UINT GetByteWidth()
 	{
 		return (UINT)(sizeof(Vertex) * verts.size());
 	}
+
+	std::vector<Vertex> verts;
 };
 
-bool loadOBJFile(const char* filename, OBJData& data);
+bool LoadOBJFile(const char* filename, OBJData& data);

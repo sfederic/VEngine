@@ -3,9 +3,6 @@
 #include <vector>
 #include "UISystem.h"
 
-int DebugPrint(const char* format, ...);
-int Print(const char* format, va_list args);
-
 enum class EMenuID
 {
 	ACTORS,
@@ -42,8 +39,7 @@ class DebugMenu
 {
 public:
 	DebugMenu();
-
-	void Tick(class UISystem* ui, class RenderSystem* dx, class World* world, float deltaTime);
+	void Tick(class World* world, float deltaTime);
 
 	std::vector<MenuItem> menuItems;
 	std::vector<DebugNotification> notifications;

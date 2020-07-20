@@ -4,7 +4,6 @@
 #include <DirectXCollision.h>
 #include <vector>
 #include "Obj.h"
-#include "Array.h"
 
 using namespace DirectX;
 

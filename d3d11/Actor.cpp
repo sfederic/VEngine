@@ -56,14 +56,9 @@ void Actor::SetScale(XMVECTOR scale)
 }
 
 //ACTOR SYSTEM
-ActorSystem::ActorSystem()
-{
-
-}
-
 void ActorSystem::CreateActors(const char* modelFilename, RenderSystem* dx, int numActorsToSpawn)
 {
-	if (loadOBJFile(modelFilename, modelData))
+	if (LoadOBJFile(modelFilename, modelData))
 	{
 		UINT byteWidth = modelData.GetByteWidth();
 		numVertices = (byteWidth * actors.size()) / sizeof(Vertex);
@@ -80,15 +75,13 @@ void ActorSystem::CreateActors(const char* modelFilename, RenderSystem* dx, int 
 			Actor actor;
 			actor.transform.r[3] = XMVectorSet(i, i, i, 1.f);
 			actor.vertexBufferOffset = i * modelData.GetByteWidth();
-			//actor.boundingBox = boundingBox;
-			//actor.boundingSphere = boundingSphere;
 
 			actors.push_back(actor);
 		}
 	}
 	else
 	{
-		OutputDebugString("Actors failed to load");
+		DebugPrint("Actors failed to load");
 	}
 }
 
@@ -96,8 +89,6 @@ void ActorSystem::AddActor()
 {
 	Actor actor = Actor();
 	actor.vertexBufferOffset = actors.size() * modelData.GetByteWidth();
-	//actor.boundingBox = boundingBox;
-	//actor.boundingSphere = boundingSphere;
 
 	actors.push_back(actor);
 }

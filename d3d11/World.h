@@ -2,7 +2,8 @@
 
 #include <vector>
 
-//Class acts as the current game world, including all actors 
+World* GetWorld();
+
 class World
 {
 public:
@@ -12,5 +13,3 @@ public:
 };
 
 static World g_CurrentWorld;
-
-World* GetWorld();

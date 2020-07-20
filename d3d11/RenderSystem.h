@@ -3,15 +3,11 @@
 #pragma comment(lib, "d3d11")
 #pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "d3dcompiler.lib")
-#pragma comment(lib, "d2d1.lib")
 
 #include <d3d11_1.h>
 #include <d3dcompiler.h>
 #include <dxgi1_6.h>
-#include <d2d1_1.h>
-#include <comdef.h>
 #include <DirectXMath.h>
-#include "CoreSystem.h"
 #include <vector>
 
 using namespace DirectX;
@@ -24,9 +20,6 @@ struct Vertex
 };
 
 extern Vertex debugLineData[2];
-
-void DXTrace(HRESULT hr, const char* filename, const char* func, int line);
-#define HR(hr) if(hr != S_OK) { DXTrace(hr, __FILE__, #hr, __LINE__); throw; }
 
 class RenderSystem
 {
@@ -42,10 +35,10 @@ public:
 	void CreateVertexBuffer(UINT size, const void* data, class ActorSystem* actor);
 	void CreateConstantBuffer();
 
-	void RenderSetup(class Camera* camera, class UISystem* ui, struct ID3D11Buffer* debugBuffer, float deltaTime);
-	void RenderActorSystem(class ActorSystem* actorSystem, class Camera* camera);
-	void RenderBounds(class World* world, class Camera* camera);
-	void RenderEnd(UISystem* ui, World* world, float deltaTime, ID3D11Buffer* debugBuffer, Camera* camera);
+	void RenderSetup(float deltaTime);
+	void RenderActorSystem(class ActorSystem* actorSystem);
+	void RenderBounds();
+	void RenderEnd(float deltaTime);
 
 	std::vector<IDXGIAdapter1*> adapters;
 	std::vector<DXGI_ADAPTER_DESC1> adaptersDesc;
@@ -59,7 +52,7 @@ public:
 
 	static const int frameCount = 2;
 
-	D3D11_VIEWPORT viewport = { 0.f, 0.f, (float)coreSystem.windowWidth, (float)coreSystem.windowHeight, 0.f, 1.f };
+	D3D11_VIEWPORT viewport;
 
 	ID3D11Device* device;
 	ID3D11DeviceContext* context;

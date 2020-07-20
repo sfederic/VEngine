@@ -14,5 +14,5 @@ struct Ray
 	int actorSystemIndex = 0;
 };
 
-void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, class ID3D11Buffer* debugBuffer, class RenderSystem* dx);
+void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, class ID3D11Buffer* debugBuffer);
 bool Raycast(Ray& ray, int sx, int sy, class Camera* camera, class ActorSystem* actorSystem);

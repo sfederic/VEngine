@@ -1,9 +1,15 @@
+#pragma comment(lib, "d2d1.lib")
+#pragma comment(lib, "dwrite.lib")
+
+#include <d2d1_1.h>
+#include <dwrite_1.h>
+
 #include "UISystem.h"
 #include "RenderSystem.h"
 #include "CoreSystem.h"
 #include "Input.h"
 
-void UISystem::Init(IDXGISwapChain* swapchain)
+void UISystem::Init()
 {
 	//Direct2D Init
 	IDXGISurface* surface;

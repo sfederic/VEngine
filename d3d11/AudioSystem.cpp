@@ -12,7 +12,6 @@
 void AudioSystem::Init()
 {
 	HR(XAudio2Create(&audioEngine));
-	//CoInitialize(NULL); //Needs to be called before CreateMasteringVoice. Comdef throws an error.
 	HR(audioEngine->CreateMasteringVoice(&masteringVoice));
 }
 

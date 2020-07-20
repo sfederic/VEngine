@@ -1,27 +1,36 @@
 #pragma once
 
-#include <Windows.h>
+#include <minwindef.h>
 
-extern WPARAM currentUpKey;
-extern WPARAM currentDownKey;
-extern bool leftMouseUp;
-extern bool leftMouseDown;
-extern bool rightMouseUp;
-extern bool rightMouseDown;
+class InputSystem
+{
+public:
+	bool GetAnyKeyUp();
+	bool GetAnyKeyDown();
+	void StoreKeyDownInput(WPARAM key);
+	void StoreKeyUpInput(WPARAM key);
+	void StoreMouseLeftDownInput(WPARAM key);
+	void StoreMouseLeftUpInput(WPARAM key);
+	void StoreMouseRightDownInput(WPARAM key);
+	void StoreMouseRightUpInput(WPARAM key);
+	bool GetKeyUpState(int key);
+	bool GetKeyDownState(int key);
+	bool GetMouseLeftDownState();
+	bool GetMouseLeftUpState();
+	bool GetMouseRightDownState();
+	bool GetMouseRightUpState();
+	bool GetAsyncKey(WPARAM key);
+	void InputReset();
 
-bool GetAnyKeyUp();
-bool GetAnyKeyDown();
-void StoreKeyDownInput(WPARAM key);
-void StoreKeyUpInput(WPARAM key);
-void StoreMouseLeftDownInput(WPARAM key);
-void StoreMouseLeftUpInput(WPARAM key);
-void StoreMouseRightDownInput(WPARAM key);
-void StoreMouseRightUpInput(WPARAM key);
-bool GetKeyUpState(int key);
-bool GetKeyDownState(int key);
-bool GetMouseLeftDownState();
-bool GetMouseLeftUpState();
-bool GetMouseRightDownState();
-bool GetMouseRightUpState();
-bool GetAsyncKey(WPARAM key); //Just a wrapper call to GetAsyncKeyState for portability purposes
-void InputEnd();
+	WPARAM currentUpKey;
+	WPARAM currentDownKey;
+	bool leftMouseUp;
+	bool leftMouseDown;
+	bool rightMouseUp;
+	bool rightMouseDown;
+	bool keyUp;
+	bool keyDown;
+};
+
+static InputSystem inputSystem;
+
