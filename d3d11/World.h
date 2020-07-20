@@ -2,8 +2,6 @@
 
 #include <vector>
 
-World* GetWorld();
-
 class World
 {
 public:
@@ -12,4 +10,6 @@ public:
 	char name[64];
 };
 
-static World g_CurrentWorld;
+static World currentWorld;
+
+World* GetWorld();

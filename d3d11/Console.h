@@ -11,10 +11,11 @@ class Console
 {
 public: 
 	void ConsoleInput();
-	void Tick(class World* world);
-	void ExecuteString(class World* world);
+	void Tick();
+	void ExecuteString();
 	void DrawViewItems();
 
 	std::vector<ConsoleViewItem> viewItems;
 };
 
+static Console console;

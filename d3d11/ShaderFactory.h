@@ -1,5 +1,6 @@
 #pragma once
 
+#include "RenderSystem.h"
 #include <vector>
 #include <unordered_map>
 
@@ -35,11 +36,11 @@ struct ShaderItem
 	wchar_t filename[64];
 	EShaderType type;
 
-	struct ID3DBlob* vertexCode; 
-	struct ID3DBlob* pixelCode; 
+	ID3DBlob* vertexCode; 
+	ID3DBlob* pixelCode; 
 
-	struct ID3D11VertexShader* vertexShader;
-	struct ID3D11PixelShader* pixelShader;
+	ID3D11VertexShader* vertexShader;
+	ID3D11PixelShader* pixelShader;
 };
 
 class ShaderFactory
@@ -51,7 +52,6 @@ public:
 	void CleanUpShaders();
 	void HotReloadShaders();
 
-	std::unordered_map<std::wstring, ShaderItem> shaders;
-
-	HANDLE hotreloadHandle;
+	std::vector<ShaderItem> shaders;
+	std::unordered_map<std::wstring, ShaderItem*> shaderMap;
 };

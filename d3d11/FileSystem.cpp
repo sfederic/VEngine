@@ -2,16 +2,18 @@
 #include "Actor.h"
 #include "World.h"
 #include "DebugMenu.h"
+#include "Input.h"
+#include "Debug.h"
 
 void FileSystem::Tick()
 {
 	//Test world load file handling.
-	if (GetKeyUpState('4'))
+	if (inputSystem.GetKeyUpState('4'))
 	{
 		g_FileSystem.WriteAllActorSystems(GetWorld(), "LevelSaves/test.sav");
 	}
 
-	if (GetKeyUpState('5'))
+	if (inputSystem.GetKeyUpState('5'))
 	{
 		g_FileSystem.ReadAllActorSystems(GetWorld(), "LevelSaves/test.sav");
 	}
@@ -33,7 +35,7 @@ void FileSystem::WriteAllActorSystems(World* world, const char* filename)
 	}
 
 	DebugPrint("All actor systems saved.\n");
-	g_DebugMenu.notifications.push_back(DebugNotification(L"All actor systems saved"));
+	debugMenu.notifications.push_back(DebugNotification(L"All actor systems saved"));
 
 	fclose(file);
 }
@@ -52,7 +54,7 @@ void FileSystem::ReadAllActorSystems(World* world, const char* filename)
 	}
 
 	DebugPrint("All actor systems loaded.\n");
-	g_DebugMenu.notifications.push_back(DebugNotification(L"All actor systems loaded."));
+	debugMenu.notifications.push_back(DebugNotification(L"All actor systems loaded."));
 
 	fclose(file);
 }

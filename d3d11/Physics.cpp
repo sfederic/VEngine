@@ -4,6 +4,8 @@
 #include "UISystem.h"
 #include "Actor.h"
 #include "DebugMenu.h"
+#include "CoreSystem.h"
+#include "Debug.h"
 
 void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, ID3D11Buffer* debugBuffer, RenderSystem* dx)
 {
@@ -23,7 +25,6 @@ void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, ID3D11Buf
 	dx->context->UpdateSubresource(debugBuffer, 0, nullptr, dx->debugLines.data(), 0, 0);
 }
 
-//Just for bounding boxes for now
 bool Raycast(Ray& ray, int sx, int sy, Camera* camera, ActorSystem* actorSystem)
 {
 	float vx = (2.f * sx / coreSystem.windowWidth - 1.0f) / camera->proj.r[0].m128_f32[0];

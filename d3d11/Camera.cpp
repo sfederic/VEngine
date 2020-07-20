@@ -18,7 +18,7 @@ Camera::Camera(XMVECTOR initialLocation)
 	UpdateViewMatrix();
 }
 
-void Camera::Tick()
+void Camera::Tick(float deltaTime)
 {
 	if (actorAttachedTo)
 	{
@@ -26,32 +26,32 @@ void Camera::Tick()
 		location += attachedOffset;
 	}
 
-	MouseMove(uiSystem->mousePos.x, uiSystem->mousePos.y);
+	MouseMove(uiSystem.mousePos.x, uiSystem.mousePos.y);
 	UpdateViewMatrix();
 
 	if (GetAsyncKeyState('W'))
 	{
-		MoveForward(5.f * win32->deltaTime);
+		MoveForward(5.f * deltaTime);
 	}
 	if (GetAsyncKeyState('S'))
 	{
-		MoveForward(-5.f * win32->deltaTime);
+		MoveForward(-5.f * deltaTime);
 	}
 	if (GetAsyncKeyState('D'))
 	{
-		Strafe(5.f * win32->deltaTime);
+		Strafe(5.f * deltaTime);
 	}
 	if (GetAsyncKeyState('A'))
 	{
-		Strafe(-5.f * win32->deltaTime);
+		Strafe(-5.f * deltaTime);
 	}
 	if (GetAsyncKeyState('Q'))
 	{
-		MoveUp(-5.f * win32->deltaTime);
+		MoveUp(-5.f * deltaTime);
 	}
 	if (GetAsyncKeyState('E'))
 	{
-		MoveUp(5.f * win32->deltaTime);
+		MoveUp(5.f * deltaTime);
 	}
 }
 
@@ -86,7 +86,7 @@ void Camera::UpdateViewMatrix()
 	view.r[3].m128_f32[3] = 1.0f;
 }
 
-//TODO: move all camera movement code to Actor
+//TODO: movement code here no good
 void Camera::Strafe(float d)
 {
 	XMVECTOR s = XMVectorReplicate(d);
@@ -178,4 +178,9 @@ void Camera::AttachTo(Actor* actor)
 
 	location = actor->GetPositionVector();
 	location += attachedOffset;
+}
+
+Camera* GetPlayerCamera()
+{
+	return &editorCamera;
 }

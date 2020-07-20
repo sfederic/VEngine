@@ -1,7 +1,9 @@
 #include "ShaderFactory.h"
 #include <Windows.h>
-#include "RenderSystem.h"
+#include "Debug.h"
 #include "DebugMenu.h"
+
+HANDLE hotreloadHandle;
 
 void ShaderFactory::CreateAllShaders(ID3D11Device* device)
 {
@@ -15,13 +17,8 @@ void ShaderFactory::CreateAllShaders(ID3D11Device* device)
 void ShaderFactory::CompileAllShadersFromFile()
 {
     //https://www.bfilipek.com/2019/04/dir-iterate.html
-    //Was something wrong with microsofts docs on this one, too verbose
-
     WIN32_FIND_DATAW data;
     HANDLE file = FindFirstFileW(L"Shaders/*.hlsl", &data);
-
-    //TODO: even though going to move to .cso files later text files still good for debugging
-    //Above at FindFirstFile at the wildcard, maybe utilise .vertex/.pixel filenames and determine type off that
 
     if (file == INVALID_HANDLE_VALUE)
     {
@@ -32,7 +29,7 @@ void ShaderFactory::CompileAllShadersFromFile()
     ShaderItem shaderItem;
 
     shaders.clear();
-    shadersMap.clear();
+    shaderMap.clear();
 
     do
     {
@@ -45,13 +42,8 @@ void ShaderFactory::CompileAllShadersFromFile()
     UINT flags = D3DCOMPILE_SKIP_OPTIMIZATION | D3DCOMPILE_DEBUG;
     ID3DBlob* error;
 
-    //TODO: Come back to this code. See if its any better than the static shader file declarations
-    //Also check whether its worth splitting up shader stages (vertex, geom, etc) per file
-    //Right now its okay, shader input and output might be a problem if that changes
     for (int i = 0; i < shaders.size(); i++)
     {
-        shadersMap[shaders[i].filename] = &shaders[i];
-
         const char* vsEntry = "VSMain";
         const char* vsTarget = "vs_5_0";
 
@@ -91,7 +83,6 @@ void ShaderFactory::InitHotLoading()
 
 void ShaderFactory::CleanUpShaders()
 {
-    //Seems to work for now. I'm sure there's a caveat in D3D11
     for (int i = 0; i < shaders.size(); i++)
     {
         shaders[i].vertexCode->Release();
@@ -102,7 +93,7 @@ void ShaderFactory::CleanUpShaders()
     }
 }
 
-void ShaderFactory::HotReloadShaders(ID3D11Device* device, DebugMenu* debugMenu)
+void ShaderFactory::HotReloadShaders()
 {
     //TODO: right now Im stuck recompiling every single shader if I can't get the filename
     //Reloading the shaders also pushes the camera back on the z-axis. Figure that one out (random negative val?)
@@ -111,16 +102,16 @@ void ShaderFactory::HotReloadShaders(ID3D11Device* device, DebugMenu* debugMenu)
 
     //https://docs.microsoft.com/en-us/windows/win32/fileio/obtaining-directory-change-notifications
 
-    BOOL nextChange = FindNextChangeNotification(hotreloadHandle);
+    bool nextChange = FindNextChangeNotification(hotreloadHandle);
     if (nextChange)
     {
         DebugPrint("Shader reload start...\n");
         CleanUpShaders();
         CompileAllShadersFromFile();
-        CreateAllShaders(device);
+        CreateAllShaders(renderSystem.device);
         DebugPrint("Shader reload complete\n");
 
-        debugMenu->notifications.push_back(DebugNotification(L"Shader reload complete."));
+        //g_DebugMenu->notifications.push_back(DebugNotification(L"Shader reload complete."));
     }
 
     FindCloseChangeNotification(hotreloadHandle);

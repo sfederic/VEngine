@@ -1,7 +1,3 @@
-#pragma comment(lib, "d3d11.lib")
-#pragma comment(lib, "dxgi.lib")
-#pragma comment(lib, "d3dcompiler.lib")
-
 #include "RenderSystem.h"
 #include "CoreSystem.h"
 #include "Actor.h"
@@ -35,20 +31,20 @@ Vertex debugLineData[2];
 
 void RenderSystem::Tick()
 {
-	if (GetKeyUpState('1'))
+	if (inputSystem.GetKeyUpState('1'))
 	{
 		activeRastState = rastStateWireframe;
 	}
-	if (GetKeyUpState('2'))
+	if (inputSystem.GetKeyUpState('2'))
 	{
 		activeRastState = rastStateSolid;
 	}
 
-	if (GetKeyUpState('B'))
+	if (inputSystem.GetKeyUpState('B'))
 	{
 		bDrawBoundingBoxes = !bDrawBoundingBoxes;
 	}
-	if (GetKeyUpState('V'))
+	if (inputSystem.GetKeyUpState('V'))
 	{
 		bDrawBoundingSpheres = !bDrawBoundingSpheres;
 	}
@@ -219,18 +215,17 @@ void RenderSystem::CreateConstantBuffer()
 	cbMatrices = CreateDefaultBuffer(sizeof(Matrices), D3D11_BIND_CONSTANT_BUFFER, &matrices);
 }
 
-void RenderSystem::RenderActorSystem(ActorSystem* actorSystem, Camera* camera)
+void RenderSystem::RenderActorSystem(ActorSystem* actorSystem)
 {
-	auto vs = g_ShaderFactory.shadersMap.find(actorSystem->shaderName);
+	auto shader = g_ShaderFactory.shaderMap.find(actorSystem->shaderName);
 
-	if (vs == g_ShaderFactory.shadersMap.end())
+	if (shader == g_ShaderFactory.shaderMap.end())
 	{
 		DebugPrint("vertex shader file name %ls not found\n", actorSystem->shaderName);
-		throw;
 	}
 
-	context->VSSetShader(vs->second->vertexShader, nullptr, 0);
-	context->PSSetShader(vs->second->pixelShader, nullptr, 0);
+	context->VSSetShader(shader->second->vertexShader, nullptr, 0);
+	context->PSSetShader(shader->second->pixelShader, nullptr, 0);
 
 	context->IASetVertexBuffers(0, 1, &actorSystem->vertexBuffer, &strides, &offsets);
 
@@ -238,7 +233,7 @@ void RenderSystem::RenderActorSystem(ActorSystem* actorSystem, Camera* camera)
 	{
 		if (actorSystem->actors[i].bRender)
 		{
-			matrices.view = camera->view;
+			matrices.view = GetPlayerCamera()->view;
 			matrices.model = actorSystem->actors[i].transform;
 			matrices.mvp = matrices.model * matrices.view * matrices.proj;
 			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
@@ -251,6 +246,9 @@ void RenderSystem::RenderActorSystem(ActorSystem* actorSystem, Camera* camera)
 
 void RenderSystem::RenderBounds()
 {
+	World* world = GetWorld();
+	Camera* camera = GetPlayerCamera();
+
 	if (bDrawBoundingBoxes || bDrawBoundingSpheres)
 	{
 		context->RSSetState(rastStateWireframe);
@@ -258,7 +256,7 @@ void RenderSystem::RenderBounds()
 
 	if (bDrawBoundingBoxes)
 	{
-		auto boxIt = g_ShaderFactory.shadersMap.find(debugBox.shaderName);
+		auto boxIt = g_ShaderFactory.shaderMap.find(debugBox.shaderName);
 		context->VSSetShader(boxIt->second->vertexShader, nullptr, 0);
 		context->PSSetShader(boxIt->second->pixelShader, nullptr, 0);
 
@@ -281,7 +279,7 @@ void RenderSystem::RenderBounds()
 
 	if (bDrawBoundingSpheres)
 	{
-		auto sphereIt = g_ShaderFactory.shadersMap.find(debugSphere.shaderName);
+		auto sphereIt = g_ShaderFactory.shaderMap.find(debugSphere.shaderName);
 		context->VSSetShader(sphereIt->second->vertexShader, nullptr, 0);
 		context->PSSetShader(sphereIt->second->pixelShader, nullptr, 0);
 
@@ -322,25 +320,24 @@ void RenderSystem::RenderEnd(float deltaTime)
 
 	//UI RENDERING 
 	//TODO: Put render and d2d stuff into func for profiling
-	ui->d2dRenderTarget->BeginDraw();
+	uiSystem.d2dRenderTarget->BeginDraw();
 
 	//Test console rendering and work. Might need to put it into a system
-	Console::Tick(ui, this, world);
-	Console::DrawViewItems(ui);
+	console.Tick();
+	console.DrawViewItems();
 
 	//Debug menu testing (really need to fix this d2d stuff in Render)
-	g_DebugMenu.Tick(ui, this, world, deltaTime);
-
+	debugMenu.Tick(GetWorld(), deltaTime);
 
 	//UI View testing
-	for (int viewIndex = 0; viewIndex < ui->uiViews.size(); viewIndex++)
+	for (int viewIndex = 0; viewIndex < uiSystem.uiViews.size(); viewIndex++)
 	{
-		ui->uiViews[viewIndex].Tick(ui);
+		uiSystem.uiViews[viewIndex].Tick();
 	}
 
 
 	//END UI RENDERING
-	ui->d2dRenderTarget->EndDraw();
+	uiSystem.d2dRenderTarget->EndDraw();
 
 	//PRESENT
 	HR(swapchain->Present(1, 0));
@@ -386,7 +383,7 @@ void RenderSystem::RenderEnd(float deltaTime)
 	}
 }
 
-void RenderSystem::RenderSetup(Camera* camera, UISystem* ui, ID3D11Buffer* debugBuffer, float deltaTime)
+void RenderSystem::RenderSetup(float deltaTime)
 {
 	if (bQueryGPU)
 	{
@@ -412,9 +409,9 @@ void RenderSystem::RenderSetup(Camera* camera, UISystem* ui, ID3D11Buffer* debug
 
 	context->RSSetState(activeRastState);
 
-	if (GetKeyUpState('3'))
+	if (inputSystem.GetKeyUpState('3'))
 	{
-		g_ShaderFactory.HotReloadShaders(device, &g_DebugMenu);
+		g_ShaderFactory.HotReloadShaders();
 	}
 }
 

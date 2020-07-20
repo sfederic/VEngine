@@ -7,9 +7,10 @@ using namespace DirectX;
 class Camera 
 {
 public:
+	Camera() {};
 	Camera(XMVECTOR initialLocation); //Set axis to default LH
 
-	void Tick();
+	void Tick(float deltaTime);
 	void UpdateViewMatrix();
 	void Strafe(float d);
 	void MoveForward(float d);
@@ -32,3 +33,5 @@ public:
 };
 
 static Camera editorCamera;
+
+Camera* GetPlayerCamera();

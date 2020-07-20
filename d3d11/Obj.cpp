@@ -1,7 +1,7 @@
 #include "Obj.h"
 #include <Windows.h>
 
-bool loadOBJFile(const char* filename, OBJData& data)
+bool LoadOBJFile(const char* filename, OBJData& data)
 {
 	std::vector<XMFLOAT3> v; //Vertex posisitons
 	std::vector<XMFLOAT2> vt; //Texcoords

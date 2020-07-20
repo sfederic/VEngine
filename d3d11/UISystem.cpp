@@ -1,9 +1,3 @@
-#pragma comment(lib, "d2d1.lib")
-#pragma comment(lib, "dwrite.lib")
-
-#include <d2d1_1.h>
-#include <dwrite_1.h>
-
 #include "UISystem.h"
 #include "RenderSystem.h"
 #include "CoreSystem.h"
@@ -143,7 +137,7 @@ void UISystem::AddView(const wchar_t* text, int actorSystemIndex, int actorIndex
 	uiViews.push_back(UIActorView(text, uiSystem.mousePos.x, uiSystem.mousePos.y, actorSystemIndex, actorIndex));
 }
 
-void UIActorView::Tick(UISystem* ui)
+void UIActorView::Tick()
 {
 	viewRect.bottom = viewRect.top + 150.f;
 	viewRect.right = viewRect.left + 100.f;
@@ -153,14 +147,14 @@ void UIActorView::Tick(UISystem* ui)
 	closeRect.left = titleRect.left + 80.f;
 	closeRect.bottom - titleRect.bottom;
 
-	ui->d2dRenderTarget->FillRectangle(viewRect, ui->brushTransparentMenu);
-	ui->d2dRenderTarget->FillRectangle(titleRect, ui->brushText);
-	ui->d2dRenderTarget->DrawTextA(title, wcslen(title), ui->textFormat, titleRect, ui->brushTextBlack);
+	uiSystem.d2dRenderTarget->FillRectangle(viewRect, uiSystem.brushTransparentMenu);
+	uiSystem.d2dRenderTarget->FillRectangle(titleRect, uiSystem.brushText);
+	uiSystem.d2dRenderTarget->DrawTextA(title, wcslen(title), uiSystem.textFormat, titleRect, uiSystem.brushTextBlack);
 
-	if (ui->Button(viewRect, ui->brushTransparentMenu))
+	if (uiSystem.Button(viewRect, uiSystem.brushTransparentMenu))
 	{
-		ui->ResetAllActiveUIViews();
-		this->bIsActive = true;
+		uiSystem.ResetAllActiveUIViews();
+		bIsActive = true;
 	}
 
 	/*if (ui->Button(closeRect, ui->brushCloseBox))
@@ -171,12 +165,12 @@ void UIActorView::Tick(UISystem* ui)
 	//TODO: view positioning is sloppy. GetAsyncKey is reading in true for the entire frame regardless of previous mouse state functions
 	if (bIsActive)
 	{
-		if(ui->DragButton(viewRect, ui->brushTextBlack))
+		if(uiSystem.DragButton(viewRect, uiSystem.brushTextBlack))
 		{
-			if (GetAsyncKey(VK_LBUTTON))
+			if (inputSystem.GetAsyncKey(VK_LBUTTON))
 			{
-				viewRect.left = (float)ui->mousePos.x - 50.f;
-				viewRect.top = (float)ui->mousePos.y - 75.f;
+				viewRect.left = (float)uiSystem.mousePos.x - 50.f;
+				viewRect.top = (float)uiSystem.mousePos.y - 75.f;
 				viewRect.right = viewRect.left + 100.f;
 				viewRect.bottom = viewRect.top + 150.f;
 			}

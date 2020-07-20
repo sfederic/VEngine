@@ -37,8 +37,8 @@ void DebugMenu::Tick(World* world, float deltaTime)
 		{
 			notifications[i].timeOnScreen += deltaTime;
 			float notificationOffsetY = 20.f * i;
-			ui->d2dRenderTarget->DrawTextA(notifications[i].text, wcslen(notifications[i].text), ui->textFormat,
-				{ 0.f, notificationOffsetY, 1000.f, 1000.f }, ui->brushText);
+			uiSystem.d2dRenderTarget->DrawTextA(notifications[i].text, wcslen(notifications[i].text), uiSystem.textFormat,
+				{ 0.f, notificationOffsetY, 1000.f, 1000.f }, uiSystem.brushText);
 		}
 		else
 		{
@@ -47,13 +47,13 @@ void DebugMenu::Tick(World* world, float deltaTime)
 	}
 
 	//Open key for menu
-	if(GetKeyUpState(VK_TAB))
+	if(inputSystem.GetKeyUpState(VK_TAB))
 	{
 		bDebugMenuActive = !bDebugMenuActive;
 		bSubMenuOpen = false;
 		subMenuCursorIndex = 0;
 	}
-	if (GetKeyUpState(VK_BACK))
+	if (inputSystem.GetKeyUpState(VK_BACK))
 	{
 		bSubMenuOpen = false;
 		subMenuCursorIndex = 0;
@@ -65,18 +65,18 @@ void DebugMenu::Tick(World* world, float deltaTime)
 		float menuHeight = (menuItems.size() * 20.f) + 30.f;
 
 		//Main window
-		ui->d2dRenderTarget->FillRectangle({ menuStartPosX, menuStartPosY, menuWidth, menuHeight }, ui->brushTransparentMenu);
+		uiSystem.d2dRenderTarget->FillRectangle({ menuStartPosX, menuStartPosY, menuWidth, menuHeight }, uiSystem.brushTransparentMenu);
 
 		float textOffsetY = 0.f;
 
-		if (GetKeyDownState(VK_DOWN))
+		if (inputSystem.GetKeyDownState(VK_DOWN))
 		{
 			if (menuCursorIndex < (menuItems.size() - 1))
 			{
 				menuCursorIndex++;
 			}
 		}
-		else if (GetKeyDownState(VK_UP))
+		else if (inputSystem.GetKeyDownState(VK_UP))
 		{
 			if (menuCursorIndex > 0)
 			{
@@ -84,7 +84,7 @@ void DebugMenu::Tick(World* world, float deltaTime)
 			}
 		}
 
-		if (GetKeyUpState(VK_RETURN))
+		if (inputSystem.GetKeyUpState(VK_RETURN))
 		{
 			//menuItems[menuCursorIndex].Open();
 			bSubMenuOpen = true;
@@ -97,13 +97,13 @@ void DebugMenu::Tick(World* world, float deltaTime)
 
 			if (menuCursorIndex != i)
 			{
-				ui->d2dRenderTarget->DrawTextA(menuItems[i].name, wcslen(menuItems[i].name), ui->textFormat, { menuStartPosX + textOffsetX,
-					menuStartPosY + textOffsetY, menuWidth, textOffsetY }, ui->brushText);
+				uiSystem.d2dRenderTarget->DrawTextA(menuItems[i].name, wcslen(menuItems[i].name), uiSystem.textFormat, { menuStartPosX + textOffsetX,
+					menuStartPosY + textOffsetY, menuWidth, textOffsetY }, uiSystem.brushText);
 			}
 			else
 			{
-				ui->d2dRenderTarget->DrawTextA(menuItems[i].name, wcslen(menuItems[i].name), ui->textFormat, { menuStartPosX + textOffsetX,
-					menuStartPosY + textOffsetY, menuWidth, textOffsetY }, ui->brushTransparentMenu);
+				uiSystem.d2dRenderTarget->DrawTextA(menuItems[i].name, wcslen(menuItems[i].name), uiSystem.textFormat, { menuStartPosX + textOffsetX,
+					menuStartPosY + textOffsetY, menuWidth, textOffsetY }, uiSystem.brushTransparentMenu);
 			}
 		}
 	}
@@ -111,17 +111,17 @@ void DebugMenu::Tick(World* world, float deltaTime)
 	//Handle opened debug menu option
 	if (bSubMenuOpen)
 	{
-		if (GetKeyUpState(VK_RETURN))
+		if (inputSystem.GetKeyUpState(VK_RETURN))
 		{
 			//... On/Off code for various switches
-			dx->bQueryGPU = false;
-			dx->bQueryGPUInner = false;
+			renderSystem.bQueryGPU = false;
+			renderSystem.bQueryGPUInner = false;
 		}
 
 		float subMenuHeight = (menuItems[menuCursorIndex].subMenuItems.size() * 20.f) + 30.f;
 
 		//Draw menu background
-		ui->d2dRenderTarget->FillRectangle({ menuStartPosX, menuStartPosY, menuWidth, subMenuHeight }, ui->brushTransparentMenu);
+		uiSystem.d2dRenderTarget->FillRectangle({ menuStartPosX, menuStartPosY, menuWidth, subMenuHeight }, uiSystem.brushTransparentMenu);
 
 		float subMenuTextOffsetY = 0.f;
 
@@ -137,19 +137,19 @@ void DebugMenu::Tick(World* world, float deltaTime)
 			break;
 
 		case EMenuID::RENDERING:
-			dx->bQueryGPU = true;
+			renderSystem.bQueryGPU = true;
 
 			wchar_t renderText[64];
-			_snwprintf_s(renderText, sizeof(renderText), L"D3D11 Timer: %f", dx->renderTime);
+			_snwprintf_s(renderText, sizeof(renderText), L"D3D11 Timer: %f", renderSystem.renderTime);
 			menuItems[menuCursorIndex].subMenuItems[0] = renderText;
 
 			wchar_t gpuText[64];
-			_snwprintf_s(gpuText, sizeof(gpuText), L"GPU: %ls", dx->adaptersDesc[0].Description);
+			_snwprintf_s(gpuText, sizeof(gpuText), L"GPU: %ls", renderSystem.adaptersDesc[0].Description);
 			menuItems[menuCursorIndex].subMenuItems[1] = gpuText;
 			break;
 
 		default:
-			dx->bQueryGPU = false;
+			renderSystem.bQueryGPU = false;
 			break;
 		}
 
@@ -159,9 +159,9 @@ void DebugMenu::Tick(World* world, float deltaTime)
 			subMenuTextOffsetY += 20.f;
 			float subMenuHeight = (menuItems[menuCursorIndex].subMenuItems.size() * 20.f);
 
-			ui->d2dRenderTarget->DrawTextA(menuItems[menuCursorIndex].subMenuItems[i],
-				wcslen(menuItems[menuCursorIndex].subMenuItems[i]), ui->textFormat, { menuStartPosX + textOffsetX,
-				menuStartPosY + subMenuTextOffsetY, menuWidth, subMenuTextOffsetY }, ui->brushText);
+			uiSystem.d2dRenderTarget->DrawTextA(menuItems[menuCursorIndex].subMenuItems[i],
+				wcslen(menuItems[menuCursorIndex].subMenuItems[i]), uiSystem.textFormat, { menuStartPosX + textOffsetX,
+				menuStartPosY + subMenuTextOffsetY, menuWidth, subMenuTextOffsetY }, uiSystem.brushText);
 
 			//Was for moving through submenus with arrow keys.
 			/*if (menuCursorIndex != i)

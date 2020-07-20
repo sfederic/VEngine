@@ -1,6 +1,6 @@
 #pragma once
 
-#include <minwindef.h>
+#include <Windows.h>
 
 void DXTrace(HRESULT hr, const char* filename, const char* func, int line);
 #define HR(hr) if(hr != S_OK) { DXTrace(hr, __FILE__, #hr, __LINE__); }

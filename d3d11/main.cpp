@@ -72,19 +72,19 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 		g_FileSystem.Tick();
 		uiSystem.Tick();
-		camera.Tick();
+		camera.Tick(deltaTime);
 
 		//RENDER
 		renderSystem.Tick();
-		renderSystem.RenderSetup(&camera, debugLinesBuffer, coreSystem.deltaTime);
+		renderSystem.RenderSetup(deltaTime);
 
 		for (int i = 0; i < world.actorSystems.size(); i++)
 		{
-			renderSystem.RenderActorSystem(world.actorSystems[i], &camera);
+			renderSystem.RenderActorSystem(world.actorSystems[i]);
 		}
 
-		renderSystem.RenderBounds(&world, &camera);
-		renderSystem.RenderEnd(&world, deltaTime, debugLinesBuffer, &camera);
+		renderSystem.RenderBounds();
+		renderSystem.RenderEnd(deltaTime);
 
 		inputSystem.InputReset();
 

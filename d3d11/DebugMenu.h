@@ -47,4 +47,4 @@ public:
 	bool bSubMenuOpen = false;
 };
 
-static DebugMenu g_DebugMenu;
+static DebugMenu debugMenu;

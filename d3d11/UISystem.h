@@ -1,5 +1,10 @@
 #pragma once
 
+#pragma comment(lib, "d2d1.lib")
+#pragma comment(lib, "dwrite.lib")
+
+#include <d2d1_1.h>
+#include <dwrite_1.h>
 #include <vector>
 
 struct UIView
@@ -55,14 +60,14 @@ public:
 
 	POINT mousePos;
 
-	struct ID2D1Factory* d2dFactory;
-	struct ID2D1RenderTarget* d2dRenderTarget;
-	struct IDWriteFactory1* writeFactory;
-	struct ID2D1SolidColorBrush* brushText;
-	struct ID2D1SolidColorBrush* brushTextBlack;
-	struct ID2D1SolidColorBrush* brushCloseBox;
-	struct ID2D1SolidColorBrush* brushTransparentMenu;
-	struct IDWriteTextFormat* textFormat;
+	ID2D1Factory* d2dFactory;
+	ID2D1RenderTarget* d2dRenderTarget;
+	IDWriteFactory1* writeFactory;
+	ID2D1SolidColorBrush* brushText;
+	ID2D1SolidColorBrush* brushTextBlack;
+	ID2D1SolidColorBrush* brushCloseBox;
+	ID2D1SolidColorBrush* brushTransparentMenu;
+	IDWriteTextFormat* textFormat;
 };
 
 static UISystem uiSystem;

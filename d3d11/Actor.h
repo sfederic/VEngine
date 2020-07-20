@@ -34,7 +34,7 @@ public:
 class ActorSystem
 {
 public:
-	ActorSystem();
+	ActorSystem() {}
 	//virtual void Tick(float deltaTime) = 0;
 	void CreateActors(const char* modelFilename, class RenderSystem* dx, int numActorsToSpawn);
 	void AddActor();
