@@ -1,6 +1,7 @@
 #include "Actor.h"
 #include "RenderSystem.h"
 #include "Array.h"
+#include "Debug.h"
 
 //ACTOR
 Actor::Actor()

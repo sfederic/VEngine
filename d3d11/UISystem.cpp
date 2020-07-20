@@ -8,12 +8,13 @@
 #include "RenderSystem.h"
 #include "CoreSystem.h"
 #include "Input.h"
+#include "Debug.h"
 
 void UISystem::Init()
 {
 	//Direct2D Init
 	IDXGISurface* surface;
-	HR(swapchain->GetBuffer(0, IID_PPV_ARGS(&surface)));
+	HR(renderSystem.swapchain->GetBuffer(0, IID_PPV_ARGS(&surface)));
 
 	D2D1_FACTORY_OPTIONS options;
 	options.debugLevel = D2D1_DEBUG_LEVEL_INFORMATION;
@@ -58,13 +59,13 @@ void UISystem::Tick()
 	//RenderStart();
 	//RenderEnd();
 
-	if (GetKeyUpState(VK_DELETE))
+	if (inputSystem.GetKeyUpState(VK_DELETE))
 	{
 		//world.actorSystems[ray.actorSystemIndex]->RemoveActor(ray.actorIndex);
 		uiSystem.uiViews.pop_back();
 	}
 
-	if (GetKeyUpState(VK_BACK))
+	if (inputSystem.GetKeyUpState(VK_BACK))
 	{
 		if (uiSystem.uiViews.size() > 0)
 		{
@@ -72,27 +73,6 @@ void UISystem::Tick()
 		}
 	}
 }
-
-void UISystem::RenderStart()
-{
-	/*d2dRenderTarget->BeginDraw();
-
-	for (int viewIndex = 0; viewIndex < uiViews.size(); viewIndex++)
-	{
-
-	}*/
-}
-
-void UISystem::RenderEnd()
-{
-	//d2dRenderTarget->EndDraw();
-}
-
-void UISystem::CreateActorUIView()
-{
-
-}
-
 
 bool UISystem::Button(D2D1_RECT_F rect, ID2D1Brush* brush)
 {
@@ -102,7 +82,7 @@ bool UISystem::Button(D2D1_RECT_F rect, ID2D1Brush* brush)
 	{
 		if ((mousePos.y > rect.top) && (mousePos.y < rect.bottom))
 		{
-			if(GetMouseLeftUpState())
+			if(inputSystem.GetMouseLeftUpState())
 			{ 
 				return true;
 			}

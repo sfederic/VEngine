@@ -1,6 +1,6 @@
 #pragma once
 
-#include <minwindef.h>
+#include <Windows.h>
 
 class InputSystem
 {

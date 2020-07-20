@@ -1,6 +1,6 @@
 #include "Debug.h"
 #include <comdef.h>
-#include <debugapi.h>
+#include <Windows.h>
 
 void DXTrace(HRESULT hr, const char* filename, const char* func, int line)
 {

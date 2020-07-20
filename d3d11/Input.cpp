@@ -1,5 +1,4 @@
 #include "Input.h"
-#include <WinUser.h>
 
 bool InputSystem::GetAnyKeyUp()
 {
@@ -149,8 +148,6 @@ bool InputSystem::GetKeyUpState(int key)
 	}
 }
 
-//Two consecutive mouseups for example were reseting. Had to throw this in before msg pump
-//TODO: throw in an input mananger
 void InputSystem::InputReset()
 {
 	rightMouseDown = false;

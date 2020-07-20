@@ -1,5 +1,6 @@
 #include "AudioSystem.h"
 #include "Audio.h"
+#include "Debug.h"
 
 //Little-Endian (Docs say that XBOX uses big endian)
 #define fourccRIFF 'FFIR'

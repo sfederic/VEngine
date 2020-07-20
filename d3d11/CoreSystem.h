@@ -1,6 +1,6 @@
 #pragma once
 
-#include <minwindef.h>
+#include <Windows.h>
 
 LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam);
 
