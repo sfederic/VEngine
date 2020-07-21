@@ -117,6 +117,16 @@ LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam
 	case WM_RBUTTONDOWN:
 		inputSystem.StoreMouseRightDownInput(wparam);
 		break;
+
+	case WM_MOUSEWHEEL:
+		if (GET_WHEEL_DELTA_WPARAM(wparam) < 0)
+		{
+			inputSystem.StoreMouseWheelDown();
+		}
+		else
+		{
+			inputSystem.StoreMouseWheelUp();
+		}
 	}
 
 	return DefWindowProc(window, message, wparam, lparam);

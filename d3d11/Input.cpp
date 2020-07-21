@@ -141,7 +141,6 @@ bool InputSystem::GetKeyUpState(int key)
 {
 	if (currentUpKey == key)
 	{
-		currentUpKey = 0;
 		return true;
 	}
 	else
@@ -160,4 +159,29 @@ void InputSystem::InputReset()
 	currentUpKey = 0;
 	keyDown = false;
 	keyUp = false;
+
+	bMouseWheelDown = false;
+	bMouseWheelUp = false;
+}
+
+void InputSystem::StoreMouseWheelUp()
+{
+	bMouseWheelUp = true;
+	bMouseWheelDown = false;
+}
+
+void InputSystem::StoreMouseWheelDown()
+{
+	bMouseWheelDown = true;
+	bMouseWheelUp = false;
+}
+
+bool InputSystem::GetMouseWheelUp()
+{
+	return bMouseWheelUp;
+}
+
+bool InputSystem::GetMouseWheelDown()
+{
+	return bMouseWheelDown;
 }

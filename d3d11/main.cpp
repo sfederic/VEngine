@@ -80,6 +80,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		renderSystem.Tick();
 		renderSystem.RenderSetup(deltaTime);
 
+
 		for (int i = 0; i < world->actorSystems.size(); i++)
 		{
 			renderSystem.RenderActorSystem(world->actorSystems[i]);

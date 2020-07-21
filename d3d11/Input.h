@@ -21,6 +21,10 @@ public:
 	bool GetMouseRightUpState();
 	bool GetAsyncKey(WPARAM key);
 	void InputReset();
+	void StoreMouseWheelUp();
+	void StoreMouseWheelDown();
+	bool GetMouseWheelUp();
+	bool GetMouseWheelDown();
 
 	WPARAM currentUpKey;
 	WPARAM currentDownKey;
@@ -30,6 +34,8 @@ public:
 	bool rightMouseDown;
 	bool keyUp;
 	bool keyDown;
+	bool bMouseWheelUp;
+	bool bMouseWheelDown;
 };
 
 extern InputSystem inputSystem;

@@ -3,6 +3,7 @@
 #include "Actor.h"
 #include "UISystem.h"
 #include <omp.h>
+#include "Input.h"
 
 Camera editorCamera;
 
@@ -31,29 +32,44 @@ void Camera::Tick(float deltaTime)
 	MouseMove(uiSystem.mousePos.x, uiSystem.mousePos.y);
 	UpdateViewMatrix();
 
+	//WASD MOVEMENT
+	const float moveSpeed = 7.5f * deltaTime;
+
 	if (GetAsyncKeyState('W'))
 	{
-		Move(5.f * deltaTime, forward);
+		Move(moveSpeed, forward);
 	}
 	if (GetAsyncKeyState('S'))
 	{
-		Move(-5.f * deltaTime, forward);
+		Move(-moveSpeed, forward);
 	}
 	if (GetAsyncKeyState('D'))
 	{
-		Move(5.f * deltaTime, right);
+		Move(moveSpeed, right);
 	}
 	if (GetAsyncKeyState('A'))
 	{
-		Move(-5.f * deltaTime, right);
+		Move(-moveSpeed, right);
 	}
 	if (GetAsyncKeyState('Q'))
 	{
-		Move(-5.f * deltaTime, up);
+		Move(-moveSpeed, up);
 	}
 	if (GetAsyncKeyState('E'))
 	{
-		Move(5.f * deltaTime, up);
+		Move(moveSpeed, up);
+	}
+
+	//MOUSE WHEEL ZOOM
+	const float zoomSpeed = 65.f * deltaTime;
+
+	if (inputSystem.GetMouseWheelUp())
+	{
+		Move(zoomSpeed, editorCamera.forward);
+	}
+	else if (inputSystem.GetMouseWheelDown())
+	{
+		Move(-zoomSpeed, editorCamera.forward);
 	}
 }
 

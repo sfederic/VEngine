@@ -8,10 +8,6 @@
 
 DebugMenu debugMenu;
 
-//float menuHeight = (float)windowHeight - 100.f;
-int menuCursorIndex = 0;
-int subMenuCursorIndex = 0;
-
 DebugMenu::DebugMenu()
 {
 	menuItems.push_back(MenuItem(L"Actors", EMenuID::ACTORS));
@@ -26,6 +22,9 @@ DebugMenu::DebugMenu()
 
 void DebugMenu::Tick(World* world, float deltaTime)
 {
+	static int menuCursorIndex;
+	static int subMenuCursorIndex;
+
 	float menuHeight = (menuItems.size() * 20.f) + 30.f;
 	float menuStartPosX = 10.f;
 	float menuStartPosY = 10.f;
@@ -55,7 +54,9 @@ void DebugMenu::Tick(World* world, float deltaTime)
 		bDebugMenuActive = !bDebugMenuActive;
 		bSubMenuOpen = false;
 		subMenuCursorIndex = 0;
+		menuCursorIndex = 0;
 	}
+
 	if (inputSystem.GetKeyUpState(VK_BACK))
 	{
 		bSubMenuOpen = false;
