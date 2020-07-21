@@ -1,12 +1,15 @@
 #pragma once
 
 #include <Windows.h>
+#include "Debug.h"
 
 LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam);
 
 class CoreSystem
 {
 public:
+	int id = 0;
+	CoreSystem() { DebugPrint("Core System Up %d\n", id++);}
 	void SetupWindow(HINSTANCE instance, int cmdShow);
 	void SetTimerFrequency();
 	void StartTimer();
@@ -28,4 +31,4 @@ public:
 	int frameCount;
 };
 
-static CoreSystem coreSystem;
+extern CoreSystem coreSystem;

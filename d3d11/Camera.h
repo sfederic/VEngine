@@ -4,34 +4,32 @@
 
 using namespace DirectX;
 
-class Camera 
+class Camera
 {
 public:
 	Camera() {};
-	Camera(XMVECTOR initialLocation); //Set axis to default LH
+	Camera(XMVECTOR initialLocation);
 
 	void Tick(float deltaTime);
 	void UpdateViewMatrix();
-	void Strafe(float d);
-	void MoveForward(float d);
-	void MoveUp(float d);
 	void Pitch(float angle);
 	void RotateY(float angle);
 	void MouseMove(int x, int y);
 	void FrustumCullTest(class ActorSystem& system);
 	void AttachTo(class Actor* actor);
+	void Move(float d, XMVECTOR axis);
 
 	XMMATRIX view, proj;
 
 	XMVECTOR location;
 	XMVECTOR focusPoint;
 	XMVECTOR worldUp;
-	XMVECTOR up, right, forward;
+	XMVECTOR forward, up, right;
 
 	XMVECTOR attachedOffset;
-	class Actor* actorAttachedTo;
+	class Actor* actorAttachedTo = nullptr;
 };
 
-static Camera editorCamera;
+extern Camera editorCamera;
 
 Camera* GetPlayerCamera();

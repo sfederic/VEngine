@@ -44,6 +44,8 @@ void ShaderFactory::CompileAllShadersFromFile()
 
     for (int i = 0; i < shaders.size(); i++)
     {
+        shaderMap[shaders[i].filename] = &shaders[i];
+
         const char* vsEntry = "VSMain";
         const char* vsTarget = "vs_5_0";
 

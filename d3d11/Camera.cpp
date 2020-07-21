@@ -4,6 +4,8 @@
 #include "UISystem.h"
 #include <omp.h>
 
+Camera editorCamera;
+
 Camera::Camera(XMVECTOR initialLocation)
 {
 	forward = XMVectorSet(0.f, 0.f, 1.f, 0.f);
@@ -31,27 +33,27 @@ void Camera::Tick(float deltaTime)
 
 	if (GetAsyncKeyState('W'))
 	{
-		MoveForward(5.f * deltaTime);
+		Move(5.f * deltaTime, forward);
 	}
 	if (GetAsyncKeyState('S'))
 	{
-		MoveForward(-5.f * deltaTime);
+		Move(-5.f * deltaTime, forward);
 	}
 	if (GetAsyncKeyState('D'))
 	{
-		Strafe(5.f * deltaTime);
+		Move(5.f * deltaTime, right);
 	}
 	if (GetAsyncKeyState('A'))
 	{
-		Strafe(-5.f * deltaTime);
+		Move(-5.f * deltaTime, right);
 	}
 	if (GetAsyncKeyState('Q'))
 	{
-		MoveUp(-5.f * deltaTime);
+		Move(-5.f * deltaTime, up);
 	}
 	if (GetAsyncKeyState('E'))
 	{
-		MoveUp(5.f * deltaTime);
+		Move(5.f * deltaTime, up);
 	}
 }
 
@@ -84,25 +86,6 @@ void Camera::UpdateViewMatrix()
 	view.r[1].m128_f32[3] = 0.0f;
 	view.r[2].m128_f32[3] = 0.0f;
 	view.r[3].m128_f32[3] = 1.0f;
-}
-
-//TODO: movement code here no good
-void Camera::Strafe(float d)
-{
-	XMVECTOR s = XMVectorReplicate(d);
-	location = XMVectorMultiplyAdd(s, right, location);
-}
-
-void Camera::MoveForward(float d)
-{
-	XMVECTOR s = XMVectorReplicate(d);
-	location = XMVectorMultiplyAdd(s, forward, location);	
-}
-
-void Camera::MoveUp(float d)
-{
-	XMVECTOR s = XMVectorReplicate(d);
-	location = XMVectorMultiplyAdd(s, up, location);
 }
 
 void Camera::Pitch(float angle)
@@ -139,6 +122,12 @@ void Camera::MouseMove(int x, int y)
 
 	lastMousePos.x = x;
 	lastMousePos.y = y;
+}
+
+void Camera::Move(float d, XMVECTOR axis)
+{
+	XMVECTOR s = XMVectorReplicate(d);
+	location = XMVectorMultiplyAdd(s, axis, location);
 }
 
 void Camera::FrustumCullTest(ActorSystem& system)

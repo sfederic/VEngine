@@ -5,6 +5,8 @@
 #include "Input.h"
 #include "Debug.h"
 
+FileSystem g_FileSystem;
+
 void FileSystem::Tick()
 {
 	//Test world load file handling.

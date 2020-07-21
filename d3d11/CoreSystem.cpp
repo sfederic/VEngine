@@ -1,12 +1,10 @@
 #include "CoreSystem.h"
 #include "UISystem.h"
 #include "Input.h"
+#include "Debug.h"
 #include <stdio.h>
 
-#pragma comment(lib, "Comctl32.lib")
-
-#include <commctrl.h>
-#include <mshtmcid.h>
+CoreSystem coreSystem;
 
 void CoreSystem::SetupWindow(HINSTANCE instance, int cmdShow)
 {
@@ -19,8 +17,15 @@ void CoreSystem::SetupWindow(HINSTANCE instance, int cmdShow)
 
 	RegisterClass(&wc);
 	mainWindow = CreateWindow("Window", "d3d11", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, windowWidth, windowHeight, 0, 0, instance, 0);
-	ShowWindow(mainWindow, cmdShow);
-	UpdateWindow(mainWindow);
+	if (!mainWindow)
+	{
+		HR(GetLastError());
+	}
+	else
+	{
+		ShowWindow(mainWindow, cmdShow);
+		UpdateWindow(mainWindow);
+	}
 }
 
 void CoreSystem::SetTimerFrequency()

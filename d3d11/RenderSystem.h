@@ -9,6 +9,7 @@
 #include <dxgi1_6.h>
 #include <DirectXMath.h>
 #include <vector>
+#include "Debug.h"
 
 using namespace DirectX;
 
@@ -24,6 +25,7 @@ extern Vertex debugLineData[2];
 class RenderSystem
 {
 public:
+	RenderSystem() { DebugPrint("Core System Up\n"); }
 	void Tick();
 	void Init();
 	void CreateDevice();
@@ -86,4 +88,4 @@ public:
 	bool bQueryGPUInner = false;
 };
 
-static RenderSystem renderSystem;
+extern RenderSystem renderSystem;

@@ -6,10 +6,7 @@
 #include "Actor.h"
 #include "World.h"
 
-float menuStartPosX = 10.f;
-float menuStartPosY = 10.f;
-float menuWidth = (float)coreSystem.windowWidth / 2.f;
-float textOffsetX = 20.f;
+DebugMenu debugMenu;
 
 //float menuHeight = (float)windowHeight - 100.f;
 int menuCursorIndex = 0;
@@ -29,6 +26,12 @@ DebugMenu::DebugMenu()
 
 void DebugMenu::Tick(World* world, float deltaTime)
 {
+	float menuHeight = (menuItems.size() * 20.f) + 30.f;
+	float menuStartPosX = 10.f;
+	float menuStartPosY = 10.f;
+	float menuWidth = (float)coreSystem.windowWidth / 2.f;
+	float textOffsetX = 20.f;
+
 	//Handle notifications (eg. "Shaders recompiled", "ERROR: Not X", etc)
 	const float notificationLifetime = 3.0f;
 	for (int i = 0; i < notifications.size(); i++)
@@ -62,8 +65,6 @@ void DebugMenu::Tick(World* world, float deltaTime)
 	//Main debug menu
 	if (bDebugMenuActive && !bSubMenuOpen)
 	{
-		float menuHeight = (menuItems.size() * 20.f) + 30.f;
-
 		//Main window
 		uiSystem.d2dRenderTarget->FillRectangle({ menuStartPosX, menuStartPosY, menuWidth, menuHeight }, uiSystem.brushTransparentMenu);
 

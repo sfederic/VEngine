@@ -4,6 +4,8 @@
 #include "Input.h"
 #include "Debug.h"
 
+UISystem uiSystem;
+
 void UISystem::Init()
 {
 	//Direct2D Init
@@ -50,8 +52,6 @@ void UISystem::Tick()
 {
 	GetCursorPos(&mousePos);
 	ScreenToClient(coreSystem.mainWindow, &mousePos);
-	//RenderStart();
-	//RenderEnd();
 
 	if (inputSystem.GetKeyUpState(VK_DELETE))
 	{

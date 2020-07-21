@@ -3,12 +3,13 @@
 #include "Array.h"
 #include "Debug.h"
 
-//ACTOR
+//CONSTRUCTORS
 Actor::Actor()
 {
 	transform = XMMatrixIdentity();
 }
 
+//POSITION FUNCTIONS
 XMVECTOR Actor::GetPositionVector()
 {
 	return transform.r[3];
@@ -31,6 +32,7 @@ void Actor::SetPosition(float x, float y, float z)
 	transform = XMMatrixTranslationFromVector(v);
 }
 
+//ROTATION FUNCTIONS
 void Actor::SetRotation(XMVECTOR axis, float angle)
 {
 	transform = XMMatrixRotationAxis(axis, angle);
@@ -41,6 +43,7 @@ XMMATRIX Actor::GetRotation()
 	return transform;
 }
 
+//SCALE FUNCTIONS
 XMFLOAT3 Actor::GetScale()
 {
 	return XMFLOAT3(transform.r[0].m128_f32[0], transform.r[1].m128_f32[1], transform.r[2].m128_f32[2]);
@@ -54,6 +57,30 @@ void Actor::SetScale(float x, float y, float z)
 void Actor::SetScale(XMVECTOR scale)
 {
 	transform = XMMatrixScalingFromVector(scale);
+}
+
+//VECTOR FUNCTIONS
+XMVECTOR Actor::GetForwardVector()
+{
+	return transform.r[2];
+}
+
+XMVECTOR Actor::GetRightVector()
+{
+	return transform.r[0];
+}
+
+XMVECTOR Actor::GetUpVector()
+{
+	return transform.r[1];
+}
+
+void Actor::Move(float d, XMVECTOR direction)
+{
+	XMVECTOR s = XMVectorReplicate(d);
+	XMVECTOR loc = GetPositionVector();
+	loc += XMVectorMultiplyAdd(s, direction, loc);
+	SetPosition(loc);
 }
 
 //ACTOR SYSTEM

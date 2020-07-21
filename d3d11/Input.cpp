@@ -1,5 +1,7 @@
 #include "Input.h"
 
+InputSystem inputSystem;
+
 bool InputSystem::GetAnyKeyUp()
 {
 	if (keyUp)

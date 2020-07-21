@@ -15,4 +15,4 @@ public:
 	FILE* file;
 };
 
-static FileSystem g_FileSystem;
+extern FileSystem g_FileSystem;

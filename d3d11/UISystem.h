@@ -43,9 +43,6 @@ public:
 	void Init();
 	void Cleanup(); //D2D1 Actually throws errors if no cleanup
 	void Tick();
-	void RenderStart();
-	void RenderEnd();
-	void CreateActorUIView();
 
 	//Create UI functions
 	bool Button(D2D1_RECT_F rect, struct ID2D1Brush* brush);
@@ -70,5 +67,4 @@ public:
 	IDWriteTextFormat* textFormat;
 };
 
-static UISystem uiSystem;
-
+extern UISystem uiSystem;

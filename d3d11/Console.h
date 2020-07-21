@@ -18,4 +18,4 @@ public:
 	std::vector<ConsoleViewItem> viewItems;
 };
 
-static Console console;
+extern Console console;

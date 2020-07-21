@@ -21,6 +21,10 @@ public:
 	XMFLOAT3 GetScale();
 	void SetScale(float x, float y, float z);
 	void SetScale(XMVECTOR scale);
+	XMVECTOR GetForwardVector();
+	XMVECTOR GetRightVector();
+	XMVECTOR GetUpVector();
+	void Move(float d, XMVECTOR direction);
 
 	//BoundingBox boundingBox;
 	//BoundingSphere boundingSphere;

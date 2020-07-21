@@ -7,6 +7,7 @@ void DXTrace(HRESULT hr, const char* filename, const char* func, int line)
 	char errmsg[1024];
 	snprintf(errmsg, sizeof(errmsg), "HR: %s\nFile: %s\nFunction: %s\nLine: %d", err.ErrorMessage(), filename, func, line);
 	MessageBox(0, errmsg, "Error", 0);
+	exit(1);
 }
 
 int Print(const char* format, va_list args)

@@ -32,5 +32,4 @@ public:
 	bool keyDown;
 };
 
-static InputSystem inputSystem;
-
+extern InputSystem inputSystem;

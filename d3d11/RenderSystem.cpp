@@ -11,6 +11,7 @@
 #include "World.h"
 #include "Debug.h"
 
+RenderSystem renderSystem;
 ShaderFactory g_ShaderFactory;
 
 UINT strides = sizeof(Vertex);
@@ -319,7 +320,7 @@ void RenderSystem::RenderEnd(float deltaTime)
 	}*/
 
 	//UI RENDERING 
-	//TODO: Put render and d2d stuff into func for profiling
+	//TODO: Put render and d2d stuff UISystem
 	uiSystem.d2dRenderTarget->BeginDraw();
 
 	//Test console rendering and work. Might need to put it into a system

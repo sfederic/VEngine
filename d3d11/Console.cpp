@@ -13,6 +13,8 @@ bool bConsoleActive = false;
 
 std::vector<ConsoleViewItem> viewItems;
 
+Console console;
+
 namespace ExecuteStrings
 {
 	const wchar_t* EXIT = L"EXIT";

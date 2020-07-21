@@ -17,20 +17,22 @@
 #include "FileSystem.h"
 #include "Debug.h"
 
+//RenderSystem gRenderSystem;
+//CoreSystem gCoreSystem;
+//UISystem gUISystem;
+//AudioSystem gAudioSystem;
+
 int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine, int cmdShow)
 {
 	//WIN32 SETUP
 	coreSystem.SetupWindow(instance, cmdShow);
 	coreSystem.SetTimerFrequency();
-	
+
 	renderSystem.Init();
 
-	Camera camera(XMVectorSet(0.f, 0.f, -5.f, 1.f));
+	editorCamera = Camera(XMVectorSet(0.f, 0.f, -5.f, 1.f));
 
-	//AUDIO SETUP
 	audioSystem.Init();
-
-	//UI SETUP
 	uiSystem.Init();
 
 	//TEXTURE TESTING
@@ -52,12 +54,12 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	ID3D11Buffer* debugLinesBuffer = renderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
 
 	//ACTOR SYSTEM TESTING
-	ActorSystem system, system2, system3;
-	system3.CreateActors("Models/cylinder.obj", &renderSystem, 3);
+	ActorSystem system;
+	system.CreateActors("Models/monkey.obj", &renderSystem, 3);
 
 	//World data testing
-	World world = {};
-	world.actorSystems.push_back(&system3);
+	World* world = GetWorld();
+	world->actorSystems.push_back(&system);
 
 	Ray ray = {};
 
@@ -72,15 +74,15 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 		g_FileSystem.Tick();
 		uiSystem.Tick();
-		camera.Tick(deltaTime);
+		editorCamera.Tick(deltaTime);
 
 		//RENDER
 		renderSystem.Tick();
 		renderSystem.RenderSetup(deltaTime);
 
-		for (int i = 0; i < world.actorSystems.size(); i++)
+		for (int i = 0; i < world->actorSystems.size(); i++)
 		{
-			renderSystem.RenderActorSystem(world.actorSystems[i]);
+			renderSystem.RenderActorSystem(world->actorSystems[i]);
 		}
 
 		renderSystem.RenderBounds();

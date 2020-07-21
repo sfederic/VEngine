@@ -10,6 +10,6 @@ public:
 	char name[64];
 };
 
-static World currentWorld;
+extern World currentWorld;
 
 World* GetWorld();

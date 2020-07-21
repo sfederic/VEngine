@@ -10,6 +10,8 @@
 #define fourccXWMA 'AMWX'
 #define fourccDPDS 'sdpd'
 
+AudioSystem audioSystem;
+
 void AudioSystem::Init()
 {
 	HR(XAudio2Create(&audioEngine));
