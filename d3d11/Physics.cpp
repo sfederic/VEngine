@@ -7,7 +7,7 @@
 #include "CoreSystem.h"
 #include "Debug.h"
 
-void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, ID3D11Buffer* debugBuffer, RenderSystem* dx)
+void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, class ID3D11Buffer* debugBuffer)
 {
 	Vertex v1 = {}, v2 = {};
 	XMStoreFloat3(&v1.pos, rayOrigin);
@@ -19,10 +19,10 @@ void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, ID3D11Buf
 	XMVECTOR rayEnd = rayOrigin + dist;
 	XMStoreFloat3(&v2.pos, rayEnd);
 
-	dx->debugLines.push_back(v1);
-	dx->debugLines.push_back(v2);
+	renderSystem.debugLines.push_back(v1);
+	renderSystem.debugLines.push_back(v2);
 
-	dx->context->UpdateSubresource(debugBuffer, 0, nullptr, dx->debugLines.data(), 0, 0);
+	renderSystem.context->UpdateSubresource(debugBuffer, 0, nullptr, renderSystem.debugLines.data(), 0, 0);
 }
 
 bool Raycast(Ray& ray, int sx, int sy, Camera* camera, ActorSystem* actorSystem)
@@ -34,7 +34,6 @@ bool Raycast(Ray& ray, int sx, int sy, Camera* camera, ActorSystem* actorSystem)
 	ray.direction = XMVectorSet(vx, vy, 1.f, 0.f);
 
 	XMMATRIX invView = XMMatrixInverse(&XMMatrixDeterminant(camera->view), camera->view);
-	//Big problem with the model matrix. Before I was wrongly using the model per actor and re-calculating. Hoisting Identity out fixed that.
 	XMMATRIX invModel = XMMatrixInverse(&XMMatrixDeterminant(XMMatrixIdentity()), XMMatrixIdentity());
 	XMMATRIX toLocal = XMMatrixMultiply(invView, invModel);
 

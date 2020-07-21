@@ -69,7 +69,6 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		const float deltaTime = coreSystem.deltaTime;
 
 		coreSystem.StartTimer();
-
 		coreSystem.HandleMessages();
 
 		g_FileSystem.Tick();
@@ -79,7 +78,6 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		//RENDER
 		renderSystem.Tick();
 		renderSystem.RenderSetup(deltaTime);
-
 
 		for (int i = 0; i < world->actorSystems.size(); i++)
 		{

@@ -209,7 +209,6 @@ void RenderSystem::CreateConstantBuffer()
 	matrices.view = XMMatrixIdentity();
 	matrices.proj = XMMatrixPerspectiveFovLH(XM_PI / 3, coreSystem.GetAspectRatio(), 0.01f, 1000.f);
 
-	//TODO: Get rid of this too. terrible
 	editorCamera.proj = matrices.proj;
 	matrices.mvp = matrices.model * matrices.view * matrices.proj;
 
@@ -370,8 +369,6 @@ void RenderSystem::RenderEnd(float deltaTime)
 			Sleep(1);
 		}
 
-
-		//TODO: fucking clean this up
 		UINT64 endTime = 0, startTime = 0;
 		HR(context->GetData(startTimeQuery, &startTime, sizeof(UINT64), 0));
 		HR(context->GetData(endTimeQuery, &endTime, sizeof(UINT64), 0));
@@ -413,6 +410,7 @@ void RenderSystem::RenderSetup(float deltaTime)
 	if (inputSystem.GetKeyUpState('3'))
 	{
 		g_ShaderFactory.HotReloadShaders();
+		debugMenu.notifications.push_back(DebugNotification(L"Shaders reloaded."));
 	}
 }
 

@@ -16,6 +16,10 @@ public:
 	void DrawViewItems();
 
 	std::vector<ConsoleViewItem> viewItems;
+	wchar_t consoleString[128];
+	int consoleStringIndex = 0;
+	bool bConsoleActive = false;
+
 };
 
 extern Console console;

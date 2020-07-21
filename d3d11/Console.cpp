@@ -6,12 +6,7 @@
 #include <vector>
 #include "FileSystem.h"
 #include "World.h"
-
-wchar_t consoleString[128];
-int consoleStringIndex = 0;
-bool bConsoleActive = false;
-
-std::vector<ConsoleViewItem> viewItems;
+#include "DebugMenu.h"
 
 Console console;
 
@@ -40,7 +35,7 @@ void Console::ConsoleInput()
 		}
 		else if ((consoleStringIndex < _countof(consoleString)) && (inputSystem.currentDownKey != 0))
 		{
-			consoleString[consoleStringIndex] = inputSystem.currentDownKey; //wchar_t to int64 cast works
+			consoleString[consoleStringIndex] = inputSystem.currentDownKey; //wchar_t to int64 works
 			consoleStringIndex++;
 		}
 	}
@@ -78,7 +73,7 @@ void Console::ExecuteString()
 
 	if (wcsncmp(consoleString, ExecuteStrings::EXIT, wcslen(ExecuteStrings::EXIT)) == 0)
 	{
-		coreSystem.msg.message = WM_QUIT; //TODO: Terrible. Fix.
+		coreSystem.msg.message = WM_QUIT;
 	}
 	else if (wcsncmp(consoleString, ExecuteStrings::GPU, wcslen(ExecuteStrings::GPU)) == 0)
 	{
@@ -87,7 +82,6 @@ void Console::ExecuteString()
 	}
 	else if (wcsncmp(consoleString, ExecuteStrings::D3D_TIME, wcslen(ExecuteStrings::D3D_TIME)) == 0)
 	{
-		//TODO: need to figure out a better system to display real time data
 		_snwprintf_s(item.text, sizeof(item.text), L"D3D11 Render: %f", renderSystem.renderTime);
 		viewItems.push_back(item);
 	}
@@ -105,6 +99,10 @@ void Console::ExecuteString()
 	else if(wcsncmp(consoleString, LevelNames::TestLevel, wcslen(LevelNames::TestLevel)) == 0) //LEVEL LOADING
 	{
 		g_FileSystem.ReadAllActorSystems(GetWorld(), "LevelSaves/test.sav");
+	}
+	else
+	{
+		debugMenu.notifications.push_back(DebugNotification(L"No command found."));
 	}
 
 	//Reset console string and index

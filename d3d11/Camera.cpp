@@ -4,6 +4,7 @@
 #include "UISystem.h"
 #include <omp.h>
 #include "Input.h"
+#include "Console.h"
 
 Camera editorCamera;
 
@@ -33,43 +34,46 @@ void Camera::Tick(float deltaTime)
 	UpdateViewMatrix();
 
 	//WASD MOVEMENT
-	const float moveSpeed = 7.5f * deltaTime;
+	if (!console.bConsoleActive)
+	{
+		const float moveSpeed = 7.5f * deltaTime;
 
-	if (GetAsyncKeyState('W'))
-	{
-		Move(moveSpeed, forward);
-	}
-	if (GetAsyncKeyState('S'))
-	{
-		Move(-moveSpeed, forward);
-	}
-	if (GetAsyncKeyState('D'))
-	{
-		Move(moveSpeed, right);
-	}
-	if (GetAsyncKeyState('A'))
-	{
-		Move(-moveSpeed, right);
-	}
-	if (GetAsyncKeyState('Q'))
-	{
-		Move(-moveSpeed, up);
-	}
-	if (GetAsyncKeyState('E'))
-	{
-		Move(moveSpeed, up);
-	}
+		if (GetAsyncKeyState('W'))
+		{
+			Move(moveSpeed, forward);
+		}
+		if (GetAsyncKeyState('S'))
+		{
+			Move(-moveSpeed, forward);
+		}
+		if (GetAsyncKeyState('D'))
+		{
+			Move(moveSpeed, right);
+		}
+		if (GetAsyncKeyState('A'))
+		{
+			Move(-moveSpeed, right);
+		}
+		if (GetAsyncKeyState('Q'))
+		{
+			Move(-moveSpeed, up);
+		}
+		if (GetAsyncKeyState('E'))
+		{
+			Move(moveSpeed, up);
+		}
 
-	//MOUSE WHEEL ZOOM
-	const float zoomSpeed = 65.f * deltaTime;
+		//MOUSE WHEEL ZOOM
+		const float zoomSpeed = 65.f * deltaTime;
 
-	if (inputSystem.GetMouseWheelUp())
-	{
-		Move(zoomSpeed, editorCamera.forward);
-	}
-	else if (inputSystem.GetMouseWheelDown())
-	{
-		Move(-zoomSpeed, editorCamera.forward);
+		if (inputSystem.GetMouseWheelUp())
+		{
+			Move(zoomSpeed, editorCamera.forward);
+		}
+		else if (inputSystem.GetMouseWheelDown())
+		{
+			Move(-zoomSpeed, editorCamera.forward);
+		}
 	}
 }
 
