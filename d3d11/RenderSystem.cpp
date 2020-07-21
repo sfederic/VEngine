@@ -10,6 +10,7 @@
 #include "MathHelpers.h"
 #include "World.h"
 #include "Debug.h"
+#include "WICTextureLoader.h"
 
 RenderSystem renderSystem;
 ShaderFactory g_ShaderFactory;
@@ -198,6 +199,7 @@ void RenderSystem::CreateRasterizerStates()
 	HR(device->CreateRasterizerState(&rastDesc, &rastStateWireframe));
 }
 
+//One vertex buffer per actor system
 void RenderSystem::CreateVertexBuffer(UINT size, const void* data, ActorSystem* system)
 {
 	system->vertexBuffer = CreateDefaultBuffer(size, D3D11_BIND_VERTEX_BUFFER, data);
@@ -215,6 +217,32 @@ void RenderSystem::CreateConstantBuffer()
 	cbMatrices = CreateDefaultBuffer(sizeof(Matrices), D3D11_BIND_CONSTANT_BUFFER, &matrices);
 }
 
+void RenderSystem::CreateSamplerState(ActorSystem* actorSystem)
+{
+	D3D11_SAMPLER_DESC sampDesc = {};
+	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+
+	ID3D11SamplerState* samplerState;
+	HR(renderSystem.device->CreateSamplerState(&sampDesc, &samplerState));
+	actorSystem->samplerState = samplerState;
+}
+
+void RenderSystem::CreateTexture(ActorSystem* actorSystem)
+{
+	wchar_t textureFilename[128] = { L"Textures/" };
+	wcscat_s(textureFilename, actorSystem->textureName);
+
+	ID3D11Resource* texture;
+	ID3D11ShaderResourceView* srv;
+
+	HR(CreateWICTextureFromFile(renderSystem.device, textureFilename, &texture, &srv));
+	actorSystem->texture = texture;
+	actorSystem->srv = srv;
+}
+
 void RenderSystem::RenderActorSystem(ActorSystem* actorSystem)
 {
 	auto shader = g_ShaderFactory.shaderMap.find(actorSystem->shaderName);
@@ -226,6 +254,9 @@ void RenderSystem::RenderActorSystem(ActorSystem* actorSystem)
 
 	context->VSSetShader(shader->second->vertexShader, nullptr, 0);
 	context->PSSetShader(shader->second->pixelShader, nullptr, 0);
+
+	renderSystem.context->PSSetSamplers(0, 1, &actorSystem->samplerState);
+	renderSystem.context->PSSetShaderResources(0, 1, &actorSystem->srv);
 
 	context->IASetVertexBuffers(0, 1, &actorSystem->vertexBuffer, &strides, &offsets);
 

@@ -49,7 +49,11 @@ public:
 	struct ID3D11Buffer* vertexBuffer;
 	struct ID3D11Buffer* indexBuffer;
 
-	//Wonder if I can make it so that only the system needs 1 copy of each and the uniform scaling does the rest
+	struct ID3D11SamplerState* samplerState;
+
+	ID3D11Resource* texture;
+	ID3D11ShaderResourceView* srv;
+
 	BoundingBox boundingBox;
 	BoundingSphere boundingSphere;
 
@@ -58,6 +62,7 @@ public:
 	std::vector<Actor> actors;
 
 	const wchar_t* shaderName = L"shaders.hlsl";
+	const wchar_t* textureName = L"texture.png";
 
 	bool bInstancingActors; //bool for setting system to use instancing
 };

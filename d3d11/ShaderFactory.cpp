@@ -16,14 +16,12 @@ void ShaderFactory::CreateAllShaders(ID3D11Device* device)
 
 void ShaderFactory::CompileAllShadersFromFile()
 {
-    //https://www.bfilipek.com/2019/04/dir-iterate.html
     WIN32_FIND_DATAW data;
     HANDLE file = FindFirstFileW(L"Shaders/*.hlsl", &data);
 
     if (file == INVALID_HANDLE_VALUE)
     {
-        int err = GetLastError();
-        return;
+        HR(GetLastError());
     }
 
     ShaderItem shaderItem;

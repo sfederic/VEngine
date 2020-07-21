@@ -25,7 +25,6 @@ extern Vertex debugLineData[2];
 class RenderSystem
 {
 public:
-	RenderSystem() { DebugPrint("Core System Up\n"); }
 	void Tick();
 	void Init();
 	void CreateDevice();
@@ -36,6 +35,8 @@ public:
 	void CreateRasterizerStates();
 	void CreateVertexBuffer(UINT size, const void* data, class ActorSystem* actor);
 	void CreateConstantBuffer();
+	void CreateSamplerState(class ActorSystem* actorSystem);
+	void CreateTexture(class ActorSystem* actorSystem);
 
 	void RenderSetup(float deltaTime);
 	void RenderActorSystem(class ActorSystem* actorSystem);

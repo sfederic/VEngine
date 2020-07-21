@@ -92,6 +92,9 @@ void ActorSystem::CreateActors(const char* modelFilename, RenderSystem* dx, int 
 		numVertices = (byteWidth * actors.size()) / sizeof(Vertex);
 		dx->CreateVertexBuffer(byteWidth, modelData.verts.data(), this);
 
+		dx->CreateSamplerState(this);
+		dx->CreateTexture(this);
+
 		size_t stride = sizeof(Vertex);
 
 		BoundingBox::CreateFromPoints(boundingBox, modelData.verts.size(), &modelData.verts[0].pos, stride);

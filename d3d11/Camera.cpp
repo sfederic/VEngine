@@ -6,7 +6,7 @@
 #include "Input.h"
 #include "Console.h"
 
-Camera editorCamera;
+Camera editorCamera(XMVectorSet(0.f, 0.f, -5.f, 1.f));
 
 Camera::Camera(XMVECTOR initialLocation)
 {

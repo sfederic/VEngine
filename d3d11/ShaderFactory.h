@@ -25,8 +25,7 @@ enum class EShaderID
 
 struct ShaderItem
 {
-	ShaderItem() {};
-	
+	ShaderItem() {}
 	ShaderItem(const wchar_t* filenameInit, EShaderType typeInit)
 	{
 		wcscpy_s(filename, 64 * 2, filenameInit);
@@ -41,6 +40,9 @@ struct ShaderItem
 
 	ID3D11VertexShader* vertexShader;
 	ID3D11PixelShader* pixelShader;
+
+	ID3D11ShaderResourceView* srv;
+	ID3D11Texture2D* texture;
 };
 
 class ShaderFactory
