@@ -1,12 +1,15 @@
 #pragma once
 
 #include <vector>
+#include "Actor.h"
 
 class World
 {
 public:
 
-	std::vector<class ActorSystem*> actorSystems;
+	void CleaupAllActors();
+
+	std::vector<ActorSystem> actorSystems;
 	char name[64];
 };
 

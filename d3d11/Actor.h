@@ -7,6 +7,13 @@
 
 using namespace DirectX;
 
+enum class EActorSystemID
+{
+	Base,
+	DebugSphere,
+	DebugBox
+};
+
 class Actor
 {
 public:
@@ -26,9 +33,6 @@ public:
 	XMVECTOR GetUpVector();
 	void Move(float d, XMVECTOR direction);
 
-	//BoundingBox boundingBox;
-	//BoundingSphere boundingSphere;
-
 	XMMATRIX transform = XMMatrixIdentity();
 
 	int vertexBufferOffset;
@@ -40,7 +44,7 @@ class ActorSystem
 public:
 	ActorSystem() {}
 	//virtual void Tick(float deltaTime) = 0;
-	void CreateActors(const char* modelFilename, class RenderSystem* dx, int numActorsToSpawn);
+	void CreateActors(class RenderSystem* dx, int numActorsToSpawn);
 	void AddActor();
 	void RemoveActor(int index);
 
@@ -63,6 +67,9 @@ public:
 
 	const wchar_t* shaderName = L"shaders.hlsl";
 	const wchar_t* textureName = L"texture.png";
+	const char* modelName = "cube.obj";
+
+	EActorSystemID id = EActorSystemID::Base;
 
 	bool bInstancingActors; //bool for setting system to use instancing
 };

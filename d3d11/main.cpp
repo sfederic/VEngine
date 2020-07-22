@@ -28,11 +28,12 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 	//ACTOR SYSTEM TESTING
 	ActorSystem system;
-	system.CreateActors("Models/monkey.obj", &renderSystem, 3);
+	system.modelName = "Sphere.obj";
+	system.CreateActors(&renderSystem, 3);
 
 	//World data testing
 	World* world = GetWorld();
-	world->actorSystems.push_back(&system);
+	world->actorSystems.push_back(system);
 
 	//MAIN LOOP
 	while (coreSystem.msg.message != WM_QUIT)
@@ -50,7 +51,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		renderSystem.RenderSetup(deltaTime);
 		for (int i = 0; i < world->actorSystems.size(); i++)
 		{
-			renderSystem.RenderActorSystem(world->actorSystems[i]);
+			renderSystem.RenderActorSystem(&world->actorSystems[i]);
 		}
 		renderSystem.RenderBounds();
 		renderSystem.RenderEnd(deltaTime);

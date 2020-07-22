@@ -112,11 +112,13 @@ void RenderSystem::CreateDevice()
 	qd.Query = D3D11_QUERY_TIMESTAMP_DISJOINT;
 	HR(device->CreateQuery(&qd, &disjointQuery));
 
-	debugBox.CreateActors("Models/cube.obj", this, 1);
+	debugBox.modelName = "cube.obj";
 	debugBox.shaderName = L"debugDraw.hlsl";
+	debugBox.CreateActors(this, 1);
 
-	debugSphere.CreateActors("Models/ico_sphere.obj", this, 1);
 	debugSphere.shaderName = L"debugDraw.hlsl";
+	debugSphere.modelName = "ico_sphere.obj";
+	debugSphere.CreateActors(this, 1);
 }
 
 void RenderSystem::CreateSwapchain()
@@ -295,10 +297,10 @@ void RenderSystem::RenderBounds()
 
 		for (int systemIndex = 0; systemIndex < world->actorSystems.size(); systemIndex++)
 		{
-			for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex]->actors.size(); actorIndex++)
+			for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex].actors.size(); actorIndex++)
 			{
 				matrices.view = camera->view;
-				matrices.model = world->actorSystems[systemIndex]->actors[actorIndex].transform;
+				matrices.model = world->actorSystems[systemIndex].actors[actorIndex].transform;
 				matrices.mvp = matrices.model * matrices.view * matrices.proj;
 				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 				context->VSSetConstantBuffers(0, 1, &cbMatrices);
@@ -318,10 +320,10 @@ void RenderSystem::RenderBounds()
 
 		for (int systemIndex = 0; systemIndex < world->actorSystems.size(); systemIndex++)
 		{
-			for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex]->actors.size(); actorIndex++)
+			for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex].actors.size(); actorIndex++)
 			{
 				matrices.view = camera->view;
-				matrices.model = world->actorSystems[systemIndex]->actors[actorIndex].transform;
+				matrices.model = world->actorSystems[systemIndex].actors[actorIndex].transform;
 				matrices.mvp = matrices.model * matrices.view * matrices.proj;
 				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 				context->VSSetConstantBuffers(0, 1, &cbMatrices);

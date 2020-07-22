@@ -84,9 +84,13 @@ void Actor::Move(float d, XMVECTOR direction)
 }
 
 //ACTOR SYSTEM
-void ActorSystem::CreateActors(const char* modelFilename, RenderSystem* dx, int numActorsToSpawn)
+void ActorSystem::CreateActors(RenderSystem* dx, int numActorsToSpawn)
 {
-	if (LoadOBJFile(modelFilename, modelData))
+	char filename[128] = {};
+	strcat_s(filename, "Models/");
+	strcat_s(filename, modelName);
+
+	if (LoadOBJFile(filename, modelData))
 	{
 		UINT byteWidth = modelData.GetByteWidth();
 		numVertices = (byteWidth * actors.size()) / sizeof(Vertex);

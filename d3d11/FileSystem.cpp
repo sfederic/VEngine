@@ -27,12 +27,20 @@ void FileSystem::WriteAllActorSystems(World* world, const char* filename)
 	fopen_s(&file, filename, "w");
 	assert(file);
 
+	int numActorSystems = world->actorSystems.size();
+	fwrite(&numActorSystems, sizeof(int), 1, file);
+
 	for (int systemIndex = 0; systemIndex < world->actorSystems.size(); systemIndex++)
 	{
-		for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex]->actors.size(); actorIndex++)
+		fwrite(&world->actorSystems[systemIndex].id, sizeof(int), 1, file);
+
+		int numOfActors = world->actorSystems[systemIndex].actors.size();
+		fwrite(&numOfActors, sizeof(int), 1, file);
+
+		for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex].actors.size(); actorIndex++)
 		{
 			//fwrite without the for loop(SOA) was about 0.01 ms faster with around 60,000 actors. Surprising
-			fwrite(&world->actorSystems[systemIndex]->actors[actorIndex].transform, sizeof(XMMATRIX), 1, file);
+			fwrite(&world->actorSystems[systemIndex].actors[actorIndex].transform, sizeof(XMMATRIX), 1, file);
 		}
 	}
 
@@ -47,13 +55,35 @@ void FileSystem::ReadAllActorSystems(World* world, const char* filename)
 	fopen_s(&file, filename, "r");
 	assert(file);
 
-	for (int systemIndex = 0; systemIndex < world->actorSystems.size(); systemIndex++)
+	World newWorld = {};
+	int numActorSystems = 0;
+	fread(&numActorSystems, sizeof(int), 1, file);
+
+	for (int systemIndex = 0; systemIndex < numActorSystems; systemIndex++)
 	{
-		for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex]->actors.size(); actorIndex++)
+		newWorld.actorSystems.push_back(ActorSystem());
+
+		fread(&newWorld.actorSystems[systemIndex].id, sizeof(int), 1, file);
+
+		int numActorsToSpawn = 0;
+		fread(&numActorsToSpawn, sizeof(int), 1, file);
+
+		switch (newWorld.actorSystems[systemIndex].id)
 		{
-			fread(&world->actorSystems[systemIndex]->actors[actorIndex].transform, sizeof(XMMATRIX), 1, file);
+		case EActorSystemID::Base:
+			newWorld.actorSystems[systemIndex].CreateActors(&renderSystem, numActorsToSpawn);
 		}
+
+		for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex].actors.size(); actorIndex++)
+		{
+			fread(&newWorld.actorSystems[systemIndex].actors[actorIndex].transform, sizeof(XMMATRIX), 1, file);
+		}
+
 	}
+
+	currentWorld.CleaupAllActors();
+
+	currentWorld = newWorld;
 
 	DebugPrint("All actor systems loaded.\n");
 	debugMenu.notifications.push_back(DebugNotification(L"All actor systems loaded."));
