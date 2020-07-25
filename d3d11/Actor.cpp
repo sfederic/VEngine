@@ -107,6 +107,7 @@ void ActorSystem::CreateActors(RenderSystem* dx, int numActorsToSpawn)
 		actors.reserve(numActorsToSpawn);
 		for (int i = 0; i < numActorsToSpawn; i++)
 		{
+			//TODO: I'm gonna need the smart pointers here to deal with the eventual Tick() virtual calls
 			Actor actor;
 			actor.transform.r[3] = XMVectorSet(i, i, i, 1.f);
 			actor.vertexBufferOffset = i * modelData.GetByteWidth();

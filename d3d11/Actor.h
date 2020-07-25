@@ -3,6 +3,7 @@
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
 #include <vector>
+#include <memory>
 #include "Obj.h"
 
 using namespace DirectX;

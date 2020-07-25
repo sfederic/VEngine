@@ -29,7 +29,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	//ACTOR SYSTEM TESTING
 	ActorSystem system;
 	system.modelName = "Sphere.obj";
-	system.CreateActors(&renderSystem, 3);
+	system.CreateActors(&renderSystem, 300);
 
 	//World data testing
 	World* world = GetWorld();

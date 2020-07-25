@@ -121,6 +121,7 @@
       </PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>$(ProjectDir)FbxInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -137,6 +138,7 @@
       </PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>$(ProjectDir)FbxInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -154,6 +156,7 @@
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="DebugMenu.cpp" />
+    <ClCompile Include="FBXImporter.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -175,6 +178,7 @@
     <ClInclude Include="Console.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="DebugMenu.h" />
+    <ClInclude Include="FBXImporter.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="FileSystem.h" />
     <ClInclude Include="Input.h" />
