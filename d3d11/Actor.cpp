@@ -91,9 +91,8 @@ void ActorSystem::CreateActors(RenderSystem* dx, int numActorsToSpawn)
 	char filename[128] = {};
 	strcat_s(filename, "Models/");
 	strcat_s(filename, modelName);
-
-	//if (FBXImporter::Import(filename, modelData))
-	if (LoadOBJFile(filename, modelData))
+	//if (LoadOBJFile(filename, modelData))
+	if (FBXImporter::Import(filename, modelData))
 	{
 		UINT byteWidth = modelData.GetByteWidth();
 		numVertices = (byteWidth * actors.size()) / sizeof(Vertex);

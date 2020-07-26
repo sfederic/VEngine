@@ -6,7 +6,7 @@
 //REF: https://peted.azurewebsites.net/hololens-fbx-loading-c/
 //REF: https://help.autodesk.com/view/FBX/2020/ENU/
 
-//NOTE: For the most part, not going to use FBX models with lights, cameras and extra nodes. One model should suffice.
+//NOTE: For the most part, not going to use FBX models with lights, cameras and extra nodes. One model should suffice. Import() code reflects that.
 
 FbxManager* manager;
 FbxIOSettings* ioSetting;
@@ -28,7 +28,7 @@ bool FBXImporter::Import(const char* filename, ModelData& data)
 			importer->GetStatus().GetErrorString());
 	}
 
-	FbxScene* scene = FbxScene::Create(manager, "");
+	FbxScene* scene = FbxScene::Create(manager, "scene0");
 	importer->Import(scene);
 
 	//Remember that the root node is essentially "empty"
@@ -36,6 +36,41 @@ bool FBXImporter::Import(const char* filename, ModelData& data)
 	FbxNode* node = scene->GetNode(nodeCount - 1);
 
 	FbxMesh* mesh = node->GetMesh();
+
+	//ANIMATION
+	//TODO: 
+	//Essentially the fix for skeletal animation is to iterate through all nodes in the scene,
+	//then take their times from the animation keys and apply it to a vector or matrix which can be 
+	//part of a struct. 
+	/*FbxInt nodeFlags = node->GetAllObjectFlags();
+	if (nodeFlags & FbxPropertyFlags::eAnimated)
+	{
+		//Each scene has an animation stack(s)
+		FbxAnimStack* animStack = scene->GetCurrentAnimationStack();
+		//each stack has an animation layer(s)
+		FbxAnimLayer* animLayer = animStack->GetMember<FbxAnimLayer>();
+	
+		//The animation evaluator fix here was taken from the official docs
+		FbxAnimEvaluator* animEvaluator = scene->GetAnimationEvaluator();
+
+		//Curves act as animation lines? (Do I need seperate curves for Pos, Rot, etc?)
+		FbxAnimCurveNode* curveNode = node->LclRotation.GetCurveNode(animLayer);
+		for (int i = 0; i < curveNode->GetCurveCount(0U); i++)
+		{
+			FbxAnimCurve* animCurve = curveNode->GetCurve(i);
+
+			for (int j = 0; j < animCurve->KeyGetCount(); j++)
+			{
+				//Keys are the keyframes into the animation
+				double t = animCurve->KeyGet(j).GetTime().GetSecondDouble();
+				FbxTime time;
+				time.SetSecondDouble(t);
+				//Take the value from the evaluator and later push the Vec/Mat into an animation struct
+				FbxVector4 rot = animEvaluator->GetNodeLocalRotation(node, time);
+				time = time;
+			}
+		}
+	}*/
 
 	//Array setup
 	int numVerts = mesh->GetControlPointsCount();
@@ -60,7 +95,7 @@ bool FBXImporter::Import(const char* filename, ModelData& data)
 		{
 			int index = mesh->GetPolygonVertex(i, j);
 
-			//TODO: indices are wrong. Stuck on ID3D11DeviceContext::Draw() without it
+			//TODO: indices are wrong without the vertex posisitons being compressed down
 			data.indices.push_back(index);
 
 			Vertex vert = {};
