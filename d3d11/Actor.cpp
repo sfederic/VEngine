@@ -2,6 +2,7 @@
 #include "RenderSystem.h"
 #include "Array.h"
 #include "Debug.h"
+#include "FBXImporter.h"
 
 //CONSTRUCTORS
 Actor::Actor()
@@ -90,18 +91,21 @@ void ActorSystem::CreateActors(RenderSystem* dx, int numActorsToSpawn)
 	strcat_s(filename, "Models/");
 	strcat_s(filename, modelName);
 
-	if (LoadOBJFile(filename, modelData))
+	//if (LoadOBJFile(filename, modelData))
+	if(FBXImporter::Import(filename, modelData))
 	{
 		UINT byteWidth = modelData.GetByteWidth();
 		numVertices = (byteWidth * actors.size()) / sizeof(Vertex);
 		dx->CreateVertexBuffer(byteWidth, modelData.verts.data(), this);
+		UINT indicesByteWidth = modelData.indices.size() * sizeof(uint16_t);
+		indexBuffer = dx->CreateDefaultBuffer(indicesByteWidth, D3D11_BIND_INDEX_BUFFER, modelData.indices.data());
 
 		dx->CreateSamplerState(this);
 		dx->CreateTexture(this);
 
 		size_t stride = sizeof(Vertex);
 
-		BoundingBox::CreateFromPoints(boundingBox, modelData.verts.size(), &modelData.verts[0].pos, stride);
+		//BoundingBox::CreateFromPoints(boundingBox, modelData.verts.size(), &modelData.verts[0].pos, stride);
 		BoundingSphere::CreateFromBoundingBox(boundingSphere, boundingBox);
 
 		actors.reserve(numActorsToSpawn);

@@ -3,17 +3,8 @@
 #include "RenderSystem.h"
 #include <vector>
 #include <DirectXMath.h>
+#include "Actor.h"
 
 using namespace DirectX;
 
-struct OBJData
-{
-	UINT GetByteWidth()
-	{
-		return (UINT)(sizeof(Vertex) * verts.size());
-	}
-
-	std::vector<Vertex> verts;
-};
-
-bool LoadOBJFile(const char* filename, OBJData& data);
+bool LoadOBJFile(const char* filename, ModelData& data);

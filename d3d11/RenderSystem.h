@@ -13,9 +13,16 @@
 
 using namespace DirectX;
 
+//TODO: can I put this in a smaller header (along with ModelData etc.)
 struct Vertex
 {
 	XMFLOAT3 pos;
+	XMFLOAT2 uv;
+	XMFLOAT3 normal;
+};
+
+struct VertexUVNormal
+{
 	XMFLOAT2 uv;
 	XMFLOAT3 normal;
 };

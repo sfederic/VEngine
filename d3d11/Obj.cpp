@@ -1,7 +1,7 @@
 #include "Obj.h"
 #include <Windows.h>
 
-bool LoadOBJFile(const char* filename, OBJData& data)
+bool LoadOBJFile(const char* filename, ModelData& data)
 {
 	std::vector<XMFLOAT3> v; //Vertex posisitons
 	std::vector<XMFLOAT2> vt; //Texcoords
@@ -81,7 +81,7 @@ bool LoadOBJFile(const char* filename, OBJData& data)
 		assert(vnf_index < vn.size());
 		vertex.normal = vn[vnf_index];
 
-		data.verts.push_back(vertex);
+		//data.verts.push_back(vertex);
 	}
 
 	fclose(file);

@@ -4,7 +4,7 @@
 #include <DirectXCollision.h>
 #include <vector>
 #include <memory>
-#include "Obj.h"
+#include "RenderSystem.h"
 
 using namespace DirectX;
 
@@ -13,6 +13,18 @@ enum class EActorSystemID
 	Base,
 	DebugSphere,
 	DebugBox
+};
+
+struct ModelData
+{
+	UINT GetByteWidth()
+	{
+		return (UINT)(sizeof(Vertex) * verts.size());
+	}
+
+	std::vector<XMFLOAT3> verts;
+	std::vector<uint16_t> indices;
+	std::vector<VertexUVNormal> uvsNormals;
 };
 
 class Actor
@@ -49,7 +61,7 @@ public:
 	void AddActor();
 	void RemoveActor(int index);
 
-	OBJData modelData;
+	ModelData modelData;
 
 	struct ID3D11Buffer* vertexBuffer;
 	struct ID3D11Buffer* indexBuffer;

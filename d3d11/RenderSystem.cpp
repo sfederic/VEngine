@@ -114,11 +114,11 @@ void RenderSystem::CreateDevice()
 
 	debugBox.modelName = "cube.obj";
 	debugBox.shaderName = L"debugDraw.hlsl";
-	debugBox.CreateActors(this, 1);
+	//debugBox.CreateActors(this, 1);
 
 	debugSphere.shaderName = L"debugDraw.hlsl";
 	debugSphere.modelName = "ico_sphere.obj";
-	debugSphere.CreateActors(this, 1);
+	//debugSphere.CreateActors(this, 1);
 }
 
 void RenderSystem::CreateSwapchain()
@@ -261,6 +261,7 @@ void RenderSystem::RenderActorSystem(ActorSystem* actorSystem)
 	renderSystem.context->PSSetShaderResources(0, 1, &actorSystem->srv);
 
 	context->IASetVertexBuffers(0, 1, &actorSystem->vertexBuffer, &strides, &offsets);
+	context->IASetIndexBuffer(actorSystem->indexBuffer, DXGI_FORMAT_R16_UINT, 0);
 
 	for (int i = 0; i < actorSystem->actors.size(); i++)
 	{
@@ -272,7 +273,8 @@ void RenderSystem::RenderActorSystem(ActorSystem* actorSystem)
 			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 			context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
-			context->Draw(actorSystem->modelData.verts.size(), 0);
+			//context->Draw(actorSystem->modelData.verts.size(), 0);
+			context->DrawIndexed(actorSystem->modelData.indices.size(), 0, 0);
 		}
 	}
 }
