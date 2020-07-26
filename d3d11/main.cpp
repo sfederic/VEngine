@@ -15,21 +15,23 @@
 #include "World.h"
 #include "FileSystem.h"
 #include "Debug.h"
+#include "FBXImporter.h"
 
 int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine, int cmdShow)
 {
+	FBXImporter::Init();
+
 	coreSystem.SetupWindow(instance, cmdShow);
 	coreSystem.SetTimerFrequency();
 	renderSystem.Init();
 	audioSystem.Init();
 	uiSystem.Init();
 
-	ID3D11Buffer* debugLinesBuffer = renderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
+	//D3D11Buffer* debugLinesBuffer = renderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
 
 	//ACTOR SYSTEM TESTING
 	ActorSystem system;
-	system.modelName = "cube.fbx";
-	system.CreateActors(&renderSystem, 1);
+	system.modelName = "monkey.obj";
 
 	//World data testing
 	World* world = GetWorld();

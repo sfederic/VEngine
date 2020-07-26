@@ -11,6 +11,7 @@ using namespace fbxsdk;
 class FBXImporter
 {
 public:
+	static void Init();
 	static bool Import(const char* filename, ModelData& data);
 };
 

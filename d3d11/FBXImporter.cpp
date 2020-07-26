@@ -8,12 +8,19 @@
 
 //NOTE: For the most part, not going to use FBX models with lights, cameras and extra nodes. One model should suffice.
 
+FbxManager* manager;
+FbxIOSettings* ioSetting;
+FbxImporter* importer;
+
+void FBXImporter::Init()
+{
+	manager = FbxManager::Create();
+	ioSetting = FbxIOSettings::Create(manager, IOSROOT);
+	importer = FbxImporter::Create(manager, "");
+}
+
 bool FBXImporter::Import(const char* filename, ModelData& data)
 {
-	FbxManager* manager = FbxManager::Create();
-	FbxIOSettings* ioSetting = FbxIOSettings::Create(manager, IOSROOT);
-
-	FbxImporter* importer = FbxImporter::Create(manager, "");
 	if (!importer->Initialize(filename, -1, manager->GetIOSettings()))
 	{
 		DebugPrint("%s failed to load. Error Code: %d - %s\n", filename, 
@@ -23,7 +30,6 @@ bool FBXImporter::Import(const char* filename, ModelData& data)
 
 	FbxScene* scene = FbxScene::Create(manager, "");
 	importer->Import(scene);
-	importer->Destroy();
 
 	//Remember that the root node is essentially "empty"
 	int nodeCount = scene->GetNodeCount();

@@ -81,7 +81,7 @@ bool LoadOBJFile(const char* filename, ModelData& data)
 		assert(vnf_index < vn.size());
 		vertex.normal = vn[vnf_index];
 
-		//data.verts.push_back(vertex);
+		data.verts.push_back(vertex);
 	}
 
 	fclose(file);
