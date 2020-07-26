@@ -22,9 +22,8 @@ struct ModelData
 		return (UINT)(sizeof(Vertex) * verts.size());
 	}
 
-	std::vector<XMFLOAT3> verts;
+	std::vector<Vertex> verts;
 	std::vector<uint16_t> indices;
-	std::vector<VertexUVNormal> uvsNormals;
 };
 
 class Actor

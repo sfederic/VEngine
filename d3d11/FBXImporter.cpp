@@ -21,11 +21,7 @@ bool FBXImporter::Import(const char* filename, ModelData& data)
 			importer->GetStatus().GetErrorString());
 	}
 
-
-	int lFileMajor, lFileMinor, lFileRevision;
-	importer->GetFileVersion(lFileMajor, lFileMinor, lFileRevision);
-
-	FbxScene* scene = FbxScene::Create(manager, "testScene");
+	FbxScene* scene = FbxScene::Create(manager, "");
 	importer->Import(scene);
 	importer->Destroy();
 
@@ -35,122 +31,61 @@ bool FBXImporter::Import(const char* filename, ModelData& data)
 
 	FbxMesh* mesh = node->GetMesh();
 
-	int verts = mesh->GetControlPointsCount();
+	//Array setup
+	int numVerts = mesh->GetControlPointsCount();
+	int vectorSize = numVerts * mesh->GetPolygonSize(0);
+	assert((vectorSize % 3) == 0);
+	data.verts.reserve(vectorSize);
 
-	data.verts.reserve(verts);
+	//Geometry Elements
+	FbxGeometryElementNormal* normals = mesh->GetElementNormal();
+	FbxGeometryElementUV* uvs = mesh->GetElementUV();
 
-
-
+	int polyIndexCounter = 0; //Used to index into normals and UVs on a per vertex basis
 	int polyCount = mesh->GetPolygonCount();
 
-	int vertNum = 0;
-
+	//Main import loop
 	for (int i = 0; i < polyCount; i++)
 	{
 		int polySize = mesh->GetPolygonSize(i);
+		assert((polySize % 3) == 0);
 
 		for (int j = 0; j < polySize; j++)
 		{
 			int index = mesh->GetPolygonVertex(i, j);
+
+			//TODO: indices are wrong. Stuck on ID3D11DeviceContext::Draw() without it
 			data.indices.push_back(index);
 
-			VertexUVNormal vert = {};
+			Vertex vert = {};
+			
+			//Position
+			FbxVector4 pos = mesh->GetControlPointAt(index);
+			vert.pos.x = (float)pos.mData[0];
+			vert.pos.y = (float)pos.mData[1];
+			vert.pos.z = (float)pos.mData[2];
 
 			//UV
-			FbxGeometryElementUV* uvs = mesh->GetElementUV();
-			FbxVector2 uv = {};
-			if (uvs->GetReferenceMode() == FbxGeometryElement::eByControlPoint)
-			{
-				if (uvs->GetReferenceMode() == FbxGeometryElement::eDirect)
-				{
-					uv = uvs->GetDirectArray().GetAt(index);
-				}
-				else
-				{
-					int uvIndex = uvs->GetIndexArray().GetAt(index);
-					uvs->GetDirectArray().GetAt(uvIndex);
-				}
-			}
-			else if (uvs->GetReferenceMode() == FbxGeometryElement::eByPolygonVertex)
-			{
-				if (uvs->GetReferenceMode() == FbxGeometryElement::eDirect)
-				{
-					uv = uvs->GetDirectArray().GetAt(vertNum);
-				}
-				else
-				{
-					int uvIndex = uvs->GetIndexArray().GetAt(vertNum);
-					uvs->GetDirectArray().GetAt(uvIndex);
-				}
-			}
-
-			vert.uv.x = uv.mData[0];
-			vert.uv.y = uv.mData[1];
+			int uvIndex = uvs->GetIndexArray().GetAt(polyIndexCounter);
+			FbxVector2 uv = uvs->GetDirectArray().GetAt(uvIndex);
+			vert.uv.x = (float)uv.mData[0];
+			vert.uv.y = (float)uv.mData[1];
 
 			//Normal
-			FbxGeometryElementNormal* normals = mesh->GetElementNormal();
-			FbxVector4 normal = {};
+			FbxVector4 normal = normals->GetDirectArray().GetAt(polyIndexCounter);
+			vert.normal.x = (float)normal.mData[0];
+			vert.normal.y = (float)normal.mData[1];
+			vert.normal.z = (float)normal.mData[2];
 
-			if (normals->GetReferenceMode() == FbxGeometryElement::eByControlPoint)
-			{
-				if (normals->GetReferenceMode() == FbxGeometryElement::eDirect)
-				{
-					normal = normals->GetDirectArray().GetAt(index);
-				}
-				else
-				{
-					int normalIndex = normals->GetIndexArray().GetAt(index);
-					normal = normals->GetDirectArray().GetAt(normalIndex);
-				}
-			}
-			else if (normals->GetReferenceMode() == FbxGeometryElement::eByPolygonVertex)
-			{
-				if (normals->GetReferenceMode() == FbxGeometryElement::eDirect)
-				{
-					normal = normals->GetDirectArray().GetAt(vertNum);
-				}
-				else
-				{
-					int normalIndex = normals->GetIndexArray().GetAt(vertNum);
-					normal = normals->GetDirectArray().GetAt(normalIndex);
-				}
-			}
+			data.verts.push_back(vert);
 
-			vert.normal.x = normal.mData[0];
-			vert.normal.y = normal.mData[1];
-			vert.normal.z = normal.mData[2];
-
-			vertNum++;
-
-			data.uvsNormals.push_back(vert);
+			polyIndexCounter++;
 		}
 	}
 
-	for (int i = 0; i < verts; i++)
-	{
-		XMFLOAT3 vert = {};
-
-		//Position
-		FbxVector4 pos = mesh->GetControlPointAt(i);
-		vert.x = pos.mData[0];
-		vert.y = pos.mData[1];
-		vert.z = pos.mData[2];
-
-		//UV
-		/*FbxGeometryElementUV* uvs = mesh->GetElementUV();
-		FbxVector2 uv = uvs->GetDirectArray().GetAt(i);
-		vert.uv.x = uv.mData[0];
-		vert.uv.y = uv.mData[1];
-
-		//Normal
-		FbxGeometryElementNormal* normals = mesh->GetElementNormal(); 
-		FbxVector4 normal = normals->GetDirectArray().GetAt(i);
-		vert.normal.x = normal.mData[0];
-		vert.normal.y = normal.mData[1];
-		vert.normal.z = normal.mData[2];*/
-
-		data.verts.push_back(vert);
-	}
+	mesh->Destroy();
+	node->Destroy();
+	scene->Destroy();
 
 	return true;
 }

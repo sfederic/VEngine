@@ -273,8 +273,8 @@ void RenderSystem::RenderActorSystem(ActorSystem* actorSystem)
 			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 			context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
-			//context->Draw(actorSystem->modelData.verts.size(), 0);
-			context->DrawIndexed(actorSystem->modelData.indices.size(), 0, 0);
+			context->Draw(actorSystem->modelData.verts.size(), 0);
+			//context->DrawIndexed(actorSystem->modelData.indices.size(), 0, 0);
 		}
 	}
 }

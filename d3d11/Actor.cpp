@@ -2,6 +2,7 @@
 #include "RenderSystem.h"
 #include "Array.h"
 #include "Debug.h"
+#include "Obj.h"
 #include "FBXImporter.h"
 
 //CONSTRUCTORS

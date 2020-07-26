@@ -37,7 +37,7 @@ float4 PSMain(VS_OUT i) : SV_Target
 {
 	float4 texColour = t.Sample(s, i.uv);
 	float4 ambient = float4(0.5f, 0.5f, 0.5f, 1.f);
-	//float3 lightDir = float3(0.0f, -1.0f, 0.0f);
-	//float diffuse = dot(-lightDir, i.normal);
+	float3 lightDir = float3(0.5f, 1.85f, 0.33f);
+	float diffuse = dot(-lightDir, i.normal);
 	return texColour;
 }

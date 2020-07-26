@@ -21,12 +21,6 @@ struct Vertex
 	XMFLOAT3 normal;
 };
 
-struct VertexUVNormal
-{
-	XMFLOAT2 uv;
-	XMFLOAT3 normal;
-};
-
 extern Vertex debugLineData[2];
 
 class RenderSystem
