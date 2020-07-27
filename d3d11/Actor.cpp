@@ -91,6 +91,7 @@ void ActorSystem::CreateActors(RenderSystem* dx, int numActorsToSpawn)
 	char filename[128] = {};
 	strcat_s(filename, "Models/");
 	strcat_s(filename, modelName);
+
 	//if (LoadOBJFile(filename, modelData))
 	if (FBXImporter::Import(filename, modelData))
 	{
@@ -98,15 +99,15 @@ void ActorSystem::CreateActors(RenderSystem* dx, int numActorsToSpawn)
 		numVertices = (byteWidth * actors.size()) / sizeof(Vertex);
 		dx->CreateVertexBuffer(byteWidth, modelData.verts.data(), this);
 		UINT indicesByteWidth = modelData.indices.size() * sizeof(uint16_t);
-		//indexBuffer = dx->CreateDefaultBuffer(indicesByteWidth, D3D11_BIND_INDEX_BUFFER, modelData.indices.data());
+		indexBuffer = dx->CreateDefaultBuffer(indicesByteWidth, D3D11_BIND_INDEX_BUFFER, modelData.indices.data());
 
 		dx->CreateSamplerState(this);
 		dx->CreateTexture(this);
 
 		size_t stride = sizeof(Vertex);
 
-		//BoundingBox::CreateFromPoints(boundingBox, modelData.verts.size(), &modelData.verts[0].pos, stride);
-		BoundingSphere::CreateFromBoundingBox(boundingSphere, boundingBox);
+		BoundingBox::CreateFromPoints(boundingBox, modelData.verts.size(), &modelData.verts[0].pos, stride);
+		BoundingSphere::CreateFromPoints(boundingSphere, modelData.verts.size(), &modelData.verts[0].pos, stride);
 
 		actors.reserve(numActorsToSpawn);
 		for (int i = 0; i < numActorsToSpawn; i++)

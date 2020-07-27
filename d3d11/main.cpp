@@ -31,7 +31,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 	//ACTOR SYSTEM TESTING
 	ActorSystem system;
-	system.modelName = "animated_cube.fbx";
+	system.modelName = "cube.fbx";
 	system.CreateActors(&renderSystem, 1);
 
 	//World data testing

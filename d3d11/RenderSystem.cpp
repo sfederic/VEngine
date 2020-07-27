@@ -112,13 +112,13 @@ void RenderSystem::CreateDevice()
 	qd.Query = D3D11_QUERY_TIMESTAMP_DISJOINT;
 	HR(device->CreateQuery(&qd, &disjointQuery));
 
-	debugBox.modelName = "cube.obj";
+	debugBox.modelName = "cube.fbx";
 	debugBox.shaderName = L"debugDraw.hlsl";
-	//debugBox.CreateActors(this, 1);
+	debugBox.CreateActors(this, 1);
 
 	debugSphere.shaderName = L"debugDraw.hlsl";
-	debugSphere.modelName = "ico_sphere.obj";
-	//debugSphere.CreateActors(this, 1);
+	debugSphere.modelName = "ico_sphere.fbx";
+	debugSphere.CreateActors(this, 1);
 }
 
 void RenderSystem::CreateSwapchain()
@@ -302,7 +302,13 @@ void RenderSystem::RenderBounds()
 			for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex].actors.size(); actorIndex++)
 			{
 				matrices.view = camera->view;
-				matrices.model = world->actorSystems[systemIndex].actors[actorIndex].transform;
+
+				XMMATRIX boxBoundsMatrix = XMMatrixIdentity();
+				boxBoundsMatrix.r[3] = world->actorSystems[systemIndex].actors[actorIndex].GetPositionVector();
+				boxBoundsMatrix.r[3].m128_f32[3] = 1.0f;
+				boxBoundsMatrix = XMMatrixScalingFromVector(XMLoadFloat3(&world->actorSystems[systemIndex].boundingBox.Extents));
+
+				matrices.model = boxBoundsMatrix;
 				matrices.mvp = matrices.model * matrices.view * matrices.proj;
 				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 				context->VSSetConstantBuffers(0, 1, &cbMatrices);
@@ -325,7 +331,14 @@ void RenderSystem::RenderBounds()
 			for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex].actors.size(); actorIndex++)
 			{
 				matrices.view = camera->view;
-				matrices.model = world->actorSystems[systemIndex].actors[actorIndex].transform;
+
+				XMMATRIX sphereBoundsMatrix = XMMatrixIdentity();
+				sphereBoundsMatrix.r[3] = world->actorSystems[systemIndex].actors[actorIndex].GetPositionVector();
+				sphereBoundsMatrix.r[3].m128_f32[3] = 1.0f;
+				XMVECTOR boundingSphereScaleFromRadius = XMVectorReplicate(world->actorSystems[systemIndex].boundingSphere.Radius);
+				sphereBoundsMatrix = XMMatrixScalingFromVector(boundingSphereScaleFromRadius);
+
+				matrices.model = sphereBoundsMatrix;
 				matrices.mvp = matrices.model * matrices.view * matrices.proj;
 				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 				context->VSSetConstantBuffers(0, 1, &cbMatrices);
