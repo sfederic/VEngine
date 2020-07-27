@@ -307,6 +307,7 @@ void RenderSystem::RenderBounds()
 				boxBoundsMatrix.r[3] = world->actorSystems[systemIndex].actors[actorIndex].GetPositionVector();
 				boxBoundsMatrix.r[3].m128_f32[3] = 1.0f;
 				boxBoundsMatrix = XMMatrixScalingFromVector(XMLoadFloat3(&world->actorSystems[systemIndex].boundingBox.Extents));
+				boxBoundsMatrix = XMMatrixMultiply(boxBoundsMatrix, world->actorSystems[systemIndex].actors[actorIndex].transform);
 
 				matrices.model = boxBoundsMatrix;
 				matrices.mvp = matrices.model * matrices.view * matrices.proj;
@@ -337,6 +338,7 @@ void RenderSystem::RenderBounds()
 				sphereBoundsMatrix.r[3].m128_f32[3] = 1.0f;
 				XMVECTOR boundingSphereScaleFromRadius = XMVectorReplicate(world->actorSystems[systemIndex].boundingSphere.Radius);
 				sphereBoundsMatrix = XMMatrixScalingFromVector(boundingSphereScaleFromRadius);
+				sphereBoundsMatrix = XMMatrixMultiply(sphereBoundsMatrix, world->actorSystems[systemIndex].actors[actorIndex].transform);
 
 				matrices.model = sphereBoundsMatrix;
 				matrices.mvp = matrices.model * matrices.view * matrices.proj;

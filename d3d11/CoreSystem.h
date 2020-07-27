@@ -26,6 +26,7 @@ public:
 	double deltaTime;
 	double deltaAccum;
 	double ticks;
+	double timeSinceStartup;
 	int frameCount;
 };
 

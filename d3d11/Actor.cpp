@@ -61,6 +61,12 @@ void Actor::SetScale(XMVECTOR scale)
 	transform = XMMatrixScalingFromVector(scale);
 }
 
+void Actor::SetScale(XMFLOAT3 scale)
+{
+	XMVECTOR scaleVec = XMLoadFloat3(&scale);
+	transform = XMMatrixScalingFromVector(scaleVec);
+}
+
 //VECTOR FUNCTIONS
 XMVECTOR Actor::GetForwardVector()
 {

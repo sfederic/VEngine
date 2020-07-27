@@ -49,8 +49,13 @@ void CoreSystem::EndTimer()
 	{ 
 		deltaTime = 0.0; 
 	}
+	else if (deltaTime > 1.0)
+	{
+		deltaTime = 1.0f / 60.f; //Just in case of breakpoint stuff
+	}
 
 	deltaAccum += deltaTime;
+	timeSinceStartup += deltaTime;
 	frameCount++;
 
 	if (deltaAccum > 1.0)
