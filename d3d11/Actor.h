@@ -10,7 +10,7 @@ using namespace DirectX;
 
 enum class EActorSystemID
 {
-	Base,
+	Actor,
 	DebugSphere,
 	DebugBox
 };
@@ -82,7 +82,7 @@ public:
 	const wchar_t* textureName = L"texture.png";
 	const char* modelName = "cube.obj";
 
-	EActorSystemID id = EActorSystemID::Base;
+	EActorSystemID id = EActorSystemID::Actor;
 
 	bool bInstancingActors; //bool for setting system to use instancing
 };

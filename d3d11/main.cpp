@@ -36,7 +36,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 	//World data testing
 	World* world = GetWorld();
-	world->actorSystems.push_back(system);
+	world->AddActorSystem(system);
 
 	//MAIN LOOP
 	while (coreSystem.msg.message != WM_QUIT)
@@ -49,6 +49,15 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		g_FileSystem.Tick();
 		uiSystem.Tick();
 		editorCamera.Tick(deltaTime);
+
+		if (inputSystem.GetKeyUpState(VK_UP))
+		{
+			world->AddActorSystem(system);
+		}
+		if (inputSystem.GetKeyUpState(VK_DOWN))
+		{
+			world->RemoveActorSystem(EActorSystemID::Actor);
+		}
 
 		renderSystem.Tick();
 		renderSystem.RenderSetup(deltaTime);

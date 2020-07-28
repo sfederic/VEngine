@@ -70,7 +70,7 @@ void FileSystem::ReadAllActorSystems(World* world, const char* filename)
 
 		switch (newWorld.actorSystems[systemIndex].id)
 		{
-		case EActorSystemID::Base:
+		case EActorSystemID::Actor:
 			newWorld.actorSystems[systemIndex].CreateActors(&renderSystem, numActorsToSpawn);
 		}
 
