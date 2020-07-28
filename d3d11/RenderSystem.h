@@ -40,9 +40,9 @@ public:
 	void CreateTexture(class ActorSystem* actorSystem);
 
 	void RenderSetup(float deltaTime);
-	void RenderActorSystem(class ActorSystem* actorSystem);
+	void RenderActorSystem(class World* world);
 	void RenderBounds();
-	void RenderEnd(float deltaTime);
+	void RenderEnd(float deltaTime, ID3D11Buffer* debugLineBuffer);
 
 	std::vector<IDXGIAdapter1*> adapters;
 	std::vector<DXGI_ADAPTER_DESC1> adaptersDesc;

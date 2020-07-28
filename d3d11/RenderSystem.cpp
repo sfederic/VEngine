@@ -245,36 +245,41 @@ void RenderSystem::CreateTexture(ActorSystem* actorSystem)
 	actorSystem->srv = srv;
 }
 
-void RenderSystem::RenderActorSystem(ActorSystem* actorSystem)
+void RenderSystem::RenderActorSystem(World* world)
 {
-	auto shader = g_ShaderFactory.shaderMap.find(actorSystem->shaderName);
-
-	if (shader == g_ShaderFactory.shaderMap.end())
+	for (int i = 0; i < world->actorSystems.size(); i++)
 	{
-		DebugPrint("vertex shader file name %ls not found\n", actorSystem->shaderName);
-	}
+		ActorSystem* actorSystem = &world->actorSystems[i];
 
-	context->VSSetShader(shader->second->vertexShader, nullptr, 0);
-	context->PSSetShader(shader->second->pixelShader, nullptr, 0);
+		auto shader = g_ShaderFactory.shaderMap.find(actorSystem->shaderName);
 
-	renderSystem.context->PSSetSamplers(0, 1, &actorSystem->samplerState);
-	renderSystem.context->PSSetShaderResources(0, 1, &actorSystem->srv);
-
-	context->IASetVertexBuffers(0, 1, &actorSystem->vertexBuffer, &strides, &offsets);
-	context->IASetIndexBuffer(actorSystem->indexBuffer, DXGI_FORMAT_R16_UINT, 0);
-
-	for (int i = 0; i < actorSystem->actors.size(); i++)
-	{
-		if (actorSystem->actors[i].bRender)
+		if (shader == g_ShaderFactory.shaderMap.end())
 		{
-			matrices.view = GetPlayerCamera()->view;
-			matrices.model = actorSystem->actors[i].transform;
-			matrices.mvp = matrices.model * matrices.view * matrices.proj;
-			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
-			context->VSSetConstantBuffers(0, 1, &cbMatrices);
+			DebugPrint("vertex shader file name %ls not found\n", actorSystem->shaderName);
+		}
 
-			context->Draw(actorSystem->modelData.verts.size(), 0);
-			//context->DrawIndexed(actorSystem->modelData.indices.size(), 0, 0);
+		context->VSSetShader(shader->second->vertexShader, nullptr, 0);
+		context->PSSetShader(shader->second->pixelShader, nullptr, 0);
+
+		renderSystem.context->PSSetSamplers(0, 1, &actorSystem->samplerState);
+		renderSystem.context->PSSetShaderResources(0, 1, &actorSystem->srv);
+
+		context->IASetVertexBuffers(0, 1, &actorSystem->vertexBuffer, &strides, &offsets);
+		context->IASetIndexBuffer(actorSystem->indexBuffer, DXGI_FORMAT_R16_UINT, 0);
+
+		for (int i = 0; i < actorSystem->actors.size(); i++)
+		{
+			if (actorSystem->actors[i].bRender)
+			{
+				matrices.view = GetPlayerCamera()->view;
+				matrices.model = actorSystem->actors[i].transform;
+				matrices.mvp = matrices.model * matrices.view * matrices.proj;
+				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
+				context->VSSetConstantBuffers(0, 1, &cbMatrices);
+
+				context->Draw(actorSystem->modelData.verts.size(), 0);
+				//context->DrawIndexed(actorSystem->modelData.indices.size(), 0, 0);
+			}
 		}
 	}
 }
@@ -351,22 +356,22 @@ void RenderSystem::RenderBounds()
 	}
 }
 
-void RenderSystem::RenderEnd(float deltaTime)
+void RenderSystem::RenderEnd(float deltaTime, ID3D11Buffer* debugLineBuffer)
 {
 	//DRAW DEBUG LINES
-	/*context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
-	context->IASetVertexBuffers(0, 1, &debugBuffer, &strides, &offsets);
+	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
+	context->IASetVertexBuffers(0, 1, &debugLineBuffer, &strides, &offsets);
 
 	for (int i = 0; i < debugLines.size(); i++)
 	{
-		matrices.view = camera->view;
+		matrices.view = GetPlayerCamera()->view;
 		matrices.model = XMMatrixIdentity();
 		matrices.mvp = matrices.model * matrices.view * matrices.proj;
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 		context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
 		context->Draw(debugLines.size(), 0);
-	}*/
+	}
 
 	//UI RENDERING 
 	//TODO: Put render and d2d stuff UISystem

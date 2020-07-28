@@ -26,6 +26,7 @@ struct ModelData
 	std::vector<uint16_t> indices;
 };
 
+//Mario 64 used the term Actor
 class Actor
 {
 public:

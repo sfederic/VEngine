@@ -1,6 +1,7 @@
 #include "World.h"
 #include "Actor.h"
 #include "Debug.h"
+#include "DebugMenu.h"
 
 World currentWorld;
 
@@ -26,6 +27,7 @@ void World::AddActorSystem(ActorSystem& actorSystem)
 	else
 	{
 		DebugPrint("Actor System already exists in world. Cannot create.\n");
+		debugMenu.AddNotification(L"Cannot create actor system.");
 	}
 }
 
@@ -35,6 +37,7 @@ void World::RemoveActorSystem(EActorSystemID id)
 	if (actorSystemIt == actorSystemMap.end())
 	{
 		DebugPrint("Actor system ID: %d not found to remove.\n", id);
+		debugMenu.AddNotification(L"Actor system not found to remove.");
 		return;
 	}
 
@@ -46,5 +49,18 @@ void World::RemoveActorSystem(EActorSystemID id)
 			actorSystemMap.erase(id);
 			break;
 		}
+	}
+}
+
+ActorSystem* World::GetActorSystem(EActorSystemID id)
+{
+	auto actorSystemIt = actorSystemMap.find(id);
+	if (actorSystemIt == actorSystemMap.end())
+	{
+		DebugPrint("Actor system not found in GetActorSystem/n");
+	}
+	else
+	{
+		return actorSystemIt->second;
 	}
 }

@@ -11,11 +11,12 @@
 #include "ShaderFactory.h"
 #include <omp.h>
 #include "DebugMenu.h"
-#include "Physics.h"
+#include "Raycast.h"
 #include "World.h"
 #include "FileSystem.h"
 #include "Debug.h"
 #include "FBXImporter.h"
+#include "WorldEditor.h"
 
 int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine, int cmdShow)
 {
@@ -27,16 +28,20 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	audioSystem.Init();
 	uiSystem.Init();
 
-	//D3D11Buffer* debugLinesBuffer = renderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
+	ID3D11Buffer* debugLinesBuffer = renderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
 
 	//ACTOR SYSTEM TESTING
-	ActorSystem system;
+	ActorSystem system, system2;
 	system.modelName = "cube.fbx";
-	system.CreateActors(&renderSystem, 1);
+	system2.modelName = "ico_sphere.fbx";
+	system.CreateActors(&renderSystem, 2);
+	system2.CreateActors(&renderSystem, 3);
 
 	//World data testing
 	World* world = GetWorld();
-	world->AddActorSystem(system);
+	//world->AddActorSystem(system);
+	world->actorSystems.push_back(system);
+	//world->actorSystems.push_back(system2);
 
 	//MAIN LOOP
 	while (coreSystem.msg.message != WM_QUIT)
@@ -50,31 +55,31 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		uiSystem.Tick();
 		editorCamera.Tick(deltaTime);
 
+		gWorldEditor.Tick();
+
 		if (inputSystem.GetKeyUpState(VK_UP))
 		{
-			world->AddActorSystem(system);
-		}
-		if (inputSystem.GetKeyUpState(VK_DOWN))
-		{
-			world->RemoveActorSystem(EActorSystemID::Actor);
+			Ray ray = {};
+			RaycastAll(ray, world->actorSystems[0].actors[0].GetPositionVector(),
+				world->actorSystems[0].actors[0].GetForwardVector(), world);
+			{
+				DrawRayDebug(world->actorSystems[0].actors[0].GetPositionVector(),
+					world->actorSystems[0].actors[0].GetForwardVector(), 10000.f, debugLinesBuffer);
+			}
 		}
 
+		//RENDERING
 		renderSystem.Tick();
 		renderSystem.RenderSetup(deltaTime);
-		for (int i = 0; i < world->actorSystems.size(); i++)
-		{
-			renderSystem.RenderActorSystem(&world->actorSystems[i]);
-		}
+		renderSystem.RenderActorSystem(world);
 		renderSystem.RenderBounds();
-		renderSystem.RenderEnd(deltaTime);
+		renderSystem.RenderEnd(deltaTime, debugLinesBuffer);
 
 		inputSystem.InputReset();
 
 		coreSystem.EndTimer();
 	}
 
-	//TODO: Add the rest of cleanup code
-	//So far only D2D gives out mem leaks
 	uiSystem.Cleanup();
 
 	return (int)coreSystem.msg.wParam;

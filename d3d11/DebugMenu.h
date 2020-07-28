@@ -40,6 +40,7 @@ class DebugMenu
 public:
 	DebugMenu();
 	void Tick(class World* world, float deltaTime);
+	void AddNotification(const wchar_t* note);
 
 	std::vector<MenuItem> menuItems;
 	std::vector<DebugNotification> notifications;

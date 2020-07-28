@@ -181,3 +181,8 @@ void DebugMenu::Tick(World* world, float deltaTime)
 		}
 	}
 }
+
+void DebugMenu::AddNotification(const wchar_t* note)
+{
+	notifications.push_back(DebugNotification(note));
+}
