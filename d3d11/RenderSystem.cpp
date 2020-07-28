@@ -12,8 +12,8 @@
 #include "Debug.h"
 #include "WICTextureLoader.h"
 
-RenderSystem renderSystem;
-ShaderFactory g_ShaderFactory;
+RenderSystem gRenderSystem;
+ShaderFactory gShaderFactory;
 
 UINT strides = sizeof(Vertex);
 UINT offsets = 0;
@@ -100,9 +100,9 @@ void RenderSystem::CreateDevice()
 	debugLineData[1].pos = XMFLOAT3(0.f, 0.f, 100.f);
 
 
-	g_ShaderFactory.CompileAllShadersFromFile();
-	g_ShaderFactory.CreateAllShaders(device);
-	g_ShaderFactory.InitHotLoading();
+	gShaderFactory.CompileAllShadersFromFile();
+	gShaderFactory.CreateAllShaders(device);
+	gShaderFactory.InitHotLoading();
 
 	D3D11_QUERY_DESC qd = {};
 	qd.Query = D3D11_QUERY_TIMESTAMP;
@@ -228,7 +228,7 @@ void RenderSystem::CreateSamplerState(ActorSystem* actorSystem)
 	sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
 
 	ID3D11SamplerState* samplerState;
-	HR(renderSystem.device->CreateSamplerState(&sampDesc, &samplerState));
+	HR(gRenderSystem.device->CreateSamplerState(&sampDesc, &samplerState));
 	actorSystem->samplerState = samplerState;
 }
 
@@ -240,7 +240,7 @@ void RenderSystem::CreateTexture(ActorSystem* actorSystem)
 	ID3D11Resource* texture;
 	ID3D11ShaderResourceView* srv;
 
-	HR(CreateWICTextureFromFile(renderSystem.device, textureFilename, &texture, &srv));
+	HR(CreateWICTextureFromFile(gRenderSystem.device, textureFilename, &texture, &srv));
 	actorSystem->texture = texture;
 	actorSystem->srv = srv;
 }
@@ -251,9 +251,9 @@ void RenderSystem::RenderActorSystem(World* world)
 	{
 		ActorSystem* actorSystem = &world->actorSystems[i];
 
-		auto shader = g_ShaderFactory.shaderMap.find(actorSystem->shaderName);
+		auto shader = gShaderFactory.shaderMap.find(actorSystem->shaderName);
 
-		if (shader == g_ShaderFactory.shaderMap.end())
+		if (shader == gShaderFactory.shaderMap.end())
 		{
 			DebugPrint("vertex shader file name %ls not found\n", actorSystem->shaderName);
 		}
@@ -261,8 +261,8 @@ void RenderSystem::RenderActorSystem(World* world)
 		context->VSSetShader(shader->second->vertexShader, nullptr, 0);
 		context->PSSetShader(shader->second->pixelShader, nullptr, 0);
 
-		renderSystem.context->PSSetSamplers(0, 1, &actorSystem->samplerState);
-		renderSystem.context->PSSetShaderResources(0, 1, &actorSystem->srv);
+		gRenderSystem.context->PSSetSamplers(0, 1, &actorSystem->samplerState);
+		gRenderSystem.context->PSSetShaderResources(0, 1, &actorSystem->srv);
 
 		context->IASetVertexBuffers(0, 1, &actorSystem->vertexBuffer, &strides, &offsets);
 		context->IASetIndexBuffer(actorSystem->indexBuffer, DXGI_FORMAT_R16_UINT, 0);
@@ -277,7 +277,7 @@ void RenderSystem::RenderActorSystem(World* world)
 				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 				context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
-				context->Draw(actorSystem->modelData.verts.size(), 0);
+				context->Draw((UINT)actorSystem->modelData.verts.size(), 0);
 				//context->DrawIndexed(actorSystem->modelData.indices.size(), 0, 0);
 			}
 		}
@@ -296,7 +296,7 @@ void RenderSystem::RenderBounds()
 
 	if (bDrawBoundingBoxes)
 	{
-		auto boxIt = g_ShaderFactory.shaderMap.find(debugBox.shaderName);
+		auto boxIt = gShaderFactory.shaderMap.find(debugBox.shaderName);
 		context->VSSetShader(boxIt->second->vertexShader, nullptr, 0);
 		context->PSSetShader(boxIt->second->pixelShader, nullptr, 0);
 
@@ -319,14 +319,14 @@ void RenderSystem::RenderBounds()
 				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 				context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
-				context->Draw(debugBox.modelData.verts.size(), 0);
+				context->Draw((UINT)debugBox.modelData.verts.size(), 0);
 			}
 		}
 	}
 
 	if (bDrawBoundingSpheres)
 	{
-		auto sphereIt = g_ShaderFactory.shaderMap.find(debugSphere.shaderName);
+		auto sphereIt = gShaderFactory.shaderMap.find(debugSphere.shaderName);
 		context->VSSetShader(sphereIt->second->vertexShader, nullptr, 0);
 		context->PSSetShader(sphereIt->second->pixelShader, nullptr, 0);
 
@@ -350,7 +350,7 @@ void RenderSystem::RenderBounds()
 				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 				context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
-				context->Draw(debugSphere.modelData.verts.size(), 0);
+				context->Draw((UINT)debugSphere.modelData.verts.size(), 0);
 			}
 		}
 	}
@@ -370,12 +370,12 @@ void RenderSystem::RenderEnd(float deltaTime, ID3D11Buffer* debugLineBuffer)
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 		context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
-		context->Draw(debugLines.size(), 0);
+		context->Draw((UINT)debugLines.size(), 0);
 	}
 
 	//UI RENDERING 
 	//TODO: Put render and d2d stuff UISystem
-	uiSystem.d2dRenderTarget->BeginDraw();
+	gUISystem.d2dRenderTarget->BeginDraw();
 
 	//Test console rendering and work. Might need to put it into a system
 	console.Tick();
@@ -385,14 +385,14 @@ void RenderSystem::RenderEnd(float deltaTime, ID3D11Buffer* debugLineBuffer)
 	debugMenu.Tick(GetWorld(), deltaTime);
 
 	//UI View testing
-	for (int viewIndex = 0; viewIndex < uiSystem.uiViews.size(); viewIndex++)
+	for (int viewIndex = 0; viewIndex < gUISystem.uiViews.size(); viewIndex++)
 	{
-		uiSystem.uiViews[viewIndex].Tick();
+		gUISystem.uiViews[viewIndex].Tick();
 	}
 
 
 	//END UI RENDERING
-	uiSystem.d2dRenderTarget->EndDraw();
+	gUISystem.d2dRenderTarget->EndDraw();
 
 	//PRESENT
 	HR(swapchain->Present(1, 0));
@@ -464,7 +464,7 @@ void RenderSystem::RenderSetup(float deltaTime)
 
 	if (inputSystem.GetKeyUpState('3'))
 	{
-		g_ShaderFactory.HotReloadShaders();
+		gShaderFactory.HotReloadShaders();
 		debugMenu.notifications.push_back(DebugNotification(L"Shaders reloaded."));
 	}
 }

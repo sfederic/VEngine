@@ -135,7 +135,7 @@ void ActorSystem::CreateActors(RenderSystem* dx, int numActorsToSpawn)
 void ActorSystem::AddActor()
 {
 	Actor actor = Actor();
-	actor.vertexBufferOffset = actors.size() * modelData.GetByteWidth();
+	actor.vertexBufferOffset = (int)(actors.size() * modelData.GetByteWidth());
 
 	actors.push_back(actor);
 }

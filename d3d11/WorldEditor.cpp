@@ -10,7 +10,7 @@ void WorldEditor::Tick()
 {
 	if (inputSystem.GetMouseLeftUpState())
 	{
-		if (RaycastAllFromScreen(screenPickRay, uiSystem.mousePos.x, uiSystem.mousePos.y, &editorCamera, GetWorld()))
+		if (RaycastAllFromScreen(screenPickRay, gUISystem.mousePos.x, gUISystem.mousePos.y, &editorCamera, GetWorld()))
 		{
 			actorIndex = screenPickRay.actorIndex;
 			actorSystemIndex = screenPickRay.actorSystemIndex;

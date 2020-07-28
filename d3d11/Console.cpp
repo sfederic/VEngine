@@ -35,7 +35,7 @@ void Console::ConsoleInput()
 		}
 		else if ((consoleStringIndex < _countof(consoleString)) && (inputSystem.currentDownKey != 0))
 		{
-			consoleString[consoleStringIndex] = inputSystem.currentDownKey; //wchar_t to int64 works
+			consoleString[consoleStringIndex] = inputSystem.currentDownKey;
 			consoleStringIndex++;
 		}
 	}
@@ -51,9 +51,9 @@ void Console::Tick()
 		float width = (float)coreSystem.windowWidth;
 		float height = (float)coreSystem.windowHeight;
 
-		uiSystem.d2dRenderTarget->DrawRectangle({ 0, height - 20.f, width, height }, uiSystem.brushTransparentMenu);
-		uiSystem.d2dRenderTarget->DrawText(consoleString, consoleStringIndex, uiSystem.textFormat,
-			{ 0, height - 20.f, width, height }, uiSystem.brushText);
+		gUISystem.d2dRenderTarget->DrawRectangle({ 0, height - 20.f, width, height }, gUISystem.brushTransparentMenu);
+		gUISystem.d2dRenderTarget->DrawText(consoleString, consoleStringIndex, gUISystem.textFormat,
+			{ 0, height - 20.f, width, height }, gUISystem.brushText);
 	}
 
 	if (inputSystem.GetKeyUpState(VK_OEM_3)) //~ key, like doom and unreal
@@ -77,12 +77,12 @@ void Console::ExecuteString()
 	}
 	else if (wcsncmp(consoleString, ExecuteStrings::GPU, wcslen(ExecuteStrings::GPU)) == 0)
 	{
-		_snwprintf_s(item.text, sizeof(item.text), L"%ls", renderSystem.adaptersDesc[0].Description);
+		_snwprintf_s(item.text, sizeof(item.text), L"%ls", gRenderSystem.adaptersDesc[0].Description);
 		viewItems.push_back(item);
 	}
 	else if (wcsncmp(consoleString, ExecuteStrings::D3D_TIME, wcslen(ExecuteStrings::D3D_TIME)) == 0)
 	{
-		_snwprintf_s(item.text, sizeof(item.text), L"D3D11 Render: %f", renderSystem.renderTime);
+		_snwprintf_s(item.text, sizeof(item.text), L"D3D11 Render: %f", gRenderSystem.renderTime);
 		viewItems.push_back(item);
 	}
 	else if (wcsncmp(consoleString, ExecuteStrings::POP, wcslen(ExecuteStrings::POP)) == 0)
@@ -119,8 +119,8 @@ void Console::DrawViewItems()
 		const float width = (float)coreSystem.windowWidth;
 		const float height = (float)coreSystem.windowHeight;
 
-		uiSystem.d2dRenderTarget->DrawTextA(viewItems[i].text, wcslen(viewItems[i].text), uiSystem.textFormat, 
-			{ 0, yMarginIncrement, width, height }, uiSystem.brushText);
+		gUISystem.d2dRenderTarget->DrawTextA(viewItems[i].text, wcslen(viewItems[i].text), gUISystem.textFormat,
+			{ 0, yMarginIncrement, width, height }, gUISystem.brushText);
 
 	}
 }

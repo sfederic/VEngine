@@ -4,13 +4,13 @@
 #include "Input.h"
 #include "Debug.h"
 
-UISystem uiSystem;
+UISystem gUISystem;
 
 void UISystem::Init()
 {
 	//Direct2D Init
 	IDXGISurface* surface;
-	HR(renderSystem.swapchain->GetBuffer(0, IID_PPV_ARGS(&surface)));
+	HR(gRenderSystem.swapchain->GetBuffer(0, IID_PPV_ARGS(&surface)));
 
 	D2D1_FACTORY_OPTIONS options;
 	options.debugLevel = D2D1_DEBUG_LEVEL_INFORMATION;
@@ -56,14 +56,14 @@ void UISystem::Tick()
 	if (inputSystem.GetKeyUpState(VK_DELETE))
 	{
 		//world.actorSystems[ray.actorSystemIndex]->RemoveActor(ray.actorIndex);
-		uiSystem.uiViews.pop_back();
+		gUISystem.uiViews.pop_back();
 	}
 
 	if (inputSystem.GetKeyUpState(VK_BACK))
 	{
-		if (uiSystem.uiViews.size() > 0)
+		if (gUISystem.uiViews.size() > 0)
 		{
-			uiSystem.uiViews.pop_back();
+			gUISystem.uiViews.pop_back();
 		}
 	}
 }
@@ -112,9 +112,9 @@ void UISystem::Label(const wchar_t* text, D2D1_RECT_F layoutRect)
 
 void UISystem::ResetAllActiveUIViews()
 {
-	for (int i = 0; i < uiSystem.uiViews.size(); i++)
+	for (int i = 0; i < gUISystem.uiViews.size(); i++)
 	{
-		uiSystem.uiViews[i].bIsActive = false;
+		gUISystem.uiViews[i].bIsActive = false;
 	}
 }
 
@@ -134,7 +134,7 @@ void UISystem::AddView(const wchar_t* text, int actorSystemIndex, int actorIndex
 		}
 	}
 
-	uiViews.push_back(UIActorView(text, uiSystem.mousePos.x, uiSystem.mousePos.y, actorSystemIndex, actorIndex));
+	uiViews.push_back(UIActorView(text, gUISystem.mousePos.x, gUISystem.mousePos.y, actorSystemIndex, actorIndex));
 }
 
 void UIActorView::Tick()
@@ -145,15 +145,15 @@ void UIActorView::Tick()
 	titleRect.bottom = viewRect.bottom - 130.f;
 	D2D1_RECT_F closeRect = { titleRect };
 	closeRect.left = titleRect.left + 80.f;
-	closeRect.bottom - titleRect.bottom;
+	closeRect.bottom -= titleRect.bottom;
 
-	uiSystem.d2dRenderTarget->FillRectangle(viewRect, uiSystem.brushTransparentMenu);
-	uiSystem.d2dRenderTarget->FillRectangle(titleRect, uiSystem.brushText);
-	uiSystem.d2dRenderTarget->DrawTextA(title, wcslen(title), uiSystem.textFormat, titleRect, uiSystem.brushTextBlack);
+	gUISystem.d2dRenderTarget->FillRectangle(viewRect, gUISystem.brushTransparentMenu);
+	gUISystem.d2dRenderTarget->FillRectangle(titleRect, gUISystem.brushText);
+	gUISystem.d2dRenderTarget->DrawTextA(title, wcslen(title), gUISystem.textFormat, titleRect, gUISystem.brushTextBlack);
 
-	if (uiSystem.Button(viewRect, uiSystem.brushTransparentMenu))
+	if (gUISystem.Button(viewRect, gUISystem.brushTransparentMenu))
 	{
-		uiSystem.ResetAllActiveUIViews();
+		gUISystem.ResetAllActiveUIViews();
 		bIsActive = true;
 	}
 
@@ -165,12 +165,12 @@ void UIActorView::Tick()
 	//TODO: view positioning is sloppy. GetAsyncKey is reading in true for the entire frame regardless of previous mouse state functions
 	if (bIsActive)
 	{
-		if(uiSystem.DragButton(viewRect, uiSystem.brushTextBlack))
+		if(gUISystem.DragButton(viewRect, gUISystem.brushTextBlack))
 		{
 			if (inputSystem.GetAsyncKey(VK_LBUTTON))
 			{
-				viewRect.left = (float)uiSystem.mousePos.x - 50.f;
-				viewRect.top = (float)uiSystem.mousePos.y - 75.f;
+				viewRect.left = (float)gUISystem.mousePos.x - 50.f;
+				viewRect.top = (float)gUISystem.mousePos.y - 75.f;
 				viewRect.right = viewRect.left + 100.f;
 				viewRect.bottom = viewRect.top + 150.f;
 			}

@@ -165,6 +165,7 @@
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="Raycast.cpp" />
     <ClCompile Include="ShaderFactory.cpp" />
+    <ClCompile Include="TimerSystem.cpp" />
     <ClCompile Include="UISystem.cpp" />
     <ClCompile Include="CoreSystem.cpp" />
     <ClCompile Include="World.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="Obj.h" />
     <ClInclude Include="Raycast.h" />
     <ClInclude Include="ShaderFactory.h" />
+    <ClInclude Include="TimerSystem.h" />
     <ClInclude Include="UISystem.h" />
     <ClInclude Include="CoreSystem.h" />
     <ClInclude Include="World.h" />

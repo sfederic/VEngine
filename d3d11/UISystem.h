@@ -67,4 +67,4 @@ public:
 	IDWriteTextFormat* textFormat;
 };
 
-extern UISystem uiSystem;
+extern UISystem gUISystem;

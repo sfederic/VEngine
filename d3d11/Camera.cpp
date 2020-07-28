@@ -30,7 +30,7 @@ void Camera::Tick(float deltaTime)
 		location += attachedOffset;
 	}
 
-	MouseMove(uiSystem.mousePos.x, uiSystem.mousePos.y);
+	MouseMove(gUISystem.mousePos.x, gUISystem.mousePos.y);
 	UpdateViewMatrix();
 
 	//WASD MOVEMENT

@@ -39,8 +39,8 @@ void DebugMenu::Tick(World* world, float deltaTime)
 		{
 			notifications[i].timeOnScreen += deltaTime;
 			float notificationOffsetY = 20.f * i;
-			uiSystem.d2dRenderTarget->DrawTextA(notifications[i].text, wcslen(notifications[i].text), uiSystem.textFormat,
-				{ 0.f, notificationOffsetY, 1000.f, 1000.f }, uiSystem.brushText);
+			gUISystem.d2dRenderTarget->DrawTextA(notifications[i].text, wcslen(notifications[i].text), gUISystem.textFormat,
+				{ 0.f, notificationOffsetY, 1000.f, 1000.f }, gUISystem.brushText);
 		}
 		else
 		{
@@ -67,7 +67,7 @@ void DebugMenu::Tick(World* world, float deltaTime)
 	if (bDebugMenuActive && !bSubMenuOpen)
 	{
 		//Main window
-		uiSystem.d2dRenderTarget->FillRectangle({ menuStartPosX, menuStartPosY, menuWidth, menuHeight }, uiSystem.brushTransparentMenu);
+		gUISystem.d2dRenderTarget->FillRectangle({ menuStartPosX, menuStartPosY, menuWidth, menuHeight }, gUISystem.brushTransparentMenu);
 
 		float textOffsetY = 0.f;
 
@@ -99,13 +99,13 @@ void DebugMenu::Tick(World* world, float deltaTime)
 
 			if (menuCursorIndex != i)
 			{
-				uiSystem.d2dRenderTarget->DrawTextA(menuItems[i].name, wcslen(menuItems[i].name), uiSystem.textFormat, { menuStartPosX + textOffsetX,
-					menuStartPosY + textOffsetY, menuWidth, textOffsetY }, uiSystem.brushText);
+				gUISystem.d2dRenderTarget->DrawTextA(menuItems[i].name, wcslen(menuItems[i].name), gUISystem.textFormat, { menuStartPosX + textOffsetX,
+					menuStartPosY + textOffsetY, menuWidth, textOffsetY }, gUISystem.brushText);
 			}
 			else
 			{
-				uiSystem.d2dRenderTarget->DrawTextA(menuItems[i].name, wcslen(menuItems[i].name), uiSystem.textFormat, { menuStartPosX + textOffsetX,
-					menuStartPosY + textOffsetY, menuWidth, textOffsetY }, uiSystem.brushTransparentMenu);
+				gUISystem.d2dRenderTarget->DrawTextA(menuItems[i].name, wcslen(menuItems[i].name), gUISystem.textFormat, { menuStartPosX + textOffsetX,
+					menuStartPosY + textOffsetY, menuWidth, textOffsetY }, gUISystem.brushTransparentMenu);
 			}
 		}
 	}
@@ -116,14 +116,14 @@ void DebugMenu::Tick(World* world, float deltaTime)
 		if (inputSystem.GetKeyUpState(VK_RETURN))
 		{
 			//... On/Off code for various switches
-			renderSystem.bQueryGPU = false;
-			renderSystem.bQueryGPUInner = false;
+			gRenderSystem.bQueryGPU = false;
+			gRenderSystem.bQueryGPUInner = false;
 		}
 
 		float subMenuHeight = (menuItems[menuCursorIndex].subMenuItems.size() * 20.f) + 30.f;
 
 		//Draw menu background
-		uiSystem.d2dRenderTarget->FillRectangle({ menuStartPosX, menuStartPosY, menuWidth, subMenuHeight }, uiSystem.brushTransparentMenu);
+		gUISystem.d2dRenderTarget->FillRectangle({ menuStartPosX, menuStartPosY, menuWidth, subMenuHeight }, gUISystem.brushTransparentMenu);
 
 		float subMenuTextOffsetY = 0.f;
 
@@ -139,19 +139,19 @@ void DebugMenu::Tick(World* world, float deltaTime)
 			break;
 
 		case EMenuID::RENDERING:
-			renderSystem.bQueryGPU = true;
+			gRenderSystem.bQueryGPU = true;
 
 			wchar_t renderText[64];
-			_snwprintf_s(renderText, sizeof(renderText), L"D3D11 Timer: %f", renderSystem.renderTime);
+			_snwprintf_s(renderText, sizeof(renderText), L"D3D11 Timer: %f", gRenderSystem.renderTime);
 			menuItems[menuCursorIndex].subMenuItems[0] = renderText;
 
 			wchar_t gpuText[64];
-			_snwprintf_s(gpuText, sizeof(gpuText), L"GPU: %ls", renderSystem.adaptersDesc[0].Description);
+			_snwprintf_s(gpuText, sizeof(gpuText), L"GPU: %ls", gRenderSystem.adaptersDesc[0].Description);
 			menuItems[menuCursorIndex].subMenuItems[1] = gpuText;
 			break;
 
 		default:
-			renderSystem.bQueryGPU = false;
+			gRenderSystem.bQueryGPU = false;
 			break;
 		}
 
@@ -161,9 +161,9 @@ void DebugMenu::Tick(World* world, float deltaTime)
 			subMenuTextOffsetY += 20.f;
 			float subMenuHeight = (menuItems[menuCursorIndex].subMenuItems.size() * 20.f);
 
-			uiSystem.d2dRenderTarget->DrawTextA(menuItems[menuCursorIndex].subMenuItems[i],
-				wcslen(menuItems[menuCursorIndex].subMenuItems[i]), uiSystem.textFormat, { menuStartPosX + textOffsetX,
-				menuStartPosY + subMenuTextOffsetY, menuWidth, subMenuTextOffsetY }, uiSystem.brushText);
+			gUISystem.d2dRenderTarget->DrawTextA(menuItems[menuCursorIndex].subMenuItems[i],
+				wcslen(menuItems[menuCursorIndex].subMenuItems[i]), gUISystem.textFormat, { menuStartPosX + textOffsetX,
+				menuStartPosY + subMenuTextOffsetY, menuWidth, subMenuTextOffsetY }, gUISystem.brushText);
 
 			//Was for moving through submenus with arrow keys.
 			/*if (menuCursorIndex != i)

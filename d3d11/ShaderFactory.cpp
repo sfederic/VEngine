@@ -108,7 +108,7 @@ void ShaderFactory::HotReloadShaders()
         DebugPrint("Shader reload start...\n");
         CleanUpShaders();
         CompileAllShadersFromFile();
-        CreateAllShaders(renderSystem.device);
+        CreateAllShaders(gRenderSystem.device);
         DebugPrint("Shader reload complete\n");
 
         //g_DebugMenu->notifications.push_back(DebugNotification(L"Shader reload complete."));

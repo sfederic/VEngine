@@ -4,7 +4,7 @@
 #include "Actor.h"
 #include <unordered_map>
 
-//Mario Bros. used the term World
+//Mario Bros. used the term World. One world per time for this engine. No streaming. No cross world functionality.
 class World
 {
 public:
@@ -20,6 +20,6 @@ public:
 	char name[64];
 };
 
-extern World currentWorld;
+extern World gCurrentWorld;
 
 World* GetWorld();

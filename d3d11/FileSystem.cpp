@@ -71,7 +71,7 @@ void FileSystem::ReadAllActorSystems(World* world, const char* filename)
 		switch (newWorld.actorSystems[systemIndex].id)
 		{
 		case EActorSystemID::Actor:
-			newWorld.actorSystems[systemIndex].CreateActors(&renderSystem, numActorsToSpawn);
+			newWorld.actorSystems[systemIndex].CreateActors(&gRenderSystem, numActorsToSpawn);
 		}
 
 		for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex].actors.size(); actorIndex++)
@@ -81,9 +81,9 @@ void FileSystem::ReadAllActorSystems(World* world, const char* filename)
 
 	}
 
-	currentWorld.CleaupAllActors();
+	gCurrentWorld.CleaupAllActors();
 
-	currentWorld = newWorld;
+	gCurrentWorld = newWorld;
 
 	DebugPrint("All actor systems loaded.\n");
 	debugMenu.notifications.push_back(DebugNotification(L"All actor systems loaded."));

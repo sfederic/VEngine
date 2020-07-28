@@ -17,6 +17,7 @@
 #include "Debug.h"
 #include "FBXImporter.h"
 #include "WorldEditor.h"
+#include "TimerSystem.h"
 
 int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine, int cmdShow)
 {
@@ -24,18 +25,18 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 	coreSystem.SetupWindow(instance, cmdShow);
 	coreSystem.SetTimerFrequency();
-	renderSystem.Init();
+	gRenderSystem.Init();
 	audioSystem.Init();
-	uiSystem.Init();
+	gUISystem.Init();
 
-	ID3D11Buffer* debugLinesBuffer = renderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
+	ID3D11Buffer* debugLinesBuffer = gRenderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
 
 	//ACTOR SYSTEM TESTING
 	ActorSystem system, system2;
 	system.modelName = "cube.fbx";
 	system2.modelName = "ico_sphere.fbx";
-	system.CreateActors(&renderSystem, 2);
-	system2.CreateActors(&renderSystem, 3);
+	system.CreateActors(&gRenderSystem, 2);
+	system2.CreateActors(&gRenderSystem, 3);
 
 	//World data testing
 	World* world = GetWorld();
@@ -52,35 +53,26 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		coreSystem.HandleMessages();
 
 		g_FileSystem.Tick();
-		uiSystem.Tick();
+		gUISystem.Tick();
 		editorCamera.Tick(deltaTime);
+
+		gTimerSystem.Tick(deltaTime);
 
 		gWorldEditor.Tick();
 
-		if (inputSystem.GetKeyUpState(VK_UP))
-		{
-			Ray ray = {};
-			RaycastAll(ray, world->actorSystems[0].actors[0].GetPositionVector(),
-				world->actorSystems[0].actors[0].GetForwardVector(), world);
-			{
-				DrawRayDebug(world->actorSystems[0].actors[0].GetPositionVector(),
-					world->actorSystems[0].actors[0].GetForwardVector(), 10000.f, debugLinesBuffer);
-			}
-		}
-
 		//RENDERING
-		renderSystem.Tick();
-		renderSystem.RenderSetup(deltaTime);
-		renderSystem.RenderActorSystem(world);
-		renderSystem.RenderBounds();
-		renderSystem.RenderEnd(deltaTime, debugLinesBuffer);
+		gRenderSystem.Tick();
+		gRenderSystem.RenderSetup(deltaTime);
+		gRenderSystem.RenderActorSystem(world);
+		gRenderSystem.RenderBounds();
+		gRenderSystem.RenderEnd(deltaTime, debugLinesBuffer);
 
 		inputSystem.InputReset();
 
 		coreSystem.EndTimer();
 	}
 
-	uiSystem.Cleanup();
+	gUISystem.Cleanup();
 
 	return (int)coreSystem.msg.wParam;
 }

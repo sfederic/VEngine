@@ -3,12 +3,12 @@
 #include "Debug.h"
 #include "DebugMenu.h"
 
-World currentWorld;
+World gCurrentWorld;
 
 //Returns the current active world
 World* GetWorld()
 {
-	return &currentWorld;
+	return &gCurrentWorld;
 }
 
 void World::CleaupAllActors()

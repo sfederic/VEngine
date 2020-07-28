@@ -90,4 +90,4 @@ public:
 	bool bQueryGPUInner = false;
 };
 
-extern RenderSystem renderSystem;
+extern RenderSystem gRenderSystem;
