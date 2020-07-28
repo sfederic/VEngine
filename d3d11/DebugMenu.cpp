@@ -11,13 +11,15 @@ DebugMenu debugMenu;
 DebugMenu::DebugMenu()
 {
 	menuItems.push_back(MenuItem(L"Actors", EMenuID::ACTORS));
-		menuItems[(int)EMenuID::ACTORS].subMenuItems.push_back(L"Actor Count: ");
+	menuItems[(int)EMenuID::ACTORS].subMenuItems.push_back(L"Actor Count: ");
 
 	menuItems.push_back(MenuItem(L"Actor Systems", EMenuID::ACTORSYSTEMS));
+	menuItems[(int)EMenuID::ACTORSYSTEMS].subMenuItems.push_back(L"Test Actor System");
+	menuItems[(int)EMenuID::ACTORSYSTEMS].subMenuItems.push_back(L"Test Actor System2");
 
 	menuItems.push_back(MenuItem(L"Rendering", EMenuID::RENDERING));
-		menuItems[(int)EMenuID::RENDERING].subMenuItems.push_back(L"D3D11 Timer: ");
-		menuItems[(int)EMenuID::RENDERING].subMenuItems.push_back(L"GPU: ");
+	menuItems[(int)EMenuID::RENDERING].subMenuItems.push_back(L"D3D11 Timer: ");
+	menuItems[(int)EMenuID::RENDERING].subMenuItems.push_back(L"GPU: ");
 }
 
 void DebugMenu::Tick(World* world, float deltaTime)
@@ -28,7 +30,7 @@ void DebugMenu::Tick(World* world, float deltaTime)
 	float menuHeight = (menuItems.size() * 20.f) + 30.f;
 	float menuStartPosX = 10.f;
 	float menuStartPosY = 10.f;
-	float menuWidth = (float)coreSystem.windowWidth / 2.f;
+	float menuWidth = (float)gCoreSystem.windowWidth / 2.f;
 	float textOffsetX = 20.f;
 
 	//Handle notifications (eg. "Shaders recompiled", "ERROR: Not X", etc)
@@ -156,7 +158,7 @@ void DebugMenu::Tick(World* world, float deltaTime)
 		}
 
 		//Submenu items
-		for (int i = 0; i < menuItems[menuCursorIndex].subMenuItems.size(); i++)
+		/*for (int i = 0; i < menuItems[menuCursorIndex].subMenuItems.size(); i++)
 		{
 			subMenuTextOffsetY += 20.f;
 			float subMenuHeight = (menuItems[menuCursorIndex].subMenuItems.size() * 20.f);
@@ -166,19 +168,19 @@ void DebugMenu::Tick(World* world, float deltaTime)
 				menuStartPosY + subMenuTextOffsetY, menuWidth, subMenuTextOffsetY }, gUISystem.brushText);
 
 			//Was for moving through submenus with arrow keys.
-			/*if (menuCursorIndex != i)
+			if (menuCursorIndex != i)
 			{
-				ui->d2dRenderTarget->DrawTextA(menuItems[menuCursorIndex].subMenuItems[i], 
-					wcslen(menuItems[menuCursorIndex].subMenuItems[i]), ui->textFormat, { menuStartPosX + textOffsetX,
-					menuStartPosY + subMenuTextOffsetY, menuWidth, subMenuHeight }, ui->brushText);
+				gUISystem.d2dRenderTarget->DrawTextA(menuItems[menuCursorIndex].subMenuItems[i], 
+					wcslen(menuItems[menuCursorIndex].subMenuItems[i]), gUISystem.textFormat, { menuStartPosX + textOffsetX,
+					menuStartPosY + subMenuTextOffsetY, menuWidth, subMenuHeight }, gUISystem.brushText);
 			}
 			else
 			{
-				ui->d2dRenderTarget->DrawTextA(menuItems[menuCursorIndex].subMenuItems[i],
-					wcslen(menuItems[menuCursorIndex].subMenuItems[i]), ui->textFormat, { menuStartPosX + textOffsetX,
-					menuStartPosY + subMenuTextOffsetY, menuWidth, subMenuHeight }, ui->brushTransparentMenu);
-			}*/
-		}
+				gUISystem.d2dRenderTarget->DrawTextA(menuItems[menuCursorIndex].subMenuItems[i],
+					wcslen(menuItems[menuCursorIndex].subMenuItems[i]), gUISystem.textFormat, { menuStartPosX + textOffsetX,
+					menuStartPosY + subMenuTextOffsetY, menuWidth, subMenuHeight }, gUISystem.brushTransparentMenu);
+			}
+		}*/
 	}
 }
 

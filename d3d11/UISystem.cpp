@@ -51,7 +51,7 @@ void UISystem::Cleanup()
 void UISystem::Tick()
 {
 	GetCursorPos(&mousePos);
-	ScreenToClient(coreSystem.mainWindow, &mousePos);
+	ScreenToClient(gCoreSystem.mainWindow, &mousePos);
 
 	if (inputSystem.GetKeyUpState(VK_DELETE))
 	{

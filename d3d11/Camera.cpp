@@ -34,7 +34,7 @@ void Camera::Tick(float deltaTime)
 	UpdateViewMatrix();
 
 	//WASD MOVEMENT
-	if (!console.bConsoleActive)
+	if (!gConsole.bConsoleActive)
 	{
 		const float moveSpeed = 7.5f * deltaTime;
 
@@ -129,7 +129,7 @@ void Camera::MouseMove(int x, int y)
 
 	if (GetAsyncKeyState(VK_RBUTTON) < 0)
 	{
-		SetCapture(coreSystem.mainWindow);
+		SetCapture(gCoreSystem.mainWindow);
 
 		float dx = XMConvertToRadians(0.25f * (float)(x - lastMousePos.x));
 		float dy = XMConvertToRadians(0.25f * (float)(y - lastMousePos.y));

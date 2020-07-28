@@ -23,11 +23,14 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 {
 	FBXImporter::Init();
 
-	coreSystem.SetupWindow(instance, cmdShow);
-	coreSystem.SetTimerFrequency();
+	gCoreSystem.SetupWindow(instance, cmdShow);
+	gCoreSystem.SetTimerFrequency();
 	gRenderSystem.Init();
-	audioSystem.Init();
+	gAudioSystem.Init();
 	gUISystem.Init();
+
+	D3D11_FEATURE_DATA_THREADING threadFeature = {};
+	gRenderSystem.device->CheckFeatureSupport(D3D11_FEATURE_THREADING, &threadFeature, sizeof(threadFeature));
 
 	ID3D11Buffer* debugLinesBuffer = gRenderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
 
@@ -45,12 +48,12 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	//world->actorSystems.push_back(system2);
 
 	//MAIN LOOP
-	while (coreSystem.msg.message != WM_QUIT)
+	while (gCoreSystem.msg.message != WM_QUIT)
 	{
-		const float deltaTime = coreSystem.deltaTime;
+		const float deltaTime = gCoreSystem.deltaTime;
 
-		coreSystem.StartTimer();
-		coreSystem.HandleMessages();
+		gCoreSystem.StartTimer();
+		gCoreSystem.HandleMessages();
 
 		g_FileSystem.Tick();
 		gUISystem.Tick();
@@ -69,10 +72,10 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 		inputSystem.InputReset();
 
-		coreSystem.EndTimer();
+		gCoreSystem.EndTimer();
 	}
 
 	gUISystem.Cleanup();
 
-	return (int)coreSystem.msg.wParam;
+	return (int)gCoreSystem.msg.wParam;
 }

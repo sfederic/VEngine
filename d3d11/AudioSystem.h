@@ -21,4 +21,4 @@ public:
 	std::vector<AudioChunk*> audioChunks;
 };
 
-extern AudioSystem audioSystem;
+extern AudioSystem gAudioSystem;

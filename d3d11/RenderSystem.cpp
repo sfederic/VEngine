@@ -54,7 +54,7 @@ void RenderSystem::Tick()
 
 void RenderSystem::Init()
 {
-	viewport = { 0.f, 0.f, (float)coreSystem.windowWidth, (float)coreSystem.windowHeight, 0.f, 1.f };
+	viewport = { 0.f, 0.f, (float)gCoreSystem.windowWidth, (float)gCoreSystem.windowHeight, 0.f, 1.f };
 
 	CreateDevice();
 	CreateSwapchain();
@@ -124,11 +124,11 @@ void RenderSystem::CreateDevice()
 void RenderSystem::CreateSwapchain()
 {
 	DXGI_SWAP_CHAIN_DESC sd = {};
-	sd.BufferDesc = { (UINT)coreSystem.windowWidth, (UINT)coreSystem.windowHeight, {60, 1}, DXGI_FORMAT_R8G8B8A8_UNORM };
+	sd.BufferDesc = { (UINT)gCoreSystem.windowWidth, (UINT)gCoreSystem.windowHeight, {60, 1}, DXGI_FORMAT_R8G8B8A8_UNORM };
 	sd.Windowed = TRUE;
 	sd.SampleDesc.Count = 1;
 	sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-	sd.OutputWindow = coreSystem.mainWindow;
+	sd.OutputWindow = gCoreSystem.mainWindow;
 	sd.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
 	sd.BufferCount = frameCount;
 
@@ -154,8 +154,8 @@ void RenderSystem::CreateRTVAndDSV()
 	dsDesc.MipLevels = 1;
 	dsDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 	dsDesc.SampleDesc.Count = 1;
-	dsDesc.Width = coreSystem.windowWidth;
-	dsDesc.Height = coreSystem.windowHeight;
+	dsDesc.Width = gCoreSystem.windowWidth;
+	dsDesc.Height = gCoreSystem.windowHeight;
 
 	ID3D11Texture2D* depthStencilBuffer;
 	HR(device->CreateTexture2D(&dsDesc, nullptr, &depthStencilBuffer));
@@ -211,7 +211,7 @@ void RenderSystem::CreateConstantBuffer()
 {
 	matrices.model = XMMatrixIdentity();
 	matrices.view = XMMatrixIdentity();
-	matrices.proj = XMMatrixPerspectiveFovLH(XM_PI / 3, coreSystem.GetAspectRatio(), 0.01f, 1000.f);
+	matrices.proj = XMMatrixPerspectiveFovLH(XM_PI / 3, gCoreSystem.GetAspectRatio(), 0.01f, 1000.f);
 
 	editorCamera.proj = matrices.proj;
 	matrices.mvp = matrices.model * matrices.view * matrices.proj;
@@ -378,8 +378,8 @@ void RenderSystem::RenderEnd(float deltaTime, ID3D11Buffer* debugLineBuffer)
 	gUISystem.d2dRenderTarget->BeginDraw();
 
 	//Test console rendering and work. Might need to put it into a system
-	console.Tick();
-	console.DrawViewItems();
+	gConsole.Tick();
+	gConsole.DrawViewItems();
 
 	//Debug menu testing (really need to fix this d2d stuff in Render)
 	debugMenu.Tick(GetWorld(), deltaTime);

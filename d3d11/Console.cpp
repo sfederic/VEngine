@@ -8,7 +8,7 @@
 #include "World.h"
 #include "DebugMenu.h"
 
-Console console;
+Console gConsole;
 
 namespace ExecuteStrings
 {
@@ -48,8 +48,8 @@ void Console::Tick()
 	{
 		Console::ConsoleInput();
 
-		float width = (float)coreSystem.windowWidth;
-		float height = (float)coreSystem.windowHeight;
+		float width = (float)gCoreSystem.windowWidth;
+		float height = (float)gCoreSystem.windowHeight;
 
 		gUISystem.d2dRenderTarget->DrawRectangle({ 0, height - 20.f, width, height }, gUISystem.brushTransparentMenu);
 		gUISystem.d2dRenderTarget->DrawText(consoleString, consoleStringIndex, gUISystem.textFormat,
@@ -73,7 +73,7 @@ void Console::ExecuteString()
 
 	if (wcsncmp(consoleString, ExecuteStrings::EXIT, wcslen(ExecuteStrings::EXIT)) == 0)
 	{
-		coreSystem.msg.message = WM_QUIT;
+		gCoreSystem.msg.message = WM_QUIT;
 	}
 	else if (wcsncmp(consoleString, ExecuteStrings::GPU, wcslen(ExecuteStrings::GPU)) == 0)
 	{
@@ -116,8 +116,8 @@ void Console::DrawViewItems()
 	{
 		const float yMarginIncrement = 20.f * i;
 
-		const float width = (float)coreSystem.windowWidth;
-		const float height = (float)coreSystem.windowHeight;
+		const float width = (float)gCoreSystem.windowWidth;
+		const float height = (float)gCoreSystem.windowHeight;
 
 		gUISystem.d2dRenderTarget->DrawTextA(viewItems[i].text, wcslen(viewItems[i].text), gUISystem.textFormat,
 			{ 0, yMarginIncrement, width, height }, gUISystem.brushText);

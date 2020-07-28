@@ -22,4 +22,4 @@ public:
 
 };
 
-extern Console console;
+extern Console gConsole;

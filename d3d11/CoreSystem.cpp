@@ -4,7 +4,7 @@
 #include "Debug.h"
 #include <stdio.h>
 
-CoreSystem coreSystem;
+CoreSystem gCoreSystem;
 
 void CoreSystem::SetupWindow(HINSTANCE instance, int cmdShow)
 {

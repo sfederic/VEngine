@@ -10,7 +10,7 @@
 #define fourccXWMA 'AMWX'
 #define fourccDPDS 'sdpd'
 
-AudioSystem audioSystem;
+AudioSystem gAudioSystem;
 
 void AudioSystem::Init()
 {

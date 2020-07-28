@@ -30,4 +30,4 @@ public:
 	int frameCount;
 };
 
-extern CoreSystem coreSystem;
+extern CoreSystem gCoreSystem;
