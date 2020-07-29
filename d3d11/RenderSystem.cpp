@@ -359,18 +359,21 @@ void RenderSystem::RenderBounds()
 void RenderSystem::RenderEnd(float deltaTime, ID3D11Buffer* debugLineBuffer)
 {
 	//DRAW DEBUG LINES
-	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
-	context->IASetVertexBuffers(0, 1, &debugLineBuffer, &strides, &offsets);
-
-	for (int i = 0; i < debugLines.size(); i++)
+	if (debugLineBuffer != nullptr)
 	{
-		matrices.view = GetPlayerCamera()->view;
-		matrices.model = XMMatrixIdentity();
-		matrices.mvp = matrices.model * matrices.view * matrices.proj;
-		context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
-		context->VSSetConstantBuffers(0, 1, &cbMatrices);
+		context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
+		context->IASetVertexBuffers(0, 1, &debugLineBuffer, &strides, &offsets);
 
-		context->Draw((UINT)debugLines.size(), 0);
+		for (int i = 0; i < debugLines.size(); i++)
+		{
+			matrices.view = GetPlayerCamera()->view;
+			matrices.model = XMMatrixIdentity();
+			matrices.mvp = matrices.model * matrices.view * matrices.proj;
+			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
+			context->VSSetConstantBuffers(0, 1, &cbMatrices);
+
+			context->Draw((UINT)debugLines.size(), 0);
+		}
 	}
 
 	//UI RENDERING 
@@ -389,6 +392,11 @@ void RenderSystem::RenderEnd(float deltaTime, ID3D11Buffer* debugLineBuffer)
 	{
 		gUISystem.uiViews[viewIndex].Tick();
 	}
+
+	D2D1_RECT_F testRect = { 0.f, 0.f, 200.f, 200.f };
+	gUISystem.Button(testRect, gUISystem.brushCloseBox);
+	gUISystem.ScrollBar(testRect);
+
 
 
 	//END UI RENDERING

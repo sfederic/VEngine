@@ -11,7 +11,7 @@ struct UIView
 {
 	UIView(const wchar_t* titleInit, int x, int y, int actorSystemInit, int actorInit)
 	{
-		viewRect = { (float)x, (float)y, 100.f, 150.f };
+		viewRect = { (float)x, (float)y, (float)x + 100.f, (float)y + 150.f };
 		wcscpy_s(title, titleInit);
 		actorSystemIndex = actorSystemInit;
 		actorIndex = actorInit;
@@ -48,6 +48,7 @@ public:
 	bool Button(D2D1_RECT_F rect, struct ID2D1Brush* brush);
 	bool DragButton(D2D1_RECT_F rect, struct ID2D1Brush* brush);
 	void Label(const wchar_t* text, D2D1_RECT_F layoutRect);
+	void ScrollBar(D2D1_RECT_F parentLayoutrect);
 
 	//UIView functions
 	void ResetAllActiveUIViews();

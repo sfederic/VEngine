@@ -3,6 +3,9 @@
 #include "CoreSystem.h"
 #include "Input.h"
 #include "Debug.h"
+#include "Actor.h"
+#include "WorldEditor.h"
+#include "World.h"
 
 UISystem gUISystem;
 
@@ -76,7 +79,10 @@ bool UISystem::Button(D2D1_RECT_F rect, ID2D1Brush* brush)
 	{
 		if ((mousePos.y > rect.top) && (mousePos.y < rect.bottom))
 		{
-			if(inputSystem.GetMouseLeftUpState())
+			//Hover 
+			//d2dRenderTarget->FillRectangle(rect, gUISystem.brushText);
+
+			if(inputSystem.GetMouseLeftDownState())
 			{ 
 				return true;
 			}
@@ -94,10 +100,8 @@ bool UISystem::DragButton(D2D1_RECT_F rect, ID2D1Brush* brush)
 	{
 		if ((mousePos.y > rect.top) && (mousePos.y < rect.bottom))
 		{
-			//if (GetMouseLeftDownState())
-			{
-				return true;
-			}
+			//d2dRenderTarget->DrawRectangle(rect, gUISystem.brushTextBlack);
+			return true;
 		}
 	}
 
@@ -106,8 +110,55 @@ bool UISystem::DragButton(D2D1_RECT_F rect, ID2D1Brush* brush)
 
 void UISystem::Label(const wchar_t* text, D2D1_RECT_F layoutRect)
 {
-	d2dRenderTarget->DrawRectangle(layoutRect, brushTransparentMenu);
-	d2dRenderTarget->DrawTextA(text, wcslen(text), textFormat, layoutRect, brushText);
+	D2D1_RECT_F textRect = { layoutRect };
+	textRect.top += 20.f;
+	wchar_t posString[128];
+
+	//TODO: figure out a format thing
+	//_snwprintf_s(posString, 64, L"X: %f", actor->GetPositionFloat3().x);
+	gUISystem.d2dRenderTarget->DrawTextA(posString, wcslen(posString), gUISystem.textFormat, textRect, gUISystem.brushTextBlack);
+}
+
+void UISystem::ScrollBar(D2D1_RECT_F parentLayoutRect)
+{
+	//TODO: the statics work for now, you're going to need to store them in a View struct for multiple scrolls
+	static float scrollOffsetTop;
+	static float scrollOffsetBottom;
+
+	const float scrollMoveOffset = 10.f;
+
+	D2D1_RECT_F scrollBarRect = parentLayoutRect;
+	scrollBarRect.left = parentLayoutRect.right - 20.f;
+	scrollBarRect.bottom = parentLayoutRect.bottom / 8.f;
+	scrollBarRect.top += scrollOffsetTop;
+	scrollBarRect.bottom += scrollOffsetBottom;
+
+	D2D1_RECT_F scrollBarExtentRect = parentLayoutRect;
+	scrollBarExtentRect.left = parentLayoutRect.right - 20.f;
+
+
+	if ((mousePos.x > parentLayoutRect.left) && (mousePos.x < parentLayoutRect.right))
+	{
+		if ((mousePos.y > parentLayoutRect.top) && (mousePos.y < parentLayoutRect.bottom))
+		{
+			if ((scrollBarRect.top >= parentLayoutRect.top) && (scrollBarRect.bottom <= parentLayoutRect.bottom))
+			{
+				if (inputSystem.GetMouseWheelDown())
+				{
+					scrollOffsetTop += scrollMoveOffset;
+					scrollOffsetBottom += scrollMoveOffset;
+				}
+				else if (inputSystem.GetMouseWheelUp())
+				{
+					scrollOffsetTop -= scrollMoveOffset;
+					scrollOffsetBottom -= scrollMoveOffset;
+				}
+			}
+		}
+	}
+
+	d2dRenderTarget->FillRectangle(scrollBarRect, brushTextBlack);
+	//d2dRenderTarget->DrawRectangle(scrollBarExtentRect, brushTextBlack);
 }
 
 void UISystem::ResetAllActiveUIViews()
@@ -139,30 +190,30 @@ void UISystem::AddView(const wchar_t* text, int actorSystemIndex, int actorIndex
 
 void UIActorView::Tick()
 {
-	viewRect.bottom = viewRect.top + 150.f;
-	viewRect.right = viewRect.left + 100.f;
-	D2D1_RECT_F titleRect = viewRect;
-	titleRect.bottom = viewRect.bottom - 130.f;
-	D2D1_RECT_F closeRect = { titleRect };
-	closeRect.left = titleRect.left + 80.f;
-	closeRect.bottom -= titleRect.bottom;
+	D2D1_RECT_F titleRect = { viewRect.left, viewRect.top, viewRect.right, viewRect.bottom - 130.f};
+	D2D1_RECT_F closeRect = titleRect;
+	closeRect.left += 120.f;
 
 	gUISystem.d2dRenderTarget->FillRectangle(viewRect, gUISystem.brushTransparentMenu);
 	gUISystem.d2dRenderTarget->FillRectangle(titleRect, gUISystem.brushText);
 	gUISystem.d2dRenderTarget->DrawTextA(title, wcslen(title), gUISystem.textFormat, titleRect, gUISystem.brushTextBlack);
 
-	if (gUISystem.Button(viewRect, gUISystem.brushTransparentMenu))
+	World* world = GetWorld();
+	Actor* actor = world->GetActor(gWorldEditor.actorSystemIndex, gWorldEditor.actorIndex);
+
+	D2D1_RECT_F textRect = { viewRect };
+	textRect.top += 20.f;
+	_snwprintf_s(actorData, 64, L"X: %.4f\nY: %.4f\nZ: %.4f", actor->GetPositionFloat3().x, 
+		actor->GetPositionFloat3().y,
+		actor->GetPositionFloat3().z);
+	gUISystem.d2dRenderTarget->DrawTextA(actorData, wcslen(actorData), gUISystem.textFormat, textRect, gUISystem.brushTextBlack);
+
+	//TODO: still can't get this to work
+	if (gUISystem.Button(closeRect, gUISystem.brushCloseBox))
 	{
-		gUISystem.ResetAllActiveUIViews();
-		bIsActive = true;
+		gUISystem.uiViews.pop_back();
 	}
 
-	/*if (ui->Button(closeRect, ui->brushCloseBox))
-	{
-		ui->uiViews.pop_back();
-	}*/
-
-	//TODO: view positioning is sloppy. GetAsyncKey is reading in true for the entire frame regardless of previous mouse state functions
 	if (bIsActive)
 	{
 		if(gUISystem.DragButton(viewRect, gUISystem.brushTextBlack))
@@ -175,5 +226,11 @@ void UIActorView::Tick()
 				viewRect.bottom = viewRect.top + 150.f;
 			}
 		}
+	}
+
+	if (gUISystem.Button(viewRect, gUISystem.brushTransparentMenu))
+	{
+		gUISystem.ResetAllActiveUIViews();
+		bIsActive = true;
 	}
 }

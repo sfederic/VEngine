@@ -87,7 +87,7 @@ void Actor::Move(float d, XMVECTOR direction)
 {
 	XMVECTOR s = XMVectorReplicate(d);
 	XMVECTOR loc = GetPositionVector();
-	loc += XMVectorMultiplyAdd(s, direction, loc);
+	loc = XMVectorMultiplyAdd(s, direction, loc);
 	SetPosition(loc);
 }
 

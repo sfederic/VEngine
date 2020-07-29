@@ -32,7 +32,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	D3D11_FEATURE_DATA_THREADING threadFeature = {};
 	gRenderSystem.device->CheckFeatureSupport(D3D11_FEATURE_THREADING, &threadFeature, sizeof(threadFeature));
 
-	ID3D11Buffer* debugLinesBuffer = gRenderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
+	//ID3D11Buffer* debugLinesBuffer = gRenderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
 
 	//ACTOR SYSTEM TESTING
 	ActorSystem system, system2;
@@ -44,7 +44,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	//World data testing
 	World* world = GetWorld();
 	//world->AddActorSystem(system);
-	world->actorSystems.push_back(system);
+	//world->actorSystems.push_back(system);
 	//world->actorSystems.push_back(system2);
 
 	//MAIN LOOP
@@ -68,7 +68,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		gRenderSystem.RenderSetup(deltaTime);
 		gRenderSystem.RenderActorSystem(world);
 		gRenderSystem.RenderBounds();
-		gRenderSystem.RenderEnd(deltaTime, debugLinesBuffer);
+		gRenderSystem.RenderEnd(deltaTime, nullptr);
 
 		inputSystem.InputReset();
 
