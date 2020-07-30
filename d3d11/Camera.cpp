@@ -5,6 +5,8 @@
 #include <omp.h>
 #include "Input.h"
 #include "Console.h"
+#include "WorldEditor.h"
+#include "World.h"
 
 Camera editorCamera(XMVectorSet(0.f, 0.f, -5.f, 1.f));
 
@@ -24,6 +26,7 @@ Camera::Camera(XMVECTOR initialLocation)
 
 void Camera::Tick(float deltaTime)
 {
+	//Old following code
 	if (actorAttachedTo)
 	{
 		location = actorAttachedTo->GetPositionVector();
@@ -61,6 +64,13 @@ void Camera::Tick(float deltaTime)
 		if (GetAsyncKeyState('E'))
 		{
 			Move(moveSpeed, up);
+		}
+
+		//Zoom onto selected actor
+		if (inputSystem.GetKeyUpState('F'))
+		{
+			World* world = GetWorld();
+			ZoomTo(world->GetActor(gWorldEditor.actorSystemIndex, gWorldEditor.actorIndex));
 		}
 
 		//MOUSE WHEEL ZOOM
@@ -146,8 +156,16 @@ void Camera::Move(float d, XMVECTOR axis)
 	location = XMVectorMultiplyAdd(s, axis, location);
 }
 
+void Camera::ZoomTo(Actor* actor)
+{
+	//Tracel the camera down the line its pointing towards the actor
+	XMVECTOR actorPos = actor->GetPositionVector() - (forward * 5.f);
+	location = actorPos;
+}
+
 void Camera::FrustumCullTest(ActorSystem& system)
 {
+	//OpenMP Test
 	#pragma omp parallel for
 	for (int i = 0; i < system.actors.size(); i++)
 	{

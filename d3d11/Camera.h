@@ -18,6 +18,7 @@ public:
 	void FrustumCullTest(class ActorSystem& system);
 	void AttachTo(class Actor* actor);
 	void Move(float d, XMVECTOR axis);
+	void ZoomTo(class Actor* actor);
 
 	XMMATRIX view, proj;
 

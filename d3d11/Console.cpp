@@ -7,6 +7,7 @@
 #include "FileSystem.h"
 #include "World.h"
 #include "DebugMenu.h"
+#include "WorldEditor.h"
 
 Console gConsole;
 
@@ -18,6 +19,7 @@ namespace ExecuteStrings
 	const wchar_t* POP = L"POP";
 	const wchar_t* CLEAR = L"CLEAR";
 	const wchar_t* LEVEL = L"LEVEL";
+	const wchar_t* SNAP = L"SNAP";
 }
 
 namespace LevelNames
@@ -99,6 +101,19 @@ void Console::ExecuteString()
 	else if(wcsncmp(consoleString, LevelNames::TestLevel, wcslen(LevelNames::TestLevel)) == 0) //LEVEL LOADING
 	{
 		g_FileSystem.ReadAllActorSystems(GetWorld(), "LevelSaves/test.sav");
+	}
+	else if (wcsncmp(consoleString, ExecuteStrings::SNAP, wcslen(ExecuteStrings::SNAP)) == 0) //Toggle grid snap
+	{
+		gWorldEditor.bMoveActorsInIncrements = !gWorldEditor.bMoveActorsInIncrements;
+
+		if (gWorldEditor.bMoveActorsInIncrements)
+		{
+			debugMenu.AddNotification(L"SNAP ON");
+		}
+		else if (!gWorldEditor.bMoveActorsInIncrements)
+		{
+			debugMenu.AddNotification(L"SNAP OFF");
+		}
 	}
 	else
 	{
