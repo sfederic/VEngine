@@ -41,18 +41,30 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSy
 	ray.direction = XMVector3TransformNormal(ray.direction, toLocal);
 	ray.direction = XMVector3Normalize(ray.direction);
 
+	std::vector<float> distances;
+
 	for (int i = 0; i < actorSystem->actors.size(); i++)
 	{
 		actorSystem->boundingBox.Center = actorSystem->actors[i].GetPositionFloat3();
-		actorSystem->boundingBox.Extents = actorSystem->actors[i].GetScale();
+
+		//TODO: see if theres a way to add the current extent of Bounding box to actor scale
+		//actorSystem->boundingBox.Extents = actorSystem->actors[i].GetScale();
 
 		if (actorSystem->boundingBox.Intersects(ray.origin, ray.direction, ray.distance))
 		{
+			distances.push_back(ray.distance);
+
 			ray.actorIndex = i;
 			DebugPrint("hit %d\n", ray.actorIndex);
 			return true;
 		}
 	}
+
+	for (int i = 0; i < distances.size(); i++)
+	{
+		//TODO: make ray return the closest actor it has hit
+	}
+
 
 	return false;
 }

@@ -21,6 +21,14 @@ struct Vertex
 	XMFLOAT3 normal;
 };
 
+struct Matrices
+{
+	XMMATRIX model;
+	XMMATRIX view;
+	XMMATRIX proj;
+	XMMATRIX mvp;
+};
+
 extern Vertex debugLineData[2];
 
 class RenderSystem
@@ -54,6 +62,8 @@ public:
 	ID3D11Buffer* CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, const void* initData);
 	ID3D11Buffer* CreateDyamicBuffer(UINT byteWidth, UINT bindFlags, const void* initData);
 
+	Matrices matrices;
+
 	static const int frameCount = 2;
 
 	D3D11_VIEWPORT viewport;
@@ -67,6 +77,7 @@ public:
 	ID3D11VertexShader* vertexShader;
 	ID3D11PixelShader* pixelShader;
 	ID3D11RasterizerState* rastStateSolid;
+	ID3D11RasterizerState* rastStateNoBackCull;
 	ID3D11RasterizerState* rastStateWireframe;
 	ID3D11RasterizerState* activeRastState;
 	IDXGIFactory6* dxgiFactory;

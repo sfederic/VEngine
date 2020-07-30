@@ -3,6 +3,8 @@
 #include "Debug.h"
 #include "DebugMenu.h"
 
+ShaderFactory gShaderFactory;
+
 HANDLE hotreloadHandle;
 
 void ShaderFactory::CreateAllShaders(ID3D11Device* device)

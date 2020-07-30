@@ -4,7 +4,7 @@
 #include <DirectXCollision.h>
 #include <vector>
 #include <memory>
-#include "RenderSystem.h"
+#include "RenderSystem.h" //TODO: Get rid of this and move struct Vertex into seperate file
 
 using namespace DirectX;
 
@@ -53,6 +53,8 @@ public:
 	bool bRender = true;
 };
 
+//TODO: I want to keep the batched state change rendering I have now.
+//Create a few new bools and sort the World list of ActorSystems based on those bools, then render
 class ActorSystem
 {
 public:
@@ -66,11 +68,11 @@ public:
 
 	struct ID3D11Buffer* vertexBuffer;
 	struct ID3D11Buffer* indexBuffer;
-
 	struct ID3D11SamplerState* samplerState;
+	struct ID3D11RasterizerState* rastState;
 
-	ID3D11Resource* texture;
-	ID3D11ShaderResourceView* srv;
+	struct ID3D11Resource* texture;
+	struct ID3D11ShaderResourceView* srv;
 
 	BoundingBox boundingBox;
 	BoundingSphere boundingSphere;

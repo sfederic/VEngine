@@ -9,6 +9,7 @@ class World
 {
 public:
 
+	void TickAllActorSystems();
 	void CleaupAllActors();
 	void AddActorSystem(ActorSystem& actorSystem);
 	void RemoveActorSystem(EActorSystemID id);

@@ -57,3 +57,5 @@ public:
 	std::vector<ShaderItem> shaders;
 	std::unordered_map<std::wstring, ShaderItem*> shaderMap;
 };
+
+extern ShaderFactory gShaderFactory;

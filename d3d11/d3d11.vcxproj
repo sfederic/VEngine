@@ -152,6 +152,7 @@
     <ClCompile Include="Array.cpp" />
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="AudioSystem.cpp" />
+    <ClCompile Include="AxisActor.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="Debug.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="Array.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="AudioSystem.h" />
+    <ClInclude Include="AxisActor.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Console.h" />
     <ClInclude Include="Debug.h" />

@@ -11,6 +11,14 @@ World* GetWorld()
 	return &gCurrentWorld;
 }
 
+void World::TickAllActorSystems()
+{
+	for (int asIndex = 0; asIndex < actorSystems.size(); asIndex++)
+	{
+		//TODO: add virtual ticks (actorSystems[i].Tick()
+	}
+}
+
 void World::CleaupAllActors()
 {
 	actorSystems.clear();

@@ -29,23 +29,18 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	gRenderSystem.Init();
 	gAudioSystem.Init();
 	gUISystem.Init();
+	gWorldEditor.Init();
 
 	D3D11_FEATURE_DATA_THREADING threadFeature = {};
 	gRenderSystem.device->CheckFeatureSupport(D3D11_FEATURE_THREADING, &threadFeature, sizeof(threadFeature));
 
 	//ID3D11Buffer* debugLinesBuffer = gRenderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
 
-	//ACTOR SYSTEM TESTING
-	ActorSystem system;
-	system.modelName = "cube.fbx";
+	ActorSystem cubes;
+	cubes.CreateActors(&gRenderSystem, 4);
 
-	system.CreateActors(&gRenderSystem, 1);
-
-
-	//World data testing
 	World* world = GetWorld();
-	world->AddActorSystem(system);
-
+	world->actorSystems.push_back(cubes);
 
 	//MAIN LOOP
 	while (gCoreSystem.msg.message != WM_QUIT)
@@ -61,7 +56,6 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 		gTimerSystem.Tick(deltaTime);
 
-		gWorldEditor.Tick();
 
 		Actor* actor = world->GetActor(gWorldEditor.actorSystemIndex, gWorldEditor.actorIndex);
 		if (actor)
@@ -72,6 +66,8 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		//RENDERING
 		gRenderSystem.Tick();
 		gRenderSystem.RenderSetup(deltaTime);
+		gWorldEditor.Tick();
+
 		gRenderSystem.RenderActorSystem(world);
 		gRenderSystem.RenderBounds();
 		gRenderSystem.RenderEnd(deltaTime, nullptr);

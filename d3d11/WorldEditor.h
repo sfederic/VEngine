@@ -1,12 +1,17 @@
 #pragma once
 
 #include "Raycast.h"
+#include "Actor.h"
 
 class WorldEditor
 {
 public:
 	void Tick();
+	void Init();
 	void MoveActor(class Actor* actor);
+
+	std::vector<ActorSystem*> axes;
+	ActorSystem xAxis, yAxis, zAxis;
 
 	Ray screenPickRay;
 

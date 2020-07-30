@@ -13,21 +13,11 @@
 #include "WICTextureLoader.h"
 
 RenderSystem gRenderSystem;
-ShaderFactory gShaderFactory;
-
 UINT strides = sizeof(Vertex);
 UINT offsets = 0;
 
 ActorSystem debugBox;
 ActorSystem debugSphere;
-
-struct Matrices
-{
-	XMMATRIX model;
-	XMMATRIX view;
-	XMMATRIX proj;
-	XMMATRIX mvp;
-}matrices;
 
 Vertex debugLineData[2];
 
@@ -192,13 +182,20 @@ void RenderSystem::CreateRasterizerStates()
 	rastDesc.DepthClipEnable = TRUE;
 	rastDesc.FrontCounterClockwise = FALSE;
 
+	//SOLID
 	HR(device->CreateRasterizerState(&rastDesc, &rastStateSolid));
 	activeRastState = rastStateSolid;
 	context->RSSetState(activeRastState);
 
+	//WIREFRAME
 	rastDesc.FillMode = D3D11_FILL_WIREFRAME;
 	rastDesc.CullMode = D3D11_CULL_NONE;
 	HR(device->CreateRasterizerState(&rastDesc, &rastStateWireframe));
+
+	//SOLID, NO BACK CULL
+	rastDesc.CullMode = D3D11_CULL_NONE;
+	rastDesc.FillMode = D3D11_FILL_SOLID;
+	HR(device->CreateRasterizerState(&rastDesc, &rastStateNoBackCull));
 }
 
 //One vertex buffer per actor system
@@ -251,6 +248,17 @@ void RenderSystem::RenderActorSystem(World* world)
 	{
 		ActorSystem* actorSystem = &world->actorSystems[i];
 
+		//NOTE: keep an eye on driver perf here
+		//Set rastState
+		if (actorSystem->rastState)
+		{
+			context->RSSetState(actorSystem->rastState);
+		}
+		else
+		{
+			context->RSSetState(activeRastState);
+		}
+
 		auto shader = gShaderFactory.shaderMap.find(actorSystem->shaderName);
 
 		if (shader == gShaderFactory.shaderMap.end())
@@ -277,7 +285,7 @@ void RenderSystem::RenderActorSystem(World* world)
 				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 				context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
-				context->Draw((UINT)actorSystem->modelData.verts.size(), 0);
+				context->Draw(actorSystem->modelData.verts.size(), 0);
 				//context->DrawIndexed(actorSystem->modelData.indices.size(), 0, 0);
 			}
 		}
