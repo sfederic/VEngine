@@ -393,11 +393,6 @@ void RenderSystem::RenderEnd(float deltaTime, ID3D11Buffer* debugLineBuffer)
 		gUISystem.uiViews[viewIndex].Tick();
 	}
 
-	D2D1_RECT_F testRect = { 0.f, 0.f, 200.f, 200.f };
-	gUISystem.Button(testRect, gUISystem.brushCloseBox);
-	gUISystem.ScrollBar(testRect);
-
-
 
 	//END UI RENDERING
 	gUISystem.d2dRenderTarget->EndDraw();

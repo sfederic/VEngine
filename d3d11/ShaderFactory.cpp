@@ -51,8 +51,8 @@ void ShaderFactory::CompileAllShadersFromFile()
         wcscat_s(directory, L"Shaders/");
         wcscat_s(directory, shaders[i].filename);
 
-        HR(D3DCompileFromFile(directory, nullptr, nullptr, vsEntry, vsTarget, flags, 0, &shaders[i].vertexCode, &error));
-        if (error)
+        HRESULT hr = D3DCompileFromFile(directory, nullptr, nullptr, vsEntry, vsTarget, flags, 0, &shaders[i].vertexCode, &error);
+        if (error && (hr != S_OK))
         {
             const char* errMsg = (char*)error->GetBufferPointer();
             OutputDebugString(errMsg);

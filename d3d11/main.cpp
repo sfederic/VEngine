@@ -18,6 +18,7 @@
 #include "FBXImporter.h"
 #include "WorldEditor.h"
 #include "TimerSystem.h"
+#include "MathHelpers.h"
 
 int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine, int cmdShow)
 {
@@ -35,17 +36,28 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	//ID3D11Buffer* debugLinesBuffer = gRenderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
 
 	//ACTOR SYSTEM TESTING
-	ActorSystem system, system2;
+	ActorSystem system, system2, system3;
 	system.modelName = "cube.fbx";
-	system2.modelName = "ico_sphere.fbx";
-	system.CreateActors(&gRenderSystem, 2);
-	system2.CreateActors(&gRenderSystem, 3);
+	system.modelName = "plane.fbx";
+
+	system2.modelName = "plane.fbx";
+
+	system3.modelName = "cube.fbx";
+
+	system.CreateActors(&gRenderSystem, 1);
+	system2.CreateActors(&gRenderSystem, 1);
+	system3.CreateActors(&gRenderSystem, 1);
+
+	//system2.actors[0].SetRotation(XMVectorUp(), 90.f);
+	//system3.actors[0].SetRotation(XMVectorRight(), 90.f);
 
 	//World data testing
 	World* world = GetWorld();
-	//world->AddActorSystem(system);
-	//world->actorSystems.push_back(system);
-	//world->actorSystems.push_back(system2);
+	world->AddActorSystem(system);
+	world->actorSystems.push_back(system2);
+	world->actorSystems.push_back(system3);
+
+	//DirectX::XMPlaneIntersectLine()
 
 	//MAIN LOOP
 	while (gCoreSystem.msg.message != WM_QUIT)
@@ -62,6 +74,15 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		gTimerSystem.Tick(deltaTime);
 
 		gWorldEditor.Tick();
+
+		//if (inputSystem.GetAsyncKey(VK_LBUTTON))
+		{
+			Actor* actor = world->GetActor(gWorldEditor.actorSystemIndex, gWorldEditor.actorIndex);
+			if (actor)
+			{
+				gWorldEditor.MoveActor(actor);
+			}
+		}
 
 		//RENDERING
 		gRenderSystem.Tick();

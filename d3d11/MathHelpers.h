@@ -5,3 +5,6 @@
 using namespace DirectX;
 
 void MatrixAddScale(float s, XMMATRIX& m);
+XMVECTOR XMVectorRight();
+XMVECTOR XMVectorUp();
+XMVECTOR XMVectorForward();

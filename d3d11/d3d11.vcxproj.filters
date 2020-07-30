@@ -150,4 +150,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Shaders\depthDraw.hlsl" />
+  </ItemGroup>
 </Project>

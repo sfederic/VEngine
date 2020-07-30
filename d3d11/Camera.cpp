@@ -129,15 +129,11 @@ void Camera::MouseMove(int x, int y)
 
 	if (GetAsyncKeyState(VK_RBUTTON) < 0)
 	{
-		SetCapture(gCoreSystem.mainWindow);
-
 		float dx = XMConvertToRadians(0.25f * (float)(x - lastMousePos.x));
 		float dy = XMConvertToRadians(0.25f * (float)(y - lastMousePos.y));
 
 		Pitch(dy);
 		RotateY(dx);
-
-		ReleaseCapture();
 	}
 
 	lastMousePos.x = x;
