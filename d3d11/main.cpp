@@ -31,13 +31,11 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	gUISystem.Init();
 	gWorldEditor.Init();
 
-	D3D11_FEATURE_DATA_THREADING threadFeature = {};
-	gRenderSystem.device->CheckFeatureSupport(D3D11_FEATURE_THREADING, &threadFeature, sizeof(threadFeature));
-
-	//ID3D11Buffer* debugLinesBuffer = gRenderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
+	ID3D11Buffer* debugLinesBuffer = gRenderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
 
 	ActorSystem cubes;
-	cubes.CreateActors(&gRenderSystem, 4);
+	cubes.modelName = "x_axis.fbx";
+	cubes.CreateActors(&gRenderSystem, 1);
 
 	World* world = GetWorld();
 	world->actorSystems.push_back(cubes);
@@ -66,11 +64,13 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		//RENDERING
 		gRenderSystem.Tick();
 		gRenderSystem.RenderSetup(deltaTime);
+
+		//TODO: id don't like the position of this here
 		gWorldEditor.Tick();
 
 		gRenderSystem.RenderActorSystem(world);
 		gRenderSystem.RenderBounds();
-		gRenderSystem.RenderEnd(deltaTime, nullptr);
+		gRenderSystem.RenderEnd(deltaTime, debugLinesBuffer);
 
 		inputSystem.InputReset();
 

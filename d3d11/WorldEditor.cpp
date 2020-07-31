@@ -10,6 +10,11 @@ WorldEditor gWorldEditor;
 
 void WorldEditor::Tick()
 {
+	World* world = GetWorld();
+	xAxis.actors[0].SetPosition(world->GetActor(actorSystemIndex, actorIndex)->GetPositionVector());
+	yAxis.actors[0].SetPosition(world->GetActor(actorSystemIndex, actorIndex)->GetPositionVector());
+	zAxis.actors[0].SetPosition(world->GetActor(actorSystemIndex, actorIndex)->GetPositionVector());
+
 	//Actor picking for editor
 	if (inputSystem.GetMouseLeftDownState())
 	{
@@ -21,11 +26,6 @@ void WorldEditor::Tick()
 
 			actorIndex = screenPickRay.actorIndex;
 			actorSystemIndex = screenPickRay.actorSystemIndex;
-
-			World* world = GetWorld();
-			xAxis.actors[0].SetPosition(world->GetActor(actorSystemIndex, actorIndex)->GetPositionVector());
-			yAxis.actors[0].SetPosition(world->GetActor(actorSystemIndex, actorIndex)->GetPositionVector());
-			zAxis.actors[0].SetPosition(world->GetActor(actorSystemIndex, actorIndex)->GetPositionVector());
 		}
 	}
 	else if (inputSystem.GetMouseRightUpState())

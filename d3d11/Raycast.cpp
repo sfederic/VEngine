@@ -45,7 +45,7 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSy
 
 	for (int i = 0; i < actorSystem->actors.size(); i++)
 	{
-		actorSystem->boundingBox.Center = actorSystem->actors[i].GetPositionFloat3();
+		//actorSystem->boundingBox.Center = actorSystem->actors[i].GetPositionFloat3();
 
 		//TODO: see if theres a way to add the current extent of Bounding box to actor scale
 		//actorSystem->boundingBox.Extents = actorSystem->actors[i].GetScale();

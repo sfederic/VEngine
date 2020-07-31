@@ -53,6 +53,11 @@ void RenderSystem::Init()
 	CreateInputLayout();
 	CreateRasterizerStates();
 	CreateConstantBuffer();
+
+	//Check feature support (just for breakpoint checking for now)
+	//TODO: Think about putting this into te debug menu
+	D3D11_FEATURE_DATA_THREADING threadFeature = {};
+	gRenderSystem.device->CheckFeatureSupport(D3D11_FEATURE_THREADING, &threadFeature, sizeof(threadFeature));
 }
 
 void RenderSystem::CreateDevice()
@@ -317,10 +322,16 @@ void RenderSystem::RenderBounds()
 				matrices.view = camera->view;
 
 				XMMATRIX boxBoundsMatrix = XMMatrixIdentity();
-				boxBoundsMatrix.r[3] = world->actorSystems[systemIndex].actors[actorIndex].GetPositionVector();
-				boxBoundsMatrix.r[3].m128_f32[3] = 1.0f;
+				XMVECTOR offset = XMVectorSet(
+					world->actorSystems[systemIndex].actors[actorIndex].GetPositionFloat3().x + world->actorSystems[systemIndex].boundingBox.Center.x,
+					world->actorSystems[systemIndex].actors[actorIndex].GetPositionFloat3().y + world->actorSystems[systemIndex].boundingBox.Center.y,
+					world->actorSystems[systemIndex].actors[actorIndex].GetPositionFloat3().z + world->actorSystems[systemIndex].boundingBox.Center.z,
+					1.0f);
+
 				boxBoundsMatrix = XMMatrixScalingFromVector(XMLoadFloat3(&world->actorSystems[systemIndex].boundingBox.Extents));
-				boxBoundsMatrix = XMMatrixMultiply(boxBoundsMatrix, world->actorSystems[systemIndex].actors[actorIndex].transform);
+				//boxBoundsMatrix = XMMatrixMultiply(boxBoundsMatrix, world->actorSystems[systemIndex].actors[actorIndex].transform);
+
+				boxBoundsMatrix.r[3] = offset;
 
 				matrices.model = boxBoundsMatrix;
 				matrices.mvp = matrices.model * matrices.view * matrices.proj;
