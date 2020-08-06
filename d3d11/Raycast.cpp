@@ -43,9 +43,23 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSy
 	ray.direction = XMVector3Normalize(ray.direction);
 
 	std::vector<float> distances;
+	std::vector<int> actorIndices;
+
+	bool bRayHit = false;
 
 	for (int i = 0; i < actorSystem->actors.size(); i++)
 	{
+		XMFLOAT3 offset = XMFLOAT3(
+			actorSystem->actors[i].GetPositionFloat3().x + actorSystem->boundingBox.Center.x,
+			actorSystem->actors[i].GetPositionFloat3().y + actorSystem->boundingBox.Center.y,
+			actorSystem->actors[i].GetPositionFloat3().z + actorSystem->boundingBox.Center.z
+		);
+
+
+		BoundingBox tempBoundingBox = actorSystem->boundingBox;
+		//There's a temp bounding box because the previous offset was always being added to the Actorsystem bounding box
+		tempBoundingBox.Center = offset;
+
 		//For editor exit
 		if (actorSystem->actors[i].bPicked)
 		{
@@ -58,26 +72,45 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSy
 			return false;
 		}
 
-		//actorSystem->boundingBox.Center = actorSystem->actors[i].GetPositionFloat3();
-
 		//TODO: see if theres a way to add the current extent of Bounding box to actor scale
 		//actorSystem->boundingBox.Extents = actorSystem->actors[i].GetScale();
 
-		if (actorSystem->boundingBox.Intersects(ray.origin, ray.direction, ray.distance))
+		if (tempBoundingBox.Intersects(ray.origin, ray.direction, ray.distance))
 		{
 			distances.push_back(ray.distance);
+			
+			//ray.actorIndex = i;
 
-			ray.actorIndex = i;
+			actorIndices.push_back(i);
+
 			DebugPrint("hit %d\n", ray.actorIndex);
-			return true;
+
+			//TODO: fix up. Add new actor class instead of this garbage
+			if (actorSystem->actors[i].pickedAxis == PickedAxis::X ||
+				actorSystem->actors[i].pickedAxis == PickedAxis::Y ||
+				actorSystem->actors[i].pickedAxis == PickedAxis::Z )
+			{
+				return true;
+			}
+
+			bRayHit = true;
 		}
 	}
 
-	for (int i = 0; i < distances.size(); i++)
+	if (bRayHit)
 	{
-		//TODO: make ray return the closest actor it has hit
-	}
+		float nearestDistance = D3D11_FLOAT32_MAX;
+		for (int i = 0; i < distances.size(); i++)
+		{
+			if (distances[i] < nearestDistance)
+			{
+				nearestDistance = distances[i];
+				ray.actorIndex = actorIndices[i];
+			}
+		}
 
+		return true;
+	}
 
 	return false;
 }
@@ -116,25 +149,27 @@ bool RaycastAllFromScreen(Ray& ray, int sx, int sy, Camera* camera, World* world
 			ray.actorSystemIndex = i;
 
 			Actor* actor = world->GetActor(ray.actorSystemIndex, ray.actorIndex);
-
-			if (actor->pickedAxis == PickedAxis::X)
+			if (actor)
 			{
-				gWorldEditor.pickedAxis = actor;
-				DebugPrint("X-Axis picked\n");
-			}
-			else if (actor->pickedAxis == PickedAxis::Y)
-			{
-				gWorldEditor.pickedAxis = actor;
-				DebugPrint("Y-Axis picked\n");
-			}
-			else if (actor->pickedAxis == PickedAxis::Z)
-			{
-				gWorldEditor.pickedAxis = actor;
-				DebugPrint("Z-Axis picked\n");
-			}
-			else
-			{
-				gWorldEditor.pickedActor = actor;
+				if (actor->pickedAxis == PickedAxis::X)
+				{
+					gWorldEditor.pickedAxis = actor;
+					DebugPrint("X-Axis picked\n");
+				}
+				else if (actor->pickedAxis == PickedAxis::Y)
+				{
+					gWorldEditor.pickedAxis = actor;
+					DebugPrint("Y-Axis picked\n");
+				}
+				else if (actor->pickedAxis == PickedAxis::Z)
+				{
+					gWorldEditor.pickedAxis = actor;
+					DebugPrint("Z-Axis picked\n");
+				}
+				else
+				{
+					gWorldEditor.pickedActor = actor;
+				}
 			}
 
 			return true;

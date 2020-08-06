@@ -6,7 +6,7 @@
 class WorldEditor
 {
 public:
-	void Tick();
+	void Tick(struct ID3D11Buffer* debugLinesBuffer);
 	void Init();
 	void MoveActor(class Actor* actor, PickedAxis axis);
 

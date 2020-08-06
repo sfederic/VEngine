@@ -9,7 +9,7 @@
 
 WorldEditor gWorldEditor;
 
-void WorldEditor::Tick()
+void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 {
 	World* world = GetWorld();
 
@@ -77,6 +77,11 @@ void WorldEditor::Tick()
 	{
 		if (RaycastAllFromScreen(screenPickRay, gUISystem.mousePos.x, gUISystem.mousePos.y, &editorCamera, GetWorld()))
 		{
+			if (debugLinesBuffer)
+			{
+				//DrawRayDebug(screenPickRay.origin, screenPickRay.direction, screenPickRay.distance, debugLinesBuffer);
+			}
+
 			xAxis.actors[0].bRender = true;
 			yAxis.actors[0].bRender = true;
 			zAxis.actors[0].bRender = true;
@@ -98,6 +103,7 @@ void WorldEditor::Tick()
 			if (pickedActor)
 			{
 				pickedActor->bPicked = false;
+				pickedActor = nullptr;
 			}
 		}
 	}
@@ -105,17 +111,17 @@ void WorldEditor::Tick()
 	{
 		if (RaycastAllFromScreen(screenPickRay, gUISystem.mousePos.x, gUISystem.mousePos.y, &editorCamera, GetWorld()))
 		{
-			actorIndex = screenPickRay.actorIndex;
-			actorSystemIndex = screenPickRay.actorSystemIndex;
+			//TODO: need to fix this. Don't likethat the UIView index are overriding the other ones
+			//actorIndex = screenPickRay.actorIndex;
+			//actorSystemIndex = screenPickRay.actorSystemIndex;
 
 			//Floating window for actor stats
-			gUISystem.AddView(L"ActorTest", actorSystemIndex, actorIndex);
+			//gUISystem.AddView(L"ActorTest", actorSystemIndex, actorIndex);
 		}
 	}
 
 	//TODO: this is no good
 	//Render translation widget
-
 	for (int i = 0; i < axes.size(); i++)
 	{
 		ActorSystem* actorSystem = axes[i];
@@ -212,7 +218,7 @@ void WorldEditor::MoveActor(Actor* actor, PickedAxis axis)
 		float dx = XMConvertToRadians(0.25f * (float)(x - lastMousePos.x));
 		float dy = XMConvertToRadians(0.25f * (float)(y - lastMousePos.y));
 
-		if (bMoveActorsInIncrements)
+		if (bMoveActorsInIncrements && actor)
 		{
 			//For incremental movement
 			dxAccum += dx;
@@ -251,7 +257,7 @@ void WorldEditor::MoveActor(Actor* actor, PickedAxis axis)
 				dzAccum = 0;
 			}
 		}
-		else
+		else if (actor)
 		{
 			//For free movement
 			if (axis == PickedAxis::X)
@@ -268,9 +274,12 @@ void WorldEditor::MoveActor(Actor* actor, PickedAxis axis)
 			}
 		}
 
-		xAxis.actors[0].transform = actor->transform;
-		yAxis.actors[0].transform = actor->transform;
-		zAxis.actors[0].transform = actor->transform;
+		if (actor)
+		{
+			xAxis.actors[0].transform = actor->transform;
+			yAxis.actors[0].transform = actor->transform;
+			zAxis.actors[0].transform = actor->transform;
+		}
 
 		ReleaseCapture();
 	}
