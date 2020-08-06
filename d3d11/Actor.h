@@ -8,6 +8,15 @@
 
 using namespace DirectX;
 
+//TODO: fix this up
+enum class PickedAxis
+{
+	None,
+	X,
+	Y,
+	Z
+};
+
 enum class EActorSystemID
 {
 	Actor,
@@ -51,6 +60,10 @@ public:
 
 	int vertexBufferOffset;
 	bool bRender = true;
+	bool bPicked = false;
+
+	//TODO: Temp. replace with new actor 
+	PickedAxis pickedAxis;
 };
 
 //TODO: I want to keep the batched state change rendering I have now.

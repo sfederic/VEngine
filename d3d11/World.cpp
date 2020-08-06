@@ -29,7 +29,7 @@ void World::AddActorSystem(ActorSystem& actorSystem)
 	auto actorSystemIt = actorSystemMap.find(actorSystem.id);
 	if (actorSystemIt == actorSystemMap.end())
 	{
-		actorSystems.push_back(actorSystem);
+		actorSystems.push_back(&actorSystem);
 		actorSystemMap[actorSystem.id] = &actorSystem;
 	}
 	else
@@ -51,7 +51,7 @@ void World::RemoveActorSystem(EActorSystemID id)
 
 	for (int i = 0; i < actorSystems.size(); i++)
 	{
-		if (i == (int)actorSystems[i].id)
+		if (i == (int)actorSystems[i]->id)
 		{
 			actorSystems.erase(actorSystems.begin() + i);
 			actorSystemMap.erase(id);
@@ -77,7 +77,7 @@ ActorSystem* World::GetActorSystem(unsigned int id)
 {
 	if (id < actorSystems.size())
 	{
-		return &actorSystems[id];
+		return actorSystems[id];
 	}
 
 	return nullptr;
@@ -87,9 +87,9 @@ Actor* World::GetActor(unsigned int systemId, unsigned int actorId)
 {
 	if (systemId < actorSystems.size())
 	{
-		if (actorId < actorSystems[systemId].actors.size())
+		if (actorId < actorSystems[systemId]->actors.size())
 		{
-			return &actorSystems[systemId].actors[actorId];
+			return &actorSystems[systemId]->actors[actorId];
 		}
 	}
 

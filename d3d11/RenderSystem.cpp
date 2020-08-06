@@ -251,7 +251,7 @@ void RenderSystem::RenderActorSystem(World* world)
 {
 	for (int i = 0; i < world->actorSystems.size(); i++)
 	{
-		ActorSystem* actorSystem = &world->actorSystems[i];
+		ActorSystem* actorSystem = world->actorSystems[i];
 
 		//NOTE: keep an eye on driver perf here
 		//Set rastState
@@ -317,19 +317,18 @@ void RenderSystem::RenderBounds()
 
 		for (int systemIndex = 0; systemIndex < world->actorSystems.size(); systemIndex++)
 		{
-			for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex].actors.size(); actorIndex++)
+			for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex]->actors.size(); actorIndex++)
 			{
 				matrices.view = camera->view;
 
 				XMMATRIX boxBoundsMatrix = XMMatrixIdentity();
 				XMVECTOR offset = XMVectorSet(
-					world->actorSystems[systemIndex].actors[actorIndex].GetPositionFloat3().x + world->actorSystems[systemIndex].boundingBox.Center.x,
-					world->actorSystems[systemIndex].actors[actorIndex].GetPositionFloat3().y + world->actorSystems[systemIndex].boundingBox.Center.y,
-					world->actorSystems[systemIndex].actors[actorIndex].GetPositionFloat3().z + world->actorSystems[systemIndex].boundingBox.Center.z,
+					world->actorSystems[systemIndex]->actors[actorIndex].GetPositionFloat3().x + world->actorSystems[systemIndex]->boundingBox.Center.x,
+					world->actorSystems[systemIndex]->actors[actorIndex].GetPositionFloat3().y + world->actorSystems[systemIndex]->boundingBox.Center.y,
+					world->actorSystems[systemIndex]->actors[actorIndex].GetPositionFloat3().z + world->actorSystems[systemIndex]->boundingBox.Center.z,
 					1.0f);
 
-				boxBoundsMatrix = XMMatrixScalingFromVector(XMLoadFloat3(&world->actorSystems[systemIndex].boundingBox.Extents));
-				//boxBoundsMatrix = XMMatrixMultiply(boxBoundsMatrix, world->actorSystems[systemIndex].actors[actorIndex].transform);
+				boxBoundsMatrix = XMMatrixScalingFromVector(XMLoadFloat3(&world->actorSystems[systemIndex]->boundingBox.Extents));
 
 				boxBoundsMatrix.r[3] = offset;
 
@@ -353,16 +352,22 @@ void RenderSystem::RenderBounds()
 
 		for (int systemIndex = 0; systemIndex < world->actorSystems.size(); systemIndex++)
 		{
-			for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex].actors.size(); actorIndex++)
+			for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex]->actors.size(); actorIndex++)
 			{
 				matrices.view = camera->view;
 
 				XMMATRIX sphereBoundsMatrix = XMMatrixIdentity();
-				sphereBoundsMatrix.r[3] = world->actorSystems[systemIndex].actors[actorIndex].GetPositionVector();
-				sphereBoundsMatrix.r[3].m128_f32[3] = 1.0f;
-				XMVECTOR boundingSphereScaleFromRadius = XMVectorReplicate(world->actorSystems[systemIndex].boundingSphere.Radius);
+
+				XMVECTOR offset = XMVectorSet(
+					world->actorSystems[systemIndex]->actors[actorIndex].GetPositionFloat3().x + world->actorSystems[systemIndex]->boundingBox.Center.x,
+					world->actorSystems[systemIndex]->actors[actorIndex].GetPositionFloat3().y + world->actorSystems[systemIndex]->boundingBox.Center.y,
+					world->actorSystems[systemIndex]->actors[actorIndex].GetPositionFloat3().z + world->actorSystems[systemIndex]->boundingBox.Center.z,
+					1.0f);
+
+				XMVECTOR boundingSphereScaleFromRadius = XMVectorReplicate(world->actorSystems[systemIndex]->boundingSphere.Radius);
 				sphereBoundsMatrix = XMMatrixScalingFromVector(boundingSphereScaleFromRadius);
-				sphereBoundsMatrix = XMMatrixMultiply(sphereBoundsMatrix, world->actorSystems[systemIndex].actors[actorIndex].transform);
+
+				sphereBoundsMatrix.r[3] = offset;
 
 				matrices.model = sphereBoundsMatrix;
 				matrices.mvp = matrices.model * matrices.view * matrices.proj;

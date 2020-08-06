@@ -7,6 +7,7 @@
 #include "CoreSystem.h"
 #include "Debug.h"
 #include "World.h"
+#include "WorldEditor.h"
 
 void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, class ID3D11Buffer* debugBuffer)
 {
@@ -45,6 +46,18 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSy
 
 	for (int i = 0; i < actorSystem->actors.size(); i++)
 	{
+		//For editor exit
+		if (actorSystem->actors[i].bPicked)
+		{
+			return false;
+		}
+
+		//Skip if actor is not render as well (good for translation widgets)
+		if (!actorSystem->actors[i].bRender) 
+		{
+			return false;
+		}
+
 		//actorSystem->boundingBox.Center = actorSystem->actors[i].GetPositionFloat3();
 
 		//TODO: see if theres a way to add the current extent of Bounding box to actor scale
@@ -73,7 +86,7 @@ bool RaycastAll(Ray& ray, XMVECTOR origin, XMVECTOR direction, World* world)
 {
 	for (int i = 0; i < world->actorSystems.size(); i++)
 	{
-		if (Raycast(ray, origin, direction, &world->actorSystems[i]))
+		if (Raycast(ray, origin, direction, world->actorSystems[i]))
 		{
 			ray.actorSystemIndex = i;
 			return true;
@@ -98,9 +111,32 @@ bool RaycastAllFromScreen(Ray& ray, int sx, int sy, Camera* camera, World* world
 {
 	for (int i = 0; i < world->actorSystems.size(); i++)
 	{
-		if (RaycastFromScreen(ray, sx, sy, camera, &world->actorSystems[i]))
+		if (RaycastFromScreen(ray, sx, sy, camera, world->actorSystems[i]))
 		{
 			ray.actorSystemIndex = i;
+
+			Actor* actor = world->GetActor(ray.actorSystemIndex, ray.actorIndex);
+
+			if (actor->pickedAxis == PickedAxis::X)
+			{
+				gWorldEditor.pickedAxis = actor;
+				DebugPrint("X-Axis picked\n");
+			}
+			else if (actor->pickedAxis == PickedAxis::Y)
+			{
+				gWorldEditor.pickedAxis = actor;
+				DebugPrint("Y-Axis picked\n");
+			}
+			else if (actor->pickedAxis == PickedAxis::Z)
+			{
+				gWorldEditor.pickedAxis = actor;
+				DebugPrint("Z-Axis picked\n");
+			}
+			else
+			{
+				gWorldEditor.pickedActor = actor;
+			}
+
 			return true;
 		}
 	}

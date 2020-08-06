@@ -5,15 +5,72 @@
 #include "World.h"
 #include "CoreSystem.h"
 #include "ShaderFactory.h"
+#include "MathHelpers.h"
 
 WorldEditor gWorldEditor;
 
 void WorldEditor::Tick()
 {
 	World* world = GetWorld();
-	xAxis.actors[0].SetPosition(world->GetActor(actorSystemIndex, actorIndex)->GetPositionVector());
-	yAxis.actors[0].SetPosition(world->GetActor(actorSystemIndex, actorIndex)->GetPositionVector());
-	zAxis.actors[0].SetPosition(world->GetActor(actorSystemIndex, actorIndex)->GetPositionVector());
+
+	if (pickedActor)
+	{
+		xAxis.actors[0].SetPosition(world->GetActor(actorSystemIndex, actorIndex)->GetPositionVector());
+		yAxis.actors[0].SetPosition(world->GetActor(actorSystemIndex, actorIndex)->GetPositionVector());
+		zAxis.actors[0].SetPosition(world->GetActor(actorSystemIndex, actorIndex)->GetPositionVector());
+	}
+
+	if (pickedAxis)
+	{
+		if (pickedAxis->pickedAxis == PickedAxis::X)
+		{
+			MoveActor(pickedActor, PickedAxis::X);
+		}
+		else if (pickedAxis->pickedAxis == PickedAxis::Y)
+		{
+			MoveActor(pickedActor, PickedAxis::Y);
+		}	
+		else if (pickedAxis->pickedAxis == PickedAxis::Z)
+		{
+			MoveActor(pickedActor, PickedAxis::Z);
+		}
+	}
+
+	//TODO: maybe make a camera axis system like MechaCrawler for arrow movement
+	//Actor Arros key movement (For grid movement)
+	if (inputSystem.GetAsyncKey(VK_CONTROL))
+	{
+		if (inputSystem.GetKeyDownState(VK_UP))
+		{
+			pickedActor->Move(moveIncrement, pickedActor->GetUpVector());
+		}
+	}
+	
+	if (inputSystem.GetAsyncKey(VK_CONTROL))
+	{
+		if (inputSystem.GetKeyDownState(VK_DOWN))
+		{
+			pickedActor->Move(-moveIncrement, pickedActor->GetUpVector());
+		}
+	}
+
+	if (inputSystem.GetKeyDownState(VK_UP))
+	{
+		pickedActor->Move(moveIncrement, pickedActor->GetForwardVector());
+	}
+	else if (inputSystem.GetKeyDownState(VK_DOWN))
+	{
+		pickedActor->Move(-moveIncrement, pickedActor->GetForwardVector());
+	}
+	else if (inputSystem.GetKeyDownState(VK_LEFT))
+	{
+		pickedActor->Move(-moveIncrement, pickedActor->GetRightVector());
+	}
+	else if (inputSystem.GetKeyDownState(VK_RIGHT))
+	{
+		pickedActor->Move(moveIncrement, pickedActor->GetRightVector());
+	}
+	
 
 	//Actor picking for editor
 	if (inputSystem.GetMouseLeftDownState())
@@ -26,6 +83,22 @@ void WorldEditor::Tick()
 
 			actorIndex = screenPickRay.actorIndex;
 			actorSystemIndex = screenPickRay.actorSystemIndex;
+
+			if (pickedActor)
+			{
+				pickedActor->bPicked = true;
+			}
+		}
+		else
+		{
+			xAxis.actors[0].bRender = false;
+			yAxis.actors[0].bRender = false;
+			zAxis.actors[0].bRender = false;
+
+			if (pickedActor)
+			{
+				pickedActor->bPicked = false;
+			}
 		}
 	}
 	else if (inputSystem.GetMouseRightUpState())
@@ -42,6 +115,7 @@ void WorldEditor::Tick()
 
 	//TODO: this is no good
 	//Render translation widget
+
 	for (int i = 0; i < axes.size(); i++)
 	{
 		ActorSystem* actorSystem = axes[i];
@@ -114,12 +188,17 @@ void WorldEditor::Init()
 	yAxis.actors[0].bRender = false;
 	zAxis.actors[0].bRender = false;
 
+	xAxis.actors[0].pickedAxis = PickedAxis::X;
+	yAxis.actors[0].pickedAxis = PickedAxis::Y;
+	zAxis.actors[0].pickedAxis = PickedAxis::Z;
+
 	axes.push_back(&xAxis);
 	axes.push_back(&yAxis);
 	axes.push_back(&zAxis);
 }
 
-void WorldEditor::MoveActor(Actor* actor)
+//Actors as the movement along the translation axis using mouse (Different from Actor::Move())
+void WorldEditor::MoveActor(Actor* actor, PickedAxis axis)
 {
 	static POINT lastMousePos;
 
@@ -159,13 +238,39 @@ void WorldEditor::MoveActor(Actor* actor)
 				actor->Move(moveIncrement, XMVectorSet(0.f, 1.f, 0.f, 0.f));
 				dyAccum = 0;
 			}
+
+			dzAccum += -dx;
+			if (dzAccum > 0.5f)
+			{
+				actor->Move(-moveIncrement, XMVectorSet(0.f, 0.f, 1.f, 0.f));
+				dzAccum = 0;
+			}
+			else if (dzAccum < -0.5f)
+			{
+				actor->Move(moveIncrement, XMVectorSet(0.f, 0.f, 1.f, 0.f));
+				dzAccum = 0;
+			}
 		}
 		else
 		{
 			//For free movement
-			actor->Move(dx * pickedActorMoveSpeed, XMVectorSet(1.f, 0.f, 0.f, 0.f));
-			actor->Move(-dy * pickedActorMoveSpeed, XMVectorSet(0.f, 1.f, 0.f, 0.f));
+			if (axis == PickedAxis::X)
+			{
+				actor->Move(dx * pickedActorMoveSpeed, XMVectorSet(1.f, 0.f, 0.f, 0.f));
+			}
+			else if (axis == PickedAxis::Y)
+			{
+				actor->Move(-dy * pickedActorMoveSpeed, XMVectorSet(0.f, 1.f, 0.f, 0.f));
+			}	
+			else if (axis == PickedAxis::Z)
+			{
+				actor->Move(-dx * pickedActorMoveSpeed, XMVectorSet(0.f, 0.f, 1.f, 0.f));
+			}
 		}
+
+		xAxis.actors[0].transform = actor->transform;
+		yAxis.actors[0].transform = actor->transform;
+		zAxis.actors[0].transform = actor->transform;
 
 		ReleaseCapture();
 	}

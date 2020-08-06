@@ -34,11 +34,14 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	ID3D11Buffer* debugLinesBuffer = gRenderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
 
 	ActorSystem cubes;
-	cubes.modelName = "x_axis.fbx";
+	cubes.modelName = "cube.fbx";
 	cubes.CreateActors(&gRenderSystem, 1);
 
 	World* world = GetWorld();
-	world->actorSystems.push_back(cubes);
+	world->actorSystems.push_back(&cubes);
+	world->actorSystems.push_back(&gWorldEditor.xAxis);
+	world->actorSystems.push_back(&gWorldEditor.yAxis);
+	world->actorSystems.push_back(&gWorldEditor.zAxis);
 
 	//MAIN LOOP
 	while (gCoreSystem.msg.message != WM_QUIT)
@@ -54,18 +57,11 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 		gTimerSystem.Tick(deltaTime);
 
-
-		Actor* actor = world->GetActor(gWorldEditor.actorSystemIndex, gWorldEditor.actorIndex);
-		if (actor)
-		{
-			gWorldEditor.MoveActor(actor);
-		}
-
 		//RENDERING
 		gRenderSystem.Tick();
 		gRenderSystem.RenderSetup(deltaTime);
 
-		//TODO: id don't like the position of this here
+		//TODO: id don't like the position of this here (here because of axis rendering)
 		gWorldEditor.Tick();
 
 		gRenderSystem.RenderActorSystem(world);
