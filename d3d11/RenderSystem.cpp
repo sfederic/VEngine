@@ -417,6 +417,91 @@ void RenderSystem::RenderEnd(float deltaTime, ID3D11Buffer* debugLineBuffer)
 		gUISystem.uiViews[viewIndex].Tick();
 	}
 
+	//TODO: more testing for a better ui system
+	struct View
+	{
+		D2D1_RECT_F viewRectBack;
+		D2D1_RECT_F viewRect;
+		D2D1_RECT_F viewRectOffset;
+
+		View(D2D1_RECT_F viewRect_, const wchar_t* title)
+		{
+			viewRectBack = viewRect_;
+			viewRect = { viewRectBack.left + 10.f, viewRectBack.top + 10.f, viewRectBack.right - 10.f, viewRectBack.top + 30.f };
+			gUISystem.d2dRenderTarget->FillRectangle(viewRectBack, gUISystem.brushViewBlack);
+			gUISystem.d2dRenderTarget->FillRectangle(viewRect, gUISystem.brushButton);
+			gUISystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+			gUISystem.d2dRenderTarget->DrawTextA(title, wcslen(title), gUISystem.textFormat, viewRect, gUISystem.brushText);
+			IncrementViewRect();
+		}
+
+		void Text(const wchar_t* string)
+		{
+			gUISystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
+			gUISystem.d2dRenderTarget->DrawTextA(string, wcslen(string), gUISystem.textFormat, viewRect, gUISystem.brushText);
+			IncrementViewRect();
+		}
+
+		bool Button(const wchar_t* string)
+		{
+			gUISystem.d2dRenderTarget->FillRectangle(viewRect, gUISystem.brushTextBlack);
+			gUISystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+			gUISystem.d2dRenderTarget->DrawTextA(string, wcslen(string), gUISystem.textFormat, viewRect, gUISystem.brushText);
+
+			POINT mousePos = gUISystem.mousePos;
+
+			DebugPrint("MouseX %d | MouseY %d\n", mousePos.x, mousePos.y);
+
+			if ((mousePos.x > viewRect.left) && (mousePos.x < viewRect.right))
+			{
+				if ((mousePos.y > viewRect.top) && (mousePos.y < viewRect.bottom))
+				{
+					//Hover graphic
+					gUISystem.d2dRenderTarget->DrawRectangle(viewRect, gUISystem.brushText);
+
+					if (inputSystem.GetMouseLeftDownState())
+					{
+						IncrementViewRect();
+						return true;
+					}
+				}
+			}
+
+			IncrementViewRect();
+			return false;
+		}
+
+		void NewLine()
+		{
+			IncrementViewRect();
+		}
+
+		void NewLine(int numOfNewlines)
+		{
+			for (int i = 0; i < numOfNewlines; i++)
+			{
+				IncrementViewRect();
+			}
+		}
+
+		void IncrementViewRect()
+		{
+			//For rough debugging 
+			assert(viewRect.bottom < viewRectBack.bottom);
+
+			viewRect.top += 20.f;
+			viewRect.bottom += 20.f;
+		}
+	};
+
+	View view = View({ 0.f, 0.f, 300.f, 400.f }, L"Properties");
+	view.Text(L"Position");
+	view.Text(L"Rotation");
+	view.Text(L"Scale");
+	view.NewLine();
+	view.Button(L"Destroy");
+	view.Button(L"Create");
+
 
 	//END UI RENDERING
 	gUISystem.d2dRenderTarget->EndDraw();

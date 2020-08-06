@@ -65,6 +65,8 @@ public:
 	ID2D1SolidColorBrush* brushTextBlack;
 	ID2D1SolidColorBrush* brushCloseBox;
 	ID2D1SolidColorBrush* brushTransparentMenu;
+	ID2D1SolidColorBrush* brushViewBlack;
+	ID2D1SolidColorBrush* brushButton;
 	IDWriteTextFormat* textFormat;
 };
 

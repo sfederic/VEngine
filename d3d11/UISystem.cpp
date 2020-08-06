@@ -32,10 +32,16 @@ void UISystem::Init()
 	HR(writeFactory->CreateTextFormat(L"Terminal", NULL, DWRITE_FONT_WEIGHT_NORMAL, DWRITE_FONT_STYLE_NORMAL,
 		DWRITE_FONT_STRETCH_NORMAL, 14.f, L"en-us", &textFormat));
 
+	HR(writeFactory->CreateTextFormat(L"Terminal", NULL, DWRITE_FONT_WEIGHT_NORMAL, DWRITE_FONT_STYLE_NORMAL,
+		DWRITE_FONT_STRETCH_NORMAL, 14.f, L"en-us", &textFormat));
+
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.5f, 0.5f, 0.5f, 0.5f), &brushTransparentMenu));
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(1.0f, 1.0f, 1.0f, 1.0f), &brushCloseBox));
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.9f, 0.9f, 0.9f, 1.0f), &brushText));
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.f, 0.f, 0.f, 1.0f), &brushTextBlack));
+
+	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.14f, 0.14f, 0.15f, 1.0f), &brushViewBlack));
+	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.17f, 0.17f, 0.18f, 1.0f), &brushButton));
 }
 
 void UISystem::Cleanup()
@@ -48,6 +54,8 @@ void UISystem::Cleanup()
 	brushText->Release();
 	brushTextBlack->Release();
 	brushCloseBox->Release();
+	brushViewBlack->Release();
+	brushButton->Release();
 	textFormat->Release();
 }
 
@@ -55,6 +63,10 @@ void UISystem::Tick()
 {
 	GetCursorPos(&mousePos);
 	ScreenToClient(gCoreSystem.mainWindow, &mousePos);
+
+	//NOTE: This one is here for the Direct2D mouse checking. Y position is off by about 10? Direct2D rendering offset?
+	mousePos.y += 10; 
+
 
 	if (inputSystem.GetKeyUpState(VK_DELETE))
 	{
