@@ -51,7 +51,7 @@ struct UIView
 
 	void Text(const wchar_t* string);
 	bool Button(const wchar_t* string);
-	void Edit();
+	void Edit(const wchar_t* editString);
 
 	void NewLine();
 	void NewLine(int numOfNewlines);
@@ -62,9 +62,9 @@ struct UIViewActor : public UIView
 {
 	void Create()
 	{
-		Init({ 0.f, 0.f, 300.f, 400.f }, L"Properties");
-		Text(L"Position");
-		Button(L"Test Button");
+		//Init({ 0.f, 0.f, 300.f, 400.f }, L"Properties");
+		//Text(L"Position");
+		//Button(L"Test Button");
 	}
 
 	void RenderBack(const wchar_t* title);
@@ -88,14 +88,12 @@ struct UIViewActor : public UIView
 
 		for (int i = 0; i < editItems.size(); i++)
 		{
-
+			editItems[i].Tick();
 		}
 
 		for (int i = 0; i < buttonItems.size(); i++)
 		{
 			buttonItems[i].Tick();
 		}
-
-
 	}
 };

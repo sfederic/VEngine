@@ -78,10 +78,9 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSy
 		if (tempBoundingBox.Intersects(ray.origin, ray.direction, ray.distance))
 		{
 			distances.push_back(ray.distance);
-			
-			//ray.actorIndex = i;
-
 			actorIndices.push_back(i);
+
+			ray.actorIndex = i;
 
 			DebugPrint("hit %d\n", ray.actorIndex);
 

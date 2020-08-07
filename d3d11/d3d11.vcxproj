@@ -167,6 +167,7 @@
     <ClCompile Include="Raycast.cpp" />
     <ClCompile Include="ShaderFactory.cpp" />
     <ClCompile Include="TimerSystem.cpp" />
+    <ClCompile Include="TranslationWidget.cpp" />
     <ClCompile Include="UISystem.cpp" />
     <ClCompile Include="CoreSystem.cpp" />
     <ClCompile Include="UIView.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="Raycast.h" />
     <ClInclude Include="ShaderFactory.h" />
     <ClInclude Include="TimerSystem.h" />
+    <ClInclude Include="TranslationWidget.h" />
     <ClInclude Include="UISystem.h" />
     <ClInclude Include="CoreSystem.h" />
     <ClInclude Include="UIView.h" />

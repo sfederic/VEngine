@@ -87,6 +87,9 @@
     <ClCompile Include="UIView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TranslationWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Obj.h">
@@ -156,6 +159,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UIView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TranslationWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

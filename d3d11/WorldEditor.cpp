@@ -15,9 +15,12 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 
 	if (pickedActor)
 	{
-		xAxis.actors[0].SetPosition(world->GetActor(actorSystemIndex, actorIndex)->GetPositionVector());
-		yAxis.actors[0].SetPosition(world->GetActor(actorSystemIndex, actorIndex)->GetPositionVector());
-		zAxis.actors[0].SetPosition(world->GetActor(actorSystemIndex, actorIndex)->GetPositionVector());
+		//xAxis.actors[0].SetPosition(world->GetActor(actorSystemIndex, actorIndex)->GetPositionVector());
+		//yAxis.actors[0].SetPosition(world->GetActor(actorSystemIndex, actorIndex)->GetPositionVector());
+		//zAxis.actors[0].SetPosition(world->GetActor(actorSystemIndex, actorIndex)->GetPositionVector());
+		xAxis.actors[0].SetPosition(pickedActor->GetPositionVector());
+		yAxis.actors[0].SetPosition(pickedActor->GetPositionVector());
+		zAxis.actors[0].SetPosition(pickedActor->GetPositionVector());
 	}
 
 	if (pickedAxis)
@@ -38,37 +41,40 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 
 	//TODO: maybe make a camera axis system like MechaCrawler for arrow movement
 	//Actor Arros key movement (For grid movement)
-	if (inputSystem.GetAsyncKey(VK_CONTROL))
+	if (pickedActor)
 	{
+		if (inputSystem.GetAsyncKey(VK_CONTROL))
+		{
+			if (inputSystem.GetKeyDownState(VK_UP))
+			{
+				pickedActor->Move(moveIncrement, pickedActor->GetUpVector());
+			}
+		}
+
+		if (inputSystem.GetAsyncKey(VK_CONTROL))
+		{
+			if (inputSystem.GetKeyDownState(VK_DOWN))
+			{
+				pickedActor->Move(-moveIncrement, pickedActor->GetUpVector());
+			}
+		}
+
 		if (inputSystem.GetKeyDownState(VK_UP))
 		{
-			pickedActor->Move(moveIncrement, pickedActor->GetUpVector());
+			pickedActor->Move(moveIncrement, pickedActor->GetForwardVector());
 		}
-	}
-	
-	if (inputSystem.GetAsyncKey(VK_CONTROL))
-	{
-		if (inputSystem.GetKeyDownState(VK_DOWN))
+		else if (inputSystem.GetKeyDownState(VK_DOWN))
 		{
-			pickedActor->Move(-moveIncrement, pickedActor->GetUpVector());
+			pickedActor->Move(-moveIncrement, pickedActor->GetForwardVector());
 		}
-	}
-
-	if (inputSystem.GetKeyDownState(VK_UP))
-	{
-		pickedActor->Move(moveIncrement, pickedActor->GetForwardVector());
-	}
-	else if (inputSystem.GetKeyDownState(VK_DOWN))
-	{
-		pickedActor->Move(-moveIncrement, pickedActor->GetForwardVector());
-	}
-	else if (inputSystem.GetKeyDownState(VK_LEFT))
-	{
-		pickedActor->Move(-moveIncrement, pickedActor->GetRightVector());
-	}
-	else if (inputSystem.GetKeyDownState(VK_RIGHT))
-	{
-		pickedActor->Move(moveIncrement, pickedActor->GetRightVector());
+		else if (inputSystem.GetKeyDownState(VK_LEFT))
+		{
+			pickedActor->Move(-moveIncrement, pickedActor->GetRightVector());
+		}
+		else if (inputSystem.GetKeyDownState(VK_RIGHT))
+		{
+			pickedActor->Move(moveIncrement, pickedActor->GetRightVector());
+		}
 	}
 	
 

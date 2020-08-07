@@ -11,6 +11,8 @@
 #include "World.h"
 #include "Debug.h"
 #include "WICTextureLoader.h"
+#include <string>
+#include "WorldEditor.h"
 
 RenderSystem gRenderSystem;
 UINT strides = sizeof(Vertex);
@@ -412,11 +414,31 @@ void RenderSystem::RenderEnd(float deltaTime, ID3D11Buffer* debugLineBuffer)
 	debugMenu.Tick(GetWorld(), deltaTime);
 
 	
-	for (int i = 0; i < gUISystem.uiViews.size(); i++)
+	/*for (int i = 0; i < gUISystem.uiViews.size(); i++)
 	{
 		gUISystem.uiViews[i]->Tick();
-	}
+	}*/
 
+	UIViewActor actorView = {};
+	actorView.Init({ 0.f, 0.f, 300.f, 400.f }, L"Properties");
+
+	Actor* actor = GetWorld()->GetActor(gWorldEditor.actorSystemIndex, gWorldEditor.actorIndex);
+	if(actor)
+	{
+		std::wstring posString = std::to_wstring(actor->GetPositionFloat3().x);
+		actorView.Text(L"Position");
+		actorView.Edit(posString.c_str());
+		actorView.Text(L"Rotation");
+		std::wstring rotString = std::to_wstring(actor->GetRotation().r[0].m128_f32[0]);
+		actorView.Edit(rotString.c_str());
+		actorView.Text(L"Scale");
+		std::wstring scaleString = std::to_wstring(actor->GetScale().x);
+		actorView.Edit(scaleString.c_str());
+		actorView.NewLine();
+		actorView.Button(L"Test BUtton");
+
+		//float f = wcstof(posString.c_str(), nullptr);
+	}
 
 	//END UI RENDERING
 	gUISystem.d2dRenderTarget->EndDraw();
