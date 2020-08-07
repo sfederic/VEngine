@@ -83,6 +83,12 @@ float CoreSystem::GetAspectRatio()
 	return (float)((float)windowWidth / (float)windowHeight);
 }
 
+//Helper for exiting the engine in the main loop
+void CoreSystem::Exit()
+{
+	msg.message = WM_QUIT;
+}
+
 LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam)
 {
 	switch (message)

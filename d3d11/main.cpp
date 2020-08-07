@@ -33,13 +33,13 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 	ID3D11Buffer* debugLinesBuffer = gRenderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
 
-	/*ActorSystem cubes;
+	ActorSystem cubes;
 	cubes.modelName = "cube.fbx";
-	cubes.CreateActors(&gRenderSystem, 3);*/
+	cubes.CreateActors(&gRenderSystem, 1);
 
 	World* world = GetWorld();
-	/*world->actorSystems.push_back(&cubes);
-	world->actorSystems.push_back(&gWorldEditor.xAxis);
+	//world->actorSystems.push_back(&cubes);
+	/*world->actorSystems.push_back(&gWorldEditor.xAxis);
 	world->actorSystems.push_back(&gWorldEditor.yAxis);
 	world->actorSystems.push_back(&gWorldEditor.zAxis);*/
 

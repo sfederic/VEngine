@@ -15,6 +15,8 @@ public:
 	void HandleMessages();
 	float GetAspectRatio();
 
+	void Exit();
+
 	HWND mainWindow;
 	MSG msg;
 	const int windowWidth = 800;

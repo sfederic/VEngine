@@ -319,25 +319,25 @@ void RenderSystem::RenderBounds()
 		{
 			for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex]->actors.size(); actorIndex++)
 			{
-				matrices.view = camera->view;
+			matrices.view = camera->view;
 
-				XMMATRIX boxBoundsMatrix = XMMatrixIdentity();
-				XMVECTOR offset = XMVectorSet(
-					world->actorSystems[systemIndex]->actors[actorIndex].GetPositionFloat3().x + world->actorSystems[systemIndex]->boundingBox.Center.x,
-					world->actorSystems[systemIndex]->actors[actorIndex].GetPositionFloat3().y + world->actorSystems[systemIndex]->boundingBox.Center.y,
-					world->actorSystems[systemIndex]->actors[actorIndex].GetPositionFloat3().z + world->actorSystems[systemIndex]->boundingBox.Center.z,
-					1.0f);
+			XMMATRIX boxBoundsMatrix = XMMatrixIdentity();
+			XMVECTOR offset = XMVectorSet(
+				world->actorSystems[systemIndex]->actors[actorIndex].GetPositionFloat3().x + world->actorSystems[systemIndex]->boundingBox.Center.x,
+				world->actorSystems[systemIndex]->actors[actorIndex].GetPositionFloat3().y + world->actorSystems[systemIndex]->boundingBox.Center.y,
+				world->actorSystems[systemIndex]->actors[actorIndex].GetPositionFloat3().z + world->actorSystems[systemIndex]->boundingBox.Center.z,
+				1.0f);
 
-				boxBoundsMatrix = XMMatrixScalingFromVector(XMLoadFloat3(&world->actorSystems[systemIndex]->boundingBox.Extents));
+			boxBoundsMatrix = XMMatrixScalingFromVector(XMLoadFloat3(&world->actorSystems[systemIndex]->boundingBox.Extents));
 
-				boxBoundsMatrix.r[3] = offset;
+			boxBoundsMatrix.r[3] = offset;
 
-				matrices.model = boxBoundsMatrix;
-				matrices.mvp = matrices.model * matrices.view * matrices.proj;
-				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
-				context->VSSetConstantBuffers(0, 1, &cbMatrices);
+			matrices.model = boxBoundsMatrix;
+			matrices.mvp = matrices.model * matrices.view * matrices.proj;
+			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
+			context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
-				context->Draw((UINT)debugBox.modelData.verts.size(), 0);
+			context->Draw((UINT)debugBox.modelData.verts.size(), 0);
 			}
 		}
 	}
@@ -411,96 +411,11 @@ void RenderSystem::RenderEnd(float deltaTime, ID3D11Buffer* debugLineBuffer)
 	//Debug menu testing (really need to fix this d2d stuff in Render)
 	debugMenu.Tick(GetWorld(), deltaTime);
 
-	//UI View testing
-	for (int viewIndex = 0; viewIndex < gUISystem.uiViews.size(); viewIndex++)
+	
+	for (int i = 0; i < gUISystem.uiViews.size(); i++)
 	{
-		gUISystem.uiViews[viewIndex].Tick();
+		gUISystem.uiViews[i]->Tick();
 	}
-
-	//TODO: more testing for a better ui system
-	struct View
-	{
-		D2D1_RECT_F viewRectBack;
-		D2D1_RECT_F viewRect;
-		D2D1_RECT_F viewRectOffset;
-
-		View(D2D1_RECT_F viewRect_, const wchar_t* title)
-		{
-			viewRectBack = viewRect_;
-			viewRect = { viewRectBack.left + 10.f, viewRectBack.top + 10.f, viewRectBack.right - 10.f, viewRectBack.top + 30.f };
-			gUISystem.d2dRenderTarget->FillRectangle(viewRectBack, gUISystem.brushViewBlack);
-			gUISystem.d2dRenderTarget->FillRectangle(viewRect, gUISystem.brushButton);
-			gUISystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
-			gUISystem.d2dRenderTarget->DrawTextA(title, wcslen(title), gUISystem.textFormat, viewRect, gUISystem.brushText);
-			IncrementViewRect();
-		}
-
-		void Text(const wchar_t* string)
-		{
-			gUISystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
-			gUISystem.d2dRenderTarget->DrawTextA(string, wcslen(string), gUISystem.textFormat, viewRect, gUISystem.brushText);
-			IncrementViewRect();
-		}
-
-		bool Button(const wchar_t* string)
-		{
-			gUISystem.d2dRenderTarget->FillRectangle(viewRect, gUISystem.brushTextBlack);
-			gUISystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
-			gUISystem.d2dRenderTarget->DrawTextA(string, wcslen(string), gUISystem.textFormat, viewRect, gUISystem.brushText);
-
-			POINT mousePos = gUISystem.mousePos;
-
-			DebugPrint("MouseX %d | MouseY %d\n", mousePos.x, mousePos.y);
-
-			if ((mousePos.x > viewRect.left) && (mousePos.x < viewRect.right))
-			{
-				if ((mousePos.y > viewRect.top) && (mousePos.y < viewRect.bottom))
-				{
-					//Hover graphic
-					gUISystem.d2dRenderTarget->DrawRectangle(viewRect, gUISystem.brushText);
-
-					if (inputSystem.GetMouseLeftDownState())
-					{
-						IncrementViewRect();
-						return true;
-					}
-				}
-			}
-
-			IncrementViewRect();
-			return false;
-		}
-
-		void NewLine()
-		{
-			IncrementViewRect();
-		}
-
-		void NewLine(int numOfNewlines)
-		{
-			for (int i = 0; i < numOfNewlines; i++)
-			{
-				IncrementViewRect();
-			}
-		}
-
-		void IncrementViewRect()
-		{
-			//For rough debugging 
-			assert(viewRect.bottom < viewRectBack.bottom);
-
-			viewRect.top += 20.f;
-			viewRect.bottom += 20.f;
-		}
-	};
-
-	View view = View({ 0.f, 0.f, 300.f, 400.f }, L"Properties");
-	view.Text(L"Position");
-	view.Text(L"Rotation");
-	view.Text(L"Scale");
-	view.NewLine();
-	view.Button(L"Destroy");
-	view.Button(L"Create");
 
 
 	//END UI RENDERING

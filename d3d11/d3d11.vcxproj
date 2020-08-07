@@ -169,6 +169,7 @@
     <ClCompile Include="TimerSystem.cpp" />
     <ClCompile Include="UISystem.cpp" />
     <ClCompile Include="CoreSystem.cpp" />
+    <ClCompile Include="UIView.cpp" />
     <ClCompile Include="World.cpp" />
     <ClCompile Include="WorldEditor.cpp" />
   </ItemGroup>
@@ -193,6 +194,7 @@
     <ClInclude Include="TimerSystem.h" />
     <ClInclude Include="UISystem.h" />
     <ClInclude Include="CoreSystem.h" />
+    <ClInclude Include="UIView.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="WorldEditor.h" />
   </ItemGroup>
