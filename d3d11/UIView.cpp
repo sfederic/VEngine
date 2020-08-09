@@ -4,6 +4,9 @@
 #include "UISystem.h"
 #include "Debug.h"
 #include <string>
+#include "WorldEditor.h"
+#include "World.h"
+#include "CoreSystem.h"
 
 void UIView::Init(D2D1_RECT_F viewRect_, const wchar_t* title)
 {
@@ -18,15 +21,6 @@ void UIView::Init(D2D1_RECT_F viewRect_, const wchar_t* title)
 
 void UIView::Text(const wchar_t* string)
 {
-	/*TextItem textItem;
-	textItem.rect = viewRect;
-	textItem.id = idCounter;
-	wcscpy_s(textItem.string, string);
-
-	textItems.push_back(textItem);
-
-	IncrementViewRect();*/
-
 	gUISystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
 	gUISystem.d2dRenderTarget->DrawTextA(string, wcslen(string), gUISystem.textFormat, viewRect, gUISystem.brushText);
 	IncrementViewRect();
@@ -34,17 +28,6 @@ void UIView::Text(const wchar_t* string)
 
 bool UIView::Button(const wchar_t* string)
 {
-	/*ButtonItem buttonItem = {};
-	buttonItem.id = idCounter;
-	buttonItem.rect = viewRect;
-	wcscpy_s(buttonItem.string, string);
-
-	buttonItems.push_back(buttonItem);
-
-	IncrementViewRect();
-
-	return true;*/
-
 	gUISystem.d2dRenderTarget->FillRectangle(viewRect, gUISystem.brushTextBlack);
 	gUISystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
 	gUISystem.d2dRenderTarget->DrawTextA(string, wcslen(string), gUISystem.textFormat, viewRect, gUISystem.brushText);
@@ -96,48 +79,19 @@ void UIView::IncrementViewRect()
 	idCounter++;
 }
 
-//Test functions
-void EditItem::Tick()
+void UIViewActor::Tick()
 {
-
-}
-
-void ButtonItem::Tick()
-{
-	gUISystem.d2dRenderTarget->FillRectangle(rect, gUISystem.brushTextBlack);
-	gUISystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
-	gUISystem.d2dRenderTarget->DrawTextA(string, wcslen(string), gUISystem.textFormat, rect, gUISystem.brushText);
-
-	POINT mousePos = gUISystem.mousePos;
-
-	if ((mousePos.x > rect.left) && (mousePos.x < rect.right))
+	if (gWorldEditor.pickedActor)
 	{
-		if ((mousePos.y > rect.top) && (mousePos.y < rect.bottom))
-		{
-			//Hover graphic
-			gUISystem.d2dRenderTarget->DrawRectangle(rect, gUISystem.brushText);
+		Init({ gCoreSystem.windowWidth - 300.f, 0.f, (float)gCoreSystem.windowWidth, (float)gCoreSystem.windowHeight }, L"Properties");
 
-			if (inputSystem.GetMouseLeftUpState())
-			{
-				DebugPrint("%ls Button pressed\n", string);
-				//return true;
-			}
+		Actor* actor = GetWorld()->GetActor(gWorldEditor.actorSystemIndex, gWorldEditor.actorIndex);
+		if (actor)
+		{
+			Text(L"Position");
+			Edit(actor->transform.r[3].m128_f32[0], posString);
+			NewLine();
+			Button(L"Test BUtton");
 		}
 	}
-
-	//return false;
-}
-
-void TextItem::Tick()
-{
-	gUISystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
-	gUISystem.d2dRenderTarget->DrawTextA(string, wcslen(string), gUISystem.textFormat, rect, gUISystem.brushText);
-}
-
-void UIViewActor::RenderBack(const wchar_t* title)
-{
-	gUISystem.d2dRenderTarget->FillRectangle(viewRectBack, gUISystem.brushViewBlack);
-	gUISystem.d2dRenderTarget->FillRectangle(viewRect, gUISystem.brushButton);
-	gUISystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
-	gUISystem.d2dRenderTarget->DrawTextA(title, wcslen(title), gUISystem.textFormat, viewRect, gUISystem.brushText);
 }

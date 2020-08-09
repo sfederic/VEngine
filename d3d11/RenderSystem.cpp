@@ -14,10 +14,6 @@
 #include <string>
 #include "WorldEditor.h"
 
-std::wstring posString;
-std::wstring rotString;
-std::wstring scaleString;
-
 RenderSystem gRenderSystem;
 UINT strides = sizeof(Vertex);
 UINT offsets = 0;
@@ -418,24 +414,9 @@ void RenderSystem::RenderEnd(float deltaTime, ID3D11Buffer* debugLineBuffer)
 	//Debug menu testing (really need to fix this d2d stuff in Render)
 	debugMenu.Tick(GetWorld(), deltaTime);
 
-	
-	/*for (int i = 0; i < gUISystem.uiViews.size(); i++)
+	for (int i = 0; i < gUISystem.uiViews.size(); i++)
 	{
 		gUISystem.uiViews[i]->Tick();
-	}*/
-
-	UIViewActor actorView = {};
-	actorView.Init({ 0.f, 0.f, 300.f, 400.f }, L"Properties");
-
-	Actor* actor = GetWorld()->GetActor(gWorldEditor.actorSystemIndex, gWorldEditor.actorIndex);
-	if(actor)
-	{
-		actorView.Text(L"Position");
-		actorView.Edit<float>(actor->transform.r[3].m128_f32[0], posString);
-		actorView.NewLine();
-		actorView.Button(L"Test BUtton");
-
-		//float f = wcstof(posString.c_str(), nullptr);
 	}
 
 	//END UI RENDERING

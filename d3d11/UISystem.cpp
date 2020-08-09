@@ -44,8 +44,8 @@ void UISystem::Init()
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.17f, 0.17f, 0.18f, 1.0f), &brushButton));
 
 	//Populate UIViews
+	//NOTE: So far the ui views are static, if I want to bring layering back, have to ditch this approach
 	UIViewActor* uiViewActor = new UIViewActor;
-	uiViewActor->Create();
 	uiViews.push_back(uiViewActor);
 }
 

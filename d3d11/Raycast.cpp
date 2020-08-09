@@ -63,11 +63,12 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSy
 		//For editor exit
 		if (actorSystem->actors[i].bPicked)
 		{
+			actorSystem->actors[i].bPicked = false;
 			return false;
 		}
 
 		//Skip if actor is not render as well (good for translation widgets)
-		if (!actorSystem->actors[i].bRender) 
+		if (!actorSystem->actors[i].bRender)
 		{
 			return false;
 		}
@@ -87,7 +88,7 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSy
 			//TODO: fix up. Add new actor class instead of this garbage
 			if (actorSystem->actors[i].pickedAxis == PickedAxis::X ||
 				actorSystem->actors[i].pickedAxis == PickedAxis::Y ||
-				actorSystem->actors[i].pickedAxis == PickedAxis::Z )
+				actorSystem->actors[i].pickedAxis == PickedAxis::Z)
 			{
 				return true;
 			}
@@ -171,6 +172,8 @@ bool RaycastAllFromScreen(Ray& ray, int sx, int sy, Camera* camera, World* world
 				}
 			}
 
+			//TODO: This sortof raycast setup isn't accounting for Actor systems, only actors.
+			//Not a huge problem, but translation widget won't take precedence without the fix
 			return true;
 		}
 	}

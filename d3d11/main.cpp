@@ -69,6 +69,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		gRenderSystem.RenderActorSystem(world);
 
 		gRenderSystem.RenderBounds();
+
 		gRenderSystem.RenderEnd(deltaTime, debugLinesBuffer);
 
 		inputSystem.InputReset();

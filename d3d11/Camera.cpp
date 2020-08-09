@@ -37,7 +37,7 @@ void Camera::Tick(float deltaTime)
 	UpdateViewMatrix();
 
 	//WASD MOVEMENT
-	if (!gConsole.bConsoleActive)
+	if (!gConsole.bConsoleActive && !gUISystem.bEditUIActive)
 	{
 		const float moveSpeed = 7.5f * deltaTime;
 

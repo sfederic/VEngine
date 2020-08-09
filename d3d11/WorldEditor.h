@@ -25,6 +25,9 @@ public:
 	float dyAccum;
 	float dzAccum;
 
+	float lastMousePosX;
+	float lastMousePosY;
+
 	float moveIncrement = 2.f;
 
 	//For picking

@@ -7,17 +7,21 @@ void MatrixAddScale(float s, XMMATRIX& m)
     m.r[2].m128_f32[2] = s;
 }
 
+//GLOBAL VECTOR DIRECTIONS
 XMVECTOR XMVectorRight()
 {
-    return XMVectorSet(1.f, 0.f, 0.f, 0.f);
+    __m128 vec = _mm_set_ps(0.f, 0.f, 0.f, 1.f);
+    return vec;
 }
 
 XMVECTOR XMVectorUp()
 {
-    return XMVectorSet(0.f, 1.f, 0.f, 0.f);
+    __m128 vec = _mm_set_ps(0.f, 0.f, 1.f, 0.f);
+    return vec;
 }
 
 XMVECTOR XMVectorForward()
 {
-    return XMVectorSet(0.f, 0.f, 1.f, 0.f);
+    __m128 vec = _mm_set_ps(0.f, 1.f, 0.f, 0.f);
+    return vec;
 }

@@ -47,40 +47,45 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 		{
 			if (inputSystem.GetKeyDownState(VK_UP))
 			{
-				pickedActor->Move(moveIncrement, pickedActor->GetUpVector());
+				pickedActor->Move(moveIncrement, XMVectorUp());
 			}
-		}
-
-		if (inputSystem.GetAsyncKey(VK_CONTROL))
-		{
-			if (inputSystem.GetKeyDownState(VK_DOWN))
+			else if (inputSystem.GetKeyDownState(VK_DOWN))
 			{
-				pickedActor->Move(-moveIncrement, pickedActor->GetUpVector());
+				pickedActor->Move(-moveIncrement, XMVectorUp());
 			}
 		}
-
-		if (inputSystem.GetKeyDownState(VK_UP))
+		else if (inputSystem.GetKeyDownState(VK_UP))
 		{
-			pickedActor->Move(moveIncrement, pickedActor->GetForwardVector());
+			pickedActor->Move(moveIncrement, XMVectorForward());
 		}
 		else if (inputSystem.GetKeyDownState(VK_DOWN))
 		{
-			pickedActor->Move(-moveIncrement, pickedActor->GetForwardVector());
+			pickedActor->Move(-moveIncrement, XMVectorForward());
 		}
 		else if (inputSystem.GetKeyDownState(VK_LEFT))
 		{
-			pickedActor->Move(-moveIncrement, pickedActor->GetRightVector());
+			pickedActor->Move(-moveIncrement, XMVectorRight());
 		}
 		else if (inputSystem.GetKeyDownState(VK_RIGHT))
 		{
-			pickedActor->Move(moveIncrement, pickedActor->GetRightVector());
+			pickedActor->Move(moveIncrement, XMVectorRight());
 		}
 	}
 	
 
 	//Actor picking for editor
-	if (inputSystem.GetMouseLeftDownState())
+	if (inputSystem.GetMouseLeftUpState())
 	{
+		pickedAxis = nullptr;
+
+		lastMousePosX = 0;
+		lastMousePosY = 0;
+	}
+	else if (inputSystem.GetMouseLeftDownState())
+	{
+		lastMousePosX = gUISystem.mousePos.x;
+		lastMousePosY = gUISystem.mousePos.y;
+
 		if (RaycastAllFromScreen(screenPickRay, gUISystem.mousePos.x, gUISystem.mousePos.y, &editorCamera, GetWorld()))
 		{
 			if (debugLinesBuffer)
@@ -115,7 +120,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 	}
 	else if (inputSystem.GetMouseRightUpState())
 	{
-		if (RaycastAllFromScreen(screenPickRay, gUISystem.mousePos.x, gUISystem.mousePos.y, &editorCamera, GetWorld()))
+		//if (RaycastAllFromScreen(screenPickRay, gUISystem.mousePos.x, gUISystem.mousePos.y, &editorCamera, GetWorld()))
 		{
 			//TODO: need to fix this. Don't likethat the UIView index are overriding the other ones
 			//actorIndex = screenPickRay.actorIndex;
@@ -212,17 +217,15 @@ void WorldEditor::Init()
 //Actors as the movement along the translation axis using mouse (Different from Actor::Move())
 void WorldEditor::MoveActor(Actor* actor, PickedAxis axis)
 {
-	static POINT lastMousePos;
-
-	int x = gUISystem.mousePos.x;
-	int y = gUISystem.mousePos.y;
+	int mouseX = gUISystem.mousePos.x;
+	int mouseY = gUISystem.mousePos.y;
 
 	if (inputSystem.GetAsyncKey(VK_LBUTTON))
 	{
 		SetCapture(gCoreSystem.mainWindow);
 
-		float dx = XMConvertToRadians(0.25f * (float)(x - lastMousePos.x));
-		float dy = XMConvertToRadians(0.25f * (float)(y - lastMousePos.y));
+		float dx = XMConvertToRadians(0.25f * (float)(mouseX - lastMousePosX));
+		float dy = XMConvertToRadians(0.25f * (float)(mouseY - lastMousePosY));
 
 		if (bMoveActorsInIncrements && actor)
 		{
@@ -275,17 +278,18 @@ void WorldEditor::MoveActor(Actor* actor, PickedAxis axis)
 		else if (actor)
 		{
 			//For free movement
+			//TODO: This code gives a funny offset when clicking.
 			if (axis == PickedAxis::X)
 			{
-				actor->Move(dx * pickedActorMoveSpeed, XMVectorSet(1.f, 0.f, 0.f, 0.f));
+				actor->Move(dx * pickedActorMoveSpeed, XMVectorRight());
 			}
 			else if (axis == PickedAxis::Y)
 			{
-				actor->Move(-dy * pickedActorMoveSpeed, XMVectorSet(0.f, 1.f, 0.f, 0.f));
+				actor->Move(-dy * pickedActorMoveSpeed, XMVectorUp());
 			}	
 			else if (axis == PickedAxis::Z)
 			{
-				actor->Move(-dx * pickedActorMoveSpeed, XMVectorSet(0.f, 0.f, 1.f, 0.f));
+				actor->Move(-dx * pickedActorMoveSpeed, XMVectorForward());
 			}
 		}
 
@@ -299,6 +303,6 @@ void WorldEditor::MoveActor(Actor* actor, PickedAxis axis)
 		ReleaseCapture();
 	}
 
-	lastMousePos.x = x;
-	lastMousePos.y = y;
+	lastMousePosX = mouseX;
+	lastMousePosY = mouseY;
 }
