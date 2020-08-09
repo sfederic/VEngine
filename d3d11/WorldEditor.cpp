@@ -227,40 +227,49 @@ void WorldEditor::MoveActor(Actor* actor, PickedAxis axis)
 		if (bMoveActorsInIncrements && actor)
 		{
 			//For incremental movement
-			dxAccum += dx;
-			if (dxAccum > 0.5f)
+			if (pickedAxis->pickedAxis == PickedAxis::X)
 			{
-				actor->Move(moveIncrement, XMVectorSet(1.f, 0.f, 0.f, 0.f));
-				dxAccum = 0;
-			}
-			else if (dxAccum < -0.5f)
-			{
-				actor->Move(-moveIncrement, XMVectorSet(1.f, 0.f, 0.f, 0.f));
-				dxAccum = 0;
-			}
-
-			dyAccum += dy;
-			if (dyAccum > 0.5f)
-			{
-				actor->Move(-moveIncrement, XMVectorSet(0.f, 1.f, 0.f, 0.f));
-				dyAccum = 0;
-			}
-			else if (dyAccum < -0.5f)
-			{
-				actor->Move(moveIncrement, XMVectorSet(0.f, 1.f, 0.f, 0.f));
-				dyAccum = 0;
+				dxAccum += dx;
+				if (dxAccum > 0.5f)
+				{
+					actor->Move(moveIncrement, XMVectorSet(1.f, 0.f, 0.f, 0.f));
+					dxAccum = 0;
+				}
+				else if (dxAccum < -0.5f)
+				{
+					actor->Move(-moveIncrement, XMVectorSet(1.f, 0.f, 0.f, 0.f));
+					dxAccum = 0;
+				}
 			}
 
-			dzAccum += -dx;
-			if (dzAccum > 0.5f)
+			if (pickedAxis->pickedAxis == PickedAxis::Y)
 			{
-				actor->Move(-moveIncrement, XMVectorSet(0.f, 0.f, 1.f, 0.f));
-				dzAccum = 0;
+				dyAccum += dy;
+				if (dyAccum > 0.5f)
+				{
+					actor->Move(-moveIncrement, XMVectorSet(0.f, 1.f, 0.f, 0.f));
+					dyAccum = 0;
+				}
+				else if (dyAccum < -0.5f)
+				{
+					actor->Move(moveIncrement, XMVectorSet(0.f, 1.f, 0.f, 0.f));
+					dyAccum = 0;
+				}
 			}
-			else if (dzAccum < -0.5f)
+
+			if (pickedAxis->pickedAxis == PickedAxis::Z)
 			{
-				actor->Move(moveIncrement, XMVectorSet(0.f, 0.f, 1.f, 0.f));
-				dzAccum = 0;
+				dzAccum += dx;
+				if (dzAccum > 0.5f)
+				{
+					actor->Move(-moveIncrement, XMVectorSet(0.f, 0.f, 1.f, 0.f));
+					dzAccum = 0;
+				}
+				else if (dzAccum < -0.5f)
+				{
+					actor->Move(moveIncrement, XMVectorSet(0.f, 0.f, 1.f, 0.f));
+					dzAccum = 0;
+				}
 			}
 		}
 		else if (actor)

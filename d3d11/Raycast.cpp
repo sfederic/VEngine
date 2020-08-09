@@ -82,7 +82,7 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSy
 
 			ray.actorIndex = i;
 
-			DebugPrint("hit %d\n", ray.actorIndex);
+			//DebugPrint("hit %d\n", ray.actorIndex);
 
 			//TODO: fix up. Add new actor class instead of this garbage
 			if (actorSystem->actors[i].pickedAxis == PickedAxis::X ||

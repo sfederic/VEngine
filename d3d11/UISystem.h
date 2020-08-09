@@ -32,6 +32,7 @@ public:
 	IDWriteTextFormat* textFormat;
 
 	int activeUIViewElementIndex = -1;
+	bool bEditUIActive = false;
 };
 
 extern UISystem gUISystem;

@@ -4,20 +4,24 @@
 #include "DebugMenu.h"
 #include "Input.h"
 #include "Debug.h"
+#include "UISystem.h"
 
 FileSystem g_FileSystem;
 
 void FileSystem::Tick()
 {
-	//Test world load file handling.
-	if (inputSystem.GetKeyUpState('4'))
+	//world load file handling.
+	if (gUISystem.bEditUIActive)
 	{
-		g_FileSystem.WriteAllActorSystems(GetWorld(), "LevelSaves/test.sav");
-	}
+		if (inputSystem.GetKeyUpState(VK_F4))
+		{
+			g_FileSystem.WriteAllActorSystems(GetWorld(), "LevelSaves/test.sav");
+		}
 
-	if (inputSystem.GetKeyUpState('5'))
-	{
-		g_FileSystem.ReadAllActorSystems(GetWorld(), "LevelSaves/test.sav");
+		if (inputSystem.GetKeyUpState(VK_F5))
+		{
+			g_FileSystem.ReadAllActorSystems(GetWorld(), "LevelSaves/test.sav");
+		}
 	}
 }
 

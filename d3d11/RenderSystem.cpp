@@ -14,6 +14,10 @@
 #include <string>
 #include "WorldEditor.h"
 
+std::wstring posString;
+std::wstring rotString;
+std::wstring scaleString;
+
 RenderSystem gRenderSystem;
 UINT strides = sizeof(Vertex);
 UINT offsets = 0;
@@ -25,11 +29,12 @@ Vertex debugLineData[2];
 
 void RenderSystem::Tick()
 {
-	if (inputSystem.GetKeyUpState('1'))
+	//Set wireframe on/off
+	if (inputSystem.GetKeyUpState(VK_F1))
 	{
 		activeRastState = rastStateWireframe;
 	}
-	if (inputSystem.GetKeyUpState('2'))
+	if (inputSystem.GetKeyUpState(VK_F2))
 	{
 		activeRastState = rastStateSolid;
 	}
@@ -425,15 +430,8 @@ void RenderSystem::RenderEnd(float deltaTime, ID3D11Buffer* debugLineBuffer)
 	Actor* actor = GetWorld()->GetActor(gWorldEditor.actorSystemIndex, gWorldEditor.actorIndex);
 	if(actor)
 	{
-		std::wstring posString = std::to_wstring(actor->GetPositionFloat3().x);
 		actorView.Text(L"Position");
-		actorView.Edit(posString.c_str());
-		actorView.Text(L"Rotation");
-		std::wstring rotString = std::to_wstring(actor->GetRotation().r[0].m128_f32[0]);
-		actorView.Edit(rotString.c_str());
-		actorView.Text(L"Scale");
-		std::wstring scaleString = std::to_wstring(actor->GetScale().x);
-		actorView.Edit(scaleString.c_str());
+		actorView.Edit<float>(actor->transform.r[3].m128_f32[0], posString);
 		actorView.NewLine();
 		actorView.Button(L"Test BUtton");
 
@@ -511,7 +509,7 @@ void RenderSystem::RenderSetup(float deltaTime)
 
 	context->RSSetState(activeRastState);
 
-	if (inputSystem.GetKeyUpState('3'))
+	if (inputSystem.GetKeyUpState(VK_F3))
 	{
 		gShaderFactory.HotReloadShaders();
 		debugMenu.notifications.push_back(DebugNotification(L"Shaders reloaded."));

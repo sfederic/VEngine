@@ -68,7 +68,6 @@ bool InputSystem::GetKeyDownState(int key)
 {
 	if (currentDownKey == key)
 	{
-		currentDownKey = 0;
 		return true;
 	}
 	else

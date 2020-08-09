@@ -40,7 +40,7 @@ void UISystem::Init()
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.9f, 0.9f, 0.9f, 1.0f), &brushText));
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.f, 0.f, 0.f, 1.0f), &brushTextBlack));
 
-	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.14f, 0.14f, 0.15f, 1.0f), &brushViewBlack));
+	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.14f, 0.14f, 0.15f, 0.75f), &brushViewBlack));
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.17f, 0.17f, 0.18f, 1.0f), &brushButton));
 
 	//Populate UIViews
@@ -79,13 +79,13 @@ void UISystem::Tick()
 		gUISystem.uiViews.pop_back();
 	}
 
-	if (inputSystem.GetKeyUpState(VK_BACK))
+	/*if (inputSystem.GetKeyUpState(VK_BACK))
 	{
 		if (gUISystem.uiViews.size() > 0)
 		{
 			gUISystem.uiViews.pop_back();
 		}
-	}
+	}*/
 }
 
 void UISystem::PrintMousePos()

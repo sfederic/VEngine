@@ -3,6 +3,7 @@
 #include "Input.h"
 #include "UISystem.h"
 #include "Debug.h"
+#include <string>
 
 void UIView::Init(D2D1_RECT_F viewRect_, const wchar_t* title)
 {
@@ -68,33 +69,6 @@ bool UIView::Button(const wchar_t* string)
 
 	IncrementViewRect();
 	return false;
-}
-
-void UIView::Edit(const wchar_t* editString)
-{
-	if (gUISystem.activeUIViewElementIndex == idCounter)
-	{
-		gUISystem.d2dRenderTarget->DrawRectangle(viewRect, gUISystem.brushTextBlack);
-	}
-
-	POINT mousePos = gUISystem.mousePos;
-
-	if ((mousePos.x > viewRect.left) && (mousePos.x < viewRect.right))
-	{
-		if ((mousePos.y > viewRect.top) && (mousePos.y < viewRect.bottom))
-		{
-			gUISystem.d2dRenderTarget->DrawRectangle(viewRect, gUISystem.brushText);
-
-			if (inputSystem.GetMouseLeftUpState())
-			{
-				gUISystem.activeUIViewElementIndex = idCounter;
-			}
-		}
-	}
-
-	gUISystem.d2dRenderTarget->DrawTextA(editString, wcslen(editString), gUISystem.textFormat, viewRect, gUISystem.brushText);
-
-	IncrementViewRect();
 }
 
 void UIView::NewLine()
