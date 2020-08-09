@@ -42,6 +42,7 @@ void UISystem::Init()
 
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.14f, 0.14f, 0.15f, 0.75f), &brushViewBlack));
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.17f, 0.17f, 0.18f, 1.0f), &brushButton));
+	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.1f, 0.1f, 0.8f, 1.0f), &brushCheckBoxOn));
 
 	//Populate UIViews
 	//NOTE: So far the ui views are static, if I want to bring layering back, have to ditch this approach
@@ -61,6 +62,8 @@ void UISystem::Cleanup()
 	brushCloseBox->Release();
 	brushViewBlack->Release();
 	brushButton->Release();
+	brushCheckBoxOn->Release();
+
 	textFormat->Release();
 }
 
@@ -69,17 +72,33 @@ void UISystem::Tick()
 	GetCursorPos(&mousePos);
 	ScreenToClient(gCoreSystem.mainWindow, &mousePos);
 
-	//NOTE: This one is here for the Direct2D mouse checking. Y position is off by about 10? Direct2D rendering offset?
+	//NOTE: This one is here for the Direct2D mouse checking. Y position is off by about 10? Direct2D rendering offset? 
+	//Was hurting raycasting too. Is it the Win32 title bar?
 	mousePos.y += 10; 
 
+	//Iterate ver all UI back rects before any world editor input so that raycasts don't hit behind UI
+	//NOTE: This actually would fail on the first frame given the current methods, but too fast to notice
+	bUIClicked = false;
 
-	if (inputSystem.GetKeyUpState(VK_DELETE))
+	for (int i = 0; i < uiViews.size(); i++)
 	{
-		//world.actorSystems[ray.actorSystemIndex]->RemoveActor(ray.actorIndex);
+		if ((mousePos.x > uiViews[i]->viewRectBack.left) && (mousePos.x < uiViews[i]->viewRectBack.right))
+		{
+			if ((mousePos.y > uiViews[i]->viewRectBack.top) && (mousePos.y < uiViews[i]->viewRectBack.bottom))
+			{
+				bUIClicked = true;
+			}
+		}
+	}
+
+	//Was for multiple floating views
+	/*if (inputSystem.GetKeyUpState(VK_DELETE))
+	{
+		world.actorSystems[ray.actorSystemIndex]->RemoveActor(ray.actorIndex);
 		gUISystem.uiViews.pop_back();
 	}
 
-	/*if (inputSystem.GetKeyUpState(VK_BACK))
+	if (inputSystem.GetKeyUpState(VK_BACK))
 	{
 		if (gUISystem.uiViews.size() > 0)
 		{

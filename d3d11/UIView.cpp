@@ -8,7 +8,7 @@
 #include "World.h"
 #include "CoreSystem.h"
 
-void UIView::Init(D2D1_RECT_F viewRect_, const wchar_t* title)
+void UIView::Begin(D2D1_RECT_F viewRect_, const wchar_t* title)
 {
 	viewRectBack = viewRect_;
 	viewRect = { viewRectBack.left + 10.f, viewRectBack.top + 10.f, viewRectBack.right - 10.f, viewRectBack.top + 30.f };
@@ -16,14 +16,19 @@ void UIView::Init(D2D1_RECT_F viewRect_, const wchar_t* title)
 	gUISystem.d2dRenderTarget->FillRectangle(viewRect, gUISystem.brushButton);
 	gUISystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
 	gUISystem.d2dRenderTarget->DrawTextA(title, wcslen(title), gUISystem.textFormat, viewRect, gUISystem.brushText);
-	IncrementViewRect();
+	IncrementViewRectAndID();
+}
+
+void UIView::End()
+{
+	idCounter = 0;
 }
 
 void UIView::Text(const wchar_t* string)
 {
 	gUISystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
 	gUISystem.d2dRenderTarget->DrawTextA(string, wcslen(string), gUISystem.textFormat, viewRect, gUISystem.brushText);
-	IncrementViewRect();
+	IncrementViewRectAndID();
 }
 
 bool UIView::Button(const wchar_t* string)
@@ -44,19 +49,53 @@ bool UIView::Button(const wchar_t* string)
 			if (inputSystem.GetMouseLeftUpState())
 			{
 				DebugPrint("%ls Button pressed\n", string);
-				IncrementViewRect();
+				IncrementViewRectAndID();
 				return true;
 			}
 		}
 	}
 
-	IncrementViewRect();
+	IncrementViewRectAndID();
 	return false;
+}
+
+void UIView::CheckBox(const wchar_t* string, bool& checkBoxVal)
+{
+	gUISystem.d2dRenderTarget->DrawTextA(string, wcslen(string), gUISystem.textFormat, viewRect, gUISystem.brushText);
+
+	D2D1_RECT_F checkBoxRect = viewRect;
+	checkBoxRect.left = viewRect.right - 20.f;
+
+	if (checkBoxVal)
+	{
+		gUISystem.d2dRenderTarget->FillRectangle(checkBoxRect, gUISystem.brushCheckBoxOn);
+	}
+
+	gUISystem.d2dRenderTarget->DrawRectangle(checkBoxRect, gUISystem.brushText);
+
+	//Mouse check
+	POINT mousePos = gUISystem.mousePos;
+
+	if ((mousePos.x > viewRect.left) && (mousePos.x < viewRect.right))
+	{
+		if ((mousePos.y > viewRect.top) && (mousePos.y < viewRect.bottom))
+		{
+			//Hover graphic
+			gUISystem.d2dRenderTarget->DrawRectangle(checkBoxRect, gUISystem.brushCloseBox);
+
+			if (inputSystem.GetMouseLeftUpState())
+			{
+				checkBoxVal = !checkBoxVal;
+			}
+		}
+	}
+
+	IncrementViewRectAndID();
 }
 
 void UIView::NewLine()
 {
-	IncrementViewRect();
+	IncrementViewRectAndID();
 
 	idCounter++;
 }
@@ -65,11 +104,11 @@ void UIView::NewLine(int numOfNewlines)
 {
 	for (int i = 0; i < numOfNewlines; i++)
 	{
-		IncrementViewRect();
+		IncrementViewRectAndID();
 	}
 }
 
-void UIView::IncrementViewRect()
+void UIView::IncrementViewRectAndID()
 {
 	assert(viewRect.bottom < viewRectBack.bottom);
 
@@ -79,11 +118,14 @@ void UIView::IncrementViewRect()
 	idCounter++;
 }
 
+bool bTest = false;
+
 void UIViewActor::Tick()
 {
+	//TODO: There has to be a better way to do this. pickedActor conflicts with the world editor raycasting
 	if (gWorldEditor.pickedActor)
 	{
-		Init({ gCoreSystem.windowWidth - 300.f, 0.f, (float)gCoreSystem.windowWidth, (float)gCoreSystem.windowHeight }, L"Properties");
+		Begin({ gCoreSystem.windowWidth - 300.f, 0.f, (float)gCoreSystem.windowWidth, (float)gCoreSystem.windowHeight }, L"Properties");
 
 		Actor* actor = GetWorld()->GetActor(gWorldEditor.actorSystemIndex, gWorldEditor.actorIndex);
 		if (actor)
@@ -91,7 +133,10 @@ void UIViewActor::Tick()
 			Text(L"Position");
 			Edit(actor->transform.r[3].m128_f32[0], posString);
 			NewLine();
+			CheckBox(L"Check box test", bTest);
 			Button(L"Test BUtton");
 		}
+
+		End();
 	}
 }

@@ -31,7 +31,8 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	gUISystem.Init();
 	gWorldEditor.Init();
 
-	ID3D11Buffer* debugLinesBuffer = gRenderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
+	//TODO: This is causing a crash in Release. Is it because it's after the init code?
+	//ID3D11Buffer* debugLinesBuffer = gRenderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
 
 	ActorSystem cubes;
 	cubes.modelName = "monkey.fbx";
@@ -64,13 +65,13 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		gRenderSystem.RenderSetup(deltaTime);
 
 		//TODO: id don't like the position of this here (here because of axis rendering)
-		gWorldEditor.Tick(debugLinesBuffer);
+		gWorldEditor.Tick(nullptr);
 
 		gRenderSystem.RenderActorSystem(world);
 
 		gRenderSystem.RenderBounds();
 
-		gRenderSystem.RenderEnd(deltaTime, debugLinesBuffer);
+		gRenderSystem.RenderEnd(deltaTime, nullptr);
 
 		inputSystem.InputReset();
 

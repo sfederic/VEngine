@@ -77,11 +77,8 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 	if (inputSystem.GetMouseLeftUpState())
 	{
 		pickedAxis = nullptr;
-
-		lastMousePosX = 0;
-		lastMousePosY = 0;
 	}
-	else if (inputSystem.GetMouseLeftDownState())
+	else if (inputSystem.GetMouseLeftDownState() && !gUISystem.bUIClicked)
 	{
 		lastMousePosX = gUISystem.mousePos.x;
 		lastMousePosY = gUISystem.mousePos.y;
@@ -107,14 +104,14 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 		}
 		else
 		{
-			xAxis.actors[0].bRender = false;
-			yAxis.actors[0].bRender = false;
-			zAxis.actors[0].bRender = false;
-
 			if (pickedActor)
 			{
 				pickedActor->bPicked = false;
 				pickedActor = nullptr;
+				
+				xAxis.actors[0].bRender = false;
+				yAxis.actors[0].bRender = false;
+				zAxis.actors[0].bRender = false;
 			}
 		}
 	}
@@ -278,7 +275,6 @@ void WorldEditor::MoveActor(Actor* actor, PickedAxis axis)
 		else if (actor)
 		{
 			//For free movement
-			//TODO: This code gives a funny offset when clicking.
 			if (axis == PickedAxis::X)
 			{
 				actor->Move(dx * pickedActorMoveSpeed, XMVectorRight());

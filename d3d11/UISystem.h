@@ -29,10 +29,12 @@ public:
 	ID2D1SolidColorBrush* brushTransparentMenu;
 	ID2D1SolidColorBrush* brushViewBlack;
 	ID2D1SolidColorBrush* brushButton;
+	ID2D1SolidColorBrush* brushCheckBoxOn;
 	IDWriteTextFormat* textFormat;
 
 	int activeUIViewElementIndex = -1;
 	bool bEditUIActive = false;
+	bool bUIClicked = false;
 };
 
 extern UISystem gUISystem;
