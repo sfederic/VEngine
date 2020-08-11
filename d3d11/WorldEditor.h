@@ -8,6 +8,7 @@ class WorldEditor
 public:
 	void Tick(struct ID3D11Buffer* debugLinesBuffer);
 	void Init();
+	void MoveActor(Actor* actor, XMVECTOR direction);
 	void MoveActor(class Actor* actor, PickedAxis axis);
 
 	std::vector<ActorSystem*> axes;
@@ -17,6 +18,7 @@ public:
 
 	Actor* pickedActor;
 	Actor* pickedAxis;
+	XMVECTOR pickedDirection;
 
 	float pickedActorMoveSpeed = 5.f;
 

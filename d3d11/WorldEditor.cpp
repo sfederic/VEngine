@@ -21,9 +21,12 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 		xAxis.actors[0].SetPosition(pickedActor->GetPositionVector());
 		yAxis.actors[0].SetPosition(pickedActor->GetPositionVector());
 		zAxis.actors[0].SetPosition(pickedActor->GetPositionVector());
+
+		MoveActor(pickedActor, pickedDirection);
 	}
 
-	if (pickedAxis)
+
+	/*if (pickedAxis)
 	{
 		if (pickedAxis->pickedAxis == PickedAxis::X)
 		{
@@ -37,7 +40,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 		{
 			MoveActor(pickedActor, PickedAxis::Z);
 		}
-	}
+	}*/
 
 	//TODO: maybe make a camera axis system like MechaCrawler for arrow movement
 	//Actor Arros key movement (For grid movement)
@@ -87,12 +90,13 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 		{
 			if (RaycastTriangleIntersect(screenPickRay))
 			{
+				pickedDirection = XMLoadFloat3(&screenPickRay.normal);
 				DebugPrint("%f %f %f\n", screenPickRay.normal.x, screenPickRay.normal.y, screenPickRay.normal.z);
 			}
 
 			if (debugLinesBuffer)
 			{
-				//DrawRayDebug(screenPickRay.origin, screenPickRay.direction, screenPickRay.distance, debugLinesBuffer);
+				DrawRayDebug(screenPickRay.origin, screenPickRay.direction, screenPickRay.distance, debugLinesBuffer);
 			}
 
 			xAxis.actors[0].bRender = true;
@@ -202,6 +206,34 @@ void WorldEditor::Init()
 	axes.push_back(&xAxis);
 	axes.push_back(&yAxis);
 	axes.push_back(&zAxis);
+}
+
+void WorldEditor::MoveActor(Actor* actor, XMVECTOR direction)
+{
+	int mouseX = gUISystem.mousePos.x;
+	int mouseY = gUISystem.mousePos.y;
+
+	if (gInputSystem.GetAsyncKey(VK_LBUTTON))
+	{
+		SetCapture(gCoreSystem.mainWindow);
+
+		float dx = XMConvertToRadians(0.25f * (float)(mouseX - lastMousePosX));
+		float dy = XMConvertToRadians(0.25f * (float)(mouseY - lastMousePosY));
+
+		if (actor)
+		{
+			XMVECTOR up = XMVectorEqual(direction, XMVectorUp());
+			if (up.m128_f32[0] == 0)
+			{
+				actor->Move(dy * pickedActorMoveSpeed, direction);
+			}
+		}
+
+		ReleaseCapture();
+	}
+
+	lastMousePosX = mouseX;
+	lastMousePosY = mouseY;
 }
 
 //Actors as the movement along the translation axis using mouse (Different from Actor::Move())

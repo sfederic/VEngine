@@ -19,8 +19,8 @@ public:
 
 	HWND mainWindow;
 	MSG msg;
-	const int windowWidth = 1024;
-	const int windowHeight = 720;
+	const int windowWidth = 800;
+	const int windowHeight = 600;
 
 	__int64 frameStartTime;
 	__int64 frameEndTime; 

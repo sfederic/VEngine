@@ -126,6 +126,8 @@ bool RaycastTriangleIntersect(Ray& ray)
 	XMMATRIX model = actor->transform;
 	XMMATRIX mvp = model * gRenderSystem.matrices.view * gRenderSystem.matrices.proj;
 
+	std::vector<Ray> rays;
+	
 	for (int i = 0; i < actorSystem->modelData.verts.size() / 3; i++)
 	{
 		XMVECTOR v0 = XMLoadFloat3(&actorSystem->modelData.verts[i * 3 + 0].pos);
@@ -137,9 +139,14 @@ bool RaycastTriangleIntersect(Ray& ray)
 		XMVECTOR v2 = XMLoadFloat3(&actorSystem->modelData.verts[i * 3 + 2].pos);
 		XMVector3TransformCoord(v2, mvp);
 
-		if (DirectX::TriangleTests::Intersects(ray.origin, ray.direction, v0, v1, v2, ray.distance))
+
+		Ray tempRay = {};
+		tempRay = ray;
+
+		if (DirectX::TriangleTests::Intersects(ray.origin, ray.direction, v0, v1, v2, tempRay.distance))
 		{
-			ray.modelDataIndex = i;
+			tempRay.modelDataIndex = i;
+
 			XMVECTOR normal = XMVectorZero();
 			normal += XMLoadFloat3(&actorSystem->modelData.verts[i * 3 + 0].normal);
 			normal += XMLoadFloat3(&actorSystem->modelData.verts[i * 3 + 1].normal);
@@ -147,12 +154,30 @@ bool RaycastTriangleIntersect(Ray& ray)
 
 			normal = XMVector3Normalize(normal);
 
-			XMStoreFloat3(&ray.normal, normal);
+			XMStoreFloat3(&tempRay.normal, normal);
+
+			rays.push_back(tempRay);
 
 			DebugPrint("%s Triangle index %d hit.\n", typeid(actor).name(), i);
-
-			return true;
 		}
+	}
+
+
+	float lowestDistance = D3D11_FLOAT32_MAX;
+	int rayIndex = -1;
+	for(int i = 0; i < rays.size(); i++)
+	{
+		if (rays[i].distance < lowestDistance)
+		{
+			lowestDistance = rays[i].distance;
+			rayIndex = i;
+		}
+	}
+
+	if (rayIndex > -1)
+	{
+		ray = rays[rayIndex];
+		return true;
 	}
 
 	return false;

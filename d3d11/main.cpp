@@ -33,7 +33,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	gWorldEditor.Init();
 
 	//TODO: This is causing a crash in Release. Is it because it's after the init code?
-	//ID3D11Buffer* debugLinesBuffer = gRenderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
+	ID3D11Buffer* debugLinesBuffer = gRenderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
 
 	ActorSystem cubes;
 	cubes.modelName = "cube.fbx";
@@ -41,9 +41,9 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 	World* world = GetWorld();
 	world->actorSystems.push_back(&cubes);
-	world->actorSystems.push_back(&gWorldEditor.xAxis);
-	world->actorSystems.push_back(&gWorldEditor.yAxis);
-	world->actorSystems.push_back(&gWorldEditor.zAxis);
+	//world->actorSystems.push_back(&gWorldEditor.xAxis);
+	//world->actorSystems.push_back(&gWorldEditor.yAxis);
+	//world->actorSystems.push_back(&gWorldEditor.zAxis);
 
 	//MAIN LOOP
 	while (gCoreSystem.msg.message != WM_QUIT)
@@ -62,11 +62,11 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		gRenderSystem.Tick();
 		gRenderSystem.RenderSetup(deltaTime);
 
-		gWorldEditor.Tick(nullptr);
+		gWorldEditor.Tick(debugLinesBuffer);
 
 		gRenderSystem.RenderActorSystem(world);
 		gRenderSystem.RenderBounds();
-		gRenderSystem.RenderEnd(deltaTime, nullptr);
+		gRenderSystem.RenderEnd(deltaTime, debugLinesBuffer);
 
 		//UI RENDERING
 		gUISystem.d2dRenderTarget->BeginDraw();
