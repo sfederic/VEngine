@@ -1,12 +1,11 @@
 #include "Input.h"
 
-InputSystem inputSystem;
+InputSystem gInputSystem;
 
 bool InputSystem::GetAnyKeyUp()
 {
 	if (keyUp)
 	{
-		keyUp = false;
 		return true;
 	}
 	else
@@ -19,7 +18,6 @@ bool InputSystem::GetAnyKeyDown()
 {
 	if (keyDown)
 	{
-		keyDown = false;
 		return true;
 	}
 	else
@@ -166,13 +164,11 @@ void InputSystem::InputReset()
 void InputSystem::StoreMouseWheelUp()
 {
 	bMouseWheelUp = true;
-	bMouseWheelDown = false;
 }
 
 void InputSystem::StoreMouseWheelDown()
 {
 	bMouseWheelDown = true;
-	bMouseWheelUp = false;
 }
 
 bool InputSystem::GetMouseWheelUp()

@@ -107,6 +107,14 @@ void UISystem::Tick()
 	}*/
 }
 
+void UISystem::RenderAllUIViews()
+{
+	for (int i = 0; i < gUISystem.uiViews.size(); i++)
+	{
+		gUISystem.uiViews[i]->Tick();
+	}
+}
+
 void UISystem::PrintMousePos()
 {
 	DebugPrint("MouseX %d | MouseY %d\n", mousePos.x, mousePos.y);

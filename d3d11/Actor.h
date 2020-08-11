@@ -45,6 +45,7 @@ public:
 	XMFLOAT3 GetPositionFloat3();
 	void SetPosition(XMVECTOR v);
 	void SetPosition(float x, float y, float z);
+	void SetPosition(XMFLOAT3 pos);
 	void SetRotation(XMVECTOR axis, float angle);
 	XMMATRIX GetRotation();
 	XMFLOAT3 GetScale();
@@ -76,6 +77,7 @@ public:
 	void CreateActors(class RenderSystem* dx, int numActorsToSpawn);
 	void AddActor();
 	void RemoveActor(int index);
+	Actor* GetActor(unsigned int index);
 
 	ModelData modelData;
 

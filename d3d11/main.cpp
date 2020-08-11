@@ -19,6 +19,7 @@
 #include "WorldEditor.h"
 #include "TimerSystem.h"
 #include "MathHelpers.h"
+#include "Console.h"
 
 int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine, int cmdShow)
 {
@@ -35,8 +36,8 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	//ID3D11Buffer* debugLinesBuffer = gRenderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
 
 	ActorSystem cubes;
-	cubes.modelName = "monkey.fbx";
-	cubes.CreateActors(&gRenderSystem, 2);
+	cubes.modelName = "cube.fbx";
+	cubes.CreateActors(&gRenderSystem, 1);
 
 	World* world = GetWorld();
 	world->actorSystems.push_back(&cubes);
@@ -52,28 +53,33 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		gCoreSystem.StartTimer();
 		gCoreSystem.HandleMessages();
 
-		g_FileSystem.Tick();
+		gFileSystem.Tick();
 		gUISystem.Tick();
 		editorCamera.Tick(deltaTime);
-
 		gTimerSystem.Tick(deltaTime);
 
 		//RENDERING
-
-
 		gRenderSystem.Tick();
 		gRenderSystem.RenderSetup(deltaTime);
 
-		//TODO: id don't like the position of this here (here because of axis rendering)
 		gWorldEditor.Tick(nullptr);
 
 		gRenderSystem.RenderActorSystem(world);
-
 		gRenderSystem.RenderBounds();
-
 		gRenderSystem.RenderEnd(deltaTime, nullptr);
 
-		inputSystem.InputReset();
+		//UI RENDERING
+		gUISystem.d2dRenderTarget->BeginDraw();
+		gConsole.Tick();
+		gConsole.DrawViewItems();
+		debugMenu.Tick(GetWorld(), deltaTime);
+		gUISystem.RenderAllUIViews();
+		gUISystem.d2dRenderTarget->EndDraw();
+
+		//PRESENT
+		HR(gRenderSystem.swapchain->Present(1, 0));
+
+		gInputSystem.InputReset();
 
 		gCoreSystem.EndTimer();
 	}

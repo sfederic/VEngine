@@ -35,7 +35,17 @@ struct UIViewActor : public UIView
 {
 	virtual void Tick();
 
-	std::wstring posString;
+	std::wstring posStringX;
+	std::wstring posStringY;
+	std::wstring posStringZ;
+
+	std::wstring scaleStringX;
+	std::wstring scaleStringY;
+	std::wstring scaleStringZ;
+
+	std::wstring rotStringX;
+	std::wstring rotStringY;
+	std::wstring rotStringZ;
 };
 
 //TODO: Figrue out whether this sort of template work would just be better of with overloaded functions. 
@@ -45,26 +55,31 @@ inline void UIView::Edit(T& editVal, std::wstring& editString)
 {
 	if (gUISystem.activeUIViewElementIndex == idCounter)
 	{
+		if (gInputSystem.GetKeyUpState(VK_TAB))
+		{
+			gUISystem.activeUIViewElementIndex++;
+		}
+
 		gUISystem.bEditUIActive = true;
 
 		gUISystem.d2dRenderTarget->DrawRectangle(viewRect, gUISystem.brushTextBlack);
 
 		//HANDLE TEXT INPUT
-		if (inputSystem.GetAsyncKey(VK_CONTROL)) //Delete all characters
+		if (gInputSystem.GetAsyncKey(VK_CONTROL)) //Delete all characters
 		{
-			if (inputSystem.GetKeyDownState(VK_BACK))
+			if (gInputSystem.GetKeyDownState(VK_BACK))
 			{
 				editString.clear();
 			}
 		}
-		else if (inputSystem.GetKeyDownState(VK_BACK)) //Backspace
+		else if (gInputSystem.GetKeyDownState(VK_BACK)) //Backspace
 		{
 			if (editString.size() > 0)
 			{
 				editString.pop_back();
 			}
 		}
-		else if (inputSystem.GetKeyDownState(VK_RETURN)) //Enter value
+		else if (gInputSystem.GetKeyDownState(VK_RETURN)) //Enter value
 		{
 			editVal = (T)_wtof(editString.c_str());
 			editString = std::to_wstring(editVal);
@@ -72,16 +87,16 @@ inline void UIView::Edit(T& editVal, std::wstring& editString)
 			gUISystem.activeUIViewElementIndex = -1;
 			gUISystem.bEditUIActive = false;
 		}
-		else if (inputSystem.GetKeyDownState(VK_OEM_PERIOD)) //(./>) key
+		else if (gInputSystem.GetKeyDownState(VK_OEM_PERIOD)) //(./>) key
 		{
 			editString.push_back('.');
 		}
-		else if (inputSystem.GetAnyKeyDown()) //Careful with the else-if here on GetAnyKey
+		else if (gInputSystem.GetAnyKeyDown()) //Careful with the else-if here on GetAnyKey
 		{
 			const int maxEditStringSize = 64;
 			if (editString.size() < maxEditStringSize)
 			{
-				wchar_t key = inputSystem.currentDownKey;
+				wchar_t key = gInputSystem.currentDownKey;
 				editString.push_back(key);
 			}
 		}
@@ -103,7 +118,7 @@ inline void UIView::Edit(T& editVal, std::wstring& editString)
 		{
 			gUISystem.d2dRenderTarget->DrawRectangle(viewRect, gUISystem.brushText);
 
-			if (inputSystem.GetMouseLeftUpState())
+			if (gInputSystem.GetMouseLeftUpState())
 			{
 				gUISystem.activeUIViewElementIndex = idCounter;
 			}

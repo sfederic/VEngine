@@ -17,6 +17,7 @@ public:
 
 	std::vector<UIView*> uiViews;
 
+	void RenderAllUIViews();
 	void PrintMousePos();
 	POINT mousePos;
 

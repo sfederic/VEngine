@@ -98,7 +98,7 @@ LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam
 		return 0;
 
 	case WM_KEYDOWN:
-		inputSystem.StoreKeyDownInput(wparam);
+		gInputSystem.StoreKeyDownInput(wparam);
 
 		//Close editor
 		if (wparam == VK_ESCAPE)
@@ -110,33 +110,33 @@ LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam
 		break;
 
 	case WM_KEYUP:
-		inputSystem.StoreKeyUpInput(wparam);
+		gInputSystem.StoreKeyUpInput(wparam);
 		break;
 
 	case WM_LBUTTONUP:
-		inputSystem.StoreMouseLeftUpInput(wparam);
+		gInputSystem.StoreMouseLeftUpInput(wparam);
 		break;
 
 	case WM_LBUTTONDOWN:
-		inputSystem.StoreMouseLeftDownInput(wparam);
+		gInputSystem.StoreMouseLeftDownInput(wparam);
 		break;
 
 	case WM_RBUTTONUP:
-		inputSystem.StoreMouseRightUpInput(wparam);
+		gInputSystem.StoreMouseRightUpInput(wparam);
 		break;
 
 	case WM_RBUTTONDOWN:
-		inputSystem.StoreMouseRightDownInput(wparam);
+		gInputSystem.StoreMouseRightDownInput(wparam);
 		break;
 
 	case WM_MOUSEWHEEL:
 		if (GET_WHEEL_DELTA_WPARAM(wparam) < 0)
 		{
-			inputSystem.StoreMouseWheelDown();
+			gInputSystem.StoreMouseWheelDown();
 		}
 		else
 		{
-			inputSystem.StoreMouseWheelUp();
+			gInputSystem.StoreMouseWheelUp();
 		}
 	}
 

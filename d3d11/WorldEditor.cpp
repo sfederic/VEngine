@@ -43,30 +43,30 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 	//Actor Arros key movement (For grid movement)
 	if (pickedActor)
 	{
-		if (inputSystem.GetAsyncKey(VK_CONTROL))
+		if (gInputSystem.GetAsyncKey(VK_CONTROL))
 		{
-			if (inputSystem.GetKeyDownState(VK_UP))
+			if (gInputSystem.GetKeyDownState(VK_UP))
 			{
 				pickedActor->Move(moveIncrement, XMVectorUp());
 			}
-			else if (inputSystem.GetKeyDownState(VK_DOWN))
+			else if (gInputSystem.GetKeyDownState(VK_DOWN))
 			{
 				pickedActor->Move(-moveIncrement, XMVectorUp());
 			}
 		}
-		else if (inputSystem.GetKeyDownState(VK_UP))
+		else if (gInputSystem.GetKeyDownState(VK_UP))
 		{
 			pickedActor->Move(moveIncrement, XMVectorForward());
 		}
-		else if (inputSystem.GetKeyDownState(VK_DOWN))
+		else if (gInputSystem.GetKeyDownState(VK_DOWN))
 		{
 			pickedActor->Move(-moveIncrement, XMVectorForward());
 		}
-		else if (inputSystem.GetKeyDownState(VK_LEFT))
+		else if (gInputSystem.GetKeyDownState(VK_LEFT))
 		{
 			pickedActor->Move(-moveIncrement, XMVectorRight());
 		}
-		else if (inputSystem.GetKeyDownState(VK_RIGHT))
+		else if (gInputSystem.GetKeyDownState(VK_RIGHT))
 		{
 			pickedActor->Move(moveIncrement, XMVectorRight());
 		}
@@ -74,17 +74,22 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 	
 
 	//Actor picking for editor
-	if (inputSystem.GetMouseLeftUpState())
+	if (gInputSystem.GetMouseLeftUpState())
 	{
 		pickedAxis = nullptr;
 	}
-	else if (inputSystem.GetMouseLeftDownState() && !gUISystem.bUIClicked)
+	else if (gInputSystem.GetMouseLeftDownState() && !gUISystem.bUIClicked)
 	{
 		lastMousePosX = gUISystem.mousePos.x;
 		lastMousePosY = gUISystem.mousePos.y;
 
 		if (RaycastAllFromScreen(screenPickRay, gUISystem.mousePos.x, gUISystem.mousePos.y, &editorCamera, GetWorld()))
 		{
+			if (RaycastTriangleIntersect(screenPickRay))
+			{
+				DebugPrint("%f %f %f\n", screenPickRay.normal.x, screenPickRay.normal.y, screenPickRay.normal.z);
+			}
+
 			if (debugLinesBuffer)
 			{
 				//DrawRayDebug(screenPickRay.origin, screenPickRay.direction, screenPickRay.distance, debugLinesBuffer);
@@ -115,20 +120,8 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 			}
 		}
 	}
-	else if (inputSystem.GetMouseRightUpState())
-	{
-		//if (RaycastAllFromScreen(screenPickRay, gUISystem.mousePos.x, gUISystem.mousePos.y, &editorCamera, GetWorld()))
-		{
-			//TODO: need to fix this. Don't likethat the UIView index are overriding the other ones
-			//actorIndex = screenPickRay.actorIndex;
-			//actorSystemIndex = screenPickRay.actorSystemIndex;
 
-			//Floating window for actor stats
-			//gUISystem.AddView(L"ActorTest", actorSystemIndex, actorIndex);
-		}
-	}
-
-	//TODO: this is no good
+	//TODO: this is no good. If the rendering code ever changes it needs to be mirrored here
 	//Render translation widget
 	for (int i = 0; i < axes.size(); i++)
 	{
@@ -217,7 +210,7 @@ void WorldEditor::MoveActor(Actor* actor, PickedAxis axis)
 	int mouseX = gUISystem.mousePos.x;
 	int mouseY = gUISystem.mousePos.y;
 
-	if (inputSystem.GetAsyncKey(VK_LBUTTON))
+	if (gInputSystem.GetAsyncKey(VK_LBUTTON))
 	{
 		SetCapture(gCoreSystem.mainWindow);
 

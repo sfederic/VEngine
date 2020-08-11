@@ -46,7 +46,7 @@ bool UIView::Button(const wchar_t* string)
 			//Hover graphic
 			gUISystem.d2dRenderTarget->DrawRectangle(viewRect, gUISystem.brushText);
 
-			if (inputSystem.GetMouseLeftUpState())
+			if (gInputSystem.GetMouseLeftUpState())
 			{
 				DebugPrint("%ls Button pressed\n", string);
 				IncrementViewRectAndID();
@@ -83,7 +83,7 @@ void UIView::CheckBox(const wchar_t* string, bool& checkBoxVal)
 			//Hover graphic
 			gUISystem.d2dRenderTarget->DrawRectangle(checkBoxRect, gUISystem.brushCloseBox);
 
-			if (inputSystem.GetMouseLeftUpState())
+			if (gInputSystem.GetMouseLeftUpState())
 			{
 				checkBoxVal = !checkBoxVal;
 			}
@@ -131,7 +131,15 @@ void UIViewActor::Tick()
 		if (actor)
 		{
 			Text(L"Position");
-			Edit(actor->transform.r[3].m128_f32[0], posString);
+			Edit(actor->transform.r[3].m128_f32[0], posStringX);
+			Edit(actor->transform.r[3].m128_f32[1], posStringY);
+			Edit(actor->transform.r[3].m128_f32[2], posStringZ);
+
+			Text(L"Scale");
+			Edit(actor->transform.r[0].m128_f32[0], scaleStringX);
+			Edit(actor->transform.r[1].m128_f32[1], scaleStringY);
+			Edit(actor->transform.r[2].m128_f32[2], scaleStringZ);
+
 			NewLine();
 			CheckBox(L"Check box test", bTest);
 			Button(L"Test BUtton");

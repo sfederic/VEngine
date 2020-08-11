@@ -51,7 +51,7 @@ void DebugMenu::Tick(World* world, float deltaTime)
 	}
 
 	//Open key for menu
-	if(inputSystem.GetKeyUpState(VK_TAB))
+	if(gInputSystem.GetKeyUpState(VK_TAB))
 	{
 		bDebugMenuActive = !bDebugMenuActive;
 		bSubMenuOpen = false;
@@ -59,7 +59,7 @@ void DebugMenu::Tick(World* world, float deltaTime)
 		menuCursorIndex = 0;
 	}
 
-	if (inputSystem.GetKeyUpState(VK_BACK))
+	if (gInputSystem.GetKeyUpState(VK_BACK))
 	{
 		bSubMenuOpen = false;
 		subMenuCursorIndex = 0;
@@ -73,14 +73,14 @@ void DebugMenu::Tick(World* world, float deltaTime)
 
 		float textOffsetY = 0.f;
 
-		if (inputSystem.GetKeyDownState(VK_DOWN))
+		if (gInputSystem.GetKeyDownState(VK_DOWN))
 		{
 			if (menuCursorIndex < (menuItems.size() - 1))
 			{
 				menuCursorIndex++;
 			}
 		}
-		else if (inputSystem.GetKeyDownState(VK_UP))
+		else if (gInputSystem.GetKeyDownState(VK_UP))
 		{
 			if (menuCursorIndex > 0)
 			{
@@ -88,7 +88,7 @@ void DebugMenu::Tick(World* world, float deltaTime)
 			}
 		}
 
-		if (inputSystem.GetKeyUpState(VK_RETURN))
+		if (gInputSystem.GetKeyUpState(VK_RETURN))
 		{
 			//menuItems[menuCursorIndex].Open();
 			bSubMenuOpen = true;
@@ -115,7 +115,7 @@ void DebugMenu::Tick(World* world, float deltaTime)
 	//Handle opened debug menu option
 	if (bSubMenuOpen)
 	{
-		if (inputSystem.GetKeyUpState(VK_RETURN))
+		if (gInputSystem.GetKeyUpState(VK_RETURN))
 		{
 			//... On/Off code for various switches
 			gRenderSystem.bQueryGPU = false;

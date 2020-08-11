@@ -34,6 +34,11 @@ void Actor::SetPosition(float x, float y, float z)
 	transform = XMMatrixTranslationFromVector(v);
 }
 
+void Actor::SetPosition(XMFLOAT3 pos)
+{
+	transform.r[3] = XMVectorSet(pos.x, pos.y, pos.z, 1.0f);
+}
+
 //ROTATION FUNCTIONS
 void Actor::SetRotation(XMVECTOR axis, float angle)
 {
@@ -142,5 +147,12 @@ void ActorSystem::AddActor()
 
 void ActorSystem::RemoveActor(int index)
 {
+	assert(index < actors.size());
 	actors.erase(actors.begin() + index);
+}
+
+Actor* ActorSystem::GetActor(unsigned int index)
+{
+	assert(index < actors.size());
+	return &actors[index];
 }

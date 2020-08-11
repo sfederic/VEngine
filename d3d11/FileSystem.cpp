@@ -6,21 +6,21 @@
 #include "Debug.h"
 #include "UISystem.h"
 
-FileSystem g_FileSystem;
+FileSystem gFileSystem;
 
 void FileSystem::Tick()
 {
 	//world load file handling.
 	if (gUISystem.bEditUIActive)
 	{
-		if (inputSystem.GetKeyUpState(VK_F4))
+		if (gInputSystem.GetKeyUpState(VK_F4))
 		{
-			g_FileSystem.WriteAllActorSystems(GetWorld(), "LevelSaves/test.sav");
+			gFileSystem.WriteAllActorSystems(GetWorld(), "LevelSaves/test.sav");
 		}
 
-		if (inputSystem.GetKeyUpState(VK_F5))
+		if (gInputSystem.GetKeyUpState(VK_F5))
 		{
-			g_FileSystem.ReadAllActorSystems(GetWorld(), "LevelSaves/test.sav");
+			gFileSystem.ReadAllActorSystems(GetWorld(), "LevelSaves/test.sav");
 		}
 	}
 }

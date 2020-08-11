@@ -67,7 +67,7 @@ void Camera::Tick(float deltaTime)
 		}
 
 		//Zoom onto selected actor
-		if (inputSystem.GetKeyUpState('F'))
+		if (gInputSystem.GetKeyUpState('F'))
 		{
 			World* world = GetWorld();
 			ZoomTo(world->GetActor(gWorldEditor.actorSystemIndex, gWorldEditor.actorIndex));
@@ -76,11 +76,11 @@ void Camera::Tick(float deltaTime)
 		//MOUSE WHEEL ZOOM
 		const float zoomSpeed = 65.f * deltaTime;
 
-		if (inputSystem.GetMouseWheelUp())
+		if (gInputSystem.GetMouseWheelUp())
 		{
 			Move(zoomSpeed, editorCamera.forward);
 		}
-		else if (inputSystem.GetMouseWheelDown())
+		else if (gInputSystem.GetMouseWheelDown())
 		{
 			Move(-zoomSpeed, editorCamera.forward);
 		}

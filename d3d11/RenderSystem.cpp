@@ -26,20 +26,20 @@ Vertex debugLineData[2];
 void RenderSystem::Tick()
 {
 	//Set wireframe on/off
-	if (inputSystem.GetKeyUpState(VK_F1))
+	if (gInputSystem.GetKeyUpState(VK_F1))
 	{
 		activeRastState = rastStateWireframe;
 	}
-	if (inputSystem.GetKeyUpState(VK_F2))
+	if (gInputSystem.GetKeyUpState(VK_F2))
 	{
 		activeRastState = rastStateSolid;
 	}
 
-	if (inputSystem.GetKeyUpState('B'))
+	if (gInputSystem.GetKeyUpState('B'))
 	{
 		bDrawBoundingBoxes = !bDrawBoundingBoxes;
 	}
-	if (inputSystem.GetKeyUpState('V'))
+	if (gInputSystem.GetKeyUpState('V'))
 	{
 		bDrawBoundingSpheres = !bDrawBoundingSpheres;
 	}
@@ -403,27 +403,7 @@ void RenderSystem::RenderEnd(float deltaTime, ID3D11Buffer* debugLineBuffer)
 		}
 	}
 
-	//UI RENDERING 
-	//TODO: Put render and d2d stuff UISystem
-	gUISystem.d2dRenderTarget->BeginDraw();
 
-	//Test console rendering and work. Might need to put it into a system
-	gConsole.Tick();
-	gConsole.DrawViewItems();
-
-	//Debug menu testing (really need to fix this d2d stuff in Render)
-	debugMenu.Tick(GetWorld(), deltaTime);
-
-	for (int i = 0; i < gUISystem.uiViews.size(); i++)
-	{
-		gUISystem.uiViews[i]->Tick();
-	}
-
-	//END UI RENDERING
-	gUISystem.d2dRenderTarget->EndDraw();
-
-	//PRESENT
-	HR(swapchain->Present(1, 0));
 
 	//END QUERY
 	if (bQueryGPUInner)
@@ -490,7 +470,7 @@ void RenderSystem::RenderSetup(float deltaTime)
 
 	context->RSSetState(activeRastState);
 
-	if (inputSystem.GetKeyUpState(VK_F3))
+	if (gInputSystem.GetKeyUpState(VK_F3))
 	{
 		gShaderFactory.HotReloadShaders();
 		debugMenu.notifications.push_back(DebugNotification(L"Shaders reloaded."));

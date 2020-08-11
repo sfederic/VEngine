@@ -115,6 +115,50 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSy
 	return false;
 }
 
+bool RaycastTriangleIntersect(Ray& ray)
+{
+	ActorSystem* actorSystem = GetWorld()->GetActorSystem(ray.actorSystemIndex);
+	assert(actorSystem);
+	
+	Actor* actor = actorSystem->GetActor(ray.actorIndex);
+	assert(actor);
+
+	XMMATRIX model = actor->transform;
+	XMMATRIX mvp = model * gRenderSystem.matrices.view * gRenderSystem.matrices.proj;
+
+	for (int i = 0; i < actorSystem->modelData.verts.size() / 3; i++)
+	{
+		XMVECTOR v0 = XMLoadFloat3(&actorSystem->modelData.verts[i * 3 + 0].pos);
+		XMVector3TransformCoord(v0, mvp);
+
+		XMVECTOR v1 = XMLoadFloat3(&actorSystem->modelData.verts[i * 3 + 1].pos);
+		XMVector3TransformCoord(v1, mvp);
+
+		XMVECTOR v2 = XMLoadFloat3(&actorSystem->modelData.verts[i * 3 + 2].pos);
+		XMVector3TransformCoord(v2, mvp);
+
+		if (DirectX::TriangleTests::Intersects(ray.origin, ray.direction, v0, v1, v2, ray.distance))
+		{
+			ray.modelDataIndex = i;
+			XMVECTOR normal = XMVectorZero();
+			normal += XMLoadFloat3(&actorSystem->modelData.verts[i * 3 + 0].normal);
+			normal += XMLoadFloat3(&actorSystem->modelData.verts[i * 3 + 1].normal);
+			normal += XMLoadFloat3(&actorSystem->modelData.verts[i * 3 + 2].normal);
+
+			normal /= XMVectorSet(3.f, 3.f, 3.f, 3.f);
+			normal = XMVector3Normalize(normal);
+
+			XMStoreFloat3(&ray.normal, normal);
+
+			DebugPrint("%s Triangle index %d hit.\n", typeid(actor).name(), i);
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
 bool RaycastAll(Ray& ray, XMVECTOR origin, XMVECTOR direction, World* world)
 {
 	for (int i = 0; i < world->actorSystems.size(); i++)

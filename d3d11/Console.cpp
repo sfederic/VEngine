@@ -29,15 +29,15 @@ namespace LevelNames
 
 void Console::ConsoleInput()
 {
-	if (inputSystem.GetAnyKeyDown() && inputSystem.currentDownKey != VK_OEM_3)
+	if (gInputSystem.GetAnyKeyDown() && gInputSystem.currentDownKey != VK_OEM_3)
 	{
-		if (inputSystem.GetKeyDownState(VK_BACK) && consoleStringIndex > 0)
+		if (gInputSystem.GetKeyDownState(VK_BACK) && consoleStringIndex > 0)
 		{
 			consoleStringIndex--;
 		}
-		else if ((consoleStringIndex < _countof(consoleString)) && (inputSystem.currentDownKey != 0))
+		else if ((consoleStringIndex < _countof(consoleString)) && (gInputSystem.currentDownKey != 0))
 		{
-			consoleString[consoleStringIndex] = inputSystem.currentDownKey;
+			consoleString[consoleStringIndex] = gInputSystem.currentDownKey;
 			consoleStringIndex++;
 		}
 	}
@@ -60,11 +60,11 @@ void Console::Tick()
 			{ 0, height - 20.f, width, height }, gUISystem.brushText);
 	}
 
-	if (inputSystem.GetKeyUpState(VK_OEM_3)) //~ key, like doom and unreal
+	if (gInputSystem.GetKeyUpState(VK_OEM_3)) //~ key, like doom and unreal
 	{
 		bConsoleActive = !bConsoleActive;
 	}
-	else if (inputSystem.GetKeyDownState(VK_RETURN) && bConsoleActive)
+	else if (gInputSystem.GetKeyDownState(VK_RETURN) && bConsoleActive)
 	{
 		Console::ExecuteString();
 	}
@@ -102,7 +102,7 @@ void Console::ExecuteString()
 	}
 	else if(wcsncmp(consoleString, LevelNames::TestLevel, wcslen(LevelNames::TestLevel)) == 0) //LEVEL LOADING
 	{
-		g_FileSystem.ReadAllActorSystems(GetWorld(), "LevelSaves/test.sav");
+		gFileSystem.ReadAllActorSystems(GetWorld(), "LevelSaves/test.sav");
 	}
 	else if (wcsncmp(consoleString, ExecuteStrings::SNAP, wcslen(ExecuteStrings::SNAP)) == 0) //Toggle grid snap
 	{

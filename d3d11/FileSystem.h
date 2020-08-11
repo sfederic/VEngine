@@ -13,4 +13,4 @@ public:
 	FILE* file;
 };
 
-extern FileSystem g_FileSystem;
+extern FileSystem gFileSystem;

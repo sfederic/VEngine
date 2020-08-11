@@ -38,4 +38,4 @@ public:
 	bool bMouseWheelDown;
 };
 
-extern InputSystem inputSystem;
+extern InputSystem gInputSystem;
