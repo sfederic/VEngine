@@ -75,7 +75,7 @@ public:
 	ActorSystem() {}
 	//virtual void Tick(float deltaTime) = 0;
 	void CreateActors(class RenderSystem* dx, int numActorsToSpawn);
-	void AddActor();
+	void AddActor(XMVECTOR spawnPosition);
 	void RemoveActor(int index);
 	Actor* GetActor(unsigned int index);
 

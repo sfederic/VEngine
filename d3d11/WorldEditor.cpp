@@ -22,7 +22,15 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 		yAxis.actors[0].SetPosition(pickedActor->GetPositionVector());
 		zAxis.actors[0].SetPosition(pickedActor->GetPositionVector());
 
-		MoveActor(pickedActor, pickedDirection);
+		//MoveActor(pickedActor, pickedDirection);
+
+		//TEST SPAWNING
+		if (gInputSystem.GetKeyDownState(VK_SPACE))
+		{
+			XMVECTOR spawnPos = world->GetActor(screenPickRay.actorSystemIndex, screenPickRay.actorIndex)->GetPositionVector() +
+				pickedDirection * 2.f;
+			world->GetActorSystem(0)->AddActor(spawnPos);
+		}
 	}
 
 
