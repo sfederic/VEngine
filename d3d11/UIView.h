@@ -53,6 +53,21 @@ struct UIViewActor : public UIView
 template<typename T>
 inline void UIView::Edit(T& editVal, std::wstring& editString)
 {
+	POINT mousePos = gUISystem.mousePos;
+
+	if ((mousePos.x > viewRect.left) && (mousePos.x < viewRect.right))
+	{
+		if ((mousePos.y > viewRect.top) && (mousePos.y < viewRect.bottom))
+		{
+			gUISystem.d2dRenderTarget->DrawRectangle(viewRect, gUISystem.brushText);
+
+			if (gInputSystem.GetMouseLeftUpState())
+			{
+				gUISystem.activeUIViewElementIndex = idCounter;
+			}
+		}
+	}
+
 	if (gUISystem.activeUIViewElementIndex == idCounter)
 	{
 		if (gInputSystem.GetKeyUpState(VK_TAB))
@@ -108,21 +123,6 @@ inline void UIView::Edit(T& editVal, std::wstring& editString)
 		editString = std::to_wstring(editVal);
 		//Careful with the overapping of later rects here if it ever changes
 		gUISystem.d2dRenderTarget->DrawTextA(editString.c_str(), editString.size(), gUISystem.textFormat, viewRect, gUISystem.brushText);
-	}
-
-	POINT mousePos = gUISystem.mousePos;
-
-	if ((mousePos.x > viewRect.left) && (mousePos.x < viewRect.right))
-	{
-		if ((mousePos.y > viewRect.top) && (mousePos.y < viewRect.bottom))
-		{
-			gUISystem.d2dRenderTarget->DrawRectangle(viewRect, gUISystem.brushText);
-
-			if (gInputSystem.GetMouseLeftUpState())
-			{
-				gUISystem.activeUIViewElementIndex = idCounter;
-			}
-		}
 	}
 
 	IncrementViewRectAndID();

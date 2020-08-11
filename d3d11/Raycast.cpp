@@ -145,7 +145,6 @@ bool RaycastTriangleIntersect(Ray& ray)
 			normal += XMLoadFloat3(&actorSystem->modelData.verts[i * 3 + 1].normal);
 			normal += XMLoadFloat3(&actorSystem->modelData.verts[i * 3 + 2].normal);
 
-			normal /= XMVectorSet(3.f, 3.f, 3.f, 3.f);
 			normal = XMVector3Normalize(normal);
 
 			XMStoreFloat3(&ray.normal, normal);
