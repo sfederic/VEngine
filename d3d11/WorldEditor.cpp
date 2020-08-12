@@ -34,7 +34,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 	}
 
 
-	/*if (pickedAxis)
+	if (pickedAxis)
 	{
 		if (pickedAxis->pickedAxis == PickedAxis::X)
 		{
@@ -48,7 +48,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 		{
 			MoveActor(pickedActor, PickedAxis::Z);
 		}
-	}*/
+	}
 
 	//TODO: maybe make a camera axis system like MechaCrawler for arrow movement
 	//Actor Arros key movement (For grid movement)
@@ -231,9 +231,9 @@ void WorldEditor::MoveActor(Actor* actor, XMVECTOR direction)
 		if (actor)
 		{
 			XMVECTOR up = XMVectorEqual(direction, XMVectorUp());
-			if (up.m128_f32[0] == 0)
+			//if (up.m128_f32[0] == 0)
 			{
-				actor->Move(dy * pickedActorMoveSpeed, direction);
+				actor->Move((dy + dx) * pickedActorMoveSpeed, direction);
 			}
 		}
 

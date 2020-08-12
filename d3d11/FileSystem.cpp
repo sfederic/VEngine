@@ -11,17 +11,14 @@ FileSystem gFileSystem;
 void FileSystem::Tick()
 {
 	//world load file handling.
-	if (gUISystem.bEditUIActive)
+	if (gInputSystem.GetKeyUpState(VK_F4))
 	{
-		if (gInputSystem.GetKeyUpState(VK_F4))
-		{
-			gFileSystem.WriteAllActorSystems(GetWorld(), "LevelSaves/test.sav");
-		}
+		gFileSystem.WriteAllActorSystems(GetWorld(), "LevelSaves/test.sav");
+	}
 
-		if (gInputSystem.GetKeyUpState(VK_F5))
-		{
-			gFileSystem.ReadAllActorSystems(GetWorld(), "LevelSaves/test.sav");
-		}
+	if (gInputSystem.GetKeyUpState(VK_F5))
+	{
+		gFileSystem.ReadAllActorSystems(GetWorld(), "LevelSaves/test.sav");
 	}
 }
 
@@ -65,14 +62,17 @@ void FileSystem::ReadAllActorSystems(World* world, const char* filename)
 
 	for (int systemIndex = 0; systemIndex < numActorSystems; systemIndex++)
 	{
-		//TODO: fix this
-		newWorld.actorSystems.push_back(&ActorSystem());
+		//TODO: Another smart pointer fix
+		ActorSystem* actorSystem = new ActorSystem();
+
+		newWorld.actorSystems.push_back(actorSystem);
 
 		fread(&newWorld.actorSystems[systemIndex]->id, sizeof(int), 1, file);
 
 		int numActorsToSpawn = 0;
 		fread(&numActorsToSpawn, sizeof(int), 1, file);
 
+		//TODO: the old init code here isn't working too well
 		switch (newWorld.actorSystems[systemIndex]->id)
 		{
 		case EActorSystemID::Actor:

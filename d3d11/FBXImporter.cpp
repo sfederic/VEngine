@@ -7,6 +7,7 @@
 //REF: https://help.autodesk.com/view/FBX/2020/ENU/
 
 //NOTE: For the most part, not going to use FBX models with lights, cameras and extra nodes. One model should suffice. Import() code reflects that.
+//NOTE: Models needto be triangluated, not working with control points (see asserts() below)
 
 FbxManager* manager;
 FbxIOSettings* ioSetting;
@@ -37,8 +38,7 @@ bool FBXImporter::Import(const char* filename, ModelData& data)
 
 	FbxMesh* mesh = node->GetMesh();
 
-	//ANIMATION
-	//TODO: 
+	//TODO: ANIMATION
 	//Essentially the fix for skeletal animation is to iterate through all nodes in the scene,
 	//then take their times from the animation keys and apply it to a vector or matrix which can be 
 	//part of a struct. 
