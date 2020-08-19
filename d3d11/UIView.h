@@ -3,15 +3,15 @@
 #include <dwrite_1.h>
 #include <vector>
 #include <string>
+#include "CoreSystem.h"
 
 //base struct for UI elements to inherit from
 struct UIView
 {
-	D2D1_RECT_F viewRectBack;
-	D2D1_RECT_F viewRect;
-	D2D1_RECT_F viewRectOffset;
+	D2D1_RECT_F viewRectBack; //The backdrop rect for the entire view
+	D2D1_RECT_F viewRect; //The layout rect for each element within the view
 
-	int idCounter = 0; //Keeps track of all ids to link to above activeElements
+	int idCounter = 0; 
 
 	void Begin(D2D1_RECT_F viewRect_, const wchar_t* title);
 	void End();
@@ -27,7 +27,19 @@ struct UIView
 
 	void NewLine();
 	void NewLine(int numOfNewlines);
+	void SetSpacing(float val);
 	void IncrementViewRectAndID();
+};
+
+struct TestUIView : public UIView
+{
+	virtual void Tick()
+	{
+		Begin({ 0.f, 0.f, 200.f, 400.f }, L"Testing");
+		Text(L"Hello");
+		Button(L"Button");
+		End();
+	}
 };
 
 //TODO: See if throwing this into another .h file will lower compile times

@@ -35,7 +35,7 @@ struct ModelData
 	std::vector<uint16_t> indices;
 };
 
-//Mario 64 used the term Actor
+//Mario 64 used the term Actor, so I will too
 class Actor
 {
 public:
@@ -75,7 +75,7 @@ public:
 	ActorSystem() {}
 	//virtual void Tick(float deltaTime) = 0;
 	void CreateActors(class RenderSystem* dx, int numActorsToSpawn);
-	void AddActor(XMVECTOR spawnPosition);
+	Actor* AddActor(XMVECTOR spawnPosition);
 	void RemoveActor(int index);
 	Actor* GetActor(unsigned int index);
 

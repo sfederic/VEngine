@@ -108,6 +108,12 @@ void UIView::NewLine(int numOfNewlines)
 	}
 }
 
+void UIView::SetSpacing(float val)
+{
+	viewRect.left += val;
+	assert(viewRect.left < viewRectBack.right);
+}
+
 void UIView::IncrementViewRectAndID()
 {
 	assert(viewRect.bottom < viewRectBack.bottom);

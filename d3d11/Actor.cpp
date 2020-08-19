@@ -137,13 +137,14 @@ void ActorSystem::CreateActors(RenderSystem* dx, int numActorsToSpawn)
 	}
 }
 
-void ActorSystem::AddActor(XMVECTOR spawnPosition)
+Actor* ActorSystem::AddActor(XMVECTOR spawnPosition)
 {
 	Actor actor = Actor();
 	actor.SetPosition(spawnPosition);
 	actor.vertexBufferOffset = (int)(actors.size() * modelData.GetByteWidth());
 
 	actors.push_back(actor);
+	return &actors[actors.size() - 1];
 }
 
 void ActorSystem::RemoveActor(int index)

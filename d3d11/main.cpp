@@ -37,13 +37,13 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 	ActorSystem cubes;
 	cubes.modelName = "cube.fbx";
-	cubes.CreateActors(&gRenderSystem, 1);
+	cubes.CreateActors(&gRenderSystem, 1000);
 
 	World* world = GetWorld();
 	world->actorSystems.push_back(&cubes);
-	//world->actorSystems.push_back(&gWorldEditor.xAxis);
-	//world->actorSystems.push_back(&gWorldEditor.yAxis);
-	//world->actorSystems.push_back(&gWorldEditor.zAxis);
+	world->actorSystems.push_back(&gWorldEditor.xAxis);
+	world->actorSystems.push_back(&gWorldEditor.yAxis);
+	world->actorSystems.push_back(&gWorldEditor.zAxis);
 
 	//MAIN LOOP
 	while (gCoreSystem.msg.message != WM_QUIT)
@@ -57,6 +57,12 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		gUISystem.Tick();
 		editorCamera.Tick(deltaTime);
 		gTimerSystem.Tick(deltaTime);
+
+		//test ortho work
+		if (gInputSystem.GetKeyDownState('P'))
+		{
+			gRenderSystem.matrices.proj = XMMatrixOrthographicOffCenterLH(-5.f, 5.f, -5.f, 5.f, -50.f, 1000.f);
+		}
 
 		//RENDERING
 		gRenderSystem.Tick();

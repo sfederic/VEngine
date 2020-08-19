@@ -27,9 +27,18 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 		//TEST SPAWNING
 		if (gInputSystem.GetKeyDownState(VK_SPACE))
 		{
-			XMVECTOR spawnPos = world->GetActor(screenPickRay.actorSystemIndex, screenPickRay.actorIndex)->GetPositionVector() +
-				pickedDirection * 2.f;
-			world->GetActorSystem(0)->AddActor(spawnPos);
+			//XMVECTOR spawnPos = world->GetActor(screenPickRay.actorSystemIndex, screenPickRay.actorIndex)->GetPositionVector() +
+			//	pickedDirection * 2.f;
+
+			XMVECTOR spawnPos = pickedActor->GetPositionVector() + (pickedDirection * 2.f);
+
+			Actor* actor = world->GetActorSystem(0)->AddActor(spawnPos);
+			pickedActor = actor;
+		}
+
+		if (gInputSystem.GetKeyUpState(VK_DELETE))
+		{
+			world->GetActorSystem(screenPickRay.actorSystemIndex)->RemoveActor(screenPickRay.actorIndex);
 		}
 	}
 

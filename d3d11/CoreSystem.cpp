@@ -25,6 +25,14 @@ void CoreSystem::SetupWindow(HINSTANCE instance, int cmdShow)
 	{
 		ShowWindow(mainWindow, cmdShow);
 		UpdateWindow(mainWindow);
+
+		RECT window_r; RECT desktop_r;
+		GetWindowRect(mainWindow, &window_r);
+		GetWindowRect(GetDesktopWindow(), &desktop_r);
+		int xPos = (desktop_r.right - (window_r.right - window_r.left)) / 2;
+		int yPos = (desktop_r.bottom - (window_r.bottom - window_r.top)) / 2;
+
+		SetWindowPos(mainWindow, 0, xPos, yPos, 0, 0, SWP_NOZORDER | SWP_NOSIZE);
 	}
 }
 

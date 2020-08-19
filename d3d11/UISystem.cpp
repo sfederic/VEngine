@@ -48,6 +48,9 @@ void UISystem::Init()
 	//NOTE: So far the ui views are static, if I want to bring layering back, have to ditch this approach
 	UIViewActor* uiViewActor = new UIViewActor;
 	uiViews.push_back(uiViewActor);
+
+	TestUIView* testUIView = new TestUIView;
+	uiViews.push_back(testUIView);
 }
 
 void UISystem::Cleanup()
