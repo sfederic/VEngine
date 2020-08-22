@@ -19,8 +19,11 @@ struct UIView
 	virtual void Tick() {}
 
 	void Text(const wchar_t* string);
+	void TextClick(const wchar_t* string);
 	bool Button(const wchar_t* string);
 	void CheckBox(const wchar_t* string, bool& checkBoxVal);
+	
+	void ListView(std::vector<std::wstring> strings);
 
 	template <typename T>
 	void Edit(T& editVal, std::wstring& editString);
@@ -31,13 +34,38 @@ struct UIView
 	void IncrementViewRectAndID();
 };
 
+struct PropertyView
+{
+	
+};
+
 struct TestUIView : public UIView
 {
+	std::vector<std::wstring> strings;
+
+	void Create()
+	{
+		strings.push_back(L"Entity1");
+		strings.push_back(L"Entity2");
+		strings.push_back(L"Entity2");
+		strings.push_back(L"Entity2");
+		strings.push_back(L"Entity2");
+		strings.push_back(L"Entity2");
+		strings.push_back(L"Entity2");
+		strings.push_back(L"Entity2");
+		strings.push_back(L"Entity2");
+		strings.push_back(L"Entity2");
+		strings.push_back(L"Entity2");
+		strings.push_back(L"Entity2");
+		strings.push_back(L"Entity2");
+		strings.push_back(L"Entity2");
+		strings.push_back(L"Entity2");
+	}
+
 	virtual void Tick()
 	{
 		Begin({ 0.f, 0.f, 200.f, 400.f }, L"Testing");
-		Text(L"Hello");
-		Button(L"Button");
+		ListView(strings);
 		End();
 	}
 };

@@ -31,6 +31,26 @@ void UIView::Text(const wchar_t* string)
 	IncrementViewRectAndID();
 }
 
+void UIView::TextClick(const wchar_t* string)
+{
+	POINT mousePos = gUISystem.mousePos;
+
+	if ((mousePos.x > viewRect.left) && (mousePos.x < viewRect.right))
+	{
+		if ((mousePos.y > viewRect.top) && (mousePos.y < viewRect.bottom))
+		{
+			gUISystem.d2dRenderTarget->DrawRectangle(viewRect, gUISystem.brushCloseBox);
+
+			if (gInputSystem.GetMouseRightUpState())
+			{
+
+			}
+		}
+	}
+
+	Text(string);
+}
+
 bool UIView::Button(const wchar_t* string)
 {
 	gUISystem.d2dRenderTarget->FillRectangle(viewRect, gUISystem.brushTextBlack);
@@ -91,6 +111,14 @@ void UIView::CheckBox(const wchar_t* string, bool& checkBoxVal)
 	}
 
 	IncrementViewRectAndID();
+}
+
+void UIView::ListView(std::vector<std::wstring> strings)
+{
+	for (int i = 0; i < strings.size(); i++)
+	{
+		TextClick(strings[i].c_str());
+	}
 }
 
 void UIView::NewLine()

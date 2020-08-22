@@ -37,7 +37,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 	ActorSystem cubes;
 	cubes.modelName = "cube.fbx";
-	cubes.CreateActors(&gRenderSystem, 1000);
+	cubes.CreateActors(&gRenderSystem, 1);
 
 	World* world = GetWorld();
 	world->actorSystems.push_back(&cubes);

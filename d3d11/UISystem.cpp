@@ -50,6 +50,7 @@ void UISystem::Init()
 	uiViews.push_back(uiViewActor);
 
 	TestUIView* testUIView = new TestUIView;
+	testUIView->Create();
 	uiViews.push_back(testUIView);
 }
 
