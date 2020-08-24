@@ -8,6 +8,9 @@ CoreSystem gCoreSystem;
 
 void CoreSystem::SetupWindow(HINSTANCE instance, int cmdShow)
 {
+	windowWidth = 1600;
+	windowHeight = 900;
+
 	WNDCLASS wc = {};
 	wc.style = CS_HREDRAW | CS_VREDRAW;
 	wc.lpszClassName = "Window";

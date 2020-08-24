@@ -10,6 +10,7 @@ struct UIView
 {
 	D2D1_RECT_F viewRectBack; //The backdrop rect for the entire view
 	D2D1_RECT_F viewRect; //The layout rect for each element within the view
+	D2D1_RECT_F subViewRect; //For menus that pop up off of another viewRect
 
 	int viewId;
 	int idCounter = 0; 
@@ -25,8 +26,12 @@ struct UIView
 	void TextClick(const wchar_t* string);
 	bool Button(const wchar_t* string);
 	void CheckBox(const wchar_t* string, bool& checkBoxVal);
-	
+	void DropBox(bool& val, std::vector<std::wstring> strings, const wchar_t* string);
+	void ToolbarItem(const wchar_t* string, bool& clickVal);
+
 	void ListView(std::vector<std::wstring>& strings);
+	void ScrollView();
+	bool DropDown(const wchar_t* string);
 
 	template <typename T>
 	void Edit(T& editVal, std::wstring& editString);
@@ -37,9 +42,11 @@ struct UIView
 	void IncrementViewRectAndID();
 };
 
-struct PropertyView
+struct Toolbar : public UIView
 {
-	
+	virtual void Tick();
+
+	bool bFileClick;
 };
 
 struct TestUIView : public UIView
@@ -60,8 +67,9 @@ struct TestUIView : public UIView
 
 	virtual void Tick()
 	{
-		Begin({ 0.f, 0.f, 200.f, 400.f }, L"Testing");
-		ListView(strings);
+		Begin({ 0.f, 40.f, 200.f, 400.f }, L"Testing");
+		bool val;
+		DropBox(val, strings, L"Combo");
 		End();
 	}
 };

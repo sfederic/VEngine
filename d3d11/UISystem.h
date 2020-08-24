@@ -4,7 +4,6 @@
 #pragma comment(lib, "dwrite.lib")
 
 #include <d2d1_1.h>
-#include <dwrite_1.h>
 #include <vector>
 #include "UIView.h"
 
@@ -14,8 +13,10 @@ public:
 	void Init();
 	void Cleanup(); //D2D1 Actually throws errors if no cleanup
 	void Tick();
+	void RenderText();
 
 	std::vector<UIView*> uiViews;
+	Toolbar* toolbar;
 
 	void RenderAllUIViews();
 	void PrintMousePos();
@@ -34,9 +35,10 @@ public:
 	IDWriteTextFormat* textFormat;
 
 	int activeUIViewElementIndex = -1;
-	int activeUIViewID = 0;
+	int currentUIElementIndex = 0;
 	bool bEditUIActive = false;
 	bool bUIClicked = false;
+	bool bAllUIActive = true;
 };
 
 extern UISystem gUISystem;

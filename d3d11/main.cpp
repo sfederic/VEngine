@@ -37,7 +37,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 
 	ActorSystem cubes;
 	cubes.modelName = "cube.fbx";
-	cubes.CreateActors(&gRenderSystem, 1);
+	cubes.CreateActors(&gRenderSystem, 2);
 
 	World* world = GetWorld();
 	world->actorSystems.push_back(&cubes);
@@ -64,7 +64,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 			gRenderSystem.matrices.proj = XMMatrixOrthographicOffCenterLH(-5.f, 5.f, -5.f, 5.f, -50.f, 1000.f);
 		}
 
-		//RENDERING
+		//ACTOR RENDERING
 		gRenderSystem.Tick();
 		gRenderSystem.RenderSetup(deltaTime);
 
@@ -75,12 +75,15 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		gRenderSystem.RenderEnd(deltaTime, nullptr);
 
 		//UI RENDERING
-		gUISystem.d2dRenderTarget->BeginDraw();
-		gConsole.Tick();
-		gConsole.DrawViewItems();
-		debugMenu.Tick(GetWorld(), deltaTime);
-		gUISystem.RenderAllUIViews();
-		gUISystem.d2dRenderTarget->EndDraw();
+		if (gUISystem.bAllUIActive)
+		{
+			gUISystem.d2dRenderTarget->BeginDraw();
+			gConsole.Tick();
+			gConsole.DrawViewItems();
+			//debugMenu.Tick(GetWorld(), deltaTime);
+			gUISystem.RenderAllUIViews();
+			gUISystem.d2dRenderTarget->EndDraw();
+		}
 
 		//PRESENT
 		HR(gRenderSystem.swapchain->Present(1, 0));

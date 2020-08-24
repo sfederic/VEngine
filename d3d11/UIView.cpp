@@ -13,10 +13,14 @@ void UIView::Begin(D2D1_RECT_F viewRect_, const wchar_t* title)
 	viewRectBack = viewRect_;
 	viewRect = { viewRectBack.left + 10.f, viewRectBack.top + 10.f, viewRectBack.right - 10.f, viewRectBack.top + 30.f };
 	gUISystem.d2dRenderTarget->FillRectangle(viewRectBack, gUISystem.brushViewBlack);
-	gUISystem.d2dRenderTarget->FillRectangle(viewRect, gUISystem.brushButton);
-	gUISystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
-	gUISystem.d2dRenderTarget->DrawTextA(title, wcslen(title), gUISystem.textFormat, viewRect, gUISystem.brushText);
-	IncrementViewRectAndID();
+
+	if (title != nullptr)
+	{
+		gUISystem.d2dRenderTarget->FillRectangle(viewRect, gUISystem.brushButton);
+		gUISystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+		gUISystem.d2dRenderTarget->DrawTextA(title, wcslen(title), gUISystem.textFormat, viewRect, gUISystem.brushText);
+		IncrementViewRectAndID();
+	}
 }
 
 void UIView::End()
@@ -35,6 +39,8 @@ void UIView::TextClick(const wchar_t* string)
 {
 	POINT mousePos = gUISystem.mousePos;
 
+	Text(string);
+
 	if (gUISystem.activeUIViewElementIndex == idCounter)
 	{
 		gUISystem.d2dRenderTarget->DrawRectangle(viewRect, gUISystem.brushCloseBox);
@@ -46,6 +52,20 @@ void UIView::TextClick(const wchar_t* string)
 		{
 			gUISystem.d2dRenderTarget->DrawRectangle(viewRect, gUISystem.brushCloseBox);
 
+			//Hover rect
+			{
+				D2D1_RECT_F hoverRect = { mousePos.x, mousePos.y, mousePos.x + 200.f, mousePos.y + 200.f };
+				gUISystem.d2dRenderTarget->FillRectangle(hoverRect, gUISystem.brushTextBlack);
+
+				hoverRect.left += 5.f;
+				hoverRect.right -= 5.f;
+				hoverRect.bottom += 5.f;
+				gUISystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
+				gUISystem.d2dRenderTarget->DrawTextA(string, wcslen(string), gUISystem.textFormat, hoverRect, gUISystem.brushText);
+				gUISystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_TRAILING);
+				gUISystem.d2dRenderTarget->DrawTextA(string, wcslen(string), gUISystem.textFormat, hoverRect, gUISystem.brushText);
+			}
+
 			if (gInputSystem.GetMouseLeftUpState())
 			{
 				gUISystem.activeUIViewElementIndex = idCounter;
@@ -53,7 +73,6 @@ void UIView::TextClick(const wchar_t* string)
 		}
 	}
 
-	Text(string);
 }
 
 bool UIView::Button(const wchar_t* string)
@@ -118,6 +137,65 @@ void UIView::CheckBox(const wchar_t* string, bool& checkBoxVal)
 	IncrementViewRectAndID();
 }
 
+void UIView::DropBox(bool& val, std::vector<std::wstring> strings, const wchar_t* string)
+{
+	gUISystem.d2dRenderTarget->DrawTextA(string, wcslen(string), gUISystem.textFormat, viewRect, gUISystem.brushText);
+
+	POINT mousePos = gUISystem.mousePos;
+
+	if ((mousePos.x > viewRect.left) && (mousePos.x < viewRect.right))
+	{
+		if ((mousePos.y > viewRect.top) && (mousePos.y < viewRect.bottom))
+		{
+			if (gInputSystem.GetMouseLeftUpState())
+			{
+				gUISystem.activeUIViewElementIndex = idCounter;
+				val = true;
+			}
+		}
+	}
+
+	if (gUISystem.activeUIViewElementIndex == idCounter)
+	{
+		for (int i = 0; i < strings.size(); i++)
+		{
+			IncrementViewRectAndID();
+			gUISystem.d2dRenderTarget->DrawTextA(strings[i].c_str(), strings[i].size(), gUISystem.textFormat, viewRect, gUISystem.brushText);
+		}
+	}
+
+	//IncrementViewRectAndID();
+}
+
+void UIView::ToolbarItem(const wchar_t* string, bool& clickVal)
+{
+	const float textOffset = 10.f;
+
+	gUISystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+
+	viewRect.right = (viewRect.left + wcslen(string) * textOffset); //5.f for nice spacing
+	gUISystem.d2dRenderTarget->DrawTextA(string, wcslen(string), gUISystem.textFormat, viewRect, gUISystem.brushText);
+
+	POINT mousePos = gUISystem.mousePos;
+
+	if ((mousePos.x > viewRect.left) && (mousePos.x < viewRect.right))
+	{
+		if ((mousePos.y > viewRect.top) && (mousePos.y < viewRect.bottom))
+		{
+			gUISystem.d2dRenderTarget->DrawRectangle(viewRect, gUISystem.brushText);
+
+			if (gInputSystem.GetMouseLeftUpState())
+			{
+				gUISystem.activeUIViewElementIndex = idCounter;
+				clickVal = true;
+			}
+		}
+	}
+
+	viewRect.right += wcslen(string) * textOffset;
+	viewRect.left += wcslen(string) * textOffset;
+}
+
 void UIView::ListView(std::vector<std::wstring>& strings)
 {
 	if (gInputSystem.GetKeyUpState(VK_DELETE) && strings.size() > 0)
@@ -129,6 +207,34 @@ void UIView::ListView(std::vector<std::wstring>& strings)
 	for (int i = 0; i < strings.size(); i++)
 	{
 		TextClick(strings[i].c_str());
+	}
+}
+
+void UIView::ScrollView()
+{
+	D2D1_RECT_F scrollRect = { viewRectBack.right, viewRectBack.top, viewRectBack.right, viewRectBack.bottom };
+	scrollRect.left -= 20.f;
+	gUISystem.d2dRenderTarget->FillRectangle(scrollRect, gUISystem.brushTextBlack);
+}
+
+bool UIView::DropDown(const wchar_t* string)
+{
+	gUISystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
+	gUISystem.d2dRenderTarget->DrawTextA(string, wcslen(string), gUISystem.textFormat, viewRect, gUISystem.brushText);
+
+	POINT mousePos = gUISystem.mousePos;
+
+	if ((mousePos.x > viewRect.left) && (mousePos.x < viewRect.right))
+	{
+		if ((mousePos.y > viewRect.top) && (mousePos.y < viewRect.bottom))
+		{
+			gUISystem.d2dRenderTarget->DrawRectangle(viewRect, gUISystem.brushText);
+
+			if (gInputSystem.GetMouseLeftUpState())
+			{
+				gUISystem.activeUIViewElementIndex = idCounter;
+			}
+		}
 	}
 }
 
@@ -170,7 +276,7 @@ void UIViewActor::Tick()
 	//TODO: There has to be a better way to do this. pickedActor conflicts with the world editor raycasting
 	if (gWorldEditor.pickedActor)
 	{
-		Begin({ gCoreSystem.windowWidth - 300.f, 0.f, (float)gCoreSystem.windowWidth, (float)gCoreSystem.windowHeight }, L"Properties");
+		Begin({ gCoreSystem.windowWidth - 300.f, 40.f, (float)gCoreSystem.windowWidth, (float)gCoreSystem.windowHeight }, L"Properties");
 
 		Actor* actor = GetWorld()->GetActor(gWorldEditor.actorSystemIndex, gWorldEditor.actorIndex);
 		if (actor)
@@ -189,6 +295,26 @@ void UIViewActor::Tick()
 			CheckBox(L"Check box test", bTest);
 			Button(L"Test BUtton");
 		}
+
+		End();
+	}
+}
+
+void Toolbar::Tick()
+{
+	if (!bIsHidden)
+	{
+		Begin({ 0.f, 0.f, (float)gCoreSystem.windowWidth, 40.f }, nullptr);
+
+		ToolbarItem(L"File", bFileClick);
+		if (bFileClick)
+		{
+
+		}
+		ToolbarItem(L"Edit", bFileClick);
+		ToolbarItem(L"Views", bFileClick);
+		ToolbarItem(L"Graphics", bFileClick);
+		ToolbarItem(L"Debug", bFileClick);
 
 		End();
 	}

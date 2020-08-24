@@ -165,6 +165,7 @@
     <ClCompile Include="MathHelpers.cpp" />
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="Raycast.cpp" />
+    <ClCompile Include="RMUI.cpp" />
     <ClCompile Include="ShaderFactory.cpp" />
     <ClCompile Include="TimerSystem.cpp" />
     <ClCompile Include="TranslationWidget.cpp" />
@@ -191,6 +192,7 @@
     <ClInclude Include="MathHelpers.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="Raycast.h" />
+    <ClInclude Include="RMUI.h" />
     <ClInclude Include="ShaderFactory.h" />
     <ClInclude Include="TimerSystem.h" />
     <ClInclude Include="TranslationWidget.h" />

@@ -48,14 +48,13 @@ void UISystem::Init()
 	//NOTE: So far the ui views are static, if I want to bring layering back, have to ditch this approach
 	UIViewActor* uiViewActor = new UIViewActor;
 	uiViewActor->bIsHidden = true;
-	uiViewActor->viewId = 0;
 	uiViews.push_back(uiViewActor);
 
-	TestUIView* testUIView = new TestUIView;
-	testUIView->Create();
-	testUIView->bIsHidden = false;
-	testUIView->viewId = 1;
+	TestUIView* testUIView = new TestUIView();
 	uiViews.push_back(testUIView);
+
+	toolbar = new Toolbar();
+	uiViews.push_back(toolbar);
 }
 
 void UISystem::Cleanup()
@@ -80,9 +79,19 @@ void UISystem::Tick()
 	GetCursorPos(&mousePos);
 	ScreenToClient(gCoreSystem.mainWindow, &mousePos);
 
+	if (gInputSystem.GetKeyUpState(VK_TAB))
+	{
+		toolbar->bIsHidden = !toolbar->bIsHidden;
+	}
+
+	if(gInputSystem.GetKeyUpState('0'))
+	{
+		bAllUIActive = !bAllUIActive;
+	}
+
 	//NOTE: This one is here for the Direct2D mouse checking. Y position is off by about 10? Direct2D rendering offset? 
 	//Was hurting raycasting too. Is it the Win32 title bar?
-	mousePos.y += 10; 
+	mousePos.y += 5; 
 
 	//Iterate ver all UI back rects before any world editor input so that raycasts don't hit behind UI
 	//NOTE: This actually would fail on the first frame given the current methods, but too fast to notice
@@ -120,6 +129,11 @@ void UISystem::Tick()
 			gUISystem.uiViews.pop_back();
 		}
 	}*/
+}
+
+void UISystem::RenderText()
+{
+
 }
 
 void UISystem::RenderAllUIViews()
