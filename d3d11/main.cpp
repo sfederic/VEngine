@@ -45,6 +45,15 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	world->actorSystems.push_back(&gWorldEditor.yAxis);
 	world->actorSystems.push_back(&gWorldEditor.zAxis);
 
+
+	ID2D1BitmapRenderTarget* bitmapRt = nullptr;
+	ID2D1Bitmap* bitmap = nullptr;
+
+	HR(gUISystem.d2dRenderTarget->CreateCompatibleRenderTarget(&bitmapRt));
+
+	HR(bitmapRt->GetBitmap(&bitmap));
+	HR(bitmap->CopyFromRenderTarget(NULL, gUISystem.d2dRenderTarget, NULL));
+
 	//MAIN LOOP
 	while (gCoreSystem.msg.message != WM_QUIT)
 	{
@@ -82,6 +91,13 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 			gConsole.DrawViewItems();
 			//debugMenu.Tick(GetWorld(), deltaTime);
 			gUISystem.RenderAllUIViews();
+			gUISystem.d2dRenderTarget->EndDraw();
+		}
+		else
+		{
+			//CACHING TEST 
+			gUISystem.d2dRenderTarget->BeginDraw();
+			gUISystem.d2dRenderTarget->DrawBitmap(bitmap);
 			gUISystem.d2dRenderTarget->EndDraw();
 		}
 

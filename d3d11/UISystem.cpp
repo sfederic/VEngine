@@ -17,18 +17,23 @@ void UISystem::Init()
 
 	D2D1_FACTORY_OPTIONS options;
 	options.debugLevel = D2D1_DEBUG_LEVEL_INFORMATION;
-	HR(D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, options, &d2dFactory));
+	HR(D2D1CreateFactory(D2D1_FACTORY_TYPE_MULTI_THREADED, options, &d2dFactory));
+
+	//ID2D1RectangleGeometry* rectGeom = d2dFactory->CreateRectangleGeometry()
 
 	D2D1_RENDER_TARGET_PROPERTIES rtProps = D2D1::RenderTargetProperties(
-		D2D1_RENDER_TARGET_TYPE_DEFAULT,
+		D2D1_RENDER_TARGET_TYPE_HARDWARE,
 		D2D1::PixelFormat(DXGI_FORMAT_UNKNOWN, D2D1_ALPHA_MODE_PREMULTIPLIED));
 
 	HR(d2dFactory->CreateDxgiSurfaceRenderTarget(surface, rtProps, &d2dRenderTarget));
 	surface->Release();
 
-	HR(DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED, __uuidof(writeFactory), (IUnknown**)(&writeFactory)));
+	d2dRenderTarget->SetTextAntialiasMode(D2D1_TEXT_ANTIALIAS_MODE_GRAYSCALE);
+	
 
 	//DirectWrite Init
+	HR(DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED, __uuidof(writeFactory), (IUnknown**)(&writeFactory)));
+
 	HR(writeFactory->CreateTextFormat(L"Terminal", NULL, DWRITE_FONT_WEIGHT_NORMAL, DWRITE_FONT_STYLE_NORMAL,
 		DWRITE_FONT_STRETCH_NORMAL, 14.f, L"en-us", &textFormat));
 
@@ -43,6 +48,8 @@ void UISystem::Init()
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.14f, 0.14f, 0.15f, 0.75f), &brushViewBlack));
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.17f, 0.17f, 0.18f, 1.0f), &brushButton));
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.1f, 0.1f, 0.8f, 1.0f), &brushCheckBoxOn));
+
+
 
 	//Populate UIViews
 	//NOTE: So far the ui views are static, if I want to bring layering back, have to ditch this approach
