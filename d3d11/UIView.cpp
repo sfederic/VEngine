@@ -21,7 +21,7 @@ void UIView::Begin(D2D1_RECT_F viewRect_, const wchar_t* title)
 
 void UIView::End()
 {
-	idCounter = 0;
+	//idCounter = 0;
 }
 
 void UIView::Text(const wchar_t* string)
@@ -35,15 +35,20 @@ void UIView::TextClick(const wchar_t* string)
 {
 	POINT mousePos = gUISystem.mousePos;
 
+	if (gUISystem.activeUIViewElementIndex == idCounter)
+	{
+		gUISystem.d2dRenderTarget->DrawRectangle(viewRect, gUISystem.brushCloseBox);
+	}
+
 	if ((mousePos.x > viewRect.left) && (mousePos.x < viewRect.right))
 	{
 		if ((mousePos.y > viewRect.top) && (mousePos.y < viewRect.bottom))
 		{
 			gUISystem.d2dRenderTarget->DrawRectangle(viewRect, gUISystem.brushCloseBox);
 
-			if (gInputSystem.GetMouseRightUpState())
+			if (gInputSystem.GetMouseLeftUpState())
 			{
-
+				gUISystem.activeUIViewElementIndex = idCounter;
 			}
 		}
 	}
@@ -113,8 +118,14 @@ void UIView::CheckBox(const wchar_t* string, bool& checkBoxVal)
 	IncrementViewRectAndID();
 }
 
-void UIView::ListView(std::vector<std::wstring> strings)
+void UIView::ListView(std::vector<std::wstring>& strings)
 {
+	if (gInputSystem.GetKeyUpState(VK_DELETE) && strings.size() > 0)
+	{
+		strings.erase(strings.begin() + gUISystem.activeUIViewElementIndex - 1);
+		gUISystem.activeUIViewElementIndex--;
+	}
+
 	for (int i = 0; i < strings.size(); i++)
 	{
 		TextClick(strings[i].c_str());

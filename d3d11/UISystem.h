@@ -34,6 +34,7 @@ public:
 	IDWriteTextFormat* textFormat;
 
 	int activeUIViewElementIndex = -1;
+	int activeUIViewID = 0;
 	bool bEditUIActive = false;
 	bool bUIClicked = false;
 };

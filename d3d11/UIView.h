@@ -11,7 +11,10 @@ struct UIView
 	D2D1_RECT_F viewRectBack; //The backdrop rect for the entire view
 	D2D1_RECT_F viewRect; //The layout rect for each element within the view
 
+	int viewId;
 	int idCounter = 0; 
+
+	bool bIsHidden;
 
 	void Begin(D2D1_RECT_F viewRect_, const wchar_t* title);
 	void End();
@@ -23,7 +26,7 @@ struct UIView
 	bool Button(const wchar_t* string);
 	void CheckBox(const wchar_t* string, bool& checkBoxVal);
 	
-	void ListView(std::vector<std::wstring> strings);
+	void ListView(std::vector<std::wstring>& strings);
 
 	template <typename T>
 	void Edit(T& editVal, std::wstring& editString);
@@ -46,13 +49,6 @@ struct TestUIView : public UIView
 	void Create()
 	{
 		strings.push_back(L"Entity1");
-		strings.push_back(L"Entity2");
-		strings.push_back(L"Entity2");
-		strings.push_back(L"Entity2");
-		strings.push_back(L"Entity2");
-		strings.push_back(L"Entity2");
-		strings.push_back(L"Entity2");
-		strings.push_back(L"Entity2");
 		strings.push_back(L"Entity2");
 		strings.push_back(L"Entity2");
 		strings.push_back(L"Entity2");

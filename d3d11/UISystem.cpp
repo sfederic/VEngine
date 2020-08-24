@@ -47,10 +47,14 @@ void UISystem::Init()
 	//Populate UIViews
 	//NOTE: So far the ui views are static, if I want to bring layering back, have to ditch this approach
 	UIViewActor* uiViewActor = new UIViewActor;
+	uiViewActor->bIsHidden = true;
+	uiViewActor->viewId = 0;
 	uiViews.push_back(uiViewActor);
 
 	TestUIView* testUIView = new TestUIView;
 	testUIView->Create();
+	testUIView->bIsHidden = false;
+	testUIView->viewId = 1;
 	uiViews.push_back(testUIView);
 }
 
@@ -86,11 +90,18 @@ void UISystem::Tick()
 
 	for (int i = 0; i < uiViews.size(); i++)
 	{
-		if ((mousePos.x > uiViews[i]->viewRectBack.left) && (mousePos.x < uiViews[i]->viewRectBack.right))
+		if (!uiViews[i]->bIsHidden)
 		{
-			if ((mousePos.y > uiViews[i]->viewRectBack.top) && (mousePos.y < uiViews[i]->viewRectBack.bottom))
+			if ((mousePos.x > uiViews[i]->viewRectBack.left) && (mousePos.x < uiViews[i]->viewRectBack.right))
 			{
-				bUIClicked = true;
+				if ((mousePos.y > uiViews[i]->viewRectBack.top) && (mousePos.y < uiViews[i]->viewRectBack.bottom))
+				{
+					if (gInputSystem.GetMouseLeftDownState())
+					{
+						bUIClicked = true;
+						uiViews[i]->bIsHidden = false;
+					}
+				}
 			}
 		}
 	}
@@ -115,7 +126,10 @@ void UISystem::RenderAllUIViews()
 {
 	for (int i = 0; i < gUISystem.uiViews.size(); i++)
 	{
-		gUISystem.uiViews[i]->Tick();
+		//if (!gUISystem.uiViews[i]->bIsHidden)
+		{
+			gUISystem.uiViews[i]->Tick();
+		}
 	}
 }
 

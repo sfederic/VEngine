@@ -11,6 +11,11 @@ WorldEditor gWorldEditor;
 
 void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 {
+	if (gUISystem.bUIClicked)
+	{
+		return;
+	}
+
 	World* world = GetWorld();
 
 	if (pickedActor)
@@ -316,10 +321,20 @@ void WorldEditor::MoveActor(Actor* actor, PickedAxis axis)
 		}
 		else if (actor)
 		{
+			//TODO: There's a better way to do this
+			//Couldcheck angle between camera and center point of transform widet for axis translations across different axis
 			//For free movement
 			if (axis == PickedAxis::X)
 			{
-				actor->Move(dx * pickedActorMoveSpeed, XMVectorRight());
+				//these if()s are here to do correct translation based on camera pos
+				if (editorCamera.location.m128_f32[2] > pickedActor->GetPositionFloat3().z) 
+				{
+					actor->Move(-dx * pickedActorMoveSpeed, XMVectorRight());
+				}
+				else
+				{
+					actor->Move(dx * pickedActorMoveSpeed, XMVectorRight());
+				}
 			}
 			else if (axis == PickedAxis::Y)
 			{
@@ -327,7 +342,14 @@ void WorldEditor::MoveActor(Actor* actor, PickedAxis axis)
 			}	
 			else if (axis == PickedAxis::Z)
 			{
-				actor->Move(-dx * pickedActorMoveSpeed, XMVectorForward());
+				if (editorCamera.location.m128_f32[0] > pickedActor->GetPositionFloat3().x)
+				{
+					actor->Move(dx * pickedActorMoveSpeed, XMVectorForward());
+				}
+				else
+				{
+					actor->Move(-dx * pickedActorMoveSpeed, XMVectorForward());
+				}
 			}
 		}
 
