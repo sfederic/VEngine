@@ -33,7 +33,7 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 	gWorldEditor.Init();
 
 	//TODO: This is causing a crash in Release. Is it because it's after the init code?
-	//ID3D11Buffer* debugLinesBuffer = gRenderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
+	ID3D11Buffer* debugLinesBuffer = gRenderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
 
 	ActorSystem cubes;
 	cubes.modelName = "cube.fbx";
@@ -77,11 +77,11 @@ int __stdcall WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR cmdLine,
 		gRenderSystem.Tick();
 		gRenderSystem.RenderSetup(deltaTime);
 
-		gWorldEditor.Tick(nullptr);
+		gWorldEditor.Tick(debugLinesBuffer);
 
 		gRenderSystem.RenderActorSystem(world);
 		gRenderSystem.RenderBounds();
-		gRenderSystem.RenderEnd(deltaTime, nullptr);
+		gRenderSystem.RenderEnd(deltaTime, debugLinesBuffer);
 
 		//UI RENDERING
 		if (gUISystem.bAllUIActive)

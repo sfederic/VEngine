@@ -7,6 +7,7 @@
 #include "Console.h"
 #include "WorldEditor.h"
 #include "World.h"
+#include "MathHelpers.h"
 
 Camera editorCamera(XMVectorSet(0.f, 0.f, -5.f, 1.f));
 
@@ -73,6 +74,12 @@ void Camera::Tick(float deltaTime)
 			ZoomTo(world->GetActor(gWorldEditor.actorSystemIndex, gWorldEditor.actorIndex));
 		}
 
+		//Rotate Around
+		if (gInputSystem.GetAsyncKey(VK_MBUTTON) && gWorldEditor.pickedActor)
+		{
+			RotateAround(gWorldEditor.pickedActor->GetPositionVector(), 0.1f);
+		}
+
 		//MOUSE WHEEL ZOOM
 		const float zoomSpeed = 65.f * deltaTime;
 
@@ -133,14 +140,24 @@ void Camera::RotateY(float angle)
 	forward = XMVector3TransformNormal(forward, r);
 }
 
+void Camera::RotateAround(XMVECTOR posToRotateAround, float angle)
+{
+	XMVECTOR diff = location - posToRotateAround;
+	XMMATRIX mat = XMMatrixRotationAxis(XMVectorUp(), angle);
+	XMVECTOR newLoc;
+	newLoc = XMVector3Transform(diff, mat);
+
+	location += newLoc * angle;
+}
+
 void Camera::MouseMove(int x, int y)
 {
 	static POINT lastMousePos;
 
 	if (GetAsyncKeyState(VK_RBUTTON) < 0)
 	{
-		float dx = XMConvertToRadians(0.25f * (float)(x - lastMousePos.x));
-		float dy = XMConvertToRadians(0.25f * (float)(y - lastMousePos.y));
+		dx = XMConvertToRadians(0.25f * (float)(x - lastMousePos.x));
+		dy = XMConvertToRadians(0.25f * (float)(y - lastMousePos.y));
 
 		Pitch(dy);
 		RotateY(dx);

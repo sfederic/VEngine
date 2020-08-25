@@ -14,6 +14,7 @@ public:
 	void UpdateViewMatrix();
 	void Pitch(float angle);
 	void RotateY(float angle);
+	void RotateAround(XMVECTOR posToRotateAround, float angle);
 	void MouseMove(int x, int y);
 	void FrustumCullTest(class ActorSystem& system);
 	void AttachTo(class Actor* actor);
@@ -29,6 +30,9 @@ public:
 
 	XMVECTOR attachedOffset;
 	class Actor* actorAttachedTo = nullptr;
+
+	float dx;
+	float dy;
 };
 
 extern Camera editorCamera;

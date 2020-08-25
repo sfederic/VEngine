@@ -62,6 +62,18 @@ void InputSystem::StoreMouseRightUpInput(WPARAM key)
 	rightMouseDown = false;
 }
 
+void InputSystem::StoreMouseMiddleDownInput(WPARAM key)
+{
+	bMiddleMouseDown = true;
+	keyDown = true;
+}
+
+void InputSystem::StoreMouseMiddleUpInput(WPARAM key)
+{
+	bMiddleMouseUp = true;
+	keyDown = true;
+}
+
 bool InputSystem::GetKeyDownState(int key)
 {
 	if (currentDownKey == key)
@@ -122,6 +134,26 @@ bool InputSystem::GetMouseRightUpState()
 	}
 }
 
+bool InputSystem::GetMouseMiddleUpState()
+{
+	if (bMiddleMouseUp)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool InputSystem::GetMouseMiddleDownState()
+{
+	if (bMiddleMouseDown)
+	{
+		return true;
+	}
+
+	return false;
+}
+
 bool InputSystem::GetAsyncKey(WPARAM key)
 {
 	if (GetAsyncKeyState(key))
@@ -159,6 +191,9 @@ void InputSystem::InputReset()
 
 	bMouseWheelDown = false;
 	bMouseWheelUp = false;
+
+	bMiddleMouseDown = false;
+	bMiddleMouseUp = false;
 }
 
 void InputSystem::StoreMouseWheelUp()

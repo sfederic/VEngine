@@ -13,12 +13,16 @@ public:
 	void StoreMouseLeftUpInput(WPARAM key);
 	void StoreMouseRightDownInput(WPARAM key);
 	void StoreMouseRightUpInput(WPARAM key);
+	void StoreMouseMiddleDownInput(WPARAM key);
+	void StoreMouseMiddleUpInput(WPARAM key);
 	bool GetKeyUpState(int key);
 	bool GetKeyDownState(int key);
 	bool GetMouseLeftDownState();
 	bool GetMouseLeftUpState();
 	bool GetMouseRightDownState();
 	bool GetMouseRightUpState();
+	bool GetMouseMiddleUpState();
+	bool GetMouseMiddleDownState();
 	bool GetAsyncKey(WPARAM key);
 	void InputReset();
 	void StoreMouseWheelUp();
@@ -36,6 +40,8 @@ public:
 	bool keyDown;
 	bool bMouseWheelUp;
 	bool bMouseWheelDown;
+	bool bMiddleMouseDown;
+	bool bMiddleMouseUp;
 };
 
 extern InputSystem gInputSystem;

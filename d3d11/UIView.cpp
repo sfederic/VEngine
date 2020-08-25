@@ -236,6 +236,8 @@ bool UIView::DropDown(const wchar_t* string)
 			}
 		}
 	}
+
+	return true;
 }
 
 void UIView::NewLine()
