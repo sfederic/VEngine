@@ -31,14 +31,19 @@ void Console::ConsoleInput()
 {
 	if (gInputSystem.GetAnyKeyDown() && gInputSystem.currentDownKey != VK_OEM_3)
 	{
-		if (gInputSystem.GetKeyDownState(VK_BACK) && consoleStringIndex > 0)
+		if (gInputSystem.GetKeyDownState(VK_BACK))
 		{
-			consoleStringIndex--;
+			consoleString.pop_back();
+			gUISystem.textLayout->Release();
+			gUISystem.writeFactory->CreateTextLayout(consoleString.c_str(), consoleString.size(),
+				gUISystem.textFormat, gCoreSystem.windowWidth, gCoreSystem.windowHeight, &gUISystem.textLayout);
 		}
-		else if ((consoleStringIndex < _countof(consoleString)) && (gInputSystem.currentDownKey != 0))
+		else if ((gInputSystem.currentDownKey != 0))
 		{
-			consoleString[consoleStringIndex] = gInputSystem.currentDownKey;
-			consoleStringIndex++;
+			consoleString.push_back(gInputSystem.currentDownKey);
+			gUISystem.textLayout->Release();
+			gUISystem.writeFactory->CreateTextLayout(consoleString.c_str(), consoleString.size(),
+				gUISystem.textFormat, gCoreSystem.windowWidth, gCoreSystem.windowHeight, &gUISystem.textLayout);
 		}
 	}
 }
@@ -55,9 +60,18 @@ void Console::Tick()
 
 		gUISystem.d2dRenderTarget->DrawRectangle({ 0, height - 20.f, width, height }, gUISystem.brushTransparentMenu);
 
-		gUISystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
-		gUISystem.d2dRenderTarget->DrawText(consoleString, consoleStringIndex, gUISystem.textFormat,
-			{ 0, height - 20.f, width, height }, gUISystem.brushText);
+		//Old rendering 
+		//gUISystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
+		//gUISystem.d2dRenderTarget->DrawText(consoleString, consoleStringIndex, gUISystem.textFormat,
+		//	{ 0, height - 20.f, width, height }, gUISystem.brushText);
+
+		//New render with caret and textlayout
+		gUISystem.textLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
+		gUISystem.d2dRenderTarget->DrawTextLayout({ 0, height - 20.f }, gUISystem.textLayout, gUISystem.brushText);
+		DWRITE_TEXT_METRICS metrics = {};
+		gUISystem.textLayout->GetMetrics(&metrics);
+		gUISystem.d2dRenderTarget->FillRectangle({0 + metrics.width, height - 20.f, 
+			0 + metrics.width + 2.f, height - 20.f + metrics.height }, gUISystem.brushText);
 	}
 
 	if (gInputSystem.GetKeyUpState(VK_OEM_3)) //~ key, like doom and unreal
@@ -74,37 +88,38 @@ void Console::Tick()
 void Console::ExecuteString()
 {
 	ConsoleViewItem item = {};
-
-	if (wcsncmp(consoleString, ExecuteStrings::EXIT, wcslen(ExecuteStrings::EXIT)) == 0)
+	
+	//TODO: fix the compares here (move to std::wstring)
+	if (wcsncmp(consoleString.c_str(), ExecuteStrings::EXIT, wcslen(ExecuteStrings::EXIT)) == 0)
 	{
 		gCoreSystem.msg.message = WM_QUIT;
 	}
-	else if (wcsncmp(consoleString, ExecuteStrings::GPU, wcslen(ExecuteStrings::GPU)) == 0)
+	else if (wcsncmp(consoleString.c_str(), ExecuteStrings::GPU, wcslen(ExecuteStrings::GPU)) == 0)
 	{
 		_snwprintf_s(item.text, sizeof(item.text), L"%ls", gRenderSystem.adaptersDesc[0].Description);
 		viewItems.push_back(item);
 	}
-	else if (wcsncmp(consoleString, ExecuteStrings::D3D_TIME, wcslen(ExecuteStrings::D3D_TIME)) == 0)
+	else if (wcsncmp(consoleString.c_str(), ExecuteStrings::D3D_TIME, wcslen(ExecuteStrings::D3D_TIME)) == 0)
 	{
 		_snwprintf_s(item.text, sizeof(item.text), L"D3D11 Render: %f", gRenderSystem.renderTime);
 		viewItems.push_back(item);
 	}
-	else if (wcsncmp(consoleString, ExecuteStrings::POP, wcslen(ExecuteStrings::POP)) == 0)
+	else if (wcsncmp(consoleString.c_str(), ExecuteStrings::POP, wcslen(ExecuteStrings::POP)) == 0)
 	{
 		if (viewItems.size() > 0)
 		{
 			viewItems.pop_back();
 		}
 	}
-	else if (wcsncmp(consoleString, ExecuteStrings::CLEAR, wcslen(ExecuteStrings::CLEAR)) == 0) //CLEAR TEXT
+	else if (wcsncmp(consoleString.c_str(), ExecuteStrings::CLEAR, wcslen(ExecuteStrings::CLEAR)) == 0) //CLEAR TEXT
 	{
 		viewItems.clear();
 	}
-	else if(wcsncmp(consoleString, LevelNames::TestLevel, wcslen(LevelNames::TestLevel)) == 0) //LEVEL LOADING
+	else if(wcsncmp(consoleString.c_str(), LevelNames::TestLevel, wcslen(LevelNames::TestLevel)) == 0) //LEVEL LOADING
 	{
 		gFileSystem.ReadAllActorSystems(GetWorld(), "LevelSaves/test.sav");
 	}
-	else if (wcsncmp(consoleString, ExecuteStrings::SNAP, wcslen(ExecuteStrings::SNAP)) == 0) //Toggle grid snap
+	else if (wcsncmp(consoleString.c_str(), ExecuteStrings::SNAP, wcslen(ExecuteStrings::SNAP)) == 0) //Toggle grid snap
 	{
 		gWorldEditor.bMoveActorsInIncrements = !gWorldEditor.bMoveActorsInIncrements;
 
@@ -123,8 +138,9 @@ void Console::ExecuteString()
 	}
 
 	//Reset console string and index
-	memset(consoleString, 0, _countof(consoleString) * sizeof(wchar_t));
-	consoleStringIndex = 0;
+	consoleString.empty();
+	gUISystem.textLayout->Release();
+	gUISystem.writeFactory->CreateTextLayout(L"", 0, gUISystem.textFormat, gCoreSystem.windowWidth, gCoreSystem.windowHeight, &gUISystem.textLayout);
 }
 
 void Console::DrawViewItems()

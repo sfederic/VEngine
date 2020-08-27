@@ -28,8 +28,7 @@ void UISystem::Init()
 	HR(d2dFactory->CreateDxgiSurfaceRenderTarget(surface, rtProps, &d2dRenderTarget));
 	surface->Release();
 
-	d2dRenderTarget->SetTextAntialiasMode(D2D1_TEXT_ANTIALIAS_MODE_GRAYSCALE);
-	
+	d2dRenderTarget->SetTextAntialiasMode(D2D1_TEXT_ANTIALIAS_MODE_GRAYSCALE); //MDSN says this is faster. Ok.
 
 	//DirectWrite Init
 	HR(DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED, __uuidof(writeFactory), (IUnknown**)(&writeFactory)));
@@ -37,8 +36,7 @@ void UISystem::Init()
 	HR(writeFactory->CreateTextFormat(L"Terminal", NULL, DWRITE_FONT_WEIGHT_NORMAL, DWRITE_FONT_STYLE_NORMAL,
 		DWRITE_FONT_STRETCH_NORMAL, 14.f, L"en-us", &textFormat));
 
-	HR(writeFactory->CreateTextFormat(L"Terminal", NULL, DWRITE_FONT_WEIGHT_NORMAL, DWRITE_FONT_STYLE_NORMAL,
-		DWRITE_FONT_STRETCH_NORMAL, 14.f, L"en-us", &textFormat));
+	HR(writeFactory->CreateTextLayout(L"", 0, textFormat, gCoreSystem.windowWidth, gCoreSystem.windowHeight, &textLayout));
 
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.5f, 0.5f, 0.5f, 0.5f), &brushTransparentMenu));
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(1.0f, 1.0f, 1.0f, 1.0f), &brushCloseBox));
@@ -98,7 +96,7 @@ void UISystem::Tick()
 
 	//NOTE: This one is here for the Direct2D mouse checking. Y position is off by about 10? Direct2D rendering offset? 
 	//Was hurting raycasting too. Is it the Win32 title bar?
-	mousePos.y += 5; 
+	//mousePos.y -= 10; 
 
 	//Iterate ver all UI back rects before any world editor input so that raycasts don't hit behind UI
 	//NOTE: This actually would fail on the first frame given the current methods, but too fast to notice

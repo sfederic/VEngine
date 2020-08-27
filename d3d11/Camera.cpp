@@ -34,7 +34,7 @@ void Camera::Tick(float deltaTime)
 		location += attachedOffset;
 	}
 
-	MouseMove(gUISystem.mousePos.x, gUISystem.mousePos.y);
+	MouseMoveWithRotate(gUISystem.mousePos.x, gUISystem.mousePos.y);
 	UpdateViewMatrix();
 
 	//WASD MOVEMENT
@@ -77,7 +77,15 @@ void Camera::Tick(float deltaTime)
 		//Rotate Around
 		if (gInputSystem.GetAsyncKey(VK_MBUTTON) && gWorldEditor.pickedActor)
 		{
-			RotateAround(gWorldEditor.pickedActor->GetPositionVector(), 0.1f);
+			MouseMove(gUISystem.mousePos.x, gUISystem.mousePos.y);
+			if (dx > 0.f || dx < 0.f)
+			{
+				RotateAround(gWorldEditor.pickedActor->GetPositionVector(), XMVectorUp(), dx);
+			}
+			if (dy > 0.f || dy < 0.f)
+			{
+				RotateAround(gWorldEditor.pickedActor->GetPositionVector(), XMVectorRight(), dy);
+			}
 		}
 
 		//MOUSE WHEEL ZOOM
@@ -140,17 +148,17 @@ void Camera::RotateY(float angle)
 	forward = XMVector3TransformNormal(forward, r);
 }
 
-void Camera::RotateAround(XMVECTOR posToRotateAround, float angle)
+void Camera::RotateAround(XMVECTOR posToRotateAround, XMVECTOR axis, float angle)
 {
 	XMVECTOR diff = location - posToRotateAround;
-	XMMATRIX mat = XMMatrixRotationAxis(XMVectorUp(), angle);
+	XMMATRIX mat = XMMatrixRotationAxis(axis, angle);
 	XMVECTOR newLoc;
 	newLoc = XMVector3Transform(diff, mat);
 
-	location += newLoc * angle;
+	location = newLoc;
 }
 
-void Camera::MouseMove(int x, int y)
+void Camera::MouseMoveWithRotate(int x, int y)
 {
 	static POINT lastMousePos;
 
@@ -162,6 +170,17 @@ void Camera::MouseMove(int x, int y)
 		Pitch(dy);
 		RotateY(dx);
 	}
+
+	lastMousePos.x = x;
+	lastMousePos.y = y;
+}
+
+void Camera::MouseMove(int x, int y)
+{
+	static POINT lastMousePos;
+
+	dx = XMConvertToRadians(0.25f * (float)(x - lastMousePos.x));
+	dy = XMConvertToRadians(0.25f * (float)(y - lastMousePos.y));
 
 	lastMousePos.x = x;
 	lastMousePos.y = y;

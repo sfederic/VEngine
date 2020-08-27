@@ -14,7 +14,8 @@ public:
 	void UpdateViewMatrix();
 	void Pitch(float angle);
 	void RotateY(float angle);
-	void RotateAround(XMVECTOR posToRotateAround, float angle);
+	void RotateAround(XMVECTOR posToRotateAround, XMVECTOR axis, float angle);
+	void MouseMoveWithRotate(int x, int y);
 	void MouseMove(int x, int y);
 	void FrustumCullTest(class ActorSystem& system);
 	void AttachTo(class Actor* actor);
