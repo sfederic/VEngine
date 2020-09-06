@@ -13,8 +13,8 @@
 #include "WICTextureLoader.h"
 #include <string>
 #include "WorldEditor.h"
+#include "D3D11RenderSystem.h"
 
-RenderSystem gRenderSystem;
 UINT strides = sizeof(Vertex);
 UINT offsets = 0;
 
@@ -23,7 +23,7 @@ ActorSystem debugSphere;
 
 Vertex debugLineData[2];
 
-void RenderSystem::Tick()
+void D3D11RenderSystem::Tick()
 {
 	//Set wireframe on/off
 	if (gInputSystem.GetKeyUpState(VK_F1))
@@ -35,7 +35,7 @@ void RenderSystem::Tick()
 		activeRastState = rastStateSolid;
 	}
 
-	if (gInputSystem.GetKeyUpState('B'))
+	if (gInputSystem.GetKeyUpState('B')) 
 	{
 		bDrawBoundingBoxes = !bDrawBoundingBoxes;
 	}
@@ -45,12 +45,12 @@ void RenderSystem::Tick()
 	}
 }
 
-void RenderSystem::Init(HWND windowHandle)
+void D3D11RenderSystem::Init()
 {
 	viewport = { 0.f, 0.f, (float)gCoreSystem.windowWidth, (float)gCoreSystem.windowHeight, 0.f, 1.f };
 
 	CreateDevice();
-	CreateSwapchain(windowHandle);
+	CreateSwapchain(GetActiveWindow());
 	CreateRTVAndDSV();
 	CreateShaders();
 	CreateInputLayout();
@@ -60,10 +60,10 @@ void RenderSystem::Init(HWND windowHandle)
 	//Check feature support (just for breakpoint checking for now)
 	//TODO: Think about putting this into te debug menu
 	D3D11_FEATURE_DATA_THREADING threadFeature = {};
-	gRenderSystem.device->CheckFeatureSupport(D3D11_FEATURE_THREADING, &threadFeature, sizeof(threadFeature));
+	device->CheckFeatureSupport(D3D11_FEATURE_THREADING, &threadFeature, sizeof(threadFeature));
 }
 
-void RenderSystem::CreateDevice()
+void D3D11RenderSystem::CreateDevice()
 {
 	D3D_FEATURE_LEVEL featureLevels[] = { D3D_FEATURE_LEVEL_11_1, D3D_FEATURE_LEVEL_11_0 };
 
@@ -119,7 +119,7 @@ void RenderSystem::CreateDevice()
 	debugSphere.CreateActors(this, 1);
 }
 
-void RenderSystem::CreateSwapchain(HWND windowHandle)
+void D3D11RenderSystem::CreateSwapchain(HWND windowHandle)
 {
 	DXGI_SWAP_CHAIN_DESC sd = {};
 	sd.BufferDesc = { (UINT)gCoreSystem.windowWidth, (UINT)gCoreSystem.windowHeight, {60, 1}, DXGI_FORMAT_R8G8B8A8_UNORM };
@@ -136,7 +136,7 @@ void RenderSystem::CreateSwapchain(HWND windowHandle)
 	tmpSwapchain->Release();
 }
 
-void RenderSystem::CreateRTVAndDSV()
+void D3D11RenderSystem::CreateRTVAndDSV()
 {
 	for (int i = 0; i < frameCount; i++)
 	{
@@ -160,7 +160,7 @@ void RenderSystem::CreateRTVAndDSV()
 	HR(device->CreateDepthStencilView(depthStencilBuffer, nullptr, &dsv));
 }
 
-void RenderSystem::CreateShaders()
+void D3D11RenderSystem::CreateShaders()
 {
 	//TODO: fix this for later. for now, all shaders are using the same Inputlayout so its fine
 	vertexCode = CreateShaderFromFile(L"Shaders/shaders.hlsl", "VSMain", "vs_5_0");
@@ -170,7 +170,7 @@ void RenderSystem::CreateShaders()
 	HR(device->CreatePixelShader(pixelCode->GetBufferPointer(), pixelCode->GetBufferSize(), nullptr, &pixelShader));
 }
 
-void RenderSystem::CreateInputLayout()
+void D3D11RenderSystem::CreateInputLayout()
 {
 	D3D11_INPUT_ELEMENT_DESC inputDesc[] = {
 		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, pos), D3D11_INPUT_PER_VERTEX_DATA, 0},
@@ -182,7 +182,7 @@ void RenderSystem::CreateInputLayout()
 	context->IASetInputLayout(inputLayout);
 }
 
-void RenderSystem::CreateRasterizerStates()
+void D3D11RenderSystem::CreateRasterizerStates()
 {
 	D3D11_RASTERIZER_DESC rastDesc = {};
 	rastDesc.FillMode = D3D11_FILL_SOLID;
@@ -207,12 +207,12 @@ void RenderSystem::CreateRasterizerStates()
 }
 
 //One vertex buffer per actor system
-void RenderSystem::CreateVertexBuffer(UINT size, const void* data, ActorSystem* system)
+void D3D11RenderSystem::CreateVertexBuffer(UINT size, const void* data, ActorSystem* system)
 {
 	system->vertexBuffer = CreateDefaultBuffer(size, D3D11_BIND_VERTEX_BUFFER, data);
 }
 
-void RenderSystem::CreateConstantBuffer()
+void D3D11RenderSystem::CreateConstantBuffer()
 {
 	matrices.model = XMMatrixIdentity();
 	matrices.view = XMMatrixIdentity();
@@ -224,7 +224,7 @@ void RenderSystem::CreateConstantBuffer()
 	cbMatrices = CreateDefaultBuffer(sizeof(Matrices), D3D11_BIND_CONSTANT_BUFFER, &matrices);
 }
 
-void RenderSystem::CreateSamplerState(ActorSystem* actorSystem)
+void D3D11RenderSystem::CreateSamplerState(ActorSystem* actorSystem)
 {
 	D3D11_SAMPLER_DESC sampDesc = {};
 	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -233,11 +233,11 @@ void RenderSystem::CreateSamplerState(ActorSystem* actorSystem)
 	sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
 
 	ID3D11SamplerState* samplerState;
-	HR(gRenderSystem.device->CreateSamplerState(&sampDesc, &samplerState));
+	HR(device->CreateSamplerState(&sampDesc, &samplerState));
 	actorSystem->samplerState = samplerState;
 }
 
-void RenderSystem::CreateTexture(ActorSystem* actorSystem)
+void D3D11RenderSystem::CreateTexture(ActorSystem* actorSystem)
 {
 	wchar_t textureFilename[128] = { L"Textures/" };
 	wcscat_s(textureFilename, actorSystem->textureName);
@@ -245,12 +245,12 @@ void RenderSystem::CreateTexture(ActorSystem* actorSystem)
 	ID3D11Resource* texture;
 	ID3D11ShaderResourceView* srv;
 
-	HR(CreateWICTextureFromFile(gRenderSystem.device, textureFilename, &texture, &srv));
+	HR(CreateWICTextureFromFile(device, textureFilename, &texture, &srv));
 	actorSystem->texture = texture;
 	actorSystem->srv = srv;
 }
 
-void RenderSystem::RenderActorSystem(World* world)
+void D3D11RenderSystem::RenderActorSystem(World* world)
 {
 	for (int i = 0; i < world->actorSystems.size(); i++)
 	{
@@ -278,8 +278,8 @@ void RenderSystem::RenderActorSystem(World* world)
 		context->VSSetShader(shader->second->vertexShader, nullptr, 0);
 		context->PSSetShader(shader->second->pixelShader, nullptr, 0);
 
-		gRenderSystem.context->PSSetSamplers(0, 1, &actorSystem->samplerState);
-		gRenderSystem.context->PSSetShaderResources(0, 1, &actorSystem->srv);
+		context->PSSetSamplers(0, 1, &actorSystem->samplerState);
+		context->PSSetShaderResources(0, 1, &actorSystem->srv);
 
 		context->IASetVertexBuffers(0, 1, &actorSystem->vertexBuffer, &strides, &offsets);
 		context->IASetIndexBuffer(actorSystem->indexBuffer, DXGI_FORMAT_R16_UINT, 0);
@@ -301,7 +301,7 @@ void RenderSystem::RenderActorSystem(World* world)
 	}
 }
 
-void RenderSystem::RenderBounds()
+void D3D11RenderSystem::RenderBounds()
 {
 	World* world = GetWorld();
 	Camera* camera = GetPlayerCamera();
@@ -384,10 +384,15 @@ void RenderSystem::RenderBounds()
 	}
 }
 
-void RenderSystem::RenderEnd(float deltaTime, ID3D11Buffer* debugLineBuffer)
+void D3D11RenderSystem::Render(float deltaTime)
 {
+}
+
+void D3D11RenderSystem::RenderEnd(float deltaTime)
+{
+	//TODO: put debug line buffers into rendersystem
 	//DRAW DEBUG LINES
-	if (debugLineBuffer != nullptr)
+	/*if (debugLineBuffer != nullptr)
 	{
 		context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
 		context->IASetVertexBuffers(0, 1, &debugLineBuffer, &strides, &offsets);
@@ -402,9 +407,7 @@ void RenderSystem::RenderEnd(float deltaTime, ID3D11Buffer* debugLineBuffer)
 
 			context->Draw((UINT)debugLines.size(), 0);
 		}
-	}
-
-
+	}*/
 
 	//END QUERY
 	if (bQueryGPUInner)
@@ -445,7 +448,7 @@ void RenderSystem::RenderEnd(float deltaTime, ID3D11Buffer* debugLineBuffer)
 	}
 }
 
-void RenderSystem::RenderSetup(float deltaTime)
+void D3D11RenderSystem::RenderSetup(float deltaTime)
 {
 	if (bQueryGPU)
 	{
@@ -478,7 +481,7 @@ void RenderSystem::RenderSetup(float deltaTime)
 	}
 }
 
-ID3DBlob* RenderSystem::CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target)
+ID3DBlob* D3D11RenderSystem::CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target)
 {
 	UINT compileFlags = 0;
 #ifdef _DEBUG
@@ -498,7 +501,7 @@ ID3DBlob* RenderSystem::CreateShaderFromFile(const wchar_t* filename, const char
 	return code;
 }
 
-ID3D11Buffer* RenderSystem::CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, const void* initData)
+ID3D11Buffer* D3D11RenderSystem::CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, const void* initData)
 {
 	ID3D11Buffer* buffer;
 
@@ -514,7 +517,7 @@ ID3D11Buffer* RenderSystem::CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, 
 	return buffer;
 }
 
-ID3D11Buffer* RenderSystem::CreateDyamicBuffer(UINT byteWidth, UINT bindFlags, const void* initData)
+ID3D11Buffer* D3D11RenderSystem::CreateDyamicBuffer(UINT byteWidth, UINT bindFlags, const void* initData)
 {
 	ID3D11Buffer* buffer;
 

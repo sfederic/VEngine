@@ -11,8 +11,5 @@ public:
 class TranslationWidgetSystem : public ActorSystem
 {
 public:
-	TranslationWidgetSystem()
-	{
-		
-	}
+	//TranslationWidgetSystem();
 };

@@ -7,37 +7,26 @@
 #include <d3d11_1.h>
 #include <d3dcompiler.h>
 #include <dxgi1_6.h>
+
 #include <DirectXMath.h>
 #include <vector>
 #include "Debug.h"
-
+#include "RenderTypes.h"
+#include "IRenderSystem.h"
 
 using namespace DirectX;
 
-//TODO: can I put this in a smaller header (along with ModelData etc.)
-struct Vertex
-{
-	XMFLOAT3 pos;
-	XMFLOAT2 uv;
-	XMFLOAT3 normal;
-};
-
-struct Matrices
-{
-	XMMATRIX model;
-	XMMATRIX view;
-	XMMATRIX proj;
-	XMMATRIX mvp;
-};
-
 extern Vertex debugLineData[2];
 
-class RenderSystem
+class D3D11RenderSystem : public IRenderSystem
 {
 public:
 
-	void Tick();
-	void Init(HWND windowHandle);
+	virtual void Tick() override;
+	virtual void Init() override;
+	virtual void CreateVertexBuffer() override;
+	virtual void CreateBuffer() override;
+	virtual void CreateSampler() override;
 	void CreateDevice();
 	void CreateSwapchain(HWND windowHandle);
 	void CreateRTVAndDSV();
@@ -49,10 +38,11 @@ public:
 	void CreateSamplerState(class ActorSystem* actorSystem);
 	void CreateTexture(class ActorSystem* actorSystem);
 
-	void RenderSetup(float deltaTime);
+	virtual void RenderSetup(float deltaTime);
 	void RenderActorSystem(class World* world);
 	void RenderBounds();
-	void RenderEnd(float deltaTime, ID3D11Buffer* debugLineBuffer);
+	virtual void Render(float deltaTime);
+	virtual void RenderEnd(float deltaTime);
 
 	std::vector<IDXGIAdapter1*> adapters;
 	std::vector<DXGI_ADAPTER_DESC1> adaptersDesc;
@@ -102,5 +92,3 @@ public:
 	bool bQueryGPU = false;
 	bool bQueryGPUInner = false;
 };
-
-extern RenderSystem gRenderSystem;

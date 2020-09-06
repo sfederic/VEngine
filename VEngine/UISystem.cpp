@@ -13,7 +13,7 @@ void UISystem::Init()
 {
 	//Direct2D Init
 	IDXGISurface* surface;
-	HR(gRenderSystem.swapchain->GetBuffer(0, IID_PPV_ARGS(&surface)));
+	gRenderSystem->swapchain->GetBuffer(0, IID_PPV_ARGS(&surface));
 
 	D2D1_FACTORY_OPTIONS options;
 	options.debugLevel = D2D1_DEBUG_LEVEL_INFORMATION;
@@ -44,7 +44,6 @@ void UISystem::Init()
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.14f, 0.14f, 0.15f, 0.75f), &brushViewBlack));
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.17f, 0.17f, 0.18f, 1.0f), &brushButton));
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.1f, 0.1f, 0.8f, 1.0f), &brushCheckBoxOn));
-
 
 
 	//Populate UIViews

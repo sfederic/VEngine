@@ -11,12 +11,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{39CF1B7F-29F8-4317-91ED-CFCCEDCDED06}</ProjectGuid>
+    <ProjectGuid>{27EB75A1-0D97-4081-A4C9-E890C753E0E4}</ProjectGuid>
     <Keyword>QtVS_v303</Keyword>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.18362.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.18362.0</WindowsTargetPlatformVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
-    <ProjectName>QtEngineEditor</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -46,10 +45,10 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <IncludePath>$(ProjectDir)/FbxInclude;$(IncludePath)</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);($ProjectDir)/FBXInclude;</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <IncludePath>$(ProjectDir)/FbxInclude;$(IncludePath)</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);($ProjectDir)/FBXInclude;</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>msvc2019_64</QtInstall>
@@ -95,7 +94,6 @@
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="Raycast.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
-    <ClCompile Include="RMUI.cpp" />
     <ClCompile Include="ShaderFactory.cpp" />
     <ClCompile Include="TimerSystem.cpp" />
     <ClCompile Include="TranslationWidget.cpp" />
@@ -103,9 +101,9 @@
     <ClCompile Include="UIView.cpp" />
     <ClCompile Include="World.cpp" />
     <ClCompile Include="WorldEditor.cpp" />
-    <QtRcc Include="QtWidgetsApplication1.qrc" />
-    <QtUic Include="QtWidgetsApplication1.ui" />
-    <QtMoc Include="QtWidgetsApplication1.h" />
+    <QtRcc Include="EditorMainWindow.qrc" />
+    <QtUic Include="EditorMainWindow.ui" />
+    <QtMoc Include="EditorMainWindow.h" />
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Array.cpp" />
     <ClCompile Include="Audio.cpp" />
@@ -114,18 +112,15 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="CoreSystem.cpp" />
+    <ClCompile Include="D3D11RenderSystem.cpp" />
+    <ClCompile Include="D3D12RenderSystem.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="DebugMenu.cpp" />
+    <ClCompile Include="EditorMainWindow.cpp" />
     <ClCompile Include="FBXImporter.cpp" />
     <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="Input.cpp" />
-    <ClCompile Include="QtWidgetsApplication1.cpp" />
-    <ClCompile Include="main.cpp">
-      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
-      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
-      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
-      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
-    </ClCompile>
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
@@ -136,16 +131,19 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Console.h" />
     <ClInclude Include="CoreSystem.h" />
+    <ClInclude Include="D3D11RenderSystem.h" />
+    <ClInclude Include="D3D12RenderSystem.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="DebugMenu.h" />
     <ClInclude Include="FBXImporter.h" />
     <ClInclude Include="FileSystem.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="IRenderSystem.h" />
     <ClInclude Include="MathHelpers.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="Raycast.h" />
     <ClInclude Include="RenderSystem.h" />
-    <ClInclude Include="RMUI.h" />
+    <ClInclude Include="RenderTypes.h" />
     <ClInclude Include="ShaderFactory.h" />
     <ClInclude Include="TimerSystem.h" />
     <ClInclude Include="TranslationWidget.h" />
@@ -155,9 +153,6 @@
     <ClInclude Include="WorldEditor.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="test.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
@@ -165,12 +160,12 @@
     <Import Project="$(QtMsBuild)\qt.targets" />
   </ImportGroup>
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\packages\directxtk_uwp.2020.8.15.1\build\native\directxtk_uwp.targets" Condition="Exists('..\packages\directxtk_uwp.2020.8.15.1\build\native\directxtk_uwp.targets')" />
+    <Import Project="..\packages\directxtk_desktop_win10.2020.8.15.1\build\native\directxtk_desktop_win10.targets" Condition="Exists('..\packages\directxtk_desktop_win10.2020.8.15.1\build\native\directxtk_desktop_win10.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\directxtk_uwp.2020.8.15.1\build\native\directxtk_uwp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\directxtk_uwp.2020.8.15.1\build\native\directxtk_uwp.targets'))" />
+    <Error Condition="!Exists('..\packages\directxtk_desktop_win10.2020.8.15.1\build\native\directxtk_desktop_win10.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\directxtk_desktop_win10.2020.8.15.1\build\native\directxtk_desktop_win10.targets'))" />
   </Target>
 </Project>

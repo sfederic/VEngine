@@ -1,5 +1,5 @@
-#include "QtWidgetsApplication1.h"
-#include <QtWidgets/QApplication>
+#include "EditorMainWindow.h"
+//#include <QtWidgets/EditorMainWindow>
 #include <qpushbutton.h>
 #include <QWidget>
 #include <qmenubar.h>
@@ -528,6 +528,7 @@ int main(int argc, char *argv[])
     QFileSystemModel* fileModel = new QFileSystemModel();
     fileModel->setRootPath(QDir::currentPath());
 
+    //Console dock
 
     //Central widget
     MainWidget w;
@@ -548,7 +549,7 @@ int main(int argc, char *argv[])
     gCoreSystem.windowWidth = w.width();
     gCoreSystem.windowHeight = w.height();
     gCoreSystem.SetTimerFrequency();
-    gRenderSystem.Init((HWND)w.winId());
+    gRenderSystem->Init((HWND)w.winId());
     gAudioSystem.Init();
     gUISystem.Init();
     gWorldEditor.Init();
@@ -558,7 +559,7 @@ int main(int argc, char *argv[])
 
     ActorSystem cubes;
     cubes.modelName = "cube.fbx";
-    cubes.CreateActors(&gRenderSystem, 2);
+    cubes.CreateActors(gRenderSystem, 2);
 
     World* world = GetWorld();
     world->actorSystems.push_back(&cubes);

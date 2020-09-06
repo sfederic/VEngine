@@ -5,6 +5,7 @@
 #include "Obj.h"
 #include "FBXImporter.h"
 #include "MathHelpers.h"
+#include "IRenderSystem.h"
 
 //CONSTRUCTORS
 Actor::Actor()
@@ -110,7 +111,7 @@ void Actor::Move(float d, XMVECTOR direction)
 }
 
 //ACTOR SYSTEM
-void ActorSystem::CreateActors(RenderSystem* dx, int numActorsToSpawn)
+void ActorSystem::CreateActors(IRenderSystem* renderSystem, int numActorsToSpawn)
 {
 	char filename[128] = {};
 	strcat_s(filename, "Models/");
@@ -121,12 +122,12 @@ void ActorSystem::CreateActors(RenderSystem* dx, int numActorsToSpawn)
 	{
 		UINT byteWidth = modelData.GetByteWidth();
 		numVertices = (byteWidth * actors.size()) / sizeof(Vertex);
-		dx->CreateVertexBuffer(byteWidth, modelData.verts.data(), this);
+		renderSystem->CreateVertexBuffer(byteWidth, modelData.verts.data(), this);
 		UINT indicesByteWidth = modelData.indices.size() * sizeof(uint16_t);
-		indexBuffer = dx->CreateDefaultBuffer(indicesByteWidth, D3D11_BIND_INDEX_BUFFER, modelData.indices.data());
+		indexBuffer = renderSystem->CreateDefaultBuffer(indicesByteWidth, D3D11_BIND_INDEX_BUFFER, modelData.indices.data());
 
-		dx->CreateSamplerState(this);
-		dx->CreateTexture(this);
+		renderSystem->CreateSamplerState(this);
+		renderSystem->CreateTexture(this);
 
 		size_t stride = sizeof(Vertex);
 

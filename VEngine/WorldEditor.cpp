@@ -149,18 +149,18 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 
 	//TODO: this is no good. If the rendering code ever changes it needs to be mirrored here
 	//Render translation widget
-	for (int i = 0; i < axes.size(); i++)
+	/*for (int i = 0; i < axes.size(); i++)
 	{
 		ActorSystem* actorSystem = axes[i];
 
 		//Set rastState
 		if (actorSystem->rastState)
 		{
-			gRenderSystem.context->RSSetState(actorSystem->rastState);
+			gRenderSystem->context->RSSetState(actorSystem->rastState);
 		}
 		else
 		{
-			gRenderSystem.context->RSSetState(gRenderSystem.activeRastState);
+			gRenderSystem->context->RSSetState(gRenderSystem->activeRastState);
 		}
 
 		auto shader = gShaderFactory.shaderMap.find(actorSystem->shaderName);
@@ -170,38 +170,38 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 			DebugPrint("vertex shader file name %ls not found\n", actorSystem->shaderName);
 		}
 
-		gRenderSystem.context->VSSetShader(shader->second->vertexShader, nullptr, 0);
-		gRenderSystem.context->PSSetShader(shader->second->pixelShader, nullptr, 0);
+		gRenderSystem->context->VSSetShader(shader->second->vertexShader, nullptr, 0);
+		gRenderSystem->context->PSSetShader(shader->second->pixelShader, nullptr, 0);
 
-		gRenderSystem.context->PSSetSamplers(0, 1, &actorSystem->samplerState);
-		gRenderSystem.context->PSSetShaderResources(0, 1, &actorSystem->srv);
+		gRenderSystem->context->PSSetSamplers(0, 1, &actorSystem->samplerState);
+		gRenderSystem->context->PSSetShaderResources(0, 1, &actorSystem->srv);
 
 		UINT strides = sizeof(Vertex);
 		UINT offsets = 0;
 
-		gRenderSystem.context->IASetVertexBuffers(0, 1, &actorSystem->vertexBuffer, &strides, &offsets);
-		gRenderSystem.context->IASetIndexBuffer(actorSystem->indexBuffer, DXGI_FORMAT_R16_UINT, 0);
+		gRenderSystem->context->IASetVertexBuffers(0, 1, &actorSystem->vertexBuffer, &strides, &offsets);
+		gRenderSystem->context->IASetIndexBuffer(actorSystem->indexBuffer, DXGI_FORMAT_R16_UINT, 0);
 
 		for (int i = 0; i < actorSystem->actors.size(); i++)
 		{
 			if (actorSystem->actors[i].bRender)
 			{
-				gRenderSystem.matrices.view = GetPlayerCamera()->view;
-				gRenderSystem.matrices.model = actorSystem->actors[i].transform;
-				gRenderSystem.matrices.mvp = gRenderSystem.matrices.model * gRenderSystem.matrices.view * gRenderSystem.matrices.proj;
-				gRenderSystem.context->UpdateSubresource(gRenderSystem.cbMatrices, 0, nullptr, &gRenderSystem.matrices, 0, 0);
-				gRenderSystem.context->VSSetConstantBuffers(0, 1, &gRenderSystem.cbMatrices);
+				gRenderSystem->matrices.view = GetPlayerCamera()->view;
+				gRenderSystem->matrices.model = actorSystem->actors[i].transform;
+				gRenderSystem->matrices.mvp = gRenderSystem->matrices.model * gRenderSystem.matrices.view * gRenderSystem.matrices.proj;
+				gRenderSystem->context->UpdateSubresource(gRenderSystem.cbMatrices, 0, nullptr, &gRenderSystem.matrices, 0, 0);
+				gRenderSystem->context->VSSetConstantBuffers(0, 1, &gRenderSystem.cbMatrices);
 
-				gRenderSystem.context->Draw(actorSystem->modelData.verts.size(), 0);
+				gRenderSystem->context->Draw(actorSystem->modelData.verts.size(), 0);
 				//context->DrawIndexed(actorSystem->modelData.indices.size(), 0, 0);
 			}
 		}
-	}
+	}*/
 }
 
 void WorldEditor::Init()
 {
-	xAxis.modelName = "x_axis.fbx";
+	/*xAxis.modelName = "x_axis.fbx";
 	yAxis.modelName = "y_axis.fbx";
 	zAxis.modelName = "z_axis.fbx";
 
@@ -227,7 +227,7 @@ void WorldEditor::Init()
 
 	axes.push_back(&xAxis);
 	axes.push_back(&yAxis);
-	axes.push_back(&zAxis);
+	axes.push_back(&zAxis);*/
 }
 
 void WorldEditor::MoveActor(Actor* actor, XMVECTOR direction)

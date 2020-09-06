@@ -5,6 +5,7 @@
 #include "Input.h"
 #include "Debug.h"
 #include "UISystem.h"
+#include "RenderSystem.h"
 
 FileSystem gFileSystem;
 
@@ -76,7 +77,7 @@ void FileSystem::ReadAllActorSystems(World* world, const char* filename)
 		switch (newWorld.actorSystems[systemIndex]->id)
 		{
 		case EActorSystemID::Actor:
-			newWorld.actorSystems[systemIndex]->CreateActors(&gRenderSystem, numActorsToSpawn);
+			newWorld.actorSystems[systemIndex]->CreateActors(gRenderSystem, numActorsToSpawn);
 		}
 
 		for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex]->actors.size(); actorIndex++)

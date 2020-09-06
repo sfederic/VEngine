@@ -1,8 +1,8 @@
 <UI version="4.0" >
- <class>QtWidgetsApplication1Class</class>
- <widget class="QMainWindow" name="QtWidgetsApplication1Class" >
+ <class>EditorMainWindowClass</class>
+ <widget class="QMainWindow" name="EditorMainWindowClass" >
   <property name="objectName" >
-   <string notr="true">QtWidgetsApplication1Class</string>
+   <string notr="true">EditorMainWindowClass</string>
   </property>
   <property name="geometry" >
    <rect>
@@ -13,7 +13,7 @@
    </rect>
   </property>
   <property name="windowTitle" >
-   <string>QtWidgetsApplication1</string>
+   <string>EditorMainWindow</string>
   </property>  <widget class="QMenuBar" name="menuBar" />
   <widget class="QToolBar" name="mainToolBar" />
   <widget class="QWidget" name="centralWidget" />
@@ -22,7 +22,7 @@
  <layoutDefault spacing="6" margin="11" />
  <pixmapfunction></pixmapfunction>
  <resources>
-   <include location="QtWidgetsApplication1.qrc"/>
+   <include location="EditorMainWindow.qrc"/>
  </resources>
  <connections/>
 </UI>

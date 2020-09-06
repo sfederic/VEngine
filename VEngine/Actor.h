@@ -5,7 +5,7 @@
 #include <vector>
 #include <memory>
 #include <string>
-#include "RenderSystem.h" //TODO: Get rid of this and move struct Vertex into seperate file
+#include "RenderTypes.h"
 
 using namespace DirectX;
 
@@ -27,9 +27,9 @@ enum class EActorSystemID
 
 struct ModelData
 {
-	UINT GetByteWidth()
+	unsigned int GetByteWidth()
 	{
-		return (UINT)(sizeof(Vertex) * verts.size());
+		return (sizeof(Vertex) * verts.size());
 	}
 
 	std::vector<Vertex> verts;
@@ -77,7 +77,7 @@ class ActorSystem
 public:
 	ActorSystem() {}
 	//virtual void Tick(float deltaTime) = 0;
-	void CreateActors(class RenderSystem* dx, int numActorsToSpawn);
+	void CreateActors(class IRenderSystem* renderSystem, int numActorsToSpawn);
 	Actor* AddActor(XMVECTOR spawnPosition);
 	void RemoveActor(int index);
 	Actor* GetActor(unsigned int index);
@@ -95,7 +95,7 @@ public:
 	BoundingBox boundingBox;
 	BoundingSphere boundingSphere;
 
-	UINT64 numVertices; //Frustrum culling is going to make a mess of this 
+	uint64_t numVertices; //Frustrum culling is going to make a mess of this 
 
 	std::vector<Actor> actors;
 
