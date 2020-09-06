@@ -81,12 +81,12 @@ void Console::ExecuteString()
 	}
 	else if (wcsncmp(consoleString, ExecuteStrings::GPU, wcslen(ExecuteStrings::GPU)) == 0)
 	{
-		_snwprintf_s(item.text, sizeof(item.text), L"%ls", gRenderSystem.adaptersDesc[0].Description);
+		//_snwprintf_s(item.text, sizeof(item.text), L"%ls", gRenderSystem.adaptersDesc[0].Description);
 		viewItems.push_back(item);
 	}
 	else if (wcsncmp(consoleString, ExecuteStrings::D3D_TIME, wcslen(ExecuteStrings::D3D_TIME)) == 0)
 	{
-		_snwprintf_s(item.text, sizeof(item.text), L"D3D11 Render: %f", gRenderSystem.renderTime);
+		//_snwprintf_s(item.text, sizeof(item.text), L"D3D11 Render: %f", gRenderSystem.renderTime);
 		viewItems.push_back(item);
 	}
 	else if (wcsncmp(consoleString, ExecuteStrings::POP, wcslen(ExecuteStrings::POP)) == 0)

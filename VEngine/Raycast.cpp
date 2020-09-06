@@ -21,10 +21,10 @@ void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, class ID3
 	XMVECTOR rayEnd = rayOrigin + dist;
 	XMStoreFloat3(&v2.pos, rayEnd);
 
-	gRenderSystem.debugLines.push_back(v1);
-	gRenderSystem.debugLines.push_back(v2);
+	//gRenderSystem.debugLines.push_back(v1);
+	//gRenderSystem.debugLines.push_back(v2);
 
-	gRenderSystem.context->UpdateSubresource(debugBuffer, 0, nullptr, gRenderSystem.debugLines.data(), 0, 0);
+	//gRenderSystem.context->UpdateSubresource(debugBuffer, 0, nullptr, gRenderSystem.debugLines.data(), 0, 0);
 }
 
 bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSystem)
@@ -124,7 +124,7 @@ bool RaycastTriangleIntersect(Ray& ray)
 	assert(actor);
 
 	XMMATRIX model = actor->transform;
-	XMMATRIX mvp = model * gRenderSystem.matrices.view * gRenderSystem.matrices.proj;
+	XMMATRIX mvp = model * gRenderSystem->matrices.view * gRenderSystem->matrices.proj;
 
 	std::vector<Ray> rays;
 	

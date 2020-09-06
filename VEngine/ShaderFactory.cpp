@@ -7,15 +7,6 @@ ShaderFactory gShaderFactory;
 
 HANDLE hotreloadHandle;
 
-void ShaderFactory::CreateAllShaders(ID3D11Device* device)
-{
-    for (int i = 0; i < shaders.size(); i++)
-    {
-        HR(device->CreateVertexShader(shaders[i].vertexCode->GetBufferPointer(), shaders[i].vertexCode->GetBufferSize(), nullptr, &shaders[i].vertexShader));
-        HR(device->CreatePixelShader(shaders[i].pixelCode->GetBufferPointer(), shaders[i].pixelCode->GetBufferSize(), nullptr, &shaders[i].pixelShader));
-    }
-}
-
 void ShaderFactory::CompileAllShadersFromFile()
 {
     WIN32_FIND_DATAW data;
@@ -110,7 +101,7 @@ void ShaderFactory::HotReloadShaders()
         DebugPrint("Shader reload start...\n");
         CleanUpShaders();
         CompileAllShadersFromFile();
-        CreateAllShaders(gRenderSystem.device);
+        gRenderSystem->CreateAllShaders();
         DebugPrint("Shader reload complete\n");
 
         //g_DebugMenu->notifications.push_back(DebugNotification(L"Shader reload complete."));

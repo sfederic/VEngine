@@ -124,7 +124,7 @@ void ActorSystem::CreateActors(IRenderSystem* renderSystem, int numActorsToSpawn
 		numVertices = (byteWidth * actors.size()) / sizeof(Vertex);
 		renderSystem->CreateVertexBuffer(byteWidth, modelData.verts.data(), this);
 		UINT indicesByteWidth = modelData.indices.size() * sizeof(uint16_t);
-		indexBuffer = renderSystem->CreateDefaultBuffer(indicesByteWidth, D3D11_BIND_INDEX_BUFFER, modelData.indices.data());
+		//indexBuffer = renderSystem->CreateDefaultBuffer(indicesByteWidth, D3D11_BIND_INDEX_BUFFER, modelData.indices.data());
 
 		renderSystem->CreateSamplerState(this);
 		renderSystem->CreateTexture(this);

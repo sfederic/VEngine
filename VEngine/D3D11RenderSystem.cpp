@@ -68,6 +68,28 @@ void D3D11RenderSystem::Init()
 	device->CheckFeatureSupport(D3D11_FEATURE_THREADING, &threadFeature, sizeof(threadFeature));
 }
 
+void D3D11RenderSystem::CreateDefaultBuffer()
+{
+}
+
+void D3D11RenderSystem::CreateVertexShader()
+{
+}
+
+void D3D11RenderSystem::CreatePixelShader()
+{
+}
+
+void D3D11RenderSystem::CreateAllShaders()
+{
+	for (int i = 0; i < gShaderFactory.shaders.size(); i++)
+	{
+		ShaderItem shaders = gShaderFactory.shaders[i];
+		HR(device->CreateVertexShader(shaders.vertexCode->GetBufferPointer(), shaders.vertexCode->GetBufferSize(), nullptr, &shaders.vertexShader));
+		HR(device->CreatePixelShader(shaders.pixelCode->GetBufferPointer(), shaders.pixelCode->GetBufferSize(), nullptr, &shaders.pixelShader));
+	}
+}
+
 void D3D11RenderSystem::CreateDevice()
 {
 	D3D_FEATURE_LEVEL featureLevels[] = { D3D_FEATURE_LEVEL_11_1, D3D_FEATURE_LEVEL_11_0 };
@@ -104,7 +126,7 @@ void D3D11RenderSystem::CreateDevice()
 
 
 	gShaderFactory.CompileAllShadersFromFile();
-	gShaderFactory.CreateAllShaders(device);
+	gRenderSystem->CreateAllShaders();
 	gShaderFactory.InitHotLoading();
 
 	D3D11_QUERY_DESC qd = {};
@@ -215,6 +237,16 @@ void D3D11RenderSystem::CreateRasterizerStates()
 void D3D11RenderSystem::CreateVertexBuffer(UINT size, const void* data, ActorSystem* system)
 {
 	system->vertexBuffer = CreateDefaultBuffer(size, D3D11_BIND_VERTEX_BUFFER, data);
+}
+
+void* D3D11RenderSystem::GetSwapchain()
+{
+	return swapchain;
+}
+
+void D3D11RenderSystem::Present()
+{
+	HR(swapchain->Present(1, 0));
 }
 
 void D3D11RenderSystem::CreateConstantBuffer()
@@ -391,6 +423,8 @@ void D3D11RenderSystem::RenderBounds()
 
 void D3D11RenderSystem::Render(float deltaTime)
 {
+	RenderActorSystem(GetWorld());
+	RenderBounds();
 }
 
 void D3D11RenderSystem::RenderEnd(float deltaTime)

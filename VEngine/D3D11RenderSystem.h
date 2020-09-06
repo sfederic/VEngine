@@ -22,21 +22,26 @@ class D3D11RenderSystem : public IRenderSystem
 {
 public:
 	D3D11RenderSystem();
+
 	virtual void Tick() override;
 	virtual void Init() override;
-	virtual void CreateVertexBuffer() override;
-	virtual void CreateBuffer() override;
-	virtual void CreateSampler() override;
+	virtual void CreateDefaultBuffer() override;
+	virtual void CreateVertexShader();
+	virtual void CreatePixelShader();
+	virtual void CreateAllShaders();
+	virtual void CreateVertexBuffer(UINT size, const void* data, class ActorSystem* actor) override;
+	virtual void* GetSwapchain();
+	virtual void Present();
+
 	void CreateDevice();
 	void CreateSwapchain(HWND windowHandle);
 	void CreateRTVAndDSV();
 	void CreateShaders();
 	void CreateInputLayout();
 	void CreateRasterizerStates();
-	void CreateVertexBuffer(UINT size, const void* data, class ActorSystem* actor);
 	void CreateConstantBuffer();
-	void CreateSamplerState(class ActorSystem* actorSystem);
-	void CreateTexture(class ActorSystem* actorSystem);
+	virtual void CreateSamplerState(class ActorSystem* actorSystem) override;
+	virtual void CreateTexture(class ActorSystem* actorSystem) override;
 
 	virtual void RenderSetup(float deltaTime);
 	void RenderActorSystem(class World* world);
@@ -53,8 +58,6 @@ public:
 	ID3DBlob* CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target);
 	ID3D11Buffer* CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, const void* initData);
 	ID3D11Buffer* CreateDyamicBuffer(UINT byteWidth, UINT bindFlags, const void* initData);
-
-	Matrices matrices;
 
 	static const int frameCount = 2;
 

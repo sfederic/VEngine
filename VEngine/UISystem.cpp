@@ -13,7 +13,9 @@ void UISystem::Init()
 {
 	//Direct2D Init
 	IDXGISurface* surface;
-	gRenderSystem->swapchain->GetBuffer(0, IID_PPV_ARGS(&surface));
+
+	IDXGISwapChain3* swapchain = (IDXGISwapChain3*)gRenderSystem->GetSwapchain();
+	swapchain->GetBuffer(0, IID_PPV_ARGS(&surface));
 
 	D2D1_FACTORY_OPTIONS options;
 	options.debugLevel = D2D1_DEBUG_LEVEL_INFORMATION;

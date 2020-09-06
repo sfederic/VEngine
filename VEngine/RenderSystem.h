@@ -4,7 +4,10 @@
 #include "D3D11RenderSystem.h"
 #include "D3D12RenderSystem.h"
 
-extern D3D11RenderSystem gRenderSystem;
+#define D3D11_RENDERER
+//#define D3D12_RENDERER
+
+extern IRenderSystem* gRenderSystem;
 
 class RenderSystem
 {

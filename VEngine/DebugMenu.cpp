@@ -118,8 +118,8 @@ void DebugMenu::Tick(World* world, float deltaTime)
 		if (gInputSystem.GetKeyUpState(VK_RETURN))
 		{
 			//... On/Off code for various switches
-			gRenderSystem.bQueryGPU = false;
-			gRenderSystem.bQueryGPUInner = false;
+			//gRenderSystem.bQueryGPU = false;
+			//gRenderSystem.bQueryGPUInner = false;
 		}
 
 		float subMenuHeight = (menuItems[menuCursorIndex].subMenuItems.size() * 20.f) + 30.f;
@@ -141,19 +141,19 @@ void DebugMenu::Tick(World* world, float deltaTime)
 			break;
 
 		case EMenuID::RENDERING:
-			gRenderSystem.bQueryGPU = true;
+			//gRenderSystem.bQueryGPU = true;
 
 			wchar_t renderText[64];
-			_snwprintf_s(renderText, sizeof(renderText), L"D3D11 Timer: %f", gRenderSystem.renderTime);
+			//_snwprintf_s(renderText, sizeof(renderText), L"D3D11 Timer: %f", gRenderSystem.renderTime);
 			menuItems[menuCursorIndex].subMenuItems[0] = renderText;
 
 			wchar_t gpuText[64];
-			_snwprintf_s(gpuText, sizeof(gpuText), L"GPU: %ls", gRenderSystem.adaptersDesc[0].Description);
+			//_snwprintf_s(gpuText, sizeof(gpuText), L"GPU: %ls", gRenderSystem.adaptersDesc[0].Description);
 			menuItems[menuCursorIndex].subMenuItems[1] = gpuText;
 			break;
 
 		default:
-			gRenderSystem.bQueryGPU = false;
+			//gRenderSystem.bQueryGPU = false;
 			break;
 		}
 

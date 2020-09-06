@@ -18,3 +18,4 @@ struct Matrices
 	XMMATRIX proj;
 	XMMATRIX mvp;
 };
+

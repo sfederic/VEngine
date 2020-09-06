@@ -48,7 +48,6 @@ struct ShaderItem
 class ShaderFactory
 {
 public:
-	void CreateAllShaders(struct ID3D11Device* device);
 	void CompileAllShadersFromFile();
 	void InitHotLoading();
 	void CleanUpShaders();
