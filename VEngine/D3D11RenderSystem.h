@@ -21,7 +21,7 @@ extern Vertex debugLineData[2];
 class D3D11RenderSystem : public IRenderSystem
 {
 public:
-
+	D3D11RenderSystem();
 	virtual void Tick() override;
 	virtual void Init() override;
 	virtual void CreateVertexBuffer() override;

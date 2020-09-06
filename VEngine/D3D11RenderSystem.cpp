@@ -23,6 +23,11 @@ ActorSystem debugSphere;
 
 Vertex debugLineData[2];
 
+D3D11RenderSystem::D3D11RenderSystem()
+{
+	
+}
+
 void D3D11RenderSystem::Tick()
 {
 	//Set wireframe on/off

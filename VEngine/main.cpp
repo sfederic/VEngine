@@ -431,7 +431,7 @@ void WorldWidget::searchWorldList()
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QtWidgetsApplication1 app;
+    EditorMainWindow app;
     app.setWindowState(Qt::WindowMaximized);
 
     app.show();
