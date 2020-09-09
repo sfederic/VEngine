@@ -25,24 +25,20 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    EditorMainWindow app = EditorMainWindow();
-    app.setWindowState(Qt::WindowMaximized);
+    EditorMainWindow* app = new EditorMainWindow();
+    app->setWindowState(Qt::WindowMaximized);
 
-    app.show();
+    app->show();
 
-    //app.resize(1024, 720);
-    app.setWindowTitle("Testing");
+    app->setWindowTitle("Testing");
 
-    
-    //old main
     FBXImporter::Init();
 
     //gCoreSystem.SetupWindow(GetModuleHandle(NULL), 1);
-    gCoreSystem.windowWidth = app.width();
-    gCoreSystem.windowHeight = w.height();
+    gCoreSystem.windowWidth = app->width();
+    gCoreSystem.windowHeight = app->height();
     gCoreSystem.SetTimerFrequency();
-    //gRenderSystem->Init((HWND)w.winId());
-    gRenderSystem->Init();
+    gRenderSystem->Init((HWND)app->mainWidget.winId());
     gAudioSystem.Init();
     gUISystem.Init();
     gWorldEditor.Init();
@@ -60,9 +56,6 @@ int main(int argc, char *argv[])
     world->actorSystems.push_back(&gWorldEditor.yAxis);
     world->actorSystems.push_back(&gWorldEditor.zAxis);
 
-    worldWidget->Tick();
-
-
     //MAIN LOOP
     while (gCoreSystem.bMainLoop)
     {
@@ -71,7 +64,7 @@ int main(int argc, char *argv[])
         a.processEvents();
 
         //QT ticks testing
-        propWidget->Tick();
+        //propWidget->Tick();
 
         gCoreSystem.StartTimer();
         gCoreSystem.HandleMessages();
@@ -79,7 +72,7 @@ int main(int argc, char *argv[])
         gFileSystem.Tick();
         gUISystem.Tick();
 
-        QPoint p = w.mapFromGlobal(QCursor::pos());
+        QPoint p = app->mainWidget.mapFromGlobal(QCursor::pos());
         gUISystem.mousePos.x = p.x();
         gUISystem.mousePos.y = p.y();
 

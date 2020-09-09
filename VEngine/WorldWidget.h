@@ -4,7 +4,7 @@
 #include <qlineedit.h>
 #include <QListWidget>
 
-class WorldWidget : QWidget
+class WorldWidget : public QWidget
 {
 public:
     void Tick();

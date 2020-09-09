@@ -6,6 +6,7 @@
 #include "FBXImporter.h"
 #include "MathHelpers.h"
 #include "IRenderSystem.h"
+#include "WICTextureLoader.h"
 
 //CONSTRUCTORS
 Actor::Actor()

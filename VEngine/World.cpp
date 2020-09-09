@@ -66,6 +66,7 @@ ActorSystem* World::FindActorSystem(EActorSystemID id)
 	if (actorSystemIt == actorSystemMap.end())
 	{
 		DebugPrint("Actor system not found in GetActorSystem/n");
+		return nullptr;
 	}
 	else
 	{

@@ -10,7 +10,7 @@
 #include "MathHelpers.h"
 #include "World.h"
 #include "Debug.h"
-#include "WICTextureLoader.h"
+#include "WICTextureLoaderD3D11.h"
 #include <string>
 #include "WorldEditor.h"
 #include "D3D11RenderSystem.h"
@@ -50,12 +50,12 @@ void D3D11RenderSystem::Tick()
 	}
 }
 
-void D3D11RenderSystem::Init()
+void D3D11RenderSystem::Init(HWND window)
 {
 	viewport = { 0.f, 0.f, (float)gCoreSystem.windowWidth, (float)gCoreSystem.windowHeight, 0.f, 1.f };
 
 	CreateDevice();
-	CreateSwapchain(GetActiveWindow());
+	CreateSwapchain(window);
 	CreateRTVAndDSV();
 	CreateShaders();
 	CreateInputLayout();
@@ -126,7 +126,7 @@ void D3D11RenderSystem::CreateDevice()
 
 
 	gShaderFactory.CompileAllShadersFromFile();
-	gRenderSystem->CreateAllShaders();
+	//gRenderSystem->CreateAllShaders();
 	gShaderFactory.InitHotLoading();
 
 	D3D11_QUERY_DESC qd = {};
@@ -184,6 +184,7 @@ void D3D11RenderSystem::CreateRTVAndDSV()
 
 	ID3D11Texture2D* depthStencilBuffer;
 	HR(device->CreateTexture2D(&dsDesc, nullptr, &depthStencilBuffer));
+	assert(depthStencilBuffer);
 	HR(device->CreateDepthStencilView(depthStencilBuffer, nullptr, &dsv));
 }
 
@@ -204,6 +205,8 @@ void D3D11RenderSystem::CreateInputLayout()
 		{"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, offsetof(Vertex, uv), D3D11_INPUT_PER_VERTEX_DATA, 0},
 		{"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, normal), D3D11_INPUT_PER_VERTEX_DATA, 0}
 	};
+
+	CreateShaders();
 
 	HR(device->CreateInputLayout(inputDesc, _countof(inputDesc), vertexCode->GetBufferPointer(), vertexCode->GetBufferSize(), &inputLayout));
 	context->IASetInputLayout(inputLayout);
@@ -293,12 +296,11 @@ void D3D11RenderSystem::RenderActorSystem(World* world)
 	{
 		ActorSystem* actorSystem = world->actorSystems[i];
 
-		//NOTE: keep an eye on driver perf here
 		//Set rastState
 		if (actorSystem->rastState)
 		{
 			//TODO: eye on this
-			//context->RSSetState(actorSystem->rastState);
+			context->RSSetState(actorSystem->rastState);
 		}
 		else
 		{
@@ -312,6 +314,8 @@ void D3D11RenderSystem::RenderActorSystem(World* world)
 			DebugPrint("vertex shader file name %ls not found\n", actorSystem->shaderName);
 		}
 
+		assert(shader->second->vertexShader);
+		assert(shader->second->pixelShader);
 		context->VSSetShader(shader->second->vertexShader, nullptr, 0);
 		context->PSSetShader(shader->second->pixelShader, nullptr, 0);
 
@@ -320,7 +324,7 @@ void D3D11RenderSystem::RenderActorSystem(World* world)
 
 		context->IASetVertexBuffers(0, 1, &actorSystem->vertexBuffer, &strides, &offsets);
 		context->IASetIndexBuffer(actorSystem->indexBuffer, DXGI_FORMAT_R16_UINT, 0);
-
+		
 		for (int i = 0; i < actorSystem->actors.size(); i++)
 		{
 			if (actorSystem->actors[i].bRender)
@@ -360,25 +364,25 @@ void D3D11RenderSystem::RenderBounds()
 		{
 			for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex]->actors.size(); actorIndex++)
 			{
-			matrices.view = camera->view;
+				matrices.view = camera->view;
 
-			XMMATRIX boxBoundsMatrix = XMMatrixIdentity();
-			XMVECTOR offset = XMVectorSet(
-				world->actorSystems[systemIndex]->actors[actorIndex].GetPositionFloat3().x + world->actorSystems[systemIndex]->boundingBox.Center.x,
-				world->actorSystems[systemIndex]->actors[actorIndex].GetPositionFloat3().y + world->actorSystems[systemIndex]->boundingBox.Center.y,
-				world->actorSystems[systemIndex]->actors[actorIndex].GetPositionFloat3().z + world->actorSystems[systemIndex]->boundingBox.Center.z,
-				1.0f);
+				XMMATRIX boxBoundsMatrix = XMMatrixIdentity();
+				XMVECTOR offset = XMVectorSet(
+					world->actorSystems[systemIndex]->actors[actorIndex].GetPositionFloat3().x + world->actorSystems[systemIndex]->boundingBox.Center.x,
+					world->actorSystems[systemIndex]->actors[actorIndex].GetPositionFloat3().y + world->actorSystems[systemIndex]->boundingBox.Center.y,
+					world->actorSystems[systemIndex]->actors[actorIndex].GetPositionFloat3().z + world->actorSystems[systemIndex]->boundingBox.Center.z,
+					1.0f);
 
-			boxBoundsMatrix = XMMatrixScalingFromVector(XMLoadFloat3(&world->actorSystems[systemIndex]->boundingBox.Extents));
+				boxBoundsMatrix = XMMatrixScalingFromVector(XMLoadFloat3(&world->actorSystems[systemIndex]->boundingBox.Extents));
 
-			boxBoundsMatrix.r[3] = offset;
+				boxBoundsMatrix.r[3] = offset;
 
-			matrices.model = boxBoundsMatrix;
-			matrices.mvp = matrices.model * matrices.view * matrices.proj;
-			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
-			context->VSSetConstantBuffers(0, 1, &cbMatrices);
+				matrices.model = boxBoundsMatrix;
+				matrices.mvp = matrices.model * matrices.view * matrices.proj;
+				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
+				context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
-			context->Draw((UINT)debugBox.modelData.verts.size(), 0);
+				context->Draw((UINT)debugBox.modelData.verts.size(), 0);
 			}
 		}
 	}

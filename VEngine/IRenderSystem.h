@@ -1,6 +1,7 @@
 #pragma once
 
 #include "RenderTypes.h"
+#include <Windows.h>
 
 class IRenderBuffer
 {
@@ -13,7 +14,7 @@ class IRenderSystem
 {
 public:
 	virtual void Tick() = 0;
-	virtual void Init() = 0;
+	virtual void Init(HWND window) = 0;
 	virtual void RenderSetup(float deltaTime) = 0;
 	virtual void Render(float deltaTime) = 0;
 	virtual void RenderEnd(float deltaTime) = 0;

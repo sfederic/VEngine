@@ -1,4 +1,4 @@
-#include "TransformWidget.h"
+#include "TransformEditWidget.h"
 #include <QDoubleValidator>
 #include <d3d11.h> //TODO: change the FLOAT32_MAX
 

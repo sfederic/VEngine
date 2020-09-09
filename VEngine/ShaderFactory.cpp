@@ -30,7 +30,10 @@ void ShaderFactory::CompileAllShadersFromFile()
 
     FindClose(file);
 
-    UINT flags = D3DCOMPILE_SKIP_OPTIMIZATION | D3DCOMPILE_DEBUG;
+    UINT flags = 0;
+#ifdef _DEBUG
+    flags = D3DCOMPILE_SKIP_OPTIMIZATION | D3DCOMPILE_DEBUG;
+#endif
     ID3DBlob* error;
 
     for (int i = 0; i < shaders.size(); i++)

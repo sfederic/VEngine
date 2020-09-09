@@ -2,6 +2,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_EditorMainWindow.h"
+#include "RenderViewWidget.h"
 
 class EditorMainWindow : public QMainWindow
 {
@@ -9,7 +10,8 @@ class EditorMainWindow : public QMainWindow
 
 public:
     EditorMainWindow(QWidget *parent = Q_NULLPTR);
-
+    MainWidget mainWidget;
+    class PropertiesWidget* propWidget;
 private:
     Ui::EditorMainWindowClass ui;
 };

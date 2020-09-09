@@ -24,7 +24,7 @@ public:
 	D3D11RenderSystem();
 
 	virtual void Tick() override;
-	virtual void Init() override;
+	virtual void Init(HWND window) override;
 	virtual void CreateDefaultBuffer() override;
 	virtual void CreateVertexShader();
 	virtual void CreatePixelShader();

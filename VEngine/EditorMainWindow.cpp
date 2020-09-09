@@ -50,13 +50,12 @@ EditorMainWindow::EditorMainWindow(QWidget *parent)
     WorldWidget* worldWidget = new WorldWidget();
 
     QDockWidget* levelLayoutDock = new QDockWidget("World");
-    //levelLayoutDock->setWidget(worldWidget);
+    levelLayoutDock->setWidget(worldWidget);
     addDockWidget(Qt::LeftDockWidgetArea, levelLayoutDock);
 
     //Properties dock
     QDockWidget* propertiesDock = new QDockWidget("Properties");
     addDockWidget(Qt::RightDockWidgetArea, propertiesDock);
-
 
     //Asset dock
     QListWidget* assetList = new QListWidget();
@@ -106,15 +105,13 @@ EditorMainWindow::EditorMainWindow(QWidget *parent)
     //Console dock
 
     //Central widget
-    MainWidget w;
-    app.setCentralWidget(&w);
-    app.centralWidget()->setFixedSize(QSize(800, 600));
-    QSize size = app.centralWidget()->size();
+    setCentralWidget(&mainWidget);
+    centralWidget()->setFixedSize(QSize(800, 600));
+    QSize size = centralWidget()->size();
     gCoreSystem.windowWidth = size.width();
     gCoreSystem.windowHeight = size.height();
 
     //Properties dock
-    PropertiesWidget* propWidget = new PropertiesWidget();
+    propWidget = new PropertiesWidget();
     propertiesDock->setWidget(propWidget);
-
 }

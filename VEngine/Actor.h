@@ -91,7 +91,7 @@ public:
 
 	struct ID3D11Resource* texture;
 	struct ID3D11ShaderResourceView* srv;
-
+	
 	BoundingBox boundingBox;
 	BoundingSphere boundingSphere;
 
