@@ -4,6 +4,8 @@
 
 #ifdef D3D11_RENDERER
 IRenderSystem* gRenderSystem = new D3D11RenderSystem();
-#elif D3D12_RENDERER
+#endif
+
+#ifdef D3D12_RENDERER
 IRenderSystem* gRenderSystem = new D3D12RenderSystem();
 #endif

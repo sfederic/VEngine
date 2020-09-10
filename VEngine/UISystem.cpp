@@ -11,11 +11,13 @@ UISystem gUISystem;
 
 void UISystem::Init()
 {
+#ifdef D3D11_RENDERER
 	//Direct2D Init
 	IDXGISurface* surface;
 
 	IDXGISwapChain3* swapchain = (IDXGISwapChain3*)gRenderSystem->GetSwapchain();
-	swapchain->GetBuffer(0, IID_PPV_ARGS(&surface));
+	HR(swapchain->GetBuffer(0, IID_PPV_ARGS(&surface)));
+	//swapchain->GetBuffer(0, __uuidof(IDXGISurface), (void**)&surface);
 
 	D2D1_FACTORY_OPTIONS options;
 	options.debugLevel = D2D1_DEBUG_LEVEL_INFORMATION;
@@ -25,6 +27,7 @@ void UISystem::Init()
 		D2D1_RENDER_TARGET_TYPE_DEFAULT,
 		D2D1::PixelFormat(DXGI_FORMAT_UNKNOWN, D2D1_ALPHA_MODE_PREMULTIPLIED));
 
+	assert(surface);
 	HR(d2dFactory->CreateDxgiSurfaceRenderTarget(surface, rtProps, &d2dRenderTarget));
 	surface->Release();
 
@@ -59,6 +62,7 @@ void UISystem::Init()
 
 	toolbar = new Toolbar();
 	uiViews.push_back(toolbar);
+#endif
 }
 
 void UISystem::Cleanup()

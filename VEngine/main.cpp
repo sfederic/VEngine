@@ -48,13 +48,15 @@ int main(int argc, char *argv[])
 
     ActorSystem cubes;
     cubes.modelName = "cube.fbx";
-    cubes.CreateActors(gRenderSystem, 2);
+    cubes.CreateActors(gRenderSystem, 1);
 
     World* world = GetWorld();
     world->actorSystems.push_back(&cubes);
     world->actorSystems.push_back(&gWorldEditor.xAxis);
     world->actorSystems.push_back(&gWorldEditor.yAxis);
     world->actorSystems.push_back(&gWorldEditor.zAxis);
+
+    gRenderSystem->Flush();
 
     //MAIN LOOP
     while (gCoreSystem.bMainLoop)
@@ -108,7 +110,6 @@ int main(int argc, char *argv[])
         }
 
         //PRESENT
-        //HR(gRenderSystem.swapchain->Present(1, 0));
         gRenderSystem->Present();
 
         gInputSystem.InputReset();

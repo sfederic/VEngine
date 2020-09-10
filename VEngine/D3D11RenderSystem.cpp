@@ -57,7 +57,6 @@ void D3D11RenderSystem::Init(HWND window)
 	CreateDevice();
 	CreateSwapchain(window);
 	CreateRTVAndDSV();
-	CreateShaders();
 	CreateInputLayout();
 	CreateRasterizerStates();
 	CreateConstantBuffer();
@@ -126,7 +125,7 @@ void D3D11RenderSystem::CreateDevice()
 
 
 	gShaderFactory.CompileAllShadersFromFile();
-	//gRenderSystem->CreateAllShaders();
+	gRenderSystem->CreateAllShaders();
 	gShaderFactory.InitHotLoading();
 
 	D3D11_QUERY_DESC qd = {};

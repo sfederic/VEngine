@@ -27,6 +27,7 @@ public:
 	virtual void CreateAllShaders() = 0;
 	virtual void* GetSwapchain() = 0;
 	virtual void Present() = 0;
+	virtual void Flush() = 0; //Acting as a stand in for WaitForPreviousFrame()
 
 	Matrices matrices;
 };

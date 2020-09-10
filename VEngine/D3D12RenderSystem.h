@@ -3,12 +3,18 @@
 #pragma comment(lib, "d3d12.lib")
 #pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "d3dcompiler.lib")
+#pragma comment(lib, "dxcompiler.lib")
 
+#include "D3D11RenderSystem.h"
+#include <d2d1_3.h>
+#include <d3d11on12.h>
 #include <d3d12.h>
 #include <d3dcompiler.h>
 #include <dxgi1_6.h>
 #include <wrl.h>
 #include "IRenderSystem.h"
+#include <dxcapi.h>
+#include <dwrite_1.h>
 
 using namespace Microsoft::WRL;
 
@@ -29,8 +35,28 @@ public:
 	virtual void CreateAllShaders() override;
 	virtual void* GetSwapchain() override;
 	virtual void Present() override;
+	virtual void Flush() override;
+
+	void ExecuteCommandLists();
+	void InitD2D();
+	void UpdateConstantBuffer(ID3D12Resource* constBuffer, int byteWidth, void* initData);
+	void WaitForPreviousFrame();
 
 	static const int swapchainCount = 2;
+
+	ID2D1Factory3* d2dFactory;
+	IDWriteFactory1* writeFactory;
+	ID2D1SolidColorBrush* brushText;
+	IDWriteTextFormat* textFormat;
+
+	ID3D11On12Device* d3d11On12Device;
+	ID3D11Device* d3d11Device;
+	ID3D11DeviceContext* d3d11DeviceContext;
+
+	IDXGIDevice* dxgiDevice;
+	ID2D1Device2* d2dDevice;
+	ID2D1DeviceContext1* d2dDeviceContext;
+	ID2D1Bitmap1* d2dRenderTargets[swapchainCount];
 
 	IDXGIFactory1* factory;
 	ID3D12Device* device;
@@ -46,14 +72,16 @@ public:
 	ID3D12PipelineState* pipelineState;
 	ID3D12Fence* fence;
 
-	//IDxcCompiler* dxcCompiler;
-	//IDxcLibrary* dxcLibrary;
+	ID3D11Resource* wrappedBackBuffers[swapchainCount];
 
-	ID3DBlob* vertexCode;
-	ID3DBlob* pixelCode;
+	IDxcCompiler* dxcCompiler;
+	IDxcLibrary* dxcLibrary;
 
-	//IDxcBlob* vertexCode;
-	//IDxcBlob* pixelCode;
+	//ID3DBlob* vertexCode;
+	//ID3DBlob* pixelCode;
+
+	IDxcBlob* vertexCode;
+	IDxcBlob* pixelCode;
 
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle;
 	D3D12_VERTEX_BUFFER_VIEW vertexBufferView;
@@ -74,3 +102,16 @@ public:
 	UINT cbHeapSize;
 };
 
+class ResourceBarrier
+{
+public:
+	static D3D12_RESOURCE_BARRIER Transition(ID3D12Resource* resource,
+		D3D12_RESOURCE_STATES stateBefore, D3D12_RESOURCE_STATES stateAfter)
+	{
+		D3D12_RESOURCE_BARRIER barrier = {};
+		barrier.Transition.pResource = resource;
+		barrier.Transition.StateBefore = stateBefore;
+		barrier.Transition.StateAfter = stateAfter;
+		return barrier;
+	}
+};
