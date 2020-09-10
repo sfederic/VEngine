@@ -25,11 +25,30 @@ enum class EShaderID
 
 struct ShaderItem
 {
-	ShaderItem() {}
+	ShaderItem() 
+	{
+		vertexCode = nullptr;
+		pixelCode = nullptr;
+
+		vertexShader = nullptr;
+		pixelShader = nullptr;
+
+		srv = nullptr;
+		texture = nullptr;
+	}
 	ShaderItem(const wchar_t* filenameInit, EShaderType typeInit)
 	{
 		wcscpy_s(filename, 64 * 2, filenameInit);
 		type = typeInit;
+
+		vertexCode = nullptr;
+		pixelCode = nullptr;
+
+		vertexShader = nullptr;
+		pixelShader = nullptr;
+
+		srv = nullptr;
+		texture = nullptr;
 	}
 
 	wchar_t filename[64];

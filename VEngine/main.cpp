@@ -8,9 +8,7 @@
 #include "AudioSystem.h"
 #include "Input.h"
 #include "Actor.h"
-#include <thread>
 #include "ShaderFactory.h"
-#include <omp.h>
 #include "DebugMenu.h"
 #include "Raycast.h"
 #include "World.h"
@@ -24,21 +22,19 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    EditorMainWindow* app = new EditorMainWindow();
-    app->setWindowState(Qt::WindowMaximized);
-
-    app->show();
-
-    app->setWindowTitle("Testing");
+    //Qt setup
+    QApplication qApplication(argc, argv);
+    EditorMainWindow* editorMainWindow = new EditorMainWindow();
+    editorMainWindow->setWindowState(Qt::WindowMaximized);
+    editorMainWindow->show();
+    editorMainWindow->setWindowTitle("Engine");
 
     FBXImporter::Init();
 
-    //gCoreSystem.SetupWindow(GetModuleHandle(NULL), 1);
-    gCoreSystem.windowWidth = app->width();
-    gCoreSystem.windowHeight = app->height();
+    gCoreSystem.windowWidth = editorMainWindow->width();
+    gCoreSystem.windowHeight = editorMainWindow->height();
     gCoreSystem.SetTimerFrequency();
-    gRenderSystem->Init((HWND)app->mainWidget.winId());
+    gRenderSystem->Init((HWND)editorMainWindow->mainWidget.winId());
     gAudioSystem.Init();
     gUISystem.Init();
     gWorldEditor.Init();
@@ -63,7 +59,7 @@ int main(int argc, char *argv[])
     {
         const float deltaTime = gCoreSystem.deltaTime;
 
-        a.processEvents();
+        qApplication.processEvents();
 
         //QT ticks testing
         //propWidget->Tick();
@@ -74,7 +70,7 @@ int main(int argc, char *argv[])
         gFileSystem.Tick();
         gUISystem.Tick();
 
-        QPoint p = app->mainWidget.mapFromGlobal(QCursor::pos());
+        QPoint p = editorMainWindow->mainWidget.mapFromGlobal(QCursor::pos());
         gUISystem.mousePos.x = p.x();
         gUISystem.mousePos.y = p.y();
 
@@ -96,8 +92,6 @@ int main(int argc, char *argv[])
         gRenderSystem->Render(deltaTime);
         gRenderSystem->RenderEnd(deltaTime);
 
-        
-
         //UI RENDERING
         if (gUISystem.bAllUIActive)
         {
@@ -113,7 +107,6 @@ int main(int argc, char *argv[])
         gRenderSystem->Present();
 
         gInputSystem.InputReset();
-
         gCoreSystem.EndTimer();
     }
 

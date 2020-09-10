@@ -34,7 +34,6 @@ void ShaderFactory::CompileAllShadersFromFile()
 #ifdef _DEBUG
     flags = D3DCOMPILE_SKIP_OPTIMIZATION | D3DCOMPILE_DEBUG;
 #endif
-    ID3DBlob* error;
 
     for (int i = 0; i < shaders.size(); i++)
     {
@@ -47,21 +46,22 @@ void ShaderFactory::CompileAllShadersFromFile()
         wcscat_s(directory, L"Shaders/");
         wcscat_s(directory, shaders[i].filename);
 
-        HRESULT hr = D3DCompileFromFile(directory, nullptr, nullptr, vsEntry, vsTarget, flags, 0, &shaders[i].vertexCode, &error);
-        if (error && (hr != S_OK))
+        ID3DBlob* vertexError;
+        HRESULT hr = D3DCompileFromFile(directory, nullptr, nullptr, vsEntry, vsTarget, flags, 0, &shaders[i].vertexCode, &vertexError);
+        if (vertexError && (hr != S_OK))
         {
-            const char* errMsg = (char*)error->GetBufferPointer();
+            const char* errMsg = (char*)vertexError->GetBufferPointer();
             OutputDebugString(errMsg);
             MessageBox(0, errMsg, vsEntry, 0);
-            error = nullptr;
         }
 
         const char* psEntry = "PSMain";
         const char* psTarget = "ps_5_0";
-        HR(D3DCompileFromFile(directory, nullptr, nullptr, psEntry, psTarget, flags, 0, &shaders[i].pixelCode, &error));
-        if (error)
+        ID3DBlob* pixelError;
+        HR(D3DCompileFromFile(directory, nullptr, nullptr, psEntry, psTarget, flags, 0, &shaders[i].pixelCode, &pixelError));
+        if (pixelError)
         {
-            const char* errMsg = (char*)error->GetBufferPointer();
+            const char* errMsg = (char*)pixelError->GetBufferPointer();
             OutputDebugString(errMsg);
             MessageBox(0, errMsg, psEntry, 0);
         }

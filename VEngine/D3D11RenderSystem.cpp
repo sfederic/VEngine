@@ -65,6 +65,7 @@ void D3D11RenderSystem::Init(HWND window)
 	//TODO: Think about putting this into te debug menu
 	D3D11_FEATURE_DATA_THREADING threadFeature = {};
 	device->CheckFeatureSupport(D3D11_FEATURE_THREADING, &threadFeature, sizeof(threadFeature));
+	return;
 }
 
 void D3D11RenderSystem::CreateDefaultBuffer()
@@ -83,9 +84,17 @@ void D3D11RenderSystem::CreateAllShaders()
 {
 	for (int i = 0; i < gShaderFactory.shaders.size(); i++)
 	{
-		ShaderItem shaders = gShaderFactory.shaders[i];
-		HR(device->CreateVertexShader(shaders.vertexCode->GetBufferPointer(), shaders.vertexCode->GetBufferSize(), nullptr, &shaders.vertexShader));
-		HR(device->CreatePixelShader(shaders.pixelCode->GetBufferPointer(), shaders.pixelCode->GetBufferSize(), nullptr, &shaders.pixelShader));
+		HR(device->CreateVertexShader(
+			gShaderFactory.shaders[i].vertexCode->GetBufferPointer(), 
+			gShaderFactory.shaders[i].vertexCode->GetBufferSize(), 
+			nullptr, 
+			&gShaderFactory.shaders[i].vertexShader));
+
+		HR(device->CreatePixelShader(
+			gShaderFactory.shaders[i].pixelCode->GetBufferPointer(),
+			gShaderFactory.shaders[i].pixelCode->GetBufferSize(),
+			nullptr, 
+			&gShaderFactory.shaders[i].pixelShader));
 	}
 }
 
@@ -102,7 +111,7 @@ void D3D11RenderSystem::CreateDevice()
 	//https://github.com/walbourn/directx-vs-templates/blob/master/d3d11game_win32_dr/DeviceResources.cpp
 
 	IDXGIAdapter1* adapter;
-	for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)
+	for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_MINIMUM_POWER, IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)
 	{
 		adapters.push_back(adapter);
 		DXGI_ADAPTER_DESC1 desc = {};
@@ -122,7 +131,6 @@ void D3D11RenderSystem::CreateDevice()
 
 	debugLineData[0].pos = XMFLOAT3(0.f, 0.f, 0.f);
 	debugLineData[1].pos = XMFLOAT3(0.f, 0.f, 100.f);
-
 
 	gShaderFactory.CompileAllShadersFromFile();
 	gRenderSystem->CreateAllShaders();
@@ -251,6 +259,11 @@ void D3D11RenderSystem::Present()
 	HR(swapchain->Present(1, 0));
 }
 
+void D3D11RenderSystem::Flush()
+{
+	//Empty
+}
+
 void D3D11RenderSystem::CreateConstantBuffer()
 {
 	matrices.model = XMMatrixIdentity();
@@ -322,7 +335,7 @@ void D3D11RenderSystem::RenderActorSystem(World* world)
 		context->PSSetShaderResources(0, 1, &actorSystem->srv);
 
 		context->IASetVertexBuffers(0, 1, &actorSystem->vertexBuffer, &strides, &offsets);
-		context->IASetIndexBuffer(actorSystem->indexBuffer, DXGI_FORMAT_R16_UINT, 0);
+		//context->IASetIndexBuffer(actorSystem->indexBuffer, DXGI_FORMAT_R16_UINT, 0);
 		
 		for (int i = 0; i < actorSystem->actors.size(); i++)
 		{

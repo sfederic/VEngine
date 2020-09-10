@@ -32,6 +32,7 @@ public:
 	virtual void CreateVertexBuffer(UINT size, const void* data, class ActorSystem* actor) override;
 	virtual void* GetSwapchain();
 	virtual void Present();
+	virtual void Flush();
 
 	void CreateDevice();
 	void CreateSwapchain(HWND windowHandle);
