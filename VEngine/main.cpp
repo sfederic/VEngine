@@ -31,8 +31,8 @@ int main(int argc, char *argv[])
 
     FBXImporter::Init();
 
-    gCoreSystem.windowWidth = editorMainWindow->width();
-    gCoreSystem.windowHeight = editorMainWindow->height();
+    gCoreSystem.windowWidth = editorMainWindow->mainWidget.width();
+    gCoreSystem.windowHeight = editorMainWindow->mainWidget.height();
     gCoreSystem.SetTimerFrequency();
     gRenderSystem->Init((HWND)editorMainWindow->mainWidget.winId());
     gAudioSystem.Init();
@@ -102,6 +102,8 @@ int main(int argc, char *argv[])
             gUISystem.RenderAllUIViews();
             gUISystem.d2dRenderTarget->EndDraw();
         }
+
+        gRenderSystem->Flush();
 
         //PRESENT
         gRenderSystem->Present();

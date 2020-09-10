@@ -197,6 +197,8 @@ void D3D12RenderSystem::Flush()
 
 void D3D12RenderSystem::ExecuteCommandLists()
 {
+	HR(cmdList->Close());
+
 	ID3D12CommandList* cmdLists[] = { cmdList };
 	cmdQueue->ExecuteCommandLists(_countof(cmdLists), cmdLists);
 }

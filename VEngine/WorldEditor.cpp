@@ -201,7 +201,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 
 void WorldEditor::Init()
 {
-	/*xAxis.modelName = "x_axis.fbx";
+	xAxis.modelName = "x_axis.fbx";
 	yAxis.modelName = "y_axis.fbx";
 	zAxis.modelName = "z_axis.fbx";
 
@@ -209,13 +209,13 @@ void WorldEditor::Init()
 	yAxis.shaderName = L"depthDrawBlue.hlsl";
 	zAxis.shaderName = L"depthDrawGreen.hlsl";
 
-	xAxis.CreateActors(&gRenderSystem, 1);
-	yAxis.CreateActors(&gRenderSystem, 1);
-	zAxis.CreateActors(&gRenderSystem, 1);
+	xAxis.CreateActors(gRenderSystem, 1);
+	yAxis.CreateActors(gRenderSystem, 1);
+	zAxis.CreateActors(gRenderSystem, 1);
 
-	xAxis.rastState = gRenderSystem.rastStateNoBackCull;
-	yAxis.rastState = gRenderSystem.rastStateNoBackCull;
-	zAxis.rastState = gRenderSystem.rastStateNoBackCull;
+	//xAxis.rastState = gRenderSystem->rastStateNoBackCull;
+	//yAxis.rastState = gRenderSystem.rastStateNoBackCull;
+	//zAxis.rastState = gRenderSystem.rastStateNoBackCull;
 
 	xAxis.actors[0].bRender = false;
 	yAxis.actors[0].bRender = false;
@@ -227,7 +227,7 @@ void WorldEditor::Init()
 
 	axes.push_back(&xAxis);
 	axes.push_back(&yAxis);
-	axes.push_back(&zAxis);*/
+	axes.push_back(&zAxis);
 }
 
 void WorldEditor::MoveActor(Actor* actor, XMVECTOR direction)
