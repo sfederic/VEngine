@@ -48,7 +48,7 @@ void PropertiesWidget::SetActorScaleX()
     if (picked && scaleEditX)
     {
         XMFLOAT3 scale = picked->GetScale();
-        scale.x = posEditX->text().toFloat();
+        scale.x = scaleEditX->text().toFloat();
         gWorldEditor.pickedActor->SetScale(scale);
     }
 }
@@ -59,7 +59,7 @@ void PropertiesWidget::SetActorScaleY()
     if (picked && scaleEditY)
     {
         XMFLOAT3 scale = picked->GetScale();
-        scale.y = posEditY->text().toFloat();
+        scale.y = scaleEditY->text().toFloat();
         gWorldEditor.pickedActor->SetScale(scale);
     }
 }
@@ -70,21 +70,42 @@ void PropertiesWidget::SetActorScaleZ()
     if (picked && scaleEditZ)
     {
         XMFLOAT3 scale = picked->GetScale();
-        scale.z = posEditZ->text().toFloat();
+        scale.z = scaleEditZ->text().toFloat();
         gWorldEditor.pickedActor->SetScale(scale);
     }
 }
 
 void PropertiesWidget::SetActorRotationX()
 {
+    Actor* picked = gWorldEditor.pickedActor;
+    if (picked && rotEditX)
+    {
+        XMFLOAT3 rot = picked->GetRollPitchYaw();
+        rot.x = rotEditX->text().toFloat();
+        gWorldEditor.pickedActor->SetRotation(rot);
+    }
 }
 
 void PropertiesWidget::SetActorRotationY()
 {
+    Actor* picked = gWorldEditor.pickedActor;
+    if (picked && rotEditY)
+    {
+        XMFLOAT3 rot = picked->GetRollPitchYaw();
+        rot.y = rotEditY->text().toFloat();
+        gWorldEditor.pickedActor->SetRotation(rot);
+    }
 }
 
 void PropertiesWidget::SetActorRotationZ()
 {
+    Actor* picked = gWorldEditor.pickedActor;
+    if (picked && rotEditZ)
+    {
+        XMFLOAT3 rot = picked->GetRollPitchYaw();
+        rot.z = rotEditZ->text().toFloat();
+        gWorldEditor.pickedActor->SetRotation(rot);
+    }
 }
 
 PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
@@ -110,8 +131,11 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
 
     //Rotation
     rotEditX = new TransformEditWidget(0.0f, this);
+    connect(rotEditX, &QLineEdit::returnPressed, this, &PropertiesWidget::SetActorRotationX);
     rotEditY = new TransformEditWidget(0.0f, this);
+    connect(rotEditY, &QLineEdit::returnPressed, this, &PropertiesWidget::SetActorRotationY);
     rotEditZ = new TransformEditWidget(0.0f, this);
+    connect(rotEditZ, &QLineEdit::returnPressed, this, &PropertiesWidget::SetActorRotationZ);
 
     QLabel* rotLabel = new QLabel("Rotation");
 

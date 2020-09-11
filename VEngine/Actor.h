@@ -49,6 +49,7 @@ public:
 	void SetPosition(XMFLOAT3 pos);
 	void SetRotation(XMVECTOR axis, float angle);
 	void SetRotation(float roll, float pitch, float yaw);
+	void SetRotation(XMFLOAT3 rollPitchYaw);
 	XMMATRIX GetRotation();
 	XMFLOAT3 GetRollPitchYaw();
 	XMFLOAT3 GetScale();

@@ -3,6 +3,7 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_EditorMainWindow.h"
 #include "RenderViewWidget.h"
+#include "PropertiesWidget.h"
 
 class EditorMainWindow : public QMainWindow
 {
@@ -11,7 +12,8 @@ class EditorMainWindow : public QMainWindow
 public:
     EditorMainWindow(QWidget *parent = Q_NULLPTR);
     MainWidget mainWidget;
-    class PropertiesWidget* propWidget;
+    PropertiesWidget* propWidget;
 private:
     Ui::EditorMainWindowClass ui;
 };
+

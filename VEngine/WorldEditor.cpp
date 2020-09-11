@@ -6,10 +6,11 @@
 #include "CoreSystem.h"
 #include "ShaderFactory.h"
 #include "MathHelpers.h"
+#include "EditorMainWindow.h"
 
 WorldEditor gWorldEditor;
 
-void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
+void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer, EditorMainWindow* editorMainWindow)
 {
 	if (gUISystem.bUIClicked)
 	{
@@ -127,6 +128,24 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 
 			actorIndex = screenPickRay.actorIndex;
 			actorSystemIndex = screenPickRay.actorSystemIndex;
+
+			//Set properties widget info
+			{
+				XMFLOAT3 pos = pickedActor->GetPositionFloat3();
+				editorMainWindow->propWidget->posEditX->setText(QString::number(pos.x));
+				editorMainWindow->propWidget->posEditY->setText(QString::number(pos.y));
+				editorMainWindow->propWidget->posEditZ->setText(QString::number(pos.z));
+
+				XMFLOAT3 scale = pickedActor->GetScale();
+				editorMainWindow->propWidget->scaleEditX->setText(QString::number(scale.x));
+				editorMainWindow->propWidget->scaleEditY->setText(QString::number(scale.y));
+				editorMainWindow->propWidget->scaleEditZ->setText(QString::number(scale.z));
+
+				XMFLOAT3 rot = pickedActor->GetRollPitchYaw();
+				editorMainWindow->propWidget->rotEditX->setText(QString::number(rot.x));
+				editorMainWindow->propWidget->rotEditY->setText(QString::number(rot.y));
+				editorMainWindow->propWidget->rotEditZ->setText(QString::number(rot.z));
+			}
 
 			if (pickedActor)
 			{

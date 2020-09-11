@@ -312,7 +312,7 @@ void D3D11RenderSystem::RenderActorSystem(World* world)
 		if (actorSystem->rastState)
 		{
 			//TODO: eye on this
-			context->RSSetState(actorSystem->rastState);
+			//context->RSSetState(actorSystem->rastState);
 		}
 		else
 		{

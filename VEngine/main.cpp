@@ -31,8 +31,6 @@ int main(int argc, char *argv[])
 
     FBXImporter::Init();
 
-    gCoreSystem.windowWidth = editorMainWindow->mainWidget.width();
-    gCoreSystem.windowHeight = editorMainWindow->mainWidget.height();
     gCoreSystem.SetTimerFrequency();
     gRenderSystem->Init((HWND)editorMainWindow->mainWidget.winId());
     gAudioSystem.Init();
@@ -87,13 +85,13 @@ int main(int argc, char *argv[])
         gRenderSystem->Tick();
         gRenderSystem->RenderSetup(deltaTime);
 
-        gWorldEditor.Tick(nullptr);
+        gWorldEditor.Tick(nullptr, editorMainWindow);
 
         gRenderSystem->Render(deltaTime);
         gRenderSystem->RenderEnd(deltaTime);
 
         //UI RENDERING
-        if (gUISystem.bAllUIActive)
+        /*if (gUISystem.bAllUIActive)
         {
             gUISystem.d2dRenderTarget->BeginDraw();
             gConsole.Tick();
@@ -101,7 +99,7 @@ int main(int argc, char *argv[])
             //debugMenu.Tick(GetWorld(), deltaTime);
             gUISystem.RenderAllUIViews();
             gUISystem.d2dRenderTarget->EndDraw();
-        }
+        }*/
 
         gRenderSystem->Flush();
 

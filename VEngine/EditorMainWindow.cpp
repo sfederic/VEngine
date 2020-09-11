@@ -75,7 +75,7 @@ EditorMainWindow::EditorMainWindow(QWidget *parent)
     assetList->addItem("Thing 5");
 
     QListWidget* assetIcons = new QListWidget();
-    QPixmap iconImage = QPixmap("test.png");
+    QPixmap iconImage = QPixmap("Editor/Icons/test.png");
     QIcon icon = QIcon(iconImage);
     QListWidgetItem* iconItem = new QListWidgetItem(icon, "testIcon");
 
@@ -102,11 +102,11 @@ EditorMainWindow::EditorMainWindow(QWidget *parent)
     QFileSystemModel* fileModel = new QFileSystemModel();
     fileModel->setRootPath(QDir::currentPath());
 
-    //Console dock
+    //TODO: Console dock (tab it within asset/prefab window)
 
     //Central widget
     setCentralWidget(&mainWidget);
-    centralWidget()->setFixedSize(QSize(800, 600));
+    centralWidget()->setFixedSize(QSize(1000, 600));
     QSize size = centralWidget()->size();
     gCoreSystem.windowWidth = size.width();
     gCoreSystem.windowHeight = size.height();

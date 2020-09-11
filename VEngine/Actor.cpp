@@ -50,7 +50,12 @@ void Actor::SetRotation(XMVECTOR axis, float angle)
 
 void Actor::SetRotation(float roll, float pitch, float yaw)
 {
-	XMMatrixRotationRollPitchYaw(pitch, yaw, roll);
+	transform *= XMMatrixRotationRollPitchYaw(pitch, yaw, roll);
+}
+
+void Actor::SetRotation(XMFLOAT3 rollPitchYaw)
+{
+	transform *= XMMatrixRotationRollPitchYaw(rollPitchYaw.x, rollPitchYaw.y, rollPitchYaw.z);
 }
 
 XMMATRIX Actor::GetRotation()

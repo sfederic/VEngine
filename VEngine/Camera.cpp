@@ -39,31 +39,34 @@ void Camera::Tick(float deltaTime)
 	//WASD MOVEMENT
 	if (!gConsole.bConsoleActive && !gUISystem.bEditUIActive)
 	{
-		const float moveSpeed = 7.5f * deltaTime;
+		if (gInputSystem.GetAsyncKey(VK_RBUTTON))
+		{
+			const float moveSpeed = 7.5f * deltaTime;
 
-		if (GetAsyncKeyState('W'))
-		{
-			Move(moveSpeed, forward);
-		}
-		if (GetAsyncKeyState('S'))
-		{
-			Move(-moveSpeed, forward);
-		}
-		if (GetAsyncKeyState('D'))
-		{
-			Move(moveSpeed, right);
-		}
-		if (GetAsyncKeyState('A'))
-		{
-			Move(-moveSpeed, right);
-		}
-		if (GetAsyncKeyState('Q'))
-		{
-			Move(-moveSpeed, up);
-		}
-		if (GetAsyncKeyState('E'))
-		{
-			Move(moveSpeed, up);
+			if (GetAsyncKeyState('W'))
+			{
+				Move(moveSpeed, forward);
+			}
+			if (GetAsyncKeyState('S'))
+			{
+				Move(-moveSpeed, forward);
+			}
+			if (GetAsyncKeyState('D'))
+			{
+				Move(moveSpeed, right);
+			}
+			if (GetAsyncKeyState('A'))
+			{
+				Move(-moveSpeed, right);
+			}
+			if (GetAsyncKeyState('Q'))
+			{
+				Move(-moveSpeed, up);
+			}
+			if (GetAsyncKeyState('E'))
+			{
+				Move(moveSpeed, up);
+			}
 		}
 
 		//Zoom onto selected actor
