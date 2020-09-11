@@ -59,9 +59,6 @@ int main(int argc, char *argv[])
 
         qApplication.processEvents();
 
-        //QT ticks testing
-        //propWidget->Tick();
-
         gCoreSystem.StartTimer();
         gCoreSystem.HandleMessages();
 
@@ -81,7 +78,6 @@ int main(int argc, char *argv[])
             gRenderSystem->matrices.proj = XMMatrixOrthographicOffCenterLH(-5.f, 5.f, -5.f, 5.f, -50.f, 1000.f);
         }
 
-        //ACTOR RENDERING
         gRenderSystem->Tick();
         gRenderSystem->RenderSetup(deltaTime);
 

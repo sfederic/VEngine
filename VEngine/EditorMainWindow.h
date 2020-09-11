@@ -4,6 +4,7 @@
 #include "ui_EditorMainWindow.h"
 #include "RenderViewWidget.h"
 #include "PropertiesWidget.h"
+#include "CoreSystem.h"
 
 class EditorMainWindow : public QMainWindow
 {
@@ -13,6 +14,14 @@ public:
     EditorMainWindow(QWidget *parent = Q_NULLPTR);
     MainWidget mainWidget;
     PropertiesWidget* propWidget;
+
+	void closeEvent(QCloseEvent* event) override
+	{
+		gCoreSystem.bMainLoop = false;
+	}
+
+	bool nativeEvent(const QByteArray& eventType, void* message, long* result) override;
+
 private:
     Ui::EditorMainWindowClass ui;
 };
