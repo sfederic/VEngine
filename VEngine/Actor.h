@@ -53,6 +53,9 @@ public:
 	XMMATRIX GetRotation();
 	XMFLOAT3 GetRollPitchYaw();
 	XMFLOAT3 GetScale();
+	void AddScale(float scale);
+	void AddScale(float x, float y, float z);
+	void AddScale(XMFLOAT3 scale);
 	void SetScale(float x, float y, float z);
 	void SetScale(XMVECTOR scale);
 	void SetScale(XMFLOAT3 scale);

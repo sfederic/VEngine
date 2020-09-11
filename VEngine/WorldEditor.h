@@ -31,12 +31,18 @@ public:
 	float lastMousePosY;
 
 	float moveIncrement = 2.f;
+	float rotateSpeed = 0.f;
+	float scaleSpeed = 1.f;
 
 	//For picking
 	int actorIndex;
 	int actorSystemIndex;
 
 	bool bMoveActorsInIncrements = false;
+
+	bool bRotateActors = false;
+	bool bTranslateActors = false;
+	bool bScaleActors = false;
 };
 
 extern WorldEditor gWorldEditor;

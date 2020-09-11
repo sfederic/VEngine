@@ -22,6 +22,8 @@ public:
 
 	bool nativeEvent(const QByteArray& eventType, void* message, long* result) override;
 
+	void AssetItemClicked(class QListWidgetItem* listWidgetItem);
+
 private:
     Ui::EditorMainWindowClass ui;
 };

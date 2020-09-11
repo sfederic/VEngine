@@ -58,21 +58,15 @@ EditorMainWindow::EditorMainWindow(QWidget *parent)
     addDockWidget(Qt::RightDockWidgetArea, propertiesDock);
 
     //Asset dock
+    QDirIterator assetDirectory(QDir::currentPath(), QDir::Dirs);
+
     QListWidget* assetList = new QListWidget();
-    assetList->addItem("Thing 1");
-    assetList->addItem("Thing 2");
-    assetList->addItem("Thing 3");
-    assetList->addItem("Thing 4");
-    assetList->addItem("Thing 5");
-    assetList->addItem("Thing 5");
-    assetList->addItem("Thing 5");
-    assetList->addItem("Thing 5");
-    assetList->addItem("Thing 5");
-    assetList->addItem("Thing 5");
-    assetList->addItem("Thing 5");
-    assetList->addItem("Thing 5");
-    assetList->addItem("Thing 5");
-    assetList->addItem("Thing 5");
+    while (assetDirectory.hasNext())
+    {
+        assetList->addItem(assetDirectory.next());
+    }
+
+    connect(assetList, &QListWidget::itemClicked, this, &EditorMainWindow::AssetItemClicked);
 
     QListWidget* assetIcons = new QListWidget();
     QPixmap iconImage = QPixmap("Editor/Icons/test.png");
@@ -169,4 +163,10 @@ bool EditorMainWindow::nativeEvent(const QByteArray& eventType, void* message, l
     }
 
     return false;
+}
+
+void EditorMainWindow::AssetItemClicked(QListWidgetItem* listWidgetItem)
+{
+    //TODO: set text into asset icon list etc.
+     //listWidgetItem->text()
 }

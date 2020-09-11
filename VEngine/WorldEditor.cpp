@@ -21,6 +21,99 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer, EditorMainWindow* editorM
 
 	if (pickedActor)
 	{
+		//Transform gizmo on button presses (i.e using arrows for rotation etc.)
+
+		//ROTATION
+		if (gInputSystem.GetKeyUpState('R'))
+		{
+			bRotateActors = !bRotateActors;
+			bTranslateActors = false;
+			bScaleActors = false;
+		}
+
+		if (bRotateActors)
+		{
+			if (gInputSystem.GetAsyncKey(VK_RIGHT))
+			{
+				rotateSpeed += 1.0f * gCoreSystem.deltaTime;
+				pickedActor->SetRotation(XMVectorUp(), rotateSpeed);
+			}
+			else
+			{
+				rotateSpeed = 0.f;
+			}
+		}
+
+		//SCALE
+		if (gInputSystem.GetKeyUpState('E'))
+		{
+			bScaleActors = ! bScaleActors;
+			bRotateActors = false;
+			bTranslateActors = false;
+		}
+
+		if (bScaleActors)
+		{
+			const float deltaTime = gCoreSystem.deltaTime;
+
+			if (gInputSystem.GetAsyncKey(VK_UP))
+			{
+				XMFLOAT3 scale = pickedActor->GetScale();
+				scale.x += scaleSpeed * deltaTime;
+				scale.y += scaleSpeed * deltaTime;
+				scale.z += scaleSpeed * deltaTime;
+				pickedActor->SetScale(scale);
+			}
+			else if (gInputSystem.GetAsyncKey(VK_DOWN))
+			{
+				XMFLOAT3 scale = pickedActor->GetScale();
+				scale.x -= scaleSpeed * deltaTime;
+				scale.y -= scaleSpeed * deltaTime;
+				scale.z -= scaleSpeed * deltaTime;
+				pickedActor->SetScale(scale);
+			}
+		}
+
+		//TRANSLATION
+		//TODO: why is 'W' returning true regardless of what is down?
+		/*if (gInputSystem.GetKeyUpState('W'));
+		{
+			bTranslateActors = !bTranslateActors;
+			bScaleActors = false;
+			bRotateActors = false;
+		}*/
+
+		if (bTranslateActors)
+		{
+			if (gInputSystem.GetAsyncKey(VK_CONTROL))
+			{
+				if (gInputSystem.GetKeyDownState(VK_UP))
+				{
+					pickedActor->Move(moveIncrement, XMVectorUp());
+				}
+				else if (gInputSystem.GetKeyDownState(VK_DOWN))
+				{
+					pickedActor->Move(-moveIncrement, XMVectorUp());
+				}
+			}
+			else if (gInputSystem.GetKeyDownState(VK_UP))
+			{
+				pickedActor->Move(moveIncrement, XMVectorForward());
+			}
+			else if (gInputSystem.GetKeyDownState(VK_DOWN))
+			{
+				pickedActor->Move(-moveIncrement, XMVectorForward());
+			}
+			else if (gInputSystem.GetKeyDownState(VK_LEFT))
+			{
+				pickedActor->Move(-moveIncrement, XMVectorRight());
+			}
+			else if (gInputSystem.GetKeyDownState(VK_RIGHT))
+			{
+				pickedActor->Move(moveIncrement, XMVectorRight());
+			}
+		}
+
 		//Set properties widget info
 		{
 			XMFLOAT3 pos = pickedActor->GetPositionFloat3();
@@ -76,46 +169,12 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer, EditorMainWindow* editorM
 		else if (pickedAxis->pickedAxis == PickedAxis::Y)
 		{
 			MoveActor(pickedActor, PickedAxis::Y);
-		}	
+		}
 		else if (pickedAxis->pickedAxis == PickedAxis::Z)
 		{
 			MoveActor(pickedActor, PickedAxis::Z);
 		}
 	}
-
-	//TODO: maybe make a camera axis system like MechaCrawler for arrow movement
-	//Actor Arros key movement (For grid movement)
-	if (pickedActor)
-	{
-		if (gInputSystem.GetAsyncKey(VK_CONTROL))
-		{
-			if (gInputSystem.GetKeyDownState(VK_UP))
-			{
-				pickedActor->Move(moveIncrement, XMVectorUp());
-			}
-			else if (gInputSystem.GetKeyDownState(VK_DOWN))
-			{
-				pickedActor->Move(-moveIncrement, XMVectorUp());
-			}
-		}
-		else if (gInputSystem.GetKeyDownState(VK_UP))
-		{
-			pickedActor->Move(moveIncrement, XMVectorForward());
-		}
-		else if (gInputSystem.GetKeyDownState(VK_DOWN))
-		{
-			pickedActor->Move(-moveIncrement, XMVectorForward());
-		}
-		else if (gInputSystem.GetKeyDownState(VK_LEFT))
-		{
-			pickedActor->Move(-moveIncrement, XMVectorRight());
-		}
-		else if (gInputSystem.GetKeyDownState(VK_RIGHT))
-		{
-			pickedActor->Move(moveIncrement, XMVectorRight());
-		}
-	}
-	
 
 	//Actor picking for editor
 	if (gInputSystem.GetMouseLeftUpState())

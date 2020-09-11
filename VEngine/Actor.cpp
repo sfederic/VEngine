@@ -45,7 +45,7 @@ void Actor::SetPosition(XMFLOAT3 pos)
 //ROTATION FUNCTIONS
 void Actor::SetRotation(XMVECTOR axis, float angle)
 {
-	transform = XMMatrixRotationAxis(axis, angle);
+	transform *= XMMatrixRotationAxis(axis, angle);
 }
 
 void Actor::SetRotation(float roll, float pitch, float yaw)
@@ -76,20 +76,35 @@ XMFLOAT3 Actor::GetScale()
 	return XMFLOAT3(transform.r[0].m128_f32[0], transform.r[1].m128_f32[1], transform.r[2].m128_f32[2]);
 }
 
+void Actor::AddScale(float scale)
+{
+
+}
+
+void Actor::AddScale(float x, float y, float z)
+{
+
+}
+
+void Actor::AddScale(XMFLOAT3 scale)
+{
+	
+}
+
 void Actor::SetScale(float x, float y, float z)
 {
-	transform = XMMatrixScaling(x, y, z);
+	transform *= XMMatrixScaling(x, y, z);
 }
 
 void Actor::SetScale(XMVECTOR scale)
 {
-	transform = XMMatrixScalingFromVector(scale);
+	transform *= XMMatrixScalingFromVector(scale);
 }
 
 void Actor::SetScale(XMFLOAT3 scale)
 {
 	XMVECTOR scaleVec = XMLoadFloat3(&scale);
-	transform = XMMatrixScalingFromVector(scaleVec);
+	transform *= XMMatrixScalingFromVector(scaleVec);
 }
 
 //VECTOR FUNCTIONS
