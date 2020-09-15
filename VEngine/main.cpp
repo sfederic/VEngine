@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     FBXImporter::Init();
 
     gCoreSystem.SetTimerFrequency();
-    gRenderSystem->Init((HWND)editorMainWindow->mainWidget.winId());
+    gRenderSystem->Init((HWND)editorMainWindow->renderViewWidget->winId());
     gAudioSystem.Init();
     gUISystem.Init();
     gWorldEditor.Init();
@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
         gFileSystem.Tick();
         gUISystem.Tick();
 
-        QPoint p = editorMainWindow->mainWidget.mapFromGlobal(QCursor::pos());
+        QPoint p = editorMainWindow->renderViewWidget->mapFromGlobal(QCursor::pos());
         gUISystem.mousePos.x = p.x();
         gUISystem.mousePos.y = p.y();
 

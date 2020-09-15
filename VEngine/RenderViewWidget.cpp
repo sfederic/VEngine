@@ -1,11 +1,11 @@
 #include "RenderViewWidget.h"
 
-MainWidget::MainWidget(QWidget* parent) : QWidget(parent)
+RenderViewWidget::RenderViewWidget(QWidget* parent) : QWidget(parent)
 {
 
 }
 
-void MainWidget::mousePressEvent(QMouseEvent* mouseEvent)
+void RenderViewWidget::mousePressEvent(QMouseEvent* mouseEvent)
 {
     if (mouseEvent->button() == Qt::MouseButton::LeftButton)
     {
@@ -17,7 +17,7 @@ void MainWidget::mousePressEvent(QMouseEvent* mouseEvent)
     }
 }
 
-void MainWidget::wheelEvent(QWheelEvent* mouseWheelEvent)
+void RenderViewWidget::wheelEvent(QWheelEvent* mouseWheelEvent)
 {
     if (mouseWheelEvent->angleDelta().y() > 0)
     {

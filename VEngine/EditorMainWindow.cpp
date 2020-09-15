@@ -8,10 +8,6 @@
 #include "RenderViewWidget.h"
 #include "PropertiesWidget.h"
 #include "CoreSystem.h"
-#include "ToolbarDock.h"
-#include "WorldDock.h"
-#include "PropertiesDock.h"
-#include "AssetDock.h"
 
 EditorMainWindow::EditorMainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -36,15 +32,22 @@ EditorMainWindow::EditorMainWindow(QWidget *parent)
 
     //TODO: Console dock (tab it within asset/prefab window)
 
-    //Central widget
-    setCentralWidget(&mainWidget);
-    centralWidget()->setFixedSize(QSize(1000, 600));
-    QSize size = centralWidget()->size();
-    gCoreSystem.windowWidth = size.width();
-    gCoreSystem.windowHeight = size.height();
+    //Central widget - Viewport
+    {
+        renderViewWidget = new RenderViewWidget();
+        setCentralWidget(renderViewWidget);
+        centralWidget()->setFixedSize(QSize(1000, 600));
+        QSize size = centralWidget()->size();
+        gCoreSystem.windowWidth = size.width();
+        gCoreSystem.windowHeight = size.height();
+    }
 }
 
-//NOTE: mouse wheel button and wheel events don't call. Function in renderviewwidget calls them.
+void EditorMainWindow::closeEvent(QCloseEvent* event)
+{
+    gCoreSystem.bMainLoop = false;
+}
+
 bool EditorMainWindow::nativeEvent(const QByteArray& eventType, void* message, long* result)
 {
     MSG* msg = (MSG*)message;
