@@ -5,6 +5,10 @@ RenderViewWidget::RenderViewWidget(QWidget* parent) : QWidget(parent)
 
 }
 
+void RenderViewWidget::Tick()
+{
+}
+
 void RenderViewWidget::mousePressEvent(QMouseEvent* mouseEvent)
 {
     if (mouseEvent->button() == Qt::MouseButton::LeftButton)

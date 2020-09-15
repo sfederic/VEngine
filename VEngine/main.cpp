@@ -25,12 +25,11 @@ int main(int argc, char *argv[])
     //Qt setup
     QApplication qApplication(argc, argv);
     EditorMainWindow* editorMainWindow = new EditorMainWindow();
-    editorMainWindow->setWindowState(Qt::WindowMaximized);
-    editorMainWindow->show();
-    editorMainWindow->setWindowTitle("Engine");
 
+    //FBX setup
     FBXImporter::Init();
 
+    //Systems setup
     gCoreSystem.SetTimerFrequency();
     gRenderSystem->Init((HWND)editorMainWindow->renderViewWidget->winId());
     gAudioSystem.Init();
@@ -42,13 +41,16 @@ int main(int argc, char *argv[])
 
     ActorSystem cubes;
     cubes.modelName = "cube.fbx";
-    cubes.CreateActors(gRenderSystem, 1);
+    cubes.name = L"TestCubes";
+    cubes.CreateActors(gRenderSystem, 3);
 
     World* world = GetWorld();
     world->actorSystems.push_back(&cubes);
     world->actorSystems.push_back(&gWorldEditor.xAxis);
     world->actorSystems.push_back(&gWorldEditor.yAxis);
     world->actorSystems.push_back(&gWorldEditor.zAxis);
+
+    editorMainWindow->worldDock->PopulateWorldList();
 
     gRenderSystem->Flush();
 
@@ -57,14 +59,16 @@ int main(int argc, char *argv[])
     {
         const float deltaTime = gCoreSystem.deltaTime;
 
-        qApplication.processEvents();
-
         gCoreSystem.StartTimer();
         gCoreSystem.HandleMessages();
+
+        qApplication.processEvents();
+        editorMainWindow->Tick();
 
         gFileSystem.Tick();
         gUISystem.Tick();
 
+        //TODO: move to CoreSystem/UISystem.
         QPoint p = editorMainWindow->renderViewWidget->mapFromGlobal(QCursor::pos());
         gUISystem.mousePos.x = p.x();
         gUISystem.mousePos.y = p.y();
@@ -72,7 +76,7 @@ int main(int argc, char *argv[])
         editorCamera.Tick(deltaTime);
         gTimerSystem.Tick(deltaTime);
 
-        //test ortho work
+        //test ortho work for game
         if (gInputSystem.GetKeyDownState('P'))
         {
             gRenderSystem->matrices.proj = XMMatrixOrthographicOffCenterLH(-5.f, 5.f, -5.f, 5.f, -50.f, 1000.f);
@@ -87,15 +91,15 @@ int main(int argc, char *argv[])
         gRenderSystem->RenderEnd(deltaTime);
 
         //UI RENDERING
-        /*if (gUISystem.bAllUIActive)
+        if (gUISystem.bAllUIActive)
         {
             gUISystem.d2dRenderTarget->BeginDraw();
             gConsole.Tick();
             gConsole.DrawViewItems();
             //debugMenu.Tick(GetWorld(), deltaTime);
-            gUISystem.RenderAllUIViews();
+            //gUISystem.RenderAllUIViews();
             gUISystem.d2dRenderTarget->EndDraw();
-        }*/
+        }
 
         gRenderSystem->Flush();
 
@@ -111,5 +115,3 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-
-

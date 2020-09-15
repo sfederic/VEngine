@@ -6,5 +6,6 @@ class ToolbarDock : public QDockWidget
 {
 public:
 	ToolbarDock(const char* title);
+	void Tick();
 };
 

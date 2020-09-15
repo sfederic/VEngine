@@ -3,14 +3,12 @@
 #include <qtoolbutton.h>
 #include <qdockwidget.h>
 #include <qlistwidget.h>
-#include "WorldWidget.h"
 #include <qfilesystemmodel.h>
 #include "RenderViewWidget.h"
 #include "PropertiesWidget.h"
 #include "CoreSystem.h"
 
-EditorMainWindow::EditorMainWindow(QWidget *parent)
-    : QMainWindow(parent)
+EditorMainWindow::EditorMainWindow(QWidget *parent) : QMainWindow(parent)
 {
     ui.setupUi(this);
 
@@ -41,6 +39,11 @@ EditorMainWindow::EditorMainWindow(QWidget *parent)
         gCoreSystem.windowWidth = size.width();
         gCoreSystem.windowHeight = size.height();
     }
+
+    //last setup stage
+    setWindowState(Qt::WindowMaximized);
+    show();
+    setWindowTitle("VEngine");
 }
 
 void EditorMainWindow::closeEvent(QCloseEvent* event)
@@ -101,5 +104,14 @@ bool EditorMainWindow::nativeEvent(const QByteArray& eventType, void* message, l
     }
 
     return false;
+}
+
+void EditorMainWindow::Tick()
+{
+    toolbarDock->Tick();
+    assetDock->Tick();
+    worldDock->Tick();
+    propertiesDock->Tick();
+    renderViewWidget->Tick();
 }
 

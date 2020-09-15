@@ -162,6 +162,9 @@ void ActorSystem::CreateActors(IRenderSystem* renderSystem, int numActorsToSpawn
 			Actor actor;
 			actor.transform.r[3] = XMVectorSet(i, i, i, 1.f);
 			actor.vertexBufferOffset = i * modelData.GetByteWidth();
+			actor.name = name;
+			std::wstring indexString = std::to_wstring(i);
+			actor.name += indexString;
 
 			actors.push_back(actor);
 		}

@@ -72,6 +72,8 @@ public:
 
 	//TODO: Temp. replace with new actor 
 	PickedAxis pickedAxis;
+
+	std::wstring name;
 };
 
 //TODO: I want to keep the batched state change rendering I have now.
@@ -88,6 +90,7 @@ public:
 
 	ModelData modelData;
 
+	//TODO: this is shit, move these into a ShaderView
 	struct ID3D11Buffer* vertexBuffer;
 	struct ID3D11Buffer* indexBuffer;
 	struct ID3D11SamplerState* samplerState;

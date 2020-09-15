@@ -60,6 +60,25 @@ void World::RemoveActorSystem(EActorSystemID id)
 	}
 }
 
+Actor* World::FindActorByString(std::wstring name)
+{
+	Actor* foundActor = nullptr;
+
+	for (int i = 0; i < actorSystems.size(); i++)
+	{
+		for (int j = 0; j < actorSystems[i]->actors.size(); j++)
+		{
+			if (actorSystems[i]->actors[j].name == name)
+			{
+				foundActor = actorSystems[i]->GetActor(j);
+				return foundActor;
+			}
+		}
+	}
+
+	return foundActor;
+}
+
 ActorSystem* World::FindActorSystem(EActorSystemID id)
 {
 	auto actorSystemIt = actorSystemMap.find(id);

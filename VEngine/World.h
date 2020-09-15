@@ -3,6 +3,7 @@
 #include <vector>
 #include "Actor.h"
 #include <unordered_map>
+#include <string>
 
 //Mario Bros. used the term World. One world per time for this engine. No streaming. No cross world functionality.
 class World
@@ -13,6 +14,7 @@ public:
 	void CleaupAllActors();
 	void AddActorSystem(ActorSystem& actorSystem);
 	void RemoveActorSystem(EActorSystemID id);
+	Actor* FindActorByString(std::wstring name);
 	ActorSystem* FindActorSystem(EActorSystemID id);
 	ActorSystem* GetActorSystem(unsigned int id);
 	Actor* GetActor(unsigned int systemId, unsigned int actorId);

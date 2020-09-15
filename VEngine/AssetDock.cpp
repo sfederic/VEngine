@@ -3,19 +3,20 @@
 #include <qlistwidget.h>
 #include <qlayout.h>
 #include <qfilesystemmodel.h>
+#include <qtreeview.h>
+#include <QModelIndexList>
+
+QFileSystemModel* fileSystemModel;
+QTreeView* assetTreeView;
 
 AssetDock::AssetDock(const char* title) : QDockWidget(title)
 {
-    //Asset dock
-    QDirIterator assetDirectory(QDir::currentPath(), QDir::Dirs);
+    fileSystemModel = new QFileSystemModel();
+    fileSystemModel->setRootPath(QDir::currentPath());
 
-    QListWidget* assetList = new QListWidget();
-    while (assetDirectory.hasNext())
-    {
-        assetList->addItem(assetDirectory.next());
-    }
-
-    connect(assetList, &QListWidget::itemClicked, this, &AssetDock::AssetItemClicked);
+    assetTreeView = new QTreeView();
+    assetTreeView->setModel(fileSystemModel);
+    assetTreeView->setRootIndex(fileSystemModel->index(QDir::currentPath()));
 
     QListWidget* assetIcons = new QListWidget();
     QPixmap iconImage = QPixmap("Editor/Icons/test.png");
@@ -31,7 +32,7 @@ AssetDock::AssetDock(const char* title) : QDockWidget(title)
     assetIcons->setViewMode(QListView::ViewMode::IconMode);
 
     QHBoxLayout* assetHBox = new QHBoxLayout();
-    assetHBox->addWidget(assetList, Qt::AlignLeft);
+    assetHBox->addWidget(assetTreeView, Qt::AlignLeft);
     assetHBox->addWidget(assetIcons, Qt::AlignRight);
 
     QWidget* assetWidget = new QWidget();
@@ -41,6 +42,15 @@ AssetDock::AssetDock(const char* title) : QDockWidget(title)
 
     QFileSystemModel* fileModel = new QFileSystemModel();
     fileModel->setRootPath(QDir::currentPath());
+}
+
+void AssetDock::Tick()
+{
+    modelIndex = &assetTreeView->currentIndex();
+    if (modelIndex->data().toString() == "main.cpp")
+    {
+        throw;
+    }
 }
 
 

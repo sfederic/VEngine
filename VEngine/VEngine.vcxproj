@@ -122,7 +122,6 @@
     <ClCompile Include="World.cpp" />
     <ClCompile Include="WorldDock.cpp" />
     <ClCompile Include="WorldEditor.cpp" />
-    <ClCompile Include="WorldWidget.cpp" />
     <QtRcc Include="EditorMainWindow.qrc" />
     <QtUic Include="EditorMainWindow.ui" />
     <QtMoc Include="EditorMainWindow.h" />
@@ -180,7 +179,6 @@
     <ClInclude Include="World.h" />
     <ClInclude Include="WorldDock.h" />
     <ClInclude Include="WorldEditor.h" />
-    <ClInclude Include="WorldWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

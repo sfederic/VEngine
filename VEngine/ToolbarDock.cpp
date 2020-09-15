@@ -31,3 +31,7 @@ ToolbarDock::ToolbarDock(const char* title) : QDockWidget(title)
     setWidget(toolbarWidget);
     setMaximumHeight(90);
 }
+
+void ToolbarDock::Tick()
+{
+}

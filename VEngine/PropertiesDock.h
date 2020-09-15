@@ -7,6 +7,7 @@ class PropertiesDock : public QDockWidget
 {
 public:
 	PropertiesDock(const char* title);
+	void Tick();
 
 	PropertiesWidget* propWidget;
 };
