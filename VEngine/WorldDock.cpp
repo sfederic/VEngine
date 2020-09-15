@@ -8,13 +8,16 @@
 #include <QListWidgetItem>
 #include <qevent.h>
 #include <qsortfilterproxymodel.h>
+#include <QListWidgetItem>
 
 QList<QTreeWidgetItem*> worldTreeItems;
 QTreeWidget* worldTreeList;
 
 WorldDock::WorldDock(const char* title) : QDockWidget(title)
 {
-    //worldList = new QListWidget();
+    worldList = new QListWidget();
+    worldList->setSelectionMode(QAbstractItemView::SelectionMode::ExtendedSelection);
+    connect(worldList, &QListWidget::itemClicked, this, &WorldDock::ClickOnListActor);
 
     //PopulateWorldList();
 
@@ -29,10 +32,11 @@ WorldDock::WorldDock(const char* title) : QDockWidget(title)
     //Tree widget for Actor Systems
     worldTreeList = new QTreeWidget();
 
-    connect(worldTreeList, &QTreeWidget::itemClicked, this, &WorldDock::ClickOnListActor);
+    connect(worldTreeList, &QTreeWidget::itemClicked, this, &WorldDock::ClickOnListActorSystem);
     worldTreeList->setColumnCount(1);
     worldTreeList->setHeaderLabels(QStringList("Actor Systems"));
 
+    worldVLayout->addWidget(worldList);
     worldVLayout->addWidget(worldTreeList);
     setLayout(worldVLayout);
 
@@ -68,10 +72,9 @@ void WorldDock::PopulateWorldList()
     worldTreeList->insertTopLevelItems(0, worldTreeItems);
 
     //Old list without tree view
-    /*worldList->clear();
+    worldList->clear();
     worldStringList.clear();
 
-    World* world = GetWorld();
     for (int i = 0; i < world->actorSystems.size(); i++)
     {
         ActorSystem* ac = world->actorSystems[i];
@@ -83,13 +86,23 @@ void WorldDock::PopulateWorldList()
         }
     }
 
-    worldList->addItems(worldStringList);*/
+    worldList->addItems(worldStringList);
 }
 
-void WorldDock::ClickOnListActor(QTreeWidgetItem* listItem)
+void WorldDock::ClickOnListActorSystem(QTreeWidgetItem* listItem)
 {
     //TODO: this works for now and for small sets of actors
     QString string = listItem->text(0);
+    Actor* clickedActor = GetWorld()->FindActorByString(string.toStdWString());
+    if (clickedActor)
+    {
+        editorCamera.ZoomTo(clickedActor);
+    }
+}
+
+void WorldDock::ClickOnListActor(QListWidgetItem* listItem)
+{
+    QString string = listItem->text();
     Actor* clickedActor = GetWorld()->FindActorByString(string.toStdWString());
     if (clickedActor)
     {
@@ -111,6 +124,4 @@ void WorldDock::SearchWorldList()
             worldList->addItem(worldStringList.at(i));
         }
     }
-
-    
 }

@@ -12,7 +12,8 @@ public:
 	void Tick();
 
     void PopulateWorldList();
-    static void ClickOnListActor(class QTreeWidgetItem* listItem);
+    void ClickOnListActorSystem(class QTreeWidgetItem* listItem);
+    void ClickOnListActor(class QListWidgetItem* listItem);
     void SearchWorldList();
 
     QListWidget* worldList;
