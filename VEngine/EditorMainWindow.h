@@ -13,7 +13,6 @@ class EditorMainWindow : public QMainWindow
 public:
     EditorMainWindow(QWidget *parent = Q_NULLPTR);
     MainWidget mainWidget;
-    PropertiesWidget* propWidget;
 
 	void closeEvent(QCloseEvent* event) override
 	{
@@ -24,6 +23,11 @@ public:
 
 	void AssetItemClicked(class QListWidgetItem* listWidgetItem);
 
+	//Docks
+	class ToolbarDock* toolbarDock;
+	class WorldDock* worldDock;
+	class PropertiesDock* propertiesDock;
+	class AssetDock* assetDock;
 private:
     Ui::EditorMainWindowClass ui;
 };

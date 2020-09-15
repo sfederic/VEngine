@@ -9,9 +9,3 @@
 
 extern IRenderSystem* gRenderSystem;
 
-class RenderSystem
-{
-public:
-
-};
-

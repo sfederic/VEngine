@@ -104,19 +104,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AssetDock.cpp" />
     <ClCompile Include="MathHelpers.cpp" />
     <ClCompile Include="Obj.cpp" />
+    <ClCompile Include="PropertiesDock.cpp" />
     <ClCompile Include="PropertiesWidget.cpp" />
     <ClCompile Include="Raycast.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="RenderViewWidget.cpp" />
     <ClCompile Include="ShaderFactory.cpp" />
     <ClCompile Include="TimerSystem.cpp" />
+    <ClCompile Include="ToolbarDock.cpp" />
     <ClCompile Include="TransformEditWidget.cpp" />
     <ClCompile Include="TranslationWidget.cpp" />
     <ClCompile Include="UISystem.cpp" />
     <ClCompile Include="UIView.cpp" />
     <ClCompile Include="World.cpp" />
+    <ClCompile Include="WorldDock.cpp" />
     <ClCompile Include="WorldEditor.cpp" />
     <ClCompile Include="WorldWidget.cpp" />
     <QtRcc Include="EditorMainWindow.qrc" />
@@ -143,6 +147,7 @@
   <ItemGroup>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Array.h" />
+    <ClInclude Include="AssetDock.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="AudioSystem.h" />
     <ClInclude Include="AxisActor.h" />
@@ -159,6 +164,7 @@
     <ClInclude Include="IRenderSystem.h" />
     <ClInclude Include="MathHelpers.h" />
     <ClInclude Include="Obj.h" />
+    <ClInclude Include="PropertiesDock.h" />
     <ClInclude Include="PropertiesWidget.h" />
     <ClInclude Include="Raycast.h" />
     <ClInclude Include="RenderSystem.h" />
@@ -166,11 +172,13 @@
     <ClInclude Include="RenderViewWidget.h" />
     <ClInclude Include="ShaderFactory.h" />
     <ClInclude Include="TimerSystem.h" />
+    <ClInclude Include="ToolbarDock.h" />
     <ClInclude Include="TransformEditWidget.h" />
     <ClInclude Include="TranslationWidget.h" />
     <ClInclude Include="UISystem.h" />
     <ClInclude Include="UIView.h" />
     <ClInclude Include="World.h" />
+    <ClInclude Include="WorldDock.h" />
     <ClInclude Include="WorldEditor.h" />
     <ClInclude Include="WorldWidget.h" />
   </ItemGroup>

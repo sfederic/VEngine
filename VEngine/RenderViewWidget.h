@@ -8,12 +8,6 @@ struct MainWidget : public QWidget
 {
     MainWidget(QWidget* parent = 0);
 
-    void mousePressEvent(QMouseEvent* mouseEvent) override
-    {
-        if (mouseEvent->button() == Qt::MouseButton::LeftButton)
-        {
-            gInputSystem.StoreMouseLeftDownInput(0);
-        }
-    }
+    void mousePressEvent(QMouseEvent* mouseEvent) override;
+    void wheelEvent(QWheelEvent* mouseWheelEvent) override;
 };
-

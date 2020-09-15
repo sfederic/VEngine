@@ -8,6 +8,10 @@
 #include "RenderViewWidget.h"
 #include "PropertiesWidget.h"
 #include "CoreSystem.h"
+#include "ToolbarDock.h"
+#include "WorldDock.h"
+#include "PropertiesDock.h"
+#include "AssetDock.h"
 
 EditorMainWindow::EditorMainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -15,86 +19,20 @@ EditorMainWindow::EditorMainWindow(QWidget *parent)
     ui.setupUi(this);
 
     //Toolbar dock
-    QHBoxLayout* toolbarHLayout = new QHBoxLayout();
-
-    QToolButton* saveToolButton = new QToolButton();
-    QPixmap saveToolPixmap = QPixmap("test.png");
-    QIcon saveToolIcon = QIcon(saveToolPixmap);
-    saveToolButton->setIcon(saveToolIcon);
-    saveToolButton->setToolButtonStyle(Qt::ToolButtonStyle::ToolButtonTextUnderIcon);
-    saveToolButton->setText("Save");
-    toolbarHLayout->addWidget(saveToolButton, Qt::AlignLeft);
-
-    QToolButton* playToolButton = new QToolButton();
-    QPixmap playToolPixmap = QPixmap("play_icon.png");
-    QIcon playToolIcon = QIcon(playToolPixmap);
-    playToolButton->setIcon(playToolIcon);
-    playToolButton->setToolButtonStyle(Qt::ToolButtonStyle::ToolButtonTextUnderIcon);
-    playToolButton->setText("Play");
-    toolbarHLayout->addWidget(playToolButton, Qt::AlignLeft);
-
-
-    //toolbarHLayout->setSpacing(1);
-    toolbarHLayout->addStretch(0);
-
-    QWidget* toolbarWidget = new QWidget();
-    toolbarWidget->setLayout(toolbarHLayout);
-
-
-    QDockWidget* toolbarDock = new QDockWidget("Toolbar");
-    toolbarDock->setWidget(toolbarWidget);
-    toolbarDock->setMaximumHeight(90);
+    toolbarDock = new ToolbarDock("Toolbar");
     addDockWidget(Qt::TopDockWidgetArea, toolbarDock);
 
     //World list
-    WorldWidget* worldWidget = new WorldWidget();
-
-    QDockWidget* levelLayoutDock = new QDockWidget("World");
-    levelLayoutDock->setWidget(worldWidget);
-    addDockWidget(Qt::LeftDockWidgetArea, levelLayoutDock);
+    worldDock = new WorldDock("World");
+    addDockWidget(Qt::LeftDockWidgetArea, worldDock);
 
     //Properties dock
-    QDockWidget* propertiesDock = new QDockWidget("Properties");
+    propertiesDock = new PropertiesDock("Properties");
     addDockWidget(Qt::RightDockWidgetArea, propertiesDock);
 
     //Asset dock
-    QDirIterator assetDirectory(QDir::currentPath(), QDir::Dirs);
-
-    QListWidget* assetList = new QListWidget();
-    while (assetDirectory.hasNext())
-    {
-        assetList->addItem(assetDirectory.next());
-    }
-
-    connect(assetList, &QListWidget::itemClicked, this, &EditorMainWindow::AssetItemClicked);
-
-    QListWidget* assetIcons = new QListWidget();
-    QPixmap iconImage = QPixmap("Editor/Icons/test.png");
-    QIcon icon = QIcon(iconImage);
-    QListWidgetItem* iconItem = new QListWidgetItem(icon, "testIcon");
-
-    QListWidgetItem* iconItem2 = new QListWidgetItem(icon, "testIcon");
-
-    assetIcons->addItem(iconItem);
-    assetIcons->addItem(iconItem2);
-
-    assetIcons->setIconSize(QSize(75, 75));
-    assetIcons->setViewMode(QListView::ViewMode::IconMode);
-
-    QHBoxLayout* assetHBox = new QHBoxLayout();
-    assetHBox->addWidget(assetList, Qt::AlignLeft);
-    assetHBox->addWidget(assetIcons, Qt::AlignRight);
-
-    QWidget* assetWidget = new QWidget();
-    assetWidget->setLayout(assetHBox);
-
-    QDockWidget* assetDock = new QDockWidget("Assets");
-    assetDock->setWidget(assetWidget);
+    assetDock = new AssetDock("Assets");
     addDockWidget(Qt::BottomDockWidgetArea, assetDock);
-
-
-    QFileSystemModel* fileModel = new QFileSystemModel();
-    fileModel->setRootPath(QDir::currentPath());
 
     //TODO: Console dock (tab it within asset/prefab window)
 
@@ -104,12 +42,9 @@ EditorMainWindow::EditorMainWindow(QWidget *parent)
     QSize size = centralWidget()->size();
     gCoreSystem.windowWidth = size.width();
     gCoreSystem.windowHeight = size.height();
-
-    //Properties dock
-    propWidget = new PropertiesWidget();
-    propertiesDock->setWidget(propWidget);
 }
 
+//NOTE: mouse wheel button and wheel events don't call. Function in renderviewwidget calls them.
 bool EditorMainWindow::nativeEvent(const QByteArray& eventType, void* message, long* result)
 {
     MSG* msg = (MSG*)message;
@@ -165,8 +100,3 @@ bool EditorMainWindow::nativeEvent(const QByteArray& eventType, void* message, l
     return false;
 }
 
-void EditorMainWindow::AssetItemClicked(QListWidgetItem* listWidgetItem)
-{
-    //TODO: set text into asset icon list etc.
-     //listWidgetItem->text()
-}

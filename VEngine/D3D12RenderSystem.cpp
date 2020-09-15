@@ -51,7 +51,7 @@ void D3D12RenderSystem::Init(HWND window)
 
 	//D3D11on12 (For D2D/DWrite)
 	//NOTE: With D3D11on12 and all the debug information, some builds were giving 500MB for hello world tier programs
-	{	
+	{
 		D3D_FEATURE_LEVEL levels[] = {
 			D3D_FEATURE_LEVEL_11_0
 		};
@@ -89,6 +89,13 @@ void D3D12RenderSystem::Init(HWND window)
 	fenceVal = 1;
 
 	fenceEvent = CreateEvent(nullptr, false, false, nullptr);
+
+	//CONSTANT DESC HEAP
+	D3D12_DESCRIPTOR_HEAP_DESC cbHeapDesc = {};
+	cbHeapDesc.NumDescriptors = 1;
+	cbHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
+	cbHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
+	HR(device->CreateDescriptorHeap(&cbHeapDesc, IID_PPV_ARGS(&cbHeap)));
 }
 
 void D3D12RenderSystem::RenderSetup(float deltaTime)
@@ -104,8 +111,8 @@ void D3D12RenderSystem::Render(float deltaTime)
 	//UpdateConstantBuffer(cbUploadMaterialBuffer.Get(), sizeof(Material), &material);
 
 	cmdList->SetGraphicsRootSignature(rootSig);
-	cmdList->SetDescriptorHeaps(1, &cbHeap);
-	cmdList->SetGraphicsRootDescriptorTable(0, cbHeap->GetGPUDescriptorHandleForHeapStart());
+	//cmdList->SetDescriptorHeaps(1, &cbHeap);
+	//cmdList->SetGraphicsRootDescriptorTable(0, cbHeap->GetGPUDescriptorHandleForHeapStart());
 	cmdList->RSSetViewports(1, &viewport);
 	cmdList->RSSetScissorRects(1, &scissorRect);
 

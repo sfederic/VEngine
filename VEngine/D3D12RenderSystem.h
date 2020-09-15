@@ -72,6 +72,7 @@ public:
 	ID3D12PipelineState* pipelineState;
 	ID3D12Fence* fence;
 
+
 	ID3D11Resource* wrappedBackBuffers[swapchainCount];
 
 	IDxcCompiler* dxcCompiler;

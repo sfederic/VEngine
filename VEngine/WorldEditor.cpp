@@ -7,6 +7,7 @@
 #include "ShaderFactory.h"
 #include "MathHelpers.h"
 #include "EditorMainWindow.h"
+#include "PropertiesDock.h"
 
 WorldEditor gWorldEditor;
 
@@ -67,10 +68,13 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer, EditorMainWindow* editorM
 			else if (gInputSystem.GetAsyncKey(VK_DOWN))
 			{
 				XMFLOAT3 scale = pickedActor->GetScale();
-				scale.x -= scaleSpeed * deltaTime;
-				scale.y -= scaleSpeed * deltaTime;
-				scale.z -= scaleSpeed * deltaTime;
-				pickedActor->SetScale(scale);
+				if (scale.x > 0.f)
+				{
+					scale.x -= scaleSpeed * deltaTime;
+					scale.y -= scaleSpeed * deltaTime;
+					scale.z -= scaleSpeed * deltaTime;
+					pickedActor->SetScale(scale);
+				}
 			}
 		}
 
@@ -116,20 +120,22 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer, EditorMainWindow* editorM
 
 		//Set properties widget info
 		{
+			PropertiesWidget* propWidget = editorMainWindow->propertiesDock->propWidget;
+
 			XMFLOAT3 pos = pickedActor->GetPositionFloat3();
-			editorMainWindow->propWidget->posEditX->setText(QString::number(pos.x));
-			editorMainWindow->propWidget->posEditY->setText(QString::number(pos.y));
-			editorMainWindow->propWidget->posEditZ->setText(QString::number(pos.z));
+			propWidget->posEditX->setText(QString::number(pos.x));
+			propWidget->posEditY->setText(QString::number(pos.y));
+			propWidget->posEditZ->setText(QString::number(pos.z));
 
 			XMFLOAT3 scale = pickedActor->GetScale();
-			editorMainWindow->propWidget->scaleEditX->setText(QString::number(scale.x));
-			editorMainWindow->propWidget->scaleEditY->setText(QString::number(scale.y));
-			editorMainWindow->propWidget->scaleEditZ->setText(QString::number(scale.z));
+			propWidget->scaleEditX->setText(QString::number(scale.x));
+			propWidget->scaleEditY->setText(QString::number(scale.y));
+			propWidget->scaleEditZ->setText(QString::number(scale.z));
 
 			XMFLOAT3 rot = pickedActor->GetRollPitchYaw();
-			editorMainWindow->propWidget->rotEditX->setText(QString::number(rot.x));
-			editorMainWindow->propWidget->rotEditY->setText(QString::number(rot.y));
-			editorMainWindow->propWidget->rotEditZ->setText(QString::number(rot.z));
+			propWidget->rotEditX->setText(QString::number(rot.x));
+			propWidget->rotEditY->setText(QString::number(rot.y));
+			propWidget->rotEditZ->setText(QString::number(rot.z));
 		}
 
 		//xAxis.actors[0].SetPosition(world->GetActor(actorSystemIndex, actorIndex)->GetPositionVector());
