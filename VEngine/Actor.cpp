@@ -28,13 +28,13 @@ XMFLOAT3 Actor::GetPositionFloat3()
 
 void Actor::SetPosition(XMVECTOR v)
 {
-	transform = XMMatrixTranslationFromVector(v);
+	transform.r[3] = v;
 }
 
 void Actor::SetPosition(float x, float y, float z)
 {
 	XMVECTOR v = XMVectorSet(x, y, z, 1.0f);
-	transform = XMMatrixTranslationFromVector(v);
+	transform.r[3] = v;
 }
 
 void Actor::SetPosition(XMFLOAT3 pos)
@@ -45,7 +45,8 @@ void Actor::SetPosition(XMFLOAT3 pos)
 //ROTATION FUNCTIONS
 void Actor::SetRotation(XMVECTOR axis, float angle)
 {
-	transform *= XMMatrixRotationAxis(axis, angle);
+	XMMATRIX m = XMMatrixRotationAxis(axis, angle);
+	transform = XMMatrixMultiply(m, transform); //Just keep in mind Matrix mul order
 }
 
 void Actor::SetRotation(float roll, float pitch, float yaw)

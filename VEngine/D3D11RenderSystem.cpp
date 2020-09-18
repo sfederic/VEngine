@@ -386,7 +386,7 @@ void D3D11RenderSystem::RenderBounds()
 					1.0f);
 
 				boxBoundsMatrix = XMMatrixScalingFromVector(XMLoadFloat3(&world->actorSystems[systemIndex]->boundingBox.Extents));
-
+				boxBoundsMatrix *= world->actorSystems[systemIndex]->actors[actorIndex].GetRotation();
 				boxBoundsMatrix.r[3] = offset;
 
 				matrices.model = boxBoundsMatrix;

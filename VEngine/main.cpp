@@ -81,6 +81,8 @@ int main(int argc, char *argv[])
         {
             gRenderSystem->matrices.proj = XMMatrixOrthographicOffCenterLH(-5.f, 5.f, -5.f, 5.f, -50.f, 1000.f);
         }
+        
+
 
         gRenderSystem->Tick();
         gRenderSystem->RenderSetup(deltaTime);
