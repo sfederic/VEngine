@@ -32,5 +32,7 @@ public:
 };
 
 extern Camera editorCamera;
+extern Camera playerCamera;
 
-Camera* GetPlayerCamera();
+Camera* GetActiveCamera();
+void SetActiveCamera(Camera* camera);

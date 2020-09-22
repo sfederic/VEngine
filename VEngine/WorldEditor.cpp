@@ -151,7 +151,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer, EditorMainWindow* editorM
 		if (gInputSystem.GetKeyDownState(VK_SPACE))
 		{
 			//XMVECTOR spawnPos = world->GetActor(screenPickRay.actorSystemIndex, screenPickRay.actorIndex)->GetPositionVector() +
-			//	pickedDirection * 2.f;
+			//pickedDirection * 2.f;
 
 			XMVECTOR spawnPos = pickedActor->GetPositionVector() + (pickedDirection * 2.f);
 
@@ -179,6 +179,15 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer, EditorMainWindow* editorM
 		else if (pickedAxis->pickedAxis == PickedAxis::Z)
 		{
 			MoveActor(pickedActor, PickedAxis::Z);
+		}
+	}
+
+	//Actor spawning on right click
+	if (gInputSystem.GetMouseRightUpState())
+	{
+		if (pickedActor)
+		{
+			world->GetActorSystem(0)->AddActor(pickedActor->GetPositionVector());
 		}
 	}
 

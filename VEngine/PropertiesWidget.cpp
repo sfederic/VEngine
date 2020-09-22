@@ -2,6 +2,8 @@
 #include "WorldEditor.h"
 #include <qgridlayout.h>
 #include <qlabel.h>
+#include <qlayout.h>
+#include <qcheckbox.h>
 
 void PropertiesWidget::SetActorPositionX()
 {
@@ -162,11 +164,19 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
 
     grid->setAlignment(Qt::AlignTop);
 
-    QHBoxLayout* hLayoutTop = new QHBoxLayout();
+    QVBoxLayout* vLayoutTop = new QVBoxLayout();
 
-    hLayoutTop->addLayout(grid);
+    vLayoutTop->addLayout(grid);
 
-    setLayout(hLayoutTop);
+    //Test Actor Properties
+    QCheckBox* checkBox = new QCheckBox();
+    checkBox->setText("Renderable");
+    vLayoutTop->addWidget(checkBox);
+
+    QLineEdit* lineEdit = new QLineEdit("Name");
+    vLayoutTop->addWidget(lineEdit);
+
+    setLayout(vLayoutTop);
 }
 
 void PropertiesWidget::Tick()

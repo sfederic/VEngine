@@ -9,6 +9,7 @@
 #include "World.h"
 
 Camera editorCamera(XMVectorSet(0.f, 0.f, -5.f, 1.f));
+Camera playerCamera(XMVectorSet(0.f, 0.f, 1.f, 1.f));
 
 Camera::Camera(XMVECTOR initialLocation)
 {
@@ -206,7 +207,14 @@ void Camera::AttachTo(Actor* actor)
 	location += attachedOffset;
 }
 
-Camera* GetPlayerCamera()
+Camera* activeCamera;
+
+void SetActiveCamera(Camera* camera)
 {
-	return &editorCamera;
+	activeCamera = camera;
+}
+
+Camera* GetActiveCamera()
+{
+	return activeCamera;
 }

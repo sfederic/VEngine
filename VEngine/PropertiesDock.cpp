@@ -1,5 +1,7 @@
 #include "PropertiesDock.h"
 
+#include "World.h"
+
 PropertiesDock::PropertiesDock(const char* title) : QDockWidget(title)
 {
     propWidget = new PropertiesWidget();

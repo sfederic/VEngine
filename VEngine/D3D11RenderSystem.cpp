@@ -341,7 +341,7 @@ void D3D11RenderSystem::RenderActorSystem(World* world)
 		{
 			if (actorSystem->actors[i].bRender)
 			{
-				matrices.view = GetPlayerCamera()->view;
+				matrices.view = GetActiveCamera()->view;
 				matrices.model = actorSystem->actors[i].transform;
 				matrices.mvp = matrices.model * matrices.view * matrices.proj;
 				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
@@ -357,7 +357,7 @@ void D3D11RenderSystem::RenderActorSystem(World* world)
 void D3D11RenderSystem::RenderBounds()
 {
 	World* world = GetWorld();
-	Camera* camera = GetPlayerCamera();
+	Camera* camera = GetActiveCamera();
 
 	if (bDrawBoundingBoxes || bDrawBoundingSpheres)
 	{

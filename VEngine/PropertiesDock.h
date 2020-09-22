@@ -3,6 +3,8 @@
 #include <qdockwidget.h>
 #include "PropertiesWidget.h"
 
+class World;
+
 class PropertiesDock : public QDockWidget
 {
 public:

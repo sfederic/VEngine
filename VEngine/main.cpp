@@ -54,6 +54,8 @@ int main(int argc, char *argv[])
 
     gRenderSystem->Flush();
 
+    bool bGameOn = false;
+
     //MAIN LOOP
     while (gCoreSystem.bMainLoop)
     {
@@ -73,16 +75,24 @@ int main(int argc, char *argv[])
         gUISystem.mousePos.x = p.x();
         gUISystem.mousePos.y = p.y();
 
-        editorCamera.Tick(deltaTime);
         gTimerSystem.Tick(deltaTime);
 
-        //test ortho work for game
+        
         if (gInputSystem.GetKeyDownState('P'))
         {
-            gRenderSystem->matrices.proj = XMMatrixOrthographicOffCenterLH(-5.f, 5.f, -5.f, 5.f, -50.f, 1000.f);
+            bGameOn = !bGameOn;
         }
-        
 
+        if (bGameOn)
+        {
+            SetActiveCamera(&playerCamera);
+            //playerCamera.Tick(deltaTime);
+        }
+        else
+        {
+            SetActiveCamera(&editorCamera);
+            editorCamera.Tick(deltaTime);
+        }
 
         gRenderSystem->Tick();
         gRenderSystem->RenderSetup(deltaTime);

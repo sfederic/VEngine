@@ -105,6 +105,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AssetDock.cpp" />
+    <ClCompile Include="GameSystem.cpp" />
     <ClCompile Include="MathHelpers.cpp" />
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="PropertiesDock.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="DebugMenu.h" />
     <ClInclude Include="FBXImporter.h" />
     <ClInclude Include="FileSystem.h" />
+    <ClInclude Include="GameSystem.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="IRenderSystem.h" />
     <ClInclude Include="MathHelpers.h" />

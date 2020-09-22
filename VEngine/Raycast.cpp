@@ -32,7 +32,7 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSy
 	ray.origin = origin;
 	ray.direction = direction;
 
-	Camera* camera = GetPlayerCamera();
+	Camera* camera = GetActiveCamera();
 
 	XMMATRIX invView = XMMatrixInverse(&XMMatrixDeterminant(camera->view), camera->view);
 	XMMATRIX invModel = XMMatrixInverse(&XMMatrixDeterminant(XMMatrixIdentity()), XMMatrixIdentity());
