@@ -34,59 +34,63 @@ void Camera::Tick(float deltaTime)
 		location += attachedOffset;
 	}
 
-	MouseMove(gUISystem.mousePos.x, gUISystem.mousePos.y);
-	UpdateViewMatrix();
-
-	//WASD MOVEMENT
-	if (!gConsole.bConsoleActive && !gUISystem.bEditUIActive)
+	//TODO: This is junk, just subclass the cameras later
+	if (bEditorCamera)
 	{
-		if (gInputSystem.GetAsyncKey(VK_RBUTTON))
-		{
-			const float moveSpeed = 7.5f * deltaTime;
+		MouseMove(gUISystem.mousePos.x, gUISystem.mousePos.y);
+		UpdateViewMatrix();
 
-			if (GetAsyncKeyState('W'))
-			{
-				Move(moveSpeed, forward);
-			}
-			if (GetAsyncKeyState('S'))
-			{
-				Move(-moveSpeed, forward);
-			}
-			if (GetAsyncKeyState('D'))
-			{
-				Move(moveSpeed, right);
-			}
-			if (GetAsyncKeyState('A'))
-			{
-				Move(-moveSpeed, right);
-			}
-			if (GetAsyncKeyState('Q'))
-			{
-				Move(-moveSpeed, up);
-			}
-			if (GetAsyncKeyState('E'))
-			{
-				Move(moveSpeed, up);
-			}
-		}
-
-		//Zoom onto selected actor
-		if (gInputSystem.GetKeyUpState('F'))
+		//WASD MOVEMENT
+		if (!gConsole.bConsoleActive && !gUISystem.bEditUIActive)
 		{
-			World* world = GetWorld();
-			ZoomTo(world->GetActor(gWorldEditor.actorSystemIndex, gWorldEditor.actorIndex));
-		}
+			if (gInputSystem.GetAsyncKey(VK_RBUTTON))
+			{
+				const float moveSpeed = 7.5f * deltaTime;
 
-		//MOUSE WHEEL ZOOM
-		const float zoomSpeed = 65.f * deltaTime;
+				if (GetAsyncKeyState('W'))
+				{
+					Move(moveSpeed, forward);
+				}
+				if (GetAsyncKeyState('S'))
+				{
+					Move(-moveSpeed, forward);
+				}
+				if (GetAsyncKeyState('D'))
+				{
+					Move(moveSpeed, right);
+				}
+				if (GetAsyncKeyState('A'))
+				{
+					Move(-moveSpeed, right);
+				}
+				if (GetAsyncKeyState('Q'))
+				{
+					Move(-moveSpeed, up);
+				}
+				if (GetAsyncKeyState('E'))
+				{
+					Move(moveSpeed, up);
+				}
+			}
 
-		if (gInputSystem.GetMouseWheelUp())
-		{
-			Move(zoomSpeed, editorCamera.forward);
-		}
-		else if (gInputSystem.GetMouseWheelDown())
-		{
-			Move(-zoomSpeed, editorCamera.forward);
+			//Zoom onto selected actor
+			if (gInputSystem.GetKeyUpState('F'))
+			{
+				World* world = GetWorld();
+				ZoomTo(world->GetActor(gWorldEditor.actorSystemIndex, gWorldEditor.actorIndex));
+			}
+
+			//MOUSE WHEEL ZOOM
+			const float zoomSpeed = 65.f * deltaTime;
+
+			if (gInputSystem.GetMouseWheelUp())
+			{
+				Move(zoomSpeed, editorCamera.forward);
+			}
+			else if (gInputSystem.GetMouseWheelDown())
+			{
+				Move(-zoomSpeed, editorCamera.forward);
+			}
 		}
 	}
 }

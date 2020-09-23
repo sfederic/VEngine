@@ -29,6 +29,8 @@ int main(int argc, char *argv[])
     //FBX setup
     FBXImporter::Init();
 
+    editorCamera.bEditorCamera = true;
+
     //Systems setup
     gCoreSystem.SetTimerFrequency();
     gRenderSystem->Init((HWND)editorMainWindow->renderViewWidget->winId());
@@ -44,8 +46,15 @@ int main(int argc, char *argv[])
     cubes.name = L"TestCubes";
     cubes.CreateActors(gRenderSystem, 3);
 
+    ActorSystem player = {};
+    player.name = L"Player0";
+    player.modelName = "monkey.fbx";
+    player.CreateActors(gRenderSystem, 1);
+
+
     World* world = GetWorld();
     world->actorSystems.push_back(&cubes);
+    world->AddActorSystem(player);
     world->actorSystems.push_back(&gWorldEditor.xAxis);
     world->actorSystems.push_back(&gWorldEditor.yAxis);
     world->actorSystems.push_back(&gWorldEditor.zAxis);
@@ -55,6 +64,7 @@ int main(int argc, char *argv[])
     gRenderSystem->Flush();
 
     bool bGameOn = false;
+    bool bMoveLeft = true;
 
     //MAIN LOOP
     while (gCoreSystem.bMainLoop)
@@ -77,22 +87,47 @@ int main(int argc, char *argv[])
 
         gTimerSystem.Tick(deltaTime);
 
-        
         if (gInputSystem.GetKeyDownState('P'))
         {
             bGameOn = !bGameOn;
         }
 
-        if (bGameOn)
+        //if (bGameOn)
         {
-            SetActiveCamera(&playerCamera);
+            //SetActiveCamera(&playerCamera);
+            //GetActiveCamera()->AttachTo(player.GetActor(0));
             //playerCamera.Tick(deltaTime);
+
+            Actor* playerActor = player.GetActor(0);
+            if (gInputSystem.GetKeyDownState(VK_LEFT))
+            {
+                bMoveLeft = false;
+                
+            }
+
+            if (bMoveLeft)
+            {
+                XMVECTOR endPos = DirectX::XMVectorSet(2.f, 0.f, 0.f, 1.f);
+                playerActor->SetPosition(XMVectorLerp(playerActor->GetPositionVector(), endPos, deltaTime * 5.0f));
+            }
+            else if (!bMoveLeft)
+            {
+                XMVECTOR endPos = DirectX::XMVectorSet(0.f, 0.f, 0.f, 1.f);
+                playerActor->SetPosition(XMVectorLerp(playerActor->GetPositionVector(), endPos, deltaTime * 5.0f));
+            }
+
+            if (gInputSystem.GetKeyDownState(VK_RIGHT))
+            {
+                bMoveLeft = true;
+                
+            }
         }
-        else
+        //else
         {
             SetActiveCamera(&editorCamera);
             editorCamera.Tick(deltaTime);
         }
+
 
         gRenderSystem->Tick();
         gRenderSystem->RenderSetup(deltaTime);

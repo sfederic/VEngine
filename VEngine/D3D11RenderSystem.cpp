@@ -266,6 +266,7 @@ void D3D11RenderSystem::Flush()
 
 void D3D11RenderSystem::CreateConstantBuffer()
 {
+	//Matrix constant buffer
 	matrices.model = XMMatrixIdentity();
 	matrices.view = XMMatrixIdentity();
 	matrices.proj = XMMatrixPerspectiveFovLH(XM_PI / 3, gCoreSystem.GetAspectRatio(), 0.01f, 1000.f);
@@ -274,6 +275,10 @@ void D3D11RenderSystem::CreateConstantBuffer()
 	matrices.mvp = matrices.model * matrices.view * matrices.proj;
 
 	cbMatrices = CreateDefaultBuffer(sizeof(Matrices), D3D11_BIND_CONSTANT_BUFFER, &matrices);
+
+	//Material constant buffer	
+	material.ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
+	cbMaterial = CreateDefaultBuffer(sizeof(Material), D3D11_BIND_CONSTANT_BUFFER, &material);
 }
 
 void D3D11RenderSystem::CreateSamplerState(ActorSystem* actorSystem)
@@ -337,16 +342,28 @@ void D3D11RenderSystem::RenderActorSystem(World* world)
 		context->IASetVertexBuffers(0, 1, &actorSystem->vertexBuffer, &strides, &offsets);
 		//context->IASetIndexBuffer(actorSystem->indexBuffer, DXGI_FORMAT_R16_UINT, 0);
 		
+		//Constant buffer register values
+		const int cbMatrixRegister = 0;
+		const int cbMaterialRegister = 1;
+
 		for (int i = 0; i < actorSystem->actors.size(); i++)
 		{
 			if (actorSystem->actors[i].bRender)
 			{
+				//Set Matrix constant buffer
 				matrices.view = GetActiveCamera()->view;
 				matrices.model = actorSystem->actors[i].transform;
 				matrices.mvp = matrices.model * matrices.view * matrices.proj;
 				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
-				context->VSSetConstantBuffers(0, 1, &cbMatrices);
+				context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
+				//Set material constant buffer
+				//TODO: set material per actor/system
+				//material.colour = actor.color etc.
+				context->UpdateSubresource(cbMaterial, 0, nullptr, &material, 0, 0);
+				context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
+
+				//Draw indexed/straight
 				context->Draw(actorSystem->modelData.verts.size(), 0);
 				//context->DrawIndexed(actorSystem->modelData.indices.size(), 0, 0);
 			}

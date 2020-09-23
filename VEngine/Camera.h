@@ -29,6 +29,8 @@ public:
 
 	XMVECTOR attachedOffset;
 	class Actor* actorAttachedTo = nullptr;
+
+	bool bEditorCamera = false;
 };
 
 extern Camera editorCamera;

@@ -19,3 +19,7 @@ struct Matrices
 	XMMATRIX mvp;
 };
 
+struct Material
+{
+	XMFLOAT4 ambient;
+};

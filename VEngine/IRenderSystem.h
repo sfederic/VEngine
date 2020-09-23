@@ -30,5 +30,6 @@ public:
 	virtual void Flush() = 0; //Acting as a stand in for WaitForPreviousFrame()
 
 	Matrices matrices;
+	Material material;
 };
 

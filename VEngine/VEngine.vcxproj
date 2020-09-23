@@ -105,7 +105,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AssetDock.cpp" />
+    <ClCompile Include="Component.cpp" />
     <ClCompile Include="GameSystem.cpp" />
+    <ClCompile Include="Lights.cpp" />
     <ClCompile Include="MathHelpers.cpp" />
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="PropertiesDock.cpp" />
@@ -152,6 +154,7 @@
     <ClInclude Include="AudioSystem.h" />
     <ClInclude Include="AxisActor.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="Console.h" />
     <ClInclude Include="CoreSystem.h" />
     <ClInclude Include="D3D11RenderSystem.h" />
@@ -163,6 +166,7 @@
     <ClInclude Include="GameSystem.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="IRenderSystem.h" />
+    <ClInclude Include="Lights.h" />
     <ClInclude Include="MathHelpers.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="PropertiesDock.h" />

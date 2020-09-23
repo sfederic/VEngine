@@ -27,6 +27,12 @@ XMVECTOR XMVectorForward()
     return vec;
 }
 
+/*XMVECTOR XMVectorConstantLerp(FXMVECTOR V0, FXMVECTOR V1, float deltaTime, float speed)
+{
+    XMVECTOR v = XMVectorLerp(V0, V1, deltaTime);
+    return v * speed;
+}*/
+
 XMVECTOR RollPitchYawFromMatrix(XMMATRIX m)
 {
     //REF: https://en.wikipedia.org/wiki/Rotation_formalisms_in_three_dimensions#Conversion_formulae_between_formalisms

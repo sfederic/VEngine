@@ -83,6 +83,7 @@ public:
 	ID3D11Query* endTimeQuery;
 
 	ID3D11Buffer* cbMatrices;
+	ID3D11Buffer* cbMaterial;
 
 	ID3DBlob* vertexCode;
 	ID3DBlob* pixelCode;
