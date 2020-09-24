@@ -7,6 +7,7 @@
 #include <string>
 #include "RenderTypes.h"
 #include <typeindex>
+#include "FBXImporter.h"
 
 using namespace DirectX;
 
@@ -19,7 +20,11 @@ class Actor
 {
 public:
 	Actor();
-	virtual void Tick(float deltaTime) = 0;
+	virtual void Tick(float deltaTime)
+	{
+
+	}
+
 	XMVECTOR GetPositionVector();
 	XMFLOAT3 GetPositionFloat3();
 	void SetPosition(XMVECTOR v);
@@ -56,7 +61,10 @@ class ActorSystem
 {
 public:
 	ActorSystem() {}
-	virtual void Tick(float deltaTime) = 0;
+	virtual void Tick(float deltaTime)
+	{
+
+	}
 
 	template <class ActorType>
 	void CreateActors(class IRenderSystem* renderSystem, int numActorsToSpawn)
@@ -88,10 +96,10 @@ public:
 				//TODO: I'm gonna need the smart pointers here to deal with the eventual Tick() virtual calls
 				ActorType* actor = new ActorType();
 				actor->transform.r[3] = XMVectorSet(i, i, i, 1.f);
-				actor.vertexBufferOffset = i * modelData.GetByteWidth();
-				actor.name = name;
+				actor->vertexBufferOffset = i * modelData.GetByteWidth();
+				actor->name = name;
 				std::wstring indexString = std::to_wstring(i);
-				actor.name += indexString;
+				actor->name += indexString;
 
 				actors.push_back(actor);
 			}

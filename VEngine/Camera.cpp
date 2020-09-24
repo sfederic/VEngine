@@ -179,7 +179,7 @@ void Camera::FrustumCullTest(ActorSystem& system)
 	{
 		XMMATRIX invView = XMMatrixInverse(&XMMatrixDeterminant(view), view);
 
-		XMMATRIX world = system.actors[i].transform;
+		XMMATRIX world = system.actors[i]->transform;
 		XMMATRIX invWorld = XMMatrixInverse(&XMMatrixDeterminant(world), world);
 
 		XMMATRIX viewToLocal = XMMatrixMultiply(invView, invWorld);
@@ -188,16 +188,16 @@ void Camera::FrustumCullTest(ActorSystem& system)
 		BoundingFrustum::CreateFromMatrix(frustum, proj);
 		frustum.Transform(localSpaceFrustum, viewToLocal);
 
-		system.boundingBox.Center = system.actors[i].GetPositionFloat3();
-		system.boundingBox.Extents = system.actors[i].GetScale();
+		system.boundingBox.Center = system.actors[i]->GetPositionFloat3();
+		system.boundingBox.Extents = system.actors[i]->GetScale();
 
 		if (localSpaceFrustum.Contains(system.boundingBox) == DirectX::DISJOINT)
 		{
-			system.actors[i].bRender = false;
+			system.actors[i]->bRender = false;
 		}
 		else
 		{
-			system.actors[i].bRender = true;
+			system.actors[i]->bRender = true;
 		}
 	}
 }

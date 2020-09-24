@@ -50,9 +50,9 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSy
 	for (int i = 0; i < actorSystem->actors.size(); i++)
 	{
 		XMFLOAT3 offset = XMFLOAT3(
-			actorSystem->actors[i].GetPositionFloat3().x + actorSystem->boundingBox.Center.x,
-			actorSystem->actors[i].GetPositionFloat3().y + actorSystem->boundingBox.Center.y,
-			actorSystem->actors[i].GetPositionFloat3().z + actorSystem->boundingBox.Center.z
+			actorSystem->actors[i]->GetPositionFloat3().x + actorSystem->boundingBox.Center.x,
+			actorSystem->actors[i]->GetPositionFloat3().y + actorSystem->boundingBox.Center.y,
+			actorSystem->actors[i]->GetPositionFloat3().z + actorSystem->boundingBox.Center.z
 		);
 
 
@@ -61,14 +61,14 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSy
 		tempBoundingBox.Center = offset;
 
 		//For editor exit
-		if (actorSystem->actors[i].bPicked)
+		if (actorSystem->actors[i]->bPicked)
 		{
-			actorSystem->actors[i].bPicked = false;
+			actorSystem->actors[i]->bPicked = false;
 			return false;
 		}
 
 		//Skip if actor is not render as well (good for translation widgets)
-		if (!actorSystem->actors[i].bRender)
+		if (!actorSystem->actors[i]->bRender)
 		{
 			return false;
 		}

@@ -6,7 +6,6 @@
 class WorldEditor
 {
 public:
-	WorldEditor();
 	void Tick(ID3D11Buffer* debugLinesBuffer, class EditorMainWindow* editorMainWindow);
 	void Init();
 	void MoveActor(Actor* actor, XMVECTOR direction);

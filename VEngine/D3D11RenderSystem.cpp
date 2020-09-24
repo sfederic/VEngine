@@ -146,11 +146,11 @@ void D3D11RenderSystem::CreateDevice()
 
 	debugBox.modelName = "cube.fbx";
 	debugBox.shaderName = L"debugDraw.hlsl";
-	debugBox.CreateActors(this, 1);
+	debugBox.CreateActors<Actor>(this, 1);
 
 	debugSphere.shaderName = L"debugDraw.hlsl";
 	debugSphere.modelName = "ico_sphere.fbx";
-	debugSphere.CreateActors(this, 1);
+	debugSphere.CreateActors<Actor>(this, 1);
 }
 
 void D3D11RenderSystem::CreateSwapchain(HWND windowHandle)
@@ -277,7 +277,7 @@ void D3D11RenderSystem::CreateConstantBuffer()
 	cbMatrices = CreateDefaultBuffer(sizeof(Matrices), D3D11_BIND_CONSTANT_BUFFER, &matrices);
 
 	//Material constant buffer	
-	material.ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
+	material.baseColour = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
 	cbMaterial = CreateDefaultBuffer(sizeof(Material), D3D11_BIND_CONSTANT_BUFFER, &material);
 }
 
@@ -348,11 +348,11 @@ void D3D11RenderSystem::RenderActorSystem(World* world)
 
 		for (int i = 0; i < actorSystem->actors.size(); i++)
 		{
-			if (actorSystem->actors[i].bRender)
+			if (actorSystem->actors[i]->bRender)
 			{
 				//Set Matrix constant buffer
 				matrices.view = GetActiveCamera()->view;
-				matrices.model = actorSystem->actors[i].transform;
+				matrices.model = actorSystem->actors[i]->transform;
 				matrices.mvp = matrices.model * matrices.view * matrices.proj;
 				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 				context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
@@ -397,13 +397,13 @@ void D3D11RenderSystem::RenderBounds()
 
 				XMMATRIX boxBoundsMatrix = XMMatrixIdentity();
 				XMVECTOR offset = XMVectorSet(
-					world->actorSystems[systemIndex]->actors[actorIndex].GetPositionFloat3().x + world->actorSystems[systemIndex]->boundingBox.Center.x,
-					world->actorSystems[systemIndex]->actors[actorIndex].GetPositionFloat3().y + world->actorSystems[systemIndex]->boundingBox.Center.y,
-					world->actorSystems[systemIndex]->actors[actorIndex].GetPositionFloat3().z + world->actorSystems[systemIndex]->boundingBox.Center.z,
+					world->actorSystems[systemIndex]->actors[actorIndex]->GetPositionFloat3().x + world->actorSystems[systemIndex]->boundingBox.Center.x,
+					world->actorSystems[systemIndex]->actors[actorIndex]->GetPositionFloat3().y + world->actorSystems[systemIndex]->boundingBox.Center.y,
+					world->actorSystems[systemIndex]->actors[actorIndex]->GetPositionFloat3().z + world->actorSystems[systemIndex]->boundingBox.Center.z,
 					1.0f);
 
 				boxBoundsMatrix = XMMatrixScalingFromVector(XMLoadFloat3(&world->actorSystems[systemIndex]->boundingBox.Extents));
-				boxBoundsMatrix *= world->actorSystems[systemIndex]->actors[actorIndex].GetRotation();
+				boxBoundsMatrix *= world->actorSystems[systemIndex]->actors[actorIndex]->GetRotation();
 				boxBoundsMatrix.r[3] = offset;
 
 				matrices.model = boxBoundsMatrix;
@@ -433,9 +433,9 @@ void D3D11RenderSystem::RenderBounds()
 				XMMATRIX sphereBoundsMatrix = XMMatrixIdentity();
 
 				XMVECTOR offset = XMVectorSet(
-					world->actorSystems[systemIndex]->actors[actorIndex].GetPositionFloat3().x + world->actorSystems[systemIndex]->boundingBox.Center.x,
-					world->actorSystems[systemIndex]->actors[actorIndex].GetPositionFloat3().y + world->actorSystems[systemIndex]->boundingBox.Center.y,
-					world->actorSystems[systemIndex]->actors[actorIndex].GetPositionFloat3().z + world->actorSystems[systemIndex]->boundingBox.Center.z,
+					world->actorSystems[systemIndex]->actors[actorIndex]->GetPositionFloat3().x + world->actorSystems[systemIndex]->boundingBox.Center.x,
+					world->actorSystems[systemIndex]->actors[actorIndex]->GetPositionFloat3().y + world->actorSystems[systemIndex]->boundingBox.Center.y,
+					world->actorSystems[systemIndex]->actors[actorIndex]->GetPositionFloat3().z + world->actorSystems[systemIndex]->boundingBox.Center.z,
 					1.0f);
 
 				XMVECTOR boundingSphereScaleFromRadius = XMVectorReplicate(world->actorSystems[systemIndex]->boundingSphere.Radius);

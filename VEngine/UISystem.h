@@ -12,7 +12,7 @@ class UISystem
 public:
 	void Init();
 	void Cleanup(); //D2D1 Actually throws errors if no cleanup
-	void Tick();
+	void Tick(class EditorMainWindow* mainWindow);
 	void RenderText();
 
 	std::vector<UIView*> uiViews;

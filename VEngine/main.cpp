@@ -38,33 +38,10 @@ int main(int argc, char *argv[])
     gUISystem.Init();
     gWorldEditor.Init();
 
-    //TODO: This is causing a crash in Release. Is it because it's after the init code?
-    //ID3D11Buffer* debugLinesBuffer = gRenderSystem.CreateDefaultBuffer(sizeof(Vertex) * 1024, D3D11_BIND_VERTEX_BUFFER, debugLineData);
-
-    ActorSystem cubes;
-    cubes.modelName = "cube.fbx";
-    cubes.name = L"TestCubes";
-    cubes.CreateActors(gRenderSystem, 3);
-
-    ActorSystem player = {};
-    player.name = L"Player0";
-    player.modelName = "monkey.fbx";
-    player.CreateActors(gRenderSystem, 1);
-
-
-    World* world = GetWorld();
-    world->actorSystems.push_back(&cubes);
-    world->AddActorSystem(player);
-    world->actorSystems.push_back(&gWorldEditor.xAxis);
-    world->actorSystems.push_back(&gWorldEditor.yAxis);
-    world->actorSystems.push_back(&gWorldEditor.zAxis);
-
+    //Qt late init
     editorMainWindow->worldDock->PopulateWorldList();
 
     gRenderSystem->Flush();
-
-    bool bGameOn = false;
-    bool bMoveLeft = true;
 
     //MAIN LOOP
     while (gCoreSystem.bMainLoop)
@@ -78,56 +55,11 @@ int main(int argc, char *argv[])
         editorMainWindow->Tick();
 
         gFileSystem.Tick();
-        gUISystem.Tick();
+        gUISystem.Tick(editorMainWindow);
 
-        //TODO: move to CoreSystem/UISystem.
-        QPoint p = editorMainWindow->renderViewWidget->mapFromGlobal(QCursor::pos());
-        gUISystem.mousePos.x = p.x();
-        gUISystem.mousePos.y = p.y();
+
 
         gTimerSystem.Tick(deltaTime);
-
-        if (gInputSystem.GetKeyDownState('P'))
-        {
-            bGameOn = !bGameOn;
-        }
-
-        //if (bGameOn)
-        {
-            //SetActiveCamera(&playerCamera);
-            //GetActiveCamera()->AttachTo(player.GetActor(0));
-            //playerCamera.Tick(deltaTime);
-
-            Actor* playerActor = player.GetActor(0);
-            if (gInputSystem.GetKeyDownState(VK_LEFT))
-            {
-                bMoveLeft = false;
-                
-            }
-
-            if (bMoveLeft)
-            {
-                XMVECTOR endPos = DirectX::XMVectorSet(2.f, 0.f, 0.f, 1.f);
-                playerActor->SetPosition(XMVectorLerp(playerActor->GetPositionVector(), endPos, deltaTime * 5.0f));
-            }
-            else if (!bMoveLeft)
-            {
-                XMVECTOR endPos = DirectX::XMVectorSet(0.f, 0.f, 0.f, 1.f);
-                playerActor->SetPosition(XMVectorLerp(playerActor->GetPositionVector(), endPos, deltaTime * 5.0f));
-            }
-
-            if (gInputSystem.GetKeyDownState(VK_RIGHT))
-            {
-                bMoveLeft = true;
-                
-            }
-        }
-        //else
-        {
-            SetActiveCamera(&editorCamera);
-            editorCamera.Tick(deltaTime);
-        }
-
 
         gRenderSystem->Tick();
         gRenderSystem->RenderSetup(deltaTime);

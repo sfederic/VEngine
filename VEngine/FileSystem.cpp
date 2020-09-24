@@ -42,7 +42,7 @@ void FileSystem::WriteAllActorSystems(World* world, const char* filename)
 		for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex]->actors.size(); actorIndex++)
 		{
 			//fwrite without the for loop(SOA) was about 0.01 ms faster with around 60,000 actors. Surprising
-			fwrite(&world->actorSystems[systemIndex]->actors[actorIndex].transform, sizeof(XMMATRIX), 1, file);
+			fwrite(&world->actorSystems[systemIndex]->actors[actorIndex]->transform, sizeof(XMMATRIX), 1, file);
 		}
 	}
 
@@ -74,7 +74,7 @@ void FileSystem::ReadAllActorSystems(World* world, const char* filename)
 		fread(&numActorsToSpawn, sizeof(int), 1, file);
 
 		//TODO: the old init code here isn't working too well
-		switch (newWorld.actorSystems[systemIndex]->id)
+		/*switch (newWorld.actorSystems[systemIndex]->id)
 		{
 		case EActorSystemID::Actor:
 			newWorld.actorSystems[systemIndex]->CreateActors(gRenderSystem, numActorsToSpawn);
@@ -83,7 +83,7 @@ void FileSystem::ReadAllActorSystems(World* world, const char* filename)
 		for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex]->actors.size(); actorIndex++)
 		{
 			fread(&newWorld.actorSystems[systemIndex]->actors[actorIndex].transform, sizeof(XMMATRIX), 1, file);
-		}
+		}*/
 
 	}
 

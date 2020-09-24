@@ -3,7 +3,6 @@
 #include "Array.h"
 #include "Debug.h"
 #include "Obj.h"
-#include "FBXImporter.h"
 #include "MathHelpers.h"
 #include "IRenderSystem.h"
 #include "WICTextureLoader.h"

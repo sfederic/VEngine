@@ -6,6 +6,7 @@
 #include "Actor.h"
 #include "WorldEditor.h"
 #include "World.h"
+#include "EditorMainWindow.h"
 
 UISystem gUISystem;
 
@@ -82,10 +83,14 @@ void UISystem::Cleanup()
 	textFormat->Release();
 }
 
-void UISystem::Tick()
+void UISystem::Tick(EditorMainWindow* mainWindow)
 {
 	GetCursorPos(&mousePos);
 	ScreenToClient(gCoreSystem.mainWindow, &mousePos);
+
+	QPoint p = mainWindow->renderViewWidget->mapFromGlobal(QCursor::pos());
+	gUISystem.mousePos.x = p.x();
+	gUISystem.mousePos.y = p.y();
 
 	if (gInputSystem.GetKeyUpState(VK_TAB))
 	{

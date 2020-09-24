@@ -139,9 +139,9 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer, EditorMainWindow* editorM
 		}
 
 		//Set translation widget positions (Never going to have more than 3, vector accesses are alright)
-		translationGizmos.actors[0].SetPosition(pickedActor->GetPositionVector());
-		translationGizmos.actors[1].SetPosition(pickedActor->GetPositionVector());
-		translationGizmos.actors[2].SetPosition(pickedActor->GetPositionVector());
+		translationGizmos.actors[0]->SetPosition(pickedActor->GetPositionVector());
+		translationGizmos.actors[1]->SetPosition(pickedActor->GetPositionVector());
+		translationGizmos.actors[2]->SetPosition(pickedActor->GetPositionVector());
 
 		//Delete actors in editor
 		if (gInputSystem.GetKeyUpState(VK_DELETE))
@@ -167,14 +167,6 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer, EditorMainWindow* editorM
 		}
 	}
 
-	//Actor spawning on right click
-	if (gInputSystem.GetMouseRightUpState())
-	{
-		if (pickedActor)
-		{
-			world->GetActorSystem(0)->AddActor(pickedActor->GetPositionVector());
-		}
-	}
 
 	//Actor picking for editor
 	if (gInputSystem.GetMouseLeftUpState())
@@ -199,9 +191,9 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer, EditorMainWindow* editorM
 				DrawRayDebug(screenPickRay.origin, screenPickRay.direction, screenPickRay.distance, debugLinesBuffer);
 			}
 
-			translationGizmos.actors[0].bRender = true;
-			translationGizmos.actors[0].bRender = true;
-			translationGizmos.actors[0].bRender = true;
+			translationGizmos.actors[0]->bRender = true;
+			translationGizmos.actors[1]->bRender = true;
+			translationGizmos.actors[2]->bRender = true;
 
 			actorIndex = screenPickRay.actorIndex;
 			actorSystemIndex = screenPickRay.actorSystemIndex;
@@ -218,9 +210,9 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer, EditorMainWindow* editorM
 				pickedActor->bPicked = false;
 				pickedActor = nullptr;
 				
-				translationGizmos.actors[0].bRender = false;
-				translationGizmos.actors[0].bRender = false;
-				translationGizmos.actors[0].bRender = false;
+				translationGizmos.actors[0]->bRender = false;
+				translationGizmos.actors[1]->bRender = false;
+				translationGizmos.actors[2]->bRender = false;
 			}
 		}
 	}
@@ -229,20 +221,20 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer, EditorMainWindow* editorM
 void WorldEditor::Init()
 {
 	//Init translation gizmos
-	TranslationGizmo xAxis;
-	xAxis.name = L"X Axis";
-	xAxis.pickedAxis = EPickedAxis::X;
-	xAxis.material.baseColour = XMFLOAT4(1.f, 0.f, 0.f, 1.f);
+	TranslationGizmo* xAxis = new TranslationGizmo;
+	xAxis->name = L"X Axis";
+	xAxis->pickedAxis = EPickedAxis::X;
+	xAxis->material.baseColour = XMFLOAT4(1.f, 0.f, 0.f, 1.f);
 
-	TranslationGizmo yAxis;
-	yAxis.name = L"Y Axis";
-	yAxis.pickedAxis = EPickedAxis::Y;
-	yAxis.material.baseColour = XMFLOAT4(0.f, 0.f, 1.f, 1.f);
+	TranslationGizmo* yAxis = new TranslationGizmo;
+	yAxis->name = L"Y Axis";
+	yAxis->pickedAxis = EPickedAxis::Y;
+	yAxis->material.baseColour = XMFLOAT4(0.f, 0.f, 1.f, 1.f);
 
-	TranslationGizmo zAxis;
-	zAxis.name = L"Z Axis";
-	zAxis.pickedAxis = EPickedAxis::Z;
-	zAxis.material.baseColour = XMFLOAT4(0.f, 1.f, 0.f, 1.f);
+	TranslationGizmo* zAxis = new TranslationGizmo;
+	zAxis->name = L"Z Axis";
+	zAxis->pickedAxis = EPickedAxis::Z;
+	zAxis->material.baseColour = XMFLOAT4(0.f, 1.f, 0.f, 1.f);
 
 	translationGizmos.actors.push_back(xAxis);
 	translationGizmos.actors.push_back(yAxis);
@@ -374,9 +366,9 @@ void WorldEditor::MoveActor(Actor* actor, EPickedAxis axis)
 
 		if (actor)
 		{
-			translationGizmos.actors[0].transform = actor->transform;
-			translationGizmos.actors[0].transform = actor->transform;
-			translationGizmos.actors[0].transform = actor->transform;
+			translationGizmos.actors[0]->transform = actor->transform;
+			translationGizmos.actors[1]->transform = actor->transform;
+			translationGizmos.actors[2]->transform = actor->transform;
 		}
 
 		ReleaseCapture();
