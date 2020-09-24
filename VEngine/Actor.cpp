@@ -133,58 +133,6 @@ void Actor::Move(float d, XMVECTOR direction)
 }
 
 //ACTOR SYSTEM
-void ActorSystem::CreateActors(IRenderSystem* renderSystem, int numActorsToSpawn)
-{
-	char filename[128] = {};
-	strcat_s(filename, "Models/");
-	strcat_s(filename, modelName);
-
-	//if (LoadOBJFile(filename, modelData))
-	if (FBXImporter::Import(filename, modelData))
-	{
-		UINT byteWidth = modelData.GetByteWidth();
-		numVertices = (byteWidth * actors.size()) / sizeof(Vertex);
-		renderSystem->CreateVertexBuffer(byteWidth, modelData.verts.data(), this);
-		UINT indicesByteWidth = modelData.indices.size() * sizeof(uint16_t);
-		//indexBuffer = renderSystem->CreateDefaultBuffer(indicesByteWidth, D3D11_BIND_INDEX_BUFFER, modelData.indices.data());
-
-		renderSystem->CreateSamplerState(this);
-		renderSystem->CreateTexture(this);
-
-		size_t stride = sizeof(Vertex);
-
-		BoundingBox::CreateFromPoints(boundingBox, modelData.verts.size(), &modelData.verts[0].pos, stride);
-		BoundingSphere::CreateFromPoints(boundingSphere, modelData.verts.size(), &modelData.verts[0].pos, stride);
-
-		actors.reserve(numActorsToSpawn);
-		for (int i = 0; i < numActorsToSpawn; i++)
-		{
-			//TODO: I'm gonna need the smart pointers here to deal with the eventual Tick() virtual calls
-			Actor actor;
-			actor.transform.r[3] = XMVectorSet(i, i, i, 1.f);
-			actor.vertexBufferOffset = i * modelData.GetByteWidth();
-			actor.name = name;
-			std::wstring indexString = std::to_wstring(i);
-			actor.name += indexString;
-
-			actors.push_back(actor);
-		}
-	}
-	else
-	{
-		DebugPrint("Actors failed to load");
-	}
-}
-
-Actor* ActorSystem::AddActor(XMVECTOR spawnPosition)
-{
-	Actor actor = Actor();
-	actor.SetPosition(spawnPosition);
-	actor.vertexBufferOffset = (int)(actors.size() * modelData.GetByteWidth());
-
-	actors.push_back(actor);
-	return &actors[actors.size() - 1];
-}
 
 void ActorSystem::RemoveActor(int index)
 {
@@ -195,5 +143,5 @@ void ActorSystem::RemoveActor(int index)
 Actor* ActorSystem::GetActor(unsigned int index)
 {
 	assert(index < actors.size());
-	return &actors[index];
+	return actors[index];
 }

@@ -6,42 +6,20 @@
 #include <memory>
 #include <string>
 #include "RenderTypes.h"
+#include <typeindex>
 
 using namespace DirectX;
 
-//TODO: fix this up
-enum class PickedAxis
-{
-	None,
-	X,
-	Y,
-	Z
-};
-
 enum class EActorSystemID
 {
-	Actor,
-	DebugSphere,
-	DebugBox
+
 };
 
-struct ModelData
-{
-	unsigned int GetByteWidth()
-	{
-		return (sizeof(Vertex) * verts.size());
-	}
-
-	std::vector<Vertex> verts;
-	std::vector<uint16_t> indices;
-};
-
-//Mario 64 used the term Actor, so I will too
 class Actor
 {
 public:
 	Actor();
-	//virtual void Tick(float deltaTime) = 0;
+	virtual void Tick(float deltaTime) = 0;
 	XMVECTOR GetPositionVector();
 	XMFLOAT3 GetPositionFloat3();
 	void SetPosition(XMVECTOR v);
@@ -65,32 +43,95 @@ public:
 	void Move(float d, XMVECTOR direction);
 
 	XMMATRIX transform = XMMatrixIdentity();
+	Material material;
 
 	int vertexBufferOffset;
 	bool bRender = true;
 	bool bPicked = false;
 
-	//TODO: Temp. replace with new actor 
-	PickedAxis pickedAxis;
-
 	std::wstring name;
 };
 
-//TODO: I want to keep the batched state change rendering I have now.
-//Create a few new bools and sort the World list of ActorSystems based on those bools, then render
 class ActorSystem
 {
 public:
 	ActorSystem() {}
-	//virtual void Tick(float deltaTime) = 0;
-	void CreateActors(class IRenderSystem* renderSystem, int numActorsToSpawn);
-	Actor* AddActor(XMVECTOR spawnPosition);
+	virtual void Tick(float deltaTime) = 0;
+
+	template <class ActorType>
+	void CreateActors(class IRenderSystem* renderSystem, int numActorsToSpawn)
+	{
+		char filename[128] = {};
+		strcat_s(filename, "Models/");
+		strcat_s(filename, modelName);
+
+		//if (LoadOBJFile(filename, modelData))
+		if (FBXImporter::Import(filename, modelData))
+		{
+			UINT byteWidth = modelData.GetByteWidth();
+			numVertices = (byteWidth * actors.size()) / sizeof(Vertex);
+			renderSystem->CreateVertexBuffer(byteWidth, modelData.verts.data(), this);
+			UINT indicesByteWidth = modelData.indices.size() * sizeof(uint16_t);
+			//indexBuffer = renderSystem->CreateDefaultBuffer(indicesByteWidth, D3D11_BIND_INDEX_BUFFER, modelData.indices.data());
+
+			renderSystem->CreateSamplerState(this);
+			renderSystem->CreateTexture(this);
+
+			size_t stride = sizeof(Vertex);
+
+			BoundingBox::CreateFromPoints(boundingBox, modelData.verts.size(), &modelData.verts[0].pos, stride);
+			BoundingSphere::CreateFromPoints(boundingSphere, modelData.verts.size(), &modelData.verts[0].pos, stride);
+
+			actors.reserve(numActorsToSpawn);
+			for (int i = 0; i < numActorsToSpawn; i++)
+			{
+				//TODO: I'm gonna need the smart pointers here to deal with the eventual Tick() virtual calls
+				ActorType* actor = new ActorType();
+				actor->transform.r[3] = XMVectorSet(i, i, i, 1.f);
+				actor.vertexBufferOffset = i * modelData.GetByteWidth();
+				actor.name = name;
+				std::wstring indexString = std::to_wstring(i);
+				actor.name += indexString;
+
+				actors.push_back(actor);
+			}
+		}
+		else
+		{
+			DebugPrint("Actors failed to load");
+		}
+	}
+
+	template <class ActorType>
+	Actor* AddActor(XMVECTOR spawnPosition)
+	{
+		ActorType* actor = new ActorType();
+		actor.SetPosition(spawnPosition);
+		actor.vertexBufferOffset = (int)(actors.size() * modelData.GetByteWidth());
+
+		actors.push_back(actor);
+		return actor;
+	}
+
 	void RemoveActor(int index);
 	Actor* GetActor(unsigned int index);
+	
+	template <class SystemType>
+	bool IsA()
+	{
+		if (typeid(this) == typeid(SystemType))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 	ModelData modelData;
 
-	//TODO: this is shit, move these into a ShaderView
+	//TODO: move these into a ShaderView/Pipelineview
 	struct ID3D11Buffer* vertexBuffer;
 	struct ID3D11Buffer* indexBuffer;
 	struct ID3D11SamplerState* samplerState;
@@ -102,17 +143,17 @@ public:
 	BoundingBox boundingBox;
 	BoundingSphere boundingSphere;
 
-	uint64_t numVertices; //Frustrum culling is going to make a mess of this 
+	size_t numVertices;
 
-	std::vector<Actor> actors;
+	std::vector<Actor*> actors;
 
-	std::wstring name = L"TestActor";
+	std::wstring name;
 
-	const wchar_t* shaderName = L"shaders.hlsl";
-	const wchar_t* textureName = L"texture.png";
-	const char* modelName = "cube.obj";
+	EActorSystemID id;
 
-	EActorSystemID id = EActorSystemID::Actor;
+	const wchar_t* shaderName;
+	const wchar_t* textureName;
+	const char* modelName;
 
 	bool bInstancingActors; //bool for setting system to use instancing
 };

@@ -119,7 +119,7 @@
     <ClCompile Include="TimerSystem.cpp" />
     <ClCompile Include="ToolbarDock.cpp" />
     <ClCompile Include="TransformEditWidget.cpp" />
-    <ClCompile Include="TranslationWidget.cpp" />
+    <ClCompile Include="TranslationGizmo.cpp" />
     <ClCompile Include="UISystem.cpp" />
     <ClCompile Include="UIView.cpp" />
     <ClCompile Include="World.cpp" />
@@ -179,7 +179,7 @@
     <ClInclude Include="TimerSystem.h" />
     <ClInclude Include="ToolbarDock.h" />
     <ClInclude Include="TransformEditWidget.h" />
-    <ClInclude Include="TranslationWidget.h" />
+    <ClInclude Include="TranslationGizmo.h" />
     <ClInclude Include="UISystem.h" />
     <ClInclude Include="UIView.h" />
     <ClInclude Include="World.h" />

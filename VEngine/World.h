@@ -5,7 +5,6 @@
 #include <unordered_map>
 #include <string>
 
-//Mario Bros. used the term World. One world per time for this engine. No streaming. No cross world functionality.
 class World
 {
 public:

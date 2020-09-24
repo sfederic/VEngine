@@ -1,23 +1,23 @@
 #pragma once
 
 #include "Raycast.h"
-#include "Actor.h"
+#include "TranslationGizmo.h"
 
 class WorldEditor
 {
 public:
+	WorldEditor();
 	void Tick(ID3D11Buffer* debugLinesBuffer, class EditorMainWindow* editorMainWindow);
 	void Init();
 	void MoveActor(Actor* actor, XMVECTOR direction);
-	void MoveActor(class Actor* actor, PickedAxis axis);
+	void MoveActor(class Actor* actor, EPickedAxis axis);
 
-	std::vector<ActorSystem*> axes;
-	ActorSystem xAxis, yAxis, zAxis;
+	TranslationGizmoSystem translationGizmos;
 
 	Ray screenPickRay;
 
 	Actor* pickedActor;
-	Actor* pickedAxis;
+	TranslationGizmo* pickedAxis;
 	XMVECTOR pickedDirection;
 
 	float pickedActorMoveSpeed = 5.f;

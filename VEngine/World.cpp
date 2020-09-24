@@ -68,7 +68,7 @@ Actor* World::FindActorByString(std::wstring name)
 	{
 		for (int j = 0; j < actorSystems[i]->actors.size(); j++)
 		{
-			if (actorSystems[i]->actors[j].name == name)
+			if (actorSystems[i]->actors[j]->name == name)
 			{
 				foundActor = actorSystems[i]->GetActor(j);
 				return foundActor;
@@ -109,7 +109,7 @@ Actor* World::GetActor(unsigned int systemId, unsigned int actorId)
 	{
 		if (actorId < actorSystems[systemId]->actors.size())
 		{
-			return &actorSystems[systemId]->actors[actorId];
+			return actorSystems[systemId]->actors[actorId];
 		}
 	}
 

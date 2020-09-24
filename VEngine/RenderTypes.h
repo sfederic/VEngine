@@ -1,6 +1,7 @@
 #pragma once
 
 #include <DirectXMath.h>
+#include <vector>
 
 using namespace DirectX;
 
@@ -21,5 +22,16 @@ struct Matrices
 
 struct Material
 {
-	XMFLOAT4 ambient;
+	XMFLOAT4 baseColour;
+};
+
+struct ModelData
+{
+	unsigned int GetByteWidth()
+	{
+		return (sizeof(Vertex) * verts.size());
+	}
+
+	std::vector<Vertex> verts;
+	std::vector<uint16_t> indices;
 };

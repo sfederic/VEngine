@@ -104,9 +104,6 @@
     <ClCompile Include="TimerSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TranslationWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="UISystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -147,6 +144,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Lights.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TranslationGizmo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -220,9 +220,6 @@
     <ClInclude Include="TimerSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TranslationWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="UISystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -263,6 +260,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Lights.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TranslationGizmo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

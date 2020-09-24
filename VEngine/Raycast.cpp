@@ -83,12 +83,7 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSy
 
 			ray.actorIndex = i;
 
-			//DebugPrint("hit %d\n", ray.actorIndex);
-
-			//TODO: fix up. Add new actor class instead of this garbage
-			if (actorSystem->actors[i].pickedAxis == PickedAxis::X ||
-				actorSystem->actors[i].pickedAxis == PickedAxis::Y ||
-				actorSystem->actors[i].pickedAxis == PickedAxis::Z)
+			if (actorSystem->IsA<TranslationGizmoSystem>());
 			{
 				return true;
 			}
@@ -219,20 +214,10 @@ bool RaycastAllFromScreen(Ray& ray, int sx, int sy, Camera* camera, World* world
 			Actor* actor = world->GetActor(ray.actorSystemIndex, ray.actorIndex);
 			if (actor)
 			{
-				if (actor->pickedAxis == PickedAxis::X)
+				TranslationGizmo* axisActor = (TranslationGizmo*)actor;
+				if (axisActor)
 				{
-					gWorldEditor.pickedAxis = actor;
-					DebugPrint("X-Axis picked\n");
-				}
-				else if (actor->pickedAxis == PickedAxis::Y)
-				{
-					gWorldEditor.pickedAxis = actor;
-					DebugPrint("Y-Axis picked\n");
-				}
-				else if (actor->pickedAxis == PickedAxis::Z)
-				{
-					gWorldEditor.pickedAxis = actor;
-					DebugPrint("Z-Axis picked\n");
+					gWorldEditor.pickedAxis = axisActor;
 				}
 				else
 				{

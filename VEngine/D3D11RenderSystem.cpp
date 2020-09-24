@@ -62,7 +62,7 @@ void D3D11RenderSystem::Init(HWND window)
 	CreateConstantBuffer();
 
 	//Check feature support (just for breakpoint checking for now)
-	//TODO: Think about putting this into te debug menu
+	//TODO: Think about putting this into the debug menu
 	D3D11_FEATURE_DATA_THREADING threadFeature = {};
 	device->CheckFeatureSupport(D3D11_FEATURE_THREADING, &threadFeature, sizeof(threadFeature));
 	return;
