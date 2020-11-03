@@ -296,15 +296,18 @@ void D3D11RenderSystem::CreateSamplerState(ActorSystem* actorSystem)
 
 void D3D11RenderSystem::CreateTexture(ActorSystem* actorSystem)
 {
-	wchar_t textureFilename[128] = { L"Textures/" };
-	wcscat_s(textureFilename, actorSystem->textureName);
+	const wchar_t* textureFilename = L"Textures/";
+	actorSystem->textureName = textureFilename;
 
 	ID3D11Resource* texture;
 	ID3D11ShaderResourceView* srv;
 
-	HR(CreateWICTextureFromFile(device, textureFilename, &texture, &srv));
-	actorSystem->texture = texture;
-	actorSystem->srv = srv;
+	//HR(CreateWICTextureFromFile(device, textureFilename, &texture, &srv));
+	if (texture && srv)
+	{
+		actorSystem->texture = texture;
+		actorSystem->srv = srv;
+	}
 }
 
 void D3D11RenderSystem::RenderActorSystem(World* world)
