@@ -12,6 +12,23 @@ EditorMainWindow::EditorMainWindow(QWidget *parent) : QMainWindow(parent)
 {
     ui.setupUi(this);
 
+    //Styles
+    //qApp->setStyleSheet("QDockWidget:title { background-color: #0f8640 }"\
+    //    "QDockWidget {background-color: #383838}");
+
+    qApp->setStyleSheet("\
+        QWidget {background-color: #383838}\
+        QDockWidget:title {background-color: #181818}\
+        QScrollBar:vertical {background: #383838}\
+        ");
+
+    QPalette p = QApplication::palette();
+    p.setColor(QPalette::Text, Qt::white);
+    p.setColor(QPalette::WindowText, Qt::white);
+    p.setColor(QPalette::ButtonText, Qt::white);
+    p.setColor(QPalette::BrightText, Qt::white);
+    QApplication::setPalette(p);
+
     //Toolbar dock
     toolbarDock = new ToolbarDock("Toolbar");
     addDockWidget(Qt::TopDockWidgetArea, toolbarDock);
