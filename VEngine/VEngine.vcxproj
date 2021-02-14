@@ -110,6 +110,7 @@
     <ClCompile Include="Lights.cpp" />
     <ClCompile Include="MathHelpers.cpp" />
     <ClCompile Include="Obj.cpp" />
+    <ClCompile Include="Profiler.cpp" />
     <ClCompile Include="PropertiesDock.cpp" />
     <ClCompile Include="PropertiesWidget.cpp" />
     <ClCompile Include="Raycast.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="Lights.h" />
     <ClInclude Include="MathHelpers.h" />
     <ClInclude Include="Obj.h" />
+    <ClInclude Include="Profiler.h" />
     <ClInclude Include="PropertiesDock.h" />
     <ClInclude Include="PropertiesWidget.h" />
     <ClInclude Include="Raycast.h" />
