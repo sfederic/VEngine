@@ -8,6 +8,7 @@
 #include "World.h"
 #include "DebugMenu.h"
 #include "WorldEditor.h"
+#include "Profiler.h"
 
 Console gConsole;
 
@@ -20,6 +21,7 @@ namespace ExecuteStrings
 	const wchar_t* CLEAR = L"CLEAR";
 	const wchar_t* LEVEL = L"LEVEL";
 	const wchar_t* SNAP = L"SNAP";
+	const wchar_t* PROFILE = L"PROFILE";
 }
 
 namespace LevelNames
@@ -115,6 +117,15 @@ void Console::ExecuteString()
 		else if (!gWorldEditor.bMoveActorsInIncrements)
 		{
 			debugMenu.AddNotification(L"SNAP OFF");
+		}
+	}
+	else if (wcsncmp(consoleString, ExecuteStrings::PROFILE, wcslen(ExecuteStrings::PROFILE)) == 0) //Show profile stats
+	{
+		for (int i = 0; i < gProfiler.timeFrames.size(); i++)
+		{
+			TimeFrame timeFrame = gProfiler.timeFrames[i];
+			_snwprintf_s(item.text, sizeof(item.text), L"Profile function: %ls", std::to_wstring(timeFrame.GetAverageTime()));
+			viewItems.push_back(item);
 		}
 	}
 	else

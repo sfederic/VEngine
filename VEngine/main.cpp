@@ -19,12 +19,15 @@
 #include "TimerSystem.h"
 #include "MathHelpers.h"
 #include "Console.h"
+#include "Profiler.h"
 
 int main(int argc, char *argv[])
 {
     //Qt setup
     QApplication qApplication(argc, argv);
     EditorMainWindow* editorMainWindow = new EditorMainWindow();
+
+    gProfiler.Init();
 
     //FBX setup
     FBXImporter::Init();
@@ -48,6 +51,8 @@ int main(int argc, char *argv[])
     {
         const float deltaTime = gCoreSystem.deltaTime;
 
+        gProfiler.Start();
+
         gCoreSystem.StartTimer();
         gCoreSystem.HandleMessages();
 
@@ -57,7 +62,7 @@ int main(int argc, char *argv[])
         gFileSystem.Tick();
         gUISystem.Tick(editorMainWindow);
 
-
+        gProfiler.End(L"main");
 
         gTimerSystem.Tick(deltaTime);
 
@@ -75,7 +80,7 @@ int main(int argc, char *argv[])
             gUISystem.d2dRenderTarget->BeginDraw();
             gConsole.Tick();
             gConsole.DrawViewItems();
-            //debugMenu.Tick(GetWorld(), deltaTime);
+            debugMenu.Tick(GetWorld(), deltaTime);
             //gUISystem.RenderAllUIViews();
             gUISystem.d2dRenderTarget->EndDraw();
         }
@@ -86,6 +91,8 @@ int main(int argc, char *argv[])
         gRenderSystem->Present();
 
         gInputSystem.InputReset();
+        gProfiler.Clean();
+
         gCoreSystem.EndTimer();
     }
 

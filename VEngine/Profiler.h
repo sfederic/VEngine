@@ -6,14 +6,16 @@
 //An period of measurement between Start() and End() calls.
 struct TimeFrame
 {
-	TimeFrame(const char* _functionName, __int64 _startTime)
+	TimeFrame(__int64 _startTime)
 	{
-		functionName = (wchar_t*)_functionName;
 		startTime = _startTime;
-		elapsedTime = 0.0;
 	}
 
-	double elapsedTime;
+	void SetElapsedTime();
+	double GetAverageTime();
+
+	double elapsedTimes[60];
+	int currentElapsedTimeIndex = 0;
 	__int64 startTime;
 	__int64 endTime;
 	std::wstring functionName;
@@ -23,8 +25,12 @@ struct TimeFrame
 class Profiler
 {
 public:
-	static void Start();
-	static void End();
+	void Init();
+	void Clean(); //Call at end of each frame.
+	void Start();
+	void End(const wchar_t* functionName);
 
-	static std::vector<TimeFrame> timeFrames;
+	std::vector<TimeFrame> timeFrames;
 };
+
+extern Profiler gProfiler;
