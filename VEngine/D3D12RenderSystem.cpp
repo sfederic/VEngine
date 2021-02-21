@@ -1,8 +1,62 @@
 #include "D3D12RenderSystem.h"
 #include "CoreSystem.h"
+#include "ShaderFactory.h"
 
 void D3D12RenderSystem::Tick()
 {
+}
+
+ID3DBlob* D3D12RenderSystem::CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target)
+{
+	UINT compileFlags = 0;
+#ifdef _DEBUG
+	compileFlags = D3DCOMPILE_SKIP_OPTIMIZATION | D3DCOMPILE_DEBUG;
+#endif
+	ID3DBlob* code;
+	ID3DBlob* error;
+
+	D3DCompileFromFile(filename, nullptr, nullptr, entry, target, compileFlags, 0, &code, &error);
+	if (error)
+	{
+		const wchar_t* errMsg = (wchar_t*)error->GetBufferPointer();
+		//OutputDebugString(errMsg);
+		//MessageBox(0, errMsg, entry, 0);
+	}
+
+	return code;
+}
+
+void D3D12RenderSystem::CreateShaders()
+{
+	//DXC COMPILER EXAMPLE
+	/*HR(DxcCreateInstance(CLSID_DxcLibrary, IID_PPV_ARGS(&dxcLibrary)));
+	HR(DxcCreateInstance(CLSID_DxcCompiler, IID_PPV_ARGS(&dxcCompiler)));
+
+	IDxcOperationResult* result;
+	dxcCompiler->Compile(vertexCode, L"Shaders/shader.hlsl", L"VSMain", L"vs_6_0", nullptr, 0, nullptr, 0, nullptr, &result);
+	HR(result->GetResult(&vertexCode));
+
+	dxcCompiler->Compile(pixelCode, L"Shaders/shader.hlsl", L"PSMain", L"ps_6_0", nullptr, 0, nullptr, 0, nullptr, &result);
+	HR(result->GetResult(&pixelCode));*/
+
+	UINT compileFlags = D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION;
+	ID3DBlob* error = nullptr;
+
+	HR(D3DCompileFromFile(L"Shaders/shaders.hlsl", nullptr, nullptr, "VSMain", "vs_5_0", compileFlags, 0, &vertexCode, &error));
+	if (error)
+	{
+		LPCSTR errMsg = (LPCSTR)error->GetBufferPointer();
+		OutputDebugString(errMsg);
+		MessageBox(0, errMsg, "VSMain", 0);
+	}
+	error = nullptr;
+	HR(D3DCompileFromFile(L"Shaders/shaders.hlsl", nullptr, nullptr, "PSMain", "ps_5_0", compileFlags, 0, &pixelCode, &error));
+	if (error)
+	{
+		LPCSTR errMsg = (LPCSTR)error->GetBufferPointer();
+		OutputDebugString(errMsg);
+		MessageBox(0, errMsg, "PSMain", 0);
+	}
 }
 
 void D3D12RenderSystem::Init(HWND window)
@@ -49,8 +103,15 @@ void D3D12RenderSystem::Init(HWND window)
 	rtvHeapSize = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 	assert(rtvHeapSize > 0);
 
+	//CONSTANT DESC HEAP
+	D3D12_DESCRIPTOR_HEAP_DESC cbHeapDesc = {};
+	cbHeapDesc.NumDescriptors = 1;
+	cbHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
+	cbHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
+	HR(device->CreateDescriptorHeap(&cbHeapDesc, IID_PPV_ARGS(&cbHeap)));
+
 	//D3D11on12 (For D2D/DWrite)
-	//NOTE: With D3D11on12 and all the debug information, some builds were giving 500MB for hello world tier programs
+	//NOTE: With D3D11on12 and all the debug information, some builds were giving 500MB for hello world-tier programs
 	{
 		D3D_FEATURE_LEVEL levels[] = {
 			D3D_FEATURE_LEVEL_11_0
@@ -77,6 +138,72 @@ void D3D12RenderSystem::Init(HWND window)
 	//CMD ALLOC
 	HR(device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&cmdAlloc)));
 
+	//INPUT ELEMENTS	
+	D3D12_INPUT_ELEMENT_DESC inputElements[] =
+	{
+		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, pos), D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0},
+		{"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, offsetof(Vertex, uv), D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0},
+		{"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, normal), D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0}
+	};
+
+	//BLEND DESC
+	D3D12_BLEND_DESC blendDesc = {};
+	blendDesc.IndependentBlendEnable = false;
+	blendDesc.RenderTarget[0].BlendEnable = false;
+	blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;
+
+	//RASTERIZER
+	D3D12_RASTERIZER_DESC rastDesc = {};
+	rastDesc.FrontCounterClockwise = true;
+	rastDesc.CullMode = D3D12_CULL_MODE_BACK;
+	rastDesc.FillMode = D3D12_FILL_MODE_WIREFRAME;
+
+	//Test shaders
+	CreateShaders();
+
+	//ROOT SIGNATURE
+	D3D12_DESCRIPTOR_RANGE descRange = {};
+	descRange.BaseShaderRegister = 0;
+	descRange.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_CBV;
+	descRange.NumDescriptors = 1;
+
+	D3D12_ROOT_PARAMETER rootParam = {};
+	rootParam.DescriptorTable = { 1, &descRange };
+	rootParam.ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParam.ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+
+
+	D3D12_ROOT_SIGNATURE_DESC rootDesc = {};
+	rootDesc.pParameters = &rootParam;
+	rootDesc.NumParameters = 1;
+	rootDesc.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
+	
+	ID3DBlob* rootBlob = nullptr;
+	ID3DBlob* rootError = nullptr;
+	HR(D3D12SerializeRootSignature(&rootDesc, D3D_ROOT_SIGNATURE_VERSION_1, &rootBlob, &rootError));
+	if (rootError)
+	{
+		MessageBox(0, (char*)rootError->GetBufferPointer(), "Root error", 0);
+	}
+	HR(device->CreateRootSignature(0, rootBlob->GetBufferPointer(), rootBlob->GetBufferSize(), IID_PPV_ARGS(&rootSig)));
+
+	//PIPELINE
+	D3D12_GRAPHICS_PIPELINE_STATE_DESC psoDesc = {};
+	psoDesc.InputLayout = { inputElements, _countof(inputElements) };
+    psoDesc.pRootSignature = rootSig;     
+	psoDesc.VS = { reinterpret_cast<UINT8*>(vertexCode->GetBufferPointer()), vertexCode->GetBufferSize() };  
+	psoDesc.PS = { reinterpret_cast<UINT8*>(pixelCode->GetBufferPointer()), pixelCode->GetBufferSize() };  
+	psoDesc.RasterizerState = rastDesc;
+	psoDesc.BlendState = blendDesc;
+	psoDesc.DepthStencilState.DepthEnable = FALSE;     
+	psoDesc.DepthStencilState.StencilEnable = FALSE;   
+	psoDesc.SampleMask = UINT_MAX;      
+	psoDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;     
+	psoDesc.NumRenderTargets = 1;    
+	psoDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;   
+	psoDesc.SampleDesc.Count = 1;     
+	HR(device->CreateGraphicsPipelineState(&psoDesc, IID_PPV_ARGS(&pipelineState)));
+
 	//CMDLIST
 	HR(device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, cmdAlloc, pipelineState, IID_PPV_ARGS(&cmdList)));
 	HR(cmdList->Close());
@@ -89,13 +216,6 @@ void D3D12RenderSystem::Init(HWND window)
 	fenceVal = 1;
 
 	fenceEvent = CreateEvent(nullptr, false, false, nullptr);
-
-	//CONSTANT DESC HEAP
-	D3D12_DESCRIPTOR_HEAP_DESC cbHeapDesc = {};
-	cbHeapDesc.NumDescriptors = 1;
-	cbHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
-	cbHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
-	HR(device->CreateDescriptorHeap(&cbHeapDesc, IID_PPV_ARGS(&cbHeap)));
 }
 
 void D3D12RenderSystem::RenderSetup(float deltaTime)
@@ -111,8 +231,8 @@ void D3D12RenderSystem::Render(float deltaTime)
 	//UpdateConstantBuffer(cbUploadMaterialBuffer.Get(), sizeof(Material), &material);
 
 	cmdList->SetGraphicsRootSignature(rootSig);
-	//cmdList->SetDescriptorHeaps(1, &cbHeap);
-	//cmdList->SetGraphicsRootDescriptorTable(0, cbHeap->GetGPUDescriptorHandleForHeapStart());
+	cmdList->SetDescriptorHeaps(1, &cbHeap);
+	cmdList->SetGraphicsRootDescriptorTable(0, cbHeap->GetGPUDescriptorHandleForHeapStart());
 	cmdList->RSSetViewports(1, &viewport);
 	cmdList->RSSetScissorRects(1, &scissorRect);
 
@@ -130,29 +250,23 @@ void D3D12RenderSystem::Render(float deltaTime)
 	cmdList->DrawInstanced(3, 1, 0, 0);
 
 	//Resource Barrier gone with D3D11on12, barrier is with wrappedBackBuffer creation
-	//cmdList->ResourceBarrier(1, &ResourceBarrier::Transition(rtvs[currentBackBufferIndex],
-		//D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT));
+	cmdList->ResourceBarrier(1, &ResourceBarrier::Transition(rtvs[currentBackBufferIndex],
+		D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT));
 
-	HR(cmdList->Close());
-
-	ID3D12CommandList* cmdLists[] = { cmdList };
-	cmdQueue->ExecuteCommandLists(_countof(cmdLists), cmdLists);
+	//TODO: this call should really be in RenderEnd(), wait until below UI code is fixed up
+	ExecuteCommandLists();
 
 	//UI
-	d3d11On12Device->AcquireWrappedResources(&wrappedBackBuffers[currentBackBufferIndex], 1);
+	//d3d11On12Device->AcquireWrappedResources(&wrappedBackBuffers[currentBackBufferIndex], 1);
 
-	d2dDeviceContext->SetTarget(d2dRenderTargets[currentBackBufferIndex]);
+	//I don't what the fuck this used to be
+	/*d2dDeviceContext->SetTarget(d2dRenderTargets[currentBackBufferIndex]);
 	d2dDeviceContext->BeginDraw();
 	d2dDeviceContext->DrawTextA(L"hello", 5, textFormat, { 0.f, 0.f, 100.f, 100.f }, brushText);
-	d2dDeviceContext->EndDraw();
+	d2dDeviceContext->EndDraw();*/
 
-	d3d11On12Device->ReleaseWrappedResources(&wrappedBackBuffers[currentBackBufferIndex], 1);
-	d3d11DeviceContext->Flush();
-
-	HR(swapchain->Present(1, 0))
-
-	WaitForPreviousFrame();
-	currentBackBufferIndex = swapchain->GetCurrentBackBufferIndex();
+	//d3d11On12Device->ReleaseWrappedResources(&wrappedBackBuffers[currentBackBufferIndex], 1);
+	//d3d11DeviceContext->Flush();
 }
 
 void D3D12RenderSystem::RenderEnd(float deltaTime)
@@ -187,13 +301,17 @@ void D3D12RenderSystem::CreateAllShaders()
 {
 }
 
-void* D3D12RenderSystem::GetSwapchain()
+IDXGISwapChain3* D3D12RenderSystem::GetSwapchain()
 {
-	return nullptr;
+	return swapchain;
 }
 
 void D3D12RenderSystem::Present()
 {
+	HR(swapchain->Present(1, 0));
+
+	WaitForPreviousFrame();
+	currentBackBufferIndex = swapchain->GetCurrentBackBufferIndex();
 }
 
 void D3D12RenderSystem::Flush()

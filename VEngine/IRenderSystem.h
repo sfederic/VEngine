@@ -9,6 +9,8 @@ public:
 
 };
 
+class IDXGISwapChain3;
+
 //Render system Interface
 class IRenderSystem
 {
@@ -25,7 +27,7 @@ public:
 	virtual void CreateVertexShader() = 0;
 	virtual void CreatePixelShader() = 0;
 	virtual void CreateAllShaders() = 0;
-	virtual void* GetSwapchain() = 0;
+	virtual IDXGISwapChain3* GetSwapchain() = 0;
 	virtual void Present() = 0;
 	virtual void Flush() = 0; //Acting as a stand in for WaitForPreviousFrame()
 

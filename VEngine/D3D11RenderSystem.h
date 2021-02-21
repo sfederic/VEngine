@@ -30,7 +30,7 @@ public:
 	virtual void CreatePixelShader();
 	virtual void CreateAllShaders();
 	virtual void CreateVertexBuffer(UINT size, const void* data, class ActorSystem* actor) override;
-	virtual void* GetSwapchain();
+	virtual IDXGISwapChain3* GetSwapchain();
 	virtual void Present();
 	virtual void Flush();
 

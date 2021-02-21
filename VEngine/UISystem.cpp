@@ -12,7 +12,7 @@ UISystem gUISystem;
 
 void UISystem::Init()
 {
-#ifdef D3D11_RENDERER
+//#ifdef D3D11_RENDERER
 	//Direct2D Init
 	IDXGISurface* surface;
 
@@ -51,7 +51,6 @@ void UISystem::Init()
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.17f, 0.17f, 0.18f, 1.0f), &brushButton));
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.1f, 0.1f, 0.8f, 1.0f), &brushCheckBoxOn));
 
-
 	//Populate UIViews
 	//NOTE: So far the ui views are static, if I want to bring layering back, have to ditch this approach
 	UIViewActor* uiViewActor = new UIViewActor;
@@ -63,7 +62,7 @@ void UISystem::Init()
 
 	toolbar = new Toolbar();
 	uiViews.push_back(toolbar);
-#endif
+//#endif
 }
 
 void UISystem::Cleanup()

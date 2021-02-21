@@ -33,12 +33,14 @@ public:
 	virtual void CreateVertexShader() override;
 	virtual void CreatePixelShader() override;
 	virtual void CreateAllShaders() override;
-	virtual void* GetSwapchain() override;
+	virtual IDXGISwapChain3* GetSwapchain() override;
 	virtual void Present() override;
 	virtual void Flush() override;
 
 	void ExecuteCommandLists();
 	void InitD2D();
+	void CreateShaders();
+	ID3DBlob* CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target);
 	void UpdateConstantBuffer(ID3D12Resource* constBuffer, int byteWidth, void* initData);
 	void WaitForPreviousFrame();
 
@@ -70,19 +72,20 @@ public:
 	ID3D12Resource* rtvs[swapchainCount];
 	ID3D12RootSignature* rootSig;
 	ID3D12PipelineState* pipelineState;
+	
 	ID3D12Fence* fence;
 
 
 	ID3D11Resource* wrappedBackBuffers[swapchainCount];
 
-	IDxcCompiler* dxcCompiler;
-	IDxcLibrary* dxcLibrary;
+	ComPtr<IDxcCompiler2> dxcCompiler;
+	ComPtr<IDxcLibrary> dxcLibrary;
 
-	//ID3DBlob* vertexCode;
-	//ID3DBlob* pixelCode;
+	ID3DBlob* vertexCode;
+	ID3DBlob* pixelCode;
 
-	IDxcBlob* vertexCode;
-	IDxcBlob* pixelCode;
+	//IDxcBlob* vertexCode;
+	//IDxcBlob* pixelCode;
 
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle;
 	D3D12_VERTEX_BUFFER_VIEW vertexBufferView;

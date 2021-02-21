@@ -249,7 +249,7 @@ void D3D11RenderSystem::CreateVertexBuffer(UINT size, const void* data, ActorSys
 	system->vertexBuffer = CreateDefaultBuffer(size, D3D11_BIND_VERTEX_BUFFER, data);
 }
 
-void* D3D11RenderSystem::GetSwapchain()
+IDXGISwapChain3* D3D11RenderSystem::GetSwapchain()
 {
 	return swapchain;
 }
