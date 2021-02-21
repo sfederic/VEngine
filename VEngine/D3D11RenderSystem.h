@@ -25,7 +25,6 @@ public:
 
 	virtual void Tick() override;
 	virtual void Init(HWND window) override;
-	virtual void CreateDefaultBuffer() override;
 	virtual void CreateVertexShader();
 	virtual void CreatePixelShader();
 	virtual void CreateAllShaders();
@@ -34,6 +33,7 @@ public:
 	virtual void Present();
 	virtual void Flush();
 
+	void CreateDefaultBuffer();
 	void CreateDevice();
 	void CreateSwapchain(HWND windowHandle);
 	void CreateRTVAndDSV();

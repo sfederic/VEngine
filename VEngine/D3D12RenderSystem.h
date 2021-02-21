@@ -26,8 +26,8 @@ public:
 	virtual void RenderSetup(float deltaTime) override;
 	virtual void Render(float deltaTime) override;
 	virtual void RenderEnd(float deltaTime) override;
-	virtual void CreateDefaultBuffer() override;
-	virtual void CreateVertexBuffer(unsigned int size, const void* data, ActorSystem* actor) override;
+	void CreateDefaultBuffer(unsigned int size, const void* data, ID3D12Resource* uploadBuffer);
+	virtual void CreateVertexBuffer(unsigned int size, const void* data, ActorSystem* actor);
 	virtual void CreateSamplerState(ActorSystem* actorSystem) override;
 	virtual void CreateTexture(ActorSystem* actorSystem) override;
 	virtual void CreateVertexShader() override;

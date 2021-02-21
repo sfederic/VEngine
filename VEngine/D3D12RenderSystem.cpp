@@ -250,6 +250,13 @@ void D3D12RenderSystem::Render(float deltaTime)
 	const float clearColour[4] = { 0.25f, 0.25f, 0.25f, 1.f };
 	cmdList->ClearRenderTargetView(rtvHandle, clearColour, 0, nullptr);
 	cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	//VERTEX BUFFER SETUP
+	{
+		vertexBufferView.BufferLocation = vertexBuffer->GetGPUVirtualAddress();
+		vertexBufferView.SizeInBytes = 3 * sizeof(float);
+		vertexBufferView.StrideInBytes = sizeof(Vertex);
+	}
 	cmdList->IASetVertexBuffers(0, 1, &vertexBufferView);
 	cmdList->DrawInstanced(3, 1, 0, 0);
 
@@ -277,15 +284,9 @@ void D3D12RenderSystem::RenderEnd(float deltaTime)
 {
 }
 
-void D3D12RenderSystem::CreateDefaultBuffer()
+//TODO: shares some code with createvertexBuffer(). delete one or the other.
+void D3D12RenderSystem::CreateDefaultBuffer(unsigned int size, const void* data, ID3D12Resource* uploadBuffer)
 {
-}
-
-void D3D12RenderSystem::CreateVertexBuffer(unsigned int size, const void* data, ActorSystem* actor)
-{
-	//VERTEX UPLOAD BUFFER
-	ComPtr<ID3D12Resource> vertexUploadBuffer;
-
 	D3D12_RESOURCE_DESC desc = {};
 	desc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
 	desc.DepthOrArraySize = 1;
@@ -299,14 +300,19 @@ void D3D12RenderSystem::CreateVertexBuffer(unsigned int size, const void* data, 
 	D3D12_HEAP_PROPERTIES vbUploadHeapProps = {};
 	vbUploadHeapProps.Type = D3D12_HEAP_TYPE_UPLOAD;
 
-	HR(device->CreateCommittedResource(&vbUploadHeapProps, D3D12_HEAP_FLAG_NONE, &desc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&vertexUploadBuffer)));
+	HR(device->CreateCommittedResource(&vbUploadHeapProps, D3D12_HEAP_FLAG_NONE, &desc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&uploadBuffer)));
 
 	D3D12_HEAP_PROPERTIES heapProps = {};
 	heapProps.Type = D3D12_HEAP_TYPE_DEFAULT;
 
 	HR(device->CreateCommittedResource(&heapProps, D3D12_HEAP_FLAG_NONE, &desc, D3D12_RESOURCE_STATE_COPY_DEST, nullptr, IID_PPV_ARGS(&vertexBuffer)));
 
-	cmdList->CopyResource(vertexBuffer.Get(), vertexUploadBuffer.Get());
+	cmdList->CopyResource(vertexBuffer.Get(), uploadBuffer);
+}
+
+void D3D12RenderSystem::CreateVertexBuffer(unsigned int size, const void* data, ActorSystem* actor)
+{
+	
 }
 
 void D3D12RenderSystem::CreateSamplerState(ActorSystem* actorSystem)

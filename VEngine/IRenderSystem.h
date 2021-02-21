@@ -20,7 +20,7 @@ public:
 	virtual void RenderSetup(float deltaTime) = 0;
 	virtual void Render(float deltaTime) = 0;
 	virtual void RenderEnd(float deltaTime) = 0;
-	virtual void CreateDefaultBuffer() = 0;
+	//virtual void CreateDefaultBuffer() = 0;
 	virtual void CreateVertexBuffer(unsigned int size, const void* data, class ActorSystem* actor) = 0;
 	virtual void CreateSamplerState(class ActorSystem* actorSystem) = 0;
 	virtual void CreateTexture(class ActorSystem* actorSystem) = 0;
