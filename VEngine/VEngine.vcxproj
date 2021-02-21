@@ -107,6 +107,11 @@
     <ClCompile Include="AssetDock.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="GameSystem.cpp" />
+    <ClCompile Include="IBuffer.cpp" />
+    <ClCompile Include="IRasterizerState.cpp" />
+    <ClCompile Include="ISampler.cpp" />
+    <ClCompile Include="IShaderView.cpp" />
+    <ClCompile Include="ITexture.cpp" />
     <ClCompile Include="Lights.cpp" />
     <ClCompile Include="MathHelpers.cpp" />
     <ClCompile Include="Obj.cpp" />
@@ -165,8 +170,13 @@
     <ClInclude Include="FBXImporter.h" />
     <ClInclude Include="FileSystem.h" />
     <ClInclude Include="GameSystem.h" />
+    <ClInclude Include="IBuffer.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="IRasterizerState.h" />
     <ClInclude Include="IRenderSystem.h" />
+    <ClInclude Include="ISampler.h" />
+    <ClInclude Include="IShaderView.h" />
+    <ClInclude Include="ITexture.h" />
     <ClInclude Include="Lights.h" />
     <ClInclude Include="MathHelpers.h" />
     <ClInclude Include="Obj.h" />

@@ -246,7 +246,7 @@ void D3D11RenderSystem::CreateRasterizerStates()
 //One vertex buffer per actor system
 void D3D11RenderSystem::CreateVertexBuffer(UINT size, const void* data, ActorSystem* system)
 {
-	system->vertexBuffer = CreateDefaultBuffer(size, D3D11_BIND_VERTEX_BUFFER, data);
+	system->pso.vertexBuffer = CreateDefaultBuffer(size, D3D11_BIND_VERTEX_BUFFER, data);
 }
 
 IDXGISwapChain3* D3D11RenderSystem::GetSwapchain()

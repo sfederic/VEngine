@@ -11,6 +11,12 @@
 
 using namespace DirectX;
 
+class IBuffer;
+class ISampler;
+class IRasterizerState;
+class ITexture;
+class IShaderView;
+
 enum class EActorSystemID
 {
 
@@ -55,6 +61,16 @@ public:
 	bool bPicked = false;
 
 	std::wstring name;
+};
+
+struct PipelineView
+{
+	IBuffer* vertexBuffer;
+	IBuffer* indexBuffer;
+	ISampler* samplerState;
+	IRasterizerState* rastState;
+	ITexture* texture;
+	IShaderView* srv;
 };
 
 class ActorSystem
@@ -138,16 +154,9 @@ public:
 	}
 
 	ModelData modelData;
-
-	//TODO: move these into a ShaderView/Pipelineview
-	struct ID3D11Buffer* vertexBuffer;
-	struct ID3D11Buffer* indexBuffer;
-	struct ID3D11SamplerState* samplerState;
-	struct ID3D11RasterizerState* rastState;
-
-	struct ID3D11Resource* texture;
-	struct ID3D11ShaderResourceView* srv;
 	
+	PipelineView pso;
+
 	BoundingBox boundingBox;
 	BoundingSphere boundingSphere;
 
