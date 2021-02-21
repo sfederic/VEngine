@@ -70,8 +70,12 @@ void D3D12RenderSystem::Init(HWND window)
 	debug->EnableDebugLayer();
 	debug->Release();
 
-	//DEVICE
-	HR(CreateDXGIFactory1(IID_PPV_ARGS(&factory)));
+	//DEVICE & FACTORY
+	IDXGIFactory* tmpFactory = nullptr;
+	HR(CreateDXGIFactory(IID_PPV_ARGS(&tmpFactory)));
+	tmpFactory->QueryInterface(&factory);
+	tmpFactory->Release();
+
 	HR(D3D12CreateDevice(nullptr, D3D_FEATURE_LEVEL_12_0, IID_PPV_ARGS(&device)));
 
 	//CMD Q

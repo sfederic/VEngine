@@ -12,13 +12,14 @@ UISystem gUISystem;
 
 void UISystem::Init()
 {
-//#ifdef D3D11_RENDERER
+#ifdef D3D11_RENDERER
 	//Direct2D Init
 	IDXGISurface* surface;
 
+	//If D3D12 is being used, you'll get a "Not Implemented" error on GetBuffer() as the CmdAllocator is pased into the 
+	//swapchain creation on d3d12 instead of the device in d3d11.
 	IDXGISwapChain3* swapchain = (IDXGISwapChain3*)gRenderSystem->GetSwapchain();
 	HR(swapchain->GetBuffer(0, IID_PPV_ARGS(&surface)));
-	//swapchain->GetBuffer(0, __uuidof(IDXGISurface), (void**)&surface);
 
 	D2D1_FACTORY_OPTIONS options;
 	options.debugLevel = D2D1_DEBUG_LEVEL_INFORMATION;
@@ -33,9 +34,9 @@ void UISystem::Init()
 	surface->Release();
 
 
+	//DirectWrite Init
 	HR(DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED, __uuidof(writeFactory), (IUnknown**)(&writeFactory)));
 
-	//DirectWrite Init
 	HR(writeFactory->CreateTextFormat(L"Terminal", NULL, DWRITE_FONT_WEIGHT_NORMAL, DWRITE_FONT_STYLE_NORMAL,
 		DWRITE_FONT_STRETCH_NORMAL, 14.f, L"en-us", &textFormat));
 
@@ -62,7 +63,7 @@ void UISystem::Init()
 
 	toolbar = new Toolbar();
 	uiViews.push_back(toolbar);
-//#endif
+#endif
 }
 
 void UISystem::Cleanup()

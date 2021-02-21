@@ -60,7 +60,7 @@ public:
 	ID2D1DeviceContext1* d2dDeviceContext;
 	ID2D1Bitmap1* d2dRenderTargets[swapchainCount];
 
-	IDXGIFactory1* factory;
+	IDXGIFactory6* factory;
 	ID3D12Device* device;
 	ID3D12CommandQueue* cmdQueue;
 	ID3D12GraphicsCommandList* cmdList;
