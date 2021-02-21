@@ -231,7 +231,7 @@ void D3D12RenderSystem::Render(float deltaTime)
 	HR(cmdAlloc->Reset());
 	HR(cmdList->Reset(cmdAlloc, pipelineState));
 
-	//UpdateConstantBuffer(cbUploadBuffer.Get(), sizeof(matrices), &matrices);
+	UpdateConstantBuffer(cbUploadBuffer.Get(), sizeof(matrices), &matrices);
 	//UpdateConstantBuffer(cbUploadMaterialBuffer.Get(), sizeof(Material), &material);
 
 	cmdList->SetGraphicsRootSignature(rootSig);
@@ -283,6 +283,30 @@ void D3D12RenderSystem::CreateDefaultBuffer()
 
 void D3D12RenderSystem::CreateVertexBuffer(unsigned int size, const void* data, ActorSystem* actor)
 {
+	//VERTEX UPLOAD BUFFER
+	ComPtr<ID3D12Resource> vertexUploadBuffer;
+
+	D3D12_RESOURCE_DESC desc = {};
+	desc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+	desc.DepthOrArraySize = 1;
+	desc.Format = DXGI_FORMAT_UNKNOWN;
+	desc.MipLevels = 1;
+	desc.SampleDesc = { 0, 1 };
+	desc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+	desc.Height = 1;
+	desc.Width = size;
+
+	D3D12_HEAP_PROPERTIES vbUploadHeapProps = {};
+	vbUploadHeapProps.Type = D3D12_HEAP_TYPE_UPLOAD;
+
+	HR(device->CreateCommittedResource(&vbUploadHeapProps, D3D12_HEAP_FLAG_NONE, &desc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&vertexUploadBuffer)));
+
+	D3D12_HEAP_PROPERTIES heapProps = {};
+	heapProps.Type = D3D12_HEAP_TYPE_DEFAULT;
+
+	HR(device->CreateCommittedResource(&heapProps, D3D12_HEAP_FLAG_NONE, &desc, D3D12_RESOURCE_STATE_COPY_DEST, nullptr, IID_PPV_ARGS(&vertexBuffer)));
+
+	cmdList->CopyResource(vertexBuffer.Get(), vertexUploadBuffer.Get());
 }
 
 void D3D12RenderSystem::CreateSamplerState(ActorSystem* actorSystem)
