@@ -220,6 +220,13 @@ void D3D12RenderSystem::Init(HWND window)
 	fenceVal = 1;
 
 	fenceEvent = CreateEvent(nullptr, false, false, nullptr);
+
+	//CONSTANT BUFFERS
+	cbUploadBuffer = CreateConstantBuffer(sizeof(matrices), &matrices);
+
+	//VERTEX BUFFERS
+	ComPtr<ID3D12Resource> tmpUploadBuffer;
+	vertexBuffer = CreateDefaultBuffer(12, nullptr, tmpUploadBuffer.Get());
 }
 
 void D3D12RenderSystem::RenderSetup(float deltaTime)
@@ -285,29 +292,52 @@ void D3D12RenderSystem::RenderEnd(float deltaTime)
 }
 
 //TODO: shares some code with createvertexBuffer(). delete one or the other.
-void D3D12RenderSystem::CreateDefaultBuffer(unsigned int size, const void* data, ID3D12Resource* uploadBuffer)
+ID3D12Resource* D3D12RenderSystem::CreateDefaultBuffer(unsigned int size, const void* data, ID3D12Resource* uploadBuffer)
 {
 	D3D12_RESOURCE_DESC desc = {};
 	desc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
 	desc.DepthOrArraySize = 1;
 	desc.Format = DXGI_FORMAT_UNKNOWN;
 	desc.MipLevels = 1;
-	desc.SampleDesc = { 0, 1 };
+	desc.SampleDesc = { 1, 0 };
 	desc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 	desc.Height = 1;
 	desc.Width = size;
 
-	D3D12_HEAP_PROPERTIES vbUploadHeapProps = {};
-	vbUploadHeapProps.Type = D3D12_HEAP_TYPE_UPLOAD;
+	D3D12_HEAP_PROPERTIES uploadHeapProps = {};
+	uploadHeapProps.Type = D3D12_HEAP_TYPE_UPLOAD;
 
-	HR(device->CreateCommittedResource(&vbUploadHeapProps, D3D12_HEAP_FLAG_NONE, &desc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&uploadBuffer)));
+	HR(device->CreateCommittedResource(&uploadHeapProps, D3D12_HEAP_FLAG_NONE, &desc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&uploadBuffer)));
 
 	D3D12_HEAP_PROPERTIES heapProps = {};
 	heapProps.Type = D3D12_HEAP_TYPE_DEFAULT;
 
-	HR(device->CreateCommittedResource(&heapProps, D3D12_HEAP_FLAG_NONE, &desc, D3D12_RESOURCE_STATE_COPY_DEST, nullptr, IID_PPV_ARGS(&vertexBuffer)));
+	ID3D12Resource* defaultBuffer = nullptr;
+	HR(device->CreateCommittedResource(&heapProps, D3D12_HEAP_FLAG_NONE, &desc, D3D12_RESOURCE_STATE_COPY_DEST, nullptr, IID_PPV_ARGS(&defaultBuffer)));
 
-	cmdList->CopyResource(vertexBuffer.Get(), uploadBuffer);
+	cmdList->CopyResource(defaultBuffer, uploadBuffer);
+	return defaultBuffer;
+}
+
+//Remember that constant buffers need to be multiples of 256 bytes wide...
+ID3D12Resource* D3D12RenderSystem::CreateConstantBuffer(unsigned int size, const void* data)
+{
+	D3D12_RESOURCE_DESC desc = {};
+	desc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+	desc.DepthOrArraySize = 1;
+	desc.Format = DXGI_FORMAT_UNKNOWN;
+	desc.MipLevels = 1;
+	desc.SampleDesc = { 1, 0 };
+	desc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+	desc.Height = 1;
+	desc.Width = 256;
+
+	D3D12_HEAP_PROPERTIES heapProps = {};
+	heapProps.Type = D3D12_HEAP_TYPE_UPLOAD;
+
+	ID3D12Resource* constantBuffer;
+	HR(device->CreateCommittedResource(&heapProps, D3D12_HEAP_FLAG_NONE, &desc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&constantBuffer)));
+	return constantBuffer;
 }
 
 void D3D12RenderSystem::CreateVertexBuffer(unsigned int size, const void* data, ActorSystem* actor)

@@ -26,7 +26,6 @@ public:
 	virtual void RenderSetup(float deltaTime) override;
 	virtual void Render(float deltaTime) override;
 	virtual void RenderEnd(float deltaTime) override;
-	void CreateDefaultBuffer(unsigned int size, const void* data, ID3D12Resource* uploadBuffer);
 	virtual void CreateVertexBuffer(unsigned int size, const void* data, ActorSystem* actor);
 	virtual void CreateSamplerState(ActorSystem* actorSystem) override;
 	virtual void CreateTexture(ActorSystem* actorSystem) override;
@@ -40,6 +39,8 @@ public:
 	void ExecuteCommandLists();
 	void InitD2D();
 	void CreateShaders();
+	ID3D12Resource* CreateDefaultBuffer(unsigned int size, const void* data, ID3D12Resource* uploadBuffer);
+	ID3D12Resource* CreateConstantBuffer(unsigned int size, const void* data);
 	ID3DBlob* CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target);
 	void UpdateConstantBuffer(ID3D12Resource* constBuffer, int byteWidth, void* initData);
 	void WaitForPreviousFrame();
