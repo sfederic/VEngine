@@ -63,8 +63,11 @@ public:
 	std::wstring name;
 };
 
+//TODO: move this into its own file after testing
 struct PipelineView
 {
+	void Create();
+
 	IBuffer* vertexBuffer;
 	IBuffer* indexBuffer;
 	ISampler* samplerState;

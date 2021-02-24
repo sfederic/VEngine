@@ -6,6 +6,12 @@
 #include "MathHelpers.h"
 #include "IRenderSystem.h"
 #include "WICTextureLoader.h"
+#include "IBuffer.h"
+#include "IRasterizerState.h"
+#include "IShaderView.h"
+#include "ISampler.h"
+#include "IShaderView.h"
+#include "ITexture.h"
 
 //CONSTRUCTORS
 Actor::Actor()
@@ -143,4 +149,26 @@ Actor* ActorSystem::GetActor(unsigned int index)
 {
 	assert(index < actors.size());
 	return actors[index];
+}
+
+void PipelineView::Create()
+{
+#ifdef D3D11_RENDERER
+	vertexBuffer = new D3D11Buffer();
+	indexBuffer = new D3D11Buffer();
+	samplerState = new D3D11Sampler();
+	rastState = new D3D11RasterizerState();
+	texture = new D3D11Texture();
+	srv = new D3D11ShaderView();
+#endif // D3D11_RENDERER
+
+#ifdef D3D12_RENDERER
+	vertexBuffer = new D3D12Buffer();
+	indexBuffer = new D3D12Buffer();
+	samplerState = new D3D12Sampler();
+	rastState = new D3D12RasterizerState();
+	texture = new D3D12Texture();
+	srv = new D3D12ShaderView();
+#endif // D3D12_RENDERER
+
 }
