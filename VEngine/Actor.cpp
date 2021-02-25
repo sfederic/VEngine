@@ -151,6 +151,57 @@ Actor* ActorSystem::GetActor(unsigned int index)
 	return actors[index];
 }
 
+void* ActorSystem::GetVertexBuffer()
+{
+	return pso.vertexBuffer->Get();
+}
+
+void* ActorSystem::GetSamplerState()
+{
+	return pso.samplerState->Get();
+}
+
+void* ActorSystem::GetRasterizerState()
+{
+	return pso.rastState->Get();
+}
+
+void* ActorSystem::GetShaderView()
+{
+	return pso.srv->Get();
+}
+
+void* ActorSystem::GetTexture()
+{
+	return nullptr;
+}
+
+void ActorSystem::SetTexture(ITexture* texture)
+{
+	pso.texture = texture;
+}
+
+void ActorSystem::SetVertexBuffer(IBuffer* vertexBuffer)
+{
+	pso.vertexBuffer = vertexBuffer;
+}
+
+void ActorSystem::SetSamplerState(ISampler* sampler)
+{
+	pso.samplerState = sampler;
+}
+
+void ActorSystem::SetRasterizerState(IRasterizerState* rasterizerState)
+{
+	pso.rasterizerState = rasterizerState;
+}
+
+void ActorSystem::SetShaderView(IShaderView* shaderView)
+{
+	pso.srv = shaderView;
+}
+
+//PIPELINE VIEW
 void PipelineView::Create()
 {
 #ifdef D3D11_RENDERER
@@ -170,5 +221,4 @@ void PipelineView::Create()
 	texture = new D3D12Texture();
 	srv = new D3D12ShaderView();
 #endif // D3D12_RENDERER
-
 }

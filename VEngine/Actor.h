@@ -143,6 +143,19 @@ public:
 	void RemoveActor(int index);
 	Actor* GetActor(unsigned int index);
 	
+	//PSO functions
+	void* GetVertexBuffer();
+	void* GetSamplerState();
+	void* GetRasterizerState();
+	void* GetShaderView();
+	void* GetTexture();
+
+	void SetVertexBuffer(IBuffer* vertexBuffer);
+	void SetSamplerState(ISampler* sampler);
+	void SetRasterizerState(IRasterizerState* rasterizerState);
+	void SetShaderView(IShaderView* shaderView);
+	void SetTexture(ITexture* texture);
+
 	template <class SystemType>
 	bool IsA()
 	{

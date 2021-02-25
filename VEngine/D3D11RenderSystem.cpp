@@ -14,6 +14,7 @@
 #include <string>
 #include "WorldEditor.h"
 #include "D3D11RenderSystem.h"
+#include "ISampler.h"
 
 UINT strides = sizeof(Vertex);
 UINT offsets = 0;
@@ -289,9 +290,13 @@ void D3D11RenderSystem::CreateSamplerState(ActorSystem* actorSystem)
 	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
 	sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
 
+	ISampler* sampler = new D3D11Sampler();
+
 	ID3D11SamplerState* samplerState;
 	HR(device->CreateSamplerState(&sampDesc, &samplerState));
-	actorSystem->samplerState = samplerState;
+
+	sampler->data = samplerState;
+	actorSystem->SetSamplerState(sampler);
 }
 
 void D3D11RenderSystem::CreateTexture(ActorSystem* actorSystem)
@@ -305,8 +310,8 @@ void D3D11RenderSystem::CreateTexture(ActorSystem* actorSystem)
 	//HR(CreateWICTextureFromFile(device, textureFilename, &texture, &srv));
 	if (texture && srv)
 	{
-		actorSystem->texture = texture;
-		actorSystem->srv = srv;
+		actorSystem->SetTexture(texture);
+		actorSystem->SetShaderView(srv);
 	}
 }
 
@@ -317,7 +322,7 @@ void D3D11RenderSystem::RenderActorSystem(World* world)
 		ActorSystem* actorSystem = world->actorSystems[i];
 
 		//Set rastState
-		if (actorSystem->rastState)
+		if (actorSystem->GetRasterizerState())
 		{
 			//TODO: eye on this
 			//context->RSSetState(actorSystem->rastState);
@@ -339,10 +344,10 @@ void D3D11RenderSystem::RenderActorSystem(World* world)
 		context->VSSetShader(shader->second->vertexShader, nullptr, 0);
 		context->PSSetShader(shader->second->pixelShader, nullptr, 0);
 
-		context->PSSetSamplers(0, 1, &actorSystem->samplerState);
-		context->PSSetShaderResources(0, 1, &actorSystem->srv);
+		context->PSSetSamplers(0, 1, actorSystem->GetSamplerState());
+		context->PSSetShaderResources(0, 1, (ID3D11ShaderResourceView**)actorSystem->GetShaderView());
 
-		context->IASetVertexBuffers(0, 1, &actorSystem->vertexBuffer, &strides, &offsets);
+		context->IASetVertexBuffers(0, 1, (ID3D11Buffer**)actorSystem->GetVertexBuffer(), &strides, &offsets);
 		//context->IASetIndexBuffer(actorSystem->indexBuffer, DXGI_FORMAT_R16_UINT, 0);
 		
 		//Constant buffer register values
@@ -390,7 +395,7 @@ void D3D11RenderSystem::RenderBounds()
 		context->VSSetShader(boxIt->second->vertexShader, nullptr, 0);
 		context->PSSetShader(boxIt->second->pixelShader, nullptr, 0);
 
-		context->IASetVertexBuffers(0, 1, &debugBox.vertexBuffer, &strides, &offsets);
+		context->IASetVertexBuffers(0, 1, (ID3D11Buffer**)debugBox.GetVertexBuffer(), &strides, &offsets);
 
 		for (int systemIndex = 0; systemIndex < world->actorSystems.size(); systemIndex++)
 		{
@@ -425,7 +430,7 @@ void D3D11RenderSystem::RenderBounds()
 		context->VSSetShader(sphereIt->second->vertexShader, nullptr, 0);
 		context->PSSetShader(sphereIt->second->pixelShader, nullptr, 0);
 
-		context->IASetVertexBuffers(0, 1, &debugSphere.vertexBuffer, &strides, &offsets);
+		context->IASetVertexBuffers(0, 1, (ID3D11Buffer**)debugSphere.GetVertexBuffer(), &strides, &offsets);
 
 		for (int systemIndex = 0; systemIndex < world->actorSystems.size(); systemIndex++)
 		{

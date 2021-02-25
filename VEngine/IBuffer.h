@@ -1,20 +1,28 @@
 #pragma once
 
+struct ID3D11Buffer;
+struct ID3D12Resource;
+
 //Buffer interface for the rendering APIs
 class IBuffer
 {
 public:
 	virtual void Create() = 0;
-};
+	virtual void* Get() = 0; //Returns buffer data
 
-class D3D12Buffer : public IBuffer
-{
-public:
-	virtual void Create();
+	void* data;
 };
 
 class D3D11Buffer : public IBuffer
 {
 public:
 	virtual void Create();
+	virtual void* Get() override;
+};
+
+class D3D12Buffer : public IBuffer
+{
+public:
+	virtual void Create();
+	virtual void* Get();
 };
