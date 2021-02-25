@@ -193,7 +193,7 @@ void ActorSystem::SetSamplerState(ISampler* sampler)
 
 void ActorSystem::SetRasterizerState(IRasterizerState* rasterizerState)
 {
-	pso.rasterizerState = rasterizerState;
+	pso.rastState = rasterizerState;
 }
 
 void ActorSystem::SetShaderView(IShaderView* shaderView)

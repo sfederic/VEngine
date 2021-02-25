@@ -15,6 +15,9 @@
 #include "WorldEditor.h"
 #include "D3D11RenderSystem.h"
 #include "ISampler.h"
+#include "IBuffer.h";
+#include "ITexture.h"
+#include "IShaderView.h"
 
 UINT strides = sizeof(Vertex);
 UINT offsets = 0;
@@ -247,7 +250,9 @@ void D3D11RenderSystem::CreateRasterizerStates()
 //One vertex buffer per actor system
 void D3D11RenderSystem::CreateVertexBuffer(UINT size, const void* data, ActorSystem* system)
 {
-	system->pso.vertexBuffer = CreateDefaultBuffer(size, D3D11_BIND_VERTEX_BUFFER, data);
+	IBuffer* buffer = new D3D11Buffer();
+	buffer->data = CreateDefaultBuffer(size, D3D11_BIND_VERTEX_BUFFER, data);
+	system->SetVertexBuffer(buffer);
 }
 
 IDXGISwapChain3* D3D11RenderSystem::GetSwapchain()
@@ -307,11 +312,14 @@ void D3D11RenderSystem::CreateTexture(ActorSystem* actorSystem)
 	ID3D11Resource* texture;
 	ID3D11ShaderResourceView* srv;
 
-	//HR(CreateWICTextureFromFile(device, textureFilename, &texture, &srv));
+	HR(CreateWICTextureFromFile(device, textureFilename, &texture, &srv));
 	if (texture && srv)
 	{
-		actorSystem->SetTexture(texture);
-		actorSystem->SetShaderView(srv);
+		ITexture* iTexture = new D3D11Texture(texture);
+		IShaderView* iShaderView = new D3D11ShaderView(srv);
+
+		actorSystem->SetTexture(iTexture);
+		actorSystem->SetShaderView(iShaderView);
 	}
 }
 
@@ -344,7 +352,7 @@ void D3D11RenderSystem::RenderActorSystem(World* world)
 		context->VSSetShader(shader->second->vertexShader, nullptr, 0);
 		context->PSSetShader(shader->second->pixelShader, nullptr, 0);
 
-		context->PSSetSamplers(0, 1, actorSystem->GetSamplerState());
+		context->PSSetSamplers(0, 1, (ID3D11SamplerState**)actorSystem->GetSamplerState());
 		context->PSSetShaderResources(0, 1, (ID3D11ShaderResourceView**)actorSystem->GetShaderView());
 
 		context->IASetVertexBuffers(0, 1, (ID3D11Buffer**)actorSystem->GetVertexBuffer(), &strides, &offsets);
