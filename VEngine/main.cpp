@@ -51,8 +51,6 @@ int main(int argc, char *argv[])
     {
         const float deltaTime = gCoreSystem.deltaTime;
 
-        gProfiler.Start();
-
         gCoreSystem.StartTimer();
         gCoreSystem.HandleMessages();
 
@@ -61,8 +59,6 @@ int main(int argc, char *argv[])
 
         gFileSystem.Tick();
         gUISystem.Tick(editorMainWindow);
-
-        gProfiler.End(L"main");
 
         gTimerSystem.Tick(deltaTime);
 

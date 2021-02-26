@@ -16,6 +16,8 @@
 #include <dxcapi.h>
 #include <dwrite_1.h>
 
+class World;
+
 using namespace Microsoft::WRL;
 
 class D3D12RenderSystem : public IRenderSystem
@@ -44,6 +46,7 @@ public:
 	ID3DBlob* CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target);
 	void UpdateConstantBuffer(ID3D12Resource* constBuffer, int byteWidth, void* initData);
 	void WaitForPreviousFrame();
+	void RenderActorSystem(World* world);
 
 	static const int swapchainCount = 2;
 
@@ -76,6 +79,7 @@ public:
 	
 	ID3D12Fence* fence;
 
+	ID3D12Resource* cbMatrices;
 
 	ID3D11Resource* wrappedBackBuffers[swapchainCount];
 

@@ -17,6 +17,8 @@ class IRasterizerState;
 class ITexture;
 class IShaderView;
 
+struct ID3D12PipelineState;
+
 enum class EActorSystemID
 {
 
@@ -74,6 +76,9 @@ struct PipelineView
 	IRasterizerState* rastState;
 	ITexture* texture;
 	IShaderView* srv;
+
+	//TODO: this is no good here abstracted, but good enough now for testing
+	ID3D12PipelineState* pipelineState;
 };
 
 class ActorSystem

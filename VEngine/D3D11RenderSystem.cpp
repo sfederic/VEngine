@@ -312,7 +312,7 @@ void D3D11RenderSystem::CreateTexture(ActorSystem* actorSystem)
 	ID3D11Resource* texture;
 	ID3D11ShaderResourceView* srv;
 
-	HR(CreateWICTextureFromFile(device, textureFilename, &texture, &srv));
+	//HR(CreateWICTextureFromFile(device, textureFilename, &texture, &srv));
 	if (texture && srv)
 	{
 		ITexture* iTexture = new D3D11Texture(texture);

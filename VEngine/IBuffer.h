@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdint.h>
+
 struct ID3D11Buffer;
 struct ID3D12Resource;
 
@@ -11,6 +13,7 @@ public:
 	virtual void* Get() = 0; //Returns buffer data
 
 	void* data;
+	uint64_t size;
 };
 
 class D3D11Buffer : public IBuffer

@@ -1,6 +1,9 @@
 #include "D3D12RenderSystem.h"
 #include "CoreSystem.h"
 #include "ShaderFactory.h"
+#include "World.h"
+#include "Camera.h"
+#include "IBuffer.h"
 
 void D3D12RenderSystem::Tick()
 {
@@ -233,13 +236,45 @@ void D3D12RenderSystem::RenderSetup(float deltaTime)
 {
 }
 
+void D3D12RenderSystem::RenderActorSystem(World* world)
+{
+	for (int i = 0; i < world->actorSystems.size(); i++)
+	{
+		ActorSystem* actorSystem = world->actorSystems[i];
+
+		cmdList->SetPipelineState(actorSystem->pso.pipelineState);
+
+		//Constant buffer register values
+		const int cbMatrixRegister = 0;
+		const int cbMaterialRegister = 1;
+
+		ID3D12Resource* vertexBufferResource = (ID3D12Resource*)actorSystem->pso.vertexBuffer->data;
+		vertexBufferView.BufferLocation = vertexBufferResource->GetGPUVirtualAddress();
+		vertexBufferView.SizeInBytes = actorSystem->pso.vertexBuffer->size;
+		vertexBufferView.StrideInBytes = sizeof(Vertex);
+		cmdList->IASetVertexBuffers(0, 1, &vertexBufferView);
+
+		for (int i = 0; i < actorSystem->actors.size(); i++)
+		{
+			if (actorSystem->actors[i]->bRender)
+			{
+				//Set Matrix constant buffer
+				matrices.view = GetActiveCamera()->view;
+				matrices.model = actorSystem->actors[i]->transform;
+				matrices.mvp = matrices.model * matrices.view * matrices.proj;
+
+				UpdateConstantBuffer(cbUploadBuffer.Get(), sizeof(matrices), &matrices);
+
+				cmdList->DrawInstanced(actorSystem->modelData.verts.size(), 1, 0, 0);
+			}
+		}
+	}
+}
+
 void D3D12RenderSystem::Render(float deltaTime)
 {
 	HR(cmdAlloc->Reset());
 	HR(cmdList->Reset(cmdAlloc, pipelineState));
-
-	UpdateConstantBuffer(cbUploadBuffer.Get(), sizeof(matrices), &matrices);
-	//UpdateConstantBuffer(cbUploadMaterialBuffer.Get(), sizeof(Material), &material);
 
 	cmdList->SetGraphicsRootSignature(rootSig);
 	cmdList->SetDescriptorHeaps(1, &cbHeap);
@@ -258,14 +293,7 @@ void D3D12RenderSystem::Render(float deltaTime)
 	cmdList->ClearRenderTargetView(rtvHandle, clearColour, 0, nullptr);
 	cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	//VERTEX BUFFER SETUP
-	{
-		vertexBufferView.BufferLocation = vertexBuffer->GetGPUVirtualAddress();
-		vertexBufferView.SizeInBytes = 3 * sizeof(float);
-		vertexBufferView.StrideInBytes = sizeof(Vertex);
-	}
-	cmdList->IASetVertexBuffers(0, 1, &vertexBufferView);
-	cmdList->DrawInstanced(3, 1, 0, 0);
+	RenderActorSystem(GetWorld());
 
 	//Resource Barrier gone with D3D11on12, barrier is with wrappedBackBuffer creation
 	cmdList->ResourceBarrier(1, &ResourceBarrier::Transition(rtvs[currentBackBufferIndex],
