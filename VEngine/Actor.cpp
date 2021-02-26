@@ -138,6 +138,11 @@ void Actor::Move(float d, XMVECTOR direction)
 }
 
 //ACTOR SYSTEM
+ActorSystem::ActorSystem()
+{
+	pso.Create();
+}
+
 void* ActorSystem::GetVertexBuffer()
 {
 	return pso.vertexBuffer->Get();
@@ -163,7 +168,12 @@ void* ActorSystem::GetSamplerState()
 
 void* ActorSystem::GetRasterizerState()
 {
-	return pso.rastState->Get();
+	if (pso.rastState)
+	{
+		return pso.rastState->Get();
+	}
+
+	return nullptr;
 }
 
 void* ActorSystem::GetShaderView()

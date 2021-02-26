@@ -84,7 +84,7 @@ struct PipelineView
 class ActorSystem
 {
 public:
-	ActorSystem() {}
+	ActorSystem();
 	virtual void Tick(float deltaTime) {}
 
 	template <class ActorType>

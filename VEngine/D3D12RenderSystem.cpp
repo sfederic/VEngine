@@ -242,7 +242,8 @@ void D3D12RenderSystem::RenderActorSystem(World* world)
 	{
 		ActorSystem* actorSystem = world->actorSystems[i];
 
-		cmdList->SetPipelineState(actorSystem->pso.pipelineState);
+		//TODO: change to actor system pso
+		cmdList->SetPipelineState(pipelineState);
 
 		//Constant buffer register values
 		const int cbMatrixRegister = 0;

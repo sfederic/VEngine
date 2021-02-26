@@ -46,9 +46,16 @@ int main(int argc, char *argv[])
     //Qt late init
     editorMainWindow->worldDock->PopulateWorldList();
 
+
+    ActorSystem ac;
+    ac.modelName = "cube.fbx";
+    ac.CreateActors<Actor>(gRenderSystem, 1);
+
+    GetWorld()->AddActorSystem(ac);
+
     gRenderSystem->Flush();
 
-    
+
 
     //MAIN LOOP
     while (gCoreSystem.bMainLoop)
