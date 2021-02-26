@@ -85,10 +85,7 @@ class ActorSystem
 {
 public:
 	ActorSystem() {}
-	virtual void Tick(float deltaTime)
-	{
-
-	}
+	virtual void Tick(float deltaTime) {}
 
 	template <class ActorType>
 	void CreateActors(class IRenderSystem* renderSystem, int numActorsToSpawn)

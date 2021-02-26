@@ -368,9 +368,12 @@ ID3D12Resource* D3D12RenderSystem::CreateConstantBuffer(unsigned int size, const
 	return constantBuffer;
 }
 
-void D3D12RenderSystem::CreateVertexBuffer(unsigned int size, const void* data, ActorSystem* actor)
+void D3D12RenderSystem::CreateVertexBuffer(unsigned int size, const void* data, ActorSystem* actorSystem)
 {
-	
+	ComPtr<ID3D12Resource> uploadBuffer;
+	IBuffer* buffer = new D3D12Buffer();
+	buffer->data = CreateDefaultBuffer(size, data, uploadBuffer.Get());
+	actorSystem->SetVertexBuffer(buffer);
 }
 
 void D3D12RenderSystem::CreateSamplerState(ActorSystem* actorSystem)
