@@ -81,13 +81,13 @@ struct PipelineView
 	ID3D12PipelineState* pipelineState;
 };
 
+template <class ActorType>
 class ActorSystem
 {
 public:
 	ActorSystem() {}
 	virtual void Tick(float deltaTime) {}
 
-	template <class ActorType>
 	void CreateActors(class IRenderSystem* renderSystem, int numActorsToSpawn)
 	{
 		char filename[128] = {};
@@ -131,7 +131,6 @@ public:
 		}
 	}
 
-	template <class ActorType>
 	Actor* AddActor(XMVECTOR spawnPosition)
 	{
 		ActorType* actor = new ActorType();
@@ -158,10 +157,10 @@ public:
 	void SetShaderView(IShaderView* shaderView);
 	void SetTexture(ITexture* texture);
 
-	template <class SystemType>
 	bool IsA()
 	{
-		if (typeid(this) == typeid(SystemType))
+		//TODO: this is too shallow. Fix it to work with an entire inheritence tree
+		if (typeid(this) == typeid(ActorType))
 		{
 			return true;
 		}
@@ -180,7 +179,7 @@ public:
 
 	size_t numVertices;
 
-	std::vector<Actor*> actors;
+	std::vector<ActorType*> actors;
 
 	std::wstring name;
 

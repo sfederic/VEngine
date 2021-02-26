@@ -122,6 +122,7 @@
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="RenderViewWidget.cpp" />
     <ClCompile Include="ShaderFactory.cpp" />
+    <ClCompile Include="TestActor.cpp" />
     <ClCompile Include="TimerSystem.cpp" />
     <ClCompile Include="ToolbarDock.cpp" />
     <ClCompile Include="TransformEditWidget.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="RenderTypes.h" />
     <ClInclude Include="RenderViewWidget.h" />
     <ClInclude Include="ShaderFactory.h" />
+    <ClInclude Include="TestActor.h" />
     <ClInclude Include="TimerSystem.h" />
     <ClInclude Include="ToolbarDock.h" />
     <ClInclude Include="TransformEditWidget.h" />

@@ -167,6 +167,9 @@
     <ClCompile Include="IShaderView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestActor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h">
@@ -299,6 +302,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IShaderView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

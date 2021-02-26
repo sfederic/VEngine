@@ -21,6 +21,8 @@
 #include "Console.h"
 #include "Profiler.h"
 
+#include "TestActor.h"
+
 int main(int argc, char *argv[])
 {
     //Qt setup
@@ -45,6 +47,9 @@ int main(int argc, char *argv[])
     editorMainWindow->worldDock->PopulateWorldList();
 
     gRenderSystem->Flush();
+
+    ActorSystem<TestActor> ac;
+    ac.CreateActors(gRenderSystem, 1);
 
     //MAIN LOOP
     while (gCoreSystem.bMainLoop)
