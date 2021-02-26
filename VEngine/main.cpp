@@ -48,8 +48,7 @@ int main(int argc, char *argv[])
 
     gRenderSystem->Flush();
 
-    ActorSystem<TestActor> ac;
-    ac.CreateActors(gRenderSystem, 1);
+    
 
     //MAIN LOOP
     while (gCoreSystem.bMainLoop)

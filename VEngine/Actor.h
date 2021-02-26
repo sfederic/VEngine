@@ -81,13 +81,13 @@ struct PipelineView
 	ID3D12PipelineState* pipelineState;
 };
 
-template <class ActorType>
 class ActorSystem
 {
 public:
 	ActorSystem() {}
 	virtual void Tick(float deltaTime) {}
 
+	template <class ActorType>
 	void CreateActors(class IRenderSystem* renderSystem, int numActorsToSpawn)
 	{
 		char filename[128] = {};
@@ -131,7 +131,8 @@ public:
 		}
 	}
 
-	Actor* AddActor(XMVECTOR spawnPosition)
+	template <class ActorType>
+	ActorType* AddActor(XMVECTOR spawnPosition)
 	{
 		ActorType* actor = new ActorType();
 		actor.SetPosition(spawnPosition);
@@ -142,8 +143,8 @@ public:
 	}
 
 	void RemoveActor(int index);
-	Actor* GetActor(unsigned int index);
-	
+	Actor* ActorSystem::GetActor(unsigned int index);
+
 	//PSO functions
 	void* GetVertexBuffer();
 	void* GetSamplerState();
@@ -157,6 +158,7 @@ public:
 	void SetShaderView(IShaderView* shaderView);
 	void SetTexture(ITexture* texture);
 
+	template <class ActorType>
 	bool IsA()
 	{
 		//TODO: this is too shallow. Fix it to work with an entire inheritence tree
@@ -179,7 +181,7 @@ public:
 
 	size_t numVertices;
 
-	std::vector<ActorType*> actors;
+	std::vector<Actor*> actors;
 
 	std::wstring name;
 

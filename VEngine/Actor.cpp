@@ -138,6 +138,10 @@ void Actor::Move(float d, XMVECTOR direction)
 }
 
 //ACTOR SYSTEM
+void* ActorSystem::GetVertexBuffer()
+{
+	return pso.vertexBuffer->Get();
+}
 
 void ActorSystem::RemoveActor(int index)
 {
@@ -151,10 +155,6 @@ Actor* ActorSystem::GetActor(unsigned int index)
 	return actors[index];
 }
 
-void* ActorSystem::GetVertexBuffer()
-{
-	return pso.vertexBuffer->Get();
-}
 
 void* ActorSystem::GetSamplerState()
 {
