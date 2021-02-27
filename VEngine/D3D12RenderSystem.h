@@ -22,6 +22,11 @@ class ITexture;
 
 using namespace Microsoft::WRL;
 
+class UploadBuffer
+{
+public:
+};
+
 class D3D12RenderSystem : public IRenderSystem
 {
 public:
@@ -66,6 +71,8 @@ public:
 	ID2D1Device2* d2dDevice;
 	ID2D1DeviceContext1* d2dDeviceContext;
 	ID2D1Bitmap1* d2dRenderTargets[swapchainCount];
+
+	ComPtr<ID3D12Resource> uploadBuffer;
 
 	IDXGIFactory6* factory;
 	ID3D12Device* device;

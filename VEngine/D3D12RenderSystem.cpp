@@ -113,10 +113,11 @@ void D3D12RenderSystem::Init(HWND window)
 
 	//CONSTANT DESC HEAP
 	D3D12_DESCRIPTOR_HEAP_DESC cbHeapDesc = {};
-	cbHeapDesc.NumDescriptors = 1;
+	cbHeapDesc.NumDescriptors = 2;
 	cbHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
 	cbHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
 	HR(device->CreateDescriptorHeap(&cbHeapDesc, IID_PPV_ARGS(&cbHeap)));
+
 
 	//D3D11on12 (For D2D/DWrite)
 	//NOTE: With D3D11on12 and all the debug information, some builds were giving 500MB for hello world-tier programs
@@ -159,12 +160,40 @@ void D3D12RenderSystem::Init(HWND window)
 	blendDesc.IndependentBlendEnable = false;
 	blendDesc.RenderTarget[0].BlendEnable = false;
 	blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;
+	blendDesc.RenderTarget[0].SrcBlend = D3D12_BLEND_ONE;
+	blendDesc.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
+	blendDesc.RenderTarget[0].DestBlend = D3D12_BLEND_ZERO;
+	blendDesc.RenderTarget[0].SrcBlendAlpha = D3D12_BLEND_ONE;
+	blendDesc.RenderTarget[0].DestBlendAlpha = D3D12_BLEND_ZERO;
+	blendDesc.RenderTarget[0].BlendOpAlpha = D3D12_BLEND_OP_ADD;
+	blendDesc.RenderTarget[0].LogicOp = D3D12_LOGIC_OP_NOOP;
 
 	//RASTERIZER
 	D3D12_RASTERIZER_DESC rastDesc = {};
-	rastDesc.FrontCounterClockwise = true;
+	rastDesc.FrontCounterClockwise = FALSE;
 	rastDesc.CullMode = D3D12_CULL_MODE_BACK;
-	rastDesc.FillMode = D3D12_FILL_MODE_WIREFRAME;
+	rastDesc.FillMode = D3D12_FILL_MODE_SOLID;
+	rastDesc.DepthBias = D3D12_DEFAULT_DEPTH_BIAS;
+	rastDesc.DepthBiasClamp = D3D12_DEFAULT_DEPTH_BIAS_CLAMP;
+	rastDesc.SlopeScaledDepthBias = D3D12_DEFAULT_SLOPE_SCALED_DEPTH_BIAS;
+	rastDesc.DepthClipEnable = TRUE;
+	rastDesc.MultisampleEnable = FALSE;
+	rastDesc.AntialiasedLineEnable = FALSE;
+	rastDesc.ForcedSampleCount = 0;
+	rastDesc.ConservativeRaster = D3D12_CONSERVATIVE_RASTERIZATION_MODE_OFF;
+
+	//DEPTHSTENCIL
+	D3D12_DEPTH_STENCIL_DESC depthStencilDesc = {};
+	depthStencilDesc.DepthEnable = TRUE;
+	depthStencilDesc.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ALL;
+	depthStencilDesc.DepthFunc = D3D12_COMPARISON_FUNC_LESS;
+	depthStencilDesc.StencilEnable = FALSE;
+	depthStencilDesc.StencilReadMask = D3D12_DEFAULT_STENCIL_READ_MASK;
+	depthStencilDesc.StencilWriteMask = D3D12_DEFAULT_STENCIL_WRITE_MASK;
+	const D3D12_DEPTH_STENCILOP_DESC defaultStencilOp =
+	{ D3D12_STENCIL_OP_KEEP, D3D12_STENCIL_OP_KEEP, D3D12_STENCIL_OP_KEEP, D3D12_COMPARISON_FUNC_ALWAYS };
+	depthStencilDesc.FrontFace = defaultStencilOp;
+	depthStencilDesc.BackFace = defaultStencilOp;
 
 	//Test shaders
 	CreateShaders();
@@ -176,19 +205,11 @@ void D3D12RenderSystem::Init(HWND window)
 	descRangeCBV.BaseShaderRegister = 0;
 	descRangeCBV.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_CBV;
 	descRangeCBV.NumDescriptors = 1;
-	descRangeCBV.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
 	D3D12_DESCRIPTOR_RANGE descRangeSRV = {};
 	descRangeSRV.BaseShaderRegister = 0;
 	descRangeSRV.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 	descRangeSRV.NumDescriptors = 1;
-	descRangeSRV.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
-
-	D3D12_DESCRIPTOR_RANGE descRangeSampler = {};
-	descRangeSampler.BaseShaderRegister = 0;
-	descRangeSampler.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SAMPLER;
-	descRangeSampler.NumDescriptors = 1;
-	descRangeSampler.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
 	D3D12_ROOT_PARAMETER rootParamCBV = {};
 	rootParamCBV.DescriptorTable = { 1, &descRangeCBV };
@@ -200,22 +221,30 @@ void D3D12RenderSystem::Init(HWND window)
 	rootParamSRV.ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
 	rootParamSRV.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 
-	D3D12_ROOT_PARAMETER rootParamSampler = {};
-	rootParamSampler.DescriptorTable = { 1, &descRangeSampler };
-	rootParamSampler.ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
-	rootParamSampler.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-
 	D3D12_ROOT_PARAMETER rootParams[] =
 	{
-
-		rootParamSRV, rootParamCBV, rootParamSampler
+		rootParamCBV, rootParamSRV
 	};
+
+	//CREATE STATIC SAMPLER
+	D3D12_STATIC_SAMPLER_DESC samplerDesc = {};
+	samplerDesc.AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
+	samplerDesc.AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
+	samplerDesc.AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
+	samplerDesc.MaxLOD = D3D12_FLOAT32_MAX;
+	samplerDesc.Filter = D3D12_FILTER_MIN_MAG_MIP_POINT;
+	samplerDesc.MaxAnisotropy = 1;
+	samplerDesc.ComparisonFunc = D3D12_COMPARISON_FUNC_ALWAYS;
+	samplerDesc.ShaderRegister = 0;
+	samplerDesc.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 
 	D3D12_ROOT_SIGNATURE_DESC rootDesc = {};
 	rootDesc.pParameters = rootParams;
 	rootDesc.NumParameters = _countof(rootParams);
 	rootDesc.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
-	
+	rootDesc.NumStaticSamplers = 1;
+	rootDesc.pStaticSamplers = &samplerDesc;
+
 	ID3DBlob* rootBlob = nullptr;
 	ID3DBlob* rootError = nullptr;
 	HR(D3D12SerializeRootSignature(&rootDesc, D3D_ROOT_SIGNATURE_VERSION_1, &rootBlob, &rootError));
@@ -233,8 +262,7 @@ void D3D12RenderSystem::Init(HWND window)
 	psoDesc.PS = { reinterpret_cast<UINT8*>(pixelCode->GetBufferPointer()), pixelCode->GetBufferSize() };  
 	psoDesc.RasterizerState = rastDesc;
 	psoDesc.BlendState = blendDesc;
-	psoDesc.DepthStencilState.DepthEnable = FALSE;     
-	psoDesc.DepthStencilState.StencilEnable = FALSE;   
+	psoDesc.DepthStencilState = depthStencilDesc;
 	psoDesc.SampleMask = UINT_MAX;      
 	psoDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;     
 	psoDesc.NumRenderTargets = 1;    
@@ -316,8 +344,15 @@ void D3D12RenderSystem::Render(float deltaTime)
 	HR(cmdList->Reset(cmdAlloc, pipelineState));
 
 	cmdList->SetGraphicsRootSignature(rootSig);
-	cmdList->SetDescriptorHeaps(1, &cbHeap);
+
+	ID3D12DescriptorHeap* descHeaps[] =
+	{
+		cbHeap
+	};
+	cmdList->SetDescriptorHeaps(_countof(descHeaps), descHeaps);
+
 	cmdList->SetGraphicsRootDescriptorTable(0, cbHeap->GetGPUDescriptorHandleForHeapStart());
+
 	cmdList->RSSetViewports(1, &viewport);
 	cmdList->RSSetScissorRects(1, &scissorRect);
 
@@ -413,7 +448,6 @@ ID3D12Resource* D3D12RenderSystem::CreateConstantBuffer(unsigned int size, const
 
 void D3D12RenderSystem::CreateVertexBuffer(unsigned int size, const void* data, ActorSystem* actorSystem)
 {
-	ComPtr<ID3D12Resource> uploadBuffer;
 	IBuffer* buffer = new D3D12Buffer();
 	buffer->size = size;
 	buffer->data = CreateDefaultBuffer(size, data, uploadBuffer.Get());
