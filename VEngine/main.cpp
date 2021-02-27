@@ -23,14 +23,18 @@
 
 #include "TestActor.h"
 
+//For throwing the program into fullscreen for profilers, getting rid of Qt
+//#define PROFILE_NOEDITOR
+
 int main(int argc, char *argv[])
 {
     HR(CoInitialize(NULL)); //For the WIC functions
 
     //Qt setup
+#ifndef PROFILE_NOEDITOR
     QApplication qApplication(argc, argv);
     EditorMainWindow* editorMainWindow = new EditorMainWindow();
-
+#endif //PROFILE_NOEDITOR
     gProfiler.Init();
 
     //FBX setup
@@ -41,7 +45,11 @@ int main(int argc, char *argv[])
 
     //Systems setup
     gCoreSystem.SetTimerFrequency();
+#ifdef PROFILE_NOEDITOR
+    gRenderSystem->Init(gCoreSystem.mainWindow);
+#else
     gRenderSystem->Init((HWND)editorMainWindow->renderViewWidget->winId());
+#endif
     gAudioSystem.Init();
     gUISystem.Init();
     gWorldEditor.Init();

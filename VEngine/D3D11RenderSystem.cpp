@@ -334,8 +334,6 @@ void D3D11RenderSystem::CreateTexture(ActorSystem* actorSystem)
 	HR(CreateWICTextureFromFile(device, textureFilename.c_str(), &texture, &srv));
 	if (texture && srv)
 	{
-		actorSystem->srv = srv;
-
 		actorSystem->pso.texture->data = texture;
 		actorSystem->pso.srv->data = srv;
 	}

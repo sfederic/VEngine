@@ -77,7 +77,7 @@ struct PipelineView
 	ITexture* texture;
 	IShaderView* srv;
 
-	//TODO: this is no good here abstracted, but good enough now for testing
+	//TODO: this is no good here, but good enough now for testing
 	ID3D12PipelineState* pipelineState;
 };
 
@@ -158,8 +158,6 @@ public:
 	void SetShaderView(IShaderView* shaderView);
 	void SetTexture(ITexture* texture);
 
-	ID3D11ShaderResourceView* srv;
-
 	template <class ActorType>
 	bool IsA()
 	{
@@ -185,12 +183,11 @@ public:
 
 	std::vector<Actor*> actors;
 
-	std::wstring name;
-
 	EActorSystemID id;
 
 	std::wstring shaderName;
 	std::wstring textureName;
+	std::wstring name;
 	std::string modelName;
 
 	bool bInstancingActors; //bool for setting system to use instancing

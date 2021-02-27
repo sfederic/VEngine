@@ -256,6 +256,13 @@ void D3D12RenderSystem::Init(HWND window)
 	fenceEvent = CreateEvent(nullptr, false, false, nullptr);
 
 	//CONSTANT BUFFERS
+	matrices.model = XMMatrixIdentity();
+	matrices.view = XMMatrixIdentity();
+	matrices.proj = XMMatrixPerspectiveFovLH(XM_PI / 3, gCoreSystem.GetAspectRatio(), 0.01f, 1000.f);
+
+	editorCamera.proj = matrices.proj;
+	matrices.mvp = matrices.model * matrices.view * matrices.proj;
+
 	cbUploadBuffer = CreateConstantBuffer(sizeof(matrices), &matrices);
 
 	//VERTEX BUFFERS
@@ -408,6 +415,7 @@ void D3D12RenderSystem::CreateVertexBuffer(unsigned int size, const void* data, 
 {
 	ComPtr<ID3D12Resource> uploadBuffer;
 	IBuffer* buffer = new D3D12Buffer();
+	buffer->size = size;
 	buffer->data = CreateDefaultBuffer(size, data, uploadBuffer.Get());
 	actorSystem->SetVertexBuffer(buffer);
 }
