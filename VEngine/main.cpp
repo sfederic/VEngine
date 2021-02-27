@@ -34,6 +34,7 @@ int main(int argc, char *argv[])
     //FBX setup
     FBXImporter::Init();
 
+    SetActiveCamera(&editorCamera);
     editorCamera.bEditorCamera = true;
 
     //Systems setup

@@ -349,10 +349,23 @@ void D3D11RenderSystem::RenderActorSystem(World* world)
 		context->VSSetShader(shader->second->vertexShader, nullptr, 0);
 		context->PSSetShader(shader->second->pixelShader, nullptr, 0);
 
-		context->PSSetSamplers(0, 1, (ID3D11SamplerState* const*)actorSystem->GetSamplerState());
-		context->PSSetShaderResources(0, 1, (ID3D11ShaderResourceView* const*)actorSystem->GetShaderView());
+		ID3D11SamplerState* samplers[] =
+		{
+			(ID3D11SamplerState*)actorSystem->GetSamplerState()
+		};
+		context->PSSetSamplers(0, _countof(samplers), samplers);
+		
+		ID3D11ShaderResourceView* shaderResourceViews[]
+		{
+			(ID3D11ShaderResourceView*)actorSystem->GetShaderView()
+		};
+		context->PSSetShaderResources(0, _countof(shaderResourceViews), shaderResourceViews);
 
-		context->IASetVertexBuffers(0, 1, (ID3D11Buffer**)actorSystem->GetVertexBuffer(), &strides, &offsets);
+		ID3D11Buffer* vertexBuffers[]
+		{
+			(ID3D11Buffer*)actorSystem->GetVertexBuffer()
+		};
+		context->IASetVertexBuffers(0, _countof(vertexBuffers), vertexBuffers, &strides, &offsets);
 		//context->IASetIndexBuffer(actorSystem->indexBuffer, DXGI_FORMAT_R16_UINT, 0);
 		
 		//Constant buffer register values
