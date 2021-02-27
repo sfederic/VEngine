@@ -170,20 +170,50 @@ void D3D12RenderSystem::Init(HWND window)
 	CreateShaders();
 
 	//ROOT SIGNATURE
-	D3D12_DESCRIPTOR_RANGE descRange = {};
-	descRange.BaseShaderRegister = 0;
-	descRange.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_CBV;
-	descRange.NumDescriptors = 1;
+	//NOTE: Samplers are not allowed in the same descriptor table as CBV/UAV/SRVs
 
-	D3D12_ROOT_PARAMETER rootParam = {};
-	rootParam.DescriptorTable = { 1, &descRange };
-	rootParam.ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
-	rootParam.ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+	D3D12_DESCRIPTOR_RANGE descRangeCBV = {};
+	descRangeCBV.BaseShaderRegister = 0;
+	descRangeCBV.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_CBV;
+	descRangeCBV.NumDescriptors = 1;
+	descRangeCBV.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
+	D3D12_DESCRIPTOR_RANGE descRangeSRV = {};
+	descRangeSRV.BaseShaderRegister = 0;
+	descRangeSRV.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	descRangeSRV.NumDescriptors = 1;
+	descRangeSRV.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+
+	D3D12_DESCRIPTOR_RANGE descRangeSampler = {};
+	descRangeSampler.BaseShaderRegister = 0;
+	descRangeSampler.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SAMPLER;
+	descRangeSampler.NumDescriptors = 1;
+	descRangeSampler.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+
+	D3D12_ROOT_PARAMETER rootParamCBV = {};
+	rootParamCBV.DescriptorTable = { 1, &descRangeCBV };
+	rootParamCBV.ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParamCBV.ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+
+	D3D12_ROOT_PARAMETER rootParamSRV = {};
+	rootParamSRV.DescriptorTable = { 1, &descRangeSRV };
+	rootParamSRV.ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParamSRV.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+
+	D3D12_ROOT_PARAMETER rootParamSampler = {};
+	rootParamSampler.DescriptorTable = { 1, &descRangeSampler };
+	rootParamSampler.ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParamSampler.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+
+	D3D12_ROOT_PARAMETER rootParams[] =
+	{
+
+		rootParamSRV, rootParamCBV, rootParamSampler
+	};
 
 	D3D12_ROOT_SIGNATURE_DESC rootDesc = {};
-	rootDesc.pParameters = &rootParam;
-	rootDesc.NumParameters = 1;
+	rootDesc.pParameters = rootParams;
+	rootDesc.NumParameters = _countof(rootParams);
 	rootDesc.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 	
 	ID3DBlob* rootBlob = nullptr;
