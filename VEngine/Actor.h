@@ -90,12 +90,11 @@ public:
 	template <class ActorType>
 	void CreateActors(class IRenderSystem* renderSystem, int numActorsToSpawn)
 	{
-		char filename[128] = {};
-		strcat_s(filename, "Models/");
-		strcat_s(filename, modelName);
+		std::string filename = "Models/";
+		filename += modelName;
 
 		//if (LoadOBJFile(filename, modelData))
-		if (FBXImporter::Import(filename, modelData))
+		if (FBXImporter::Import(filename.c_str(), modelData))
 		{
 			UINT byteWidth = modelData.GetByteWidth();
 			numVertices = (byteWidth * actors.size()) / sizeof(Vertex);
@@ -188,9 +187,9 @@ public:
 
 	EActorSystemID id;
 
-	const wchar_t* shaderName;
-	const wchar_t* textureName;
-	const char* modelName;
+	std::wstring shaderName;
+	std::wstring textureName;
+	std::string modelName;
 
 	bool bInstancingActors; //bool for setting system to use instancing
 };

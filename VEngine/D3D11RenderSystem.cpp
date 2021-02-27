@@ -18,6 +18,7 @@
 #include "IBuffer.h";
 #include "ITexture.h"
 #include "IShaderView.h"
+#include <string.h>
 
 UINT strides = sizeof(Vertex);
 UINT offsets = 0;
@@ -303,13 +304,19 @@ void D3D11RenderSystem::CreateSamplerState(ISampler* sampler)
 
 void D3D11RenderSystem::CreateTexture(ActorSystem* actorSystem)
 {
-	const wchar_t* textureFilename = L"Textures/";
-	actorSystem->textureName = textureFilename;
+	if (actorSystem->textureName.empty())
+	{
+		DebugPrint("%s has no texture filename specified. Skipping texture creation.\n", actorSystem->name);
+		return;
+	}
 
-	ID3D11Resource* texture;
-	ID3D11ShaderResourceView* srv;
+	std::wstring textureFilename = L"Textures/";
+	textureFilename += actorSystem->textureName;
 
-	//HR(CreateWICTextureFromFile(device, textureFilename, &texture, &srv));
+	ID3D11Resource* texture = nullptr;
+	ID3D11ShaderResourceView* srv = nullptr;
+
+	HR(CreateWICTextureFromFile(device, textureFilename.c_str(), &texture, &srv));
 	if (texture && srv)
 	{
 		ITexture* iTexture = new D3D11Texture(texture);

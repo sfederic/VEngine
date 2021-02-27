@@ -51,13 +51,12 @@ int main(int argc, char *argv[])
     ActorSystem ac;
     ac.modelName = "cube.fbx";
     ac.shaderName = L"shaders.hlsl";
+    ac.textureName = L"texture.png";
     ac.CreateActors<Actor>(gRenderSystem, 1);
 
     GetWorld()->AddActorSystem(ac);
 
     gRenderSystem->Flush();
-
-
 
     //MAIN LOOP
     while (gCoreSystem.bMainLoop)
@@ -74,6 +73,8 @@ int main(int argc, char *argv[])
         gUISystem.Tick(editorMainWindow);
 
         gTimerSystem.Tick(deltaTime);
+
+        GetActiveCamera()->Tick(deltaTime);
 
         gRenderSystem->Tick();
         gRenderSystem->RenderSetup(deltaTime);
