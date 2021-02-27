@@ -17,6 +17,8 @@
 #include <dwrite_1.h>
 
 class World;
+class IShaderView;
+class ITexture;
 
 using namespace Microsoft::WRL;
 
@@ -28,6 +30,7 @@ public:
 	virtual void RenderSetup(float deltaTime) override;
 	virtual void Render(float deltaTime) override;
 	virtual void RenderEnd(float deltaTime) override;
+	virtual void CreateShaderView(IShaderView* shaderView, ITexture* texture) override;
 	virtual void CreateVertexBuffer(unsigned int size, const void* data, ActorSystem* actor);
 	virtual void CreateSamplerState(ISampler* sampler) override;
 	virtual void CreateTexture(ActorSystem* actorSystem) override;

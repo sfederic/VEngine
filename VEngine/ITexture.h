@@ -9,7 +9,7 @@ class ITexture
 {
 public:
 	virtual void Create() = 0;
-
+	void* Get();
 	void* data;
 };
 

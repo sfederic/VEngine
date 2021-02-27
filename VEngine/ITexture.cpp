@@ -22,3 +22,13 @@ D3D12Texture::D3D12Texture(ID3D12Resource* texture)
 void D3D12Texture::Create()
 {
 }
+
+void* ITexture::Get()
+{
+	if (data)
+	{
+		return data;
+	}
+
+	return nullptr;
+}

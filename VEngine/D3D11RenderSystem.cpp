@@ -288,6 +288,21 @@ void D3D11RenderSystem::CreateConstantBuffer()
 	cbMaterial = CreateDefaultBuffer(sizeof(Material), D3D11_BIND_CONSTANT_BUFFER, &material);
 }
 
+//Takes the actor system's texture and throws it into t SRV to link with a shader.
+void D3D11RenderSystem::CreateShaderView(IShaderView* shaderView, ITexture* texture)
+{
+	D3D11_SHADER_RESOURCE_VIEW_DESC desc = {};
+	desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	desc.Texture2D.MipLevels = 1;
+	desc.Texture2D.MostDetailedMip = 0;
+	desc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+
+	ID3D11Resource* textureResource = (ID3D11Resource*)texture->Get();
+
+	ID3D11ShaderResourceView* shaderResourceView = nullptr;
+	device->CreateShaderResourceView(textureResource, &desc, &shaderResourceView);
+}
+
 void D3D11RenderSystem::CreateSamplerState(ISampler* sampler)
 {
 	D3D11_SAMPLER_DESC sampDesc = {};

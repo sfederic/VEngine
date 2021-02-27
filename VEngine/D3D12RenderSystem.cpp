@@ -4,6 +4,7 @@
 #include "World.h"
 #include "Camera.h"
 #include "IBuffer.h"
+#include "ITexture.h"
 
 void D3D12RenderSystem::Tick()
 {
@@ -317,6 +318,10 @@ void D3D12RenderSystem::Render(float deltaTime)
 }
 
 void D3D12RenderSystem::RenderEnd(float deltaTime)
+{
+}
+
+void D3D12RenderSystem::CreateShaderView(IShaderView* shaderView, ITexture* texture)
 {
 }
 
