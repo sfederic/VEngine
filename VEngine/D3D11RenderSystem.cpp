@@ -288,11 +288,11 @@ void D3D11RenderSystem::CreateConstantBuffer()
 	cbMaterial = CreateDefaultBuffer(sizeof(Material), D3D11_BIND_CONSTANT_BUFFER, &material);
 }
 
-//Takes the actor system's texture and throws it into t SRV to link with a shader.
+//Takes the actor system's texture and throws it into SRV to link with a shader.
 void D3D11RenderSystem::CreateShaderView(IShaderView* shaderView, ITexture* texture)
 {
 	D3D11_SHADER_RESOURCE_VIEW_DESC desc = {};
-	desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
 	desc.Texture2D.MipLevels = 1;
 	desc.Texture2D.MostDetailedMip = 0;
 	desc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
@@ -300,7 +300,7 @@ void D3D11RenderSystem::CreateShaderView(IShaderView* shaderView, ITexture* text
 	ID3D11Resource* textureResource = (ID3D11Resource*)texture->Get();
 
 	ID3D11ShaderResourceView* shaderResourceView = nullptr;
-	device->CreateShaderResourceView(textureResource, &desc, &shaderResourceView);
+	HR(device->CreateShaderResourceView(textureResource, &desc, &shaderResourceView));
 }
 
 void D3D11RenderSystem::CreateSamplerState(ISampler* sampler)
@@ -334,11 +334,10 @@ void D3D11RenderSystem::CreateTexture(ActorSystem* actorSystem)
 	HR(CreateWICTextureFromFile(device, textureFilename.c_str(), &texture, &srv));
 	if (texture && srv)
 	{
-		ITexture* iTexture = new D3D11Texture(texture);
-		IShaderView* iShaderView = new D3D11ShaderView(srv);
+		actorSystem->srv = srv;
 
-		actorSystem->SetTexture(iTexture);
-		actorSystem->SetShaderView(iShaderView);
+		actorSystem->pso.texture->data = texture;
+		actorSystem->pso.srv->data = srv;
 	}
 }
 
@@ -376,7 +375,7 @@ void D3D11RenderSystem::RenderActorSystem(World* world)
 			(ID3D11SamplerState*)actorSystem->GetSamplerState()
 		};
 		context->PSSetSamplers(0, _countof(samplers), samplers);
-		
+
 		ID3D11ShaderResourceView* shaderResourceViews[]
 		{
 			(ID3D11ShaderResourceView*)actorSystem->GetShaderView()
@@ -388,7 +387,6 @@ void D3D11RenderSystem::RenderActorSystem(World* world)
 			(ID3D11Buffer*)actorSystem->GetVertexBuffer()
 		};
 		context->IASetVertexBuffers(0, _countof(vertexBuffers), vertexBuffers, &strides, &offsets);
-		//context->IASetIndexBuffer(actorSystem->indexBuffer, DXGI_FORMAT_R16_UINT, 0);
 		
 		//Constant buffer register values
 		const int cbMatrixRegister = 0;

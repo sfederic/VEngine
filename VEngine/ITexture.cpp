@@ -5,9 +5,9 @@ D3D11Texture::D3D11Texture(ID3D11Texture* texture)
 	data = texture;
 }
 
-D3D11Texture::D3D11Texture(ID3D11Resource* texture)
+D3D11Texture::D3D11Texture(ID3D11Resource* resource)
 {
-	data = texture;
+	data = resource;
 }
 
 void D3D11Texture::Create()

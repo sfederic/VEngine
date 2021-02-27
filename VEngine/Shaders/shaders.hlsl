@@ -8,10 +8,10 @@ cbuffer cbPerObject : register(b0)
 	float4x4 mvp;
 };
 
-cbuffer cbMaterial : register(b1)
+/*cbuffer cbMaterial : register(b1)
 {
 	float4 ambient;
-};
+};*/
 
 struct VS_IN
 {
@@ -38,7 +38,7 @@ VS_OUT VSMain(VS_IN i)
 	return o;
 }
 
-Texture2D t;
+Texture2D t : register(t0);
 SamplerState s : register(s0);
 
 float4 PSMain(VS_OUT i) : SV_Target
@@ -47,6 +47,7 @@ float4 PSMain(VS_OUT i) : SV_Target
 	float3 lightDir = float3(0.f, 1.f, 1.f);
 	float diffuse = dot(-lightDir, i.normal);
 
-	float4 finalColour = ambient + saturate(diffuse);
-	return texColour * finalColour;
+	//float4 finalColour = ambient + saturate(diffuse);
+	//return texColour * finalColour;
+	return texColour;
 }

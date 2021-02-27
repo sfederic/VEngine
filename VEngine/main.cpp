@@ -25,6 +25,8 @@
 
 int main(int argc, char *argv[])
 {
+    HR(CoInitialize(NULL)); //For the WIC functions
+
     //Qt setup
     QApplication qApplication(argc, argv);
     EditorMainWindow* editorMainWindow = new EditorMainWindow();

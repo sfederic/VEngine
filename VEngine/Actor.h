@@ -158,6 +158,8 @@ public:
 	void SetShaderView(IShaderView* shaderView);
 	void SetTexture(ITexture* texture);
 
+	ID3D11ShaderResourceView* srv;
+
 	template <class ActorType>
 	bool IsA()
 	{

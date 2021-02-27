@@ -7,7 +7,7 @@ class IShaderView
 {
 public:
 	virtual void Create() = 0;
-	virtual void* Get() = 0;
+	virtual void* Get() { return data; }
 
 	void* data;
 };
@@ -18,12 +18,10 @@ public:
 	D3D11ShaderView() {}
 	D3D11ShaderView(ID3D11ShaderResourceView* srv);
 	virtual void Create() override;
-	virtual void* Get() override;
 };
 
 class D3D12ShaderView : public IShaderView
 {
 public:
 	virtual void Create() override;
-	virtual void* Get() override;
 };
