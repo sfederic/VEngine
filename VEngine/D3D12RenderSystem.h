@@ -53,7 +53,7 @@ public:
 	ID3D12Resource* CreateConstantBuffer(unsigned int size, const void* data);
 	ID3DBlob* CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target);
 	void UpdateConstantBuffer(ID3D12Resource* constBuffer, int byteWidth, void* initData);
-	void WaitForPreviousFrame();
+	virtual void WaitForPreviousFrame();
 	void RenderActorSystem(World* world);
 
 	static const int swapchainCount = 2;
@@ -72,7 +72,7 @@ public:
 	ID2D1DeviceContext1* d2dDeviceContext;
 	ID2D1Bitmap1* d2dRenderTargets[swapchainCount];
 
-	ComPtr<ID3D12Resource> uploadBuffer;
+	ID3D12Resource* uploadBuffer;
 
 	IDXGIFactory6* factory;
 	ID3D12Device* device;

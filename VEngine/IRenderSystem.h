@@ -34,7 +34,8 @@ public:
 	virtual void CreateAllShaders() = 0;
 	virtual IDXGISwapChain3* GetSwapchain() = 0;
 	virtual void Present() = 0;
-	virtual void Flush() = 0; //Acting as a stand in for WaitForPreviousFrame()
+	virtual void Flush() = 0;
+	virtual void WaitForPreviousFrame() = 0;
 
 	Matrices matrices;
 	Material material;

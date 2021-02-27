@@ -292,10 +292,6 @@ void D3D12RenderSystem::Init(HWND window)
 	matrices.mvp = matrices.model * matrices.view * matrices.proj;
 
 	cbUploadBuffer = CreateConstantBuffer(sizeof(matrices), &matrices);
-
-	//VERTEX BUFFERS
-	ComPtr<ID3D12Resource> tmpUploadBuffer;
-	vertexBuffer = CreateDefaultBuffer(12, nullptr, tmpUploadBuffer.Get());
 }
 
 void D3D12RenderSystem::RenderSetup(float deltaTime)
@@ -373,8 +369,6 @@ void D3D12RenderSystem::Render(float deltaTime)
 	cmdList->ResourceBarrier(1, &ResourceBarrier::Transition(rtvs[currentBackBufferIndex],
 		D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT));
 
-	//TODO: this call should really be in RenderEnd(), wait until below UI code is fixed up
-	ExecuteCommandLists();
 
 	//UI
 	//d3d11On12Device->AcquireWrappedResources(&wrappedBackBuffers[currentBackBufferIndex], 1);
@@ -421,7 +415,16 @@ ID3D12Resource* D3D12RenderSystem::CreateDefaultBuffer(unsigned int size, const 
 	ID3D12Resource* defaultBuffer = nullptr;
 	HR(device->CreateCommittedResource(&heapProps, D3D12_HEAP_FLAG_NONE, &desc, D3D12_RESOURCE_STATE_COPY_DEST, nullptr, IID_PPV_ARGS(&defaultBuffer)));
 
+	//Upload from CPU to UploadBuffer
+	UINT8* uploadData = nullptr;
+	uploadBuffer->Map(0, nullptr, (void**)&uploadData);
+	memcpy(uploadData, data, size);
+	uploadBuffer->Unmap(0, nullptr);
+
 	cmdList->CopyResource(defaultBuffer, uploadBuffer);
+
+	cmdList->ResourceBarrier(1, &ResourceBarrier::Transition(defaultBuffer, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_GENERIC_READ));
+
 	return defaultBuffer;
 }
 
@@ -443,15 +446,16 @@ ID3D12Resource* D3D12RenderSystem::CreateConstantBuffer(unsigned int size, const
 
 	ID3D12Resource* constantBuffer;
 	HR(device->CreateCommittedResource(&heapProps, D3D12_HEAP_FLAG_NONE, &desc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&constantBuffer)));
+
+	UpdateConstantBuffer(constantBuffer, 256, &data);
+
 	return constantBuffer;
 }
 
 void D3D12RenderSystem::CreateVertexBuffer(unsigned int size, const void* data, ActorSystem* actorSystem)
 {
-	IBuffer* buffer = new D3D12Buffer();
-	buffer->size = size;
-	buffer->data = CreateDefaultBuffer(size, data, uploadBuffer.Get());
-	actorSystem->SetVertexBuffer(buffer);
+	actorSystem->pso.vertexBuffer->size = size;
+	actorSystem->pso.vertexBuffer->data = CreateDefaultBuffer(size, data, uploadBuffer);
 }
 
 void D3D12RenderSystem::CreateSamplerState(ISampler* sampler)
@@ -490,7 +494,6 @@ void D3D12RenderSystem::Present()
 void D3D12RenderSystem::Flush()
 {
 	ExecuteCommandLists();
-	WaitForPreviousFrame();
 }
 
 void D3D12RenderSystem::ExecuteCommandLists()

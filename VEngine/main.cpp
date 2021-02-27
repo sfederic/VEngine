@@ -67,6 +67,7 @@ int main(int argc, char *argv[])
     GetWorld()->AddActorSystem(ac);
 
     gRenderSystem->Flush();
+    gRenderSystem->WaitForPreviousFrame();
 
     //MAIN LOOP
     while (gCoreSystem.bMainLoop)
@@ -105,10 +106,12 @@ int main(int argc, char *argv[])
             //gUISystem.d2dRenderTarget->EndDraw();
         }
 
-        //gRenderSystem->Flush();
+        gRenderSystem->Flush();
 
         //PRESENT
         gRenderSystem->Present();
+
+        gRenderSystem->WaitForPreviousFrame();
 
         gInputSystem.InputReset();
         gProfiler.Clean();
