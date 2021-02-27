@@ -103,7 +103,8 @@ public:
 			UINT indicesByteWidth = modelData.indices.size() * sizeof(uint16_t);
 			//indexBuffer = renderSystem->CreateDefaultBuffer(indicesByteWidth, D3D11_BIND_INDEX_BUFFER, modelData.indices.data());
 
-			renderSystem->CreateSamplerState(this);
+			//TODO: actorsystems pso have their own init now figure out if this is still needed
+			renderSystem->CreateSamplerState(this->pso.samplerState);
 			renderSystem->CreateTexture(this);
 
 			size_t stride = sizeof(Vertex);

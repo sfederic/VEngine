@@ -377,7 +377,7 @@ void D3D12RenderSystem::CreateVertexBuffer(unsigned int size, const void* data, 
 	actorSystem->SetVertexBuffer(buffer);
 }
 
-void D3D12RenderSystem::CreateSamplerState(ActorSystem* actorSystem)
+void D3D12RenderSystem::CreateSamplerState(ISampler* sampler)
 {
 }
 

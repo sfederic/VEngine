@@ -18,6 +18,8 @@ using namespace DirectX;
 
 extern Vertex debugLineData[2];
 
+class ISampler;
+
 class D3D11RenderSystem : public IRenderSystem
 {
 public:
@@ -41,7 +43,7 @@ public:
 	void CreateInputLayout();
 	void CreateRasterizerStates();
 	void CreateConstantBuffer();
-	virtual void CreateSamplerState(class ActorSystem* actorSystem) override;
+	virtual void CreateSamplerState(ISampler* sampler) override;
 	virtual void CreateTexture(class ActorSystem* actorSystem) override;
 
 	virtual void RenderSetup(float deltaTime);

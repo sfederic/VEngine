@@ -287,7 +287,7 @@ void D3D11RenderSystem::CreateConstantBuffer()
 	cbMaterial = CreateDefaultBuffer(sizeof(Material), D3D11_BIND_CONSTANT_BUFFER, &material);
 }
 
-void D3D11RenderSystem::CreateSamplerState(ActorSystem* actorSystem)
+void D3D11RenderSystem::CreateSamplerState(ISampler* sampler)
 {
 	D3D11_SAMPLER_DESC sampDesc = {};
 	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -295,13 +295,10 @@ void D3D11RenderSystem::CreateSamplerState(ActorSystem* actorSystem)
 	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
 	sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
 
-	ISampler* sampler = new D3D11Sampler();
-
 	ID3D11SamplerState* samplerState;
 	HR(device->CreateSamplerState(&sampDesc, &samplerState));
 
 	sampler->data = samplerState;
-	actorSystem->SetSamplerState(sampler);
 }
 
 void D3D11RenderSystem::CreateTexture(ActorSystem* actorSystem)
@@ -352,8 +349,8 @@ void D3D11RenderSystem::RenderActorSystem(World* world)
 		context->VSSetShader(shader->second->vertexShader, nullptr, 0);
 		context->PSSetShader(shader->second->pixelShader, nullptr, 0);
 
-		context->PSSetSamplers(0, 1, (ID3D11SamplerState**)actorSystem->GetSamplerState());
-		context->PSSetShaderResources(0, 1, (ID3D11ShaderResourceView**)actorSystem->GetShaderView());
+		context->PSSetSamplers(0, 1, (ID3D11SamplerState* const*)actorSystem->GetSamplerState());
+		context->PSSetShaderResources(0, 1, (ID3D11ShaderResourceView* const*)actorSystem->GetShaderView());
 
 		context->IASetVertexBuffers(0, 1, (ID3D11Buffer**)actorSystem->GetVertexBuffer(), &strides, &offsets);
 		//context->IASetIndexBuffer(actorSystem->indexBuffer, DXGI_FORMAT_R16_UINT, 0);

@@ -29,7 +29,7 @@ public:
 	virtual void Render(float deltaTime) override;
 	virtual void RenderEnd(float deltaTime) override;
 	virtual void CreateVertexBuffer(unsigned int size, const void* data, ActorSystem* actor);
-	virtual void CreateSamplerState(ActorSystem* actorSystem) override;
+	virtual void CreateSamplerState(ISampler* sampler) override;
 	virtual void CreateTexture(ActorSystem* actorSystem) override;
 	virtual void CreateVertexShader() override;
 	virtual void CreatePixelShader() override;

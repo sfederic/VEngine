@@ -14,12 +14,12 @@ void D3D11Buffer::Create()
 void* D3D11Buffer::Get()
 {
     assert(data);
-    return (ID3D11Buffer*)data;
+    return data;
 }
 
 void* D3D12Buffer::Get()
 {
     assert(data);
-    return (ID3D12Resource*)data;
+    return data;
 }
 

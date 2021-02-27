@@ -49,6 +49,7 @@ int main(int argc, char *argv[])
 
     ActorSystem ac;
     ac.modelName = "cube.fbx";
+    ac.shaderName = L"shaders.hlsl";
     ac.CreateActors<Actor>(gRenderSystem, 1);
 
     GetWorld()->AddActorSystem(ac);
