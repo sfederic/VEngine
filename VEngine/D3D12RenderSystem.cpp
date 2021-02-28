@@ -292,6 +292,9 @@ void D3D12RenderSystem::Init(HWND window)
 	matrices.mvp = matrices.model * matrices.view * matrices.proj;
 
 	cbUploadBuffer = CreateConstantBuffer(sizeof(matrices), &matrices);
+	constantBufferView.SizeInBytes = 256;
+	constantBufferView.BufferLocation = cbUploadBuffer->GetGPUVirtualAddress();
+	device->CreateConstantBufferView(&constantBufferView, cbHeap->GetCPUDescriptorHandleForHeapStart());
 }
 
 void D3D12RenderSystem::RenderSetup(float deltaTime)

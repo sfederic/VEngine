@@ -104,6 +104,7 @@ public:
 
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle;
 	D3D12_VERTEX_BUFFER_VIEW vertexBufferView;
+	D3D12_CONSTANT_BUFFER_VIEW_DESC constantBufferView;
 
 	ComPtr<ID3D12Resource> vertexBuffer;
 	ComPtr<ID3D12Resource> cbUploadBuffer;
