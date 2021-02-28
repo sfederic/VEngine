@@ -47,12 +47,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)\FBXInclude;</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)\Libs;</LibraryPath>
-    <OutDir>$(ProjectDir)</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)\FBXInclude;</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)\Libs;</LibraryPath>
-    <OutDir>$(ProjectDir)</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
@@ -108,6 +106,7 @@
   <ItemGroup>
     <ClCompile Include="AssetDock.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="ConsoleDock.cpp" />
     <ClCompile Include="GameSystem.cpp" />
     <ClCompile Include="IBuffer.cpp" />
     <ClCompile Include="IRasterizerState.cpp" />
@@ -165,6 +164,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Console.h" />
+    <ClInclude Include="ConsoleDock.h" />
     <ClInclude Include="CoreSystem.h" />
     <ClInclude Include="D3D11RenderSystem.h" />
     <ClInclude Include="D3D12RenderSystem.h" />

@@ -12,18 +12,6 @@ EditorMainWindow::EditorMainWindow(QWidget *parent) : QMainWindow(parent)
 {
     ui.setupUi(this);
 
-    //Styles
-    qApp->setStyleSheet("QDockWidget:title { background-color: #0f8640 }"\
-        "QDockWidget {background-color: #383838}");
-
-    //Pallete theming example
-    /*QPalette p = QApplication::palette();
-    p.setColor(QPalette::Text, Qt::white);
-    p.setColor(QPalette::WindowText, Qt::white);
-    p.setColor(QPalette::ButtonText, Qt::white);
-    p.setColor(QPalette::BrightText, Qt::white);
-    QApplication::setPalette(p);*/
-
     //Toolbar dock
     toolbarDock = new ToolbarDock("Toolbar");
     addDockWidget(Qt::TopDockWidgetArea, toolbarDock);
@@ -41,6 +29,7 @@ EditorMainWindow::EditorMainWindow(QWidget *parent) : QMainWindow(parent)
     addDockWidget(Qt::BottomDockWidgetArea, assetDock);
 
     //TODO: Console dock (tab it within asset/prefab window)
+
 
     //Central widget - Viewport
     {
