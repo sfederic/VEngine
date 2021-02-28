@@ -8,6 +8,8 @@
 #include "AssetDock.h"
 #include "RenderViewWidget.h"
 
+class ConsoleDock;
+
 class EditorMainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -23,10 +25,12 @@ public:
 	void Tick();
 
 	//Docks
+	//TODO: why aren't these forward declared? fix up
 	ToolbarDock* toolbarDock;
 	WorldDock* worldDock;
 	PropertiesDock* propertiesDock;
 	AssetDock* assetDock;
+	ConsoleDock* consoleDock;
 
 	RenderViewWidget* renderViewWidget;
 

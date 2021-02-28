@@ -7,6 +7,7 @@
 #include "RenderViewWidget.h"
 #include "PropertiesWidget.h"
 #include "CoreSystem.h"
+#include "ConsoleDock.h"
 
 EditorMainWindow::EditorMainWindow(QWidget *parent) : QMainWindow(parent)
 {
@@ -28,8 +29,9 @@ EditorMainWindow::EditorMainWindow(QWidget *parent) : QMainWindow(parent)
     assetDock = new AssetDock("Assets");
     addDockWidget(Qt::BottomDockWidgetArea, assetDock);
 
-    //TODO: Console dock (tab it within asset/prefab window)
-
+    //Console dock
+    consoleDock = new ConsoleDock();
+    tabifyDockWidget(assetDock, consoleDock); //Adds second argument as tab to first's Dock Area
 
     //Central widget - Viewport
     {
