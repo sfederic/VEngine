@@ -22,6 +22,7 @@
 #include "Profiler.h"
 
 #include "TestActor.h"
+#include "ConsoleDock.h"
 
 //For throwing the program into fullscreen for profilers, getting rid of Qt
 //#define PROFILE_NOEDITOR
@@ -33,7 +34,6 @@ int main(int argc, char *argv[])
     //Qt setup
 #ifndef PROFILE_NOEDITOR
     QApplication qApplication(argc, argv);
-    EditorMainWindow* editorMainWindow = new EditorMainWindow();
 #endif //PROFILE_NOEDITOR
     gProfiler.Init();
 
@@ -48,14 +48,14 @@ int main(int argc, char *argv[])
 #ifdef PROFILE_NOEDITOR
     gRenderSystem->Init(gCoreSystem.mainWindow);
 #else
-    gRenderSystem->Init((HWND)editorMainWindow->renderViewWidget->winId());
+    gRenderSystem->Init((HWND)gEditorMainWindow.renderViewWidget->winId());
 #endif
     gAudioSystem.Init();
     gUISystem.Init();
     gWorldEditor.Init();
 
     //Qt late init
-    editorMainWindow->worldDock->PopulateWorldList();
+    gEditorMainWindow.worldDock->PopulateWorldList();
 
 
     ActorSystem ac;
@@ -78,10 +78,10 @@ int main(int argc, char *argv[])
         gCoreSystem.HandleMessages();
 
         qApplication.processEvents();
-        editorMainWindow->Tick();
+        gEditorMainWindow.Tick();
 
         gFileSystem.Tick();
-        gUISystem.Tick(editorMainWindow);
+        gUISystem.Tick(&gEditorMainWindow);
 
         gTimerSystem.Tick(deltaTime);
 
@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
         gRenderSystem->Tick();
         gRenderSystem->RenderSetup(deltaTime);
 
-        gWorldEditor.Tick(nullptr, editorMainWindow);
+        gWorldEditor.Tick(nullptr, &gEditorMainWindow);
 
         gRenderSystem->Render(deltaTime);
         gRenderSystem->RenderEnd(deltaTime);

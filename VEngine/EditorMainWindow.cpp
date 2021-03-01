@@ -9,6 +9,8 @@
 #include "CoreSystem.h"
 #include "ConsoleDock.h"
 
+EditorMainWindow gEditorMainWindow;
+
 EditorMainWindow::EditorMainWindow(QWidget *parent) : QMainWindow(parent)
 {
     ui.setupUi(this);

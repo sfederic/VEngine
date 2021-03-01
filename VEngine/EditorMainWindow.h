@@ -38,3 +38,4 @@ private:
     Ui::EditorMainWindowClass ui;
 };
 
+extern EditorMainWindow gEditorMainWindow;

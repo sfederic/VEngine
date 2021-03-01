@@ -10,7 +10,7 @@ ConsoleDock::ConsoleDock() : QDockWidget(QString("Console"))
 	auto consoleSearchBar = new QLineEdit();
 	vbLayout->addWidget(consoleSearchBar);
 
-	auto consoleMessageBox = new QTextEdit();
+	consoleMessageBox = new QTextEdit();
 	consoleMessageBox->setReadOnly(true);
 	vbLayout->addWidget(consoleMessageBox);
 
@@ -18,4 +18,11 @@ ConsoleDock::ConsoleDock() : QDockWidget(QString("Console"))
 	consoleWidget->setLayout(vbLayout);
 
 	setWidget(consoleWidget);
+}
+
+//Simply print text argument to console 
+void ConsoleDock::Print(const char* string)
+{
+	consoleMessageBox->insertPlainText(QString(string));
+	consoleMessageBox->insertPlainText("\n");
 }
