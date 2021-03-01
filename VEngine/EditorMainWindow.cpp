@@ -8,7 +8,10 @@
 #include "PropertiesWidget.h"
 #include "CoreSystem.h"
 #include "ConsoleDock.h"
+#include <QTextEdit>
 
+int argc = 0;
+QApplication qapplication(argc, nullptr);
 EditorMainWindow gEditorMainWindow;
 
 EditorMainWindow::EditorMainWindow(QWidget *parent) : QMainWindow(parent)
@@ -120,3 +123,9 @@ void EditorMainWindow::Tick()
     renderViewWidget->Tick();
 }
 
+void EditorMainWindow::Print(const char* string)
+{
+    //TODO: set verbosity level to conincide with text colour
+    consoleDock->consoleMessageBox->insertPlainText(QString(string));
+    consoleDock->consoleMessageBox->insertPlainText("\n");
+}

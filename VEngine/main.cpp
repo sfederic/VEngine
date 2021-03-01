@@ -29,11 +29,11 @@
 
 int main(int argc, char *argv[])
 {
-    HR(CoInitialize(NULL)); //For the WIC functions
+    //HR(CoInitialize(NULL)); //For the WIC functions
 
     //Qt setup
 #ifndef PROFILE_NOEDITOR
-    QApplication qApplication(argc, argv);
+    //QApplication qApplication(argc, argv);
 #endif //PROFILE_NOEDITOR
     gProfiler.Init();
 

@@ -19,10 +19,3 @@ ConsoleDock::ConsoleDock() : QDockWidget(QString("Console"))
 
 	setWidget(consoleWidget);
 }
-
-//Simply print text argument to console 
-void ConsoleDock::Print(const char* string)
-{
-	consoleMessageBox->insertPlainText(QString(string));
-	consoleMessageBox->insertPlainText("\n");
-}

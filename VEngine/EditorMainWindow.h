@@ -23,6 +23,7 @@ public:
 	bool nativeEvent(const QByteArray& eventType, void* message, long* result) override;
 
 	void Tick();
+	void Print(const char* string); //Print to consoledock's TextEdit
 
 	//Docks
 	//TODO: why aren't these forward declared? fix up
@@ -39,3 +40,4 @@ private:
 };
 
 extern EditorMainWindow gEditorMainWindow;
+extern QApplication qApplication;
