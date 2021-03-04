@@ -36,6 +36,7 @@ public:
 	virtual IDXGISwapChain3* GetSwapchain();
 	virtual void Present();
 	virtual void Flush();
+	virtual void WaitForPreviousFrame() {}
 
 	void CreateDefaultBuffer();
 	void CreateDevice();
