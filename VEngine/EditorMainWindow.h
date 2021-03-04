@@ -38,6 +38,3 @@ public:
 private:
     Ui::EditorMainWindowClass ui;
 };
-
-extern EditorMainWindow gEditorMainWindow;
-extern QApplication qApplication;

@@ -29,9 +29,12 @@
 
 int main(int argc, char *argv[])
 {
-    //HR(CoInitialize(NULL)); //For the WIC functions
+    HR(CoInitialize(NULL)); //For the WIC functions
 
     //Qt setup
+    QApplication qApplication(argc, nullptr);
+    EditorMainWindow gEditorMainWindow;
+
 #ifndef PROFILE_NOEDITOR
     //QApplication qApplication(argc, argv);
 #endif //PROFILE_NOEDITOR

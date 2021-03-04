@@ -10,10 +10,6 @@
 #include "ConsoleDock.h"
 #include <QTextEdit>
 
-int argc = 0;
-QApplication qapplication(argc, nullptr);
-EditorMainWindow gEditorMainWindow;
-
 EditorMainWindow::EditorMainWindow(QWidget *parent) : QMainWindow(parent)
 {
     ui.setupUi(this);
