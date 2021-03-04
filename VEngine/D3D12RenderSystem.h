@@ -16,6 +16,9 @@
 #include <dxcapi.h>
 #include <dwrite_1.h>
 
+//TODO: Try make a memory query class whatever that can track allocations and leftover space
+//https://docs.microsoft.com/en-us/windows/win32/api/dxgi1_4/nf-dxgi1_4-idxgiadapter3-queryvideomemoryinfo
+
 class World;
 class IShaderView;
 class ITexture;
