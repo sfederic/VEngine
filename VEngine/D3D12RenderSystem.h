@@ -55,7 +55,7 @@ public:
 	ID3D12Resource* CreateDefaultBuffer(unsigned int size, const void* data, ID3D12Resource* uploadBuffer);
 	ID3D12Resource* CreateConstantBuffer(unsigned int size, const void* data);
 	ID3DBlob* CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target);
-	void UpdateConstantBuffer(ID3D12Resource* constBuffer, int byteWidth, void* initData);
+	void UpdateBuffer(ID3D12Resource* buffer, int byteWidth, void* initData);
 	virtual void WaitForPreviousFrame();
 	void RenderActorSystem(World* world);
 

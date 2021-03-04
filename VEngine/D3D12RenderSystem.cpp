@@ -32,15 +32,31 @@ ID3DBlob* D3D12RenderSystem::CreateShaderFromFile(const wchar_t* filename, const
 
 void D3D12RenderSystem::CreateShaders()
 {
+	//TODO: can just never get this shit to work.
 	//DXC COMPILER EXAMPLE
 	/*HR(DxcCreateInstance(CLSID_DxcLibrary, IID_PPV_ARGS(&dxcLibrary)));
 	HR(DxcCreateInstance(CLSID_DxcCompiler, IID_PPV_ARGS(&dxcCompiler)));
 
-	IDxcOperationResult* result;
-	dxcCompiler->Compile(vertexCode, L"Shaders/shader.hlsl", L"VSMain", L"vs_6_0", nullptr, 0, nullptr, 0, nullptr, &result);
+	const wchar_t* pArgs[] =
+	{
+		L"-Zpr",			//Row-major matrices
+		L"-WX",				//Warnings as errors
+#ifdef _DEBUG
+		L"-Zi",				//Debug info
+		L"-Qembed_debug",	//Embed debug info into the shader
+		L"-Od",				//Disable optimization
+#else
+		L"-O3",				//Optimization level 3
+#endif
+	};
+
+	std::vector<DxcDefine> defines;
+
+	IDxcOperationResult* result = nullptr;
+	HR(dxcCompiler->Compile(vertexCode, L"Shaders/shaders.hlsl", L"VSMain", L"vs_6_0", &pArgs[0], sizeof(pArgs) / sizeof(pArgs[0]), defines.data(), defines.size(), nullptr, &result));
 	HR(result->GetResult(&vertexCode));
 
-	dxcCompiler->Compile(pixelCode, L"Shaders/shader.hlsl", L"PSMain", L"ps_6_0", nullptr, 0, nullptr, 0, nullptr, &result);
+	HR(dxcCompiler->Compile(pixelCode, L"Shaders/shaders.hlsl", L"PSMain", L"ps_6_0", &pArgs[0], sizeof(pArgs) / sizeof(pArgs[0]), nullptr, 0, nullptr, &result));
 	HR(result->GetResult(&pixelCode));*/
 
 	UINT compileFlags = D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION;
@@ -329,7 +345,7 @@ void D3D12RenderSystem::RenderActorSystem(World* world)
 				matrices.model = actorSystem->actors[i]->transform;
 				matrices.mvp = matrices.model * matrices.view * matrices.proj;
 
-				UpdateConstantBuffer(cbUploadBuffer.Get(), sizeof(matrices), &matrices);
+				UpdateBuffer(cbUploadBuffer.Get(), sizeof(matrices), &matrices);
 
 				cmdList->DrawInstanced(actorSystem->modelData.verts.size(), 1, 0, 0);
 			}
@@ -450,7 +466,7 @@ ID3D12Resource* D3D12RenderSystem::CreateConstantBuffer(unsigned int size, const
 	ID3D12Resource* constantBuffer;
 	HR(device->CreateCommittedResource(&heapProps, D3D12_HEAP_FLAG_NONE, &desc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&constantBuffer)));
 
-	UpdateConstantBuffer(constantBuffer, 256, &data);
+	UpdateBuffer(constantBuffer, 256, &data);
 
 	return constantBuffer;
 }
@@ -538,12 +554,12 @@ void D3D12RenderSystem::InitD2D()
 	HR(d2dDeviceContext->CreateSolidColorBrush(color, &brushText));
 }
 
-void D3D12RenderSystem::UpdateConstantBuffer(ID3D12Resource* constBuffer, int byteWidth, void* initData)
+void D3D12RenderSystem::UpdateBuffer(ID3D12Resource* buffer, int byteWidth, void* initData)
 {
 	UINT8* data = nullptr;
-	constBuffer->Map(0, nullptr, (void**)&data);
+	buffer->Map(0, nullptr, (void**)&data);
 	memcpy(data, initData, byteWidth);
-	constBuffer->Unmap(0, nullptr);
+	buffer->Unmap(0, nullptr);
 }
 
 void D3D12RenderSystem::WaitForPreviousFrame()
