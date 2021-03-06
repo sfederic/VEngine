@@ -7,6 +7,5 @@ struct ID3D11Resource;
 class Texture
 {
 public:
-	void Create();
 	ID3D11Resource* data;
 };

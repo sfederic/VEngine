@@ -224,4 +224,10 @@ void ActorSystem::SetShaderView(ShaderResourceView* shaderView)
 //PIPELINE VIEW
 void PipelineView::Create()
 {
+	vertexBuffer = new Buffer();
+	indexBuffer = new Buffer();
+	samplerState = new Sampler();
+	rastState = new RasterizerState();
+	texture = new Texture();
+	srv = new ShaderResourceView();
 }
