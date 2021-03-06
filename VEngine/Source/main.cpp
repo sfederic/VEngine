@@ -25,7 +25,7 @@
 #include "ConsoleDock.h"
 
 //For throwing the program into fullscreen for profilers, getting rid of Qt
-//#define PROFILE_NOEDITOR
+#define NO_EDITOR
 
 int main(int argc, char *argv[])
 {
@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
     QApplication qApplication(argc, nullptr);
     EditorMainWindow gEditorMainWindow;
 
-#ifndef PROFILE_NOEDITOR
+#ifndef NO_EDITOR
     //QApplication qApplication(argc, argv);
 #endif //PROFILE_NOEDITOR
     gProfiler.Init();

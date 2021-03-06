@@ -5,7 +5,6 @@
 #include "Obj.h"
 #include "MathHelpers.h"
 #include "IRenderSystem.h"
-#include "WICTextureLoader.h"
 #include "IBuffer.h"
 #include "IRasterizerState.h"
 #include "IShaderView.h"
