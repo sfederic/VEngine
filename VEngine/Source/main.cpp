@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
 #ifdef PROFILE_NOEDITOR
     gRenderSystem->Init(gCoreSystem.mainWindow);
 #else
-    gRenderSystem->Init((HWND)gEditorMainWindow.renderViewWidget->winId());
+    gRenderSystem.Init((HWND)gEditorMainWindow.renderViewWidget->winId());
 #endif
     gAudioSystem.Init();
     gUISystem.Init();
@@ -65,12 +65,12 @@ int main(int argc, char *argv[])
     ac.modelName = "cube.fbx";
     ac.shaderName = L"shaders.hlsl";
     ac.textureName = L"texture.png";
-    ac.CreateActors<Actor>(gRenderSystem, 1);
+    ac.CreateActors<Actor>(&gRenderSystem, 1);
 
     GetWorld()->AddActorSystem(ac);
 
-    gRenderSystem->Flush();
-    gRenderSystem->WaitForPreviousFrame();
+    gRenderSystem.Flush();
+    gRenderSystem.WaitForPreviousFrame();
 
     //MAIN LOOP
     while (gCoreSystem.bMainLoop)
@@ -90,13 +90,13 @@ int main(int argc, char *argv[])
 
         GetActiveCamera()->Tick(deltaTime);
 
-        gRenderSystem->Tick();
-        gRenderSystem->RenderSetup(deltaTime);
+        gRenderSystem.Tick();
+        gRenderSystem.RenderSetup(deltaTime);
 
         gWorldEditor.Tick(nullptr, &gEditorMainWindow);
 
-        gRenderSystem->Render(deltaTime);
-        gRenderSystem->RenderEnd(deltaTime);
+        gRenderSystem.Render(deltaTime);
+        gRenderSystem.RenderEnd(deltaTime);
 
         //UI RENDERING
         if (gUISystem.bAllUIActive)
@@ -109,12 +109,12 @@ int main(int argc, char *argv[])
             //gUISystem.d2dRenderTarget->EndDraw();
         }
 
-        gRenderSystem->Flush();
+        gRenderSystem.Flush();
 
         //PRESENT
-        gRenderSystem->Present();
+        gRenderSystem.Present();
 
-        gRenderSystem->WaitForPreviousFrame();
+        gRenderSystem.WaitForPreviousFrame();
 
         gInputSystem.InputReset();
         gProfiler.Clean();

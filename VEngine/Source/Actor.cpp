@@ -4,7 +4,6 @@
 #include "Debug.h"
 #include "Obj.h"
 #include "MathHelpers.h"
-#include "IRenderSystem.h"
 #include "Buffer.h"
 #include "RasterizerState.h"
 #include "ShaderResourceView.h"
@@ -141,8 +140,13 @@ ActorSystem::ActorSystem()
 	pso.Create();
 }
 
-void* ActorSystem::GetVertexBuffer()
+Buffer* ActorSystem::GetVertexBuffer()
 {
+	if (pso.vertexBuffer)
+	{
+		return pso.vertexBuffer;
+	}
+
 	return nullptr;
 }
 
@@ -159,28 +163,38 @@ Actor* ActorSystem::GetActor(unsigned int index)
 }
 
 
-void* ActorSystem::GetSamplerState()
+Sampler* ActorSystem::GetSamplerState()
 {
-	return nullptr;
+	return pso.samplerState;
 }
 
-void* ActorSystem::GetRasterizerState()
+RasterizerState* ActorSystem::GetRasterizerState()
 {
 	if (pso.rastState)
 	{
-		return pso.rastState->Get();
+		return pso.rastState;
 	}
 
 	return nullptr;
 }
 
-void* ActorSystem::GetShaderView()
+ShaderResourceView* ActorSystem::GetShaderView()
 {
+	if (pso.srv)
+	{
+		return pso.srv;
+	}
+
 	return nullptr;
 }
 
-void* ActorSystem::GetTexture()
+Texture* ActorSystem::GetTexture()
 {
+	if (pso.texture)
+	{
+		return pso.texture;
+	}
+
 	return nullptr;
 }
 

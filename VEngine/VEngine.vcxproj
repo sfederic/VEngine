@@ -121,7 +121,6 @@
     <ClCompile Include="Source\Console.cpp" />
     <ClCompile Include="Source\ConsoleDock.cpp" />
     <ClCompile Include="Source\CoreSystem.cpp" />
-    <ClCompile Include="Source\D3D11RenderSystem.cpp" />
     <ClCompile Include="Source\Debug.cpp" />
     <ClCompile Include="Source\DebugMenu.cpp" />
     <ClCompile Include="Source\FBXImporter.cpp" />
@@ -130,6 +129,7 @@
     <ClCompile Include="Source\Buffer.cpp" />
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\RasterizerState.cpp" />
+    <ClCompile Include="Source\RenderSystem.cpp" />
     <ClCompile Include="Source\Sampler.cpp" />
     <ClCompile Include="Source\ShaderResourceView.cpp" />
     <ClCompile Include="Source\Texture.cpp" />
@@ -141,7 +141,6 @@
     <ClCompile Include="Source\PropertiesDock.cpp" />
     <ClCompile Include="Source\PropertiesWidget.cpp" />
     <ClCompile Include="Source\Raycast.cpp" />
-    <ClCompile Include="Source\RenderSystem.cpp" />
     <ClCompile Include="Source\RenderViewWidget.cpp" />
     <ClCompile Include="Source\ShaderFactory.cpp" />
     <ClCompile Include="Source\TestActor.cpp" />
@@ -171,7 +170,6 @@
     <ClInclude Include="Source\Console.h" />
     <ClInclude Include="Source\ConsoleDock.h" />
     <ClInclude Include="Source\CoreSystem.h" />
-    <ClInclude Include="Source\D3D11RenderSystem.h" />
     <ClInclude Include="Source\Debug.h" />
     <ClInclude Include="Source\DebugMenu.h" />
     <ClInclude Include="Source\FBXImporter.h" />
@@ -180,7 +178,7 @@
     <ClInclude Include="Source\Buffer.h" />
     <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\RasterizerState.h" />
-    <ClInclude Include="Source\IRenderSystem.h" />
+    <ClInclude Include="Source\RenderSystem.h" />
     <ClInclude Include="Source\Sampler.h" />
     <ClInclude Include="Source\ShaderResourceView.h" />
     <ClInclude Include="Source\Texture.h" />
@@ -191,7 +189,6 @@
     <ClInclude Include="Source\PropertiesDock.h" />
     <ClInclude Include="Source\PropertiesWidget.h" />
     <ClInclude Include="Source\Raycast.h" />
-    <ClInclude Include="Source\RenderSystem.h" />
     <ClInclude Include="Source\RenderTypes.h" />
     <ClInclude Include="Source\RenderViewWidget.h" />
     <ClInclude Include="Source\ShaderFactory.h" />

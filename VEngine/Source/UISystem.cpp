@@ -14,10 +14,10 @@ void UISystem::Init()
 {
 	//Direct2D Init
 	IDXGISurface* surface;
-
+	
 	//If D3D12 is being used, you'll get a "Not Implemented" error on GetBuffer() as the CmdAllocator is pased into the 
 	//swapchain creation on d3d12 instead of the device in d3d11.
-	IDXGISwapChain3* swapchain = (IDXGISwapChain3*)gRenderSystem->GetSwapchain();
+	IDXGISwapChain3* swapchain = (IDXGISwapChain3*)gRenderSystem.GetSwapchain();
 	HR(swapchain->GetBuffer(0, IID_PPV_ARGS(&surface)));
 
 	D2D1_FACTORY_OPTIONS options;

@@ -119,7 +119,7 @@ bool RaycastTriangleIntersect(Ray& ray)
 	assert(actor);
 
 	XMMATRIX model = actor->transform;
-	XMMATRIX mvp = model * gRenderSystem->matrices.view * gRenderSystem->matrices.proj;
+	XMMATRIX mvp = model * gRenderSystem.matrices.view * gRenderSystem.matrices.proj;
 
 	std::vector<Ray> rays;
 	

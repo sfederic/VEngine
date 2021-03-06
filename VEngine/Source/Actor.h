@@ -16,8 +16,7 @@ class Sampler;
 class RasterizerState;
 class Texture;
 class ShaderResourceView;
-
-struct ID3D12PipelineState;
+class RenderSystem;
 
 enum class EActorSystemID
 {
@@ -76,9 +75,6 @@ struct PipelineView
 	RasterizerState* rastState;
 	Texture* texture;
 	ShaderResourceView* srv;
-
-	//TODO: this is no good here, but good enough now for testing
-	ID3D12PipelineState* pipelineState;
 };
 
 class ActorSystem
@@ -88,7 +84,7 @@ public:
 	virtual void Tick(float deltaTime) {}
 
 	template <class ActorType>
-	void CreateActors(class IRenderSystem* renderSystem, int numActorsToSpawn)
+	void CreateActors(RenderSystem* renderSystem, int numActorsToSpawn)
 	{
 		std::string filename = "Models/";
 		filename += modelName;
@@ -102,8 +98,7 @@ public:
 			UINT indicesByteWidth = modelData.indices.size() * sizeof(uint16_t);
 			//indexBuffer = renderSystem->CreateDefaultBuffer(indicesByteWidth, D3D11_BIND_INDEX_BUFFER, modelData.indices.data());
 
-			//TODO: actorsystems pso have their own init now figure out if this is still needed
-			renderSystem->CreateSamplerState(this->pso.samplerState);
+			renderSystem->CreateSamplerState(GetSamplerState());
 			renderSystem->CreateTexture(this);
 
 			size_t stride = sizeof(Vertex);
@@ -146,11 +141,11 @@ public:
 	Actor* ActorSystem::GetActor(unsigned int index);
 
 	//PSO functions
-	void* GetVertexBuffer();
-	void* GetSamplerState();
-	void* GetRasterizerState();
-	void* GetShaderView();
-	void* GetTexture();
+	Buffer* GetVertexBuffer();
+	Sampler* GetSamplerState();
+	RasterizerState* GetRasterizerState();
+	ShaderResourceView* GetShaderView();
+	Texture* GetTexture();
 
 	void SetVertexBuffer(Buffer* vertexBuffer);
 	void SetSamplerState(Sampler* sampler);
