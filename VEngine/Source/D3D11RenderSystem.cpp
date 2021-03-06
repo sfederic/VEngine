@@ -10,7 +10,7 @@
 #include "MathHelpers.h"
 #include "World.h"
 #include "Debug.h"
-#include "WICTextureLoaderD3D11.h"
+#include "WICTextureLoader.h"
 #include <string>
 #include "WorldEditor.h"
 #include "D3D11RenderSystem.h"
