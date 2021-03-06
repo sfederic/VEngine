@@ -229,6 +229,6 @@ void PipelineView::Create()
 	samplerState = new D3D12Sampler();
 	rastState = new D3D12RasterizerState();
 	texture = new D3D12Texture();
-	srv = new D3D12ShaderView();
+	srv = new D3D12ShaderView(); 
 #endif // D3D12_RENDERER
 }
