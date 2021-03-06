@@ -214,21 +214,10 @@ void ActorSystem::SetShaderView(IShaderView* shaderView)
 //PIPELINE VIEW
 void PipelineView::Create()
 {
-#ifdef D3D11_RENDERER
 	vertexBuffer = new D3D11Buffer();
 	indexBuffer = new D3D11Buffer();
 	samplerState = new D3D11Sampler();
 	rastState = new D3D11RasterizerState();
 	texture = new D3D11Texture();
 	srv = new D3D11ShaderView();
-#endif // D3D11_RENDERER
-
-#ifdef D3D12_RENDERER
-	vertexBuffer = new D3D12Buffer();
-	indexBuffer = new D3D12Buffer();
-	samplerState = new D3D12Sampler();
-	rastState = new D3D12RasterizerState();
-	texture = new D3D12Texture();
-	srv = new D3D12ShaderView(); 
-#endif // D3D12_RENDERER
 }

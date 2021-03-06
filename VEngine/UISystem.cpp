@@ -12,7 +12,6 @@ UISystem gUISystem;
 
 void UISystem::Init()
 {
-#ifdef D3D11_RENDERER
 	//Direct2D Init
 	IDXGISurface* surface;
 
@@ -63,7 +62,6 @@ void UISystem::Init()
 
 	toolbar = new Toolbar();
 	uiViews.push_back(toolbar);
-#endif
 }
 
 void UISystem::Cleanup()

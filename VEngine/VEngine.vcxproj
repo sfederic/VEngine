@@ -145,7 +145,6 @@
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="CoreSystem.cpp" />
     <ClCompile Include="D3D11RenderSystem.cpp" />
-    <ClCompile Include="D3D12RenderSystem.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="DebugMenu.cpp" />
     <ClCompile Include="EditorMainWindow.cpp" />
@@ -167,7 +166,6 @@
     <ClInclude Include="ConsoleDock.h" />
     <ClInclude Include="CoreSystem.h" />
     <ClInclude Include="D3D11RenderSystem.h" />
-    <ClInclude Include="D3D12RenderSystem.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="DebugMenu.h" />
     <ClInclude Include="FBXImporter.h" />
