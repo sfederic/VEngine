@@ -86,6 +86,7 @@ public:
 	ID3D12DescriptorHeap* rtvHeap;
 	ID3D12DescriptorHeap* dsvHeap;
 	ID3D12DescriptorHeap* cbHeap;
+	ID3D12DescriptorHeap* srvHeap;
 	ID3D12Resource* rtvs[swapchainCount];
 	ID3D12RootSignature* rootSig;
 	ID3D12PipelineState* pipelineState;
@@ -93,6 +94,7 @@ public:
 	ID3D12Fence* fence;
 
 	ID3D12Resource* cbMatrices;
+	ID3D12Resource* srv;
 
 	ID3D11Resource* wrappedBackBuffers[swapchainCount];
 

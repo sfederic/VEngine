@@ -5,6 +5,8 @@
 #include "Camera.h"
 #include "IBuffer.h"
 #include "ITexture.h"
+#include <ResourceUploadBatch.h>
+#include <WICTextureLoader.h>
 
 void D3D12RenderSystem::Tick()
 {
@@ -129,11 +131,10 @@ void D3D12RenderSystem::Init(HWND window)
 
 	//CONSTANT DESC HEAP
 	D3D12_DESCRIPTOR_HEAP_DESC cbHeapDesc = {};
-	cbHeapDesc.NumDescriptors = 2;
+	cbHeapDesc.NumDescriptors = 3;
 	cbHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
 	cbHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
 	HR(device->CreateDescriptorHeap(&cbHeapDesc, IID_PPV_ARGS(&cbHeap)));
-
 
 	//D3D11on12 (For D2D/DWrite)
 	//NOTE: With D3D11on12 and all the debug information, some builds were giving 500MB for hello world-tier programs
@@ -311,6 +312,15 @@ void D3D12RenderSystem::Init(HWND window)
 	constantBufferView.SizeInBytes = 256;
 	constantBufferView.BufferLocation = cbUploadBuffer->GetGPUVirtualAddress();
 	device->CreateConstantBufferView(&constantBufferView, cbHeap->GetCPUDescriptorHandleForHeapStart());
+
+	//SRV
+	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
+	srvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.Texture2D.MipLevels = 1;
+	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	
+	device->CreateShaderResourceView(srv, &srvDesc, cbHeap->GetCPUDescriptorHandleForHeapStart());
 }
 
 void D3D12RenderSystem::RenderSetup(float deltaTime)
@@ -483,6 +493,29 @@ void D3D12RenderSystem::CreateSamplerState(ISampler* sampler)
 
 void D3D12RenderSystem::CreateTexture(ActorSystem* actorSystem)
 {
+	if (actorSystem->textureName.empty())
+	{
+		DebugPrint("%s has no texture filename specified. Skipping texture creation.\n", actorSystem->name);
+		return;
+	}
+
+	std::wstring textureFilename = L"Textures/";
+	textureFilename += actorSystem->textureName;
+
+	ID3D12Resource* texture = nullptr;
+
+	//https://github.com/microsoft/DirectXTK12/wiki/ResourceUploadBatch
+	ResourceUploadBatch uploadBatch(device);
+	uploadBatch.Begin();
+	
+	CreateWICTextureFromFile(device, uploadBatch, textureFilename.c_str(), &texture);
+	if (texture)
+	{
+		actorSystem->pso.texture->data = texture;
+	}
+
+	auto finish = uploadBatch.End(cmdQueue);
+	finish.wait();
 }
 
 void D3D12RenderSystem::CreateVertexShader()
