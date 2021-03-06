@@ -1,7 +1,7 @@
 #include "Debug.h"
 #include <comdef.h>
 #include <string>
-#include "EditorMainWindow.h"
+#include "..\EditorMainWindow.h"
 
 void DXTrace(HRESULT hr, const char* filename, const char* func, int line)
 {

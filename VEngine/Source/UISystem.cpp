@@ -6,7 +6,7 @@
 #include "Actor.h"
 #include "WorldEditor.h"
 #include "World.h"
-#include "EditorMainWindow.h"
+#include "..\EditorMainWindow.h"
 
 UISystem gUISystem;
 

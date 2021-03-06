@@ -1,4 +1,4 @@
-#include "EditorMainWindow.h"
+#include "..\EditorMainWindow.h"
 #include "RenderSystem.h"
 #include "CoreSystem.h"
 #include "UISystem.h"

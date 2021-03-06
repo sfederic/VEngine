@@ -6,7 +6,7 @@
 #include "CoreSystem.h"
 #include "ShaderFactory.h"
 #include "MathHelpers.h"
-#include "EditorMainWindow.h"
+#include "..\EditorMainWindow.h"
 #include "PropertiesDock.h"
 
 WorldEditor gWorldEditor;

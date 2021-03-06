@@ -45,12 +45,18 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)\FBXInclude;</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)\Libs;</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)\FBXInclude;$(ProjectDir)\Source</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)\Libs</LibraryPath>
+    <OutDir>$(ProjectDir)</OutDir>
+    <ReferencePath>$(VC_ReferencesPath_x64);</ReferencePath>
+    <ExecutablePath>$(VC_ExecutablePath_x64);$(CommonExecutablePath);</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)\FBXInclude;</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)\Libs;</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)\FBXInclude;$(ProjectDir)\Source</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)\Libs</LibraryPath>
+    <OutDir>$(ProjectDir)</OutDir>
+    <ReferencePath>$(VC_ReferencesPath_x64);</ReferencePath>
+    <ExecutablePath>$(VC_ExecutablePath_x64);$(CommonExecutablePath);</ExecutablePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
@@ -104,104 +110,105 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AssetDock.cpp" />
-    <ClCompile Include="Component.cpp" />
-    <ClCompile Include="ConsoleDock.cpp" />
-    <ClCompile Include="GameSystem.cpp" />
-    <ClCompile Include="IBuffer.cpp" />
-    <ClCompile Include="IRasterizerState.cpp" />
-    <ClCompile Include="ISampler.cpp" />
-    <ClCompile Include="IShaderView.cpp" />
-    <ClCompile Include="ITexture.cpp" />
-    <ClCompile Include="Lights.cpp" />
-    <ClCompile Include="MathHelpers.cpp" />
-    <ClCompile Include="Obj.cpp" />
-    <ClCompile Include="Profiler.cpp" />
-    <ClCompile Include="PropertiesDock.cpp" />
-    <ClCompile Include="PropertiesWidget.cpp" />
-    <ClCompile Include="Raycast.cpp" />
-    <ClCompile Include="RenderSystem.cpp" />
-    <ClCompile Include="RenderViewWidget.cpp" />
-    <ClCompile Include="ShaderFactory.cpp" />
-    <ClCompile Include="TestActor.cpp" />
-    <ClCompile Include="TimerSystem.cpp" />
-    <ClCompile Include="ToolbarDock.cpp" />
-    <ClCompile Include="TransformEditWidget.cpp" />
-    <ClCompile Include="TranslationGizmo.cpp" />
-    <ClCompile Include="UISystem.cpp" />
-    <ClCompile Include="UIView.cpp" />
-    <ClCompile Include="World.cpp" />
-    <ClCompile Include="WorldDock.cpp" />
-    <ClCompile Include="WorldEditor.cpp" />
+    <ClCompile Include="Source\Actor.cpp" />
+    <ClCompile Include="Source\Array.cpp" />
+    <ClCompile Include="Source\AssetDock.cpp" />
+    <ClCompile Include="Source\Audio.cpp" />
+    <ClCompile Include="Source\AudioSystem.cpp" />
+    <ClCompile Include="Source\AxisActor.cpp" />
+    <ClCompile Include="Source\Camera.cpp" />
+    <ClCompile Include="Source\Component.cpp" />
+    <ClCompile Include="Source\Console.cpp" />
+    <ClCompile Include="Source\ConsoleDock.cpp" />
+    <ClCompile Include="Source\CoreSystem.cpp" />
+    <ClCompile Include="Source\D3D11RenderSystem.cpp" />
+    <ClCompile Include="Source\Debug.cpp" />
+    <ClCompile Include="Source\DebugMenu.cpp" />
+    <ClCompile Include="Source\FBXImporter.cpp" />
+    <ClCompile Include="Source\FileSystem.cpp" />
+    <ClCompile Include="Source\GameSystem.cpp" />
+    <ClCompile Include="Source\IBuffer.cpp" />
+    <ClCompile Include="Source\Input.cpp" />
+    <ClCompile Include="Source\IRasterizerState.cpp" />
+    <ClCompile Include="Source\ISampler.cpp" />
+    <ClCompile Include="Source\IShaderView.cpp" />
+    <ClCompile Include="Source\ITexture.cpp" />
+    <ClCompile Include="Source\Lights.cpp" />
+    <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\MathHelpers.cpp" />
+    <ClCompile Include="Source\Obj.cpp" />
+    <ClCompile Include="Source\Profiler.cpp" />
+    <ClCompile Include="Source\PropertiesDock.cpp" />
+    <ClCompile Include="Source\PropertiesWidget.cpp" />
+    <ClCompile Include="Source\Raycast.cpp" />
+    <ClCompile Include="Source\RenderSystem.cpp" />
+    <ClCompile Include="Source\RenderViewWidget.cpp" />
+    <ClCompile Include="Source\ShaderFactory.cpp" />
+    <ClCompile Include="Source\TestActor.cpp" />
+    <ClCompile Include="Source\TimerSystem.cpp" />
+    <ClCompile Include="Source\ToolbarDock.cpp" />
+    <ClCompile Include="Source\TransformEditWidget.cpp" />
+    <ClCompile Include="Source\TranslationGizmo.cpp" />
+    <ClCompile Include="Source\UISystem.cpp" />
+    <ClCompile Include="Source\UIView.cpp" />
+    <ClCompile Include="Source\World.cpp" />
+    <ClCompile Include="Source\WorldDock.cpp" />
+    <ClCompile Include="Source\WorldEditor.cpp" />
     <QtRcc Include="EditorMainWindow.qrc" />
     <QtUic Include="EditorMainWindow.ui" />
     <QtMoc Include="EditorMainWindow.h" />
-    <ClCompile Include="Actor.cpp" />
-    <ClCompile Include="Array.cpp" />
-    <ClCompile Include="Audio.cpp" />
-    <ClCompile Include="AudioSystem.cpp" />
-    <ClCompile Include="AxisActor.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Console.cpp" />
-    <ClCompile Include="CoreSystem.cpp" />
-    <ClCompile Include="D3D11RenderSystem.cpp" />
-    <ClCompile Include="Debug.cpp" />
-    <ClCompile Include="DebugMenu.cpp" />
     <ClCompile Include="EditorMainWindow.cpp" />
-    <ClCompile Include="FBXImporter.cpp" />
-    <ClCompile Include="FileSystem.cpp" />
-    <ClCompile Include="Input.cpp" />
-    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Actor.h" />
-    <ClInclude Include="Array.h" />
-    <ClInclude Include="AssetDock.h" />
-    <ClInclude Include="Audio.h" />
-    <ClInclude Include="AudioSystem.h" />
-    <ClInclude Include="AxisActor.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Component.h" />
-    <ClInclude Include="Console.h" />
-    <ClInclude Include="ConsoleDock.h" />
-    <ClInclude Include="CoreSystem.h" />
-    <ClInclude Include="D3D11RenderSystem.h" />
-    <ClInclude Include="Debug.h" />
-    <ClInclude Include="DebugMenu.h" />
-    <ClInclude Include="FBXImporter.h" />
-    <ClInclude Include="FileSystem.h" />
-    <ClInclude Include="GameSystem.h" />
-    <ClInclude Include="IBuffer.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="IRasterizerState.h" />
-    <ClInclude Include="IRenderSystem.h" />
-    <ClInclude Include="ISampler.h" />
-    <ClInclude Include="IShaderView.h" />
-    <ClInclude Include="ITexture.h" />
-    <ClInclude Include="Lights.h" />
-    <ClInclude Include="MathHelpers.h" />
-    <ClInclude Include="Obj.h" />
-    <ClInclude Include="Profiler.h" />
-    <ClInclude Include="PropertiesDock.h" />
-    <ClInclude Include="PropertiesWidget.h" />
-    <ClInclude Include="Raycast.h" />
-    <ClInclude Include="RenderSystem.h" />
-    <ClInclude Include="RenderTypes.h" />
-    <ClInclude Include="RenderViewWidget.h" />
-    <ClInclude Include="ShaderFactory.h" />
-    <ClInclude Include="TestActor.h" />
-    <ClInclude Include="TimerSystem.h" />
-    <ClInclude Include="ToolbarDock.h" />
-    <ClInclude Include="TransformEditWidget.h" />
-    <ClInclude Include="TranslationGizmo.h" />
-    <ClInclude Include="UISystem.h" />
-    <ClInclude Include="UIView.h" />
-    <ClInclude Include="World.h" />
-    <ClInclude Include="WorldDock.h" />
-    <ClInclude Include="WorldEditor.h" />
+    <ClInclude Include="Source\Actor.h" />
+    <ClInclude Include="Source\Array.h" />
+    <ClInclude Include="Source\AssetDock.h" />
+    <ClInclude Include="Source\Audio.h" />
+    <ClInclude Include="Source\AudioSystem.h" />
+    <ClInclude Include="Source\AxisActor.h" />
+    <ClInclude Include="Source\Camera.h" />
+    <ClInclude Include="Source\Component.h" />
+    <ClInclude Include="Source\Console.h" />
+    <ClInclude Include="Source\ConsoleDock.h" />
+    <ClInclude Include="Source\CoreSystem.h" />
+    <ClInclude Include="Source\D3D11RenderSystem.h" />
+    <ClInclude Include="Source\Debug.h" />
+    <ClInclude Include="Source\DebugMenu.h" />
+    <ClInclude Include="Source\FBXImporter.h" />
+    <ClInclude Include="Source\FileSystem.h" />
+    <ClInclude Include="Source\GameSystem.h" />
+    <ClInclude Include="Source\IBuffer.h" />
+    <ClInclude Include="Source\Input.h" />
+    <ClInclude Include="Source\IRasterizerState.h" />
+    <ClInclude Include="Source\IRenderSystem.h" />
+    <ClInclude Include="Source\ISampler.h" />
+    <ClInclude Include="Source\IShaderView.h" />
+    <ClInclude Include="Source\ITexture.h" />
+    <ClInclude Include="Source\Lights.h" />
+    <ClInclude Include="Source\MathHelpers.h" />
+    <ClInclude Include="Source\Obj.h" />
+    <ClInclude Include="Source\Profiler.h" />
+    <ClInclude Include="Source\PropertiesDock.h" />
+    <ClInclude Include="Source\PropertiesWidget.h" />
+    <ClInclude Include="Source\Raycast.h" />
+    <ClInclude Include="Source\RenderSystem.h" />
+    <ClInclude Include="Source\RenderTypes.h" />
+    <ClInclude Include="Source\RenderViewWidget.h" />
+    <ClInclude Include="Source\ShaderFactory.h" />
+    <ClInclude Include="Source\TestActor.h" />
+    <ClInclude Include="Source\TimerSystem.h" />
+    <ClInclude Include="Source\ToolbarDock.h" />
+    <ClInclude Include="Source\TransformEditWidget.h" />
+    <ClInclude Include="Source\TranslationGizmo.h" />
+    <ClInclude Include="Source\UISystem.h" />
+    <ClInclude Include="Source\UIView.h" />
+    <ClInclude Include="Source\World.h" />
+    <ClInclude Include="Source\WorldDock.h" />
+    <ClInclude Include="Source\WorldEditor.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Source\libfbxsdk.dll" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

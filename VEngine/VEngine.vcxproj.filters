@@ -38,277 +38,278 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="Source\Actor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Actor.cpp">
+    <ClCompile Include="Source\Array.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Array.cpp">
+    <ClCompile Include="Source\AssetDock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Audio.cpp">
+    <ClCompile Include="Source\Audio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AudioSystem.cpp">
+    <ClCompile Include="Source\AudioSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AxisActor.cpp">
+    <ClCompile Include="Source\AxisActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
+    <ClCompile Include="Source\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Console.cpp">
+    <ClCompile Include="Source\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CoreSystem.cpp">
+    <ClCompile Include="Source\Console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D3D11RenderSystem.cpp">
+    <ClCompile Include="Source\ConsoleDock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug.cpp">
+    <ClCompile Include="Source\CoreSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DebugMenu.cpp">
+    <ClCompile Include="Source\D3D11RenderSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FBXImporter.cpp">
+    <ClCompile Include="Source\Debug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FileSystem.cpp">
+    <ClCompile Include="Source\DebugMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Input.cpp">
+    <ClCompile Include="Source\FBXImporter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MathHelpers.cpp">
+    <ClCompile Include="Source\FileSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Obj.cpp">
+    <ClCompile Include="Source\GameSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Raycast.cpp">
+    <ClCompile Include="Source\IBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RenderSystem.cpp">
+    <ClCompile Include="Source\Input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderFactory.cpp">
+    <ClCompile Include="Source\IRasterizerState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TimerSystem.cpp">
+    <ClCompile Include="Source\ISampler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UISystem.cpp">
+    <ClCompile Include="Source\IShaderView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UIView.cpp">
+    <ClCompile Include="Source\ITexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="World.cpp">
+    <ClCompile Include="Source\Lights.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WorldEditor.cpp">
+    <ClCompile Include="Source\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PropertiesWidget.cpp">
+    <ClCompile Include="Source\MathHelpers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TransformEditWidget.cpp">
+    <ClCompile Include="Source\Obj.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RenderViewWidget.cpp">
+    <ClCompile Include="Source\Profiler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ToolbarDock.cpp">
+    <ClCompile Include="Source\PropertiesDock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WorldDock.cpp">
+    <ClCompile Include="Source\PropertiesWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PropertiesDock.cpp">
+    <ClCompile Include="Source\Raycast.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AssetDock.cpp">
+    <ClCompile Include="Source\RenderSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameSystem.cpp">
+    <ClCompile Include="Source\RenderViewWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Component.cpp">
+    <ClCompile Include="Source\ShaderFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Lights.cpp">
+    <ClCompile Include="Source\TestActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TranslationGizmo.cpp">
+    <ClCompile Include="Source\TimerSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Profiler.cpp">
+    <ClCompile Include="Source\ToolbarDock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IBuffer.cpp">
+    <ClCompile Include="Source\TransformEditWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ISampler.cpp">
+    <ClCompile Include="Source\TranslationGizmo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IRasterizerState.cpp">
+    <ClCompile Include="Source\UISystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ITexture.cpp">
+    <ClCompile Include="Source\UIView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IShaderView.cpp">
+    <ClCompile Include="Source\World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TestActor.cpp">
+    <ClCompile Include="Source\WorldDock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ConsoleDock.cpp">
+    <ClCompile Include="Source\WorldEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Actor.h">
+    <ClInclude Include="Source\Actor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Array.h">
+    <ClInclude Include="Source\Array.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Audio.h">
+    <ClInclude Include="Source\AssetDock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AudioSystem.h">
+    <ClInclude Include="Source\Audio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AxisActor.h">
+    <ClInclude Include="Source\AudioSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
+    <ClInclude Include="Source\AxisActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Console.h">
+    <ClInclude Include="Source\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CoreSystem.h">
+    <ClInclude Include="Source\Component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D3D11RenderSystem.h">
+    <ClInclude Include="Source\Console.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Debug.h">
+    <ClInclude Include="Source\ConsoleDock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DebugMenu.h">
+    <ClInclude Include="Source\CoreSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FBXImporter.h">
+    <ClInclude Include="Source\D3D11RenderSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FileSystem.h">
+    <ClInclude Include="Source\Debug.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Input.h">
+    <ClInclude Include="Source\DebugMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IRenderSystem.h">
+    <ClInclude Include="Source\FBXImporter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MathHelpers.h">
+    <ClInclude Include="Source\FileSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Obj.h">
+    <ClInclude Include="Source\GameSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Raycast.h">
+    <ClInclude Include="Source\IBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RenderSystem.h">
+    <ClInclude Include="Source\Input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RenderTypes.h">
+    <ClInclude Include="Source\IRasterizerState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderFactory.h">
+    <ClInclude Include="Source\IRenderSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TimerSystem.h">
+    <ClInclude Include="Source\ISampler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UISystem.h">
+    <ClInclude Include="Source\IShaderView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UIView.h">
+    <ClInclude Include="Source\ITexture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="World.h">
+    <ClInclude Include="Source\Lights.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WorldEditor.h">
+    <ClInclude Include="Source\MathHelpers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PropertiesWidget.h">
+    <ClInclude Include="Source\Obj.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TransformEditWidget.h">
+    <ClInclude Include="Source\Profiler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RenderViewWidget.h">
+    <ClInclude Include="Source\PropertiesDock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ToolbarDock.h">
+    <ClInclude Include="Source\PropertiesWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WorldDock.h">
+    <ClInclude Include="Source\Raycast.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PropertiesDock.h">
+    <ClInclude Include="Source\RenderSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AssetDock.h">
+    <ClInclude Include="Source\RenderTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameSystem.h">
+    <ClInclude Include="Source\RenderViewWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Component.h">
+    <ClInclude Include="Source\ShaderFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Lights.h">
+    <ClInclude Include="Source\TestActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TranslationGizmo.h">
+    <ClInclude Include="Source\TimerSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Profiler.h">
+    <ClInclude Include="Source\ToolbarDock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IBuffer.h">
+    <ClInclude Include="Source\TransformEditWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ISampler.h">
+    <ClInclude Include="Source\TranslationGizmo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IRasterizerState.h">
+    <ClInclude Include="Source\UISystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ITexture.h">
+    <ClInclude Include="Source\UIView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IShaderView.h">
+    <ClInclude Include="Source\World.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TestActor.h">
+    <ClInclude Include="Source\WorldDock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ConsoleDock.h">
+    <ClInclude Include="Source\WorldEditor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Source\libfbxsdk.dll" />
   </ItemGroup>
 </Project>
