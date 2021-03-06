@@ -309,7 +309,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="Source\libfbxsdk.dll" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
