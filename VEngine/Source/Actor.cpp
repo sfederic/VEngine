@@ -5,12 +5,11 @@
 #include "Obj.h"
 #include "MathHelpers.h"
 #include "IRenderSystem.h"
-#include "IBuffer.h"
-#include "IRasterizerState.h"
-#include "IShaderView.h"
-#include "ISampler.h"
-#include "IShaderView.h"
-#include "ITexture.h"
+#include "Buffer.h"
+#include "RasterizerState.h"
+#include "ShaderResourceView.h"
+#include "Sampler.h"
+#include "Texture.h"
 
 //CONSTRUCTORS
 Actor::Actor()
@@ -144,7 +143,7 @@ ActorSystem::ActorSystem()
 
 void* ActorSystem::GetVertexBuffer()
 {
-	return pso.vertexBuffer->Get();
+	return nullptr;
 }
 
 void ActorSystem::RemoveActor(int index)
@@ -162,7 +161,7 @@ Actor* ActorSystem::GetActor(unsigned int index)
 
 void* ActorSystem::GetSamplerState()
 {
-	return pso.samplerState->Get();
+	return nullptr;
 }
 
 void* ActorSystem::GetRasterizerState()
@@ -177,7 +176,7 @@ void* ActorSystem::GetRasterizerState()
 
 void* ActorSystem::GetShaderView()
 {
-	return pso.srv->Get();
+	return nullptr;
 }
 
 void* ActorSystem::GetTexture()
@@ -185,27 +184,25 @@ void* ActorSystem::GetTexture()
 	return nullptr;
 }
 
-void ActorSystem::SetTexture(ITexture* texture)
+void ActorSystem::SetTexture(Texture* texture)
 {
-	pso.texture = texture;
 }
 
-void ActorSystem::SetVertexBuffer(IBuffer* vertexBuffer)
+void ActorSystem::SetVertexBuffer(Buffer* vertexBuffer)
 {
-	pso.vertexBuffer = vertexBuffer;
 }
 
-void ActorSystem::SetSamplerState(ISampler* sampler)
+void ActorSystem::SetSamplerState(Sampler* sampler)
 {
 	pso.samplerState = sampler;
 }
 
-void ActorSystem::SetRasterizerState(IRasterizerState* rasterizerState)
+void ActorSystem::SetRasterizerState(RasterizerState* rasterizerState)
 {
 	pso.rastState = rasterizerState;
 }
 
-void ActorSystem::SetShaderView(IShaderView* shaderView)
+void ActorSystem::SetShaderView(ShaderResourceView* shaderView)
 {
 	pso.srv = shaderView;
 }
@@ -213,10 +210,4 @@ void ActorSystem::SetShaderView(IShaderView* shaderView)
 //PIPELINE VIEW
 void PipelineView::Create()
 {
-	vertexBuffer = new D3D11Buffer();
-	indexBuffer = new D3D11Buffer();
-	samplerState = new D3D11Sampler();
-	rastState = new D3D11RasterizerState();
-	texture = new D3D11Texture();
-	srv = new D3D11ShaderView();
 }

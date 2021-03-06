@@ -11,11 +11,11 @@
 
 using namespace DirectX;
 
-class IBuffer;
-class ISampler;
-class IRasterizerState;
-class ITexture;
-class IShaderView;
+class Buffer;
+class Sampler;
+class RasterizerState;
+class Texture;
+class ShaderResourceView;
 
 struct ID3D12PipelineState;
 
@@ -70,12 +70,12 @@ struct PipelineView
 {
 	void Create();
 
-	IBuffer* vertexBuffer;
-	IBuffer* indexBuffer;
-	ISampler* samplerState;
-	IRasterizerState* rastState;
-	ITexture* texture;
-	IShaderView* srv;
+	Buffer* vertexBuffer;
+	Buffer* indexBuffer;
+	Sampler* samplerState;
+	RasterizerState* rastState;
+	Texture* texture;
+	ShaderResourceView* srv;
 
 	//TODO: this is no good here, but good enough now for testing
 	ID3D12PipelineState* pipelineState;
@@ -152,11 +152,11 @@ public:
 	void* GetShaderView();
 	void* GetTexture();
 
-	void SetVertexBuffer(IBuffer* vertexBuffer);
-	void SetSamplerState(ISampler* sampler);
-	void SetRasterizerState(IRasterizerState* rasterizerState);
-	void SetShaderView(IShaderView* shaderView);
-	void SetTexture(ITexture* texture);
+	void SetVertexBuffer(Buffer* vertexBuffer);
+	void SetSamplerState(Sampler* sampler);
+	void SetRasterizerState(RasterizerState* rasterizerState);
+	void SetShaderView(ShaderResourceView* shaderView);
+	void SetTexture(Texture* texture);
 
 	template <class ActorType>
 	bool IsA()

@@ -3,9 +3,9 @@
 #include "RenderTypes.h"
 #include <Windows.h>
 
-class ISampler;
-class ITexture;
-class IShaderView;
+class Sampler;
+class Texture;
+class ShaderView;
 
 class IRenderBuffer
 {
@@ -26,8 +26,8 @@ public:
 	virtual void RenderEnd(float deltaTime) = 0;
 	//virtual void CreateDefaultBuffer() = 0;
 	virtual void CreateVertexBuffer(unsigned int size, const void* data, class ActorSystem* actor) = 0;
-	virtual void CreateSamplerState(ISampler* sampler) = 0;
-	virtual void CreateShaderView(IShaderView* shaderView, ITexture* texture) = 0;
+	virtual void CreateSamplerState(Sampler* sampler) = 0;
+	virtual void CreateShaderView(ShaderView* shaderView, Texture* texture) = 0;
 	virtual void CreateTexture(class ActorSystem* actorSystem) = 0;
 	virtual void CreateVertexShader() = 0;
 	virtual void CreatePixelShader() = 0;

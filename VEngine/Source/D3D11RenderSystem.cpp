@@ -14,10 +14,10 @@
 #include <string>
 #include "WorldEditor.h"
 #include "D3D11RenderSystem.h"
-#include "ISampler.h"
-#include "IBuffer.h";
-#include "ITexture.h"
-#include "IShaderView.h"
+#include "Sampler.h"
+#include "Buffer.h"
+#include "Texture.h"
+#include "ShaderResourceView.h"
 #include <string.h>
 
 UINT strides = sizeof(Vertex);
@@ -251,7 +251,7 @@ void D3D11RenderSystem::CreateRasterizerStates()
 //One vertex buffer per actor system
 void D3D11RenderSystem::CreateVertexBuffer(UINT size, const void* data, ActorSystem* system)
 {
-	IBuffer* buffer = new D3D11Buffer();
+	Buffer* buffer = new Buffer;
 	buffer->data = CreateDefaultBuffer(size, D3D11_BIND_VERTEX_BUFFER, data);
 	system->SetVertexBuffer(buffer);
 }
@@ -289,7 +289,7 @@ void D3D11RenderSystem::CreateConstantBuffer()
 }
 
 //Takes the actor system's texture and throws it into SRV to link with a shader.
-void D3D11RenderSystem::CreateShaderView(IShaderView* shaderView, ITexture* texture)
+void D3D11RenderSystem::CreateShaderView(ShaderView* shaderView, Texture* texture)
 {
 	D3D11_SHADER_RESOURCE_VIEW_DESC desc = {};
 	desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
@@ -297,13 +297,11 @@ void D3D11RenderSystem::CreateShaderView(IShaderView* shaderView, ITexture* text
 	desc.Texture2D.MostDetailedMip = 0;
 	desc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
 
-	ID3D11Resource* textureResource = (ID3D11Resource*)texture->Get();
-
 	ID3D11ShaderResourceView* shaderResourceView = nullptr;
-	HR(device->CreateShaderResourceView(textureResource, &desc, &shaderResourceView));
+	HR(device->CreateShaderResourceView(texture->data, &desc, &shaderResourceView));
 }
 
-void D3D11RenderSystem::CreateSamplerState(ISampler* sampler)
+void D3D11RenderSystem::CreateSamplerState(Sampler* sampler)
 {
 	D3D11_SAMPLER_DESC sampDesc = {};
 	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;

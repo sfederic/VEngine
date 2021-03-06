@@ -89,22 +89,22 @@
     <ClCompile Include="Source\GameSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\IBuffer.cpp">
+    <ClCompile Include="Source\Buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\IRasterizerState.cpp">
+    <ClCompile Include="Source\RasterizerState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ISampler.cpp">
+    <ClCompile Include="Source\Sampler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\IShaderView.cpp">
+    <ClCompile Include="Source\ShaderResourceView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ITexture.cpp">
+    <ClCompile Include="Source\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Lights.cpp">
@@ -223,25 +223,25 @@
     <ClInclude Include="Source\GameSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\IBuffer.h">
+    <ClInclude Include="Source\Buffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\IRasterizerState.h">
+    <ClInclude Include="Source\RasterizerState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\IRenderSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ISampler.h">
+    <ClInclude Include="Source\Sampler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\IShaderView.h">
+    <ClInclude Include="Source\ShaderResourceView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ITexture.h">
+    <ClInclude Include="Source\Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Lights.h">

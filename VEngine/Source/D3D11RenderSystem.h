@@ -47,8 +47,8 @@ public:
 	void CreateRasterizerStates();
 	void CreateConstantBuffer();
 
-	virtual void CreateShaderView(IShaderView* shaderView, ITexture* texture) override;
-	virtual void CreateSamplerState(ISampler* sampler) override;
+	virtual void CreateShaderView(ShaderView* shaderView, Texture* texture) override;
+	virtual void CreateSamplerState(Sampler* sampler) override;
 	virtual void CreateTexture(class ActorSystem* actorSystem) override;
 
 	virtual void RenderSetup(float deltaTime);
