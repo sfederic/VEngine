@@ -1,4 +1,4 @@
-cbuffer cbPerObject
+cbuffer cbPerObject : register(b0)
 {
 	float4x4 model;
 	float4x4 view;
@@ -19,3 +19,6 @@ struct VS_OUT
 	float2 uv : TEXCOORD;
 	float3 normal : NORMAL;
 };
+
+Texture2D t : register(t0);
+SamplerState s : register(s0);
