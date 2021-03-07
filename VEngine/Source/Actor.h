@@ -89,7 +89,6 @@ public:
 		std::string filename = "Models/";
 		filename += modelName;
 
-		//if (LoadOBJFile(filename, modelData))
 		if (FBXImporter::Import(filename.c_str(), modelData))
 		{
 			UINT byteWidth = modelData.GetByteWidth();

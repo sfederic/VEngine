@@ -367,19 +367,19 @@ void RenderSystem::RenderActorSystem(World* world)
 
 		ID3D11SamplerState* samplers[] =
 		{
-			(ID3D11SamplerState*)actorSystem->GetSamplerState()
+			actorSystem->GetSamplerState()->data
 		};
 		context->PSSetSamplers(0, _countof(samplers), samplers);
 
 		ID3D11ShaderResourceView* shaderResourceViews[]
 		{
-			(ID3D11ShaderResourceView*)actorSystem->GetShaderView()
+			actorSystem->GetShaderView()->data
 		};
 		context->PSSetShaderResources(0, _countof(shaderResourceViews), shaderResourceViews);
 
 		ID3D11Buffer* vertexBuffers[]
 		{
-			(ID3D11Buffer*)actorSystem->GetVertexBuffer()
+			actorSystem->GetVertexBuffer()->data
 		};
 		context->IASetVertexBuffers(0, _countof(vertexBuffers), vertexBuffers, &strides, &offsets);
 		
@@ -603,12 +603,12 @@ ID3DBlob* RenderSystem::CreateShaderFromFile(const wchar_t* filename, const char
 	ID3DBlob* code;
 	ID3DBlob* error;
 	
-	D3DCompileFromFile(filename, nullptr, nullptr, entry, target, compileFlags, 0, &code, &error);
+	D3DCompileFromFile(filename, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, entry, target, compileFlags, 0, &code, &error);
 	if (error)
 	{
 		const wchar_t* errMsg = (wchar_t*)error->GetBufferPointer();
 		//OutputDebugString(errMsg);
-		//MessageBox(0, errMsg, entry, 0);
+		MessageBox(0, (char*)errMsg, entry, 0);
 	}
 
 	return code;

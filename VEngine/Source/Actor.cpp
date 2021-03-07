@@ -200,10 +200,12 @@ Texture* ActorSystem::GetTexture()
 
 void ActorSystem::SetTexture(Texture* texture)
 {
+	pso.texture = texture;
 }
 
 void ActorSystem::SetVertexBuffer(Buffer* vertexBuffer)
 {
+	pso.vertexBuffer = vertexBuffer;
 }
 
 void ActorSystem::SetSamplerState(Sampler* sampler)
