@@ -63,7 +63,6 @@ void FileSystem::ReadAllActorSystems(World* world, const char* filename)
 
 	for (int systemIndex = 0; systemIndex < numActorSystems; systemIndex++)
 	{
-		//TODO: Another smart pointer fix
 		ActorSystem* actorSystem = new ActorSystem();
 
 		newWorld.actorSystems.push_back(actorSystem);
@@ -72,19 +71,6 @@ void FileSystem::ReadAllActorSystems(World* world, const char* filename)
 
 		int numActorsToSpawn = 0;
 		fread(&numActorsToSpawn, sizeof(int), 1, file);
-
-		//TODO: the old init code here isn't working too well
-		/*switch (newWorld.actorSystems[systemIndex]->id)
-		{
-		case EActorSystemID::Actor:
-			newWorld.actorSystems[systemIndex]->CreateActors(gRenderSystem, numActorsToSpawn);
-		}
-
-		for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex]->actors.size(); actorIndex++)
-		{
-			fread(&newWorld.actorSystems[systemIndex]->actors[actorIndex].transform, sizeof(XMMATRIX), 1, file);
-		}*/
-
 	}
 
 	gCurrentWorld.CleaupAllActors();

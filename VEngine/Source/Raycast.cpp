@@ -73,9 +73,6 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSy
 			return false;
 		}
 
-		//TODO: see if theres a way to add the current extent of Bounding box to actor scale
-		//actorSystem->boundingBox.Extents = actorSystem->actors[i].GetScale();
-
 		if (tempBoundingBox.Intersects(ray.origin, ray.direction, ray.distance))
 		{
 			distances.push_back(ray.distance);
@@ -225,8 +222,6 @@ bool RaycastAllFromScreen(Ray& ray, int sx, int sy, Camera* camera, World* world
 				}
 			}
 
-			//TODO: This sortof raycast setup isn't accounting for Actor systems, only actors.
-			//Not a huge problem, but translation widget won't take precedence without the fix
 			return true;
 		}
 	}

@@ -74,7 +74,6 @@ struct TestUIView : public UIView
 	}
 };
 
-//TODO: See if throwing this into another .h file will lower compile times
 struct UIViewActor : public UIView
 {
 	virtual void Tick();
@@ -92,8 +91,6 @@ struct UIViewActor : public UIView
 	std::wstring rotStringZ;
 };
 
-//TODO: Figrue out whether this sort of template work would just be better of with overloaded functions. 
-//eg. Editfloat, EditInt, EditString
 template<typename T>
 inline void UIView::Edit(T& editVal, std::wstring& editString)
 {

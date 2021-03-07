@@ -134,7 +134,6 @@ void DebugMenu::Tick(World* world, float deltaTime)
 		{
 		case EMenuID::ACTORS:
 			wchar_t actorCount[64];
-			//TODO: make a better system that iterates over all actor systems in world
 			//_snwprintf_s(actorCount, sizeof(actorCount), L"Actor Count: %d", 
 				//world->actorSystems.size() * world->actorSystems);
 			menuItems[menuCursorIndex].subMenuItems[0] = actorCount;

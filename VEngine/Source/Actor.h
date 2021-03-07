@@ -64,7 +64,6 @@ public:
 	std::wstring name;
 };
 
-//TODO: move this into its own file after testing
 struct PipelineView
 {
 	void Create();
@@ -108,7 +107,6 @@ public:
 			actors.reserve(numActorsToSpawn);
 			for (int i = 0; i < numActorsToSpawn; i++)
 			{
-				//TODO: I'm gonna need the smart pointers here to deal with the eventual Tick() virtual calls
 				ActorType* actor = new ActorType();
 				actor->transform.r[3] = XMVectorSet(i, i, i, 1.f);
 				actor->vertexBufferOffset = i * modelData.GetByteWidth();
@@ -155,7 +153,6 @@ public:
 	template <class ActorType>
 	bool IsA()
 	{
-		//TODO: this is too shallow. Fix it to work with an entire inheritence tree
 		if (typeid(this) == typeid(ActorType))
 		{
 			return true;

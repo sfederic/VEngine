@@ -91,7 +91,6 @@ void WorldDock::PopulateWorldList()
 
 void WorldDock::ClickOnListActorSystem(QTreeWidgetItem* listItem)
 {
-    //TODO: this works for now and for small sets of actors
     QString string = listItem->text(0);
     Actor* clickedActor = GetWorld()->FindActorByString(string.toStdWString());
     if (clickedActor)

@@ -56,6 +56,5 @@ void AssetDock::Tick()
 
 void AssetDock::AssetItemClicked(QListWidgetItem* listWidgetItem)
 {
-    //TODO: set text into asset icon list etc.
      //listWidgetItem->text()
 }

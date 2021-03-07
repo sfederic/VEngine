@@ -121,7 +121,6 @@ void EditorMainWindow::Tick()
 
 void EditorMainWindow::Print(const char* string)
 {
-    //TODO: set verbosity level to conincide with text colour
     consoleDock->consoleMessageBox->insertPlainText(QString(string));
     consoleDock->consoleMessageBox->insertPlainText("\n");
 }

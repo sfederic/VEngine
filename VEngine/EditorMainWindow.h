@@ -2,13 +2,14 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_EditorMainWindow.h"
-#include "ToolbarDock.h"
-#include "WorldDock.h"
-#include "PropertiesDock.h"
-#include "AssetDock.h"
-#include "RenderViewWidget.h"
 
 class ConsoleDock;
+class ToolbarDock;
+class WorldDock;
+class PropertiesDock;
+class AssetDock;
+class ConsoleDock;
+class RenderViewWidget;
 
 class EditorMainWindow : public QMainWindow
 {

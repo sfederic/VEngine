@@ -69,7 +69,6 @@ void RenderSystem::Init(HWND window)
 	CreateConstantBuffer();
 
 	//Check feature support (just for breakpoint checking for now)
-	//TODO: Think about putting this into the debug menu
 	D3D11_FEATURE_DATA_THREADING threadFeature = {};
 	device->CheckFeatureSupport(D3D11_FEATURE_THREADING, &threadFeature, sizeof(threadFeature));
 	return;
@@ -204,7 +203,6 @@ void RenderSystem::CreateRTVAndDSV()
 
 void RenderSystem::CreateShaders()
 {
-	//TODO: fix this for later. for now, all shaders are using the same Inputlayout so its fine
 	vertexCode = CreateShaderFromFile(L"Shaders/shaders.hlsl", "VSMain", "vs_5_0");
 	pixelCode = CreateShaderFromFile(L"Shaders/shaders.hlsl", "PSMain", "ps_5_0");
 
@@ -345,7 +343,6 @@ void RenderSystem::RenderActorSystem(World* world)
 		//Set rastState
 		if (actorSystem->GetRasterizerState())
 		{
-			//TODO: eye on this
 			//context->RSSetState(actorSystem->rastState);
 		}
 		else
