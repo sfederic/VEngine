@@ -130,10 +130,21 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
     posEditZ = new TransformEditWidget(0.f, this);
     connect(posEditZ, &QLineEdit::returnPressed, this, &PropertiesWidget::SetActorPositionZ);
 
-    grid->addWidget(posLabel, 0, 0);
-    grid->addWidget(posEditX, 0, 1);
-    grid->addWidget(posEditY, 0, 2);
-    grid->addWidget(posEditZ, 0, 3);
+    QLabel* xLabel = new QLabel("X");
+    xLabel->setStyleSheet("border: 1px solid red;");
+    QLabel* yLabel = new QLabel("Y");
+    yLabel->setStyleSheet("border: 1px solid green;");
+    QLabel* zLabel = new QLabel("Z");
+    zLabel->setStyleSheet("border: 1px solid blue;");
+
+    grid->addWidget(xLabel, 0, 1);
+    grid->addWidget(yLabel, 0, 2);
+    grid->addWidget(zLabel, 0, 3);
+
+    grid->addWidget(posLabel, 1, 0);
+    grid->addWidget(posEditX, 1, 1);
+    grid->addWidget(posEditY, 1, 2);
+    grid->addWidget(posEditZ, 1, 3);
 
     //Rotation
     rotEditX = new TransformEditWidget(0.0f, this);
@@ -145,10 +156,10 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
 
     QLabel* rotLabel = new QLabel("Rotation");
 
-    grid->addWidget(rotLabel, 1, 0);
-    grid->addWidget(rotEditX, 1, 1);
-    grid->addWidget(rotEditY, 1, 2);
-    grid->addWidget(rotEditZ, 1, 3);
+    grid->addWidget(rotLabel, 2, 0);
+    grid->addWidget(rotEditX, 2, 1);
+    grid->addWidget(rotEditY, 2, 2);
+    grid->addWidget(rotEditZ, 2, 3);
 
     //Scale
     scaleEditX = new TransformEditWidget(0.0f, this);
@@ -161,10 +172,10 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
 
     QLabel* scaleLabel = new QLabel("Scale");
 
-    grid->addWidget(scaleLabel, 2, 0);
-    grid->addWidget(scaleEditX, 2, 1);
-    grid->addWidget(scaleEditY, 2, 2);
-    grid->addWidget(scaleEditZ, 2, 3);
+    grid->addWidget(scaleLabel, 3, 0);
+    grid->addWidget(scaleEditX, 3, 1);
+    grid->addWidget(scaleEditY, 3, 2);
+    grid->addWidget(scaleEditZ, 3, 3);
 
     grid->setAlignment(Qt::AlignTop);
 
