@@ -12,7 +12,7 @@ class AssetDock : public QDockWidget
 public:
 	AssetDock(const char* title);
 	void Tick();
-	void AssetItemClicked(class QListWidgetItem* listWidgetItem);
+	void AssetItemClicked();
 	void AssetFolderClicked();
 
 	QListWidget* assetIcons;

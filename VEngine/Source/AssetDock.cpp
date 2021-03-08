@@ -7,6 +7,8 @@
 #include <QModelIndexList>
 #include <QModelIndex>
 #include <QDirModel>
+#include <qdesktopservices.h>
+#include <qurl.h>
 
 AssetDock::AssetDock(const char* title) : QDockWidget(title)
 {
@@ -17,9 +19,17 @@ AssetDock::AssetDock(const char* title) : QDockWidget(title)
     fileSystemModel->setFilter(QDir::Dirs | QDir::NoDotAndDotDot);
 
     assetTreeView = new QTreeView();
+    assetTreeView->setMaximumSize(QSize(300, 1000));
     assetTreeView->setModel(fileSystemModel);
     assetTreeView->setRootIndex(fileSystemModel->index(QDir::currentPath()));
     connect(assetTreeView, &QTreeView::clicked, this, &AssetDock::AssetFolderClicked);
+
+    //Hide all columsn except for 'Name' (Other columns mirror Win32 usuals. Date, Type, etc.)
+    //Start on i = 1 as 'Name' is first column.
+    for (int i = 1; i < fileSystemModel->columnCount(); i++)
+    {
+        assetTreeView->hideColumn(i);
+    }
 
     assetIcons = new QListWidget();
     assetIcons->setIconSize(QSize(75, 75));
@@ -49,9 +59,15 @@ void AssetDock::Tick()
 }
 
 
-void AssetDock::AssetItemClicked(QListWidgetItem* listWidgetItem)
+void AssetDock::AssetItemClicked()
 {
-     //listWidgetItem->text()
+    QModelIndex index = assetTreeView->currentIndex();
+    QString path = fileSystemModel->filePath(index);
+
+    QString assetName = assetIcons->currentItem()->text();
+    QString fullPath = path + "/" + assetName;
+
+    QDesktopServices::openUrl(QUrl::fromLocalFile(fullPath));
 }
 
 void AssetDock::AssetFolderClicked()
