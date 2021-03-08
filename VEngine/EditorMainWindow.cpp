@@ -13,6 +13,12 @@
 #include "PropertiesDock.h"
 #include "AssetDock.h"
 #include "ConsoleDock.h"
+#include <qapplication.h>
+
+//Because I can't figure out why Qt doesn't like these two not being defined in main, just going with
+//two pointers here to those instances defined in main.
+QApplication* gQApplication;
+EditorMainWindow* gEditorMainWindow;
 
 EditorMainWindow::EditorMainWindow(QWidget *parent) : QMainWindow(parent)
 {

@@ -27,7 +27,6 @@ public:
 	void Print(const char* string); //Print to consoledock's TextEdit
 
 	//Docks
-	//TODO: why aren't these forward declared? fix up
 	ToolbarDock* toolbarDock;
 	WorldDock* worldDock;
 	PropertiesDock* propertiesDock;
@@ -39,3 +38,6 @@ public:
 private:
     Ui::EditorMainWindowClass ui;
 };
+
+extern QApplication* gQApplication;
+extern EditorMainWindow* gEditorMainWindow;

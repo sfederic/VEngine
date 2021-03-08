@@ -33,8 +33,13 @@ int main(int argc, char *argv[])
     HR(CoInitialize(NULL)); //For the WIC functions
 
     //Qt setup
+    //TODO: this is junk. Think about making an LevelEditor class or some bullshit so that the constructors
+    //can call this and you don't need the weird global pointers and these two going out of scope.
+    //You want to pass in argc to the constructor too.
     QApplication qApplication(argc, nullptr);
-    EditorMainWindow gEditorMainWindow;
+    EditorMainWindow editorMainWindow;
+    gEditorMainWindow = &editorMainWindow;
+    gQApplication = &qApplication;
 
 #ifndef NO_EDITOR
     //QApplication qApplication(argc, argv);
@@ -52,14 +57,14 @@ int main(int argc, char *argv[])
 #ifdef PROFILE_NOEDITOR
     gRenderSystem->Init(gCoreSystem.mainWindow);
 #else
-    gRenderSystem.Init((HWND)gEditorMainWindow.renderViewWidget->winId());
+    gRenderSystem.Init((HWND)gEditorMainWindow->renderViewWidget->winId());
 #endif
     gAudioSystem.Init();
     gUISystem.Init();
     gWorldEditor.Init();
 
     //Qt late init
-    gEditorMainWindow.worldDock->PopulateWorldList();
+    gEditorMainWindow->worldDock->PopulateWorldList();
 
 
     ActorSystem ac;
@@ -67,6 +72,7 @@ int main(int argc, char *argv[])
     ac.shaderName = L"shaders.hlsl";
     ac.textureName = L"texture.png";
     ac.CreateActors<Actor>(&gRenderSystem, 1);
+
 
     GetWorld()->AddActorSystem(ac);
 
@@ -81,11 +87,11 @@ int main(int argc, char *argv[])
         gCoreSystem.StartTimer();
         gCoreSystem.HandleMessages();
 
-        qApplication.processEvents();
-        gEditorMainWindow.Tick();
+        gQApplication->processEvents();
+        gEditorMainWindow->Tick();
 
         gFileSystem.Tick();
-        gUISystem.Tick(&gEditorMainWindow);
+        gUISystem.Tick(gEditorMainWindow);
 
         gTimerSystem.Tick(deltaTime);
 
@@ -94,7 +100,7 @@ int main(int argc, char *argv[])
         gRenderSystem.Tick();
         gRenderSystem.RenderSetup(deltaTime);
 
-        gWorldEditor.Tick(nullptr, &gEditorMainWindow);
+        gWorldEditor.Tick(nullptr, gEditorMainWindow);
 
         gRenderSystem.Render(deltaTime);
         gRenderSystem.RenderEnd(deltaTime);
