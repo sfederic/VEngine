@@ -7,8 +7,12 @@
 #include "RenderViewWidget.h"
 #include "PropertiesWidget.h"
 #include "CoreSystem.h"
-#include "ConsoleDock.h"
 #include <QTextEdit>
+#include "ToolbarDock.h"
+#include "WorldDock.h"
+#include "PropertiesDock.h"
+#include "AssetDock.h"
+#include "ConsoleDock.h"
 
 EditorMainWindow::EditorMainWindow(QWidget *parent) : QMainWindow(parent)
 {
