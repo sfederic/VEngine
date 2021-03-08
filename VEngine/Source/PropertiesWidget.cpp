@@ -17,7 +17,7 @@ void PropertiesWidget::SetActorPositionX()
     if (picked && posEditX)
     {
         XMFLOAT3 pos = picked->GetPositionFloat3();
-        pos.x = posEditX->text().toFloat();
+        pos.x = posEditX->value();
         gWorldEditor.pickedActor->SetPosition(pos);
     }
 
@@ -30,7 +30,7 @@ void PropertiesWidget::SetActorPositionY()
     if (picked && posEditY)
     {
         XMFLOAT3 pos = picked->GetPositionFloat3();
-        pos.y = posEditY->text().toFloat();
+        pos.y = posEditY->value();
         gWorldEditor.pickedActor->SetPosition(pos);
     }
 
@@ -43,7 +43,7 @@ void PropertiesWidget::SetActorPositionZ()
     if (picked && posEditZ)
     {
         XMFLOAT3 pos = picked->GetPositionFloat3();
-        pos.z = posEditZ->text().toFloat();
+        pos.z = posEditZ->value();
         gWorldEditor.pickedActor->SetPosition(pos);
     }
 
@@ -56,7 +56,7 @@ void PropertiesWidget::SetActorScaleX()
     if (picked && scaleEditX)
     {
         XMFLOAT3 scale = picked->GetScale();
-        scale.x = scaleEditX->text().toFloat();
+        scale.x = scaleEditX->value();
         gWorldEditor.pickedActor->SetScale(scale);
     }
 }
@@ -67,7 +67,7 @@ void PropertiesWidget::SetActorScaleY()
     if (picked && scaleEditY)
     {
         XMFLOAT3 scale = picked->GetScale();
-        scale.y = scaleEditY->text().toFloat();
+        scale.y = scaleEditY->value();
         gWorldEditor.pickedActor->SetScale(scale);
     }
 }
@@ -78,7 +78,7 @@ void PropertiesWidget::SetActorScaleZ()
     if (picked && scaleEditZ)
     {
         XMFLOAT3 scale = picked->GetScale();
-        scale.z = scaleEditZ->text().toFloat();
+        scale.z = scaleEditZ->value();
         gWorldEditor.pickedActor->SetScale(scale);
     }
 }
@@ -89,7 +89,7 @@ void PropertiesWidget::SetActorRotationX()
     if (picked && rotEditX)
     {
         XMFLOAT3 rot = picked->GetRollPitchYaw();
-        rot.x = rotEditX->text().toFloat();
+        rot.x = rotEditX->value();
         gWorldEditor.pickedActor->SetRotation(rot);
     }
 }
@@ -100,7 +100,7 @@ void PropertiesWidget::SetActorRotationY()
     if (picked && rotEditY)
     {
         XMFLOAT3 rot = picked->GetRollPitchYaw();
-        rot.y = rotEditY->text().toFloat();
+        rot.y = rotEditY->value();
         gWorldEditor.pickedActor->SetRotation(rot);
     }
 }
@@ -111,7 +111,7 @@ void PropertiesWidget::SetActorRotationZ()
     if (picked && rotEditZ)
     {
         XMFLOAT3 rot = picked->GetRollPitchYaw();
-        rot.z = rotEditZ->text().toFloat();
+        rot.z = rotEditZ->value();
         gWorldEditor.pickedActor->SetRotation(rot);
     }
 }
