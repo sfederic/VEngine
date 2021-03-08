@@ -217,24 +217,30 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
 
 void PropertiesWidget::SelectShader()
 {
-    QString fileName = QFileDialog::getOpenFileName(this,
+    QString filePath = QFileDialog::getOpenFileName(this,
         tr("Open Shaders"), "Shaders", tr("Shader Files (*.hlsl)"));
 
-    if (!fileName.isEmpty())
+    if (!filePath.isEmpty())
     {
-        //QFileInfo here chops of the entire path, leaves only the filename.
+        QString fileName = QFileInfo(filePath).fileName();
         actorSystemShaderName->setText(QFileInfo(fileName).fileName());
+
+        selectedActorSystem->shaderName = fileName.toStdWString();
     }
 }
 
 void PropertiesWidget::SelectModel()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, 
+    QString filePath = QFileDialog::getOpenFileName(this, 
         tr("Open Models"), "Models", tr("Model Files (*.fbx *.obj)"));
 
-    if (!fileName.isEmpty())
+    if (!filePath.isEmpty())
     {
-        actorSystemModelName->setText(QFileInfo(fileName).fileName());
+        QString fileName = QFileInfo(filePath).fileName();
+        actorSystemModelName->setText(fileName);
+
+        selectedActorSystem->modelName = fileName.toStdString();
+        selectedActorSystem->RecreateModel();
     }
 }
 

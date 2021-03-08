@@ -32,6 +32,12 @@ struct ModelData
 		return (sizeof(Vertex) * verts.size());
 	}
 
+	void DeleteAll()
+	{
+		verts.clear();
+		indices.clear();
+	}
+
 	std::vector<Vertex> verts;
 	std::vector<uint16_t> indices;
 };

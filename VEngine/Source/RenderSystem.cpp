@@ -251,6 +251,7 @@ void RenderSystem::CreateRasterizerStates()
 //One vertex buffer per actor system
 void RenderSystem::CreateVertexBuffer(UINT size, const void* data, ActorSystem* system)
 {
+	//TODO: this is a mem leak.
 	Buffer* buffer = new Buffer;
 	buffer->data = CreateDefaultBuffer(size, D3D11_BIND_VERTEX_BUFFER, data);
 	system->SetVertexBuffer(buffer);

@@ -213,10 +213,25 @@ void ActorSystem::RecreateTexture()
 
 void ActorSystem::RecreateShader()
 {
+
 }
 
 void ActorSystem::RecreateModel()
 {
+	pso.vertexBuffer->data->Release();
+
+	modelData.DeleteAll();
+
+	std::string filename = "Models/";
+	filename += modelName;
+	if (FBXImporter::Import(filename.c_str(), modelData))
+	{
+		gRenderSystem.CreateVertexBuffer(modelData.GetByteWidth(), modelData.verts.data(), this);
+
+		size_t stride = sizeof(Vertex);
+		BoundingBox::CreateFromPoints(boundingBox, modelData.verts.size(), &modelData.verts[0].pos, stride);
+		BoundingSphere::CreateFromPoints(boundingSphere, modelData.verts.size(), &modelData.verts[0].pos, stride);
+	}
 }
 
 void ActorSystem::SetVertexBuffer(Buffer* vertexBuffer)
