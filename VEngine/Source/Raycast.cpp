@@ -8,6 +8,9 @@
 #include "Debug.h"
 #include "World.h"
 #include "WorldEditor.h"
+#include "PropertiesWidget.h"
+#include "PropertiesDock.h"
+#include "../EditorMainWindow.h"
 
 void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, class ID3D11Buffer* debugBuffer)
 {
@@ -211,14 +214,31 @@ bool RaycastAllFromScreen(Ray& ray, int sx, int sy, Camera* camera, World* world
 			Actor* actor = world->GetActor(ray.actorSystemIndex, ray.actorIndex);
 			if (actor)
 			{
-				TranslationGizmo* axisActor = (TranslationGizmo*)actor;
+				/*TranslationGizmo* axisActor = (TranslationGizmo*)actor;
 				if (axisActor)
 				{
 					gWorldEditor.pickedAxis = axisActor;
-				}
-				else
+				}*/
+				//else
 				{
 					gWorldEditor.pickedActor = actor;
+
+					PropertiesWidget* propWidget = gEditorMainWindow->propertiesDock->propWidget;
+
+					XMFLOAT3 pos = actor->GetPositionFloat3();
+					propWidget->posEditX->setText(QString::number(pos.x));
+					propWidget->posEditY->setText(QString::number(pos.y));
+					propWidget->posEditZ->setText(QString::number(pos.z));
+
+					XMFLOAT3 scale = actor->GetScale();
+					propWidget->scaleEditX->setText(QString::number(scale.x));
+					propWidget->scaleEditY->setText(QString::number(scale.y));
+					propWidget->scaleEditZ->setText(QString::number(scale.z));
+
+					XMFLOAT3 rot = actor->GetRollPitchYaw();
+					propWidget->rotEditX->setText(QString::number(rot.x));
+					propWidget->rotEditY->setText(QString::number(rot.y));
+					propWidget->rotEditZ->setText(QString::number(rot.z));
 				}
 			}
 

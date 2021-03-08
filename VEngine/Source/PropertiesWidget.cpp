@@ -183,7 +183,6 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
 
     vLayoutTop->addLayout(grid);
 
-
     //Actor/ActorSystem Properties
     QGridLayout* actorSystemDetailsGrid = new QGridLayout();
 

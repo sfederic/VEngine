@@ -9,7 +9,7 @@ PropertiesDock::PropertiesDock(const char* title) : QDockWidget(title)
 
 void PropertiesDock::Tick()
 {
-    propWidget->Tick();
+    //propWidget->Tick();
 }
 
 //Throw all of the selected actor's variables into the properties dock

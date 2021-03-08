@@ -120,7 +120,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer, EditorMainWindow* editorM
 
 		//Set properties widget info
 		{
-			PropertiesWidget* propWidget = editorMainWindow->propertiesDock->propWidget;
+			/*PropertiesWidget* propWidget = editorMainWindow->propertiesDock->propWidget;
 
 			XMFLOAT3 pos = pickedActor->GetPositionFloat3();
 			propWidget->posEditX->setText(QString::number(pos.x));
@@ -135,7 +135,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer, EditorMainWindow* editorM
 			XMFLOAT3 rot = pickedActor->GetRollPitchYaw();
 			propWidget->rotEditX->setText(QString::number(rot.x));
 			propWidget->rotEditY->setText(QString::number(rot.y));
-			propWidget->rotEditZ->setText(QString::number(rot.z));
+			propWidget->rotEditZ->setText(QString::number(rot.z));*/
 		}
 
 		//Set translation widget positions (Never going to have more than 3, vector accesses are alright)
@@ -214,7 +214,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer, EditorMainWindow* editorM
 			if (pickedActor)
 			{
 				pickedActor->bPicked = false;
-				pickedActor = nullptr;
+				//pickedActor = nullptr;
 				
 				translationGizmos.actors[0]->bRender = false;
 				translationGizmos.actors[1]->bRender = false;
