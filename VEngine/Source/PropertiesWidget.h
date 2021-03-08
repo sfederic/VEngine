@@ -29,7 +29,9 @@ public:
 
     void Tick();
 
-    void ShowDialog();
+    void SelectShader();
+    void SelectTexture();
+    void SelectModel();
 
     void SetActorPositionX();
     void SetActorPositionY();

@@ -172,40 +172,81 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
 
     vLayoutTop->addLayout(grid);
 
+
     //Actor/ActorSystem Properties
+    QGridLayout* actorSystemDetailsGrid = new QGridLayout();
+
     QCheckBox* checkBox = new QCheckBox();
     checkBox->setText("Renderable");
-    vLayoutTop->addWidget(checkBox);
+    actorSystemDetailsGrid->addWidget(checkBox, 0, 0);
 
+    //Line edits 
     actorSystemName = new QLineEdit();
     actorSystemName->setReadOnly(true);
-    vLayoutTop->addWidget(actorSystemName);
+    actorSystemDetailsGrid->addWidget(actorSystemName, 1, 0);
 
     actorSystemModelName = new QLineEdit();
     actorSystemModelName->setReadOnly(true);
-    vLayoutTop->addWidget(actorSystemModelName);
+    actorSystemDetailsGrid->addWidget(actorSystemModelName, 2, 0);
 
     actorSystemShaderName = new QLineEdit();
     actorSystemShaderName->setReadOnly(true);
-    vLayoutTop->addWidget(actorSystemShaderName);
+    actorSystemDetailsGrid->addWidget(actorSystemShaderName, 3, 0);
 
     actorSystemTextureName = new QLineEdit();
     actorSystemTextureName->setReadOnly(true);
-    vLayoutTop->addWidget(actorSystemTextureName);
+    actorSystemDetailsGrid->addWidget(actorSystemTextureName, 4, 0);
 
-    QPushButton* testButton = new QPushButton();
-    testButton->setText("Dialog Test");
-    connect(testButton, &QPushButton::pressed, this, &PropertiesWidget::ShowDialog);
-    vLayoutTop->addWidget(testButton);
+    //Open file dialog buttons (These are fine to be defined locally like this)
+    QPushButton* selectModelButton = new QPushButton("Select Model");
+    connect(selectModelButton, &QPushButton::pressed, this, &PropertiesWidget::SelectModel);
+    actorSystemDetailsGrid->addWidget(selectModelButton, 2, 1);
+
+    QPushButton* selectShaderButton = new QPushButton("Select Shader");
+    connect(selectShaderButton, &QPushButton::pressed, this, &PropertiesWidget::SelectShader);
+    actorSystemDetailsGrid->addWidget(selectShaderButton, 3, 1);
+
+    QPushButton* selectTextureButton = new QPushButton("Select Texture");
+    connect(selectTextureButton, &QPushButton::pressed, this, &PropertiesWidget::SelectTexture);
+    actorSystemDetailsGrid->addWidget(selectTextureButton, 4, 1);
+
+    vLayoutTop->addLayout(actorSystemDetailsGrid);
 
     setLayout(vLayoutTop);
 }
 
-void PropertiesWidget::ShowDialog()
+void PropertiesWidget::SelectShader()
 {
-    gEditorMainWindow->Print("Dialog test all good");
-    auto fileName = QFileDialog::getOpenFileName(this,
+    QString fileName = QFileDialog::getOpenFileName(this,
         tr("Open Shaders"), "Shaders", tr("Shader Files (*.hlsl)"));
+
+    if (!fileName.isEmpty())
+    {
+        //QFileInfo here chops of the entire path, leaves only the filename.
+        actorSystemShaderName->setText(QFileInfo(fileName).fileName());
+    }
+}
+
+void PropertiesWidget::SelectModel()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, 
+        tr("Open Models"), "Models", tr("Model Files (*.fbx *.obj)"));
+
+    if (!fileName.isEmpty())
+    {
+        actorSystemModelName->setText(QFileInfo(fileName).fileName());
+    }
+}
+
+void PropertiesWidget::SelectTexture()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+        tr("Open Textures"), "Textures", tr("Texture Files (*.jpg *.png)"));
+
+    if (!fileName.isEmpty())
+    {
+        actorSystemTextureName->setText(QFileInfo(fileName).fileName());
+    }
 }
 
 void PropertiesWidget::Tick()
