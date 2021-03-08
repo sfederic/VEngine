@@ -3,6 +3,8 @@
 #include <qwidget.h>
 #include "TransformEditWidget.h"
 
+class QLineEdit;
+
 class PropertiesWidget : public QWidget
 {
 public:
@@ -18,9 +20,16 @@ public:
     TransformEditWidget* scaleEditY;
     TransformEditWidget* scaleEditZ;
 
+    QLineEdit* actorSystemName;
+    QLineEdit* actorSystemShaderName;
+    QLineEdit* actorSystemTextureName;
+    QLineEdit* actorSystemModelName;
+
     PropertiesWidget(QWidget* parent = 0);
 
     void Tick();
+
+    void ShowDialog();
 
     void SetActorPositionX();
     void SetActorPositionY();

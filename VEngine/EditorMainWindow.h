@@ -23,6 +23,7 @@ public:
 	//NOTE: mouse wheel button and wheel events don't call here. Function in renderviewwidget calls them.
 	bool nativeEvent(const QByteArray& eventType, void* message, long* result) override;
 
+	void Init(int argc);
 	void Tick();
 	void Print(const char* string); //Print to consoledock's TextEdit
 

@@ -5,6 +5,10 @@
 #include <qlayout.h>
 #include <qcheckbox.h>
 
+#include "../EditorMainWindow.h"
+#include <qpushbutton.h>
+#include <qfiledialog.h>
+
 void PropertiesWidget::SetActorPositionX()
 {
     Actor* picked = gWorldEditor.pickedActor;
@@ -168,15 +172,40 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
 
     vLayoutTop->addLayout(grid);
 
-    //Test Actor Properties
+    //Actor/ActorSystem Properties
     QCheckBox* checkBox = new QCheckBox();
     checkBox->setText("Renderable");
     vLayoutTop->addWidget(checkBox);
 
-    QLineEdit* lineEdit = new QLineEdit("Name");
-    vLayoutTop->addWidget(lineEdit);
+    actorSystemName = new QLineEdit();
+    actorSystemName->setReadOnly(true);
+    vLayoutTop->addWidget(actorSystemName);
+
+    actorSystemModelName = new QLineEdit();
+    actorSystemModelName->setReadOnly(true);
+    vLayoutTop->addWidget(actorSystemModelName);
+
+    actorSystemShaderName = new QLineEdit();
+    actorSystemShaderName->setReadOnly(true);
+    vLayoutTop->addWidget(actorSystemShaderName);
+
+    actorSystemTextureName = new QLineEdit();
+    actorSystemTextureName->setReadOnly(true);
+    vLayoutTop->addWidget(actorSystemTextureName);
+
+    QPushButton* testButton = new QPushButton();
+    testButton->setText("Dialog Test");
+    connect(testButton, &QPushButton::pressed, this, &PropertiesWidget::ShowDialog);
+    vLayoutTop->addWidget(testButton);
 
     setLayout(vLayoutTop);
+}
+
+void PropertiesWidget::ShowDialog()
+{
+    gEditorMainWindow->Print("Dialog test all good");
+    auto fileName = QFileDialog::getOpenFileName(this,
+        tr("Open Shaders"), "Shaders", tr("Shader Files (*.hlsl)"));
 }
 
 void PropertiesWidget::Tick()

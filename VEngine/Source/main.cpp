@@ -33,17 +33,11 @@ int main(int argc, char *argv[])
     HR(CoInitialize(NULL)); //For the WIC functions
 
     //Qt setup
-    //TODO: this is junk. Think about making an LevelEditor class or some bullshit so that the constructors
-    //can call this and you don't need the weird global pointers and these two going out of scope.
-    //You want to pass in argc to the constructor too.
     QApplication qApplication(argc, nullptr);
     EditorMainWindow editorMainWindow;
     gEditorMainWindow = &editorMainWindow;
     gQApplication = &qApplication;
 
-#ifndef NO_EDITOR
-    //QApplication qApplication(argc, argv);
-#endif //PROFILE_NOEDITOR
     gProfiler.Init();
 
     //FBX setup
@@ -71,6 +65,7 @@ int main(int argc, char *argv[])
     ac.modelName = "cube.fbx";
     ac.shaderName = L"shaders.hlsl";
     ac.textureName = L"texture.png";
+    ac.name = L"Cubes";
     ac.CreateActors<Actor>(&gRenderSystem, 1);
 
 

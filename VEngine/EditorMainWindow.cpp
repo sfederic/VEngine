@@ -20,6 +20,11 @@
 QApplication* gQApplication;
 EditorMainWindow* gEditorMainWindow;
 
+void EditorMainWindow::Init(int argc)
+{
+    gQApplication = new QApplication(argc, nullptr);
+}
+
 EditorMainWindow::EditorMainWindow(QWidget *parent) : QMainWindow(parent)
 {
     ui.setupUi(this);
