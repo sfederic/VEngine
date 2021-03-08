@@ -226,19 +226,19 @@ bool RaycastAllFromScreen(Ray& ray, int sx, int sy, Camera* camera, World* world
 					PropertiesWidget* propWidget = gEditorMainWindow->propertiesDock->propWidget;
 
 					XMFLOAT3 pos = actor->GetPositionFloat3();
-					propWidget->posEditX->setText(QString::number(pos.x));
-					propWidget->posEditY->setText(QString::number(pos.y));
-					propWidget->posEditZ->setText(QString::number(pos.z));
+					propWidget->posEditX->setValue(pos.x);
+					propWidget->posEditY->setValue(pos.y);
+					propWidget->posEditZ->setValue(pos.z);
 
 					XMFLOAT3 scale = actor->GetScale();
-					propWidget->scaleEditX->setText(QString::number(scale.x));
-					propWidget->scaleEditY->setText(QString::number(scale.y));
-					propWidget->scaleEditZ->setText(QString::number(scale.z));
+					propWidget->scaleEditX->setValue(scale.x);
+					propWidget->scaleEditY->setValue(scale.y);
+					propWidget->scaleEditZ->setValue(scale.z);
 
 					XMFLOAT3 rot = actor->GetRollPitchYaw();
-					propWidget->rotEditX->setText(QString::number(rot.x));
-					propWidget->rotEditY->setText(QString::number(rot.y));
-					propWidget->rotEditZ->setText(QString::number(rot.z));
+					propWidget->rotEditX->setValue(rot.x);
+					propWidget->rotEditY->setValue(rot.y);
+					propWidget->rotEditZ->setValue(rot.z);
 				}
 			}
 

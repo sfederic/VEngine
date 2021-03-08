@@ -1,10 +1,10 @@
 #pragma once
 
 #include <qdockwidget.h>
-#include "PropertiesWidget.h"
 
 class World;
 class ActorSystem;
+class PropertiesWidget;
 
 class PropertiesDock : public QDockWidget
 {

@@ -2,9 +2,9 @@
 #include <QDoubleValidator>
 #include <limits>
 
-TransformEditWidget::TransformEditWidget(float val, QWidget* parent) : QLineEdit(parent)
+TransformEditWidget::TransformEditWidget(float val, QWidget* parent) : QDoubleSpinBox(parent)
 {
-    setValidator(new QDoubleValidator(std::numeric_limits<float>::min(),
-        std::numeric_limits<float>::max(), 32, parent));
-    setText(QString::number(val));
+    setMinimum(std::numeric_limits<float>::min());
+    setMaximum(std::numeric_limits<float>::max());
+    setValue(val);
 }

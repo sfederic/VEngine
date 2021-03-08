@@ -1,9 +1,9 @@
 #pragma once
 
 #include <qwidget.h>
-#include <qlineedit.h>
+#include <QDoubleSpinBox>
 
-class TransformEditWidget : public QLineEdit
+class TransformEditWidget : public QDoubleSpinBox
 {
 public:
     TransformEditWidget(float val, QWidget* parent = 0);

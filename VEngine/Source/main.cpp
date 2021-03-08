@@ -25,12 +25,12 @@
 #include "RenderViewWidget.h"
 #include "WorldDock.h"
 
-//For throwing the program into fullscreen for profilers, getting rid of Qt
+//For throwing the program into fullscreen for profiling (gets rid of Qt)
 #define NO_EDITOR
 
 int main(int argc, char *argv[])
 {
-    HR(CoInitialize(NULL)); //For the WIC functions
+    HR(CoInitialize(NULL)); //For the WIC texture functions from DXT
 
     //Qt setup
     QApplication qApplication(argc, nullptr);

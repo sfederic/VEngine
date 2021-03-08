@@ -8,6 +8,8 @@
 #include "../EditorMainWindow.h"
 #include <qpushbutton.h>
 #include <qfiledialog.h>
+#include <QDoubleSpinBox>
+#include <QLineEdit>
 
 void PropertiesWidget::SetActorPositionX()
 {
@@ -124,11 +126,11 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
     QLabel* posLabel = new QLabel("Position");
 
     posEditX = new TransformEditWidget(0.f, this);
-    connect(posEditX, &QLineEdit::returnPressed, this, &PropertiesWidget::SetActorPositionX);
+    connect(posEditX, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorPositionX);
     posEditY = new TransformEditWidget(0.f, this);
-    connect(posEditY, &QLineEdit::returnPressed, this, &PropertiesWidget::SetActorPositionY);
+    connect(posEditY, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorPositionY);
     posEditZ = new TransformEditWidget(0.f, this);
-    connect(posEditZ, &QLineEdit::returnPressed, this, &PropertiesWidget::SetActorPositionZ);
+    connect(posEditZ, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorPositionZ);
 
     QLabel* xLabel = new QLabel("X");
     xLabel->setStyleSheet("border: 1px solid red;");
@@ -148,11 +150,11 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
 
     //Rotation
     rotEditX = new TransformEditWidget(0.0f, this);
-    connect(rotEditX, &QLineEdit::returnPressed, this, &PropertiesWidget::SetActorRotationX);
+    connect(rotEditX, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorRotationX);
     rotEditY = new TransformEditWidget(0.0f, this);
-    connect(rotEditY, &QLineEdit::returnPressed, this, &PropertiesWidget::SetActorRotationY);
+    connect(rotEditY, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorRotationY);
     rotEditZ = new TransformEditWidget(0.0f, this);
-    connect(rotEditZ, &QLineEdit::returnPressed, this, &PropertiesWidget::SetActorRotationZ);
+    connect(rotEditZ, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorRotationZ);
 
     QLabel* rotLabel = new QLabel("Rotation");
 
@@ -163,11 +165,11 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
 
     //Scale
     scaleEditX = new TransformEditWidget(0.0f, this);
-    connect(scaleEditX, &QLineEdit::returnPressed, this, &PropertiesWidget::SetActorScaleX);
+    connect(scaleEditX, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorScaleX);
     scaleEditY = new TransformEditWidget(0.0f, this);
-    connect(scaleEditY, &QLineEdit::returnPressed, this, &PropertiesWidget::SetActorScaleY);
+    connect(scaleEditY, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorScaleY);
     scaleEditZ = new TransformEditWidget(0.0f, this);
-    connect(scaleEditZ, &QLineEdit::returnPressed, this, &PropertiesWidget::SetActorScaleZ);
+    connect(scaleEditZ, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorScaleZ);
 
 
     QLabel* scaleLabel = new QLabel("Scale");
@@ -272,25 +274,21 @@ void PropertiesWidget::SelectTexture()
 void PropertiesWidget::Tick()
 {
     Actor* picked = gWorldEditor.pickedActor;
-    if (posEditX->hasFocus())
-    {
-        return;
-    }
-    else if (picked)
+    if (picked)
     {
         XMFLOAT3 pos = picked->GetPositionFloat3();
-        posEditX->setText(QString::number(pos.x));
-        posEditY->setText(QString::number(pos.y));
-        posEditZ->setText(QString::number(pos.z));
+        posEditX->setValue(pos.x);
+        posEditY->setValue(pos.y);
+        posEditZ->setValue(pos.z);
 
         XMFLOAT3 rot = picked->GetRollPitchYaw();
-        rotEditX->setText(QString::number(rot.x));
-        rotEditY->setText(QString::number(rot.y));
-        rotEditZ->setText(QString::number(rot.z));
+        rotEditX->setValue(rot.x);
+        rotEditY->setValue(rot.y);
+        rotEditZ->setValue(rot.z);
 
         XMFLOAT3 scale = picked->GetScale();
-        scaleEditX->setText(QString::number(scale.x));
-        scaleEditY->setText(QString::number(scale.y));
-        scaleEditZ->setText(QString::number(scale.z));
+        scaleEditX->setValue(scale.x);
+        scaleEditY->setValue(scale.y);
+        scaleEditZ->setValue(scale.z);
     }
 }

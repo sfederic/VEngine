@@ -1,5 +1,7 @@
 #include "PropertiesDock.h"
+#include "PropertiesWidget.h"
 #include "World.h"
+#include <QLineEdit>
 
 PropertiesDock::PropertiesDock(const char* title) : QDockWidget(title)
 {
