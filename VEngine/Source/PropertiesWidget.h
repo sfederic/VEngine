@@ -4,6 +4,7 @@
 #include "TransformEditWidget.h"
 
 class QLineEdit;
+class ActorSystem;
 
 class PropertiesWidget : public QWidget
 {
@@ -24,6 +25,8 @@ public:
     QLineEdit* actorSystemShaderName;
     QLineEdit* actorSystemTextureName;
     QLineEdit* actorSystemModelName;
+
+    ActorSystem* selectedActorSystem;
 
     PropertiesWidget(QWidget* parent = 0);
 

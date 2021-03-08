@@ -15,5 +15,7 @@ public:
 	void DisplayActorSystemProperties(ActorSystem* actorSystem);
 
 	PropertiesWidget* propWidget;
+
+	ActorSystem* selectedActorSystem;
 };
 

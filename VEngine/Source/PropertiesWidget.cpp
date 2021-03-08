@@ -240,12 +240,16 @@ void PropertiesWidget::SelectModel()
 
 void PropertiesWidget::SelectTexture()
 {
-    QString fileName = QFileDialog::getOpenFileName(this,
+    QString filePath = QFileDialog::getOpenFileName(this,
         tr("Open Textures"), "Textures", tr("Texture Files (*.jpg *.png)"));
 
-    if (!fileName.isEmpty())
+    if (!filePath.isEmpty())
     {
-        actorSystemTextureName->setText(QFileInfo(fileName).fileName());
+        QString fileName = QFileInfo(filePath).fileName();
+        actorSystemTextureName->setText(fileName);
+
+        selectedActorSystem->textureName = fileName.toStdWString();
+        selectedActorSystem->RecreateTexture();
     }
 }
 

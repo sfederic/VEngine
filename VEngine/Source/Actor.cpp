@@ -203,6 +203,22 @@ void ActorSystem::SetTexture(Texture* texture)
 	pso.texture = texture;
 }
 
+//For when texture file is changed in-editor.
+void ActorSystem::RecreateTexture()
+{
+	pso.texture->data->Release();
+	pso.srv->data->Release();
+	gRenderSystem.CreateTexture(this);
+}
+
+void ActorSystem::RecreateShader()
+{
+}
+
+void ActorSystem::RecreateModel()
+{
+}
+
 void ActorSystem::SetVertexBuffer(Buffer* vertexBuffer)
 {
 	pso.vertexBuffer = vertexBuffer;

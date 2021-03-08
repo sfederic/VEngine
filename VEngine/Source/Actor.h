@@ -150,6 +150,10 @@ public:
 	void SetShaderView(ShaderResourceView* shaderView);
 	void SetTexture(Texture* texture);
 
+	void RecreateTexture();
+	void RecreateShader();
+	void RecreateModel();
+
 	template <class ActorType>
 	bool IsA()
 	{
