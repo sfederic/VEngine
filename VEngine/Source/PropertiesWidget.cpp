@@ -118,8 +118,6 @@ void PropertiesWidget::SetActorRotationZ()
 
 PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
 {
-    setFocusPolicy(Qt::FocusPolicy::StrongFocus);
-
     QGridLayout* grid = new QGridLayout();
 
     //Position

@@ -1,7 +1,11 @@
 #pragma once
 
 #include <qdockwidget.h>
-#include <QModelIndex>
+
+class QFileSystemModel;
+class QTreeView;
+class QModelIndex;
+class QListWidget;
 
 class AssetDock : public QDockWidget
 {
@@ -9,6 +13,10 @@ public:
 	AssetDock(const char* title);
 	void Tick();
 	void AssetItemClicked(class QListWidgetItem* listWidgetItem);
+	void AssetFolderClicked();
 
+	QListWidget* assetIcons;
+	QFileSystemModel* fileSystemModel;
+	QTreeView* assetTreeView;
 	QModelIndex* modelIndex;
 };
