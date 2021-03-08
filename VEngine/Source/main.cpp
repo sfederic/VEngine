@@ -20,9 +20,10 @@
 #include "MathHelpers.h"
 #include "Console.h"
 #include "Profiler.h"
-
 #include "TestActor.h"
 #include "ConsoleDock.h"
+#include "RenderViewWidget.h"
+#include "WorldDock.h"
 
 //For throwing the program into fullscreen for profilers, getting rid of Qt
 #define NO_EDITOR

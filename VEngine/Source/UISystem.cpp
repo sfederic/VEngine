@@ -7,6 +7,7 @@
 #include "WorldEditor.h"
 #include "World.h"
 #include "..\EditorMainWindow.h"
+#include "RenderViewWidget.h"
 
 UISystem gUISystem;
 
