@@ -67,6 +67,7 @@ void AssetDock::AssetItemClicked()
     QString assetName = assetIcons->currentItem()->text();
     QString fullPath = path + "/" + assetName;
 
+    //Opens up default system program from filename.
     QDesktopServices::openUrl(QUrl::fromLocalFile(fullPath));
 }
 
