@@ -47,7 +47,8 @@ EditorMainWindow::EditorMainWindow(QWidget *parent) : QMainWindow(parent)
 
     //Console dock
     consoleDock = new ConsoleDock();
-    tabifyDockWidget(assetDock, consoleDock); //Adds second argument as tab to first's Dock Area
+    addDockWidget(Qt::BottomDockWidgetArea, consoleDock);
+    //tabifyDockWidget(assetDock, consoleDock); //Adds second argument as tab to first's Dock Area
 
     //Central widget - Viewport
     {
