@@ -34,7 +34,7 @@ AssetDock::AssetDock(const char* title) : QDockWidget(title)
     assetIcons = new QListWidget();
     assetIcons->setIconSize(QSize(75, 75));
     assetIcons->setViewMode(QListView::ViewMode::IconMode);
-    connect(assetIcons, &QListWidget::clicked, this, &AssetDock::AssetItemClicked);
+    connect(assetIcons, &QListWidget::doubleClicked, this, &AssetDock::AssetItemClicked);
 
     QHBoxLayout* assetHBox = new QHBoxLayout();
     assetHBox->addWidget(assetTreeView, Qt::AlignLeft);
@@ -51,11 +51,7 @@ AssetDock::AssetDock(const char* title) : QDockWidget(title)
 
 void AssetDock::Tick()
 {
-    modelIndex = &assetTreeView->currentIndex();
-    if (modelIndex->data().toString() == "main.cpp")
-    {
-        throw;
-    }
+
 }
 
 
