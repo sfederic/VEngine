@@ -36,6 +36,7 @@ bool FBXImporter::Import(const char* filename, ModelData& data, ActorSystem* act
 	importer->Import(scene);
 
 	//Remember that the root node is essentially "empty"
+	//TODO: going to have to come back here later for Skeletal Animation, as every bone is a node
 	int nodeCount = scene->GetNodeCount();
 	FbxNode* node = scene->GetNode(nodeCount - 1);
 
@@ -92,9 +93,12 @@ bool FBXImporter::Import(const char* filename, ModelData& data, ActorSystem* act
 								animFrame.time = keyTime;
 
 								XMVECTOR euler = XMVectorZero();
-								euler.m128_f32[0] = XMConvertToRadians(rot[0]);
-								euler.m128_f32[1] = XMConvertToRadians(rot[1]);
-								euler.m128_f32[2] = XMConvertToRadians(rot[2]);
+								//Angles are measured clockwise when looking along the rotation axis toward the 
+								//origin. This is a left-handed coordinate system. 
+								//To use right-handed coordinates, negate all three angles.
+								euler.m128_f32[0] = -XMConvertToRadians(rot[0]);
+								euler.m128_f32[1] = -XMConvertToRadians(rot[1]);
+								euler.m128_f32[2] = -XMConvertToRadians(rot[2]);
 								XMVECTOR quat = XMQuaternionRotationRollPitchYawFromVector(euler);
 								animFrame.rot.x = quat.m128_f32[0];
 								animFrame.rot.y = quat.m128_f32[1];
