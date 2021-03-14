@@ -3,6 +3,7 @@
 #include "Debug.h"
 #include "Actor.h"
 #include "RenderSystem.h"
+#include "Animationstructures.h"
 
 //REF: https://github.com/peted70/hololens-fbx-viewer/tree/master/HolographicAppForOpenGLES1/include
 //REF: https://peted.azurewebsites.net/hololens-fbx-loading-c/
@@ -22,13 +23,7 @@ void FBXImporter::Init()
 	importer = FbxImporter::Create(manager, "");
 }
 
-struct AnimData
-{
-	FbxVector4 rot;
-	double time;
-};
-
-bool FBXImporter::Import(const char* filename, ModelData& data)
+bool FBXImporter::Import(const char* filename, ModelData& data, ActorSystem* actorSystem)
 {
 	if (!importer->Initialize(filename, -1, manager->GetIOSettings()))
 	{
@@ -58,6 +53,10 @@ bool FBXImporter::Import(const char* filename, ModelData& data)
 		int numAnimStacks = scene->GetSrcObjectCount<FbxAnimStack>();
 		for (int animStackIndex = 0; animStackIndex < numAnimStacks; animStackIndex++)
 		{
+			//TODO: This isn't too bad, but FBX file without animation still have eAnimated flags set,
+			//for some reason, so plaing this here is the quick fix. Better fix is doing this in the component.
+			actorSystem->bAnimated = true;
+
 			FbxAnimStack* animStack = scene->GetSrcObject<FbxAnimStack>(animStackIndex);
 			if (animStack)
 			{
@@ -75,10 +74,6 @@ bool FBXImporter::Import(const char* filename, ModelData& data)
 							FbxAnimCurve* animCurve = curveNode->GetCurve(curveIndex);
 							int keyCount = animCurve->KeyGetCount();
 
-							//TODO: think about changing anim data like this to std::array.
-							//size should be known ahead of time from keyCount.
-							std::vector<AnimData> data;
-
 							for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
 							{
 								//Keys are the keyframes into the animation
@@ -87,11 +82,31 @@ bool FBXImporter::Import(const char* filename, ModelData& data)
 								time.SetSecondDouble(keyTime);
 
 								FbxVector4 rot = animEvaluator->GetNodeLocalRotation(node, time);
+								FbxVector4 scale = animEvaluator->GetNodeLocalScaling(node, time);
+								FbxVector4 pos = animEvaluator->GetNodeLocalTransform(node, time);
+								
+								AnimFrame animFrame = {};
+								animFrame.time = keyTime;
 
-								AnimData animdata = {};
-								animdata.time = keyTime;
-								animdata.rot = rot;
-								data.push_back(animdata);
+								XMVECTOR euler;
+								euler.m128_f32[0] = rot[0];
+								euler.m128_f32[1] = rot[1];
+								euler.m128_f32[2] = rot[2];
+								XMVECTOR quat = XMQuaternionRotationRollPitchYawFromVector(euler);
+								animFrame.rot.x = quat.m128_f32[0];
+								animFrame.rot.y = quat.m128_f32[1];
+								animFrame.rot.z = quat.m128_f32[2];
+								animFrame.rot.w = quat.m128_f32[3];
+
+								animFrame.scale.x = 1.f;
+								animFrame.scale.y = 1.f;
+								animFrame.scale.z = 1.f;
+
+								//animFrame.pos.x = pos[0];
+								//animFrame.pos.y = pos[1];
+								//animFrame.pos.z = pos[2];
+
+								actorSystem->animData.frames.push_back(animFrame);
 							}
 						}
 					}

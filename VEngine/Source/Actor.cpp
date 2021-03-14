@@ -225,7 +225,7 @@ void ActorSystem::RecreateModel()
 
 	std::string filename = "Models/";
 	filename += modelName;
-	if (FBXImporter::Import(filename.c_str(), modelData))
+	if (FBXImporter::Import(filename.c_str(), modelData, this))
 	{
 		gRenderSystem.CreateVertexBuffer(modelData.GetByteWidth(), modelData.verts.data(), this);
 

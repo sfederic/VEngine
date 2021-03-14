@@ -11,11 +11,12 @@
 using namespace fbxsdk;
 
 struct ModelData;
+class ActorSystem;
 
 class FBXImporter
 {
 public:
 	static void Init();
-	static bool Import(const char* filename, ModelData& data);
+	static bool Import(const char* filename, ModelData& data, ActorSystem* actorSystem);
 };
 

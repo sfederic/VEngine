@@ -389,6 +389,22 @@ void RenderSystem::RenderActorSystem(World* world)
 		{
 			if (actorSystem->actors[i]->bRender)
 			{
+				//Animation
+				if (actorSystem->bAnimated)
+				{
+					actorSystem->actors[i]->currentAnimationTime += gCoreSystem.deltaTime;
+					float timeRemaining = actorSystem->animData.GetEndTime();
+					if (actorSystem->actors[i]->currentAnimationTime >= actorSystem->animData.GetEndTime())
+					{
+						actorSystem->actors[i]->currentAnimationTime = 0.0;
+					}
+
+					XMFLOAT4X4 animationMatrix;
+					XMStoreFloat4x4(&animationMatrix, actorSystem->actors[i]->transform);
+					actorSystem->animData.Interpolate(actorSystem->actors[i]->currentAnimationTime, animationMatrix);
+					actorSystem->actors[i]->transform = XMLoadFloat4x4(&animationMatrix);
+				}
+
 				//Set Matrix constant buffer
 				matrices.view = GetActiveCamera()->view;
 				matrices.model = actorSystem->actors[i]->transform;

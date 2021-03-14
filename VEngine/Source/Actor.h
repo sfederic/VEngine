@@ -8,6 +8,7 @@
 #include "RenderTypes.h"
 #include <typeindex>
 #include "FBXImporter.h"
+#include "AnimationStructures.h"
 
 using namespace DirectX;
 
@@ -57,6 +58,8 @@ public:
 	XMMATRIX transform = XMMatrixIdentity();
 	Material material;
 
+	double currentAnimationTime = 0.0;
+
 	int vertexBufferOffset;
 	bool bRender = true;
 	bool bPicked = false;
@@ -88,7 +91,7 @@ public:
 		std::string filename = "Models/";
 		filename += modelName;
 
-		if (FBXImporter::Import(filename.c_str(), modelData))
+		if (FBXImporter::Import(filename.c_str(), modelData, this))
 		{
 			UINT byteWidth = modelData.GetByteWidth();
 			numVertices = (byteWidth * actors.size()) / sizeof(Vertex);
@@ -172,6 +175,8 @@ public:
 
 	ModelData modelData;
 	
+	Animation animData;
+
 	PipelineView pso;
 
 	BoundingBox boundingBox;
@@ -189,4 +194,5 @@ public:
 	std::string modelName;
 
 	bool bInstancingActors; //bool for setting system to use instancing
+	bool bAnimated; //Whether model has any animation data. Is set in FXB import.
 };

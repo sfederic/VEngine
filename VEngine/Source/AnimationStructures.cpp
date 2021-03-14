@@ -25,10 +25,10 @@ void Animation::Interpolate(float t, DirectX::XMFLOAT4X4& m)
 
 	for (int i = 0; i < (frames.size() - 1); i++)
 	{
-		if (t >= frames[i].time && t <= frames[i].time)
+		if (t >= frames[i].time && t <= frames[i+1].time)
 		{
 			//Get the interpolation difference between input time and frame time.
-			float lerpPercent = (t - frames[i].time) / (frames[i + 1].time - frames[i].time);
+			float lerpPercent = (t - frames[i].time) / (frames[i+1].time - frames[i].time);
 
 			XMVECTOR pos1 = XMLoadFloat3(&frames[i].pos);
 			XMVECTOR pos2 = XMLoadFloat3(&frames[i+1].pos);
