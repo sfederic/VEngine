@@ -7,10 +7,10 @@
 #pragma comment(lib, "libfbxsdk.lib")
 
 #include <fbxsdk.h>
-#include "RenderSystem.h"
-#include "Actor.h"
 
 using namespace fbxsdk;
+
+struct ModelData;
 
 class FBXImporter
 {

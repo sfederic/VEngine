@@ -1,6 +1,8 @@
 #include "FBXImporter.h"
 #include <vector>
 #include "Debug.h"
+#include "Actor.h"
+#include "RenderSystem.h"
 
 //REF: https://github.com/peted70/hololens-fbx-viewer/tree/master/HolographicAppForOpenGLES1/include
 //REF: https://peted.azurewebsites.net/hololens-fbx-loading-c/

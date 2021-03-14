@@ -1,3 +1,4 @@
+
 #include "..\EditorMainWindow.h"
 #include "RenderSystem.h"
 #include "CoreSystem.h"
@@ -26,17 +27,19 @@
 #include "WorldDock.h"
 
 //For throwing the program into fullscreen for profiling (gets rid of Qt)
-#define NO_EDITOR
+//#define NO_EDITOR
 
 int main(int argc, char *argv[])
 {
     HR(CoInitialize(NULL)); //For the WIC texture functions from DXT
 
     //Qt setup
+#ifndef NO_EDITOR
     QApplication qApplication(argc, nullptr);
     EditorMainWindow editorMainWindow;
     gEditorMainWindow = &editorMainWindow;
     gQApplication = &qApplication;
+#endif
 
     gProfiler.Init();
 
@@ -48,10 +51,12 @@ int main(int argc, char *argv[])
 
     //Systems setup
     gCoreSystem.SetTimerFrequency();
-#ifdef PROFILE_NOEDITOR
-    gRenderSystem->Init(gCoreSystem.mainWindow);
-#else
+#ifndef NO_EDITOR
     gRenderSystem.Init((HWND)gEditorMainWindow->renderViewWidget->winId());
+#else
+    gCoreSystem.windowWidth = 800;
+    gCoreSystem.windowHeight = 600;
+    gRenderSystem.Init(gCoreSystem.mainWindow);
 #endif
     gAudioSystem.Init();
     gUISystem.Init();
@@ -62,7 +67,7 @@ int main(int argc, char *argv[])
 
 
     ActorSystem ac;
-    ac.modelName = "cube.fbx";
+    ac.modelName = "animated_cube.fbx";
     ac.shaderName = L"shaders.hlsl";
     ac.textureName = L"texture.png";
     ac.name = L"Cubes";
