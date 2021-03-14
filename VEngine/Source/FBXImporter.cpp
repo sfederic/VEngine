@@ -59,13 +59,13 @@ bool FBXImporter::Import(const char* filename, ModelData& data)
 		for (int animStackIndex = 0; animStackIndex < numAnimStacks; animStackIndex++)
 		{
 			FbxAnimStack* animStack = scene->GetSrcObject<FbxAnimStack>(animStackIndex);
-			//if (animStack)
+			if (animStack)
 			{
 				int numAnimLayers = animStack->GetMemberCount<FbxAnimLayer>();
 				for (int animLayerIndex = 0; animLayerIndex < numAnimLayers; animLayerIndex++)
 				{
 					FbxAnimLayer* animLayer = animStack->GetMember<FbxAnimLayer>(animLayerIndex);
-					//if (animLayer)
+					if (animLayer)
 					{
 						FbxAnimCurveNode* curveNode = node->LclRotation.GetCurveNode(animLayer);
 						int numCurveNodes = curveNode->GetCurveCount(0);
@@ -75,6 +75,8 @@ bool FBXImporter::Import(const char* filename, ModelData& data)
 							FbxAnimCurve* animCurve = curveNode->GetCurve(curveIndex);
 							int keyCount = animCurve->KeyGetCount();
 
+							//TODO: think about changing anim data like this to std::array.
+							//size should be known ahead of time from keyCount.
 							std::vector<AnimData> data;
 
 							for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
