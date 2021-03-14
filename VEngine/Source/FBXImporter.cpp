@@ -22,6 +22,12 @@ void FBXImporter::Init()
 	importer = FbxImporter::Create(manager, "");
 }
 
+struct AnimData
+{
+	FbxVector4 rot;
+	double time;
+};
+
 bool FBXImporter::Import(const char* filename, ModelData& data)
 {
 	if (!importer->Initialize(filename, -1, manager->GetIOSettings()))
@@ -44,35 +50,53 @@ bool FBXImporter::Import(const char* filename, ModelData& data)
 	//Essentially the fix for skeletal animation is to iterate through all nodes in the scene,
 	//then take their times from the animation keys and apply it to a vector or matrix which can be 
 	//part of a struct. 
-	/*FbxInt nodeFlags = node->GetAllObjectFlags();
+	FbxInt nodeFlags = node->GetAllObjectFlags();
 	if (nodeFlags & FbxPropertyFlags::eAnimated)
 	{
-		//Each scene has an animation stack(s)
-		FbxAnimStack* animStack = scene->GetCurrentAnimationStack();
-		//each stack has an animation layer(s)
-		FbxAnimLayer* animLayer = animStack->GetMember<FbxAnimLayer>();
-	
-		//The animation evaluator fix here was taken from the official docs
 		FbxAnimEvaluator* animEvaluator = scene->GetAnimationEvaluator();
 
-		//Curves act as animation lines? (Do I need seperate curves for Pos, Rot, etc?)
-		FbxAnimCurveNode* curveNode = node->LclRotation.GetCurveNode(animLayer);
-		for (int i = 0; i < curveNode->GetCurveCount(0U); i++)
+		int numAnimStacks = scene->GetSrcObjectCount<FbxAnimStack>();
+		for (int animStackIndex = 0; animStackIndex < numAnimStacks; animStackIndex++)
 		{
-			FbxAnimCurve* animCurve = curveNode->GetCurve(i);
-
-			for (int j = 0; j < animCurve->KeyGetCount(); j++)
+			FbxAnimStack* animStack = scene->GetSrcObject<FbxAnimStack>(animStackIndex);
+			//if (animStack)
 			{
-				//Keys are the keyframes into the animation
-				double t = animCurve->KeyGet(j).GetTime().GetSecondDouble();
-				FbxTime time;
-				time.SetSecondDouble(t);
-				//Take the value from the evaluator and later push the Vec/Mat into an animation struct
-				FbxVector4 rot = animEvaluator->GetNodeLocalRotation(node, time);
-				time = time;
+				int numAnimLayers = animStack->GetMemberCount<FbxAnimLayer>();
+				for (int animLayerIndex = 0; animLayerIndex < numAnimLayers; animLayerIndex++)
+				{
+					FbxAnimLayer* animLayer = animStack->GetMember<FbxAnimLayer>(animLayerIndex);
+					//if (animLayer)
+					{
+						FbxAnimCurveNode* curveNode = node->LclRotation.GetCurveNode(animLayer);
+						int numCurveNodes = curveNode->GetCurveCount(0);
+
+						for(int curveIndex = 0; curveIndex < numCurveNodes; curveIndex++)
+						{
+							FbxAnimCurve* animCurve = curveNode->GetCurve(curveIndex);
+							int keyCount = animCurve->KeyGetCount();
+
+							std::vector<AnimData> data;
+
+							for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
+							{
+								//Keys are the keyframes into the animation
+								double keyTime = animCurve->KeyGet(keyIndex).GetTime().GetSecondDouble();
+								FbxTime time;
+								time.SetSecondDouble(keyTime);
+
+								FbxVector4 rot = animEvaluator->GetNodeLocalRotation(node, time);
+
+								AnimData animdata = {};
+								animdata.time = keyTime;
+								animdata.rot = rot;
+								data.push_back(animdata);
+							}
+						}
+					}
+				}
 			}
 		}
-	}*/
+	}
 
 	//Array setup
 	int numVerts = mesh->GetControlPointsCount();
