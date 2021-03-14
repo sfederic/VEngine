@@ -4,25 +4,6 @@ using namespace DirectX;
 
 void Animation::Interpolate(float t, DirectX::XMFLOAT4X4& m)
 {
-	if (t <= frames.front().time)
-	{
-		XMVECTOR pos = XMLoadFloat3(&frames.front().pos);
-		XMVECTOR scale = XMLoadFloat3(&frames.front().scale);
-		XMVECTOR rot = XMLoadFloat4(&frames.front().rot);
-		XMVECTOR zero = XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f);
-		XMStoreFloat4x4(&m, XMMatrixAffineTransformation(scale, zero, rot, pos));
-		return;
-	}
-	else if(t >= frames.back().time)
-	{
-		XMVECTOR pos = XMLoadFloat3(&frames.back().pos);
-		XMVECTOR scale = XMLoadFloat3(&frames.back().scale);
-		XMVECTOR rot = XMLoadFloat4(&frames.back().rot);
-		XMVECTOR zero = XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f);
-		XMStoreFloat4x4(&m, XMMatrixAffineTransformation(scale, zero, rot, pos));
-		return;
-	}
-
 	for (int i = 0; i < (frames.size() - 1); i++)
 	{
 		if (t >= frames[i].time && t <= frames[i+1].time)
