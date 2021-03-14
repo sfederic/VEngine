@@ -81,6 +81,9 @@ bool FBXImporter::Import(const char* filename, ModelData& data, ActorSystem* act
 								FbxTime time;
 								time.SetSecondDouble(keyTime);
 
+								//TODO: have to comeback here and clean up Quat conversions, uniform scaling,
+								//decide whether to even use transform (in the sense that all animations just play 
+								//in-place.)
 								FbxVector4 rot = animEvaluator->GetNodeLocalRotation(node, time);
 								FbxVector4 scale = animEvaluator->GetNodeLocalScaling(node, time);
 								FbxVector4 pos = animEvaluator->GetNodeLocalTransform(node, time);
@@ -88,10 +91,10 @@ bool FBXImporter::Import(const char* filename, ModelData& data, ActorSystem* act
 								AnimFrame animFrame = {};
 								animFrame.time = keyTime;
 
-								XMVECTOR euler;
-								euler.m128_f32[0] = rot[0];
-								euler.m128_f32[1] = rot[1];
-								euler.m128_f32[2] = rot[2];
+								XMVECTOR euler = XMVectorZero();
+								euler.m128_f32[0] = XMConvertToRadians(rot[0]);
+								euler.m128_f32[1] = XMConvertToRadians(rot[1]);
+								euler.m128_f32[2] = XMConvertToRadians(rot[2]);
 								XMVECTOR quat = XMQuaternionRotationRollPitchYawFromVector(euler);
 								animFrame.rot.x = quat.m128_f32[0];
 								animFrame.rot.y = quat.m128_f32[1];

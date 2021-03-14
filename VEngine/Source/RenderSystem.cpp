@@ -393,7 +393,6 @@ void RenderSystem::RenderActorSystem(World* world)
 				if (actorSystem->bAnimated)
 				{
 					actorSystem->actors[i]->currentAnimationTime += gCoreSystem.deltaTime;
-					float timeRemaining = actorSystem->animData.GetEndTime();
 					if (actorSystem->actors[i]->currentAnimationTime >= actorSystem->animData.GetEndTime())
 					{
 						actorSystem->actors[i]->currentAnimationTime = 0.0;
