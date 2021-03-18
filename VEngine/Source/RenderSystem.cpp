@@ -66,6 +66,7 @@ void RenderSystem::Init(HWND window)
 	CreateRTVAndDSV();
 	CreateInputLayout();
 	CreateRasterizerStates();
+	CreateBlendStates();
 	CreateConstantBuffer();
 
 	//Check feature support (just for breakpoint checking for now)
@@ -248,6 +249,22 @@ void RenderSystem::CreateRasterizerStates()
 	HR(device->CreateRasterizerState(&rastDesc, &rastStateNoBackCull));
 }
 
+void RenderSystem::CreateBlendStates()
+{
+	D3D11_BLEND_DESC alphaToCoverageDesc = {};
+	alphaToCoverageDesc.AlphaToCoverageEnable = true;
+	alphaToCoverageDesc.IndependentBlendEnable = false;
+	alphaToCoverageDesc.RenderTarget[0].BlendEnable = false;
+	alphaToCoverageDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
+	alphaToCoverageDesc.RenderTarget[0].DestBlend = D3D11_BLEND_ZERO;
+	alphaToCoverageDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	alphaToCoverageDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+	alphaToCoverageDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+	alphaToCoverageDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+
+	HR(device->CreateBlendState(&alphaToCoverageDesc, &blendStateAlphaToCoverage));
+}
+
 //One vertex buffer per actor system
 void RenderSystem::CreateVertexBuffer(UINT size, const void* data, ActorSystem* system)
 {
@@ -349,6 +366,12 @@ void RenderSystem::RenderActorSystem(World* world)
 		else
 		{
 			context->RSSetState(activeRastState);
+		}
+
+		//Set blend
+		{
+			const FLOAT blendState[4] = { 0.f };
+			context->OMSetBlendState(blendStateAlphaToCoverage, blendState, 0xFFFFFFFF);
 		}
 
 		auto shader = gShaderFactory.shaderMap.find(actorSystem->shaderName);

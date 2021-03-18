@@ -43,6 +43,7 @@ public:
 	void CreateShaders();
 	void CreateInputLayout();
 	void CreateRasterizerStates();
+	void CreateBlendStates();
 	void CreateConstantBuffer();
 
 	void CreateShaderView(ShaderResourceView* shaderView, Texture* texture);
@@ -77,10 +78,15 @@ public:
 	ID3D11InputLayout* inputLayout;
 	ID3D11VertexShader* vertexShader;
 	ID3D11PixelShader* pixelShader;
+
+
 	ID3D11RasterizerState* rastStateSolid;
 	ID3D11RasterizerState* rastStateNoBackCull;
 	ID3D11RasterizerState* rastStateWireframe;
 	ID3D11RasterizerState* activeRastState;
+
+	ID3D11BlendState* blendStateAlphaToCoverage;
+
 	IDXGIFactory6* dxgiFactory;
 
 	ID3D11Query* disjointQuery;
