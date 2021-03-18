@@ -43,15 +43,15 @@ bool FBXImporter::Import(const char* filename, ModelData& data, ActorSystem* act
 	//I think the root node encapsulates the whole mesh
 	FbxMesh* mesh = node->GetMesh();
 
-	int deformerCount = mesh->GetDeformerCount();
+	//int deformerCount = mesh->GetDeformerCount();
 
-	for (int nodeIndex = 1; nodeIndex < nodeCount; nodeIndex++)
+	//for (int nodeIndex = 1; nodeIndex < nodeCount; nodeIndex++)
 	{
-		node = scene->GetNode(nodeIndex);
-		const char* name = node->GetName();
+		//node = scene->GetNode(nodeIndex);
+		//const char* name = node->GetName();
 		FbxNodeAttribute* attrib = node->GetNodeAttribute();
 
-		int numDeformers = node->GetMesh()->GetDeformerCount();
+		//int numDeformers = node->GetMesh()->GetDeformerCount();
 
 		FbxInt nodeFlags = node->GetAllObjectFlags();
 		if (nodeFlags & FbxPropertyFlags::eAnimated)
