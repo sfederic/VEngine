@@ -10,3 +10,5 @@ XMVECTOR XMVectorUp();
 XMVECTOR XMVectorForward();
 //XMVECTOR XMVectorConstantLerp(FXMVECTOR V0, FXMVECTOR V1, float deltaTime, float speed);
 XMVECTOR RollPitchYawFromMatrix(XMMATRIX m);
+
+void LookAtRotation(XMVECTOR lookAtPoint, XMMATRIX& m);
