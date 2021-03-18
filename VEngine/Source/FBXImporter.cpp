@@ -40,80 +40,92 @@ bool FBXImporter::Import(const char* filename, ModelData& data, ActorSystem* act
 	int nodeCount = scene->GetNodeCount();
 	FbxNode* node = scene->GetNode(nodeCount - 1);
 
+	//I think the root node encapsulates the whole mesh
 	FbxMesh* mesh = node->GetMesh();
 
-	//TODO: ANIMATION
-	//Essentially the fix for skeletal animation is to iterate through all nodes in the scene,
-	//then take their times from the animation keys and apply it to a vector or matrix which can be 
-	//part of a struct. 
-	FbxInt nodeFlags = node->GetAllObjectFlags();
-	if (nodeFlags & FbxPropertyFlags::eAnimated)
+	int deformerCount = mesh->GetDeformerCount();
+
+	for (int nodeIndex = 1; nodeIndex < nodeCount; nodeIndex++)
 	{
-		FbxAnimEvaluator* animEvaluator = scene->GetAnimationEvaluator();
+		node = scene->GetNode(nodeIndex);
+		const char* name = node->GetName();
+		FbxNodeAttribute* attrib = node->GetNodeAttribute();
 
-		int numAnimStacks = scene->GetSrcObjectCount<FbxAnimStack>();
-		for (int animStackIndex = 0; animStackIndex < numAnimStacks; animStackIndex++)
+		int numDeformers = node->GetMesh()->GetDeformerCount();
+
+		FbxInt nodeFlags = node->GetAllObjectFlags();
+		if (nodeFlags & FbxPropertyFlags::eAnimated)
 		{
-			//TODO: This isn't too bad, but FBX file without animation still have eAnimated flags set,
-			//for some reason, so plaing this here is the quick fix. Better fix is doing this in the component.
-			actorSystem->bAnimated = true;
+			FbxAnimEvaluator* animEvaluator = scene->GetAnimationEvaluator();
 
-			FbxAnimStack* animStack = scene->GetSrcObject<FbxAnimStack>(animStackIndex);
-			if (animStack)
+			int numAnimStacks = scene->GetSrcObjectCount<FbxAnimStack>();
+			for (int animStackIndex = 0; animStackIndex < numAnimStacks; animStackIndex++)
 			{
-				int numAnimLayers = animStack->GetMemberCount<FbxAnimLayer>();
-				for (int animLayerIndex = 0; animLayerIndex < numAnimLayers; animLayerIndex++)
+				//TODO: This isn't too bad, but FBX file without animation still have eAnimated flags set,
+				//for some reason, so plaing this here is the quick fix. Better fix is doing this in the component.
+				actorSystem->bAnimated = true;
+
+				FbxAnimStack* animStack = scene->GetSrcObject<FbxAnimStack>(animStackIndex);
+				if (animStack)
 				{
-					FbxAnimLayer* animLayer = animStack->GetMember<FbxAnimLayer>(animLayerIndex);
-					if (animLayer)
+					int numAnimLayers = animStack->GetMemberCount<FbxAnimLayer>();
+					for (int animLayerIndex = 0; animLayerIndex < numAnimLayers; animLayerIndex++)
 					{
-						FbxAnimCurveNode* curveNode = node->LclRotation.GetCurveNode(animLayer);
-						int numCurveNodes = curveNode->GetCurveCount(0);
-
-						for(int curveIndex = 0; curveIndex < numCurveNodes; curveIndex++)
+						FbxAnimLayer* animLayer = animStack->GetMember<FbxAnimLayer>(animLayerIndex);
+						if (animLayer)
 						{
-							FbxAnimCurve* animCurve = curveNode->GetCurve(curveIndex);
-							int keyCount = animCurve->KeyGetCount();
-
-							for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
+							//Feels like just getting one curve isn't the right answer here.
+							FbxAnimCurveNode* curveNode = node->LclRotation.GetCurveNode(animLayer);
+							if (curveNode)
 							{
-								//Keys are the keyframes into the animation
-								double keyTime = animCurve->KeyGet(keyIndex).GetTime().GetSecondDouble();
-								FbxTime time;
-								time.SetSecondDouble(keyTime);
+								int numCurveNodes = curveNode->GetCurveCount(0);
 
-								//TODO: have to comeback here and clean up Quat conversions, uniform scaling,
-								//decide whether to even use transform (in the sense that all animations just play 
-								//in-place.)
-								FbxVector4 rot = animEvaluator->GetNodeLocalRotation(node, time);
-								FbxVector4 scale = animEvaluator->GetNodeLocalScaling(node, time);
-								FbxVector4 pos = animEvaluator->GetNodeLocalTransform(node, time);
-								
-								AnimFrame animFrame = {};
-								animFrame.time = keyTime;
+								for (int curveIndex = 0; curveIndex < numCurveNodes; curveIndex++)
+								{
+									FbxAnimCurve* animCurve = curveNode->GetCurve(curveIndex);
+									int keyCount = animCurve->KeyGetCount();
+									
+									for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
+									{
+										//Keys are the keyframes into the animation
+										double keyTime = animCurve->KeyGet(keyIndex).GetTime().GetSecondDouble();
+										FbxTime time;
+										time.SetSecondDouble(keyTime);
 
-								XMVECTOR euler = XMVectorZero();
-								//Angles are measured clockwise when looking along the rotation axis toward the 
-								//origin. This is a left-handed coordinate system. 
-								//To use right-handed coordinates, negate all three angles.
-								euler.m128_f32[0] = -XMConvertToRadians(rot[0]);
-								euler.m128_f32[1] = -XMConvertToRadians(rot[1]);
-								euler.m128_f32[2] = -XMConvertToRadians(rot[2]);
-								XMVECTOR quat = XMQuaternionRotationRollPitchYawFromVector(euler);
-								animFrame.rot.x = quat.m128_f32[0];
-								animFrame.rot.y = quat.m128_f32[1];
-								animFrame.rot.z = quat.m128_f32[2];
-								animFrame.rot.w = quat.m128_f32[3];
+										//TODO: have to comeback here and clean up Quat conversions, uniform scaling,
+										//decide whether to even use transform (in the sense that all animations just play 
+										//in-place.)
+										FbxVector4 rot = animEvaluator->GetNodeLocalRotation(node, time);
+										FbxVector4 scale = animEvaluator->GetNodeLocalScaling(node, time);
+										FbxVector4 pos = animEvaluator->GetNodeLocalTransform(node, time);
 
-								animFrame.scale.x = 1.f;
-								animFrame.scale.y = 1.f;
-								animFrame.scale.z = 1.f;
+										AnimFrame animFrame = {};
+										animFrame.time = keyTime;
 
-								//animFrame.pos.x = pos[0];
-								//animFrame.pos.y = pos[1];
-								//animFrame.pos.z = pos[2];
+										XMVECTOR euler = XMVectorZero();
+										//Angles are measured clockwise when looking along the rotation axis toward the 
+										//origin. This is a left-handed coordinate system. 
+										//To use right-handed coordinates, negate all three angles.
+										euler.m128_f32[0] = -XMConvertToRadians(rot[0]);
+										euler.m128_f32[1] = -XMConvertToRadians(rot[1]);
+										euler.m128_f32[2] = -XMConvertToRadians(rot[2]);
+										XMVECTOR quat = XMQuaternionRotationRollPitchYawFromVector(euler);
+										animFrame.rot.x = quat.m128_f32[0];
+										animFrame.rot.y = quat.m128_f32[1];
+										animFrame.rot.z = quat.m128_f32[2];
+										animFrame.rot.w = quat.m128_f32[3];
 
-								actorSystem->animData.frames.push_back(animFrame);
+										animFrame.scale.x = 1.f;
+										animFrame.scale.y = 1.f;
+										animFrame.scale.z = 1.f;
+
+										//animFrame.pos.x = pos[0];
+										//animFrame.pos.y = pos[1];
+										//animFrame.pos.z = pos[2];
+
+										actorSystem->animData.frames.push_back(animFrame);
+									}
+								}
 							}
 						}
 					}

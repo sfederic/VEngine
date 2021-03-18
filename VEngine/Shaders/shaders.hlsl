@@ -17,6 +17,5 @@ float4 PSMain(VS_OUT i) : SV_Target
 	float diffuse = dot(-lightDir, i.normal);
 
 	//float4 finalColour = ambient + saturate(diffuse);
-	//return texColour * finalColour;
-	return texColour;
+	return texColour * diffuse;
 }
