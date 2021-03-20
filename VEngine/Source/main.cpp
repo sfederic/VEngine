@@ -68,11 +68,12 @@ int main(int argc, char *argv[])
 
     ActorSystem ac;
     //ac.modelName = "bone_cylinder.fbx";
-    ac.modelName = "cube.fbx";
+    ac.modelName = "bone_cylinder.fbx";
     ac.shaderName = L"shaders.hlsl";
     ac.textureName = L"texture2.jpg";
     ac.name = L"Cubes";
     ac.CreateActors<Actor>(&gRenderSystem, 1);
+    //ac.GetActor(0)->SetRotation(0.f, 90.f, 0.f);
 
     GetWorld()->AddActorSystem(ac);
 

@@ -423,6 +423,7 @@ void RenderSystem::RenderActorSystem(World* world)
 					XMFLOAT4X4 animationMatrix;
 					XMStoreFloat4x4(&animationMatrix, actorSystem->actors[i]->transform);
 					actorSystem->animData.Interpolate(actorSystem->actors[i]->currentAnimationTime, animationMatrix);
+					//TODO: need to find a way to handle actor TRS so that not only animation ones are playing
 					actorSystem->actors[i]->transform = XMLoadFloat4x4(&animationMatrix);
 				}
 

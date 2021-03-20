@@ -42,6 +42,8 @@ bool FBXImporter::Import(const char* filename, ModelData& data, ActorSystem* act
 	FbxScene* scene = FbxScene::Create(manager, "scene0");
 	importer->Import(scene);
 
+	//scene->GetGlobalSettings().SetAxisSystem(FbxAxisSystem::DirectX);
+
 	animEvaluator = scene->GetAnimationEvaluator();
 
 	FbxNode* rootNode = scene->GetRootNode();
@@ -68,7 +70,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 	}
 
 	FbxScene* scene = node->GetScene();
-
+	
 	FbxInt nodeFlags = node->GetAllObjectFlags();
 	if (nodeFlags & FbxPropertyFlags::eAnimated)
 	{
@@ -98,7 +100,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 							{
 								FbxAnimCurve* animCurve = curveNode->GetCurve(curveIndex);
 								int keyCount = animCurve->KeyGetCount();
-
+								
 								for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
 								{
 									//Keys are the keyframes into the animation
@@ -150,6 +152,35 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 	FbxMesh* mesh = node->GetMesh();
 	if (mesh)
 	{
+		const int deformerCount = mesh->GetDeformerCount(FbxDeformer::eSkin);
+		for (int deformerIndex = 0; deformerIndex < deformerCount; deformerIndex++)
+		{
+			FbxSkin* skin = (FbxSkin*)mesh->GetDeformer(deformerIndex, FbxDeformer::eSkin);
+			
+			const int clusterCount = skin->GetClusterCount();
+			for (int clusterIndex = 0; clusterIndex < clusterCount; clusterIndex++)
+			{
+				FbxCluster* cluster = skin->GetCluster(clusterIndex);
+				const int vertexIndexCount = cluster->GetControlPointIndicesCount();
+				for (int i = 0; i < vertexIndexCount; i++)
+				{
+					int index = cluster->GetControlPointIndices()[i];
+
+					if (index >= vertexIndexCount)
+					{
+						continue;
+					}
+
+					double weight = cluster->GetControlPointWeights()[i];
+
+					if (weight == 0.0)
+					{
+						continue;
+					}
+				}
+			}
+		}
+
 		//Array setup
 		int numVerts = mesh->GetControlPointsCount();
 		int vectorSize = numVerts * mesh->GetPolygonSize(0);
@@ -185,16 +216,22 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 				vert.pos.z = (float)pos.mData[2];
 
 				//UV
-				int uvIndex = uvs->GetIndexArray().GetAt(polyIndexCounter);
-				FbxVector2 uv = uvs->GetDirectArray().GetAt(uvIndex);
-				vert.uv.x = (float)uv.mData[0];
-				vert.uv.y = (float)uv.mData[1];
+				if (uvs)
+				{
+					int uvIndex = uvs->GetIndexArray().GetAt(polyIndexCounter);
+					FbxVector2 uv = uvs->GetDirectArray().GetAt(uvIndex);
+					vert.uv.x = (float)uv.mData[0];
+					vert.uv.y = (float)uv.mData[1];
+				}
 
 				//Normal
-				FbxVector4 normal = normals->GetDirectArray().GetAt(polyIndexCounter);
-				vert.normal.x = (float)normal.mData[0];
-				vert.normal.y = (float)normal.mData[1];
-				vert.normal.z = (float)normal.mData[2];
+				if (normals)
+				{
+					FbxVector4 normal = normals->GetDirectArray().GetAt(polyIndexCounter);
+					vert.normal.x = (float)normal.mData[0];
+					vert.normal.y = (float)normal.mData[1];
+					vert.normal.z = (float)normal.mData[2];
+				}
 
 				currentActorSystem->modelData.verts.push_back(vert);
 
