@@ -10,6 +10,8 @@ struct Vertex
 	XMFLOAT3 pos;
 	XMFLOAT2 uv;
 	XMFLOAT3 normal;
+	XMFLOAT3 weights;
+	XMUINT4 boneIndices;
 };
 
 struct Matrices
@@ -40,4 +42,10 @@ struct ModelData
 
 	std::vector<Vertex> verts;
 	std::vector<uint16_t> indices;
+};
+
+struct BoneWeights
+{
+	std::vector<float> weights;
+	std::vector<uint32_t> vertexIndex;
 };

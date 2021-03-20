@@ -4,6 +4,7 @@
 #include "Actor.h"
 #include "RenderSystem.h"
 #include "Animationstructures.h"
+#include <unordered_map>
 
 //REF: https://github.com/peted70/hololens-fbx-viewer/tree/master/HolographicAppForOpenGLES1/include
 //REF: https://peted.azurewebsites.net/hololens-fbx-loading-c/
@@ -149,6 +150,8 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 		}
 	}
 
+	std::unordered_map<int, BoneWeights> boneWeightsMap;
+
 	FbxMesh* mesh = node->GetMesh();
 	if (mesh)
 	{
@@ -173,9 +176,19 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 
 					double weight = cluster->GetControlPointWeights()[i];
 
-					if (weight == 0.0)
+					if (weight == 0.0 || weight >= 1.0)
 					{
 						continue;
+					}
+
+					if (boneWeightsMap[index].vertexIndex.size() < 4)
+					{
+						boneWeightsMap[index].vertexIndex.push_back(index);
+					}
+
+					if (boneWeightsMap[index].weights.size() < 3)
+					{
+						boneWeightsMap[index].weights.push_back(weight);
 					}
 				}
 			}
@@ -231,6 +244,25 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 					vert.normal.x = (float)normal.mData[0];
 					vert.normal.y = (float)normal.mData[1];
 					vert.normal.z = (float)normal.mData[2];
+				}
+
+				//Bone Weights
+				if (boneWeightsMap.find(index) != boneWeightsMap.end())
+				{
+					BoneWeights* boneData = &boneWeightsMap.find(index)->second;
+					if (boneData)
+					{
+						vert.weights = XMFLOAT3(
+							boneData->weights[0],
+							boneData->weights[1],
+							boneData->weights[2]);
+
+						vert.boneIndices = XMUINT4(
+							boneWeightsMap[index].vertexIndex[0],
+							boneWeightsMap[index].vertexIndex[1],
+							boneWeightsMap[index].vertexIndex[2],
+							boneWeightsMap[index].vertexIndex[3]);
+					}
 				}
 
 				currentActorSystem->modelData.verts.push_back(vert);
