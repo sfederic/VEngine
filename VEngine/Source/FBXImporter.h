@@ -18,5 +18,7 @@ class FBXImporter
 public:
 	static void Init();
 	static bool Import(const char* filename, ModelData& data, ActorSystem* actorSystem);
-};
 
+private:
+	static void ProcessAllChildNodes(FbxNode* node);
+};

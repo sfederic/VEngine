@@ -369,8 +369,8 @@ void RenderSystem::RenderActorSystem(World* world)
 			//TODO: Not really a blendstate problem as a whole, need to figure out how to do pixel clipping
 			//for grass and fences and boxes and shit and make it work with a material constant buffer struct
 			//for transparent images. All it is is just an if(transparentTexture) {clip(textureColour.a - 0.01f) }
-			const FLOAT blendState[4] = { 0.f };
-			context->OMSetBlendState(blendStateAlphaToCoverage, blendState, 0xFFFFFFFF);
+			//const FLOAT blendState[4] = { 0.f };
+			//context->OMSetBlendState(blendStateAlphaToCoverage, blendState, 0xFFFFFFFF);
 		}
 
 		auto shader = gShaderFactory.shaderMap.find(actorSystem->shaderName);

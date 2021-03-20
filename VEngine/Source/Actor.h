@@ -187,7 +187,8 @@ public:
 	std::vector<Actor*> actors;
 
 	EActorSystemID id;
-
+	
+	//TODO: look into using std::filesystem::path here, or using a helper conversion
 	std::wstring shaderName;
 	std::wstring textureName;
 	std::wstring name;
