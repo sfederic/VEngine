@@ -36,22 +36,16 @@ bool FBXImporter::Import(const char* filename, ModelData& data, ActorSystem* act
 	importer->Import(scene);
 
 	//Remember that the root node is essentially "empty"
-	//TODO: going to have to come back here later for Skeletal Animation, as every bone is a node
-	int nodeCount = scene->GetNodeCount();
-	FbxNode* node = scene->GetNode(nodeCount - 1);
+	//TODO: going to have to come back here later for Skeletal Animation, as every bone is a node.
+	//Also, go through and do the same recursion for every forloop.
+	FbxNode* rootNode = scene->GetRootNode();
 
-	//I think the root node encapsulates the whole mesh
-	FbxMesh* mesh = node->GetMesh();
-
-	//int deformerCount = mesh->GetDeformerCount();
-
-	//for (int nodeIndex = 1; nodeIndex < nodeCount; nodeIndex++)
+	const int nodeCount = rootNode->GetChildCount();
+	for (int nodeIndex = 0; nodeIndex < nodeCount; nodeIndex++)
 	{
-		//node = scene->GetNode(nodeIndex);
-		//const char* name = node->GetName();
-		FbxNodeAttribute* attrib = node->GetNodeAttribute();
-
-		//int numDeformers = node->GetMesh()->GetDeformerCount();
+		//TODO: this is shit, you need a recursive funcion here to deal with potential node children off of this node
+		FbxNode* node = rootNode->GetChild(nodeIndex);
+		if (node == nullptr) { continue; }
 
 		FbxInt nodeFlags = node->GetAllObjectFlags();
 		if (nodeFlags & FbxPropertyFlags::eAnimated)
@@ -132,62 +126,65 @@ bool FBXImporter::Import(const char* filename, ModelData& data, ActorSystem* act
 				}
 			}
 		}
-	}
 
-	//Array setup
-	int numVerts = mesh->GetControlPointsCount();
-	int vectorSize = numVerts * mesh->GetPolygonSize(0);
-	assert((vectorSize % 3) == 0);
-	data.verts.reserve(vectorSize);
-
-	//Geometry Elements
-	FbxGeometryElementNormal* normals = mesh->GetElementNormal();
-	FbxGeometryElementUV* uvs = mesh->GetElementUV();
-
-	int polyIndexCounter = 0; //Used to index into normals and UVs on a per vertex basis
-	int polyCount = mesh->GetPolygonCount();
-
-	//Main import loop
-	for (int i = 0; i < polyCount; i++)
-	{
-		int polySize = mesh->GetPolygonSize(i);
-		assert((polySize % 3) == 0);
-
-		for (int j = 0; j < polySize; j++)
+		FbxMesh* mesh = node->GetMesh();
+		if (mesh)
 		{
-			int index = mesh->GetPolygonVertex(i, j);
+			//Array setup
+			int numVerts = mesh->GetControlPointsCount();
+			int vectorSize = numVerts * mesh->GetPolygonSize(0);
+			assert((vectorSize % 3) == 0);
+			data.verts.reserve(vectorSize);
 
-			//TODO: indices are wrong without the vertex posisitons being compressed down
-			data.indices.push_back(index);
+			//Geometry Elements
+			FbxGeometryElementNormal* normals = mesh->GetElementNormal();
+			FbxGeometryElementUV* uvs = mesh->GetElementUV();
 
-			Vertex vert = {};
-			
-			//Position
-			FbxVector4 pos = mesh->GetControlPointAt(index);
-			vert.pos.x = (float)pos.mData[0];
-			vert.pos.y = (float)pos.mData[1];
-			vert.pos.z = (float)pos.mData[2];
+			int polyIndexCounter = 0; //Used to index into normals and UVs on a per vertex basis
+			int polyCount = mesh->GetPolygonCount();
 
-			//UV
-			int uvIndex = uvs->GetIndexArray().GetAt(polyIndexCounter);
-			FbxVector2 uv = uvs->GetDirectArray().GetAt(uvIndex);
-			vert.uv.x = (float)uv.mData[0];
-			vert.uv.y = (float)uv.mData[1];
+			//Main import loop
+			for (int i = 0; i < polyCount; i++)
+			{
+				int polySize = mesh->GetPolygonSize(i);
+				assert((polySize % 3) == 0);
 
-			//Normal
-			FbxVector4 normal = normals->GetDirectArray().GetAt(polyIndexCounter);
-			vert.normal.x = (float)normal.mData[0];
-			vert.normal.y = (float)normal.mData[1];
-			vert.normal.z = (float)normal.mData[2];
+				for (int j = 0; j < polySize; j++)
+				{
+					int index = mesh->GetPolygonVertex(i, j);
 
-			data.verts.push_back(vert);
+					//TODO: indices are wrong without the vertex posisitons being compressed down
+					data.indices.push_back(index);
 
-			polyIndexCounter++;
+					Vertex vert = {};
+
+					//Position
+					FbxVector4 pos = mesh->GetControlPointAt(index);
+					vert.pos.x = (float)pos.mData[0];
+					vert.pos.y = (float)pos.mData[1];
+					vert.pos.z = (float)pos.mData[2];
+
+					//UV
+					int uvIndex = uvs->GetIndexArray().GetAt(polyIndexCounter);
+					FbxVector2 uv = uvs->GetDirectArray().GetAt(uvIndex);
+					vert.uv.x = (float)uv.mData[0];
+					vert.uv.y = (float)uv.mData[1];
+
+					//Normal
+					FbxVector4 normal = normals->GetDirectArray().GetAt(polyIndexCounter);
+					vert.normal.x = (float)normal.mData[0];
+					vert.normal.y = (float)normal.mData[1];
+					vert.normal.z = (float)normal.mData[2];
+
+					data.verts.push_back(vert);
+
+					polyIndexCounter++;
+				}
+			}
 		}
 	}
 
-	mesh->Destroy();
-	node->Destroy();
+	//Cleanup
 	scene->Destroy();
 
 	return true;

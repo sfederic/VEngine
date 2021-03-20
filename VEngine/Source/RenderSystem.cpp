@@ -251,16 +251,12 @@ void RenderSystem::CreateRasterizerStates()
 
 void RenderSystem::CreateBlendStates()
 {
+	//Remember that MSAA has to be set for AlphaToCoverage to work.
 	D3D11_BLEND_DESC alphaToCoverageDesc = {};
 	alphaToCoverageDesc.AlphaToCoverageEnable = true;
 	alphaToCoverageDesc.IndependentBlendEnable = false;
 	alphaToCoverageDesc.RenderTarget[0].BlendEnable = false;
-	alphaToCoverageDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
-	alphaToCoverageDesc.RenderTarget[0].DestBlend = D3D11_BLEND_ZERO;
-	alphaToCoverageDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
-	alphaToCoverageDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
-	alphaToCoverageDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
-	alphaToCoverageDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+	alphaToCoverageDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
 	HR(device->CreateBlendState(&alphaToCoverageDesc, &blendStateAlphaToCoverage));
 }
@@ -370,6 +366,9 @@ void RenderSystem::RenderActorSystem(World* world)
 
 		//Set blend
 		{
+			//TODO: Not really a blendstate problem as a whole, need to figure out how to do pixel clipping
+			//for grass and fences and boxes and shit and make it work with a material constant buffer struct
+			//for transparent images. All it is is just an if(transparentTexture) {clip(textureColour.a - 0.01f) }
 			const FLOAT blendState[4] = { 0.f };
 			context->OMSetBlendState(blendStateAlphaToCoverage, blendState, 0xFFFFFFFF);
 		}

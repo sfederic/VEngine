@@ -67,13 +67,11 @@ int main(int argc, char *argv[])
 
 
     ActorSystem ac;
-    ac.modelName = "plane.fbx";
+    ac.modelName = "animated_cube.fbx";
     ac.shaderName = L"shaders.hlsl";
     ac.textureName = L"penguin.png";
     ac.name = L"Cubes";
     ac.CreateActors<Actor>(&gRenderSystem, 1);
-    ac.GetActor(0)->SetRotation(0.f, 180.f, 0.f);
-
 
     GetWorld()->AddActorSystem(ac);
 
@@ -84,9 +82,6 @@ int main(int argc, char *argv[])
     while (gCoreSystem.bMainLoop)
     {
         const float deltaTime = gCoreSystem.deltaTime;
-
-        Actor* actor = ac.GetActor(0);
-        LookAtRotation(GetActiveCamera()->location, actor->transform);
 
         gCoreSystem.StartTimer();
         gCoreSystem.HandleMessages();

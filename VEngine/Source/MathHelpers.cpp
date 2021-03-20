@@ -46,6 +46,7 @@ XMVECTOR RollPitchYawFromMatrix(XMMATRIX m)
 }
 
 //Direction will usually be your forward vector for an actor/billboard.
+//TODO: make a billboard component or gizmos for lights or whatever
 void LookAtRotation(XMVECTOR lookAtPoint, XMMATRIX& m)
 {
     //lookAtPoint.m128_f32[3] = 0.f;
