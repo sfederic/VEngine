@@ -10,8 +10,8 @@ struct Vertex
 	XMFLOAT3 pos;
 	XMFLOAT2 uv;
 	XMFLOAT3 normal;
-	XMFLOAT3 weights;
-	XMUINT4 boneIndices;
+	float weights[3];
+	uint32_t boneIndices[4];
 };
 
 struct Matrices

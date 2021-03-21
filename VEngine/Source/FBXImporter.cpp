@@ -252,16 +252,17 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 					BoneWeights* boneData = &boneWeightsMap.find(index)->second;
 					if (boneData)
 					{
-						vert.weights = XMFLOAT3(
-							boneData->weights[0],
-							boneData->weights[1],
-							boneData->weights[2]);
+						//TODO: I wish I could think of a better way to do this.
+						//There must be a way to merge the above cluster FBX code and the vertices.
+						for (int i = 0; i < boneData->weights.size(); i++)
+						{
+							vert.weights[i] = boneData->weights[i];
+						}
 
-						vert.boneIndices = XMUINT4(
-							boneWeightsMap[index].vertexIndex[0],
-							boneWeightsMap[index].vertexIndex[1],
-							boneWeightsMap[index].vertexIndex[2],
-							boneWeightsMap[index].vertexIndex[3]);
+						for (int i = 0; i < boneData->weights.size(); i++)
+						{
+							vert.boneIndices[i] = boneData->vertexIndex[i];
+						}
 					}
 				}
 
