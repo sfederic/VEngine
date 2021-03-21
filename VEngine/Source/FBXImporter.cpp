@@ -91,7 +91,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 					FbxAnimLayer* animLayer = animStack->GetMember<FbxAnimLayer>(animLayerIndex);
 					if (animLayer)
 					{
-						//Feels like just getting one curve isn't the right answer here.
+						//TODO: Feels like just getting one curve isn't the right answer here.
 						FbxAnimCurveNode* curveNode = node->LclRotation.GetCurveNode(animLayer);
 						if (curveNode)
 						{
@@ -102,6 +102,8 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 								FbxAnimCurve* animCurve = curveNode->GetCurve(curveIndex);
 								int keyCount = animCurve->KeyGetCount();
 								
+								currentActorSystem->animData.boneAnimations.push_back(BoneAnimation());
+
 								for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
 								{
 									//Keys are the keyframes into the animation
@@ -140,7 +142,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 									//animFrame.pos.y = pos[1];
 									//animFrame.pos.z = pos[2];
 
-									currentActorSystem->animData.frames.push_back(animFrame);
+									currentActorSystem->animData.boneAnimations.back().frames.push_back(animFrame);
 								}
 							}
 						}

@@ -6,11 +6,18 @@ cbuffer cbPerObject : register(b0)
 	float4x4 mvp;
 };
 
+cbuffer cbSkiningData : register(b1)
+{
+	float4x4 boneTransforms[96];
+};
+
 struct VS_IN
 {
 	float3 pos : POSITION;
 	float2 uv : TEXCOORD;
 	float3 normal : NORMAL;
+	float3 boneWeight : BONEWEIGHT;
+	uint4 boneIndex : BONEINDEX;
 };
 
 struct VS_OUT

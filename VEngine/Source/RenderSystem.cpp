@@ -216,7 +216,9 @@ void RenderSystem::CreateInputLayout()
 	D3D11_INPUT_ELEMENT_DESC inputDesc[] = {
 		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, pos), D3D11_INPUT_PER_VERTEX_DATA, 0},
 		{"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, offsetof(Vertex, uv), D3D11_INPUT_PER_VERTEX_DATA, 0},
-		{"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, normal), D3D11_INPUT_PER_VERTEX_DATA, 0}
+		{"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, normal), D3D11_INPUT_PER_VERTEX_DATA, 0},
+		{"BONEWEIGHT", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, weights), D3D11_INPUT_PER_VERTEX_DATA, 0},
+		{"BONEINDEX", 0, DXGI_FORMAT_R32G32B32_UINT, 0, offsetof(Vertex, boneIndices), D3D11_INPUT_PER_VERTEX_DATA, 0}
 	};
 
 	CreateShaders();
@@ -300,6 +302,11 @@ void RenderSystem::CreateConstantBuffer()
 	//Material constant buffer	
 	material.baseColour = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
 	cbMaterial = CreateDefaultBuffer(sizeof(Material), D3D11_BIND_CONSTANT_BUFFER, &material);
+
+	//Bone Transforms constant buffer
+	cbBoneTransforms = CreateDefaultBuffer(sizeof(XMMATRIX) * boneTransformsMax,
+		D3D11_BIND_CONSTANT_BUFFER,
+		boneTransforms);
 }
 
 //Takes the actor system's texture and throws it into SRV to link with a shader.

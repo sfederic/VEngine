@@ -95,6 +95,10 @@ public:
 
 	ID3D11Buffer* cbMatrices;
 	ID3D11Buffer* cbMaterial;
+	ID3D11Buffer* cbBoneTransforms;
+
+	static const int boneTransformsMax = 96;
+	XMMATRIX boneTransforms[boneTransformsMax];
 
 	ID3DBlob* vertexCode;
 	ID3DBlob* pixelCode;
