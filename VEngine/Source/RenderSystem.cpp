@@ -362,9 +362,9 @@ void RenderSystem::CreateTexture(ActorSystem* actorSystem)
 
 void RenderSystem::RenderActorSystem(World* world)
 {
-	for (int i = 0; i < world->actorSystems.size(); i++)
+	for (int actorSystemIndex = 0; actorSystemIndex < world->actorSystems.size(); actorSystemIndex++)
 	{
-		ActorSystem* actorSystem = world->actorSystems[i];
+		ActorSystem* actorSystem = world->actorSystems[actorSystemIndex];
 
 		//Set rastState
 		if (actorSystem->GetRasterizerState())
@@ -419,31 +419,33 @@ void RenderSystem::RenderActorSystem(World* world)
 		const int cbMatrixRegister = 0;
 		const int cbMaterialRegister = 1;
 
-		for (int i = 0; i < actorSystem->actors.size(); i++)
+		for (int actorIndex = 0; actorIndex < actorSystem->actors.size(); actorIndex++)
 		{
-			if (actorSystem->actors[i]->bRender)
+			if (actorSystem->actors[actorIndex]->bRender)
 			{
-				//Animation
+				//Skinned Animation
 				if (actorSystem->bAnimated)
 				{
-					AnimationClip* currentClip = &actorSystem->skinnedData.animationClips["test"];
-					for (int i = 0; i < currentClip->boneAnimations.size(); i++)
+					AnimationClip* currentClip = &actorSystem->skinnedData.animationClips.find("test")->second;
+					for (int boneIndex = 0; boneIndex < currentClip->boneAnimations.size(); boneIndex++)
 					{
-
-						actorSystem->actors[i]->currentAnimationTime += gCoreSystem.deltaTime;
-						if (actorSystem->actors[i]->currentAnimationTime >= currentClip->GetEndClipTime())
+						actorSystem->actors[actorIndex]->currentAnimationTime += gCoreSystem.deltaTime;
+						if (actorSystem->actors[actorIndex]->currentAnimationTime >= currentClip->GetEndClipTime())
 						{
-							actorSystem->actors[i]->currentAnimationTime = 0.0;
+							actorSystem->actors[actorIndex]->currentAnimationTime = 0.0;
 						}
 
 						//TODO: need to find a way to handle actor TRS so that not only animation ones are playing
-						currentClip->Interpolate(actorSystem->actors[i]->currentAnimationTime, boneTransforms);
+						currentClip->Interpolate(actorSystem->actors[actorIndex]->currentAnimationTime, boneTransforms);
 					}
+
+					//Update bones constant buffer
+					context->UpdateSubresource(cbBoneTransforms, 0, nullptr, &boneTransforms, 0, 0);
 				}
 
 				//Set Matrix constant buffer
 				matrices.view = GetActiveCamera()->view;
-				matrices.model = actorSystem->actors[i]->transform;
+				matrices.model = actorSystem->actors[actorIndex]->transform;
 				matrices.mvp = matrices.model * matrices.view * matrices.proj;
 				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 				context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);

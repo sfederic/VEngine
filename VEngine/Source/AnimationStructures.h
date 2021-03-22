@@ -56,5 +56,5 @@ public:
 
 	std::vector<int> boneHierarchy;
 	std::vector<DirectX::XMFLOAT4X4> boneOffsets;
-	std::unordered_map<const char*, AnimationClip> animationClips;
+	std::unordered_map<std::string, AnimationClip> animationClips;
 };
