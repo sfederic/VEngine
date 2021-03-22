@@ -13,6 +13,8 @@
 //NOTE: For the most part, not going to use FBX models with lights, cameras and extra nodes. One model should suffice. Import() code reflects that.
 //NOTE: Models needto be triangluated, not working with control points (see asserts() below)
 
+
+//TODO: these globals are getting messy, might as well put them in the class and instantiate it.
 FbxManager* manager;
 FbxIOSettings* ioSetting;
 FbxImporter* importer;
@@ -75,13 +77,12 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 	int childNodeCount = node->GetChildCount();
 	for (int i = 0; i < childNodeCount; i++)
 	{
+		uint32_t previousBoneIndex = currentBoneIndex;
 		ProcessAllChildNodes(node->GetChild(i));
+		currentBoneIndex = previousBoneIndex;
 	}
 
 	FbxScene* scene = node->GetScene();
-	
-	currentActorSystem->skinnedData.boneHierarchy.push_back(currentBoneIndex);
-	currentBoneIndex++;
 
 	FbxInt nodeFlags = node->GetAllObjectFlags();
 	if (nodeFlags & FbxPropertyFlags::eAnimated)
@@ -121,6 +122,12 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 
 								AnimationClip* currentClip = &currentAnimClip->second;
 								currentClip->boneAnimations.push_back(BoneAnimation());
+
+								//Get bone's initial offset.
+								FbxMatrix boneMat = animEvaluator->GetNodeGlobalTransform(node)
+								currentActorSystem->skinnedData.boneOffsets.push_back(
+									
+								);
 
 								for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
 								{
@@ -291,5 +298,12 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 				polyIndexCounter++;
 			}
 		}
+	}
+
+	//Add bone index to actorsystem skindata.
+	if (node)
+	{
+		currentActorSystem->skinnedData.boneHierarchy.push_back(currentBoneIndex);
+		currentBoneIndex++;
 	}
 }

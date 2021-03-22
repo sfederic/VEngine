@@ -1,8 +1,10 @@
 #pragma once
 
 #include <DirectXMath.h>
+#include <fbxsdk/core/math/fbxmatrix.h>
 
 using namespace DirectX;
+
 
 void MatrixAddScale(float s, XMMATRIX& m);
 XMVECTOR XMVectorRight();
@@ -12,3 +14,4 @@ XMVECTOR XMVectorForward();
 XMVECTOR RollPitchYawFromMatrix(XMMATRIX m);
 
 void LookAtRotation(XMVECTOR lookAtPoint, XMMATRIX& m);
+XMFLOAT4X4 FbxMatrixToDirectXMathMatrix(fbxsdk::FbxMatrix fbxMatrix);
