@@ -33,12 +33,34 @@ void BoneAnimation::Interpolate(float t, DirectX::XMFLOAT4X4& m)
 
 float AnimationClip::GetStartClipTime()
 {
-	return 0.f;
+	float startTime = 0.f;
+	float tempStartTime = 0.f;
+	for (int i = 0; i < boneAnimations.size(); i++)
+	{
+		tempStartTime = boneAnimations[i].GetStartTime();
+		if (tempStartTime >= startTime)
+		{
+			startTime = tempStartTime;
+		}
+	}
+
+	return startTime;
 }
 
 float AnimationClip::GetEndClipTime()
 {
-	return 0.f;
+	float endTime = 0.f;
+	float tempEndTime = 0.f;
+	for (int i = 0; i < boneAnimations.size(); i++)
+	{
+		tempEndTime = boneAnimations[i].GetEndTime();
+		if (tempEndTime >= endTime)
+		{
+			endTime = tempEndTime;
+		}
+	}
+
+	return endTime;
 }
 
 void AnimationClip::Interpolate(float t, std::vector<DirectX::XMFLOAT4X4>& boneTransforms)
@@ -54,7 +76,7 @@ void SkinnedData::GetFinalTransforms(const std::string& clipName, float timePos,
 	uint32_t numBones = boneOffsets.size();
 	std::vector<XMFLOAT4X4> toParentTransforms(numBones);
 
-	auto clip = animationClips.find(clipName)->second;
+	auto clip = animationClips.find(clipName.c_str())->second;
 	clip.Interpolate(timePos, toParentTransforms);
 
 	std::vector<XMFLOAT4X4> toRootTransforms(numBones);

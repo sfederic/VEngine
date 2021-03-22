@@ -175,7 +175,7 @@ public:
 
 	ModelData modelData;
 	
-	AnimationClip animData;
+	SkinnedData skinnedData;
 
 	PipelineView pso;
 

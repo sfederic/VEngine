@@ -20,12 +20,12 @@ struct BoneAnimation
 {
 	float GetStartTime()
 	{
-		return 0.f;
+		return frames.front().time;
 	}
 
 	float GetEndTime()
 	{
-		return 0.f;
+		return frames.back().time;
 	}
 
 	void Interpolate(float t, DirectX::XMFLOAT4X4& m);
@@ -49,9 +49,12 @@ class SkinnedData
 public:
 	void GetFinalTransforms(const std::string& clipName, float timePos, std::vector<DirectX::XMFLOAT4X4>& finalTransforms);
 
-	uint32_t GetBoneCount();
+	uint32_t GetBoneCount()
+	{
+		return boneOffsets.size();
+	}
 
 	std::vector<int> boneHierarchy;
 	std::vector<DirectX::XMFLOAT4X4> boneOffsets;
-	std::unordered_map<std::string, AnimationClip> animationClips;
+	std::unordered_map<const char*, AnimationClip> animationClips;
 };

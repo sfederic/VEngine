@@ -303,10 +303,15 @@ void RenderSystem::CreateConstantBuffer()
 	material.baseColour = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
 	cbMaterial = CreateDefaultBuffer(sizeof(Material), D3D11_BIND_CONSTANT_BUFFER, &material);
 
+	for (int i = 0; i < boneTransformsMax; i++)
+	{
+		boneTransforms.push_back(XMFLOAT4X4());
+	}
+
 	//Bone Transforms constant buffer
 	cbBoneTransforms = CreateDefaultBuffer(sizeof(XMMATRIX) * boneTransformsMax,
 		D3D11_BIND_CONSTANT_BUFFER,
-		boneTransforms);
+		boneTransforms.data());
 }
 
 //Takes the actor system's texture and throws it into SRV to link with a shader.
@@ -421,17 +426,19 @@ void RenderSystem::RenderActorSystem(World* world)
 				//Animation
 				if (actorSystem->bAnimated)
 				{
-					actorSystem->actors[i]->currentAnimationTime += gCoreSystem.deltaTime;
-					if (actorSystem->actors[i]->currentAnimationTime >= actorSystem->animData.GetEndTime())
+					AnimationClip* currentClip = &actorSystem->skinnedData.animationClips["test"];
+					for (int i = 0; i < currentClip->boneAnimations.size(); i++)
 					{
-						actorSystem->actors[i]->currentAnimationTime = 0.0;
-					}
 
-					XMFLOAT4X4 animationMatrix;
-					XMStoreFloat4x4(&animationMatrix, actorSystem->actors[i]->transform);
-					actorSystem->animData.Interpolate(actorSystem->actors[i]->currentAnimationTime, animationMatrix);
-					//TODO: need to find a way to handle actor TRS so that not only animation ones are playing
-					actorSystem->actors[i]->transform = XMLoadFloat4x4(&animationMatrix);
+						actorSystem->actors[i]->currentAnimationTime += gCoreSystem.deltaTime;
+						if (actorSystem->actors[i]->currentAnimationTime >= currentClip->GetEndClipTime())
+						{
+							actorSystem->actors[i]->currentAnimationTime = 0.0;
+						}
+
+						//TODO: need to find a way to handle actor TRS so that not only animation ones are playing
+						currentClip->Interpolate(actorSystem->actors[i]->currentAnimationTime, boneTransforms);
+					}
 				}
 
 				//Set Matrix constant buffer

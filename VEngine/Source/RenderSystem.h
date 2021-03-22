@@ -13,6 +13,8 @@
 #include "Debug.h"
 #include "RenderTypes.h"
 
+//TODO: want a Qt Widget where you can see that current global Rast/blend states and so on.
+
 using namespace DirectX;
 
 class Sampler;
@@ -98,7 +100,7 @@ public:
 	ID3D11Buffer* cbBoneTransforms;
 
 	static const int boneTransformsMax = 96;
-	XMMATRIX boneTransforms[boneTransformsMax];
+	std::vector<DirectX::XMFLOAT4X4> boneTransforms;
 
 	ID3DBlob* vertexCode;
 	ID3DBlob* pixelCode;

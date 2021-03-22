@@ -40,6 +40,11 @@ bool FBXImporter::Import(const char* filename, ModelData& data, ActorSystem* act
 	//Set importer fields.
 	currentActorSystem = actorSystem;
 
+	//Set single animation clip for now.
+	AnimationClip* animClip = new AnimationClip();
+	std::string animName("test");
+	currentActorSystem->skinnedData.animationClips[animName.c_str()] = AnimationClip();
+
 	FbxScene* scene = FbxScene::Create(manager, "scene0");
 	importer->Import(scene);
 
@@ -102,7 +107,8 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 								FbxAnimCurve* animCurve = curveNode->GetCurve(curveIndex);
 								int keyCount = animCurve->KeyGetCount();
 								
-								currentActorSystem->animData.boneAnimations.push_back(BoneAnimation());
+								AnimationClip* currentClip = &currentActorSystem->skinnedData.animationClips["test"];
+								currentClip->boneAnimations.push_back(BoneAnimation());
 
 								for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
 								{
@@ -142,7 +148,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 									//animFrame.pos.y = pos[1];
 									//animFrame.pos.z = pos[2];
 
-									currentActorSystem->animData.boneAnimations.back().frames.push_back(animFrame);
+									currentClip->boneAnimations.back().frames.push_back(animFrame);
 								}
 							}
 						}
