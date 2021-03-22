@@ -64,8 +64,9 @@ void LookAtRotation(XMVECTOR lookAtPoint, XMMATRIX& m)
 
 XMFLOAT4X4 FbxMatrixToDirectXMathMatrix(fbxsdk::FbxMatrix fbxMatrix)
 {
-    return XMFLOAT4X4(fbxMatrix.mData[0].mData[0], fbxMatrix.mData[0].mData[1], fbxMatrix.mData[0].mData[2], fbxMatrix.mData[0].mData[3],
-        fbxMatrix.mData[1].mData[0], fbxMatrix.mData[1].mData[1], fbxMatrix.mData[1].mData[2], fbxMatrix.mData[1].mData[3],
-        fbxMatrix.mData[2].mData[0], fbxMatrix.mData[2].mData[1], fbxMatrix.mData[2].mData[2], fbxMatrix.mData[2].mData[3],
-        fbxMatrix.mData[3].mData[0], fbxMatrix.mData[3].mData[1], fbxMatrix.mData[3].mData[2], fbxMatrix.mData[3].mData[3]);
+    //TODO: Fbx likes to work in units of 100. Either do the division or make like UE4.
+    return XMFLOAT4X4(fbxMatrix.mData[0].mData[0] / 100.0, fbxMatrix.mData[0].mData[1] / 100.0, fbxMatrix.mData[0].mData[2] / 100.0, fbxMatrix.mData[0].mData[3] / 100.0,
+        fbxMatrix.mData[1].mData[0] / 100.0, fbxMatrix.mData[1].mData[1] / 100.0, fbxMatrix.mData[1].mData[2] / 100.0, fbxMatrix.mData[1].mData[3] / 100.0,
+        fbxMatrix.mData[2].mData[0] / 100.0, fbxMatrix.mData[2].mData[1] / 100.0, fbxMatrix.mData[2].mData[2] / 100.0, fbxMatrix.mData[2].mData[3] / 100.0,
+        fbxMatrix.mData[3].mData[0] / 100.0, fbxMatrix.mData[3].mData[1] / 100.0, fbxMatrix.mData[3].mData[2] / 100.0, fbxMatrix.mData[3].mData[3] / 100.0);
 }

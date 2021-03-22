@@ -3,6 +3,7 @@
 #include "Debug.h"
 #include "Actor.h"
 #include "RenderSystem.h"
+#include "MathHelpers.h"
 #include "Animationstructures.h"
 #include <unordered_map>
 
@@ -124,10 +125,8 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 								currentClip->boneAnimations.push_back(BoneAnimation());
 
 								//Get bone's initial offset.
-								FbxMatrix boneMat = animEvaluator->GetNodeGlobalTransform(node)
-								currentActorSystem->skinnedData.boneOffsets.push_back(
-									
-								);
+								FbxMatrix boneMat = animEvaluator->GetNodeGlobalTransform(node);
+								currentActorSystem->skinnedData.boneOffsets.push_back(FbxMatrixToDirectXMathMatrix(boneMat));
 
 								for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
 								{
