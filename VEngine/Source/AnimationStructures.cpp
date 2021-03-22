@@ -65,6 +65,8 @@ float AnimationClip::GetEndClipTime()
 
 void AnimationClip::Interpolate(float t, std::vector<DirectX::XMFLOAT4X4>& boneTransforms)
 {
+	assert(boneTransforms.size() < 96); //TODO: clean this magic number up
+
 	for (int i = 0; i < boneAnimations.size(); i++)
 	{
 		boneAnimations[i].Interpolate(t, boneTransforms[i]);
@@ -76,7 +78,7 @@ void SkinnedData::GetFinalTransforms(const std::string& clipName, float timePos,
 	uint32_t numBones = boneOffsets.size();
 	std::vector<XMFLOAT4X4> toParentTransforms(numBones);
 
-	auto clip = animationClips.find(clipName.c_str())->second;
+	auto clip = animationClips.find(clipName)->second;
 	clip.Interpolate(timePos, toParentTransforms);
 
 	std::vector<XMFLOAT4X4> toRootTransforms(numBones);

@@ -427,17 +427,17 @@ void RenderSystem::RenderActorSystem(World* world)
 				if (actorSystem->bAnimated)
 				{
 					AnimationClip* currentClip = &actorSystem->skinnedData.animationClips.find("test")->second;
-					for (int boneIndex = 0; boneIndex < currentClip->boneAnimations.size(); boneIndex++)
-					{
-						actorSystem->actors[actorIndex]->currentAnimationTime += gCoreSystem.deltaTime;
-						if (actorSystem->actors[actorIndex]->currentAnimationTime >= currentClip->GetEndClipTime())
-						{
-							actorSystem->actors[actorIndex]->currentAnimationTime = 0.0;
-						}
 
-						//TODO: need to find a way to handle actor TRS so that not only animation ones are playing
-						currentClip->Interpolate(actorSystem->actors[actorIndex]->currentAnimationTime, boneTransforms);
+					actorSystem->actors[actorIndex]->currentAnimationTime += gCoreSystem.deltaTime;
+					if (actorSystem->actors[actorIndex]->currentAnimationTime >= currentClip->GetEndClipTime())
+					{
+						actorSystem->actors[actorIndex]->currentAnimationTime = 0.0;
 					}
+
+					//TODO: need to find a way to handle actor TRS so that not only animation ones are playing
+					actorSystem->skinnedData.GetFinalTransforms("test",
+						actorSystem->actors[actorIndex]->currentAnimationTime,
+						boneTransforms);
 
 					//Update bones constant buffer
 					context->UpdateSubresource(cbBoneTransforms, 0, nullptr, &boneTransforms, 0, 0);

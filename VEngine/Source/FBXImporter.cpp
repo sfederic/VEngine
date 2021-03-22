@@ -21,6 +21,8 @@ FbxAnimEvaluator* animEvaluator;
 
 ActorSystem* currentActorSystem;
 
+uint32_t currentBoneIndex = 0;
+
 void FBXImporter::Init()
 {
 	manager = FbxManager::Create();
@@ -63,6 +65,8 @@ bool FBXImporter::Import(const char* filename, ModelData& data, ActorSystem* act
 	currentActorSystem = nullptr;
 	animEvaluator = nullptr;
 
+	currentBoneIndex = 0;
+
 	return true;
 }
 
@@ -76,6 +80,9 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 
 	FbxScene* scene = node->GetScene();
 	
+	currentActorSystem->skinnedData.boneHierarchy.push_back(currentBoneIndex);
+	currentBoneIndex++;
+
 	FbxInt nodeFlags = node->GetAllObjectFlags();
 	if (nodeFlags & FbxPropertyFlags::eAnimated)
 	{
@@ -194,9 +201,9 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 						continue;
 					}
 
-					if (boneWeightsMap[index].vertexIndex.size() < 4)
+					if (boneWeightsMap[index].boneIndex.size() < 4)
 					{
-						boneWeightsMap[index].vertexIndex.push_back(index);
+						boneWeightsMap[index].boneIndex.push_back(currentBoneIndex);
 					}
 
 					if (boneWeightsMap[index].weights.size() < 3)
@@ -274,7 +281,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 
 						for (int i = 0; i < boneData->weights.size(); i++)
 						{
-							vert.boneIndices[i] = boneData->vertexIndex[i];
+							vert.boneIndices[i] = boneData->boneIndex[i];
 						}
 					}
 				}

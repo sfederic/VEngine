@@ -47,5 +47,5 @@ struct ModelData
 struct BoneWeights
 {
 	std::vector<float> weights;
-	std::vector<uint32_t> vertexIndex;
+	std::vector<uint32_t> boneIndex;
 };
