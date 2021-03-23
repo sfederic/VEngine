@@ -305,7 +305,12 @@ void RenderSystem::CreateConstantBuffer()
 
 	for (int i = 0; i < boneTransformsMax; i++)
 	{
-		boneTransforms.push_back(XMFLOAT4X4());
+		boneTransforms.push_back(XMFLOAT4X4(
+			1.f, 0.f, 0.f, 0.f,
+			0.f, 1.f, 0.f, 0.f,
+			0.f, 0.f, 1.f, 0.f, 
+			0.f, 0.f, 0.f, 1.f
+			));
 	}
 
 	//Bone Transforms constant buffer
@@ -441,6 +446,7 @@ void RenderSystem::RenderActorSystem(World* world)
 
 					//Update bones constant buffer
 					context->UpdateSubresource(cbBoneTransforms, 0, nullptr, &boneTransforms, 0, 0);
+					context->VSSetConstantBuffers(1, 1, &cbBoneTransforms);
 				}
 
 				//Set Matrix constant buffer

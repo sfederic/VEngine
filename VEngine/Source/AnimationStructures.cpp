@@ -84,7 +84,7 @@ void SkinnedData::GetFinalTransforms(const std::string& clipName, float timePos,
 	std::vector<XMFLOAT4X4> toRootTransforms(numBones);
 	toRootTransforms[0] = toParentTransforms[0];
 
-	for (int i = 1; i < numBones; i++)
+	for (int i = 0; i < numBones; i++)
 	{
 		XMMATRIX toParent = XMLoadFloat4x4(&toParentTransforms[i]);
 		int parentIndex = boneHierarchy[i];

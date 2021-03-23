@@ -22,7 +22,7 @@ VS_OUT VSMain(VS_IN i)
 		normalL += weights[boneIndex] * mul(i.normal, (float3x3)boneTransforms[i.boneIndex[boneIndex]]);
 	}
 
-	o.pos = mul(float4(posL, 1.0f), model);
+	o.pos = mul(mvp, float4(posL, 1.0f));
 	o.normal = mul(normalL, (float3x3)model);
 
 	return o;

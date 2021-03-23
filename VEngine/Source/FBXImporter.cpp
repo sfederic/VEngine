@@ -6,6 +6,7 @@
 #include "MathHelpers.h"
 #include "Animationstructures.h"
 #include <unordered_map>
+#include <algorithm>
 
 //REF: https://github.com/peted70/hololens-fbx-viewer/tree/master/HolographicAppForOpenGLES1/include
 //REF: https://peted.azurewebsites.net/hololens-fbx-loading-c/
@@ -58,6 +59,9 @@ bool FBXImporter::Import(const char* filename, ModelData& data, ActorSystem* act
 
 	FbxNode* rootNode = scene->GetRootNode();
 
+	currentBoneIndex = 0;
+	currentActorSystem->skinnedData.boneHierarchy.clear();
+
 	int childNodeCount = rootNode->GetChildCount();
 	for (int i = 0; i < childNodeCount; i++)
 	{
@@ -65,6 +69,7 @@ bool FBXImporter::Import(const char* filename, ModelData& data, ActorSystem* act
 	}
 
 	scene->Destroy();
+
 	currentActorSystem = nullptr;
 	animEvaluator = nullptr;
 
@@ -78,9 +83,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 	int childNodeCount = node->GetChildCount();
 	for (int i = 0; i < childNodeCount; i++)
 	{
-		uint32_t previousBoneIndex = currentBoneIndex;
 		ProcessAllChildNodes(node->GetChild(i));
-		currentBoneIndex = previousBoneIndex;
 	}
 
 	FbxScene* scene = node->GetScene();
@@ -123,6 +126,9 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 
 								AnimationClip* currentClip = &currentAnimClip->second;
 								currentClip->boneAnimations.push_back(BoneAnimation());
+
+								currentActorSystem->skinnedData.boneHierarchy.push_back(currentBoneIndex);
+								currentBoneIndex++;
 
 								//Get bone's initial offset.
 								FbxMatrix boneMat = animEvaluator->GetNodeGlobalTransform(node);
@@ -297,12 +303,5 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 				polyIndexCounter++;
 			}
 		}
-	}
-
-	//Add bone index to actorsystem skindata.
-	if (node)
-	{
-		currentActorSystem->skinnedData.boneHierarchy.push_back(currentBoneIndex);
-		currentBoneIndex++;
 	}
 }
