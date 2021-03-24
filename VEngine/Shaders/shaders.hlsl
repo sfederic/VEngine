@@ -10,13 +10,11 @@ VS_OUT VSMain(VS_IN i)
 	float weights[4] = { 0.f, 0.f, 0.f, 0.f };
 	weights[0] = i.boneWeight.x;
 	weights[1] = i.boneWeight.y;
-	weights[2] = i.boneWeight.z;
-	weights[3] = 1.0f - weights[0] - weights[1] - weights[2];
 
 	float3 posL = float3(0.0f, 0.0f, 0.0f);
 	float3 normalL = float3(0.0f, 0.0f, 0.0f);
 	
-	for (int boneIndex = 0; boneIndex < 4; boneIndex++) 
+	for (int boneIndex = 0; boneIndex < 2; boneIndex++) 
 	{
 		posL += weights[boneIndex] * mul(float4(i.pos, 1.0f), boneTransforms[i.boneIndex[boneIndex]]).xyz;
 		normalL += weights[boneIndex] * mul(i.normal, (float3x3)boneTransforms[i.boneIndex[boneIndex]]);

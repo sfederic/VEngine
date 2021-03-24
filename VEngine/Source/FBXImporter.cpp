@@ -80,6 +80,9 @@ bool FBXImporter::Import(const char* filename, ModelData& data, ActorSystem* act
 
 void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 {
+	currentActorSystem->skinnedData.boneHierarchy.push_back(currentBoneIndex);
+	currentBoneIndex++;
+
 	int childNodeCount = node->GetChildCount();
 	for (int i = 0; i < childNodeCount; i++)
 	{
@@ -87,6 +90,13 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 	}
 
 	FbxScene* scene = node->GetScene();
+
+	//TODO: eventually need to go through every attribute like this and deal with the data recursively.
+	/*FbxNodeAttribute* attrib = node->GetNodeAttribute();
+	if (attrib->GetAttributeType() == FbxNodeAttribute::eSkeleton)
+	{
+		throw;
+	}*/
 
 	FbxInt nodeFlags = node->GetAllObjectFlags();
 	if (nodeFlags & FbxPropertyFlags::eAnimated)
@@ -112,12 +122,11 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 						if (curveNode)
 						{
 							int numCurveNodes = curveNode->GetCurveCount(0);
-
 							for (int curveIndex = 0; curveIndex < numCurveNodes; curveIndex++)
 							{
 								FbxAnimCurve* animCurve = curveNode->GetCurve(curveIndex);
 								int keyCount = animCurve->KeyGetCount();
-								
+
 								auto currentAnimClip = currentActorSystem->skinnedData.animationClips.find("test");
 								if (currentAnimClip == currentActorSystem->skinnedData.animationClips.end())
 								{
@@ -125,10 +134,9 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 								}
 
 								AnimationClip* currentClip = &currentAnimClip->second;
+								BoneAnimation boneAnim = BoneAnimation();
+								boneAnim.name = node->GetNameOnly();
 								currentClip->boneAnimations.push_back(BoneAnimation());
-
-								currentActorSystem->skinnedData.boneHierarchy.push_back(currentBoneIndex);
-								currentBoneIndex++;
 
 								//Get bone's initial offset.
 								FbxMatrix boneMat = animEvaluator->GetNodeGlobalTransform(node);

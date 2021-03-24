@@ -30,6 +30,8 @@ struct BoneAnimation
 
 	void Interpolate(float t, DirectX::XMFLOAT4X4& m);
 
+	std::string name;
+
 	std::vector<AnimFrame> frames;
 };
 

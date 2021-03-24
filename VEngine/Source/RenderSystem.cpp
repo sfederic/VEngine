@@ -217,8 +217,8 @@ void RenderSystem::CreateInputLayout()
 		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, pos), D3D11_INPUT_PER_VERTEX_DATA, 0},
 		{"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, offsetof(Vertex, uv), D3D11_INPUT_PER_VERTEX_DATA, 0},
 		{"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, normal), D3D11_INPUT_PER_VERTEX_DATA, 0},
-		{"BONEWEIGHT", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, weights), D3D11_INPUT_PER_VERTEX_DATA, 0},
-		{"BONEINDEX", 0, DXGI_FORMAT_R32G32B32_UINT, 0, offsetof(Vertex, boneIndices), D3D11_INPUT_PER_VERTEX_DATA, 0}
+		{"BONEWEIGHT", 0, DXGI_FORMAT_R32G32_FLOAT, 0, offsetof(Vertex, weights), D3D11_INPUT_PER_VERTEX_DATA, 0},
+		{"BONEINDEX", 0, DXGI_FORMAT_R32G32_UINT, 0, offsetof(Vertex, boneIndices), D3D11_INPUT_PER_VERTEX_DATA, 0}
 	};
 
 	CreateShaders();
@@ -439,6 +439,8 @@ void RenderSystem::RenderActorSystem(World* world)
 						actorSystem->actors[actorIndex]->currentAnimationTime = 0.0;
 					}
 
+					//currentClip->Interpolate(actorSystem->actors[actorIndex]->currentAnimationTime, boneTransforms);
+
 					//TODO: need to find a way to handle actor TRS so that not only animation ones are playing
 					actorSystem->skinnedData.GetFinalTransforms("test",
 						actorSystem->actors[actorIndex]->currentAnimationTime,
@@ -446,7 +448,7 @@ void RenderSystem::RenderActorSystem(World* world)
 
 					//Update bones constant buffer
 					context->UpdateSubresource(cbBoneTransforms, 0, nullptr, &boneTransforms, 0, 0);
-					context->VSSetConstantBuffers(1, 1, &cbBoneTransforms);
+					context->VSSetConstantBuffers(2, 1, &cbBoneTransforms);
 				}
 
 				//Set Matrix constant buffer

@@ -73,7 +73,6 @@ int main(int argc, char *argv[])
     ac.textureName = L"texture2.jpg";
     ac.name = L"Cubes";
     ac.CreateActors<Actor>(&gRenderSystem, 1);
-    //ac.GetActor(0)->SetRotation(0.f, 90.f, 0.f);
 
     GetWorld()->AddActorSystem(ac);
 
