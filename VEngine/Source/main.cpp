@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
 
     ActorSystem ac;
     //ac.modelName = "bone_cylinder.fbx";
-    ac.modelName = "animated_cube.fbx";
+    ac.modelName = "material_test_cube.fbx";
     ac.shaderName = L"shaders.hlsl";
     ac.textureName = L"texture2.jpg";
     ac.name = L"Cubes";

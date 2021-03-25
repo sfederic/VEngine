@@ -120,6 +120,8 @@ public:
 				std::wstring indexString = std::to_wstring(i);
 				actor->name += indexString;
 
+				actor->material = this->material;
+
 				actors.push_back(actor);
 			}
 		}
@@ -178,6 +180,8 @@ public:
 	//SkinnedData skinnedData;
 	Animation animData;
 
+	Material material;
+
 	PipelineView pso;
 
 	BoundingBox boundingBox;
@@ -196,6 +200,6 @@ public:
 	std::string modelName;
 
 	bool bInstancingActors; //bool for setting system to use instancing
-	bool bAnimated; //Whether model has any animation data. Is set in FBX import.
+	bool bAnimated = false; //Whether model has any animation data. Is set in FBX import.
 	bool bHasSkeletalAnimation;
 };

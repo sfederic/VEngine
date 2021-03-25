@@ -6,6 +6,11 @@ cbuffer cbPerObject : register(b0)
 	float4x4 mvp;
 };
 
+cbuffer cbMaterials : register(b1)
+{
+	float4 ambient;
+}
+
 cbuffer cbSkiningData : register(b2)
 {
 	float4x4 boneTransforms[96];

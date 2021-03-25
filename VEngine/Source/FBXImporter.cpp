@@ -91,10 +91,6 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 		int numAnimStacks = scene->GetSrcObjectCount<FbxAnimStack>();
 		for (int animStackIndex = 0; animStackIndex < numAnimStacks; animStackIndex++)
 		{
-			//TODO: This isn't too bad, but FBX file without animation still have eAnimated flags set
-			//(for some reason) so placing this here is the quick fix. Better fix is doing this in the component.
-			currentActorSystem->bAnimated = true;
-
 			FbxAnimStack* animStack = scene->GetSrcObject<FbxAnimStack>(animStackIndex);
 			if (animStack)
 			{
@@ -113,6 +109,10 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 							{
 								FbxAnimCurve* animCurve = curveNode->GetCurve(curveIndex);
 								int keyCount = animCurve->KeyGetCount();
+
+								//TODO: This isn't too bad, but FBX file without animation still have eAnimated flags set
+								//(for some reason) so placing this here is the quick fix. Better fix is doing this in the component.
+								currentActorSystem->bAnimated = true;
 
 								for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
 								{
@@ -206,6 +206,22 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 				}
 			}
 		}*/
+
+		//Material 
+		int materialCount = node->GetMaterialCount();
+		for (int materialIndex = 0; materialIndex < materialCount; materialIndex++)
+		{
+			FbxSurfacePhong* material = (FbxSurfacePhong*)node->GetMaterial(materialIndex);
+			FbxClassId surfaceID = material->GetClassId();
+			FbxDouble3 ambient = material->Ambient.Get();
+
+			Material mat = {};
+			mat.baseColour.x = ambient.mData[0];
+			mat.baseColour.y = ambient.mData[1];
+			mat.baseColour.z = ambient.mData[2];
+			mat.baseColour.w = 1.0f;
+			currentActorSystem->material = mat;
+		}
 
 		//Array setup
 		int numVerts = mesh->GetControlPointsCount();

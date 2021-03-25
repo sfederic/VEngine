@@ -435,8 +435,7 @@ void RenderSystem::RenderActorSystem(World* world)
 				context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 				//Set material constant buffer
-				//TODO: set material per actor/system
-				//material.colour = actor.color etc.
+				material = actorSystem->material;
 				context->UpdateSubresource(cbMaterial, 0, nullptr, &material, 0, 0);
 				context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 
