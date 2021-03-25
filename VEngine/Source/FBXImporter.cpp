@@ -25,8 +25,6 @@ FbxAnimEvaluator* animEvaluator;
 
 ActorSystem* currentActorSystem;
 
-uint32_t currentBoneIndex = 0;
-
 void FBXImporter::Init()
 {
 	manager = FbxManager::Create();
@@ -46,10 +44,6 @@ bool FBXImporter::Import(const char* filename, ModelData& data, ActorSystem* act
 	//Set importer fields.
 	currentActorSystem = actorSystem;
 
-	//Set single animation clip for now.
-	AnimationClip* animClip = new AnimationClip();
-	currentActorSystem->skinnedData.animationClips["test"] = AnimationClip();
-
 	FbxScene* scene = FbxScene::Create(manager, "scene0");
 	importer->Import(scene);
 
@@ -59,13 +53,10 @@ bool FBXImporter::Import(const char* filename, ModelData& data, ActorSystem* act
 
 	FbxNode* rootNode = scene->GetRootNode();
 
-	currentBoneIndex = 0;
-	currentActorSystem->skinnedData.boneHierarchy.clear();
-
 	int childNodeCount = rootNode->GetChildCount();
-	for (int i = 0; i < childNodeCount; i++)
+	//for (int i = 0; i < childNodeCount; i++)
 	{
-		ProcessAllChildNodes(rootNode->GetChild(i));
+		ProcessAllChildNodes(rootNode->GetChild(childNodeCount - 1));
 	}
 
 	scene->Destroy();
@@ -73,21 +64,17 @@ bool FBXImporter::Import(const char* filename, ModelData& data, ActorSystem* act
 	currentActorSystem = nullptr;
 	animEvaluator = nullptr;
 
-	currentBoneIndex = 0;
-
 	return true;
 }
 
 void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 {
-	currentActorSystem->skinnedData.boneHierarchy.push_back(currentBoneIndex);
-	currentBoneIndex++;
-
-	int childNodeCount = node->GetChildCount();
+	//Recursion code for dealing with nodes in the heirarchy. Come back to this after more work is done.
+	/*int childNodeCount = node->GetChildCount();
 	for (int i = 0; i < childNodeCount; i++)
 	{
 		ProcessAllChildNodes(node->GetChild(i));
-	}
+	}*/
 
 	FbxScene* scene = node->GetScene();
 
@@ -127,21 +114,6 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 								FbxAnimCurve* animCurve = curveNode->GetCurve(curveIndex);
 								int keyCount = animCurve->KeyGetCount();
 
-								auto currentAnimClip = currentActorSystem->skinnedData.animationClips.find("test");
-								if (currentAnimClip == currentActorSystem->skinnedData.animationClips.end())
-								{
-									throw;
-								}
-
-								AnimationClip* currentClip = &currentAnimClip->second;
-								BoneAnimation boneAnim = BoneAnimation();
-								boneAnim.name = node->GetNameOnly();
-								currentClip->boneAnimations.push_back(BoneAnimation());
-
-								//Get bone's initial offset.
-								FbxMatrix boneMat = animEvaluator->GetNodeGlobalTransform(node);
-								currentActorSystem->skinnedData.boneOffsets.push_back(FbxMatrixToDirectXMathMatrix(boneMat));
-
 								for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
 								{
 									//Keys are the keyframes into the animation
@@ -180,7 +152,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 									//animFrame.pos.y = pos[1];
 									//animFrame.pos.z = pos[2];
 
-									currentClip->boneAnimations.back().frames.push_back(animFrame);
+									currentActorSystem->animData.frames.push_back(animFrame);
 								}
 							}
 						}
@@ -195,7 +167,8 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 	FbxMesh* mesh = node->GetMesh();
 	if (mesh)
 	{
-		const int deformerCount = mesh->GetDeformerCount(FbxDeformer::eSkin);
+		//OLD WEIGHT AND BONE INDICES CODE
+		/*const int deformerCount = mesh->GetDeformerCount(FbxDeformer::eSkin);
 		for (int deformerIndex = 0; deformerIndex < deformerCount; deformerIndex++)
 		{
 			FbxSkin* skin = (FbxSkin*)mesh->GetDeformer(deformerIndex, FbxDeformer::eSkin);
@@ -232,7 +205,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 					}
 				}
 			}
-		}
+		}*/
 
 		//Array setup
 		int numVerts = mesh->GetControlPointsCount();

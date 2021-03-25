@@ -16,8 +16,6 @@ struct VS_IN
 	float3 pos : POSITION;
 	float2 uv : TEXCOORD;
 	float3 normal : NORMAL;
-	float2 boneWeight : BONEWEIGHT;
-	uint2 boneIndex : BONEINDEX;
 };
 
 struct VS_OUT

@@ -3,25 +3,9 @@
 VS_OUT VSMain(VS_IN i)
 {
 	VS_OUT o;
-	//o.pos = mul(mvp, float4(i.pos, 1.0f));
+	o.pos = mul(mvp, float4(i.pos, 1.0f));
 	o.uv = i.uv;
-	//o.normal = mul(i.normal, (float3x3)model);
-
-	float weights[4] = { 0.f, 0.f, 0.f, 0.f };
-	weights[0] = i.boneWeight.x;
-	weights[1] = i.boneWeight.y;
-
-	float3 posL = float3(0.0f, 0.0f, 0.0f);
-	float3 normalL = float3(0.0f, 0.0f, 0.0f);
-	
-	for (int boneIndex = 0; boneIndex < 2; boneIndex++) 
-	{
-		posL += weights[boneIndex] * mul(float4(i.pos, 1.0f), boneTransforms[i.boneIndex[boneIndex]]).xyz;
-		normalL += weights[boneIndex] * mul(i.normal, (float3x3)boneTransforms[i.boneIndex[boneIndex]]);
-	}
-
-	o.pos = mul(mvp, float4(posL, 1.0f));
-	o.normal = mul(normalL, (float3x3)model);
+	o.normal = mul(i.normal, (float3x3)model);
 
 	return o;
 }

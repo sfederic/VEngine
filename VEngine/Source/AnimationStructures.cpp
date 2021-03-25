@@ -2,7 +2,7 @@
 
 using namespace DirectX;
 
-void BoneAnimation::Interpolate(float t, DirectX::XMFLOAT4X4& m)
+void Animation::Interpolate(float t, DirectX::XMFLOAT4X4& m)
 {
 	for (int i = 0; i < (frames.size() - 1); i++)
 	{
@@ -28,76 +28,5 @@ void BoneAnimation::Interpolate(float t, DirectX::XMFLOAT4X4& m)
 
 			return;
 		}
-	}
-}
-
-float AnimationClip::GetStartClipTime()
-{
-	float startTime = 0.f;
-	float tempStartTime = 0.f;
-	for (int i = 0; i < boneAnimations.size(); i++)
-	{
-		tempStartTime = boneAnimations[i].GetStartTime();
-		if (tempStartTime >= startTime)
-		{
-			startTime = tempStartTime;
-		}
-	}
-
-	return startTime;
-}
-
-float AnimationClip::GetEndClipTime()
-{
-	float endTime = 0.f;
-	float tempEndTime = 0.f;
-	for (int i = 0; i < boneAnimations.size(); i++)
-	{
-		tempEndTime = boneAnimations[i].GetEndTime();
-		if (tempEndTime >= endTime)
-		{
-			endTime = tempEndTime;
-		}
-	}
-
-	return endTime;
-}
-
-void AnimationClip::Interpolate(float t, std::vector<DirectX::XMFLOAT4X4>& boneTransforms)
-{
-	assert(boneTransforms.size() < 97); //TODO: clean this magic number up
-
-	for (int i = 0; i < boneAnimations.size(); i++)
-	{
-		boneAnimations[i].Interpolate(t, boneTransforms[i]);
-	}
-}
-
-void SkinnedData::GetFinalTransforms(const std::string& clipName, float timePos, std::vector<XMFLOAT4X4>& finalTransforms)
-{
-	uint32_t numBones = boneOffsets.size();
-	std::vector<XMFLOAT4X4> toParentTransforms(numBones);
-
-	auto clip = animationClips.find(clipName)->second;
-	clip.Interpolate(timePos, toParentTransforms);
-
-	std::vector<XMFLOAT4X4> toRootTransforms(numBones);
-	toRootTransforms = boneOffsets;
-	toRootTransforms[0] = toParentTransforms[0];
-
-	for (int i = 1; i < numBones; i++)
-	{
-		XMMATRIX toParent = XMLoadFloat4x4(&toParentTransforms[i]);
-		int parentIndex = boneHierarchy[i];
-		XMMATRIX parentToRoot = XMLoadFloat4x4(&toRootTransforms[parentIndex]);
-		XMMATRIX toRoot = XMMatrixMultiply(toParent, parentToRoot);
-		XMStoreFloat4x4(&toRootTransforms[i], toRoot);
-	}
-
-	for (int i = 0; i < numBones; i++) 
-	{
-		XMMATRIX offset = XMLoadFloat4x4(&boneOffsets[i]);
-		XMMATRIX toRoot = XMLoadFloat4x4(&toRootTransforms[i]);
-		XMStoreFloat4x4(&finalTransforms[i], XMMatrixMultiply(offset, toRoot));
 	}
 }

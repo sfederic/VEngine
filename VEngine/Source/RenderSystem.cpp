@@ -302,21 +302,6 @@ void RenderSystem::CreateConstantBuffer()
 	//Material constant buffer	
 	material.baseColour = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
 	cbMaterial = CreateDefaultBuffer(sizeof(Material), D3D11_BIND_CONSTANT_BUFFER, &material);
-
-	for (int i = 0; i < boneTransformsMax; i++)
-	{
-		boneTransforms.push_back(XMFLOAT4X4(
-			1.f, 0.f, 0.f, 0.f,
-			0.f, 1.f, 0.f, 0.f,
-			0.f, 0.f, 1.f, 0.f, 
-			0.f, 0.f, 0.f, 1.f
-			));
-	}
-
-	//Bone Transforms constant buffer
-	cbBoneTransforms = CreateDefaultBuffer(sizeof(XMMATRIX) * boneTransformsMax,
-		D3D11_BIND_CONSTANT_BUFFER,
-		boneTransforms.data());
 }
 
 //Takes the actor system's texture and throws it into SRV to link with a shader.
@@ -431,24 +416,17 @@ void RenderSystem::RenderActorSystem(World* world)
 				//Skinned Animation
 				if (actorSystem->bAnimated)
 				{
-					AnimationClip* currentClip = &actorSystem->skinnedData.animationClips.find("test")->second;
-
 					actorSystem->actors[actorIndex]->currentAnimationTime += gCoreSystem.deltaTime;
-					if (actorSystem->actors[actorIndex]->currentAnimationTime >= currentClip->GetEndClipTime())
+					if (actorSystem->actors[actorIndex]->currentAnimationTime >= actorSystem->animData.GetEndTime())
 					{
 						actorSystem->actors[actorIndex]->currentAnimationTime = 0.0;
 					}
 
-					//currentClip->Interpolate(actorSystem->actors[actorIndex]->currentAnimationTime, boneTransforms);
-
 					//TODO: need to find a way to handle actor TRS so that not only animation ones are playing
-					actorSystem->skinnedData.GetFinalTransforms("test",
-						actorSystem->actors[actorIndex]->currentAnimationTime,
-						boneTransforms);
-
-					//Update bones constant buffer
-					context->UpdateSubresource(cbBoneTransforms, 0, nullptr, &boneTransforms, 0, 0);
-					context->VSSetConstantBuffers(2, 1, &cbBoneTransforms);
+					XMFLOAT4X4 animMatrix;
+					actorSystem->animData.Interpolate(actorSystem->actors[actorIndex]->currentAnimationTime, animMatrix);
+					XMMATRIX animMatrixFinal = XMLoadFloat4x4(&animMatrix);
+					actorSystem->actors[actorIndex]->transform = animMatrixFinal;
 				}
 
 				//Set Matrix constant buffer
