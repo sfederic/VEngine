@@ -143,6 +143,16 @@ void Actor::Move(float d, XMVECTOR direction)
 	SetPosition(loc);
 }
 
+ActorSystem* Actor::GetActorSystem()
+{
+	if (linkedActorSystem)
+	{
+		return linkedActorSystem;
+	}
+
+	return nullptr;
+}
+
 //ACTOR SYSTEM
 ActorSystem::ActorSystem()
 {

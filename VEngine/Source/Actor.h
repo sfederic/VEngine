@@ -54,6 +54,7 @@ public:
 	XMVECTOR GetRightVector();
 	XMVECTOR GetUpVector();
 	void Move(float d, XMVECTOR direction);
+	ActorSystem* GetActorSystem();
 
 	XMMATRIX transform = XMMatrixIdentity();
 	Material material;
@@ -65,6 +66,10 @@ public:
 	bool bPicked = false;
 
 	std::wstring name;
+
+private:
+
+	ActorSystem* linkedActorSystem;
 };
 
 struct PipelineView
@@ -121,6 +126,8 @@ public:
 				actor->name += indexString;
 
 				actor->material = this->material;
+
+				actor->linkedActorSystem = this;
 
 				actors.push_back(actor);
 			}
