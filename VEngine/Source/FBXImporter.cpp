@@ -162,7 +162,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 		}
 	}
 
-	std::unordered_map<int, BoneWeights> boneWeightsMap;
+	//std::unordered_map<int, BoneWeights> boneWeightsMap;
 
 	FbxMesh* mesh = node->GetMesh();
 	if (mesh)
@@ -260,7 +260,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 				}
 
 				//Bone Weights
-				if (boneWeightsMap.find(index) != boneWeightsMap.end())
+				/*if (boneWeightsMap.find(index) != boneWeightsMap.end())
 				{
 					BoneWeights* boneData = &boneWeightsMap.find(index)->second;
 					if (boneData)
@@ -277,7 +277,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 							vert.boneIndices[i] = boneData->boneIndex[i];
 						}
 					}
-				}
+				}*/
 
 				currentActorSystem->modelData.verts.push_back(vert);
 
