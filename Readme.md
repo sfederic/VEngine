@@ -1,3 +1,3 @@
-Qt 5.15
-Visual C++ 16.9.0
-FBX SDK 2020.1
+Qt 5.15.0
+Visual C++ 16.9.2
+FBX SDK 2020.0.1
