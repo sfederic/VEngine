@@ -67,8 +67,6 @@ public:
 
 	std::wstring name;
 
-private:
-
 	ActorSystem* linkedActorSystem;
 };
 

@@ -62,12 +62,7 @@ int main(int argc, char *argv[])
     gUISystem.Init();
     gWorldEditor.Init();
 
-    //Qt late init
-    gEditorMainWindow->worldDock->PopulateWorldList();
-
-
     ActorSystem ac;
-    //ac.modelName = "bone_cylinder.fbx";
     ac.modelName = "material_test_cube.fbx";
     ac.shaderName = L"shaders.hlsl";
     ac.textureName = L"texture2.jpg";
@@ -75,6 +70,9 @@ int main(int argc, char *argv[])
     ac.CreateActors<Actor>(&gRenderSystem, 1);
 
     GetWorld()->AddActorSystem(ac);
+
+    //Qt late init
+    gEditorMainWindow->worldDock->PopulateWorldList();
 
     gRenderSystem.Flush();
     gRenderSystem.WaitForPreviousFrame();

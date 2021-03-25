@@ -9,6 +9,8 @@
 #include <qevent.h>
 #include <qsortfilterproxymodel.h>
 #include <QListWidgetItem>
+#include "../EditorMainWindow.h"
+#include "PropertiesDock.h"
 
 QList<QTreeWidgetItem*> worldTreeItems;
 QTreeWidget* worldTreeList;
@@ -96,6 +98,7 @@ void WorldDock::ClickOnListActorSystem(QTreeWidgetItem* listItem)
     if (clickedActor)
     {
         editorCamera.ZoomTo(clickedActor);
+        gEditorMainWindow->propertiesDock->DisplayActorSystemProperties(clickedActor->GetActorSystem());
     }
 }
 
@@ -106,6 +109,7 @@ void WorldDock::ClickOnListActor(QListWidgetItem* listItem)
     if (clickedActor)
     {
         editorCamera.ZoomTo(clickedActor);
+        gEditorMainWindow->propertiesDock->DisplayActorSystemProperties(clickedActor->GetActorSystem());
     }
 }
 

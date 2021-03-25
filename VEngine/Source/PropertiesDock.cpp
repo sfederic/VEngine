@@ -18,9 +18,9 @@ void PropertiesDock::Tick()
 void PropertiesDock::DisplayActorSystemProperties(ActorSystem* actorSystem)
 {
     propWidget->actorSystemName->setText(QString::fromStdWString(actorSystem->name));
-    propWidget->actorSystemModelName->setText(QString::fromStdWString(actorSystem->shaderName));
-    propWidget->actorSystemTextureName->setText(QString::fromStdWString(actorSystem->textureName));
     propWidget->actorSystemModelName->setText(QString::fromStdString(actorSystem->modelName));
+    propWidget->actorSystemTextureName->setText(QString::fromStdWString(actorSystem->textureName));
+    propWidget->actorSystemShaderName->setText(QString::fromStdWString(actorSystem->shaderName));
 
     propWidget->selectedActorSystem = actorSystem;
 }
