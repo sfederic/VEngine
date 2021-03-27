@@ -32,6 +32,8 @@ public:
 
     void Tick();
 
+    void SetActorRenderable(bool renderCheck);
+
     void SelectShader();
     void SelectTexture();
     void SelectModel();

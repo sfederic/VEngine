@@ -188,7 +188,9 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
 
     QCheckBox* checkBox = new QCheckBox();
     checkBox->setText("Renderable");
+    checkBox->setChecked(true);
     actorSystemDetailsGrid->addWidget(checkBox, 0, 0);
+    connect(checkBox, &QCheckBox::clicked, this, &PropertiesWidget::SetActorRenderable);
 
     //Line edits 
     actorSystemName = new QLineEdit();
@@ -289,4 +291,9 @@ void PropertiesWidget::Tick()
         scaleEditY->setValue(scale.y);
         scaleEditZ->setValue(scale.z);
     }
+}
+
+void PropertiesWidget::SetActorRenderable(bool renderCheck)
+{
+    selectedActorSystem->GetActor(0)->bRender = renderCheck;
 }
