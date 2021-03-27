@@ -55,22 +55,12 @@ struct TestUIView : public UIView
 
 	void Create()
 	{
-		strings.push_back(L"Entity1");
-		strings.push_back(L"Entity2");
-		strings.push_back(L"Entity2");
-		strings.push_back(L"Entity2");
-		strings.push_back(L"Entity2");
-		strings.push_back(L"Entity2");
-		strings.push_back(L"Entity2");
-		strings.push_back(L"Entity2");
+
 	}
 
 	virtual void Tick()
 	{
-		Begin({ 0.f, 40.f, 200.f, 400.f }, L"Testing");
-		bool val;
-		DropBox(val, strings, L"Combo");
-		End();
+
 	}
 };
 
@@ -78,17 +68,6 @@ struct UIViewActor : public UIView
 {
 	virtual void Tick();
 
-	std::wstring posStringX;
-	std::wstring posStringY;
-	std::wstring posStringZ;
-
-	std::wstring scaleStringX;
-	std::wstring scaleStringY;
-	std::wstring scaleStringZ;
-
-	std::wstring rotStringX;
-	std::wstring rotStringY;
-	std::wstring rotStringZ;
 };
 
 template<typename T>

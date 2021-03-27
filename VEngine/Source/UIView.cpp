@@ -275,31 +275,7 @@ bool bTest = false;
 
 void UIViewActor::Tick()
 {
-	//TODO: There has to be a better way to do this. pickedActor conflicts with the world editor raycasting
-	if (gWorldEditor.pickedActor)
-	{
-		Begin({ gCoreSystem.windowWidth - 300.f, 40.f, (float)gCoreSystem.windowWidth, (float)gCoreSystem.windowHeight }, L"Properties");
 
-		Actor* actor = GetWorld()->GetActor(gWorldEditor.actorSystemIndex, gWorldEditor.actorIndex);
-		if (actor)
-		{
-			Text(L"Position");
-			Edit(actor->transform.r[3].m128_f32[0], posStringX);
-			Edit(actor->transform.r[3].m128_f32[1], posStringY);
-			Edit(actor->transform.r[3].m128_f32[2], posStringZ);
-
-			Text(L"Scale");
-			Edit(actor->transform.r[0].m128_f32[0], scaleStringX);
-			Edit(actor->transform.r[1].m128_f32[1], scaleStringY);
-			Edit(actor->transform.r[2].m128_f32[2], scaleStringZ);
-
-			NewLine();
-			CheckBox(L"Check box test", bTest);
-			Button(L"Test BUtton");
-		}
-
-		End();
-	}
 }
 
 void Toolbar::Tick()
