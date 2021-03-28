@@ -234,7 +234,6 @@ void WorldEditor::Init()
 
 	translationGizmos.CreateActors<TranslationGizmo>(&gRenderSystem, 3);
 
-	translationGizmos.GetActor(0)->SetRotation(0.f, 0.f, 0.f);
 	translationGizmos.GetActor(0)->material.baseColour = XMFLOAT4(1.f, 0.f, 0.f, 1.f);
 	TranslationGizmo* xGizmo = dynamic_cast<TranslationGizmo*>(translationGizmos.GetActor(0));
 	xGizmo->pickedAxis = EPickedAxis::X;

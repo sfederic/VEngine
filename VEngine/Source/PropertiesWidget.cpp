@@ -21,7 +21,7 @@ void PropertiesWidget::SetActorPositionX()
         gWorldEditor.pickedActor->SetPosition(pos);
     }
 
-    clearFocus();
+    //clearFocus();
 }
 
 void PropertiesWidget::SetActorPositionY()
@@ -124,6 +124,7 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
     QLabel* posLabel = new QLabel("Position");
 
     posEditX = new TransformEditWidget(0.f, this);
+    //Note: QDoubleSpinBox::editingFinished calls its calling function twice for some reason.
     connect(posEditX, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorPositionX);
     posEditY = new TransformEditWidget(0.f, this);
     connect(posEditY, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorPositionY);

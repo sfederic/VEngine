@@ -51,13 +51,13 @@ void DebugMenu::Tick(World* world, float deltaTime)
 	}
 
 	//Open key for menu
-	if(gInputSystem.GetKeyUpState(VK_TAB))
+	/*if(gInputSystem.GetKeyUpState(VK_TAB))
 	{
 		bDebugMenuActive = !bDebugMenuActive;
 		bSubMenuOpen = false;
 		subMenuCursorIndex = 0;
 		menuCursorIndex = 0;
-	}
+	}*/
 
 	if (gInputSystem.GetKeyUpState(VK_BACK))
 	{
@@ -91,7 +91,7 @@ void DebugMenu::Tick(World* world, float deltaTime)
 		if (gInputSystem.GetKeyUpState(VK_RETURN))
 		{
 			//menuItems[menuCursorIndex].Open();
-			bSubMenuOpen = true;
+			//bSubMenuOpen = true;
 		}
 
 		//menu items
