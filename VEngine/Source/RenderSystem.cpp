@@ -409,39 +409,42 @@ void RenderSystem::RenderActorSystem(World* world)
 
 		for (int actorIndex = 0; actorIndex < actorSystem->actors.size(); actorIndex++)
 		{
-			if (actorSystem->actors[actorIndex]->bRender)
+			if (actorSystem->bRender)
 			{
-				//Skinned Animation
-				if (actorSystem->bAnimated)
+				if (actorSystem->actors[actorIndex]->bRender)
 				{
-					actorSystem->actors[actorIndex]->currentAnimationTime += gCoreSystem.deltaTime;
-					if (actorSystem->actors[actorIndex]->currentAnimationTime >= actorSystem->animData.GetEndTime())
+					//Skinned Animation
+					if (actorSystem->bAnimated)
 					{
-						actorSystem->actors[actorIndex]->currentAnimationTime = 0.0;
+						actorSystem->actors[actorIndex]->currentAnimationTime += gCoreSystem.deltaTime;
+						if (actorSystem->actors[actorIndex]->currentAnimationTime >= actorSystem->animData.GetEndTime())
+						{
+							actorSystem->actors[actorIndex]->currentAnimationTime = 0.0;
+						}
+
+						//TODO: need to find a way to handle actor TRS so that not only animation ones are playing
+						XMFLOAT4X4 animMatrix;
+						actorSystem->animData.Interpolate(actorSystem->actors[actorIndex]->currentAnimationTime, animMatrix);
+						XMMATRIX animMatrixFinal = XMLoadFloat4x4(&animMatrix);
+						actorSystem->actors[actorIndex]->transform = animMatrixFinal;
 					}
 
-					//TODO: need to find a way to handle actor TRS so that not only animation ones are playing
-					XMFLOAT4X4 animMatrix;
-					actorSystem->animData.Interpolate(actorSystem->actors[actorIndex]->currentAnimationTime, animMatrix);
-					XMMATRIX animMatrixFinal = XMLoadFloat4x4(&animMatrix);
-					actorSystem->actors[actorIndex]->transform = animMatrixFinal;
+					//Set Matrix constant buffer
+					matrices.view = GetActiveCamera()->view;
+					matrices.model = actorSystem->actors[actorIndex]->transform;
+					matrices.mvp = matrices.model * matrices.view * matrices.proj;
+					context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
+					context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+
+					//Set material constant buffer
+					material = actorSystem->material;
+					context->UpdateSubresource(cbMaterial, 0, nullptr, &material, 0, 0);
+					context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
+
+					//Draw indexed/straight
+					context->Draw(actorSystem->modelData.verts.size(), 0);
+					//context->DrawIndexed(actorSystem->modelData.indices.size(), 0, 0);
 				}
-
-				//Set Matrix constant buffer
-				matrices.view = GetActiveCamera()->view;
-				matrices.model = actorSystem->actors[actorIndex]->transform;
-				matrices.mvp = matrices.model * matrices.view * matrices.proj;
-				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
-				context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
-
-				//Set material constant buffer
-				material = actorSystem->material;
-				context->UpdateSubresource(cbMaterial, 0, nullptr, &material, 0, 0);
-				context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
-
-				//Draw indexed/straight
-				context->Draw(actorSystem->modelData.verts.size(), 0);
-				//context->DrawIndexed(actorSystem->modelData.indices.size(), 0, 0);
 			}
 		}
 	}

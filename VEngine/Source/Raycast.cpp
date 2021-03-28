@@ -214,12 +214,12 @@ bool RaycastAllFromScreen(Ray& ray, int sx, int sy, Camera* camera, World* world
 			Actor* actor = world->GetActor(ray.actorSystemIndex, ray.actorIndex);
 			if (actor)
 			{
-				/*TranslationGizmo* axisActor = (TranslationGizmo*)actor;
+				TranslationGizmo* axisActor = (TranslationGizmo*)actor;
 				if (axisActor)
 				{
 					gWorldEditor.pickedAxis = axisActor;
-				}*/
-				//else
+				}
+				else
 				{
 					gWorldEditor.pickedActor = actor;
 

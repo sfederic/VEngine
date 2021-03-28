@@ -117,7 +117,7 @@ public:
 			for (int i = 0; i < numActorsToSpawn; i++)
 			{
 				ActorType* actor = new ActorType();
-				actor->transform.r[3] = XMVectorSet(i, i, i, 1.f);
+				actor->transform.r[3] = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 				actor->vertexBufferOffset = i * modelData.GetByteWidth();
 				actor->name = name;
 				std::wstring indexString = std::to_wstring(i);
@@ -207,4 +207,5 @@ public:
 	bool bInstancingActors; //bool for setting system to use instancing
 	bool bAnimated = false; //Whether model has any animation data. Is set in FBX import.
 	bool bHasSkeletalAnimation;
+	bool bRender = true;
 };
