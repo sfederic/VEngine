@@ -36,11 +36,11 @@ XMVECTOR XMVectorForward()
 XMVECTOR RollPitchYawFromMatrix(XMMATRIX m)
 {
     //REF: https://en.wikipedia.org/wiki/Rotation_formalisms_in_three_dimensions#Conversion_formulae_between_formalisms
-    float roll = atan2f(m.r[2].m128_f32[0], m.r[2].m128_f32[1]);
     float pitch = acosf(m.r[2].m128_f32[2]);
     float yaw = atan2f(m.r[0].m128_f32[2], m.r[1].m128_f32[2]);
+    float roll = atan2f(m.r[2].m128_f32[0], m.r[2].m128_f32[1]);
 
-    XMVECTOR vec = XMVectorSet(roll, pitch, yaw, 0.f);
+    XMVECTOR vec = XMVectorSet(pitch, yaw, roll, 0.f);
 
     return vec;
 }

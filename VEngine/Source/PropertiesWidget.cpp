@@ -4,7 +4,7 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qcheckbox.h>
-
+#include "MathHelpers.h"
 #include "../EditorMainWindow.h"
 #include <qpushbutton.h>
 #include <qfiledialog.h>
@@ -90,7 +90,7 @@ void PropertiesWidget::SetActorRotationX()
     {
         XMFLOAT3 rot = picked->GetRollPitchYaw();
         rot.x = rotEditX->value();
-        gWorldEditor.pickedActor->SetRotation(rot);
+        gWorldEditor.pickedActor->SetRotation(XMVectorRight(), rot.x);
     }
 }
 
@@ -101,7 +101,7 @@ void PropertiesWidget::SetActorRotationY()
     {
         XMFLOAT3 rot = picked->GetRollPitchYaw();
         rot.y = rotEditY->value();
-        gWorldEditor.pickedActor->SetRotation(rot);
+        gWorldEditor.pickedActor->SetRotation(XMVectorUp(), rot.y);
     }
 }
 
@@ -112,7 +112,7 @@ void PropertiesWidget::SetActorRotationZ()
     {
         XMFLOAT3 rot = picked->GetRollPitchYaw();
         rot.z = rotEditZ->value();
-        gWorldEditor.pickedActor->SetRotation(rot);
+        gWorldEditor.pickedActor->SetRotation(XMVectorForward(), rot.z);
     }
 }
 

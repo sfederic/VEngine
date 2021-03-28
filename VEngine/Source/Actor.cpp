@@ -47,34 +47,18 @@ void Actor::SetPosition(XMFLOAT3 pos)
 //ROTATION FUNCTIONS
 void Actor::SetRotation(XMVECTOR axis, float angle)
 {
-	assert(false);
-	XMMATRIX m = XMMatrixRotationAxis(axis, angle);
-	transform = XMMatrixMultiply(m, transform); //Just keep in mind Matrix mul order
+	transform = XMMatrixRotationAxis(axis, XMConvertToRadians(angle));
 }
 
-void Actor::SetRotation(float roll, float pitch, float yaw)
+void Actor::SetRotation(float pitch, float yaw, float roll)
 {
+	//Careful with XMMatrixRotationRollPitchYaw(), it takes in the arguments in a funny order.
 	XMVECTOR previousPosition = transform.r[3];
 	XMFLOAT3 previousScale = GetScale();
 	transform = XMMatrixRotationRollPitchYaw(
-		XMConvertToRadians(roll),
 		XMConvertToRadians(pitch),
-		XMConvertToRadians(yaw)
-	);
-	transform.r[3] = previousPosition;
-	transform.r[0].m128_f32[0] = previousScale.x;
-	transform.r[1].m128_f32[1] = previousScale.y;
-	transform.r[2].m128_f32[2] = previousScale.z;
-}
-
-void Actor::SetRotation(XMFLOAT3 rollPitchYaw)
-{
-	XMVECTOR previousPosition = transform.r[3];
-	XMFLOAT3 previousScale = GetScale();
-	transform = XMMatrixRotationRollPitchYaw(
-		XMConvertToRadians(rollPitchYaw.x),
-		XMConvertToRadians(rollPitchYaw.y),
-		XMConvertToRadians(rollPitchYaw.z)
+		XMConvertToRadians(yaw),
+		XMConvertToRadians(roll)
 	);
 	transform.r[3] = previousPosition;
 	transform.r[0].m128_f32[0] = previousScale.x;
