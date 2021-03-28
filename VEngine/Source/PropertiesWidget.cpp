@@ -187,13 +187,20 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
     //Actor/ActorSystem Properties
     QGridLayout* actorSystemDetailsGrid = new QGridLayout();
 
+    QGridLayout* actorDetailsGrid = new QGridLayout();
+
     QCheckBox* checkBox = new QCheckBox();
     checkBox->setText("Renderable");
     checkBox->setChecked(true);
     actorSystemDetailsGrid->addWidget(checkBox, 0, 0);
     connect(checkBox, &QCheckBox::clicked, this, &PropertiesWidget::SetActorRenderable);
 
-    //Line edits 
+    //Actor properties
+    actorDetailsGrid->addWidget(new QLabel("Actor Name"), 0, 0);
+    actorName = new QLineEdit();
+    actorDetailsGrid->addWidget(actorName, 0, 1);
+
+    //Actorsystem properties
     actorSystemName = new QLineEdit();
     actorSystemName->setReadOnly(true);
     actorSystemDetailsGrid->addWidget(actorSystemName, 1, 0);
@@ -223,6 +230,7 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
     connect(selectTextureButton, &QPushButton::pressed, this, &PropertiesWidget::SelectTexture);
     actorSystemDetailsGrid->addWidget(selectTextureButton, 4, 1);
 
+    vLayoutTop->addLayout(actorDetailsGrid);
     vLayoutTop->addLayout(actorSystemDetailsGrid);
 
     setLayout(vLayoutTop);

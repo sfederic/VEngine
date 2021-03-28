@@ -21,6 +21,8 @@ public:
     TransformEditWidget* scaleEditY;
     TransformEditWidget* scaleEditZ;
 
+    QLineEdit* actorName;
+
     QLineEdit* actorSystemName;
     QLineEdit* actorSystemShaderName;
     QLineEdit* actorSystemTextureName;

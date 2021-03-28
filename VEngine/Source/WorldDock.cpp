@@ -98,7 +98,7 @@ void WorldDock::ClickOnListActorSystem(QTreeWidgetItem* listItem)
     if (clickedActor)
     {
         editorCamera.ZoomTo(clickedActor);
-        gEditorMainWindow->propertiesDock->DisplayActorSystemProperties(clickedActor->GetActorSystem());
+        gEditorMainWindow->propertiesDock->DisplayActorSystemProperties(clickedActor);
     }
 }
 
@@ -109,7 +109,7 @@ void WorldDock::ClickOnListActor(QListWidgetItem* listItem)
     if (clickedActor)
     {
         editorCamera.ZoomTo(clickedActor);
-        gEditorMainWindow->propertiesDock->DisplayActorSystemProperties(clickedActor->GetActorSystem());
+        gEditorMainWindow->propertiesDock->DisplayActorSystemProperties(clickedActor);
     }
 }
 
