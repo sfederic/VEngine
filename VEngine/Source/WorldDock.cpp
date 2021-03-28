@@ -98,6 +98,7 @@ void WorldDock::ClickOnListActorSystem(QTreeWidgetItem* listItem)
     if (clickedActor)
     {
         editorCamera.ZoomTo(clickedActor);
+        gWorldEditor.pickedActor = clickedActor;
         gEditorMainWindow->propertiesDock->DisplayActorSystemProperties(clickedActor);
     }
 }
@@ -109,6 +110,7 @@ void WorldDock::ClickOnListActor(QListWidgetItem* listItem)
     if (clickedActor)
     {
         editorCamera.ZoomTo(clickedActor);
+        gWorldEditor.pickedActor = clickedActor;
         gEditorMainWindow->propertiesDock->DisplayActorSystemProperties(clickedActor);
     }
 }
