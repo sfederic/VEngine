@@ -235,12 +235,12 @@ void WorldEditor::Init()
 	TranslationGizmo* yAxis = new TranslationGizmo;
 	yAxis->name = L"Y Axis";
 	yAxis->pickedAxis = EPickedAxis::Y;
-	yAxis->material.baseColour = XMFLOAT4(0.f, 0.f, 1.f, 1.f);
+	yAxis->material.baseColour = XMFLOAT4(0.f, 1.f, 0.f, 1.f);
 
 	TranslationGizmo* zAxis = new TranslationGizmo;
 	zAxis->name = L"Z Axis";
 	zAxis->pickedAxis = EPickedAxis::Z;
-	zAxis->material.baseColour = XMFLOAT4(0.f, 1.f, 0.f, 1.f);
+	zAxis->material.baseColour = XMFLOAT4(0.f, 0.f, 1.f, 1.f);
 
 	translationGizmos.shaderName = L"depthDraw.hlsl";
 	translationGizmos.name = L"Translation Gizmos";
@@ -252,7 +252,7 @@ void WorldEditor::Init()
 	translationGizmos.GetActor(1)->SetRotation(90.f, 0.f, 0.f);
 	translationGizmos.GetActor(2)->SetRotation(-90.f, 0.f, 0.f);
 
-	translationGizmos.bRender = false;
+	//translationGizmos.bRender = false;
 }
 
 void WorldEditor::MoveActor(Actor* actor, XMVECTOR direction)

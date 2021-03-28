@@ -33,6 +33,19 @@ public:
 
 	}
 
+	template <class ActorType>
+	bool IsA()
+	{
+		if (typeid(this) == typeid(ActorType))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	XMVECTOR GetPositionVector();
 	XMFLOAT3 GetPositionFloat3();
 	void SetPosition(XMVECTOR v);
