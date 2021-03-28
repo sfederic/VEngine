@@ -5,7 +5,7 @@
 TransformEditWidget::TransformEditWidget(float val, QWidget* parent) : QDoubleSpinBox(parent)
 {
     setDecimals(0);
-    setMinimum(std::numeric_limits<float>::min());
-    setMaximum(std::numeric_limits<float>::max());
+    setMinimum(std::numeric_limits<float>::lowest());
+    setMaximum(std::numeric_limits<double>::max());
     setValue(val);
 }
