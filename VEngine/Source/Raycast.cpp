@@ -214,7 +214,7 @@ bool RaycastAllFromScreen(Ray& ray, int sx, int sy, Camera* camera, World* world
 			Actor* actor = world->GetActor(ray.actorSystemIndex, ray.actorIndex);
 			if (actor)
 			{
-				//TODO: this dynamic cast is a bit funny. Might have to brush up on C++ here.
+				//TODO: this dynamic cast is a bit funny. Might have to brush up on C++ here to work it into IsA() and GetActor() calls
 				TranslationGizmo* axisActor = dynamic_cast<TranslationGizmo*>(actor);
 				if (axisActor)
 				{

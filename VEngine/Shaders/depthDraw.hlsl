@@ -5,7 +5,7 @@ VS_OUT VSMain(VS_IN i)
 {
 	VS_OUT o;
 	o.pos = mul(mvp, float4(i.pos, 1.0f));
-	o.pos.z = 0.001f; //Should be enough to give off the right effect
+	o.pos.z = 0.001f; //Should be enough to give off the right effect for depth.
 	o.uv = i.uv;
 	o.normal = i.normal;
 

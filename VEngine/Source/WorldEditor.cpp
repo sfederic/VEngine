@@ -150,9 +150,10 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer, EditorMainWindow* editorM
 		}
 	}
 
-
+	//Move actor along translation gizmo axis
 	if (pickedAxis)
 	{
+		//MoveActor(pickedActor, pickedAxis->GetRightVector());
 		if (pickedAxis->pickedAxis == EPickedAxis::X)
 		{
 			MoveActor(pickedActor, EPickedAxis::X);
@@ -227,21 +228,6 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer, EditorMainWindow* editorM
 void WorldEditor::Init()
 {
 	//Init translation gizmos
-	TranslationGizmo* xAxis = new TranslationGizmo;
-	xAxis->name = L"X Axis";
-	xAxis->pickedAxis = EPickedAxis::X;
-	xAxis->material.baseColour = XMFLOAT4(1.f, 0.f, 0.f, 1.f);
-
-	TranslationGizmo* yAxis = new TranslationGizmo;
-	yAxis->name = L"Y Axis";
-	yAxis->pickedAxis = EPickedAxis::Y;
-	yAxis->material.baseColour = XMFLOAT4(0.f, 1.f, 0.f, 1.f);
-
-	TranslationGizmo* zAxis = new TranslationGizmo;
-	zAxis->name = L"Z Axis";
-	zAxis->pickedAxis = EPickedAxis::Z;
-	zAxis->material.baseColour = XMFLOAT4(0.f, 0.f, 1.f, 1.f);
-
 	translationGizmos.shaderName = L"depthDraw.hlsl";
 	translationGizmos.name = L"Translation Gizmos";
 	translationGizmos.modelName = "x_axis.fbx";
@@ -249,8 +235,19 @@ void WorldEditor::Init()
 	translationGizmos.CreateActors<TranslationGizmo>(&gRenderSystem, 3);
 
 	translationGizmos.GetActor(0)->SetRotation(0.f, 0.f, 0.f);
+	translationGizmos.GetActor(0)->material.baseColour = XMFLOAT4(1.f, 0.f, 0.f, 1.f);
+	TranslationGizmo* xGizmo = dynamic_cast<TranslationGizmo*>(translationGizmos.GetActor(0));
+	xGizmo->pickedAxis = EPickedAxis::X;
+
 	translationGizmos.GetActor(1)->SetRotation(90.f, 0.f, 0.f);
-	translationGizmos.GetActor(2)->SetRotation(-90.f, 0.f, 0.f);
+	translationGizmos.GetActor(1)->material.baseColour = XMFLOAT4(0.f, 1.f, 0.f, 1.f);
+	TranslationGizmo* yGizmo = dynamic_cast<TranslationGizmo*>(translationGizmos.GetActor(1));
+	yGizmo->pickedAxis = EPickedAxis::Y;
+
+	translationGizmos.GetActor(2)->SetRotation(0.f, 90.f, 0.f);
+	translationGizmos.GetActor(2)->material.baseColour = XMFLOAT4(0.f, 0.f, 1.f, 1.f);
+	TranslationGizmo* zGizmo = dynamic_cast<TranslationGizmo*>(translationGizmos.GetActor(2));
+	zGizmo->pickedAxis = EPickedAxis::Z;
 
 	//translationGizmos.bRender = false;
 }
@@ -380,9 +377,9 @@ void WorldEditor::MoveActor(Actor* actor, EPickedAxis axis)
 
 		if (actor)
 		{
-			translationGizmos.actors[0]->transform = actor->transform;
-			translationGizmos.actors[1]->transform = actor->transform;
-			translationGizmos.actors[2]->transform = actor->transform;
+			translationGizmos.actors[0]->SetPosition(actor->GetPositionVector());
+			translationGizmos.actors[1]->SetPosition(actor->GetPositionVector());
+			translationGizmos.actors[2]->SetPosition(actor->GetPositionVector());
 		}
 
 		ReleaseCapture();
