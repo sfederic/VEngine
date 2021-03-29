@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
     ac.CreateActors<Actor>(&gRenderSystem, 1);
 
     GetWorld()->AddActorSystem(ac);
-    GetWorld()->AddActorSystem(gWorldEditor.translationGizmos);
+    //GetWorld()->AddActorSystem(gWorldEditor.translationGizmos);
 
     //Qt late init
     gEditorMainWindow->worldDock->PopulateWorldList();

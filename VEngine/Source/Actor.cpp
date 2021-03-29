@@ -13,7 +13,7 @@
 //CONSTRUCTORS
 Actor::Actor()
 {
-
+	transform = Transform();
 }
 
 //POSITION FUNCTIONS
