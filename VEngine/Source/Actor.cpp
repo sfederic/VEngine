@@ -47,7 +47,11 @@ void Actor::SetPosition(XMFLOAT3 pos)
 //ROTATION FUNCTIONS
 void Actor::SetRotation(XMVECTOR axis, float angle)
 {
+	XMVECTOR previousPosition = transform.r[3];
+	XMFLOAT3 previousScale = GetScale();
 	transform = XMMatrixRotationAxis(axis, XMConvertToRadians(angle));
+	SetScale(previousScale);
+	SetPosition(previousPosition);
 }
 
 void Actor::SetRotation(float pitch, float yaw, float roll)
