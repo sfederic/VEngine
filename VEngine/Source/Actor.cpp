@@ -53,6 +53,11 @@ void Actor::SetRotation(float pitch, float yaw, float roll)
 	XMStoreFloat4(&transform.quatRotation, XMQuaternionRotationRollPitchYaw(pitch, yaw, roll));
 }
 
+void Actor::SetRotation(XMFLOAT3 euler)
+{
+	XMStoreFloat4(&transform.quatRotation, XMQuaternionRotationRollPitchYaw(euler.x, euler.y, euler.z));
+}
+
 XMFLOAT4 Actor::GetRotationQuat()
 {
 	return transform.quatRotation;

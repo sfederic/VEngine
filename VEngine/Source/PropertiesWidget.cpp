@@ -88,7 +88,9 @@ void PropertiesWidget::SetActorRotationX()
     Actor* picked = gWorldEditor.pickedActor;
     if (picked && rotEditX)
     {
-
+        XMFLOAT3 euler = picked->GetPitchYawRoll();
+        euler.x = rotEditX->value();
+        gWorldEditor.pickedActor->SetRotation(euler);
     }
 }
 
@@ -97,7 +99,9 @@ void PropertiesWidget::SetActorRotationY()
     Actor* picked = gWorldEditor.pickedActor;
     if (picked && rotEditY)
     {
-
+        XMFLOAT3 euler = picked->GetPitchYawRoll();
+        euler.y = rotEditY->value();
+        gWorldEditor.pickedActor->SetRotation(euler);
     }
 }
 
@@ -106,7 +110,9 @@ void PropertiesWidget::SetActorRotationZ()
     Actor* picked = gWorldEditor.pickedActor;
     if (picked && rotEditZ)
     {
-
+        XMFLOAT3 euler = picked->GetPitchYawRoll();
+        euler.z = rotEditZ->value();
+        gWorldEditor.pickedActor->SetRotation(euler);
     }
 }
 

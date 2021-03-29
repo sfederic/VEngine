@@ -54,6 +54,7 @@ public:
 	void SetPosition(XMFLOAT3 pos);
 	void SetRotation(XMVECTOR axis, float angle);
 	void SetRotation(float roll, float pitch, float yaw);
+	void SetRotation(XMFLOAT3 euler);
 	XMFLOAT4 GetRotationQuat();
 	XMMATRIX GetTransformationMatrix();
 	void SetTransformationMatrix(XMMATRIX& m);
