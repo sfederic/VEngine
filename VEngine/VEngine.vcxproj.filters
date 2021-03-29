@@ -170,7 +170,7 @@
     <ClCompile Include="Source\AnimationStructures.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Transform.cpp">
+    <ClCompile Include="Source\Transform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -307,7 +307,7 @@
     <ClInclude Include="Source\AnimationStructures.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Transform.h">
+    <ClInclude Include="Source\Transform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

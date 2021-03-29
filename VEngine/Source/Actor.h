@@ -9,6 +9,7 @@
 #include <typeindex>
 #include "FBXImporter.h"
 #include "AnimationStructures.h"
+#include "Transform.h"
 
 using namespace DirectX;
 
@@ -53,8 +54,10 @@ public:
 	void SetPosition(XMFLOAT3 pos);
 	void SetRotation(XMVECTOR axis, float angle);
 	void SetRotation(float roll, float pitch, float yaw);
-	XMMATRIX GetRotation();
-	XMFLOAT3 GetRollPitchYaw();
+	XMFLOAT4 GetRotationQuat();
+	XMMATRIX GetTransformationMatrix();
+	void SetTransformationMatrix(XMMATRIX& m);
+	//XMFLOAT3 GetRollPitchYaw();
 	XMFLOAT3 GetScale();
 	void AddScale(float scale);
 	void AddScale(float x, float y, float z);
@@ -68,7 +71,7 @@ public:
 	void Move(float d, XMVECTOR direction);
 	ActorSystem* GetActorSystem();
 
-	XMMATRIX transform = XMMatrixIdentity();
+	Transform transform;
 	Material material;
 
 	double currentAnimationTime = 0.0;
@@ -129,7 +132,7 @@ public:
 			for (int i = 0; i < numActorsToSpawn; i++)
 			{
 				ActorType* actor = new ActorType();
-				actor->transform.r[3] = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+				actor->transform.position = XMFLOAT3(0.f, 0.f, 0.f);
 				actor->vertexBufferOffset = i * modelData.GetByteWidth();
 				actor->name = name;
 				std::wstring indexString = std::to_wstring(i);

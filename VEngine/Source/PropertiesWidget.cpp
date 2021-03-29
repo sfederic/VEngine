@@ -88,9 +88,7 @@ void PropertiesWidget::SetActorRotationX()
     Actor* picked = gWorldEditor.pickedActor;
     if (picked && rotEditX)
     {
-        XMFLOAT3 rot = picked->GetRollPitchYaw();
-        rot.x = rotEditX->value();
-        gWorldEditor.pickedActor->SetRotation(XMVectorRight(), rot.x);
+
     }
 }
 
@@ -99,9 +97,7 @@ void PropertiesWidget::SetActorRotationY()
     Actor* picked = gWorldEditor.pickedActor;
     if (picked && rotEditY)
     {
-        XMFLOAT3 rot = picked->GetRollPitchYaw();
-        rot.y = rotEditY->value();
-        gWorldEditor.pickedActor->SetRotation(XMVectorUp(), rot.y);
+
     }
 }
 
@@ -110,9 +106,7 @@ void PropertiesWidget::SetActorRotationZ()
     Actor* picked = gWorldEditor.pickedActor;
     if (picked && rotEditZ)
     {
-        XMFLOAT3 rot = picked->GetRollPitchYaw();
-        rot.z = rotEditZ->value();
-        gWorldEditor.pickedActor->SetRotation(XMVectorForward(), rot.z);
+
     }
 }
 
@@ -290,7 +284,7 @@ void PropertiesWidget::Tick()
         posEditY->setValue(pos.y);
         posEditZ->setValue(pos.z);
 
-        XMFLOAT3 rot = picked->GetRollPitchYaw();
+        XMFLOAT3 rot;
         rotEditX->setValue(rot.x);
         rotEditY->setValue(rot.y);
         rotEditZ->setValue(rot.z);

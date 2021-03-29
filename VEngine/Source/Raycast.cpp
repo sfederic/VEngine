@@ -118,7 +118,7 @@ bool RaycastTriangleIntersect(Ray& ray)
 	Actor* actor = actorSystem->GetActor(ray.actorIndex);
 	assert(actor);
 
-	XMMATRIX model = actor->transform;
+	XMMATRIX model = actor->GetTransformationMatrix();
 	XMMATRIX mvp = model * gRenderSystem.matrices.view * gRenderSystem.matrices.proj;
 
 	std::vector<Ray> rays;
@@ -237,7 +237,7 @@ bool RaycastAllFromScreen(Ray& ray, int sx, int sy, Camera* camera, World* world
 					propWidget->scaleEditY->setValue(scale.y);
 					propWidget->scaleEditZ->setValue(scale.z);
 
-					XMFLOAT3 rot = actor->GetRollPitchYaw();
+					XMFLOAT3 rot;
 					propWidget->rotEditX->setValue(rot.x);
 					propWidget->rotEditY->setValue(rot.y);
 					propWidget->rotEditZ->setValue(rot.z);

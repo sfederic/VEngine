@@ -426,12 +426,12 @@ void RenderSystem::RenderActorSystem(World* world)
 						XMFLOAT4X4 animMatrix;
 						actorSystem->animData.Interpolate(actorSystem->actors[actorIndex]->currentAnimationTime, animMatrix);
 						XMMATRIX animMatrixFinal = XMLoadFloat4x4(&animMatrix);
-						actorSystem->actors[actorIndex]->transform = animMatrixFinal;
+						actorSystem->actors[actorIndex]->SetTransformationMatrix(animMatrixFinal);
 					}
 
 					//Set Matrix constant buffer
 					matrices.view = GetActiveCamera()->view;
-					matrices.model = actorSystem->actors[actorIndex]->transform;
+					matrices.model = actorSystem->actors[actorIndex]->GetTransformationMatrix();
 					matrices.mvp = matrices.model * matrices.view * matrices.proj;
 					context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 					context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
@@ -482,7 +482,7 @@ void RenderSystem::RenderBounds()
 					1.0f);
 
 				boxBoundsMatrix = XMMatrixScalingFromVector(XMLoadFloat3(&world->actorSystems[systemIndex]->boundingBox.Extents));
-				boxBoundsMatrix *= world->actorSystems[systemIndex]->actors[actorIndex]->GetRotation();
+				boxBoundsMatrix *= world->actorSystems[systemIndex]->actors[actorIndex]->GetTransformationMatrix();
 				boxBoundsMatrix.r[3] = offset;
 
 				matrices.model = boxBoundsMatrix;

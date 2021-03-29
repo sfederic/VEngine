@@ -179,7 +179,7 @@ void Camera::FrustumCullTest(ActorSystem& system)
 	{
 		XMMATRIX invView = XMMatrixInverse(&XMMatrixDeterminant(view), view);
 
-		XMMATRIX world = system.actors[i]->transform;
+		XMMATRIX world = system.actors[i]->GetTransformationMatrix();
 		XMMATRIX invWorld = XMMatrixInverse(&XMMatrixDeterminant(world), world);
 
 		XMMATRIX viewToLocal = XMMatrixMultiply(invView, invWorld);

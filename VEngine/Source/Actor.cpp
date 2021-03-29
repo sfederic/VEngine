@@ -13,79 +13,77 @@
 //CONSTRUCTORS
 Actor::Actor()
 {
-	transform = XMMatrixIdentity();
+
 }
 
 //POSITION FUNCTIONS
 XMVECTOR Actor::GetPositionVector()
 {
-	return transform.r[3];
+	return XMLoadFloat3(&transform.position);
 }
 
 XMFLOAT3 Actor::GetPositionFloat3()
 {
-	XMVECTOR pos = transform.r[3];
-	return XMFLOAT3(pos.m128_f32[0], pos.m128_f32[1], pos.m128_f32[2]);
+	return transform.position;
 }
 
 void Actor::SetPosition(XMVECTOR v)
 {
-	transform.r[3] = v;
+	XMStoreFloat3(&transform.position, v);
 }
 
 void Actor::SetPosition(float x, float y, float z)
 {
-	XMVECTOR v = XMVectorSet(x, y, z, 1.0f);
-	transform.r[3] = v;
+	transform.position = XMFLOAT3(x, y, z);
 }
 
 void Actor::SetPosition(XMFLOAT3 pos)
 {
-	transform.r[3] = XMVectorSet(pos.x, pos.y, pos.z, 1.0f);
+	transform.position = pos;
 }
 
 //ROTATION FUNCTIONS
 void Actor::SetRotation(XMVECTOR axis, float angle)
 {
-	XMVECTOR previousPosition = transform.r[3];
-	XMFLOAT3 previousScale = GetScale();
-	transform = XMMatrixRotationAxis(axis, XMConvertToRadians(angle));
-	SetScale(previousScale);
-	SetPosition(previousPosition);
+	XMStoreFloat4(&transform.quatRotation, XMQuaternionRotationAxis(axis, angle));
 }
 
 void Actor::SetRotation(float pitch, float yaw, float roll)
 {
-	//Careful with XMMatrixRotationRollPitchYaw(), it takes in the arguments in a funny order.
-	XMVECTOR previousPosition = transform.r[3];
-	XMFLOAT3 previousScale = GetScale();
-	transform = XMMatrixRotationRollPitchYaw(
-		XMConvertToRadians(pitch),
-		XMConvertToRadians(yaw),
-		XMConvertToRadians(roll)
-	);
-	transform.r[3] = previousPosition;
-	transform.r[0].m128_f32[0] = previousScale.x;
-	transform.r[1].m128_f32[1] = previousScale.y;
-	transform.r[2].m128_f32[2] = previousScale.z;
+	XMStoreFloat4(&transform.quatRotation, XMQuaternionRotationRollPitchYaw(pitch, yaw, roll));
 }
 
-XMMATRIX Actor::GetRotation()
+XMFLOAT4 Actor::GetRotationQuat()
 {
-	return transform;
+	return transform.quatRotation;
 }
 
-XMFLOAT3 Actor::GetRollPitchYaw()
+XMMATRIX Actor::GetTransformationMatrix()
+{
+	return XMMatrixAffineTransformation(
+		XMLoadFloat3(&transform.scale),
+		XMVectorSet(0.f, 0.f, 0.f, 1.f),
+		XMLoadFloat4(&transform.quatRotation),
+		XMLoadFloat3(&transform.position)
+	);
+}
+
+void Actor::SetTransformationMatrix(XMMATRIX& m)
+{
+
+}
+
+/*XMFLOAT3 Actor::GetRollPitchYaw()
 {
 	XMVECTOR vec = RollPitchYawFromMatrix(transform);
 	XMFLOAT3 rot(vec.m128_f32[0], vec.m128_f32[1], vec.m128_f32[2]);
 	return rot;
-}
+}*/
 
 //SCALE FUNCTIONS
 XMFLOAT3 Actor::GetScale()
 {
-	return XMFLOAT3(transform.r[0].m128_f32[0], transform.r[1].m128_f32[1], transform.r[2].m128_f32[2]);
+	return transform.scale;
 }
 
 void Actor::AddScale(float scale)
@@ -105,35 +103,54 @@ void Actor::AddScale(XMFLOAT3 scale)
 
 void Actor::SetScale(float x, float y, float z)
 {
-	transform *= XMMatrixScaling(x, y, z);
+	transform.scale = XMFLOAT3(x, y, z);
 }
 
 void Actor::SetScale(XMVECTOR scale)
 {
-	transform *= XMMatrixScalingFromVector(scale);
+	XMStoreFloat3(&transform.scale, scale);
 }
 
 void Actor::SetScale(XMFLOAT3 scale)
 {
-	transform.r[0].m128_f32[0] = scale.x;
-	transform.r[1].m128_f32[1] = scale.y;
-	transform.r[2].m128_f32[2] = scale.z;
+	transform.scale = scale;
 }
 
 //VECTOR FUNCTIONS
 XMVECTOR Actor::GetForwardVector()
 {
-	return transform.r[2];
+	XMMATRIX m = XMMatrixAffineTransformation(
+		XMLoadFloat3(&transform.scale),
+		XMVectorSet(0.f, 0.f, 0.f, 1.f),
+		XMLoadFloat4(&transform.quatRotation),
+		XMLoadFloat3(&transform.position)
+	);
+
+	return m.r[2];
 }
 
 XMVECTOR Actor::GetRightVector()
 {
-	return transform.r[0];
+	XMMATRIX m = XMMatrixAffineTransformation(
+		XMLoadFloat3(&transform.scale),
+		XMVectorSet(0.f, 0.f, 0.f, 1.f),
+		XMLoadFloat4(&transform.quatRotation),
+		XMLoadFloat3(&transform.position)
+	);
+
+	return m.r[0];
 }
 
 XMVECTOR Actor::GetUpVector()
 {
-	return transform.r[1];
+	XMMATRIX m = XMMatrixAffineTransformation(
+		XMLoadFloat3(&transform.scale),
+		XMVectorSet(0.f, 0.f, 0.f, 1.f),
+		XMLoadFloat4(&transform.quatRotation),
+		XMLoadFloat3(&transform.position)
+	);
+
+	return m.r[1];
 }
 
 void Actor::Move(float d, XMVECTOR direction)
