@@ -33,7 +33,7 @@ XMVECTOR XMVectorForward()
     return v * speed;
 }*/
 
-XMVECTOR RollPitchYawFromMatrix(XMMATRIX m)
+XMVECTOR PitchYawRollFromMatrix(XMMATRIX m)
 {
     //REF: https://en.wikipedia.org/wiki/Rotation_formalisms_in_three_dimensions#Conversion_formulae_between_formalisms
     float pitch = acosf(m.r[2].m128_f32[2]);
@@ -43,6 +43,12 @@ XMVECTOR RollPitchYawFromMatrix(XMMATRIX m)
     XMVECTOR vec = XMVectorSet(pitch, yaw, roll, 0.f);
 
     return vec;
+}
+
+XMVECTOR PitchYawRollFromQuaternion(XMVECTOR q)
+{
+    XMMATRIX m = XMMatrixRotationQuaternion(q);
+    return PitchYawRollFromMatrix(m);
 }
 
 //Direction will usually be your forward vector for an actor/billboard.

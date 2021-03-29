@@ -11,7 +11,7 @@ XMVECTOR XMVectorRight();
 XMVECTOR XMVectorUp();
 XMVECTOR XMVectorForward();
 //XMVECTOR XMVectorConstantLerp(FXMVECTOR V0, FXMVECTOR V1, float deltaTime, float speed);
-XMVECTOR RollPitchYawFromMatrix(XMMATRIX m);
+XMVECTOR PitchYawRollFromMatrix(XMMATRIX m);
 
 void LookAtRotation(XMVECTOR lookAtPoint, XMMATRIX& m);
 XMFLOAT4X4 FbxMatrixToDirectXMathMatrix(fbxsdk::FbxMatrix fbxMatrix);

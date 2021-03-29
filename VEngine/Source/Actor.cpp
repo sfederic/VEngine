@@ -73,12 +73,12 @@ void Actor::SetTransformationMatrix(XMMATRIX& m)
 
 }
 
-/*XMFLOAT3 Actor::GetRollPitchYaw()
+XMFLOAT3 Actor::GetPitchYawRoll()
 {
-	XMVECTOR vec = RollPitchYawFromMatrix(transform);
+	XMVECTOR vec = PitchYawRollFromMatrix(GetTransformationMatrix());
 	XMFLOAT3 rot(vec.m128_f32[0], vec.m128_f32[1], vec.m128_f32[2]);
 	return rot;
-}*/
+}
 
 //SCALE FUNCTIONS
 XMFLOAT3 Actor::GetScale()

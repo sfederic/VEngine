@@ -57,7 +57,7 @@ public:
 	XMFLOAT4 GetRotationQuat();
 	XMMATRIX GetTransformationMatrix();
 	void SetTransformationMatrix(XMMATRIX& m);
-	//XMFLOAT3 GetRollPitchYaw();
+	XMFLOAT3 GetPitchYawRoll();
 	XMFLOAT3 GetScale();
 	void AddScale(float scale);
 	void AddScale(float x, float y, float z);

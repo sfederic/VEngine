@@ -237,7 +237,7 @@ bool RaycastAllFromScreen(Ray& ray, int sx, int sy, Camera* camera, World* world
 					propWidget->scaleEditY->setValue(scale.y);
 					propWidget->scaleEditZ->setValue(scale.z);
 
-					XMFLOAT3 rot;
+					XMFLOAT3 rot = actor->GetPitchYawRoll();
 					propWidget->rotEditX->setValue(rot.x);
 					propWidget->rotEditY->setValue(rot.y);
 					propWidget->rotEditZ->setValue(rot.z);
