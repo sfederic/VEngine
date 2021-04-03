@@ -45,17 +45,24 @@ void Actor::SetPosition(XMFLOAT3 pos)
 //ROTATION FUNCTIONS
 void Actor::SetRotation(XMVECTOR axis, float angle)
 {
-	XMStoreFloat4(&transform.quatRotation, XMQuaternionRotationAxis(axis, angle));
+	float andleRadians = XMConvertToRadians(angle);
+	XMStoreFloat4(&transform.quatRotation, XMQuaternionRotationAxis(axis, andleRadians));
 }
 
 void Actor::SetRotation(float pitch, float yaw, float roll)
 {
-	XMStoreFloat4(&transform.quatRotation, XMQuaternionRotationRollPitchYaw(pitch, yaw, roll));
+	float pitchRadians = XMConvertToRadians(pitch);
+	float yawRadians = XMConvertToRadians(yaw);
+	float rollRadians = XMConvertToRadians(roll);
+	XMStoreFloat4(&transform.quatRotation, XMQuaternionRotationRollPitchYaw(pitchRadians, yawRadians, rollRadians));
 }
 
 void Actor::SetRotation(XMFLOAT3 euler)
 {
-	XMStoreFloat4(&transform.quatRotation, XMQuaternionRotationRollPitchYaw(euler.x, euler.y, euler.z));
+	float pitchRadians = XMConvertToRadians(euler.x);
+	float yawRadians = XMConvertToRadians(euler.y);
+	float rollRadians = XMConvertToRadians(euler.z);
+	XMStoreFloat4(&transform.quatRotation, XMQuaternionRotationRollPitchYaw(pitchRadians, yawRadians, rollRadians));
 }
 
 XMFLOAT4 Actor::GetRotationQuat()

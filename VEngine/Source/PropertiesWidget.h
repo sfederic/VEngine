@@ -40,17 +40,9 @@ public:
     void SelectTexture();
     void SelectModel();
 
-    void SetActorPositionX();
-    void SetActorPositionY();
-    void SetActorPositionZ();
-
-    void SetActorScaleX();
-    void SetActorScaleY();
-    void SetActorScaleZ();
-
-    void SetActorRotationX();
-    void SetActorRotationY();
-    void SetActorRotationZ();
+    void SetActorPosition();
+    void SetActorScale();
+    void SetActorRotation();
 
     virtual void enterEvent(QEvent* event)
     {

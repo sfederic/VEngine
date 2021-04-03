@@ -11,108 +11,39 @@
 #include <QDoubleSpinBox>
 #include <QLineEdit>
 
-void PropertiesWidget::SetActorPositionX()
+void PropertiesWidget::SetActorPosition()
 {
     Actor* picked = gWorldEditor.pickedActor;
-    if (picked && posEditX)
+    if (picked)
     {
-        XMFLOAT3 pos = picked->GetPositionFloat3();
-        pos.x = posEditX->value();
-        gWorldEditor.pickedActor->SetPosition(pos);
-    }
-
-    //clearFocus();
-}
-
-void PropertiesWidget::SetActorPositionY()
-{
-    Actor* picked = gWorldEditor.pickedActor;
-    if (picked && posEditY)
-    {
-        XMFLOAT3 pos = picked->GetPositionFloat3();
-        pos.y = posEditY->value();
-        gWorldEditor.pickedActor->SetPosition(pos);
-    }
-
-    clearFocus();
-}
-
-void PropertiesWidget::SetActorPositionZ()
-{
-    Actor* picked = gWorldEditor.pickedActor;
-    if (picked && posEditZ)
-    {
-        XMFLOAT3 pos = picked->GetPositionFloat3();
-        pos.z = posEditZ->value();
-        gWorldEditor.pickedActor->SetPosition(pos);
-    }
-
-    clearFocus();
-}
-
-void PropertiesWidget::SetActorScaleX()
-{
-    Actor* picked = gWorldEditor.pickedActor;
-    if (picked && scaleEditX)
-    {
-        XMFLOAT3 scale = picked->GetScale();
-        scale.x = scaleEditX->value();
-        gWorldEditor.pickedActor->SetScale(scale);
+        float posX = posEditX->value();
+        float posY = posEditY->value();
+        float posZ = posEditZ->value();
+        gWorldEditor.pickedActor->SetPosition(posX, posY, posZ);
     }
 }
 
-void PropertiesWidget::SetActorScaleY()
+void PropertiesWidget::SetActorScale()
 {
     Actor* picked = gWorldEditor.pickedActor;
-    if (picked && scaleEditY)
+    if (picked)
     {
-        XMFLOAT3 scale = picked->GetScale();
-        scale.y = scaleEditY->value();
-        gWorldEditor.pickedActor->SetScale(scale);
+        float scaleX = scaleEditX->value();
+        float scaleY = scaleEditY->value();
+        float scaleZ = scaleEditZ->value();
+        gWorldEditor.pickedActor->SetScale(scaleX, scaleY, scaleZ);
     }
 }
 
-void PropertiesWidget::SetActorScaleZ()
+void PropertiesWidget::SetActorRotation()
 {
     Actor* picked = gWorldEditor.pickedActor;
-    if (picked && scaleEditZ)
+    if (picked)
     {
-        XMFLOAT3 scale = picked->GetScale();
-        scale.z = scaleEditZ->value();
-        gWorldEditor.pickedActor->SetScale(scale);
-    }
-}
-
-void PropertiesWidget::SetActorRotationX()
-{
-    Actor* picked = gWorldEditor.pickedActor;
-    if (picked && rotEditX)
-    {
-        XMFLOAT3 euler = picked->GetPitchYawRoll();
-        euler.x = rotEditX->value();
-        gWorldEditor.pickedActor->SetRotation(euler);
-    }
-}
-
-void PropertiesWidget::SetActorRotationY()
-{
-    Actor* picked = gWorldEditor.pickedActor;
-    if (picked && rotEditY)
-    {
-        XMFLOAT3 euler = picked->GetPitchYawRoll();
-        euler.y = rotEditY->value();
-        gWorldEditor.pickedActor->SetRotation(euler);
-    }
-}
-
-void PropertiesWidget::SetActorRotationZ()
-{
-    Actor* picked = gWorldEditor.pickedActor;
-    if (picked && rotEditZ)
-    {
-        XMFLOAT3 euler = picked->GetPitchYawRoll();
-        euler.z = rotEditZ->value();
-        gWorldEditor.pickedActor->SetRotation(euler);
+        float roll = rotEditX->value();
+        float pitch = rotEditY->value();
+        float yaw = rotEditZ->value();
+        gWorldEditor.pickedActor->SetRotation(roll, pitch, yaw);
     }
 }
 
@@ -125,11 +56,11 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
 
     posEditX = new TransformEditWidget(0.f, this);
     //Note: QDoubleSpinBox::editingFinished calls its calling function twice for some reason.
-    connect(posEditX, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorPositionX);
+    connect(posEditX, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorPosition);
     posEditY = new TransformEditWidget(0.f, this);
-    connect(posEditY, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorPositionY);
+    connect(posEditY, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorPosition);
     posEditZ = new TransformEditWidget(0.f, this);
-    connect(posEditZ, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorPositionZ);
+    connect(posEditZ, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorPosition);
 
     QLabel* xLabel = new QLabel("X");
     xLabel->setStyleSheet("border: 1px solid red;");
@@ -149,11 +80,11 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
 
     //Rotation
     rotEditX = new TransformEditWidget(0.0f, this);
-    connect(rotEditX, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorRotationX);
+    connect(rotEditX, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorRotation);
     rotEditY = new TransformEditWidget(0.0f, this);
-    connect(rotEditY, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorRotationY);
+    connect(rotEditY, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorRotation);
     rotEditZ = new TransformEditWidget(0.0f, this);
-    connect(rotEditZ, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorRotationZ);
+    connect(rotEditZ, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorRotation);
 
     QLabel* rotLabel = new QLabel("Rotation");
 
@@ -164,11 +95,11 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
 
     //Scale
     scaleEditX = new TransformEditWidget(0.0f, this);
-    connect(scaleEditX, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorScaleX);
+    connect(scaleEditX, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorScale);
     scaleEditY = new TransformEditWidget(0.0f, this);
-    connect(scaleEditY, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorScaleY);
+    connect(scaleEditY, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorScale);
     scaleEditZ = new TransformEditWidget(0.0f, this);
-    connect(scaleEditZ, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorScaleZ);
+    connect(scaleEditZ, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorScale);
 
 
     QLabel* scaleLabel = new QLabel("Scale");
