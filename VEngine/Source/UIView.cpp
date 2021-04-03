@@ -280,20 +280,5 @@ void UIViewActor::Tick()
 
 void Toolbar::Tick()
 {
-	if (!bIsHidden)
-	{
-		Begin({ 0.f, 0.f, (float)gCoreSystem.windowWidth, 40.f }, nullptr);
 
-		ToolbarItem(L"File", bFileClick);
-		if (bFileClick)
-		{
-
-		}
-		ToolbarItem(L"Edit", bFileClick);
-		ToolbarItem(L"Views", bFileClick);
-		ToolbarItem(L"Graphics", bFileClick);
-		ToolbarItem(L"Debug", bFileClick);
-
-		End();
-	}
 }
