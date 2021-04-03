@@ -2,6 +2,7 @@
 
 #include "RenderSystem.h"
 #include <vector>
+#include <string>
 #include <unordered_map>
 
 //NOTE: All the stuff in these files assumes using joined shaders for now (eg. vert/pixel in same file)
@@ -27,31 +28,16 @@ struct ShaderItem
 {
 	ShaderItem() 
 	{
-		vertexCode = nullptr;
-		pixelCode = nullptr;
 
-		vertexShader = nullptr;
-		pixelShader = nullptr;
-
-		srv = nullptr;
-		texture = nullptr;
 	}
-	ShaderItem(const wchar_t* filenameInit, EShaderType typeInit)
+
+	ShaderItem(const wchar_t* _filename, EShaderType type_)
 	{
-		wcscpy_s(filename, 64 * 2, filenameInit);
-		type = typeInit;
-
-		vertexCode = nullptr;
-		pixelCode = nullptr;
-
-		vertexShader = nullptr;
-		pixelShader = nullptr;
-
-		srv = nullptr;
-		texture = nullptr;
+		filename = _filename;
+		type = type_;
 	}
 
-	wchar_t filename[64];
+	std::wstring filename;
 	EShaderType type;
 
 	ID3DBlob* vertexCode; 
