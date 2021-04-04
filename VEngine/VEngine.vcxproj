@@ -45,14 +45,14 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)\FBXInclude;$(ProjectDir)\Source</IncludePath>
+    <IncludePath>C:\Users\Cahntz\source\repos\VEngine\VEngine\Source\imgui;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)\FBXInclude;C:\Users\Cahntz\source\repos\VEngine\VEngine\Source\ImGuizmo;$(ProjectDir)\Source</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)\Libs</LibraryPath>
     <OutDir>$(ProjectDir)</OutDir>
     <ReferencePath>$(VC_ReferencesPath_x64);</ReferencePath>
     <ExecutablePath>$(VC_ExecutablePath_x64);$(CommonExecutablePath);</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)\FBXInclude;$(ProjectDir)\Source</IncludePath>
+    <IncludePath>C:\Users\Cahntz\source\repos\VEngine\VEngine\Source\imgui;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)\FBXInclude;C:\Users\Cahntz\source\repos\VEngine\VEngine\Source\ImGuizmo;$(ProjectDir)\Source</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)\Libs</LibraryPath>
     <OutDir>$(ProjectDir)</OutDir>
     <ReferencePath>$(VC_ReferencesPath_x64);</ReferencePath>
@@ -128,6 +128,13 @@
     <ClCompile Include="Source\FileSystem.cpp" />
     <ClCompile Include="Source\GameSystem.cpp" />
     <ClCompile Include="Source\Buffer.cpp" />
+    <ClCompile Include="Source\imgui\backends\imgui_impl_dx11.cpp" />
+    <ClCompile Include="Source\imgui\backends\imgui_impl_win32.cpp" />
+    <ClCompile Include="Source\imgui\imgui.cpp" />
+    <ClCompile Include="Source\imgui\imgui_demo.cpp" />
+    <ClCompile Include="Source\imgui\imgui_draw.cpp" />
+    <ClCompile Include="Source\imgui\imgui_tables.cpp" />
+    <ClCompile Include="Source\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\RasterizerState.cpp" />
     <ClCompile Include="Source\RenderSystem.cpp" />
@@ -179,6 +186,14 @@
     <ClInclude Include="Source\FileSystem.h" />
     <ClInclude Include="Source\GameSystem.h" />
     <ClInclude Include="Source\Buffer.h" />
+    <ClInclude Include="Source\imgui\backends\imgui_impl_dx11.h" />
+    <ClInclude Include="Source\imgui\backends\imgui_impl_win32.h" />
+    <ClInclude Include="Source\imgui\imconfig.h" />
+    <ClInclude Include="Source\imgui\imgui.h" />
+    <ClInclude Include="Source\imgui\imgui_internal.h" />
+    <ClInclude Include="Source\imgui\imstb_rectpack.h" />
+    <ClInclude Include="Source\imgui\imstb_textedit.h" />
+    <ClInclude Include="Source\imgui\imstb_truetype.h" />
     <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\RasterizerState.h" />
     <ClInclude Include="Source\RenderSystem.h" />

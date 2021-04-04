@@ -26,6 +26,10 @@
 #include "RenderViewWidget.h"
 #include "WorldDock.h"
 
+#include "imgui/imgui.h"
+#include "imgui/backends/imgui_impl_win32.h"
+#include "imgui/backends/imgui_impl_dx11.h"
+
 //For throwing the program into fullscreen for profiling (gets rid of Qt)
 //#define NO_EDITOR
 
@@ -58,6 +62,19 @@ int main(int argc, char *argv[])
     gCoreSystem.windowHeight = 600;
     gRenderSystem.Init(gCoreSystem.mainWindow);
 #endif
+
+    //IMGUI setup
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+
+    ImGui::StyleColorsDark();
+
+    ImGui_ImplWin32_Init((HWND)gEditorMainWindow->renderViewWidget->winId());
+    ImGui_ImplDX11_Init(gRenderSystem.device, gRenderSystem.context);
+
     gAudioSystem.Init();
     gUISystem.Init();
     gWorldEditor.Init();
@@ -96,13 +113,20 @@ int main(int argc, char *argv[])
 
         GetActiveCamera()->Tick(deltaTime);
 
+        ImGui_ImplDX11_NewFrame();
+        ImGui_ImplWin32_NewFrame();
+        ImGui::NewFrame();
+        ImGui::ShowDemoWindow();
+
         gRenderSystem.Tick();
         gRenderSystem.RenderSetup(deltaTime);
 
         gWorldEditor.Tick(nullptr, gEditorMainWindow);
 
+        ImGui::Render();
         gRenderSystem.Render(deltaTime);
         gRenderSystem.RenderEnd(deltaTime);
+        ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
         //UI RENDERING
         if (gUISystem.bAllUIActive)
@@ -128,6 +152,9 @@ int main(int argc, char *argv[])
         gCoreSystem.EndTimer();
     }
 
+    ImGui_ImplDX11_Shutdown();
+    ImGui_ImplWin32_Shutdown();
+    ImGui::DestroyContext();
     gUISystem.Cleanup();
     qApp->quit();
 
