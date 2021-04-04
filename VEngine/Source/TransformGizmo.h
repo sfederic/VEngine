@@ -3,8 +3,8 @@
 #include "imgui/imgui.h"
 #include "Imguizmo/ImGuizmo.h"
 
-//Using ImGuizmo for transform, scale and rotation.
-//Press W, E or R for Translation, Scale or Rotation.
+//Using ImGuizmo for transform, scale and rotation. Press W, E or R for Translation, Scale or Rotation.
+//NOTE: Keep in mind that ImGuizmo draws its gizmos inside an ImGui window, and not directly onto the viewport.
 class TransformGizmo
 {
 public:

@@ -166,7 +166,7 @@ void Camera::Move(float d, XMVECTOR axis)
 
 void Camera::ZoomTo(Actor* actor)
 {
-	//Tracel the camera down the line its pointing towards the actor
+	//Trace the camera down the line its pointing towards the actor
 	XMVECTOR actorPos = actor->GetPositionVector() - (forward * 5.f);
 	location = actorPos;
 }
