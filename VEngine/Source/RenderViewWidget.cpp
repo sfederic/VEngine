@@ -1,5 +1,6 @@
 #include "RenderViewWidget.h"
 #include "imgui/backends/imgui_impl_win32.h"
+#include "../EditorMainWindow.h"
 
 RenderViewWidget::RenderViewWidget(QWidget* parent) : QWidget(parent)
 {
@@ -8,6 +9,7 @@ RenderViewWidget::RenderViewWidget(QWidget* parent) : QWidget(parent)
 
 void RenderViewWidget::Tick()
 {
+
 }
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -28,6 +30,7 @@ void RenderViewWidget::mousePressEvent(QMouseEvent* mouseEvent)
     if (mouseEvent->button() == Qt::MouseButton::LeftButton)
     {
         gInputSystem.StoreMouseLeftDownInput(VK_LBUTTON);
+        gEditorMainWindow->currentDockFocus = EDockFocus::RenderView;
     }
     else if (mouseEvent->button() == Qt::MouseButton::RightButton)
     {

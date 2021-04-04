@@ -2,6 +2,7 @@
 #include "PropertiesWidget.h"
 #include "World.h"
 #include <QLineEdit>
+#include "../EditorMainWindow.h"
 
 PropertiesDock::PropertiesDock(const char* title) : QDockWidget(title)
 {
@@ -9,9 +10,17 @@ PropertiesDock::PropertiesDock(const char* title) : QDockWidget(title)
     setWidget(propWidget);
 }
 
+void PropertiesDock::enterEvent(QEvent* event)
+{
+    gEditorMainWindow->currentDockFocus = EDockFocus::Properties;
+}
+
 void PropertiesDock::Tick()
 {
-    //propWidget->Tick();
+    if (gEditorMainWindow->currentDockFocus != EDockFocus::Properties)
+    {
+        propWidget->Tick();
+    }
 }
 
 //Throw all of the selected actor's variables into the properties dock

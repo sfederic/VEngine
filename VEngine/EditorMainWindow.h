@@ -11,6 +11,16 @@ class AssetDock;
 class ConsoleDock;
 class RenderViewWidget;
 
+enum class EDockFocus : uint8_t
+{
+	None,
+	Properties,
+	RenderView,
+	Console,
+	Assets,
+	WorldList
+};
+
 class EditorMainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -35,6 +45,8 @@ public:
 	ConsoleDock* consoleDock;
 
 	RenderViewWidget* renderViewWidget;
+
+	EDockFocus currentDockFocus;
 
 private:
     Ui::EditorMainWindowClass ui;

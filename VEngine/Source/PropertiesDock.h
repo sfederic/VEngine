@@ -11,8 +11,10 @@ class PropertiesDock : public QDockWidget
 {
 public:
 	PropertiesDock(const char* title);
-	void Tick();
 
+	virtual void enterEvent(QEvent* event);
+
+	void Tick();
 	void DisplayActorSystemProperties(Actor* actorSystem);
 
 	PropertiesWidget* propWidget;

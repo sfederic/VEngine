@@ -10,6 +10,7 @@
 #include <qfiledialog.h>
 #include <QDoubleSpinBox>
 #include <QLineEdit>
+#include "RenderViewWidget.h"
 
 void PropertiesWidget::SetActorPosition()
 {
@@ -214,17 +215,20 @@ void PropertiesWidget::SelectTexture()
 void PropertiesWidget::Tick()
 {
     Actor* picked = gWorldEditor.pickedActor;
-    if (picked)
+    if (picked && gEditorMainWindow->renderViewWidget->bRenderViewHasFocus)
     {
         XMFLOAT3 pos = picked->GetPositionFloat3();
         posEditX->setValue(pos.x);
         posEditY->setValue(pos.y);
         posEditZ->setValue(pos.z);
 
-        XMFLOAT3 rot;
-        rotEditX->setValue(rot.x);
-        rotEditY->setValue(rot.y);
-        rotEditZ->setValue(rot.z);
+        XMFLOAT4 rot = picked->GetRotationQuat();
+        XMVECTOR rotationAxis;
+        float rotationAngle;
+        XMQuaternionToAxisAngle(&rotationAxis, &rotationAngle, XMLoadFloat4(&rot));
+        rotEditX->setValue(rotationAxis.m128_f32[0]);
+        rotEditY->setValue(rotationAxis.m128_f32[1]);
+        rotEditZ->setValue(rotationAxis.m128_f32[2]);
 
         XMFLOAT3 scale = picked->GetScale();
         scaleEditX->setValue(scale.x);

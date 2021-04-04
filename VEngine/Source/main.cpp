@@ -1,4 +1,3 @@
-
 #include "..\EditorMainWindow.h"
 #include "RenderSystem.h"
 #include "CoreSystem.h"
@@ -122,18 +121,11 @@ int main(int argc, char *argv[])
         ImGui_ImplDX11_NewFrame();
         ImGui_ImplWin32_NewFrame();
         ImGui::NewFrame();
-        //ImGui::ShowDemoWindow();
         
         if (gWorldEditor.pickedActor)
         {
-            /*ImGuizmo::BeginFrame();
-            ImGuizmo::Enable(true);
-            ImGuizmo::SetOrthographic(false);
-            ImGuizmo::SetDrawlist();*/
-
             XMFLOAT4X4 view, proj, actorMatrix;
             XMStoreFloat4x4(&view, GetActiveCamera()->view);
-            //view._43 *= -1.f;
             XMStoreFloat4x4(&proj, GetActiveCamera()->proj);
             XMStoreFloat4x4(&actorMatrix, gWorldEditor.pickedActor->GetTransformationMatrix());
 
@@ -141,7 +133,7 @@ int main(int argc, char *argv[])
             float viewManipulateTop = 0;
             ImGui::SetNextWindowSize(ImVec2(1000, 600));
             ImGui::SetNextWindowPos(ImVec2(0, 0));
-            ImGui::Begin("Gizmo", 0, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground);
+            ImGui::Begin("Gizmo", 0, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar);
             ImGuizmo::SetDrawlist();
             float windowWidth = (float)ImGui::GetWindowWidth();
             float windowHeight = (float)ImGui::GetWindowHeight();
@@ -149,7 +141,21 @@ int main(int argc, char *argv[])
             viewManipulateRight = ImGui::GetWindowPos().x + windowWidth;
             viewManipulateTop = ImGui::GetWindowPos().y;
 
-            ImGuizmo::Manipulate(&view.m[0][0], &proj.m[0][0], ImGuizmo::OPERATION::ROTATE, ImGuizmo::MODE::LOCAL, &actorMatrix.m[0][0]);
+            static ImGuizmo::OPERATION currentTransformOperation;
+            if (gInputSystem.GetKeyDownState('E'))
+            {
+                currentTransformOperation = ImGuizmo::SCALE;
+            }
+            else if (gInputSystem.GetKeyDownState('R'))
+            {
+                currentTransformOperation = ImGuizmo::ROTATE;
+            }
+            else if (gInputSystem.GetKeyDownState('W'))
+            {
+                currentTransformOperation = ImGuizmo::TRANSLATE;
+            }
+
+            ImGuizmo::Manipulate(&view.m[0][0], &proj.m[0][0], currentTransformOperation, ImGuizmo::MODE::LOCAL, &actorMatrix.m[0][0]);
             Actor* actor = gWorldEditor.pickedActor;
             XMFLOAT3 axis;
             ImGuizmo::DecomposeMatrixToComponents(&actorMatrix.m[0][0], &actor->transform.position.x,

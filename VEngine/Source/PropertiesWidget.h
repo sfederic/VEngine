@@ -43,15 +43,4 @@ public:
     void SetActorPosition();
     void SetActorScale();
     void SetActorRotation();
-
-    virtual void enterEvent(QEvent* event)
-    {
-
-    }
-
-    virtual void leaveEvent(QEvent* event)
-    {
-
-    }
 };
-
