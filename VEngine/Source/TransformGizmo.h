@@ -15,6 +15,9 @@ public:
 	float snap[3] = { 1.f, 1.f, 1.f };
 	float bounds[6] = { -1.f, -1.f, -1.f, 1.f, 1.f, 1.f };
 	float boundsSnap[3] = { 0.5f, 0.5f, 0.5f };
+
+	bool bBoundsToggle = true;
+	bool bGridToggle = true;
 };
 
 extern TransformGizmo gTransformGizmo;

@@ -1,10 +1,12 @@
 #include "RenderViewWidget.h"
 #include "imgui/backends/imgui_impl_win32.h"
 #include "../EditorMainWindow.h"
+#include <QSpinBox>
+#include <QVBoxLayout>
 
 RenderViewWidget::RenderViewWidget(QWidget* parent) : QWidget(parent)
 {
-
+    //TODO: Need some snap setting controls. See what the tradeoffs are between Qt and IMGUI
 }
 
 void RenderViewWidget::Tick()

@@ -215,7 +215,7 @@ void PropertiesWidget::SelectTexture()
 void PropertiesWidget::Tick()
 {
     Actor* picked = gWorldEditor.pickedActor;
-    if (picked && gEditorMainWindow->renderViewWidget->bRenderViewHasFocus)
+    if (picked)
     {
         XMFLOAT3 pos = picked->GetPositionFloat3();
         posEditX->setValue(pos.x);

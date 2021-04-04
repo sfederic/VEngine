@@ -50,9 +50,17 @@ void TransformGizmo::Tick(ImGuiIO* io)
             &actor->transform.scale.x);
         actor->SetRotation(axis);
 
-        XMFLOAT4X4 identity;
-        XMStoreFloat4x4(&identity, XMMatrixIdentity());
-        ImGuizmo::DrawGrid(&view.m[0][0], &proj.m[0][0], &identity.m[0][0], 100.f);
+        //Toggle and draw grid
+        if (gInputSystem.GetKeyUpState('G'))
+        {
+            bGridToggle = !bGridToggle;
+        }
+        if (bGridToggle)
+        {
+            XMFLOAT4X4 identity;
+            XMStoreFloat4x4(&identity, XMMatrixIdentity());
+            ImGuizmo::DrawGrid(&view.m[0][0], &proj.m[0][0], &identity.m[0][0], 100.f);
+        }
 
         //TODO: View Manipulator (Gives a little Autodesk-esque widget in the corner, but I can't figure it out. Camera class is a bit wonky)
         /*float viewManipulateRight = io->DisplaySize.x;
@@ -64,6 +72,27 @@ void TransformGizmo::Tick(ImGuiIO* io)
         GetActiveCamera()->forward = XMVectorSet(view._31, view._32, view._33, 0.f);
         GetActiveCamera()->right = XMVectorSet(view._11, view._12, view._13, 0.f);
         GetActiveCamera()->up = XMVectorSet(view._21, view._22, view._23, 0.f);*/
+
+        //Toggle snap and scale controls
+        if (gInputSystem.GetKeyUpState('O'))
+        {
+            bBoundsToggle = !bBoundsToggle;
+            if (bBoundsToggle)
+            {
+                memset(bounds, 0.f, sizeof(float) * 6);
+                memset(boundsSnap, 0.f, sizeof(float) * 3);
+            }
+            else if (!bBoundsToggle)
+            {
+                bounds[0] = -1.f;
+                bounds[1] = -1.f;
+                bounds[2] = -1.f;
+                bounds[3] = 1.f;
+                bounds[4] = 1.f;
+                bounds[5] = 1.f;
+                memset(boundsSnap, 0.5f, sizeof(float) * 3);
+            }
+        }
 
         ImGui::End();
     }
