@@ -28,7 +28,8 @@
 #include "imgui/imgui.h"
 #include "imgui/backends/imgui_impl_win32.h"
 #include "imgui/backends/imgui_impl_dx11.h"
-#include "Imguizmo/ImGuizmo.h"
+
+#include "TransformGizmo.h"
 
 //For throwing the program into fullscreen for profiling (gets rid of Qt)
 //#define NO_EDITOR
@@ -120,57 +121,8 @@ int main(int argc, char *argv[])
         ImGui_ImplDX11_NewFrame();
         ImGui_ImplWin32_NewFrame();
         ImGui::NewFrame();
-        
-        if (gWorldEditor.pickedActor)
-        {
-            XMFLOAT4X4 view, proj, actorMatrix;
-            XMStoreFloat4x4(&view, GetActiveCamera()->view);
-            XMStoreFloat4x4(&proj, GetActiveCamera()->proj);
-            XMStoreFloat4x4(&actorMatrix, gWorldEditor.pickedActor->GetTransformationMatrix());
 
-            float viewManipulateRight = io.DisplaySize.x;
-            float viewManipulateTop = 0;
-            ImGui::SetNextWindowSize(ImVec2(gCoreSystem.windowWidth, gCoreSystem.windowHeight));
-            ImGui::SetNextWindowPos(ImVec2(0, 0));
-            ImGui::Begin("Transform Gizmo", 0, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar);
-            ImGuizmo::SetDrawlist();
-            float windowWidth = (float)ImGui::GetWindowWidth();
-            float windowHeight = (float)ImGui::GetWindowHeight();
-            ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
-            viewManipulateRight = ImGui::GetWindowPos().x + windowWidth;
-            viewManipulateTop = ImGui::GetWindowPos().y;
-
-            static ImGuizmo::OPERATION currentTransformOperation;
-            if (gInputSystem.GetKeyDownState('E'))
-            {
-                currentTransformOperation = ImGuizmo::SCALE;
-            }
-            else if (gInputSystem.GetKeyDownState('R'))
-            {
-                currentTransformOperation = ImGuizmo::ROTATE;
-            }
-            else if (gInputSystem.GetKeyDownState('W'))
-            {
-                currentTransformOperation = ImGuizmo::TRANSLATE;
-            }
-
-            static float snap[3] = { 1.f, 1.f, 1.f };
-            static float bounds[] = { -0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f };
-            static float boundsSnap[] = { 0.1f, 0.1f, 0.1f };
-            ImGuizmo::Manipulate(&view.m[0][0], &proj.m[0][0], currentTransformOperation, ImGuizmo::MODE::LOCAL, &actorMatrix.m[0][0],
-                nullptr, snap, bounds, boundsSnap);
-            Actor* actor = gWorldEditor.pickedActor;
-            XMFLOAT3 axis;
-            ImGuizmo::DecomposeMatrixToComponents(&actorMatrix.m[0][0], &actor->transform.position.x,
-                &axis.x,
-                &actor->transform.scale.x);
-            actor->SetRotation(axis);
-
-            //Gives a little Autodesk-esque widget in the corner, but I can't figure it out.
-            //ImGuizmo::ViewManipulate(&view.m[0][0], 8.0f, ImVec2(viewManipulateRight - 128, viewManipulateTop), ImVec2(128, 128), 0x10101010);
-
-            ImGui::End();
-        }
+        gTransformGizmo.Tick(&ImGui::GetIO());
 
         ImGui::EndFrame();
 

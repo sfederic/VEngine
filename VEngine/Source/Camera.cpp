@@ -171,6 +171,7 @@ void Camera::ZoomTo(Actor* actor)
 	location = actorPos;
 }
 
+//TODO: This works, but it might need some cleaning up (or some visualisation)
 void Camera::FrustumCullTest(ActorSystem& system)
 {
 	//OpenMP Test

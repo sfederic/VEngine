@@ -166,6 +166,7 @@
     <ClCompile Include="Source\WorldDock.cpp" />
     <ClCompile Include="Source\WorldEditor.cpp" />
     <ClCompile Include="Source\Transform.cpp" />
+    <ClCompile Include="Source\TransformGizmo.cpp" />
     <QtRcc Include="EditorMainWindow.qrc" />
     <QtUic Include="EditorMainWindow.ui" />
     <QtMoc Include="EditorMainWindow.h" />
@@ -230,6 +231,7 @@
     <ClInclude Include="Source\WorldDock.h" />
     <ClInclude Include="Source\WorldEditor.h" />
     <ClInclude Include="Source\Transform.h" />
+    <ClInclude Include="Source\TransformGizmo.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
