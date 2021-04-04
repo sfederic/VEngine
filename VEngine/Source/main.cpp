@@ -29,6 +29,7 @@
 #include "imgui/imgui.h"
 #include "imgui/backends/imgui_impl_win32.h"
 #include "imgui/backends/imgui_impl_dx11.h"
+#include "Imguizmo/ImGuizmo.h"
 
 //For throwing the program into fullscreen for profiling (gets rid of Qt)
 //#define NO_EDITOR
@@ -121,7 +122,47 @@ int main(int argc, char *argv[])
         ImGui_ImplDX11_NewFrame();
         ImGui_ImplWin32_NewFrame();
         ImGui::NewFrame();
-        ImGui::ShowDemoWindow();
+        //ImGui::ShowDemoWindow();
+        
+        if (gWorldEditor.pickedActor)
+        {
+            /*ImGuizmo::BeginFrame();
+            ImGuizmo::Enable(true);
+            ImGuizmo::SetOrthographic(false);
+            ImGuizmo::SetDrawlist();*/
+
+            XMFLOAT4X4 view, proj, actorMatrix;
+            XMStoreFloat4x4(&view, GetActiveCamera()->view);
+            //view._43 *= -1.f;
+            XMStoreFloat4x4(&proj, GetActiveCamera()->proj);
+            XMStoreFloat4x4(&actorMatrix, gWorldEditor.pickedActor->GetTransformationMatrix());
+
+            float viewManipulateRight = io.DisplaySize.x;
+            float viewManipulateTop = 0;
+            ImGui::SetNextWindowSize(ImVec2(1000, 600));
+            ImGui::SetNextWindowPos(ImVec2(0, 0));
+            ImGui::Begin("Gizmo", 0, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground);
+            ImGuizmo::SetDrawlist();
+            float windowWidth = (float)ImGui::GetWindowWidth();
+            float windowHeight = (float)ImGui::GetWindowHeight();
+            ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
+            viewManipulateRight = ImGui::GetWindowPos().x + windowWidth;
+            viewManipulateTop = ImGui::GetWindowPos().y;
+
+            ImGuizmo::Manipulate(&view.m[0][0], &proj.m[0][0], ImGuizmo::OPERATION::ROTATE, ImGuizmo::MODE::LOCAL, &actorMatrix.m[0][0]);
+            Actor* actor = gWorldEditor.pickedActor;
+            XMVECTOR axis;
+            float angle;
+            XMQuaternionToAxisAngle(&axis, &angle, XMLoadFloat4(&actor->transform.quatRotation));
+            ImGuizmo::DecomposeMatrixToComponents(&actorMatrix.m[0][0], &actor->transform.position.x,
+                &axis.m128_f32[0],
+                &actor->transform.scale.x);
+            actor->SetRotation(axis, angle);
+
+            ImGui::End();
+        }
+
+        ImGui::EndFrame();
 
         gRenderSystem.Tick();
         gRenderSystem.RenderSetup(deltaTime);

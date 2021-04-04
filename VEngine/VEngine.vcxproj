@@ -128,6 +128,10 @@
     <ClCompile Include="Source\FileSystem.cpp" />
     <ClCompile Include="Source\GameSystem.cpp" />
     <ClCompile Include="Source\Buffer.cpp" />
+    <ClCompile Include="Source\ImGuizmo\ImCurveEdit.cpp" />
+    <ClCompile Include="Source\ImGuizmo\ImGradient.cpp" />
+    <ClCompile Include="Source\ImGuizmo\ImGuizmo.cpp" />
+    <ClCompile Include="Source\ImGuizmo\ImSequencer.cpp" />
     <ClCompile Include="Source\imgui\backends\imgui_impl_dx11.cpp" />
     <ClCompile Include="Source\imgui\backends\imgui_impl_win32.cpp" />
     <ClCompile Include="Source\imgui\imgui.cpp" />
@@ -186,6 +190,11 @@
     <ClInclude Include="Source\FileSystem.h" />
     <ClInclude Include="Source\GameSystem.h" />
     <ClInclude Include="Source\Buffer.h" />
+    <ClInclude Include="Source\ImGuizmo\ImCurveEdit.h" />
+    <ClInclude Include="Source\ImGuizmo\ImGradient.h" />
+    <ClInclude Include="Source\ImGuizmo\ImGuizmo.h" />
+    <ClInclude Include="Source\ImGuizmo\ImSequencer.h" />
+    <ClInclude Include="Source\ImGuizmo\ImZoomSlider.h" />
     <ClInclude Include="Source\imgui\backends\imgui_impl_dx11.h" />
     <ClInclude Include="Source\imgui\backends\imgui_impl_win32.h" />
     <ClInclude Include="Source\imgui\imconfig.h" />
