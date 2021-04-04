@@ -45,9 +45,9 @@ void Actor::SetPosition(XMFLOAT3 pos)
 //ROTATION FUNCTIONS
 void Actor::SetRotation(XMVECTOR axis, float angle)
 {
-	//DirectXMath hits asserts on axis and angle being zero in XMQuat_() functions.
 	if (XMVector3Equal(XMVectorZero(), axis))
 	{
+		transform.quatRotation = XMFLOAT4(0.f, 0.f, 0.f, 1.f);
 		return;
 	}
 

@@ -151,13 +151,11 @@ int main(int argc, char *argv[])
 
             ImGuizmo::Manipulate(&view.m[0][0], &proj.m[0][0], ImGuizmo::OPERATION::ROTATE, ImGuizmo::MODE::LOCAL, &actorMatrix.m[0][0]);
             Actor* actor = gWorldEditor.pickedActor;
-            XMVECTOR axis;
-            float angle;
-            XMQuaternionToAxisAngle(&axis, &angle, XMLoadFloat4(&actor->transform.quatRotation));
+            XMFLOAT3 axis;
             ImGuizmo::DecomposeMatrixToComponents(&actorMatrix.m[0][0], &actor->transform.position.x,
-                &axis.m128_f32[0],
+                &axis.x,
                 &actor->transform.scale.x);
-            actor->SetRotation(axis, angle);
+            actor->SetRotation(axis);
 
             ImGui::End();
         }
