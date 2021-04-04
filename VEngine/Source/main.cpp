@@ -92,7 +92,6 @@ int main(int argc, char *argv[])
     ac.CreateActors<Actor>(&gRenderSystem, 1);
 
     GetWorld()->AddActorSystem(ac);
-    //GetWorld()->AddActorSystem(gWorldEditor.translationGizmos);
 
     //Qt late init
     gEditorMainWindow->worldDock->PopulateWorldList();
@@ -131,9 +130,9 @@ int main(int argc, char *argv[])
 
             float viewManipulateRight = io.DisplaySize.x;
             float viewManipulateTop = 0;
-            ImGui::SetNextWindowSize(ImVec2(1000, 600));
+            ImGui::SetNextWindowSize(ImVec2(gCoreSystem.windowWidth, gCoreSystem.windowHeight));
             ImGui::SetNextWindowPos(ImVec2(0, 0));
-            ImGui::Begin("Gizmo", 0, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar);
+            ImGui::Begin("Transform Gizmo", 0, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar);
             ImGuizmo::SetDrawlist();
             float windowWidth = (float)ImGui::GetWindowWidth();
             float windowHeight = (float)ImGui::GetWindowHeight();
@@ -155,13 +154,20 @@ int main(int argc, char *argv[])
                 currentTransformOperation = ImGuizmo::TRANSLATE;
             }
 
-            ImGuizmo::Manipulate(&view.m[0][0], &proj.m[0][0], currentTransformOperation, ImGuizmo::MODE::LOCAL, &actorMatrix.m[0][0]);
+            static float snap[3] = { 1.f, 1.f, 1.f };
+            static float bounds[] = { -0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f };
+            static float boundsSnap[] = { 0.1f, 0.1f, 0.1f };
+            ImGuizmo::Manipulate(&view.m[0][0], &proj.m[0][0], currentTransformOperation, ImGuizmo::MODE::LOCAL, &actorMatrix.m[0][0],
+                nullptr, snap, bounds, boundsSnap);
             Actor* actor = gWorldEditor.pickedActor;
             XMFLOAT3 axis;
             ImGuizmo::DecomposeMatrixToComponents(&actorMatrix.m[0][0], &actor->transform.position.x,
                 &axis.x,
                 &actor->transform.scale.x);
             actor->SetRotation(axis);
+
+            //Gives a little Autodesk-esque widget in the corner, but I can't figure it out.
+            //ImGuizmo::ViewManipulate(&view.m[0][0], 8.0f, ImVec2(viewManipulateRight - 128, viewManipulateTop), ImVec2(128, 128), 0x10101010);
 
             ImGui::End();
         }
