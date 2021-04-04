@@ -67,6 +67,11 @@ int main(int argc, char *argv[])
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
+
+    //Imgui has an .ini file to save previous ui positions and values.
+    //Setting this to null removes this initial setup.
+    io.IniFilename = nullptr;  
+
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
     //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 
