@@ -8,22 +8,23 @@ TransformGizmo gTransformGizmo;
 
 void TransformGizmo::Tick(ImGuiIO* io)
 {
+    //Set Imgui window
+    ImGui::SetNextWindowSize(ImVec2(gCoreSystem.windowWidth, gCoreSystem.windowHeight));
+    ImGui::SetNextWindowPos(ImVec2(0, 0));
+    ImGui::Begin("Transform Gizmo", 0, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar);
+    ImGuizmo::SetDrawlist();
+    float windowWidth = (float)ImGui::GetWindowWidth();
+    float windowHeight = (float)ImGui::GetWindowHeight();
+    ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
+
+    //Setup camera and actor matrices
+    XMFLOAT4X4 view, proj, actorMatrix;
+    XMStoreFloat4x4(&view, GetActiveCamera()->view);
+    XMStoreFloat4x4(&proj, GetActiveCamera()->proj);
+
     if (gWorldEditor.pickedActor)
     {
-        //Setup camera and actor matrices
-        XMFLOAT4X4 view, proj, actorMatrix;
-        XMStoreFloat4x4(&view, GetActiveCamera()->view);
-        XMStoreFloat4x4(&proj, GetActiveCamera()->proj);
         XMStoreFloat4x4(&actorMatrix, gWorldEditor.pickedActor->GetTransformationMatrix());
-
-        //Set Imgui window
-        ImGui::SetNextWindowSize(ImVec2(gCoreSystem.windowWidth, gCoreSystem.windowHeight));
-        ImGui::SetNextWindowPos(ImVec2(0, 0));
-        ImGui::Begin("Transform Gizmo", 0, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar);
-        ImGuizmo::SetDrawlist();
-        float windowWidth = (float)ImGui::GetWindowWidth();
-        float windowHeight = (float)ImGui::GetWindowHeight();
-        ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
 
         //Set transform operation
         if (gInputSystem.GetKeyDownState('W'))
@@ -49,18 +50,6 @@ void TransformGizmo::Tick(ImGuiIO* io)
             &axis.x,
             &actor->transform.scale.x);
         actor->SetRotation(axis);
-
-        //Toggle and draw grid
-        if (gInputSystem.GetKeyUpState('G'))
-        {
-            bGridToggle = !bGridToggle;
-        }
-        if (bGridToggle)
-        {
-            XMFLOAT4X4 identity;
-            XMStoreFloat4x4(&identity, XMMatrixIdentity());
-            ImGuizmo::DrawGrid(&view.m[0][0], &proj.m[0][0], &identity.m[0][0], 100.f);
-        }
 
         //TODO: View Manipulator (Gives a little Autodesk-esque widget in the corner, but I can't figure it out. Camera class is a bit wonky)
         /*float viewManipulateRight = io->DisplaySize.x;
@@ -93,7 +82,19 @@ void TransformGizmo::Tick(ImGuiIO* io)
                 memset(boundsSnap, 0.5f, sizeof(float) * 3);
             }
         }
-
-        ImGui::End();
     }
+
+    //Toggle and draw grid
+    if (gInputSystem.GetKeyUpState('G'))
+    {
+        bGridToggle = !bGridToggle;
+    }
+    if (bGridToggle)
+    {
+        XMFLOAT4X4 identity;
+        XMStoreFloat4x4(&identity, XMMatrixIdentity());
+        ImGuizmo::DrawGrid(&view.m[0][0], &proj.m[0][0], &identity.m[0][0], 100.f);
+    }
+
+    ImGui::End();
 }
