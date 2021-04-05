@@ -3,6 +3,8 @@
 #include "Input.h"
 #include "Debug.h"
 #include <stdio.h>
+#include "RenderSystem.h"
+#include "Camera.h"
 
 CoreSystem gCoreSystem;
 
@@ -16,7 +18,7 @@ void CoreSystem::SetupWindow(HINSTANCE instance, int cmdShow)
 	wc.hCursor = LoadCursor(0, IDC_CROSS);
 
 	RegisterClass(&wc);
-	mainWindow = CreateWindow("Window", "d3d11", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, windowWidth, windowHeight, 0, 0, instance, 0);
+	mainWindow = CreateWindow("Window", "VEngine", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, windowWidth, windowHeight, 0, 0, instance, 0);
 	if (!mainWindow)
 	{
 		HR(GetLastError());
@@ -145,6 +147,54 @@ LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam
 		else
 		{
 			gInputSystem.StoreMouseWheelUp();
+		}
+
+	case WM_SIZE:
+		if (gRenderSystem.swapchain)
+		{
+			gRenderSystem.context->OMSetRenderTargets(0, 0, 0);
+
+			// Release all outstanding references to the swap chain's buffers.
+			for (int rtvIndex = 0; rtvIndex < gRenderSystem.frameCount; rtvIndex++)
+			{
+				gRenderSystem.rtvs[rtvIndex]->Release();
+			}
+
+			gRenderSystem.dsv->Release();
+
+			//gUISystem.Cleanup();
+			//gUISystem.Init();
+
+			//ID3D11Debug* debug;
+			//gRenderSystem.device->QueryInterface(__uuidof(ID3D11Debug), reinterpret_cast<void**>(&debug));
+			//debug->ReportLiveDeviceObjects(D3D11_RLDO_SUMMARY);
+			//gRenderSystem.context->ClearState();
+			//gRenderSystem.context->Flush();
+
+			// Preserve the existing buffer count and format.
+			// Automatically choose the width and height to match the client rect for HWNDs.
+
+			UINT width = LOWORD(lparam);
+			UINT height = HIWORD(lparam);
+			gCoreSystem.windowWidth = width;
+			gCoreSystem.windowHeight = height;
+
+			HR(gRenderSystem.swapchain->ResizeBuffers(gRenderSystem.frameCount,
+				gCoreSystem.windowWidth, gCoreSystem.windowHeight, DXGI_FORMAT_R8G8B8A8_UNORM, 0));
+
+			gRenderSystem.CreateRTVAndDSV();
+
+			gRenderSystem.matrices.proj = XMMatrixPerspectiveFovLH(XM_PI / 3, gCoreSystem.GetAspectRatio(), 0.01f, 1000.f);
+			GetActiveCamera()->proj = gRenderSystem.matrices.proj;
+
+			// Set up the viewport.
+			gRenderSystem.viewport.Width = gCoreSystem.windowWidth;
+			gRenderSystem.viewport.Height = gCoreSystem.windowHeight;
+			gRenderSystem.viewport.MinDepth = 0.0f;
+			gRenderSystem.viewport.MaxDepth = 1.0f;
+			gRenderSystem.viewport.TopLeftX = 0;
+			gRenderSystem.viewport.TopLeftY = 0;
+			gRenderSystem.context->RSSetViewports(1, &gRenderSystem.viewport);
 		}
 	}
 

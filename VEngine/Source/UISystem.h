@@ -7,6 +7,10 @@
 #include <vector>
 #include "UIView.h"
 
+//TODO: Bringing fullscreen toggle stuff into DX11 and D2D has a few funny things between
+//swapchain references IDXGISwapChain::ResizeBuffers() fails in this case) and resizing. 
+//Either figure it out or drop it.
+
 class UISystem
 {
 public:

@@ -32,12 +32,11 @@
 #include "TransformGizmo.h"
 
 //For throwing the program into fullscreen for profiling (gets rid of Qt)
-//#define NO_EDITOR
+#define NO_EDITOR
 
 bool fullscreen = false;
 
-
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     HR(CoInitialize(NULL)); //For the WIC texture functions from DXT
 
@@ -64,6 +63,7 @@ int main(int argc, char *argv[])
 #else
     gCoreSystem.windowWidth = 800;
     gCoreSystem.windowHeight = 600;
+    gCoreSystem.SetupWindow(GetModuleHandle(NULL), SW_SHOW);
     gRenderSystem.Init(gCoreSystem.mainWindow);
 #endif
 
@@ -81,7 +81,11 @@ int main(int argc, char *argv[])
 
     ImGui::StyleColorsDark();
 
+#ifdef NO_EDITOR
+    ImGui_ImplWin32_Init(gCoreSystem.mainWindow);
+#else
     ImGui_ImplWin32_Init((HWND)gEditorMainWindow->renderViewWidget->winId());
+#endif
     ImGui_ImplDX11_Init(gRenderSystem.device, gRenderSystem.context);
 
     gAudioSystem.Init();
@@ -98,7 +102,7 @@ int main(int argc, char *argv[])
     GetWorld()->AddActorSystem(ac);
 
     //Qt late init
-    gEditorMainWindow->worldDock->PopulateWorldList();
+    //gEditorMainWindow->worldDock->PopulateWorldList();
 
     gRenderSystem.Flush();
     gRenderSystem.WaitForPreviousFrame();
@@ -111,8 +115,8 @@ int main(int argc, char *argv[])
         gCoreSystem.StartTimer();
         gCoreSystem.HandleMessages();
 
-        gQApplication->processEvents();
-        gEditorMainWindow->Tick();
+        //gQApplication->processEvents();
+        //gEditorMainWindow->Tick();
 
         gFileSystem.Tick();
         gUISystem.Tick(gEditorMainWindow);
@@ -143,7 +147,7 @@ int main(int argc, char *argv[])
         gWorldEditor.Tick(nullptr, gEditorMainWindow);
 
         //Fullscreen test
-        if (gInputSystem.GetKeyUpState('5'))
+        /*if (gInputSystem.GetKeyUpState('5'))
         {
             fullscreen = !fullscreen;
 
@@ -159,7 +163,7 @@ int main(int argc, char *argv[])
                 gEditorMainWindow->renderViewWidget->setParent(gEditorMainWindow);
                 gEditorMainWindow->setCentralWidget(gEditorMainWindow->renderViewWidget);
             }
-        }
+        }*/
 
 
 
@@ -195,7 +199,7 @@ int main(int argc, char *argv[])
     ImGui_ImplDX11_Shutdown();
     ImGui_ImplWin32_Shutdown();
     ImGui::DestroyContext();
-    gUISystem.Cleanup();
+    //gUISystem.Cleanup();
     qApp->quit();
 
     return 0;
