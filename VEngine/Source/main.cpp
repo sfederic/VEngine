@@ -127,26 +127,6 @@ int main(int argc, char* argv[])
 
         gWorldEditor.Tick(nullptr);
 
-        //Fullscreen test
-        /*if (gInputSystem.GetKeyUpState('5'))
-        {
-            fullscreen = !fullscreen;
-
-            if (fullscreen)
-            {
-                gEditorMainWindow->renderViewWidget->setParent(nullptr);
-                gEditorMainWindow->renderViewWidget->setWindowFlags(gEditorMainWindow->renderViewWidget->windowFlags() | Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint);
-                gEditorMainWindow->renderViewWidget->setWindowState(gEditorMainWindow->renderViewWidget->windowState() | Qt::WindowFullScreen);
-                gEditorMainWindow->renderViewWidget->show();
-            }
-            else if (!fullscreen)
-            {
-                gEditorMainWindow->renderViewWidget->setParent(gEditorMainWindow);
-                gEditorMainWindow->setCentralWidget(gEditorMainWindow->renderViewWidget);
-            }
-        }*/
-
-
 
         ImGui::Render();
         gRenderSystem.Render(deltaTime);

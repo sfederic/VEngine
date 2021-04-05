@@ -17,4 +17,5 @@ public:
 	virtual void SetDockFocus(EDockFocus focus);
 	virtual int GetDockFocus();
 	virtual void GetMousePos(int* x, int* y);
+	virtual void ToggleFullscreen();
 };

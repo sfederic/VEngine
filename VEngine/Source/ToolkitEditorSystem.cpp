@@ -4,6 +4,7 @@
 #include "RenderViewWidget.h"
 #include "PropertiesDock.h"
 #include "Actor.h"
+#include "Input.h"
 
 QApplication* qApplication;
 EditorMainWindow* editorMainWindow;
@@ -20,6 +21,7 @@ void ToolkitEditorSystem::Init(int argc, char** argv)
 void ToolkitEditorSystem::Tick()
 {
 	editorMainWindow->Tick();
+	ToggleFullscreen();
 }
 
 void ToolkitEditorSystem::PopulateWorldList()
@@ -58,4 +60,27 @@ void ToolkitEditorSystem::GetMousePos(int* x, int* y)
 	QPoint p = editorMainWindow->renderViewWidget->mapFromGlobal(QCursor::pos());
 	*x = p.x();
 	*y = p.y();
+}
+
+void ToolkitEditorSystem::ToggleFullscreen()
+{
+	static bool fullscreen;
+
+	if (gInputSystem.GetKeyUpState(VK_F11))
+	{
+		fullscreen = !fullscreen;
+
+		if (fullscreen)
+		{
+			editorMainWindow->renderViewWidget->setParent(nullptr);
+			editorMainWindow->renderViewWidget->setWindowFlags(editorMainWindow->renderViewWidget->windowFlags() | Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint);
+			editorMainWindow->renderViewWidget->setWindowState(editorMainWindow->renderViewWidget->windowState() | Qt::WindowFullScreen);
+			editorMainWindow->renderViewWidget->show();
+		}
+		else if (!fullscreen)
+		{
+			editorMainWindow->renderViewWidget->setParent(editorMainWindow);
+			editorMainWindow->setCentralWidget(editorMainWindow->renderViewWidget);
+		}
+	}
 }
