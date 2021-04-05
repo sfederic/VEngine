@@ -16,6 +16,7 @@ class Actor;
 class IEditorSystem
 {
 public:
+	virtual void Init(int argc, char** argv) = 0;
 	virtual void Tick() = 0;
 	virtual void PopulateWorldList() = 0;
 	virtual void ProcessEvents() = 0;
@@ -23,4 +24,6 @@ public:
 	virtual void SetWindowWidthHeight() = 0;
 	virtual void SetDockFocus(EDockFocus focus) = 0;
 	virtual int GetDockFocus() = 0;
+
+	void* mainWindow;
 };

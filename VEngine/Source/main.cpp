@@ -33,23 +33,14 @@
 
 #include "TransformGizmo.h"
 
-//For throwing the program into fullscreen for profiling (gets rid of Qt)
-#define NO_EDITOR
-
 bool fullscreen = false;
 
 int main(int argc, char* argv[])
 {
     HR(CoInitialize(NULL)); //For the WIC texture functions from DXT
 
-    //Qt setup
-#ifndef NO_EDITOR
-    QApplication qApplication(argc, nullptr);
-    EditorMainWindow editorMainWindow;
-    gEditorMainWindow = &editorMainWindow;
-    gQApplication = &qApplication;
-#endif
-
+    gEditorSystem->Init(argc, argv);
+    
     gProfiler.Init();
 
     //FBX setup
@@ -60,14 +51,7 @@ int main(int argc, char* argv[])
 
     //Systems setup
     gCoreSystem.SetTimerFrequency();
-#ifndef NO_EDITOR
-    gRenderSystem.Init((HWND)gEditorMainWindow->renderViewWidget->winId());
-#else
-    gCoreSystem.windowWidth = 800;
-    gCoreSystem.windowHeight = 600;
-    gCoreSystem.SetupWindow(GetModuleHandle(NULL), SW_SHOW);
-    gRenderSystem.Init(gCoreSystem.mainWindow);
-#endif
+    gRenderSystem.Init((HWND)gEditorSystem->mainWindow);
 
     //IMGUI setup
     IMGUI_CHECKVERSION();
@@ -82,12 +66,7 @@ int main(int argc, char* argv[])
     //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 
     ImGui::StyleColorsDark();
-
-#ifdef NO_EDITOR
-    ImGui_ImplWin32_Init(gCoreSystem.mainWindow);
-#else
-    ImGui_ImplWin32_Init((HWND)gEditorMainWindow->renderViewWidget->winId());
-#endif
+    ImGui_ImplWin32_Init((HWND)gEditorSystem->mainWindow);
     ImGui_ImplDX11_Init(gRenderSystem.device, gRenderSystem.context);
 
     gAudioSystem.Init();

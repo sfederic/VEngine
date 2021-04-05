@@ -2,11 +2,20 @@
 #include "WorldDock.h"
 #include "CoreSystem.h"
 #include "RenderViewWidget.h"
+#include "PropertiesDock.h"
+#include "Actor.h"
 
 QApplication* qApplication;
 EditorMainWindow* editorMainWindow;
 
 EDockFocus currentDockFocus;
+
+void ToolkitEditorSystem::Init(int argc, char** argv)
+{
+	qApplication = new QApplication(argc, argv);
+	editorMainWindow = new EditorMainWindow();
+	mainWindow = (void*)editorMainWindow->renderViewWidget->winId();
+}
 
 void ToolkitEditorSystem::Tick()
 {
@@ -25,7 +34,7 @@ void ToolkitEditorSystem::ProcessEvents()
 
 void ToolkitEditorSystem::DisplayActorSystemProperties(Actor* actor)
 {
-
+	editorMainWindow->propertiesDock->DisplayActorSystemProperties(actor);
 }
 
 void ToolkitEditorSystem::SetWindowWidthHeight()

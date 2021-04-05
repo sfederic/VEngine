@@ -7,6 +7,7 @@
 class NativeEditorSystem : public IEditorSystem
 {
 public:
+	virtual void Init(int argc, char** argv);
 	virtual void Tick() {}
 	virtual void PopulateWorldList() {}
 	virtual void ProcessEvents() {}

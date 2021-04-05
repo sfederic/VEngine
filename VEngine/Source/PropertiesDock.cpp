@@ -18,7 +18,7 @@ void PropertiesDock::enterEvent(QEvent* event)
 
 void PropertiesDock::Tick()
 {
-    if (gEditorMainWindow->currentDockFocus != EDockFocus::Properties)
+    if (gEditorSystem->GetDockFocus() != (int)EDockFocus::Properties)
     {
         propWidget->Tick();
     }

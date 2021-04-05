@@ -177,6 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\EditorSystem.h" />
+    <ClInclude Include="Source\GlobalDefines.h" />
     <ClInclude Include="Source\NativeEditorSystem.h" />
     <ClInclude Include="Source\IEditorSystem.h" />
     <ClInclude Include="Source\ToolkitEditorSystem.h" />

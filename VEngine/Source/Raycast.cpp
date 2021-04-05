@@ -224,7 +224,8 @@ bool RaycastAllFromScreen(Ray& ray, int sx, int sy, Camera* camera, World* world
 				{
 					gWorldEditor.pickedActor = actor;
 
-					PropertiesWidget* propWidget = gEditorMainWindow->propertiesDock->propWidget;
+					//TODO: cleanup
+					/*PropertiesWidget* propWidget = gEditorMainWindow->propertiesDock->propWidget;
 
 					//TODO: This is no good. Should just be able to update entire actor with one call.
 					XMFLOAT3 pos = actor->GetPositionFloat3();
@@ -240,7 +241,7 @@ bool RaycastAllFromScreen(Ray& ray, int sx, int sy, Camera* camera, World* world
 					XMFLOAT3 rot = actor->GetPitchYawRoll();
 					propWidget->rotEditX->setValue(rot.x);
 					propWidget->rotEditY->setValue(rot.y);
-					propWidget->rotEditZ->setValue(rot.z);
+					propWidget->rotEditZ->setValue(rot.z);*/
 				}
 			}
 

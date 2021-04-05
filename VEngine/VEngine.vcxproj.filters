@@ -409,6 +409,9 @@
     <ClInclude Include="Source\EditorSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GlobalDefines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\libfbxsdk.dll" />

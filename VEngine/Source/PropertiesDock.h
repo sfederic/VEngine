@@ -15,10 +15,9 @@ public:
 	virtual void enterEvent(QEvent* event);
 
 	void Tick();
-	void DisplayActorSystemProperties(Actor* actorSystem);
+	void DisplayActorSystemProperties(Actor* actor);
 
 	PropertiesWidget* propWidget;
 
 	ActorSystem* selectedActorSystem;
 };
-

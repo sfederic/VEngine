@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QtWidgets/QMainWindow>
+#include "EditorSystem.h"
 #include "ui_EditorMainWindow.h"
 
 class ConsoleDock;
