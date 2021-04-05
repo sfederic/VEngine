@@ -15,4 +15,5 @@ public:
 	virtual void SetWindowWidthHeight() {}
 	virtual void SetDockFocus(EDockFocus focus) {}
 	virtual int GetDockFocus() { return 0; }
+	virtual void GetMousePos(int* x, int* y) {}
 };

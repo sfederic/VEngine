@@ -24,6 +24,8 @@ public:
 	virtual void SetWindowWidthHeight() = 0;
 	virtual void SetDockFocus(EDockFocus focus) = 0;
 	virtual int GetDockFocus() = 0;
+	virtual void GetMousePos(int* x, int* y) = 0;
 
+	//For the current setup, this is just going to be cast as a HWND everywhere
 	void* mainWindow;
 };

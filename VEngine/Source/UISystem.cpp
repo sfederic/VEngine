@@ -88,9 +88,7 @@ void UISystem::Tick()
 	GetCursorPos(&mousePos);
 	ScreenToClient(gCoreSystem.mainWindow, &mousePos);
 
-	//QPoint p = mainWindow->renderViewWidget->mapFromGlobal(QCursor::pos());
-	//gUISystem.mousePos.x = p.x();
-	//gUISystem.mousePos.y = p.y();
+	gEditorSystem->GetMousePos((int*)&gUISystem.mousePos.x, (int*)&gUISystem.mousePos.y);
 
 	if (gInputSystem.GetKeyUpState(VK_TAB))
 	{

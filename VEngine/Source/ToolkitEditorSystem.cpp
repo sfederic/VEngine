@@ -52,3 +52,10 @@ int ToolkitEditorSystem::GetDockFocus()
 {
 	return (int)editorMainWindow->currentDockFocus;
 }
+
+void ToolkitEditorSystem::GetMousePos(int* x, int* y)
+{
+	QPoint p = editorMainWindow->renderViewWidget->mapFromGlobal(QCursor::pos());
+	*x = p.x();
+	*y = p.y();
+}
