@@ -8,7 +8,7 @@
 class TransformGizmo
 {
 public:
-	void Tick(ImGuiIO* io);
+	void Tick();
 
 	ImGuizmo::OPERATION currentTransformOperation = ImGuizmo::TRANSLATE;
 

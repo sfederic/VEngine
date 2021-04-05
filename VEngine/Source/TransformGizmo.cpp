@@ -6,18 +6,19 @@
 
 TransformGizmo gTransformGizmo;
 
-void TransformGizmo::Tick(ImGuiIO* io)
+void TransformGizmo::Tick()
 {
     //Set Imgui window
     ImGui::SetNextWindowSize(ImVec2(gCoreSystem.windowWidth, gCoreSystem.windowHeight));
     ImGui::SetNextWindowPos(ImVec2(0, 0));
-    ImGui::Begin("Transform Gizmo", 0, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar);
+    ImGui::Begin("Transform Gizmo", 0, ImGuiWindowFlags_NoMove | 
+        ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMouseInputs | ImGuiWindowFlags_NoTitleBar);
     ImGuizmo::SetDrawlist();
     float windowWidth = (float)ImGui::GetWindowWidth();
     float windowHeight = (float)ImGui::GetWindowHeight();
     ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
 
-    //Setup camera and actor matrices
+    //Setup camera matrices
     XMFLOAT4X4 view, proj, actorMatrix;
     XMStoreFloat4x4(&view, GetActiveCamera()->view);
     XMStoreFloat4x4(&proj, GetActiveCamera()->proj);
@@ -51,17 +52,6 @@ void TransformGizmo::Tick(ImGuiIO* io)
             &actor->transform.scale.x);
         actor->SetRotation(axis);
 
-        //TODO: View Manipulator (Gives a little Autodesk-esque widget in the corner, but I can't figure it out. Camera class is a bit wonky)
-        /*float viewManipulateRight = io->DisplaySize.x;
-        float viewManipulateTop = 0;
-        viewManipulateRight = ImGui::GetWindowPos().x + windowWidth;
-        viewManipulateTop = ImGui::GetWindowPos().y;
-        ImGuizmo::ViewManipulate(&view.m[0][0], 8.0f, ImVec2(viewManipulateRight - 128, viewManipulateTop), ImVec2(128, 128), 0x10101010);
-        GetActiveCamera()->view = XMLoadFloat4x4(&view);
-        GetActiveCamera()->forward = XMVectorSet(view._31, view._32, view._33, 0.f);
-        GetActiveCamera()->right = XMVectorSet(view._11, view._12, view._13, 0.f);
-        GetActiveCamera()->up = XMVectorSet(view._21, view._22, view._23, 0.f);*/
-
         //Toggle snap and scale controls
         if (gInputSystem.GetKeyUpState('O'))
         {
@@ -83,6 +73,17 @@ void TransformGizmo::Tick(ImGuiIO* io)
             }
         }
     }
+
+    //TODO: View Manipulator (Gives a little Autodesk-esque widget in the corner, but I can't figure it out. Camera class is a bit wonky)
+    /*float viewManipulateRight = io->DisplaySize.x;
+    float viewManipulateTop = 0;
+    viewManipulateRight = ImGui::GetWindowPos().x + windowWidth;
+    viewManipulateTop = ImGui::GetWindowPos().y;
+    ImGuizmo::ViewManipulate(&view.m[0][0], 8.0f, ImVec2(viewManipulateRight - 128, viewManipulateTop), ImVec2(128, 128), 0x10101010);
+    GetActiveCamera()->view = XMLoadFloat4x4(&view);
+    GetActiveCamera()->forward = XMVectorSet(view._31, view._32, view._33, 0.f);
+    GetActiveCamera()->right = XMVectorSet(view._11, view._12, view._13, 0.f);
+    GetActiveCamera()->up = XMVectorSet(view._21, view._22, view._23, 0.f);*/
 
     //Toggle and draw grid
     if (gInputSystem.GetKeyUpState('G'))

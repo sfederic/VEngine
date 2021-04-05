@@ -122,8 +122,16 @@ int main(int argc, char *argv[])
         ImGui_ImplWin32_NewFrame();
         ImGui::NewFrame();
 
-        gTransformGizmo.Tick(&ImGui::GetIO());
+        if (gInputSystem.GetKeyDownState(VK_BACK))
+        {
+            gWorldEditor.pickedActor = nullptr;
+        }
 
+        gTransformGizmo.Tick();
+
+        static bool open = true;
+        ImGui::SetWindowFocus();
+        ImGui::ShowDemoWindow(&open);
         ImGui::EndFrame();
 
         gRenderSystem.Tick();
