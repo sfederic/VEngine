@@ -34,6 +34,9 @@
 //For throwing the program into fullscreen for profiling (gets rid of Qt)
 //#define NO_EDITOR
 
+bool fullscreen = false;
+
+
 int main(int argc, char *argv[])
 {
     HR(CoInitialize(NULL)); //For the WIC texture functions from DXT
@@ -138,6 +141,27 @@ int main(int argc, char *argv[])
         gRenderSystem.RenderSetup(deltaTime);
 
         gWorldEditor.Tick(nullptr, gEditorMainWindow);
+
+        //Fullscreen test
+        if (gInputSystem.GetKeyUpState('5'))
+        {
+            fullscreen = !fullscreen;
+
+            if (fullscreen)
+            {
+                gEditorMainWindow->renderViewWidget->setParent(nullptr);
+                gEditorMainWindow->renderViewWidget->setWindowFlags(gEditorMainWindow->renderViewWidget->windowFlags() | Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint);
+                gEditorMainWindow->renderViewWidget->setWindowState(gEditorMainWindow->renderViewWidget->windowState() | Qt::WindowFullScreen);
+                gEditorMainWindow->renderViewWidget->show();
+            }
+            else if (!fullscreen)
+            {
+                gEditorMainWindow->renderViewWidget->setParent(gEditorMainWindow);
+                gEditorMainWindow->setCentralWidget(gEditorMainWindow->renderViewWidget);
+            }
+        }
+
+
 
         ImGui::Render();
         gRenderSystem.Render(deltaTime);

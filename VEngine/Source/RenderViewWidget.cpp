@@ -24,6 +24,54 @@ bool RenderViewWidget::nativeEvent(const QByteArray& eventType, void* message, l
         return true;
     }
 
+    switch (msg->message)
+    {
+    case WM_DESTROY:
+        PostQuitMessage(0);
+
+    case WM_KEYDOWN:
+        gInputSystem.StoreKeyDownInput(msg->wParam);
+
+        //Close editor
+        if (msg->wParam == VK_ESCAPE)
+        {
+
+        }
+
+        break;
+
+    case WM_KEYUP:
+        gInputSystem.StoreKeyUpInput(msg->wParam);
+        break;
+
+    case WM_LBUTTONUP:
+        gInputSystem.StoreMouseLeftUpInput(msg->wParam);
+        break;
+
+    case WM_LBUTTONDOWN:
+        gInputSystem.StoreMouseLeftDownInput(msg->wParam);
+        break;
+
+    case WM_RBUTTONUP:
+        gInputSystem.StoreMouseRightUpInput(msg->wParam);
+        break;
+
+    case WM_RBUTTONDOWN:
+        gInputSystem.StoreMouseRightDownInput(msg->wParam);
+        break;
+
+    case WM_MOUSEWHEEL:
+        if (GET_WHEEL_DELTA_WPARAM(msg->wParam) < 0)
+        {
+            gInputSystem.StoreMouseWheelDown();
+        }
+        else
+        {
+            gInputSystem.StoreMouseWheelUp();
+        }
+        break;
+    }
+
     return false;
 }
 
