@@ -8,10 +8,11 @@
 #include "MathHelpers.h"
 #include "..\EditorMainWindow.h"
 #include "PropertiesDock.h"
+#include "EditorSystem.h"
 
 WorldEditor gWorldEditor;
 
-void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer, EditorMainWindow* editorMainWindow)
+void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 {
 	if (gUISystem.bUIClicked)
 	{
@@ -205,7 +206,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer, EditorMainWindow* editorM
 				//Properties Dock Panel
 				{
 					ActorSystem* actorSystemToDisplay = GetWorld()->GetActorSystem(actorSystemIndex);
-					gEditorMainWindow->propertiesDock->DisplayActorSystemProperties(pickedActor);
+					gEditorSystem->DisplayActorSystemProperties(pickedActor);
 				}
 
 				pickedActor->bPicked = true;

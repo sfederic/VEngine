@@ -1,0 +1,26 @@
+#pragma once
+
+enum class EDockFocus
+{
+	None,
+	Properties,
+	RenderView,
+	Console,
+	Assets,
+	WorldList
+};
+
+class Actor;
+
+//Interface to allow for swapping between editor and 'OS window only' functions.
+class IEditorSystem
+{
+public:
+	virtual void Tick() = 0;
+	virtual void PopulateWorldList() = 0;
+	virtual void ProcessEvents() = 0;
+	virtual void DisplayActorSystemProperties(Actor* actor) = 0;
+	virtual void SetWindowWidthHeight() = 0;
+	virtual void SetDockFocus(EDockFocus focus) = 0;
+	virtual int GetDockFocus() = 0;
+};

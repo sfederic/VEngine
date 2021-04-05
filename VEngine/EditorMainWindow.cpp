@@ -17,8 +17,6 @@
 
 //Because I can't figure out why Qt doesn't like these two not being defined in main, just going with
 //two pointers here to those instances defined in main.
-QApplication* gQApplication;
-EditorMainWindow* gEditorMainWindow;
 
 void EditorMainWindow::Init(int argc)
 {

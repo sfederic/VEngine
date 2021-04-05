@@ -11,16 +11,6 @@ class AssetDock;
 class ConsoleDock;
 class RenderViewWidget;
 
-enum class EDockFocus : uint8_t
-{
-	None,
-	Properties,
-	RenderView,
-	Console,
-	Assets,
-	WorldList
-};
-
 class EditorMainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -37,6 +27,9 @@ public:
 	void Tick();
 	void Print(const char* string); //Print to consoledock's TextEdit
 
+	//Main Qt Application
+	QApplication* gQApplication;
+
 	//Docks
 	ToolbarDock* toolbarDock;
 	WorldDock* worldDock;
@@ -51,6 +44,3 @@ public:
 private:
     Ui::EditorMainWindowClass ui;
 };
-
-extern QApplication* gQApplication;
-extern EditorMainWindow* gEditorMainWindow;

@@ -7,6 +7,7 @@
 #include "CoreSystem.h"
 #include "UISystem.h"
 #include "Camera.h"
+#include "EditorSystem.h"
 
 RenderViewWidget::RenderViewWidget(QWidget* parent) : QWidget(parent)
 {
@@ -99,8 +100,7 @@ bool RenderViewWidget::nativeEvent(const QByteArray& eventType, void* message, l
             
             // Preserve the existing buffer count and format.
             // Automatically choose the width and height to match the client rect for HWNDs.
-            gCoreSystem.windowWidth = gEditorMainWindow->renderViewWidget->size().width();
-            gCoreSystem.windowHeight = gEditorMainWindow->renderViewWidget->size().height();
+            gEditorSystem->SetWindowWidthHeight();
 
             HR(gRenderSystem.swapchain->ResizeBuffers(gRenderSystem.frameCount,
                 gCoreSystem.windowWidth, gCoreSystem.windowHeight, DXGI_FORMAT_R8G8B8A8_UNORM, 0));
@@ -131,7 +131,6 @@ void RenderViewWidget::mousePressEvent(QMouseEvent* mouseEvent)
     if (mouseEvent->button() == Qt::MouseButton::LeftButton)
     {
         gInputSystem.StoreMouseLeftDownInput(VK_LBUTTON);
-        gEditorMainWindow->currentDockFocus = EDockFocus::RenderView;
     }
     else if (mouseEvent->button() == Qt::MouseButton::RightButton)
     {

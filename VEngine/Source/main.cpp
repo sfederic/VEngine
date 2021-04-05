@@ -25,6 +25,8 @@
 #include "RenderViewWidget.h"
 #include "WorldDock.h"
 
+#include "EditorSystem.h"
+
 #include "imgui/imgui.h"
 #include "imgui/backends/imgui_impl_win32.h"
 #include "imgui/backends/imgui_impl_dx11.h"
@@ -102,7 +104,7 @@ int main(int argc, char* argv[])
     GetWorld()->AddActorSystem(ac);
 
     //Qt late init
-    //gEditorMainWindow->worldDock->PopulateWorldList();
+    gEditorSystem->PopulateWorldList();
 
     gRenderSystem.Flush();
     gRenderSystem.WaitForPreviousFrame();
@@ -115,11 +117,11 @@ int main(int argc, char* argv[])
         gCoreSystem.StartTimer();
         gCoreSystem.HandleMessages();
 
-        //gQApplication->processEvents();
-        //gEditorMainWindow->Tick();
+        gEditorSystem->ProcessEvents();
+        gEditorSystem->Tick();
 
         gFileSystem.Tick();
-        gUISystem.Tick(gEditorMainWindow);
+        gUISystem.Tick();
 
         gTimerSystem.Tick(deltaTime);
 
@@ -144,7 +146,7 @@ int main(int argc, char* argv[])
         gRenderSystem.Tick();
         gRenderSystem.RenderSetup(deltaTime);
 
-        gWorldEditor.Tick(nullptr, gEditorMainWindow);
+        gWorldEditor.Tick(nullptr);
 
         //Fullscreen test
         /*if (gInputSystem.GetKeyUpState('5'))

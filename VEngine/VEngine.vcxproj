@@ -110,6 +110,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\EditorSystem.cpp" />
+    <ClCompile Include="Source\NativeEditorSystem.cpp" />
+    <ClCompile Include="Source\ToolkitEditorSystem.cpp" />
     <ClCompile Include="Source\Actor.cpp" />
     <ClCompile Include="Source\AnimationStructures.cpp" />
     <ClCompile Include="Source\Array.cpp" />
@@ -173,6 +176,10 @@
     <ClCompile Include="EditorMainWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\EditorSystem.h" />
+    <ClInclude Include="Source\NativeEditorSystem.h" />
+    <ClInclude Include="Source\IEditorSystem.h" />
+    <ClInclude Include="Source\ToolkitEditorSystem.h" />
     <ClInclude Include="Source\Actor.h" />
     <ClInclude Include="Source\AnimationStructures.h" />
     <ClInclude Include="Source\Array.h" />

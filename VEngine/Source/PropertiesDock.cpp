@@ -3,6 +3,7 @@
 #include "World.h"
 #include <QLineEdit>
 #include "../EditorMainWindow.h"
+#include "EditorSystem.h"
 
 PropertiesDock::PropertiesDock(const char* title) : QDockWidget(title)
 {
@@ -12,7 +13,7 @@ PropertiesDock::PropertiesDock(const char* title) : QDockWidget(title)
 
 void PropertiesDock::enterEvent(QEvent* event)
 {
-    gEditorMainWindow->currentDockFocus = EDockFocus::Properties;
+    gEditorSystem->SetDockFocus(EDockFocus::Properties);
 }
 
 void PropertiesDock::Tick()
