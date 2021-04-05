@@ -54,7 +54,9 @@ EditorMainWindow::EditorMainWindow(QWidget *parent) : QMainWindow(parent)
     {
         renderViewWidget = new RenderViewWidget();
         setCentralWidget(renderViewWidget);
-        centralWidget()->setFixedSize(QSize(1000, 600));
+        //centralWidget()->setFixedSize(QSize(1000, 600));
+        centralWidget()->setMinimumSize(QSize(1000, 600));
+        centralWidget()->setMaximumSize(QSize(1000, 600));
         QSize size = centralWidget()->size();
         gCoreSystem.windowWidth = size.width();
         gCoreSystem.windowHeight = size.height();

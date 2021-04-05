@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
     ImGui_ImplDX11_Init(gRenderSystem.device, gRenderSystem.context);
 
     gAudioSystem.Init();
-    gUISystem.Init();
+    //gUISystem.Init();
     gWorldEditor.Init();
 
     ActorSystem ac;
@@ -171,12 +171,12 @@ int main(int argc, char *argv[])
         //UI RENDERING
         if (gUISystem.bAllUIActive)
         {
-            gUISystem.d2dRenderTarget->BeginDraw();
+            /*gUISystem.d2dRenderTarget->BeginDraw();
             gConsole.Tick();
             gConsole.DrawViewItems();
             debugMenu.Tick(GetWorld(), deltaTime);
             gUISystem.RenderAllUIViews();
-            gUISystem.d2dRenderTarget->EndDraw();
+            gUISystem.d2dRenderTarget->EndDraw();*/
         }
 
         gRenderSystem.Flush();

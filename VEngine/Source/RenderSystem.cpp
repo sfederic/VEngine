@@ -183,6 +183,7 @@ void RenderSystem::CreateRTVAndDSV()
 	{
 		ID3D11Texture2D* backBuffer;
 		swapchain->GetBuffer(0, IID_PPV_ARGS(&backBuffer));
+		assert(backBuffer);
 		HR(device->CreateRenderTargetView(backBuffer, nullptr, &rtvs[i]));
 		backBuffer->Release();
 	}
@@ -200,6 +201,7 @@ void RenderSystem::CreateRTVAndDSV()
 	HR(device->CreateTexture2D(&dsDesc, nullptr, &depthStencilBuffer));
 	assert(depthStencilBuffer);
 	HR(device->CreateDepthStencilView(depthStencilBuffer, nullptr, &dsv));
+	depthStencilBuffer->Release();
 }
 
 void RenderSystem::CreateShaders()
@@ -413,7 +415,7 @@ void RenderSystem::RenderActorSystem(World* world)
 			{
 				if (actorSystem->actors[actorIndex]->bRender)
 				{
-					//Skinned Animation
+					//Animation
 					if (actorSystem->bAnimated)
 					{
 						actorSystem->actors[actorIndex]->currentAnimationTime += gCoreSystem.deltaTime;
@@ -625,6 +627,7 @@ void RenderSystem::RenderSetup(float deltaTime)
 
 	context->RSSetState(activeRastState);
 
+	//TODO: this needs to move somewhere else
 	if (gInputSystem.GetKeyUpState(VK_F3))
 	{
 		gShaderFactory.HotReloadShaders();
