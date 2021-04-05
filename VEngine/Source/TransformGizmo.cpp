@@ -28,17 +28,20 @@ void TransformGizmo::Tick()
         XMStoreFloat4x4(&actorMatrix, gWorldEditor.pickedActor->GetTransformationMatrix());
 
         //Set transform operation
-        if (gInputSystem.GetKeyDownState('W'))
+        if (!gInputSystem.GetAsyncKey(VK_RBUTTON))
         {
-            currentTransformOperation = ImGuizmo::TRANSLATE;
-        }      
-        else if (gInputSystem.GetKeyDownState('E'))
-        {
-            currentTransformOperation = ImGuizmo::SCALE;
-        }
-        else if (gInputSystem.GetKeyDownState('R'))
-        {
-            currentTransformOperation = ImGuizmo::ROTATE;
+            if (gInputSystem.GetKeyDownState('W'))
+            {
+                currentTransformOperation = ImGuizmo::TRANSLATE;
+            }
+            else if (gInputSystem.GetKeyDownState('E'))
+            {
+                currentTransformOperation = ImGuizmo::SCALE;
+            }
+            else if (gInputSystem.GetKeyDownState('R'))
+            {
+                currentTransformOperation = ImGuizmo::ROTATE;
+            }
         }
 
         //Render gizmos and set component values back to actor

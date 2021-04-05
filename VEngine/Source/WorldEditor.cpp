@@ -147,6 +147,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer, EditorMainWindow* editorM
 		if (gInputSystem.GetKeyUpState(VK_DELETE))
 		{
 			world->GetActorSystem(screenPickRay.actorSystemIndex)->RemoveActor(screenPickRay.actorIndex);
+			pickedActor = nullptr;
 		}
 	}
 
