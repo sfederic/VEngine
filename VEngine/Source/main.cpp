@@ -34,6 +34,7 @@
 #include "TransformGizmo.h"
 
 bool fullscreen = false;
+float translationSnap = 69.0f;
 
 int main(int argc, char* argv[])
 {
@@ -62,7 +63,7 @@ int main(int argc, char* argv[])
     //Setting this to null removes this initial setup.
     io.IniFilename = nullptr;  
 
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+    //io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
     //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 
     ImGui::StyleColorsDark();
@@ -118,9 +119,11 @@ int main(int argc, char* argv[])
 
         gTransformGizmo.Tick();
 
-        static bool open = true;
-        ImGui::SetWindowFocus();
-        ImGui::ShowDemoWindow(&open);
+        ImGui::Begin("Snap");
+        ImGui::SetWindowSize(ImVec2(0, 0));
+        ImGui::InputFloat("Translation", &translationSnap);
+        ImGui::End();
+
         ImGui::EndFrame();
 
         gRenderSystem.Tick();

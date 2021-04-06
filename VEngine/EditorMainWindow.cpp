@@ -14,7 +14,7 @@
 #include "AssetDock.h"
 #include "ConsoleDock.h"
 #include <qapplication.h>
-#include <QLabel>
+#include "imgui/imgui.h"
 
 //Because I can't figure out why Qt doesn't like these two not being defined in main, just going with
 //two pointers here to those instances defined in main.
@@ -85,9 +85,16 @@ void EditorMainWindow::closeEvent(QCloseEvent* event)
     gCoreSystem.bMainLoop = false;
 }
 
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
 bool EditorMainWindow::nativeEvent(const QByteArray& eventType, void* message, long* result)
 {
     MSG* msg = (MSG*)message;
+
+    if (ImGui_ImplWin32_WndProcHandler(msg->hwnd, msg->message, msg->wParam, msg->lParam))
+    {
+        return true;
+    }
 
     switch (msg->message)
     {
@@ -160,6 +167,8 @@ void EditorMainWindow::CloseTab(int tabIndex)
     editorTabWidget->removeTab(tabIndex);
 }
 
+//TODO: testing for closing and creating docks/tabs and widgets. See if it's worth even finishing up.
+//You'd have to make a CloseableTabWidget class and override it's closed() function.
 void EditorMainWindow::CreateConsoleDock()
 {
     if (consoleDock == nullptr)
