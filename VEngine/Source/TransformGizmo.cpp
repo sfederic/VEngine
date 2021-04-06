@@ -33,20 +33,30 @@ void TransformGizmo::Tick()
             if (gInputSystem.GetKeyDownState('W'))
             {
                 currentTransformOperation = ImGuizmo::TRANSLATE;
+                currentSnapValues[0] = translateSnapValues[0];
+                currentSnapValues[0] = translateSnapValues[1];
+                currentSnapValues[0] = translateSnapValues[2];
             }
             else if (gInputSystem.GetKeyDownState('E'))
             {
                 currentTransformOperation = ImGuizmo::SCALE;
+                currentSnapValues[0] = scaleSnapValues[0];
+                currentSnapValues[1] = scaleSnapValues[1];
+                currentSnapValues[2] = scaleSnapValues[2];
+
             }
             else if (gInputSystem.GetKeyDownState('R'))
             {
                 currentTransformOperation = ImGuizmo::ROTATE;
+                currentSnapValues[0] = rotationSnapValues[0];
+                currentSnapValues[1] = rotationSnapValues[1];
+                currentSnapValues[2] = rotationSnapValues[2];
             }
         }
 
         //Render gizmos and set component values back to actor
         ImGuizmo::Manipulate(&view.m[0][0], &proj.m[0][0], currentTransformOperation, ImGuizmo::MODE::LOCAL, &actorMatrix.m[0][0],
-            nullptr, snap, bounds, boundsSnap);
+            nullptr, currentSnapValues, bounds, boundsSnap);
         Actor* actor = gWorldEditor.pickedActor;
         XMFLOAT3 axis;
         ImGuizmo::DecomposeMatrixToComponents(&actorMatrix.m[0][0],

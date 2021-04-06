@@ -92,7 +92,7 @@ void UISystem::Tick()
 
 	if (gInputSystem.GetKeyUpState(VK_TAB))
 	{
-		toolbar->bIsHidden = !toolbar->bIsHidden;
+		//toolbar->bIsHidden = !toolbar->bIsHidden;
 	}
 
 	if(gInputSystem.GetKeyUpState('0'))

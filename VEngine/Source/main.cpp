@@ -33,9 +33,6 @@
 
 #include "TransformGizmo.h"
 
-bool fullscreen = false;
-float translationSnap = 69.0f;
-
 int main(int argc, char* argv[])
 {
     HR(CoInitialize(NULL)); //For the WIC texture functions from DXT
@@ -119,9 +116,20 @@ int main(int argc, char* argv[])
 
         gTransformGizmo.Tick();
 
-        ImGui::Begin("Snap");
+        //Snapping 
+        ImGui::Begin("Snapping");
         ImGui::SetWindowSize(ImVec2(0, 0));
-        ImGui::InputFloat("Translation", &translationSnap);
+        ImGui::InputFloat("Translation", &gTransformGizmo.translateSnapValues[0]);
+        gTransformGizmo.translateSnapValues[1] = gTransformGizmo.translateSnapValues[0];
+        gTransformGizmo.translateSnapValues[2] = gTransformGizmo.translateSnapValues[0];
+
+        ImGui::InputFloat("Rotation", &gTransformGizmo.rotationSnapValues[0]);
+        gTransformGizmo.rotationSnapValues[1] = gTransformGizmo.rotationSnapValues[0];
+        gTransformGizmo.rotationSnapValues[2] = gTransformGizmo.rotationSnapValues[0];
+
+        ImGui::InputFloat("Scale", &gTransformGizmo.scaleSnapValues[0]);
+        gTransformGizmo.scaleSnapValues[1] = gTransformGizmo.scaleSnapValues[0];
+        gTransformGizmo.scaleSnapValues[2] = gTransformGizmo.scaleSnapValues[0];
         ImGui::End();
 
         ImGui::EndFrame();
