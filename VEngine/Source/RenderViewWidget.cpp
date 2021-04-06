@@ -49,13 +49,14 @@ bool RenderViewWidget::nativeEvent(const QByteArray& eventType, void* message, l
         gInputSystem.StoreKeyUpInput(msg->wParam);
         break;
 
+    //TODO: there's a bit of conflict here between 
     case WM_LBUTTONUP:
-        gInputSystem.StoreMouseLeftUpInput(msg->wParam);
-        break;
+        //gInputSystem.StoreMouseLeftUpInput(msg->wParam);
+        //break;
 
     case WM_LBUTTONDOWN:
-        gInputSystem.StoreMouseLeftDownInput(msg->wParam);
-        break;
+        //gInputSystem.StoreMouseLeftDownInput(msg->wParam);
+        //break;
 
     case WM_RBUTTONUP:
         gInputSystem.StoreMouseRightUpInput(msg->wParam);

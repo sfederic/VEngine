@@ -115,6 +115,7 @@ int main(int argc, char* argv[])
             gWorldEditor.pickedActor = nullptr;
         }
 
+
         gTransformGizmo.Tick();
 
         static bool open = true;

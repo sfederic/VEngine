@@ -14,6 +14,7 @@
 #include "AssetDock.h"
 #include "ConsoleDock.h"
 #include <qapplication.h>
+#include <QLabel>
 
 //Because I can't figure out why Qt doesn't like these two not being defined in main, just going with
 //two pointers here to those instances defined in main.
@@ -27,35 +28,41 @@ EditorMainWindow::EditorMainWindow(QWidget *parent) : QMainWindow(parent)
 {
     ui.setupUi(this);
 
+    //WORLD EDITOR TAB
+    editorTabWidget = new QTabWidget();
+    connect(editorTabWidget, &QTabWidget::tabCloseRequested, this, &EditorMainWindow::CloseTab);
+    setCentralWidget(editorTabWidget);
+    editorTabWidget->setTabsClosable(true);
+
+    QMainWindow* mainWindow = new QMainWindow();
+    editorTabWidget->addTab(mainWindow, "World Editor");
+
     //Toolbar dock
     toolbarDock = new ToolbarDock("Toolbar");
-    addDockWidget(Qt::TopDockWidgetArea, toolbarDock);
+    mainWindow->addDockWidget(Qt::TopDockWidgetArea, toolbarDock);
 
     //World list
     worldDock = new WorldDock("World");
-    addDockWidget(Qt::LeftDockWidgetArea, worldDock);
+    mainWindow->addDockWidget(Qt::LeftDockWidgetArea, worldDock);
 
     //Properties dock
     propertiesDock = new PropertiesDock("Properties");
-    addDockWidget(Qt::RightDockWidgetArea, propertiesDock);
+    mainWindow->addDockWidget(Qt::RightDockWidgetArea, propertiesDock);
 
     //Asset dock
     assetDock = new AssetDock("Assets");
-    addDockWidget(Qt::BottomDockWidgetArea, assetDock);
+    mainWindow->addDockWidget(Qt::BottomDockWidgetArea, assetDock);
 
     //Console dock
     consoleDock = new ConsoleDock();
-    addDockWidget(Qt::BottomDockWidgetArea, consoleDock);
-    //tabifyDockWidget(assetDock, consoleDock); //Adds second argument as tab to first's Dock Area
+    mainWindow->addDockWidget(Qt::BottomDockWidgetArea, consoleDock);
 
     //Central widget - Viewport
     {
         renderViewWidget = new RenderViewWidget();
-        setCentralWidget(renderViewWidget);
+        mainWindow->setCentralWidget(renderViewWidget);
         //centralWidget()->setFixedSize(QSize(1000, 600));
-        centralWidget()->setMinimumSize(QSize(1000, 600));
-        centralWidget()->setMaximumSize(QSize(1000, 600));
-        QSize size = centralWidget()->size();
+        QSize size = renderViewWidget->size();
         gCoreSystem.windowWidth = size.width();
         gCoreSystem.windowHeight = size.height();
     }
@@ -139,4 +146,9 @@ void EditorMainWindow::Print(const char* string)
 {
     consoleDock->consoleMessageBox->insertPlainText(QString(string));
     consoleDock->consoleMessageBox->insertPlainText("\n");
+}
+
+void EditorMainWindow::CloseTab(int tabIndex)
+{
+    editorTabWidget->removeTab(tabIndex);
 }

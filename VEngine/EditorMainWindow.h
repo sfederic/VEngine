@@ -27,6 +27,7 @@ public:
 	void Init(int argc);
 	void Tick();
 	void Print(const char* string); //Print to consoledock's TextEdit
+	void CloseTab(int tabIndex);
 
 	//Main Qt Application
 	QApplication* gQApplication;
@@ -44,4 +45,7 @@ public:
 
 private:
     Ui::EditorMainWindowClass ui;
+
+	//Tabs
+	QTabWidget* editorTabWidget;
 };
