@@ -28,39 +28,46 @@ EditorMainWindow::EditorMainWindow(QWidget *parent) : QMainWindow(parent)
 {
     ui.setupUi(this);
 
+    //Menu for recreating closed tabs and docks
+    QMenu* windowMenu = menuBar()->addMenu("Window");
+    auto console = new QAction("Console");
+    connect(console, &QAction::triggered, this, &EditorMainWindow::CreateConsoleDock);
+    windowMenu->addAction(console);
+
     //WORLD EDITOR TAB
     editorTabWidget = new QTabWidget();
     connect(editorTabWidget, &QTabWidget::tabCloseRequested, this, &EditorMainWindow::CloseTab);
     setCentralWidget(editorTabWidget);
     editorTabWidget->setTabsClosable(true);
 
-    QMainWindow* mainWindow = new QMainWindow();
-    editorTabWidget->addTab(mainWindow, "World Editor");
+    worldEditorWindow = new QMainWindow();
+    editorTabWidget->addTab(worldEditorWindow, "World Editor");
 
     //Toolbar dock
     toolbarDock = new ToolbarDock("Toolbar");
-    mainWindow->addDockWidget(Qt::TopDockWidgetArea, toolbarDock);
+    worldEditorWindow->addDockWidget(Qt::TopDockWidgetArea, toolbarDock);
 
     //World list
     worldDock = new WorldDock("World");
-    mainWindow->addDockWidget(Qt::LeftDockWidgetArea, worldDock);
+    worldEditorWindow->addDockWidget(Qt::LeftDockWidgetArea, worldDock);
 
     //Properties dock
     propertiesDock = new PropertiesDock("Properties");
-    mainWindow->addDockWidget(Qt::RightDockWidgetArea, propertiesDock);
+    worldEditorWindow->addDockWidget(Qt::RightDockWidgetArea, propertiesDock);
 
     //Asset dock
     assetDock = new AssetDock("Assets");
-    mainWindow->addDockWidget(Qt::BottomDockWidgetArea, assetDock);
+    worldEditorWindow->addDockWidget(Qt::BottomDockWidgetArea, assetDock);
 
     //Console dock
     consoleDock = new ConsoleDock();
-    mainWindow->addDockWidget(Qt::BottomDockWidgetArea, consoleDock);
+    worldEditorWindow->addDockWidget(Qt::BottomDockWidgetArea, consoleDock);
+    //connect(consoleDock, &QDockWidget::close, this, &EditorMainWindow::CloseConsoleDock);
 
     //Central widget - Viewport
     {
         renderViewWidget = new RenderViewWidget();
-        mainWindow->setCentralWidget(renderViewWidget);
+        worldEditorWindow->setCentralWidget(renderViewWidget);
         //centralWidget()->setFixedSize(QSize(1000, 600));
         QSize size = renderViewWidget->size();
         gCoreSystem.windowWidth = size.width();
@@ -151,4 +158,20 @@ void EditorMainWindow::Print(const char* string)
 void EditorMainWindow::CloseTab(int tabIndex)
 {
     editorTabWidget->removeTab(tabIndex);
+}
+
+void EditorMainWindow::CreateConsoleDock()
+{
+    if (consoleDock == nullptr)
+    {
+        consoleDock = new ConsoleDock();
+        consoleDock->setFloating(true);
+        worldEditorWindow->addDockWidget(Qt::DockWidgetArea::NoDockWidgetArea, consoleDock);
+    }
+}
+
+void EditorMainWindow::CloseConsoleDock()
+{
+    delete consoleDock;
+    consoleDock = nullptr;
 }

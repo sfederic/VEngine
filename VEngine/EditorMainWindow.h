@@ -29,6 +29,12 @@ public:
 	void Print(const char* string); //Print to consoledock's TextEdit
 	void CloseTab(int tabIndex);
 
+	//Create functions
+	void CreateConsoleDock();
+
+	//Close functions
+	void CloseConsoleDock();
+
 	//Main Qt Application
 	QApplication* gQApplication;
 
@@ -48,4 +54,5 @@ private:
 
 	//Tabs
 	QTabWidget* editorTabWidget;
+	QMainWindow* worldEditorWindow;
 };
