@@ -631,7 +631,7 @@ void RenderSystem::RenderSetup(float deltaTime)
 	if (gInputSystem.GetKeyUpState(VK_F3))
 	{
 		gShaderFactory.HotReloadShaders();
-		debugMenu.notifications.push_back(DebugNotification(L"Shaders reloaded."));
+		gDebugMenu.notifications.push_back(DebugNotification(L"Shaders reloaded."));
 	}
 }
 

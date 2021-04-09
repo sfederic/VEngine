@@ -47,7 +47,7 @@ void FileSystem::WriteAllActorSystems(World* world, const char* filename)
 	}
 
 	DebugPrint("All actor systems saved.\n");
-	debugMenu.notifications.push_back(DebugNotification(L"All actor systems saved"));
+	gDebugMenu.notifications.push_back(DebugNotification(L"All actor systems saved"));
 
 	fclose(file);
 }
@@ -78,7 +78,7 @@ void FileSystem::ReadAllActorSystems(World* world, const char* filename)
 	gCurrentWorld = newWorld;
 
 	DebugPrint("All actor systems loaded.\n");
-	debugMenu.notifications.push_back(DebugNotification(L"All actor systems loaded."));
+	gDebugMenu.notifications.push_back(DebugNotification(L"All actor systems loaded."));
 
 	fclose(file);
 }

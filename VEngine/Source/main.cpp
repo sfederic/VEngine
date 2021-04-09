@@ -89,6 +89,7 @@ int main(int argc, char* argv[])
     //MAIN LOOP
     while (gCoreSystem.bMainLoop)
     {
+        //TODO: fine for simple main loop for now, need to throw it into somewhere later.
         const float deltaTime = gCoreSystem.deltaTime;
 
         gCoreSystem.StartTimer();
@@ -116,21 +117,7 @@ int main(int argc, char* argv[])
 
         gTransformGizmo.Tick();
 
-        //Snapping 
-        ImGui::Begin("Snapping");
-        ImGui::SetWindowSize(ImVec2(0, 0));
-        ImGui::InputFloat("Translation", &gTransformGizmo.translateSnapValues[0]);
-        gTransformGizmo.translateSnapValues[1] = gTransformGizmo.translateSnapValues[0];
-        gTransformGizmo.translateSnapValues[2] = gTransformGizmo.translateSnapValues[0];
-
-        ImGui::InputFloat("Rotation", &gTransformGizmo.rotationSnapValues[0]);
-        gTransformGizmo.rotationSnapValues[1] = gTransformGizmo.rotationSnapValues[0];
-        gTransformGizmo.rotationSnapValues[2] = gTransformGizmo.rotationSnapValues[0];
-
-        ImGui::InputFloat("Scale", &gTransformGizmo.scaleSnapValues[0]);
-        gTransformGizmo.scaleSnapValues[1] = gTransformGizmo.scaleSnapValues[0];
-        gTransformGizmo.scaleSnapValues[2] = gTransformGizmo.scaleSnapValues[0];
-        ImGui::End();
+        gDebugMenu.Tick(GetWorld(), deltaTime);
 
         ImGui::EndFrame();
 
@@ -151,7 +138,7 @@ int main(int argc, char* argv[])
             /*gUISystem.d2dRenderTarget->BeginDraw();
             gConsole.Tick();
             gConsole.DrawViewItems();
-            debugMenu.Tick(GetWorld(), deltaTime);
+            gDebugMenu.Tick(GetWorld(), deltaTime);
             gUISystem.RenderAllUIViews();
             gUISystem.d2dRenderTarget->EndDraw();*/
         }

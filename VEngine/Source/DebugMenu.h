@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-#include "UISystem.h"
 
 enum class EMenuID
 {
@@ -35,6 +34,7 @@ struct DebugNotification
 	float timeOnScreen;
 };
 
+//A stats UI system for showing debug-level information. Encapsulates Immediate Mode GUI as well.
 class DebugMenu
 {
 public:
@@ -48,4 +48,4 @@ public:
 	bool bSubMenuOpen = false;
 };
 
-extern DebugMenu debugMenu;
+extern DebugMenu gDebugMenu;

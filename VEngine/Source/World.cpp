@@ -35,7 +35,7 @@ void World::AddActorSystem(ActorSystem& actorSystem)
 	else
 	{
 		DebugPrint("Actor System already exists in world. Cannot create.\n");
-		debugMenu.AddNotification(L"Cannot create actor system.");
+		gDebugMenu.AddNotification(L"Cannot create actor system.");
 	}
 }
 
@@ -45,7 +45,7 @@ void World::RemoveActorSystem(EActorSystemID id)
 	if (actorSystemIt == actorSystemMap.end())
 	{
 		DebugPrint("Actor system ID: %d not found to remove.\n", id);
-		debugMenu.AddNotification(L"Actor system not found to remove.");
+		gDebugMenu.AddNotification(L"Actor system not found to remove.");
 		return;
 	}
 

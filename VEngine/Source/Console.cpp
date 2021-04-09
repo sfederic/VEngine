@@ -112,11 +112,11 @@ void Console::ExecuteString()
 
 		if (gWorldEditor.bMoveActorsInIncrements)
 		{
-			debugMenu.AddNotification(L"SNAP ON");
+			gDebugMenu.AddNotification(L"SNAP ON");
 		}
 		else if (!gWorldEditor.bMoveActorsInIncrements)
 		{
-			debugMenu.AddNotification(L"SNAP OFF");
+			gDebugMenu.AddNotification(L"SNAP OFF");
 		}
 	}
 	else if (wcsncmp(consoleString, ExecuteStrings::PROFILE, wcslen(ExecuteStrings::PROFILE)) == 0) //Show profile stats
@@ -130,7 +130,7 @@ void Console::ExecuteString()
 	}
 	else
 	{
-		debugMenu.notifications.push_back(DebugNotification(L"No command found."));
+		gDebugMenu.notifications.push_back(DebugNotification(L"No command found."));
 	}
 
 	//Reset console string and index

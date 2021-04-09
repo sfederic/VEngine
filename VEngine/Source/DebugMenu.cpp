@@ -5,8 +5,10 @@
 #include "RenderSystem.h"
 #include "Actor.h"
 #include "World.h"
+#include "imgui/imgui.h"
+#include "TransformGizmo.h"
 
-DebugMenu debugMenu;
+DebugMenu gDebugMenu;
 
 DebugMenu::DebugMenu()
 {
@@ -48,6 +50,31 @@ void DebugMenu::Tick(World* world, float deltaTime)
 		{
 			notifications.erase(notifications.begin() + i);
 		}
+	}
+
+	//IMGUI Snapping menu
+	static bool bIsSnappingMenuOpen;
+	if (gInputSystem.GetKeyUpState('4'))
+	{
+		bIsSnappingMenuOpen = !bIsSnappingMenuOpen;
+	}
+
+	if (bIsSnappingMenuOpen)
+	{
+		ImGui::Begin("Snapping");
+		ImGui::SetWindowSize(ImVec2(0, 0));
+		ImGui::InputFloat("Translation", &gTransformGizmo.translateSnapValues[0]);
+		gTransformGizmo.translateSnapValues[1] = gTransformGizmo.translateSnapValues[0];
+		gTransformGizmo.translateSnapValues[2] = gTransformGizmo.translateSnapValues[0];
+
+		ImGui::InputFloat("Rotation", &gTransformGizmo.rotationSnapValues[0]);
+		gTransformGizmo.rotationSnapValues[1] = gTransformGizmo.rotationSnapValues[0];
+		gTransformGizmo.rotationSnapValues[2] = gTransformGizmo.rotationSnapValues[0];
+
+		ImGui::InputFloat("Scale", &gTransformGizmo.scaleSnapValues[0]);
+		gTransformGizmo.scaleSnapValues[1] = gTransformGizmo.scaleSnapValues[0];
+		gTransformGizmo.scaleSnapValues[2] = gTransformGizmo.scaleSnapValues[0];
+		ImGui::End();
 	}
 
 	//Open key for menu
