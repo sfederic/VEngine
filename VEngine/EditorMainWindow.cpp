@@ -117,19 +117,19 @@ bool EditorMainWindow::nativeEvent(const QByteArray& eventType, void* message, l
         break;
 
     case WM_LBUTTONUP:
-        gInputSystem.StoreMouseLeftUpInput(msg->wParam);
+        gInputSystem.StoreMouseLeftUpInput();
         break;
 
     case WM_LBUTTONDOWN:
-        gInputSystem.StoreMouseLeftDownInput(msg->wParam);
+        gInputSystem.StoreMouseLeftDownInput();
         break;
 
     case WM_RBUTTONUP:
-        gInputSystem.StoreMouseRightUpInput(msg->wParam);
+        gInputSystem.StoreMouseRightUpInput();
         break;
 
     case WM_RBUTTONDOWN:
-        gInputSystem.StoreMouseRightDownInput(msg->wParam);
+        gInputSystem.StoreMouseRightDownInput();
         break;
 
     case WM_MOUSEWHEEL:

@@ -59,11 +59,11 @@ bool RenderViewWidget::nativeEvent(const QByteArray& eventType, void* message, l
         //break;
 
     case WM_RBUTTONUP:
-        gInputSystem.StoreMouseRightUpInput(msg->wParam);
+        gInputSystem.StoreMouseRightUpInput();
         break;
 
     case WM_RBUTTONDOWN:
-        gInputSystem.StoreMouseRightDownInput(msg->wParam);
+        gInputSystem.StoreMouseRightDownInput();
         break;
 
     case WM_MOUSEWHEEL:
@@ -131,11 +131,11 @@ void RenderViewWidget::mousePressEvent(QMouseEvent* mouseEvent)
 {
     if (mouseEvent->button() == Qt::MouseButton::LeftButton)
     {
-        gInputSystem.StoreMouseLeftDownInput(VK_LBUTTON);
+        gInputSystem.StoreMouseLeftDownInput();
     }
     else if (mouseEvent->button() == Qt::MouseButton::RightButton)
     {
-        gInputSystem.StoreMouseRightDownInput(VK_RBUTTON);
+        gInputSystem.StoreMouseRightDownInput();
     }
 }
 

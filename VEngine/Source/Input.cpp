@@ -26,45 +26,57 @@ bool InputSystem::GetAnyKeyDown()
 	}
 }
 
-void InputSystem::StoreKeyDownInput(WPARAM key)
+void InputSystem::StoreKeyDownInput(int key)
 {
 	currentDownKey = key;
 	keyDown = true;
 }
 
-void InputSystem::StoreKeyUpInput(WPARAM key)
+void InputSystem::StoreKeyUpInput(int key)
 {
 	currentUpKey = key;
 	keyUp = true;
 }
 
-void InputSystem::StoreMouseLeftDownInput(WPARAM key)
+void InputSystem::StoreMouseLeftDownInput()
 {
 	leftMouseDown = true;
 	leftMouseUp = false;
 }
 
-void InputSystem::StoreMouseLeftUpInput(WPARAM key)
+void InputSystem::StoreMouseLeftUpInput()
 {
 	leftMouseUp = true;
 	leftMouseDown = false;
 }
 
-void InputSystem::StoreMouseRightDownInput(WPARAM key)
+void InputSystem::StoreMouseRightDownInput()
 {
 	rightMouseDown = true;
 	rightMouseUp = false;
 }
 
-void InputSystem::StoreMouseRightUpInput(WPARAM key)
+void InputSystem::StoreMouseRightUpInput()
 {
 	rightMouseUp = true;
 	rightMouseDown = false;
 }
 
+bool InputSystem::GetKeyDownState(Keys key)
+{
+	if (currentDownKey == (int)key)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 bool InputSystem::GetKeyDownState(int key)
 {
-	if (currentDownKey == key)
+	if (currentUpKey == key)
 	{
 		return true;
 	}
@@ -122,9 +134,21 @@ bool InputSystem::GetMouseRightUpState()
 	}
 }
 
-bool InputSystem::GetAsyncKey(WPARAM key)
+bool InputSystem::GetAsyncKey(Keys key)
 {
-	if (GetAsyncKeyState(key))
+	if (GetAsyncKeyState((int)key))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool InputSystem::GetKeyUpState(Keys key)
+{
+	if (currentUpKey == (int)key)
 	{
 		return true;
 	}
@@ -152,8 +176,8 @@ void InputSystem::InputReset()
 	rightMouseUp = false;
 	leftMouseDown = false;
 	leftMouseUp = false;
-	currentDownKey = 0;
-	currentUpKey = 0;
+	currentDownKey = (int)Keys::None;
+	currentUpKey = (int)Keys::None;
 	keyDown = false;
 	keyUp = false;
 

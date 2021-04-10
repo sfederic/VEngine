@@ -124,19 +124,19 @@ LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam
 		break;
 
 	case WM_LBUTTONUP:
-		gInputSystem.StoreMouseLeftUpInput(wparam);
+		gInputSystem.StoreMouseLeftUpInput();
 		break;
 
 	case WM_LBUTTONDOWN:
-		gInputSystem.StoreMouseLeftDownInput(wparam);
+		gInputSystem.StoreMouseLeftDownInput();
 		break;
 
 	case WM_RBUTTONUP:
-		gInputSystem.StoreMouseRightUpInput(wparam);
+		gInputSystem.StoreMouseRightUpInput();
 		break;
 
 	case WM_RBUTTONDOWN:
-		gInputSystem.StoreMouseRightDownInput(wparam);
+		gInputSystem.StoreMouseRightDownInput();
 		break;
 
 	case WM_MOUSEWHEEL:

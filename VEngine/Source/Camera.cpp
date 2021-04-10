@@ -43,7 +43,7 @@ void Camera::Tick(float deltaTime)
 		//WASD MOVEMENT
 		if (!gConsole.bConsoleActive && !gUISystem.bEditUIActive)
 		{
-			if (gInputSystem.GetAsyncKey(VK_RBUTTON))
+			if (gInputSystem.GetAsyncKey(Keys::RightMouse))
 			{
 				const float moveSpeed = 7.5f * deltaTime;
 

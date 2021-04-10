@@ -28,7 +28,7 @@ void TransformGizmo::Tick()
         XMStoreFloat4x4(&actorMatrix, gWorldEditor.pickedActor->GetTransformationMatrix());
 
         //Set transform operation
-        if (!gInputSystem.GetAsyncKey(VK_RBUTTON))
+        if (!gInputSystem.GetAsyncKey(Keys::RightMouse))
         {
             if (gInputSystem.GetKeyDownState('W'))
             {

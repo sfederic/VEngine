@@ -35,7 +35,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 
 		if (bRotateActors)
 		{
-			if (gInputSystem.GetAsyncKey(VK_RIGHT))
+			if (gInputSystem.GetAsyncKey(Keys::Right))
 			{
 				rotateSpeed += 1.0f * gCoreSystem.deltaTime;
 				pickedActor->SetRotation(XMVectorUp(), rotateSpeed);
@@ -58,7 +58,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 		{
 			const float deltaTime = gCoreSystem.deltaTime;
 
-			if (gInputSystem.GetAsyncKey(VK_UP))
+			if (gInputSystem.GetAsyncKey(Keys::Up))
 			{
 				XMFLOAT3 scale = pickedActor->GetScale();
 				scale.x += scaleSpeed * deltaTime;
@@ -66,7 +66,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 				scale.z += scaleSpeed * deltaTime;
 				pickedActor->SetScale(scale);
 			}
-			else if (gInputSystem.GetAsyncKey(VK_DOWN))
+			else if (gInputSystem.GetAsyncKey(Keys::Down))
 			{
 				XMFLOAT3 scale = pickedActor->GetScale();
 				if (scale.x > 0.f)
@@ -90,7 +90,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 
 		if (bTranslateActors)
 		{
-			if (gInputSystem.GetAsyncKey(VK_CONTROL))
+			if (gInputSystem.GetAsyncKey(Keys::Ctrl))
 			{
 				if (gInputSystem.GetKeyDownState(VK_UP))
 				{
@@ -258,7 +258,7 @@ void WorldEditor::MoveActor(Actor* actor, XMVECTOR direction)
 	int mouseX = gUISystem.mousePos.x;
 	int mouseY = gUISystem.mousePos.y;
 
-	if (gInputSystem.GetAsyncKey(VK_LBUTTON))
+	if (gInputSystem.GetAsyncKey(Keys::LeftMouse))
 	{
 		SetCapture(gCoreSystem.mainWindow);
 
@@ -287,7 +287,7 @@ void WorldEditor::MoveActor(Actor* actor, EPickedAxis axis)
 	int mouseX = gUISystem.mousePos.x;
 	int mouseY = gUISystem.mousePos.y;
 
-	if (gInputSystem.GetAsyncKey(VK_LBUTTON))
+	if (gInputSystem.GetAsyncKey(Keys::LeftMouse))
 	{
 		SetCapture(gCoreSystem.mainWindow);
 

@@ -31,7 +31,7 @@ namespace LevelNames
 
 void Console::ConsoleInput()
 {
-	if (gInputSystem.GetAnyKeyDown() && gInputSystem.currentDownKey != VK_OEM_3)
+	if (gInputSystem.GetAnyKeyDown() && gInputSystem.GetKeyUpState(Keys::Tilde))
 	{
 		if (gInputSystem.GetKeyDownState(VK_BACK) && consoleStringIndex > 0)
 		{
