@@ -8,8 +8,7 @@
 class World
 {
 public:
-
-	void TickAllActorSystems();
+	void TickAllActorSystems(float deltaTime);
 	void CleaupAllActors();
 	void AddActorSystem(ActorSystem& actorSystem);
 	void RemoveActorSystem(EActorSystemID id);

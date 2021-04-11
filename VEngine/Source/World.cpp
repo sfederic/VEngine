@@ -2,6 +2,7 @@
 #include "Actor.h"
 #include "Debug.h"
 #include "DebugMenu.h"
+#include "CoreSystem.h"
 
 World gCurrentWorld;
 
@@ -11,11 +12,22 @@ World* GetWorld()
 	return &gCurrentWorld;
 }
 
-void World::TickAllActorSystems()
+void World::TickAllActorSystems(float deltaTime)
 {
+	//Skip actor ticks if game is paused.
+	if (gCoreSystem.bGamePaused)
+	{
+		return;
+	}
+
 	for (int asIndex = 0; asIndex < actorSystems.size(); asIndex++)
 	{
-		//TODO: add virtual ticks (actorSystems[i].Tick()
+		for (int actorIndex = 0; actorIndex < actorSystems[asIndex]->actors.size(); actorIndex++)
+		{
+			actorSystems[asIndex]->actors[actorIndex]->Tick(deltaTime);
+		}
+
+		actorSystems[asIndex]->Tick(deltaTime);
 	}
 }
 

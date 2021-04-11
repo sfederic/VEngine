@@ -111,9 +111,6 @@ int main(int argc, char* argv[])
         ImGui_ImplWin32_NewFrame();
         ImGui::NewFrame();
 
-        roll += 5 * deltaTime;
-        ac.actors[0]->SetRotation(roll, 0.f, 0.f);
-
         gTransformGizmo.Tick();
 
         gDebugMenu.Tick(GetWorld(), deltaTime);
@@ -125,6 +122,7 @@ int main(int argc, char* argv[])
 
         gWorldEditor.Tick(nullptr);
 
+        GetWorld()->TickAllActorSystems(deltaTime);
 
         ImGui::Render();
         gRenderSystem.Render(deltaTime);

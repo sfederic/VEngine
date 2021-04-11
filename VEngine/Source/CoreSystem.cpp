@@ -8,6 +8,15 @@
 
 CoreSystem gCoreSystem;
 
+void CoreSystem::Tick()
+{
+	//Pause game (freezes actor ticks)
+	if (gInputSystem.GetKeyUpState(Keys::Enter))
+	{
+		bGamePaused = !bGamePaused;
+	}
+}
+
 void CoreSystem::SetupWindow(HINSTANCE instance, int cmdShow)
 {
 	WNDCLASS wc = {};

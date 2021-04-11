@@ -8,6 +8,7 @@ LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam
 class CoreSystem
 {
 public:
+	void Tick();
 	void SetupWindow(HINSTANCE instance, int cmdShow);
 	void SetTimerFrequency();
 	void StartTimer();
@@ -32,6 +33,7 @@ public:
 	int frameCount;
 
 	bool bMainLoop = true;
+	bool bGamePaused = false;
 };
 
 extern CoreSystem gCoreSystem;

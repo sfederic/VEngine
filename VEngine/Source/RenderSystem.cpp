@@ -431,9 +431,10 @@ void RenderSystem::RenderActorSystem(World* world)
 						actorSystem->actors[actorIndex]->SetTransformationMatrix(animMatrixFinal);
 					}
 
-					//Set Matrix constant buffer
-					matrices.view = GetActiveCamera()->view;
+
+					//Set matrices constant buffer
 					matrices.model = actorSystem->actors[actorIndex]->GetTransformationMatrix();
+					matrices.view = GetActiveCamera()->view;
 					matrices.mvp = matrices.model * matrices.view * matrices.proj;
 					context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 					context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
@@ -443,7 +444,7 @@ void RenderSystem::RenderActorSystem(World* world)
 					context->UpdateSubresource(cbMaterial, 0, nullptr, &material, 0, 0);
 					context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 
-					//Draw indexed/straight
+					//Draw
 					context->Draw(actorSystem->modelData.verts.size(), 0);
 					//context->DrawIndexed(actorSystem->modelData.indices.size(), 0, 0);
 				}

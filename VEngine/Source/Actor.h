@@ -31,7 +31,9 @@ public:
 	Actor();
 	virtual void Tick(float deltaTime)
 	{
-
+		static float roll;
+		roll += (5 * deltaTime);
+		SetRotation(roll, 0.f, 0.f);
 	}
 
 	template <class ActorType>
