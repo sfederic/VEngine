@@ -55,18 +55,19 @@ void TransformGizmo::Tick()
         }
 
         //Render gizmos and set component values back to actor
-        ImGuizmo::Manipulate(&view.m[0][0], &proj.m[0][0], currentTransformOperation, ImGuizmo::MODE::LOCAL, &actorMatrix.m[0][0],
+        ImGuizmo::Manipulate(*view.m, *proj.m, currentTransformOperation, ImGuizmo::MODE::LOCAL, *actorMatrix.m,
             nullptr, currentSnapValues, bounds, boundsSnap);
 
         if (ImGuizmo::IsUsing())
         {
             Actor* actor = gWorldEditor.pickedActor;
-            XMFLOAT3 axis;
-            ImGuizmo::DecomposeMatrixToComponents(&actorMatrix.m[0][0],
-                &actor->transform.position.x,
-                &axis.x,
-                &actor->transform.scale.x);
-            actor->SetRotation(axis);
+            float trans[3];
+            float scale[3];
+            float rot[3];
+            ImGuizmo::DecomposeMatrixToComponents(*actorMatrix.m, trans, rot, scale);
+            actor->SetPosition(XMFLOAT3(trans));
+            actor->SetScale(XMFLOAT3(scale));
+            actor->SetRotation(XMFLOAT3(rot));
         }
 
         //Toggle snap and scale controls
