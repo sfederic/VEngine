@@ -223,10 +223,10 @@ void PropertiesWidget::Tick()
         posEditY->setValue(pos.y);
         posEditZ->setValue(pos.z);
 
-        XMFLOAT3 rot = PitchYawRollFromQuaternion(picked->transform.quatRotation);
-        rotEditX->setValue(rot.x);
-        rotEditY->setValue(rot.y);
-        rotEditZ->setValue(rot.z);
+        XMFLOAT3 rot = PitchYawRollFromMatrix(picked->GetTransformationMatrix());
+        rotEditX->setValue(XMConvertToDegrees(rot.x));
+        rotEditY->setValue(XMConvertToDegrees(rot.y));
+        rotEditZ->setValue(XMConvertToDegrees(rot.z));
 
         XMFLOAT3 scale = picked->GetScale();
         scaleEditX->setValue(scale.x);

@@ -109,11 +109,6 @@ int main(int argc, char* argv[])
         ImGui_ImplWin32_NewFrame();
         ImGui::NewFrame();
 
-        if (gInputSystem.GetKeyDownState(VK_BACK))
-        {
-            gWorldEditor.pickedActor = nullptr;
-        }
-
 
         gTransformGizmo.Tick();
 

@@ -40,8 +40,12 @@ XMFLOAT3 PitchYawRollFromMatrix(XMMATRIX m)
     float yaw = atan2f(m.r[0].m128_f32[2], m.r[1].m128_f32[2]);
     float roll = atan2f(m.r[2].m128_f32[0], m.r[2].m128_f32[1]);
 
+    pitch = XMConvertToDegrees(pitch);
+    yaw = XMConvertToDegrees(yaw);
+    roll = XMConvertToDegrees(roll);
+
     return XMFLOAT3(pitch, yaw, roll);
-}
+}   
 
 XMFLOAT3 PitchYawRollFromQuaternion(XMFLOAT4 q)
 {

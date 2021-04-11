@@ -52,7 +52,7 @@ void ToolkitEditorSystem::SetDockFocus(EDockFocus focus)
 
 int ToolkitEditorSystem::GetDockFocus()
 {
-	return (int)editorMainWindow->currentDockFocus;
+	return (int)currentDockFocus;
 }
 
 void ToolkitEditorSystem::GetMousePos(int* x, int* y)
