@@ -6,26 +6,43 @@
 #include "Actor.h"
 #include "World.h"
 #include "imgui/imgui.h"
+#include "imgui/backends/imgui_impl_win32.h"
+#include "imgui/backends/imgui_impl_dx11.h"
 #include "TransformGizmo.h"
+#include "EditorSystem.h"
 
 DebugMenu gDebugMenu;
 
-DebugMenu::DebugMenu()
+void DebugMenu::Init()
 {
-	menuItems.push_back(MenuItem(L"Actors", EMenuID::ACTORS));
-	menuItems[(int)EMenuID::ACTORS].subMenuItems.push_back(L"Actor Count: ");
+	//IMGUI setup
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
 
-	menuItems.push_back(MenuItem(L"Actor Systems", EMenuID::ACTORSYSTEMS));
-	menuItems[(int)EMenuID::ACTORSYSTEMS].subMenuItems.push_back(L"Test Actor System");
-	menuItems[(int)EMenuID::ACTORSYSTEMS].subMenuItems.push_back(L"Test Actor System2");
+	//Imgui has an .ini file to save previous ui positions and values.
+	//Setting this to null removes this initial setup.
+	io.IniFilename = nullptr;
 
-	menuItems.push_back(MenuItem(L"Rendering", EMenuID::RENDERING));
-	menuItems[(int)EMenuID::RENDERING].subMenuItems.push_back(L"D3D11 Timer: ");
-	menuItems[(int)EMenuID::RENDERING].subMenuItems.push_back(L"GPU: ");
+	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+
+	ImGui::StyleColorsDark();
+	ImGui_ImplWin32_Init((HWND)gEditorSystem->mainWindow);
+	ImGui_ImplDX11_Init(gRenderSystem.device, gRenderSystem.context);
 }
 
 void DebugMenu::Tick(World* world, float deltaTime)
 {
+	//Start ImGui
+	ImGui_ImplDX11_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
+
+	//Keep in mind ImGuizmo has to be called here to, it's part of ImGui
+	gTransformGizmo.Tick();
+
+
 	static int menuCursorIndex;
 	static int subMenuCursorIndex;
 
@@ -218,6 +235,15 @@ void DebugMenu::Tick(World* world, float deltaTime)
 			}
 		}*/
 	}
+
+	ImGui::EndFrame();
+}
+
+void DebugMenu::Cleanup()
+{
+	ImGui_ImplDX11_Shutdown();
+	ImGui_ImplWin32_Shutdown();
+	ImGui::DestroyContext();
 }
 
 void DebugMenu::AddNotification(const wchar_t* note)

@@ -52,23 +52,7 @@ int main(int argc, char* argv[])
     //Systems setup
     gCoreSystem.SetTimerFrequency();
     gRenderSystem.Init((HWND)gEditorSystem->mainWindow);
-
-    //IMGUI setup
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
-
-    //Imgui has an .ini file to save previous ui positions and values.
-    //Setting this to null removes this initial setup.
-    io.IniFilename = nullptr;  
-
-    //io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-    //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-
-    ImGui::StyleColorsDark();
-    ImGui_ImplWin32_Init((HWND)gEditorSystem->mainWindow);
-    ImGui_ImplDX11_Init(gRenderSystem.device, gRenderSystem.context);
-
+    gDebugMenu.Init();
     gAudioSystem.Init();
     //gUISystem.Init();
     gWorldEditor.Init();
@@ -107,15 +91,7 @@ int main(int argc, char* argv[])
 
         GetActiveCamera()->Tick(deltaTime);
 
-        ImGui_ImplDX11_NewFrame();
-        ImGui_ImplWin32_NewFrame();
-        ImGui::NewFrame();
-
-        gTransformGizmo.Tick();
-
         gDebugMenu.Tick(GetWorld(), deltaTime);
-
-        ImGui::EndFrame();
 
         gRenderSystem.Tick();
         gRenderSystem.RenderSetup(deltaTime);
@@ -153,9 +129,7 @@ int main(int argc, char* argv[])
         gCoreSystem.EndTimer();
     }
 
-    ImGui_ImplDX11_Shutdown();
-    ImGui_ImplWin32_Shutdown();
-    ImGui::DestroyContext();
+    gDebugMenu.Cleanup();
     //gUISystem.Cleanup();
     qApp->quit();
 

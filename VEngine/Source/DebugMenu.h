@@ -38,8 +38,9 @@ struct DebugNotification
 class DebugMenu
 {
 public:
-	DebugMenu();
+	void Init();
 	void Tick(class World* world, float deltaTime);
+	void Cleanup();
 	void AddNotification(const wchar_t* note);
 
 	std::vector<MenuItem> menuItems;
