@@ -52,14 +52,18 @@ public:
 	void SetPosition(XMVECTOR v);
 	void SetPosition(float x, float y, float z);
 	void SetPosition(XMFLOAT3 pos);
+
 	void SetRotation(XMVECTOR quaternion);
 	void SetRotation(XMVECTOR axis, float angle);
 	void SetRotation(float roll, float pitch, float yaw);
 	void SetRotation(XMFLOAT3 euler);
 	XMFLOAT4 GetRotationQuat();
+
 	XMMATRIX GetTransformationMatrix();
 	void SetTransformationMatrix(XMMATRIX& m);
+
 	XMFLOAT3 GetPitchYawRoll();
+
 	XMFLOAT3 GetScale();
 	void AddScale(float scale);
 	void AddScale(float x, float y, float z);
@@ -67,9 +71,11 @@ public:
 	void SetScale(float x, float y, float z);
 	void SetScale(XMVECTOR scale);
 	void SetScale(XMFLOAT3 scale);
+
 	XMVECTOR GetForwardVector();
 	XMVECTOR GetRightVector();
 	XMVECTOR GetUpVector();
+
 	void Move(float d, XMVECTOR direction);
 	ActorSystem* GetActorSystem();
 

@@ -109,7 +109,6 @@ int main(int argc, char* argv[])
         ImGui_ImplWin32_NewFrame();
         ImGui::NewFrame();
 
-
         gTransformGizmo.Tick();
 
         gDebugMenu.Tick(GetWorld(), deltaTime);
