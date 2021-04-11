@@ -112,7 +112,6 @@ int main(int argc, char* argv[])
             gConsole.DrawViewItems();
             gDebugMenu.Tick(GetWorld(), deltaTime);
             gUISystem.RenderAllUIViews();
-            gDebugMenu.AddNotification(L"helo");
 
             gUISystem.d2dRenderTarget->EndDraw();
 

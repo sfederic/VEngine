@@ -1,0 +1,14 @@
+Todo List for engine:
+
+-Level saving/loading
+-C++ RTTI
+-Engine-wide Undo/Redo 
+-Experimental live gameplay editing
+-Lights
+-Shadows
+-Actor component systems (Keep actor tick(), use a map and index those with actor UID or something. If using the array approach, think about using GC for cleanup and just use raw pointers.)
+-Audio (XAudio2 or DXToolkit?)
+-Actor parenting
+-Prefabs
+-C++ hot reloading
+-Skeletal animation
