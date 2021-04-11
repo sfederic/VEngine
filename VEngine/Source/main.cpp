@@ -52,9 +52,10 @@ int main(int argc, char* argv[])
     //Systems setup
     gCoreSystem.SetTimerFrequency();
     gRenderSystem.Init((HWND)gEditorSystem->mainWindow);
+    gUISystem.Init();
+
     gDebugMenu.Init();
     gAudioSystem.Init();
-    //gUISystem.Init();
     gWorldEditor.Init();
 
     ActorSystem ac;
@@ -92,8 +93,6 @@ int main(int argc, char* argv[])
 
         GetActiveCamera()->Tick(deltaTime);
 
-        gDebugMenu.Tick(GetWorld(), deltaTime);
-
         gRenderSystem.Tick();
         gRenderSystem.RenderSetup(deltaTime);
 
@@ -101,20 +100,25 @@ int main(int argc, char* argv[])
 
         GetWorld()->TickAllActorSystems(deltaTime);
 
-        ImGui::Render();
         gRenderSystem.Render(deltaTime);
         gRenderSystem.RenderEnd(deltaTime);
-        ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
         //UI RENDERING
         if (gUISystem.bAllUIActive)
         {
-            /*gUISystem.d2dRenderTarget->BeginDraw();
+
+            gUISystem.d2dRenderTarget->BeginDraw();
             gConsole.Tick();
             gConsole.DrawViewItems();
             gDebugMenu.Tick(GetWorld(), deltaTime);
             gUISystem.RenderAllUIViews();
-            gUISystem.d2dRenderTarget->EndDraw();*/
+            gDebugMenu.AddNotification(L"helo");
+
+            gUISystem.d2dRenderTarget->EndDraw();
+
+            ImGui::Render();
+
+            ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
         }
 
         gRenderSystem.Flush();
@@ -131,7 +135,7 @@ int main(int argc, char* argv[])
     }
 
     gDebugMenu.Cleanup();
-    //gUISystem.Cleanup();
+    gUISystem.Cleanup();
     qApp->quit();
 
     return 0;

@@ -90,9 +90,9 @@ bool RenderViewWidget::nativeEvent(const QByteArray& eventType, void* message, l
 
             gRenderSystem.dsv->Release();
 
-            //gUISystem.Cleanup();
-            //gUISystem.Init();
+            gUISystem.Cleanup();
             
+            //TODO: maybe can move this somewhere and salvage this functionality?
             //ID3D11Debug* debug;
             //gRenderSystem.device->QueryInterface(__uuidof(ID3D11Debug), reinterpret_cast<void**>(&debug));
             //debug->ReportLiveDeviceObjects(D3D11_RLDO_SUMMARY);
@@ -107,6 +107,8 @@ bool RenderViewWidget::nativeEvent(const QByteArray& eventType, void* message, l
                 gCoreSystem.windowWidth, gCoreSystem.windowHeight, DXGI_FORMAT_R8G8B8A8_UNORM, 0));
 
             gRenderSystem.CreateRTVAndDSV();
+
+            gUISystem.Init();
 
             gRenderSystem.matrices.proj = XMMatrixPerspectiveFovLH(XM_PI / 3, gCoreSystem.GetAspectRatio(), 0.01f, 1000.f);
             GetActiveCamera()->proj = gRenderSystem.matrices.proj;
