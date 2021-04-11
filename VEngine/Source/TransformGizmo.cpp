@@ -55,7 +55,7 @@ void TransformGizmo::Tick()
         }
 
         //Render gizmos and set component values back to actor
-        ImGuizmo::Manipulate(*view.m, *proj.m, currentTransformOperation, ImGuizmo::MODE::LOCAL, *actorMatrix.m,
+        ImGuizmo::Manipulate(*view.m, *proj.m, currentTransformOperation, ImGuizmo::MODE::WORLD, *actorMatrix.m,
             nullptr, currentSnapValues, bounds, boundsSnap);
 
         if (ImGuizmo::IsUsing())

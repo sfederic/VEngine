@@ -5,13 +5,12 @@
 
 using namespace DirectX;
 
-
 void MatrixAddScale(float s, XMMATRIX& m);
 XMVECTOR XMVectorRight();
 XMVECTOR XMVectorUp();
 XMVECTOR XMVectorForward();
 //XMVECTOR XMVectorConstantLerp(FXMVECTOR V0, FXMVECTOR V1, float deltaTime, float speed);
-XMVECTOR PitchYawRollFromMatrix(XMMATRIX m);
-
+XMFLOAT3 PitchYawRollFromMatrix(XMMATRIX m);
+XMFLOAT3 PitchYawRollFromQuaternion(XMFLOAT4 q);
 void LookAtRotation(XMVECTOR lookAtPoint, XMMATRIX& m);
 XMFLOAT4X4 FbxMatrixToDirectXMathMatrix(fbxsdk::FbxMatrix fbxMatrix);

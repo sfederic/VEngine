@@ -11,6 +11,7 @@
 #include <QDoubleSpinBox>
 #include <QLineEdit>
 #include "RenderViewWidget.h"
+#include "MathHelpers.h"
 
 void PropertiesWidget::SetActorPosition()
 {
@@ -222,13 +223,10 @@ void PropertiesWidget::Tick()
         posEditY->setValue(pos.y);
         posEditZ->setValue(pos.z);
 
-        XMFLOAT4 rot = picked->GetRotationQuat();
-        XMVECTOR rotationAxis;
-        float rotationAngle;
-        XMQuaternionToAxisAngle(&rotationAxis, &rotationAngle, XMLoadFloat4(&rot));
-        rotEditX->setValue(rotationAxis.m128_f32[0]);
-        rotEditY->setValue(rotationAxis.m128_f32[1]);
-        rotEditZ->setValue(rotationAxis.m128_f32[2]);
+        XMFLOAT3 rot = PitchYawRollFromQuaternion(picked->transform.quatRotation);
+        rotEditX->setValue(rot.x);
+        rotEditY->setValue(rot.y);
+        rotEditZ->setValue(rot.z);
 
         XMFLOAT3 scale = picked->GetScale();
         scaleEditX->setValue(scale.x);
