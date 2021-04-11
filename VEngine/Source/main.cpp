@@ -33,6 +33,8 @@
 
 #include "TransformGizmo.h"
 
+float roll = 0.f;
+
 int main(int argc, char* argv[])
 {
     HR(CoInitialize(NULL)); //For the WIC texture functions from DXT
@@ -108,6 +110,9 @@ int main(int argc, char* argv[])
         ImGui_ImplDX11_NewFrame();
         ImGui_ImplWin32_NewFrame();
         ImGui::NewFrame();
+
+        roll += 5 * deltaTime;
+        ac.actors[0]->SetRotation(roll, 0.f, 0.f);
 
         gTransformGizmo.Tick();
 

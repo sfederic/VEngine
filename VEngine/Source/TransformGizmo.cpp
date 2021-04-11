@@ -32,6 +32,7 @@ void TransformGizmo::Tick()
     XMStoreFloat4x4(&view, GetActiveCamera()->view);
     XMStoreFloat4x4(&proj, GetActiveCamera()->proj);
 
+
     if (gWorldEditor.pickedActor)
     {
         //Set transform operation
@@ -61,11 +62,26 @@ void TransformGizmo::Tick()
             }
         }
 
+
+        //Set Transform mode between world and local for gizmo
+        if (gInputSystem.GetKeyUpState(Keys::Space))
+        {
+            if (currentTransformMode == ImGuizmo::MODE::LOCAL)
+            {
+                currentTransformMode = ImGuizmo::MODE::WORLD;
+            }
+            else if (currentTransformMode == ImGuizmo::MODE::WORLD)
+            {
+                currentTransformMode = ImGuizmo::MODE::LOCAL;
+            }
+        }
+
+
         XMStoreFloat4x4(&actorMatrix, gWorldEditor.pickedActor->GetTransformationMatrix());
 
         //Render gizmos and set component values back to actor
-        ImGuizmo::Manipulate(*view.m, *proj.m, currentTransformOperation, ImGuizmo::MODE::WORLD, *actorMatrix.m,
-            nullptr, currentSnapValues, bounds, boundsSnap);
+        ImGuizmo::Manipulate(*view.m, *proj.m, currentTransformOperation, currentTransformMode, 
+            *actorMatrix.m, nullptr, currentSnapValues, bounds, boundsSnap);
 
         if (ImGuizmo::IsUsing())
         {

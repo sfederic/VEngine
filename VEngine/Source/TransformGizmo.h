@@ -11,6 +11,7 @@ public:
 	void Tick();
 
 	ImGuizmo::OPERATION currentTransformOperation = ImGuizmo::TRANSLATE;
+	ImGuizmo::MODE currentTransformMode = ImGuizmo::WORLD;
 
 	float currentSnapValues[3] = { 1.f, 1.f, 1.f };
 	float translateSnapValues[3] = { 1.f, 1.f, 1.f };

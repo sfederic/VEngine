@@ -74,6 +74,16 @@ void DebugMenu::Tick(World* world, float deltaTime)
 		ImGui::InputFloat("Scale", &gTransformGizmo.scaleSnapValues[0]);
 		gTransformGizmo.scaleSnapValues[1] = gTransformGizmo.scaleSnapValues[0];
 		gTransformGizmo.scaleSnapValues[2] = gTransformGizmo.scaleSnapValues[0];
+
+		if (gTransformGizmo.currentTransformMode == ImGuizmo::MODE::LOCAL)
+		{
+			ImGui::Text("LOCAL");
+		}
+		else if (gTransformGizmo.currentTransformMode == ImGuizmo::MODE::WORLD)
+		{
+			ImGui::Text("WORLD");
+		}
+
 		ImGui::End();
 	}
 
