@@ -11,7 +11,7 @@ CoreSystem gCoreSystem;
 void CoreSystem::Tick()
 {
 	//Pause game (freezes actor ticks)
-	if (gInputSystem.GetKeyUpState(Keys::Enter))
+	if (gInputSystem.GetKeyUpState('P'))
 	{
 		bGamePaused = !bGamePaused;
 	}

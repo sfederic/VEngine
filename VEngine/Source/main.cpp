@@ -80,6 +80,7 @@ int main(int argc, char* argv[])
 
         gCoreSystem.StartTimer();
         gCoreSystem.HandleMessages();
+        gCoreSystem.Tick();
 
         gEditorSystem->ProcessEvents();
         gEditorSystem->Tick();
