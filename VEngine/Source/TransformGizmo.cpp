@@ -6,6 +6,15 @@
 
 TransformGizmo gTransformGizmo;
 
+void ExtractPitchYawRollFromXMMatrix(float* flt_p_PitchOut, float* flt_p_YawOut, float* flt_p_RollOut, const DirectX::XMMATRIX* XMMatrix_p_Rotation)
+{
+    DirectX::XMFLOAT4X4 XMFLOAT4X4_Values;
+    DirectX::XMStoreFloat4x4(&XMFLOAT4X4_Values, DirectX::XMMatrixTranspose(*XMMatrix_p_Rotation));
+    *flt_p_PitchOut = (float)asin(-XMFLOAT4X4_Values._23);
+    *flt_p_YawOut = (float)atan2(XMFLOAT4X4_Values._13, XMFLOAT4X4_Values._33);
+    *flt_p_RollOut = (float)atan2(XMFLOAT4X4_Values._21, XMFLOAT4X4_Values._22);
+}
+
 void TransformGizmo::Tick()
 {
     //Set Imgui window
@@ -25,8 +34,6 @@ void TransformGizmo::Tick()
 
     if (gWorldEditor.pickedActor)
     {
-        XMStoreFloat4x4(&actorMatrix, gWorldEditor.pickedActor->GetTransformationMatrix());
-
         //Set transform operation
         if (!gInputSystem.GetAsyncKey(Keys::RightMouse))
         {
@@ -54,6 +61,8 @@ void TransformGizmo::Tick()
             }
         }
 
+        XMStoreFloat4x4(&actorMatrix, gWorldEditor.pickedActor->GetTransformationMatrix());
+
         //Render gizmos and set component values back to actor
         ImGuizmo::Manipulate(*view.m, *proj.m, currentTransformOperation, ImGuizmo::MODE::WORLD, *actorMatrix.m,
             nullptr, currentSnapValues, bounds, boundsSnap);
@@ -61,13 +70,13 @@ void TransformGizmo::Tick()
         if (ImGuizmo::IsUsing())
         {
             Actor* actor = gWorldEditor.pickedActor;
-            float trans[3];
-            float scale[3];
-            float rot[3];
-            ImGuizmo::DecomposeMatrixToComponents(*actorMatrix.m, trans, rot, scale);
-            actor->SetPosition(XMFLOAT3(trans));
-            actor->SetScale(XMFLOAT3(scale));
-            actor->SetRotation(XMFLOAT3(rot));
+
+            XMVECTOR scale, rot, trans;
+            XMMatrixDecompose(&scale, &rot, &trans, XMLoadFloat4x4(&actorMatrix));
+
+            actor->SetPosition(trans);
+            actor->SetScale(scale);
+            actor->SetRotation(rot);
         }
 
         //Toggle snap and scale controls

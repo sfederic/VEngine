@@ -11,6 +11,7 @@ public:
 
 	XMFLOAT3 position;
 	XMFLOAT3 scale;
+	XMFLOAT3 euler;
 	XMFLOAT4 quatRotation;
 };
 

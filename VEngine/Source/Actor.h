@@ -52,6 +52,7 @@ public:
 	void SetPosition(XMVECTOR v);
 	void SetPosition(float x, float y, float z);
 	void SetPosition(XMFLOAT3 pos);
+	void SetRotation(XMVECTOR quaternion);
 	void SetRotation(XMVECTOR axis, float angle);
 	void SetRotation(float roll, float pitch, float yaw);
 	void SetRotation(XMFLOAT3 euler);
