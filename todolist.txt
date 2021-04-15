@@ -7,6 +7,7 @@ Todo List for engine:
 -Lights
 -Shadows
 -Actor component systems (Keep actor tick(), use a map and index those with actor UID or something. If using the array approach, think about using GC for cleanup and just use raw pointers.)
+-Shader system update (Look into uber shaders)
 -Audio (XAudio2 or DXToolkit?)
 -Actor parenting
 -Prefabs
