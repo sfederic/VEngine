@@ -97,7 +97,7 @@ void UISystem::Tick()
 
 	if(gInputSystem.GetKeyUpState('0'))
 	{
-		bAllUIActive = !bAllUIActive;
+		//bAllUIActive = !bAllUIActive;
 	}
 
 	//NOTE: This one is here for the Direct2D mouse checking. Y position is off by about 10? Direct2D rendering offset? 

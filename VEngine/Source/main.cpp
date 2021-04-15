@@ -59,6 +59,7 @@ int main(int argc, char* argv[])
     gWorldEditor.Init();
 
     ActorSystem ac;
+    ac.SetActorSize<Actor>();
     ac.modelName = "material_test_cube.fbx";
     ac.shaderName = L"shaders.hlsl";
     ac.textureName = L"texture2.jpg";

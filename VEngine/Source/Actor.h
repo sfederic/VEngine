@@ -31,9 +31,7 @@ public:
 	Actor();
 	virtual void Tick(float deltaTime)
 	{
-		static float roll;
-		roll += (5 * deltaTime);
-		SetRotation(roll, 0.f, 0.f);
+		
 	}
 
 	template <class ActorType>
@@ -110,8 +108,18 @@ struct PipelineView
 class ActorSystem
 {
 public:
-	ActorSystem();
+	ActorSystem()
+	{
+		pso.Create();
+	}
+
 	virtual void Tick(float deltaTime) {}
+
+	template <class ActorType>
+	void SetActorSize()
+	{
+		sizeofActor = sizeof(ActorType);
+	}
 
 	template <class ActorType>
 	void CreateActors(RenderSystem* renderSystem, int numActorsToSpawn)
@@ -228,6 +236,9 @@ public:
 	std::wstring textureName;
 	std::wstring name;
 	std::string modelName;
+
+	//Size of the actor system's linked actor
+	uint32_t sizeofActor = 0;
 
 	bool bInstancingActors; //bool for setting system to use instancing
 	bool bAnimated = false; //Whether model has any animation data. Is set in FBX import.

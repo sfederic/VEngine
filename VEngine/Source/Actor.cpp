@@ -196,12 +196,6 @@ ActorSystem* Actor::GetActorSystem()
 	return nullptr;
 }
 
-//ACTOR SYSTEM
-ActorSystem::ActorSystem()
-{
-	pso.Create();
-}
-
 Buffer* ActorSystem::GetVertexBuffer()
 {
 	if (pso.vertexBuffer)

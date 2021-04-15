@@ -29,20 +29,16 @@ void FileSystem::WriteAllActorSystems(World* world, const char* filename)
 	fopen_s(&file, filename, "w");
 	assert(file);
 
-	int numActorSystems = world->actorSystems.size();
-	fwrite(&numActorSystems, sizeof(int), 1, file);
-
 	for (int systemIndex = 0; systemIndex < world->actorSystems.size(); systemIndex++)
 	{
-		fwrite(&world->actorSystems[systemIndex]->id, sizeof(int), 1, file);
-
 		int numOfActors = world->actorSystems[systemIndex]->actors.size();
 		fwrite(&numOfActors, sizeof(int), 1, file);
 
 		for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex]->actors.size(); actorIndex++)
 		{
-			//fwrite without the for loop(SOA) was about 0.01 ms faster with around 60,000 actors. Surprising
-			fwrite(&world->actorSystems[systemIndex]->actors[actorIndex]->transform, sizeof(XMMATRIX), 1, file);
+			//fwrite without the for loop(SOA) was about 0.01 ms faster with around 60,000 actors. Surprising.
+			fwrite(&world->actorSystems[systemIndex]->actors[actorIndex]->transform,
+				sizeof(Transform), 1, file);
 		}
 	}
 
@@ -57,25 +53,19 @@ void FileSystem::ReadAllActorSystems(World* world, const char* filename)
 	fopen_s(&file, filename, "r");
 	assert(file);
 
-	World newWorld = {};
-	int numActorSystems = 0;
-	fread(&numActorSystems, sizeof(int), 1, file);
+	World* newWorld = GetWorld();
 
-	for (int systemIndex = 0; systemIndex < numActorSystems; systemIndex++)
+	int numActors = 0;
+	fread(&numActors, sizeof(int), 1, file);
+
+	for (int systemIndex = 0; systemIndex < newWorld->actorSystems.size(); systemIndex++)
 	{
-		ActorSystem* actorSystem = new ActorSystem();
-
-		newWorld.actorSystems.push_back(actorSystem);
-
-		fread(&newWorld.actorSystems[systemIndex]->id, sizeof(int), 1, file);
-
-		int numActorsToSpawn = 0;
-		fread(&numActorsToSpawn, sizeof(int), 1, file);
+		for (int i = 0; i < numActors; i++)
+		{
+			fread(&newWorld->actorSystems[systemIndex]->actors[i]->transform,
+				sizeof(Transform), 1, file);
+		}
 	}
-
-	gCurrentWorld.CleaupAllActors();
-
-	gCurrentWorld = newWorld;
 
 	DebugPrint("All actor systems loaded.\n");
 	gDebugMenu.notifications.push_back(DebugNotification(L"All actor systems loaded."));
