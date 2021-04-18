@@ -59,17 +59,8 @@ int main(int argc, char* argv[])
     gAudioSystem.Init();
     gWorldEditor.Init();
 
-    ActorSystem ac;
-    ac.SetActorSize<Actor>();
-    ac.modelName = "material_test_cube.fbx";
-    ac.shaderName = L"shaders.hlsl";
-    ac.textureName = L"texture2.jpg";
-    ac.name = L"Cubes";
-    ac.CreateActors<Actor>(&gRenderSystem, 1);
-
     ParticleSystem* ps = new ParticleSystem();
 
-    GetWorld()->AddActorSystem(&ac);
     GetWorld()->AddActorSystem(ps);
 
     //Qt late init

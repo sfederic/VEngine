@@ -7,12 +7,12 @@ ParticleSystem::ParticleSystem()
 {
 	modelName = "plane.fbx";
 	shaderName = L"shaders.hlsl";
-	textureName = L"texture.jpg";
+	textureName = L"texture.png";
 	name = L"ParticleSystem";
 	CreateActors<Particle>(&gRenderSystem, 5);
 }
 
-void ParticleSystem::Tick()
+void ParticleSystem::Tick(float deltaTime)
 {
 	for (int i = 0; i < actors.size(); i++)
 	{

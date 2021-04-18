@@ -113,7 +113,7 @@ public:
 		pso.Create();
 	}
 
-	virtual void Tick(float deltaTime) {}
+	virtual void Tick(float deltaTime) = 0;
 
 	template <class ActorType>
 	void SetActorSize()

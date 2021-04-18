@@ -19,12 +19,14 @@
 #include "Texture.h"
 #include "ShaderResourceView.h"
 #include <string.h>
+#include "DebugBox.h"
+#include "DebugSphere.h"
 
 UINT strides = sizeof(Vertex);
 UINT offsets = 0;
 
-ActorSystem debugBox;
-ActorSystem debugSphere;
+DebugBox* debugBox;
+DebugSphere* debugSphere;
 
 Vertex debugLineData[2];
 
@@ -151,13 +153,9 @@ void RenderSystem::CreateDevice()
 	qd.Query = D3D11_QUERY_TIMESTAMP_DISJOINT;
 	HR(device->CreateQuery(&qd, &disjointQuery));
 
-	debugBox.modelName = "cube.fbx";
-	debugBox.shaderName = L"debugDraw.hlsl";
-	debugBox.CreateActors<Actor>(this, 1);
-
-	debugSphere.shaderName = L"debugDraw.hlsl";
-	debugSphere.modelName = "ico_sphere.fbx";
-	debugSphere.CreateActors<Actor>(this, 1);
+	//Init debug box and sphere systems
+	debugBox = new DebugBox();
+	debugSphere = new DebugSphere();
 }
 
 void RenderSystem::CreateSwapchain(HWND windowHandle)
@@ -465,11 +463,11 @@ void RenderSystem::RenderBounds()
 
 	if (bDrawBoundingBoxes)
 	{
-		auto boxIt = gShaderFactory.shaderMap.find(debugBox.shaderName);
+		auto boxIt = gShaderFactory.shaderMap.find(debugBox->shaderName);
 		context->VSSetShader(boxIt->second->vertexShader, nullptr, 0);
 		context->PSSetShader(boxIt->second->pixelShader, nullptr, 0);
 
-		context->IASetVertexBuffers(0, 1, (ID3D11Buffer**)debugBox.GetVertexBuffer(), &strides, &offsets);
+		context->IASetVertexBuffers(0, 1, (ID3D11Buffer**)debugBox->GetVertexBuffer(), &strides, &offsets);
 
 		for (int systemIndex = 0; systemIndex < world->actorSystems.size(); systemIndex++)
 		{
@@ -493,18 +491,18 @@ void RenderSystem::RenderBounds()
 				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 				context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
-				context->Draw((UINT)debugBox.modelData.verts.size(), 0);
+				context->Draw((UINT)debugBox->modelData.verts.size(), 0);
 			}
 		}
 	}
 
 	if (bDrawBoundingSpheres)
 	{
-		auto sphereIt = gShaderFactory.shaderMap.find(debugSphere.shaderName);
+		auto sphereIt = gShaderFactory.shaderMap.find(debugSphere->shaderName);
 		context->VSSetShader(sphereIt->second->vertexShader, nullptr, 0);
 		context->PSSetShader(sphereIt->second->pixelShader, nullptr, 0);
 
-		context->IASetVertexBuffers(0, 1, (ID3D11Buffer**)debugSphere.GetVertexBuffer(), &strides, &offsets);
+		context->IASetVertexBuffers(0, 1, (ID3D11Buffer**)debugSphere->GetVertexBuffer(), &strides, &offsets);
 
 		for (int systemIndex = 0; systemIndex < world->actorSystems.size(); systemIndex++)
 		{
@@ -530,7 +528,7 @@ void RenderSystem::RenderBounds()
 				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 				context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
-				context->Draw((UINT)debugSphere.modelData.verts.size(), 0);
+				context->Draw((UINT)debugSphere->modelData.verts.size(), 0);
 			}
 		}
 	}

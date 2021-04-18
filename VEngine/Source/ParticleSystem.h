@@ -18,7 +18,7 @@ class ParticleSystem : public ActorSystem
 public:
 	ParticleSystem();
 
-	virtual void Tick();
+	virtual void Tick(float deltaTime);
 
 	Transform transform;
 };
