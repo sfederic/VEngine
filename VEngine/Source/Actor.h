@@ -18,6 +18,7 @@ class Sampler;
 class RasterizerState;
 class Texture;
 class ShaderResourceView;
+class BlendState;
 class RenderSystem;
 
 enum class EActorSystemID
@@ -103,6 +104,7 @@ struct PipelineView
 	RasterizerState* rastState;
 	Texture* texture;
 	ShaderResourceView* srv;
+	BlendState* blendState;
 };
 
 class ActorSystem
