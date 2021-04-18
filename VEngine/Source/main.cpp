@@ -20,7 +20,6 @@
 #include "MathHelpers.h"
 #include "Console.h"
 #include "Profiler.h"
-#include "TestActor.h"
 #include "ConsoleDock.h"
 #include "RenderViewWidget.h"
 #include "WorldDock.h"
@@ -33,6 +32,7 @@
 
 #include "TransformGizmo.h"
 #include "ParticleSystem.h"
+#include "Actors/TestActor.h"
 
 float roll = 0.f;
 
@@ -58,6 +58,11 @@ int main(int argc, char* argv[])
     gDebugMenu.Init();
     gAudioSystem.Init();
     gWorldEditor.Init();
+
+    //test actor setup
+    TestActor* ta = new TestActor();
+    ta->CreateActors<Actor>(&gRenderSystem, 1);
+    GetWorld()->AddActorSystem(ta);
 
     //Qt late init
     gEditorSystem->PopulateWorldList();

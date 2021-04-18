@@ -134,7 +134,7 @@
     <ClCompile Include="Source\ShaderFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TestActor.cpp">
+    <ClCompile Include="Source\Actors\TestActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\TimerSystem.cpp">
@@ -144,9 +144,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\TransformEditWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TranslationGizmo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\UISystem.cpp">
@@ -328,7 +325,7 @@
     <ClInclude Include="Source\ShaderFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\TestActor.h">
+    <ClInclude Include="Source\Actors\TestActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\TimerSystem.h">
@@ -338,9 +335,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\TransformEditWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TranslationGizmo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\UISystem.h">

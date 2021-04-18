@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Raycast.h"
-#include "TranslationGizmo.h"
+#include "Actor.h"
 
 class WorldEditor
 {
@@ -9,14 +9,11 @@ public:
 	void Tick(ID3D11Buffer* debugLinesBuffer);
 	void Init();
 	void MoveActor(Actor* actor, XMVECTOR direction);
-	void MoveActor(class Actor* actor, EPickedAxis axis);
-
-	TranslationGizmoSystem translationGizmos;
+	void MoveActor(class Actor* actor);
 
 	Ray screenPickRay;
 
 	Actor* pickedActor;
-	TranslationGizmo* pickedAxis;
 	XMVECTOR pickedDirection;
 
 	float pickedActorMoveSpeed = 5.f;

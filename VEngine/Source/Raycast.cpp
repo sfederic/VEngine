@@ -83,11 +83,6 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSy
 
 			ray.actorIndex = i;
 
-			if (actorSystem->IsA<TranslationGizmoSystem>());
-			{
-				return true;
-			}
-
 			bRayHit = true;
 		}
 	}
@@ -214,15 +209,7 @@ bool RaycastAllFromScreen(Ray& ray, int sx, int sy, Camera* camera, World* world
 			Actor* actor = world->GetActor(ray.actorSystemIndex, ray.actorIndex);
 			if (actor)
 			{
-				TranslationGizmo* axisActor = dynamic_cast<TranslationGizmo*>(actor);
-				if (axisActor)
-				{
-					gWorldEditor.pickedAxis = axisActor;
-				}
-				else
-				{
-					gWorldEditor.pickedActor = actor;
-				}
+				gWorldEditor.pickedActor = actor;
 			}
 
 			return true;

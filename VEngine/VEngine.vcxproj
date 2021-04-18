@@ -162,11 +162,10 @@
     <ClCompile Include="Source\Raycast.cpp" />
     <ClCompile Include="Source\RenderViewWidget.cpp" />
     <ClCompile Include="Source\ShaderFactory.cpp" />
-    <ClCompile Include="Source\TestActor.cpp" />
+    <ClCompile Include="Source\Actors\TestActor.cpp" />
     <ClCompile Include="Source\TimerSystem.cpp" />
     <ClCompile Include="Source\ToolbarDock.cpp" />
     <ClCompile Include="Source\TransformEditWidget.cpp" />
-    <ClCompile Include="Source\TranslationGizmo.cpp" />
     <ClCompile Include="Source\UISystem.cpp" />
     <ClCompile Include="Source\UIView.cpp" />
     <ClCompile Include="Source\World.cpp" />
@@ -236,11 +235,10 @@
     <ClInclude Include="Source\RenderTypes.h" />
     <ClInclude Include="Source\RenderViewWidget.h" />
     <ClInclude Include="Source\ShaderFactory.h" />
-    <ClInclude Include="Source\TestActor.h" />
+    <ClInclude Include="Source\Actors\TestActor.h" />
     <ClInclude Include="Source\TimerSystem.h" />
     <ClInclude Include="Source\ToolbarDock.h" />
     <ClInclude Include="Source\TransformEditWidget.h" />
-    <ClInclude Include="Source\TranslationGizmo.h" />
     <ClInclude Include="Source\UISystem.h" />
     <ClInclude Include="Source\UIView.h" />
     <ClInclude Include="Source\World.h" />

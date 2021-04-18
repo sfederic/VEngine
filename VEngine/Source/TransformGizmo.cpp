@@ -3,6 +3,7 @@
 #include "Camera.h"
 #include "CoreSystem.h"
 #include "Input.h"
+#include "Actor.h"
 
 TransformGizmo gTransformGizmo;
 
