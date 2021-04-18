@@ -15,8 +15,6 @@
 //NOTE: For the most part, not going to use FBX models with lights, cameras and extra nodes. One model should suffice. Import() code reflects that.
 //NOTE: Models needto be triangluated, not working with control points (see asserts() below)
 
-
-//TODO: these globals are getting messy, might as well put them in the class and instantiate it.
 FbxManager* manager;
 FbxIOSettings* ioSetting;
 FbxImporter* importer;
@@ -78,7 +76,6 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 
 	FbxScene* scene = node->GetScene();
 
-	//TODO: eventually need to go through every attribute like this and deal with the data recursively.
 	/*FbxNodeAttribute* attrib = node->GetNodeAttribute();
 	if (attrib->GetAttributeType() == FbxNodeAttribute::eSkeleton)
 	{
@@ -100,7 +97,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 					FbxAnimLayer* animLayer = animStack->GetMember<FbxAnimLayer>(animLayerIndex);
 					if (animLayer)
 					{
-						//TODO: Feels like just getting one curve isn't the right answer here.
+						//Feels like just getting one curve isn't the right answer here.
 						FbxAnimCurveNode* curveNode = node->LclRotation.GetCurveNode(animLayer);
 						if (curveNode)
 						{
@@ -110,7 +107,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 								FbxAnimCurve* animCurve = curveNode->GetCurve(curveIndex);
 								int keyCount = animCurve->KeyGetCount();
 
-								//TODO: This isn't too bad, but FBX file without animation still have eAnimated flags set
+								//This isn't too bad, but FBX file without animation still have eAnimated flags set
 								//(for some reason) so placing this here is the quick fix. Better fix is doing this in the component.
 								currentActorSystem->bAnimated = true;
 
@@ -121,9 +118,6 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 									FbxTime time;
 									time.SetSecondDouble(keyTime);
 
-									//TODO: have to comeback here and clean up Quat conversions, uniform scaling,
-									//decide whether to even use transform (in the sense that all animations just play 
-									//in-place.)
 									FbxVector4 rot = animEvaluator->GetNodeLocalRotation(node, time);
 									FbxVector4 scale = animEvaluator->GetNodeLocalScaling(node, time);
 									FbxVector4 pos = animEvaluator->GetNodeLocalTransform(node, time);
@@ -281,7 +275,6 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 					BoneWeights* boneData = &boneWeightsMap.find(index)->second;
 					if (boneData)
 					{
-						//TODO: I wish I could think of a better way to do this.
 						//There must be a way to merge the above cluster FBX code and the vertices.
 						for (int i = 0; i < boneData->weights.size(); i++)
 						{

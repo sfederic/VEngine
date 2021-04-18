@@ -59,10 +59,6 @@ int main(int argc, char* argv[])
     gAudioSystem.Init();
     gWorldEditor.Init();
 
-    ParticleSystem* ps = new ParticleSystem();
-
-    GetWorld()->AddActorSystem(ps);
-
     //Qt late init
     gEditorSystem->PopulateWorldList();
 

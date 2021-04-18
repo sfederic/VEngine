@@ -138,8 +138,6 @@ public:
 			//UINT indicesByteWidth = modelData.indices.size() * sizeof(uint16_t);
 			//indexBuffer = renderSystem->CreateDefaultBuffer(indicesByteWidth, D3D11_BIND_INDEX_BUFFER, modelData.indices.data());
 
-			//TODO: shader states don't really change per actor system that much.
-			//Can probablly do like how D3D12 does it and have a bunch of static samplers to assign at startup.
 			renderSystem->CreateSamplerState(GetSamplerState());
 			renderSystem->CreateTexture(this);
 
@@ -233,7 +231,6 @@ public:
 
 	EActorSystemID id;
 	
-	//TODO: look into using std::filesystem::path here, or using a helper conversion
 	std::wstring shaderName;
 	std::wstring textureName;
 	std::wstring name;

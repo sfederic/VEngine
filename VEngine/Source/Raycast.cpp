@@ -214,7 +214,6 @@ bool RaycastAllFromScreen(Ray& ray, int sx, int sy, Camera* camera, World* world
 			Actor* actor = world->GetActor(ray.actorSystemIndex, ray.actorIndex);
 			if (actor)
 			{
-				//TODO: this dynamic cast is a bit funny. Might have to brush up on C++ here to work it into IsA() and GetActor() calls
 				TranslationGizmo* axisActor = dynamic_cast<TranslationGizmo*>(actor);
 				if (axisActor)
 				{
@@ -223,25 +222,6 @@ bool RaycastAllFromScreen(Ray& ray, int sx, int sy, Camera* camera, World* world
 				else
 				{
 					gWorldEditor.pickedActor = actor;
-
-					//TODO: cleanup
-					/*PropertiesWidget* propWidget = gEditorMainWindow->propertiesDock->propWidget;
-
-					//TODO: This is no good. Should just be able to update entire actor with one call.
-					XMFLOAT3 pos = actor->GetPositionFloat3();
-					propWidget->posEditX->setValue(pos.x);
-					propWidget->posEditY->setValue(pos.y);
-					propWidget->posEditZ->setValue(pos.z);
-
-					XMFLOAT3 scale = actor->GetScale();
-					propWidget->scaleEditX->setValue(scale.x);
-					propWidget->scaleEditY->setValue(scale.y);
-					propWidget->scaleEditZ->setValue(scale.z);
-
-					XMFLOAT3 rot = actor->GetPitchYawRoll();
-					propWidget->rotEditX->setValue(rot.x);
-					propWidget->rotEditY->setValue(rot.y);
-					propWidget->rotEditZ->setValue(rot.z);*/
 				}
 			}
 

@@ -11,7 +11,7 @@
 
 RenderViewWidget::RenderViewWidget(QWidget* parent) : QWidget(parent)
 {
-    //TODO: Need some snap setting controls. See what the tradeoffs are between Qt and IMGUI
+
 }
 
 void RenderViewWidget::Tick()
@@ -49,7 +49,6 @@ bool RenderViewWidget::nativeEvent(const QByteArray& eventType, void* message, l
         gInputSystem.StoreKeyUpInput(msg->wParam);
         break;
 
-    //TODO: there's a bit of conflict here between 
     case WM_LBUTTONUP:
         //gInputSystem.StoreMouseLeftUpInput(msg->wParam);
         //break;

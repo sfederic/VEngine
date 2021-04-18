@@ -422,7 +422,6 @@ void RenderSystem::RenderActorSystem(World* world)
 							actorSystem->actors[actorIndex]->currentAnimationTime = 0.0;
 						}
 
-						//TODO: need to find a way to handle actor TRS so that not only animation ones are playing
 						XMFLOAT4X4 animMatrix;
 						actorSystem->animData.Interpolate(actorSystem->actors[actorIndex]->currentAnimationTime, animMatrix);
 						XMMATRIX animMatrixFinal = XMLoadFloat4x4(&animMatrix);

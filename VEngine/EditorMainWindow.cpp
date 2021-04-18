@@ -167,8 +167,6 @@ void EditorMainWindow::CloseTab(int tabIndex)
     editorTabWidget->removeTab(tabIndex);
 }
 
-//TODO: testing for closing and creating docks/tabs and widgets. See if it's worth even finishing up.
-//You'd have to make a CloseableTabWidget class and override it's closed() function.
 void EditorMainWindow::CreateConsoleDock()
 {
     if (consoleDock == nullptr)

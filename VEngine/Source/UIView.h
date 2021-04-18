@@ -5,8 +5,6 @@
 #include <string>
 #include "CoreSystem.h"
 
-//TODO: This was the implementation for a lot of previous Stat debug ui. See if it's worth keeping.
-
 //base struct for UI elements to inherit from
 struct UIView
 {

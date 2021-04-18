@@ -13,7 +13,7 @@ using namespace fbxsdk;
 struct ModelData;
 class ActorSystem;
 
-//TODO: need to look into a custom loading binary format for FBX and glTF models
+//TODO: need to look into a custom intermediate binary format for FBX or glTF model loading.
 
 class FBXImporter
 {

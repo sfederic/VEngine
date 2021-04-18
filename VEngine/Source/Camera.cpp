@@ -34,7 +34,6 @@ void Camera::Tick(float deltaTime)
 		location += attachedOffset;
 	}
 
-	//TODO: This is junk, just subclass the cameras later
 	if (bEditorCamera)
 	{
 		MouseMove(gUISystem.mousePos.x, gUISystem.mousePos.y);
@@ -171,7 +170,6 @@ void Camera::ZoomTo(Actor* actor)
 	location = actorPos;
 }
 
-//TODO: This works, but it might need some cleaning up (or some visualisation)
 void Camera::FrustumCullTest(ActorSystem& system)
 {
 	//OpenMP Test

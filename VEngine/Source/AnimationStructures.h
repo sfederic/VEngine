@@ -9,9 +9,6 @@ struct AnimFrame
 {
 	double time;
 	DirectX::XMFLOAT3 pos;
-
-	//TODO: Can propably get away with just using uniform scaling here (Turn XMFLOAt3 to single float)
-	//Gotta read up some more, can guarantee shearing would be fucking imposible.
 	DirectX::XMFLOAT3 scale;
 	DirectX::XMFLOAT4 rot; //Quaternion
 };

@@ -53,8 +53,6 @@ void UISystem::Init()
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.1f, 0.1f, 0.8f, 1.0f), &brushCheckBoxOn));
 
 	//Populate UIViews
-	//TODO: cleanup
-	//NOTE: So far the ui views are static, if I want to bring layering back, have to ditch this approach
 	UIViewActor* uiViewActor = new UIViewActor;
 	uiViewActor->bIsHidden = true;
 	uiViews.push_back(uiViewActor);
@@ -126,7 +124,6 @@ void UISystem::Tick()
 		}
 	}
 
-	//TODO: cleanup
 	//Was for multiple floating views
 	/*if (inputSystem.GetKeyUpState(VK_DELETE))
 	{

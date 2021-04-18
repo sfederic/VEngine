@@ -11,8 +11,6 @@ public:
 
 };
 
-//TODO: figure out if you need a system that manages every particle or whether it's
-//light enough to throw it in with the actors.
 class ParticleSystem : public ActorSystem
 {
 public:

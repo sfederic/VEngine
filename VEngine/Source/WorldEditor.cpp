@@ -80,7 +80,6 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 		}
 
 		//TRANSLATION
-		//TODO: why is 'W' returning true regardless of what is down?
 		/*if (gInputSystem.GetKeyUpState('W'));
 		{
 			bTranslateActors = !bTranslateActors;
@@ -344,9 +343,6 @@ void WorldEditor::MoveActor(Actor* actor, EPickedAxis axis)
 		}
 		else if (actor)
 		{
-			//TODO: There's a better way to do this
-			//Couldcheck angle between camera and center point of transform widet for axis translations across different axis
-			//For free movement
 			if (axis == EPickedAxis::X)
 			{
 				//these if()s are here to do correct translation based on camera pos
