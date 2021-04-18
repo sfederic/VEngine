@@ -60,7 +60,7 @@ public:
 	XMFLOAT4 GetRotationQuat();
 
 	XMMATRIX GetTransformationMatrix();
-	void SetTransformationMatrix(XMMATRIX& m);
+	void SetTransformationMatrix(XMMATRIX m);
 
 	XMFLOAT3 GetPitchYawRoll();
 

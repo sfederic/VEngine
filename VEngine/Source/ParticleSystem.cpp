@@ -16,6 +16,8 @@ void ParticleSystem::Tick(float deltaTime)
 {
 	for (int i = 0; i < actors.size(); i++)
 	{
-		LookAtRotation(GetActiveCamera()->location, actors[i]->GetTransformationMatrix());
+		XMMATRIX m = actors[i]->GetTransformationMatrix();
+		LookAtRotation(GetActiveCamera()->location, m);
+		actors[i]->transform.Decompose(m);
 	}
 }

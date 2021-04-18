@@ -95,9 +95,8 @@ XMMATRIX Actor::GetTransformationMatrix()
 	);
 }
 
-void Actor::SetTransformationMatrix(XMMATRIX& m)
+void Actor::SetTransformationMatrix(XMMATRIX m)
 {
-
 }
 
 XMFLOAT3 Actor::GetPitchYawRoll()

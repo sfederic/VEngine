@@ -7,3 +7,13 @@ Transform::Transform()
 	quatRotation = XMFLOAT4(0.f, 0.f, 0.f, 1.f);
 	position = XMFLOAT3(0.f, 0.f, 0.f);
 }
+
+void Transform::Decompose(XMMATRIX m)
+{
+	XMVECTOR outScale, outQuat, outTrans;
+	XMMatrixDecompose(&outScale, &outQuat, &outTrans, m);
+
+	XMStoreFloat3(&scale, outScale);
+	XMStoreFloat4(&quatRotation, outQuat);
+	XMStoreFloat3(&position, outTrans);
+}

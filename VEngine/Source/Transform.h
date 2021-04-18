@@ -8,6 +8,7 @@ class Transform
 {
 public:
 	Transform();
+	void Decompose(XMMATRIX m);
 
 	XMFLOAT3 position;
 	XMFLOAT3 scale;
