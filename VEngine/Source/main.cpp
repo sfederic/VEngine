@@ -32,6 +32,7 @@
 #include "imgui/backends/imgui_impl_dx11.h"
 
 #include "TransformGizmo.h"
+#include "ParticleSystem.h"
 
 float roll = 0.f;
 
@@ -66,7 +67,10 @@ int main(int argc, char* argv[])
     ac.name = L"Cubes";
     ac.CreateActors<Actor>(&gRenderSystem, 1);
 
-    GetWorld()->AddActorSystem(ac);
+    ParticleSystem* ps = new ParticleSystem();
+
+    GetWorld()->AddActorSystem(&ac);
+    GetWorld()->AddActorSystem(ps);
 
     //Qt late init
     gEditorSystem->PopulateWorldList();

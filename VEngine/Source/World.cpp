@@ -36,13 +36,13 @@ void World::CleaupAllActors()
 	actorSystems.clear();
 }
 
-void World::AddActorSystem(ActorSystem& actorSystem)
+void World::AddActorSystem(ActorSystem* actorSystem)
 {
-	auto actorSystemIt = actorSystemMap.find(actorSystem.id);
+	auto actorSystemIt = actorSystemMap.find(actorSystem->id);
 	if (actorSystemIt == actorSystemMap.end())
 	{
-		actorSystems.push_back(&actorSystem);
-		actorSystemMap[actorSystem.id] = &actorSystem;
+		actorSystems.push_back(actorSystem);
+		actorSystemMap[actorSystem->id] = actorSystem;
 	}
 	else
 	{

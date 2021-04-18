@@ -110,7 +110,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="Source\ParticleSystem.cpp" />
     <ClCompile Include="Source\EditorSystem.cpp" />
     <ClCompile Include="Source\NativeEditorSystem.cpp" />
     <ClCompile Include="Source\ToolkitEditorSystem.cpp" />
@@ -177,7 +177,7 @@
     <ClCompile Include="EditorMainWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="Source\ParticleSystem.h" />
     <ClInclude Include="Source\EditorSystem.h" />
     <ClInclude Include="Source\GlobalDefines.h" />
     <ClInclude Include="Source\NativeEditorSystem.h" />

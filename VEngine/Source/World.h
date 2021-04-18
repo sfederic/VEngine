@@ -10,7 +10,7 @@ class World
 public:
 	void TickAllActorSystems(float deltaTime);
 	void CleaupAllActors();
-	void AddActorSystem(ActorSystem& actorSystem);
+	void AddActorSystem(ActorSystem* actorSystem);
 	void RemoveActorSystem(EActorSystemID id);
 	Actor* FindActorByString(std::wstring name);
 	ActorSystem* FindActorSystem(EActorSystemID id);
