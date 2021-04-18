@@ -91,12 +91,12 @@ void TransformGizmo::Tick()
         if (gInputSystem.GetKeyUpState('O'))
         {
             bBoundsToggle = !bBoundsToggle;
-            if (bBoundsToggle)
+            if (!bBoundsToggle)
             {
                 memset(bounds, 0.f, sizeof(float) * 6);
                 memset(boundsSnap, 0.f, sizeof(float) * 3);
             }
-            else if (!bBoundsToggle)
+            else if (bBoundsToggle)
             {
                 bounds[0] = -1.f;
                 bounds[1] = -1.f;
