@@ -53,16 +53,14 @@ void FileSystem::ReadAllActorSystems(World* world, const char* filename)
 	fopen_s(&file, filename, "r");
 	assert(file);
 
-	World* newWorld = GetWorld();
-
-	int numActors = 0;
-	fread(&numActors, sizeof(int), 1, file);
-
-	for (int systemIndex = 0; systemIndex < newWorld->actorSystems.size(); systemIndex++)
+	for (int systemIndex = 0; systemIndex < world->actorSystems.size(); systemIndex++)
 	{
+		int numActors = 0;
+		fread(&numActors, sizeof(int), 1, file);
+
 		for (int i = 0; i < numActors; i++)
 		{
-			fread(&newWorld->actorSystems[systemIndex]->actors[i]->transform,
+			fread(&world->actorSystems[systemIndex]->actors[i]->transform,
 				sizeof(Transform), 1, file);
 		}
 	}
