@@ -26,7 +26,7 @@ void FileSystem::Tick()
 void FileSystem::WriteAllActorSystems(World* world, const char* filename)
 {
 	//TODO: make filename work with current World name
-	fopen_s(&file, filename, "w");
+	fopen_s(&file, filename, "wb");
 	assert(file);
 
 	for (int systemIndex = 0; systemIndex < world->actorSystems.size(); systemIndex++)
@@ -50,7 +50,7 @@ void FileSystem::WriteAllActorSystems(World* world, const char* filename)
 
 void FileSystem::ReadAllActorSystems(World* world, const char* filename)
 {
-	fopen_s(&file, filename, "r");
+	fopen_s(&file, filename, "rb");
 	assert(file);
 
 	for (int systemIndex = 0; systemIndex < world->actorSystems.size(); systemIndex++)
