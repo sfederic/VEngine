@@ -1,5 +1,6 @@
 #include "TestActor.h"
 #include "Input.h"
+#include "TypeFactory.h"
 
 TestActorSystem::TestActorSystem()
 {
@@ -17,4 +18,3 @@ void TestActorSystem::Tick(float deltaTime)
 
 
 }
-
