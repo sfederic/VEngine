@@ -6,6 +6,7 @@
 #include "Debug.h"
 #include "UISystem.h"
 #include "RenderSystem.h"
+#include "Actors/TestActor.h"
 
 FileSystem gFileSystem;
 
@@ -37,8 +38,8 @@ void FileSystem::WriteAllActorSystems(World* world, const char* filename)
 		for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex]->actors.size(); actorIndex++)
 		{
 			//fwrite without the for loop(SOA) was about 0.01 ms faster with around 60,000 actors. Surprising.
-			fwrite(&world->actorSystems[systemIndex]->actors[actorIndex]->transform,
-				sizeof(Transform), 1, file);
+			fwrite(world->actorSystems[systemIndex]->actors[actorIndex],
+				sizeof(TestActor), 1, file);
 		}
 	}
 
@@ -60,8 +61,8 @@ void FileSystem::ReadAllActorSystems(World* world, const char* filename)
 
 		for (int i = 0; i < numActors; i++)
 		{
-			fread(&world->actorSystems[systemIndex]->actors[i]->transform,
-				sizeof(Transform), 1, file);
+			fread(world->actorSystems[systemIndex]->actors[i],
+				sizeof(TestActor), 1, file);
 		}
 	}
 
