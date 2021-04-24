@@ -60,9 +60,8 @@ int main(int argc, char* argv[])
     gWorldEditor.Init();
 
     //test actor setup
-    TestActorSystem* ta = new TestActorSystem();
-    ta->CreateActors<TestActor>(&gRenderSystem, 1);
-    GetWorld()->AddActorSystem(ta);
+    testActorSystem.CreateActors<TestActor>(&gRenderSystem, 1);
+    GetWorld()->AddActorSystem(&testActorSystem);
 
     //Qt late init
     gEditorSystem->PopulateWorldList();
