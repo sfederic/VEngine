@@ -4,7 +4,7 @@
 
 TestActorSystem::TestActorSystem()
 {
-	ActorSystemFactory::Register(this);
+	ActorSystemFactory::Register<TestActorSystem>(this);
 
 	shaderName = L"shaders.hlsl";
 	textureName = L"texture2.jpg";
