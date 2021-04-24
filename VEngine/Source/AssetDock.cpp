@@ -9,6 +9,8 @@
 #include <QDirModel>
 #include <qdesktopservices.h>
 #include <qurl.h>
+#include <filesystem>
+#include "World.h"
 
 AssetDock::AssetDock(const char* title) : QDockWidget(title)
 {
@@ -62,6 +64,18 @@ void AssetDock::AssetItemClicked()
 
     QString assetName = assetIcons->currentItem()->text();
     QString fullPath = path + "/" + assetName;
+
+    //Do whatever based on extension.
+    {
+        auto fileExtension = std::filesystem::path(fullPath.toStdString()).extension();
+        auto extension = (const char*)fileExtension.c_str();
+
+        //Load world
+        if (strcmp(extension, ".sav"))
+        {
+            GetWorld()->Load(fullPath.toStdString());
+        }
+    }
 
     //Opens up default system program from filename.
     QDesktopServices::openUrl(QUrl::fromLocalFile(fullPath));
