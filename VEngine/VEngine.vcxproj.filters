@@ -227,7 +227,7 @@
     <ClCompile Include="Source\BlendState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TypeFactory.cpp">
+    <ClCompile Include="Source\ActorSystemFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -433,7 +433,7 @@
     <ClInclude Include="Source\BlendState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\TypeFactory.h">
+    <ClInclude Include="Source\ActorSystemFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

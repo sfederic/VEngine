@@ -34,6 +34,8 @@
 #include "ParticleSystem.h"
 #include "Actors/TestActor.h"
 
+#include "TypeFactory.h"
+
 float roll = 0.f;
 
 int main(int argc, char* argv[])
@@ -62,6 +64,8 @@ int main(int argc, char* argv[])
     //test actor setup
     testActorSystem.CreateActors<TestActor>(&gRenderSystem, 1);
     GetWorld()->AddActorSystem(&testActorSystem);
+
+    auto map = typeFactory.actorSystemMap;
 
     //Qt late init
     gEditorSystem->PopulateWorldList();
