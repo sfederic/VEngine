@@ -20,4 +20,3 @@ public:
 	TestActorSystem();
 	virtual void Tick(float deltaTime) override;
 } static testActorSystem;
-

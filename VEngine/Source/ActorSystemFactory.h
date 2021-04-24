@@ -1,7 +1,5 @@
 #pragma once
 
-#include <unordered_map>
-
 class ActorSystem;
 
 //This is where every ActorSystem is registered at startup in a hashtable.
@@ -12,12 +10,16 @@ class ActorSystem;
 class ActorSystemFactory
 {
 public:
-	template <class ActorSystemType>
-	void Register(ActorSystem* actorSystem)
+
+	static void Register(ActorSystem*);
+
+	/*template <class ActorSystemType>
+	static void Register(ActorSystem* actorSystem)
 	{
 		size_t actorSystemID = typeid(ActorSystemType).hash_code();
-		actorSystemMap[actorSystemID] = actorSystem;
+		std::unordered_map<size_t, ActorSystem*> map;
+		map[actorSystemID] = actorSystem;
 	}
 
-	std::unordered_map<size_t, ActorSystem*> actorSystemMap;
-}static typeFactory;
+	static std::unordered_map<size_t, ActorSystem*> actorSystemMap;*/
+};

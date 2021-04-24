@@ -1,10 +1,10 @@
 #include "TestActor.h"
 #include "Input.h"
-#include "TypeFactory.h"
+#include "ActorSystemFactory.h"
 
 TestActorSystem::TestActorSystem()
 {
-	TypeFactory::Register<TestActorSystem>(this);
+	ActorSystemFactory::Register(this);
 
 	shaderName = L"shaders.hlsl";
 	textureName = L"texture2.jpg";
