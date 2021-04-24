@@ -11,11 +11,6 @@ public:
 	TestActor() 
 	{
 	}
-
-	virtual void Tick(float deltaTime)
-	{
-
-	}
 };
 
 class TestActorSystem : public ActorSystem
@@ -24,4 +19,5 @@ class TestActorSystem : public ActorSystem
 public:
 	TestActorSystem();
 	virtual void Tick(float deltaTime) override;
-} testActorSystem;
+} static testActorSystem;
+

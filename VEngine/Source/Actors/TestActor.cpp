@@ -4,6 +4,8 @@
 
 TestActorSystem::TestActorSystem()
 {
+	TypeFactory::Register<TestActorSystem>(this);
+
 	shaderName = L"shaders.hlsl";
 	textureName = L"texture2.jpg";
 	modelName = "cube.fbx";
@@ -14,7 +16,5 @@ TestActorSystem::TestActorSystem()
 
 void TestActorSystem::Tick(float deltaTime)
 {
-	__super::Tick(deltaTime);
-
-
 }
+
