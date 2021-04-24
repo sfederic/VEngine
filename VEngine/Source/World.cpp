@@ -12,6 +12,15 @@ World* GetWorld()
 	return &gCurrentWorld;
 }
 
+void World::Load(std::string levelName)
+{
+	FILE* file;
+	fopen_s(&file, levelName.c_str(), "rb");
+	assert(file);
+
+	fclose(file);
+}
+
 void World::TickAllActorSystems(float deltaTime)
 {
 	//Skip actor ticks if game is paused.

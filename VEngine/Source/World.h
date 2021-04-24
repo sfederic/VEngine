@@ -8,6 +8,7 @@
 class World
 {
 public:
+	void Load(std::string levelName);
 	void TickAllActorSystems(float deltaTime);
 	void CleaupAllActors();
 	void AddActorSystem(ActorSystem* actorSystem);
