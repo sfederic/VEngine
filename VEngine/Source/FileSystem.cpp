@@ -20,7 +20,7 @@ void FileSystem::Tick()
 
 	if (gInputSystem.GetKeyUpState(VK_F5))
 	{
-		gFileSystem.ReadAllActorSystems(GetWorld(), "LevelSaves/test.sav");
+		gFileSystem.ReloadAllActorSystems(GetWorld(), "LevelSaves/test.sav");
 	}
 }
 
@@ -49,7 +49,9 @@ void FileSystem::WriteAllActorSystems(World* world, const char* filename)
 	fclose(file);
 }
 
-void FileSystem::ReadAllActorSystems(World* world, const char* filename)
+//This function works on like a 'hot-reload' basis when the level is already open
+//and actor systems are persistent. Doesn't work with level loading/streaming.
+void FileSystem::ReloadAllActorSystems(World* world, const char* filename)
 {
 	fopen_s(&file, filename, "rb");
 	assert(file);

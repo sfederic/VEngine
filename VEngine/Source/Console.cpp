@@ -104,7 +104,7 @@ void Console::ExecuteString()
 	}
 	else if(wcsncmp(consoleString, LevelNames::TestLevel, wcslen(LevelNames::TestLevel)) == 0) //LEVEL LOADING
 	{
-		gFileSystem.ReadAllActorSystems(GetWorld(), "LevelSaves/test.sav");
+		gFileSystem.ReloadAllActorSystems(GetWorld(), "LevelSaves/test.sav");
 	}
 	else if (wcsncmp(consoleString, ExecuteStrings::SNAP, wcslen(ExecuteStrings::SNAP)) == 0) //Toggle grid snap
 	{
