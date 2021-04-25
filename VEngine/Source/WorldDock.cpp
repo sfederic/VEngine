@@ -18,19 +18,22 @@ QTreeWidget* worldTreeList;
 
 WorldDock::WorldDock(const char* title) : QDockWidget(title)
 {
-    actorSystemList = new QListWidget();
-    actorSystemList->setSelectionMode(QAbstractItemView::SelectionMode::ExtendedSelection);
-    connect(actorSystemList, &QListWidget::itemClicked, this, &WorldDock::ClickOnListActor);
-
+    //Search bar
     worldSearch = new QLineEdit();
     worldSearch->setPlaceholderText("Search");
     connect(worldSearch, &QLineEdit::textChanged, this, &WorldDock::SearchWorldList);
 
-    QVBoxLayout* worldVLayout = new QVBoxLayout();
-    worldVLayout->addWidget(worldSearch);
+    //Actor systems list to choose actor spawning 
+    actorSystemList = new QListWidget();
+    actorSystemList->setSelectionMode(QAbstractItemView::SelectionMode::ExtendedSelection);
+    connect(actorSystemList, &QListWidget::itemClicked, this, &WorldDock::ClickOnListActor);
 
     PopulateActorSystemList();
 
+    QVBoxLayout* worldVLayout = new QVBoxLayout();
+    worldVLayout->addWidget(worldSearch);
+
+    //currently active actor systems in world list
     worldTreeList = new QTreeWidget();
 
     connect(worldTreeList, &QTreeWidget::itemClicked, this, &WorldDock::ClickOnListActorSystem);
@@ -104,14 +107,11 @@ void WorldDock::ClickOnListActorSystem(QTreeWidgetItem* listItem)
 
 void WorldDock::ClickOnListActor(QListWidgetItem* listItem)
 {
-    QString string = listItem->text();
-    Actor* clickedActor = GetWorld()->FindActorByString(string.toStdWString());
-    if (clickedActor)
-    {
-        editorCamera.ZoomTo(clickedActor);
-        gWorldEditor.pickedActor = clickedActor;
-        gEditorSystem->DisplayActorSystemProperties(clickedActor);
-    }
+    QString actorSystemName = listItem->text();
+    wchar_t name[64] = {};
+    actorSystemName.toWCharArray(name);
+    ActorSystem* actorSystem = ActorSystemFactory::GetActorSystem(name);
+    ActorSystemFactory::SetCurrentActiveActorSystem(actorSystem);
 }
 
 void WorldDock::SearchWorldList()

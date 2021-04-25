@@ -4,6 +4,9 @@
 #include <qlistwidget.h>
 #include <qlineedit.h>
 #include <qstringlist.h>
+#include <unordered_map>
+
+class ActorSystem;
 
 class WorldDock : public QDockWidget
 {

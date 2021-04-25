@@ -1,8 +1,18 @@
 #include "ActorSystemFactory.h"
 #include "Debug.h"
+#include "Actor.h"
 
 std::unordered_map<size_t, ActorSystem*> *ActorSystemFactory::IDToSystemMap;
 std::unordered_map<ActorSystem*, size_t> *ActorSystemFactory::systemToIDMap;
+std::unordered_map<const wchar_t*, ActorSystem*> *ActorSystemFactory::nameToSystemMap;
+
+//The currently selected actor system to spawn actors from.
+ActorSystem* currentActiveActorSystem;
+
+ActorSystemFactory::ActorSystemFactory()
+{
+
+}
 
 size_t ActorSystemFactory::GetActorSystemID(ActorSystem* actorSystem)
 {
@@ -16,10 +26,21 @@ ActorSystem* ActorSystemFactory::GetActorSystem(size_t id)
 	return actorSystem->second;
 }
 
+ActorSystem* ActorSystemFactory::GetActorSystem(const wchar_t* name)
+{
+	auto actorSystem = nameToSystemMap->find(name);
+	return actorSystem->second;
+}
+
 void ActorSystemFactory::GetAllActorSystems(std::vector<ActorSystem*>& actorSystems)
 {
 	for (auto& as : *IDToSystemMap)
 	{
 		actorSystems.push_back(as.second);
 	}
+}
+
+void ActorSystemFactory::SetCurrentActiveActorSystem(ActorSystem* actorSystem)
+{
+	currentActiveActorSystem = actorSystem;
 }

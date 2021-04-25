@@ -9,8 +9,8 @@ TestSpawnActorSystem::TestSpawnActorSystem()
 
 	shaderName = L"shaders.hlsl";
 	textureName = L"texture2.jpg";
-	modelName = "cube.fbx";
-	name = L"testactor";
+	modelName = "cone.fbx";
+	name = L"testspawnactor";
 
 	sizeofActor = sizeof(TestSpawnActor);
 }
