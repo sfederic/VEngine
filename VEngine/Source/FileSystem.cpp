@@ -8,6 +8,7 @@
 #include "RenderSystem.h"
 #include "Actors/TestActor.h"
 #include "ActorSystemFactory.h"
+#include "WorldEditor.h"
 
 FileSystem gFileSystem;
 
@@ -57,6 +58,11 @@ void FileSystem::LoadWorld(const char* levelName)
 			fread(actorSystem->actors[actorIndex], actorSystem->sizeofActor, 1, file);
 		}
 	}
+
+	//Deselect any existing actors, because TransformGizmo will stay at previous positions.
+	gWorldEditor.pickedActor = nullptr;
+
+	gDebugMenu.notifications.push_back(DebugNotification(L"Level loaded."));
 }
 
 void FileSystem::WriteAllActorSystems(World* world, const char* filename)
@@ -97,6 +103,9 @@ void FileSystem::ReloadAllActorSystems(World* world, const char* filename)
 	fopen_s(&file, filename, "rb");
 	assert(file);
 
+	uint64_t numActorSystemsToLoad = 0;
+	fread(&numActorSystemsToLoad, sizeof(uint64_t), 1, file);
+
 	for (int systemIndex = 0; systemIndex < world->actorSystems.size(); systemIndex++)
 	{
 		ActorSystem* actorSystem = world->actorSystems[systemIndex];
@@ -109,7 +118,7 @@ void FileSystem::ReloadAllActorSystems(World* world, const char* filename)
 
 		for (int i = 0; i < numActors; i++)
 		{
-			fread(world->actorSystems[systemIndex]->actors[i], actorSystem->sizeofActor, 1, file);
+			fread(actorSystem->actors[i], actorSystem->sizeofActor, 1, file);
 		}
 	}
 
