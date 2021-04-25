@@ -180,6 +180,7 @@
     <ClCompile Include="Source\Transform.cpp" />
     <ClCompile Include="Source\TransformGizmo.cpp" />
     <ClCompile Include="Source\ActorSystemFactory.cpp" />
+    <ClCompile Include="Source\Actors\TestSpawnActor.cpp" />
     <QtRcc Include="EditorMainWindow.qrc" />
     <QtUic Include="EditorMainWindow.ui" />
     <QtMoc Include="EditorMainWindow.h" />
@@ -254,6 +255,7 @@
     <ClInclude Include="Source\Transform.h" />
     <ClInclude Include="Source\TransformGizmo.h" />
     <ClInclude Include="Source\ActorSystemFactory.h" />
+    <ClInclude Include="Source\Actors\TestSpawnActor.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

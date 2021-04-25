@@ -230,6 +230,9 @@
     <ClCompile Include="Source\ActorSystemFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Actors\TestSpawnActor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Actor.h">
@@ -434,6 +437,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\ActorSystemFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Actors\TestSpawnActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

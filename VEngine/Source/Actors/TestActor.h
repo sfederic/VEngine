@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Actor.h"
-#include "Input.h"
 
 //Just for testing
 
