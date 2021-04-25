@@ -179,6 +179,11 @@ public:
 		ActorType* actor = new ActorType();
 		actor->transform = transform;
 		actor->vertexBufferOffset = (int)(actors.size() * modelData.GetByteWidth());
+		actor->name = name;
+		std::wstring indexString = std::to_wstring(actors.size());
+		actor->name += indexString;
+		actor->material = this->material;
+		actor->linkedActorSystem = this;
 
 		actors.push_back(actor);
 		return actor;
