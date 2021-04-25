@@ -173,8 +173,8 @@ public:
 	ActorType* AddActor(XMVECTOR spawnPosition)
 	{
 		ActorType* actor = new ActorType();
-		actor.SetPosition(spawnPosition);
-		actor.vertexBufferOffset = (int)(actors.size() * modelData.GetByteWidth());
+		actor->SetPosition(spawnPosition);
+		actor->vertexBufferOffset = (int)(actors.size() * modelData.GetByteWidth());
 
 		actors.push_back(actor);
 		return actor;

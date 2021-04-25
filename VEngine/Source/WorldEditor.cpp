@@ -9,6 +9,7 @@
 #include "..\EditorMainWindow.h"
 #include "PropertiesDock.h"
 #include "EditorSystem.h"
+#include "Actors/TestActor.h"
 
 WorldEditor gWorldEditor;
 
@@ -23,6 +24,16 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 
 	if (pickedActor)
 	{
+		//Duplicate selected actor
+		if (gInputSystem.GetAsyncKey(Keys::Ctrl))
+		{
+			if (gInputSystem.GetKeyUpState(Keys::D))
+			{
+				pickedActor->linkedActorSystem->AddActor<TestActor>(
+					XMLoadFloat3(&pickedActor->transform.position));
+			}
+		}
+
 		//Transform gizmo on button presses (i.e using arrows for rotation etc.)
 
 		//ROTATION

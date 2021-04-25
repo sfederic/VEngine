@@ -51,6 +51,10 @@ void FileSystem::LoadWorld(const char* levelName)
 		uint64_t numActorsToLoad = 0;
 		fread(&numActorsToLoad, sizeof(uint64_t), 1, file);
 
+		//TODO: there's a hard fix here where I don't want to lose this templated function.
+		//I'm thinking the fix is to make some sort of ActorSystem macro where the linked
+		//actor class is instantiated once as a dummy inside this macro and then you'll be 
+		//able to call decltype() on that member variable and run the template.
 		actorSystem->CreateActors<TestActor>(&gRenderSystem, numActorsToLoad);
 
 		for (int actorIndex = 0; actorIndex < numActorsToLoad; actorIndex++)
