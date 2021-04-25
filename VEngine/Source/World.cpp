@@ -43,6 +43,7 @@ void World::TickAllActorSystems(float deltaTime)
 void World::CleaupAllActors()
 {
 	actorSystems.clear();
+	actorSystemMap.clear();
 }
 
 void World::AddActorSystem(ActorSystem* actorSystem)

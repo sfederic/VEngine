@@ -11,6 +11,7 @@
 #include <qurl.h>
 #include <filesystem>
 #include "World.h"
+#include "FileSystem.h"
 
 AssetDock::AssetDock(const char* title) : QDockWidget(title)
 {
@@ -73,7 +74,8 @@ void AssetDock::AssetItemClicked()
         //Load world
         if (strcmp(extension, ".sav"))
         {
-            GetWorld()->Load(fullPath.toStdString());
+            gFileSystem.LoadWorld(fullPath.toStdString().c_str());
+            return;
         }
     }
 
