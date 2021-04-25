@@ -11,17 +11,16 @@
 #include <QListWidgetItem>
 #include "../EditorMainWindow.h"
 #include "PropertiesDock.h"
+#include "ActorSystemFactory.h"
 
 QList<QTreeWidgetItem*> worldTreeItems;
 QTreeWidget* worldTreeList;
 
 WorldDock::WorldDock(const char* title) : QDockWidget(title)
 {
-    worldList = new QListWidget();
-    worldList->setSelectionMode(QAbstractItemView::SelectionMode::ExtendedSelection);
-    connect(worldList, &QListWidget::itemClicked, this, &WorldDock::ClickOnListActor);
-
-    //PopulateWorldList();
+    actorSystemList = new QListWidget();
+    actorSystemList->setSelectionMode(QAbstractItemView::SelectionMode::ExtendedSelection);
+    connect(actorSystemList, &QListWidget::itemClicked, this, &WorldDock::ClickOnListActor);
 
     worldSearch = new QLineEdit();
     worldSearch->setPlaceholderText("Search");
@@ -29,16 +28,16 @@ WorldDock::WorldDock(const char* title) : QDockWidget(title)
 
     QVBoxLayout* worldVLayout = new QVBoxLayout();
     worldVLayout->addWidget(worldSearch);
-    //worldVLayout->addWidget(worldList);
 
-    //Tree widget for Actor Systems
+    PopulateActorSystemList();
+
     worldTreeList = new QTreeWidget();
 
     connect(worldTreeList, &QTreeWidget::itemClicked, this, &WorldDock::ClickOnListActorSystem);
     worldTreeList->setColumnCount(1);
-    worldTreeList->setHeaderLabels(QStringList("Actor Systems"));
+    worldTreeList->setHeaderLabels(QStringList("Active Actor Systems"));
 
-    worldVLayout->addWidget(worldList);
+    worldVLayout->addWidget(actorSystemList);
     worldVLayout->addWidget(worldTreeList);
     setLayout(worldVLayout);
 
@@ -50,6 +49,20 @@ WorldDock::WorldDock(const char* title) : QDockWidget(title)
 void WorldDock::Tick()
 {
 
+}
+
+void WorldDock::PopulateActorSystemList()
+{
+    std::vector<ActorSystem*> actorSystems;
+    ActorSystemFactory::GetAllActorSystems(actorSystems);
+
+    for(int i = 0; i < actorSystems.size(); i++)
+    {
+        QString name = QString::fromStdWString(actorSystems[i]->name);
+        worldStringList.append(name);
+    }
+
+    actorSystemList->addItems(worldStringList);
 }
 
 void WorldDock::PopulateWorldList()
@@ -75,23 +88,6 @@ void WorldDock::PopulateWorldList()
     }
 
     worldTreeList->insertTopLevelItems(0, worldTreeItems);
-
-    //Old list without tree view
-    worldList->clear();
-    worldStringList.clear();
-
-    for (int i = 0; i < world->actorSystems.size(); i++)
-    {
-        ActorSystem* ac = world->actorSystems[i];
-
-        for (int j = 0; j < ac->actors.size(); j++)
-        {
-            QString name = QString::fromStdWString(ac->actors[j]->name);
-            worldStringList.append(name);
-        }
-    }
-
-    worldList->addItems(worldStringList);
 }
 
 void WorldDock::ClickOnListActorSystem(QTreeWidgetItem* listItem)
@@ -122,14 +118,11 @@ void WorldDock::SearchWorldList()
 {
     QString searchText = "*" + worldSearch->text() + "*"; //Wildcards include items with text at any point
 
-    //Old world list search
-    worldList->clear();
-
     for (int i = 0; i < worldStringList.size(); i++)
     {
         if (worldStringList.indexOf(QRegExp(searchText, Qt::CaseInsensitive, QRegExp::Wildcard)) == 0)
         {
-            worldList->addItem(worldStringList.at(i));
+            actorSystemList->addItem(worldStringList.at(i));
         }
     }
 }

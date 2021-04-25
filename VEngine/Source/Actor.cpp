@@ -14,6 +14,7 @@
 Actor::Actor()
 {
 	transform = Transform();
+	wmemset(name, ' ', 64);
 }
 
 //POSITION FUNCTIONS

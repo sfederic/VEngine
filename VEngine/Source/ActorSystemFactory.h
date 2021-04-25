@@ -36,6 +36,7 @@ public:
 
 	static size_t GetActorSystemID(ActorSystem* actorSystem);
 	static ActorSystem* GetActorSystem(size_t id);
+	static void GetAllActorSystems(std::vector<ActorSystem*>& actorSystems);
 
 	static std::unordered_map<size_t, ActorSystem*> *IDToSystemMap;
 	static std::unordered_map<ActorSystem*, size_t> *systemToIDMap;

@@ -11,12 +11,13 @@ public:
 	WorldDock(const char* title);
 	void Tick();
 
+    void PopulateActorSystemList();
     void PopulateWorldList();
     void ClickOnListActorSystem(class QTreeWidgetItem* listItem);
     void ClickOnListActor(class QListWidgetItem* listItem);
     void SearchWorldList();
 
-    QListWidget* worldList;
+    QListWidget* actorSystemList;
     QLineEdit* worldSearch;
     QStringList worldStringList;
 };

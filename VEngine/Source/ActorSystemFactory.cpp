@@ -15,3 +15,11 @@ ActorSystem* ActorSystemFactory::GetActorSystem(size_t id)
 	auto actorSystem = IDToSystemMap->find(id);
 	return actorSystem->second;
 }
+
+void ActorSystemFactory::GetAllActorSystems(std::vector<ActorSystem*>& actorSystems)
+{
+	for (auto& as : *IDToSystemMap)
+	{
+		actorSystems.push_back(as.second);
+	}
+}
