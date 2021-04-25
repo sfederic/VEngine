@@ -9,6 +9,7 @@
 #include "Actors/TestActor.h"
 #include "ActorSystemFactory.h"
 #include "WorldEditor.h"
+#include "EditorSystem.h"
 
 FileSystem gFileSystem;
 
@@ -63,6 +64,8 @@ void FileSystem::LoadWorld(const char* levelName)
 	gWorldEditor.pickedActor = nullptr;
 
 	gDebugMenu.notifications.push_back(DebugNotification(L"Level loaded."));
+
+	gEditorSystem->PopulateWorldList();
 
 	fflush(file);
 	fclose(file);

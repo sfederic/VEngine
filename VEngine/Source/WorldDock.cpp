@@ -54,6 +54,9 @@ void WorldDock::Tick()
 
 void WorldDock::PopulateWorldList()
 {
+    worldTreeItems.clear();
+    worldTreeList->clear();
+
     World* world = GetWorld();
 
     for (int i = 0; i < world->actorSystems.size(); i++)

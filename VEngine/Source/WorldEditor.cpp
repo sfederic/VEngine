@@ -31,6 +31,9 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 			{
 				Transform transform = pickedActor->transform;
 				pickedActor->linkedActorSystem->SpawnActor(transform);
+
+				//Refresh world dock
+				gEditorSystem->PopulateWorldList();
 			}
 		}
 
@@ -150,10 +153,12 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 		}
 
 		//Delete actors in editor
-		if (gInputSystem.GetKeyUpState(VK_DELETE))
+		if (gInputSystem.GetKeyUpState(Keys::Delete))
 		{
 			world->GetActorSystem(screenPickRay.actorSystemIndex)->RemoveActor(screenPickRay.actorIndex);
 			pickedActor = nullptr;
+
+			gEditorSystem->PopulateWorldList();
 		}
 	}
 

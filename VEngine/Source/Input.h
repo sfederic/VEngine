@@ -12,6 +12,7 @@ enum class Keys
 	Tab = VK_TAB,
 	Tilde = VK_OEM_3,
 	Ctrl = VK_CONTROL,
+	Delete = VK_DELETE,
 
 	W = 'W',
 	A = 'A',
