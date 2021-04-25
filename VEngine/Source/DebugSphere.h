@@ -8,4 +8,6 @@ class DebugSphere : public ActorSystem
 public:
 	DebugSphere();
 	virtual void Tick(float deltaTime);
+	virtual void SpawnActors(int numToSpawn) {}
+	virtual void SpawnActor(Transform transform) {}
 };

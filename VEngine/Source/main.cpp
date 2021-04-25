@@ -60,7 +60,7 @@ int main(int argc, char* argv[])
     gWorldEditor.Init();
 
     //test actor setup
-    testActorSystem.CreateActors<TestActor>(&gRenderSystem, 1);
+    testActorSystem.SpawnActors(1);
     GetWorld()->AddActorSystem(&testActorSystem);
 
     //Qt late init

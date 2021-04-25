@@ -29,8 +29,8 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 		{
 			if (gInputSystem.GetKeyUpState(Keys::D))
 			{
-				pickedActor->linkedActorSystem->AddActor<TestActor>(
-					XMLoadFloat3(&pickedActor->transform.position));
+				Transform transform = pickedActor->transform;
+				pickedActor->linkedActorSystem->SpawnActor(transform);
 			}
 		}
 

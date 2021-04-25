@@ -1,6 +1,7 @@
 #include "TestActor.h"
 #include "Input.h"
 #include "ActorSystemFactory.h"
+#include "RenderSystem.h"
 
 TestActorSystem::TestActorSystem()
 {
@@ -18,3 +19,12 @@ void TestActorSystem::Tick(float deltaTime)
 {
 }
 
+void TestActorSystem::SpawnActors(int numToSpawn)
+{
+	CreateActors<TestActor>(&gRenderSystem, numToSpawn);
+}
+
+void TestActorSystem::SpawnActor(Transform transform)
+{
+	AddActor<TestActor>(transform);
+}

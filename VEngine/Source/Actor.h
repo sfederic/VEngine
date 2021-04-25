@@ -117,6 +117,10 @@ public:
 
 	virtual void Tick(float deltaTime) = 0;
 
+	//These two functions are to get around classes calling CreateActors<>() with their own actor types.
+	virtual void SpawnActors(int numToSpawn) = 0;
+	virtual void SpawnActor(Transform transform) = 0;
+
 	template <class ActorType>
 	void SetActorSize()
 	{
@@ -170,10 +174,10 @@ public:
 	}
 
 	template <class ActorType>
-	ActorType* AddActor(XMVECTOR spawnPosition)
+	ActorType* AddActor(Transform transform)
 	{
 		ActorType* actor = new ActorType();
-		actor->SetPosition(spawnPosition);
+		actor->transform = transform;
 		actor->vertexBufferOffset = (int)(actors.size() * modelData.GetByteWidth());
 
 		actors.push_back(actor);

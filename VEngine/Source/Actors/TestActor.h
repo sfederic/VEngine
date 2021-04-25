@@ -15,8 +15,9 @@ public:
 
 class TestActorSystem : public ActorSystem
 {
-
 public:
 	TestActorSystem();
 	virtual void Tick(float deltaTime) override;
+	virtual void SpawnActors(int numToSpawn);
+	virtual void SpawnActor(Transform transform);
 } static testActorSystem;
