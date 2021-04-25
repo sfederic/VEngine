@@ -43,6 +43,8 @@ void FileSystem::LoadWorld(const char* levelName)
 		fread(&actorSystemID, sizeof(uint64_t), 1, file);
 
 		ActorSystem* actorSystem = ActorSystemFactory::GetActorSystem(actorSystemID);
+		actorSystem->Cleanup();
+
 		world->AddActorSystem(actorSystem);
 
 		uint64_t numActorsToLoad = 0;

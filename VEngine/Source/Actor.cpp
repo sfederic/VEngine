@@ -289,6 +289,11 @@ void ActorSystem::RecreateModel()
 	}
 }
 
+void ActorSystem::Cleanup()
+{
+	actors.clear();
+}
+
 void ActorSystem::SetVertexBuffer(Buffer* vertexBuffer)
 {
 	pso.vertexBuffer = vertexBuffer;

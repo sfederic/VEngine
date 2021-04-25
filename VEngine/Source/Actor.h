@@ -200,6 +200,8 @@ public:
 	void RecreateShader();
 	void RecreateModel();
 
+	void Cleanup();
+
 	template <class ActorType>
 	bool IsA()
 	{
