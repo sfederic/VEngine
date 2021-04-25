@@ -3,6 +3,8 @@
 #include "ActorSystemFactory.h"
 #include "RenderSystem.h"
 
+TestSpawnActorSystem testSpawnActorSystem;
+
 TestSpawnActorSystem::TestSpawnActorSystem()
 {
 	shaderName = L"shaders.hlsl";

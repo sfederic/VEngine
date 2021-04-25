@@ -15,4 +15,6 @@ public:
 	virtual void Tick(float deltaTime);
 	virtual void SpawnActors(int numToSpawn);
 	virtual void SpawnActor(Transform transform);
-} static testSpawnActorSystem;
+};
+
+extern TestSpawnActorSystem testSpawnActorSystem;
