@@ -164,6 +164,8 @@ public:
 			{
 				AddActor<ActorType>(Transform());
 			}
+
+			bHasBeenInitialised = true;
 		}
 		else
 		{
@@ -235,4 +237,5 @@ public:
 	bool bAnimated = false; //Whether model has any animation data. Is set in FBX import.
 	bool bHasSkeletalAnimation;
 	bool bRender = true;
+	bool bHasBeenInitialised = false;
 };

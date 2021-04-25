@@ -47,6 +47,11 @@ void World::CleaupAllActors()
 
 void World::AddActorSystem(ActorSystem* actorSystem)
 {
+	if (!actorSystem->bHasBeenInitialised)
+	{
+		actorSystem->SpawnActors(0);
+	}
+
 	actorSystems.push_back(actorSystem);
 }
 
