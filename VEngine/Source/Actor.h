@@ -89,7 +89,7 @@ public:
 	bool bRender = true;
 	bool bPicked = false;
 
-	std::wstring name;
+	const wchar_t* name;
 
 	ActorSystem* linkedActorSystem;
 };
@@ -128,6 +128,22 @@ public:
 	}
 
 	template <class ActorType>
+	ActorType* AddActor(Transform transform)
+	{
+		ActorType* actor = new ActorType();
+		actor->transform = transform;
+		actor->vertexBufferOffset = (int)(actors.size() * modelData.GetByteWidth());
+		actor->name = name.c_str();
+		std::wstring indexString = std::to_wstring(actors.size());
+		actor->name = std::wstring(name.c_str() + indexString).c_str();
+		actor->material = this->material;
+		actor->linkedActorSystem = this;
+
+		actors.push_back(actor);
+		return actor;
+	}
+
+	template <class ActorType>
 	void CreateActors(RenderSystem* renderSystem, int numActorsToSpawn)
 	{
 		std::string filename = "Models/";
@@ -153,29 +169,13 @@ public:
 			actors.reserve(numActorsToSpawn);
 			for (int i = 0; i < numActorsToSpawn; i++)
 			{
-				AddActor<ActorType>(new Transform());
+				AddActor<ActorType>(Transform());
 			}
 		}
 		else
 		{
 			DebugPrint("Actors failed to load");
 		}
-	}
-
-	template <class ActorType>
-	ActorType* AddActor(Transform transform)
-	{
-		ActorType* actor = new ActorType();
-		actor->transform = transform;
-		actor->vertexBufferOffset = (int)(actors.size() * modelData.GetByteWidth());
-		actor->name = name;
-		std::wstring indexString = std::to_wstring(actors.size());
-		actor->name += indexString;
-		actor->material = this->material;
-		actor->linkedActorSystem = this;
-
-		actors.push_back(actor);
-		return actor;
 	}
 
 	void RemoveActor(int index);
