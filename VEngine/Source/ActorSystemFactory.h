@@ -18,9 +18,24 @@ public:
 	template <class ActorSystemType>
 	static void Register(ActorSystem* actorSystem)
 	{
+		//There's a lot of weird stuff with static initialisation order and C++
+		//and how std::maps involve in that. Have to make them pointers.
+		if (IDToSystemMap == nullptr)
+		{
+			IDToSystemMap = new std::unordered_map<size_t, ActorSystem*>;
+		}
+		if (systemToIDMap == nullptr)
+		{
+			systemToIDMap = new std::unordered_map<ActorSystem*, size_t>;
+		}
+
 		size_t id = typeid(ActorSystemType).hash_code();
-		actorSystemMap.insert(std::pair(id, actorSystem));
+		IDToSystemMap->insert(std::pair(id, actorSystem));
+		systemToIDMap->insert(std::pair(actorSystem, id));
 	}
 
-	static std::unordered_map<size_t, ActorSystem*> actorSystemMap;
+	static size_t GetActorSystemID(ActorSystem* actorSystem);
+
+	static std::unordered_map<size_t, ActorSystem*> *IDToSystemMap;
+	static std::unordered_map<ActorSystem*, size_t> *systemToIDMap;
 };
