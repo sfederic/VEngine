@@ -27,7 +27,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 		//Duplicate selected actor
 		if (gInputSystem.GetAsyncKey(Keys::Ctrl))
 		{
-			if (gInputSystem.GetKeyUpState(Keys::D))
+			if (gInputSystem.GetKeyDownState(Keys::D))
 			{
 				Transform transform = pickedActor->transform;
 				pickedActor->linkedActorSystem->SpawnActor(transform);
