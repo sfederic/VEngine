@@ -294,6 +294,13 @@ void ActorSystem::Cleanup()
 	actors.clear();
 }
 
+//On loading, pointers to classes are being lost, but still want to keep std::wstring.
+//This function just regenerates all actor names in the actorsystem.
+void ActorSystem::ResetActorNames()
+{
+
+}
+
 void ActorSystem::SetVertexBuffer(Buffer* vertexBuffer)
 {
 	pso.vertexBuffer = vertexBuffer;

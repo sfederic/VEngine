@@ -153,18 +153,7 @@ public:
 			actors.reserve(numActorsToSpawn);
 			for (int i = 0; i < numActorsToSpawn; i++)
 			{
-				ActorType* actor = new ActorType();
-				actor->transform.position = XMFLOAT3(0.f, 0.f, 0.f);
-				actor->vertexBufferOffset = i * modelData.GetByteWidth();
-				actor->name = name;
-				std::wstring indexString = std::to_wstring(i);
-				actor->name += indexString;
-
-				actor->material = this->material;
-
-				actor->linkedActorSystem = this;
-
-				actors.push_back(actor);
+				AddActor<ActorType>(new Transform());
 			}
 		}
 		else
@@ -210,6 +199,7 @@ public:
 	void RecreateModel();
 
 	void Cleanup();
+	void ResetActorNames();
 
 	template <class ActorType>
 	bool IsA()
