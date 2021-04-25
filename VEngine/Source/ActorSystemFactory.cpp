@@ -9,3 +9,9 @@ size_t ActorSystemFactory::GetActorSystemID(ActorSystem* actorSystem)
 	auto ID = systemToIDMap->find(actorSystem);
 	return ID->second;
 }
+
+ActorSystem* ActorSystemFactory::GetActorSystem(size_t id)
+{
+	auto actorSystem = IDToSystemMap->find(id);
+	return actorSystem->second;
+}

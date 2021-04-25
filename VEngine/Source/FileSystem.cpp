@@ -7,6 +7,7 @@
 #include "UISystem.h"
 #include "RenderSystem.h"
 #include "Actors/TestActor.h"
+#include "ActorSystemFactory.h"
 
 FileSystem gFileSystem;
 
@@ -24,6 +25,12 @@ void FileSystem::Tick()
 	}
 }
 
+void FileSystem::LoadWorld(const char* levelName)
+{
+	fopen_s(&file, levelName, "rb");
+	assert(file);
+}
+
 void FileSystem::WriteAllActorSystems(World* world, const char* filename)
 {
 	//TODO: make filename work with current World name
@@ -32,14 +39,18 @@ void FileSystem::WriteAllActorSystems(World* world, const char* filename)
 
 	for (int systemIndex = 0; systemIndex < world->actorSystems.size(); systemIndex++)
 	{
-		int numOfActors = world->actorSystems[systemIndex]->actors.size();
-		fwrite(&numOfActors, sizeof(int), 1, file);
+		ActorSystem* actorSystem = world->actorSystems[systemIndex];
+
+		uint64_t actorSystemID = ActorSystemFactory::GetActorSystemID(actorSystem);
+		fwrite(&actorSystemID, sizeof(uint64_t), 1, file);
+
+		uint64_t numOfActors = actorSystem->actors.size();
+		fwrite(&numOfActors, sizeof(uint64_t), 1, file);
 
 		for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex]->actors.size(); actorIndex++)
 		{
 			//fwrite without the for loop(SOA) was about 0.01 ms faster with around 60,000 actors. Surprising.
-			fwrite(world->actorSystems[systemIndex]->actors[actorIndex],
-				sizeof(TestActor), 1, file);
+			fwrite(actorSystem->actors[actorIndex], actorSystem->sizeofActor, 1, file);
 		}
 	}
 
@@ -58,13 +69,17 @@ void FileSystem::ReloadAllActorSystems(World* world, const char* filename)
 
 	for (int systemIndex = 0; systemIndex < world->actorSystems.size(); systemIndex++)
 	{
-		int numActors = 0;
-		fread(&numActors, sizeof(int), 1, file);
+		ActorSystem* actorSystem = world->actorSystems[systemIndex];
+
+		uint64_t actorSystemID;
+		fread(&actorSystemID, sizeof(uint64_t), 1, file);
+
+		uint64_t numActors = 0;
+		fread(&numActors, sizeof(uint64_t), 1, file);
 
 		for (int i = 0; i < numActors; i++)
 		{
-			fread(world->actorSystems[systemIndex]->actors[i],
-				sizeof(TestActor), 1, file);
+			fread(world->actorSystems[systemIndex]->actors[i], actorSystem->sizeofActor, 1, file);
 		}
 	}
 
