@@ -5,14 +5,14 @@
 
 TestSpawnActorSystem::TestSpawnActorSystem()
 {
-	ActorSystemFactory::Register<TestSpawnActorSystem>(this);
-
 	shaderName = L"shaders.hlsl";
 	textureName = L"texture2.jpg";
 	modelName = "cone.fbx";
 	name = L"testspawnactor";
 
 	sizeofActor = sizeof(TestSpawnActor);
+
+	ActorSystemFactory::Register<TestSpawnActorSystem>(this);
 }
 
 void TestSpawnActorSystem::Tick(float deltaTime)

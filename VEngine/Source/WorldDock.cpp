@@ -108,9 +108,7 @@ void WorldDock::ClickOnListActorSystem(QTreeWidgetItem* listItem)
 void WorldDock::ClickOnListActor(QListWidgetItem* listItem)
 {
     QString actorSystemName = listItem->text();
-    wchar_t name[64] = {};
-    actorSystemName.toWCharArray(name);
-    ActorSystem* actorSystem = ActorSystemFactory::GetActorSystem(name);
+    ActorSystem* actorSystem = ActorSystemFactory::GetActorSystem(actorSystemName.toStdWString().c_str());
     ActorSystemFactory::SetCurrentActiveActorSystem(actorSystem);
 }
 

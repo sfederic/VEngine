@@ -5,14 +5,14 @@
 
 TestActorSystem::TestActorSystem()
 {
-	ActorSystemFactory::Register<TestActorSystem>(this);
-
 	shaderName = L"shaders.hlsl";
 	textureName = L"texture2.jpg";
 	modelName = "cube.fbx";
 	name = L"testactor";
 
 	sizeofActor = sizeof(TestActor);
+
+	ActorSystemFactory::Register<TestActorSystem>(this);
 }
 
 void TestActorSystem::Tick(float deltaTime)
