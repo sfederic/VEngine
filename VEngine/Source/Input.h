@@ -13,6 +13,7 @@ enum class Keys
 	Tilde = VK_OEM_3,
 	Ctrl = VK_CONTROL,
 	Delete = VK_DELETE,
+	BackSpace = VK_BACK,
 
 	W = 'W',
 	A = 'A',

@@ -17,6 +17,7 @@ public:
 	Actor* GetActor(unsigned int systemId, unsigned int actorId);
 
 	std::vector<ActorSystem*> actorSystems;
+	std::unordered_map<std::wstring, ActorSystem*> actorSystemsMap;
 
 	char name[64];
 };

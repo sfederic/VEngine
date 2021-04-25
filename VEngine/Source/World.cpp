@@ -47,12 +47,21 @@ void World::CleaupAllActors()
 
 void World::AddActorSystem(ActorSystem* actorSystem)
 {
-	if (!actorSystem->bHasBeenInitialised)
+	auto actorSystemIt = actorSystemsMap.find(actorSystem->name);
+	if (actorSystemIt == actorSystemsMap.end())
 	{
-		actorSystem->SpawnActors(0);
-	}
+		if (!actorSystem->bHasBeenInitialised)
+		{
+			actorSystem->SpawnActors(0);
+		}
 
-	actorSystems.push_back(actorSystem);
+		actorSystems.push_back(actorSystem);
+		actorSystemsMap.insert(std::pair(actorSystem->name, actorSystem));
+	}
+	else
+	{
+		gDebugMenu.AddNotification(L"Actor system could not be added to world");
+	}
 }
 
 Actor* World::FindActorByString(std::wstring name)
