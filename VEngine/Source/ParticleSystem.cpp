@@ -9,7 +9,7 @@ ParticleSystem::ParticleSystem()
 	shaderName = L"shaders.hlsl";
 	textureName = L"texture.png";
 	name = L"ParticleSystem";
-	CreateActors<Particle>(&gRenderSystem, 5);
+	Init<Particle>(&gRenderSystem, 5);
 }
 
 void ParticleSystem::Tick(float deltaTime)

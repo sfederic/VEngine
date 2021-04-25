@@ -23,7 +23,7 @@ void TestActorSystem::Tick(float deltaTime)
 
 void TestActorSystem::SpawnActors(int numToSpawn)
 {
-	CreateActors<TestActor>(&gRenderSystem, numToSpawn);
+	Init<TestActor>(&gRenderSystem, numToSpawn);
 }
 
 void TestActorSystem::SpawnActor(Transform transform)

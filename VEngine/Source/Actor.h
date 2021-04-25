@@ -137,7 +137,7 @@ public:
 	}
 
 	template <class ActorType>
-	void CreateActors(RenderSystem* renderSystem, int numActorsToSpawn)
+	void Init(RenderSystem* renderSystem, int numActorsToSpawn)
 	{
 		std::string filename = "Models/";
 		filename += modelName;
