@@ -10,6 +10,7 @@
 #include "imgui/backends/imgui_impl_dx11.h"
 #include "TransformGizmo.h"
 #include "EditorSystem.h"
+#include "ActorSystemFactory.h"
 
 DebugMenu gDebugMenu;
 
@@ -42,6 +43,17 @@ void DebugMenu::Tick(World* world, float deltaTime)
 	//Keep in mind ImGuizmo has to be called here to, it's part of ImGui
 	gTransformGizmo.Tick();
 
+
+	//Current selected actor system menu
+	ActorSystem* selectedActorSystem = ActorSystemFactory::GetCurrentActiveActorSystem();
+	if(selectedActorSystem)
+	{
+		ImGui::Begin("Selected Actor System");
+		ImGui::SetWindowPos(ImVec2(10, 10));
+		ImGui::SetWindowSize(ImVec2(250, 50));
+		ImGui::Text(typeid(*selectedActorSystem).name());
+		ImGui::End();
+	}
 
 	static int menuCursorIndex;
 	static int subMenuCursorIndex;
