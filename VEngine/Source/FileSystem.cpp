@@ -16,10 +16,14 @@ FileSystem gFileSystem;
 void FileSystem::Tick()
 {
 	//actorsystem save/load input
-	if (gInputSystem.GetKeyUpState(VK_F4))
+	if (gInputSystem.GetAsyncKey(Keys::Ctrl))
 	{
-		gFileSystem.WriteAllActorSystems(GetWorld(), "LevelSaves/test.sav");
+		if (gInputSystem.GetKeyDownState(Keys::S))
+		{
+			gFileSystem.WriteAllActorSystems(GetWorld(), "LevelSaves/test.sav");
+		}
 	}
+
 	if (gInputSystem.GetKeyUpState(VK_F5))
 	{
 		gFileSystem.ReloadAllActorSystems(GetWorld(), "LevelSaves/test.sav");
@@ -58,12 +62,15 @@ void FileSystem::LoadWorld(const char* levelName)
 		{
 			fread(actorSystem->actors[actorIndex], actorSystem->sizeofActor, 1, file);
 		}
+
+		actorSystem->ResetActorNames();
 	}
 
 	//Deselect any existing actors, because TransformGizmo will stay at previous positions.
 	gWorldEditor.pickedActor = nullptr;
 
 	gDebugMenu.notifications.push_back(DebugNotification(L"Level loaded."));
+
 
 	gEditorSystem->PopulateWorldList();
 
