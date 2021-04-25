@@ -300,8 +300,7 @@ void ActorSystem::ResetActorNames()
 {
 	for (int i = 0; i < actors.size(); i++)
 	{
-		std::wstring indexString = std::to_wstring(i);
-		actors[i]->name = std::wstring(name.c_str() + indexString).c_str();
+		wcsncpy(actors[i]->name, name.c_str(), name.size());
 	}
 }
 

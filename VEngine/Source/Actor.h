@@ -89,7 +89,7 @@ public:
 	bool bRender = true;
 	bool bPicked = false;
 
-	const wchar_t* name;
+	wchar_t name[64];
 
 	ActorSystem* linkedActorSystem;
 };
@@ -133,9 +133,7 @@ public:
 		ActorType* actor = new ActorType();
 		actor->transform = transform;
 		actor->vertexBufferOffset = (int)(actors.size() * modelData.GetByteWidth());
-		actor->name = name.c_str();
-		std::wstring indexString = std::to_wstring(actors.size());
-		actor->name = std::wstring(name.c_str() + indexString).c_str();
+		wcsncpy(actor->name, name.c_str(), name.size());
 		actor->material = this->material;
 		actor->linkedActorSystem = this;
 
