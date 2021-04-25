@@ -10,6 +10,7 @@
 #include "PropertiesDock.h"
 #include "EditorSystem.h"
 #include "Actors/TestActor.h"
+#include "ActorSystemFactory.h"
 
 WorldEditor gWorldEditor;
 
@@ -162,6 +163,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 		}
 	}
 
+
 	//Actor picking for editor
 	if (gInputSystem.GetMouseLeftDownState() && !gUISystem.bUIClicked)
 	{
@@ -170,6 +172,17 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 
 		if (RaycastAllFromScreen(screenPickRay, gUISystem.mousePos.x, gUISystem.mousePos.y, &editorCamera, GetWorld()))
 		{
+			//Actor spawning based on current picked system in world dock
+			if (ActorSystemFactory::GetCurrentActiveActorSystem())
+			{
+				ActorSystem* actorSystemToSpawnFrom = ActorSystemFactory::GetCurrentActiveActorSystem();
+				Transform transform = Transform();
+				transform.position = screenPickRay.hitPos;
+				actorSystemToSpawnFrom->SpawnActor(transform);
+
+				GetWorld()->AddActorSystem(actorSystemToSpawnFrom);
+			}
+
 			if (RaycastTriangleIntersect(screenPickRay))
 			{
 				pickedDirection = XMLoadFloat3(&screenPickRay.normal);

@@ -46,6 +46,7 @@ public:
 	static ActorSystem* GetActorSystem(std::wstring name);
 	static void GetAllActorSystems(std::vector<ActorSystem*>& actorSystems);
 	static void SetCurrentActiveActorSystem(ActorSystem* actorSystem);
+	static ActorSystem* GetCurrentActiveActorSystem();
 
 	static std::unordered_map<size_t, ActorSystem*> *IDToSystemMap;
 	static std::unordered_map<ActorSystem*, size_t> *systemToIDMap;

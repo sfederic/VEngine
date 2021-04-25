@@ -21,11 +21,6 @@ class ShaderResourceView;
 class BlendState;
 class RenderSystem;
 
-enum class EActorSystemID
-{
-
-};
-
 class Actor
 {
 public:
@@ -228,8 +223,6 @@ public:
 
 	std::vector<Actor*> actors;
 
-	EActorSystemID id;
-	
 	std::wstring shaderName;
 	std::wstring textureName;
 	std::wstring name;

@@ -44,3 +44,8 @@ void ActorSystemFactory::SetCurrentActiveActorSystem(ActorSystem* actorSystem)
 {
 	currentActiveActorSystem = actorSystem;
 }
+
+ActorSystem* ActorSystemFactory::GetCurrentActiveActorSystem()
+{
+	return currentActiveActorSystem;
+}
