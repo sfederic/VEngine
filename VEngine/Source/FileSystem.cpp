@@ -63,6 +63,9 @@ void FileSystem::LoadWorld(const char* levelName)
 	gWorldEditor.pickedActor = nullptr;
 
 	gDebugMenu.notifications.push_back(DebugNotification(L"Level loaded."));
+
+	fflush(file);
+	fclose(file);
 }
 
 void FileSystem::WriteAllActorSystems(World* world, const char* filename)
@@ -93,6 +96,7 @@ void FileSystem::WriteAllActorSystems(World* world, const char* filename)
 	DebugPrint("All actor systems saved.\n");
 	gDebugMenu.notifications.push_back(DebugNotification(L"All actor systems saved"));
 
+	fflush(file);
 	fclose(file);
 }
 
@@ -125,5 +129,6 @@ void FileSystem::ReloadAllActorSystems(World* world, const char* filename)
 	DebugPrint("All actor systems loaded.\n");
 	gDebugMenu.notifications.push_back(DebugNotification(L"All actor systems loaded."));
 
+	fflush(file);
 	fclose(file);
 }
