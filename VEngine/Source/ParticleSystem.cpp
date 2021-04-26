@@ -1,5 +1,4 @@
 #include "ParticleSystem.h"
-#include "RenderSystem.h"
 #include "MathHelpers.h"
 #include "Camera.h"
 
@@ -9,7 +8,7 @@ ParticleSystem::ParticleSystem()
 	shaderName = L"shaders.hlsl";
 	textureName = L"texture.png";
 	name = L"ParticleSystem";
-	Init<Particle>(&gRenderSystem, 5);
+	Init<Particle>(5);
 }
 
 void ParticleSystem::Tick(float deltaTime)

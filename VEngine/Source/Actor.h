@@ -10,6 +10,7 @@
 #include "FBXImporter.h"
 #include "AnimationStructures.h"
 #include "Transform.h"
+#include "RenderSystem.h"
 
 using namespace DirectX;
 
@@ -137,7 +138,7 @@ public:
 	}
 
 	template <class ActorType>
-	void Init(RenderSystem* renderSystem, int numActorsToSpawn)
+	void Init(int numActorsToSpawn)
 	{
 		std::string filename = "Models/";
 		filename += modelName;
@@ -146,13 +147,13 @@ public:
 		{
 			UINT byteWidth = modelData.GetByteWidth();
 			numVertices = (byteWidth * actors.size()) / sizeof(Vertex);
-			renderSystem->CreateVertexBuffer(byteWidth, modelData.verts.data(), this);
+			gRenderSystem.CreateVertexBuffer(byteWidth, modelData.verts.data(), this);
 
 			//UINT indicesByteWidth = modelData.indices.size() * sizeof(uint16_t);
 			//indexBuffer = renderSystem->CreateDefaultBuffer(indicesByteWidth, D3D11_BIND_INDEX_BUFFER, modelData.indices.data());
 
-			renderSystem->CreateSamplerState(GetSamplerState());
-			renderSystem->CreateTexture(this);
+			gRenderSystem.CreateSamplerState(GetSamplerState());
+			gRenderSystem.CreateTexture(this);
 
 			size_t stride = sizeof(Vertex);
 
