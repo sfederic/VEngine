@@ -58,10 +58,10 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSy
 			actorSystem->actors[i]->GetPositionFloat3().z + actorSystem->boundingBox.Center.z
 		);
 
-
 		BoundingBox tempBoundingBox = actorSystem->boundingBox;
 		//There's a temp bounding box because the previous offset was always being added to the Actorsystem bounding box
 		tempBoundingBox.Center = offset;
+		tempBoundingBox.Extents = actorSystem->actors[i]->GetScale();
 
 		//For editor exit
 		if (actorSystem->actors[i]->bPicked)
