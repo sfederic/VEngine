@@ -5,6 +5,10 @@
 #include "ActorSystemFactory.h"
 #include <qpushbutton.h>
 #include <assert.h>
+#include <qlineedit.h>
+#include <qdialog.h>
+#include <qlabel.h>
+#include <qcombobox.h>
 
 ToolbarDock::ToolbarDock(const char* title) : QDockWidget(title)
 {
@@ -48,74 +52,24 @@ void ToolbarDock::Tick()
 
 void ToolbarDock::CreateNewActorSystem()
 {
-    const char* actorSystemHeaderFile =
-        "#pragma once\n"
-        "\n"
-        "#include \"Actor.h\"\n"
-        "\n"
-        "class AActor : public Actor\n"
-        "{\n"
-        "public:\n"
-        "\tAActor();\n"
-        "};\n"
-        "\n"
-        "class AActorSystem : public ActorSystem\n"
-        "{\n"
-        "public:\n"
-        "\tvirtual void Tick(float deltaTime) override;\n"
-        "\tvirtual void SpawnActors(int numToSpawn);\n"
-        "\tvirtual void SpawnActor(Transform transform);\n"
-        "};\n"
-        "\n"
-        "extern AActorSystem aActorSystem;\n";
+    //Qt dialog to create system specifics
+    auto createActorSystemWindow = new QDialog();
+    createActorSystemWindow->setWindowTitle("Create New Actor System");
 
-    const char* actorSystemSourceFile =
-        "#include \"AActor.h\"\n"
-        "#include \"ActorSystemFactory.h\"\n"
-        "\n"
-        "AActorSystem aActorSystem;"
-        "\n"
-        "TestActorSystem::TestActorSystem()\n"
-        "{\n"
-        "\tshaderName = L\"shaders.hlsl\";\n"
-        "\ttextureName = L\"texture2.jpg\";\n"
-        "\tmodelName = \"cube.fbx\";\n"
-        "\tname = L\"testactor\";\n"
-        "\n"
-        "\tsizeofActor = sizeof(TestActor);\n"
-        "\n"
-        "\tActorSystemFactory::Register<TestActorSystem>(this);\n"
-        "}\n"
-        "\n"
-        "void TestActorSystem::Tick(float deltaTime)\n"
-        "{\n"
-        "\n"
-        "}\n"
-        "\n"
-        "void TestActorSystem::SpawnActors(int numToSpawn)\n"
-        "{\n"
-        "\tInit<TestActor>(&gRenderSystem, numToSpawn);\n"
-        "}\n"
-        "\n"
-        "void TestActorSystem::SpawnActor(Transform transform)\n"
-        "{\n"
-        "\tAddActor<TestActor>(transform);\n"
-        "}\n"
-        "\n";
+    auto grid = new QGridLayout();
 
-    FILE* file;
+    grid->addWidget(new QLabel("Actor System Name: "), 0, 0);
+    grid->addWidget(new QLineEdit(), 0, 1);
+    
+    grid->addWidget(new QLabel("Actor Name: "), 1, 0);
+    grid->addWidget(new QLineEdit(), 1, 1);
 
-    //Write .h file.
-    fopen_s(&file, "AActor.h", "w");
-    assert(file);
-    fprintf(file, "%s", actorSystemHeaderFile);
-    fflush(file);
+    grid->addWidget(new QLabel("Super class: "), 2, 0);
+    grid->addWidget(new QComboBox(), 2, 1);
 
-    //Write .cpp file.
-    fopen_s(&file, "AActor.cpp", "w");
-    assert(file);
-    fprintf(file, "%s", actorSystemSourceFile);
-    fflush(file);
+    auto createActorButton = new QPushButton("Create");
+    grid->addWidget(createActorButton, 3, 1);
 
-    fclose(file);
+    createActorSystemWindow->setLayout(grid);
+    createActorSystemWindow->show();
 }
