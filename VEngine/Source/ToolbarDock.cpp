@@ -50,6 +50,9 @@ void ToolbarDock::Tick()
 
 }
 
+QLineEdit* actorSystemNameLineEdit;
+QLineEdit* actorNameLineEdit;
+
 void ToolbarDock::CreateNewActorSystem()
 {
     //Qt dialog to create system specifics
@@ -58,18 +61,29 @@ void ToolbarDock::CreateNewActorSystem()
 
     auto grid = new QGridLayout();
 
+    if (actorSystemNameLineEdit == nullptr) { actorSystemNameLineEdit = new QLineEdit(); }
+    if (actorNameLineEdit == nullptr) { actorNameLineEdit = new QLineEdit(); }
+
     grid->addWidget(new QLabel("Actor System Name: "), 0, 0);
-    grid->addWidget(new QLineEdit(), 0, 1);
+    grid->addWidget(actorSystemNameLineEdit, 0, 1);
     
     grid->addWidget(new QLabel("Actor Name: "), 1, 0);
-    grid->addWidget(new QLineEdit(), 1, 1);
+    grid->addWidget(actorNameLineEdit, 1, 1);
 
     grid->addWidget(new QLabel("Super class: "), 2, 0);
     grid->addWidget(new QComboBox(), 2, 1);
 
     auto createActorButton = new QPushButton("Create");
+    connect(createActorButton, &QPushButton::clicked, this, &ToolbarDock::SetActorSystemGenerateArgs);
     grid->addWidget(createActorButton, 3, 1);
 
     createActorSystemWindow->setLayout(grid);
     createActorSystemWindow->show();
+}
+
+void ToolbarDock::SetActorSystemGenerateArgs()
+{
+    ActorSystemFactory::CreateActorSystem(actorSystemNameLineEdit->text().toUtf8().constData(),
+        actorNameLineEdit->text().toUtf8().constData(),
+        "Actor");
 }

@@ -47,7 +47,7 @@ public:
 	static void GetAllActorSystems(std::vector<ActorSystem*>& actorSystems);
 	static void SetCurrentActiveActorSystem(ActorSystem* actorSystem);
 	static ActorSystem* GetCurrentActiveActorSystem();
-	void CreateActorSystem(const char* actorSystemName, const char* actorName, const char* superClass);
+	static void CreateActorSystem(const char* actorSystemName, const char* actorName, const char* superClass);
 
 	static std::unordered_map<size_t, ActorSystem*> *IDToSystemMap;
 	static std::unordered_map<ActorSystem*, size_t> *systemToIDMap;

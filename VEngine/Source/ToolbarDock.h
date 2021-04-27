@@ -8,5 +8,5 @@ public:
 	ToolbarDock(const char* title);
 	void Tick();
 	void CreateNewActorSystem();
+	void SetActorSystemGenerateArgs();
 };
-
