@@ -53,18 +53,19 @@ ActorSystem* ActorSystemFactory::GetCurrentActiveActorSystem()
 void ActorSystemFactory::CreateActorSystem(const char* actorSystemName, const char* actorName, const char* superClass)
 {
     //.cpp/.h "code-gen" for system and actor
-    const char* actorSystemHeaderFile =
+    char actorSystemHeaderFile[1024];
+    snprintf(actorSystemHeaderFile, 1024,
         "#pragma once\n"
         "\n"
         "#include \"Actor.h\"\n"
         "\n"
-        "class AActor : public Actor\n"
+        "class %s : public Actor\n"
         "{\n"
         "public:\n"
-        "\tAActor();\n"
+        "\%s();\n"
         "};\n"
         "\n"
-        "class AActorSystem : public ActorSystem\n"
+        "class %s : public ActorSystem\n"
         "{\n"
         "public:\n"
         "\tvirtual void Tick(float deltaTime) override;\n"
@@ -72,52 +73,64 @@ void ActorSystemFactory::CreateActorSystem(const char* actorSystemName, const ch
         "\tvirtual void SpawnActor(Transform transform);\n"
         "};\n"
         "\n"
-        "extern AActorSystem aActorSystem;\n";
+        "extern %s %s;\n",
+        actorName, actorName, actorSystemName, actorSystemName, actorSystemName);
 
-    const char* actorSystemSourceFile =
-        "#include \"AActor.h\"\n"
+
+    char actorSystemSourceFile[1024];
+    snprintf(actorSystemSourceFile, 1024,
+        "#include \"%s.h\"\n"
         "#include \"ActorSystemFactory.h\"\n"
         "\n"
-        "AActorSystem aActorSystem;"
+        "%s %s;\n"
         "\n"
-        "TestActorSystem::TestActorSystem()\n"
+        "%s::%s()\n"
         "{\n"
         "\tshaderName = L\"shaders.hlsl\";\n"
         "\ttextureName = L\"texture2.jpg\";\n"
         "\tmodelName = \"cube.fbx\";\n"
         "\tname = L\"testactor\";\n"
         "\n"
-        "\tsizeofActor = sizeof(TestActor);\n"
+        "\tsizeofActor = sizeof(%s);\n"
         "\n"
-        "\tActorSystemFactory::Register<TestActorSystem>(this);\n"
+        "\%s::Register<%s>(this);\n"
         "}\n"
         "\n"
-        "void TestActorSystem::Tick(float deltaTime)\n"
+        "void %s::Tick(float deltaTime)\n"
         "{\n"
         "\n"
         "}\n"
         "\n"
-        "void TestActorSystem::SpawnActors(int numToSpawn)\n"
+        "void %s::SpawnActors(int numToSpawn)\n"
         "{\n"
-        "\tInit<TestActor>(&gRenderSystem, numToSpawn);\n"
+        "\tInit<%s>(numToSpawn);\n"
         "}\n"
         "\n"
-        "void TestActorSystem::SpawnActor(Transform transform)\n"
+        "void %s::SpawnActor(Transform transform)\n"
         "{\n"
-        "\tAddActor<TestActor>(transform);\n"
+        "\tAddActor<%s>(transform);\n"
         "}\n"
-        "\n";
+        "\n",
+        actorSystemName, actorSystemName, actorSystemName, actorSystemName, actorSystemName,
+        actorName, actorSystemName, actorSystemName, actorSystemName, actorSystemName,
+        actorName, actorSystemName, actorName);
 
     FILE* file;
 
     //Write .h file.
-    fopen_s(&file, "AActor.h", "w");
+    std::string fileName = actorSystemName;
+    fileName += ".h";
+
+    fopen_s(&file, fileName.c_str(), "w");
     assert(file);
     fprintf(file, "%s", actorSystemHeaderFile);
     fflush(file);
 
     //Write .cpp file.
-    fopen_s(&file, "AActor.cpp", "w");
+    fileName = actorSystemName;
+    fileName += ".cpp";
+
+    fopen_s(&file, fileName.c_str(), "w");
     assert(file);
     fprintf(file, "%s", actorSystemSourceFile);
     fflush(file);
