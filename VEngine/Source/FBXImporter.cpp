@@ -220,7 +220,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 		//Array setup
 		int numVerts = mesh->GetControlPointsCount();
 		int vectorSize = numVerts * mesh->GetPolygonSize(0);
-		assert((vectorSize % 3) == 0); //This is a check to make sure the mesh is triangulated (in blender, Ctrl+T)
+		assert((vectorSize % 3) == 0 && "FBX model isn't triangulated"); //This is a check to make sure the mesh is triangulated (in blender, Ctrl+T)
 		currentActorSystem->modelData.verts.reserve(vectorSize);
 
 		//Geometry Elements
@@ -234,7 +234,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 		for (int i = 0; i < polyCount; i++)
 		{
 			int polySize = mesh->GetPolygonSize(i);
-			assert((polySize % 3) == 0);
+			assert((polySize % 3) == 0 && "FBX model isn't triangulated");
 
 			for (int j = 0; j < polySize; j++)
 			{
