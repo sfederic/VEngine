@@ -34,6 +34,7 @@ public:
 
 	bool bMainLoop = true;
 	bool bGamePaused = false;
+	bool bGamePlayOn = false; //Runs the game state in editor within the viewport.
 };
 
 extern CoreSystem gCoreSystem;

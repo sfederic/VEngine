@@ -23,20 +23,26 @@ void World::Load(std::string levelName)
 
 void World::TickAllActorSystems(float deltaTime)
 {
-	//Skip actor ticks if game is paused.
+	//Skip ticks if game is paused
 	if (gCoreSystem.bGamePaused)
+	{
+		return;
+	}
+
+	//Skip ticks if game in-editor isn't running
+	if (!gCoreSystem.bGamePlayOn)
 	{
 		return;
 	}
 
 	for (int asIndex = 0; asIndex < actorSystems.size(); asIndex++)
 	{
+		actorSystems[asIndex]->Tick(deltaTime);
+
 		for (int actorIndex = 0; actorIndex < actorSystems[asIndex]->actors.size(); actorIndex++)
 		{
 			actorSystems[asIndex]->actors[actorIndex]->Tick(deltaTime);
 		}
-
-		actorSystems[asIndex]->Tick(deltaTime);
 	}
 }
 

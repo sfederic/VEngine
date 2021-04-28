@@ -9,4 +9,5 @@ public:
 	void Tick();
 	void CreateNewActorSystem();
 	void SetActorSystemGenerateArgs();
+	void SetPlayMode();
 };

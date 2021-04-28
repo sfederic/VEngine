@@ -9,6 +9,7 @@
 #include <qdialog.h>
 #include <qlabel.h>
 #include <qcombobox.h>
+#include "CoreSystem.h"
 
 ToolbarDock::ToolbarDock(const char* title) : QDockWidget(title)
 {
@@ -28,6 +29,7 @@ ToolbarDock::ToolbarDock(const char* title) : QDockWidget(title)
     playToolButton->setIcon(playToolIcon);
     playToolButton->setToolButtonStyle(Qt::ToolButtonStyle::ToolButtonTextUnderIcon);
     playToolButton->setText("Play");
+    connect(playToolButton, &QToolButton::clicked, this, &ToolbarDock::SetPlayMode);
     toolbarHLayout->addWidget(playToolButton, Qt::AlignLeft);
 
     //Add Actorsystem button
@@ -89,4 +91,9 @@ void ToolbarDock::SetActorSystemGenerateArgs()
         "Actor");
 
     createActorSystemWindow->close();
+}
+
+void ToolbarDock::SetPlayMode()
+{
+    gCoreSystem.bGamePlayOn = !gCoreSystem.bGamePlayOn;
 }
