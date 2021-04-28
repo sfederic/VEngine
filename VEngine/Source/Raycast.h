@@ -24,7 +24,7 @@ struct Ray
 };
 
 void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, class ID3D11Buffer* debugBuffer);
-bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, class ActorSystem* actorSystem);
+bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, class ActorSystem* actorSystem, bool fromScreen = false);
 bool RaycastTriangleIntersect(Ray& ray);
 bool RaycastAll(Ray& ray, XMVECTOR origin, XMVECTOR direction, class World* world);
 bool RaycastFromScreen(Ray& ray, int sx, int sy, class Camera* camera, class ActorSystem* actorSystem);

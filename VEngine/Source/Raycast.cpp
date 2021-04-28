@@ -30,20 +30,24 @@ void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, class ID3
 	//gRenderSystem.context->UpdateSubresource(debugBuffer, 0, nullptr, gRenderSystem.debugLines.data(), 0, 0);
 }
 
-bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSystem)
+bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSystem, bool fromScreen)
 {
 	ray.origin = origin;
 	ray.direction = direction;
 
-	Camera* camera = GetActiveCamera();
+	//Calculate raycast from camera coords into world
+	if (fromScreen)
+	{
+		Camera* camera = GetActiveCamera();
 
-	XMMATRIX invView = XMMatrixInverse(&XMMatrixDeterminant(camera->view), camera->view);
-	XMMATRIX invModel = XMMatrixInverse(&XMMatrixDeterminant(XMMatrixIdentity()), XMMatrixIdentity());
-	XMMATRIX toLocal = XMMatrixMultiply(invView, invModel);
+		XMMATRIX invView = XMMatrixInverse(&XMMatrixDeterminant(camera->view), camera->view);
+		XMMATRIX invModel = XMMatrixInverse(&XMMatrixDeterminant(XMMatrixIdentity()), XMMatrixIdentity());
+		XMMATRIX toLocal = XMMatrixMultiply(invView, invModel);
 
-	ray.origin = XMVector3TransformCoord(ray.origin, toLocal);
-	ray.direction = XMVector3TransformNormal(ray.direction, toLocal);
-	ray.direction = XMVector3Normalize(ray.direction);
+		ray.origin = XMVector3TransformCoord(ray.origin, toLocal);
+		ray.direction = XMVector3TransformNormal(ray.direction, toLocal);
+		ray.direction = XMVector3Normalize(ray.direction);
+	}
 
 	std::vector<float> distances;
 	std::vector<int> actorIndices;
@@ -195,7 +199,7 @@ bool RaycastFromScreen(Ray& ray, int sx, int sy, Camera* camera, ActorSystem* ac
 	ray.origin = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	ray.direction = XMVectorSet(vx, vy, 1.f, 0.f);
 
-	return Raycast(ray, ray.origin, ray.direction, actorSystem);
+	return Raycast(ray, ray.origin, ray.direction, actorSystem, true);
 }
 
 bool RaycastAllFromScreen(Ray& ray, int sx, int sy, Camera* camera, World* world)

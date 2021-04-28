@@ -2,6 +2,8 @@
 #include "ActorSystemFactory.h"
 #include "Input.h"
 #include "MathHelpers.h"
+#include "Raycast.h"
+#include "World.h"
 
 TestActorSystem testActorSystem;
 
@@ -44,6 +46,15 @@ void TestActor::Tick(float deltaTime)
 		if (gInputSystem.GetKeyDownState(Keys::Right))
 		{
 			nextPos.m128_f32[0] += 2.0f;
+		}
+	}
+
+	if (gInputSystem.GetKeyDownState(Keys::Down))
+	{
+		Ray ray = {};
+		if (RaycastAll(ray, XMVectorSet(0.f, 10.f, 0.f, 0.f), -XMVectorUp(), GetWorld()))
+		{
+			throw;
 		}
 	}
 
