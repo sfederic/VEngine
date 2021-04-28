@@ -10,6 +10,7 @@
 #include <qlabel.h>
 #include <qcombobox.h>
 #include "CoreSystem.h"
+#include "../EditorMainWindow.h"
 
 ToolbarDock::ToolbarDock(const char* title) : QDockWidget(title)
 {
@@ -96,4 +97,13 @@ void ToolbarDock::SetActorSystemGenerateArgs()
 void ToolbarDock::SetPlayMode()
 {
     gCoreSystem.bGamePlayOn = !gCoreSystem.bGamePlayOn;
+
+    if (gCoreSystem.bGamePlayOn)
+    {
+        gEditorSystem->DisableEditorDocks();
+    }
+    else if (!gCoreSystem.bGamePlayOn)
+    {
+        gEditorSystem->EnableEditorDocks();
+    }
 }

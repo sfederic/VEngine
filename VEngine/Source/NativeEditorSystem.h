@@ -17,4 +17,6 @@ public:
 	virtual int GetDockFocus() { return 0; }
 	virtual void GetMousePos(int* x, int* y) {}
 	virtual void ToggleFullscreen() {}
+	virtual void EnableEditorDocks() {}
+	virtual void DisableEditorDocks() {}
 };

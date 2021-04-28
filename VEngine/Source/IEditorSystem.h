@@ -26,6 +26,8 @@ public:
 	virtual int GetDockFocus() = 0;
 	virtual void GetMousePos(int* x, int* y) = 0;
 	virtual void ToggleFullscreen() = 0;
+	virtual void EnableEditorDocks() = 0;
+	virtual void DisableEditorDocks() = 0;
 
 	//For the current setup, this is just going to be cast as a HWND everywhere
 	void* mainWindow;

@@ -5,6 +5,8 @@
 #include "PropertiesDock.h"
 #include "Actor.h"
 #include "Input.h"
+#include "ConsoleDock.h"
+#include "AssetDock.h"
 
 QApplication* qApplication;
 EditorMainWindow* editorMainWindow;
@@ -83,4 +85,19 @@ void ToolkitEditorSystem::ToggleFullscreen()
 			editorMainWindow->setCentralWidget(editorMainWindow->renderViewWidget);
 		}
 	}
+}
+
+//With both of these functions, want to keep the console dock enabled.
+void ToolkitEditorSystem::EnableEditorDocks()
+{
+	editorMainWindow->assetDock->setEnabled(true);
+	editorMainWindow->propertiesDock->setEnabled(true);
+	editorMainWindow->worldDock->setEnabled(true);
+}
+
+void ToolkitEditorSystem::DisableEditorDocks()
+{
+	editorMainWindow->assetDock->setEnabled(false);
+	editorMainWindow->propertiesDock->setEnabled(false);
+	editorMainWindow->worldDock->setEnabled(false);
 }
