@@ -7,9 +7,11 @@
 class TestActor : public Actor
 {
 public:
-	TestActor() 
-	{
-	}
+	TestActor();
+	virtual void Tick(float deltaTime);
+
+	XMVECTOR currentPos;
+	XMVECTOR nextPos;
 };
 
 class TestActorSystem : public ActorSystem

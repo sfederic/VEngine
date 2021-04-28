@@ -76,3 +76,28 @@ XMFLOAT4X4 FbxMatrixToDirectXMathMatrix(fbxsdk::FbxMatrix fbxMatrix)
         fbxMatrix.mData[2].mData[0] / 100.0, fbxMatrix.mData[2].mData[1] / 100.0, fbxMatrix.mData[2].mData[2] / 100.0, fbxMatrix.mData[2].mData[3] / 100.0,
         fbxMatrix.mData[3].mData[0] / 100.0, fbxMatrix.mData[3].mData[1] / 100.0, fbxMatrix.mData[3].mData[2] / 100.0, fbxMatrix.mData[3].mData[3] / 100.0);
 }
+
+bool VecEqual(XMVECTOR v1, XMVECTOR v2, float epsilon)
+{
+    if (v1.m128_f32[0] < (v2.m128_f32[0] + epsilon) && v1.m128_f32[0] > (v2.m128_f32[0] - epsilon) &&
+        v1.m128_f32[1] < (v2.m128_f32[1] + epsilon) && v1.m128_f32[1] > (v2.m128_f32[1] - epsilon) && 
+        v1.m128_f32[2] < (v2.m128_f32[2] + epsilon) && v1.m128_f32[2] > (v2.m128_f32[2] - epsilon) &&
+        v1.m128_f32[3] < (v2.m128_f32[3] + epsilon) && v1.m128_f32[3] > (v2.m128_f32[3] - epsilon))
+    {
+        return true;
+    }
+
+    return false;
+}
+
+XMVECTOR XMVectorConstantLerp(XMVECTOR current, XMVECTOR target, float dist)
+{
+    XMVECTOR toTarget = XMVectorSubtract(target, current);
+    XMVECTOR magnitude = XMVector3Dot(toTarget, toTarget);
+    if (magnitude.m128_f32[0] > (dist * dist))
+    {
+        toTarget *= (dist / sqrt(magnitude.m128_f32[0]));
+    }
+
+    return current + toTarget;
+}

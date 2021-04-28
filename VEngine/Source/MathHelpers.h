@@ -14,3 +14,5 @@ XMFLOAT3 PitchYawRollFromMatrix(XMMATRIX m);
 XMFLOAT3 PitchYawRollFromQuaternion(XMFLOAT4 q);
 void LookAtRotation(XMVECTOR lookAtPoint, XMMATRIX& m);
 XMFLOAT4X4 FbxMatrixToDirectXMathMatrix(fbxsdk::FbxMatrix fbxMatrix);
+bool VecEqual(XMVECTOR v1, XMVECTOR v2, float epsilon = 0.0005f);
+XMVECTOR XMVectorConstantLerp(XMVECTOR v1, XMVECTOR v2, float dist);
