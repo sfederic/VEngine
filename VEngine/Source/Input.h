@@ -14,6 +14,7 @@ enum class Keys
 	Ctrl = VK_CONTROL,
 	Delete = VK_DELETE,
 	BackSpace = VK_BACK,
+	Alt = VK_LMENU, //Left Menu is alt?
 
 	W = 'W',
 	A = 'A',

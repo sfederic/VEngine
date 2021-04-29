@@ -10,10 +10,22 @@ CoreSystem gCoreSystem;
 
 void CoreSystem::Tick()
 {
-	//Pause game (freezes actor ticks)
-	if (gInputSystem.GetKeyUpState('P'))
+	//Start play in editor
+	if (gInputSystem.GetAsyncKey(Keys::Ctrl))
 	{
-		bGamePaused = !bGamePaused;
+		if (gInputSystem.GetKeyUpState('P'))
+		{
+			bGamePlayOn = !bGamePlayOn;
+		}
+	}
+	
+	//Pause game (freezes actor ticks)
+	if (bGamePlayOn)
+	{
+		if (gInputSystem.GetKeyUpState('P', (int)Keys::Ctrl))
+		{
+			bGamePaused = !bGamePaused;
+		}
 	}
 }
 

@@ -218,8 +218,6 @@ void PropertiesWidget::Tick()
     Actor* picked = gWorldEditor.pickedActor;
     if (picked)
     {
-        setEnabled(true);
-
         XMFLOAT3 pos = picked->GetPositionFloat3();
         posEditX->setValue(pos.x);
         posEditY->setValue(pos.y);
@@ -234,10 +232,6 @@ void PropertiesWidget::Tick()
         scaleEditX->setValue(scale.x);
         scaleEditY->setValue(scale.y);
         scaleEditZ->setValue(scale.z);
-    }
-    else
-    {
-        setEnabled(false);
     }
 }
 
