@@ -87,7 +87,7 @@ void ToolkitEditorSystem::ToggleFullscreen()
 	}
 }
 
-//With both of these functions, want to keep the console dock enabled.
+//With both of these functions, want to keep the console dock enabled coz debugging is sick
 void ToolkitEditorSystem::EnableEditorDocks()
 {
 	editorMainWindow->assetDock->setEnabled(true);
