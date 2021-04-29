@@ -67,12 +67,6 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSy
 		tempBoundingBox.Center = offset;
 		tempBoundingBox.Extents = actorSystem->actors[i]->GetScale();
 
-		//For editor exit
-		if (actorSystem->actors[i]->bPicked)
-		{
-			actorSystem->actors[i]->bPicked = false;
-			return false;
-		}
 
 		//Skip if actor is not render as well (good for translation widgets)
 		if (!actorSystem->actors[i]->bRender)
