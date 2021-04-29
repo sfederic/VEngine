@@ -55,15 +55,20 @@ public:
 	void StoreMouseRightUpInput();
 
 	bool GetKeyUpState(Keys key);
+	bool GetKeyUpState(Keys key, Keys modifier);
 	bool GetKeyUpState(int key);
+	bool GetKeyUpState(int key, int modifier);
 	bool GetKeyDownState(Keys key);
+	bool GetKeyDownState(Keys key, Keys modifier);
 	bool GetKeyDownState(int key);
+	bool GetKeyDownState(int key, int modifier);
 
 	bool GetMouseLeftDownState();
 	bool GetMouseLeftUpState();
 	bool GetMouseRightDownState();
 	bool GetMouseRightUpState();
 	bool GetAsyncKey(Keys key);
+	bool GetAsyncKey(int key);
 	void InputReset();
 	void StoreMouseWheelUp();
 	void StoreMouseWheelDown();

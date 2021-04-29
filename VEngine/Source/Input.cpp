@@ -74,6 +74,16 @@ bool InputSystem::GetKeyDownState(Keys key)
 	}
 }
 
+bool InputSystem::GetKeyDownState(Keys key, Keys modifier)
+{
+	if (GetAsyncKey(modifier))
+	{
+		return GetKeyDownState(key);
+	}
+
+	return false;
+}
+
 bool InputSystem::GetKeyDownState(int key)
 {
 	if (currentUpKey == key)
@@ -84,6 +94,16 @@ bool InputSystem::GetKeyDownState(int key)
 	{
 		return false;
 	}
+}
+
+bool InputSystem::GetKeyDownState(int key, int modifier)
+{
+	if (GetAsyncKey(modifier))
+	{
+		return GetKeyDownState(key);
+	}
+
+	return false;
 }
 
 bool InputSystem::GetMouseLeftDownState()
@@ -146,6 +166,18 @@ bool InputSystem::GetAsyncKey(Keys key)
 	}
 }
 
+bool InputSystem::GetAsyncKey(int key)
+{
+	if (GetAsyncKeyState(key))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 bool InputSystem::GetKeyUpState(Keys key)
 {
 	if (currentUpKey == (int)key)
@@ -158,6 +190,16 @@ bool InputSystem::GetKeyUpState(Keys key)
 	}
 }
 
+bool InputSystem::GetKeyUpState(Keys key, Keys modifier)
+{
+	if (GetAsyncKey(modifier))
+	{
+		return GetKeyUpState(key);
+	}
+
+	return false;
+}
+
 bool InputSystem::GetKeyUpState(int key)
 {
 	if (currentUpKey == key)
@@ -168,6 +210,16 @@ bool InputSystem::GetKeyUpState(int key)
 	{
 		return false;
 	}
+}
+
+bool InputSystem::GetKeyUpState(int key, int modifier)
+{
+	if (GetAsyncKey(modifier))
+	{
+		return GetKeyUpState(key);
+	}
+
+	return false;
 }
 
 void InputSystem::InputReset()
