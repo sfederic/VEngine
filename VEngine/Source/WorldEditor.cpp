@@ -25,7 +25,6 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 	if (gInputSystem.GetKeyUpState(Keys::BackSpace))
 	{
 		ActorSystemFactory::SetCurrentActiveActorSystem(nullptr);
-		pickedActor = nullptr;
 	}
 
 	World* world = GetWorld();
