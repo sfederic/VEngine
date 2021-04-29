@@ -24,6 +24,7 @@ ToolbarDock::ToolbarDock(const char* title) : QDockWidget(title)
     saveToolButton->setText("Save");
     toolbarHLayout->addWidget(saveToolButton, Qt::AlignLeft);
 
+    //Play button
     QToolButton* playToolButton = new QToolButton();
     QPixmap playToolPixmap = QPixmap("play_icon.png");
     QIcon playToolIcon = QIcon(playToolPixmap);
@@ -32,6 +33,11 @@ ToolbarDock::ToolbarDock(const char* title) : QDockWidget(title)
     playToolButton->setText("Play");
     connect(playToolButton, &QToolButton::clicked, this, &ToolbarDock::SetPlayMode);
     toolbarHLayout->addWidget(playToolButton, Qt::AlignLeft);
+
+    //Pause button
+    QToolButton* pauseToolButton = new QToolButton();
+    pauseToolButton->setText("Pause");
+    connect(pauseToolButton, &QToolButton::clicked, this, &ToolbarDock::PauseViewportInPlayMode);
 
     //Add Actorsystem button
     QPushButton* createActorSystemButton = new QPushButton();
@@ -105,5 +111,13 @@ void ToolbarDock::SetPlayMode()
     else if (!gCoreSystem.bGamePlayOn)
     {
         gEditorSystem->EnableEditorDocks();
+    }
+}
+
+void ToolbarDock::PauseViewportInPlayMode()
+{
+    if (gCoreSystem.bGamePlayOn)
+    {
+        gCoreSystem.bGamePaused = !gCoreSystem.bGamePaused;
     }
 }

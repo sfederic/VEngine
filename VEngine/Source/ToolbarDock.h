@@ -10,4 +10,5 @@ public:
 	void CreateNewActorSystem();
 	void SetActorSystemGenerateArgs();
 	void SetPlayMode();
+	void PauseViewportInPlayMode();
 };
