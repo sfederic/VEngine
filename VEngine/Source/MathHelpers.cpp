@@ -90,13 +90,14 @@ bool VecEqual(XMVECTOR v1, XMVECTOR v2, float epsilon)
     return false;
 }
 
+//Just stole this from stackoverflow.
 XMVECTOR XMVectorConstantLerp(XMVECTOR current, XMVECTOR target, float dist)
 {
     XMVECTOR toTarget = XMVectorSubtract(target, current);
-    XMVECTOR magnitude = XMVector3Dot(toTarget, toTarget);
-    if (magnitude.m128_f32[0] > (dist * dist))
+    float magnitude = XMVector3Dot(toTarget, toTarget).m128_f32[0];
+    if (magnitude > (dist * dist))
     {
-        toTarget *= (dist / sqrt(magnitude.m128_f32[0]));
+        toTarget *= (dist / sqrtf(magnitude));
     }
 
     return current + toTarget;
