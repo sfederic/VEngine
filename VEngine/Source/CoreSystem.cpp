@@ -5,8 +5,16 @@
 #include <stdio.h>
 #include "RenderSystem.h"
 #include "Camera.h"
+#include "GlobalDefines.h"
 
 CoreSystem gCoreSystem;
+
+void CoreSystem::Init()
+{
+#ifndef EDITOR
+	bGamePlayOn = true;
+#endif
+}
 
 void CoreSystem::Tick()
 {

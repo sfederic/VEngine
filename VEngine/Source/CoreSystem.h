@@ -8,6 +8,7 @@ LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam
 class CoreSystem
 {
 public:
+	void Init();
 	void Tick();
 	void SetupWindow(HINSTANCE instance, int cmdShow);
 	void SetTimerFrequency();

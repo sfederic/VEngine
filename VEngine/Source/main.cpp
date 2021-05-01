@@ -40,6 +40,7 @@ int main(int argc, char* argv[])
 {
     HR(CoInitialize(NULL)); //For the WIC texture functions from DXT
 
+    gCoreSystem.Init();
     gEditorSystem->Init(argc, argv);
     
     gProfiler.Init();
