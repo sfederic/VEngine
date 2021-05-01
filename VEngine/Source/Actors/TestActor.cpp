@@ -37,28 +37,43 @@ TestActor::TestActor()
 {
 	currentPos = GetPositionVector();
 	nextPos = currentPos;
+
+	currentRot = XMLoadFloat4(&GetRotationQuat());
+	nextRot = currentRot;
 }
 
 void TestActor::Tick(float deltaTime)
 {
 	if(VecEqual(currentPos, nextPos))
 	{
-		if (gInputSystem.GetKeyDownState(Keys::Right))
+		if (gInputSystem.GetKeyDownState(Keys::D))
 		{
-			nextPos.m128_f32[0] += 2.0f;
+			nextPos += (GetRightVector() * 2.f);
+		}
+		else if (gInputSystem.GetKeyDownState(Keys::A))
+		{
+			nextPos += (-GetRightVector() * 2.f);
+		}
+		else if (gInputSystem.GetKeyDownState(Keys::W))
+		{
+			nextPos += (GetForwardVector() * 2.f);
+		}
+		else if (gInputSystem.GetKeyDownState(Keys::S))
+		{
+			nextPos += (-GetForwardVector() * 2.f);
 		}
 	}
 
-	if (gInputSystem.GetKeyDownState(Keys::Down))
+	if (gInputSystem.GetKeyDownState(Keys::Right))
 	{
-		Ray ray = {};
-		if (RaycastAll(ray, XMVectorSet(0.f, 10.f, 0.f, 0.f), -XMVectorUp(), GetWorld()))
-		{
-			throw;
-		}
+		nextRot.m128_f32[0] = 0.5f;
+		nextRot.m128_f32[1] = 1.f;
 	}
 
 	const float moveSpeed = 5.0f;
 	currentPos = XMVectorConstantLerp(currentPos, nextPos, (deltaTime * moveSpeed));
 	SetPosition(currentPos);
+
+	const float rotationSpeed = 15.0f;
+	currentRot = XMQuaternionSlerp(currentRot, nextRot, (deltaTime * rotationSpeed));
 }

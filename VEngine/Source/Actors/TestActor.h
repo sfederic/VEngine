@@ -12,6 +12,9 @@ public:
 
 	XMVECTOR currentPos;
 	XMVECTOR nextPos;
+
+	XMVECTOR currentRot;
+	XMVECTOR nextRot;
 };
 
 class TestActorSystem : public ActorSystem
