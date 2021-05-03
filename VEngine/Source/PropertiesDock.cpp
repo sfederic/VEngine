@@ -5,6 +5,7 @@
 #include "../EditorMainWindow.h"
 #include "EditorSystem.h"
 #include "PropertyWidgets/BoolWidget.h"
+#include "PropertyWidgets/FloatWidget.h"
 #include <QVBoxLayout>
 
 PropertiesDock::PropertiesDock(const char* title) : QDockWidget(title)
@@ -42,6 +43,16 @@ void PropertiesDock::DisplayActorSystemProperties(Actor* actor)
 
     propWidget->selectedActorSystem = actorSystem;
 
-    BoolWidget* boolWidget = new BoolWidget(&actorSystem->bRender, this);
-    setWidget(boolWidget);
+    QWidget* widget = new QWidget();
+
+    BoolWidget* boolWidget = new BoolWidget(&actorSystem->bRender, widget);
+    auto floatWidget = new FloatWidget((float*)&actorSystem->numVertices, widget);
+
+    auto layout = new QVBoxLayout();
+    layout->addWidget(boolWidget);
+    layout->addWidget(floatWidget);
+
+    widget->setLayout(layout);
+
+    setWidget(widget);
 }
