@@ -4,6 +4,8 @@
 #include <QLineEdit>
 #include "../EditorMainWindow.h"
 #include "EditorSystem.h"
+#include "PropertyWidgets/BoolWidget.h"
+#include <QVBoxLayout>
 
 PropertiesDock::PropertiesDock(const char* title) : QDockWidget(title)
 {
@@ -39,4 +41,7 @@ void PropertiesDock::DisplayActorSystemProperties(Actor* actor)
     propWidget->actorSystemShaderName->setText(QString::fromStdWString(actorSystem->shaderName));
 
     propWidget->selectedActorSystem = actorSystem;
+
+    BoolWidget* boolWidget = new BoolWidget(&actorSystem->bRender, this);
+    setWidget(boolWidget);
 }

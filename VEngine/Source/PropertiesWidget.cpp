@@ -13,41 +13,7 @@
 #include "RenderViewWidget.h"
 #include "MathHelpers.h"
 
-void PropertiesWidget::SetActorPosition()
-{
-    Actor* picked = gWorldEditor.pickedActor;
-    if (picked)
-    {
-        float posX = posEditX->value();
-        float posY = posEditY->value();
-        float posZ = posEditZ->value();
-        gWorldEditor.pickedActor->SetPosition(posX, posY, posZ);
-    }
-}
-
-void PropertiesWidget::SetActorScale()
-{
-    Actor* picked = gWorldEditor.pickedActor;
-    if (picked)
-    {
-        float scaleX = scaleEditX->value();
-        float scaleY = scaleEditY->value();
-        float scaleZ = scaleEditZ->value();
-        gWorldEditor.pickedActor->SetScale(scaleX, scaleY, scaleZ);
-    }
-}
-
-void PropertiesWidget::SetActorRotation()
-{
-    Actor* picked = gWorldEditor.pickedActor;
-    if (picked)
-    {
-        float roll = rotEditX->value();
-        float pitch = rotEditY->value();
-        float yaw = rotEditZ->value();
-        gWorldEditor.pickedActor->SetRotation(roll, pitch, yaw);
-    }
-}
+#include "PropertyWidgets/BoolWidget.h"
 
 PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
 {
@@ -167,6 +133,42 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
     vLayoutTop->addLayout(actorSystemDetailsGrid);
 
     setLayout(vLayoutTop);
+}
+
+void PropertiesWidget::SetActorPosition()
+{
+    Actor* picked = gWorldEditor.pickedActor;
+    if (picked)
+    {
+        float posX = posEditX->value();
+        float posY = posEditY->value();
+        float posZ = posEditZ->value();
+        gWorldEditor.pickedActor->SetPosition(posX, posY, posZ);
+    }
+}
+
+void PropertiesWidget::SetActorScale()
+{
+    Actor* picked = gWorldEditor.pickedActor;
+    if (picked)
+    {
+        float scaleX = scaleEditX->value();
+        float scaleY = scaleEditY->value();
+        float scaleZ = scaleEditZ->value();
+        gWorldEditor.pickedActor->SetScale(scaleX, scaleY, scaleZ);
+    }
+}
+
+void PropertiesWidget::SetActorRotation()
+{
+    Actor* picked = gWorldEditor.pickedActor;
+    if (picked)
+    {
+        float roll = rotEditX->value();
+        float pitch = rotEditY->value();
+        float yaw = rotEditZ->value();
+        gWorldEditor.pickedActor->SetRotation(roll, pitch, yaw);
+    }
 }
 
 void PropertiesWidget::SelectShader()
