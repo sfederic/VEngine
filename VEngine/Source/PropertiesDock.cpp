@@ -6,6 +6,7 @@
 #include "EditorSystem.h"
 #include "PropertyWidgets/BoolWidget.h"
 #include "PropertyWidgets/FloatWidget.h"
+#include "PropertyWidgets/IntWidget.h"
 #include <QVBoxLayout>
 
 PropertiesDock::PropertiesDock(const char* title) : QDockWidget(title)
@@ -45,12 +46,17 @@ void PropertiesDock::DisplayActorSystemProperties(Actor* actor)
 
     QWidget* widget = new QWidget();
 
-    BoolWidget* boolWidget = new BoolWidget(&actorSystem->bRender, widget);
-    auto floatWidget = new FloatWidget((float*)&actorSystem->numVertices, widget);
+    //TODO: Better to do something like a grid here (two columns) so you can forloop over the 
+    //eventual actorsystemfactory properties per actorsystem.
+
+    BoolWidget* boolWidget = new BoolWidget(&actorSystem->bRender, "pussywidget");
+    auto floatWidget = new FloatWidget((float*)&actorSystem->numVertices, "pussyspinbox");
+    auto intWidget = new IntWidget((int*)&actorSystem->numVertices, "bigcockintbox");
 
     auto layout = new QVBoxLayout();
     layout->addWidget(boolWidget);
     layout->addWidget(floatWidget);
+    layout->addWidget(intWidget);
 
     widget->setLayout(layout);
 

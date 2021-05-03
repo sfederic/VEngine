@@ -1,15 +1,28 @@
 #include "FloatWidget.h"
+#include <QHBoxLayout>
+#include <QLabel>
 
-FloatWidget::FloatWidget(float* value, QWidget* parent) : QDoubleSpinBox(parent)
+FloatWidget::FloatWidget(float* value, const char* name, QWidget* parent) : QWidget(parent)
 {
 	_value = value;
-	connect(this, &QDoubleSpinBox::editingFinished, this, &FloatWidget::SetValue);
+
+	auto layout = new QHBoxLayout();
+	setLayout(layout);
+
+	//Label
+	auto label = new QLabel(name);
+	layout->addWidget(label);
+
+	//DoubleSpinbox
+	spinbox = new QDoubleSpinBox();
+	connect(spinbox, &QDoubleSpinBox::editingFinished, this, &FloatWidget::SetValue);
+	layout->addWidget(spinbox);
 }
 
 void FloatWidget::SetValue()
 {
 	if (_value)
 	{
-		*_value = (float)value();
+		*_value = (float)spinbox->value();
 	}
 }

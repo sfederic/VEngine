@@ -116,6 +116,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\PropertyWidgets\IntWidget.cpp" />
     <ClCompile Include="Source\PropertyWidgets\FloatWidget.cpp" />
     <ClCompile Include="Source\PropertyWidgets\BoolWidget.cpp" />
     <ClCompile Include="Source\BlendState.cpp" />
@@ -189,6 +190,7 @@
     <ClCompile Include="EditorMainWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\PropertyWidgets\IntWidget.h" />
     <ClInclude Include="Source\PropertyWidgets\FloatWidget.h" />
     <ClInclude Include="Source\PropertyWidgets\BoolWidget.h" />
     <ClInclude Include="Source\BlendState.h" />
