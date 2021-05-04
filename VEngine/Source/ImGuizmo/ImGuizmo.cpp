@@ -1216,7 +1216,8 @@ namespace ImGuizmo
             gContext.mRadiusSquareCenter = radiusAxis;
          }
 
-         drawList->AddPolyline(circlePos, circleMul * halfCircleSegmentCount + 1, colors[3 - axis], false, 2);
+         const int rotationGizmoThickness = 5;
+         drawList->AddPolyline(circlePos, circleMul * halfCircleSegmentCount + 1, colors[3 - axis], false, rotationGizmoThickness);
       }
       if(hasRSC)
       {
@@ -1299,15 +1300,17 @@ namespace ImGuizmo
             ImVec2 worldDirSSpaceNoScale = worldToPos(dirAxis * markerScale * gContext.mScreenFactor, gContext.mMVP);
             ImVec2 worldDirSSpace = worldToPos((dirAxis * markerScale * scaleDisplay[i]) * gContext.mScreenFactor, gContext.mMVP);
 
+            const float scaleGizmoThickness = 5.0f;
+
             if (gContext.mbUsing && (gContext.mActualID == -1 || gContext.mActualID == gContext.mEditingID))
             {
-               drawList->AddLine(baseSSpace, worldDirSSpaceNoScale, 0xFF404040, 3.f);
+               drawList->AddLine(baseSSpace, worldDirSSpaceNoScale, 0xFF404040, scaleGizmoThickness);
                drawList->AddCircleFilled(worldDirSSpaceNoScale, 6.f, 0xFF404040);
             }
 
             if(!hasTranslateOnAxis || gContext.mbUsing)
             {
-              drawList->AddLine(baseSSpace, worldDirSSpace, colors[i + 1], 3.f);
+              drawList->AddLine(baseSSpace, worldDirSSpace, colors[i + 1], scaleGizmoThickness);
             }
             drawList->AddCircleFilled(worldDirSSpace, 6.f, colors[i + 1]);
 
@@ -1375,7 +1378,8 @@ namespace ImGuizmo
             ImVec2 baseSSpace = worldToPos(dirAxis * 0.1f * gContext.mScreenFactor, gContext.mMVP);
             ImVec2 worldDirSSpace = worldToPos(dirAxis * gContext.mScreenFactor, gContext.mMVP);
 
-            drawList->AddLine(baseSSpace, worldDirSSpace, colors[i + 1], 3.f);
+            const float translationGizmoThickness = 5.0f;
+            drawList->AddLine(baseSSpace, worldDirSSpace, colors[i + 1], translationGizmoThickness);
 
             // Arrow head begin
             ImVec2 dir(origin - worldDirSSpace);
