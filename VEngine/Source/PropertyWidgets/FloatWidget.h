@@ -2,7 +2,7 @@
 
 #include <QDoubleSpinBox>
 
-class FloatWidget : public QWidget
+class FloatWidget : public QDoubleSpinBox
 {
 public:
 	FloatWidget(float* value, const char* name, QWidget* parent = 0);
@@ -10,6 +10,5 @@ public:
 private:
 	void SetValue();
 
-	QDoubleSpinBox* spinbox;
 	float* _value;
 };
