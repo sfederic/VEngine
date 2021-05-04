@@ -8,6 +8,7 @@
 #include "PropertyWidgets/FloatWidget.h"
 #include "PropertyWidgets/IntWidget.h"
 #include <QVBoxLayout>
+#include <qlabel.h>
 
 PropertiesDock::PropertiesDock(const char* title) : QDockWidget(title)
 {
@@ -49,16 +50,19 @@ void PropertiesDock::DisplayActorSystemProperties(Actor* actor)
     //TODO: Better to do something like a grid here (two columns) so you can forloop over the 
     //eventual actorsystemfactory properties per actorsystem.
 
-    BoolWidget* boolWidget = new BoolWidget(&actorSystem->bRender, "pussywidget");
-    auto floatWidget = new FloatWidget((float*)&actorSystem->numVertices, "pussyspinbox");
     auto intWidget = new IntWidget((int*)&actorSystem->numVertices, "bigcockintbox");
 
-    auto layout = new QVBoxLayout();
-    layout->addWidget(boolWidget);
-    layout->addWidget(floatWidget);
-    layout->addWidget(intWidget);
+    auto grid = new QGridLayout();
+    grid->setColumnMinimumWidth(0, 100);
+    grid->setColumnMinimumWidth(1, 100);
 
-    widget->setLayout(layout);
+    for (int i = 0; i < 5; i++)
+    {
+        grid->addWidget(new QLabel("Position"), i, 0);
+        grid->addWidget(intWidget, i, 1);
+    }
+
+    widget->setLayout(grid);
 
     setWidget(widget);
 }

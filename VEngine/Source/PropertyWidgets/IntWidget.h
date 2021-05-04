@@ -2,7 +2,7 @@
 
 #include <QDoubleSpinBox>
 
-class IntWidget : public QWidget
+class IntWidget : public QSpinBox
 {
 public:
 	IntWidget(int* value, const char* name, QWidget* parent = 0);
@@ -10,6 +10,5 @@ public:
 private:
 	void SetValue();
 
-	QSpinBox* spinbox;
 	int* _value;
 };
