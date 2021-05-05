@@ -46,7 +46,7 @@ TestActor::TestActor()
 PropertyMap TestActor::GetProperties()
 {
 	PropertyMap properties;
-	properties["Picked"] = std::make_pair(typeid(bPicked), &bPicked);
+	properties[typeid(bPicked)] = std::make_pair("Picked", (void*)&bPicked);
 
 	return properties;
 }

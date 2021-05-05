@@ -12,8 +12,7 @@
 #include "Transform.h"
 #include "RenderSystem.h"
 #include <typeindex>
-#include <unordered_map>
-#include <optional>
+#include <map>
 
 using namespace DirectX;
 
@@ -31,7 +30,7 @@ class RenderSystem;
 //This is a mean map. It's basically a name, linked to a pair of property type and data.
 //It's not really a good solution, but it'll do, unless you can cache the property widget
 //based on ActorType.
-typedef std::unordered_map<const char*, std::optional<std::pair<std::type_index, void*>>> PropertyMap;
+typedef std::unordered_map<std::type_index, std::pair<const char*, void*>> PropertyMap;
 
 class Actor
 {
@@ -45,7 +44,8 @@ public:
 	//Returns all the hand-defined properties in this function as a big 'fuck you' map
 	virtual PropertyMap GetProperties() 
 	{
-
+		PropertyMap properties;
+		return properties;
 	}
 
 	template <class ActorType>

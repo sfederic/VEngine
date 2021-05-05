@@ -56,24 +56,22 @@ void PropertiesDock::DisplayActorSystemProperties(Actor* actor)
 
     int currentGridRow = 0;
 
-    for (auto& actorProperty : actor->actorProperties)
+    for (auto& actorProperty : actor->GetProperties())
     {
-        auto propertyName = actorProperty.first;
-        auto propertyInfo = actorProperty.second;
+        auto propertyInfo = actorProperty.first;
+        auto propertyData = actorProperty.second;
 
-        grid->addWidget(new QLabel(propertyName), currentGridRow, 0);
+        grid->addWidget(new QLabel(propertyData.first), currentGridRow, 0);
 
-        if (std::get<0>(propertyInfo.value()) == typeid(bool))
+        if (propertyInfo == typeid(bool))
         {
-            auto boolWidget = new BoolWidget((bool*)&std::get<1>(propertyInfo.value()));
+            auto boolWidget = new BoolWidget((bool*)&propertyData.second);
+            grid->addWidget(boolWidget, currentGridRow, 1);
         }
 
         currentGridRow++;
     }
 
-    auto intWidget = new IntWidget((int*)&actorSystem->numVertices, "bigcockintbox");
-
     widget->setLayout(grid);
-
     setWidget(widget);
 }
