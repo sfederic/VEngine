@@ -20,3 +20,8 @@ void ParticleSystem::Tick(float deltaTime)
 		actors[i]->transform.Decompose(m);
 	}
 }
+
+PropertyMap Particle::GetProperties()
+{
+	return __super::GetProperties();
+}

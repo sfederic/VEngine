@@ -96,7 +96,7 @@ void ShaderFactory::HotReloadShaders()
 
     //Potentially engine could let the previous vertex/shader object buffers be used until new compile is ready
 
-    //https://docs.microsoft.com/en-us/windows/win32/fileio/obtaining-directory-change-notifications
+    //REF: https://docs.microsoft.com/en-us/windows/win32/fileio/obtaining-directory-change-notifications
 
     bool nextChange = FindNextChangeNotification(hotreloadHandle);
     if (nextChange)

@@ -4,6 +4,7 @@
 #include "MathHelpers.h"
 #include "Raycast.h"
 #include "World.h"
+#include <tuple>
 
 TestActorSystem testActorSystem;
 
@@ -40,6 +41,14 @@ TestActor::TestActor()
 
 	currentRot = XMLoadFloat4(&GetRotationQuat());
 	nextRot = currentRot;
+}
+
+PropertyMap TestActor::GetProperties()
+{
+	PropertyMap properties;
+	properties[typeid(bPicked)] = std::make_pair("Picked", (void*)&bPicked);
+
+	return properties;
 }
 
 void TestActor::Tick(float deltaTime)

@@ -8,7 +8,7 @@
 class Particle : public Actor
 {
 public:
-
+	virtual PropertyMap GetProperties() override;
 };
 
 class ParticleSystem : public ActorSystem

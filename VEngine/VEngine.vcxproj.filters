@@ -233,6 +233,15 @@
     <ClCompile Include="Source\Actors\TestSpawnActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PropertyWidgets\BoolWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PropertyWidgets\FloatWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PropertyWidgets\IntWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Actor.h">
@@ -440,6 +449,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Actors\TestSpawnActor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PropertyWidgets\BoolWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PropertyWidgets\FloatWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PropertyWidgets\IntWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

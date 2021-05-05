@@ -4,6 +4,13 @@
 #include <QLineEdit>
 #include "../EditorMainWindow.h"
 #include "EditorSystem.h"
+#include "PropertyWidgets/BoolWidget.h"
+#include "PropertyWidgets/FloatWidget.h"
+#include "PropertyWidgets/IntWidget.h"
+#include <QVBoxLayout>
+#include <qlabel.h>
+#include "ActorSystemFactory.h"
+#include <typeindex>
 
 PropertiesDock::PropertiesDock(const char* title) : QDockWidget(title)
 {
@@ -39,4 +46,32 @@ void PropertiesDock::DisplayActorSystemProperties(Actor* actor)
     propWidget->actorSystemShaderName->setText(QString::fromStdWString(actorSystem->shaderName));
 
     propWidget->selectedActorSystem = actorSystem;
+
+    QWidget* widget = new QWidget();
+
+    //TODO: Better to do something like a grid here (two columns) so you can forloop over the 
+    //eventual actorsystemfactory properties per actorsystem.
+
+    auto grid = new QGridLayout();
+
+    int currentGridRow = 0;
+
+    for (auto& actorProperty : actor->GetProperties())
+    {
+        auto propertyInfo = actorProperty.first;
+        auto propertyData = actorProperty.second;
+
+        grid->addWidget(new QLabel(propertyData.first), currentGridRow, 0);
+
+        if (propertyInfo == typeid(bool))
+        {
+            auto boolWidget = new BoolWidget((bool*)&propertyData.second);
+            grid->addWidget(boolWidget, currentGridRow, 1);
+        }
+
+        currentGridRow++;
+    }
+
+    widget->setLayout(grid);
+    setWidget(widget);
 }

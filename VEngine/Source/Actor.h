@@ -11,6 +11,8 @@
 #include "AnimationStructures.h"
 #include "Transform.h"
 #include "RenderSystem.h"
+#include <typeindex>
+#include <map>
 
 using namespace DirectX;
 
@@ -22,6 +24,14 @@ class ShaderResourceView;
 class BlendState;
 class RenderSystem;
 
+//Apparently, because type_index can't be null, you can either make a wrapper class that 
+//accounts for null because maps can assign to null or something or use std::optional.
+//REF: https://stackoverflow.com/questions/46197573/use-stdtype-index-as-value-in-a-map
+//This is a mean map. It's basically a name, linked to a pair of property type and data.
+//It's not really a good solution, but it'll do, unless you can cache the property widget
+//based on ActorType.
+typedef std::unordered_map<std::type_index, std::pair<const char*, void*>> PropertyMap;
+
 class Actor
 {
 public:
@@ -29,6 +39,13 @@ public:
 	virtual void Tick(float deltaTime)
 	{
 		
+	}
+
+	//Returns all the hand-defined properties in this function as a big 'fuck you' map
+	virtual PropertyMap GetProperties() 
+	{
+		PropertyMap properties;
+		return properties;
 	}
 
 	template <class ActorType>

@@ -77,7 +77,12 @@ int main(int argc, char* argv[])
         const float deltaTime = gCoreSystem.deltaTime;
 
         gCoreSystem.StartTimer();
+
+#ifndef EDITOR
+        //Qt can have a bit of a fit here in strange widget cases handling Win32 msg's
         gCoreSystem.HandleMessages();
+#endif
+
         gCoreSystem.Tick();
 
         gEditorSystem->ProcessEvents();
