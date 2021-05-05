@@ -117,7 +117,7 @@ void RenderSystem::CreateDevice()
 	tmpFactory->Release();
 
 	//Reference for EnumAdapterByGpuPerformance
-	//https://github.com/walbourn/directx-vs-templates/blob/master/d3d11game_win32_dr/DeviceResources.cpp
+	//REF: https://github.com/walbourn/directx-vs-templates/blob/master/d3d11game_win32_dr/DeviceResources.cpp
 
 	IDXGIAdapter1* adapter;
 	for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_MINIMUM_POWER, IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)

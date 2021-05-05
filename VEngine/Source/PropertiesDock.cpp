@@ -9,6 +9,8 @@
 #include "PropertyWidgets/IntWidget.h"
 #include <QVBoxLayout>
 #include <qlabel.h>
+#include "ActorSystemFactory.h"
+#include <typeindex>
 
 PropertiesDock::PropertiesDock(const char* title) : QDockWidget(title)
 {
@@ -50,17 +52,26 @@ void PropertiesDock::DisplayActorSystemProperties(Actor* actor)
     //TODO: Better to do something like a grid here (two columns) so you can forloop over the 
     //eventual actorsystemfactory properties per actorsystem.
 
-    auto intWidget = new IntWidget((int*)&actorSystem->numVertices, "bigcockintbox");
-
     auto grid = new QGridLayout();
-    grid->setColumnMinimumWidth(0, 100);
-    grid->setColumnMinimumWidth(1, 100);
 
-    for (int i = 0; i < 5; i++)
+    int currentGridRow = 0;
+
+    for (auto& actorProperty : actor->actorProperties)
     {
-        grid->addWidget(new QLabel("Position"), i, 0);
-        grid->addWidget(intWidget, i, 1);
+        auto propertyName = actorProperty.first;
+        auto propertyInfo = actorProperty.second;
+
+        grid->addWidget(new QLabel(propertyName), currentGridRow, 0);
+
+        if (std::get<0>(propertyInfo.value()) == typeid(bool))
+        {
+            auto boolWidget = new BoolWidget((bool*)&std::get<1>(propertyInfo.value()));
+        }
+
+        currentGridRow++;
     }
+
+    auto intWidget = new IntWidget((int*)&actorSystem->numVertices, "bigcockintbox");
 
     widget->setLayout(grid);
 

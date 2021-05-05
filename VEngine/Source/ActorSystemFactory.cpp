@@ -1,6 +1,7 @@
 #include "ActorSystemFactory.h"
 #include "Debug.h"
 #include "Actor.h"
+#include <typeindex>
 
 std::unordered_map<size_t, ActorSystem*> *ActorSystemFactory::IDToSystemMap;
 std::unordered_map<ActorSystem*, size_t> *ActorSystemFactory::systemToIDMap;
@@ -10,6 +11,26 @@ std::unordered_map<std::wstring, ActorSystem*> *ActorSystemFactory::nameToSystem
 ActorSystem* currentActiveActorSystem;
 
 ActorSystemFactory::ActorSystemFactory()
+{
+
+}
+
+void ActorSystemFactory::RegisterType(int type)
+{
+    
+}
+
+void ActorSystemFactory::RegisterType(float type)
+{
+
+}
+
+void ActorSystemFactory::RegisterType(DirectX::XMVECTOR type)
+{
+
+}
+
+void ActorSystemFactory::RegisterType(bool type)
 {
 
 }
