@@ -33,6 +33,7 @@
 #include "TransformGizmo.h"
 #include "ParticleSystem.h"
 #include "Actors/TestActor.h"
+#include "GlobalDefines.h"
 
 float roll = 0.f;
 

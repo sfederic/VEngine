@@ -65,7 +65,7 @@ void PropertiesDock::DisplayActorSystemProperties(Actor* actor)
 
         if (propertyInfo == typeid(bool))
         {
-            auto boolWidget = new BoolWidget((bool*)&propertyData.second);
+            auto boolWidget = new BoolWidget((bool*)propertyData.second);
             grid->addWidget(boolWidget, currentGridRow, 1);
         }
 

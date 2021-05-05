@@ -15,10 +15,10 @@ BoolWidget::BoolWidget(bool* value, QWidget* parent) : QCheckBox(parent)
 	connect(this, &QCheckBox::stateChanged, this, &BoolWidget::SetValue);
 }
 
-void BoolWidget::SetValue(int value_)
+void BoolWidget::SetValue(int value)
 {
 	if (_value)
 	{
-		*_value = value_;
+		*_value = value;
 	}
 }
