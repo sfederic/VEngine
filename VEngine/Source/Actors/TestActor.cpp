@@ -47,7 +47,8 @@ PropertyMap TestActor::GetProperties()
 {
 	PropertyMap properties;
 	properties[typeid(bRender)] = std::make_pair("Visibility", (void*)&bRender);
-
+	properties[typeid(vertexBufferOffset)] = std::make_pair("Test int", (void*)&vertexBufferOffset);
+	
 	return properties;
 }
 

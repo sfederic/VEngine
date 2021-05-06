@@ -7,6 +7,7 @@
 #include "PropertyWidgets/BoolWidget.h"
 #include "PropertyWidgets/FloatWidget.h"
 #include "PropertyWidgets/IntWidget.h"
+#include "PropertyWidgets/VectorWidget.h"
 #include <QVBoxLayout>
 #include <qlabel.h>
 #include "ActorSystemFactory.h"
@@ -82,6 +83,11 @@ void PropertiesDock::DisplayActorSystemProperties(Actor* actor)
         {
             auto floatWidget = new FloatWidget((float*)propertyData.second);
             grid->addWidget(floatWidget, currentGridRow, propertyDataColumn);
+        }
+        else if (propertyInfo == typeid(XMVECTOR))
+        {
+            auto vectorWidget = new VectorWidget((XMVECTOR*)propertyData.second);
+            grid->addWidget(vectorWidget, currentGridRow, propertyDataColumn);
         }
 
         currentGridRow++;

@@ -16,6 +16,9 @@ public:
 
 	XMVECTOR currentRot;
 	XMVECTOR nextRot;
+
+	int testint;
+	float testfloat;
 };
 
 class TestActorSystem : public ActorSystem
