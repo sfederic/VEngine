@@ -14,6 +14,8 @@
 
 PropertiesDock::PropertiesDock(const char* title) : QDockWidget(title)
 {
+    setMinimumWidth(400);
+
     propWidget = new PropertiesWidget();
     setWidget(propWidget);
 }
@@ -47,26 +49,39 @@ void PropertiesDock::DisplayActorSystemProperties(Actor* actor)
 
     propWidget->selectedActorSystem = actorSystem;
 
-    QWidget* widget = new QWidget();
 
     //TODO: Better to do something like a grid here (two columns) so you can forloop over the 
     //eventual actorsystemfactory properties per actorsystem.
-
+    QWidget* widget = new QWidget();
     auto grid = new QGridLayout();
 
     int currentGridRow = 0;
+    const int propertyNameColumn = 0;
+    const int propertyDataColumn = 1;
 
     for (auto& actorProperty : actor->GetProperties())
     {
         auto propertyInfo = actorProperty.first;
         auto propertyData = actorProperty.second;
 
-        grid->addWidget(new QLabel(propertyData.first), currentGridRow, 0);
+        //Set property name onto label
+        grid->addWidget(new QLabel(propertyData.first), currentGridRow, propertyNameColumn);
 
+        //Set property data into grid
         if (propertyInfo == typeid(bool))
         {
             auto boolWidget = new BoolWidget((bool*)propertyData.second);
-            grid->addWidget(boolWidget, currentGridRow, 1);
+            grid->addWidget(boolWidget, currentGridRow, propertyDataColumn);
+        }
+        else if (propertyInfo == typeid(int))
+        {
+            auto intWidget = new IntWidget((int*)propertyData.second);
+            grid->addWidget(intWidget, currentGridRow, propertyDataColumn);
+        }
+        else if (propertyInfo == typeid(float))
+        {
+            auto floatWidget = new FloatWidget((float*)propertyData.second);
+            grid->addWidget(floatWidget, currentGridRow, propertyDataColumn);
         }
 
         currentGridRow++;
