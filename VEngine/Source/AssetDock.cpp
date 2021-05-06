@@ -72,7 +72,7 @@ void AssetDock::AssetItemClicked()
         auto extension = (const char*)fileExtension.c_str();
 
         //Load world
-        if (strcmp(extension, ".sav"))
+        if (strcmp(extension, ".sav") == 0)
         {
             gFileSystem.LoadWorld(fullPath.toStdString().c_str());
             return;
