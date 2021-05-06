@@ -21,7 +21,7 @@ void ParticleSystem::Tick(float deltaTime)
 	}
 }
 
-PropertyMap Particle::GetProperties()
+Properties Particle::GetProperties()
 {
 	return __super::GetProperties();
 }

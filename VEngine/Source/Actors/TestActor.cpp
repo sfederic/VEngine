@@ -43,13 +43,12 @@ TestActor::TestActor()
 	nextRot = currentRot;
 }
 
-PropertyMap TestActor::GetProperties()
+Properties TestActor::GetProperties()
 {
-	PropertyMap properties;
-	properties[typeid(bRender)] = std::make_pair("Visibility", (void*)&bRender);
-	properties[typeid(vertexBufferOffset)] = std::make_pair("Test int", (void*)&vertexBufferOffset);
+	Properties props;
+	props.Register("VertexBufferOffset", &vertexBufferOffset);
 	
-	return properties;
+	return props;
 }
 
 void TestActor::Tick(float deltaTime)

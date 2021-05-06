@@ -60,7 +60,7 @@ void PropertiesDock::DisplayActorSystemProperties(Actor* actor)
     const int propertyNameColumn = 0;
     const int propertyDataColumn = 1;
 
-    for (auto& actorProperty : actor->GetProperties())
+    for (auto& actorProperty : actor->GetProperties().propertyMap)
     {
         auto propertyInfo = actorProperty.first;
         auto propertyData = actorProperty.second;

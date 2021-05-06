@@ -30,7 +30,16 @@ class RenderSystem;
 //This is a mean map. It's basically a name, linked to a pair of property type and data.
 //It's not really a good solution, but it'll do, unless you can cache the property widget
 //based on ActorType.
-typedef std::unordered_map<std::type_index, std::pair<const char*, void*>> PropertyMap;
+struct Properties
+{
+	template <typename T>
+	void Register(const char* name, T* value)
+	{
+		propertyMap[typeid(*value)] = std::make_pair(name, (void*)&value);
+	}
+
+	std::unordered_map<std::type_index, std::pair<const char*, void*>> propertyMap;
+};
 
 class Actor
 {
@@ -42,9 +51,9 @@ public:
 	}
 
 	//Returns all the hand-defined properties in this function as a big 'fuck you' map
-	virtual PropertyMap GetProperties() 
+	virtual Properties GetProperties() 
 	{
-		PropertyMap properties;
+		Properties properties;
 		return properties;
 	}
 
