@@ -2,7 +2,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 
-FloatWidget::FloatWidget(float* value, const char* name, QWidget* parent) : QDoubleSpinBox(parent)
+FloatWidget::FloatWidget(float* value, QWidget* parent) : QDoubleSpinBox(parent)
 {
 	_value = value;
 
