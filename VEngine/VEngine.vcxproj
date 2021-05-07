@@ -125,6 +125,8 @@
     <ClCompile Include="Source\ParticleSystem.cpp" />
     <ClCompile Include="Source\EditorSystem.cpp" />
     <ClCompile Include="Source\NativeEditorSystem.cpp" />
+    <ClCompile Include="Source\Reflection.cpp" />
+    <ClCompile Include="Source\Reflection.h" />
     <ClCompile Include="Source\ToolkitEditorSystem.cpp" />
     <ClCompile Include="Source\Actor.cpp" />
     <ClCompile Include="Source\AnimationStructures.cpp" />
