@@ -206,6 +206,16 @@ Buffer* ActorSystem::GetVertexBuffer()
 	return nullptr;
 }
 
+Buffer* ActorSystem::GetInstanceBuffer()
+{
+	if (pso.instanceBuffer)
+	{
+		return pso.instanceBuffer;
+	}
+
+	return nullptr;
+}
+
 void ActorSystem::RemoveActor(int index)
 {
 	assert(index < actors.size());
@@ -308,6 +318,11 @@ void ActorSystem::ResetActorNames()
 void ActorSystem::SetVertexBuffer(Buffer* vertexBuffer)
 {
 	pso.vertexBuffer = vertexBuffer;
+}
+
+void ActorSystem::SetInstanceBuffer(Buffer* instanceBuffer)
+{
+	pso.instanceBuffer = instanceBuffer;
 }
 
 void ActorSystem::SetSamplerState(Sampler* sampler)

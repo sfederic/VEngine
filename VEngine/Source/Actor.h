@@ -24,12 +24,6 @@ class ShaderResourceView;
 class BlendState;
 class RenderSystem;
 
-//Apparently, because type_index can't be null, you can either make a wrapper class that 
-//accounts for null because maps can assign to null or something or use std::optional.
-//REF: https://stackoverflow.com/questions/46197573/use-stdtype-index-as-value-in-a-map
-//This is a mean map. It's basically a name, linked to a pair of property type and data.
-//It's not really a good solution, but it'll do, unless you can cache the property widget
-//based on ActorType.
 struct Properties
 {
 	template <typename T>
@@ -122,6 +116,7 @@ struct PipelineView
 
 	Buffer* vertexBuffer;
 	Buffer* indexBuffer;
+	Buffer* instanceBuffer;
 	Sampler* samplerState;
 	RasterizerState* rastState;
 	Texture* texture;
@@ -171,32 +166,53 @@ public:
 
 		if (FBXImporter::Import(filename.c_str(), modelData, this))
 		{
-			UINT byteWidth = modelData.GetByteWidth();
-			numVertices = (byteWidth * actors.size()) / sizeof(Vertex);
-			gRenderSystem.CreateVertexBuffer(byteWidth, modelData.verts.data(), this);
-
-			//UINT indicesByteWidth = modelData.indices.size() * sizeof(uint16_t);
-			//indexBuffer = renderSystem->CreateDefaultBuffer(indicesByteWidth, D3D11_BIND_INDEX_BUFFER, modelData.indices.data());
-
-			gRenderSystem.CreateSamplerState(GetSamplerState());
-			gRenderSystem.CreateTexture(this);
-
-			size_t stride = sizeof(Vertex);
-
-			BoundingBox::CreateFromPoints(boundingBox, modelData.verts.size(), &modelData.verts[0].pos, stride);
-			BoundingSphere::CreateFromPoints(boundingSphere, modelData.verts.size(), &modelData.verts[0].pos, stride);
-
+			//Spawn actors, setup components
 			actors.reserve(numActorsToSpawn);
 			for (int i = 0; i < numActorsToSpawn; i++)
 			{
 				AddActor<ActorType>(Transform());
 			}
 
+			//Setup buffers
+			UINT byteWidth = modelData.GetByteWidth();
+			numVertices = (byteWidth * actors.size()) / sizeof(Vertex);
+
+			gRenderSystem.CreateVertexBuffer(byteWidth, modelData.verts.data(), this);
+
+			if (bInstancingActors)
+			{
+				std::vector<XMFLOAT4X4> actorModelMatrices;
+				actorModelMatrices.reserve(actors.size());
+				for (int i = 0; i < actors.size(); i++)
+				{
+					XMFLOAT4X4 modelMatrix;
+					XMStoreFloat4x4(&modelMatrix, actors[i]->GetTransformationMatrix());
+					actorModelMatrices.push_back(modelMatrix);
+				}
+
+				gRenderSystem.CreateInstanceBuffer(byteWidth * actors.size(), actorModelMatrices.data(), this);
+			}
+
+			//TODO: index buffers
+			//UINT indicesByteWidth = modelData.indices.size() * sizeof(uint16_t);
+			//indexBuffer = renderSystem->CreateDefaultBuffer(indicesByteWidth, D3D11_BIND_INDEX_BUFFER, modelData.indices.data());
+
+			//Sampler, texture setup
+			gRenderSystem.CreateSamplerState(GetSamplerState());
+			gRenderSystem.CreateTexture(this);
+
+			size_t stride = sizeof(Vertex);
+
+			//Bounding setup
+			BoundingBox::CreateFromPoints(boundingBox, modelData.verts.size(), &modelData.verts[0].pos, stride);
+			BoundingSphere::CreateFromPoints(boundingSphere, modelData.verts.size(), &modelData.verts[0].pos, stride);
+
 			bHasBeenInitialised = true;
 		}
 		else
 		{
 			DebugPrint("Actors failed to load");
+			bHasBeenInitialised = false;
 		}
 	}
 
@@ -205,12 +221,14 @@ public:
 
 	//PSO functions
 	Buffer* GetVertexBuffer();
+	Buffer* GetInstanceBuffer();
 	Sampler* GetSamplerState();
 	RasterizerState* GetRasterizerState();
 	ShaderResourceView* GetShaderView();
 	Texture* GetTexture();
 
 	void SetVertexBuffer(Buffer* vertexBuffer);
+	void SetInstanceBuffer(Buffer* instanceBuffer);
 	void SetSamplerState(Sampler* sampler);
 	void SetRasterizerState(RasterizerState* rasterizerState);
 	void SetShaderView(ShaderResourceView* shaderView);
@@ -260,9 +278,9 @@ public:
 	//Size of the actor system's linked actor
 	uint32_t sizeofActor = 0;
 
-	bool bInstancingActors; //bool for setting system to use instancing
 	bool bAnimated = false; //Whether model has any animation data. Is set in FBX import.
 	bool bHasSkeletalAnimation;
 	bool bRender = true;
 	bool bHasBeenInitialised = false;
+	bool bInstancingActors = false; //bool for setting system to use instancing in renderer
 };

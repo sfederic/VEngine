@@ -33,6 +33,7 @@ public:
 	void CreatePixelShader();
 	void CreateAllShaders();
 	void CreateVertexBuffer(UINT size, const void* data, class ActorSystem* actor) ;
+	void CreateInstanceBuffer(UINT size, const void* data, ActorSystem* system);
 	IDXGISwapChain3* GetSwapchain();
 	void Present();
 	void Flush();
@@ -66,7 +67,7 @@ public:
 
 	ID3DBlob* CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target);
 	ID3D11Buffer* CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, const void* initData);
-	ID3D11Buffer* CreateDyamicBuffer(UINT byteWidth, UINT bindFlags, const void* initData);
+	ID3D11Buffer* CreateDynamicBuffer(UINT byteWidth, UINT bindFlags, const void* initData);
 
 	static const int frameCount = 2;
 

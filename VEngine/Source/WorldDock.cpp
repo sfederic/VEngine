@@ -81,7 +81,7 @@ void WorldDock::PopulateWorldList()
 
         for (int actorIndex = 0; actorIndex < world->actorSystems[i]->actors.size(); actorIndex++)
         {
-            QString actorName = QString::fromStdWString(world->actorSystems[i]->actors[actorIndex]->name);
+            QString actorName = QString::fromStdWString(std::wstring(world->actorSystems[i]->actors[actorIndex]->name));
 
             QTreeWidgetItem* child = new QTreeWidgetItem();
             child->setText(0, actorName);

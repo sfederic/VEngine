@@ -12,6 +12,11 @@ struct Vertex
 	XMFLOAT3 normal;
 };
 
+struct InstanceData
+{
+	XMFLOAT4X4 model;
+};
+
 struct Matrices
 {
 	XMMATRIX model;

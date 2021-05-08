@@ -21,6 +21,7 @@ struct VS_IN
 	float3 pos : POSITION;
 	float2 uv : TEXCOORD;
 	float3 normal : NORMAL;
+	uint instanceID : SV_InstanceID;
 };
 
 struct VS_OUT

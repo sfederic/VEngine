@@ -217,6 +217,11 @@ void RenderSystem::CreateInputLayout()
 		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, pos), D3D11_INPUT_PER_VERTEX_DATA, 0},
 		{"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, offsetof(Vertex, uv), D3D11_INPUT_PER_VERTEX_DATA, 0},
 		{"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, normal), D3D11_INPUT_PER_VERTEX_DATA, 0},
+
+		{"MODEL", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, offsetof(InstanceData, model._11), D3D11_INPUT_PER_INSTANCE_DATA, 1},
+		{"MODEL", 1, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, offsetof(InstanceData, model._21), D3D11_INPUT_PER_INSTANCE_DATA, 1},
+		{"MODEL", 2, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, offsetof(InstanceData, model._31), D3D11_INPUT_PER_INSTANCE_DATA, 1},
+		{"MODEL", 3, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, offsetof(InstanceData, model._41), D3D11_INPUT_PER_INSTANCE_DATA, 1},
 	};
 
 	CreateShaders();
@@ -268,6 +273,13 @@ void RenderSystem::CreateVertexBuffer(UINT size, const void* data, ActorSystem* 
 	Buffer* buffer = new Buffer;
 	buffer->data = CreateDefaultBuffer(size, D3D11_BIND_VERTEX_BUFFER, data);
 	system->SetVertexBuffer(buffer);
+}
+
+void RenderSystem::CreateInstanceBuffer(UINT size, const void* data, ActorSystem* system)
+{
+	Buffer* buffer = new Buffer;
+	buffer->data = CreateDynamicBuffer(size, D3D11_BIND_VERTEX_BUFFER, data);
+	system->SetInstanceBuffer(buffer);
 }
 
 IDXGISwapChain3* RenderSystem::GetSwapchain()
@@ -397,11 +409,26 @@ void RenderSystem::RenderActorSystem(World* world)
 		};
 		context->PSSetShaderResources(0, _countof(shaderResourceViews), shaderResourceViews);
 
-		ID3D11Buffer* vertexBuffers[]
+		if (actorSystem->bInstancingActors)
 		{
-			actorSystem->GetVertexBuffer()->data
-		};
-		context->IASetVertexBuffers(0, _countof(vertexBuffers), vertexBuffers, &strides, &offsets);
+			ID3D11Buffer* vertexBuffers[]
+			{
+				actorSystem->GetVertexBuffer()->data,
+				actorSystem->GetInstanceBuffer()->data
+			};
+
+			UINT instanceStride[2] = { sizeof(Vertex), sizeof(InstanceData) };
+			UINT instanceOffsets[2] = { 0, 0 };
+			context->IASetVertexBuffers(0, _countof(vertexBuffers), vertexBuffers, instanceStride, instanceOffsets);
+		}
+		else
+		{
+			ID3D11Buffer* vertexBuffers[]
+			{
+				actorSystem->GetVertexBuffer()->data
+			};
+			context->IASetVertexBuffers(0, _countof(vertexBuffers), vertexBuffers, &strides, &offsets);
+		}
 		
 		//Constant buffer register values
 		const int cbMatrixRegister = 0;
@@ -442,8 +469,15 @@ void RenderSystem::RenderActorSystem(World* world)
 					context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 
 					//Draw
-					context->Draw(actorSystem->modelData.verts.size(), 0);
-					//context->DrawIndexed(actorSystem->modelData.indices.size(), 0, 0);
+					if (actorSystem->bInstancingActors)
+					{
+						context->DrawIndexed(100, 0, 0);
+					}
+					else
+					{
+						context->Draw(actorSystem->modelData.verts.size(), 0);
+						//context->DrawIndexed(actorSystem->modelData.indices.size(), 0, 0);
+					}
 				}
 			}
 		}
@@ -669,7 +703,7 @@ ID3D11Buffer* RenderSystem::CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, 
 	return buffer;
 }
 
-ID3D11Buffer* RenderSystem::CreateDyamicBuffer(UINT byteWidth, UINT bindFlags, const void* initData)
+ID3D11Buffer* RenderSystem::CreateDynamicBuffer(UINT byteWidth, UINT bindFlags, const void* initData)
 {
 	ID3D11Buffer* buffer;
 
@@ -686,5 +720,3 @@ ID3D11Buffer* RenderSystem::CreateDyamicBuffer(UINT byteWidth, UINT bindFlags, c
 
 	return buffer;
 }
-
-
