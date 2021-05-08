@@ -181,22 +181,27 @@ public:
 
 			if (bInstancingActors)
 			{
+				numActorsToDrawOnInstance = 10;
+
 				std::vector<XMFLOAT4X4> actorModelMatrices;
-				actorModelMatrices.reserve(actors.size());
-				for (int i = 0; i < actors.size(); i++)
+				actorModelMatrices.reserve(numActorsToDrawOnInstance);
+				for (int i = 0; i < numActorsToDrawOnInstance; i++)
 				{
 					XMFLOAT4X4 modelMatrix;
-					XMStoreFloat4x4(&modelMatrix, actors[i]->GetTransformationMatrix());
-					actorModelMatrices.push_back(modelMatrix);
+
+					if (i < actors.size())
+					{
+						XMStoreFloat4x4(&modelMatrix, actors[i]->GetTransformationMatrix());
+						actorModelMatrices.push_back(modelMatrix);
+					}
+					else
+					{
+						XMStoreFloat4x4(&modelMatrix, XMMatrixIdentity());
+						actorModelMatrices.push_back(modelMatrix);
+					}
 				}
 
-				//TODO: If you ever want instancing to work through the constant buffer, makea call like this
-				//and attach the buffer to the actorsystem, then go off of SV_InstanceID as an index
-				//into each model matrix pushed into the shader. eg.
-				// cbuffer ActorMatrices : register(b4)
-				// { float4x4 matrices[NUM_ACTORS_TO_INSTANCE]; }
-				// or you can opt for a dynamic vertex buffer, dunno.
-				//gRenderSystem.CreateConstantBuffer(byteWidth * actors.size(), actorModelMatrices.data(), this);
+				gRenderSystem.CreateConstantInstanceBuffer(sizeof(XMFLOAT4X4) * numActorsToDrawOnInstance, actorModelMatrices.data(), this);
 			}
 
 			//TODO: index buffers
@@ -288,5 +293,7 @@ public:
 	bool bHasSkeletalAnimation;
 	bool bRender = true;
 	bool bHasBeenInitialised = false;
+
 	bool bInstancingActors = false; //bool for setting system to use instancing in renderer
+	uint32_t numActorsToDrawOnInstance;
 };

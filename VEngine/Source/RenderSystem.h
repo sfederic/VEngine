@@ -33,7 +33,7 @@ public:
 	void CreatePixelShader();
 	void CreateAllShaders();
 	void CreateVertexBuffer(UINT size, const void* data, class ActorSystem* actor) ;
-	void CreateInstanceBuffer(UINT size, const void* data, ActorSystem* system);
+	void CreateConstantInstanceBuffer(UINT size, const void* data, ActorSystem* system);
 	IDXGISwapChain3* GetSwapchain();
 	void Present();
 	void Flush();
@@ -47,7 +47,7 @@ public:
 	void CreateInputLayout();
 	void CreateRasterizerStates();
 	void CreateBlendStates();
-	void CreateConstantBuffer();
+	void CreateMainConstantBuffers();
 
 	void CreateShaderView(ShaderResourceView* shaderView, Texture* texture);
 	void CreateSamplerState(Sampler* sampler);

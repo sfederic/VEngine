@@ -17,6 +17,8 @@ TestActorSystem::TestActorSystem()
 
 	sizeofActor = sizeof(TestActor);
 
+	bInstancingActors = true;
+
 	ActorSystemFactory::Register<TestActorSystem>(this);
 }
 

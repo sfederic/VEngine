@@ -3,7 +3,8 @@
 VS_OUT VSMain(VS_IN i)
 {
 	VS_OUT o;
-	o.pos = mul(mvp, float4(i.pos, 1.0f));
+	float3 pos = mul(modelMatrices[i.instanceID], float4(i.pos, 1.0f)).xyz;
+	o.pos = mul(mvp, float4(pos, 1.0f));
 	o.uv = i.uv;
 	o.normal = mul((float3x3)model, i.normal);
 

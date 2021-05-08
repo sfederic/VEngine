@@ -69,7 +69,7 @@ void RenderSystem::Init(HWND window)
 	CreateInputLayout();
 	CreateRasterizerStates();
 	CreateBlendStates();
-	CreateConstantBuffer();
+	CreateMainConstantBuffers();
 
 	//Check feature support (just for breakpoint checking for now)
 	D3D11_FEATURE_DATA_THREADING threadFeature = {};
@@ -217,11 +217,6 @@ void RenderSystem::CreateInputLayout()
 		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, pos), D3D11_INPUT_PER_VERTEX_DATA, 0},
 		{"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, offsetof(Vertex, uv), D3D11_INPUT_PER_VERTEX_DATA, 0},
 		{"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, normal), D3D11_INPUT_PER_VERTEX_DATA, 0},
-
-		{"MODEL", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, offsetof(InstanceData, model._11), D3D11_INPUT_PER_INSTANCE_DATA, 1},
-		{"MODEL", 1, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, offsetof(InstanceData, model._21), D3D11_INPUT_PER_INSTANCE_DATA, 1},
-		{"MODEL", 2, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, offsetof(InstanceData, model._31), D3D11_INPUT_PER_INSTANCE_DATA, 1},
-		{"MODEL", 3, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, offsetof(InstanceData, model._41), D3D11_INPUT_PER_INSTANCE_DATA, 1},
 	};
 
 	CreateShaders();
@@ -266,6 +261,23 @@ void RenderSystem::CreateBlendStates()
 	HR(device->CreateBlendState(&alphaToCoverageDesc, &blendStateAlphaToCoverage));
 }
 
+void RenderSystem::CreateMainConstantBuffers()
+{
+	//Matrix constant buffer
+	matrices.model = XMMatrixIdentity();
+	matrices.view = XMMatrixIdentity();
+	matrices.proj = XMMatrixPerspectiveFovLH(XM_PI / 3, gCoreSystem.GetAspectRatio(), 0.01f, 1000.f);
+
+	editorCamera.proj = matrices.proj;
+	matrices.mvp = matrices.model * matrices.view * matrices.proj;
+
+	cbMatrices = CreateDefaultBuffer(sizeof(Matrices), D3D11_BIND_CONSTANT_BUFFER, &matrices);
+
+	//Material constant buffer	
+	material.baseColour = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
+	cbMaterial = CreateDefaultBuffer(sizeof(Material), D3D11_BIND_CONSTANT_BUFFER, &material);
+}
+
 //One vertex buffer per actor system
 void RenderSystem::CreateVertexBuffer(UINT size, const void* data, ActorSystem* system)
 {
@@ -275,10 +287,11 @@ void RenderSystem::CreateVertexBuffer(UINT size, const void* data, ActorSystem* 
 	system->SetVertexBuffer(buffer);
 }
 
-void RenderSystem::CreateInstanceBuffer(UINT size, const void* data, ActorSystem* system)
+//For creating a cbuffer on an actorsystem holding all model matrices for instancing
+void RenderSystem::CreateConstantInstanceBuffer(UINT size, const void* data, ActorSystem* system)
 {
 	Buffer* buffer = new Buffer;
-	buffer->data = CreateDynamicBuffer(size, D3D11_BIND_VERTEX_BUFFER, data);
+	buffer->data = CreateDefaultBuffer(size, D3D11_BIND_CONSTANT_BUFFER, data);
 	system->SetInstanceBuffer(buffer);
 }
 
@@ -295,23 +308,6 @@ void RenderSystem::Present()
 void RenderSystem::Flush()
 {
 	//Empty
-}
-
-void RenderSystem::CreateConstantBuffer()
-{
-	//Matrix constant buffer
-	matrices.model = XMMatrixIdentity();
-	matrices.view = XMMatrixIdentity();
-	matrices.proj = XMMatrixPerspectiveFovLH(XM_PI / 3, gCoreSystem.GetAspectRatio(), 0.01f, 1000.f);
-
-	editorCamera.proj = matrices.proj;
-	matrices.mvp = matrices.model * matrices.view * matrices.proj;
-
-	cbMatrices = CreateDefaultBuffer(sizeof(Matrices), D3D11_BIND_CONSTANT_BUFFER, &matrices);
-
-	//Material constant buffer	
-	material.baseColour = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
-	cbMaterial = CreateDefaultBuffer(sizeof(Material), D3D11_BIND_CONSTANT_BUFFER, &material);
 }
 
 //Takes the actor system's texture and throws it into SRV to link with a shader.
@@ -409,26 +405,11 @@ void RenderSystem::RenderActorSystem(World* world)
 		};
 		context->PSSetShaderResources(0, _countof(shaderResourceViews), shaderResourceViews);
 
-		if (actorSystem->bInstancingActors)
+		ID3D11Buffer* vertexBuffers[]
 		{
-			ID3D11Buffer* vertexBuffers[]
-			{
-				actorSystem->GetVertexBuffer()->data,
-				actorSystem->GetInstanceBuffer()->data
-			};
-
-			UINT instanceStride[2] = { sizeof(Vertex), sizeof(InstanceData) };
-			UINT instanceOffsets[2] = { 0, 0 };
-			context->IASetVertexBuffers(0, _countof(vertexBuffers), vertexBuffers, instanceStride, instanceOffsets);
-		}
-		else
-		{
-			ID3D11Buffer* vertexBuffers[]
-			{
-				actorSystem->GetVertexBuffer()->data
-			};
-			context->IASetVertexBuffers(0, _countof(vertexBuffers), vertexBuffers, &strides, &offsets);
-		}
+			actorSystem->GetVertexBuffer()->data
+		};
+		context->IASetVertexBuffers(0, _countof(vertexBuffers), vertexBuffers, &strides, &offsets);
 		
 		//Constant buffer register values
 		const int cbMatrixRegister = 0;
@@ -455,7 +436,6 @@ void RenderSystem::RenderActorSystem(World* world)
 						actorSystem->actors[actorIndex]->SetTransformationMatrix(animMatrixFinal);
 					}
 
-
 					//Set matrices constant buffer
 					matrices.model = actorSystem->actors[actorIndex]->GetTransformationMatrix();
 					matrices.view = GetActiveCamera()->view;
@@ -468,16 +448,17 @@ void RenderSystem::RenderActorSystem(World* world)
 					context->UpdateSubresource(cbMaterial, 0, nullptr, &material, 0, 0);
 					context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 
-					//Draw
 					if (actorSystem->bInstancingActors)
 					{
-						//context->DrawIndexed(0, 0, 0);
+						context->VSSetConstantBuffers(3, 1, &actorSystem->GetInstanceBuffer()->data);
+						context->PSSetConstantBuffers(3, 1, &actorSystem->GetInstanceBuffer()->data);
+						context->DrawInstanced(actorSystem->modelData.verts.size(),
+							actorSystem->numActorsToDrawOnInstance, 0, 0);
+
+						break; //Exit the for loop (DrawInstanced() is like iteration over 1 actor)
 					}
-					else
-					{
-						context->Draw(actorSystem->modelData.verts.size(), 0);
-						//context->DrawIndexed(actorSystem->modelData.indices.size(), 0, 0);
-					}
+
+					context->Draw(actorSystem->modelData.verts.size(), 0);
 				}
 			}
 		}

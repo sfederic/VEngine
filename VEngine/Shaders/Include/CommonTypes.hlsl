@@ -16,6 +16,11 @@ cbuffer cbSkiningData : register(b2)
 	float4x4 boneTransforms[96];
 };
 
+cbuffer cbInstanceData : register(b3)
+{
+	float4x4 modelMatrices[512];
+};
+
 struct VS_IN
 {
 	float3 pos : POSITION;
