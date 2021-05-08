@@ -423,41 +423,6 @@ void RenderSystem::RenderActorSystem(World* world)
 
 		for (int actorIndex = 0; actorIndex < actorSystem->actors.size(); actorIndex++)
 		{
-			/*if (actorSystem->bRender)
-			{
-				if (actorSystem->actors[actorIndex]->bRender)
-				{
-					//Animation
-					if (actorSystem->bAnimated)
-					{
-						actorSystem->actors[actorIndex]->currentAnimationTime += gCoreSystem.deltaTime;
-						if (actorSystem->actors[actorIndex]->currentAnimationTime >= actorSystem->animData.GetEndTime())
-						{
-							actorSystem->actors[actorIndex]->currentAnimationTime = 0.0;
-						}
-
-						XMFLOAT4X4 animMatrix;
-						actorSystem->animData.Interpolate(actorSystem->actors[actorIndex]->currentAnimationTime, animMatrix);
-						XMMATRIX animMatrixFinal = XMLoadFloat4x4(&animMatrix);
-						actorSystem->actors[actorIndex]->SetTransformationMatrix(animMatrixFinal);
-					}
-
-					//Set matrices constant buffer
-					matrices.model = actorSystem->actors[actorIndex]->GetTransformationMatrix();
-					matrices.view = GetActiveCamera()->view;
-					matrices.mvp = matrices.model * matrices.view * matrices.proj;
-					context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
-					context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
-
-					//Set material constant buffer
-					material = actorSystem->actors[actorIndex]->material;
-					context->UpdateSubresource(cbMaterial, 0, nullptr, &material, 0, 0);
-					context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
-
-					context->Draw(actorSystem->modelData.verts.size(), 0);
-				}
-			}*/
-
 			InstanceData data;
 			data.model = actorSystem->actors[actorIndex]->GetTransformationMatrix();
 			instanceData.push_back(data);
