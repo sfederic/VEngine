@@ -419,7 +419,7 @@ void RenderSystem::RenderActorSystem(World* world)
 		std::vector<InstanceData> instanceData;
 		instanceData.reserve(actorSystem->actors.size());
 
-		gProfiler.Start();
+		PROFILE_START
 
 		for (int actorIndex = 0; actorIndex < actorSystem->actors.size(); actorIndex++)
 		{
@@ -478,7 +478,7 @@ void RenderSystem::RenderActorSystem(World* world)
 				actorSystem->actors.size(), 0, 0);
 		}
 
-		gProfiler.End(L"RenderActorsystem");
+		PROFILE_END
 	}
 }
 

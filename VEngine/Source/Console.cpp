@@ -119,15 +119,6 @@ void Console::ExecuteString()
 			gDebugMenu.AddNotification(L"SNAP OFF");
 		}
 	}
-	else if (wcsncmp(consoleString, ExecuteStrings::PROFILE, wcslen(ExecuteStrings::PROFILE)) == 0) //Show profile stats
-	{
-		for (int i = 0; i < gProfiler.timeFrames.size(); i++)
-		{
-			TimeFrame timeFrame = gProfiler.timeFrames[i];
-			_snwprintf_s(item.text, sizeof(item.text), L"Profile function: %ls", std::to_wstring(timeFrame.GetAverageTime()));
-			viewItems.push_back(item);
-		}
-	}
 	else
 	{
 		gDebugMenu.notifications.push_back(DebugNotification(L"No command found."));

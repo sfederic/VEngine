@@ -11,6 +11,7 @@
 #include "TransformGizmo.h"
 #include "EditorSystem.h"
 #include "ActorSystemFactory.h"
+#include "Profiler.h"
 
 DebugMenu gDebugMenu;
 
@@ -43,6 +44,27 @@ void DebugMenu::Tick(World* world, float deltaTime)
 	//Keep in mind ImGuizmo has to be called here to, it's part of ImGui
 	gTransformGizmo.Tick();
 
+	//ImGui profile menu
+	if (gInputSystem.GetKeyUpState(Keys::_5))
+	{
+		bProfileMenuOpen = !bProfileMenuOpen;
+	}
+
+	if (bProfileMenuOpen)
+	{
+		ImGui::Begin("Profiler Time Frames");
+		ImGui::SetWindowPos(ImVec2(10, 10));
+		ImGui::SetWindowSize(ImVec2(300, 300));
+
+		for (auto& timeFrame : gProfiler.timeFrames)
+		{
+			ImGui::Text(timeFrame.first.c_str());
+			double time = timeFrame.second->GetAverageTime();
+			ImGui::Text(std::to_string(time).c_str());
+		}
+
+		ImGui::End();
+	}
 
 	//Current selected actor system menu
 	ActorSystem* selectedActorSystem = ActorSystemFactory::GetCurrentActiveActorSystem();

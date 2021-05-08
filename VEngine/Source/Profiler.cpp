@@ -1,6 +1,7 @@
 #include "Profiler.h"
 #include <locale>
 #include <Windows.h>
+#include <assert.h>
 
 Profiler gProfiler;
 
@@ -9,24 +10,37 @@ void Profiler::Init()
 
 }
 
-void Profiler::Clean()
+void Profiler::Reset()
 {
 	timeFrames.empty();
 }
 
-void Profiler::Start()
+void Profiler::Start(const char* functionName)
 {
 	__int64 startTime = 0;
 	QueryPerformanceCounter((LARGE_INTEGER*)&startTime);
-	timeFrames.push_back(TimeFrame(startTime));
+
+	auto timeFramesIt = timeFrames.find(functionName);
+	if (timeFramesIt == timeFrames.end())
+	{
+		TimeFrame* timeFrame = new TimeFrame(startTime);
+		timeFrames[functionName] = timeFrame;
+	}
+	else
+	{
+		timeFrames[functionName]->startTime = startTime;
+	}
 }
 
-void Profiler::End(const wchar_t* functionName)
+void Profiler::End(const char* functionName)
 {
 	__int64 endTime = 0;
 	QueryPerformanceCounter((LARGE_INTEGER*)&endTime);
 
-	TimeFrame* currentTimeFrame = &timeFrames.back();
+	auto timeFramesIt = timeFrames.find(functionName);
+	assert(timeFramesIt->second && "Check for matching PROFILE_START in function.");
+
+	TimeFrame* currentTimeFrame = timeFramesIt->second;
 	currentTimeFrame->endTime = endTime;
 	currentTimeFrame->SetElapsedTime();
 }
@@ -37,7 +51,7 @@ void TimeFrame::SetElapsedTime()
 	QueryPerformanceFrequency((LARGE_INTEGER*)&cpuFreq);
 	double ticks = 1.0 / (double)cpuFreq;
 
-	if (currentElapsedTimeIndex < 60)
+	if (currentElapsedTimeIndex < maxSampleSize)
 	{
 		elapsedTimes[currentElapsedTimeIndex] = ticks * (double)(endTime - startTime);
 		currentElapsedTimeIndex++;
@@ -46,17 +60,20 @@ void TimeFrame::SetElapsedTime()
 	{
 		currentElapsedTimeIndex = 0;
 	}
+
+	endTime = 0;
+	startTime = 0;
 }
 
 double TimeFrame::GetAverageTime()
 {
 	double averageTime = 0.0;
 
-	for (int i = 0; i < 60; i++)
+	for (int i = 0; i < maxSampleSize; i++)
 	{
 		averageTime += elapsedTimes[i];
 	}
 
-	averageTime /= 60;
-	return averageTime;
+	double retVal = averageTime / (double)maxSampleSize;
+	return retVal;
 }

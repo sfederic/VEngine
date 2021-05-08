@@ -131,7 +131,7 @@ int main(int argc, char* argv[])
         gRenderSystem.WaitForPreviousFrame();
 
         gInputSystem.InputReset();
-        gProfiler.Clean();
+        gProfiler.Reset();
 
         gCoreSystem.EndTimer();
     }
