@@ -78,18 +78,6 @@ void RenderSystem::Init(HWND window)
 	return;
 }
 
-void RenderSystem::CreateDefaultBuffer()
-{
-}
-
-void RenderSystem::CreateVertexShader()
-{
-}
-
-void RenderSystem::CreatePixelShader()
-{
-}
-
 void RenderSystem::CreateAllShaders()
 {
 	for (int i = 0; i < gShaderFactory.shaders.size(); i++)
