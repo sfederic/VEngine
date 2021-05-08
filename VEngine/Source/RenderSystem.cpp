@@ -471,7 +471,7 @@ void RenderSystem::RenderActorSystem(World* world)
 					//Draw
 					if (actorSystem->bInstancingActors)
 					{
-						context->DrawIndexed(100, 0, 0);
+						//context->DrawIndexed(0, 0, 0);
 					}
 					else
 					{

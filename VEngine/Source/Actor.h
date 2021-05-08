@@ -44,7 +44,7 @@ public:
 		
 	}
 
-	//Returns all the hand-defined properties in this function as a big 'fuck you' map
+	//Returns all the hand-defined properties in this function
 	virtual Properties GetProperties() 
 	{
 		Properties properties;
@@ -190,7 +190,13 @@ public:
 					actorModelMatrices.push_back(modelMatrix);
 				}
 
-				gRenderSystem.CreateInstanceBuffer(byteWidth * actors.size(), actorModelMatrices.data(), this);
+				//TODO: If you ever want instancing to work through the constant buffer, makea call like this
+				//and attach the buffer to the actorsystem, then go off of SV_InstanceID as an index
+				//into each model matrix pushed into the shader. eg.
+				// cbuffer ActorMatrices : register(b4)
+				// { float4x4 matrices[NUM_ACTORS_TO_INSTANCE]; }
+				// or you can opt for a dynamic vertex buffer, dunno.
+				//gRenderSystem.CreateConstantBuffer(byteWidth * actors.size(), actorModelMatrices.data(), this);
 			}
 
 			//TODO: index buffers
