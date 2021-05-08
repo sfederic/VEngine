@@ -16,10 +16,16 @@ cbuffer cbSkiningData : register(b2)
 	float4x4 boneTransforms[96];
 };
 
-cbuffer cbInstanceData : register(b3)
+struct InstanceData
 {
-	float4x4 modelMatrices[512];
+	float4x4 modelMatrix;
 };
+
+StructuredBuffer<InstanceData> modelMatrices : register(t3);
+/*cbuffer cbInstanceData : register(b3)
+{
+	float4x4 modelMatrices[10000];
+};*/
 
 struct VS_IN
 {

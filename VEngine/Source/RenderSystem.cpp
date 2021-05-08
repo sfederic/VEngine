@@ -276,14 +276,6 @@ void RenderSystem::CreateVertexBuffer(UINT size, const void* data, ActorSystem* 
 	system->SetVertexBuffer(buffer);
 }
 
-//For creating a cbuffer on an actorsystem holding all model matrices for instancing
-void RenderSystem::CreateConstantInstanceBuffer(UINT size, const void* data, ActorSystem* system)
-{
-	Buffer* buffer = new Buffer;
-	buffer->data = CreateDefaultBuffer(size, D3D11_BIND_CONSTANT_BUFFER, data);
-	system->SetInstanceBuffer(buffer);
-}
-
 IDXGISwapChain3* RenderSystem::GetSwapchain()
 {
 	return swapchain;
@@ -370,6 +362,8 @@ void RenderSystem::RenderActorSystem(World* world)
 			//context->OMSetBlendState(blendStateAlphaToCoverage, blendState, 0xFFFFFFFF);
 		}
 
+
+		//Set shaders
 		auto shader = gShaderFactory.shaderMap.find(actorSystem->shaderName);
 
 		if (shader == gShaderFactory.shaderMap.end())
@@ -382,6 +376,7 @@ void RenderSystem::RenderActorSystem(World* world)
 		context->VSSetShader(shader->second->vertexShader, nullptr, 0);
 		context->PSSetShader(shader->second->pixelShader, nullptr, 0);
 
+		//Set all state
 		ID3D11SamplerState* samplers[] =
 		{
 			actorSystem->GetSamplerState()->data
@@ -393,6 +388,7 @@ void RenderSystem::RenderActorSystem(World* world)
 			actorSystem->GetShaderView()->data
 		};
 		context->PSSetShaderResources(0, _countof(shaderResourceViews), shaderResourceViews);
+		context->VSSetShaderResources(3, 1, &actorSystem->instancedDataSrv);
 
 		ID3D11Buffer* vertexBuffers[]
 		{
@@ -400,6 +396,7 @@ void RenderSystem::RenderActorSystem(World* world)
 		};
 		context->IASetVertexBuffers(0, _countof(vertexBuffers), vertexBuffers, &strides, &offsets);
 		
+
 		//Constant buffer register values
 		const int cbMatrixRegister = 0;
 		const int cbMaterialRegister = 1;
@@ -407,8 +404,8 @@ void RenderSystem::RenderActorSystem(World* world)
 		std::vector<InstanceData> instanceData;
 		instanceData.reserve(actorSystem->actors.size());
 
-		PROFILE_START
 
+		//Populate instance data
 		for (int actorIndex = 0; actorIndex < actorSystem->actors.size(); actorIndex++)
 		{
 			InstanceData data;
@@ -416,22 +413,16 @@ void RenderSystem::RenderActorSystem(World* world)
 			instanceData.push_back(data);
 		}
 
+		//matrix cbuffer 
 		matrices.view = GetActiveCamera()->view;
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
-		if (actorSystem->bInstancingActors)
-		{
-			context->UpdateSubresource(actorSystem->GetInstanceBuffer()->data, 0, nullptr, instanceData.data(), 0, 0);
+		//update structred buffer holding instance data
+		context->UpdateSubresource(actorSystem->instancedDataStructuredBuffer, 0, nullptr, instanceData.data(), 0, 0);
 
-			context->VSSetConstantBuffers(3, 1, &actorSystem->GetInstanceBuffer()->data);
-			context->PSSetConstantBuffers(3, 1, &actorSystem->GetInstanceBuffer()->data);
-
-			context->DrawInstanced(actorSystem->modelData.verts.size(),
-				actorSystem->actors.size(), 0, 0);
-		}
-
-		PROFILE_END
+		context->DrawInstanced(actorSystem->modelData.verts.size(),
+			actorSystem->actors.size(), 0, 0);
 	}
 }
 
@@ -645,6 +636,24 @@ ID3D11Buffer* RenderSystem::CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, 
 	D3D11_BUFFER_DESC desc = {};
 	desc.ByteWidth = byteWidth;
 	desc.BindFlags = bindFlags;
+
+	D3D11_SUBRESOURCE_DATA data = {};
+	data.pSysMem = initData;
+
+	HR(device->CreateBuffer(&desc, &data, &buffer));
+
+	return buffer;
+}
+
+ID3D11Buffer* RenderSystem::CreateStructuredBuffer(UINT byteWidth, UINT byteStride, const void* initData)
+{
+	ID3D11Buffer* buffer;
+
+	D3D11_BUFFER_DESC desc = {};
+	desc.ByteWidth = byteWidth;
+	desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+	desc.StructureByteStride = byteStride;
+	desc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
 
 	D3D11_SUBRESOURCE_DATA data = {};
 	data.pSysMem = initData;

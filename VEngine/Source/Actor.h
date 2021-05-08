@@ -179,24 +179,27 @@ public:
 
 			gRenderSystem.CreateVertexBuffer(byteWidth, modelData.verts.data(), this);
 
-			if (bInstancingActors)
+			std::vector<XMMATRIX> actorModelMatrices;
+			actorModelMatrices.reserve(actors.size());
+			for (int i = 0; i < actors.size(); i++)
 			{
-				std::vector<XMMATRIX> actorModelMatrices;
-				actorModelMatrices.reserve(numActorsToDrawOnInstance);
-				for (int i = 0; i < actors.size(); i++)
+				if (i < actors.size())
 				{
-					if (i < actors.size())
-					{
-						actorModelMatrices.push_back(actors[i]->GetTransformationMatrix());
-					}
-					else
-					{
-						actorModelMatrices.push_back(XMMatrixIdentity());
-					}
+					actorModelMatrices.push_back(actors[i]->GetTransformationMatrix());
 				}
-
-				gRenderSystem.CreateConstantInstanceBuffer(sizeof(InstanceData) * actors.size(), actorModelMatrices.data(), this);
+				else
+				{
+					actorModelMatrices.push_back(XMMatrixIdentity());
+				}
 			}
+
+			//Setup structured buffer
+			instancedDataStructuredBuffer = gRenderSystem.CreateStructuredBuffer(sizeof(InstanceData) * actors.size(), sizeof(InstanceData), actorModelMatrices.data());
+			D3D11_SHADER_RESOURCE_VIEW_DESC sbDesc = {};
+			sbDesc.Format = DXGI_FORMAT_UNKNOWN;
+			sbDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFEREX;
+			sbDesc.BufferEx.NumElements = actors.size();
+			HR(gRenderSystem.device->CreateShaderResourceView(instancedDataStructuredBuffer, &sbDesc, &instancedDataSrv));
 
 			//TODO: index buffers
 			//UINT indicesByteWidth = modelData.indices.size() * sizeof(uint16_t);
@@ -246,6 +249,10 @@ public:
 	void Cleanup();
 	void ResetActorNames();
 
+	//Structured buffer stuff
+	ID3D11Buffer* instancedDataStructuredBuffer;
+	ID3D11ShaderResourceView* instancedDataSrv;
+
 	template <class ActorType>
 	bool IsA()
 	{
@@ -287,7 +294,4 @@ public:
 	bool bHasSkeletalAnimation;
 	bool bRender = true;
 	bool bHasBeenInitialised = false;
-
-	bool bInstancingActors = false; //bool for setting system to use instancing in renderer
-	uint32_t numActorsToDrawOnInstance;
 };

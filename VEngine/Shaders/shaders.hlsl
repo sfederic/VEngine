@@ -4,7 +4,7 @@ VS_OUT VSMain(VS_IN i)
 {
 	VS_OUT o;
 
-	float4x4 world = modelMatrices[i.instanceID];
+	float4x4 world = modelMatrices[i.instanceID].modelMatrix;
 	float4x4 viewProj = mul(proj, view);
 	float4x4 modelViewProj = mul(viewProj, world);
 

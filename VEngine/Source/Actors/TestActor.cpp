@@ -13,11 +13,9 @@ TestActorSystem::TestActorSystem()
 	shaderName = L"shaders.hlsl";
 	textureName = L"texture2.jpg";
 	modelName = "cube.fbx";
-	name = L"testactor";
+	name = L"TestActorSystem";
 
 	sizeofActor = sizeof(TestActor);
-
-	bInstancingActors = true;
 
 	ActorSystemFactory::Register<TestActorSystem>(this);
 }
