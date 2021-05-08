@@ -21,6 +21,7 @@
 #include <string.h>
 #include "DebugBox.h"
 #include "DebugSphere.h"
+#include "Profiler.h"
 
 UINT strides = sizeof(Vertex);
 UINT offsets = 0;
@@ -415,9 +416,14 @@ void RenderSystem::RenderActorSystem(World* world)
 		const int cbMatrixRegister = 0;
 		const int cbMaterialRegister = 1;
 
+		std::vector<InstanceData> instanceData;
+		instanceData.reserve(actorSystem->actors.size());
+
+		gProfiler.Start();
+
 		for (int actorIndex = 0; actorIndex < actorSystem->actors.size(); actorIndex++)
 		{
-			if (actorSystem->bRender)
+			/*if (actorSystem->bRender)
 			{
 				if (actorSystem->actors[actorIndex]->bRender)
 				{
@@ -448,20 +454,31 @@ void RenderSystem::RenderActorSystem(World* world)
 					context->UpdateSubresource(cbMaterial, 0, nullptr, &material, 0, 0);
 					context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 
-					if (actorSystem->bInstancingActors)
-					{
-						context->VSSetConstantBuffers(3, 1, &actorSystem->GetInstanceBuffer()->data);
-						context->PSSetConstantBuffers(3, 1, &actorSystem->GetInstanceBuffer()->data);
-						context->DrawInstanced(actorSystem->modelData.verts.size(),
-							actorSystem->numActorsToDrawOnInstance, 0, 0);
-
-						break; //Exit the for loop (DrawInstanced() is like iteration over 1 actor)
-					}
-
 					context->Draw(actorSystem->modelData.verts.size(), 0);
 				}
-			}
+			}*/
+
+			InstanceData data;
+			data.model = actorSystem->actors[actorIndex]->GetTransformationMatrix();
+			instanceData.push_back(data);
 		}
+
+		matrices.view = GetActiveCamera()->view;
+		context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
+		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+
+		if (actorSystem->bInstancingActors)
+		{
+			context->UpdateSubresource(actorSystem->GetInstanceBuffer()->data, 0, nullptr, instanceData.data(), 0, 0);
+
+			context->VSSetConstantBuffers(3, 1, &actorSystem->GetInstanceBuffer()->data);
+			context->PSSetConstantBuffers(3, 1, &actorSystem->GetInstanceBuffer()->data);
+
+			context->DrawInstanced(actorSystem->modelData.verts.size(),
+				actorSystem->actors.size(), 0, 0);
+		}
+
+		gProfiler.End(L"RenderActorsystem");
 	}
 }
 

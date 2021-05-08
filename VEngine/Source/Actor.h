@@ -181,27 +181,21 @@ public:
 
 			if (bInstancingActors)
 			{
-				numActorsToDrawOnInstance = 10;
-
-				std::vector<XMFLOAT4X4> actorModelMatrices;
+				std::vector<XMMATRIX> actorModelMatrices;
 				actorModelMatrices.reserve(numActorsToDrawOnInstance);
-				for (int i = 0; i < numActorsToDrawOnInstance; i++)
+				for (int i = 0; i < actors.size(); i++)
 				{
-					XMFLOAT4X4 modelMatrix;
-
 					if (i < actors.size())
 					{
-						XMStoreFloat4x4(&modelMatrix, actors[i]->GetTransformationMatrix());
-						actorModelMatrices.push_back(modelMatrix);
+						actorModelMatrices.push_back(actors[i]->GetTransformationMatrix());
 					}
 					else
 					{
-						XMStoreFloat4x4(&modelMatrix, XMMatrixIdentity());
-						actorModelMatrices.push_back(modelMatrix);
+						actorModelMatrices.push_back(XMMatrixIdentity());
 					}
 				}
 
-				gRenderSystem.CreateConstantInstanceBuffer(sizeof(XMFLOAT4X4) * numActorsToDrawOnInstance, actorModelMatrices.data(), this);
+				gRenderSystem.CreateConstantInstanceBuffer(sizeof(InstanceData) * actors.size(), actorModelMatrices.data(), this);
 			}
 
 			//TODO: index buffers

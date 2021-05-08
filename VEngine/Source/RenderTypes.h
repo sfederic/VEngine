@@ -20,6 +20,11 @@ struct Matrices
 	XMMATRIX mvp;
 };
 
+struct InstanceData
+{
+	XMMATRIX model;
+};
+
 struct Material
 {
 	XMFLOAT4 baseColour;

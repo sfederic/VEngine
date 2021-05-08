@@ -6,7 +6,7 @@ Profiler gProfiler;
 
 void Profiler::Init()
 {
-	
+
 }
 
 void Profiler::Clean()

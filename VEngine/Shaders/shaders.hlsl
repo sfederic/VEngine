@@ -3,10 +3,14 @@
 VS_OUT VSMain(VS_IN i)
 {
 	VS_OUT o;
-	float3 pos = mul(modelMatrices[i.instanceID], float4(i.pos, 1.0f)).xyz;
-	o.pos = mul(mvp, float4(pos, 1.0f));
+
+	float4x4 world = modelMatrices[i.instanceID];
+	float4x4 viewProj = mul(proj, view);
+	float4x4 modelViewProj = mul(viewProj, world);
+
+	o.pos = mul(modelViewProj, float4(i.pos, 1.0f));
 	o.uv = i.uv;
-	o.normal = mul((float3x3)model, i.normal);
+	o.normal = mul((float3x3)world, i.normal);
 
 	return o;
 }

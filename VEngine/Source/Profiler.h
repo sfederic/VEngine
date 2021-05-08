@@ -9,6 +9,7 @@ struct TimeFrame
 	TimeFrame(__int64 _startTime)
 	{
 		startTime = _startTime;
+		memset(elapsedTimes, 0.0, sizeof(double) * 60);
 	}
 
 	void SetElapsedTime();
