@@ -1,6 +1,7 @@
 #pragma once
 
 #include <qdockwidget.h>
+#include <unordered_map>
 
 class World;
 class ActorSystem;
@@ -20,4 +21,8 @@ public:
 
 	PropertiesWidget* propWidget;
 	ActorSystem* selectedActorSystem;
+	
+	//This map holds all property widgets an actor can make
+	//and caches it so were' not remaking prop widgets over and over.
+	std::unordered_map<ActorSystem*, QWidget*> actorPropWidgetMap;
 };
