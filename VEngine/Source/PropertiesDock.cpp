@@ -12,13 +12,19 @@
 #include <qlabel.h>
 #include "ActorSystemFactory.h"
 #include <typeindex>
+#include <qscrollarea.h>
 
 PropertiesDock::PropertiesDock(const char* title) : QDockWidget(title)
 {
     setMinimumWidth(400);
 
     propWidget = new PropertiesWidget();
-    setWidget(propWidget);
+
+    auto scrollArea = new QScrollArea();
+    scrollArea->setWidgetResizable(true);
+    scrollArea->setWidget(propWidget);
+
+    setWidget(scrollArea);
 }
 
 void PropertiesDock::enterEvent(QEvent* event)
@@ -53,7 +59,7 @@ void PropertiesDock::DisplayActorSystemProperties(Actor* actor)
 
     //TODO: Better to do something like a grid here (two columns) so you can forloop over the 
     //eventual actorsystemfactory properties per actorsystem.
-    QWidget* widget = new QWidget();
+    //QWidget* actorPropsWidget = new QWidget();
     auto grid = new QGridLayout();
 
     int currentGridRow = 0;
@@ -93,6 +99,5 @@ void PropertiesDock::DisplayActorSystemProperties(Actor* actor)
         currentGridRow++;
     }
 
-    widget->setLayout(grid);
-    setWidget(widget);
+    propWidget->entireVLayout->addLayout(grid);
 }

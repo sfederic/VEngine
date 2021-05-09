@@ -12,7 +12,6 @@
 #include "EditorSystem.h"
 #include "ActorSystemFactory.h"
 #include "Profiler.h"
-#include "WorldEditor.h"
 
 DebugMenu gDebugMenu;
 
@@ -62,38 +61,6 @@ void DebugMenu::Tick(World* world, float deltaTime)
 			ImGui::Text(timeFrame.first.c_str());
 			double time = timeFrame.second->GetAverageTime();
 			ImGui::Text(std::to_string(time).c_str());
-		}
-
-		ImGui::End();
-	}
-
-	if (gWorldEditor.pickedActor)
-	{
-		ImGui::Begin("Actor Properties");
-		ImGui::SetWindowPos(ImVec2(gCoreSystem.windowWidth - 300, 10));
-		ImGui::SetWindowSize(ImVec2(300, gCoreSystem.windowHeight - 10));
-	
-		for (auto& actorProperty : gWorldEditor.pickedActor->GetProperties().propertyMap)
-		{
-			auto propertyInfo = actorProperty.first;
-			auto propertyData = actorProperty.second;
-
-			if (propertyInfo == typeid(bool))
-			{
-				ImGui::Checkbox(propertyData.first, (bool*)propertyData.second);
-			}
-			else if (propertyInfo == typeid(int))
-			{
-				ImGui::InputInt(propertyData.first, (int*)propertyData.second);
-			}
-			else if (propertyInfo == typeid(float))
-			{
-				ImGui::InputFloat(propertyData.first, (float*)propertyData.second);
-			}
-			else if (propertyInfo == typeid(XMVECTOR))
-			{
-				ImGui::InputFloat3(propertyData.first, (float*)propertyData.second);
-			}
 		}
 
 		ImGui::End();

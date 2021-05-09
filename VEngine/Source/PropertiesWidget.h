@@ -5,6 +5,7 @@
 
 class QLineEdit;
 class ActorSystem;
+class QVBoxLayout;
 
 class PropertiesWidget : public QWidget
 {
@@ -27,6 +28,8 @@ public:
     QLineEdit* actorSystemShaderName;
     QLineEdit* actorSystemTextureName;
     QLineEdit* actorSystemModelName;
+
+    QVBoxLayout* entireVLayout;
 
     ActorSystem* selectedActorSystem;
 

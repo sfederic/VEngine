@@ -12,8 +12,9 @@
 #include <QLineEdit>
 #include "RenderViewWidget.h"
 #include "MathHelpers.h"
-
+#include <qscrollarea.h>
 #include "PropertyWidgets/BoolWidget.h"
+#include <qscrollarea.h>
 
 PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
 {
@@ -22,8 +23,8 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
     //Position
     QLabel* posLabel = new QLabel("Position");
 
+    //QDoubleSpinBox::editingFinished calls its signal function twice for some reason.
     posEditX = new TransformEditWidget(0.f, this);
-    //Note: QDoubleSpinBox::editingFinished calls its calling function twice for some reason.
     connect(posEditX, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorPosition);
     posEditY = new TransformEditWidget(0.f, this);
     connect(posEditY, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorPosition);
@@ -69,7 +70,6 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
     scaleEditZ = new TransformEditWidget(0.0f, this);
     connect(scaleEditZ, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorScale);
 
-
     QLabel* scaleLabel = new QLabel("Scale");
 
     grid->addWidget(scaleLabel, 3, 0);
@@ -84,6 +84,8 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
     vLayoutTop->addLayout(grid);
 
     //Actor/ActorSystem Properties
+    //Since every actor is going to have these, make this one widget and then
+    //throw any other inherited actor properties below this.
     QGridLayout* actorSystemDetailsGrid = new QGridLayout();
 
     QGridLayout* actorDetailsGrid = new QGridLayout();
@@ -132,7 +134,10 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
     vLayoutTop->addLayout(actorDetailsGrid);
     vLayoutTop->addLayout(actorSystemDetailsGrid);
 
-    setLayout(vLayoutTop);
+    entireVLayout = new QVBoxLayout();
+    entireVLayout->addLayout(vLayoutTop);
+
+    setLayout(entireVLayout);
 }
 
 void PropertiesWidget::SetActorPosition()

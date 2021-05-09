@@ -6,6 +6,7 @@ class World;
 class ActorSystem;
 class Actor;
 class PropertiesWidget;
+class QVBoxLayout;
 
 class PropertiesDock : public QDockWidget
 {
@@ -18,6 +19,5 @@ public:
 	void DisplayActorSystemProperties(Actor* actor);
 
 	PropertiesWidget* propWidget;
-
 	ActorSystem* selectedActorSystem;
 };
