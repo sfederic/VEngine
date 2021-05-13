@@ -41,9 +41,6 @@
     <ClCompile Include="Source\Actor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Array.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\AssetDock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -251,9 +248,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Actor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Array.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\AssetDock.h">

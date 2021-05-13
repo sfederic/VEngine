@@ -130,7 +130,6 @@
     <ClCompile Include="Source\ToolkitEditorSystem.cpp" />
     <ClCompile Include="Source\Actor.cpp" />
     <ClCompile Include="Source\AnimationStructures.cpp" />
-    <ClCompile Include="Source\Array.cpp" />
     <ClCompile Include="Source\AssetDock.cpp" />
     <ClCompile Include="Source\Audio.cpp" />
     <ClCompile Include="Source\AudioSystem.cpp" />
@@ -206,7 +205,6 @@
     <ClInclude Include="Source\ToolkitEditorSystem.h" />
     <ClInclude Include="Source\Actor.h" />
     <ClInclude Include="Source\AnimationStructures.h" />
-    <ClInclude Include="Source\Array.h" />
     <ClInclude Include="Source\AssetDock.h" />
     <ClInclude Include="Source\Audio.h" />
     <ClInclude Include="Source\AudioSystem.h" />
