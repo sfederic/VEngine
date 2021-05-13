@@ -11,31 +11,6 @@ std::unordered_map<std::type_index, ActorSystem*>* ActorSystemFactory::actorType
 //The currently selected actor system to spawn actors from.
 ActorSystem* currentActiveActorSystem;
 
-ActorSystemFactory::ActorSystemFactory()
-{
-
-}
-
-void ActorSystemFactory::RegisterType(int type)
-{
-    
-}
-
-void ActorSystemFactory::RegisterType(float type)
-{
-
-}
-
-void ActorSystemFactory::RegisterType(DirectX::XMVECTOR type)
-{
-
-}
-
-void ActorSystemFactory::RegisterType(bool type)
-{
-
-}
-
 size_t ActorSystemFactory::GetActorSystemID(ActorSystem* actorSystem)
 {
 	auto ID = systemToIDMap->find(actorSystem);

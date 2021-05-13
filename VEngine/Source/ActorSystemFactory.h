@@ -47,11 +47,6 @@ public:
 		nameToSystemMap->insert(std::pair(actorSystem->name, actorSystem));
 	}
 
-	static void RegisterType(int type);
-	static void RegisterType(float type);
-	static void RegisterType(DirectX::XMVECTOR type);
-	static void RegisterType(bool type);
-
 	static size_t GetActorSystemID(ActorSystem* actorSystem);
 	static ActorSystem* GetActorSystem(size_t id);
 	static ActorSystem* GetActorSystem(std::wstring name);
