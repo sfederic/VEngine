@@ -1,7 +1,6 @@
 #pragma once
 
 #include <unordered_map>
-#include <DirectXMath.h>
 #include <typeindex>
 
 class ActorSystem;
