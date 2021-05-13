@@ -55,6 +55,7 @@ public:
 	static size_t GetActorSystemID(ActorSystem* actorSystem);
 	static ActorSystem* GetActorSystem(size_t id);
 	static ActorSystem* GetActorSystem(std::wstring name);
+	static ActorSystem* GetActorSystem(std::type_index actorType);
 	static void GetAllActorSystems(std::vector<ActorSystem*>& actorSystems);
 	static void SetCurrentActiveActorSystem(ActorSystem* actorSystem);
 	static ActorSystem* GetCurrentActiveActorSystem();

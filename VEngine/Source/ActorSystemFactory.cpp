@@ -54,6 +54,17 @@ ActorSystem* ActorSystemFactory::GetActorSystem(std::wstring name)
 	return actorSystem->second;
 }
 
+ActorSystem* ActorSystemFactory::GetActorSystem(std::type_index actorType)
+{
+    auto actorSystemIt = actorTypeToSystemMap->find(typeid(actorType));
+    if (actorSystemIt != actorTypeToSystemMap->end())
+    {
+        return actorSystemIt->second;
+    }
+
+    return nullptr;
+}
+
 void ActorSystemFactory::GetAllActorSystems(std::vector<ActorSystem*>& actorSystems)
 {
 	for (auto& as : *IDToSystemMap)
