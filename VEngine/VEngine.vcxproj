@@ -185,7 +185,6 @@
     <ClCompile Include="Source\Transform.cpp" />
     <ClCompile Include="Source\TransformGizmo.cpp" />
     <ClCompile Include="Source\ActorSystemFactory.cpp" />
-    <ClCompile Include="Source\Actors\TestSpawnActor.cpp" />
     <ClCompile Include="Source\PropertyWidgets\VectorWidget.cpp" />
     <QtRcc Include="EditorMainWindow.qrc" />
     <QtUic Include="EditorMainWindow.ui" />
@@ -264,7 +263,6 @@
     <ClInclude Include="Source\Transform.h" />
     <ClInclude Include="Source\TransformGizmo.h" />
     <ClInclude Include="Source\ActorSystemFactory.h" />
-    <ClInclude Include="Source\Actors\TestSpawnActor.h" />
     <ClInclude Include="Source\PropertyWidgets\VectorWidget.h" />
   </ItemGroup>
   <ItemGroup>
