@@ -1,8 +1,5 @@
 #include "Actor.h"
 #include "RenderSystem.h"
-#include "Array.h"
-#include "Debug.h"
-#include "Obj.h"
 #include "MathHelpers.h"
 #include "Buffer.h"
 #include "RasterizerState.h"

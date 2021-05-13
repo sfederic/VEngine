@@ -134,7 +134,6 @@
     <ClCompile Include="Source\Audio.cpp" />
     <ClCompile Include="Source\AudioSystem.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
-    <ClCompile Include="Source\Component.cpp" />
     <ClCompile Include="Source\Console.cpp" />
     <ClCompile Include="Source\ConsoleDock.cpp" />
     <ClCompile Include="Source\CoreSystem.cpp" />
@@ -208,7 +207,6 @@
     <ClInclude Include="Source\Audio.h" />
     <ClInclude Include="Source\AudioSystem.h" />
     <ClInclude Include="Source\Camera.h" />
-    <ClInclude Include="Source\Component.h" />
     <ClInclude Include="Source\Console.h" />
     <ClInclude Include="Source\ConsoleDock.h" />
     <ClInclude Include="Source\CoreSystem.h" />
