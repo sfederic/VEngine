@@ -133,7 +133,6 @@
     <ClCompile Include="Source\AssetDock.cpp" />
     <ClCompile Include="Source\Audio.cpp" />
     <ClCompile Include="Source\AudioSystem.cpp" />
-    <ClCompile Include="Source\AxisActor.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\Component.cpp" />
     <ClCompile Include="Source\Console.cpp" />
@@ -208,7 +207,6 @@
     <ClInclude Include="Source\AssetDock.h" />
     <ClInclude Include="Source\Audio.h" />
     <ClInclude Include="Source\AudioSystem.h" />
-    <ClInclude Include="Source\AxisActor.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Component.h" />
     <ClInclude Include="Source\Console.h" />
