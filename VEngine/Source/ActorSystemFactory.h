@@ -2,6 +2,7 @@
 
 #include <unordered_map>
 #include <DirectXMath.h>
+#include <typeindex>
 
 class ActorSystem;
 
@@ -35,6 +36,10 @@ public:
 		{
 			nameToSystemMap = new std::unordered_map<std::wstring, ActorSystem*>;
 		}
+		if (actorTypeToSystemMap == nullptr)
+		{
+			actorTypeToSystemMap = new std::unordered_map<std::type_index, ActorSystem*>;
+		}
 
 		size_t id = typeid(ActorSystemType).hash_code();
 		IDToSystemMap->insert(std::pair(id, actorSystem));
@@ -58,4 +63,5 @@ public:
 	static std::unordered_map<size_t, ActorSystem*> *IDToSystemMap;
 	static std::unordered_map<ActorSystem*, size_t> *systemToIDMap;
 	static std::unordered_map<std::wstring, ActorSystem*>* nameToSystemMap;
+	static std::unordered_map<std::type_index, ActorSystem*>* actorTypeToSystemMap;
 };

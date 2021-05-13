@@ -6,6 +6,7 @@
 std::unordered_map<size_t, ActorSystem*> *ActorSystemFactory::IDToSystemMap;
 std::unordered_map<ActorSystem*, size_t> *ActorSystemFactory::systemToIDMap;
 std::unordered_map<std::wstring, ActorSystem*> *ActorSystemFactory::nameToSystemMap;
+std::unordered_map<std::type_index, ActorSystem*>* ActorSystemFactory::actorTypeToSystemMap;
 
 //The currently selected actor system to spawn actors from.
 ActorSystem* currentActiveActorSystem;
