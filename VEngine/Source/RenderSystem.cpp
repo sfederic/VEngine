@@ -419,7 +419,10 @@ void RenderSystem::RenderActorSystem(World* world)
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 		//update structred buffer holding instance data
-		context->UpdateSubresource(actorSystem->instancedDataStructuredBuffer, 0, nullptr, instanceData.data(), 0, 0);
+		if (!instanceData.empty())
+		{
+			context->UpdateSubresource(actorSystem->instancedDataStructuredBuffer, 0, nullptr, instanceData.data(), 0, 0);
+		}
 
 		context->DrawInstanced(actorSystem->modelData.verts.size(),
 			actorSystem->actors.size(), 0, 0);
