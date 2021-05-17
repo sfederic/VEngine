@@ -1,16 +1,20 @@
 #pragma once
 
 #include <unordered_map>
+#include <typeindex>
+#include <optional>
 
 struct Properties
 {
 	template <typename T>
 	void Register(const char* name, T* value)
 	{
-		propertyMap[typeid(T)] = std::make_pair(name, (void*)&value);
+		dataMap[name] = &value;
+		typeMap[name] = typeid(T);
 	}
 
-	std::unordered_map<std::type_index, std::pair<const char*, void*>> propertyMap;
+	std::unordered_map<const char*, void*> dataMap;
+	std::unordered_map<const char*, std::optional<std::type_index>> typeMap;
 };
 
 template <typename T>
