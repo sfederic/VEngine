@@ -3,6 +3,8 @@
 #include <unordered_map>
 #include <typeindex>
 #include <optional>
+#include <assert.h>
+#include <string>
 
 struct Properties
 {
@@ -26,50 +28,44 @@ struct Properties
 	}
 
 	std::unordered_map<const char*, void*> dataMap;
+	//There's a lot of fucking around with type_index if std::optional isn't here.
 	std::unordered_map<const char*, std::optional<std::type_index>> typeMap;
 };
 
 template <typename T>
-inline void put(const char* name, T value, FILE* file)
+inline void Serialise(const char* name, T value, FILE* file)
 {
 	fprintf(file "%s : %s\n", name, std::to_string(value).c_str());
 }
 
-inline void put(const char* name, const char* value, FILE* file)
+inline void Serialise(const char* name, const char* value, FILE* file)
 {
 	fprintf(file, "%s : %s\n", name, value);
 }
 
 template <typename T>
-inline void get(const char* name, T* value, Properties& props, FILE* file)
+inline void Deserialise(const char* name, T* value, Properties& props, FILE* file)
 {
 	char strBuffer[256];
 	fgets(strBuffer, 256, file);
 
-	auto res = props.propertyMap.find()
-	if (res != saveMap.end())
-	{
-
-	}
-
-	if (str == nullptr)
-	{
-	}
-
 	char* context = nullptr;
 	auto tok = strtok_s(strBuffer, ":", &context);
-
 	assert(context);
-	if (typeid(T) == typeid(float)) {
-		*value = std::stof(context);
-	}
-	else if (typeid(T) == typeid(int)) {
-		*value = std::stoi(context);
-	}
-	else if (typeid(T) == typeid(bool)) {
-		*value = std::stoi(context);
+
+	void* data = props.GetData(context);
+	if (data)
+	{
+		auto& type = props.GetType(dataMapIt.first);
+
+		if (type == typeid(float)) {
+			*value = std::stof(context);
+		}
+		else if (type == typeid(int)) {
+			*value = std::stoi(context);
+		}
+		else if (type == typeid(bool)) {
+			*value = std::stoi(context);
+		}
 	}
 }
-
-#define PUT(value) put(#value, value);
-#define GET(value) get(#value, &value);
