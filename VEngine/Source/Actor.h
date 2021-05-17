@@ -13,6 +13,8 @@
 #include "RenderSystem.h"
 #include <typeindex>
 #include <map>
+#include <unordered_map>
+#include "Serialise.h"
 
 using namespace DirectX;
 
@@ -24,17 +26,6 @@ class ShaderResourceView;
 class BlendState;
 class RenderSystem;
 
-struct Properties
-{
-	template <typename T>
-	void Register(const char* name, T* value)
-	{
-		propertyMap[typeid(*value)] = std::make_pair(name, (void*)&value);
-	}
-
-	std::unordered_map<std::type_index, std::pair<const char*, void*>> propertyMap;
-};
-
 class Actor
 {
 public:
@@ -44,11 +35,24 @@ public:
 		
 	}
 
-	//Returns all the hand-defined properties in this function
+	//Returns all defined properties from this actor
 	virtual Properties GetProperties() 
 	{
 		Properties properties;
 		return properties;
+	}
+
+	virtual void Deserialise() 
+	{
+		FILE* file;
+		//TODO: I'm thinking do save files on a per actorsystem basis
+		fopen_s(&file, "Actor.sav", "r");
+
+		auto saveProps = GetProperties();
+		for (auto& saveProp : saveProps.propertyMap)
+		{
+			get(saveProp.second.first, saveProp.second.second, saveProp, file);
+		}
 	}
 
 	template <class ActorType>
@@ -131,6 +135,8 @@ public:
 	{
 		pso.Create();
 	}
+
+	virtual void Serialise(FILE* file);
 
 	virtual void Tick(float deltaTime) = 0;
 

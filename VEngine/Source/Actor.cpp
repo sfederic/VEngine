@@ -14,6 +14,15 @@ Actor::Actor()
 	wmemset(name, ' ', 64);
 }
 
+void ActorSystem::Serialise(FILE* file)
+{
+	//Save transforms for every actor
+	for (int i = 0; i < actors.size(); i++)
+	{
+		fwrite(&actors[i]->transform, sizeof(Transform), 1, file);
+	}
+}
+
 //POSITION FUNCTIONS
 XMVECTOR Actor::GetPositionVector()
 {

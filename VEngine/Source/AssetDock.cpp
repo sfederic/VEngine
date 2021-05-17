@@ -69,10 +69,10 @@ void AssetDock::AssetItemClicked()
     //Do whatever based on extension.
     {
         auto fileExtension = std::filesystem::path(fullPath.toStdString()).extension();
-        auto extension = (const char*)fileExtension.c_str();
+        auto extension = fileExtension.c_str();
 
         //Load world
-        if (strcmp(extension, ".sav") == 0)
+        if (std::wcscmp(extension, L".sav") == 0)
         {
             gFileSystem.LoadWorld(fullPath.toStdString().c_str());
             return;

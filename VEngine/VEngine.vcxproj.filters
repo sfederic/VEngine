@@ -448,6 +448,9 @@
     <ClInclude Include="Source\PropertyWidgets\VectorWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Serialise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\libfbxsdk.dll" />

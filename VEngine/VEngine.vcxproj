@@ -200,6 +200,7 @@
     <ClInclude Include="Source\GlobalDefines.h" />
     <ClInclude Include="Source\NativeEditorSystem.h" />
     <ClInclude Include="Source\IEditorSystem.h" />
+    <ClInclude Include="Source\Serialise.h" />
     <ClInclude Include="Source\ToolkitEditorSystem.h" />
     <ClInclude Include="Source\Actor.h" />
     <ClInclude Include="Source\AnimationStructures.h" />
