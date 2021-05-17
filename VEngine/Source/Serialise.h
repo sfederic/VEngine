@@ -47,7 +47,10 @@ template <typename T>
 inline void Deserialise(const char* name, T* value, Properties& props, FILE* file)
 {
 	char strBuffer[256];
-	fgets(strBuffer, 256, file);
+	if (fgets(strBuffer, 256, file) == EOF)
+	{
+		return;
+	}
 
 	char* context = nullptr;
 	auto tok = strtok_s(strBuffer, ":", &context);
