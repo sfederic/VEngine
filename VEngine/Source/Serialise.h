@@ -13,6 +13,18 @@ struct Properties
 		typeMap[name] = typeid(T);
 	}
 
+	void* GetData(const char* dataName)
+	{
+		auto dataMapIt = dataMap.find(dataName);
+		return dataMapIt->second;
+	}
+
+	std::type_index GetType(const char* typeName)
+	{
+		auto typeMapIt = typeMap.find(typeName);
+		return typeMapIt->second.value();
+	}
+
 	std::unordered_map<const char*, void*> dataMap;
 	std::unordered_map<const char*, std::optional<std::type_index>> typeMap;
 };
