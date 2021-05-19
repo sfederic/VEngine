@@ -5,70 +5,122 @@
 #include <optional>
 #include <assert.h>
 #include <string>
+#include <fstream>
 
+//TODO: for this serialisation code to work, actorsystem needs to be updated with something similar to
+/*void SerialiseAllActors(Serialiser& s, std::ostream& os)
+{
+	for (auto& actor : actors)
+	{
+		s.Serialise(actor, os);
+		os << "ret\n";
+	}
+}
+
+void DeserialiseAllActors(Serialiser& s, FILE* file)
+{
+	for (auto& actor : actors)
+	{
+		s.Deserialise(actor, file);
+	}
+}*/
+
+//Container for storing variable data and variable types against a name on registration.
+//Used with Actors during serialisation and creating property widgets.
+//Properties are created in GetProps() function blocks so that the maps can be cascaded down
+//actor inheritence trees, meaning you have to define Properties by hand in that same function, then
+//call it when needed. Maybe look into some way to cache it. Performance wasn't a huge issue in testing.
 struct Properties
 {
 	template <typename T>
-	void Register(const char* name, T* value)
+	void Register(const std::string& name, T* data)
 	{
-		dataMap[name] = &value;
+		dataMap[name] = data;
 		typeMap[name] = typeid(T);
 	}
 
-	void* GetData(const char* dataName)
+	void* GetData(const std::string& dataName)
 	{
-		auto dataMapIt = dataMap.find(dataName);
-		return dataMapIt->second;
+		auto& dataMapIt = dataMap.find(dataName);
+		if(dataMapIt != dataMap.end())
+		{
+			return dataMapIt->second;
+		}
+
+		return nullptr; //Want to be able to fail finding keys when serialising.
 	}
 
-	std::type_index GetType(const char* typeName)
+	std::type_index GetType(const std::string& typeName)
 	{
-		auto typeMapIt = typeMap.find(typeName);
-		return typeMapIt->second.value();
+		auto& typeMapIt = typeMap.find(typeName);
+		return typeMapIt->second.value(); //Type will usually be grabbed after data, failing here acts as a check.
 	}
 
-	std::unordered_map<const char*, void*> dataMap;
-	//There's a lot of fucking around with type_index if std::optional isn't here.
-	std::unordered_map<const char*, std::optional<std::type_index>> typeMap;
+	std::unordered_map<std::string, void*> dataMap;
+	std::unordered_map<std::string, std::optional<std::type_index>> typeMap;
 };
 
-template <typename T>
-inline void Serialise(const char* name, T value, FILE* file)
+//TODO: fix these two functions up. They're a conjoined mess of C and C++ I/O libs
+struct Serialiser
 {
-	fprintf(file "%s : %s\n", name, std::to_string(value).c_str());
-}
-
-inline void Serialise(const char* name, const char* value, FILE* file)
-{
-	fprintf(file, "%s : %s\n", name, value);
-}
-
-template <typename T>
-inline void Deserialise(const char* name, T* value, Properties& props, FILE* file)
-{
-	char strBuffer[256];
-	if (fgets(strBuffer, 256, file) == EOF)
+	void Serialise(Actor* actor, std::ostream& os)
 	{
-		return;
+		Properties props = actor->GetProperties();
+		for (auto& prop : props.dataMap)
+		{
+			std::type_index type = props.typeMap.find(prop.first)->second.value();
+
+			if (type == typeid(float))
+			{
+				os << prop.first << ":" << *(float*)prop.second << "\n";
+			}
+			else if (type == typeid(bool))
+			{
+				os << prop.first << ":" << *(bool*)prop.second << "\n";
+			}
+		}
 	}
 
-	char* context = nullptr;
-	auto tok = strtok_s(strBuffer, ":", &context);
-	assert(context);
-
-	void* data = props.GetData(context);
-	if (data)
+	void Deserialise(Actor* actor, FILE* file)
 	{
-		auto& type = props.GetType(dataMapIt.first);
+		Properties props = actor->GetProperties();
 
-		if (type == typeid(float)) {
-			*value = std::stof(context);
-		}
-		else if (type == typeid(int)) {
-			*value = std::stoi(context);
-		}
-		else if (type == typeid(bool)) {
-			*value = std::stoi(context);
+		char line[256];
+		while (!feof(file))
+		{
+			fgets(line, 256, file);
+
+			std::string stringline = line;
+			if (stringline.find("ret") != stringline.npos) //Move to next actor (ret = return)
+			{
+				return;
+			}
+
+			char* value = nullptr;
+			char* name = strtok_s(line, ":", &value);
+			if (name == nullptr || value == nullptr || strcmp(value, "") == 0)
+			{
+				continue;
+			}
+
+			auto prop = props.dataMap.find(name);
+			if (prop == props.dataMap.end())
+			{
+				continue;
+			}
+
+			std::type_index type = props.typeMap.find(name)->second.value();
+
+			if (type == typeid(float))
+			{
+				*(float*)prop->second = std::stof(value);
+			}
+			else if (type == typeid(bool))
+			{
+				*(bool*)prop->second = std::stoi(value);
+			}
 		}
 	}
-}
+
+	std::filebuf fb;
+};
