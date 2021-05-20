@@ -7,6 +7,10 @@
 #include <string>
 #include <fstream>
 
+//Lot of good references and ideas on serialisation. Heaps of ideas on reflection, custom compile stages, header parsing.
+//REF:https://google.github.io/flatbuffers/flatbuffers_guide_tutorial.html
+//REF:http://donw.io/post/reflection-cpp-2/
+
 //TODO: for this serialisation code to work, actorsystem needs to be updated with something similar to
 /*void SerialiseAllActors(Serialiser& s, std::ostream& os)
 {
