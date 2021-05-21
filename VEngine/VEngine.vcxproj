@@ -127,6 +127,7 @@
     <ClCompile Include="Source\NativeEditorSystem.cpp" />
     <ClCompile Include="Source\Reflection.cpp" />
     <ClCompile Include="Source\Reflection.h" />
+    <ClCompile Include="Source\Serialise.cpp" />
     <ClCompile Include="Source\ToolkitEditorSystem.cpp" />
     <ClCompile Include="Source\Actor.cpp" />
     <ClCompile Include="Source\AnimationStructures.cpp" />

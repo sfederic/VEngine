@@ -69,33 +69,33 @@ void PropertiesDock::DisplayActorSystemProperties(Actor* actor)
         const int propertyNameColumn = 0;
         const int propertyDataColumn = 1;
 
-        for (auto& actorProperty : actor->GetProperties().propertyMap)
+        for (auto& actorProperty : actor->GetProperties().dataMap)
         {
-            auto propertyInfo = actorProperty.first;
-            auto propertyData = actorProperty.second;
+            auto typeMap = actor->GetProperties().typeMap;
+            auto type = typeMap.find(actorProperty.first);
 
             //Set property name onto label
-            grid->addWidget(new QLabel(propertyData.first), currentGridRow, propertyNameColumn);
+            grid->addWidget(new QLabel(actorProperty.first.c_str()), currentGridRow, propertyNameColumn);
 
             //Set property data into grid
-            if (propertyInfo == typeid(bool))
+            if (type->second == typeid(bool))
             {
-                auto boolWidget = new BoolWidget((bool*)propertyData.second);
+                auto boolWidget = new BoolWidget((bool*)actorProperty.second);
                 grid->addWidget(boolWidget, currentGridRow, propertyDataColumn);
             }
-            else if (propertyInfo == typeid(int))
+            else if (type->second == typeid(int))
             {
-                auto intWidget = new IntWidget((int*)propertyData.second);
+                auto intWidget = new IntWidget((int*)actorProperty.second);
                 grid->addWidget(intWidget, currentGridRow, propertyDataColumn);
             }
-            else if (propertyInfo == typeid(float))
+            else if (type->second == typeid(float))
             {
-                auto floatWidget = new FloatWidget((float*)propertyData.second);
+                auto floatWidget = new FloatWidget((float*)actorProperty.second);
                 grid->addWidget(floatWidget, currentGridRow, propertyDataColumn);
             }
-            else if (propertyInfo == typeid(XMVECTOR))
+            else if (type->second == typeid(XMVECTOR))
             {
-                auto vectorWidget = new VectorWidget((XMVECTOR*)propertyData.second);
+                auto vectorWidget = new VectorWidget((XMVECTOR*)actorProperty.second);
                 grid->addWidget(vectorWidget, currentGridRow, propertyDataColumn);
             }
 

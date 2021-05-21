@@ -42,17 +42,11 @@ public:
 		return properties;
 	}
 
-	virtual void Deserialise() 
+	virtual void Write() 
 	{
 		FILE* file;
 		//TODO: I'm thinking do save files on a per actorsystem basis
 		fopen_s(&file, "Actor.sav", "r");
-
-		auto saveProps = GetProperties();
-		for (auto& saveProp : saveProps.propertyMap)
-		{
-			get(saveProp.second.first, saveProp.second.second, saveProp, file);
-		}
 	}
 
 	template <class ActorType>

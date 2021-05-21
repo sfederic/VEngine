@@ -42,7 +42,7 @@ TestActor::TestActor()
 
 Properties TestActor::GetProperties()
 {
-	Properties props = __super::GetProperties();
+	Properties props;
 	
 	props.Register("VertexBufferOffset", &vertexBufferOffset);
 	props.Register("Render", &bRender);
