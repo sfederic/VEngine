@@ -242,6 +242,9 @@
     <ClCompile Include="Source\Serialise.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Actor.h">
@@ -452,6 +455,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Serialise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
