@@ -103,7 +103,7 @@ public:
 	bool bRender = true;
 	bool bPicked = false;
 
-	wchar_t name[64];
+	std::wstring name;
 
 	ActorSystem* linkedActorSystem;
 };
@@ -133,7 +133,7 @@ public:
 		ActorType* actor = new ActorType();
 		actor->transform = transform;
 		actor->vertexBufferOffset = (int)(actors.size() * modelData.GetByteWidth());
-		wcsncpy(actor->name, name.c_str(), name.size());
+		actor->name = name;
 		actor->material = this->material;
 		actor->linkedActorSystem = this;
 
@@ -230,24 +230,10 @@ public:
 	void RecreateModel();
 
 	void Cleanup();
-	void ResetActorNames();
 
 	//Structured buffer stuff
 	ID3D11Buffer* instancedDataStructuredBuffer;
 	ID3D11ShaderResourceView* instancedDataSrv;
-
-	template <class ActorType>
-	bool IsA()
-	{
-		if (typeid(this) == typeid(ActorType))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
 
 	ModelData modelData;
 	

@@ -62,8 +62,6 @@ void FileSystem::LoadWorld(const char* levelName)
 		{
 			fread(actorSystem->actors[actorIndex], actorSystem->sizeofActor, 1, file);
 		}
-
-		actorSystem->ResetActorNames();
 	}
 
 	//Deselect any existing actors, because TransformGizmo will stay at previous positions.

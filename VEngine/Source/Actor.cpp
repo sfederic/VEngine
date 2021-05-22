@@ -9,8 +9,7 @@
 
 Actor::Actor()
 {
-	transform = Transform();
-	wmemset(name, ' ', 64);
+
 }
 
 void ActorSystem::Serialise(FILE* file)
@@ -283,16 +282,6 @@ void ActorSystem::RecreateModel()
 void ActorSystem::Cleanup()
 {
 	actors.clear();
-}
-
-//On loading, pointers to classes are being lost, but still want to keep std::wstring.
-//This function just regenerates all actor names in the actorsystem.
-void ActorSystem::ResetActorNames()
-{
-	for (int i = 0; i < actors.size(); i++)
-	{
-		wcsncpy(actors[i]->name, name.c_str(), name.size());
-	}
 }
 
 void ActorSystem::SetVertexBuffer(Buffer* vertexBuffer)
