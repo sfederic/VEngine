@@ -210,15 +210,6 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 					ActorSystem* actorSystemToDisplay = GetWorld()->GetActorSystem(actorSystemIndex);
 					gEditorSystem->DisplayActorSystemProperties(pickedActor);
 				}
-
-				pickedActor->bPicked = true;
-			}
-		}
-		else
-		{
-			if (pickedActor)
-			{
-				pickedActor->bPicked = false;
 			}
 		}
 	}

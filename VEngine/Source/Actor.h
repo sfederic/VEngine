@@ -101,7 +101,6 @@ public:
 
 	int vertexBufferOffset;
 	bool bRender = true;
-	bool bPicked = false;
 
 	std::wstring name;
 
