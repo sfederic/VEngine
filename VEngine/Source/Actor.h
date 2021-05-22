@@ -15,6 +15,7 @@
 #include <map>
 #include <unordered_map>
 #include "Serialise.h"
+#include "Component.h"
 
 using namespace DirectX;
 
@@ -25,6 +26,7 @@ class Texture;
 class ShaderResourceView;
 class BlendState;
 class RenderSystem;
+class Component;
 
 class Actor
 {
@@ -93,6 +95,12 @@ public:
 
 	void Move(float d, XMVECTOR direction);
 	ActorSystem* GetActorSystem();
+
+	template <class T>
+	void AddComponent(T* component)
+	{
+		component = new T();
+	}
 
 	Transform transform;
 	Material material;
