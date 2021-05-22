@@ -39,12 +39,6 @@ ToolbarDock::ToolbarDock(const char* title) : QDockWidget(title)
     pauseToolButton->setText("Pause");
     connect(pauseToolButton, &QToolButton::clicked, this, &ToolbarDock::PauseViewportInPlayMode);
 
-    //Add Actorsystem button
-    QPushButton* createActorSystemButton = new QPushButton();
-    createActorSystemButton->setText("New Actor System");
-    connect(createActorSystemButton, &QToolButton::clicked, this, &ToolbarDock::CreateNewActorSystem);
-    toolbarHLayout->addWidget(createActorSystemButton);
-
     toolbarHLayout->addStretch(0);
 
     QWidget* toolbarWidget = new QWidget();
@@ -62,43 +56,6 @@ void ToolbarDock::Tick()
 QDialog* createActorSystemWindow;
 QLineEdit* actorSystemNameLineEdit;
 QLineEdit* actorNameLineEdit;
-
-void ToolbarDock::CreateNewActorSystem()
-{
-    if (createActorSystemWindow == nullptr) { createActorSystemWindow = new QDialog(); }
-    if (actorSystemNameLineEdit == nullptr) { actorSystemNameLineEdit = new QLineEdit(); }
-    if (actorNameLineEdit == nullptr) { actorNameLineEdit = new QLineEdit(); }
-
-    //Qt dialog to create system specifics
-    createActorSystemWindow->setWindowTitle("Create New Actor System");
-
-    auto grid = new QGridLayout();
-
-    grid->addWidget(new QLabel("Actor System Name: "), 0, 0);
-    grid->addWidget(actorSystemNameLineEdit, 0, 1);
-    
-    grid->addWidget(new QLabel("Actor Name: "), 1, 0);
-    grid->addWidget(actorNameLineEdit, 1, 1);
-
-    grid->addWidget(new QLabel("Super class: "), 2, 0);
-    grid->addWidget(new QComboBox(), 2, 1);
-
-    auto createActorButton = new QPushButton("Create");
-    connect(createActorButton, &QPushButton::clicked, this, &ToolbarDock::SetActorSystemGenerateArgs);
-    grid->addWidget(createActorButton, 3, 1);
-
-    createActorSystemWindow->setLayout(grid);
-    createActorSystemWindow->show();
-}
-
-void ToolbarDock::SetActorSystemGenerateArgs()
-{
-    ActorSystemFactory::CreateActorSystem(actorSystemNameLineEdit->text().toUtf8().constData(),
-        actorNameLineEdit->text().toUtf8().constData(),
-        "Actor");
-
-    createActorSystemWindow->close();
-}
 
 void ToolbarDock::SetPlayMode()
 {
