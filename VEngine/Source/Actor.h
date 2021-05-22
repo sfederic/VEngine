@@ -113,7 +113,6 @@ public:
 	ActorSystem() {}
 
 	virtual void Serialise(FILE* file);
-
 	virtual void Tick(float deltaTime) = 0;
 
 	//These two functions are to get around classes calling CreateActors<>() with their own actor types.
@@ -230,7 +229,7 @@ public:
 
 	void Cleanup();
 
-	//Structured buffer stuff
+	//Structured buffer
 	ID3D11Buffer* instancedDataStructuredBuffer;
 	ID3D11ShaderResourceView* instancedDataSrv;
 
@@ -259,7 +258,6 @@ public:
 	uint32_t sizeofActor = 0;
 
 	bool bAnimated = false; //Whether model has any animation data. Is set in FBX import.
-	bool bHasSkeletalAnimation;
 	bool bRender = true;
 	bool bHasBeenInitialised = false;
 };
