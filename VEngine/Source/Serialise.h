@@ -39,7 +39,7 @@ void DeserialiseAllActors(Serialiser& s, FILE* file)
 struct Properties
 {
 	template <typename T>
-	void Register(const std::string& name, T* data)
+	void Add(const std::string& name, T* data)
 	{
 		dataMap[name] = data;
 		typeMap[name] = typeid(T);

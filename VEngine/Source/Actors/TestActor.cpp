@@ -44,8 +44,8 @@ Properties TestActor::GetProperties()
 {
 	Properties props;
 	
-	props.Register("VertexBufferOffset", &vertexBufferOffset);
-	props.Register("Render", &bRender);
+	props.Add("VertexBufferOffset", &vertexBufferOffset);
+	props.Add("Render", &bRender);
 	
 	return props;
 }
