@@ -16,6 +16,10 @@ void Serialiser::Serialise(Actor* actor, std::ostream& os)
 		{
 			os << prop.first << ":" << *(bool*)prop.second << "\n";
 		}
+		else if (type == typeid(std::string))
+		{
+			os << prop.first << ":" << (std::string&)prop.second << "\n";
+		}
 	}
 }
 
@@ -56,6 +60,10 @@ void Serialiser::Deserialise(Actor* actor, FILE* file)
 		else if (type == typeid(bool))
 		{
 			*(bool*)prop->second = std::stoi(value);
+		}
+		else if (type == typeid(std::string))
+		{
+			(std::string&)prop->second = value;
 		}
 	}
 }
