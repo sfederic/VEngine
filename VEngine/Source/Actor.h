@@ -16,15 +16,10 @@
 #include <unordered_map>
 #include "Serialise.h"
 #include "Component.h"
+#include "PipelineView.h"
 
 using namespace DirectX;
 
-class Buffer;
-class Sampler;
-class RasterizerState;
-class Texture;
-class ShaderResourceView;
-class BlendState;
 class RenderSystem;
 class Component;
 
@@ -82,9 +77,6 @@ public:
 	XMFLOAT3 GetPitchYawRoll();
 
 	XMFLOAT3 GetScale();
-	void AddScale(float scale);
-	void AddScale(float x, float y, float z);
-	void AddScale(XMFLOAT3 scale);
 	void SetScale(float x, float y, float z);
 	void SetScale(XMVECTOR scale);
 	void SetScale(XMFLOAT3 scale);
@@ -116,27 +108,10 @@ public:
 	ActorSystem* linkedActorSystem;
 };
 
-struct PipelineView
-{
-	void Create();
-
-	Buffer* vertexBuffer;
-	Buffer* indexBuffer;
-	Buffer* instanceBuffer;
-	Sampler* samplerState;
-	RasterizerState* rastState;
-	Texture* texture;
-	ShaderResourceView* srv;
-	BlendState* blendState;
-};
-
 class ActorSystem
 {
 public:
-	ActorSystem()
-	{
-		pso.Create();
-	}
+	ActorSystem() {}
 
 	virtual void Serialise(FILE* file);
 

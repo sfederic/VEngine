@@ -7,7 +7,6 @@
 #include "Sampler.h"
 #include "Texture.h"
 
-//CONSTRUCTORS
 Actor::Actor()
 {
 	transform = Transform();
@@ -23,7 +22,6 @@ void ActorSystem::Serialise(FILE* file)
 	}
 }
 
-//POSITION FUNCTIONS
 XMVECTOR Actor::GetPositionVector()
 {
 	return XMLoadFloat3(&transform.position);
@@ -49,7 +47,6 @@ void Actor::SetPosition(XMFLOAT3 pos)
 	transform.position = pos;
 }
 
-//ROTATION FUNCTIONS
 void Actor::SetRotation(XMVECTOR quaternion)
 {
 	XMStoreFloat4(&transform.quatRotation, quaternion);
@@ -111,25 +108,9 @@ XMFLOAT3 Actor::GetPitchYawRoll()
 	return PitchYawRollFromMatrix(GetTransformationMatrix());
 }
 
-//SCALE FUNCTIONS
 XMFLOAT3 Actor::GetScale()
 {
 	return transform.scale;
-}
-
-void Actor::AddScale(float scale)
-{
-
-}
-
-void Actor::AddScale(float x, float y, float z)
-{
-
-}
-
-void Actor::AddScale(XMFLOAT3 scale)
-{
-	
 }
 
 void Actor::SetScale(float x, float y, float z)
@@ -147,7 +128,6 @@ void Actor::SetScale(XMFLOAT3 scale)
 	transform.scale = scale;
 }
 
-//VECTOR FUNCTIONS
 XMVECTOR Actor::GetForwardVector()
 {
 	XMMATRIX m = XMMatrixAffineTransformation(
@@ -234,7 +214,6 @@ Actor* ActorSystem::GetActor(unsigned int index)
 	return actors[index];
 }
 
-
 Sampler* ActorSystem::GetSamplerState()
 {
 	return pso.samplerState;
@@ -281,11 +260,6 @@ void ActorSystem::RecreateTexture()
 	pso.texture->data->Release();
 	pso.srv->data->Release();
 	gRenderSystem.CreateTexture(this);
-}
-
-void ActorSystem::RecreateShader()
-{
-
 }
 
 void ActorSystem::RecreateModel()
@@ -344,15 +318,4 @@ void ActorSystem::SetRasterizerState(RasterizerState* rasterizerState)
 void ActorSystem::SetShaderView(ShaderResourceView* shaderView)
 {
 	pso.srv = shaderView;
-}
-
-//PIPELINE VIEW
-void PipelineView::Create()
-{
-	vertexBuffer = new Buffer();
-	indexBuffer = new Buffer();
-	samplerState = new Sampler();
-	rastState = new RasterizerState();
-	texture = new Texture();
-	srv = new ShaderResourceView();
 }

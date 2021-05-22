@@ -117,6 +117,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Component.cpp" />
+    <ClCompile Include="Source\PipelineView.cpp" />
     <ClCompile Include="Source\PropertyWidgets\IntWidget.cpp" />
     <ClCompile Include="Source\PropertyWidgets\FloatWidget.cpp" />
     <ClCompile Include="Source\PropertyWidgets\BoolWidget.cpp" />
@@ -192,6 +193,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Component.h" />
+    <ClInclude Include="Source\PipelineView.h" />
     <ClInclude Include="Source\PropertyWidgets\IntWidget.h" />
     <ClInclude Include="Source\PropertyWidgets\FloatWidget.h" />
     <ClInclude Include="Source\PropertyWidgets\BoolWidget.h" />
