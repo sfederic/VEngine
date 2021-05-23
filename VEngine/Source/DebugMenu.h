@@ -45,9 +45,11 @@ public:
 
 	std::vector<MenuItem> menuItems;
 	std::vector<DebugNotification> notifications;
+
 	bool bDebugMenuActive = false;
 	bool bSubMenuOpen = false;
 	bool bProfileMenuOpen = false;
+	bool bFPSMenuOpen = false;
 };
 
 extern DebugMenu gDebugMenu;

@@ -99,9 +99,12 @@ void CoreSystem::EndTimer()
 
 	if (deltaAccum > 1.0)
 	{
+		//Win32 FPS windowtext
 		char fpsText[128];
 		snprintf(fpsText, sizeof(fpsText), "d3d11 | FPS: %d mspf %f.12", frameCount, deltaTime);
 		SetWindowText(mainWindow, fpsText);
+
+		finalFrameCount = frameCount;
 
 		frameCount= 0;
 		deltaAccum = 0.0;

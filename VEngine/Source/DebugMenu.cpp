@@ -66,6 +66,25 @@ void DebugMenu::Tick(World* world, float deltaTime)
 		ImGui::End();
 	}
 
+	//FPS Menu
+	if (gInputSystem.GetKeyUpState(Keys::_6))
+	{
+		bFPSMenuOpen = !bFPSMenuOpen;
+	}
+
+	if (bFPSMenuOpen)
+	{
+		ImGui::Begin("FPS");
+		ImGui::SetWindowPos(ImVec2(10, 10));
+		ImGui::SetWindowSize(ImVec2(300, 100));
+		
+		ImGui::Text("FPS: %d", gCoreSystem.finalFrameCount);
+		ImGui::Text("Delta Time (ms): %f", deltaTime);
+		ImGui::Text("Time Since Startup: %f", gCoreSystem.timeSinceStartup);
+
+		ImGui::End();
+	}
+
 	//Current selected actor system menu
 	ActorSystem* selectedActorSystem = ActorSystemFactory::GetCurrentActiveActorSystem();
 	if(selectedActorSystem)

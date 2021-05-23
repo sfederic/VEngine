@@ -2,6 +2,7 @@
 
 #include <Windows.h>
 #include "Debug.h"
+#include <stdint.h>
 
 LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam);
 
@@ -31,7 +32,8 @@ public:
 	double deltaAccum;
 	double ticks;
 	double timeSinceStartup;
-	int frameCount;
+	uint32_t frameCount;
+	uint32_t finalFrameCount;
 
 	bool bMainLoop = true;
 	bool bGamePaused = false;
