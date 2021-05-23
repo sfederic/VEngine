@@ -21,13 +21,13 @@ ActorSystem* ActorSystemFactory::GetActorSystem(size_t id)
 	return actorSystem->second;
 }
 
-ActorSystem* ActorSystemFactory::GetActorSystem(std::string name)
+ActorSystem* ActorSystemFactory::GetActorSystem(const std::string& name)
 {
 	auto actorSystem = nameToSystemMap->find(name);
 	return actorSystem->second;
 }
 
-ActorSystem* ActorSystemFactory::GetActorSystem(std::type_index actorType)
+ActorSystem* ActorSystemFactory::GetActorSystem(const std::type_index& actorType)
 {
     auto actorSystemIt = actorTypeToSystemMap->find(typeid(actorType));
     if (actorSystemIt != actorTypeToSystemMap->end())
