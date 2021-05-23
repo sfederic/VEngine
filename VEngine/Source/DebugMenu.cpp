@@ -106,11 +106,6 @@ void DebugMenu::RenderFPSMenu(float deltaTime)
 
 void DebugMenu::RenderGPUMenu()
 {
-	if (gInputSystem.GetKeyUpState(Keys::_7))
-	{
-		bGPUMenuOpen = !bGPUMenuOpen;
-	}
-
 	if (bGPUMenuOpen)
 	{
 		ImGui::Begin("GPU Info");
@@ -151,11 +146,6 @@ void DebugMenu::RenderGPUMenu()
 
 void DebugMenu::RenderProfileMenu()
 {
-	if (gInputSystem.GetKeyUpState(Keys::_5))
-	{
-		bProfileMenuOpen = !bProfileMenuOpen;
-	}
-
 	if (bProfileMenuOpen)
 	{
 		ImGui::Begin("Profiler Time Frames");
@@ -173,11 +163,6 @@ void DebugMenu::RenderProfileMenu()
 
 void DebugMenu::RenderSnappingMenu()
 {
-	if (gInputSystem.GetKeyUpState(Keys::_4))
-	{
-		bSnapMenuOpen = !bSnapMenuOpen;
-	}
-
 	if (bSnapMenuOpen)
 	{
 		ImGui::Begin("Snapping");
