@@ -1,3 +1,4 @@
+#include "Actor.h"
 #include "MathHelpers.h"
 #include <math.h>
 
@@ -8,23 +9,20 @@ void MatrixAddScale(float s, XMMATRIX& m)
     m.r[2].m128_f32[2] = s;
 }
 
-//GLOBAL VECTOR DIRECTIONS
+//GLOBAL VECTOR DIRECTIONS (X+ = Right, Y+ = Up, Z+ = forward)
 XMVECTOR XMVectorRight()
 {
-    __m128 vec = _mm_set_ps(0.f, 0.f, 0.f, 1.f);
-    return vec;
+    return XMVectorSet(1.f, 0.f, 0.f, 0.f);
 }
 
 XMVECTOR XMVectorUp()
 {
-    __m128 vec = _mm_set_ps(0.f, 0.f, 1.f, 0.f);
-    return vec;
+    return XMVectorSet(0.f, 1.f, 0.f, 0.f);
 }
 
 XMVECTOR XMVectorForward()
 {
-    __m128 vec = _mm_set_ps(0.f, 1.f, 0.f, 0.f);
-    return vec;
+    return XMVectorSet(0.f, 0.f, 1.f, 0.f);
 }
 
 /*XMVECTOR XMVectorConstantLerp(FXMVECTOR V0, FXMVECTOR V1, float deltaTime, float speed)
@@ -90,7 +88,6 @@ bool VecEqual(XMVECTOR v1, XMVECTOR v2, float epsilon)
     return false;
 }
 
-//Just stole this from stackoverflow.
 XMVECTOR XMVectorConstantLerp(XMVECTOR current, XMVECTOR target, float dist)
 {
     XMVECTOR toTarget = XMVectorSubtract(target, current);
@@ -101,4 +98,41 @@ XMVECTOR XMVectorConstantLerp(XMVECTOR current, XMVECTOR target, float dist)
     }
 
     return current + toTarget;
+}
+
+XMMATRIX GetBoundingBoxMatrix(BoundingBox& boundingBox, Actor* actor)
+{
+    XMVECTOR actorPos = XMLoadFloat3(&actor->GetPositionFloat3());
+    XMVECTOR boundingBoxCenter = XMLoadFloat3(&boundingBox.Center);
+    XMVECTOR offset = actorPos + boundingBoxCenter;
+    offset.m128_f32[3] = 1.0f;
+
+    XMVECTOR actorScale = XMLoadFloat3(&actor->GetScale());
+    XMVECTOR extents = XMLoadFloat3(&boundingBox.Extents);
+    XMVECTOR scale = extents * actorScale;
+    scale.m128_f32[3] = 1.0f;
+
+    XMMATRIX boxBoundsMatrix = XMMatrixIdentity();
+    boxBoundsMatrix = actor->GetTransformationMatrix();
+    boxBoundsMatrix *= XMMatrixScalingFromVector(scale);
+    boxBoundsMatrix.r[3] = offset;
+
+    return boxBoundsMatrix;
+}
+
+void UpdateBoundingBox(BoundingBox& boundingBox, Actor* actor)
+{
+    XMMATRIX boxBoundsMatrix = XMMatrixIdentity();
+    XMVECTOR actorPos = XMLoadFloat3(&actor->GetPositionFloat3());
+    XMVECTOR boundingBoxCenter = XMLoadFloat3(&boundingBox.Center);
+    XMVECTOR offset = actorPos + boundingBoxCenter;
+    offset.m128_f32[3] = 1.0f;
+
+    XMVECTOR actorScale = XMLoadFloat3(&actor->GetScale());
+    XMVECTOR extents = XMLoadFloat3(&boundingBox.Extents);
+    XMVECTOR scale = extents * actorScale;
+    scale.m128_f32[3] = 1.0f;
+
+    XMStoreFloat3(&boundingBox.Center, offset);
+    XMStoreFloat3(&boundingBox.Extents, scale);
 }

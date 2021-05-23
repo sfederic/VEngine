@@ -46,7 +46,6 @@ public:
 	void SetRotation(XMFLOAT3 euler);
 	XMFLOAT4 GetRotationQuat();
 	XMMATRIX GetTransformationMatrix();
-	void SetTransformationMatrix(XMMATRIX m);
 	XMFLOAT3 GetPitchYawRoll();
 	XMFLOAT3 GetScale();
 	void SetScale(float x, float y, float z);
@@ -104,7 +103,7 @@ public:
 	}
 
 	template <class ActorType>
-	void Init(int numActorsToSpawn)
+	void Init(int numActorsToSpawn) 
 	{
 		std::string filename = "Models/";
 		filename += modelName;

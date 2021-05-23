@@ -93,10 +93,6 @@ XMMATRIX Actor::GetTransformationMatrix()
 	);
 }
 
-void Actor::SetTransformationMatrix(XMMATRIX m)
-{
-}
-
 XMFLOAT3 Actor::GetPitchYawRoll()
 {
 	return PitchYawRollFromMatrix(GetTransformationMatrix());

@@ -451,20 +451,10 @@ void RenderSystem::RenderBounds()
 		{
 			for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex]->actors.size(); actorIndex++)
 			{
+				Actor* actor = world->actorSystems[systemIndex]->GetActor(actorIndex);
+
+				matrices.model = GetBoundingBoxMatrix(world->actorSystems[systemIndex]->boundingBox, actor);
 				matrices.view = camera->view;
-
-				XMMATRIX boxBoundsMatrix = XMMatrixIdentity();
-				XMVECTOR offset = XMVectorSet(
-					world->actorSystems[systemIndex]->actors[actorIndex]->GetPositionFloat3().x + world->actorSystems[systemIndex]->boundingBox.Center.x,
-					world->actorSystems[systemIndex]->actors[actorIndex]->GetPositionFloat3().y + world->actorSystems[systemIndex]->boundingBox.Center.y,
-					world->actorSystems[systemIndex]->actors[actorIndex]->GetPositionFloat3().z + world->actorSystems[systemIndex]->boundingBox.Center.z,
-					1.0f);
-
-				boxBoundsMatrix = XMMatrixScalingFromVector(XMLoadFloat3(&world->actorSystems[systemIndex]->boundingBox.Extents));
-				boxBoundsMatrix *= world->actorSystems[systemIndex]->actors[actorIndex]->GetTransformationMatrix();
-				boxBoundsMatrix.r[3] = offset;
-
-				matrices.model = boxBoundsMatrix;
 				matrices.mvp = matrices.model * matrices.view * matrices.proj;
 				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 				context->VSSetConstantBuffers(0, 1, &cbMatrices);
@@ -486,6 +476,8 @@ void RenderSystem::RenderBounds()
 		{
 			for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex]->actors.size(); actorIndex++)
 			{
+				Actor* actor = world->actorSystems[systemIndex]->GetActor(actorIndex);
+
 				matrices.view = camera->view;
 
 				XMMATRIX sphereBoundsMatrix = XMMatrixIdentity();
@@ -496,9 +488,12 @@ void RenderSystem::RenderBounds()
 					world->actorSystems[systemIndex]->actors[actorIndex]->GetPositionFloat3().z + world->actorSystems[systemIndex]->boundingBox.Center.z,
 					1.0f);
 
-				XMVECTOR boundingSphereScaleFromRadius = XMVectorReplicate(world->actorSystems[systemIndex]->boundingSphere.Radius);
-				sphereBoundsMatrix = XMMatrixScalingFromVector(boundingSphereScaleFromRadius);
+				XMVECTOR actorScale = XMLoadFloat3(&actor->GetScale());
+				XMVECTOR extents = XMLoadFloat3(&world->actorSystems[systemIndex]->boundingBox.Extents);
+				XMVECTOR scale = extents * actorScale;
+				scale.m128_f32[3] = 1.0f;
 
+				sphereBoundsMatrix = XMMatrixScalingFromVector(scale);
 				sphereBoundsMatrix.r[3] = offset;
 
 				matrices.model = sphereBoundsMatrix;

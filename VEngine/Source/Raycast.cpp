@@ -11,6 +11,7 @@
 #include "PropertiesWidget.h"
 #include "PropertiesDock.h"
 #include "../EditorMainWindow.h"
+#include "MathHelpers.h"
 
 void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, class ID3D11Buffer* debugBuffer)
 {
@@ -56,25 +57,17 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSy
 
 	for (int i = 0; i < actorSystem->actors.size(); i++)
 	{
-		XMFLOAT3 offset = XMFLOAT3(
-			actorSystem->actors[i]->GetPositionFloat3().x + actorSystem->boundingBox.Center.x,
-			actorSystem->actors[i]->GetPositionFloat3().y + actorSystem->boundingBox.Center.y,
-			actorSystem->actors[i]->GetPositionFloat3().z + actorSystem->boundingBox.Center.z
-		);
+		Actor* actor = actorSystem->GetActor(i);
 
-		BoundingBox tempBoundingBox = actorSystem->boundingBox;
-		//There's a temp bounding box because the previous offset was always being added to the Actorsystem bounding box
-		tempBoundingBox.Center = offset;
-		tempBoundingBox.Extents = actorSystem->actors[i]->GetScale();
-
-
-		//Skip if actor is not render as well (good for translation widgets)
-		if (!actorSystem->actors[i]->bRender)
+		if (!actor->bRender)
 		{
 			return false;
 		}
 
-		if (tempBoundingBox.Intersects(ray.origin, ray.direction, ray.distance))
+		BoundingBox boundingBox = actorSystem->boundingBox;
+		UpdateBoundingBox(boundingBox, actor);
+
+		if (boundingBox.Intersects(ray.origin, ray.direction, ray.distance))
 		{
 			distances.push_back(ray.distance);
 			actorIndices.push_back(i);

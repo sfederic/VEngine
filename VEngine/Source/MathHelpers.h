@@ -1,9 +1,12 @@
 #pragma once
 
 #include <DirectXMath.h>
+#include <DirectXCollision.h>
 #include <fbxsdk/core/math/fbxmatrix.h>
 
 using namespace DirectX;
+
+class Actor;
 
 void MatrixAddScale(float s, XMMATRIX& m);
 XMVECTOR XMVectorRight();
@@ -16,3 +19,5 @@ void LookAtRotation(XMVECTOR lookAtPoint, XMMATRIX& m);
 XMFLOAT4X4 FbxMatrixToDirectXMathMatrix(fbxsdk::FbxMatrix fbxMatrix);
 bool VecEqual(XMVECTOR v1, XMVECTOR v2, float epsilon = 0.0005f);
 XMVECTOR XMVectorConstantLerp(XMVECTOR v1, XMVECTOR v2, float dist);
+XMMATRIX GetBoundingBoxMatrix(BoundingBox& boundingBox, Actor* actor);
+void UpdateBoundingBox(BoundingBox& boundingBox, Actor* actor);
