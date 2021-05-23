@@ -64,7 +64,7 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSy
 			return false;
 		}
 
-		BoundingBox boundingBox = actorSystem->boundingBox;
+		BoundingOrientedBox boundingBox = actorSystem->boundingBox;
 		UpdateBoundingBox(boundingBox, actor);
 
 		if (boundingBox.Intersects(ray.origin, ray.direction, ray.distance))

@@ -100,7 +100,7 @@ XMVECTOR XMVectorConstantLerp(XMVECTOR current, XMVECTOR target, float dist)
     return current + toTarget;
 }
 
-XMMATRIX GetBoundingBoxMatrix(BoundingBox& boundingBox, Actor* actor)
+XMMATRIX GetBoundingBoxMatrix(BoundingOrientedBox& boundingBox, Actor* actor)
 {
     XMVECTOR actorPos = XMLoadFloat3(&actor->GetPositionFloat3());
     XMVECTOR boundingBoxCenter = XMLoadFloat3(&boundingBox.Center);
@@ -120,9 +120,8 @@ XMMATRIX GetBoundingBoxMatrix(BoundingBox& boundingBox, Actor* actor)
     return boxBoundsMatrix;
 }
 
-void UpdateBoundingBox(BoundingBox& boundingBox, Actor* actor)
+void UpdateBoundingBox(BoundingOrientedBox& boundingBox, Actor* actor)
 {
-    XMMATRIX boxBoundsMatrix = XMMatrixIdentity();
     XMVECTOR actorPos = XMLoadFloat3(&actor->GetPositionFloat3());
     XMVECTOR boundingBoxCenter = XMLoadFloat3(&boundingBox.Center);
     XMVECTOR offset = actorPos + boundingBoxCenter;
@@ -133,6 +132,9 @@ void UpdateBoundingBox(BoundingBox& boundingBox, Actor* actor)
     XMVECTOR scale = extents * actorScale;
     scale.m128_f32[3] = 1.0f;
 
+    XMVECTOR orientation = XMLoadFloat4(&actor->GetRotationQuat());
+
     XMStoreFloat3(&boundingBox.Center, offset);
     XMStoreFloat3(&boundingBox.Extents, scale);
+    XMStoreFloat4(&boundingBox.Orientation, orientation);
 }

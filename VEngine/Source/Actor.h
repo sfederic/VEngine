@@ -152,7 +152,7 @@ public:
 			size_t stride = sizeof(Vertex);
 
 			//Bounding setup
-			BoundingBox::CreateFromPoints(boundingBox, modelData.verts.size(), &modelData.verts[0].pos, stride);
+			BoundingOrientedBox::CreateFromPoints(boundingBox, modelData.verts.size(), &modelData.verts[0].pos, stride);
 			BoundingSphere::CreateFromPoints(boundingSphere, modelData.verts.size(), &modelData.verts[0].pos, stride);
 
 			bHasBeenInitialised = true;
@@ -165,7 +165,7 @@ public:
 	}
 
 	void RemoveActor(int index);
-	Actor* ActorSystem::GetActor(unsigned int index);
+	Actor* GetActor(unsigned int index);
 
 	Buffer* GetVertexBuffer();
 	Buffer* GetInstanceBuffer();
@@ -195,7 +195,7 @@ public:
 	Material material;
 	PipelineView pso;
 
-	BoundingBox boundingBox;
+	BoundingOrientedBox boundingBox;
 	BoundingSphere boundingSphere;
 
 	std::vector<Actor*> actors;
