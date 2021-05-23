@@ -12,6 +12,10 @@ Actor::Actor()
 
 }
 
+void Actor::Tick(float deltaTime)
+{
+}
+
 XMVECTOR Actor::GetPositionVector()
 {
 	return XMLoadFloat3(&transform.position);
@@ -160,6 +164,11 @@ void Actor::Move(float d, XMVECTOR direction)
 	XMVECTOR loc = GetPositionVector();
 	loc = XMVectorMultiplyAdd(s, direction, loc);
 	SetPosition(loc);
+}
+
+ActorSystem::ActorSystem()
+{
+
 }
 
 ActorSystem* Actor::GetActorSystem()

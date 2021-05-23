@@ -27,36 +27,12 @@ class Actor
 {
 public:
 	Actor();
-	virtual void Tick(float deltaTime)
-	{
-		
-	}
+	virtual void Tick(float deltaTime);
 
-	//Returns all defined properties from this actor
 	virtual Properties GetProperties() 
 	{
 		Properties properties;
 		return properties;
-	}
-
-	virtual void Write() 
-	{
-		FILE* file;
-		//TODO: I'm thinking do save files on a per actorsystem basis
-		fopen_s(&file, "Actor.sav", "r");
-	}
-
-	template <class ActorType>
-	bool IsA()
-	{
-		if (typeid(this) == typeid(ActorType))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
 	}
 
 	XMVECTOR GetPositionVector();
@@ -64,27 +40,21 @@ public:
 	void SetPosition(XMVECTOR v);
 	void SetPosition(float x, float y, float z);
 	void SetPosition(XMFLOAT3 pos);
-
 	void SetRotation(XMVECTOR quaternion);
 	void SetRotation(XMVECTOR axis, float angle);
 	void SetRotation(float roll, float pitch, float yaw);
 	void SetRotation(XMFLOAT3 euler);
 	XMFLOAT4 GetRotationQuat();
-
 	XMMATRIX GetTransformationMatrix();
 	void SetTransformationMatrix(XMMATRIX m);
-
 	XMFLOAT3 GetPitchYawRoll();
-
 	XMFLOAT3 GetScale();
 	void SetScale(float x, float y, float z);
 	void SetScale(XMVECTOR scale);
 	void SetScale(XMFLOAT3 scale);
-
 	XMVECTOR GetForwardVector();
 	XMVECTOR GetRightVector();
 	XMVECTOR GetUpVector();
-
 	void Move(float d, XMVECTOR direction);
 	ActorSystem* GetActorSystem();
 
@@ -96,27 +66,20 @@ public:
 
 	Transform transform;
 	Material material;
-
+	std::string name;
+	ActorSystem* linkedActorSystem;
 	double currentAnimationTime = 0.0;
-
 	int vertexBufferOffset;
 	bool bRender = true;
-
-	std::string name;
-
-	ActorSystem* linkedActorSystem;
 };
 
 class ActorSystem
 {
 public:
-	ActorSystem() {}
-
+	ActorSystem();
 	void Serialise();
 	void Deserialise();
 	virtual void Tick(float deltaTime) = 0;
-
-	//These two functions are to get around classes calling CreateActors<>() with their own actor types.
 	virtual void SpawnActors(int numToSpawn) = 0;
 	virtual void SpawnActor(Transform transform) = 0;
 
@@ -183,10 +146,6 @@ public:
 			sbDesc.BufferEx.NumElements = actors.size();
 			HR(gRenderSystem.device->CreateShaderResourceView(instancedDataStructuredBuffer, &sbDesc, &instancedDataSrv));
 
-			//TODO: index buffers
-			//UINT indicesByteWidth = modelData.indices.size() * sizeof(uint16_t);
-			//indexBuffer = renderSystem->CreateDefaultBuffer(indicesByteWidth, D3D11_BIND_INDEX_BUFFER, modelData.indices.data());
-
 			//Sampler, texture setup
 			gRenderSystem.CreateSamplerState(GetSamplerState());
 			gRenderSystem.CreateTexture(this);
@@ -209,7 +168,6 @@ public:
 	void RemoveActor(int index);
 	Actor* ActorSystem::GetActor(unsigned int index);
 
-	//PSO functions
 	Buffer* GetVertexBuffer();
 	Buffer* GetInstanceBuffer();
 	Sampler* GetSamplerState();
@@ -230,23 +188,16 @@ public:
 
 	void Cleanup();
 
-	//Structured buffer
 	ID3D11Buffer* instancedDataStructuredBuffer;
 	ID3D11ShaderResourceView* instancedDataSrv;
 
 	ModelData modelData;
-	
-	//SkinnedData skinnedData;
 	Animation animData;
-
 	Material material;
-
 	PipelineView pso;
 
 	BoundingBox boundingBox;
 	BoundingSphere boundingSphere;
-
-	size_t numVertices;
 
 	std::vector<Actor*> actors;
 
@@ -255,10 +206,10 @@ public:
 	std::string name;
 	std::string modelName;
 
-	//Size of the actor system's linked actor
 	uint32_t sizeofActor = 0;
+	size_t numVertices;
 
-	bool bAnimated = false; //Whether model has any animation data. Is set in FBX import.
+	bool bAnimated = false;
 	bool bRender = true;
 	bool bHasBeenInitialised = false;
 };
