@@ -14,33 +14,23 @@ Console gConsole;
 
 namespace ExecuteStrings
 {
-	const wchar_t* EXIT = L"EXIT";
-	const wchar_t* GPU = L"GPU";
-	const wchar_t* D3D_TIME = L"D3D TIME";
-	const wchar_t* POP = L"POP";
-	const wchar_t* CLEAR = L"CLEAR";
-	const wchar_t* LEVEL = L"LEVEL";
-	const wchar_t* SNAP = L"SNAP";
-	const wchar_t* PROFILE = L"PROFILE";
-}
-
-namespace LevelNames
-{
-	const wchar_t* TestLevel = L"TESTLEVEL";
+	const std::wstring GPU = L"GPU";
+	const std::wstring FPS = L"FPS";
+	const std::wstring SNAP = L"SNAP";
+	const std::wstring PROFILE = L"PROFILE";
 }
 
 void Console::ConsoleInput()
 {
-	if (gInputSystem.GetAnyKeyDown() && gInputSystem.GetKeyUpState(Keys::Tilde))
+	if (gInputSystem.GetAnyKeyDown())
 	{
-		if (gInputSystem.GetKeyDownState(VK_BACK) && consoleStringIndex > 0)
+		if (gInputSystem.GetKeyDownState(Keys::BackSpace) && !consoleString.empty())
 		{
-			consoleStringIndex--;
+			consoleString.pop_back();
 		}
-		else if ((consoleStringIndex < _countof(consoleString)) && (gInputSystem.currentDownKey != 0))
+		else if (gInputSystem.currentDownKey != 0)
 		{
-			consoleString[consoleStringIndex] = gInputSystem.currentDownKey;
-			consoleStringIndex++;
+			consoleString.push_back(gInputSystem.currentDownKey);
 		}
 	}
 }
@@ -48,85 +38,61 @@ void Console::ConsoleInput()
 //Make sure D2D render target calls have been made (Begin/End Draw)
 void Console::Tick()
 {
+	if (gInputSystem.GetKeyUpState(Keys::Tilde)) //~ key, like doom and unreal
+	{
+		bConsoleActive = !bConsoleActive;
+		return;
+	}
+
 	if (bConsoleActive)
 	{
+		if (gInputSystem.GetKeyUpState(Keys::Enter))
+		{
+			consoleString.pop_back(); //Remove '\r' return carriage
+			Console::ExecuteString();
+			bConsoleActive = false;
+			return;
+		}
+
 		Console::ConsoleInput();
 
 		float width = (float)gCoreSystem.windowWidth;
 		float height = (float)gCoreSystem.windowHeight;
 
-		gUISystem.d2dRenderTarget->DrawRectangle({ 0, height - 20.f, width, height }, gUISystem.brushTransparentMenu);
+		gUISystem.d2dRenderTarget->DrawRectangle({ 0, height - 24.f, width, height }, gUISystem.brushTransparentMenu);
 
 		gUISystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
-		gUISystem.d2dRenderTarget->DrawText(consoleString, consoleStringIndex, gUISystem.textFormat,
+		gUISystem.d2dRenderTarget->DrawText(consoleString.c_str(), consoleString.size(), gUISystem.textFormat,
 			{ 0, height - 20.f, width, height }, gUISystem.brushText);
-	}
-
-	if (gInputSystem.GetKeyUpState(VK_OEM_3)) //~ key, like doom and unreal
-	{
-		bConsoleActive = !bConsoleActive;
-	}
-	else if (gInputSystem.GetKeyDownState(VK_RETURN) && bConsoleActive)
-	{
-		Console::ExecuteString();
 	}
 }
 
 //Execute values need to be uppercase with WndProc
 void Console::ExecuteString()
 {
-	ConsoleViewItem item = {};
-
-	if (wcsncmp(consoleString, ExecuteStrings::EXIT, wcslen(ExecuteStrings::EXIT)) == 0)
+	if (consoleString == ExecuteStrings::GPU)
 	{
-		gCoreSystem.msg.message = WM_QUIT;
+		gDebugMenu.bGPUMenuOpen = !gDebugMenu.bGPUMenuOpen;
 	}
-	else if (wcsncmp(consoleString, ExecuteStrings::GPU, wcslen(ExecuteStrings::GPU)) == 0)
+	else if (consoleString == ExecuteStrings::SNAP)
 	{
-		//_snwprintf_s(item.text, sizeof(item.text), L"%ls", gRenderSystem.adaptersDesc[0].Description);
-		viewItems.push_back(item);
+		gDebugMenu.bSnapMenuOpen = !gDebugMenu.bSnapMenuOpen;
 	}
-	else if (wcsncmp(consoleString, ExecuteStrings::D3D_TIME, wcslen(ExecuteStrings::D3D_TIME)) == 0)
+	else if (consoleString == ExecuteStrings::PROFILE)
 	{
-		//_snwprintf_s(item.text, sizeof(item.text), L"D3D11 Render: %f", gRenderSystem.renderTime);
-		viewItems.push_back(item);
+		gDebugMenu.bProfileMenuOpen = !gDebugMenu.bProfileMenuOpen;
 	}
-	else if (wcsncmp(consoleString, ExecuteStrings::POP, wcslen(ExecuteStrings::POP)) == 0)
+	else if (consoleString == ExecuteStrings::FPS)
 	{
-		if (viewItems.size() > 0)
-		{
-			viewItems.pop_back();
-		}
-	}
-	else if (wcsncmp(consoleString, ExecuteStrings::CLEAR, wcslen(ExecuteStrings::CLEAR)) == 0) //CLEAR TEXT
-	{
-		viewItems.clear();
-	}
-	else if(wcsncmp(consoleString, LevelNames::TestLevel, wcslen(LevelNames::TestLevel)) == 0) //LEVEL LOADING
-	{
-		gFileSystem.ReloadAllActorSystems(GetWorld(), "LevelSaves/test.sav");
-	}
-	else if (wcsncmp(consoleString, ExecuteStrings::SNAP, wcslen(ExecuteStrings::SNAP)) == 0) //Toggle grid snap
-	{
-		gWorldEditor.bMoveActorsInIncrements = !gWorldEditor.bMoveActorsInIncrements;
-
-		if (gWorldEditor.bMoveActorsInIncrements)
-		{
-			gDebugMenu.AddNotification(L"SNAP ON");
-		}
-		else if (!gWorldEditor.bMoveActorsInIncrements)
-		{
-			gDebugMenu.AddNotification(L"SNAP OFF");
-		}
+		gDebugMenu.bFPSMenuOpen = !gDebugMenu.bFPSMenuOpen;
 	}
 	else
 	{
-		gDebugMenu.notifications.push_back(DebugNotification(L"No command found."));
+		gDebugMenu.AddNotification(L"No command found");
 	}
 
-	//Reset console string and index
-	memset(consoleString, 0, _countof(consoleString) * sizeof(wchar_t));
-	consoleStringIndex = 0;
+
+	consoleString.clear();
 }
 
 void Console::DrawViewItems()
@@ -140,6 +106,5 @@ void Console::DrawViewItems()
 
 		gUISystem.d2dRenderTarget->DrawTextA(viewItems[i].text, wcslen(viewItems[i].text), gUISystem.textFormat,
 			{ 0, yMarginIncrement, width, height }, gUISystem.brushText);
-
 	}
 }

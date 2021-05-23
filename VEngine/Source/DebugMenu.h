@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
 enum class EMenuID
 {
@@ -24,13 +25,13 @@ struct MenuItem
 
 struct DebugNotification
 {
-	DebugNotification(const wchar_t* initText)
+	DebugNotification(const wchar_t* note)
 	{
-		wcsncpy_s(text, initText, 256);
+		text = note;
 		timeOnScreen = 0.f;
 	}
 
-	wchar_t text[256];
+	std::wstring text;
 	float timeOnScreen;
 };
 
@@ -50,11 +51,10 @@ public:
 	std::vector<MenuItem> menuItems;
 	std::vector<DebugNotification> notifications;
 
-	bool bDebugMenuActive = false;
-	bool bSubMenuOpen = false;
 	bool bProfileMenuOpen = false;
 	bool bFPSMenuOpen = false;
 	bool bGPUMenuOpen = false;
+	bool bSnapMenuOpen = false;
 };
 
 extern DebugMenu gDebugMenu;

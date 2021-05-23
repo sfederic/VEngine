@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
 struct ConsoleViewItem
 {
@@ -16,10 +17,9 @@ public:
 	void DrawViewItems();
 
 	std::vector<ConsoleViewItem> viewItems;
-	wchar_t consoleString[128];
-	int consoleStringIndex = 0;
-	bool bConsoleActive = false;
+	std::wstring consoleString;
 
+	bool bConsoleActive = false;
 };
 
 extern Console gConsole;

@@ -58,8 +58,9 @@ void DebugMenu::Tick(World* world, float deltaTime)
 		if (notifications[i].timeOnScreen < notificationLifetime)
 		{
 			notifications[i].timeOnScreen += deltaTime;
+
 			float notificationOffsetY = 20.f * i;
-			gUISystem.d2dRenderTarget->DrawTextA(notifications[i].text, wcslen(notifications[i].text), gUISystem.textFormat,
+			gUISystem.d2dRenderTarget->DrawTextA(notifications[i].text.c_str(), notifications[i].text.size(), gUISystem.textFormat,
 				{ 0.f, notificationOffsetY, 1000.f, 1000.f }, gUISystem.brushText);
 		}
 		else
@@ -95,6 +96,7 @@ void DebugMenu::RenderFPSMenu(float deltaTime)
 		ImGui::Begin("FPS");
 
 		ImGui::Text("FPS: %d", gCoreSystem.finalFrameCount);
+		ImGui::Text("GPU Render Time: %d", gRenderSystem.renderTime);
 		ImGui::Text("Delta Time (ms): %f", deltaTime);
 		ImGui::Text("Time Since Startup: %f", gCoreSystem.timeSinceStartup);
 
@@ -171,14 +173,12 @@ void DebugMenu::RenderProfileMenu()
 
 void DebugMenu::RenderSnappingMenu()
 {
-	static bool bIsSnappingMenuOpen;
-
 	if (gInputSystem.GetKeyUpState(Keys::_4))
 	{
-		bIsSnappingMenuOpen = !bIsSnappingMenuOpen;
+		bSnapMenuOpen = !bSnapMenuOpen;
 	}
 
-	if (bIsSnappingMenuOpen)
+	if (bSnapMenuOpen)
 	{
 		ImGui::Begin("Snapping");
 
