@@ -42,6 +42,10 @@ public:
 	void Tick(class World* world, float deltaTime);
 	void Cleanup();
 	void AddNotification(const wchar_t* note);
+	void RenderFPSMenu(float deltaTime);
+	void RenderGPUMenu();
+	void RenderProfileMenu();
+	void RenderSnappingMenu();
 
 	std::vector<MenuItem> menuItems;
 	std::vector<DebugNotification> notifications;
