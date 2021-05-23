@@ -195,6 +195,8 @@ public:
 	Material material;
 	PipelineView pso;
 
+	//Everything's a BoundingOrientedBox, but maybe just a BoundingBox is faster in some places.
+	//REF:https://www.gamasutra.com/view/feature/131833/when_two_hearts_collide_.php
 	BoundingOrientedBox boundingBox;
 	BoundingSphere boundingSphere;
 

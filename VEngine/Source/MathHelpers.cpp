@@ -109,12 +109,11 @@ XMMATRIX GetBoundingBoxMatrix(BoundingOrientedBox& boundingBox, Actor* actor)
 
     XMVECTOR actorScale = XMLoadFloat3(&actor->GetScale());
     XMVECTOR extents = XMLoadFloat3(&boundingBox.Extents);
-    XMVECTOR scale = extents * actorScale;
-    scale.m128_f32[3] = 1.0f;
+    extents.m128_f32[3] = 1.0f;
 
     XMMATRIX boxBoundsMatrix = XMMatrixIdentity();
-    boxBoundsMatrix = actor->GetTransformationMatrix();
-    boxBoundsMatrix *= XMMatrixScalingFromVector(scale);
+    boxBoundsMatrix = actor->GetTransformationMatrix(); //This is more just to get the rotation
+    boxBoundsMatrix *= XMMatrixScalingFromVector(extents);
     boxBoundsMatrix.r[3] = offset;
 
     return boxBoundsMatrix;
