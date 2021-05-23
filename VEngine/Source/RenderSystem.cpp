@@ -483,9 +483,13 @@ void RenderSystem::RenderBounds()
 				XMVECTOR actorPos = actor->GetPositionVector();
 				actorPos.m128_f32[3] = 1.0f;
 				XMVECTOR actorScale = XMLoadFloat3(&actor->GetScale());
-				actorScale.m128_f32[3] = 1.0f;
 
-				sphereBoundsMatrix = XMMatrixScalingFromVector(actorScale);
+				//Grab the actors largest scale value and build the sphere's scale from that, making it uniform
+				float highestScaleValue = FindMaxInVector(actorScale);
+				XMVECTOR scale = XMVectorReplicate(highestScaleValue);
+				scale.m128_f32[3] = 1.0f;
+
+				sphereBoundsMatrix = XMMatrixScalingFromVector(scale);
 				sphereBoundsMatrix.r[3] = actorPos;
 
 				matrices.model = sphereBoundsMatrix;

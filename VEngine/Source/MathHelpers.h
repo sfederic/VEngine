@@ -18,6 +18,7 @@ XMFLOAT3 PitchYawRollFromQuaternion(XMFLOAT4 q);
 void LookAtRotation(XMVECTOR lookAtPoint, XMMATRIX& m);
 XMFLOAT4X4 FbxMatrixToDirectXMathMatrix(fbxsdk::FbxMatrix fbxMatrix);
 bool VecEqual(XMVECTOR v1, XMVECTOR v2, float epsilon = 0.0005f);
+float FindMaxInVector(XMVECTOR v);
 XMVECTOR XMVectorConstantLerp(XMVECTOR v1, XMVECTOR v2, float dist);
 XMMATRIX GetBoundingBoxMatrix(BoundingOrientedBox& boundingBox, Actor* actor);
 void UpdateBoundingBox(BoundingOrientedBox& boundingBox, Actor* actor);

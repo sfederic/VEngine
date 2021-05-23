@@ -88,6 +88,20 @@ bool VecEqual(XMVECTOR v1, XMVECTOR v2, float epsilon)
     return false;
 }
 
+float FindMaxInVector(XMVECTOR v)
+{
+    float max = 0.f;
+    for (int i = 0; i < 4; i++)
+    {
+        if (max < v.m128_f32[i])
+        {
+            max = v.m128_f32[i];
+        }
+    }
+
+    return max;
+}
+
 XMVECTOR XMVectorConstantLerp(XMVECTOR current, XMVECTOR target, float dist)
 {
     XMVECTOR toTarget = XMVectorSubtract(target, current);
