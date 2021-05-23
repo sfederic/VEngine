@@ -14,10 +14,10 @@ Console gConsole;
 
 namespace ExecuteStrings
 {
-	const std::wstring GPU = L"GPU";
-	const std::wstring FPS = L"FPS";
-	const std::wstring SNAP = L"SNAP";
-	const std::wstring PROFILE = L"PROFILE";
+	const wchar_t* GPU = L"GPU";
+	const wchar_t* FPS = L"FPS";
+	const wchar_t* SNAP = L"SNAP";
+	const wchar_t* PROFILE = L"PROFILE";
 }
 
 void Console::ConsoleInput()
