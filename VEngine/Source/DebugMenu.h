@@ -50,6 +50,7 @@ public:
 	bool bSubMenuOpen = false;
 	bool bProfileMenuOpen = false;
 	bool bFPSMenuOpen = false;
+	bool bGPUMenuOpen = false;
 };
 
 extern DebugMenu gDebugMenu;

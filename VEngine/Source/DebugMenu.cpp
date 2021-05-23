@@ -85,6 +85,51 @@ void DebugMenu::Tick(World* world, float deltaTime)
 		ImGui::End();
 	}
 
+	//GPU Menu
+	if (gInputSystem.GetKeyUpState(Keys::_7))
+	{
+		bGPUMenuOpen = !bGPUMenuOpen;
+	}
+
+	if (bGPUMenuOpen)
+	{
+		ImGui::Begin("GPU Info");
+		ImGui::SetWindowPos(ImVec2(10, 10));
+		//ImGui::SetWindowSize(ImVec2(400, 400));
+
+		DXGI_ADAPTER_DESC1 adapterDesc = gRenderSystem.adaptersDesc.front();
+
+		ImGui::Text("Device: %ls", adapterDesc.Description);
+		ImGui::Text("System Memory: %zu", adapterDesc.DedicatedSystemMemory);
+		ImGui::Text("Video Memory: %zu", adapterDesc.DedicatedVideoMemory);
+		ImGui::Text("Shared System Memory: %zu", adapterDesc.SharedSystemMemory);
+		ImGui::Spacing();
+
+		static bool showAllDevices;
+		if (!showAllDevices && ImGui::Button("Show all Devices"))
+		{
+			showAllDevices = true;
+		}
+		else if (showAllDevices && ImGui::Button("Hide all Devices"))
+		{
+			showAllDevices = false;
+		}
+
+		if (showAllDevices)
+		{
+			for (int i = 1; i < gRenderSystem.adaptersDesc.size(); i++)
+			{
+				ImGui::Text("Device: %ls", gRenderSystem.adaptersDesc[i].Description);
+				ImGui::Text("System Memory: %zu", gRenderSystem.adaptersDesc[i].DedicatedSystemMemory);
+				ImGui::Text("Video Memory: %zu", gRenderSystem.adaptersDesc[i].DedicatedVideoMemory);
+				ImGui::Text("Shared System Memory: %zu", gRenderSystem.adaptersDesc[i].SharedSystemMemory);
+				ImGui::Spacing();
+			}
+		}
+
+		ImGui::End();
+	}
+
 	//Current selected actor system menu
 	ActorSystem* selectedActorSystem = ActorSystemFactory::GetCurrentActiveActorSystem();
 	if(selectedActorSystem)
