@@ -12,15 +12,6 @@ Actor::Actor()
 
 }
 
-void ActorSystem::Serialise(FILE* file)
-{
-	//Save transforms for every actor
-	for (int i = 0; i < actors.size(); i++)
-	{
-		fwrite(&actors[i]->transform, sizeof(Transform), 1, file);
-	}
-}
-
 XMVECTOR Actor::GetPositionVector()
 {
 	return XMLoadFloat3(&transform.position);
@@ -179,6 +170,30 @@ ActorSystem* Actor::GetActorSystem()
 	}
 
 	return nullptr;
+}
+
+void ActorSystem::Serialise()
+{
+	std::string file = name + ".ass"; //.ass stands for ActorSystem Save
+
+	Serialiser s(file, std::ios_base::out);
+
+	for (int i = 0; i < actors.size(); i++)
+	{
+		s.Serialise(actors[i]);
+	}
+}
+
+void ActorSystem::Deserialise()
+{
+	std::string file = name + ".ass";
+
+	Serialiser s(file, std::ios_base::in);
+
+	for (int i = 0; i < actors.size(); i++)
+	{
+		s.Deserialise(actors[i]);
+	}
 }
 
 Buffer* ActorSystem::GetVertexBuffer()

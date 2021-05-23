@@ -69,8 +69,9 @@ struct Properties
 //TODO: fix these two functions up. They're a conjoined mess of C and C++ I/O libs
 struct Serialiser
 {
-	void Serialise(Actor* actor, std::ostream& os);
-	void Deserialise(Actor* actor, FILE* file);
+	Serialiser(const std::string& file, std::ios_base::openmode mode);
+	void Serialise(Actor* actor);
+	void Deserialise(Actor* actor);
 
 	std::filebuf fb;
 };

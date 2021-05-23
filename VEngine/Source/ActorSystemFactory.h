@@ -24,7 +24,7 @@ public:
 		}
 		if (nameToSystemMap == nullptr)
 		{
-			nameToSystemMap = new std::unordered_map<std::wstring, ActorSystem*>;
+			nameToSystemMap = new std::unordered_map<std::string, ActorSystem*>;
 		}
 		if (actorTypeToSystemMap == nullptr)
 		{
@@ -39,7 +39,7 @@ public:
 
 	static size_t GetActorSystemID(ActorSystem* actorSystem);
 	static ActorSystem* GetActorSystem(size_t id);
-	static ActorSystem* GetActorSystem(std::wstring name);
+	static ActorSystem* GetActorSystem(std::string name);
 	static ActorSystem* GetActorSystem(std::type_index actorType);
 	static void GetAllActorSystems(std::vector<ActorSystem*>& actorSystems);
 	static void SetCurrentActiveActorSystem(ActorSystem* actorSystem);
@@ -47,6 +47,6 @@ public:
 
 	static std::unordered_map<size_t, ActorSystem*> *IDToSystemMap;
 	static std::unordered_map<ActorSystem*, size_t> *systemToIDMap;
-	static std::unordered_map<std::wstring, ActorSystem*>* nameToSystemMap;
+	static std::unordered_map<std::string, ActorSystem*>* nameToSystemMap;
 	static std::unordered_map<std::type_index, ActorSystem*>* actorTypeToSystemMap;
 };

@@ -61,7 +61,7 @@ void WorldDock::PopulateActorSystemList()
 
     for(int i = 0; i < actorSystems.size(); i++)
     {
-        QString name = QString::fromStdWString(actorSystems[i]->name);
+        QString name = QString::fromStdString(actorSystems[i]->name);
         worldStringList.append(name);
     }
 
@@ -77,11 +77,11 @@ void WorldDock::PopulateWorldList()
 
     for (int i = 0; i < world->actorSystems.size(); i++)
     {
-        worldTreeItems.append(new QTreeWidgetItem(worldTreeList, QStringList(QString::fromStdWString(world->actorSystems[i]->name))));
+        worldTreeItems.append(new QTreeWidgetItem(worldTreeList, QStringList(QString::fromStdString(world->actorSystems[i]->name))));
 
         for (int actorIndex = 0; actorIndex < world->actorSystems[i]->actors.size(); actorIndex++)
         {
-            QString actorName = QString::fromStdWString(std::wstring(world->actorSystems[i]->actors[actorIndex]->name));
+            QString actorName = QString::fromStdString(world->actorSystems[i]->actors[actorIndex]->name);
 
             QTreeWidgetItem* child = new QTreeWidgetItem();
             child->setText(0, actorName);
@@ -96,7 +96,7 @@ void WorldDock::PopulateWorldList()
 void WorldDock::ClickOnListActorSystem(QTreeWidgetItem* listItem)
 {
     QString string = listItem->text(0);
-    Actor* clickedActor = GetWorld()->FindActorByString(string.toStdWString());
+    Actor* clickedActor = GetWorld()->FindActorByString(string.toStdString());
     if (clickedActor)
     {
         editorCamera.ZoomTo(clickedActor);
@@ -108,7 +108,7 @@ void WorldDock::ClickOnListActorSystem(QTreeWidgetItem* listItem)
 void WorldDock::ClickOnListActor(QListWidgetItem* listItem)
 {
     QString actorSystemName = listItem->text();
-    ActorSystem* actorSystem = ActorSystemFactory::GetActorSystem(actorSystemName.toStdWString().c_str());
+    ActorSystem* actorSystem = ActorSystemFactory::GetActorSystem(actorSystemName.toStdString().c_str());
     ActorSystemFactory::SetCurrentActiveActorSystem(actorSystem);
 }
 

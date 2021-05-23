@@ -34,12 +34,12 @@ public:
 		}
 	}
 
-	Actor* FindActorByString(std::wstring name);
+	Actor* FindActorByString(const std::string& name);
 	ActorSystem* GetActorSystem(unsigned int id);
 	Actor* GetActor(unsigned int systemId, unsigned int actorId);
 
 	std::vector<ActorSystem*> actorSystems;
-	std::unordered_map<std::wstring, ActorSystem*> actorSystemsMap;
+	std::unordered_map<std::string, ActorSystem*> actorSystemsMap;
 
 	char name[64];
 };

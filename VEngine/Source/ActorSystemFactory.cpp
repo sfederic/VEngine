@@ -4,7 +4,7 @@
 
 std::unordered_map<size_t, ActorSystem*> *ActorSystemFactory::IDToSystemMap;
 std::unordered_map<ActorSystem*, size_t> *ActorSystemFactory::systemToIDMap;
-std::unordered_map<std::wstring, ActorSystem*> *ActorSystemFactory::nameToSystemMap;
+std::unordered_map<std::string, ActorSystem*> *ActorSystemFactory::nameToSystemMap;
 std::unordered_map<std::type_index, ActorSystem*>* ActorSystemFactory::actorTypeToSystemMap;
 
 ActorSystem* activeActorSystemSpawner;
@@ -21,7 +21,7 @@ ActorSystem* ActorSystemFactory::GetActorSystem(size_t id)
 	return actorSystem->second;
 }
 
-ActorSystem* ActorSystemFactory::GetActorSystem(std::wstring name)
+ActorSystem* ActorSystemFactory::GetActorSystem(std::string name)
 {
 	auto actorSystem = nameToSystemMap->find(name);
 	return actorSystem->second;

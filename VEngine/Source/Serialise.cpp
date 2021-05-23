@@ -1,8 +1,20 @@
 #include "Serialise.h"
 #include "Actor.h"
 
-void Serialiser::Serialise(Actor* actor, std::ostream& os)
+Serialiser::Serialiser(const std::string& file, std::ios_base::openmode mode)
 {
+	if (fb.is_open())
+	{
+		fb.close();
+	}
+
+	fb.open(file.c_str(), mode);
+}
+
+void Serialiser::Serialise(Actor* actor)
+{
+	std::ostream os(&fb);
+
 	Properties props = actor->GetProperties();
 	for (auto& prop : props.dataMap)
 	{
@@ -21,19 +33,23 @@ void Serialiser::Serialise(Actor* actor, std::ostream& os)
 			os << prop.first << ":" << (std::string&)prop.second << "\n";
 		}
 	}
+
+	os << "next"; //"next" moves the forloop onto the next Actor in Deserialise
 }
 
-void Serialiser::Deserialise(Actor* actor, FILE* file)
+void Serialiser::Deserialise(Actor* actor)
 {
+	std::istream is(&fb);
+
 	Properties props = actor->GetProperties();
 
 	char line[256];
-	while (!feof(file))
+	while (!is.eof())
 	{
-		fgets(line, 256, file);
+		is.getline(line, 256);
 
 		std::string stringline = line;
-		if (stringline.find("ret") != stringline.npos) //Move to next actor (ret = return)
+		if (stringline.find("next") != stringline.npos) //Move to next actor
 		{
 			return;
 		}

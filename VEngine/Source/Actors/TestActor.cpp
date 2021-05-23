@@ -10,7 +10,7 @@ TestActorSystem::TestActorSystem()
 	shaderName = L"shaders.hlsl";
 	textureName = L"texture2.jpg";
 	modelName = "cube.fbx";
-	name = L"TestActorSystem";
+	name = "TestActorSystem";
 
 	sizeofActor = sizeof(TestActor);
 

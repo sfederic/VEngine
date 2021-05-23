@@ -70,7 +70,7 @@ void World::AddActorSystem(ActorSystem* actorSystem)
 	}
 }
 
-Actor* World::FindActorByString(std::wstring name)
+Actor* World::FindActorByString(const std::string& name)
 {
 	Actor* foundActor = nullptr;
 

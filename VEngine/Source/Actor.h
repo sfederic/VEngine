@@ -102,7 +102,7 @@ public:
 	int vertexBufferOffset;
 	bool bRender = true;
 
-	std::wstring name;
+	std::string name;
 
 	ActorSystem* linkedActorSystem;
 };
@@ -112,7 +112,8 @@ class ActorSystem
 public:
 	ActorSystem() {}
 
-	virtual void Serialise(FILE* file);
+	void Serialise();
+	void Deserialise();
 	virtual void Tick(float deltaTime) = 0;
 
 	//These two functions are to get around classes calling CreateActors<>() with their own actor types.
@@ -251,7 +252,7 @@ public:
 
 	std::wstring shaderName;
 	std::wstring textureName;
-	std::wstring name;
+	std::string name;
 	std::string modelName;
 
 	//Size of the actor system's linked actor
