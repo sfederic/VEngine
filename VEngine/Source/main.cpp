@@ -35,8 +35,6 @@
 #include "Actors/TestActor.h"
 #include "GlobalDefines.h"
 
-float roll = 0.f;
-
 int main(int argc, char* argv[])
 {
     HR(CoInitialize(NULL)); //For the WIC texture functions from DXT
@@ -62,7 +60,7 @@ int main(int argc, char* argv[])
     gWorldEditor.Init();
 
     //test actor setup
-    testActorSystem.SpawnActors(2);
+    testActorSystem.SpawnActors(10000);
     GetWorld()->AddActorSystem(&testActorSystem);
 
     //Qt late init
@@ -74,7 +72,6 @@ int main(int argc, char* argv[])
     //MAIN LOOP
     while (gCoreSystem.bMainLoop)
     {
-        //TODO: fine for simple main loop for now, need to throw it into somewhere later.
         const float deltaTime = gCoreSystem.deltaTime;
 
         gCoreSystem.StartTimer();
@@ -109,7 +106,6 @@ int main(int argc, char* argv[])
         //UI RENDERING
         if (gUISystem.bAllUIActive)
         {
-
             gUISystem.d2dRenderTarget->BeginDraw();
             gConsole.Tick();
             gConsole.DrawViewItems();
@@ -119,13 +115,11 @@ int main(int argc, char* argv[])
             gUISystem.d2dRenderTarget->EndDraw();
 
             ImGui::Render();
-
             ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
         }
 
         gRenderSystem.Flush();
 
-        //PRESENT
         gRenderSystem.Present();
 
         gRenderSystem.WaitForPreviousFrame();
