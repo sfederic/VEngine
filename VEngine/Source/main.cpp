@@ -23,13 +23,10 @@
 #include "ConsoleDock.h"
 #include "RenderViewWidget.h"
 #include "WorldDock.h"
-
 #include "EditorSystem.h"
-
 #include "imgui/imgui.h"
 #include "imgui/backends/imgui_impl_win32.h"
 #include "imgui/backends/imgui_impl_dx11.h"
-
 #include "TransformGizmo.h"
 #include "ParticleSystem.h"
 #include "Actors/TestActor.h"
@@ -60,7 +57,7 @@ int main(int argc, char* argv[])
     gWorldEditor.Init();
 
     //test actor setup
-    testActorSystem.SpawnActors(1000);
+    testActorSystem.SpawnActors(2);
     GetWorld()->AddActorSystem(&testActorSystem);
 
     //Qt late init

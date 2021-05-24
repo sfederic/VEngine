@@ -162,7 +162,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 		//Delete actors in editor
 		if (gInputSystem.GetKeyUpState(Keys::Delete))
 		{
-			world->GetActorSystem(screenPickRay.actorSystemIndex)->RemoveActor(screenPickRay.actorIndex);
+			//world->GetActorSystem(screenPickRay.actorSystemIndex)->RemoveActor(screenPickRay.actorIndex);
 			pickedActor = nullptr;
 
 			gEditorSystem->PopulateWorldList();
@@ -175,6 +175,8 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 	{
 		lastMousePosX = gUISystem.mousePos.x;
 		lastMousePosY = gUISystem.mousePos.y;
+
+		Ray screenPickRay;
 
 		if (RaycastAllFromScreen(screenPickRay, gUISystem.mousePos.x, gUISystem.mousePos.y, &editorCamera, GetWorld()))
 		{
@@ -191,25 +193,24 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 
 			if (RaycastTriangleIntersect(screenPickRay))
 			{
-				pickedDirection = XMLoadFloat3(&screenPickRay.normal);
-				DebugPrint("%f %f %f\n", screenPickRay.normal.x, screenPickRay.normal.y, screenPickRay.normal.z);
-			}
-
-			if (debugLinesBuffer)
-			{
-				DrawRayDebug(screenPickRay.origin, screenPickRay.direction, screenPickRay.distance, debugLinesBuffer);
-			}
-
-			actorIndex = screenPickRay.actorIndex;
-			actorSystemIndex = screenPickRay.actorSystemIndex;
-
-			if (pickedActor)
-			{
-				//Properties Dock Panel
+				if (debugLinesBuffer)
 				{
-					ActorSystem* actorSystemToDisplay = GetWorld()->GetActorSystem(actorSystemIndex);
-					gEditorSystem->DisplayActorSystemProperties(pickedActor);
+					DrawRayDebug(screenPickRay.origin, screenPickRay.direction, screenPickRay.distance, debugLinesBuffer);
 				}
+
+				actorIndex = screenPickRay.actorIndex;
+				actorSystemIndex = screenPickRay.actorSystemIndex;
+
+				pickedActor = screenPickRay.hitActor;
+
+				/*if (pickedActor)
+				{
+					//Properties Dock Panel
+					{
+						ActorSystem* actorSystemToDisplay = GetWorld()->GetActorSystem(actorSystemIndex);
+						gEditorSystem->DisplayActorSystemProperties(pickedActor);
+					}
+				}*/
 			}
 		}
 	}

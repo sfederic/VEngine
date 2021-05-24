@@ -11,8 +11,6 @@ public:
 	void MoveActor(Actor* actor, XMVECTOR direction);
 	void MoveActor(class Actor* actor);
 
-	Ray screenPickRay;
-
 	Actor* pickedActor;
 	XMVECTOR pickedDirection;
 

@@ -1,8 +1,11 @@
 #pragma once
 
 #include <DirectXMath.h>
+#include <vector>
 
 using namespace DirectX;
+
+class Actor;
 
 struct Ray
 {
@@ -19,6 +22,9 @@ struct Ray
 
 	int actorIndex = 0;
 	int actorSystemIndex = 0;
+
+	std::vector<Actor*> hitActors;
+	Actor* hitActor;
 
 	bool bHit = false;
 };
