@@ -76,8 +76,8 @@ class ActorSystem
 {
 public:
 	ActorSystem();
-	void Serialise();
-	void Deserialise();
+	void Serialise(const std::string& levelName);
+	void Deserialise(const std::string& levelName);
 	virtual void Tick(float deltaTime) = 0;
 	virtual void SpawnActors(int numToSpawn) = 0;
 	virtual void SpawnActor(Transform transform) = 0;

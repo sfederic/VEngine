@@ -177,9 +177,10 @@ ActorSystem* Actor::GetActorSystem()
 	return nullptr;
 }
 
-void ActorSystem::Serialise()
+void ActorSystem::Serialise(const std::string& levelName)
 {
-	std::string file = name + ".ass"; //.ass stands for ActorSystem Save
+	std::string file = "LevelSaves/" + levelName;
+	file += ".sav";
 
 	Serialiser s(file, std::ios_base::out);
 
@@ -189,9 +190,10 @@ void ActorSystem::Serialise()
 	}
 }
 
-void ActorSystem::Deserialise()
+void ActorSystem::Deserialise(const std::string& levelName)
 {
-	std::string file = name + ".ass";
+	std::string file = "LevelSaves/" + levelName;
+	file += ".sav";
 
 	Serialiser s(file, std::ios_base::in);
 
