@@ -46,4 +46,5 @@ public:
     void SetActorPosition();
     void SetActorScale();
     void SetActorRotation();
+    void SetActorName();
 };

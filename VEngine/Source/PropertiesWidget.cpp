@@ -99,6 +99,7 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
     //Actor properties
     actorDetailsGrid->addWidget(new QLabel("Actor Name"), 0, 0);
     actorName = new QLineEdit();
+    connect(actorName, &QLineEdit::editingFinished, this, &PropertiesWidget::SetActorName);
     actorDetailsGrid->addWidget(actorName, 0, 1);
 
     //Actorsystem properties
@@ -174,6 +175,11 @@ void PropertiesWidget::SetActorRotation()
         float yaw = rotEditZ->value();
         gWorldEditor.pickedActor->SetRotation(roll, pitch, yaw);
     }
+}
+
+void PropertiesWidget::SetActorName()
+{
+    gWorldEditor.pickedActor->name = actorName->text().toStdString();
 }
 
 void PropertiesWidget::SelectShader()

@@ -90,7 +90,6 @@ public:
 		ActorType* actor = new ActorType();
 		actor->transform = transform;
 		actor->vertexBufferOffset = (int)(actors.size() * modelData.GetByteWidth());
-		actor->name = name;
 		actor->material = this->material;
 		actor->linkedActorSystem = this;
 

@@ -28,7 +28,8 @@ void Serialiser::Serialise(Actor* actor, std::ostream& os)
 		}
 		else if (type == typeid(std::string))
 		{
-			os << prop.first << ":" << (std::string&)prop.second << "\n";
+			auto str = (std::string*)prop.second;
+			os << prop.first << ":" << str->c_str() << "\n";
 		}
 	}
 
@@ -75,7 +76,8 @@ void Serialiser::Deserialise(Actor* actor, std::istream& is)
 		}
 		else if (type == typeid(std::string))
 		{
-			(std::string&)prop->second = value;
+			auto str = (std::string*)prop->second;
+			str->assign(value);
 		}
 	}
 }

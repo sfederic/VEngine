@@ -1,4 +1,15 @@
 TestActorSystem
 1
+Scale_x:1
+Name:hello 
+Position_x:0
+RotQuat_x:0
+Position_y:0
+Position_z:0
+Scale_y:1
+Scale_z:1
+RotQuat_y:0
+RotQuat_z:0
+RotQuat_w:1
 Render:1
 next

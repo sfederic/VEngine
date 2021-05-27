@@ -20,6 +20,8 @@ Properties Actor::GetProperties()
 {
 	Properties props;
 
+	props.Add("Name", &name);
+
 	props.Add("Position_x", &transform.position.x);
 	props.Add("Position_y", &transform.position.y);
 	props.Add("Position_z", &transform.position.z);
