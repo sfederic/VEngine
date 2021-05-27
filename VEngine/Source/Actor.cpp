@@ -200,10 +200,11 @@ ActorSystem* Actor::GetActorSystem()
 void ActorSystem::Serialise(std::ostream& os)
 {
 	os << name << "\n"; //Use actorsystem name to create again from ActorSystemFactory on Deserialise
-	os << actors.size() << "\n"; //Write out num of actors to load the same amount on Deserialise
+	os << actors.size(); //Write out num of actors to load the same amount on Deserialise
 
 	for (int i = 0; i < actors.size(); i++)
 	{
+		os << "\n";
 		Serialiser::Serialise(actors[i], os);
 	}
 }

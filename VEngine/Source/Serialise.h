@@ -48,10 +48,11 @@ struct Properties
 	std::unordered_map<std::string, std::optional<std::type_index>> typeMap;
 };
 
-//TODO: fix these two functions up. They're a conjoined mess of C and C++ I/O libs
 struct Serialiser
 {
 	Serialiser(const std::string& file, std::ios_base::openmode mode);
+
+	//TODO: I don't like these being static here.
 	static void Serialise(Actor* actor, std::ostream& os);
 	static void Deserialise(Actor* actor, std::istream& is);
 

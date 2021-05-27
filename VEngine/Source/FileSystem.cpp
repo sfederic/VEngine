@@ -42,9 +42,7 @@ void FileSystem::LoadWorld(const std::string& levelName)
 		auto asIt = ActorSystemFactory::nameToSystemMap->find(actorSystemName);
 		if (asIt == ActorSystemFactory::nameToSystemMap->end())
 		{
-			//TODO: figure out what kind of error to throw here. 
-			//There is an EOF problem where std::istream always returns "" at the end of a file
-			continue;
+			assert(true && "actorsystem not found in factory");
 		}
 
 		size_t numActorsToSpawn = 0;
