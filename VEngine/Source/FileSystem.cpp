@@ -69,7 +69,6 @@ void FileSystem::LoadWorld(const char* levelName)
 
 	gDebugMenu.notifications.push_back(DebugNotification(L"Level loaded."));
 
-
 	gEditorSystem->PopulateWorldList();
 
 	fflush(file);

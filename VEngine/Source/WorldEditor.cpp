@@ -203,14 +203,13 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 
 				pickedActor = screenPickRay.hitActor;
 
-				/*if (pickedActor)
+
+				//Set Properties Dock Panel from actorsystem
+				if (pickedActor)
 				{
-					//Properties Dock Panel
-					{
-						ActorSystem* actorSystemToDisplay = GetWorld()->GetActorSystem(actorSystemIndex);
-						gEditorSystem->DisplayActorSystemProperties(pickedActor);
-					}
-				}*/
+					ActorSystem* actorSystemToDisplay = GetWorld()->GetActorSystem(actorSystemIndex);
+					gEditorSystem->DisplayActorSystemProperties(pickedActor);
+				}
 			}
 		}
 	}
