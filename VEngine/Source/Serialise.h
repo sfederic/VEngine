@@ -13,24 +13,6 @@ class Actor;
 //REF:https://google.github.io/flatbuffers/flatbuffers_guide_tutorial.html
 //REF:http://donw.io/post/reflection-cpp-2/
 
-//TODO: for this serialisation code to work, actorsystem needs to be updated with something similar to
-/*void SerialiseAllActors(Serialiser& s, std::ostream& os)
-{
-	for (auto& actor : actors)
-	{
-		s.Serialise(actor, os);
-		os << "ret\n";
-	}
-}
-
-void DeserialiseAllActors(Serialiser& s, FILE* file)
-{
-	for (auto& actor : actors)
-	{
-		s.Deserialise(actor, file);
-	}
-}*/
-
 //Container for storing variable data and variable types against a name on registration.
 //Used with Actors during serialisation and creating property widgets.
 //Properties are created in GetProps() function blocks so that the maps can be cascaded down
@@ -70,8 +52,8 @@ struct Properties
 struct Serialiser
 {
 	Serialiser(const std::string& file, std::ios_base::openmode mode);
-	void Serialise(Actor* actor);
-	void Deserialise(Actor* actor);
+	static void Serialise(Actor* actor, std::ostream& os);
+	static void Deserialise(Actor* actor, std::istream& is);
 
 	std::filebuf fb;
 };

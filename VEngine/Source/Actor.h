@@ -29,11 +29,7 @@ public:
 	Actor();
 	virtual void Tick(float deltaTime);
 
-	virtual Properties GetProperties() 
-	{
-		Properties properties;
-		return properties;
-	}
+	virtual Properties GetProperties();
 
 	XMVECTOR GetPositionVector();
 	XMFLOAT3 GetPositionFloat3();
@@ -76,8 +72,8 @@ class ActorSystem
 {
 public:
 	ActorSystem();
-	void Serialise(const std::string& levelName);
-	void Deserialise(const std::string& levelName);
+	void Serialise(std::ostream& os);
+	void Deserialise(std::istream& is);
 	virtual void Tick(float deltaTime) = 0;
 	virtual void SpawnActors(int numToSpawn) = 0;
 	virtual void SpawnActor(Transform transform) = 0;

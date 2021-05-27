@@ -16,6 +16,17 @@ void Actor::Tick(float deltaTime)
 {
 }
 
+Properties Actor::GetProperties()
+{
+	Properties props;
+
+	props.Add("Position_x", &transform.position.x);
+	props.Add("Position_y", &transform.position.y);
+	props.Add("Position_z", &transform.position.z);
+
+	return props;
+}
+
 XMVECTOR Actor::GetPositionVector()
 {
 	return XMLoadFloat3(&transform.position);
@@ -177,29 +188,22 @@ ActorSystem* Actor::GetActorSystem()
 	return nullptr;
 }
 
-void ActorSystem::Serialise(const std::string& levelName)
+void ActorSystem::Serialise(std::ostream& os)
 {
-	std::string file = "LevelSaves/" + levelName;
-	file += ".sav";
-
-	Serialiser s(file, std::ios_base::out);
+	os << name << "\n"; //Use actorsystem name to create again from ActorSystemFactory on Deserialise
+	os << actors.size() << "\n"; //Write out num of actors to load the same amount on Deserialise
 
 	for (int i = 0; i < actors.size(); i++)
 	{
-		s.Serialise(actors[i]);
+		Serialiser::Serialise(actors[i], os);
 	}
 }
 
-void ActorSystem::Deserialise(const std::string& levelName)
+void ActorSystem::Deserialise(std::istream& is)
 {
-	std::string file = "LevelSaves/" + levelName;
-	file += ".sav";
-
-	Serialiser s(file, std::ios_base::in);
-
 	for (int i = 0; i < actors.size(); i++)
 	{
-		s.Deserialise(actors[i]);
+		Serialiser::Deserialise(actors[i], is);
 	}
 }
 
