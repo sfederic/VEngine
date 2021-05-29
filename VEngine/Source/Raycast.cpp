@@ -17,18 +17,23 @@ void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, class ID3
 {
 	Vertex v1 = {}, v2 = {};
 	XMStoreFloat3(&v1.pos, rayOrigin);
+	XMVECTOR pos = XMLoadFloat3(&v1.pos);
+	pos += GetActiveCamera()->right;
+	XMStoreFloat3(&v1.pos, pos);
+
 	if (distance <= 0.f)
 	{
-		distance = 10000.f;
+		distance = 0.f;
 	}
+
 	XMVECTOR dist = rayDir * distance;
 	XMVECTOR rayEnd = rayOrigin + dist;
 	XMStoreFloat3(&v2.pos, rayEnd);
 
-	//gRenderSystem.debugLines.push_back(v1);
-	//gRenderSystem.debugLines.push_back(v2);
+	gRenderSystem.debugLines[0] = v1;
+	gRenderSystem.debugLines[1] = v2;
 
-	//gRenderSystem.context->UpdateSubresource(debugBuffer, 0, nullptr, gRenderSystem.debugLines.data(), 0, 0);
+	gRenderSystem.context->UpdateSubresource(debugBuffer, 0, nullptr, &gRenderSystem.debugLines[0], 0, 0);
 }
 
 bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSystem, bool fromScreen)
@@ -84,6 +89,8 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSy
 				ray.hitActor = ray.hitActors[i];
 			}
 		}
+
+		ray.distance = nearestDistance;
 
 		return true;
 	}

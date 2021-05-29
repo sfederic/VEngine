@@ -18,7 +18,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 {
 	if (gUISystem.bUIClicked)
 	{
-		return;
+		//return;
 	}
 
 	//Turn off currently selected actor spawn systsm.
@@ -35,7 +35,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 		DuplicateActor();
 	}
 
-	SpawnActorOnClick();
+	//SpawnActorOnClick();
 
 	//Actor picking for editor
 	if (gInputSystem.GetMouseLeftDownState() && !gUISystem.bUIClicked)
@@ -53,7 +53,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 				{
 					if (debugLinesBuffer)
 					{
-						DrawRayDebug(screenPickRay.origin, screenPickRay.direction, screenPickRay.distance, debugLinesBuffer);
+						//DrawRayDebug(screenPickRay.origin, screenPickRay.direction, screenPickRay.distance, debugLinesBuffer);
 					}
 
 					SetPickedActor(screenPickRay.hitActor);

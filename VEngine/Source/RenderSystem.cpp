@@ -29,8 +29,6 @@ UINT offsets = 0;
 DebugBox* debugBox;
 DebugSphere* debugSphere;
 
-Vertex debugLineData[2];
-
 RenderSystem gRenderSystem;
 
 RenderSystem::RenderSystem()
@@ -75,7 +73,8 @@ void RenderSystem::Init(HWND window)
 	//Check feature support (just for breakpoint checking for now)
 	D3D11_FEATURE_DATA_THREADING threadFeature = {};
 	device->CheckFeatureSupport(D3D11_FEATURE_THREADING, &threadFeature, sizeof(threadFeature));
-	return;
+
+	debugLineBuffer = CreateDefaultBuffer(sizeof(Vertex) * 2, D3D11_BIND_VERTEX_BUFFER, debugLines);
 }
 
 void RenderSystem::CreateAllShaders()
@@ -126,9 +125,6 @@ void RenderSystem::CreateDevice()
 	HR(D3D11CreateDevice(adapter, D3D_DRIVER_TYPE_HARDWARE, 0, createDeviceFlags,
 		featureLevels, _countof(featureLevels), D3D11_SDK_VERSION, &device, &featureLevel, &context));
 
-
-	debugLineData[0].pos = XMFLOAT3(0.f, 0.f, 0.f);
-	debugLineData[1].pos = XMFLOAT3(0.f, 0.f, 100.f);
 
 	gShaderFactory.CompileAllShadersFromFile();
 	gRenderSystem.CreateAllShaders();
@@ -513,22 +509,28 @@ void RenderSystem::RenderEnd(float deltaTime)
 {
 	//TODO: put debug line buffers into rendersystem
 	//DRAW DEBUG LINES
-	/*if (debugLineBuffer != nullptr)
+	if (debugLineBuffer != nullptr)
 	{
+		auto boxIt = gShaderFactory.shaderMap.find(debugBox->shaderName);
+		context->VSSetShader(boxIt->second->vertexShader, nullptr, 0);
+		context->PSSetShader(boxIt->second->pixelShader, nullptr, 0);
+
 		context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
 		context->IASetVertexBuffers(0, 1, &debugLineBuffer, &strides, &offsets);
 
-		for (int i = 0; i < debugLines.size(); i++)
+		context->UpdateSubresource(debugLineBuffer, 0, nullptr, &debugLines[0], 0, 0);
+
+		for (int i = 0; i < 2; i++)
 		{
-			matrices.view = GetPlayerCamera()->view;
+			matrices.view = GetActiveCamera()->view;
 			matrices.model = XMMatrixIdentity();
 			matrices.mvp = matrices.model * matrices.view * matrices.proj;
 			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 			context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
-			context->Draw((UINT)debugLines.size(), 0);
+			context->Draw(2, 0);
 		}
-	}*/
+	}
 
 	//END QUERY
 	if (bQueryGPUInner)

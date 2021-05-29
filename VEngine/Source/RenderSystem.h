@@ -61,7 +61,7 @@ public:
 	std::vector<IDXGIAdapter1*> adapters;
 	std::vector<DXGI_ADAPTER_DESC1> adaptersDesc;
 
-	std::vector<Vertex> debugLines;
+	Vertex debugLines[2];
 	std::vector<XMMATRIX> debugLineMatrices;
 
 	ID3DBlob* CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target);
@@ -101,6 +101,8 @@ public:
 
 	ID3DBlob* vertexCode;
 	ID3DBlob* pixelCode;
+
+	ID3D11Buffer* debugLineBuffer;
 
 	Matrices matrices;
 	Material material;
