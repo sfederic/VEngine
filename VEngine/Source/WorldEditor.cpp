@@ -55,9 +55,6 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 						DrawRayDebug(screenPickRay.origin, screenPickRay.direction, screenPickRay.distance, debugLinesBuffer);
 					}
 
-					actorIndex = screenPickRay.actorIndex;
-					actorSystemIndex = screenPickRay.actorSystemIndex;
-
 					SetPickedActor(screenPickRay.hitActor);
 				}
 			}
@@ -72,54 +69,6 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 void WorldEditor::Init()
 {
 
-}
-
-void WorldEditor::MoveActor(Actor* actor, XMVECTOR direction)
-{
-	int mouseX = gUISystem.mousePos.x;
-	int mouseY = gUISystem.mousePos.y;
-
-	if (gInputSystem.GetAsyncKey(Keys::LeftMouse))
-	{
-		SetCapture(gCoreSystem.mainWindow);
-
-		float dx = XMConvertToRadians(0.25f * (float)(mouseX - lastMousePosX));
-		float dy = XMConvertToRadians(0.25f * (float)(mouseY - lastMousePosY));
-
-		if (actor)
-		{
-			XMVECTOR up = XMVectorEqual(direction, XMVectorUp());
-			//if (up.m128_f32[0] == 0)
-			{
-				actor->Move((dy + dx) * pickedActorMoveSpeed, direction);
-			}
-		}
-
-		ReleaseCapture();
-	}
-
-	lastMousePosX = mouseX;
-	lastMousePosY = mouseY;
-}
-
-//Actors as the movement along the translation axis using mouse (Different from Actor::Move())
-void WorldEditor::MoveActor(Actor* actor)
-{
-	int mouseX = gUISystem.mousePos.x;
-	int mouseY = gUISystem.mousePos.y;
-
-	if (gInputSystem.GetAsyncKey(Keys::LeftMouse))
-	{
-		SetCapture(gCoreSystem.mainWindow);
-
-		float dx = XMConvertToRadians(0.25f * (float)(mouseX - lastMousePosX));
-		float dy = XMConvertToRadians(0.25f * (float)(mouseY - lastMousePosY));
-
-		ReleaseCapture();
-	}
-
-	lastMousePosX = mouseX;
-	lastMousePosY = mouseY;
 }
 
 void WorldEditor::DeleteActor()
@@ -156,7 +105,7 @@ void WorldEditor::SetPickedActor(Actor* actor)
 	//Set Properties Dock Panel from actorsystem
 	if (pickedActor)
 	{
-		ActorSystem* actorSystemToDisplay = GetWorld()->GetActorSystem(actorSystemIndex);
+		ActorSystem* actorSystemToDisplay = pickedActor->linkedActorSystem;
 		gEditorSystem->DisplayActorSystemProperties(pickedActor);
 	}
 }

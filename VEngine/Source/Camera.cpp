@@ -76,7 +76,7 @@ void Camera::Tick(float deltaTime)
 			if (gInputSystem.GetKeyUpState('F'))
 			{
 				World* world = GetWorld();
-				ZoomTo(world->GetActor(gWorldEditor.actorSystemIndex, gWorldEditor.actorIndex));
+				ZoomTo(gWorldEditor.pickedActor);
 			}
 
 			//MOUSE WHEEL ZOOM
