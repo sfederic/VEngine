@@ -203,7 +203,6 @@ void ActorSystem::Serialise(std::ostream& os)
 
 	for (int i = 0; i < actors.size(); i++)
 	{
-		os << "\n";
 		Serialiser::Serialise(actors[i], os);
 	}
 }

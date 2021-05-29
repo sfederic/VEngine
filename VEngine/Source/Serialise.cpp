@@ -43,7 +43,7 @@ void Serialiser::Serialise(Actor* actor, std::ostream& os)
 		}
 	}
 
-	os << "next"; //"next" moves the forloop onto the next Actor in Deserialise
+	os << "next\n"; //"next" moves the forloop onto the next Actor in Deserialise
 }
 
 void Serialiser::Deserialise(Actor* actor, std::istream& is)
