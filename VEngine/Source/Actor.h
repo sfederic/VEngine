@@ -77,7 +77,7 @@ public:
 	void Deserialise(std::istream& is);
 	virtual void Tick(float deltaTime) = 0;
 	virtual void SpawnActors(int numToSpawn) = 0;
-	virtual void SpawnActor(Transform transform) = 0;
+	virtual Actor* SpawnActor(Transform transform) = 0;
 
 	template <class ActorType>
 	void SetActorSize()
@@ -86,7 +86,7 @@ public:
 	}
 
 	template <class ActorType>
-	ActorType* AddActor(Transform transform)
+	Actor* AddActor(Transform transform)
 	{
 		ActorType* actor = new ActorType();
 		actor->transform = transform;
@@ -96,10 +96,13 @@ public:
 
 		actors.push_back(actor);
 
-		//Structured buffer needs to be rebuilt
-		//TODO: Maybe look into doing some std::vector-tier allocation where reallocation on this buffer
-		//happens when it passes a threshold (eg. actors.size() > 64)
-		CreateStructuredBuffer();
+		if (bHasBeenInitialised)
+		{
+			//Structured buffer needs to be rebuilt
+			//TODO: Maybe look into doing some std::vector-tier allocation where reallocation on this buffer
+			//happens when it passes a threshold (eg. actors.size() > 64)
+			CreateStructuredBuffer();
+		}
 
 		return actor;
 	}

@@ -31,24 +31,8 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 
 	if (pickedActor)
 	{
-		//Delete selected actor
-		if (gInputSystem.GetKeyUpState(Keys::Delete))
-		{
-			pickedActor->Destroy();
-		}
-
-		//Duplicate selected actor
-		if (gInputSystem.GetAsyncKey(Keys::Ctrl))
-		{
-			if (gInputSystem.GetKeyDownState(Keys::D))
-			{
-				Transform transform = pickedActor->transform;
-				pickedActor->linkedActorSystem->SpawnActor(transform);
-
-				//Refresh world dock
-				gEditorSystem->PopulateWorldList();
-			}
-		}
+		DeleteActor();
+		DuplicateActor();
 
 		//Transform gizmo on button presses (i.e using arrows for rotation etc.)
 
@@ -272,4 +256,31 @@ void WorldEditor::MoveActor(Actor* actor)
 
 	lastMousePosX = mouseX;
 	lastMousePosY = mouseY;
+}
+
+void WorldEditor::DeleteActor()
+{
+	if (gInputSystem.GetKeyUpState(Keys::Delete))
+	{
+		pickedActor->Destroy();
+		pickedActor = nullptr;
+	}
+}
+
+void WorldEditor::DuplicateActor()
+{
+	if (gInputSystem.GetAsyncKey(Keys::Ctrl))
+	{
+		if (gInputSystem.GetKeyDownState(Keys::D))
+		{
+			Transform transform = pickedActor->transform;
+			Actor* newActor = pickedActor->linkedActorSystem->SpawnActor(transform);
+
+			pickedActor = newActor;
+
+			//Refresh world dock
+			gEditorSystem->PopulateWorldList();
+		}
+	}
+
 }

@@ -10,6 +10,8 @@ public:
 	void Init();
 	void MoveActor(Actor* actor, XMVECTOR direction);
 	void MoveActor(class Actor* actor);
+	void DeleteActor();
+	void DuplicateActor();
 
 	Actor* pickedActor;
 	XMVECTOR pickedDirection;

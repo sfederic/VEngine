@@ -8,6 +8,6 @@ class DebugBox : public ActorSystem
 public:
 	DebugBox();
 	virtual void Tick(float deltaTime);
-	virtual void SpawnActors(int numToSpawn) {}
-	virtual void SpawnActor(Transform transform) {}
+	virtual void SpawnActors(int numToSpawn) { }
+	virtual Actor* SpawnActor(Transform transform) { return nullptr; }
 };

@@ -26,9 +26,9 @@ void TestActorSystem::SpawnActors(int numToSpawn)
 	Init<TestActor>(numToSpawn);
 }
 
-void TestActorSystem::SpawnActor(Transform transform)
+Actor* TestActorSystem::SpawnActor(Transform transform)
 {
-	AddActor<TestActor>(transform);
+	return AddActor<TestActor>(transform);
 }
 
 TestActor::TestActor()

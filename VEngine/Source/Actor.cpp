@@ -317,7 +317,12 @@ void ActorSystem::CreateStructuredBuffer()
 		}
 	}
 
-	instancedDataStructuredBuffer->Release();
+	if (instancedDataStructuredBuffer)
+	{
+		//TODO: gotta fix this up.Maybe wrap this in a ComPtr.
+		//instancedDataStructuredBuffer->Release();
+	}
+
 	instancedDataStructuredBuffer = gRenderSystem.CreateStructuredBuffer(sizeof(InstanceData) * actors.size(), sizeof(InstanceData), actorModelMatrices.data());
 
 	D3D11_SHADER_RESOURCE_VIEW_DESC sbDesc = {};

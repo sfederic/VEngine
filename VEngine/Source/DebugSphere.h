@@ -9,5 +9,5 @@ public:
 	DebugSphere();
 	virtual void Tick(float deltaTime);
 	virtual void SpawnActors(int numToSpawn) {}
-	virtual void SpawnActor(Transform transform) {}
+	virtual Actor* SpawnActor(Transform transform) { return nullptr; }
 };
