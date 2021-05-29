@@ -74,7 +74,7 @@ void RenderSystem::Init(HWND window)
 	D3D11_FEATURE_DATA_THREADING threadFeature = {};
 	device->CheckFeatureSupport(D3D11_FEATURE_THREADING, &threadFeature, sizeof(threadFeature));
 
-	debugLineBuffer = CreateDefaultBuffer(sizeof(Vertex) * 2, D3D11_BIND_VERTEX_BUFFER, debugLines);
+	//debugLineBuffer = CreateDefaultBuffer(sizeof(Vertex) * 2, D3D11_BIND_VERTEX_BUFFER, debugLines);
 }
 
 void RenderSystem::CreateAllShaders()

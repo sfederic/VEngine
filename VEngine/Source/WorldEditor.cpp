@@ -11,6 +11,7 @@
 #include "EditorSystem.h"
 #include "Actors/TestActor.h"
 #include "ActorSystemFactory.h"
+#include "DebugMenu.h"
 
 WorldEditor gWorldEditor;
 
@@ -38,7 +39,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 	SpawnActorOnClick();
 
 	//Actor picking for editor
-	if (gInputSystem.GetMouseLeftDownState() && !gUISystem.bUIClicked)
+	if (gInputSystem.GetMouseLeftDownState() && !gUISystem.bUIClicked && !bActorSpawnerOn)
 	{
 		lastMousePosX = gUISystem.mousePos.x;
 		lastMousePosY = gUISystem.mousePos.y;
@@ -116,12 +117,13 @@ void WorldEditor::SpawnActorOnClick()
 	if (gInputSystem.GetKeyUpState(Keys::Tab))
 	{
 		bActorSpawnerOn = !bActorSpawnerOn;
+		gDebugMenu.bActorSpawnMenuOpen = bActorSpawnerOn;
 	}
 
 	if (bActorSpawnerOn)
 	{
 		//Spawn actor on right click in viewport
-		if (gInputSystem.GetMouseRightUpState())
+		if (gInputSystem.GetMouseLeftUpState())
 		{
 			ActorSystem* actorSystem = ActorSystemFactory::GetCurrentActiveActorSystem();
 			if (actorSystem)
@@ -152,6 +154,8 @@ void WorldEditor::SpawnActorOnClick()
 
 					actorSystem->SpawnActor(transform);
 				}
+
+				gEditorSystem->PopulateWorldList();
 			}
 		}
 	}

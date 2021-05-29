@@ -49,6 +49,7 @@ public:
 	void RenderProfileMenu();
 	void RenderSnappingMenu();
 	void RenderActorStatsMenu();
+	void RenderActorSpawnMenu();
 
 	std::vector<MenuItem> menuItems;
 	std::vector<DebugNotification> notifications;
@@ -58,6 +59,7 @@ public:
 	bool bGPUMenuOpen = false;
 	bool bSnapMenuOpen = false;
 	bool bActorStatsMenuOpen = false;
+	bool bActorSpawnMenuOpen = false;
 };
 
 extern DebugMenu gDebugMenu;

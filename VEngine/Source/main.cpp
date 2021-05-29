@@ -100,17 +100,6 @@ int main(int argc, char* argv[])
 
         gRenderSystem.Render(deltaTime);
 
-        //spawner picker testing
-        Ray ray = {};
-        if (RaycastAllFromScreen(ray, gUISystem.mousePos.x, gUISystem.mousePos.y, GetActiveCamera(), GetWorld()))
-        {
-            DrawRayDebug(ray.origin, ray.direction, ray.distance, gRenderSystem.debugLineBuffer);
-        }
-        else
-        {
-            DrawRayDebug(ray.origin, ray.direction, 10.f, gRenderSystem.debugLineBuffer);
-        }
-
         gRenderSystem.RenderEnd(deltaTime);
 
         //UI RENDERING

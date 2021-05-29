@@ -50,12 +50,12 @@ bool RenderViewWidget::nativeEvent(const QByteArray& eventType, void* message, l
         break;
 
     case WM_LBUTTONUP:
-        //gInputSystem.StoreMouseLeftUpInput(msg->wParam);
-        //break;
+        gInputSystem.StoreMouseLeftUpInput();
+        break;
 
     case WM_LBUTTONDOWN:
-        //gInputSystem.StoreMouseLeftDownInput(msg->wParam);
-        //break;
+        gInputSystem.StoreMouseLeftDownInput();
+        break;
 
     case WM_RBUTTONUP:
         gInputSystem.StoreMouseRightUpInput();

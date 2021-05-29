@@ -51,6 +51,7 @@ void DebugMenu::Tick(World* world, float deltaTime)
 	RenderProfileMenu();
 	RenderSnappingMenu();
 	RenderActorStatsMenu();
+	RenderActorSpawnMenu();
 
 	ImGui::EndFrame();
 }
@@ -201,6 +202,28 @@ void DebugMenu::RenderActorStatsMenu()
 
 		World* world = GetWorld();
 		ImGui::Text("Num actors rendered: %d", world->GetNumOfActorsInWorld());
+
+		ImGui::End();
+	}
+}
+
+void DebugMenu::RenderActorSpawnMenu()
+{
+	if (bActorSpawnMenuOpen)
+	{
+		ImGui::Begin("Active Actor System");
+		ImGui::SetWindowPos(ImVec2(10, 10));
+		ImGui::SetWindowSize(ImVec2(200, 50));
+		
+		ActorSystem* activeAS = ActorSystemFactory::GetCurrentActiveActorSystem();
+		if (activeAS)
+		{
+			ImGui::Text("%s", activeAS->name.c_str());
+		}
+		else
+		{
+			ImGui::Text("None");
+		}
 
 		ImGui::End();
 	}
