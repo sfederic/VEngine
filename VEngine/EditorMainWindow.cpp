@@ -128,6 +128,12 @@ bool EditorMainWindow::nativeEvent(const QByteArray& eventType, void* message, l
         gInputSystem.StoreMouseRightUpInput();
         break;
 
+    case WM_MBUTTONDOWN:
+        gInputSystem.StoreMouseMiddleDownInput();
+
+    case WM_MBUTTONUP:
+        gInputSystem.StoreMouseMiddleUpInput();
+
     case WM_RBUTTONDOWN:
         gInputSystem.StoreMouseRightDownInput();
         break;

@@ -35,6 +35,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 		DuplicateActor();
 	}
 
+	SpawnActorOnClick();
 
 	//Actor picking for editor
 	if (gInputSystem.GetMouseLeftDownState() && !gUISystem.bUIClicked)
@@ -107,5 +108,24 @@ void WorldEditor::SetPickedActor(Actor* actor)
 	{
 		ActorSystem* actorSystemToDisplay = pickedActor->linkedActorSystem;
 		gEditorSystem->DisplayActorSystemProperties(pickedActor);
+	}
+}
+
+void WorldEditor::SpawnActorOnClick()
+{
+	//Spawn actor on right click in viewport
+	if (gInputSystem.GetMouseMiddleUpState())
+	{
+		ActorSystem* actorSystem = ActorSystemFactory::GetCurrentActiveActorSystem();
+		if (actorSystem)
+		{
+			XMVECTOR spawnPos = GetActiveCamera()->location;
+			spawnPos += GetActiveCamera()->forward * 5.0f;
+
+			Transform transform;
+			XMStoreFloat3(&transform.position, spawnPos);
+
+			actorSystem->SpawnActor(transform);
+		}
 	}
 }

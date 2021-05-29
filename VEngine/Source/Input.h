@@ -40,6 +40,7 @@ enum class Keys
 
 	LeftMouse = VK_LBUTTON,
 	RightMouse = VK_RBUTTON,
+	MiddleMouse = VK_MBUTTON
 };
 #endif
 
@@ -54,6 +55,8 @@ public:
 	void StoreMouseLeftUpInput();
 	void StoreMouseRightDownInput();
 	void StoreMouseRightUpInput();
+	void StoreMouseMiddleDownInput();
+	void StoreMouseMiddleUpInput();
 
 	bool GetKeyUpState(Keys key);
 	bool GetKeyUpState(Keys key, Keys modifier);
@@ -68,6 +71,8 @@ public:
 	bool GetMouseLeftUpState();
 	bool GetMouseRightDownState();
 	bool GetMouseRightUpState();
+	bool GetMouseMiddleUpState();
+	bool GetMouseMiddleDownState();
 	bool GetAsyncKey(Keys key);
 	bool GetAsyncKey(int key);
 	void InputReset();
@@ -83,6 +88,8 @@ public:
 	bool leftMouseDown;
 	bool rightMouseUp;
 	bool rightMouseDown;
+	bool middleMouseDown;
+	bool middleMouseUp;
 	bool keyUp;
 	bool keyDown;
 	bool bMouseWheelUp;

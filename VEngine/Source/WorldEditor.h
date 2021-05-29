@@ -11,6 +11,7 @@ public:
 	void DeleteActor();
 	void DuplicateActor();
 	void SetPickedActor(Actor* actor);
+	void SpawnActorOnClick();
 
 	Actor* pickedActor;
 

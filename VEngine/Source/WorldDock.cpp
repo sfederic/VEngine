@@ -26,7 +26,7 @@ WorldDock::WorldDock(const char* title) : QDockWidget(title)
     //Actor systems list to choose actor spawning 
     actorSystemList = new QListWidget();
     actorSystemList->setSelectionMode(QAbstractItemView::SelectionMode::ExtendedSelection);
-    connect(actorSystemList, &QListWidget::itemClicked, this, &WorldDock::ClickOnListActor);
+    connect(actorSystemList, &QListWidget::itemClicked, this, &WorldDock::ClickOnActorSystem);
 
     PopulateActorSystemList();
 
@@ -36,7 +36,7 @@ WorldDock::WorldDock(const char* title) : QDockWidget(title)
     //currently active actor systems in world list
     worldTreeList = new QTreeWidget();
 
-    connect(worldTreeList, &QTreeWidget::itemClicked, this, &WorldDock::ClickOnListActorSystem);
+    connect(worldTreeList, &QTreeWidget::itemClicked, this, &WorldDock::ClickOnActor);
     worldTreeList->setColumnCount(1);
     worldTreeList->setHeaderLabels(QStringList("Active Actor Systems"));
 
@@ -93,7 +93,7 @@ void WorldDock::PopulateWorldList()
     worldTreeList->insertTopLevelItems(0, worldTreeItems);
 }
 
-void WorldDock::ClickOnListActorSystem(QTreeWidgetItem* listItem)
+void WorldDock::ClickOnActor(QTreeWidgetItem* listItem)
 {
     QString string = listItem->text(0);
     Actor* clickedActor = GetWorld()->FindActorByString(string.toStdString());
@@ -105,7 +105,7 @@ void WorldDock::ClickOnListActorSystem(QTreeWidgetItem* listItem)
     }
 }
 
-void WorldDock::ClickOnListActor(QListWidgetItem* listItem)
+void WorldDock::ClickOnActorSystem(QListWidgetItem* listItem)
 {
     QString actorSystemName = listItem->text();
     ActorSystem* actorSystem = ActorSystemFactory::GetActorSystem(actorSystemName.toStdString().c_str());

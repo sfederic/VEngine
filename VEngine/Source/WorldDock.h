@@ -16,8 +16,8 @@ public:
 
     void PopulateActorSystemList();
     void PopulateWorldList();
-    void ClickOnListActorSystem(class QTreeWidgetItem* listItem);
-    void ClickOnListActor(class QListWidgetItem* listItem);
+    void ClickOnActor(class QTreeWidgetItem* listItem);
+    void ClickOnActorSystem(class QListWidgetItem* listItem);
     void SearchWorldList();
 
     QListWidget* actorSystemList;

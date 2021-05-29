@@ -62,6 +62,18 @@ void InputSystem::StoreMouseRightUpInput()
 	rightMouseDown = false;
 }
 
+void InputSystem::StoreMouseMiddleDownInput()
+{
+	middleMouseDown = true;
+	middleMouseUp = false;
+}
+
+void InputSystem::StoreMouseMiddleUpInput()
+{
+	middleMouseUp = true;
+	middleMouseDown = false;
+}
+
 bool InputSystem::GetKeyDownState(Keys key)
 {
 	if (currentDownKey == (int)key)
@@ -154,6 +166,30 @@ bool InputSystem::GetMouseRightUpState()
 	}
 }
 
+bool InputSystem::GetMouseMiddleUpState()
+{
+	if (middleMouseUp)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool InputSystem::GetMouseMiddleDownState()
+{
+	if (middleMouseDown)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 bool InputSystem::GetAsyncKey(Keys key)
 {
 	if (GetAsyncKeyState((int)key))
@@ -228,6 +264,8 @@ void InputSystem::InputReset()
 	rightMouseUp = false;
 	leftMouseDown = false;
 	leftMouseUp = false;
+	middleMouseUp = false;
+	middleMouseDown = false;
 	currentDownKey = (int)Keys::None;
 	currentUpKey = (int)Keys::None;
 	keyDown = false;
