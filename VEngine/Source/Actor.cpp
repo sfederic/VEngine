@@ -319,7 +319,7 @@ void ActorSystem::CreateStructuredBuffer()
 
 	if (instancedDataStructuredBuffer)
 	{
-		//TODO: gotta fix this up.Maybe wrap this in a ComPtr.
+		//TODO: gotta fix this up. Maybe wrap this in a ComPtr.
 		//instancedDataStructuredBuffer->Release();
 	}
 

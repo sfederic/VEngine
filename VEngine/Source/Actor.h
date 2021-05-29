@@ -95,6 +95,8 @@ public:
 		actor->linkedActorSystem = this;
 
 		actors.push_back(actor);
+	
+		actor->name = this->name + std::to_string(actors.size() - 1);
 
 		if (bHasBeenInitialised)
 		{
