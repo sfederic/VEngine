@@ -22,18 +22,9 @@ Properties Actor::GetProperties()
 
 	props.Add("Name", &name);
 
-	props.Add("Position_x", &transform.position.x);
-	props.Add("Position_y", &transform.position.y);
-	props.Add("Position_z", &transform.position.z);
-
-	props.Add("Scale_x", &transform.scale.x);
-	props.Add("Scale_y", &transform.scale.y);
-	props.Add("Scale_z", &transform.scale.z);
-
-	props.Add("RotQuat_x", &transform.quatRotation.x);
-	props.Add("RotQuat_y", &transform.quatRotation.y);
-	props.Add("RotQuat_z", &transform.quatRotation.z);
-	props.Add("RotQuat_w", &transform.quatRotation.w);
+	props.Add("Position", &transform.position);
+	props.Add("Scale", &transform.scale);
+	props.Add("RotQuat", &transform.quatRotation);
 
 	return props;
 }

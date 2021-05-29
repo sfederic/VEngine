@@ -33,6 +33,8 @@ void TestActorSystem::SpawnActor(Transform transform)
 
 TestActor::TestActor()
 {
+	name = "TestActor";
+
 	currentPos = GetPositionVector();
 	nextPos = currentPos;
 

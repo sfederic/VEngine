@@ -20,16 +20,26 @@ void Serialiser::Serialise(Actor* actor, std::ostream& os)
 
 		if (type == typeid(float))
 		{
-			os << prop.first << ":" << *(float*)prop.second << "\n";
+			os << prop.first << "\n" << *(float*)prop.second << "\n";
+		}
+		else if (type == typeid(XMFLOAT3))
+		{
+			auto* value = (XMFLOAT3*)prop.second;
+			os << prop.first << "\n" << value->x << " " << value->y << " " << value->z << "\n";
+		}
+		else if (type == typeid(XMFLOAT4))
+		{
+			auto* value = (XMFLOAT4*)prop.second;
+			os << prop.first << "\n" << value->x << " " << value->y << " " << value->z << " " << value->w << "\n";
 		}
 		else if (type == typeid(bool))
 		{
-			os << prop.first << ":" << *(bool*)prop.second << "\n";
+			os << prop.first << "\n" << *(bool*)prop.second << "\n";
 		}
 		else if (type == typeid(std::string))
 		{
 			auto str = (std::string*)prop.second;
-			os << prop.first << ":" << str->c_str() << "\n";
+			os << prop.first << "\n" << str->c_str() << "\n";
 		}
 	}
 
@@ -40,10 +50,10 @@ void Serialiser::Deserialise(Actor* actor, std::istream& is)
 {
 	Properties props = actor->GetProperties();
 
-	char line[256];
+	char line[512];
 	while (!is.eof())
 	{
-		is.getline(line, 256);
+		is.getline(line, 512);
 
 		std::string stringline = line;
 		if (stringline.find("next") != stringline.npos) //Move to next actor
@@ -51,33 +61,43 @@ void Serialiser::Deserialise(Actor* actor, std::istream& is)
 			return;
 		}
 
-		char* value = nullptr;
-		char* name = strtok_s(line, ":", &value);
-		if (name == nullptr || value == nullptr || strcmp(value, "") == 0)
-		{
-			continue;
-		}
-
-		auto prop = props.dataMap.find(name);
+		auto prop = props.dataMap.find(line);
 		if (prop == props.dataMap.end())
 		{
 			continue;
 		}
 
-		std::type_index type = props.typeMap.find(name)->second.value();
+		std::type_index type = props.typeMap.find(line)->second.value();
 
 		if (type == typeid(float))
 		{
-			*(float*)prop->second = std::stof(value);
+			is >> *(float*)prop->second;
+		}
+		else if (type == typeid(XMFLOAT3))
+		{
+			auto float3 = (XMFLOAT3*)prop->second;
+			is >> float3->x;
+			is >> float3->y;
+			is >> float3->z;
+		}
+		else if (type == typeid(XMFLOAT4))
+		{
+			auto float4 = (XMFLOAT4*)prop->second;
+			is >> float4->x; 
+			is >> float4->y;
+			is >> float4->z;
+			is >> float4->w;
 		}
 		else if (type == typeid(bool))
 		{
-			*(bool*)prop->second = std::stoi(value);
+			is >> *(bool*)prop->second;
 		}
 		else if (type == typeid(std::string))
 		{
+			char actorString[512];
+			is.getline(actorString, 512);
 			auto str = (std::string*)prop->second;
-			str->assign(value);
+			str->assign(actorString);
 		}
 	}
 }
