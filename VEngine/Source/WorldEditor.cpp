@@ -46,24 +46,27 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 
 		if (RaycastAllFromScreen(screenPickRay, gUISystem.mousePos.x, gUISystem.mousePos.y, &editorCamera, GetWorld()))
 		{
-			if (RaycastTriangleIntersect(screenPickRay))
+			//if (screenPickRay.hitActors.size() > 1) //Checking if multiple bounding volumes are hit
 			{
-				if (debugLinesBuffer)
+				if (RaycastTriangleIntersect(screenPickRay))
 				{
-					DrawRayDebug(screenPickRay.origin, screenPickRay.direction, screenPickRay.distance, debugLinesBuffer);
-				}
+					if (debugLinesBuffer)
+					{
+						DrawRayDebug(screenPickRay.origin, screenPickRay.direction, screenPickRay.distance, debugLinesBuffer);
+					}
 
-				actorIndex = screenPickRay.actorIndex;
-				actorSystemIndex = screenPickRay.actorSystemIndex;
+					actorIndex = screenPickRay.actorIndex;
+					actorSystemIndex = screenPickRay.actorSystemIndex;
 
-				pickedActor = screenPickRay.hitActor;
+					pickedActor = screenPickRay.hitActor;
 
 
-				//Set Properties Dock Panel from actorsystem
-				if (pickedActor)
-				{
-					ActorSystem* actorSystemToDisplay = GetWorld()->GetActorSystem(actorSystemIndex);
-					gEditorSystem->DisplayActorSystemProperties(pickedActor);
+					//Set Properties Dock Panel from actorsystem
+					if (pickedActor)
+					{
+						ActorSystem* actorSystemToDisplay = GetWorld()->GetActorSystem(actorSystemIndex);
+						gEditorSystem->DisplayActorSystemProperties(pickedActor);
+					}
 				}
 			}
 		}

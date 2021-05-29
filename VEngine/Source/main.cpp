@@ -58,6 +58,7 @@ int main(int argc, char* argv[])
 
     //test actor setup
     testActorSystem.SpawnActors(2);
+    testActorSystem.GetActor(1)->transform.position.x = 3.0f;
     GetWorld()->AddActorSystem(&testActorSystem);
 
     //Qt late init

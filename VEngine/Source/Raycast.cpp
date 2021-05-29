@@ -101,18 +101,21 @@ bool RaycastTriangleIntersect(Ray& ray)
 	for (Actor* actor : ray.hitActors)
 	{
 		XMMATRIX model = actor->GetTransformationMatrix();
-		XMMATRIX mvp = model * gRenderSystem.matrices.view * gRenderSystem.matrices.proj;
 
 		for (int i = 0; i < actorSystem->modelData.verts.size() / 3; i++)
 		{
-			XMVECTOR v0 = XMLoadFloat3(&actorSystem->modelData.verts[i * 3 + 0].pos);
-			XMVector3TransformCoord(v0, mvp);
+			uint32_t index2 = actorSystem->modelData.indices[i * 3];
+			uint32_t index1 = actorSystem->modelData.indices[i * 3 + 1];
+			uint32_t index0 = actorSystem->modelData.indices[i * 3 + 2];
 
-			XMVECTOR v1 = XMLoadFloat3(&actorSystem->modelData.verts[i * 3 + 1].pos);
-			XMVector3TransformCoord(v1, mvp);
+			XMVECTOR v0 = XMLoadFloat3(&actorSystem->modelData.verts[index0].pos);
+			v0 = XMVector3TransformCoord(v0, model);
 
-			XMVECTOR v2 = XMLoadFloat3(&actorSystem->modelData.verts[i * 3 + 2].pos);
-			XMVector3TransformCoord(v2, mvp);
+			XMVECTOR v1 = XMLoadFloat3(&actorSystem->modelData.verts[index1].pos);
+			v1 = XMVector3TransformCoord(v1, model);
+
+			XMVECTOR v2 = XMLoadFloat3(&actorSystem->modelData.verts[index2].pos);
+			v2 = XMVector3TransformCoord(v2, model);
 
 			Ray tempRay = {};
 			tempRay = ray;
@@ -123,20 +126,19 @@ bool RaycastTriangleIntersect(Ray& ray)
 				tempRay.modelDataIndex = i;
 
 				XMVECTOR normal = XMVectorZero();
-				normal += XMLoadFloat3(&actorSystem->modelData.verts[i * 3 + 0].normal);
-				normal += XMLoadFloat3(&actorSystem->modelData.verts[i * 3 + 1].normal);
-				normal += XMLoadFloat3(&actorSystem->modelData.verts[i * 3 + 2].normal);
+				normal += XMLoadFloat3(&actorSystem->modelData.verts[index0].normal);
+				normal += XMLoadFloat3(&actorSystem->modelData.verts[index1].normal);
+				normal += XMLoadFloat3(&actorSystem->modelData.verts[index2].normal);
 
 				normal = XMVector3Normalize(normal);
 
 				XMStoreFloat3(&tempRay.normal, normal);
 
-				//tempRay.hitActors.push_back(actor);
 				tempRay.hitActor = actor;
 
 				rays.push_back(tempRay);
 
-				DebugPrint("%s Triangle index %d hit.\n", typeid(actor).name(), i);
+				DebugPrint("%s Triangle index %d hit.\n", actor->name, i);
 			}
 		}
 	}
@@ -193,12 +195,6 @@ bool RaycastAllFromScreen(Ray& ray, int sx, int sy, Camera* camera, World* world
 		if (RaycastFromScreen(ray, sx, sy, camera, world->actorSystems[i]))
 		{
 			ray.actorSystemIndex = i;
-
-			Actor* actor = world->GetActor(ray.actorSystemIndex, ray.actorIndex);
-			if (actor)
-			{
-				gWorldEditor.pickedActor = actor;
-			}
 
 			return true;
 		}
