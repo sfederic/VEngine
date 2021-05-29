@@ -48,6 +48,13 @@ struct Properties
 	std::unordered_map<std::string, std::optional<std::type_index>> typeMap;
 };
 
+//Level save text file structure looks like this:
+//ActorSystem Name
+//Num of actors to spawn
+//Actor Property - eg. Position
+//Property value - eg. 1 -4 69.5
+//next
+
 struct Serialiser
 {
 	Serialiser(const std::string& file, std::ios_base::openmode mode);
