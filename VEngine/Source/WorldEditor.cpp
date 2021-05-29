@@ -35,7 +35,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 		DuplicateActor();
 	}
 
-	//SpawnActorOnClick();
+	SpawnActorOnClick();
 
 	//Actor picking for editor
 	if (gInputSystem.GetMouseLeftDownState() && !gUISystem.bUIClicked)
@@ -113,19 +113,46 @@ void WorldEditor::SetPickedActor(Actor* actor)
 
 void WorldEditor::SpawnActorOnClick()
 {
-	//Spawn actor on right click in viewport
-	if (gInputSystem.GetMouseRightUpState())
+	if (gInputSystem.GetKeyUpState(Keys::Tab))
 	{
-		ActorSystem* actorSystem = ActorSystemFactory::GetCurrentActiveActorSystem();
-		if (actorSystem)
+		bActorSpawnerOn = !bActorSpawnerOn;
+	}
+
+	if (bActorSpawnerOn)
+	{
+		//Spawn actor on right click in viewport
+		if (gInputSystem.GetMouseRightUpState())
 		{
-			XMVECTOR spawnPos = GetActiveCamera()->location;
-			spawnPos += GetActiveCamera()->forward * 5.0f;
+			ActorSystem* actorSystem = ActorSystemFactory::GetCurrentActiveActorSystem();
+			if (actorSystem)
+			{
+				Ray ray;
+				if (RaycastAllFromScreen(ray, gUISystem.mousePos.x, gUISystem.mousePos.y, GetActiveCamera(), GetWorld()))
+				{
+					//Spawn actor at ray hit point
+					Transform transform;
 
-			Transform transform;
-			XMStoreFloat3(&transform.position, spawnPos);
+					XMVECTOR dist = ray.direction * ray.distance;
+					XMVECTOR rayEnd = ray.origin + dist;
+					XMStoreFloat3(&transform.position, rayEnd);
 
-			actorSystem->SpawnActor(transform);
+					actorSystem->SpawnActor(transform);
+				}
+				else
+				{
+					//Spawn actor a bit in front of the camera based on the click
+					XMVECTOR spawnPos = GetActiveCamera()->location;
+					spawnPos += GetActiveCamera()->forward * 10.0f;
+
+					Transform transform;
+
+					XMVECTOR dist = ray.direction * 10.f;
+					XMVECTOR rayEnd = ray.origin + dist;
+					XMStoreFloat3(&transform.position, rayEnd);
+
+					actorSystem->SpawnActor(transform);
+				}
+			}
 		}
 	}
 }

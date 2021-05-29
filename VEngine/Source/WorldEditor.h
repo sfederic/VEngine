@@ -22,6 +22,7 @@ public:
 	bool bRotateActors = false;
 	bool bTranslateActors = false;
 	bool bScaleActors = false;
+	bool bActorSpawnerOn = false;
 };
 
 extern WorldEditor gWorldEditor;
