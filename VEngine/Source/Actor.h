@@ -119,27 +119,7 @@ public:
 
 			gRenderSystem.CreateVertexBuffer(byteWidth, modelData.verts.data(), this);
 
-			std::vector<XMMATRIX> actorModelMatrices;
-			actorModelMatrices.reserve(actors.size());
-			for (int i = 0; i < actors.size(); i++)
-			{
-				if (i < actors.size())
-				{
-					actorModelMatrices.push_back(actors[i]->GetTransformationMatrix());
-				}
-				else
-				{
-					actorModelMatrices.push_back(XMMatrixIdentity());
-				}
-			}
-
-			//Setup structured buffer
-			instancedDataStructuredBuffer = gRenderSystem.CreateStructuredBuffer(sizeof(InstanceData) * actors.size(), sizeof(InstanceData), actorModelMatrices.data());
-			D3D11_SHADER_RESOURCE_VIEW_DESC sbDesc = {};
-			sbDesc.Format = DXGI_FORMAT_UNKNOWN;
-			sbDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFEREX;
-			sbDesc.BufferEx.NumElements = actors.size();
-			HR(gRenderSystem.device->CreateShaderResourceView(instancedDataStructuredBuffer, &sbDesc, &instancedDataSrv));
+			CreateStructuredBuffer();
 
 			//Sampler, texture setup
 			gRenderSystem.CreateSamplerState(GetSamplerState());
@@ -177,6 +157,8 @@ public:
 	void SetRasterizerState(RasterizerState* rasterizerState);
 	void SetShaderView(ShaderResourceView* shaderView);
 	void SetTexture(Texture* texture);
+
+	void CreateStructuredBuffer();
 
 	void RecreateTexture();
 	void RecreateShader();

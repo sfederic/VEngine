@@ -404,7 +404,6 @@ void RenderSystem::RenderActorSystem(World* world)
 		std::vector<InstanceData> instanceData;
 		instanceData.reserve(actorSystem->actors.size());
 
-
 		//Populate instance data
 		for (int actorIndex = 0; actorIndex < actorSystem->actors.size(); actorIndex++)
 		{
