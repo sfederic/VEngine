@@ -42,7 +42,7 @@ void FileSystem::LoadWorld(const std::string& levelName)
 		auto asIt = ActorSystemFactory::nameToSystemMap->find(actorSystemName);
 		if (asIt == ActorSystemFactory::nameToSystemMap->end())
 		{
-			assert(true && "actorsystem not found in factory");
+			continue;
 		}
 
 		size_t numActorsToSpawn = 0;

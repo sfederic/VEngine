@@ -15,6 +15,10 @@ public:
 	void AssetItemClicked();
 	void AssetFolderClicked();
 
+	//Context menu functions
+	void ShowCreateAssetContextMenu(const QPoint& pos);
+	void CreateLevel();
+
 	QListWidget* assetIcons;
 	QFileSystemModel* fileSystemModel;
 	QTreeView* assetTreeView;

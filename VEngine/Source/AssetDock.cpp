@@ -12,6 +12,9 @@
 #include <filesystem>
 #include "World.h"
 #include "FileSystem.h"
+#include <qmenu.h>
+#include <fstream>
+#include <qinputdialog.h>
 
 AssetDock::AssetDock(const char* title) : QDockWidget(title)
 {
@@ -50,6 +53,11 @@ AssetDock::AssetDock(const char* title) : QDockWidget(title)
 
     QFileSystemModel* fileModel = new QFileSystemModel();
     fileModel->setRootPath(QDir::currentPath());
+
+
+    //Setup context menu
+    setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(this, &QWidget::customContextMenuRequested, this, &AssetDock::ShowCreateAssetContextMenu);
 }
 
 void AssetDock::Tick()
@@ -102,4 +110,25 @@ void AssetDock::AssetFolderClicked()
         item->setSizeHint(QSize(100, 100));
         assetIcons->addItem(item);
     }
+}
+
+void AssetDock::ShowCreateAssetContextMenu(const QPoint& pos)
+{
+    QMenu contextMenu(tr("Create Asset"), this);
+
+    contextMenu.addAction("New Level", this, &AssetDock::CreateLevel);
+
+    contextMenu.exec(mapToGlobal(pos));
+}
+
+void AssetDock::CreateLevel()
+{
+    QString levelName = QInputDialog::getText(this, "New Level", "Enter level name:");
+    std::string levelPath = "LevelSaves/" + levelName.toStdString() + ".sav";
+
+    std::ofstream stream(levelPath);
+    stream << "empty" << std::endl;
+    stream.close();
+
+    AssetFolderClicked(); //Refresh the asset widget
 }
