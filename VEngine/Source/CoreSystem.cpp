@@ -173,9 +173,11 @@ LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam
 
 	case WM_MBUTTONDOWN:
 		gInputSystem.StoreMouseMiddleDownInput();
+		break;
 
 	case WM_MBUTTONUP:
 		gInputSystem.StoreMouseMiddleUpInput();
+		break;
 
 	case WM_MOUSEWHEEL:
 		if (GET_WHEEL_DELTA_WPARAM(wparam) < 0)

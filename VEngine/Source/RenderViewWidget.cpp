@@ -67,9 +67,11 @@ bool RenderViewWidget::nativeEvent(const QByteArray& eventType, void* message, l
 
     case WM_MBUTTONDOWN:
         gInputSystem.StoreMouseMiddleDownInput();
+        break;
 
     case WM_MBUTTONUP:
         gInputSystem.StoreMouseMiddleUpInput();
+        break;
 
     case WM_MOUSEWHEEL:
         if (GET_WHEEL_DELTA_WPARAM(msg->wParam) < 0)
