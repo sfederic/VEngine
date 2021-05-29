@@ -31,6 +31,12 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 
 	if (pickedActor)
 	{
+		//Delete selected actor
+		if (gInputSystem.GetKeyUpState(Keys::Delete))
+		{
+			pickedActor->Destroy();
+		}
+
 		//Duplicate selected actor
 		if (gInputSystem.GetAsyncKey(Keys::Ctrl))
 		{
