@@ -27,8 +27,8 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 		ActorSystemFactory::SetCurrentActiveActorSystem(nullptr);
 	}
 
-	World* world = GetWorld();
 
+	//Actor Hotkey commands
 	if (pickedActor)
 	{
 		DeleteActor();
@@ -46,17 +46,6 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 
 		if (RaycastAllFromScreen(screenPickRay, gUISystem.mousePos.x, gUISystem.mousePos.y, &editorCamera, GetWorld()))
 		{
-			//Actor spawning based on current picked system in world dock
-			if (ActorSystemFactory::GetCurrentActiveActorSystem())
-			{
-				ActorSystem* actorSystemToSpawnFrom = ActorSystemFactory::GetCurrentActiveActorSystem();
-				Transform transform = Transform();
-				transform.position = screenPickRay.hitPos;
-				actorSystemToSpawnFrom->SpawnActor(transform);
-
-				GetWorld()->AddActorSystem(actorSystemToSpawnFrom);
-			}
-
 			if (RaycastTriangleIntersect(screenPickRay))
 			{
 				if (debugLinesBuffer)
