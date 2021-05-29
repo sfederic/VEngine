@@ -18,6 +18,7 @@ public:
 	//Context menu functions
 	void ShowCreateAssetContextMenu(const QPoint& pos);
 	void CreateLevel();
+	void CreateShader();
 
 	QListWidget* assetIcons;
 	QFileSystemModel* fileSystemModel;

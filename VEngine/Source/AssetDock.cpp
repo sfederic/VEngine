@@ -117,6 +117,7 @@ void AssetDock::ShowCreateAssetContextMenu(const QPoint& pos)
     QMenu contextMenu(tr("Create Asset"), this);
 
     contextMenu.addAction("New Level", this, &AssetDock::CreateLevel);
+    contextMenu.addAction("New Shader", this, &AssetDock::CreateShader);
 
     contextMenu.exec(mapToGlobal(pos));
 }
@@ -128,6 +129,24 @@ void AssetDock::CreateLevel()
 
     std::ofstream stream(levelPath);
     stream << "empty" << std::endl;
+    stream.close();
+
+    AssetFolderClicked(); //Refresh the asset widget
+}
+
+void AssetDock::CreateShader()
+{
+    QString shaderName = QInputDialog::getText(this, "New Shader", "Enter shader name:");
+    std::string levelPath = "Shaders/" + shaderName.toStdString() + ".hlsl";
+
+    std::ofstream stream(levelPath);
+    stream << "#include \"Include/CommonTypes.hlsl\"\n\n";
+    stream << "VS_OUT VSMain(VS_IN i)\n";
+    stream << "{\n\n";
+    stream << "}\n\n";
+    stream << "float4 PSMain(VS_OUT i) : SV_Target\n";
+    stream << "{\n\n";
+    stream << "}\n";
     stream.close();
 
     AssetFolderClicked(); //Refresh the asset widget
