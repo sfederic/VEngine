@@ -56,11 +56,6 @@ void World::AddActorSystem(ActorSystem* actorSystem)
 	auto actorSystemIt = actorSystemsMap.find(actorSystem->name);
 	if (actorSystemIt == actorSystemsMap.end())
 	{
-		if (!actorSystem->bHasBeenInitialised)
-		{
-			actorSystem->SpawnActors(0);
-		}
-
 		actorSystems.push_back(actorSystem);
 		actorSystemsMap.insert(std::pair(actorSystem->name, actorSystem));
 	}
