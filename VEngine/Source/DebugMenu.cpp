@@ -86,11 +86,6 @@ void DebugMenu::AddNotification(const wchar_t* note)
 
 void DebugMenu::RenderFPSMenu(float deltaTime)
 {
-	if (gInputSystem.GetKeyUpState(Keys::_6))
-	{
-		bFPSMenuOpen = !bFPSMenuOpen;
-	}
-
 	if (bFPSMenuOpen)
 	{
 		ImGui::Begin("FPS");
