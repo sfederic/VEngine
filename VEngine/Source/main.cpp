@@ -56,11 +56,6 @@ int main(int argc, char* argv[])
     gAudioSystem.Init();
     gWorldEditor.Init();
 
-    //test actor setup
-    testActorSystem.SpawnActors(2);
-    testActorSystem.GetActor(1)->transform.position.x = 3.0f;
-    GetWorld()->AddActorSystem(&testActorSystem);
-
     //Qt late init
     gEditorSystem->PopulateWorldList();
 

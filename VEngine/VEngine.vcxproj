@@ -186,6 +186,7 @@
     <ClCompile Include="Source\TransformGizmo.cpp" />
     <ClCompile Include="Source\ActorSystemFactory.cpp" />
     <ClCompile Include="Source\PropertyWidgets\VectorWidget.cpp" />
+    <ClCompile Include="Source\Actors\TestActor2.cpp" />
     <QtRcc Include="EditorMainWindow.qrc" />
     <QtUic Include="EditorMainWindow.ui" />
     <QtMoc Include="EditorMainWindow.h" />
@@ -264,6 +265,7 @@
     <ClInclude Include="Source\TransformGizmo.h" />
     <ClInclude Include="Source\ActorSystemFactory.h" />
     <ClInclude Include="Source\PropertyWidgets\VectorWidget.h" />
+    <ClInclude Include="Source\Actors\TestActor2.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

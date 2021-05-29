@@ -1,9 +1,108 @@
-TestActorSystem
-1
+TestActor2System
+6
 Name
-TestActor
+TestActor2System0
 Position
-0 0 0
+-3.88183 -0.291137 4.21122
+Scale
+1 1 1
+RotQuat
+0 0 0 1
+next
+Name
+TestActor2System1
+Position
+0.231163 -0.693489 4.97325
+Scale
+1 1 1
+RotQuat
+0 0 0 1
+next
+Name
+TestActor2System2
+Position
+1.59835 -0.573532 4.61044
+Scale
+1 1 1
+RotQuat
+0 0 0 1
+next
+Name
+TestActor2System3
+Position
+-2.51464 -0.351238 3.56878
+Scale
+1 1 1
+RotQuat
+0 0 0 1
+next
+Name
+TestActor2System4
+Position
+2.45018 2.76905 -2.90807
+Scale
+1 1 1
+RotQuat
+0 0 0 1
+next
+Name
+TestActor2System5
+Position
+2.63645 0.969727 -2.90927
+Scale
+1 1 1
+RotQuat
+0 0 0 1
+nextTestActorSystem
+5
+Name
+TestActorSystem0
+Position
+-1.14745 -0.404257 3.37613
+Scale
+1 1 1
+Render
+1
+RotQuat
+0 0 0 1
+next
+Name
+TestActorSystem1
+Position
+0.128386 -2.42567 2.88039
+Scale
+1 1 1
+Render
+1
+RotQuat
+0 0 0 1
+next
+Name
+TestActorSystem2
+Position
+-1.0345 -3.1496 1.3761
+Scale
+1 1 1
+Render
+1
+RotQuat
+-0 0 -0 1
+next
+Name
+TestActorSystem3
+Position
+-10.0503 4.95831 6.64266
+Scale
+1 1 1
+Render
+1
+RotQuat
+0 0 0 1
+next
+Name
+TestActorSystem4
+Position
+4.76725 2.68958 -0.588648
 Scale
 1 1 1
 Render

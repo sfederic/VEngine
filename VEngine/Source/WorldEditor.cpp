@@ -128,6 +128,8 @@ void WorldEditor::SpawnActorOnClick()
 			ActorSystem* actorSystem = ActorSystemFactory::GetCurrentActiveActorSystem();
 			if (actorSystem)
 			{
+				GetWorld()->AddActorSystem(actorSystem); //Raycasts mess around a bit if world AS list is empty
+
 				Ray ray;
 				if (RaycastAllFromScreen(ray, gUISystem.mousePos.x, gUISystem.mousePos.y, GetActiveCamera(), GetWorld()))
 				{
