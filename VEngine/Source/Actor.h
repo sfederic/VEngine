@@ -15,7 +15,7 @@
 #include <map>
 #include <unordered_map>
 #include "Serialise.h"
-#include "Component.h"
+#include "Components/Component.h"
 #include "PipelineView.h"
 
 using namespace DirectX;

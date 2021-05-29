@@ -242,7 +242,7 @@
     <ClCompile Include="Source\Serialise.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Component.cpp">
+    <ClCompile Include="Source\Components\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\PipelineView.cpp">
@@ -463,7 +463,7 @@
     <ClInclude Include="Source\Serialise.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Component.h">
+    <ClInclude Include="Source\Components\Component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\PipelineView.h">
