@@ -180,6 +180,7 @@ void PropertiesWidget::SetActorRotation()
 void PropertiesWidget::SetActorName()
 {
     gWorldEditor.pickedActor->name = actorName->text().toStdString();
+    gEditorSystem->PopulateWorldList();
 }
 
 void PropertiesWidget::SelectShader()
