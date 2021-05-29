@@ -104,9 +104,9 @@ bool RaycastTriangleIntersect(Ray& ray)
 
 		for (int i = 0; i < actorSystem->modelData.verts.size() / 3; i++)
 		{
-			uint32_t index2 = actorSystem->modelData.indices[i * 3];
+			uint32_t index0 = actorSystem->modelData.indices[i * 3];
 			uint32_t index1 = actorSystem->modelData.indices[i * 3 + 1];
-			uint32_t index0 = actorSystem->modelData.indices[i * 3 + 2];
+			uint32_t index2 = actorSystem->modelData.indices[i * 3 + 2];
 
 			XMVECTOR v0 = XMLoadFloat3(&actorSystem->modelData.verts[index0].pos);
 			v0 = XMVector3TransformCoord(v0, model);
@@ -137,8 +137,6 @@ bool RaycastTriangleIntersect(Ray& ray)
 				tempRay.hitActor = actor;
 
 				rays.push_back(tempRay);
-
-				DebugPrint("%s Triangle index %d hit.\n", actor->name, i);
 			}
 		}
 	}
@@ -157,6 +155,8 @@ bool RaycastTriangleIntersect(Ray& ray)
 	if (rayIndex > -1)
 	{
 		ray = rays[rayIndex];
+		DebugPrint("%s Triangle index %d hit.\n", ray.hitActor->name, rayIndex);
+
 		return true;
 	}
 
