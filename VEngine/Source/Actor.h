@@ -95,6 +95,12 @@ public:
 		actor->linkedActorSystem = this;
 
 		actors.push_back(actor);
+
+		//Structured buffer needs to be rebuilt
+		//TODO: Maybe look into doing some std::vector-tier allocation where reallocation on this buffer
+		//happens when it passes a threshold (eg. actors.size() > 64)
+		CreateStructuredBuffer();
+
 		return actor;
 	}
 
