@@ -48,6 +48,7 @@ void DebugMenu::Tick(World* world, float deltaTime)
 	RenderGPUMenu();
 	RenderProfileMenu();
 	RenderSnappingMenu();
+	RenderActorStatsMenu();
 
 	float textOffsetX = 20.f;
 
@@ -182,6 +183,19 @@ void DebugMenu::RenderSnappingMenu()
 		{
 			ImGui::Text("WORLD");
 		}
+
+		ImGui::End();
+	}
+}
+
+void DebugMenu::RenderActorStatsMenu()
+{
+	if (bActorStatsMenuOpen)
+	{
+		ImGui::Begin("Actor Stats");
+
+		World* world = GetWorld();
+		ImGui::Text("Num actors rendered: %d", world->GetNumOfActorsInWorld());
 
 		ImGui::End();
 	}

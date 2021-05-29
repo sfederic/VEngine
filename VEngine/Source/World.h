@@ -37,6 +37,7 @@ public:
 	Actor* FindActorByString(const std::string& name);
 	ActorSystem* GetActorSystem(unsigned int id);
 	Actor* GetActor(unsigned int systemId, unsigned int actorId);
+	uint64_t GetNumOfActorsInWorld();
 
 	std::vector<ActorSystem*> actorSystems;
 	std::unordered_map<std::string, ActorSystem*> actorSystemsMap;

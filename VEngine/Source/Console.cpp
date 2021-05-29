@@ -18,6 +18,7 @@ namespace ExecuteStrings
 	const wchar_t* FPS = L"FPS";
 	const wchar_t* SNAP = L"SNAP";
 	const wchar_t* PROFILE = L"PROFILE";
+	const wchar_t* ACTOR = L"ACTOR";
 }
 
 void Console::ConsoleInput()
@@ -85,6 +86,10 @@ void Console::ExecuteString()
 	else if (consoleString == ExecuteStrings::FPS)
 	{
 		gDebugMenu.bFPSMenuOpen = !gDebugMenu.bFPSMenuOpen;
+	}
+	else if (consoleString == ExecuteStrings::ACTOR)
+	{
+		gDebugMenu.bActorStatsMenuOpen = !gDebugMenu.bActorStatsMenuOpen;
 	}
 	else
 	{

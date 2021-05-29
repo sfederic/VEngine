@@ -114,7 +114,7 @@ void WorldEditor::SetPickedActor(Actor* actor)
 void WorldEditor::SpawnActorOnClick()
 {
 	//Spawn actor on right click in viewport
-	if (gInputSystem.GetMouseMiddleUpState())
+	if (gInputSystem.GetMouseRightUpState())
 	{
 		ActorSystem* actorSystem = ActorSystemFactory::GetCurrentActiveActorSystem();
 		if (actorSystem)

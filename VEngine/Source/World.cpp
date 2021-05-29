@@ -106,3 +106,15 @@ Actor* World::GetActor(unsigned int systemId, unsigned int actorId)
 
 	return nullptr;
 }
+
+uint64_t World::GetNumOfActorsInWorld()
+{
+	uint64_t numOfActorsInWorld = 0;
+
+	for (auto& actorSystem : actorSystems)
+	{
+		numOfActorsInWorld += actorSystem->actors.size();
+	}
+
+	return numOfActorsInWorld;
+}
