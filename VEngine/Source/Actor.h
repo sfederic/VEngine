@@ -52,6 +52,7 @@ public:
 	XMVECTOR GetUpVector();
 	void Move(float d, XMVECTOR direction);
 	ActorSystem* GetActorSystem();
+	void Destroy();
 
 	template <class T>
 	void AddComponent(T* component)
@@ -159,6 +160,7 @@ public:
 		}
 	}
 
+	void RemoveActor(Actor* actor);
 	void RemoveActor(int index);
 	Actor* GetActor(unsigned int index);
 

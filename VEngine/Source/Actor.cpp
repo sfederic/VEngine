@@ -190,6 +190,12 @@ ActorSystem* Actor::GetActorSystem()
 	return nullptr;
 }
 
+void Actor::Destroy()
+{
+	assert(linkedActorSystem);
+	linkedActorSystem->RemoveActor(this);
+}
+
 void ActorSystem::Serialise(std::ostream& os)
 {
 	os << name << "\n"; //Use actorsystem name to create again from ActorSystemFactory on Deserialise
@@ -228,6 +234,19 @@ Buffer* ActorSystem::GetInstanceBuffer()
 	}
 
 	return nullptr;
+}
+
+void ActorSystem::RemoveActor(Actor* actor)
+{
+	//TODO: this looks bad (but honestly, I don't think the performance is too bad).
+	//Either way look into shared_ptr and how it can be set into the actors vector
+	for(int i = 0; i < actors.size(); i++)
+	{
+		if (&actor[i] == actor)
+		{
+			actors.erase(actors.begin() + i);
+		}
+	}
 }
 
 void ActorSystem::RemoveActor(int index)
