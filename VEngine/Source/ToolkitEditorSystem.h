@@ -20,4 +20,5 @@ public:
 	virtual void ToggleFullscreen();
 	virtual void EnableEditorDocks();
 	virtual void DisableEditorDocks();
+	virtual void Print(const std::string& msg);
 };

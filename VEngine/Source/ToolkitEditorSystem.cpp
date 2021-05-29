@@ -7,6 +7,7 @@
 #include "Input.h"
 #include "ConsoleDock.h"
 #include "AssetDock.h"
+#include <QTextEdit>
 
 QApplication* qApplication;
 EditorMainWindow* editorMainWindow;
@@ -100,4 +101,9 @@ void ToolkitEditorSystem::DisableEditorDocks()
 	editorMainWindow->assetDock->setEnabled(false);
 	editorMainWindow->propertiesDock->setEnabled(false);
 	editorMainWindow->worldDock->setEnabled(false);
+}
+
+void ToolkitEditorSystem::Print(const std::string& msg)
+{
+	editorMainWindow->consoleDock->consoleMessageBox->insertPlainText(QString(msg.c_str()));
 }

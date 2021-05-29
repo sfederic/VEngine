@@ -156,12 +156,6 @@ void EditorMainWindow::Tick()
     renderViewWidget->Tick();
 }
 
-void EditorMainWindow::Print(const char* string)
-{
-    consoleDock->consoleMessageBox->insertPlainText(QString(string));
-    consoleDock->consoleMessageBox->insertPlainText("\n");
-}
-
 void EditorMainWindow::CloseTab(int tabIndex)
 {
     editorTabWidget->removeTab(tabIndex);
