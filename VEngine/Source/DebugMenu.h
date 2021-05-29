@@ -43,6 +43,7 @@ public:
 	void Tick(class World* world, float deltaTime);
 	void Cleanup();
 	void AddNotification(const wchar_t* note);
+	void RenderNotifications(float deltaTime);
 	void RenderFPSMenu(float deltaTime);
 	void RenderGPUMenu();
 	void RenderProfileMenu();

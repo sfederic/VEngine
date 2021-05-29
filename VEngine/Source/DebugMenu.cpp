@@ -41,6 +41,8 @@ void DebugMenu::Tick(World* world, float deltaTime)
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
+	RenderNotifications(deltaTime);
+
 	//Keep in mind ImGuizmo has to be called here, it's part of ImGui
 	gTransformGizmo.Tick();
 
@@ -50,9 +52,26 @@ void DebugMenu::Tick(World* world, float deltaTime)
 	RenderSnappingMenu();
 	RenderActorStatsMenu();
 
+	ImGui::EndFrame();
+}
+
+void DebugMenu::Cleanup()
+{
+	ImGui_ImplDX11_Shutdown();
+	ImGui_ImplWin32_Shutdown();
+	ImGui::DestroyContext();
+}
+
+void DebugMenu::AddNotification(const wchar_t* note)
+{
+	notifications.push_back(DebugNotification(note));
+}
+
+//Handle notifications (eg. "Shaders recompiled", "ERROR: Not X", etc)
+void DebugMenu::RenderNotifications(float deltaTime)
+{
 	float textOffsetX = 20.f;
 
-	//Handle notifications (eg. "Shaders recompiled", "ERROR: Not X", etc)
 	const float notificationLifetime = 3.0f;
 	for (int i = 0; i < notifications.size(); i++)
 	{
@@ -69,20 +88,6 @@ void DebugMenu::Tick(World* world, float deltaTime)
 			notifications.erase(notifications.begin() + i);
 		}
 	}
-
-	ImGui::EndFrame();
-}
-
-void DebugMenu::Cleanup()
-{
-	ImGui_ImplDX11_Shutdown();
-	ImGui_ImplWin32_Shutdown();
-	ImGui::DestroyContext();
-}
-
-void DebugMenu::AddNotification(const wchar_t* note)
-{
-	notifications.push_back(DebugNotification(note));
 }
 
 void DebugMenu::RenderFPSMenu(float deltaTime)
