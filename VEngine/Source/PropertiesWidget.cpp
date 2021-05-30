@@ -185,6 +185,11 @@ void PropertiesWidget::SetActorName()
 
 void PropertiesWidget::SelectShader()
 {
+    if (selectedActorSystem == nullptr)
+    {
+        return;
+    }
+
     QString filePath = QFileDialog::getOpenFileName(this,
         tr("Open Shaders"), "Shaders", tr("Shader Files (*.hlsl)"));
 
@@ -199,6 +204,11 @@ void PropertiesWidget::SelectShader()
 
 void PropertiesWidget::SelectModel()
 {
+    if (selectedActorSystem == nullptr)
+    {
+        return;
+    }
+
     QString filePath = QFileDialog::getOpenFileName(this, 
         tr("Open Models"), "Models", tr("Model Files (*.fbx *.obj)"));
 
@@ -214,6 +224,11 @@ void PropertiesWidget::SelectModel()
 
 void PropertiesWidget::SelectTexture()
 {
+    if (selectedActorSystem == nullptr)
+    {
+        return;
+    }
+
     QString filePath = QFileDialog::getOpenFileName(this,
         tr("Open Textures"), "Textures", tr("Texture Files (*.jpg *.png)"));
 
@@ -251,5 +266,10 @@ void PropertiesWidget::Tick()
 
 void PropertiesWidget::SetActorRenderable(bool renderCheck)
 {
+    if (selectedActorSystem == nullptr)
+    {
+        return;
+    }
+
     selectedActorSystem->GetActor(0)->bRender = renderCheck;
 }
