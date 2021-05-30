@@ -24,8 +24,11 @@ QTreeWidget* worldTreeList;
 WorldDock::WorldDock(const char* title) : QDockWidget(title)
 {
     //Add/Create new actorsystem button
-    auto addActorSystemButton = new QPushButton("Add Actor System");
-    connect(addActorSystemButton, &QPushButton::clicked, this, &WorldDock::CreateNewActorSystem);
+    auto newActorSystemButton = new QPushButton("New");
+    connect(newActorSystemButton, &QPushButton::clicked, this, &WorldDock::CreateNewActorSystem);
+
+    auto addActorSystemButton = new QPushButton("Add");
+    connect(addActorSystemButton, &QPushButton::clicked, this, &WorldDock::AddExistingActorSystem);
 
     //Search bar
     worldSearch = new QLineEdit();
@@ -40,6 +43,7 @@ WorldDock::WorldDock(const char* title) : QDockWidget(title)
     PopulateActorSystemList();
 
     QVBoxLayout* worldVLayout = new QVBoxLayout();
+    worldVLayout->addWidget(newActorSystemButton);
     worldVLayout->addWidget(addActorSystemButton);
     worldVLayout->addWidget(worldSearch);
 
@@ -142,48 +146,48 @@ void WorldDock::CreateNewActorSystem()
     QDialog actorSystemPopup;
     actorSystemPopup.setWindowTitle("Add New Actor System");
     
-    QGridLayout* grid = new QGridLayout();
+    QGridLayout grid;
 
     QLineEdit name;
 
     //TODO: would be nice to have custom dropdowns that list all current models/shaders in the system,
     //but who's going to do that? That's a lot of work
 
-    grid->addWidget(new QLabel("Name:"), 0, 0);
-    grid->addWidget(&name, 0, 1);
+    grid.addWidget(new QLabel("Name:"), 0, 0);
+    grid.addWidget(&name, 0, 1);
 
     QDir shaderPath("Shaders/");
     QStringList shaderFiles = shaderPath.entryList(QDir::Files);
     QComboBox shadersCombo;
     shadersCombo.addItems(shaderFiles);
 
-    grid->addWidget(new QLabel("Shader:"), 1, 0);
-    grid->addWidget(&shadersCombo, 1, 1);
+    grid.addWidget(new QLabel("Shader:"), 1, 0);
+    grid.addWidget(&shadersCombo, 1, 1);
 
     QDir modelPath("Models/");
     QStringList modelFiles = modelPath.entryList(QDir::Files);
     QComboBox modelsCombo;
     modelsCombo.addItems(modelFiles);
 
-    grid->addWidget(new QLabel("Model:"), 2, 0);
-    grid->addWidget(&modelsCombo, 2, 1);
+    grid.addWidget(new QLabel("Model:"), 2, 0);
+    grid.addWidget(&modelsCombo, 2, 1);
 
     QDir texturePath("Textures/");
     QStringList textureFiles = texturePath.entryList(QDir::Files);
     QComboBox texturesCombo;
     texturesCombo.addItems(textureFiles);
 
-    grid->addWidget(new QLabel("Texture:"), 3, 0);
-    grid->addWidget(&texturesCombo, 3, 1);
+    grid.addWidget(new QLabel("Texture:"), 3, 0);
+    grid.addWidget(&texturesCombo, 3, 1);
 
     QPushButton addButton("Add");
     connect(&addButton, &QPushButton::clicked, &actorSystemPopup, &QDialog::accept);
-    grid->addWidget(&addButton, 4, 1);
+    grid.addWidget(&addButton, 4, 1);
 
-    actorSystemPopup.setLayout(grid);
+    actorSystemPopup.setLayout(&grid);
 
     int ret = actorSystemPopup.exec();
-    if (ret != 0)
+    if (ret)
     {
         auto newActorSystem = new ActorSystem();
         newActorSystem->name = name.text().toStdString();
@@ -197,6 +201,39 @@ void WorldDock::CreateNewActorSystem()
         PopulateWorldList();
 
         AddActorSystemTemplate(newActorSystem);
+    }
+}
+
+void WorldDock::AddExistingActorSystem()
+{
+    std::vector<ActorSystem*> actorSystems;
+    ActorSystemFactory::GetAllActorSystems(actorSystems);
+
+    QComboBox* systemNames = new QComboBox();
+    for (auto& system : actorSystems)
+    {
+        systemNames->addItem(system->name.c_str());
+    }
+
+    QDialog* addSystemDialog = new QDialog();
+    addSystemDialog->setWindowTitle("Add Actor System");
+
+    QGridLayout* grid = new QGridLayout();
+    grid->addWidget(systemNames, 0, 0);
+
+    QPushButton* addButton = new QPushButton("Add");
+    connect(addButton, &QPushButton::clicked, addSystemDialog, &QDialog::accept);
+    grid->addWidget(addButton, 1, 0);
+
+    addSystemDialog->setLayout(grid);
+
+    int ret = addSystemDialog->exec();
+    if (ret)
+    {
+        auto actorSystem = ActorSystemFactory::GetActorSystem(systemNames->currentText().toStdString());
+        assert(actorSystem && "Actor System not present in ActorSystemFactory maps");
+
+        GetWorld()->AddActorSystem(actorSystem);
     }
 }
 

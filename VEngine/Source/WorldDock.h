@@ -20,6 +20,7 @@ public:
     void ClickOnActorSystem(class QListWidgetItem* listItem);
     void SearchWorldList();
     void CreateNewActorSystem();
+    void AddExistingActorSystem();
     void AddActorSystemTemplate(ActorSystem* actorSystem);
 
     QListWidget* actorSystemList;
