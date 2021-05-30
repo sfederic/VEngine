@@ -56,9 +56,16 @@ void World::AddActorSystem(ActorSystem* actorSystem)
 	auto actorSystemIt = actorSystemsMap.find(actorSystem->name);
 	if (actorSystemIt == actorSystemsMap.end())
 	{
-		actorSystem->SpawnActors(0);
+		actorSystem->SpawnActors(1); //Spawn one dummy actor so that buffers set up properly
 		actorSystems.push_back(actorSystem);
 		actorSystemsMap.insert(std::pair(actorSystem->name, actorSystem));
+
+		auto asIt = ActorSystemFactory::nameToSystemMap->find(actorSystem->name);
+		if (asIt == ActorSystemFactory::nameToSystemMap->end())
+		{
+			//This is to spawn template actorsystems that won't exist in the factory
+			ActorSystemFactory::Register<ActorSystem>(actorSystem);
+		}
 	}
 }
 

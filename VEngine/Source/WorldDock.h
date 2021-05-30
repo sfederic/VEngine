@@ -19,6 +19,7 @@ public:
     void ClickOnActor(class QTreeWidgetItem* listItem);
     void ClickOnActorSystem(class QListWidgetItem* listItem);
     void SearchWorldList();
+    void CreateNewActorSystem();
 
     QListWidget* actorSystemList;
     QLineEdit* worldSearch;

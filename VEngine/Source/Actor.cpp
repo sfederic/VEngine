@@ -354,7 +354,7 @@ void ActorSystem::CreateStructuredBuffer()
 		//instancedDataStructuredBuffer->Release();
 	}
 
-	if (actors.size() > 0)
+	//if (actors.size() > 0)
 	{
 		instancedDataStructuredBuffer = gRenderSystem.CreateStructuredBuffer(sizeof(InstanceData) * actors.size(), sizeof(InstanceData), actorModelMatrices.data());
 

@@ -1,27 +1,11 @@
-TestActor2System
-2Name
-TestActor2System0
-Position
--5.00563 1.38645 3.54526
-Scale
-1 1 1
-RotQuat
-0 0 0 1
-next
-Name
-TestActor2System1
-Position
-0.692793 -0.50385 4.96324
-Scale
-1 1 1
-RotQuat
-0 0 0 1
-next
 TestActorSystem
-2Name
+3ico_sphere.fbx
+penguin.png
+shaders.hlsl
+Name
 TestActorSystem0
 Position
--2.11635 2.39586 4.47528
+-1.55366 1.8603 4.70183
 Scale
 1 1 1
 Render
@@ -32,11 +16,22 @@ next
 Name
 TestActorSystem1
 Position
-2.87198 1.84203 4.39993
+-4.46775 0 3.94646
 Scale
 1 1 1
 Render
 1
 RotQuat
 0 0 0 1
+next
+Name
+TestActorSystem2
+Position
+0.541675 -1.39585 4.88727
+Scale
+1 1 1
+Render
+1
+RotQuat
+-0 0 -0 1
 next

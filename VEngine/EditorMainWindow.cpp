@@ -16,9 +16,6 @@
 #include <qapplication.h>
 #include "imgui/imgui.h"
 
-//Because I can't figure out why Qt doesn't like these two not being defined in main, just going with
-//two pointers here to those instances defined in main.
-
 void EditorMainWindow::Init(int argc)
 {
     gQApplication = new QApplication(argc, nullptr);
@@ -100,6 +97,7 @@ bool EditorMainWindow::nativeEvent(const QByteArray& eventType, void* message, l
     {
     case WM_DESTROY:
         PostQuitMessage(0);
+        return 0;
 
     case WM_KEYDOWN:
         gInputSystem.StoreKeyDownInput(msg->wParam);

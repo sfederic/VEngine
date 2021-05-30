@@ -12,12 +12,19 @@
 #include "../EditorMainWindow.h"
 #include "PropertiesDock.h"
 #include "ActorSystemFactory.h"
+#include <qpushbutton.h>
+#include <qdialog.h>
+#include <qlabel.h>
 
 QList<QTreeWidgetItem*> worldTreeItems;
 QTreeWidget* worldTreeList;
 
 WorldDock::WorldDock(const char* title) : QDockWidget(title)
 {
+    //Add/Create new actorsystem button
+    auto addActorSystemButton = new QPushButton("Add Actor System");
+    connect(addActorSystemButton, &QPushButton::clicked, this, &WorldDock::CreateNewActorSystem);
+
     //Search bar
     worldSearch = new QLineEdit();
     worldSearch->setPlaceholderText("Search");
@@ -31,6 +38,7 @@ WorldDock::WorldDock(const char* title) : QDockWidget(title)
     PopulateActorSystemList();
 
     QVBoxLayout* worldVLayout = new QVBoxLayout();
+    worldVLayout->addWidget(addActorSystemButton);
     worldVLayout->addWidget(worldSearch);
 
     //currently active actor systems in world list
@@ -56,8 +64,10 @@ void WorldDock::Tick()
 
 void WorldDock::PopulateActorSystemList()
 {
-    std::vector<ActorSystem*> actorSystems;
-    ActorSystemFactory::GetAllActorSystems(actorSystems);
+    actorSystemList->clear();
+    worldStringList.clear();
+
+    auto& actorSystems = GetWorld()->actorSystems;
 
     for(int i = 0; i < actorSystems.size(); i++)
     {
@@ -122,5 +132,53 @@ void WorldDock::SearchWorldList()
         {
             actorSystemList->addItem(worldStringList.at(i));
         }
+    }
+}
+
+void WorldDock::CreateNewActorSystem()
+{
+    QDialog actorSystemPopup;
+    actorSystemPopup.setWindowTitle("Add New Actor System");
+    
+    QGridLayout* grid = new QGridLayout();
+
+    QLineEdit name;
+    QLineEdit shader;
+    QLineEdit model;
+    QLineEdit texture;
+
+    //TODO: would be nice to have custom dropdowns that list all current models/shaders in the system,
+    //but who's going to do that? That's a lot of work
+
+    grid->addWidget(new QLabel("Name:"), 0, 0);
+    grid->addWidget(&name, 0, 1);
+
+    grid->addWidget(new QLabel("Shader:"), 1, 0);
+    grid->addWidget(&shader, 1, 1);
+
+    grid->addWidget(new QLabel("Model:"), 2, 0);
+    grid->addWidget(&model, 2, 1);
+
+    grid->addWidget(new QLabel("Texture:"), 3, 0);
+    grid->addWidget(&texture, 3, 1);
+
+    QPushButton addButton("Add");
+    connect(&addButton, &QPushButton::clicked, &actorSystemPopup, &QDialog::accept);
+    grid->addWidget(&addButton, 4, 1);
+
+    actorSystemPopup.setLayout(grid);
+
+    int ret = actorSystemPopup.exec();
+    if (ret != 0)
+    {
+        auto newActorSystem = new ActorSystem();
+        newActorSystem->name = name.text().toStdString();
+        newActorSystem->shaderName = shader.text().toStdString();
+        newActorSystem->modelName = model.text().toStdString();
+        newActorSystem->textureName = texture.text().toStdString();
+
+        GetWorld()->AddActorSystem(newActorSystem);
+
+        PopulateActorSystemList();
     }
 }
