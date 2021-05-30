@@ -51,6 +51,10 @@ public:
 	void RenderActorStatsMenu();
 	void RenderActorSpawnMenu();
 
+	//Shows actor/system stats when hovering over actor (Idea stolen from Fledge Engine)
+	//REF:https://www.youtube.com/watch?v=WjPiJn9dkxs
+	void RenderActorInspectMenu();
+
 	std::vector<MenuItem> menuItems;
 	std::vector<DebugNotification> notifications;
 
@@ -60,6 +64,7 @@ public:
 	bool bSnapMenuOpen = false;
 	bool bActorStatsMenuOpen = false;
 	bool bActorSpawnMenuOpen = false;
+	bool bActorInspectMenuOpen = false;
 };
 
 extern DebugMenu gDebugMenu;

@@ -19,6 +19,7 @@ namespace ExecuteStrings
 	const wchar_t* SNAP = L"SNAP";
 	const wchar_t* PROFILE = L"PROFILE";
 	const wchar_t* ACTOR = L"ACTOR";
+	const wchar_t* INSPECT = L"INSPECT";
 }
 
 void Console::ConsoleInput()
@@ -86,11 +87,15 @@ void Console::ExecuteString()
 	else if (consoleString == ExecuteStrings::FPS)
 	{
 		gDebugMenu.bFPSMenuOpen = !gDebugMenu.bFPSMenuOpen;
-		//gRenderSystem.bQueryGPU = gDebugMenu.bFPSMenuOpen;
+		//gRenderSystem.bQueryGPU = gDebugMenu.bFPSMenuOpen; //Causing performance problems
 	}
 	else if (consoleString == ExecuteStrings::ACTOR)
 	{
 		gDebugMenu.bActorStatsMenuOpen = !gDebugMenu.bActorStatsMenuOpen;
+	}
+	else if (consoleString == ExecuteStrings::INSPECT)
+	{
+		gDebugMenu.bActorInspectMenuOpen = !gDebugMenu.bActorInspectMenuOpen;
 	}
 	else
 	{

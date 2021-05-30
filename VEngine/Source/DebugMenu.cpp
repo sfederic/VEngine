@@ -12,6 +12,8 @@
 #include "EditorSystem.h"
 #include "ActorSystemFactory.h"
 #include "Profiler.h"
+#include "Raycast.h"
+#include "Camera.h"
 
 DebugMenu gDebugMenu;
 
@@ -52,6 +54,7 @@ void DebugMenu::Tick(World* world, float deltaTime)
 	RenderSnappingMenu();
 	RenderActorStatsMenu();
 	RenderActorSpawnMenu();
+	RenderActorInspectMenu();
 
 	ImGui::EndFrame();
 }
@@ -223,6 +226,34 @@ void DebugMenu::RenderActorSpawnMenu()
 		else
 		{
 			ImGui::Text("None");
+		}
+
+		ImGui::End();
+	}
+}
+
+void DebugMenu::RenderActorInspectMenu()
+{
+	if (bActorInspectMenuOpen)
+	{
+		ImGui::Begin("Actor Inspect");
+		ImGui::SetWindowPos(ImVec2(gUISystem.mousePos.x, gUISystem.mousePos.y));
+		ImGui::SetWindowSize(ImVec2(300, 250));
+
+		Ray ray;
+		if (RaycastAllFromScreen(ray, gUISystem.mousePos.x, gUISystem.mousePos.y, GetActiveCamera(), GetWorld()))
+		{
+			Actor* actor = ray.hitActor;
+			if (actor)
+			{
+				//TODO: this is just dummy data to see what the menu can do.
+				//Come back here when there is more actor specific instance data to show
+				//eg. materials, buffers, other weird things
+				ImGui::Text("Linked System: %s", actor->linkedActorSystem->name.c_str());
+				ImGui::Text("Shader: %s", actor->linkedActorSystem->shaderName.c_str());
+				ImGui::Text("Texture: %s", actor->linkedActorSystem->textureName.c_str());
+				ImGui::Text("Model: %s", actor->linkedActorSystem->modelName.c_str());
+			}
 		}
 
 		ImGui::End();
