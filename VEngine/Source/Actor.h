@@ -73,7 +73,9 @@ class ActorSystem
 public:
 	ActorSystem();
 	void Serialise(std::ostream& os);
+	void SerialiseAsTemplate(std::ostream& os);
 	void Deserialise(std::istream& is);
+	void DeserialiseAsTemplate(std::istream& is);
 	virtual void Tick(float deltaTime);
 	virtual void SpawnActors(int numToSpawn);
 	virtual Actor* SpawnActor(Transform transform);

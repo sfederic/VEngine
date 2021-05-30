@@ -213,6 +213,14 @@ void ActorSystem::Serialise(std::ostream& os)
 	}
 }
 
+void ActorSystem::SerialiseAsTemplate(std::ostream& os)
+{
+	os << name << "\n";
+	os << modelName.c_str() << "\n";
+	os << textureName.c_str() << "\n";
+	os << shaderName.c_str() << "\n";
+}
+
 void ActorSystem::Deserialise(std::istream& is)
 {
 	char name[512];
@@ -230,6 +238,14 @@ void ActorSystem::Deserialise(std::istream& is)
 	{
 		Serialiser::Deserialise(actors[i], is);
 	}
+}
+
+void ActorSystem::DeserialiseAsTemplate(std::istream& is)
+{
+	is >> name;
+	is >> modelName;
+	is >> textureName;
+	is >> shaderName;
 }
 
 void ActorSystem::Tick(float deltaTime)

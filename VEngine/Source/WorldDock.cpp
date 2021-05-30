@@ -194,5 +194,20 @@ void WorldDock::CreateNewActorSystem()
         GetWorld()->AddActorSystem(newActorSystem);
 
         PopulateActorSystemList();
+        PopulateWorldList();
+
+        AddActorSystemTemplate(newActorSystem);
     }
+}
+
+//Adds a template to text file (Think blueprints/prefabs)
+void WorldDock::AddActorSystemTemplate(ActorSystem* actorSystem)
+{
+    std::string path = "ActorSystemTemplates/" + actorSystem->name + ".ast"; //.ast = ActorSystemTemplate
+
+    std::filebuf fb;
+    fb.open(path, std::ios_base::out);
+    std::ostream os(&fb);
+
+    actorSystem->SerialiseAsTemplate(os);
 }
