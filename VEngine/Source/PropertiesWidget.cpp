@@ -193,7 +193,7 @@ void PropertiesWidget::SelectShader()
         QString fileName = QFileInfo(filePath).fileName();
         actorSystemShaderName->setText(QFileInfo(fileName).fileName());
 
-        selectedActorSystem->shaderName = fileName.toStdWString();
+        selectedActorSystem->shaderName = fileName.toStdString();
     }
 }
 

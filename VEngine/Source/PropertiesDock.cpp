@@ -51,8 +51,8 @@ void PropertiesDock::DisplayActorSystemProperties(Actor* actor)
     //Actor system 
     propWidget->actorSystemName->setText(QString::fromStdString(actorSystem->name));
     propWidget->actorSystemModelName->setText(QString::fromStdString(actorSystem->modelName));
-    propWidget->actorSystemTextureName->setText(QString::fromStdWString(actorSystem->textureName));
-    propWidget->actorSystemShaderName->setText(QString::fromStdWString(actorSystem->shaderName));
+    propWidget->actorSystemTextureName->setText(QString::fromStdString(actorSystem->textureName));
+    propWidget->actorSystemShaderName->setText(QString::fromStdString(actorSystem->shaderName));
 
     propWidget->selectedActorSystem = actorSystem;
 
