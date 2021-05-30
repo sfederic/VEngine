@@ -1,11 +1,16 @@
 #include "VWidget.h"
 #include "UISystem.h"
 #include "Input.h"
+#include <SpriteBatch.h>
+#include <WICTextureLoader.h>
+#include "RenderSystem.h"
+#include <SimpleMath.h>
 
 void VWidget::Tick(float deltaTime)
 {
 	Text(L"Hello baby", { 0,0,200,200 });
 	Button(L"button", { 200, 200, 300, 300 });
+	Image(L"yep");
 }
 
 void VWidget::Text(const std::wstring& text, D2D1_RECT_F layout)
@@ -35,7 +40,28 @@ bool VWidget::Button(const std::wstring& text, D2D1_RECT_F layout, float lineWid
 	return false;
 }
 
+//REF:https://github.com/Microsoft/DirectXTK/wiki/Sprites-and-textures
 void VWidget::Image(const std::wstring& file)
 {
-	//gUISystem.d2dRenderTarget->DrawBitmap()
+	ID3D11ShaderResourceView* m_texture;
+	ID3D11Resource* resource;
+	HR(CreateWICTextureFromFile(gRenderSystem.device, L"Textures/penguin.png", &resource, &m_texture));
+
+	ID3D11Texture2D* tex;
+	resource->QueryInterface(&tex);
+
+	DirectX::SpriteBatch* m_spriteBatch;
+	DirectX::SimpleMath::Vector2 m_screenPos;
+	DirectX::SimpleMath::Vector2 m_origin;
+
+	m_spriteBatch = new SpriteBatch(gRenderSystem.context);
+
+	m_spriteBatch->Begin();
+	m_spriteBatch->Draw(m_texture, m_screenPos, nullptr, Colors::White, 0.f, m_origin);
+	m_spriteBatch->End();
+
+	m_texture->Release();
+	resource->Release();
+	tex->Release();
+	delete m_spriteBatch;
 }
