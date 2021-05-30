@@ -138,7 +138,7 @@ void AssetDock::CreateLevel()
     std::string levelPath = "LevelSaves/" + levelName.toStdString() + ".sav";
 
     std::ofstream stream(levelPath);
-    stream << "empty" << std::endl;
+    stream << "" << std::endl;
     stream.close();
 
     AssetFolderClicked(); //Refresh the asset widget

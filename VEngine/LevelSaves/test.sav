@@ -1,82 +1,23 @@
-poles
-6
-cube.fbx
-texture.png
-shaders.hlsl
-Name
-poles0
-Position
--2 0 0.125
-Scale
-1 2.5 1.125
-RotQuat
--0 0 -0 1
-next
-Name
-poles1
-Position
-6 0 0
-Scale
-1 2.5 1
-RotQuat
--0 0 -0 1
-next
-Name
-poles2
-Position
-6 0 -5
-Scale
-1 2.5 1
-RotQuat
--0 0 -0 1
-next
-Name
-poles3
-Position
--2 0 -5
-Scale
-1 2.5 1
-RotQuat
--0 0 -0 1
-next
-Name
-poles4
-Position
--1.75 -0.3125 4.75
-Scale
-1.25 2.8125 0.75
-RotQuat
--0 0 -0 1
-next
-Name
-poles5
-Position
-6 0 5
-Scale
-1 2.5 1
-RotQuat
--0 0 -0 1
-next
-roofs
+TestActor2System
 2
-cone.fbx
-penguin.png
+monkey.fbx
+
 shaders.hlsl
 Name
-roofs0
+TestActor2System0
 Position
--2 5 0
+0 0 -2
 Scale
-1 0.999988 0.999988
+0.999999 0.999999 1
 RotQuat
-0.707107 0 0 -0.707107
+-0 0 -0.573577 0.819152
 next
 Name
-roofs1
+TestActor2System1
 Position
-6 5 0
+3 0 6
 Scale
-1 0.999984 0.999984
+1 1 1
 RotQuat
-0.707107 0 0 -0.707107
+-0 0 -0 1
 next
