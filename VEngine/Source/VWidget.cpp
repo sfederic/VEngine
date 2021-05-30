@@ -8,14 +8,12 @@ void VWidget::Tick(float deltaTime)
 {
 	Text(L"Hello baby", { 0,0,200,200 });
 	Button(L"button", { 200, 200, 300, 300 });
-	Image(texture1, 200, 200);
+	Image(L"penguin.png", 200, 200);
 }
 
 void VWidget::Start()
 {
 	spriteBatch = new DirectX::SpriteBatch(gRenderSystem.context);
-
-	texture1 = CreateTexture(L"penguin.png");
 }
 
 ID3D11ShaderResourceView* VWidget::CreateTexture(const std::wstring& filename)
@@ -56,12 +54,21 @@ bool VWidget::Button(const std::wstring& text, D2D1_RECT_F layout, float lineWid
 }
 
 //REF:https://github.com/Microsoft/DirectXTK/wiki/Sprites-and-textures
-void VWidget::Image(ID3D11ShaderResourceView* texture, float x, float y)
+void VWidget::Image(const std::wstring& filename, float x, float y)
 {
-	DirectX::XMFLOAT2 screenPos(x, y);
-	DirectX::XMFLOAT2 origin(0.f, 0.f);
+	auto textureIt = texturesMap.find(filename);
+	if (textureIt == texturesMap.end())
+	{
+		auto texture = CreateTexture(filename);
+		texturesMap[filename] = texture;
+	}
+	else
+	{
+		DirectX::XMFLOAT2 screenPos(x, y);
+		DirectX::XMFLOAT2 origin(0.f, 0.f);
 
-	spriteBatch->Begin();
-	spriteBatch->Draw(texture, screenPos, nullptr, Colors::White, 0.f, origin);
-	spriteBatch->End();
+		spriteBatch->Begin();
+		spriteBatch->Draw(textureIt->second, screenPos, nullptr, Colors::White, 0.f, origin);
+		spriteBatch->End();
+	}
 }

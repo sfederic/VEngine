@@ -24,11 +24,11 @@ public:
 
 	void Text(const std::wstring& text, D2D1_RECT_F layout);
 	bool Button(const std::wstring& text, D2D1_RECT_F layout, float lineWidth = 1.0f);
-	void Image(ID3D11ShaderResourceView* texture, float x, float y);
+	void Image(const std::wstring& filename, float x, float y);
 
 	DirectX::SpriteBatch* spriteBatch;
 
-	ID3D11ShaderResourceView* texture1;
+	std::unordered_map<std::wstring, ID3D11ShaderResourceView*> texturesMap;
 
 	bool bRender = true;
 };
