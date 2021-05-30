@@ -60,7 +60,7 @@ void Console::Tick()
 		float width = (float)gCoreSystem.windowWidth;
 		float height = (float)gCoreSystem.windowHeight;
 
-		gUISystem.d2dRenderTarget->DrawRectangle({ 0, height - 24.f, width, height }, gUISystem.brushTransparentMenu);
+		gUISystem.d2dRenderTarget->DrawRectangle({ 0, height - 24.f, width, height }, gUISystem.brushText);
 
 		gUISystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
 		gUISystem.d2dRenderTarget->DrawText(consoleString.c_str(), consoleString.size(), gUISystem.textFormat,

@@ -26,12 +26,6 @@ public:
 	ID2D1RenderTarget* d2dRenderTarget;
 	IDWriteFactory1* writeFactory;
 	ID2D1SolidColorBrush* brushText;
-	ID2D1SolidColorBrush* brushTextBlack;
-	ID2D1SolidColorBrush* brushCloseBox;
-	ID2D1SolidColorBrush* brushTransparentMenu;
-	ID2D1SolidColorBrush* brushViewBlack;
-	ID2D1SolidColorBrush* brushButton;
-	ID2D1SolidColorBrush* brushCheckBoxOn;
 	IDWriteTextFormat* textFormat;
 
 	std::vector<VWidget*> widgets;

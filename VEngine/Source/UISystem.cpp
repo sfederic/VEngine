@@ -18,7 +18,8 @@ void UISystem::Init()
 	IDXGISurface* surface;
 	
 	//If D3D12 is being used, you'll get a "Not Implemented" error on GetBuffer() as the CmdAllocator is pased into the 
-	//swapchain creation on d3d12 instead of the device in d3d11.
+	//swapchain creation on d3d12 instead of the device in d3d11. The workaround is to use D3D11on12 but it uses
+	//fucking 500 MB while running. I guess at that point, you'd be doing your own UI calls through D3D12 anyway.
 	IDXGISwapChain3* swapchain = (IDXGISwapChain3*)gRenderSystem.GetSwapchain();
 	HR(swapchain->GetBuffer(0, IID_PPV_ARGS(&surface)));
 
@@ -44,14 +45,7 @@ void UISystem::Init()
 	HR(writeFactory->CreateTextFormat(L"Terminal", NULL, DWRITE_FONT_WEIGHT_NORMAL, DWRITE_FONT_STYLE_NORMAL,
 		DWRITE_FONT_STRETCH_NORMAL, 14.f, L"en-us", &textFormat));
 
-	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.5f, 0.5f, 0.5f, 0.5f), &brushTransparentMenu));
-	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(1.0f, 1.0f, 1.0f, 1.0f), &brushCloseBox));
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.9f, 0.9f, 0.9f, 1.0f), &brushText));
-	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.f, 0.f, 0.f, 1.0f), &brushTextBlack));
-
-	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.14f, 0.14f, 0.15f, 0.75f), &brushViewBlack));
-	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.17f, 0.17f, 0.18f, 1.0f), &brushButton));
-	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.1f, 0.1f, 0.8f, 1.0f), &brushCheckBoxOn));
 }
 
 void UISystem::Cleanup()
@@ -60,13 +54,7 @@ void UISystem::Cleanup()
 	d2dRenderTarget->Release();
 	writeFactory->Release();
 
-	brushTransparentMenu->Release();
 	brushText->Release();
-	brushTextBlack->Release();
-	brushCloseBox->Release();
-	brushViewBlack->Release();
-	brushButton->Release();
-	brushCheckBoxOn->Release();
 
 	textFormat->Release();
 }
