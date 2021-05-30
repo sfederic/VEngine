@@ -15,6 +15,8 @@
 #include <qpushbutton.h>
 #include <qdialog.h>
 #include <qlabel.h>
+#include <qdir.h>
+#include <qcombobox.h>
 
 QList<QTreeWidgetItem*> worldTreeItems;
 QTreeWidget* worldTreeList;
@@ -143,9 +145,6 @@ void WorldDock::CreateNewActorSystem()
     QGridLayout* grid = new QGridLayout();
 
     QLineEdit name;
-    QLineEdit shader;
-    QLineEdit model;
-    QLineEdit texture;
 
     //TODO: would be nice to have custom dropdowns that list all current models/shaders in the system,
     //but who's going to do that? That's a lot of work
@@ -153,14 +152,29 @@ void WorldDock::CreateNewActorSystem()
     grid->addWidget(new QLabel("Name:"), 0, 0);
     grid->addWidget(&name, 0, 1);
 
+    QDir shaderPath("Shaders/");
+    QStringList shaderFiles = shaderPath.entryList(QDir::Files);
+    QComboBox shadersCombo;
+    shadersCombo.addItems(shaderFiles);
+
     grid->addWidget(new QLabel("Shader:"), 1, 0);
-    grid->addWidget(&shader, 1, 1);
+    grid->addWidget(&shadersCombo, 1, 1);
+
+    QDir modelPath("Models/");
+    QStringList modelFiles = modelPath.entryList(QDir::Files);
+    QComboBox modelsCombo;
+    modelsCombo.addItems(modelFiles);
 
     grid->addWidget(new QLabel("Model:"), 2, 0);
-    grid->addWidget(&model, 2, 1);
+    grid->addWidget(&modelsCombo, 2, 1);
+
+    QDir texturePath("Textures/");
+    QStringList textureFiles = texturePath.entryList(QDir::Files);
+    QComboBox texturesCombo;
+    texturesCombo.addItems(textureFiles);
 
     grid->addWidget(new QLabel("Texture:"), 3, 0);
-    grid->addWidget(&texture, 3, 1);
+    grid->addWidget(&texturesCombo, 3, 1);
 
     QPushButton addButton("Add");
     connect(&addButton, &QPushButton::clicked, &actorSystemPopup, &QDialog::accept);
@@ -173,9 +187,9 @@ void WorldDock::CreateNewActorSystem()
     {
         auto newActorSystem = new ActorSystem();
         newActorSystem->name = name.text().toStdString();
-        newActorSystem->shaderName = shader.text().toStdString();
-        newActorSystem->modelName = model.text().toStdString();
-        newActorSystem->textureName = texture.text().toStdString();
+        newActorSystem->shaderName = shadersCombo.currentText().toStdString();
+        newActorSystem->modelName = modelsCombo.currentText().toStdString();
+        newActorSystem->textureName = texturesCombo.currentText().toStdString();
 
         GetWorld()->AddActorSystem(newActorSystem);
 

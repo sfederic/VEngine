@@ -1,37 +1,14 @@
-TestActorSystem
-3ico_sphere.fbx
+dummy
+1
+cone.fbx
 penguin.png
 shaders.hlsl
 Name
-TestActorSystem0
+dummy0
 Position
--1.55366 1.8603 4.70183
+0 0 0
 Scale
 1 1 1
-Render
-1
 RotQuat
 0 0 0 1
-next
-Name
-TestActorSystem1
-Position
--4.46775 0 3.94646
-Scale
-1 1 1
-Render
-1
-RotQuat
-0 0 0 1
-next
-Name
-TestActorSystem2
-Position
-0.541675 -1.39585 4.88727
-Scale
-1 1 1
-Render
-1
-RotQuat
--0 0 -0 1
 next

@@ -199,7 +199,7 @@ void Actor::Destroy()
 void ActorSystem::Serialise(std::ostream& os)
 {
 	os << name << "\n"; //Use actorsystem name to create again from ActorSystemFactory on Deserialise
-	os << actors.size(); //Write out num of actors to load the same amount on Deserialise
+	os << actors.size() << "\n"; //Write out num of actors to load the same amount on Deserialise
 
 	//Writing these three out is more about instancing prefabs off of ActorSystem so that you're not 
 	//defining these again by hand in new cpp files.
@@ -216,7 +216,7 @@ void ActorSystem::Serialise(std::ostream& os)
 void ActorSystem::Deserialise(std::istream& is)
 {
 	char name[512];
-
+	is.getline(name, 512);
 	is.getline(name, 512);
 	modelName.assign(name);
 
@@ -354,16 +354,13 @@ void ActorSystem::CreateStructuredBuffer()
 		//instancedDataStructuredBuffer->Release();
 	}
 
-	//if (actors.size() > 0)
-	{
-		instancedDataStructuredBuffer = gRenderSystem.CreateStructuredBuffer(sizeof(InstanceData) * actors.size(), sizeof(InstanceData), actorModelMatrices.data());
+	instancedDataStructuredBuffer = gRenderSystem.CreateStructuredBuffer(sizeof(InstanceData) * actors.size(), sizeof(InstanceData), actorModelMatrices.data());
 
-		D3D11_SHADER_RESOURCE_VIEW_DESC sbDesc = {};
-		sbDesc.Format = DXGI_FORMAT_UNKNOWN;
-		sbDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFEREX;
-		sbDesc.BufferEx.NumElements = actors.size();
-		HR(gRenderSystem.device->CreateShaderResourceView(instancedDataStructuredBuffer, &sbDesc, &instancedDataSrv));
-	}
+	D3D11_SHADER_RESOURCE_VIEW_DESC sbDesc = {};
+	sbDesc.Format = DXGI_FORMAT_UNKNOWN;
+	sbDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFEREX;
+	sbDesc.BufferEx.NumElements = actors.size();
+	HR(gRenderSystem.device->CreateShaderResourceView(instancedDataStructuredBuffer, &sbDesc, &instancedDataSrv));
 }
 
 //For when texture file is changed in-editor.

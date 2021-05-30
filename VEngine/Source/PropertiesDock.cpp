@@ -46,7 +46,7 @@ void PropertiesDock::DisplayActorSystemProperties(Actor* actor)
     //Actor
     propWidget->actorName->setText(QString::fromStdString(actor->name));
 
-    ActorSystem* actorSystem = actor->GetActorSystem();
+    ActorSystem* actorSystem = actor->linkedActorSystem;
 
     //Actor system 
     propWidget->actorSystemName->setText(QString::fromStdString(actorSystem->name));

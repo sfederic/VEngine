@@ -65,7 +65,6 @@ public:
 	std::string name;
 	ActorSystem* linkedActorSystem;
 	double currentAnimationTime = 0.0;
-	int vertexBufferOffset;
 	bool bRender = true;
 };
 
@@ -90,7 +89,6 @@ public:
 	{
 		ActorType* actor = new ActorType();
 		actor->transform = transform;
-		actor->vertexBufferOffset = (int)(actors.size() * modelData.GetByteWidth());
 		actor->material = this->material;
 		actor->linkedActorSystem = this;
 

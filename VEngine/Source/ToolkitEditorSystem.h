@@ -11,6 +11,7 @@ public:
 	virtual void Init(int argc, char** argv);
 	virtual void Tick();
 	virtual void PopulateWorldList();
+	virtual void PopulateActorSystemList();
 	virtual void ProcessEvents();
 	virtual void DisplayActorSystemProperties(Actor* actor);
 	virtual void SetWindowWidthHeight();

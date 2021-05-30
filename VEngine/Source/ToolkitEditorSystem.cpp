@@ -32,6 +32,11 @@ void ToolkitEditorSystem::PopulateWorldList()
 	editorMainWindow->worldDock->PopulateWorldList();
 }
 
+void ToolkitEditorSystem::PopulateActorSystemList()
+{
+	editorMainWindow->worldDock->PopulateActorSystemList();
+}
+
 void ToolkitEditorSystem::ProcessEvents()
 {
 	qApplication->processEvents();

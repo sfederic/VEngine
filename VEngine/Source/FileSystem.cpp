@@ -37,24 +37,43 @@ void FileSystem::LoadWorld(const std::string& levelName)
 
 	while (!is.eof())
 	{
+		ActorSystem* actorSystem = nullptr;
+
 		std::string actorSystemName;
 		is >> actorSystemName;
-		auto asIt = ActorSystemFactory::nameToSystemMap->find(actorSystemName);
-		if (asIt == ActorSystemFactory::nameToSystemMap->end())
+
+		if (actorSystemName == "")
 		{
-			continue;
+			break;
 		}
 
 		size_t numActorsToSpawn = 0;
 		is >> numActorsToSpawn;
 
-		ActorSystem* actorSystem = asIt->second;
-		actorSystem->Cleanup();
+		auto asIt = ActorSystemFactory::nameToSystemMap->find(actorSystemName);
+		if (asIt == ActorSystemFactory::nameToSystemMap->end())
+		{
+			actorSystem = new ActorSystem();
+			for (int i = 0; i < numActorsToSpawn; i++)
+			{
+				actorSystem->AddActor<Actor>(Transform());
+			}
+
+			actorSystem->Deserialise(is);
+			actorSystem->SpawnActors(0);
+		}
+		else
+		{
+			actorSystem = asIt->second;
+			actorSystem->Cleanup();
+
+			actorSystem->SpawnActors(numActorsToSpawn);
+			actorSystem->Deserialise(is);
+		}
 
 		world->AddActorSystem(actorSystem);
-
-		actorSystem->SpawnActors(numActorsToSpawn);
-		actorSystem->Deserialise(is);
+		gEditorSystem->PopulateWorldList();
+		gEditorSystem->PopulateActorSystemList();
 	}
 	 
 	//Deselect any existing actors, because TransformGizmo will stay at previous positions.
