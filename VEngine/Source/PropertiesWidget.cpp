@@ -222,7 +222,7 @@ void PropertiesWidget::SelectTexture()
         QString fileName = QFileInfo(filePath).fileName();
         actorSystemTextureName->setText(fileName);
 
-        selectedActorSystem->textureName = fileName.toStdWString();
+        selectedActorSystem->textureName = fileName.toStdString();
         selectedActorSystem->RecreateTexture();
     }
 }
