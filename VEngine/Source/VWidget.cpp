@@ -34,3 +34,8 @@ bool VWidget::Button(const std::wstring& text, D2D1_RECT_F layout, float lineWid
 
 	return false;
 }
+
+void VWidget::Image(const std::wstring& file)
+{
+	//gUISystem.d2dRenderTarget->DrawBitmap()
+}

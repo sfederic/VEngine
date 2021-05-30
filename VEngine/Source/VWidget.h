@@ -17,6 +17,7 @@ public:
 
 	void Text(const std::wstring& text, D2D1_RECT_F layout);
 	bool Button(const std::wstring& text, D2D1_RECT_F layout, float lineWidth = 1.0f);
+	void Image(const std::wstring& file);
 
 	bool bRender = true;
 };
