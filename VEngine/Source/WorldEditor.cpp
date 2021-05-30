@@ -41,7 +41,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 
 		Ray screenPickRay;
 
-		if (RaycastAllFromScreen(screenPickRay, gUISystem.mousePos.x, gUISystem.mousePos.y, &editorCamera, GetWorld()))
+		if (RaycastAllFromScreen(screenPickRay))
 		{
 			if (screenPickRay.hitActors.size() > 1) //Checking if multiple bounding volumes are hit
 			{
@@ -126,7 +126,7 @@ void WorldEditor::SpawnActorOnClick()
 				GetWorld()->AddActorSystem(actorSystem); //Raycasts mess around a bit if world AS list is empty
 
 				Ray ray;
-				if (RaycastAllFromScreen(ray, gUISystem.mousePos.x, gUISystem.mousePos.y, GetActiveCamera(), GetWorld()))
+				if (RaycastAllFromScreen(ray))
 				{
 					//Spawn actor at ray hit point
 					Transform transform;

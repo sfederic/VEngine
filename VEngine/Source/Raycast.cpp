@@ -195,11 +195,14 @@ bool RaycastFromScreen(Ray& ray, int sx, int sy, Camera* camera, ActorSystem* ac
 	return Raycast(ray, ray.origin, ray.direction, actorSystem, true);
 }
 
-bool RaycastAllFromScreen(Ray& ray, int sx, int sy, Camera* camera, World* world)
+bool RaycastAllFromScreen(Ray& ray)
 {
+	World* world = GetWorld();
+
 	for (int i = 0; i < world->actorSystems.size(); i++)
 	{
-		if (RaycastFromScreen(ray, sx, sy, camera, world->actorSystems[i]))
+		if (RaycastFromScreen(ray, gUISystem.mousePos.x, gUISystem.mousePos.y, 
+			GetActiveCamera(), world->actorSystems[i]))
 		{
 			ray.actorSystemIndex = i;
 

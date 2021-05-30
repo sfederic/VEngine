@@ -241,7 +241,7 @@ void DebugMenu::RenderActorInspectMenu()
 		ImGui::SetWindowSize(ImVec2(300, 250));
 
 		Ray ray;
-		if (RaycastAllFromScreen(ray, gUISystem.mousePos.x, gUISystem.mousePos.y, GetActiveCamera(), GetWorld()))
+		if (RaycastAllFromScreen(ray))
 		{
 			Actor* actor = ray.hitActor;
 			if (actor)

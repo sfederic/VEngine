@@ -34,4 +34,4 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, class ActorSystem* a
 bool RaycastTriangleIntersect(Ray& ray);
 bool RaycastAll(Ray& ray, XMVECTOR origin, XMVECTOR direction, class World* world);
 bool RaycastFromScreen(Ray& ray, int sx, int sy, class Camera* camera, class ActorSystem* actorSystem);
-bool RaycastAllFromScreen(Ray& ray, int sx, int sy, Camera* camera, class World* world);
+bool RaycastAllFromScreen(Ray& ray);
