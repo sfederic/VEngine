@@ -86,6 +86,7 @@ void Console::ExecuteString()
 	else if (consoleString == ExecuteStrings::FPS)
 	{
 		gDebugMenu.bFPSMenuOpen = !gDebugMenu.bFPSMenuOpen;
+		//gRenderSystem.bQueryGPU = gDebugMenu.bFPSMenuOpen;
 	}
 	else if (consoleString == ExecuteStrings::ACTOR)
 	{

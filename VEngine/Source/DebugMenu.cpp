@@ -98,7 +98,7 @@ void DebugMenu::RenderFPSMenu(float deltaTime)
 		ImGui::Begin("FPS");
 
 		ImGui::Text("FPS: %d", gCoreSystem.finalFrameCount);
-		ImGui::Text("GPU Render Time: %d", gRenderSystem.renderTime);
+		ImGui::Text("GPU Render Time: %f", gRenderSystem.renderTime);
 		ImGui::Text("Delta Time (ms): %f", deltaTime);
 		ImGui::Text("Time Since Startup: %f", gCoreSystem.timeSinceStartup);
 

@@ -502,8 +502,12 @@ void RenderSystem::RenderBounds()
 
 void RenderSystem::Render(float deltaTime)
 {
+	PROFILE_START
+
 	RenderActorSystem(GetWorld());
 	RenderBounds();
+
+	PROFILE_END
 }
 
 void RenderSystem::RenderEnd(float deltaTime)
@@ -533,6 +537,9 @@ void RenderSystem::RenderEnd(float deltaTime)
 		}
 	}
 
+
+	//TODO: the GPU query timer stuff is heavy, looks like it drops the FPS by half because of those sleeps()s
+	//down there.
 	//END QUERY
 	if (bQueryGPUInner)
 	{

@@ -114,6 +114,8 @@ public:
 	bool bDrawBoundingBoxes = false;
 	bool bDrawBoundingSpheres = false;
 	bool bQueryGPU = false;
+
+private:
 	bool bQueryGPUInner = false;
 };
 
