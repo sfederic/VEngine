@@ -1,37 +1,82 @@
-dummy
+poles
+6
+cube.fbx
+texture.png
+shaders.hlsl
+Name
+poles0
+Position
+-2 0 0.125
+Scale
+1 2.5 1.125
+RotQuat
+-0 0 -0 1
+next
+Name
+poles1
+Position
+6 0 0
+Scale
+1 2.5 1
+RotQuat
+-0 0 -0 1
+next
+Name
+poles2
+Position
+6 0 -5
+Scale
+1 2.5 1
+RotQuat
+-0 0 -0 1
+next
+Name
+poles3
+Position
+-2 0 -5
+Scale
+1 2.5 1
+RotQuat
+-0 0 -0 1
+next
+Name
+poles4
+Position
+-1.75 -0.3125 4.75
+Scale
+1.25 2.8125 0.75
+RotQuat
+-0 0 -0 1
+next
+Name
+poles5
+Position
+6 0 5
+Scale
+1 2.5 1
+RotQuat
+-0 0 -0 1
+next
+roofs
 2
 cone.fbx
 penguin.png
 shaders.hlsl
 Name
-dummy0
+roofs0
 Position
-0 0 0
+-2 5 0
 Scale
-1 1 1
+1 0.999988 0.999988
 RotQuat
-0 0 0 1
+0.707107 0 0 -0.707107
 next
 Name
-dummy1
+roofs1
 Position
-0 0 0
+6 5 0
 Scale
-1 1 1
+1 0.999984 0.999984
 RotQuat
-0 0 0 1
-next
-dumm2
-1
-monkey.fbx
-texture.png
-shaders.hlsl
-Name
-dumm20
-Position
-0 0 0
-Scale
-1 1 1
-RotQuat
-0 0 0 1
+0.707107 0 0 -0.707107
 next

@@ -34,8 +34,8 @@ void TransformGizmo::Tick()
             {
                 currentTransformOperation = ImGuizmo::TRANSLATE;
                 currentSnapValues[0] = translateSnapValues[0];
-                currentSnapValues[0] = translateSnapValues[1];
-                currentSnapValues[0] = translateSnapValues[2];
+                currentSnapValues[1] = translateSnapValues[1];
+                currentSnapValues[2] = translateSnapValues[2];
             }
             else if (gInputSystem.GetKeyDownState('E'))
             {
