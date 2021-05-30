@@ -111,4 +111,5 @@ void ToolkitEditorSystem::DisableEditorDocks()
 void ToolkitEditorSystem::Print(const std::string& msg)
 {
 	editorMainWindow->consoleDock->consoleMessageBox->insertPlainText(QString(msg.c_str()));
+	editorMainWindow->consoleDock->consoleMessageBox->moveCursor(QTextCursor::MoveOperation::End);
 }
