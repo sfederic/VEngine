@@ -32,6 +32,8 @@
 #include "Actors/TestActor.h"
 #include "GlobalDefines.h"
 
+#include "VWidget.h"
+
 int main(int argc, char* argv[])
 {
     HR(CoInitialize(NULL)); //For the WIC texture functions from DXT
@@ -55,6 +57,11 @@ int main(int argc, char* argv[])
     gDebugMenu.Init();
     gAudioSystem.Init();
     gWorldEditor.Init();
+
+
+    //Test in-game UI widget stuff
+    VWidget widget;
+
 
     //Qt late init
     gEditorSystem->PopulateWorldList();
@@ -98,19 +105,17 @@ int main(int argc, char* argv[])
         gRenderSystem.RenderEnd(deltaTime);
 
         //UI RENDERING
-        if (gUISystem.bAllUIActive)
-        {
-            gUISystem.d2dRenderTarget->BeginDraw();
-            gConsole.Tick();
-            gConsole.DrawViewItems();
-            gDebugMenu.Tick(GetWorld(), deltaTime);
-            gUISystem.RenderAllUIViews();
+        gUISystem.d2dRenderTarget->BeginDraw();
+        gConsole.Tick();
+        gConsole.DrawViewItems();
+        gDebugMenu.Tick(GetWorld(), deltaTime);
 
-            gUISystem.d2dRenderTarget->EndDraw();
+        gUISystem.RenderAllWidgets(deltaTime);
 
-            ImGui::Render();
-            ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-        }
+        gUISystem.d2dRenderTarget->EndDraw();
+
+        ImGui::Render();
+        ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
         gRenderSystem.Flush();
 

@@ -17,11 +17,6 @@ WorldEditor gWorldEditor;
 
 void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 {
-	if (gUISystem.bUIClicked)
-	{
-		//return;
-	}
-
 	//Turn off currently selected actor spawn systsm.
 	if (gInputSystem.GetKeyUpState(Keys::BackSpace))
 	{
@@ -39,7 +34,7 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 	SpawnActorOnClick();
 
 	//Actor picking for editor
-	if (gInputSystem.GetMouseLeftDownState() && !gUISystem.bUIClicked && !bActorSpawnerOn)
+	if (gInputSystem.GetMouseLeftDownState() && !bActorSpawnerOn)
 	{
 		lastMousePosX = gUISystem.mousePos.x;
 		lastMousePosY = gUISystem.mousePos.y;

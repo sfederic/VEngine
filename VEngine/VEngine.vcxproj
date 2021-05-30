@@ -178,7 +178,6 @@
     <ClCompile Include="Source\ToolbarDock.cpp" />
     <ClCompile Include="Source\TransformEditWidget.cpp" />
     <ClCompile Include="Source\UISystem.cpp" />
-    <ClCompile Include="Source\UIView.cpp" />
     <ClCompile Include="Source\VString.cpp" />
     <ClCompile Include="Source\World.cpp" />
     <ClCompile Include="Source\WorldDock.cpp" />
@@ -188,6 +187,7 @@
     <ClCompile Include="Source\ActorSystemFactory.cpp" />
     <ClCompile Include="Source\PropertyWidgets\VectorWidget.cpp" />
     <ClCompile Include="Source\Actors\TestActor2.cpp" />
+    <ClCompile Include="Source\VWidget.cpp" />
     <QtRcc Include="EditorMainWindow.qrc" />
     <QtUic Include="EditorMainWindow.ui" />
     <QtMoc Include="EditorMainWindow.h" />
@@ -258,7 +258,6 @@
     <ClInclude Include="Source\ToolbarDock.h" />
     <ClInclude Include="Source\TransformEditWidget.h" />
     <ClInclude Include="Source\UISystem.h" />
-    <ClInclude Include="Source\UIView.h" />
     <ClInclude Include="Source\VString.h" />
     <ClInclude Include="Source\World.h" />
     <ClInclude Include="Source\WorldDock.h" />
@@ -268,6 +267,7 @@
     <ClInclude Include="Source\ActorSystemFactory.h" />
     <ClInclude Include="Source\PropertyWidgets\VectorWidget.h" />
     <ClInclude Include="Source\Actors\TestActor2.h" />
+    <ClInclude Include="Source\VWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

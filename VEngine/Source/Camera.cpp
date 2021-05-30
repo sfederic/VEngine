@@ -40,7 +40,7 @@ void Camera::Tick(float deltaTime)
 		UpdateViewMatrix();
 
 		//WASD MOVEMENT
-		if (!gConsole.bConsoleActive && !gUISystem.bEditUIActive)
+		if (!gConsole.bConsoleActive)
 		{
 			if (gInputSystem.GetAsyncKey(Keys::RightMouse))
 			{

@@ -5,7 +5,9 @@
 
 #include <d2d1_1.h>
 #include <vector>
-#include "UIView.h"
+#include <dwrite_1.h>
+
+class VWidget;
 
 class UISystem
 {
@@ -14,12 +16,10 @@ public:
 	void Cleanup(); //D2D1 Actually throws errors if no cleanup
 	void Tick();
 	void RenderText();
-
-	std::vector<UIView*> uiViews;
-	Toolbar* toolbar;
-
-	void RenderAllUIViews();
+	void AddWidget(VWidget* widget);
+	void RenderAllWidgets(float deltaTime);
 	void PrintMousePos();
+
 	POINT mousePos;
 
 	ID2D1Factory* d2dFactory;
@@ -34,11 +34,7 @@ public:
 	ID2D1SolidColorBrush* brushCheckBoxOn;
 	IDWriteTextFormat* textFormat;
 
-	int activeUIViewElementIndex = -1;
-	int currentUIElementIndex = 0;
-	bool bEditUIActive = false;
-	bool bUIClicked = false;
-	bool bAllUIActive = true;
+	std::vector<VWidget*> widgets;
 };
 
 extern UISystem gUISystem;

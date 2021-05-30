@@ -8,6 +8,7 @@
 #include "World.h"
 #include "..\EditorMainWindow.h"
 #include "RenderViewWidget.h"
+#include "VWidget.h"
 
 UISystem gUISystem;
 
@@ -51,17 +52,6 @@ void UISystem::Init()
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.14f, 0.14f, 0.15f, 0.75f), &brushViewBlack));
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.17f, 0.17f, 0.18f, 1.0f), &brushButton));
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.1f, 0.1f, 0.8f, 1.0f), &brushCheckBoxOn));
-
-	//Populate UIViews
-	UIViewActor* uiViewActor = new UIViewActor;
-	uiViewActor->bIsHidden = true;
-	uiViews.push_back(uiViewActor);
-
-	TestUIView* testUIView = new TestUIView();
-	uiViews.push_back(testUIView);
-
-	toolbar = new Toolbar();
-	uiViews.push_back(toolbar);
 }
 
 void UISystem::Cleanup()
@@ -87,57 +77,6 @@ void UISystem::Tick()
 	ScreenToClient(gCoreSystem.mainWindow, &mousePos);
 
 	gEditorSystem->GetMousePos((int*)&gUISystem.mousePos.x, (int*)&gUISystem.mousePos.y);
-
-	if (gInputSystem.GetKeyUpState(VK_TAB))
-	{
-		//toolbar->bIsHidden = !toolbar->bIsHidden;
-	}
-
-	if(gInputSystem.GetKeyUpState('0'))
-	{
-		//bAllUIActive = !bAllUIActive;
-	}
-
-	//NOTE: This one is here for the Direct2D mouse checking. Y position is off by about 10? Direct2D rendering offset? 
-	//Was hurting raycasting too. Is it the Win32 title bar?
-	mousePos.y += 5; 
-
-	//Iterate ver all UI back rects before any world editor input so that raycasts don't hit behind UI
-	//NOTE: This actually would fail on the first frame given the current methods, but too fast to notice
-	bUIClicked = false;
-
-	for (int i = 0; i < uiViews.size(); i++)
-	{
-		if (!uiViews[i]->bIsHidden)
-		{
-			if ((mousePos.x > uiViews[i]->viewRectBack.left) && (mousePos.x < uiViews[i]->viewRectBack.right))
-			{
-				if ((mousePos.y > uiViews[i]->viewRectBack.top) && (mousePos.y < uiViews[i]->viewRectBack.bottom))
-				{
-					if (gInputSystem.GetMouseLeftDownState())
-					{
-						bUIClicked = true;
-						uiViews[i]->bIsHidden = false;
-					}
-				}
-			}
-		}
-	}
-
-	//Was for multiple floating views
-	/*if (inputSystem.GetKeyUpState(VK_DELETE))
-	{
-		world.actorSystems[ray.actorSystemIndex]->RemoveActor(ray.actorIndex);
-		gUISystem.uiViews.pop_back();
-	}
-
-	if (inputSystem.GetKeyUpState(VK_BACK))
-	{
-		if (gUISystem.uiViews.size() > 0)
-		{
-			gUISystem.uiViews.pop_back();
-		}
-	}*/
 }
 
 void UISystem::RenderText()
@@ -145,14 +84,16 @@ void UISystem::RenderText()
 
 }
 
-void UISystem::RenderAllUIViews()
+void UISystem::AddWidget(VWidget* widget)
 {
-	for (int i = 0; i < gUISystem.uiViews.size(); i++)
+	widgets.push_back(widget);
+}
+
+void UISystem::RenderAllWidgets(float deltaTime)
+{
+	for (auto& widget : widgets)
 	{
-		//if (!gUISystem.uiViews[i]->bIsHidden)
-		{
-			gUISystem.uiViews[i]->Tick();
-		}
+		widget->Tick(deltaTime);
 	}
 }
 
