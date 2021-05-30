@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
 
     //Test in-game UI widget stuff
     VWidget widget;
-
+    gUISystem.AddWidget(&widget);
 
     //Qt late init
     gEditorSystem->PopulateWorldList();

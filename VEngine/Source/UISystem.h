@@ -15,7 +15,6 @@ public:
 	void Init();
 	void Cleanup(); //D2D1 Actually throws errors if no cleanup
 	void Tick();
-	void RenderText();
 	void AddWidget(VWidget* widget);
 	void RenderAllWidgets(float deltaTime);
 	void PrintMousePos();
@@ -26,6 +25,7 @@ public:
 	ID2D1RenderTarget* d2dRenderTarget;
 	IDWriteFactory1* writeFactory;
 	ID2D1SolidColorBrush* brushText;
+	ID2D1SolidColorBrush* brushShapes;
 	IDWriteTextFormat* textFormat;
 
 	std::vector<VWidget*> widgets;

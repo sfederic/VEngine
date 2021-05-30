@@ -42,10 +42,8 @@ void UISystem::Init()
 	HR(writeFactory->CreateTextFormat(L"Terminal", NULL, DWRITE_FONT_WEIGHT_NORMAL, DWRITE_FONT_STYLE_NORMAL,
 		DWRITE_FONT_STRETCH_NORMAL, 24.f, L"en-us", &textFormat));
 
-	HR(writeFactory->CreateTextFormat(L"Terminal", NULL, DWRITE_FONT_WEIGHT_NORMAL, DWRITE_FONT_STYLE_NORMAL,
-		DWRITE_FONT_STRETCH_NORMAL, 14.f, L"en-us", &textFormat));
-
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.9f, 0.9f, 0.9f, 1.0f), &brushText));
+	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.5f, 0.5f, 0.5f, 1.0f), &brushShapes));
 }
 
 void UISystem::Cleanup()
@@ -65,11 +63,6 @@ void UISystem::Tick()
 	ScreenToClient(gCoreSystem.mainWindow, &mousePos);
 
 	gEditorSystem->GetMousePos((int*)&gUISystem.mousePos.x, (int*)&gUISystem.mousePos.y);
-}
-
-void UISystem::RenderText()
-{
-
 }
 
 void UISystem::AddWidget(VWidget* widget)
