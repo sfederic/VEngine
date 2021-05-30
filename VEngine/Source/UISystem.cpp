@@ -53,6 +53,7 @@ void UISystem::Cleanup()
 	writeFactory->Release();
 
 	brushText->Release();
+	brushShapes->Release();
 
 	textFormat->Release();
 }
@@ -72,9 +73,12 @@ void UISystem::AddWidget(VWidget* widget)
 
 void UISystem::RenderAllWidgets(float deltaTime)
 {
-	for (auto& widget : widgets)
+	if (gCoreSystem.bGamePlayOn)
 	{
-		widget->Tick(deltaTime);
+		for (auto& widget : widgets)
+		{
+			widget->Tick(deltaTime);
+		}
 	}
 }
 
