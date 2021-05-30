@@ -110,7 +110,7 @@ int main(int argc, char* argv[])
         gConsole.DrawViewItems();
         gDebugMenu.Tick(GetWorld(), deltaTime);
 
-        gUISystem.RenderAllWidgets(deltaTime);
+        gUISystem.TickAllWidgets(deltaTime);
 
         gUISystem.d2dRenderTarget->EndDraw();
 

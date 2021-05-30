@@ -16,7 +16,7 @@ public:
 	void Cleanup(); //D2D1 Actually throws errors if no cleanup
 	void Tick();
 	void AddWidget(VWidget* widget);
-	void RenderAllWidgets(float deltaTime);
+	void TickAllWidgets(float deltaTime);
 	void StartAllWidgets();
 	void PrintMousePos();
 

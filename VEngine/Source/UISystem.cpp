@@ -9,6 +9,7 @@
 #include "..\EditorMainWindow.h"
 #include "RenderViewWidget.h"
 #include "VWidget.h"
+#include "Profiler.h"
 
 UISystem gUISystem;
 
@@ -71,8 +72,10 @@ void UISystem::AddWidget(VWidget* widget)
 	widgets.push_back(widget);
 }
 
-void UISystem::RenderAllWidgets(float deltaTime)
+void UISystem::TickAllWidgets(float deltaTime)
 {
+	PROFILE_START
+
 	if (gCoreSystem.bGamePlayOn)
 	{
 		for (auto& widget : widgets)
@@ -80,6 +83,8 @@ void UISystem::RenderAllWidgets(float deltaTime)
 			widget->Tick(deltaTime);
 		}
 	}
+
+	PROFILE_END
 }
 
 void UISystem::StartAllWidgets()

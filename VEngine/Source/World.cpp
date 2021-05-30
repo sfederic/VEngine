@@ -3,6 +3,7 @@
 #include "DebugMenu.h"
 #include "CoreSystem.h"
 #include "EditorSystem.h"
+#include "Profiler.h"
 
 World gCurrentWorld;
 
@@ -23,6 +24,8 @@ void World::Load(std::string levelName)
 
 void World::TickAllActorSystems(float deltaTime)
 {
+	PROFILE_START
+
 	//Skip ticks if game is paused
 	if (gCoreSystem.bGamePaused)
 	{
@@ -44,6 +47,8 @@ void World::TickAllActorSystems(float deltaTime)
 			actorSystems[asIndex]->actors[actorIndex]->Tick(deltaTime);
 		}
 	}
+
+	PROFILE_END
 }
 
 void World::StartAllActorSystems()
