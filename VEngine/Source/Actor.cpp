@@ -16,6 +16,10 @@ void Actor::Tick(float deltaTime)
 {
 }
 
+void Actor::Start()
+{
+}
+
 Properties Actor::GetProperties()
 {
 	Properties props;
@@ -251,6 +255,10 @@ void ActorSystem::DeserialiseAsTemplate(std::istream& is)
 void ActorSystem::Tick(float deltaTime)
 {
 
+}
+
+void ActorSystem::Start()
+{
 }
 
 void ActorSystem::SpawnActors(int numToSpawn)

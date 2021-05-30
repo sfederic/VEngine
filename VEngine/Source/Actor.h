@@ -28,6 +28,7 @@ class Actor
 public:
 	Actor();
 	virtual void Tick(float deltaTime);
+	virtual void Start();
 
 	virtual Properties GetProperties();
 
@@ -77,6 +78,7 @@ public:
 	void Deserialise(std::istream& is);
 	void DeserialiseAsTemplate(std::istream& is);
 	virtual void Tick(float deltaTime);
+	virtual void Start();
 	virtual void SpawnActors(int numToSpawn);
 	virtual Actor* SpawnActor(Transform transform);
 

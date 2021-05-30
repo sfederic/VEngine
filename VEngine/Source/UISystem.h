@@ -17,6 +17,7 @@ public:
 	void Tick();
 	void AddWidget(VWidget* widget);
 	void RenderAllWidgets(float deltaTime);
+	void StartAllWidgets();
 	void PrintMousePos();
 
 	POINT mousePos;

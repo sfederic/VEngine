@@ -11,6 +11,7 @@ class World
 public:
 	void Load(std::string levelName);
 	void TickAllActorSystems(float deltaTime);
+	void StartAllActorSystems();
 	void CleaupAllActors();
 	void AddActorSystem(ActorSystem* actorSystem);
 

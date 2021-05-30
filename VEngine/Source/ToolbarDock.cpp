@@ -11,6 +11,8 @@
 #include <qcombobox.h>
 #include "CoreSystem.h"
 #include "../EditorMainWindow.h"
+#include "UISystem.h"
+#include "World.h"
 
 ToolbarDock::ToolbarDock(const char* title) : QDockWidget(title)
 {
@@ -64,6 +66,9 @@ void ToolbarDock::SetPlayMode()
     if (gCoreSystem.bGamePlayOn)
     {
         gEditorSystem->DisableEditorDocks();
+
+        GetWorld()->StartAllActorSystems();
+        gUISystem.StartAllWidgets();
     }
     else if (!gCoreSystem.bGamePlayOn)
     {

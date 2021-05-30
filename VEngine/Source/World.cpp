@@ -46,6 +46,19 @@ void World::TickAllActorSystems(float deltaTime)
 	}
 }
 
+void World::StartAllActorSystems()
+{
+	for (auto& as : actorSystems)
+	{
+		as->Start();
+
+		for (auto& actor : as->actors)
+		{
+			actor->Start();
+		}
+	}
+}
+
 void World::CleaupAllActors()
 {
 	actorSystems.clear();

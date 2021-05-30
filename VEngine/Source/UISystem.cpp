@@ -82,6 +82,14 @@ void UISystem::RenderAllWidgets(float deltaTime)
 	}
 }
 
+void UISystem::StartAllWidgets()
+{
+	for (auto& widget : widgets)
+	{
+		widget->Start();
+	}
+}
+
 void UISystem::PrintMousePos()
 {
 	DebugPrint("MouseX %d | MouseY %d\n", mousePos.x, mousePos.y);

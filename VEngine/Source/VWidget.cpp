@@ -1,16 +1,31 @@
 #include "VWidget.h"
 #include "UISystem.h"
 #include "Input.h"
-#include <SpriteBatch.h>
 #include <WICTextureLoader.h>
 #include "RenderSystem.h"
-#include <SimpleMath.h>
 
 void VWidget::Tick(float deltaTime)
 {
 	Text(L"Hello baby", { 0,0,200,200 });
 	Button(L"button", { 200, 200, 300, 300 });
-	Image(L"yep");
+	Image(texture1, 200, 200);
+}
+
+void VWidget::Start()
+{
+	spriteBatch = new DirectX::SpriteBatch(gRenderSystem.context);
+
+	texture1 = CreateTexture(L"penguin.png");
+}
+
+ID3D11ShaderResourceView* VWidget::CreateTexture(const std::wstring& filename)
+{
+	ID3D11ShaderResourceView* textureView;
+	std::wstring filepath = L"Textures/" + filename;
+	CreateWICTextureFromFile(gRenderSystem.device, filepath.c_str(), nullptr, &textureView);
+	assert(textureView && "texture filename will be wrong");
+
+	return textureView;
 }
 
 void VWidget::Text(const std::wstring& text, D2D1_RECT_F layout)
@@ -41,27 +56,12 @@ bool VWidget::Button(const std::wstring& text, D2D1_RECT_F layout, float lineWid
 }
 
 //REF:https://github.com/Microsoft/DirectXTK/wiki/Sprites-and-textures
-void VWidget::Image(const std::wstring& file)
+void VWidget::Image(ID3D11ShaderResourceView* texture, float x, float y)
 {
-	ID3D11ShaderResourceView* m_texture;
-	ID3D11Resource* resource;
-	HR(CreateWICTextureFromFile(gRenderSystem.device, L"Textures/penguin.png", &resource, &m_texture));
+	DirectX::XMFLOAT2 screenPos(x, y);
+	DirectX::XMFLOAT2 origin(0.f, 0.f);
 
-	ID3D11Texture2D* tex;
-	resource->QueryInterface(&tex);
-
-	DirectX::SpriteBatch* m_spriteBatch;
-	DirectX::SimpleMath::Vector2 m_screenPos;
-	DirectX::SimpleMath::Vector2 m_origin;
-
-	m_spriteBatch = new SpriteBatch(gRenderSystem.context);
-
-	m_spriteBatch->Begin();
-	m_spriteBatch->Draw(m_texture, m_screenPos, nullptr, Colors::White, 0.f, m_origin);
-	m_spriteBatch->End();
-
-	m_texture->Release();
-	resource->Release();
-	tex->Release();
-	delete m_spriteBatch;
+	spriteBatch->Begin();
+	spriteBatch->Draw(texture, screenPos, nullptr, Colors::White, 0.f, origin);
+	spriteBatch->End();
 }
