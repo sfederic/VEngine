@@ -1,10 +1,33 @@
 dummy
-1
+2
 cone.fbx
 penguin.png
 shaders.hlsl
 Name
 dummy0
+Position
+0 0 0
+Scale
+1 1 1
+RotQuat
+0 0 0 1
+next
+Name
+dummy1
+Position
+0 0 0
+Scale
+1 1 1
+RotQuat
+0 0 0 1
+next
+dumm2
+1
+monkey.fbx
+texture.png
+shaders.hlsl
+Name
+dumm20
 Position
 0 0 0
 Scale

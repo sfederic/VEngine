@@ -54,6 +54,8 @@ void FileSystem::LoadWorld(const std::string& levelName)
 		if (asIt == ActorSystemFactory::nameToSystemMap->end())
 		{
 			actorSystem = new ActorSystem();
+			actorSystem->name.assign(actorSystemName);
+
 			for (int i = 0; i < numActorsToSpawn; i++)
 			{
 				actorSystem->AddActor<Actor>(Transform());
@@ -72,8 +74,6 @@ void FileSystem::LoadWorld(const std::string& levelName)
 		}
 
 		world->AddActorSystem(actorSystem);
-		gEditorSystem->PopulateWorldList();
-		gEditorSystem->PopulateActorSystemList();
 	}
 	 
 	//Deselect any existing actors, because TransformGizmo will stay at previous positions.

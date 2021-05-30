@@ -2,6 +2,7 @@
 #include "Actor.h"
 #include "DebugMenu.h"
 #include "CoreSystem.h"
+#include "EditorSystem.h"
 
 World gCurrentWorld;
 
@@ -67,6 +68,9 @@ void World::AddActorSystem(ActorSystem* actorSystem)
 			ActorSystemFactory::Register<ActorSystem>(actorSystem);
 		}
 	}
+
+	gEditorSystem->PopulateActorSystemList();
+	gEditorSystem->PopulateWorldList();
 }
 
 Actor* World::FindActorByString(const std::string& name)
