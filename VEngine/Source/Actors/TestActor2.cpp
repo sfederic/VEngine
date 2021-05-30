@@ -7,7 +7,7 @@ TestActor2System::TestActor2System()
 {
 	name = "TestActor2System";
 	modelName = "monkey.fbx";
-	shaderName = L"shaders.hlsl";
+	shaderName = "shaders.hlsl";
 
 	ActorSystemFactory::Register<TestActor2System>(this);
 }

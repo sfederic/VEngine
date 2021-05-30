@@ -7,8 +7,8 @@ TestActorSystem testActorSystem;
 
 TestActorSystem::TestActorSystem()
 {
-	shaderName = L"shaders.hlsl";
-	textureName = L"texture2.jpg";
+	shaderName = "shaders.hlsl";
+	textureName = "texture2.jpg";
 	modelName = "cube.fbx";
 	name = "TestActorSystem";
 

@@ -201,6 +201,12 @@ void ActorSystem::Serialise(std::ostream& os)
 	os << name << "\n"; //Use actorsystem name to create again from ActorSystemFactory on Deserialise
 	os << actors.size(); //Write out num of actors to load the same amount on Deserialise
 
+	//Writing these three out is more about instancing prefabs off of ActorSystem so that you're not 
+	//defining these again by hand in new cpp files.
+	os << modelName.c_str() << "\n";
+	os << textureName.c_str() << "\n";
+	os << shaderName.c_str() << "\n";
+
 	for (int i = 0; i < actors.size(); i++)
 	{
 		Serialiser::Serialise(actors[i], os);
@@ -209,10 +215,36 @@ void ActorSystem::Serialise(std::ostream& os)
 
 void ActorSystem::Deserialise(std::istream& is)
 {
+	char name[512];
+
+	is.getline(name, 512);
+	modelName.assign(name);
+
+	is.getline(name, 512);
+	textureName.assign(name);
+
+	is.getline(name, 512);
+	shaderName.assign(name);
+
 	for (int i = 0; i < actors.size(); i++)
 	{
 		Serialiser::Deserialise(actors[i], is);
 	}
+}
+
+void ActorSystem::Tick(float deltaTime)
+{
+
+}
+
+void ActorSystem::SpawnActors(int numToSpawn)
+{
+	Init<Actor>(numToSpawn);
+}
+
+Actor* ActorSystem::SpawnActor(Transform transform)
+{
+	return AddActor<Actor>(transform);
 }
 
 Buffer* ActorSystem::GetVertexBuffer()

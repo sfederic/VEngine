@@ -2,7 +2,7 @@
 
 DebugSphere::DebugSphere()
 {
-	shaderName = L"debugDraw.hlsl";
+	shaderName = "debugDraw.hlsl";
 	modelName = "ico_sphere.fbx";
 	Init<Actor>(1);
 }

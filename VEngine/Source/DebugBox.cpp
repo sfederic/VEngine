@@ -3,7 +3,7 @@
 DebugBox::DebugBox()
 {
 	modelName = "cube.fbx";
-	shaderName = L"debugDraw.hlsl";
+	shaderName = "debugDraw.hlsl";
 	Init<Actor>(1);
 }
 

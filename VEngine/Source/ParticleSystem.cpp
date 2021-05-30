@@ -5,8 +5,8 @@
 ParticleSystem::ParticleSystem()
 {
 	modelName = "plane.fbx";
-	shaderName = L"shaders.hlsl";
-	textureName = L"texture.png";
+	shaderName = "shaders.hlsl";
+	textureName = "texture.png";
 	name = "ParticleSystem";
 	Init<Particle>(5);
 }

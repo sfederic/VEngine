@@ -179,6 +179,7 @@
     <ClCompile Include="Source\TransformEditWidget.cpp" />
     <ClCompile Include="Source\UISystem.cpp" />
     <ClCompile Include="Source\UIView.cpp" />
+    <ClCompile Include="Source\VString.cpp" />
     <ClCompile Include="Source\World.cpp" />
     <ClCompile Include="Source\WorldDock.cpp" />
     <ClCompile Include="Source\WorldEditor.cpp" />
@@ -258,6 +259,7 @@
     <ClInclude Include="Source\TransformEditWidget.h" />
     <ClInclude Include="Source\UISystem.h" />
     <ClInclude Include="Source\UIView.h" />
+    <ClInclude Include="Source\VString.h" />
     <ClInclude Include="Source\World.h" />
     <ClInclude Include="Source\WorldDock.h" />
     <ClInclude Include="Source\WorldEditor.h" />

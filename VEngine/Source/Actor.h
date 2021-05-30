@@ -75,9 +75,9 @@ public:
 	ActorSystem();
 	void Serialise(std::ostream& os);
 	void Deserialise(std::istream& is);
-	virtual void Tick(float deltaTime) = 0;
-	virtual void SpawnActors(int numToSpawn) = 0;
-	virtual Actor* SpawnActor(Transform transform) = 0;
+	virtual void Tick(float deltaTime);
+	virtual void SpawnActors(int numToSpawn);
+	virtual Actor* SpawnActor(Transform transform);
 
 	template <class ActorType>
 	void SetActorSize()
@@ -192,8 +192,8 @@ public:
 
 	std::vector<Actor*> actors;
 
-	std::wstring shaderName;
-	std::wstring textureName;
+	std::string shaderName;
+	std::string textureName;
 	std::string name;
 	std::string modelName;
 

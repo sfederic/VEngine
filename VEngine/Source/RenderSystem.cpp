@@ -22,6 +22,7 @@
 #include "DebugBox.h"
 #include "DebugSphere.h"
 #include "Profiler.h"
+#include "VString.h"
 
 UINT strides = sizeof(Vertex);
 UINT offsets = 0;
@@ -320,7 +321,7 @@ void RenderSystem::CreateTexture(ActorSystem* actorSystem)
 	}
 
 	std::wstring textureFilename = L"Textures/";
-	textureFilename += actorSystem->textureName;
+	textureFilename += stows(actorSystem->textureName);
 
 	ID3D11Resource* texture = nullptr;
 	ID3D11ShaderResourceView* srv = nullptr;
@@ -360,7 +361,7 @@ void RenderSystem::RenderActorSystem(World* world)
 
 
 		//Set shaders
-		auto shader = gShaderFactory.shaderMap.find(actorSystem->shaderName);
+		auto shader = gShaderFactory.shaderMap.find(stows(actorSystem->shaderName));
 
 		if (shader == gShaderFactory.shaderMap.end())
 		{
@@ -436,7 +437,7 @@ void RenderSystem::RenderBounds()
 
 	if (bDrawBoundingBoxes)
 	{
-		auto boxIt = gShaderFactory.shaderMap.find(debugBox->shaderName);
+		auto boxIt = gShaderFactory.shaderMap.find(stows(debugBox->shaderName));
 		context->VSSetShader(boxIt->second->vertexShader, nullptr, 0);
 		context->PSSetShader(boxIt->second->pixelShader, nullptr, 0);
 
@@ -461,7 +462,7 @@ void RenderSystem::RenderBounds()
 
 	if (bDrawBoundingSpheres)
 	{
-		auto sphereIt = gShaderFactory.shaderMap.find(debugSphere->shaderName);
+		auto sphereIt = gShaderFactory.shaderMap.find(stows(debugSphere->shaderName));
 		context->VSSetShader(sphereIt->second->vertexShader, nullptr, 0);
 		context->PSSetShader(sphereIt->second->pixelShader, nullptr, 0);
 
@@ -511,7 +512,7 @@ void RenderSystem::RenderEnd(float deltaTime)
 	//DRAW DEBUG LINES
 	if (debugLineBuffer != nullptr)
 	{
-		auto boxIt = gShaderFactory.shaderMap.find(debugBox->shaderName);
+		auto boxIt = gShaderFactory.shaderMap.find(stows(debugBox->shaderName));
 		context->VSSetShader(boxIt->second->vertexShader, nullptr, 0);
 		context->PSSetShader(boxIt->second->pixelShader, nullptr, 0);
 
