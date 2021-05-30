@@ -75,20 +75,30 @@ void AssetDock::AssetItemClicked()
     QString fullPath = path + "/" + assetName;
 
     //Do whatever based on extension.
+    auto fileExtension = std::filesystem::path(fullPath.toStdString()).extension();
+    auto extension = fileExtension.c_str();
+
+    //Load world
+    if (std::wcscmp(extension, L".sav") == 0)
     {
-        auto fileExtension = std::filesystem::path(fullPath.toStdString()).extension();
-        auto extension = fileExtension.c_str();
-
-        //Load world
-        if (std::wcscmp(extension, L".sav") == 0)
-        {
-            gFileSystem.LoadWorld(fullPath.toStdString().c_str());
-            return;
-        }
+        gFileSystem.LoadWorld(fullPath.toStdString().c_str());
     }
+    else if (std::wcscmp(extension, L".ast") == 0)
+    {
+        std::filebuf fb;
+        fb.open(fullPath.toUtf8(), std::ios_base::in);
+        std::istream is(&fb);
 
-    //Opens up default system program from filename.
-    QDesktopServices::openUrl(QUrl::fromLocalFile(fullPath));
+        auto templateActorSystem = new ActorSystem();
+        templateActorSystem->DeserialiseAsTemplate(is);
+        GetWorld()->AddActorSystem(templateActorSystem);
+            
+    }
+    else
+    {
+        //Opens up default system program from filename.
+        QDesktopServices::openUrl(QUrl::fromLocalFile(fullPath));
+    }
 }
 
 void AssetDock::AssetFolderClicked()
