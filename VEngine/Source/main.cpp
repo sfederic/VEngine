@@ -106,11 +106,13 @@ int main(int argc, char* argv[])
 
         //UI RENDERING
         gUISystem.d2dRenderTarget->BeginDraw();
+
+        gUISystem.TickAllWidgets(deltaTime);
+
         gConsole.Tick();
         gConsole.DrawViewItems();
         gDebugMenu.Tick(GetWorld(), deltaTime);
 
-        gUISystem.TickAllWidgets(deltaTime);
 
         gUISystem.d2dRenderTarget->EndDraw();
 

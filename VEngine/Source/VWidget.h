@@ -4,6 +4,9 @@
 #include <d2d1_1.h>
 #include <SpriteBatch.h>
 #include <unordered_map>
+#include <wrl.h>
+
+using namespace Microsoft::WRL;
 
 //I can never get the D2D1_RECT_F things right
 //left = The x-coordinate of the upper-left corner of the rectangle
@@ -20,7 +23,7 @@ public:
 	virtual void Tick(float deltaTime);
 	virtual void Start();
 
-	ID3D11ShaderResourceView* CreateTexture(const std::wstring& filename);
+	ComPtr<ID3D11ShaderResourceView> CreateTexture(const std::wstring& filename);
 
 	void Text(const std::wstring& text, D2D1_RECT_F layout);
 	bool Button(const std::wstring& text, D2D1_RECT_F layout, float lineWidth = 1.0f);

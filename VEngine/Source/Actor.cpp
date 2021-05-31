@@ -33,7 +33,6 @@ Properties Actor::GetSaveProps()
 Properties Actor::GetEditorProps()
 {
 	Properties props;
-	props.Add("Name", &name);
 	props.Add("Render", &bRender);
 	return props;
 }

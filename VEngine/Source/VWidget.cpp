@@ -16,9 +16,9 @@ void VWidget::Start()
 	spriteBatch = new DirectX::SpriteBatch(gRenderSystem.context);
 }
 
-ID3D11ShaderResourceView* VWidget::CreateTexture(const std::wstring& filename)
+ComPtr<ID3D11ShaderResourceView> VWidget::CreateTexture(const std::wstring& filename)
 {
-	ID3D11ShaderResourceView* textureView;
+	ComPtr<ID3D11ShaderResourceView> textureView;
 	std::wstring filepath = L"Textures/" + filename;
 	CreateWICTextureFromFile(gRenderSystem.device, filepath.c_str(), nullptr, &textureView);
 	assert(textureView && "texture filename will be wrong");
@@ -56,11 +56,15 @@ bool VWidget::Button(const std::wstring& text, D2D1_RECT_F layout, float lineWid
 //REF:https://github.com/Microsoft/DirectXTK/wiki/Sprites-and-textures
 void VWidget::Image(const std::wstring& filename, float x, float y)
 {
-	auto textureIt = texturesMap.find(filename);
+	//TODO: sprite rendering is fucked up. There's something going wrong with its state changes
+	//and maybe its shader binding, models get messed up when this function is called.
+	//REF:https://github.com/Microsoft/DirectXTK/wiki/SpriteBatch#state-management
+	//REF:https://stackoverflow.com/questions/35558178/directxspritefont-spritebatch-prevents-3d-scene-from-drawing
+	/*auto textureIt = texturesMap.find(filename);
 	if (textureIt == texturesMap.end())
 	{
 		auto texture = CreateTexture(filename);
-		texturesMap[filename] = texture;
+		texturesMap[filename] = texture.Get();
 	}
 	else
 	{
@@ -70,5 +74,5 @@ void VWidget::Image(const std::wstring& filename, float x, float y)
 		spriteBatch->Begin();
 		spriteBatch->Draw(textureIt->second, screenPos, nullptr, Colors::White, 0.f, origin);
 		spriteBatch->End();
-	}
+	}*/
 }
