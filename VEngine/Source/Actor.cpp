@@ -114,6 +114,23 @@ XMMATRIX Actor::GetTransformationMatrix()
 	);
 }
 
+void Actor::DecomposeTransformationMatrix(XMMATRIX& m)
+{
+	for (auto child : children)
+	{
+		XMMATRIX childMatrix = child->GetTransformationMatrix();
+		XMMATRIX m2 = XMMatrixMultiply(childMatrix, m);
+		child->DecomposeTransformationMatrix(m2);
+	}
+
+	XMVECTOR scale, rot, trans;
+	XMMatrixDecompose(&scale, &rot, &trans, m);
+
+	SetPosition(trans);
+	SetScale(scale);
+	SetRotation(rot);
+}
+
 XMFLOAT3 Actor::GetPitchYawRoll()
 {
 	return PitchYawRollFromMatrix(GetTransformationMatrix());
