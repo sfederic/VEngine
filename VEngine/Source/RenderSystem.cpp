@@ -404,8 +404,14 @@ void RenderSystem::RenderActorSystem(World* world)
 		//Populate instance data
 		for (int actorIndex = 0; actorIndex < actorSystem->actors.size(); actorIndex++)
 		{
-			InstanceData data;
-			data.model = actorSystem->actors[actorIndex]->GetTransformationMatrix();
+			InstanceData data = {};
+
+			//This is like a hack to get around hiding actors with instanced rendering
+			if (actorSystem->actors[actorIndex]->bRender) 
+			{
+				data.model = actorSystem->actors[actorIndex]->GetTransformationMatrix();
+			}
+
 			instanceData.push_back(data);
 		}
 
