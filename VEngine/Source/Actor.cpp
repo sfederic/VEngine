@@ -20,16 +20,21 @@ void Actor::Start()
 {
 }
 
-Properties Actor::GetProperties()
+Properties Actor::GetSaveProps()
 {
 	Properties props;
-
 	props.Add("Name", &name);
-
 	props.Add("Position", &transform.position);
 	props.Add("Scale", &transform.scale);
 	props.Add("RotQuat", &transform.quatRotation);
+	return props;
+}
 
+Properties Actor::GetEditorProps()
+{
+	Properties props;
+	props.Add("Name", &name);
+	props.Add("Render", &bRender);
 	return props;
 }
 

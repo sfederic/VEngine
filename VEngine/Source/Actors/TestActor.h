@@ -8,7 +8,8 @@ class TestActor : public Actor
 {
 public:
 	TestActor();
-	virtual Properties GetProperties() override;
+	virtual Properties GetSaveProps() override;
+	virtual Properties GetEditorProps() override;
 	virtual void Tick(float deltaTime);
 
 	XMVECTOR currentPos;

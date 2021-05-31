@@ -30,7 +30,8 @@ public:
 	virtual void Tick(float deltaTime);
 	virtual void Start();
 
-	virtual Properties GetProperties();
+	virtual Properties GetSaveProps();
+	virtual Properties GetEditorProps();
 
 	XMVECTOR GetPositionVector();
 	XMFLOAT3 GetPositionFloat3();

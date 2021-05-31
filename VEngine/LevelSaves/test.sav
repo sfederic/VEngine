@@ -1,23 +1,63 @@
-TestActor2System
-2
-monkey.fbx
-
+TestActorSystem
+4
+cube.fbx
+texture2.jpg
 shaders.hlsl
 Name
-TestActor2System0
+TestActorSystem2
 Position
-0 0 -2
+4 0 -5
 Scale
-0.999999 0.999999 1
-RotQuat
--0 0 -0.573577 0.819152
-next
-Name
-TestActor2System1
-Position
-3 0 6
-Scale
-1 1 1
+1 2.5 1
+Render
+1
 RotQuat
 -0 0 -0 1
+next
+Name
+TestActorSystem1
+Position
+0.808521 -0.810185 -1.18806
+Scale
+1 1 1
+Render
+1
+RotQuat
+-0 0 -0 1
+next
+Name
+TestActorSystem2
+Position
+1.78506 -0.810183 4.08243
+Scale
+1 1 1
+Render
+1
+RotQuat
+-0 0 -0 1
+next
+Name
+TestActorSystem3
+Position
+0.734792 -0.810186 -3.47184
+Scale
+1 1 1
+Render
+1
+RotQuat
+-0 0 -0 1
+next
+plane
+1
+plane.fbx
+texture2.jpg
+shaders.hlsl
+Name
+plane0
+Position
+3.18156 -1.81018 0.771147
+Scale
+4.5 5.49994 3.49997
+RotQuat
+0.707107 0 0 -0.707107
 next

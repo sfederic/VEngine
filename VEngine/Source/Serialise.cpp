@@ -13,7 +13,7 @@ Serialiser::Serialiser(const std::string& file, std::ios_base::openmode mode)
 
 void Serialiser::Serialise(Actor* actor, std::ostream& os)
 {
-	Properties props = actor->GetProperties();
+	Properties props = actor->GetSaveProps();
 	for (auto& prop : props.dataMap)
 	{
 		std::type_index type = props.typeMap.find(prop.first)->second.value();
@@ -48,7 +48,7 @@ void Serialiser::Serialise(Actor* actor, std::ostream& os)
 
 void Serialiser::Deserialise(Actor* actor, std::istream& is)
 {
-	Properties props = actor->GetProperties();
+	Properties props = actor->GetSaveProps();
 
 	char line[512];
 	while (!is.eof())
