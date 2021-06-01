@@ -56,6 +56,7 @@ public:
 	void Move(float d, XMVECTOR direction);
 	ActorSystem* GetActorSystem();
 	void Destroy();
+	void AddChild(Actor* child);
 
 	template <class T>
 	void AddComponent(T* component)
@@ -68,6 +69,7 @@ public:
 	std::string name;
 	ActorSystem* linkedActorSystem;
 	std::vector<Actor*> children;
+	Actor* parent;
 	double currentAnimationTime = 0.0;
 	bool bRender = true;
 };

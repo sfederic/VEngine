@@ -221,6 +221,13 @@ void Actor::Destroy()
 	linkedActorSystem->RemoveActor(this);
 }
 
+void Actor::AddChild(Actor* child)
+{
+	assert(child);
+	child->parent = this;
+	children.push_back(child);
+}
+
 void ActorSystem::Serialise(std::ostream& os)
 {
 	os << name << "\n"; //Use actorsystem name to create again from ActorSystemFactory on Deserialise
