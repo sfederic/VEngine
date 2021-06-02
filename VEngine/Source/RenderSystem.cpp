@@ -496,6 +496,18 @@ void RenderSystem::RenderBounds()
 				context->Draw((UINT)debugSphere.modelData.verts.size(), 0);
 			}
 		}
+
+		//Draw box triggers
+		for (auto box : debugBox.actors)
+		{
+			matrices.model = box->GetTransformationMatrix();
+			matrices.view = camera->view;
+			matrices.mvp = matrices.model * matrices.view * matrices.proj;
+			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
+			context->VSSetConstantBuffers(0, 1, &cbMatrices);
+
+			context->Draw((UINT)debugBox.modelData.verts.size(), 0);
+		}
 	}
 }
 

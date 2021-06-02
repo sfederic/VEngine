@@ -6,10 +6,13 @@ DebugBox::DebugBox()
 {
 	modelName = "cube.fbx";
 	shaderName = "debugDraw.hlsl";
-	Init<Actor>(1);
 }
 
 void DebugBox::Tick(float deltaTime)
 {
+}
 
+void DebugBox::Start()
+{
+	Init<Actor>(1);
 }

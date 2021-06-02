@@ -7,7 +7,8 @@ class DebugSphere : public ActorSystem
 {
 public:
 	DebugSphere();
-	virtual void Tick(float deltaTime);
+	virtual void Tick(float deltaTime) override;
+	virtual void Start() override;
 	virtual void SpawnActors(int numToSpawn) {}
 	virtual Actor* SpawnActor(Transform transform) { return nullptr; }
 };

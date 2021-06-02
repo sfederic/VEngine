@@ -44,7 +44,8 @@ public:
 	void SetRotation(XMFLOAT3 euler);
 	XMFLOAT4 GetRotationQuat();
 	XMMATRIX GetTransformationMatrix();
-	void DecomposeTransformationMatrix(bool dirtyFlag);
+	void DecomposeTransformationMatrix();
+	void DecomposeTransformationMatrix(XMMATRIX m);
 	XMFLOAT3 GetPitchYawRoll();
 	XMFLOAT3 GetScale();
 	void SetScale(float x, float y, float z);

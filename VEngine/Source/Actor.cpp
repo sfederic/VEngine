@@ -121,50 +121,30 @@ XMMATRIX Actor::GetTransformationMatrix()
 	);
 }
 
-//REF:https://gameprogrammingpatterns.com/dirty-flag.html
-void Actor::DecomposeTransformationMatrix(bool dirtyFlag)
+void Actor::DecomposeTransformationMatrix()
 {
-	XMMATRIX currentMatrix = GetTransformationMatrix();
+	XMMATRIX m = GetTransformationMatrix();
 
-	XMVECTOR scale, rot, pos;
-	XMMatrixDecompose(&scale, &rot, &pos, currentMatrix);
-
-	XMVECTOR oldPos = XMLoadFloat3(&transform.oldPosition);
-	oldPos.m128_f32[3] = 1.0f;
-	XMVECTOR oldScale = XMLoadFloat3(&transform.oldScale);
-	oldScale.m128_f32[3] = 0.f;
-	XMVECTOR oldRot = XMLoadFloat4(&transform.oldQuatRotation);
-	if (VecEqual(oldPos, pos) && VecEqual(oldScale, scale) && VecEqual(oldRot, rot))
+	if (parent)
 	{
-		transform.dirty = false;
+		if (parent->transform.dirty)
+		{
+			XMMATRIX m = GetTransformationMatrix() * parent->GetTransformationMatrix();
+		}
 	}
 
-	dirtyFlag = transform.dirty;
+	transform.Decompose(m);
 
-	if (dirtyFlag)
+	for (auto child : children)
 	{
-		for (auto child : children)
-		{
-			child->DecomposeTransformationMatrix(dirtyFlag);
-		}
-
-		if (parent)
-		{
-			currentMatrix = parent->GetTransformationMatrix() * currentMatrix;
-		}
-
-		transform.dirty = false;
+		child->DecomposeTransformationMatrix();
 	}
 
-	XMMatrixDecompose(&scale, &rot, &pos, currentMatrix);
+	transform.dirty = false;
+}
 
-	XMStoreFloat3(&transform.oldPosition, pos);
-	XMStoreFloat3(&transform.oldScale, scale);
-	XMStoreFloat4(&transform.oldQuatRotation, rot);
-
-	SetPosition(pos);
-	SetScale(scale);
-	SetRotation(rot);
+void Actor::DecomposeTransformationMatrix(XMMATRIX m)
+{
 }
 
 XMFLOAT3 Actor::GetPitchYawRoll()

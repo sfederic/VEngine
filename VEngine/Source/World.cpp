@@ -30,7 +30,7 @@ void World::TickAllActorSystems(float deltaTime)
 	{
 		for (auto actor : system->actors)
 		{
-			actor->DecomposeTransformationMatrix(actor->transform.dirty);
+			actor->DecomposeTransformationMatrix();
 		}
 	}
 
