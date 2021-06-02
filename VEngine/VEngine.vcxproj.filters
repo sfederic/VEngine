@@ -254,6 +254,9 @@
     <ClCompile Include="Source\VWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Components\BoxTriggerComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Actor.h">
@@ -476,6 +479,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\VWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Components\BoxTriggerComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

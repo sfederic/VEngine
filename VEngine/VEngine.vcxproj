@@ -116,6 +116,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Components\BoxTriggerComponent.cpp" />
     <ClCompile Include="Source\Components\Component.cpp" />
     <ClCompile Include="Source\PipelineView.cpp" />
     <ClCompile Include="Source\PropertyWidgets\IntWidget.cpp" />
@@ -194,6 +195,7 @@
     <ClCompile Include="EditorMainWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Components\BoxTriggerComponent.h" />
     <ClInclude Include="Source\Components\Component.h" />
     <ClInclude Include="Source\PipelineView.h" />
     <ClInclude Include="Source\PropertyWidgets\IntWidget.h" />

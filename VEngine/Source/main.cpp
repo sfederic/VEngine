@@ -61,12 +61,6 @@ int main(int argc, char* argv[])
     
     //Test actor system stuff
     GetWorld()->AddActorSystem(&testActorSystem);
-    Transform transform;
-    transform.position = XMFLOAT3(3.f, 0.f, 0.f);
-    testActorSystem.SpawnActor(transform);
-
-    testActorSystem.GetActor(0)->AddChild(testActorSystem.GetActor(1));
-
 
     //Test in-game UI widget stuff
     VWidget widget;

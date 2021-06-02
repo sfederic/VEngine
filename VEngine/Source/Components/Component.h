@@ -7,6 +7,7 @@ class Component
 public:
 	Component();
 	virtual void Tick(float deltaTime) = 0;
+	virtual void Start() = 0;
 };
 
 class ComponentSystem
