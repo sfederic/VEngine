@@ -1,5 +1,7 @@
 #include "DebugBox.h"
 
+DebugBox debugBox;
+
 DebugBox::DebugBox()
 {
 	modelName = "cube.fbx";
@@ -9,4 +11,5 @@ DebugBox::DebugBox()
 
 void DebugBox::Tick(float deltaTime)
 {
+
 }

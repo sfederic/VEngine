@@ -1,5 +1,7 @@
 #include "DebugSphere.h"
 
+DebugSphere debugSphere;
+
 DebugSphere::DebugSphere()
 {
 	shaderName = "debugDraw.hlsl";
@@ -9,4 +11,5 @@ DebugSphere::DebugSphere()
 
 void DebugSphere::Tick(float deltaTime)
 {
+
 }

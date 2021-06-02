@@ -11,3 +11,5 @@ public:
 	virtual void SpawnActors(int numToSpawn) {}
 	virtual Actor* SpawnActor(Transform transform) { return nullptr; }
 };
+
+extern DebugSphere debugSphere;
