@@ -44,7 +44,7 @@ public:
 	void SetRotation(XMFLOAT3 euler);
 	XMFLOAT4 GetRotationQuat();
 	XMMATRIX GetTransformationMatrix();
-	void DecomposeTransformationMatrix(XMMATRIX& m);
+	void DecomposeTransformationMatrix(bool dirtyFlag);
 	XMFLOAT3 GetPitchYawRoll();
 	XMFLOAT3 GetScale();
 	void SetScale(float x, float y, float z);
@@ -69,7 +69,7 @@ public:
 	std::string name;
 	ActorSystem* linkedActorSystem;
 	std::vector<Actor*> children;
-	Actor* parent;
+	Actor* parent = nullptr;
 	double currentAnimationTime = 0.0;
 	bool bRender = true;
 };

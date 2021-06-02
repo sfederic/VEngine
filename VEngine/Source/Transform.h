@@ -11,8 +11,15 @@ public:
 	void Decompose(XMMATRIX m);
 
 	XMFLOAT3 position;
-	XMFLOAT3 scale;
-	XMFLOAT3 euler;
-	XMFLOAT4 quatRotation;
-};
+	XMFLOAT3 oldPosition;
 
+	XMFLOAT3 scale;
+	XMFLOAT3 oldScale;
+
+	XMFLOAT3 euler;
+
+	XMFLOAT4 quatRotation;
+	XMFLOAT4 oldQuatRotation;
+
+	bool dirty = false;
+};

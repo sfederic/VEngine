@@ -50,21 +50,25 @@ XMFLOAT3 Actor::GetPositionFloat3()
 void Actor::SetPosition(XMVECTOR v)
 {
 	XMStoreFloat3(&transform.position, v);
+	transform.dirty = true;
 }
 
 void Actor::SetPosition(float x, float y, float z)
 {
 	transform.position = XMFLOAT3(x, y, z);
+	transform.dirty = true;
 }
 
 void Actor::SetPosition(XMFLOAT3 pos)
 {
 	transform.position = pos;
+	transform.dirty = true;
 }
 
 void Actor::SetRotation(XMVECTOR quaternion)
 {
 	XMStoreFloat4(&transform.quatRotation, quaternion);
+	transform.dirty = true;
 }
 
 void Actor::SetRotation(XMVECTOR axis, float angle)
@@ -77,6 +81,7 @@ void Actor::SetRotation(XMVECTOR axis, float angle)
 
 	float andleRadians = XMConvertToRadians(angle);
 	XMStoreFloat4(&transform.quatRotation, XMQuaternionRotationAxis(axis, andleRadians));
+	transform.dirty = true;
 }
 
 void Actor::SetRotation(float pitch, float yaw, float roll)
@@ -87,6 +92,7 @@ void Actor::SetRotation(float pitch, float yaw, float roll)
 	float yawRadians = XMConvertToRadians(yaw);
 	float rollRadians = XMConvertToRadians(roll);
 	XMStoreFloat4(&transform.quatRotation, XMQuaternionRotationRollPitchYaw(pitchRadians, yawRadians, rollRadians));
+	transform.dirty = true;
 }
 
 void Actor::SetRotation(XMFLOAT3 euler)
@@ -97,6 +103,7 @@ void Actor::SetRotation(XMFLOAT3 euler)
 	float yawRadians = XMConvertToRadians(euler.y);
 	float rollRadians = XMConvertToRadians(euler.z);
 	XMStoreFloat4(&transform.quatRotation, XMQuaternionRotationRollPitchYaw(pitchRadians, yawRadians, rollRadians));
+	transform.dirty = true;
 }
 
 XMFLOAT4 Actor::GetRotationQuat()
@@ -114,19 +121,48 @@ XMMATRIX Actor::GetTransformationMatrix()
 	);
 }
 
-void Actor::DecomposeTransformationMatrix(XMMATRIX& m)
+//REF:https://gameprogrammingpatterns.com/dirty-flag.html
+void Actor::DecomposeTransformationMatrix(bool dirtyFlag)
 {
-	for (auto child : children)
+	XMMATRIX currentMatrix = GetTransformationMatrix();
+
+	XMVECTOR scale, rot, pos;
+	XMMatrixDecompose(&scale, &rot, &pos, currentMatrix);
+
+	XMVECTOR oldPos = XMLoadFloat3(&transform.oldPosition);
+	oldPos.m128_f32[3] = 1.0f;
+	XMVECTOR oldScale = XMLoadFloat3(&transform.oldScale);
+	oldScale.m128_f32[3] = 0.f;
+	XMVECTOR oldRot = XMLoadFloat4(&transform.oldQuatRotation);
+	if (VecEqual(oldPos, pos) && VecEqual(oldScale, scale) && VecEqual(oldRot, rot))
 	{
-		XMMATRIX childMatrix = child->GetTransformationMatrix();
-		XMMATRIX m2 = XMMatrixMultiply(childMatrix, m);
-		child->DecomposeTransformationMatrix(m2);
+		transform.dirty = false;
 	}
 
-	XMVECTOR scale, rot, trans;
-	XMMatrixDecompose(&scale, &rot, &trans, m);
+	dirtyFlag = transform.dirty;
 
-	SetPosition(trans);
+	if (dirtyFlag)
+	{
+		for (auto child : children)
+		{
+			child->DecomposeTransformationMatrix(dirtyFlag);
+		}
+
+		if (parent)
+		{
+			currentMatrix = parent->GetTransformationMatrix() * currentMatrix;
+		}
+
+		transform.dirty = false;
+	}
+
+	XMMatrixDecompose(&scale, &rot, &pos, currentMatrix);
+
+	XMStoreFloat3(&transform.oldPosition, pos);
+	XMStoreFloat3(&transform.oldScale, scale);
+	XMStoreFloat4(&transform.oldQuatRotation, rot);
+
+	SetPosition(pos);
 	SetScale(scale);
 	SetRotation(rot);
 }
@@ -144,16 +180,19 @@ XMFLOAT3 Actor::GetScale()
 void Actor::SetScale(float x, float y, float z)
 {
 	transform.scale = XMFLOAT3(x, y, z);
+	transform.dirty = true;
 }
 
 void Actor::SetScale(XMVECTOR scale)
 {
 	XMStoreFloat3(&transform.scale, scale);
+	transform.dirty = true;
 }
 
 void Actor::SetScale(XMFLOAT3 scale)
 {
 	transform.scale = scale;
+	transform.dirty = true;
 }
 
 XMVECTOR Actor::GetForwardVector()

@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
     transform.position = XMFLOAT3(3.f, 0.f, 0.f);
     testActorSystem.SpawnActor(transform);
 
-    testActorSystem.GetActor(0)->children.push_back(testActorSystem.GetActor(1));
+    testActorSystem.GetActor(0)->AddChild(testActorSystem.GetActor(1));
 
 
     //Test in-game UI widget stuff

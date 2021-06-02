@@ -78,7 +78,12 @@ void TransformGizmo::Tick()
         if (ImGuizmo::IsUsing())
         {
             Actor* actor = gWorldEditor.pickedActor;
-            actor->DecomposeTransformationMatrix(XMLoadFloat4x4(&actorMatrix));
+            //actor->DecomposeTransformationMatrix(XMLoadFloat4x4(&actorMatrix));
+            XMVECTOR scale, pos, rot;
+            XMMatrixDecompose(&scale, &rot, &pos, XMLoadFloat4x4(&actorMatrix));
+            actor->SetPosition(pos);
+            actor->SetScale(scale);
+            actor->SetRotation(rot);
         }
 
         //Toggle snap and scale controls
