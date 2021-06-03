@@ -67,10 +67,10 @@ int main(int argc, char* argv[])
     GetWorld()->AddActorSystem(&testActorSystem);
 
     Transform t;
-    t.position = XMFLOAT3(-3.f, 0.f, 0.f);
+    t.position = XMFLOAT3(-2.f, 0.f, 0.f);
     Actor* child = testActorSystem.SpawnActor(t);
 
-    testActorSystem.actors[0]->SetPosition(3.f, 0.f, 0.f);
+    testActorSystem.actors[0]->SetPosition(2.f, 0.f, 0.f);
     testActorSystem.actors[0]->AddChild(child);
 
 
