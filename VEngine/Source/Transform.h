@@ -20,6 +20,4 @@ public:
 
 	XMFLOAT4 quatRotation;
 	XMFLOAT4 oldQuatRotation;
-
-	bool dirty = false;
 };
