@@ -163,26 +163,24 @@ XMMATRIX Actor::GetTransformationMatrix()
 	);
 }
 
-void Actor::DecomposeTransformationMatrix()
+void Actor::DecomposeTransformationMatrix(Actor* actor)
 {
-	XMMATRIX m = GetTransformationMatrix();
-
-	if (parent)
+	if (actor->parent == nullptr || actor->isRoot)
 	{
-		if (parent->transform.dirty)
-		{
-			m = parent->GetTransformationMatrix() * m;
-		}
+		return actor->GetAffine();
 	}
 
-	transform.Decompose(m);
-
-	for (auto child : children)
+	if (actor->oldPos.x == actor->pos.x)
 	{
-		child->DecomposeTransformationMatrix();
+		return actor->GetAffine();
 	}
 
-	transform.dirty = false;
+	XMMATRIX toParent = actor->parent->GetAffine();
+	XMMATRIX parentToRoot = XMMatrixIdentity();
+	if (!actor->parent->isRoot)
+	{
+		parentToRoot = GetTransform(actor->parent);
+	}
 }
 
 void Actor::DecomposeTransformationMatrix(XMMATRIX m)
@@ -304,6 +302,7 @@ void Actor::AddChild(Actor* child)
 {
 	assert(child);
 	child->parent = this;
+	child->isRoot = false;
 	children.push_back(child);
 }
 

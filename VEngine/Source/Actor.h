@@ -44,7 +44,7 @@ public:
 	void SetRotation(XMFLOAT3 euler);
 	XMFLOAT4 GetRotationQuat();
 	XMMATRIX GetTransformationMatrix();
-	void DecomposeTransformationMatrix();
+	void DecomposeTransformationMatrix(Actor* actor);
 	void DecomposeTransformationMatrix(XMMATRIX m);
 	XMFLOAT3 GetPitchYawRoll();
 	XMFLOAT3 GetScale();
@@ -73,6 +73,7 @@ public:
 	Actor* parent = nullptr;
 	double currentAnimationTime = 0.0;
 	bool bRender = true;
+	bool isRoot = true;
 };
 
 class ActorSystem
