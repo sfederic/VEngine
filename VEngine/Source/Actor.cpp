@@ -126,17 +126,6 @@ XMMATRIX Actor::DecomposeTransformationMatrix(Actor* actor)
 		actor = this;
 	}
 
-	if (VecEqual(XMLoadFloat3(&actor->transform.oldPosition), XMLoadFloat3(&actor->transform.position)))
-	{
-		if (VecEqual(XMLoadFloat4(&actor->transform.oldQuatRotation), XMLoadFloat4(&actor->transform.quatRotation)))
-		{
-			if (VecEqual(XMLoadFloat3(&actor->transform.oldScale), XMLoadFloat3(&actor->transform.scale)))
-			{
-				return actor->GetTransformationMatrix(); // Don't decompose matrix if old properties are equal to current		
-			}
-		}
-	}
-
 	if (actor->parent == nullptr || actor->isRoot)
 	{
 		XMMATRIX actorMatrix = actor->GetTransformationMatrix();
@@ -159,6 +148,20 @@ XMMATRIX Actor::DecomposeTransformationMatrix(Actor* actor)
 
 	XMMATRIX toRoot = toParent * parentToRoot;
 	XMMATRIX result = actor->GetTransformationMatrix() * toRoot;
+
+	Transform tempTransform;
+	tempTransform.Decompose(result);
+
+	if (VecEqual(XMLoadFloat3(&actor->transform.oldPosition), XMLoadFloat3(&tempTransform.position)))
+	{
+		if (VecEqual(XMLoadFloat4(&actor->transform.oldQuatRotation), XMLoadFloat4(&tempTransform.quatRotation)))
+		{
+			if (VecEqual(XMLoadFloat3(&actor->transform.oldScale), XMLoadFloat3(&tempTransform.scale)))
+			{
+				return actor->GetTransformationMatrix(); // Don't decompose matrix if old properties are equal to current		
+			}
+		}
+	}
 
 	actor->transform.Decompose(result);
 
