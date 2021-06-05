@@ -163,28 +163,35 @@ XMMATRIX Actor::GetTransformationMatrix()
 	);
 }
 
-void Actor::DecomposeTransformationMatrix(Actor* actor)
+//This function traverses up the parent hierarchy, saves the new world matrix on the current actor
+//and also returns that matrix in world space.
+//It's not a nice looking function because of the recursion. There's room to clean it up.
+XMMATRIX Actor::DecomposeTransformationMatrix(Actor* actor)
 {
+	if (actor == nullptr)
+	{
+		actor = this;
+	}
+
 	if (actor->parent == nullptr || actor->isRoot)
 	{
-		return actor->GetAffine();
+		return actor->GetTransformationMatrix();
 	}
 
-	if (actor->oldPos.x == actor->pos.x)
-	{
-		return actor->GetAffine();
-	}
-
-	XMMATRIX toParent = actor->parent->GetAffine();
+	XMMATRIX toParent = actor->parent->GetTransformationMatrix();
 	XMMATRIX parentToRoot = XMMatrixIdentity();
 	if (!actor->parent->isRoot)
 	{
-		parentToRoot = GetTransform(actor->parent);
+		parentToRoot = DecomposeTransformationMatrix(actor->parent);
 	}
-}
 
-void Actor::DecomposeTransformationMatrix(XMMATRIX m)
-{
+	XMMATRIX toRoot = toParent * parentToRoot;
+	XMMATRIX result = actor->GetTransformationMatrix() * toRoot;
+
+	//save out result
+	actor->transform.Decompose(result);
+
+	return result;
 }
 
 XMFLOAT3 Actor::GetPitchYawRoll()
