@@ -536,6 +536,7 @@ void RenderSystem::RenderEnd(float deltaTime)
 		}
 	}
 
+
 	//Draw debug primitives (seperate from bounds, bounds use actor transforms)
 	if (debugSphere.debugSphereTransforms.size() > 0)
 	{
@@ -561,6 +562,32 @@ void RenderSystem::RenderEnd(float deltaTime)
 		//Need to clear out transforms at end
 		debugSphere.debugSphereTransforms.clear();
 	}
+
+	if (debugBox.debugBoxTransforms.size() > 0)
+	{
+		context->RSSetState(rastStateWireframe);
+
+		auto boxIt = gShaderFactory.shaderMap.find(stows(debugBox.shaderName));
+		context->VSSetShader(boxIt->second->vertexShader, nullptr, 0);
+		context->PSSetShader(boxIt->second->pixelShader, nullptr, 0);
+
+		context->IASetVertexBuffers(0, 1, (ID3D11Buffer**)debugBox.GetVertexBuffer(), &strides, &offsets);
+
+		for (Transform& transform : debugBox.debugBoxTransforms)
+		{
+			matrices.view = GetActiveCamera()->view;
+			matrices.model = transform.GetAffine();
+			matrices.mvp = matrices.model * matrices.view * matrices.proj;
+			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
+			context->VSSetConstantBuffers(0, 1, &cbMatrices);
+
+			context->Draw(debugSphere.modelData.verts.size(), 0);
+		}
+
+		//Need to clear out transforms at end
+		debugBox.debugBoxTransforms.clear();
+	}
+
 
 	//TODO: the GPU query timer stuff is heavy, looks like it drops the FPS by half because of those sleeps()s
 	//down there.

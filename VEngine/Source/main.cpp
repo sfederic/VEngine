@@ -82,6 +82,7 @@ int main(int argc, char* argv[])
     while (gCoreSystem.bMainLoop)
     {
         DebugDraw::DrawSphere(XMFLOAT3(0.f, gCoreSystem.timeSinceStartup, 0.f));
+        DebugDraw::DrawBox(Transform());
 
         const float deltaTime = gCoreSystem.deltaTime;
 

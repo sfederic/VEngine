@@ -12,6 +12,7 @@ public:
 	virtual void SpawnActors(int numToSpawn) {}
 	virtual Actor* SpawnActor(Transform transform) { return nullptr; }
 
+	//These transforms are linked to DebugDraw::DrawSphere
 	std::vector<Transform> debugSphereTransforms;
 };
 
