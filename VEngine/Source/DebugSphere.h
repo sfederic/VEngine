@@ -11,6 +11,8 @@ public:
 	virtual void Start() override;
 	virtual void SpawnActors(int numToSpawn) {}
 	virtual Actor* SpawnActor(Transform transform) { return nullptr; }
+
+	std::vector<Transform> debugSphereTransforms;
 };
 
 extern DebugSphere debugSphere;

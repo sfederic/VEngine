@@ -61,22 +61,11 @@ int main(int argc, char* argv[])
     gAudioSystem.Init();
     gWorldEditor.Init();
 
-    
-
-    //Test actor system stuff
-    GetWorld()->AddActorSystem(&testActorSystem);
-
-    Transform t;
-    t.position = XMFLOAT3(-4.f, 0.f, 0.f);
-    Actor* child = testActorSystem.SpawnActor(t);
-
-    testActorSystem.actors[0]->SetPosition(3.f, 0.f, 0.f);
-    testActorSystem.actors[0]->AddChild(child);
-
-
-    //Test component stuff
+   
+    //Test debug primitive drawing
     debugBox.Start();
     debugSphere.Start();
+
 
 
     //Test in-game UI widget stuff

@@ -50,8 +50,6 @@ XMFLOAT3 Actor::GetPositionFloat3()
 void Actor::SetPosition(XMVECTOR v)
 {
 	XMStoreFloat3(&transform.position, v);
-
-	transform.oldPosition = transform.position;
 }
 
 void Actor::SetPosition(float x, float y, float z)
