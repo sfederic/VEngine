@@ -13,13 +13,15 @@
 #include "../EditorMainWindow.h"
 #include "MathHelpers.h"
 
-void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, class ID3D11Buffer* debugBuffer)
+std::vector<Line> debugLines;
+
+void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance)
 {
-	Vertex v1 = {}, v2 = {};
-	XMStoreFloat3(&v1.pos, rayOrigin);
-	XMVECTOR pos = XMLoadFloat3(&v1.pos);
+	Line debugLine = {};
+	XMStoreFloat3(&debugLine.p1.pos, rayOrigin);
+	XMVECTOR pos = XMLoadFloat3(&debugLine.p1.pos);
 	pos += GetActiveCamera()->right;
-	XMStoreFloat3(&v1.pos, pos);
+	XMStoreFloat3(&debugLine.p1.pos, pos);
 
 	if (distance <= 0.f)
 	{
@@ -28,12 +30,14 @@ void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, class ID3
 
 	XMVECTOR dist = rayDir * distance;
 	XMVECTOR rayEnd = rayOrigin + dist;
-	XMStoreFloat3(&v2.pos, rayEnd);
+	XMStoreFloat3(&debugLine.p2.pos, rayEnd);
 
-	gRenderSystem.debugLines[0] = v1;
-	gRenderSystem.debugLines[1] = v2;
+	debugLines.push_back(debugLine);
+}
 
-	gRenderSystem.context->UpdateSubresource(debugBuffer, 0, nullptr, &gRenderSystem.debugLines[0], 0, 0);
+void ClearDebugRays()
+{
+	debugLines.clear();
 }
 
 bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSystem, bool fromScreen)

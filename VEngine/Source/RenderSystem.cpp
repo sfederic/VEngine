@@ -72,7 +72,10 @@ void RenderSystem::Init(HWND window)
 	D3D11_FEATURE_DATA_THREADING threadFeature = {};
 	device->CheckFeatureSupport(D3D11_FEATURE_THREADING, &threadFeature, sizeof(threadFeature));
 
-	//debugLineBuffer = CreateDefaultBuffer(sizeof(Vertex) * 2, D3D11_BIND_VERTEX_BUFFER, debugLines);
+	//Keep an eye on the size of this buffer. There are no checks in the code for it.
+	debugLines.push_back(Line());
+	debugLineBuffer = CreateDefaultBuffer(sizeof(Line) * 256, D3D11_BIND_VERTEX_BUFFER, debugLines.data());
+	debugLines.clear();
 }
 
 void RenderSystem::CreateAllShaders()
@@ -513,8 +516,9 @@ void RenderSystem::RenderEnd(float deltaTime)
 {
 	//TODO: put debug line buffers into rendersystem
 	//DRAW DEBUG LINES
-	if (debugLineBuffer != nullptr)
+	if ((debugLineBuffer != nullptr) && (debugLines.size() > 0))
 	{
+		//Use the debug box's shader stuff for now
 		auto boxIt = gShaderFactory.shaderMap.find(stows(debugBox.shaderName));
 		context->VSSetShader(boxIt->second->vertexShader, nullptr, 0);
 		context->PSSetShader(boxIt->second->pixelShader, nullptr, 0);
@@ -524,7 +528,7 @@ void RenderSystem::RenderEnd(float deltaTime)
 
 		context->UpdateSubresource(debugLineBuffer, 0, nullptr, &debugLines[0], 0, 0);
 
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < debugLines.size(); i++)
 		{
 			matrices.view = GetActiveCamera()->view;
 			matrices.model = XMMatrixIdentity();
@@ -532,8 +536,10 @@ void RenderSystem::RenderEnd(float deltaTime)
 			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 			context->VSSetConstantBuffers(0, 1, &cbMatrices);
 
-			context->Draw(2, 0);
+			context->Draw(debugLines.size() * 2, 0);
 		}
+
+		ClearDebugRays();
 	}
 
 

@@ -61,9 +61,6 @@ public:
 	std::vector<IDXGIAdapter1*> adapters;
 	std::vector<DXGI_ADAPTER_DESC1> adaptersDesc;
 
-	Vertex debugLines[2];
-	std::vector<XMMATRIX> debugLineMatrices;
-
 	ID3DBlob* CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target);
 	ID3D11Buffer* CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, const void* initData);
 	ID3D11Buffer* CreateStructuredBuffer(UINT byteWidth, UINT byteStride, const void* initData);

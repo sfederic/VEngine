@@ -81,8 +81,14 @@ int main(int argc, char* argv[])
     //MAIN LOOP
     while (gCoreSystem.bMainLoop)
     {
-        DebugDraw::DrawSphere(XMFLOAT3(0.f, gCoreSystem.timeSinceStartup, 0.f));
+        DebugDraw::DrawSphere(XMFLOAT3(0.f, 5.f, 0.f));
         DebugDraw::DrawBox(Transform());
+        DebugDraw::DrawRay(XMVectorSet(0.f, 0.f, 0.f, 1.f),
+            XMVectorSet(0.f, 0.f, 1.f, 0.f), 5.f);
+        DebugDraw::DrawRay(XMVectorSet(0.f, 0.f, 5.f, 1.f),
+            XMVectorSet(1.f, 0.f, 0.f, 0.f), 5.f);
+        DebugDraw::DrawRay(XMVectorSet(5.f, 0.f, 5.f, 1.f),
+            XMVectorSet(0.f, 1.f, 0.f, 0.f), 5.f);
 
         const float deltaTime = gCoreSystem.deltaTime;
 

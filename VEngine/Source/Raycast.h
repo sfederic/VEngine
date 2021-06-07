@@ -2,6 +2,7 @@
 
 #include <DirectXMath.h>
 #include <vector>
+#include "RenderTypes.h"
 
 using namespace DirectX;
 
@@ -29,7 +30,10 @@ struct Ray
 	bool bHit = false;
 };
 
-void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance, class ID3D11Buffer* debugBuffer);
+extern std::vector<Line> debugLines;
+
+void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance);
+void ClearDebugRays();
 bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, class ActorSystem* actorSystem, bool fromScreen = false);
 bool RaycastTriangleIntersect(Ray& ray);
 bool RaycastAll(Ray& ray, XMVECTOR origin, XMVECTOR direction, class World* world);
