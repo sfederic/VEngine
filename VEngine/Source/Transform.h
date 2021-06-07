@@ -8,6 +8,7 @@ class Transform
 {
 public:
 	Transform();
+	XMMATRIX GetAffine();
 	void Decompose(XMMATRIX m);
 
 	XMFLOAT3 position;

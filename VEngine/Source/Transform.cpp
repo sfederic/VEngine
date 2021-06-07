@@ -14,6 +14,16 @@ Transform::Transform()
 	oldPosition = XMFLOAT3(0.f, 0.f, 0.f);
 }
 
+XMMATRIX Transform::GetAffine()
+{
+	return XMMatrixAffineTransformation(
+		XMLoadFloat3(&scale),
+		XMVectorSet(0.f, 0.f, 0.f, 1.f),
+		XMLoadFloat4(&quatRotation),
+		XMLoadFloat3(&position)
+	);
+}
+
 void Transform::Decompose(XMMATRIX m)
 {
 	XMVECTOR outScale, outQuat, outTrans;
