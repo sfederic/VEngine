@@ -12,6 +12,12 @@ struct Vertex
 	XMFLOAT3 normal;
 };
 
+struct Line
+{
+	Vertex p1;
+	Vertex p2;
+};
+
 struct Matrices
 {
 	XMMATRIX model;
