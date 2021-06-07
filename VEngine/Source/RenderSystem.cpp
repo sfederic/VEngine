@@ -496,18 +496,6 @@ void RenderSystem::RenderBounds()
 				context->Draw((UINT)debugSphere.modelData.verts.size(), 0);
 			}
 		}
-
-		//Draw box triggers
-		for (auto box : debugBox.actors)
-		{
-			matrices.model = box->GetTransformationMatrix();
-			matrices.view = camera->view;
-			matrices.mvp = matrices.model * matrices.view * matrices.proj;
-			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
-			context->VSSetConstantBuffers(0, 1, &cbMatrices);
-
-			context->Draw((UINT)debugBox.modelData.verts.size(), 0);
-		}
 	}
 }
 
@@ -548,6 +536,31 @@ void RenderSystem::RenderEnd(float deltaTime)
 		}
 	}
 
+	//Draw debug primitives (seperate from bounds, bounds use actor transforms)
+	if (debugSphere.debugSphereTransforms.size() > 0)
+	{
+		context->RSSetState(rastStateWireframe);
+
+		auto sphereIt = gShaderFactory.shaderMap.find(stows(debugSphere.shaderName));
+		context->VSSetShader(sphereIt->second->vertexShader, nullptr, 0);
+		context->PSSetShader(sphereIt->second->pixelShader, nullptr, 0);
+
+		context->IASetVertexBuffers(0, 1, (ID3D11Buffer**)debugSphere.GetVertexBuffer(), &strides, &offsets);
+
+		for (Transform& transform : debugSphere.debugSphereTransforms)
+		{
+			matrices.view = GetActiveCamera()->view;
+			matrices.model = transform.GetAffine();
+			matrices.mvp = matrices.model * matrices.view * matrices.proj;
+			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
+			context->VSSetConstantBuffers(0, 1, &cbMatrices);
+
+			context->Draw(debugSphere.modelData.verts.size(), 0);
+		}
+
+		//Need to clear out transforms at end
+		debugSphere.debugSphereTransforms.clear();
+	}
 
 	//TODO: the GPU query timer stuff is heavy, looks like it drops the FPS by half because of those sleeps()s
 	//down there.

@@ -36,6 +36,7 @@
 #include "Components/BoxTriggerComponent.h"
 #include "DebugBox.h"
 #include "DebugSphere.h"
+#include "DebugDraw.h"
 
 int main(int argc, char* argv[])
 {
@@ -65,8 +66,7 @@ int main(int argc, char* argv[])
     //Test debug primitive drawing
     debugBox.Start();
     debugSphere.Start();
-
-
+    
 
     //Test in-game UI widget stuff
     VWidget widget;
@@ -81,6 +81,8 @@ int main(int argc, char* argv[])
     //MAIN LOOP
     while (gCoreSystem.bMainLoop)
     {
+        DebugDraw::DrawSphere(XMFLOAT3(0.f, gCoreSystem.timeSinceStartup, 0.f));
+
         const float deltaTime = gCoreSystem.deltaTime;
 
         gCoreSystem.StartTimer();
