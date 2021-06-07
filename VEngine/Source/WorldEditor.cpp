@@ -47,11 +47,6 @@ void WorldEditor::Tick(ID3D11Buffer* debugLinesBuffer)
 			{
 				if (RaycastTriangleIntersect(screenPickRay))
 				{
-					if (debugLinesBuffer)
-					{
-						//DrawRayDebug(screenPickRay.origin, screenPickRay.direction, screenPickRay.distance, debugLinesBuffer);
-					}
-
 					SetPickedActor(screenPickRay.hitActor);
 				}
 			}
