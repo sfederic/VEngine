@@ -22,5 +22,5 @@ public:
 	PropertiesWidget* propWidget;
 	ActorSystem* selectedActorSystem;
 	
-	QWidget* actorPropsWidget;
+	QWidget* actorPropsWidget = nullptr;
 };

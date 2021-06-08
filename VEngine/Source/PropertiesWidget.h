@@ -31,7 +31,7 @@ public:
 
     QVBoxLayout* entireVLayout;
 
-    ActorSystem* selectedActorSystem;
+    ActorSystem* selectedActorSystem = nullptr;
 
     PropertiesWidget(QWidget* parent = 0);
 
