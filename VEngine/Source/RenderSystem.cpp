@@ -443,28 +443,21 @@ void RenderSystem::RenderBounds()
 		context->VSSetShader(boxIt->second->vertexShader, nullptr, 0);
 		context->PSSetShader(boxIt->second->pixelShader, nullptr, 0);
 
-		context->IASetVertexBuffers(0, 1, (ID3D11Buffer**)debugBox.GetVertexBuffer(), &strides, &offsets);
+		context->IASetVertexBuffers(0, 1, &debugBox.GetVertexBuffer()->data, &strides, &offsets);
+		context->VSSetShaderResources(3, 1, &debugBox.instancedDataSrv);
 
 		for(ActorSystem* actorSystem : world->actorSystems)
 		{
-			context->VSSetShaderResources(3, 1, &debugBox.instancedDataSrv);
-
-			ID3D11Buffer* vertexBuffers[] = { debugBox.GetVertexBuffer()->data };
-			context->IASetVertexBuffers(0, _countof(vertexBuffers), vertexBuffers, &strides, &offsets);
-
-			//Constant buffer register values
 			const int cbMatrixRegister = 0;
 			const int cbMaterialRegister = 1;
 
 			std::vector<InstanceData> instanceData;
 			instanceData.reserve(actorSystem->actors.size());
 
-			//Populate instance data
 			for (Actor* actor : actorSystem->actors)
 			{
 				InstanceData data = {};
 
-				//This is like a hack to get around hiding actors with instanced rendering
 				if (actor->bRender)
 				{
 					data.model = GetBoundingBoxMatrix(actorSystem->boundingBox, actor);
@@ -473,12 +466,10 @@ void RenderSystem::RenderBounds()
 				instanceData.push_back(data);
 			}
 
-			//matrix cbuffer 
 			matrices.view = GetActiveCamera()->view;
 			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 			context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
-			//update structred buffer holding instance data
 			if (!instanceData.empty())
 			{
 				context->UpdateSubresource(debugBox.instancedDataStructuredBuffer, 0, nullptr, instanceData.data(), 0, 0);
@@ -495,23 +486,17 @@ void RenderSystem::RenderBounds()
 		context->VSSetShader(sphereIt->second->vertexShader, nullptr, 0);
 		context->PSSetShader(sphereIt->second->pixelShader, nullptr, 0);
 
-		context->IASetVertexBuffers(0, 1, (ID3D11Buffer**)debugSphere.GetVertexBuffer(), &strides, &offsets);
+		context->IASetVertexBuffers(0, 1, &debugSphere.GetVertexBuffer()->data, &strides, &offsets);
+		context->VSSetShaderResources(3, 1, &debugSphere.instancedDataSrv);
 
 		for (ActorSystem* actorSystem : world->actorSystems)
 		{
-			context->VSSetShaderResources(3, 1, &debugSphere.instancedDataSrv);
-
-			ID3D11Buffer* vertexBuffers[] = { debugSphere.GetVertexBuffer()->data };
-			context->IASetVertexBuffers(0, _countof(vertexBuffers), vertexBuffers, &strides, &offsets);
-
-			//Constant buffer register values
 			const int cbMatrixRegister = 0;
 			const int cbMaterialRegister = 1;
 
 			std::vector<InstanceData> instanceData;
 			instanceData.reserve(actorSystem->actors.size());
 
-			//Populate instance data
 			for (Actor* actor : actorSystem->actors)
 			{
 				InstanceData data = {};
@@ -538,12 +523,10 @@ void RenderSystem::RenderBounds()
 				instanceData.push_back(data);
 			}
 
-			//matrix cbuffer 
 			matrices.view = GetActiveCamera()->view;
 			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 			context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
-			//update structred buffer holding instance data
 			if (!instanceData.empty())
 			{
 				context->UpdateSubresource(debugSphere.instancedDataStructuredBuffer, 0, nullptr, instanceData.data(), 0, 0);
