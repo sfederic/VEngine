@@ -56,58 +56,54 @@ void PropertiesDock::DisplayActorSystemProperties(Actor* actor)
 
     propWidget->selectedActorSystem = actorSystem;
 
-    auto actorPropWidgetIt = actorPropWidgetMap.find(actorSystem);
-    if (actorPropWidgetIt == actorPropWidgetMap.end())
+    //Just delete the previous widget
+    if (actorPropsWidget)
     {
-        QWidget* actorPropsWidget = new QWidget();
+        propWidget->entireVLayout->removeWidget(actorPropsWidget);
+        delete actorPropsWidget;
+    }
 
-        actorPropWidgetMap[actorSystem] = actorPropsWidget;
+    actorPropsWidget = new QWidget();
 
-        auto grid = new QGridLayout();
+    auto grid = new QGridLayout();
 
-        int currentGridRow = 0;
-        const int propertyNameColumn = 0;
-        const int propertyDataColumn = 1;
+    int currentGridRow = 0;
+    const int propertyNameColumn = 0;
+    const int propertyDataColumn = 1;
 
-        for (auto& actorProperty : actor->GetEditorProps().dataMap)
+    for (auto& actorProperty : actor->GetEditorProps().dataMap)
+    {
+        auto typeMap = actor->GetEditorProps().typeMap;
+        auto type = typeMap.find(actorProperty.first);
+
+        //Set property name onto label
+        grid->addWidget(new QLabel(actorProperty.first.c_str()), currentGridRow, propertyNameColumn);
+
+        //Set property data into grid
+        if (type->second == typeid(bool))
         {
-            auto typeMap = actor->GetEditorProps().typeMap;
-            auto type = typeMap.find(actorProperty.first);
-
-            //Set property name onto label
-            grid->addWidget(new QLabel(actorProperty.first.c_str()), currentGridRow, propertyNameColumn);
-
-            //Set property data into grid
-            if (type->second == typeid(bool))
-            {
-                auto boolWidget = new BoolWidget((bool*)actorProperty.second);
-                grid->addWidget(boolWidget, currentGridRow, propertyDataColumn);
-            }
-            else if (type->second == typeid(int))
-            {
-                auto intWidget = new IntWidget((int*)actorProperty.second);
-                grid->addWidget(intWidget, currentGridRow, propertyDataColumn);
-            }
-            else if (type->second == typeid(float))
-            {
-                auto floatWidget = new FloatWidget((float*)actorProperty.second);
-                grid->addWidget(floatWidget, currentGridRow, propertyDataColumn);
-            }
-            else if (type->second == typeid(XMVECTOR))
-            {
-                auto vectorWidget = new VectorWidget((XMVECTOR*)actorProperty.second);
-                grid->addWidget(vectorWidget, currentGridRow, propertyDataColumn);
-            }
-
-            currentGridRow++;
+            auto boolWidget = new BoolWidget((bool*)actorProperty.second);
+            grid->addWidget(boolWidget, currentGridRow, propertyDataColumn);
+        }
+        else if (type->second == typeid(int))
+        {
+            auto intWidget = new IntWidget((int*)actorProperty.second);
+            grid->addWidget(intWidget, currentGridRow, propertyDataColumn);
+        }
+        else if (type->second == typeid(float))
+        {
+            auto floatWidget = new FloatWidget((float*)actorProperty.second);
+            grid->addWidget(floatWidget, currentGridRow, propertyDataColumn);
+        }
+        else if (type->second == typeid(XMVECTOR))
+        {
+            auto vectorWidget = new VectorWidget((XMVECTOR*)actorProperty.second);
+            grid->addWidget(vectorWidget, currentGridRow, propertyDataColumn);
         }
 
-        actorPropsWidget->setLayout(grid);
-
-        propWidget->entireVLayout->addWidget(actorPropsWidget);
+        currentGridRow++;
     }
-    else
-    {
-        //TODO: got to add a bit more here to handle different actorsystem clicks
-    } 
+
+    actorPropsWidget->setLayout(grid);
+    propWidget->entireVLayout->addWidget(actorPropsWidget);
 }

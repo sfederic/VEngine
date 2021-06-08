@@ -22,7 +22,5 @@ public:
 	PropertiesWidget* propWidget;
 	ActorSystem* selectedActorSystem;
 	
-	//This map holds all property widgets an actor can make
-	//and caches it so were' not remaking prop widgets over and over.
-	std::unordered_map<ActorSystem*, QWidget*> actorPropWidgetMap;
+	QWidget* actorPropsWidget;
 };
