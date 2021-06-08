@@ -1,3 +1,4 @@
+//keep per object buffer for single draws
 cbuffer cbPerObject : register(b0)
 {
 	float4x4 model;
