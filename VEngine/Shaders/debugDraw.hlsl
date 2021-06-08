@@ -1,4 +1,4 @@
-#include "Include/CommonTypes.h"
+#include "Include/CommonTypes.hlsl"
 
 VS_OUT VSMain(VS_IN i)
 {

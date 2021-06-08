@@ -427,10 +427,16 @@ void RenderSystem::RenderActorSystem(World* world)
 	}
 }
 
+//Bounding primitives here aren't using the same structured buffer DrawInstanced() as actors are, they're
+//just using Draw() because trying to keep up with actor counts and debug primitive structured buffer sizes
+//is a headache. You could just make these structured buffers huge, but they won't be rendered in gameplay anyway.
 void RenderSystem::RenderBounds()
 {
 	World* world = GetWorld();
 	Camera* camera = GetActiveCamera();
+
+	const int cbMatrixRegister = 0;
+	const int cbMaterialRegister = 1;
 
 	if (bDrawBoundingBoxes || bDrawBoundingSpheres)
 	{
@@ -444,39 +450,19 @@ void RenderSystem::RenderBounds()
 		context->PSSetShader(boxIt->second->pixelShader, nullptr, 0);
 
 		context->IASetVertexBuffers(0, 1, &debugBox.GetVertexBuffer()->data, &strides, &offsets);
-		context->VSSetShaderResources(3, 1, &debugBox.instancedDataSrv);
+		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 		for(ActorSystem* actorSystem : world->actorSystems)
 		{
-			const int cbMatrixRegister = 0;
-			const int cbMaterialRegister = 1;
-
-			std::vector<InstanceData> instanceData;
-			instanceData.reserve(actorSystem->actors.size());
-
 			for (Actor* actor : actorSystem->actors)
 			{
-				InstanceData data = {};
+				matrices.model = actor->GetTransformationMatrix();
+				matrices.view = GetActiveCamera()->view;
+				matrices.mvp = matrices.model * matrices.view * matrices.proj;
+				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 
-				if (actor->bRender)
-				{
-					data.model = GetBoundingBoxMatrix(actorSystem->boundingBox, actor);
-				}
-
-				instanceData.push_back(data);
+				context->Draw(debugBox.modelData.verts.size(), 0);
 			}
-
-			matrices.view = GetActiveCamera()->view;
-			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
-			context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
-
-			if (!instanceData.empty())
-			{
-				context->UpdateSubresource(debugBox.instancedDataStructuredBuffer, 0, nullptr, instanceData.data(), 0, 0);
-			}
-
-			context->DrawInstanced(debugBox.modelData.verts.size(),
-				actorSystem->actors.size(), 0, 0);
 		}
 	}
 
@@ -487,53 +473,33 @@ void RenderSystem::RenderBounds()
 		context->PSSetShader(sphereIt->second->pixelShader, nullptr, 0);
 
 		context->IASetVertexBuffers(0, 1, &debugSphere.GetVertexBuffer()->data, &strides, &offsets);
-		context->VSSetShaderResources(3, 1, &debugSphere.instancedDataSrv);
+		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 		for (ActorSystem* actorSystem : world->actorSystems)
 		{
-			const int cbMatrixRegister = 0;
-			const int cbMaterialRegister = 1;
-
-			std::vector<InstanceData> instanceData;
-			instanceData.reserve(actorSystem->actors.size());
-
 			for (Actor* actor : actorSystem->actors)
 			{
-				InstanceData data = {};
+				XMMATRIX sphereBoundsMatrix = XMMatrixIdentity();
 
-				if (actor->bRender)
-				{
-					XMMATRIX sphereBoundsMatrix = XMMatrixIdentity();
+				XMVECTOR actorPos = actor->GetPositionVector();
+				actorPos.m128_f32[3] = 1.0f;
+				XMVECTOR actorScale = XMLoadFloat3(&actor->GetScale());
 
-					XMVECTOR actorPos = actor->GetPositionVector();
-					actorPos.m128_f32[3] = 1.0f;
-					XMVECTOR actorScale = XMLoadFloat3(&actor->GetScale());
+				//Grab the actors largest scale value and build the sphere's scale from that, making it uniform
+				float highestScaleValue = FindMaxInVector(actorScale);
+				XMVECTOR scale = XMVectorReplicate(highestScaleValue);
+				scale.m128_f32[3] = 1.0f;
 
-					//Grab the actors largest scale value and build the sphere's scale from that, making it uniform
-					float highestScaleValue = FindMaxInVector(actorScale);
-					XMVECTOR scale = XMVectorReplicate(highestScaleValue);
-					scale.m128_f32[3] = 1.0f;
+				sphereBoundsMatrix = XMMatrixScalingFromVector(scale);
+				sphereBoundsMatrix.r[3] = actorPos;
 
-					sphereBoundsMatrix = XMMatrixScalingFromVector(scale);
-					sphereBoundsMatrix.r[3] = actorPos;
+				matrices.model = sphereBoundsMatrix;
+				matrices.view = GetActiveCamera()->view;
+				matrices.mvp = matrices.model * matrices.view * matrices.proj;
+				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
 
-					data.model = sphereBoundsMatrix;
-				}
-
-				instanceData.push_back(data);
+				context->Draw(debugSphere.modelData.verts.size(), 0);
 			}
-
-			matrices.view = GetActiveCamera()->view;
-			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
-			context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
-
-			if (!instanceData.empty())
-			{
-				context->UpdateSubresource(debugSphere.instancedDataStructuredBuffer, 0, nullptr, instanceData.data(), 0, 0);
-			}
-
-			context->DrawInstanced(debugSphere.modelData.verts.size(),
-				actorSystem->actors.size(), 0, 0);
 		}
 	}
 }
