@@ -7,6 +7,7 @@
 #include "Input.h"
 #include "ConsoleDock.h"
 #include "AssetDock.h"
+#include "ToolbarDock.h"
 #include <QTextEdit>
 
 QApplication* qApplication;
@@ -80,15 +81,19 @@ void ToolkitEditorSystem::ToggleFullscreen()
 
 		if (fullscreen)
 		{
-			editorMainWindow->renderViewWidget->setParent(nullptr);
-			editorMainWindow->renderViewWidget->setWindowFlags(editorMainWindow->renderViewWidget->windowFlags() | Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint);
-			editorMainWindow->renderViewWidget->setWindowState(editorMainWindow->renderViewWidget->windowState() | Qt::WindowFullScreen);
-			editorMainWindow->renderViewWidget->show();
+			editorMainWindow->propertiesDock->hide();
+			editorMainWindow->assetDock->hide();
+			editorMainWindow->consoleDock->hide();
+			editorMainWindow->toolbarDock->hide();
+			editorMainWindow->worldDock->hide();
 		}
 		else if (!fullscreen)
 		{
-			editorMainWindow->renderViewWidget->setParent(editorMainWindow);
-			editorMainWindow->setCentralWidget(editorMainWindow->renderViewWidget);
+			editorMainWindow->propertiesDock->show();
+			editorMainWindow->assetDock->show();
+			editorMainWindow->consoleDock->show();
+			editorMainWindow->toolbarDock->show();
+			editorMainWindow->worldDock->show();
 		}
 	}
 }
