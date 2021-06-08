@@ -16,5 +16,4 @@ void DebugSphere::Tick(float deltaTime)
 void DebugSphere::Start()
 {
 	Init<Actor>(1);
-
 }

@@ -376,14 +376,14 @@ void RenderSystem::RenderActorSystem(World* world)
 		};
 		context->PSSetSamplers(0, _countof(samplers), samplers);
 
-		ID3D11ShaderResourceView* shaderResourceViews[]
+		ID3D11ShaderResourceView* shaderResourceViews[] =
 		{
 			actorSystem->GetShaderView()->data
 		};
 		context->PSSetShaderResources(0, _countof(shaderResourceViews), shaderResourceViews);
 		context->VSSetShaderResources(3, 1, &actorSystem->instancedDataSrv);
 
-		ID3D11Buffer* vertexBuffers[]
+		ID3D11Buffer* vertexBuffers[] =
 		{
 			actorSystem->GetVertexBuffer()->data
 		};
@@ -445,20 +445,47 @@ void RenderSystem::RenderBounds()
 
 		context->IASetVertexBuffers(0, 1, (ID3D11Buffer**)debugBox.GetVertexBuffer(), &strides, &offsets);
 
-		for (int systemIndex = 0; systemIndex < world->actorSystems.size(); systemIndex++)
+		for(ActorSystem* actorSystem : world->actorSystems)
 		{
-			for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex]->actors.size(); actorIndex++)
+			context->VSSetShaderResources(3, 1, &debugBox.instancedDataSrv);
+
+			ID3D11Buffer* vertexBuffers[] = { debugBox.GetVertexBuffer()->data };
+			context->IASetVertexBuffers(0, _countof(vertexBuffers), vertexBuffers, &strides, &offsets);
+
+			//Constant buffer register values
+			const int cbMatrixRegister = 0;
+			const int cbMaterialRegister = 1;
+
+			std::vector<InstanceData> instanceData;
+			instanceData.reserve(actorSystem->actors.size());
+
+			//Populate instance data
+			for (Actor* actor : actorSystem->actors)
 			{
-				Actor* actor = world->actorSystems[systemIndex]->GetActor(actorIndex);
+				InstanceData data = {};
 
-				matrices.model = GetBoundingBoxMatrix(world->actorSystems[systemIndex]->boundingBox, actor);
-				matrices.view = camera->view;
-				matrices.mvp = matrices.model * matrices.view * matrices.proj;
-				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
-				context->VSSetConstantBuffers(0, 1, &cbMatrices);
+				//This is like a hack to get around hiding actors with instanced rendering
+				if (actor->bRender)
+				{
+					data.model = GetBoundingBoxMatrix(actorSystem->boundingBox, actor);
+				}
 
-				context->Draw((UINT)debugBox.modelData.verts.size(), 0);
+				instanceData.push_back(data);
 			}
+
+			//matrix cbuffer 
+			matrices.view = GetActiveCamera()->view;
+			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
+			context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+
+			//update structred buffer holding instance data
+			if (!instanceData.empty())
+			{
+				context->UpdateSubresource(debugBox.instancedDataStructuredBuffer, 0, nullptr, instanceData.data(), 0, 0);
+			}
+
+			context->DrawInstanced(debugBox.modelData.verts.size(),
+				actorSystem->actors.size(), 0, 0);
 		}
 	}
 
@@ -470,34 +497,60 @@ void RenderSystem::RenderBounds()
 
 		context->IASetVertexBuffers(0, 1, (ID3D11Buffer**)debugSphere.GetVertexBuffer(), &strides, &offsets);
 
-		for (int systemIndex = 0; systemIndex < world->actorSystems.size(); systemIndex++)
+		for (ActorSystem* actorSystem : world->actorSystems)
 		{
-			for (int actorIndex = 0; actorIndex < world->actorSystems[systemIndex]->actors.size(); actorIndex++)
+			context->VSSetShaderResources(3, 1, &debugSphere.instancedDataSrv);
+
+			ID3D11Buffer* vertexBuffers[] = { debugSphere.GetVertexBuffer()->data };
+			context->IASetVertexBuffers(0, _countof(vertexBuffers), vertexBuffers, &strides, &offsets);
+
+			//Constant buffer register values
+			const int cbMatrixRegister = 0;
+			const int cbMaterialRegister = 1;
+
+			std::vector<InstanceData> instanceData;
+			instanceData.reserve(actorSystem->actors.size());
+
+			//Populate instance data
+			for (Actor* actor : actorSystem->actors)
 			{
-				Actor* actor = world->actorSystems[systemIndex]->GetActor(actorIndex);
+				InstanceData data = {};
 
-				XMMATRIX sphereBoundsMatrix = XMMatrixIdentity();
+				if (actor->bRender)
+				{
+					XMMATRIX sphereBoundsMatrix = XMMatrixIdentity();
 
-				XMVECTOR actorPos = actor->GetPositionVector();
-				actorPos.m128_f32[3] = 1.0f;
-				XMVECTOR actorScale = XMLoadFloat3(&actor->GetScale());
+					XMVECTOR actorPos = actor->GetPositionVector();
+					actorPos.m128_f32[3] = 1.0f;
+					XMVECTOR actorScale = XMLoadFloat3(&actor->GetScale());
 
-				//Grab the actors largest scale value and build the sphere's scale from that, making it uniform
-				float highestScaleValue = FindMaxInVector(actorScale);
-				XMVECTOR scale = XMVectorReplicate(highestScaleValue);
-				scale.m128_f32[3] = 1.0f;
+					//Grab the actors largest scale value and build the sphere's scale from that, making it uniform
+					float highestScaleValue = FindMaxInVector(actorScale);
+					XMVECTOR scale = XMVectorReplicate(highestScaleValue);
+					scale.m128_f32[3] = 1.0f;
 
-				sphereBoundsMatrix = XMMatrixScalingFromVector(scale);
-				sphereBoundsMatrix.r[3] = actorPos;
+					sphereBoundsMatrix = XMMatrixScalingFromVector(scale);
+					sphereBoundsMatrix.r[3] = actorPos;
 
-				matrices.model = sphereBoundsMatrix;
-				matrices.view = camera->view;
-				matrices.mvp = matrices.model * matrices.view * matrices.proj;
-				context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
-				context->VSSetConstantBuffers(0, 1, &cbMatrices);
+					data.model = sphereBoundsMatrix;
+				}
 
-				context->Draw((UINT)debugSphere.modelData.verts.size(), 0);
+				instanceData.push_back(data);
 			}
+
+			//matrix cbuffer 
+			matrices.view = GetActiveCamera()->view;
+			context->UpdateSubresource(cbMatrices, 0, nullptr, &matrices, 0, 0);
+			context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+
+			//update structred buffer holding instance data
+			if (!instanceData.empty())
+			{
+				context->UpdateSubresource(debugSphere.instancedDataStructuredBuffer, 0, nullptr, instanceData.data(), 0, 0);
+			}
+
+			context->DrawInstanced(debugSphere.modelData.verts.size(),
+				actorSystem->actors.size(), 0, 0);
 		}
 	}
 }
