@@ -5,7 +5,7 @@ DebugBox debugBox;
 DebugBox::DebugBox()
 {
 	modelName = "cube.fbx";
-	shaderName = "debugDraw.hlsl";
+	shaderName = "shaders.hlsl";
 }
 
 void DebugBox::Tick(float deltaTime)

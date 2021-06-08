@@ -4,7 +4,7 @@ DebugSphere debugSphere;
 
 DebugSphere::DebugSphere()
 {
-	shaderName = "debugDraw.hlsl";
+	shaderName = "shaders.hlsl";
 	modelName = "ico_sphere.fbx";
 }
 
