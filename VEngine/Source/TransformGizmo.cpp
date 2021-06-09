@@ -122,7 +122,7 @@ void TransformGizmo::Tick()
     {
         XMFLOAT4X4 identity;
         XMStoreFloat4x4(&identity, XMMatrixIdentity());
-        ImGuizmo::DrawGrid(&view.m[0][0], &proj.m[0][0], &identity.m[0][0], 100.f);
+        ImGuizmo::DrawGrid(&view.m[0][0], &proj.m[0][0], &identity.m[0][0], 20.f);
     }
 
     ImGui::End();
