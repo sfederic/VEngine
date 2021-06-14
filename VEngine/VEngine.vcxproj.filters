@@ -263,7 +263,7 @@
     <ClCompile Include="Source\Material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Properties.cpp">
+    <ClCompile Include="Source\Properties.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -499,7 +499,7 @@
     <ClInclude Include="Source\Material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Properties.h">
+    <ClInclude Include="Source\Properties.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

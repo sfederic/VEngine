@@ -3,6 +3,7 @@
 #include <DirectXMath.h>
 #include <string>
 #include <vector>
+#include "Properties.h"
 
 using namespace DirectX;
 

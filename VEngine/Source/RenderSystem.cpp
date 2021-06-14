@@ -257,6 +257,7 @@ void RenderSystem::CreateMainConstantBuffers()
 	cbMatrices = CreateDefaultBuffer(sizeof(Matrices), D3D11_BIND_CONSTANT_BUFFER, &matrices);
 
 	//Material constant buffer	
+	material = new Material();
 	material->colour = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
 	cbMaterial = CreateDefaultBuffer(sizeof(Material), D3D11_BIND_CONSTANT_BUFFER, &material);
 }
