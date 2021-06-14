@@ -381,7 +381,7 @@ void RenderSystem::RenderActorSystem(World* world)
 			actorSystem->GetShaderView()->data
 		};
 		context->PSSetShaderResources(0, _countof(shaderResourceViews), shaderResourceViews);
-		context->VSSetShaderResources(3, 1, &actorSystem->instancedDataSrv);
+		context->VSSetShaderResources(3, 1, &actorSystem->pso.instancedDataSrv->data);
 
 		ID3D11Buffer* vertexBuffers[] =
 		{
@@ -419,7 +419,7 @@ void RenderSystem::RenderActorSystem(World* world)
 		//update structred buffer holding instance data
 		if (!instanceData.empty())
 		{
-			context->UpdateSubresource(actorSystem->instancedDataStructuredBuffer, 0, nullptr, instanceData.data(), 0, 0);
+			context->UpdateSubresource(actorSystem->pso.instancedDataStructuredBuffer->data, 0, nullptr, instanceData.data(), 0, 0);
 		}
 
 		context->DrawInstanced(actorSystem->modelData.verts.size(),

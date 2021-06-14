@@ -441,19 +441,19 @@ void ActorSystem::CreateStructuredBuffer()
 		}
 	}
 
-	if (instancedDataStructuredBuffer)
+	if (pso.instancedDataStructuredBuffer)
 	{
 		//TODO: gotta fix this up. Maybe wrap this in a ComPtr.
 		//instancedDataStructuredBuffer->Release();
 	}
 
-	instancedDataStructuredBuffer = gRenderSystem.CreateStructuredBuffer(sizeof(InstanceData) * actors.size(), sizeof(InstanceData), actorModelMatrices.data());
+	pso.instancedDataStructuredBuffer->data = gRenderSystem.CreateStructuredBuffer(sizeof(InstanceData) * actors.size(), sizeof(InstanceData), actorModelMatrices.data());
 
 	D3D11_SHADER_RESOURCE_VIEW_DESC sbDesc = {};
 	sbDesc.Format = DXGI_FORMAT_UNKNOWN;
 	sbDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFEREX;
 	sbDesc.BufferEx.NumElements = actors.size();
-	HR(gRenderSystem.device->CreateShaderResourceView(instancedDataStructuredBuffer, &sbDesc, &instancedDataSrv));
+	HR(gRenderSystem.device->CreateShaderResourceView(pso.instancedDataStructuredBuffer->data, &sbDesc, &pso.instancedDataSrv->data));
 }
 
 //For when texture file is changed in-editor.

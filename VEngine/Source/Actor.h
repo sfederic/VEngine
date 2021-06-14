@@ -109,8 +109,8 @@ public:
 		if (bHasBeenInitialised)
 		{
 			//Structured buffer needs to be rebuilt
-			//TODO: Maybe look into doing some std::vector-tier allocation where reallocation on this buffer
-			//happens when it passes a threshold (eg. actors.size() > 64)
+			//TODO: Maybe look into doing some std::vector-tier allocation on Buffer where reallocation
+			//happens when it passes a threshold
 			CreateStructuredBuffer();
 		}
 
@@ -184,9 +184,6 @@ public:
 	void RecreateModel();
 
 	void Cleanup();
-
-	ID3D11Buffer* instancedDataStructuredBuffer;
-	ID3D11ShaderResourceView* instancedDataSrv;
 
 	ModelData modelData;
 	Animation animData;

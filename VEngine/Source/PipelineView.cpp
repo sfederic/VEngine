@@ -13,4 +13,6 @@ PipelineView::PipelineView()
 	rastState = new RasterizerState();
 	texture = new Texture();
 	srv = new ShaderResourceView();
+	instancedDataStructuredBuffer = new Buffer();
+	instancedDataSrv = new ShaderResourceView();
 }

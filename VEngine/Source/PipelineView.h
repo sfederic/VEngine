@@ -21,4 +21,6 @@ struct PipelineView
 	Texture* texture;
 	ShaderResourceView* srv;
 	BlendState* blendState;
+	Buffer* instancedDataStructuredBuffer;
+	ShaderResourceView* instancedDataSrv;
 };
