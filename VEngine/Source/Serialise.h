@@ -1,19 +1,8 @@
 #pragma once
 
-#include <unordered_map>
-#include <typeindex>
-#include <optional>
-#include <assert.h>
 #include <string>
 #include <fstream>
 #include "Properties.h"
-
-//Level save text file structure looks like this:
-//ActorSystem Name
-//Num of actors to spawn
-//Actor Property - eg. Position
-//Property value - eg. 1 -4 69.5
-//next
 
 struct Serialiser
 {
