@@ -7,6 +7,7 @@
 #include "Animationstructures.h"
 #include <unordered_map>
 #include <algorithm>
+#include "Material.h"
 
 //REF: https://github.com/peted70/hololens-fbx-viewer/tree/master/HolographicAppForOpenGLES1/include
 //REF: https://peted.azurewebsites.net/hololens-fbx-loading-c/
@@ -210,11 +211,11 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 			FbxDouble3 ambient = material->Ambient.Get();
 
 			Material mat = {};
-			mat.baseColour.x = ambient.mData[0];
-			mat.baseColour.y = ambient.mData[1];
-			mat.baseColour.z = ambient.mData[2];
-			mat.baseColour.w = 1.0f;
-			currentActorSystem->material = mat;
+			mat.colour.x = ambient.mData[0];
+			mat.colour.y = ambient.mData[1];
+			mat.colour.z = ambient.mData[2];
+			mat.colour.w = 1.0f;
+			currentActorSystem->material = &mat;
 		}
 
 		//Array setup

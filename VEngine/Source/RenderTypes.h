@@ -31,11 +31,6 @@ struct InstanceData
 	XMMATRIX model;
 };
 
-struct Material
-{
-	XMFLOAT4 baseColour;
-};
-
 struct ModelData
 {
 	unsigned int GetByteWidth()

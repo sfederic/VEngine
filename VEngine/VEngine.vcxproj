@@ -116,6 +116,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Material.cpp" />
     <ClCompile Include="Source\DebugDraw.cpp" />
     <ClCompile Include="Source\Components\BoxTriggerComponent.cpp" />
     <ClCompile Include="Source\Components\Component.cpp" />
@@ -196,6 +197,7 @@
     <ClCompile Include="EditorMainWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Material.h" />
     <ClInclude Include="Source\DebugDraw.h" />
     <ClInclude Include="Source\Components\BoxTriggerComponent.h" />
     <ClInclude Include="Source\Components\Component.h" />

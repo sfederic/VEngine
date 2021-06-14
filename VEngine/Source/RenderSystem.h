@@ -21,6 +21,7 @@ class Sampler;
 class Texture;
 class ShaderResourceView;
 class ActorSystem;
+class Material;
 
 class RenderSystem
 {
@@ -102,7 +103,7 @@ public:
 	ID3D11Buffer* debugLineBuffer;
 
 	Matrices matrices;
-	Material material;
+	Material* material;
 
 	D3D_FEATURE_LEVEL featureLevel;
 

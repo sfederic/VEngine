@@ -22,6 +22,7 @@ using namespace DirectX;
 
 class RenderSystem;
 class Component;
+class Material;
 
 class Actor
 {
@@ -65,7 +66,7 @@ public:
 	}
 
 	Transform transform;
-	Material material;
+	Material* material;
 	std::string name;
 	ActorSystem* linkedActorSystem;
 	std::vector<Actor*> children;
@@ -187,7 +188,7 @@ public:
 
 	ModelData modelData;
 	Animation animData;
-	Material material;
+	Material* material;
 	PipelineView pso;
 
 	//Everything's a BoundingOrientedBox, but maybe just a BoundingBox is faster in some places.
