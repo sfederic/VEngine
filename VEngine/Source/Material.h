@@ -10,6 +10,9 @@ using namespace DirectX;
 class Material
 {
 public:
+	Properties GetProps();
+	void SaveToFile();
+
 	std::string name;
 	XMFLOAT4 colour;
 };
