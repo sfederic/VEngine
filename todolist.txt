@@ -1,6 +1,5 @@
 Todo List for engine:
 
--Level saving/loading
 -C++ RTTI
 -Engine-wide Undo/Redo 
 -Experimental live gameplay editing
