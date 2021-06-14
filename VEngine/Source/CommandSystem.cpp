@@ -1,11 +1,10 @@
 #include "CommandSystem.h"
-#include <assert.h>
 
 CommandSystem gCommandSystem;
 
 void CommandSystem::AddCommand(ICommand* command)
 {
-	assert(command);
+	command->Execute();
 	commands.push_back(command);
 	currentCommandIndex = commands.size() - 1;
 }
