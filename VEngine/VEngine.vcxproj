@@ -116,6 +116,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\CommandSystem.cpp" />
+    <ClCompile Include="Source\FloatCommand.cpp" />
     <ClCompile Include="Source\Properties.cpp" />
     <ClCompile Include="Source\Material.cpp" />
     <ClCompile Include="Source\DebugDraw.cpp" />
@@ -198,6 +200,9 @@
     <ClCompile Include="EditorMainWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\CommandSystem.h" />
+    <ClInclude Include="Source\FloatCommand.h" />
+    <ClInclude Include="Source\ICommand.h" />
     <ClInclude Include="Source\Properties.h" />
     <ClInclude Include="Source\Material.h" />
     <ClInclude Include="Source\DebugDraw.h" />
