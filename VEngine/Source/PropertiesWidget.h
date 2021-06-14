@@ -28,6 +28,7 @@ public:
     QLineEdit* actorSystemShaderName;
     QLineEdit* actorSystemTextureName;
     QLineEdit* actorSystemModelName;
+    QLineEdit* actorSystemMaterial;
 
     QVBoxLayout* entireVLayout;
 

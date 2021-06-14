@@ -128,6 +128,7 @@ void AssetDock::ShowCreateAssetContextMenu(const QPoint& pos)
 
     contextMenu.addAction("New Level", this, &AssetDock::CreateLevel);
     contextMenu.addAction("New Shader", this, &AssetDock::CreateShader);
+    contextMenu.addAction("New Material", this, &AssetDock::CreateMaterial);
 
     contextMenu.exec(mapToGlobal(pos));
 }
@@ -160,4 +161,16 @@ void AssetDock::CreateShader()
     stream.close();
 
     AssetFolderClicked(); //Refresh the asset widget
+}
+
+void AssetDock::CreateMaterial()
+{
+    QString materialName = QInputDialog::getText(this, "New Material", "Enter material name:");
+    std::string materialPath = "Materials/" + materialName.toStdString() + ".vmat";
+
+    std::ofstream stream(materialPath);
+    stream << "" << std::endl;
+    stream.close();
+
+    AssetFolderClicked();
 }

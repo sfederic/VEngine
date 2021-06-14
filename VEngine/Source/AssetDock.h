@@ -19,6 +19,7 @@ public:
 	void ShowCreateAssetContextMenu(const QPoint& pos);
 	void CreateLevel();
 	void CreateShader();
+	void CreateMaterial();
 
 	QListWidget* assetIcons;
 	QFileSystemModel* fileSystemModel;

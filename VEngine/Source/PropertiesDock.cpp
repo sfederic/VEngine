@@ -13,6 +13,7 @@
 #include "ActorSystemFactory.h"
 #include <typeindex>
 #include <qscrollarea.h>
+#include "Material.h"
 
 PropertiesDock::PropertiesDock(const char* title) : QDockWidget(title)
 {
@@ -53,6 +54,7 @@ void PropertiesDock::DisplayActorSystemProperties(Actor* actor)
     propWidget->actorSystemModelName->setText(QString::fromStdString(actorSystem->modelName));
     propWidget->actorSystemTextureName->setText(QString::fromStdString(actorSystem->textureName));
     propWidget->actorSystemShaderName->setText(QString::fromStdString(actorSystem->shaderName));
+    propWidget->actorSystemMaterial->setText(QString::fromStdString(actorSystem->material->name));
 
     propWidget->selectedActorSystem = actorSystem;
 
