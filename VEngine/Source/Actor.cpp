@@ -280,9 +280,9 @@ void ActorSystem::Serialise(std::ostream& os)
 	os << textureName.c_str() << "\n";
 	os << shaderName.c_str() << "\n";
 
-	for (int i = 0; i < actors.size(); i++)
+	for(Actor* actor : actors)
 	{
-		Serialiser::Serialise(actors[i], os);
+		Serialiser::Serialise(actor->GetSaveProps(), os);
 	}
 }
 
@@ -307,9 +307,9 @@ void ActorSystem::Deserialise(std::istream& is)
 	is.getline(name, 512);
 	shaderName.assign(name);
 
-	for (int i = 0; i < actors.size(); i++)
+	for(Actor* actor : actors)
 	{
-		Serialiser::Deserialise(actors[i], is);
+		Serialiser::Deserialise(actor->GetSaveProps(), is);
 	}
 }
 

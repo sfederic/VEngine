@@ -11,9 +11,8 @@ Serialiser::Serialiser(const std::string& file, std::ios_base::openmode mode)
 	fb.open(file.c_str(), mode);
 }
 
-void Serialiser::Serialise(Actor* actor, std::ostream& os)
+void Serialiser::Serialise(Properties& props, std::ostream& os)
 {
-	Properties props = actor->GetSaveProps();
 	for (auto& prop : props.dataMap)
 	{
 		std::type_index type = props.typeMap.find(prop.first)->second.value();
@@ -46,10 +45,8 @@ void Serialiser::Serialise(Actor* actor, std::ostream& os)
 	os << "next\n"; //"next" moves the forloop onto the next Actor in Deserialise
 }
 
-void Serialiser::Deserialise(Actor* actor, std::istream& is)
+void Serialiser::Deserialise(Properties& props, std::istream& is)
 {
-	Properties props = actor->GetSaveProps();
-
 	char line[512];
 	while (!is.eof())
 	{
