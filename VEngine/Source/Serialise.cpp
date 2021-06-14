@@ -42,7 +42,7 @@ void Serialiser::Serialise(const Properties& props, std::ostream& os)
 		}
 	}
 
-	os << "next\n"; //"next" moves the forloop onto the next Actor in Deserialise
+	os << "next\n"; //"next" moves the forloop onto the next 'Object'
 }
 
 void Serialiser::Deserialise(const Properties& props, std::istream& is)
@@ -53,7 +53,7 @@ void Serialiser::Deserialise(const Properties& props, std::istream& is)
 		is.getline(line, 512);
 
 		std::string stringline = line;
-		if (stringline.find("next") != stringline.npos) //Move to next actor
+		if (stringline.find("next") != stringline.npos) //Move to next Object
 		{
 			return;
 		}
