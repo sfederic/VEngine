@@ -257,9 +257,9 @@ void RenderSystem::CreateMainConstantBuffers()
 	cbMatrices = CreateDefaultBuffer(sizeof(Matrices), D3D11_BIND_CONSTANT_BUFFER, &matrices);
 
 	//Material constant buffer	
-	material = new Material();
-	material->colour = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
-	cbMaterial = CreateDefaultBuffer(sizeof(Material), D3D11_BIND_CONSTANT_BUFFER, &material);
+	//material = new Material();
+	//material->colour = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
+	//cbMaterial = CreateDefaultBuffer(sizeof(Material), D3D11_BIND_CONSTANT_BUFFER, nullptr);
 }
 
 //One vertex buffer per actor system
@@ -400,6 +400,10 @@ void RenderSystem::RenderActorSystem(World* world)
 		instanceData.reserve(actorSystem->actors.size());
 
 		//Populate instance data
+		//TODO: going to have to come back here at one point and make the instance data based on
+		//which actors in a system hold reference to the actorsystem's vertexbuffer (model) and batch
+		//the instance data per actor accordingly (material and texture wouldn't matter).
+		//OR look into how other people have done batching by sorting.
 		for (int actorIndex = 0; actorIndex < actorSystem->actors.size(); actorIndex++)
 		{
 			InstanceData data = {};
