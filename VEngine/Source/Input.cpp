@@ -188,16 +188,6 @@ bool InputSystem::GetKeyUpState(Keys key, Keys modifier)
 	return false;
 }
 
-bool InputSystem::GetKeyUpState(int key, int modifier)
-{
-	if (GetAsyncKey(modifier))
-	{
-		return GetKeyUpState(key);
-	}
-
-	return false;
-}
-
 void InputSystem::InputReset()
 {
 	rightMouseDown = false;

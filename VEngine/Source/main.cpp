@@ -31,7 +31,7 @@
 #include "ParticleSystem.h"
 #include "Actors/TestActor.h"
 #include "GlobalDefines.h"
-
+#include "CommandSystem.h"
 #include "VWidget.h"
 #include "Components/BoxTriggerComponent.h"
 #include "DebugBox.h"
@@ -127,6 +127,14 @@ int main(int argc, char* argv[])
 
         ImGui::Render();
         ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+
+        if (gInputSystem.GetAsyncKey(Keys::Ctrl))
+        {
+            if (gInputSystem.GetKeyUpState(Keys::Z))
+            {
+                gCommandSystem.Undo();
+            }
+        }
 
         gRenderSystem.Flush();
 

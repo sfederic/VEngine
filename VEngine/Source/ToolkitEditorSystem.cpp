@@ -75,7 +75,7 @@ void ToolkitEditorSystem::ToggleFullscreen()
 {
 	static bool fullscreen;
 
-	if (gInputSystem.GetKeyUpState(VK_F11))
+	if (gInputSystem.GetKeyUpState(Keys::F11))
 	{
 		fullscreen = !fullscreen;
 

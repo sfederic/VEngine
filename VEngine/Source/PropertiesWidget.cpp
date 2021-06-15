@@ -15,6 +15,8 @@
 #include <qscrollarea.h>
 #include "PropertyWidgets/BoolWidget.h"
 #include <qscrollarea.h>
+#include "CommandSystem.h"
+#include "FloatCommand.h"
 
 PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
 {
@@ -149,6 +151,9 @@ void PropertiesWidget::SetActorPosition()
         float posX = posEditX->value();
         float posY = posEditY->value();
         float posZ = posEditZ->value();
+
+        gCommandSystem.AddCommand(new FloatCommand(posX, &picked->transform.position.x));
+
         gWorldEditor.pickedActor->SetPosition(posX, posY, posZ);
     }
 }

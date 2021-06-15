@@ -8,6 +8,7 @@
 enum class Keys
 {
 	None = 0,
+
 	Space = VK_SPACE,
 	Enter = VK_RETURN,
 	Tab = VK_TAB,
@@ -17,12 +18,21 @@ enum class Keys
 	BackSpace = VK_BACK,
 	Alt = VK_LMENU,
 
+	//TODO: there's all sorts of scancode shit win Win32 and keyboards
+	//that won't make this work internationally.
 	W = 'W',
 	A = 'A',
 	S = 'S',
 	D = 'D',
 	F = 'F',
 	Z = 'Z',
+	P = 'P',
+	E = 'E',
+	R = 'R',
+	O = 'O',
+	G = 'G',
+	V = 'V',
+	B = 'B',
 
 	_1 = '1',
 	_2 = '2',
@@ -34,6 +44,11 @@ enum class Keys
 	_8 = '8',
 	_9 = '9',
 	_0 = '0',
+
+	F1 = VK_F1,
+	F2 = VK_F2,
+	F3 = VK_F3,
+	F11 = VK_F11,
 
 	Up = VK_UP,
 	Down = VK_DOWN,
@@ -62,7 +77,6 @@ public:
 
 	bool GetKeyUpState(Keys key);
 	bool GetKeyUpState(Keys key, Keys modifier);
-	bool GetKeyUpState(int key, int modifier);
 	bool GetKeyDownState(Keys key);
 	bool GetKeyDownState(Keys key, Keys modifier);
 

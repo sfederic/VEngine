@@ -73,7 +73,7 @@ void Camera::Tick(float deltaTime)
 			}
 
 			//Zoom onto selected actor
-			if (gInputSystem.GetKeyUpState('F'))
+			if (gInputSystem.GetKeyUpState(Keys::F))
 			{
 				World* world = GetWorld();
 				ZoomTo(gWorldEditor.pickedActor);

@@ -21,7 +21,7 @@ void CoreSystem::Tick()
 	//Start play in editor
 	if (gInputSystem.GetAsyncKey(Keys::Ctrl))
 	{
-		if (gInputSystem.GetKeyUpState('P'))
+		if (gInputSystem.GetKeyUpState(Keys::P))
 		{
 			bGamePlayOn = !bGamePlayOn;
 		}
@@ -30,7 +30,7 @@ void CoreSystem::Tick()
 	//Pause game (freezes actor ticks)
 	if (bGamePlayOn)
 	{
-		if (gInputSystem.GetKeyUpState('P', (int)Keys::Ctrl))
+		if (gInputSystem.GetKeyUpState(Keys::P, Keys::Ctrl))
 		{
 			bGamePaused = !bGamePaused;
 		}

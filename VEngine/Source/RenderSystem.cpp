@@ -38,20 +38,20 @@ RenderSystem::RenderSystem()
 void RenderSystem::Tick()
 {
 	//Set wireframe on/off
-	if (gInputSystem.GetKeyUpState(VK_F1))
+	if (gInputSystem.GetKeyUpState(Keys::F1))
 	{
 		activeRastState = rastStateWireframe;
 	}
-	if (gInputSystem.GetKeyUpState(VK_F2))
+	if (gInputSystem.GetKeyUpState(Keys::F2))
 	{
 		activeRastState = rastStateSolid;
 	}
 
-	if (gInputSystem.GetKeyUpState('B')) 
+	if (gInputSystem.GetKeyUpState(Keys::B)) 
 	{
 		bDrawBoundingBoxes = !bDrawBoundingBoxes;
 	}
-	if (gInputSystem.GetKeyUpState('V'))
+	if (gInputSystem.GetKeyUpState(Keys::V))
 	{
 		bDrawBoundingSpheres = !bDrawBoundingSpheres;
 	}
@@ -671,7 +671,7 @@ void RenderSystem::RenderSetup(float deltaTime)
 	context->RSSetState(activeRastState);
 
 	//TODO: this needs to move somewhere else
-	if (gInputSystem.GetKeyUpState(VK_F3))
+	if (gInputSystem.GetKeyUpState(Keys::F3))
 	{
 		gShaderFactory.HotReloadShaders();
 		gDebugMenu.notifications.push_back(DebugNotification(L"Shaders reloaded."));

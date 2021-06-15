@@ -30,14 +30,14 @@ void TransformGizmo::Tick()
         //Set transform operation
         if (!gInputSystem.GetAsyncKey(Keys::RightMouse))
         {
-            if (gInputSystem.GetKeyDownState('W'))
+            if (gInputSystem.GetKeyDownState(Keys::W))
             {
                 currentTransformOperation = ImGuizmo::TRANSLATE;
                 currentSnapValues[0] = translateSnapValues[0];
                 currentSnapValues[1] = translateSnapValues[1];
                 currentSnapValues[2] = translateSnapValues[2];
             }
-            else if (gInputSystem.GetKeyDownState('E'))
+            else if (gInputSystem.GetKeyDownState(Keys::E))
             {
                 currentTransformOperation = ImGuizmo::SCALE;
                 currentSnapValues[0] = scaleSnapValues[0];
@@ -45,7 +45,7 @@ void TransformGizmo::Tick()
                 currentSnapValues[2] = scaleSnapValues[2];
 
             }
-            else if (gInputSystem.GetKeyDownState('R'))
+            else if (gInputSystem.GetKeyDownState(Keys::R))
             {
                 currentTransformOperation = ImGuizmo::ROTATE;
                 currentSnapValues[0] = rotationSnapValues[0];
@@ -82,7 +82,7 @@ void TransformGizmo::Tick()
         }
 
         //Toggle snap and scale controls
-        if (gInputSystem.GetKeyUpState('O'))
+        if (gInputSystem.GetKeyUpState(Keys::O))
         {
             bBoundsToggle = !bBoundsToggle;
             if (!bBoundsToggle)
@@ -114,7 +114,7 @@ void TransformGizmo::Tick()
     ImGuizmo::ViewManipulate(&view.m[0][0], camDistance, ImVec2(viewManipulateRight - 128, viewManipulateTop), ImVec2(128, 128), 0x10101010);*/
 
     //Toggle and draw grid
-    if (gInputSystem.GetKeyUpState('G'))
+    if (gInputSystem.GetKeyUpState(Keys::G))
     {
         bGridToggle = !bGridToggle;
     }
