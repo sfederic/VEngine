@@ -16,6 +16,7 @@ public:
 	void StartTimer();
 	void EndTimer();
 	void HandleMessages();
+	void HandleWin32MessagePump(UINT message, WPARAM wparam, LPARAM lparam);
 	float GetAspectRatio();
 
 	void Exit();

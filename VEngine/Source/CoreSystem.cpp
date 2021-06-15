@@ -6,6 +6,7 @@
 #include "RenderSystem.h"
 #include "Camera.h"
 #include "GlobalDefines.h"
+#include "EditorSystem.h"
 
 CoreSystem gCoreSystem;
 
@@ -120,24 +121,13 @@ void CoreSystem::HandleMessages()
 	}
 }
 
-float CoreSystem::GetAspectRatio()
-{
-	return (float)((float)windowWidth / (float)windowHeight);
-}
-
-//Helper for exiting the engine in the main loop
-void CoreSystem::Exit()
-{
-	msg.message = WM_QUIT;
-}
-
-LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam)
+void CoreSystem::HandleWin32MessagePump(UINT message, WPARAM wparam, LPARAM lparam)
 {
 	switch (message)
 	{
 	case WM_DESTROY:
 		PostQuitMessage(0);
-		return 0;
+		break;
 
 	case WM_KEYDOWN:
 		gInputSystem.StoreKeyDownInput(wparam);
@@ -182,7 +172,7 @@ LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam
 		}
 		break;
 
-	case WM_SIZE:
+	case WM_SIZE: //Careful here, D3D11's swapchain and D2D's rendertarget like to fuck around
 		if (gRenderSystem.swapchain)
 		{
 			gRenderSystem.context->OMSetRenderTargets(0, 0, 0);
@@ -195,8 +185,7 @@ LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam
 
 			gRenderSystem.dsv->Release();
 
-			//gUISystem.Cleanup();
-			//gUISystem.Init();
+			gUISystem.Cleanup();
 
 			//ID3D11Debug* debug;
 			//gRenderSystem.device->QueryInterface(__uuidof(ID3D11Debug), reinterpret_cast<void**>(&debug));
@@ -207,15 +196,20 @@ LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam
 			// Preserve the existing buffer count and format.
 			// Automatically choose the width and height to match the client rect for HWNDs.
 
+#ifdef EDITOR
+			gEditorSystem->SetWindowWidthHeight();
+#else
 			UINT width = LOWORD(lparam);
 			UINT height = HIWORD(lparam);
 			gCoreSystem.windowWidth = width;
 			gCoreSystem.windowHeight = height;
-
+#endif
 			HR(gRenderSystem.swapchain->ResizeBuffers(gRenderSystem.frameCount,
 				gCoreSystem.windowWidth, gCoreSystem.windowHeight, DXGI_FORMAT_R8G8B8A8_UNORM, 0));
 
 			gRenderSystem.CreateRTVAndDSV();
+
+			gUISystem.Init();
 
 			gRenderSystem.matrices.proj = XMMatrixPerspectiveFovLH(XM_PI / 3, gCoreSystem.GetAspectRatio(), 0.01f, 1000.f);
 			GetActiveCamera()->proj = gRenderSystem.matrices.proj;
@@ -229,7 +223,25 @@ LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam
 			gRenderSystem.viewport.TopLeftY = 0;
 			gRenderSystem.context->RSSetViewports(1, &gRenderSystem.viewport);
 		}
+
+		break;
 	}
+}
+
+float CoreSystem::GetAspectRatio()
+{
+	return (float)((float)windowWidth / (float)windowHeight);
+}
+
+//Helper for exiting the engine in the main loop
+void CoreSystem::Exit()
+{
+	msg.message = WM_QUIT;
+}
+
+LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam)
+{
+	gCoreSystem.HandleWin32MessagePump(message, wparam, lparam);
 
 	return DefWindowProc(window, message, wparam, lparam);
 }
