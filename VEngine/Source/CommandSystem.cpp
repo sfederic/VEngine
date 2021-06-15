@@ -13,7 +13,11 @@ void CommandSystem::Undo()
 {
 	if (currentCommandIndex <= 0)
 	{
-		commands.front()->Undo();
+		if (commands.size() > 0)
+		{
+			commands.front()->Undo();
+		}
+
 		return; //Reached start of list
 	}
 
