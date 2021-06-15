@@ -2,6 +2,7 @@
 
 #include <Windows.h>
 #include <stdint.h>
+#include <vector>
 
 #ifdef WIN32
 enum class Keys
@@ -14,7 +15,7 @@ enum class Keys
 	Ctrl = VK_CONTROL,
 	Delete = VK_DELETE,
 	BackSpace = VK_BACK,
-	Alt = VK_LMENU, //Left Menu is alt?
+	Alt = VK_LMENU,
 
 	W = 'W',
 	A = 'A',
@@ -61,12 +62,9 @@ public:
 
 	bool GetKeyUpState(Keys key);
 	bool GetKeyUpState(Keys key, Keys modifier);
-	bool GetKeyUpState(int key);
 	bool GetKeyUpState(int key, int modifier);
 	bool GetKeyDownState(Keys key);
 	bool GetKeyDownState(Keys key, Keys modifier);
-	bool GetKeyDownState(int key);
-	bool GetKeyDownState(int key, int modifier);
 
 	bool GetMouseLeftDownState();
 	bool GetMouseLeftUpState();
@@ -75,15 +73,17 @@ public:
 	bool GetMouseMiddleUpState();
 	bool GetMouseMiddleDownState();
 	bool GetAsyncKey(Keys key);
-	bool GetAsyncKey(int key);
 	void InputReset();
 	void StoreMouseWheelUp();
 	void StoreMouseWheelDown();
 	bool GetMouseWheelUp();
 	bool GetMouseWheelDown();
 
-	int currentUpKey;
+	std::vector<int> currentDownKeys;
+	std::vector<int> currentUpKeys;
+
 	int currentDownKey;
+	int currentUpKey;
 
 	bool leftMouseUp;
 	bool leftMouseDown;

@@ -2,39 +2,37 @@
 
 InputSystem gInputSystem;
 
-bool InputSystem::GetAnyKeyUp()
-{
-	if (keyUp)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
 bool InputSystem::GetAnyKeyDown()
 {
 	if (keyDown)
 	{
 		return true;
 	}
-	else
+
+	return false;
+}
+
+bool InputSystem::GetAnyKeyUp()
+{
+	if (keyUp)
 	{
-		return false;
+		return true;
 	}
+
+	return false;
 }
 
 void InputSystem::StoreKeyDownInput(int key)
 {
 	currentDownKey = key;
+	currentDownKeys.push_back(key);
 	keyDown = true;
 }
 
 void InputSystem::StoreKeyUpInput(int key)
 {
 	currentUpKey = key;
+	currentUpKeys.push_back(key);
 	keyUp = true;
 }
 
@@ -76,39 +74,18 @@ void InputSystem::StoreMouseMiddleUpInput()
 
 bool InputSystem::GetKeyDownState(Keys key)
 {
-	if (currentDownKey == (int)key)
+	for (int i = 0; i < currentDownKeys.size(); i++)
 	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-bool InputSystem::GetKeyDownState(Keys key, Keys modifier)
-{
-	if (GetAsyncKey(modifier))
-	{
-		return GetKeyDownState(key);
+		if ((int)key == currentDownKeys[i])
+		{
+			return true;
+		}
 	}
 
 	return false;
 }
 
-bool InputSystem::GetKeyDownState(int key)
-{
-	if (currentUpKey == key)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-bool InputSystem::GetKeyDownState(int key, int modifier)
+bool InputSystem::GetKeyDownState(Keys key, Keys modifier)
 {
 	if (GetAsyncKey(modifier))
 	{
@@ -124,10 +101,8 @@ bool InputSystem::GetMouseLeftDownState()
 	{
 		return true;
 	}
-	else
-	{
-		return false;
-	}
+
+	return false;
 }
 
 bool InputSystem::GetMouseLeftUpState()
@@ -136,10 +111,8 @@ bool InputSystem::GetMouseLeftUpState()
 	{
 		return true;
 	}
-	else
-	{
-		return false;
-	}
+		
+	return false;
 }
 
 bool InputSystem::GetMouseRightDownState()
@@ -148,10 +121,8 @@ bool InputSystem::GetMouseRightDownState()
 	{
 		return true;
 	}
-	else
-	{
-		return false;
-	}
+
+	return false;
 }
 
 bool InputSystem::GetMouseRightUpState()
@@ -160,10 +131,8 @@ bool InputSystem::GetMouseRightUpState()
 	{
 		return true;
 	}
-	else
-	{
-		return false;
-	}
+		
+	return false;
 }
 
 bool InputSystem::GetMouseMiddleUpState()
@@ -172,10 +141,8 @@ bool InputSystem::GetMouseMiddleUpState()
 	{
 		return true;
 	}
-	else
-	{
-		return false;
-	}
+
+	return false;
 }
 
 bool InputSystem::GetMouseMiddleDownState()
@@ -184,10 +151,8 @@ bool InputSystem::GetMouseMiddleDownState()
 	{
 		return true;
 	}
-	else
-	{
-		return false;
-	}
+
+	return false;
 }
 
 bool InputSystem::GetAsyncKey(Keys key)
@@ -196,34 +161,21 @@ bool InputSystem::GetAsyncKey(Keys key)
 	{
 		return true;
 	}
-	else
-	{
-		return false;
-	}
-}
 
-bool InputSystem::GetAsyncKey(int key)
-{
-	if (GetAsyncKeyState(key))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return false;
 }
 
 bool InputSystem::GetKeyUpState(Keys key)
 {
-	if (currentUpKey == (int)key)
+	for (int i = 0; i < currentUpKeys.size(); i++)
 	{
-		return true;
+		if ((int)key == currentUpKeys[i])
+		{
+			return true;
+		}
 	}
-	else
-	{
-		return false;
-	}
+
+	return false;
 }
 
 bool InputSystem::GetKeyUpState(Keys key, Keys modifier)
@@ -234,18 +186,6 @@ bool InputSystem::GetKeyUpState(Keys key, Keys modifier)
 	}
 
 	return false;
-}
-
-bool InputSystem::GetKeyUpState(int key)
-{
-	if (currentUpKey == key)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
 }
 
 bool InputSystem::GetKeyUpState(int key, int modifier)
@@ -266,10 +206,11 @@ void InputSystem::InputReset()
 	leftMouseUp = false;
 	middleMouseUp = false;
 	middleMouseDown = false;
-	currentDownKey = (int)Keys::None;
-	currentUpKey = (int)Keys::None;
 	keyDown = false;
 	keyUp = false;
+
+	currentDownKey = (int)Keys::None;
+	currentUpKey = (int)Keys::None;
 
 	bMouseWheelDown = false;
 	bMouseWheelUp = false;
