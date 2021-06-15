@@ -164,10 +164,14 @@ void PropertiesWidget::SetActorScale()
     Actor* picked = gWorldEditor.pickedActor;
     if (picked)
     {
-        float scaleX = scaleEditX->value();
-        float scaleY = scaleEditY->value();
-        float scaleZ = scaleEditZ->value();
-        gWorldEditor.pickedActor->SetScale(scaleX, scaleY, scaleZ);
+        XMFLOAT3 newScale = {};
+        newScale.x = scaleEditX->value();
+        newScale.y = scaleEditY->value();
+        newScale.z = scaleEditZ->value();
+
+        gCommandSystem.AddCommand(new VectorCommand(newScale, &picked->transform.scale));
+
+        gWorldEditor.pickedActor->SetScale(newScale);
     }
 }
 
@@ -176,10 +180,12 @@ void PropertiesWidget::SetActorRotation()
     Actor* picked = gWorldEditor.pickedActor;
     if (picked)
     {
-        float roll = rotEditX->value();
-        float pitch = rotEditY->value();
-        float yaw = rotEditZ->value();
-        gWorldEditor.pickedActor->SetRotation(roll, pitch, yaw);
+        XMFLOAT3 newRot = {};
+        newRot.x = rotEditX->value();
+        newRot.y = rotEditY->value();
+        newRot.z = rotEditZ->value();
+
+        gWorldEditor.pickedActor->SetRotation(newRot);
     }
 }
 
