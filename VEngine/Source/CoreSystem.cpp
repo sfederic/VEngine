@@ -141,14 +141,6 @@ LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam
 
 	case WM_KEYDOWN:
 		gInputSystem.StoreKeyDownInput(wparam);
-
-		//Close editor
-		if (wparam == VK_ESCAPE)
-		{
-			DestroyWindow(window);
-			return 0;
-		}
-
 		break;
 
 	case WM_KEYUP:
@@ -188,6 +180,7 @@ LRESULT CALLBACK WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam
 		{
 			gInputSystem.StoreMouseWheelUp();
 		}
+		break;
 
 	case WM_SIZE:
 		if (gRenderSystem.swapchain)

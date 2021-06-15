@@ -93,6 +93,9 @@ public:
 	bool GetMouseWheelUp();
 	bool GetMouseWheelDown();
 
+	void ClearUpKeys();
+	void ClearDownKeys(int keyToClear);
+
 	std::vector<int> currentDownKeys;
 	std::vector<int> currentUpKeys;
 
