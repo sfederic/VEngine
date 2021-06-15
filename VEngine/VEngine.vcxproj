@@ -194,6 +194,7 @@
     <ClCompile Include="Source\PropertyWidgets\VectorWidget.cpp" />
     <ClCompile Include="Source\Actors\TestActor2.cpp" />
     <ClCompile Include="Source\VWidget.cpp" />
+    <ClCompile Include="Source\VectorCommand.cpp" />
     <QtRcc Include="EditorMainWindow.qrc" />
     <QtUic Include="EditorMainWindow.ui" />
     <QtMoc Include="EditorMainWindow.h" />
@@ -281,6 +282,7 @@
     <ClInclude Include="Source\PropertyWidgets\VectorWidget.h" />
     <ClInclude Include="Source\Actors\TestActor2.h" />
     <ClInclude Include="Source\VWidget.h" />
+    <ClInclude Include="Source\VectorCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
