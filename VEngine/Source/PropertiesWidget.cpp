@@ -16,7 +16,7 @@
 #include "PropertyWidgets/BoolWidget.h"
 #include <qscrollarea.h>
 #include "CommandSystem.h"
-#include "FloatCommand.h"
+#include "Commands/VectorCommand.h"
 
 PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
 {
@@ -148,13 +148,14 @@ void PropertiesWidget::SetActorPosition()
     Actor* picked = gWorldEditor.pickedActor;
     if (picked)
     {
-        float posX = posEditX->value();
-        float posY = posEditY->value();
-        float posZ = posEditZ->value();
+        XMFLOAT3 newPos = {};
+        newPos.x = posEditX->value();
+        newPos.y = posEditY->value();
+        newPos.z = posEditZ->value();
 
-        gCommandSystem.AddCommand(new FloatCommand(posX, &picked->transform.position.x));
+        gCommandSystem.AddCommand(new VectorCommand(newPos, &picked->transform.position));
 
-        gWorldEditor.pickedActor->SetPosition(posX, posY, posZ);
+        gWorldEditor.pickedActor->SetPosition(newPos);
     }
 }
 

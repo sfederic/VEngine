@@ -266,13 +266,13 @@
     <ClCompile Include="Source\Properties.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\FloatCommand.cpp">
+    <ClCompile Include="Source\Commands\FloatCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\CommandSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\VectorCommand.cpp">
+    <ClCompile Include="Source\Commands\VectorCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -511,16 +511,16 @@
     <ClInclude Include="Source\Properties.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ICommand.h">
+    <ClInclude Include="Source\Commands\ICommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\FloatCommand.h">
+    <ClInclude Include="Source\Commands\FloatCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\CommandSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\VectorCommand.h">
+    <ClInclude Include="Source\Commands\VectorCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

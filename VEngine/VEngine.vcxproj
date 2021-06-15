@@ -117,7 +117,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\CommandSystem.cpp" />
-    <ClCompile Include="Source\FloatCommand.cpp" />
+    <ClCompile Include="Source\Commands\FloatCommand.cpp" />
     <ClCompile Include="Source\Properties.cpp" />
     <ClCompile Include="Source\Material.cpp" />
     <ClCompile Include="Source\DebugDraw.cpp" />
@@ -194,7 +194,7 @@
     <ClCompile Include="Source\PropertyWidgets\VectorWidget.cpp" />
     <ClCompile Include="Source\Actors\TestActor2.cpp" />
     <ClCompile Include="Source\VWidget.cpp" />
-    <ClCompile Include="Source\VectorCommand.cpp" />
+    <ClCompile Include="Source\Commands\VectorCommand.cpp" />
     <QtRcc Include="EditorMainWindow.qrc" />
     <QtUic Include="EditorMainWindow.ui" />
     <QtMoc Include="EditorMainWindow.h" />
@@ -202,8 +202,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CommandSystem.h" />
-    <ClInclude Include="Source\FloatCommand.h" />
-    <ClInclude Include="Source\ICommand.h" />
+    <ClInclude Include="Source\Commands\FloatCommand.h" />
+    <ClInclude Include="Source\Commands\ICommand.h" />
     <ClInclude Include="Source\Properties.h" />
     <ClInclude Include="Source\Material.h" />
     <ClInclude Include="Source\DebugDraw.h" />
@@ -282,7 +282,7 @@
     <ClInclude Include="Source\PropertyWidgets\VectorWidget.h" />
     <ClInclude Include="Source\Actors\TestActor2.h" />
     <ClInclude Include="Source\VWidget.h" />
-    <ClInclude Include="Source\VectorCommand.h" />
+    <ClInclude Include="Source\Commands\VectorCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

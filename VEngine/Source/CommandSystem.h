@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ICommand.h"
+#include "Commands/ICommand.h"
 #include <vector>
 
 //currently just for editor undo/redo, but I guess the pattern is generic enough that it 
