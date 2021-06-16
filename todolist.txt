@@ -1,6 +1,7 @@
 Todo List for engine:
 
 -Input system buffering: need to handle multiple inputs per frame
+-Binary serialisation/deserialisation: just use std::hash and use it instead of the variable name
 -C++ RTTI
 -Engine-wide Undo/Redo 
 -Experimental live gameplay editing
