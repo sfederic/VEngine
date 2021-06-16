@@ -2,11 +2,14 @@
 #include <QDoubleValidator>
 #include <limits>
 
-TransformEditWidget::TransformEditWidget(float val, QWidget* parent) : QDoubleSpinBox(parent)
+TransformEditWidget::TransformEditWidget(float value_, QWidget* parent) : QDoubleSpinBox(parent)
 {
     setDecimals(4);
     setMinimum(std::numeric_limits<float>::lowest());
     setMaximum(std::numeric_limits<double>::max());
     setButtonSymbols(QAbstractSpinBox::NoButtons);
-    setValue(val);
+
+    //value = value_;
+
+    setValue(value_);
 }

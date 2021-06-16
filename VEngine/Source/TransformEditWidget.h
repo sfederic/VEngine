@@ -6,6 +6,8 @@
 class TransformEditWidget : public QDoubleSpinBox
 {
 public:
-    TransformEditWidget(float val, QWidget* parent = 0);
-};
+    TransformEditWidget(float value_, QWidget* parent = 0);
 
+private: 
+    //float* value;
+};

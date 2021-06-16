@@ -25,6 +25,9 @@ PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
     //Position
     QLabel* posLabel = new QLabel("Position");
 
+    //TODO: this all needs to change and get created on actor clicks in the viewport 
+    //so that the undo system will work with pointer refs into the TransformEditWidgets.
+
     //QDoubleSpinBox::editingFinished calls its signal function twice for some reason.
     posEditX = new TransformEditWidget(0.f, this);
     connect(posEditX, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorPosition);
