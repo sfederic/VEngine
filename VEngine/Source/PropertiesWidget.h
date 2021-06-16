@@ -1,7 +1,6 @@
 #pragma once
 
 #include <qwidget.h>
-#include "TransformEditWidget.h"
 
 class QLineEdit;
 class ActorSystem;
@@ -10,18 +9,6 @@ class QVBoxLayout;
 class PropertiesWidget : public QWidget
 {
 public:
-    TransformEditWidget* posEditX;
-    TransformEditWidget* posEditY;
-    TransformEditWidget* posEditZ;
-
-    TransformEditWidget* rotEditX;
-    TransformEditWidget* rotEditY;
-    TransformEditWidget* rotEditZ;
-
-    TransformEditWidget* scaleEditX;
-    TransformEditWidget* scaleEditY;
-    TransformEditWidget* scaleEditZ;
-
     QLineEdit* actorName;
 
     QLineEdit* actorSystemName;

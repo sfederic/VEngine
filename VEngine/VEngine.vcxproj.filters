@@ -134,9 +134,6 @@
     <ClCompile Include="Source\ToolbarDock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TransformEditWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\UISystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -275,6 +272,9 @@
     <ClCompile Include="Source\Commands\VectorCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PropertyWidgets\Float3Widget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Actor.h">
@@ -371,9 +371,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\ToolbarDock.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TransformEditWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\UISystem.h">
@@ -521,6 +518,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Commands\VectorCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PropertyWidgets\Float3Widget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -16,8 +16,5 @@ FloatWidget::FloatWidget(float* value, QWidget* parent) : QDoubleSpinBox(parent)
 
 void FloatWidget::SetValue()
 {
-	if (_value)
-	{
-		*_value = (float)value();
-	}
+	*_value = (float)value();
 }

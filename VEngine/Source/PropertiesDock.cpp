@@ -14,6 +14,7 @@
 #include <typeindex>
 #include <qscrollarea.h>
 #include "Material.h"
+#include "PropertyWidgets/Float3Widget.h"
 
 PropertiesDock::PropertiesDock(const char* title) : QDockWidget(title)
 {
@@ -96,6 +97,11 @@ void PropertiesDock::DisplayActorSystemProperties(Actor* actor)
         {
             auto floatWidget = new FloatWidget((float*)actorProperty.second);
             grid->addWidget(floatWidget, currentGridRow, propertyDataColumn);
+        }
+        else if (type->second == typeid(XMFLOAT3))
+        {
+            auto float3Widget = new Float3Widget((float*)actorProperty.second);
+            grid->addWidget(float3Widget, currentGridRow, propertyDataColumn);
         }
         else if (type->second == typeid(XMVECTOR))
         {

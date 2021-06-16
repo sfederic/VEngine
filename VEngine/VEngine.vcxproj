@@ -116,6 +116,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\PropertyWidgets\Float3Widget.cpp" />
     <ClCompile Include="Source\CommandSystem.cpp" />
     <ClCompile Include="Source\Commands\FloatCommand.cpp" />
     <ClCompile Include="Source\Properties.cpp" />
@@ -182,7 +183,6 @@
     <ClCompile Include="Source\Actors\TestActor.cpp" />
     <ClCompile Include="Source\TimerSystem.cpp" />
     <ClCompile Include="Source\ToolbarDock.cpp" />
-    <ClCompile Include="Source\TransformEditWidget.cpp" />
     <ClCompile Include="Source\UISystem.cpp" />
     <ClCompile Include="Source\VString.cpp" />
     <ClCompile Include="Source\World.cpp" />
@@ -201,6 +201,7 @@
     <ClCompile Include="EditorMainWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\PropertyWidgets\Float3Widget.h" />
     <ClInclude Include="Source\CommandSystem.h" />
     <ClInclude Include="Source\Commands\FloatCommand.h" />
     <ClInclude Include="Source\Commands\ICommand.h" />
@@ -270,7 +271,6 @@
     <ClInclude Include="Source\Actors\TestActor.h" />
     <ClInclude Include="Source\TimerSystem.h" />
     <ClInclude Include="Source\ToolbarDock.h" />
-    <ClInclude Include="Source\TransformEditWidget.h" />
     <ClInclude Include="Source\UISystem.h" />
     <ClInclude Include="Source\VString.h" />
     <ClInclude Include="Source\World.h" />
