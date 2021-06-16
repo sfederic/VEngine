@@ -5,7 +5,7 @@
 class FloatWidget : public QDoubleSpinBox
 {
 public:
-	FloatWidget(float* value, QWidget* parent = 0);
+	FloatWidget(float value, QWidget* parent = 0);
 
 private:
 	void SetValue();

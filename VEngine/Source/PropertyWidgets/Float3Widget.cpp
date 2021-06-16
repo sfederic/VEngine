@@ -1,14 +1,9 @@
 #include "Float3Widget.h"
 #include <qboxlayout.h>
 
-Float3Widget::Float3Widget(XMFLOAT3* value, QWidget* parent)
+Float3Widget::Float3Widget(XMFLOAT3* value, QWidget* parent) : QWidget(parent)
 {
 	_value = value;
-
-	setDecimals(4);
-	setMinimum(std::numeric_limits<float>::lowest());
-	setMaximum(std::numeric_limits<double>::max());
-	setButtonSymbols(QAbstractSpinBox::NoButtons);
 
 	connect(&xSpinbox, &QDoubleSpinBox::editingFinished, this, &Float3Widget::SetValue);
 	connect(&ySpinbox, &QDoubleSpinBox::editingFinished, this, &Float3Widget::SetValue);
@@ -20,8 +15,6 @@ Float3Widget::Float3Widget(XMFLOAT3* value, QWidget* parent)
 	hLayout->addWidget(&zSpinbox);
 
 	setLayout(hLayout);
-
-	connect(this, &QDoubleSpinBox::editingFinished, this, &Float3Widget::SetValue);
 }
 
 void Float3Widget::SetValue()

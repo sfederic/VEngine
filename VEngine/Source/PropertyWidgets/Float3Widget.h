@@ -5,7 +5,7 @@
 
 using namespace DirectX;
 
-class Float3Widget : public QDoubleSpinBox
+class Float3Widget : public QWidget
 {
 public:
 	Float3Widget(XMFLOAT3* value, QWidget* parent = 0);

@@ -17,11 +17,76 @@
 #include <qscrollarea.h>
 #include "CommandSystem.h"
 #include "Commands/VectorCommand.h"
+#include "PropertyWidgets/FloatWidget.h"
 
 PropertiesWidget::PropertiesWidget(QWidget* parent) : QWidget(parent)
 {
     QGridLayout* grid = new QGridLayout();
+
+    //Position
+    QLabel* posLabel = new QLabel("Position");
+
+    //TODO: this all needs to change and get created on actor clicks in the viewport 
+    //so that the undo system will work with pointer refs into the TransformEditWidgets.
+
+    //QDoubleSpinBox::editingFinished calls its signal function twice for some reason.
+    posEditX = new FloatWidget(0.f, this);
+    connect(posEditX, &FloatWidget::editingFinished, this, &PropertiesWidget::SetActorPosition);
+    posEditY = new FloatWidget(0.f, this);
+    connect(posEditY, &FloatWidget::editingFinished, this, &PropertiesWidget::SetActorPosition);
+    posEditZ = new FloatWidget(0.f, this);
+    connect(posEditZ, &FloatWidget::editingFinished, this, &PropertiesWidget::SetActorPosition);
+
+    QLabel* xLabel = new QLabel("X");
+    xLabel->setStyleSheet("border: 1px solid red;");
+    QLabel* yLabel = new QLabel("Y");
+    yLabel->setStyleSheet("border: 1px solid green;");
+    QLabel* zLabel = new QLabel("Z");
+    zLabel->setStyleSheet("border: 1px solid blue;");
+
+    grid->addWidget(xLabel, 0, 1);
+    grid->addWidget(yLabel, 0, 2);
+    grid->addWidget(zLabel, 0, 3);
+
+    grid->addWidget(posLabel, 1, 0);
+    grid->addWidget(posEditX, 1, 1);
+    grid->addWidget(posEditY, 1, 2);
+    grid->addWidget(posEditZ, 1, 3);
+
+    //Rotation
+    rotEditX = new FloatWidget(0.0f, this);
+    connect(rotEditX, &FloatWidget::editingFinished, this, &PropertiesWidget::SetActorRotation);
+    rotEditY = new FloatWidget(0.0f, this);
+    connect(rotEditY, &FloatWidget::editingFinished, this, &PropertiesWidget::SetActorRotation);
+    rotEditZ = new FloatWidget(0.0f, this);
+    connect(rotEditZ, &FloatWidget::editingFinished, this, &PropertiesWidget::SetActorRotation);
+
+    QLabel* rotLabel = new QLabel("Rotation");
+
+    grid->addWidget(rotLabel, 2, 0);
+    grid->addWidget(rotEditX, 2, 1);
+    grid->addWidget(rotEditY, 2, 2);
+    grid->addWidget(rotEditZ, 2, 3);
+
+    //Scale
+    scaleEditX = new FloatWidget(0.0f, this);
+    connect(scaleEditX, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorScale);
+    scaleEditY = new FloatWidget(0.0f, this);
+    connect(scaleEditY, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorScale);
+    scaleEditZ = new FloatWidget(0.0f, this);
+    connect(scaleEditZ, &QDoubleSpinBox::editingFinished, this, &PropertiesWidget::SetActorScale);
+
+    QLabel* scaleLabel = new QLabel("Scale");
+
+    grid->addWidget(scaleLabel, 3, 0);
+    grid->addWidget(scaleEditX, 3, 1);
+    grid->addWidget(scaleEditY, 3, 2);
+    grid->addWidget(scaleEditZ, 3, 3);
+
+    grid->setAlignment(Qt::AlignTop);
+
     QVBoxLayout* vLayoutTop = new QVBoxLayout();
+
     vLayoutTop->addLayout(grid);
 
     //Actor/ActorSystem Properties
@@ -88,9 +153,9 @@ void PropertiesWidget::SetActorPosition()
     if (picked)
     {
         XMFLOAT3 newPos = {};
-        //newPos.x = posEditX->value();
-        //newPos.y = posEditY->value();
-        //newPos.z = posEditZ->value();
+        newPos.x = posEditX->value();
+        newPos.y = posEditY->value();
+        newPos.z = posEditZ->value();
 
         gCommandSystem.AddCommand(new VectorCommand(newPos, &picked->transform.position));
 
@@ -104,9 +169,9 @@ void PropertiesWidget::SetActorScale()
     if (picked)
     {
         XMFLOAT3 newScale = {};
-        //newScale.x = scaleEditX->value();
-        //newScale.y = scaleEditY->value();
-        //newScale.z = scaleEditZ->value();
+        newScale.x = scaleEditX->value();
+        newScale.y = scaleEditY->value();
+        newScale.z = scaleEditZ->value();
 
         gCommandSystem.AddCommand(new VectorCommand(newScale, &picked->transform.scale));
 
@@ -120,9 +185,9 @@ void PropertiesWidget::SetActorRotation()
     if (picked)
     {
         XMFLOAT3 newRot = {};
-        //newRot.x = rotEditX->value();
-        //newRot.y = rotEditY->value();
-        //newRot.z = rotEditZ->value();
+        newRot.x = rotEditX->value();
+        newRot.y = rotEditY->value();
+        newRot.z = rotEditZ->value();
 
         gWorldEditor.pickedActor->SetRotation(newRot);
     }
@@ -198,7 +263,7 @@ void PropertiesWidget::Tick()
     Actor* picked = gWorldEditor.pickedActor;
     if (picked)
     {
-        /*XMFLOAT3 pos = picked->GetPositionFloat3();
+        XMFLOAT3 pos = picked->GetPositionFloat3();
         posEditX->setValue(pos.x);
         posEditY->setValue(pos.y);
         posEditZ->setValue(pos.z);
@@ -211,7 +276,7 @@ void PropertiesWidget::Tick()
         XMFLOAT3 scale = picked->GetScale();
         scaleEditX->setValue(scale.x);
         scaleEditY->setValue(scale.y);
-        scaleEditZ->setValue(scale.z);*/
+        scaleEditZ->setValue(scale.z);
     }
 }
 

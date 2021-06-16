@@ -5,10 +5,23 @@
 class QLineEdit;
 class ActorSystem;
 class QVBoxLayout;
+class FloatWidget;
 
 class PropertiesWidget : public QWidget
 {
 public:
+    FloatWidget* posEditX;
+    FloatWidget* posEditY;
+    FloatWidget* posEditZ;
+
+    FloatWidget* scaleEditX;
+    FloatWidget* scaleEditY;
+    FloatWidget* scaleEditZ;
+
+    FloatWidget* rotEditX;
+    FloatWidget* rotEditY;
+    FloatWidget* rotEditZ;
+
     QLineEdit* actorName;
 
     QLineEdit* actorSystemName;

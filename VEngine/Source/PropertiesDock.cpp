@@ -95,12 +95,12 @@ void PropertiesDock::DisplayActorSystemProperties(Actor* actor)
         }
         else if (type->second == typeid(float))
         {
-            auto floatWidget = new FloatWidget((float*)actorProperty.second);
-            grid->addWidget(floatWidget, currentGridRow, propertyDataColumn);
+            //auto floatWidget = new FloatWidget((float*)actorProperty.second);
+            //grid->addWidget(floatWidget, currentGridRow, propertyDataColumn);
         }
         else if (type->second == typeid(XMFLOAT3))
         {
-            auto float3Widget = new Float3Widget((float*)actorProperty.second);
+            auto float3Widget = new Float3Widget((XMFLOAT3*)actorProperty.second);
             grid->addWidget(float3Widget, currentGridRow, propertyDataColumn);
         }
         else if (type->second == typeid(XMVECTOR))
