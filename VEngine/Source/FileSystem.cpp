@@ -18,7 +18,7 @@ void FileSystem::Tick()
 	//actorsystem save/load input
 	if (gInputSystem.GetAsyncKey(Keys::Ctrl))
 	{
-		if (gInputSystem.GetKeyDownState(Keys::S))
+		if (gInputSystem.GetKeyUpState(Keys::S))
 		{
 			gFileSystem.WriteAllActorSystems(GetWorld(), "test");
 		}

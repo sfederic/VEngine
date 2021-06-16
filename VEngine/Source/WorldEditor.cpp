@@ -76,7 +76,7 @@ void WorldEditor::DuplicateActor()
 {
 	if (gInputSystem.GetAsyncKey(Keys::Ctrl))
 	{
-		if (gInputSystem.GetKeyDownState(Keys::D))
+		if (gInputSystem.GetKeyUpState(Keys::D))
 		{
 			Transform transform = pickedActor->transform;
 			Actor* newActor = pickedActor->linkedActorSystem->SpawnActor(transform);
