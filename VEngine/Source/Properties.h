@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <optional>
 #include <typeindex>
+#include "GlobalDefines.h"
 
 //Lot of good references and ideas on serialisation. Heaps of ideas on reflection, custom compile stages, header parsing.
 //REF:https://google.github.io/flatbuffers/flatbuffers_guide_tutorial.html
@@ -17,6 +18,9 @@
 //call it when needed. Maybe look into some way to cache it. Performance wasn't a huge issue in testing.
 struct Properties
 {
+#ifndef GAME_RELEASE
+
+	//PROPERTIES FOR TEXT
 	template <typename T>
 	void Add(const std::string& name, T* data)
 	{
@@ -43,5 +47,37 @@ struct Properties
 
 	std::unordered_map<std::string, void*> dataMap;
 	std::unordered_map<std::string, std::optional<std::type_index>> typeMap;
-};
 
+#else //GAME_RELEASE
+
+	//PROPERTIES FOR BINARY
+	template <typename T>
+	void Add(const std::string& name, T* data)
+	{
+		size_t hash = std::hash < std::string>{}(name);
+		dataMap[hash] = data;
+		typeMap[hash] = typeid(T);
+	}
+
+	void* GetData(size_t hash)
+	{
+		auto& dataMapIt = dataMap.find(hash);
+		if (dataMapIt != dataMap.end())
+		{
+			return dataMapIt->second;
+		}
+
+		return nullptr;
+	}
+
+	std::type_index GetType(size_t hash)
+	{
+		auto& typeMapIt = typeMap.find(hash);
+		return typeMapIt->second.value();
+	}
+
+	std::unordered_map<size_t, void*> dataMap;
+	std::unordered_map<size_t, std::optional<std::type_index>> typeMap;
+
+#endif
+};
