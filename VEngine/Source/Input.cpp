@@ -208,7 +208,8 @@ void InputSystem::InputReset()
 	bMouseWheelDown = false;
 	bMouseWheelUp = false;
 
-	ClearUpKeys();
+	currentDownKeys.clear();
+	currentUpKeys.clear();
 }
 
 void InputSystem::StoreMouseWheelUp()
@@ -229,12 +230,6 @@ bool InputSystem::GetMouseWheelUp()
 bool InputSystem::GetMouseWheelDown()
 {
 	return bMouseWheelDown;
-}
-
-//Clearing the up keys can't be done like down keys, you can basically only have one per frame.
-void InputSystem::ClearUpKeys()
-{
-	currentUpKeys.clear();
 }
 
 void InputSystem::ClearDownKeys(int keyToClear)
