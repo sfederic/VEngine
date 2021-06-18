@@ -13,6 +13,9 @@
 //REF: https://peted.azurewebsites.net/hololens-fbx-loading-c/
 //REF: https://help.autodesk.com/view/FBX/2020/ENU/
 
+// Great GameDev.net reference on using FBX SDK and animation.
+//REF: https://www.gamedev.net/tutorials/_/technical/graphics-programming-and-theory/how-to-work-with-fbx-sdk-r3582/
+
 //NOTE: For the most part, not going to use FBX models with lights, cameras and extra nodes. One model should suffice. Import() code reflects that.
 //NOTE: Models needto be triangluated, not working with control points (see asserts() below)
 
@@ -110,7 +113,6 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 
 								//This isn't too bad, but FBX file without animation still have eAnimated flags set
 								//(for some reason) so placing this here is the quick fix. Better fix is doing this in the component.
-								currentActorSystem->bAnimated = true;
 
 								for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
 								{
@@ -147,7 +149,6 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 									//animFrame.pos.y = pos[1];
 									//animFrame.pos.z = pos[2];
 
-									currentActorSystem->animData.frames.push_back(animFrame);
 								}
 							}
 						}
@@ -215,14 +216,12 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 			mat.colour.y = ambient.mData[1];
 			mat.colour.z = ambient.mData[2];
 			mat.colour.w = 1.0f;
-			currentActorSystem->material = &mat;
 		}
 
 		//Array setup
 		int numVerts = mesh->GetControlPointsCount();
 		int vectorSize = numVerts * mesh->GetPolygonSize(0);
 		assert((vectorSize % 3) == 0 && "FBX model isn't triangulated"); //This is a check to make sure the mesh is triangulated (in blender, Ctrl+T)
-		currentActorSystem->modelData.verts.reserve(vectorSize);
 
 		//Geometry Elements
 		FbxGeometryElementNormal* normals = mesh->GetElementNormal();
