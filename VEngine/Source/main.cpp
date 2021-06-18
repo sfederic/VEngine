@@ -63,12 +63,13 @@ int main(int argc, char* argv[])
     gWorldEditor.Init();
 
    
+    GetWorld()->AddActorSystem(&testActorSystem);
+
+
     //Test debug primitive drawing
     debugBox.Start();
     debugSphere.Start();
     
-    testActorSystem.SpawnActor(Transform());
-    GetWorld()->AddActorSystem(&testActorSystem);
 
     //Test in-game UI widget stuff
     VWidget widget;

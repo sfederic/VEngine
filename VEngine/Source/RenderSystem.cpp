@@ -397,6 +397,7 @@ void RenderSystem::RenderActorSystem(World* world)
 		};
 		context->IASetVertexBuffers(0, _countof(vertexBuffers), vertexBuffers, &strides, &offsets);
 		
+		context->IASetIndexBuffer(actorSystem->pso.indexBuffer->data, DXGI_FORMAT_R16_UINT, 0);
 
 		//Constant buffer register values
 		const int cbMatrixRegister = 0;
@@ -434,8 +435,8 @@ void RenderSystem::RenderActorSystem(World* world)
 			context->UpdateSubresource(actorSystem->pso.instancedDataStructuredBuffer->data, 0, nullptr, instanceData.data(), 0, 0);
 		}
 
-		context->DrawInstanced(actorSystem->modelData.verts.size(),
-			actorSystem->actors.size(), 0, 0);
+		context->DrawIndexedInstanced(actorSystem->modelData.indices.size(),
+			actorSystem->actors.size(), 0, 0, 0);
 	}
 }
 

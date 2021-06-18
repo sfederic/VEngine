@@ -138,7 +138,7 @@ public:
 			numVertices = (byteWidth * actors.size()) / sizeof(Vertex);
 
 			gRenderSystem.CreateVertexBuffer(byteWidth, modelData.verts.data(), this);
-			gRenderSystem.CreateDefaultBuffer(sizeof(uint16_t) * modelData.indices.size(),
+			gRenderSystem.CreateIndexBuffer(sizeof(uint16_t) * modelData.indices.size(),
 				modelData.indices.data(), this);
 
 			CreateStructuredBuffer();
