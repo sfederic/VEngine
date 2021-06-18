@@ -11,6 +11,8 @@
 
 //REF: https://github.com/peted70/hololens-fbx-viewer/tree/master/HolographicAppForOpenGLES1/include
 //REF: https://peted.azurewebsites.net/hololens-fbx-loading-c/
+
+// The oficial docs on the FBX SDK (the current version is hard to find, google brings you to 2014 docs)
 //REF: https://help.autodesk.com/view/FBX/2020/ENU/
 
 // Great GameDev.net reference on using FBX SDK and animation.
