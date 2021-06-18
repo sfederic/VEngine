@@ -138,6 +138,8 @@ public:
 			numVertices = (byteWidth * actors.size()) / sizeof(Vertex);
 
 			gRenderSystem.CreateVertexBuffer(byteWidth, modelData.verts.data(), this);
+			gRenderSystem.CreateDefaultBuffer(sizeof(uint16_t) * modelData.indices.size(),
+				modelData.indices.data(), this);
 
 			CreateStructuredBuffer();
 
@@ -172,6 +174,7 @@ public:
 	Texture* GetTexture();
 
 	void SetVertexBuffer(Buffer* vertexBuffer);
+	void SetIndexBuffer(Buffer* indexBuffer);
 	void SetInstanceBuffer(Buffer* instanceBuffer);
 	void SetSamplerState(Sampler* sampler);
 	void SetRasterizerState(RasterizerState* rasterizerState);

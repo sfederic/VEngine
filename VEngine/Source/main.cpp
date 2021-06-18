@@ -67,6 +67,8 @@ int main(int argc, char* argv[])
     debugBox.Start();
     debugSphere.Start();
     
+    testActorSystem.SpawnActor(Transform());
+    GetWorld()->AddActorSystem(&testActorSystem);
 
     //Test in-game UI widget stuff
     VWidget widget;

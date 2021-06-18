@@ -33,7 +33,8 @@ public:
 	void CreateVertexShader();
 	void CreatePixelShader();
 	void CreateAllShaders();
-	void CreateVertexBuffer(UINT size, const void* data, class ActorSystem* actor) ;
+	void CreateVertexBuffer(UINT size, const void* data, class ActorSystem* actor);
+	void CreateIndexBuffer(UINT size, const void* data, class ActorSystem* actor);
 	IDXGISwapChain3* GetSwapchain();
 	void Present();
 	void Flush();

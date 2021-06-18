@@ -232,6 +232,8 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 		int polyIndexCounter = 0; //Used to index into normals and UVs on a per vertex basis
 		int polyCount = mesh->GetPolygonCount();
 
+		currentActorSystem->modelData.verts.reserve(polyCount);
+
 		//Main import loop
 		for (int i = 0; i < polyCount; i++)
 		{

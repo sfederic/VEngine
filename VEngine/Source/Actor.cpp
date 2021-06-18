@@ -494,6 +494,11 @@ void ActorSystem::SetVertexBuffer(Buffer* vertexBuffer)
 	pso.vertexBuffer = vertexBuffer;
 }
 
+void ActorSystem::SetIndexBuffer(Buffer* indexBuffer)
+{
+	pso.indexBuffer = indexBuffer;
+}
+
 void ActorSystem::SetInstanceBuffer(Buffer* instanceBuffer)
 {
 	pso.instanceBuffer = instanceBuffer;

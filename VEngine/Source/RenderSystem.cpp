@@ -265,10 +265,16 @@ void RenderSystem::CreateMainConstantBuffers()
 //One vertex buffer per actor system
 void RenderSystem::CreateVertexBuffer(UINT size, const void* data, ActorSystem* system)
 {
-	//TODO: this is a mem leak.
-	Buffer* buffer = new Buffer;
+	Buffer* buffer = new Buffer();
 	buffer->data = CreateDefaultBuffer(size, D3D11_BIND_VERTEX_BUFFER, data);
 	system->SetVertexBuffer(buffer);
+}
+
+void RenderSystem::CreateIndexBuffer(UINT size, const void* data, ActorSystem* actor)
+{
+	Buffer* buffer = new Buffer();
+	buffer->data = CreateDefaultBuffer(size, D3D11_BIND_INDEX_BUFFER, data);
+	actor->SetIndexBuffer(buffer);
 }
 
 IDXGISwapChain3* RenderSystem::GetSwapchain()
