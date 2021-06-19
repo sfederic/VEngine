@@ -44,7 +44,8 @@ struct ModelData
 		indices.clear();
 	}
 
-	bool CheckForDuplicateVertices(Vertex& vert);
+	bool CheckDuplicateVertices(Vertex& vert);
+	bool CheckDuplicateIndices(uint16_t index);
 
 	std::vector<Vertex> verts;
 	std::vector<uint16_t> indices;

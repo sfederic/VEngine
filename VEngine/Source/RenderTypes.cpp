@@ -1,7 +1,7 @@
 #include "RenderTypes.h"
 #include "MathHelpers.h"
 
-bool ModelData::CheckForDuplicateVertices(Vertex& vert)
+bool ModelData::CheckDuplicateVertices(Vertex& vert)
 {
 	auto pos = XMLoadFloat3(&vert.pos);
 
@@ -11,8 +11,28 @@ bool ModelData::CheckForDuplicateVertices(Vertex& vert)
 		XMVECTOR p = XMLoadFloat3(&verts[i].pos);
 		if (VecEqual(p, pos, 0.0f))
 		{
-			indices.push_back(i);
 			return true;
+		}
+	}
+
+	return false;
+}
+
+//Duplicate checks for indices only return true if the index is present in the array
+//more than once. Eg. For {2, 1, 0}, {3, 1, 2}, 2 and 1 are the duplicates.
+bool ModelData::CheckDuplicateIndices(uint16_t index)
+{
+	int duplicateCounter = 0;
+
+	for (int i = 0; i < indices.size(); i++)
+	{
+		if (index == indices[i])
+		{
+			duplicateCounter++;
+			if(duplicateCounter >= 2)
+			{
+				return true;
+			}
 		}
 	}
 

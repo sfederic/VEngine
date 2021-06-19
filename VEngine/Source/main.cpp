@@ -62,9 +62,7 @@ int main(int argc, char* argv[])
     gAudioSystem.Init();
     gWorldEditor.Init();
 
-   
     GetWorld()->AddActorSystem(&testActorSystem);
-
 
     //Test debug primitive drawing
     debugBox.Start();

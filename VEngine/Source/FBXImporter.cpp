@@ -243,7 +243,18 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 			for (int j = 0; j < polySize; j++)
 			{
 				int index = mesh->GetPolygonVertex(i, j);
-				
+
+				//The index stuff was a bitch to get right. Keep an eye on this part
+				//if you ever want to change it somehow later.
+				currentActorSystem->modelData.indices.push_back(polyIndexCounter);
+
+				if (currentActorSystem->modelData.CheckDuplicateIndices(index))
+				{
+					//If you ever need to go back to Draw()/DrawInstanced without the indices,
+					//just comment this out.
+					continue;
+				}
+
 				Vertex vert = {};
 
 				//Position
@@ -251,16 +262,6 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 				vert.pos.x = (float)pos.mData[0];
 				vert.pos.y = (float)pos.mData[1];
 				vert.pos.z = (float)pos.mData[2];
-
-				//TODO: indices are wrong without the vertex posisitons being compressed down
-				if(currentActorSystem->modelData.CheckForDuplicateVertices(vert))
-				{
-					continue;
-				}
-				else
-				{
-					currentActorSystem->modelData.indices.push_back(index);
-				}
 
 				//UV
 				if (uvs)
@@ -302,12 +303,6 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 				currentActorSystem->modelData.verts.push_back(vert);
 				polyIndexCounter++;
 			}
-		}
-
-		assert((currentActorSystem->modelData.indices.size() % 3) == 0);
-		for (auto it = currentActorSystem->modelData.indices.begin(); it != currentActorSystem->modelData.indices.end(); it += 3)
-		{
-			std::swap(*it, *(it+2));
 		}
 	}
 }
