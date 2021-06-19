@@ -88,7 +88,8 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 		throw;
 	}*/
 
-	FbxInt nodeFlags = node->GetAllObjectFlags();
+	//Animation code: works for singular transforms, not taking bone weights into account yet
+	/*FbxInt nodeFlags = node->GetAllObjectFlags();
 	if (nodeFlags & FbxPropertyFlags::eAnimated)
 	{
 		int numAnimStacks = scene->GetSrcObjectCount<FbxAnimStack>();
@@ -158,7 +159,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 				}
 			}
 		}
-	}
+	}*/
 
 	//std::unordered_map<int, BoneWeights> boneWeightsMap;
 
