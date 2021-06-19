@@ -305,5 +305,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node)
 				polyIndexCounter++;
 			}
 		}
+
+		assert(currentActorSystem->modelData.indices.size() % 3 == 0 && "Num of indices won't be matching vertices");
 	}
 }
