@@ -52,16 +52,28 @@ XMFLOAT3 Actor::GetPositionFloat3()
 void Actor::SetPosition(XMVECTOR v)
 {
 	XMStoreFloat3(&transform.position, v);
+	SetChildPositions(v);
 }
 
 void Actor::SetPosition(float x, float y, float z)
 {
 	transform.position = XMFLOAT3(x, y, z);
+	SetChildPositions(XMVectorSet(x, y, z, 1.0f));
 }
 
 void Actor::SetPosition(XMFLOAT3 pos)
 {
 	transform.position = pos;
+	SetChildPositions(XMLoadFloat3(&pos));
+}
+
+void Actor::SetChildPositions(XMVECTOR pos)
+{
+	for (Actor* child : children)
+	{
+		XMVECTOR offset = XMLoadFloat3(&child->transform.position) + pos;
+		child->SetPosition(offset);
+	}
 }
 
 void Actor::SetRotation(XMVECTOR quaternion)
@@ -79,6 +91,8 @@ void Actor::SetRotation(XMVECTOR axis, float angle)
 
 	float andleRadians = XMConvertToRadians(angle);
 	XMStoreFloat4(&transform.quatRotation, XMQuaternionRotationAxis(axis, andleRadians));
+
+	SetChildRotations(XMLoadFloat4(&transform.quatRotation));
 }
 
 void Actor::SetRotation(float pitch, float yaw, float roll)
@@ -89,6 +103,8 @@ void Actor::SetRotation(float pitch, float yaw, float roll)
 	float yawRadians = XMConvertToRadians(yaw);
 	float rollRadians = XMConvertToRadians(roll);
 	XMStoreFloat4(&transform.quatRotation, XMQuaternionRotationRollPitchYaw(pitchRadians, yawRadians, rollRadians));
+
+	SetChildRotations(XMLoadFloat4(&transform.quatRotation));
 }
 
 void Actor::SetRotation(XMFLOAT3 euler)
@@ -99,6 +115,18 @@ void Actor::SetRotation(XMFLOAT3 euler)
 	float yawRadians = XMConvertToRadians(euler.y);
 	float rollRadians = XMConvertToRadians(euler.z);
 	XMStoreFloat4(&transform.quatRotation, XMQuaternionRotationRollPitchYaw(pitchRadians, yawRadians, rollRadians));
+
+	SetChildRotations(XMLoadFloat4(&transform.quatRotation));
+
+}
+
+void Actor::SetChildRotations(XMVECTOR rot)
+{
+	for (Actor* child : children)
+	{
+		XMVECTOR childRot = XMQuaternionMultiply(XMLoadFloat4(&child->transform.quatRotation), rot);
+		child->SetRotation(childRot);
+	}
 }
 
 XMFLOAT4 Actor::GetRotationQuat()
@@ -131,11 +159,6 @@ XMMATRIX Actor::DecomposeTransformationMatrix(Actor* actor)
 		XMMATRIX actorMatrix = actor->GetTransformationMatrix();
 		actor->transform.Decompose(actorMatrix);
 
-		//Set previous 
-		actor->transform.oldPosition = actor->transform.position;
-		actor->transform.oldScale = actor->transform.scale;
-		actor->transform.oldQuatRotation = actor->transform.quatRotation;
-
 		return actorMatrix;
 	}
 
@@ -149,26 +172,7 @@ XMMATRIX Actor::DecomposeTransformationMatrix(Actor* actor)
 	XMMATRIX toRoot = toParent * parentToRoot;
 	XMMATRIX result = actor->GetTransformationMatrix() * toRoot;
 
-	Transform tempTransform;
-	tempTransform.Decompose(result);
-
-	if (VecEqual(XMLoadFloat3(&actor->transform.oldPosition), XMLoadFloat3(&tempTransform.position)))
-	{
-		if (VecEqual(XMLoadFloat4(&actor->transform.oldQuatRotation), XMLoadFloat4(&tempTransform.quatRotation)))
-		{
-			if (VecEqual(XMLoadFloat3(&actor->transform.oldScale), XMLoadFloat3(&tempTransform.scale)))
-			{
-				return actor->GetTransformationMatrix(); // Don't decompose matrix if old properties are equal to current		
-			}
-		}
-	}
-
 	actor->transform.Decompose(result);
-
-	//Set previous again (first one is a fall through for root actors)
-	actor->transform.oldPosition = actor->transform.position;
-	actor->transform.oldScale = actor->transform.scale;
-	actor->transform.oldQuatRotation = actor->transform.quatRotation;
 
 	return result;
 }

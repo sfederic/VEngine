@@ -63,6 +63,13 @@ int main(int argc, char* argv[])
     gWorldEditor.Init();
 
     GetWorld()->AddActorSystem(&testActorSystem);
+    Transform tempTransform;
+    tempTransform.position = XMFLOAT3(3.f, 0.f, 0.f);
+    testActorSystem.SpawnActor(tempTransform);
+    testActorSystem.GetActor(0)->AddChild(testActorSystem.GetActor(1));
+    testActorSystem.GetActor(0)->SetPosition(XMVectorSet(-3.f, 0.f, 0.f, 1.f));
+
+
 
     //Test debug primitive drawing
     debugBox.Start();
