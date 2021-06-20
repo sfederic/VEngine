@@ -18,6 +18,17 @@ XMMATRIX Transform::GetAffine()
 	);
 }
 
+//Helps with rotating child actors around their parent using Quaternions
+XMMATRIX Transform::GetAffineRotationOrigin(XMVECTOR rotOrigin)
+{
+	return XMMatrixAffineTransformation(
+		XMLoadFloat3(&scale),
+		rotOrigin,
+		XMLoadFloat4(&quatRotation),
+		XMLoadFloat3(&position)
+	);
+}
+
 void Transform::Decompose(XMMATRIX m)
 {
 	XMVECTOR outScale, outQuat, outTrans;

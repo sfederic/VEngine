@@ -9,6 +9,7 @@ class Transform
 public:
 	Transform();
 	XMMATRIX GetAffine();
+	XMMATRIX GetAffineRotationOrigin(XMVECTOR rotOrigin);
 	void Decompose(XMMATRIX m);
 
 	XMFLOAT3 position;
