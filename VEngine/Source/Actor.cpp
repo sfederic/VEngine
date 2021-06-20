@@ -122,9 +122,12 @@ void Actor::SetRotation(XMFLOAT3 euler)
 
 void Actor::SetChildRotations(XMVECTOR rot)
 {
+	XMMATRIX rotOriginMatrix = transform.GetAffineRotationOrigin(XMLoadFloat3(&transform.position));
+
 	for (Actor* child : children)
 	{
-		XMVECTOR childRot = XMQuaternionMultiply(XMLoadFloat4(&child->transform.quatRotation), rot);
+		XMVECTOR parentRot = XMQuaternionRotationMatrix(rotOriginMatrix);
+		XMVECTOR childRot = XMQuaternionMultiply(XMLoadFloat4(&child->transform.quatRotation), parentRot);
 		child->SetRotation(childRot);
 	}
 }

@@ -67,7 +67,7 @@ int main(int argc, char* argv[])
     tempTransform.position = XMFLOAT3(3.f, 0.f, 0.f);
     testActorSystem.SpawnActor(tempTransform);
     testActorSystem.GetActor(0)->AddChild(testActorSystem.GetActor(1));
-    testActorSystem.GetActor(0)->SetPosition(XMVectorSet(-3.f, 0.f, 0.f, 1.f));
+    testActorSystem.GetActor(0)->SetRotation(45.f, 0.f, 0.f);
 
 
 
