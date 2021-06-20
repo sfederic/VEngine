@@ -189,16 +189,28 @@ XMFLOAT3 Actor::GetScale()
 void Actor::SetScale(float x, float y, float z)
 {
 	transform.scale = XMFLOAT3(x, y, z);
+	SetChildScales(XMVectorSet(x, y, z, 0.f));
 }
 
 void Actor::SetScale(XMVECTOR scale)
 {
 	XMStoreFloat3(&transform.scale, scale);
+	SetChildScales(scale);
 }
 
 void Actor::SetScale(XMFLOAT3 scale)
 {
 	transform.scale = scale;
+	SetChildScales(XMLoadFloat3(&scale));
+}
+
+void Actor::SetChildScales(XMVECTOR scale)
+{
+	for (Actor* child : children)
+	{
+		XMVECTOR childScale = XMLoadFloat3(&child->transform.scale) * scale;
+		child->SetScale(childScale);
+	}
 }
 
 XMVECTOR Actor::GetForwardVector()

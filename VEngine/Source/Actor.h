@@ -55,6 +55,8 @@ public:
 	void SetScale(float x, float y, float z);
 	void SetScale(XMVECTOR scale);
 	void SetScale(XMFLOAT3 scale);
+	void SetChildScales(XMVECTOR scale);
+
 	XMVECTOR GetForwardVector();
 	XMVECTOR GetRightVector();
 	XMVECTOR GetUpVector();
