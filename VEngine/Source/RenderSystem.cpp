@@ -109,7 +109,7 @@ void RenderSystem::CreateDevice()
 	//Reference for EnumAdapterByGpuPerformance
 	//REF:https://github.com/walbourn/directx-vs-templates/blob/master/d3d11game_win32_dr/DeviceResources.cpp
 
-	IDXGIAdapter1* adapter;
+	IDXGIAdapter1* adapter = nullptr;
 	for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_MINIMUM_POWER, IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)
 	{
 		adapters.push_back(adapter);
@@ -118,12 +118,12 @@ void RenderSystem::CreateDevice()
 		adaptersDesc.push_back(desc);
 	}
 
+	//BGRA support needed for DirectWrite and Direct2D
 	UINT createDeviceFlags = D3D11_CREATE_DEVICE_BGRA_SUPPORT;
 #ifdef _DEBUG
 	createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
 #endif
 
-	//BGRA support needed for DirectWrite and Direct2D
 	HR(D3D11CreateDevice(adapter, D3D_DRIVER_TYPE_HARDWARE, 0, createDeviceFlags,
 		featureLevels, _countof(featureLevels), D3D11_SDK_VERSION, &device, &featureLevel, &context));
 
