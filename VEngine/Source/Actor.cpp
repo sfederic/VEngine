@@ -79,6 +79,7 @@ void Actor::SetChildPositions(XMVECTOR pos)
 void Actor::SetRotation(XMVECTOR quaternion)
 {
 	XMStoreFloat4(&transform.quatRotation, quaternion);
+	SetChildRotations(quaternion);
 }
 
 void Actor::SetRotation(XMVECTOR axis, float angle)
@@ -117,7 +118,6 @@ void Actor::SetRotation(XMFLOAT3 euler)
 	XMStoreFloat4(&transform.quatRotation, XMQuaternionRotationRollPitchYaw(pitchRadians, yawRadians, rollRadians));
 
 	SetChildRotations(XMLoadFloat4(&transform.quatRotation));
-
 }
 
 void Actor::SetChildRotations(XMVECTOR rot)
@@ -146,7 +146,6 @@ XMMATRIX Actor::GetTransformationMatrix()
 
 //This function traverses up the parent hierarchy, saves the new world matrix on the current actor
 //and also returns that matrix in world space.
-//It's not a nice looking function because of the recursion. There's room to clean it up.
 XMMATRIX Actor::DecomposeTransformationMatrix(Actor* actor)
 {
 	if (actor == nullptr)
