@@ -26,14 +26,6 @@ void World::TickAllActorSystems(float deltaTime)
 {
 	PROFILE_START
 
-	for (auto system : actorSystems)
-	{
-		for (auto actor : system->actors)
-		{
-			actor->DecomposeTransformationMatrix();
-		}
-	}
-
 	//Skip ticks if game is paused
 	if (gCoreSystem.bGamePaused)
 	{
