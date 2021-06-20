@@ -449,12 +449,24 @@ void ActorSystem::CreateStructuredBuffer()
 		//instancedDataStructuredBuffer->Release();
 	}
 
-	pso.instancedDataStructuredBuffer->data = gRenderSystem.CreateStructuredBuffer(sizeof(InstanceData) * actors.size(), sizeof(InstanceData), actorModelMatrices.data());
 
 	D3D11_SHADER_RESOURCE_VIEW_DESC sbDesc = {};
 	sbDesc.Format = DXGI_FORMAT_UNKNOWN;
 	sbDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFEREX;
-	sbDesc.BufferEx.NumElements = actors.size();
+
+	if (actors.size() > 0)
+	{
+		sbDesc.BufferEx.NumElements = actors.size();
+		pso.instancedDataStructuredBuffer->data = gRenderSystem.CreateStructuredBuffer(sizeof(InstanceData) * actors.size(), sizeof(InstanceData), actorModelMatrices.data());
+	}
+	else
+	{
+		sbDesc.BufferEx.NumElements = 1;
+
+		actorModelMatrices.push_back(XMMATRIX());
+		pso.instancedDataStructuredBuffer->data = gRenderSystem.CreateStructuredBuffer(sizeof(InstanceData), sizeof(InstanceData), actorModelMatrices.data());
+	}
+
 	HR(gRenderSystem.device->CreateShaderResourceView(pso.instancedDataStructuredBuffer->data, &sbDesc, &pso.instancedDataSrv->data));
 }
 
