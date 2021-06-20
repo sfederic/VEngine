@@ -58,7 +58,7 @@ Properties TestActor::GetEditorProps()
 
 void TestActor::Tick(float deltaTime)
 {
-	if(VecEqual(currentPos, nextPos))
+	/*if (VecEqual(currentPos, nextPos))
 	{
 		if (gInputSystem.GetKeyDownState(Keys::D))
 		{
@@ -89,5 +89,5 @@ void TestActor::Tick(float deltaTime)
 	SetPosition(currentPos);
 
 	const float rotationSpeed = 15.0f;
-	currentRot = XMQuaternionSlerp(currentRot, nextRot, (deltaTime * rotationSpeed));
+	currentRot = XMQuaternionSlerp(currentRot, nextRot, (deltaTime * rotationSpeed));*/
 }

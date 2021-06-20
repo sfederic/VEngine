@@ -88,6 +88,16 @@ bool VecEqual(XMVECTOR v1, XMVECTOR v2, float epsilon)
     return false;
 }
 
+bool Float3Equal(XMFLOAT3& f1, XMFLOAT3& f2)
+{
+    if (f1.x == f2.x && f1.y == f2.y && f1.z == f2.z)
+    {
+        return true;
+    }
+
+    return false;
+}
+
 float FindMaxInVector(XMVECTOR v)
 {
     float max = 0.f;
