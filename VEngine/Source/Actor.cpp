@@ -52,34 +52,21 @@ XMFLOAT3 Actor::GetPositionFloat3()
 void Actor::SetPosition(XMVECTOR v)
 {
 	XMStoreFloat3(&transform.position, v);
-	SetChildPositions(v);
 }
 
 void Actor::SetPosition(float x, float y, float z)
 {
 	transform.position = XMFLOAT3(x, y, z);
-	SetChildPositions(XMVectorSet(x, y, z, 1.0f));
 }
 
 void Actor::SetPosition(XMFLOAT3 pos)
 {
 	transform.position = pos;
-	SetChildPositions(XMLoadFloat3(&pos));
-}
-
-void Actor::SetChildPositions(XMVECTOR pos)
-{
-	for (Actor* child : children)
-	{
-		XMVECTOR offset = XMLoadFloat3(&child->transform.position) + pos;
-		child->SetPosition(offset);
-	}
 }
 
 void Actor::SetRotation(XMVECTOR quaternion)
 {
 	XMStoreFloat4(&transform.quatRotation, quaternion);
-	SetChildRotations(quaternion);
 }
 
 void Actor::SetRotation(XMVECTOR axis, float angle)
@@ -93,7 +80,6 @@ void Actor::SetRotation(XMVECTOR axis, float angle)
 	float andleRadians = XMConvertToRadians(angle);
 	XMStoreFloat4(&transform.quatRotation, XMQuaternionRotationAxis(axis, andleRadians));
 
-	SetChildRotations(XMLoadFloat4(&transform.quatRotation));
 }
 
 void Actor::SetRotation(float pitch, float yaw, float roll)
@@ -104,8 +90,6 @@ void Actor::SetRotation(float pitch, float yaw, float roll)
 	float yawRadians = XMConvertToRadians(yaw);
 	float rollRadians = XMConvertToRadians(roll);
 	XMStoreFloat4(&transform.quatRotation, XMQuaternionRotationRollPitchYaw(pitchRadians, yawRadians, rollRadians));
-
-	SetChildRotations(XMLoadFloat4(&transform.quatRotation));
 }
 
 void Actor::SetRotation(XMFLOAT3 euler)
@@ -116,20 +100,6 @@ void Actor::SetRotation(XMFLOAT3 euler)
 	float yawRadians = XMConvertToRadians(euler.y);
 	float rollRadians = XMConvertToRadians(euler.z);
 	XMStoreFloat4(&transform.quatRotation, XMQuaternionRotationRollPitchYaw(pitchRadians, yawRadians, rollRadians));
-
-	SetChildRotations(XMLoadFloat4(&transform.quatRotation));
-}
-
-void Actor::SetChildRotations(XMVECTOR rot)
-{
-	XMMATRIX rotOriginMatrix = transform.GetAffineRotationOrigin(XMLoadFloat3(&transform.position));
-
-	for (Actor* child : children)
-	{
-		XMVECTOR parentRot = XMQuaternionRotationMatrix(rotOriginMatrix);
-		XMVECTOR childRot = XMQuaternionMultiply(XMLoadFloat4(&child->transform.quatRotation), parentRot);
-		child->SetRotation(childRot);
-	}
 }
 
 XMFLOAT4 Actor::GetRotationQuat()
@@ -147,7 +117,7 @@ XMMATRIX Actor::GetTransformationMatrix()
 	);
 }
 
-XMMATRIX Actor::UpdateTransform(XMMATRIX parentWorld)
+void Actor::UpdateTransform(XMMATRIX parentWorld)
 {
 	XMMATRIX world = transform.local * parentWorld;
 
@@ -172,28 +142,16 @@ XMFLOAT3 Actor::GetScale()
 void Actor::SetScale(float x, float y, float z)
 {
 	transform.scale = XMFLOAT3(x, y, z);
-	SetChildScales(XMVectorSet(x, y, z, 0.f));
 }
 
 void Actor::SetScale(XMVECTOR scale)
 {
 	XMStoreFloat3(&transform.scale, scale);
-	SetChildScales(scale);
 }
 
 void Actor::SetScale(XMFLOAT3 scale)
 {
 	transform.scale = scale;
-	SetChildScales(XMLoadFloat3(&scale));
-}
-
-void Actor::SetChildScales(XMVECTOR scale)
-{
-	for (Actor* child : children)
-	{
-		XMVECTOR childScale = XMLoadFloat3(&child->transform.scale) * scale;
-		child->SetScale(childScale);
-	}
 }
 
 XMVECTOR Actor::GetForwardVector()
