@@ -62,6 +62,18 @@ void Actor::SetPosition(float x, float y, float z)
 void Actor::SetPosition(XMFLOAT3 pos)
 {
 	transform.position = pos;
+
+	XMVECTOR offset = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+
+	if (parent)
+	{
+		offset = parent->transform.local.r[3];
+	}
+
+	XMVECTOR value = XMVectorSet(pos.x, pos.y, pos.z, 1.0f);
+	XMVECTOR newVec = value - offset;
+	transform.local.r[3] = newVec;
+	transform.local.r[3].m128_f32[3] = 1.0f;
 }
 
 void Actor::SetRotation(XMVECTOR quaternion)

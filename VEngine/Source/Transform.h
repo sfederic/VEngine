@@ -12,8 +12,8 @@ public:
 	XMMATRIX GetAffineRotationOrigin(XMVECTOR rotOrigin);
 	void Decompose(XMMATRIX m);
 
-	XMMATRIX world;
-	XMMATRIX local;
+	XMMATRIX world = XMMatrixIdentity();
+	XMMATRIX local = XMMatrixIdentity();
 
 	XMFLOAT3 position;
 	XMFLOAT3 scale;

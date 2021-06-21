@@ -29,13 +29,13 @@ void World::TickAllActorSystems(float deltaTime)
 	//Skip ticks if game is paused
 	if (gCoreSystem.bGamePaused)
 	{
-		return;
+		//return;
 	}
 
 	//Skip ticks if game in-editor isn't running
 	if (!gCoreSystem.bGamePlayOn)
 	{
-		return;
+		//return;
 	}
 
 	for(ActorSystem* actorSystem : actorSystems)
@@ -45,6 +45,11 @@ void World::TickAllActorSystems(float deltaTime)
 		for (Actor* actor : actorSystem->actors)
 		{
 			actor->Tick(deltaTime);
+
+			if (actor->parent == nullptr)
+			{
+				actor->UpdateTransform(XMMatrixIdentity());
+			}
 		}
 	}
 
