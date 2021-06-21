@@ -48,7 +48,7 @@ public:
 	void SetChildRotations(XMVECTOR rot);
 	XMFLOAT4 GetRotationQuat();
 	XMMATRIX GetTransformationMatrix();
-	XMMATRIX DecomposeTransformationMatrix(Actor* actor = nullptr);
+	XMMATRIX UpdateTransform(XMMATRIX parentWorld);
 	XMFLOAT3 GetPitchYawRoll();
 
 	XMFLOAT3 GetScale();
