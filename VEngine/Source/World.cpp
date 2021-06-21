@@ -38,13 +38,13 @@ void World::TickAllActorSystems(float deltaTime)
 		return;
 	}
 
-	for (int asIndex = 0; asIndex < actorSystems.size(); asIndex++)
+	for(ActorSystem* actorSystem : actorSystems)
 	{
-		actorSystems[asIndex]->Tick(deltaTime);
+		actorSystem->Tick(deltaTime);
 
-		for (int actorIndex = 0; actorIndex < actorSystems[asIndex]->actors.size(); actorIndex++)
+		for (Actor* actor : actorSystem->actors)
 		{
-			actorSystems[asIndex]->actors[actorIndex]->Tick(deltaTime);
+			actor->Tick(deltaTime);
 		}
 	}
 
