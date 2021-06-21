@@ -46,6 +46,7 @@ public:
 	void SetRotation(XMFLOAT3 euler);
 	XMFLOAT4 GetRotationQuat();
 	XMMATRIX GetTransformationMatrix();
+	XMMATRIX GetWorldMatrix();
 	void UpdateTransform(XMMATRIX parentWorld);
 	XMFLOAT3 GetPitchYawRoll();
 

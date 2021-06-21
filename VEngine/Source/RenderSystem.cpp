@@ -418,7 +418,9 @@ void RenderSystem::RenderActorSystem(World* world)
 			//This is like a hack to get around hiding actors with instanced rendering
 			if (actorSystem->actors[actorIndex]->bRender) 
 			{
-				data.model = actorSystem->actors[actorIndex]->transform.world;
+				//data.model = actorSystem->actors[actorIndex]->transform.world;
+				//data.model = actorSystem->actors[actorIndex]->GetTransformationMatrix();
+				data.model = actorSystem->actors[actorIndex]->GetWorldMatrix();
 			}
 
 			instanceData.push_back(data);

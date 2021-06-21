@@ -53,18 +53,18 @@ void Actor::SetPosition(XMVECTOR v)
 {
 	v.m128_f32[3] = 1.0f; //Set the W component just in case
 
-	XMStoreFloat3(&transform.position, v);
-
 	XMVECTOR offset = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 
 	if (parent)
 	{
-		offset = parent->transform.local.r[3];
+		offset = XMLoadFloat3(&parent->transform.position);
 	}
 
 	XMVECTOR newVec = v - offset;
-	transform.local.r[3] = newVec;
-	transform.local.r[3].m128_f32[3] = 1.0f;
+	//transform.local.r[3] = newVec;
+	//transform.local.r[3].m128_f32[3] = 1.0f;
+
+	XMStoreFloat3(&transform.position, newVec);
 }
 
 void Actor::SetPosition(float x, float y, float z)
@@ -94,7 +94,6 @@ void Actor::SetRotation(XMVECTOR axis, float angle)
 
 	float andleRadians = XMConvertToRadians(angle);
 	XMStoreFloat4(&transform.quatRotation, XMQuaternionRotationAxis(axis, andleRadians));
-
 }
 
 void Actor::SetRotation(float pitch, float yaw, float roll)
@@ -124,17 +123,38 @@ XMFLOAT4 Actor::GetRotationQuat()
 
 XMMATRIX Actor::GetTransformationMatrix()
 {
+	XMVECTOR rotationOffset = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+
+	if (parent)
+	{
+		rotationOffset = parent->transform.world.r[3];
+	}
+
 	return XMMatrixAffineTransformation(
 		XMLoadFloat3(&transform.scale),
-		XMVectorSet(0.f, 0.f, 0.f, 1.f),
+		rotationOffset,
 		XMLoadFloat4(&transform.quatRotation),
 		XMLoadFloat3(&transform.position)
 	);
 }
 
+XMMATRIX Actor::GetWorldMatrix()
+{
+	XMMATRIX parentWorld = XMMatrixIdentity();
+
+	if (parent)
+	{
+		parentWorld = parent->GetWorldMatrix();
+	}
+
+	UpdateTransform(parentWorld);
+
+	return transform.world;
+}
+
 void Actor::UpdateTransform(XMMATRIX parentWorld)
 {
-	XMMATRIX world = transform.local * parentWorld;
+	XMMATRIX world = GetTransformationMatrix() * parentWorld;
 
 	for (Actor* child : children)
 	{
