@@ -51,17 +51,9 @@ XMFLOAT3 Actor::GetPositionFloat3()
 
 void Actor::SetPosition(XMVECTOR v)
 {
+	v.m128_f32[3] = 1.0f; //Set the W component just in case
+
 	XMStoreFloat3(&transform.position, v);
-}
-
-void Actor::SetPosition(float x, float y, float z)
-{
-	transform.position = XMFLOAT3(x, y, z);
-}
-
-void Actor::SetPosition(XMFLOAT3 pos)
-{
-	transform.position = pos;
 
 	XMVECTOR offset = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 
@@ -70,10 +62,21 @@ void Actor::SetPosition(XMFLOAT3 pos)
 		offset = parent->transform.local.r[3];
 	}
 
-	XMVECTOR value = XMVectorSet(pos.x, pos.y, pos.z, 1.0f);
-	XMVECTOR newVec = value - offset;
+	XMVECTOR newVec = v - offset;
 	transform.local.r[3] = newVec;
 	transform.local.r[3].m128_f32[3] = 1.0f;
+}
+
+void Actor::SetPosition(float x, float y, float z)
+{
+	XMVECTOR pos = XMVectorSet(x, y, z, 1.0f);
+	SetPosition(pos);
+}
+
+void Actor::SetPosition(XMFLOAT3 pos)
+{
+	XMVECTOR vecpos = XMVectorSet(pos.x, pos.y, pos.z, 1.0f);
+	SetPosition(vecpos);
 }
 
 void Actor::SetRotation(XMVECTOR quaternion)
