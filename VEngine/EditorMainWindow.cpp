@@ -25,6 +25,33 @@ EditorMainWindow::EditorMainWindow(QWidget *parent) : QMainWindow(parent)
 {
     ui.setupUi(this);
 
+    qApp->setStyleSheet(
+        "QDockWidget { background-color: rgb(37, 33, 34); } "
+        "QWidget { background-color: rgb(40, 40, 40); border-color: rgb(11, 11, 11); border-width: 1.2px; border-style: inset; } "
+        "QPushButton { min-height:30px; background-color: rgb(40, 40, 43); border-radius: 5px; } "
+        "QPushButton:hover { background-color: rgb(80, 80, 80); } "
+        "QPushButton:pressed { background-color: rgb(140, 140, 140); } "
+        "QHeaderView { color: rgb(210, 210, 210); border: 0px; } "
+        "QHeaderView:section { background-color: rgb(40, 40, 40); } "
+        "QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical { background: none;  border: 0px; } "
+        "QScrollBar:vertical { background-color: #2A2929; width: 15px; margin: 15px 3px 15px 3px; border: 1px transparent #2A2929; border-radius: 4px } "
+    );
+
+    //Set font
+    QFont font("Din");
+    font.setStyleHint(QFont::Monospace);
+    font.setPixelSize(14);
+    qApp->setFont(font);
+
+    //Set global font colour
+    QPalette p = qApp->palette();
+    QColor fontColour = QColor::fromRgb(210, 210, 210);
+    p.setColor(QPalette::Text, fontColour);
+    p.setColor(QPalette::WindowText, fontColour);
+    p.setColor(QPalette::ButtonText, fontColour);
+    p.setColor(QPalette::BrightText, fontColour);
+    QApplication::setPalette(p);
+
     //Menu for recreating closed tabs and docks
     QMenu* windowMenu = menuBar()->addMenu("Window");
     auto console = new QAction("Console");
