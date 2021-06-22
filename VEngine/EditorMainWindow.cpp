@@ -27,7 +27,9 @@ EditorMainWindow::EditorMainWindow(QWidget *parent) : QMainWindow(parent)
 
     //Stole all the scrollbar stuff from https://stackoverflow.com/questions/54595957/how-to-set-a-stylesheet-for-the-qscrollbar-in-a-qscrollarea
     qApp->setStyleSheet(
-        "QDockWidget { background-color: rgb(37, 33, 34); } "
+        "QMainWindow { background-color: rgb(255, 0, 0); border: none; } "
+
+        "QDockWidget { background-color: rgb(37, 33, 34); border:0px; } "
 
         "QWidget { background-color: rgb(40, 40, 40); border-color: rgb(11, 11, 11); border-width: 1.2px; border-style: inset; } "
 
@@ -37,6 +39,9 @@ EditorMainWindow::EditorMainWindow(QWidget *parent) : QMainWindow(parent)
 
         "QHeaderView { color: rgb(210, 210, 210); border: 0px; } "
         "QHeaderView:section { background-color: rgb(40, 40, 40); } "
+
+        "QTabWidget { border: none; } "
+        "QTabBar::tab { background: rgb(66, 66, 66); } "
 
         "QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical { background: none;  border: 0px; } "
         "QScrollBar:vertical { background-color: #2A2929; width: 15px; margin: 15px 3px 15px 3px; border: 1px transparent #2A2929; border-radius: 4px } "
