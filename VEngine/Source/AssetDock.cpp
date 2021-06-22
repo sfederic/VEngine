@@ -111,7 +111,7 @@ void AssetDock::AssetFolderClicked()
 
     assetIcons->clear();
 
-    QPixmap iconImage = QPixmap("Editor/Icons/test.png");
+    QPixmap iconImage = QPixmap("Editor/Icons/play_icon.png");
     QIcon icon = QIcon(iconImage);
 
     for (int i = 0; i < list.count(); i++)
