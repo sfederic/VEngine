@@ -12,6 +12,12 @@ class AssetDock;
 class ConsoleDock;
 class RenderViewWidget;
 
+enum class EEditorTheme
+{
+	Light, 
+	Dark
+};
+
 class EditorMainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -54,4 +60,6 @@ private:
 	//Tabs
 	QTabWidget* editorTabWidget;
 	QMainWindow* worldEditorWindow;
+
+	EEditorTheme editorTheme = EEditorTheme::Dark;
 };
