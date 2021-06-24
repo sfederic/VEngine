@@ -20,6 +20,27 @@
 
 using namespace DirectX;
 
+#define ACTORSYSTEM(type) \
+class type##ActorSystem : public ActorSystem { \
+public: \
+	type##ActorSystem() \
+	{ \
+		std::string typeID = #type; \
+		typeMap[typeID] = this; \
+		typeMap2[typeid(type)] = this; \
+	}\
+\
+	void Tick(float dt); \
+	virtual type* AddActor() \
+	{ \
+		actors.push_back(SpawnActor<type>()); \
+		return &actors.back(); \
+	} \
+\
+	std::vector<type> actors; \
+	static type##ActorSystem actorSystem; \
+};
+
 class RenderSystem;
 class Component;
 class Material;
