@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../EditorMainWindow.h"
+#include "EditorMainWindow.h"
 #include "IEditorSystem.h"
 
 //A huge wrapper around anything 'editor' (Qt) related so the engine can get around #ifdefs

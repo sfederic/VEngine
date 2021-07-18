@@ -9,6 +9,7 @@
 #include "AssetDock.h"
 #include "ToolbarDock.h"
 #include <QTextEdit>
+#include <qapplication.h>
 
 QApplication* qApplication;
 EditorMainWindow* editorMainWindow;

@@ -15,6 +15,8 @@
 #include "ConsoleDock.h"
 #include <qapplication.h>
 #include "imgui/imgui.h"
+#include <QMenu>
+#include <QMenuBar>
 
 void EditorMainWindow::Init(int argc)
 {
@@ -23,8 +25,6 @@ void EditorMainWindow::Init(int argc)
 
 EditorMainWindow::EditorMainWindow(QWidget *parent) : QMainWindow(parent)
 {
-    ui.setupUi(this);
-
     if (editorTheme == EEditorTheme::Dark)
     {
         //Stole all the scrollbar stuff from https://stackoverflow.com/questions/54595957/how-to-set-a-stylesheet-for-the-qscrollbar-in-a-qscrollarea

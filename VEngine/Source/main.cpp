@@ -1,4 +1,4 @@
-#include "..\EditorMainWindow.h"
+#include "EditorMainWindow.h"
 #include "RenderSystem.h"
 #include "CoreSystem.h"
 #include "UISystem.h"
@@ -156,7 +156,6 @@ int main(int argc, char* argv[])
 
     gDebugMenu.Cleanup();
     gUISystem.Cleanup();
-    qApp->quit();
 
     return 0;
 }

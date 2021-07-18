@@ -24,16 +24,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="EditorMainWindow.qrc">
-      <Filter>Resource Files</Filter>
-    </QtRcc>
-    <QtUic Include="EditorMainWindow.ui">
-      <Filter>Resource Files</Filter>
-    </QtUic>
-    <QtMoc Include="EditorMainWindow.h">
+    <QtMoc Include="Source\EditorMainWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <ClCompile Include="EditorMainWindow.cpp">
+    <ClCompile Include="Source\EditorMainWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

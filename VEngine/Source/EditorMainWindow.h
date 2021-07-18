@@ -2,7 +2,6 @@
 
 #include <QtWidgets/QMainWindow>
 #include "EditorSystem.h"
-#include "ui_EditorMainWindow.h"
 
 class ConsoleDock;
 class ToolbarDock;
@@ -55,7 +54,6 @@ public:
 	EDockFocus currentDockFocus;
 
 private:
-    Ui::EditorMainWindowClass ui;
 
 	//Tabs
 	QTabWidget* editorTabWidget;

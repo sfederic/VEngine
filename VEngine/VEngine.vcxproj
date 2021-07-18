@@ -196,10 +196,8 @@
     <ClCompile Include="Source\Actors\TestActor2.cpp" />
     <ClCompile Include="Source\VWidget.cpp" />
     <ClCompile Include="Source\Commands\VectorCommand.cpp" />
-    <QtRcc Include="EditorMainWindow.qrc" />
-    <QtUic Include="EditorMainWindow.ui" />
-    <QtMoc Include="EditorMainWindow.h" />
-    <ClCompile Include="EditorMainWindow.cpp" />
+    <QtMoc Include="Source\EditorMainWindow.h" />
+    <ClCompile Include="Source\EditorMainWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\PropertyWidgets\Float3Widget.h" />
