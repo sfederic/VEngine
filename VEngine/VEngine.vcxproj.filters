@@ -98,9 +98,6 @@
     <ClCompile Include="Source\MathHelpers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Obj.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Profiler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -335,9 +332,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\MathHelpers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Obj.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Profiler.h">

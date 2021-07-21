@@ -174,7 +174,6 @@
     <ClCompile Include="Source\Lights.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\MathHelpers.cpp" />
-    <ClCompile Include="Source\Obj.cpp" />
     <ClCompile Include="Source\Profiler.cpp" />
     <ClCompile Include="Source\PropertiesDock.cpp" />
     <ClCompile Include="Source\PropertiesWidget.cpp" />
@@ -259,7 +258,6 @@
     <ClInclude Include="Source\Texture.h" />
     <ClInclude Include="Source\Lights.h" />
     <ClInclude Include="Source\MathHelpers.h" />
-    <ClInclude Include="Source\Obj.h" />
     <ClInclude Include="Source\Profiler.h" />
     <ClInclude Include="Source\PropertiesDock.h" />
     <ClInclude Include="Source\PropertiesWidget.h" />
