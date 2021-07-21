@@ -124,14 +124,12 @@
     <ClCompile Include="Source\DebugDraw.cpp" />
     <ClCompile Include="Source\Components\BoxTriggerComponent.cpp" />
     <ClCompile Include="Source\Components\Component.cpp" />
-    <ClCompile Include="Source\PipelineView.cpp" />
     <ClCompile Include="Source\PropertyWidgets\IntWidget.cpp" />
     <ClCompile Include="Source\PropertyWidgets\FloatWidget.cpp" />
     <ClCompile Include="Source\PropertyWidgets\BoolWidget.cpp" />
     <ClCompile Include="Source\BlendState.cpp" />
     <ClCompile Include="Source\DebugBox.cpp" />
     <ClCompile Include="Source\DebugSphere.cpp" />
-    <ClCompile Include="Source\ParticleSystem.cpp" />
     <ClCompile Include="Source\EditorSystem.cpp" />
     <ClCompile Include="Source\NativeEditorSystem.cpp" />
     <ClCompile Include="Source\Reflection.cpp" />
@@ -171,7 +169,6 @@
     <ClCompile Include="Source\Sampler.cpp" />
     <ClCompile Include="Source\ShaderResourceView.cpp" />
     <ClCompile Include="Source\Texture.cpp" />
-    <ClCompile Include="Source\Lights.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\MathHelpers.cpp" />
     <ClCompile Include="Source\Profiler.cpp" />
@@ -215,7 +212,6 @@
     <ClInclude Include="Source\BlendState.h" />
     <ClInclude Include="Source\DebugBox.h" />
     <ClInclude Include="Source\DebugSphere.h" />
-    <ClInclude Include="Source\ParticleSystem.h" />
     <ClInclude Include="Source\EditorSystem.h" />
     <ClInclude Include="Source\GlobalDefines.h" />
     <ClInclude Include="Source\NativeEditorSystem.h" />
@@ -256,7 +252,6 @@
     <ClInclude Include="Source\Sampler.h" />
     <ClInclude Include="Source\ShaderResourceView.h" />
     <ClInclude Include="Source\Texture.h" />
-    <ClInclude Include="Source\Lights.h" />
     <ClInclude Include="Source\MathHelpers.h" />
     <ClInclude Include="Source\Profiler.h" />
     <ClInclude Include="Source\PropertiesDock.h" />
