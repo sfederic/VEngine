@@ -282,6 +282,11 @@ void DebugMenu::RenderActorProps()
 			ImGui::InputFloat(y.c_str(), &f3->y);
 			ImGui::InputFloat(z.c_str(), &f3->z);
 		}
+		else if (type->second == typeid(std::string))
+		{
+			std::string* str = static_cast<std::string*>(actorProperty.second);
+			ImGui::InputText("name", str->data(), str->size());
+		}
 	}
 
 	ImGui::End();
