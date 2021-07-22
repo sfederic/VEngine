@@ -50,6 +50,7 @@ public:
 	void RenderSnappingMenu();
 	void RenderActorStatsMenu();
 	void RenderActorSpawnMenu();
+	void RenderActorProps();
 
 	//Shows actor/system stats when hovering over actor (Idea stolen from Fledge Engine)
 	//REF:https://www.youtube.com/watch?v=WjPiJn9dkxs

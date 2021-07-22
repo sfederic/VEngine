@@ -14,6 +14,9 @@
 #include "Profiler.h"
 #include "Raycast.h"
 #include "Camera.h"
+#include "Properties.h"
+#include "WorldEditor.h"
+#include <DirectXMath.h>
 
 DebugMenu gDebugMenu;
 
@@ -55,6 +58,7 @@ void DebugMenu::Tick(World* world, float deltaTime)
 	RenderActorStatsMenu();
 	RenderActorSpawnMenu();
 	RenderActorInspectMenu();
+	RenderActorProps();
 
 	ImGui::EndFrame();
 }
@@ -230,6 +234,59 @@ void DebugMenu::RenderActorSpawnMenu()
 
 		ImGui::End();
 	}
+}
+
+void DebugMenu::RenderActorProps()
+{
+	PROFILE_START
+
+	if (gWorldEditor.pickedActor == nullptr) return;
+
+	ImGui::Begin("Actor Props");
+	//ImGui::SetWindowPos(ImVec2(10, 10));
+	//ImGui::SetWindowSize(ImVec2(300, 500));
+
+	auto props = gWorldEditor.pickedActor->GetEditorProps();
+
+	for (auto& actorProperty : props.dataMap)
+	{
+		auto& typeMap = props.typeMap;
+		auto& type = typeMap.find(actorProperty.first);
+
+		if (type->second == typeid(bool))
+		{
+			ImGui::Checkbox(actorProperty.first.c_str(), (bool*)actorProperty.second);
+		}
+		else if (type->second == typeid(int))
+		{
+			ImGui::InputInt(actorProperty.first.c_str(), (int*)actorProperty.second);
+		}
+		else if (type->second == typeid(float))
+		{
+			ImGui::InputFloat(actorProperty.first.c_str(), (float*)actorProperty.second);
+		}
+		else if (type->second == typeid(XMFLOAT3))
+		{
+			DirectX::XMFLOAT3* f3 = (DirectX::XMFLOAT3*)actorProperty.second;
+			ImGui::Text(actorProperty.first.c_str());
+
+			//ImGui actually uses the Label as the unique ID to a widget, that's why
+			//the strings below are made to be unique.
+			//REF: https://github.com/ocornut/imgui/blob/master/docs/FAQ.md#q-why-is-my-widget-not-reacting-when-i-click-on-it
+
+			std::string x = actorProperty.first + "X";
+			std::string y = actorProperty.first + "Y";
+			std::string z = actorProperty.first + "Z";
+
+			ImGui::InputFloat(x.c_str(), (float*)&f3->x);
+			ImGui::InputFloat(y.c_str(), &f3->y);
+			ImGui::InputFloat(z.c_str(), &f3->z);
+		}
+	}
+
+	ImGui::End();
+
+	PROFILE_END
 }
 
 void DebugMenu::RenderActorInspectMenu()
