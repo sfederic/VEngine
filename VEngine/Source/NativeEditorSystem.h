@@ -21,4 +21,5 @@ public:
 	virtual void EnableEditorDocks() {}
 	virtual void DisableEditorDocks() {}
 	virtual void Print(const std::string& msg) {}
+	virtual void SetActorProperties() {}
 };
