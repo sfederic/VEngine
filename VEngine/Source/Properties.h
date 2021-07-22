@@ -81,3 +81,5 @@ struct Properties
 
 #endif
 };
+
+#define PROPS_ADD(value, props) props.Add(#value, &value); 
