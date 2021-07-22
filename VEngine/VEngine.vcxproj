@@ -116,6 +116,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\PipelineView.cpp" />
     <ClCompile Include="Source\PropertyWidgets\Float3Widget.cpp" />
     <ClCompile Include="Source\CommandSystem.cpp" />
     <ClCompile Include="Source\Commands\FloatCommand.cpp" />
