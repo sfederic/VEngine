@@ -38,7 +38,7 @@ void PropertiesDock::Tick()
 {
     if (gEditorSystem->GetDockFocus() != (int)EDockFocus::Properties)
     {
-        propWidget->Tick();
+        //propWidget->Tick();
     }
 }
 

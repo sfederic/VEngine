@@ -10,6 +10,7 @@
 #include "ToolbarDock.h"
 #include <QTextEdit>
 #include <qapplication.h>
+#include "PropertiesWidget.h"
 
 QApplication* qApplication;
 EditorMainWindow* editorMainWindow;
@@ -118,4 +119,9 @@ void ToolkitEditorSystem::Print(const std::string& msg)
 {
 	editorMainWindow->consoleDock->consoleMessageBox->insertPlainText(QString(msg.c_str()));
 	editorMainWindow->consoleDock->consoleMessageBox->moveCursor(QTextCursor::MoveOperation::End);
+}
+
+void ToolkitEditorSystem::SetActorProperties()
+{
+	editorMainWindow->propertiesDock->propWidget->Tick();
 }

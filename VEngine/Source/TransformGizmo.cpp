@@ -4,6 +4,7 @@
 #include "CoreSystem.h"
 #include "Input.h"
 #include "Actor.h"
+#include "EditorMainWindow.h"
 
 TransformGizmo gTransformGizmo;
 
@@ -86,6 +87,8 @@ void TransformGizmo::Tick()
             actor->SetPosition(trans);
             actor->SetScale(scale);
             actor->SetRotation(rot);
+
+            gEditorSystem->SetActorProperties();
         }
 
         //Toggle snap and scale controls

@@ -32,6 +32,7 @@ public:
 	virtual void EnableEditorDocks() = 0;
 	virtual void DisableEditorDocks() = 0;
 	virtual void Print(const std::string& msg) = 0;
+	virtual void SetActorProperties() {}
 
 	//For the current setup, this is just going to be cast as a HWND everywhere
 	void* mainWindow;
