@@ -20,17 +20,7 @@ void Actor::Start()
 {
 }
 
-Properties Actor::GetSaveProps()
-{
-	Properties props;
-	PROPS_ADD(name, props);
-	PROPS_ADD(transform.position, props);
-	PROPS_ADD(transform.scale, props);
-	PROPS_ADD(transform.quatRotation, props);
-	return props;
-}
-
-Properties Actor::GetEditorProps()
+Properties Actor::GetProps()
 {
 	Properties props;
 	PROPS_ADD(name, props);
@@ -277,7 +267,7 @@ void ActorSystem::Serialise(std::ostream& os)
 
 	for(Actor* actor : actors)
 	{
-		Serialiser::Serialise(actor->GetSaveProps(), os);
+		Serialiser::Serialise(actor->GetProps(), os);
 	}
 }
 
@@ -304,7 +294,7 @@ void ActorSystem::Deserialise(std::istream& is)
 
 	for(Actor* actor : actors)
 	{
-		Serialiser::Deserialise(actor->GetSaveProps(), is);
+		Serialiser::Deserialise(actor->GetProps(), is);
 	}
 }
 

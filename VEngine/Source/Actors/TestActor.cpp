@@ -42,18 +42,9 @@ TestActor::TestActor()
 	nextRot = currentRot;
 }
 
-Properties TestActor::GetSaveProps()
+Properties TestActor::GetProps()
 {
-	Properties props = __super::GetSaveProps();
-	
-	props.Add("Render", &bRender);
-	
-	return props;
-}
-
-Properties TestActor::GetEditorProps()
-{
-	return __super::GetEditorProps();
+	return __super::GetProps();
 }
 
 void TestActor::Tick(float deltaTime)

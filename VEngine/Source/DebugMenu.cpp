@@ -246,7 +246,7 @@ void DebugMenu::RenderActorProps()
 	//ImGui::SetWindowPos(ImVec2(10, 10));
 	//ImGui::SetWindowSize(ImVec2(300, 500));
 
-	auto props = gWorldEditor.pickedActor->GetEditorProps();
+	auto props = gWorldEditor.pickedActor->GetProps();
 
 	for (auto& actorProperty : props.dataMap)
 	{

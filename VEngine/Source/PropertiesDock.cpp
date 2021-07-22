@@ -74,9 +74,9 @@ void PropertiesDock::DisplayActorSystemProperties(Actor* actor)
     const int propertyNameColumn = 0;
     const int propertyDataColumn = 1;
 
-    for (auto& actorProperty : actor->GetEditorProps().dataMap)
+    for (auto& actorProperty : actor->GetProps().dataMap)
     {
-        auto typeMap = actor->GetEditorProps().typeMap;
+        auto typeMap = actor->GetProps().typeMap;
         auto type = typeMap.find(actorProperty.first);
 
         //Set property name onto label
