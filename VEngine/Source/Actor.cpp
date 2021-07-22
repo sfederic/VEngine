@@ -23,20 +23,21 @@ void Actor::Start()
 Properties Actor::GetSaveProps()
 {
 	Properties props;
-	props.Add("Name", &name);
-	props.Add("Position", &transform.position);
-	props.Add("Scale", &transform.scale);
-	props.Add("RotQuat", &transform.quatRotation);
+	PROPS_ADD(name, props);
+	PROPS_ADD(transform.position, props);
+	PROPS_ADD(transform.scale, props);
+	PROPS_ADD(transform.quatRotation, props);
 	return props;
 }
 
 Properties Actor::GetEditorProps()
 {
 	Properties props;
-	props.Add("Name", &name);
-	props.Add("Render", &bRender);
-	props.Add("Position", &transform.position);
-	props.Add("Scale", &transform.scale);
+	PROPS_ADD(name, props);
+	PROPS_ADD(bRender, props);
+	PROPS_ADD(transform.position, props);
+	PROPS_ADD(transform.scale, props);
+	PROPS_ADD(transform.quatRotation, props);
 	return props;
 }
 
