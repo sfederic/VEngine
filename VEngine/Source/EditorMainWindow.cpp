@@ -204,11 +204,7 @@ bool EditorMainWindow::nativeEvent(const QByteArray& eventType, void* message, l
 
 void EditorMainWindow::Tick()
 {
-    toolbarDock->Tick();
-    assetDock->Tick();
-    worldDock->Tick();
-    propertiesDock->Tick();
-    renderViewWidget->Tick();
+
 }
 
 void EditorMainWindow::CloseTab(int tabIndex)
