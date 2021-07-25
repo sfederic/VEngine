@@ -26,7 +26,7 @@ void DebugMenu::Init()
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
-
+	
 	//Imgui has an .ini file to save previous ui positions and values.
 	//Setting this to null removes this initial setup.
 	io.IniFilename = nullptr;
@@ -267,20 +267,15 @@ void DebugMenu::RenderActorProps()
 		}
 		else if (type->second == typeid(XMFLOAT3))
 		{
-			DirectX::XMFLOAT3* f3 = (DirectX::XMFLOAT3*)actorProperty.second;
-			ImGui::Text(actorProperty.first.c_str());
+			DirectX::XMFLOAT3* xmfloat3 = (DirectX::XMFLOAT3*)actorProperty.second;
 
 			//ImGui actually uses the Label as the unique ID to a widget, that's why
 			//the strings below are made to be unique.
 			//REF: https://github.com/ocornut/imgui/blob/master/docs/FAQ.md#q-why-is-my-widget-not-reacting-when-i-click-on-it
 
-			std::string x = actorProperty.first + "X";
-			std::string y = actorProperty.first + "Y";
-			std::string z = actorProperty.first + "Z";
+			float *f3[3] = { &xmfloat3->x, &xmfloat3->y, &xmfloat3->z };
 
-			ImGui::InputFloat(x.c_str(), (float*)&f3->x);
-			ImGui::InputFloat(y.c_str(), &f3->y);
-			ImGui::InputFloat(z.c_str(), &f3->z);
+			ImGui::InputFloat3(actorProperty.first.c_str(), *f3);
 		}
 		else if (type->second == typeid(std::string))
 		{
