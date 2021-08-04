@@ -50,8 +50,10 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, ActorSystem* actorSy
 	{
 		Camera* camera = GetActiveCamera();
 
-		XMMATRIX invView = XMMatrixInverse(&XMMatrixDeterminant(camera->view), camera->view);
-		XMMATRIX invModel = XMMatrixInverse(&XMMatrixDeterminant(XMMatrixIdentity()), XMMatrixIdentity());
+		XMVECTOR cameraViewDet = XMMatrixDeterminant(camera->view);
+		XMMATRIX invView = XMMatrixInverse(&cameraViewDet, camera->view);
+		XMVECTOR indentityDet = XMMatrixDeterminant(XMMatrixIdentity());
+		XMMATRIX invModel = XMMatrixInverse(&indentityDet, XMMatrixIdentity());
 		XMMATRIX toLocal = XMMatrixMultiply(invView, invModel);
 
 		ray.origin = XMVector3TransformCoord(ray.origin, toLocal);

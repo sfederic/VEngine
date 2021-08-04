@@ -48,7 +48,7 @@ void CoreSystem::SetupWindow(HINSTANCE instance, int cmdShow)
 	wc.hCursor = LoadCursor(0, IDC_CROSS);
 
 	RegisterClass(&wc);
-	mainWindow = CreateWindow("Window", "VEngine", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, windowWidth, windowHeight, 0, 0, instance, 0);
+	mainWindow = CreateWindow("Window", "VEngine2.0", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, windowWidth, windowHeight, 0, 0, instance, 0);
 	if (!mainWindow)
 	{
 		HR(GetLastError());

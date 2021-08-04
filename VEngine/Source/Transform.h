@@ -11,7 +11,7 @@ public:
 	XMMATRIX GetAffine();
 	XMMATRIX GetAffineRotationOrigin(XMVECTOR rotOrigin);
 	void Decompose(XMMATRIX m);
-
+	
 	XMMATRIX world = XMMatrixIdentity();
 	XMMATRIX local = XMMatrixIdentity();
 

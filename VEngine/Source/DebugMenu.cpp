@@ -251,7 +251,7 @@ void DebugMenu::RenderActorProps()
 	for (auto& actorProperty : props.dataMap)
 	{
 		auto& typeMap = props.typeMap;
-		auto& type = typeMap.find(actorProperty.first);
+		auto type = typeMap.find(actorProperty.first);
 
 		if (type->second == typeid(bool))
 		{
