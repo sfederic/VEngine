@@ -45,7 +45,7 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <IncludePath>C:\Users\Cahntz\source\repos\VEngine\VEngine\Source\imgui;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)\FBXInclude;C:\Users\Cahntz\source\repos\VEngine\VEngine\Source\ImGuizmo;$(ProjectDir)\Source</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(ProjectDir)\FBXInclude;$(ProjectDir)\Source\imgui;$(WindowsSDK_IncludePath);$(ProjectDir)\Source\ImGuizmo;$(ProjectDir)\Source</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)\Libs</LibraryPath>
     <OutDir>$(ProjectDir)</OutDir>
     <ReferencePath>$(VC_ReferencesPath_x64);</ReferencePath>
@@ -95,7 +95,7 @@
     <ClCompile>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
