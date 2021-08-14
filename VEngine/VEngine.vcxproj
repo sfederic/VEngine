@@ -125,7 +125,6 @@
     <ClCompile Include="Source\Properties.cpp" />
     <ClCompile Include="Source\Material.cpp" />
     <ClCompile Include="Source\DebugDraw.cpp" />
-    <ClCompile Include="Source\Components\BoxTriggerComponent.cpp" />
     <ClCompile Include="Source\Components\Component.cpp" />
     <ClCompile Include="Source\PropertyWidgets\IntWidget.cpp" />
     <ClCompile Include="Source\PropertyWidgets\FloatWidget.cpp" />
@@ -180,7 +179,6 @@
     <ClCompile Include="Source\Raycast.cpp" />
     <ClCompile Include="Source\RenderViewWidget.cpp" />
     <ClCompile Include="Source\ShaderFactory.cpp" />
-    <ClCompile Include="Source\Actors\TestActor.cpp" />
     <ClCompile Include="Source\TimerSystem.cpp" />
     <ClCompile Include="Source\ToolbarDock.cpp" />
     <ClCompile Include="Source\UISystem.cpp" />
@@ -192,7 +190,6 @@
     <ClCompile Include="Source\TransformGizmo.cpp" />
     <ClCompile Include="Source\ActorSystemFactory.cpp" />
     <ClCompile Include="Source\PropertyWidgets\VectorWidget.cpp" />
-    <ClCompile Include="Source\Actors\TestActor2.cpp" />
     <ClCompile Include="Source\VWidget.cpp" />
     <ClCompile Include="Source\Commands\VectorCommand.cpp" />
     <QtMoc Include="Source\EditorMainWindow.h" />
@@ -206,7 +203,6 @@
     <ClInclude Include="Source\Properties.h" />
     <ClInclude Include="Source\Material.h" />
     <ClInclude Include="Source\DebugDraw.h" />
-    <ClInclude Include="Source\Components\BoxTriggerComponent.h" />
     <ClInclude Include="Source\Components\Component.h" />
     <ClInclude Include="Source\PipelineView.h" />
     <ClInclude Include="Source\PropertyWidgets\IntWidget.h" />
@@ -263,7 +259,6 @@
     <ClInclude Include="Source\RenderTypes.h" />
     <ClInclude Include="Source\RenderViewWidget.h" />
     <ClInclude Include="Source\ShaderFactory.h" />
-    <ClInclude Include="Source\Actors\TestActor.h" />
     <ClInclude Include="Source\TimerSystem.h" />
     <ClInclude Include="Source\ToolbarDock.h" />
     <ClInclude Include="Source\UISystem.h" />
@@ -275,7 +270,6 @@
     <ClInclude Include="Source\TransformGizmo.h" />
     <ClInclude Include="Source\ActorSystemFactory.h" />
     <ClInclude Include="Source\PropertyWidgets\VectorWidget.h" />
-    <ClInclude Include="Source\Actors\TestActor2.h" />
     <ClInclude Include="Source\VWidget.h" />
     <ClInclude Include="Source\Commands\VectorCommand.h" />
   </ItemGroup>

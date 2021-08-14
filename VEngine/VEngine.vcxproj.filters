@@ -113,9 +113,6 @@
     <ClCompile Include="Source\ShaderFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Actors\TestActor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\TimerSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -224,16 +221,10 @@
     <ClCompile Include="Source\Components\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Actors\TestActor2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\VString.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\VWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Components\BoxTriggerComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\DebugDraw.cpp">
@@ -344,9 +335,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\ShaderFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Actors\TestActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\TimerSystem.h">
@@ -466,16 +454,10 @@
     <ClInclude Include="Source\PipelineView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Actors\TestActor2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\VString.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\VWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Components\BoxTriggerComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\DebugDraw.h">
