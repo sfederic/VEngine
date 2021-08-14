@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.30413.136
+VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VEngine", "VEngine\VEngine.vcxproj", "{27EB75A1-0D97-4081-A4C9-E890C753E0E4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VEngine", "VEngine\VEngine.vcxproj", "{06F17222-BBAD-453D-B1B8-096E2C5F7501}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{27EB75A1-0D97-4081-A4C9-E890C753E0E4}.Debug|x64.ActiveCfg = Debug|x64
-		{27EB75A1-0D97-4081-A4C9-E890C753E0E4}.Debug|x64.Build.0 = Debug|x64
-		{27EB75A1-0D97-4081-A4C9-E890C753E0E4}.Release|x64.ActiveCfg = Release|x64
-		{27EB75A1-0D97-4081-A4C9-E890C753E0E4}.Release|x64.Build.0 = Release|x64
+		{06F17222-BBAD-453D-B1B8-096E2C5F7501}.Debug|x64.ActiveCfg = Debug|x64
+		{06F17222-BBAD-453D-B1B8-096E2C5F7501}.Debug|x64.Build.0 = Debug|x64
+		{06F17222-BBAD-453D-B1B8-096E2C5F7501}.Release|x64.ActiveCfg = Release|x64
+		{06F17222-BBAD-453D-B1B8-096E2C5F7501}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {6C1DEF92-2E7F-4F83-B779-C83E8DE6062A}
+		SolutionGuid = {BE999B6B-A144-4746-B909-5D0706B90FC4}
 	EndGlobalSection
 EndGlobal

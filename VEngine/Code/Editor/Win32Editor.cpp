@@ -1,0 +1,78 @@
+#include "Win32Editor.h"
+#include "imgui_forward_declare.h"
+#include "Core.h"
+#include "Debug.h"
+
+MSG msg;
+HWND window;
+
+void Win32Editor::Init(int argc, char* argv[])
+{
+	viewportWidth = 1000;
+	viewportHeight = 600;
+
+	SetupWindow();
+	windowHwnd = (void*)window;
+}
+
+void Win32Editor::Tick()
+{
+	if (ImGui_ImplWin32_WndProcHandler(msg.hwnd, msg.message, msg.wParam, msg.lParam))
+	{
+		return;
+	}
+
+	HandleMessages();
+	Core::HandleWin32MessagePump(msg.message, msg.wParam, msg.lParam);
+}
+
+void Win32Editor::SetMousePos()
+{
+	POINT mousePos;
+	GetCursorPos(&mousePos);
+	ScreenToClient((HWND)windowHwnd, &mousePos);
+	viewportMouseX = mousePos.x;
+	viewportMouseY = mousePos.y;
+}
+
+void Win32Editor::SetupWindow()
+{
+	HINSTANCE instance = GetModuleHandle(NULL);
+
+	WNDCLASS wc = {};
+	wc.style = CS_HREDRAW | CS_VREDRAW;
+	wc.lpszClassName = L"Window";
+	wc.lpfnWndProc = (WNDPROC)Core::WndProc;
+	wc.hInstance = instance;
+	wc.hCursor = LoadCursor(0, IDC_CROSS);
+
+	RegisterClass(&wc);
+	window = CreateWindow(L"Window", L"VEngine2.0", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, viewportWidth, viewportHeight, 0, 0, instance, 0);
+	if (!window)
+	{
+		HR(GetLastError());
+	}
+	else
+	{
+		ShowWindow(window, SW_SHOW);
+		UpdateWindow(window);
+
+		//Center window
+		RECT windowRect; RECT desktopRect;
+		GetWindowRect(window, &windowRect);
+		GetWindowRect(GetDesktopWindow(), &desktopRect);
+		int xPos = (desktopRect.right - (windowRect.right - windowRect.left)) / 2;
+		int yPos = (desktopRect.bottom - (windowRect.bottom - windowRect.top)) / 2;
+
+		SetWindowPos(window, 0, xPos, yPos, 0, 0, SWP_NOZORDER | SWP_NOSIZE);
+	}
+}
+
+void Win32Editor::HandleMessages()
+{
+	if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
+	{
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+}

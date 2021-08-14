@@ -11,73 +11,25 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{27EB75A1-0D97-4081-A4C9-E890C753E0E4}</ProjectGuid>
-    <Keyword>QtVS_v303</Keyword>
-    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0</WindowsTargetPlatformVersion>
+    <ProjectGuid>{06F17222-BBAD-453D-B1B8-096E2C5F7501}</ProjectGuid>
+    <Keyword>QtVS_v304</Keyword>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.18362.0</WindowsTargetPlatformVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
-    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
-  </Target>
-  <ImportGroup Label="ExtensionSettings" />
-  <ImportGroup Label="Shared" />
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <PropertyGroup Label="UserMacros" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <IncludePath>$(VC_IncludePath);$(ProjectDir)\FbxSdk;$(ProjectDir)\Source\imgui;$(WindowsSDK_IncludePath);$(ProjectDir)\Source\ImGuizmo;$(ProjectDir)\Source</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)\Libs</LibraryPath>
-    <OutDir>$(ProjectDir)</OutDir>
-    <ReferencePath>$(VC_ReferencesPath_x64);</ReferencePath>
-    <ExecutablePath>$(VC_ExecutablePath_x64);$(CommonExecutablePath);</ExecutablePath>
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <IncludePath>C:\Users\Cahntz\source\repos\VEngine\VEngine\Source\imgui;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)\FBXInclude;C:\Users\Cahntz\source\repos\VEngine\VEngine\Source\ImGuizmo;$(ProjectDir)\Source</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)\Libs</LibraryPath>
-    <OutDir>$(ProjectDir)</OutDir>
-    <ReferencePath>$(VC_ReferencesPath_x64);</ReferencePath>
-    <ExecutablePath>$(VC_ExecutablePath_x64);$(CommonExecutablePath);</ExecutablePath>
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Link>
-      <AdditionalLibraryDirectories>$(Qt_LIBPATH_);%(AdditionalLibraryDirectories);$(ProjectDir)\Libs;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-    <ClCompile>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Link>
-      <AdditionalLibraryDirectories>$(Qt_LIBPATH_);%(AdditionalLibraryDirectories);$(ProjectDir)\Libs;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-    <ClCompile>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-    </ClCompile>
-  </ItemDefinitionGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>msvc2019_64</QtInstall>
     <QtModules>core;gui;widgets</QtModules>
@@ -88,14 +40,54 @@
     <QtModules>core;gui;widgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
-  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
-    <Import Project="$(QtMsBuild)\qt.props" />
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
   </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <IncludePath>$(ProjectDir)\Code;$(ProjectDir)\Code\Editor\imgui;$(ProjectDir)\Code\Editor\ImGuizmo;$(ProjectDir)\Code\FbxSdk;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\Libs;$(LibraryPath)</LibraryPath>
+    <ReferencePath>$(ReferencePath)</ReferencePath>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <IncludePath>$(ProjectDir)\Code\Editor\imgui;$(ProjectDir)\Code\Editor\ImGuizmo;$(ProjectDir)\Code\FbxSdk;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\Libs;$(LibraryPath)</LibraryPath>
+    <ReferencePath>$(ReferencePath)</ReferencePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(UniversalCRT_IncludePath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;libfbxsdk.lib;d2d1.lib;dwrite.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;libfbxsdk.lib;d2d1.lib;dwrite.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -114,180 +106,132 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\PipelineView.cpp" />
-    <ClCompile Include="Source\PropertyWidgets\Float3Widget.cpp" />
-    <ClCompile Include="Source\CommandSystem.cpp" />
-    <ClCompile Include="Source\Commands\FloatCommand.cpp" />
-    <ClCompile Include="Source\Properties.cpp" />
-    <ClCompile Include="Source\Material.cpp" />
-    <ClCompile Include="Source\DebugDraw.cpp" />
-    <ClCompile Include="Source\Components\Component.cpp" />
-    <ClCompile Include="Source\PropertyWidgets\IntWidget.cpp" />
-    <ClCompile Include="Source\PropertyWidgets\FloatWidget.cpp" />
-    <ClCompile Include="Source\PropertyWidgets\BoolWidget.cpp" />
-    <ClCompile Include="Source\BlendState.cpp" />
-    <ClCompile Include="Source\DebugBox.cpp" />
-    <ClCompile Include="Source\DebugSphere.cpp" />
-    <ClCompile Include="Source\EditorSystem.cpp" />
-    <ClCompile Include="Source\NativeEditorSystem.cpp" />
-    <ClCompile Include="Source\Reflection.cpp" />
-    <ClCompile Include="Source\Reflection.h" />
-    <ClCompile Include="Source\RenderTypes.cpp" />
-    <ClCompile Include="Source\Serialise.cpp" />
-    <ClCompile Include="Source\ToolkitEditorSystem.cpp" />
-    <ClCompile Include="Source\Actor.cpp" />
-    <ClCompile Include="Source\AnimationStructures.cpp" />
-    <ClCompile Include="Source\AssetDock.cpp" />
-    <ClCompile Include="Source\Audio.cpp" />
-    <ClCompile Include="Source\AudioSystem.cpp" />
-    <ClCompile Include="Source\Camera.cpp" />
-    <ClCompile Include="Source\Console.cpp" />
-    <ClCompile Include="Source\ConsoleDock.cpp" />
-    <ClCompile Include="Source\CoreSystem.cpp" />
-    <ClCompile Include="Source\Debug.cpp" />
-    <ClCompile Include="Source\DebugMenu.cpp" />
-    <ClCompile Include="Source\FBXImporter.cpp" />
-    <ClCompile Include="Source\FileSystem.cpp" />
-    <ClCompile Include="Source\GameSystem.cpp" />
-    <ClCompile Include="Source\Buffer.cpp" />
-    <ClCompile Include="Source\ImGuizmo\ImCurveEdit.cpp" />
-    <ClCompile Include="Source\ImGuizmo\ImGradient.cpp" />
-    <ClCompile Include="Source\ImGuizmo\ImGuizmo.cpp" />
-    <ClCompile Include="Source\ImGuizmo\ImSequencer.cpp" />
-    <ClCompile Include="Source\imgui\backends\imgui_impl_dx11.cpp" />
-    <ClCompile Include="Source\imgui\backends\imgui_impl_win32.cpp" />
-    <ClCompile Include="Source\imgui\imgui.cpp" />
-    <ClCompile Include="Source\imgui\imgui_demo.cpp" />
-    <ClCompile Include="Source\imgui\imgui_draw.cpp" />
-    <ClCompile Include="Source\imgui\imgui_tables.cpp" />
-    <ClCompile Include="Source\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="Source\Input.cpp" />
-    <ClCompile Include="Source\RasterizerState.cpp" />
-    <ClCompile Include="Source\RenderSystem.cpp" />
-    <ClCompile Include="Source\Sampler.cpp" />
-    <ClCompile Include="Source\ShaderResourceView.cpp" />
-    <ClCompile Include="Source\Texture.cpp" />
-    <ClCompile Include="Source\main.cpp" />
-    <ClCompile Include="Source\MathHelpers.cpp" />
-    <ClCompile Include="Source\Profiler.cpp" />
-    <ClCompile Include="Source\PropertiesDock.cpp" />
-    <ClCompile Include="Source\PropertiesWidget.cpp" />
-    <ClCompile Include="Source\Raycast.cpp" />
-    <ClCompile Include="Source\RenderViewWidget.cpp" />
-    <ClCompile Include="Source\ShaderFactory.cpp" />
-    <ClCompile Include="Source\TimerSystem.cpp" />
-    <ClCompile Include="Source\ToolbarDock.cpp" />
-    <ClCompile Include="Source\UISystem.cpp" />
-    <ClCompile Include="Source\VString.cpp" />
-    <ClCompile Include="Source\World.cpp" />
-    <ClCompile Include="Source\WorldDock.cpp" />
-    <ClCompile Include="Source\WorldEditor.cpp" />
-    <ClCompile Include="Source\Transform.cpp" />
-    <ClCompile Include="Source\TransformGizmo.cpp" />
-    <ClCompile Include="Source\ActorSystemFactory.cpp" />
-    <ClCompile Include="Source\PropertyWidgets\VectorWidget.cpp" />
-    <ClCompile Include="Source\VWidget.cpp" />
-    <ClCompile Include="Source\Commands\VectorCommand.cpp" />
-    <QtMoc Include="Source\EditorMainWindow.h" />
-    <ClCompile Include="Source\EditorMainWindow.cpp" />
+    <ClInclude Include="Code\Actors\Actor.h" />
+    <ClInclude Include="Code\Actors\ActorSystem.h" />
+    <ClInclude Include="Code\Actors\ActorSystemCache.h" />
+    <ClInclude Include="Code\Actors\IActorSystem.h" />
+    <ClCompile Include="Code\Audio\AudioSystem.cpp" />
+    <ClInclude Include="Code\Audio\AudioSystem.h" />
+    <ClInclude Include="Code\Camera.h" />
+    <ClCompile Include="Code\Camera.cpp" />
+    <ClCompile Include="Code\Commands\CommandSystem.cpp" />
+    <ClInclude Include="Code\Commands\CommandSystem.h" />
+    <ClInclude Include="Code\Commands\Float3Command.h" />
+    <ClInclude Include="Code\Commands\ICommand.h" />
+    <ClInclude Include="Code\Components\Component.h" />
+    <ClInclude Include="Code\Components\ComponentSystem.h" />
+    <ClInclude Include="Code\Components\IComponentSystem.h" />
+    <ClCompile Include="Code\Components\MeshComponent.cpp" />
+    <ClInclude Include="Code\Components\MeshComponent.h" />
+    <ClCompile Include="Code\Debug.cpp" />
+    <ClCompile Include="Code\Editor\Console.cpp" />
+    <ClInclude Include="Code\Editor\Console.h" />
+    <ClCompile Include="Code\Core.cpp" />
+    <ClInclude Include="Code\Debug.h" />
+    <ClCompile Include="Code\Editor\DebugMenu.cpp" />
+    <ClInclude Include="Code\Editor\DebugMenu.h" />
+    <ClCompile Include="Code\Editor\AssetDock.cpp" />
+    <ClInclude Include="Code\Editor\AssetDock.h" />
+    <ClCompile Include="Code\Editor\Editor.cpp" />
+    <ClCompile Include="Code\Editor\ImGuizmo\ImGuizmo.cpp" />
+    <ClCompile Include="Code\Editor\imgui\imgui.cpp" />
+    <ClCompile Include="Code\Editor\imgui\imgui_draw.cpp" />
+    <ClCompile Include="Code\Editor\imgui\imgui_tables.cpp" />
+    <ClCompile Include="Code\Editor\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Code\Editor\LogDock.cpp" />
+    <ClInclude Include="Code\Editor\ImGuizmo\ImGuizmo.h" />
+    <ClInclude Include="Code\Editor\imgui\imconfig.h" />
+    <ClInclude Include="Code\Editor\imgui\imgui.h" />
+    <ClInclude Include="Code\Editor\imgui\imgui_internal.h" />
+    <ClInclude Include="Code\Editor\imgui\imstb_rectpack.h" />
+    <ClInclude Include="Code\Editor\imgui\imstb_textedit.h" />
+    <ClInclude Include="Code\Editor\imgui\imstb_truetype.h" />
+    <ClInclude Include="Code\Editor\LogDock.h" />
+    <ClInclude Include="Code\Editor\Editor.h" />
+    <ClCompile Include="Code\Editor\EditorMainWindow.cpp" />
+    <ClCompile Include="Code\Editor\imgui\backends\imgui_impl_dx11.cpp" />
+    <ClCompile Include="Code\Editor\imgui\backends\imgui_impl_win32.cpp" />
+    <ClCompile Include="Code\Editor\PropertiesDock.cpp" />
+    <ClInclude Include="Code\Editor\PropertiesDock.h" />
+    <ClCompile Include="Code\Editor\QtEditor.cpp" />
+    <ClCompile Include="Code\Editor\RenderViewWidget.cpp" />
+    <ClCompile Include="Code\Editor\ToolbarDock.cpp" />
+    <ClInclude Include="Code\Editor\ToolbarDock.h" />
+    <ClCompile Include="Code\Editor\Win32Editor.cpp" />
+    <ClInclude Include="Code\Editor\Win32Editor.h" />
+    <ClInclude Include="Code\Editor\QtEditor.h" />
+    <ClInclude Include="Code\Editor\EditorMainWindow.h" />
+    <ClInclude Include="Code\Editor\IEditor.h" />
+    <ClInclude Include="Code\Core.h" />
+    <ClCompile Include="Code\Editor\WorldDock.cpp" />
+    <ClInclude Include="Code\Editor\WorldDock.h" />
+    <ClCompile Include="Code\Engine.cpp" />
+    <ClInclude Include="Code\Engine.h" />
+    <ClCompile Include="Code\FBXImporter.cpp" />
+    <ClInclude Include="Code\FBXImporter.h" />
+    <ClCompile Include="Code\Input.cpp" />
+    <ClInclude Include="Code\Input.h" />
+    <ClCompile Include="Code\main.cpp" />
+    <ClInclude Include="Code\Editor\RenderViewWidget.h" />
+    <ClCompile Include="Code\Math.cpp" />
+    <ClInclude Include="Code\Math.h" />
+    <ClCompile Include="Code\Physics\Raycast.cpp" />
+    <ClInclude Include="Code\Physics\Raycast.h" />
+    <ClCompile Include="Code\Render\ShaderSystem.cpp" />
+    <ClCompile Include="Code\World.cpp" />
+    <ClCompile Include="Code\WorldEditor.cpp" />
+    <ClCompile Include="Code\Profile.cpp" />
+    <ClInclude Include="Code\Render\PipelineObjects.h" />
+    <ClInclude Include="Code\Profile.h" />
+    <ClInclude Include="Code\Properties.h" />
+    <ClCompile Include="Code\Render\Renderer.cpp" />
+    <ClInclude Include="Code\Render\Renderer.h" />
+    <ClInclude Include="Code\Render\RenderTypes.h" />
+    <ClInclude Include="Code\Render\ShaderSystem.h" />
+    <ClCompile Include="Code\Serialiser.cpp" />
+    <ClInclude Include="Code\Serialiser.h" />
+    <ClCompile Include="Code\TimerSystem.cpp" />
+    <ClInclude Include="Code\TimerSystem.h" />
+    <ClCompile Include="Code\Transform.cpp" />
+    <ClInclude Include="Code\Transform.h" />
+    <ClCompile Include="Code\TransformGizmo.cpp" />
+    <ClInclude Include="Code\TransformGizmo.h" />
+    <ClInclude Include="Code\UISystem.h" />
+    <ClInclude Include="Code\World.h" />
+    <ClInclude Include="Code\WorldEditor.h" />
+    <ClCompile Include="Code\UISystem.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\PropertyWidgets\Float3Widget.h" />
-    <ClInclude Include="Source\CommandSystem.h" />
-    <ClInclude Include="Source\Commands\FloatCommand.h" />
-    <ClInclude Include="Source\Commands\ICommand.h" />
-    <ClInclude Include="Source\Properties.h" />
-    <ClInclude Include="Source\Material.h" />
-    <ClInclude Include="Source\DebugDraw.h" />
-    <ClInclude Include="Source\Components\Component.h" />
-    <ClInclude Include="Source\PipelineView.h" />
-    <ClInclude Include="Source\PropertyWidgets\IntWidget.h" />
-    <ClInclude Include="Source\PropertyWidgets\FloatWidget.h" />
-    <ClInclude Include="Source\PropertyWidgets\BoolWidget.h" />
-    <ClInclude Include="Source\BlendState.h" />
-    <ClInclude Include="Source\DebugBox.h" />
-    <ClInclude Include="Source\DebugSphere.h" />
-    <ClInclude Include="Source\EditorSystem.h" />
-    <ClInclude Include="Source\GlobalDefines.h" />
-    <ClInclude Include="Source\NativeEditorSystem.h" />
-    <ClInclude Include="Source\IEditorSystem.h" />
-    <ClInclude Include="Source\Serialise.h" />
-    <ClInclude Include="Source\ToolkitEditorSystem.h" />
-    <ClInclude Include="Source\Actor.h" />
-    <ClInclude Include="Source\AnimationStructures.h" />
-    <ClInclude Include="Source\AssetDock.h" />
-    <ClInclude Include="Source\Audio.h" />
-    <ClInclude Include="Source\AudioSystem.h" />
-    <ClInclude Include="Source\Camera.h" />
-    <ClInclude Include="Source\Console.h" />
-    <ClInclude Include="Source\ConsoleDock.h" />
-    <ClInclude Include="Source\CoreSystem.h" />
-    <ClInclude Include="Source\Debug.h" />
-    <ClInclude Include="Source\DebugMenu.h" />
-    <ClInclude Include="Source\FBXImporter.h" />
-    <ClInclude Include="Source\FileSystem.h" />
-    <ClInclude Include="Source\GameSystem.h" />
-    <ClInclude Include="Source\Buffer.h" />
-    <ClInclude Include="Source\ImGuizmo\ImCurveEdit.h" />
-    <ClInclude Include="Source\ImGuizmo\ImGradient.h" />
-    <ClInclude Include="Source\ImGuizmo\ImGuizmo.h" />
-    <ClInclude Include="Source\ImGuizmo\ImSequencer.h" />
-    <ClInclude Include="Source\ImGuizmo\ImZoomSlider.h" />
-    <ClInclude Include="Source\imgui\backends\imgui_impl_dx11.h" />
-    <ClInclude Include="Source\imgui\backends\imgui_impl_win32.h" />
-    <ClInclude Include="Source\imgui\imconfig.h" />
-    <ClInclude Include="Source\imgui\imgui.h" />
-    <ClInclude Include="Source\imgui\imgui_internal.h" />
-    <ClInclude Include="Source\imgui\imstb_rectpack.h" />
-    <ClInclude Include="Source\imgui\imstb_textedit.h" />
-    <ClInclude Include="Source\imgui\imstb_truetype.h" />
-    <ClInclude Include="Source\Input.h" />
-    <ClInclude Include="Source\RasterizerState.h" />
-    <ClInclude Include="Source\RenderSystem.h" />
-    <ClInclude Include="Source\Sampler.h" />
-    <ClInclude Include="Source\ShaderResourceView.h" />
-    <ClInclude Include="Source\Texture.h" />
-    <ClInclude Include="Source\MathHelpers.h" />
-    <ClInclude Include="Source\Profiler.h" />
-    <ClInclude Include="Source\PropertiesDock.h" />
-    <ClInclude Include="Source\PropertiesWidget.h" />
-    <ClInclude Include="Source\Raycast.h" />
-    <ClInclude Include="Source\RenderTypes.h" />
-    <ClInclude Include="Source\RenderViewWidget.h" />
-    <ClInclude Include="Source\ShaderFactory.h" />
-    <ClInclude Include="Source\TimerSystem.h" />
-    <ClInclude Include="Source\ToolbarDock.h" />
-    <ClInclude Include="Source\UISystem.h" />
-    <ClInclude Include="Source\VString.h" />
-    <ClInclude Include="Source\World.h" />
-    <ClInclude Include="Source\WorldDock.h" />
-    <ClInclude Include="Source\WorldEditor.h" />
-    <ClInclude Include="Source\Transform.h" />
-    <ClInclude Include="Source\TransformGizmo.h" />
-    <ClInclude Include="Source\ActorSystemFactory.h" />
-    <ClInclude Include="Source\PropertyWidgets\VectorWidget.h" />
-    <ClInclude Include="Source\VWidget.h" />
-    <ClInclude Include="Source\Commands\VectorCommand.h" />
+    <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
+    <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_win32.h" />
+    <ClInclude Include="Code\Editor\imgui_forward_declare.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Code\Render\Shaders\CommonTypes.hlsli" />
     <None Include="packages.config" />
-    <None Include="Source\libfbxsdk.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Code\Render\Shaders\DefaultShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <FileType>Document</FileType>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
     <Import Project="$(QtMsBuild)\qt.targets" />
   </ImportGroup>
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\packages\directxtk_desktop_win10.2021.4.7.2\build\native\directxtk_desktop_win10.targets" Condition="Exists('..\packages\directxtk_desktop_win10.2021.4.7.2\build\native\directxtk_desktop_win10.targets')" />
+    <Import Project="..\packages\directxtk_desktop_win10.2021.8.2.1\build\native\directxtk_desktop_win10.targets" Condition="Exists('..\packages\directxtk_desktop_win10.2021.8.2.1\build\native\directxtk_desktop_win10.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\directxtk_desktop_win10.2021.4.7.2\build\native\directxtk_desktop_win10.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\directxtk_desktop_win10.2021.4.7.2\build\native\directxtk_desktop_win10.targets'))" />
+    <Error Condition="!Exists('..\packages\directxtk_desktop_win10.2021.8.2.1\build\native\directxtk_desktop_win10.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\directxtk_desktop_win10.2021.8.2.1\build\native\directxtk_desktop_win10.targets'))" />
   </Target>
 </Project>
