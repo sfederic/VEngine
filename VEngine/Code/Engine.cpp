@@ -11,6 +11,7 @@
 #include "TimerSystem.h"
 #include "Editor/Console.h"
 #include "World.h"
+#include "Render/ShaderSystem.h"
 
 Engine engine;
 
@@ -32,6 +33,7 @@ void Engine::Init(int argc, char* argv[])
 void Engine::TickSystems(double deltaTime)
 {
 	editor->Tick();
+	shaderSystem.Tick();
 	activeCamera->Tick(deltaTime, editor->viewportMouseX, editor->viewportMouseY);
 	timerSystem.Tick(deltaTime);
 	worldEditor.Tick();

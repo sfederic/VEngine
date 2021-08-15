@@ -36,6 +36,7 @@ struct ShaderSystem
 	std::unordered_map<std::wstring, ShaderItem*> shaderMap;
 
 	void Init();
+	void Tick();
 	ComPtr<ID3DBlob> CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target);
 	void CreateAllShaders();
 	void CompileAllShadersFromFile();

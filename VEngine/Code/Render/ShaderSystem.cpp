@@ -3,6 +3,7 @@
 #include "Debug.h"
 #include "Renderer.h"
 #include "VString.h"
+#include "Input.h"
 
 ShaderSystem shaderSystem;
 
@@ -13,6 +14,14 @@ void ShaderSystem::Init()
     CompileAllShadersFromFile();
     CreateAllShaders();
     InitHotLoading();
+}
+
+void ShaderSystem::Tick()
+{
+    if (Input::GetKeyUp(Keys::F4))
+    {
+        HotReloadShaders();
+    }
 }
 
 ComPtr<ID3DBlob> ShaderSystem::CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target)
@@ -115,7 +124,7 @@ void ShaderSystem::CompileAllShadersFromFile()
 
 void ShaderSystem::InitHotLoading()
 {
-    hotreloadHandle = FindFirstChangeNotificationA("Shaders", false, FILE_NOTIFY_CHANGE_LAST_WRITE);
+    hotreloadHandle = FindFirstChangeNotificationA("Code/Render/Shaders", false, FILE_NOTIFY_CHANGE_LAST_WRITE);
     if (hotreloadHandle == INVALID_HANDLE_VALUE)
     {
         editor->Log(L"Shader hot reload init failed");
