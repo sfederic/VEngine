@@ -110,10 +110,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Code\Animation\AnimationStructures.h" />
     <ClInclude Include="Code\Actors\Actor.h" />
     <ClInclude Include="Code\Actors\ActorSystem.h" />
     <ClInclude Include="Code\Actors\ActorSystemCache.h" />
     <ClInclude Include="Code\Actors\IActorSystem.h" />
+    <ClCompile Include="Code\Animation\AnimationStructures.cpp" />
     <ClCompile Include="Code\Actors\Actor.cpp" />
     <ClCompile Include="Code\Audio\AudioSystem.cpp" />
     <ClInclude Include="Code\Audio\AudioSystem.h" />
