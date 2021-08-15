@@ -67,7 +67,7 @@ void TransformGizmo::Tick()
         }
 
 
-        XMStoreFloat4x4(&actorMatrix, worldEditor.pickedActor->transform.GetAffine());
+        XMStoreFloat4x4(&actorMatrix, worldEditor.pickedActor->GetWorldMatrix());
 
         //Render gizmos and set component values back to actor
         ImGuizmo::Manipulate(*view.m, *proj.m, currentTransformOperation, currentTransformMode,
@@ -76,14 +76,13 @@ void TransformGizmo::Tick()
         if (ImGuizmo::IsUsing())
         {
             Actor* actor = worldEditor.pickedActor;
-            actor->transform.Decompose(XMLoadFloat4x4(&actorMatrix));
 
             XMVECTOR scale, rot, trans;
             XMMatrixDecompose(&scale, &rot, &trans, XMLoadFloat4x4(&actorMatrix));
 
-            XMStoreFloat3(&actor->transform.position, trans);
-            XMStoreFloat3(&actor->transform.scale, scale);
-            XMStoreFloat4(&actor->transform.rotation, rot);
+            actor->SetPosition(trans);
+            actor->SetScale(scale);
+            actor->SetRotation(rot);
 
             //editor->SetActorProperties();
         }

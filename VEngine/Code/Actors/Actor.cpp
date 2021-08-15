@@ -1,9 +1,8 @@
 #include "Actor.h"
-#include "Components/MeshComponent.h"
+#include "Components/SpatialComponent.h"
 
 Actor::Actor()
 {
-
 }
 
 XMMATRIX Actor::GetWorldMatrix()
@@ -17,7 +16,7 @@ XMMATRIX Actor::GetWorldMatrix()
 
 	UpdateTransform(parentWorld);
 
-	return transform.world;
+	return rootComponent->transform.world;
 }
 
 void Actor::UpdateTransform(XMMATRIX parentWorld)
@@ -29,7 +28,7 @@ void Actor::UpdateTransform(XMMATRIX parentWorld)
 		child->UpdateTransform(world);
 	}
 
-	transform.world = world;
+	rootComponent->transform.world = world;
 }
 
 XMMATRIX Actor::GetTransformMatrix()
@@ -38,8 +37,38 @@ XMMATRIX Actor::GetTransformMatrix()
 
 	if (parent)
 	{
-		rotationOffset = parent->transform.world.r[3];
+		rotationOffset = parent->rootComponent->transform.world.r[3];
 	}
 
-	return transform.GetAffineRotationOrigin(rotationOffset);
+	return rootComponent->transform.GetAffineRotationOrigin(rotationOffset);
+}
+
+XMFLOAT3 Actor::GetPosition()
+{
+	return XMFLOAT3(rootComponent->transform.position);
+}
+
+XMFLOAT3 Actor::GetScale()
+{
+	return XMFLOAT3(rootComponent->transform.scale);
+}
+
+XMFLOAT4 Actor::GetRotation()
+{
+	return XMFLOAT4(rootComponent->transform.rotation);
+}
+
+void Actor::SetPosition(XMVECTOR position)
+{
+	XMStoreFloat3(&rootComponent->transform.position, position);
+}
+
+void Actor::SetScale(XMVECTOR scale)
+{
+	XMStoreFloat3(&rootComponent->transform.scale, scale);
+}
+
+void Actor::SetRotation(XMVECTOR rotation)
+{
+	XMStoreFloat4(&rootComponent->transform.rotation, rotation);
 }

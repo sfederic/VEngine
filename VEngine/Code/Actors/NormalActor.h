@@ -2,11 +2,14 @@
 #include "Actor.h"
 #include "ActorSystem.h"
 
+struct MeshComponent;
+
 struct NormalActor : Actor
 {
 	ACTOR_SYSTEM(NormalActor)
 
-	struct MeshComponent* mesh;
+	MeshComponent* mesh1;
+	MeshComponent* mesh2;
 
 	NormalActor();
 };

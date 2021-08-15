@@ -4,23 +4,26 @@
 #include "Transform.h"
 
 struct Component;
+struct SpatialComponent;
 
 using namespace DirectX;
 
 struct Actor
 {
-	Transform transform;
-
-	BoundingOrientedBox boundingBox;
-	BoundingSphere boundingSphere;
-
 	Actor* parent = nullptr;
 	std::vector<Actor*> children;
 
+	SpatialComponent* rootComponent = nullptr;
 	std::vector<Component*> components;
 
 	Actor();
 	XMMATRIX GetWorldMatrix();
 	void UpdateTransform(XMMATRIX parentWorld);
 	XMMATRIX GetTransformMatrix();
+	XMFLOAT3 GetPosition();
+	XMFLOAT3 GetScale();
+	XMFLOAT4 GetRotation();
+	void SetPosition(XMVECTOR position);
+	void SetScale(XMVECTOR scale);
+	void SetRotation(XMVECTOR rotation);
 };

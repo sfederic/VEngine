@@ -10,8 +10,6 @@ struct MeshComponent : SpatialComponent
 {
 	COMPONENT_SYSTEM(MeshComponent)
 
-	inline static std::string createFilename;
-
 	std::string filename;
 	MeshData data;
 	PipelineStateObject pso;

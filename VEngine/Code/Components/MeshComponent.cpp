@@ -5,11 +5,6 @@
 void MeshComponent::Create()
 {
 	//Import mesh
-	if (system.systemState == SystemStates::Loaded)
-	{
-		filename = createFilename;
-	}
-
 	fbxImporter.Import(filename.c_str(), data);
 
 	//Setup bounds

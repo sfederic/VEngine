@@ -247,11 +247,6 @@ void Renderer::Render()
 
 	shaderMatrices.view = activeCamera->view;
 
-	for (NormalActor* actor : NormalActor::system.actors)
-	{
-
-	}
-
 	for (MeshComponent* mesh : MeshComponent::system.components)
 	{
 		context->RSSetState(activeRastState.Get());
@@ -277,7 +272,7 @@ void Renderer::Render()
 		context->IASetVertexBuffers(0, 1, &mesh->pso.vertexBuffer.data, &stride, &offset);
 		context->IASetIndexBuffer(mesh->pso.indexBuffer.data, DXGI_FORMAT_R32_UINT, 0);
 
-		shaderMatrices.model = mesh->owner->GetTransformMatrix();
+		shaderMatrices.model = mesh->GetWorldMatrix();
 
 		shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
 		context->UpdateSubresource(cbMatrices.Get(), 0, nullptr, &shaderMatrices, 0, 0);
