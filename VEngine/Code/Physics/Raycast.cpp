@@ -2,11 +2,12 @@
 #include <limits>
 #include "Camera.h"
 #include "Render/Renderer.h"
-#include "World.h"
 #include "Editor/Editor.h"
 #include "Math.h"
 #include "Actors/IActorSystem.h"
 #include "Actors/Actor.h"
+#include "Components/SpatialComponent.h"
+#include "World.h"
 
 #undef max
 
@@ -59,17 +60,24 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, IActorSystem* actorS
 
 	for (Actor* actor : outActors)
 	{
-		BoundingOrientedBox& boundingBox = actor->boundingBox;
-
-		boundingBox.Center = actor->transform.position;
-		boundingBox.Orientation = actor->transform.rotation;
-		boundingBox.Extents = actor->transform.scale;
-
-		if (boundingBox.Intersects(ray.origin, ray.direction, ray.distance))
+		for (Component* component : actor->components)
 		{
-			distances.push_back(ray.distance);
-			ray.hitActors.push_back(actor);
-			bRayHit = true;
+			SpatialComponent* spatialComponent = (SpatialComponent*)component;
+			if (spatialComponent)
+			{
+				BoundingOrientedBox& boundingBox = spatialComponent->boundingBox;
+
+				boundingBox.Center = spatialComponent->transform.position;
+				boundingBox.Orientation = spatialComponent->transform.rotation;
+				boundingBox.Extents = spatialComponent->transform.scale;
+
+				if (boundingBox.Intersects(ray.origin, ray.direction, ray.distance))
+				{
+					distances.push_back(ray.distance);
+					ray.hitActors.push_back(actor);
+					bRayHit = true;
+				}
+			}
 		}
 	}
 

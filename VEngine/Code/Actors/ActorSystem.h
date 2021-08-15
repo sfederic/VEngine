@@ -11,7 +11,7 @@ struct ActorSystem : IActorSystem
 
 	ActorSystem()
 	{
-		ActorSystemCache::Add(typeid(T), this);
+		actorSystemCache.Add(typeid(T), this);
 	}
 
 	T* Add()
