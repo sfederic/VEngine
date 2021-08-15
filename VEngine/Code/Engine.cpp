@@ -30,6 +30,9 @@ void Engine::Init(int argc, char* argv[])
 	activeCamera = &editorCamera;
 	
 	NormalActor::system.Add();
+	NormalActor::system.Add();
+	NormalActor::system.actors[1]->mesh1->transform.position.z += 2.0f;
+	NormalActor::system.actors[1]->mesh2->transform.position.z += 2.0f;
 
 	MeshComponent::system.Init();
 

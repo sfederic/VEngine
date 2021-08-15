@@ -6,7 +6,7 @@
 #include "Math.h"
 #include "Actors/IActorSystem.h"
 #include "Actors/Actor.h"
-#include "Components/SpatialComponent.h"
+#include "Components/MeshComponent.h"
 #include "World.h"
 
 #undef max
@@ -105,51 +105,54 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, IActorSystem* actorS
 
 bool RaycastTriangleIntersect(Ray& ray)
 {
-	//TODO: mesh component
-	/*ActorSystem* actorSystem = GetWorld()->GetActorSystem(ray.actorSystemIndex);
-	assert(actorSystem);
-
 	std::vector<Ray> rays;
 
 	for (Actor* actor : ray.hitActors)
 	{
-		XMMATRIX model = actor->GetTransformationMatrix();
+		XMMATRIX model = actor->GetTransformMatrix();
 
-		for (int i = 0; i < actorSystem->modelData.verts.size() / 3; i++)
+		for (Component* component : actor->components)
 		{
-			uint32_t index0 = actorSystem->modelData.indices[i * 3];
-			uint32_t index1 = actorSystem->modelData.indices[i * 3 + 1];
-			uint32_t index2 = actorSystem->modelData.indices[i * 3 + 2];
-
-			XMVECTOR v0 = XMLoadFloat3(&actorSystem->modelData.verts[index0].pos);
-			v0 = XMVector3TransformCoord(v0, model);
-
-			XMVECTOR v1 = XMLoadFloat3(&actorSystem->modelData.verts[index1].pos);
-			v1 = XMVector3TransformCoord(v1, model);
-
-			XMVECTOR v2 = XMLoadFloat3(&actorSystem->modelData.verts[index2].pos);
-			v2 = XMVector3TransformCoord(v2, model);
-
-			Ray tempRay = {};
-			tempRay = ray;
-			tempRay.hitActors.clear();
-
-			if (DirectX::TriangleTests::Intersects(ray.origin, ray.direction, v0, v1, v2, tempRay.distance))
+			MeshComponent* mesh = (MeshComponent*)component;
+			if (mesh)
 			{
-				tempRay.modelDataIndex = i;
+				for (int i = 0; i < mesh->data.vertices.size() / 3; i++)
+				{
+					uint32_t index0 = mesh->data.indices[i * 3];
+					uint32_t index1 = mesh->data.indices[i * 3 + 1];
+					uint32_t index2 = mesh->data.indices[i * 3 + 2];
 
-				XMVECTOR normal = XMVectorZero();
-				normal += XMLoadFloat3(&actorSystem->modelData.verts[index0].normal);
-				normal += XMLoadFloat3(&actorSystem->modelData.verts[index1].normal);
-				normal += XMLoadFloat3(&actorSystem->modelData.verts[index2].normal);
+					XMVECTOR v0 = XMLoadFloat3(&mesh->data.vertices[index0].pos);
+					v0 = XMVector3TransformCoord(v0, model);
 
-				normal = XMVector3Normalize(normal);
+					XMVECTOR v1 = XMLoadFloat3(&mesh->data.vertices[index1].pos);
+					v1 = XMVector3TransformCoord(v1, model);
 
-				XMStoreFloat3(&tempRay.normal, normal);
+					XMVECTOR v2 = XMLoadFloat3(&mesh->data.vertices[index2].pos);
+					v2 = XMVector3TransformCoord(v2, model);
 
-				tempRay.hitActor = actor;
+					Ray tempRay = {};
+					tempRay = ray;
+					tempRay.hitActors.clear();
 
-				rays.push_back(tempRay);
+					if (DirectX::TriangleTests::Intersects(ray.origin, ray.direction, v0, v1, v2, tempRay.distance))
+					{
+						tempRay.modelDataIndex = i;
+
+						XMVECTOR normal = XMVectorZero();
+						normal += XMLoadFloat3(&mesh->data.vertices[index0].normal);
+						normal += XMLoadFloat3(&mesh->data.vertices[index1].normal);
+						normal += XMLoadFloat3(&mesh->data.vertices[index2].normal);
+
+						normal = XMVector3Normalize(normal);
+
+						XMStoreFloat3(&tempRay.normal, normal);
+
+						tempRay.hitActor = actor;
+
+						rays.push_back(tempRay);
+					}
+				}
 			}
 		}
 	}
@@ -168,10 +171,8 @@ bool RaycastTriangleIntersect(Ray& ray)
 	if (rayIndex > -1)
 	{
 		ray = rays[rayIndex];
-		DebugPrint("%s Triangle index %d hit.\n", ray.hitActor->name, rayIndex);
-
 		return true;
-	}*/
+	}
 
 	return false;
 }
