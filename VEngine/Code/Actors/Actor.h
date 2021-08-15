@@ -2,7 +2,6 @@
 #include <vector>
 #include <DirectXCollision.h>
 #include "Transform.h"
-#include "Components/MeshComponent.h"
 
 using namespace DirectX;
 
@@ -13,7 +12,7 @@ struct Actor
 	BoundingOrientedBox boundingBox;
 	BoundingSphere boundingSphere;
 
-	MeshComponent* mesh = MeshComponent::system.Add();
+	struct MeshComponent* mesh;
 
 	Actor* parent;
 	std::vector<Actor*> children;

@@ -1,7 +1,9 @@
 #include "Actor.h"
+#include "Components/MeshComponent.h"
 
 Actor::Actor()
 {
+	mesh = MeshComponent::system.Add();
 	mesh->filename = "Meshes/cube.fbx";
 }
 
