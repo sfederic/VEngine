@@ -24,6 +24,8 @@ LogDock::LogDock() : QDockWidget("Console")
 
 void LogDock::Print(const std::wstring& message)
 {
+	logMessageBox->insertPlainText(QString::fromStdWString(message));
+	logMessageBox->moveCursor(QTextCursor::MoveOperation::End);
 }
 
 void LogDock::ClearLog()
