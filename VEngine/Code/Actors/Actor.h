@@ -3,6 +3,8 @@
 #include <DirectXCollision.h>
 #include "Transform.h"
 
+struct Component;
+
 using namespace DirectX;
 
 struct Actor
@@ -14,6 +16,8 @@ struct Actor
 
 	Actor* parent;
 	std::vector<Actor*> children;
+
+	std::vector<Component*> components;
 
 	Actor();
 	XMMATRIX GetWorldMatrix();
