@@ -212,8 +212,8 @@
     <ClInclude Include="Code\TimerSystem.h" />
     <ClCompile Include="Code\Transform.cpp" />
     <ClInclude Include="Code\Transform.h" />
-    <ClCompile Include="Code\TransformGizmo.cpp" />
-    <ClInclude Include="Code\TransformGizmo.h" />
+    <ClCompile Include="Code\Editor\TransformGizmo.cpp" />
+    <ClInclude Include="Code\Editor\TransformGizmo.h" />
     <ClInclude Include="Code\UI\UISystem.h" />
     <ClInclude Include="Code\World.h" />
     <ClInclude Include="Code\WorldEditor.h" />
