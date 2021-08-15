@@ -164,10 +164,13 @@
     <ClCompile Include="Code\Animation\AnimationStructures.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Widget.cpp">
+    <ClCompile Include="Code\UI\Widget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\ActorSystemCache.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\VString.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -271,7 +274,10 @@
     <ClInclude Include="Code\Animation\AnimationStructures.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Widget.h">
+    <ClInclude Include="Code\UI\Widget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\VString.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

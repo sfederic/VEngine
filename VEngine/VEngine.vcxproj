@@ -21,6 +21,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -111,7 +112,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Code\Actors\ActorSystemCache.cpp" />
-    <ClCompile Include="Widget.cpp" />
+    <ClCompile Include="Code\VString.cpp" />
+    <ClCompile Include="Code\UI\Widget.cpp" />
     <ClInclude Include="Code\Animation\AnimationStructures.h" />
     <ClInclude Include="Code\Actors\Actor.h" />
     <ClInclude Include="Code\Actors\ActorSystem.h" />
@@ -219,7 +221,8 @@
     <ClInclude Include="Code\World.h" />
     <ClInclude Include="Code\WorldEditor.h" />
     <ClCompile Include="Code\UI\UISystem.cpp" />
-    <ClInclude Include="Widget.h" />
+    <ClInclude Include="Code\VString.h" />
+    <ClInclude Include="Code\UI\Widget.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
