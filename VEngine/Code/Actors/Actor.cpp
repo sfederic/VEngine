@@ -1,0 +1,49 @@
+#include "Actor.h"
+
+Actor::Actor()
+{
+	mesh->filename = "Meshes/cube.fbx";
+}
+
+XMMATRIX Actor::GetWorldMatrix()
+{
+	XMMATRIX parentWorld = XMMatrixIdentity();
+
+	if (parent)
+	{
+		parentWorld = parent->GetWorldMatrix();
+	}
+
+	UpdateTransform(parentWorld);
+
+	return transform.world;
+}
+
+void Actor::UpdateTransform(XMMATRIX parentWorld)
+{
+	XMMATRIX world = GetTransformMatrix() * parentWorld;
+
+	for (Actor* child : children)
+	{
+		child->UpdateTransform(world);
+	}
+
+	transform.world = world;
+}
+
+XMMATRIX Actor::GetTransformMatrix()
+{
+	XMVECTOR rotationOffset = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+
+	if (parent)
+	{
+		rotationOffset = parent->transform.world.r[3];
+	}
+
+	return XMMatrixAffineTransformation(
+		XMLoadFloat3(&transform.scale),
+		rotationOffset,
+		XMLoadFloat4(&transform.rotation),
+		XMLoadFloat3(&transform.position)
+	);
+}

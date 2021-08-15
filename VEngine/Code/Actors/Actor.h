@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include <DirectXCollision.h>
 #include "Transform.h"
 #include "Components/MeshComponent.h"
@@ -14,13 +15,11 @@ struct Actor
 
 	MeshComponent* mesh = MeshComponent::system.Add();
 
-	Actor()
-	{
-		mesh->filename = "Meshes/cube.fbx";
-	}
+	Actor* parent;
+	std::vector<Actor*> children;
 
-	void PushTransformToMesh()
-	{
-		mesh->transform = transform;
-	}
+	Actor();
+	XMMATRIX GetWorldMatrix();
+	void UpdateTransform(XMMATRIX parentWorld);
+	XMMATRIX GetTransformMatrix();
 };
