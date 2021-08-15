@@ -3,6 +3,6 @@
 
 NormalActor::NormalActor()
 {
-	mesh = MeshComponent::system.Add();
+	mesh = MeshComponent::system.Add(this);
 	mesh->filename = "Meshes/cube.fbx";
 }
