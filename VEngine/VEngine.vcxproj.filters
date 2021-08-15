@@ -276,7 +276,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Code\Render\Shaders\CommonTypes.hlsli" />
+    <None Include="Code\Render\Shaders\Include\CommonTypes.hlsli" />
     <None Include="Code\Render\Shaders\DefaultShader.hlsl" />
     <None Include="packages.config" />
   </ItemGroup>

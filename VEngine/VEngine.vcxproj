@@ -227,7 +227,7 @@
     <ClInclude Include="Code\Editor\imgui_forward_declare.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Code\Render\Shaders\CommonTypes.hlsli" />
+    <None Include="Code\Render\Shaders\Include\CommonTypes.hlsli" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
