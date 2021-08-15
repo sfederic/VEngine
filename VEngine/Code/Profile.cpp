@@ -49,7 +49,7 @@ double TimeFrame::GetAverageTime()
 
 void Profile::Reset()
 {
-	timeFrames.empty();
+	timeFrames.clear();
 }
 
 void Profile::Start(std::source_location location)
