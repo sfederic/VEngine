@@ -35,11 +35,12 @@ struct ShaderSystem
 	std::vector<ShaderItem> shaders;
 	std::unordered_map<std::wstring, ShaderItem*> shaderMap;
 
+	void Init();
 	ComPtr<ID3DBlob> CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target);
 	void CreateAllShaders();
 	void CompileAllShadersFromFile();
-	void InitHotLoading();
 	void CleanUpShaders();
+	void InitHotLoading();
 	void HotReloadShaders();
 };
 

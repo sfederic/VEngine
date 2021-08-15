@@ -5,6 +5,7 @@
 #include "UI/UISystem.h"
 #include "Components/MeshComponent.h"
 #include "Actors/Actor.h"
+#include "ShaderSystem.h"
 
 Renderer renderer;
 
@@ -19,6 +20,9 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 
 	CreateFactory();
 	CreateDevice();
+
+	shaderSystem.Init();
+
 	CreateSwapchain((HWND)window);
 	CreateRTVAndDSV();
 	CreateInputLayout();

@@ -2,10 +2,18 @@
 #include "Editor/Editor.h"
 #include "Debug.h"
 #include "Renderer.h"
+#include "VString.h"
 
 ShaderSystem shaderSystem;
 
 HANDLE hotreloadHandle;
+
+void ShaderSystem::Init()
+{
+    CompileAllShadersFromFile();
+    CreateAllShaders();
+    InitHotLoading();
+}
 
 ComPtr<ID3DBlob> ShaderSystem::CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target)
 {
@@ -49,7 +57,7 @@ void ShaderSystem::CreateAllShaders()
 void ShaderSystem::CompileAllShadersFromFile()
 {
     WIN32_FIND_DATAW data;
-    HANDLE file = FindFirstFileW(L"Shaders/*.hlsl", &data);
+    HANDLE file = FindFirstFileW(L"Code/Render/Shaders/*.hlsl", &data);
 
     if (file == INVALID_HANDLE_VALUE)
     {
@@ -82,25 +90,25 @@ void ShaderSystem::CompileAllShadersFromFile()
         const char* vsTarget = "vs_5_0";
 
         std::wstring directory;
-        directory += L"Shaders/";
+        directory += L"Code/Render/Shaders/";
         directory += shaders[i].filename;
 
         ID3DBlob* vertexError;
-        HRESULT hr = D3DCompileFromFile(directory.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, vsEntry, vsTarget, flags, 0, &shaders[i].vertexCode, &vertexError);
-        if (vertexError && (hr != S_OK))
+        D3DCompileFromFile(directory.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, vsEntry, vsTarget, flags, 0, &shaders[i].vertexCode, &vertexError);
+        if (vertexError)
         {
             const char* errMsg = (char*)vertexError->GetBufferPointer();
-            
+            MessageBoxA(0, errMsg, "Shader Compile Error", 0);
         }
 
         const char* psEntry = "PSMain";
         const char* psTarget = "ps_5_0";
         ID3DBlob* pixelError;
-        HR(D3DCompileFromFile(directory.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, psEntry, psTarget, flags, 0, &shaders[i].pixelCode, &pixelError));
+        D3DCompileFromFile(directory.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, psEntry, psTarget, flags, 0, &shaders[i].pixelCode, &pixelError);
         if (pixelError)
         {
             const char* errMsg = (char*)pixelError->GetBufferPointer();
-
+            MessageBoxA(0, errMsg, "Shader Compile Error", 0);
         }
     }
 }
