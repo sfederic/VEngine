@@ -69,7 +69,9 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, IActorSystem* actorS
 
 				boundingBox.Center = spatialComponent->transform.position;
 				boundingBox.Orientation = spatialComponent->transform.rotation;
-				boundingBox.Extents = spatialComponent->transform.scale;
+				boundingBox.Extents.x *= spatialComponent->transform.scale.x;
+				boundingBox.Extents.y *= spatialComponent->transform.scale.y;
+				boundingBox.Extents.z *= spatialComponent->transform.scale.z;
 
 				if (boundingBox.Intersects(ray.origin, ray.direction, ray.distance))
 				{
