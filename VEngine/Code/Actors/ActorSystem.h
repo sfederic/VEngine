@@ -1,6 +1,5 @@
 #pragma once
 #include <vector>
-#include <memory>
 #include "IActorSystem.h"
 #include "Actor.h"
 #include "ActorSystemCache.h"
@@ -29,3 +28,6 @@ struct ActorSystem : IActorSystem
 		}
 	}
 };
+
+#define ACTOR_SYSTEM(type) \
+inline static ActorSystem<type> system; \

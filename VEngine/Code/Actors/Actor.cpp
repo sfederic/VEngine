@@ -3,8 +3,7 @@
 
 Actor::Actor()
 {
-	mesh = MeshComponent::system.Add();
-	mesh->filename = "Meshes/cube.fbx";
+
 }
 
 XMMATRIX Actor::GetWorldMatrix()

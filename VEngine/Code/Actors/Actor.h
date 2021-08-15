@@ -12,8 +12,6 @@ struct Actor
 	BoundingOrientedBox boundingBox;
 	BoundingSphere boundingSphere;
 
-	struct MeshComponent* mesh;
-
 	Actor* parent;
 	std::vector<Actor*> children;
 
