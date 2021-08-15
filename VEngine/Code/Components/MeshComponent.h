@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include <vector>
 #include "Component.h"
 #include "ComponentSystem.h"
 #include "Render/RenderTypes.h"
@@ -10,6 +9,8 @@
 struct MeshComponent : Component
 {
 	COMPONENT_SYSTEM(MeshComponent)
+
+	inline static std::string createFilename;
 
 	std::string filename;
 	MeshData data;

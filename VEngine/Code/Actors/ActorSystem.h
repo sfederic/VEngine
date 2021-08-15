@@ -7,7 +7,7 @@
 template <typename T>
 struct ActorSystem : IActorSystem
 {
-	std::vector<T> actors;
+	std::vector<T*> actors;
 
 	ActorSystem()
 	{
@@ -16,15 +16,15 @@ struct ActorSystem : IActorSystem
 
 	T* Add()
 	{
-		actors.push_back(T());
-		return &actors.back();
+		actors.push_back(new T());
+		return actors.back();
 	}
 
 	virtual void GetActors(std::vector<Actor*>& outActors) override
 	{
-		for (T& actor : actors)
+		for (T* actor : actors)
 		{
-			outActors.push_back(&actor);
+			outActors.push_back(actor);
 		}
 	}
 };

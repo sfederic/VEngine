@@ -1,12 +1,11 @@
 #pragma once
 #include <vector>
-
-struct Actor;
+#include "Actors/Actor.h"
 
 struct Component
 {
-	Actor* owner;
-	Component* parent;
+	Actor* owner = nullptr;
+	Component* parent = nullptr;
 	std::vector<Component*> children;
 
 	virtual void Create() = 0;

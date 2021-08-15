@@ -12,6 +12,8 @@
 #include "Editor/Console.h"
 #include "World.h"
 #include "Render/ShaderSystem.h"
+#include "Actors/NormalActor.h"
+#include "Components/MeshComponent.h"
 
 Engine engine;
 
@@ -27,6 +29,10 @@ void Engine::Init(int argc, char* argv[])
 
 	activeCamera = &editorCamera;
 	
+	NormalActor::system.Add();
+
+	MeshComponent::system.Init();
+
 	world.Start();
 }
 

@@ -14,7 +14,7 @@ struct Actor
 	BoundingOrientedBox boundingBox;
 	BoundingSphere boundingSphere;
 
-	Actor* parent;
+	Actor* parent = nullptr;
 	std::vector<Actor*> children;
 
 	std::vector<Component*> components;

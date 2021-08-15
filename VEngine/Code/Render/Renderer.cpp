@@ -5,6 +5,7 @@
 #include "UI/UISystem.h"
 #include "Components/MeshComponent.h"
 #include "Actors/Actor.h"
+#include "Actors/NormalActor.h"
 #include "ShaderSystem.h"
 
 Renderer renderer;
@@ -246,7 +247,12 @@ void Renderer::Render()
 
 	shaderMatrices.view = activeCamera->view;
 
-	for (MeshComponent& mesh : MeshComponent::system.components)
+	for (NormalActor* actor : NormalActor::system.actors)
+	{
+
+	}
+
+	for (MeshComponent* mesh : MeshComponent::system.components)
 	{
 		context->RSSetState(activeRastState.Get());
 
@@ -262,22 +268,22 @@ void Renderer::Render()
 		context->VSSetShader(defaultVertexShader.Get(), nullptr, 0);
 		context->PSSetShader(defaultPixelShader.Get(), nullptr, 0);
 
-		context->PSSetSamplers(0, 1, &mesh.pso.sampler.data);
+		context->PSSetSamplers(0, 1, &mesh->pso.sampler.data);
 		//context->PSSetShaderResources(0, _countof(shaderResourceViews), shaderResourceViews);
 		//context->VSSetShaderResources(3, 1, &actorSystem->pso.instancedDataSrv->data);
 
 		UINT stride = sizeof(Vertex);
 		UINT offset = 0;
-		context->IASetVertexBuffers(0, 1, &mesh.pso.vertexBuffer.data, &stride, &offset);
-		context->IASetIndexBuffer(mesh.pso.indexBuffer.data, DXGI_FORMAT_R32_UINT, 0);
+		context->IASetVertexBuffers(0, 1, &mesh->pso.vertexBuffer.data, &stride, &offset);
+		context->IASetIndexBuffer(mesh->pso.indexBuffer.data, DXGI_FORMAT_R32_UINT, 0);
 
-		shaderMatrices.model = mesh.transform.GetAffine();
+		shaderMatrices.model = mesh->owner->GetTransformMatrix();
 
 		shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
 		context->UpdateSubresource(cbMatrices.Get(), 0, nullptr, &shaderMatrices, 0, 0);
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, cbMatrices.GetAddressOf());
 
-		context->DrawIndexed(mesh.data.indices.size(), 0, 0);
+		context->DrawIndexed(mesh->data.indices.size(), 0, 0);
 	}
 }
 

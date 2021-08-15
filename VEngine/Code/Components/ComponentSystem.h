@@ -7,31 +7,29 @@
 template <typename T>
 struct ComponentSystem : IComponentSystem
 {
-	std::vector<T> components;
-
-	SystemStates systemState = SystemStates::Unloaded;
+	std::vector<T*> components;
 
 	T* Add(Actor* owner)
 	{
-		components.push_back(T());
+		components.push_back(new T());
 
-		T& component = components.back();
-		component.owner = owner;
-		if (systemState == SystemStates::Unloaded)
+		T* component = components.back();
+		component->owner = owner;
+		if (systemState == SystemStates::Loaded)
 		{
-			component.Create();
+			component->Create();
 		}
 
-		owner->components.push_back(&component);
+		owner->components.push_back(component);
 
-		return &components.back();
+		return component;
 	}
 
 	void Init()
 	{
-		for (T& component : components)
+		for (T* component : components)
 		{
-			component.Create();
+			component->Create();
 		}
 
 		systemState = SystemStates::Loaded;
