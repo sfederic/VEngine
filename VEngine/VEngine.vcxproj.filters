@@ -173,6 +173,9 @@
     <ClCompile Include="Code\VString.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\NormalActor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -280,10 +283,17 @@
     <ClInclude Include="Code\VString.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Actors\NormalActor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\SystemStates.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Code\Render\Shaders\Include\CommonTypes.hlsli" />
     <None Include="Code\Render\Shaders\DefaultShader.hlsl" />
     <None Include="packages.config" />
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

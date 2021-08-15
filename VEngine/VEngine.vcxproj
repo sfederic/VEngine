@@ -114,6 +114,7 @@
     <ClCompile Include="Code\Actors\ActorSystemCache.cpp" />
     <ClCompile Include="Code\VString.cpp" />
     <ClCompile Include="Code\UI\Widget.cpp" />
+    <ClCompile Include="Code\Actors\NormalActor.cpp" />
     <ClInclude Include="Code\Animation\AnimationStructures.h" />
     <ClInclude Include="Code\Actors\Actor.h" />
     <ClInclude Include="Code\Actors\ActorSystem.h" />
@@ -212,6 +213,7 @@
     <ClCompile Include="Code\Serialiser.cpp" />
     <ClInclude Include="Code\Serialiser.h" />
     <ClCompile Include="Code\TimerSystem.cpp" />
+    <ClInclude Include="Code\SystemStates.h" />
     <ClInclude Include="Code\TimerSystem.h" />
     <ClCompile Include="Code\Transform.cpp" />
     <ClInclude Include="Code\Transform.h" />
@@ -223,6 +225,7 @@
     <ClCompile Include="Code\UI\UISystem.cpp" />
     <ClInclude Include="Code\VString.h" />
     <ClInclude Include="Code\UI\Widget.h" />
+    <ClInclude Include="Code\Actors\NormalActor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
@@ -231,6 +234,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Code\Render\Shaders\Include\CommonTypes.hlsli" />
+    <None Include="cpp.hint" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
