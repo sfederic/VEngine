@@ -115,6 +115,7 @@
     <ClCompile Include="Code\VString.cpp" />
     <ClCompile Include="Code\UI\Widget.cpp" />
     <ClCompile Include="Code\Actors\NormalActor.cpp" />
+    <ClCompile Include="Code\Components\SpatialComponent.cpp" />
     <ClInclude Include="Code\Animation\AnimationStructures.h" />
     <ClInclude Include="Code\Actors\Actor.h" />
     <ClInclude Include="Code\Actors\ActorSystem.h" />
@@ -226,6 +227,7 @@
     <ClInclude Include="Code\VString.h" />
     <ClInclude Include="Code\UI\Widget.h" />
     <ClInclude Include="Code\Actors\NormalActor.h" />
+    <ClInclude Include="Code\Components\SpatialComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

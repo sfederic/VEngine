@@ -1,12 +1,12 @@
 #pragma once
 #include <string>
-#include "Component.h"
+#include "SpatialComponent.h"
 #include "ComponentSystem.h"
 #include "Render/RenderTypes.h"
 #include "Render/PipelineObjects.h"
 #include "Transform.h"
 
-struct MeshComponent : Component
+struct MeshComponent : SpatialComponent
 {
 	COMPONENT_SYSTEM(MeshComponent)
 
@@ -15,7 +15,6 @@ struct MeshComponent : Component
 	std::string filename;
 	MeshData data;
 	PipelineStateObject pso;
-	Transform transform;
 
 	virtual void Create() override;
 };
