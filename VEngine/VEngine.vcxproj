@@ -213,10 +213,10 @@
     <ClInclude Include="Code\Transform.h" />
     <ClCompile Include="Code\TransformGizmo.cpp" />
     <ClInclude Include="Code\TransformGizmo.h" />
-    <ClInclude Include="Code\UISystem.h" />
+    <ClInclude Include="Code\UI\UISystem.h" />
     <ClInclude Include="Code\World.h" />
     <ClInclude Include="Code\WorldEditor.h" />
-    <ClCompile Include="Code\UISystem.cpp" />
+    <ClCompile Include="Code\UI\UISystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
