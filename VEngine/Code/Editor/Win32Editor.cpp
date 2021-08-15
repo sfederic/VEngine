@@ -37,7 +37,7 @@ void Win32Editor::SetMousePos()
 
 void Win32Editor::Log(const std::wstring logMessage)
 {
-	MessageBox(0, logMessage.c_str(), L"Error", 0);
+	MessageBoxW(0, logMessage.c_str(), L"Error", 0);
 }
 
 void Win32Editor::SetupWindow()
@@ -46,13 +46,13 @@ void Win32Editor::SetupWindow()
 
 	WNDCLASS wc = {};
 	wc.style = CS_HREDRAW | CS_VREDRAW;
-	wc.lpszClassName = L"Window";
+	wc.lpszClassName = "Window";
 	wc.lpfnWndProc = (WNDPROC)Core::WndProc;
 	wc.hInstance = instance;
 	wc.hCursor = LoadCursor(0, IDC_CROSS);
 
 	RegisterClass(&wc);
-	window = CreateWindow(L"Window", L"VEngine2.0", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, viewportWidth, viewportHeight, 0, 0, instance, 0);
+	window = CreateWindow("Window", "VEngine2.0", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, viewportWidth, viewportHeight, 0, 0, instance, 0);
 	if (!window)
 	{
 		HR(GetLastError());
