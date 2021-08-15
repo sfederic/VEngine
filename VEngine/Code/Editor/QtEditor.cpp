@@ -5,6 +5,7 @@
 #include "EditorMainWindow.h"
 #include "Input.h"
 #include "RenderViewWidget.h"
+#include "LogDock.h"
 
 void QtEditor::Init(int argc, char* argv[])
 {
@@ -35,6 +36,11 @@ void QtEditor::SetMousePos()
     QPoint mousePos = mainWindow->renderView->mapFromGlobal(QCursor::pos());
     viewportMouseX = mousePos.x();
     viewportMouseY = mousePos.y();
+}
+
+void QtEditor::Log(const std::wstring logMessage)
+{
+    mainWindow->logDock->Print(logMessage);
 }
 
 void QtEditor::SetEditorFont()

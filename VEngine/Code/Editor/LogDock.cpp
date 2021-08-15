@@ -22,6 +22,10 @@ LogDock::LogDock() : QDockWidget("Console")
 	setWidget(logWidget);
 }
 
+void LogDock::Print(const std::wstring& message)
+{
+}
+
 void LogDock::ClearLog()
 {
 	logMessageBox->clear();

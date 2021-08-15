@@ -35,6 +35,11 @@ void Win32Editor::SetMousePos()
 	viewportMouseY = mousePos.y;
 }
 
+void Win32Editor::Log(const std::wstring logMessage)
+{
+	MessageBox(0, logMessage.c_str(), L"Error", 0);
+}
+
 void Win32Editor::SetupWindow()
 {
 	HINSTANCE instance = GetModuleHandle(NULL);

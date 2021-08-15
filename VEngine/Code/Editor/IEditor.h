@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 //Base class for Toolkit and Native editors
 struct IEditor
@@ -14,4 +15,5 @@ struct IEditor
 	virtual void Init(int argc, char* argv[]) = 0;
 	virtual void Tick() = 0;
 	virtual void SetMousePos() = 0;
+	virtual void Log(const std::wstring logMessage) = 0;
 };

@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include <qdockwidget.h>
 
 struct LogDock : public QDockWidget
@@ -7,5 +8,6 @@ struct LogDock : public QDockWidget
 	struct QPushButton* clearButton;
 
 	LogDock();
+	void Print(const std::wstring& message);
 	void ClearLog();
 };
