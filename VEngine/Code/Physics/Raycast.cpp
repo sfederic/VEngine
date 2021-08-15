@@ -179,14 +179,13 @@ bool RaycastTriangleIntersect(Ray& ray)
 
 bool RaycastAll(Ray& ray, XMVECTOR origin, XMVECTOR direction)
 {
-	//for (int i = 0; i < world->actorSystems.size(); i++)
-	//{
-	//	if (Raycast(ray, origin, direction, world->actorSystems[i]))
-	//	{
-	//		ray.actorSystemIndex = i;
-	//		return true;
-	//	}
-	//}
+	for (IActorSystem* actorSystem : world.activeActorSystems)
+	{
+		if (Raycast(ray, origin, direction, actorSystem))
+		{
+			return true;
+		}
+	}
 
 	return false;
 }
