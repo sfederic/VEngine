@@ -40,10 +40,5 @@ XMMATRIX Actor::GetTransformMatrix()
 		rotationOffset = parent->transform.world.r[3];
 	}
 
-	return XMMatrixAffineTransformation(
-		XMLoadFloat3(&transform.scale),
-		rotationOffset,
-		XMLoadFloat4(&transform.rotation),
-		XMLoadFloat3(&transform.position)
-	);
+	return transform.GetAffineRotationOrigin(rotationOffset);
 }
