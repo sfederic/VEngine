@@ -76,6 +76,7 @@ void Engine::Render(double deltaTime)
 
 void Engine::Cleanup()
 {
+	shaderSystem.CleanUpShaders();
 	debugMenu.Cleanup();
 	uiSystem.Cleanup();
 }
