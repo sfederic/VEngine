@@ -15,3 +15,8 @@ void MeshComponent::Create()
 	pso.indexBuffer.data = renderer.CreateIndexBuffer(data);
 	pso.sampler.data = renderer.CreateSampler();
 }
+
+Properties MeshComponent::GetProperties()
+{
+	return Properties();
+}

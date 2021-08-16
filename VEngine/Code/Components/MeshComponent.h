@@ -15,4 +15,5 @@ struct MeshComponent : SpatialComponent
 	PipelineStateObject pso;
 
 	virtual void Create() override;
+	virtual Properties GetProperties();
 };
