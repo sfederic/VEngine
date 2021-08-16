@@ -2,6 +2,11 @@
 #include "FBXImporter.h"
 #include "Render/Renderer.h"
 
+MeshComponent::MeshComponent(const char* filename_)
+{
+	filename = filename_;
+}
+
 void MeshComponent::Create()
 {
 	//Import mesh

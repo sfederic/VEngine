@@ -14,6 +14,7 @@ struct MeshComponent : SpatialComponent
 	MeshData data;
 	PipelineStateObject pso;
 
+	MeshComponent(const char* filename_);
 	virtual void Create() override;
 	virtual Properties GetProperties();
 };
