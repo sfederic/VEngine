@@ -271,9 +271,6 @@
     <ClInclude Include="Code\Editor\PropertyWidgets\BoolWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Editor\PropertyWidgets\Float3Widget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Editor\PropertyWidgets\FloatWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -305,6 +302,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\Material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Editor\PropertyWidgets\Float3Widget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

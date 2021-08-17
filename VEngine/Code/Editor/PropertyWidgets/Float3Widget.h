@@ -1,5 +1,4 @@
 #pragma once
-
 #include <QDoubleSpinBox>
 #include <DirectXMath.h>
 
@@ -9,13 +8,11 @@ class Float3Widget : public QWidget
 {
 public:
 	Float3Widget(XMFLOAT3* value, QWidget* parent = 0);
-
-private:
 	void SetValue();
 
+private:
 	QDoubleSpinBox xSpinbox;
 	QDoubleSpinBox ySpinbox;
 	QDoubleSpinBox zSpinbox;
 	XMFLOAT3* _value;
 };
-

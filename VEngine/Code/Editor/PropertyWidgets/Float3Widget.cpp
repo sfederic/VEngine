@@ -9,6 +9,10 @@ Float3Widget::Float3Widget(XMFLOAT3* value, QWidget* parent) : QWidget(parent)
 	connect(&ySpinbox, &QDoubleSpinBox::editingFinished, this, &Float3Widget::SetValue);
 	connect(&zSpinbox, &QDoubleSpinBox::editingFinished, this, &Float3Widget::SetValue);
 
+	xSpinbox.setValue(value->x);
+	ySpinbox.setValue(value->y);
+	zSpinbox.setValue(value->z);
+
 	auto hLayout = new QHBoxLayout();
 	hLayout->addWidget(&xSpinbox);
 	hLayout->addWidget(&ySpinbox);
