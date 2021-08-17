@@ -24,7 +24,10 @@ struct ComponentSystem : IComponentSystem
 			component->Create();
 		}
 
-		owner->components.push_back(component);
+		if (owner)
+		{
+			owner->components.push_back(component);
+		}
 
 		return component;
 	}

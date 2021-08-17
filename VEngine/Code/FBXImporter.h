@@ -30,7 +30,7 @@ struct FBXImporter
 	FbxAnimEvaluator* animEvaluator;
 
 	void Init();
-	bool Import(const char* filename, MeshData& meshData /*, ActorSystem* actorSystem*/ );
+	bool Import(const std::string& filename, MeshData& meshData /*, ActorSystem* actorSystem*/ );
 	void ProcessAllChildNodes(FbxNode* node, MeshData& meshData);
 };
 

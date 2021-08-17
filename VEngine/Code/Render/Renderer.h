@@ -45,7 +45,10 @@ struct Renderer
 	std::vector<IDXGIAdapter1*> gpuAdapters;
 	std::vector<DXGI_ADAPTER_DESC1> gpuAdaptersDesc;
 
+	bool drawBoundingBoxes = false;
+
 	void Init(void* window, int viewportWidth, int viewportHeight);
+	void Tick();
 	void CreateFactory();
 	void CreateDevice();
 	void CreateSwapchain(HWND window);
@@ -65,6 +68,7 @@ struct Renderer
 
 	void RenderSetup();
 	void Render();
+	void RenderBounds();
 	void Present();
 	void* GetSwapchain();
 	float GetAspectRatio();

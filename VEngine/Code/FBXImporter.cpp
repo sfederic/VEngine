@@ -10,9 +10,11 @@ void FBXImporter::Init()
 	importer = FbxImporter::Create(manager, "");
 }
 
-bool FBXImporter::Import(const char* filename, MeshData& meshData /*, ActorSystem* actorSystem*/)
+bool FBXImporter::Import(const std::string& filename, MeshData& meshData /*, ActorSystem* actorSystem*/)
 {
-	if (!importer->Initialize(filename, -1, manager->GetIOSettings()))
+	std::string filepath = "Meshes/" + filename;
+
+	if (!importer->Initialize(filepath.c_str(), -1, manager->GetIOSettings()))
 	{
 		throw new std::exception("FBX importer fucked up. filename probably wrong");
 	}

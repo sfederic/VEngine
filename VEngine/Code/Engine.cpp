@@ -46,6 +46,7 @@ void Engine::TickSystems(double deltaTime)
 	activeCamera->Tick(deltaTime, editor->viewportMouseX, editor->viewportMouseY);
 	timerSystem.Tick(deltaTime);
 	worldEditor.Tick();
+	renderer.Tick();
 }
 
 void Engine::ResetSystems()
@@ -73,6 +74,7 @@ void Engine::Render(double deltaTime)
 {
 	renderer.RenderSetup();
 	renderer.Render();
+	renderer.RenderBounds();
 
 	uiSystem.BeginDraw();
 	console.Tick();

@@ -7,8 +7,13 @@
 #include "Actors/Actor.h"
 #include "Actors/NormalActor.h"
 #include "ShaderSystem.h"
+#include "Actors/DebugBox.h"
+#include "Input.h"
 
 Renderer renderer;
+
+UINT stride = sizeof(Vertex);
+UINT offset = 0;
 
 void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 {
@@ -27,8 +32,17 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	CreateSwapchain((HWND)window);
 	CreateRTVAndDSV();
 	CreateInputLayout();
+	CreateRasterizerStates();
 	CreateMainConstantBuffers();
 	CheckSupportedFeatures();
+}
+
+void Renderer::Tick()
+{
+	if (Input::GetKeyUp(Keys::B))
+	{
+		drawBoundingBoxes = !drawBoundingBoxes;
+	}
 }
 
 void Renderer::CreateFactory()
@@ -140,19 +154,19 @@ void Renderer::CreateRasterizerStates()
 	rastDesc.FrontCounterClockwise = FALSE;
 
 	//SOLID
-	HR(device->CreateRasterizerState(&rastDesc, &rastStateSolid));
+	HR(device->CreateRasterizerState(&rastDesc, rastStateSolid.GetAddressOf()));
 	activeRastState = rastStateSolid;
 	context->RSSetState(activeRastState.Get());
 
 	//WIREFRAME
 	rastDesc.FillMode = D3D11_FILL_WIREFRAME;
 	rastDesc.CullMode = D3D11_CULL_NONE;
-	HR(device->CreateRasterizerState(&rastDesc, &rastStateWireframe));
+	HR(device->CreateRasterizerState(&rastDesc, rastStateWireframe.GetAddressOf()));
 
 	//SOLID, NO BACK CULL
 	rastDesc.CullMode = D3D11_CULL_NONE;
 	rastDesc.FillMode = D3D11_FILL_SOLID;
-	HR(device->CreateRasterizerState(&rastDesc, &rastStateNoBackCull));
+	HR(device->CreateRasterizerState(&rastDesc, rastStateNoBackCull.GetAddressOf()));
 }
 
 void Renderer::CreateBlendStates()
@@ -267,8 +281,6 @@ void Renderer::Render()
 		//context->PSSetShaderResources(0, _countof(shaderResourceViews), shaderResourceViews);
 		//context->VSSetShaderResources(3, 1, &actorSystem->pso.instancedDataSrv->data);
 
-		UINT stride = sizeof(Vertex);
-		UINT offset = 0;
 		context->IASetVertexBuffers(0, 1, &mesh->pso.vertexBuffer.data, &stride, &offset);
 		context->IASetIndexBuffer(mesh->pso.indexBuffer.data, DXGI_FORMAT_R32_UINT, 0);
 
@@ -279,6 +291,37 @@ void Renderer::Render()
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, cbMatrices.GetAddressOf());
 
 		context->DrawIndexed(mesh->data.indices.size(), 0, 0);
+	}
+}
+
+void Renderer::RenderBounds()
+{
+	const int cbMatrixRegister = 0;
+	const int cbMaterialRegister = 1;
+
+	static DebugBox debugBox;
+
+	if (drawBoundingBoxes)
+	{
+		context->RSSetState(rastStateWireframe.Get());
+
+		auto boxShaderIt = shaderSystem.shaderMap.find(L"DefaultShader.hlsl");
+		context->VSSetShader(boxShaderIt->second->vertexShader, nullptr, 0);
+		context->PSSetShader(boxShaderIt->second->pixelShader, nullptr, 0);
+
+		context->IASetVertexBuffers(0, 1, &debugBox.boxMesh->pso.vertexBuffer.data, &stride, &offset);
+
+		shaderMatrices.view = activeCamera->view;
+
+		for (MeshComponent* mesh : MeshComponent::system.components)
+		{
+			shaderMatrices.model = mesh->GetWorldMatrix();
+			shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
+			context->UpdateSubresource(cbMatrices.Get(), 0, nullptr, &shaderMatrices, 0, 0);
+			context->VSSetConstantBuffers(cbMatrixRegister, 1, cbMatrices.GetAddressOf());
+
+			context->Draw(debugBox.boxMesh->data.vertices.size(), 0);
+		}
 	}
 }
 
