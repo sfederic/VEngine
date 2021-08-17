@@ -1,6 +1,7 @@
 #include "WorldEditor.h"
 #include "Physics/Raycast.h"
 #include "Input.h"
+#include "Editor/Editor.h"
 
 WorldEditor worldEditor;
 
@@ -22,11 +23,13 @@ void WorldEditor::HandleActorPicking()
 				if (RaycastTriangleIntersect(screenPickRay))
 				{
 					pickedActor = screenPickRay.hitActor;
+					editor->ActorProps(pickedActor);
 				}
 			}
 			else
 			{
 				pickedActor = screenPickRay.hitActor;
+				editor->ActorProps(pickedActor);
 			}
 		}
 	}

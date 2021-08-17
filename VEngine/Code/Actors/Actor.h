@@ -2,6 +2,7 @@
 #include <vector>
 #include <DirectXCollision.h>
 #include "Transform.h"
+#include "Properties.h"
 
 struct Component;
 struct SpatialComponent;
@@ -26,4 +27,5 @@ struct Actor
 	void SetPosition(XMVECTOR position);
 	void SetScale(XMVECTOR scale);
 	void SetRotation(XMVECTOR rotation);
+	virtual Properties GetProps();
 };

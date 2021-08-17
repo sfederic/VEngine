@@ -72,3 +72,11 @@ void Actor::SetRotation(XMVECTOR rotation)
 {
 	XMStoreFloat4(&rootComponent->transform.rotation, rotation);
 }
+
+Properties Actor::GetProps()
+{
+	Properties props;
+	props.Add("Position", &rootComponent->transform.position);
+	props.Add("Scale", &rootComponent->transform.scale);
+	return props;
+}

@@ -6,6 +6,7 @@
 #include "Input.h"
 #include "RenderViewWidget.h"
 #include "LogDock.h"
+#include "PropertiesDock.h"
 
 void QtEditor::Init(int argc, char* argv[])
 {
@@ -41,6 +42,11 @@ void QtEditor::SetMousePos()
 void QtEditor::Log(const std::wstring logMessage)
 {
     mainWindow->logDock->Print(logMessage);
+}
+
+void QtEditor::ActorProps(Actor* actor)
+{
+    mainWindow->propertiesDock->DisplayActorProperties(actor);
 }
 
 void QtEditor::SetEditorFont()

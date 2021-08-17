@@ -5,6 +5,7 @@
 #include "Input.h"
 #include "WorldEditor.h"
 #include "Actors/Actor.h"
+#include "Editor.h"
 
 TransformGizmo transformGizmo;
 
@@ -84,7 +85,7 @@ void TransformGizmo::Tick()
             actor->SetScale(scale);
             actor->SetRotation(rot);
 
-            //editor->SetActorProperties();
+            editor->ActorProps(actor);
         }
 
         //Toggle snap and scale controls

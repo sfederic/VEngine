@@ -5,40 +5,74 @@
 #include <QLabel>
 #include <QCheckBox>
 #include <QLineEdit>
+#include "Actors/Actor.h"
+#include "PropertyWidgets/BoolWidget.h" 
+#include "PropertyWidgets/Float3Widget.h"
+#include "PropertyWidgets/FloatWidget.h"
+#include "PropertyWidgets/IntWidget.h"
+#include "PropertyWidgets/VectorWidget.h"
 
 PropertiesDock::PropertiesDock() : QDockWidget("Properties")
 {
-	auto grid = new QGridLayout();
-	grid->setAlignment(Qt::AlignTop);
 
-	grid->addWidget(new QLabel("Transform"), 0, 1, 1, 3);
+}
 
-	grid->addWidget(new QLabel("Position"), 1, 0);
-	grid->addWidget(new QDoubleSpinBox(), 1, 1);
-	grid->addWidget(new QDoubleSpinBox(), 1, 2);
-	grid->addWidget(new QDoubleSpinBox(), 1, 3);
+void PropertiesDock::DisplayActorProperties(Actor* actor)
+{
+    if (actorPropsWidget && actorPropsGridLayout)
+    {
+        delete actorPropsGridLayout;
+        delete actorPropsWidget;
+    }
 
-	grid->addWidget(new QLabel("Rotation"), 2, 0);
-	grid->addWidget(new QDoubleSpinBox(), 2, 1);
-	grid->addWidget(new QDoubleSpinBox(), 2, 2);
-	grid->addWidget(new QDoubleSpinBox(), 2, 3);
+    actorPropsWidget = new QWidget();
+    actorPropsGridLayout = new QGridLayout();
+    actorPropsGridLayout->setAlignment(Qt::AlignTop);
 
-	grid->addWidget(new QLabel("Scale"), 3, 0);
-	grid->addWidget(new QDoubleSpinBox(), 3, 1);
-	grid->addWidget(new QDoubleSpinBox(), 3, 2);
-	grid->addWidget(new QDoubleSpinBox(), 3, 3);
+    int currentGridRow = 0;
+    const int propertyNameColumn = 0;
+    const int propertyDataColumn = 1;
 
-	grid->addWidget(new QLabel("MeshComponent"), 4, 1, 1, 3);
+    Properties props = actor->GetProps();
 
-	grid->addWidget(new QLabel("Shadow Depth"), 5, 0);
-	grid->addWidget(new QCheckBox(), 5, 1, 1, 3);
+    for (auto actorProperty : props.dataMap)
+    {
+        auto typeMap = props.typeMap;
+        auto type = typeMap.find(actorProperty.first);
 
-	grid->addWidget(new QLabel("Name"), 6, 0);
-	grid->addWidget(new QLineEdit(), 6, 1, 1, 3);
+        //Set property name onto label
+        actorPropsGridLayout->addWidget(new QLabel(actorProperty.first.c_str()), currentGridRow, propertyNameColumn);
 
+        //Set property data into grid
+        if (type->second == typeid(bool))
+        {
+            auto boolWidget = new BoolWidget((bool*)actorProperty.second);
+            actorPropsGridLayout->addWidget(boolWidget, currentGridRow, propertyDataColumn);
+        }
+        else if (type->second == typeid(int))
+        {
+            auto intWidget = new IntWidget((int*)actorProperty.second);
+            actorPropsGridLayout->addWidget(intWidget, currentGridRow, propertyDataColumn);
+        }
+        else if (type->second == typeid(float))
+        {
+            //auto floatWidget = new FloatWidget((float*)actorProperty.second);
+            //actorPropsGridLayout->addWidget(floatWidget, currentGridRow, propertyDataColumn);
+        }
+        else if (type->second == typeid(XMFLOAT3))
+        {
+            auto float3Widget = new Float3Widget((XMFLOAT3*)actorProperty.second);
+            actorPropsGridLayout->addWidget(float3Widget, currentGridRow, propertyDataColumn);
+        }
+        else if (type->second == typeid(XMVECTOR))
+        {
+            auto vectorWidget = new VectorWidget((XMVECTOR*)actorProperty.second);
+            actorPropsGridLayout->addWidget(vectorWidget, currentGridRow, propertyDataColumn);
+        }
 
-	auto propsWidget = new QWidget();
-	propsWidget->setLayout(grid);
+        currentGridRow++;
+    }
 
-	setWidget(propsWidget);
+    actorPropsWidget->setLayout(actorPropsGridLayout);
+    setWidget(actorPropsWidget);
 }

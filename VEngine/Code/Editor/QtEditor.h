@@ -10,6 +10,7 @@ struct QtEditor : IEditor
 	void Tick() override;
 	void SetMousePos() override;
 	virtual void Log(const std::wstring logMessage) override;
+	virtual void ActorProps(Actor* actor) override;
 	void SetEditorFont();
 	void EnableDarkMode();
 };
