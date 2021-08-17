@@ -112,6 +112,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Code\Actors\ActorSystemCache.cpp" />
+    <ClCompile Include="Code\Render\Material.cpp" />
     <ClCompile Include="Code\VString.cpp" />
     <ClCompile Include="Code\UI\Widget.cpp" />
     <ClCompile Include="Code\Actors\NormalActor.cpp" />
@@ -205,6 +206,7 @@
     <ClCompile Include="Code\World.cpp" />
     <ClCompile Include="Code\WorldEditor.cpp" />
     <ClCompile Include="Code\Profile.cpp" />
+    <ClInclude Include="Code\Render\Material.h" />
     <ClInclude Include="Code\Render\PipelineObjects.h" />
     <ClInclude Include="Code\Profile.h" />
     <ClInclude Include="Code\Properties.h" />
