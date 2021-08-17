@@ -9,11 +9,18 @@
 #include "ShaderSystem.h"
 #include "Actors/DebugBox.h"
 #include "Input.h"
+#include "Material.h"
 
 Renderer renderer;
 
 UINT stride = sizeof(Vertex);
 UINT offset = 0;
+
+const int cbMatrixRegister = 0;
+const int cbMaterialRegister = 1;
+
+ShaderMatrices shaderMatrices;
+Material shaderMaterial;
 
 void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 {
@@ -188,6 +195,11 @@ void Renderer::CreateMainConstantBuffers()
 	editorCamera.proj = shaderMatrices.proj;
 
 	cbMatrices = CreateDefaultBuffer(sizeof(shaderMatrices), D3D11_BIND_CONSTANT_BUFFER, &shaderMatrices);
+	assert(cbMatrices);
+
+	//Material buffer
+	cbMaterial = CreateDefaultBuffer(sizeof(Material), D3D11_BIND_CONSTANT_BUFFER, &shaderMaterial);
+	assert(cbMaterial);
 }
 
 void Renderer::CheckSupportedFeatures()
@@ -296,29 +308,32 @@ void Renderer::Render()
 
 void Renderer::RenderBounds()
 {
-	const int cbMatrixRegister = 0;
-	const int cbMaterialRegister = 1;
-
 	static DebugBox debugBox;
 
 	if (drawBoundingBoxes)
 	{
 		context->RSSetState(rastStateWireframe.Get());
 
-		auto boxShaderIt = shaderSystem.shaderMap.find(L"DefaultShader.hlsl");
+		auto boxShaderIt = shaderSystem.shaderMap.find(L"SolidColour.hlsl");
 		context->VSSetShader(boxShaderIt->second->vertexShader, nullptr, 0);
 		context->PSSetShader(boxShaderIt->second->pixelShader, nullptr, 0);
 
 		context->IASetVertexBuffers(0, 1, &debugBox.boxMesh->pso.vertexBuffer.data, &stride, &offset);
 
+		context->VSSetConstantBuffers(cbMatrixRegister, 1, cbMatrices.GetAddressOf());
+
 		shaderMatrices.view = activeCamera->view;
+
+		//Set debug wireframe material colour
+		shaderMaterial.ambient = XMFLOAT4(0.75f, 0.75f, 0.75f, 1.0f);
+		context->UpdateSubresource(cbMaterial.Get(), 0, nullptr, &shaderMaterial, 0, 0);
+		context->PSSetConstantBuffers(cbMaterialRegister, 1, cbMaterial.GetAddressOf());
 
 		for (MeshComponent* mesh : MeshComponent::system.components)
 		{
 			shaderMatrices.model = mesh->GetWorldMatrix();
 			shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
 			context->UpdateSubresource(cbMatrices.Get(), 0, nullptr, &shaderMatrices, 0, 0);
-			context->VSSetConstantBuffers(cbMatrixRegister, 1, cbMatrices.GetAddressOf());
 
 			context->Draw(debugBox.boxMesh->data.vertices.size(), 0);
 		}

@@ -21,27 +21,33 @@ struct Renderer
 	ComPtr<ID3D11DepthStencilView> dsv;
 	ComPtr<ID3D11InputLayout> inputLayout;
 
+	//Rasterizer states
 	ComPtr<ID3D11RasterizerState> activeRastState;
 	ComPtr<ID3D11RasterizerState> rastStateSolid;
 	ComPtr<ID3D11RasterizerState> rastStateWireframe;
 	ComPtr<ID3D11RasterizerState> rastStateNoBackCull;
 
+	//Blendstates
 	ComPtr<ID3D11BlendState> blendStateAlphaToCoverage;
 
+	//DXGI
 	ComPtr<IDXGISwapChain3> swapchain;
 	ComPtr<IDXGIFactory6> dxgiFactory;
 
+	//Shader data
 	ComPtr<ID3DBlob> defaultVertexCode;
 	ComPtr<ID3DBlob> defaultPixelCode;
 	ComPtr<ID3D11VertexShader> defaultVertexShader;
 	ComPtr<ID3D11PixelShader> defaultPixelShader;
 
+	//Constant buffers and data
 	ComPtr<ID3D11Buffer> cbMatrices;
+	ComPtr<ID3D11Buffer> cbMaterial;
 
-	ShaderMatrices shaderMatrices;
-
+	//Viewport
 	D3D11_VIEWPORT viewport;
 
+	//GPU structures
 	std::vector<IDXGIAdapter1*> gpuAdapters;
 	std::vector<DXGI_ADAPTER_DESC1> gpuAdaptersDesc;
 

@@ -309,9 +309,12 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Code\Render\Shaders\Include\CommonTypes.hlsli" />
-    <None Include="Code\Render\Shaders\DefaultShader.hlsl" />
     <None Include="packages.config" />
     <None Include="cpp.hint" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Code\Render\Shaders\SolidColour.hlsl" />
+    <FxCompile Include="Code\Render\Shaders\DefaultShader.hlsl" />
+    <FxCompile Include="Code\Render\Shaders\Include\CommonTypes.hlsli" />
   </ItemGroup>
 </Project>
