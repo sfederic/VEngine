@@ -3,5 +3,6 @@
 
 DebugBox::DebugBox()
 {
-	boxMesh = MeshComponent::system.Add(nullptr, MeshComponent("cube.fbx"));
+	boxMesh = new MeshComponent("cube.fbx");
+	boxMesh->Create();
 }

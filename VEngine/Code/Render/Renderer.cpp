@@ -332,6 +332,12 @@ void Renderer::RenderBounds()
 		for (MeshComponent* mesh : MeshComponent::system.components)
 		{
 			shaderMatrices.model = mesh->GetWorldMatrix();
+
+			//Set bouding box scale just slightly more than the Mesh to avoid overlap
+			shaderMatrices.model.r[0].m128_f32[0] *= mesh->boundingBox.Extents.x + 0.01f;
+			shaderMatrices.model.r[1].m128_f32[1] *= mesh->boundingBox.Extents.y + 0.01f;
+			shaderMatrices.model.r[2].m128_f32[2] *= mesh->boundingBox.Extents.z + 0.01f;
+
 			shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
 			context->UpdateSubresource(cbMatrices.Get(), 0, nullptr, &shaderMatrices, 0, 0);
 
