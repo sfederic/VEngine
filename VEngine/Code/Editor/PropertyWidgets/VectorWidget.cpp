@@ -27,3 +27,10 @@ void VectorWidget::SetValue()
 	XMVECTOR newVector = XMVectorSet((float)xSpinbox->value(), (float)ySpinbox->value(), (float)zSpinbox->value(), 0.f);
 	*_vector = newVector;
 }
+
+void VectorWidget::ResetValue()
+{
+	xSpinbox->setValue(_vector->m128_f32[0]);
+	ySpinbox->setValue(_vector->m128_f32[1]);
+	zSpinbox->setValue(_vector->m128_f32[2]);
+}

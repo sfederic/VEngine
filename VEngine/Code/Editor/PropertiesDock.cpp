@@ -19,8 +19,20 @@ PropertiesDock::PropertiesDock() : QDockWidget("Properties")
 
 void PropertiesDock::DisplayActorProperties(Actor* actor)
 {
+    //Set the inner values in the Qt widgets instead of remaking all the widgets below
+    if (previousActor == actor)
+    {
+        for (IPropertyWidget* propertyWidget : propertyWidgetsToUpdate)
+        {
+            propertyWidget->ResetValue();
+        }
+
+        return;
+    }
+
     if (actorPropsWidget && actorPropsGridLayout)
     {
+        propertyWidgetsToUpdate.clear();
         delete actorPropsGridLayout;
         delete actorPropsWidget;
     }
@@ -48,11 +60,13 @@ void PropertiesDock::DisplayActorProperties(Actor* actor)
         {
             auto boolWidget = new BoolWidget((bool*)actorProperty.second);
             actorPropsGridLayout->addWidget(boolWidget, currentGridRow, propertyDataColumn);
+            propertyWidgetsToUpdate.push_back((IPropertyWidget*)boolWidget);
         }
         else if (type->second == typeid(int))
         {
             auto intWidget = new IntWidget((int*)actorProperty.second);
             actorPropsGridLayout->addWidget(intWidget, currentGridRow, propertyDataColumn);
+            propertyWidgetsToUpdate.push_back((IPropertyWidget*)intWidget);
         }
         else if (type->second == typeid(float))
         {
@@ -63,11 +77,13 @@ void PropertiesDock::DisplayActorProperties(Actor* actor)
         {
             auto float3Widget = new Float3Widget((XMFLOAT3*)actorProperty.second);
             actorPropsGridLayout->addWidget(float3Widget, currentGridRow, propertyDataColumn);
+            propertyWidgetsToUpdate.push_back((IPropertyWidget*)float3Widget);
         }
         else if (type->second == typeid(XMVECTOR))
         {
             auto vectorWidget = new VectorWidget((XMVECTOR*)actorProperty.second);
             actorPropsGridLayout->addWidget(vectorWidget, currentGridRow, propertyDataColumn);
+            propertyWidgetsToUpdate.push_back((IPropertyWidget*)vectorWidget);
         }
 
         currentGridRow++;
@@ -75,4 +91,6 @@ void PropertiesDock::DisplayActorProperties(Actor* actor)
 
     actorPropsWidget->setLayout(actorPropsGridLayout);
     setWidget(actorPropsWidget);
+
+    previousActor = actor;
 }

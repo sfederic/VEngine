@@ -307,6 +307,9 @@
     <ClInclude Include="Code\Editor\PropertyWidgets\Float3Widget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Editor\PropertyWidgets\IPropertyWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

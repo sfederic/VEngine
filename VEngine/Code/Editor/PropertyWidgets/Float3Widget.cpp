@@ -29,3 +29,10 @@ void Float3Widget::SetValue()
 	newFloat3.z = zSpinbox.value();
 	*_value = newFloat3;
 }
+
+void Float3Widget::ResetValue()
+{
+	xSpinbox.setValue(_value->x);
+	ySpinbox.setValue(_value->y);
+	zSpinbox.setValue(_value->z);
+}

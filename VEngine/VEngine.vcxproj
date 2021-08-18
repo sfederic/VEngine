@@ -180,6 +180,7 @@
     <ClInclude Include="Code\Editor\PropertyWidgets\Float3Widget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\FloatWidget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\IntWidget.h" />
+    <ClInclude Include="Code\Editor\PropertyWidgets\IPropertyWidget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\VectorWidget.h" />
     <ClInclude Include="Code\Editor\ToolbarDock.h" />
     <ClCompile Include="Code\Editor\Win32Editor.cpp" />

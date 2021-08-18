@@ -20,3 +20,8 @@ void FloatWidget::SetValue()
 {
 	*_value = (float)value();
 }
+
+void FloatWidget::ResetValue()
+{
+	setValue(*_value);
+}

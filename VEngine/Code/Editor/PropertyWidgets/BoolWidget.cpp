@@ -22,3 +22,15 @@ void BoolWidget::SetValue(int value)
 		*_value = value;
 	}
 }
+
+void BoolWidget::ResetValue()
+{
+	if (*_value == true)
+	{
+		setCheckState(Qt::CheckState::Checked);
+	}
+	else
+	{
+		setCheckState(Qt::CheckState::Unchecked);
+	}
+}

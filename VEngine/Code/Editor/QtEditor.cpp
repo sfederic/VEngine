@@ -8,6 +8,8 @@
 #include "LogDock.h"
 #include "PropertiesDock.h"
 
+#include "Profile.h"
+
 void QtEditor::Init(int argc, char* argv[])
 {
     app = new QApplication(argc, argv); //Init order matters here. Qt wants a QApp before a QMainWindow/QWidget
@@ -46,7 +48,9 @@ void QtEditor::Log(const std::wstring logMessage)
 
 void QtEditor::ActorProps(Actor* actor)
 {
+    Profile::Start(std::source_location::current());
     mainWindow->propertiesDock->DisplayActorProperties(actor);
+    Profile::End(std::source_location::current());
 }
 
 void QtEditor::SetEditorFont()

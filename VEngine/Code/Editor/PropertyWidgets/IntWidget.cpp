@@ -14,3 +14,8 @@ void IntWidget::SetValue()
 		*_value = value();
 	}
 }
+
+void IntWidget::ResetValue()
+{
+	setValue(*_value);
+}
