@@ -27,3 +27,6 @@ namespace Profile
 	void End(std::source_location location);
 	void Reset();
 }
+
+#define PROFILE_START Profile::Start(std::source_location::current());
+#define PROFILE_END Profile::End(std::source_location::current());
