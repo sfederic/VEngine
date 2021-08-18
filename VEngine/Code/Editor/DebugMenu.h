@@ -30,6 +30,7 @@ struct DebugMenu
 	void RenderFPSMenu(double deltaTime);
 	void RenderProfileMenu();
 	void RenderSnappingMenu();
+	void RenderActorProps();
 };
 
 extern DebugMenu debugMenu;

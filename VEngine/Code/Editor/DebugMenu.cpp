@@ -9,6 +9,8 @@
 #include "TransformGizmo.h"
 #include "Core.h"
 #include "Profile.h"
+#include "WorldEditor.h"
+#include "Actors/Actor.h"
 
 DebugMenu debugMenu;
 
@@ -50,7 +52,7 @@ void DebugMenu::Tick(double deltaTime)
 	//RenderActorStatsMenu();
 	//RenderActorSpawnMenu();
 	//RenderActorInspectMenu();
-	//RenderActorProps();
+	RenderActorProps();
 
 	ImGui::EndFrame();
 
@@ -68,6 +70,57 @@ void DebugMenu::Cleanup()
 void DebugMenu::AddNotification(const wchar_t* note)
 {
 	debugNotifications.push_back(DebugNotification(note));
+}
+
+void DebugMenu::RenderActorProps()
+{
+	if (worldEditor.pickedActor == nullptr)
+	{
+		return;
+	}
+
+
+	ImGui::Begin("Actor Properties");
+
+	auto props = worldEditor.pickedActor->GetProps();
+
+	for (auto& actorProperty : props.dataMap)
+	{
+		auto& typeMap = props.typeMap;
+		auto type = typeMap.find(actorProperty.first);
+
+		if (type->second == typeid(bool))
+		{
+			ImGui::Checkbox(actorProperty.first.c_str(), (bool*)actorProperty.second);
+		}
+		else if (type->second == typeid(int))
+		{
+			ImGui::InputInt(actorProperty.first.c_str(), (int*)actorProperty.second);
+		}
+		else if (type->second == typeid(float))
+		{
+			ImGui::InputFloat(actorProperty.first.c_str(), (float*)actorProperty.second);
+		}
+		else if (type->second == typeid(XMFLOAT3))
+		{
+			DirectX::XMFLOAT3* xmfloat3 = (DirectX::XMFLOAT3*)actorProperty.second;
+
+			//ImGui actually uses the Label as the unique ID to a widget, that's why
+			//the strings below are made to be unique.
+			//REF: https://github.com/ocornut/imgui/blob/master/docs/FAQ.md#q-why-is-my-widget-not-reacting-when-i-click-on-it
+
+			float* f3[3] = { &xmfloat3->x, &xmfloat3->y, &xmfloat3->z };
+
+			ImGui::InputFloat3(actorProperty.first.c_str(), *f3);
+		}
+		else if (type->second == typeid(std::string))
+		{
+			std::string* str = static_cast<std::string*>(actorProperty.second);
+			ImGui::InputText("name", str->data(), str->size());
+		}
+	}
+
+	ImGui::End();
 }
 
 //Handle notifications (eg. "Shaders recompiled", "ERROR: Not X", etc)
@@ -233,59 +286,6 @@ void DebugMenu::RenderSnappingMenu()
 
 //		ImGui::End();
 //	}
-//}
-
-//void DebugMenu::RenderActorProps()
-//{
-//	PROFILE_START
-
-//		if (gWorldEditor.pickedActor == nullptr) return;
-
-//	ImGui::Begin("Actor Props");
-//	//ImGui::SetWindowPos(ImVec2(10, 10));
-//	//ImGui::SetWindowSize(ImVec2(300, 500));
-
-//	auto props = gWorldEditor.pickedActor->GetProps();
-
-//	for (auto& actorProperty : props.dataMap)
-//	{
-//		auto& typeMap = props.typeMap;
-//		auto& type = typeMap.find(actorProperty.first);
-
-//		if (type->second == typeid(bool))
-//		{
-//			ImGui::Checkbox(actorProperty.first.c_str(), (bool*)actorProperty.second);
-//		}
-//		else if (type->second == typeid(int))
-//		{
-//			ImGui::InputInt(actorProperty.first.c_str(), (int*)actorProperty.second);
-//		}
-//		else if (type->second == typeid(float))
-//		{
-//			ImGui::InputFloat(actorProperty.first.c_str(), (float*)actorProperty.second);
-//		}
-//		else if (type->second == typeid(XMFLOAT3))
-//		{
-//			DirectX::XMFLOAT3* xmfloat3 = (DirectX::XMFLOAT3*)actorProperty.second;
-
-//			//ImGui actually uses the Label as the unique ID to a widget, that's why
-//			//the strings below are made to be unique.
-//			//REF: https://github.com/ocornut/imgui/blob/master/docs/FAQ.md#q-why-is-my-widget-not-reacting-when-i-click-on-it
-
-//			float* f3[3] = { &xmfloat3->x, &xmfloat3->y, &xmfloat3->z };
-
-//			ImGui::InputFloat3(actorProperty.first.c_str(), *f3);
-//		}
-//		else if (type->second == typeid(std::string))
-//		{
-//			std::string* str = static_cast<std::string*>(actorProperty.second);
-//			ImGui::InputText("name", str->data(), str->size());
-//		}
-//	}
-
-//	ImGui::End();
-
-//	PROFILE_END
 //}
 
 //void DebugMenu::RenderActorInspectMenu()
