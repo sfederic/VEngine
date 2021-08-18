@@ -21,6 +21,8 @@ void DebugMenu::Init()
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 
+	io.Fonts->AddFontFromFileTTF("Fonts/OpenSans.ttf", 20);
+
 	//Imgui has an .ini file to save previous ui positions and values.
 	//Setting this to null removes this initial setup.
 	io.IniFilename = nullptr;
