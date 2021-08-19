@@ -2,12 +2,15 @@
 #include "Physics/Raycast.h"
 #include "Input.h"
 #include "Editor/Editor.h"
+#include "Actors/Actor.h"
+#include "Actors/IActorSystem.h"
 
 WorldEditor worldEditor;
 
 void WorldEditor::Tick()
 {
 	HandleActorPicking();
+	DuplicateActor();
 }
 
 void WorldEditor::HandleActorPicking()
@@ -30,6 +33,20 @@ void WorldEditor::HandleActorPicking()
 			{
 				pickedActor = screenPickRay.hitActor;
 				editor->ActorProps(pickedActor);
+			}
+		}
+	}
+}
+
+void WorldEditor::DuplicateActor()
+{
+	if (Input::GetAsyncKey(Keys::Ctrl))
+	{
+		if (Input::GetKeyUp(Keys::D))
+		{
+			if (pickedActor)
+			{
+				pickedActor->actorSystem->SpawnActor(pickedActor->GetTransform());
 			}
 		}
 	}
