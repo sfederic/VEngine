@@ -17,7 +17,15 @@ struct ActorSystem : IActorSystem
 	T* Add()
 	{
 		actors.push_back(new T());
+		actors.back()->actorSystem = this;
 		return actors.back();
+	}
+
+	virtual Actor* SpawnActor(Transform transform) override
+	{
+		actors.push_back(new T());
+		actors.back()->SetTransform(transform);
+		return (Actor*)actors.back();
 	}
 
 	virtual void GetActors(std::vector<Actor*>& outActors) override
@@ -29,5 +37,4 @@ struct ActorSystem : IActorSystem
 	}
 };
 
-#define ACTOR_SYSTEM(type) \
-inline static ActorSystem<type> system; \
+#define ACTOR_SYSTEM(type) inline static ActorSystem<type> system;
