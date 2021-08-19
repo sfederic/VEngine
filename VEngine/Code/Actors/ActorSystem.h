@@ -17,15 +17,22 @@ struct ActorSystem : IActorSystem
 	T* Add()
 	{
 		actors.push_back(new T());
-		actors.back()->actorSystem = this;
-		return actors.back();
+
+		T* actor = actors.back();
+		actor->actorSystem = this;
+
+		return actor;
 	}
 
 	virtual Actor* SpawnActor(Transform transform) override
 	{
 		actors.push_back(new T());
-		actors.back()->SetTransform(transform);
-		return (Actor*)actors.back();
+
+		T* actor = actors.back();
+		actor->SetTransform(transform);
+		actor->actorSystem = this;
+
+		return (Actor*)actor;
 	}
 
 	virtual void GetActors(std::vector<Actor*>& outActors) override
