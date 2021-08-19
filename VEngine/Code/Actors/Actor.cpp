@@ -73,6 +73,11 @@ void Actor::SetRotation(XMVECTOR rotation)
 	XMStoreFloat4(&rootComponent->transform.rotation, rotation);
 }
 
+void Actor::SetTransform(Transform transform)
+{
+	rootComponent->transform = transform;
+}
+
 Properties Actor::GetProps()
 {
 	Properties props;
