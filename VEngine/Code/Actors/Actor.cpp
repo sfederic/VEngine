@@ -78,6 +78,11 @@ void Actor::SetTransform(Transform transform)
 	rootComponent->transform = transform;
 }
 
+Transform Actor::GetTransform()
+{
+	return rootComponent->transform;
+}
+
 Properties Actor::GetProps()
 {
 	Properties props;

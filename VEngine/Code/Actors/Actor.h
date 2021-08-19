@@ -31,5 +31,6 @@ struct Actor
 	void SetScale(XMVECTOR scale);
 	void SetRotation(XMVECTOR rotation);
 	void SetTransform(Transform transform);
+	Transform GetTransform();
 	virtual Properties GetProps();
 };
