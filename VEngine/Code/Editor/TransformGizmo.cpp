@@ -74,7 +74,7 @@ void TransformGizmo::Tick()
         ImGuizmo::Manipulate(*view.m, *proj.m, currentTransformOperation, currentTransformMode,
             *actorMatrix.m, nullptr, currentSnapValues, bounds, boundsSnap);
 
-        if (ImGuizmo::IsUsing())
+        if (CheckInUse())
         {
             Actor* actor = worldEditor.pickedActor;
 
@@ -134,4 +134,14 @@ void TransformGizmo::Tick()
     }
 
     ImGui::End();
+}
+
+bool TransformGizmo::CheckInUse()
+{
+    return ImGuizmo::IsUsing();
+}
+
+bool TransformGizmo::CheckMouseOver()
+{
+    return ImGuizmo::IsOver();
 }

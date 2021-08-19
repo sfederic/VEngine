@@ -4,6 +4,7 @@
 #include "Editor/Editor.h"
 #include "Actors/Actor.h"
 #include "Actors/IActorSystem.h"
+#include "Editor/TransformGizmo.h"
 
 WorldEditor worldEditor;
 
@@ -15,6 +16,11 @@ void WorldEditor::Tick()
 
 void WorldEditor::HandleActorPicking()
 {
+	if (transformGizmo.CheckMouseOver()) 
+	{
+		return;
+	}
+
 	if (Input::GetKeyDown(Keys::LeftMouse))
 	{
 		Ray screenPickRay;

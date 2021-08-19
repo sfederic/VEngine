@@ -27,8 +27,9 @@ struct TransformGizmo
 	bool bBoundsToggle = true;
 	bool bGridToggle = true;
 
-    //Needs to be called in DebugMenu::Tick() to work with ImGui calls
-	void Tick();
+	void Tick(); //Needs to be called in DebugMenu::Tick() to work with ImGui calls
+	bool CheckInUse();
+	bool CheckMouseOver();
 };
 
 extern TransformGizmo transformGizmo;
