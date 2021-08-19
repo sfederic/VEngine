@@ -76,6 +76,11 @@ void DebugMenu::AddNotification(const wchar_t* note)
 
 void DebugMenu::RenderActorProps()
 {
+	if (!propsMenuOpen)
+	{
+		return;
+	}
+
 	if (worldEditor.pickedActor == nullptr)
 	{
 		return;

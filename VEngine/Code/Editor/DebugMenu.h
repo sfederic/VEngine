@@ -21,6 +21,7 @@ struct DebugMenu
 	bool fpsMenuOpen = false;
 	bool snapMenuOpen = false;
 	bool profileMenuOpen = false;
+	bool propsMenuOpen = false;
 
 	void Init();
 	void Tick(double deltaTime);

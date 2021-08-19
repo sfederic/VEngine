@@ -15,6 +15,7 @@ namespace ExecuteStrings
 	const wchar_t* SNAP = L"SNAP";
 	const wchar_t* PROFILE = L"PROFILE";
 	const wchar_t* ACTOR = L"ACTOR";
+	const wchar_t* PROPS = L"PROPS";
 	const wchar_t* INSPECT = L"INSPECT";
 }
 
@@ -92,6 +93,10 @@ void Console::ExecuteString()
 	{
 		debugMenu.bActorInspectMenuOpen = !debugMenu.bActorInspectMenuOpen;
 	}*/
+	else if (consoleString == ExecuteStrings::PROPS)
+	{
+		debugMenu.propsMenuOpen = !debugMenu.propsMenuOpen;
+	}
 	else
 	{
 		debugMenu.AddNotification(L"No command found");
