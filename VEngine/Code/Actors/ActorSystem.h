@@ -14,25 +14,21 @@ struct ActorSystem : IActorSystem
 		actorSystemCache.Add(typeid(T), this);
 	}
 
-	T* Add()
+	T* Add(Transform transform = Transform())
 	{
 		actors.push_back(new T());
 
 		T* actor = actors.back();
 		actor->actorSystem = this;
+		actor->SetTransform(transform);
 
 		return actor;
 	}
 
 	virtual Actor* SpawnActor(Transform transform) override
 	{
-		actors.push_back(new T());
-
-		T* actor = actors.back();
-		actor->SetTransform(transform);
-		actor->actorSystem = this;
-
-		return (Actor*)actor;
+		Actor* actor = (Actor*)Add(transform);
+		return actor;
 	}
 
 	virtual void GetActors(std::vector<Actor*>& outActors) override
