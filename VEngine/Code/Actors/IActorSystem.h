@@ -16,4 +16,5 @@ struct IActorSystem
 	virtual Actor* FindActorByName(std::string actorName) = 0;
 	virtual void Serialise(std::ostream& os) = 0;
 	virtual void Deserialise(std::istream& is) = 0;
+	virtual void Clean() = 0;
 };

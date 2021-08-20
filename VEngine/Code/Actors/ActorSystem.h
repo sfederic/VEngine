@@ -12,12 +12,12 @@ struct ActorSystem : IActorSystem
 
 	ActorSystem()
 	{
-		actorSystemCache.Add(typeid(T), this);
-
 		std::string typeName = typeid(T).name();
 		std::string delimiter = " ";
 		std::string token = typeName.substr(typeName.find(delimiter) + 1);
 		name = token;
+
+		actorSystemCache.Add(typeid(T), this);
 	}
 
 	T* Add(Transform transform = Transform())
@@ -76,6 +76,16 @@ struct ActorSystem : IActorSystem
 		{
 			outActors.push_back(actor);
 		}
+	}
+
+	virtual void Clean() override
+	{
+		for (T* actor : actors)
+		{
+			delete actor;
+		}
+
+		actors.clear();
 	}
 };
 
