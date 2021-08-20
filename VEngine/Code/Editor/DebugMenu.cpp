@@ -11,6 +11,7 @@
 #include "Profile.h"
 #include "WorldEditor.h"
 #include "Actors/Actor.h"
+#include "UI/UISystem.h"
 
 DebugMenu debugMenu;
 
@@ -143,8 +144,8 @@ void DebugMenu::RenderNotifications(double deltaTime)
 			debugNotifications[i].timeOnScreen += deltaTime;
 
 			float notificationOffsetY = 20.f * i;
-			/*gUISystem.d2dRenderTarget->DrawTextA(debugNotifications[i].text.c_str(), debugNotifications[i].text.size(), gUISystem.textFormat,
-				{ 0.f, notificationOffsetY, 1000.f, 1000.f }, gUISystem.brushText);*/
+			uiSystem.d2dRenderTarget->DrawTextA(debugNotifications[i].text.c_str(), debugNotifications[i].text.size(), uiSystem.textFormat,
+				{ 0.f, notificationOffsetY, 1000.f, 1000.f }, uiSystem.brushText);
 		}
 		else
 		{
