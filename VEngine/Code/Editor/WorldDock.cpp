@@ -11,8 +11,6 @@ WorldDock::WorldDock() : QDockWidget("World")
 	actorTreeWidget->setColumnCount(1);
 	actorTreeWidget->setHeaderLabels(QStringList("Actors"));
 
-	PopulateWorldActorList();
-
 	setWidget(actorTreeWidget);
 }
 

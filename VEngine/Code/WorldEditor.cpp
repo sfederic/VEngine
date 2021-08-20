@@ -53,6 +53,7 @@ void WorldEditor::DuplicateActor()
 			if (pickedActor)
 			{
 				pickedActor->actorSystem->SpawnActor(pickedActor->GetTransform());
+				editor->UpdateWorldList();
 			}
 		}
 	}
