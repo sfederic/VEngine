@@ -13,6 +13,7 @@ void WorldEditor::Tick()
 {
 	HandleActorPicking();
 	DuplicateActor();
+	DeleteActor();
 	SaveWorld();
 }
 
@@ -68,6 +69,20 @@ void WorldEditor::SaveWorld()
 		if (Input::GetKeyUp(Keys::S))
 		{
 			fileSystem.WriteAllActorSystems("test");
+		}
+	}
+}
+
+void WorldEditor::DeleteActor()
+{
+	if (pickedActor)
+	{
+		if (Input::GetKeyUp(Keys::Delete))
+		{
+			pickedActor->Destroy();
+			pickedActor = nullptr;
+
+			editor->UpdateWorldList();
 		}
 	}
 }
