@@ -11,4 +11,5 @@ struct IActorSystem
 
 	virtual void GetActors(std::vector<Actor*>& outActors) = 0;
 	virtual Actor* SpawnActor(Transform transform) = 0;
+	virtual Actor* FindActorByName(std::string actorName) = 0;
 };

@@ -12,15 +12,11 @@ Actor* World::FindActorByName(std::string actorName)
 {
 	for (IActorSystem* actorSystem : activeActorSystems)
 	{
-		std::vector<Actor*> actors;
-		actorSystem->GetActors(actors);
+		Actor* foundActor = actorSystem->FindActorByName(actorName);
 
-		for (Actor* actor : actors)
+		if (foundActor)
 		{
-			if (actor->name == actorName)
-			{
-				return actor;
-			}
+			return foundActor;
 		}
 	}
 

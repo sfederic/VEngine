@@ -31,6 +31,19 @@ struct ActorSystem : IActorSystem
 		return actor;
 	}
 
+	virtual Actor* FindActorByName(std::string actorName) override
+	{
+		for (T* actor : actors)
+		{
+			if (actor->name == actorName)
+			{
+				return (Actor*)actor;
+			}
+		}
+
+		return nullptr;
+	}
+
 	virtual Actor* SpawnActor(Transform transform) override
 	{
 		Actor* actor = (Actor*)Add(transform);
