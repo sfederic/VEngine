@@ -7,6 +7,7 @@
 #include <QDesktopServices>
 #include <qboxlayout.h>
 #include <QUrl>
+#include "FileSystem.h"
 
 AssetDock::AssetDock() : QDockWidget("Assets")
 {
@@ -59,8 +60,16 @@ void AssetDock::AssetItemClicked()
     auto fileExtension = std::filesystem::path(fullPath.toStdString()).extension();
     auto extension = fileExtension.c_str();
 
-    //Opens up default system program from filename.
-    QDesktopServices::openUrl(QUrl::fromLocalFile(fullPath));
+    //Load world
+    if (std::wcscmp(extension, L".sav") == 0)
+    {
+        fileSystem.LoadWorld(fullPath.toStdString().c_str());
+    }
+    else
+    {
+        //Opens up default system program from filename.
+        QDesktopServices::openUrl(QUrl::fromLocalFile(fullPath));
+    }
 }
 
 void AssetDock::AssetFolderClicked()
