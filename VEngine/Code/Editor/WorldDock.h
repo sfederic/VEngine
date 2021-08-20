@@ -1,9 +1,12 @@
 #pragma once
 #include <qdockwidget.h>
 
+class QTreeWidget;
+
 struct WorldDock : public QDockWidget
 {
-	struct QTreeWidget* actorTreeWidget;
+	QTreeWidget* actorTreeWidget;
 
 	WorldDock();
+	void PopulateWorldActorList();
 };

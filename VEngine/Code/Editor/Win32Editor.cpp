@@ -44,6 +44,10 @@ void Win32Editor::ActorProps(Actor* actor)
 {
 }
 
+void Win32Editor::UpdateWorldList()
+{
+}
+
 void Win32Editor::SetupWindow()
 {
 	HINSTANCE instance = GetModuleHandle(NULL);

@@ -12,6 +12,11 @@ struct ActorSystem : IActorSystem
 	ActorSystem()
 	{
 		actorSystemCache.Add(typeid(T), this);
+
+		std::string typeName = typeid(T).name();
+		std::string delimiter = " ";
+		std::string token = typeName.substr(typeName.find(delimiter) + 1);
+		name = token;
 	}
 
 	T* Add(Transform transform = Transform())
@@ -21,6 +26,7 @@ struct ActorSystem : IActorSystem
 		T* actor = actors.back();
 		actor->actorSystem = this;
 		actor->SetTransform(transform);
+		actor->name = this->name + std::to_string(actors.size() - 1);
 
 		return actor;
 	}
@@ -40,4 +46,5 @@ struct ActorSystem : IActorSystem
 	}
 };
 
-#define ACTOR_SYSTEM(type) inline static ActorSystem<type> system;
+#define ACTOR_SYSTEM(type) inline static ActorSystem<type> system; \
+type* Add(Transform transform = Transform()) { return (type*)system.Add(transform); } \

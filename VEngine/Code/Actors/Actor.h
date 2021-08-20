@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 #include <DirectXCollision.h>
 #include "Transform.h"
 #include "Properties.h"
@@ -19,6 +20,8 @@ struct Actor
 	std::vector<Component*> components;
 
 	IActorSystem* actorSystem;
+
+	std::string name;
 
 	Actor();
 	XMMATRIX GetWorldMatrix();

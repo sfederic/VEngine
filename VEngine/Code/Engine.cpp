@@ -30,10 +30,10 @@ void Engine::Init(int argc, char* argv[])
 	activeCamera = &editorCamera;
 	
 	NormalActor::system.Add();
-
 	MeshComponent::system.Init();
 
 	world.Start();
+	editor->UpdateWorldList();
 }
 
 void Engine::TickSystems(double deltaTime)

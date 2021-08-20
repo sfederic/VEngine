@@ -7,8 +7,7 @@
 #include "RenderViewWidget.h"
 #include "LogDock.h"
 #include "PropertiesDock.h"
-
-#include "Profile.h"
+#include "WorldDock.h"
 
 void QtEditor::Init(int argc, char* argv[])
 {
@@ -48,9 +47,12 @@ void QtEditor::Log(const std::wstring logMessage)
 
 void QtEditor::ActorProps(Actor* actor)
 {
-    Profile::Start(std::source_location::current());
     mainWindow->propertiesDock->DisplayActorProperties(actor);
-    Profile::End(std::source_location::current());
+}
+
+void QtEditor::UpdateWorldList()
+{
+    mainWindow->worldDock->PopulateWorldActorList();
 }
 
 void QtEditor::SetEditorFont()
