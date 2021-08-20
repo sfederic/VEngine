@@ -19,6 +19,8 @@ struct ComponentSystem : IComponentSystem
 
 		T* component = components.back();
 		component->owner = owner;
+		component->index = components.size() - 1;
+
 		if (systemState == SystemStates::Loaded)
 		{
 			component->Create();
@@ -30,6 +32,14 @@ struct ComponentSystem : IComponentSystem
 		}
 
 		return component;
+	}
+
+	void Remove(int index)
+	{
+		delete components[index];
+		std::swap(components[index], components.back());
+		components[index]->index = index;
+		components.pop_back();
 	}
 
 	void Init()
@@ -55,3 +65,4 @@ struct ComponentSystem : IComponentSystem
 
 #define COMPONENT_SYSTEM(type) \
 inline static ComponentSystem<type> system; \
+virtual void Destroy() override { system.Remove(index); } \
