@@ -22,3 +22,8 @@ Actor* World::FindActorByName(std::string actorName)
 
 	return nullptr;
 }
+
+void World::CleanupActorSystems()
+{
+	activeActorSystems.clear();
+}

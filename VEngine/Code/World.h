@@ -13,6 +13,7 @@ struct World
 
 	void Start();
 	Actor* FindActorByName(std::string actorName);
+	void CleanupActorSystems();
 };
 
 extern World world;
