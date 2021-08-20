@@ -2,6 +2,7 @@
 #include <qdockwidget.h>
 
 class QTreeWidget;
+class QTreeWidgetItem;
 
 struct WorldDock : public QDockWidget
 {
@@ -9,4 +10,6 @@ struct WorldDock : public QDockWidget
 
 	WorldDock();
 	void PopulateWorldActorList();
+	void ClickOnActorInList(QTreeWidgetItem* item, int column);
+	void DoubleClickOnActorInList(QTreeWidgetItem* item, int column);
 };
