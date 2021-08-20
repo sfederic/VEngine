@@ -4,4 +4,6 @@
 struct IComponentSystem
 {
 	SystemStates systemState = SystemStates::Unloaded;
+
+	virtual void Cleanup() = 0;
 };

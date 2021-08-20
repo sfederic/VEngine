@@ -78,7 +78,7 @@ struct ActorSystem : IActorSystem
 		}
 	}
 
-	virtual void Clean() override
+	virtual void Cleanup() override
 	{
 		for (T* actor : actors)
 		{

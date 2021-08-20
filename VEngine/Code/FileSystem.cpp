@@ -21,15 +21,15 @@ void FileSystem::WriteAllActorSystems(std::string worldName)
 	{
 		actorSystem->Serialise(os);
 	}
+
+	debugMenu.AddNotification(L"World saved.");
 }
 
 void FileSystem::LoadWorld(std::string worldName)
 {
-	world.CleanupActorSystems();
+	world.Cleanup();
 
-	std::string path = "WorldMaps/" + worldName;
-
-	Serialiser s(path, std::ios_base::in);
+	Serialiser s(worldName, std::ios_base::in);
 	std::istream is(&s.fb);
 
 	while (!is.eof())
@@ -50,8 +50,6 @@ void FileSystem::LoadWorld(std::string worldName)
 		IActorSystem* actorSystem = asIt->second;
 		world.activeActorSystems.push_back(actorSystem);
 
-		actorSystem->name.assign(actorSystemName);
-
 		for (int i = 0; i < numActorsToSpawn; i++)
 		{
 			actorSystem->SpawnActor(Transform());
@@ -63,5 +61,5 @@ void FileSystem::LoadWorld(std::string worldName)
 	//Deselect any existing actors, because TransformGizmo will stay at previous positions.
 	worldEditor.pickedActor = nullptr;
 	editor->UpdateWorldList();
-	debugMenu.AddNotification(L"Level loaded.");
+	debugMenu.AddNotification(L"World loaded.");
 }

@@ -1,11 +1,14 @@
 #include "World.h"
 #include "Actors/NormalActor.h"
+#include "Components/IComponentSystem.h"
+#include "Components/MeshComponent.h"
 
 World world;
 
 void World::Start()
 {
 	activeActorSystems.push_back(&NormalActor::system);
+	activeComponentSystems.push_back(&MeshComponent::system);
 }
 
 Actor* World::FindActorByName(std::string actorName)
@@ -23,11 +26,18 @@ Actor* World::FindActorByName(std::string actorName)
 	return nullptr;
 }
 
-void World::CleanupActorSystems()
+void World::Cleanup()
 {
+	//CLEANUP COMPONENT SYSTEMS
+	for (IComponentSystem* componentSystem : activeComponentSystems)
+	{
+		componentSystem->Cleanup();
+	}
+
+	//CLEANUP ACTOR SYSTEMS
 	for (IActorSystem* actorSystem : activeActorSystems)
 	{
-		actorSystem->Clean();
+		actorSystem->Cleanup();
 	}
 
 	activeActorSystems.clear();

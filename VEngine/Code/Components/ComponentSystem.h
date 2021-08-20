@@ -41,6 +41,16 @@ struct ComponentSystem : IComponentSystem
 
 		systemState = SystemStates::Loaded;
 	}
+
+	virtual void Cleanup() override
+	{
+		for (T* component : components)
+		{
+			delete component;
+		}
+
+		components.clear();
+	}
 };
 
 #define COMPONENT_SYSTEM(type) \
