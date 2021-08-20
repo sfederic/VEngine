@@ -1,8 +1,10 @@
 #pragma once
 #include <vector>
+#include <string>
 
 struct IActorSystem;
 struct IComponentSystem;
+struct Actor;
 
 struct World
 {
@@ -10,6 +12,7 @@ struct World
 	std::vector<IComponentSystem*> activeComponentSystems;
 
 	void Start();
+	Actor* FindActorByName(std::string actorName);
 };
 
 extern World world;
