@@ -90,3 +90,7 @@ Properties Actor::GetProps()
 	props.Add("Scale", &rootComponent->transform.scale);
 	return props;
 }
+
+void Actor::Destroy()
+{
+}

@@ -26,10 +26,24 @@ struct ActorSystem : IActorSystem
 
 		T* actor = actors.back();
 		actor->actorSystem = this;
+		actor->index = actors.size() - 1;
 		actor->SetTransform(transform);
 		actor->name = this->name + std::to_string(actors.size() - 1);
 
 		return actor;
+	}
+
+	void Remove(int index)
+	{
+		for (Component* component : actors[index]->components)
+		{
+			component->Destroy();
+		}
+
+		delete actors[index];
+		std::swap(actors[index], actors.back());
+		actors[index]->index = index;
+		actors.pop_back();
 	}
 
 	virtual void Serialise(std::ostream& os) override
@@ -91,3 +105,4 @@ struct ActorSystem : IActorSystem
 
 #define ACTOR_SYSTEM(type) inline static ActorSystem<type> system; \
 type* Add(Transform transform = Transform()) { return (type*)system.Add(transform); } \
+virtual void Destroy() override { system.Remove(index); } \

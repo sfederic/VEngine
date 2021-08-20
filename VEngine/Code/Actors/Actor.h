@@ -23,6 +23,8 @@ struct Actor
 
 	std::string name;
 
+	int index = -1;
+
 	Actor();
 	XMMATRIX GetWorldMatrix();
 	void UpdateTransform(XMMATRIX parentWorld);
@@ -36,4 +38,5 @@ struct Actor
 	void SetTransform(Transform transform);
 	Transform GetTransform();
 	virtual Properties GetProps();
+	virtual void Destroy();
 };
