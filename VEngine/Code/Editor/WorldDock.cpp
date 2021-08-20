@@ -35,15 +35,18 @@ void WorldDock::PopulateWorldActorList()
 		{
 			auto item = new QTreeWidgetItem(actorTreeWidget);
 			item->setText(0, QString::fromStdString(actor->name));
+			item->setFlags(item->flags() | Qt::ItemIsEditable);
 			item->insertChild(0, new QTreeWidgetItem());
 		}
 	}
+
+	connect(actorTreeWidget, &QTreeWidget::itemChanged, this, &WorldDock::ActorNameChanged);
 }
 
 void WorldDock::ClickOnActorInList(QTreeWidgetItem* item, int column)
 {
-	QString string = item->text(0);
-	Actor* clickedActor = world.FindActorByName(string.toStdString());
+	QString actorName = item->text(column);
+	Actor* clickedActor = world.FindActorByName(actorName.toStdString());
 	if (clickedActor)
 	{
 		worldEditor.pickedActor = clickedActor;
@@ -53,12 +56,22 @@ void WorldDock::ClickOnActorInList(QTreeWidgetItem* item, int column)
 
 void WorldDock::DoubleClickOnActorInList(QTreeWidgetItem* item, int column)
 {
-	QString string = item->text(0);
-	Actor* clickedActor = world.FindActorByName(string.toStdString());
+	QString actorName = item->text(column);
+	Actor* clickedActor = world.FindActorByName(actorName.toStdString());
 	if (clickedActor)
 	{
 		activeCamera->ZoomTo(clickedActor);
 		worldEditor.pickedActor = clickedActor;
 		editor->ActorProps(clickedActor);
+	}
+}
+
+void WorldDock::ActorNameChanged(QTreeWidgetItem* item, int column)
+{
+	QString actorName = item->text(column);
+
+	if (worldEditor.pickedActor) //pickedActor should be set before this is hit in the other events
+	{
+		worldEditor.pickedActor->name = actorName.toStdString();
 	}
 }
