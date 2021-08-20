@@ -9,6 +9,6 @@ struct Serialiser
 	std::filebuf fb;
 
 	Serialiser(const std::string& file, std::ios_base::openmode mode);
-	void Serialise(const Properties& props, std::ostream& os);
-	void Deserialise(const Properties& props, std::istream& is);
+	static void Serialise(Properties props, std::ostream& os);
+	static void Deserialise(Properties props, std::istream& is);
 };

@@ -15,7 +15,7 @@ Serialiser::Serialiser(const std::string& file, std::ios_base::openmode mode)
 	fb.open(file.c_str(), mode);
 }
 
-void Serialiser::Serialise(const Properties& props, std::ostream& os)
+void Serialiser::Serialise(Properties props, std::ostream& os)
 {
 	for (auto& prop : props.dataMap)
 	{
@@ -49,7 +49,7 @@ void Serialiser::Serialise(const Properties& props, std::ostream& os)
 	os << "next\n"; //"next" moves the forloop onto the next 'Object'
 }
 
-void Serialiser::Deserialise(const Properties& props, std::istream& is)
+void Serialiser::Deserialise(Properties props, std::istream& is)
 {
 	char line[512];
 	while (!is.eof())

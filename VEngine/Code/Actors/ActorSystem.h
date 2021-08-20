@@ -3,6 +3,7 @@
 #include "IActorSystem.h"
 #include "Actor.h"
 #include "ActorSystemCache.h"
+#include "Serialiser.h"
 
 template <typename T>
 struct ActorSystem : IActorSystem
@@ -29,6 +30,17 @@ struct ActorSystem : IActorSystem
 		actor->name = this->name + std::to_string(actors.size() - 1);
 
 		return actor;
+	}
+
+	virtual void Serialise(std::ostream& os) override
+	{
+		os << name << "\n"; //Use actorsystem name to create again from ActorSystemCache on Deserialise
+		os << actors.size() << "\n"; //Write out num of actors to load the same amount on Deserialise
+
+		for (T* actor : actors)
+		{
+			Serialiser::Serialise(actor->GetProps(), os);
+		}
 	}
 
 	virtual Actor* FindActorByName(std::string actorName) override

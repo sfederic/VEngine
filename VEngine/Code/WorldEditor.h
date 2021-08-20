@@ -9,6 +9,7 @@ struct WorldEditor
 	void Tick();
 	void HandleActorPicking();
 	void DuplicateActor();
+	void SaveWorld();
 };
 
 extern WorldEditor worldEditor;

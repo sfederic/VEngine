@@ -5,6 +5,7 @@
 #include "Actors/Actor.h"
 #include "Actors/IActorSystem.h"
 #include "Editor/TransformGizmo.h"
+#include "FileSystem.h"
 
 WorldEditor worldEditor;
 
@@ -12,6 +13,7 @@ void WorldEditor::Tick()
 {
 	HandleActorPicking();
 	DuplicateActor();
+	SaveWorld();
 }
 
 void WorldEditor::HandleActorPicking()
@@ -55,6 +57,17 @@ void WorldEditor::DuplicateActor()
 				pickedActor->actorSystem->SpawnActor(pickedActor->GetTransform());
 				editor->UpdateWorldList();
 			}
+		}
+	}
+}
+
+void WorldEditor::SaveWorld()
+{
+	if (Input::GetAsyncKey(Keys::Ctrl))
+	{
+		if (Input::GetKeyUp(Keys::S))
+		{
+			fileSystem.WriteAllActorSystems("test");
 		}
 	}
 }
