@@ -25,5 +25,10 @@ Actor* World::FindActorByName(std::string actorName)
 
 void World::CleanupActorSystems()
 {
+	for (IActorSystem* actorSystem : activeActorSystems)
+	{
+		actorSystem->Clean();
+	}
+
 	activeActorSystems.clear();
 }
