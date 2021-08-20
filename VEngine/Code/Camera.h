@@ -3,6 +3,8 @@
 
 using namespace DirectX;
 
+struct Actor;
+
 struct Camera
 {
 	XMMATRIX view, proj;
@@ -21,7 +23,7 @@ struct Camera
 	void RotateY(float angle);
 	void MouseMove(int x, int y);
 	void Move(float d, XMVECTOR axis);
-	//void ZoomTo(Actor* actor);
+	void ZoomTo(Actor* actor);
 	//void FrustumCullTest(ActorSystem& system);
 };
 

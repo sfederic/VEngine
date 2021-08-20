@@ -1,5 +1,7 @@
 #include "Camera.h"
 #include "Input.h"
+#include "WorldEditor.h"
+#include "Actors/Actor.h"
 
 Camera editorCamera(XMVectorSet(0.f, 2.f, -5.f, 1.f), true);
 Camera playerCamera(XMVectorSet(0.f, 0.f, 1.f, 1.f), false);
@@ -64,8 +66,7 @@ void Camera::Tick(float deltaTime, int mouseX, int mouseY)
 			//Zoom onto selected actor
 			if (Input::GetKeyUp(Keys::F))
 			{
-				//World* world = GetWorld();
-				//ZoomTo(gWorldEditor.pickedActor);
+				ZoomTo(worldEditor.pickedActor);
 			}
 
 			//MOUSE WHEEL ZOOM
@@ -152,12 +153,14 @@ void Camera::Move(float d, XMVECTOR axis)
 	position = XMVectorMultiplyAdd(s, axis, position);
 }
 
-//void Camera::ZoomTo(Actor* actor)
-//{
-//	//Trace the camera down the line its pointing towards the actor
-//	XMVECTOR actorPos = actor->GetPositionVector() - (forward * 5.f);
-//	position = actorPos;
-//}
+void Camera::ZoomTo(Actor* actor)
+{
+	//Trace the camera down the line its pointing towards the actor
+	XMFLOAT3 actorPos = actor->GetPosition();
+	XMVECTOR actorPosVec = XMLoadFloat3(&actorPos);
+	XMVECTOR zoomPos = actorPosVec - (forward * 5.f);
+	position = zoomPos;
+}
 
 //void Camera::FrustumCullTest(ActorSystem& system)
 //{
