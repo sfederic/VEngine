@@ -43,6 +43,14 @@ struct ActorSystem : IActorSystem
 		}
 	}
 
+	virtual void Deserialise(std::istream& is) override
+	{
+		for (Actor* actor : actors)
+		{
+			Serialiser::Deserialise(actor->GetProps(), is);
+		}
+	}
+
 	virtual Actor* FindActorByName(std::string actorName) override
 	{
 		for (T* actor : actors)

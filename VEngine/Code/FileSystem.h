@@ -3,7 +3,8 @@
 
 struct FileSystem
 {
-	void WriteAllActorSystems(std::string levelName);
+	void WriteAllActorSystems(std::string worldName);
+	void LoadWorld(std::string worldName);
 };
 
 extern FileSystem fileSystem;
