@@ -4,8 +4,6 @@
 
 FBXImporter fbxImporter;
 
-//Keep in mind that MeshData isn't a pointer here because want to keep mesh vertices unique per mesh
-//to look into BSP level editing options.
 std::unordered_map<std::string, MeshData> existingMeshDataMap;
 
 void FBXImporter::Init()

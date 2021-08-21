@@ -289,12 +289,12 @@ void Renderer::Render()
 		context->VSSetShader(defaultVertexShader.Get(), nullptr, 0);
 		context->PSSetShader(defaultPixelShader.Get(), nullptr, 0);
 
-		context->PSSetSamplers(0, 1, &mesh->pso.sampler.data);
+		context->PSSetSamplers(0, 1, &mesh->pso->sampler.data);
 		//context->PSSetShaderResources(0, _countof(shaderResourceViews), shaderResourceViews);
 		//context->VSSetShaderResources(3, 1, &actorSystem->pso.instancedDataSrv->data);
 
-		context->IASetVertexBuffers(0, 1, &mesh->pso.vertexBuffer.data, &stride, &offset);
-		context->IASetIndexBuffer(mesh->pso.indexBuffer.data, DXGI_FORMAT_R32_UINT, 0);
+		context->IASetVertexBuffers(0, 1, &mesh->pso->vertexBuffer.data, &stride, &offset);
+		context->IASetIndexBuffer(mesh->pso->indexBuffer.data, DXGI_FORMAT_R32_UINT, 0);
 
 		shaderMatrices.model = mesh->GetWorldMatrix();
 
@@ -318,7 +318,7 @@ void Renderer::RenderBounds()
 		context->VSSetShader(boxShaderIt->second->vertexShader, nullptr, 0);
 		context->PSSetShader(boxShaderIt->second->pixelShader, nullptr, 0);
 
-		context->IASetVertexBuffers(0, 1, &debugBox.boxMesh->pso.vertexBuffer.data, &stride, &offset);
+		context->IASetVertexBuffers(0, 1, &debugBox.boxMesh->pso->vertexBuffer.data, &stride, &offset);
 
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, cbMatrices.GetAddressOf());
 

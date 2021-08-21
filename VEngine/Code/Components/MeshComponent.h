@@ -12,7 +12,7 @@ struct MeshComponent : SpatialComponent
 
 	std::string filename;
 	MeshData data;
-	PipelineStateObject pso;
+	PipelineStateObject* pso;
 
 	MeshComponent(const char* filename_);
 	virtual void Create() override;
