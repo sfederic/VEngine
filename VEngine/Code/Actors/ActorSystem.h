@@ -28,7 +28,7 @@ struct ActorSystem : IActorSystem
 		actor->actorSystem = this;
 		actor->index = actors.size() - 1;
 		actor->SetTransform(transform);
-		actor->name = this->name + std::to_string(actors.size() - 1);
+		actor->name = this->name + std::to_string(actor->index);
 
 		return actor;
 	}

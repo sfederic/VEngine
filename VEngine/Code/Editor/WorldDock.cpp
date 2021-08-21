@@ -26,6 +26,9 @@ void WorldDock::PopulateWorldActorList()
 {
     actorTreeWidget->clear();
 
+	//Need to block signals because calling functions on tree items makes the connect()ed event fire
+	actorTreeWidget->blockSignals(true);
+
 	for (IActorSystem* actorSystem : world.activeActorSystems)
 	{
 		std::vector<Actor*> actors;
@@ -39,6 +42,8 @@ void WorldDock::PopulateWorldActorList()
 			item->insertChild(0, new QTreeWidgetItem());
 		}
 	}
+
+	actorTreeWidget->blockSignals(false);
 
 	connect(actorTreeWidget, &QTreeWidget::itemChanged, this, &WorldDock::ActorNameChanged);
 }

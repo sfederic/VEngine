@@ -19,7 +19,7 @@ struct Actor
 	SpatialComponent* rootComponent = nullptr;
 	std::vector<Component*> components;
 
-	IActorSystem* actorSystem;
+	IActorSystem* actorSystem = nullptr;
 
 	std::string name;
 
