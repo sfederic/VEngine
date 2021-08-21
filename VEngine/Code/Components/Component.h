@@ -11,5 +11,5 @@ struct Component
 
 	virtual void Create() = 0;
 	virtual void Destroy() = 0;
-	virtual Properties GetProperties() = 0;
+	virtual Properties GetProps() = 0;
 };

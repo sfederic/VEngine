@@ -6,6 +6,7 @@
 #include <QCheckBox>
 #include <QLineEdit>
 #include "Actors/Actor.h"
+#include "Components/Component.h"
 #include "PropertyWidgets/BoolWidget.h" 
 #include "PropertyWidgets/Float3Widget.h"
 #include "PropertyWidgets/FloatWidget.h"
@@ -14,7 +15,6 @@
 
 PropertiesDock::PropertiesDock() : QDockWidget("Properties")
 {
-
 }
 
 void PropertiesDock::DisplayActorProperties(Actor* actor)
@@ -41,12 +41,36 @@ void PropertiesDock::DisplayActorProperties(Actor* actor)
     actorPropsGridLayout = new QGridLayout();
     actorPropsGridLayout->setAlignment(Qt::AlignTop);
 
-    int currentGridRow = 0;
+    //Go over actor properties
+    Properties props = actor->GetProps();
+    int gridRow = 0;
+    IterateOverProperties(props, gridRow);
+
+    //Go over component properties
+    for (Component* component : actor->components)
+    {
+        Properties componentProps = component->GetProps();
+        IterateOverProperties(componentProps, gridRow);
+    }
+
+    actorPropsWidget->setLayout(actorPropsGridLayout);
+    setWidget(actorPropsWidget);
+
+    previousActor = actor;
+}
+
+void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRow)
+{
     const int propertyNameColumn = 0;
     const int propertyDataColumn = 1;
 
-    Properties props = actor->GetProps();
+    //Set title to seperate components/actor properties
+    auto titleLabel = new QLabel(props.title.c_str(), this);
+    titleLabel->setStyleSheet("font-weight: bold");
+    actorPropsGridLayout->addWidget(titleLabel, currentGridRow, 0, 1, 2, Qt::AlignCenter);
+    currentGridRow++;
 
+    //Properties
     for (auto actorProperty : props.dataMap)
     {
         auto typeMap = props.typeMap;
@@ -88,9 +112,4 @@ void PropertiesDock::DisplayActorProperties(Actor* actor)
 
         currentGridRow++;
     }
-
-    actorPropsWidget->setLayout(actorPropsGridLayout);
-    setWidget(actorPropsWidget);
-
-    previousActor = actor;
 }

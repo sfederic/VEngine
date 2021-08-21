@@ -9,6 +9,12 @@ struct Properties
 	//PROPERTIES FOR TEXT
 	std::unordered_map<std::string, void*> dataMap;
 	std::unordered_map<std::string, std::optional<std::type_index>> typeMap;
+	std::string title;
+
+	Properties(const char* title_)
+	{
+		title = title_;
+	}
 
 	template <typename T>
 	void Add(std::string name, T* data)

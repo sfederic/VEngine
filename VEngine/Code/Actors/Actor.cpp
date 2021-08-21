@@ -85,10 +85,20 @@ Transform Actor::GetTransform()
 
 Properties Actor::GetProps()
 {
-	Properties props;
+	Properties props("Actor");
+
 	props.Add("Position", &rootComponent->transform.position);
 	props.Add("Scale", &rootComponent->transform.scale);
 	props.Add("Rotation", &rootComponent->transform.rotation);
+
+	//This was how to join maps. Keeping here for reference.
+	/*for (Component* component : components)
+	{
+		Properties componentProps = component->GetProps();
+		props.dataMap.insert(componentProps.dataMap.begin(), componentProps.dataMap.end());
+		props.typeMap.insert(componentProps.typeMap.begin(), componentProps.typeMap.end());
+	}*/
+
 	return props;
 }
 

@@ -39,7 +39,10 @@ void MeshComponent::Create()
 	existingPiplineStateObjects[filename] = pso;
 }
 
-Properties MeshComponent::GetProperties()
+Properties MeshComponent::GetProps()
 {
-	return Properties();
+	Properties props("MeshComponent");
+	props.Add("Filename", &filename);
+	props.Add("RenderShadows", &renderShadows);
+	return props;
 }
