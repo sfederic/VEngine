@@ -1,7 +1,12 @@
 #include "FBXImporter.h"
 #include <cassert>
+#include <unordered_map>
 
 FBXImporter fbxImporter;
+
+//Keep in mind that MeshData isn't a pointer here because want to keep mesh vertices unique per mesh
+//to look into BSP level editing options.
+std::unordered_map<std::string, MeshData> existingMeshDataMap;
 
 void FBXImporter::Init()
 {
@@ -10,8 +15,17 @@ void FBXImporter::Init()
 	importer = FbxImporter::Create(manager, "");
 }
 
-bool FBXImporter::Import(const std::string& filename, MeshData& meshData /*, ActorSystem* actorSystem*/)
+bool FBXImporter::Import(const std::string& filename, MeshData& meshData)
 {
+	//Find if mesh data already exists, push it to meshcomponent data
+	auto existingMeshIt = existingMeshDataMap.find(filename);
+	if (existingMeshIt != existingMeshDataMap.end())
+	{
+		meshData = existingMeshIt->second;
+		return true;
+	}
+
+
 	std::string filepath = "Meshes/" + filename;
 
 	if (!importer->Initialize(filepath.c_str(), -1, manager->GetIOSettings()))
@@ -38,6 +52,8 @@ bool FBXImporter::Import(const std::string& filename, MeshData& meshData /*, Act
 	scene->Destroy();
 
 	animEvaluator = nullptr;
+
+	existingMeshDataMap[filename] = meshData;
 
 	return true;
 }
