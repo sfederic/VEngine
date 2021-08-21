@@ -6,6 +6,8 @@
 #include "Render/PipelineObjects.h"
 #include "Transform.h"
 
+struct ShaderItem;
+
 struct MeshComponent : SpatialComponent
 {
 	COMPONENT_SYSTEM(MeshComponent)
@@ -13,8 +15,9 @@ struct MeshComponent : SpatialComponent
 	std::string filename;
 	MeshDataProxy* data = nullptr;
 	PipelineStateObject* pso = nullptr;
+	ShaderItem* shader = nullptr;
 
-	MeshComponent(const char* filename_);
+	MeshComponent(const char* filename_, const wchar_t* shader = L"DefaultShader.hlsl");
 	virtual void Create() override;
 	virtual Properties GetProperties();
 };

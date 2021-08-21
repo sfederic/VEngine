@@ -128,15 +128,6 @@ void Renderer::CreateRTVAndDSV()
 	depthStencilBuffer.Reset();
 }
 
-void Renderer::CreateDefaultShaders()
-{
-	defaultVertexCode = shaderSystem.CreateShaderFromFile(L"Code/Render/Shaders/DefaultShader.hlsl", "VSMain", "vs_5_0");
-	defaultPixelCode = shaderSystem.CreateShaderFromFile(L"Code/Render/Shaders/DefaultShader.hlsl", "PSMain", "ps_5_0");
-
-	HR(device->CreateVertexShader(defaultVertexCode->GetBufferPointer(), defaultVertexCode->GetBufferSize(), nullptr, defaultVertexShader.GetAddressOf()));
-	HR(device->CreatePixelShader(defaultPixelCode->GetBufferPointer(), defaultPixelCode->GetBufferSize(), nullptr, defaultPixelShader.GetAddressOf()));
-}
-
 void Renderer::CreateInputLayout()
 {
 	D3D11_INPUT_ELEMENT_DESC inputDesc[] =
@@ -146,9 +137,9 @@ void Renderer::CreateInputLayout()
 		{"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, normal), D3D11_INPUT_PER_VERTEX_DATA, 0},
 	};
 
-	CreateDefaultShaders();
+	ShaderItem* shader = shaderSystem.shaderMap.find(L"DefaultShader.hlsl")->second;
 
-	HR(device->CreateInputLayout(inputDesc, _countof(inputDesc), defaultVertexCode->GetBufferPointer(), defaultVertexCode->GetBufferSize(), &inputLayout));
+	HR(device->CreateInputLayout(inputDesc, _countof(inputDesc), shader->vertexCode->GetBufferPointer(), shader->vertexCode->GetBufferSize(), &inputLayout));
 	context->IASetInputLayout(inputLayout.Get());
 }
 
@@ -286,8 +277,8 @@ void Renderer::Render()
 			DebugPrint("vertex shader file name %ls not found\n", actorSystem->shaderName);
 		}*/
 
-		context->VSSetShader(defaultVertexShader.Get(), nullptr, 0);
-		context->PSSetShader(defaultPixelShader.Get(), nullptr, 0);
+		context->VSSetShader(mesh->shader->vertexShader, nullptr, 0);
+		context->PSSetShader(mesh->shader->pixelShader, nullptr, 0);
 
 		context->PSSetSamplers(0, 1, &mesh->pso->sampler.data);
 		//context->PSSetShaderResources(0, _countof(shaderResourceViews), shaderResourceViews);

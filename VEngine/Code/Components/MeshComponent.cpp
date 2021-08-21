@@ -1,14 +1,17 @@
 #include "MeshComponent.h"
 #include "FBXImporter.h"
 #include "Render/Renderer.h"
+#include "Render/ShaderSystem.h"
 
 std::unordered_map<std::string, PipelineStateObject*> existingPiplineStateObjects;
 
-MeshComponent::MeshComponent(const char* filename_)
+MeshComponent::MeshComponent(const char* filename_, const wchar_t* shaderFilename)
 {
 	filename = filename_;
 	data = new MeshDataProxy();
 	pso = new PipelineStateObject();
+
+	shader = shaderSystem.shaderMap.find(shaderFilename)->second;
 }
 
 void MeshComponent::Create()

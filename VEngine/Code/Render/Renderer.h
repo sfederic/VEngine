@@ -34,12 +34,6 @@ struct Renderer
 	ComPtr<IDXGISwapChain3> swapchain;
 	ComPtr<IDXGIFactory6> dxgiFactory;
 
-	//Shader data
-	ComPtr<ID3DBlob> defaultVertexCode;
-	ComPtr<ID3DBlob> defaultPixelCode;
-	ComPtr<ID3D11VertexShader> defaultVertexShader;
-	ComPtr<ID3D11PixelShader> defaultPixelShader;
-
 	//Constant buffers and data
 	ComPtr<ID3D11Buffer> cbMatrices;
 	ComPtr<ID3D11Buffer> cbMaterial;
@@ -59,7 +53,6 @@ struct Renderer
 	void CreateDevice();
 	void CreateSwapchain(HWND window);
 	void CreateRTVAndDSV();
-	void CreateDefaultShaders();
 	void CreateInputLayout();
 	void CreateRasterizerStates();
 	void CreateBlendStates();
