@@ -11,6 +11,7 @@
 #include "Profile.h"
 #include "WorldEditor.h"
 #include "Actors/Actor.h"
+#include "Components/Component.h"
 #include "UI/UISystem.h"
 
 DebugMenu debugMenu;
@@ -90,7 +91,23 @@ void DebugMenu::RenderActorProps()
 
 	ImGui::Begin("Actor Properties");
 
+	//Iterate over actor props
 	auto props = worldEditor.pickedActor->GetProps();
+	IterateOverProperties(props);
+
+	//Go over component properties
+	for (Component* component : worldEditor.pickedActor->components)
+	{
+		Properties componentProps = component->GetProps();
+		IterateOverProperties(componentProps);
+	}
+
+	ImGui::End();
+}
+
+void DebugMenu::IterateOverProperties(Properties& props)
+{
+	ImGui::Text(props.title.c_str());
 
 	for (auto& actorProperty : props.dataMap)
 	{
@@ -127,8 +144,6 @@ void DebugMenu::RenderActorProps()
 			ImGui::InputText("name", str->data(), str->size());
 		}
 	}
-
-	ImGui::End();
 }
 
 //Handle notifications (eg. "Shaders recompiled", "ERROR: Not X", etc)

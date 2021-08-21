@@ -2,6 +2,8 @@
 #include <vector>
 #include <string>
 
+struct Properties;
+
 struct DebugNotification
 {
 	DebugNotification(const wchar_t* note)
@@ -32,6 +34,7 @@ struct DebugMenu
 	void RenderProfileMenu();
 	void RenderSnappingMenu();
 	void RenderActorProps();
+	void IterateOverProperties(Properties& props);
 };
 
 extern DebugMenu debugMenu;
