@@ -3,6 +3,7 @@
 #include <qboxlayout.h>
 #include <QDoubleSpinBox>
 #include <QLabel>
+#include <qscrollarea.h>
 #include <QCheckBox>
 #include <QLineEdit>
 #include "Actors/Actor.h"
@@ -15,6 +16,7 @@
 
 PropertiesDock::PropertiesDock() : QDockWidget("Properties")
 {
+    actorPropsScrollArea = new QScrollArea(this);
 }
 
 void PropertiesDock::DisplayActorProperties(Actor* actor)
@@ -55,6 +57,10 @@ void PropertiesDock::DisplayActorProperties(Actor* actor)
 
     actorPropsWidget->setLayout(actorPropsGridLayout);
     setWidget(actorPropsWidget);
+
+    actorPropsScrollArea->setWidget(actorPropsWidget);
+
+    setWidget(actorPropsScrollArea);
 
     previousActor = actor;
 }
