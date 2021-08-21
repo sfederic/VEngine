@@ -11,7 +11,7 @@ struct MeshComponent : SpatialComponent
 	COMPONENT_SYSTEM(MeshComponent)
 
 	std::string filename;
-	MeshData data;
+	MeshData* data;
 	PipelineStateObject* pso;
 
 	MeshComponent(const char* filename_);

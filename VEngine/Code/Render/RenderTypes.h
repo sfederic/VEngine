@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <DirectXMath.h>
+#include <DirectXCollision.h>
 
 using namespace DirectX;
 
@@ -15,6 +16,8 @@ struct MeshData
 {
 	std::vector<Vertex> vertices;
 	std::vector<uint32_t> indices;
+
+	BoundingOrientedBox boundingBox;
 
 	uint64_t GetVerticesByteWidth()
 	{
@@ -69,7 +72,6 @@ struct MeshData
 
 		return false;
 	}
-
 };
 
 struct ShaderMatrices

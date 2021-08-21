@@ -13,13 +13,13 @@ void FBXImporter::Init()
 	importer = FbxImporter::Create(manager, "");
 }
 
-bool FBXImporter::Import(const std::string& filename, MeshData& meshData)
+bool FBXImporter::Import(const std::string& filename, MeshData* meshData)
 {
 	//Find if mesh data already exists, push it to meshcomponent data
 	auto existingMeshIt = existingMeshDataMap.find(filename);
 	if (existingMeshIt != existingMeshDataMap.end())
 	{
-		meshData = existingMeshIt->second;
+		meshData = &existingMeshIt->second;
 		return true;
 	}
 
@@ -47,16 +47,20 @@ bool FBXImporter::Import(const std::string& filename, MeshData& meshData)
 		ProcessAllChildNodes(rootNode->GetChild(childNodeCount - 1), meshData);
 	}
 
+	//Setup bounds
+	BoundingOrientedBox::CreateFromPoints(meshData->boundingBox, meshData->vertices.size(),
+		&meshData->vertices[0].pos, sizeof(Vertex));
+
 	scene->Destroy();
 
 	animEvaluator = nullptr;
 
-	existingMeshDataMap[filename] = meshData;
+	existingMeshDataMap[filename] = *meshData;
 
 	return true;
 }
 
-void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData& meshData)
+void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 {
 	//Recursion code for dealing with nodes in the heirarchy. Come back to this after more work is done.
 	/*int childNodeCount = node->GetChildCount();
@@ -212,8 +216,8 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData& meshData)
 		int polyIndexCounter = 0; //Used to index into normals and UVs on a per vertex basis
 		int polyCount = mesh->GetPolygonCount();
 
-		meshData.vertices.reserve(polyCount);
-		meshData.indices.reserve(polyCount);
+		meshData->vertices.reserve(polyCount);
+		meshData->indices.reserve(polyCount);
 
 		//Main import loop
 		for (int i = 0; i < polyCount; i++)
@@ -277,13 +281,13 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData& meshData)
 				//	meshData.vertices.push_back(vert);
 				//}
 
-				meshData.vertices.push_back(vert);
-				meshData.indices.push_back(polyIndexCounter);
+				meshData->vertices.push_back(vert);
+				meshData->indices.push_back(polyIndexCounter);
 
 				polyIndexCounter++;
 			}
 		}
 
-		assert(meshData.indices.size() % 3 == 0 && "Num of indices won't be matching vertices");
+		assert(meshData->indices.size() % 3 == 0 && "Num of indices won't be matching vertices");
 	}
 }
