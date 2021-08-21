@@ -17,7 +17,6 @@ WorldDock::WorldDock() : QDockWidget("World")
 
 	actorTreeWidget->setSelectionMode(QAbstractItemView::SelectionMode::ExtendedSelection);
 	connect(actorTreeWidget, &QTreeWidget::itemClicked, this, &WorldDock::ClickOnActorInList);
-	connect(actorTreeWidget, &QTreeWidget::itemDoubleClicked, this, &WorldDock::DoubleClickOnActorInList);
 
 	setWidget(actorTreeWidget);
 }
@@ -54,18 +53,6 @@ void WorldDock::ClickOnActorInList(QTreeWidgetItem* item, int column)
 	Actor* clickedActor = world.FindActorByName(actorName.toStdString());
 	if (clickedActor)
 	{
-		worldEditor.pickedActor = clickedActor;
-		editor->ActorProps(clickedActor);
-	}
-}
-
-void WorldDock::DoubleClickOnActorInList(QTreeWidgetItem* item, int column)
-{
-	QString actorName = item->text(column);
-	Actor* clickedActor = world.FindActorByName(actorName.toStdString());
-	if (clickedActor)
-	{
-		activeCamera->ZoomTo(clickedActor);
 		worldEditor.pickedActor = clickedActor;
 		editor->ActorProps(clickedActor);
 	}
