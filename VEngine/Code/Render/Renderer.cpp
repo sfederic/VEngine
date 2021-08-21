@@ -224,16 +224,16 @@ ID3D11Buffer* Renderer::CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, cons
 	return buffer;
 }
 
-ID3D11Buffer* Renderer::CreateVertexBuffer(MeshData* meshData)
+ID3D11Buffer* Renderer::CreateVertexBuffer(MeshDataProxy* meshData)
 {
 	return Renderer::CreateDefaultBuffer(meshData->GetVerticesByteWidth(), 
-		D3D11_BIND_VERTEX_BUFFER, meshData->vertices.data());
+		D3D11_BIND_VERTEX_BUFFER, meshData->vertices->data());
 }
 
-ID3D11Buffer* Renderer::CreateIndexBuffer(MeshData* meshData)
+ID3D11Buffer* Renderer::CreateIndexBuffer(MeshDataProxy* meshData)
 {
 	return Renderer::CreateDefaultBuffer(meshData->GetIndicesByteWidth(),
-		D3D11_BIND_INDEX_BUFFER, meshData->indices.data());
+		D3D11_BIND_INDEX_BUFFER, meshData->indices->data());
 }
 
 ID3D11SamplerState* Renderer::CreateSampler()
@@ -302,7 +302,7 @@ void Renderer::Render()
 		context->UpdateSubresource(cbMatrices.Get(), 0, nullptr, &shaderMatrices, 0, 0);
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, cbMatrices.GetAddressOf());
 
-		context->DrawIndexed(mesh->data->indices.size(), 0, 0);
+		context->DrawIndexed(mesh->data->indices->size(), 0, 0);
 	}
 }
 
@@ -341,7 +341,7 @@ void Renderer::RenderBounds()
 			shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
 			context->UpdateSubresource(cbMatrices.Get(), 0, nullptr, &shaderMatrices, 0, 0);
 
-			context->Draw(debugBox.boxMesh->data->vertices.size(), 0);
+			context->Draw(debugBox.boxMesh->data->vertices->size(), 0);
 		}
 	}
 }

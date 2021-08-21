@@ -68,8 +68,8 @@ struct Renderer
 
 	//TODO: think about seperating these into a Renderutils file
 	ID3D11Buffer* CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, const void* initData);
-	ID3D11Buffer* CreateVertexBuffer(MeshData* meshData);
-	ID3D11Buffer* CreateIndexBuffer(MeshData* meshData);
+	ID3D11Buffer* CreateVertexBuffer(MeshDataProxy* meshData);
+	ID3D11Buffer* CreateIndexBuffer(MeshDataProxy* meshData);
 	ID3D11SamplerState* CreateSampler();
 
 	void RenderSetup();

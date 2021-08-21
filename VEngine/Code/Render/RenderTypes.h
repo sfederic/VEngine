@@ -16,33 +16,37 @@ struct MeshData
 {
 	std::vector<Vertex> vertices;
 	std::vector<uint32_t> indices;
+};
 
-	BoundingOrientedBox boundingBox;
+struct MeshDataProxy
+{
+	std::vector<Vertex>* vertices = nullptr;
+	std::vector<uint32_t>* indices = nullptr;
 
 	uint64_t GetVerticesByteWidth()
 	{
-		return (sizeof(Vertex) * vertices.size());
+		return (sizeof(Vertex) * vertices->size());
 	}
 
 	uint64_t GetIndicesByteWidth()
 	{
-		return (sizeof(uint32_t) * indices.size());
+		return (sizeof(uint32_t) * indices->size());
 	}
 
 	void Clear()
 	{
-		vertices.clear();
-		indices.clear();
+		vertices->clear();
+		indices->clear();
 	}
 
 	bool CheckDuplicateVertices(Vertex& vert)
 	{
 		auto pos = XMLoadFloat3(&vert.pos);
 
-		const int size = vertices.size();
+		const int size = vertices->size();
 		for (int i = 0; i < size; i++)
 		{
-			XMVECTOR p = XMLoadFloat3(&vertices[i].pos);
+			XMVECTOR p = XMLoadFloat3(&vertices->at(i).pos);
 			if (XMVector3Equal(p, pos))
 			{
 				return true;
@@ -58,9 +62,9 @@ struct MeshData
 	{
 		int duplicateCounter = 0;
 
-		for (int i = 0; i < indices.size(); i++)
+		for (int i = 0; i < indices->size(); i++)
 		{
-			if (index == indices[i])
+			if (index == indices->at(i))
 			{
 				duplicateCounter++;
 				if (duplicateCounter >= 2)

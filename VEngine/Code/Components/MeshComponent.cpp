@@ -7,7 +7,7 @@ std::unordered_map<std::string, PipelineStateObject*> existingPiplineStateObject
 MeshComponent::MeshComponent(const char* filename_)
 {
 	filename = filename_;
-	data = new MeshData();
+	data = new MeshDataProxy();
 	pso = new PipelineStateObject();
 }
 
@@ -15,6 +15,10 @@ void MeshComponent::Create()
 {
 	//Import mesh (set up bounding box in here too so you don't need to re-create bounds)
 	fbxImporter.Import(filename.c_str(), data);
+
+	//Setup bounds
+	BoundingOrientedBox::CreateFromPoints(boundingBox, data->vertices->size(),
+		&data->vertices->at(0).pos, sizeof(Vertex));
 
 	//Setup pipeline objects
 	auto psoIt = existingPiplineStateObjects.find(filename);

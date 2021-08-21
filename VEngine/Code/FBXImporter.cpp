@@ -4,7 +4,7 @@
 
 FBXImporter fbxImporter;
 
-std::unordered_map<std::string, MeshData> existingMeshDataMap;
+std::unordered_map<std::string, MeshData*> existingMeshDataMap;
 
 void FBXImporter::Init()
 {
@@ -13,14 +13,19 @@ void FBXImporter::Init()
 	importer = FbxImporter::Create(manager, "");
 }
 
-bool FBXImporter::Import(const std::string& filename, MeshData* meshData)
+bool FBXImporter::Import(const std::string& filename, MeshDataProxy* meshData)
 {
 	//Find if mesh data already exists, push it to meshcomponent data
 	auto existingMeshIt = existingMeshDataMap.find(filename);
 	if (existingMeshIt != existingMeshDataMap.end())
 	{
-		meshData = &existingMeshIt->second;
+		meshData->vertices = &existingMeshIt->second->vertices;
+		meshData->indices = &existingMeshIt->second->indices;
 		return true;
+	}
+	else
+	{
+		existingMeshDataMap[filename] = new MeshData();
 	}
 
 
@@ -44,18 +49,17 @@ bool FBXImporter::Import(const std::string& filename, MeshData* meshData)
 	int childNodeCount = rootNode->GetChildCount();
 	//for (int i = 0; i < childNodeCount; i++)
 	{
-		ProcessAllChildNodes(rootNode->GetChild(childNodeCount - 1), meshData);
+		ProcessAllChildNodes(rootNode->GetChild(childNodeCount - 1), existingMeshDataMap[filename]);
 	}
-
-	//Setup bounds
-	BoundingOrientedBox::CreateFromPoints(meshData->boundingBox, meshData->vertices.size(),
-		&meshData->vertices[0].pos, sizeof(Vertex));
 
 	scene->Destroy();
 
 	animEvaluator = nullptr;
 
-	existingMeshDataMap[filename] = *meshData;
+	MeshData* newMeshData = existingMeshDataMap.find(filename)->second;
+
+	meshData->vertices = &newMeshData->vertices;
+	meshData->indices = &newMeshData->indices;
 
 	return true;
 }

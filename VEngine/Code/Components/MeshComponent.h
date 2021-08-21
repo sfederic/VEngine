@@ -11,8 +11,8 @@ struct MeshComponent : SpatialComponent
 	COMPONENT_SYSTEM(MeshComponent)
 
 	std::string filename;
-	MeshData* data;
-	PipelineStateObject* pso;
+	MeshDataProxy* data = nullptr;
+	PipelineStateObject* pso = nullptr;
 
 	MeshComponent(const char* filename_);
 	virtual void Create() override;
