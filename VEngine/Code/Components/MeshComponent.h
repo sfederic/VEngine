@@ -17,8 +17,6 @@ struct MeshComponent : SpatialComponent
 	PipelineStateObject* pso = nullptr;
 	ShaderItem* shader = nullptr;
 
-	bool renderShadows = true;
-
 	MeshComponent(const char* filename_, const wchar_t* shader = L"DefaultShader.hlsl");
 	virtual void Create() override;
 	virtual Properties GetProps();

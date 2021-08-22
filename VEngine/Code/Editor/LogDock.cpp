@@ -3,7 +3,7 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 
-LogDock::LogDock() : QDockWidget("Console")
+LogDock::LogDock() : QDockWidget("Log")
 {
 	auto vbLayout = new QVBoxLayout();
 

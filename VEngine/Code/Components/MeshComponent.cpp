@@ -43,6 +43,5 @@ Properties MeshComponent::GetProps()
 {
 	Properties props("MeshComponent");
 	props.Add("Filename", &filename);
-	props.Add("RenderShadows", &renderShadows);
 	return props;
 }
