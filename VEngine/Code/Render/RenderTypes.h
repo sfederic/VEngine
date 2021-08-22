@@ -93,3 +93,8 @@ struct ShaderMatrices
 		mvp = model * view * proj;
 	}
 };
+
+struct InstanceData
+{
+	XMMATRIX world;
+};
