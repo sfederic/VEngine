@@ -66,7 +66,10 @@ void Camera::Tick(float deltaTime, int mouseX, int mouseY)
 			//Zoom onto selected actor
 			if (Input::GetKeyUp(Keys::F))
 			{
-				ZoomTo(worldEditor.pickedActor);
+				if (worldEditor.pickedActor)
+				{
+					ZoomTo(worldEditor.pickedActor);
+				}
 			}
 
 			//MOUSE WHEEL ZOOM
