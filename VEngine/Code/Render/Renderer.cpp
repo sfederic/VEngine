@@ -10,6 +10,7 @@
 #include "Actors/DebugBox.h"
 #include "Input.h"
 #include "Material.h"
+#include "InstanceMeshSystem.h"
 
 #include "Profile.h"
 
@@ -229,6 +230,37 @@ ID3D11Buffer* Renderer::CreateIndexBuffer(MeshDataProxy* meshData)
 		D3D11_BIND_INDEX_BUFFER, meshData->indices->data());
 }
 
+ID3D11ShaderResourceView* Renderer::CreateSRVForMeshInstance(ID3D11Buffer* structuredBuffer)
+{
+	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
+	srvDesc.Format = DXGI_FORMAT_UNKNOWN;
+	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFEREX;
+	srvDesc.BufferEx.NumElements = 250;
+
+	ID3D11ShaderResourceView* srv = nullptr;
+	HR(device->CreateShaderResourceView(structuredBuffer, &srvDesc, &srv));
+
+	return srv;
+}
+
+ID3D11Buffer* Renderer::CreateStructuredBuffer(UINT byteWidth, UINT byteStride, const void* initData)
+{
+	ID3D11Buffer* buffer;
+
+	D3D11_BUFFER_DESC desc = {};
+	desc.ByteWidth = byteWidth;
+	desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+	desc.StructureByteStride = byteStride;
+	desc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
+
+	D3D11_SUBRESOURCE_DATA data = {};
+	data.pSysMem = initData;
+
+	HR(device->CreateBuffer(&desc, &data, &buffer));
+
+	return buffer;
+}
+
 ID3D11SamplerState* Renderer::CreateSampler()
 {
 	ID3D11SamplerState* sampler;
@@ -275,18 +307,10 @@ void Renderer::Render()
 		//const FLOAT blendState[4] = { 0.f };
 		//context->OMSetBlendState(blendStateAlphaToCoverage, blendState, 0xFFFFFFFF);
 
-		//auto shader = gShaderFactory.shaderMap.find(stows(actorSystem->shaderName));
-		/*if (shader == gShaderFactory.shaderMap.end())
-		{
-			DebugPrint("vertex shader file name %ls not found\n", actorSystem->shaderName);
-		}*/
-
 		context->VSSetShader(mesh->shader->vertexShader, nullptr, 0);
 		context->PSSetShader(mesh->shader->pixelShader, nullptr, 0);
 
 		context->PSSetSamplers(0, 1, &mesh->pso->sampler.data);
-		//context->PSSetShaderResources(0, _countof(shaderResourceViews), shaderResourceViews);
-		//context->VSSetShaderResources(3, 1, &actorSystem->pso.instancedDataSrv->data);
 
 		context->IASetVertexBuffers(0, 1, &mesh->pso->vertexBuffer.data, &stride, &offset);
 		context->IASetIndexBuffer(mesh->pso->indexBuffer.data, DXGI_FORMAT_R32_UINT, 0);

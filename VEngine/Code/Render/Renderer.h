@@ -63,6 +63,8 @@ struct Renderer
 	ID3D11Buffer* CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, const void* initData);
 	ID3D11Buffer* CreateVertexBuffer(MeshDataProxy* meshData);
 	ID3D11Buffer* CreateIndexBuffer(MeshDataProxy* meshData);
+	ID3D11ShaderResourceView* CreateSRVForMeshInstance(ID3D11Buffer* structuredBuffer);
+	ID3D11Buffer* CreateStructuredBuffer(UINT byteWidth, UINT byteStride, const void* initData);
 	ID3D11SamplerState* CreateSampler();
 
 	void RenderSetup();
