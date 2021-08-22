@@ -51,7 +51,7 @@ void WorldEditor::DuplicateActor()
 {
 	if (Input::GetAsyncKey(Keys::Ctrl))
 	{
-		if (Input::GetKeyUp(Keys::D))
+		if (Input::GetKeyDown(Keys::D))
 		{
 			if (pickedActor)
 			{

@@ -11,6 +11,8 @@
 #include "Input.h"
 #include "Material.h"
 
+#include "Profile.h"
+
 Renderer renderer;
 
 UINT stride = sizeof(Vertex);
@@ -260,6 +262,8 @@ void Renderer::RenderSetup()
 
 void Renderer::Render()
 {
+	PROFILE_START
+
 	const int cbMatrixRegister = 0;
 
 	shaderMatrices.view = activeCamera->view;
@@ -295,6 +299,8 @@ void Renderer::Render()
 
 		context->DrawIndexed(mesh->data->indices->size(), 0, 0);
 	}
+
+	PROFILE_END
 }
 
 void Renderer::RenderBounds()

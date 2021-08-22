@@ -188,6 +188,9 @@
     <ClCompile Include="Code\FileSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Render\InstanceMeshSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -314,6 +317,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\FileSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Render\InstanceMeshSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
