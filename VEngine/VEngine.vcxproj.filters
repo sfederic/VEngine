@@ -331,5 +331,6 @@
     <FxCompile Include="Code\Render\Shaders\SolidColour.hlsl" />
     <FxCompile Include="Code\Render\Shaders\DefaultShader.hlsl" />
     <FxCompile Include="Code\Render\Shaders\Include\CommonTypes.hlsli" />
+    <FxCompile Include="Code\Render\Shaders\InstanceShader.hlsl" />
   </ItemGroup>
 </Project>
