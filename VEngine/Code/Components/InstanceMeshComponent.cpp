@@ -10,8 +10,8 @@ InstanceMeshComponent::InstanceMeshComponent(
 
 InstanceMeshComponent::~InstanceMeshComponent()
 {
-	structuredBuffer->Release();
-	srv->Release();
+	if(structuredBuffer) structuredBuffer->Release();
+	if(srv) srv->Release();
 }
 
 void InstanceMeshComponent::Create()
@@ -23,14 +23,30 @@ void InstanceMeshComponent::Create()
 
 	for (uint32_t i = 0; i < meshInstanceRenderCount; i++)
 	{
-		instanceData.push_back(InstanceData());
+		InstanceData data = {};
+		data.world = XMMatrixIdentity();
+		data.world.r[3].m128_f32[0] = i;
+		instanceData.push_back(data);
 	}
 
 	//Setup shader buffers
-	structuredBuffer = renderer.CreateStructuredBuffer(sizeof(InstanceData) * instanceData.size(),
+	structuredBuffer = renderer.CreateStructuredBuffer(sizeof(InstanceData) * meshInstanceRenderCount,
 		sizeof(InstanceData), instanceData.data());
 	assert(structuredBuffer);
 
-	srv = renderer.CreateSRVForMeshInstance(structuredBuffer);
+	srv = renderer.CreateSRVForMeshInstance(structuredBuffer, meshInstanceRenderCount);
 	assert(srv);
+}
+
+void InstanceMeshComponent::SetInstanceData(std::vector<InstanceData>& instanceData_)
+{
+	instanceData.clear();
+	instanceData = instanceData_;
+}
+
+Properties InstanceMeshComponent::GetProps()
+{
+	Properties props = MeshComponent::GetProps();
+	props.title = "InstanceMeshComponent";
+	return props;
 }

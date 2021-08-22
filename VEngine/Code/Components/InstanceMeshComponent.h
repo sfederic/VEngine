@@ -4,6 +4,7 @@
 struct ID3D11Buffer;
 struct ID3D11ShaderResourceView;
 
+//InstanceMeshComponent doesn't have the individual meshes moved around in editor right now.
 struct InstanceMeshComponent : MeshComponent
 {
 	COMPONENT_SYSTEM(InstanceMeshComponent)
@@ -21,4 +22,7 @@ public:
 		uint32_t meshInstanceRenderCount_, const char* filename, const wchar_t* shader = L"InstanceShader.hlsl");
 	~InstanceMeshComponent();
 	virtual void Create();
+	uint32_t GetInstanceCount() { return meshInstanceRenderCount; }
+	void SetInstanceData(std::vector<InstanceData>& instanceData_);
+	virtual Properties GetProps();
 };

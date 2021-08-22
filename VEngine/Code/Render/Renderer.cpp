@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "UI/UISystem.h"
 #include "Components/MeshComponent.h"
+#include "Components/InstanceMeshComponent.h"
 #include "Actors/Actor.h"
 #include "Actors/NormalActor.h"
 #include "ShaderSystem.h"
@@ -20,6 +21,7 @@ UINT offset = 0;
 
 const int cbMatrixRegister = 0;
 const int cbMaterialRegister = 1;
+const int instanceSRVRegister = 3;
 
 ShaderMatrices shaderMatrices;
 Material shaderMaterial;
@@ -229,12 +231,12 @@ ID3D11Buffer* Renderer::CreateIndexBuffer(MeshDataProxy* meshData)
 		D3D11_BIND_INDEX_BUFFER, meshData->indices->data());
 }
 
-ID3D11ShaderResourceView* Renderer::CreateSRVForMeshInstance(ID3D11Buffer* structuredBuffer)
+ID3D11ShaderResourceView* Renderer::CreateSRVForMeshInstance(ID3D11Buffer* structuredBuffer, UINT numBufferElements)
 {
 	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 	srvDesc.Format = DXGI_FORMAT_UNKNOWN;
 	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFEREX;
-	srvDesc.BufferEx.NumElements = 250;
+	srvDesc.BufferEx.NumElements = numBufferElements;
 
 	ID3D11ShaderResourceView* srv = nullptr;
 	HR(device->CreateShaderResourceView(structuredBuffer, &srvDesc, &srv));
@@ -293,9 +295,14 @@ void Renderer::RenderSetup()
 
 void Renderer::Render()
 {
-	PROFILE_START
+	RenderMeshComponents();
+	RenderInstanceMeshComponents();
+	RenderBounds();
+}
 
-	const int cbMatrixRegister = 0;
+void Renderer::RenderMeshComponents()
+{
+	PROFILE_START
 
 	shaderMatrices.view = activeCamera->view;
 
@@ -321,6 +328,37 @@ void Renderer::Render()
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, cbMatrices.GetAddressOf());
 
 		context->DrawIndexed(mesh->data->indices->size(), 0, 0);
+	}
+
+	PROFILE_END
+}
+
+void Renderer::RenderInstanceMeshComponents()
+{
+	PROFILE_START
+
+	shaderMatrices.view = activeCamera->view;
+	shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
+	context->UpdateSubresource(cbMatrices.Get(), 0, nullptr, &shaderMatrices, 0, 0);
+	context->VSSetConstantBuffers(cbMatrixRegister, 1, cbMatrices.GetAddressOf());
+
+	for (InstanceMeshComponent* instanceMesh : InstanceMeshComponent::system.components)
+	{
+		context->RSSetState(activeRastState.Get());
+
+		context->VSSetShader(instanceMesh->shader->vertexShader, nullptr, 0);
+		context->PSSetShader(instanceMesh->shader->pixelShader, nullptr, 0);
+
+		context->PSSetSamplers(0, 1, &instanceMesh->pso->sampler.data);
+
+		context->IASetVertexBuffers(0, 1, &instanceMesh->pso->vertexBuffer.data, &stride, &offset);
+		context->IASetIndexBuffer(instanceMesh->pso->indexBuffer.data, DXGI_FORMAT_R32_UINT, 0);
+
+		//Update instance data and set SRV
+		context->UpdateSubresource(instanceMesh->structuredBuffer, 0, nullptr, instanceMesh->instanceData.data(), 0, 0);
+		context->VSSetShaderResources(instanceSRVRegister, 1, &instanceMesh->srv);
+
+		context->DrawIndexedInstanced(instanceMesh->data->indices->size(), instanceMesh->GetInstanceCount(), 0, 0, 0);
 	}
 
 	PROFILE_END

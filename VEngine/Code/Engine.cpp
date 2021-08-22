@@ -14,6 +14,7 @@
 #include "Render/ShaderSystem.h"
 #include "Actors/NormalActor.h"
 #include "Components/MeshComponent.h"
+#include "Components/InstanceMeshComponent.h"
 
 Engine engine;
 
@@ -31,6 +32,7 @@ void Engine::Init(int argc, char* argv[])
 	
 	NormalActor::system.Add();
 	MeshComponent::system.Init();
+	InstanceMeshComponent::system.Init();
 
 	world.Start();
 	editor->UpdateWorldList();
@@ -71,7 +73,6 @@ void Engine::Render(double deltaTime)
 {
 	renderer.RenderSetup();
 	renderer.Render();
-	renderer.RenderBounds();
 
 	uiSystem.BeginDraw();
 	console.Tick();
