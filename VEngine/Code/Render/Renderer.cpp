@@ -10,7 +10,6 @@
 #include "Actors/DebugBox.h"
 #include "Input.h"
 #include "Material.h"
-#include "InstanceMeshSystem.h"
 
 #include "Profile.h"
 

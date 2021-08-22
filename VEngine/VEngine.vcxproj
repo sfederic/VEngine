@@ -13,7 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{06F17222-BBAD-453D-B1B8-096E2C5F7501}</ProjectGuid>
     <Keyword>QtVS_v304</Keyword>
-    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0</WindowsTargetPlatformVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
@@ -119,7 +119,6 @@
     <ClCompile Include="Code\Components\SpatialComponent.cpp" />
     <ClCompile Include="Code\Actors\DebugBox.cpp" />
     <ClCompile Include="Code\FileSystem.cpp" />
-    <ClCompile Include="Code\Render\InstanceMeshSystem.cpp" />
     <ClInclude Include="Code\Animation\AnimationStructures.h" />
     <ClInclude Include="Code\Actors\Actor.h" />
     <ClInclude Include="Code\Actors\ActorSystem.h" />
@@ -236,7 +235,6 @@
     <ClInclude Include="Code\Components\SpatialComponent.h" />
     <ClInclude Include="Code\Actors\DebugBox.h" />
     <ClInclude Include="Code\FileSystem.h" />
-    <ClInclude Include="Code\Render\InstanceMeshSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
@@ -264,6 +262,7 @@
   <ItemGroup>
     <FxCompile Include="Code\Render\Shaders\InstanceShader.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="Code\Render\Shaders\SolidColour.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
