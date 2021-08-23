@@ -93,6 +93,10 @@ void Serialiser::Deserialise(Properties props, std::istream& is)
 		{
 			is >> *(bool*)prop->second;
 		}
+		else if (type == typeid(int))
+		{
+			is >> *(int*)prop->second;
+		}
 		else if (type == typeid(std::string))
 		{
 			char actorString[512];
