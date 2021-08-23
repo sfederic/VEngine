@@ -22,7 +22,7 @@ struct ActorSystem : IActorSystem
 
 	T* Add(Transform transform = Transform())
 	{
-		actors.push_back(new T());
+		actors.emplace_back(new T());
 
 		T* actor = actors.back();
 		actor->actorSystem = this;

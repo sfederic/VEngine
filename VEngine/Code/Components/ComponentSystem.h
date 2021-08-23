@@ -15,7 +15,7 @@ struct ComponentSystem : IComponentSystem
 
 	T* Add(Actor* owner = nullptr, T newComponent = T())
 	{
-		components.push_back(new T(newComponent));
+		components.emplace_back(new T(newComponent));
 
 		T* component = components.back();
 		component->owner = owner;
