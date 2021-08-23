@@ -112,6 +112,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Code\Actors\ActorSystemCache.cpp" />
+    <ClCompile Include="Code\Editor\PropertyWidgets\SpinBox.cpp" />
     <ClCompile Include="Code\Render\Material.cpp" />
     <ClCompile Include="Code\VString.cpp" />
     <ClCompile Include="Code\UI\Widget.cpp" />
@@ -183,6 +184,7 @@
     <ClInclude Include="Code\Editor\PropertyWidgets\FloatWidget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\IntWidget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\IPropertyWidget.h" />
+    <ClInclude Include="Code\Editor\PropertyWidgets\SpinBox.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\VectorWidget.h" />
     <ClInclude Include="Code\Editor\ToolbarDock.h" />
     <ClCompile Include="Code\Editor\Win32Editor.cpp" />

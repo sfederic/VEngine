@@ -1,14 +1,12 @@
 #pragma once
-
-#include <QDoubleSpinBox>
+#include "SpinBox.h"
 #include "IPropertyWidget.h"
 
-class FloatWidget : public QDoubleSpinBox, IPropertyWidget
+class FloatWidget : SpinBox, IPropertyWidget
 {
 public:
-	FloatWidget(float value, QWidget* parent = 0);
+	FloatWidget(float* value, QWidget* parent = 0);
 
-private:
 	void SetValue();
 	virtual void ResetValue() override;
 

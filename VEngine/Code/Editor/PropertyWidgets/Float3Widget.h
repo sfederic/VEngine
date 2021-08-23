@@ -1,5 +1,5 @@
 #pragma once
-#include <QDoubleSpinBox>
+#include "SpinBox.h"
 #include <DirectXMath.h>
 #include "IPropertyWidget.h"
 
@@ -13,8 +13,8 @@ public:
 	virtual void ResetValue() override;
 
 private:
-	QDoubleSpinBox xSpinbox;
-	QDoubleSpinBox ySpinbox;
-	QDoubleSpinBox zSpinbox;
+	SpinBox xSpinbox;
+	SpinBox ySpinbox;
+	SpinBox zSpinbox;
 	XMFLOAT3* _value;
 };
