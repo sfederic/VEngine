@@ -39,6 +39,10 @@ void Serialiser::Serialise(Properties props, std::ostream& os)
 		{
 			os << prop.first << "\n" << *(bool*)prop.second << "\n";
 		}
+		else if (type == typeid(int))
+		{
+			os << prop.first << "\n" << *(int*)prop.second << "\n";
+		}
 		else if (type == typeid(std::string))
 		{
 			auto str = (std::string*)prop.second;
