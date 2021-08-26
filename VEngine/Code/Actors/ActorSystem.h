@@ -46,6 +46,14 @@ struct ActorSystem : IActorSystem
 		actors.pop_back();
 	}
 
+	virtual void Tick(double deltaTime) override
+	{
+		for (T* actor : actors)
+		{
+			actor->Tick(deltaTime);
+		}
+	}
+
 	virtual void Serialise(std::ostream& os) override
 	{
 		os << name << "\n"; //Use actorsystem name to create again from ActorSystemCache on Deserialise

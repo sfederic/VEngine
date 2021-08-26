@@ -102,6 +102,10 @@ Properties Actor::GetProps()
 	return props;
 }
 
+void Actor::Tick(double deltaTime)
+{
+}
+
 void Actor::Destroy()
 {
 }

@@ -38,5 +38,6 @@ struct Actor
 	void SetTransform(Transform transform);
 	Transform GetTransform();
 	virtual Properties GetProps();
+	virtual void Tick(double deltaTime);
 	virtual void Destroy();
 };

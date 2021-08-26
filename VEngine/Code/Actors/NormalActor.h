@@ -2,13 +2,15 @@
 #include "Actor.h"
 #include "ActorSystem.h"
 
-struct InstanceMeshComponent;
+struct MeshComponent;
 
 struct NormalActor : Actor
 {
 	ACTOR_SYSTEM(NormalActor)
 
-	InstanceMeshComponent* mesh1;
+	MeshComponent* mesh1;
+	MeshComponent* mesh2;
 
 	NormalActor();
+	virtual Properties GetProps();
 };
