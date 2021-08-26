@@ -10,9 +10,9 @@ struct NormalActor : Actor
 	ACTOR_SYSTEM(NormalActor)
 
 	MeshComponent* mesh1;
-	MeshComponent* mesh2;
 	CameraComponent* camera;
 
 	NormalActor();
+	virtual void Tick(double deltaTime) override;
 	virtual Properties GetProps();
 };

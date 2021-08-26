@@ -4,20 +4,15 @@
 #include "Actors/Actor.h"
 #include "Editor/Editor.h"
 
-CameraComponent editorCamera(XMVectorSet(0.f, 2.f, -5.f, 1.f), true);
+CameraComponent editorCamera(XMFLOAT3(0.f, 2.f, -5.f), true);
 CameraComponent* activeCamera;
 
-CameraComponent::CameraComponent(XMVECTOR startingPosition, bool isEditorCamera)
+CameraComponent::CameraComponent(XMFLOAT3 startPos, bool isEditorCamera)
 {
-	forward = XMVectorSet(0.f, 0.f, 1.f, 0.f);
-	right = XMVectorSet(1.f, 0.f, 0.f, 0.f);
-	up = XMVectorSet(0.f, 1.f, 0.f, 0.f);
-
-	worldUp = XMVectorSet(0.f, 1.f, 0.f, 0.f);
 	focusPoint = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 
-	position = startingPosition;
-
+	transform.position = startPos;
+	UpdateTransform();
 	UpdateViewMatrix();
 
 	editorCamera = isEditorCamera;
@@ -25,6 +20,11 @@ CameraComponent::CameraComponent(XMVECTOR startingPosition, bool isEditorCamera)
 
 void CameraComponent::UpdateViewMatrix()
 {
+	XMVECTOR& right = transform.world.r[0];
+	XMVECTOR& up = transform.world.r[1];
+	XMVECTOR& forward = transform.world.r[2];
+	XMVECTOR& position = transform.world.r[3];
+
 	forward = XMVector3Normalize(forward);
 	up = XMVector3Normalize(XMVector3Cross(forward, right));
 	right = XMVector3Cross(up, forward);
@@ -56,6 +56,10 @@ void CameraComponent::UpdateViewMatrix()
 
 void CameraComponent::Pitch(float angle)
 {
+	XMVECTOR& right = transform.world.r[0];
+	XMVECTOR& up = transform.world.r[1];
+	XMVECTOR& forward = transform.world.r[2];
+
 	XMMATRIX r = XMMatrixRotationAxis(right, angle);
 	up = XMVector3TransformNormal(up, r);
 	forward = XMVector3TransformNormal(forward, r);
@@ -63,6 +67,10 @@ void CameraComponent::Pitch(float angle)
 
 void CameraComponent::RotateY(float angle)
 {
+	XMVECTOR& right = transform.world.r[0];
+	XMVECTOR& up = transform.world.r[1];
+	XMVECTOR& forward = transform.world.r[2];
+
 	XMMATRIX r = XMMatrixRotationY(angle);
 	up = XMVector3TransformNormal(up, r);
 	right = XMVector3TransformNormal(right, r);
@@ -89,11 +97,15 @@ void CameraComponent::MouseMove(int x, int y)
 void CameraComponent::Move(float d, XMVECTOR axis)
 {
 	XMVECTOR s = XMVectorReplicate(d);
+	XMVECTOR& position = transform.world.r[3];
 	position = XMVectorMultiplyAdd(s, axis, position);
 }
 
 void CameraComponent::ZoomTo(Actor* actor)
 {
+	XMVECTOR& position = transform.world.r[3];
+	XMVECTOR& forward = transform.world.r[2];
+
 	//Trace the camera down the line its pointing towards the actor
 	XMFLOAT3 actorPos = actor->GetPosition();
 	XMVECTOR actorPosVec = XMLoadFloat3(&actorPos);
@@ -103,6 +115,10 @@ void CameraComponent::ZoomTo(Actor* actor)
 
 void CameraComponent::Tick(double deltaTime)
 {
+	XMVECTOR& right = transform.world.r[0];
+	XMVECTOR& up = transform.world.r[1];
+	XMVECTOR& forward = transform.world.r[2];
+
 	UpdateViewMatrix();
 
 	if (editorCamera)

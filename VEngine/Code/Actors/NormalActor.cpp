@@ -7,8 +7,13 @@ NormalActor::NormalActor()
 	mesh1 = MeshComponent::system.Add(this, MeshComponent("cube.fbx"));
 	rootComponent = mesh1;
 
-	camera = CameraComponent::system.Add(this, CameraComponent(XMVectorSet(0.f, 0.f, -5.f, 1.f), false));
-	camera->parent = mesh1;
+	camera = CameraComponent::system.Add(this, CameraComponent(XMFLOAT3(0.f, 0.f, -5.f), false));
+	rootComponent->AddChild(camera);
+}
+
+void NormalActor::Tick(double deltaTime)
+{
+
 }
 
 Properties NormalActor::GetProps()

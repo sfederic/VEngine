@@ -12,15 +12,10 @@ struct CameraComponent : SpatialComponent
 	COMPONENT_SYSTEM(CameraComponent)
 
 	XMMATRIX view, proj;
-
-	XMVECTOR position;
 	XMVECTOR focusPoint;
-	XMVECTOR worldUp;
-	XMVECTOR forward, up, right;
-
 	bool editorCamera = false;
 
-	CameraComponent(XMVECTOR startingPosition, bool isEditorCamera);
+	CameraComponent(XMFLOAT3 startPos, bool isEditorCamera);
 	void UpdateViewMatrix();
 	void Pitch(float angle);
 	void RotateY(float angle);

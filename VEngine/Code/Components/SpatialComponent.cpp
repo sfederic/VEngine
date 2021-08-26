@@ -33,6 +33,16 @@ void SpatialComponent::UpdateTransform(XMMATRIX parentWorld)
 	transform.world = world;
 }
 
+void SpatialComponent::SetPosition(XMFLOAT3 newPosition)
+{
+	transform.position = newPosition;
+}
+
+void SpatialComponent::SetPosition(XMVECTOR newPosition)
+{
+	XMStoreFloat3(&transform.position, newPosition);
+}
+
 XMFLOAT3 SpatialComponent::GetForwardVector()
 {
 	XMFLOAT3 forward;
