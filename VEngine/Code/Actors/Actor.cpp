@@ -83,6 +83,27 @@ Transform Actor::GetTransform()
 	return rootComponent->transform;
 }
 
+XMFLOAT3 Actor::GetForwardVector()
+{
+	XMFLOAT3 forward;
+	XMStoreFloat3(&forward, rootComponent->transform.world.r[2]);
+	return forward;
+}
+
+XMFLOAT3 Actor::GetRightVector()
+{
+	XMFLOAT3 right;
+	XMStoreFloat3(&right, rootComponent->transform.world.r[0]);
+	return right;
+}
+
+XMFLOAT3 Actor::GetUpVector()
+{
+	XMFLOAT3 up;
+	XMStoreFloat3(&up, rootComponent->transform.world.r[1]);
+	return up;
+}
+
 Properties Actor::GetProps()
 {
 	Properties props("Actor");

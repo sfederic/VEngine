@@ -37,6 +37,9 @@ struct Actor
 	void SetRotation(XMVECTOR rotation);
 	void SetTransform(Transform transform);
 	Transform GetTransform();
+	XMFLOAT3 GetForwardVector();
+	XMFLOAT3 GetRightVector();
+	XMFLOAT3 GetUpVector();
 	virtual Properties GetProps();
 	virtual void Tick(double deltaTime);
 	virtual void Destroy();
