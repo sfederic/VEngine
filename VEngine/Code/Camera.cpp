@@ -13,12 +13,11 @@ CameraComponent::CameraComponent(XMFLOAT3 startPos, bool isEditorCamera)
 
 	transform.position = startPos;
 	UpdateTransform();
-	UpdateViewMatrix();
 
 	editorCamera = isEditorCamera;
 }
 
-void CameraComponent::UpdateViewMatrix()
+XMMATRIX CameraComponent::GetViewMatrix()
 {
 	XMVECTOR& right = transform.world.r[0];
 	XMVECTOR& up = transform.world.r[1];
@@ -32,6 +31,8 @@ void CameraComponent::UpdateViewMatrix()
 	float x = XMVectorGetX(XMVector3Dot(position, right));
 	float y = XMVectorGetX(XMVector3Dot(position, up));
 	float z = XMVectorGetX(XMVector3Dot(position, forward));
+
+	XMMATRIX view;
 
 	view.r[0].m128_f32[0] = right.m128_f32[0];
 	view.r[1].m128_f32[0] = right.m128_f32[1];
@@ -52,6 +53,8 @@ void CameraComponent::UpdateViewMatrix()
 	view.r[1].m128_f32[3] = 0.0f;
 	view.r[2].m128_f32[3] = 0.0f;
 	view.r[3].m128_f32[3] = 1.0f;
+
+	return view;
 }
 
 void CameraComponent::Pitch(float angle)
@@ -118,8 +121,6 @@ void CameraComponent::Tick(double deltaTime)
 	XMVECTOR& right = transform.world.r[0];
 	XMVECTOR& up = transform.world.r[1];
 	XMVECTOR& forward = transform.world.r[2];
-
-	UpdateViewMatrix();
 
 	if (editorCamera)
 	{

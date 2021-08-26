@@ -39,8 +39,8 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, IActorSystem* actorS
 	//Calculate raycast from camera coords into world
 	if (fromScreen)
 	{
-		XMVECTOR invViewDet = XMMatrixDeterminant(activeCamera->view);
-		XMMATRIX invView = XMMatrixInverse(&invViewDet, activeCamera->view);
+		XMVECTOR invViewDet = XMMatrixDeterminant(activeCamera->GetViewMatrix());
+		XMMATRIX invView = XMMatrixInverse(&invViewDet, activeCamera->GetViewMatrix());
 		XMVECTOR invDet = XMMatrixDeterminant(XMMatrixIdentity());
 		XMMATRIX invModel = XMMatrixInverse(&invDet, XMMatrixIdentity());
 		XMMATRIX toLocal = XMMatrixMultiply(invView, invModel);

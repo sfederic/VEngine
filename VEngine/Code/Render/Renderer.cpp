@@ -304,7 +304,7 @@ void Renderer::RenderMeshComponents()
 {
 	PROFILE_START
 
-	shaderMatrices.view = activeCamera->view;
+	shaderMatrices.view = activeCamera->GetViewMatrix();
 
 	for (MeshComponent* mesh : MeshComponent::system.components)
 	{
@@ -337,7 +337,7 @@ void Renderer::RenderInstanceMeshComponents()
 {
 	PROFILE_START
 
-	shaderMatrices.view = activeCamera->view;
+	shaderMatrices.view = activeCamera->GetViewMatrix();
 	shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
 	context->UpdateSubresource(cbMatrices.Get(), 0, nullptr, &shaderMatrices, 0, 0);
 	context->VSSetConstantBuffers(cbMatrixRegister, 1, cbMatrices.GetAddressOf());
@@ -380,7 +380,7 @@ void Renderer::RenderBounds()
 
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, cbMatrices.GetAddressOf());
 
-		shaderMatrices.view = activeCamera->view;
+		shaderMatrices.view = activeCamera->GetViewMatrix();
 
 		//Set debug wireframe material colour
 		shaderMaterial.ambient = XMFLOAT4(0.75f, 0.75f, 0.75f, 1.0f);

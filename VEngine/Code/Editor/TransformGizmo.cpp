@@ -23,7 +23,7 @@ void TransformGizmo::Tick()
 
     //Setup camera matrices
     XMFLOAT4X4 view, proj, actorMatrix;
-    XMStoreFloat4x4(&view, activeCamera->view);
+    XMStoreFloat4x4(&view, activeCamera->GetViewMatrix());
     XMStoreFloat4x4(&proj, activeCamera->proj);
 
     if (worldEditor.pickedActor)
