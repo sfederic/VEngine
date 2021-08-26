@@ -17,6 +17,8 @@ void Win32Editor::Init(int argc, char* argv[])
 
 void Win32Editor::Tick()
 {
+	SetMousePos();
+
 	if (ImGui_ImplWin32_WndProcHandler(msg.hwnd, msg.message, msg.wParam, msg.lParam))
 	{
 		return;
