@@ -11,6 +11,8 @@ struct Properties
 	std::unordered_map<std::string, std::optional<std::type_index>> typeMap;
 	std::string title;
 
+	Properties() {}
+
 	Properties(const char* title_)
 	{
 		title = title_;
