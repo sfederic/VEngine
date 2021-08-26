@@ -32,3 +32,24 @@ void SpatialComponent::UpdateTransform(XMMATRIX parentWorld)
 
 	transform.world = world;
 }
+
+XMFLOAT3 SpatialComponent::GetForwardVector()
+{
+	XMFLOAT3 forward;
+	XMStoreFloat3(&forward, transform.world.r[2]);
+	return forward;
+}
+
+XMFLOAT3 SpatialComponent::GetRightVector()
+{
+	XMFLOAT3 right;
+	XMStoreFloat3(&right, transform.world.r[0]);
+	return right;
+}
+
+XMFLOAT3 SpatialComponent::GetUpVector()
+{
+	XMFLOAT3 up;
+	XMStoreFloat3(&up, transform.world.r[1]);
+	return up;
+}
