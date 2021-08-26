@@ -40,4 +40,21 @@ struct Actor
 	virtual Properties GetProps();
 	virtual void Tick(double deltaTime);
 	virtual void Destroy();
+
+	template <typename T>
+	std::vector<T*> GetComponentsOfType()
+	{
+		std::vector<T*> outComponents;
+
+		for (Component* component : components)
+		{
+			T* outComponent = dynamic_cast<T*>(component);
+			if (outComponent)
+			{
+				outComponents.push_back(outComponent);
+			}
+		}
+
+		return outComponents;
+	}
 };
