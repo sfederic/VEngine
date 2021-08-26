@@ -5,5 +5,6 @@ struct IComponentSystem
 {
 	SystemStates systemState = SystemStates::Unloaded;
 
+	virtual void Tick(double deltaTime) = 0;
 	virtual void Cleanup() = 0;
 };

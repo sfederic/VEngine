@@ -14,6 +14,10 @@ MeshComponent::MeshComponent(const char* filename_, const wchar_t* shaderFilenam
 	shader = shaderSystem.shaderMap.find(shaderFilename)->second;
 }
 
+void MeshComponent::Tick(double deltaTime)
+{
+}
+
 void MeshComponent::Create()
 {
 	//Import mesh (set up bounding box in here too so you don't need to re-create bounds)

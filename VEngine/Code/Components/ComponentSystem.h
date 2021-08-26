@@ -52,6 +52,14 @@ struct ComponentSystem : IComponentSystem
 		systemState = SystemStates::Loaded;
 	}
 
+	virtual void Tick(double deltaTime) override
+	{
+		for (T* component : components)
+		{
+			component->Tick(deltaTime);
+		}
+	}
+
 	virtual void Cleanup() override
 	{
 		for (T* component : components)
