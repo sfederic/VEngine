@@ -113,7 +113,7 @@ bool RaycastTriangleIntersect(Ray& ray)
 
 		for (Component* component : actor->components)
 		{
-			MeshComponent* mesh = (MeshComponent*)component;
+			MeshComponent* mesh = dynamic_cast<MeshComponent*>(component);
 			if (mesh)
 			{
 				for (int i = 0; i < mesh->data->vertices->size() / 3; i++)

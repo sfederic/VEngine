@@ -22,6 +22,8 @@ namespace Core
 	void Init();
 	void StartTimer();
 	void EndTimer();
+	void StartGame();
+	void EndGame();
 	void HandleWin32MessagePump(UINT message, WPARAM wparam, LPARAM lparam);
 	LRESULT __stdcall WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam);
 }

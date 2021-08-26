@@ -3,6 +3,7 @@
 #include "ActorSystem.h"
 
 struct MeshComponent;
+struct CameraComponent;
 
 struct NormalActor : Actor
 {
@@ -10,6 +11,7 @@ struct NormalActor : Actor
 
 	MeshComponent* mesh1;
 	MeshComponent* mesh2;
+	CameraComponent* camera;
 
 	NormalActor();
 	virtual Properties GetProps();

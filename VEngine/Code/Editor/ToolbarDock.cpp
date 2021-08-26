@@ -28,10 +28,12 @@ void ToolbarDock::StartPlay()
 
 	if (Core::gameplayOn)
 	{
+		Core::StartGame();
 		playButton->setText("Stop");
 	}
 	else
 	{
+		Core::EndGame();
 		playButton->setText("Play");
 	}
 }

@@ -3,6 +3,9 @@
 #include "Render/Renderer.h"
 #include "Debug.h"
 
+#include "Actors/NormalActor.h"
+#include "Camera.h"
+
 double ticks;
 double deltaTime = 0.0;
 double deltaAccum;
@@ -72,6 +75,16 @@ void Core::EndTimer()
 		frameCount = 0;
 		deltaAccum = 0.0;
 	}
+}
+
+void Core::StartGame()
+{
+	activeCamera = NormalActor::system.actors[0]->camera;
+}
+
+void Core::EndGame()
+{
+	activeCamera = &editorCamera;
 }
 
 void Core::HandleWin32MessagePump(UINT message, WPARAM wparam, LPARAM lparam)
