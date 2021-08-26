@@ -60,25 +60,21 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, IActorSystem* actorS
 
 	for (Actor* actor : outActors)
 	{
-		for (Component* component : actor->components)
+		for (SpatialComponent* spatialComponent : actor->GetComponentsOfType<SpatialComponent>())
 		{
-			SpatialComponent* spatialComponent = (SpatialComponent*)component;
-			if (spatialComponent)
+			BoundingOrientedBox& boundingBox = spatialComponent->boundingBox;
+
+			boundingBox.Center = spatialComponent->transform.position;
+			boundingBox.Orientation = spatialComponent->transform.rotation;
+			boundingBox.Extents.x *= spatialComponent->transform.scale.x;
+			boundingBox.Extents.y *= spatialComponent->transform.scale.y;
+			boundingBox.Extents.z *= spatialComponent->transform.scale.z;
+
+			if (boundingBox.Intersects(ray.origin, ray.direction, ray.distance))
 			{
-				BoundingOrientedBox& boundingBox = spatialComponent->boundingBox;
-
-				boundingBox.Center = spatialComponent->transform.position;
-				boundingBox.Orientation = spatialComponent->transform.rotation;
-				boundingBox.Extents.x *= spatialComponent->transform.scale.x;
-				boundingBox.Extents.y *= spatialComponent->transform.scale.y;
-				boundingBox.Extents.z *= spatialComponent->transform.scale.z;
-
-				if (boundingBox.Intersects(ray.origin, ray.direction, ray.distance))
-				{
-					distances.push_back(ray.distance);
-					ray.hitActors.push_back(actor);
-					bRayHit = true;
-				}
+				distances.push_back(ray.distance);
+				ray.hitActors.push_back(actor);
+				bRayHit = true;
 			}
 		}
 	}

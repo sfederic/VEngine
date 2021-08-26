@@ -4,7 +4,7 @@
 #include <DirectXCollision.h>
 
 struct IActorSystem;
-struct Camera;
+struct CameraComponent;
 struct Actor;
 
 using namespace DirectX;
@@ -32,5 +32,5 @@ struct Ray
 bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, IActorSystem* actorSystem, bool fromScreen = false);
 bool RaycastTriangleIntersect(Ray& ray);
 bool RaycastAll(Ray& ray, XMVECTOR origin, XMVECTOR direction);
-bool RaycastFromScreen(Ray& ray, int sx, int sy, Camera* camera, IActorSystem* actorSystem);
+bool RaycastFromScreen(Ray& ray, int sx, int sy, CameraComponent* camera, IActorSystem* actorSystem);
 bool RaycastAllFromScreen(Ray& ray);
