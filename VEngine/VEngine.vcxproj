@@ -203,8 +203,8 @@
     <ClInclude Include="Code\Input.h" />
     <ClCompile Include="Code\main.cpp" />
     <ClInclude Include="Code\Editor\RenderViewWidget.h" />
-    <ClCompile Include="Code\Math.cpp" />
-    <ClInclude Include="Code\Math.h" />
+    <ClCompile Include="Code\VMath.cpp" />
+    <ClInclude Include="Code\VMath.h" />
     <ClCompile Include="Code\Physics\Raycast.cpp" />
     <ClInclude Include="Code\Physics\Raycast.h" />
     <ClCompile Include="Code\Render\ShaderSystem.cpp" />

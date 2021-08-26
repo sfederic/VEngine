@@ -7,7 +7,7 @@ struct Actor;
 
 using namespace DirectX;
 
-namespace Math
+namespace VMath
 {
 	void MatrixAddScale(float s, XMMATRIX& m);
 	XMVECTOR XMVectorRight();

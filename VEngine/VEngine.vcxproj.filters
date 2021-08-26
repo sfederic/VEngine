@@ -101,7 +101,7 @@
     <ClCompile Include="Code\Editor\PropertiesDock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Math.cpp">
+    <ClCompile Include="Code\VMath.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Editor\ToolbarDock.cpp">
@@ -246,7 +246,7 @@
     <ClInclude Include="Code\Engine.h" />
     <ClInclude Include="Code\FBXImporter.h" />
     <ClInclude Include="Code\Input.h" />
-    <ClInclude Include="Code\Math.h" />
+    <ClInclude Include="Code\VMath.h" />
     <ClInclude Include="Code\Profile.h" />
     <ClInclude Include="Code\Serialiser.h" />
     <ClInclude Include="Code\Properties.h" />
