@@ -47,8 +47,11 @@ void Engine::TickSystems(double deltaTime)
 	worldEditor.Tick();
 	renderer.Tick();
 
-	world.TickAllActorSystems(deltaTime);
-	world.TickAllComponentSystems(deltaTime);
+	if (Core::gameplayOn)
+	{
+		world.TickAllActorSystems(deltaTime);
+		world.TickAllComponentSystems(deltaTime);
+	}
 }
 
 void Engine::ResetSystems()
