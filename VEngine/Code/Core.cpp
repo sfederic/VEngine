@@ -10,6 +10,7 @@ double deltaAccum;
 namespace Core
 {
 	bool mainLoop = true;
+	bool gameplayOn = false;
 
 	__int64 tickFrequency;
 	__int64 frameStartTime;

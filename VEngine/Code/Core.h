@@ -6,6 +6,7 @@
 namespace Core
 {
 	extern bool mainLoop;
+	extern bool gameplayOn;
 
 	extern __int64 tickFrequency;
 	extern __int64 frameStartTime;
