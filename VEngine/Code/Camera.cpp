@@ -103,10 +103,11 @@ void CameraComponent::ZoomTo(Actor* actor)
 
 void CameraComponent::Tick(double deltaTime)
 {
+	UpdateViewMatrix();
+
 	if (editorCamera)
 	{
 		MouseMove(editor->viewportMouseX, editor->viewportMouseY);
-		UpdateViewMatrix();
 
 		//WASD MOVEMENT
 		//if (!gConsole.bConsoleActive)
