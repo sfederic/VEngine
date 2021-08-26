@@ -12,6 +12,8 @@ struct World
 	std::vector<IComponentSystem*> activeComponentSystems;
 
 	void Start();
+	void TickAllActorSystems(double deltaTime);
+	void TickAllComponentSystems(double deltaTime);
 	Actor* FindActorByName(std::string actorName);
 	void Cleanup();
 };

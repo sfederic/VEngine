@@ -11,6 +11,22 @@ void World::Start()
 	activeComponentSystems.push_back(&MeshComponent::system);
 }
 
+void World::TickAllActorSystems(double deltaTime)
+{
+	for (IActorSystem* actorSystem : activeActorSystems)
+	{
+		actorSystem->Tick(deltaTime);
+	}
+}
+
+void World::TickAllComponentSystems(double deltaTime)
+{
+	for (IComponentSystem* componentSystem : activeComponentSystems)
+	{
+		componentSystem->Tick(deltaTime);
+	}
+}
+
 Actor* World::FindActorByName(std::string actorName)
 {
 	for (IActorSystem* actorSystem : activeActorSystems)
