@@ -42,7 +42,7 @@ void Engine::TickSystems(double deltaTime)
 {
 	editor->Tick();
 	shaderSystem.Tick();
-	activeCamera->Tick(deltaTime, editor->viewportMouseX, editor->viewportMouseY);
+	activeCamera->Tick(deltaTime);
 	timerSystem.Tick(deltaTime);
 	worldEditor.Tick();
 	renderer.Tick();

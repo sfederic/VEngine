@@ -190,7 +190,7 @@ bool RaycastAll(Ray& ray, XMVECTOR origin, XMVECTOR direction)
 	return false;
 }
 
-bool RaycastFromScreen(Ray& ray, int sx, int sy, Camera* camera, IActorSystem* actorSystem)
+bool RaycastFromScreen(Ray& ray, int sx, int sy, CameraComponent* camera, IActorSystem* actorSystem)
 {
 	float vx = (2.f * sx / renderer.GetViewportWidth() - 1.0f) / camera->proj.r[0].m128_f32[0];
 	float vy = (-2.f * sy / renderer.GetViewportHeight() + 1.0f) / camera->proj.r[1].m128_f32[1];

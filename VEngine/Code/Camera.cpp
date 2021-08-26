@@ -2,12 +2,12 @@
 #include "Input.h"
 #include "WorldEditor.h"
 #include "Actors/Actor.h"
+#include "Editor/Editor.h"
 
-Camera editorCamera(XMVectorSet(0.f, 2.f, -5.f, 1.f), true);
-Camera playerCamera(XMVectorSet(0.f, 0.f, 1.f, 1.f), false);
-Camera* activeCamera;
+CameraComponent editorCamera(XMVectorSet(0.f, 2.f, -5.f, 1.f), true);
+CameraComponent* activeCamera;
 
-Camera::Camera(XMVECTOR startingPosition, bool isEditorCamera)
+CameraComponent::CameraComponent(XMVECTOR startingPosition, bool isEditorCamera)
 {
 	forward = XMVectorSet(0.f, 0.f, 1.f, 0.f);
 	right = XMVectorSet(1.f, 0.f, 0.f, 0.f);
@@ -23,11 +23,89 @@ Camera::Camera(XMVECTOR startingPosition, bool isEditorCamera)
 	editorCamera = isEditorCamera;
 }
 
-void Camera::Tick(float deltaTime, int mouseX, int mouseY)
+void CameraComponent::UpdateViewMatrix()
+{
+	forward = XMVector3Normalize(forward);
+	up = XMVector3Normalize(XMVector3Cross(forward, right));
+	right = XMVector3Cross(up, forward);
+
+	float x = XMVectorGetX(XMVector3Dot(position, right));
+	float y = XMVectorGetX(XMVector3Dot(position, up));
+	float z = XMVectorGetX(XMVector3Dot(position, forward));
+
+	view.r[0].m128_f32[0] = right.m128_f32[0];
+	view.r[1].m128_f32[0] = right.m128_f32[1];
+	view.r[2].m128_f32[0] = right.m128_f32[2];
+	view.r[3].m128_f32[0] = -x;
+
+	view.r[0].m128_f32[1] = up.m128_f32[0];
+	view.r[1].m128_f32[1] = up.m128_f32[1];
+	view.r[2].m128_f32[1] = up.m128_f32[2];
+	view.r[3].m128_f32[1] = -y;
+
+	view.r[0].m128_f32[2] = forward.m128_f32[0];
+	view.r[1].m128_f32[2] = forward.m128_f32[1];
+	view.r[2].m128_f32[2] = forward.m128_f32[2];
+	view.r[3].m128_f32[2] = -z;
+
+	view.r[0].m128_f32[3] = 0.0f;
+	view.r[1].m128_f32[3] = 0.0f;
+	view.r[2].m128_f32[3] = 0.0f;
+	view.r[3].m128_f32[3] = 1.0f;
+}
+
+void CameraComponent::Pitch(float angle)
+{
+	XMMATRIX r = XMMatrixRotationAxis(right, angle);
+	up = XMVector3TransformNormal(up, r);
+	forward = XMVector3TransformNormal(forward, r);
+}
+
+void CameraComponent::RotateY(float angle)
+{
+	XMMATRIX r = XMMatrixRotationY(angle);
+	up = XMVector3TransformNormal(up, r);
+	right = XMVector3TransformNormal(right, r);
+	forward = XMVector3TransformNormal(forward, r);
+}
+
+void CameraComponent::MouseMove(int x, int y)
+{
+	static XMINT2 lastMousePos;
+
+	if (Input::GetAsyncKey(Keys::RightMouse))
+	{
+		float dx = XMConvertToRadians(0.25f * (float)(x - lastMousePos.x));
+		float dy = XMConvertToRadians(0.25f * (float)(y - lastMousePos.y));
+
+		Pitch(dy);
+		RotateY(dx);
+	}
+
+	lastMousePos.x = x;
+	lastMousePos.y = y;
+}
+
+void CameraComponent::Move(float d, XMVECTOR axis)
+{
+	XMVECTOR s = XMVectorReplicate(d);
+	position = XMVectorMultiplyAdd(s, axis, position);
+}
+
+void CameraComponent::ZoomTo(Actor* actor)
+{
+	//Trace the camera down the line its pointing towards the actor
+	XMFLOAT3 actorPos = actor->GetPosition();
+	XMVECTOR actorPosVec = XMLoadFloat3(&actorPos);
+	XMVECTOR zoomPos = actorPosVec - (forward * 5.f);
+	position = zoomPos;
+}
+
+void CameraComponent::Tick(double deltaTime)
 {
 	if (editorCamera)
 	{
-		MouseMove(mouseX, mouseY);
+		MouseMove(editor->viewportMouseX, editor->viewportMouseY);
 		UpdateViewMatrix();
 
 		//WASD MOVEMENT
@@ -87,82 +165,13 @@ void Camera::Tick(float deltaTime, int mouseX, int mouseY)
 	}
 }
 
-void Camera::UpdateViewMatrix()
+void CameraComponent::Create()
 {
-	forward = XMVector3Normalize(forward);
-	up = XMVector3Normalize(XMVector3Cross(forward, right));
-	right = XMVector3Cross(up, forward);
-
-	float x = XMVectorGetX(XMVector3Dot(position, right));
-	float y = XMVectorGetX(XMVector3Dot(position, up));
-	float z = XMVectorGetX(XMVector3Dot(position, forward));
-
-	view.r[0].m128_f32[0] = right.m128_f32[0];
-	view.r[1].m128_f32[0] = right.m128_f32[1];
-	view.r[2].m128_f32[0] = right.m128_f32[2];
-	view.r[3].m128_f32[0] = -x;
-
-	view.r[0].m128_f32[1] = up.m128_f32[0];
-	view.r[1].m128_f32[1] = up.m128_f32[1];
-	view.r[2].m128_f32[1] = up.m128_f32[2];
-	view.r[3].m128_f32[1] = -y;
-
-	view.r[0].m128_f32[2] = forward.m128_f32[0];
-	view.r[1].m128_f32[2] = forward.m128_f32[1];
-	view.r[2].m128_f32[2] = forward.m128_f32[2];
-	view.r[3].m128_f32[2] = -z;
-
-	view.r[0].m128_f32[3] = 0.0f;
-	view.r[1].m128_f32[3] = 0.0f;
-	view.r[2].m128_f32[3] = 0.0f;
-	view.r[3].m128_f32[3] = 1.0f;
 }
 
-void Camera::Pitch(float angle)
+Properties CameraComponent::GetProps()
 {
-	XMMATRIX r = XMMatrixRotationAxis(right, angle);
-	up = XMVector3TransformNormal(up, r);
-	forward = XMVector3TransformNormal(forward, r);
-}
-
-void Camera::RotateY(float angle)
-{
-	XMMATRIX r = XMMatrixRotationY(angle);
-	up = XMVector3TransformNormal(up, r);
-	right = XMVector3TransformNormal(right, r);
-	forward = XMVector3TransformNormal(forward, r);
-}
-
-void Camera::MouseMove(int x, int y)
-{
-	static XMINT2 lastMousePos;
-
-	if (Input::GetAsyncKey(Keys::RightMouse))
-	{
-		float dx = XMConvertToRadians(0.25f * (float)(x - lastMousePos.x));
-		float dy = XMConvertToRadians(0.25f * (float)(y - lastMousePos.y));
-
-		Pitch(dy);
-		RotateY(dx);
-	}
-
-	lastMousePos.x = x;
-	lastMousePos.y = y;
-}
-
-void Camera::Move(float d, XMVECTOR axis)
-{
-	XMVECTOR s = XMVectorReplicate(d);
-	position = XMVectorMultiplyAdd(s, axis, position);
-}
-
-void Camera::ZoomTo(Actor* actor)
-{
-	//Trace the camera down the line its pointing towards the actor
-	XMFLOAT3 actorPos = actor->GetPosition();
-	XMVECTOR actorPosVec = XMLoadFloat3(&actorPos);
-	XMVECTOR zoomPos = actorPosVec - (forward * 5.f);
-	position = zoomPos;
+	return Properties();
 }
 
 //void Camera::FrustumCullTest(ActorSystem& system)
