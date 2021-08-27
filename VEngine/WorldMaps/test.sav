@@ -1,5 +1,5 @@
 NormalActor
-1
+2
 Position
 0 0 0
 Scale
@@ -7,5 +7,14 @@ Scale
 Rotation
 0 0 0 1
 MeshNum
-34
+953151904
+next
+Position
+0 0 0
+Scale
+1 1 1
+Rotation
+0 0 0 1
+MeshNum
+953150816
 next

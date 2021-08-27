@@ -63,6 +63,11 @@ void Actor::SetPosition(XMVECTOR position)
 	XMStoreFloat3(&rootComponent->transform.position, position);
 }
 
+void Actor::SetPosition(XMFLOAT3 position)
+{
+	rootComponent->transform.position = position;
+}
+
 void Actor::SetScale(XMVECTOR scale)
 {
 	XMStoreFloat3(&rootComponent->transform.scale, scale);

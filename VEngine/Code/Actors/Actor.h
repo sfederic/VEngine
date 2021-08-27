@@ -33,6 +33,7 @@ struct Actor
 	XMFLOAT3 GetScale();
 	XMFLOAT4 GetRotation();
 	void SetPosition(XMVECTOR position);
+	void SetPosition(XMFLOAT3 position);
 	void SetScale(XMVECTOR scale);
 	void SetRotation(XMVECTOR rotation);
 	void SetTransform(Transform transform);

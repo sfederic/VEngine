@@ -13,6 +13,7 @@ struct CameraComponent : SpatialComponent
 
 	XMMATRIX proj;
 	XMVECTOR focusPoint;
+	Actor* targetActor = nullptr;
 	bool editorCamera = false;
 
 	CameraComponent(XMFLOAT3 startPos, bool isEditorCamera);

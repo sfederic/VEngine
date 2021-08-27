@@ -3,6 +3,7 @@
 #include "WorldEditor.h"
 #include "Actors/Actor.h"
 #include "Editor/Editor.h"
+#include "Math.h"
 
 CameraComponent editorCamera(XMFLOAT3(0.f, 2.f, -5.f), true);
 CameraComponent* activeCamera;
@@ -19,10 +20,10 @@ CameraComponent::CameraComponent(XMFLOAT3 startPos, bool isEditorCamera)
 
 XMMATRIX CameraComponent::GetViewMatrix()
 {
-	XMVECTOR& right = transform.world.r[0];
-	XMVECTOR& up = transform.world.r[1];
-	XMVECTOR& forward = transform.world.r[2];
-	XMVECTOR& position = transform.world.r[3];
+	XMVECTOR right = transform.world.r[0];
+	XMVECTOR up = transform.world.r[1];
+	XMVECTOR forward = transform.world.r[2];
+	XMVECTOR position = transform.world.r[3];
 
 	forward = XMVector3Normalize(forward);
 	up = XMVector3Normalize(XMVector3Cross(forward, right));
@@ -118,9 +119,9 @@ void CameraComponent::ZoomTo(Actor* actor)
 
 void CameraComponent::Tick(double deltaTime)
 {
-	XMVECTOR& right = transform.world.r[0];
-	XMVECTOR& up = transform.world.r[1];
-	XMVECTOR& forward = transform.world.r[2];
+	XMVECTOR right = transform.world.r[0];
+	XMVECTOR up = transform.world.r[1];
+	XMVECTOR forward = transform.world.r[2];
 
 	if (editorCamera)
 	{
