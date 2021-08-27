@@ -20,10 +20,10 @@ namespace Core
 	double GetDeltaTime();
 	void SetTimerFrequency();
 	void Init();
+	void Tick();
 	void StartTimer();
 	void EndTimer();
-	void StartGame();
-	void EndGame();
+	void SetGameplayState();
 	void HandleWin32MessagePump(UINT message, WPARAM wparam, LPARAM lparam);
 	LRESULT __stdcall WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam);
 }

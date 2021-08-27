@@ -54,6 +54,17 @@ void Core::Init()
 	SetTimerFrequency();
 }
 
+void Core::Tick()
+{
+	if (Input::GetAsyncKey(Keys::Ctrl))
+	{
+		if (Input::GetKeyUp(Keys::P))
+		{
+			SetGameplayState();
+		}
+	}
+}
+
 void Core::StartTimer()
 {
 	QueryPerformanceCounter((LARGE_INTEGER*)&frameStartTime);
@@ -77,14 +88,28 @@ void Core::EndTimer()
 	}
 }
 
-void Core::StartGame()
+void StartGame()
 {
 	activeCamera = NormalActor::system.actors[0]->camera;
 }
 
-void Core::EndGame()
+void EndGame()
 {
 	activeCamera = &editorCamera;
+}
+
+void Core::SetGameplayState()
+{
+	gameplayOn = !gameplayOn;
+
+	if (gameplayOn)
+	{
+		StartGame();
+	}
+	else if(!gameplayOn)
+	{
+		EndGame();
+	}
 }
 
 void Core::HandleWin32MessagePump(UINT message, WPARAM wparam, LPARAM lparam)

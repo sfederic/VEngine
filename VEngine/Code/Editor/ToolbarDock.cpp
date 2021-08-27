@@ -24,16 +24,14 @@ ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 
 void ToolbarDock::StartPlay()
 {
-	Core::gameplayOn = !Core::gameplayOn;
+	Core::SetGameplayState();
 
 	if (Core::gameplayOn)
 	{
-		Core::StartGame();
 		playButton->setText("Stop");
 	}
 	else
 	{
-		Core::EndGame();
 		playButton->setText("Play");
 	}
 }

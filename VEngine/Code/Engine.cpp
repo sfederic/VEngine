@@ -41,6 +41,8 @@ void Engine::Init(int argc, char* argv[])
 void Engine::TickSystems(double deltaTime)
 {
 	editor->Tick();
+	Core::Tick();
+
 	shaderSystem.Tick();
 	activeCamera->Tick(deltaTime);
 	timerSystem.Tick(deltaTime);
