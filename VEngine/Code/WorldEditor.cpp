@@ -55,7 +55,7 @@ void WorldEditor::DuplicateActor()
 		{
 			if (pickedActor)
 			{
-				pickedActor->actorSystem->SpawnActor(pickedActor->GetTransform());
+				Actor* newDuplicateActor = pickedActor->actorSystem->SpawnActor(pickedActor->GetTransform());
 				editor->UpdateWorldList();
 			}
 		}

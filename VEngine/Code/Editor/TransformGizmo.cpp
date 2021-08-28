@@ -7,6 +7,7 @@
 #include "Actors/Actor.h"
 #include "Editor.h"
 #include "Commands/CommandSystem.h"
+#include "Commands/Command.h"
 
 TransformGizmo transformGizmo;
 

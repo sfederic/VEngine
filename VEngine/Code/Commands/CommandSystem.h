@@ -1,6 +1,5 @@
 #pragma once
 #include <vector>
-#include "Command.h"
 
 struct ICommand;
 

@@ -14,6 +14,7 @@
 #include "Components/Component.h"
 #include "UI/UISystem.h"
 #include "Commands/CommandSystem.h"
+#include "Commands/ICommand.h"
 
 DebugMenu debugMenu;
 
