@@ -4,6 +4,7 @@
 #include "Actor.h"
 #include "ActorSystemCache.h"
 #include "Serialiser.h"
+#include "Components/Component.h"
 
 template <typename T>
 struct ActorSystem : IActorSystem
