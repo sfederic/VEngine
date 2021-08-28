@@ -21,9 +21,9 @@ struct ActorSystem : IActorSystem
 		actorSystemCache.Add(typeid(T), this);
 	}
 
-	T* Add(Transform transform = Transform())
+	T* Add(T newActor = T(), Transform transform = Transform())
 	{
-		actors.emplace_back(new T());
+		actors.emplace_back(new T(newActor));
 
 		T* actor = actors.back();
 		actor->actorSystem = this;
@@ -89,7 +89,7 @@ struct ActorSystem : IActorSystem
 
 	virtual Actor* SpawnActor(Transform transform) override
 	{
-		Actor* actor = (Actor*)Add(transform);
+		Actor* actor = (Actor*)Add();
 		return actor;
 	}
 
@@ -113,5 +113,4 @@ struct ActorSystem : IActorSystem
 };
 
 #define ACTOR_SYSTEM(type) inline static ActorSystem<type> system; \
-type* Add(Transform transform = Transform()) { return (type*)system.Add(transform); } \
 virtual void Destroy() override { system.Remove(index); } \
