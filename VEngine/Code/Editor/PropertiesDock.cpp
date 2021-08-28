@@ -79,37 +79,36 @@ void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRo
     //Properties
     for (auto actorProperty : props.dataMap)
     {
-        auto typeMap = props.typeMap;
-        auto type = typeMap.find(actorProperty.first);
+        const std::string& propName = actorProperty.first;
 
         //Set property name onto label
-        actorPropsGridLayout->addWidget(new QLabel(actorProperty.first.c_str()), currentGridRow, propertyNameColumn);
+        actorPropsGridLayout->addWidget(new QLabel(propName.c_str()), currentGridRow, propertyNameColumn);
 
         //Set property data into grid
-        if (type->second == typeid(bool))
+        if (props.CheckType<bool>(propName))
         {
             auto boolWidget = new BoolWidget((bool*)actorProperty.second);
             actorPropsGridLayout->addWidget(boolWidget, currentGridRow, propertyDataColumn);
             propertyWidgetsToUpdate.push_back((IPropertyWidget*)boolWidget);
         }
-        else if (type->second == typeid(int))
+        else if (props.CheckType<int>(propName))
         {
             auto intWidget = new IntWidget((int*)actorProperty.second);
             actorPropsGridLayout->addWidget(intWidget, currentGridRow, propertyDataColumn);
             propertyWidgetsToUpdate.push_back((IPropertyWidget*)intWidget);
         }
-        else if (type->second == typeid(float))
+        else if (props.CheckType<float>(propName))
         {
             //auto floatWidget = new FloatWidget((float*)actorProperty.second);
             //actorPropsGridLayout->addWidget(floatWidget, currentGridRow, propertyDataColumn);
         }
-        else if (type->second == typeid(XMFLOAT3))
+        else if (props.CheckType<XMFLOAT3>(propName))
         {
             auto float3Widget = new Float3Widget((XMFLOAT3*)actorProperty.second);
             actorPropsGridLayout->addWidget(float3Widget, currentGridRow, propertyDataColumn);
             propertyWidgetsToUpdate.push_back((IPropertyWidget*)float3Widget);
         }
-        else if (type->second == typeid(XMVECTOR))
+        else if (props.CheckType<XMVECTOR>(propName))
         {
             auto vectorWidget = new VectorWidget((XMVECTOR*)actorProperty.second);
             actorPropsGridLayout->addWidget(vectorWidget, currentGridRow, propertyDataColumn);
