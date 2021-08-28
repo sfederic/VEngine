@@ -129,19 +129,19 @@ void Core::HandleWin32MessagePump(UINT message, WPARAM wparam, LPARAM lparam)
 		break;
 
 	case WM_LBUTTONUP:
-		Input::SetKeyUp((Keys)wparam);
+		Input::SetLeftMouseUp();
 		break;
 
 	case WM_LBUTTONDOWN:
-		Input::SetKeyDown((Keys)wparam);
+		Input::SetLeftMouseDown();
 		break;
 
 	case WM_RBUTTONUP:
-		Input::SetKeyUp((Keys)wparam);
+		Input::SetRightMouseUp();
 		break;
 
 	case WM_RBUTTONDOWN:
-		Input::SetKeyDown((Keys)wparam);
+		Input::SetRightMouseDown();
 		break;
 
 	case WM_MOUSEWHEEL:

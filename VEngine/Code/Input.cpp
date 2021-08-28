@@ -1,61 +1,117 @@
 #include "Input.h"
 
-std::vector<Keys> Input::currentDownKeys;
-std::vector<Keys> Input::currentUpKeys;
-
-bool Input::mouseWheelUp;
-bool Input::mouseWheelDown;
-
-void Input::Reset()
+namespace Input
 {
-	currentUpKeys.clear();
-	currentDownKeys.clear();
-	mouseWheelUp = false;
-	mouseWheelDown = false;
-}
+	std::vector<Keys> currentDownKeys;
+	std::vector<Keys> currentUpKeys;
 
-void Input::SetKeyDown(Keys key)
-{
-	currentDownKeys.push_back(key);
-}
+	bool mouseWheelUp;
+	bool mouseWheelDown;
 
-void Input::SetKeyUp(Keys key)
-{
-	currentUpKeys.push_back(key);
-}
+	bool mouseLeftUp;
+	bool mouseLeftDown;
+	bool mouseRightUp;
+	bool mouseRightDown;
 
-bool Input::GetKeyDown(Keys key)
-{
-	for (int i = 0; i < currentDownKeys.size(); i++)
+	void Reset()
 	{
-		if (key == currentDownKeys[i])
-		{
-			return true;
-		}
+		currentUpKeys.clear();
+		currentDownKeys.clear();
+
+		mouseWheelUp = false;
+		mouseWheelDown = false;
+
+		mouseLeftUp = false;
+		mouseRightUp = false;
 	}
 
-	return false;
-}
-
-bool Input::GetKeyUp(Keys key)
-{
-	for (int i = 0; i < currentUpKeys.size(); i++)
+	void SetKeyDown(Keys key)
 	{
-		if (key == currentUpKeys[i])
-		{
-			return true;
-		}
+		currentDownKeys.push_back(key);
 	}
 
-	return false;
-}
+	void SetKeyUp(Keys key)
+	{
+		currentUpKeys.push_back(key);
+	}
 
-bool Input::GetAnyKeyDown()
-{
-	return currentDownKeys.size();
-}
+	bool GetKeyDown(Keys key)
+	{
+		for (int i = 0; i < currentDownKeys.size(); i++)
+		{
+			if (key == currentDownKeys[i])
+			{
+				return true;
+			}
+		}
 
-bool Input::GetAsyncKey(Keys key)
-{
-	return GetAsyncKeyState((int)key);
+		return false;
+	}
+
+	bool GetKeyUp(Keys key)
+	{
+		for (int i = 0; i < currentUpKeys.size(); i++)
+		{
+			if (key == currentUpKeys[i])
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	bool GetAnyKeyDown()
+	{
+		return currentDownKeys.size();
+	}
+
+	bool GetAsyncKey(Keys key)
+	{
+		return GetAsyncKeyState((int)key);
+	}
+
+	void SetLeftMouseDown()
+	{
+		mouseLeftDown = true;
+		mouseLeftUp = false;
+	}
+
+	void SetRightMouseUp()
+	{
+		mouseRightUp = true;
+		mouseRightDown = false;
+	}
+
+	void SetRightMouseDown()
+	{
+		mouseRightDown = true;
+		mouseRightUp = false;
+	}
+
+	void SetLeftMouseUp()
+	{
+		mouseLeftUp = true;
+		mouseLeftDown = false;
+	}
+
+	bool GetMouseLeftUp()
+	{
+		return mouseLeftUp;
+	}
+
+	bool GetMouseRightUp()
+	{
+		return mouseRightUp;
+	}
+
+	bool GetMouseLeftDown()
+	{
+		return mouseLeftDown;
+	}
+
+	bool GetMouseRightDown()
+	{
+		return mouseRightDown;
+	}
 }

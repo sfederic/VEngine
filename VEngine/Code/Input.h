@@ -48,9 +48,6 @@ enum class Keys
 	Down = VK_DOWN,
 	Right = VK_RIGHT,
 	Left = VK_LEFT,
-	LeftMouse = VK_LBUTTON,
-	RightMouse = VK_RBUTTON,
-	MiddleMouse = VK_MBUTTON
 };
 
 namespace Input
@@ -61,11 +58,28 @@ namespace Input
 	extern bool mouseWheelUp;
 	extern bool mouseWheelDown;
 
+	extern bool mouseLeftUp;
+	extern bool mouseLeftDown;	
+	extern bool mouseRightUp;
+	extern bool mouseRightDown;
+
 	void Reset();
+
 	void SetKeyDown(Keys key);
 	void SetKeyUp(Keys key);
+
 	bool GetKeyDown(Keys key);
 	bool GetKeyUp(Keys key);
 	bool GetAnyKeyDown();
 	bool GetAsyncKey(Keys key);
+
+	void SetLeftMouseUp();
+	void SetLeftMouseDown();
+	void SetRightMouseUp();
+	void SetRightMouseDown();
+
+	bool GetMouseLeftUp();
+	bool GetMouseRightUp();
+	bool GetMouseLeftDown();
+	bool GetMouseRightDown();
 }
