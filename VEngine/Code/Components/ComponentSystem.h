@@ -5,10 +5,6 @@
 #include "Actors/Actor.h"
 #include "ComponentSystemCache.h"
 
-//TODO: I need to do a thing where if a component is created past the initial world load dynamically, defer
-//that component's creation to the start of the next frame because of assigning values to its member variables.
-//Maybe have two sepereate arrays (loaded vs unloaded components) and create new components at the next check.
-
 template <typename T>
 struct ComponentSystem : IComponentSystem
 {
