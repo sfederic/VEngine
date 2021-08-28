@@ -21,6 +21,7 @@ enum class Keys
 	D = 'D',
 	F = 'F',
 	Z = 'Z',
+	X = 'X',
 	P = 'P',
 	E = 'E',
 	R = 'R',

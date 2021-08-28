@@ -12,13 +12,27 @@ void CommandSystem::Tick()
 		{
 			Undo();
 		}
+		else if (Input::GetKeyUp(Keys::X))
+		{
+			Redo();
+		}
 	}
 }
 
 void CommandSystem::Add(ICommand* command)
 {
+	if (!commands.empty())
+	{
+		for (int i = commands.size() - 1; i > commandIndex; i--)
+		{
+			commands.pop_back();
+		}
+	}
+
 	command->Execute();
+
 	commands.push_back(command);
+
 	commandIndex = commands.size() - 1;
 }
 
@@ -27,8 +41,9 @@ void CommandSystem::Undo()
 	if (commandIndex > 0)
 	{
 		commandIndex--;
-		commands[commandIndex]->Undo();
 	}
+
+	commands[commandIndex]->Undo();
 }
 
 void CommandSystem::Redo()
