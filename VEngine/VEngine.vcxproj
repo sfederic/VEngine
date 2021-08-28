@@ -136,7 +136,7 @@
     <ClCompile Include="Code\Camera.cpp" />
     <ClCompile Include="Code\Commands\CommandSystem.cpp" />
     <ClInclude Include="Code\Commands\CommandSystem.h" />
-    <ClInclude Include="Code\Commands\Float3Command.h" />
+    <ClInclude Include="Code\Commands\Command.h" />
     <ClInclude Include="Code\Commands\ICommand.h" />
     <ClInclude Include="Code\Components\Component.h" />
     <ClInclude Include="Code\Components\ComponentSystem.h" />

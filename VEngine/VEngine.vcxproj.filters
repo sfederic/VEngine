@@ -239,7 +239,7 @@
     <ClInclude Include="Code\Components\IComponentSystem.h" />
     <ClInclude Include="Code\Components\MeshComponent.h" />
     <ClInclude Include="Code\Commands\CommandSystem.h" />
-    <ClInclude Include="Code\Commands\Float3Command.h" />
+    <ClInclude Include="Code\Commands\Command.h" />
     <ClInclude Include="Code\Commands\ICommand.h" />
     <ClInclude Include="Code\Audio\AudioSystem.h" />
     <ClInclude Include="Code\Actors\Actor.h" />
