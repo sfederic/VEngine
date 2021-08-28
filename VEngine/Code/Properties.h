@@ -26,6 +26,12 @@ struct Properties
 	}
 
 	template <typename T>
+	bool CheckType(std::string name)
+	{
+		return typeMap[name] == typeid(T);
+	}
+
+	template <typename T>
 	T* GetData(const std::string& dataName)
 	{
 		auto dataMapIt = dataMap.find(dataName);
