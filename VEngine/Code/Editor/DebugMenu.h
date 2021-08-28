@@ -24,6 +24,7 @@ struct DebugMenu
 	bool snapMenuOpen = false;
 	bool profileMenuOpen = false;
 	bool propsMenuOpen = false;
+	bool commandsMenuOpen = false;
 
 	void Init();
 	void Tick(double deltaTime);
@@ -35,6 +36,7 @@ struct DebugMenu
 	void RenderSnappingMenu();
 	void RenderActorProps();
 	void IterateOverProperties(Properties& props);
+	void RenderCommandsMenu();
 };
 
 extern DebugMenu debugMenu;

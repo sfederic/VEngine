@@ -13,6 +13,8 @@ struct Command : ICommand
 	{
 		value = value_;
 		newValue = newValue_;
+
+		name = typeid(T).name();
 	}
 
 	//Use this one when you just need the pointer value pushed in
@@ -20,6 +22,8 @@ struct Command : ICommand
 	{
 		value = value_;
 		newValue = *value_;
+
+		name = typeid(T).name();
 	}
 
 	void Execute() override

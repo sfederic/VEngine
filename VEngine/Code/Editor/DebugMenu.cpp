@@ -13,6 +13,7 @@
 #include "Actors/Actor.h"
 #include "Components/Component.h"
 #include "UI/UISystem.h"
+#include "Commands/CommandSystem.h"
 
 DebugMenu debugMenu;
 
@@ -57,6 +58,7 @@ void DebugMenu::Tick(double deltaTime)
 	//RenderActorSpawnMenu();
 	//RenderActorInspectMenu();
 	RenderActorProps();
+	RenderCommandsMenu();
 
 	ImGui::EndFrame();
 
@@ -144,6 +146,38 @@ void DebugMenu::IterateOverProperties(Properties& props)
 			ImGui::InputText("name", str->data(), str->size());
 		}
 	}
+}
+
+void DebugMenu::RenderCommandsMenu()
+{
+	if (!commandsMenuOpen) return;
+
+	ImGui::Begin("Commands");
+
+	if (ImGui::BeginListBox("First"))
+	{
+		unsigned int nameCount = 0;
+
+		for (ICommand* command : commandSystem.commands)
+		{
+			std::string name = command->name + std::to_string(nameCount);
+
+			if (ImGui::Selectable(name.c_str()))
+			{
+				commandSystem.WindToCommand(nameCount);
+			}
+
+			nameCount++;
+		}
+		ImGui::EndListBox();
+	}
+
+	if (ImGui::Button("Clear Commands"))
+	{
+		commandSystem.Reset();
+	}
+
+	ImGui::End();
 }
 
 //Handle notifications (eg. "Shaders recompiled", "ERROR: Not X", etc)
