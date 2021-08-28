@@ -15,37 +15,27 @@ void CommandSystem::Tick()
 	}
 }
 
-void CommandSystem::AddCommand(ICommand* command)
+void CommandSystem::Add(ICommand* command)
 {
 	command->Execute();
 	commands.push_back(command);
-	currentCommandIndex = commands.size() - 1;
+	commandIndex = commands.size() - 1;
 }
 
 void CommandSystem::Undo()
 {
-	if (currentCommandIndex <= 0)
+	if (commandIndex > 0)
 	{
-		if (commands.size() > 0)
-		{
-			commands.front()->Undo();
-		}
-
-		return; //Reached start of list
+		commandIndex--;
+		commands[commandIndex]->Undo();
 	}
-
-	commands[currentCommandIndex]->Undo();
-	currentCommandIndex--;
 }
 
 void CommandSystem::Redo()
 {
-	if (currentCommandIndex >= commands.size() - 1)
+	if (commandIndex < commands.size() - 1)
 	{
-		commands.back()->Execute();
-		return; //Reached end of list
+		commandIndex++;
+		commands[commandIndex]->Execute();
 	}
-
-	currentCommandIndex++;
-	commands[currentCommandIndex]->Execute();
 }

@@ -6,10 +6,10 @@ struct ICommand;
 struct CommandSystem
 {
 	std::vector<ICommand*> commands;
-	uint32_t currentCommandIndex = 0;
+	uint32_t commandIndex = 0;
 
 	void Tick();
-	void AddCommand(ICommand* command);
+	void Add(ICommand* command);
 	void Undo();
 	void Redo();
 };
