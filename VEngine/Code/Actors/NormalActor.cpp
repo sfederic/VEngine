@@ -9,7 +9,7 @@ NormalActor::NormalActor()
 	mesh1 = MeshComponent::system.Add(this, MeshComponent("cube.fbx"));
 	rootComponent = mesh1;
 
-	auto monkey = MeshComponent::system.Add(nullptr, MeshComponent("monkey.fbx"));
+	auto monkey = MeshComponent::system.Add(this, MeshComponent("monkey.fbx"));
 	monkey->SetPosition(XMFLOAT3(5.f, 0.f, 0.f));
 
 	camera = CameraComponent::system.Add(this, CameraComponent(XMFLOAT3(0.f, 5.f, -20.f), false));

@@ -8,6 +8,8 @@
 #include <qboxlayout.h>
 #include <QUrl>
 #include "FileSystem.h"
+#include "Actors/MeshActor.h"
+#include "Editor.h"
 
 AssetDock::AssetDock() : QDockWidget("Assets")
 {
@@ -65,6 +67,10 @@ void AssetDock::AssetItemClicked()
     {
         fileSystem.LoadWorld(fullPath.toStdString().c_str());
     }
+    else if (std::wcscmp(extension, L".fbx") == 0)
+    {
+        SpawnMeshActor(assetName.toStdString());
+    }
     else
     {
         //Opens up default system program from filename.
@@ -91,4 +97,10 @@ void AssetDock::AssetFolderClicked()
         item->setSizeHint(QSize(100, 100));
         assetIcons->addItem(item);
     }
+}
+
+void AssetDock::SpawnMeshActor(std::string meshFilename)
+{
+    MeshActor* meshActor = MeshActor::system.Add(MeshActor(meshFilename));
+    editor->UpdateWorldList();
 }
