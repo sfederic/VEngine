@@ -112,24 +112,23 @@ void DebugMenu::IterateOverProperties(Properties& props)
 {
 	ImGui::Text(props.title.c_str());
 
-	for (auto& actorProperty : props.dataMap)
+	for (auto actorProperty : props.dataMap)
 	{
-		auto& typeMap = props.typeMap;
-		auto type = typeMap.find(actorProperty.first);
+		const std::string& propName = actorProperty.first;
 
-		if (type->second == typeid(bool))
+		if (props.CheckType<bool>(propName))
 		{
-			ImGui::Checkbox(actorProperty.first.c_str(), (bool*)actorProperty.second);
+			ImGui::Checkbox(propName.c_str(), (bool*)actorProperty.second);
 		}
-		else if (type->second == typeid(int))
+		else if (props.CheckType<int>(propName))
 		{
-			ImGui::InputInt(actorProperty.first.c_str(), (int*)actorProperty.second);
+			ImGui::InputInt(propName.c_str(), (int*)actorProperty.second);
 		}
-		else if (type->second == typeid(float))
+		else if (props.CheckType<float>(propName))
 		{
-			ImGui::InputFloat(actorProperty.first.c_str(), (float*)actorProperty.second);
+			ImGui::InputFloat(propName.c_str(), (float*)actorProperty.second);
 		}
-		else if (type->second == typeid(XMFLOAT3))
+		else if (props.CheckType<XMFLOAT3>(propName))
 		{
 			DirectX::XMFLOAT3* xmfloat3 = (DirectX::XMFLOAT3*)actorProperty.second;
 
@@ -139,9 +138,9 @@ void DebugMenu::IterateOverProperties(Properties& props)
 
 			float* f3[3] = { &xmfloat3->x, &xmfloat3->y, &xmfloat3->z };
 
-			ImGui::InputFloat3(actorProperty.first.c_str(), *f3);
+			ImGui::InputFloat3(propName.c_str(), *f3);
 		}
-		else if (type->second == typeid(std::string))
+		else if (props.CheckType<std::string>(propName))
 		{
 			std::string* str = static_cast<std::string*>(actorProperty.second);
 			ImGui::InputText("name", str->data(), str->size());
