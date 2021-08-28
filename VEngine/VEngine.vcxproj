@@ -121,6 +121,7 @@
     <ClCompile Include="Code\Actors\DebugBox.cpp" />
     <ClCompile Include="Code\FileSystem.cpp" />
     <ClCompile Include="Code\Components\InstanceMeshComponent.cpp" />
+    <ClCompile Include="Code\Actors\MeshActor.cpp" />
     <ClInclude Include="Code\Animation\AnimationStructures.h" />
     <ClInclude Include="Code\Actors\Actor.h" />
     <ClInclude Include="Code\Actors\ActorSystem.h" />
@@ -239,6 +240,7 @@
     <ClInclude Include="Code\Actors\DebugBox.h" />
     <ClInclude Include="Code\FileSystem.h" />
     <ClInclude Include="Code\Components\InstanceMeshComponent.h" />
+    <ClInclude Include="Code\Actors\MeshActor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
