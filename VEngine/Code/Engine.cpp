@@ -15,6 +15,7 @@
 #include "Actors/NormalActor.h"
 #include "Components/MeshComponent.h"
 #include "Components/InstanceMeshComponent.h"
+#include "Commands/CommandSystem.h"
 
 Engine engine;
 
@@ -42,6 +43,7 @@ void Engine::TickSystems(double deltaTime)
 {
 	editor->Tick();
 	Core::Tick();
+	commandSystem.Tick();
 
 	shaderSystem.Tick();
 	activeCamera->Tick(deltaTime);

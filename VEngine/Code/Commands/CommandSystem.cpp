@@ -1,7 +1,19 @@
 #include "CommandSystem.h"
 #include "ICommand.h"
+#include "Input.h"
 
 CommandSystem commandSystem;
+
+void CommandSystem::Tick()
+{
+	if (Input::GetAsyncKey(Keys::Ctrl))
+	{
+		if (Input::GetKeyUp(Keys::Z))
+		{
+			Undo();
+		}
+	}
+}
 
 void CommandSystem::AddCommand(ICommand* command)
 {
