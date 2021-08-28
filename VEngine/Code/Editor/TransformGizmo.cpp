@@ -6,6 +6,7 @@
 #include "WorldEditor.h"
 #include "Actors/Actor.h"
 #include "Editor.h"
+#include "Commands/CommandSystem.h"
 
 TransformGizmo transformGizmo;
 
@@ -29,7 +30,7 @@ void TransformGizmo::Tick()
     if (worldEditor.pickedActor)
     {
         //Set transform operation
-        if (!Input::GetAsyncKey(Keys::RightMouse))
+        if (!Input::GetMouseRightDown())
         {
             if (Input::GetKeyDown(Keys::W))
             {
@@ -86,6 +87,17 @@ void TransformGizmo::Tick()
             actor->SetRotation(rot);
 
             editor->ActorProps(actor);
+
+            mousePressAfterGizmoUse = true;
+        }
+
+        //When gizmo input ends, add change to CommandSystem
+        if (mousePressAfterGizmoUse && Input::GetMouseLeftUp())
+        {
+            mousePressAfterGizmoUse = false;
+
+            Actor* actor = worldEditor.pickedActor;
+            commandSystem.Add(new Command<Transform>(&actor->rootComponent->transform));
         }
 
         //Toggle snap and scale controls
