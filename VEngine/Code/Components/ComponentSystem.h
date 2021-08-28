@@ -3,6 +3,7 @@
 #include "IComponentSystem.h"
 #include "SystemStates.h"
 #include "Actors/Actor.h"
+#include "ComponentSystemCache.h"
 
 //TODO: I need to do a thing where if a component is created past the initial world load dynamically, defer
 //that component's creation to the start of the next frame because of assigning values to its member variables.
@@ -12,6 +13,16 @@ template <typename T>
 struct ComponentSystem : IComponentSystem
 {
 	std::vector<T*> components;
+
+	ComponentSystem()
+	{
+		std::string typeName = typeid(T).name();
+		std::string delimiter = " ";
+		std::string token = typeName.substr(typeName.find(delimiter) + 1);
+		name = token;
+
+		componentSystemCache.Add(typeid(T), this);
+	}
 
 	T* Add(Actor* owner = nullptr, T newComponent = T())
 	{
