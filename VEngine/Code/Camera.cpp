@@ -85,7 +85,7 @@ void CameraComponent::MouseMove(int x, int y)
 {
 	static XMINT2 lastMousePos;
 
-	if (Input::GetAsyncKey(Keys::RightMouse))
+	if (Input::GetMouseRightDown())
 	{
 		float dx = XMConvertToRadians(0.25f * (float)(x - lastMousePos.x));
 		float dy = XMConvertToRadians(0.25f * (float)(y - lastMousePos.y));
@@ -130,7 +130,7 @@ void CameraComponent::Tick(double deltaTime)
 		//WASD MOVEMENT
 		//if (!gConsole.bConsoleActive)
 		{
-			if (Input::GetAsyncKey(Keys::RightMouse))
+			if (Input::GetMouseRightDown())
 			{
 				const float moveSpeed = 7.5f * deltaTime;
 

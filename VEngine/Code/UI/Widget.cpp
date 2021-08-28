@@ -44,7 +44,7 @@ bool Widget::Button(const std::wstring& text, D2D1_RECT_F layout, float lineWidt
 	{
 		if (editor->viewportMouseX > layout.top && editor->viewportMouseY < layout.bottom)
 		{
-			if (Input::GetKeyUp(Keys::LeftMouse))
+			if (Input::GetMouseLeftUp())
 			{
 				return true;
 			}

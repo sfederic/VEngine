@@ -24,7 +24,7 @@ void WorldEditor::HandleActorPicking()
 		return;
 	}
 
-	if (Input::GetKeyDown(Keys::LeftMouse))
+	if (Input::GetMouseLeftDown())
 	{
 		Ray screenPickRay;
 
