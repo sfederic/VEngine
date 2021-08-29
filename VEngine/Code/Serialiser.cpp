@@ -17,36 +17,36 @@ Serialiser::Serialiser(const std::string& file, std::ios_base::openmode mode)
 
 void Serialiser::Serialise(Properties props, std::ostream& os)
 {
-	for (auto& prop : props.dataMap)
+	for (auto prop : props.propMap)
 	{
-		std::type_index type = props.typeMap.find(prop.first)->second.value();
+		const std::string& name = prop.first;
 
-		if (type == typeid(float))
+		if (props.CheckType<float>(name))
 		{
-			os << prop.first << "\n" << *(float*)prop.second << "\n";
+			os << name << "\n" << *props.GetData<float>(name) << "\n";
 		}
-		else if (type == typeid(XMFLOAT3))
+		else if (props.CheckType<XMFLOAT3>(name))
 		{
-			auto* value = (XMFLOAT3*)prop.second;
-			os << prop.first << "\n" << value->x << " " << value->y << " " << value->z << "\n";
+			XMFLOAT3* value = props.GetData<XMFLOAT3>(name);
+			os << name << "\n" << value->x << " " << value->y << " " << value->z << "\n";
 		}
-		else if (type == typeid(XMFLOAT4))
+		else if (props.CheckType<XMFLOAT4>(name))
 		{
-			auto* value = (XMFLOAT4*)prop.second;
-			os << prop.first << "\n" << value->x << " " << value->y << " " << value->z << " " << value->w << "\n";
+			XMFLOAT4* value = props.GetData<XMFLOAT4>(name);
+			os << name << "\n" << value->x << " " << value->y << " " << value->z << " " << value->w << "\n";
 		}
-		else if (type == typeid(bool))
+		else if (props.CheckType<bool>(name))
 		{
-			os << prop.first << "\n" << *(bool*)prop.second << "\n";
+			os << name << "\n" << *props.GetData<bool>(name) << "\n";
 		}
-		else if (type == typeid(int))
+		else if (props.CheckType<int>(name))
 		{
-			os << prop.first << "\n" << *(int*)prop.second << "\n";
+			os << name << "\n" << *props.GetData<int>(name) << "\n";
 		}
-		else if (type == typeid(std::string))
+		else if (props.CheckType<std::string>(name))
 		{
-			auto str = (std::string*)prop.second;
-			os << prop.first << "\n" << str->c_str() << "\n";
+			std::string* str = props.GetData<std::string>(name);
+			os << name << "\n" << str->c_str() << "\n";
 		}
 	}
 
@@ -66,47 +66,47 @@ void Serialiser::Deserialise(Properties props, std::istream& is)
 			return;
 		}
 
-		auto prop = props.dataMap.find(line);
-		if (prop == props.dataMap.end())
+		auto prop = props.propMap.find(line);
+		if (prop == props.propMap.end())
 		{
 			continue;
 		}
 
-		std::type_index type = props.typeMap.find(line)->second.value();
+		const std::string& name = prop->first;
 
-		if (type == typeid(float))
+		if (props.CheckType<float>(name))
 		{
-			is >> *(float*)prop->second;
+			is >> *props.GetData<float>(name);
 		}
-		else if (type == typeid(XMFLOAT3))
+		else if (props.CheckType<XMFLOAT3>(name))
 		{
-			XMFLOAT3* float3 = (XMFLOAT3*)prop->second;
+			XMFLOAT3* float3 = props.GetData<XMFLOAT3>(name);
 			is >> float3->x;
 			is >> float3->y;
 			is >> float3->z;
 		}
-		else if (type == typeid(XMFLOAT4))
+		else if (props.CheckType<XMFLOAT4>(name))
 		{
-			XMFLOAT4* float4 = (XMFLOAT4*)prop->second;
+			XMFLOAT4* float4 = props.GetData<XMFLOAT4>(name);
 			is >> float4->x;
 			is >> float4->y;
 			is >> float4->z;
 			is >> float4->w;
 		}
-		else if (type == typeid(bool))
+		else if (props.CheckType<bool>(name))
 		{
-			is >> *(bool*)prop->second;
+			is >> *props.GetData<bool>(name);
 		}
-		else if (type == typeid(int))
+		else if (props.CheckType<int>(name))
 		{
-			is >> *(int*)prop->second;
+			is >> *props.GetData<int>(name);
 		}
-		else if (type == typeid(std::string))
+		else if (props.CheckType<std::string>(name))
 		{
-			char actorString[512];
-			is.getline(actorString, 512);
-			auto str = (std::string*)prop->second;
-			str->assign(actorString);
+			char propString[512];
+			is.getline(propString, 512);
+			std::string* str = props.GetData<std::string>(name);
+			str->assign(propString);
 		}
 	}
 }

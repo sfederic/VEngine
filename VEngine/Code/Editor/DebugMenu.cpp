@@ -112,38 +112,32 @@ void DebugMenu::IterateOverProperties(Properties& props)
 {
 	ImGui::Text(props.title.c_str());
 
-	for (auto actorProperty : props.dataMap)
+	for (auto prop : props.propMap)
 	{
-		const std::string& propName = actorProperty.first;
+		const std::string& name = prop.first;
 
-		if (props.CheckType<bool>(propName))
+		if (props.CheckType<bool>(name))
 		{
-			ImGui::Checkbox(propName.c_str(), (bool*)actorProperty.second);
+			ImGui::Checkbox(name.c_str(), props.GetData<bool>(name));
 		}
-		else if (props.CheckType<int>(propName))
+		else if (props.CheckType<int>(name))
 		{
-			ImGui::InputInt(propName.c_str(), (int*)actorProperty.second);
+			ImGui::InputInt(name.c_str(), props.GetData<int>(name));
 		}
-		else if (props.CheckType<float>(propName))
+		else if (props.CheckType<float>(name))
 		{
-			ImGui::InputFloat(propName.c_str(), (float*)actorProperty.second);
+			ImGui::InputFloat(name.c_str(), props.GetData<float>(name));
 		}
-		else if (props.CheckType<XMFLOAT3>(propName))
+		else if (props.CheckType<XMFLOAT3>(name))
 		{
-			DirectX::XMFLOAT3* xmfloat3 = (DirectX::XMFLOAT3*)actorProperty.second;
-
-			//ImGui actually uses the Label as the unique ID to a widget, that's why
-			//the strings below are made to be unique.
-			//REF: https://github.com/ocornut/imgui/blob/master/docs/FAQ.md#q-why-is-my-widget-not-reacting-when-i-click-on-it
-
+			DirectX::XMFLOAT3* xmfloat3 = props.GetData<XMFLOAT3>(name);
 			float* f3[3] = { &xmfloat3->x, &xmfloat3->y, &xmfloat3->z };
-
-			ImGui::InputFloat3(propName.c_str(), *f3);
+			ImGui::InputFloat3(name.c_str(), *f3);
 		}
-		else if (props.CheckType<std::string>(propName))
+		else if (props.CheckType<std::string>(name))
 		{
-			std::string* str = static_cast<std::string*>(actorProperty.second);
-			ImGui::InputText("name", str->data(), str->size());
+			std::string* str = props.GetData<std::string>(name);
+			ImGui::InputText("Name", str->data(), str->size());
 		}
 	}
 }
@@ -156,18 +150,18 @@ void DebugMenu::RenderCommandsMenu()
 
 	if (ImGui::BeginListBox("First"))
 	{
-		unsigned int nameCount = 0;
+		unsigned int cmdCount = 0;
 
 		for (ICommand* command : commandSystem.commands)
 		{
-			std::string name = command->name + std::to_string(nameCount);
+			std::string name = command->name + std::to_string(cmdCount);
 
 			if (ImGui::Selectable(name.c_str()))
 			{
-				commandSystem.WindToCommand(nameCount);
+				commandSystem.WindToCommand(cmdCount);
 			}
 
-			nameCount++;
+			cmdCount++;
 		}
 		ImGui::EndListBox();
 	}

@@ -77,40 +77,40 @@ void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRo
     currentGridRow++;
 
     //Properties
-    for (auto actorProperty : props.dataMap)
+    for (auto prop : props.propMap)
     {
-        const std::string& propName = actorProperty.first;
+        const std::string& name = prop.first;
 
         //Set property name onto label
-        actorPropsGridLayout->addWidget(new QLabel(propName.c_str()), currentGridRow, propertyNameColumn);
+        actorPropsGridLayout->addWidget(new QLabel(name.c_str()), currentGridRow, propertyNameColumn);
 
         //Set property data into grid
-        if (props.CheckType<bool>(propName))
+        if (props.CheckType<bool>(name))
         {
-            auto boolWidget = new BoolWidget((bool*)actorProperty.second);
+            auto boolWidget = new BoolWidget(props.GetData<bool>(name));
             actorPropsGridLayout->addWidget(boolWidget, currentGridRow, propertyDataColumn);
             propertyWidgetsToUpdate.push_back((IPropertyWidget*)boolWidget);
         }
-        else if (props.CheckType<int>(propName))
+        else if (props.CheckType<int>(name))
         {
-            auto intWidget = new IntWidget((int*)actorProperty.second);
+            auto intWidget = new IntWidget(props.GetData<int>(name));
             actorPropsGridLayout->addWidget(intWidget, currentGridRow, propertyDataColumn);
             propertyWidgetsToUpdate.push_back((IPropertyWidget*)intWidget);
         }
-        else if (props.CheckType<float>(propName))
+        else if (props.CheckType<float>(name))
         {
             //auto floatWidget = new FloatWidget((float*)actorProperty.second);
             //actorPropsGridLayout->addWidget(floatWidget, currentGridRow, propertyDataColumn);
         }
-        else if (props.CheckType<XMFLOAT3>(propName))
+        else if (props.CheckType<XMFLOAT3>(name))
         {
-            auto float3Widget = new Float3Widget((XMFLOAT3*)actorProperty.second);
+            auto float3Widget = new Float3Widget(props.GetData<XMFLOAT3>(name));
             actorPropsGridLayout->addWidget(float3Widget, currentGridRow, propertyDataColumn);
             propertyWidgetsToUpdate.push_back((IPropertyWidget*)float3Widget);
         }
-        else if (props.CheckType<XMVECTOR>(propName))
+        else if (props.CheckType<XMVECTOR>(name))
         {
-            auto vectorWidget = new VectorWidget((XMVECTOR*)actorProperty.second);
+            auto vectorWidget = new VectorWidget(props.GetData<XMVECTOR>(name));
             actorPropsGridLayout->addWidget(vectorWidget, currentGridRow, propertyDataColumn);
             propertyWidgetsToUpdate.push_back((IPropertyWidget*)vectorWidget);
         }

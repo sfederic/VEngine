@@ -4,11 +4,19 @@
 #include <string>
 #include <typeindex>
 
+struct Property
+{
+	void* data = nullptr;
+	//uint64_t offset = 0;
+	uint64_t size = 0;
+	std::optional<std::type_index> info;
+	std::string name;
+};
+
 struct Properties
 {
 	//PROPERTIES FOR TEXT
-	std::unordered_map<std::string, void*> dataMap;
-	std::unordered_map<std::string, std::optional<std::type_index>> typeMap;
+	std::unordered_map<std::string, Property> propMap;
 	std::string title;
 
 	Properties() {}
@@ -21,60 +29,41 @@ struct Properties
 	template <typename T>
 	void Add(std::string name, T* data)
 	{
-		dataMap[name] = data;
-		typeMap[name] = typeid(T);
+		Property prop = {};
+
+		prop.size = sizeof(T);
+		prop.info = typeid(T);
+		prop.name = name;
+		prop.data = data;
+
+		//If you ever need the offset for a property, you can do it where you pass in the Actor/Object
+		//as a 'this' pointer through a template param. eg. <typename P> P* = this. Might help for serialisation?
+		//prop.offset = ((uint64_t*)data - (uint64_t*)parent) * sizeof(T);
+
+		propMap[name] = prop;
 	}
 
 	template <typename T>
 	bool CheckType(std::string name)
 	{
-		return typeMap[name] == typeid(T);
+		return propMap[name].info == typeid(T);
 	}
 
 	template <typename T>
-	T* GetData(const std::string& dataName)
+	T* GetData(std::string name)
 	{
-		auto dataMapIt = dataMap.find(dataName);
-		if (dataMapIt != dataMap.end())
-		{
-			return static_cast<T*>(dataMapIt->second);
-		}
-
-		return nullptr;
+		return (T*)propMap[name].data;
 	}
 
-	std::type_index GetType(const std::string& typeName)
+	std::type_index GetType(std::string name)
 	{
-		auto typeMapIt = typeMap.find(typeName);
-		return typeMapIt->second.value();
+		return propMap[name].info.value();
 	}
 
-	////PROPERTIES FOR BINARY
-	//std::unordered_map<size_t, void*> dataMap;
-	//std::unordered_map<size_t, std::optional<std::type_index>> typeMap;
-	// 
+	//Binary props work the same as text, just hash the name passed in
 	//template <typename T>
 	//void Add(const std::string& name, T* data)
 	//{
-	//	size_t hash = std::hash < std::string>{}(name);
-	//	dataMap[hash] = data;
-	//	typeMap[hash] = typeid(T);
-	//}
-
-	//void* GetData(size_t hash)
-	//{
-	//	auto& dataMapIt = dataMap.find(hash);
-	//	if (dataMapIt != dataMap.end())
-	//	{
-	//		return dataMapIt->second;
-	//	}
-
-	//	return nullptr;
-	//}
-
-	//std::type_index GetType(size_t hash)
-	//{
-	//	auto& typeMapIt = typeMap.find(hash);
-	//	return typeMapIt->second.value();
+	//	size_t hash = std::hash<std::string>{}(name);
 	//}
 };
