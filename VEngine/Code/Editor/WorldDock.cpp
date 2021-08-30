@@ -53,7 +53,7 @@ void WorldDock::ClickOnActorInList(QTreeWidgetItem* item, int column)
 	if (clickedActor)
 	{
 		worldEditor.pickedActor = clickedActor;
-		editor->ActorProps(clickedActor);
+		editor->SetActorProps(clickedActor);
 	}
 }
 

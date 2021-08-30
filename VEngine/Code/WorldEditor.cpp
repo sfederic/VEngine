@@ -38,13 +38,13 @@ void WorldEditor::HandleActorPicking()
 				if (RaycastTriangleIntersect(screenPickRay))
 				{
 					pickedActor = screenPickRay.hitActor;
-					editor->ActorProps(pickedActor);
+					editor->SetActorProps(pickedActor);
 				}
 			}
 			else
 			{
 				pickedActor = screenPickRay.hitActor;
-				editor->ActorProps(pickedActor);
+				editor->SetActorProps(pickedActor);
 			}
 		}
 	}

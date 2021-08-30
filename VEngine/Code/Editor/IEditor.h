@@ -22,7 +22,7 @@ struct IEditor
 	virtual void Tick() = 0;
 	virtual void SetMousePos() = 0;
 	virtual void Log(const std::wstring logMessage) = 0;
-	virtual void ActorProps(Actor* actor) = 0;
+	virtual void SetActorProps(Actor* actor) = 0;
 	virtual void UpdateWorldList() = 0;
 
 	//Spawns actors from an editor persepctive (eg. clicking on files in AssetDock)

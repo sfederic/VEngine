@@ -46,7 +46,7 @@ void QtEditor::Log(const std::wstring logMessage)
     mainWindow->logDock->Print(logMessage);
 }
 
-void QtEditor::ActorProps(Actor* actor)
+void QtEditor::SetActorProps(Actor* actor)
 {
     mainWindow->propertiesDock->DisplayActorProperties(actor);
 }

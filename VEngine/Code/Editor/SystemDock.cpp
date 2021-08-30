@@ -88,7 +88,7 @@ void SystemDock::ClickOnActorSystemItem(QTreeWidgetItem* item, int column)
 	if (clickedActor)
 	{
 		worldEditor.pickedActor = clickedActor;
-		editor->ActorProps(clickedActor);
+		editor->SetActorProps(clickedActor);
 	}
 }
 
@@ -102,7 +102,7 @@ void SystemDock::ClickOnComponentSystemItem(QTreeWidgetItem* item, int column)
 		if (clickedComponent->owner)
 		{
 			worldEditor.pickedActor = clickedComponent->owner;
-			editor->ActorProps(clickedComponent->owner);
+			editor->SetActorProps(clickedComponent->owner);
 		}
 	}
 }

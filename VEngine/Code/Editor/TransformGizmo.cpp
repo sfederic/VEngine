@@ -87,7 +87,7 @@ void TransformGizmo::Tick()
             actor->SetScale(scale);
             actor->SetRotation(rot);
 
-            editor->ActorProps(actor);
+            editor->SetActorProps(actor);
 
             mousePressAfterGizmoUse = true;
         }
