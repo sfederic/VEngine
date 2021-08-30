@@ -20,4 +20,7 @@ struct IEditor
 	virtual void Log(const std::wstring logMessage) = 0;
 	virtual void ActorProps(Actor* actor) = 0;
 	virtual void UpdateWorldList() = 0;
+
+	//Spawns actors from an editor persepctive (eg. clicking on .fbx files, actor templates)
+	virtual void SpawnActor() = 0;
 };

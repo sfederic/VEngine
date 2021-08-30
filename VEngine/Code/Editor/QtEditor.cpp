@@ -55,6 +55,10 @@ void QtEditor::UpdateWorldList()
     mainWindow->worldDock->PopulateWorldActorList();
 }
 
+void QtEditor::SpawnActor()
+{
+}
+
 void QtEditor::SetEditorFont()
 {
     //Capcom have a cool talk on UI design and fonts for RE Engine
