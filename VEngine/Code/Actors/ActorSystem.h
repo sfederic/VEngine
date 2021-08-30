@@ -23,9 +23,9 @@ struct ActorSystem : IActorSystem
 
 	T* Add(T newActor = T(), Transform transform = Transform())
 	{
-		actors.push_back(new T(newActor));
+		T* actor = new T(newActor);
+		actors.push_back(actor);
 
-		T* actor = actors.back();
 		actor->actorSystem = this;
 		actor->index = actors.size() - 1;
 		actor->SetTransform(transform);

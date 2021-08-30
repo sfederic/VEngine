@@ -22,9 +22,9 @@ struct ComponentSystem : IComponentSystem
 
 	T* Add(Actor* owner = nullptr, T newComponent = T())
 	{
-		components.emplace_back(new T(newComponent));
+		T* component = new T(newComponent);
+		components.push_back(component);
 
-		T* component = components.back();
 		component->owner = owner;
 		component->index = components.size() - 1;
 		component->name = this->name + std::to_string(component->index);
