@@ -6,7 +6,7 @@ struct Actor;
 struct Component
 {
 	Actor* owner = nullptr;
-	
+	std::string name;
 	int index = -1;
 
 	virtual void Tick(double deltaTime) = 0;
