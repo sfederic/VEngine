@@ -44,6 +44,7 @@ struct ActorSystem : IActorSystem
 		delete actors[index];
 		std::swap(actors[index], actors.back());
 		actors[index]->index = index;
+		actors[index]->name = this->name + std::to_string(index);
 		actors.pop_back();
 	}
 

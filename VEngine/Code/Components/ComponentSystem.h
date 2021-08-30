@@ -27,7 +27,7 @@ struct ComponentSystem : IComponentSystem
 		T* component = components.back();
 		component->owner = owner;
 		component->index = components.size() - 1;
-		component->name = name + std::to_string(component->index);
+		component->name = this->name + std::to_string(component->index);
 
 		if (systemState == SystemStates::Loaded)
 		{
@@ -47,6 +47,7 @@ struct ComponentSystem : IComponentSystem
 		delete components[index];
 		std::swap(components[index], components.back());
 		components[index]->index = index;
+		components[index]->name = this->name + std::to_string(index);
 		components.pop_back();
 	}
 
