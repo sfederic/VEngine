@@ -36,7 +36,7 @@ EditorMainWindow::EditorMainWindow()
 	tabifyDockWidget(worldDock, systemDock);
 
 	setWindowState(Qt::WindowMaximized);
-	setWindowTitle("VEngine | 2.0");
+	setWindowTitle("VEngine 2.0 | Vagrant Tactics");
 	show();
 }
 

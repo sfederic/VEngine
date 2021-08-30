@@ -73,12 +73,7 @@ void SystemDock::AddComponentSystemsToWidget()
 		for (Component* component : components)
 		{
 			auto childItem = new QTreeWidgetItem();
-
-			//Set component name in UI as system name + component index
-			std::string componentName = componentSystem->name;
-			componentName += std::to_string(component->index);
-			childItem->setText(0, QString::fromStdString(componentName));
-
+			childItem->setText(0, QString::fromStdString(component->name));
 			item->addChild(childItem);
 		}
 	}
