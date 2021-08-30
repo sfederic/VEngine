@@ -11,5 +11,5 @@ struct AssetDock : public QDockWidget
     AssetDock();
     void AssetItemClicked();
     void AssetFolderClicked();
-    void SpawnMeshActor(std::string meshFilename);
+    void MeshFileClicked(std::string meshFilename);
 };

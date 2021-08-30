@@ -6,11 +6,15 @@
 #include "Actors/IActorSystem.h"
 #include "Editor/TransformGizmo.h"
 #include "FileSystem.h"
+#include "Camera.h"
+
+#include "Actors/MeshActor.h"
 
 WorldEditor worldEditor;
 
 void WorldEditor::Tick()
 {
+	SpawnActorOnClick();
 	HandleActorPicking();
 	DuplicateActor();
 	DeleteActor();
@@ -55,7 +59,8 @@ void WorldEditor::DuplicateActor()
 		{
 			if (pickedActor)
 			{
-				Actor* newDuplicateActor = pickedActor->actorSystem->SpawnActor(pickedActor->GetTransform());
+				Transform transform = pickedActor->GetTransform();
+				Actor* newDuplicateActor = pickedActor->actorSystem->SpawnActor(transform);
 				editor->UpdateWorldList();
 			}
 		}
@@ -81,6 +86,50 @@ void WorldEditor::DeleteActor()
 		{
 			pickedActor->Destroy();
 			pickedActor = nullptr;
+
+			editor->UpdateWorldList();
+		}
+	}
+}
+
+void WorldEditor::SpawnActorOnClick()
+{
+	//Spawn actor on right click in viewport
+	if (Input::GetMouseRightUp())
+	{
+		IActorSystem* actorSystem = editor->spawnSystem;
+		if (actorSystem)
+		{
+			Ray ray;
+			if (RaycastAllFromScreen(ray))
+			{
+				//Spawn actor at ray hit point
+				Transform transform;
+
+				XMVECTOR dist = ray.direction * ray.distance;
+				XMVECTOR rayEnd = ray.origin + dist;
+				XMStoreFloat3(&transform.position, rayEnd);
+
+				//actorSystem->SpawnActor(transform);
+				MeshActor::system.Add(MeshActor(MeshActor::spawnMeshFilename), transform);
+			}
+			else
+			{
+				//Spawn actor a bit in front of the camera based on the click
+				XMVECTOR spawnPos = XMLoadFloat3(&activeCamera->transform.position);
+				XMFLOAT3 forward = activeCamera->GetForwardVector();
+				XMVECTOR forwardVec = XMLoadFloat3(&forward);
+				spawnPos += forwardVec * 10.0f;
+
+				Transform transform;
+
+				XMVECTOR dist = ray.direction * 10.f;
+				XMVECTOR rayEnd = ray.origin + dist;
+				XMStoreFloat3(&transform.position, rayEnd);
+
+				//actorSystem->SpawnActor(transform);
+				MeshActor::system.Add(MeshActor(MeshActor::spawnMeshFilename), transform);
+			}
 
 			editor->UpdateWorldList();
 		}

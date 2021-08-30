@@ -2,6 +2,7 @@
 #include <string>
 
 struct Actor;
+struct IActorSystem;
 
 //Base class for Toolkit and Native editors
 struct IEditor
@@ -14,6 +15,9 @@ struct IEditor
 	int viewportWidth;
 	int viewportHeight;
 
+	//Selected system to spawn actors from
+	IActorSystem* spawnSystem = nullptr;
+
 	virtual void Init(int argc, char* argv[]) = 0;
 	virtual void Tick() = 0;
 	virtual void SetMousePos() = 0;
@@ -21,6 +25,6 @@ struct IEditor
 	virtual void ActorProps(Actor* actor) = 0;
 	virtual void UpdateWorldList() = 0;
 
-	//Spawns actors from an editor persepctive (eg. clicking on .fbx files, actor templates)
+	//Spawns actors from an editor persepctive (eg. clicking on files in AssetDock)
 	virtual void SpawnActor() = 0;
 };

@@ -13,5 +13,7 @@ struct MeshActor : Actor
 
 	std::string meshFilename;
 
+	inline static std::string spawnMeshFilename;
+
 	MeshActor(std::string meshFilename_ = "");
 };

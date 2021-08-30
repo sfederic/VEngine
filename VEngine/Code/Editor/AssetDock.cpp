@@ -36,7 +36,7 @@ AssetDock::AssetDock() : QDockWidget("Assets")
     assetIcons = new QListWidget();
     assetIcons->setIconSize(QSize(75, 75));
     assetIcons->setViewMode(QListView::ViewMode::IconMode);
-    connect(assetIcons, &QListWidget::doubleClicked, this, &AssetDock::AssetItemClicked);
+    connect(assetIcons, &QListWidget::clicked, this, &AssetDock::AssetItemClicked);
 
     QHBoxLayout* assetHBox = new QHBoxLayout();
     assetHBox->addWidget(assetTreeView, Qt::AlignLeft);
@@ -69,7 +69,7 @@ void AssetDock::AssetItemClicked()
     }
     else if (std::wcscmp(extension, L".fbx") == 0)
     {
-        SpawnMeshActor(assetName.toStdString());
+        MeshFileClicked(assetName.toStdString());
     }
     else
     {
@@ -99,8 +99,9 @@ void AssetDock::AssetFolderClicked()
     }
 }
 
-void AssetDock::SpawnMeshActor(std::string meshFilename)
+void AssetDock::MeshFileClicked(std::string meshFilename)
 {
-    MeshActor* meshActor = MeshActor::system.Add(MeshActor(meshFilename));
-    editor->UpdateWorldList();
+    //MeshActor* meshActor = MeshActor::system.Add(MeshActor(meshFilename));
+    editor->spawnSystem = &MeshActor::system;
+    MeshActor::spawnMeshFilename = meshFilename;
 }
