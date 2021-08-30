@@ -23,6 +23,9 @@ EditorMainWindow::EditorMainWindow()
 	systemDock = new SystemDock();
 	toolbarDock = new ToolbarDock();
 
+	//Set dock tabs up top
+	setTabPosition(Qt::DockWidgetArea::AllDockWidgetAreas, QTabWidget::TabPosition::North);
+
 	setCentralWidget(renderView);
 	addDockWidget(Qt::DockWidgetArea::RightDockWidgetArea, propertiesDock);
 	addDockWidget(Qt::DockWidgetArea::BottomDockWidgetArea, assetDock);
