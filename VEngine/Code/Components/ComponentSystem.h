@@ -86,6 +86,19 @@ struct ComponentSystem : IComponentSystem
 			outComponents.push_back(component);
 		}
 	}
+
+	virtual Component* FindComponentByName(std::string componentName) override
+	{
+		for (T* component : components)
+		{
+			if (component->name == componentName)
+			{
+				return (Component*)component;
+			}
+		}
+
+		return nullptr;
+	}
 };
 
 #define COMPONENT_SYSTEM(type) \

@@ -13,4 +13,5 @@ struct IComponentSystem
 	virtual void Tick(double deltaTime) = 0;
 	virtual void Cleanup() = 0;
 	virtual void GetComponents(std::vector<Component*>& outComponents) = 0;
+	virtual Component* FindComponentByName(std::string componentName) = 0;
 };
