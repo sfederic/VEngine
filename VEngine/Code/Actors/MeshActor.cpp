@@ -8,3 +8,8 @@ MeshActor::MeshActor(std::string meshFilename_)
 	mesh = MeshComponent::system.Add(this, MeshComponent(meshFilename.c_str()));
 	rootComponent = mesh;
 }
+
+Properties MeshActor::GetProps()
+{
+	return Actor::GetProps();
+}

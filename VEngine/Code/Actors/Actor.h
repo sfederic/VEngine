@@ -41,7 +41,7 @@ struct Actor
 	XMFLOAT3 GetForwardVector();
 	XMFLOAT3 GetRightVector();
 	XMFLOAT3 GetUpVector();
-	virtual Properties GetProps();
+	virtual Properties GetProps() = 0;
 	virtual void Tick(double deltaTime);
 	virtual void Destroy();
 

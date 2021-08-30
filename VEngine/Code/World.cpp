@@ -59,6 +59,21 @@ Actor* World::FindActorByName(std::string actorName)
 	return nullptr;
 }
 
+Component* World::FindComponentByName(std::string componentName)
+{
+	for (IComponentSystem* componentSystem : activeComponentSystems)
+	{
+		Component* foundComponent = componentSystem->FindComponentByName(componentName);
+
+		if (foundComponent)
+		{
+			return foundComponent;
+		}
+	}
+
+	return nullptr;
+}
+
 void World::Cleanup()
 {
 	//CLEANUP COMPONENT SYSTEMS

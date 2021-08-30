@@ -6,6 +6,8 @@
 #include "Actors/Actor.h"
 #include "Components/IComponentSystem.h"
 #include "Components/Component.h"
+#include "WorldEditor.h"
+#include "Editor.h"
 
 SystemDock::SystemDock() : QDockWidget("Systems")
 {
@@ -14,14 +16,14 @@ SystemDock::SystemDock() : QDockWidget("Systems")
 	actorSystemTreeWidget->setColumnCount(1);
 	actorSystemTreeWidget->setHeaderLabels(QStringList("Actor Systems"));
 	actorSystemTreeWidget->setSelectionMode(QAbstractItemView::SelectionMode::SingleSelection);
-	connect(actorSystemTreeWidget, &QTreeWidget::itemClicked, this, &SystemDock::ClickOnActorSystem);
+	connect(actorSystemTreeWidget, &QTreeWidget::itemClicked, this, &SystemDock::ClickOnActorSystemItem);
 
 	//setup componentsystem treewidget
 	componentSystemTreeWidget = new QTreeWidget(this);
 	componentSystemTreeWidget->setColumnCount(1);
 	componentSystemTreeWidget->setHeaderLabels(QStringList("Component Systems"));
 	componentSystemTreeWidget->setSelectionMode(QAbstractItemView::SelectionMode::SingleSelection);
-	connect(componentSystemTreeWidget, &QTreeWidget::itemClicked, this, &SystemDock::ClickOnComponentSystem);
+	connect(componentSystemTreeWidget, &QTreeWidget::itemClicked, this, &SystemDock::ClickOnComponentSystemItem);
 
 	QVBoxLayout* vLayout = new QVBoxLayout(this);
 	vLayout->addWidget(actorSystemTreeWidget);
@@ -79,10 +81,28 @@ void SystemDock::AddComponentSystemsToWidget()
 	}
 }
 
-void SystemDock::ClickOnActorSystem()
+void SystemDock::ClickOnActorSystemItem(QTreeWidgetItem* item, int column)
 {
+	QString actorName = item->text(column);
+	Actor* clickedActor = world.FindActorByName(actorName.toStdString());
+	if (clickedActor)
+	{
+		worldEditor.pickedActor = clickedActor;
+		editor->ActorProps(clickedActor);
+	}
 }
 
-void SystemDock::ClickOnComponentSystem()
+void SystemDock::ClickOnComponentSystemItem(QTreeWidgetItem* item, int column)
 {
+	//highlight owner of component in editor
+	QString componentName = item->text(column);
+	Component* clickedComponent = world.FindComponentByName(componentName.toStdString());
+	if (clickedComponent)
+	{
+		if (clickedComponent->owner)
+		{
+			worldEditor.pickedActor = clickedComponent->owner;
+			editor->ActorProps(clickedComponent->owner);
+		}
+	}
 }

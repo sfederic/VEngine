@@ -2,6 +2,7 @@
 #include <qdockwidget.h>
 
 class QTreeWidget;
+class QTreeWidgetItem;
 
 //Displays information for all Actor and Component systems
 struct SystemDock : public QDockWidget
@@ -13,6 +14,6 @@ struct SystemDock : public QDockWidget
 	void PopulateSystemLists();
 	void AddActorSystemsToWidget();
 	void AddComponentSystemsToWidget();
-	void ClickOnActorSystem();
-	void ClickOnComponentSystem();
+	void ClickOnActorSystemItem(QTreeWidgetItem* item, int column);
+	void ClickOnComponentSystemItem(QTreeWidgetItem* item, int column);
 };

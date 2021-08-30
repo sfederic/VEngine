@@ -16,4 +16,5 @@ struct MeshActor : Actor
 	inline static std::string spawnMeshFilename;
 
 	MeshActor(std::string meshFilename_ = "");
+	virtual Properties GetProps() override;
 };

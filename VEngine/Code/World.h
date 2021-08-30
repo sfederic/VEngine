@@ -4,6 +4,7 @@
 
 struct IActorSystem;
 struct IComponentSystem;
+struct Component;
 struct Actor;
 
 struct World
@@ -15,6 +16,7 @@ struct World
 	void TickAllActorSystems(double deltaTime);
 	void TickAllComponentSystems(double deltaTime);
 	Actor* FindActorByName(std::string actorName);
+	Component* FindComponentByName(std::string componentName);
 	void Cleanup();
 };
 
