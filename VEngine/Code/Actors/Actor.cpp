@@ -117,6 +117,8 @@ Properties Actor::GetProps()
 	props.Add("Scale", &rootComponent->transform.scale);
 	props.Add("Rotation", &rootComponent->transform.rotation);
 
+	props.Add("Name", &name);
+
 	//This was how to join maps. Keeping here for reference.
 	/*for (Component* component : components)
 	{
