@@ -8,6 +8,7 @@
 #include "LogDock.h"
 #include "PropertiesDock.h"
 #include "WorldDock.h"
+#include "SystemDock.h"
 
 void QtEditor::Init(int argc, char* argv[])
 {
@@ -53,6 +54,7 @@ void QtEditor::ActorProps(Actor* actor)
 void QtEditor::UpdateWorldList()
 {
     mainWindow->worldDock->PopulateWorldActorList();
+    mainWindow->systemDock->PopulateSystemLists();
 }
 
 void QtEditor::SpawnActor()

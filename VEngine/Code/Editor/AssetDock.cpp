@@ -101,7 +101,6 @@ void AssetDock::AssetFolderClicked()
 
 void AssetDock::MeshFileClicked(std::string meshFilename)
 {
-    //MeshActor* meshActor = MeshActor::system.Add(MeshActor(meshFilename));
     editor->spawnSystem = &MeshActor::system;
     MeshActor::spawnMeshFilename = meshFilename;
 }

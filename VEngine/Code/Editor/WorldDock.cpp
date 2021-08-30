@@ -15,7 +15,7 @@ WorldDock::WorldDock() : QDockWidget("World")
 	actorTreeWidget->setColumnCount(1);
 	actorTreeWidget->setHeaderLabels(QStringList("Actors"));
 
-	actorTreeWidget->setSelectionMode(QAbstractItemView::SelectionMode::ExtendedSelection);
+	actorTreeWidget->setSelectionMode(QAbstractItemView::SelectionMode::MultiSelection);
 	connect(actorTreeWidget, &QTreeWidget::itemClicked, this, &WorldDock::ClickOnActorInList);
 
 	setWidget(actorTreeWidget);
@@ -38,7 +38,6 @@ void WorldDock::PopulateWorldActorList()
 			auto item = new QTreeWidgetItem(actorTreeWidget);
 			item->setText(0, QString::fromStdString(actor->name));
 			item->setFlags(item->flags() | Qt::ItemIsEditable);
-			item->insertChild(0, new QTreeWidgetItem());
 		}
 	}
 

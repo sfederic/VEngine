@@ -7,7 +7,6 @@
 #include "Editor/TransformGizmo.h"
 #include "FileSystem.h"
 #include "Camera.h"
-
 #include "Actors/MeshActor.h"
 
 WorldEditor worldEditor;
@@ -108,9 +107,11 @@ void WorldEditor::SpawnActorOnClick()
 
 				XMVECTOR dist = ray.direction * ray.distance;
 				XMVECTOR rayEnd = ray.origin + dist;
+
+				//Round the position up for spawning on the grid in increments
+				rayEnd = XMVectorRound(rayEnd);
 				XMStoreFloat3(&transform.position, rayEnd);
 
-				//actorSystem->SpawnActor(transform);
 				MeshActor::system.Add(MeshActor(MeshActor::spawnMeshFilename), transform);
 			}
 			else
@@ -125,9 +126,12 @@ void WorldEditor::SpawnActorOnClick()
 
 				XMVECTOR dist = ray.direction * 10.f;
 				XMVECTOR rayEnd = ray.origin + dist;
+
+				//Round the position up for spawning on the grid in increments
+				XMStoreFloat3(&transform.position, rayEnd);
+				rayEnd = XMVectorRound(rayEnd);
 				XMStoreFloat3(&transform.position, rayEnd);
 
-				//actorSystem->SpawnActor(transform);
 				MeshActor::system.Add(MeshActor(MeshActor::spawnMeshFilename), transform);
 			}
 

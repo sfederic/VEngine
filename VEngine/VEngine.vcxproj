@@ -123,6 +123,7 @@
     <ClCompile Include="Code\Components\InstanceMeshComponent.cpp" />
     <ClCompile Include="Code\Actors\MeshActor.cpp" />
     <ClCompile Include="Code\Components\ComponentSystemCache.cpp" />
+    <ClCompile Include="Code\Editor\SystemDock.cpp" />
     <ClInclude Include="Code\Animation\AnimationStructures.h" />
     <ClInclude Include="Code\Actors\Actor.h" />
     <ClInclude Include="Code\Actors\ActorSystem.h" />
@@ -243,6 +244,7 @@
     <ClInclude Include="Code\Components\InstanceMeshComponent.h" />
     <ClInclude Include="Code\Actors\MeshActor.h" />
     <ClInclude Include="Code\Components\ComponentSystemCache.h" />
+    <ClInclude Include="Code\Editor\SystemDock.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

@@ -7,6 +7,7 @@ struct EditorMainWindow : public QMainWindow
 	struct PropertiesDock* propertiesDock;
 	struct AssetDock* assetDock;
 	struct WorldDock* worldDock;
+	struct SystemDock* systemDock;
 	struct ToolbarDock* toolbarDock;
 	struct LogDock* logDock;
 

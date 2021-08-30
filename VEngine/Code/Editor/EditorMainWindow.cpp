@@ -11,6 +11,7 @@
 #include "WorldDock.h"
 #include "ToolbarDock.h"
 #include "LogDock.h"
+#include "SystemDock.h"
 
 EditorMainWindow::EditorMainWindow()
 {
@@ -19,14 +20,17 @@ EditorMainWindow::EditorMainWindow()
 	assetDock = new AssetDock();
 	logDock = new LogDock();
 	worldDock = new WorldDock();
+	systemDock = new SystemDock();
 	toolbarDock = new ToolbarDock();
 
 	setCentralWidget(renderView);
 	addDockWidget(Qt::DockWidgetArea::RightDockWidgetArea, propertiesDock);
 	addDockWidget(Qt::DockWidgetArea::BottomDockWidgetArea, assetDock);
 	addDockWidget(Qt::DockWidgetArea::BottomDockWidgetArea, logDock);
-	addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, worldDock);
 	addDockWidget(Qt::DockWidgetArea::TopDockWidgetArea, toolbarDock);
+
+	addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, worldDock);
+	tabifyDockWidget(worldDock, systemDock);
 
 	setWindowState(Qt::WindowMaximized);
 	setWindowTitle("VEngine | 2.0");
