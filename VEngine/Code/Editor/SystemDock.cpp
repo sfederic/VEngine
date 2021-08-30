@@ -96,13 +96,10 @@ void SystemDock::ClickOnComponentSystemItem(QTreeWidgetItem* item, int column)
 {
 	//highlight owner of component in editor
 	QString componentName = item->text(column);
-	Component* clickedComponent = world.FindComponentByName(componentName.toStdString());
-	if (clickedComponent)
+	Actor* owner = world.FindComponentOwnerByName(componentName.toStdString());
+	if (owner)
 	{
-		if (clickedComponent->owner)
-		{
-			worldEditor.pickedActor = clickedComponent->owner;
-			editor->SetActorProps(clickedComponent->owner);
-		}
+		worldEditor.pickedActor = owner;
+		editor->SetActorProps(owner);
 	}
 }

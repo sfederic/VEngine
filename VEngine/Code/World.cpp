@@ -6,6 +6,8 @@
 #include "Components/IComponentSystem.h"
 #include "Components/MeshComponent.h"
 
+#include "Profile.h"
+
 World world;
 
 void World::Start()
@@ -59,15 +61,22 @@ Actor* World::FindActorByName(std::string actorName)
 	return nullptr;
 }
 
-Component* World::FindComponentByName(std::string componentName)
+Actor* World::FindComponentOwnerByName(std::string componentName)
 {
-	for (IComponentSystem* componentSystem : activeComponentSystems)
+	for (IActorSystem* actorSystem : activeActorSystems)
 	{
-		Component* foundComponent = componentSystem->FindComponentByName(componentName);
+		std::vector<Actor*> actors;
+		actorSystem->GetActors(actors);
 
-		if (foundComponent)
+		for (Actor* actor : actors)
 		{
-			return foundComponent;
+			for (Component* component : actor->components)
+			{
+				if (component->name == componentName)
+				{
+					return actor;
+				}
+			}
 		}
 	}
 
