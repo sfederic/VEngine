@@ -76,6 +76,14 @@ struct ComponentSystem : IComponentSystem
 
 		components.clear();
 	}
+
+	virtual void GetComponents(std::vector<Component*>& outComponents) override
+	{
+		for (T* component : components)
+		{
+			outComponents.push_back(component);
+		}
+	}
 };
 
 #define COMPONENT_SYSTEM(type) \
