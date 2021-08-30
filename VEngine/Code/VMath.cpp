@@ -27,6 +27,13 @@ namespace VMath
         return XMVectorSet(0.f, 0.f, 1.f, 0.f);
     }
 
+    void RoundFloat3(XMFLOAT3& float3)
+    {
+        float3.x = std::round(float3.x);
+        float3.y = std::round(float3.y);
+        float3.z = std::round(float3.z);
+    }
+
     /*XMVECTOR XMVectorConstantLerp(FXMVECTOR V0, FXMVECTOR V1, float deltaTime, float speed)
     {
         XMVECTOR v = XMVectorLerp(V0, V1, deltaTime);
