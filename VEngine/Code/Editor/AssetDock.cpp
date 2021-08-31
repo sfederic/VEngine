@@ -10,6 +10,7 @@
 #include "FileSystem.h"
 #include "Actors/MeshActor.h"
 #include "Editor.h"
+#include "WorldEditor.h"
 
 AssetDock::AssetDock() : QDockWidget("Assets")
 {
@@ -63,13 +64,26 @@ void AssetDock::AssetItemClicked()
     auto extension = fileExtension.c_str();
 
     //Load world
-    if (std::wcscmp(extension, L".sav") == 0)
+    if (std::wcscmp(extension, L".sav") == 0) //Map files
     {
         fileSystem.LoadWorld(fullPath.toStdString().c_str());
     }
-    else if (std::wcscmp(extension, L".fbx") == 0)
+    else if (std::wcscmp(extension, L".fbx") == 0) //FBX files
     {
         MeshFileClicked(assetName.toStdString());
+    }
+    else if (std::wcscmp(extension, L".at") == 0) //Actor Template
+    {
+        std::filebuf fb;
+        fb.open(fullPath.toUtf8(), std::ios_base::in);
+        std::istream is(&fb);
+
+        std::string actorSystemName;
+        is >> actorSystemName;
+
+        auto actorSystemIt = actorSystemCache.nameToSystemMap->find(actorSystemName);
+        worldEditor.spawnSystem = actorSystemIt->second;
+        actorSystemIt->second->actorTemplateFilename = fullPath.toStdString();
     }
     else
     {
@@ -101,6 +115,7 @@ void AssetDock::AssetFolderClicked()
 
 void AssetDock::MeshFileClicked(std::string meshFilename)
 {
-    editor->spawnSystem = &MeshActor::system;
+    //Set spawner system as MeshActor
+    worldEditor.spawnSystem = &MeshActor::system;
     MeshActor::spawnMeshFilename = meshFilename;
 }

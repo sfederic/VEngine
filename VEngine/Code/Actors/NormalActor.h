@@ -13,10 +13,6 @@ struct NormalActor : Actor
 	CameraComponent* camera;
 
 	NormalActor();
-	~NormalActor()
-	{
-
-	}
 	virtual void Tick(double deltaTime) override;
 	virtual Properties GetProps();
 };

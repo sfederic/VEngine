@@ -18,6 +18,7 @@ void WorldEditor::Tick()
 	DuplicateActor();
 	DeleteActor();
 	SaveWorld();
+	CreateActorTemplate();
 }
 
 void WorldEditor::HandleActorPicking()
@@ -96,8 +97,7 @@ void WorldEditor::SpawnActorOnClick()
 	//Spawn actor on right click in viewport
 	if (Input::GetMouseRightUp())
 	{
-		IActorSystem* actorSystem = editor->spawnSystem;
-		if (actorSystem)
+		if (spawnSystem)
 		{
 			Ray ray;
 			if (RaycastAllFromScreen(ray))
@@ -112,7 +112,8 @@ void WorldEditor::SpawnActorOnClick()
 				rayEnd = XMVectorRound(rayEnd);
 				XMStoreFloat3(&transform.position, rayEnd);
 
-				MeshActor::system.Add(MeshActor(MeshActor::spawnMeshFilename), transform);
+				Actor* actor = SpawnActorTemplate();
+				actor->SetTransform(transform);
 			}
 			else
 			{
@@ -132,10 +133,50 @@ void WorldEditor::SpawnActorOnClick()
 				rayEnd = XMVectorRound(rayEnd);
 				XMStoreFloat3(&transform.position, rayEnd);
 
-				MeshActor::system.Add(MeshActor(MeshActor::spawnMeshFilename), transform);
+				Actor* actor = SpawnActorTemplate();
+				actor->SetTransform(transform);
 			}
 
 			editor->UpdateWorldList();
 		}
 	}
+}
+
+void WorldEditor::CreateActorTemplate()
+{
+	//Create template file from picked actor using actor's properties
+	if (pickedActor)
+	{
+		if (Input::GetAsyncKey(Keys::Ctrl))
+		{
+			if (Input::GetKeyUp(Keys::T))
+			{
+				Actor* actor = pickedActor;
+
+				std::string path = "ActorTemplates/" + actor->name + ".at"; //.at = ActorTemplate
+
+				std::filebuf fb;
+				fb.open(path, std::ios_base::out);
+				std::ostream os(&fb);
+
+				actor->actorSystem->SerialiseActorTemplate(os, actor);
+			}
+		}
+	}
+}
+
+Actor* WorldEditor::SpawnActorTemplate()
+{
+	if (spawnSystem)
+	{
+		const std::string& filename = spawnSystem->actorTemplateFilename;
+
+		std::filebuf fb;
+		fb.open(filename, std::ios_base::in);
+		std::istream is(&fb);
+
+		return spawnSystem->DeserialiseActorTemplate(is);
+	}
+
+	return nullptr;
 }

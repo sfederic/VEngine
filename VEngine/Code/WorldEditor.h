@@ -1,10 +1,12 @@
 #pragma once
 
 struct Actor;
+struct IActorSystem;
 
 struct WorldEditor
 {
-	Actor* pickedActor;
+	Actor* pickedActor = nullptr;
+	IActorSystem* spawnSystem = nullptr;
 
 	void Tick();
 	void HandleActorPicking();
@@ -12,6 +14,8 @@ struct WorldEditor
 	void SaveWorld();
 	void DeleteActor();
 	void SpawnActorOnClick();
+	void CreateActorTemplate();
+	Actor* SpawnActorTemplate();
 };
 
 extern WorldEditor worldEditor;

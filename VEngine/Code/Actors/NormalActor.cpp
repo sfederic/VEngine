@@ -30,7 +30,5 @@ void NormalActor::Tick(double deltaTime)
 
 Properties NormalActor::GetProps()
 {
-	Properties props = __super::GetProps();
-	props.Add("MeshNum", &mesh1->number);
-	return props;
+	return __super::GetProps();
 }

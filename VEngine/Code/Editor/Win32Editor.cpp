@@ -50,10 +50,6 @@ void Win32Editor::UpdateWorldList()
 {
 }
 
-void Win32Editor::SpawnActor()
-{
-}
-
 void Win32Editor::SetupWindow()
 {
 	HINSTANCE instance = GetModuleHandle(NULL);
