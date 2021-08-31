@@ -58,8 +58,8 @@ struct ActorSystem : IActorSystem
 
 	virtual void Serialise(Serialiser& s) override
 	{
-		s.os << name << "\n"; //Use actorsystem name to create again from ActorSystemCache on Deserialise
-		s.os << actors.size() << "\n"; //Write out num of actors to load the same amount on Deserialise
+		s.WriteLine(name); //Use actorsystem name to create again from ActorSystemCache on Deserialise
+		s.WriteLine(actors.size()); //Write out num of actors to load the same amount on Deserialise
 
 		for (T* actor : actors)
 		{
@@ -78,7 +78,7 @@ struct ActorSystem : IActorSystem
 	virtual void SerialiseActorTemplate(Serialiser& s, Actor* actor) override
 	{
 		auto props = actor->GetProps();
-		s.os << this->name << "\n";
+		s.WriteLine(this->name);
 		s.Serialise(props);
 	}
 

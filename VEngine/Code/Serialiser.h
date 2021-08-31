@@ -23,14 +23,8 @@ struct Serialiser
 	void Deserialise(Properties props);
 
 	template <typename T>
-	void Write(T& arg)
+	void WriteLine(T arg)
 	{
 		os << arg << "\n";
-	}
-
-	template <typename T>
-	void Read(T* arg)
-	{
-		is >> arg >> "\n";
 	}
 };
