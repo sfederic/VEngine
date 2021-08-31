@@ -8,6 +8,7 @@
 #include "Editor.h"
 #include "Commands/CommandSystem.h"
 #include "Commands/Command.h"
+#include "Core.h"
 
 TransformGizmo transformGizmo;
 
@@ -139,7 +140,7 @@ void TransformGizmo::Tick()
         bGridToggle = !bGridToggle;
     }
 
-    if (bGridToggle)
+    if (bGridToggle && !Core::gameplayOn)
     {
         XMFLOAT4X4 identity;
         XMStoreFloat4x4(&identity, XMMatrixIdentity());
