@@ -5,17 +5,12 @@
 
 using namespace DirectX;
 
-Serialiser::Serialiser(const std::string& file, std::ios_base::openmode mode)
+Serialiser::Serialiser(const std::string& filename, OpenMode openMode) : os(&fb), is(&fb)
 {
-	if (fb.is_open())
-	{
-		fb.close();
-	}
-
-	fb.open(file.c_str(), mode);
+	fb.open(filename.c_str(), (std::ios_base::openmode)openMode);
 }
 
-void Serialiser::Serialise(Properties props, std::ostream& os)
+void Serialiser::Serialise(Properties props)
 {
 	for (auto prop : props.propMap)
 	{
@@ -53,7 +48,7 @@ void Serialiser::Serialise(Properties props, std::ostream& os)
 	os << "next\n"; //"next" moves the forloop onto the next 'Object'
 }
 
-void Serialiser::Deserialise(Properties props, std::istream& is)
+void Serialiser::Deserialise(Properties props)
 {
 	char line[512];
 	while (!is.eof())

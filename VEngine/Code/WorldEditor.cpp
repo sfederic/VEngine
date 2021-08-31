@@ -152,14 +152,10 @@ void WorldEditor::CreateActorTemplate()
 			if (Input::GetKeyUp(Keys::T))
 			{
 				Actor* actor = pickedActor;
-
 				std::string path = "ActorTemplates/" + actor->name + ".at"; //.at = ActorTemplate
 
-				std::filebuf fb;
-				fb.open(path, std::ios_base::out);
-				std::ostream os(&fb);
-
-				actor->actorSystem->SerialiseActorTemplate(os, actor);
+				Serialiser s(path, OpenMode::Out);
+				actor->actorSystem->SerialiseActorTemplate(s, actor);
 			}
 		}
 	}
@@ -170,12 +166,8 @@ Actor* WorldEditor::SpawnActorTemplate()
 	if (spawnSystem)
 	{
 		const std::string& filename = spawnSystem->actorTemplateFilename;
-
-		std::filebuf fb;
-		fb.open(filename, std::ios_base::in);
-		std::istream is(&fb);
-
-		return spawnSystem->DeserialiseActorTemplate(is);
+		Serialiser s(filename, OpenMode::In);
+		return spawnSystem->DeserialiseActorTemplate(s);
 	}
 
 	return nullptr;

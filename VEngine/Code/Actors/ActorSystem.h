@@ -56,36 +56,36 @@ struct ActorSystem : IActorSystem
 		}
 	}
 
-	virtual void Serialise(std::ostream& os) override
+	virtual void Serialise(Serialiser& s) override
 	{
-		os << name << "\n"; //Use actorsystem name to create again from ActorSystemCache on Deserialise
-		os << actors.size() << "\n"; //Write out num of actors to load the same amount on Deserialise
+		s.os << name << "\n"; //Use actorsystem name to create again from ActorSystemCache on Deserialise
+		s.os << actors.size() << "\n"; //Write out num of actors to load the same amount on Deserialise
 
 		for (T* actor : actors)
 		{
-			Serialiser::Serialise(actor->GetProps(), os);
+			s.Serialise(actor->GetProps());
 		}
 	}
 
-	virtual void Deserialise(std::istream& is) override
+	virtual void Deserialise(Serialiser& s) override
 	{
 		for (Actor* actor : actors)
 		{
-			Serialiser::Deserialise(actor->GetProps(), is);
+			s.Deserialise(actor->GetProps());
 		}
 	}
 
-	virtual void SerialiseActorTemplate(std::ostream& os, Actor* actor) override
+	virtual void SerialiseActorTemplate(Serialiser& s, Actor* actor) override
 	{
 		auto props = actor->GetProps();
-		os << this->name << "\n";
-		Serialiser::Serialise(props, os);
+		s.os << this->name << "\n";
+		s.Serialise(props);
 	}
 
-	virtual Actor* DeserialiseActorTemplate(std::istream& is) override
+	virtual Actor* DeserialiseActorTemplate(Serialiser& s) override
 	{
 		T* actor = Add();
-		Serialiser::Deserialise(actor->GetProps(), is);
+		s.Deserialise(actor->GetProps());
 		actor->name = this->name + std::to_string(actor->index);
 		return (Actor*)actor;
 	}

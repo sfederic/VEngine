@@ -14,12 +14,11 @@ void FileSystem::WriteAllActorSystems(std::string worldName)
 	std::string file = "WorldMaps/" + worldName;
 	file += ".sav";
 
-	Serialiser s(file, std::ios_base::out);
-	std::ostream os(&s.fb);
+	Serialiser s(file, OpenMode::Out);
 
 	for (IActorSystem* actorSystem : world.activeActorSystems)
 	{
-		actorSystem->Serialise(os);
+		actorSystem->Serialise(s);
 	}
 
 	debugMenu.AddNotification(L"World saved.");
@@ -29,13 +28,12 @@ void FileSystem::LoadWorld(std::string worldName)
 {
 	world.Cleanup();
 
-	Serialiser s(worldName, std::ios_base::in);
-	std::istream is(&s.fb);
+	Serialiser s(worldName, OpenMode::In);
 
-	while (!is.eof())
+	while (!s.is.eof())
 	{
 		std::string actorSystemName;
-		is >> actorSystemName;
+		s.is >> actorSystemName;
 
 		if (actorSystemName == "")
 		{
@@ -43,7 +41,7 @@ void FileSystem::LoadWorld(std::string worldName)
 		}
 
 		size_t numActorsToSpawn = 0;
-		is >> numActorsToSpawn;
+		s.is >> numActorsToSpawn;
 
 		auto asIt = actorSystemCache.nameToSystemMap->find(actorSystemName);
 
@@ -55,7 +53,7 @@ void FileSystem::LoadWorld(std::string worldName)
 			actorSystem->SpawnActor(Transform());
 		}
 
-		actorSystem->Deserialise(is);
+		actorSystem->Deserialise(s);
 	}
 
 	//Deselect any existing actors, because TransformGizmo will stay at previous positions.
