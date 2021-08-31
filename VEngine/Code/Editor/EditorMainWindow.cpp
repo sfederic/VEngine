@@ -32,8 +32,8 @@ EditorMainWindow::EditorMainWindow()
 	addDockWidget(Qt::DockWidgetArea::BottomDockWidgetArea, logDock);
 	addDockWidget(Qt::DockWidgetArea::TopDockWidgetArea, toolbarDock);
 
-	addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, worldDock);
-	tabifyDockWidget(worldDock, systemDock);
+	addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, systemDock);
+	tabifyDockWidget(systemDock, worldDock);
 
 	setWindowState(Qt::WindowMaximized);
 	setWindowTitle("VEngine 2.0 | Vagrant Tactics");
@@ -68,6 +68,7 @@ void EditorMainWindow::HideAllDocks()
 		propertiesDock->hide();
 		assetDock->hide();
 		worldDock->hide();
+		systemDock->hide();
 		toolbarDock->hide();
 		logDock->hide();
 	}
@@ -76,6 +77,7 @@ void EditorMainWindow::HideAllDocks()
 		propertiesDock->show();
 		assetDock->show();
 		worldDock->show();
+		systemDock->show();
 		toolbarDock->show();
 		logDock->show();
 	}
