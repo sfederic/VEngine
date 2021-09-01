@@ -103,6 +103,4 @@ void World::Cleanup()
 	{
 		actorSystem->Cleanup();
 	}
-
-	activeActorSystems.clear();
 }
