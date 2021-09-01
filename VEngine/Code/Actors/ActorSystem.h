@@ -84,10 +84,11 @@ struct ActorSystem : IActorSystem
 
 	virtual Actor* DeserialiseActorTemplate(Serialiser& s) override
 	{
-		T* actor = Add();
-		s.Deserialise(actor->GetProps());
-		actor->name = this->name + std::to_string(actor->index);
-		return (Actor*)actor;
+		T* newActor = Add();
+		s.Deserialise(newActor->GetProps());
+		newActor->CreateAllComponents();
+
+		return (Actor*)newActor;
 	}
 
 	virtual Actor* FindActorByName(std::string actorName) override
