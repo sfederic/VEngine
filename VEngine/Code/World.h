@@ -12,6 +12,10 @@ struct World
 	std::vector<IActorSystem*> activeActorSystems;
 	std::vector<IComponentSystem*> activeComponentSystems;
 
+	//Called at engine startup
+	void Init();
+
+	//Called on level load
 	void Start();
 	void TickAllActorSystems(double deltaTime);
 	void TickAllComponentSystems(double deltaTime);

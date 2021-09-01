@@ -35,7 +35,7 @@ void Engine::Init(int argc, char* argv[])
 	MeshComponent::system.Init();
 	InstanceMeshComponent::system.Init();
 
-	world.Start();
+	world.Init();
 	editor->UpdateWorldList();
 }
 

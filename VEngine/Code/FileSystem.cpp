@@ -46,7 +46,6 @@ void FileSystem::LoadWorld(std::string worldName)
 		auto asIt = actorSystemCache.nameToSystemMap->find(actorSystemName);
 
 		IActorSystem* actorSystem = asIt->second;
-		world.activeActorSystems.push_back(actorSystem);
 
 		for (int i = 0; i < numActorsToSpawn; i++)
 		{
@@ -56,8 +55,12 @@ void FileSystem::LoadWorld(std::string worldName)
 		actorSystem->Deserialise(s);
 	}
 
+	//Re-init world
+	world.Start();
+
 	//Deselect any existing actors, because TransformGizmo will stay at previous positions.
 	worldEditor.pickedActor = nullptr;
+
 	editor->UpdateWorldList();
 	debugMenu.AddNotification(L"World loaded.");
 }
