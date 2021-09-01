@@ -13,13 +13,13 @@ World world;
 void World::Init()
 {
 	//Add actorsystems into world
-	for (auto actorSystemIt : *actorSystemCache.actorSystemMap)
+	for (auto actorSystemIt : *actorSystemCache.typeToSystemMap)
 	{
 		activeActorSystems.push_back(actorSystemIt.second);
 	}
 
 	//Add componentsystems into world
-	for (auto componentSystemIt : *componentSystemCache.componentSystemMap)
+	for (auto componentSystemIt : *componentSystemCache.typeToSystemMap)
 	{
 		activeComponentSystems.push_back(componentSystemIt.second);
 	}
