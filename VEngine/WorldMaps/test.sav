@@ -1,5 +1,5 @@
 NormalActor
-5
+3
 Position
 0 0 0
 Mesh Filename
@@ -18,40 +18,18 @@ cube.fbx
 Scale
 1 1 1
 Rotation
--0 0 -0 1
-Name
-NormalActor0
-next
-Position
-6 -1 2
-Mesh Filename
-cone.fbx
-Scale
-1 1 1
-Rotation
 0 0 0 1
 Name
 NormalActor0
 next
 Position
-0 1 -1
+5 0 3
 Mesh Filename
-cone.fbx
+cube.fbx
 Scale
 1 1 1
 Rotation
 0 0 0 1
-Name
-NormalActor0
-next
-Position
-7 -1 0
-Mesh Filename
-cone.fbx
-Scale
-1 1 1
-Rotation
--0 0 -0 1
 Name
 NormalActor0
 next

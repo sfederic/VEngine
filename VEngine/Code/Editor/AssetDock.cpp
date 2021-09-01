@@ -11,6 +11,7 @@
 #include "Actors/MeshActor.h"
 #include "Editor.h"
 #include "WorldEditor.h"
+#include "PropertiesDock.h"
 
 AssetDock::AssetDock() : QDockWidget("Assets")
 {
@@ -72,10 +73,6 @@ void AssetDock::AssetItemClicked()
     {
         MeshFileClicked(assetName.toStdString());
     }
-    else if (std::wcscmp(extension, L".at") == 0) //Actor Template
-    {
-        ActorTemplateClicked(fullPath.toStdString());
-    }
     else
     {
         //Opens up default system program from filename.
@@ -109,18 +106,4 @@ void AssetDock::MeshFileClicked(std::string meshFilename)
     //Set spawner system as MeshActor
     worldEditor.spawnSystem = &MeshActor::system;
     MeshActor::spawnMeshFilename = meshFilename;
-}
-
-void AssetDock::ActorTemplateClicked(std::string actorTemplateFilename)
-{
-    std::filebuf fb;
-    fb.open(actorTemplateFilename.c_str(), std::ios_base::in);
-    std::istream is(&fb);
-
-    std::string actorSystemName;
-    is >> actorSystemName;
-
-    auto actorSystemIt = actorSystemCache.nameToSystemMap->find(actorSystemName);
-    worldEditor.spawnSystem = actorSystemIt->second;
-    actorSystemIt->second->actorTemplateFilename = actorTemplateFilename;
 }

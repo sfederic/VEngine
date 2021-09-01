@@ -19,7 +19,6 @@ void WorldEditor::Tick()
 	DuplicateActor();
 	DeleteActor();
 	SaveWorld();
-	CreateActorTemplate();
 }
 
 void WorldEditor::HandleActorPicking()
@@ -114,8 +113,7 @@ void WorldEditor::SpawnActorOnClick()
 				rayEnd = XMVectorRound(rayEnd);
 				XMStoreFloat3(&transform.position, rayEnd);
 
-				Actor* actor = SpawnActorTemplate();
-				actor->SetTransform(transform);
+				Actor* actor = spawnSystem->SpawnActor(transform);
 			}
 			else
 			{
@@ -135,45 +133,10 @@ void WorldEditor::SpawnActorOnClick()
 				rayEnd = XMVectorRound(rayEnd);
 				XMStoreFloat3(&transform.position, rayEnd);
 
-				Actor* actor = SpawnActorTemplate();
-				actor->SetTransform(transform);
+				Actor* actor = spawnSystem->SpawnActor(transform);
 			}
 
 			editor->UpdateWorldList();
 		}
 	}
-}
-
-void WorldEditor::CreateActorTemplate()
-{
-	//Create template file from picked actor using actor's properties
-	if (pickedActor)
-	{
-		if (Input::GetAsyncKey(Keys::Ctrl))
-		{
-			if (Input::GetKeyUp(Keys::T))
-			{
-				Actor* actor = pickedActor;
-				std::string path = "ActorTemplates/" + actor->name + ".at"; //.at = ActorTemplate
-
-				Serialiser s(path, OpenMode::Out);
-				actor->actorSystem->SerialiseActorTemplate(s, actor);
-
-				editor->RefreshAssetList();
-				debugMenu.AddNotification(L"Actor Template created");
-			}
-		}
-	}
-}
-
-Actor* WorldEditor::SpawnActorTemplate()
-{
-	if (spawnSystem)
-	{
-		const std::string& filename = spawnSystem->actorTemplateFilename;
-		Serialiser s(filename, OpenMode::In);
-		return spawnSystem->DeserialiseActorTemplate(s);
-	}
-
-	return nullptr;
 }

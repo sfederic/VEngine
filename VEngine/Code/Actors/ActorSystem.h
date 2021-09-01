@@ -75,22 +75,6 @@ struct ActorSystem : IActorSystem
 		}
 	}
 
-	virtual void SerialiseActorTemplate(Serialiser& s, Actor* actor) override
-	{
-		auto props = actor->GetProps();
-		s.WriteLine(this->name);
-		s.Serialise(props);
-	}
-
-	virtual Actor* DeserialiseActorTemplate(Serialiser& s) override
-	{
-		T* newActor = Add();
-		s.Deserialise(newActor->GetProps());
-		newActor->CreateAllComponents();
-
-		return (Actor*)newActor;
-	}
-
 	virtual Actor* FindActorByName(std::string actorName) override
 	{
 		for (T* actor : actors)
@@ -108,19 +92,6 @@ struct ActorSystem : IActorSystem
 	{
 		Actor* actor = (Actor*)Add(T(), transform);
 		return actor;
-	}
-
-	virtual Actor* SpawnActorNoAdd(Transform transform) override
-	{
-		T* actor = new T();
-		actor->SetTransform(transform);
-		actor->CreateAllComponents();
-		return (Actor*)actor;
-	}
-
-	virtual Actor* SpawnActorTemplate() override
-	{
-		return (Actor*)Add();
 	}
 
 	virtual void GetActors(std::vector<Actor*>& outActors) override

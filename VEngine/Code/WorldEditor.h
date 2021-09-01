@@ -14,8 +14,6 @@ struct WorldEditor
 	void SaveWorld();
 	void DeleteActor();
 	void SpawnActorOnClick();
-	void CreateActorTemplate();
-	Actor* SpawnActorTemplate();
 };
 
 extern WorldEditor worldEditor;
