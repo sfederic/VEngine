@@ -50,9 +50,12 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 
 void Renderer::Tick()
 {
-	if (Input::GetKeyUp(Keys::B))
+	if (Input::GetAsyncKey(Keys::Ctrl))
 	{
-		drawBoundingBoxes = !drawBoundingBoxes;
+		if (Input::GetKeyUp(Keys::B))
+		{
+			drawBoundingBoxes = !drawBoundingBoxes;
+		}
 	}
 }
 
