@@ -62,6 +62,7 @@ void WorldEditor::DuplicateActor()
 			{
 				Transform transform = pickedActor->GetTransform();
 				Actor* newDuplicateActor = pickedActor->actorSystem->SpawnActor(transform);
+				newDuplicateActor->CreateAllComponents();
 				editor->UpdateWorldList();
 			}
 		}

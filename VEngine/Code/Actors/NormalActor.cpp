@@ -30,5 +30,7 @@ void NormalActor::Tick(double deltaTime)
 
 Properties NormalActor::GetProps()
 {
-	return __super::GetProps();
+	auto props = Actor::GetProps();
+	props.Add("Mesh Filename", &mesh1->filename);
+	return props;
 }

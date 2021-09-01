@@ -47,7 +47,7 @@ struct ComponentSystem : IComponentSystem
 		delete components[index];
 		components.pop_back();
 
-		if (components.size() > 0)
+		if (components.size() > 1)
 		{
 			std::swap(components[index], components.back());
 			components[index]->index = index;

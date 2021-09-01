@@ -45,6 +45,7 @@ struct Actor
 	virtual void Tick(double deltaTime);
 	virtual void Destroy();
 
+	//This shouldn't be called too often, only when ComponentSystem::Init() can't be called
 	void CreateAllComponents();
 
 	template <typename T>
