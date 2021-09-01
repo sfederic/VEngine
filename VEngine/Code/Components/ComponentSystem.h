@@ -31,7 +31,7 @@ struct ComponentSystem : IComponentSystem
 
 		if (systemState == SystemStates::Loaded)
 		{
-			component->Create();
+			//component->Create();
 		}
 
 		if (owner)
@@ -45,13 +45,17 @@ struct ComponentSystem : IComponentSystem
 	void Remove(int index)
 	{
 		delete components[index];
-		std::swap(components[index], components.back());
-		components[index]->index = index;
-		components[index]->name = this->name + std::to_string(index);
 		components.pop_back();
+
+		if (components.size() > 0)
+		{
+			std::swap(components[index], components.back());
+			components[index]->index = index;
+			components[index]->name = this->name + std::to_string(index);
+		}
 	}
 
-	void Init()
+	virtual void Init() override
 	{
 		for (T* component : components)
 		{

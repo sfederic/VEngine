@@ -10,6 +10,7 @@ struct IComponentSystem
 
 	std::string name;
 
+	virtual void Init() = 0;
 	virtual void Tick(double deltaTime) = 0;
 	virtual void Cleanup() = 0;
 	virtual void GetComponents(std::vector<Component*>& outComponents) = 0;
