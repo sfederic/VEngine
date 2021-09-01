@@ -74,16 +74,7 @@ void AssetDock::AssetItemClicked()
     }
     else if (std::wcscmp(extension, L".at") == 0) //Actor Template
     {
-        std::filebuf fb;
-        fb.open(fullPath.toUtf8(), std::ios_base::in);
-        std::istream is(&fb);
-
-        std::string actorSystemName;
-        is >> actorSystemName;
-
-        auto actorSystemIt = actorSystemCache.nameToSystemMap->find(actorSystemName);
-        worldEditor.spawnSystem = actorSystemIt->second;
-        actorSystemIt->second->actorTemplateFilename = fullPath.toStdString();
+        ActorTemplateClicked(fullPath.toStdString());
     }
     else
     {
@@ -118,4 +109,18 @@ void AssetDock::MeshFileClicked(std::string meshFilename)
     //Set spawner system as MeshActor
     worldEditor.spawnSystem = &MeshActor::system;
     MeshActor::spawnMeshFilename = meshFilename;
+}
+
+void AssetDock::ActorTemplateClicked(std::string actorTemplateFilename)
+{
+    std::filebuf fb;
+    fb.open(actorTemplateFilename.c_str(), std::ios_base::in);
+    std::istream is(&fb);
+
+    std::string actorSystemName;
+    is >> actorSystemName;
+
+    auto actorSystemIt = actorSystemCache.nameToSystemMap->find(actorSystemName);
+    worldEditor.spawnSystem = actorSystemIt->second;
+    actorSystemIt->second->actorTemplateFilename = actorTemplateFilename;
 }
