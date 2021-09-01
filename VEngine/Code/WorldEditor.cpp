@@ -8,6 +8,7 @@
 #include "FileSystem.h"
 #include "Camera.h"
 #include "Actors/MeshActor.h"
+#include "Editor/DebugMenu.h"
 
 WorldEditor worldEditor;
 
@@ -156,6 +157,8 @@ void WorldEditor::CreateActorTemplate()
 
 				Serialiser s(path, OpenMode::Out);
 				actor->actorSystem->SerialiseActorTemplate(s, actor);
+
+				debugMenu.AddNotification(L"Actor Template created");
 			}
 		}
 	}
