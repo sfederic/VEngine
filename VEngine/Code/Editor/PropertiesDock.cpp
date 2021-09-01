@@ -13,6 +13,7 @@
 #include "PropertyWidgets/FloatWidget.h"
 #include "PropertyWidgets/IntWidget.h"
 #include "PropertyWidgets/VectorWidget.h"
+#include "PropertyWidgets/StringWidget.h"
 
 PropertiesDock::PropertiesDock() : QDockWidget("Properties")
 {
@@ -113,6 +114,12 @@ void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRo
             auto vectorWidget = new VectorWidget(props.GetData<XMVECTOR>(name));
             actorPropsGridLayout->addWidget(vectorWidget, currentGridRow, propertyDataColumn);
             propertyWidgetsToUpdate.push_back((IPropertyWidget*)vectorWidget);
+        }
+        else if (props.CheckType<std::string>(name))
+        {
+            auto stringWidget = new StringWidget(props.GetData<std::string>(name));
+            actorPropsGridLayout->addWidget(stringWidget, currentGridRow, propertyDataColumn);
+            propertyWidgetsToUpdate.push_back((IPropertyWidget*)stringWidget);
         }
 
         currentGridRow++;
