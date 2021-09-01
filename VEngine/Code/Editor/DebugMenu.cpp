@@ -16,6 +16,8 @@
 #include "Commands/CommandSystem.h"
 #include "Commands/ICommand.h"
 
+#include "Input.h"
+
 DebugMenu debugMenu;
 
 void DebugMenu::Init()
@@ -137,7 +139,7 @@ void DebugMenu::IterateOverProperties(Properties& props)
 		else if (props.CheckType<std::string>(name))
 		{
 			std::string* str = props.GetData<std::string>(name);
-			ImGui::InputText("Name", str->data(), str->size());
+			ImGui::InputText(name.c_str(), str->data(), str->size());
 		}
 	}
 }
