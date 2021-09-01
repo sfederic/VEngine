@@ -45,6 +45,8 @@ struct Actor
 	virtual void Tick(double deltaTime);
 	virtual void Destroy();
 
+	void CreateAllComponents();
+
 	template <typename T>
 	std::vector<T*> GetComponentsOfType()
 	{

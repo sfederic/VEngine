@@ -137,3 +137,11 @@ void Actor::Tick(double deltaTime)
 void Actor::Destroy()
 {
 }
+
+void Actor::CreateAllComponents()
+{
+	for (Component* component : components)
+	{
+		component->Create();
+	}
+}
