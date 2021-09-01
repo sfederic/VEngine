@@ -1,5 +1,5 @@
 #include "SystemDock.h"
-#include <qtreewidget.h>
+#include <qlistwidget.h>
 #include <qboxlayout.h>
 #include "World.h"
 #include "Actors/IActorSystem.h"
@@ -9,26 +9,36 @@
 #include "Components/Component.h"
 #include "WorldEditor.h"
 #include "Editor.h"
+#include <qlabel.h>
+#include <qlineedit.h>
 
 SystemDock::SystemDock() : QDockWidget("Systems")
 {
-	//Setup actorsystem treewidget
-	actorSystemTreeWidget = new QTreeWidget(this);
-	actorSystemTreeWidget->setColumnCount(1);
-	actorSystemTreeWidget->setHeaderLabels(QStringList("Actor Systems"));
-	actorSystemTreeWidget->setSelectionMode(QAbstractItemView::SelectionMode::SingleSelection);
-	connect(actorSystemTreeWidget, &QTreeWidget::itemClicked, this, &SystemDock::ClickOnActorSystemItem);
+	//Setup actorsystem list widget
+	actorSystemList = new QListWidget(this);
+	actorSystemList->setSelectionMode(QAbstractItemView::SelectionMode::SingleSelection);
+	connect(actorSystemList, &QListWidget::itemClicked, this, &SystemDock::ClickOnActorSystemItem);
 
-	//setup componentsystem treewidget
-	componentSystemTreeWidget = new QTreeWidget(this);
-	componentSystemTreeWidget->setColumnCount(1);
-	componentSystemTreeWidget->setHeaderLabels(QStringList("Component Systems"));
-	componentSystemTreeWidget->setSelectionMode(QAbstractItemView::SelectionMode::SingleSelection);
-	connect(componentSystemTreeWidget, &QTreeWidget::itemClicked, this, &SystemDock::ClickOnComponentSystemItem);
+	selectedActorSystemLabel = new QLabel("Selected Actor System");
+
+	//setup actorsystem searchbar 
+	actorSystemSearchBar = new QLineEdit();
+	actorSystemSearchBar->setPlaceholderText("Search...");
+	connect(actorSystemSearchBar, &QLineEdit::textChanged, this, &SystemDock::SearchActorSystems);
+
+	//setup componentsystem list widget
+	componentSystemList = new QListWidget(this);
+	componentSystemList->setSelectionMode(QAbstractItemView::SelectionMode::SingleSelection);
+	connect(componentSystemList, &QListWidget::itemClicked, this, &SystemDock::ClickOnComponentSystemItem);
+
+	selectedComponentSystemLabel = new QLabel("Selected Component System");
 
 	QVBoxLayout* vLayout = new QVBoxLayout(this);
-	vLayout->addWidget(actorSystemTreeWidget);
-	vLayout->addWidget(componentSystemTreeWidget);
+	vLayout->addWidget(selectedActorSystemLabel);
+	vLayout->addWidget(actorSystemSearchBar);
+	vLayout->addWidget(actorSystemList);
+	vLayout->addWidget(selectedComponentSystemLabel);
+	vLayout->addWidget(componentSystemList);
 
 	auto systemWidget = new QWidget(this);
 	systemWidget->setLayout(vLayout);
@@ -44,67 +54,59 @@ void SystemDock::PopulateSystemLists()
 
 void SystemDock::AddActorSystemsToWidget()
 {
-	actorSystemTreeWidget->clear();
+	actorSystemList->clear();
 
 	for (IActorSystem* actorSystem : world.activeActorSystems)
 	{
-		auto item = new QTreeWidgetItem(actorSystemTreeWidget);
-		item->setText(0, QString::fromStdString(actorSystem->name));
-
-		std::vector<Actor*> actors;
-		actorSystem->GetActors(actors);
-		for (Actor* actor : actors)
-		{
-			auto childItem = new QTreeWidgetItem();
-			childItem->setText(0, QString::fromStdString(actor->name));
-			item->addChild(childItem);
-		}
+		auto item = new QListWidgetItem(actorSystemList);
+		item->setText(QString::fromStdString(actorSystem->name));
 	}
 }
 
 void SystemDock::AddComponentSystemsToWidget()
 {
-	componentSystemTreeWidget->clear();
+	componentSystemList->clear();
 
 	for (IComponentSystem* componentSystem : world.activeComponentSystems)
 	{
-		auto item = new QTreeWidgetItem(componentSystemTreeWidget);
-		item->setText(0, QString::fromStdString(componentSystem->name));
-
-		std::vector<Component*> components;
-		componentSystem->GetComponents(components);
-		for (Component* component : components)
-		{
-			auto childItem = new QTreeWidgetItem();
-			childItem->setText(0, QString::fromStdString(component->name));
-			item->addChild(childItem);
-		}
+		auto item = new QListWidgetItem(componentSystemList);
+		item->setText(QString::fromStdString(componentSystem->name));
 	}
 }
 
-void SystemDock::ClickOnActorSystemItem(QTreeWidgetItem* item, int column)
+void SystemDock::ClickOnActorSystemItem(QListWidgetItem* item)
 {
-	QString actorName = item->text(column);
+	QString actorSystemName = item->text();
 
 	//Set spawn system based on the actorsystem clicked in the dock
-	worldEditor.spawnSystem = actorSystemCache.Get(actorName.toStdString());
+	worldEditor.spawnSystem = actorSystemCache.Get(actorSystemName.toStdString());
 
-	Actor* clickedActor = world.FindActorByName(actorName.toStdString());
-	if (clickedActor)
-	{
-		worldEditor.pickedActor = clickedActor;
-		editor->SetActorProps(clickedActor);
-	}
+	selectedActorSystemLabel->setText(actorSystemName);
 }
 
-void SystemDock::ClickOnComponentSystemItem(QTreeWidgetItem* item, int column)
+void SystemDock::ClickOnComponentSystemItem(QListWidgetItem* item)
 {
-	//highlight owner of component in editor
-	QString componentName = item->text(column);
-	Actor* owner = world.FindComponentOwnerByName(componentName.toStdString());
-	if (owner)
+	//TODO: figure out if there is some sort of spawning on a component basis thing to do later
+
+	QString componentSystemName = item->text();
+
+	selectedComponentSystemLabel->setText(componentSystemName);
+}
+
+void SystemDock::SearchActorSystems()
+{
+	QString searchText = actorSystemSearchBar->text().toLower();
+
+	for (int i = 0; i < actorSystemList->count(); i++)
 	{
-		worldEditor.pickedActor = owner;
-		editor->SetActorProps(owner);
+		QListWidgetItem* item = actorSystemList->item(i);
+		if (item->text().toLower().contains(searchText))
+		{
+			item->setHidden(false);
+		}
+		else
+		{
+			item->setHidden(true);
+		}
 	}
 }
