@@ -7,6 +7,7 @@
 #include "RenderViewWidget.h"
 #include "LogDock.h"
 #include "PropertiesDock.h"
+#include "AssetDock.h"
 #include "WorldDock.h"
 #include "SystemDock.h"
 
@@ -55,6 +56,11 @@ void QtEditor::UpdateWorldList()
 {
     mainWindow->worldDock->PopulateWorldActorList();
     mainWindow->systemDock->PopulateSystemLists();
+}
+
+void QtEditor::RefreshAssetList()
+{
+    mainWindow->assetDock->AssetFolderClicked();
 }
 
 void QtEditor::SetEditorFont()

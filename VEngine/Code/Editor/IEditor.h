@@ -21,4 +21,5 @@ struct IEditor
 	virtual void Log(const std::wstring logMessage) = 0;
 	virtual void SetActorProps(Actor* actor) = 0;
 	virtual void UpdateWorldList() = 0;
+	virtual void RefreshAssetList() = 0;
 };

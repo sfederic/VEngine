@@ -159,6 +159,7 @@ void WorldEditor::CreateActorTemplate()
 				Serialiser s(path, OpenMode::Out);
 				actor->actorSystem->SerialiseActorTemplate(s, actor);
 
+				editor->RefreshAssetList();
 				debugMenu.AddNotification(L"Actor Template created");
 			}
 		}

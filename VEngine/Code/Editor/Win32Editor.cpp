@@ -91,3 +91,7 @@ void Win32Editor::HandleMessages()
 		DispatchMessage(&msg);
 	}
 }
+
+void Win32Editor::RefreshAssetList()
+{
+}

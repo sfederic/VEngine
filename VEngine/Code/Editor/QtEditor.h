@@ -12,6 +12,7 @@ struct QtEditor : IEditor
 	virtual void Log(const std::wstring logMessage) override;
 	virtual void SetActorProps(Actor* actor) override;
 	virtual void UpdateWorldList() override;
+	virtual void RefreshAssetList() override;
 	void SetEditorFont();
 	void EnableDarkMode();
 };
