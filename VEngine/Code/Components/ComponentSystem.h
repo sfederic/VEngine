@@ -31,7 +31,7 @@ struct ComponentSystem : IComponentSystem
 
 		if (systemState == SystemStates::Loaded)
 		{
-			//component->Create();
+			component->Create();
 		}
 
 		if (owner)
