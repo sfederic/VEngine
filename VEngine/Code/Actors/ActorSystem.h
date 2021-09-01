@@ -110,6 +110,14 @@ struct ActorSystem : IActorSystem
 		return actor;
 	}
 
+	virtual Actor* SpawnActorNoAdd(Transform transform) override
+	{
+		T* actor = new T();
+		actor->SetTransform(transform);
+		actor->CreateAllComponents();
+		return (Actor*)actor;
+	}
+
 	virtual Actor* SpawnActorTemplate() override
 	{
 		return (Actor*)Add();
