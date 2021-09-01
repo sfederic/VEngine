@@ -4,6 +4,7 @@
 #include "World.h"
 #include "Actors/IActorSystem.h"
 #include "Actors/Actor.h"
+#include "Actors/ActorSystemCache.h"
 #include "Components/IComponentSystem.h"
 #include "Components/Component.h"
 #include "WorldEditor.h"
@@ -84,6 +85,10 @@ void SystemDock::AddComponentSystemsToWidget()
 void SystemDock::ClickOnActorSystemItem(QTreeWidgetItem* item, int column)
 {
 	QString actorName = item->text(column);
+
+	//Set spawn system based on the actorsystem clicked in the dock
+	worldEditor.spawnSystem = actorSystemCache.Get(actorName.toStdString());
+
 	Actor* clickedActor = world.FindActorByName(actorName.toStdString());
 	if (clickedActor)
 	{
