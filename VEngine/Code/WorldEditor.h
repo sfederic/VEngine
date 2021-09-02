@@ -8,8 +8,6 @@ struct WorldEditor
 	Actor* pickedActor = nullptr;
 	IActorSystem* spawnSystem = nullptr;
 
-	bool spawnerActive = false;
-
 	void Tick();
 	void HandleActorPicking();
 	void DuplicateActor();
