@@ -1,38 +1,48 @@
 #pragma once
 
+struct ID3D11Buffer;
+struct ID3D11Texture2D;
+struct ID3D11ShaderResourceView;
+struct ID3D11SamplerState;
+struct ID3D11RasterizerState;
+struct ID3D11BlendState;
+
 struct Buffer
 {
-	struct ID3D11Buffer* data;
+	ID3D11Buffer* data = nullptr;
 };
 
 struct Texture2D
 {
-	struct ID3D11Texture2D* data;
+	ID3D11Texture2D* data = nullptr;
 };
 
 struct ShaderResourceView
 {
-	struct ID3D11ShaderResourceView* data;
+	ID3D11ShaderResourceView* data = nullptr;
 };
 
 struct Sampler
 {
-	struct ID3D11SamplerState* data;
+	ID3D11SamplerState* data = nullptr;
 };
 
 struct RasterizerState
 {
-	struct ID3D11RasterizerState* data;
+	ID3D11RasterizerState* data = nullptr;
 };
 
 struct BlendState
 {
-	struct ID3D11BlendState* data;
+	ID3D11BlendState* data = nullptr;
 };
 
 struct PipelineStateObject
 {
+	PipelineStateObject();
+
 	Buffer vertexBuffer;
 	Buffer indexBuffer;
 	Sampler sampler;
+	RasterizerState rastState;
 };
