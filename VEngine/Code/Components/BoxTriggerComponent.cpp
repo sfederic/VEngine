@@ -4,16 +4,12 @@
 
 BoxTriggerComponent::BoxTriggerComponent()
 {
+
 }
 
 void BoxTriggerComponent::Tick(double deltaTime)
 {
-	XMVECTOR pos = target->GetPositionVector();
-	auto rootpos = XMLoadFloat3(&transform.position);
-	if (boundingBox.Contains(rootpos))
-	{
-		throw;
-	}
+
 }
 
 Properties BoxTriggerComponent::GetProps()
@@ -23,4 +19,5 @@ Properties BoxTriggerComponent::GetProps()
 
 void BoxTriggerComponent::Create()
 {
+
 }

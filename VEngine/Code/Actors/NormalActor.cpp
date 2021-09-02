@@ -1,5 +1,6 @@
 #include "NormalActor.h"
 #include "Components/MeshComponent.h"
+#include "Components/BoxTriggerComponent.h"
 #include "Camera.h"
 #include "VMath.h"
 #include "Input.h"
@@ -11,6 +12,10 @@ NormalActor::NormalActor()
 
 	camera = CameraComponent::system.Add(this, CameraComponent(XMFLOAT3(0.f, 5.f, -20.f), false));
 	rootComponent->AddChild(camera);
+
+	boxTrigger = BoxTriggerComponent::system.Add(this);
+	rootComponent->AddChild(boxTrigger);
+	boxTrigger->transform.position.x += 3.f;
 }
 
 void NormalActor::Tick(double deltaTime)

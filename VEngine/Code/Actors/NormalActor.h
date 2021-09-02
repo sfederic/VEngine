@@ -4,6 +4,7 @@
 
 struct MeshComponent;
 struct CameraComponent;
+struct BoxTriggerComponent;
 
 struct NormalActor : Actor
 {
@@ -11,6 +12,7 @@ struct NormalActor : Actor
 
 	MeshComponent* mesh1;
 	CameraComponent* camera;
+	BoxTriggerComponent* boxTrigger;
 
 	NormalActor();
 	virtual void Tick(double deltaTime) override;
