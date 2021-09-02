@@ -48,6 +48,12 @@ XMFLOAT3 Actor::GetPosition()
 	return XMFLOAT3(rootComponent->transform.position);
 }
 
+XMVECTOR Actor::GetPositionVector()
+{
+	XMFLOAT3 pos = GetPosition();
+	return XMLoadFloat3(&pos);
+}
+
 XMFLOAT3 Actor::GetScale()
 {
 	return XMFLOAT3(rootComponent->transform.scale);

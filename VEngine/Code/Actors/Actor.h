@@ -30,6 +30,7 @@ struct Actor
 	void UpdateTransform(XMMATRIX parentWorld);
 	XMMATRIX GetTransformMatrix();
 	XMFLOAT3 GetPosition();
+	XMVECTOR GetPositionVector();
 	XMFLOAT3 GetScale();
 	XMFLOAT4 GetRotation();
 	void SetPosition(XMVECTOR position);
