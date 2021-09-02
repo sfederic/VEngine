@@ -85,7 +85,7 @@ void CameraComponent::MouseMove(int x, int y)
 {
 	static XMINT2 lastMousePos;
 
-	if (Input::GetMouseRightDown())
+	if (Input::GetAsyncKey(Keys::MouseRight))
 	{
 		float dx = XMConvertToRadians(0.25f * (float)(x - lastMousePos.x));
 		float dy = XMConvertToRadians(0.25f * (float)(y - lastMousePos.y));

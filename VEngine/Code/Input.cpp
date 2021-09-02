@@ -12,6 +12,8 @@ namespace Input
 	bool mouseLeftDown;
 	bool mouseRightUp;
 	bool mouseRightDown;
+	bool mouseMiddleUp;
+	bool mouseMiddleDown;
 
 	void Reset()
 	{
@@ -22,9 +24,8 @@ namespace Input
 		mouseWheelDown = false;
 
 		mouseLeftUp = false;
-		mouseLeftDown = false;
 		mouseRightUp = false;
-		mouseRightDown = false;
+		mouseMiddleUp = false;
 	}
 
 	void SetKeyDown(Keys key)
@@ -91,6 +92,18 @@ namespace Input
 		mouseRightUp = false;
 	}
 
+	void SetMiddleMouseUp()
+	{
+		mouseMiddleUp = true;
+		mouseMiddleDown = false;
+	}
+
+	void SetMiddleMouseDown()
+	{
+		mouseMiddleDown = true;
+		mouseMiddleUp = false;
+	}
+
 	void SetLeftMouseUp()
 	{
 		mouseLeftUp = true;
@@ -115,5 +128,15 @@ namespace Input
 	bool GetMouseRightDown()
 	{
 		return mouseRightDown;
+	}
+
+	bool GetMouseMiddleUp()
+	{
+		return mouseMiddleUp;
+	}
+
+	bool GetMouseMiddleDown()
+	{
+		return mouseMiddleDown;
 	}
 }

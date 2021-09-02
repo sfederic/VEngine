@@ -14,6 +14,20 @@ WorldEditor worldEditor;
 
 void WorldEditor::Tick()
 {
+	if (Input::GetKeyUp(Keys::Tab))
+	{
+		spawnerActive = !spawnerActive;
+
+		if (spawnerActive)
+		{
+			debugMenu.AddNotification(L"Spawn System ON");
+		}
+		else
+		{
+			debugMenu.AddNotification(L"Spawn System OFF");
+		}
+	}
+
 	SpawnActorOnClick();
 	HandleActorPicking();
 	DuplicateActor();
@@ -96,9 +110,9 @@ void WorldEditor::DeleteActor()
 void WorldEditor::SpawnActorOnClick()
 {
 	//Spawn actor on right click in viewport
-	if (Input::GetMouseRightUp())
+	if (Input::GetMouseMiddleUp())
 	{
-		if (spawnSystem)
+		if (spawnSystem && spawnerActive)
 		{
 			Ray ray;
 			if (RaycastAllFromScreen(ray))

@@ -128,6 +128,14 @@ void Core::HandleWin32MessagePump(UINT message, WPARAM wparam, LPARAM lparam)
 		Input::SetKeyUp((Keys)wparam);
 		break;
 
+	case WM_MBUTTONUP:
+		Input::SetMiddleMouseUp();
+		break;	
+	
+	case WM_MBUTTONDOWN:
+		Input::SetMiddleMouseDown();
+		break;
+
 	case WM_LBUTTONUP:
 		Input::SetLeftMouseUp();
 		break;
