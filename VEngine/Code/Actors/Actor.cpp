@@ -59,9 +59,21 @@ XMFLOAT3 Actor::GetScale()
 	return XMFLOAT3(rootComponent->transform.scale);
 }
 
+XMVECTOR Actor::GetScaleVector()
+{
+	XMFLOAT3 scale = GetScale();
+	return XMLoadFloat3(&scale);
+}
+
 XMFLOAT4 Actor::GetRotation()
 {
 	return XMFLOAT4(rootComponent->transform.rotation);
+}
+
+XMVECTOR Actor::GetRotationVector()
+{
+	XMFLOAT4 rotation = GetRotation();
+	return XMLoadFloat4(&rotation);
 }
 
 void Actor::SetPosition(XMVECTOR position)
