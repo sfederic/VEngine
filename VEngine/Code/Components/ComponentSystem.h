@@ -44,15 +44,11 @@ struct ComponentSystem : IComponentSystem
 
 	void Remove(int index)
 	{
-		delete components[index];
+		std::swap(components[index], components.back());
+		components[index]->index = index;
+		components[index]->name = this->name + std::to_string(index);
+		delete components.back();
 		components.pop_back();
-
-		if (components.size() > 1)
-		{
-			std::swap(components[index], components.back());
-			components[index]->index = index;
-			components[index]->name = this->name + std::to_string(index);
-		}
 	}
 
 	virtual void Init() override

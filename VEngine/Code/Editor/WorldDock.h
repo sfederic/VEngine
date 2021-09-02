@@ -4,6 +4,7 @@
 class QTreeWidget;
 class QTreeWidgetItem;
 
+//Holds a list of all the actors (and their parent child relationships) currently in world
 struct WorldDock : public QDockWidget
 {
 	QTreeWidget* actorTreeWidget;

@@ -41,10 +41,10 @@ struct ActorSystem : IActorSystem
 			component->Destroy();
 		}
 
-		delete actors[index];
 		std::swap(actors[index], actors.back());
 		actors[index]->index = index;
 		actors[index]->name = this->name + std::to_string(index);
+		delete actors.back();
 		actors.pop_back();
 	}
 
