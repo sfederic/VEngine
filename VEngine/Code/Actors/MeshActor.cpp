@@ -5,6 +5,11 @@ MeshActor::MeshActor(std::string meshFilename_)
 {
 	meshFilename = meshFilename_;
 
+	if (!spawnMeshFilename.empty())
+	{
+		meshFilename = spawnMeshFilename;
+	}
+
 	mesh = MeshComponent::system.Add(this, MeshComponent(meshFilename.c_str()));
 	rootComponent = mesh;
 }
