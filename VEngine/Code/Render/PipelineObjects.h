@@ -1,11 +1,7 @@
 #pragma once
+#include <string>
+#include <d3d11.h>
 
-struct ID3D11Buffer;
-struct ID3D11Texture2D;
-struct ID3D11ShaderResourceView;
-struct ID3D11SamplerState;
-struct ID3D11RasterizerState;
-struct ID3D11BlendState;
 
 struct Buffer
 {
@@ -27,9 +23,14 @@ struct Sampler
 	ID3D11SamplerState* data = nullptr;
 };
 
-struct RasterizerState
+struct RastState
 {
+	D3D11_RASTERIZER_DESC desc;
 	ID3D11RasterizerState* data = nullptr;
+	std::string name;
+
+	RastState() {}
+	RastState(std::string name_, D3D11_RASTERIZER_DESC desc_, ID3D11RasterizerState* data_);
 };
 
 struct BlendState
@@ -39,10 +40,10 @@ struct BlendState
 
 struct PipelineStateObject
 {
-	PipelineStateObject();
+	PipelineStateObject() {}
 
 	Buffer vertexBuffer;
 	Buffer indexBuffer;
 	Sampler sampler;
-	RasterizerState rastState;
+	RastState rastState;
 };

@@ -33,12 +33,15 @@ void MeshComponent::Create()
 	{
 		pso->vertexBuffer.data = renderer.CreateVertexBuffer(data);
 		pso->indexBuffer.data = renderer.CreateIndexBuffer(data);
-		pso->sampler.data = renderer.CreateSampler();
 	}
 	else
 	{
-		pso = psoIt->second;
+		pso->vertexBuffer = psoIt->second->vertexBuffer;
+		pso->indexBuffer = psoIt->second->indexBuffer;
 	}
+
+	pso->sampler.data = renderer.CreateSampler();
+	pso->rastState = *renderer.rastStateMap["solid"];
 
 	existingPiplineStateObjects[filename] = pso;
 }

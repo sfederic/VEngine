@@ -159,20 +159,29 @@ void Renderer::CreateRasterizerStates()
 	rastDesc.FrontCounterClockwise = FALSE;
 
 	//SOLID
-	HR(device->CreateRasterizerState(&rastDesc, &rastStateSolid));
-	rastStatesMap["solid"] = rastStateSolid;
+	{
+		HR(device->CreateRasterizerState(&rastDesc, &rastStateSolid));
+		RastState* rs = new RastState("solid", rastDesc, rastStateSolid);
+		rastStateMap[rs->name] = rs;
+	}
 
 	//WIREFRAME
-	rastDesc.FillMode = D3D11_FILL_WIREFRAME;
-	rastDesc.CullMode = D3D11_CULL_NONE;
-	HR(device->CreateRasterizerState(&rastDesc, &rastStateWireframe));
-	rastStatesMap["wireframe"] = rastStateWireframe;
+	{
+		rastDesc.FillMode = D3D11_FILL_WIREFRAME;
+		rastDesc.CullMode = D3D11_CULL_NONE;
+		HR(device->CreateRasterizerState(&rastDesc, &rastStateWireframe));
+		RastState* rs = new RastState("wireframe", rastDesc, rastStateWireframe);
+		rastStateMap[rs->name] = rs;
+	}
 
 	//SOLID, NO BACK CULL
-	rastDesc.CullMode = D3D11_CULL_NONE;
-	rastDesc.FillMode = D3D11_FILL_SOLID;
-	HR(device->CreateRasterizerState(&rastDesc, &rastStateNoBackCull));
-	rastStatesMap["nobackcull"] = rastStateNoBackCull;
+	{
+		rastDesc.CullMode = D3D11_CULL_NONE;
+		rastDesc.FillMode = D3D11_FILL_SOLID;
+		HR(device->CreateRasterizerState(&rastDesc, &rastStateNoBackCull));
+		RastState* rs = new RastState("nobackcull", rastDesc, rastStateNoBackCull);
+		rastStateMap[rs->name] = rs;
+	}
 }
 
 void Renderer::CreateBlendStates()

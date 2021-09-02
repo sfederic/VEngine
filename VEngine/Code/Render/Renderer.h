@@ -23,7 +23,7 @@ struct Renderer
 	ComPtr<ID3D11InputLayout> inputLayout;
 
 	//Rasterizer states
-	std::unordered_map<std::string, ID3D11RasterizerState*> rastStatesMap;
+	std::unordered_map<std::string, RastState*> rastStateMap;
 	ID3D11RasterizerState* rastStateSolid;
 	ID3D11RasterizerState* rastStateWireframe;
 	ID3D11RasterizerState* rastStateNoBackCull;

@@ -8,7 +8,7 @@ BoxTrigger::BoxTrigger()
 	rootComponent = boxMesh;
 
 	//set mesh to wireframe for debugging purposes
-	boxMesh->pso->rastState.data = renderer.rastStateWireframe;
+	boxMesh->pso->rastState = *renderer.rastStateMap["wireframe"];
 }
 
 Properties BoxTrigger::GetProps()
