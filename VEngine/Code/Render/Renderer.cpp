@@ -159,19 +159,20 @@ void Renderer::CreateRasterizerStates()
 	rastDesc.FrontCounterClockwise = FALSE;
 
 	//SOLID
-	HR(device->CreateRasterizerState(&rastDesc, rastStateSolid.GetAddressOf()));
-	activeRastState = rastStateSolid;
-	context->RSSetState(activeRastState.Get());
+	HR(device->CreateRasterizerState(&rastDesc, &rastStateSolid));
+	rastStatesMap["solid"] = rastStateSolid;
 
 	//WIREFRAME
 	rastDesc.FillMode = D3D11_FILL_WIREFRAME;
 	rastDesc.CullMode = D3D11_CULL_NONE;
-	HR(device->CreateRasterizerState(&rastDesc, rastStateWireframe.GetAddressOf()));
+	HR(device->CreateRasterizerState(&rastDesc, &rastStateWireframe));
+	rastStatesMap["wireframe"] = rastStateWireframe;
 
 	//SOLID, NO BACK CULL
 	rastDesc.CullMode = D3D11_CULL_NONE;
 	rastDesc.FillMode = D3D11_FILL_SOLID;
-	HR(device->CreateRasterizerState(&rastDesc, rastStateNoBackCull.GetAddressOf()));
+	HR(device->CreateRasterizerState(&rastDesc, &rastStateNoBackCull));
+	rastStatesMap["nobackcull"] = rastStateNoBackCull;
 }
 
 void Renderer::CreateBlendStates()
@@ -292,8 +293,6 @@ void Renderer::RenderSetup()
 
 	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv.Get());
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-	context->RSSetState(activeRastState.Get());
 }
 
 void Renderer::Render()
@@ -311,7 +310,7 @@ void Renderer::RenderMeshComponents()
 
 	for (MeshComponent* mesh : MeshComponent::system.components)
 	{
-		context->RSSetState(activeRastState.Get());
+		context->RSSetState(mesh->pso->rastState.data);
 
 		//const FLOAT blendState[4] = { 0.f };
 		//context->OMSetBlendState(blendStateAlphaToCoverage, blendState, 0xFFFFFFFF);
@@ -347,7 +346,7 @@ void Renderer::RenderInstanceMeshComponents()
 
 	for (InstanceMeshComponent* instanceMesh : InstanceMeshComponent::system.components)
 	{
-		context->RSSetState(activeRastState.Get());
+		context->RSSetState(instanceMesh->pso->rastState.data);
 
 		context->VSSetShader(instanceMesh->shader->vertexShader, nullptr, 0);
 		context->PSSetShader(instanceMesh->shader->pixelShader, nullptr, 0);
@@ -373,7 +372,7 @@ void Renderer::RenderBounds()
 
 	if (drawBoundingBoxes)
 	{
-		context->RSSetState(rastStateWireframe.Get());
+		context->RSSetState(rastStateWireframe);
 
 		auto boxShaderIt = shaderSystem.shaderMap.find(L"SolidColour.hlsl");
 		context->VSSetShader(boxShaderIt->second->vertexShader, nullptr, 0);

@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <unordered_map>
 #include <d3d11.h>
 #include <dxgi1_6.h>
 #include <wrl.h>
@@ -22,10 +23,10 @@ struct Renderer
 	ComPtr<ID3D11InputLayout> inputLayout;
 
 	//Rasterizer states
-	ComPtr<ID3D11RasterizerState> activeRastState;
-	ComPtr<ID3D11RasterizerState> rastStateSolid;
-	ComPtr<ID3D11RasterizerState> rastStateWireframe;
-	ComPtr<ID3D11RasterizerState> rastStateNoBackCull;
+	std::unordered_map<std::string, ID3D11RasterizerState*> rastStatesMap;
+	ID3D11RasterizerState* rastStateSolid;
+	ID3D11RasterizerState* rastStateWireframe;
+	ID3D11RasterizerState* rastStateNoBackCull;
 
 	//Blendstates
 	ComPtr<ID3D11BlendState> blendStateAlphaToCoverage;
