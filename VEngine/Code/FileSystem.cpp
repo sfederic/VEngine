@@ -6,6 +6,7 @@
 #include "WorldEditor.h"
 #include "Editor/DebugMenu.h"
 #include "Editor/Editor.h"
+#include "Commands/CommandSystem.h"
 
 FileSystem fileSystem;
 
@@ -60,6 +61,9 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	//Deselect any existing actors, because TransformGizmo will stay at previous positions.
 	worldEditor.pickedActor = nullptr;
+
+	//Clear all commands
+	commandSystem.commands.clear();
 
 	editor->UpdateWorldList();
 	debugMenu.AddNotification(L"World loaded.");
