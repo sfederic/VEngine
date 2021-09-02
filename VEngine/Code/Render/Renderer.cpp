@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "UI/UISystem.h"
 #include "Components/MeshComponent.h"
+#include "Components/BoxTriggerComponent.h"
 #include "Components/InstanceMeshComponent.h"
 #include "Actors/Actor.h"
 #include "Actors/NormalActor.h"
@@ -11,7 +12,7 @@
 #include "Actors/DebugBox.h"
 #include "Input.h"
 #include "Material.h"
-
+#include "World.h"
 #include "Profile.h"
 
 Renderer renderer;
@@ -398,19 +399,31 @@ void Renderer::RenderBounds()
 		context->UpdateSubresource(cbMaterial.Get(), 0, nullptr, &shaderMaterial, 0, 0);
 		context->PSSetConstantBuffers(cbMaterialRegister, 1, cbMaterial.GetAddressOf());
 
-		for (MeshComponent* mesh : MeshComponent::system.components)
+		for (IActorSystem* actorSystem : world.activeActorSystems)
 		{
-			shaderMatrices.model = mesh->GetWorldMatrix();
+			std::vector<Actor*> actors;
+			actorSystem->GetActors(actors);
+			for (Actor* actor : actors)
+			{
+				for (Component* component : actor->components)
+				{
+					SpatialComponent* spatialComponent = dynamic_cast<SpatialComponent*>(component);
+					if (spatialComponent)
+					{
+						shaderMatrices.model = spatialComponent->GetWorldMatrix();
 
-			//Set bouding box scale just slightly more than the Mesh to avoid overlap
-			shaderMatrices.model.r[0].m128_f32[0] *= mesh->boundingBox.Extents.x + 0.01f;
-			shaderMatrices.model.r[1].m128_f32[1] *= mesh->boundingBox.Extents.y + 0.01f;
-			shaderMatrices.model.r[2].m128_f32[2] *= mesh->boundingBox.Extents.z + 0.01f;
+						//Set bouding box scale just slightly more than the component to avoid overlap
+						shaderMatrices.model.r[0].m128_f32[0] *= spatialComponent->boundingBox.Extents.x + 0.01f;
+						shaderMatrices.model.r[1].m128_f32[1] *= spatialComponent->boundingBox.Extents.y + 0.01f;
+						shaderMatrices.model.r[2].m128_f32[2] *= spatialComponent->boundingBox.Extents.z + 0.01f;
 
-			shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
-			context->UpdateSubresource(cbMatrices.Get(), 0, nullptr, &shaderMatrices, 0, 0);
+						shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
+						context->UpdateSubresource(cbMatrices.Get(), 0, nullptr, &shaderMatrices, 0, 0);
 
-			context->Draw(debugBox.boxMesh->data->vertices->size(), 0);
+						context->Draw(debugBox.boxMesh->data->vertices->size(), 0);
+					}
+				}
+			}
 		}
 	}
 }
