@@ -9,5 +9,6 @@ struct BoxTrigger : Actor
 	struct MeshComponent* boxMesh;
 
 	BoxTrigger();
+	void Tick(double deltaTime);
 	virtual Properties GetProps() override;
 };

@@ -45,5 +45,5 @@ struct PipelineStateObject
 	Buffer vertexBuffer;
 	Buffer indexBuffer;
 	Sampler sampler;
-	RastState rastState;
+	RastState* rastState;
 };

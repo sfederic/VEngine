@@ -41,7 +41,7 @@ void MeshComponent::Create()
 	}
 
 	pso->sampler.data = renderer.CreateSampler();
-	pso->rastState = *renderer.rastStateMap["solid"];
+	pso->rastState = renderer.rastStateMap["solid"];
 
 	existingPiplineStateObjects[filename] = pso;
 }

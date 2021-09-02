@@ -319,7 +319,7 @@ void Renderer::RenderMeshComponents()
 
 	for (MeshComponent* mesh : MeshComponent::system.components)
 	{
-		context->RSSetState(mesh->pso->rastState.data);
+		context->RSSetState(mesh->pso->rastState->data);
 
 		//const FLOAT blendState[4] = { 0.f };
 		//context->OMSetBlendState(blendStateAlphaToCoverage, blendState, 0xFFFFFFFF);
@@ -355,7 +355,7 @@ void Renderer::RenderInstanceMeshComponents()
 
 	for (InstanceMeshComponent* instanceMesh : InstanceMeshComponent::system.components)
 	{
-		context->RSSetState(instanceMesh->pso->rastState.data);
+		context->RSSetState(instanceMesh->pso->rastState->data);
 
 		context->VSSetShader(instanceMesh->shader->vertexShader, nullptr, 0);
 		context->PSSetShader(instanceMesh->shader->pixelShader, nullptr, 0);

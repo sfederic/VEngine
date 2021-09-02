@@ -8,7 +8,14 @@ BoxTrigger::BoxTrigger()
 	rootComponent = boxMesh;
 
 	//set mesh to wireframe for debugging purposes
-	boxMesh->pso->rastState = *renderer.rastStateMap["wireframe"];
+	boxMesh->pso->rastState = renderer.rastStateMap["wireframe"];
+}
+
+void BoxTrigger::Tick(double deltaTime)
+{
+	__super::Tick(deltaTime);
+
+
 }
 
 Properties BoxTrigger::GetProps()
