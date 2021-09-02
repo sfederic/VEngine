@@ -206,7 +206,7 @@
     <ClCompile Include="Code\Editor\PropertyWidgets\StringWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\BoxTrigger.cpp">
+    <ClCompile Include="Code\Components\BoxTriggerComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Render\PipelineObjects.cpp">
@@ -358,7 +358,7 @@
     <ClInclude Include="Code\Editor\PropertyWidgets\StringWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\BoxTrigger.h">
+    <ClInclude Include="Code\Components\BoxTriggerComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

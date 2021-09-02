@@ -112,7 +112,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Code\Actors\BoxTrigger.cpp" />
+    <ClCompile Include="Code\Components\BoxTriggerComponent.cpp" />
     <ClCompile Include="Code\Actors\ActorSystemCache.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\SpinBox.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\StringWidget.cpp" />
@@ -128,7 +128,7 @@
     <ClCompile Include="Code\Actors\MeshActor.cpp" />
     <ClCompile Include="Code\Components\ComponentSystemCache.cpp" />
     <ClCompile Include="Code\Editor\SystemDock.cpp" />
-    <ClInclude Include="Code\Actors\BoxTrigger.h" />
+    <ClInclude Include="Code\Components\BoxTriggerComponent.h" />
     <ClInclude Include="Code\Animation\AnimationStructures.h" />
     <ClInclude Include="Code\Actors\Actor.h" />
     <ClInclude Include="Code\Actors\ActorSystem.h" />
