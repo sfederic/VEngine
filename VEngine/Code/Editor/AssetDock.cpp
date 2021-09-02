@@ -90,11 +90,52 @@ void AssetDock::AssetFolderClicked()
 
     assetIcons->clear();
 
-    QPixmap iconImage = QPixmap("Icons/play_icon.png");
-    QIcon icon = QIcon(iconImage);
+    QPixmap playIcon = QPixmap("Icons/play_icon.png");
+    QPixmap fontIcon = QPixmap("Icons/font_icon.png");
+    QPixmap iconIcon = QPixmap("Icons/icon_icon.png");
+    QPixmap libIcon = QPixmap("Icons/lib_icon.png");
+    QPixmap meshIcon = QPixmap("Icons/mesh_icon.png");
+    QPixmap worldIcon = QPixmap("Icons/world_icon.png");
+    QPixmap codeIcon = QPixmap("Icons/code_icon.png");
+
+    auto fileExtension = std::filesystem::path(path.toStdString()).extension();
+    auto extension = fileExtension.c_str();
 
     for (int i = 0; i < list.count(); i++)
     {
+        QIcon icon;;
+
+        QString str = list[i];
+
+        if (str.contains(".ttf"))
+        {
+            icon = QIcon(fontIcon);
+        }
+        else if (str.contains(".fbx"))
+        {
+            icon = QIcon(meshIcon);
+        }
+        else if (str.contains(".lib") || str.contains(".dll"))
+        {
+            icon = QIcon(libIcon);
+        }
+        else if (str.contains(".sav"))
+        {
+            icon = QIcon(worldIcon);
+        }
+        else if (str.contains(".h") || str.contains(".cpp"))
+        {
+            icon = QIcon(codeIcon);
+        } 
+        else if (str.contains(".png") || str.contains(".jpg"))
+        {
+            icon = QIcon(iconIcon);
+        }     
+        else
+        {
+            icon = QIcon(playIcon);
+        }
+
         QListWidgetItem* item = new QListWidgetItem(icon, list[i]);
         item->setSizeHint(QSize(100, 100));
         assetIcons->addItem(item);
