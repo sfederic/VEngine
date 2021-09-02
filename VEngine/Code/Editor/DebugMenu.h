@@ -25,6 +25,8 @@ struct DebugMenu
 	bool profileMenuOpen = false;
 	bool propsMenuOpen = false;
 	bool commandsMenuOpen = false;
+	bool gpuMenuOpen = false;
+	bool actorInspectMenuOpen = false;
 
 	void Init();
 	void Tick(double deltaTime);
@@ -32,6 +34,7 @@ struct DebugMenu
 	void AddNotification(const wchar_t* note);
 	void RenderNotifications(double deltaTime);
 	void RenderFPSMenu(double deltaTime);
+	void RenderGPUMenu();
 	void RenderProfileMenu();
 	void RenderSnappingMenu();
 	void RenderActorProps();

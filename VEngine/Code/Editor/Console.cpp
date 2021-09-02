@@ -86,14 +86,6 @@ void Console::ExecuteString()
 	{
 		debugMenu.fpsMenuOpen = !debugMenu.fpsMenuOpen;
 	}
-	/*else if (consoleString == ExecuteStrings::ACTOR)
-	{
-		debugMenu.bActorStatsMenuOpen = !debugMenu.bActorStatsMenuOpen;
-	}
-	else if (consoleString == ExecuteStrings::INSPECT)
-	{
-		debugMenu.bActorInspectMenuOpen = !debugMenu.bActorInspectMenuOpen;
-	}*/
 	else if (consoleString == ExecuteStrings::PROPS)
 	{
 		debugMenu.propsMenuOpen = !debugMenu.propsMenuOpen;
@@ -101,6 +93,10 @@ void Console::ExecuteString()
 	else if (consoleString == ExecuteStrings::COMMANDS)
 	{
 		debugMenu.commandsMenuOpen = !debugMenu.commandsMenuOpen;
+	}
+	else if (consoleString == ExecuteStrings::GPU)
+	{
+		debugMenu.gpuMenuOpen = !debugMenu.gpuMenuOpen;
 	}
 	else
 	{

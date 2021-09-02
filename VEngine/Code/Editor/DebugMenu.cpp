@@ -11,11 +11,12 @@
 #include "Profile.h"
 #include "WorldEditor.h"
 #include "Actors/Actor.h"
+#include "Actors/IActorSystem.h"
 #include "Components/Component.h"
 #include "UI/UISystem.h"
 #include "Commands/CommandSystem.h"
 #include "Commands/ICommand.h"
-
+#include "Physics/Raycast.h"
 #include "Input.h"
 
 DebugMenu debugMenu;
@@ -54,12 +55,9 @@ void DebugMenu::Tick(double deltaTime)
 	transformGizmo.Tick();
 
 	RenderFPSMenu(deltaTime);
-	//RenderGPUMenu();
+	RenderGPUMenu();
 	RenderProfileMenu();
 	RenderSnappingMenu();
-	//RenderActorStatsMenu();
-	//RenderActorSpawnMenu();
-	//RenderActorInspectMenu();
 	RenderActorProps();
 	RenderCommandsMenu();
 
@@ -218,45 +216,45 @@ void DebugMenu::RenderFPSMenu(double deltaTime)
 	Profile::End(std::source_location::current());
 }
 
-//void DebugMenu::RenderGPUMenu()
-//{
-//	if (bGPUMenuOpen)
-//	{
-//		ImGui::Begin("GPU Info");
+void DebugMenu::RenderGPUMenu()
+{
+	if (gpuMenuOpen)
+	{
+		ImGui::Begin("GPU Info");
 
-//		DXGI_ADAPTER_DESC1 adapterDesc = gRenderSystem.adaptersDesc.front();
+		DXGI_ADAPTER_DESC1 adapterDesc = renderer.gpuAdaptersDesc.front();
 
-//		ImGui::Text("Device: %ls", adapterDesc.Description);
-//		ImGui::Text("System Memory: %zu", adapterDesc.DedicatedSystemMemory);
-//		ImGui::Text("Video Memory: %zu", adapterDesc.DedicatedVideoMemory);
-//		ImGui::Text("Shared System Memory: %zu", adapterDesc.SharedSystemMemory);
-//		ImGui::Spacing();
+		ImGui::Text("Device: %ls", adapterDesc.Description);
+		ImGui::Text("System Memory: %zu", adapterDesc.DedicatedSystemMemory);
+		ImGui::Text("Video Memory: %zu", adapterDesc.DedicatedVideoMemory);
+		ImGui::Text("Shared System Memory: %zu", adapterDesc.SharedSystemMemory);
+		ImGui::Spacing();
 
-//		static bool showAllDevices;
-//		if (!showAllDevices && ImGui::Button("Show all Devices"))
-//		{
-//			showAllDevices = true;
-//		}
-//		else if (showAllDevices && ImGui::Button("Hide all Devices"))
-//		{
-//			showAllDevices = false;
-//		}
+		static bool showAllDevices;
+		if (!showAllDevices && ImGui::Button("Show all Devices"))
+		{
+			showAllDevices = true;
+		}
+		else if (showAllDevices && ImGui::Button("Hide all Devices"))
+		{
+			showAllDevices = false;
+		}
 
-//		if (showAllDevices)
-//		{
-//			for (int i = 1; i < gRenderSystem.adaptersDesc.size(); i++)
-//			{
-//				ImGui::Text("Device: %ls", gRenderSystem.adaptersDesc[i].Description);
-//				ImGui::Text("System Memory: %zu", gRenderSystem.adaptersDesc[i].DedicatedSystemMemory);
-//				ImGui::Text("Video Memory: %zu", gRenderSystem.adaptersDesc[i].DedicatedVideoMemory);
-//				ImGui::Text("Shared System Memory: %zu", gRenderSystem.adaptersDesc[i].SharedSystemMemory);
-//				ImGui::Spacing();
-//			}
-//		}
+		if (showAllDevices)
+		{
+			for (int i = 1; i < renderer.gpuAdaptersDesc.size(); i++)
+			{
+				ImGui::Text("Device: %ls", renderer.gpuAdaptersDesc[i].Description);
+				ImGui::Text("System Memory: %zu", renderer.gpuAdaptersDesc[i].DedicatedSystemMemory);
+				ImGui::Text("Video Memory: %zu", renderer.gpuAdaptersDesc[i].DedicatedVideoMemory);
+				ImGui::Text("Shared System Memory: %zu", renderer.gpuAdaptersDesc[i].SharedSystemMemory);
+				ImGui::Spacing();
+			}
+		}
 
-//		ImGui::End();
-//	}
-//}
+		ImGui::End();
+	}
+}
 
 void DebugMenu::RenderProfileMenu()
 {
@@ -306,65 +304,22 @@ void DebugMenu::RenderSnappingMenu()
 	}
 }
 
-//void DebugMenu::RenderActorStatsMenu()
-//{
-//	if (bActorStatsMenuOpen)
-//	{
-//		ImGui::Begin("Actor Stats");
-
-//		World* world = GetWorld();
-//		ImGui::Text("Num actors rendered: %d", world->GetNumOfActorsInWorld());
-
-//		ImGui::End();
-//	}
-//}
-
-//void DebugMenu::RenderActorSpawnMenu()
-//{
-//	if (bActorSpawnMenuOpen)
-//	{
-//		ImGui::Begin("Active Actor System");
-//		ImGui::SetWindowPos(ImVec2(10, 10));
-//		ImGui::SetWindowSize(ImVec2(200, 50));
-
-//		ActorSystem* activeAS = ActorSystemFactory::GetCurrentActiveActorSystem();
-//		if (activeAS)
-//		{
-//			ImGui::Text("%s", activeAS->name.c_str());
-//		}
-//		else
-//		{
-//			ImGui::Text("None");
-//		}
-
-//		ImGui::End();
-//	}
-//}
-
 //void DebugMenu::RenderActorInspectMenu()
 //{
-//	if (bActorInspectMenuOpen)
+//	if (actorInspectMenuOpen)
 //	{
 //		ImGui::Begin("Actor Inspect");
-//		ImGui::SetWindowPos(ImVec2(gUISystem.mousePos.x, gUISystem.mousePos.y));
-//		ImGui::SetWindowSize(ImVec2(300, 250));
-
+//
 //		Ray ray;
 //		if (RaycastAllFromScreen(ray))
 //		{
 //			Actor* actor = ray.hitActor;
 //			if (actor)
 //			{
-//				//TODO: this is just dummy data to see what the menu can do.
-//				//Come back here when there is more actor specific instance data to show
-//				//eg. materials, buffers, other weird things
-//				ImGui::Text("Linked System: %s", actor->linkedActorSystem->name.c_str());
-//				ImGui::Text("Shader: %s", actor->linkedActorSystem->shaderName.c_str());
-//				ImGui::Text("Texture: %s", actor->linkedActorSystem->textureName.c_str());
-//				ImGui::Text("Model: %s", actor->linkedActorSystem->modelName.c_str());
+//
 //			}
 //		}
-
+//
 //		ImGui::End();
 //	}
 //}
