@@ -130,6 +130,7 @@
     <ClCompile Include="Code\Render\Materials\Material.cpp" />
     <ClCompile Include="Code\Render\Materials\MaterialSystem.cpp" />
     <ClCompile Include="Code\Render\TextureSystem.cpp" />
+    <ClCompile Include="Code\Render\RenderUtils.cpp" />
     <ClInclude Include="Code\Components\BoxTriggerComponent.h" />
     <ClInclude Include="Code\Animation\AnimationStructures.h" />
     <ClInclude Include="Code\Actors\Actor.h" />
@@ -255,6 +256,7 @@
     <ClInclude Include="Code\Render\Materials\Material.h" />
     <ClInclude Include="Code\Render\Materials\MaterialSystem.h" />
     <ClInclude Include="Code\Render\TextureSystem.h" />
+    <ClInclude Include="Code\Render\RenderUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

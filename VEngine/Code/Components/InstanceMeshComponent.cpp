@@ -1,5 +1,5 @@
 #include "InstanceMeshComponent.h"
-#include "Render/Renderer.h"
+#include "Render/RenderUtils.h"
 
 InstanceMeshComponent::InstanceMeshComponent(
 	uint32_t meshInstanceRenderCount_, const char* filename, const wchar_t* shader)
@@ -30,11 +30,11 @@ void InstanceMeshComponent::Create()
 	}
 
 	//Setup shader buffers
-	structuredBuffer = renderer.CreateStructuredBuffer(sizeof(InstanceData) * meshInstanceRenderCount,
+	structuredBuffer = RenderUtils::CreateStructuredBuffer(sizeof(InstanceData) * meshInstanceRenderCount,
 		sizeof(InstanceData), instanceData.data());
 	assert(structuredBuffer);
 
-	srv = renderer.CreateSRVForMeshInstance(structuredBuffer, meshInstanceRenderCount);
+	srv = RenderUtils::CreateSRVForMeshInstance(structuredBuffer, meshInstanceRenderCount);
 	assert(srv);
 }
 

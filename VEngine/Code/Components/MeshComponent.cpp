@@ -1,6 +1,6 @@
 #include "MeshComponent.h"
 #include "FBXImporter.h"
-#include "Render/Renderer.h"
+#include "Render/RenderUtils.h"
 #include "Render/ShaderSystem.h"
 #include "Render/Materials/MaterialSystem.h"
 
@@ -33,8 +33,8 @@ void MeshComponent::Create()
 	auto psoIt = existingPiplineStateObjects.find(meshFilename);
 	if (psoIt == existingPiplineStateObjects.end())
 	{
-		pso->vertexBuffer.data = renderer.CreateVertexBuffer(data);
-		pso->indexBuffer.data = renderer.CreateIndexBuffer(data);
+		pso->vertexBuffer.data = RenderUtils::CreateVertexBuffer(data);
+		pso->indexBuffer.data = RenderUtils::CreateIndexBuffer(data);
 	}
 	else
 	{

@@ -48,11 +48,8 @@ struct Renderer
 
 	bool drawBoundingBoxes = false;
 
-public:
 	void Init(void* window, int viewportWidth, int viewportHeight);
 	void Tick();
-
-private:
 	void CreateFactory();
 	void CreateDevice();
 	void CreateSwapchain(HWND window);
@@ -62,17 +59,6 @@ private:
 	void CreateBlendStates();
 	void CreateMainConstantBuffers();
 	void CheckSupportedFeatures();
-
-public:
-	//TODO: think about seperating these into a Renderutils file
-	ID3D11Buffer* CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, const void* initData);
-	ID3D11Buffer* CreateVertexBuffer(MeshDataProxy* meshData);
-	ID3D11Buffer* CreateIndexBuffer(MeshDataProxy* meshData);
-	ID3D11ShaderResourceView* CreateSRVForMeshInstance(ID3D11Buffer* structuredBuffer, UINT numBufferElements);
-	ID3D11Buffer* CreateStructuredBuffer(UINT byteWidth, UINT byteStride, const void* initData);
-	Texture2D* CreateTexture(std::wstring textureFilename);
-	Sampler* CreateSampler();
-
 	void RenderSetup();
 	void Render();
 	void RenderMeshComponents();

@@ -1,0 +1,103 @@
+#include "RenderUtils.h"
+#include "RenderTypes.h"
+#include "Debug.h"
+#include <WICTextureLoader.h>
+#include "TextureSystem.h"
+
+namespace RenderUtils
+{
+	ID3D11Device* device;
+
+	ID3D11Buffer* CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, const void* initData)
+	{
+		ID3D11Buffer* buffer;
+
+		D3D11_BUFFER_DESC desc = {};
+		desc.ByteWidth = byteWidth;
+		desc.BindFlags = bindFlags;
+
+		D3D11_SUBRESOURCE_DATA data = {};
+		data.pSysMem = initData;
+
+		HR(device->CreateBuffer(&desc, &data, &buffer));
+
+		return buffer;
+	}
+
+	ID3D11Buffer* CreateVertexBuffer(MeshDataProxy* meshData)
+	{
+		return CreateDefaultBuffer(meshData->GetVerticesByteWidth(),
+			D3D11_BIND_VERTEX_BUFFER, meshData->vertices->data());
+	}
+
+	ID3D11Buffer* CreateIndexBuffer(MeshDataProxy* meshData)
+	{
+		return CreateDefaultBuffer(meshData->GetIndicesByteWidth(),
+			D3D11_BIND_INDEX_BUFFER, meshData->indices->data());
+	}
+
+	ID3D11ShaderResourceView* CreateSRVForMeshInstance(ID3D11Buffer* structuredBuffer, UINT numBufferElements)
+	{
+		D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
+		srvDesc.Format = DXGI_FORMAT_UNKNOWN;
+		srvDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFEREX;
+		srvDesc.BufferEx.NumElements = numBufferElements;
+
+		ID3D11ShaderResourceView* srv = nullptr;
+		HR(device->CreateShaderResourceView(structuredBuffer, &srvDesc, &srv));
+
+		return srv;
+	}
+
+	ID3D11Buffer* CreateStructuredBuffer(UINT byteWidth, UINT byteStride, const void* initData)
+	{
+		ID3D11Buffer* buffer;
+
+		D3D11_BUFFER_DESC desc = {};
+		desc.ByteWidth = byteWidth;
+		desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+		desc.StructureByteStride = byteStride;
+		desc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
+
+		D3D11_SUBRESOURCE_DATA data = {};
+		data.pSysMem = initData;
+
+		HR(device->CreateBuffer(&desc, &data, &buffer));
+
+		return buffer;
+	}
+
+	Sampler* CreateSampler()
+	{
+		//TODO: gotta find a way to do a 'Static Sampler' like how d3d12 does it. 
+		//Majoirty of samplers are going to be the same.
+
+		D3D11_SAMPLER_DESC sampDesc = {};
+		sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+		sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+		sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+		sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+
+		ID3D11SamplerState* samplerState;
+		HR(device->CreateSamplerState(&sampDesc, &samplerState));
+
+		auto sampler = new Sampler(sampDesc, samplerState);
+		return sampler;
+	}
+
+	Texture2D* CreateTexture(std::wstring textureFilename)
+	{
+		Texture2D* texture = textureSystem.FindTexture2D(textureFilename);
+
+		std::wstring path = L"Textures/" + texture->filename;
+
+		ID3D11Resource* resource;
+		ID3D11ShaderResourceView* srv;
+		HR(CreateWICTextureFromFile(device, path.c_str(), &resource, &srv));
+
+		texture->data = resource;
+		texture->srv = srv;
+
+		return texture;
+	}
+}

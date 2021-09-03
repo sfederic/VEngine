@@ -1,6 +1,6 @@
 #include "TextureSystem.h"
 #include "PipelineObjects.h"
-#include "Renderer.h"
+#include "Render/RenderUtils.h"
 
 TextureSystem textureSystem;
 
@@ -27,6 +27,6 @@ void TextureSystem::CreateAllTextures()
 	for (auto textureIt : texture2DMap)
 	{
 		Texture2D* texture = textureIt.second;
-		texture = renderer.CreateTexture(textureIt.first);
+		texture = RenderUtils::CreateTexture(textureIt.first);
 	}
 }
