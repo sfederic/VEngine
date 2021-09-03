@@ -12,7 +12,7 @@
 #include "Actors/DebugBox.h"
 #include "Input.h"
 #include "World.h"
-#include "Materials/Material.h"
+#include "Material.h"
 #include "Profile.h"
 #include "RenderUtils.h"
 
@@ -252,18 +252,18 @@ void Renderer::RenderMeshComponents()
 		//const FLOAT blendState[4] = { 0.f };
 		//context->OMSetBlendState(blendStateAlphaToCoverage, blendState, 0xFFFFFFFF);
 
-		Material* meshMaterial = mesh->material;
+		PipelineStateObject* pso = mesh->pso;
 
-		context->RSSetState(meshMaterial->rastState->data);
+		context->RSSetState(pso->rastState->data);
 
-		context->VSSetShader(meshMaterial->shader->vertexShader, nullptr, 0);
-		context->PSSetShader(meshMaterial->shader->pixelShader, nullptr, 0);
+		context->VSSetShader(pso->shader->vertexShader, nullptr, 0);
+		context->PSSetShader(pso->shader->pixelShader, nullptr, 0);
 
-		context->PSSetSamplers(0, 1, &meshMaterial->sampler->data);
-		context->PSSetShaderResources(0, 1, &meshMaterial->texture->srv);
+		context->PSSetSamplers(0, 1, &pso->sampler->data);
+		context->PSSetShaderResources(0, 1, &pso->texture->srv);
 
-		context->IASetVertexBuffers(0, 1, &mesh->pso->vertexBuffer.data, &stride, &offset);
-		context->IASetIndexBuffer(mesh->pso->indexBuffer.data, DXGI_FORMAT_R32_UINT, 0);
+		context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &stride, &offset);
+		context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
 
 		shaderMatrices.model = mesh->GetWorldMatrix();
 
@@ -288,17 +288,17 @@ void Renderer::RenderInstanceMeshComponents()
 
 	for (InstanceMeshComponent* instanceMesh : InstanceMeshComponent::system.components)
 	{
-		Material* instanceMeshMaterial = instanceMesh->material;
+		PipelineStateObject* pso = instanceMesh->pso;
 
-		context->RSSetState(instanceMeshMaterial->rastState->data);
+		context->RSSetState(pso->rastState->data);
 
-		context->VSSetShader(instanceMeshMaterial->shader->vertexShader, nullptr, 0);
-		context->PSSetShader(instanceMeshMaterial->shader->pixelShader, nullptr, 0);
+		context->VSSetShader(pso->shader->vertexShader, nullptr, 0);
+		context->PSSetShader(pso->shader->pixelShader, nullptr, 0);
 
-		context->PSSetSamplers(0, 1, &instanceMeshMaterial->sampler->data);
+		context->PSSetSamplers(0, 1, &pso->sampler->data);
 
-		context->IASetVertexBuffers(0, 1, &instanceMesh->pso->vertexBuffer.data, &stride, &offset);
-		context->IASetIndexBuffer(instanceMesh->pso->indexBuffer.data, DXGI_FORMAT_R32_UINT, 0);
+		context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &stride, &offset);
+		context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
 
 		//Update instance data and set SRV
 		context->UpdateSubresource(instanceMesh->structuredBuffer, 0, nullptr, instanceMesh->instanceData.data(), 0, 0);
@@ -322,7 +322,7 @@ void Renderer::RenderBounds()
 		context->VSSetShader(shader->vertexShader, nullptr, 0);
 		context->PSSetShader(shader->pixelShader, nullptr, 0);
 
-		context->IASetVertexBuffers(0, 1, &debugBox.boxMesh->pso->vertexBuffer.data, &stride, &offset);
+		context->IASetVertexBuffers(0, 1, &debugBox.boxMesh->pso->vertexBuffer->data, &stride, &offset);
 
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, cbMatrices.GetAddressOf());
 

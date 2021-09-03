@@ -11,8 +11,8 @@
 #include "Editor/DebugMenu.h"
 
 #include "Render/TextureSystem.h"
+#include "Render/RenderUtils.h"
 #include "Components/MeshComponent.h"
-#include "Render/Materials/Material.h"
 
 WorldEditor worldEditor;
 
@@ -48,10 +48,6 @@ void WorldEditor::HandleActorPicking()
 			}
 			else
 			{
-				Texture2D* texture = textureSystem.FindTexture2D(textureSystem.selectedTextureInEditor);
-				auto meshes = screenPickRay.hitActor->GetComponentsOfType<MeshComponent>();
-				meshes[0]->material->texture = texture;
-
 				pickedActor = screenPickRay.hitActor;
 				editor->SetActorProps(pickedActor);
 			}

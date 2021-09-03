@@ -1,26 +1,13 @@
 NormalActor
-2
+1
 Position
-0 2 0
-Mesh Filename
-cube.fbx
+0 0 0
 Scale
 1 1 1
 Rotation
 -0 0 -0 1
 Name
 NormalActor0
-next
-Position
--3 0 0
-Mesh Filename
-cube.fbx
-Scale
-1 1 1
-Rotation
--0.342249 0 -0 0.939609
-Name
-NormalActor1
 next
 MeshActor
 0

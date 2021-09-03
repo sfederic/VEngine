@@ -2,6 +2,8 @@
 #include <string>
 #include <d3d11.h>
 
+struct ShaderItem;
+
 struct Buffer
 {
 	ID3D11Buffer* data = nullptr;
@@ -11,7 +13,7 @@ struct Texture2D
 {
 	std::wstring filename;
 	ID3D11Resource* data = nullptr;
-	ID3D11ShaderResourceView* srv;
+	ID3D11ShaderResourceView* srv = nullptr;
 
 	Texture2D(std::wstring filename_);
 };
@@ -44,10 +46,30 @@ struct BlendState
 	ID3D11BlendState* data = nullptr;
 };
 
+struct MeshBuffers
+{
+	Buffer* vertexBuffer = nullptr;
+	Buffer* indexBuffer = nullptr;
+};
+
 struct PipelineStateObject
 {
-	PipelineStateObject() {}
+	Buffer* vertexBuffer = nullptr;
+	Buffer* indexBuffer = nullptr;
+	Texture2D* texture = nullptr;
+	Sampler* sampler = nullptr;
+	RastState* rastState = nullptr;
+	ShaderItem* shader = nullptr;
 
-	Buffer vertexBuffer;
-	Buffer indexBuffer;
+	std::wstring textureFilename;
+	std::wstring shaderFilename;
+
+	PipelineStateObject(std::wstring textureFilename_, std::wstring shaderFilename_);
+	void Create();
+	void SetVertexBuffer(Buffer* vertexBuffer);
+	void SetIndexBuffer(Buffer* indexBuffer);
+	void SetTexture(Texture2D* texture);
+	void SetSampler(Sampler* sampler);
+	void SetRastState(RastState* rastState);
+	void SetShader(ShaderItem* shaderItem);
 };

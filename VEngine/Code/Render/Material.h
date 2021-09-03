@@ -13,11 +13,6 @@ struct Material
 {
 	XMFLOAT4 ambient = XMFLOAT4(0.f, 0.f, 0.f, 1.f);
 
-	Texture2D* texture = nullptr;
-	Sampler* sampler = nullptr;
-	RastState* rastState = nullptr;
-	ShaderItem* shader = nullptr;
-
 	std::wstring textureFilename;
 	std::wstring shaderFilename;
 

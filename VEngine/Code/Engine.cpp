@@ -16,7 +16,6 @@
 #include "Components/MeshComponent.h"
 #include "Components/InstanceMeshComponent.h"
 #include "Commands/CommandSystem.h"
-#include "Render/Materials/MaterialSystem.h"
 #include "Render/TextureSystem.h"
 #include "Render/RenderUtils.h"
 
@@ -42,7 +41,6 @@ void Engine::Init(int argc, char* argv[])
 	MeshComponent::system.Init();
 	InstanceMeshComponent::system.Init();
 
-	materialSystem.CreateAllMaterials();
 	textureSystem.CreateAllTextures();
 
 	world.Init();

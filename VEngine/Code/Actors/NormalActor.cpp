@@ -4,7 +4,6 @@
 #include "Camera.h"
 #include "VMath.h"
 #include "Input.h"
-#include "Render/Materials/Material.h"
 
 NormalActor::NormalActor()
 {
@@ -13,8 +12,6 @@ NormalActor::NormalActor()
 
 	camera = CameraComponent::system.Add(this, CameraComponent(XMFLOAT3(0.f, 5.f, -20.f), false));
 	rootComponent->AddChild(camera);
-
-	nextMaterial = new Material(L"floor.jpg", L"DefaultShader.hlsl");
 }
 
 void NormalActor::Tick(double deltaTime)
@@ -35,6 +32,6 @@ void NormalActor::Tick(double deltaTime)
 Properties NormalActor::GetProps()
 {
 	auto props = Actor::GetProps();
-	props.Add("Mesh Filename", &mesh1->meshFilename);
+	props.Add("Texture Name", &mesh1->pso->texture->filename);
 	return props;
 }

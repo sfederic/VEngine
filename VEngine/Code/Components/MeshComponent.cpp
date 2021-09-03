@@ -2,18 +2,14 @@
 #include "FBXImporter.h"
 #include "Render/RenderUtils.h"
 #include "Render/ShaderSystem.h"
-#include "Render/Materials/MaterialSystem.h"
 
-std::unordered_map<std::string, PipelineStateObject*> existingPiplineStateObjects;
+//Vertex and index buffers linked to a mesh filename to copy over to new PSOs
+std::unordered_map<std::string, MeshBuffers> existingMeshBuffers;
 
-MeshComponent::MeshComponent(const char* filename_, const wchar_t* textureFilename)
+MeshComponent::MeshComponent(const char* filename_, const wchar_t* textureFilename_)
 {
 	meshFilename = filename_;
-
-	material = materialSystem.Find(textureFilename);
-
-	data = new MeshDataProxy();
-	pso = new PipelineStateObject();
+	textureFilename = textureFilename_;
 }
 
 void MeshComponent::Tick(double deltaTime)
@@ -22,6 +18,9 @@ void MeshComponent::Tick(double deltaTime)
 
 void MeshComponent::Create()
 {
+	data = new MeshDataProxy();
+	pso = new PipelineStateObject(textureFilename, L"DefaultShader.hlsl");
+
 	//Import mesh (set up bounding box in here too so you don't need to re-create bounds)
 	fbxImporter.Import(meshFilename.c_str(), data);
 
@@ -30,19 +29,26 @@ void MeshComponent::Create()
 		&data->vertices->at(0).pos, sizeof(Vertex));
 
 	//Setup pipeline objects
-	auto psoIt = existingPiplineStateObjects.find(meshFilename);
-	if (psoIt == existingPiplineStateObjects.end())
+	auto psoIt = existingMeshBuffers.find(meshFilename);
+	if (psoIt == existingMeshBuffers.end())
 	{
-		pso->vertexBuffer.data = RenderUtils::CreateVertexBuffer(data);
-		pso->indexBuffer.data = RenderUtils::CreateIndexBuffer(data);
+		pso->vertexBuffer = new Buffer();
+		pso->indexBuffer = new Buffer();
+		pso->vertexBuffer->data = RenderUtils::CreateVertexBuffer(data);
+		pso->indexBuffer->data = RenderUtils::CreateIndexBuffer(data);
 	}
 	else
 	{
-		pso->vertexBuffer = psoIt->second->vertexBuffer;
-		pso->indexBuffer = psoIt->second->indexBuffer;
+		pso->vertexBuffer = psoIt->second.vertexBuffer;
+		pso->indexBuffer = psoIt->second.indexBuffer;
 	}
 
-	existingPiplineStateObjects[meshFilename] = pso;
+	pso->Create();
+
+	MeshBuffers meshBuffers = {};
+	meshBuffers.vertexBuffer = pso->vertexBuffer;
+	meshBuffers.indexBuffer = pso->indexBuffer;
+	existingMeshBuffers[meshFilename] = meshBuffers;
 }
 
 Properties MeshComponent::GetProps()
