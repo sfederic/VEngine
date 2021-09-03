@@ -85,6 +85,7 @@ namespace RenderUtils
 
 	Sampler* GetDefaultSampler()
 	{
+		assert(defaultSampler);
 		return defaultSampler;
 	}
 

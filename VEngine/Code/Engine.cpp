@@ -27,8 +27,12 @@ void Engine::Init(int argc, char* argv[])
 	Core::Init();
 
 	editor->Init(argc, argv);
+
 	renderer.Init(editor->windowHwnd, editor->viewportWidth, editor->viewportHeight);
+	RenderUtils::defaultSampler = RenderUtils::CreateSampler();
+
 	fbxImporter.Init();
+
 	uiSystem.Init((void*)renderer.swapchain.Get());
 	debugMenu.Init();
 
@@ -40,7 +44,6 @@ void Engine::Init(int argc, char* argv[])
 
 	materialSystem.CreateAllMaterials();
 	textureSystem.CreateAllTextures();
-	RenderUtils::defaultSampler = RenderUtils::CreateSampler();
 
 	world.Init();
 	editor->UpdateWorldList();
