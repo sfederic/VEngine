@@ -2,18 +2,18 @@
 #include "FBXImporter.h"
 #include "Render/Renderer.h"
 #include "Render/ShaderSystem.h"
+#include "Render/Materials/MaterialSystem.h"
 
 std::unordered_map<std::string, PipelineStateObject*> existingPiplineStateObjects;
 
-MeshComponent::MeshComponent(const char* filename_, std::wstring textureName, const wchar_t* shaderFilename)
+MeshComponent::MeshComponent(const char* filename_, const wchar_t* textureFilename)
 {
-	filename = filename_;
-	textureFilename = textureName;
+	meshFilename = filename_;
+
+	material = materialSystem.Find(textureFilename);
 
 	data = new MeshDataProxy();
 	pso = new PipelineStateObject();
-
-	shader = shaderSystem.shaderMap.find(shaderFilename)->second;
 }
 
 void MeshComponent::Tick(double deltaTime)
@@ -23,14 +23,14 @@ void MeshComponent::Tick(double deltaTime)
 void MeshComponent::Create()
 {
 	//Import mesh (set up bounding box in here too so you don't need to re-create bounds)
-	fbxImporter.Import(filename.c_str(), data);
+	fbxImporter.Import(meshFilename.c_str(), data);
 
 	//Setup bounds
 	BoundingOrientedBox::CreateFromPoints(boundingBox, data->vertices->size(),
 		&data->vertices->at(0).pos, sizeof(Vertex));
 
 	//Setup pipeline objects
-	auto psoIt = existingPiplineStateObjects.find(filename);
+	auto psoIt = existingPiplineStateObjects.find(meshFilename);
 	if (psoIt == existingPiplineStateObjects.end())
 	{
 		pso->vertexBuffer.data = renderer.CreateVertexBuffer(data);
@@ -42,21 +42,12 @@ void MeshComponent::Create()
 		pso->indexBuffer = psoIt->second->indexBuffer;
 	}
 
-	//Create texture and sampler
-	if (!textureFilename.empty())
-	{
-		pso->texture = renderer.CreateTexture(textureFilename.c_str());
-		pso->sampler = renderer.CreateSampler();
-	}
-
-	pso->rastState = renderer.rastStateMap["solid"];
-
-	existingPiplineStateObjects[filename] = pso;
+	existingPiplineStateObjects[meshFilename] = pso;
 }
 
 Properties MeshComponent::GetProps()
 {
 	Properties props("MeshComponent");
-	props.Add("Filename", &filename);
+	props.Add("Mesh Filename", &meshFilename);
 	return props;
 }

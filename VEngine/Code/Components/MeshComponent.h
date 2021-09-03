@@ -7,20 +7,20 @@
 #include "Transform.h"
 
 struct ShaderItem;
+struct Material;
 
 struct MeshComponent : SpatialComponent
 {
 	COMPONENT_SYSTEM(MeshComponent)
 
-	std::string filename;
-	std::wstring textureFilename;
+	std::string meshFilename;
 
+	Material* material = nullptr;
 	MeshDataProxy* data = nullptr;
 	PipelineStateObject* pso = nullptr;
-	ShaderItem* shader = nullptr;
 	int number;
 
-	MeshComponent(const char* filename_, std::wstring textureName = L"", const wchar_t* shader = L"DefaultShader.hlsl");
+	MeshComponent(const char* filename_, const wchar_t* textureFilename);
 	virtual void Tick(double deltaTime) override;
 	virtual void Create() override;
 	virtual Properties GetProps();

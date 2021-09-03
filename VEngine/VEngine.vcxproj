@@ -116,7 +116,6 @@
     <ClCompile Include="Code\Actors\ActorSystemCache.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\SpinBox.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\StringWidget.cpp" />
-    <ClCompile Include="Code\Render\Material.cpp" />
     <ClCompile Include="Code\Render\PipelineObjects.cpp" />
     <ClCompile Include="Code\VString.cpp" />
     <ClCompile Include="Code\UI\Widget.cpp" />
@@ -128,6 +127,8 @@
     <ClCompile Include="Code\Actors\MeshActor.cpp" />
     <ClCompile Include="Code\Components\ComponentSystemCache.cpp" />
     <ClCompile Include="Code\Editor\SystemDock.cpp" />
+    <ClCompile Include="Code\Render\Materials\Material.cpp" />
+    <ClCompile Include="Code\Render\Materials\MaterialSystem.cpp" />
     <ClInclude Include="Code\Components\BoxTriggerComponent.h" />
     <ClInclude Include="Code\Animation\AnimationStructures.h" />
     <ClInclude Include="Code\Actors\Actor.h" />
@@ -220,7 +221,6 @@
     <ClCompile Include="Code\World.cpp" />
     <ClCompile Include="Code\WorldEditor.cpp" />
     <ClCompile Include="Code\Profile.cpp" />
-    <ClInclude Include="Code\Render\Material.h" />
     <ClInclude Include="Code\Render\PipelineObjects.h" />
     <ClInclude Include="Code\Profile.h" />
     <ClInclude Include="Code\Properties.h" />
@@ -251,6 +251,8 @@
     <ClInclude Include="Code\Actors\MeshActor.h" />
     <ClInclude Include="Code\Components\ComponentSystemCache.h" />
     <ClInclude Include="Code\Editor\SystemDock.h" />
+    <ClInclude Include="Code\Render\Materials\Material.h" />
+    <ClInclude Include="Code\Render\Materials\MaterialSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

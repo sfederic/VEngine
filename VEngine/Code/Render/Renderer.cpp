@@ -11,8 +11,8 @@
 #include "ShaderSystem.h"
 #include "Actors/DebugBox.h"
 #include "Input.h"
-#include "Material.h"
 #include "World.h"
+#include "Materials/Material.h"
 #include "Profile.h"
 #include <WICTextureLoader.h>
 
@@ -26,7 +26,7 @@ const int cbMaterialRegister = 1;
 const int instanceSRVRegister = 3;
 
 ShaderMatrices shaderMatrices;
-Material shaderMaterial;
+//Material* shaderMaterial
 
 void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 {
@@ -208,8 +208,8 @@ void Renderer::CreateMainConstantBuffers()
 	assert(cbMatrices);
 
 	//Material buffer
-	cbMaterial = CreateDefaultBuffer(sizeof(Material), D3D11_BIND_CONSTANT_BUFFER, &shaderMaterial);
-	assert(cbMaterial);
+	/*cbMaterial = CreateDefaultBuffer(sizeof(Material), D3D11_BIND_CONSTANT_BUFFER, &shaderMaterial);
+	assert(cbMaterial);*/
 }
 
 void Renderer::CheckSupportedFeatures()
@@ -279,6 +279,9 @@ ID3D11Buffer* Renderer::CreateStructuredBuffer(UINT byteWidth, UINT byteStride, 
 
 Sampler* Renderer::CreateSampler()
 {
+	//TODO: gotta find a way to do a 'Static Sampler' like how d3d12 does it. 
+	//Majoirty of samplers are going to be the same.
+
 	D3D11_SAMPLER_DESC sampDesc = {};
 	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
 	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -337,19 +340,18 @@ void Renderer::RenderMeshComponents()
 
 	for (MeshComponent* mesh : MeshComponent::system.components)
 	{
-		context->RSSetState(mesh->pso->rastState->data);
-
 		//const FLOAT blendState[4] = { 0.f };
 		//context->OMSetBlendState(blendStateAlphaToCoverage, blendState, 0xFFFFFFFF);
 
-		context->VSSetShader(mesh->shader->vertexShader, nullptr, 0);
-		context->PSSetShader(mesh->shader->pixelShader, nullptr, 0);
+		Material* meshMaterial = mesh->material;
 
-		if (mesh->pso->sampler && mesh->pso->texture)
-		{
-			context->PSSetSamplers(0, 1, &mesh->pso->sampler->data);
-			context->PSSetShaderResources(0, 1, &mesh->pso->texture->srv);
-		}
+		context->RSSetState(meshMaterial->rastState->data);
+
+		context->VSSetShader(meshMaterial->shader->vertexShader, nullptr, 0);
+		context->PSSetShader(meshMaterial->shader->pixelShader, nullptr, 0);
+
+		context->PSSetSamplers(0, 1, &meshMaterial->sampler->data);
+		context->PSSetShaderResources(0, 1, &meshMaterial->texture->srv);
 
 		context->IASetVertexBuffers(0, 1, &mesh->pso->vertexBuffer.data, &stride, &offset);
 		context->IASetIndexBuffer(mesh->pso->indexBuffer.data, DXGI_FORMAT_R32_UINT, 0);
@@ -377,12 +379,14 @@ void Renderer::RenderInstanceMeshComponents()
 
 	for (InstanceMeshComponent* instanceMesh : InstanceMeshComponent::system.components)
 	{
-		context->RSSetState(instanceMesh->pso->rastState->data);
+		Material* instanceMeshMaterial = instanceMesh->material;
 
-		context->VSSetShader(instanceMesh->shader->vertexShader, nullptr, 0);
-		context->PSSetShader(instanceMesh->shader->pixelShader, nullptr, 0);
+		context->RSSetState(instanceMeshMaterial->rastState->data);
 
-		context->PSSetSamplers(0, 1, &instanceMesh->pso->sampler->data);
+		context->VSSetShader(instanceMeshMaterial->shader->vertexShader, nullptr, 0);
+		context->PSSetShader(instanceMeshMaterial->shader->pixelShader, nullptr, 0);
+
+		context->PSSetSamplers(0, 1, &instanceMeshMaterial->sampler->data);
 
 		context->IASetVertexBuffers(0, 1, &instanceMesh->pso->vertexBuffer.data, &stride, &offset);
 		context->IASetIndexBuffer(instanceMesh->pso->indexBuffer.data, DXGI_FORMAT_R32_UINT, 0);
@@ -416,9 +420,9 @@ void Renderer::RenderBounds()
 		shaderMatrices.view = activeCamera->GetViewMatrix();
 
 		//Set debug wireframe material colour
-		shaderMaterial.ambient = XMFLOAT4(0.75f, 0.75f, 0.75f, 1.0f);
+		/*shaderMaterial->ambient = XMFLOAT4(0.75f, 0.75f, 0.75f, 1.0f);
 		context->UpdateSubresource(cbMaterial.Get(), 0, nullptr, &shaderMaterial, 0, 0);
-		context->PSSetConstantBuffers(cbMaterialRegister, 1, cbMaterial.GetAddressOf());
+		context->PSSetConstantBuffers(cbMaterialRegister, 1, cbMaterial.GetAddressOf());*/
 
 		for (IActorSystem* actorSystem : world.activeActorSystems)
 		{

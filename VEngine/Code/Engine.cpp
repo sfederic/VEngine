@@ -16,6 +16,7 @@
 #include "Components/MeshComponent.h"
 #include "Components/InstanceMeshComponent.h"
 #include "Commands/CommandSystem.h"
+#include "Render/Materials/MaterialSystem.h"
 
 Engine engine;
 
@@ -34,6 +35,8 @@ void Engine::Init(int argc, char* argv[])
 	NormalActor::system.Add();
 	MeshComponent::system.Init();
 	InstanceMeshComponent::system.Init();
+
+	materialSystem.CreateAllMaterials();
 
 	world.Init();
 	editor->UpdateWorldList();

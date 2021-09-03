@@ -48,8 +48,11 @@ struct Renderer
 
 	bool drawBoundingBoxes = false;
 
+public:
 	void Init(void* window, int viewportWidth, int viewportHeight);
 	void Tick();
+
+private:
 	void CreateFactory();
 	void CreateDevice();
 	void CreateSwapchain(HWND window);
@@ -60,6 +63,7 @@ struct Renderer
 	void CreateMainConstantBuffers();
 	void CheckSupportedFeatures();
 
+public:
 	//TODO: think about seperating these into a Renderutils file
 	ID3D11Buffer* CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, const void* initData);
 	ID3D11Buffer* CreateVertexBuffer(MeshDataProxy* meshData);

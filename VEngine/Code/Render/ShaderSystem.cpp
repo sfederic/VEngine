@@ -24,6 +24,11 @@ void ShaderSystem::Tick()
     }
 }
 
+ShaderItem* ShaderSystem::Find(std::wstring shaderName)
+{
+    return shaderMap.find(shaderName)->second;
+}
+
 ComPtr<ID3DBlob> ShaderSystem::CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target)
 {
 	UINT compileFlags = 0;
