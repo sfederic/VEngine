@@ -11,5 +11,6 @@ struct AssetDock : public QDockWidget
     AssetDock();
     void AssetItemClicked();
     void AssetFolderClicked();
+    void OpenAssetItemInDefaultProgram();
     void MeshFileClicked(std::string meshFilename);
 };

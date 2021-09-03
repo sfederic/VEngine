@@ -39,6 +39,7 @@ AssetDock::AssetDock() : QDockWidget("Assets")
     assetIcons->setIconSize(QSize(75, 75));
     assetIcons->setViewMode(QListView::ViewMode::IconMode);
     connect(assetIcons, &QListWidget::clicked, this, &AssetDock::AssetItemClicked);
+    connect(assetIcons, &QListWidget::doubleClicked, this, &AssetDock::OpenAssetItemInDefaultProgram);
 
     QHBoxLayout* assetHBox = new QHBoxLayout();
     assetHBox->addWidget(assetTreeView, Qt::AlignLeft);
@@ -73,11 +74,21 @@ void AssetDock::AssetItemClicked()
     {
         MeshFileClicked(assetName.toStdString());
     }
-    else
-    {
-        //Opens up default system program from filename.
-        QDesktopServices::openUrl(QUrl::fromLocalFile(fullPath));
-    }
+}
+
+void AssetDock::OpenAssetItemInDefaultProgram()
+{
+    QModelIndex index = assetTreeView->currentIndex();
+    QString path = fileSystemModel->filePath(index);
+
+    QString assetName = assetIcons->currentItem()->text();
+    QString fullPath = path + "/" + assetName;
+
+    auto fileExtension = std::filesystem::path(fullPath.toStdString()).extension();
+    auto extension = fileExtension.c_str();
+
+    //Opens up default system program from filename.
+    QDesktopServices::openUrl(QUrl::fromLocalFile(fullPath));
 }
 
 void AssetDock::AssetFolderClicked()
