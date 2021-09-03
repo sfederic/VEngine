@@ -299,6 +299,7 @@ Texture2D* Renderer::CreateTexture(std::wstring filename)
 {
 	std::wstring path = L"Textures/" + filename;
 
+	//TODO: gotta make a texture system here so duplicates aren't made
 	Texture2D* texture2D = new Texture2D();
 
 	ID3D11Resource* texture;

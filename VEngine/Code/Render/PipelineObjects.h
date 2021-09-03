@@ -9,6 +9,7 @@ struct Buffer
 
 struct Texture2D
 {
+	std::wstring filename;
 	ID3D11Resource* data = nullptr;
 	ID3D11ShaderResourceView* srv;
 };
