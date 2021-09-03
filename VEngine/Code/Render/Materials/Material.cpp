@@ -13,7 +13,7 @@ Material::Material(std::wstring textureFilename_, std::wstring shaderFilename_)
 
 void Material::Create()
 {
-	texture = renderer.CreateTexture(textureFilename.c_str());
+	texture = renderer.CreateTexture(textureFilename);
 	sampler = renderer.CreateSampler();
 	shader = shaderSystem.shaderMap.find(shaderFilename)->second;
 	rastState = renderer.rastStateMap["solid"];

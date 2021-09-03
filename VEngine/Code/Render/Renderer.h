@@ -70,7 +70,7 @@ public:
 	ID3D11Buffer* CreateIndexBuffer(MeshDataProxy* meshData);
 	ID3D11ShaderResourceView* CreateSRVForMeshInstance(ID3D11Buffer* structuredBuffer, UINT numBufferElements);
 	ID3D11Buffer* CreateStructuredBuffer(UINT byteWidth, UINT byteStride, const void* initData);
-	Texture2D* CreateTexture(std::wstring filename);
+	Texture2D* CreateTexture(std::wstring textureFilename);
 	Sampler* CreateSampler();
 
 	void RenderSetup();

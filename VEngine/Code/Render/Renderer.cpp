@@ -15,6 +15,7 @@
 #include "Materials/Material.h"
 #include "Profile.h"
 #include <WICTextureLoader.h>
+#include "Render/TextureSystem.h"
 
 Renderer renderer;
 
@@ -295,21 +296,20 @@ Sampler* Renderer::CreateSampler()
 	return sampler;
 }
 
-Texture2D* Renderer::CreateTexture(std::wstring filename)
+Texture2D* Renderer::CreateTexture(std::wstring textureFilename)
 {
-	std::wstring path = L"Textures/" + filename;
+	Texture2D* texture = textureSystem.FindTexture2D(textureFilename);
 
-	//TODO: gotta make a texture system here so duplicates aren't made
-	Texture2D* texture2D = new Texture2D();
+	std::wstring path = L"Textures/" + texture->filename;
 
-	ID3D11Resource* texture;
+	ID3D11Resource* resource;
 	ID3D11ShaderResourceView* srv;
-	HR(CreateWICTextureFromFile(device.Get(), path.c_str(), &texture, &srv));
+	HR(CreateWICTextureFromFile(device.Get(), path.c_str(), &resource, &srv));
 
-	texture2D->data = texture;
-	texture2D->srv = srv;
+	texture->data = resource;
+	texture->srv = srv;
 
-	return texture2D;
+	return texture;
 }
 
 void Renderer::RenderSetup()
