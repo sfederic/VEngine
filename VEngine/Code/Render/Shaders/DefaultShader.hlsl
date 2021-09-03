@@ -13,14 +13,13 @@ VS_OUT VSMain(VS_IN i)
 
 float4 PSMain(VS_OUT i) : SV_Target
 {
-	//float4 texColour = t.Sample(s, i.uv);
+	float4 texColour = t.Sample(s, i.uv);
 	float3 lightDir = float3(0.15f, -0.13f, 0.8f);
 	float diffuse = dot(-lightDir, i.normal);
 
-	float4 baseAmbience = float4(1.5f, 0.5f, 0.5f, 1.f);
+	float4 baseAmbience = float4(0.5f, 0.5f, 0.5f, 1.f);
 
 	//clip(texColour.a - 0.1f);
-	//float4 finalColour = (baseAmbience + ambient + diffuse) * texColour;
-	float4 finalColour = baseAmbience + diffuse;
+	float4 finalColour = (baseAmbience + ambient + diffuse) * texColour;
 	return finalColour;
 }

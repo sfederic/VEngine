@@ -13,12 +13,14 @@ struct MeshComponent : SpatialComponent
 	COMPONENT_SYSTEM(MeshComponent)
 
 	std::string filename;
+	std::wstring textureFilename;
+
 	MeshDataProxy* data = nullptr;
 	PipelineStateObject* pso = nullptr;
 	ShaderItem* shader = nullptr;
 	int number;
 
-	MeshComponent(const char* filename_, const wchar_t* shader = L"DefaultShader.hlsl");
+	MeshComponent(const char* filename_, std::wstring textureName = L"", const wchar_t* shader = L"DefaultShader.hlsl");
 	virtual void Tick(double deltaTime) override;
 	virtual void Create() override;
 	virtual Properties GetProps();

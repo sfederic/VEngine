@@ -5,9 +5,11 @@
 
 std::unordered_map<std::string, PipelineStateObject*> existingPiplineStateObjects;
 
-MeshComponent::MeshComponent(const char* filename_, const wchar_t* shaderFilename)
+MeshComponent::MeshComponent(const char* filename_, std::wstring textureName, const wchar_t* shaderFilename)
 {
 	filename = filename_;
+	textureFilename = textureName;
+
 	data = new MeshDataProxy();
 	pso = new PipelineStateObject();
 
@@ -40,7 +42,13 @@ void MeshComponent::Create()
 		pso->indexBuffer = psoIt->second->indexBuffer;
 	}
 
-	pso->sampler.data = renderer.CreateSampler();
+	//Create texture and sampler
+	if (!textureFilename.empty())
+	{
+		pso->texture = renderer.CreateTexture(textureFilename.c_str());
+		pso->sampler = renderer.CreateSampler();
+	}
+
 	pso->rastState = renderer.rastStateMap["solid"];
 
 	existingPiplineStateObjects[filename] = pso;

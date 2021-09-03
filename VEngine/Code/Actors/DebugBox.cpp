@@ -3,6 +3,6 @@
 
 DebugBox::DebugBox()
 {
-	boxMesh = new MeshComponent("cube.fbx");
+	boxMesh = new MeshComponent("cube.fbx", L"test.png");
 	boxMesh->Create();
 }

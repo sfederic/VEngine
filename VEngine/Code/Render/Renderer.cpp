@@ -14,6 +14,7 @@
 #include "Material.h"
 #include "World.h"
 #include "Profile.h"
+#include <WICTextureLoader.h>
 
 Renderer renderer;
 
@@ -276,19 +277,35 @@ ID3D11Buffer* Renderer::CreateStructuredBuffer(UINT byteWidth, UINT byteStride, 
 	return buffer;
 }
 
-ID3D11SamplerState* Renderer::CreateSampler()
+Sampler* Renderer::CreateSampler()
 {
-	ID3D11SamplerState* sampler;
-
 	D3D11_SAMPLER_DESC sampDesc = {};
 	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
 	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
 	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
 	sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
 
-	HR(device->CreateSamplerState(&sampDesc, &sampler));
+	ID3D11SamplerState* samplerState;
+	HR(device->CreateSamplerState(&sampDesc, &samplerState));
 
+	auto sampler = new Sampler(sampDesc, samplerState);
 	return sampler;
+}
+
+Texture2D* Renderer::CreateTexture(std::wstring filename)
+{
+	std::wstring path = L"Textures/" + filename;
+
+	Texture2D* texture2D = new Texture2D();
+
+	ID3D11Resource* texture;
+	ID3D11ShaderResourceView* srv;
+	HR(CreateWICTextureFromFile(device.Get(), path.c_str(), &texture, &srv));
+
+	texture2D->data = texture;
+	texture2D->srv = srv;
+
+	return texture2D;
 }
 
 void Renderer::RenderSetup()
@@ -328,7 +345,11 @@ void Renderer::RenderMeshComponents()
 		context->VSSetShader(mesh->shader->vertexShader, nullptr, 0);
 		context->PSSetShader(mesh->shader->pixelShader, nullptr, 0);
 
-		context->PSSetSamplers(0, 1, &mesh->pso->sampler.data);
+		if (mesh->pso->sampler && mesh->pso->texture)
+		{
+			context->PSSetSamplers(0, 1, &mesh->pso->sampler->data);
+			context->PSSetShaderResources(0, 1, &mesh->pso->texture->srv);
+		}
 
 		context->IASetVertexBuffers(0, 1, &mesh->pso->vertexBuffer.data, &stride, &offset);
 		context->IASetIndexBuffer(mesh->pso->indexBuffer.data, DXGI_FORMAT_R32_UINT, 0);
@@ -361,7 +382,7 @@ void Renderer::RenderInstanceMeshComponents()
 		context->VSSetShader(instanceMesh->shader->vertexShader, nullptr, 0);
 		context->PSSetShader(instanceMesh->shader->pixelShader, nullptr, 0);
 
-		context->PSSetSamplers(0, 1, &instanceMesh->pso->sampler.data);
+		context->PSSetSamplers(0, 1, &instanceMesh->pso->sampler->data);
 
 		context->IASetVertexBuffers(0, 1, &instanceMesh->pso->vertexBuffer.data, &stride, &offset);
 		context->IASetIndexBuffer(instanceMesh->pso->indexBuffer.data, DXGI_FORMAT_R32_UINT, 0);

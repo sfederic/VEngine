@@ -10,7 +10,8 @@ struct Buffer
 
 struct Texture2D
 {
-	ID3D11Texture2D* data = nullptr;
+	ID3D11Resource* data = nullptr;
+	ID3D11ShaderResourceView* srv;
 };
 
 struct ShaderResourceView
@@ -20,7 +21,10 @@ struct ShaderResourceView
 
 struct Sampler
 {
+	D3D11_SAMPLER_DESC desc;
 	ID3D11SamplerState* data = nullptr;
+
+	Sampler(D3D11_SAMPLER_DESC desc_, ID3D11SamplerState* data_);
 };
 
 struct RastState
@@ -44,6 +48,7 @@ struct PipelineStateObject
 
 	Buffer vertexBuffer;
 	Buffer indexBuffer;
-	Sampler sampler;
+	Texture2D* texture = nullptr;
+	Sampler* sampler = nullptr;
 	RastState* rastState = nullptr;
 };
