@@ -14,6 +14,7 @@ struct NormalActor : Actor
 	MeshComponent* mesh2;
 	CameraComponent* camera;
 	BoxTriggerComponent* boxTrigger;
+	struct Material* nextMaterial;
 
 	NormalActor();
 	virtual void Tick(double deltaTime) override;

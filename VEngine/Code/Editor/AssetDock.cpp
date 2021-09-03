@@ -12,6 +12,7 @@
 #include "Editor.h"
 #include "WorldEditor.h"
 #include "PropertiesDock.h"
+#include "Render/TextureSystem.h"
 
 AssetDock::AssetDock() : QDockWidget("Assets")
 {
@@ -73,6 +74,11 @@ void AssetDock::AssetItemClicked()
     else if (std::wcscmp(extension, L".fbx") == 0) //FBX files
     {
         MeshFileClicked(assetName.toStdString());
+    }
+    else if (std::wcscmp(extension, L".jpg") == 0 ||
+        std::wcscmp(extension, L".png") == 0)
+    {
+        TextureFileClicked(assetName.toStdWString());
     }
 }
 
@@ -158,4 +164,9 @@ void AssetDock::MeshFileClicked(std::string meshFilename)
     //Set spawner system as MeshActor
     worldEditor.spawnSystem = &MeshActor::system;
     MeshActor::spawnMeshFilename = meshFilename;
+}
+
+void AssetDock::TextureFileClicked(std::wstring textureFilename)
+{
+    textureSystem.selectedTextureInEditor = textureFilename;
 }

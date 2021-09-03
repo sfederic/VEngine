@@ -9,6 +9,8 @@ struct TextureSystem
 {
 	std::unordered_map<std::wstring, Texture2D*> texture2DMap;
 
+	std::wstring selectedTextureInEditor;
+
 	void AddTexture2D(Texture2D* texture);
 	Texture2D* FindTexture2D(std::wstring textureFilename);
 	void CreateAllTextures();

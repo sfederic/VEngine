@@ -70,10 +70,6 @@ void Console::Tick()
 //Execute values need to be uppercase with WndProc
 void Console::ExecuteString()
 {
-	/*if (consoleString == ExecuteStrings::GPU)
-	{
-		debugMenu.bGPUMenuOpen = !debugMenu.bGPUMenuOpen;
-	}*/
 	if (consoleString == ExecuteStrings::SNAP)
 	{
 		debugMenu.snapMenuOpen = !debugMenu.snapMenuOpen;
