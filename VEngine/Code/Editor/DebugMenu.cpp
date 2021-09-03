@@ -60,6 +60,7 @@ void DebugMenu::Tick(double deltaTime)
 	RenderSnappingMenu();
 	RenderActorProps();
 	RenderCommandsMenu();
+	RenderActorInspectMenu();
 
 	ImGui::EndFrame();
 
@@ -304,22 +305,23 @@ void DebugMenu::RenderSnappingMenu()
 	}
 }
 
-//void DebugMenu::RenderActorInspectMenu()
-//{
-//	if (actorInspectMenuOpen)
-//	{
-//		ImGui::Begin("Actor Inspect");
-//
-//		Ray ray;
-//		if (RaycastAllFromScreen(ray))
-//		{
-//			Actor* actor = ray.hitActor;
-//			if (actor)
-//			{
-//
-//			}
-//		}
-//
-//		ImGui::End();
-//	}
-//}
+//Stole this from the Fledge Engine https://www.youtube.com/watch?v=WjPiJn9dkxs
+//Works by hovering a menu over the current mouse over'd actor.
+void DebugMenu::RenderActorInspectMenu()
+{
+	if (actorInspectMenuOpen)
+	{
+		Ray ray;
+		if (RaycastAllFromScreen(ray))
+		{
+			Actor* actor = ray.hitActor;
+			if (actor)
+			{
+				ImGui::Begin("Actor Inspect");
+				ImGui::SetWindowSize(ImVec2(300, 300));
+				ImGui::SetWindowPos(ImVec2(editor->viewportMouseX, editor->viewportMouseY));
+				ImGui::End();
+			}
+		}
+	}
+}

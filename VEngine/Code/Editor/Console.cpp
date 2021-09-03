@@ -97,6 +97,10 @@ void Console::ExecuteString()
 	else if (consoleString == ExecuteStrings::GPU)
 	{
 		debugMenu.gpuMenuOpen = !debugMenu.gpuMenuOpen;
+	}	
+	else if (consoleString == ExecuteStrings::ACTOR)
+	{
+		debugMenu.actorInspectMenuOpen = !debugMenu.actorInspectMenuOpen;
 	}
 	else
 	{

@@ -37,6 +37,7 @@ struct DebugMenu
 	void RenderGPUMenu();
 	void RenderProfileMenu();
 	void RenderSnappingMenu();
+	void RenderActorInspectMenu();
 	void RenderActorProps();
 	void IterateOverProperties(Properties& props);
 	void RenderCommandsMenu();
