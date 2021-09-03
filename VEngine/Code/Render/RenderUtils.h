@@ -7,6 +7,7 @@ struct MeshDataProxy;
 namespace RenderUtils
 {
 	extern ID3D11Device* device;
+	extern Sampler* defaultSampler;
 
 	ID3D11Buffer* CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, const void* initData);
 	ID3D11Buffer* CreateVertexBuffer(MeshDataProxy* meshData);
@@ -15,4 +16,5 @@ namespace RenderUtils
 	ID3D11Buffer* CreateStructuredBuffer(UINT byteWidth, UINT byteStride, const void* initData);
 	Texture2D* CreateTexture(std::wstring textureFilename);
 	Sampler* CreateSampler();
+	Sampler* GetDefaultSampler();
 };

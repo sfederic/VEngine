@@ -18,6 +18,7 @@
 #include "Commands/CommandSystem.h"
 #include "Render/Materials/MaterialSystem.h"
 #include "Render/TextureSystem.h"
+#include "Render/RenderUtils.h"
 
 Engine engine;
 
@@ -39,6 +40,7 @@ void Engine::Init(int argc, char* argv[])
 
 	materialSystem.CreateAllMaterials();
 	textureSystem.CreateAllTextures();
+	RenderUtils::defaultSampler = RenderUtils::CreateSampler();
 
 	world.Init();
 	editor->UpdateWorldList();

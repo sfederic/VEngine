@@ -7,6 +7,7 @@
 namespace RenderUtils
 {
 	ID3D11Device* device;
+	Sampler* defaultSampler;
 
 	ID3D11Buffer* CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, const void* initData)
 	{
@@ -69,9 +70,6 @@ namespace RenderUtils
 
 	Sampler* CreateSampler()
 	{
-		//TODO: gotta find a way to do a 'Static Sampler' like how d3d12 does it. 
-		//Majoirty of samplers are going to be the same.
-
 		D3D11_SAMPLER_DESC sampDesc = {};
 		sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
 		sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -83,6 +81,11 @@ namespace RenderUtils
 
 		auto sampler = new Sampler(sampDesc, samplerState);
 		return sampler;
+	}
+
+	Sampler* GetDefaultSampler()
+	{
+		return defaultSampler;
 	}
 
 	Texture2D* CreateTexture(std::wstring textureFilename)
