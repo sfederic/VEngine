@@ -24,7 +24,7 @@ void ShaderSystem::Tick()
     }
 }
 
-ShaderItem* ShaderSystem::Find(std::wstring shaderName)
+ShaderItem* ShaderSystem::FindShader(std::wstring shaderName)
 {
     return shaderMap.find(shaderName)->second;
 }

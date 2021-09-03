@@ -148,7 +148,7 @@ void Renderer::CreateInputLayout()
 		{"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, normal), D3D11_INPUT_PER_VERTEX_DATA, 0},
 	};
 
-	ShaderItem* shader = shaderSystem.shaderMap.find(L"DefaultShader.hlsl")->second;
+	ShaderItem* shader = shaderSystem.FindShader(L"DefaultShader.hlsl");
 
 	HR(device->CreateInputLayout(inputDesc, _countof(inputDesc), shader->vertexCode->GetBufferPointer(), shader->vertexCode->GetBufferSize(), &inputLayout));
 	context->IASetInputLayout(inputLayout.Get());
@@ -318,9 +318,9 @@ void Renderer::RenderBounds()
 	{
 		context->RSSetState(rastStateWireframe);
 
-		auto boxShaderIt = shaderSystem.shaderMap.find(L"SolidColour.hlsl");
-		context->VSSetShader(boxShaderIt->second->vertexShader, nullptr, 0);
-		context->PSSetShader(boxShaderIt->second->pixelShader, nullptr, 0);
+		ShaderItem* shader = shaderSystem.FindShader(L"SolidColour.hlsl");
+		context->VSSetShader(shader->vertexShader, nullptr, 0);
+		context->PSSetShader(shader->pixelShader, nullptr, 0);
 
 		context->IASetVertexBuffers(0, 1, &debugBox.boxMesh->pso->vertexBuffer.data, &stride, &offset);
 
