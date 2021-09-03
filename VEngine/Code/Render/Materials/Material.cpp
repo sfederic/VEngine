@@ -2,6 +2,7 @@
 #include "MaterialSystem.h"
 #include "Render/Renderer.h"
 #include "Render/ShaderSystem.h"
+#include "Render/TextureSystem.h"
 
 Material::Material(std::wstring textureFilename_, std::wstring shaderFilename_)
 {
@@ -13,7 +14,7 @@ Material::Material(std::wstring textureFilename_, std::wstring shaderFilename_)
 
 void Material::Create()
 {
-	texture = renderer.CreateTexture(textureFilename);
+	texture = textureSystem.FindTexture2D(textureFilename);
 	sampler = renderer.CreateSampler();
 	shader = shaderSystem.shaderMap.find(shaderFilename)->second;
 	rastState = renderer.rastStateMap["solid"];

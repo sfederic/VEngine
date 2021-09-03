@@ -1,5 +1,6 @@
 #include "TextureSystem.h"
 #include "PipelineObjects.h"
+#include "Renderer.h"
 
 TextureSystem textureSystem;
 
@@ -14,8 +15,18 @@ Texture2D* TextureSystem::FindTexture2D(std::wstring textureFilename)
 	if (textureIt == texture2DMap.end())
 	{
 		auto texture = new Texture2D(textureFilename);
+		AddTexture2D(texture);
 		return texture;
 	}
 
 	return textureIt->second;
+}
+
+void TextureSystem::CreateAllTextures()
+{
+	for (auto textureIt : texture2DMap)
+	{
+		Texture2D* texture = textureIt.second;
+		texture = renderer.CreateTexture(textureIt.first);
+	}
 }

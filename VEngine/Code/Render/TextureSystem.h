@@ -11,6 +11,7 @@ struct TextureSystem
 
 	void AddTexture2D(Texture2D* texture);
 	Texture2D* FindTexture2D(std::wstring textureFilename);
+	void CreateAllTextures();
 };
 
 extern TextureSystem textureSystem;
