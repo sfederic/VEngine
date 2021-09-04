@@ -5,6 +5,8 @@
 
 using namespace DirectX;
 
+struct MaterialShaderData;
+
 struct Vertex
 {
 	XMFLOAT3 pos;
@@ -87,14 +89,11 @@ struct ShaderMatrices
 	XMMATRIX view;
 	XMMATRIX proj;
 	XMMATRIX mvp;
+	XMMATRIX texMatrix;
 
-	void Create(float aspectRatio)
-	{
-		model = XMMatrixIdentity();
-		view = XMMatrixIdentity();
-		proj = XMMatrixPerspectiveFovLH(XM_PI / 3, aspectRatio, 0.01f, 1000.f);
-		mvp = model * view * proj;
-	}
+	void Create(float aspectRatio);
+	void MakeTextureMatrix(MaterialShaderData* shaderData);
+	void MakeModelViewProjectionMatrix();
 };
 
 struct InstanceData
