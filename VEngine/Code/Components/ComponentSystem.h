@@ -77,6 +77,8 @@ struct ComponentSystem : IComponentSystem
 		}
 
 		components.clear();
+
+		systemState = SystemStates::Unloaded;
 	}
 
 	virtual void GetComponents(std::vector<Component*>& outComponents) override

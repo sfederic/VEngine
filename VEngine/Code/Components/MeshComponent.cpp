@@ -11,6 +11,11 @@ MeshComponent::MeshComponent(const char* filename_, const wchar_t* textureFilena
 {
 	meshFilename = filename_;
 	textureFilename = textureFilename_;
+
+	data = new MeshDataProxy();
+	pso = new PipelineStateObject();
+
+	material = new Material(textureFilename, L"DefaultShader.hlsl");
 }
 
 void MeshComponent::Tick(double deltaTime)
@@ -19,10 +24,6 @@ void MeshComponent::Tick(double deltaTime)
 
 void MeshComponent::Create()
 {
-	data = new MeshDataProxy();
-	pso = new PipelineStateObject();
-	material = new Material(textureFilename, L"DefaultShader.hlsl");
-
 	//Import mesh (set up bounding box in here too so you don't need to re-create bounds)
 	fbxImporter.Import(meshFilename.c_str(), data);
 

@@ -1,7 +1,7 @@
 NormalActor
 1
 Position
--0.531265 0.5 6.82236e-05
+1.46873 0.5 6.82236e-05
 Scale
 1.40629 1.5 1.00003
 Rotation
@@ -9,7 +9,7 @@ Rotation
 Name
 NormalActor0
 UvOffset
-1 0
+0.5 0
 next
 MeshActor
 0
