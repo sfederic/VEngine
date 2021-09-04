@@ -57,5 +57,6 @@ Properties MeshComponent::GetProps()
 {
 	Properties props("MeshComponent");
 	props.Add("Mesh Filename", &meshFilename);
+	props.Add("UV offset", &material->shaderData.uvOffset);
 	return props;
 }

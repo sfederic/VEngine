@@ -4,14 +4,15 @@
 #include "Camera.h"
 #include "VMath.h"
 #include "Input.h"
+#include "Render/Material.h"
 
 NormalActor::NormalActor()
 {
-	mesh1 = MeshComponent::system.Add(this, MeshComponent("cube.fbx", L"test.png"));
+	mesh1 = MeshComponent::system.Add(this, MeshComponent("plane.fbx", L"wall.png"));
 	rootComponent = mesh1;
 
-	camera = CameraComponent::system.Add(this, CameraComponent(XMFLOAT3(0.f, 5.f, -20.f), false));
-	rootComponent->AddChild(camera);
+	//camera = CameraComponent::system.Add(this, CameraComponent(XMFLOAT3(0.f, 5.f, -20.f), false));
+	//rootComponent->AddChild(camera);
 }
 
 void NormalActor::Tick(double deltaTime)
@@ -32,5 +33,6 @@ void NormalActor::Tick(double deltaTime)
 Properties NormalActor::GetProps()
 {
 	auto props = Actor::GetProps();
+	props.Add("UvOffset", &mesh1->material->shaderData.uvOffset);
 	return props;
 }

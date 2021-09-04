@@ -12,6 +12,8 @@ struct World
 	std::vector<IActorSystem*> activeActorSystems;
 	std::vector<IComponentSystem*> activeComponentSystems;
 
+	std::string worldFilename;
+
 	//Called at engine startup
 	void Init();
 

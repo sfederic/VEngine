@@ -10,10 +10,12 @@
 
 FileSystem fileSystem;
 
-void FileSystem::WriteAllActorSystems(std::string worldName)
+void FileSystem::WriteAllActorSystems()
 {
-	std::string file = "WorldMaps/" + worldName;
-	file += ".sav";
+	auto lastOf = world.worldFilename.find_last_of("/\\");
+	std::string str = world.worldFilename.substr(lastOf + 1);
+	std::string file = "WorldMaps/" + str;
+	//file += ".sav";
 
 	Serialiser s(file, OpenMode::Out);
 
@@ -27,19 +29,23 @@ void FileSystem::WriteAllActorSystems(std::string worldName)
 
 void FileSystem::LoadWorld(std::string worldName)
 {
+	world.worldFilename = worldName;
+
 	world.Cleanup();
 
-	std::string file = "WorldMaps/" + worldName;
-	Serialiser s(file, OpenMode::In);
+	//Re-init world
+	//world.Start();
+
+	Serialiser s(worldName, OpenMode::In);
 
 	while (!s.is.eof())
 	{
 		std::string actorSystemName;
 		s.is >> actorSystemName;
 
-		if (actorSystemName == "")
+		if (actorSystemName.empty())
 		{
-			continue;
+			break;
 		}
 
 		size_t numActorsToSpawn = 0;
@@ -56,9 +62,6 @@ void FileSystem::LoadWorld(std::string worldName)
 
 		actorSystem->Deserialise(s);
 	}
-
-	//Re-init world
-	world.Start();
 
 	//Deselect any existing actors, because TransformGizmo will stay at previous positions.
 	worldEditor.pickedActor = nullptr;

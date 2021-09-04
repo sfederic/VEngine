@@ -25,12 +25,13 @@ void World::Init()
 	}
 
 	//Load starting map
-	fileSystem.LoadWorld("test.sav");
+	fileSystem.LoadWorld("WorldMaps/test2.sav");
 
 	//Start default loaded world
 	//Start();
 }
 
+//TODO: this sort of stuff doesn't work when deserialisation is onvolved as is.
 void World::Start()
 {
 	//Init component systems

@@ -19,6 +19,7 @@ struct Serialiser
 	std::istream is;
 
 	Serialiser(const std::string& filename, OpenMode mode);
+	~Serialiser();
 	void Serialise(Properties props);
 	void Deserialise(Properties props);
 

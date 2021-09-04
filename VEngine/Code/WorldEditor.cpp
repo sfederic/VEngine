@@ -10,10 +10,6 @@
 #include "Actors/MeshActor.h"
 #include "Editor/DebugMenu.h"
 
-#include "Render/TextureSystem.h"
-#include "Render/RenderUtils.h"
-#include "Components/MeshComponent.h"
-
 WorldEditor worldEditor;
 
 void WorldEditor::Tick()
@@ -78,7 +74,7 @@ void WorldEditor::SaveWorld()
 	{
 		if (Input::GetKeyUp(Keys::S))
 		{
-			fileSystem.WriteAllActorSystems("test");
+			fileSystem.WriteAllActorSystems();
 		}
 	}
 }

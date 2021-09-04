@@ -10,6 +10,12 @@ Serialiser::Serialiser(const std::string& filename, OpenMode openMode) : os(&fb)
 	fb.open(filename.c_str(), (std::ios_base::openmode)openMode);
 }
 
+Serialiser::~Serialiser()
+{
+	os.flush();
+	fb.close();
+}
+
 void Serialiser::Serialise(Properties props)
 {
 	for (auto prop : props.propMap)
@@ -80,9 +86,9 @@ void Serialiser::Deserialise(Properties props)
 		}
 		else if (props.CheckType<XMFLOAT2>(name))
 		{
-			XMFLOAT2* float3 = props.GetData<XMFLOAT2>(name);
-			is >> float3->x;
-			is >> float3->y;
+			XMFLOAT2* float2 = props.GetData<XMFLOAT2>(name);
+			is >> float2->x;
+			is >> float2->y;
 		}		
 		else if (props.CheckType<XMFLOAT3>(name))
 		{

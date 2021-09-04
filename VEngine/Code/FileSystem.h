@@ -3,7 +3,7 @@
 
 struct FileSystem
 {
-	void WriteAllActorSystems(std::string worldName);
+	void WriteAllActorSystems();
 	void LoadWorld(std::string worldName);
 };
 
