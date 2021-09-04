@@ -26,7 +26,6 @@ const int cbMaterialRegister = 1;
 const int instanceSRVRegister = 3;
 
 ShaderMatrices shaderMatrices;
-//Material* shaderMaterial
 
 void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 {
@@ -210,8 +209,10 @@ void Renderer::CreateMainConstantBuffers()
 	assert(cbMatrices);
 
 	//Material buffer
-	/*cbMaterial = CreateDefaultBuffer(sizeof(Material), D3D11_BIND_CONSTANT_BUFFER, &shaderMaterial);
-	assert(cbMaterial);*/
+	MaterialShaderData tempMaterialShaderData; //use this just to populate the constant buffer on create
+	cbMaterial = RenderUtils::CreateDefaultBuffer(sizeof(MaterialShaderData), 
+		D3D11_BIND_CONSTANT_BUFFER, &tempMaterialShaderData);
+	assert(cbMaterial);
 }
 
 void Renderer::CheckSupportedFeatures()
@@ -266,6 +267,10 @@ void Renderer::RenderMeshComponents()
 		context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &stride, &offset);
 		context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
 
+		MaterialShaderData* materialShaderData = &material->shaderData;
+		context->UpdateSubresource(cbMaterial.Get(), 0, nullptr, &materialShaderData, 0, 0);
+		context->PSSetConstantBuffers(cbMaterialRegister, 1, cbMaterial.GetAddressOf());
+
 		shaderMatrices.model = mesh->GetWorldMatrix();
 
 		shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
@@ -302,6 +307,10 @@ void Renderer::RenderInstanceMeshComponents()
 		context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &stride, &offset);
 		context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
 
+		MaterialShaderData* materialShaderData = &material->shaderData;
+		context->UpdateSubresource(cbMaterial.Get(), 0, nullptr, &materialShaderData, 0, 0);
+		context->PSSetConstantBuffers(cbMaterialRegister, 1, cbMaterial.GetAddressOf());
+
 		//Update instance data and set SRV
 		context->UpdateSubresource(instanceMesh->structuredBuffer, 0, nullptr, instanceMesh->instanceData.data(), 0, 0);
 		context->VSSetShaderResources(instanceSRVRegister, 1, &instanceMesh->srv);
@@ -331,9 +340,10 @@ void Renderer::RenderBounds()
 		shaderMatrices.view = activeCamera->GetViewMatrix();
 
 		//Set debug wireframe material colour
-		/*shaderMaterial->ambient = XMFLOAT4(0.75f, 0.75f, 0.75f, 1.0f);
-		context->UpdateSubresource(cbMaterial.Get(), 0, nullptr, &shaderMaterial, 0, 0);
-		context->PSSetConstantBuffers(cbMaterialRegister, 1, cbMaterial.GetAddressOf());*/
+		MaterialShaderData materialShaderData;
+		materialShaderData.ambient = XMFLOAT4(0.75f, 0.75f, 0.75f, 1.0f);
+		context->UpdateSubresource(cbMaterial.Get(), 0, nullptr, &materialShaderData, 0, 0);
+		context->PSSetConstantBuffers(cbMaterialRegister, 1, cbMaterial.GetAddressOf());
 
 		for (IActorSystem* actorSystem : world.activeActorSystems)
 		{
