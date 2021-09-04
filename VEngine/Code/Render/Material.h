@@ -13,6 +13,12 @@ struct ShaderItem;
 struct MaterialShaderData
 {
 	XMFLOAT4 ambient = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
+	XMFLOAT2 uvOffset = XMFLOAT2(0.f, 0.f);
+	XMFLOAT2 uvScale = XMFLOAT2(1.f, 1.f);
+	float uvRotation = 0.f;
+
+private:
+	float padding[3];
 };
 
 struct Material

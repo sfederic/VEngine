@@ -5,11 +5,16 @@ cbuffer cbPerObject : register(b0)
 	float4x4 view;
 	float4x4 proj;
 	float4x4 mvp;
+	float4x4 texMatrix;
 };
 
 cbuffer cbMaterials : register(b1)
 {
 	float4 ambient;
+	float2 uvOffset;
+	float2 uvScale;
+	float uvRotation;
+	float padding[3];
 }
 
 cbuffer cbSkiningData : register(b2)

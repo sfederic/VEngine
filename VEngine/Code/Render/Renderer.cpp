@@ -77,18 +77,18 @@ void Renderer::CreateDevice()
 	const D3D_FEATURE_LEVEL featureLevels[] = { D3D_FEATURE_LEVEL_11_1 };
 	D3D_FEATURE_LEVEL selectedFeatureLevel;
 
-	IDXGIAdapter1* adapter;
-	for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_MINIMUM_POWER,
-		IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)
-	{
-		gpuAdapters.push_back(adapter);
-		DXGI_ADAPTER_DESC1 desc = {};
-		adapter->GetDesc1(&desc);
-		gpuAdaptersDesc.push_back(desc);
-	}
+	//IDXGIAdapter1* adapter;
+	//for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_MINIMUM_POWER,
+	//	IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)
+	//{
+	//	gpuAdapters.push_back(adapter);
+	//	DXGI_ADAPTER_DESC1 desc = {};
+	//	adapter->GetDesc1(&desc);
+	//	gpuAdaptersDesc.push_back(desc);
+	//}
 
 	//TODO: selecting adapters here isn't working.
-	HR(D3D11CreateDevice(adapter, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags,
+	HR(D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags,
 		featureLevels, _countof(featureLevels), D3D11_SDK_VERSION, &device,
 		&selectedFeatureLevel, &context));
 
@@ -209,9 +209,9 @@ void Renderer::CreateMainConstantBuffers()
 	assert(cbMatrices);
 
 	//Material buffer
-	MaterialShaderData tempMaterialShaderData; //use this just to populate the constant buffer on create
+	MaterialShaderData materialShaderData;
 	cbMaterial = RenderUtils::CreateDefaultBuffer(sizeof(MaterialShaderData), 
-		D3D11_BIND_CONSTANT_BUFFER, &tempMaterialShaderData);
+		D3D11_BIND_CONSTANT_BUFFER, &materialShaderData);
 	assert(cbMaterial);
 }
 
@@ -252,9 +252,11 @@ void Renderer::RenderMeshComponents()
 	{
 		SetRenderPipelineStates(mesh);
 
+		//Set matrices
 		shaderMatrices.model = mesh->GetWorldMatrix();
+		shaderMatrices.MakeModelViewProjectionMatrix();
+		shaderMatrices.MakeTextureMatrix(&mesh->material->shaderData);
 
-		shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
@@ -268,14 +270,21 @@ void Renderer::RenderInstanceMeshComponents()
 {
 	PROFILE_START
 
+	//Set matrices
 	shaderMatrices.view = activeCamera->GetViewMatrix();
-	shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
+	shaderMatrices.MakeModelViewProjectionMatrix();
+
 	context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 	context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 	for (InstanceMeshComponent* instanceMesh : InstanceMeshComponent::system.components)
 	{
 		SetRenderPipelineStates(instanceMesh);
+
+		//update texture matrix
+		shaderMatrices.MakeTextureMatrix(&instanceMesh->material->shaderData);
+		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 		//Update instance data and set SRV
 		context->UpdateSubresource(instanceMesh->structuredBuffer, 0, nullptr, instanceMesh->instanceData.data(), 0, 0);
@@ -424,7 +433,7 @@ void Renderer::SetRenderPipelineStates(MeshComponent* mesh)
 	context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &stride, &offset);
 	context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
 
-	MaterialShaderData* materialShaderData = &material->shaderData;
-	context->UpdateSubresource(cbMaterial, 0, nullptr, &materialShaderData, 0, 0);
+	context->UpdateSubresource(cbMaterial, 0, nullptr, &material->shaderData, 0, 0);
+	//context->VSSetConstantBuffers(cbMaterialRegister, 0, &cbMaterial);
 	context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 }
