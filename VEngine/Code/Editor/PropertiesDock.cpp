@@ -9,6 +9,7 @@
 #include "Actors/Actor.h"
 #include "Components/Component.h"
 #include "PropertyWidgets/BoolWidget.h" 
+#include "PropertyWidgets/Float2Widget.h"
 #include "PropertyWidgets/Float3Widget.h"
 #include "PropertyWidgets/FloatWidget.h"
 #include "PropertyWidgets/IntWidget.h"
@@ -108,6 +109,12 @@ void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRo
             auto float3Widget = new Float3Widget(props.GetData<XMFLOAT3>(name));
             actorPropsGridLayout->addWidget(float3Widget, currentGridRow, propertyDataColumn);
             propertyWidgetsToUpdate.push_back((IPropertyWidget*)float3Widget);
+        }
+        else if (props.CheckType<XMFLOAT2>(name))
+        {
+            auto float2Widget = new Float2Widget(props.GetData<XMFLOAT2>(name));
+            actorPropsGridLayout->addWidget(float2Widget, currentGridRow, propertyDataColumn);
+            propertyWidgetsToUpdate.push_back((IPropertyWidget*)float2Widget);
         }
         else if (props.CheckType<XMVECTOR>(name))
         {
