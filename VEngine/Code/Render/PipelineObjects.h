@@ -56,20 +56,9 @@ struct PipelineStateObject
 {
 	Buffer* vertexBuffer = nullptr;
 	Buffer* indexBuffer = nullptr;
-	Texture2D* texture = nullptr;
-	Sampler* sampler = nullptr;
-	RastState* rastState = nullptr;
-	ShaderItem* shader = nullptr;
 
-	std::wstring textureFilename;
-	std::wstring shaderFilename;
-
-	PipelineStateObject(std::wstring textureFilename_, std::wstring shaderFilename_);
+	PipelineStateObject();
 	void Create();
 	void SetVertexBuffer(Buffer* vertexBuffer);
 	void SetIndexBuffer(Buffer* indexBuffer);
-	void SetTexture(Texture2D* texture);
-	void SetSampler(Sampler* sampler);
-	void SetRastState(RastState* rastState);
-	void SetShader(ShaderItem* shaderItem);
 };

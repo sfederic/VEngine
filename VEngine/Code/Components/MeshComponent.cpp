@@ -2,6 +2,7 @@
 #include "FBXImporter.h"
 #include "Render/RenderUtils.h"
 #include "Render/ShaderSystem.h"
+#include "Render/Material.h"
 
 //Vertex and index buffers linked to a mesh filename to copy over to new PSOs
 std::unordered_map<std::string, MeshBuffers> existingMeshBuffers;
@@ -19,7 +20,8 @@ void MeshComponent::Tick(double deltaTime)
 void MeshComponent::Create()
 {
 	data = new MeshDataProxy();
-	pso = new PipelineStateObject(textureFilename, L"DefaultShader.hlsl");
+	pso = new PipelineStateObject();
+	material = new Material(textureFilename, L"DefaultShader.hlsl");
 
 	//Import mesh (set up bounding box in here too so you don't need to re-create bounds)
 	fbxImporter.Import(meshFilename.c_str(), data);

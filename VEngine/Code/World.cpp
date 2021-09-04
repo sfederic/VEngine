@@ -25,7 +25,7 @@ void World::Init()
 	}
 
 	//Start default loaded world
-	Start();
+	//Start();
 }
 
 void World::Start()

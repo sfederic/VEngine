@@ -32,6 +32,5 @@ void NormalActor::Tick(double deltaTime)
 Properties NormalActor::GetProps()
 {
 	auto props = Actor::GetProps();
-	props.Add("Texture Name", &mesh1->pso->texture->filename);
 	return props;
 }

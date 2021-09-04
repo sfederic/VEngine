@@ -218,6 +218,9 @@
     <ClCompile Include="Code\Render\RenderUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Render\MaterialSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -371,6 +374,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\RenderUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Render\MaterialSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

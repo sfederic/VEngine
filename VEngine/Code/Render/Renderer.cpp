@@ -252,15 +252,16 @@ void Renderer::RenderMeshComponents()
 		//const FLOAT blendState[4] = { 0.f };
 		//context->OMSetBlendState(blendStateAlphaToCoverage, blendState, 0xFFFFFFFF);
 
+		Material* material = mesh->material;
 		PipelineStateObject* pso = mesh->pso;
 
-		context->RSSetState(pso->rastState->data);
+		context->RSSetState(material->rastState->data);
 
-		context->VSSetShader(pso->shader->vertexShader, nullptr, 0);
-		context->PSSetShader(pso->shader->pixelShader, nullptr, 0);
+		context->VSSetShader(material->shader->vertexShader, nullptr, 0);
+		context->PSSetShader(material->shader->pixelShader, nullptr, 0);
 
-		context->PSSetSamplers(0, 1, &pso->sampler->data);
-		context->PSSetShaderResources(0, 1, &pso->texture->srv);
+		context->PSSetSamplers(0, 1, &material->sampler->data);
+		context->PSSetShaderResources(0, 1, &material->texture->srv);
 
 		context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &stride, &offset);
 		context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
@@ -288,14 +289,15 @@ void Renderer::RenderInstanceMeshComponents()
 
 	for (InstanceMeshComponent* instanceMesh : InstanceMeshComponent::system.components)
 	{
+		Material* material = instanceMesh->material;
 		PipelineStateObject* pso = instanceMesh->pso;
 
-		context->RSSetState(pso->rastState->data);
+		context->RSSetState(material->rastState->data);
 
-		context->VSSetShader(pso->shader->vertexShader, nullptr, 0);
-		context->PSSetShader(pso->shader->pixelShader, nullptr, 0);
+		context->VSSetShader(material->shader->vertexShader, nullptr, 0);
+		context->PSSetShader(material->shader->pixelShader, nullptr, 0);
 
-		context->PSSetSamplers(0, 1, &pso->sampler->data);
+		context->PSSetSamplers(0, 1, &material->sampler->data);
 
 		context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &stride, &offset);
 		context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
