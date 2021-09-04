@@ -36,6 +36,9 @@ void World::Init()
 //TODO: this sort of stuff doesn't work when deserialisation is onvolved as is.
 void World::Start()
 {
+	materialSystem.CreateAllMaterials();
+	textureSystem.CreateAllTextures();
+
 	//Init component systems
 	for (IComponentSystem* componentSystem : activeComponentSystems)
 	{

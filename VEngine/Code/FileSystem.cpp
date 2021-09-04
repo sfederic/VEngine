@@ -32,9 +32,6 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	world.Cleanup();
 
-	//Re-init world
-	//world.Start();
-
 	Serialiser s(worldName, OpenMode::In);
 
 	while (!s.is.eof())

@@ -38,13 +38,6 @@ void Engine::Init(int argc, char* argv[])
 
 	activeCamera = &editorCamera;
 	
-	NormalActor::system.Add();
-	MeshComponent::system.Init();
-	InstanceMeshComponent::system.Init();
-
-	materialSystem.CreateAllMaterials();
-	textureSystem.CreateAllTextures();
-
 	world.Init();
 	editor->UpdateWorldList();
 }
