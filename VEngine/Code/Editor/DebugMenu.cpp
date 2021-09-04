@@ -39,7 +39,7 @@ void DebugMenu::Init()
 
 	ImGui::StyleColorsDark();
 	ImGui_ImplWin32_Init((HWND)editor->windowHwnd);
-	ImGui_ImplDX11_Init(renderer.device.Get(), renderer.context.Get());
+	ImGui_ImplDX11_Init(renderer.device, renderer.context);
 }
 
 void DebugMenu::Tick(double deltaTime)
@@ -134,6 +134,12 @@ void DebugMenu::IterateOverProperties(Properties& props)
 			DirectX::XMFLOAT3* xmfloat3 = props.GetData<XMFLOAT3>(name);
 			float* f3[3] = { &xmfloat3->x, &xmfloat3->y, &xmfloat3->z };
 			ImGui::InputFloat3(name.c_str(), *f3);
+		}		
+		else if (props.CheckType<XMFLOAT2>(name))
+		{
+			DirectX::XMFLOAT2* xmfloat2 = props.GetData<XMFLOAT2>(name);
+			float* f2[2] = { &xmfloat2->x, &xmfloat2->y };
+			ImGui::InputFloat2(name.c_str(), *f2);
 		}
 		else if (props.CheckType<std::string>(name))
 		{
