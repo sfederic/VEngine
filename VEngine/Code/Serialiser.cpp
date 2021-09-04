@@ -20,6 +20,11 @@ void Serialiser::Serialise(Properties props)
 		{
 			os << name << "\n" << *props.GetData<float>(name) << "\n";
 		}
+		else if (props.CheckType<XMFLOAT2>(name))
+		{
+			XMFLOAT2* value = props.GetData<XMFLOAT2>(name);
+			os << name << "\n" << value->x << " " << value->y << "\n";
+		}		
 		else if (props.CheckType<XMFLOAT3>(name))
 		{
 			XMFLOAT3* value = props.GetData<XMFLOAT3>(name);
@@ -73,6 +78,12 @@ void Serialiser::Deserialise(Properties props)
 		{
 			is >> *props.GetData<float>(name);
 		}
+		else if (props.CheckType<XMFLOAT2>(name))
+		{
+			XMFLOAT2* float3 = props.GetData<XMFLOAT2>(name);
+			is >> float3->x;
+			is >> float3->y;
+		}		
 		else if (props.CheckType<XMFLOAT3>(name))
 		{
 			XMFLOAT3* float3 = props.GetData<XMFLOAT3>(name);
