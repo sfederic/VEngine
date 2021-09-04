@@ -64,7 +64,7 @@ void Renderer::CreateFactory()
 {
 	ComPtr<IDXGIFactory> tempDxgiFactory;
 	HR(CreateDXGIFactory(IID_PPV_ARGS(tempDxgiFactory.GetAddressOf())));
-	HR(tempDxgiFactory->QueryInterface(dxgiFactory.GetAddressOf()));
+	HR(tempDxgiFactory->QueryInterface(&dxgiFactory));
 }
 
 void Renderer::CreateDevice()
@@ -77,22 +77,22 @@ void Renderer::CreateDevice()
 	const D3D_FEATURE_LEVEL featureLevels[] = { D3D_FEATURE_LEVEL_11_1 };
 	D3D_FEATURE_LEVEL selectedFeatureLevel;
 
-	ComPtr<IDXGIAdapter1> adapter;
+	IDXGIAdapter1* adapter;
 	for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_MINIMUM_POWER,
-		IID_PPV_ARGS(adapter.ReleaseAndGetAddressOf())) != DXGI_ERROR_NOT_FOUND; i++)
+		IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)
 	{
-		gpuAdapters.push_back(adapter.Get());
+		gpuAdapters.push_back(adapter);
 		DXGI_ADAPTER_DESC1 desc = {};
 		adapter->GetDesc1(&desc);
 		gpuAdaptersDesc.push_back(desc);
 	}
 
 	//TODO: selecting adapters here isn't working.
-	HR(D3D11CreateDevice(adapter.Get(), D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags,
-		featureLevels, _countof(featureLevels), D3D11_SDK_VERSION, device.GetAddressOf(),
-		&selectedFeatureLevel, context.GetAddressOf()));
+	HR(D3D11CreateDevice(adapter, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags,
+		featureLevels, _countof(featureLevels), D3D11_SDK_VERSION, &device,
+		&selectedFeatureLevel, &context));
 
-	RenderUtils::device = device.Get();
+	RenderUtils::device = device;
 }
 
 void Renderer::CreateSwapchain(HWND window)
@@ -107,8 +107,8 @@ void Renderer::CreateSwapchain(HWND window)
 	sd.BufferCount = swapchainCount;
 
 	ComPtr<IDXGISwapChain> tempSwapchain;
-	HR(dxgiFactory->CreateSwapChain(device.Get(), &sd, tempSwapchain.GetAddressOf()));
-	HR(tempSwapchain->QueryInterface(swapchain.GetAddressOf()));
+	HR(dxgiFactory->CreateSwapChain(device, &sd, tempSwapchain.GetAddressOf()));
+	HR(tempSwapchain->QueryInterface(&swapchain));
 }
 
 void Renderer::CreateRTVAndDSV()
@@ -134,7 +134,7 @@ void Renderer::CreateRTVAndDSV()
 
 	ComPtr<ID3D11Texture2D> depthStencilBuffer;
 	HR(device->CreateTexture2D(&dsDesc, nullptr, depthStencilBuffer.GetAddressOf()));
-	HR(device->CreateDepthStencilView(depthStencilBuffer.Get(), nullptr, dsv.GetAddressOf()));
+	HR(device->CreateDepthStencilView(depthStencilBuffer.Get(), nullptr, &dsv));
 	depthStencilBuffer.Reset();
 }
 
@@ -150,7 +150,7 @@ void Renderer::CreateInputLayout()
 	ShaderItem* shader = shaderSystem.FindShader(L"DefaultShader.hlsl");
 
 	HR(device->CreateInputLayout(inputDesc, _countof(inputDesc), shader->vertexCode->GetBufferPointer(), shader->vertexCode->GetBufferSize(), &inputLayout));
-	context->IASetInputLayout(inputLayout.Get());
+	context->IASetInputLayout(inputLayout);
 }
 
 void Renderer::CreateRasterizerStates()
@@ -196,7 +196,7 @@ void Renderer::CreateBlendStates()
 	alphaToCoverageDesc.RenderTarget[0].BlendEnable = false;
 	alphaToCoverageDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
-	HR(device->CreateBlendState(&alphaToCoverageDesc, blendStateAlphaToCoverage.GetAddressOf()));
+	HR(device->CreateBlendState(&alphaToCoverageDesc, &blendStateAlphaToCoverage));
 }
 
 void Renderer::CreateMainConstantBuffers()
@@ -229,9 +229,9 @@ void Renderer::RenderSetup()
 	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
 
 	context->ClearRenderTargetView(rtvs[frameIndex], clearColour);
-	context->ClearDepthStencilView(dsv.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
+	context->ClearDepthStencilView(dsv, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 
-	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv.Get());
+	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
@@ -255,8 +255,8 @@ void Renderer::RenderMeshComponents()
 		shaderMatrices.model = mesh->GetWorldMatrix();
 
 		shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
-		context->UpdateSubresource(cbMatrices.Get(), 0, nullptr, &shaderMatrices, 0, 0);
-		context->VSSetConstantBuffers(cbMatrixRegister, 1, cbMatrices.GetAddressOf());
+		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 		context->DrawIndexed(mesh->data->indices->size(), 0, 0);
 	}
@@ -270,8 +270,8 @@ void Renderer::RenderInstanceMeshComponents()
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
 	shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
-	context->UpdateSubresource(cbMatrices.Get(), 0, nullptr, &shaderMatrices, 0, 0);
-	context->VSSetConstantBuffers(cbMatrixRegister, 1, cbMatrices.GetAddressOf());
+	context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+	context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 	for (InstanceMeshComponent* instanceMesh : InstanceMeshComponent::system.components)
 	{
@@ -301,15 +301,15 @@ void Renderer::RenderBounds()
 
 		context->IASetVertexBuffers(0, 1, &debugBox.boxMesh->pso->vertexBuffer->data, &stride, &offset);
 
-		context->VSSetConstantBuffers(cbMatrixRegister, 1, cbMatrices.GetAddressOf());
+		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 		shaderMatrices.view = activeCamera->GetViewMatrix();
 
 		//Set debug wireframe material colour
 		MaterialShaderData materialShaderData;
 		materialShaderData.ambient = XMFLOAT4(0.75f, 0.75f, 0.75f, 1.0f);
-		context->UpdateSubresource(cbMaterial.Get(), 0, nullptr, &materialShaderData, 0, 0);
-		context->PSSetConstantBuffers(cbMaterialRegister, 1, cbMaterial.GetAddressOf());
+		context->UpdateSubresource(cbMaterial, 0, nullptr, &materialShaderData, 0, 0);
+		context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 
 		for (IActorSystem* actorSystem : world.activeActorSystems)
 		{
@@ -330,7 +330,7 @@ void Renderer::RenderBounds()
 						shaderMatrices.model.r[2].m128_f32[2] *= spatialComponent->boundingBox.Extents.z + 0.01f;
 
 						shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
-						context->UpdateSubresource(cbMatrices.Get(), 0, nullptr, &shaderMatrices, 0, 0);
+						context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 
 						context->Draw(debugBox.boxMesh->data->vertices->size(), 0);
 					}
@@ -347,7 +347,7 @@ void Renderer::Present()
 
 void* Renderer::GetSwapchain()
 {
-	return swapchain.Get();
+	return swapchain;
 }
 
 float Renderer::GetAspectRatio()
@@ -383,7 +383,7 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 		rtvs[rtvIndex]->Release();
 	}
 
-	dsv.Reset();
+	dsv->Release();
 
 	uiSystem.Cleanup();
 
@@ -399,7 +399,7 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 
 	CreateRTVAndDSV();
 
-	uiSystem.Init((void*)swapchain.Get());
+	uiSystem.Init((void*)swapchain);
 
 	shaderMatrices.Create(GetAspectRatio());
 	activeCamera->proj = shaderMatrices.proj;
@@ -424,6 +424,6 @@ void Renderer::SetRenderPipelineStates(MeshComponent* mesh)
 	context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
 
 	MaterialShaderData* materialShaderData = &material->shaderData;
-	context->UpdateSubresource(cbMaterial.Get(), 0, nullptr, &materialShaderData, 0, 0);
-	context->PSSetConstantBuffers(cbMaterialRegister, 1, cbMaterial.GetAddressOf());
+	context->UpdateSubresource(cbMaterial, 0, nullptr, &materialShaderData, 0, 0);
+	context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 }

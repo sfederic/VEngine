@@ -14,14 +14,14 @@ void Widget::Tick(float deltaTime)
 
 void Widget::Start()
 {
-	spriteBatch = new DirectX::SpriteBatch(renderer.context.Get());
+	spriteBatch = new DirectX::SpriteBatch(renderer.context);
 }
 
 ComPtr<ID3D11ShaderResourceView> Widget::CreateTexture(const std::wstring& filename)
 {
 	ComPtr<ID3D11ShaderResourceView> textureView;
 	std::wstring filepath = L"Textures/" + filename;
-	CreateWICTextureFromFile(renderer.device.Get(), filepath.c_str(), nullptr, &textureView);
+	CreateWICTextureFromFile(renderer.device, filepath.c_str(), nullptr, &textureView);
 	assert(textureView && "texture filename will be wrong");
 
 	return textureView;

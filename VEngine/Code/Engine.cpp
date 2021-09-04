@@ -33,7 +33,7 @@ void Engine::Init(int argc, char* argv[])
 
 	fbxImporter.Init();
 
-	uiSystem.Init((void*)renderer.swapchain.Get());
+	uiSystem.Init((void*)renderer.swapchain);
 	debugMenu.Init();
 
 	activeCamera = &editorCamera;
