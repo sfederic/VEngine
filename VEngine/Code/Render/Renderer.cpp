@@ -419,6 +419,7 @@ void Renderer::SetRenderPipelineStates(MeshComponent* mesh)
 	context->PSSetShader(material->shader->pixelShader, nullptr, 0);
 
 	context->PSSetSamplers(0, 1, &material->sampler->data);
+	context->PSSetShaderResources(0, 1, &material->texture->srv);
 
 	context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &stride, &offset);
 	context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
