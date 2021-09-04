@@ -250,26 +250,7 @@ void Renderer::RenderMeshComponents()
 
 	for (MeshComponent* mesh : MeshComponent::system.components)
 	{
-		//const FLOAT blendState[4] = { 0.f };
-		//context->OMSetBlendState(blendStateAlphaToCoverage, blendState, 0xFFFFFFFF);
-
-		Material* material = mesh->material;
-		PipelineStateObject* pso = mesh->pso;
-
-		context->RSSetState(material->rastState->data);
-
-		context->VSSetShader(material->shader->vertexShader, nullptr, 0);
-		context->PSSetShader(material->shader->pixelShader, nullptr, 0);
-
-		context->PSSetSamplers(0, 1, &material->sampler->data);
-		context->PSSetShaderResources(0, 1, &material->texture->srv);
-
-		context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &stride, &offset);
-		context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
-
-		MaterialShaderData* materialShaderData = &material->shaderData;
-		context->UpdateSubresource(cbMaterial.Get(), 0, nullptr, &materialShaderData, 0, 0);
-		context->PSSetConstantBuffers(cbMaterialRegister, 1, cbMaterial.GetAddressOf());
+		SetRenderPipelineStates(mesh);
 
 		shaderMatrices.model = mesh->GetWorldMatrix();
 
@@ -294,22 +275,7 @@ void Renderer::RenderInstanceMeshComponents()
 
 	for (InstanceMeshComponent* instanceMesh : InstanceMeshComponent::system.components)
 	{
-		Material* material = instanceMesh->material;
-		PipelineStateObject* pso = instanceMesh->pso;
-
-		context->RSSetState(material->rastState->data);
-
-		context->VSSetShader(material->shader->vertexShader, nullptr, 0);
-		context->PSSetShader(material->shader->pixelShader, nullptr, 0);
-
-		context->PSSetSamplers(0, 1, &material->sampler->data);
-
-		context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &stride, &offset);
-		context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
-
-		MaterialShaderData* materialShaderData = &material->shaderData;
-		context->UpdateSubresource(cbMaterial.Get(), 0, nullptr, &materialShaderData, 0, 0);
-		context->PSSetConstantBuffers(cbMaterialRegister, 1, cbMaterial.GetAddressOf());
+		SetRenderPipelineStates(instanceMesh);
 
 		//Update instance data and set SRV
 		context->UpdateSubresource(instanceMesh->structuredBuffer, 0, nullptr, instanceMesh->instanceData.data(), 0, 0);
@@ -437,4 +403,27 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 
 	shaderMatrices.Create(GetAspectRatio());
 	activeCamera->proj = shaderMatrices.proj;
+}
+
+void Renderer::SetRenderPipelineStates(MeshComponent* mesh)
+{
+	Material* material = mesh->material;
+	PipelineStateObject* pso = mesh->pso;
+
+	context->RSSetState(material->rastState->data);
+
+	//const FLOAT blendState[4] = { 0.f };
+	//context->OMSetBlendState(blendStateAlphaToCoverage, blendState, 0xFFFFFFFF);
+
+	context->VSSetShader(material->shader->vertexShader, nullptr, 0);
+	context->PSSetShader(material->shader->pixelShader, nullptr, 0);
+
+	context->PSSetSamplers(0, 1, &material->sampler->data);
+
+	context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &stride, &offset);
+	context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
+
+	MaterialShaderData* materialShaderData = &material->shaderData;
+	context->UpdateSubresource(cbMaterial.Get(), 0, nullptr, &materialShaderData, 0, 0);
+	context->PSSetConstantBuffers(cbMaterialRegister, 1, cbMaterial.GetAddressOf());
 }

@@ -9,6 +9,8 @@
 
 using namespace Microsoft::WRL;
 
+struct MeshComponent;
+
 struct Renderer
 {
 	static const int swapchainCount = 2;
@@ -71,6 +73,9 @@ struct Renderer
 	float GetViewportHeight();
 	void SetViewportWidthHeight(float width, float height);
 	void ResizeSwapchain(int newWidth, int newHeight);
+
+private:
+	void SetRenderPipelineStates(MeshComponent* mesh);
 };
 
 extern Renderer renderer;
