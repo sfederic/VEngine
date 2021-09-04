@@ -12,6 +12,7 @@ struct MaterialSystem
 
 	void AddMaterial(Material* material);
 	void CreateAllMaterials();
+	void Cleanup();
 };
 
 extern MaterialSystem materialSystem;

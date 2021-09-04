@@ -24,3 +24,13 @@ void MaterialSystem::CreateAllMaterials()
 
 	systemState = SystemStates::Loaded;
 }
+
+void MaterialSystem::Cleanup()
+{
+	for (Material* material : materials)
+	{
+		delete material;
+	}
+
+	materials.clear();
+}

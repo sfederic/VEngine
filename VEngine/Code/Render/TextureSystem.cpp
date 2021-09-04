@@ -30,3 +30,12 @@ void TextureSystem::CreateAllTextures()
 		texture = RenderUtils::CreateTexture(textureIt.first);
 	}
 }
+
+void TextureSystem::Cleanup()
+{
+	for (auto textureIt : texture2DMap)
+	{
+		Texture2D* texture = textureIt.second;
+		delete texture;
+	}
+}

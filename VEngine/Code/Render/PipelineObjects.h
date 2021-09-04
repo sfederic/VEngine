@@ -16,6 +16,7 @@ struct Texture2D
 	ID3D11ShaderResourceView* srv = nullptr;
 
 	Texture2D(std::wstring filename_);
+	~Texture2D();
 };
 
 struct ShaderResourceView

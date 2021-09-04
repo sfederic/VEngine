@@ -18,6 +18,12 @@ Texture2D::Texture2D(std::wstring filename_)
 	filename = filename_;
 }
 
+Texture2D::~Texture2D()
+{
+	data->Release();
+	srv->Release();
+}
+
 PipelineStateObject::PipelineStateObject()
 {
 }

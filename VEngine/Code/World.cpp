@@ -7,6 +7,8 @@
 #include "Components/MeshComponent.h"
 #include "FileSystem.h"
 #include "Profile.h"
+#include "Render/TextureSystem.h"
+#include "Render/MaterialSystem.h"
 
 World world;
 
@@ -96,6 +98,9 @@ Actor* World::FindComponentOwnerByName(std::string componentName)
 
 void World::Cleanup()
 {
+	textureSystem.Cleanup();
+	materialSystem.Cleanup();
+
 	//CLEANUP COMPONENT SYSTEMS
 	for (IComponentSystem* componentSystem : activeComponentSystems)
 	{
