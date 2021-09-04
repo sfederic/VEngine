@@ -8,6 +8,11 @@ void MaterialSystem::AddMaterial(Material* material)
 {
 	assert(material);
 	materials.push_back(material);
+
+	if (systemState == SystemStates::Loaded)
+	{
+		material->Create();
+	}
 }
 
 void MaterialSystem::CreateAllMaterials()
@@ -16,4 +21,6 @@ void MaterialSystem::CreateAllMaterials()
 	{
 		material->Create();
 	}
+
+	systemState = SystemStates::Loaded;
 }
