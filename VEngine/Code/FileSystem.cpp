@@ -29,7 +29,8 @@ void FileSystem::LoadWorld(std::string worldName)
 {
 	world.Cleanup();
 
-	Serialiser s(worldName, OpenMode::In);
+	std::string file = "WorldMaps/" + worldName;
+	Serialiser s(file, OpenMode::In);
 
 	while (!s.is.eof())
 	{
@@ -38,7 +39,7 @@ void FileSystem::LoadWorld(std::string worldName)
 
 		if (actorSystemName == "")
 		{
-			break;
+			continue;
 		}
 
 		size_t numActorsToSpawn = 0;

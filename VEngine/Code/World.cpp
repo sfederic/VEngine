@@ -5,7 +5,7 @@
 #include "Components/ComponentSystemCache.h"
 #include "Components/IComponentSystem.h"
 #include "Components/MeshComponent.h"
-
+#include "FileSystem.h"
 #include "Profile.h"
 
 World world;
@@ -23,6 +23,9 @@ void World::Init()
 	{
 		activeComponentSystems.push_back(componentSystemIt.second);
 	}
+
+	//Load starting map
+	fileSystem.LoadWorld("test.sav");
 
 	//Start default loaded world
 	//Start();
