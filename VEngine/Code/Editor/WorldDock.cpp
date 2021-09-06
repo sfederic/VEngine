@@ -29,17 +29,11 @@ void WorldDock::PopulateWorldActorList()
 	//Need to block signals because calling functions on tree items makes the connect()ed event fire
 	actorTreeWidget->blockSignals(true);
 
-	for (IActorSystem* actorSystem : world.activeActorSystems)
+	for (Actor* actor : world.GetAllActorsInWorld())
 	{
-		std::vector<Actor*> actors;
-		actorSystem->GetActors(actors);
-
-		for (Actor* actor : actors)
-		{
-			auto item = new QTreeWidgetItem(actorTreeWidget);
-			item->setText(0, QString::fromStdString(actor->name));
-			item->setFlags(item->flags() | Qt::ItemIsEditable);
-		}
+		auto item = new QTreeWidgetItem(actorTreeWidget);
+		item->setText(0, QString::fromStdString(actor->name));
+		item->setFlags(item->flags() | Qt::ItemIsEditable);
 	}
 
 	actorTreeWidget->blockSignals(false);

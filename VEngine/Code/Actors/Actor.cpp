@@ -159,10 +159,7 @@ void Actor::Destroy()
 
 bool Actor::SetName(std::string newName)
 {
-	std::vector<Actor*> outActors;
-	actorSystem->GetActors(outActors);
-
-	for (Actor* actor : outActors)
+	for (Actor* actor : actorSystem->GetActors())
 	{
 		if (actor->name == newName)
 		{

@@ -55,10 +55,7 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, IActorSystem* actorS
 	bool bRayHit = false;
 	ray.hitActors.clear();
 
-	std::vector<Actor*> outActors;
-	actorSystem->GetActors(outActors);
-
-	for (Actor* actor : outActors)
+	for (Actor* actor : actorSystem->GetActors())
 	{
 		for (SpatialComponent* spatialComponent : actor->GetComponentsOfType<SpatialComponent>())
 		{

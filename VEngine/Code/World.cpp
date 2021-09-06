@@ -79,19 +79,13 @@ Actor* World::FindActorByName(std::string actorName)
 
 Actor* World::FindComponentOwnerByName(std::string componentName)
 {
-	for (IActorSystem* actorSystem : activeActorSystems)
+	for (Actor* actor : GetAllActorsInWorld())
 	{
-		std::vector<Actor*> actors;
-		actorSystem->GetActors(actors);
-
-		for (Actor* actor : actors)
+		for (Component* component : actor->components)
 		{
-			for (Component* component : actor->components)
+			if (component->name == componentName)
 			{
-				if (component->name == componentName)
-				{
-					return actor;
-				}
+				return actor;
 			}
 		}
 	}
@@ -99,12 +93,17 @@ Actor* World::FindComponentOwnerByName(std::string componentName)
 	return nullptr;
 }
 
-void World::GetAllActorsInWorld(std::vector<Actor*>& outActors)
+std::vector<Actor*> World::GetAllActorsInWorld()
 {
+	std::vector<Actor*> outActors;
+
 	for (IActorSystem* actorSystem : activeActorSystems)
 	{
-		actorSystem->GetActors(outActors);
+		auto actors = actorSystem->GetActors();
+		outActors.insert(outActors.end(), actors.begin(), actors.end());
 	}
+
+	return outActors;
 }
 
 void World::Cleanup()

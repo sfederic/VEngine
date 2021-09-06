@@ -328,9 +328,7 @@ void Renderer::RenderBounds()
 		context->UpdateSubresource(cbMaterial, 0, nullptr, &materialShaderData, 0, 0);
 		context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 
-		std::vector<Actor*> actors;
-		world.GetAllActorsInWorld(actors);
-		for (Actor* actor : actors)
+		for (Actor* actor : world.GetAllActorsInWorld())
 		{
 			for (SpatialComponent* spatialComponent : actor->GetComponentsOfType<SpatialComponent>())
 			{

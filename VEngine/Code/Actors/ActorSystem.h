@@ -95,12 +95,16 @@ struct ActorSystem : IActorSystem
 		return actor;
 	}
 
-	virtual void GetActors(std::vector<Actor*>& outActors) override
+	virtual std::vector<Actor*> GetActors() override
 	{
+		std::vector<Actor*> outActors;
+
 		for (T* actor : actors)
 		{
 			outActors.push_back(actor);
 		}
+
+		return outActors;
 	}
 
 	virtual void Cleanup() override
