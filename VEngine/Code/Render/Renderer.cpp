@@ -328,30 +328,23 @@ void Renderer::RenderBounds()
 		context->UpdateSubresource(cbMaterial, 0, nullptr, &materialShaderData, 0, 0);
 		context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 
-		for (IActorSystem* actorSystem : world.activeActorSystems)
+		std::vector<Actor*> actors;
+		world.GetAllActorsInWorld(actors);
+		for (Actor* actor : actors)
 		{
-			std::vector<Actor*> actors;
-			actorSystem->GetActors(actors);
-			for (Actor* actor : actors)
+			for (SpatialComponent* spatialComponent : actor->GetComponentsOfType<SpatialComponent>())
 			{
-				for (Component* component : actor->components)
-				{
-					SpatialComponent* spatialComponent = dynamic_cast<SpatialComponent*>(component);
-					if (spatialComponent)
-					{
-						shaderMatrices.model = spatialComponent->GetWorldMatrix();
+				shaderMatrices.model = spatialComponent->GetWorldMatrix();
 
-						//Set bouding box scale just slightly more than the component to avoid overlap
-						shaderMatrices.model.r[0].m128_f32[0] *= spatialComponent->boundingBox.Extents.x + 0.01f;
-						shaderMatrices.model.r[1].m128_f32[1] *= spatialComponent->boundingBox.Extents.y + 0.01f;
-						shaderMatrices.model.r[2].m128_f32[2] *= spatialComponent->boundingBox.Extents.z + 0.01f;
+				//Set bouding box scale just slightly more than the component to avoid overlap
+				shaderMatrices.model.r[0].m128_f32[0] *= spatialComponent->boundingBox.Extents.x + 0.01f;
+				shaderMatrices.model.r[1].m128_f32[1] *= spatialComponent->boundingBox.Extents.y + 0.01f;
+				shaderMatrices.model.r[2].m128_f32[2] *= spatialComponent->boundingBox.Extents.z + 0.01f;
 
-						shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
-						context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+				shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
+				context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 
-						context->Draw(debugBox.boxMesh->data->vertices->size(), 0);
-					}
-				}
+				context->Draw(debugBox.boxMesh->data->vertices->size(), 0);
 			}
 		}
 	}
