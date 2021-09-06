@@ -62,7 +62,7 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, IActorSystem* actorS
 	{
 		for (SpatialComponent* spatialComponent : actor->GetComponentsOfType<SpatialComponent>())
 		{
-			BoundingOrientedBox& boundingBox = spatialComponent->boundingBox;
+			BoundingOrientedBox boundingBox = spatialComponent->boundingBox;
 
 			boundingBox.Center = spatialComponent->transform.position;
 			boundingBox.Orientation = spatialComponent->transform.rotation;
