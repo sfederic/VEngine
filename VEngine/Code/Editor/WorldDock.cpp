@@ -17,6 +17,7 @@ WorldDock::WorldDock() : QDockWidget("World")
 
 	actorTreeWidget->setSelectionMode(QAbstractItemView::SelectionMode::SingleSelection);
 	connect(actorTreeWidget, &QTreeWidget::itemClicked, this, &WorldDock::ClickOnActorInList);
+	connect(actorTreeWidget, &QTreeWidget::itemChanged, this, &WorldDock::ActorNameChanged);
 
 	setWidget(actorTreeWidget);
 }
@@ -42,8 +43,6 @@ void WorldDock::PopulateWorldActorList()
 	}
 
 	actorTreeWidget->blockSignals(false);
-
-	connect(actorTreeWidget, &QTreeWidget::itemChanged, this, &WorldDock::ActorNameChanged);
 }
 
 void WorldDock::ClickOnActorInList(QTreeWidgetItem* item, int column)
@@ -59,10 +58,14 @@ void WorldDock::ClickOnActorInList(QTreeWidgetItem* item, int column)
 
 void WorldDock::ActorNameChanged(QTreeWidgetItem* item, int column)
 {
-	QString actorName = item->text(column);
+	QString newActorName = item->text(column);
 
-	if (worldEditor.pickedActor) //pickedActor should be set before this is hit in the other events
+	Actor* actor = worldEditor.pickedActor;
+	if (actor) //pickedActor should be set before this is hit in the other events
 	{
-		worldEditor.pickedActor->name = actorName.toStdString();
+		if (!actor->SetName(newActorName.toStdString()))
+		{
+			editor->Log(L"Could not change actor name. Name already exists.");
+		}
 	}
 }
