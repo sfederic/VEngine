@@ -49,6 +49,8 @@ struct Renderer
 
 	void Init(void* window, int viewportWidth, int viewportHeight);
 	void Tick();
+
+private:
 	void CreateFactory();
 	void CreateDevice();
 	void CreateSwapchain(HWND window);
@@ -58,12 +60,14 @@ struct Renderer
 	void CreateBlendStates();
 	void CreateMainConstantBuffers();
 	void CheckSupportedFeatures();
-	void RenderSetup();
-	void Render();
 	void RenderMeshComponents();
 	void RenderInstanceMeshComponents();
 	void RenderBounds();
+
+public:
 	void Present();
+	void RenderSetup();
+	void Render();
 	void* GetSwapchain();
 	float GetAspectRatio();
 	float GetViewportWidth();
