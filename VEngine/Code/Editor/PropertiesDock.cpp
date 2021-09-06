@@ -101,8 +101,9 @@ void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRo
         }
         else if (props.CheckType<float>(name))
         {
-            //auto floatWidget = new FloatWidget((float*)actorProperty.second);
-            //actorPropsGridLayout->addWidget(floatWidget, currentGridRow, propertyDataColumn);
+            auto floatWidget = new FloatWidget(props.GetData<float>(name));
+            actorPropsGridLayout->addWidget(floatWidget, currentGridRow, propertyDataColumn);
+            propertyWidgetsToUpdate.push_back((IPropertyWidget*)floatWidget);
         }
         else if (props.CheckType<XMFLOAT3>(name))
         {
