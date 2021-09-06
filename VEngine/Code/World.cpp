@@ -99,6 +99,14 @@ Actor* World::FindComponentOwnerByName(std::string componentName)
 	return nullptr;
 }
 
+void World::GetAllActorsInWorld(std::vector<Actor*>& outActors)
+{
+	for (IActorSystem* actorSystem : activeActorSystems)
+	{
+		actorSystem->GetActors(outActors);
+	}
+}
+
 void World::Cleanup()
 {
 	textureSystem.Cleanup();

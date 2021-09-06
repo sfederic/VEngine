@@ -23,6 +23,7 @@ struct World
 	void TickAllComponentSystems(double deltaTime);
 	Actor* FindActorByName(std::string actorName);
 	Actor* FindComponentOwnerByName(std::string componentName);
+	void GetAllActorsInWorld(std::vector<Actor*>& outActors);
 	void Cleanup();
 };
 
