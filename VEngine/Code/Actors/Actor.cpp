@@ -1,4 +1,5 @@
 #include "Actor.h"
+#include "Actors/IActorSystem.h"
 #include "Components/SpatialComponent.h"
 
 Actor::Actor()
@@ -154,6 +155,24 @@ void Actor::Tick(double deltaTime)
 
 void Actor::Destroy()
 {
+}
+
+bool Actor::SetName(std::string newName)
+{
+	std::vector<Actor*> outActors;
+	actorSystem->GetActors(outActors);
+
+	for (Actor* actor : outActors)
+	{
+		if (actor->name == newName)
+		{
+			//Name collision
+			return false;
+		}
+	}
+
+	name = newName;
+	return true;
 }
 
 void Actor::CreateAllComponents()

@@ -48,6 +48,9 @@ struct Actor
 	virtual void Tick(double deltaTime);
 	virtual void Destroy();
 
+	//Iterates over every actor from the actor's system to avoid a rename collision. bool denotes if collision occured.
+	bool SetName(std::string newName);
+
 	//This shouldn't be called too often, only when ComponentSystem::Init() can't be called
 	void CreateAllComponents();
 
