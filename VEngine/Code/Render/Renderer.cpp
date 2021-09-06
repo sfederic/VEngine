@@ -15,6 +15,7 @@
 #include "Material.h"
 #include "Profile.h"
 #include "RenderUtils.h"
+#include "Editor/DebugMenu.h"
 
 Renderer renderer;
 
@@ -51,12 +52,19 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 
 void Renderer::Tick()
 {
+	//BOUNDING BOXES HOTKEY
 	if (Input::GetAsyncKey(Keys::Ctrl))
 	{
 		if (Input::GetKeyUp(Keys::B))
 		{
 			drawBoundingBoxes = !drawBoundingBoxes;
 		}
+	}
+
+	//DRAW ALL AS WIREFRAME HOTKEY
+	if (Input::GetKeyUp(Keys::F2))
+	{
+		drawAllAsWireframe = !drawAllAsWireframe;
 	}
 }
 
@@ -419,7 +427,14 @@ void Renderer::SetRenderPipelineStates(MeshComponent* mesh)
 	Material* material = mesh->material;
 	PipelineStateObject* pso = mesh->pso;
 
-	context->RSSetState(material->rastState->data);
+	if (drawAllAsWireframe)
+	{
+		context->RSSetState(rastStateWireframe);
+	}
+	else
+	{
+		context->RSSetState(material->rastState->data);
+	}
 
 	//const FLOAT blendState[4] = { 0.f };
 	//context->OMSetBlendState(blendStateAlphaToCoverage, blendState, 0xFFFFFFFF);
