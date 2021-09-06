@@ -1,6 +1,7 @@
 #include "Actor.h"
 #include "Actors/IActorSystem.h"
 #include "Components/SpatialComponent.h"
+#include "World.h"
 
 Actor::Actor()
 {
@@ -159,11 +160,10 @@ void Actor::Destroy()
 
 bool Actor::SetName(std::string newName)
 {
-	for (Actor* actor : actorSystem->GetActors())
+	for (Actor* actor : world.GetAllActorsInWorld())
 	{
 		if (actor->name == newName)
 		{
-			//Name collision
 			return false;
 		}
 	}
