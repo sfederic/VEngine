@@ -139,13 +139,12 @@ Properties Actor::GetProps()
 
 	props.Add("Name", &name);
 
-	//This was how to join maps. Keeping here for reference.
-	/*for (Component* component : components)
+	//Add in all component properties
+	for (Component* component : components)
 	{
 		Properties componentProps = component->GetProps();
-		props.dataMap.insert(componentProps.dataMap.begin(), componentProps.dataMap.end());
-		props.typeMap.insert(componentProps.typeMap.begin(), componentProps.typeMap.end());
-	}*/
+		props.Merge(componentProps);
+	}
 
 	return props;
 }
