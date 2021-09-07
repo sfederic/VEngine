@@ -135,9 +135,12 @@ void TransformGizmo::Tick()
     ImGuizmo::ViewManipulate(&view.m[0][0], camDistance, ImVec2(viewManipulateRight - 128, viewManipulateTop), ImVec2(128, 128), 0x10101010);*/
 
     //Toggle and draw grid
-    if (Input::GetKeyUp(Keys::G))
+    if (Input::GetAsyncKey(Keys::ShiftLeft))
     {
-        bGridToggle = !bGridToggle;
+        if (Input::GetKeyUp(Keys::G))
+        {
+            bGridToggle = !bGridToggle;
+        }
     }
 
     if (bGridToggle && !Core::gameplayOn)
