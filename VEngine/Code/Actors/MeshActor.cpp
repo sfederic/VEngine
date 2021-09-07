@@ -1,5 +1,6 @@
 #include "MeshActor.h"
 #include "Components/MeshComponent.h"
+#include "Render/Material.h"
 
 MeshActor::MeshActor(std::string meshFilename_)
 {
@@ -23,5 +24,6 @@ Properties MeshActor::GetProps()
 {
 	Properties props = Actor::GetProps();
 	props.Add("Mesh Filename", &meshFilename);
+	props.Merge(mesh->material->GetProps());
 	return props;
 }

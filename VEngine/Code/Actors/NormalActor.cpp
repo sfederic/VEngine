@@ -34,8 +34,5 @@ Properties NormalActor::GetProps()
 {
 	auto props = Actor::GetProps();
 	props.title = name;
-	props.Add("UvOffset", &mesh1->material->shaderData.uvOffset);
-	props.Add("UvScale", &mesh1->material->shaderData.uvScale);
-	props.Add("UvRotation", &mesh1->material->shaderData.uvRotation);
 	return props;
 }
