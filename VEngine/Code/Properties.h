@@ -43,6 +43,11 @@ struct Properties
 		propMap[name] = prop;
 	}
 
+	void Merge(Properties propsToMerge)
+	{
+		propMap.merge(propsToMerge.propMap);
+	}
+
 	template <typename T>
 	bool CheckType(std::string name)
 	{
