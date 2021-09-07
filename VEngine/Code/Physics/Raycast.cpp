@@ -31,7 +31,7 @@
 //	debugLines.push_back(debugLine);
 //}
 
-bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, IActorSystem* actorSystem, bool fromScreen)
+bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, bool fromScreen)
 {
 	ray.origin = origin;
 	ray.direction = direction;
@@ -55,7 +55,7 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, IActorSystem* actorS
 	bool bRayHit = false;
 	ray.hitActors.clear();
 
-	for (Actor* actor : actorSystem->GetActors())
+	for (Actor* actor : world.GetAllActorsInWorld())
 	{
 		for (SpatialComponent* spatialComponent : actor->GetComponentsOfType<SpatialComponent>())
 		{
@@ -183,7 +183,7 @@ bool RaycastAll(Ray& ray, XMVECTOR origin, XMVECTOR direction)
 	return false;
 }
 
-bool RaycastFromScreen(Ray& ray, int sx, int sy, CameraComponent* camera, IActorSystem* actorSystem)
+bool RaycastFromScreen(Ray& ray, int sx, int sy, CameraComponent* camera)
 {
 	float vx = (2.f * sx / renderer.GetViewportWidth() - 1.0f) / camera->proj.r[0].m128_f32[0];
 	float vy = (-2.f * sy / renderer.GetViewportHeight() + 1.0f) / camera->proj.r[1].m128_f32[1];
@@ -191,18 +191,10 @@ bool RaycastFromScreen(Ray& ray, int sx, int sy, CameraComponent* camera, IActor
 	ray.origin = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	ray.direction = XMVectorSet(vx, vy, 1.f, 0.f);
 
-	return Raycast(ray, ray.origin, ray.direction, actorSystem, true);
+	return Raycast(ray, ray.origin, ray.direction, true);
 }
 
 bool RaycastAllFromScreen(Ray& ray)
 {
-	for(IActorSystem* actorSystem : world.activeActorSystems)
-	{
-		if (RaycastFromScreen(ray, editor->viewportMouseX, editor->viewportMouseY, activeCamera, actorSystem))
-		{
-			return true;
-		}
-	}
-
-	return false;
+	return RaycastFromScreen(ray, editor->viewportMouseX, editor->viewportMouseY, activeCamera);
 }
