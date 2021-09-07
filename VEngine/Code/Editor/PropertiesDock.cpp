@@ -19,6 +19,8 @@
 PropertiesDock::PropertiesDock() : QDockWidget("Properties")
 {
     actorPropsScrollArea = new QScrollArea(this);
+
+    this->setMinimumSize(250, 250);
 }
 
 void PropertiesDock::DisplayActorProperties(Actor* actor)
