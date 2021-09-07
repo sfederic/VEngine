@@ -10,6 +10,7 @@ struct Win32Editor : IEditor
 	virtual void SetActorProps(Actor* actor) override;
 	virtual void UpdateWorldList() override;
 	virtual void RefreshAssetList() override;
+	virtual void ClearProperties() override;
 	void SetupWindow();
 	void HandleMessages();
 };

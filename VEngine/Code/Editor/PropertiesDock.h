@@ -22,4 +22,5 @@ struct PropertiesDock : public QDockWidget
 	PropertiesDock();
 	void DisplayActorProperties(Actor* actor);
 	void IterateOverProperties(Properties& props, int& currentGridRow);
+	void Clear();
 };

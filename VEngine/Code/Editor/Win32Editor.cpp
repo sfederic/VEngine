@@ -95,3 +95,7 @@ void Win32Editor::HandleMessages()
 void Win32Editor::RefreshAssetList()
 {
 }
+
+void Win32Editor::ClearProperties()
+{
+}

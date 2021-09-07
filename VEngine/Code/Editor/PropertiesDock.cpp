@@ -20,7 +20,7 @@ PropertiesDock::PropertiesDock() : QDockWidget("Properties")
 {
     actorPropsScrollArea = new QScrollArea(this);
 
-    this->setMinimumSize(250, 250);
+    setFixedWidth(375);
 }
 
 void PropertiesDock::DisplayActorProperties(Actor* actor)
@@ -133,5 +133,20 @@ void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRo
         }
 
         currentGridRow++;
+    }
+}
+
+void PropertiesDock::Clear()
+{
+    previousActor = nullptr;
+    propertyWidgetsToUpdate.clear();
+
+    if (actorPropsGridLayout && actorPropsWidget)
+    {
+        delete actorPropsGridLayout;
+        actorPropsGridLayout = nullptr;
+
+        delete actorPropsWidget;
+        actorPropsWidget = nullptr;
     }
 }

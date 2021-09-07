@@ -63,6 +63,11 @@ void QtEditor::RefreshAssetList()
     mainWindow->assetDock->AssetFolderClicked();
 }
 
+void QtEditor::ClearProperties()
+{
+    mainWindow->propertiesDock->Clear();
+}
+
 void QtEditor::SetEditorFont()
 {
     //Capcom have a cool talk on UI design and fonts for RE Engine

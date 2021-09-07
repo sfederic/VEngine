@@ -15,9 +15,11 @@ WorldEditor worldEditor;
 void WorldEditor::Tick()
 {
 	SpawnActorOnClick();
+	DeselectPickedActor();
 	HandleActorPicking();
 	DuplicateActor();
 	DeleteActor();
+
 	SaveWorld();
 }
 
@@ -138,5 +140,15 @@ void WorldEditor::SpawnActorOnClick()
 
 			editor->UpdateWorldList();
 		}
+	}
+}
+
+void WorldEditor::DeselectPickedActor()
+{
+	if (Input::GetKeyUp(Keys::BackSpace))
+	{
+		pickedActor = nullptr;
+
+		editor->ClearProperties();
 	}
 }

@@ -22,4 +22,5 @@ struct IEditor
 	virtual void SetActorProps(Actor* actor) = 0;
 	virtual void UpdateWorldList() = 0;
 	virtual void RefreshAssetList() = 0;
+	virtual void ClearProperties() = 0;
 };

@@ -13,6 +13,7 @@ struct QtEditor : IEditor
 	virtual void SetActorProps(Actor* actor) override;
 	virtual void UpdateWorldList() override;
 	virtual void RefreshAssetList() override;
+	virtual void ClearProperties() override;
 	void SetEditorFont();
 	void EnableDarkMode();
 };
