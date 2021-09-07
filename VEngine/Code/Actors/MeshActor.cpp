@@ -16,5 +16,7 @@ MeshActor::MeshActor(std::string meshFilename_)
 
 Properties MeshActor::GetProps()
 {
-	return Actor::GetProps();
+	Properties props = Actor::GetProps();
+	props.Add("Mesh Filename", &meshFilename);
+	return props;
 }
