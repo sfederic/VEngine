@@ -130,7 +130,7 @@ void CameraComponent::Tick(double deltaTime)
 		//WASD MOVEMENT
 		//if (!gConsole.bConsoleActive)
 		{
-			if (Input::GetMouseRightDown())
+			if (Input::GetAsyncKey(Keys::MouseRight))
 			{
 				const float moveSpeed = 7.5f * deltaTime;
 
