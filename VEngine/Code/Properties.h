@@ -1,5 +1,5 @@
 #pragma once
-#include <unordered_map>
+#include <map>
 #include <optional>
 #include <string>
 #include <typeindex>
@@ -16,7 +16,7 @@ struct Property
 struct Properties
 {
 	//PROPERTIES FOR TEXT
-	std::unordered_map<std::string, Property> propMap;
+	std::map<std::string, Property> propMap;
 	std::string title;
 
 	Properties() {}
