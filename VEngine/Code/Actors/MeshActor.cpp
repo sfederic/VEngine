@@ -14,6 +14,11 @@ MeshActor::MeshActor(std::string meshFilename_)
 	rootComponent = mesh;
 }
 
+void MeshActor::Create()
+{
+	mesh->meshFilename = meshFilename;
+}
+
 Properties MeshActor::GetProps()
 {
 	Properties props = Actor::GetProps();

@@ -154,6 +154,10 @@ void Actor::Tick(double deltaTime)
 {
 }
 
+void Actor::Create()
+{
+}
+
 void Actor::Destroy()
 {
 }

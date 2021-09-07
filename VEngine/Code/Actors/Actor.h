@@ -46,6 +46,7 @@ struct Actor
 	XMFLOAT3 GetUpVector();
 	virtual Properties GetProps() = 0;
 	virtual void Tick(double deltaTime);
+	virtual void Create();
 	virtual void Destroy();
 
 	//Iterates over every actor from the actor's system to avoid a rename collision. bool denotes if collision occured.

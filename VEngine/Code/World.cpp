@@ -39,6 +39,12 @@ void World::Start()
 	materialSystem.CreateAllMaterials();
 	textureSystem.CreateAllTextures();
 
+	//Init actor systems
+	for (IActorSystem* actorSystem : activeActorSystems)
+	{
+		actorSystem->Init();
+	}
+
 	//Init component systems
 	for (IComponentSystem* componentSystem : activeComponentSystems)
 	{

@@ -10,6 +10,7 @@ struct IActorSystem
 	std::string name;
 
 	virtual void Tick(double deltaTime) = 0;
+	virtual void Init() = 0;
 	virtual std::vector<Actor*> GetActors() = 0;
 	virtual Actor* SpawnActor(Transform transform) = 0;
 	virtual Actor* FindActorByName(std::string actorName) = 0;

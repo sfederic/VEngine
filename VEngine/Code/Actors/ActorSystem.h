@@ -56,6 +56,14 @@ struct ActorSystem : IActorSystem
 		}
 	}
 
+	virtual void Init() override
+	{
+		for (T* actor : actors)
+		{
+			actor->Create();
+		}
+	}
+
 	virtual void Serialise(Serialiser& s) override
 	{
 		s.WriteLine(name); //Use actorsystem name to create again from ActorSystemCache on Deserialise

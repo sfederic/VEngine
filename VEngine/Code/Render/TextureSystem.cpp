@@ -38,4 +38,6 @@ void TextureSystem::Cleanup()
 		Texture2D* texture = textureIt.second;
 		delete texture;
 	}
+
+	texture2DMap.clear();
 }
