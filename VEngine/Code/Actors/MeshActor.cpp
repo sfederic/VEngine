@@ -23,7 +23,7 @@ void MeshActor::Create()
 Properties MeshActor::GetProps()
 {
 	Properties props = Actor::GetProps();
+	props.title = name;
 	props.Add("Mesh Filename", &meshFilename);
-	props.Merge(mesh->material->GetProps());
 	return props;
 }

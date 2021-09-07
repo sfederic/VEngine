@@ -57,7 +57,6 @@ void MeshComponent::Create()
 Properties MeshComponent::GetProps()
 {
 	Properties props("MeshComponent");
-	props.Add("Mesh Filename", &meshFilename);
-	props.Add("UV offset", &material->shaderData.uvOffset);
+	props.Merge(material->GetProps());
 	return props;
 }
