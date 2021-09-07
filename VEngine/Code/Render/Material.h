@@ -1,6 +1,7 @@
 #pragma once
 #include <DirectXMath.h>
 #include <string>
+#include "Properties.h"
 
 using namespace DirectX;
 
@@ -35,4 +36,5 @@ struct Material
 
 	Material(std::wstring textureFilename_, std::wstring shaderFilename_);
 	virtual void Create();
+	virtual Properties GetProps();
 };

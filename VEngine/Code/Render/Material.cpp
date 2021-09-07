@@ -20,3 +20,12 @@ void Material::Create()
 	shader = shaderSystem.FindShader(shaderFilename);
 	rastState = renderer.rastStateMap["solid"];
 }
+
+Properties Material::GetProps()
+{
+	Properties props("Material");
+	props.Add("UvOffset", &shaderData.uvOffset);
+	props.Add("UvScale", &shaderData.uvScale);
+	props.Add("UvRotation", &shaderData.uvRotation);
+	return props;
+}
