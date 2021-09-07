@@ -145,10 +145,12 @@ void WorldEditor::SpawnActorOnClick()
 
 void WorldEditor::DeselectPickedActor()
 {
-	if (Input::GetKeyUp(Keys::BackSpace))
+	if (Input::GetAsyncKey(Keys::ShiftLeft))
 	{
-		pickedActor = nullptr;
-
-		editor->ClearProperties();
+		if (Input::GetKeyUp(Keys::C))
+		{
+			pickedActor = nullptr;
+			editor->ClearProperties();
+		}
 	}
 }
