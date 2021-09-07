@@ -1,5 +1,5 @@
 #include "VMath.h"
-#include <math.h>
+#include <cmath>
 #include "Actors/Actor.h"
 
 namespace VMath
