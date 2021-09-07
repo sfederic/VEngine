@@ -52,13 +52,6 @@ void PropertiesDock::DisplayActorProperties(Actor* actor)
     int gridRow = 0;
     IterateOverProperties(props, gridRow);
 
-    //Go over component properties
-    for (Component* component : actor->components)
-    {
-        Properties componentProps = component->GetProps();
-        IterateOverProperties(componentProps, gridRow);
-    }
-
     actorPropsWidget->setLayout(actorPropsGridLayout);
     setWidget(actorPropsWidget);
 

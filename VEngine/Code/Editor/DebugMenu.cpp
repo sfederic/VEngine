@@ -99,13 +99,6 @@ void DebugMenu::RenderActorProps()
 	auto props = worldEditor.pickedActor->GetProps();
 	IterateOverProperties(props);
 
-	//Go over component properties
-	for (Component* component : worldEditor.pickedActor->components)
-	{
-		Properties componentProps = component->GetProps();
-		IterateOverProperties(componentProps);
-	}
-
 	ImGui::End();
 }
 
