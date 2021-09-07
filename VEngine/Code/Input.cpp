@@ -24,7 +24,11 @@ namespace Input
 		mouseWheelDown = false;
 
 		mouseLeftUp = false;
+		mouseLeftDown = false;
+
 		mouseRightUp = false;
+		mouseRightDown = false;
+
 		mouseMiddleUp = false;
 	}
 
