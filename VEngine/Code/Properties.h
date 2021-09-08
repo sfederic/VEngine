@@ -65,6 +65,7 @@ struct Properties
 		return propMap[name].info.value();
 	}
 
+	//PROPERTIES FOR BINARY 
 	//Binary props work the same as text, just hash the name passed in
 	//template <typename T>
 	//void Add(const std::string& name, T* data)
