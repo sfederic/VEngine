@@ -71,15 +71,23 @@ struct ActorSystem : IActorSystem
 
 		for (T* actor : actors)
 		{
-			s.Serialise(actor->GetProps());
+			auto propsVector = actor->GetAllProps();
+			for (auto props : propsVector)
+			{
+				s.Serialise(props);
+			}
 		}
 	}
 
 	virtual void Deserialise(Serialiser& s) override
 	{
-		for (Actor* actor : actors)
+		for (T* actor : actors)
 		{
-			s.Deserialise(actor->GetProps());
+			auto propsVector = actor->GetAllProps();
+			for (auto props : propsVector)
+			{
+				s.Deserialise(props);
+			}
 		}
 	}
 

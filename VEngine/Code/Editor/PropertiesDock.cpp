@@ -48,9 +48,12 @@ void PropertiesDock::DisplayActorProperties(Actor* actor)
     actorPropsGridLayout->setAlignment(Qt::AlignTop);
 
     //Go over actor properties
-    Properties props = actor->GetProps();
     int gridRow = 0;
-    IterateOverProperties(props, gridRow);
+
+    for (auto props : actor->GetAllProps())
+    {
+        IterateOverProperties(props, gridRow);
+    }
 
     actorPropsWidget->setLayout(actorPropsGridLayout);
     setWidget(actorPropsWidget);

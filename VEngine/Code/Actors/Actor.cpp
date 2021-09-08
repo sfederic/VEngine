@@ -139,14 +139,22 @@ Properties Actor::GetProps()
 
 	props.Add("Name", &name);
 
-	//Add in all component properties
+	return props;
+}
+
+std::vector<Properties> Actor::GetAllProps()
+{
+	std::vector<Properties> propsVector;
+
+	propsVector.push_back(GetProps());
+
 	for (Component* component : components)
 	{
 		Properties componentProps = component->GetProps();
-		props.Merge(componentProps);
+		propsVector.push_back(componentProps);
 	}
 
-	return props;
+	return propsVector;
 }
 
 void Actor::Tick(double deltaTime)
