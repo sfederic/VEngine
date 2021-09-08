@@ -71,11 +71,15 @@ struct ActorSystem : IActorSystem
 
 		for (T* actor : actors)
 		{
+			Properties mergedProps;
+
 			auto propsVector = actor->GetAllProps();
 			for (auto props : propsVector)
 			{
-				s.Serialise(props);
+				mergedProps.Merge(props);
 			}
+
+			s.Serialise(mergedProps);
 		}
 	}
 
@@ -83,11 +87,15 @@ struct ActorSystem : IActorSystem
 	{
 		for (T* actor : actors)
 		{
+			Properties mergedProps;
+
 			auto propsVector = actor->GetAllProps();
 			for (auto props : propsVector)
 			{
-				s.Deserialise(props);
+				mergedProps.Merge(props);
 			}
+
+			s.Deserialise(mergedProps);
 		}
 	}
 

@@ -2,20 +2,20 @@ NormalActor
 0
 MeshActor
 1
-Position
-0.278953 1.21657 2.98316
 Mesh Filename
-hollow_barrel.fbx
-Scale
-1.25 0.999998 1.25
-Rotation
--0.483167 0.224112 0.129464 0.836398
+cube.fbx
 Name
 MeshActor0
+Position
+1 0 5
+Rotation
+-0 0 -0 1
+Scale
+1 1 1
 UvOffset
-0 0
-UvScale
-5 1
+69 1
 UvRotation
-69
+0
+UvScale
+0.5 0.5
 next
