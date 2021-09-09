@@ -8,11 +8,13 @@
 #include "Components/BoxTriggerComponent.h"
 #include "Components/InstanceMeshComponent.h"
 #include "Components/Lights/DirectionalLightComponent.h"
+#include "Components/Lights/PointLightComponent.h"
 #include "Actors/Actor.h"
 #include "Actors/NormalActor.h"
 #include "ShaderSystem.h"
 #include "DebugActors/DebugBox.h"
 #include "DebugActors/DebugSphere.h"
+#include "DebugActors/DebugIcoSphere.h"
 #include "Input.h"
 #include "World.h"
 #include "Material.h"
@@ -291,7 +293,7 @@ void Renderer::RenderMeshComponents()
 
 			DirectionalLightComponent* light = DirectionalLightComponent::system.components[i];
 
-			shaderLights.lights[i].colour = light->colour;
+			shaderLights.lights[i].colour = light->lightData.colour;
 			shaderLights.lights[i].direction = light->GetForwardVector();
 		}
 
@@ -388,6 +390,7 @@ void Renderer::RenderBounds()
 void Renderer::RenderLightMeshes()
 {
 	static DebugSphere debugSphere;
+	static DebugIcoSphere debugIcoSphere;
 
 	if (Core::gameplayOn)
 	{
@@ -400,8 +403,6 @@ void Renderer::RenderLightMeshes()
 	context->VSSetShader(shader->vertexShader, nullptr, 0);
 	context->PSSetShader(shader->pixelShader, nullptr, 0);
 
-	context->IASetVertexBuffers(0, 1, &debugSphere.sphereMesh->pso->vertexBuffer->data, &stride, &offset);
-
 	context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
@@ -412,6 +413,10 @@ void Renderer::RenderLightMeshes()
 	context->UpdateSubresource(cbMaterial, 0, nullptr, &materialShaderData, 0, 0);
 	context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 
+
+	//DIRECTIONAL LIGHTS
+	context->IASetVertexBuffers(0, 1, &debugSphere.sphereMesh->pso->vertexBuffer->data, &stride, &offset);
+
 	for (auto directionalLight : DirectionalLightComponent::system.components)
 	{
 		shaderMatrices.model = directionalLight->GetWorldMatrix();
@@ -419,6 +424,19 @@ void Renderer::RenderLightMeshes()
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 
 		context->Draw(debugSphere.sphereMesh->data->vertices->size(), 0);
+	}
+
+
+	//POINT LIGHTS
+	context->IASetVertexBuffers(0, 1, &debugIcoSphere.mesh->pso->vertexBuffer->data, &stride, &offset);
+
+	for (auto pointLight : PointLightComponent::system.components)
+	{
+		shaderMatrices.model = pointLight->GetWorldMatrix();
+		shaderMatrices.MakeModelViewProjectionMatrix();
+		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+
+		context->Draw(debugIcoSphere.mesh->data->vertices->size(), 0);
 	}
 }
 

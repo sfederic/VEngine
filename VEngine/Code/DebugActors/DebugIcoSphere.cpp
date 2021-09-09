@@ -3,6 +3,6 @@
 
 DebugIcoSphere::DebugIcoSphere()
 {
-	mesh = new MeshComponent("icosphere.fbx", L"test.png");
+	mesh = new MeshComponent("ico_sphere.fbx", L"test.png");
 	mesh->Create();
 }
