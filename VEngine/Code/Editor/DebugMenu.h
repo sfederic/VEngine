@@ -16,6 +16,8 @@ struct DebugNotification
 	float timeOnScreen;
 };
 
+//TODO: ShowWorldVertexCount() function
+
 struct DebugMenu
 {
 	std::vector<DebugNotification> debugNotifications;
