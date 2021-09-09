@@ -137,6 +137,8 @@
     <ClCompile Include="Code\Actors\DirectionalLightActor.cpp" />
     <ClCompile Include="Code\DebugActors\DebugSphere.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\Float4Widget.cpp" />
+    <ClCompile Include="Code\Components\Lights\PointLightComponent.cpp" />
+    <ClCompile Include="Code\DebugActors\DebugIcoSphere.cpp" />
     <ClInclude Include="Code\Components\BoxTriggerComponent.h" />
     <ClInclude Include="Code\Animation\AnimationStructures.h" />
     <ClInclude Include="Code\Actors\Actor.h" />
@@ -268,6 +270,8 @@
     <ClInclude Include="Code\Actors\DirectionalLightActor.h" />
     <ClInclude Include="Code\DebugActors\DebugSphere.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\Float4Widget.h" />
+    <ClInclude Include="Code\Components\Lights\PointLightComponent.h" />
+    <ClInclude Include="Code\DebugActors\DebugIcoSphere.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
