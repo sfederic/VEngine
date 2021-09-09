@@ -130,6 +130,12 @@ void DebugMenu::IterateOverProperties(Properties& props)
 			float* f3[3] = { &xmfloat3->x, &xmfloat3->y, &xmfloat3->z };
 			ImGui::InputFloat3(name.c_str(), *f3);
 		}		
+		else if (props.CheckType<XMFLOAT4>(name))
+		{
+			DirectX::XMFLOAT4* xmfloat4 = props.GetData<XMFLOAT4>(name);
+			float* f4[4] = { &xmfloat4->x, &xmfloat4->y, &xmfloat4->z, &xmfloat4->w };
+			ImGui::InputFloat4(name.c_str(), *f4);
+		}		
 		else if (props.CheckType<XMFLOAT2>(name))
 		{
 			DirectX::XMFLOAT2* xmfloat2 = props.GetData<XMFLOAT2>(name);
