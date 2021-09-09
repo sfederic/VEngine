@@ -96,6 +96,18 @@ struct ShaderMatrices
 	void MakeModelViewProjectionMatrix();
 };
 
+struct DirectionalLight
+{
+	XMFLOAT4 colour;
+	XMFLOAT3 direction;
+	float pad;
+};
+
+struct ShaderLights
+{
+	DirectionalLight directionalLight;
+};
+
 struct InstanceData
 {
 	XMMATRIX world;

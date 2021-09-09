@@ -36,6 +36,7 @@ struct Renderer
 	//Constant buffers and data
 	ID3D11Buffer* cbMatrices;
 	ID3D11Buffer* cbMaterial;
+	ID3D11Buffer* cbLights;
 
 	//Viewport
 	D3D11_VIEWPORT viewport;

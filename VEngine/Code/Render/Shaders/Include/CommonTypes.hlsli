@@ -22,6 +22,18 @@ cbuffer cbSkiningData : register(b2)
 	float4x4 boneTransforms[96];
 };
 
+struct DirectionalLight
+{
+	float4 colour;
+	float3 direction;
+	float pad;
+};
+
+cbuffer cbLights : register(b3)
+{
+	DirectionalLight directionalLight;
+}
+
 struct InstanceData
 {
 	float4x4 modelMatrix;

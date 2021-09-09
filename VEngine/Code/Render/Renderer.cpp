@@ -27,9 +27,12 @@ UINT offset = 0;
 
 const int cbMatrixRegister = 0;
 const int cbMaterialRegister = 1;
+const int cbSkinningRegister = 2;
+const int cbLightsRegister = 3;
 const int instanceSRVRegister = 3;
 
 ShaderMatrices shaderMatrices;
+ShaderLights shaderLights;
 
 void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 {
@@ -224,6 +227,12 @@ void Renderer::CreateMainConstantBuffers()
 	cbMaterial = RenderUtils::CreateDefaultBuffer(sizeof(MaterialShaderData), 
 		D3D11_BIND_CONSTANT_BUFFER, &materialShaderData);
 	assert(cbMaterial);
+
+	//Lights buffer
+	ShaderLights shaderLights;
+	cbLights = RenderUtils::CreateDefaultBuffer(sizeof(ShaderLights),
+		D3D11_BIND_CONSTANT_BUFFER, &shaderLights);
+	assert(cbLights);
 }
 
 void Renderer::CheckSupportedFeatures()
@@ -260,7 +269,7 @@ void Renderer::RenderMeshComponents()
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
 
-	for (MeshComponent* mesh : MeshComponent::system.components)
+	for (auto mesh : MeshComponent::system.components)
 	{
 		SetRenderPipelineStates(mesh);
 
@@ -272,6 +281,17 @@ void Renderer::RenderMeshComponents()
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
+		//Set lights
+		for (auto directionalLight : DirectionalLightComponent::system.components)
+		{
+			shaderLights.directionalLight.colour = directionalLight->colour;
+			shaderLights.directionalLight.direction = directionalLight->GetForwardVector();
+		}
+
+		context->UpdateSubresource(cbLights, 0, nullptr, &shaderLights, 0, 0);
+		context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
+		
+		//Draw
 		context->DrawIndexed(mesh->data->indices->size(), 0, 0);
 	}
 
