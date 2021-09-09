@@ -96,16 +96,33 @@ struct ShaderMatrices
 	void MakeModelViewProjectionMatrix();
 };
 
-struct DirectionalLight
+enum class LightType
 {
+	Directional = 0,
+	Point = 1,
+	Spot = 2
+};
+
+struct Light
+{
+	XMFLOAT4 position;
 	XMFLOAT4 colour;
 	XMFLOAT3 direction;
-	float pad;
+	float range;
+	LightType lightType = LightType::Directional;
+
+	float pad[3];
+	//bool enabled;
 };
 
 struct ShaderLights
 {
-	DirectionalLight directionalLight;
+	static const int MAX_LIGHTS = 8;
+
+	XMFLOAT4 eyePosition;
+	XMFLOAT4 globalAmbience;
+
+	Light lights[MAX_LIGHTS];
 };
 
 struct InstanceData

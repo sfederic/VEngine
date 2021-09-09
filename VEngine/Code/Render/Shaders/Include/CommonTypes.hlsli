@@ -22,16 +22,46 @@ cbuffer cbSkiningData : register(b2)
 	float4x4 boneTransforms[96];
 };
 
-struct DirectionalLight
+struct Light
 {
+	float4 position;
 	float4 colour;
 	float3 direction;
-	float pad;
+	float range;
+	int lightType;
 };
+
+static const int MAX_LIGHTS = 8;
+static const int DIRECTIONAL_LIGHT = 0;
+static const int POINT_LIGHT = 1;
+static const int SPOT_LIGHT = 2;
 
 cbuffer cbLights : register(b3)
 {
-	DirectionalLight directionalLight;
+	float4 eyePosition;
+	float4 globalAmbient;
+	Light lights[MAX_LIGHTS];
+}
+
+float4 CalcDiffuse(Light light, float3 L, float3 N)
+{
+	float NdotL = max(0.0, dot(N, L));
+	return light.colour * NdotL;
+}
+
+struct LightingResult
+{
+	float4 diffuse;
+};
+
+LightingResult CalcDirectionalLight(Light light, float3 normal)
+{
+	LightingResult result;
+
+	float3 lightDir = -light.direction.xyz;
+	result.diffuse = CalcDiffuse(light, lightDir, normal);
+
+	return result;
 }
 
 struct InstanceData
