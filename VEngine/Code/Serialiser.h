@@ -12,6 +12,7 @@ enum class OpenMode
 	In = std::ios_base::in
 };
 
+//TODO: split serialiser into Serialiser and Deserialiser and use std::ofstream/ifstream instead of o/istreams
 struct Serialiser
 {
 	std::filebuf fb;
