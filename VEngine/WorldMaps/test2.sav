@@ -19,3 +19,16 @@ UvRotation
 UvScale
 0.5 0.5
 next
+DirectionalLightActor
+1
+Colour
+0 0 0 0
+Name
+DirectionalLightActor0
+Position
+-6 4 3
+Rotation
+-0 0 -0 1
+Scale
+1 1 1
+next

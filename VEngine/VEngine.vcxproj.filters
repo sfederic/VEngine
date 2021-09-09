@@ -179,7 +179,7 @@
     <ClCompile Include="Code\Components\SpatialComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\DebugBox.cpp">
+    <ClCompile Include="Code\DebugActors\DebugBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\FileSystem.cpp">
@@ -225,6 +225,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Editor\PropertyWidgets\Float2Widget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Components\Lights\DirectionalLightComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Actors\DirectionalLightActor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\DebugActors\DebugSphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -340,7 +349,7 @@
     <ClInclude Include="Code\Components\SpatialComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\DebugBox.h">
+    <ClInclude Include="Code\DebugActors\DebugBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\PropertyWidgets\Float3Widget.h">
@@ -386,6 +395,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\PropertyWidgets\Float2Widget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Components\Lights\DirectionalLightComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\DirectionalLightActor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\DebugActors\DebugSphere.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

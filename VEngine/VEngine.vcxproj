@@ -122,7 +122,7 @@
     <ClCompile Include="Code\UI\Widget.cpp" />
     <ClCompile Include="Code\Actors\NormalActor.cpp" />
     <ClCompile Include="Code\Components\SpatialComponent.cpp" />
-    <ClCompile Include="Code\Actors\DebugBox.cpp" />
+    <ClCompile Include="Code\DebugActors\DebugBox.cpp" />
     <ClCompile Include="Code\FileSystem.cpp" />
     <ClCompile Include="Code\Components\InstanceMeshComponent.cpp" />
     <ClCompile Include="Code\Actors\MeshActor.cpp" />
@@ -133,6 +133,9 @@
     <ClCompile Include="Code\Render\RenderUtils.cpp" />
     <ClCompile Include="Code\Render\MaterialSystem.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\Float2Widget.cpp" />
+    <ClCompile Include="Code\Components\Lights\DirectionalLightComponent.cpp" />
+    <ClCompile Include="Code\Actors\DirectionalLightActor.cpp" />
+    <ClCompile Include="Code\DebugActors\DebugSphere.cpp" />
     <ClInclude Include="Code\Components\BoxTriggerComponent.h" />
     <ClInclude Include="Code\Animation\AnimationStructures.h" />
     <ClInclude Include="Code\Actors\Actor.h" />
@@ -249,7 +252,7 @@
     <ClInclude Include="Code\UI\Widget.h" />
     <ClInclude Include="Code\Actors\NormalActor.h" />
     <ClInclude Include="Code\Components\SpatialComponent.h" />
-    <ClInclude Include="Code\Actors\DebugBox.h" />
+    <ClInclude Include="Code\DebugActors\DebugBox.h" />
     <ClInclude Include="Code\FileSystem.h" />
     <ClInclude Include="Code\Components\InstanceMeshComponent.h" />
     <ClInclude Include="Code\Actors\MeshActor.h" />
@@ -260,6 +263,9 @@
     <ClInclude Include="Code\Render\RenderUtils.h" />
     <ClInclude Include="Code\Render\MaterialSystem.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\Float2Widget.h" />
+    <ClInclude Include="Code\Components\Lights\DirectionalLightComponent.h" />
+    <ClInclude Include="Code\Actors\DirectionalLightActor.h" />
+    <ClInclude Include="Code\DebugActors\DebugSphere.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

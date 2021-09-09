@@ -1,15 +1,18 @@
 #include "Renderer.h"
 #include "Debug.h"
+#include "Core.h"
 #include "ShaderSystem.h"
 #include "Camera.h"
 #include "UI/UISystem.h"
 #include "Components/MeshComponent.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Components/InstanceMeshComponent.h"
+#include "Components/Lights/DirectionalLightComponent.h"
 #include "Actors/Actor.h"
 #include "Actors/NormalActor.h"
 #include "ShaderSystem.h"
-#include "Actors/DebugBox.h"
+#include "DebugActors/DebugBox.h"
+#include "DebugActors/DebugSphere.h"
 #include "Input.h"
 #include "World.h"
 #include "Material.h"
@@ -248,6 +251,7 @@ void Renderer::Render()
 	RenderMeshComponents();
 	RenderInstanceMeshComponents();
 	RenderBounds();
+	RenderLightMeshes();
 }
 
 void Renderer::RenderMeshComponents()
@@ -345,6 +349,43 @@ void Renderer::RenderBounds()
 				context->Draw(debugBox.boxMesh->data->vertices->size(), 0);
 			}
 		}
+	}
+}
+
+void Renderer::RenderLightMeshes()
+{
+	static DebugSphere debugSphere;
+
+	if (Core::gameplayOn)
+	{
+		return;
+	}
+
+	context->RSSetState(rastStateWireframe);
+
+	ShaderItem* shader = shaderSystem.FindShader(L"SolidColour.hlsl");
+	context->VSSetShader(shader->vertexShader, nullptr, 0);
+	context->PSSetShader(shader->pixelShader, nullptr, 0);
+
+	context->IASetVertexBuffers(0, 1, &debugSphere.sphereMesh->pso->vertexBuffer->data, &stride, &offset);
+
+	context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+
+	shaderMatrices.view = activeCamera->GetViewMatrix();
+
+	//Set debug sphere wireframe material colour
+	MaterialShaderData materialShaderData;
+	materialShaderData.ambient = XMFLOAT4(1.f, 1.f, 0.f, 1.0f);
+	context->UpdateSubresource(cbMaterial, 0, nullptr, &materialShaderData, 0, 0);
+	context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
+
+	for (auto directionalLight : DirectionalLightComponent::system.components)
+	{
+		shaderMatrices.model = directionalLight->GetWorldMatrix();
+		shaderMatrices.MakeModelViewProjectionMatrix();
+		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+
+		context->Draw(debugSphere.sphereMesh->data->vertices->size(), 0);
 	}
 }
 
