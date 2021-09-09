@@ -236,6 +236,9 @@
     <ClCompile Include="Code\DebugActors\DebugSphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Editor\PropertyWidgets\Float4Widget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -404,6 +407,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\DebugActors\DebugSphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Editor\PropertyWidgets\Float4Widget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
