@@ -29,21 +29,22 @@ ShaderItem* ShaderSystem::FindShader(std::wstring shaderName)
     return shaderMap.find(shaderName)->second;
 }
 
-ComPtr<ID3DBlob> ShaderSystem::CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target)
+ID3DBlob* ShaderSystem::CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target)
 {
 	UINT compileFlags = 0;
 #ifdef _DEBUG
 	compileFlags = D3DCOMPILE_SKIP_OPTIMIZATION | D3DCOMPILE_DEBUG;
 #endif
-	ComPtr<ID3DBlob> code;
+	ID3DBlob* code;
 	ComPtr<ID3DBlob> error;
 
 	HR(D3DCompileFromFile(filename, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
-		entry, target, compileFlags, 0, code.GetAddressOf(), error.GetAddressOf()));
+		entry, target, compileFlags, 0, &code, error.GetAddressOf()));
 
 	if (error)
 	{
-		const wchar_t* errMsg = (wchar_t*)error->GetBufferPointer();
+        const char* errMsg = (char*)error->GetBufferPointer();
+        MessageBoxA(0, errMsg, "Shader Compile Error", 0);
 	}
 
 	return code;
@@ -100,30 +101,19 @@ void ShaderSystem::CompileAllShadersFromFile()
     {
         shaderMap[shaders[i].filename] = &shaders[i];
 
-        const char* vsEntry = "VSMain";
-        const char* vsTarget = "vs_5_0";
-
         std::wstring directory;
         directory += L"Code/Render/Shaders/";
         directory += shaders[i].filename;
 
-        ID3DBlob* vertexError;
-        D3DCompileFromFile(directory.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, vsEntry, vsTarget, flags, 0, &shaders[i].vertexCode, &vertexError);
-        if (vertexError)
-        {
-            const char* errMsg = (char*)vertexError->GetBufferPointer();
-            MessageBoxA(0, errMsg, "Shader Compile Error", 0);
-        }
+        const char* vsEntry = "VSMain";
+        const char* vsTarget = "vs_5_0";
+        shaders[i].vertexCode = CreateShaderFromFile(directory.c_str(), vsEntry, vsTarget);
+        assert(shaders[i].vertexCode);
 
         const char* psEntry = "PSMain";
         const char* psTarget = "ps_5_0";
-        ID3DBlob* pixelError;
-        D3DCompileFromFile(directory.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, psEntry, psTarget, flags, 0, &shaders[i].pixelCode, &pixelError);
-        if (pixelError)
-        {
-            const char* errMsg = (char*)pixelError->GetBufferPointer();
-            MessageBoxA(0, errMsg, "Shader Compile Error", 0);
-        }
+        shaders[i].pixelCode = CreateShaderFromFile(directory.c_str(), psEntry, psTarget);
+        assert(shaders[i].pixelCode);
     }
 }
 

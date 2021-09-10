@@ -25,9 +25,6 @@ struct ShaderItem
 
 	struct ID3D11VertexShader* vertexShader;
 	struct ID3D11PixelShader* pixelShader;
-
-	struct ID3D11ShaderResourceView* srv;
-	struct ID3D11Texture2D* texture;
 };
 
 struct ShaderSystem
@@ -40,7 +37,7 @@ public:
 	void Init();
 	void Tick();
 	ShaderItem* FindShader(std::wstring shaderName);
-	ComPtr<ID3DBlob> CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target);
+	ID3DBlob* CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target);
 	void CreateAllShaders();
 	void CompileAllShadersFromFile();
 	void CleanUpShaders();
