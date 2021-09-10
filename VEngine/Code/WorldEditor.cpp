@@ -61,10 +61,16 @@ void WorldEditor::DuplicateActor()
 		{
 			if (pickedActor)
 			{
+				//TODO: need to look into copying properties from the picked actor
+				//to the new duplicated actor so that variable values are copied across
+
 				Transform transform = pickedActor->GetTransform();
 				Actor* newDuplicateActor = pickedActor->actorSystem->SpawnActor(transform);
 				newDuplicateActor->CreateAllComponents();
 				editor->UpdateWorldList();
+
+				//Set new actor as picked in-editor
+				pickedActor = newDuplicateActor;
 			}
 		}
 	}
