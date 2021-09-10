@@ -471,6 +471,9 @@ void Renderer::UpdateLights()
 			light->transform.position.y,
 			light->transform.position.z, 1.0f);
 
+		XMFLOAT3 forwardVector = light->GetForwardVector();
+		light->lightData.direction = XMFLOAT4(forwardVector.x, forwardVector.y, forwardVector.z, 0.f);
+
 		shaderLights.lights[shaderLightsIndex] = light->lightData;
 		shaderLightsIndex++;
 	}
