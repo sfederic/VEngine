@@ -27,6 +27,8 @@ struct ShaderItem
 	struct ID3D11PixelShader* pixelShader;
 };
 
+//TODO: need to make a CompileShaderFromFile() function eventually to work with compiled files over text
+
 struct ShaderSystem
 {
 private:
