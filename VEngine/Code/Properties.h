@@ -4,6 +4,9 @@
 #include <string>
 #include <typeindex>
 
+//TODO: there's a problem with properties where if you have multiple fields from multiple components or
+//inherited actor fields that share the same name, there's gonna be a conflict on the map.
+
 struct Property
 {
 	void* data = nullptr;
