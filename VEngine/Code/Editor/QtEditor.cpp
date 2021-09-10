@@ -17,6 +17,8 @@ void QtEditor::Init(int argc, char* argv[])
     mainWindow = new EditorMainWindow();
     windowHwnd = (void*)mainWindow->renderView->winId();
 
+    app->setWindowIcon(QIcon("Icons/engine_icon.png"));
+
     viewportWidth = mainWindow->renderView->size().width();
     viewportHeight = mainWindow->renderView->size().height();
 
