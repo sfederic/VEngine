@@ -103,6 +103,8 @@ enum class LightType : int
 	Spot = 2
 };
 
+//Still the best tutorial for lighting in D3D11.
+//REF:https://www.3dgep.com/texturing-lighting-directx-11/#Attenuation
 struct Light
 {
 	XMFLOAT4 position = XMFLOAT4(0.f, 0.f, 0.f, 1.f);
