@@ -283,39 +283,7 @@ void Renderer::RenderMeshComponents()
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
-		//Set lights
-		int shaderLightsIndex = 0;
-
-		for (int i = 0; i < DirectionalLightComponent::system.components.size(); i++)
-		{
-			auto light = DirectionalLightComponent::system.components[i];
-
-			Light lightData = light->lightData;
-			XMFLOAT3 forwardVector = light->GetForwardVector();
-			lightData.direction = XMFLOAT4(forwardVector.x, forwardVector.y, forwardVector.z, 0.f);
-
-			shaderLights.lights[shaderLightsIndex] = lightData;
-			shaderLightsIndex++;
-		}
-
-		for (int i = 0; i < PointLightComponent::system.components.size(); i++)
-		{
-			auto light = PointLightComponent::system.components[i];
-			light->lightData.position = XMFLOAT4(light->transform.position.x,
-				light->transform.position.y,
-				light->transform.position.z, 1.0f);
-
-			shaderLights.lights[shaderLightsIndex] = light->lightData;
-			shaderLightsIndex++;
-		}
-
-		shaderLights.numLights = shaderLightsIndex;
-
-		shaderLights.globalAmbience = XMFLOAT4(0.35f, 0.35f, 0.35f, 1.f);
-		XMStoreFloat4(&shaderLights.eyePosition, activeCamera->transform.world.r[3]);
-
-		context->UpdateSubresource(cbLights, 0, nullptr, &shaderLights, 0, 0);
-		context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
+		UpdateLights();
 		
 		//Draw
 		context->DrawIndexed(mesh->data->indices->size(), 0, 0);
@@ -343,6 +311,8 @@ void Renderer::RenderInstanceMeshComponents()
 		shaderMatrices.MakeTextureMatrix(&instanceMesh->material->shaderData);
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+
+		UpdateLights();
 
 		//Update instance data and set SRV
 		context->UpdateSubresource(instanceMesh->structuredBuffer, 0, nullptr, instanceMesh->instanceData.data(), 0, 0);
@@ -449,6 +419,40 @@ void Renderer::RenderLightMeshes()
 
 		context->Draw(debugIcoSphere.mesh->data->vertices->size(), 0);
 	}
+}
+
+//Loops over every light component and moves their data into the lights constant buffer
+void Renderer::UpdateLights()
+{
+	int shaderLightsIndex = 0;
+
+	for (auto light : DirectionalLightComponent::system.components)
+	{
+		Light lightData = light->lightData;
+		XMFLOAT3 forwardVector = light->GetForwardVector();
+		lightData.direction = XMFLOAT4(forwardVector.x, forwardVector.y, forwardVector.z, 0.f);
+
+		shaderLights.lights[shaderLightsIndex] = lightData;
+		shaderLightsIndex++;
+	}
+
+	for (auto light : PointLightComponent::system.components)
+	{
+		light->lightData.position = XMFLOAT4(light->transform.position.x,
+			light->transform.position.y,
+			light->transform.position.z, 1.0f);
+
+		shaderLights.lights[shaderLightsIndex] = light->lightData;
+		shaderLightsIndex++;
+	}
+
+	shaderLights.numLights = shaderLightsIndex;
+
+	shaderLights.globalAmbience = XMFLOAT4(0.35f, 0.35f, 0.35f, 1.f);
+	XMStoreFloat4(&shaderLights.eyePosition, activeCamera->transform.world.r[3]);
+
+	context->UpdateSubresource(cbLights, 0, nullptr, &shaderLights, 0, 0);
+	context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
 }
 
 void Renderer::Present()

@@ -109,7 +109,7 @@ struct Light
 {
 	XMFLOAT4 position = XMFLOAT4(0.f, 0.f, 0.f, 1.f);
 	XMFLOAT4 direction = XMFLOAT4(0.f, 0.f, 0.f, 0.f);
-	XMFLOAT4 colour = XMFLOAT4(0.f, 0.f, 0.f, 1.f);
+	XMFLOAT4 colour = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
 	float spotAngle = 0.f;
 	float constantAtten = 0.f;
 	float linearAtten = 0.f;
@@ -121,7 +121,7 @@ struct Light
 
 struct ShaderLights
 {
-	static const int MAX_LIGHTS = 8;
+	static const int MAX_LIGHTS = 32;
 
 	XMFLOAT4 eyePosition = XMFLOAT4(0.f, 0.f, 0.f, 1.0);
 	XMFLOAT4 globalAmbience = XMFLOAT4(0.f, 0.f, 0.f, 1.f);

@@ -65,6 +65,7 @@ private:
 	void RenderInstanceMeshComponents();
 	void RenderBounds();
 	void RenderLightMeshes();
+	void UpdateLights();
 
 public:
 	void Present();
