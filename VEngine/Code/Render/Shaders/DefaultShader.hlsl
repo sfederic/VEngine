@@ -34,6 +34,10 @@ float4 PSMain(VS_OUT i) : SV_Target
 			result = CalcPointLight(lights[i], V, position, normal);
 			break;
 
+		case SPOT_LIGHT:
+			result = CalcSpotLight(lights[i], V, position, normal);
+			break;
+
 		case DIRECTIONAL_LIGHT:
 			result = CalcDirectionalLight(lights[i], normal);
 			break;	
