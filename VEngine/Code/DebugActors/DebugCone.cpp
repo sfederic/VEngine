@@ -3,6 +3,6 @@
 
 DebugCone::DebugCone()
 {
-	mesh = new MeshComponent("cone.fbx", L"test.png");
+	mesh = new MeshComponent("small_cone.fbx", L"test.png");
 	mesh->Create();
 }
