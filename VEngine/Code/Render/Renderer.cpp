@@ -284,24 +284,35 @@ void Renderer::RenderMeshComponents()
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 		//Set lights
+		int shaderLightsIndex = 0;
+
 		for (int i = 0; i < DirectionalLightComponent::system.components.size(); i++)
 		{
-			if (i >= ShaderLights::MAX_LIGHTS)
-			{
-				throw;
-			}
+			auto light = DirectionalLightComponent::system.components[i];
 
-			DirectionalLightComponent* light = DirectionalLightComponent::system.components[i];
+			Light lightData = light->lightData;
+			XMFLOAT3 forwardVector = light->GetForwardVector();
+			lightData.direction = XMFLOAT4(forwardVector.x, forwardVector.y, forwardVector.z, 0.f);
 
-			shaderLights.lights[i].colour = light->lightData.colour;
-			shaderLights.lights[i].direction = light->GetForwardVector();
+			shaderLights.lights[shaderLightsIndex] = lightData;
+			shaderLightsIndex++;
 		}
 
+		for (int i = 0; i < PointLightComponent::system.components.size(); i++)
+		{
+			auto light = PointLightComponent::system.components[i];
+			light->lightData.position = XMFLOAT4(light->transform.position.x,
+				light->transform.position.y,
+				light->transform.position.z, 1.0f);
+
+			shaderLights.lights[shaderLightsIndex] = light->lightData;
+			shaderLightsIndex++;
+		}
+
+		shaderLights.numLights = shaderLightsIndex;
+
 		shaderLights.globalAmbience = XMFLOAT4(0.35f, 0.35f, 0.35f, 1.f);
-		shaderLights.eyePosition = XMFLOAT4(activeCamera->transform.position.x,
-			activeCamera->transform.position.y,
-			activeCamera->transform.position.z,
-			1.0f);
+		XMStoreFloat4(&shaderLights.eyePosition, activeCamera->transform.world.r[3]);
 
 		context->UpdateSubresource(cbLights, 0, nullptr, &shaderLights, 0, 0);
 		context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);

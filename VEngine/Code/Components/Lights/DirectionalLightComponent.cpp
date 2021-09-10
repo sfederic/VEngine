@@ -2,7 +2,7 @@
 
 DirectionalLightComponent::DirectionalLightComponent()
 {
-    lightData.lightType = LightType::Directional;
+    lightData.lightType = (int)LightType::Directional;
 }
 
 void DirectionalLightComponent::Tick(double deltaTime)

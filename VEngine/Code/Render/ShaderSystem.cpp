@@ -38,8 +38,8 @@ ID3DBlob* ShaderSystem::CreateShaderFromFile(const wchar_t* filename, const char
 	ID3DBlob* code;
 	ComPtr<ID3DBlob> error;
 
-	HR(D3DCompileFromFile(filename, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
-		entry, target, compileFlags, 0, &code, error.GetAddressOf()));
+	D3DCompileFromFile(filename, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
+		entry, target, compileFlags, 0, &code, error.GetAddressOf());
 
 	if (error)
 	{

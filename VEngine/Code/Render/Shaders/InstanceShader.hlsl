@@ -9,6 +9,7 @@ VS_OUT VSMain(VS_IN i)
 	float4x4 modelViewProj = mul(viewProj, world);
 
 	o.pos = mul(modelViewProj, float4(i.pos, 1.0f));
+	o.posWS = i.pos;
 	o.uv = i.uv;
 	o.normal = mul((float3x3)world, i.normal);
 

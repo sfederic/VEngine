@@ -14,12 +14,17 @@ struct ShaderItem;
 struct MaterialShaderData
 {
 	XMFLOAT4 ambient = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
+	XMFLOAT4 emissive = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
+	XMFLOAT4 diffuse = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
+	XMFLOAT4 specular = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
 	XMFLOAT2 uvOffset = XMFLOAT2(0.f, 0.f);
 	XMFLOAT2 uvScale = XMFLOAT2(1.f, 1.f);
 	float uvRotation = 0.f;
+	float specularPower = 0.f;
+	int useTexture; //Keep in mind that bools in HLSL are 4 bytes
 
 private:
-	float padding[3];
+	float padding[1];
 };
 
 struct Material
