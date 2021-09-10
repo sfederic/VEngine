@@ -47,10 +47,10 @@ struct Light
 	int2 pad;
 };
 
-#define MAX_LIGHTS 8
-#define DIRECTIONAL_LIGHT 0
-#define POINT_LIGHT 1
-#define SPOT_LIGHT 2
+static const int MAX_LIGHTS = 8;
+static const int DIRECTIONAL_LIGHT = 0;
+static const int POINT_LIGHT = 1;
+static const int SPOT_LIGHT = 2;
 
 cbuffer cbLights : register(b3)
 {
@@ -98,6 +98,30 @@ LightingResult CalcPointLight(Light light, float3 V, float4 P, float3 N)
 	float attenuation = CalcAttenuation(light, distance);
 
 	result.diffuse = CalcDiffuse(light, L, N) * attenuation;
+	return result;
+}
+
+float CalcSpotCone(Light light, float3 L)
+{
+	float minCos = cos(light.spotAngle);
+	float maxCos = (minCos + 1.0f) / 2.0f;
+	float cosAngle = dot(light.direction.xyz, -L);
+	return smoothstep(minCos, maxCos, cosAngle);
+}
+
+LightingResult CalcSpotLight(Light light, float3 V, float4 P, float3 N)
+{
+	LightingResult result;
+
+	float3 L = (light.position - P).xyz;
+	float distance = length(L);
+	L = L / distance;
+
+	float attenuation = CalcAttenuation(light, distance);
+	float spotIntensity = CalcSpotCone(light, L);
+
+	result.diffuse = CalcDiffuse(light, L, N) * attenuation * spotIntensity;
+
 	return result;
 }
 
