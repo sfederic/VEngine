@@ -9,12 +9,14 @@
 #include "Components/InstanceMeshComponent.h"
 #include "Components/Lights/DirectionalLightComponent.h"
 #include "Components/Lights/PointLightComponent.h"
+#include "Components/Lights/SpotLightComponent.h"
 #include "Actors/Actor.h"
 #include "Actors/NormalActor.h"
 #include "ShaderSystem.h"
 #include "DebugActors/DebugBox.h"
 #include "DebugActors/DebugSphere.h"
 #include "DebugActors/DebugIcoSphere.h"
+#include "DebugActors/DebugCone.h"
 #include "Input.h"
 #include "World.h"
 #include "Material.h"
@@ -372,6 +374,7 @@ void Renderer::RenderLightMeshes()
 {
 	static DebugSphere debugSphere;
 	static DebugIcoSphere debugIcoSphere;
+	static DebugCone debugCone;
 
 	if (Core::gameplayOn)
 	{
@@ -419,6 +422,19 @@ void Renderer::RenderLightMeshes()
 
 		context->Draw(debugIcoSphere.mesh->data->vertices->size(), 0);
 	}
+
+
+	//SPOT LIGHTS
+	context->IASetVertexBuffers(0, 1, &debugCone.mesh->pso->vertexBuffer->data, &stride, &offset);
+
+	for (auto spotLight : SpotLightComponent::system.components)
+	{
+		shaderMatrices.model = spotLight->GetWorldMatrix();
+		shaderMatrices.MakeModelViewProjectionMatrix();
+		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+
+		context->Draw(debugCone.mesh->data->vertices->size(), 0);
+	}
 }
 
 //Loops over every light component and moves their data into the lights constant buffer
@@ -426,6 +442,7 @@ void Renderer::UpdateLights()
 {
 	int shaderLightsIndex = 0;
 
+	//Directional lights
 	for (auto light : DirectionalLightComponent::system.components)
 	{
 		Light lightData = light->lightData;
@@ -436,7 +453,19 @@ void Renderer::UpdateLights()
 		shaderLightsIndex++;
 	}
 
+	//Point lights
 	for (auto light : PointLightComponent::system.components)
+	{
+		light->lightData.position = XMFLOAT4(light->transform.position.x,
+			light->transform.position.y,
+			light->transform.position.z, 1.0f);
+
+		shaderLights.lights[shaderLightsIndex] = light->lightData;
+		shaderLightsIndex++;
+	}
+	
+	//Spot lights
+	for (auto light : SpotLightComponent::system.components)
 	{
 		light->lightData.position = XMFLOAT4(light->transform.position.x,
 			light->transform.position.y,
