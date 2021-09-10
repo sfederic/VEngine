@@ -140,6 +140,9 @@
     <ClCompile Include="Code\Components\Lights\PointLightComponent.cpp" />
     <ClCompile Include="Code\DebugActors\DebugIcoSphere.cpp" />
     <ClCompile Include="Code\Actors\PointLightActor.cpp" />
+    <ClCompile Include="Code\Components\Lights\SpotLightComponent.cpp" />
+    <ClCompile Include="Code\Actors\SpotLightActor.cpp" />
+    <ClCompile Include="Code\DebugActors\DebugCone.cpp" />
     <ClInclude Include="Code\Components\BoxTriggerComponent.h" />
     <ClInclude Include="Code\Animation\AnimationStructures.h" />
     <ClInclude Include="Code\Actors\Actor.h" />
@@ -274,6 +277,9 @@
     <ClInclude Include="Code\Components\Lights\PointLightComponent.h" />
     <ClInclude Include="Code\DebugActors\DebugIcoSphere.h" />
     <ClInclude Include="Code\Actors\PointLightActor.h" />
+    <ClInclude Include="Code\Components\Lights\SpotLightComponent.h" />
+    <ClInclude Include="Code\Actors\SpotLightActor.h" />
+    <ClInclude Include="Code\DebugActors\DebugCone.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

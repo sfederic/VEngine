@@ -20,40 +20,17 @@ UvScale
 1 1
 next
 DirectionalLightActor
-0
+1
+Colour
+1 1 1 1
+Name
+DirectionalLightActor0
+Position
+-6 2 4
+Rotation
+0 0 0 1
+Scale
+1 1 1
+next
 PointLightActor
-2
-Colour
-1 0 0 0
-Const Atten.
-1
-Linear Atten.
 0
-Name
-PointLightActor0
-Position
-4 0 6
-Quad Atten.
-0
-Rotation
--0 0 -0 1
-Scale
-1 1 1
-next
-Colour
-1 1 0 0
-Const Atten.
-1
-Linear Atten.
-0
-Name
-PointLightActor1
-Position
--1 2 2
-Quad Atten.
-0
-Rotation
--0 0 -0 1
-Scale
-1 1 1
-next
