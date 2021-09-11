@@ -221,13 +221,20 @@ void Renderer::CreateBlendStates()
 void Renderer::CreateQueries()
 {
 	D3D11_QUERY_DESC qd = {};
+
+	//Create disjoint queries
+	qd.Query = D3D11_QUERY_TIMESTAMP_DISJOINT;
+	HR(device->CreateQuery(&qd, &timeDisjointQuery[0]));
+	HR(device->CreateQuery(&qd, &timeDisjointQuery[1]));
+
+	//Create frame start/end queries
 	qd.Query = D3D11_QUERY_TIMESTAMP;
 
-	HR(device->CreateQuery(&qd, &frameStartQuery));
-	HR(device->CreateQuery(&qd, &frameEndQuery));
+	HR(device->CreateQuery(&qd, &frameStartQuery[0]));
+	HR(device->CreateQuery(&qd, &frameStartQuery[1]));
 
-	qd.Query = D3D11_QUERY_TIMESTAMP_DISJOINT;
-	HR(device->CreateQuery(&qd, &timeDisjointQuery));
+	HR(device->CreateQuery(&qd, &frameEndQuery[0]));
+	HR(device->CreateQuery(&qd, &frameEndQuery[1]));
 }
 
 void Renderer::CreateMainConstantBuffers()
@@ -516,38 +523,70 @@ void Renderer::StartGPUQueries()
 {
 	if (debugMenu.fpsMenuOpen)
 	{
-		context->Begin(timeDisjointQuery);
-		context->End(frameStartQuery);
+		context->Begin(timeDisjointQuery[frameQueryIndex]);
+		context->End(frameStartQuery[frameQueryIndex]);
+
+		GetGPUQueryData();
+	}
+}
+
+void Renderer::EndGPUQueries()
+{
+	static bool firstRun = true;
+
+	if (debugMenu.fpsMenuOpen)
+	{
+		if (firstRun)
+		{
+			firstRun = false;
+			return;
+		}
+
+		context->End(frameEndQuery[frameQueryIndex]);
+		context->End(timeDisjointQuery[frameQueryIndex]);
+
+		++frameQueryIndex &= 1;
 	}
 }
 
 //Called after Present()
-void Renderer::EndGPUQueries()
+void Renderer::GetGPUQueryData()
 {
 	if (debugMenu.fpsMenuOpen)
 	{
-		context->End(frameEndQuery);
-		context->End(timeDisjointQuery);
+		//No frame data has been collected yet
+		if (framesCollected < 0)
+		{
+			framesCollected = 0;
+			return;
+		}
 
-		while (context->GetData(timeDisjointQuery, nullptr, 0, 0) == S_FALSE)
+		while (context->GetData(timeDisjointQuery[framesCollected], nullptr, 0, 0) == S_FALSE)
 		{
 			Sleep(1);
 		}
 
+		int frameIndex = framesCollected;
+		++framesCollected &= 1;
+
 		//Check whether timestamps were disjoint during the last frame
 		D3D11_QUERY_DATA_TIMESTAMP_DISJOINT timeStampDisjoint;
-		context->GetData(timeDisjointQuery, &timeStampDisjoint, sizeof(timeStampDisjoint), 0);
+		context->GetData(timeDisjointQuery[frameIndex], &timeStampDisjoint, sizeof(timeStampDisjoint), 0);
 		if (timeStampDisjoint.Disjoint)
 		{
 			return;
 		}
 
 		//Get all the timestamps
-		UINT64 timeStampStartFrame;
-		context->GetData(frameStartQuery, &timeStampStartFrame, sizeof(UINT64), 0);
+		UINT64 timeStampStartFrame = 0;
+		while (context->GetData(frameStartQuery[frameIndex], &timeStampStartFrame, sizeof(UINT64), 0) != S_OK)
+		{
+		}
 
-		UINT64 timeStampEndFrame;
-		context->GetData(frameEndQuery, &timeStampEndFrame, sizeof(UINT64), 0);
+		UINT64 timeStampEndFrame = 0;
+		while (context->GetData(frameEndQuery[frameIndex], &timeStampEndFrame, sizeof(UINT64), 0) != S_OK)
+		{
+		}
 
 		frameTime = (float)(timeStampEndFrame - timeStampStartFrame) / (float)timeStampDisjoint.Frequency * 1000.f;
 	}

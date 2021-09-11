@@ -41,10 +41,16 @@ struct Renderer
 	//Viewport
 	D3D11_VIEWPORT viewport;
 
-	//Queries for GPU profiling
-	ID3D11Query* frameStartQuery;
-	ID3D11Query* frameEndQuery;
-	ID3D11Query* timeDisjointQuery;
+private:
+	//Queries for GPU profiling (Note that the queires are double buffered to deal with two frames for the GPU
+	//being ahead of the GPU)
+	ID3D11Query* frameStartQuery[2];
+	ID3D11Query* frameEndQuery[2];
+	ID3D11Query* timeDisjointQuery[2];
+	int frameQueryIndex = 0;
+	int framesCollected = -1;
+
+public:
 	float frameTime;
 
 	//GPU structures
@@ -75,6 +81,7 @@ private:
 	void UpdateLights();
 	void StartGPUQueries();
 	void EndGPUQueries();
+	void GetGPUQueryData();
 
 public:
 	void Present();
