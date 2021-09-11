@@ -552,6 +552,8 @@ void Renderer::EndGPUQueries()
 //Called after Present()
 void Renderer::GetGPUQueryData()
 {
+	PROFILE_START
+
 	if (debugMenu.fpsMenuOpen)
 	{
 		//No frame data has been collected yet
@@ -590,6 +592,8 @@ void Renderer::GetGPUQueryData()
 
 		frameTime = (float)(timeStampEndFrame - timeStampStartFrame) / (float)timeStampDisjoint.Frequency * 1000.f;
 	}
+
+	PROFILE_END
 }
 
 void Renderer::Present()
