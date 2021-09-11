@@ -42,9 +42,10 @@ struct Renderer
 	D3D11_VIEWPORT viewport;
 
 	//Queries for GPU profiling
-	ID3D11Query* startTimeQuery;
-	ID3D11Query* endTimeQuery;
+	ID3D11Query* frameStartQuery;
+	ID3D11Query* frameEndQuery;
 	ID3D11Query* timeDisjointQuery;
+	float frameTime;
 
 	//GPU structures
 	std::vector<IDXGIAdapter1*> gpuAdapters;
@@ -72,6 +73,8 @@ private:
 	void RenderBounds();
 	void RenderLightMeshes();
 	void UpdateLights();
+	void StartGPUQueries();
+	void EndGPUQueries();
 
 public:
 	void Present();

@@ -223,8 +223,8 @@ void Renderer::CreateQueries()
 	D3D11_QUERY_DESC qd = {};
 	qd.Query = D3D11_QUERY_TIMESTAMP;
 
-	HR(device->CreateQuery(&qd, &startTimeQuery));
-	HR(device->CreateQuery(&qd, &endTimeQuery));
+	HR(device->CreateQuery(&qd, &frameStartQuery));
+	HR(device->CreateQuery(&qd, &frameEndQuery));
 
 	qd.Query = D3D11_QUERY_TIMESTAMP_DISJOINT;
 	HR(device->CreateQuery(&qd, &timeDisjointQuery));
@@ -275,6 +275,8 @@ void Renderer::RenderSetup()
 void Renderer::Render()
 {
 	PROFILE_START
+
+	StartGPUQueries();
 
 	RenderMeshComponents();
 	RenderInstanceMeshComponents();
@@ -508,9 +510,48 @@ void Renderer::UpdateLights()
 	PROFILE_END
 }
 
+//Not many good references on D3D11 Querying 
+//REF:https://www.reedbeta.com/blog/gpu-profiling-101/
+void Renderer::StartGPUQueries()
+{
+	context->Begin(timeDisjointQuery);
+	context->End(frameStartQuery);
+}
+
+//Called after Present()
+void Renderer::EndGPUQueries()
+{
+	context->End(frameEndQuery);
+	context->End(timeDisjointQuery);
+
+	while (context->GetData(timeDisjointQuery, nullptr, 0, 0) == S_FALSE)
+	{
+		Sleep(1);
+	}
+
+	//Check whether timestamps were disjoint during the last frame
+	D3D11_QUERY_DATA_TIMESTAMP_DISJOINT timeStampDisjoint;
+	context->GetData(timeDisjointQuery, &timeStampDisjoint, sizeof(timeStampDisjoint), 0);
+	if (timeStampDisjoint.Disjoint)
+	{
+		return;
+	}
+
+	//Get all the timestamps
+	UINT64 timeStampStartFrame;
+	context->GetData(frameStartQuery, &timeStampStartFrame, sizeof(UINT64), 0);
+
+	UINT64 timeStampEndFrame;
+	context->GetData(frameStartQuery, &timeStampEndFrame, sizeof(UINT64), 0);
+
+	frameTime = (float)(frameEndQuery - frameStartQuery) / (float)timeStampDisjoint.Frequency * 1000.f;
+}
+
 void Renderer::Present()
 {
 	HR(swapchain->Present(1, 0));
+
+	EndGPUQueries();
 }
 
 void* Renderer::GetSwapchain()
