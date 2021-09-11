@@ -57,6 +57,7 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	CreateInputLayout();
 	CreateRasterizerStates();
 	CreateMainConstantBuffers();
+	CreateQueries();
 	CheckSupportedFeatures();
 }
 
@@ -215,6 +216,18 @@ void Renderer::CreateBlendStates()
 	alphaToCoverageDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
 	HR(device->CreateBlendState(&alphaToCoverageDesc, &blendStateAlphaToCoverage));
+}
+
+void Renderer::CreateQueries()
+{
+	D3D11_QUERY_DESC qd = {};
+	qd.Query = D3D11_QUERY_TIMESTAMP;
+
+	HR(device->CreateQuery(&qd, &startTimeQuery));
+	HR(device->CreateQuery(&qd, &endTimeQuery));
+
+	qd.Query = D3D11_QUERY_TIMESTAMP_DISJOINT;
+	HR(device->CreateQuery(&qd, &timeDisjointQuery));
 }
 
 void Renderer::CreateMainConstantBuffers()

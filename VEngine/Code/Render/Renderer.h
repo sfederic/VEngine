@@ -41,6 +41,11 @@ struct Renderer
 	//Viewport
 	D3D11_VIEWPORT viewport;
 
+	//Queries for GPU profiling
+	ID3D11Query* startTimeQuery;
+	ID3D11Query* endTimeQuery;
+	ID3D11Query* timeDisjointQuery;
+
 	//GPU structures
 	std::vector<IDXGIAdapter1*> gpuAdapters;
 	std::vector<DXGI_ADAPTER_DESC1> gpuAdaptersDesc;
@@ -59,6 +64,7 @@ private:
 	void CreateInputLayout();
 	void CreateRasterizerStates();
 	void CreateBlendStates();
+	void CreateQueries();
 	void CreateMainConstantBuffers();
 	void CheckSupportedFeatures();
 	void RenderMeshComponents();
