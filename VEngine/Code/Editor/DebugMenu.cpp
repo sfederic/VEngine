@@ -207,21 +207,17 @@ void DebugMenu::RenderNotifications(double deltaTime)
 
 void DebugMenu::RenderFPSMenu(double deltaTime)
 {
-	Profile::Start(std::source_location::current());
-
 	if (fpsMenuOpen)
 	{
 		ImGui::Begin("FPS");
 
 		ImGui::Text("FPS: %d", Core::finalFrameCount);
-		//ImGui::Text("GPU Render Time: %f", renderer.renderTime);
+		ImGui::Text("GPU Render Time: %f", renderer.frameTime);
 		ImGui::Text("Delta Time (ms): %f", deltaTime);
 		ImGui::Text("Time Since Startup: %f", Core::timeSinceStartup);
 
 		ImGui::End();
 	}
-
-	Profile::End(std::source_location::current());
 }
 
 void DebugMenu::RenderGPUMenu()
