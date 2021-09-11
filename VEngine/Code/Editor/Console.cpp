@@ -18,6 +18,7 @@ namespace ExecuteStrings
 	const wchar_t* PROPS = L"PROPS";
 	const wchar_t* INSPECT = L"INSPECT";
 	const wchar_t* COMMANDS = L"COMMANDS";
+	const wchar_t* STATS = L"STATS";
 }
 
 void Console::ConsoleInput()
@@ -97,6 +98,10 @@ void Console::ExecuteString()
 	else if (consoleString == ExecuteStrings::ACTOR)
 	{
 		debugMenu.actorInspectMenuOpen = !debugMenu.actorInspectMenuOpen;
+	}	
+	else if (consoleString == ExecuteStrings::STATS)
+	{
+		debugMenu.worldStatsMenuOpen = !debugMenu.worldStatsMenuOpen;
 	}
 	else
 	{

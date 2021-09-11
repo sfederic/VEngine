@@ -16,8 +16,6 @@ struct DebugNotification
 	float timeOnScreen;
 };
 
-//TODO: ShowWorldVertexCount() function
-
 struct DebugMenu
 {
 	std::vector<DebugNotification> debugNotifications;
@@ -29,11 +27,14 @@ struct DebugMenu
 	bool commandsMenuOpen = false;
 	bool gpuMenuOpen = false;
 	bool actorInspectMenuOpen = false;
+	bool worldStatsMenuOpen = false;
 
 	void Init();
 	void Tick(double deltaTime);
 	void Cleanup();
 	void AddNotification(const wchar_t* note);
+
+private:
 	void RenderNotifications(double deltaTime);
 	void RenderFPSMenu(double deltaTime);
 	void RenderGPUMenu();
@@ -43,6 +44,7 @@ struct DebugMenu
 	void RenderActorProps();
 	void IterateOverProperties(Properties& props);
 	void RenderCommandsMenu();
+	void RenderWorldStats();
 };
 
 extern DebugMenu debugMenu;

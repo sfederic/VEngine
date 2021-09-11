@@ -13,6 +13,8 @@
 #include "Actors/Actor.h"
 #include "Actors/IActorSystem.h"
 #include "Components/Component.h"
+#include "Components/MeshComponent.h"
+#include "Components/InstanceMeshComponent.h"
 #include "UI/UISystem.h"
 #include "Commands/CommandSystem.h"
 #include "Commands/ICommand.h"
@@ -61,6 +63,7 @@ void DebugMenu::Tick(double deltaTime)
 	RenderActorProps();
 	RenderCommandsMenu();
 	RenderActorInspectMenu();
+	RenderWorldStats();
 
 	ImGui::EndFrame();
 
@@ -178,6 +181,32 @@ void DebugMenu::RenderCommandsMenu()
 	{
 		commandSystem.Reset();
 	}
+
+	ImGui::End();
+}
+
+void DebugMenu::RenderWorldStats()
+{
+	if (!worldStatsMenuOpen)
+	{
+		return;
+	}
+
+	ImGui::Begin("World Stats");
+
+	uint64_t totalVerticesInWorld = 0;
+
+	for (auto mesh : MeshComponent::system.components)
+	{
+		totalVerticesInWorld += mesh->data->vertices->size();
+	}
+
+	for (auto instanceMesh : InstanceMeshComponent::system.components)
+	{
+		totalVerticesInWorld += instanceMesh->data->vertices->size();
+	}
+
+	ImGui::Text("Vertex Count: %lld", totalVerticesInWorld);
 
 	ImGui::End();
 }
