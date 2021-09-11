@@ -274,10 +274,14 @@ void Renderer::RenderSetup()
 
 void Renderer::Render()
 {
+	PROFILE_START
+
 	RenderMeshComponents();
 	RenderInstanceMeshComponents();
 	RenderBounds();
 	RenderLightMeshes();
+
+	PROFILE_END
 }
 
 void Renderer::RenderMeshComponents()
