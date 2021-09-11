@@ -440,6 +440,8 @@ void Renderer::RenderLightMeshes()
 //Loops over every light component and moves their data into the lights constant buffer
 void Renderer::UpdateLights()
 {
+	PROFILE_START
+
 	int shaderLightsIndex = 0;
 
 	//Directional lights
@@ -485,6 +487,8 @@ void Renderer::UpdateLights()
 
 	context->UpdateSubresource(cbLights, 0, nullptr, &shaderLights, 0, 0);
 	context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
+
+	PROFILE_END
 }
 
 void Renderer::Present()
