@@ -1,15 +1,53 @@
 NormalActor
 1
-Position
--0.531265 0.5 6.82236e-05
-Scale
-1.40629 1.5 1.00003
-Rotation
-0.000244325 1 9.91799e-11 -4.07534e-07
 Name
 NormalActor0
+Position
+-0.531265 0.5 6.82236e-05
+Rotation
+0.000244325 1 9.91799e-11 -4.07534e-07
+Scale
+1.40629 1.5 1.00003
 UvOffset
 0.5 0
+UvRotation
+0
+UvScale
+1 1
 next
 MeshActor
+0
+DirectionalLightActor
+1
+Colour
+1 1 1 1
+Name
+DirectionalLightActor0
+Position
+0 0 -4
+Rotation
+-0 0 -0 1
+Scale
+1 1 1
+next
+PointLightActor
+1
+Colour
+1 1 1 1
+Const Atten.
+1
+Linear Atten.
+0
+Name
+PointLightActor0
+Position
+-9 0 -2
+Quad Atten.
+0
+Rotation
+-0 0 -0 1
+Scale
+1 1 1
+next
+SpotLightActor
 0

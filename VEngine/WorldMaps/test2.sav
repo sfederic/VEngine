@@ -3,15 +3,15 @@ NormalActor
 MeshActor
 1
 Mesh Filename
-cube.fbx
+monkey.fbx
 Name
 MeshActor0
 Position
-1 0 5.25
+2 0 5
 Rotation
--0 0 -0 1
+0.454535 0.54169 0.541503 -0.454691
 Scale
-1 1 1.25
+3 3 3
 UvOffset
 0 0
 UvRotation
@@ -26,11 +26,13 @@ Colour
 Name
 DirectionalLightActor0
 Position
--6 2 4
+-3 2 1
 Rotation
-0 0 0 1
+-0 0.342182 -0 0.939634
 Scale
-1 1 1
+0.999995 1 0.999995
 next
 PointLightActor
+0
+SpotLightActor
 0

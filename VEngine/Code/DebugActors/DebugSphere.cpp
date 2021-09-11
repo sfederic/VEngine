@@ -3,6 +3,6 @@
 
 DebugSphere::DebugSphere()
 {
-	sphereMesh = new MeshComponent("sphere.fbx", L"test.png");
+	sphereMesh = new MeshComponent("ico_sphere.fbx", L"test.png");
 	sphereMesh->Create();
 }
