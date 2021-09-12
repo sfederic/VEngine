@@ -32,12 +32,12 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	world.Cleanup();
 
-	Serialiser s(worldName, OpenMode::In);
+	Deserialiser d(worldName, OpenMode::In);
 
-	while (!s.is.eof())
+	while (!d.is.eof())
 	{
 		std::string actorSystemName;
-		s.is >> actorSystemName;
+		d.is >> actorSystemName;
 
 		if (actorSystemName.empty())
 		{
@@ -45,7 +45,7 @@ void FileSystem::LoadWorld(std::string worldName)
 		}
 
 		size_t numActorsToSpawn = 0;
-		s.is >> numActorsToSpawn;
+		d.is >> numActorsToSpawn;
 
 		auto asIt = actorSystemCache.nameToSystemMap->find(actorSystemName);
 
@@ -56,7 +56,7 @@ void FileSystem::LoadWorld(std::string worldName)
 			actorSystem->SpawnActor(Transform());
 		}
 
-		actorSystem->Deserialise(s);
+		actorSystem->Deserialise(d);
 	}
 
 	world.Start();

@@ -83,7 +83,7 @@ struct ActorSystem : IActorSystem
 		}
 	}
 
-	virtual void Deserialise(Serialiser& s) override
+	virtual void Deserialise(Deserialiser& d) override
 	{
 		for (T* actor : actors)
 		{
@@ -95,7 +95,7 @@ struct ActorSystem : IActorSystem
 				mergedProps.Merge(props);
 			}
 
-			s.Deserialise(mergedProps);
+			d.Deserialise(mergedProps);
 		}
 	}
 

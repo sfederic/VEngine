@@ -5,15 +5,19 @@
 
 using namespace DirectX;
 
-Serialiser::Serialiser(const std::string& filename, OpenMode openMode) : os(&fb), is(&fb)
+Serialiser::Serialiser(const std::string filename, const OpenMode mode)
 {
-	fb.open(filename.c_str(), (std::ios_base::openmode)openMode);
+	os.open(filename.c_str(), (std::ios_base::openmode)mode);
+	if (os.fail())
+	{
+		throw;
+	}
 }
 
 Serialiser::~Serialiser()
 {
 	os.flush();
-	fb.close();
+	os.close();
 }
 
 void Serialiser::Serialise(Properties props)
@@ -59,7 +63,21 @@ void Serialiser::Serialise(Properties props)
 	os << "next\n"; //"next" moves the forloop onto the next 'Object'
 }
 
-void Serialiser::Deserialise(Properties props)
+Deserialiser::Deserialiser(const std::string filename, const OpenMode mode)
+{
+	is.open(filename.c_str(), (std::ios_base::openmode)mode);
+	if (is.fail())
+	{
+		throw;
+	}
+}
+
+Deserialiser::~Deserialiser()
+{
+	is.close();
+}
+
+void Deserialiser::Deserialise(Properties props)
 {
 	char line[512];
 	while (!is.eof())
@@ -89,7 +107,7 @@ void Serialiser::Deserialise(Properties props)
 			XMFLOAT2* float2 = props.GetData<XMFLOAT2>(name);
 			is >> float2->x;
 			is >> float2->y;
-		}		
+		}
 		else if (props.CheckType<XMFLOAT3>(name))
 		{
 			XMFLOAT3* float3 = props.GetData<XMFLOAT3>(name);
