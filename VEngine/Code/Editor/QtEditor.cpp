@@ -86,9 +86,9 @@ void QtEditor::EnableDarkMode()
     app->setStyleSheet(
         "QMainWindow { background-color: rgb(255, 0, 0); border: none; } "
 
-        "QDockWidget { background-color: rgb(37, 33, 34); border:0px; } "
+        "QDockWidget { background-color: rgb(37, 37, 37); border:0px; } "
 
-        "QWidget { background-color: rgb(40, 40, 40); border-color: rgb(11, 11, 11); border-width: 1.2px; border-style: inset; } "
+        "QWidget { background-color: rgb(45, 45, 45); border-color: rgb(11, 11, 11); border-width: 1.2px; border-style: inset; } "
 
         "QPushButton { min-height:30px; min-width:50px; background-color: rgb(53, 53, 53); border-radius: 5px; } "
         "QPushButton:hover { background-color: rgb(80, 80, 80); } "
