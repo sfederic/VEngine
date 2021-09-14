@@ -14,8 +14,30 @@
 #include "PropertiesDock.h"
 #include "Render/TextureSystem.h"
 
+namespace Icons
+{
+    QPixmap* play;
+    QPixmap* font;
+    QPixmap* icon;
+    QPixmap* lib;
+    QPixmap* mesh;
+    QPixmap* world;
+    QPixmap* code;
+    QPixmap* material;
+}
+
 AssetDock::AssetDock() : QDockWidget("Assets")
 {
+    //Set icons
+    Icons::play = new QPixmap("Icons/play_icon.png");
+    Icons::font = new QPixmap("Icons/font_icon.png");
+    Icons::icon = new QPixmap("Icons/icon_icon.png");
+    Icons::lib = new QPixmap("Icons/lib_icon.png");
+    Icons::mesh = new QPixmap("Icons/mesh_icon.png");
+    Icons::world = new QPixmap("Icons/world_icon.png");
+    Icons::code = new QPixmap("Icons/code_icon.png");
+    Icons::material = new QPixmap("Icons/material_icon.png");
+
     fileSystemModel = new QFileSystemModel();
     fileSystemModel->setRootPath(QDir::currentPath());
 
@@ -70,6 +92,10 @@ void AssetDock::AssetItemClicked()
     if (std::wcscmp(extension, L".sav") == 0) //Map files
     {
         fileSystem.LoadWorld(fullPath.toStdString().c_str());
+    }   
+    if (std::wcscmp(extension, L".mt") == 0) //Material files
+    {
+        MaterialFileClicked(fullPath.toStdString());
     }
     else if (std::wcscmp(extension, L".fbx") == 0) //FBX files
     {
@@ -107,50 +133,46 @@ void AssetDock::AssetFolderClicked()
 
     assetIcons->clear();
 
-    QPixmap playIcon = QPixmap("Icons/play_icon.png");
-    QPixmap fontIcon = QPixmap("Icons/font_icon.png");
-    QPixmap iconIcon = QPixmap("Icons/icon_icon.png");
-    QPixmap libIcon = QPixmap("Icons/lib_icon.png");
-    QPixmap meshIcon = QPixmap("Icons/mesh_icon.png");
-    QPixmap worldIcon = QPixmap("Icons/world_icon.png");
-    QPixmap codeIcon = QPixmap("Icons/code_icon.png");
-
     auto fileExtension = std::filesystem::path(path.toStdString()).extension();
     auto extension = fileExtension.c_str();
 
     for (int i = 0; i < list.count(); i++)
     {
-        QIcon icon;;
+        QIcon icon;
 
         QString str = list[i];
 
         if (str.contains(".ttf"))
         {
-            icon = QIcon(fontIcon);
+            icon = *Icons::font;
         }
         else if (str.contains(".fbx"))
         {
-            icon = QIcon(meshIcon);
+            icon = *Icons::mesh;
         }
         else if (str.contains(".lib") || str.contains(".dll"))
         {
-            icon = QIcon(libIcon);
+            icon = *Icons::lib;
         }
         else if (str.contains(".sav"))
         {
-            icon = QIcon(worldIcon);
+            icon = *Icons::world;
         }
         else if (str.contains(".h") || str.contains(".cpp"))
         {
-            icon = QIcon(codeIcon);
+            icon = *Icons::code;
         } 
         else if (str.contains(".png") || str.contains(".jpg"))
         {
-            icon = QIcon(iconIcon);
+            icon = *Icons::icon;
+        }       
+        else if (str.contains(".mt"))
+        {
+            icon = *Icons::material;
         }     
         else
         {
-            icon = QIcon(playIcon);
+            icon = *Icons::play;
         }
 
         QListWidgetItem* item = new QListWidgetItem(icon, list[i]);
@@ -159,14 +181,19 @@ void AssetDock::AssetFolderClicked()
     }
 }
 
-void AssetDock::MeshFileClicked(std::string meshFilename)
+void AssetDock::MeshFileClicked(const std::string meshFilename)
 {
     //Set spawner system as MeshActor
     worldEditor.spawnSystem = &MeshActor::system;
     MeshActor::spawnMeshFilename = meshFilename;
 }
 
-void AssetDock::TextureFileClicked(std::wstring textureFilename)
+void AssetDock::TextureFileClicked(const std::wstring textureFilename)
 {
     textureSystem.selectedTextureInEditor = textureFilename;
+}
+
+void AssetDock::MaterialFileClicked(const std::string materialFilename)
+{
+    editor->OpenMaterialEditor(materialFilename);
 }
