@@ -4,9 +4,6 @@
 #include <string>
 #include <typeindex>
 
-//TODO: there's a problem with properties where if you have multiple fields from multiple components or
-//inherited actor fields that share the same name, there's gonna be a conflict on the map.
-
 struct Property
 {
 	void* data = nullptr;
@@ -34,7 +31,16 @@ struct Properties
 	{
 		Property prop = {};
 
-		prop.size = sizeof(T);
+		if (typeid(T) == typeid(std::string)) 
+		{
+			std::string* str = (std::string*)data;
+			prop.size = str->size();
+		} 
+		else 
+		{
+			prop.size = sizeof(T);
+		}
+
 		prop.info = typeid(T);
 		prop.name = name;
 		prop.data = data;
@@ -42,6 +48,8 @@ struct Properties
 		//If you ever need the offset for a property, you can do it where you pass in the Actor/Object
 		//as a 'this' pointer through a template param. eg. <typename P> P* = this. Might help for serialisation?
 		//prop.offset = ((uint64_t*)data - (uint64_t*)parent) * sizeof(T);
+
+		assert(propMap.find(name) == propMap.end() && "name key already exists in properties map");
 
 		propMap[name] = prop;
 	}
