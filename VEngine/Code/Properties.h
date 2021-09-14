@@ -76,6 +76,24 @@ struct Properties
 		return propMap[name].info.value();
 	}
 
+	//Used to copy data in from other Properties (types have to be matching)
+	void CopyData(std::string name, void* dataToCopy)
+	{
+		Property& prop = propMap[name];
+
+		if (prop.info == typeid(std::string))
+		{
+			std::string* dst = (std::string*)prop.data;
+			std::string* src = (std::string*)dataToCopy;
+
+			dst->assign(src->c_str());
+		}
+		else
+		{
+			memcpy(prop.data, dataToCopy, prop.size);
+		}
+	}
+
 	//PROPERTIES FOR BINARY 
 	//Binary props work the same as text, just hash the name passed in
 	//template <typename T>
