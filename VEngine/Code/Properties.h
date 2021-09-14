@@ -96,6 +96,22 @@ struct Properties
 		}
 	}
 
+	//Copy matching vectors of properties across (currently only works for exact matching properties collections,
+	//should be able to work with partial matching collections though without the vectors).
+	static void CopyProperties(std::vector<Properties>& src, std::vector<Properties>& dst)
+	{
+		assert(src.size() == dst.size());
+
+		for (int i = 0; i < src.size(); i++)
+		{
+			for (auto prop : src[i].propMap)
+			{
+				std::string propName = prop.first;
+				dst[i].CopyData(propName, prop.second);
+			}
+		}
+	}
+
 	//PROPERTIES FOR BINARY 
 	//Binary props work the same as text, just hash the name passed in
 	//template <typename T>
