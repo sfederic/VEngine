@@ -69,6 +69,19 @@ void WorldEditor::DuplicateActor()
 				newDuplicateActor->CreateAllComponents();
 				editor->UpdateWorldList();
 
+				//Copy values across
+				auto oldProps = pickedActor->GetAllProps();
+				auto newProps = newDuplicateActor->GetAllProps();
+				
+				for (int i = 0; i < oldProps.size(); i++)
+				{
+					for (auto prop : oldProps[i].propMap)
+					{
+						std::string propName = prop.first;
+						memcpy(newProps[i].propMap[propName].data, prop.second.data, prop.second.size);
+					}
+				}
+
 				//Set new actor as picked in-editor
 				pickedActor = newDuplicateActor;
 			}
