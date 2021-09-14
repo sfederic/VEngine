@@ -14,8 +14,7 @@ struct ActorSystem : IActorSystem
 	ActorSystem()
 	{
 		std::string typeName = typeid(T).name();
-		std::string delimiter = " ";
-		std::string token = typeName.substr(typeName.find(delimiter) + 1);
+		std::string token = typeName.substr(typeName.find(" ") + 1);
 		name = token;
 
 		actorSystemCache.Add(typeid(T), this);

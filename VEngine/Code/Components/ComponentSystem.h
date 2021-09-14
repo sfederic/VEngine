@@ -13,8 +13,7 @@ struct ComponentSystem : IComponentSystem
 	ComponentSystem()
 	{
 		std::string typeName = typeid(T).name();
-		std::string delimiter = " ";
-		std::string token = typeName.substr(typeName.find(delimiter) + 1);
+		std::string token = typeName.substr(typeName.find(" ") + 1);
 		name = token;
 
 		componentSystemCache.Add(typeid(T), this);
