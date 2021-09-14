@@ -77,20 +77,22 @@ struct Properties
 	}
 
 	//Used to copy data in from other Properties (types have to be matching)
-	void CopyData(std::string name, void* dataToCopy)
+	void CopyData(std::string name, Property& propToCopy)
 	{
 		Property& prop = propMap[name];
+
+		assert(prop.info == propToCopy.info && "property types not matching");
 
 		if (prop.info == typeid(std::string))
 		{
 			std::string* dst = (std::string*)prop.data;
-			std::string* src = (std::string*)dataToCopy;
+			std::string* src = (std::string*)propToCopy.data;
 
 			dst->assign(src->c_str());
 		}
 		else
 		{
-			memcpy(prop.data, dataToCopy, prop.size);
+			memcpy(prop.data, propToCopy.data, prop.size);
 		}
 	}
 
