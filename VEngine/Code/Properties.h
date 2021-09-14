@@ -3,6 +3,7 @@
 #include <optional>
 #include <string>
 #include <typeindex>
+#include <vector>
 
 struct Property
 {
@@ -106,8 +107,8 @@ struct Properties
 		{
 			for (auto prop : src[i].propMap)
 			{
-				std::string propName = prop.first;
-				dst[i].CopyData(propName, prop.second);
+				std::string propname = prop.first;
+				dst[i].CopyData(propname, prop.second);
 			}
 		}
 	}

@@ -63,15 +63,17 @@ void WorldEditor::DuplicateActor()
 			{
 				Transform transform = pickedActor->GetTransform();
 				Actor* newDuplicateActor = pickedActor->actorSystem->SpawnActor(transform);
-				newDuplicateActor->CreateAllComponents();
 
 				editor->UpdateWorldList();
 
 				//Copy values across
 				auto oldProps = pickedActor->GetAllProps();
 				auto newProps = newDuplicateActor->GetAllProps();
-				
 				Properties::CopyProperties(oldProps, newProps);
+
+				newDuplicateActor->CreateAllComponents();
+
+				editor->SetActorProps(newDuplicateActor);
 
 				//Set new actor as picked in-editor
 				pickedActor = newDuplicateActor;
