@@ -19,7 +19,7 @@ private:
 
 public:
 	InstanceMeshComponent(
-		uint32_t meshInstanceRenderCount_, const char* filename, const wchar_t* shader = L"InstanceShader.hlsl");
+		uint32_t meshInstanceRenderCount_, const std::string filename, const std::string shader = "InstanceShader.hlsl");
 	~InstanceMeshComponent();
 	virtual void Create();
 	uint32_t GetInstanceCount() { return meshInstanceRenderCount; }

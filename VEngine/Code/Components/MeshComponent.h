@@ -14,13 +14,13 @@ struct MeshComponent : SpatialComponent
 	COMPONENT_SYSTEM(MeshComponent)
 
 	std::string meshFilename;
-	std::wstring textureFilename;
+	std::string textureFilename;
 
 	Material* material = nullptr;
 	MeshDataProxy* data = nullptr;
 	PipelineStateObject* pso = nullptr;
 
-	MeshComponent(const char* filename_, const wchar_t* textureFilename_);
+	MeshComponent(const std::string filename_, const std::string textureFilename_);
 	virtual void Tick(double deltaTime) override;
 	virtual void Create() override;
 	virtual Properties GetProps();

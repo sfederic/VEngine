@@ -10,6 +10,12 @@
 #include "AssetDock.h"
 #include "WorldDock.h"
 #include "SystemDock.h"
+#include "Render/Material.h"
+#include "Serialiser.h"
+
+#include <qgridlayout.h>
+#include <qscrollarea.h>
+#include <qpushbutton.h>
 
 void QtEditor::Init(int argc, char* argv[])
 {
@@ -75,6 +81,29 @@ void QtEditor::ClearProperties()
     mainWindow->propertiesDock->Clear();
 }
 
+void QtEditor::OpenMaterialEditor(const std::string materialFilename)
+{
+    Deserialiser d(materialFilename, OpenMode::In);
+    auto material = new Material("", "");
+    auto props = material->GetProps();
+    d.Deserialise(props);
+
+    auto propDock = new PropertiesDock();
+    int gridRow = 0;
+    propDock->IterateOverProperties(props, gridRow);
+
+    auto materialSaveButton = new QPushButton("Save", propDock);
+    materialSaveButton->connect(materialSaveButton, &QPushButton::clicked, this, &QtEditor::SaveMaterialFile);
+    propDock->actorPropsGridLayout->addWidget(materialSaveButton);
+
+    propDock->actorPropsWidget->setLayout(propDock->actorPropsGridLayout);
+    propDock->setWidget(propDock->actorPropsWidget);
+    propDock->actorPropsScrollArea->setWidget(propDock->actorPropsWidget);
+    propDock->setWidget(propDock->actorPropsScrollArea);
+
+    propDock->show();
+}
+
 void QtEditor::SetEditorFont()
 {
     //Capcom have a cool talk on UI design and fonts for RE Engine
@@ -126,4 +155,13 @@ void QtEditor::EnableDarkMode()
     p.setColor(QPalette::ButtonText, fontColour);
     p.setColor(QPalette::BrightText, fontColour);
     app->setPalette(p);
+}
+
+void QtEditor::SaveMaterialFile()
+{
+    Serialiser s("Materials/testmaterial.mt", OpenMode::Out);
+    Material mat = Material("test.png", "DefaultShader.hlsl");
+    s.Serialise(mat.GetProps());
+    
+    Log("Material saved.");
 }

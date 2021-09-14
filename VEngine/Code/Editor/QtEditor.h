@@ -1,7 +1,8 @@
 #pragma once
 #include "IEditor.h"
+#include <qobject.h>
 
-struct QtEditor : IEditor
+struct QtEditor : IEditor, QObject
 {
 	struct QApplication* app;
 	struct EditorMainWindow* mainWindow;
@@ -15,6 +16,8 @@ struct QtEditor : IEditor
 	virtual void UpdateWorldList() override;
 	virtual void RefreshAssetList() override;
 	virtual void ClearProperties() override;
+	virtual void OpenMaterialEditor(const std::string materialFilename) override;
 	void SetEditorFont();
 	void EnableDarkMode();
+	void SaveMaterialFile();
 };

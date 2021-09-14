@@ -11,7 +11,7 @@ MeshActor::MeshActor(std::string meshFilename_)
 		meshFilename = spawnMeshFilename;
 	}
 
-	mesh = MeshComponent::system.Add(this, MeshComponent(meshFilename.c_str(), L"test.png"));
+	mesh = MeshComponent::system.Add(this, MeshComponent(meshFilename.c_str(), "test.png"));
 	rootComponent = mesh;
 }
 

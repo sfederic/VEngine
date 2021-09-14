@@ -30,7 +30,7 @@ void LogDock::Print(const std::wstring message)
 
 void LogDock::Print(const std::string message)
 {
-	logMessageBox->insertPlainText(QString::fromStdString(message));
+	logMessageBox->insertPlainText(QString::fromStdString(message) + "\n");
 	logMessageBox->moveCursor(QTextCursor::MoveOperation::End);
 }
 

@@ -36,10 +36,10 @@ struct Material
 	RastState* rastState = nullptr;
 	ShaderItem* shader = nullptr;
 
-	std::wstring textureFilename;
-	std::wstring shaderFilename;
+	std::string textureFilename;
+	std::string shaderFilename;
 
-	Material(std::wstring textureFilename_, std::wstring shaderFilename_);
+	Material(std::string textureFilename_, std::string shaderFilename_);
 	virtual void Create();
 	virtual Properties GetProps();
 };

@@ -2,7 +2,7 @@
 #include "Render/RenderUtils.h"
 
 InstanceMeshComponent::InstanceMeshComponent(
-	uint32_t meshInstanceRenderCount_, const char* filename, const wchar_t* shader)
+	uint32_t meshInstanceRenderCount_, const std::string filename, const std::string shader)
 	: MeshComponent(filename, shader)
 {
 	meshInstanceRenderCount = meshInstanceRenderCount_;

@@ -8,7 +8,7 @@
 
 NormalActor::NormalActor()
 {
-	mesh1 = MeshComponent::system.Add(this, MeshComponent("plane.fbx", L"wall.png"));
+	mesh1 = MeshComponent::system.Add(this, MeshComponent("plane.fbx", "wall.png"));
 	rootComponent = mesh1;
 
 	//camera = CameraComponent::system.Add(this, CameraComponent(XMFLOAT3(0.f, 5.f, -20.f), false));

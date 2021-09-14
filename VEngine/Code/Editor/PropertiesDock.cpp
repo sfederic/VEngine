@@ -20,7 +20,8 @@
 PropertiesDock::PropertiesDock() : QDockWidget("Properties")
 {
     actorPropsScrollArea = new QScrollArea(this);
-
+    actorPropsGridLayout = new QGridLayout();
+    actorPropsWidget = new QWidget();
     setFixedWidth(375);
 }
 

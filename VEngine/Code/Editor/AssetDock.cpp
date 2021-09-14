@@ -1,4 +1,5 @@
 #include "AssetDock.h"
+#include <qmenu.h>
 #include <filesystem>
 #include <qdockwidget.h>
 #include <qfilesystemmodel.h>
@@ -13,6 +14,7 @@
 #include "WorldEditor.h"
 #include "PropertiesDock.h"
 #include "Render/TextureSystem.h"
+#include "Render/Material.h"
 
 namespace Icons
 {
@@ -28,6 +30,9 @@ namespace Icons
 
 AssetDock::AssetDock() : QDockWidget("Assets")
 {
+    this->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(this, &QWidget::customContextMenuRequested, this, &AssetDock::ShowContextMenu);
+
     //Set icons
     Icons::play = new QPixmap("Icons/play_icon.png");
     Icons::font = new QPixmap("Icons/font_icon.png");
@@ -181,6 +186,17 @@ void AssetDock::AssetFolderClicked()
     }
 }
 
+void AssetDock::ShowContextMenu(const QPoint& point)
+{
+    QMenu contextMenu("Context menu", this);
+
+    QAction materialAction("New Material", this);
+    connect(&materialAction, &QAction::triggered, this, &AssetDock::CreateMaterialFile);
+    contextMenu.addAction(&materialAction);
+
+    contextMenu.exec(mapToGlobal(point));
+}
+
 void AssetDock::MeshFileClicked(const std::string meshFilename)
 {
     //Set spawner system as MeshActor
@@ -196,4 +212,11 @@ void AssetDock::TextureFileClicked(const std::wstring textureFilename)
 void AssetDock::MaterialFileClicked(const std::string materialFilename)
 {
     editor->OpenMaterialEditor(materialFilename);
+}
+
+void AssetDock::CreateMaterialFile()
+{
+    Serialiser s("Materials/testmaterial.mt", OpenMode::Out);
+    Material mat = Material("test.png", "DefaultShader.hlsl");
+    s.Serialise(mat.GetProps());
 }

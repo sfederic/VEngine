@@ -3,15 +3,15 @@ NormalActor
 MeshActor
 1
 Mesh Filename
-monkey.fbx
+small_cone.fbx
 Name
 MeshActor0
 Position
-2 0 5
+-1 2 0
 Rotation
-0.454535 0.54169 0.541503 -0.454691
+-0 0 -0 1
 Scale
-3 3 3
+1 1 1
 UvOffset
 0 0
 UvRotation
