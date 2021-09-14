@@ -61,9 +61,6 @@ void WorldEditor::DuplicateActor()
 		{
 			if (pickedActor)
 			{
-				//TODO: need to look into copying properties from the picked actor
-				//to the new duplicated actor so that variable values are copied across
-
 				Transform transform = pickedActor->GetTransform();
 				Actor* newDuplicateActor = pickedActor->actorSystem->SpawnActor(transform);
 				newDuplicateActor->CreateAllComponents();
@@ -78,7 +75,7 @@ void WorldEditor::DuplicateActor()
 					for (auto prop : oldProps[i].propMap)
 					{
 						std::string propName = prop.first;
-						memcpy(newProps[i].propMap[propName].data, prop.second.data, prop.second.size);
+						newProps[i].CopyData(propName, prop.second.data);
 					}
 				}
 
