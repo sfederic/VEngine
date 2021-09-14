@@ -128,6 +128,8 @@ void Renderer::CreateSwapchain(HWND window)
 	ComPtr<IDXGISwapChain> tempSwapchain;
 	HR(dxgiFactory->CreateSwapChain(device, &sd, tempSwapchain.GetAddressOf()));
 	HR(tempSwapchain->QueryInterface(&swapchain));
+
+	dxgiFactory->MakeWindowAssociation(window, DXGI_MWA_NO_WINDOW_CHANGES | DXGI_MWA_NO_ALT_ENTER);
 }
 
 void Renderer::CreateRTVAndDSV()
