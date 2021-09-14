@@ -64,6 +64,7 @@ void WorldEditor::DuplicateActor()
 				Transform transform = pickedActor->GetTransform();
 				Actor* newDuplicateActor = pickedActor->actorSystem->SpawnActor(transform);
 				newDuplicateActor->CreateAllComponents();
+
 				editor->UpdateWorldList();
 
 				//Copy values across
@@ -75,7 +76,7 @@ void WorldEditor::DuplicateActor()
 					for (auto prop : oldProps[i].propMap)
 					{
 						std::string propName = prop.first;
-						newProps[i].CopyData(propName, prop.second.data);
+						newProps[i].CopyData(propName, prop.second);
 					}
 				}
 
