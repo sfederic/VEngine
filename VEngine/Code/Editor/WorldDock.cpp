@@ -63,3 +63,15 @@ void WorldDock::ActorNameChanged(QTreeWidgetItem* item, int column)
 		}
 	}
 }
+
+void WorldDock::SelectActorInList()
+{
+	std::string actorName = worldEditor.pickedActor->name;
+	auto foundItems = actorTreeWidget->findItems(QString::fromStdString(actorName), Qt::MatchExactly);
+
+	//Names should be unique in list, even though findItems() returns a collection
+	assert(foundItems.size() == 1);
+
+	actorTreeWidget->clearSelection();
+	actorTreeWidget->setItemSelected(foundItems[0], true);
+}

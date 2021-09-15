@@ -17,6 +17,7 @@ struct QtEditor : IEditor, QObject
 	virtual void RefreshAssetList() override;
 	virtual void ClearProperties() override;
 	virtual void OpenMaterialEditor(const std::string materialFilename) override;
+	virtual void SelectActorInWorldList() override;
 	void SetEditorFont();
 	void EnableDarkMode();
 	void SaveMaterialFile();

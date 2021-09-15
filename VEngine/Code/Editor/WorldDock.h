@@ -12,5 +12,6 @@ struct WorldDock : public QDockWidget
 	WorldDock();
 	void PopulateWorldActorList();
 	void ClickOnActorInList(QTreeWidgetItem* item, int column);
+	void SelectActorInList();
 	void ActorNameChanged(QTreeWidgetItem* item, int column);
 };

@@ -165,3 +165,8 @@ void QtEditor::SaveMaterialFile()
     
     Log("Material saved.");
 }
+
+void QtEditor::SelectActorInWorldList()
+{
+    mainWindow->worldDock->SelectActorInList();
+}

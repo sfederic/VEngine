@@ -169,5 +169,7 @@ void WorldEditor::SetPickedActor(Actor* actor)
 {
 	assert(actor);
 	pickedActor = actor;
+
 	editor->SetActorProps(pickedActor);
+	editor->SelectActorInWorldList();
 }
