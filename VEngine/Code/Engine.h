@@ -1,5 +1,6 @@
 #pragma once
 
+//
 struct Engine
 {
 	void Init(int argc, char* argv[]);
