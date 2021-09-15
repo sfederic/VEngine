@@ -1,5 +1,4 @@
 #pragma once
-#include <WorldEditor.cpp>
 
 struct Actor;
 struct IActorSystem;
