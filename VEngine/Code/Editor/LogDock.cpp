@@ -24,7 +24,7 @@ LogDock::LogDock() : QDockWidget("Log")
 
 void LogDock::Print(const std::wstring message)
 {
-	logMessageBox->insertPlainText(QString::fromStdWString(message));
+	logMessageBox->insertPlainText(QString::fromStdWString(message) + "\n");
 	logMessageBox->moveCursor(QTextCursor::MoveOperation::End);
 }
 
