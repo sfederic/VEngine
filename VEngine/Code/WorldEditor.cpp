@@ -62,7 +62,8 @@ void WorldEditor::DuplicateActor()
 				Transform transform = pickedActor->GetTransform();
 				Actor* newDuplicateActor = pickedActor->actorSystem->SpawnActor(transform);
 
-				editor->UpdateWorldList();
+				//The props copying below will overwrite the new actor's name, so keep it here then copy it back.
+				const std::string newActorOriginalName = newDuplicateActor->name;
 
 				//Copy values across
 				auto oldProps = pickedActor->GetAllProps();
@@ -71,7 +72,10 @@ void WorldEditor::DuplicateActor()
 
 				newDuplicateActor->CreateAllComponents();
 
+				newDuplicateActor->name = newActorOriginalName;
+
 				editor->SetActorProps(newDuplicateActor);
+				editor->UpdateWorldList();
 
 				//Set new actor as picked in-editor
 				pickedActor = newDuplicateActor;
