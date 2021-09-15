@@ -1,4 +1,5 @@
 #pragma once
+#include <WorldEditor.cpp>
 
 struct Actor;
 struct IActorSystem;
@@ -15,6 +16,7 @@ struct WorldEditor
 	void DeleteActor();
 	void SpawnActorOnClick();
 	void DeselectPickedActor();
+	void SetPickedActor(Actor* actor);
 };
 
 extern WorldEditor worldEditor;

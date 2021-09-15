@@ -40,14 +40,12 @@ void WorldEditor::HandleActorPicking()
 			{
 				if (RaycastTriangleIntersect(screenPickRay))
 				{
-					pickedActor = screenPickRay.hitActor;
-					editor->SetActorProps(pickedActor);
+					SetPickedActor(screenPickRay.hitActor);
 				}
 			}
 			else
 			{
-				pickedActor = screenPickRay.hitActor;
-				editor->SetActorProps(pickedActor);
+				SetPickedActor(screenPickRay.hitActor);
 			}
 		}
 	}
@@ -165,4 +163,11 @@ void WorldEditor::DeselectPickedActor()
 			editor->ClearProperties();
 		}
 	}
+}
+
+void WorldEditor::SetPickedActor(Actor* actor)
+{
+	assert(actor);
+	pickedActor = actor;
+	editor->SetActorProps(pickedActor);
 }
