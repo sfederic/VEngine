@@ -9,10 +9,10 @@ void MaterialSystem::AddMaterial(Material* material)
 	assert(material);
 	materials.push_back(material);
 
-	//if (systemState == SystemStates::Loaded)
-	//{
-	//	material->Create();
-	//}
+	if (systemState == SystemStates::Loaded)
+	{
+		material->Create();
+	}
 }
 
 void MaterialSystem::CreateAllMaterials()
