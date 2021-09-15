@@ -137,8 +137,6 @@ Properties Actor::GetProps()
 	props.Add("Scale", &rootComponent->transform.scale);
 	props.Add("Rotation", &rootComponent->transform.rotation);
 
-	props.Add("Name", &name);
-
 	return props;
 }
 
