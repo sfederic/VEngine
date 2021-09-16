@@ -5,7 +5,7 @@ VS_OUT VSMain(VS_IN i)
 	VS_OUT o;
 
 	o.pos = mul(mvp, float4(i.pos, 1.0f));
-	o.posWS = i.pos;
+	o.posWS = mul(model, float4(i.pos, 1.0f));
 	o.uv = i.uv;
 	o.normal = mul((float3x3)model, i.normal);
 

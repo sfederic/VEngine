@@ -1,5 +1,4 @@
-//keep per object buffer for single draws
-cbuffer cbPerObject : register(b0)
+cbuffer cbMatrices : register(b0)
 {
 	float4x4 model;
 	float4x4 view;
@@ -173,7 +172,7 @@ struct VS_IN
 struct VS_OUT
 {
 	float4 pos : SV_POSITION;
-	float3 posWS : POSITION;
+	float4 posWS : POSITION;
 	float2 uv : TEXCOORD;
 	float3 normal : NORMAL;
 };
