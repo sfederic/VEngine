@@ -8,17 +8,17 @@
 
 Console console;
 
-namespace ExecuteStrings
+Console::Console()
 {
-	const wchar_t* GPU = L"GPU";
-	const wchar_t* FPS = L"FPS";
-	const wchar_t* SNAP = L"SNAP";
-	const wchar_t* PROFILE = L"PROFILE";
-	const wchar_t* ACTOR = L"ACTOR";
-	const wchar_t* PROPS = L"PROPS";
-	const wchar_t* INSPECT = L"INSPECT";
-	const wchar_t* COMMANDS = L"COMMANDS";
-	const wchar_t* STATS = L"STATS";
+	//Execute values need to be uppercase with WndProc
+	executeMap.emplace(L"SNAP", []() { debugMenu.snapMenuOpen = !debugMenu.snapMenuOpen; });
+	executeMap.emplace(L"PROFILE", []() { debugMenu.profileMenuOpen = !debugMenu.profileMenuOpen; });
+	executeMap.emplace(L"FPS", []() { debugMenu.fpsMenuOpen = !debugMenu.fpsMenuOpen; });
+	executeMap.emplace(L"PROPS", []() { debugMenu.propsMenuOpen = !debugMenu.propsMenuOpen; });
+	executeMap.emplace(L"COMMANDS", []() { debugMenu.commandsMenuOpen = !debugMenu.commandsMenuOpen; });
+	executeMap.emplace(L"GPU", []() { debugMenu.gpuMenuOpen = !debugMenu.gpuMenuOpen; });
+	executeMap.emplace(L"ACTOR", []() { debugMenu.actorInspectMenuOpen = !debugMenu.actorInspectMenuOpen; });
+	executeMap.emplace(L"STATS", []() { debugMenu.worldStatsMenuOpen = !debugMenu.worldStatsMenuOpen; });
 }
 
 void Console::ConsoleInput()
@@ -68,40 +68,12 @@ void Console::Tick()
 	}
 }
 
-//Execute values need to be uppercase with WndProc
 void Console::ExecuteString()
 {
-	if (consoleString == ExecuteStrings::SNAP)
+	auto executeIt = executeMap.find(consoleString);
+	if (executeIt != executeMap.end())
 	{
-		debugMenu.snapMenuOpen = !debugMenu.snapMenuOpen;
-	}
-	else if (consoleString == ExecuteStrings::PROFILE)
-	{
-		debugMenu.profileMenuOpen = !debugMenu.profileMenuOpen;
-	}
-	else if (consoleString == ExecuteStrings::FPS)
-	{
-		debugMenu.fpsMenuOpen = !debugMenu.fpsMenuOpen;
-	}
-	else if (consoleString == ExecuteStrings::PROPS)
-	{
-		debugMenu.propsMenuOpen = !debugMenu.propsMenuOpen;
-	}	
-	else if (consoleString == ExecuteStrings::COMMANDS)
-	{
-		debugMenu.commandsMenuOpen = !debugMenu.commandsMenuOpen;
-	}
-	else if (consoleString == ExecuteStrings::GPU)
-	{
-		debugMenu.gpuMenuOpen = !debugMenu.gpuMenuOpen;
-	}	
-	else if (consoleString == ExecuteStrings::ACTOR)
-	{
-		debugMenu.actorInspectMenuOpen = !debugMenu.actorInspectMenuOpen;
-	}	
-	else if (consoleString == ExecuteStrings::STATS)
-	{
-		debugMenu.worldStatsMenuOpen = !debugMenu.worldStatsMenuOpen;
+		executeIt->second();
 	}
 	else
 	{
