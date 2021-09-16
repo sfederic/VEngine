@@ -131,6 +131,11 @@ LightingResult CalcForwardLighting(float3 V, float4 position, float3 normal)
 	[unroll]
 	for (int i = 0; i < numLights; i++)
 	{
+		if (!lights[i].enabled)
+		{
+			continue;
+		}
+
 		LightingResult result = { 0.f, 0.f, 0.f, 0.f };
 
 		switch (lights[i].lightType)

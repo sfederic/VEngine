@@ -20,5 +20,6 @@ Properties PointLightComponent::GetProps()
 	props.Add("Const Atten.", &lightData.constantAtten);
 	props.Add("Linear Atten.", &lightData.linearAtten);
 	props.Add("Quad Atten.", &lightData.quadraticAtten);
+	props.Add("LightEnabled", &lightData.enabled);
 	return props;
 }

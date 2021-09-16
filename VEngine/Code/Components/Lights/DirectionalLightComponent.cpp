@@ -17,5 +17,6 @@ Properties DirectionalLightComponent::GetProps()
 {
     Properties props("DirectionalLight");
     props.Add("Colour", &lightData.colour);
+    props.Add("LightEnabled", &lightData.enabled);
     return props;
 }
