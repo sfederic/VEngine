@@ -19,32 +19,9 @@ float4 PSMain(VS_OUT i) : SV_Target
 	float3 normal = normalize(i.normal);
 	float4 position = float4(i.posWS, 1.0f);
 
-	LightingResult endResult = { 0.f, 0.f, 0.f, 0.f };
-
 	float3 V = normalize(eyePosition - position).xyz;
 
-	[unroll]
-	for (int i = 0; i < numLights; i++)
-	{
-		LightingResult result = { 0.f, 0.f, 0.f, 0.f };
-
-		switch (lights[i].lightType)
-		{
-		case POINT_LIGHT:
-			result = CalcPointLight(lights[i], V, position, normal);
-			break;
-
-		case SPOT_LIGHT:
-			result = CalcSpotLight(lights[i], V, position, normal);
-			break;
-
-		case DIRECTIONAL_LIGHT:
-			result = CalcDirectionalLight(lights[i], normal);
-			break;	
-		}
-
-		endResult.diffuse += result.diffuse;
-	}
+	LightingResult endResult = CalcForwardLighting(V, position, normal);
 
 	endResult.diffuse = saturate(endResult.diffuse);
 

@@ -125,6 +125,36 @@ LightingResult CalcSpotLight(Light light, float3 V, float4 P, float3 N)
 	return result;
 }
 
+LightingResult CalcForwardLighting(float3 V, float4 position, float3 normal)
+{
+	LightingResult endResult = { 0.f, 0.f, 0.f, 0.f };
+
+	[unroll]
+	for (int i = 0; i < numLights; i++)
+	{
+		LightingResult result = { 0.f, 0.f, 0.f, 0.f };
+
+		switch (lights[i].lightType)
+		{
+		case POINT_LIGHT:
+			result = CalcPointLight(lights[i], V, position, normal);
+			break;
+
+		case SPOT_LIGHT:
+			result = CalcSpotLight(lights[i], V, position, normal);
+			break;
+
+		case DIRECTIONAL_LIGHT:
+			result = CalcDirectionalLight(lights[i], normal);
+			break;
+		}
+
+		endResult.diffuse += result.diffuse;
+	}
+
+	return endResult;
+}
+
 struct InstanceData
 {
 	float4x4 modelMatrix;
