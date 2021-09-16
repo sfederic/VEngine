@@ -301,6 +301,10 @@ void Renderer::RenderMeshComponents()
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
 
+	//TODO: I'm not sure of how constant buffers persist between shaders. Keeping UpdateLights() here
+	//seems faster, but not sure on how persistant that data is.
+	UpdateLights();
+
 	for (auto mesh : MeshComponent::system.components)
 	{
 		SetRenderPipelineStates(mesh);
@@ -313,8 +317,9 @@ void Renderer::RenderMeshComponents()
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
-		UpdateLights();
-		
+		//Set lights buffer
+		context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
+
 		//Draw
 		context->DrawIndexed(mesh->data->indices->size(), 0, 0);
 	}
@@ -342,11 +347,12 @@ void Renderer::RenderInstanceMeshComponents()
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
-		UpdateLights();
-
 		//Update instance data and set SRV
 		context->UpdateSubresource(instanceMesh->structuredBuffer, 0, nullptr, instanceMesh->instanceData.data(), 0, 0);
 		context->VSSetShaderResources(instanceSRVRegister, 1, &instanceMesh->srv);
+
+		//Set lights buffer
+		context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
 
 		context->DrawIndexedInstanced(instanceMesh->data->indices->size(), instanceMesh->GetInstanceCount(), 0, 0, 0);
 	}
