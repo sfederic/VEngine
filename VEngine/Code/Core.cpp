@@ -5,6 +5,7 @@
 #include "GameUtils.h"
 #include "Camera.h"
 #include "Actors/Player.h"
+#include "World.h"
 
 double ticks;
 double deltaTime = 0.0;
@@ -50,7 +51,7 @@ void Core::SetTimerFrequency()
 
 void Core::Init()
 {
-	HR(CoInitialize(NULL)); //For the WIC texture functions from DXT
+	HR(CoInitialize(NULL)); //For the WIC texture functions from DirectXToolkit
 	SetTimerFrequency();
 }
 
@@ -98,6 +99,8 @@ void StartGame()
 			activeCamera = player->camera;
 		}
 	}
+
+	world.StartAllActors();
 }
 
 void EndGame()
