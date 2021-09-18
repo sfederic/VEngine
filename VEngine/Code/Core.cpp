@@ -2,8 +2,9 @@
 #include "Input.h"
 #include "Render/Renderer.h"
 #include "Debug.h"
-
+#include "GameUtils.h"
 #include "Camera.h"
+#include "Actors/Player.h"
 
 double ticks;
 double deltaTime = 0.0;
@@ -89,7 +90,7 @@ void Core::EndTimer()
 
 void StartGame()
 {
-	//activeCamera = Player::system.actors[0]->camera;
+	activeCamera = GameUtils::GetPlayer()->camera;
 }
 
 void EndGame()
