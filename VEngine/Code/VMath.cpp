@@ -1,5 +1,6 @@
 #include "VMath.h"
 #include <cmath>
+#include <algorithm>
 #include "Actors/Actor.h"
 
 namespace VMath
@@ -141,16 +142,47 @@ namespace VMath
         return max;
     }
 
-    XMVECTOR VectorConstantLerp(XMVECTOR current, XMVECTOR target, float dist)
+    //Copied heavily from UE4
+    XMVECTOR VectorConstantLerp(XMVECTOR current, XMVECTOR target, float deltaTime, float interpSpeed)
     {
         XMVECTOR toTarget = XMVectorSubtract(target, current);
-        float magnitude = XMVector3Dot(toTarget, toTarget).m128_f32[0];
-        if (magnitude > (dist * dist))
-        {
-            toTarget *= (dist / sqrtf(magnitude));
-        }
 
-        return current + toTarget;
+        const float magnitude = XMVector3Length(toTarget).m128_f32[0];
+        const float step = deltaTime * interpSpeed;
+
+        if (magnitude > step)
+        {
+            if (step > 0.0f)
+            {
+                const XMVECTOR diff = toTarget / magnitude;
+                return current + diff * step;
+            }
+            else
+            {
+                return current;
+            }
+        }
+        
+        return target;
+    }
+
+    //Copied heavily from UE4
+    XMVECTOR QuatConstantLerp(XMVECTOR current, XMVECTOR target, float deltaTime, float interpSpeed)
+    {
+        float deltaInterpSpeed = std::clamp(deltaTime * interpSpeed, 0.f, 1.f);
+        float AngularDistance = std::max(1.e-8f, QuatAngularDistance(target, current));
+        float alpha = std::clamp(deltaInterpSpeed / AngularDistance, 0.f, 1.f);
+
+        return XMQuaternionSlerp(current, target, alpha);
+    }
+
+    float QuatAngularDistance(XMVECTOR q1, XMVECTOR q2)
+    {
+        float innerProduct = q1.m128_f32[0] * q2.m128_f32[0] + 
+            q1.m128_f32[1] * q2.m128_f32[1] +
+            q1.m128_f32[2] * q2.m128_f32[2] +
+            q1.m128_f32[3] * q2.m128_f32[3];
+        return acosf((2 * innerProduct * innerProduct) - 1.f);
     }
 
     XMMATRIX GetBoundingBoxMatrix(BoundingOrientedBox& boundingBox, Actor* actor)

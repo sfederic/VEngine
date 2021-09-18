@@ -29,8 +29,9 @@ namespace VMath
 	bool VecEqual(XMVECTOR v1, XMVECTOR v2, float epsilon = 0.0005f);
 	bool Float3Equal(XMFLOAT3& f1, XMFLOAT3& f2);
 	float FindMaxInVector(XMVECTOR v);
-	XMVECTOR VectorConstantLerp(XMVECTOR v1, XMVECTOR v2, float dist);
-	XMVECTOR XMVectorConstantLerp(FXMVECTOR V0, FXMVECTOR V1, float deltaTime, float speed);
+	XMVECTOR VectorConstantLerp(XMVECTOR current, XMVECTOR target, float deltaTime, float interpSpeed);
+	XMVECTOR QuatConstantLerp(XMVECTOR current, XMVECTOR target, float deltaTime, float interpSpeed);
+	float QuatAngularDistance(XMVECTOR q1, XMVECTOR q2);
 	XMVECTOR SmoothStep(XMVECTOR V0, XMVECTOR V1, float t);
 
 	XMMATRIX GetBoundingBoxMatrix(BoundingOrientedBox& boundingBox, Actor* actor);

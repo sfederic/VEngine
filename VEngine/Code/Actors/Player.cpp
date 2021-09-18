@@ -25,7 +25,7 @@ void Player::Start()
 void Player::Tick(double deltaTime)
 {
 	const float moveSpeed = 7.5f;
-	currentPos = VMath::VectorConstantLerp(currentPos, nextPos, deltaTime * moveSpeed);
+	currentPos = VMath::VectorConstantLerp(currentPos, nextPos, deltaTime, moveSpeed);
 
 	if (VMath::VecEqual(currentPos, nextPos))
 	{
@@ -49,8 +49,9 @@ void Player::Tick(double deltaTime)
 
 	SetPosition(currentPos);
 
-	const float rotSpeed = 45.f;
-	currentRot = XMQuaternionSlerp(currentRot, nextRot, deltaTime * rotSpeed);
+	const float rotSpeed = 5.f;
+	//currentRot = XMQuaternionSlerp(currentRot, nextRot, deltaTime * rotSpeed);
+	currentRot = VMath::QuatConstantLerp(currentRot, nextRot, deltaTime, rotSpeed);
 
 	if (VMath::VecEqual(currentRot, nextRot))
 	{
