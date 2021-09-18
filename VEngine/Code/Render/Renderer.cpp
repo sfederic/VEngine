@@ -212,21 +212,21 @@ void Renderer::CreateRasterizerStates()
 void Renderer::CreateBlendStates()
 {
 	{
-		//MSAA has to be set for AlphaToCoverage to work.
 		D3D11_BLEND_DESC alphaToCoverageDesc = {};
-		alphaToCoverageDesc.AlphaToCoverageEnable = true;
+		//MSAA has to be set for AlphaToCoverage to work.
+		//alphaToCoverageDesc.AlphaToCoverageEnable = true;
 		alphaToCoverageDesc.RenderTarget[0].BlendEnable = true;
 		alphaToCoverageDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
 		alphaToCoverageDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
 		alphaToCoverageDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
 		alphaToCoverageDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
-		alphaToCoverageDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+		alphaToCoverageDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
 		alphaToCoverageDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 		alphaToCoverageDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
 		HR(device->CreateBlendState(&alphaToCoverageDesc, &blendStateAlphaToCoverage));
 
-		BlendState* bs = new BlendState("alphaToCoverage", alphaToCoverageDesc, blendStateAlphaToCoverage);
+		BlendState* bs = new BlendState("default", alphaToCoverageDesc, blendStateAlphaToCoverage);
 		blendStateMap[bs->name] = bs;
 	}
 }

@@ -25,7 +25,7 @@ float4 PSMain(VS_OUT i) : SV_Target
 
 	endResult.diffuse = saturate(endResult.diffuse);
 
-	//clip(texColour.a - 0.1f);
+	clip(texColour.a - 0.1f);
 
 	float4 finalColour = (endResult.diffuse + globalAmbient) * texColour;
 	return finalColour;
