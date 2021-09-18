@@ -143,6 +143,7 @@
     <ClCompile Include="Code\Actors\SpotLightActor.cpp" />
     <ClCompile Include="Code\DebugActors\DebugCone.cpp" />
     <ClCompile Include="Code\Actors\Player.cpp" />
+    <ClCompile Include="Code\GameUtils.cpp" />
     <ClInclude Include="Code\Components\BoxTriggerComponent.h" />
     <ClInclude Include="Code\Animation\AnimationStructures.h" />
     <ClInclude Include="Code\Actors\Actor.h" />
@@ -280,6 +281,7 @@
     <ClInclude Include="Code\Actors\SpotLightActor.h" />
     <ClInclude Include="Code\DebugActors\DebugCone.h" />
     <ClInclude Include="Code\Actors\Player.h" />
+    <ClInclude Include="Code\GameUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
