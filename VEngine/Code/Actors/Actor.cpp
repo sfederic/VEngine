@@ -115,6 +115,11 @@ XMFLOAT3 Actor::GetForwardVector()
 	return forward;
 }
 
+XMVECTOR Actor::GetForwardVectorV()
+{
+	return rootComponent->transform.world.r[2];
+}
+
 XMFLOAT3 Actor::GetRightVector()
 {
 	XMFLOAT3 right;
@@ -122,11 +127,21 @@ XMFLOAT3 Actor::GetRightVector()
 	return right;
 }
 
+XMVECTOR Actor::GetRightVectorV()
+{
+	return rootComponent->transform.world.r[0];
+}
+
 XMFLOAT3 Actor::GetUpVector()
 {
 	XMFLOAT3 up;
 	XMStoreFloat3(&up, rootComponent->transform.world.r[1]);
 	return up;
+}
+
+XMVECTOR Actor::GetUpVectorV()
+{
+	return rootComponent->transform.world.r[1];
 }
 
 Properties Actor::GetProps()

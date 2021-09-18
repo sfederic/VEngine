@@ -42,8 +42,11 @@ struct Actor
 	void SetTransform(Transform transform);
 	Transform GetTransform();
 	XMFLOAT3 GetForwardVector();
+	XMVECTOR GetForwardVectorV();
 	XMFLOAT3 GetRightVector();
+	XMVECTOR GetRightVectorV();
 	XMFLOAT3 GetUpVector();
+	XMVECTOR GetUpVectorV();
 	virtual Properties GetProps() = 0;
 	std::vector<Properties> GetAllProps();
 	virtual void Start();
