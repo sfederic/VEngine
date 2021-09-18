@@ -12,7 +12,6 @@
 #include "Editor/Console.h"
 #include "World.h"
 #include "Render/ShaderSystem.h"
-#include "Actors/NormalActor.h"
 #include "Components/MeshComponent.h"
 #include "Components/InstanceMeshComponent.h"
 #include "Commands/CommandSystem.h"

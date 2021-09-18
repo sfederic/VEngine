@@ -11,7 +11,6 @@
 #include "Components/Lights/PointLightComponent.h"
 #include "Components/Lights/SpotLightComponent.h"
 #include "Actors/Actor.h"
-#include "Actors/NormalActor.h"
 #include "ShaderSystem.h"
 #include "DebugActors/DebugBox.h"
 #include "DebugActors/DebugSphere.h"
@@ -215,7 +214,7 @@ void Renderer::CreateBlendStates()
 		D3D11_BLEND_DESC alphaToCoverageDesc = {};
 		//MSAA has to be set for AlphaToCoverage to work.
 		//alphaToCoverageDesc.AlphaToCoverageEnable = true;
-		alphaToCoverageDesc.RenderTarget[0].BlendEnable = true;
+		alphaToCoverageDesc.RenderTarget[0].BlendEnable = false;
 		alphaToCoverageDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
 		alphaToCoverageDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
 		alphaToCoverageDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
@@ -695,7 +694,7 @@ void Renderer::SetRenderPipelineStates(MeshComponent* mesh)
 	}
 
 	const FLOAT blendState[4] = { 0.f };
-	context->OMSetBlendState(material->blendState->data, blendState, 0xFFFFFFFF);
+	//context->OMSetBlendState(material->blendState->data, blendState, 0xFFFFFFFF);
 
 	context->VSSetShader(material->shader->vertexShader, nullptr, 0);
 	context->PSSetShader(material->shader->pixelShader, nullptr, 0);

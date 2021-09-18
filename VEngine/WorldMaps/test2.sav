@@ -3,9 +3,9 @@ NormalActor
 MeshActor
 2
 Mesh Filename
-small_cone.fbx
+cube.fbx
 Position
--1 0 1
+-2 0 5
 Rotation
 -0 0 -0 1
 Scale
@@ -13,7 +13,7 @@ Scale
 Shader
 DefaultShader.hlsl
 Texture
-test.png
+bush.png
 UvOffset
 0 0
 UvRotation
@@ -22,17 +22,17 @@ UvScale
 1 1
 next
 Mesh Filename
-small_cone.fbx
+cube.fbx
 Position
-1 0 1
+0 0 7
 Rotation
--0 0 -0 1
+0.707279 0 0 -0.706934
 Scale
-1 1 1
+1 0.999999 0.999999
 Shader
 DefaultShader.hlsl
 Texture
-test.png
+bush.png
 UvOffset
 0 0
 UvRotation
@@ -44,14 +44,35 @@ DirectionalLightActor
 1
 Colour
 1 1 1 1
+LightEnabled
+1
 Position
--3 2 1
+4 -4 8
 Rotation
--0 0.342182 -0 0.939634
+-0 -0.5 -0 0.866025
 Scale
-0.999995 1 0.999995
+1 1 1
 next
 PointLightActor
 0
 SpotLightActor
 0
+Player
+1
+Position
+-1 0 2
+Rotation
+-0 0 -0 1
+Scale
+1 1 1
+Shader
+DefaultShader.hlsl
+Texture
+wall.png
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next

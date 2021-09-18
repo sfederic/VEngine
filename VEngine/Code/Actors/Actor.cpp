@@ -155,6 +155,10 @@ std::vector<Properties> Actor::GetAllProps()
 	return propsVector;
 }
 
+void Actor::Start()
+{
+}
+
 void Actor::Tick(double deltaTime)
 {
 }

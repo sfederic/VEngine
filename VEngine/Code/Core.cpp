@@ -3,7 +3,6 @@
 #include "Render/Renderer.h"
 #include "Debug.h"
 
-#include "Actors/NormalActor.h"
 #include "Camera.h"
 
 double ticks;
@@ -90,7 +89,7 @@ void Core::EndTimer()
 
 void StartGame()
 {
-	activeCamera = NormalActor::system.actors[0]->camera;
+	//activeCamera = Player::system.actors[0]->camera;
 }
 
 void EndGame()

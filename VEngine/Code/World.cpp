@@ -1,5 +1,4 @@
 #include "World.h"
-#include "Actors/NormalActor.h"
 #include "Actors/MeshActor.h"
 #include "Actors/ActorSystemCache.h"
 #include "Components/ComponentSystemCache.h"

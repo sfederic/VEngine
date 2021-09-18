@@ -173,9 +173,6 @@
     <ClCompile Include="Code\VString.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\NormalActor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Components\SpatialComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -255,6 +252,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\DebugActors\DebugCone.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Actors\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -361,9 +361,6 @@
     <ClInclude Include="Code\VString.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\NormalActor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\SystemStates.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -446,6 +443,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\DebugActors\DebugCone.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
