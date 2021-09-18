@@ -12,6 +12,12 @@ struct Player : Actor
 	MeshComponent* mesh = nullptr;
 	CameraComponent* camera = nullptr;
 
+	XMVECTOR nextPos;
+	XMVECTOR currentPos;
+	
+	XMVECTOR nextRot;
+	XMVECTOR currentRot;
+
 	Player();
 	virtual void Start() override;
 	virtual void Tick(double deltaTime) override;

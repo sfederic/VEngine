@@ -34,11 +34,19 @@ namespace VMath
         float3.z = std::round(float3.z);
     }
 
-    /*XMVECTOR XMVectorConstantLerp(FXMVECTOR V0, FXMVECTOR V1, float deltaTime, float speed)
+    XMVECTOR XMVectorConstantLerp(FXMVECTOR V0, FXMVECTOR V1, float deltaTime, float speed)
     {
-        XMVECTOR v = XMVectorLerp(V0, V1, deltaTime);
-        return v * speed;
-    }*/
+        XMVECTOR v = XMVectorLerp(V0, V1, deltaTime * speed);
+        return v;
+    }
+
+    //REF:https://docs.microsoft.com/en-us/windows/win32/api/directxmath/nf-directxmath-xmvectorlerp
+    XMVECTOR SmoothStep(XMVECTOR V0, XMVECTOR V1, float t)
+    {
+        t = (t > 1.0f) ? 1.0f : ((t < 0.0f) ? 0.0f : t);  // Clamp value to 0 to 1
+        t = t * t * (3.f - 2.f * t);
+        return XMVectorLerp(V0, V1, t);
+    }
 
     XMFLOAT3 PitchYawRollFromMatrix(XMMATRIX m)
     {
@@ -97,6 +105,18 @@ namespace VMath
         return false;
     }
 
+    //bool VecEqual(XMVECTOR v1, XMVECTOR v2, float epsilon)
+    //{
+    //    XMVECTOR v = XMVectorZero();
+    //    v = DirectX::XMVectorEqual(v1, v2);
+    //    if (v.m128_f32[0] > 0)
+    //    {
+    //        return true;
+    //    }
+
+    //    return false;
+    //}
+
     bool Float3Equal(XMFLOAT3& f1, XMFLOAT3& f2)
     {
         if (f1.x == f2.x && f1.y == f2.y && f1.z == f2.z)
@@ -121,7 +141,7 @@ namespace VMath
         return max;
     }
 
-    XMVECTOR XMVectorConstantLerp(XMVECTOR current, XMVECTOR target, float dist)
+    XMVECTOR VectorConstantLerp(XMVECTOR current, XMVECTOR target, float dist)
     {
         XMVECTOR toTarget = XMVectorSubtract(target, current);
         float magnitude = XMVector3Dot(toTarget, toTarget).m128_f32[0];
