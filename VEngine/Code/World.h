@@ -19,6 +19,10 @@ struct World
 
 	//Called on level load
 	void Start();
+
+	//Called when gameplay begins
+	void StartAllActors();
+
 	void TickAllActorSystems(double deltaTime);
 	void TickAllComponentSystems(double deltaTime);
 	Actor* FindActorByName(std::string actorName);

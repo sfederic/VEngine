@@ -51,6 +51,16 @@ void World::Start()
 	}
 }
 
+void World::StartAllActors()
+{
+	auto actors = GetAllActorsInWorld();
+
+	for (auto actor : actors)
+	{
+		actor->Start();
+	}
+}
+
 void World::TickAllActorSystems(double deltaTime)
 {
 	for (IActorSystem* actorSystem : activeActorSystems)
