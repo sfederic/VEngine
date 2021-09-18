@@ -42,3 +42,10 @@ void PipelineStateObject::SetIndexBuffer(Buffer* indexBuffer_)
 {
 	indexBuffer = indexBuffer;
 }
+
+BlendState::BlendState(std::string name_, D3D11_BLEND_DESC desc_, ID3D11BlendState* data_)
+{
+	name = name_;
+	desc = desc_;
+	data = data_;
+}

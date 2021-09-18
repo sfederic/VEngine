@@ -56,6 +56,7 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	CreateRTVAndDSV();
 	CreateInputLayout();
 	CreateRasterizerStates();
+	CreateBlendStates();
 	CreateMainConstantBuffers();
 	CreateQueries();
 	CheckSupportedFeatures();
@@ -210,14 +211,24 @@ void Renderer::CreateRasterizerStates()
 
 void Renderer::CreateBlendStates()
 {
-	//MSAA has to be set for AlphaToCoverage to work.
-	D3D11_BLEND_DESC alphaToCoverageDesc = {};
-	alphaToCoverageDesc.AlphaToCoverageEnable = true;
-	alphaToCoverageDesc.IndependentBlendEnable = false;
-	alphaToCoverageDesc.RenderTarget[0].BlendEnable = false;
-	alphaToCoverageDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+	{
+		//MSAA has to be set for AlphaToCoverage to work.
+		D3D11_BLEND_DESC alphaToCoverageDesc = {};
+		alphaToCoverageDesc.AlphaToCoverageEnable = true;
+		alphaToCoverageDesc.RenderTarget[0].BlendEnable = true;
+		alphaToCoverageDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+		alphaToCoverageDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+		alphaToCoverageDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+		alphaToCoverageDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+		alphaToCoverageDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+		alphaToCoverageDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+		alphaToCoverageDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
-	HR(device->CreateBlendState(&alphaToCoverageDesc, &blendStateAlphaToCoverage));
+		HR(device->CreateBlendState(&alphaToCoverageDesc, &blendStateAlphaToCoverage));
+
+		BlendState* bs = new BlendState("alphaToCoverage", alphaToCoverageDesc, blendStateAlphaToCoverage);
+		blendStateMap[bs->name] = bs;
+	}
 }
 
 void Renderer::CreateQueries()
@@ -301,8 +312,6 @@ void Renderer::RenderMeshComponents()
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
 
-	//TODO: I'm not sure of how constant buffers persist between shaders. Keeping UpdateLights() here
-	//seems faster, but not sure on how persistant that data is.
 	UpdateLights();
 
 	for (auto mesh : MeshComponent::system.components)
@@ -685,8 +694,8 @@ void Renderer::SetRenderPipelineStates(MeshComponent* mesh)
 		context->RSSetState(material->rastState->data);
 	}
 
-	//const FLOAT blendState[4] = { 0.f };
-	//context->OMSetBlendState(blendStateAlphaToCoverage, blendState, 0xFFFFFFFF);
+	const FLOAT blendState[4] = { 0.f };
+	context->OMSetBlendState(material->blendState->data, blendState, 0xFFFFFFFF);
 
 	context->VSSetShader(material->shader->vertexShader, nullptr, 0);
 	context->PSSetShader(material->shader->pixelShader, nullptr, 0);

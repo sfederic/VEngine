@@ -9,6 +9,7 @@ struct Texture2D;
 struct Sampler;
 struct RastState;
 struct ShaderItem;
+struct BlendState;
 
 //The data passed into a shader's constant buffer. Has to be seperate because of byte packing.
 struct MaterialShaderData
@@ -35,6 +36,7 @@ struct Material
 	Sampler* sampler = nullptr;
 	RastState* rastState = nullptr;
 	ShaderItem* shader = nullptr;
+	BlendState* blendState = nullptr;
 
 	std::string textureFilename;
 	std::string shaderFilename;

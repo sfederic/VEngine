@@ -22,6 +22,7 @@ struct Renderer
 
 	//Rasterizer states
 	std::unordered_map<std::string, RastState*> rastStateMap;
+	std::unordered_map<std::string, BlendState*> blendStateMap;
 	ID3D11RasterizerState* rastStateSolid;
 	ID3D11RasterizerState* rastStateWireframe;
 	ID3D11RasterizerState* rastStateNoBackCull;

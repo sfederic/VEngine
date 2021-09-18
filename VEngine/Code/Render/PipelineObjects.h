@@ -44,7 +44,12 @@ struct RastState
 
 struct BlendState
 {
+	D3D11_BLEND_DESC desc;
 	ID3D11BlendState* data = nullptr;
+	std::string name;
+
+	BlendState() {}
+	BlendState(std::string name_, D3D11_BLEND_DESC desc_, ID3D11BlendState* data_);
 };
 
 struct MeshBuffers

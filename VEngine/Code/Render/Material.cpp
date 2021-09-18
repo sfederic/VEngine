@@ -20,6 +20,7 @@ void Material::Create()
 	sampler = RenderUtils::GetDefaultSampler();
 	shader = shaderSystem.FindShader(stows(shaderFilename));
 	rastState = renderer.rastStateMap["solid"];
+	blendState = renderer.blendStateMap["default"];
 }
 
 Properties Material::GetProps()
