@@ -90,7 +90,14 @@ void Core::EndTimer()
 
 void StartGame()
 {
-	activeCamera = GameUtils::GetPlayer()->camera;
+	Player* player = GameUtils::GetPlayer();
+	if (player)
+	{
+		if (player->camera)
+		{
+			activeCamera = player->camera;
+		}
+	}
 }
 
 void EndGame()

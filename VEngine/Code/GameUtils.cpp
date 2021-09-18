@@ -5,6 +5,11 @@ namespace GameUtils
 {
 	Player* GetPlayer()
 	{
-		return Player::system.actors[0];
+		if (Player::system.actors.size() > 0)
+		{
+			return Player::system.actors[0];
+		}
+
+		return nullptr;
 	}
 }
