@@ -48,6 +48,10 @@ void FileSystem::LoadWorld(std::string worldName)
 		d.is >> numActorsToSpawn;
 
 		auto asIt = actorSystemCache.nameToSystemMap->find(actorSystemName);
+		if (asIt == actorSystemCache.nameToSystemMap->end())
+		{
+			continue;
+		}
 
 		IActorSystem* actorSystem = asIt->second;
 
