@@ -64,6 +64,16 @@ void Core::Tick()
 			SetGameplayState();
 		}
 	}
+
+	//End game on Esc pressed
+	if (Input::GetKeyDown(Keys::Esc))
+	{
+		if (gameplayOn)
+		{
+			EndGame();
+			gameplayOn = false;
+		}
+	}
 }
 
 void Core::StartTimer()
@@ -89,7 +99,7 @@ void Core::EndTimer()
 	}
 }
 
-void StartGame()
+void Core::StartGame()
 {
 	Player* player = GameUtils::GetPlayer();
 	if (player)
@@ -103,7 +113,7 @@ void StartGame()
 	world.StartAllActors();
 }
 
-void EndGame()
+void Core::EndGame()
 {
 	activeCamera = &editorCamera;
 }

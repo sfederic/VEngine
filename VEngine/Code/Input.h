@@ -7,6 +7,7 @@ enum class Keys
 	None = 0,
 	Space = VK_SPACE,
 	Enter = VK_RETURN,
+	Esc = VK_ESCAPE,
 	Tab = VK_TAB,
 	Tilde = VK_OEM_3,
 	Ctrl = VK_CONTROL,
