@@ -17,6 +17,8 @@
 #include "PropertyWidgets/VectorWidget.h"
 #include "PropertyWidgets/StringWidget.h"
 
+#include "Profile.h"
+
 PropertiesDock::PropertiesDock() : QDockWidget("Properties")
 {
     actorPropsScrollArea = new QScrollArea(this);
@@ -30,11 +32,7 @@ void PropertiesDock::DisplayActorProperties(Actor* actor)
     //Set the inner values in the Qt widgets instead of remaking all the widgets below
     if (previousActor == actor)
     {
-        for (IPropertyWidget* propertyWidget : propertyWidgetsToUpdate)
-        {
-            propertyWidget->ResetValue();
-        }
-
+        ResetPropertyWidgetValues();
         return;
     }
 
@@ -153,4 +151,16 @@ void PropertiesDock::Clear()
         delete actorPropsWidget;
         actorPropsWidget = nullptr;
     }
+}
+
+void PropertiesDock::ResetPropertyWidgetValues()
+{
+    PROFILE_START
+
+    for (IPropertyWidget* propertyWidget : propertyWidgetsToUpdate)
+    {
+        propertyWidget->ResetValue();
+    }
+
+    PROFILE_END
 }

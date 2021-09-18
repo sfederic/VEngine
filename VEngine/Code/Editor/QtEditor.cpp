@@ -12,6 +12,7 @@
 #include "SystemDock.h"
 #include "Render/Material.h"
 #include "Serialiser.h"
+#include "Core.h"
 
 #include <qgridlayout.h>
 #include <qscrollarea.h>
@@ -36,6 +37,12 @@ void QtEditor::Tick()
 {
     app->processEvents();
     SetMousePos();
+
+    //update property dock values if game is running
+    if (Core::gameplayOn)
+    {
+        mainWindow->propertiesDock->ResetPropertyWidgetValues();
+    }
 
     if (Input::GetKeyUp(Keys::F11))
     {
