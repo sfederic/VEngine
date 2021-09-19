@@ -95,15 +95,9 @@ namespace VMath
 
     bool VecEqual(XMVECTOR v1, XMVECTOR v2, float epsilon)
     {
-        if (v1.m128_f32[0] <= (v2.m128_f32[0] + epsilon) && v1.m128_f32[0] >= (v2.m128_f32[0] - epsilon) &&
-            v1.m128_f32[1] <= (v2.m128_f32[1] + epsilon) && v1.m128_f32[1] >= (v2.m128_f32[1] - epsilon) &&
-            v1.m128_f32[2] <= (v2.m128_f32[2] + epsilon) && v1.m128_f32[2] >= (v2.m128_f32[2] - epsilon) &&
-            v1.m128_f32[3] <= (v2.m128_f32[3] + epsilon) && v1.m128_f32[3] >= (v2.m128_f32[3] - epsilon))
-        {
-            return true;
-        }
-
-        return false;
+        return fabsf(v1.m128_f32[0] - v2.m128_f32[0]) <= epsilon &&
+            fabsf(v1.m128_f32[1] - v2.m128_f32[1]) <= epsilon && 
+            fabsf(v1.m128_f32[2] - v2.m128_f32[2]) <= epsilon;
     }
 
     //bool VecEqual(XMVECTOR v1, XMVECTOR v2, float epsilon)

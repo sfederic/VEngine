@@ -26,7 +26,7 @@ namespace VMath
 	XMFLOAT4X4 FbxMatrixToDirectXMathMatrix(fbxsdk::FbxMatrix fbxMatrix);
 
 	//bool VecEqual(XMVECTOR v1, XMVECTOR v2, float epsilon = 0.0005f);
-	bool VecEqual(XMVECTOR v1, XMVECTOR v2, float epsilon = 0.0005f);
+	bool VecEqual(XMVECTOR v1, XMVECTOR v2, float epsilon = 9.9999999747e-05f);
 	bool Float3Equal(XMFLOAT3& f1, XMFLOAT3& f2);
 	float FindMaxInVector(XMVECTOR v);
 	XMVECTOR VectorConstantLerp(XMVECTOR current, XMVECTOR target, float deltaTime, float interpSpeed);
