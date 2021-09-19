@@ -9,65 +9,61 @@ Player::Player()
 	mesh = MeshComponent::system.Add(this, MeshComponent("cube.fbx", "wall.png"));
 	rootComponent = mesh;
 
-	camera = CameraComponent::system.Add(this, CameraComponent(XMFLOAT3(0.f, 3.f, -7.f), false));
+	camera = CameraComponent::system.Add(this, CameraComponent(XMFLOAT3(0.f, 0.f, -5.f), false));
+	camera->focusPoint = GetPositionVector();
 	rootComponent->AddChild(camera);
 }
 
 void Player::Start()
 {
-	currentPos = GetPositionVector();
-	nextPos = currentPos;
+	nextPos = GetPositionVector();
 
-	currentRot = GetRotationVector();
-	nextRot = currentRot;
+	nextRot = GetRotationVector();
 }
 
 void Player::Tick(double deltaTime)
 {
 	const float moveSpeed = 7.5f;
-	currentPos = VMath::VectorConstantLerp(currentPos, nextPos, deltaTime, moveSpeed);
+	SetPosition(VMath::VectorConstantLerp(GetPositionVector(), nextPos, deltaTime, moveSpeed));
 
-	if (VMath::VecEqual(currentPos, nextPos))
+	//if (VMath::VecEqual(GetPositionVector(), nextPos))
+	if (XMVector4Equal(GetPositionVector(), nextPos))
 	{
 		if (Input::GetAsyncKey(Keys::W))
 		{
-			nextPos = GetForwardVectorV() + currentPos;
+			nextPos = GetForwardVectorV() + GetPositionVector();
 		}		
 		if (Input::GetAsyncKey(Keys::S))
 		{
-			nextPos = -GetForwardVectorV() + currentPos;
+			nextPos = -GetForwardVectorV() + GetPositionVector();
 		}
 		if (Input::GetAsyncKey(Keys::A))
 		{
-			nextPos = -GetRightVectorV() + currentPos;
+			nextPos = -GetRightVectorV() + GetPositionVector();
 		}
 		if (Input::GetAsyncKey(Keys::D))
 		{
-			nextPos = GetRightVectorV() + currentPos;
+			nextPos = GetRightVectorV() + GetPositionVector();
 		}
 	}
 
-	SetPosition(currentPos);
-
 	const float rotSpeed = 5.f;
 	//currentRot = XMQuaternionSlerp(currentRot, nextRot, deltaTime * rotSpeed);
-	currentRot = VMath::QuatConstantLerp(currentRot, nextRot, deltaTime, rotSpeed);
+	SetRotation(VMath::QuatConstantLerp(GetRotationVector(), nextRot, deltaTime, rotSpeed));
 
-	if (VMath::VecEqual(currentRot, nextRot))
+	if (XMQuaternionEqual(GetRotationVector(), nextRot))
 	{
-		if (Input::GetKeyDown(Keys::Right))
+		if (Input::GetKeyUp(Keys::Right))
 		{
 			float angle = XMConvertToRadians(90.f);
 			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::XMVectorUp(), angle));
 		}		
-		if (Input::GetKeyDown(Keys::Left))
+		if (Input::GetKeyUp(Keys::Left))
 		{
 			float angle = XMConvertToRadians(-90.f);
 			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::XMVectorUp(), angle));
 		}
 	}
-
-	SetRotation(currentRot);
 }
 
 Properties Player::GetProps()

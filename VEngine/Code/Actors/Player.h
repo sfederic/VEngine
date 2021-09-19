@@ -13,10 +13,7 @@ struct Player : Actor
 	CameraComponent* camera = nullptr;
 
 	XMVECTOR nextPos;
-	XMVECTOR currentPos;
-	
 	XMVECTOR nextRot;
-	XMVECTOR currentRot;
 
 	Player();
 	virtual void Start() override;
