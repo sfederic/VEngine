@@ -3,6 +3,7 @@
 #include "Debug.h"
 #include <WICTextureLoader.h>
 #include "TextureSystem.h"
+#include <filesystem>
 
 namespace RenderUtils
 {
@@ -94,6 +95,8 @@ namespace RenderUtils
 		Texture2D* texture = textureSystem.FindTexture2D(textureFilename);
 
 		std::wstring path = L"Textures/" + texture->filename;
+
+		assert(std::filesystem::exists(path) && "Texture file doesn't exist");
 
 		ID3D11Resource* resource;
 		ID3D11ShaderResourceView* srv;
