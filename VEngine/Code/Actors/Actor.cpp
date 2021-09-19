@@ -16,8 +16,6 @@ XMMATRIX Actor::GetWorldMatrix()
 		parentWorld = parent->GetWorldMatrix();
 	}
 
-	UpdateTransform(parentWorld);
-
 	return rootComponent->transform.world;
 }
 
@@ -81,26 +79,31 @@ XMVECTOR Actor::GetRotationVector()
 void Actor::SetPosition(XMVECTOR position)
 {
 	XMStoreFloat3(&rootComponent->transform.position, position);
+	rootComponent->UpdateTransform();
 }
 
 void Actor::SetPosition(XMFLOAT3 position)
 {
 	rootComponent->transform.position = position;
+	rootComponent->UpdateTransform();
 }
 
 void Actor::SetScale(XMVECTOR scale)
 {
 	XMStoreFloat3(&rootComponent->transform.scale, scale);
+	rootComponent->UpdateTransform();
 }
 
 void Actor::SetRotation(XMVECTOR rotation)
 {
 	XMStoreFloat4(&rootComponent->transform.rotation, rotation);
+	rootComponent->UpdateTransform();
 }
 
 void Actor::SetTransform(Transform transform)
 {
 	rootComponent->transform = transform;
+	rootComponent->UpdateTransform();
 }
 
 Transform Actor::GetTransform()
