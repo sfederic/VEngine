@@ -22,6 +22,9 @@ public:
 	virtual void Tick(float deltaTime);
 	virtual void Start();
 
+	//TODO: when the game needs 3D widgets above npcs and actors, come back here.
+	void MapToScreenSpace();
+
 	ComPtr<ID3D11ShaderResourceView> CreateTexture(const std::wstring& filename);
 
 	void Text(const std::wstring& text, D2D1_RECT_F layout);
