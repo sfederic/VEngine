@@ -10,6 +10,10 @@ struct MaterialSystem
 
 	SystemStates systemState = SystemStates::Unloaded;
 
+	//The material that is currently open in the materialeditor 
+	Material* currentMaterialEditorInstance = nullptr;
+
+	MaterialSystem();
 	void AddMaterial(Material* material);
 	void CreateAllMaterials();
 	void Cleanup();

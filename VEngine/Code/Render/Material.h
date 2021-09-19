@@ -41,6 +41,7 @@ struct Material
 	std::string textureFilename;
 	std::string shaderFilename;
 
+	Material();
 	Material(std::string textureFilename_, std::string shaderFilename_);
 	virtual void Create();
 	virtual Properties GetProps();

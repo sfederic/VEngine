@@ -6,6 +6,10 @@
 #include "Render/MaterialSystem.h"
 #include "VString.h"
 
+Material::Material()
+{
+}
+
 Material::Material(std::string textureFilename_, std::string shaderFilename_)
 {
 	textureFilename = textureFilename_;

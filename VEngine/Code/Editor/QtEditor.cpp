@@ -2,6 +2,9 @@
 #include <QtWidgets/QApplication>
 #include <QWidget>
 #include <QFont>
+#include <qgridlayout.h>
+#include <qscrollarea.h>
+#include <qpushbutton.h>
 #include "EditorMainWindow.h"
 #include "Input.h"
 #include "RenderViewWidget.h"
@@ -13,10 +16,7 @@
 #include "Render/Material.h"
 #include "Serialiser.h"
 #include "Core.h"
-
-#include <qgridlayout.h>
-#include <qscrollarea.h>
-#include <qpushbutton.h>
+#include "Render/MaterialSystem.h"
 
 void QtEditor::Init(int argc, char* argv[])
 {
@@ -90,9 +90,9 @@ void QtEditor::ClearProperties()
 
 void QtEditor::OpenMaterialEditor(const std::string materialFilename)
 {
+    //Get props from editor's singular material instance
     Deserialiser d(materialFilename, OpenMode::In);
-    auto material = new Material("", "");
-    auto props = material->GetProps();
+    auto props = materialSystem.currentMaterialEditorInstance->GetProps();
     d.Deserialise(props);
 
     auto propDock = new PropertiesDock();
@@ -167,8 +167,7 @@ void QtEditor::EnableDarkMode()
 void QtEditor::SaveMaterialFile()
 {
     Serialiser s("Materials/testmaterial.mt", OpenMode::Out);
-    Material mat = Material("test.png", "DefaultShader.hlsl");
-    s.Serialise(mat.GetProps());
+    s.Serialise(materialSystem.currentMaterialEditorInstance->GetProps());
     
     Log("Material saved.");
 }

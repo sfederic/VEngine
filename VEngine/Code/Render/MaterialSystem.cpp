@@ -4,6 +4,12 @@
 
 MaterialSystem materialSystem;
 
+MaterialSystem::MaterialSystem()
+{
+	//Don't add editor instance material to the system
+	currentMaterialEditorInstance = new Material();
+}
+
 void MaterialSystem::AddMaterial(Material* material)
 {
 	assert(material);
