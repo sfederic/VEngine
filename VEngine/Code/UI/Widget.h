@@ -4,8 +4,10 @@
 #include <SpriteBatch.h>
 #include <unordered_map>
 #include <wrl.h>
+#include <DirectXMath.h>
 
 using namespace Microsoft::WRL;
+using namespace DirectX;
 
 //I can never get the D2D1_RECT_F things right
 //left = The x-coordinate of the upper-left corner of the rectangle
@@ -21,6 +23,9 @@ class Widget
 public:
 	virtual void Tick(float deltaTime);
 	virtual void Start();
+
+	//TODO: when the game needs 3D widgets above npcs and actors, come back here.
+	void MapToScreenSpace(XMVECTOR pos);
 
 	ComPtr<ID3D11ShaderResourceView> CreateTexture(const std::wstring& filename);
 

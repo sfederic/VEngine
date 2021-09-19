@@ -17,6 +17,22 @@ void Widget::Start()
 	spriteBatch = new DirectX::SpriteBatch(renderer.context);
 }
 
+void Widget::MapToScreenSpace(XMVECTOR pos)
+{
+	//What you'll need to do here it take the actor's position after it's been multiplied 
+	//by the MVP matrix on the CPU side of things, divide it by the W component and multiply it out by the viewport.
+
+	//REF:http://www.windows-tech.info/5/a80747e145dd9062.php
+
+	float f1 = pos.m128_f32[0] / pos.m128_f32[3];
+	float f2 = pos.m128_f32[1] / pos.m128_f32[3];
+
+	int sx = ((f1 * 0.5f) + 0.5) * renderer.viewport.Width;
+	int sy = ((f2 * -0.5f) + 0.5) * renderer.viewport.Height;
+
+	Text(L"Hello Game", { (float)sx, (float)sy, (float)sx + 150, (float)sy + 150 });
+}
+
 ComPtr<ID3D11ShaderResourceView> Widget::CreateTexture(const std::wstring& filename)
 {
 	ComPtr<ID3D11ShaderResourceView> textureView;
