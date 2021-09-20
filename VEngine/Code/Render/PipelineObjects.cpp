@@ -20,8 +20,8 @@ Texture2D::Texture2D(std::wstring filename_)
 
 Texture2D::~Texture2D()
 {
-	data->Release();
-	srv->Release();
+	if (data) data->Release();
+	if(srv) srv->Release();
 }
 
 PipelineStateObject::PipelineStateObject()
