@@ -5,6 +5,10 @@
 #include "Render/TextureSystem.h"
 #include "Render/MaterialSystem.h"
 #include "VString.h"
+#include "WorldEditor.h"
+#include "Actors/Actor.h"
+#include "Components/MeshComponent.h"
+#include "Editor/Editor.h"
 
 Material::Material()
 {
@@ -27,10 +31,28 @@ void Material::Create()
 	blendState = renderer.blendStateMap["default"];
 }
 
+void ReassignTexture(void* data)
+{
+	std::string* str = (std::string*)data;
+
+	Texture2D* swapTexture = textureSystem.FindTexture2D(stows(*str));
+	if (swapTexture == nullptr)
+	{
+		editor->Log("Texture wasn't found on change.");
+		return;
+	}
+
+	auto meshes = worldEditor.pickedActor->GetComponentsOfType<MeshComponent>();
+	for (auto mesh : meshes)
+	{
+		mesh->material->texture = swapTexture;
+	}
+}
+
 Properties Material::GetProps()
 {
 	Properties props("Material");
-	props.Add("Texture", &textureFilename);
+	props.Add("Texture", &textureFilename).change = ReassignTexture;
 	props.Add("Shader", &shaderFilename);
 	props.Add("UvOffset", &shaderData.uvOffset);
 	props.Add("UvScale", &shaderData.uvScale);

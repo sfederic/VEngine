@@ -1,5 +1,3 @@
-NormalActor
-0
 MeshActor
 2
 Mesh Filename
@@ -26,13 +24,13 @@ cube.fbx
 Position
 0 0 7
 Rotation
-0.707279 0 0 -0.706934
+0.707279 0 0 -0.706935
 Scale
-1 0.999999 0.999999
+1 0.999998 0.999998
 Shader
 DefaultShader.hlsl
 Texture
-bush.png
+wall.png
 UvOffset
 0 0
 UvRotation

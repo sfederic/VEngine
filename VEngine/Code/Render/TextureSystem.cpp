@@ -1,6 +1,7 @@
 #include "TextureSystem.h"
 #include "PipelineObjects.h"
 #include "Render/RenderUtils.h"
+#include <filesystem>
 
 TextureSystem textureSystem;
 
@@ -11,6 +12,11 @@ void TextureSystem::AddTexture2D(Texture2D* texture)
 
 Texture2D* TextureSystem::FindTexture2D(std::wstring textureFilename)
 {
+	if (!std::filesystem::exists(L"Textures/" + textureFilename))
+	{
+		return nullptr;
+	}
+
 	auto textureIt = texture2DMap.find(textureFilename);
 	if (textureIt == texture2DMap.end())
 	{

@@ -4,14 +4,18 @@
 #include <string>
 #include <typeindex>
 #include <vector>
+#include <functional>
 
 struct Property
 {
 	void* data = nullptr;
+	void* parentData = nullptr;
 	//uint64_t offset = 0;
 	uint64_t size = 0;
 	std::optional<std::type_index> info;
 	std::string name;
+
+	std::function<void(void*)> change;
 };
 
 struct Properties
@@ -28,7 +32,7 @@ struct Properties
 	}
 
 	template <typename T>
-	void Add(std::string name, T* data)
+	Property& Add(std::string name, T* data)
 	{
 		Property prop = {};
 
@@ -53,6 +57,8 @@ struct Properties
 		assert(propMap.find(name) == propMap.end() && "name key already exists in properties map");
 
 		propMap[name] = prop;
+
+		return propMap[name];
 	}
 
 	void Merge(Properties propsToMerge)
@@ -75,6 +81,11 @@ struct Properties
 	std::type_index GetType(std::string name)
 	{
 		return propMap[name].info.value();
+	}
+
+	Property* GetProp(std::string name)
+	{
+		return &propMap[name];
 	}
 
 	//Used to copy data in from other Properties (types have to be matching)

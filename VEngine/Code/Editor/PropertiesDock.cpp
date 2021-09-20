@@ -129,7 +129,7 @@ void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRo
         }
         else if (props.CheckType<std::string>(name))
         {
-            auto stringWidget = new StringWidget(props.GetData<std::string>(name));
+            auto stringWidget = new StringWidget(prop.second);
             actorPropsGridLayout->addWidget(stringWidget, currentGridRow, propertyDataColumn);
             propertyWidgetsToUpdate.push_back((IPropertyWidget*)stringWidget);
         }
