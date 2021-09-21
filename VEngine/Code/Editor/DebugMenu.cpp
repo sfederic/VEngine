@@ -6,6 +6,7 @@
 #include "DebugMenu.h"
 #include "Editor.h"
 #include "Render/Renderer.h"
+#include "Render/PipelineObjects.h"
 #include "TransformGizmo.h"
 #include "Core.h"
 #include "Profile.h"
@@ -149,6 +150,13 @@ void DebugMenu::IterateOverProperties(Properties& props)
 		{
 			std::string* str = props.GetData<std::string>(name);
 			ImGui::InputText(name.c_str(), str->data(), str->size());
+		}		
+		else if (props.CheckType<Texture2D>(name))
+		{
+			Texture2D* texture = props.GetData<Texture2D>(name);
+			ImGui::Text(name.c_str());
+			ImGui::SameLine();
+			ImGui::Text(texture->filename.c_str());
 		}
 	}
 }
