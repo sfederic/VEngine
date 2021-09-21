@@ -80,12 +80,16 @@ struct ComponentSystem : IComponentSystem
 		systemState = SystemStates::Unloaded;
 	}
 
-	virtual void GetComponents(std::vector<Component*>& outComponents) override
+	virtual std::vector<Component*> GetComponents() override
 	{
+		std::vector<Component*> outComponents;
+
 		for (T* component : components)
 		{
 			outComponents.push_back(component);
 		}
+
+		return outComponents;
 	}
 
 	virtual Component* FindComponentByName(std::string componentName) override
