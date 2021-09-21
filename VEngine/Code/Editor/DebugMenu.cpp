@@ -21,6 +21,7 @@
 #include "Commands/ICommand.h"
 #include "Physics/Raycast.h"
 #include "Input.h"
+#include "World.h"
 
 DebugMenu debugMenu;
 
@@ -202,6 +203,7 @@ void DebugMenu::RenderWorldStats()
 
 	ImGui::Begin("World Stats");
 
+	//Num of vertices in world
 	uint64_t totalVerticesInWorld = 0;
 
 	for (auto mesh : MeshComponent::system.components)
@@ -214,7 +216,26 @@ void DebugMenu::RenderWorldStats()
 		totalVerticesInWorld += instanceMesh->data->vertices->size();
 	}
 
-	ImGui::Text("Vertex Count: %lld", totalVerticesInWorld);
+	ImGui::Text("Vertex Count: %d", totalVerticesInWorld);
+
+	//Num of actors
+	uint64_t actorCount = 0;
+	for (auto actorSystem : world.activeActorSystems)
+	{
+		actorCount += actorSystem->GetActors().size();
+	}
+
+	ImGui::Text("Active Actors: %d", actorCount);
+
+	//Num of components
+	uint64_t componentCount = 0;
+	for (auto componentSystem : world.activeComponentSystems)
+	{
+		componentCount += componentSystem->GetComponents().size();
+	}
+
+	ImGui::Text("Active Components: %d", componentCount);
+
 
 	ImGui::End();
 }
