@@ -9,6 +9,7 @@
 #include "Commands/CommandSystem.h"
 #include "Commands/Command.h"
 #include "Core.h"
+#include "Console.h"
 
 TransformGizmo transformGizmo;
 
@@ -24,15 +25,42 @@ void TransformGizmo::Tick()
     float windowHeight = (float)ImGui::GetWindowHeight();
     ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
 
+
     //Setup camera matrices
     XMFLOAT4X4 view, proj, actorMatrix;
     XMStoreFloat4x4(&view, activeCamera->GetViewMatrix());
     XMStoreFloat4x4(&proj, activeCamera->proj);
 
+
+    //Toggle and draw grid
+    if (Input::GetAsyncKey(Keys::ShiftLeft))
+    {
+        if (Input::GetKeyUp(Keys::G))
+        {
+            bGridToggle = !bGridToggle;
+        }
+    }
+
+    if (bGridToggle && !Core::gameplayOn)
+    {
+        XMFLOAT4X4 identity;
+        XMStoreFloat4x4(&identity, XMMatrixIdentity());
+        ImGuizmo::DrawGrid(&view.m[0][0], &proj.m[0][0], &identity.m[0][0], 20.f);
+    }
+
+
+    //Exit early if console is active
+    if (console.bConsoleActive)
+    {
+        ImGui::End();
+        return;
+    }
+
+
     if (worldEditor.pickedActor)
     {
         //Set transform operation
-        if (!Input::GetMouseRightDown())
+        if (!Input::GetAsyncKey(Keys::MouseRight))
         {
             if (Input::GetKeyDown(Keys::W))
             {
@@ -133,22 +161,6 @@ void TransformGizmo::Tick()
 
     const float camDistance = 8.f;
     ImGuizmo::ViewManipulate(&view.m[0][0], camDistance, ImVec2(viewManipulateRight - 128, viewManipulateTop), ImVec2(128, 128), 0x10101010);*/
-
-    //Toggle and draw grid
-    if (Input::GetAsyncKey(Keys::ShiftLeft))
-    {
-        if (Input::GetKeyUp(Keys::G))
-        {
-            bGridToggle = !bGridToggle;
-        }
-    }
-
-    if (bGridToggle && !Core::gameplayOn)
-    {
-        XMFLOAT4X4 identity;
-        XMStoreFloat4x4(&identity, XMMatrixIdentity());
-        ImGuizmo::DrawGrid(&view.m[0][0], &proj.m[0][0], &identity.m[0][0], 20.f);
-    }
 
     ImGui::End();
 }
