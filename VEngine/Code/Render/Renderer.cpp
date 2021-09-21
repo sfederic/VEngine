@@ -10,6 +10,7 @@
 #include "Components/Lights/DirectionalLightComponent.h"
 #include "Components/Lights/PointLightComponent.h"
 #include "Components/Lights/SpotLightComponent.h"
+#include "Components/BoxTriggerComponent.h"
 #include "Actors/Actor.h"
 #include "ShaderSystem.h"
 #include "DebugActors/DebugBox.h"
@@ -408,6 +409,29 @@ void Renderer::RenderBounds()
 
 				context->Draw(debugBox.boxMesh->data->vertices->size(), 0);
 			}
+		}
+
+		//Draw trigger bounds
+
+		//Set trigger wireframe material colour
+		MaterialShaderData materialShaderData;
+		materialShaderData.ambient = XMFLOAT4(0.75f, 0.75f, 0.75f, 1.0f);
+		context->UpdateSubresource(cbMaterial, 0, nullptr, &materialShaderData, 0, 0);
+		context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
+
+		for (auto boxTrigger : BoxTriggerComponent::system.components)
+		{
+			shaderMatrices.model = boxTrigger->GetWorldMatrix();
+
+			//Set bouding box scale just slightly more than the component to avoid overlap
+			shaderMatrices.model.r[0].m128_f32[0] *= boxTrigger->boundingBox.Extents.x + 0.01f;
+			shaderMatrices.model.r[1].m128_f32[1] *= boxTrigger->boundingBox.Extents.y + 0.01f;
+			shaderMatrices.model.r[2].m128_f32[2] *= boxTrigger->boundingBox.Extents.z + 0.01f;
+
+			shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
+			context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+
+			context->Draw(debugBox.boxMesh->data->vertices->size(), 0);
 		}
 	}
 }
