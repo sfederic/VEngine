@@ -8,5 +8,5 @@ EntranceTrigger::EntranceTrigger()
 
 Properties EntranceTrigger::GetProps()
 {
-    return Properties();
+    return Actor::GetProps();
 }
