@@ -373,6 +373,8 @@ void Renderer::RenderBounds()
 {
 	static DebugBox debugBox;
 
+	MaterialShaderData materialShaderData;
+
 	if (drawBoundingBoxes)
 	{
 		context->RSSetState(rastStateWireframe);
@@ -388,7 +390,6 @@ void Renderer::RenderBounds()
 		shaderMatrices.view = activeCamera->GetViewMatrix();
 
 		//Set debug wireframe material colour
-		MaterialShaderData materialShaderData;
 		materialShaderData.ambient = XMFLOAT4(0.75f, 0.75f, 0.75f, 1.0f);
 		context->UpdateSubresource(cbMaterial, 0, nullptr, &materialShaderData, 0, 0);
 		context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
@@ -397,6 +398,12 @@ void Renderer::RenderBounds()
 		{
 			for (SpatialComponent* spatialComponent : actor->GetComponentsOfType<SpatialComponent>())
 			{
+				//Skip any triggers, otherwise you're rendering two wireframe meshes per component
+				if (dynamic_cast<BoxTriggerComponent*>(spatialComponent))
+				{
+					continue;
+				}
+
 				shaderMatrices.model = spatialComponent->GetWorldMatrix();
 
 				//Set bouding box scale just slightly more than the component to avoid overlap
@@ -411,11 +418,10 @@ void Renderer::RenderBounds()
 			}
 		}
 
-		//Draw trigger bounds
+		//DRAW TRIGGER BOUNDS
 
 		//Set trigger wireframe material colour
-		MaterialShaderData materialShaderData;
-		materialShaderData.ambient = XMFLOAT4(0.75f, 0.75f, 0.75f, 1.0f);
+		materialShaderData.ambient = XMFLOAT4(0.1f, 0.75f, 0.1f, 1.0f);
 		context->UpdateSubresource(cbMaterial, 0, nullptr, &materialShaderData, 0, 0);
 		context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 

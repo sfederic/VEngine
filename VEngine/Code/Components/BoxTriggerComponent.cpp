@@ -3,7 +3,7 @@
 
 BoxTriggerComponent::BoxTriggerComponent()
 {
-	
+
 }
 
 void BoxTriggerComponent::Tick(double deltaTime)
