@@ -149,7 +149,10 @@ void Deserialiser::Deserialise(Properties props)
 			char propString[512];
 			is.getline(propString, 512);
 			Texture2D* texture = props.GetData<Texture2D>(name);
-			texture->filename.assign(propString);
+			if (texture)
+			{
+				texture->filename.assign(propString);
+			}
 		}
 	}
 }
