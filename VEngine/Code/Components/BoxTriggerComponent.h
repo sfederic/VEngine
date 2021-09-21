@@ -14,4 +14,5 @@ struct BoxTriggerComponent : SpatialComponent
 	void Tick(double deltaTime);
 	virtual Properties GetProps() override;
 	virtual void Create() override;
+	bool Contains(XMVECTOR point);
 };

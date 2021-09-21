@@ -16,8 +16,9 @@ void EntranceTrigger::Start()
 void EntranceTrigger::Tick(double deltaTime)
 {
     XMVECTOR targetPos = trigger->target->GetPositionVector();
-    if (trigger->boundingBox.Contains(targetPos))
+    if (trigger->Contains(targetPos))
     {
+
     }
 }
 

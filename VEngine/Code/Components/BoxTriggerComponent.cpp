@@ -22,3 +22,16 @@ void BoxTriggerComponent::Create()
 {
 
 }
+
+bool BoxTriggerComponent::Contains(XMVECTOR point)
+{
+	boundingBox.Center = transform.position;
+	boundingBox.Extents = transform.scale;
+
+	if (boundingBox.Contains(point))
+	{
+		return true;
+	}
+
+	return false;
+}
