@@ -13,7 +13,9 @@ void BoxTriggerComponent::Tick(double deltaTime)
 
 Properties BoxTriggerComponent::GetProps()
 {
-	return Properties();
+	Properties props("BoxTriggerComponent");
+	props.Add("Extents", &boundingBox.Extents);
+	return props;
 }
 
 void BoxTriggerComponent::Create()
