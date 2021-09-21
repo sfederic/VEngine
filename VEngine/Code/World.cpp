@@ -63,18 +63,26 @@ void World::StartAllActors()
 
 void World::TickAllActorSystems(double deltaTime)
 {
+	PROFILE_START
+
 	for (IActorSystem* actorSystem : activeActorSystems)
 	{
 		actorSystem->Tick(deltaTime);
 	}
+
+	PROFILE_END
 }
 
 void World::TickAllComponentSystems(double deltaTime)
 {
+	PROFILE_START
+
 	for (IComponentSystem* componentSystem : activeComponentSystems)
 	{
 		componentSystem->Tick(deltaTime);
 	}
+
+	PROFILE_END
 }
 
 Actor* World::FindActorByName(std::string actorName)
