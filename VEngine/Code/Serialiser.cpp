@@ -2,6 +2,7 @@
 #include <DirectXMath.h>
 #include <typeindex>
 #include "Properties.h"
+#include "Render/PipelineObjects.h"
 
 using namespace DirectX;
 
@@ -57,6 +58,11 @@ void Serialiser::Serialise(Properties props)
 		{
 			std::string* str = props.GetData<std::string>(name);
 			os << name << "\n" << str->c_str() << "\n";
+		}	
+		else if (props.CheckType<Texture2D>(name))
+		{
+			Texture2D* texture = props.GetData<Texture2D>(name);
+			os << name << "\n" << texture->filename.c_str() << "\n";
 		}
 	}
 
@@ -137,6 +143,13 @@ void Deserialiser::Deserialise(Properties props)
 			is.getline(propString, 512);
 			std::string* str = props.GetData<std::string>(name);
 			str->assign(propString);
+		}		
+		else if (props.CheckType<Texture2D>(name))
+		{
+			char propString[512];
+			is.getline(propString, 512);
+			Texture2D* texture = props.GetData<Texture2D>(name);
+			texture->filename.assign(propString);
 		}
 	}
 }

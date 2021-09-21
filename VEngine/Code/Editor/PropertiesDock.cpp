@@ -16,6 +16,8 @@
 #include "PropertyWidgets/IntWidget.h"
 #include "PropertyWidgets/VectorWidget.h"
 #include "PropertyWidgets/StringWidget.h"
+#include "PropertyWidgets/Texture2DWidget.h"
+#include "Render/PipelineObjects.h"
 
 #include "Profile.h"
 
@@ -132,6 +134,12 @@ void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRo
             auto stringWidget = new StringWidget(prop.second);
             actorPropsGridLayout->addWidget(stringWidget, currentGridRow, propertyDataColumn);
             propertyWidgetsToUpdate.push_back((IPropertyWidget*)stringWidget);
+        }       
+        else if (props.CheckType<Texture2D>(name))
+        {
+            auto texture2DWidget = new Texture2DWidget(prop.second);
+            actorPropsGridLayout->addWidget(texture2DWidget, currentGridRow, propertyDataColumn);
+            propertyWidgetsToUpdate.push_back((IPropertyWidget*)texture2DWidget);
         }
 
         currentGridRow++;

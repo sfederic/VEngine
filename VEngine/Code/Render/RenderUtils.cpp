@@ -4,6 +4,7 @@
 #include <WICTextureLoader.h>
 #include "TextureSystem.h"
 #include <filesystem>
+#include "VString.h"
 
 namespace RenderUtils
 {
@@ -90,11 +91,11 @@ namespace RenderUtils
 		return defaultSampler;
 	}
 
-	Texture2D* CreateTexture(std::wstring textureFilename)
+	Texture2D* CreateTexture(std::string textureFilename)
 	{
 		Texture2D* texture = textureSystem.FindTexture2D(textureFilename);
 
-		std::wstring path = L"Textures/" + texture->filename;
+		std::wstring path = L"Textures/" + stows(texture->filename);
 
 		assert(std::filesystem::exists(path) && "Texture file doesn't exist");
 

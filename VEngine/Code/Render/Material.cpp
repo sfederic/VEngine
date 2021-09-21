@@ -24,7 +24,7 @@ Material::Material(std::string textureFilename_, std::string shaderFilename_)
 
 void Material::Create()
 {
-	texture = textureSystem.FindTexture2D(stows(textureFilename));
+	texture = textureSystem.FindTexture2D(textureFilename);
 	sampler = RenderUtils::GetDefaultSampler();
 	shader = shaderSystem.FindShader(stows(shaderFilename));
 	rastState = renderer.rastStateMap["solid"];
@@ -33,9 +33,9 @@ void Material::Create()
 
 void ReassignTexture(void* data)
 {
-	std::string* str = (std::string*)data;
+	Texture2D* texture = (Texture2D*)data;
 
-	Texture2D* swapTexture = textureSystem.FindTexture2D(stows(*str));
+	Texture2D* swapTexture = textureSystem.FindTexture2D(texture->filename);
 	if (swapTexture == nullptr)
 	{
 		editor->Log("Texture wasn't found on change.");
@@ -52,7 +52,7 @@ void ReassignTexture(void* data)
 Properties Material::GetProps()
 {
 	Properties props("Material");
-	props.Add("Texture", &textureFilename).change = ReassignTexture;
+	props.Add("Texture2D", texture).change = ReassignTexture;
 	props.Add("Shader", &shaderFilename);
 	props.Add("UvOffset", &shaderData.uvOffset);
 	props.Add("UvScale", &shaderData.uvScale);

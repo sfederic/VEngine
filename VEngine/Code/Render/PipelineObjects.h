@@ -11,11 +11,11 @@ struct Buffer
 
 struct Texture2D
 {
-	std::wstring filename;
+	std::string filename;
 	ID3D11Resource* data = nullptr;
 	ID3D11ShaderResourceView* srv = nullptr;
 
-	Texture2D(std::wstring filename_);
+	Texture2D(std::string filename_);
 	~Texture2D();
 };
 

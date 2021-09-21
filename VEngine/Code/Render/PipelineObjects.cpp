@@ -13,7 +13,7 @@ Sampler::Sampler(D3D11_SAMPLER_DESC desc_, ID3D11SamplerState* data_)
 	data = data_;
 }
 
-Texture2D::Texture2D(std::wstring filename_)
+Texture2D::Texture2D(std::string filename_)
 {
 	filename = filename_;
 }

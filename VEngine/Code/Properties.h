@@ -5,6 +5,7 @@
 #include <typeindex>
 #include <vector>
 #include <functional>
+#include <cassert>
 
 struct Property
 {
@@ -69,7 +70,7 @@ struct Properties
 	template <typename T>
 	bool CheckType(std::string name)
 	{
-		return propMap[name].info == typeid(T);
+		return propMap[name].info.value() == typeid(T);
 	}
 
 	template <typename T>

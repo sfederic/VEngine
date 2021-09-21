@@ -260,6 +260,9 @@
     <ClCompile Include="Code\GameUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Editor\PropertyWidgets\Texture2DWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -452,6 +455,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\GameUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Editor\PropertyWidgets\Texture2DWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

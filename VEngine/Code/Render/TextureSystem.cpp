@@ -10,9 +10,9 @@ void TextureSystem::AddTexture2D(Texture2D* texture)
 	texture2DMap[texture->filename] = texture;
 }
 
-Texture2D* TextureSystem::FindTexture2D(std::wstring textureFilename)
+Texture2D* TextureSystem::FindTexture2D(std::string textureFilename)
 {
-	if (!std::filesystem::exists(L"Textures/" + textureFilename))
+	if (!std::filesystem::exists("Textures/" + textureFilename))
 	{
 		return nullptr;
 	}
