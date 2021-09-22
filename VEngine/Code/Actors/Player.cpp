@@ -9,8 +9,7 @@ Player::Player()
 	mesh = MeshComponent::system.Add(this, MeshComponent("cube.fbx", "wall.png"));
 	rootComponent = mesh;
 
-	camera = CameraComponent::system.Add(this, CameraComponent(XMFLOAT3(0.f, 0.f, -5.f), false));
-	camera->focusPoint = GetPositionVector();
+	camera = CameraComponent::system.Add(this, CameraComponent(XMFLOAT3(3.f, 3.f, -7.f), false));
 	rootComponent->AddChild(camera);
 }
 

@@ -4,6 +4,9 @@
 #include "Actors/Actor.h"
 #include "Editor/Editor.h"
 #include "Math.h"
+#include "GameUtils.h"
+#include "Actors/Player.h"
+#include "VMath.h"
 
 CameraComponent editorCamera(XMFLOAT3(0.f, 2.f, -5.f), true);
 CameraComponent* activeCamera;
@@ -54,6 +57,14 @@ XMMATRIX CameraComponent::GetViewMatrix()
 	view.r[1].m128_f32[3] = 0.0f;
 	view.r[2].m128_f32[3] = 0.0f;
 	view.r[3].m128_f32[3] = 1.0f;
+
+	//TODO: this camera logic is shit and is just for testing
+	//Player camera logic
+	if (!editorCamera)
+	{
+		focusPoint = GameUtils::GetPlayer()->GetPositionVector();
+		view = XMMatrixLookAtLH(transform.world.r[3], focusPoint, VMath::XMVectorUp());
+	}
 
 	return view;
 }
