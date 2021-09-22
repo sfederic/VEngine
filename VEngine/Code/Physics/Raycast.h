@@ -18,6 +18,8 @@ struct Ray
 	XMFLOAT3 normal;
 	XMFLOAT2 uv;
 
+	std::vector<Actor*> actorsToIgnore;
+
 	std::vector<Actor*> hitActors;
 	Actor* hitActor;
 

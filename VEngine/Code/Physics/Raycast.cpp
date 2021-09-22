@@ -57,6 +57,16 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, bool fromScreen)
 
 	for (Actor* actor : world.GetAllActorsInWorld())
 	{
+		//Skip raycast if actor is in ignore list
+		for (Actor* actorToIgnore : ray.actorsToIgnore)
+		{
+			if (actorToIgnore == actor)
+			{
+				continue;
+			}
+		}
+
+		//Iterate over actor's spatial components
 		for (SpatialComponent* spatialComponent : actor->GetComponentsOfType<SpatialComponent>())
 		{
 			BoundingOrientedBox boundingBox = spatialComponent->boundingBox;
@@ -76,6 +86,7 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, bool fromScreen)
 		}
 	}
 
+	//Figure out the distance
 	if (bRayHit)
 	{
 		float nearestDistance = std::numeric_limits<float>::max();
