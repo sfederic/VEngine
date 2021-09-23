@@ -31,7 +31,7 @@
 //	debugLines.push_back(debugLine);
 //}
 
-bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, bool fromScreen)
+bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fromScreen)
 {
 	ray.origin = origin;
 	ray.direction = direction;
@@ -57,15 +57,6 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, bool fromScreen)
 
 	for (Actor* actor : world.GetAllActorsInWorld())
 	{
-		//Skip raycast if actor is in ignore list
-		for (Actor* actorToIgnore : ray.actorsToIgnore)
-		{
-			if (actorToIgnore == actor)
-			{
-				continue;
-			}
-		}
-
 		//Iterate over actor's spatial components
 		for (SpatialComponent* spatialComponent : actor->GetComponentsOfType<SpatialComponent>())
 		{
@@ -77,9 +68,9 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, bool fromScreen)
 			boundingBox.Extents.y *= spatialComponent->transform.scale.y;
 			boundingBox.Extents.z *= spatialComponent->transform.scale.z;
 
-			if (boundingBox.Intersects(ray.origin, ray.direction, ray.distance))
+			if (boundingBox.Intersects(ray.origin, ray.direction, ray.hitDistance))
 			{
-				distances.push_back(ray.distance);
+				distances.push_back(ray.hitDistance);
 				ray.hitActors.push_back(actor);
 				bRayHit = true;
 			}
@@ -92,14 +83,31 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, bool fromScreen)
 		float nearestDistance = std::numeric_limits<float>::max();
 		for (int i = 0; i < distances.size(); i++)
 		{
+			//Skip hit if more than range or less than 0
+			if (distances[i] > range || distances[i] < 0.f)
+			{
+				continue;
+			}
+
 			if (distances[i] < nearestDistance)
 			{
 				nearestDistance = distances[i];
+
 				ray.hitActor = ray.hitActors[i];
+
+				//Skip raycast if actor is in ignore list
+				for (Actor* actorToIgnore : ray.actorsToIgnore)
+				{
+					if (actorToIgnore == ray.hitActors[i])
+					{
+						ray.hitActor = nullptr;
+						return false;
+					}
+				}
 			}
 		}
 
-		ray.distance = nearestDistance;
+		ray.hitDistance = nearestDistance;
 
 		return true;
 	}
@@ -139,10 +147,8 @@ bool RaycastTriangleIntersect(Ray& ray)
 					tempRay = ray;
 					tempRay.hitActors.clear();
 
-					if (DirectX::TriangleTests::Intersects(ray.origin, ray.direction, v0, v1, v2, tempRay.distance))
+					if (DirectX::TriangleTests::Intersects(ray.origin, ray.direction, v0, v1, v2, tempRay.hitDistance))
 					{
-						tempRay.modelDataIndex = i;
-
 						XMVECTOR normal = XMVectorZero();
 						normal += XMLoadFloat3(&mesh->data->vertices->at(index0).normal);
 						normal += XMLoadFloat3(&mesh->data->vertices->at(index1).normal);
@@ -165,9 +171,9 @@ bool RaycastTriangleIntersect(Ray& ray)
 	int rayIndex = -1;
 	for (int i = 0; i < rays.size(); i++)
 	{
-		if (rays[i].distance < lowestDistance)
+		if (rays[i].hitDistance < lowestDistance)
 		{
-			lowestDistance = rays[i].distance;
+			lowestDistance = rays[i].hitDistance;
 			rayIndex = i;
 		}
 	}
@@ -181,14 +187,11 @@ bool RaycastTriangleIntersect(Ray& ray)
 	return false;
 }
 
-bool RaycastAll(Ray& ray, XMVECTOR origin, XMVECTOR direction)
+bool RaycastAll(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range)
 {
-	for (IActorSystem* actorSystem : world.activeActorSystems)
+	if (Raycast(ray, origin, direction, range))
 	{
-		if (Raycast(ray, origin, direction, actorSystem))
-		{
-			return true;
-		}
+		return true;
 	}
 
 	return false;
@@ -202,7 +205,7 @@ bool RaycastFromScreen(Ray& ray, int sx, int sy, CameraComponent* camera)
 	ray.origin = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	ray.direction = XMVectorSet(vx, vy, 1.f, 0.f);
 
-	return Raycast(ray, ray.origin, ray.direction, true);
+	return Raycast(ray, ray.origin, ray.direction, 1000.0f, true);
 }
 
 bool RaycastAllFromScreen(Ray& ray)

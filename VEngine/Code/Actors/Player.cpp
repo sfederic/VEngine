@@ -4,6 +4,9 @@
 #include "Input.h"
 #include "VMath.h"
 
+#include "Physics/Raycast.h"
+#include "Editor/Editor.h"
+
 Player::Player()
 {
 	mesh = MeshComponent::system.Add(this, MeshComponent("cube.fbx", "wall.png"));
@@ -24,6 +27,16 @@ void Player::Tick(double deltaTime)
 {
 	const float moveSpeed = 7.5f;
 	SetPosition(VMath::VectorConstantLerp(GetPositionVector(), nextPos, deltaTime, moveSpeed));
+
+	if (Input::GetKeyUp(Keys::Space))
+	{
+		Ray ray;
+		ray.actorsToIgnore.push_back(this);
+		if (RaycastAll(ray, GetPositionVector(), GetForwardVectorV(), 2.f))
+		{
+			editor->Log("hit");
+		}
+	}
 
 	//if (VMath::VecEqual(GetPositionVector(), nextPos))
 	if (XMVector4Equal(GetPositionVector(), nextPos))

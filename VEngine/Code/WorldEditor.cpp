@@ -122,7 +122,7 @@ void WorldEditor::SpawnActorOnClick()
 				//Spawn actor at ray hit point
 				Transform transform;
 
-				XMVECTOR dist = ray.direction * ray.distance;
+				XMVECTOR dist = ray.direction * ray.hitDistance;
 				XMVECTOR rayEnd = ray.origin + dist;
 
 				//Round the position up for spawning on the grid in increments

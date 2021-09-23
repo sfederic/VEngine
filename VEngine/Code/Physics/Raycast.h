@@ -18,21 +18,26 @@ struct Ray
 	XMFLOAT3 normal;
 	XMFLOAT2 uv;
 
+	//List of actors to ignore when cast
 	std::vector<Actor*> actorsToIgnore;
 
 	std::vector<Actor*> hitActors;
 	Actor* hitActor;
 
-	float distance = 0.f;
-	int modelDataIndex; //Long as the engine is keeping off the index buffer, index will give normal and uv to pos
+	//Cut the raycast off at this point
+	float range = 0.f;
+
+	//Output distance from ray origin and hit point
+	float hitDistance = 0.f;
+
 	int actorIndex = 0;
 	int actorSystemIndex = 0;
 	bool bHit = false;
 };
 
 //export void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance)
-bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, bool fromScreen = false);
+bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fromScreen = false);
 bool RaycastTriangleIntersect(Ray& ray);
-bool RaycastAll(Ray& ray, XMVECTOR origin, XMVECTOR direction);
+bool RaycastAll(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range);
 bool RaycastFromScreen(Ray& ray, int sx, int sy, CameraComponent* camera);
 bool RaycastAllFromScreen(Ray& ray);
