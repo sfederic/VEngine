@@ -31,27 +31,34 @@ void Player::Tick(double deltaTime)
 	//if (VMath::VecEqual(GetPositionVector(), nextPos))
 	if (XMVector4Equal(GetPositionVector(), nextPos))
 	{
+		XMVECTOR previousPos = nextPos;
+
 		if (Input::GetAsyncKey(Keys::W))
 		{
-			Ray ray;
-			ray.actorsToIgnore.push_back(this);
-			if (!Raycast(ray, GetPositionVector(), GetForwardVectorV(), 1.f))
-			{
-				editor->Log("hit");
-				nextPos = GetForwardVectorV() + GetPositionVector();
-			}
+			nextPos = GetPositionVector() + GetForwardVectorV();
 		}		
 		if (Input::GetAsyncKey(Keys::S))
 		{
-			nextPos = -GetForwardVectorV() + GetPositionVector();
+			nextPos = GetPositionVector() + -GetForwardVectorV();
 		}
 		if (Input::GetAsyncKey(Keys::A))
 		{
-			nextPos = -GetRightVectorV() + GetPositionVector();
+			nextPos = GetPositionVector() + -GetRightVectorV();
 		}
 		if (Input::GetAsyncKey(Keys::D))
 		{
-			nextPos = GetRightVectorV() + GetPositionVector();
+			nextPos =  GetPositionVector() + GetRightVectorV();
+		}
+
+		if (!XMVector4Equal(previousPos, nextPos))
+		{
+			Ray ray;
+			ray.actorsToIgnore.push_back(this);
+			XMVECTOR direction = XMVector3Normalize(nextPos - previousPos);
+			if (Raycast(ray, GetPositionVector(), direction, 1.f))
+			{
+				nextPos = previousPos;
+			}
 		}
 	}
 
