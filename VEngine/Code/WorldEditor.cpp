@@ -34,7 +34,7 @@ void WorldEditor::HandleActorPicking()
 	{
 		Ray screenPickRay;
 
-		if (RaycastAllFromScreen(screenPickRay))
+		if (RaycastFromScreen(screenPickRay))
 		{
 			if (screenPickRay.hitActors.size() > 1) //Checking if multiple bounding volumes are hit
 			{
@@ -117,7 +117,7 @@ void WorldEditor::SpawnActorOnClick()
 		if (spawnSystem)
 		{
 			Ray ray;
-			if (RaycastAllFromScreen(ray))
+			if (RaycastFromScreen(ray))
 			{
 				//Spawn actor at ray hit point
 				Transform transform;

@@ -32,7 +32,7 @@ void Player::Tick(double deltaTime)
 	{
 		Ray ray;
 		ray.actorsToIgnore.push_back(this);
-		if (RaycastAll(ray, GetPositionVector(), GetForwardVectorV(), 2.f))
+		if (Raycast(ray, GetPositionVector(), GetForwardVectorV(), 2.f))
 		{
 			editor->Log("hit");
 		}

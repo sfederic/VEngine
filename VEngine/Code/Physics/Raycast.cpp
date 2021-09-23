@@ -187,28 +187,20 @@ bool RaycastTriangleIntersect(Ray& ray)
 	return false;
 }
 
-bool RaycastAll(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range)
+bool RaycastFromScreen(Ray& ray)
 {
-	if (Raycast(ray, origin, direction, range))
-	{
-		return true;
-	}
+	const int sx = editor->viewportMouseX;
+	const int sy = editor->viewportMouseY;
 
-	return false;
-}
+	CameraComponent* camera = activeCamera;
 
-bool RaycastFromScreen(Ray& ray, int sx, int sy, CameraComponent* camera)
-{
-	float vx = (2.f * sx / renderer.GetViewportWidth() - 1.0f) / camera->proj.r[0].m128_f32[0];
-	float vy = (-2.f * sy / renderer.GetViewportHeight() + 1.0f) / camera->proj.r[1].m128_f32[1];
+	const float vx = (2.f * sx / renderer.GetViewportWidth() - 1.0f) / camera->proj.r[0].m128_f32[0];
+	const float vy = (-2.f * sy / renderer.GetViewportHeight() + 1.0f) / camera->proj.r[1].m128_f32[1];
 
 	ray.origin = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	ray.direction = XMVectorSet(vx, vy, 1.f, 0.f);
 
-	return Raycast(ray, ray.origin, ray.direction, 1000.0f, true);
-}
+	const float range = std::numeric_limits<float>::max();
 
-bool RaycastAllFromScreen(Ray& ray)
-{
-	return RaycastFromScreen(ray, editor->viewportMouseX, editor->viewportMouseY, activeCamera);
+	return Raycast(ray, ray.origin, ray.direction, range, true);
 }

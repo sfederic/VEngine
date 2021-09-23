@@ -38,6 +38,4 @@ struct Ray
 //export void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance)
 bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fromScreen = false);
 bool RaycastTriangleIntersect(Ray& ray);
-bool RaycastAll(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range);
-bool RaycastFromScreen(Ray& ray, int sx, int sy, CameraComponent* camera);
-bool RaycastAllFromScreen(Ray& ray);
+bool RaycastFromScreen(Ray& ray);
