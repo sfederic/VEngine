@@ -77,38 +77,42 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 		}
 	}
 
+	float nearestDistance = std::numeric_limits<float>::max();
+
 	//Figure out the distance
-	if (bRayHit)
+	if (!bRayHit)
 	{
-		float nearestDistance = std::numeric_limits<float>::max();
-		for (int i = 0; i < distances.size(); i++)
+		return false;
+	}
+
+	for (int i = 0; i < distances.size(); i++)
+	{
+		//Skip hit if more than range or less than 0
+		if (distances[i] > range || distances[i] < 0.f)
 		{
-			//Skip hit if more than range or less than 0
-			if (distances[i] > range || distances[i] < 0.f)
+			continue;
+		}
+
+		if (distances[i] < nearestDistance)
+		{
+			nearestDistance = distances[i];
+
+			ray.hitActor = ray.hitActors[i];
+
+			//Skip raycast if actor is in ignore list
+			for (Actor* actorToIgnore : ray.actorsToIgnore)
 			{
-				continue;
-			}
-
-			if (distances[i] < nearestDistance)
-			{
-				nearestDistance = distances[i];
-
-				ray.hitActor = ray.hitActors[i];
-
-				//Skip raycast if actor is in ignore list
-				for (Actor* actorToIgnore : ray.actorsToIgnore)
+				if (actorToIgnore == ray.hitActors[i])
 				{
-					if (actorToIgnore == ray.hitActors[i])
-					{
-						ray.hitActor = nullptr;
-						return false;
-					}
+					ray.hitActor = nullptr;
 				}
 			}
 		}
+	}
 
+	if (ray.hitActor)
+	{
 		ray.hitDistance = nearestDistance;
-
 		return true;
 	}
 

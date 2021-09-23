@@ -22,7 +22,7 @@ struct Ray
 	std::vector<Actor*> actorsToIgnore;
 
 	std::vector<Actor*> hitActors;
-	Actor* hitActor;
+	Actor* hitActor = nullptr;
 
 	//Cut the raycast off at this point
 	float range = 0.f;
