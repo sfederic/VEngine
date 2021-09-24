@@ -42,6 +42,9 @@ struct Renderer
 	//Viewport
 	D3D11_VIEWPORT viewport;
 
+	//Shadow maps
+	struct ShadowMap* shadowMap;
+
 private:
 	//Queries for GPU profiling (Note that the queires are double buffered to deal with two frames for the GPU
 	//being ahead of the GPU)
@@ -98,6 +101,7 @@ public:
 
 private:
 	void SetRenderPipelineStates(MeshComponent* mesh);
+	void SetRenderPipelineStatesForShadows(MeshComponent* mesh);
 };
 
 extern Renderer renderer;

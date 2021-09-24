@@ -11,6 +11,7 @@ struct TransformOut
 		float4 newUv = mul(texMatrix, float4(i.uv, 0.f, 1.0f));
 		o.uv = float2(newUv.x, newUv.y);
 		o.normal = mul((float3x3)model, i.normal);
+		o.shadowPos = mul(lightMVP, float4(i.pos, 1.0f));
 
 		return o;
 	}
@@ -36,6 +37,9 @@ float4 PSMain(VS_OUT i) : SV_Target
 
 	//clip(texColour.a - 0.1f);
 
-	float4 finalColour = (endResult.diffuse + globalAmbient) * texColour;
+	float4 shadowColour = CalcShadowFactor(i.shadowPos);
+
+	//float4 finalColour = (endResult.diffuse + globalAmbient) * texColour;
+	float4 finalColour = (endResult.diffuse + globalAmbient) * shadowColour * texColour;
 	return finalColour;
 }

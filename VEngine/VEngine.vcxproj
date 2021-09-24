@@ -147,6 +147,7 @@
     <ClCompile Include="Code\Editor\PropertyWidgets\Texture2DWidget.cpp" />
     <ClCompile Include="Code\Actors\EntranceTrigger.cpp" />
     <ClCompile Include="Code\DebugActors\DebugCamera.cpp" />
+    <ClCompile Include="Code\Render\ShadowMap.cpp" />
     <ClInclude Include="Code\Components\BoxTriggerComponent.h" />
     <ClInclude Include="Code\Animation\AnimationStructures.h" />
     <ClInclude Include="Code\Actors\Actor.h" />
@@ -288,6 +289,7 @@
     <ClInclude Include="Code\Editor\PropertyWidgets\Texture2DWidget.h" />
     <ClInclude Include="Code\Actors\EntranceTrigger.h" />
     <ClInclude Include="Code\DebugActors\DebugCamera.h" />
+    <ClInclude Include="Code\Render\ShadowMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

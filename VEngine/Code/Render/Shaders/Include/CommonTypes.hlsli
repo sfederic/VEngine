@@ -5,6 +5,7 @@ cbuffer cbMatrices : register(b0)
 	float4x4 proj;
 	float4x4 mvp;
 	float4x4 texMatrix;
+	float4x4 lightMVP;
 };
 
 struct Material
@@ -178,9 +179,40 @@ struct VS_OUT
 {
 	float4 pos : SV_POSITION;
 	float4 posWS : POSITION;
-	float2 uv : TEXCOORD;
+	float2 uv : TEXCOORD0;
 	float3 normal : NORMAL;
+	float4 shadowPos : TEXCOORD1;
 };
 
 Texture2D t : register(t0);
+Texture2D shadowMap : register(t4);
 SamplerState s : register(s0);
+SamplerComparisonState shadowSampler : register(s1);
+
+static const float SMAP_SIZE = 2048.0f;
+static const float SMAP_DX = 1.0f / SMAP_SIZE;
+
+float CalcShadowFactor(float4 shadowPos)
+{
+	shadowPos.xyz /= shadowPos.w;
+	float depth = shadowPos.z;
+
+	float percentLit = 0.0f;
+
+	const float dx = SMAP_DX;
+
+	const float2 offsets[9] =
+	{
+		float2(-dx, -dx), float2(0.0f, -dx), float2(dx, -dx),
+		float2(-dx, 0.0f), float2(0.0f, 0.0f), float2(dx, 0.0f),
+		float2(-dx, +dx), float2(0.0f, +dx), float2(dx, +dx)
+	};
+
+	[unroll]
+	for (int i = 0; i < 9; i++)
+	{
+		percentLit += shadowMap.SampleCmpLevelZero(shadowSampler, shadowPos.xy + offsets[i], depth).r;
+	}
+
+	return percentLit /= 9.0f;
+}
