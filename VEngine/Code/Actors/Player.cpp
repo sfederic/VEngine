@@ -29,7 +29,7 @@ void Player::Tick(double deltaTime)
 	SetPosition(VMath::VectorConstantLerp(GetPositionVector(), nextPos, deltaTime, moveSpeed));
 
 	//if (VMath::VecEqual(GetPositionVector(), nextPos))
-	if (XMVector4Equal(GetPositionVector(), nextPos))
+	if (XMVector4Equal(GetPositionVector(), nextPos) && XMQuaternionEqual(GetRotationVector(), nextRot))
 	{
 		XMVECTOR previousPos = nextPos;
 
@@ -66,16 +66,16 @@ void Player::Tick(double deltaTime)
 	//currentRot = XMQuaternionSlerp(currentRot, nextRot, deltaTime * rotSpeed);
 	SetRotation(VMath::QuatConstantLerp(GetRotationVector(), nextRot, deltaTime, rotSpeed));
 
-	if (XMQuaternionEqual(GetRotationVector(), nextRot))
+	if (XMQuaternionEqual(GetRotationVector(), nextRot) && XMVector4Equal(GetPositionVector(), nextPos))
 	{
 		if (Input::GetKeyUp(Keys::Right))
 		{
-			float angle = XMConvertToRadians(90.f);
+			const float angle = XMConvertToRadians(90.f);
 			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::XMVectorUp(), angle));
 		}		
 		if (Input::GetKeyUp(Keys::Left))
 		{
-			float angle = XMConvertToRadians(-90.f);
+			const float angle = XMConvertToRadians(-90.f);
 			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::XMVectorUp(), angle));
 		}
 	}
