@@ -78,6 +78,7 @@ private:
 	void RenderMeshComponents();
 	void RenderInstanceMeshComponents();
 	void RenderBounds();
+	void RenderCameraMeshes();
 	void RenderLightMeshes();
 	void UpdateLights();
 	void StartGPUQueries();

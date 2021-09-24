@@ -16,6 +16,7 @@
 #include "DebugActors/DebugBox.h"
 #include "DebugActors/DebugSphere.h"
 #include "DebugActors/DebugIcoSphere.h"
+#include "DebugActors/DebugCamera.h"
 #include "DebugActors/DebugCone.h"
 #include "Input.h"
 #include "World.h"
@@ -302,6 +303,7 @@ void Renderer::Render()
 	RenderInstanceMeshComponents();
 	RenderBounds();
 	RenderLightMeshes();
+	RenderCameraMeshes();
 
 	PROFILE_END
 }
@@ -438,6 +440,46 @@ void Renderer::RenderBounds()
 
 			context->Draw(debugBox.boxMesh->data->vertices->size(), 0);
 		}
+	}
+}
+
+void Renderer::RenderCameraMeshes()
+{
+	if (Core::gameplayOn)
+	{
+		return;
+	}
+
+	static DebugCamera debugCamera;;
+
+	MaterialShaderData materialShaderData;
+
+	//DRAW CAMERAS
+	for (auto camera : CameraComponent::system.components)
+	{
+		context->RSSetState(rastStateWireframe);
+
+		ShaderItem* shader = shaderSystem.FindShader(L"SolidColour.hlsl");
+		context->VSSetShader(shader->vertexShader, nullptr, 0);
+		context->PSSetShader(shader->pixelShader, nullptr, 0);
+
+		context->IASetVertexBuffers(0, 1, &debugCamera.mesh->pso->vertexBuffer->data, &stride, &offset);
+
+		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+
+		shaderMatrices.view = activeCamera->GetViewMatrix();
+
+		//Make cameras red
+		materialShaderData.ambient = XMFLOAT4(1.0f, 0.0f, 0.f, 1.0f);
+		context->UpdateSubresource(cbMaterial, 0, nullptr, &materialShaderData, 0, 0);
+		context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
+
+		shaderMatrices.model = camera->GetWorldMatrix();
+
+		shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
+		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+
+		context->Draw(debugCamera.mesh->data->vertices->size(), 0);
 	}
 }
 
