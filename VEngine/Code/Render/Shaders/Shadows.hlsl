@@ -23,8 +23,10 @@ VS_OUT VSMain(VS_IN i)
 	return o.Transform(i);
 }
 
+Texture2D diffuseMap;
+
 void PSMain(VS_OUT i)
 {
-	float4 diffuse = t.Sample(s, i.shadowPos.xy);
+	float4 diffuse = diffuseMap.Sample(s, i.shadowPos.xy);
 	clip(diffuse.a - 0.15f);
 }

@@ -339,7 +339,7 @@ void Renderer::RenderMeshComponents()
 		//Set lights buffer
 		context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
 
-		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
+		//context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
 
 		//Draw
 		context->DrawIndexed(mesh->data->indices->size(), 0, 0);
@@ -347,9 +347,10 @@ void Renderer::RenderMeshComponents()
 
 	context->RSSetState(0);
 
-	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
+	RenderSetup();
+	/*UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
 	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
-	context->RSSetViewports(1, &viewport);
+	context->RSSetViewports(1, &viewport);*/
 
 	for (auto mesh : MeshComponent::system.components)
 	{
