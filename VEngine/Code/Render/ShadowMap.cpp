@@ -2,6 +2,7 @@
 #include "Debug.h"
 #include <cassert>
 #include "Core.h"
+#include "Components/Lights/DirectionalLightComponent.h"
 
 ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
 {
@@ -92,8 +93,9 @@ void ShadowMap::BindDsvAndSetNullRenderTarget(ID3D11DeviceContext* dc)
 
 XMMATRIX ShadowMap::GetLightPerspectiveMatrix()
 {
-	static float radius = 50.f;
-	const XMFLOAT3 center = XMFLOAT3(0.f, 0.f, 0.f);
+	static float radius = 10.f;
+	auto light = DirectionalLightComponent::system.components[0];
+	XMFLOAT3 center = light->transform.position;
 
 	float l = center.x - radius;
 	float b = center.y - radius;
@@ -108,10 +110,11 @@ XMMATRIX ShadowMap::GetLightPerspectiveMatrix()
 
 XMMATRIX ShadowMap::GetLightViewMatrix()
 {
-	static float delta = -5.f;
-	delta += Core::GetDeltaTime();
+	auto light = DirectionalLightComponent::system.components[0];
 
-	return XMMatrixLookAtLH(XMVectorSet(delta, 3.f, 5.f, 1.f),
+	XMVECTOR eye = XMLoadFloat3(&light->transform.position);
+
+	return XMMatrixLookAtLH(eye,
 		XMVectorSet(0.f, 0.f, 0.f, 1.f),
 		XMVectorSet(0.f, 1.f, 0.f, 0.f));
 }

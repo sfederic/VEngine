@@ -6,6 +6,8 @@ cbuffer cbMatrices : register(b0)
 	float4x4 mvp;
 	float4x4 texMatrix;
 	float4x4 lightMVP;
+	float4x4 lightView;
+	float4x4 lightProj;
 };
 
 struct Material
@@ -197,6 +199,23 @@ float CalcShadowFactor(float4 shadowPos)
 	shadowPos.xyz /= shadowPos.w;
 	float depth = shadowPos.z;
 
-	float percentLit = shadowMap.SampleCmpLevelZero(shadowSampler, shadowPos.xy, depth).r;
-	return percentLit;
+	// Texel size.
+	const float dx = SMAP_DX;
+	float percentLit = 0.0f;
+
+	const float2 offsets[9] =
+	{
+	float2(-dx, -dx), float2(0.0f, -dx), float2(dx, -dx),
+	float2(-dx, 0.0f), float2(0.0f, 0.0f), float2(dx, 0.0f),
+	float2(-dx, +dx), float2(0.0f, +dx), float2(dx, +dx)
+	};
+
+	// 3×3 box filter pattern. Each sample does a 4-tap PCF.
+	[unroll]
+	for (int i = 0; i < 9; ++i)
+	{
+		percentLit += shadowMap.SampleCmpLevelZero(shadowSampler, shadowPos.xy + offsets[i], depth).r;
+	}
+
+	return percentLit /= 9.f;
 }
