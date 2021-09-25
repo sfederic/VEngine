@@ -93,7 +93,9 @@ void ShadowMap::BindDsvAndSetNullRenderTarget(ID3D11DeviceContext* dc)
 
 XMMATRIX ShadowMap::GetLightPerspectiveMatrix()
 {
-	static float radius = 10.f;
+	//Radius needs to be big otherwise the orthomatrix sort of wraps underneath and over the world
+	float radius = 50.f;
+
 	auto light = DirectionalLightComponent::system.components[0];
 	XMFLOAT3 center = light->transform.position;
 

@@ -90,10 +90,8 @@ struct ShaderMatrices
 	XMMATRIX proj;
 	XMMATRIX mvp;
 	XMMATRIX texMatrix;
-	XMMATRIX lightMVP;
-	XMMATRIX lightView;
-	XMMATRIX lightProj;
-	XMMATRIX lightViewProj;
+	XMMATRIX lightMVP; //Light mvp is the shadowposition
+	XMMATRIX lightViewProj; //This is for in Shadows.hlsl to push vertex pos into space
 
 	void Create(float aspectRatio);
 	void MakeTextureMatrix(MaterialShaderData* shaderData);

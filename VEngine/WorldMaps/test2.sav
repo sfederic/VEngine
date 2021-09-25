@@ -83,11 +83,11 @@ Colour
 LightEnabled
 1
 Position
--7.3 8 14.57
+-0.3 8 15.57
 Rotation
-0.346275 0.902773 -0.242553 -0.0791396
+0.346275 0.902773 -0.242553 -0.0791393
 Scale
-0.999743 0.999994 0.9998
+0.999779 0.999994 0.999836
 next
 EntranceTrigger
 0
@@ -98,11 +98,11 @@ SpotLightActor
 Player
 1
 Position
-12 1.125 2
+21.001 0.5 2.99621
 Rotation
-0 0.707229 0 0.706984
+0 0.706984 0 -0.707229
 Scale
-0.499995 0.375 0.499995
+0.999997 1 0.999997
 Shader
 DefaultShader.hlsl
 Texture2D

@@ -346,9 +346,7 @@ void Renderer::RenderMeshComponents()
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		shaderMatrices.MakeTextureMatrix(&mesh->material->shaderData);
 		shaderMatrices.lightMVP = shadowMap->OutputMatrix();
-		shaderMatrices.lightView = shadowMap->GetLightViewMatrix();
-		shaderMatrices.lightProj = shadowMap->GetLightPerspectiveMatrix();
-		shaderMatrices.lightViewProj = shaderMatrices.lightView * shaderMatrices.lightProj;
+		shaderMatrices.lightViewProj = shadowMap->GetLightViewMatrix() * shadowMap->GetLightPerspectiveMatrix();
 
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
@@ -376,9 +374,7 @@ void Renderer::RenderMeshComponents()
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		shaderMatrices.MakeTextureMatrix(&mesh->material->shaderData);
 		shaderMatrices.lightMVP = shadowMap->OutputMatrix();
-		shaderMatrices.lightView = shadowMap->GetLightViewMatrix();
-		shaderMatrices.lightProj = shadowMap->GetLightPerspectiveMatrix();
-		shaderMatrices.lightViewProj = shaderMatrices.lightView * shaderMatrices.lightProj;
+		shaderMatrices.lightViewProj = shadowMap->GetLightViewMatrix() * shadowMap->GetLightPerspectiveMatrix();
 
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);

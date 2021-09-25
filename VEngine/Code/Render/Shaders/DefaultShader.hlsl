@@ -12,8 +12,6 @@ struct TransformOut
 		o.uv = float2(newUv.x, newUv.y);
 		o.normal = mul((float3x3)model, i.normal);
 
-		//o.shadowPos = mul(lightMVP, o.posWS);
-		//o.shadowPos = mul(model, float4(i.pos, 1.0f));
 		o.shadowPos = mul(lightMVP, o.posWS);
 
 		return o;
