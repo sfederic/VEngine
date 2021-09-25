@@ -93,6 +93,7 @@ struct ShaderMatrices
 	XMMATRIX lightMVP;
 	XMMATRIX lightView;
 	XMMATRIX lightProj;
+	XMMATRIX lightViewProj;
 
 	void Create(float aspectRatio);
 	void MakeTextureMatrix(MaterialShaderData* shaderData);

@@ -8,6 +8,7 @@ cbuffer cbMatrices : register(b0)
 	float4x4 lightMVP;
 	float4x4 lightView;
 	float4x4 lightProj;
+	float4x4 lightViewProj;
 };
 
 struct Material

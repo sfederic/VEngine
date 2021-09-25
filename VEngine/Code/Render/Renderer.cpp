@@ -217,7 +217,7 @@ void Renderer::CreateRasterizerStates()
 	{
 		rastDesc.CullMode = D3D11_CULL_BACK;
 		rastDesc.FillMode = D3D11_FILL_SOLID;
-		rastDesc.DepthBias = 100000;
+		rastDesc.DepthBias = 1000;
 		rastDesc.DepthBiasClamp = 0.0f;
 		rastDesc.SlopeScaledDepthBias = 1.0f;
 		HR(device->CreateRasterizerState(&rastDesc, &rastStateShadow));
@@ -348,6 +348,7 @@ void Renderer::RenderMeshComponents()
 		shaderMatrices.lightMVP = shadowMap->OutputMatrix();
 		shaderMatrices.lightView = shadowMap->GetLightViewMatrix();
 		shaderMatrices.lightProj = shadowMap->GetLightPerspectiveMatrix();
+		shaderMatrices.lightViewProj = shaderMatrices.lightView * shaderMatrices.lightProj;
 
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
@@ -377,6 +378,7 @@ void Renderer::RenderMeshComponents()
 		shaderMatrices.lightMVP = shadowMap->OutputMatrix();
 		shaderMatrices.lightView = shadowMap->GetLightViewMatrix();
 		shaderMatrices.lightProj = shadowMap->GetLightPerspectiveMatrix();
+		shaderMatrices.lightViewProj = shaderMatrices.lightView * shaderMatrices.lightProj;
 
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);

@@ -1,5 +1,5 @@
 MeshActor
-3
+4
 Mesh Filename
 plane.fbx
 Position
@@ -22,11 +22,11 @@ next
 Mesh Filename
 ico_sphere.fbx
 Position
--2 4 6
+2 4 6
 Rotation
--0 0 -0 1
+0.75432 0.111532 -0.132872 -0.633172
 Scale
-10 10 10
+5 5 5
 Shader
 DefaultShader.hlsl
 Texture2D
@@ -43,9 +43,28 @@ monkey.fbx
 Position
 17 3 -7
 Rotation
--0.571394 0.0713943 -0.0499908 0.816035
+0.836516 0.0435772 0.224144 -0.498097
 Scale
-5 5 5
+5 4.99999 5.00001
+Shader
+DefaultShader.hlsl
+Texture2D
+test.png
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh Filename
+hollow_barrel.fbx
+Position
+17 0 0
+Rotation
+-0 0 -0 1
+Scale
+1 1 1
 Shader
 DefaultShader.hlsl
 Texture2D
@@ -64,11 +83,11 @@ Colour
 LightEnabled
 1
 Position
-8.7 10 41.57
+-7.3 8 14.57
 Rotation
-0.346275 0.902773 -0.242553 -0.0791398
+0.346275 0.902773 -0.242553 -0.0791396
 Scale
-0.999741 0.999995 0.999797
+0.999743 0.999994 0.9998
 next
 EntranceTrigger
 0
@@ -79,11 +98,11 @@ SpotLightActor
 Player
 1
 Position
-0 3 22
+12 1.125 2
 Rotation
-0 0.707229 0 0.706985
+0 0.707229 0 0.706984
 Scale
-0.499995 0.5 0.499995
+0.499995 0.375 0.499995
 Shader
 DefaultShader.hlsl
 Texture2D
