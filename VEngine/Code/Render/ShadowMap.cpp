@@ -1,6 +1,7 @@
 #include "ShadowMap.h"
 #include "Debug.h"
 #include <cassert>
+#include "Core.h"
 
 ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
 {
@@ -91,7 +92,7 @@ void ShadowMap::BindDsvAndSetNullRenderTarget(ID3D11DeviceContext* dc)
 
 XMMATRIX ShadowMap::GetLightPerspectiveMatrix()
 {
-	const float radius = 500.f;
+	static float radius = 50.f;
 	const XMFLOAT3 center = XMFLOAT3(0.f, 0.f, 0.f);
 
 	float l = center.x - radius;
@@ -107,7 +108,10 @@ XMMATRIX ShadowMap::GetLightPerspectiveMatrix()
 
 XMMATRIX ShadowMap::GetLightViewMatrix()
 {
-	return XMMatrixLookAtLH(XMVectorSet(5.f, 5.f, -5.f, 1.f),
+	static float delta = -5.f;
+	delta += Core::GetDeltaTime();
+
+	return XMMatrixLookAtLH(XMVectorSet(delta, 3.f, 5.f, 1.f),
 		XMVectorSet(0.f, 0.f, 0.f, 1.f),
 		XMVectorSet(0.f, 1.f, 0.f, 0.f));
 }

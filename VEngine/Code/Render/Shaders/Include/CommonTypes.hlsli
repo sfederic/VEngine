@@ -185,7 +185,7 @@ struct VS_OUT
 };
 
 Texture2D t : register(t0);
-Texture2D shadowMap : register(t4);
+Texture2D shadowMap : register(t1);
 SamplerState s : register(s0);
 SamplerComparisonState shadowSampler : register(s1);
 
@@ -197,22 +197,6 @@ float CalcShadowFactor(float4 shadowPos)
 	shadowPos.xyz /= shadowPos.w;
 	float depth = shadowPos.z;
 
-	float percentLit = 0.0f;
-
-	const float dx = SMAP_DX;
-
-	const float2 offsets[9] =
-	{
-		float2(-dx, -dx), float2(0.0f, -dx), float2(dx, -dx),
-		float2(-dx, 0.0f), float2(0.0f, 0.0f), float2(dx, 0.0f),
-		float2(-dx, +dx), float2(0.0f, +dx), float2(dx, +dx)
-	};
-
-	[unroll]
-	for (int i = 0; i < 9; i++)
-	{
-		percentLit += shadowMap.SampleCmpLevelZero(shadowSampler, shadowPos.xy + offsets[i], depth).r;
-	}
-
-	return percentLit /= 9.0f;
+	float percentLit = shadowMap.SampleCmpLevelZero(shadowSampler, shadowPos.xy, depth).r;
+	return percentLit;
 }

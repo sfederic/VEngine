@@ -26,6 +26,7 @@ struct Renderer
 	ID3D11RasterizerState* rastStateSolid;
 	ID3D11RasterizerState* rastStateWireframe;
 	ID3D11RasterizerState* rastStateNoBackCull;
+	ID3D11RasterizerState* rastStateShadow;
 
 	//Blendstates
 	ID3D11BlendState* blendStateAlphaToCoverage;

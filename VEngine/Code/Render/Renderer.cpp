@@ -36,7 +36,7 @@ const int cbMaterialRegister = 1;
 const int cbSkinningRegister = 2;
 const int cbLightsRegister = 3;
 const int instanceSRVRegister = 3;
-const int shadowMapTextureResgiter = 4;
+const int shadowMapTextureResgiter = 1;
 
 ShaderMatrices shaderMatrices;
 ShaderLights shaderLights;
@@ -212,6 +212,18 @@ void Renderer::CreateRasterizerStates()
 		RastState* rs = new RastState("nobackcull", rastDesc, rastStateNoBackCull);
 		rastStateMap[rs->name] = rs;
 	}
+
+	//SHADOWS
+	{
+		rastDesc.CullMode = D3D11_CULL_BACK;
+		rastDesc.FillMode = D3D11_FILL_SOLID;
+		rastDesc.DepthBias = 100000;
+		rastDesc.DepthBiasClamp = 0.0f;
+		rastDesc.SlopeScaledDepthBias = 1.0f;
+		HR(device->CreateRasterizerState(&rastDesc, &rastStateShadow));
+		RastState* rs = new RastState("shadow", rastDesc, rastStateShadow);
+		rastStateMap[rs->name] = rs;
+	}
 }
 
 void Renderer::CreateBlendStates()
@@ -318,9 +330,11 @@ void Renderer::RenderMeshComponents()
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
 
-	UpdateLights();
+	//UpdateLights();
 
 	shadowMap->BindDsvAndSetNullRenderTarget(context);
+
+	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	//Shadow testing
 	for (auto mesh : MeshComponent::system.components)
@@ -338,19 +352,17 @@ void Renderer::RenderMeshComponents()
 
 		//Set lights buffer
 		context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
-
-		//context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
+		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
 
 		//Draw
 		context->DrawIndexed(mesh->data->indices->size(), 0, 0);
 	}
 
+	ID3D11RenderTargetView* nullRTV = nullptr;
+	context->OMSetRenderTargets(1, &nullRTV, nullptr);
 	context->RSSetState(0);
 
 	RenderSetup();
-	/*UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
-	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
-	context->RSSetViewports(1, &viewport);*/
 
 	for (auto mesh : MeshComponent::system.components)
 	{
@@ -374,11 +386,10 @@ void Renderer::RenderMeshComponents()
 
 		//Draw
 		context->DrawIndexed(mesh->data->indices->size(), 0, 0);
-
-		ID3D11ShaderResourceView* nullSrv = nullptr;
-		context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSrv);
+		
+		ID3D11ShaderResourceView* nullSRV = nullptr;
+		context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSRV);
 	}	
-	
 
 	PROFILE_END
 }
@@ -831,7 +842,7 @@ void Renderer::SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 	Material* material = mesh->material;
 	PipelineStateObject* pso = mesh->pso;
 
-	context->RSSetState(material->rastState->data);
+	context->RSSetState(rastStateMap["shadow"]->data);
 
 	ShaderItem* shader = shaderSystem.FindShader(L"Shadows.hlsl");
 

@@ -83,7 +83,7 @@ void Engine::MainLoop()
 
 void Engine::Render(double deltaTime)
 {
-	renderer.RenderSetup();
+	//renderer.RenderSetup();
 	renderer.Render();
 
 	uiSystem.BeginDraw();
