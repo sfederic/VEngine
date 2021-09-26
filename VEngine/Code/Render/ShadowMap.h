@@ -2,6 +2,10 @@
 #include <d3d11.h>
 #include <DirectXMath.h>
 
+//Basic tutorial for shadow mapping
+//REF: https://takinginitiative.wordpress.com/2011/05/15/directx10-tutorial-10-shadow-mapping/
+//REF: https://takinginitiative.wordpress.com/2011/05/25/directx10-tutorial-10-shadow-mapping-part-2/
+
 using namespace DirectX;
 
 struct ShadowMap
