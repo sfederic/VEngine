@@ -2,6 +2,7 @@
 #include "Debug.h"
 #include <cassert>
 #include "Core.h"
+#include "VMath.h"
 #include "Components/Lights/DirectionalLightComponent.h"
 
 ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
@@ -92,6 +93,12 @@ XMMATRIX ShadowMap::GetLightPerspectiveMatrix()
 	//Radius needs to be big otherwise the orthomatrix sort of wraps underneath and over the world
 	float radius = 50.f;
 
+	//Make the first directionalLight the main shadow projector for now
+	if (DirectionalLightComponent::system.components.size() == 0)
+	{
+		throw;
+	}
+
 	auto light = DirectionalLightComponent::system.components[0];
 	XMFLOAT3 center = light->transform.position;
 
@@ -108,13 +115,19 @@ XMMATRIX ShadowMap::GetLightPerspectiveMatrix()
 
 XMMATRIX ShadowMap::GetLightViewMatrix()
 {
+	if (DirectionalLightComponent::system.components.size() == 0)
+	{
+		throw;
+	}
+
 	auto light = DirectionalLightComponent::system.components[0];
 
 	XMVECTOR eye = XMLoadFloat3(&light->transform.position);
+	XMFLOAT3 forwardVec = light->GetForwardVector();
+	XMVECTOR direction = XMLoadFloat3(&forwardVec);
+	XMVECTOR focus = eye - (direction * 100.f);
 
-	return XMMatrixLookAtLH(eye,
-		XMVectorSet(0.f, 0.f, 0.f, 1.f),
-		XMVectorSet(0.f, 1.f, 0.f, 0.f));
+	return XMMatrixLookAtLH(eye, direction, VMath::XMVectorUp());
 }
 
 XMMATRIX ShadowMap::GetLightTextureMatrix()
