@@ -12,6 +12,7 @@ VS_OUT VSMain(VS_IN i)
 	o.posWS = mul(model, float4(i.pos, 1.0f));
 	o.uv = i.uv;
 	o.normal = mul((float3x3)world, i.normal);
+	o.shadowPos = float4(1.0f, 1.0f, 1.0f, 1.0f);
 
 	return o;
 }

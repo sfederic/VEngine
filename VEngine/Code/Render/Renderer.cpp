@@ -24,6 +24,7 @@
 #include "Profile.h"
 #include "RenderUtils.h"
 #include "Editor/DebugMenu.h"
+#include "ShadowMap.h"
 
 Renderer renderer;
 
@@ -35,6 +36,7 @@ const int cbMaterialRegister = 1;
 const int cbSkinningRegister = 2;
 const int cbLightsRegister = 3;
 const int instanceSRVRegister = 3;
+const int shadowMapTextureResgiter = 1;
 
 ShaderMatrices shaderMatrices;
 ShaderLights shaderLights;
@@ -52,6 +54,8 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	CreateDevice();
 
 	shaderSystem.Init();
+
+	shadowMap = new ShadowMap(device, 2048, 2048);
 
 	CreateSwapchain((HWND)window);
 	CreateRTVAndDSV();
@@ -208,6 +212,18 @@ void Renderer::CreateRasterizerStates()
 		RastState* rs = new RastState("nobackcull", rastDesc, rastStateNoBackCull);
 		rastStateMap[rs->name] = rs;
 	}
+
+	//SHADOWS
+	{
+		rastDesc.CullMode = D3D11_CULL_BACK;
+		rastDesc.FillMode = D3D11_FILL_SOLID;
+		rastDesc.DepthBias = 100000;
+		rastDesc.DepthBiasClamp = 0.0f;
+		rastDesc.SlopeScaledDepthBias = 1.0f;
+		HR(device->CreateRasterizerState(&rastDesc, &rastStateShadow));
+		RastState* rs = new RastState("shadow", rastDesc, rastStateShadow);
+		rastStateMap[rs->name] = rs;
+	}
 }
 
 void Renderer::CreateBlendStates()
@@ -316,6 +332,39 @@ void Renderer::RenderMeshComponents()
 
 	UpdateLights();
 
+	shadowMap->BindDsvAndSetNullRenderTarget(context);
+
+	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	//Shadow testing
+	for (auto mesh : MeshComponent::system.components)
+	{
+		SetRenderPipelineStatesForShadows(mesh);
+
+		//Set matrices
+		shaderMatrices.model = mesh->GetWorldMatrix();
+		shaderMatrices.MakeModelViewProjectionMatrix();
+		shaderMatrices.MakeTextureMatrix(&mesh->material->shaderData);
+		shaderMatrices.lightMVP = shadowMap->OutputMatrix();
+		shaderMatrices.lightViewProj = shadowMap->GetLightViewMatrix() * shadowMap->GetLightPerspectiveMatrix();
+
+		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+
+		//Set lights buffer
+		context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
+		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
+
+		//Draw
+		context->DrawIndexed(mesh->data->indices->size(), 0, 0);
+	}
+
+	ID3D11RenderTargetView* nullRTV = nullptr;
+	context->OMSetRenderTargets(1, &nullRTV, nullptr);
+	context->RSSetState(0);
+
+	RenderSetup();
+
 	for (auto mesh : MeshComponent::system.components)
 	{
 		SetRenderPipelineStates(mesh);
@@ -324,6 +373,8 @@ void Renderer::RenderMeshComponents()
 		shaderMatrices.model = mesh->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		shaderMatrices.MakeTextureMatrix(&mesh->material->shaderData);
+		shaderMatrices.lightMVP = shadowMap->OutputMatrix();
+		shaderMatrices.lightViewProj = shadowMap->GetLightViewMatrix() * shadowMap->GetLightPerspectiveMatrix();
 
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
@@ -331,9 +382,16 @@ void Renderer::RenderMeshComponents()
 		//Set lights buffer
 		context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
 
+		//set shadow stuff
+		context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
+		context->PSSetSamplers(1, 1, &shadowMap->sampler);
+
 		//Draw
 		context->DrawIndexed(mesh->data->indices->size(), 0, 0);
-	}
+		
+		ID3D11ShaderResourceView* nullSRV = nullptr;
+		context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSRV);
+	}	
 
 	PROFILE_END
 }
@@ -779,4 +837,20 @@ void Renderer::SetRenderPipelineStates(MeshComponent* mesh)
 	context->UpdateSubresource(cbMaterial, 0, nullptr, &material->shaderData, 0, 0);
 	//context->VSSetConstantBuffers(cbMaterialRegister, 0, &cbMaterial);
 	context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
+}
+
+void Renderer::SetRenderPipelineStatesForShadows(MeshComponent* mesh)
+{
+	Material* material = mesh->material;
+	PipelineStateObject* pso = mesh->pso;
+
+	context->RSSetState(rastStateMap["shadow"]->data);
+
+	ShaderItem* shader = shaderSystem.FindShader(L"Shadows.hlsl");
+
+	context->VSSetShader(shader->vertexShader, nullptr, 0);
+	context->PSSetShader(shader->pixelShader, nullptr, 0);
+
+	context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &stride, &offset);
+	context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
 }

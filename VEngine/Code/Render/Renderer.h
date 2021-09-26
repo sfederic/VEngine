@@ -26,6 +26,7 @@ struct Renderer
 	ID3D11RasterizerState* rastStateSolid;
 	ID3D11RasterizerState* rastStateWireframe;
 	ID3D11RasterizerState* rastStateNoBackCull;
+	ID3D11RasterizerState* rastStateShadow;
 
 	//Blendstates
 	ID3D11BlendState* blendStateAlphaToCoverage;
@@ -41,6 +42,9 @@ struct Renderer
 
 	//Viewport
 	D3D11_VIEWPORT viewport;
+
+	//Shadow maps
+	struct ShadowMap* shadowMap;
 
 private:
 	//Queries for GPU profiling (Note that the queires are double buffered to deal with two frames for the GPU
@@ -98,6 +102,7 @@ public:
 
 private:
 	void SetRenderPipelineStates(MeshComponent* mesh);
+	void SetRenderPipelineStatesForShadows(MeshComponent* mesh);
 };
 
 extern Renderer renderer;
