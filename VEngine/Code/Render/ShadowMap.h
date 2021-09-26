@@ -21,8 +21,6 @@ struct ShadowMap
 	~ShadowMap();
 	void BindDsvAndSetNullRenderTarget(ID3D11DeviceContext* dc);
 
-	//TODO: the light matrix stuff here isn't working in some cases when deleting the main shadow light
-	//and then adding it back into world. Something with the floor? Not sure.
 	XMMATRIX GetLightPerspectiveMatrix();
 	XMMATRIX GetLightViewMatrix();
 	XMMATRIX GetLightTextureMatrix();
