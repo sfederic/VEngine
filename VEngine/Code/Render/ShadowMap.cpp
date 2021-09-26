@@ -73,21 +73,17 @@ ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
 
 ShadowMap::~ShadowMap()
 {
-}
-
-ID3D11ShaderResourceView* ShadowMap::DepthMapSRV()
-{
-	return depthMapSRV;
+	sampler->Release();
+	depthMapDSV->Release();
+	depthMapSRV->Release();
 }
 
 void ShadowMap::BindDsvAndSetNullRenderTarget(ID3D11DeviceContext* dc)
 {
 	dc->RSSetViewports(1, &viewport);
-	// Set null render target because we are only going to draw
-	// to depth buffer. Setting a null render target will disable
-	// color writes.
-	ID3D11RenderTargetView* renderTargets[1] = { nullptr };
-	dc->OMSetRenderTargets(1, renderTargets, depthMapDSV);
+
+	ID3D11RenderTargetView* nullRTV = nullptr;
+	dc->OMSetRenderTargets(1, &nullRTV, depthMapDSV);
 	dc->ClearDepthStencilView(depthMapDSV, D3D11_CLEAR_DEPTH, 1.0f, 0);
 }
 
