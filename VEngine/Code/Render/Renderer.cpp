@@ -295,6 +295,45 @@ void Renderer::CheckSupportedFeatures()
 	device->CheckFeatureSupport(D3D11_FEATURE_THREADING, &threadFeature, sizeof(threadFeature));
 }
 
+void Renderer::RenderShadowPass()
+{
+	PROFILE_START
+
+	shadowMap->BindDsvAndSetNullRenderTarget(context);
+
+	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	shaderMatrices.view = activeCamera->GetViewMatrix();
+	shaderMatrices.lightMVP = shadowMap->OutputMatrix();
+	shaderMatrices.lightViewProj = shadowMap->GetLightViewMatrix() * shadowMap->GetLightPerspectiveMatrix();
+
+	for (auto mesh : MeshComponent::system.components)
+	{
+		SetRenderPipelineStatesForShadows(mesh);
+
+		//Set matrices
+		shaderMatrices.model = mesh->GetWorldMatrix();
+		shaderMatrices.MakeModelViewProjectionMatrix();
+		shaderMatrices.MakeTextureMatrix(&mesh->material->shaderData);
+
+		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+
+		//Set lights buffer
+		//context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
+		//context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
+
+		//Draw
+		context->DrawIndexed(mesh->data->indices->size(), 0, 0);
+	}
+
+	ID3D11RenderTargetView* nullRTV = nullptr;
+	context->OMSetRenderTargets(1, &nullRTV, nullptr);
+	context->RSSetState(0);
+
+	PROFILE_END
+}
+
 void Renderer::RenderSetup()
 {
 	context->RSSetViewports(1, &viewport);
@@ -315,6 +354,7 @@ void Renderer::Render()
 
 	StartGPUQueries();
 
+	RenderShadowPass();
 	RenderMeshComponents();
 	RenderInstanceMeshComponents();
 	RenderBounds();
@@ -329,41 +369,12 @@ void Renderer::RenderMeshComponents()
 	PROFILE_START
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
-
-	UpdateLights();
-
-	shadowMap->BindDsvAndSetNullRenderTarget(context);
-
-	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-	//Shadow testing
-	for (auto mesh : MeshComponent::system.components)
-	{
-		SetRenderPipelineStatesForShadows(mesh);
-
-		//Set matrices
-		shaderMatrices.model = mesh->GetWorldMatrix();
-		shaderMatrices.MakeModelViewProjectionMatrix();
-		shaderMatrices.MakeTextureMatrix(&mesh->material->shaderData);
-		shaderMatrices.lightMVP = shadowMap->OutputMatrix();
-		shaderMatrices.lightViewProj = shadowMap->GetLightViewMatrix() * shadowMap->GetLightPerspectiveMatrix();
-
-		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
-		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
-
-		//Set lights buffer
-		context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
-		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
-
-		//Draw
-		context->DrawIndexed(mesh->data->indices->size(), 0, 0);
-	}
-
-	ID3D11RenderTargetView* nullRTV = nullptr;
-	context->OMSetRenderTargets(1, &nullRTV, nullptr);
-	context->RSSetState(0);
+	shaderMatrices.lightMVP = shadowMap->OutputMatrix();
+	shaderMatrices.lightViewProj = shadowMap->GetLightViewMatrix() * shadowMap->GetLightPerspectiveMatrix();
 
 	RenderSetup();
+
+	UpdateLights();
 
 	for (auto mesh : MeshComponent::system.components)
 	{
@@ -373,22 +384,21 @@ void Renderer::RenderMeshComponents()
 		shaderMatrices.model = mesh->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		shaderMatrices.MakeTextureMatrix(&mesh->material->shaderData);
-		shaderMatrices.lightMVP = shadowMap->OutputMatrix();
-		shaderMatrices.lightViewProj = shadowMap->GetLightViewMatrix() * shadowMap->GetLightPerspectiveMatrix();
-
+	
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 		//Set lights buffer
 		context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
 
-		//set shadow stuff
+		//Set shadow resources
 		context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
 		context->PSSetSamplers(1, 1, &shadowMap->sampler);
 
 		//Draw
 		context->DrawIndexed(mesh->data->indices->size(), 0, 0);
 		
+		//Setting the shadowmap to null here gets rid of a warning. Can also set this outside of the loop.
 		ID3D11ShaderResourceView* nullSRV = nullptr;
 		context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSRV);
 	}	
@@ -398,6 +408,8 @@ void Renderer::RenderMeshComponents()
 
 void Renderer::RenderInstanceMeshComponents()
 {
+	//TODO: shadows aren't done yet for instancemeshes
+
 	PROFILE_START
 
 	//Set matrices

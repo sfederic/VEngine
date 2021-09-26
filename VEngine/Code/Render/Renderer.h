@@ -79,6 +79,7 @@ private:
 	void CreateQueries();
 	void CreateMainConstantBuffers();
 	void CheckSupportedFeatures();
+	void RenderShadowPass();
 	void RenderMeshComponents();
 	void RenderInstanceMeshComponents();
 	void RenderBounds();
