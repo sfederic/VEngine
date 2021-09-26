@@ -90,14 +90,13 @@ void ShadowMap::BindDsvAndSetNullRenderTarget(ID3D11DeviceContext* dc)
 
 XMMATRIX ShadowMap::GetLightPerspectiveMatrix()
 {
+	if (DirectionalLightComponent::system.components.empty())
+	{
+		return XMMatrixIdentity();
+	}
+
 	//Radius needs to be big otherwise the orthomatrix sort of wraps underneath and over the world
 	float radius = 50.f;
-
-	//Make the first directionalLight the main shadow projector for now
-	if (DirectionalLightComponent::system.components.size() == 0)
-	{
-		throw;
-	}
 
 	auto light = DirectionalLightComponent::system.components[0];
 	XMFLOAT3 center = light->transform.position;
@@ -115,9 +114,9 @@ XMMATRIX ShadowMap::GetLightPerspectiveMatrix()
 
 XMMATRIX ShadowMap::GetLightViewMatrix()
 {
-	if (DirectionalLightComponent::system.components.size() == 0)
+	if (DirectionalLightComponent::system.components.empty())
 	{
-		throw;
+		return XMMatrixIdentity();
 	}
 
 	auto light = DirectionalLightComponent::system.components[0];
@@ -143,6 +142,11 @@ XMMATRIX ShadowMap::GetLightTextureMatrix()
 
 XMMATRIX ShadowMap::OutputMatrix()
 {
+	if (DirectionalLightComponent::system.components.empty())
+	{
+		return XMMatrixIdentity();
+	}
+
 	auto V = GetLightViewMatrix();
 	auto P = GetLightPerspectiveMatrix();
 	auto T = GetLightTextureMatrix();

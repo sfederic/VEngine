@@ -319,10 +319,6 @@ void Renderer::RenderShadowPass()
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
-		//Set lights buffer
-		//context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
-		//context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
-
 		//Draw
 		context->DrawIndexed(mesh->data->indices->size(), 0, 0);
 	}
@@ -369,8 +365,12 @@ void Renderer::RenderMeshComponents()
 	PROFILE_START
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
-	shaderMatrices.lightMVP = shadowMap->OutputMatrix();
-	shaderMatrices.lightViewProj = shadowMap->GetLightViewMatrix() * shadowMap->GetLightPerspectiveMatrix();
+
+	if (!DirectionalLightComponent::system.components.empty())
+	{
+		shaderMatrices.lightMVP = shadowMap->OutputMatrix();
+		shaderMatrices.lightViewProj = shadowMap->GetLightViewMatrix() * shadowMap->GetLightPerspectiveMatrix();
+	}
 
 	RenderSetup();
 
