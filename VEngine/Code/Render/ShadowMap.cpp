@@ -10,7 +10,6 @@ ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
 	width = width_;
 	height = height_;
 
-	// Viewport that matches the shadow map dimensions.
 	viewport.TopLeftX = 0.0f;
 	viewport.TopLeftY = 0.0f;
 	viewport.Width = static_cast<float>(width_);
@@ -18,9 +17,9 @@ ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
 	viewport.MinDepth = 0.0f;
 	viewport.MaxDepth = 1.0f;
 
-	// Use typeless format because the DSV is going to interpret
-	// the bits as DXGI_FORMAT_D24_UNORM_S8_UINT, whereas the SRV is going
-	// to interpret the bits as DXGI_FORMAT_R24_UNORM_X8_TYPELESS.
+	//Be mindful of the formats here. The Comparison sampler at and the call to SampleCmp/SampleCmpLevelZero
+	//is very picky about the formats. 
+
 	D3D11_TEXTURE2D_DESC texDesc;
 	texDesc.Width = width;
 	texDesc.Height = height;
@@ -56,8 +55,6 @@ ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
 
 	D3D11_SAMPLER_DESC sd = {};
 	sd.Filter = D3D11_FILTER_COMPARISON_MIN_MAG_LINEAR_MIP_POINT;
-	// Return 0 for points outside the light frustum
-	// to put them in shadow.
 	sd.AddressU = D3D11_TEXTURE_ADDRESS_BORDER;
 	sd.AddressV = D3D11_TEXTURE_ADDRESS_BORDER;
 	sd.AddressW = D3D11_TEXTURE_ADDRESS_BORDER;
@@ -124,7 +121,7 @@ XMMATRIX ShadowMap::GetLightViewMatrix()
 	XMVECTOR eye = XMLoadFloat3(&light->transform.position);
 	XMFLOAT3 forwardVec = light->GetForwardVector();
 	XMVECTOR direction = XMLoadFloat3(&forwardVec);
-	XMVECTOR focus = eye - (direction * 100.f);
+	XMVECTOR focus = eye + (direction * 100.f);
 
 	return XMMatrixLookAtLH(eye, direction, VMath::XMVectorUp());
 }
