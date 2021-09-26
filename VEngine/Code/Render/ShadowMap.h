@@ -6,6 +6,9 @@
 //REF: https://takinginitiative.wordpress.com/2011/05/15/directx10-tutorial-10-shadow-mapping/
 //REF: https://takinginitiative.wordpress.com/2011/05/25/directx10-tutorial-10-shadow-mapping-part-2/
 
+//Cool presentation on Silhouette maps. Old (2004), but nice to look at for ideas
+//REF: https://jankautz.com/courses/ShadowCourse/04-SilhouetteMap.pdf
+
 using namespace DirectX;
 
 struct ShadowMap
