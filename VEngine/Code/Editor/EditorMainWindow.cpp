@@ -32,8 +32,9 @@ EditorMainWindow::EditorMainWindow()
 	addDockWidget(Qt::DockWidgetArea::BottomDockWidgetArea, logDock);
 	addDockWidget(Qt::DockWidgetArea::TopDockWidgetArea, toolbarDock);
 
-	addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, systemDock);
-	tabifyDockWidget(systemDock, worldDock);
+	addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, worldDock);
+	tabifyDockWidget(worldDock, systemDock);
+	worldDock->raise(); //raise() is essentially a getFocus() call 
 
 	setWindowState(Qt::WindowMaximized);
 	setWindowTitle("VEngine 2.0 | Vagrant Tactics");
