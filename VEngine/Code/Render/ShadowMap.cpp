@@ -92,18 +92,15 @@ XMMATRIX ShadowMap::GetLightPerspectiveMatrix()
 		return XMMatrixIdentity();
 	}
 
-	//Radius needs to be big otherwise the orthomatrix sort of wraps underneath and over the world
-	float radius = 50.f;
-
 	auto light = DirectionalLightComponent::system.components[0];
 	XMFLOAT3 center = XMFLOAT3(0.f, 0.f, 0.f);
 
-	float l = center.x - radius;
-	float b = center.y - radius;
-	float n = center.z - radius;
-	float r = center.x + radius;
-	float t = center.y + radius;
-	float f = center.z + radius;
+	float l = center.x - levelRadius;
+	float b = center.y - levelRadius;
+	float n = center.z - levelRadius;
+	float r = center.x + levelRadius;
+	float t = center.y + levelRadius;
+	float f = center.z + levelRadius;
 
 	XMMATRIX P = XMMatrixOrthographicOffCenterLH(l, r, b, t, n, f);
 	return P;
@@ -119,7 +116,7 @@ XMMATRIX ShadowMap::GetLightViewMatrix()
 	auto light = DirectionalLightComponent::system.components[0];
 
 	XMVECTOR backVec = -XMVector3Normalize(light->transform.world.r[2]);
-	XMVECTOR eye = XMVectorSet(0.f, 0.f, 0.f, 1.f) + (backVec * 50.f);
+	XMVECTOR eye = XMVectorSet(0.f, 0.f, 0.f, 1.f) + (backVec * levelRadius);
 
 	return XMMatrixLookAtLH(eye, XMVectorSet(0.f, 0.f, 0.f, 1.f), VMath::XMVectorUp());
 }
