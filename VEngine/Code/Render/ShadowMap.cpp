@@ -96,7 +96,7 @@ XMMATRIX ShadowMap::GetLightPerspectiveMatrix()
 	float radius = 50.f;
 
 	auto light = DirectionalLightComponent::system.components[0];
-	XMFLOAT3 center = light->transform.position;
+	XMFLOAT3 center = XMFLOAT3(0.f, 0.f, 0.f);
 
 	float l = center.x - radius;
 	float b = center.y - radius;
@@ -118,12 +118,10 @@ XMMATRIX ShadowMap::GetLightViewMatrix()
 
 	auto light = DirectionalLightComponent::system.components[0];
 
-	XMVECTOR eye = XMLoadFloat3(&light->transform.position);
-	XMFLOAT3 forwardVec = light->GetForwardVector();
-	XMVECTOR direction = XMLoadFloat3(&forwardVec);
-	XMVECTOR focus = eye + (direction * 100.f);
+	XMVECTOR backVec = -XMVector3Normalize(light->transform.world.r[2]);
+	XMVECTOR eye = XMVectorSet(0.f, 0.f, 0.f, 1.f) + (backVec * 50.f);
 
-	return XMMatrixLookAtLH(eye, direction, VMath::XMVectorUp());
+	return XMMatrixLookAtLH(eye, XMVectorSet(0.f, 0.f, 0.f, 1.f), VMath::XMVectorUp());
 }
 
 XMMATRIX ShadowMap::GetLightTextureMatrix()

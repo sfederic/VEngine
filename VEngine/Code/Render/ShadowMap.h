@@ -11,6 +11,7 @@
 
 using namespace DirectX;
 
+//All this is stolen from Luna's book
 struct ShadowMap
 {
 	int width;
