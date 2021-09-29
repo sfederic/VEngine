@@ -149,6 +149,7 @@
     <ClCompile Include="Code\Actors\EntranceTrigger.cpp" />
     <ClCompile Include="Code\DebugActors\DebugCamera.cpp" />
     <ClCompile Include="Code\Render\ShadowMap.cpp" />
+    <ClCompile Include="Code\Components\DialogueComponent.cpp" />
     <ClInclude Include="Code\Components\BoxTriggerComponent.h" />
     <ClInclude Include="Code\Animation\AnimationStructures.h" />
     <ClInclude Include="Code\Actors\Actor.h" />
@@ -291,6 +292,7 @@
     <ClInclude Include="Code\Actors\EntranceTrigger.h" />
     <ClInclude Include="Code\DebugActors\DebugCamera.h" />
     <ClInclude Include="Code\Render\ShadowMap.h" />
+    <ClInclude Include="Code\Components\DialogueComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

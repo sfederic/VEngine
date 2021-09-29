@@ -272,6 +272,9 @@
     <ClCompile Include="Code\Render\ShadowMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Components\DialogueComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -476,6 +479,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\ShadowMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Components\DialogueComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
