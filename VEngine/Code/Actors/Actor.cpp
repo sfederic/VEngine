@@ -2,6 +2,7 @@
 #include "Actors/IActorSystem.h"
 #include "Components/SpatialComponent.h"
 #include "World.h"
+#include "Camera.h"
 
 Actor::Actor()
 {
@@ -52,6 +53,17 @@ XMVECTOR Actor::GetPositionVector()
 {
 	XMFLOAT3 pos = GetPosition();
 	return XMLoadFloat3(&pos);
+}
+
+//This is mainly used for Widgets rendering to screen-space.
+//Because the W component is needed as-is, there's no Float3 function for this yet.
+XMVECTOR Actor::GetHomogeneousPositionVector()
+{
+	XMMATRIX view = activeCamera->GetViewMatrix();
+	XMMATRIX proj = activeCamera->proj;
+	XMMATRIX mvp = rootComponent->GetWorldMatrix() * view * proj;
+
+	return mvp.r[3];
 }
 
 XMFLOAT3 Actor::GetScale()

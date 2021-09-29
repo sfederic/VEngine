@@ -31,6 +31,7 @@ struct Actor
 	XMMATRIX GetTransformMatrix();
 	XMFLOAT3 GetPosition();
 	XMVECTOR GetPositionVector();
+	XMVECTOR GetHomogeneousPositionVector();
 	XMFLOAT3 GetScale();
 	XMVECTOR GetScaleVector();
 	XMFLOAT4 GetRotation();
