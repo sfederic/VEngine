@@ -2,12 +2,12 @@
 #include "Material.h"
 #include "Camera.h"
 
-void ShaderMatrices::Create(float aspectRatio)
+void ShaderMatrices::Create()
 {
 	model = XMMatrixIdentity();
 	view = XMMatrixIdentity();
 	texMatrix = XMMatrixIdentity();
-	proj = activeCamera->proj;
+	proj = activeCamera->GetProjectionMatrix();
 
 	MakeModelViewProjectionMatrix();
 }

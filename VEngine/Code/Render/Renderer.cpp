@@ -279,8 +279,7 @@ void Renderer::CreateQueries()
 void Renderer::CreateMainConstantBuffers()
 {
 	//Shader matrix constant buffer
-	shaderMatrices.Create(GetAspectRatio());
-	editorCamera.proj = shaderMatrices.proj;
+	shaderMatrices.Create();
 
 	cbMatrices = RenderUtils::CreateDefaultBuffer(sizeof(shaderMatrices), D3D11_BIND_CONSTANT_BUFFER, &shaderMatrices);
 	assert(cbMatrices);
@@ -839,8 +838,7 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 
 	uiSystem.Init((void*)swapchain);
 
-	shaderMatrices.Create(GetAspectRatio());
-	activeCamera->proj = shaderMatrices.proj;
+	shaderMatrices.Create();
 }
 
 void Renderer::SetRenderPipelineStates(MeshComponent* mesh)

@@ -29,7 +29,7 @@ void TransformGizmo::Tick()
     //Setup camera matrices
     XMFLOAT4X4 view, proj, actorMatrix;
     XMStoreFloat4x4(&view, activeCamera->GetViewMatrix());
-    XMStoreFloat4x4(&proj, activeCamera->proj);
+    XMStoreFloat4x4(&proj, activeCamera->GetProjectionMatrix());
 
 
     //Toggle and draw grid

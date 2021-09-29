@@ -60,7 +60,7 @@ XMVECTOR Actor::GetPositionVector()
 XMVECTOR Actor::GetHomogeneousPositionVector()
 {
 	XMMATRIX view = activeCamera->GetViewMatrix();
-	XMMATRIX proj = activeCamera->proj;
+	XMMATRIX proj = activeCamera->GetProjectionMatrix();
 	XMMATRIX mvp = rootComponent->GetWorldMatrix() * view * proj;
 
 	return mvp.r[3];

@@ -13,13 +13,13 @@ struct CameraComponent : SpatialComponent
 {
 	COMPONENT_SYSTEM(CameraComponent)
 
-	XMMATRIX proj;
 	XMVECTOR focusPoint;
 	Actor* targetActor = nullptr;
 	bool editorCamera = false;
 
 	CameraComponent(XMFLOAT3 startPos, bool isEditorCamera);
 	XMMATRIX GetViewMatrix();
+	XMMATRIX GetProjectionMatrix();
 	void Pitch(float angle);
 	void RotateY(float angle);
 	void MouseMove(int x, int y);

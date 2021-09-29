@@ -205,8 +205,10 @@ bool RaycastFromScreen(Ray& ray)
 
 	CameraComponent* camera = activeCamera;
 
-	const float vx = (2.f * sx / renderer.GetViewportWidth() - 1.0f) / camera->proj.r[0].m128_f32[0];
-	const float vy = (-2.f * sy / renderer.GetViewportHeight() + 1.0f) / camera->proj.r[1].m128_f32[1];
+	XMMATRIX proj = camera->GetProjectionMatrix();
+
+	const float vx = (2.f * sx / renderer.GetViewportWidth() - 1.0f) / proj.r[0].m128_f32[0];
+	const float vy = (-2.f * sy / renderer.GetViewportHeight() + 1.0f) / proj.r[1].m128_f32[1];
 
 	ray.origin = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	ray.direction = XMVectorSet(vx, vy, 1.f, 0.f);

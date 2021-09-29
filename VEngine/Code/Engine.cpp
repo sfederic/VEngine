@@ -27,6 +27,8 @@ void Engine::Init(int argc, char* argv[])
 
 	editor->Init(argc, argv);
 
+	activeCamera = &editorCamera;
+
 	renderer.Init(editor->windowHwnd, editor->viewportWidth, editor->viewportHeight);
 	RenderUtils::defaultSampler = RenderUtils::CreateSampler();
 
@@ -35,8 +37,6 @@ void Engine::Init(int argc, char* argv[])
 	uiSystem.Init((void*)renderer.swapchain);
 	debugMenu.Init();
 
-	activeCamera = &editorCamera;
-	
 	world.Init();
 	editor->UpdateWorldList();
 }

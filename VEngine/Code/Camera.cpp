@@ -16,8 +16,6 @@ CameraComponent::CameraComponent(XMFLOAT3 startPos, bool isEditorCamera)
 {
 	focusPoint = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 
-	proj = XMMatrixPerspectiveFovLH(XM_PI / 3, renderer.GetAspectRatio(), 0.01f, 1000.f);
-
 	transform.position = startPos;
 	UpdateTransform();
 
@@ -70,6 +68,13 @@ XMMATRIX CameraComponent::GetViewMatrix()
 	}
 
 	return view;
+}
+
+XMMATRIX CameraComponent::GetProjectionMatrix()
+{
+	//GetApsectRatio() can change with ResizeBuffer() calls, that's why this getter needs to exist.
+	XMMATRIX proj = XMMatrixPerspectiveFovLH(XM_PI / 3, renderer.GetAspectRatio(), 0.01f, 1000.f);
+	return proj;
 }
 
 void CameraComponent::Pitch(float angle)
