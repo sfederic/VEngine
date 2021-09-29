@@ -5,6 +5,7 @@
 
 Actor::Actor()
 {
+	assert(rootComponent && "No root component set");
 }
 
 XMMATRIX Actor::GetWorldMatrix()
