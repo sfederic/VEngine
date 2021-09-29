@@ -18,14 +18,13 @@ using namespace DirectX;
 class ID3D11ShaderResourceView;
 
 //Base widget class for in-game UI. Gotta figure out whether to use this or a small Direct2d implementation
-class Widget
+struct Widget
 {
-public:
 	virtual void Tick(float deltaTime);
 	virtual void Start();
-
-	//TODO: when the game needs 3D widgets above npcs and actors, come back here.
-	void MapToScreenSpace(XMVECTOR pos);
+	void AddToViewport();
+	void RemoveFromViewport();
+	void MapToScreenSpace();
 
 	ComPtr<ID3D11ShaderResourceView> CreateTexture(const std::wstring& filename);
 
@@ -34,6 +33,8 @@ public:
 	void Image(const std::wstring& filename, float x, float y);
 
 	DirectX::SpriteBatch* spriteBatch;
+
+	XMVECTOR pos;
 
 	std::unordered_map<std::wstring, ID3D11ShaderResourceView*> texturesMap;
 

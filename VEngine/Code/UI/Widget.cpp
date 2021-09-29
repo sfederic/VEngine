@@ -7,9 +7,7 @@
 
 void Widget::Tick(float deltaTime)
 {
-	Text(L"Hello baby", { 0,0,200,200 });
-	Button(L"button", { 200, 200, 300, 300 });
-	Image(L"penguin.png", 200, 200);
+	MapToScreenSpace();
 }
 
 void Widget::Start()
@@ -17,9 +15,19 @@ void Widget::Start()
 	spriteBatch = new DirectX::SpriteBatch(renderer.context);
 }
 
-void Widget::MapToScreenSpace(XMVECTOR pos)
+void Widget::AddToViewport()
 {
-	//What you'll need to do here it take the actor's position after it's been multiplied 
+	uiSystem.AddWidget(this);
+}
+
+void Widget::RemoveFromViewport()
+{
+	uiSystem.RemoveWidget(this);
+}
+
+void Widget::MapToScreenSpace()
+{
+	//What you need to do here it take the actor's position after it's been multiplied 
 	//by the MVP matrix on the CPU side of things, divide it by the W component and multiply it out by the viewport.
 
 	//REF:http://www.windows-tech.info/5/a80747e145dd9062.php

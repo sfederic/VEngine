@@ -1,9 +1,15 @@
 #pragma once
 #include <d2d1_1.h>
 #include <dwrite_1.h>
+#include <vector>
+
+struct Widget;
 
 struct UISystem
 {
+	//In-game wigdets
+	std::vector<Widget*> widgets;
+
 	ID2D1Factory* d2dFactory;
 	ID2D1RenderTarget* d2dRenderTarget;
 	IDWriteFactory1* writeFactory;
@@ -13,6 +19,9 @@ struct UISystem
 
 	void Init(void* swapchain);
 	void BeginDraw();
+	void AddWidget(Widget* widgetToAdd);
+	void RemoveWidget(Widget* widgetToRemove);
+	void DrawAllWidgets(double deltaTime);
 	void EndDraw();
 	void Cleanup();
 };

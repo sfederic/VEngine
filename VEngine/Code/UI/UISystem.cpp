@@ -2,6 +2,8 @@
 #include <cassert>
 #include <dxgi1_6.h>
 #include "Debug.h"
+#include "UI/Widget.h"
+#include "Editor/Editor.h"
 
 UISystem uiSystem;
 
@@ -42,6 +44,39 @@ void UISystem::Init(void* swapchain)
 void UISystem::BeginDraw()
 {
 	d2dRenderTarget->BeginDraw();
+}
+
+void UISystem::AddWidget(Widget* widgetToAdd)
+{
+	for (auto widget : widgets)
+	{
+		if (widget == widgetToAdd)
+		{
+			editor->Log("Widget already in viewport");
+			return;
+		}
+	}
+
+	widgets.push_back(widgetToAdd);
+}
+
+void UISystem::RemoveWidget(Widget* widgetToRemove)
+{
+	for (int i = 0; i < widgets.size(); i++)
+	{
+		if (widgets[i] == widgetToRemove)
+		{
+			widgets.erase(widgets.begin() + i, widgets.end());
+		}
+	}
+}
+
+void UISystem::DrawAllWidgets(double deltaTime)
+{
+	for (auto widget : widgets)
+	{
+		widget->Tick(deltaTime);
+	}
 }
 
 void UISystem::EndDraw()
