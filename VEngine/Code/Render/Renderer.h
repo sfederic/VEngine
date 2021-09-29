@@ -63,6 +63,7 @@ public:
 	std::vector<DXGI_ADAPTER_DESC1> gpuAdaptersDesc;
 
 	bool drawBoundingBoxes = false;
+	bool drawTriggers = true;
 	bool drawAllAsWireframe = false;
 
 	void Init(void* window, int viewportWidth, int viewportHeight);

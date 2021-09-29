@@ -78,6 +78,15 @@ void Renderer::Tick()
 		}
 	}
 
+	//RENDER TRIGGERS HOTKEY
+	if (Input::GetAsyncKey(Keys::Ctrl))
+	{
+		if (Input::GetKeyUp(Keys::T))
+		{
+			drawTriggers = !drawTriggers;
+		}
+	}
+
 	//DRAW ALL AS WIREFRAME HOTKEY
 	if (Input::GetKeyUp(Keys::F2))
 	{
@@ -489,8 +498,22 @@ void Renderer::RenderBounds()
 				context->Draw(debugBox.boxMesh->data->vertices->size(), 0);
 			}
 		}
+	}
 
-		//DRAW TRIGGER BOUNDS
+	//DRAW TRIGGER BOUNDS
+	if(drawTriggers)
+	{
+		context->RSSetState(rastStateWireframe);
+
+		ShaderItem* shader = shaderSystem.FindShader(L"SolidColour.hlsl");
+		context->VSSetShader(shader->vertexShader, nullptr, 0);
+		context->PSSetShader(shader->pixelShader, nullptr, 0);
+
+		context->IASetVertexBuffers(0, 1, &debugBox.boxMesh->pso->vertexBuffer->data, &stride, &offset);
+
+		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+
+		shaderMatrices.view = activeCamera->GetViewMatrix();
 
 		//Set trigger wireframe material colour
 		materialShaderData.ambient = XMFLOAT4(0.1f, 0.75f, 0.1f, 1.0f);
