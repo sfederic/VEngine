@@ -5,7 +5,7 @@ Visual Studio 2019 16.11.3
 
 ## Packages
 
-DirectXTK ver. 2021.8.2.1 - https://github.com/microsoft/DirectXTK
+DirectXTK (directxtk_desktop_win10) ver. 2021.8.2.1 - https://github.com/microsoft/DirectXTK
 
 ## Extensions
 
