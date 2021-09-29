@@ -4,7 +4,7 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # Engine-specific folders
-VEngine/FbxSdk/
+VEngine/Code/FbxSdk/
  
 # User-specific files
 *.rsuser
