@@ -17,6 +17,6 @@ FBXSDK ver. 2020.1 | Throw FBXSDK headers/source into Code/FbxSdk - https://www.
 
 Qt ver. 5.15.0 - https://download.qt.io/official_releases/qt/5.15/
 
-The ImGui libs are already included in the repo
-Dear ImGui - https://github.com/ocornut/imgui
+The ImGui libs are already included in the repo\
+Dear ImGui - https://github.com/ocornut/imgui\
 ImGuizmo - https://github.com/CedricGuillemet/ImGuizmo
