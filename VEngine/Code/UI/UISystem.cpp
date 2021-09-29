@@ -52,7 +52,6 @@ void UISystem::AddWidget(Widget* widgetToAdd)
 	{
 		if (widget == widgetToAdd)
 		{
-			editor->Log("Widget already in viewport");
 			return;
 		}
 	}
@@ -69,6 +68,11 @@ void UISystem::RemoveWidget(Widget* widgetToRemove)
 			widgets.erase(widgets.begin() + i, widgets.end());
 		}
 	}
+}
+
+void UISystem::RemoveAllWidgets()
+{
+	widgets.clear();
 }
 
 void UISystem::DrawAllWidgets(double deltaTime)

@@ -21,6 +21,10 @@ struct UISystem
 	void BeginDraw();
 	void AddWidget(Widget* widgetToAdd);
 	void RemoveWidget(Widget* widgetToRemove);
+
+	//Called on gameplay end
+	void RemoveAllWidgets();
+
 	void DrawAllWidgets(double deltaTime);
 	void EndDraw();
 	void Cleanup();

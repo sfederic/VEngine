@@ -6,6 +6,7 @@
 #include "Camera.h"
 #include "Actors/Player.h"
 #include "World.h"
+#include "UI/UISystem.h"
 
 double ticks;
 double deltaTime = 0.0;
@@ -115,6 +116,8 @@ void Core::StartGame()
 
 void Core::EndGame()
 {
+	uiSystem.RemoveAllWidgets();
+
 	activeCamera = &editorCamera;
 }
 
