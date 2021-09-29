@@ -15,4 +15,5 @@ struct BoxTriggerComponent : SpatialComponent
 	virtual Properties GetProps() override;
 	virtual void Create() override;
 	bool Contains(XMVECTOR point);
+	bool ContainsTarget();
 };

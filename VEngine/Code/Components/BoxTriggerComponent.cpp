@@ -3,7 +3,6 @@
 
 BoxTriggerComponent::BoxTriggerComponent()
 {
-
 }
 
 void BoxTriggerComponent::Tick(double deltaTime)
@@ -31,6 +30,17 @@ bool BoxTriggerComponent::Contains(XMVECTOR point)
 	if (boundingBox.Contains(point))
 	{
 		return true;
+	}
+
+	return false;
+}
+
+bool BoxTriggerComponent::ContainsTarget()
+{
+	if (target)
+	{
+		XMVECTOR targetPos = target->GetPositionVector();
+		return Contains(targetPos);
 	}
 
 	return false;
