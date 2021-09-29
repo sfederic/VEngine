@@ -86,6 +86,7 @@ void Engine::Render(double deltaTime)
 	renderer.Render();
 
 	uiSystem.BeginDraw();
+	uiSystem.DrawAllWidgets(deltaTime);
 	console.Tick();
 	debugMenu.Tick(deltaTime);
 	uiSystem.EndDraw();
