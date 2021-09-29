@@ -7,6 +7,7 @@
 #include "GameUtils.h"
 #include "Actors/Player.h"
 #include "VMath.h"
+#include "Render/Renderer.h"
 
 CameraComponent editorCamera(XMFLOAT3(0.f, 2.f, -5.f), true);
 CameraComponent* activeCamera;
@@ -14,6 +15,8 @@ CameraComponent* activeCamera;
 CameraComponent::CameraComponent(XMFLOAT3 startPos, bool isEditorCamera)
 {
 	focusPoint = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+
+	proj = XMMatrixPerspectiveFovLH(XM_PI / 3, renderer.GetAspectRatio(), 0.01f, 1000.f);
 
 	transform.position = startPos;
 	UpdateTransform();

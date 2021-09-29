@@ -1,14 +1,13 @@
 #include "RenderTypes.h"
 #include "Material.h"
+#include "Camera.h"
 
 void ShaderMatrices::Create(float aspectRatio)
 {
 	model = XMMatrixIdentity();
 	view = XMMatrixIdentity();
 	texMatrix = XMMatrixIdentity();
-
-	//TODO: this shouldn't be here. This needs to be in CameraComponent
-	proj = XMMatrixPerspectiveFovLH(XM_PI / 3, aspectRatio, 0.01f, 1000.f);
+	proj = activeCamera->proj;
 
 	MakeModelViewProjectionMatrix();
 }
