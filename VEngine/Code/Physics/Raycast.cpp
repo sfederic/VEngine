@@ -7,6 +7,7 @@
 #include "Actors/IActorSystem.h"
 #include "Actors/Actor.h"
 #include "Components/MeshComponent.h"
+#include "Components/BoxTriggerComponent.h"
 #include "World.h"
 
 #undef max
@@ -60,6 +61,12 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 		//Iterate over actor's spatial components
 		for (SpatialComponent* spatialComponent : actor->GetComponentsOfType<SpatialComponent>())
 		{
+			//Skip over triggers when not in editor
+			if (dynamic_cast<BoxTriggerComponent*>(spatialComponent) && !fromScreen)
+			{
+				continue;
+			}
+
 			BoundingOrientedBox boundingBox = spatialComponent->boundingBox;
 
 			boundingBox.Center = spatialComponent->transform.position;
