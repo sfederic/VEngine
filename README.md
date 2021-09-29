@@ -11,7 +11,7 @@ DirectXTK ver. 2021.8.2.1 - https://github.com/microsoft/DirectXTK
 
 Qt VS Tools ver. 2.7.1.20 - https://marketplace.visualstudio.com/items?itemName=TheQtCompany.QtVisualStudioTools-19123
 
-## Other Third party libs:
+## Third party libs:
 
 FBXSDK ver. 2020.1 | Throw FBXSDK headers/source into Code/FbxSdk - https://www.autodesk.com/developer-network/platform-technologies/fbx-sdk-2020-1
 
