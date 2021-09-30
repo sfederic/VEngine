@@ -73,7 +73,7 @@ XMMATRIX CameraComponent::GetViewMatrix()
 XMMATRIX CameraComponent::GetProjectionMatrix()
 {
 	//GetApsectRatio() can change with ResizeBuffer() calls, that's why this getter needs to exist.
-	XMMATRIX proj = XMMatrixPerspectiveFovLH(XM_PI / 3, renderer.GetAspectRatio(), 0.01f, 1000.f);
+	XMMATRIX proj = XMMatrixPerspectiveFovLH(FOV, renderer.GetAspectRatio(), nearZ, farZ);
 	return proj;
 }
 

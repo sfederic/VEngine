@@ -17,6 +17,10 @@ struct CameraComponent : SpatialComponent
 	Actor* targetActor = nullptr;
 	bool editorCamera = false;
 
+	float FOV = XM_PI / 3.f;
+	float nearZ = 0.01f;
+	float farZ = 1000.f;
+
 	CameraComponent(XMFLOAT3 startPos, bool isEditorCamera);
 	XMMATRIX GetViewMatrix();
 	XMMATRIX GetProjectionMatrix();
