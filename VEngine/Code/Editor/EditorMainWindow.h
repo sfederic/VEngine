@@ -10,6 +10,7 @@ struct EditorMainWindow : public QMainWindow
 	struct SystemDock* systemDock;
 	struct ToolbarDock* toolbarDock;
 	struct LogDock* logDock;
+	struct DialogueDock* dialogueDock;
 
 	bool fullScreenOn = false;
 

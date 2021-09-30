@@ -278,6 +278,9 @@
     <ClCompile Include="Code\Actors\InteractTrigger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Editor\DialogueDock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -488,6 +491,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\InteractTrigger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Editor\DialogueDock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

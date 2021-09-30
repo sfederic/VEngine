@@ -12,6 +12,7 @@
 #include "ToolbarDock.h"
 #include "LogDock.h"
 #include "SystemDock.h"
+#include "DialogueDock.h"
 
 EditorMainWindow::EditorMainWindow()
 {
@@ -22,19 +23,24 @@ EditorMainWindow::EditorMainWindow()
 	worldDock = new WorldDock();
 	systemDock = new SystemDock();
 	toolbarDock = new ToolbarDock();
+	dialogueDock = new DialogueDock();
 
 	//Set dock tabs up top
 	setTabPosition(Qt::DockWidgetArea::AllDockWidgetAreas, QTabWidget::TabPosition::North);
 
 	setCentralWidget(renderView);
 	addDockWidget(Qt::DockWidgetArea::RightDockWidgetArea, propertiesDock);
+
 	addDockWidget(Qt::DockWidgetArea::BottomDockWidgetArea, assetDock);
+	tabifyDockWidget(assetDock, dialogueDock);
+	//assetDock->raise();
+
 	addDockWidget(Qt::DockWidgetArea::BottomDockWidgetArea, logDock);
 	addDockWidget(Qt::DockWidgetArea::TopDockWidgetArea, toolbarDock);
 
 	addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, worldDock);
 	tabifyDockWidget(worldDock, systemDock);
-	worldDock->raise(); //raise() is essentially a getFocus() call 
+	worldDock->raise();
 
 	setWindowState(Qt::WindowMaximized);
 	setWindowTitle("VEngine 2.0 | Vagrant Tactics");
