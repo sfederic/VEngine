@@ -4,6 +4,15 @@
 #include <qpushbutton.h>
 #include <qlayout.h>
 #include <qfiledialog.h>
+#include <qcombobox.h>
+#include "World.h"
+#include "Actors/Actor.h"
+
+//columns for QTreeWidget
+const int lineColumn = 0;
+const int textColumn = 1;
+const int actorColumn = 2;
+const int intuitionColumn = 3;
 
 DialogueDock::DialogueDock() : QDockWidget("Dialogue")
 {
@@ -52,20 +61,36 @@ DialogueDock::DialogueDock() : QDockWidget("Dialogue")
 	setWidget(dialogueWidget);
 }
 
-void DialogueDock::AddEmptyDialogueLine()
+void DialogueDock::PopulateTreeItem(QTreeWidgetItem* item)
 {
-	auto selectedLine = dialogueTree->currentItem();
-
-	auto item = new QTreeWidgetItem(dialogueTree, selectedLine);
 	int index = dialogueTree->indexOfTopLevelItem(item);
 	item->setText(0, QString::number(index));
 	item->setFlags(item->flags() | Qt::ItemIsEditable);
+
+	//Grab all actors in world and add their names to a combobox
+	auto actorComboBox = new QComboBox(this);
+	auto actorsInWorld = world.GetAllActorsInWorld();
+	for (auto actor : actorsInWorld)
+	{
+		QString actorName = QString::fromStdString(actor->name);
+		actorComboBox->addItem(actorName);
+	}
+
+	dialogueTree->setItemWidget(item, actorColumn, actorComboBox);
+}
+
+void DialogueDock::AddEmptyDialogueLine()
+{
+	auto selectedLine = dialogueTree->currentItem();
+	auto item = new QTreeWidgetItem(dialogueTree, selectedLine);
+	PopulateTreeItem(item);
 }
 
 void DialogueDock::AddEmptyBranchDialogueLine()
 {
 	auto selectedLine = dialogueTree->currentItem();
-	auto branchItem = new QTreeWidgetItem(selectedLine);
+	auto item = new QTreeWidgetItem(selectedLine);
+	PopulateTreeItem(item);
 }
 
 void DialogueDock::DeleteLine()

@@ -2,6 +2,7 @@
 #include <qdockwidget.h>
 
 class QTreeWidget;
+class QTreeWidgetItem;
 
 //The current dialogue editor is lightly based off of Neverwinter Nights 2's editor.
 //REF:https://gdcvault.com/play/1013446/The-Neverwinter-Nights-2-Toolset
@@ -14,6 +15,9 @@ struct DialogueDock : public QDockWidget
 	QTreeWidget* dialogueTree;
 
 	DialogueDock();
+
+private:
+	void PopulateTreeItem(QTreeWidgetItem* item);
 	void AddEmptyDialogueLine();
 	void AddEmptyBranchDialogueLine();
 	void DeleteLine();
