@@ -75,6 +75,8 @@ void DialogueDock::DeleteLine()
 	dialogueTree->takeTopLevelItem(index);
 }
 
+//TODO: when you're saving dialogue, make sure the Intuition and Actor name fields correspond
+//to something that actually exists in-game/world.
 void DialogueDock::SaveDialogueToFile()
 {
 	QFileDialog saveDialog;
