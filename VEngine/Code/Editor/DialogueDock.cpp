@@ -10,18 +10,16 @@
 
 //columns for QTreeWidget
 const int lineColumn = 0;
-const int textColumn = 1;
-const int actorColumn = 2;
-const int intuitionColumn = 3;
+const int actorColumn = 1;
+const int intuitionColumn = 2;
+const int textColumn = 3;
 
 DialogueDock::DialogueDock() : QDockWidget("Dialogue")
 {
 	//TREE WIDGET
 	dialogueTree = new QTreeWidget(); 
 	dialogueTree->setColumnCount(4);
-	dialogueTree->setHeaderLabels({ "Line", "Text", "Actor", "Intuition" });
-	dialogueTree->setColumnWidth(0, 20);
-	dialogueTree->setColumnWidth(1, 750);
+	dialogueTree->setHeaderLabels({ "Line", "Actor", "Intuition", "Text"});
 
 
 	//BUTTONS
