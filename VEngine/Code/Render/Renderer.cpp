@@ -386,6 +386,11 @@ void Renderer::RenderMeshComponents()
 
 	for (auto mesh : MeshComponent::system.components)
 	{
+		if (!mesh->owner->active)
+		{
+			continue;
+		}
+
 		SetRenderPipelineStates(mesh);
 
 		//Set matrices

@@ -25,6 +25,8 @@ struct Actor
 
 	int index = -1;
 
+	bool active = true;
+
 	Actor();
 	XMMATRIX GetWorldMatrix();
 	void UpdateTransform(XMMATRIX parentWorld);
