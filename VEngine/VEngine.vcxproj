@@ -152,6 +152,7 @@
     <ClCompile Include="Code\Components\DialogueComponent.cpp" />
     <ClCompile Include="Code\Actors\InteractTrigger.cpp" />
     <ClCompile Include="Code\Editor\DialogueDock.cpp" />
+    <ClCompile Include="Code\Actors\NPC.cpp" />
     <ClInclude Include="Code\Components\BoxTriggerComponent.h" />
     <ClInclude Include="Code\Animation\AnimationStructures.h" />
     <ClInclude Include="Code\Actors\Actor.h" />
@@ -297,6 +298,7 @@
     <ClInclude Include="Code\Components\DialogueComponent.h" />
     <ClInclude Include="Code\Actors\InteractTrigger.h" />
     <ClInclude Include="Code\Editor\DialogueDock.h" />
+    <ClInclude Include="Code\Actors\NPC.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

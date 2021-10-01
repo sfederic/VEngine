@@ -28,7 +28,6 @@ void Player::Tick(double deltaTime)
 	const float moveSpeed = 7.5f;
 	SetPosition(VMath::VectorConstantLerp(GetPositionVector(), nextPos, deltaTime, moveSpeed));
 
-	//if (VMath::VecEqual(GetPositionVector(), nextPos))
 	if (XMVector4Equal(GetPositionVector(), nextPos) && XMQuaternionEqual(GetRotationVector(), nextRot))
 	{
 		XMVECTOR previousPos = nextPos;
@@ -63,7 +62,6 @@ void Player::Tick(double deltaTime)
 	}
 
 	const float rotSpeed = 5.f;
-	//currentRot = XMQuaternionSlerp(currentRot, nextRot, deltaTime * rotSpeed);
 	SetRotation(VMath::QuatConstantLerp(GetRotationVector(), nextRot, deltaTime, rotSpeed));
 
 	if (XMQuaternionEqual(GetRotationVector(), nextRot) && XMVector4Equal(GetPositionVector(), nextPos))
