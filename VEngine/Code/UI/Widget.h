@@ -35,6 +35,7 @@ struct Widget
 	DirectX::SpriteBatch* spriteBatch;
 
 	XMVECTOR pos;
+	std::wstring displayText;
 
 	std::unordered_map<std::wstring, ID3D11ShaderResourceView*> texturesMap;
 

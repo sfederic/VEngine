@@ -38,7 +38,7 @@ void Widget::MapToScreenSpace()
 	int sx = ((f1 * 0.5f) + 0.5) * renderer.viewport.Width;
 	int sy = ((f2 * -0.5f) + 0.5) * renderer.viewport.Height;
 
-	Text(L"Hello Game", { (float)sx, (float)sy, (float)sx + 150, (float)sy + 150 });
+	Text(displayText, { (float)sx, (float)sy, (float)sx + 150, (float)sy + 150 });
 }
 
 ComPtr<ID3D11ShaderResourceView> Widget::CreateTexture(const std::wstring& filename)

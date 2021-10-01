@@ -2,6 +2,7 @@
 #include "Components/BoxTriggerComponent.h"
 #include "GameUtils.h"
 #include "UI/Widget.h"
+#include "VString.h"
 
 InteractTrigger::InteractTrigger()
 {
@@ -16,6 +17,7 @@ void InteractTrigger::Start()
 	trigger->target = (Actor*)GameUtils::GetPlayer();
 
 	widget->pos = GetHomogeneousPositionVector();
+	widget->displayText = stows(interactText);
 }
 
 void InteractTrigger::Tick(double deltaTime)
