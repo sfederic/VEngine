@@ -117,10 +117,10 @@ void DialogueDock::SaveDialogueToFile()
 		auto intuitionText = (*it)->text(intuitionColumn);
 		auto text = (*it)->text(textColumn);
 
-		os << lineText.toStdString() << "\n";
-		os << actorText.toStdString() << "\n";
-		os << intuitionText.toStdString() << "\n";
-		os << text.toStdString() << "\n";
+		os << "Line\n" << lineText.toStdString() << "\n";
+		os << "Actor\n" << actorText.toStdString() << "\n";
+		os << "Intuition\n" << intuitionText.toStdString() << "\n";
+		os << "Text\n" << text.toStdString() << "\n";
 
 		it++;
 	}
