@@ -109,18 +109,25 @@ void DialogueDock::SaveDialogueToFile()
 	std::ofstream os;
 	os.open(saveName.toStdString(), std::ios_base::out);
 
+	int dialogueTreeIndex = 0;
+
 	QTreeWidgetItemIterator it(dialogueTree);
 	while (*it) 
 	{
 		auto lineText = (*it)->text(lineColumn);
-		auto actorText = (*it)->text(actorColumn);
+
+		//Have to do a bit more to get the text from the combobox
+		QTreeWidgetItem* item = dialogueTree->topLevelItem(dialogueTreeIndex);
+		dialogueTreeIndex++;
+		QComboBox* actorComboBox = (QComboBox*)dialogueTree->itemWidget(item, actorColumn);
+
 		auto intuitionText = (*it)->text(intuitionColumn);
 		auto text = (*it)->text(textColumn);
 
-		os << "Line\n" << lineText.toStdString() << "\n";
-		os << "Actor\n" << actorText.toStdString() << "\n";
-		os << "Intuition\n" << intuitionText.toStdString() << "\n";
-		os << "Text\n" << text.toStdString() << "\n";
+		os << lineText.toStdString() << "\n";
+		os << actorComboBox->currentText().toStdString() << "\n";
+		os << intuitionText.toStdString() << "\n";
+		os << text.toStdString() << "\n";
 
 		it++;
 	}
@@ -131,5 +138,56 @@ void DialogueDock::SaveDialogueToFile()
 void DialogueDock::LoadDialogueFile()
 {
 	QFileDialog loadDialog;
-	loadDialog.exec();
+	QString loadName = loadDialog.getOpenFileName(this, "Open Dialogue");
+
+	std::ifstream is;
+	is.open(loadName.toStdString(), std::ios_base::in);
+
+	dialogueTree->clear();
+
+	while (!is.eof())
+	{
+		//Get all text
+		std::string lineText;
+		std::string actorText;
+		std::string intuitionText;
+		std::string text;
+
+		char line[1024];
+
+		is.getline(line, 1024); 
+		lineText.assign(line);
+		if (lineText.empty())
+		{
+			break;
+		}
+		
+		is.getline(line, 1024); 
+		actorText.assign(line);
+
+		is.getline(line, 1024);
+		intuitionText.assign(line);
+
+		is.getline(line, 1024);
+		text.assign(line);
+
+		//populate widget items
+		auto item = new QTreeWidgetItem(dialogueTree);
+		PopulateTreeItem(item);
+
+		item->setText(lineColumn, QString::fromStdString(lineText));
+		item->setText(intuitionColumn, QString::fromStdString(intuitionText));
+		item->setText(textColumn, QString::fromStdString(text));
+
+		//Find the matching existing entry in the combobox and set it per the index
+		QComboBox* actorComboBox = (QComboBox*)dialogueTree->itemWidget(item, actorColumn);
+
+		//findText() returns -1 if nothing is found and will place an empty entry in the combobox.
+		//Have to be careful here on the findText() as well. QStrings work a bit funny with '\n' and '\r' I'm guessing.
+		QString actorStr = QString::fromStdString(actorText);
+		int foundComboEntryIndex = actorComboBox->findText(actorStr);
+		actorComboBox->setCurrentIndex(foundComboEntryIndex);
+	}
+
+	is.close();
 }

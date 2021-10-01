@@ -80,6 +80,8 @@ InteractTrigger
 1
 Extents
 1 1 1
+Interact Text
+Open Door
 Position
 15 1 3
 Rotation
@@ -108,12 +110,18 @@ SpotLightActor
 0
 Player
 1
+FOV
+1.0472
+Far Z
+1000
+Near Z
+0.01
 Position
 21.001 0.5 2.99621
 Rotation
-0 0.706984 0 -0.707229
+-0 -0.706984 -0 0.70723
 Scale
-0.999997 1 0.999997
+0.999992 1 0.999992
 Shader
 DefaultShader.hlsl
 Texture2D
