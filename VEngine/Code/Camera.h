@@ -33,7 +33,7 @@ struct CameraComponent : SpatialComponent
 	virtual void Tick(double deltaTime) override;
 	virtual void Create() override;
 	virtual Properties GetProps() override;
-	//void FrustumCullTest(ActorSystem& system);
+	void FrustumCull();
 };
 
 extern CameraComponent editorCamera;

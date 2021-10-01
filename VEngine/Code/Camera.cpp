@@ -8,6 +8,7 @@
 #include "Actors/Player.h"
 #include "VMath.h"
 #include "Render/Renderer.h"
+#include "World.h"
 
 CameraComponent editorCamera(XMFLOAT3(0.f, 2.f, -5.f), true);
 CameraComponent* activeCamera;
@@ -216,31 +217,32 @@ Properties CameraComponent::GetProps()
 	return props;
 }
 
-//void Camera::FrustumCullTest(ActorSystem& system)
-//{
-//	for (int i = 0; i < system.actors.size(); i++)
-//	{
-//		XMMATRIX invView = XMMatrixInverse(&XMMatrixDeterminant(view), view);
+void CameraComponent::FrustumCull()
+{
+	for (auto actor : world.GetAllActorsInWorld())
+	{
+		XMMATRIX cameraView = GetViewMatrix();
+		XMVECTOR cameraViewDet = XMMatrixDeterminant(cameraView);
+		XMMATRIX invView = XMMatrixInverse(&cameraViewDet, cameraView);
 
-//		XMMATRIX world = system.actors[i]->GetTransformationMatrix();
-//		XMMATRIX invWorld = XMMatrixInverse(&XMMatrixDeterminant(world), world);
+		XMMATRIX actorWorld = actor->GetWorldMatrix();
+		XMVECTOR actorWorldDet = XMMatrixDeterminant(actorWorld);
+		XMMATRIX invWorld = XMMatrixInverse(&actorWorldDet, actorWorld);
 
-//		XMMATRIX viewToLocal = XMMatrixMultiply(invView, invWorld);
+		XMMATRIX viewToLocal = XMMatrixMultiply(invView, invWorld);
 
-//		BoundingFrustum frustum, localSpaceFrustum;
-//		BoundingFrustum::CreateFromMatrix(frustum, proj);
-//		frustum.Transform(localSpaceFrustum, viewToLocal);
+		XMMATRIX proj = GetProjectionMatrix();
+		BoundingFrustum frustum, localSpaceFrustum;
+		BoundingFrustum::CreateFromMatrix(frustum, proj);
+		frustum.Transform(localSpaceFrustum, viewToLocal);
 
-//		system.boundingBox.Center = system.actors[i]->GetPositionFloat3();
-//		system.boundingBox.Extents = system.actors[i]->GetScale();
-
-//		if (localSpaceFrustum.Contains(system.boundingBox) == DirectX::DISJOINT)
-//		{
-//			system.actors[i]->bRender = false;
-//		}
-//		else
-//		{
-//			system.actors[i]->bRender = true;
-//		}
-//	}
-//}
+		if (localSpaceFrustum.Contains(actor->rootComponent->boundingBox) == DirectX::DISJOINT)
+		{
+			actor->active = false;
+		}
+		else
+		{
+			actor->active = true;
+		}
+	}
+}
