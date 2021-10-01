@@ -209,7 +209,11 @@ void CameraComponent::Create()
 
 Properties CameraComponent::GetProps()
 {
-	return Properties();
+	Properties props("Camera Component");
+	props.Add("FOV", &FOV);
+	props.Add("Near Z", &nearZ);
+	props.Add("Far Z", &farZ);
+	return props;
 }
 
 //void Camera::FrustumCullTest(ActorSystem& system)
