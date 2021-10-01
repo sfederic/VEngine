@@ -1,4 +1,5 @@
 #include "DialogueDock.h"
+#include <fstream>
 #include <qtreewidget.h>
 #include <qstandarditemmodel.h>
 #include <qpushbutton.h>
@@ -103,7 +104,28 @@ void DialogueDock::DeleteLine()
 void DialogueDock::SaveDialogueToFile()
 {
 	QFileDialog saveDialog;
-	saveDialog.getSaveFileName(this, "Save Dialogue", ".dialog");
+	QString saveName = saveDialog.getSaveFileName(this, "Save Dialogue", "Dialogues/", ".dialog");
+
+	std::ofstream os;
+	os.open(saveName.toStdString(), std::ios_base::out);
+
+	QTreeWidgetItemIterator it(dialogueTree);
+	while (*it) 
+	{
+		auto lineText = (*it)->text(lineColumn);
+		auto actorText = (*it)->text(actorColumn);
+		auto intuitionText = (*it)->text(intuitionColumn);
+		auto text = (*it)->text(textColumn);
+
+		os << lineText.toStdString() << "\n";
+		os << actorText.toStdString() << "\n";
+		os << intuitionText.toStdString() << "\n";
+		os << text.toStdString() << "\n";
+
+		it++;
+	}
+
+	os.close();
 }
 
 void DialogueDock::LoadDialogueFile()
