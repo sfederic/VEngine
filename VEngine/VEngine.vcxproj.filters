@@ -287,6 +287,12 @@
     <ClCompile Include="Code\DialogueStructures.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\DialogueInstance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Components\EmptyComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -506,6 +512,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\DialogueStructures.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\DialogueInstance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Components\EmptyComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
