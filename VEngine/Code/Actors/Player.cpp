@@ -3,9 +3,10 @@
 #include "Camera.h"
 #include "Input.h"
 #include "VMath.h"
-
 #include "Physics/Raycast.h"
+
 #include "Editor/Editor.h"
+#include "Actors/NPC.h"
 
 Player::Player()
 {
@@ -27,6 +28,22 @@ void Player::Tick(double deltaTime)
 {
 	const float moveSpeed = 7.5f;
 	SetPosition(VMath::VectorConstantLerp(GetPositionVector(), nextPos, deltaTime, moveSpeed));
+
+
+	if (Input::GetKeyUp(Keys::Down))
+	{
+		Ray ray;
+		ray.actorsToIgnore.push_back(this);
+		if (Raycast(ray, GetPositionVector(), GetForwardVectorV(), 1.f))
+		{
+			NPC* npc = (NPC*)ray.hitActor;
+			if (npc)
+			{
+				npc->TalkTo();
+			}
+		}
+	}
+
 
 	if (XMVector4Equal(GetPositionVector(), nextPos) && XMQuaternionEqual(GetRotationVector(), nextRot))
 	{

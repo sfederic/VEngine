@@ -111,6 +111,7 @@ void Core::StartGame()
 		}
 	}
 
+	world.StartAllComponents();
 	world.StartAllActors();
 }
 

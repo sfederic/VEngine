@@ -11,6 +11,7 @@ struct DialogueComponent : Component
 	Dialogue dialogue;
 
 	virtual void Tick(double deltaTime) override;
+	virtual void Start() override;
 	virtual void Create() override;
 	virtual Properties GetProps() override;
 };

@@ -4,9 +4,13 @@ void DialogueComponent::Tick(double deltaTime)
 {
 }
 
-void DialogueComponent::Create()
+void DialogueComponent::Start()
 {
     dialogue.LoadFromFile();
+}
+
+void DialogueComponent::Create()
+{
 }
 
 Properties DialogueComponent::GetProps()

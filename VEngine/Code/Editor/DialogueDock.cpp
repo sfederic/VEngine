@@ -182,7 +182,7 @@ void DialogueDock::LoadDialogueFile()
 		PopulateTreeItem(item);
 
 		item->setText(lineColumn, QString::fromStdString(lineText));
-		item->setText(lineColumn, QString::fromStdString(gotoText));
+		item->setText(gotoColumn, QString::fromStdString(gotoText));
 		item->setText(intuitionColumn, QString::fromStdString(intuitionText));
 		item->setText(textColumn, QString::fromStdString(text));
 

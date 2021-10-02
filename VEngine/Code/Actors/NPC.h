@@ -15,4 +15,5 @@ struct NPC : Actor
 	NPC();
 	virtual void Start() override;
 	virtual Properties GetProps() override;
+	void TalkTo();
 };
