@@ -12,7 +12,9 @@ class QTreeWidgetItem;
 //TODO: look into Qt's json approach if the simple text format isn't enough
 //https://doc.qt.io/qt-5/qtcore-serialization-savegame-example.html
 
-//Dock for consversation information
+//Dock for consversation information.
+//The dialogue files are set up linearly, the branching is based on 'goto' lines in the 
+//dialogue file where there is either a 'next' value or the value of the matching line number to jump to.
 struct DialogueDock : public QDockWidget
 {
 	QTreeWidget* dialogueTree;
