@@ -293,6 +293,9 @@
     <ClCompile Include="Code\Components\EmptyComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Components\WidgetComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -518,6 +521,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Components\EmptyComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Components\WidgetComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
