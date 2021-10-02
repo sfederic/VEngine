@@ -60,6 +60,14 @@ struct ComponentSystem : IComponentSystem
 		systemState = SystemStates::Loaded;
 	}
 
+	virtual void Start() override
+	{
+		for (T* component : components)
+		{
+			component->Start();
+		}
+	}
+
 	virtual void Tick(double deltaTime) override
 	{
 		for (T* component : components)

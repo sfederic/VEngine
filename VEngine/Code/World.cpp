@@ -61,6 +61,16 @@ void World::StartAllActors()
 	}
 }
 
+void World::StartAllComponents()
+{
+	auto components = GetAllComponentsInWorld();
+
+	for (auto component : components)
+	{
+		component->Start();
+	}
+}
+
 void World::TickAllActorSystems(double deltaTime)
 {
 	PROFILE_START
@@ -127,6 +137,19 @@ std::vector<Actor*> World::GetAllActorsInWorld()
 	}
 
 	return outActors;
+}
+
+std::vector<Component*> World::GetAllComponentsInWorld()
+{
+	std::vector<Component*> outComponents;
+
+	for (IComponentSystem* componentSystem : activeComponentSystems)
+	{
+		auto components = componentSystem->GetComponents();
+		outComponents.insert(outComponents.end(), components.begin(), components.end());
+	}
+
+	return outComponents;
 }
 
 void World::Cleanup()

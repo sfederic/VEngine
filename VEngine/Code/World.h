@@ -22,12 +22,14 @@ struct World
 
 	//Called when gameplay begins
 	void StartAllActors();
+	void StartAllComponents();
 
 	void TickAllActorSystems(double deltaTime);
 	void TickAllComponentSystems(double deltaTime);
 	Actor* FindActorByName(std::string actorName);
 	Actor* FindComponentOwnerByName(std::string componentName);
 	std::vector<Actor*> GetAllActorsInWorld();
+	std::vector<Component*> GetAllComponentsInWorld();
 	void Cleanup();
 };
 
