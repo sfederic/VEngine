@@ -26,19 +26,10 @@ SystemDock::SystemDock() : QDockWidget("Systems")
 	actorSystemSearchBar->setPlaceholderText("Search...");
 	connect(actorSystemSearchBar, &QLineEdit::textChanged, this, &SystemDock::SearchActorSystems);
 
-	//setup componentsystem list widget
-	componentSystemList = new QListWidget(this);
-	componentSystemList->setSelectionMode(QAbstractItemView::SelectionMode::SingleSelection);
-	connect(componentSystemList, &QListWidget::itemClicked, this, &SystemDock::ClickOnComponentSystemItem);
-
-	selectedComponentSystemLabel = new QLabel("Selected Component System");
-
 	QVBoxLayout* vLayout = new QVBoxLayout(this);
 	vLayout->addWidget(selectedActorSystemLabel);
 	vLayout->addWidget(actorSystemSearchBar);
 	vLayout->addWidget(actorSystemList);
-	vLayout->addWidget(selectedComponentSystemLabel);
-	vLayout->addWidget(componentSystemList);
 
 	auto systemWidget = new QWidget(this);
 	systemWidget->setLayout(vLayout);
@@ -49,7 +40,6 @@ SystemDock::SystemDock() : QDockWidget("Systems")
 void SystemDock::PopulateSystemLists()
 {
 	AddActorSystemsToWidget();
-	AddComponentSystemsToWidget();
 }
 
 void SystemDock::AddActorSystemsToWidget()
@@ -63,17 +53,6 @@ void SystemDock::AddActorSystemsToWidget()
 	}
 }
 
-void SystemDock::AddComponentSystemsToWidget()
-{
-	componentSystemList->clear();
-
-	for (IComponentSystem* componentSystem : world.activeComponentSystems)
-	{
-		auto item = new QListWidgetItem(componentSystemList);
-		item->setText(QString::fromStdString(componentSystem->name));
-	}
-}
-
 void SystemDock::ClickOnActorSystemItem(QListWidgetItem* item)
 {
 	QString actorSystemName = item->text();
@@ -82,15 +61,6 @@ void SystemDock::ClickOnActorSystemItem(QListWidgetItem* item)
 	worldEditor.spawnSystem = actorSystemCache.Get(actorSystemName.toStdString());
 
 	selectedActorSystemLabel->setText(actorSystemName);
-}
-
-void SystemDock::ClickOnComponentSystemItem(QListWidgetItem* item)
-{
-	//TODO: figure out if there is some sort of spawning on a component basis thing to do later
-
-	QString componentSystemName = item->text();
-
-	selectedComponentSystemLabel->setText(componentSystemName);
 }
 
 void SystemDock::SearchActorSystems()
