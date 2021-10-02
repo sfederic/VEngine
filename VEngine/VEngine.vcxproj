@@ -115,6 +115,7 @@
   <ItemGroup>
     <ClCompile Include="Code\Components\BoxTriggerComponent.cpp" />
     <ClCompile Include="Code\Actors\ActorSystemCache.cpp" />
+    <ClCompile Include="Code\DialogueStructures.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\SpinBox.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\StringWidget.cpp" />
     <ClCompile Include="Code\Render\PipelineObjects.cpp" />
@@ -176,7 +177,7 @@
     <ClInclude Include="Code\Components\MeshComponent.h" />
     <ClCompile Include="Code\Debug.cpp" />
     <ClCompile Include="Code\Editor\Console.cpp" />
-    <ClInclude Include="Code\DialogueStructues.h" />
+    <ClInclude Include="Code\DialogueStructures.h" />
     <ClInclude Include="Code\Editor\Console.h" />
     <ClCompile Include="Code\Core.cpp" />
     <ClInclude Include="Code\Debug.h" />

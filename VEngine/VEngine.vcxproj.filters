@@ -284,6 +284,9 @@
     <ClCompile Include="Code\Actors\NPC.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\DialogueStructures.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -502,7 +505,7 @@
     <ClInclude Include="Code\Actors\NPC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\DialogueStructues.h">
+    <ClInclude Include="Code\DialogueStructures.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
