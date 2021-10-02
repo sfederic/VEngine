@@ -52,6 +52,10 @@ bool DialogueComponent::NextLine()
 void DialogueComponent::ShowTextAtActor()
 {
     auto dataIt = dialogue.data.find(currentLine);
+    if (dataIt == dialogue.data.end())
+    {
+        return;
+    }
 
     Actor* actor = world.FindActorByName(dataIt->second.actorName);
     auto wcs = actor->GetComponentsOfType<WidgetComponent>();

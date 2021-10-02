@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Components/MeshComponent.h"
+#include "Components/WidgetComponent.h"
 #include "Camera.h"
 #include "Input.h"
 #include "VMath.h"
@@ -18,6 +19,8 @@ Player::Player()
 
 	camera = CameraComponent::system.Add(this, CameraComponent(XMFLOAT3(3.f, 3.f, -7.f), false));
 	rootComponent->AddChild(camera);
+
+	widget = WidgetComponent::system.Add(this);
 }
 
 void Player::Start()
