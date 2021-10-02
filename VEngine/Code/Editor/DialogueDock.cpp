@@ -6,6 +6,8 @@
 #include <qlayout.h>
 #include <qfiledialog.h>
 #include <qcombobox.h>
+#include <qjsonobject.h>
+#include <qjsondocument.h>
 #include "World.h"
 #include "Actors/Actor.h"
 
@@ -104,12 +106,10 @@ void DialogueDock::DeleteLine()
 void DialogueDock::SaveDialogueToFile()
 {
 	QFileDialog saveDialog;
-	QString saveName = saveDialog.getSaveFileName(this, "Save Dialogue", "Dialogues/", ".dialog");
+	QString saveName = saveDialog.getSaveFileName(this, "Save Dialogue", ".dialog");
 
 	std::ofstream os;
 	os.open(saveName.toStdString(), std::ios_base::out);
-
-	int dialogueTreeIndex = 0;
 
 	QTreeWidgetItemIterator it(dialogueTree);
 	while (*it) 
@@ -117,9 +117,7 @@ void DialogueDock::SaveDialogueToFile()
 		auto lineText = (*it)->text(lineColumn);
 
 		//Have to do a bit more to get the text from the combobox
-		QTreeWidgetItem* item = dialogueTree->topLevelItem(dialogueTreeIndex);
-		dialogueTreeIndex++;
-		QComboBox* actorComboBox = (QComboBox*)dialogueTree->itemWidget(item, actorColumn);
+		QComboBox* actorComboBox = (QComboBox*)dialogueTree->itemWidget(*it, actorColumn);
 
 		auto intuitionText = (*it)->text(intuitionColumn);
 		auto text = (*it)->text(textColumn);
@@ -128,6 +126,9 @@ void DialogueDock::SaveDialogueToFile()
 		os << actorComboBox->currentText().toStdString() << "\n";
 		os << intuitionText.toStdString() << "\n";
 		os << text.toStdString() << "\n";
+
+		int numChildren = (*it)->childCount();
+		os << numChildren << "\n";
 
 		it++;
 	}
@@ -145,6 +146,9 @@ void DialogueDock::LoadDialogueFile()
 
 	dialogueTree->clear();
 
+	//For figuring our parent items and linking children to them
+	QTreeWidgetItem* previousItem = nullptr;
+
 	while (!is.eof())
 	{
 		//Get all text
@@ -152,6 +156,7 @@ void DialogueDock::LoadDialogueFile()
 		std::string actorText;
 		std::string intuitionText;
 		std::string text;
+		std::string numChildren;
 
 		char line[1024];
 
@@ -169,10 +174,27 @@ void DialogueDock::LoadDialogueFile()
 		intuitionText.assign(line);
 
 		is.getline(line, 1024);
-		text.assign(line);
+		text.assign(line);		
+		
+		is.getline(line, 1024);
+		numChildren.assign(line);
 
 		//populate widget items
-		auto item = new QTreeWidgetItem(dialogueTree);
+		QTreeWidgetItem* item = nullptr;
+
+		//attach to TreeWidgetItem if branching dialogue
+		int childCount = std::stoi(numChildren);
+		if (childCount == 0)
+		{
+			item = new QTreeWidgetItem(dialogueTree);
+		}
+		else if (childCount > 0)
+		{
+			item = new QTreeWidgetItem(dialogueTree, previousItem);
+		}
+
+		previousItem = item;
+
 		PopulateTreeItem(item);
 
 		item->setText(lineColumn, QString::fromStdString(lineText));
