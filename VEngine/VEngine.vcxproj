@@ -176,6 +176,7 @@
     <ClInclude Include="Code\Components\MeshComponent.h" />
     <ClCompile Include="Code\Debug.cpp" />
     <ClCompile Include="Code\Editor\Console.cpp" />
+    <ClInclude Include="Code\DialogueStructues.h" />
     <ClInclude Include="Code\Editor\Console.h" />
     <ClCompile Include="Code\Core.cpp" />
     <ClInclude Include="Code\Debug.h" />
