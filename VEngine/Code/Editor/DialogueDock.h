@@ -22,7 +22,6 @@ struct DialogueDock : public QDockWidget
 private:
 	void PopulateTreeItem(QTreeWidgetItem* item);
 	void AddEmptyDialogueLine();
-	void AddEmptyBranchDialogueLine();
 	void DeleteLine();
 	void SaveDialogueToFile();
 	void LoadDialogueFile();
