@@ -7,6 +7,9 @@
 
 #include "Editor/Editor.h"
 #include "Actors/NPC.h"
+#include "Components/DialogueComponent.h"
+
+DialogueComponent* dialogueComponent;
 
 Player::Player()
 {
@@ -32,14 +35,31 @@ void Player::Tick(double deltaTime)
 
 	if (Input::GetKeyUp(Keys::Down))
 	{
-		Ray ray;
-		ray.actorsToIgnore.push_back(this);
-		if (Raycast(ray, GetPositionVector(), GetForwardVectorV(), 1.f))
+		if (inConversation)
 		{
-			NPC* npc = (NPC*)ray.hitActor;
-			if (npc)
+			if (!dialogueComponent->NextLine())
 			{
-				npc->TalkTo();
+				inConversation = false;
+			}
+			else
+			{ 
+				dialogueComponent->ShowTextAtActor();
+			}
+		}
+		else
+		{
+			Ray ray;
+			ray.actorsToIgnore.push_back(this);
+			if (Raycast(ray, GetPositionVector(), GetForwardVectorV(), 1.5f))
+			{
+				NPC* npc = (NPC*)ray.hitActor;
+				if (npc)
+				{
+					dialogueComponent = npc->dialogue;
+					inConversation = true;
+
+					dialogueComponent->ShowTextAtActor();
+				}
 			}
 		}
 	}

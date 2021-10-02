@@ -4,6 +4,7 @@
 
 struct MeshComponent;
 struct DialogueComponent;
+struct WidgetComponent;
 
 struct NPC : Actor
 {
@@ -11,6 +12,7 @@ struct NPC : Actor
 
 	MeshComponent* mesh = nullptr;
 	DialogueComponent* dialogue = nullptr;
+	WidgetComponent* widget = nullptr;
 
 	NPC();
 	virtual void Start() override;

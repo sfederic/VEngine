@@ -15,6 +15,8 @@ struct Player : Actor
 	XMVECTOR nextPos;
 	XMVECTOR nextRot;
 
+	bool inConversation = false;
+
 	Player();
 	virtual void Start() override;
 	virtual void Tick(double deltaTime) override;
