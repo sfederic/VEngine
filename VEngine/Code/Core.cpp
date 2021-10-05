@@ -7,6 +7,7 @@
 #include "Actors/Player.h"
 #include "World.h"
 #include "UI/UISystem.h"
+#include "FileSystem.h"
 
 double ticks;
 double deltaTime = 0.0;
@@ -14,6 +15,8 @@ double deltaAccum;
 
 namespace Core
 {
+	std::string initialStartingWorldFromEditor;
+
 	bool mainLoop = true;
 	bool gameplayOn = false;
 
@@ -111,6 +114,8 @@ void Core::StartGame()
 		}
 	}
 
+	initialStartingWorldFromEditor = world.worldFilename;
+
 	world.StartAllComponents();
 	world.StartAllActors();
 }
@@ -118,6 +123,12 @@ void Core::StartGame()
 void Core::EndGame()
 {
 	uiSystem.RemoveAllWidgets();
+
+	//Load initial level from editor's play if changed
+	if (initialStartingWorldFromEditor != world.worldFilename)
+	{
+		fileSystem.LoadWorld(initialStartingWorldFromEditor);
+	}
 
 	activeCamera = &editorCamera;
 }

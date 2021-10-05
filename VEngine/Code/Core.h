@@ -1,6 +1,7 @@
 #pragma once
 #include <Windows.h>
 #include <cstdint>
+#include <string>
 
 //Any utility functions or variables that are 'core' to the engine live here.
 namespace Core
@@ -16,6 +17,10 @@ namespace Core
 
 	extern uint32_t frameCount;
 	extern uint32_t finalFrameCount;
+
+	//When starting a gameplay session, keep the first loaded world's name here to switch back
+	//to this level when gameplay stops in-editor.
+	extern std::string initialStartingWorldFromEditor;
 
 	double GetDeltaTime();
 	void SetTimerFrequency();
