@@ -33,7 +33,7 @@ EditorMainWindow::EditorMainWindow()
 
 	addDockWidget(Qt::DockWidgetArea::BottomDockWidgetArea, assetDock);
 	tabifyDockWidget(assetDock, dialogueDock);
-	//assetDock->raise();
+	assetDock->raise();
 
 	addDockWidget(Qt::DockWidgetArea::BottomDockWidgetArea, logDock);
 	addDockWidget(Qt::DockWidgetArea::TopDockWidgetArea, toolbarDock);
@@ -43,7 +43,7 @@ EditorMainWindow::EditorMainWindow()
 	worldDock->raise();
 
 	setWindowState(Qt::WindowMaximized);
-	setWindowTitle("VEngine 2.0 | Vagrant Tactics");
+	setWindowTitle("VEngine | Vagrant Tactics");
 	show();
 }
 
