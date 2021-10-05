@@ -30,5 +30,8 @@ void Texture2DWidget::SetValue()
 
 void Texture2DWidget::ResetValue()
 {
-	setText(QString::fromStdString(value->filename));
+	if (value)
+	{
+		setText(QString::fromStdString(value->filename));
+	}
 }
