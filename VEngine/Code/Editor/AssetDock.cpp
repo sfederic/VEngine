@@ -98,7 +98,7 @@ void AssetDock::AssetItemClicked()
     //Load world
     if (std::wcscmp(extension, L".sav") == 0) //Map files
     {
-        fileSystem.LoadWorld(fullPath.toStdString().c_str());
+        fileSystem.LoadWorld(assetName.toStdString());
     }   
     if (std::wcscmp(extension, L".mt") == 0) //Material files
     {

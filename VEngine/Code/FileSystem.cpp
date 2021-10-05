@@ -7,6 +7,10 @@
 #include "Editor/DebugMenu.h"
 #include "Editor/Editor.h"
 #include "Commands/CommandSystem.h"
+#include "Core.h"
+#include "GameUtils.h"
+#include "Camera.h"
+#include "Actors/Player.h"
 
 FileSystem fileSystem;
 
@@ -30,9 +34,11 @@ void FileSystem::LoadWorld(std::string worldName)
 {
 	world.worldFilename = worldName;
 
+	std::string path = "WorldMaps/" + worldName;
+
 	world.Cleanup();
 
-	Deserialiser d(worldName, OpenMode::In);
+	Deserialiser d(path, OpenMode::In);
 
 	while (!d.is.eof())
 	{
@@ -70,6 +76,12 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	//Clear all commands
 	commandSystem.commands.clear();
+
+	//Set player camera on world change as active if in-gameplay
+	if (Core::gameplayOn)
+	{
+		activeCamera = GameUtils::GetPlayer()->camera;
+	}
 
 	editor->UpdateWorldList();
 	debugMenu.AddNotification(L"World loaded.");
