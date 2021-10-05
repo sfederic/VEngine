@@ -1,53 +1,109 @@
-NormalActor
+Player
 1
-Name
-NormalActor0
+FOV
+1.0472
+Far Z
+1000
+Near Z
+0.01
 Position
--0.531265 0.5 6.82236e-05
+3 1 -7
 Rotation
-0.000244325 1 9.91799e-11 -4.07534e-07
+-0 0 -0 1
 Scale
-1.40629 1.5 1.00003
+1 1 1
+Shader
+DefaultShader.hlsl
+Texture2D
+wall.png
 UvOffset
-0.5 0
+0 0
 UvRotation
 0
 UvScale
 1 1
 next
 MeshActor
+3
+Mesh Filename
+hollow_barrel.fbx
+Position
+1 1 -1
+Rotation
+0 0 0 1
+Scale
+1 1 1
+Shader
+DefaultShader.hlsl
+Texture2D
+test.png
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh Filename
+hollow_barrel.fbx
+Position
+1 -1 -4
+Rotation
+0 0 0 1
+Scale
+1 1 1
+Shader
+DefaultShader.hlsl
+Texture2D
+test.png
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh Filename
+hollow_barrel.fbx
+Position
+0 -1 -8
+Rotation
+0 0 0 1
+Scale
+1 1 1
+Shader
+DefaultShader.hlsl
+Texture2D
+test.png
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+InteractTrigger
 0
 DirectionalLightActor
 1
 Colour
 1 1 1 1
-Name
-DirectionalLightActor0
+LightEnabled
+1
 Position
-0 0 -4
+7 4 -3
 Rotation
 -0 0 -0 1
 Scale
 1 1 1
 next
+NPC
+0
+EntranceTrigger
+0
 PointLightActor
-1
-Colour
-1 1 1 1
-Const Atten.
-1
-Linear Atten.
 0
-Name
-PointLightActor0
-Position
--9 0 -2
-Quad Atten.
-0
-Rotation
--0 0 -0 1
-Scale
-1 1 1
-next
 SpotLightActor
+0
+DialogueInstance
 0
