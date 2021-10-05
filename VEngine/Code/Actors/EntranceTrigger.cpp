@@ -1,6 +1,8 @@
 #include "EntranceTrigger.h"
 #include "Components/BoxTriggerComponent.h"
 #include "GameUtils.h"
+#include "Input.h"
+#include "FileSystem.h"
 
 EntranceTrigger::EntranceTrigger()
 {
@@ -18,11 +20,18 @@ void EntranceTrigger::Tick(double deltaTime)
     XMVECTOR targetPos = trigger->target->GetPositionVector();
     if (trigger->Contains(targetPos))
     {
-
+        if (Input::GetKeyUp(Keys::Down))
+        {
+            //Load new world
+            fileSystem.LoadWorld(levelToMoveTo);
+        }
     }
 }
 
 Properties EntranceTrigger::GetProps()
 {
-    return Actor::GetProps();
+    auto props = Actor::GetProps();
+    props.title = "EntranceTrigger";
+    props.Add("Level Name", &levelToMoveTo);
+    return props;
 }
