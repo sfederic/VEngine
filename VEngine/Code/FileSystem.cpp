@@ -71,6 +71,8 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	world.Start();
 
+
+
 	//Deselect any existing actors, because TransformGizmo will stay at previous positions.
 	worldEditor.pickedActor = nullptr;
 

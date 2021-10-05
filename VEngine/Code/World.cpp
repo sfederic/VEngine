@@ -8,6 +8,7 @@
 #include "Profile.h"
 #include "Render/TextureSystem.h"
 #include "Render/MaterialSystem.h"
+#include "Core.h"
 
 World world;
 
@@ -32,7 +33,7 @@ void World::Init()
 	//Start();
 }
 
-//TODO: this sort of stuff doesn't work when deserialisation is onvolved as is.
+//TODO: this sort of stuff doesn't work when deserialisation is involved as is.
 void World::Start()
 {
 	materialSystem.CreateAllMaterials();
@@ -48,6 +49,12 @@ void World::Start()
 	for (IComponentSystem* componentSystem : activeComponentSystems)
 	{
 		componentSystem->Init();
+	}
+
+	if (Core::gameplayOn)
+	{
+		world.StartAllActors();
+		world.StartAllComponents();
 	}
 }
 
