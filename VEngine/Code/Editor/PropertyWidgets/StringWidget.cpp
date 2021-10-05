@@ -25,8 +25,5 @@ void StringWidget::SetValue()
 
 void StringWidget::ResetValue()
 {
-	if (value)
-	{
-		setText(QString::fromStdString(value->data()));
-	}
+	setText(QString::fromStdString(value->data()));
 }
