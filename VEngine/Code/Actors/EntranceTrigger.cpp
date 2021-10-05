@@ -3,6 +3,7 @@
 #include "GameUtils.h"
 #include "Input.h"
 #include "FileSystem.h"
+#include "World.h"
 
 EntranceTrigger::EntranceTrigger()
 {
@@ -24,6 +25,8 @@ void EntranceTrigger::Tick(double deltaTime)
         {
             //Load new world
             fileSystem.LoadWorld(levelToMoveTo);
+            world.StartAllActors();
+            world.StartAllComponents();
         }
     }
 }
