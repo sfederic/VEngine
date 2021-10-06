@@ -4,4 +4,5 @@
 struct GameInstanceData
 {
 	inline static int currentHour;
+	inline static int currentMinute;
 };

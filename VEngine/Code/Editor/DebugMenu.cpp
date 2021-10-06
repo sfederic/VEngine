@@ -22,6 +22,7 @@
 #include "Physics/Raycast.h"
 #include "Input.h"
 #include "World.h"
+#include "GameInstanceData.h"
 
 DebugMenu debugMenu;
 
@@ -66,6 +67,7 @@ void DebugMenu::Tick(double deltaTime)
 	RenderCommandsMenu();
 	RenderActorInspectMenu();
 	RenderWorldStats();
+	RenderGameInstanceData();
 
 	ImGui::EndFrame();
 
@@ -236,6 +238,21 @@ void DebugMenu::RenderWorldStats()
 
 	ImGui::Text("Active Components: %d", componentCount);
 
+
+	ImGui::End();
+}
+
+void DebugMenu::RenderGameInstanceData()
+{
+	if (!gameInstaceMenuOpen)
+	{
+		return;
+	}
+
+	ImGui::Begin("Game Instance Data");
+
+	ImGui::InputInt("Current Hour", &GameInstanceData::currentHour);
+	ImGui::InputInt("Current Minute", &GameInstanceData::currentMinute);
 
 	ImGui::End();
 }

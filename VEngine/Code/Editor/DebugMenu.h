@@ -28,6 +28,7 @@ struct DebugMenu
 	bool gpuMenuOpen = false;
 	bool actorInspectMenuOpen = false;
 	bool worldStatsMenuOpen = false;
+	bool gameInstaceMenuOpen = false;
 
 	void Init();
 	void Tick(double deltaTime);
@@ -45,6 +46,7 @@ private:
 	void IterateOverProperties(Properties& props);
 	void RenderCommandsMenu();
 	void RenderWorldStats();
+	void RenderGameInstanceData();
 };
 
 extern DebugMenu debugMenu;
