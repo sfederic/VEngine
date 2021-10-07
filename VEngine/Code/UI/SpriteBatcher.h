@@ -2,6 +2,7 @@
 #include <DirectXMath.h>
 //TODO: come back here and get rid of the <d3d11.h>
 #include <d3d11.h>
+#include <string>
 #include "Transform.h"
 #include "Render/RenderTypes.h"
 
@@ -17,6 +18,8 @@ struct Sprite
 	D3D11_RECT srcRect;
 	D3D11_RECT dstRect;
 
+	std::string textureFilename;
+
 	float angle = 0.f;
 	float z = 0.f;
 };
@@ -30,10 +33,16 @@ struct SpriteBatcher
 
 	ID3D11Buffer* spriteVertexBuffer = nullptr;
 	ID3D11Buffer* spriteIndexBuffer = nullptr;
-	Vertex verts[4];
-	Sprite sprite;
 
-	SpriteBatcher();
+	//TODO: The same 4 vertices are used for every quad, can probably do some instancing here later.
+	Vertex verts[4];
+	std::vector<Sprite> sprites;
+
+	void Init();
+	void Reset();
+	void CreateSprite(Sprite sprite);
 	XMFLOAT3 PointToNdc(int x, int y, float z);
-	void BuildSpriteQuad(const Sprite& sprite, Vertex v[4]);
+	void BuildSpriteQuad(const Sprite& sprite);
 };
+
+extern SpriteBatcher spriteBatcher;
