@@ -86,7 +86,6 @@ private:
 	void RenderBounds();
 	void RenderCameraMeshes();
 	void RenderLightMeshes();
-	void RenderSpritesInScreenSpace();
 	void UpdateLights();
 	void StartGPUQueries();
 	void EndGPUQueries();
@@ -96,6 +95,7 @@ public:
 	void Present();
 	void RenderSetup();
 	void Render();
+	void RenderSpritesInScreenSpace();
 	void* GetSwapchain();
 	float GetAspectRatio();
 	float GetViewportWidth();

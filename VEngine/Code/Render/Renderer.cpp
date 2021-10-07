@@ -44,8 +44,6 @@ const int shadowMapTextureResgiter = 1;
 ShaderMatrices shaderMatrices;
 ShaderLights shaderLights;
 
-SpriteBatcher* spriteBatcher = nullptr;
-
 void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 {
 	viewport.Width = viewportWidth;
@@ -71,7 +69,7 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	CreateQueries();
 	CheckSupportedFeatures();
 
-	spriteBatcher = new SpriteBatcher();
+	spriteBatcher.Init();
 }
 
 void Renderer::Tick()
@@ -371,7 +369,6 @@ void Renderer::Render()
 	RenderBounds();
 	RenderLightMeshes();
 	RenderCameraMeshes();
-	RenderSpritesInScreenSpace();
 
 	PROFILE_END
 }
@@ -656,7 +653,7 @@ void Renderer::RenderSpritesInScreenSpace()
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
 
-	for (auto widget : WidgetComponent::system.components)
+	for (const Sprite& sprite : spriteBatcher.sprites)
 	{
 		if (drawAllAsWireframe)
 		{
@@ -664,7 +661,7 @@ void Renderer::RenderSpritesInScreenSpace()
 		}
 		else
 		{
-			//Careful with back culling visibility here
+			//Careful with back culling visibility here for UI
 			context->RSSetState(rastStateMap["solid"]->data);
 		}
 
@@ -673,10 +670,20 @@ void Renderer::RenderSpritesInScreenSpace()
 		context->PSSetShader(shader->pixelShader, nullptr, 0);
 
 		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
-		context->PSSetShaderResources(0, 1, &textureSystem.FindTexture2D("test.png")->srv);
 
-		context->IASetVertexBuffers(0, 1, &spriteBatcher->spriteVertexBuffer, &stride, &offset);
-		context->IASetIndexBuffer(spriteBatcher->spriteIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+		//Set texture from sprite
+		context->PSSetShaderResources(0, 1, &textureSystem.FindTexture2D(sprite.textureFilename)->srv);
+
+		//Update vertex buffer
+		//REF:https://docs.microsoft.com/en-us/windows/win32/direct3d11/how-to--use-dynamic-resources
+		spriteBatcher.BuildSpriteQuad(sprite);
+		D3D11_MAPPED_SUBRESOURCE mappedResource;
+		HR(context->Map(spriteBatcher.spriteVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+		memcpy(mappedResource.pData, spriteBatcher.verts, sizeof(spriteBatcher.verts));
+		context->Unmap(spriteBatcher.spriteVertexBuffer, 0);
+
+		context->IASetVertexBuffers(0, 1, &spriteBatcher.spriteVertexBuffer, &stride, &offset);
+		context->IASetIndexBuffer(spriteBatcher.spriteIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
 		shaderMatrices.model = XMMatrixIdentity();
 		shaderMatrices.MakeModelViewProjectionMatrix();
