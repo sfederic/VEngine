@@ -296,7 +296,7 @@
     <ClCompile Include="Code\Components\WidgetComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\UI\Sprite.cpp">
+    <ClCompile Include="Code\UI\SpriteBatcher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -532,7 +532,7 @@
     <ClInclude Include="Code\GameInstanceData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\UI\Sprite.h">
+    <ClInclude Include="Code\UI\SpriteBatcher.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

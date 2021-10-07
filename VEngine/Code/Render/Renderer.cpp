@@ -10,6 +10,7 @@
 #include "Components/Lights/DirectionalLightComponent.h"
 #include "Components/Lights/PointLightComponent.h"
 #include "Components/Lights/SpotLightComponent.h"
+#include "Components/WidgetComponent.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Actors/Actor.h"
 #include "ShaderSystem.h"
@@ -25,6 +26,8 @@
 #include "RenderUtils.h"
 #include "Editor/DebugMenu.h"
 #include "ShadowMap.h"
+#include "TextureSystem.h"
+#include "UI/SpriteBatcher.h"
 
 Renderer renderer;
 
@@ -40,6 +43,8 @@ const int shadowMapTextureResgiter = 1;
 
 ShaderMatrices shaderMatrices;
 ShaderLights shaderLights;
+
+SpriteBatcher* spriteBatcher = nullptr;
 
 void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 {
@@ -65,6 +70,8 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	CreateMainConstantBuffers();
 	CreateQueries();
 	CheckSupportedFeatures();
+
+	spriteBatcher = new SpriteBatcher();
 }
 
 void Renderer::Tick()
@@ -364,6 +371,7 @@ void Renderer::Render()
 	RenderBounds();
 	RenderLightMeshes();
 	RenderCameraMeshes();
+	RenderSpritesInScreenSpace();
 
 	PROFILE_END
 }
@@ -640,6 +648,47 @@ void Renderer::RenderLightMeshes()
 
 		context->Draw(debugCone.mesh->data->vertices->size(), 0);
 	}
+}
+
+void Renderer::RenderSpritesInScreenSpace()
+{
+	PROFILE_START
+
+	shaderMatrices.view = activeCamera->GetViewMatrix();
+
+	for (auto widget : WidgetComponent::system.components)
+	{
+		if (drawAllAsWireframe)
+		{
+			context->RSSetState(rastStateWireframe);
+		}
+		else
+		{
+			//Careful with back culling visibility here
+			context->RSSetState(rastStateMap["solid"]->data);
+		}
+
+		ShaderItem* shader = shaderSystem.FindShader(L"ui.hlsl");
+		context->VSSetShader(shader->vertexShader, nullptr, 0);
+		context->PSSetShader(shader->pixelShader, nullptr, 0);
+
+		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
+		context->PSSetShaderResources(0, 1, &textureSystem.FindTexture2D("test.png")->srv);
+
+		context->IASetVertexBuffers(0, 1, &spriteBatcher->spriteVertexBuffer, &stride, &offset);
+		context->IASetIndexBuffer(spriteBatcher->spriteIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+
+		shaderMatrices.model = XMMatrixIdentity();
+		shaderMatrices.MakeModelViewProjectionMatrix();
+
+		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+
+		//Draw
+		context->DrawIndexed(6, 0, 0);
+	}
+
+	PROFILE_END
 }
 
 //Loops over every light component and moves their data into the lights constant buffer

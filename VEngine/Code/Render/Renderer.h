@@ -86,6 +86,7 @@ private:
 	void RenderBounds();
 	void RenderCameraMeshes();
 	void RenderLightMeshes();
+	void RenderSpritesInScreenSpace();
 	void UpdateLights();
 	void StartGPUQueries();
 	void EndGPUQueries();

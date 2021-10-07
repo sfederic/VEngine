@@ -1,7 +1,25 @@
-#include "Sprite.h"
+#include "SpriteBatcher.h"
 #include "Render/Renderer.h"
+#include "Render/RenderUtils.h"
 
-XMFLOAT3 SpriteBatch::PointToNdc(int x, int y, float z)
+SpriteBatcher::SpriteBatcher()
+{
+	sprite.dstRect = { 0, 0, 50, 50 };
+	sprite.srcRect = { 0, 0, 512, 512 };
+	BuildSpriteQuad(sprite, verts);
+	spriteVertexBuffer = RenderUtils::CreateDefaultBuffer(4 * sizeof(Vertex), D3D11_BIND_VERTEX_BUFFER, &verts[0]);
+
+	//Always a quad for now
+	uint32_t spriteIndices[]
+	{
+		0, 1, 2,
+		2, 3, 0
+	};
+
+	spriteIndexBuffer = RenderUtils::CreateDefaultBuffer(6 * sizeof(uint32_t), D3D11_BIND_INDEX_BUFFER, &spriteIndices[0]);
+}
+
+XMFLOAT3 SpriteBatcher::PointToNdc(int x, int y, float z)
 {
 	XMFLOAT3 p;
 	p.x = 2.0f * (float)x / renderer.GetViewportWidth() -1.0f;
@@ -10,14 +28,13 @@ XMFLOAT3 SpriteBatch::PointToNdc(int x, int y, float z)
 	return p;
 }
 
-void SpriteBatch::BuildSpriteQuad(const Sprite& sprite, Vertex v[4])
+void SpriteBatcher::BuildSpriteQuad(const Sprite& sprite, Vertex v[4])
 {
 	const D3D11_RECT& dst = sprite.dstRect;
 
 	const D3D11_RECT& src = sprite.srcRect;
 
 	// Dest rect defines target in screen space.
-
 	v[0].pos = PointToNdc(dst.left, dst.bottom, sprite.z);
 	v[1].pos = PointToNdc(dst.left, dst.top, sprite.z);
 	v[2].pos = PointToNdc(dst.right, dst.top, sprite.z);
