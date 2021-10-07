@@ -1,7 +1,7 @@
 # VEngine - Vagrant Tactics 
 
 ## Build Notes
-Visual Studio 2019 16.11.3
+Visual Studio 2019 16.11.4
 
 ## Packages
 
