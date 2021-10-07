@@ -1,7 +1,7 @@
 #pragma once
 
 //Instance holding data over the entirety of the game
-struct GameInstanceData
+struct GameInstance
 {
 	inline static int currentHour;
 	inline static int currentMinute;

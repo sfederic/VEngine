@@ -22,7 +22,7 @@
 #include "Physics/Raycast.h"
 #include "Input.h"
 #include "World.h"
-#include "GameInstanceData.h"
+#include "GameInstance.h"
 
 DebugMenu debugMenu;
 
@@ -251,8 +251,8 @@ void DebugMenu::RenderGameInstanceData()
 
 	ImGui::Begin("Game Instance Data");
 
-	ImGui::InputInt("Current Hour", &GameInstanceData::currentHour);
-	ImGui::InputInt("Current Minute", &GameInstanceData::currentMinute);
+	ImGui::InputInt("Current Hour", &GameInstance::currentHour);
+	ImGui::InputInt("Current Minute", &GameInstance::currentMinute);
 
 	ImGui::End();
 }
