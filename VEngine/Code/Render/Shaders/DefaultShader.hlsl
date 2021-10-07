@@ -1,5 +1,6 @@
 #include "Include/CommonTypes.hlsli"
 
+//TODO: gotta go through every shader and move this into CommonTypes
 struct TransformOut
 {
 	VS_OUT Transform(VS_IN i)
