@@ -18,6 +18,25 @@ namespace RenderUtils
 		D3D11_BUFFER_DESC desc = {};
 		desc.ByteWidth = byteWidth;
 		desc.BindFlags = bindFlags;
+		desc.Usage = D3D11_USAGE_DEFAULT;
+
+		D3D11_SUBRESOURCE_DATA data = {};
+		data.pSysMem = initData;
+
+		HR(device->CreateBuffer(&desc, &data, &buffer));
+
+		return buffer;
+	}
+
+	ID3D11Buffer* CreateDynamicBuffer(UINT byteWidth, UINT bindFlags, const void* initData)
+	{
+		ID3D11Buffer* buffer;
+
+		D3D11_BUFFER_DESC desc = {};
+		desc.ByteWidth = byteWidth;
+		desc.BindFlags = bindFlags;
+		desc.Usage = D3D11_USAGE_DYNAMIC;
+		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 
 		D3D11_SUBRESOURCE_DATA data = {};
 		data.pSysMem = initData;
