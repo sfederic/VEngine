@@ -10,6 +10,7 @@ struct WidgetComponent : Component
 	Widget widget;
 
 	virtual void Tick(double deltaTime) override;
+	virtual void Start() override;
 	virtual void Create() override;
 	virtual Properties GetProps() override;
 	void SetText(std::string text);

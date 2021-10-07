@@ -5,6 +5,11 @@ void WidgetComponent::Tick(double deltaTime)
 {
 }
 
+void WidgetComponent::Start()
+{
+    widget.Start();
+}
+
 void WidgetComponent::Create()
 {
 }
