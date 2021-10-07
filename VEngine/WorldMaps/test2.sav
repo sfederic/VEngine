@@ -1,3 +1,28 @@
+Player
+1
+FOV
+1.0472
+Far Z
+1000
+Near Z
+0.01
+Position
+3.00102 0.5 -0.00380194
+Rotation
+0 1.51992e-06 0 1
+Scale
+0.999987 1 0.999987
+Shader
+DefaultShader.hlsl
+Texture2D
+wall.png
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
 MeshActor
 1
 Mesh Filename
@@ -28,14 +53,33 @@ Colour
 LightEnabled
 1
 Position
--5.3 8 12.57
+-4.3 8 8.57
 Rotation
-0.889952 -0.360453 0.217206 0.175728
+-0.138815 -0.206475 0.905496 -0.343766
 Scale
-0.999783 0.999981 0.999837
+0.999787 0.999979 0.999836
 next
 NPC
+1
+File
+testdiag
+Position
+3 1 2
+Rotation
+-0 0 -0 1
+Scale
+1 1 1
+Shader
+DefaultShader.hlsl
+Texture2D
+test.png
+UvOffset
+0 0
+UvRotation
 0
+UvScale
+1 1
+next
 EntranceTrigger
 1
 Extents
@@ -53,30 +97,5 @@ PointLightActor
 0
 SpotLightActor
 0
-Player
-1
-FOV
-1.0472
-Far Z
-1000
-Near Z
-0.01
-Position
--0.99898 0.5 -1.00379
-Rotation
-0 1.49012e-06 0 1
-Scale
-0.999987 1 0.999987
-Shader
-DefaultShader.hlsl
-Texture2D
-wall.png
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
 DialogueInstance
 0

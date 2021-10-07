@@ -18,6 +18,7 @@
 #include "Render/TextureSystem.h"
 #include "Render/RenderUtils.h"
 #include "Render/MaterialSystem.h"
+#include "UI/SpriteBatcher.h"
 
 Engine engine;
 
@@ -63,6 +64,7 @@ void Engine::TickSystems(double deltaTime)
 void Engine::ResetSystems()
 {
 	Input::Reset();
+	spriteBatcher.Reset();
 }
 
 void Engine::MainLoop()
@@ -87,6 +89,7 @@ void Engine::Render(double deltaTime)
 
 	uiSystem.BeginDraw();
 	uiSystem.DrawAllWidgets(deltaTime);
+	renderer.RenderSpritesInScreenSpace();
 	console.Tick();
 	debugMenu.Tick(deltaTime);
 	uiSystem.EndDraw();
