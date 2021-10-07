@@ -7,6 +7,7 @@
 
 void Widget::Tick(float deltaTime)
 {
+	Image(L"test.png", 200.f, 200.f);
 	MapToScreenSpace();
 }
 
@@ -41,9 +42,9 @@ void Widget::MapToScreenSpace()
 	Text(displayText, { (float)sx, (float)sy, (float)sx + 150, (float)sy + 150 });
 }
 
-ComPtr<ID3D11ShaderResourceView> Widget::CreateTexture(const std::wstring& filename)
+ID3D11ShaderResourceView* Widget::CreateTexture(const std::wstring& filename)
 {
-	ComPtr<ID3D11ShaderResourceView> textureView;
+	ID3D11ShaderResourceView* textureView;
 	std::wstring filepath = L"Textures/" + filename;
 	CreateWICTextureFromFile(renderer.device, filepath.c_str(), nullptr, &textureView);
 	assert(textureView && "texture filename will be wrong");
@@ -85,11 +86,11 @@ void Widget::Image(const std::wstring& filename, float x, float y)
 	//and maybe its shader binding, models get messed up when this function is called.
 	//REF:https://github.com/Microsoft/DirectXTK/wiki/SpriteBatch#state-management
 	//REF:https://stackoverflow.com/questions/35558178/directxspritefont-spritebatch-prevents-3d-scene-from-drawing
-	/*auto textureIt = texturesMap.find(filename);
+	auto textureIt = texturesMap.find(filename);
 	if (textureIt == texturesMap.end())
 	{
 		auto texture = CreateTexture(filename);
-		texturesMap[filename] = texture.Get();
+		texturesMap[filename] = texture;
 	}
 	else
 	{
@@ -99,5 +100,7 @@ void Widget::Image(const std::wstring& filename, float x, float y)
 		spriteBatch->Begin();
 		spriteBatch->Draw(textureIt->second, screenPos, nullptr, Colors::White, 0.f, origin);
 		spriteBatch->End();
-	}*/
+
+		//renderer.context->ClearState();
+	}
 }
