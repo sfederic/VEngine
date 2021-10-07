@@ -4,16 +4,23 @@
 #include "Input.h"
 #include "Render/Renderer.h"
 #include "Editor/Editor.h"
+#include "UI/SpriteBatcher.h"
+
+//NOTE:https://github.com/Microsoft/DirectXTK/wiki/Sprites-and-textures
+//sprite rendering wth DirectXtk was fucked up. There was something going wrong when rendering the scene
+//that jsut made everything disappear. I can't tell what rendering state it was changing internally.
+//REF:https://github.com/Microsoft/DirectXTK/wiki/SpriteBatch#state-management
+//REF:https://stackoverflow.com/questions/35558178/directxspritefont-spritebatch-prevents-3d-scene-from-drawing
 
 void Widget::Tick(float deltaTime)
 {
-	Image(L"test.png", 200.f, 200.f);
+	Image("test.png", 50, 0, 100, 100);
+	Image("test.png", 50, 50, 200, 200);
 	MapToScreenSpace();
 }
 
 void Widget::Start()
 {
-	spriteBatch = new DirectX::SpriteBatch(renderer.context);
 }
 
 void Widget::AddToViewport()
@@ -40,16 +47,6 @@ void Widget::MapToScreenSpace()
 	int sy = ((f2 * -0.5f) + 0.5) * renderer.viewport.Height;
 
 	Text(displayText, { (float)sx, (float)sy, (float)sx + 150, (float)sy + 150 });
-}
-
-ID3D11ShaderResourceView* Widget::CreateTexture(const std::wstring& filename)
-{
-	ID3D11ShaderResourceView* textureView;
-	std::wstring filepath = L"Textures/" + filename;
-	CreateWICTextureFromFile(renderer.device, filepath.c_str(), nullptr, &textureView);
-	assert(textureView && "texture filename will be wrong");
-
-	return textureView;
 }
 
 void Widget::Text(const std::wstring& text, D2D1_RECT_F layout)
@@ -79,28 +76,12 @@ bool Widget::Button(const std::wstring& text, D2D1_RECT_F layout, float lineWidt
 	return false;
 }
 
-//REF:https://github.com/Microsoft/DirectXTK/wiki/Sprites-and-textures
-void Widget::Image(const std::wstring& filename, float x, float y)
+void Widget::Image(const std::string& filename, int x, int y, int w, int h)
 {
-	//TODO: sprite rendering is fucked up. There's something going wrong with its state changes
-	//and maybe its shader binding, models get messed up when this function is called.
-	//REF:https://github.com/Microsoft/DirectXTK/wiki/SpriteBatch#state-management
-	//REF:https://stackoverflow.com/questions/35558178/directxspritefont-spritebatch-prevents-3d-scene-from-drawing
-	auto textureIt = texturesMap.find(filename);
-	if (textureIt == texturesMap.end())
-	{
-		auto texture = CreateTexture(filename);
-		texturesMap[filename] = texture;
-	}
-	else
-	{
-		DirectX::XMFLOAT2 screenPos(x, y);
-		DirectX::XMFLOAT2 origin(0.f, 0.f);
+	Sprite sprite = {};
+	sprite.textureFilename = filename;
+	sprite.dstRect = { x, y, w, h };
+	sprite.srcRect = { 0, 0, 512, 512 };
 
-		spriteBatch->Begin();
-		spriteBatch->Draw(textureIt->second, screenPos, nullptr, Colors::White, 0.f, origin);
-		spriteBatch->End();
-
-		//renderer.context->ClearState();
-	}
+	spriteBatcher.CreateSprite(sprite);
 }

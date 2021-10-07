@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 #include <d2d1_1.h>
-#include <SpriteBatch.h>
 #include <unordered_map>
 #include <DirectXMath.h>
 
@@ -24,18 +23,12 @@ struct Widget
 	void RemoveFromViewport();
 	void MapToScreenSpace();
 
-	ID3D11ShaderResourceView* CreateTexture(const std::wstring& filename);
-
 	void Text(const std::wstring& text, D2D1_RECT_F layout);
 	bool Button(const std::wstring& text, D2D1_RECT_F layout, float lineWidth = 1.0f);
-	void Image(const std::wstring& filename, float x, float y);
-
-	DirectX::SpriteBatch* spriteBatch;
+	void Image(const std::string& filename, int x, int y, int w, int h);
 
 	XMVECTOR pos;
 	std::wstring displayText;
-
-	std::unordered_map<std::wstring, ID3D11ShaderResourceView*> texturesMap;
 
 	bool bRender = true;
 };
