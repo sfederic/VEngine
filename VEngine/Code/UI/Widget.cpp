@@ -14,8 +14,7 @@
 
 void Widget::Tick(float deltaTime)
 {
-	Image("test.png", 50, 0, 100, 100);
-	Image("test.png", 50, 50, 200, 200);
+	Image("bush.png", 50, 0, 100, 100);
 	MapToScreenSpace();
 }
 
