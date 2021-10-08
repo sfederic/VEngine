@@ -8,6 +8,11 @@ TextureSystem textureSystem;
 void TextureSystem::AddTexture2D(Texture2D* texture)
 {
 	texture2DMap[texture->filename] = texture;
+
+	if (systemState == SystemStates::Loaded)
+	{
+		texture = RenderUtils::CreateTexture(texture->filename);
+	}
 }
 
 Texture2D* TextureSystem::FindTexture2D(std::string textureFilename)
@@ -35,6 +40,8 @@ void TextureSystem::CreateAllTextures()
 		Texture2D* texture = textureIt.second;
 		texture = RenderUtils::CreateTexture(textureIt.first);
 	}
+
+	systemState = SystemStates::Loaded;
 }
 
 void TextureSystem::Cleanup()
