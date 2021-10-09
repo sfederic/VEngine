@@ -6,7 +6,6 @@ VS_OUT VSMain(VS_IN i)
 
 	o.pos = mul(model, float4(i.pos, 1.0f));
 	o.pos = mul(lightViewProj, o.pos);
-	//o.pos = mul(mvp, float4(i.pos, 1.0f));
 	o.posWS = mul(model, float4(i.pos, 1.0f));
 	float4 newUv = mul(texMatrix, float4(i.uv, 0.f, 1.0f));
 	o.uv = float2(newUv.x, newUv.y);
@@ -17,10 +16,8 @@ VS_OUT VSMain(VS_IN i)
 	return o;
 }
 
-//Texture2D diffuseMap;
-
 void PSMain(VS_OUT i)
 {
-	//float4 diffuse = diffuseMap.Sample(s, i.uv.xy);
-	//clip(diffuse.a - 0.15f);
+	float4 diffuse = t.Sample(s, i.uv);
+	clip(diffuse.a - 0.05f);
 }

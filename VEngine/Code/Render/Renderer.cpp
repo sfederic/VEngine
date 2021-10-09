@@ -332,6 +332,11 @@ void Renderer::RenderShadowPass()
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
+		//Set textures
+		Material* mat = mesh->material;
+		context->PSSetSamplers(0, 1, &mat->sampler->data);
+		context->PSSetShaderResources(0, 1, &mat->texture->srv);
+
 		//Draw
 		context->DrawIndexed(mesh->data->indices->size(), 0, 0);
 	}
