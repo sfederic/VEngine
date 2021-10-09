@@ -41,6 +41,8 @@ struct Material
 	std::string textureFilename;
 	std::string shaderFilename;
 
+	std::string rastStateName = "solid";
+
 	Material();
 	Material(std::string textureFilename_, std::string shaderFilename_);
 	virtual void Create();

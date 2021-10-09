@@ -27,7 +27,7 @@ void Material::Create()
 	texture = textureSystem.FindTexture2D(textureFilename);
 	sampler = RenderUtils::GetDefaultSampler();
 	shader = shaderSystem.FindShader(stows(shaderFilename));
-	rastState = renderer.rastStateMap["solid"];
+	rastState = renderer.rastStateMap[rastStateName];
 	blendState = renderer.blendStateMap["default"];
 }
 

@@ -7,6 +7,7 @@ Billboard::Billboard()
 {
     mesh = MeshComponent::system.Add(this, MeshComponent("plane.fbx", "bush.png"));
     mesh->material->shaderFilename = "Unlit.hlsl";
+    mesh->material->rastStateName = "nobackcull";
     rootComponent = mesh;
 }
 
@@ -14,7 +15,6 @@ void Billboard::Tick(double deltaTime)
 {
     XMFLOAT3 pos = GetPosition();
 
-    //REF:http://www.rastertek.com/dx11tut34.html
     float angle = atan2(activeCamera->transform.world.r[3].m128_f32[0] - pos.x,
         activeCamera->transform.world.r[3].m128_f32[2] - pos.z) * (180.0 / XM_PI);
 
