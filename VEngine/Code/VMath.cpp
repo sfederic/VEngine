@@ -71,14 +71,13 @@ namespace VMath
 
     void LookAtRotation(XMVECTOR lookAtPoint, XMMATRIX& m)
     {
-        //lookAtPoint.m128_f32[3] = 0.f;
-        XMVECTOR forward = XMVectorAdd(lookAtPoint, m.r[3]);
+        XMVECTOR forward = XMVectorSubtract(lookAtPoint, m.r[3]);
         forward = XMVector3Normalize(forward);
 
         XMVECTOR right = XMVector3Cross(XMVectorUp(), forward);
         right = XMVector3Normalize(right);
 
-        XMVECTOR up = XMVector3Cross(forward, right); //Already normalised.
+        XMVECTOR up = XMVector3Normalize(XMVector3Cross(forward, right));
         m.r[0] = right;
         m.r[1] = up;
         m.r[2] = forward;
