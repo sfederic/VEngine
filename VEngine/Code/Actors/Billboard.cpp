@@ -6,7 +6,7 @@
 Billboard::Billboard()
 {
     mesh = MeshComponent::system.Add(this, MeshComponent("plane.fbx", "bush.png"));
-    //mesh->material->shaderFilename = "Unlit.hlsl";
+    mesh->material->shaderFilename = "Unlit.hlsl";
     rootComponent = mesh;
 }
 

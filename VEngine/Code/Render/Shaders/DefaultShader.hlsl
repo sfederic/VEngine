@@ -1,23 +1,5 @@
 #include "Include/CommonTypes.hlsli"
-
-//TODO: gotta go through every shader and move this into CommonTypes
-struct TransformOut
-{
-	VS_OUT Transform(VS_IN i)
-	{
-		VS_OUT o;
-
-		o.pos = mul(mvp, float4(i.pos, 1.0f));
-		o.posWS = mul(model, float4(i.pos, 1.0f));
-		float4 newUv = mul(texMatrix, float4(i.uv, 0.f, 1.0f));
-		o.uv = float2(newUv.x, newUv.y);
-		o.normal = mul((float3x3)model, i.normal);
-
-		o.shadowPos = mul(lightMVP, o.posWS);
-
-		return o;
-	}
-};
+#include "Include/TransformOut.hlsli"
 
 VS_OUT VSMain(VS_IN i)
 {

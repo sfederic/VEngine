@@ -7,9 +7,9 @@ Far Z
 Near Z
 0.01
 Position
-3.00102 0.5 -0.00380194
+2.00101 0.5 -6.00379
 Rotation
-0 1.51992e-06 0 1
+0 -1.3113e-06 0 -1
 Scale
 0.999987 1 0.999987
 Shader
@@ -44,6 +44,59 @@ UvRotation
 UvScale
 1 1
 next
+Billboard
+3
+Position
+0 1 4
+Rotation
+0 0.98979 0 0.142535
+Scale
+0.999999 1 0.999999
+Shader
+Unlit.hlsl
+Texture2D
+bush.png
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Position
+3 1 4
+Rotation
+0 0.998285 0 0.0585361
+Scale
+0.99999 1 0.99999
+Shader
+Unlit.hlsl
+Texture2D
+bush.png
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Position
+-3 1 4
+Rotation
+0 0.98979 0 0.142535
+Scale
+1 1 1
+Shader
+Unlit.hlsl
+Texture2D
+bush.png
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
 InteractTrigger
 0
 DirectionalLightActor
@@ -60,39 +113,9 @@ Scale
 0.999787 0.999979 0.999836
 next
 NPC
-1
-File
-testdiag
-Position
-3 1 2
-Rotation
--0 0 -0 1
-Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture2D
-test.png
-UvOffset
-0 0
-UvRotation
 0
-UvScale
-1 1
-next
 EntranceTrigger
-1
-Extents
-1 1 1
-Level Name
-test.sav
-Position
--1 0.5 4
-Rotation
--0 0 -0 1
-Scale
-1 1 1
-next
+0
 PointLightActor
 0
 SpotLightActor
