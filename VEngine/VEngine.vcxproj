@@ -158,6 +158,7 @@
     <ClCompile Include="Code\Components\EmptyComponent.cpp" />
     <ClCompile Include="Code\Components\WidgetComponent.cpp" />
     <ClCompile Include="Code\UI\SpriteBatcher.cpp" />
+    <ClCompile Include="Code\Actors\Billboard.cpp" />
     <ClInclude Include="Code\Components\BoxTriggerComponent.h" />
     <ClInclude Include="Code\Animation\AnimationStructures.h" />
     <ClInclude Include="Code\Actors\Actor.h" />
@@ -310,6 +311,7 @@
     <ClInclude Include="Code\Components\EmptyComponent.h" />
     <ClInclude Include="Code\Components\WidgetComponent.h" />
     <ClInclude Include="Code\UI\SpriteBatcher.h" />
+    <ClInclude Include="Code\Actors\Billboard.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
