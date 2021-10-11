@@ -2,15 +2,14 @@
 #include "Components/InstanceMeshComponent.h"
 #include "Render/RenderUtils.h"
 #include "Render/Material.h"
+#include "Render/Renderer.h"
 #include "Physics/Raycast.h"
 #include "VMath.h"
 
 BattleNode::BattleNode()
 {
-    int meshInstanceCount = 5 * 5;
-
     nodeMesh = InstanceMeshComponent::system.Add(
-        this, InstanceMeshComponent(meshInstanceCount, "node.fbx", "test.png"));
+        this, InstanceMeshComponent(1, "node.fbx", "test.png"));
 
     nodeMesh->material->shaderFilename = "InstanceShader.hlsl";
     rootComponent = nodeMesh;
@@ -18,12 +17,34 @@ BattleNode::BattleNode()
 
 void BattleNode::Start()
 {
+    //This is all pretty lazy, but I need the sizeX and sizeY to determine the buffer sizes on gameplay start
+    if (nodeMesh->structuredBuffer)
+    {
+        nodeMesh->structuredBuffer->Release();
+    }
+    if (nodeMesh->srv)
+    {
+        nodeMesh->srv->Release();
+    }
+
+    nodeMesh->instanceData.clear();
+
+    int meshInstanceCount = sizeX * sizeY;
+    nodeMesh->meshInstanceRenderCount = meshInstanceCount;
+
+    //Re-setup shader buffers
+    nodeMesh->structuredBuffer = RenderUtils::CreateStructuredBuffer(sizeof(InstanceData) * meshInstanceCount,
+        sizeof(InstanceData), nodeMesh->instanceData.data());
+
+    nodeMesh->srv = RenderUtils::CreateSRVForMeshInstance(nodeMesh->structuredBuffer, meshInstanceCount);
+
+
     XMMATRIX rootWorldMatrix = rootComponent->GetWorldMatrix();
     XMVECTOR rayOrigin = XMVectorZero();
 
-    for (int x = 0; x < 5; x++)
+    for (int x = 0; x < sizeX; x++)
     {
-        for (int y = 0; y < 5; y++)
+        for (int y = 0; y < sizeY; y++)
         {
             rayOrigin = XMVectorSet(x, 10.f, y, 1.f);
 
@@ -47,7 +68,6 @@ void BattleNode::Start()
                 hitPosVector.m128_f32[3] = 1.0f;
 
                 nodeMesh->instanceData.back().world.r[3] = hitPosVector;
-
             }
         }
     }
