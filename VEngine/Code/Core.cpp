@@ -105,6 +105,8 @@ void Core::EndTimer()
 
 void Core::StartGame()
 {
+	gameplayOn = true;
+
 	Player* player = GameUtils::GetPlayer();
 	if (player)
 	{
@@ -122,6 +124,8 @@ void Core::StartGame()
 
 void Core::EndGame()
 {
+	gameplayOn = false;
+
 	uiSystem.RemoveAllWidgets();
 
 	//TODO: initially I had it so that the world is only reloaded when the starting level is changed
