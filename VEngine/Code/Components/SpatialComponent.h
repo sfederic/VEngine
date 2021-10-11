@@ -19,6 +19,12 @@ struct SpatialComponent : Component
 	XMFLOAT3 GetPosition();
 	void SetPosition(XMFLOAT3 newPosition);
 	void SetPosition(XMVECTOR newPosition);
+	XMFLOAT3 GetScale();
+	void SetScale(XMFLOAT3 newScale);
+	void SetScale(XMVECTOR newScale);
+	XMFLOAT4 GetRotation();
+	void SetRotation(XMFLOAT4 newRotation);
+	void SetRotation(XMVECTOR newRotation);
 	XMFLOAT3 GetForwardVector();
 	XMFLOAT3 GetRightVector();
 	XMFLOAT3 GetUpVector();

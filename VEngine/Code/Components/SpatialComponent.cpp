@@ -48,6 +48,36 @@ void SpatialComponent::SetPosition(XMVECTOR newPosition)
 	XMStoreFloat3(&transform.position, newPosition);
 }
 
+XMFLOAT3 SpatialComponent::GetScale()
+{
+	return XMFLOAT3();
+}
+
+void SpatialComponent::SetScale(XMFLOAT3 newScale)
+{
+	transform.scale = newScale;
+}
+
+void SpatialComponent::SetScale(XMVECTOR newScale)
+{
+	XMStoreFloat3(&transform.scale, newScale);
+}
+
+XMFLOAT4 SpatialComponent::GetRotation()
+{
+	return transform.rotation;
+}
+
+void SpatialComponent::SetRotation(XMFLOAT4 newRotation)
+{
+	transform.rotation = newRotation;
+}
+
+void SpatialComponent::SetRotation(XMVECTOR newRotation)
+{
+	XMStoreFloat4(&transform.rotation, newRotation);
+}
+
 XMFLOAT3 SpatialComponent::GetForwardVector()
 {
 	XMFLOAT3 forward;
