@@ -10,6 +10,9 @@ struct BattleNode : Actor
 
 	InstanceMeshComponent* nodeMesh = nullptr;
 
+	int sizeX = 1;
+	int sizeY = 1;
+
 	BattleNode();
 	virtual void Start() override;
 	virtual Properties GetProps() override;
