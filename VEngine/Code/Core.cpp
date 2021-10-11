@@ -124,8 +124,10 @@ void Core::EndGame()
 {
 	uiSystem.RemoveAllWidgets();
 
-	//Load initial level from editor's play if changed
-	if (initialStartingWorldFromEditor != world.worldFilename)
+	//TODO: initially I had it so that the world is only reloaded when the starting level is changed
+	//from when play is pressed, but spawning extra components/actors during play just meant that
+	//you'd have to keep a list of initial actors and components to delete on endplay
+	//if (initialStartingWorldFromEditor != world.worldFilename)
 	{
 		fileSystem.LoadWorld(initialStartingWorldFromEditor);
 	}
