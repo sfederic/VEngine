@@ -13,7 +13,8 @@ struct Ray
 {
 	XMVECTOR origin;
 	XMVECTOR direction;
-
+	
+	//Position the ray has hit in world
 	XMFLOAT3 hitPos;
 	XMFLOAT3 normal;
 	XMFLOAT2 uv;
