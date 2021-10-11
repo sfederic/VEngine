@@ -2,14 +2,15 @@
 #include "Actor.h"
 #include "ActorSystem.h"
 
-struct MeshComponent;
+struct InstanceMeshComponent;
 
 struct BattleNode : Actor
 {
 	ACTOR_SYSTEM(BattleNode)
 
-	MeshComponent* nodeMesh = nullptr;
+	InstanceMeshComponent* nodeMesh = nullptr;
 
 	BattleNode();
+	virtual void Start() override;
 	virtual Properties GetProps() override;
 };

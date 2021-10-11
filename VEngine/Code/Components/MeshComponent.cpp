@@ -7,7 +7,9 @@
 //Vertex and index buffers linked to a mesh filename to copy over to new PSOs
 std::unordered_map<std::string, MeshBuffers> existingMeshBuffers;
 
-MeshComponent::MeshComponent(const std::string filename_, const std::string textureFilename_)
+MeshComponent::MeshComponent(const std::string filename_, 
+	const std::string textureFilename_,
+	const std::string shaderFilename_)
 {
 	meshFilename = filename_;
 	textureFilename = textureFilename_;
@@ -15,7 +17,7 @@ MeshComponent::MeshComponent(const std::string filename_, const std::string text
 	data = new MeshDataProxy();
 	pso = new PipelineStateObject();
 
-	material = new Material(textureFilename, "DefaultShader.hlsl");
+	material = new Material(textureFilename, shaderFilename_);
 }
 
 void MeshComponent::Tick(double deltaTime)
