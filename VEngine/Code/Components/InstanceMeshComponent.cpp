@@ -2,8 +2,8 @@
 #include "Render/RenderUtils.h"
 
 InstanceMeshComponent::InstanceMeshComponent(
-	uint32_t meshInstanceRenderCount_, const std::string filename, const std::string shader)
-	: MeshComponent(filename, shader)
+	uint32_t meshInstanceRenderCount_, const std::string filename, const std::string textureFilename)
+	: MeshComponent(filename, textureFilename)
 {
 	meshInstanceRenderCount = meshInstanceRenderCount_;
 }
@@ -25,7 +25,6 @@ void InstanceMeshComponent::Create()
 	{
 		InstanceData data = {};
 		data.world = XMMatrixIdentity();
-		data.world.r[3].m128_f32[0] = i;
 		instanceData.push_back(data);
 	}
 
