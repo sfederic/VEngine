@@ -113,6 +113,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Actors\BattleNode.cpp" />
     <ClCompile Include="Code\Components\BoxTriggerComponent.cpp" />
     <ClCompile Include="Code\Actors\ActorSystemCache.cpp" />
     <ClCompile Include="Code\DialogueStructures.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="Code\Components\WidgetComponent.cpp" />
     <ClCompile Include="Code\UI\SpriteBatcher.cpp" />
     <ClCompile Include="Code\Actors\Billboard.cpp" />
+    <ClInclude Include="Code\Actors\BattleNode.h" />
     <ClInclude Include="Code\Components\BoxTriggerComponent.h" />
     <ClInclude Include="Code\Animation\AnimationStructures.h" />
     <ClInclude Include="Code\Actors\Actor.h" />
