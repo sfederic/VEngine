@@ -16,6 +16,7 @@ struct SpatialComponent : Component
 	void AddChild(SpatialComponent* component);
 	XMMATRIX GetWorldMatrix();
 	void UpdateTransform(XMMATRIX parentWorld = XMMatrixIdentity());
+	XMFLOAT3 GetPosition();
 	void SetPosition(XMFLOAT3 newPosition);
 	void SetPosition(XMVECTOR newPosition);
 	XMFLOAT3 GetForwardVector();

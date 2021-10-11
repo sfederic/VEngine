@@ -33,6 +33,11 @@ void SpatialComponent::UpdateTransform(XMMATRIX parentWorld)
 	transform.world = world;
 }
 
+XMFLOAT3 SpatialComponent::GetPosition()
+{
+	return transform.position;
+}
+
 void SpatialComponent::SetPosition(XMFLOAT3 newPosition)
 {
 	transform.position = newPosition;
