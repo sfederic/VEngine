@@ -5,14 +5,12 @@ IntWidget::IntWidget(int* value, QWidget* parent) : QSpinBox(parent)
 	_value = value;
 
 	connect(this, &QDoubleSpinBox::editingFinished, this, &IntWidget::SetValue);
+	setValue(*_value);
 }
 
 void IntWidget::SetValue()
 {
-	if (_value)
-	{
-		*_value = value();
-	}
+	*_value = value();
 }
 
 void IntWidget::ResetValue()
