@@ -31,6 +31,16 @@ void InstanceMeshComponent::Create()
 	srv = RenderUtils::CreateSRVForMeshInstance(structuredBuffer, meshInstanceRenderCount);
 }
 
+void InstanceMeshComponent::SetInstanceCount(uint32_t count)
+{
+	meshInstanceRenderCount = count;
+}
+
+uint32_t InstanceMeshComponent::GetInstanceCount()
+{
+	return meshInstanceRenderCount;
+}
+
 void InstanceMeshComponent::SetInstanceData(std::vector<InstanceData>& instanceData_)
 {
 	instanceData.clear();
