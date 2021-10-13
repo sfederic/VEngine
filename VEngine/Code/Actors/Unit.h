@@ -15,7 +15,7 @@ struct Unit : Actor
 	int xIndex = -1;
 	int yIndex = -1;
 
-	int movementPoints = 5;
+	int movementPoints = 20;
 
 	int movementPathNodeIndex = 0;
 

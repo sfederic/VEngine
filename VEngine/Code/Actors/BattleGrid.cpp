@@ -61,6 +61,9 @@ void BattleGrid::Start()
             InstanceData instanceData = {};
             instanceData.world = rootWorldMatrix;
 
+            //create grid node in row
+            GridNode node = GridNode(x, y, nodeMesh->instanceData.size());
+
             //raycast against the world to set node position
             Ray ray = {};
             ray.actorsToIgnore.push_back(this);
@@ -77,18 +80,21 @@ void BattleGrid::Start()
                 hitPosVector.m128_f32[3] = 1.0f;
 
                 instanceData.world.r[3] = hitPosVector;
+
+                node.active = true;
             }
             else
             {
                 //Mul by empty scale matrix to make the node invisible in-scene
                 XMMATRIX emptyScaleMatrix = XMMatrixScaling(0.f, 0.f, 0.f);
                 instanceData.world *= emptyScaleMatrix;
+
+                node.active = false;
             }
 
             nodeMesh->instanceData.push_back(instanceData);
 
-            //create grid node in row
-            GridNode node = GridNode(x, y, nodeMesh->instanceData.size());
+            //Add node to column
             rows[x].Add(node);
         }
     }

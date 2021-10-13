@@ -16,13 +16,14 @@ Unit::Unit()
 
 void Unit::Start()
 {
+	//Careful here with the naming (x/z)
 	xIndex = std::round(GetPosition().x);
-	yIndex = std::round(GetPosition().y);
+	yIndex = std::round(GetPosition().z);
 
 	nextMovePos = GetPositionVector();
 
 	BattleGrid* battleGrid = GameUtils::GetBattleGrid();
-	GridNode* destNode = battleGrid->GetNode(1, 1);
+	GridNode* destNode = battleGrid->GetNode(4, 0);
 	MoveTo(destNode);
 }
 
@@ -46,13 +47,15 @@ void Unit::Tick(double deltaTime)
 		}
 	}
 
-	const float moveSpeed = 3.0f;
+	const float moveSpeed = 1.5f;
 	SetPosition(VMath::VectorConstantLerp(GetPositionVector(), nextMovePos, deltaTime, moveSpeed));
 }
 
 Properties Unit::GetProps()
 {
-	return Actor::GetProps();
+	auto props = Actor::GetProps();
+	props.Add("Next Move", &nextMovePos);
+	return props;
 }
 
 void Unit::MoveTo(GridNode* destinationNode)
@@ -109,6 +112,11 @@ void Unit::MoveTo(GridNode* destinationNode)
 			lowestHCostIndex = i;
 			nextNode = movementPathNodes[i];
 		}
+	}
+
+	if (nextNode != nullptr)
+	{
+		pathNodes.push_back(nextNode);
 	}
 
 	while (nextNode != startingNode)
