@@ -1,3 +1,5 @@
+BattleGrid
+0
 Player
 1
 FOV
@@ -7,11 +9,11 @@ Far Z
 Near Z
 0.01
 Position
-2.00102 0.5 -4.00379
+0 1 -3
 Rotation
-0 -1.3411e-06 0 -1
+-0 0 -0 1
 Scale
-0.999987 1 0.999987
+0.5 0.5 0.5
 Shader
 DefaultShader.hlsl
 Texture2D
@@ -28,11 +30,11 @@ MeshActor
 Mesh Filename
 plane.fbx
 Position
-0 -0.5 0
+0 0 0
 Rotation
-0.000333151 0.707229 0.706985 8.93947e-05
+-0.706985 0 -0 0.707229
 Scale
-5 5 1
+5 5.00002 1
 Shader
 DefaultShader.hlsl
 Texture2D
@@ -44,61 +46,6 @@ UvRotation
 UvScale
 1 1
 next
-Billboard
-3
-Position
-0 0 -1
-Rotation
-0 0.973257 0 0.229718
-Scale
-0.999996 1 0.999996
-Shader
-Unlit.hlsl
-Texture2D
-bush.png
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Position
-3 0 2
-Rotation
-0 0.997088 0 0.0762651
-Scale
-0.999987 1 0.999987
-Shader
-Unlit.hlsl
-Texture2D
-bush.png
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Position
--2 0 -3
-Rotation
-0 0.936131 0 0.351651
-Scale
-1.00001 1 1.00001
-Shader
-Unlit.hlsl
-Texture2D
-bush.png
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-InteractTrigger
-0
 DirectionalLightActor
 1
 Colour
@@ -106,11 +53,11 @@ Colour
 LightEnabled
 1
 Position
--4.3 8 8.57
+-5 4 0
 Rotation
--0.138815 -0.206475 0.905496 -0.343766
+0.129365 0.483131 -0.223977 0.836471
 Scale
-0.999787 0.999979 0.999836
+0.999996 0.999997 0.999996
 next
 NPC
 0
@@ -119,6 +66,10 @@ EntranceTrigger
 PointLightActor
 0
 SpotLightActor
+0
+Billboard
+0
+InteractTrigger
 0
 DialogueInstance
 0
