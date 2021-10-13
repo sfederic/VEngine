@@ -1,5 +1,6 @@
 #include "GameUtils.h"
 #include "Actors/Player.h"
+#include "Actors/BattleGrid.h"
 
 namespace GameUtils
 {
@@ -11,5 +12,10 @@ namespace GameUtils
 		}
 
 		return nullptr;
+	}
+
+	BattleGrid* GetBattleGrid()
+	{
+		return BattleGrid::system.actors[0];
 	}
 }
