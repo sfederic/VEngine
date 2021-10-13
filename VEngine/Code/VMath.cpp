@@ -28,6 +28,11 @@ namespace VMath
         return XMVectorSet(0.f, 0.f, 1.f, 0.f);
     }
 
+    XMMATRIX ZeroMatrix()
+    {
+        return XMMATRIX();
+    }
+
     void RoundFloat3(XMFLOAT3& float3)
     {
         float3.x = std::round(float3.x);

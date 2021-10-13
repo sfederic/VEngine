@@ -16,6 +16,9 @@ namespace VMath
 	XMVECTOR XMVectorUp();
 	XMVECTOR XMVectorForward();
 
+	//returns matrix with all 0's
+	XMMATRIX ZeroMatrix();
+
 	void RoundFloat3(XMFLOAT3& float3);
 
 	XMFLOAT3 PitchYawRollFromMatrix(XMMATRIX m);
