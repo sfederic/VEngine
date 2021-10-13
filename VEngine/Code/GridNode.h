@@ -46,11 +46,11 @@ struct GridNode
 	GridNode* parentNode = nullptr;
 	XMVECTOR location;
 
-	float gCost; //Distance from start node
-	float hCost; //Distance to end node
-	int xIndex;
-	int yIndex;
-	uint32_t instancedMeshIndex;
-	bool active;
-	bool closed;
+	float gCost = 0.f; //Distance from start node
+	float hCost = 0.f; //Distance to end node
+	int xIndex = 0;
+	int yIndex = 0;
+	uint32_t instancedMeshIndex = 0;
+	bool active = true;
+	bool closed = false;
 };
