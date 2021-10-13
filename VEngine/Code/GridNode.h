@@ -17,7 +17,7 @@ struct GridNode
 		yIndex = y;
 		instancedMeshIndex = instancedMeshIndex_;
 
-		location = XMVectorSet((float)x, (float)y, 0.f, 1.f);
+		worldPosition = XMFLOAT3((float)x, (float)y, 0.f);
 	}
 
 	bool Equals(int x, int y)
@@ -44,7 +44,7 @@ struct GridNode
 	}
 
 	GridNode* parentNode = nullptr;
-	XMVECTOR location;
+	XMFLOAT3 worldPosition;
 
 	float gCost = 0.f; //Distance from start node
 	float hCost = 0.f; //Distance to end node
