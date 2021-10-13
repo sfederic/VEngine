@@ -4,16 +4,16 @@
 
 struct InstanceMeshComponent;
 
-struct BattleNode : Actor
+struct BattleGrid : Actor
 {
-	ACTOR_SYSTEM(BattleNode)
+	ACTOR_SYSTEM(BattleGrid)
 
 	InstanceMeshComponent* nodeMesh = nullptr;
 
 	int sizeX;
 	int sizeY;
 
-	BattleNode();
+	BattleGrid();
 	virtual void Start() override;
 	virtual Properties GetProps() override;
 };

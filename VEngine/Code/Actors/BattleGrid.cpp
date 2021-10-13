@@ -1,4 +1,4 @@
-#include "BattleNode.h"
+#include "BattleGrid.h"
 #include "Components/InstanceMeshComponent.h"
 #include "Render/RenderUtils.h"
 #include "Render/Material.h"
@@ -6,7 +6,7 @@
 #include "Physics/Raycast.h"
 #include "VMath.h"
 
-BattleNode::BattleNode()
+BattleGrid::BattleGrid()
 {
     nodeMesh = InstanceMeshComponent::system.Add(
         this, InstanceMeshComponent(1, "node.fbx", "test.png"));
@@ -15,7 +15,7 @@ BattleNode::BattleNode()
     rootComponent = nodeMesh;
 }
 
-void BattleNode::Start()
+void BattleGrid::Start()
 {
     //This is all pretty lazy, but I need the sizeX and sizeY to determine the buffer sizes on gameplay start
     if (nodeMesh->structuredBuffer)
@@ -73,7 +73,7 @@ void BattleNode::Start()
     }
 }
 
-Properties BattleNode::GetProps()
+Properties BattleGrid::GetProps()
 {
     auto props = Actor::GetProps();
     props.title = "BattleNode";

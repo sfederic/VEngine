@@ -302,7 +302,7 @@
     <ClCompile Include="Code\Actors\Billboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\BattleNode.cpp">
+    <ClCompile Include="Code\Actors\BattleGrid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -544,7 +544,7 @@
     <ClInclude Include="Code\Actors\Billboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\BattleNode.h">
+    <ClInclude Include="Code\Actors\BattleGrid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
