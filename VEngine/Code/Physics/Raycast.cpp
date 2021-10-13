@@ -104,18 +104,21 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 		return false;
 	}
 
-	for (int i = 0; i < distances.size(); i++)
+	//TODO: I worry about this triangle intersect being here. There's another call to it in worldeditor
+	if (RaycastTriangleIntersect(ray))
 	{
-		//Skip hit if more than range or less than 0
-		if (distances[i] > range || distances[i] < 0.f)
+		for (int i = 0; i < distances.size(); i++)
 		{
-			continue;
-		}
+			//Skip hit if more than range or less than 0
+			if (distances[i] > range || distances[i] < 0.f)
+			{
+				continue;
+			}
 
-		if (distances[i] < nearestDistance)
-		{
-			nearestDistance = distances[i];
-			ray.hitActor = ray.hitActors[i];
+			if (distances[i] < nearestDistance)
+			{
+				nearestDistance = distances[i];
+			}
 		}
 	}
 
