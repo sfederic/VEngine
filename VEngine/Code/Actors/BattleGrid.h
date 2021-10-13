@@ -32,5 +32,5 @@ struct BattleGrid : Actor
 	virtual void Start() override;
 	virtual Properties GetProps() override;
 	GridNode* GetNode(int x, int y);
-	void GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode>& outNodes);
+	void GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode*>& outNodes);
 };

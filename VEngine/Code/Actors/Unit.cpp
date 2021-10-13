@@ -1,78 +1,8 @@
 #include "Unit.h"
+#include <algorithm>
 #include "GridNode.h"
 #include "GameUtils.h"
-
-void Unit::MoveTo(GridNode& destinationNode)
-{
-	//BattleGrid* battleGrid = GameUtils::GetBattleGrid();
-	//GridNode* startingNode = battleGrid->GetNode(xIndex, yIndex);
-
-	////Assign all costs
-	//for (int i = 0; i < movementPathNodes.Num(); i++)
-	//{
-	//	movementPathNodes[i]->gCost = FVector::Distance(startingNode->location, movementPathNodes[i]->location);
-	//	movementPathNodes[i]->hCost = FVector::Distance(destinationNode->location, movementPathNodes[i]->location);
-	//}
-
-	////Find lowest distance to 'end' based on UnitState
-	//int highestHCostIndex = 0;
-	//int lowestHCostIndex = 0;
-
-	//if (unitState == EUnitState::Chase)
-	//{
-	//	float lowestHCost = TNumericLimits<float>::Max();
-	//	for (int i = 0; i < movementPathNodes.Num(); i++)
-	//	{
-	//		if (movementPathNodes[i]->hCost < lowestHCost)
-	//		{
-	//			lowestHCost = movementPathNodes[i]->hCost;
-	//			lowestHCostIndex = i;
-	//		}
-	//	}
-	//}
-	//else if (unitState == EUnitState::Flee)
-	//{
-	//	float highestHCost = -1.f;
-	//	for (int i = 0; i < movementPathNodes.Num(); i++)
-	//	{
-	//		if (movementPathNodes[i]->hCost >= highestHCost)
-	//		{
-	//			highestHCost = movementPathNodes[i]->hCost;
-	//			highestHCostIndex = i;
-	//		}
-	//	}
-	//}
-
-	//FGridNode* nextNode = nullptr;
-	//switch (unitState)
-	//{
-	//case EUnitState::Stationary: nextNode = startingNode; break;
-	//case EUnitState::Chase:	nextNode = movementPathNodes[lowestHCostIndex]; break;
-	//case EUnitState::Flee: nextNode = movementPathNodes[highestHCostIndex]; break;
-	//case EUnitState::Wander:
-	//	int randomNodeIndex = FMath::RandRange(0, movementPathNodes.Num() - 1);
-	//	nextNode = movementPathNodes[randomNodeIndex];
-	//	break;
-	//}
-
-	//while (nextNode != startingNode)
-	//{
-	//	if (nextNode->parentNode)
-	//	{
-	//		nextNode = nextNode->parentNode;
-	//		pathNodes.Add(nextNode);
-	//	}
-	//}
-
-	//Algo::Reverse(pathNodes);
-	//movementPathNodes.Empty();
-
-	////Activate previous standing node 
-	//if (pathNodes.Num() > 0)
-	//{
-	//	battleGrid->UnhideNode(battleGrid->GetNode(xIndex, yIndex));
-	//}
-}
+#include "BattleGrid.h"
 
 Unit::Unit()
 {
@@ -81,4 +11,58 @@ Unit::Unit()
 Properties Unit::GetProps()
 {
 	return Properties();
+}
+
+void Unit::MoveTo(GridNode* destinationNode)
+{
+	BattleGrid* battleGrid = GameUtils::GetBattleGrid();
+	GridNode* startingNode = battleGrid->GetNode(xIndex, yIndex);
+
+	std::vector<GridNode*> previewNodes;
+	std::vector<GridNode*> closedPreviewNodes;
+
+	battleGrid->GetNeighbouringNodes(startingNode, previewNodes);
+
+	for (int moveIndex = 0; moveIndex < movementPoints; moveIndex++)
+	{
+		for (int previewIndex = 0; previewIndex < previewNodes.size(); previewIndex++)
+		{
+			battleGrid->GetNeighbouringNodes(previewNodes[previewIndex], closedPreviewNodes);
+		}
+
+		previewNodes.insert(previewNodes.end(), closedPreviewNodes.begin(), closedPreviewNodes.end());
+		closedPreviewNodes.clear();
+	}
+
+	for (GridNode* node : previewNodes)
+	{
+		movementPathNodes.push_back(node);
+	}
+
+	//Assign all costs
+	for (auto node : movementPathNodes)
+	{
+		//TODO: come back here and see if getting the distances with just the int x/yIndex values is enough.
+		//I'm guessing the Vector distance stuff here was for node height originally.
+		XMVECTOR startPos = XMLoadFloat3(&startingNode->worldPosition);
+		XMVECTOR endPos = XMLoadFloat3(&destinationNode->worldPosition);
+		XMVECTOR currentPos = XMLoadFloat3(&node->worldPosition);
+
+		node->gCost = XMVector3Length(startPos - currentPos).m128_f32[0];
+		node->hCost = XMVector3Length(endPos - currentPos).m128_f32[0];
+	}
+
+	GridNode* nextNode = nullptr;
+	while (nextNode != startingNode)
+	{
+		if (nextNode->parentNode)
+		{
+			nextNode = nextNode->parentNode;
+			pathNodes.push_back(nextNode);
+		}
+	}
+
+	std::reverse(pathNodes.begin(), pathNodes.end());
+
+	movementPathNodes.clear();
 }

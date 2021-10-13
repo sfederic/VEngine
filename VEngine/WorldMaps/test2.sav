@@ -1,5 +1,26 @@
 BattleGrid
+1
+Position
+-2 0 0
+Rotation
+0 0 0 1
+Scale
+1 1 1
+Shader
+InstanceShader.hlsl
+Size X
+99
+Size Y
+10
+Texture2D
+test.png
+UvOffset
+0 0
+UvRotation
 0
+UvScale
+1 1
+next
 Player
 1
 FOV

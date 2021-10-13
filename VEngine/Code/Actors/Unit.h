@@ -12,7 +12,12 @@ struct Unit : Actor
 	int xIndex;
 	int yIndex;
 
+	int movementPoints;
+
+	std::vector<GridNode*> movementPathNodes;
+	std::vector<GridNode*> pathNodes;
+
 	Unit();
 	virtual Properties GetProps() override;
-	void MoveTo(GridNode& node);
+	void MoveTo(GridNode* destinationNode);
 };

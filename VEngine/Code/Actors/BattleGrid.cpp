@@ -108,7 +108,7 @@ GridNode* BattleGrid::GetNode(int x, int y)
     return &rows[x].columns[y];
 }
 
-void BattleGrid::GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode>& outNodes)
+void BattleGrid::GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode*>& outNodes)
 {
     int currentX = centerNode->xIndex;
     int currentY = centerNode->yIndex;
@@ -121,7 +121,7 @@ void BattleGrid::GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode
         {
             node.closed = true;
             node.parentNode = centerNode;
-            outNodes.push_back(node);
+            outNodes.push_back(&node);
         }
     }
 
@@ -133,7 +133,7 @@ void BattleGrid::GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode
         {
             node.closed = true;
             node.parentNode = centerNode;
-            outNodes.push_back(node);
+            outNodes.push_back(&node);
         }
     }
 
@@ -145,7 +145,7 @@ void BattleGrid::GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode
         {
             node.closed = true;
             node.parentNode = centerNode;
-            outNodes.push_back(node);
+            outNodes.push_back(&node);
         }
     }
 
@@ -157,7 +157,7 @@ void BattleGrid::GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode
         {
             node.closed = true;
             node.parentNode = centerNode;
-            outNodes.push_back(node);
+            outNodes.push_back(&node);
         }
     }
 }
