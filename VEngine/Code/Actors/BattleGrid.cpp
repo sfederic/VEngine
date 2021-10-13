@@ -28,6 +28,8 @@ void BattleGrid::Start()
         nodeMesh->srv->Release();
     }
 
+
+    //Set the mesh count as 1 and empty the data just to put dummy data into the buffers
     nodeMesh->instanceData.clear();
     nodeMesh->instanceData.push_back(InstanceData());
 
