@@ -547,6 +547,9 @@
     <ClInclude Include="Code\Actors\BattleGrid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\GridNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

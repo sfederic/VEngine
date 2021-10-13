@@ -244,6 +244,7 @@
     <ClInclude Include="Code\FBXImporter.h" />
     <ClCompile Include="Code\Input.cpp" />
     <ClInclude Include="Code\GameInstance.h" />
+    <ClInclude Include="Code\GridNode.h" />
     <ClInclude Include="Code\Input.h" />
     <ClCompile Include="Code\main.cpp" />
     <ClInclude Include="Code\Editor\RenderViewWidget.h" />
