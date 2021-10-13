@@ -33,8 +33,8 @@ void BattleGrid::Start()
     nodeMesh->instanceData.clear();
     nodeMesh->instanceData.push_back(InstanceData());
 
-    int meshInstanceCount = 1;
-    nodeMesh->meshInstanceRenderCount = meshInstanceCount;
+    int meshInstanceCount = sizeX * sizeY;
+    nodeMesh->SetInstanceCount(meshInstanceCount);
 
     //Re-setup shader buffers
     nodeMesh->structuredBuffer = RenderUtils::CreateStructuredBuffer(sizeof(InstanceData) * meshInstanceCount,
@@ -47,7 +47,6 @@ void BattleGrid::Start()
     XMVECTOR rayOrigin = XMVectorZero();
 
     nodeMesh->instanceData.clear();
-    meshInstanceCount = sizeX * sizeY;
 
     for (int x = 0; x < sizeX; x++)
     {
@@ -61,14 +60,13 @@ void BattleGrid::Start()
             //Set instance model matrix
             InstanceData instanceData = {};
             instanceData.world = rootWorldMatrix;
-            nodeMesh->instanceData.push_back(instanceData);
 
-            //raycast against the world to get node position
+            //raycast against the world to set node position
             Ray ray = {};
             ray.actorsToIgnore.push_back(this);
             if (Raycast(ray, rayOrigin, -VMath::XMVectorUp(), 20.0f))
             {
-                //Scale the node down a little
+                //Scale the node down a little so that nodes aren't touching
                 XMMATRIX scaleMatrix = XMMatrixScaling(0.9f, 0.9f, 0.9f);
                 instanceData.world *= scaleMatrix;
 
@@ -78,8 +76,16 @@ void BattleGrid::Start()
                 XMVECTOR hitPosVector = XMLoadFloat3(&hitPos);
                 hitPosVector.m128_f32[3] = 1.0f;
 
-                nodeMesh->instanceData.back().world.r[3] = hitPosVector;
+                instanceData.world.r[3] = hitPosVector;
             }
+            else
+            {
+                //Mul by empty scale matrix to make the node invisible in-scene
+                XMMATRIX emptyScaleMatrix = XMMatrixScaling(0.f, 0.f, 0.f);
+                instanceData.world *= emptyScaleMatrix;
+            }
+
+            nodeMesh->instanceData.push_back(instanceData);
 
             //create grid node in row
             GridNode node = GridNode(x, y, nodeMesh->instanceData.size());
