@@ -3,14 +3,56 @@
 #include "GridNode.h"
 #include "GameUtils.h"
 #include "BattleGrid.h"
+#include "VMath.h"
+#include "Components/MeshComponent.h"
+
+#undef max
 
 Unit::Unit()
 {
+	mesh = MeshComponent::system.Add(this, MeshComponent("cube.fbx", "test.png"));
+	rootComponent = mesh;
+}
+
+void Unit::Start()
+{
+	xIndex = std::round(GetPosition().x);
+	yIndex = std::round(GetPosition().y);
+
+	nextMovePos = GetPositionVector();
+
+	BattleGrid* battleGrid = GameUtils::GetBattleGrid();
+	GridNode* destNode = battleGrid->GetNode(1, 1);
+	MoveTo(destNode);
+}
+
+void Unit::Tick(double deltaTime)
+{
+	if (XMVector4Equal(nextMovePos, GetPositionVector()))
+	{
+		if (movementPathNodeIndex < pathNodes.size())
+		{
+			nextMovePos = XMLoadFloat3(&pathNodes[movementPathNodeIndex]->worldPosition);
+
+			xIndex = pathNodes[movementPathNodeIndex]->xIndex;
+			yIndex = pathNodes[movementPathNodeIndex]->yIndex;
+
+			movementPathNodeIndex++;
+		}
+		else if (movementPathNodeIndex >= pathNodes.size())
+		{
+			movementPathNodeIndex = 0;
+			pathNodes.clear();
+		}
+	}
+
+	const float moveSpeed = 3.0f;
+	SetPosition(VMath::VectorConstantLerp(GetPositionVector(), nextMovePos, deltaTime, moveSpeed));
 }
 
 Properties Unit::GetProps()
 {
-	return Properties();
+	return Actor::GetProps();
 }
 
 void Unit::MoveTo(GridNode* destinationNode)
@@ -52,7 +94,23 @@ void Unit::MoveTo(GridNode* destinationNode)
 		node->hCost = XMVector3Length(endPos - currentPos).m128_f32[0];
 	}
 
+
 	GridNode* nextNode = nullptr;
+
+	int highestHCostIndex = 0;
+	int lowestHCostIndex = 0;
+
+	float lowestHCost = std::numeric_limits<float>::max();
+	for (int i = 0; i < movementPathNodes.size(); i++)
+	{
+		if (movementPathNodes[i]->hCost < lowestHCost)
+		{
+			lowestHCost = movementPathNodes[i]->hCost;
+			lowestHCostIndex = i;
+			nextNode = movementPathNodes[i];
+		}
+	}
+
 	while (nextNode != startingNode)
 	{
 		if (nextNode->parentNode)
