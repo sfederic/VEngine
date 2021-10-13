@@ -31,4 +31,5 @@ struct BattleGrid : Actor
 	BattleGrid();
 	virtual void Start() override;
 	virtual Properties GetProps() override;
+	GridNode* GetNode(int x, int y);
 };

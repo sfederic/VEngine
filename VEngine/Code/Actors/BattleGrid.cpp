@@ -102,3 +102,8 @@ Properties BattleGrid::GetProps()
     props.Add("Size Y", &sizeY);
     return props;
 }
+
+GridNode* BattleGrid::GetNode(int x, int y)
+{
+    return &rows[x].nodes[y];
+}
