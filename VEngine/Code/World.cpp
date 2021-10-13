@@ -33,7 +33,6 @@ void World::Init()
 	//Start();
 }
 
-//TODO: this sort of stuff doesn't work when deserialisation is involved as is.
 void World::Start()
 {
 	materialSystem.CreateAllMaterials();

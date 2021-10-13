@@ -21,8 +21,6 @@ namespace Profile
 {
 	extern std::unordered_map<std::string, TimeFrame*> timeFrames;
 
-	//TODO: source_location is fucking around a bit with being called in-function. Need to figure 
-	//out a way to use it.
 	void Start(std::source_location location);
 	void End(std::source_location location);
 	void Reset();

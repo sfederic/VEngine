@@ -8,8 +8,6 @@
 
 using namespace fbxsdk;
 
-//TODO: need to come back through here and change the actor system references to work with meshcomponents
-
 //REF: https://github.com/peted70/hololens-fbx-viewer/tree/master/HolographicAppForOpenGLES1/include
 //REF: https://peted.azurewebsites.net/hololens-fbx-loading-c/
 
