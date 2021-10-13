@@ -58,6 +58,15 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 
 	for (Actor* actor : world.GetAllActorsInWorld())
 	{
+		//Skip if actor is in ignore list
+		for (Actor* actorToIgnore : ray.actorsToIgnore)
+		{
+			if (actorToIgnore == actor)
+			{
+				goto endActorIteration;
+			}
+		}
+
 		//Iterate over actor's spatial components
 		for (SpatialComponent* spatialComponent : actor->GetComponentsOfType<SpatialComponent>())
 		{
@@ -82,6 +91,9 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 				bRayHit = true;
 			}
 		}
+
+		endActorIteration:
+		continue;
 	}
 
 	float nearestDistance = std::numeric_limits<float>::max();
@@ -103,17 +115,7 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 		if (distances[i] < nearestDistance)
 		{
 			nearestDistance = distances[i];
-
 			ray.hitActor = ray.hitActors[i];
-
-			//Skip raycast if actor is in ignore list
-			for (Actor* actorToIgnore : ray.actorsToIgnore)
-			{
-				if (actorToIgnore == ray.hitActors[i])
-				{
-					ray.hitActor = nullptr;
-				}
-			}
 		}
 	}
 
