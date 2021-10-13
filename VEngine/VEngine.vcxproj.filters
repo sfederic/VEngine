@@ -305,6 +305,9 @@
     <ClCompile Include="Code\Actors\BattleGrid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\Unit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -548,6 +551,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\GridNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Unit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
