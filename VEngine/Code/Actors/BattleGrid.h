@@ -7,11 +7,11 @@ struct InstanceMeshComponent;
 
 struct GridRow
 {
-	std::vector<GridNode> nodes;
+	std::vector<GridNode> columns;
 
 	void Add(GridNode node)
 	{
-		nodes.emplace_back(node);
+		columns.emplace_back(node);
 	}
 };
 
@@ -32,4 +32,5 @@ struct BattleGrid : Actor
 	virtual void Start() override;
 	virtual Properties GetProps() override;
 	GridNode* GetNode(int x, int y);
+	void GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode>& outNodes);
 };

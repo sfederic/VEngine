@@ -105,5 +105,59 @@ Properties BattleGrid::GetProps()
 
 GridNode* BattleGrid::GetNode(int x, int y)
 {
-    return &rows[x].nodes[y];
+    return &rows[x].columns[y];
+}
+
+void BattleGrid::GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode>& outNodes)
+{
+    int currentX = centerNode->xIndex;
+    int currentY = centerNode->yIndex;
+
+    //+X
+    if (currentX < (sizeX - 1))
+    {
+        GridNode& node = rows[currentX + 1].columns[currentY];
+        if (!node.closed && node.active)
+        {
+            node.closed = true;
+            node.parentNode = centerNode;
+            outNodes.push_back(node);
+        }
+    }
+
+    //-X
+    if (currentX > 0)
+    {
+        GridNode& node = rows[currentX - 1].columns[currentY];
+        if (!node.closed && node.active)
+        {
+            node.closed = true;
+            node.parentNode = centerNode;
+            outNodes.push_back(node);
+        }
+    }
+
+    //+Y
+    if (currentY < (sizeY - 1))
+    {
+        GridNode& node = rows[currentX].columns[currentY + 1];
+        if (!node.closed && node.active)
+        {
+            node.closed = true;
+            node.parentNode = centerNode;
+            outNodes.push_back(node);
+        }
+    }
+
+    //-Y
+    if (currentY > 0)
+    {
+        GridNode& node = rows[currentX].columns[currentY - 1];
+        if (!node.closed && node.active)
+        {
+            node.closed = true;
+            node.parentNode = centerNode;
+            outNodes.push_back(node);
+        }
+    }
 }
