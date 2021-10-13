@@ -15,6 +15,8 @@ struct GridRow
 	}
 };
 
+//Actor that holds all the traversable nodes in the level.
+//BatteGrid needs to always be at (0, 0, 0) in world because of how rows & nodes are created at index.
 struct BattleGrid : Actor
 {
 	ACTOR_SYSTEM(BattleGrid)
