@@ -1,4 +1,5 @@
 #include "AudioSystem.h"
+#include <filesystem>
 #include "Debug.h"
 
 #define fourccRIFF 'FFIR'
@@ -16,9 +17,9 @@ void AudioSystem::Init()
 	HR(audioEngine->CreateMasteringVoice(&masteringVoice));
 }
 
-void AudioSystem::PlayAudio(AudioChunk* chunk)
+void AudioSystem::PlayAudio(AudioBase* chunk)
 {
-	if (!chunk->bIsPlaying)
+	if (!chunk->isPlaying)
 	{
 		HR(chunk->sourceVoice->SubmitSourceBuffer(&chunk->buffer));
 		HR(chunk->sourceVoice->Start(0));
@@ -101,11 +102,13 @@ HRESULT AudioSystem::LoadWAV(const std::string filename, WAVEFORMATEXTENSIBLE& w
 {
 	HANDLE file = CreateFileA(filename.c_str(), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
 
-	if (INVALID_HANDLE_VALUE == file) {
+	if (INVALID_HANDLE_VALUE == file) 
+	{
 		return HRESULT_FROM_WIN32(GetLastError());
 	}
 
-	if (INVALID_SET_FILE_POINTER == SetFilePointer(file, 0, NULL, FILE_BEGIN)) {
+	if (INVALID_SET_FILE_POINTER == SetFilePointer(file, 0, NULL, FILE_BEGIN)) 
+	{
 		return HRESULT_FROM_WIN32(GetLastError());
 	}
 
@@ -115,7 +118,8 @@ HRESULT AudioSystem::LoadWAV(const std::string filename, WAVEFORMATEXTENSIBLE& w
 
 	DWORD fileType;
 	HR(ReadChunkData(file, &fileType, sizeof(DWORD), chunkPosition));
-	if (fileType != fourccWAVE) {
+	if (fileType != fourccWAVE) 
+	{
 		return S_FALSE;
 	}
 
@@ -133,12 +137,28 @@ HRESULT AudioSystem::LoadWAV(const std::string filename, WAVEFORMATEXTENSIBLE& w
 	return S_OK;
 }
 
-void AudioSystem::CreateAudio(const std::string filename, AudioChunk* chunk)
+AudioBase* AudioSystem::FindAudio(const std::string filename)
 {
-	//Initilization of audio is bad if nothing is zeroed out. Source voice fails
-	HR(LoadWAV(filename, chunk->waveFormat, chunk->buffer));
+	std::string path = "Audio/" + filename;
+	assert(std::filesystem::exists(path) && "Audio file not found.");
 
-	HR(audioEngine->CreateSourceVoice(&chunk->sourceVoice, (WAVEFORMATEX*)&chunk->waveFormat, 0, 2.0f, &chunk->callback));
+	AudioBase* audio = nullptr;
 
-	HR(chunk->sourceVoice->SubmitSourceBuffer(&chunk->buffer));
+	auto audioIt = loadedAudioFilesMap.find(filename);
+	if (audioIt != loadedAudioFilesMap.end())
+	{
+		audio = audioIt->second;
+	}
+	else
+	{
+		audio = new AudioBase();
+		loadedAudioFilesMap.insert(std::make_pair(filename, audio));
+
+		//Initilization of audio is bad if nothing is zeroed out, source voice fails
+		HR(LoadWAV(path, audio->waveFormat, audio->buffer));
+		HR(audioEngine->CreateSourceVoice(&audio->sourceVoice, (WAVEFORMATEX*)&audio->waveFormat, 0, 2.0f, &audio->callback));
+		HR(audio->sourceVoice->SubmitSourceBuffer(&audio->buffer));
+	}
+
+	return audio;
 }

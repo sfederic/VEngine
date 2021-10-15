@@ -1,7 +1,10 @@
 #pragma once
-#include <vector>
 #include <xaudio2.h>
 #include <string>
+#include <map>
+
+//TODO: wav files might be a bit too big with git, look into .ogg 
+//https://github.com/nothings/stb/blob/master/stb_vorbis.c
 
 struct VoiceCallback : public IXAudio2VoiceCallback
 {
@@ -20,6 +23,7 @@ struct VoiceCallback : public IXAudio2VoiceCallback
 	void OnVoiceError(void* pBufferContext, HRESULT Error) {}
 };
 
+//Base class for audio data
 struct AudioBase
 {
 	VoiceCallback callback;
@@ -35,17 +39,7 @@ struct AudioBase
 
 	IXAudio2SourceVoice* sourceVoice;
 
-	bool bIsPlaying;
-};
-
-struct AudioChunk : AudioBase
-{
-	//bool CreateAudio(const char* filename);
-};
-
-struct AudioStream : AudioBase
-{
-
+	bool isPlaying;
 };
 
 struct AudioSystem
@@ -53,11 +47,14 @@ struct AudioSystem
 	IXAudio2* audioEngine; //Main XAudio2 sound engine
 	IXAudio2MasteringVoice* masteringVoice; //Main track	
 
-	std::vector<AudioChunk*> audioChunks;
+	//Maps audio filename to AudioChunk
+	std::map<std::string, AudioBase*> loadedAudioFilesMap;
 
 	void Init();
-	void PlayAudio(AudioChunk* chunk);
-	void CreateAudio(const std::string filename, AudioChunk* chunk);
+	void PlayAudio(AudioBase* audio);
+
+	//Finds an audio file by filename and creates the audio if the map doesn't contain the filename.
+	AudioBase* FindAudio(const std::string filename);
 
 private:
 	HRESULT LoadWAV(const std::string filename, WAVEFORMATEXTENSIBLE& waveFormat, XAUDIO2_BUFFER& buffer);
