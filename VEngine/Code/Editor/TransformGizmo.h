@@ -22,7 +22,7 @@ struct TransformGizmo
 	ImGuizmo::MODE currentTransformMode = ImGuizmo::WORLD;
 
 	//Snap values are currently uniform across each axis, Imguizmo can handle seperate axis snap values though.
-	float currentSnapValues[3] = { 1.f, 1.f, 1.f };
+	float* currentSnapValues = nullptr;
 	float translateSnapValues[3] = { 1.f, 1.f, 1.f };
 	float rotationSnapValues[3] = { 90.f, 90.f, 90.f };
 	float scaleSnapValues[3] = { 0.5f, 0.5f, 0.5f };
@@ -35,9 +35,16 @@ struct TransformGizmo
 
 	bool mousePressAfterGizmoUse = false;
 
-	void Tick(); //Needs to be called in DebugMenu::Tick() to work with ImGui calls
+	TransformGizmo();
+
+	//Needs to be called in DebugMenu::Tick() to work with ImGui calls
+	void Tick();
+
 	bool CheckInUse();
 	bool CheckMouseOver();
+	void SetTranslateSnapValue(float value);
+	void SetScaleSnapValue(float value);
+	void SetRotationSnapValue(float value);
 };
 
 extern TransformGizmo transformGizmo;

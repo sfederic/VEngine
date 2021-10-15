@@ -13,6 +13,12 @@
 
 TransformGizmo transformGizmo;
 
+TransformGizmo::TransformGizmo()
+{
+    //Set translate as default startup transform operation
+    currentSnapValues = translateSnapValues;
+}
+
 void TransformGizmo::Tick()
 {
     //Set Imgui window
@@ -65,23 +71,17 @@ void TransformGizmo::Tick()
             if (Input::GetKeyDown(Keys::W))
             {
                 currentTransformOperation = ImGuizmo::TRANSLATE;
-                currentSnapValues[0] = translateSnapValues[0];
-                currentSnapValues[1] = translateSnapValues[1];
-                currentSnapValues[2] = translateSnapValues[2];
+                currentSnapValues = translateSnapValues;
             }
             else if (Input::GetKeyDown(Keys::E))
             {
                 currentTransformOperation = ImGuizmo::SCALE;
-                currentSnapValues[0] = scaleSnapValues[0];
-                currentSnapValues[1] = scaleSnapValues[1];
-                currentSnapValues[2] = scaleSnapValues[2];
+                currentSnapValues = scaleSnapValues;
             }
             else if (Input::GetKeyDown(Keys::R))
             {
                 currentTransformOperation = ImGuizmo::ROTATE;
-                currentSnapValues[0] = rotationSnapValues[0];
-                currentSnapValues[1] = rotationSnapValues[1];
-                currentSnapValues[2] = rotationSnapValues[2];
+                currentSnapValues = rotationSnapValues;
             }
         }
 
@@ -173,4 +173,25 @@ bool TransformGizmo::CheckInUse()
 bool TransformGizmo::CheckMouseOver()
 {
     return ImGuizmo::IsOver();
+}
+
+void TransformGizmo::SetTranslateSnapValue(float value)
+{
+    translateSnapValues[0] = value;
+    translateSnapValues[1] = value;
+    translateSnapValues[2] = value;
+}
+
+void TransformGizmo::SetScaleSnapValue(float value)
+{
+    scaleSnapValues[0] = value;
+    scaleSnapValues[1] = value;
+    scaleSnapValues[2] = value;
+}
+
+void TransformGizmo::SetRotationSnapValue(float value)
+{
+    rotationSnapValues[0] = value;
+    rotationSnapValues[1] = value;
+    rotationSnapValues[2] = value;
 }

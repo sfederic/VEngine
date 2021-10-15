@@ -71,23 +71,17 @@ void ToolbarDock::StartPlay()
 void ToolbarDock::SetTranslationSnapValue()
 {
 	float value = (float)translationSnapSpinBox->value();
-	transformGizmo.translateSnapValues[0] = value;
-	transformGizmo.translateSnapValues[1] = value;
-	transformGizmo.translateSnapValues[2] = value;
+	transformGizmo.SetTranslateSnapValue(value);
 }
 
 void ToolbarDock::SetScaleSnapValue()
 {
 	float value = (float)scaleSnapSpinBox->value();
-	transformGizmo.scaleSnapValues[0] = value;
-	transformGizmo.scaleSnapValues[1] = value;
-	transformGizmo.scaleSnapValues[2] = value;
+	transformGizmo.SetScaleSnapValue(value);
 }
 
 void ToolbarDock::SetRotationSnapValue()
 {
 	float value = (float)rotationSnapSpinBox->value();
-	transformGizmo.rotationSnapValues[0] = value;
-	transformGizmo.rotationSnapValues[1] = value;
-	transformGizmo.rotationSnapValues[2] = value;
+	transformGizmo.SetRotationSnapValue(value);
 }
