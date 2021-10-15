@@ -55,6 +55,7 @@ Properties Unit::GetProps()
 {
 	auto props = Actor::GetProps();
 	props.Add("Move Points", &movementPoints);
+	props.Add("NextMove", &nextMovePos);
 	return props;
 }
 

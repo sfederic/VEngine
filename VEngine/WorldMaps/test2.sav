@@ -30,7 +30,7 @@ Far Z
 Near Z
 0.01
 Position
-0 1 -3
+3 1 -3
 Rotation
 -0 0 -0 1
 Scale
@@ -47,15 +47,110 @@ UvScale
 1 1
 next
 MeshActor
-1
+6
 Mesh Filename
-plane.fbx
+cube.fbx
 Position
-0 0 0
+0 -1 -3
 Rotation
--0.706985 0 -0 0.707229
+-0 0 -0 1
 Scale
-5 5.00002 1
+1 1 1
+Shader
+DefaultShader.hlsl
+Texture2D
+test.png
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh Filename
+cube.fbx
+Position
+4 -1 -1
+Rotation
+-0 0 -0 1
+Scale
+1 1 1
+Shader
+DefaultShader.hlsl
+Texture2D
+test.png
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh Filename
+cube.fbx
+Position
+2 -1 -1
+Rotation
+-0 0 -0 1
+Scale
+1 1 1
+Shader
+DefaultShader.hlsl
+Texture2D
+test.png
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh Filename
+cube.fbx
+Position
+2 -1 1
+Rotation
+-0 0 -0 1
+Scale
+1 1 1
+Shader
+DefaultShader.hlsl
+Texture2D
+test.png
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh Filename
+cube.fbx
+Position
+2 -1 3
+Rotation
+-0 0 -0 1
+Scale
+1 1 1
+Shader
+DefaultShader.hlsl
+Texture2D
+test.png
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh Filename
+cube.fbx
+Position
+4 -1 3
+Rotation
+-0 0 -0 1
+Scale
+1 1 1
 Shader
 DefaultShader.hlsl
 Texture2D
@@ -94,3 +189,24 @@ InteractTrigger
 0
 DialogueInstance
 0
+Unit
+1
+Move Points
+5
+Position
+4 0 3
+Rotation
+-0 0 -0 1
+Scale
+0.5 0.5 0.5
+Shader
+DefaultShader.hlsl
+Texture2D
+test.png
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
