@@ -1,6 +1,7 @@
 #include "GameUtils.h"
 #include "Actors/Player.h"
 #include "Actors/BattleGrid.h"
+#include "Audio/AudioSystem.h"
 
 namespace GameUtils
 {
@@ -17,5 +18,12 @@ namespace GameUtils
 	BattleGrid* GetBattleGrid()
 	{
 		return BattleGrid::system.actors[0];
+	}
+
+	AudioBase* PlayAudio(const std::string filename)
+	{
+		auto audio = audioSystem.FindAudio(filename);
+		audioSystem.PlayAudio(audio);
+		return audio;
 	}
 }
