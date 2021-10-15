@@ -2,16 +2,23 @@
 #include <qdockwidget.h>
 #include <string>
 
+struct QFileSystemModel;
+struct QTreeView;
+struct QListWidget;
+struct QLineEdit;
+
 struct AssetDock : public QDockWidget
 {
-    struct QFileSystemModel* fileSystemModel;
-    struct QTreeView* assetTreeView;
-    struct QListWidget* assetIcons;
+    QFileSystemModel* fileSystemModel;
+    QTreeView* assetTreeView;
+    QListWidget* assetIcons;
+    QLineEdit* assetFilterLineEdit;
 
     AssetDock();
     void AssetItemClicked();
     void AssetFolderClicked();
     void ShowContextMenu(const QPoint&);
+    void FilterAssets();
 
     //Asset open functions
     void OpenAssetItemInDefaultProgram();

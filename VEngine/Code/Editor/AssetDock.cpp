@@ -7,6 +7,7 @@
 #include <qlistwidget.h>
 #include <QDesktopServices>
 #include <qboxlayout.h>
+#include <qlineedit.h>
 #include <QUrl>
 #include "FileSystem.h"
 #include "Actors/MeshActor.h"
@@ -75,8 +76,18 @@ AssetDock::AssetDock() : QDockWidget("Assets")
     assetHBox->addWidget(assetTreeView, Qt::AlignLeft);
     assetHBox->addWidget(assetIcons, Qt::AlignRight);
 
+
+    //Setup search bar
+    assetFilterLineEdit = new QLineEdit();
+    assetFilterLineEdit->setPlaceholderText("Search Assets...");
+    connect(assetFilterLineEdit, &QLineEdit::textChanged, this, &AssetDock::FilterAssets);
+
+    auto vLayout = new QVBoxLayout();
+    vLayout->addWidget(assetFilterLineEdit);
+    vLayout->addLayout(assetHBox);
+
     QWidget* assetWidget = new QWidget();
-    assetWidget->setLayout(assetHBox);
+    assetWidget->setLayout(vLayout);
 
     setWidget(assetWidget);
 
@@ -201,6 +212,24 @@ void AssetDock::ShowContextMenu(const QPoint& point)
     contextMenu.addAction(&materialAction);
 
     contextMenu.exec(mapToGlobal(point));
+}
+
+void AssetDock::FilterAssets()
+{
+    QString filterText = assetFilterLineEdit->text().toLower();
+
+    for (int i = 0; i < assetIcons->count(); i++)
+    {
+        QListWidgetItem* item = assetIcons->item(i);
+        if (item->text().toLower().contains(filterText))
+        {
+            item->setHidden(false);
+        }
+        else
+        {
+            item->setHidden(true);
+        }
+    }
 }
 
 void AssetDock::MeshFileClicked(const std::string meshFilename)
