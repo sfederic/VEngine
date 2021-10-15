@@ -21,9 +21,10 @@ struct TransformGizmo
 	ImGuizmo::OPERATION currentTransformOperation = ImGuizmo::TRANSLATE;
 	ImGuizmo::MODE currentTransformMode = ImGuizmo::WORLD;
 
+	//Snap values are currently uniform across each axis, Imguizmo can handle seperate axis snap values though.
 	float currentSnapValues[3] = { 1.f, 1.f, 1.f };
 	float translateSnapValues[3] = { 1.f, 1.f, 1.f };
-	float rotationSnapValues[3] = { 10.f, 10.f, 10.f };
+	float rotationSnapValues[3] = { 90.f, 90.f, 90.f };
 	float scaleSnapValues[3] = { 0.5f, 0.5f, 0.5f };
 
 	float bounds[6] = { -1.f, -1.f, -1.f, 1.f, 1.f, 1.f };
