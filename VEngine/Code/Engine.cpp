@@ -19,6 +19,7 @@
 #include "Render/RenderUtils.h"
 #include "Render/MaterialSystem.h"
 #include "UI/SpriteBatcher.h"
+#include "Audio/AudioSystem.h"
 
 Engine engine;
 
@@ -29,6 +30,8 @@ void Engine::Init(int argc, char* argv[])
 	editor->Init(argc, argv);
 
 	activeCamera = &editorCamera;
+
+	audioSystem.Init();
 
 	renderer.Init(editor->windowHwnd, editor->viewportWidth, editor->viewportHeight);
 	RenderUtils::defaultSampler = RenderUtils::CreateSampler();
