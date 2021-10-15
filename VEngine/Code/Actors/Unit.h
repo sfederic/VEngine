@@ -15,11 +15,14 @@ struct Unit : Actor
 	int xIndex = -1;
 	int yIndex = -1;
 
-	int movementPoints = 20;
+	int movementPoints = 1;
 
 	int movementPathNodeIndex = 0;
 
+	//All the nodes the unit can move to
 	std::vector<GridNode*> movementPathNodes;
+
+	//The end path the unit takes after a call to MoveTo()
 	std::vector<GridNode*> pathNodes;
 
 	XMVECTOR nextMovePos;

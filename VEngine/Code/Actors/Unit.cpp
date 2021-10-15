@@ -54,7 +54,7 @@ void Unit::Tick(double deltaTime)
 Properties Unit::GetProps()
 {
 	auto props = Actor::GetProps();
-	props.Add("Next Move", &nextMovePos);
+	props.Add("Move Points", &movementPoints);
 	return props;
 }
 
@@ -63,23 +63,23 @@ void Unit::MoveTo(GridNode* destinationNode)
 	BattleGrid* battleGrid = GameUtils::GetBattleGrid();
 	GridNode* startingNode = battleGrid->GetNode(xIndex, yIndex);
 
-	std::vector<GridNode*> previewNodes;
-	std::vector<GridNode*> closedPreviewNodes;
+	std::vector<GridNode*> nodes;
+	std::vector<GridNode*> closedNodes;
 
-	battleGrid->GetNeighbouringNodes(startingNode, previewNodes);
+	battleGrid->GetNeighbouringNodes(startingNode, nodes);
 
 	for (int moveIndex = 0; moveIndex < movementPoints; moveIndex++)
 	{
-		for (int previewIndex = 0; previewIndex < previewNodes.size(); previewIndex++)
+		for (int previewIndex = 0; previewIndex < nodes.size(); previewIndex++)
 		{
-			battleGrid->GetNeighbouringNodes(previewNodes[previewIndex], closedPreviewNodes);
+			battleGrid->GetNeighbouringNodes(nodes[previewIndex], closedNodes);
 		}
 
-		previewNodes.insert(previewNodes.end(), closedPreviewNodes.begin(), closedPreviewNodes.end());
-		closedPreviewNodes.clear();
+		nodes.insert(nodes.end(), closedNodes.begin(), closedNodes.end());
+		closedNodes.clear();
 	}
 
-	for (GridNode* node : previewNodes)
+	for (GridNode* node : nodes)
 	{
 		movementPathNodes.push_back(node);
 	}
@@ -114,17 +114,23 @@ void Unit::MoveTo(GridNode* destinationNode)
 		}
 	}
 
-	if (nextNode != nullptr)
-	{
-		pathNodes.push_back(nextNode);
-	}
+	//This needs to be here if you need Units moving exactly to a point, but most times
+	// the unit is going to be moving to a surrounding node if there is a target, eg. the unit
+	// isn't going to move onto the node of the player, instead to a neighbouring node
+	//if (nextNode != nullptr)
+	//{
+	//	pathNodes.push_back(nextNode);
+	//}
 
-	while (nextNode != startingNode)
+	if (nextNode)
 	{
-		if (nextNode->parentNode)
+		while (nextNode != startingNode)
 		{
-			nextNode = nextNode->parentNode;
-			pathNodes.push_back(nextNode);
+			if (nextNode->parentNode)
+			{
+				nextNode = nextNode->parentNode;
+				pathNodes.push_back(nextNode);
+			}
 		}
 	}
 
