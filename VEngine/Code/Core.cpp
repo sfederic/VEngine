@@ -55,7 +55,8 @@ void Core::SetTimerFrequency()
 
 void Core::Init()
 {
-	HR(CoInitialize(NULL)); //For the WIC texture functions from DirectXToolkit
+	//For the WIC texture functions from DirectXToolkit and XAudio2 threading
+	HR(CoInitializeEx(NULL, COINIT_MULTITHREADED));
 	SetTimerFrequency();
 }
 
