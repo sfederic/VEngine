@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <xaudio2.h>
+#include <string>
 
 struct VoiceCallback : public IXAudio2VoiceCallback
 {
@@ -56,8 +57,12 @@ struct AudioSystem
 
 	void Init();
 	void PlayAudio(AudioChunk* chunk);
+	void CreateAudio(const std::string filename, AudioChunk* chunk);
+
+private:
+	HRESULT LoadWAV(const std::string filename, WAVEFORMATEXTENSIBLE& waveFormat, XAUDIO2_BUFFER& buffer);
 	HRESULT FindChunk(HANDLE file, DWORD fourcc, DWORD* dwChunkSize, DWORD* dwChunkDataPosition);
 	HRESULT ReadChunkData(HANDLE file, void* buffer, DWORD bufferSize, DWORD bufferOffset);
-	HRESULT LoadWAV(const char* filename, WAVEFORMATEXTENSIBLE& waveFormat, XAUDIO2_BUFFER& buffer);
-	bool CreateAudio(const char* filename, AudioChunk* chunk);
 };
+
+extern AudioSystem audioSystem;

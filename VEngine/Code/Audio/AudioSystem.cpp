@@ -8,6 +8,8 @@
 #define fourccXWMA 'AMWX'
 #define fourccDPDS 'sdpd'
 
+AudioSystem audioSystem;
+
 void AudioSystem::Init()
 {
 	HR(XAudio2Create(&audioEngine));
@@ -94,9 +96,10 @@ HRESULT AudioSystem::ReadChunkData(HANDLE file, void* buffer, DWORD bufferSize, 
 	return hr;
 }
 
-HRESULT AudioSystem::LoadWAV(const char* filename, WAVEFORMATEXTENSIBLE& waveFormat, XAUDIO2_BUFFER& buffer)
+//REF::https://docs.microsoft.com/en-us/windows/win32/xaudio2/how-to--load-audio-data-files-in-xaudio2
+HRESULT AudioSystem::LoadWAV(const std::string filename, WAVEFORMATEXTENSIBLE& waveFormat, XAUDIO2_BUFFER& buffer)
 {
-	HANDLE file = CreateFileA(filename, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
+	HANDLE file = CreateFileA(filename.c_str(), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
 
 	if (INVALID_HANDLE_VALUE == file) {
 		return HRESULT_FROM_WIN32(GetLastError());
@@ -130,14 +133,12 @@ HRESULT AudioSystem::LoadWAV(const char* filename, WAVEFORMATEXTENSIBLE& waveFor
 	return S_OK;
 }
 
-bool AudioSystem::CreateAudio(const char* filename, AudioChunk* chunk)
+void AudioSystem::CreateAudio(const std::string filename, AudioChunk* chunk)
 {
 	//Initilization of audio is bad if nothing is zeroed out. Source voice fails
 	HR(LoadWAV(filename, chunk->waveFormat, chunk->buffer));
 
 	HR(audioEngine->CreateSourceVoice(&chunk->sourceVoice, (WAVEFORMATEX*)&chunk->waveFormat, 0, 2.0f, &chunk->callback));
 
-	//HR(chunk->sourceVoice->SubmitSourceBuffer(&chunk->buffer));
-
-	return true;
+	HR(chunk->sourceVoice->SubmitSourceBuffer(&chunk->buffer));
 }
