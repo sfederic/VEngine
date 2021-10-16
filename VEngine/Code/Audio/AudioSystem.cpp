@@ -68,7 +68,7 @@ void AudioSystem::CleanupAllLoadedAudio()
 	loadedAudioMap.clear();
 }
 
-void AudioSystem::PlayAudio(const std::string filename)
+uint64_t AudioSystem::PlayAudio(const std::string filename)
 {
 	auto audioIt = loadedAudioMap.find(filename);
 	if (audioIt == loadedAudioMap.end())
@@ -90,6 +90,8 @@ void AudioSystem::PlayAudio(const std::string filename)
 
 	HR(sourceVoice->SubmitSourceBuffer(&audio->buffer));
 	HR(sourceVoice->Start(0));
+
+	return nextChannelID;
 }
 
 void AudioSystem::LoadAudio(const std::string filename)
