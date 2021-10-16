@@ -25,8 +25,6 @@ void AudioBase::OnBufferEnd(void* pBufferContext)
 			break;
 		}
 	}
-
-	isPlaying = false;
 }
 
 void __stdcall AudioBase::OnVoiceProcessingPassStart(UINT32 BytesRequired)

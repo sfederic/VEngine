@@ -11,9 +11,9 @@ struct AudioBase : IXAudio2VoiceCallback
 	XAUDIO2_BUFFER buffer = {};
 	std::string audioFilename;
 
+	//Instead of putting these into the AudioSystem, decided to leave them here.
+	//Each sourcevoice will have matching data as the AudioBase data.
 	std::vector<IXAudio2SourceVoice*> sourceVoicesPlaying;
-
-	bool isPlaying = false;
 
 	AudioBase(std::string filename);
 	~AudioBase();
