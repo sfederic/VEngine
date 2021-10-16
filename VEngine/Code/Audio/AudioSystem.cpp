@@ -48,7 +48,7 @@ void AudioSystem::Tick()
 
 void AudioSystem::Cleanup()
 {
-	CleanupAllLoadedAudio();
+	DeleteLoadedAudioAndChannels();
 
 	masteringVoice->DestroyVoice();
 	audioEngine->Release();
@@ -58,7 +58,7 @@ void AudioSystem::Cleanup()
 	CoUninitialize();
 }
 
-void AudioSystem::CleanupAllLoadedAudio()
+void AudioSystem::DeleteLoadedAudioAndChannels()
 {
 	for (auto audioIt : loadedAudioMap)
 	{
@@ -66,6 +66,13 @@ void AudioSystem::CleanupAllLoadedAudio()
 	}
 
 	loadedAudioMap.clear();
+
+	for (auto channel : channelMap)
+	{
+		delete channel.second;
+	}
+
+	channelMap.clear();
 }
 
 uint64_t AudioSystem::PlayAudio(const std::string filename)
@@ -80,6 +87,7 @@ uint64_t AudioSystem::PlayAudio(const std::string filename)
 	AudioBase* audio = audioIt->second;
 
 	auto channel = new AudioChannel(); 
+	channel->isPlaying = true;
 	nextChannelID++;
 	channelMap[nextChannelID] = channel;
 
@@ -99,12 +107,6 @@ void AudioSystem::LoadAudio(const std::string filename)
 	std::string path = "Audio/" + filename;
 	assert(std::filesystem::exists(path) && "Audio file not found.");
 
-	auto audioIt = loadedAudioMap.find(filename);
-	if (!loadedAudioMap.empty())
-	{
-		assert(audioIt != loadedAudioMap.end() && "Duplicate audio entry in map.");
-	}
-
 	auto audio = new AudioBase(filename);
 	loadedAudioMap.insert(std::make_pair(filename, audio));
 
@@ -115,7 +117,7 @@ void AudioSystem::LoadAudio(const std::string filename)
 void AudioSystem::UnloadAudio(const std::string filename)
 {
 	auto audioIt = loadedAudioMap.find(filename);
-	assert(audioIt == loadedAudioMap.end());
+	assert(audioIt != loadedAudioMap.end());
 
 	delete audioIt->second;
 	loadedAudioMap.erase(audioIt);

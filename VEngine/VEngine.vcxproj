@@ -113,6 +113,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Actors\AudioActor.cpp" />
     <ClCompile Include="Code\Components\AudioComponent.cpp" />
     <ClCompile Include="Code\Actors\BattleGrid.cpp" />
     <ClCompile Include="Code\Audio\AudioBase.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="Code\UI\SpriteBatcher.cpp" />
     <ClCompile Include="Code\Actors\Billboard.cpp" />
     <ClCompile Include="Code\Actors\Unit.cpp" />
+    <ClInclude Include="Code\Actors\AudioActor.h" />
     <ClInclude Include="Code\Components\AudioComponent.h" />
     <ClInclude Include="Code\Actors\BattleGrid.h" />
     <ClInclude Include="Code\Audio\AudioBase.h" />

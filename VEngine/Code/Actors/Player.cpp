@@ -38,6 +38,8 @@ void Player::Tick(double deltaTime)
 
 	if (Input::GetKeyUp(Keys::Down))
 	{
+		GameUtils::PlayAudio("jingle.wav");
+
 		if (inConversation)
 		{
 			if (!dialogueComponent->NextLine())

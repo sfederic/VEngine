@@ -8,6 +8,7 @@
 #include "World.h"
 #include "UI/UISystem.h"
 #include "FileSystem.h"
+#include "Audio/AudioSystem.h"
 
 double ticks;
 double deltaTime = 0.0;
@@ -128,6 +129,8 @@ void Core::EndGame()
 	gameplayOn = false;
 
 	uiSystem.RemoveAllWidgets();
+
+	audioSystem.DeleteLoadedAudioAndChannels();
 
 	//TODO: initially I had it so that the world is only reloaded when the starting level is changed
 	//from when play is pressed, but spawning extra components/actors during play just meant that

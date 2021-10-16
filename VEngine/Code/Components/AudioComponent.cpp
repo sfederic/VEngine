@@ -24,7 +24,7 @@ void AudioComponent::Create()
 
 Properties AudioComponent::GetProps()
 {
-    Properties props;
+    Properties props("AudioComponent");
     props.Add("Audio Filename", &audioFilename);
     props.Add("Play On Start", &playOnStart);
     return props;

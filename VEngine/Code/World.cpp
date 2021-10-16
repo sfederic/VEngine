@@ -162,7 +162,7 @@ std::vector<Component*> World::GetAllComponentsInWorld()
 void World::Cleanup()
 {
 	//Cleanup various systems
-	audioSystem.CleanupAllLoadedAudio();
+	audioSystem.DeleteLoadedAudioAndChannels();
 	textureSystem.Cleanup();
 	materialSystem.Cleanup();
 
