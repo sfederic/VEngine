@@ -2,7 +2,31 @@
 
 AudioChannel::~AudioChannel()
 {
-	voice->DestroyVoice();
+	sourceVoice->DestroyVoice();
+}
+
+void AudioChannel::SetVolume(float volume)
+{
+	sourceVoice->SetVolume(volume);
+}
+
+float AudioChannel::GetVolume()
+{
+	float volume = 0.f;
+	sourceVoice->GetVolume(&volume);
+	return volume;
+}
+
+void AudioChannel::SetPitch(float pitch)
+{
+	sourceVoice->SetFrequencyRatio(pitch);
+}
+
+float AudioChannel::GetPitch()
+{
+	float pitch = 0.f;
+	sourceVoice->GetFrequencyRatio(&pitch);
+	return pitch;
 }
 
 void __stdcall AudioChannel::OnVoiceProcessingPassStart(UINT32 BytesRequired)

@@ -86,7 +86,7 @@ uint64_t AudioSystem::PlayAudio(const std::string filename)
 	IXAudio2SourceVoice* sourceVoice = nullptr;
 	HR(audioEngine->CreateSourceVoice(&sourceVoice, (WAVEFORMATEX*)&audio->waveFormat, 0, 2.0f, channel));
 
-	channel->voice = sourceVoice;
+	channel->sourceVoice = sourceVoice;
 
 	HR(sourceVoice->SubmitSourceBuffer(&audio->buffer));
 	HR(sourceVoice->Start(0));
