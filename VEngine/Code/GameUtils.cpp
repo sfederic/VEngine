@@ -20,10 +20,8 @@ namespace GameUtils
 		return BattleGrid::system.actors[0];
 	}
 
-	AudioBase* PlayAudioOneShot(const std::string filename)
+	void PlayAudio(const std::string audioFilename)
 	{
-		auto audio = audioSystem.FindAudio(filename);
-		audioSystem.PlayAudioOneShot(audio);
-		return audio;
+		audioSystem.PlayAudio(audioFilename);
 	}
 }

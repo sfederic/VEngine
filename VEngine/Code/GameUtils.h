@@ -3,13 +3,11 @@
 
 struct Player;
 struct BattleGrid;
-struct AudioBase;
 
 //Utility functions for in-game stuff
 namespace GameUtils
 {
 	Player* GetPlayer();
 	BattleGrid* GetBattleGrid();
-
-	AudioBase* PlayAudioOneShot(const std::string filename);
+	void PlayAudio(const std::string audioFilename);
 };
