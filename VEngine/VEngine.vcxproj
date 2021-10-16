@@ -115,8 +115,7 @@
   <ItemGroup>
     <ClCompile Include="Code\Actors\BattleGrid.cpp" />
     <ClCompile Include="Code\Audio\AudioBase.cpp" />
-    <ClCompile Include="Code\Audio\AudioInstance.cpp" />
-    <ClCompile Include="Code\Audio\SourceVoice.cpp" />
+    <ClCompile Include="Code\Audio\AudioChannel.cpp" />
     <ClCompile Include="Code\Components\BoxTriggerComponent.cpp" />
     <ClCompile Include="Code\Actors\ActorSystemCache.cpp" />
     <ClCompile Include="Code\DialogueStructures.cpp" />
@@ -166,8 +165,7 @@
     <ClCompile Include="Code\Actors\Unit.cpp" />
     <ClInclude Include="Code\Actors\BattleGrid.h" />
     <ClInclude Include="Code\Audio\AudioBase.h" />
-    <ClInclude Include="Code\Audio\AudioInstance.h" />
-    <ClInclude Include="Code\Audio\SourceVoice.h" />
+    <ClInclude Include="Code\Audio\AudioChannel.h" />
     <ClInclude Include="Code\Components\BoxTriggerComponent.h" />
     <ClInclude Include="Code\Animation\AnimationStructures.h" />
     <ClInclude Include="Code\Actors\Actor.h" />

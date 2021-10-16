@@ -1,36 +1,37 @@
 #pragma once
+#include <xaudio2.h>
 #include <string>
 #include <map>
 #include <vector>
-#include "AudioBase.h"
-#include "SourceVoice.h"
 
-//TODO: wav files might be a bit too big with git, look into .ogg 
-//https://github.com/nothings/stb/blob/master/stb_vorbis.c
+struct AudioChannel;
+struct AudioBase;
 
+//Lot of this was inspired by https://gdcvault.com/play/1022061/How-to-Write-an-Audio after 
+//fucking around for hours with XAudio2.
 struct AudioSystem
 {
+private:
+	uint64_t nextChannelID = 0;
+
 	IXAudio2* audioEngine = nullptr; //Main XAudio2 sound engine
 	IXAudio2MasteringVoice* masteringVoice = nullptr; //Main track	
 
-	//Maps audio filename to AudioBase structure
-	std::map<std::string, AudioBase*> loadedAudioFilesMap;
+	typedef std::map<std::string, AudioBase*> AudioMap;
+	AudioMap loadedAudioMap;
 
-	inline static const int MAX_SOURCE_VOICES = 16;
-	//This acts as a buffer for 'One-shot' audio files being played.
-	SourceVoice sourceVoices[MAX_SOURCE_VOICES];
+	typedef std::map<uint64_t, AudioChannel*> ChannelMap;
+	ChannelMap channelMap;
 
+public:
 	void Init();
+	void Tick();
 	void Cleanup();
-
-	//Needs to be called when new world's are loaded in to clear loaded audio structs
 	void CleanupAllLoadedAudio();
 
-	//Plays audio as a 'one shot'. Creates a sourcevoice and fires its Start()
-	void PlayAudioOneShot(AudioBase* audio);
-
-	//Finds an audio file by filename and creates the audio if the map doesn't contain the filename.
-	AudioBase* FindAudio(const std::string filename);
+	void PlayAudio(const std::string filename);
+	void LoadAudio(const std::string filename);
+	void UnloadAudio(const std::string filename);
 
 private:
 	HRESULT LoadWAV(const std::string filename, WAVEFORMATEXTENSIBLE& waveFormat, XAUDIO2_BUFFER& buffer);

@@ -1,6 +1,8 @@
 #include "AudioSystem.h"
 #include <filesystem>
 #include "Debug.h"
+#include "AudioBase.h"
+#include "AudioChannel.h"
 
 #define fourccRIFF 'FFIR'
 #define fourccDATA 'atad'
@@ -25,6 +27,24 @@ void AudioSystem::Init()
 	HR(audioEngine->CreateMasteringVoice(&masteringVoice));
 }
 
+void AudioSystem::Tick()
+{
+	std::vector<ChannelMap::iterator> stoppedChannels;
+
+	for (auto it = channelMap.begin(), itEnd = channelMap.end(); it != itEnd; it++)
+	{
+		if (it->second->isPlaying)
+		{
+			stoppedChannels.push_back(it);
+		}
+	}
+
+	for (auto& it : stoppedChannels)
+	{
+		channelMap.erase(it);
+	}
+}
+
 void AudioSystem::Cleanup()
 {
 	CleanupAllLoadedAudio();
@@ -39,59 +59,63 @@ void AudioSystem::Cleanup()
 
 void AudioSystem::CleanupAllLoadedAudio()
 {
-	for (auto audioIt : loadedAudioFilesMap)
+	for (auto audioIt : loadedAudioMap)
 	{
 		delete audioIt.second;
 	}
 
-	loadedAudioFilesMap.clear();
+	loadedAudioMap.clear();
 }
 
-void AudioSystem::PlayAudioOneShot(AudioBase* audio)
+void AudioSystem::PlayAudio(const std::string filename)
 {
-	//Find a SourceVoice in the array that isn't playing
-	SourceVoice* connectedVoice = nullptr;
-	for (SourceVoice& source : sourceVoices)
+	nextChannelID++;
+
+	auto audioIt = loadedAudioMap.find(filename);
+	if (audioIt == loadedAudioMap.end())
 	{
-		if (source.CheckNotPlaying())
-		{
-			connectedVoice = &source;
-		}
+		LoadAudio(filename);
+		audioIt = loadedAudioMap.find(filename);
 	}
 
-	assert(connectedVoice && "MAX_SOURCE_VOICES isn't big enough.");
+	AudioBase* audio = audioIt->second;
+	auto channel = new AudioChannel(); 
+	channelMap[nextChannelID] = channel;
 
 	IXAudio2SourceVoice* sourceVoice = nullptr;
-	HR(audioEngine->CreateSourceVoice(&sourceVoice, (WAVEFORMATEX*)&audio->waveFormat, 0, 2.0f, connectedVoice));
+	HR(audioEngine->CreateSourceVoice(&sourceVoice, (WAVEFORMATEX*)&audio->waveFormat, 0, 2.0f, channel));
 
-	connectedVoice->voice = sourceVoice;
+	channel->voice = sourceVoice;
 
 	HR(sourceVoice->SubmitSourceBuffer(&audio->buffer));
 	HR(sourceVoice->Start(0));
 }
 
-AudioBase* AudioSystem::FindAudio(const std::string filename)
+void AudioSystem::LoadAudio(const std::string filename)
 {
 	std::string path = "Audio/" + filename;
 	assert(std::filesystem::exists(path) && "Audio file not found.");
 
-	AudioBase* audio = nullptr;
-
-	auto audioIt = loadedAudioFilesMap.find(filename);
-	if (audioIt != loadedAudioFilesMap.end())
+	auto audioIt = loadedAudioMap.find(filename);
+	if (!loadedAudioMap.empty())
 	{
-		audio = audioIt->second;
-	}
-	else
-	{
-		audio = new AudioBase(filename);
-		loadedAudioFilesMap.insert(std::make_pair(filename, audio));
-
-		//Initilization of audio is bad if nothing is zeroed out, source voice fails
-		HR(LoadWAV(path, audio->waveFormat, audio->buffer));
+		assert(audioIt != loadedAudioMap.end() && "Duplicate audio entry in map.");
 	}
 
-	return audio;
+	auto audio = new AudioBase(filename);
+	loadedAudioMap.insert(std::make_pair(filename, audio));
+
+	//Initilization of audio is bad if nothing is zeroed out, source voice fails
+	HR(LoadWAV(path, audio->waveFormat, audio->buffer));
+}
+
+void AudioSystem::UnloadAudio(const std::string filename)
+{
+	auto audioIt = loadedAudioMap.find(filename);
+	assert(audioIt == loadedAudioMap.end());
+
+	audioIt->second->Destroy();
+	loadedAudioMap.erase(audioIt);
 }
 
 HRESULT AudioSystem::FindChunk(HANDLE file, DWORD fourcc, DWORD* dwChunkSize, DWORD* dwChunkDataPosition)

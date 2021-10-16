@@ -1,13 +1,12 @@
 #pragma once
 #include <xaudio2.h>
 
-struct SourceVoice : IXAudio2VoiceCallback
+//Rough wrapper around IXAudio2SourceVoice to handle deletion and callbacks easier
+struct AudioChannel : IXAudio2VoiceCallback
 {
 	IXAudio2SourceVoice* voice = nullptr;
 
 	bool isPlaying = false;
-
-	bool CheckNotPlaying();
 
 	// Inherited via IXAudio2VoiceCallback
 	virtual void __stdcall OnVoiceProcessingPassStart(UINT32 BytesRequired) override;

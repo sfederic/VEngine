@@ -311,10 +311,7 @@
     <ClCompile Include="Code\Audio\AudioBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Audio\AudioInstance.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Audio\SourceVoice.cpp">
+    <ClCompile Include="Code\Audio\AudioChannel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -571,10 +568,7 @@
     <ClInclude Include="Code\Audio\AudioBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Audio\AudioInstance.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Audio\SourceVoice.h">
+    <ClInclude Include="Code\Audio\AudioChannel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
