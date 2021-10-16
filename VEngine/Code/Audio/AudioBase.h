@@ -22,12 +22,12 @@ struct VoiceCallback : public IXAudio2VoiceCallback
 //Base class for audio data
 struct AudioBase
 {
-	VoiceCallback callback;
-	WAVEFORMATEXTENSIBLE waveFormat;
-	XAUDIO2_BUFFER buffer;
+	VoiceCallback callback = {};
+	WAVEFORMATEXTENSIBLE waveFormat = {};
+	XAUDIO2_BUFFER buffer = {};
 	std::string audioFilename;
-	IXAudio2SourceVoice* sourceVoice;
-	bool isPlaying;
+	IXAudio2SourceVoice* sourceVoice = nullptr;
+	bool isPlaying = false;
 
 	AudioBase(std::string filename)
 	{
