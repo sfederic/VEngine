@@ -556,6 +556,9 @@
     <ClInclude Include="Code\Actors\Unit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\VMemory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

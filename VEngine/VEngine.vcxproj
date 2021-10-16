@@ -274,6 +274,7 @@
     <ClCompile Include="Code\Editor\TransformGizmo.cpp" />
     <ClInclude Include="Code\Editor\TransformGizmo.h" />
     <ClInclude Include="Code\UI\UISystem.h" />
+    <ClInclude Include="Code\VMemory.h" />
     <ClInclude Include="Code\World.h" />
     <ClInclude Include="Code\WorldEditor.h" />
     <ClCompile Include="Code\UI\UISystem.cpp" />
