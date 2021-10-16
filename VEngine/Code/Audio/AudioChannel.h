@@ -8,6 +8,7 @@ struct AudioChannel : IXAudio2VoiceCallback
 
 	bool isPlaying = false;
 
+	~AudioChannel();
 	// Inherited via IXAudio2VoiceCallback
 	virtual void __stdcall OnVoiceProcessingPassStart(UINT32 BytesRequired) override;
 	virtual void __stdcall OnVoiceProcessingPassEnd(void) override;

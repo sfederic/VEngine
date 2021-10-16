@@ -33,7 +33,7 @@ void AudioSystem::Tick()
 
 	for (auto it = channelMap.begin(), itEnd = channelMap.end(); it != itEnd; it++)
 	{
-		if (it->second->isPlaying)
+		if (!it->second->isPlaying)
 		{
 			stoppedChannels.push_back(it);
 		}
@@ -41,6 +41,7 @@ void AudioSystem::Tick()
 
 	for (auto& it : stoppedChannels)
 	{
+		delete it->second;
 		channelMap.erase(it);
 	}
 }
@@ -69,8 +70,6 @@ void AudioSystem::CleanupAllLoadedAudio()
 
 void AudioSystem::PlayAudio(const std::string filename)
 {
-	nextChannelID++;
-
 	auto audioIt = loadedAudioMap.find(filename);
 	if (audioIt == loadedAudioMap.end())
 	{
@@ -79,7 +78,9 @@ void AudioSystem::PlayAudio(const std::string filename)
 	}
 
 	AudioBase* audio = audioIt->second;
+
 	auto channel = new AudioChannel(); 
+	nextChannelID++;
 	channelMap[nextChannelID] = channel;
 
 	IXAudio2SourceVoice* sourceVoice = nullptr;
@@ -114,7 +115,7 @@ void AudioSystem::UnloadAudio(const std::string filename)
 	auto audioIt = loadedAudioMap.find(filename);
 	assert(audioIt == loadedAudioMap.end());
 
-	audioIt->second->Destroy();
+	delete audioIt->second;
 	loadedAudioMap.erase(audioIt);
 }
 

@@ -1,5 +1,10 @@
 #include "AudioChannel.h"
 
+AudioChannel::~AudioChannel()
+{
+	voice->DestroyVoice();
+}
+
 void __stdcall AudioChannel::OnVoiceProcessingPassStart(UINT32 BytesRequired)
 {
 }
