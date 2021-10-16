@@ -17,6 +17,16 @@ void AudioSystem::Init()
 	HR(audioEngine->CreateMasteringVoice(&masteringVoice));
 }
 
+void AudioSystem::Cleanup()
+{
+	for (auto audioIt : loadedAudioFilesMap)
+	{
+		delete audioIt.second;
+	}
+
+	loadedAudioFilesMap.clear();
+}
+
 void AudioSystem::PlayAudio(AudioBase* chunk)
 {
 	if (!chunk->isPlaying)

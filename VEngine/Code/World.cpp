@@ -9,6 +9,7 @@
 #include "Render/TextureSystem.h"
 #include "Render/MaterialSystem.h"
 #include "Core.h"
+#include "Audio/AudioSystem.h"
 
 World world;
 
@@ -160,6 +161,8 @@ std::vector<Component*> World::GetAllComponentsInWorld()
 
 void World::Cleanup()
 {
+	//Cleanup various systems
+	audioSystem.Cleanup();
 	textureSystem.Cleanup();
 	materialSystem.Cleanup();
 

@@ -47,10 +47,14 @@ struct AudioSystem
 	IXAudio2* audioEngine; //Main XAudio2 sound engine
 	IXAudio2MasteringVoice* masteringVoice; //Main track	
 
-	//Maps audio filename to AudioChunk
+	//Maps audio filename to AudioBase structure
 	std::map<std::string, AudioBase*> loadedAudioFilesMap;
 
 	void Init();
+
+	//Needs to be called when new world's are loaded in to clear loaded audio structs
+	void Cleanup();
+
 	void PlayAudio(AudioBase* audio);
 
 	//Finds an audio file by filename and creates the audio if the map doesn't contain the filename.
