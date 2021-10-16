@@ -559,6 +559,9 @@
     <ClInclude Include="Code\VMemory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Audio\AudioBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

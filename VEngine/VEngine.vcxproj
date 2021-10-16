@@ -162,6 +162,7 @@
     <ClCompile Include="Code\Actors\Billboard.cpp" />
     <ClCompile Include="Code\Actors\Unit.cpp" />
     <ClInclude Include="Code\Actors\BattleGrid.h" />
+    <ClInclude Include="Code\Audio\AudioBase.h" />
     <ClInclude Include="Code\Components\BoxTriggerComponent.h" />
     <ClInclude Include="Code\Animation\AnimationStructures.h" />
     <ClInclude Include="Code\Actors\Actor.h" />

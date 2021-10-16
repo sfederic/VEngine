@@ -1,46 +1,10 @@
 #pragma once
-#include <xaudio2.h>
 #include <string>
 #include <map>
+#include "AudioBase.h"
 
 //TODO: wav files might be a bit too big with git, look into .ogg 
 //https://github.com/nothings/stb/blob/master/stb_vorbis.c
-
-struct VoiceCallback : public IXAudio2VoiceCallback
-{
-	HANDLE hBufferEndEvent;
-	VoiceCallback() : hBufferEndEvent(CreateEvent(NULL, FALSE, FALSE, NULL)) {}
-	~VoiceCallback() { CloseHandle(hBufferEndEvent); }
-
-	//Called when the voice has just finished playing a contiguous audio stream.
-	void OnStreamEnd() { SetEvent(hBufferEndEvent); }
-
-	void OnVoiceProcessingPassEnd() {}
-	void OnVoiceProcessingPassStart(UINT32 SamplesRequired) {}
-	void OnBufferEnd(void* pBufferContext) {}
-	void OnBufferStart(void* pBufferContext) {}
-	void OnLoopEnd(void* pBufferContext) {}
-	void OnVoiceError(void* pBufferContext, HRESULT Error) {}
-};
-
-//Base class for audio data
-struct AudioBase
-{
-	VoiceCallback callback;
-
-	void SetPitch(float ratio)
-	{
-		if (ratio <= 0.f) { ratio = 1.f; }
-		sourceVoice->SetFrequencyRatio(ratio);
-	}
-
-	WAVEFORMATEXTENSIBLE waveFormat;
-	XAUDIO2_BUFFER buffer;
-
-	IXAudio2SourceVoice* sourceVoice;
-
-	bool isPlaying;
-};
 
 struct AudioSystem
 {
@@ -51,9 +15,10 @@ struct AudioSystem
 	std::map<std::string, AudioBase*> loadedAudioFilesMap;
 
 	void Init();
+	void Cleanup();
 
 	//Needs to be called when new world's are loaded in to clear loaded audio structs
-	void Cleanup();
+	void CleanupAllLoadedAudio();
 
 	void PlayAudio(AudioBase* audio);
 

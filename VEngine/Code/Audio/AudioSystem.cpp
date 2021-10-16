@@ -19,6 +19,14 @@ void AudioSystem::Init()
 
 void AudioSystem::Cleanup()
 {
+	CleanupAllLoadedAudio();
+
+	masteringVoice->DestroyVoice();
+	audioEngine->Release();
+}
+
+void AudioSystem::CleanupAllLoadedAudio()
+{
 	for (auto audioIt : loadedAudioFilesMap)
 	{
 		delete audioIt.second;
@@ -29,7 +37,7 @@ void AudioSystem::Cleanup()
 
 void AudioSystem::PlayAudio(AudioBase* chunk)
 {
-	if (!chunk->isPlaying)
+	//if (!chunk->isPlaying)
 	{
 		HR(chunk->sourceVoice->SubmitSourceBuffer(&chunk->buffer));
 		HR(chunk->sourceVoice->Start(0));
