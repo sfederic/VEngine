@@ -14,6 +14,14 @@ AudioSystem audioSystem;
 void AudioSystem::Init()
 {
 	HR(XAudio2Create(&audioEngine));
+
+#ifdef _DEBUG
+	XAUDIO2_DEBUG_CONFIGURATION debug = {};
+	debug.BreakMask = XAUDIO2_LOG_WARNINGS;
+	debug.TraceMask = XAUDIO2_LOG_WARNINGS;
+	audioEngine->SetDebugConfiguration(&debug);
+#endif
+
 	HR(audioEngine->CreateMasteringVoice(&masteringVoice));
 }
 
@@ -23,6 +31,10 @@ void AudioSystem::Cleanup()
 
 	masteringVoice->DestroyVoice();
 	audioEngine->Release();
+
+	//Needs to be called after XAudio2 shutdown. Only reference I could find on this is in the DirectXTK SDK samples
+	//REF:https://stackoverflow.com/questions/56091616/directx-sdk-june-2010-xaudio2-crashes-on-every-app-exit
+	CoUninitialize();
 }
 
 void AudioSystem::CleanupAllLoadedAudio()
@@ -37,11 +49,36 @@ void AudioSystem::CleanupAllLoadedAudio()
 
 void AudioSystem::PlayAudio(AudioBase* chunk)
 {
-	//if (!chunk->isPlaying)
+	if (!chunk->isPlaying)
 	{
 		HR(chunk->sourceVoice->SubmitSourceBuffer(&chunk->buffer));
 		HR(chunk->sourceVoice->Start(0));
 	}
+}
+
+AudioBase* AudioSystem::FindAudio(const std::string filename)
+{
+	std::string path = "Audio/" + filename;
+	assert(std::filesystem::exists(path) && "Audio file not found.");
+
+	AudioBase* audio = nullptr;
+
+	auto audioIt = loadedAudioFilesMap.find(filename);
+	if (audioIt != loadedAudioFilesMap.end())
+	{
+		audio = audioIt->second;
+	}
+	else
+	{
+		audio = new AudioBase(filename);
+		loadedAudioFilesMap.insert(std::make_pair(filename, audio));
+
+		//Initilization of audio is bad if nothing is zeroed out, source voice fails
+		HR(LoadWAV(path, audio->waveFormat, audio->buffer));
+		HR(audioEngine->CreateSourceVoice(&audio->sourceVoice, (WAVEFORMATEX*)&audio->waveFormat, 0, 2.0f, &audio->callback));
+	}
+
+	return audio;
 }
 
 HRESULT AudioSystem::FindChunk(HANDLE file, DWORD fourcc, DWORD* dwChunkSize, DWORD* dwChunkDataPosition)
@@ -153,30 +190,4 @@ HRESULT AudioSystem::LoadWAV(const std::string filename, WAVEFORMATEXTENSIBLE& w
 	buffer.Flags = XAUDIO2_END_OF_STREAM;
 
 	return S_OK;
-}
-
-AudioBase* AudioSystem::FindAudio(const std::string filename)
-{
-	std::string path = "Audio/" + filename;
-	assert(std::filesystem::exists(path) && "Audio file not found.");
-
-	AudioBase* audio = nullptr;
-
-	auto audioIt = loadedAudioFilesMap.find(filename);
-	if (audioIt != loadedAudioFilesMap.end())
-	{
-		audio = audioIt->second;
-	}
-	else
-	{
-		audio = new AudioBase(filename);
-		loadedAudioFilesMap.insert(std::make_pair(filename, audio));
-
-		//Initilization of audio is bad if nothing is zeroed out, source voice fails
-		HR(LoadWAV(path, audio->waveFormat, audio->buffer));
-		HR(audioEngine->CreateSourceVoice(&audio->sourceVoice, (WAVEFORMATEX*)&audio->waveFormat, 0, 2.0f, &audio->callback));
-		HR(audio->sourceVoice->SubmitSourceBuffer(&audio->buffer));
-	}
-
-	return audio;
 }
