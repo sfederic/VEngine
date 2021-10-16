@@ -6,7 +6,4 @@
 struct AudioInstance : AudioBase
 {
 	bool isPlaying = false;
-
-	virtual void OnBufferStart(void* pBufferContext) override;
-	virtual void OnBufferEnd(void* pBufferContext) override;
 };

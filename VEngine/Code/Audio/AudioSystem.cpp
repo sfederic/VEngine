@@ -49,11 +49,22 @@ void AudioSystem::CleanupAllLoadedAudio()
 
 void AudioSystem::PlayAudioOneShot(AudioBase* audio)
 {
-	IXAudio2SourceVoice* sourceVoice = nullptr;
-	HR(audioEngine->CreateSourceVoice(&sourceVoice, (WAVEFORMATEX*)&audio->waveFormat, 0, 2.0f, audio));
-	audio->sourceVoicesPlaying.push_back(sourceVoice);
+	//Find a SourceVoice in the array that isn't playing
+	SourceVoice* connectedVoice = nullptr;
+	for (SourceVoice& source : sourceVoices)
+	{
+		if (source.CheckNotPlaying())
+		{
+			connectedVoice = &source;
+		}
+	}
 
-	audio->buffer.pContext = sourceVoice;
+	assert(connectedVoice && "MAX_SOURCE_VOICES isn't big enough.");
+
+	IXAudio2SourceVoice* sourceVoice = nullptr;
+	HR(audioEngine->CreateSourceVoice(&sourceVoice, (WAVEFORMATEX*)&audio->waveFormat, 0, 2.0f, connectedVoice));
+
+	connectedVoice->voice = sourceVoice;
 
 	HR(sourceVoice->SubmitSourceBuffer(&audio->buffer));
 	HR(sourceVoice->Start(0));

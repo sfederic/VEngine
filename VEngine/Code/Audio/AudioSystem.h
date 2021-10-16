@@ -3,6 +3,7 @@
 #include <map>
 #include <vector>
 #include "AudioBase.h"
+#include "SourceVoice.h"
 
 //TODO: wav files might be a bit too big with git, look into .ogg 
 //https://github.com/nothings/stb/blob/master/stb_vorbis.c
@@ -14,6 +15,10 @@ struct AudioSystem
 
 	//Maps audio filename to AudioBase structure
 	std::map<std::string, AudioBase*> loadedAudioFilesMap;
+
+	inline static const int MAX_SOURCE_VOICES = 16;
+	//This acts as a buffer for 'One-shot' audio files being played.
+	SourceVoice sourceVoices[MAX_SOURCE_VOICES];
 
 	void Init();
 	void Cleanup();
