@@ -23,6 +23,11 @@ struct VoiceCallback : public IXAudio2VoiceCallback
 struct AudioBase
 {
 	VoiceCallback callback;
+	WAVEFORMATEXTENSIBLE waveFormat;
+	XAUDIO2_BUFFER buffer;
+	std::string audioFilename;
+	IXAudio2SourceVoice* sourceVoice;
+	bool isPlaying;
 
 	AudioBase(std::string filename)
 	{
@@ -39,10 +44,4 @@ struct AudioBase
 		if (ratio <= 0.f) { ratio = 1.f; }
 		sourceVoice->SetFrequencyRatio(ratio);
 	}
-
-	WAVEFORMATEXTENSIBLE waveFormat;
-	XAUDIO2_BUFFER buffer;
-	std::string audioFilename;
-	IXAudio2SourceVoice* sourceVoice;
-	bool isPlaying;
 };
