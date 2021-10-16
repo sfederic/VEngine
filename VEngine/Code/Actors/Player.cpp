@@ -5,7 +5,7 @@
 #include "Input.h"
 #include "VMath.h"
 #include "Physics/Raycast.h"
-
+#include "GameUtils.h"
 #include "Editor/Editor.h"
 #include "Actors/NPC.h"
 #include "Components/DialogueComponent.h"
