@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <map>
+#include <vector>
 #include "AudioBase.h"
 
 //TODO: wav files might be a bit too big with git, look into .ogg 
@@ -8,8 +9,8 @@
 
 struct AudioSystem
 {
-	IXAudio2* audioEngine; //Main XAudio2 sound engine
-	IXAudio2MasteringVoice* masteringVoice; //Main track	
+	IXAudio2* audioEngine = nullptr; //Main XAudio2 sound engine
+	IXAudio2MasteringVoice* masteringVoice = nullptr; //Main track	
 
 	//Maps audio filename to AudioBase structure
 	std::map<std::string, AudioBase*> loadedAudioFilesMap;
@@ -20,7 +21,8 @@ struct AudioSystem
 	//Needs to be called when new world's are loaded in to clear loaded audio structs
 	void CleanupAllLoadedAudio();
 
-	void PlayAudio(AudioBase* audio);
+	//Plays audio as a 'one shot'. Creates a sourcevoice and fires its Start()
+	void PlayAudioOneShot(AudioBase* audio);
 
 	//Finds an audio file by filename and creates the audio if the map doesn't contain the filename.
 	AudioBase* FindAudio(const std::string filename);

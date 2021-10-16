@@ -1,6 +1,8 @@
 #pragma once
 #include <xaudio2.h>
 #include <string>
+#include <vector>
+#include <map>
 
 //Base class for audio data
 struct AudioBase : IXAudio2VoiceCallback
@@ -8,37 +10,20 @@ struct AudioBase : IXAudio2VoiceCallback
 	WAVEFORMATEXTENSIBLE waveFormat = {};
 	XAUDIO2_BUFFER buffer = {};
 	std::string audioFilename;
-	IXAudio2SourceVoice* sourceVoice = nullptr;
+
+	std::vector<IXAudio2SourceVoice*> sourceVoicesPlaying;
+
 	bool isPlaying = false;
 
-	AudioBase(std::string filename)
-	{
-		audioFilename = filename;
-	}
+	AudioBase(std::string filename);
+	~AudioBase();
 
-	~AudioBase()
-	{
-		sourceVoice->DestroyVoice();
-	}
-
-	void SetPitch(float ratio)
-	{
-		if (ratio <= 0.f) { ratio = 1.f; }
-		sourceVoice->SetFrequencyRatio(ratio);
-	}
-
-	//Called when the voice has just finished playing a contiguous audio stream.
-	void OnStreamEnd() 
-	{ 
-	}
-
-	void OnVoiceProcessingPassEnd() {}
-	void OnVoiceProcessingPassStart(UINT32 SamplesRequired) {}
-	void OnBufferEnd(void* pBufferContext) 
-	{
-		isPlaying = false;
-	}
-	void OnBufferStart(void* pBufferContext) {}
-	void OnLoopEnd(void* pBufferContext) {}
-	void OnVoiceError(void* pBufferContext, HRESULT Error) {}
+	// Inherited via IXAudio2VoiceCallback
+	virtual void OnVoiceProcessingPassStart(UINT32 BytesRequired) override;
+	virtual void OnVoiceProcessingPassEnd(void) override;
+	virtual void OnStreamEnd(void) override;
+	virtual void OnBufferStart(void* pBufferContext) override;
+	virtual void OnBufferEnd(void* pBufferContext) override;
+	virtual void OnLoopEnd(void* pBufferContext) override;
+	virtual void OnVoiceError(void* pBufferContext, HRESULT Error) override;
 };

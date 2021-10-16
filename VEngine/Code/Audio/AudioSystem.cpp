@@ -47,13 +47,16 @@ void AudioSystem::CleanupAllLoadedAudio()
 	loadedAudioFilesMap.clear();
 }
 
-void AudioSystem::PlayAudio(AudioBase* chunk)
+void AudioSystem::PlayAudioOneShot(AudioBase* audio)
 {
-	if (!chunk->isPlaying)
-	{
-		HR(chunk->sourceVoice->SubmitSourceBuffer(&chunk->buffer));
-		HR(chunk->sourceVoice->Start(0));
-	}
+	IXAudio2SourceVoice* sourceVoice = nullptr;
+	HR(audioEngine->CreateSourceVoice(&sourceVoice, (WAVEFORMATEX*)&audio->waveFormat, 0, 2.0f, audio));
+	audio->sourceVoicesPlaying.push_back(sourceVoice);
+
+	audio->buffer.pContext = sourceVoice;
+
+	HR(sourceVoice->SubmitSourceBuffer(&audio->buffer));
+	HR(sourceVoice->Start(0));
 }
 
 AudioBase* AudioSystem::FindAudio(const std::string filename)
@@ -75,7 +78,6 @@ AudioBase* AudioSystem::FindAudio(const std::string filename)
 
 		//Initilization of audio is bad if nothing is zeroed out, source voice fails
 		HR(LoadWAV(path, audio->waveFormat, audio->buffer));
-		HR(audioEngine->CreateSourceVoice(&audio->sourceVoice, (WAVEFORMATEX*)&audio->waveFormat, 0, 2.0f, &audio->callback));
 	}
 
 	return audio;

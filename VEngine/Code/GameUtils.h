@@ -11,5 +11,5 @@ namespace GameUtils
 	Player* GetPlayer();
 	BattleGrid* GetBattleGrid();
 
-	AudioBase* PlayAudio(const std::string filename);
+	AudioBase* PlayAudioOneShot(const std::string filename);
 };
