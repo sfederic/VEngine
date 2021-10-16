@@ -169,7 +169,7 @@ AudioBase* AudioSystem::FindAudio(const std::string filename)
 	}
 	else
 	{
-		audio = new AudioBase();
+		audio = new AudioBase(filename);
 		loadedAudioFilesMap.insert(std::make_pair(filename, audio));
 
 		//Initilization of audio is bad if nothing is zeroed out, source voice fails

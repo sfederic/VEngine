@@ -1,5 +1,6 @@
 #pragma once
 #include <xaudio2.h>
+#include <string>
 
 struct VoiceCallback : public IXAudio2VoiceCallback
 {
@@ -23,6 +24,11 @@ struct AudioBase
 {
 	VoiceCallback callback;
 
+	AudioBase(std::string filename)
+	{
+		audioFilename = filename;
+	}
+
 	~AudioBase()
 	{
 		sourceVoice->DestroyVoice();
@@ -36,8 +42,7 @@ struct AudioBase
 
 	WAVEFORMATEXTENSIBLE waveFormat;
 	XAUDIO2_BUFFER buffer;
-
+	std::string audioFilename;
 	IXAudio2SourceVoice* sourceVoice;
-
 	bool isPlaying;
 };
