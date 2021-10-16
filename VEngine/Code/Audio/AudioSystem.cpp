@@ -75,6 +75,11 @@ void AudioSystem::DeleteLoadedAudioAndChannels()
 	channelMap.clear();
 }
 
+AudioChannel* AudioSystem::GetChannel(uint64_t channelID)
+{
+	return channelMap.find(channelID)->second;
+}
+
 uint64_t AudioSystem::PlayAudio(const std::string filename)
 {
 	auto audioIt = loadedAudioMap.find(filename);

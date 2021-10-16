@@ -28,6 +28,7 @@ public:
 	void Tick();
 	void Cleanup();
 	void DeleteLoadedAudioAndChannels();
+	AudioChannel* GetChannel(uint64_t channelID);
 
 	//Returns channel ID that audio is playing on so that audio components can work with that data.
 	uint64_t PlayAudio(const std::string filename);
