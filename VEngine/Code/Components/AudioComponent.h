@@ -9,6 +9,8 @@ struct AudioComponent : SpatialComponent
 
 	std::string audioFilename;
 	uint64_t channelID = 0;
+	float volume = 1.0f;
+	float pitch = 1.0f;
 	bool playOnStart = false;
 
 	AudioComponent();
@@ -16,4 +18,7 @@ struct AudioComponent : SpatialComponent
 	virtual void Start() override;
 	virtual void Create() override;
 	virtual Properties GetProps() override;
+
+	void Play();
+	void Stop();
 };
