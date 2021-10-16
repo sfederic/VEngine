@@ -51,6 +51,7 @@ void Engine::TickSystems(double deltaTime)
 	Core::Tick();
 	commandSystem.Tick();
 
+	audioSystem.Tick();
 	shaderSystem.Tick();
 	activeCamera->Tick(deltaTime);
 	timerSystem.Tick(deltaTime);
