@@ -7,6 +7,7 @@ struct AudioChannel : IXAudio2VoiceCallback
 	IXAudio2SourceVoice* sourceVoice = nullptr;
 
 	bool isPlaying = false;
+	bool isLooping = false;
 
 	AudioChannel();
 	~AudioChannel();

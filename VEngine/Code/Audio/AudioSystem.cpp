@@ -80,7 +80,7 @@ AudioChannel* AudioSystem::GetChannel(uint64_t channelID)
 	return channelMap.find(channelID)->second;
 }
 
-uint64_t AudioSystem::PlayAudio(const std::string filename)
+uint64_t AudioSystem::PlayAudio(const std::string filename, bool loopAudio)
 {
 	auto audioIt = loadedAudioMap.find(filename);
 	if (audioIt == loadedAudioMap.end())
@@ -100,6 +100,12 @@ uint64_t AudioSystem::PlayAudio(const std::string filename)
 	HR(audioEngine->CreateSourceVoice(&sourceVoice, (WAVEFORMATEX*)&audio->waveFormat, 0, 2.0f, channel));
 
 	channel->sourceVoice = sourceVoice;
+
+	if (loopAudio)
+	{
+		channel->isLooping = true;
+		audio->buffer.LoopCount = XAUDIO2_LOOP_INFINITE;
+	}
 
 	HR(sourceVoice->SubmitSourceBuffer(&audio->buffer));
 	HR(sourceVoice->Start(0));

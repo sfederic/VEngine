@@ -20,7 +20,7 @@ void AudioComponent::Start()
 {
     if (playOnStart)
     {
-        channelID = audioSystem.PlayAudio(audioFilename);
+        channelID = audioSystem.PlayAudio(audioFilename, loop);
     }
 }
 
@@ -35,6 +35,7 @@ Properties AudioComponent::GetProps()
     props.Add("Play On Start", &playOnStart);
     props.Add("Volume", &volume);
     props.Add("Pitch", &pitch);
+    props.Add("Loop", &loop);
     return props;
 }
 

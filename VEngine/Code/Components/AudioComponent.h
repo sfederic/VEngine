@@ -8,10 +8,14 @@ struct AudioComponent : SpatialComponent
 	COMPONENT_SYSTEM(AudioComponent)
 
 	std::string audioFilename;
+
 	uint64_t channelID = 0;
+
 	float volume = 1.0f;
 	float pitch = 1.0f;
+
 	bool playOnStart = false;
+	bool loop = false;
 
 	AudioComponent();
 	virtual void Tick(double deltaTime) override;
