@@ -2,6 +2,9 @@
 #include "Actors/Player.h"
 #include "Actors/BattleGrid.h"
 #include "Audio/AudioSystem.h"
+#include "World.h"
+#include "FileSystem.h"
+#include "Editor/Editor.h"
 
 namespace GameUtils
 {
@@ -23,5 +26,12 @@ namespace GameUtils
 	void PlayAudio(const std::string audioFilename)
 	{
 		audioSystem.PlayAudio(audioFilename);
+	}
+
+	void SaveGameWorldState()
+	{
+		world.worldFilename += "01";
+		fileSystem.WriteAllActorSystems();
+		editor->Log("Game saved");
 	}
 }

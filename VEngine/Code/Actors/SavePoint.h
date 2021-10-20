@@ -12,6 +12,7 @@ struct SavePoint : Actor
 	BoxTriggerComponent* trigger = nullptr;
 
 	SavePoint();
+	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 };

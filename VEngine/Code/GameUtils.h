@@ -10,4 +10,5 @@ namespace GameUtils
 	Player* GetPlayer();
 	BattleGrid* GetBattleGrid();
 	void PlayAudio(const std::string audioFilename);
+	void SaveGameWorldState();
 };
