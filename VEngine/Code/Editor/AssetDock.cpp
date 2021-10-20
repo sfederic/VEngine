@@ -106,9 +106,8 @@ void AssetDock::AssetItemClicked()
     auto fileExtension = std::filesystem::path(fullPath.toStdString()).extension();
     auto extension = fileExtension.c_str();
 
-    //Load world
-    if (std::wcscmp(extension, L".vmap") == 0 ||
-        std::wcscmp(extension, L".sav")) //Map files
+    if (std::wcscmp(extension, L".vmap") == 0 || //Map files
+        std::wcscmp(extension, L".sav") == 0) 
     {
         fileSystem.LoadWorld(assetName.toStdString());
     }   
@@ -120,7 +119,7 @@ void AssetDock::AssetItemClicked()
     {
         MeshFileClicked(assetName.toStdString());
     }
-    else if (std::wcscmp(extension, L".jpg") == 0 ||
+    else if (std::wcscmp(extension, L".jpg") == 0 || //Image files
         std::wcscmp(extension, L".png") == 0)
     {
         TextureFileClicked(assetName.toStdWString());
