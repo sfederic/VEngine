@@ -78,6 +78,24 @@ void World::StartAllComponents()
 	}
 }
 
+std::vector<IActorSystem*> World::GetLayerActorSystems()
+{
+	std::vector<IActorSystem*> actorSystems;
+
+	for (auto actorSystem : activeActorSystems)
+	{
+		if (actorSystem->name == "EntranceTrigger" ||
+			actorSystem->name == "MeshActor")
+		{
+			continue;
+		}
+
+		actorSystems.push_back(actorSystem);
+	}
+
+	return actorSystems;
+}
+
 void World::TickAllActorSystems(float deltaTime)
 {
 	PROFILE_START
