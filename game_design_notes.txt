@@ -1,0 +1,1 @@
+-with the current save system, it could be possible to do save files based on the time of day, save their prop files out and work from there. For example: World1_5_am and World1_530am.
