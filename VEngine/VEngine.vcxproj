@@ -165,6 +165,7 @@
     <ClCompile Include="Code\UI\SpriteBatcher.cpp" />
     <ClCompile Include="Code\Actors\Billboard.cpp" />
     <ClCompile Include="Code\Actors\Unit.cpp" />
+    <ClCompile Include="Code\SaveSystem.cpp" />
     <ClInclude Include="Code\Actors\AudioActor.h" />
     <ClInclude Include="Code\Components\AudioComponent.h" />
     <ClInclude Include="Code\Actors\BattleGrid.h" />
@@ -326,6 +327,8 @@
     <ClInclude Include="Code\UI\SpriteBatcher.h" />
     <ClInclude Include="Code\Actors\Billboard.h" />
     <ClInclude Include="Code\Actors\Unit.h" />
+    <ClInclude Include="Code\SaveSystem.h" />
+    <ClInclude Include="Code\System.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
