@@ -11,4 +11,7 @@ namespace GameUtils
 	BattleGrid* GetBattleGrid();
 	void PlayAudio(const std::string audioFilename);
 	void SaveGameWorldState();
+
+	//Make sure to just pass in the world name here, no file exensions (.sav, .vmap)
+	void LoadGameWorldState(std::string worldName);
 };
