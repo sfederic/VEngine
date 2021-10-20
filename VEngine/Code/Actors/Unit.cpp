@@ -27,7 +27,7 @@ void Unit::Start()
 	MoveTo(destNode);
 }
 
-void Unit::Tick(double deltaTime)
+void Unit::Tick(float deltaTime)
 {
 	if (XMVector4Equal(nextMovePos, GetPositionVector()))
 	{

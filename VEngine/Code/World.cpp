@@ -78,7 +78,7 @@ void World::StartAllComponents()
 	}
 }
 
-void World::TickAllActorSystems(double deltaTime)
+void World::TickAllActorSystems(float deltaTime)
 {
 	PROFILE_START
 
@@ -90,7 +90,7 @@ void World::TickAllActorSystems(double deltaTime)
 	PROFILE_END
 }
 
-void World::TickAllComponentSystems(double deltaTime)
+void World::TickAllComponentSystems(float deltaTime)
 {
 	PROFILE_START
 

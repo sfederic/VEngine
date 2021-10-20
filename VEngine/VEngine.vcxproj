@@ -166,6 +166,7 @@
     <ClCompile Include="Code\Actors\Billboard.cpp" />
     <ClCompile Include="Code\Actors\Unit.cpp" />
     <ClCompile Include="Code\SaveSystem.cpp" />
+    <ClCompile Include="Code\Actors\SavePoint.cpp" />
     <ClInclude Include="Code\Actors\AudioActor.h" />
     <ClInclude Include="Code\Components\AudioComponent.h" />
     <ClInclude Include="Code\Actors\BattleGrid.h" />
@@ -329,6 +330,7 @@
     <ClInclude Include="Code\Actors\Unit.h" />
     <ClInclude Include="Code\SaveSystem.h" />
     <ClInclude Include="Code\System.h" />
+    <ClInclude Include="Code\Actors\SavePoint.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

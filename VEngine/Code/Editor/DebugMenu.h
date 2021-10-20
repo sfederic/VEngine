@@ -31,13 +31,13 @@ struct DebugMenu
 	bool gameInstaceMenuOpen = false;
 
 	void Init();
-	void Tick(double deltaTime);
+	void Tick(float deltaTime);
 	void Cleanup();
 	void AddNotification(const wchar_t* note);
 
 private:
-	void RenderNotifications(double deltaTime);
-	void RenderFPSMenu(double deltaTime);
+	void RenderNotifications(float deltaTime);
+	void RenderFPSMenu(float deltaTime);
 	void RenderGPUMenu();
 	void RenderProfileMenu();
 	void RenderSnappingMenu();

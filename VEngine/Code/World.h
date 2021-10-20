@@ -24,8 +24,8 @@ struct World
 	void StartAllActors();
 	void StartAllComponents();
 
-	void TickAllActorSystems(double deltaTime);
-	void TickAllComponentSystems(double deltaTime);
+	void TickAllActorSystems(float deltaTime);
+	void TickAllComponentSystems(float deltaTime);
 	Actor* FindActorByName(std::string actorName);
 	Actor* FindComponentOwnerByName(std::string componentName);
 	std::vector<Actor*> GetAllActorsInWorld();

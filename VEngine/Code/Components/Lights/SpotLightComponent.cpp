@@ -5,7 +5,7 @@ SpotLightComponent::SpotLightComponent()
     lightData.lightType = (int)LightType::Spot;
 }
 
-void SpotLightComponent::Tick(double deltaTime)
+void SpotLightComponent::Tick(float deltaTime)
 {
 }
 

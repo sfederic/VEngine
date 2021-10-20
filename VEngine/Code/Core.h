@@ -22,7 +22,7 @@ namespace Core
 	//to this level when gameplay stops in-editor.
 	extern std::string initialStartingWorldFromEditor;
 
-	double GetDeltaTime();
+	float GetDeltaTime();
 	void SetTimerFrequency();
 	void Init();
 	void Tick();

@@ -75,7 +75,7 @@ void UISystem::RemoveAllWidgets()
 	widgets.clear();
 }
 
-void UISystem::DrawAllWidgets(double deltaTime)
+void UISystem::DrawAllWidgets(float deltaTime)
 {
 	for (auto widget : widgets)
 	{

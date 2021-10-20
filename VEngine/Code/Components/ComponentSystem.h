@@ -68,7 +68,7 @@ struct ComponentSystem : IComponentSystem
 		}
 	}
 
-	virtual void Tick(double deltaTime) override
+	virtual void Tick(float deltaTime) override
 	{
 		for (T* component : components)
 		{

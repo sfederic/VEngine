@@ -47,7 +47,7 @@ void DebugMenu::Init()
 	ImGui_ImplDX11_Init(renderer.device, renderer.context);
 }
 
-void DebugMenu::Tick(double deltaTime)
+void DebugMenu::Tick(float deltaTime)
 {
 	//Start ImGui
 	ImGui_ImplDX11_NewFrame();
@@ -258,7 +258,7 @@ void DebugMenu::RenderGameInstanceData()
 }
 
 //Handle notifications (eg. "Shaders recompiled", "ERROR: Not X", etc)
-void DebugMenu::RenderNotifications(double deltaTime)
+void DebugMenu::RenderNotifications(float deltaTime)
 {
 	float textOffsetX = 20.f;
 
@@ -280,7 +280,7 @@ void DebugMenu::RenderNotifications(double deltaTime)
 	}
 }
 
-void DebugMenu::RenderFPSMenu(double deltaTime)
+void DebugMenu::RenderFPSMenu(float deltaTime)
 {
 	if (fpsMenuOpen)
 	{

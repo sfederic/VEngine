@@ -20,7 +20,7 @@ MeshComponent::MeshComponent(const std::string filename_,
 	material = new Material(textureFilename, shaderFilename_);
 }
 
-void MeshComponent::Tick(double deltaTime)
+void MeshComponent::Tick(float deltaTime)
 {
 }
 

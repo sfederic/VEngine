@@ -9,6 +9,6 @@ struct Billboard : Actor
 	struct MeshComponent* mesh = nullptr;
 
 	Billboard();
-	virtual void Tick(double deltaTime) override;
+	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 };

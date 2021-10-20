@@ -21,6 +21,6 @@ struct Player : Actor
 
 	Player();
 	virtual void Start() override;
-	virtual void Tick(double deltaTime) override;
+	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 };

@@ -11,7 +11,7 @@ Billboard::Billboard()
     rootComponent = mesh;
 }
 
-void Billboard::Tick(double deltaTime)
+void Billboard::Tick(float deltaTime)
 {
     XMFLOAT3 pos = GetPosition();
 

@@ -189,7 +189,7 @@ void Actor::Start()
 {
 }
 
-void Actor::Tick(double deltaTime)
+void Actor::Tick(float deltaTime)
 {
 }
 

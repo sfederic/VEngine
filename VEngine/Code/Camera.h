@@ -30,7 +30,7 @@ struct CameraComponent : SpatialComponent
 	void Move(float d, XMVECTOR axis);
 	void ZoomTo(Actor* actor);
 
-	virtual void Tick(double deltaTime) override;
+	virtual void Tick(float deltaTime) override;
 	virtual void Create() override;
 	virtual Properties GetProps() override;
 	void FrustumCull();

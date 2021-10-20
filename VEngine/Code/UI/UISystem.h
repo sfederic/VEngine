@@ -25,7 +25,7 @@ struct UISystem
 	//Called on gameplay end
 	void RemoveAllWidgets();
 
-	void DrawAllWidgets(double deltaTime);
+	void DrawAllWidgets(float deltaTime);
 	void EndDraw();
 	void Cleanup();
 };

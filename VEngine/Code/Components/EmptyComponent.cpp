@@ -4,7 +4,7 @@ EmptyComponent::EmptyComponent()
 {
 }
 
-void EmptyComponent::Tick(double deltaTime)
+void EmptyComponent::Tick(float deltaTime)
 {
 }
 

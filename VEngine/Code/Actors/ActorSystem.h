@@ -47,7 +47,7 @@ struct ActorSystem : IActorSystem
 		actors.pop_back();
 	}
 
-	virtual void Tick(double deltaTime) override
+	virtual void Tick(float deltaTime) override
 	{
 		for (T* actor : actors)
 		{

@@ -15,7 +15,7 @@ void EntranceTrigger::Start()
     trigger->target = (Actor*)GameUtils::GetPlayer();
 }
 
-void EntranceTrigger::Tick(double deltaTime)
+void EntranceTrigger::Tick(float deltaTime)
 {
     XMVECTOR targetPos = trigger->target->GetPositionVector();
     if (trigger->Contains(targetPos))

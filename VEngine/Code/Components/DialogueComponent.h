@@ -16,7 +16,7 @@ public:
 	Dialogue dialogue;
 	WidgetComponent* previousWidgetComponent = nullptr;
 
-	virtual void Tick(double deltaTime) override;
+	virtual void Tick(float deltaTime) override;
 	virtual void Start() override;
 	virtual void Create() override;
 	virtual Properties GetProps() override;

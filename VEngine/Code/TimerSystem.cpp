@@ -2,7 +2,7 @@
 
 TimerSystem timerSystem;
 
-void TimerSystem::Tick(double deltaTime)
+void TimerSystem::Tick(float deltaTime)
 {
 	for (int timerIndex = 0; timerIndex < timerItems.size(); timerIndex++)
 	{

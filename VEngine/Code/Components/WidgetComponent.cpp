@@ -1,7 +1,7 @@
 #include "WidgetComponent.h"
 #include "VString.h"
 
-void WidgetComponent::Tick(double deltaTime)
+void WidgetComponent::Tick(float deltaTime)
 {
 }
 

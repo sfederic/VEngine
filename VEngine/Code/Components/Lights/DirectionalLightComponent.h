@@ -10,7 +10,7 @@ struct DirectionalLightComponent : SpatialComponent
 	Light lightData;
 
 	DirectionalLightComponent();
-	virtual void Tick(double deltaTime) override;
+	virtual void Tick(float deltaTime) override;
 	virtual void Create() override;
 	virtual Properties GetProps() override;
 };

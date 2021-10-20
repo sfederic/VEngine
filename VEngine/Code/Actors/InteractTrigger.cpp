@@ -20,7 +20,7 @@ void InteractTrigger::Start()
 	widget->displayText = stows(interactText);
 }
 
-void InteractTrigger::Tick(double deltaTime)
+void InteractTrigger::Tick(float deltaTime)
 {
 	if (trigger->ContainsTarget())
 	{

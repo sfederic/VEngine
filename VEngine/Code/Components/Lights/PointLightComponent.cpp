@@ -5,7 +5,7 @@ PointLightComponent::PointLightComponent()
 	lightData.lightType = (int)LightType::Point;
 }
 
-void PointLightComponent::Tick(double deltaTime)
+void PointLightComponent::Tick(float deltaTime)
 {
 }
 

@@ -7,7 +7,7 @@ AudioComponent::AudioComponent()
 {
 }
 
-void AudioComponent::Tick(double deltaTime)
+void AudioComponent::Tick(float deltaTime)
 {
     auto channel = audioSystem.GetChannel(channelID);
 

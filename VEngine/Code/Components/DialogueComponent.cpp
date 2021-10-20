@@ -2,7 +2,7 @@
 #include "World.h"
 #include "Components/WidgetComponent.h"
 
-void DialogueComponent::Tick(double deltaTime)
+void DialogueComponent::Tick(float deltaTime)
 {
 }
 

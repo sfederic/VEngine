@@ -31,7 +31,7 @@ namespace Core
 	uint32_t finalFrameCount;
 }
 
-double Core::GetDeltaTime()
+float Core::GetDeltaTime()
 {
 	if (deltaTime < 0.0)
 	{
@@ -44,7 +44,7 @@ double Core::GetDeltaTime()
 		deltaTime = 1.0f / 60.f;
 	}
 
-	return deltaTime;
+	return (float)deltaTime;
 }
 
 void Core::SetTimerFrequency()

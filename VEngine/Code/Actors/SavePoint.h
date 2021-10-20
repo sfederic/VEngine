@@ -1,20 +1,17 @@
 #pragma once
 #include "Actor.h"
 #include "ActorSystem.h"
-#include <string>
 
 struct BoxTriggerComponent;
 
-struct EntranceTrigger : Actor
+//In-world save point the player can interact with to save.
+struct SavePoint : Actor
 {
-	ACTOR_SYSTEM(EntranceTrigger)
+	ACTOR_SYSTEM(SavePoint);
 
 	BoxTriggerComponent* trigger = nullptr;
 
-	std::string levelToMoveTo;
-
-	EntranceTrigger();
-	virtual void Start() override;
+	SavePoint();
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 };

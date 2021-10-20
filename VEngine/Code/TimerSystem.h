@@ -13,7 +13,7 @@ struct TimerSystem
 {
 	std::vector<TimerItem> timerItems;
 
-	void Tick(double deltaTime);
+	void Tick(float deltaTime);
 	void SetTimer(double duration, std::function<void()> functionToCall);
 };
 

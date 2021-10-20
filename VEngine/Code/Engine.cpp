@@ -45,7 +45,7 @@ void Engine::Init(int argc, char* argv[])
 	editor->UpdateWorldList();
 }
 
-void Engine::TickSystems(double deltaTime)
+void Engine::TickSystems(float deltaTime)
 {
 	editor->Tick();
 	Core::Tick();
@@ -75,7 +75,7 @@ void Engine::MainLoop()
 {
 	while (Core::mainLoop)
 	{
-		const double deltaTime = Core::GetDeltaTime();
+		const float deltaTime = Core::GetDeltaTime();
 		Core::StartTimer();
 
 		TickSystems(deltaTime);
@@ -87,7 +87,7 @@ void Engine::MainLoop()
 	}
 }
 
-void Engine::Render(double deltaTime)
+void Engine::Render(float deltaTime)
 {
 	renderer.Render();
 

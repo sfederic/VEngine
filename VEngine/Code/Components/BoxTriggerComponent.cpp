@@ -5,7 +5,7 @@ BoxTriggerComponent::BoxTriggerComponent()
 {
 }
 
-void BoxTriggerComponent::Tick(double deltaTime)
+void BoxTriggerComponent::Tick(float deltaTime)
 {
 
 }

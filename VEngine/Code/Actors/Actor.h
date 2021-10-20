@@ -53,7 +53,7 @@ struct Actor
 	virtual Properties GetProps() = 0;
 	std::vector<Properties> GetAllProps();
 	virtual void Start();
-	virtual void Tick(double deltaTime);
+	virtual void Tick(float deltaTime);
 	virtual void Create();
 	virtual void Destroy();
 

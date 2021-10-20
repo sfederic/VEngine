@@ -30,7 +30,7 @@ void Player::Start()
 	nextRot = GetRotationVector();
 }
 
-void Player::Tick(double deltaTime)
+void Player::Tick(float deltaTime)
 {
 	const float moveSpeed = 5.5f;
 	SetPosition(VMath::VectorConstantLerp(GetPositionVector(), nextPos, deltaTime, moveSpeed));

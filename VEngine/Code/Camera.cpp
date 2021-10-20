@@ -137,7 +137,7 @@ void CameraComponent::ZoomTo(Actor* actor)
 	position = zoomPos;
 }
 
-void CameraComponent::Tick(double deltaTime)
+void CameraComponent::Tick(float deltaTime)
 {
 	XMVECTOR right = transform.world.r[0];
 	XMVECTOR up = transform.world.r[1];

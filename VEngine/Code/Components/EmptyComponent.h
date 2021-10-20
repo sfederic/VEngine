@@ -8,7 +8,7 @@ struct EmptyComponent : SpatialComponent
 	COMPONENT_SYSTEM(EmptyComponent)
 
 	EmptyComponent();
-	virtual void Tick(double deltaTime) override;
+	virtual void Tick(float deltaTime) override;
 	virtual void Create() override;
 	virtual Properties GetProps() override;
 };

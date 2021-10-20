@@ -6,10 +6,10 @@
 struct Engine
 {
 	void Init(int argc, char* argv[]);
-	void TickSystems(double deltaTime);
+	void TickSystems(float deltaTime);
 	void ResetSystems();
 	void MainLoop();
-	void Render(double deltaTime);
+	void Render(float deltaTime);
 	void Cleanup();
 };
 
