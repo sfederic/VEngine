@@ -107,7 +107,7 @@ void AssetDock::AssetItemClicked()
     auto extension = fileExtension.c_str();
 
     //Load world
-    if (std::wcscmp(extension, L".sav") == 0) //Map files
+    if (std::wcscmp(extension, L".vmap") == 0) //Map files
     {
         fileSystem.LoadWorld(assetName.toStdString());
     }   
@@ -172,7 +172,7 @@ void AssetDock::AssetFolderClicked()
         {
             icon = *Icons::lib;
         }
-        else if (str.contains(".sav"))
+        else if (str.contains(".vmap"))
         {
             icon = *Icons::world;
         }

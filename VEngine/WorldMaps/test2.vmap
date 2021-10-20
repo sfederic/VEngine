@@ -1,26 +1,3 @@
-BattleGrid
-1
-Position
-0 0 0
-Rotation
-0 0 0 1
-Scale
-1 1 1
-Shader
-InstanceShader.hlsl
-Size X
-5
-Size Y
-5
-Texture2D
-test.png
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
 Player
 1
 FOV
@@ -46,6 +23,10 @@ UvRotation
 UvScale
 1 1
 next
+AudioActor
+0
+BattleGrid
+0
 MeshActor
 0
 DirectionalLightActor
@@ -61,10 +42,21 @@ Rotation
 Scale
 0.999996 0.999997 0.999996
 next
-NPC
-0
 EntranceTrigger
 0
+NPC
+0
+SavePoint
+1
+Extents
+1 1 1
+Position
+0 0 4
+Rotation
+-0 0 -0 1
+Scale
+1 1 1
+next
 PointLightActor
 0
 SpotLightActor

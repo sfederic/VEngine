@@ -28,7 +28,7 @@ void World::Init()
 	}
 
 	//Load starting map
-	fileSystem.LoadWorld("test2.sav");
+	fileSystem.LoadWorld("test2.vmap");
 
 	//Start default loaded world
 	//Start();
