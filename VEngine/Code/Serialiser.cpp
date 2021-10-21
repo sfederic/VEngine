@@ -3,6 +3,8 @@
 #include <typeindex>
 #include "Properties.h"
 #include "Render/PipelineObjects.h"
+#include "Actors/Actor.h"
+#include "World.h"
 
 using namespace DirectX;
 
@@ -63,6 +65,17 @@ void Serialiser::Serialise(Properties props)
 		{
 			Texture2D* texture = props.GetData<Texture2D>(name);
 			os << name << "\n" << texture->filename.c_str() << "\n";
+		}
+		else if (props.CheckType<std::vector<Actor*>>(name))
+		{
+			auto actors = props.GetData<std::vector<Actor*>>(name);
+			os << name << "\n";
+			os << actors->size() << "\n";
+			for (auto actor : *actors)
+			{
+				os << actor->name << "\n";
+			}
+			os << "\n";
 		}
 	}
 
@@ -152,6 +165,27 @@ void Deserialiser::Deserialise(Properties props)
 			if (texture)
 			{
 				texture->filename.assign(propString);
+			}
+		}
+		else if (props.CheckType<std::vector<Actor*>>(name))
+		{
+			char actorName[512];
+			int actorsSize = 0;
+
+			is >> actorsSize;
+
+			//progress to next line (empty value)
+			is.getline(actorName, 512);
+
+			auto actors = props.GetData<std::vector<Actor*>>(name);
+			actors->reserve(actorsSize);
+
+			for (int i = 0; i < actorsSize; i++)
+			{
+				is.getline(actorName, 512);
+				std::string actorNameStr(actorName);
+				Actor* foundActor = world.FindActorByName(actorNameStr);
+				actors->push_back(foundActor);
 			}
 		}
 	}
