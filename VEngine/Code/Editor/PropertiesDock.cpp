@@ -8,6 +8,7 @@
 #include <QLineEdit>
 #include "Actors/Actor.h"
 #include "Components/Component.h"
+#include "Render/PipelineObjects.h"
 #include "PropertyWidgets/BoolWidget.h" 
 #include "PropertyWidgets/Float2Widget.h"
 #include "PropertyWidgets/Float3Widget.h"
@@ -17,9 +18,7 @@
 #include "PropertyWidgets/VectorWidget.h"
 #include "PropertyWidgets/StringWidget.h"
 #include "PropertyWidgets/Texture2DWidget.h"
-#include "Render/PipelineObjects.h"
-
-#include "Profile.h"
+#include "PropertyWidgets/ActorListWidget.h"
 
 PropertiesDock::PropertiesDock() : QDockWidget("Properties")
 {
@@ -140,6 +139,12 @@ void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRo
             auto texture2DWidget = new Texture2DWidget(prop.second);
             actorPropsGridLayout->addWidget(texture2DWidget, currentGridRow, propertyDataColumn);
             propertyWidgetsToUpdate.push_back((IPropertyWidget*)texture2DWidget);
+        }     
+        else if (props.CheckType<std::vector<Actor*>>(name))
+        {
+            auto actorListWidget = new ActorListWidget(prop.second);
+            actorPropsGridLayout->addWidget(actorListWidget, currentGridRow, propertyDataColumn);
+            propertyWidgetsToUpdate.push_back((IPropertyWidget*)actorListWidget);
         }
 
         currentGridRow++;
@@ -163,12 +168,8 @@ void PropertiesDock::Clear()
 
 void PropertiesDock::ResetPropertyWidgetValues()
 {
-    PROFILE_START
-
     for (IPropertyWidget* propertyWidget : propertyWidgetsToUpdate)
     {
         propertyWidget->ResetValue();
     }
-
-    PROFILE_END
 }

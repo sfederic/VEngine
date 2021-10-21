@@ -75,7 +75,6 @@ void Serialiser::Serialise(Properties props)
 			{
 				os << actor->name << "\n";
 			}
-			os << "\n";
 		}
 	}
 
