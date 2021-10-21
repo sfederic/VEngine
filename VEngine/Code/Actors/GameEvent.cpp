@@ -4,6 +4,8 @@
 
 GameEvent::GameEvent()
 {
+	root = EmptyComponent::system.Add(this);
+	rootComponent = root;
 }
 
 void GameEvent::Start()
@@ -31,5 +33,6 @@ Properties GameEvent::GetProps()
 	props.Add("End Hour", &endHour);
 	props.Add("Start Minute", &startMinute);
 	props.Add("End Minute", &endMinute);
+	props.Add("Actors to Activate", &actorsToActivate);
 	return props;
 }
