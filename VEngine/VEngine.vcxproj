@@ -126,6 +126,7 @@
     <ClCompile Include="Code\Editor\PropertyWidgets\StringWidget.cpp" />
     <ClCompile Include="Code\Render\PipelineObjects.cpp" />
     <ClCompile Include="Code\Render\RenderTypes.cpp" />
+    <ClCompile Include="Code\System.cpp" />
     <ClCompile Include="Code\VMemory.cpp" />
     <ClCompile Include="Code\VString.cpp" />
     <ClCompile Include="Code\UI\Widget.cpp" />
@@ -169,6 +170,7 @@
     <ClCompile Include="Code\Actors\Unit.cpp" />
     <ClCompile Include="Code\Actors\SavePoint.cpp" />
     <ClCompile Include="Code\Actors\GameEvent.cpp" />
+    <ClCompile Include="Code\SystemCache.cpp" />
     <ClInclude Include="Code\Actors\AudioActor.h" />
     <ClInclude Include="Code\Components\AudioComponent.h" />
     <ClInclude Include="Code\Actors\BattleGrid.h" />
@@ -334,6 +336,7 @@
     <ClInclude Include="Code\System.h" />
     <ClInclude Include="Code\Actors\SavePoint.h" />
     <ClInclude Include="Code\Actors\GameEvent.h" />
+    <ClInclude Include="Code\SystemCache.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
