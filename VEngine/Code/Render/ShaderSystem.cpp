@@ -9,6 +9,10 @@ ShaderSystem shaderSystem;
 
 HANDLE hotreloadHandle;
 
+ShaderSystem::ShaderSystem() : System("ShaderSystem")
+{
+}
+
 void ShaderSystem::Init()
 {
     CompileAllShadersFromFile();

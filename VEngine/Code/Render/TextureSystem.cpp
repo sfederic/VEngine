@@ -5,6 +5,10 @@
 
 TextureSystem textureSystem;
 
+TextureSystem::TextureSystem() : System("TextureSystem")
+{
+}
+
 void TextureSystem::AddTexture2D(Texture2D* texture)
 {
 	texture2DMap[texture->filename] = texture;

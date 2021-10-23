@@ -8,5 +8,5 @@ struct System
 
 	std::string name;
 
-	System();
+	System(std::string name_);
 };

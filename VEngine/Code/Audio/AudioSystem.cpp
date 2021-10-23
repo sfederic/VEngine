@@ -13,6 +13,10 @@
 
 AudioSystem audioSystem;
 
+AudioSystem::AudioSystem() : System("AudioSystem")
+{
+}
+
 void AudioSystem::Init()
 {
 	HR(XAudio2Create(&audioEngine));

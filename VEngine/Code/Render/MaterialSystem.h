@@ -1,14 +1,12 @@
 #pragma once
 #include <vector>
-#include "SystemStates.h"
+#include "System.h"
 
 struct Material;
 
-struct MaterialSystem
+struct MaterialSystem : System
 {
 	std::vector<Material*> materials;
-
-	SystemStates systemState = SystemStates::Unloaded;
 
 	//The material that is currently open in the materialeditor 
 	Material* currentMaterialEditorInstance = nullptr;

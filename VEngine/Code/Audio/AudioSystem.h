@@ -3,13 +3,14 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "System.h"
 
 struct AudioChannel;
 struct AudioBase;
 
 //Lot of this was inspired by https://gdcvault.com/play/1022061/How-to-Write-an-Audio after 
 //fucking around for hours with XAudio2.
-struct AudioSystem
+struct AudioSystem : System
 {
 private:
 	uint64_t nextChannelID = 0;
@@ -24,6 +25,7 @@ private:
 	ChannelMap channelMap;
 
 public:
+	AudioSystem();
 	void Init();
 	void Tick();
 	void Cleanup();

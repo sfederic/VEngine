@@ -4,7 +4,7 @@
 
 MaterialSystem materialSystem;
 
-MaterialSystem::MaterialSystem()
+MaterialSystem::MaterialSystem() : System("MaterialSystem")
 {
 	//Don't add editor instance material to the system
 	currentMaterialEditorInstance = new Material();

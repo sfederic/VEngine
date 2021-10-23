@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <d3dcompiler.h>
 #include <wrl.h>
+#include "System.h"
 
 using namespace Microsoft::WRL;
 
@@ -29,13 +30,14 @@ struct ShaderItem
 
 //TODO: need to make a CompileShaderFromFile() function eventually to work with compiled files over text
 
-struct ShaderSystem
+struct ShaderSystem : System
 {
 private:
 	std::vector<ShaderItem> shaders;
 	std::unordered_map<std::wstring, ShaderItem*> shaderMap;
 
 public:
+	ShaderSystem();
 	void Init();
 	void Tick();
 	ShaderItem* FindShader(std::wstring shaderName);

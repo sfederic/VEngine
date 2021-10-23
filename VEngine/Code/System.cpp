@@ -1,5 +1,7 @@
 #include "System.h"
+#include "SystemCache.h"
 
-System::System()
+System::System(std::string name_) : name(name_)
 {
+	systemCache.Add(this);
 }
