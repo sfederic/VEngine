@@ -68,6 +68,7 @@ void DebugMenu::Tick(float deltaTime)
 	RenderActorInspectMenu();
 	RenderWorldStats();
 	RenderGameInstanceData();
+	RenderMemoryMenu();
 
 	ImGui::EndFrame();
 
@@ -255,6 +256,11 @@ void DebugMenu::RenderGameInstanceData()
 	ImGui::InputInt("Current Minute", &GameInstance::currentMinute);
 
 	ImGui::End();
+}
+
+void DebugMenu::RenderMemoryMenu()
+{
+	
 }
 
 //Handle notifications (eg. "Shaders recompiled", "ERROR: Not X", etc)
