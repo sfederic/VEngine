@@ -23,6 +23,8 @@
 #include "Input.h"
 #include "World.h"
 #include "GameInstance.h"
+#include "SystemCache.h"
+#include "System.h"
 
 DebugMenu debugMenu;
 
@@ -260,7 +262,30 @@ void DebugMenu::RenderGameInstanceData()
 
 void DebugMenu::RenderMemoryMenu()
 {
-	
+	if (!memoryMenuOpen)
+	{
+		return;
+	}
+
+	ImGui::Begin("Memory");
+
+	for (auto systemIt : *systemCache.nameToSystemMap)
+	{
+		System* system = systemIt.second;
+		ImGui::Text(system->name.c_str());
+		switch (system->systemState)
+		{
+		case SystemStates::Loaded:
+			ImGui::Text("Loaded");
+			break;
+
+		case SystemStates::Unloaded:
+			ImGui::Text("Unloaded");
+			break;
+		}
+	}
+
+	ImGui::End();
 }
 
 //Handle notifications (eg. "Shaders recompiled", "ERROR: Not X", etc)
