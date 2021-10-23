@@ -126,6 +126,7 @@
     <ClCompile Include="Code\Editor\PropertyWidgets\StringWidget.cpp" />
     <ClCompile Include="Code\Render\PipelineObjects.cpp" />
     <ClCompile Include="Code\Render\RenderTypes.cpp" />
+    <ClCompile Include="Code\VMemory.cpp" />
     <ClCompile Include="Code\VString.cpp" />
     <ClCompile Include="Code\UI\Widget.cpp" />
     <ClCompile Include="Code\Components\SpatialComponent.cpp" />
