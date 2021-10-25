@@ -15,7 +15,7 @@
 const int lineColumn = 0;
 const int gotoColumn = 1;
 const int actorColumn = 2;
-const int intuitionColumn = 3;
+const int conditionColumn = 3;
 const int textColumn = 4;
 
 DialogueDock::DialogueDock() : QDockWidget("Dialogue")
@@ -23,7 +23,7 @@ DialogueDock::DialogueDock() : QDockWidget("Dialogue")
 	//TREE WIDGET
 	dialogueTree = new QTreeWidget(); 
 	dialogueTree->setColumnCount(5);
-	dialogueTree->setHeaderLabels({ "Line", "Goto", "Actor", "Intuition", "Text"});
+	dialogueTree->setHeaderLabels({ "Line", "Goto", "Actor", "Condition", "Text"});
 
 
 	//BUTTONS
@@ -121,13 +121,13 @@ void DialogueDock::SaveDialogueToFile()
 		//Have to do a bit more to get the text from the combobox
 		QComboBox* actorComboBox = (QComboBox*)dialogueTree->itemWidget(*it, actorColumn);
 
-		auto intuitionText = (*it)->text(intuitionColumn);
+		auto conditionText = (*it)->text(conditionColumn);
 		auto text = (*it)->text(textColumn);
 
 		os << lineText.toStdString() << "\n";
 		os << gotoText.toStdString() << "\n";
 		os << actorComboBox->currentText().toStdString() << "\n";
-		os << intuitionText.toStdString() << "\n";
+		os << conditionText.toStdString() << "\n";
 		os << text.toStdString() << "\n";
 
 		it++;
@@ -153,7 +153,7 @@ void DialogueDock::LoadDialogueFile()
 		std::string lineText;
 		std::string gotoText;
 		std::string actorText;
-		std::string intuitionText;
+		std::string conditionText;
 		std::string text;
 
 		char line[1024];
@@ -172,7 +172,7 @@ void DialogueDock::LoadDialogueFile()
 		actorText.assign(line);
 
 		is.getline(line, 1024);
-		intuitionText.assign(line);
+		conditionText.assign(line);
 
 		is.getline(line, 1024);
 		text.assign(line);		
@@ -183,7 +183,7 @@ void DialogueDock::LoadDialogueFile()
 
 		item->setText(lineColumn, QString::fromStdString(lineText));
 		item->setText(gotoColumn, QString::fromStdString(gotoText));
-		item->setText(intuitionColumn, QString::fromStdString(intuitionText));
+		item->setText(conditionColumn, QString::fromStdString(conditionText));
 		item->setText(textColumn, QString::fromStdString(text));
 
 		//Find the matching existing entry in the combobox and set it per the index
