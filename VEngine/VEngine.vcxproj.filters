@@ -338,6 +338,9 @@
     <ClCompile Include="Code\SystemCache.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ConditionSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -614,6 +617,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\SystemCache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConditionSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
