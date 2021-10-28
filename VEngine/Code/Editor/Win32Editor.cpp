@@ -107,3 +107,7 @@ void Win32Editor::ClearProperties()
 void Win32Editor::OpenMaterialEditor(const std::string materialFilename)
 {
 }
+
+void Win32Editor::SelectActorInWorldList()
+{
+}

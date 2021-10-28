@@ -1,9 +1,6 @@
 #pragma once
 #include "IEditor.h"
 
-//TODO: a lot of empty virtual functions. Come back and see whether it's worth making imgui equivalents
-//of all the Qt controls in the editor.
-
 struct Win32Editor : IEditor
 {
 	void Init(int argc, char* argv[]) override;

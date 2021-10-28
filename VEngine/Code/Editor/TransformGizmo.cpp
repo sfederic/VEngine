@@ -152,16 +152,6 @@ void TransformGizmo::Tick()
         }
     }
 
-    //TODO: View Manipulator (Gives a little Autodesk-esque widget in the corner, but I can't figure it out. Camera class is a bit wonky)
-    /*ImGuiIO& io = ImGui::GetIO();
-    float viewManipulateRight = io.DisplaySize.x;
-    float viewManipulateTop = 0;
-    viewManipulateRight = ImGui::GetWindowPos().x + windowWidth;
-    viewManipulateTop = ImGui::GetWindowPos().y;
-
-    const float camDistance = 8.f;
-    ImGuizmo::ViewManipulate(&view.m[0][0], camDistance, ImVec2(viewManipulateRight - 128, viewManipulateTop), ImVec2(128, 128), 0x10101010);*/
-
     ImGui::End();
 }
 
