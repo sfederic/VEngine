@@ -11,6 +11,7 @@ struct Buffer
 
 struct Texture2D
 {
+	D3D11_TEXTURE2D_DESC desc = {};
 	std::string filename;
 	ID3D11Resource* data = nullptr;
 	ID3D11ShaderResourceView* srv = nullptr;

@@ -5,6 +5,7 @@
 #include "TextureSystem.h"
 #include <filesystem>
 #include "VString.h"
+#include "Debug.h"
 
 namespace RenderUtils
 {
@@ -124,6 +125,12 @@ namespace RenderUtils
 
 		texture->data = resource;
 		texture->srv = srv;
+
+		//CreateWICTextureFromFile() doesn't like ID3D11Texture2D, so casting down here
+		//to get the texture Desc.
+		ID3D11Texture2D* textureResource = nullptr;
+		HR(resource->QueryInterface(&textureResource));
+		textureResource->GetDesc(&texture->desc);
 
 		return texture;
 	}

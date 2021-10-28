@@ -25,11 +25,6 @@ struct Sprite
 
 struct SpriteBatcher
 {
-	//TODO: come back here, pass the texture into BuildSpriteQuad(), grab the textire dimensions
-	//through GetDesc() and set these two accordingly.
-	int texWidth = 512;
-	int texHeight = 512;
-
 	ID3D11Buffer* spriteVertexBuffer = nullptr;
 	ID3D11Buffer* spriteIndexBuffer = nullptr;
 

@@ -1,6 +1,7 @@
 #include "SpriteBatcher.h"
 #include "Render/Renderer.h"
 #include "Render/RenderUtils.h"
+#include "Render/TextureSystem.h"
 
 SpriteBatcher spriteBatcher;
 
@@ -50,6 +51,10 @@ void SpriteBatcher::BuildSpriteQuad(const Sprite& sprite)
 	verts[1].pos = PointToNdc(dst.left, dst.top, sprite.z);
 	verts[2].pos = PointToNdc(dst.right, dst.top, sprite.z);
 	verts[3].pos = PointToNdc(dst.right, dst.bottom, sprite.z);
+
+	Texture2D* texture = textureSystem.FindTexture2D(sprite.textureFilename);
+	int texWidth = texture->desc.Width;
+	int texHeight = texture->desc.Height;
 
 	// Source rect defines subset of texture to use from sprite sheet.
 	verts[0].uv = XMFLOAT2((float)src.left / texWidth, (float)src.bottom / texHeight);
