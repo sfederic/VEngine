@@ -7,8 +7,6 @@ using namespace DirectX;
 
 struct Actor;
 
-//TODO: camera's transform variables aren't being updated, only world matrix is
-
 struct CameraComponent : SpatialComponent
 {
 	COMPONENT_SYSTEM(CameraComponent)

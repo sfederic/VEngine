@@ -25,10 +25,10 @@ CameraComponent::CameraComponent(XMFLOAT3 startPos, bool isEditorCamera)
 
 XMMATRIX CameraComponent::GetViewMatrix()
 {
-	XMVECTOR right = transform.world.r[0];
-	XMVECTOR up = transform.world.r[1];
-	XMVECTOR forward = transform.world.r[2];
-	XMVECTOR position = transform.world.r[3];
+	XMVECTOR right = GetRightVectorV();
+	XMVECTOR up = GetUpVectorV();
+	XMVECTOR forward = GetForwardVectorV();
+	XMVECTOR position = GetPositionV();
 
 	forward = XMVector3Normalize(forward);
 	up = XMVector3Normalize(XMVector3Cross(forward, right));
@@ -121,27 +121,27 @@ void CameraComponent::MouseMove(int x, int y)
 void CameraComponent::Move(float d, XMVECTOR axis)
 {
 	XMVECTOR s = XMVectorReplicate(d);
-	XMVECTOR& position = transform.world.r[3];
+	XMVECTOR position = GetPositionV();
 	position = XMVectorMultiplyAdd(s, axis, position);
+	SetPosition(position);
 }
 
 void CameraComponent::ZoomTo(Actor* actor)
 {
-	XMVECTOR& position = transform.world.r[3];
-	XMVECTOR& forward = transform.world.r[2];
+	XMVECTOR forward = GetForwardVectorV();
 
 	//Trace the camera down the line its pointing towards the actor
-	XMFLOAT3 actorPos = actor->GetPosition();
-	XMVECTOR actorPosVec = XMLoadFloat3(&actorPos);
-	XMVECTOR zoomPos = actorPosVec - (forward * 5.f);
-	position = zoomPos;
+	XMVECTOR actorPos = actor->GetPositionVector();
+	XMVECTOR zoomPos = actorPos - (forward * 5.f);
+
+	SetPosition(zoomPos);
 }
 
 void CameraComponent::Tick(float deltaTime)
 {
-	XMVECTOR right = transform.world.r[0];
-	XMVECTOR up = transform.world.r[1];
-	XMVECTOR forward = transform.world.r[2];
+	XMVECTOR right = GetRightVectorV();
+	XMVECTOR up = GetUpVectorV();
+	XMVECTOR forward = GetForwardVectorV();
 
 	if (editorCamera)
 	{
