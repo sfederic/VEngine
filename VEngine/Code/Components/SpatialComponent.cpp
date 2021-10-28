@@ -85,6 +85,11 @@ XMFLOAT3 SpatialComponent::GetForwardVector()
 	return forward;
 }
 
+XMVECTOR SpatialComponent::GetForwardVectorV()
+{
+	return XMVector3Normalize(transform.world.r[2]);
+}
+
 XMFLOAT3 SpatialComponent::GetRightVector()
 {
 	XMFLOAT3 right;
@@ -92,9 +97,19 @@ XMFLOAT3 SpatialComponent::GetRightVector()
 	return right;
 }
 
+XMVECTOR SpatialComponent::GetRightVectorV()
+{
+	return XMVector3Normalize(transform.world.r[0]);
+}
+
 XMFLOAT3 SpatialComponent::GetUpVector()
 {
 	XMFLOAT3 up;
 	XMStoreFloat3(&up, transform.world.r[1]);
 	return up;
+}
+
+XMVECTOR SpatialComponent::GetUpVectorV()
+{
+	return XMVector3Normalize(transform.world.r[1]);
 }
