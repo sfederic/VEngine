@@ -17,12 +17,15 @@ struct SpatialComponent : Component
 	XMMATRIX GetWorldMatrix();
 	void UpdateTransform(XMMATRIX parentWorld = XMMatrixIdentity());
 	XMFLOAT3 GetPosition();
+	XMVECTOR GetPositionV();
 	void SetPosition(XMFLOAT3 newPosition);
 	void SetPosition(XMVECTOR newPosition);
 	XMFLOAT3 GetScale();
+	XMVECTOR GetScaleV();
 	void SetScale(XMFLOAT3 newScale);
 	void SetScale(XMVECTOR newScale);
 	XMFLOAT4 GetRotation();
+	XMVECTOR GetRotationV();
 	void SetRotation(XMFLOAT4 newRotation);
 	void SetRotation(XMVECTOR newRotation);
 	XMFLOAT3 GetForwardVector();

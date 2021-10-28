@@ -38,6 +38,12 @@ XMFLOAT3 SpatialComponent::GetPosition()
 	return transform.position;
 }
 
+XMVECTOR SpatialComponent::GetPositionV()
+{
+	XMVECTOR position = XMLoadFloat3(&transform.position);
+	return position;
+}
+
 void SpatialComponent::SetPosition(XMFLOAT3 newPosition)
 {
 	transform.position = newPosition;
@@ -50,7 +56,13 @@ void SpatialComponent::SetPosition(XMVECTOR newPosition)
 
 XMFLOAT3 SpatialComponent::GetScale()
 {
-	return XMFLOAT3();
+	return transform.scale;
+}
+
+XMVECTOR SpatialComponent::GetScaleV()
+{
+	XMVECTOR scale = XMLoadFloat3(&transform.scale);
+	return scale;
 }
 
 void SpatialComponent::SetScale(XMFLOAT3 newScale)
@@ -61,6 +73,12 @@ void SpatialComponent::SetScale(XMFLOAT3 newScale)
 void SpatialComponent::SetScale(XMVECTOR newScale)
 {
 	XMStoreFloat3(&transform.scale, newScale);
+}
+
+XMVECTOR SpatialComponent::GetRotationV()
+{
+	XMVECTOR rotation = XMLoadFloat4(&transform.rotation);
+	return rotation;
 }
 
 XMFLOAT4 SpatialComponent::GetRotation()
