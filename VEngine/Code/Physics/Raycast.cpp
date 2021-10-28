@@ -104,7 +104,6 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 		return false;
 	}
 
-	//TODO: I worry about this triangle intersect being here. There's another call to it in worldeditor
 	if (RaycastTriangleIntersect(ray))
 	{
 		for (int i = 0; i < distances.size(); i++)

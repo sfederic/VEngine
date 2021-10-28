@@ -36,17 +36,7 @@ void WorldEditor::HandleActorPicking()
 
 		if (RaycastFromScreen(screenPickRay))
 		{
-			if (screenPickRay.hitActors.size() > 1) //Checking if multiple bounding volumes are hit
-			{
-				if (RaycastTriangleIntersect(screenPickRay))
-				{
-					SetPickedActor(screenPickRay.hitActor);
-				}
-			}
-			else
-			{
-				SetPickedActor(screenPickRay.hitActor);
-			}
+			SetPickedActor(screenPickRay.hitActor);
 		}
 	}
 }
