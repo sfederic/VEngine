@@ -1,6 +1,5 @@
 #pragma once
 #include <DirectXMath.h>
-//TODO: come back here and get rid of the <d3d11.h>
 #include <d3d11.h>
 #include <string>
 #include "Transform.h"

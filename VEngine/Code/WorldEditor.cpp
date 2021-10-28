@@ -33,7 +33,6 @@ void WorldEditor::HandleActorPicking()
 	if (Input::GetMouseLeftDown())
 	{
 		Ray screenPickRay;
-
 		if (RaycastFromScreen(screenPickRay))
 		{
 			SetPickedActor(screenPickRay.hitActor);

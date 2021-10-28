@@ -144,11 +144,8 @@ void ShaderSystem::CleanUpShaders()
 
 void ShaderSystem::HotReloadShaders()
 {
-    //TODO: right now Im stuck recompiling every single shader if I can't get the filename
-    //Reloading the shaders also pushes the camera back on the z-axis. Figure that one out (random negative val?)
-
+    //TODO: right now Im stuck recompiling every single shader if I can't get the filename.
     //Potentially engine could let the previous vertex/shader object buffers be used until new compile is ready
-
     //REF: https://docs.microsoft.com/en-us/windows/win32/fileio/obtaining-directory-change-notifications
 
     bool nextChange = FindNextChangeNotification(hotreloadHandle);

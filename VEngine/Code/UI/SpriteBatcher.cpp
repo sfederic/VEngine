@@ -30,7 +30,6 @@ void SpriteBatcher::CreateSprite(Sprite sprite)
 	sprites.push_back(sprite);
 }
 
-//TODO: there's a doubling of this function in Widget that does that same thing
 XMFLOAT3 SpriteBatcher::PointToNdc(int x, int y, float z)
 {
 	XMFLOAT3 p;
