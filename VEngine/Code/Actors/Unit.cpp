@@ -23,7 +23,7 @@ void Unit::Start()
 	nextMovePos = GetPositionVector();
 
 	BattleGrid* battleGrid = GameUtils::GetBattleGrid();
-	GridNode* destNode = battleGrid->GetNode(4, 0);
+	GridNode* destNode = battleGrid->GetNode(0, 0);
 	MoveTo(destNode);
 }
 

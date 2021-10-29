@@ -3,7 +3,7 @@
 #include "Core.h"
 #include "Input.h"
 #include "Render/Renderer.h"
-#include "FBXImporter.h"
+#include "Asset/FBXImporter.h"
 #include "UI/UISystem.h"
 #include "Editor/DebugMenu.h"
 #include "Camera.h"

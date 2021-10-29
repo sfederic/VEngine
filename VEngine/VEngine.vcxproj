@@ -257,8 +257,8 @@
     <ClInclude Include="Code\Editor\WorldDock.h" />
     <ClCompile Include="Code\Engine.cpp" />
     <ClInclude Include="Code\Engine.h" />
-    <ClCompile Include="Code\FBXImporter.cpp" />
-    <ClInclude Include="Code\FBXImporter.h" />
+    <ClCompile Include="Code\Asset\FBXImporter.cpp" />
+    <ClInclude Include="Code\Asset\FBXImporter.h" />
     <ClCompile Include="Code\Input.cpp" />
     <ClInclude Include="Code\GameInstance.h" />
     <ClInclude Include="Code\GridNode.h" />
@@ -266,6 +266,7 @@
     <ClCompile Include="Code\main.cpp" />
     <ClInclude Include="Code\Editor\RenderViewWidget.h" />
     <ClCompile Include="Code\VMath.cpp" />
+    <ClInclude Include="Code\Asset\MeshAssetHeader.h" />
     <ClInclude Include="Code\VMath.h" />
     <ClCompile Include="Code\Physics\Raycast.cpp" />
     <ClInclude Include="Code\Physics\Raycast.h" />

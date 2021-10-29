@@ -41,7 +41,7 @@
     <ClCompile Include="Code\Editor\DebugMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\FBXImporter.cpp">
+    <ClCompile Include="Code\Asset\FBXImporter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Input.cpp">
@@ -391,7 +391,7 @@
     <ClInclude Include="Code\Core.h" />
     <ClInclude Include="Code\Debug.h" />
     <ClInclude Include="Code\Engine.h" />
-    <ClInclude Include="Code\FBXImporter.h" />
+    <ClInclude Include="Code\Asset\FBXImporter.h" />
     <ClInclude Include="Code\Input.h" />
     <ClInclude Include="Code\VMath.h" />
     <ClInclude Include="Code\Profile.h" />
@@ -620,6 +620,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ConditionSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Asset\MeshAssetHeader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,5 @@
 #include "MeshComponent.h"
-#include "FBXImporter.h"
+#include "Asset/FBXImporter.h"
 #include "Render/RenderUtils.h"
 #include "Render/ShaderSystem.h"
 #include "Render/Material.h"
