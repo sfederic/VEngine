@@ -17,8 +17,10 @@ struct Vertex
 //The actual data for each loaded mesh. Each loaded mesh file will have one of these per its filename.
 struct MeshData
 {
+	typedef uint32_t indexDataType;
+
 	std::vector<Vertex> vertices;
-	std::vector<uint32_t> indices;
+	std::vector<indexDataType> indices;
 };
 
 //A pointer structure to a MeshData struct in memory. Each rendered component will have one of these pointing

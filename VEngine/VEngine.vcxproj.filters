@@ -341,6 +341,9 @@
     <ClCompile Include="ConditionSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Asset\AssetSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -623,6 +626,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Asset\MeshAssetHeader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Asset\AssetSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
