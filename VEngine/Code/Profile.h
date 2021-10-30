@@ -24,6 +24,10 @@ namespace Profile
 	void Start(std::source_location location);
 	void End(std::source_location location);
 	void Reset();
+
+	//Quick timing functions that need to be called once off without need for constant profiling.
+	__int64 QuickStart();
+	double QuickEnd(__int64 startTime);
 }
 
 #define PROFILE_START Profile::Start(std::source_location::current());

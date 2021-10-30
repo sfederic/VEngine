@@ -16,7 +16,7 @@ TimeFrame::TimeFrame(__int64 _startTime)
 
 void TimeFrame::SetElapsedTime()
 {
-	__int64 cpuFreq;
+	__int64 cpuFreq = 0;
 	QueryPerformanceFrequency((LARGE_INTEGER*)&cpuFreq);
 	double ticks = 1.0 / (double)cpuFreq;
 
@@ -50,6 +50,26 @@ double TimeFrame::GetAverageTime()
 void Profile::Reset()
 {
 	timeFrames.clear();
+}
+
+__int64 Profile::QuickStart()
+{
+	__int64 startTime = 0;
+	QueryPerformanceCounter((LARGE_INTEGER*)&startTime);
+	return startTime;
+}
+
+double Profile::QuickEnd(__int64 startTime)
+{
+	__int64 endTime = 0;
+	QueryPerformanceCounter((LARGE_INTEGER*)&endTime);
+
+	__int64 cpuFreq = 0;
+	QueryPerformanceFrequency((LARGE_INTEGER*)&cpuFreq);
+	double ticks = 1.0 / (double)cpuFreq;
+
+	double elapsedTime = ticks * double(endTime - startTime);
+	return elapsedTime;
 }
 
 void Profile::Start(std::source_location location)
