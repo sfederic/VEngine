@@ -34,7 +34,6 @@ void Engine::Init(int argc, char* argv[])
 	audioSystem.Init();
 
 	renderer.Init(editor->windowHwnd, editor->viewportWidth, editor->viewportHeight);
-	RenderUtils::defaultSampler = RenderUtils::CreateSampler();
 
 	fbxImporter.Init();
 

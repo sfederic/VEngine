@@ -69,6 +69,8 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	CreateQueries();
 	CheckSupportedFeatures();
 
+	RenderUtils::defaultSampler = RenderUtils::CreateSampler();
+
 	spriteBatcher.Init();
 }
 
