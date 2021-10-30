@@ -1,10 +1,7 @@
 #include "FBXImporter.h"
 #include <cassert>
-#include <unordered_map>
 
 FBXImporter fbxImporter;
-
-std::unordered_map<std::string, MeshData*> existingMeshDataMap;
 
 void FBXImporter::Init()
 {

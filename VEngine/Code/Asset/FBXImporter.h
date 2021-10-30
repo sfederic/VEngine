@@ -5,6 +5,7 @@
 
 #include <fbxsdk.h>
 #include "Render/RenderTypes.h"
+#include <unordered_map>
 
 using namespace fbxsdk;
 
@@ -22,10 +23,12 @@ using namespace fbxsdk;
 
 struct FBXImporter
 {
-	FbxManager* manager;
-	FbxIOSettings* ioSetting;
-	FbxImporter* importer;
-	FbxAnimEvaluator* animEvaluator;
+	FbxManager* manager = nullptr;
+	FbxIOSettings* ioSetting = nullptr;
+	FbxImporter* importer = nullptr;
+	FbxAnimEvaluator* animEvaluator = nullptr;
+
+	std::unordered_map<std::string, MeshData*> existingMeshDataMap;
 
 	void Init();
 	bool Import(std::string filename, MeshDataProxy* meshData);
