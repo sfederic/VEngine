@@ -3,7 +3,9 @@
 
 struct AssetSystem : System
 {
+	AssetSystem();
 	void WriteAllMeshDataToMeshAssetFiles();
+	void ReadAllMeshAssetsFromFile();
 };
 
 extern AssetSystem assetSystem;

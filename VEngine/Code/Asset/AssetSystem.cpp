@@ -3,7 +3,11 @@
 #include "FBXImporter.h"
 #include "MeshAssetHeader.h"
 
-extern AssetSystem assetSystem;
+AssetSystem assetSystem;
+
+AssetSystem::AssetSystem() : System("AssetSystem")
+{
+}
 
 void AssetSystem::WriteAllMeshDataToMeshAssetFiles()
 {
@@ -20,9 +24,9 @@ void AssetSystem::WriteAllMeshDataToMeshAssetFiles()
 
 		const std::string& filename = meshIt.first;
 		const std::string meshName = filename.substr(0, filename.find("."));
-		const std::string meshFilename = meshName + ".vmesh";
+		const std::string meshFilePath = "Meshes/" + meshName + ".vmesh";
 
-		fopen_s(&file, meshFilename.c_str(), "wb");
+		fopen_s(&file, meshFilePath.c_str(), "wb");
 		assert(file);
 
 		fwrite(&header, sizeof(MeshAssetHeader), 1, file);
@@ -30,5 +34,26 @@ void AssetSystem::WriteAllMeshDataToMeshAssetFiles()
 		fwrite(meshData->indices.data(), sizeof(MeshData::indexDataType), meshData->indices.size(), file);
 
 		fclose(file);
+		file = nullptr;
 	}
+}
+
+void AssetSystem::ReadAllMeshAssetsFromFile()
+{
+	FILE* file = nullptr;
+	fopen_s(&file, "Meshes/cube.vmesh", "rb");
+	assert(file);
+
+	MeshAssetHeader header;
+	MeshData data;
+
+	fread(&header, sizeof(MeshAssetHeader), 1, file);
+
+	data.vertices.resize(header.vertexCount);
+	data.indices.resize(header.indexCount);
+
+	fread(data.vertices.data(), sizeof(Vertex), header.vertexCount, file);
+	fread(data.indices.data(), sizeof(MeshData::indexDataType), header.indexCount, file);
+
+	return;
 }

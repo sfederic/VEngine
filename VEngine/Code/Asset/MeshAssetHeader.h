@@ -12,5 +12,5 @@ struct MeshAssetHeader
 	uint64_t vertexCount = 0;
 	uint64_t indexCount = 0;
 
-	SourceMeshFormat sourceMeshFormat;
+	SourceMeshFormat sourceMeshFormat = SourceMeshFormat::FBX;
 };
