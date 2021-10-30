@@ -5,12 +5,15 @@
 #include "UI/UISystem.h"
 #include "DebugMenu.h"
 #include "Render/Renderer.h"
+#include "Asset/AssetSystem.h"
 
 Console console;
 
 Console::Console()
 {
-	//Execute values need to be uppercase with WndProc
+	//NOTE: command strings need to be uppercase with WndProc
+
+	//Debug Menu Commands
 	executeMap.emplace(L"SNAP", []() { debugMenu.snapMenuOpen = !debugMenu.snapMenuOpen; });
 	executeMap.emplace(L"PROFILE", []() { debugMenu.profileMenuOpen = !debugMenu.profileMenuOpen; });
 	executeMap.emplace(L"FPS", []() { debugMenu.fpsMenuOpen = !debugMenu.fpsMenuOpen; });
@@ -21,6 +24,9 @@ Console::Console()
 	executeMap.emplace(L"STATS", []() { debugMenu.worldStatsMenuOpen = !debugMenu.worldStatsMenuOpen; });
 	executeMap.emplace(L"GAME", []() { debugMenu.gameInstaceMenuOpen = !debugMenu.gameInstaceMenuOpen; });
 	executeMap.emplace(L"MEM", []() { debugMenu.memoryMenuOpen = !debugMenu.memoryMenuOpen; });
+
+	//Asset Build Commands
+	executeMap.emplace(L"BUILD MESHES", []() { assetSystem.WriteAllMeshDataToMeshAssetFiles(); });
 }
 
 void Console::ConsoleInput()

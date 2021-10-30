@@ -2,6 +2,7 @@
 #include <cstdio>
 #include "FBXImporter.h"
 #include "MeshAssetHeader.h"
+#include "Editor/Editor.h"
 
 AssetSystem assetSystem;
 
@@ -12,6 +13,8 @@ AssetSystem::AssetSystem() : System("AssetSystem")
 void AssetSystem::WriteAllMeshDataToMeshAssetFiles()
 {
 	FILE* file = nullptr;
+
+	uint32_t numberOfMeshFilesBuilt = 0;
 
 	for (auto meshIt : fbxImporter.existingMeshDataMap)
 	{
@@ -35,9 +38,14 @@ void AssetSystem::WriteAllMeshDataToMeshAssetFiles()
 
 		fclose(file);
 		file = nullptr;
+
+		numberOfMeshFilesBuilt++;
 	}
+
+	editor->Log("Mesh asset build complete %d", numberOfMeshFilesBuilt);
 }
 
+//This is just testing code.
 void AssetSystem::ReadAllMeshAssetsFromFile()
 {
 	FILE* file = nullptr;
