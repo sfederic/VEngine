@@ -39,11 +39,26 @@ void Win32Editor::SetMousePos()
 
 void Win32Editor::Log(const std::wstring logMessage, ...)
 {
-	MessageBoxW(0, logMessage.c_str(), L"Error", 0);
+	va_list args;
+	va_start(args, logMessage);
+
+	wchar_t msg[1024];
+	_vsnwprintf(msg, 1024, logMessage.c_str(), args);
+	va_end(args);
+
+	OutputDebugStringW(msg);
 }
 
 void Win32Editor::Log(const std::string logMessage, ...)
 {
+	va_list args;
+	va_start(args, logMessage);
+
+	char msg[1024];
+	_vsnprintf(msg, 1024, logMessage.c_str(), args);
+	va_end(args);
+
+	OutputDebugString(msg);
 }
 
 void Win32Editor::SetActorProps(Actor* actor)
