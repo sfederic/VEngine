@@ -147,9 +147,9 @@ bool RaycastTriangleIntersect(Ray& ray)
 			{
 				for (int i = 0; i < mesh->data->vertices->size() / 3; i++)
 				{
-					uint32_t index0 = mesh->data->indices->at(i * 3);
-					uint32_t index1 = mesh->data->indices->at(i * 3 + 1);
-					uint32_t index2 = mesh->data->indices->at(i * 3 + 2);
+					MeshData::indexDataType index0 = mesh->data->indices->at(i * 3);
+					MeshData::indexDataType index1 = mesh->data->indices->at(i * 3 + 1);
+					MeshData::indexDataType index2 = mesh->data->indices->at(i * 3 + 2);
 
 					XMVECTOR v0 = XMLoadFloat3(&mesh->data->vertices->at(index0).pos);
 					v0 = XMVector3TransformCoord(v0, model);

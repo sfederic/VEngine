@@ -28,7 +28,7 @@ struct MeshData
 struct MeshDataProxy
 {
 	std::vector<Vertex>* vertices = nullptr;
-	std::vector<uint32_t>* indices = nullptr;
+	std::vector<MeshData::indexDataType>* indices = nullptr;
 
 	uint64_t GetVerticesByteWidth()
 	{
@@ -37,7 +37,7 @@ struct MeshDataProxy
 
 	uint64_t GetIndicesByteWidth()
 	{
-		return (sizeof(uint32_t) * indices->size());
+		return (sizeof(MeshData::indexDataType) * indices->size());
 	}
 
 	void Clear()
@@ -65,7 +65,7 @@ struct MeshDataProxy
 
 	//Duplicate checks for indices only return true if the index is present in the array
 	//more than once. Eg. For {2, 1, 0}, {3, 1, 2}, 2 and 1 are the duplicates.
-	bool CheckDuplicateIndices(uint32_t index)
+	bool CheckDuplicateIndices(MeshData::indexDataType index)
 	{
 		int duplicateCounter = 0;
 

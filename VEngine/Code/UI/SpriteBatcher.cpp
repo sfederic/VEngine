@@ -11,13 +11,13 @@ void SpriteBatcher::Init()
 		D3D11_BIND_VERTEX_BUFFER, &verts[0]);
 
 	//Always a quad, for now
-	uint32_t spriteIndices[]
+	MeshData::indexDataType spriteIndices[]
 	{
 		0, 1, 2,
 		2, 3, 0
 	};
 
-	spriteIndexBuffer = RenderUtils::CreateDefaultBuffer(6 * sizeof(uint32_t),
+	spriteIndexBuffer = RenderUtils::CreateDefaultBuffer(6 * sizeof(MeshData::indexDataType),
 		D3D11_BIND_INDEX_BUFFER, &spriteIndices[0]);
 }
 
