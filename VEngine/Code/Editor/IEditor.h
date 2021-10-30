@@ -18,8 +18,8 @@ struct IEditor
 	virtual void Init(int argc, char* argv[]) = 0;
 	virtual void Tick() = 0;
 	virtual void SetMousePos() = 0;
-	virtual void Log(const std::wstring logMessage) = 0;
-	virtual void Log(const std::string logMessage) = 0;
+	virtual void Log(const std::wstring logMessage, ...) = 0;
+	virtual void Log(const std::string logMessage, ...) = 0;
 	virtual void SetActorProps(Actor* actor) = 0;
 	virtual void UpdateWorldList() = 0;
 	virtual void RefreshAssetList() = 0;

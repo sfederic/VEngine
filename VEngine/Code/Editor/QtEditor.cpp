@@ -57,14 +57,20 @@ void QtEditor::SetMousePos()
     viewportMouseY = mousePos.y();
 }
 
-void QtEditor::Log(const std::wstring logMessage)
+void QtEditor::Log(const std::wstring logMessage, ...)
 {
     mainWindow->logDock->Print(logMessage);
 }
 
-void QtEditor::Log(const std::string logMessage)
+void QtEditor::Log(const std::string logMessage, ...)
 {
-    mainWindow->logDock->Print(logMessage);
+    va_list args;
+    va_start(args, logMessage);
+    char msg[1024];
+    vsnprintf(msg, 1024, logMessage.c_str(), args);
+    va_end(args);
+
+    mainWindow->logDock->Print(msg);
 }
 
 void QtEditor::SetActorProps(Actor* actor)
