@@ -173,6 +173,7 @@
     <ClCompile Include="Code\Actors\GameEvent.cpp" />
     <ClCompile Include="Code\SystemCache.cpp" />
     <ClCompile Include="ConditionSystem.cpp" />
+    <ClCompile Include="Code\ThreadSystem.cpp" />
     <ClInclude Include="Code\Actors\AudioActor.h" />
     <ClInclude Include="Code\Asset\AssetSystem.h" />
     <ClInclude Include="Code\Components\AudioComponent.h" />
@@ -342,6 +343,7 @@
     <ClInclude Include="Code\Actors\GameEvent.h" />
     <ClInclude Include="Code\SystemCache.h" />
     <ClInclude Include="ConditionSystem.h" />
+    <ClInclude Include="Code\ThreadSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
