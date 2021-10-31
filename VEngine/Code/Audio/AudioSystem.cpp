@@ -1,5 +1,6 @@
 #include "AudioSystem.h"
 #include <filesystem>
+#include <cassert>
 #include "Debug.h"
 #include "AudioBase.h"
 #include "AudioChannel.h"
