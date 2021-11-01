@@ -164,6 +164,19 @@ void DebugMenu::IterateOverProperties(Properties& props)
 			ImGui::SameLine();
 			ImGui::Text(texture->filename.c_str());
 		}
+		else if (props.CheckType<Transform>(name))
+		{
+			Transform* transform = props.GetData<Transform>(name);
+
+			float* position[3] = { &transform->position.x, &transform->position.y, &transform->position.z };
+			ImGui::InputFloat3("Position", *position);
+
+			float* scale[3] = { &transform->scale.x, &transform->scale.y, &transform->scale.z };
+			ImGui::InputFloat3("Scale", *scale);
+
+			float* rotation[4] = { &transform->rotation.x, &transform->rotation.y, &transform->rotation.z };
+			ImGui::InputFloat4("Rotation", *rotation);
+		}
 	}
 }
 

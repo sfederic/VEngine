@@ -19,6 +19,7 @@
 #include "PropertyWidgets/StringWidget.h"
 #include "PropertyWidgets/Texture2DWidget.h"
 #include "PropertyWidgets/ActorListWidget.h"
+#include "PropertyWidgets/TransformWidget.h"
 
 PropertiesDock::PropertiesDock() : QDockWidget("Properties")
 {
@@ -145,6 +146,12 @@ void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRo
             auto actorListWidget = new ActorListWidget(prop.second);
             actorPropsGridLayout->addWidget(actorListWidget, currentGridRow, propertyDataColumn);
             propertyWidgetsToUpdate.push_back((IPropertyWidget*)actorListWidget);
+        }
+        else if (props.CheckType<Transform>(name))
+        {
+            auto transformWidget = new TransformWidget((Transform*)prop.second.data, this);
+            actorPropsGridLayout->addWidget(transformWidget, currentGridRow, propertyDataColumn);
+            propertyWidgetsToUpdate.push_back((IPropertyWidget*)transformWidget);
         }
 
         currentGridRow++;

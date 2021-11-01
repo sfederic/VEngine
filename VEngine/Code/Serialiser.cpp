@@ -76,6 +76,14 @@ void Serialiser::Serialise(Properties props)
 				os << actor->name << "\n";
 			}
 		}
+		else if (props.CheckType<Transform>(name))
+		{
+			Transform* transform = props.GetData<Transform>(name);
+			os << name << "\n";
+			os << transform->position.x << " " << transform->position.y << " " << transform->position.z << " ";
+			os << transform->scale.x << " " << transform->scale.y << " " << transform->scale.z << " ";
+			os << transform->rotation.x << " " << transform->rotation.y << " " << transform->rotation.z << " " << transform->rotation.w << "\n";
+		}
 	}
 
 	os << "next\n"; //"next" moves the forloop onto the next 'Object'
@@ -186,6 +194,23 @@ void Deserialiser::Deserialise(Properties props)
 				Actor* foundActor = world.FindActorByName(actorNameStr);
 				actors->push_back(foundActor);
 			}
+		}
+		else if (props.CheckType<Transform>(name))
+		{
+			Transform* transform = props.GetData<Transform>(name);
+
+			is >> transform->position.x;
+			is >> transform->position.y;
+			is >> transform->position.z;
+
+			is >> transform->scale.x;
+			is >> transform->scale.y;
+			is >> transform->scale.z;
+
+			is >> transform->rotation.x;
+			is >> transform->rotation.y;
+			is >> transform->rotation.z;
+			is >> transform->rotation.w;
 		}
 	}
 }

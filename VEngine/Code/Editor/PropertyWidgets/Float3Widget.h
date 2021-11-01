@@ -12,7 +12,6 @@ public:
 	void SetValue();
 	virtual void ResetValue() override;
 
-private:
 	SpinBox xSpinbox;
 	SpinBox ySpinbox;
 	SpinBox zSpinbox;
