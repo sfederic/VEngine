@@ -2,6 +2,8 @@
 #include <qtreewidget.h>
 #include <QTreeWidgetItem>
 #include "World.h"
+#include <qboxlayout.h>
+#include <qlineedit.h>
 #include "Actors/IActorSystem.h"
 #include "Actors/Actor.h"
 #include "Camera.h"
@@ -10,16 +12,30 @@
 
 WorldDock::WorldDock() : QDockWidget("World")
 {
-	actorTreeWidget = new QTreeWidget();
+	//Search bar
+	actorSearchBar = new QLineEdit(this);
+	actorSearchBar->setPlaceholderText("Search...");
+	connect(actorSearchBar, &QLineEdit::textChanged, this, &WorldDock::SearchActors);
+
+	//Actor Tree widget
+	actorTreeWidget = new QTreeWidget(this);
 
 	actorTreeWidget->setColumnCount(1);
 	actorTreeWidget->setHeaderLabels(QStringList("Actors"));
-
 	actorTreeWidget->setSelectionMode(QAbstractItemView::SelectionMode::SingleSelection);
+
 	connect(actorTreeWidget, &QTreeWidget::itemClicked, this, &WorldDock::ClickOnActorInList);
 	connect(actorTreeWidget, &QTreeWidget::itemChanged, this, &WorldDock::ActorNameChanged);
 
-	setWidget(actorTreeWidget);
+	//Dock Layout
+	auto vLayout = new QVBoxLayout(this);
+	vLayout->addWidget(actorSearchBar);
+	vLayout->addWidget(actorTreeWidget);
+
+	auto worldWidget = new QWidget(this);
+	worldWidget->setLayout(vLayout);
+
+	setWidget(worldWidget);
 }
 
 void WorldDock::PopulateWorldActorList()
@@ -74,4 +90,24 @@ void WorldDock::SelectActorInList()
 
 	actorTreeWidget->clearSelection();
 	actorTreeWidget->setItemSelected(foundItems[0], true);
+}
+
+//This is only working for single columns in the tree. If showing actor parenting through this list 
+//later on, need to change this too in the item->text(int column) below.
+void WorldDock::SearchActors()
+{
+	QString searchText = actorSearchBar->text().toLower();
+	
+	for (int i = 0; i < actorTreeWidget->topLevelItemCount(); i++)
+	{
+		QTreeWidgetItem* item = actorTreeWidget->topLevelItem(i);
+		if (item->text(0).toLower().contains(searchText))
+		{
+			item->setHidden(false);
+		}
+		else
+		{
+			item->setHidden(true);
+		}
+	}
 }
