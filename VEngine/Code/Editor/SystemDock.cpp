@@ -51,6 +51,8 @@ void SystemDock::AddActorSystemsToWidget()
 		auto item = new QListWidgetItem(actorSystemList);
 		item->setText(QString::fromStdString(actorSystem->name));
 	}
+
+	actorSystemList->sortItems(Qt::SortOrder::AscendingOrder);
 }
 
 void SystemDock::ClickOnActorSystemItem(QListWidgetItem* item)
