@@ -13,6 +13,7 @@ using namespace DirectX;
 struct Sprite
 {
 	Transform transform;
+	XMVECTOR velocity = XMVectorZero();
 
 	D3D11_RECT srcRect;
 	D3D11_RECT dstRect;
@@ -21,6 +22,9 @@ struct Sprite
 
 	float angle = 0.f;
 	float z = 0.f;
+
+	float speed = 5.0f;
+	float lifetime = 1.0f;
 };
 
 struct SpriteBatcher
@@ -30,13 +34,23 @@ struct SpriteBatcher
 
 	//TODO: The same 4 vertices are used for every quad, can probably do some instancing here later.
 	Vertex verts[4];
-	std::vector<Sprite> sprites;
+
+	//Sprites rendering for UI
+	std::vector<Sprite> screenSprites;
+
+	//Sprites rendering in-world (eg. particles)
+	std::vector<Sprite> worldSprites;
 
 	void Init();
+	void Tick(float deltaTime);
 	void Reset();
-	void CreateSprite(Sprite sprite);
+	void CreateWorldSprite(Sprite sprite);
+	void CreateScreenSprite(Sprite sprite);
+	void BuildSpriteQuadForViewportRendering(const Sprite& sprite);
+	void BuildSpriteQuadForParticleRendering();
+
+private:
 	XMFLOAT3 PointToNdc(int x, int y, float z);
-	void BuildSpriteQuad(const Sprite& sprite);
 };
 
 extern SpriteBatcher spriteBatcher;

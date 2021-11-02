@@ -96,6 +96,7 @@ public:
 	void RenderSetup();
 	void Render();
 	void RenderSpritesInScreenSpace();
+	void RenderSpritesInWorldSpace();
 	void* GetSwapchain();
 	float GetAspectRatio();
 	float GetViewportWidth();

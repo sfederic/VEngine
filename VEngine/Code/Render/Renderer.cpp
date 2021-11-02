@@ -654,13 +654,77 @@ void Renderer::RenderLightMeshes()
 	}
 }
 
+void Renderer::RenderSpritesInWorldSpace()
+{
+	PROFILE_START
+
+	spriteBatcher.Tick(Core::GetDeltaTime());
+
+	//Only need to build sprite quad once for in-world rendering
+	spriteBatcher.BuildSpriteQuadForParticleRendering();
+
+	shaderMatrices.view = activeCamera->GetViewMatrix();
+
+	for (Sprite& sprite : spriteBatcher.worldSprites)
+	{
+		if (drawAllAsWireframe)
+		{
+			context->RSSetState(rastStateWireframe);
+		}
+		else
+		{
+			//Careful with back culling visibility here for UI
+			context->RSSetState(rastStateMap["nobackcull"]->data);
+		}
+
+		ShaderItem* shader = shaderSystem.FindShader(L"Unlit.hlsl");
+		context->VSSetShader(shader->vertexShader, nullptr, 0);
+		context->PSSetShader(shader->pixelShader, nullptr, 0);
+
+		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
+
+		//Set texture from sprite
+		context->PSSetShaderResources(0, 1, &textureSystem.FindTexture2D(sprite.textureFilename)->srv);
+
+		//Update vertex buffer
+		D3D11_MAPPED_SUBRESOURCE mappedResource;
+		HR(context->Map(spriteBatcher.spriteVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+		memcpy(mappedResource.pData, spriteBatcher.verts, sizeof(spriteBatcher.verts));
+		context->Unmap(spriteBatcher.spriteVertexBuffer, 0);
+
+		context->IASetVertexBuffers(0, 1, &spriteBatcher.spriteVertexBuffer, &stride, &offset);
+		context->IASetIndexBuffer(spriteBatcher.spriteIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+
+		//TODO: make a VMath::RotateTowardsCamera() function for here and Billboard
+		const float angle = atan2(activeCamera->transform.world.r[3].m128_f32[0] - sprite.transform.position.x,
+			activeCamera->transform.world.r[3].m128_f32[2] - sprite.transform.position.z) * (180.0 / XM_PI);
+
+		const float rotation = XMConvertToRadians(angle);
+
+		XMMATRIX m = XMMatrixRotationY(rotation);
+		XMVECTOR rot = XMQuaternionRotationMatrix(m);
+		XMStoreFloat4(&sprite.transform.rotation, rot);
+
+		shaderMatrices.model = sprite.transform.GetAffine();
+		shaderMatrices.MakeModelViewProjectionMatrix();
+
+		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+
+		//Draw
+		context->DrawIndexed(6, 0, 0);
+	}
+
+	PROFILE_END
+}
+
 void Renderer::RenderSpritesInScreenSpace()
 {
 	PROFILE_START
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
 
-	for (const Sprite& sprite : spriteBatcher.sprites)
+	for (const Sprite& sprite : spriteBatcher.screenSprites)
 	{
 		if (drawAllAsWireframe)
 		{
@@ -681,9 +745,9 @@ void Renderer::RenderSpritesInScreenSpace()
 		//Set texture from sprite
 		context->PSSetShaderResources(0, 1, &textureSystem.FindTexture2D(sprite.textureFilename)->srv);
 
+		spriteBatcher.BuildSpriteQuadForViewportRendering(sprite);
+
 		//Update vertex buffer
-		//REF:https://docs.microsoft.com/en-us/windows/win32/direct3d11/how-to--use-dynamic-resources
-		spriteBatcher.BuildSpriteQuad(sprite);
 		D3D11_MAPPED_SUBRESOURCE mappedResource;
 		HR(context->Map(spriteBatcher.spriteVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
 		memcpy(mappedResource.pData, spriteBatcher.verts, sizeof(spriteBatcher.verts));

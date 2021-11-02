@@ -14,8 +14,8 @@
 
 void Widget::Tick(float deltaTime)
 {
-	Image("bush.png", 50, 0, 100, 100);
-	MapToScreenSpace();
+	//Image("bush.png", 50, 0, 100, 100);
+	//MapToScreenSpace();
 }
 
 void Widget::Start()
@@ -82,5 +82,5 @@ void Widget::Image(const std::string& filename, int x, int y, int w, int h)
 	sprite.dstRect = { x, y, w, h };
 	sprite.srcRect = { 0, 0, 512, 512 };
 
-	spriteBatcher.CreateSprite(sprite);
+	spriteBatcher.CreateScreenSprite(sprite);
 }

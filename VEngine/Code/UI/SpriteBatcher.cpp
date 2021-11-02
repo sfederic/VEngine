@@ -21,14 +21,32 @@ void SpriteBatcher::Init()
 		D3D11_BIND_INDEX_BUFFER, &spriteIndices[0]);
 }
 
-void SpriteBatcher::Reset()
+void SpriteBatcher::Tick(float deltaTime)
 {
-	sprites.clear();
+	for (int i = 0; i < worldSprites.size(); i++)
+	{
+		float speed = worldSprites[i].speed * deltaTime;
+
+		worldSprites[i].transform.position.x += worldSprites[i].velocity.m128_f32[0] * speed;
+		worldSprites[i].transform.position.y += worldSprites[i].velocity.m128_f32[1] * speed;
+		worldSprites[i].transform.position.z += worldSprites[i].velocity.m128_f32[2] * speed;
+	}
 }
 
-void SpriteBatcher::CreateSprite(Sprite sprite)
+void SpriteBatcher::Reset()
 {
-	sprites.push_back(sprite);
+	worldSprites.clear();
+	screenSprites.clear();
+}
+
+void SpriteBatcher::CreateWorldSprite(Sprite sprite)
+{
+	worldSprites.push_back(sprite);
+}
+
+void SpriteBatcher::CreateScreenSprite(Sprite sprite)
+{
+	screenSprites.push_back(sprite);
 }
 
 XMFLOAT3 SpriteBatcher::PointToNdc(int x, int y, float z)
@@ -40,10 +58,9 @@ XMFLOAT3 SpriteBatcher::PointToNdc(int x, int y, float z)
 	return p;
 }
 
-void SpriteBatcher::BuildSpriteQuad(const Sprite& sprite)
+void SpriteBatcher::BuildSpriteQuadForViewportRendering(const Sprite& sprite)
 {
 	const D3D11_RECT& dst = sprite.dstRect;
-
 	const D3D11_RECT& src = sprite.srcRect;
 
 	// Dest rect defines target in screen space.
@@ -61,7 +78,7 @@ void SpriteBatcher::BuildSpriteQuad(const Sprite& sprite)
 	verts[1].uv = XMFLOAT2((float)src.left / texWidth, (float)src.top / texHeight);
 	verts[2].uv = XMFLOAT2((float)src.right / texWidth, (float)src.top / texHeight);
 	verts[3].uv = XMFLOAT2((float)src.right / texWidth, (float)src.bottom / texHeight);
-
+	
 	// Quad center point.
 	float tx = 0.5f * (verts[0].pos.x + verts[3].pos.x);
 	float ty = 0.5f * (verts[0].pos.y + verts[1].pos.y);
@@ -72,10 +89,23 @@ void SpriteBatcher::BuildSpriteQuad(const Sprite& sprite)
 	XMMATRIX T = XMMatrixAffineTransformation2D(scaling, origin, sprite.angle, translation);
 
 	// Rotate and scale the quad in NDC space.
-	for (int i = 0; i < 4; ++i)
+	for (int i = 0; i < 4; i++)
 	{
 		XMVECTOR p = XMLoadFloat3(&verts[i].pos);
 		p = XMVector3TransformCoord(p, T);
 		XMStoreFloat3(&verts[i].pos, p);
 	}
+}
+
+void SpriteBatcher::BuildSpriteQuadForParticleRendering()
+{
+	verts[0].pos = XMFLOAT3(-1.f, -1.f, 0.f);
+	verts[1].pos = XMFLOAT3(-1.f, 1.f, 0.f);
+	verts[2].pos = XMFLOAT3(1.f, 1.f, 0.f);
+	verts[3].pos = XMFLOAT3(1.f, -1.f, 0.f);
+
+	verts[0].uv = XMFLOAT2(0.f, 0.f);
+	verts[1].uv = XMFLOAT2(0.f, 1.f);
+	verts[2].uv = XMFLOAT2(1.f, 1.f);
+	verts[3].uv = XMFLOAT2(1.f, 0.f);
 }

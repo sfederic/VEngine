@@ -26,7 +26,6 @@ Player::Player()
 void Player::Start()
 {
 	nextPos = GetPositionVector();
-
 	nextRot = GetRotationVector();
 }
 
@@ -34,7 +33,6 @@ void Player::Tick(float deltaTime)
 {
 	const float moveSpeed = 5.5f;
 	SetPosition(VMath::VectorConstantLerp(GetPositionVector(), nextPos, deltaTime, moveSpeed));
-
 
 	if (Input::GetKeyUp(Keys::Down))
 	{

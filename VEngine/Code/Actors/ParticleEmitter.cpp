@@ -2,6 +2,7 @@
 #include "Billboard.h"
 #include "Components/EmptyComponent.h"
 #include "VMath.h"
+#include "UI/SpriteBatcher.h"
 
 ParticleEmitter::ParticleEmitter()
 {
@@ -17,20 +18,24 @@ void ParticleEmitter::Tick(float deltaTime)
 
 	if (spawnTimer > spawnRate)
 	{
+		const float rangeX = VMath::RandomRange(particleDirectionMin.x, particleDirectionMax.x);
+		const float rangeY = VMath::RandomRange(particleDirectionMin.y, particleDirectionMax.y);
+		const float rangeZ = VMath::RandomRange(particleDirectionMin.z, particleDirectionMax.z);
+
+		XMVECTOR direction = XMVectorSet(rangeX, rangeY, rangeZ, 0.f);
+
 		auto transform = Transform();
 		transform.position = GetPosition();
 		transform.scale = GetScale();
 		transform.rotation = GetRotation();
 
-		auto bill = Billboard::system.Add(Billboard(), transform);
-		activeBillboards.push_back(bill);
-
-		float rangeX = VMath::RandomRange(particleDirectionMin.x, particleDirectionMax.x);
-		float rangeY = VMath::RandomRange(particleDirectionMin.y, particleDirectionMax.y);
-		float rangeZ = VMath::RandomRange(particleDirectionMin.z, particleDirectionMax.z);
-
-		XMVECTOR direction = XMVectorSet(rangeX, rangeY, rangeZ, 0.f);
-		bill->velocity = direction * (speed * deltaTime);
+		Sprite sprite = {};
+		sprite.dstRect = { 0, 0, 256, 256 };
+		sprite.srcRect = { 0, 0, 563, 486};
+		sprite.transform = transform;
+		sprite.textureFilename = "bush.png";
+		sprite.velocity = direction;
+		spriteBatcher.CreateWorldSprite(sprite);
 
 		spawnTimer = 0.f;
 	}

@@ -67,7 +67,7 @@ void Engine::TickSystems(float deltaTime)
 void Engine::ResetSystems()
 {
 	Input::Reset();
-	spriteBatcher.Reset();
+	//spriteBatcher.Reset();
 }
 
 void Engine::MainLoop()
@@ -92,7 +92,10 @@ void Engine::Render(float deltaTime)
 
 	uiSystem.BeginDraw();
 	uiSystem.DrawAllWidgets(deltaTime);
+
+	renderer.RenderSpritesInWorldSpace();
 	renderer.RenderSpritesInScreenSpace();
+
 	console.Tick();
 	debugMenu.Tick(deltaTime);
 	uiSystem.EndDraw();
