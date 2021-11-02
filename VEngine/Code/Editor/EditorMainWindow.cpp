@@ -78,6 +78,7 @@ void EditorMainWindow::HideAllDocks()
 		systemDock->hide();
 		toolbarDock->hide();
 		logDock->hide();
+		dialogueDock->hide();
 	}
 	else if (!fullScreenOn)
 	{
@@ -87,5 +88,6 @@ void EditorMainWindow::HideAllDocks()
 		systemDock->show();
 		toolbarDock->show();
 		logDock->show();
+		dialogueDock->show();
 	}
 }
