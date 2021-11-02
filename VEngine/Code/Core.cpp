@@ -9,6 +9,7 @@
 #include "UI/UISystem.h"
 #include "FileSystem.h"
 #include "Audio/AudioSystem.h"
+#include "WorldEditor.h"
 
 double ticks;
 double deltaTime = 0.0;
@@ -122,6 +123,8 @@ void Core::StartGame()
 
 	world.StartAllComponents();
 	world.StartAllActors();
+
+	worldEditor.pickedActor = nullptr;
 }
 
 void Core::EndGame()
