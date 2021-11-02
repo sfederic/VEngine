@@ -18,7 +18,7 @@ struct ShadowMap
 	int height = 0;
 
 	//Radius needs to be big otherwise the orthomatrix sort of wraps underneath and over the world
-	float levelRadius = 0.f;
+	float levelRadius = 50.f;
 
 	ID3D11ShaderResourceView* depthMapSRV = nullptr;;
 	ID3D11DepthStencilView* depthMapDSV = nullptr;
