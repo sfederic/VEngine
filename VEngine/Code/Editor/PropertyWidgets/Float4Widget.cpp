@@ -28,7 +28,7 @@ void Float4Widget::SetValue()
 	newFloat4.x = xSpinbox.value();
 	newFloat4.y = ySpinbox.value();
 	newFloat4.z = zSpinbox.value();
-	newFloat4.w = zSpinbox.value();
+	newFloat4.w = wSpinbox.value();
 	*value = newFloat4;
 }
 
