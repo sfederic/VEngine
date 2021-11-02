@@ -98,9 +98,9 @@ void WorldEditor::DeleteActor()
 	}
 }
 
+//Spawn actor on middle mouse click in viewport
 void WorldEditor::SpawnActorOnClick()
 {
-	//Spawn actor on right click in viewport
 	if (Input::GetMouseMiddleUp())
 	{
 		if (spawnSystem)
@@ -119,6 +119,8 @@ void WorldEditor::SpawnActorOnClick()
 				XMStoreFloat3(&transform.position, rayEnd);
 
 				Actor* actor = spawnSystem->SpawnActor(transform);
+				pickedActor = actor;
+				editor->SetActorProps(pickedActor);
 			}
 			else
 			{
@@ -139,6 +141,8 @@ void WorldEditor::SpawnActorOnClick()
 				XMStoreFloat3(&transform.position, rayEnd);
 
 				Actor* actor = spawnSystem->SpawnActor(transform);
+				pickedActor = actor;
+				editor->SetActorProps(pickedActor);
 			}
 
 			editor->UpdateWorldList();
