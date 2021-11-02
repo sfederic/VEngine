@@ -2,10 +2,13 @@
 #include <string>
 #include <qdockwidget.h>
 
+class QTextEdit;
+class QPushButton;
+
 struct LogDock : public QDockWidget
 {
-	struct QTextEdit* logMessageBox;
-	struct QPushButton* clearButton;
+	QTextEdit* logMessageBox = nullptr;
+	QPushButton* clearButton = nullptr;
 
 	LogDock();
 	void Print(const std::wstring message);

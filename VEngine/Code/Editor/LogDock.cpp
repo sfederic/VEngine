@@ -5,15 +5,15 @@
 
 LogDock::LogDock() : QDockWidget("Log")
 {
-	auto vbLayout = new QVBoxLayout();
+	auto vbLayout = new QVBoxLayout(this);
 
-	logMessageBox = new QTextEdit();
+	logMessageBox = new QTextEdit(this);
 	logMessageBox->setReadOnly(true);
 
 	vbLayout->addWidget(logMessageBox);
 
 	clearButton = new QPushButton("Clear");
-	vbLayout->addWidget(clearButton);
+	clearButton->setMaximumWidth(75);
 	connect(clearButton, &QPushButton::pressed, this, &LogDock::ClearLog);
 
 	auto logWidget = new QWidget();
