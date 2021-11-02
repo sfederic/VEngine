@@ -338,7 +338,7 @@
     <ClCompile Include="Code\SystemCache.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ConditionSystem.cpp">
+    <ClCompile Include="Code\ConditionSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Asset\AssetSystem.cpp">
@@ -628,7 +628,7 @@
     <ClInclude Include="Code\SystemCache.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ConditionSystem.h">
+    <ClInclude Include="Code\ConditionSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Asset\MeshAssetHeader.h">
