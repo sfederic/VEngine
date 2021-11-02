@@ -23,7 +23,7 @@ SystemDock::SystemDock() : QDockWidget("Systems")
 
 	//setup actorsystem searchbar 
 	actorSystemSearchBar = new QLineEdit();
-	actorSystemSearchBar->setPlaceholderText("Search...");
+	actorSystemSearchBar->setPlaceholderText("Search Actor Systems...");
 	connect(actorSystemSearchBar, &QLineEdit::textChanged, this, &SystemDock::SearchActorSystems);
 
 	QVBoxLayout* vLayout = new QVBoxLayout(this);

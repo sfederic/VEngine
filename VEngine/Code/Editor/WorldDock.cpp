@@ -14,7 +14,7 @@ WorldDock::WorldDock() : QDockWidget("World")
 {
 	//Search bar
 	actorSearchBar = new QLineEdit(this);
-	actorSearchBar->setPlaceholderText("Search...");
+	actorSearchBar->setPlaceholderText("Search Actors...");
 	connect(actorSearchBar, &QLineEdit::textChanged, this, &WorldDock::SearchActors);
 
 	//Actor Tree widget
