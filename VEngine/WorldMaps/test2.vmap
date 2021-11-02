@@ -51,11 +51,11 @@ UvScale
 1 1
 next
 MeshActor
-20
+4
 Mesh Filename
 cube.fbx
 Position
-3 1 0
+-1 -1 -5
 Rotation
 -0 0 -0 1
 Scale
@@ -74,7 +74,26 @@ next
 Mesh Filename
 cube.fbx
 Position
-4 3 0
+-9 0.25 -4
+Rotation
+-0 0 -0 1
+Scale
+1 0.75 1
+Shader
+DefaultShader.hlsl
+Texture2D
+test.png
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh Filename
+cube.fbx
+Position
+-3 0 -1
 Rotation
 -0 0 -0 1
 Scale
@@ -91,336 +110,13 @@ UvScale
 1 1
 next
 Mesh Filename
-cube.fbx
+plane.fbx
 Position
-0 0 0
+0.625 -2 -1.75
 Rotation
-0 0 0 1
+0.707107 0 0 -0.707107
 Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture2D
-test.png
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Mesh Filename
-cube.fbx
-Position
-0 0 0
-Rotation
-0 0 0 1
-Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture2D
-test.png
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Mesh Filename
-cube.fbx
-Position
-0 0 0
-Rotation
-0 0 0 1
-Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture2D
-test.png
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Mesh Filename
-cube.fbx
-Position
-0 0 0
-Rotation
-0 0 0 1
-Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture2D
-test.png
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Mesh Filename
-cube.fbx
-Position
-0 0 0
-Rotation
-0 0 0 1
-Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture2D
-test.png
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Mesh Filename
-cube.fbx
-Position
-0 0 0
-Rotation
-0 0 0 1
-Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture2D
-test.png
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Mesh Filename
-cube.fbx
-Position
-0 0 0
-Rotation
-0 0 0 1
-Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture2D
-test.png
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Mesh Filename
-cube.fbx
-Position
-0 0 0
-Rotation
-0 0 0 1
-Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture2D
-test.png
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Mesh Filename
-cube.fbx
-Position
-0 0 0
-Rotation
-0 0 0 1
-Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture2D
-test.png
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Mesh Filename
-cube.fbx
-Position
-0 0 0
-Rotation
-0 0 0 1
-Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture2D
-test.png
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Mesh Filename
-cube.fbx
-Position
-0 0 0
-Rotation
-0 0 0 1
-Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture2D
-test.png
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Mesh Filename
-cube.fbx
-Position
-0 0 0
-Rotation
-0 0 0 1
-Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture2D
-test.png
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Mesh Filename
-cube.fbx
-Position
-0 0 0
-Rotation
-0 0 0 1
-Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture2D
-test.png
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Mesh Filename
-cube.fbx
-Position
-0 0 0
-Rotation
-0 0 0 1
-Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture2D
-test.png
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Mesh Filename
-cube.fbx
-Position
-0 0 0
-Rotation
-0 0 0 1
-Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture2D
-test.png
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Mesh Filename
-cube.fbx
-Position
-0 0 0
-Rotation
-0 0 0 1
-Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture2D
-test.png
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Mesh Filename
-cube.fbx
-Position
-0 0 0
-Rotation
-0 0 0 1
-Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture2D
-test.png
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Mesh Filename
-cube.fbx
-Position
-0 0 0
-Rotation
-0 0 0 1
-Scale
-1 1 1
+50 50 1
 Shader
 DefaultShader.hlsl
 Texture2D
@@ -439,11 +135,11 @@ Colour
 LightEnabled
 1
 Position
-0 0 0
+-6 0 -3
 Rotation
-0 0 0 1
+0.386553 0.0784697 0.4653 0.792411
 Scale
-1 1 1
+0.999986 0.999983 0.999985
 next
 EntranceTrigger
 0
@@ -456,25 +152,17 @@ PointLightActor
 SpotLightActor
 0
 Billboard
-0
-InteractTrigger
-0
-DialogueInstance
-0
-Unit
 1
-Move Points
-10
 Position
-0 0 0
+-5 1 -4
 Rotation
 0 0 0 1
 Scale
 1 1 1
 Shader
-DefaultShader.hlsl
+Unlit.hlsl
 Texture2D
-test.png
+bush.png
 UvOffset
 0 0
 UvRotation
@@ -482,3 +170,9 @@ UvRotation
 UvScale
 1 1
 next
+InteractTrigger
+0
+DialogueInstance
+0
+Unit
+0
