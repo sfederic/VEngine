@@ -1,6 +1,7 @@
 #include "VMath.h"
 #include <cmath>
 #include <algorithm>
+#include <random>
 #include "Actors/Actor.h"
 
 namespace VMath
@@ -224,5 +225,24 @@ namespace VMath
         //XMStoreFloat3(&boundingBox.Center, offset);
         //XMStoreFloat3(&boundingBox.Extents, scale);
         //XMStoreFloat4(&boundingBox.Orientation, orientation);
+    }
+
+    float RandomRange(float min, float max)
+    {
+        if (max < min)
+        {
+            return min;
+        }
+
+        if (min > max)
+        {
+            return max;
+        }
+
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_real_distribution dist(min, max);
+        float result = dist(gen);
+        return result;
     }
 }

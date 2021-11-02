@@ -39,4 +39,6 @@ namespace VMath
 
 	XMMATRIX GetBoundingBoxMatrix(BoundingOrientedBox& boundingBox, Actor* actor);
 	void UpdateBoundingBox(BoundingOrientedBox& boundingBox, Actor* actor);
+
+	float RandomRange(float min, float max);
 }
