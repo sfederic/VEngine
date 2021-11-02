@@ -14,15 +14,15 @@ using namespace DirectX;
 //All this is stolen from Luna's book
 struct ShadowMap
 {
-	int width;
-	int height;
+	int width = 0;
+	int height = 0;
 
 	//Radius needs to be big otherwise the orthomatrix sort of wraps underneath and over the world
-	inline static const float levelRadius = 50.f;
+	float levelRadius = 0.f;
 
 	ID3D11ShaderResourceView* depthMapSRV = nullptr;;
 	ID3D11DepthStencilView* depthMapDSV = nullptr;
-	ID3D11SamplerState* sampler;
+	ID3D11SamplerState* sampler = nullptr;
 	D3D11_VIEWPORT viewport;
 
 	ShadowMap(ID3D11Device* device, int width_, int height_);

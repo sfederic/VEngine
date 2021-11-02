@@ -1,12 +1,12 @@
+#define NOMINMAX
+
 #include "Unit.h"
 #include <algorithm>
 #include "GridNode.h"
 #include "GameUtils.h"
 #include "BattleGrid.h"
-#include "VMath.h"
 #include "Components/MeshComponent.h"
-
-#undef max
+#include "VMath.h"
 
 Unit::Unit()
 {

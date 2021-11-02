@@ -1,3 +1,4 @@
+#define NOMINMAX
 #include "SpinBox.h"
 
 SpinBox::SpinBox(QWidget* parent) : QDoubleSpinBox(parent)

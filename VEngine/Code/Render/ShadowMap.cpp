@@ -1,3 +1,5 @@
+#define NOMINMAX
+
 #include "ShadowMap.h"
 #include "Debug.h"
 #include <cassert>
@@ -7,6 +9,8 @@
 
 ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
 {
+	levelRadius = std::numeric_limits<float>::max();
+
 	width = width_;
 	height = height_;
 
