@@ -1,33 +1,52 @@
 #include "ParticleEmitter.h"
 #include "Billboard.h"
 #include "Components/EmptyComponent.h"
+#include "VMath.h"
 
 ParticleEmitter::ParticleEmitter()
 {
 	rootComponent = EmptyComponent::system.Add(this);
+
+	particleDirectionMin = XMFLOAT3(0.f, 0.f, 0.f);
+	particleDirectionMax = XMFLOAT3(0.f, 0.f, 0.f);
 }
 
 void ParticleEmitter::Tick(float deltaTime)
 {
-	timer += deltaTime;
+	spawnTimer += deltaTime;
 
-	if (timer > 0.5)
+	if (spawnTimer > spawnRate)
 	{
-		Transform transform = rootComponent->transform;
+		auto transform = Transform();
+		transform.position = GetPosition();
+		transform.scale = GetScale();
+		transform.rotation = GetRotation();
+
 		auto bill = Billboard::system.Add(Billboard(), transform);
-		bills.push_back(bill);
-		timer = 0.f;
+		activeBillboards.push_back(bill);
+
+		spawnTimer = 0.f;
 	}
 
-	for (auto bill : bills)
+	for (auto billboard : activeBillboards)
 	{
-		auto pos = bill->GetPosition();
-		pos.y += deltaTime * 2.f;
-		bill->SetPosition(pos);
+		float rangeX = VMath::RandomRange(particleDirectionMin.x, particleDirectionMax.x);
+		float rangeY = VMath::RandomRange(particleDirectionMin.y, particleDirectionMax.y);
+		float rangeZ = VMath::RandomRange(particleDirectionMin.z, particleDirectionMax.z);
+
+		XMVECTOR direction = XMVectorSet(rangeX, rangeY, rangeZ, 0.f);
+		XMVECTOR pos = billboard->GetPositionVector();
+		pos += direction * (speed * deltaTime);
+		billboard->SetPosition(pos);
 	}
 }
 
 Properties ParticleEmitter::GetProps()
 {
-	return Properties();
+	auto props = Actor::GetProps();
+	props.Add("DirectionMin", &particleDirectionMin);
+	props.Add("DirectionMax", &particleDirectionMax);
+	props.Add("Rate", &spawnRate);
+	props.Add("Speed", &speed);
+	return props;
 }

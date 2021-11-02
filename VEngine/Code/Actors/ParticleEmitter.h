@@ -9,9 +9,14 @@ struct ParticleEmitter : Actor
 {
 	ACTOR_SYSTEM(ParticleEmitter)
 
-	float timer = 0.f;
+	XMFLOAT3 particleDirectionMin;
+	XMFLOAT3 particleDirectionMax;
 
-	std::vector<Billboard*> bills;
+	float spawnTimer = 1.f;
+	float spawnRate = 1.f;
+	float speed = 1.f;
+
+	std::vector<Billboard*> activeBillboards;
 
 	ParticleEmitter();
 	virtual void Tick(float deltaTime) override;
