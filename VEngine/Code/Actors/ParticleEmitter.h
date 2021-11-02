@@ -2,10 +2,13 @@
 #include "Actor.h"
 #include "ActorSystem.h"
 #include <vector>
+#include "UI/SpriteBatcher.h"
 
 struct ParticleEmitter : Actor
 {
 	ACTOR_SYSTEM(ParticleEmitter)
+
+	std::vector<Sprite> particles;
 
 	XMFLOAT3 particleDirectionMin;
 	XMFLOAT3 particleDirectionMax;

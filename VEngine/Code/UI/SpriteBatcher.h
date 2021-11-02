@@ -38,13 +38,8 @@ struct SpriteBatcher
 	//Sprites rendering for UI
 	std::vector<Sprite> screenSprites;
 
-	//Sprites rendering in-world (eg. particles)
-	std::vector<Sprite> worldSprites;
-
 	void Init();
-	void Tick(float deltaTime);
 	void Reset();
-	void CreateWorldSprite(Sprite sprite);
 	void CreateScreenSprite(Sprite sprite);
 	void BuildSpriteQuadForViewportRendering(const Sprite& sprite);
 	void BuildSpriteQuadForParticleRendering();

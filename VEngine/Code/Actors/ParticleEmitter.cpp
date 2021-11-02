@@ -16,6 +16,15 @@ void ParticleEmitter::Tick(float deltaTime)
 {
 	spawnTimer += deltaTime;
 
+	for (int i = 0; i < particles.size(); i++)
+	{
+		float speed = particles[i].speed * deltaTime;
+
+		particles[i].transform.position.x += particles[i].velocity.m128_f32[0] * speed;
+		particles[i].transform.position.y += particles[i].velocity.m128_f32[1] * speed;
+		particles[i].transform.position.z += particles[i].velocity.m128_f32[2] * speed;
+	}
+
 	if (spawnTimer > spawnRate)
 	{
 		const float rangeX = VMath::RandomRange(particleDirectionMin.x, particleDirectionMax.x);
@@ -35,7 +44,8 @@ void ParticleEmitter::Tick(float deltaTime)
 		sprite.transform = transform;
 		sprite.textureFilename = "bush.png";
 		sprite.velocity = direction;
-		spriteBatcher.CreateWorldSprite(sprite);
+
+		particles.push_back(sprite);
 
 		spawnTimer = 0.f;
 	}

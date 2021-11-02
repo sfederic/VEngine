@@ -21,27 +21,9 @@ void SpriteBatcher::Init()
 		D3D11_BIND_INDEX_BUFFER, &spriteIndices[0]);
 }
 
-void SpriteBatcher::Tick(float deltaTime)
-{
-	for (int i = 0; i < worldSprites.size(); i++)
-	{
-		float speed = worldSprites[i].speed * deltaTime;
-
-		worldSprites[i].transform.position.x += worldSprites[i].velocity.m128_f32[0] * speed;
-		worldSprites[i].transform.position.y += worldSprites[i].velocity.m128_f32[1] * speed;
-		worldSprites[i].transform.position.z += worldSprites[i].velocity.m128_f32[2] * speed;
-	}
-}
-
 void SpriteBatcher::Reset()
 {
-	worldSprites.clear();
 	screenSprites.clear();
-}
-
-void SpriteBatcher::CreateWorldSprite(Sprite sprite)
-{
-	worldSprites.push_back(sprite);
 }
 
 void SpriteBatcher::CreateScreenSprite(Sprite sprite)
