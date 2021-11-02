@@ -49,9 +49,11 @@ struct ActorSystem : IActorSystem
 
 	virtual void Tick(float deltaTime) override
 	{
-		for (T* actor : actors)
+		//Has to be an index based forloop here because actors can be destroyed in-game
+		//and its pointer popped off its actorsystem.
+		for (int i = 0; i < actors.size(); i++)
 		{
-			actor->Tick(deltaTime);
+			actors[i]->Tick(deltaTime);
 		}
 	}
 
