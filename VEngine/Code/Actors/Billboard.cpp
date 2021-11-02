@@ -15,10 +15,10 @@ void Billboard::Tick(float deltaTime)
 {
     XMFLOAT3 pos = GetPosition();
 
-    float angle = atan2(activeCamera->transform.world.r[3].m128_f32[0] - pos.x,
+    const float angle = atan2(activeCamera->transform.world.r[3].m128_f32[0] - pos.x,
         activeCamera->transform.world.r[3].m128_f32[2] - pos.z) * (180.0 / XM_PI);
 
-    float rotation = XMConvertToRadians(angle);
+    const float rotation = XMConvertToRadians(angle);
 
     XMMATRIX m = XMMatrixRotationY(rotation);
     XMVECTOR rot = XMQuaternionRotationMatrix(m);
