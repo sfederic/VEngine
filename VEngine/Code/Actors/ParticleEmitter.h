@@ -3,8 +3,6 @@
 #include "ActorSystem.h"
 #include <vector>
 
-//struct Billboard;
-
 struct ParticleEmitter : Actor
 {
 	ACTOR_SYSTEM(ParticleEmitter)
@@ -15,8 +13,6 @@ struct ParticleEmitter : Actor
 	float spawnTimer = 1.f;
 	float spawnRate = 1.f;
 	float speed = 1.f;
-
-	//std::vector<Billboard*> activeBillboards;
 
 	ParticleEmitter();
 	virtual void Tick(float deltaTime) override;
