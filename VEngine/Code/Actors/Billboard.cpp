@@ -8,10 +8,19 @@ Billboard::Billboard()
     mesh = MeshComponent::system.Add(this, MeshComponent("plane.fbx", "bush.png", "Unlit.hlsl"));
     mesh->material->rastStateName = "nobackcull";
     rootComponent = mesh;
+
+    velocity = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 }
 
 void Billboard::Tick(float deltaTime)
 {
+    lifeTime += deltaTime;
+    if (lifeTime > 2.0f)
+    {
+        Destroy();
+        return;
+    }
+
     XMFLOAT3 pos = GetPosition();
 
     const float angle = atan2(activeCamera->transform.world.r[3].m128_f32[0] - pos.x,
@@ -22,6 +31,10 @@ void Billboard::Tick(float deltaTime)
     XMMATRIX m = XMMatrixRotationY(rotation);
     XMVECTOR rot = XMQuaternionRotationMatrix(m);
     SetRotation(rot);
+
+    XMVECTOR posv = GetPositionVector();
+    posv += velocity;
+    SetPosition(posv);
 }
 
 Properties Billboard::GetProps()

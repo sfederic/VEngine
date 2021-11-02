@@ -25,19 +25,14 @@ void ParticleEmitter::Tick(float deltaTime)
 		auto bill = Billboard::system.Add(Billboard(), transform);
 		activeBillboards.push_back(bill);
 
-		spawnTimer = 0.f;
-	}
-
-	for (auto billboard : activeBillboards)
-	{
 		float rangeX = VMath::RandomRange(particleDirectionMin.x, particleDirectionMax.x);
 		float rangeY = VMath::RandomRange(particleDirectionMin.y, particleDirectionMax.y);
 		float rangeZ = VMath::RandomRange(particleDirectionMin.z, particleDirectionMax.z);
 
 		XMVECTOR direction = XMVectorSet(rangeX, rangeY, rangeZ, 0.f);
-		XMVECTOR pos = billboard->GetPositionVector();
-		pos += direction * (speed * deltaTime);
-		billboard->SetPosition(pos);
+		bill->velocity = direction * (speed * deltaTime);
+
+		spawnTimer = 0.f;
 	}
 }
 
