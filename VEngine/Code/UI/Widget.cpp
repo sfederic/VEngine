@@ -4,7 +4,7 @@
 #include "Input.h"
 #include "Render/Renderer.h"
 #include "Editor/Editor.h"
-#include "UI/SpriteBatcher.h"
+#include "UI/SpriteSystem.h"
 
 //NOTE:https://github.com/Microsoft/DirectXTK/wiki/Sprites-and-textures
 //sprite rendering wth DirectXtk was fucked up. There was something going wrong when rendering the scene
@@ -82,5 +82,5 @@ void Widget::Image(const std::string& filename, int x, int y, int w, int h)
 	sprite.dstRect = { x, y, w, h };
 	sprite.srcRect = { 0, 0, 512, 512 };
 
-	spriteBatcher.CreateScreenSprite(sprite);
+	spriteSystem.CreateScreenSprite(sprite);
 }

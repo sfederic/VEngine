@@ -166,7 +166,7 @@
     <ClCompile Include="Code\Actors\DialogueInstance.cpp" />
     <ClCompile Include="Code\Components\EmptyComponent.cpp" />
     <ClCompile Include="Code\Components\WidgetComponent.cpp" />
-    <ClCompile Include="Code\UI\SpriteBatcher.cpp" />
+    <ClCompile Include="Code\UI\SpriteSystem.cpp" />
     <ClCompile Include="Code\Actors\Billboard.cpp" />
     <ClCompile Include="Code\Actors\Unit.cpp" />
     <ClCompile Include="Code\Actors\SavePoint.cpp" />
@@ -339,7 +339,7 @@
     <ClInclude Include="Code\Actors\DialogueInstance.h" />
     <ClInclude Include="Code\Components\EmptyComponent.h" />
     <ClInclude Include="Code\Components\WidgetComponent.h" />
-    <ClInclude Include="Code\UI\SpriteBatcher.h" />
+    <ClInclude Include="Code\UI\SpriteSystem.h" />
     <ClInclude Include="Code\Actors\Billboard.h" />
     <ClInclude Include="Code\Actors\Unit.h" />
     <ClInclude Include="Code\System.h" />

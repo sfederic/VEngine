@@ -1,4 +1,5 @@
 #pragma once
+#include "System.h"
 #include <DirectXMath.h>
 #include <d3d11.h>
 #include <string>
@@ -10,10 +11,10 @@ using namespace DirectX;
 //Sprite and text rendering for D3D11
 //REF:http://www.d3dcoder.net/Data/Resources/SpritesAndText.pdf
 
+//Sprites are images that are rendered on the viewport in screen space.
 struct Sprite
 {
 	Transform transform;
-	XMVECTOR velocity = XMVectorZero();
 
 	D3D11_RECT srcRect;
 	D3D11_RECT dstRect;
@@ -22,12 +23,10 @@ struct Sprite
 
 	float angle = 0.f;
 	float z = 0.f;
-
-	float speed = 5.0f;
-	float lifetime = 1.0f;
 };
 
-struct SpriteBatcher
+//SpriteSystem is used for rendering both widget and particle images (screen space vs world space)
+struct SpriteSystem : System
 {
 	ID3D11Buffer* spriteVertexBuffer = nullptr;
 	ID3D11Buffer* spriteIndexBuffer = nullptr;
@@ -35,9 +34,9 @@ struct SpriteBatcher
 	//TODO: The same 4 vertices are used for every quad, can probably do some instancing here later.
 	Vertex verts[4];
 
-	//Sprites rendering for UI
 	std::vector<Sprite> screenSprites;
 
+	SpriteSystem();
 	void Init();
 	void Reset();
 	void CreateScreenSprite(Sprite sprite);
@@ -48,4 +47,4 @@ private:
 	XMFLOAT3 PointToNdc(int x, int y, float z);
 };
 
-extern SpriteBatcher spriteBatcher;
+extern SpriteSystem spriteSystem;

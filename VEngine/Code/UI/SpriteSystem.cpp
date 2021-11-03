@@ -1,11 +1,15 @@
-#include "SpriteBatcher.h"
+#include "SpriteSystem.h"
 #include "Render/Renderer.h"
 #include "Render/RenderUtils.h"
 #include "Render/TextureSystem.h"
 
-SpriteBatcher spriteBatcher;
+SpriteSystem spriteSystem;
 
-void SpriteBatcher::Init()
+SpriteSystem::SpriteSystem() : System("SpriteSystem")
+{
+}
+
+void SpriteSystem::Init()
 {
 	spriteVertexBuffer = RenderUtils::CreateDynamicBuffer(4 * sizeof(Vertex),
 		D3D11_BIND_VERTEX_BUFFER, &verts[0]);
@@ -21,17 +25,17 @@ void SpriteBatcher::Init()
 		D3D11_BIND_INDEX_BUFFER, &spriteIndices[0]);
 }
 
-void SpriteBatcher::Reset()
+void SpriteSystem::Reset()
 {
 	screenSprites.clear();
 }
 
-void SpriteBatcher::CreateScreenSprite(Sprite sprite)
+void SpriteSystem::CreateScreenSprite(Sprite sprite)
 {
 	screenSprites.push_back(sprite);
 }
 
-XMFLOAT3 SpriteBatcher::PointToNdc(int x, int y, float z)
+XMFLOAT3 SpriteSystem::PointToNdc(int x, int y, float z)
 {
 	XMFLOAT3 p;
 	p.x = 2.0f * (float)x / renderer.GetViewportWidth() -1.0f;
@@ -40,7 +44,7 @@ XMFLOAT3 SpriteBatcher::PointToNdc(int x, int y, float z)
 	return p;
 }
 
-void SpriteBatcher::BuildSpriteQuadForViewportRendering(const Sprite& sprite)
+void SpriteSystem::BuildSpriteQuadForViewportRendering(const Sprite& sprite)
 {
 	const D3D11_RECT& dst = sprite.dstRect;
 	const D3D11_RECT& src = sprite.srcRect;
@@ -79,7 +83,7 @@ void SpriteBatcher::BuildSpriteQuadForViewportRendering(const Sprite& sprite)
 	}
 }
 
-void SpriteBatcher::BuildSpriteQuadForParticleRendering()
+void SpriteSystem::BuildSpriteQuadForParticleRendering()
 {
 	verts[0].pos = XMFLOAT3(-1.f, -1.f, 0.f);
 	verts[1].pos = XMFLOAT3(-1.f, 1.f, 0.f);

@@ -27,7 +27,7 @@
 #include "Editor/DebugMenu.h"
 #include "ShadowMap.h"
 #include "TextureSystem.h"
-#include "UI/SpriteBatcher.h"
+#include "UI/SpriteSystem.h"
 #include "Particle/ParticleSystem.h"
 #include "Particle/ParticleEmitter.h"
 
@@ -73,7 +73,7 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 
 	RenderUtils::defaultSampler = RenderUtils::CreateSampler();
 
-	spriteBatcher.Init();
+	spriteSystem.Init();
 }
 
 void Renderer::Tick()
@@ -656,12 +656,12 @@ void Renderer::RenderLightMeshes()
 	}
 }
 
-void Renderer::RenderSpritesInWorldSpace()
+void Renderer::RenderParticleEmitters()
 {
 	PROFILE_START
 
 	//Only need to build sprite quad once for in-world rendering
-	spriteBatcher.BuildSpriteQuadForParticleRendering();
+	spriteSystem.BuildSpriteQuadForParticleRendering();
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
 
@@ -688,12 +688,12 @@ void Renderer::RenderSpritesInWorldSpace()
 
 		//Update vertex buffer
 		D3D11_MAPPED_SUBRESOURCE mappedResource;
-		HR(context->Map(spriteBatcher.spriteVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
-		memcpy(mappedResource.pData, spriteBatcher.verts, sizeof(spriteBatcher.verts));
-		context->Unmap(spriteBatcher.spriteVertexBuffer, 0);
+		HR(context->Map(spriteSystem.spriteVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+		memcpy(mappedResource.pData, spriteSystem.verts, sizeof(spriteSystem.verts));
+		context->Unmap(spriteSystem.spriteVertexBuffer, 0);
 
-		context->IASetVertexBuffers(0, 1, &spriteBatcher.spriteVertexBuffer, &stride, &offset);
-		context->IASetIndexBuffer(spriteBatcher.spriteIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+		context->IASetVertexBuffers(0, 1, &spriteSystem.spriteVertexBuffer, &stride, &offset);
+		context->IASetIndexBuffer(spriteSystem.spriteIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
 		for (auto& particle : emitter->particles)
 		{
@@ -728,7 +728,7 @@ void Renderer::RenderSpritesInScreenSpace()
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
 
-	for (const Sprite& sprite : spriteBatcher.screenSprites)
+	for (const Sprite& sprite : spriteSystem.screenSprites)
 	{
 		if (drawAllAsWireframe)
 		{
@@ -749,16 +749,16 @@ void Renderer::RenderSpritesInScreenSpace()
 		//Set texture from sprite
 		context->PSSetShaderResources(0, 1, &textureSystem.FindTexture2D(sprite.textureFilename)->srv);
 
-		spriteBatcher.BuildSpriteQuadForViewportRendering(sprite);
+		spriteSystem.BuildSpriteQuadForViewportRendering(sprite);
 
 		//Update vertex buffer
 		D3D11_MAPPED_SUBRESOURCE mappedResource;
-		HR(context->Map(spriteBatcher.spriteVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
-		memcpy(mappedResource.pData, spriteBatcher.verts, sizeof(spriteBatcher.verts));
-		context->Unmap(spriteBatcher.spriteVertexBuffer, 0);
+		HR(context->Map(spriteSystem.spriteVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+		memcpy(mappedResource.pData, spriteSystem.verts, sizeof(spriteSystem.verts));
+		context->Unmap(spriteSystem.spriteVertexBuffer, 0);
 
-		context->IASetVertexBuffers(0, 1, &spriteBatcher.spriteVertexBuffer, &stride, &offset);
-		context->IASetIndexBuffer(spriteBatcher.spriteIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+		context->IASetVertexBuffers(0, 1, &spriteSystem.spriteVertexBuffer, &stride, &offset);
+		context->IASetIndexBuffer(spriteSystem.spriteIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
 		shaderMatrices.model = XMMatrixIdentity();
 		shaderMatrices.MakeModelViewProjectionMatrix();

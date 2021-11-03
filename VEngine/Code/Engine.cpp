@@ -18,7 +18,7 @@
 #include "Render/TextureSystem.h"
 #include "Render/RenderUtils.h"
 #include "Render/MaterialSystem.h"
-#include "UI/SpriteBatcher.h"
+#include "UI/SpriteSystem.h"
 #include "Audio/AudioSystem.h"
 
 Engine engine;
@@ -89,11 +89,10 @@ void Engine::MainLoop()
 void Engine::Render(float deltaTime)
 {
 	renderer.Render();
+	renderer.RenderParticleEmitters();
 
 	uiSystem.BeginDraw();
-	uiSystem.DrawAllWidgets(deltaTime);
-
-	renderer.RenderSpritesInWorldSpace();
+	uiSystem.TickAllWidgets(deltaTime);
 	renderer.RenderSpritesInScreenSpace();
 
 	console.Tick();
