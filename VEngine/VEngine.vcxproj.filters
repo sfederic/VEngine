@@ -350,7 +350,7 @@
     <ClCompile Include="Code\Editor\PropertyWidgets\TransformWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\ParticleEmitter.cpp">
+    <ClCompile Include="Code\Particle\ParticleEmitter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -646,7 +646,10 @@
     <ClInclude Include="Code\Editor\PropertyWidgets\TransformWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\ParticleEmitter.h">
+    <ClInclude Include="Code\Particle\Particle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Particle\ParticleEmitter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

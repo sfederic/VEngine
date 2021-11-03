@@ -13,7 +13,6 @@
 #include "Components/WidgetComponent.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Actors/Actor.h"
-#include "Actors/ParticleEmitter.h"
 #include "ShaderSystem.h"
 #include "DebugActors/DebugBox.h"
 #include "DebugActors/DebugSphere.h"
