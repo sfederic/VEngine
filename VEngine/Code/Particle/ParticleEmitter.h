@@ -11,10 +11,13 @@ struct ParticleEmitter : SpatialComponent
 
 	std::vector<Particle> particles;
 
+	XMFLOAT3 direction;
+
 	std::string textureFilename;
 
 	float speed = 1.0f;
 
+	ParticleEmitter();
 	void CreateParticle(Particle particle);
 	virtual void Tick(float deltaTime) override;
 	virtual void Create() override;
