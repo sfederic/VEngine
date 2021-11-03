@@ -2,6 +2,7 @@
 #include "Render/Renderer.h"
 #include "Render/RenderUtils.h"
 #include "Render/TextureSystem.h"
+#include "Debug.h"
 
 SpriteSystem spriteSystem;
 
@@ -42,6 +43,18 @@ XMFLOAT3 SpriteSystem::PointToNdc(int x, int y, float z)
 	p.y = 1.0f - 2.0f * (float)y / renderer.GetViewportHeight();
 	p.z = z;
 	return p;
+}
+
+void SpriteSystem::UpdateAndSetSpriteBuffers(ID3D11DeviceContext* context)
+{
+	//Update vertex buffer
+	D3D11_MAPPED_SUBRESOURCE mappedResource;
+	HR(context->Map(spriteSystem.spriteVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+	memcpy(mappedResource.pData, spriteSystem.verts, sizeof(spriteSystem.verts));
+	context->Unmap(spriteSystem.spriteVertexBuffer, 0);
+
+	context->IASetVertexBuffers(0, 1, &spriteSystem.spriteVertexBuffer, &Renderer::stride, &Renderer::offset);
+	context->IASetIndexBuffer(spriteSystem.spriteIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
 }
 
 void SpriteSystem::BuildSpriteQuadForViewportRendering(const Sprite& sprite)

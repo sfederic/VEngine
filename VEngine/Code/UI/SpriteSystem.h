@@ -34,7 +34,7 @@ struct SpriteSystem : System
 	ID3D11Buffer* spriteIndexBuffer = nullptr;
 
 	//TODO: The same 4 vertices are used for every quad, can probably do some instancing here later.
-	Vertex verts[4];
+	Vertex verts[4] = {};
 
 	std::vector<Sprite> screenSprites;
 
@@ -44,6 +44,7 @@ struct SpriteSystem : System
 	void CreateScreenSprite(Sprite sprite);
 	void BuildSpriteQuadForViewportRendering(const Sprite& sprite);
 	void BuildSpriteQuadForParticleRendering();
+	void UpdateAndSetSpriteBuffers(ID3D11DeviceContext* context);
 
 private:
 	XMFLOAT3 PointToNdc(int x, int y, float z);

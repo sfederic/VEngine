@@ -11,6 +11,8 @@ struct MeshComponent;
 struct Renderer
 {
 	static const int swapchainCount = 2;
+	static const UINT stride = sizeof(Vertex);
+	static const UINT offset = 0;
 
 	ID3D11Device* device;
 	ID3D11DeviceContext* context;

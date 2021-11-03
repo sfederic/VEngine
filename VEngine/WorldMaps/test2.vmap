@@ -81,20 +81,35 @@ DialogueInstance
 0
 Unit
 0
-ParticleEmitter
-1
-DirectionMax
-1 0 0
-DirectionMin
-0 1 0
+ParticleSystem
+2
+Lifetime
+0.5
 Position
-0 -1 1
-Rate
-0.1
+-4 0 0
 Rotation
-0 0 0 1
+-0 0 -0 1
 Scale
 1 1 1
+Spawn Rate
+1
 Speed
-2
+1
+Texture Filename
+floor.jpg
+next
+Lifetime
+0.5
+Position
+4 0 0
+Rotation
+-0 0 -0 1
+Scale
+1 1 1
+Spawn Rate
+1
+Speed
+1
+Texture Filename
+bush.png
 next

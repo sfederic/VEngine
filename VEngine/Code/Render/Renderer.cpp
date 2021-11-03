@@ -33,9 +33,6 @@
 
 Renderer renderer;
 
-UINT stride = sizeof(Vertex);
-UINT offset = 0;
-
 const int cbMatrixRegister = 0;
 const int cbMaterialRegister = 1;
 const int cbSkinningRegister = 2;
@@ -683,17 +680,10 @@ void Renderer::RenderParticleEmitters()
 
 		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
 
-		//Set texture from sprite
+		//Set texture from emitter for every particle
 		context->PSSetShaderResources(0, 1, &textureSystem.FindTexture2D(emitter->textureFilename)->srv);
 
-		//Update vertex buffer
-		D3D11_MAPPED_SUBRESOURCE mappedResource;
-		HR(context->Map(spriteSystem.spriteVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
-		memcpy(mappedResource.pData, spriteSystem.verts, sizeof(spriteSystem.verts));
-		context->Unmap(spriteSystem.spriteVertexBuffer, 0);
-
-		context->IASetVertexBuffers(0, 1, &spriteSystem.spriteVertexBuffer, &stride, &offset);
-		context->IASetIndexBuffer(spriteSystem.spriteIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+		spriteSystem.UpdateAndSetSpriteBuffers(context);
 
 		for (auto& particle : emitter->particles)
 		{
@@ -752,13 +742,7 @@ void Renderer::RenderSpritesInScreenSpace()
 		spriteSystem.BuildSpriteQuadForViewportRendering(sprite);
 
 		//Update vertex buffer
-		D3D11_MAPPED_SUBRESOURCE mappedResource;
-		HR(context->Map(spriteSystem.spriteVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
-		memcpy(mappedResource.pData, spriteSystem.verts, sizeof(spriteSystem.verts));
-		context->Unmap(spriteSystem.spriteVertexBuffer, 0);
-
-		context->IASetVertexBuffers(0, 1, &spriteSystem.spriteVertexBuffer, &stride, &offset);
-		context->IASetIndexBuffer(spriteSystem.spriteIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+		spriteSystem.UpdateAndSetSpriteBuffers(context);
 
 		shaderMatrices.model = XMMatrixIdentity();
 		shaderMatrices.MakeModelViewProjectionMatrix();
