@@ -16,8 +16,8 @@ struct ParticleEmitter : SpatialComponent
 	std::string textureFilename;
 
 	float speed = 1.0f;
-	float lifetime = 0.5f;
-	float spawnRate = 1.f;
+	float lifetime = 1.f;
+	float spawnRate = 0.2f;
 	float spawnTimer = 0.f;
 
 	ParticleEmitter();

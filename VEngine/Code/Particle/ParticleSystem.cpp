@@ -5,6 +5,7 @@ ParticleSystem::ParticleSystem()
 {
 	auto emitter = ParticleEmitter::system.Add(this);
 	//emitter->textureFilename = "bush.png";
+	emitter->direction.y = -1.f;
 	AddEmitter(emitter);
 
 	rootComponent = emitter;

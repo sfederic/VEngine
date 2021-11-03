@@ -1,4 +1,5 @@
 #include "ParticleEmitter.h"
+#include "VMath.h"
 
 ParticleEmitter::ParticleEmitter()
 {
@@ -19,6 +20,7 @@ void ParticleEmitter::Tick(float deltaTime)
 		//Need to get the world position instead of relative
 		XMMATRIX worldMatrix = this->GetWorldMatrix();
 		XMStoreFloat3(&particle.transform.position, worldMatrix.r[3]);
+		particle.transform.position.x = VMath::RandomRange(-3.f, 3.f);
 		CreateParticle(particle);
 
 		spawnTimer = 0.f;
