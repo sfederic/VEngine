@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <random>
 #include "Actors/Actor.h"
+#include "Camera.h"
 
 namespace VMath
 {
@@ -87,6 +88,27 @@ namespace VMath
         m.r[0] = right;
         m.r[1] = up;
         m.r[2] = forward;
+    }
+
+    void RotateTowardsCamera(Transform& transform)
+    {
+        const float posX = transform.position.x;
+        const float posZ = transform.position.z;
+
+        //Make sure to use the world matrix here because some camera (Player camera) will 
+        //have the camera at an offset from its parent.
+        const XMMATRIX cameraWorldMatrix = activeCamera->GetWorldMatrix();
+
+        const float angle = atan2(cameraWorldMatrix.r[3].m128_f32[0] - posX,
+            cameraWorldMatrix.r[3].m128_f32[2] - posZ) * (180.0 / XM_PI);
+
+        const float rotation = XMConvertToRadians(angle);
+
+        const XMMATRIX m = XMMatrixRotationY(rotation);
+        const XMVECTOR rot = XMQuaternionRotationMatrix(m);
+
+        //Set rotation
+        XMStoreFloat4(&transform.rotation, rot);
     }
 
     XMFLOAT4X4 FbxMatrixToDirectXMathMatrix(fbxsdk::FbxMatrix fbxMatrix)

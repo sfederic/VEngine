@@ -4,6 +4,7 @@
 #include <fbxsdk/core/math/fbxmatrix.h>
 
 struct Actor;
+struct Transform;
 
 using namespace DirectX;
 
@@ -25,6 +26,9 @@ namespace VMath
 	XMFLOAT3 PitchYawRollFromQuaternion(XMFLOAT4 q);
 
 	void LookAtRotation(XMVECTOR lookAtPoint, XMMATRIX& m);
+
+	//Rotates on the Y-axis
+	void RotateTowardsCamera(Transform& transform);
 
 	XMFLOAT4X4 FbxMatrixToDirectXMathMatrix(fbxsdk::FbxMatrix fbxMatrix);
 
