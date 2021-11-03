@@ -2,6 +2,7 @@
 #include "Components/MeshComponent.h"
 #include "Render/Material.h"
 #include "Camera.h"
+#include "VMath.h"
 
 Billboard::Billboard()
 {
@@ -21,16 +22,7 @@ void Billboard::Tick(float deltaTime)
         return;
     }
 
-    XMFLOAT3 pos = GetPosition();
-
-    const float angle = atan2(activeCamera->transform.world.r[3].m128_f32[0] - pos.x,
-        activeCamera->transform.world.r[3].m128_f32[2] - pos.z) * (180.0 / XM_PI);
-
-    const float rotation = XMConvertToRadians(angle);
-
-    XMMATRIX m = XMMatrixRotationY(rotation);
-    XMVECTOR rot = XMQuaternionRotationMatrix(m);
-    SetRotation(rot);
+    VMath::RotateTowardsCamera(rootComponent->transform);
 
     XMVECTOR posv = GetPositionVector();
     posv += velocity;

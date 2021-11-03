@@ -1,6 +1,7 @@
 #include "Renderer.h"
 #include "Debug.h"
 #include "Core.h"
+#include "VMath.h"
 #include "ShaderSystem.h"
 #include "Camera.h"
 #include "UI/UISystem.h"
@@ -687,15 +688,7 @@ void Renderer::RenderParticleEmitters()
 
 		for (auto& particle : emitter->particles)
 		{
-			//TODO: make a VMath::RotateTowardsCamera() function for here and Billboard
-			const float angle = atan2(activeCamera->transform.world.r[3].m128_f32[0] - particle.transform.position.x,
-				activeCamera->transform.world.r[3].m128_f32[2] - particle.transform.position.z) * (180.0 / XM_PI);
-
-			const float rotation = XMConvertToRadians(angle);
-
-			XMMATRIX m = XMMatrixRotationY(rotation);
-			XMVECTOR rot = XMQuaternionRotationMatrix(m);
-			XMStoreFloat4(&particle.transform.rotation, rot);
+			VMath::RotateTowardsCamera(particle.transform);
 
 			shaderMatrices.model = particle.transform.GetAffine();
 			shaderMatrices.MakeModelViewProjectionMatrix();
