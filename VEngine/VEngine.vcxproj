@@ -176,6 +176,7 @@
     <ClCompile Include="Code\ThreadSystem.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\TransformWidget.cpp" />
     <ClCompile Include="Code\Particle\ParticleEmitter.cpp" />
+    <ClCompile Include="Code\Particle\ParticleSystem.cpp" />
     <ClInclude Include="Code\Actors\AudioActor.h" />
     <ClInclude Include="Code\Asset\AssetSystem.h" />
     <ClInclude Include="Code\Components\AudioComponent.h" />
@@ -349,6 +350,7 @@
     <ClInclude Include="Code\ThreadSystem.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\TransformWidget.h" />
     <ClInclude Include="Code\Particle\ParticleEmitter.h" />
+    <ClInclude Include="Code\Particle\ParticleSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

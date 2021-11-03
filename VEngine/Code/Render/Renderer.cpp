@@ -28,6 +28,8 @@
 #include "ShadowMap.h"
 #include "TextureSystem.h"
 #include "UI/SpriteBatcher.h"
+#include "Particle/ParticleSystem.h"
+#include "Particle/ParticleEmitter.h"
 
 Renderer renderer;
 
@@ -663,49 +665,49 @@ void Renderer::RenderSpritesInWorldSpace()
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
 
-	for (auto emitter : ParticleEmitter::system.actors)
+	for (auto emitter : ParticleEmitter::system.components)
 	{
-		for (auto& sprite : emitter->particles)
+		if (drawAllAsWireframe)
 		{
-			if (drawAllAsWireframe)
-			{
-				context->RSSetState(rastStateWireframe);
-			}
-			else
-			{
-				//Careful with back culling visibility here for UI
-				context->RSSetState(rastStateMap["nobackcull"]->data);
-			}
+			context->RSSetState(rastStateWireframe);
+		}
+		else
+		{
+			//Careful with back culling visibility here for UI
+			context->RSSetState(rastStateMap["nobackcull"]->data);
+		}
 
-			ShaderItem* shader = shaderSystem.FindShader(L"Unlit.hlsl");
-			context->VSSetShader(shader->vertexShader, nullptr, 0);
-			context->PSSetShader(shader->pixelShader, nullptr, 0);
+		ShaderItem* shader = shaderSystem.FindShader(L"Unlit.hlsl");
+		context->VSSetShader(shader->vertexShader, nullptr, 0);
+		context->PSSetShader(shader->pixelShader, nullptr, 0);
 
-			context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
+		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
 
-			//Set texture from sprite
-			context->PSSetShaderResources(0, 1, &textureSystem.FindTexture2D(sprite.textureFilename)->srv);
+		//Set texture from sprite
+		context->PSSetShaderResources(0, 1, &textureSystem.FindTexture2D(emitter->textureFilename)->srv);
 
-			//Update vertex buffer
-			D3D11_MAPPED_SUBRESOURCE mappedResource;
-			HR(context->Map(spriteBatcher.spriteVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
-			memcpy(mappedResource.pData, spriteBatcher.verts, sizeof(spriteBatcher.verts));
-			context->Unmap(spriteBatcher.spriteVertexBuffer, 0);
+		//Update vertex buffer
+		D3D11_MAPPED_SUBRESOURCE mappedResource;
+		HR(context->Map(spriteBatcher.spriteVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+		memcpy(mappedResource.pData, spriteBatcher.verts, sizeof(spriteBatcher.verts));
+		context->Unmap(spriteBatcher.spriteVertexBuffer, 0);
 
-			context->IASetVertexBuffers(0, 1, &spriteBatcher.spriteVertexBuffer, &stride, &offset);
-			context->IASetIndexBuffer(spriteBatcher.spriteIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+		context->IASetVertexBuffers(0, 1, &spriteBatcher.spriteVertexBuffer, &stride, &offset);
+		context->IASetIndexBuffer(spriteBatcher.spriteIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
+		for (auto& particle : emitter->particles)
+		{
 			//TODO: make a VMath::RotateTowardsCamera() function for here and Billboard
-			const float angle = atan2(activeCamera->transform.world.r[3].m128_f32[0] - sprite.transform.position.x,
-				activeCamera->transform.world.r[3].m128_f32[2] - sprite.transform.position.z) * (180.0 / XM_PI);
+			const float angle = atan2(activeCamera->transform.world.r[3].m128_f32[0] - particle.transform.position.x,
+				activeCamera->transform.world.r[3].m128_f32[2] - particle.transform.position.z) * (180.0 / XM_PI);
 
 			const float rotation = XMConvertToRadians(angle);
 
 			XMMATRIX m = XMMatrixRotationY(rotation);
 			XMVECTOR rot = XMQuaternionRotationMatrix(m);
-			XMStoreFloat4(&sprite.transform.rotation, rot);
+			XMStoreFloat4(&particle.transform.rotation, rot);
 
-			shaderMatrices.model = sprite.transform.GetAffine();
+			shaderMatrices.model = particle.transform.GetAffine();
 			shaderMatrices.MakeModelViewProjectionMatrix();
 
 			context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
