@@ -4,5 +4,5 @@
 struct Particle
 {
 	Transform transform;
-	float lifeTime = 0.f;
+	float lifetime = 0.f;
 };

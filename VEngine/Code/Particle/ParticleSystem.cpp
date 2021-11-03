@@ -1,15 +1,13 @@
 #include "ParticleSystem.h"
-#include "Components/EmptyComponent.h"
 #include "ParticleEmitter.h"
 
 ParticleSystem::ParticleSystem()
 {
-	rootComponent = EmptyComponent::system.Add(this);
-
 	auto emitter = ParticleEmitter::system.Add(this);
-	emitter->textureFilename = "bush.png";
-	emitter->CreateParticle(Particle());
+	//emitter->textureFilename = "bush.png";
 	AddEmitter(emitter);
+
+	rootComponent = emitter;
 }
 
 void ParticleSystem::AddEmitter(ParticleEmitter* emitter)
