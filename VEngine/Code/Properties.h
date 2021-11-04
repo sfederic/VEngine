@@ -10,7 +10,6 @@
 struct Property
 {
 	void* data = nullptr;
-	void* parentData = nullptr;
 	//uint64_t offset = 0;
 	uint64_t size = 0;
 	std::optional<std::type_index> info;
