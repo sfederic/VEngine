@@ -14,8 +14,11 @@ Texture2DWidget::Texture2DWidget(Property prop_)
 
 void Texture2DWidget::SetValue()
 {
+	//BUG: is there a fucking bug when using the OS' native file opener?
+	//https://stackoverflow.com/questions/31983412/code-freezes-on-trying-to-open-qdialog
 	QString filepath = QFileDialog::getOpenFileName(this,
-		tr("Open Image"), "Textures/", tr("Image Files (*.png *.jpg *.bmp)"));
+		tr("Open Image"), "Textures/", tr("Image Files (*.png *.jpg *.bmp)"),
+		0, QFileDialog::DontUseNativeDialog);
 
 	QFileInfo info(filepath);
 	QString filename = info.fileName();
