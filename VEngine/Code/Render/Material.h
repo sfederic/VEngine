@@ -31,7 +31,7 @@ private:
 
 struct Material
 {
-	UID uid = 0;
+	UID uid = GenerateUID();
 
 	MaterialShaderData shaderData;
 
