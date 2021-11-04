@@ -25,6 +25,11 @@ void MaterialSystem::AddMaterial(Material* material)
 Material* MaterialSystem::FindMaterial(UID uid)
 {
 	auto materialIt = materials.find(uid);
+	if (materialIt == materials.end())
+	{
+		return nullptr;
+	}
+
 	return materialIt->second;
 }
 

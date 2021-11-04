@@ -356,9 +356,6 @@
     <ClCompile Include="Code\Particle\ParticleSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Editor\PropertyWidgets\MaterialWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\UID.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -662,9 +659,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Particle\ParticleSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Editor\PropertyWidgets\MaterialWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UID.h">
