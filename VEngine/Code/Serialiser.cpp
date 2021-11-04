@@ -5,7 +5,6 @@
 #include "Render/PipelineObjects.h"
 #include "Actors/Actor.h"
 #include "World.h"
-#include "Render/Material.h"
 
 using namespace DirectX;
 
@@ -84,12 +83,6 @@ void Serialiser::Serialise(Properties props)
 			os << transform->position.x << " " << transform->position.y << " " << transform->position.z << " ";
 			os << transform->scale.x << " " << transform->scale.y << " " << transform->scale.z << " ";
 			os << transform->rotation.x << " " << transform->rotation.y << " " << transform->rotation.z << " " << transform->rotation.w << "\n";
-		}
-		else if (props.CheckType<Material>(name))
-		{
-			Material* material = props.GetData<Material>(name);
-			os << name << "\n";
-			os << material->uid << "\n";
 		}
 	}
 
