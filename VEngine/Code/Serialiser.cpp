@@ -26,7 +26,7 @@ Serialiser::~Serialiser()
 
 void Serialiser::Serialise(Properties props)
 {
-	for (auto prop : props.propMap)
+	for (auto& prop : props.propMap)
 	{
 		const std::string& name = prop.first;
 
