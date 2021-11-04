@@ -2,6 +2,7 @@
 #include <DirectXMath.h>
 #include <string>
 #include "Properties.h"
+#include "UID.h"
 
 using namespace DirectX;
 
@@ -30,6 +31,8 @@ private:
 
 struct Material
 {
+	UID uid;
+
 	MaterialShaderData shaderData;
 
 	Texture2D* texture = nullptr;
