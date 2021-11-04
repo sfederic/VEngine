@@ -4,10 +4,10 @@
 
 std::random_device randomDevice;
 std::mt19937 randomGenerator(randomDevice());
-std::uniform_int_distribution<uid> uidDist(std::numeric_limits<uid>::min(), std::numeric_limits<uid>::max());
+std::uniform_int_distribution<UID> uidDist(std::numeric_limits<UID>::min(), std::numeric_limits<UID>::max());
 
-uid GenerateUID()
+UID GenerateUID()
 {
-	uid value = uidDist(randomGenerator);
-	return uid();
+	UID value = uidDist(randomGenerator);
+	return value;
 }

@@ -2,6 +2,6 @@
 #include <cstdint>
 
 //UID = Unique Identifier!
-typedef uint32_t uid;
+typedef uint32_t UID;
 
-uid GenerateUID();
+UID GenerateUID();
