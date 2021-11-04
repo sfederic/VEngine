@@ -38,6 +38,8 @@ struct Material
 	ShaderItem* shader = nullptr;
 	BlendState* blendState = nullptr;
 
+	std::string name;
+
 	std::string textureFilename;
 	std::string shaderFilename;
 
