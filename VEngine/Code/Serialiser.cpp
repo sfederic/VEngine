@@ -5,7 +5,6 @@
 #include "Render/PipelineObjects.h"
 #include "Actors/Actor.h"
 #include "World.h"
-#include "Render/TextureSystem.h"
 
 using namespace DirectX;
 
@@ -170,8 +169,7 @@ void Deserialiser::Deserialise(Properties props)
 			char propString[512];
 			is.getline(propString, 512);
 			Texture2D* texture = props.GetData<Texture2D>(name);
-			Texture2D* foundTexture = textureSystem.FindTexture2D(propString);
-			texture = foundTexture;
+			texture->filename = propString;
 		}
 		else if (props.CheckType<std::vector<Actor*>>(name))
 		{

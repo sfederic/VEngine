@@ -113,6 +113,11 @@ namespace RenderUtils
 
 	Texture2D* CreateTexture(std::string textureFilename)
 	{
+		if (textureFilename.empty())
+		{
+			textureFilename = "test.png";
+		}
+
 		Texture2D* texture = textureSystem.FindTexture2D(textureFilename);
 
 		std::wstring path = L"Textures/" + stows(texture->filename);

@@ -12,6 +12,7 @@
 
 Material::Material()
 {
+	materialSystem.AddMaterial(this);
 }
 
 Material::Material(std::string textureFilename_, std::string shaderFilename_)
@@ -19,12 +20,14 @@ Material::Material(std::string textureFilename_, std::string shaderFilename_)
 	textureFilename = textureFilename_;
 	shaderFilename = shaderFilename_;
 
+	texture = new Texture2D(textureFilename_);
+
 	materialSystem.AddMaterial(this);
 }
 
 void Material::Create()
 {
-	texture = textureSystem.FindTexture2D(textureFilename);
+	texture = textureSystem.FindTexture2D(texture->filename);
 	sampler = RenderUtils::GetDefaultSampler();
 	shader = shaderSystem.FindShader(stows(shaderFilename));
 	rastState = renderer.rastStateMap[rastStateName];
