@@ -128,6 +128,7 @@
     <ClCompile Include="Code\Render\PipelineObjects.cpp" />
     <ClCompile Include="Code\Render\RenderTypes.cpp" />
     <ClCompile Include="Code\System.cpp" />
+    <ClCompile Include="Code\UID.cpp" />
     <ClCompile Include="Code\VMemory.cpp" />
     <ClCompile Include="Code\VString.cpp" />
     <ClCompile Include="Code\UI\Widget.cpp" />
@@ -275,6 +276,7 @@
     <ClCompile Include="Code\VMath.cpp" />
     <ClInclude Include="Code\Asset\MeshAssetHeader.h" />
     <ClInclude Include="Code\Particle\Particle.h" />
+    <ClInclude Include="Code\UID.h" />
     <ClInclude Include="Code\VMath.h" />
     <ClCompile Include="Code\Physics\Raycast.cpp" />
     <ClInclude Include="Code\Physics\Raycast.h" />
