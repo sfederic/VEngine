@@ -13,7 +13,7 @@ struct PropertiesDock : public QDockWidget
 {
 	QWidget* actorPropsWidget = nullptr;
 	QGridLayout* actorPropsGridLayout = nullptr;
-	QScrollArea* actorPropsScrollArea;
+	QScrollArea* actorPropsScrollArea = nullptr;
 
 	std::vector<IPropertyWidget*> propertyWidgetsToUpdate;
 

@@ -8,7 +8,7 @@ struct MaterialWidget : public QLineEdit, IPropertyWidget
 {
 	Material* material = nullptr;
 
-	MaterialWidget(Material* material_);
+	MaterialWidget(Material* material_, QWidget* parent = nullptr);
 	void SetValue();
 	virtual void ResetValue() override;
 };

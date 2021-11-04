@@ -2,7 +2,7 @@
 #include "Render/Material.h"
 #include "Render/MaterialSystem.h"
 
-MaterialWidget::MaterialWidget(Material* material_)
+MaterialWidget::MaterialWidget(Material* material_, QWidget* parent) : QLineEdit(parent)
 {
 	material = material_;
 
