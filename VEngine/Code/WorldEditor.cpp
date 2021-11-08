@@ -36,6 +36,11 @@ void WorldEditor::HandleActorPicking()
 		if (RaycastFromScreen(screenPickRay))
 		{
 			SetPickedActor(screenPickRay.hitActor);
+
+			if (Input::GetAsyncKey(Keys::ShiftLeft))
+			{
+				pickedActors.push_back(screenPickRay.hitActor);
+			}
 		}
 	}
 }
@@ -91,6 +96,19 @@ void WorldEditor::DeleteActor()
 		if (Input::GetKeyUp(Keys::Delete))
 		{
 			pickedActor->Destroy();
+
+			//Destroy all multiple picked actors
+			for (auto actor : pickedActors)
+			{
+				if (actor == pickedActor)
+				{
+					continue;
+				}
+
+				actor->Destroy();
+			}
+
+			pickedActors.clear();
 			pickedActor = nullptr;
 
 			editor->UpdateWorldList();
