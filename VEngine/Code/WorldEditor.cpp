@@ -35,12 +35,16 @@ void WorldEditor::HandleActorPicking()
 		Ray screenPickRay;
 		if (RaycastFromScreen(screenPickRay))
 		{
-			SetPickedActor(screenPickRay.hitActor);
-
-			if (Input::GetAsyncKey(Keys::ShiftLeft))
+			if (Input::GetAsyncKey(Keys::ShiftLeft) || pickedActors.empty())
 			{
-				pickedActors.push_back(screenPickRay.hitActor);
+				pickedActors.insert(screenPickRay.hitActor);
 			}
+			else
+			{
+				pickedActors.clear();
+			}
+
+			SetPickedActor(screenPickRay.hitActor);
 		}
 	}
 }
@@ -184,6 +188,8 @@ void WorldEditor::SetPickedActor(Actor* actor)
 {
 	assert(actor);
 	pickedActor = actor;
+
+	pickedActors.insert(actor);
 
 	editor->SetActorProps(pickedActor);
 	editor->SelectActorInWorldList();

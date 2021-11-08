@@ -61,7 +61,7 @@ void WorldDock::ClickOnActorInList(QTreeWidgetItem* item, int column)
 	if (clickedActor)
 	{
 		worldEditor.pickedActor = clickedActor;
-		worldEditor.pickedActors.push_back(clickedActor);
+		worldEditor.pickedActors.insert(clickedActor);
 		editor->SetActorProps(clickedActor);
 	}
 }
@@ -82,14 +82,26 @@ void WorldDock::ActorNameChanged(QTreeWidgetItem* item, int column)
 
 void WorldDock::SelectActorInList()
 {
-	std::string actorName = worldEditor.pickedActor->name;
-	auto foundItems = actorTreeWidget->findItems(QString::fromStdString(actorName), Qt::MatchExactly);
-
-	//Names should be unique in list, even though findItems() returns a collection
-	assert(foundItems.size() == 1);
-
 	actorTreeWidget->clearSelection();
-	actorTreeWidget->setItemSelected(foundItems[0], true);
+
+	std::vector<std::string> actorNames;
+	QList<QTreeWidgetItem*> listItems;
+
+	for (auto actor : worldEditor.pickedActors)
+	{
+		std::string actorName = actor->name;
+		auto foundItems = actorTreeWidget->findItems(QString::fromStdString(actorName), Qt::MatchExactly);
+
+		//Names should be unique in list, even though findItems() returns a collection
+		assert(foundItems.size() == 1);
+
+		listItems.append(foundItems);
+	}
+
+	for (auto item : listItems)
+	{
+		actorTreeWidget->setItemSelected(item, true);
+	}
 }
 
 //This is only working for single columns in the tree. If showing actor parenting through this list 

@@ -1,12 +1,12 @@
 #pragma once
-#include <vector>
+#include <set>
 
 struct Actor;
 struct IActorSystem;
 
 struct WorldEditor
 {
-	std::vector<Actor*> pickedActors;
+	std::set<Actor*> pickedActors;
 	Actor* pickedActor = nullptr;
 	IActorSystem* spawnSystem = nullptr;
 
