@@ -147,6 +147,8 @@ void QtEditor::EnableDarkMode()
         "QScrollBar::handle:horizontal { background-color: rgb(11, 11, 11); min-width: 5px; border-radius: 4px; } "
         "QScrollBar::add-line:horizontal{ margin: 0px 3px 0px 3px; border-image: url(:/qss_icons/rc/right_arrow_disabled.png); width: 10px; height: 10px; subcontrol - position: right; subcontrol - origin: margin; } "
         "QScrollBar::sub-line:horizontal { margin: 0px 3px 0px 3px; border-image: url(:/qss_icons/rc/left_arrow_disabled.png); height: 10px; width: 10px; subcontrol-position: left; subcontrol-origin: margin; } "
+
+        "QTreeWidget::item::selected { color : skyblue } " 
     );
 
     //Set global font to  off white
