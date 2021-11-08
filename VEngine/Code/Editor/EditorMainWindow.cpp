@@ -47,6 +47,11 @@ EditorMainWindow::EditorMainWindow()
 	show();
 }
 
+void EditorMainWindow::Tick()
+{
+	worldDock->Tick();
+}
+
 void EditorMainWindow::closeEvent(QCloseEvent* closeEvent)
 {
 	Core::mainLoop = false;

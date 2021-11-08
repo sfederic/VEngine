@@ -1,6 +1,7 @@
 #include "WorldDock.h"
 #include <qtreewidget.h>
 #include <QTreeWidgetItem>
+#include <qmenu.h>
 #include "World.h"
 #include <qboxlayout.h>
 #include <qlineedit.h>
@@ -9,6 +10,7 @@
 #include "Camera.h"
 #include "WorldEditor.h"
 #include "Editor.h"
+#include "Input.h"
 
 WorldDock::WorldDock() : QDockWidget("World")
 {
@@ -22,6 +24,7 @@ WorldDock::WorldDock() : QDockWidget("World")
 	actorTreeWidget->setColumnCount(1);
 	actorTreeWidget->setHeaderLabels(QStringList("Actors"));
 	actorTreeWidget->setSelectionMode(QAbstractItemView::SelectionMode::MultiSelection);
+	connect(actorTreeWidget, &QTreeWidget::customContextMenuRequested, this, &WorldDock::ActorListContextMenu);
 
 	connect(actorTreeWidget, &QTreeWidget::itemClicked, this, &WorldDock::ClickOnActorInList);
 	connect(actorTreeWidget, &QTreeWidget::itemChanged, this, &WorldDock::ActorNameChanged);
@@ -35,6 +38,22 @@ WorldDock::WorldDock() : QDockWidget("World")
 	worldWidget->setLayout(vLayout);
 
 	setWidget(worldWidget);
+}
+
+void WorldDock::Tick()
+{
+	QAbstractItemView::SelectionMode selectionMode;
+
+	if (Input::GetAsyncKey(Keys::ShiftLeft))
+	{
+		selectionMode = QAbstractItemView::SelectionMode::MultiSelection;
+	}
+	else
+	{
+		selectionMode = QAbstractItemView::SelectionMode::SingleSelection;
+	}
+
+	actorTreeWidget->setSelectionMode(selectionMode);
 }
 
 void WorldDock::PopulateWorldActorList()
@@ -78,6 +97,16 @@ void WorldDock::ActorNameChanged(QTreeWidgetItem* item, int column)
 			editor->Log(L"Could not change actor name. Name already exists.");
 		}
 	}
+}
+
+void WorldDock::ActorListContextMenu(const QPoint& pos)
+{
+	QPoint globalPos = actorTreeWidget->mapToGlobal(pos);
+
+	QMenu actorListMenu;
+	actorListMenu.addAction("Clear Selection", actorTreeWidget, &QTreeWidget::clearSelection);
+
+	actorListMenu.exec(globalPos);
 }
 
 void WorldDock::SelectActorInList()

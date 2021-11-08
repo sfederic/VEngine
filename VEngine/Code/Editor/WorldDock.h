@@ -12,6 +12,7 @@ struct WorldDock : public QDockWidget
 	QLineEdit* actorSearchBar = nullptr;
 
 	WorldDock();
+	void Tick();
 	void PopulateWorldActorList();
 	void SelectActorInList();
 
@@ -19,4 +20,5 @@ private:
 	void ClickOnActorInList(QTreeWidgetItem* item, int column);
 	void SearchActors();
 	void ActorNameChanged(QTreeWidgetItem* item, int column);
+	void ActorListContextMenu(const QPoint& pos);
 };

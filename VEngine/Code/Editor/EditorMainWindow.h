@@ -15,6 +15,7 @@ struct EditorMainWindow : public QMainWindow
 	bool fullScreenOn = false;
 
 	EditorMainWindow();
+	void Tick();
 	void closeEvent(QCloseEvent* closeEvent) override;
 	bool nativeEvent(const QByteArray& eventType, void* message, long* result) override;
 	void HideAllDocks();

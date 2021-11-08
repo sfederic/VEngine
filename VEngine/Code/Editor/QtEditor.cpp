@@ -35,6 +35,8 @@ void QtEditor::Init(int argc, char* argv[])
 
 void QtEditor::Tick()
 {
+    mainWindow->Tick();
+
     app->processEvents();
     SetMousePos();
 
