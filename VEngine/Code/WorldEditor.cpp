@@ -35,7 +35,7 @@ void WorldEditor::HandleActorPicking()
 		Ray screenPickRay;
 		if (RaycastFromScreen(screenPickRay))
 		{
-			if (Input::GetAsyncKey(Keys::ShiftLeft) || pickedActors.empty())
+			if (Input::GetAsyncKey(Keys::Ctrl) || pickedActors.empty())
 			{
 				pickedActors.insert(screenPickRay.hitActor);
 			}

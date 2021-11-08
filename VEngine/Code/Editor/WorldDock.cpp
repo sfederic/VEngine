@@ -46,7 +46,7 @@ void WorldDock::Tick()
 {
 	QAbstractItemView::SelectionMode selectionMode;
 
-	if (Input::GetAsyncKey(Keys::ShiftLeft))
+	if (Input::GetAsyncKey(Keys::Ctrl))
 	{
 		selectionMode = QAbstractItemView::SelectionMode::MultiSelection;
 	}
