@@ -12,7 +12,6 @@ struct Win32Editor : IEditor
 	virtual void UpdateWorldList() override;
 	virtual void RefreshAssetList() override;
 	virtual void ClearProperties() override;
-	virtual void OpenMaterialEditor(const std::string materialFilename) override;
 	virtual void SelectActorInWorldList() override;
 	void SetupWindow();
 	void HandleMessages();

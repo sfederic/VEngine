@@ -24,6 +24,5 @@ struct IEditor
 	virtual void UpdateWorldList() = 0;
 	virtual void RefreshAssetList() = 0;
 	virtual void ClearProperties() = 0;
-	virtual void OpenMaterialEditor(const std::string materialFilename) = 0;
 	virtual void SelectActorInWorldList() = 0;
 };

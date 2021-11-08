@@ -111,10 +111,6 @@ void AssetDock::AssetItemClicked()
     {
         fileSystem.LoadWorld(assetName.toStdString());
     }   
-    if (std::wcscmp(extension, L".mt") == 0) //Material files
-    {
-        MaterialFileClicked(fullPath.toStdString());
-    }
     else if (std::wcscmp(extension, L".fbx") == 0) //FBX files
     {
         MeshFileClicked(assetName.toStdString());
@@ -207,10 +203,6 @@ void AssetDock::ShowContextMenu(const QPoint& point)
 {
     QMenu contextMenu("Context menu", this);
 
-    QAction materialAction("New Material", this);
-    connect(&materialAction, &QAction::triggered, this, &AssetDock::CreateMaterialFile);
-    contextMenu.addAction(&materialAction);
-
     contextMenu.exec(mapToGlobal(point));
 }
 
@@ -242,16 +234,4 @@ void AssetDock::MeshFileClicked(const std::string meshFilename)
 void AssetDock::TextureFileClicked(const std::wstring textureFilename)
 {
     textureSystem.selectedTextureInEditor = textureFilename;
-}
-
-void AssetDock::MaterialFileClicked(const std::string materialFilename)
-{
-    editor->OpenMaterialEditor(materialFilename);
-}
-
-void AssetDock::CreateMaterialFile()
-{
-    Serialiser s("Materials/testmaterial.mt", OpenMode::Out);
-    Material mat = Material("test.png", "DefaultShader.hlsl");
-    s.Serialise(mat.GetProps());
 }
