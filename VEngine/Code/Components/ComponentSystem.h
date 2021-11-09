@@ -22,7 +22,7 @@ struct ComponentSystem : IComponentSystem
 	T* Add(Actor* owner = nullptr, T newComponent = T())
 	{
 		T* component = new T(std::move(newComponent));
-		components.push_back(component);
+		components.emplace_back(component);
 
 		component->owner = owner;
 		component->index = components.size() - 1;
