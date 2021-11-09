@@ -84,6 +84,12 @@ void Serialiser::Serialise(Properties props)
 			os << transform->scale.x << " " << transform->scale.y << " " << transform->scale.z << " ";
 			os << transform->rotation.x << " " << transform->rotation.y << " " << transform->rotation.z << " " << transform->rotation.w << "\n";
 		}
+		else if (props.CheckType<UID>(name))
+		{
+			UID* uid = props.GetData<UID>(name);
+			os << name << "\n";
+			os << *uid << "\n";
+		}
 	}
 
 	os << "next\n"; //"next" moves the forloop onto the next 'Object'
@@ -208,6 +214,11 @@ void Deserialiser::Deserialise(Properties props)
 			is >> transform->rotation.y;
 			is >> transform->rotation.z;
 			is >> transform->rotation.w;
+		}
+		else if (props.CheckType<UID>(name))
+		{
+			UID* uid = props.GetData<UID>(name);
+			is >> *uid;
 		}
 	}
 }

@@ -166,6 +166,7 @@ Properties Actor::GetProps()
 	props.Add("Position", &rootComponent->transform.position);
 	props.Add("Scale", &rootComponent->transform.scale);
 	props.Add("Rotation", &rootComponent->transform.rotation);
+	props.Add("UID", &uid);
 
 	return props;
 }
