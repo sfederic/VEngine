@@ -86,7 +86,7 @@ struct Properties
 		return propMap[name].info.value();
 	}
 
-	Property* GetProp(std::string name)
+	Property* GetProperty(std::string name)
 	{
 		return &propMap[name];
 	}
