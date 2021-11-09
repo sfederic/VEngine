@@ -1,28 +1,5 @@
 Player
-1
-FOV
-1.0472
-Far Z
-1000
-Near Z
-0.01
-Position
--3.25 -1 -9
-Rotation
--0 0 -0 1
-Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture2D
-wall.png
-UvOffset
-0 0
-UvRotation
 0
-UvScale
-1 1
-next
 AudioActor
 0
 GameEvent
@@ -32,17 +9,19 @@ BattleGrid
 MeshActor
 1
 Mesh Filename
-plane.fbx
+cone.fbx
 Position
-0 -2 -1.75
+-5 -3 -1
 Rotation
-0.707107 0 0 -0.707107
+0 0 0 1
 Scale
-10 10 1
+1 1 1
 Shader
 DefaultShader.hlsl
 Texture2D
 test.png
+UID
+2047500996
 UvOffset
 0 0
 UvRotation
@@ -51,18 +30,7 @@ UvScale
 1 1
 next
 DirectionalLightActor
-1
-Colour
-1 1 1 1
-LightEnabled
-1
-Position
--6 0 -3
-Rotation
-0.386553 0.0784697 0.4653 0.792411
-Scale
-0.999986 0.999983 0.999985
-next
+0
 EntranceTrigger
 0
 NPC
@@ -82,34 +50,4 @@ DialogueInstance
 Unit
 0
 ParticleSystem
-2
-Lifetime
-0.5
-Position
--4 0 0
-Rotation
--0 0 -0 1
-Scale
-1 1 1
-Spawn Rate
-1
-Speed
-1
-Texture Filename
-floor.jpg
-next
-Lifetime
-0.5
-Position
-4 0 0
-Rotation
--0 0 -0 1
-Scale
-1 1 1
-Spawn Rate
-1
-Speed
-1
-Texture Filename
-bush.png
-next
+0

@@ -1,8 +1,13 @@
 #include "IntWidget.h"
 
-IntWidget::IntWidget(int* value, QWidget* parent) : SpinBox(parent)
+IntWidget::IntWidget(int* value, bool readOnly, QWidget* parent) : SpinBox(parent)
 {
 	_value = value;
+
+	if (readOnly)
+	{
+		setDisabled(true);
+	}
 
 	connect(this, &QDoubleSpinBox::editingFinished, this, &IntWidget::SetValue);
 	setValue(*_value);
