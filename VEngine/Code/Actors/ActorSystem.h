@@ -22,7 +22,7 @@ struct ActorSystem : IActorSystem
 
 	T* Add(T newActor = T(), Transform transform = Transform())
 	{
-		T* actor = new T(newActor);
+		T* actor = new T(std::move(newActor));
 		actors.push_back(actor);
 
 		actor->actorSystem = this;

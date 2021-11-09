@@ -21,7 +21,7 @@ struct ComponentSystem : IComponentSystem
 
 	T* Add(Actor* owner = nullptr, T newComponent = T())
 	{
-		T* component = new T(newComponent);
+		T* component = new T(std::move(newComponent));
 		components.push_back(component);
 
 		component->owner = owner;
