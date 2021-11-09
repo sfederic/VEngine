@@ -1,9 +1,9 @@
 #pragma once
 
-#include <QDoubleSpinBox>
+#include "SpinBox.h"
 #include "IPropertyWidget.h"
 
-class IntWidget : public QSpinBox, IPropertyWidget
+class IntWidget : public SpinBox, IPropertyWidget
 {
 public:
 	IntWidget(int* value, QWidget* parent = 0);

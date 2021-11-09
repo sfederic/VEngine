@@ -7,6 +7,5 @@ SpinBox::SpinBox(QWidget* parent) : QDoubleSpinBox(parent)
 	setMaximum(std::numeric_limits<double>::max());
 
 	setButtonSymbols(QAbstractSpinBox::NoButtons);
-	setFixedWidth(75);
 	setDecimals(3);
 }

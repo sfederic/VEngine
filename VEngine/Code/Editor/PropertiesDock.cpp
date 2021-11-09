@@ -100,6 +100,13 @@ void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRo
             actorPropsGridLayout->addWidget(intWidget, currentGridRow, propertyDataColumn);
             propertyWidgetsToUpdate.push_back((IPropertyWidget*)intWidget);
         }
+        else if (props.CheckType<uint32_t>(name))
+        {
+            //TODO: right now this is just to check UIDs, need to make a new spinbox for uints
+            auto intWidget = new IntWidget((int*)props.GetData<uint32_t>(name));
+            actorPropsGridLayout->addWidget(intWidget, currentGridRow, propertyDataColumn);
+            propertyWidgetsToUpdate.push_back((IPropertyWidget*)intWidget);
+        }
         else if (props.CheckType<float>(name))
         {
             auto floatWidget = new FloatWidget(props.GetData<float>(name));
