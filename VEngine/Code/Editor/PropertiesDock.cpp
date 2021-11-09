@@ -15,6 +15,7 @@
 #include "PropertyWidgets/Float4Widget.h"
 #include "PropertyWidgets/FloatWidget.h"
 #include "PropertyWidgets/IntWidget.h"
+#include "PropertyWidgets/UintWidget.h"
 #include "PropertyWidgets/VectorWidget.h"
 #include "PropertyWidgets/StringWidget.h"
 #include "PropertyWidgets/Texture2DWidget.h"
@@ -102,8 +103,7 @@ void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRo
         }
         else if (props.CheckType<uint32_t>(name))
         {
-            //TODO: right now this is just to check UIDs, need to make a new spinbox for uints
-            auto intWidget = new IntWidget((int*)props.GetData<uint32_t>(name), props.GetProperty(name)->readOnly);
+            auto intWidget = new UintWidget(props.GetData<uint32_t>(name), props.GetProperty(name)->readOnly);
             actorPropsGridLayout->addWidget(intWidget, currentGridRow, propertyDataColumn);
             propertyWidgetsToUpdate.push_back((IPropertyWidget*)intWidget);
         }

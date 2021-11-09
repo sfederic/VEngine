@@ -3,7 +3,7 @@
 #include "SpinBox.h"
 #include "IPropertyWidget.h"
 
-class IntWidget : public SpinBox, IPropertyWidget
+class IntWidget : public IntSpinBox, IPropertyWidget
 {
 public:
 	IntWidget(int* value, bool readOnly = false, QWidget* parent = 0);

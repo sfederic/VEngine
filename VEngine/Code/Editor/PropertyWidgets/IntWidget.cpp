@@ -1,6 +1,6 @@
 #include "IntWidget.h"
 
-IntWidget::IntWidget(int* value, bool readOnly, QWidget* parent) : SpinBox(parent)
+IntWidget::IntWidget(int* value, bool readOnly, QWidget* parent) : IntSpinBox(parent)
 {
 	_value = value;
 

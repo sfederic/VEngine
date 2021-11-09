@@ -21,7 +21,6 @@ IntSpinBox::IntSpinBox(QWidget* parent)
 UintSpinBox::UintSpinBox(QWidget* parent)
 {
 	setMinimum(std::numeric_limits<uint32_t>::lowest());
-	//TODO: this maximum set will probably wrap over right?
 	setMaximum(std::numeric_limits<uint32_t>::max());
 
 	setButtonSymbols(QAbstractSpinBox::NoButtons);
