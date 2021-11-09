@@ -15,6 +15,7 @@ LogDock::LogDock() : QDockWidget("Log")
 	clearButton = new QPushButton("Clear");
 	clearButton->setMaximumWidth(75);
 	connect(clearButton, &QPushButton::pressed, this, &LogDock::ClearLog);
+	vbLayout->addWidget(clearButton);
 
 	auto logWidget = new QWidget();
 	logWidget->setLayout(vbLayout);
