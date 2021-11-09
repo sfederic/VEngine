@@ -15,6 +15,9 @@ struct Property
 	std::optional<std::type_index> info;
 	std::string name;
 
+	//Sets widgets to be inactive/readonly
+	bool readOnly = false;
+
 	std::function<void(void*)> change;
 };
 
