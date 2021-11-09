@@ -4,6 +4,7 @@
 #include <DirectXCollision.h>
 #include "Transform.h"
 #include "Properties.h"
+#include "UID.h"
 
 struct Component;
 struct SpatialComponent;
@@ -24,6 +25,7 @@ struct Actor
 	std::string name;
 
 	int index = -1;
+	UID uid = 0;
 
 	bool active = true;
 
