@@ -10,6 +10,7 @@ DirectXTK (directxtk_desktop_win10) ver. 2021.8.2.1 - https://github.com/microso
 ## Extensions
 
 Qt VS Tools ver. 2.7.1.20 - https://marketplace.visualstudio.com/items?itemName=TheQtCompany.QtVisualStudioTools-19123
+(Currently the engine is using VS2022 tools, the Qt VS extension holds over but VS2022 can't create new Qt projects but builds and settings still work.)
 
 ## Third party libs:
 
