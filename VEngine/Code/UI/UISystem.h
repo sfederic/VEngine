@@ -7,15 +7,17 @@ struct Widget;
 
 struct UISystem
 {
-	//In-game wigdets
+	//Every widget added in-game
 	std::vector<Widget*> widgets;
 
-	ID2D1Factory* d2dFactory;
-	ID2D1RenderTarget* d2dRenderTarget;
-	IDWriteFactory1* writeFactory;
-	ID2D1SolidColorBrush* brushText;
-	ID2D1SolidColorBrush* brushShapes;
-	IDWriteTextFormat* textFormat;
+	std::vector<Widget*> widgetsInViewport;
+
+	ID2D1Factory* d2dFactory = nullptr;
+	ID2D1RenderTarget* d2dRenderTarget = nullptr;
+	IDWriteFactory1* writeFactory = nullptr;
+	ID2D1SolidColorBrush* brushText = nullptr;
+	ID2D1SolidColorBrush* brushShapes = nullptr;
+	IDWriteTextFormat* textFormat = nullptr;
 
 	void Init(void* swapchain);
 	void BeginDraw();

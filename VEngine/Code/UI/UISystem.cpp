@@ -48,7 +48,7 @@ void UISystem::BeginDraw()
 
 void UISystem::AddWidget(Widget* widgetToAdd)
 {
-	for (auto widget : widgets)
+	for (auto widget : widgetsInViewport)
 	{
 		if (widget == widgetToAdd)
 		{
@@ -56,28 +56,28 @@ void UISystem::AddWidget(Widget* widgetToAdd)
 		}
 	}
 
-	widgets.push_back(widgetToAdd);
+	widgetsInViewport.push_back(widgetToAdd);
 }
 
 void UISystem::RemoveWidget(Widget* widgetToRemove)
 {
-	for (int i = 0; i < widgets.size(); i++)
+	for (int i = 0; i < widgetsInViewport.size(); i++)
 	{
-		if (widgets[i] == widgetToRemove)
+		if (widgetsInViewport[i] == widgetToRemove)
 		{
-			widgets.erase(widgets.begin() + i, widgets.end());
+			widgetsInViewport.erase(widgetsInViewport.begin() + i, widgetsInViewport.end());
 		}
 	}
 }
 
 void UISystem::RemoveAllWidgets()
 {
-	widgets.clear();
+	widgetsInViewport.clear();
 }
 
 void UISystem::TickAllWidgets(float deltaTime)
 {
-	for (auto widget : widgets)
+	for (auto widget : widgetsInViewport)
 	{
 		widget->Tick(deltaTime);
 	}
