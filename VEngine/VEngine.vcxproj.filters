@@ -362,6 +362,9 @@
     <ClCompile Include="Code\Editor\PropertyWidgets\UintWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\UI\TitleScreenWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -668,6 +671,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\PropertyWidgets\UintWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\UI\TitleScreenWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
