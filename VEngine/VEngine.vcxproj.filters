@@ -296,7 +296,7 @@
     <ClCompile Include="Code\Components\WidgetComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\UI\SpriteSystem.cpp">
+    <ClCompile Include="Code\Render\SpriteSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\Billboard.cpp">
@@ -598,7 +598,7 @@
     <ClInclude Include="Code\GameInstance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\UI\SpriteSystem.h">
+    <ClInclude Include="Code\Render\SpriteSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Billboard.h">

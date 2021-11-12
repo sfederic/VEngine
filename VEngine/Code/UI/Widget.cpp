@@ -4,7 +4,7 @@
 #include "Input.h"
 #include "Render/Renderer.h"
 #include "Editor/Editor.h"
-#include "UI/SpriteSystem.h"
+#include "Render/SpriteSystem.h"
 
 //NOTE:https://github.com/Microsoft/DirectXTK/wiki/Sprites-and-textures
 //sprite rendering wth DirectXtk was fucked up. There was something going wrong when rendering the scene

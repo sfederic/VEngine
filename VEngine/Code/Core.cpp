@@ -10,7 +10,7 @@
 #include "FileSystem.h"
 #include "Audio/AudioSystem.h"
 #include "WorldEditor.h"
-#include "UI/SpriteSystem.h"
+#include "Render/SpriteSystem.h"
 
 double ticks;
 double deltaTime = 0.0;
