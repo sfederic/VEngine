@@ -10,6 +10,7 @@
 #include "FileSystem.h"
 #include "Audio/AudioSystem.h"
 #include "WorldEditor.h"
+#include "UI/SpriteSystem.h"
 
 double ticks;
 double deltaTime = 0.0;
@@ -132,6 +133,7 @@ void Core::EndGame()
 	gameplayOn = false;
 
 	uiSystem.RemoveAllWidgets();
+	spriteSystem.Reset();
 
 	audioSystem.DeleteLoadedAudioAndChannels();
 
