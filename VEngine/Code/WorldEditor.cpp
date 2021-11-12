@@ -15,7 +15,6 @@ WorldEditor worldEditor;
 void WorldEditor::Tick()
 {
 	SpawnActorOnClick();
-	DeselectPickedActor();
 	HandleActorPicking();
 	DuplicateActor();
 	DeleteActor();
@@ -174,14 +173,8 @@ void WorldEditor::SpawnActorOnClick()
 
 void WorldEditor::DeselectPickedActor()
 {
-	if (Input::GetAsyncKey(Keys::ShiftLeft))
-	{
-		if (Input::GetKeyUp(Keys::C))
-		{
-			pickedActor = nullptr;
-			editor->ClearProperties();
-		}
-	}
+	pickedActor = nullptr;
+	editor->ClearProperties();
 }
 
 void WorldEditor::SetPickedActor(Actor* actor)

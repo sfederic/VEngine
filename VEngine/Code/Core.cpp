@@ -141,6 +141,9 @@ void Core::EndGame()
 	}
 
 	activeCamera = &editorCamera;
+
+	//Clear the properties dock or you'll end up with pointer problems
+	worldEditor.DeselectPickedActor();
 }
 
 void Core::SetGameplayState()
