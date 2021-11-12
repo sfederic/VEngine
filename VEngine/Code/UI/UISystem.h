@@ -22,6 +22,14 @@ struct UISystem
 	void AddWidget(Widget* widgetToAdd);
 	void RemoveWidget(Widget* widgetToRemove);
 
+	template <typename T>
+	T* CreateWidget()
+	{
+		auto newWidget = new T();
+		widgets.push_back(newWidget);
+		return newWidget;
+	}
+
 	//Called on gameplay end
 	void RemoveAllWidgets();
 
