@@ -43,7 +43,7 @@ float Core::GetDeltaTime()
 	{
 		//There's a good talk on the, "Myths and Misconceptions of Frame Pacing", by the Serious Sam guys
 		//REF:https://www.youtube.com/watch?v=n0zT8YSSFzw
-		deltaTime = 1.0f / 60.f;
+		deltaTime = 1.0 / 60.0;
 	}
 
 	return (float)deltaTime;
