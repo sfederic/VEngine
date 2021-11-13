@@ -11,6 +11,12 @@ using namespace DirectX;
 
 struct Ray
 {
+	Ray() {}
+	Ray(Actor* actorToIgnore)
+	{
+		actorsToIgnore.push_back(actorToIgnore);
+	}
+
 	XMVECTOR origin;
 	XMVECTOR direction;
 	
