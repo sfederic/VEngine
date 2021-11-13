@@ -7,6 +7,8 @@ struct WidgetComponent : Component
 {
 	COMPONENT_SYSTEM(WidgetComponent)
 
+	//TODO: because the widgets are subclassed, eventually WigetComponent needs to just be for
+	//character speech bubbles. So make a CharacterSpeechWidget and replace it here later.
 	Widget widget;
 
 	virtual void Tick(float deltaTime) override;
