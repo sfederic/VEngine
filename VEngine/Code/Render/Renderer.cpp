@@ -28,7 +28,7 @@
 #include "Editor/DebugMenu.h"
 #include "ShadowMap.h"
 #include "TextureSystem.h"
-#include "UI/SpriteSystem.h"
+#include "Render/SpriteSystem.h"
 #include "Particle/ParticleSystem.h"
 #include "Particle/ParticleEmitter.h"
 
@@ -719,7 +719,7 @@ void Renderer::RenderSpritesInScreenSpace()
 		}
 		else
 		{
-			//Careful with back culling visibility here for UI
+			//Careful with back culling visibility here for UI (as every sprite's a quad)
 			context->RSSetState(rastStateMap["solid"]->data);
 		}
 

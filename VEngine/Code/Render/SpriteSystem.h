@@ -23,6 +23,10 @@ struct Sprite
 
 	float angle = 0.f;
 	float z = 0.f;
+
+	//this bool denotes whether the srcRect is used per a user definition or
+	//whether it's values are made from the texture's width and height.
+	bool useSourceRect = false;
 };
 
 //SpriteSystem is used for rendering both widget and particle images (screen space vs world space).

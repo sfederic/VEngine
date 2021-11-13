@@ -28,6 +28,8 @@ void SpriteSystem::Init()
 
 void SpriteSystem::Reset()
 {
+	//in-game UI sprites (not particle) need to be cleared out at the end of the frame
+	//because of the imgui-esque way widgets render their content in-game.
 	screenSprites.clear();
 }
 
@@ -59,8 +61,8 @@ void SpriteSystem::UpdateAndSetSpriteBuffers(ID3D11DeviceContext* context)
 
 void SpriteSystem::BuildSpriteQuadForViewportRendering(const Sprite& sprite)
 {
-	const D3D11_RECT& dst = sprite.dstRect;
-	const D3D11_RECT& src = sprite.srcRect;
+	D3D11_RECT dst = sprite.dstRect;
+	D3D11_RECT src = sprite.srcRect;
 
 	// Dest rect defines target in screen space.
 	verts[0].pos = PointToNdc(dst.left, dst.bottom, sprite.z);
@@ -71,6 +73,12 @@ void SpriteSystem::BuildSpriteQuadForViewportRendering(const Sprite& sprite)
 	Texture2D* texture = textureSystem.FindTexture2D(sprite.textureFilename);
 	int texWidth = texture->desc.Width;
 	int texHeight = texture->desc.Height;
+
+	if (!sprite.useSourceRect)
+	{
+		src.right = texWidth;
+		src.bottom = texHeight;
+	}
 
 	// Source rect defines subset of texture to use from sprite sheet.
 	verts[0].uv = XMFLOAT2((float)src.left / texWidth, (float)src.bottom / texHeight);

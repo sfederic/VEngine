@@ -79,8 +79,8 @@ void Widget::Image(const std::string& filename, int x, int y, int w, int h)
 {
 	Sprite sprite = {};
 	sprite.textureFilename = filename;
-	sprite.dstRect = { x, y, w, h };
-	sprite.srcRect = { 0, 0, 512, 512 };
+	sprite.dstRect = { x, y, x + w, y + h };
+	sprite.srcRect = { 0, 0, w, h };
 
 	spriteSystem.CreateScreenSprite(sprite);
 }

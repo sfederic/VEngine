@@ -18,7 +18,7 @@
 #include "Render/TextureSystem.h"
 #include "Render/RenderUtils.h"
 #include "Render/MaterialSystem.h"
-#include "UI/SpriteSystem.h"
+#include "Render/SpriteSystem.h"
 #include "Audio/AudioSystem.h"
 
 Engine engine;
@@ -67,7 +67,7 @@ void Engine::TickSystems(float deltaTime)
 void Engine::ResetSystems()
 {
 	Input::Reset();
-	//spriteBatcher.Reset();
+	spriteSystem.Reset();
 }
 
 void Engine::MainLoop()

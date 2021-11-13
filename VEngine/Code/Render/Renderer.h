@@ -97,6 +97,7 @@ public:
 	void Present();
 	void RenderSetup();
 	void Render();
+	//Renders sprites on the viewport as UI elements
 	void RenderSpritesInScreenSpace();
 	void RenderParticleEmitters();
 	void* GetSwapchain();
