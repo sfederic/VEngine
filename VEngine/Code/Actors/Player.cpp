@@ -51,8 +51,7 @@ void Player::Tick(float deltaTime)
 		}
 		else
 		{
-			Ray ray;
-			ray.actorsToIgnore.push_back(this);
+			Ray ray(this);
 			if (Raycast(ray, GetPositionVector(), GetForwardVectorV(), 1.5f))
 			{
 				NPC* npc = (NPC*)ray.hitActor;
@@ -91,8 +90,7 @@ void Player::Tick(float deltaTime)
 
 		if (!XMVector4Equal(previousPos, nextPos))
 		{
-			Ray ray;
-			ray.actorsToIgnore.push_back(this);
+			Ray ray(this);
 			XMVECTOR direction = XMVector3Normalize(nextPos - previousPos);
 			if (Raycast(ray, GetPositionVector(), direction, 1.f))
 			{

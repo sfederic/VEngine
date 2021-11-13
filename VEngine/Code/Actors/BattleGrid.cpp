@@ -65,8 +65,7 @@ void BattleGrid::Start()
             GridNode node = GridNode(x, y, nodeMesh->instanceData.size());
 
             //raycast against the world to set node position
-            Ray ray = {};
-            ray.actorsToIgnore.push_back(this);
+            Ray ray(this);
             if (Raycast(ray, rayOrigin, -VMath::XMVectorUp(), 20.0f))
             {
                 //Scale the node down a little so that nodes aren't touching
