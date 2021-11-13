@@ -1,9 +1,9 @@
 #include "Camera.h"
+#include <math.h>
 #include "Input.h"
 #include "WorldEditor.h"
 #include "Actors/Actor.h"
 #include "Editor/Editor.h"
-#include "Math.h"
 #include "GameUtils.h"
 #include "Actors/Player.h"
 #include "VMath.h"
@@ -25,47 +25,27 @@ CameraComponent::CameraComponent(XMFLOAT3 startPos, bool isEditorCamera)
 
 XMMATRIX CameraComponent::GetViewMatrix()
 {
-	XMVECTOR right = GetRightVectorV();
-	XMVECTOR up = GetUpVectorV();
 	XMVECTOR forward = GetForwardVectorV();
 	XMVECTOR position = GetPositionV();
 
-	forward = XMVector3Normalize(forward);
-	up = XMVector3Normalize(XMVector3Cross(forward, right));
-	right = XMVector3Cross(up, forward);
+	XMMATRIX view = XMMatrixIdentity();
 
-	float x = XMVectorGetX(XMVector3Dot(position, right));
-	float y = XMVectorGetX(XMVector3Dot(position, up));
-	float z = XMVectorGetX(XMVector3Dot(position, forward));
-
-	XMMATRIX view;
-
-	view.r[0].m128_f32[0] = right.m128_f32[0];
-	view.r[1].m128_f32[0] = right.m128_f32[1];
-	view.r[2].m128_f32[0] = right.m128_f32[2];
-	view.r[3].m128_f32[0] = -x;
-
-	view.r[0].m128_f32[1] = up.m128_f32[0];
-	view.r[1].m128_f32[1] = up.m128_f32[1];
-	view.r[2].m128_f32[1] = up.m128_f32[2];
-	view.r[3].m128_f32[1] = -y;
-
-	view.r[0].m128_f32[2] = forward.m128_f32[0];
-	view.r[1].m128_f32[2] = forward.m128_f32[1];
-	view.r[2].m128_f32[2] = forward.m128_f32[2];
-	view.r[3].m128_f32[2] = -z;
-
-	view.r[0].m128_f32[3] = 0.0f;
-	view.r[1].m128_f32[3] = 0.0f;
-	view.r[2].m128_f32[3] = 0.0f;
-	view.r[3].m128_f32[3] = 1.0f;
-
-	//TODO: this camera logic is shit and is just for testing
 	//Player camera logic
 	if (!editorCamera)
 	{
 		focusPoint = GameUtils::GetPlayer()->GetPositionVector();
 		view = XMMatrixLookAtLH(transform.world.r[3], focusPoint, VMath::XMVectorUp());
+	}
+	else
+	{
+		XMVECTOR focus = position + forward;
+
+		if (arcBallMovementOn)
+		{
+			focus = worldEditor.pickedActor->GetPositionVector();
+		}
+
+		view = XMMatrixLookAtLH(position, focus, VMath::XMVectorUp());
 	}
 
 	return view;
@@ -80,36 +60,50 @@ XMMATRIX CameraComponent::GetProjectionMatrix()
 
 void CameraComponent::Pitch(float angle)
 {
-	XMVECTOR& right = transform.world.r[0];
-	XMVECTOR& up = transform.world.r[1];
-	XMVECTOR& forward = transform.world.r[2];
-
-	XMMATRIX r = XMMatrixRotationAxis(right, angle);
-	up = XMVector3TransformNormal(up, r);
-	forward = XMVector3TransformNormal(forward, r);
+	XMMATRIX r = XMMatrixRotationAxis(GetRightVectorV(), angle);
+	transform.world *= r;
 }
 
 void CameraComponent::RotateY(float angle)
 {
-	XMVECTOR& right = transform.world.r[0];
-	XMVECTOR& up = transform.world.r[1];
-	XMVECTOR& forward = transform.world.r[2];
-
 	XMMATRIX r = XMMatrixRotationY(angle);
-	up = XMVector3TransformNormal(up, r);
-	right = XMVector3TransformNormal(right, r);
-	forward = XMVector3TransformNormal(forward, r);
+	transform.world *= r;
 }
 
 void CameraComponent::MouseMove(int x, int y)
 {
 	static XMINT2 lastMousePos;
 
-	if (Input::GetAsyncKey(Keys::MouseRight))
-	{
-		float dx = XMConvertToRadians(0.25f * (float)(x - lastMousePos.x));
-		float dy = XMConvertToRadians(0.25f * (float)(y - lastMousePos.y));
+	const float dx = XMConvertToRadians(0.25f * (float)(x - lastMousePos.x));
+	const float dy = XMConvertToRadians(0.25f * (float)(y - lastMousePos.y));
 
+	arcBallMovementOn = false;
+
+	if (Input::GetAsyncKey(Keys::MouseRight) && Input::GetAsyncKey(Keys::Alt))
+	{
+		//Arcball camera movement
+		//REF:https://asliceofrendering.com/camera/2019/11/30/ArcballCamera/
+		//TODO: sort of works, but keeps reseting the camera's lookat direction when you release the arcball keys
+		//because the rotation isn't updated below, only the position.
+
+		arcBallMovementOn = true;
+
+		auto pos = GetPositionV();
+		auto pivot = worldEditor.pickedActor->GetPositionVector();
+		focusPoint = pivot;
+
+		XMMATRIX xRot = XMMatrixIdentity();
+		xRot = XMMatrixRotationX(dy);
+		pos = XMVector3Transform(pos - pivot, xRot) + pivot;
+
+		XMMATRIX yRot = XMMatrixIdentity();
+		yRot = XMMatrixRotationY(dx);
+		pos = XMVector3Transform(pos - pivot, yRot) + pivot;
+
+		SetPosition(pos);
+	}
+	else if (Input::GetAsyncKey(Keys::MouseRight))
+	{
 		Pitch(dy);
 		RotateY(dx);
 	}
