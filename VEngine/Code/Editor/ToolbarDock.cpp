@@ -5,6 +5,7 @@
 #include "PropertyWidgets/SpinBox.h"
 #include "Core.h"
 #include "TransformGizmo.h"
+#include "FileSystem.h"
 
 ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 {
@@ -13,13 +14,14 @@ ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 	hLayout->setAlignment(Qt::AlignHCenter);
 
 
-	//Play buttons
+	//gameplay buttons
 	playButton = new QPushButton("Play");
 	connect(playButton, &QPushButton::clicked, this, &ToolbarDock::StartPlay);
 	hLayout->addWidget(playButton);
 
-	pauseButton = new QPushButton("Pause");
-	hLayout->addWidget(pauseButton);
+	resetWorldButton = new QPushButton("Reset World");
+	connect(resetWorldButton, &QPushButton::clicked, this, &ToolbarDock::ResetWorldState);
+	hLayout->addWidget(resetWorldButton);
 
 
 	//TRANSFORMGIZMO SNAP INPUTS
@@ -66,6 +68,11 @@ void ToolbarDock::StartPlay()
 	{
 		playButton->setText("Play");
 	}
+}
+
+void ToolbarDock::ResetWorldState()
+{
+	fileSystem.ReloadCurrentWorld();
 }
 
 void ToolbarDock::SetTranslationSnapValue()

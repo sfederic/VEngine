@@ -7,7 +7,7 @@ struct SpinBox;
 struct ToolbarDock : public QDockWidget
 {
 	QPushButton* playButton;
-	QPushButton* pauseButton;
+	QPushButton* resetWorldButton;
 
 	SpinBox* translationSnapSpinBox;
 	SpinBox* scaleSnapSpinBox;
@@ -15,6 +15,7 @@ struct ToolbarDock : public QDockWidget
 
 	ToolbarDock();
 	void StartPlay();
+	void ResetWorldState();
 	void SetTranslationSnapValue();
 	void SetScaleSnapValue();
 	void SetRotationSnapValue();
