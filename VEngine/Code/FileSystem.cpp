@@ -84,6 +84,8 @@ void FileSystem::LoadWorld(std::string worldName)
 	}
 
 	editor->UpdateWorldList();
+	editor->ClearProperties();
+
 	debugMenu.AddNotification(L"World loaded.");
 }
 
