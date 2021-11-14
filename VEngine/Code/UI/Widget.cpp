@@ -29,8 +29,8 @@ void Widget::RemoveFromViewport()
 void Widget::MapToScreenSpace()
 {
 	//What you need to do here it take the actor's position after it's been multiplied 
-	//by the MVP matrix on the CPU side of things, divide it by the W component and multiply it out by the viewport.
-
+	//by the MVP matrix on the CPU side of things, divide it by the W component 
+	//and multiply it out by the viewport.
 	//REF:http://www.windows-tech.info/5/a80747e145dd9062.php
 
 	float f1 = pos.m128_f32[0] / pos.m128_f32[3];
@@ -48,8 +48,6 @@ void Widget::Text(const std::wstring& text, D2D1_RECT_F layout)
 		uiSystem.textFormat, layout, uiSystem.brushText);
 }
 
-//Make sure the buttons layout isn't backwards(bottom and top less than left and right)
-//else the mouse check won't work.
 bool Widget::Button(const std::wstring& text, D2D1_RECT_F layout, float lineWidth)
 {
 	uiSystem.d2dRenderTarget->DrawRectangle(layout, uiSystem.brushShapes, lineWidth);

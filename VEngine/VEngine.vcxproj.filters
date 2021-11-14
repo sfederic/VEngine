@@ -365,6 +365,9 @@
     <ClCompile Include="Code\UI\TitleScreenWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\UI\DialogueWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -674,6 +677,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\TitleScreenWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\UI\DialogueWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
