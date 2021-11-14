@@ -18,10 +18,11 @@
 #include "PropertyWidgets/UintWidget.h"
 #include "PropertyWidgets/VectorWidget.h"
 #include "PropertyWidgets/StringWidget.h"
-#include "PropertyWidgets/Texture2DWidget.h"
+#include "PropertyWidgets/TextureDataWidget.h"
 #include "PropertyWidgets/ActorListWidget.h"
 #include "PropertyWidgets/TransformWidget.h"
 #include "Render/Material.h"
+#include "Render/RenderTypes.h"
 
 PropertiesDock::PropertiesDock() : QDockWidget("Properties")
 {
@@ -143,11 +144,11 @@ void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRo
             actorPropsGridLayout->addWidget(stringWidget, currentGridRow, propertyDataColumn);
             propertyWidgetsToUpdate.push_back((IPropertyWidget*)stringWidget);
         }       
-        else if (props.CheckType<Texture2D>(name))
+        else if (props.CheckType<TextureData>(name))
         {
-            auto texture2DWidget = new Texture2DWidget(prop.second);
-            actorPropsGridLayout->addWidget(texture2DWidget, currentGridRow, propertyDataColumn);
-            propertyWidgetsToUpdate.push_back((IPropertyWidget*)texture2DWidget);
+            auto textureDataWidget = new TextureDataWidget(prop.second);
+            actorPropsGridLayout->addWidget(textureDataWidget, currentGridRow, propertyDataColumn);
+            propertyWidgetsToUpdate.push_back((IPropertyWidget*)textureDataWidget);
         }     
         else if (props.CheckType<std::vector<Actor*>>(name))
         {

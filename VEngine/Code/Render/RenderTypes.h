@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
 
@@ -21,6 +22,14 @@ struct MeshData
 
 	std::vector<Vertex> vertices;
 	std::vector<indexDataType> indices;
+};
+
+//TextureData exists because serialisation needed texture representation that wasn't a Texture2D
+//(Which is used by the renderer). This way you can pass TextureData in as a type instead of std::string
+//for texture filanames and still keep all the previous widgets and functionality.
+struct TextureData
+{
+	std::string filename;
 };
 
 //A pointer structure to a MeshData struct in memory. Each rendered component will have one of these pointing

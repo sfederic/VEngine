@@ -2,6 +2,7 @@
 #include <DirectXMath.h>
 #include <string>
 #include "Properties.h"
+#include "RenderTypes.h"
 #include "UID.h"
 
 using namespace DirectX;
@@ -43,7 +44,7 @@ struct Material
 
 	std::string name;
 
-	std::string textureFilename;
+	TextureData textureData;
 	std::string shaderFilename;
 
 	std::string rastStateName = "solid";

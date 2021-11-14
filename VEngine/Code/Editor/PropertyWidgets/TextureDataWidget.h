@@ -3,14 +3,14 @@
 #include <qpushbutton.h>
 #include "Properties.h"
 
-struct Texture2D;
+struct TextureData;
 
-struct Texture2DWidget : QPushButton, IPropertyWidget
+struct TextureDataWidget : QPushButton, IPropertyWidget
 {
-	Texture2D* value;
+	TextureData* value;
 	Property prop;
 
-	Texture2DWidget(Property prop_);
+	TextureDataWidget(Property prop_);
 	void SetValue();
 	virtual void ResetValue() override;
 };

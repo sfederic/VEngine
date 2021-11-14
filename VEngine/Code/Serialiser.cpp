@@ -5,6 +5,7 @@
 #include "Render/PipelineObjects.h"
 #include "Actors/Actor.h"
 #include "World.h"
+#include "Render/RenderTypes.h"
 
 using namespace DirectX;
 
@@ -61,6 +62,11 @@ void Serialiser::Serialise(Properties props)
 			std::string* str = props.GetData<std::string>(name);
 			os << name << "\n" << str->c_str() << "\n";
 		}	
+		else if (props.CheckType<TextureData>(name))
+		{
+			TextureData* textureData = props.GetData<TextureData>(name);
+			os << name << "\n" << textureData->filename << "\n";
+		}
 		else if (props.CheckType<std::vector<Actor*>>(name))
 		{
 			auto actors = props.GetData<std::vector<Actor*>>(name);
@@ -164,7 +170,14 @@ void Deserialiser::Deserialise(Properties props)
 			is.getline(propString, 512);
 			std::string* str = props.GetData<std::string>(name);
 			str->assign(propString);
-		}		
+		}
+		else if (props.CheckType<TextureData>(name))
+		{
+			char propString[512];
+			is.getline(propString, 512);
+			TextureData* textureData = props.GetData<TextureData>(name);
+			textureData->filename.assign(propString);
+		}
 		else if (props.CheckType<std::vector<Actor*>>(name))
 		{
 			char actorName[512];

@@ -260,7 +260,7 @@
     <ClCompile Include="Code\GameUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Editor\PropertyWidgets\Texture2DWidget.cpp">
+    <ClCompile Include="Code\Editor\PropertyWidgets\TextureDataWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\EntranceTrigger.cpp">
@@ -562,7 +562,7 @@
     <ClInclude Include="Code\GameUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Editor\PropertyWidgets\Texture2DWidget.h">
+    <ClInclude Include="Code\Editor\PropertyWidgets\TextureDataWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\EntranceTrigger.h">

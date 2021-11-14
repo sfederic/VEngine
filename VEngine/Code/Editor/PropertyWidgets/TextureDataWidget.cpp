@@ -1,18 +1,19 @@
-#include "Texture2DWidget.h"
+#include "TextureDataWidget.h"
 #include <qpushbutton.h>
 #include <qfiledialog.h>
 #include "Render/PipelineObjects.h"
+#include "Render/RenderTypes.h"
 
-Texture2DWidget::Texture2DWidget(Property prop_)
+TextureDataWidget::TextureDataWidget(Property prop_)
 {
 	prop = prop_;
-	value = (Texture2D*)prop.data;
+	value = (TextureData*)prop.data;
 
 	setText(QString::fromStdString(value->filename));
-	connect(this, &QPushButton::clicked, this, &Texture2DWidget::SetValue);
+	connect(this, &QPushButton::clicked, this, &TextureDataWidget::SetValue);
 }
 
-void Texture2DWidget::SetValue()
+void TextureDataWidget::SetValue()
 {
 	//BUG: is there a fucking bug when using the OS' native file opener?
 	//https://stackoverflow.com/questions/31983412/code-freezes-on-trying-to-open-qdialog
@@ -31,7 +32,7 @@ void Texture2DWidget::SetValue()
 	}
 }
 
-void Texture2DWidget::ResetValue()
+void TextureDataWidget::ResetValue()
 {
 	if (value)
 	{
