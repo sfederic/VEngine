@@ -6,16 +6,10 @@
 #include "Editor/Editor.h"
 #include "Render/SpriteSystem.h"
 
-//NOTE:https://github.com/Microsoft/DirectXTK/wiki/Sprites-and-textures
-//sprite rendering wth DirectXtk was fucked up. There was something going wrong when rendering the scene
-//that jsut made everything disappear. I can't tell what rendering state it was changing internally.
-//REF:https://github.com/Microsoft/DirectXTK/wiki/SpriteBatch#state-management
-//REF:https://stackoverflow.com/questions/35558178/directxspritefont-spritebatch-prevents-3d-scene-from-drawing
-
 void Widget::Tick(float deltaTime)
 {
-	//Image("bush.png", 50, 0, 100, 100);
-	//MapToScreenSpace();
+	//Just for testing
+	MapToScreenSpace();
 }
 
 void Widget::Start()
