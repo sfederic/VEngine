@@ -15,15 +15,35 @@ Console::Console()
 	//NOTE: command strings need to be uppercase with WndProc
 
 	//Debug Menu Commands
+
+	//Show snapping menu
 	executeMap.emplace(L"SNAP", []() { debugMenu.snapMenuOpen = !debugMenu.snapMenuOpen; });
+
+	//Show profile stats
 	executeMap.emplace(L"PROFILE", []() { debugMenu.profileMenuOpen = !debugMenu.profileMenuOpen; });
+
+	//Show FPS and GPU timing info
 	executeMap.emplace(L"FPS", []() { debugMenu.fpsMenuOpen = !debugMenu.fpsMenuOpen; });
+
+	//Show actor props
 	executeMap.emplace(L"PROPS", []() { debugMenu.propsMenuOpen = !debugMenu.propsMenuOpen; });
+
+	//Shows current undo/redo commands in buffer
 	executeMap.emplace(L"COMMANDS", []() { debugMenu.commandsMenuOpen = !debugMenu.commandsMenuOpen; });
+
+	//Show GPU info
 	executeMap.emplace(L"GPU", []() { debugMenu.gpuMenuOpen = !debugMenu.gpuMenuOpen; });
+
+	//Shows actor info while hovering over the actor with mouse
 	executeMap.emplace(L"ACTOR", []() { debugMenu.actorInspectMenuOpen = !debugMenu.actorInspectMenuOpen; });
+
+	//shows in-world stats (eg. vertex count, actor count)
 	executeMap.emplace(L"STATS", []() { debugMenu.worldStatsMenuOpen = !debugMenu.worldStatsMenuOpen; });
+
+	//Menu for manipulating game instance data
 	executeMap.emplace(L"GAME", []() { debugMenu.gameInstaceMenuOpen = !debugMenu.gameInstaceMenuOpen; });
+
+	//show memory for engine systems
 	executeMap.emplace(L"MEM", []() { debugMenu.memoryMenuOpen = !debugMenu.memoryMenuOpen; });
 
 	//Reload current world
