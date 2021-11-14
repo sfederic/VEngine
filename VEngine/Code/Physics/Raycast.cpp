@@ -121,6 +121,11 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 		}
 	}
 
+	if (nearestDistance > range)
+	{
+		return false;
+	}
+
 	if (ray.hitActor)
 	{
 		ray.hitDistance = nearestDistance;
