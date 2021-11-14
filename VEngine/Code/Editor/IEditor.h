@@ -25,4 +25,5 @@ struct IEditor
 	virtual void RefreshAssetList() = 0;
 	virtual void ClearProperties() = 0;
 	virtual void SelectActorInWorldList() = 0;
+	virtual void SetPlayButtonText(std::string text) = 0;
 };

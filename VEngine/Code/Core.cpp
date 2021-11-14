@@ -11,10 +11,11 @@
 #include "Audio/AudioSystem.h"
 #include "WorldEditor.h"
 #include "Render/SpriteSystem.h"
+#include "Editor/Editor.h"
 
-double ticks;
+double ticks = 0.0;
 double deltaTime = 0.0;
-double deltaAccum;
+double deltaAccum = 0.0;
 
 namespace Core
 {
@@ -126,6 +127,8 @@ void Core::StartGame()
 	world.StartAllActors();
 
 	worldEditor.pickedActor = nullptr;
+
+	editor->SetPlayButtonText("Stop");
 }
 
 void Core::EndGame()
@@ -141,6 +144,8 @@ void Core::EndGame()
 
 	//Clear the properties dock or you'll end up with pointer problems
 	worldEditor.DeselectPickedActor();
+
+	editor->SetPlayButtonText("Play");
 }
 
 void Core::SetGameplayState()

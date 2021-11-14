@@ -13,6 +13,7 @@
 #include "AssetDock.h"
 #include "WorldDock.h"
 #include "SystemDock.h"
+#include "ToolbarDock.h"
 #include "Render/Material.h"
 #include "Serialiser.h"
 #include "Core.h"
@@ -164,4 +165,9 @@ void QtEditor::EnableDarkMode()
 void QtEditor::SelectActorInWorldList()
 {
     mainWindow->worldDock->SelectActorInList();
+}
+
+void QtEditor::SetPlayButtonText(std::string text)
+{
+    mainWindow->toolbarDock->playButton->setText(QString::fromStdString(text));
 }

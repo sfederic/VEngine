@@ -17,6 +17,7 @@ struct QtEditor : IEditor, QObject
 	virtual void RefreshAssetList() override;
 	virtual void ClearProperties() override;
 	virtual void SelectActorInWorldList() override;
+	virtual void SetPlayButtonText(std::string text) override;
 	void SetEditorFont();
 	void EnableDarkMode();
 };

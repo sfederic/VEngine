@@ -122,3 +122,7 @@ void Win32Editor::ClearProperties()
 void Win32Editor::SelectActorInWorldList()
 {
 }
+
+void Win32Editor::SetPlayButtonText(std::string text)
+{
+}
