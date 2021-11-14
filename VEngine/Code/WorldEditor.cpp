@@ -115,6 +115,7 @@ void WorldEditor::DeleteActor()
 			pickedActor = nullptr;
 
 			editor->UpdateWorldList();
+			editor->ClearProperties();
 		}
 	}
 }
