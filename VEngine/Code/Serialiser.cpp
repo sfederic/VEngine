@@ -61,11 +61,6 @@ void Serialiser::Serialise(Properties props)
 			std::string* str = props.GetData<std::string>(name);
 			os << name << "\n" << str->c_str() << "\n";
 		}	
-		else if (props.CheckType<Texture2D>(name))
-		{
-			Texture2D* texture = props.GetData<Texture2D>(name);
-			os << name << "\n" << texture->filename.c_str() << "\n";
-		}
 		else if (props.CheckType<std::vector<Actor*>>(name))
 		{
 			auto actors = props.GetData<std::vector<Actor*>>(name);
@@ -170,13 +165,6 @@ void Deserialiser::Deserialise(Properties props)
 			std::string* str = props.GetData<std::string>(name);
 			str->assign(propString);
 		}		
-		else if (props.CheckType<Texture2D>(name))
-		{
-			char propString[512];
-			is.getline(propString, 512);
-			Texture2D* texture = props.GetData<Texture2D>(name);
-			texture->filename = propString;
-		}
 		else if (props.CheckType<std::vector<Actor*>>(name))
 		{
 			char actorName[512];
