@@ -6,6 +6,7 @@
 #include "DebugMenu.h"
 #include "Render/Renderer.h"
 #include "Asset/AssetSystem.h"
+#include "FileSystem.h"
 
 Console console;
 
@@ -24,6 +25,9 @@ Console::Console()
 	executeMap.emplace(L"STATS", []() { debugMenu.worldStatsMenuOpen = !debugMenu.worldStatsMenuOpen; });
 	executeMap.emplace(L"GAME", []() { debugMenu.gameInstaceMenuOpen = !debugMenu.gameInstaceMenuOpen; });
 	executeMap.emplace(L"MEM", []() { debugMenu.memoryMenuOpen = !debugMenu.memoryMenuOpen; });
+
+	//Reload current world
+	executeMap.emplace(L"RESET", []() { fileSystem.ReloadCurrentWorld(); });
 
 	//Asset Build Commands
 	executeMap.emplace(L"BUILD MESHES", []() { assetSystem.WriteAllMeshDataToMeshAssetFiles(); });
