@@ -19,10 +19,13 @@ ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 	connect(playButton, &QPushButton::clicked, this, &ToolbarDock::StartPlay);
 	hLayout->addWidget(playButton);
 
-	resetWorldButton = new QPushButton("Reset World");
+	resetWorldButton = new QPushButton("Reset");
 	connect(resetWorldButton, &QPushButton::clicked, this, &ToolbarDock::ResetWorldState);
 	hLayout->addWidget(resetWorldButton);
 
+	saveWorldButton = new QPushButton("Save");
+	connect(saveWorldButton, &QPushButton::clicked, this, &ToolbarDock::SaveWorld);
+	hLayout->addWidget(saveWorldButton);
 
 	//TRANSFORMGIZMO SNAP INPUTS
 	//Translation
@@ -73,6 +76,11 @@ void ToolbarDock::StartPlay()
 void ToolbarDock::ResetWorldState()
 {
 	fileSystem.ReloadCurrentWorld();
+}
+
+void ToolbarDock::SaveWorld()
+{
+	fileSystem.WriteAllActorSystems();
 }
 
 void ToolbarDock::SetTranslationSnapValue()
