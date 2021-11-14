@@ -137,11 +137,6 @@ void Core::EndGame()
 
 	audioSystem.DeleteLoadedAudioAndChannels();
 
-	//if (initialStartingWorldFromEditor != world.worldFilename)
-	{
-		fileSystem.LoadWorld(initialStartingWorldFromEditor);
-	}
-
 	activeCamera = &editorCamera;
 
 	//Clear the properties dock or you'll end up with pointer problems
