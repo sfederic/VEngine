@@ -1,5 +1,30 @@
 Player
+1
+FOV
+1.0472
+Far Z
+1000
+Near Z
+0.01
+Position
+1.99998 -0.5 3.27482
+Rotation
+0 -0.999999 0 1.10269e-06
+Scale
+0.499998 0.5 0.499998
+Shader
+DefaultShader.hlsl
+Texture
+test.png
+UID
+4273372237
+UvOffset
+0 0
+UvRotation
 0
+UvScale
+1 1
+next
 AudioActor
 0
 GameEvent
@@ -7,21 +32,210 @@ GameEvent
 BattleGrid
 0
 MeshActor
-1
+10
 Mesh Filename
-cone.fbx
+hollow_barrel.fbx
 Position
--5 -3 -1
+5 -1 -2
 Rotation
-0 0 0 1
+-0 0 -0 1
 Scale
 1 1 1
 Shader
 DefaultShader.hlsl
-Texture2D
-test.png
+Texture
+floor.jpg
 UID
-2047500996
+1285231246
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh Filename
+plane.fbx
+Position
+1 -1 2
+Rotation
+-0.706985 2.66879e-08 2.66971e-08 0.707229
+Scale
+5 5 1
+Shader
+DefaultShader.hlsl
+Texture
+floor.jpg
+UID
+1954516946
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh Filename
+hollow_barrel.fbx
+Position
+3 -1 -2
+Rotation
+-0 0 -0 1
+Scale
+0.5 0.5 0.5
+Shader
+DefaultShader.hlsl
+Texture
+floor.jpg
+UID
+1285231246
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh Filename
+plane.fbx
+Position
+-4 0 -1
+Rotation
+-0 0.707107 -0 0.707107
+Scale
+2 1 1
+Shader
+DefaultShader.hlsl
+Texture
+wall.png
+UID
+1352059038
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh Filename
+plane.fbx
+Position
+-4 0 3
+Rotation
+-0 0.707107 -0 0.707107
+Scale
+2 1 1
+Shader
+DefaultShader.hlsl
+Texture
+wall.png
+UID
+1352059038
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh Filename
+plane.fbx
+Position
+-4 2 1
+Rotation
+-0 0.707107 -0 0.707107
+Scale
+2 1 1
+Shader
+DefaultShader.hlsl
+Texture
+wall.png
+UID
+1352059038
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh Filename
+plane.fbx
+Position
+-4 0 6
+Rotation
+-0 0.707107 -0 0.707107
+Scale
+1 1 1
+Shader
+DefaultShader.hlsl
+Texture
+wall.png
+UID
+1352059038
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh Filename
+cube.fbx
+Position
+-2 -0.5 -2
+Rotation
+-0 0 -0 1
+Scale
+0.5 0.5 0.5
+Shader
+DefaultShader.hlsl
+Texture
+crate.jpg
+UID
+2819191068
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh Filename
+cube.fbx
+Position
+-2 0.5 -2
+Rotation
+-0 0 -0 1
+Scale
+0.5 0.5 0.5
+Shader
+DefaultShader.hlsl
+Texture
+crate.jpg
+UID
+2819191068
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh Filename
+cube.fbx
+Position
+-1 -0.5 -2
+Rotation
+-0 0 -0 1
+Scale
+0.5 0.5 0.5
+Shader
+DefaultShader.hlsl
+Texture
+crate.jpg
+UID
+2819191068
 UvOffset
 0 0
 UvRotation
@@ -30,7 +244,20 @@ UvScale
 1 1
 next
 DirectionalLightActor
-0
+1
+Colour
+1 1 1 1
+LightEnabled
+1
+Position
+-1 3 5
+Rotation
+0.539036 -0.280359 0.196449 0.769575
+Scale
+0.999999 1 0.999991
+UID
+202714208
+next
 EntranceTrigger
 0
 NPC
