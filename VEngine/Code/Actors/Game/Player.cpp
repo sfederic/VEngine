@@ -7,7 +7,7 @@
 #include "Physics/Raycast.h"
 #include "GameUtils.h"
 #include "Editor/Editor.h"
-#include "Actors/NPC.h"
+#include "Actors/Game/NPC.h"
 #include "Components/DialogueComponent.h"
 
 DialogueComponent* dialogueComponent;

@@ -254,7 +254,7 @@
     <ClCompile Include="Code\DebugActors\DebugCone.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Player.cpp">
+    <ClCompile Include="Code\Actors\Game\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\GameUtils.cpp">
@@ -263,7 +263,7 @@
     <ClCompile Include="Code\Editor\PropertyWidgets\TextureDataWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\EntranceTrigger.cpp">
+    <ClCompile Include="Code\Actors\Game\EntranceTrigger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\DebugActors\DebugCamera.cpp">
@@ -275,19 +275,19 @@
     <ClCompile Include="Code\Components\DialogueComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\InteractTrigger.cpp">
+    <ClCompile Include="Code\Actors\Game\InteractTrigger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Editor\DialogueDock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\NPC.cpp">
+    <ClCompile Include="Code\Actors\Game\NPC.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\DialogueStructures.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\DialogueInstance.cpp">
+    <ClCompile Include="Code\Actors\Game\DialogueInstance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Components\EmptyComponent.cpp">
@@ -302,10 +302,10 @@
     <ClCompile Include="Code\Actors\Billboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\BattleGrid.cpp">
+    <ClCompile Include="Code\Actors\Game\BattleGrid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Unit.cpp">
+    <ClCompile Include="Code\Actors\Game\Unit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Audio\AudioBase.cpp">
@@ -320,10 +320,10 @@
     <ClCompile Include="Code\Actors\AudioActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\SavePoint.cpp">
+    <ClCompile Include="Code\Actors\Game\SavePoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\GameEvent.cpp">
+    <ClCompile Include="Code\Actors\Game\GameEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Editor\PropertyWidgets\ActorListWidget.cpp">
@@ -556,7 +556,7 @@
     <ClInclude Include="Code\DebugActors\DebugCone.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Player.h">
+    <ClInclude Include="Code\Actors\Game\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\GameUtils.h">
@@ -565,7 +565,7 @@
     <ClInclude Include="Code\Editor\PropertyWidgets\TextureDataWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\EntranceTrigger.h">
+    <ClInclude Include="Code\Actors\Game\EntranceTrigger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\DebugActors\DebugCamera.h">
@@ -577,19 +577,19 @@
     <ClInclude Include="Code\Components\DialogueComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\InteractTrigger.h">
+    <ClInclude Include="Code\Actors\Game\InteractTrigger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\DialogueDock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\NPC.h">
+    <ClInclude Include="Code\Actors\Game\NPC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\DialogueStructures.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\DialogueInstance.h">
+    <ClInclude Include="Code\Actors\Game\DialogueInstance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Components\EmptyComponent.h">
@@ -607,13 +607,13 @@
     <ClInclude Include="Code\Actors\Billboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\BattleGrid.h">
+    <ClInclude Include="Code\Actors\Game\BattleGrid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\GridNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Unit.h">
+    <ClInclude Include="Code\Actors\Game\Unit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\VMemory.h">
@@ -634,10 +634,10 @@
     <ClInclude Include="Code\System.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\SavePoint.h">
+    <ClInclude Include="Code\Actors\Game\SavePoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\GameEvent.h">
+    <ClInclude Include="Code\Actors\Game\GameEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\PropertyWidgets\ActorListWidget.h">

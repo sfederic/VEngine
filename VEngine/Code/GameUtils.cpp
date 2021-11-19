@@ -1,7 +1,7 @@
 #include "GameUtils.h"
 #include <filesystem>
-#include "Actors/Player.h"
-#include "Actors/BattleGrid.h"
+#include "Actors/Game/Player.h"
+#include "Actors/Game/BattleGrid.h"
 #include "Audio/AudioSystem.h"
 #include "World.h"
 #include "FileSystem.h"

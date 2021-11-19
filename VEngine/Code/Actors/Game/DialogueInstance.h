@@ -1,6 +1,6 @@
 #pragma once
-#include "Actor.h"
-#include "ActorSystem.h"
+#include "../Actor.h"
+#include "../ActorSystem.h"
 
 struct DialogueComponent;
 
