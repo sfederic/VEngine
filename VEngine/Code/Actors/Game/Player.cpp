@@ -8,6 +8,7 @@
 #include "GameUtils.h"
 #include "Editor/Editor.h"
 #include "Actors/Game/NPC.h"
+#include "Actors/Game/Pickup.h"
 #include "Components/DialogueComponent.h"
 
 DialogueComponent* dialogueComponent;
@@ -38,28 +39,39 @@ void Player::Tick(float deltaTime)
 	{
 		GameUtils::PlayAudio("jingle.wav");
 
-		if (inConversation)
+		Ray ray(this);
+		if (Raycast(ray, GetPositionVector(), GetForwardVectorV(), 1.5f))
 		{
-			if (!dialogueComponent->NextLine())
+			//PICKUP CHECK
 			{
-				inConversation = false;
+				auto pickup = dynamic_cast<Pickup*>(ray.hitActor);
+				if (pickup)
+				{
+					heldItem = pickup;
+					pickup->AddToPlayerInventory();
+					return;
+				}
+			}
+
+			//DIALOGUE CHECK
+			if (inConversation)
+			{
+				if (!dialogueComponent->NextLine())
+				{
+					inConversation = false;
+				}
+				else
+				{
+					dialogueComponent->ShowTextAtActor();
+				}
 			}
 			else
-			{ 
-				dialogueComponent->ShowTextAtActor();
-			}
-		}
-		else
-		{
-			Ray ray(this);
-			if (Raycast(ray, GetPositionVector(), GetForwardVectorV(), 1.5f))
 			{
-				NPC* npc = (NPC*)ray.hitActor;
+				NPC* npc = dynamic_cast<NPC*>(ray.hitActor);
 				if (npc)
 				{
 					dialogueComponent = npc->dialogue;
 					inConversation = true;
-
 					dialogueComponent->ShowTextAtActor();
 				}
 			}

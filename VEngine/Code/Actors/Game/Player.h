@@ -5,6 +5,7 @@
 struct MeshComponent;
 struct CameraComponent;
 struct WidgetComponent;
+struct Pickup;
 
 struct Player : Actor
 {
@@ -13,6 +14,8 @@ struct Player : Actor
 	MeshComponent* mesh = nullptr;
 	CameraComponent* camera = nullptr;
 	WidgetComponent* widget;
+
+	Pickup* heldItem = nullptr;
 
 	XMVECTOR nextPos;
 	XMVECTOR nextRot;

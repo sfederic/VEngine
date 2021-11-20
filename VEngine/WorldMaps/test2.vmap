@@ -7,11 +7,11 @@ Far Z
 Near Z
 0.01
 Position
-1.99998 -0.5 3.27482
+3 -0.5 2
 Rotation
-0 -0.999999 0 1.10269e-06
+-0 -0.707105 -0 0.707108
 Scale
-0.499998 0.5 0.499998
+0.499997 0.5 0.499997
 Shader
 DefaultShader.hlsl
 Texture
@@ -268,13 +268,34 @@ PointLightActor
 0
 SpotLightActor
 0
+Unit
+0
+Pickup
+1
+Position
+-2 -0.5 3
+Rotation
+-0 0 -0 1
+Scale
+1 1 1
+Shader
+DefaultShader.hlsl
+Texture
+test.png
+UID
+2788623338
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
 Billboard
 0
 InteractTrigger
 0
 DialogueInstance
-0
-Unit
 0
 ParticleSystem
 0
