@@ -164,6 +164,13 @@ std::vector<Actor*> World::GetAllActorsInWorld()
 	return outActors;
 }
 
+Actor* World::GetActorByUID(UID uid)
+{
+	auto actorIt = actorMap.find(uid);
+	assert(actorIt != actorMap.end());
+	return actorIt->second;
+}
+
 std::vector<Component*> World::GetAllComponentsInWorld()
 {
 	std::vector<Component*> outComponents;
