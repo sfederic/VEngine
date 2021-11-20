@@ -40,5 +40,6 @@ Properties InteractTrigger::GetProps()
 {
 	auto props = Actor::GetProps();
 	props.Add("Interact Text", &interactText);
+	props.Add("Target Actor", &targetActor);
 	return props;
 }

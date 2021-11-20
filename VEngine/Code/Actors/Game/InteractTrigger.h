@@ -14,6 +14,8 @@ struct InteractTrigger : Actor
 	BoxTriggerComponent* trigger = nullptr;
 	Widget* widget = nullptr;
 
+	Actor* targetActor = nullptr;
+
 	std::string interactText;
 
 	InteractTrigger();
