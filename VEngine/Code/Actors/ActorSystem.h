@@ -5,6 +5,7 @@
 #include "ActorSystemCache.h"
 #include "Serialiser.h"
 #include "Components/Component.h"
+#include "Editor/Editor.h"
 
 template <typename T>
 struct ActorSystem : IActorSystem
@@ -46,6 +47,11 @@ struct ActorSystem : IActorSystem
 		actors[index]->name = this->name + std::to_string(index);
 		delete actors.back();
 		actors.pop_back();
+
+		//TODO: just keep an eye on this. Code like this makes me want to seperate editor from game.
+		//It shouldn't be too bad during gameplay though, maybe through an #ifdef here later.
+		editor->UpdateWorldList();
+		editor->ClearProperties();
 	}
 
 	virtual void Tick(float deltaTime) override
