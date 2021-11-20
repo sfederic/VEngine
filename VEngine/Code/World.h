@@ -14,7 +14,8 @@ struct World
 	std::vector<IActorSystem*> activeActorSystems;
 	std::vector<IComponentSystem*> activeComponentSystems;
 
-	std::unordered_map<UID, Actor*> actorMap;
+	std::unordered_map<UID, Actor*> actorUIDMap;
+	std::unordered_map<std::string, Actor*> actorNameMap;
 
 	std::string worldFilename;
 
@@ -35,7 +36,8 @@ struct World
 	Actor* FindActorByName(std::string actorName);
 	Actor* FindComponentOwnerByName(std::string componentName);
 	std::vector<Actor*> GetAllActorsInWorld();
-	Actor* GetActorByUID(UID uid);
+	Actor* GetActor(UID uid);
+	Actor* GetActor(std::string actorName);
 	std::vector<Component*> GetAllComponentsInWorld();
 	void Cleanup();
 };

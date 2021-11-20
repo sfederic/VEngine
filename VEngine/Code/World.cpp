@@ -164,10 +164,17 @@ std::vector<Actor*> World::GetAllActorsInWorld()
 	return outActors;
 }
 
-Actor* World::GetActorByUID(UID uid)
+Actor* World::GetActor(UID uid)
 {
-	auto actorIt = actorMap.find(uid);
-	assert(actorIt != actorMap.end());
+	auto actorIt = actorUIDMap.find(uid);
+	assert(actorIt != actorUIDMap.end());
+	return actorIt->second;
+}
+
+Actor* World::GetActor(std::string actorName)
+{
+	auto actorIt = actorNameMap.find(actorName);
+	assert(actorIt != actorNameMap.end());
 	return actorIt->second;
 }
 
@@ -186,7 +193,8 @@ std::vector<Component*> World::GetAllComponentsInWorld()
 
 void World::Cleanup()
 {
-	actorMap.clear();
+	actorUIDMap.clear();
+	actorNameMap.clear();
 
 	//Cleanup various systems
 	audioSystem.DeleteLoadedAudioAndChannels();
