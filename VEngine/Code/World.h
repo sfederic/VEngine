@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 #include <string>
+#include <unordered_map>
+#include "UID.h"
 
 struct IActorSystem;
 struct IComponentSystem;
@@ -11,6 +13,8 @@ struct World
 {
 	std::vector<IActorSystem*> activeActorSystems;
 	std::vector<IComponentSystem*> activeComponentSystems;
+
+	std::unordered_map<UID, Actor*> actorMap;
 
 	std::string worldFilename;
 

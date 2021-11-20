@@ -179,6 +179,8 @@ std::vector<Component*> World::GetAllComponentsInWorld()
 
 void World::Cleanup()
 {
+	actorMap.clear();
+
 	//Cleanup various systems
 	audioSystem.DeleteLoadedAudioAndChannels();
 	textureSystem.Cleanup();
