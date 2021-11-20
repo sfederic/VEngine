@@ -6,6 +6,7 @@
 #include "Serialiser.h"
 #include "Components/Component.h"
 #include "Editor/Editor.h"
+#include "World.h"
 
 template <typename T>
 struct ActorSystem : IActorSystem
@@ -32,6 +33,8 @@ struct ActorSystem : IActorSystem
 		actor->SetTransform(transform);
 		actor->name = this->name + std::to_string(actor->index);
 
+		world.actorMap.emplace(actor->uid, actor);
+
 		return actor;
 	}
 
@@ -45,6 +48,9 @@ struct ActorSystem : IActorSystem
 		std::swap(actors[index], actors.back());
 		actors[index]->index = index;
 		actors[index]->name = this->name + std::to_string(index);
+
+		world.actorMap.erase(actors.back()->uid);
+
 		delete actors.back();
 		actors.pop_back();
 
