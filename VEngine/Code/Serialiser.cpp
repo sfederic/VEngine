@@ -26,6 +26,10 @@ Serialiser::~Serialiser()
 
 void Serialiser::Serialise(Properties props)
 {
+	//TODO: If the program ever crashes while serialising data, the save vmap file is still created up 
+	//until the point of the crash, leaving you with partially saved maps. Find a way to roll back saves
+	//with either a temp file or something std::ofstream can do.
+
 	for (auto& prop : props.propMap)
 	{
 		const std::string& name = prop.first;
