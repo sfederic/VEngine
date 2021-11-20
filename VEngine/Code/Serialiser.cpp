@@ -239,7 +239,7 @@ void Deserialiser::Deserialise(Properties props)
 			Actor** actor = props.GetData<Actor*>(name);
 			std::string actorName;
 			is >> actorName;
-			Actor* foundActor = world.GetActor(actorName);
+			Actor* foundActor = world.GetActorByName(actorName);
 			actor[0] = foundActor;
 		}
 	}

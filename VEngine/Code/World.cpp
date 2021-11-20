@@ -164,14 +164,14 @@ std::vector<Actor*> World::GetAllActorsInWorld()
 	return outActors;
 }
 
-Actor* World::GetActor(UID uid)
+Actor* World::GetActorByUID(UID uid)
 {
 	auto actorIt = actorUIDMap.find(uid);
 	assert(actorIt != actorUIDMap.end());
 	return actorIt->second;
 }
 
-Actor* World::GetActor(std::string actorName)
+Actor* World::GetActorByName(std::string actorName)
 {
 	auto actorIt = actorNameMap.find(actorName);
 	if (actorIt == actorNameMap.end())

@@ -36,8 +36,8 @@ struct World
 	Actor* FindActorByName(std::string actorName);
 	Actor* FindComponentOwnerByName(std::string componentName);
 	std::vector<Actor*> GetAllActorsInWorld();
-	Actor* GetActor(UID uid);
-	Actor* GetActor(std::string actorName);
+	Actor* GetActorByUID(UID uid);
+	Actor* GetActorByName(std::string actorName);
 	std::vector<Component*> GetAllComponentsInWorld();
 	void Cleanup();
 };

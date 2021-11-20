@@ -35,7 +35,7 @@ void ActorListWidget::SetValue(QListWidgetItem* item)
 	if (actorNameListWidget->count() == 0) return;
 
 	std::string actorName = item->text().toStdString();
-	Actor* foundActor = world.GetActor(actorName);
+	Actor* foundActor = world.GetActorByName(actorName);
 	if (foundActor)
 	{
 		for (auto actor : *value)
