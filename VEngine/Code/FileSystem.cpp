@@ -10,7 +10,7 @@
 #include "Core.h"
 #include "GameUtils.h"
 #include "Camera.h"
-#include "Actors/Player.h"
+#include "Actors/Game/Player.h"
 
 FileSystem fileSystem;
 

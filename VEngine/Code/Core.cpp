@@ -4,7 +4,7 @@
 #include "Debug.h"
 #include "GameUtils.h"
 #include "Camera.h"
-#include "Actors/Player.h"
+#include "Actors/Game/Player.h"
 #include "World.h"
 #include "UI/UISystem.h"
 #include "FileSystem.h"
