@@ -33,7 +33,8 @@ struct ActorSystem : IActorSystem
 		actor->SetTransform(transform);
 		actor->name = this->name + std::to_string(actor->index);
 
-		world.actorMap.emplace(actor->uid, actor);
+		world.actorUIDMap.emplace(actor->uid, actor);
+		world.actorNameMap.emplace(actor->name, actor);
 
 		return actor;
 	}
@@ -49,7 +50,8 @@ struct ActorSystem : IActorSystem
 		actors[index]->index = index;
 		actors[index]->name = this->name + std::to_string(index);
 
-		world.actorMap.erase(actors.back()->uid);
+		world.actorUIDMap.erase(actors.back()->uid);
+		world.actorNameMap.erase(actors.back()->name);
 
 		delete actors.back();
 		actors.pop_back();
