@@ -3,6 +3,7 @@
 #include "GameUtils.h"
 #include "UI/Widget.h"
 #include "VString.h"
+#include "Input.h"
 
 InteractTrigger::InteractTrigger()
 {
@@ -24,7 +25,10 @@ void InteractTrigger::Tick(float deltaTime)
 {
 	if (trigger->ContainsTarget())
 	{
-		widget->AddToViewport();
+		if (Input::GetKeyDown(Keys::Down))
+		{
+			widget->AddToViewport();
+		}
 	}
 	else
 	{
