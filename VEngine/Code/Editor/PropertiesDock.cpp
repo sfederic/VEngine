@@ -149,7 +149,14 @@ void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRo
             auto textureDataWidget = new TextureDataWidget(prop.second);
             actorPropsGridLayout->addWidget(textureDataWidget, currentGridRow, propertyDataColumn);
             propertyWidgetsToUpdate.push_back((IPropertyWidget*)textureDataWidget);
-        }     
+        }
+        else if (props.CheckType<Actor*>(name))
+        {
+            //For now just keep single actor assignments in-editor as names of the actor.
+            auto actorWidget = new StringWidget(prop.second);
+            actorPropsGridLayout->addWidget(actorWidget, currentGridRow, propertyDataColumn);
+            propertyWidgetsToUpdate.push_back((IPropertyWidget*)actorWidget);
+        }
         else if (props.CheckType<std::vector<Actor*>>(name))
         {
             auto actorListWidget = new ActorListWidget(prop.second);
