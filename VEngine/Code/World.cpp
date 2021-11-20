@@ -174,7 +174,10 @@ Actor* World::GetActor(UID uid)
 Actor* World::GetActor(std::string actorName)
 {
 	auto actorIt = actorNameMap.find(actorName);
-	assert(actorIt != actorNameMap.end());
+	if (actorIt == actorNameMap.end())
+	{
+		return nullptr;
+	}
 	return actorIt->second;
 }
 
