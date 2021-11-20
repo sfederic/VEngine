@@ -38,6 +38,7 @@ void UISystem::Init(void* swapchain)
 		DWRITE_FONT_STRETCH_NORMAL, 24.f, L"en-us", &textFormat));
 
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.9f, 0.9f, 0.9f, 1.0f), &brushText));
+	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.1f, 1.0f, 0.4f, 1.0f), &debugBrushText));
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.5f, 0.5f, 0.5f, 1.0f), &brushShapes));
 }
 
@@ -95,6 +96,7 @@ void UISystem::Cleanup()
 	writeFactory->Release();
 
 	brushText->Release();
+	debugBrushText->Release();
 	brushShapes->Release();
 
 	textFormat->Release();

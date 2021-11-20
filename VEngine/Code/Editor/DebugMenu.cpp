@@ -315,7 +315,7 @@ void DebugMenu::RenderNotifications(float deltaTime)
 
 			float notificationOffsetY = 20.f * i;
 			uiSystem.d2dRenderTarget->DrawTextA(debugNotifications[i].text.c_str(), debugNotifications[i].text.size(), uiSystem.textFormat,
-				{ 0.f, notificationOffsetY, 1000.f, 1000.f }, uiSystem.brushText);
+				{ 0.f, notificationOffsetY, 1000.f, 1000.f }, uiSystem.debugBrushText);
 		}
 		else
 		{

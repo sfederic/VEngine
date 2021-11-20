@@ -92,11 +92,11 @@ void Console::Tick()
 		float width = (float)renderer.GetViewportWidth();
 		float height = (float)renderer.GetViewportHeight();
 
-		uiSystem.d2dRenderTarget->DrawRectangle({ 0, height - 50.f, width, height }, uiSystem.brushText);
+		uiSystem.d2dRenderTarget->DrawRectangle({ 0, height - 50.f, width, height }, uiSystem.debugBrushText);
 
 		uiSystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
 		uiSystem.d2dRenderTarget->DrawText(consoleString.c_str(), consoleString.size(), uiSystem.textFormat,
-			{ 0, height - 50.f, width, height }, uiSystem.brushText);
+			{ 0, height - 50.f, width, height }, uiSystem.debugBrushText);
 	}
 }
 

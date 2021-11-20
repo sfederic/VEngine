@@ -15,8 +15,12 @@ struct UISystem
 	ID2D1Factory* d2dFactory = nullptr;
 	ID2D1RenderTarget* d2dRenderTarget = nullptr;
 	IDWriteFactory1* writeFactory = nullptr;
+
+	//D2D11 Brushes
 	ID2D1SolidColorBrush* brushText = nullptr;
+	ID2D1SolidColorBrush* debugBrushText = nullptr;
 	ID2D1SolidColorBrush* brushShapes = nullptr;
+
 	IDWriteTextFormat* textFormat = nullptr;
 
 	void Init(void* swapchain);
