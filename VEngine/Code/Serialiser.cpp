@@ -91,6 +91,15 @@ void Serialiser::Serialise(Properties props)
 			os << name << "\n";
 			os << *uid << "\n";
 		}
+		else if (props.CheckType<Actor*>(name))
+		{
+			Actor** actor = props.GetData<Actor*>(name);
+			if (actor[0])
+			{
+				os << name << "\n";
+				os << actor[0]->name << "\n";
+			}
+		}
 	}
 
 	os << "next\n"; //"next" moves the forloop onto the next 'Object'
@@ -220,6 +229,14 @@ void Deserialiser::Deserialise(Properties props)
 		{
 			UID* uid = props.GetData<UID>(name);
 			is >> *uid;
+		}
+		else if (props.CheckType<Actor*>(name))
+		{
+			Actor** actor = props.GetData<Actor*>(name);
+			std::string actorName;
+			is >> actorName;
+			Actor* foundActor = world.GetActor(actorName);
+			actor[0] = foundActor;
 		}
 	}
 }
