@@ -103,7 +103,7 @@ struct Properties
 			std::string* dst = (std::string*)prop.data;
 			std::string* src = (std::string*)propToCopy.data;
 
-			dst->assign(src->c_str());
+			*dst = *src;
 		}
 		else
 		{
