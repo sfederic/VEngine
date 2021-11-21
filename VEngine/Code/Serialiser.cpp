@@ -208,7 +208,7 @@ void Deserialiser::Deserialise(Properties props)
 			{
 				is.getline(actorName, 512);
 				std::string actorNameStr(actorName);
-				Actor* foundActor = world.FindActorByName(actorNameStr);
+				Actor* foundActor = world.GetActorByName(actorNameStr);
 				actors->push_back(foundActor);
 			}
 		}
