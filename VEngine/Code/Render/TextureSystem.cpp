@@ -39,7 +39,7 @@ Texture2D* TextureSystem::FindTexture2D(std::string textureFilename)
 
 void TextureSystem::CreateAllTextures()
 {
-	for (auto textureIt : texture2DMap)
+	for (auto& textureIt : texture2DMap)
 	{
 		Texture2D* texture = textureIt.second;
 		texture = RenderUtils::CreateTexture(textureIt.first);
@@ -50,7 +50,7 @@ void TextureSystem::CreateAllTextures()
 
 void TextureSystem::Cleanup()
 {
-	for (auto textureIt : texture2DMap)
+	for (auto& textureIt : texture2DMap)
 	{
 		Texture2D* texture = textureIt.second;
 		delete texture;

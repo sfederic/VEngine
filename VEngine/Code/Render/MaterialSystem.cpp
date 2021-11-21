@@ -33,7 +33,7 @@ Material* MaterialSystem::FindMaterial(UID uid)
 
 void MaterialSystem::CreateAllMaterials()
 {
-	for (auto materialIt : materials)
+	for (auto& materialIt : materials)
 	{
 		materialIt.second->Create();
 	}
@@ -43,7 +43,7 @@ void MaterialSystem::CreateAllMaterials()
 
 void MaterialSystem::Cleanup()
 {
-	for (auto materialIt : materials)
+	for (auto& materialIt : materials)
 	{
 		delete materialIt.second;
 	}
