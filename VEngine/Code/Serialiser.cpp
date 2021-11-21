@@ -11,8 +11,8 @@ using namespace DirectX;
 
 Serialiser::Serialiser(const std::string filename, const OpenMode mode)
 {
-	os.open(filename.c_str(), (std::ios_base::openmode)mode);
-	if (os.fail())
+	ofs.open(filename.c_str(), (std::ios_base::openmode)mode);
+	if (ofs.fail())
 	{
 		throw;
 	}
@@ -20,93 +20,91 @@ Serialiser::Serialiser(const std::string filename, const OpenMode mode)
 
 Serialiser::~Serialiser()
 {
-	os.flush();
-	os.close();
+	ofs << ss.str();
+
+	ofs.flush();
+	ofs.close();
 }
 
 void Serialiser::Serialise(Properties props)
 {
-	//TODO: If the program ever crashes while serialising data, the save vmap file is still created up 
-	//until the point of the crash, leaving you with partially saved maps. Find a way to roll back saves
-	//with either a temp file or something std::ofstream can do.
-
 	for (auto& prop : props.propMap)
 	{
 		const std::string& name = prop.first;
 
 		if (props.CheckType<float>(name))
 		{
-			os << name << "\n" << *props.GetData<float>(name) << "\n";
+			ss << name << "\n" << *props.GetData<float>(name) << "\n";
 		}
 		else if (props.CheckType<XMFLOAT2>(name))
 		{
 			XMFLOAT2* value = props.GetData<XMFLOAT2>(name);
-			os << name << "\n" << value->x << " " << value->y << "\n";
+			ss << name << "\n" << value->x << " " << value->y << "\n";
 		}		
 		else if (props.CheckType<XMFLOAT3>(name))
 		{
 			XMFLOAT3* value = props.GetData<XMFLOAT3>(name);
-			os << name << "\n" << value->x << " " << value->y << " " << value->z << "\n";
+			ss << name << "\n" << value->x << " " << value->y << " " << value->z << "\n";
 		}
 		else if (props.CheckType<XMFLOAT4>(name))
 		{
 			XMFLOAT4* value = props.GetData<XMFLOAT4>(name);
-			os << name << "\n" << value->x << " " << value->y << " " << value->z << " " << value->w << "\n";
+			ss << name << "\n" << value->x << " " << value->y << " " << value->z << " " << value->w << "\n";
 		}
 		else if (props.CheckType<bool>(name))
 		{
-			os << name << "\n" << *props.GetData<bool>(name) << "\n";
+			ss << name << "\n" << *props.GetData<bool>(name) << "\n";
 		}
 		else if (props.CheckType<int>(name))
 		{
-			os << name << "\n" << *props.GetData<int>(name) << "\n";
+			ss << name << "\n" << *props.GetData<int>(name) << "\n";
 		}
 		else if (props.CheckType<std::string>(name))
 		{
 			std::string* str = props.GetData<std::string>(name);
-			os << name << "\n" << str->c_str() << "\n";
+			ss << name << "\n" << str->c_str() << "\n";
 		}	
 		else if (props.CheckType<TextureData>(name))
 		{
 			TextureData* textureData = props.GetData<TextureData>(name);
-			os << name << "\n" << textureData->filename << "\n";
+			ss << name << "\n" << textureData->filename << "\n";
 		}
 		else if (props.CheckType<std::vector<Actor*>>(name))
 		{
 			auto actors = props.GetData<std::vector<Actor*>>(name);
-			os << name << "\n";
-			os << actors->size() << "\n";
+			ss << name << "\n";
+			ss << actors->size() << "\n";
 			for (auto actor : *actors)
 			{
-				os << actor->name << "\n";
+				ss << actor->name << "\n";
 			}
 		}
 		else if (props.CheckType<Transform>(name))
 		{
 			Transform* transform = props.GetData<Transform>(name);
-			os << name << "\n";
-			os << transform->position.x << " " << transform->position.y << " " << transform->position.z << " ";
-			os << transform->scale.x << " " << transform->scale.y << " " << transform->scale.z << " ";
-			os << transform->rotation.x << " " << transform->rotation.y << " " << transform->rotation.z << " " << transform->rotation.w << "\n";
+			ss << name << "\n";
+			ss << transform->position.x << " " << transform->position.y << " " << transform->position.z << " ";
+			ss << transform->scale.x << " " << transform->scale.y << " " << transform->scale.z << " ";
+			ss << transform->rotation.x << " " << transform->rotation.y << " " << transform->rotation.z << " " << transform->rotation.w << "\n";
 		}
 		else if (props.CheckType<UID>(name))
 		{
 			UID* uid = props.GetData<UID>(name);
-			os << name << "\n";
-			os << *uid << "\n";
+			ss << name << "\n";
+			ss << *uid << "\n";
 		}
 		else if (props.CheckType<Actor*>(name))
 		{
 			Actor** actor = props.GetData<Actor*>(name);
 			if (actor[0])
 			{
-				os << name << "\n";
-				os << actor[0]->name << "\n";
+				ss << name << "\n";
+				ss << actor[0]->name << "\n";
 			}
 		}
 	}
 
-	os << "next\n"; //"next" moves the forloop onto the next 'Object'
+	ss << "next\n"; //"next" moves the forloop onto the next 'Object'
 }
 
 Deserialiser::Deserialiser(const std::string filename, const OpenMode mode)

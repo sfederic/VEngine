@@ -1,6 +1,7 @@
 #pragma once
 #include <fstream>
 #include <string>
+#include <sstream>
 
 struct Properties;
 
@@ -13,7 +14,11 @@ enum class OpenMode
 
 struct Serialiser
 {
-	std::ofstream os;
+	std::ofstream ofs;
+
+	//Serialiser uses a stringstream as a temp buffer in memory before writing out to file with std::ofstream.
+	//This way if there's a crash while serialising, partial save files won't be written out.
+	std::stringstream ss;
 
 	Serialiser(const std::string filename, const OpenMode mode);
 	~Serialiser();
@@ -22,7 +27,7 @@ struct Serialiser
 	template <typename T>
 	void WriteLine(T arg)
 	{
-		os << arg << "\n";
+		ss << arg << "\n";
 	}
 };
 
