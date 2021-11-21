@@ -14,7 +14,6 @@ struct MeshComponent : SpatialComponent
 	COMPONENT_SYSTEM(MeshComponent)
 
 	std::string meshFilename;
-	std::string textureFilename;
 
 	Material* material = nullptr;
 	MeshDataProxy* data = nullptr;

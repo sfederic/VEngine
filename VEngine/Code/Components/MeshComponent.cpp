@@ -12,12 +12,11 @@ MeshComponent::MeshComponent(const std::string filename_,
 	const std::string shaderFilename_)
 {
 	meshFilename = filename_;
-	textureFilename = textureFilename_;
 
 	data = new MeshDataProxy();
 	pso = new PipelineStateObject();
 
-	material = new Material(textureFilename, shaderFilename_);
+	material = new Material(textureFilename_, shaderFilename_);
 }
 
 void MeshComponent::Tick(float deltaTime)
@@ -26,6 +25,9 @@ void MeshComponent::Tick(float deltaTime)
 
 void MeshComponent::Create()
 {
+	//Material's create needs to be called here to deal with serialisation
+	material->Create();
+
 	//Import mesh (set up bounding box in here too so you don't need to re-create bounds)
 	fbxImporter.Import(meshFilename.c_str(), data);
 
@@ -59,6 +61,7 @@ void MeshComponent::Create()
 Properties MeshComponent::GetProps()
 {
 	Properties props("MeshComponent");
+	props.Add("Mesh Filename", &meshFilename);
 	props.Merge(material->GetProps());
 	return props;
 }
