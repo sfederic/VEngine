@@ -9,17 +9,22 @@
 
 using namespace DirectX;
 
-Serialiser::Serialiser(const std::string filename, const OpenMode mode)
+Serialiser::Serialiser(const std::string filename_, const OpenMode mode_) :
+	filename(filename_), mode(mode_)
 {
+}
+
+Serialiser::~Serialiser()
+{
+	//A bit counter-intuitive to put file opening in destructor, but otherwise the entire file
+	//is overwritten from the start, meaning you miss out on the safety stringstream is
+	//lending as a temp buffer during crashes.
 	ofs.open(filename.c_str(), (std::ios_base::openmode)mode);
 	if (ofs.fail())
 	{
 		throw;
 	}
-}
 
-Serialiser::~Serialiser()
-{
 	ofs << ss.str();
 
 	ofs.flush();
