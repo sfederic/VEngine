@@ -2,28 +2,23 @@
 #include "Components/MeshComponent.h"
 #include "Render/Material.h"
 
-MeshActor::MeshActor(std::string meshFilename_)
+MeshActor::MeshActor()
 {
-	meshFilename = meshFilename_;
-
 	if (!spawnMeshFilename.empty())
 	{
-		meshFilename = spawnMeshFilename;
+		mesh = MeshComponent::system.Add(this, MeshComponent(spawnMeshFilename.c_str(), "test.png"));
+		rootComponent = mesh;
 	}
-
-	mesh = MeshComponent::system.Add(this, MeshComponent(meshFilename.c_str(), "test.png"));
-	rootComponent = mesh;
-}
-
-void MeshActor::Create()
-{
-	mesh->meshFilename = meshFilename;
+	else
+	{
+		mesh = MeshComponent::system.Add(this, MeshComponent("cube.fbx", "test.png"));
+		rootComponent = mesh;
+	}
 }
 
 Properties MeshActor::GetProps()
 {
 	Properties props = Actor::GetProps();
 	props.title = name;
-	props.Add("Mesh Filename", &meshFilename);
 	return props;
 }

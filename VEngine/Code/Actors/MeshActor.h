@@ -11,11 +11,8 @@ struct MeshActor : Actor
 
 	MeshComponent* mesh = nullptr;
 
-	std::string meshFilename;
-
 	inline static std::string spawnMeshFilename;
 
-	MeshActor(std::string meshFilename_ = "");
-	virtual void Create();
+	MeshActor();
 	virtual Properties GetProps() override;
 };
