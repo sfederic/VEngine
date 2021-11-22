@@ -48,8 +48,6 @@ void Player::Tick(float deltaTime)
 
 	if (Input::GetKeyUp(Keys::Down))
 	{
-		GameUtils::PlayAudio("jingle.wav");
-
 		Ray ray(this);
 		if (Raycast(ray, GetPositionVector(), GetForwardVectorV(), 1.5f))
 		{
@@ -89,7 +87,21 @@ void Player::Tick(float deltaTime)
 		}
 	}
 
+	if (!inConversation)
+	{
+		MovementInput(deltaTime);
+		RotationInput(deltaTime);
+	}
+}
 
+Properties Player::GetProps()
+{
+    auto props = Actor::GetProps();
+	return props;
+}
+
+void Player::MovementInput(float deltaTime)
+{
 	if (XMVector4Equal(GetPositionVector(), nextPos) && XMQuaternionEqual(GetRotationVector(), nextRot))
 	{
 		XMVECTOR previousPos = nextPos;
@@ -97,7 +109,7 @@ void Player::Tick(float deltaTime)
 		if (Input::GetAsyncKey(Keys::W))
 		{
 			nextPos = GetPositionVector() + GetForwardVectorV();
-		}		
+		}
 		if (Input::GetAsyncKey(Keys::S))
 		{
 			nextPos = GetPositionVector() + -GetForwardVectorV();
@@ -108,7 +120,7 @@ void Player::Tick(float deltaTime)
 		}
 		if (Input::GetAsyncKey(Keys::D))
 		{
-			nextPos =  GetPositionVector() + GetRightVectorV();
+			nextPos = GetPositionVector() + GetRightVectorV();
 		}
 
 		if (!XMVector4Equal(previousPos, nextPos))
@@ -121,7 +133,10 @@ void Player::Tick(float deltaTime)
 			}
 		}
 	}
+}
 
+void Player::RotationInput(float deltaTime)
+{
 	const float rotSpeed = 5.0f;
 	SetRotation(VMath::QuatConstantLerp(GetRotationVector(), nextRot, deltaTime, rotSpeed));
 
@@ -131,16 +146,11 @@ void Player::Tick(float deltaTime)
 		{
 			const float angle = XMConvertToRadians(90.f);
 			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::XMVectorUp(), angle));
-		}		
+		}
 		if (Input::GetKeyUp(Keys::Left))
 		{
 			const float angle = XMConvertToRadians(-90.f);
 			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::XMVectorUp(), angle));
 		}
 	}
-}
-
-Properties Player::GetProps()
-{
-    return Actor::GetProps();
 }
