@@ -65,6 +65,9 @@ struct Actor
 	//This shouldn't be called too often, only when ComponentSystem::Init() can't be called
 	void CreateAllComponents();
 
+	//Set Actor and all components as active/inactive
+	void SetActive(bool newActive);
+
 	template <typename T>
 	std::vector<T*> GetComponentsOfType()
 	{

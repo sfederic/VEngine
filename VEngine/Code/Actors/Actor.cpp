@@ -223,3 +223,13 @@ void Actor::CreateAllComponents()
 		component->Create();
 	}
 }
+
+void Actor::SetActive(bool newActiveValue)
+{
+	active = newActiveValue;
+
+	for (auto component : components)
+	{
+		component->active = newActiveValue;
+	}
+}
