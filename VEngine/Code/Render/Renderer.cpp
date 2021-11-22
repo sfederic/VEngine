@@ -398,6 +398,8 @@ void Renderer::RenderMeshComponents()
 
 	for (auto mesh : MeshComponent::system.components)
 	{
+		if (!mesh->active) continue;
+
 		SetRenderPipelineStates(mesh);
 
 		//Set matrices
@@ -441,6 +443,8 @@ void Renderer::RenderInstanceMeshComponents()
 
 	for (InstanceMeshComponent* instanceMesh : InstanceMeshComponent::system.components)
 	{
+		if (!instanceMesh->active) continue;
+
 		SetRenderPipelineStates(instanceMesh);
 
 		//update texture matrix
