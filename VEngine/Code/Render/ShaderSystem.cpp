@@ -1,9 +1,9 @@
 #include "ShaderSystem.h"
-#include "Editor/Editor.h"
 #include "Debug.h"
 #include "Renderer.h"
 #include "VString.h"
 #include "Input.h"
+#include "Editor/DebugMenu.h"
 
 ShaderSystem shaderSystem;
 
@@ -126,7 +126,7 @@ void ShaderSystem::InitHotLoading()
     hotreloadHandle = FindFirstChangeNotificationA("Code/Render/Shaders", false, FILE_NOTIFY_CHANGE_LAST_WRITE);
     if (hotreloadHandle == INVALID_HANDLE_VALUE)
     {
-        editor->Log(L"Shader hot reload init failed");
+        throw;
     }
 }
 
@@ -151,13 +151,13 @@ void ShaderSystem::HotReloadShaders()
     bool nextChange = FindNextChangeNotification(hotreloadHandle);
     if (nextChange)
     {
-        editor->Log(L"Shader reload start...\n");
+        debugMenu.AddNotification(L"Shader reload start...");
 
         CleanUpShaders();
         CompileAllShadersFromFile();
         CreateAllShaders();
 
-        editor->Log(L"Shader reload complete\n");
+        debugMenu.AddNotification(L"Shader reload complete");
     }
 
     FindCloseChangeNotification(hotreloadHandle);
