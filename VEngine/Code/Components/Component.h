@@ -12,6 +12,8 @@ struct Component
 	std::string name;
 	int index = -1;
 
+	bool active = true;
+
 	virtual void Tick(float deltaTime) = 0;
 	virtual void Start() {}
 	virtual void Create() = 0;
