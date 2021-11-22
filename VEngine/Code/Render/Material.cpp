@@ -55,6 +55,7 @@ Properties Material::GetProps()
 	Properties props("Material");
 	props.Add("Texture", &textureData).change = ReassignTexture;
 	props.Add("Shader", &shaderFilename);
+	props.Add("Rast State", &rastStateName);
 	props.Add("UvOffset", &shaderData.uvOffset);
 	props.Add("UvScale", &shaderData.uvScale);
 	props.Add("UvRotation", &shaderData.uvRotation);
