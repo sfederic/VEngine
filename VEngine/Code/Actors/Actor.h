@@ -65,7 +65,7 @@ struct Actor
 	//This shouldn't be called too often, only when ComponentSystem::Init() can't be called.
 	void CreateAllComponents();
 
-	//Set Actor and all components as active/inactive.
+	//Set Actor and all components as active/inactive. Active state sets actor components as equivalent.
 	void SetActive(bool newActive);
 
 	//Set Actor and components active field as opposite of what it currently is.

@@ -232,6 +232,11 @@ void Actor::SetActive(bool newActiveValue)
 	{
 		component->active = newActiveValue;
 	}
+
+	for (auto child : children)
+	{
+		child->SetActive(newActiveValue);
+	}
 }
 
 void Actor::ToggleActive()
@@ -240,6 +245,11 @@ void Actor::ToggleActive()
 
 	for (auto component : components)
 	{
-		component->active = !active;
+		component->active = active;
+	}
+
+	for (auto child : children)
+	{
+		child->SetActive(active);
 	}
 }
