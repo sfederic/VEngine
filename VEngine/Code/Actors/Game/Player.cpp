@@ -40,7 +40,10 @@ void Player::Tick(float deltaTime)
 	if (Input::GetKeyUp(Keys::B))
 	{
 		auto battleGrid = GameUtils::GetBattleGrid();
-		battleGrid->ToggleActive();
+		if (battleGrid)
+		{
+			battleGrid->ToggleActive();
+		}
 	}
 
 	if (Input::GetKeyUp(Keys::Down))
