@@ -33,9 +33,6 @@ void Player::Start()
 
 void Player::Tick(float deltaTime)
 {
-	const float moveSpeed = 5.5f;
-	SetPosition(VMath::VectorConstantLerp(GetPositionVector(), nextPos, deltaTime, moveSpeed));
-
 	//toggle battlegrid visibility
 	if (Input::GetKeyUp(Keys::B))
 	{
@@ -102,6 +99,9 @@ Properties Player::GetProps()
 
 void Player::MovementInput(float deltaTime)
 {
+	const float moveSpeed = 5.5f;
+	SetPosition(VMath::VectorConstantLerp(GetPositionVector(), nextPos, deltaTime, moveSpeed));
+
 	if (XMVector4Equal(GetPositionVector(), nextPos) && XMQuaternionEqual(GetRotationVector(), nextRot))
 	{
 		XMVECTOR previousPos = nextPos;
