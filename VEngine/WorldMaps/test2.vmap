@@ -9,9 +9,9 @@ cube.fbx
 Near Z
 0.01
 Position
-2 0.751 0
+2.54082 0.5 2
 Rotation
--0.000211432 0.707108 -0.000211433 0.707105
+0 0.707107 0 0.707107
 Scale
 0.499997 0.499999 0.5
 Shader
@@ -32,32 +32,7 @@ AudioActor
 GameEvent
 0
 BattleGrid
-1
-Mesh Filename
-node.fbx
-Position
-0 0 0
-Rotation
-0 0 0 1
-Scale
-1 1 1
-Shader
-InstanceShader.hlsl
-Size X
-9
-Size Y
-9
-Texture
-test.png
-UID
-3799905537
-UvOffset
-0 0
-UvRotation
 0
-UvScale
-1 1
-next
 MeshActor
 11
 Mesh Filename
@@ -214,7 +189,7 @@ Position
 Rotation
 -0 0 -0 1
 Scale
-0.5 0.5 0.5
+0.75 0.5 0.5
 Shader
 DefaultShader.hlsl
 Texture
@@ -231,7 +206,7 @@ next
 Mesh Filename
 cube.fbx
 Position
-3 0.5 9
+5 0.5 1
 Rotation
 -0 0 -0 1
 Scale
@@ -309,7 +284,30 @@ next
 EntranceTrigger
 0
 NPC
+1
+File
+testdiag
+Mesh Filename
+cube.fbx
+Position
+6 0.5 2
+Rotation
+-0 0 -0 1
+Scale
+0.5 0.5 0.5
+Shader
+DefaultShader.hlsl
+Texture
+test.png
+UID
+277479395
+UvOffset
+0 0
+UvRotation
 0
+UvScale
+1 1
+next
 SavePoint
 0
 PointLightActor
