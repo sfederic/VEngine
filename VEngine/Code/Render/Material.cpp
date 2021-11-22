@@ -50,12 +50,24 @@ static void ReassignTexture(void* data)
 	}
 }
 
+static void ReassignRastState(void* data)
+{
+	auto rastName = (std::string*)data;
+	RastState* foundRastState = renderer.rastStateMap[*rastName];
+
+	auto meshes = worldEditor.pickedActor->GetComponentsOfType<MeshComponent>();
+	for (auto mesh : meshes)
+	{
+		mesh->material->rastState = foundRastState;
+	}
+}
+
 Properties Material::GetProps()
 {
 	Properties props("Material");
 	props.Add("Texture", &textureData).change = ReassignTexture;
 	props.Add("Shader", &shaderFilename);
-	props.Add("Rast State", &rastStateName);
+	props.Add("Rast State", &rastStateName).change = ReassignRastState;
 	props.Add("UvOffset", &shaderData.uvOffset);
 	props.Add("UvScale", &shaderData.uvScale);
 	props.Add("UvRotation", &shaderData.uvRotation);
