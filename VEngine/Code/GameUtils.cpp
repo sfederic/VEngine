@@ -10,7 +10,7 @@ namespace GameUtils
 {
 	Player* GetPlayer()
 	{
-		if (Player::system.actors.size() > 0)
+		if (!Player::system.actors.empty())
 		{
 			return Player::system.actors[0];
 		}
@@ -20,7 +20,12 @@ namespace GameUtils
 
 	BattleGrid* GetBattleGrid()
 	{
-		return BattleGrid::system.actors[0];
+		if (!BattleGrid::system.actors.empty())
+		{
+			return BattleGrid::system.actors[0];
+		}
+
+		return nullptr;
 	}
 
 	void PlayAudio(const std::string audioFilename)
