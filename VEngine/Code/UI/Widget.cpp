@@ -8,7 +8,7 @@
 
 void Widget::Tick(float deltaTime)
 {
-	//Just for testing
+	//For NPC dialogue testing (so far I'm just using the base widget for dialogue)
 	MapToScreenSpace();
 }
 
@@ -39,7 +39,8 @@ void Widget::MapToScreenSpace()
 	int sx = ((f1 * 0.5f) + 0.5) * renderer.viewport.Width;
 	int sy = ((f2 * -0.5f) + 0.5) * renderer.viewport.Height;
 
-	Text(displayText, { (float)sx, (float)sy, (float)sx + 150, (float)sy + 150 });
+	Image("speech_bubble.png", (float)sx - 50.f, (float)sy - 50.f, 200.f, 200.f);
+	Text(displayText, { (float)sx, (float)sy, (float)sx + 150.f, (float)sy + 150.f });
 }
 
 void Widget::Text(const std::wstring& text, D2D1_RECT_F layout)
