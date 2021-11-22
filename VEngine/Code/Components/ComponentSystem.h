@@ -72,7 +72,10 @@ struct ComponentSystem : IComponentSystem
 	{
 		for (T* component : components)
 		{
-			component->Tick(deltaTime);
+			if (component->active)
+			{
+				component->Tick(deltaTime);
+			}
 		}
 	}
 

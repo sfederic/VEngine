@@ -68,7 +68,10 @@ struct ActorSystem : IActorSystem
 		//actors can be destroyed in-game and its pointer popped off its actorsystem.
 		for (int i = 0; i < actors.size(); i++)
 		{
-			actors[i]->Tick(deltaTime);
+			if (actors[i]->active)
+			{
+				actors[i]->Tick(deltaTime);
+			}
 		}
 	}
 
