@@ -233,3 +233,13 @@ void Actor::SetActive(bool newActiveValue)
 		component->active = newActiveValue;
 	}
 }
+
+void Actor::ToggleActive()
+{
+	active = !active;
+
+	for (auto component : components)
+	{
+		component->active = !active;
+	}
+}
