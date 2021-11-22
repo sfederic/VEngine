@@ -15,11 +15,10 @@ TextureDataWidget::TextureDataWidget(Property prop_)
 
 void TextureDataWidget::SetValue()
 {
-	//BUG: is there a fucking bug when using the OS' native file opener?
-	//https://stackoverflow.com/questions/31983412/code-freezes-on-trying-to-open-qdialog
+	//BUG: You have to call CoInitializeEx(NULL, COINIT_APARTMENTTHREADED) for the native file
+	//dialog to work properly.
 	QString filepath = QFileDialog::getOpenFileName(this,
-		tr("Open Image"), "Textures/", tr("Image Files (*.png *.jpg *.bmp)"),
-		0, QFileDialog::DontUseNativeDialog);
+		tr("Open Image"), "Textures/", tr("Image Files (*.png *.jpg *.bmp)"));
 
 	QFileInfo info(filepath);
 	QString filename = info.fileName();
