@@ -10,6 +10,7 @@
 #include "Actors/Game/NPC.h"
 #include "Actors/Game/Pickup.h"
 #include "Components/DialogueComponent.h"
+#include "Actors/Game/BattleGrid.h"
 
 DialogueComponent* dialogueComponent;
 
@@ -34,6 +35,13 @@ void Player::Tick(float deltaTime)
 {
 	const float moveSpeed = 5.5f;
 	SetPosition(VMath::VectorConstantLerp(GetPositionVector(), nextPos, deltaTime, moveSpeed));
+
+	//toggle battlegrid visibility
+	if (Input::GetKeyUp(Keys::B))
+	{
+		auto battleGrid = GameUtils::GetBattleGrid();
+		battleGrid->active = !battleGrid->active;
+	}
 
 	if (Input::GetKeyUp(Keys::Down))
 	{
