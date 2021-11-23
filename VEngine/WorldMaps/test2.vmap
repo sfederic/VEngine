@@ -4,12 +4,14 @@ FOV
 1.0472
 Far Z
 1000
-Mesh Filename
+Mesh
 cube.fbx
 Near Z
 0.01
 Position
 2.54082 0.5 2
+Rast State
+solid
 Rotation
 0 0.707107 0 0.707107
 Scale
@@ -35,10 +37,12 @@ BattleGrid
 0
 MeshActor
 11
-Mesh Filename
+Mesh
 plane.fbx
 Position
 4.5 0 4.5
+Rast State
+solid
 Rotation
 -0.707107 0 -0 0.707107
 Scale
@@ -56,10 +60,12 @@ UvRotation
 UvScale
 1 1
 next
-Mesh Filename
+Mesh
 hollow_barrel.fbx
 Position
 7.5 0 0
+Rast State
+solid
 Rotation
 -0 0 -0 1
 Scale
@@ -77,10 +83,12 @@ UvRotation
 UvScale
 1 1
 next
-Mesh Filename
+Mesh
 hollow_barrel.fbx
 Position
 9 0 0
+Rast State
+solid
 Rotation
 -0 0 -0 1
 Scale
@@ -98,10 +106,12 @@ UvRotation
 UvScale
 1 1
 next
-Mesh Filename
+Mesh
 hollow_barrel.fbx
 Position
 9.5 0.5 1.5
+Rast State
+solid
 Rotation
 0 0 0.707229 0.706985
 Scale
@@ -119,10 +129,12 @@ UvRotation
 UvScale
 1 1
 next
-Mesh Filename
+Mesh
 hollow_barrel.fbx
 Position
 9.5 0.5 2.5
+Rast State
+solid
 Rotation
 0 0 0.707229 0.706985
 Scale
@@ -140,10 +152,12 @@ UvRotation
 UvScale
 1 1
 next
-Mesh Filename
+Mesh
 hollow_barrel.fbx
 Position
 9.5 1.5 2
+Rast State
+solid
 Rotation
 0 0 0.707229 0.706985
 Scale
@@ -161,10 +175,12 @@ UvRotation
 UvScale
 1 1
 next
-Mesh Filename
+Mesh
 cube.fbx
 Position
 0 0.5 9
+Rast State
+solid
 Rotation
 -0 0 -0 1
 Scale
@@ -182,10 +198,12 @@ UvRotation
 UvScale
 1 1
 next
-Mesh Filename
+Mesh
 cube.fbx
 Position
 1.5 0.5 9
+Rast State
+solid
 Rotation
 -0 0 -0 1
 Scale
@@ -203,10 +221,12 @@ UvRotation
 UvScale
 1 1
 next
-Mesh Filename
-cube.fbx
+Mesh
+sphere.fbx
 Position
 5 0.5 1
+Rast State
+solid
 Rotation
 -0 0 -0 1
 Scale
@@ -224,10 +244,12 @@ UvRotation
 UvScale
 1 1
 next
-Mesh Filename
+Mesh
 cube.fbx
 Position
 2.5 1.5 9
+Rast State
+solid
 Rotation
 -0 0 -0 1
 Scale
@@ -245,10 +267,12 @@ UvRotation
 UvScale
 1 1
 next
-Mesh Filename
+Mesh
 cube.fbx
 Position
 0.5 1.5 9
+Rast State
+solid
 Rotation
 -0 0 -0 1
 Scale
@@ -287,10 +311,12 @@ NPC
 1
 File
 testdiag
-Mesh Filename
+Mesh
 cube.fbx
 Position
 6 0.5 2
+Rast State
+solid
 Rotation
 -0 0 -0 1
 Scale
