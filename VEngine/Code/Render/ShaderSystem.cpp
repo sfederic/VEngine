@@ -30,7 +30,13 @@ void ShaderSystem::Tick()
 
 ShaderItem* ShaderSystem::FindShader(std::wstring shaderName)
 {
-    return shaderMap.find(shaderName)->second;
+    auto shaderIt = shaderMap.find(shaderName);
+    if (shaderIt == shaderMap.end())
+    {
+        return nullptr;
+    }
+
+    return shaderIt->second;
 }
 
 ID3DBlob* ShaderSystem::CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target)
