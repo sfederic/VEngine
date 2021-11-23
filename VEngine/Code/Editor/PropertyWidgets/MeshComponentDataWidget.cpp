@@ -1,0 +1,36 @@
+#include "MeshComponentDataWidget.h"
+#include <qfiledialog.h>
+#include "Render/RenderTypes.h"
+
+MeshComponentDataWidget::MeshComponentDataWidget(Property prop_)
+{
+	prop = prop_;
+	value = (MeshComponentData*)prop.data;
+
+	setText(QString::fromStdString(value->filename));
+	connect(this, &QPushButton::clicked, this, &MeshComponentDataWidget::SetValue);
+}
+
+void MeshComponentDataWidget::SetValue()
+{
+	QString filepath = QFileDialog::getOpenFileName(this,
+		tr("Set Shader"), "Code/Render/Shaders/", tr("Shader Files (*.hlsl)"));
+
+	QFileInfo info(filepath);
+	QString filename = info.fileName();
+
+	if (!filename.isEmpty())
+	{
+		value->filename = filename.toStdString();
+		prop.change(value);
+		ResetValue();
+	}
+}
+
+void MeshComponentDataWidget::ResetValue()
+{
+	if (value)
+	{
+		setText(QString::fromStdString(value->filename));
+	}
+}
