@@ -65,9 +65,15 @@ void MeshComponent::Create()
 
 void MeshComponent::Destroy()
 {
+	material->Destroy();
 	delete material;
+	material = nullptr;
+
 	delete meshDataProxy;
+	meshDataProxy = nullptr;
+
 	delete pso;
+	pso = nullptr;
 }
 
 static void ReassignMesh(void* data)
