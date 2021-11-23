@@ -298,3 +298,14 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 		assert(meshData->indices.size() % 3 == 0 && "Num of indices won't be matching vertices");
 	}
 }
+
+MeshData* FBXImporter::FindMesh(std::string meshName)
+{
+	auto meshIt = existingMeshDataMap.find(meshName);
+	if (meshIt == existingMeshDataMap.end())
+	{
+		return nullptr;
+	}
+
+	return meshIt->second;
+}

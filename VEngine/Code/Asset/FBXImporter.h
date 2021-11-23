@@ -23,16 +23,19 @@ using namespace fbxsdk;
 
 struct FBXImporter
 {
+private:
 	FbxManager* manager = nullptr;
 	FbxIOSettings* ioSetting = nullptr;
 	FbxImporter* importer = nullptr;
 	FbxAnimEvaluator* animEvaluator = nullptr;
 
+public:
 	std::unordered_map<std::string, MeshData*> existingMeshDataMap;
 
 	void Init();
 	bool Import(std::string filename, MeshDataProxy* meshData);
 	void ProcessAllChildNodes(FbxNode* node, MeshData* meshData);
+	MeshData* FindMesh(std::string meshName);
 };
 
 extern FBXImporter fbxImporter;
