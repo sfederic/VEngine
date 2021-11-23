@@ -14,7 +14,7 @@ MeshComponentDataWidget::MeshComponentDataWidget(Property prop_)
 void MeshComponentDataWidget::SetValue()
 {
 	QString filepath = QFileDialog::getOpenFileName(this,
-		tr("Set Shader"), "Code/Render/Shaders/", tr("Shader Files (*.hlsl)"));
+		tr("Set Mesh"), "Meshes/", tr("Meshes (*.fbx *.vmesh)"));
 
 	QFileInfo info(filepath);
 	QString filename = info.fileName();
