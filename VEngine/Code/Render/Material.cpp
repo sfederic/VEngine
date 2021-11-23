@@ -43,6 +43,8 @@ static void ReassignTexture(void* data)
 		return;
 	}
 
+	//TODO: these 'get all mesh' calls aren't really right as each mesh component would
+	//have its own properties, but it works ok for simple actors for now.
 	auto meshes = worldEditor.pickedActor->GetComponentsOfType<MeshComponent>();
 	for (auto mesh : meshes)
 	{
@@ -62,11 +64,23 @@ static void ReassignRastState(void* data)
 	}
 }
 
+static void ReassignShader(void* data)
+{
+	auto shaderName = (std::string*)data;
+	ShaderItem* foundShader = shaderSystem.FindShader(stows(*shaderName));
+
+	auto meshes = worldEditor.pickedActor->GetComponentsOfType<MeshComponent>();
+	for (auto mesh : meshes)
+	{
+		mesh->material->shader = foundShader;
+	}
+}
+
 Properties Material::GetProps()
 {
 	Properties props("Material");
 	props.Add("Texture", &textureData).change = ReassignTexture;
-	props.Add("Shader", &shaderFilename);
+	props.Add("Shader", &shaderFilename).change = ReassignShader;
 	props.Add("Rast State", &rastStateName).change = ReassignRastState;
 	props.Add("UvOffset", &shaderData.uvOffset);
 	props.Add("UvScale", &shaderData.uvScale);
