@@ -7,7 +7,10 @@ StringWidget::StringWidget(Property value_)
 
 	value = (std::string*)value_.data;
 	setText(QString::fromStdString(value->data()));
-	connect(this, &QLineEdit::editingFinished, this, &StringWidget::SetValue);
+
+	//BUG: previously StringWidget was using ::editingFinished but there's a supposed bug in Qt
+	//where the Signal function is called twice.
+	connect(this, &QLineEdit::returnPressed, this, &StringWidget::SetValue);
 }
 
 void StringWidget::SetValue()
