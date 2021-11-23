@@ -7,6 +7,7 @@
 using namespace DirectX;
 
 struct MaterialShaderData;
+struct MeshDataProxy;
 
 struct Vertex
 {
@@ -42,6 +43,7 @@ struct ShaderData
 struct MeshComponentData
 {
 	std::string filename;
+	MeshDataProxy* meshDataProxy = nullptr;
 };
 
 //A pointer structure to a MeshData struct in memory. Each rendered component will have one of these pointing
