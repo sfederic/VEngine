@@ -19,6 +19,7 @@
 #include "PropertyWidgets/VectorWidget.h"
 #include "PropertyWidgets/StringWidget.h"
 #include "PropertyWidgets/TextureDataWidget.h"
+#include "PropertyWidgets/ShaderDataWidget.h"
 #include "PropertyWidgets/ActorListWidget.h"
 #include "PropertyWidgets/TransformWidget.h"
 #include "Render/Material.h"
@@ -149,6 +150,12 @@ void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRo
             auto textureDataWidget = new TextureDataWidget(prop.second);
             actorPropsGridLayout->addWidget(textureDataWidget, currentGridRow, propertyDataColumn);
             propertyWidgetsToUpdate.push_back((IPropertyWidget*)textureDataWidget);
+        }
+        else if (props.CheckType<ShaderData>(name))
+        {
+            auto shaderDataWidget = new ShaderDataWidget(prop.second);
+            actorPropsGridLayout->addWidget(shaderDataWidget, currentGridRow, propertyDataColumn);
+            propertyWidgetsToUpdate.push_back((IPropertyWidget*)shaderDataWidget);
         }
         else if (props.CheckType<Actor*>(name))
         {
