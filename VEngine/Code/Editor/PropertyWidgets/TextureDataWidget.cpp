@@ -1,7 +1,5 @@
 #include "TextureDataWidget.h"
-#include <qpushbutton.h>
 #include <qfiledialog.h>
-#include "Render/PipelineObjects.h"
 #include "Render/RenderTypes.h"
 
 TextureDataWidget::TextureDataWidget(Property prop_)
@@ -18,7 +16,7 @@ void TextureDataWidget::SetValue()
 	//BUG: You have to call CoInitializeEx(NULL, COINIT_APARTMENTTHREADED) for the native file
 	//dialog to work properly.
 	QString filepath = QFileDialog::getOpenFileName(this,
-		tr("Open Image"), "Textures/", tr("Image Files (*.png *.jpg *.bmp)"));
+		tr("Set Texture"), "Textures/", tr("Image Files (*.png *.jpg *.bmp)"));
 
 	QFileInfo info(filepath);
 	QString filename = info.fileName();

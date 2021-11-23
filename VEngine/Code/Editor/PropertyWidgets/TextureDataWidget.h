@@ -5,7 +5,7 @@
 
 struct TextureData;
 
-struct TextureDataWidget : QPushButton, IPropertyWidget
+struct TextureDataWidget : public QPushButton, IPropertyWidget
 {
 	TextureData* value;
 	Property prop;
