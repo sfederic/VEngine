@@ -34,7 +34,7 @@ struct Material
 {
 	UID uid = GenerateUID();
 
-	MaterialShaderData shaderData;
+	MaterialShaderData materialShaderData;
 
 	Texture2D* texture = nullptr;
 	Sampler* sampler = nullptr;

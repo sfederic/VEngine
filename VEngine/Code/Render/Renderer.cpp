@@ -329,7 +329,7 @@ void Renderer::RenderShadowPass()
 		//Set matrices
 		shaderMatrices.model = mesh->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
-		shaderMatrices.MakeTextureMatrix(&mesh->material->shaderData);
+		shaderMatrices.MakeTextureMatrix(&mesh->material->materialShaderData);
 
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
@@ -405,7 +405,7 @@ void Renderer::RenderMeshComponents()
 		//Set matrices
 		shaderMatrices.model = mesh->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
-		shaderMatrices.MakeTextureMatrix(&mesh->material->shaderData);
+		shaderMatrices.MakeTextureMatrix(&mesh->material->materialShaderData);
 	
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
@@ -448,7 +448,7 @@ void Renderer::RenderInstanceMeshComponents()
 		SetRenderPipelineStates(instanceMesh);
 
 		//update texture matrix
-		shaderMatrices.MakeTextureMatrix(&instanceMesh->material->shaderData);
+		shaderMatrices.MakeTextureMatrix(&instanceMesh->material->materialShaderData);
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
@@ -979,7 +979,7 @@ void Renderer::SetRenderPipelineStates(MeshComponent* mesh)
 	context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &stride, &offset);
 	context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
 
-	context->UpdateSubresource(cbMaterial, 0, nullptr, &material->shaderData, 0, 0);
+	context->UpdateSubresource(cbMaterial, 0, nullptr, &material->materialShaderData, 0, 0);
 	//context->VSSetConstantBuffers(cbMaterialRegister, 0, &cbMaterial);
 	context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 }
