@@ -78,6 +78,11 @@ void Serialiser::Serialise(Properties props)
 		{
 			ShaderData* shaderData = props.GetData<ShaderData>(name);
 			ss << name << "\n" << shaderData->filename << "\n";
+		}		
+		else if (props.CheckType<MeshComponentData>(name))
+		{
+			MeshComponentData* meshComponentData = props.GetData<MeshComponentData>(name);
+			ss << name << "\n" << meshComponentData->filename << "\n";
 		}
 		else if (props.CheckType<std::vector<Actor*>>(name))
 		{
@@ -205,6 +210,13 @@ void Deserialiser::Deserialise(Properties props)
 			is.getline(propString, 512);
 			ShaderData* shaderData = props.GetData<ShaderData>(name);
 			shaderData->filename.assign(propString);
+		}		
+		else if (props.CheckType<MeshComponentData>(name))
+		{
+			char propString[512];
+			is.getline(propString, 512);
+			MeshComponentData* meshComponentData = props.GetData<MeshComponentData>(name);
+			meshComponentData->filename.assign(propString);
 		}
 		else if (props.CheckType<std::vector<Actor*>>(name))
 		{
