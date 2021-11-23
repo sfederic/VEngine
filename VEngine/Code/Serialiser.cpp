@@ -74,6 +74,11 @@ void Serialiser::Serialise(Properties props)
 			TextureData* textureData = props.GetData<TextureData>(name);
 			ss << name << "\n" << textureData->filename << "\n";
 		}
+		else if (props.CheckType<ShaderData>(name))
+		{
+			ShaderData* shaderData = props.GetData<ShaderData>(name);
+			ss << name << "\n" << shaderData->filename << "\n";
+		}
 		else if (props.CheckType<std::vector<Actor*>>(name))
 		{
 			auto actors = props.GetData<std::vector<Actor*>>(name);
@@ -193,6 +198,13 @@ void Deserialiser::Deserialise(Properties props)
 			is.getline(propString, 512);
 			TextureData* textureData = props.GetData<TextureData>(name);
 			textureData->filename.assign(propString);
+		}
+		else if (props.CheckType<ShaderData>(name))
+		{
+			char propString[512];
+			is.getline(propString, 512);
+			ShaderData* shaderData = props.GetData<ShaderData>(name);
+			shaderData->filename.assign(propString);
 		}
 		else if (props.CheckType<std::vector<Actor*>>(name))
 		{
