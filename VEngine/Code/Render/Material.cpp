@@ -39,7 +39,7 @@ static void ReassignTexture(void* data)
 	Texture2D* swapTexture = textureSystem.FindTexture2D(textureData->filename);
 	if (swapTexture == nullptr)
 	{
-		editor->Log("Texture wasn't found on change.");
+		editor->Log("%s wasn't found on texture change.", textureData->filename);
 		return;
 	}
 
@@ -56,6 +56,11 @@ static void ReassignRastState(void* data)
 {
 	auto rastName = (std::string*)data;
 	RastState* foundRastState = renderer.rastStateMap[*rastName];
+	if (foundRastState == nullptr)
+	{
+		editor->Log("%s not found on rast state change.", *rastName);
+		return;
+	}
 
 	auto meshes = worldEditor.pickedActor->GetComponentsOfType<MeshComponent>();
 	for (auto mesh : meshes)
@@ -68,6 +73,11 @@ static void ReassignShader(void* data)
 {
 	auto shaderName = (std::string*)data;
 	ShaderItem* foundShader = shaderSystem.FindShader(stows(*shaderName));
+	if (foundShader == nullptr)
+	{
+		editor->Log("%s not found on shader change.", *shaderName);
+		return;
+	}
 
 	auto meshes = worldEditor.pickedActor->GetComponentsOfType<MeshComponent>();
 	for (auto mesh : meshes)
