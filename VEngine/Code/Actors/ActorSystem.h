@@ -43,7 +43,7 @@ struct ActorSystem : IActorSystem
 	{
 		for (Component* component : actors[index]->components)
 		{
-			//component->Destroy();
+			component->Destroy();
 			component->Remove();
 		}
 

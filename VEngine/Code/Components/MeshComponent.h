@@ -24,5 +24,6 @@ struct MeshComponent : SpatialComponent
 		const std::string shaderFilename_ = "DefaultShader.hlsl");
 	virtual void Tick(float deltaTime) override;
 	virtual void Create() override;
+	virtual void Destroy() override;
 	virtual Properties GetProps();
 };

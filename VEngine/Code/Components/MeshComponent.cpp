@@ -63,11 +63,16 @@ void MeshComponent::Create()
 	existingMeshBuffers[meshComponentData.filename] = meshBuffers;
 }
 
+void MeshComponent::Destroy()
+{
+	delete material;
+	delete meshDataProxy;
+	delete pso;
+}
+
 static void ReassignMesh(void* data)
 {
 	auto meshData = (MeshComponentData*)data;
-
-	//TODO: this Create() is shit, come back when Components can Destroy() themselves properly
 	meshData->meshComponent->Create();
 }
 
