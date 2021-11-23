@@ -226,12 +226,12 @@ void DebugMenu::RenderWorldStats()
 
 	for (auto mesh : MeshComponent::system.components)
 	{
-		totalVerticesInWorld += mesh->data->vertices->size();
+		totalVerticesInWorld += mesh->meshDataProxy->vertices->size();
 	}
 
 	for (auto instanceMesh : InstanceMeshComponent::system.components)
 	{
-		totalVerticesInWorld += instanceMesh->data->vertices->size();
+		totalVerticesInWorld += instanceMesh->meshDataProxy->vertices->size();
 	}
 
 	ImGui::Text("Vertex Count: %d", totalVerticesInWorld);

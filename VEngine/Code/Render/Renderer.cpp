@@ -340,7 +340,7 @@ void Renderer::RenderShadowPass()
 		context->PSSetShaderResources(0, 1, &mat->texture->srv);
 
 		//Draw
-		context->DrawIndexed(mesh->data->indices->size(), 0, 0);
+		context->DrawIndexed(mesh->meshDataProxy->indices->size(), 0, 0);
 	}
 
 	ID3D11RenderTargetView* nullRTV = nullptr;
@@ -418,7 +418,7 @@ void Renderer::RenderMeshComponents()
 		context->PSSetSamplers(1, 1, &shadowMap->sampler);
 
 		//Draw
-		context->DrawIndexed(mesh->data->indices->size(), 0, 0);
+		context->DrawIndexed(mesh->meshDataProxy->indices->size(), 0, 0);
 		
 		//Setting the shadowmap to null here gets rid of a warning. Can also set this outside of the loop.
 		ID3D11ShaderResourceView* nullSRV = nullptr;
@@ -459,7 +459,7 @@ void Renderer::RenderInstanceMeshComponents()
 		//Set lights buffer
 		context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
 
-		context->DrawIndexedInstanced(instanceMesh->data->indices->size(), instanceMesh->GetInstanceCount(), 0, 0, 0);
+		context->DrawIndexedInstanced(instanceMesh->meshDataProxy->indices->size(), instanceMesh->GetInstanceCount(), 0, 0, 0);
 	}
 
 	PROFILE_END
@@ -510,7 +510,7 @@ void Renderer::RenderBounds()
 				shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
 				context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 
-				context->Draw(debugBox.boxMesh->data->vertices->size(), 0);
+				context->Draw(debugBox.boxMesh->meshDataProxy->vertices->size(), 0);
 			}
 		}
 	}
@@ -546,7 +546,7 @@ void Renderer::RenderBounds()
 			shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
 			context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 
-			context->Draw(debugBox.boxMesh->data->vertices->size(), 0);
+			context->Draw(debugBox.boxMesh->meshDataProxy->vertices->size(), 0);
 		}
 	}
 }
@@ -587,7 +587,7 @@ void Renderer::RenderCameraMeshes()
 		shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 
-		context->Draw(debugCamera.mesh->data->vertices->size(), 0);
+		context->Draw(debugCamera.mesh->meshDataProxy->vertices->size(), 0);
 	}
 }
 
@@ -628,7 +628,7 @@ void Renderer::RenderLightMeshes()
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 
-		context->Draw(debugSphere.sphereMesh->data->vertices->size(), 0);
+		context->Draw(debugSphere.sphereMesh->meshDataProxy->vertices->size(), 0);
 	}
 
 
@@ -641,7 +641,7 @@ void Renderer::RenderLightMeshes()
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 
-		context->Draw(debugIcoSphere.mesh->data->vertices->size(), 0);
+		context->Draw(debugIcoSphere.mesh->meshDataProxy->vertices->size(), 0);
 	}
 
 
@@ -654,7 +654,7 @@ void Renderer::RenderLightMeshes()
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 
-		context->Draw(debugCone.mesh->data->vertices->size(), 0);
+		context->Draw(debugCone.mesh->meshDataProxy->vertices->size(), 0);
 	}
 }
 

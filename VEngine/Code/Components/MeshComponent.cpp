@@ -3,6 +3,8 @@
 #include "Render/RenderUtils.h"
 #include "Render/ShaderSystem.h"
 #include "Render/Material.h"
+#include "WorldEditor.h"
+#include "Editor/Editor.h"
 
 //Vertex and index buffers linked to a mesh filename to copy over to new PSOs
 std::unordered_map<std::string, MeshBuffers> existingMeshBuffers;
@@ -11,10 +13,11 @@ MeshComponent::MeshComponent(const std::string filename_,
 	const std::string textureFilename_,
 	const std::string shaderFilename_)
 {
-	meshComponentData.filename = filename_;
-
-	data = new MeshDataProxy();
+	meshDataProxy = new MeshDataProxy();
 	pso = new PipelineStateObject();
+
+	meshComponentData.filename = filename_;
+	meshComponentData.meshDataProxy = meshDataProxy;
 
 	material = new Material(textureFilename_, shaderFilename_);
 }
@@ -29,11 +32,11 @@ void MeshComponent::Create()
 	material->Create();
 
 	//Import mesh (set up bounding box in here too so you don't need to re-create bounds)
-	fbxImporter.Import(meshComponentData.filename.c_str(), data);
+	fbxImporter.Import(meshComponentData.filename.c_str(), meshDataProxy);
 
 	//Setup bounds
-	BoundingOrientedBox::CreateFromPoints(boundingBox, data->vertices->size(),
-		&data->vertices->at(0).pos, sizeof(Vertex));
+	BoundingOrientedBox::CreateFromPoints(boundingBox, meshDataProxy->vertices->size(),
+		&meshDataProxy->vertices->at(0).pos, sizeof(Vertex));
 
 	//Setup pipeline objects
 	auto psoIt = existingMeshBuffers.find(meshComponentData.filename);
@@ -41,8 +44,8 @@ void MeshComponent::Create()
 	{
 		pso->vertexBuffer = new Buffer();
 		pso->indexBuffer = new Buffer();
-		pso->vertexBuffer->data = RenderUtils::CreateVertexBuffer(data);
-		pso->indexBuffer->data = RenderUtils::CreateIndexBuffer(data);
+		pso->vertexBuffer->data = RenderUtils::CreateVertexBuffer(meshDataProxy);
+		pso->indexBuffer->data = RenderUtils::CreateIndexBuffer(meshDataProxy);
 	}
 	else
 	{
@@ -60,7 +63,19 @@ void MeshComponent::Create()
 
 static void ReassignMesh(void* data)
 {
+	auto meshData = (MeshComponentData*)data;
+	MeshData* foundMeshData = fbxImporter.FindMesh(meshData->filename);
+	if (foundMeshData == nullptr)
+	{
+		editor->Log("%s not found on mesh change.", meshData->filename);
+		return;
+	}
 
+	auto meshes = worldEditor.pickedActor->GetComponentsOfType<MeshComponent>();
+	for (auto mesh : meshes)
+	{
+		fbxImporter.Import(meshData->filename, meshData->meshDataProxy);
+	}
 }
 
 Properties MeshComponent::GetProps()

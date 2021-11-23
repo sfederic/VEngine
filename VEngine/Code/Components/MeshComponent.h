@@ -16,7 +16,7 @@ struct MeshComponent : SpatialComponent
 	MeshComponentData meshComponentData;
 
 	Material* material = nullptr;
-	MeshDataProxy* data = nullptr;
+	MeshDataProxy* meshDataProxy = nullptr;
 	PipelineStateObject* pso = nullptr;
 
 	MeshComponent(const std::string filename_,
