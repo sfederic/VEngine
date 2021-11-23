@@ -17,7 +17,6 @@ MeshComponent::MeshComponent(const std::string filename_,
 	pso = new PipelineStateObject();
 
 	meshComponentData.filename = filename_;
-	meshComponentData.meshDataProxy = meshDataProxy;
 
 	material = new Material(textureFilename_, shaderFilename_);
 }
@@ -28,6 +27,9 @@ void MeshComponent::Tick(float deltaTime)
 
 void MeshComponent::Create()
 {
+	//Set 'this' so mesh widgets can access this component.
+	meshComponentData.meshComponent = this;
+
 	//Material's create needs to be called here to deal with serialisation
 	material->Create();
 
@@ -64,24 +66,13 @@ void MeshComponent::Create()
 static void ReassignMesh(void* data)
 {
 	auto meshData = (MeshComponentData*)data;
-	MeshData* foundMeshData = fbxImporter.FindMesh(meshData->filename);
-	if (foundMeshData == nullptr)
-	{
-		editor->Log("%s not found on mesh change.", meshData->filename);
-		return;
-	}
-
-	auto meshes = worldEditor.pickedActor->GetComponentsOfType<MeshComponent>();
-	for (auto mesh : meshes)
-	{
-		fbxImporter.Import(meshData->filename, meshData->meshDataProxy);
-	}
+	meshData->meshComponent->Create();
 }
 
 Properties MeshComponent::GetProps()
 {
 	Properties props("MeshComponent");
-	props.Add("Mesh", &meshComponentData);
+	props.Add("Mesh", &meshComponentData).change = ReassignMesh;
 	props.Merge(material->GetProps());
 	return props;
 }
