@@ -71,11 +71,11 @@ static void ReassignRastState(void* data)
 
 static void ReassignShader(void* data)
 {
-	auto shaderName = (std::string*)data;
-	ShaderItem* foundShader = shaderSystem.FindShader(stows(*shaderName));
+	auto shaderData = (ShaderData*)data;
+	ShaderItem* foundShader = shaderSystem.FindShader(stows(shaderData->filename));
 	if (foundShader == nullptr)
 	{
-		editor->Log("%s not found on shader change.", *shaderName);
+		editor->Log("%s not found on shader change.", shaderData->filename);
 		return;
 	}
 
