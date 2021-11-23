@@ -119,4 +119,4 @@ struct ComponentSystem : IComponentSystem
 
 #define COMPONENT_SYSTEM(type) \
 inline static ComponentSystem<type> system; \
-virtual void Remove() override { system.Remove(index); } \
+virtual void Remove() override { Destroy(); system.Remove(index); } \
