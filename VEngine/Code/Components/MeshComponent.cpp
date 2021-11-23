@@ -66,6 +66,8 @@ void MeshComponent::Create()
 static void ReassignMesh(void* data)
 {
 	auto meshData = (MeshComponentData*)data;
+
+	//TODO: this Create() is shit, come back when Components can Destroy() themselves properly
 	meshData->meshComponent->Create();
 }
 
