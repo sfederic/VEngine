@@ -52,5 +52,6 @@ struct Material
 	Material();
 	Material(std::string textureFilename_, std::string shaderFilename_);
 	virtual void Create();
+	virtual void Destroy();
 	virtual Properties GetProps();
 };

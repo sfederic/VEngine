@@ -32,6 +32,11 @@ void Material::Create()
 	blendState = renderer.blendStateMap["default"];
 }
 
+void Material::Destroy()
+{
+	materialSystem.materials.erase(uid);
+}
+
 static void ReassignTexture(void* data)
 {
 	auto textureData = (TextureData*)data;
