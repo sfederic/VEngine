@@ -182,6 +182,7 @@
     <ClCompile Include="Code\UI\TitleScreenWidget.cpp" />
     <ClCompile Include="Code\UI\DialogueWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\Pickup.cpp" />
+    <ClCompile Include="Code\Editor\PropertyWidgets\ShaderDataWidget.cpp" />
     <ClInclude Include="Code\Actors\AudioActor.h" />
     <ClInclude Include="Code\Asset\AssetSystem.h" />
     <ClInclude Include="Code\Components\AudioComponent.h" />
@@ -361,6 +362,7 @@
     <ClInclude Include="Code\UI\TitleScreenWidget.h" />
     <ClInclude Include="Code\UI\DialogueWidget.h" />
     <ClInclude Include="Code\Actors\Game\Pickup.h" />
+    <ClInclude Include="Code\Editor\PropertyWidgets\ShaderDataWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
