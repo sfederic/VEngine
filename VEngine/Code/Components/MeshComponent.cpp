@@ -11,7 +11,7 @@ MeshComponent::MeshComponent(const std::string filename_,
 	const std::string textureFilename_,
 	const std::string shaderFilename_)
 {
-	meshFilename = filename_;
+	meshComponentData.filename = filename_;
 
 	data = new MeshDataProxy();
 	pso = new PipelineStateObject();
@@ -29,14 +29,14 @@ void MeshComponent::Create()
 	material->Create();
 
 	//Import mesh (set up bounding box in here too so you don't need to re-create bounds)
-	fbxImporter.Import(meshFilename.c_str(), data);
+	fbxImporter.Import(meshComponentData.filename.c_str(), data);
 
 	//Setup bounds
 	BoundingOrientedBox::CreateFromPoints(boundingBox, data->vertices->size(),
 		&data->vertices->at(0).pos, sizeof(Vertex));
 
 	//Setup pipeline objects
-	auto psoIt = existingMeshBuffers.find(meshFilename);
+	auto psoIt = existingMeshBuffers.find(meshComponentData.filename);
 	if (psoIt == existingMeshBuffers.end())
 	{
 		pso->vertexBuffer = new Buffer();
@@ -55,13 +55,18 @@ void MeshComponent::Create()
 	MeshBuffers meshBuffers = {};
 	meshBuffers.vertexBuffer = pso->vertexBuffer;
 	meshBuffers.indexBuffer = pso->indexBuffer;
-	existingMeshBuffers[meshFilename] = meshBuffers;
+	existingMeshBuffers[meshComponentData.filename] = meshBuffers;
+}
+
+static void ReassignMesh(void* data)
+{
+
 }
 
 Properties MeshComponent::GetProps()
 {
 	Properties props("MeshComponent");
-	props.Add("Mesh Filename", &meshFilename);
+	props.Add("Mesh", &meshComponentData);
 	props.Merge(material->GetProps());
 	return props;
 }

@@ -13,7 +13,7 @@ struct MeshComponent : SpatialComponent
 {
 	COMPONENT_SYSTEM(MeshComponent)
 
-	std::string meshFilename;
+	MeshComponentData meshComponentData;
 
 	Material* material = nullptr;
 	MeshDataProxy* data = nullptr;
