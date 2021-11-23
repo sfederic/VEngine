@@ -32,6 +32,11 @@ struct TextureData
 	std::string filename;
 };
 
+struct ShaderData
+{
+	std::string filename;
+};
+
 //A pointer structure to a MeshData struct in memory. Each rendered component will have one of these pointing
 //to the mesh data on a per-filename basis.
 struct MeshDataProxy

@@ -45,7 +45,7 @@ struct Material
 	std::string name;
 
 	TextureData textureData;
-	std::string shaderFilename;
+	ShaderData shaderData;
 
 	std::string rastStateName = "solid";
 

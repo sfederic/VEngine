@@ -11,7 +11,7 @@ BattleGrid::BattleGrid()
     nodeMesh = InstanceMeshComponent::system.Add(
         this, InstanceMeshComponent(1, "node.fbx", "test.png"));
 
-    nodeMesh->material->shaderFilename = "InstanceShader.hlsl";
+    nodeMesh->material->shaderData.filename = "InstanceShader.hlsl";
     rootComponent = nodeMesh;
 }
 
