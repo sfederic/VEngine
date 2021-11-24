@@ -33,6 +33,8 @@ struct ActorSystem : IActorSystem
 		actor->SetTransform(transform);
 		actor->name = this->name + std::to_string(actor->index);
 
+		actor->Create();
+
 		world.actorUIDMap.emplace(actor->uid, actor);
 		world.actorNameMap.emplace(actor->name, actor);
 
