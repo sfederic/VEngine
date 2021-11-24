@@ -33,7 +33,10 @@ XMMATRIX CameraComponent::GetViewMatrix()
 	//Player camera logic
 	if (!editorCamera)
 	{
-		focusPoint = GameUtils::GetPlayer()->GetPositionVector();
+		if (targetActor)
+		{
+			focusPoint = targetActor->GetPositionVector();
+		}
 		view = XMMatrixLookAtLH(transform.world.r[3], focusPoint, VMath::XMVectorUp());
 	}
 	else

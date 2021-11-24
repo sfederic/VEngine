@@ -20,6 +20,7 @@ Player::Player()
 	rootComponent = mesh;
 
 	camera = CameraComponent::system.Add(this, CameraComponent(XMFLOAT3(3.f, 3.f, -7.f), false));
+
 	rootComponent->AddChild(camera);
 
 	widget = WidgetComponent::system.Add(this);
@@ -27,6 +28,8 @@ Player::Player()
 
 void Player::Start()
 {
+	camera->targetActor = this;
+
 	nextPos = GetPositionVector();
 	nextRot = GetRotationVector();
 }
