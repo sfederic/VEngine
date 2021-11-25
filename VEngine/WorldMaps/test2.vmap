@@ -9,11 +9,11 @@ cube.fbx
 Near Z
 0.01
 Position
-0.54082 0.5 2
+5 0.5 6
 Rast State
 solid
 Rotation
-0 0.707107 0 0.707107
+0 0.999999 0 0
 Scale
 0.499997 0.499999 0.5
 Shader
@@ -36,7 +36,7 @@ GameEvent
 BattleGrid
 0
 MeshActor
-9
+18
 Mesh
 plane.fbx
 Position
@@ -205,7 +205,7 @@ Position
 Rast State
 solid
 Rotation
--0 0.707107 -0 0.707107
+0 0.707107 0 0.707107
 Scale
 2 1.5 1
 Shader
@@ -244,6 +244,213 @@ UvRotation
 UvScale
 1 1
 next
+Mesh
+plane.fbx
+Position
+-0.5 1.5 6.49999
+Rast State
+solid
+Rotation
+0 0.707107 0 0.707107
+Scale
+2.99998 1.5 0.999995
+Shader
+DefaultShader.hlsl
+Texture
+wall03.png
+UID
+2218589739
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh
+plane.fbx
+Position
+1.00001 1.5 9.5
+Rast State
+solid
+Rotation
+0 1 0 -2.60274e-07
+Scale
+1.49999 1.5 0.999992
+Shader
+DefaultShader.hlsl
+Texture
+wall03.png
+UID
+2218589739
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+0.2 0.2
+next
+Mesh
+plane.fbx
+Position
+4.00001 1.5 9.5
+Rast State
+solid
+Rotation
+0 1 0 -2.60274e-07
+Scale
+1.49999 1.5 0.999992
+Shader
+DefaultShader.hlsl
+Texture
+wall03.png
+UID
+2218589739
+UvOffset
+0.5 0.1
+UvRotation
+0
+UvScale
+0.4 0.4
+next
+Mesh
+plane.fbx
+Position
+9.5 1.5 6.49999
+Rast State
+solid
+Rotation
+-0 -0.707107 -0 0.707107
+Scale
+2.99994 1.5 0.999983
+Shader
+DefaultShader.hlsl
+Texture
+wall03.png
+UID
+2218589739
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh
+plane.fbx
+Position
+9.5 1.5 1.5
+Rast State
+solid
+Rotation
+-0 -0.706934 -0 0.70728
+Scale
+2.00001 1.5 1
+Shader
+DefaultShader.hlsl
+Texture
+wall03.png
+UID
+2218589739
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh
+plane.fbx
+Position
+7.5 1.5 9.5
+Rast State
+solid
+Rotation
+0 1 0 -0.000172637
+Scale
+2 1.5 1
+Shader
+DefaultShader.hlsl
+Texture
+wall03.png
+UID
+2218589739
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+0.4 0.4
+next
+Mesh
+plane.fbx
+Position
+1.5 1.5 -0.5
+Rast State
+solid
+Rotation
+-0 0.000172667 -0 1
+Scale
+2 1.5 1
+Shader
+DefaultShader.hlsl
+Texture
+wall03.png
+UID
+2218589739
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh
+plane.fbx
+Position
+6.5 1.5 -0.500345
+Rast State
+solid
+Rotation
+-0 0.000172667 -0 1
+Scale
+3 1.5 1
+Shader
+DefaultShader.hlsl
+Texture
+wall03.png
+UID
+2218589739
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh
+plane.fbx
+Position
+1.00001 1.5 9.5
+Rast State
+solid
+Rotation
+0 1 0 -2.60274e-07
+Scale
+1.49999 1.5 0.999992
+Shader
+DefaultShader.hlsl
+Texture
+wall03.png
+UID
+2218589739
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
 DirectionalLightActor
 1
 Colour
@@ -268,11 +475,11 @@ testdiag
 Mesh
 cube.fbx
 Position
-6 0.5 2
+4 0.5 2
 Rast State
 solid
 Rotation
--0 0 -0 1
+-0 0.707107 -0 0.707107
 Scale
 0.5 0.5 0.5
 Shader
