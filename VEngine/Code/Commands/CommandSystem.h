@@ -3,6 +3,8 @@
 
 struct ICommand;
 
+//Currently used for undo/redo commands in the editor, but is generic enough with ICommand
+//that it could be used during gameplay and for other systems.
 struct CommandSystem
 {
 	std::vector<ICommand*> commands;
