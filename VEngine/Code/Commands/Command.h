@@ -6,7 +6,7 @@ struct Command : ICommand
 {
 	T oldValue;
 	T newValue;
-	T* value;
+	T* value = nullptr;
 
 	//use this constructor to push new values into the command
 	Command(T newValue_, T* value_)
