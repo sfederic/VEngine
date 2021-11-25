@@ -137,6 +137,7 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 	return false;
 }
 
+//TODO: no logic for raycasts hitting trigger volumes. See if it's even worth adding it in down the line.
 bool RaycastTriangleIntersect(Ray& ray)
 {
 	std::vector<Ray> rays;
