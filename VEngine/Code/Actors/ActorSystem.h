@@ -93,6 +93,11 @@ struct ActorSystem : IActorSystem
 		}
 	}
 
+	virtual uint32_t GetNumActors() override
+	{
+		return actors.size();
+	}
+
 	virtual void Serialise(Serialiser& s) override
 	{
 		s.WriteLine(name); //Use actorsystem name to create again from ActorSystemCache on Deserialise
