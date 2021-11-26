@@ -9,7 +9,7 @@ cube.fbx
 Near Z
 0.01
 Position
-5 0.5 6
+4 0.5 6
 Rast State
 solid
 Rotation
@@ -467,7 +467,20 @@ UID
 202714208
 next
 EntranceTrigger
-0
+1
+Extents
+1 1 1
+Level Name
+test.vmap
+Position
+8 1 8
+Rotation
+-0 0 -0 1
+Scale
+1 1 1
+UID
+1351714053
+next
 NPC
 1
 File
