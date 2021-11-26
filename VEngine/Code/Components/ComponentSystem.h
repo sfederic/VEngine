@@ -103,6 +103,11 @@ struct ComponentSystem : IComponentSystem
 		return outComponents;
 	}
 
+	uint32_t GetNumComponents() override
+	{
+		return components.size();
+	}
+
 	virtual Component* FindComponentByName(std::string componentName) override
 	{
 		for (T* component : components)
