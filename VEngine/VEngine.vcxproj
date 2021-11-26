@@ -114,7 +114,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Code\Actors\AudioActor.cpp" />
-    <ClCompile Include="Code\Actors\Game\DestructibleActor.cpp" />
     <ClCompile Include="Code\Actors\Game\GridActor.cpp" />
     <ClCompile Include="Code\Asset\AssetSystem.cpp" />
     <ClCompile Include="Code\Components\AudioComponent.cpp" />
@@ -187,7 +186,6 @@
     <ClCompile Include="Code\Editor\PropertyWidgets\ShaderDataWidget.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\MeshComponentDataWidget.cpp" />
     <ClInclude Include="Code\Actors\AudioActor.h" />
-    <ClInclude Include="Code\Actors\Game\DestructibleActor.h" />
     <ClInclude Include="Code\Actors\Game\GridActor.h" />
     <ClInclude Include="Code\Asset\AssetSystem.h" />
     <ClInclude Include="Code\Components\AudioComponent.h" />
