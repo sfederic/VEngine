@@ -11,6 +11,7 @@
 #include "Actors/Game/Pickup.h"
 #include "Components/DialogueComponent.h"
 #include "Actors/Game/BattleGrid.h"
+#include "Actors/Game/DestructibleActor.h"
 
 DialogueComponent* dialogueComponent;
 
@@ -138,6 +139,16 @@ void Player::PrimaryAction()
 				{
 					heldItem = pickup;
 					pickup->AddToPlayerInventory();
+					return;
+				}
+			}
+
+			//DESTRUCTIBLE CHECK
+			{
+				auto destructible = dynamic_cast<DestructibleActor*>(ray.hitActor);
+				if (destructible)
+				{
+					destructible->Destroy();
 					return;
 				}
 			}
