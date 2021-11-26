@@ -72,6 +72,7 @@ void DebugMenu::Tick(float deltaTime)
 	RenderGameInstanceData();
 	RenderMemoryMenu();
 	RenderActorSystemMenu();
+	RenderComponentSystemMenu();
 
 	ImGui::EndFrame();
 
@@ -313,6 +314,22 @@ void DebugMenu::RenderActorSystemMenu()
 		ImGui::Text("Name: %s |", actorSystem->name.c_str());
 		ImGui::SameLine();
 		ImGui::Text("Actor Count: %d", actorSystem->GetNumActors());
+	}
+
+	ImGui::End();
+}
+
+void DebugMenu::RenderComponentSystemMenu()
+{
+	if (!componentSystemMenuOpen) return;
+
+	ImGui::Begin("Component Systems");
+
+	for (auto componentSystem : world.activeComponentSystems)
+	{
+		ImGui::Text("Name: %s |", componentSystem->name.c_str());
+		ImGui::SameLine();
+		ImGui::Text("Actor Count: %d", componentSystem->GetNumComponents());
 	}
 
 	ImGui::End();

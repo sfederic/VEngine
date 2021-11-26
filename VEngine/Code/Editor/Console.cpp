@@ -40,6 +40,9 @@ Console::Console()
 	//Show actor system stats
 	executeMap.emplace(L"ACTORSYSTEM", []() { debugMenu.actorSystemMenuOpen = !debugMenu.actorSystemMenuOpen; });
 
+	//show component system stats
+	executeMap.emplace(L"COMPONENTSYSTEM", []() { debugMenu.componentSystemMenuOpen = !debugMenu.componentSystemMenuOpen; });
+
 	//shows in-world stats (eg. vertex count, actor count)
 	executeMap.emplace(L"STATS", []() { debugMenu.worldStatsMenuOpen = !debugMenu.worldStatsMenuOpen; });
 
