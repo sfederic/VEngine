@@ -43,6 +43,21 @@ void Widget::MapToScreenSpace()
 	Text(displayText, { (float)sx, (float)sy, (float)sx + 150.f, (float)sy + 150.f });
 }
 
+void Widget::DrawHealth(int healthCount)
+{
+	//TODO: code duplication between here and MapToScreenSpace()
+	float f1 = pos.m128_f32[0] / pos.m128_f32[3];
+	float f2 = pos.m128_f32[1] / pos.m128_f32[3];
+
+	int sx = ((f1 * 0.5f) + 0.5) * renderer.viewport.Width;
+	int sy = ((f2 * -0.5f) + 0.5) * renderer.viewport.Height;
+
+	for (int i = 0; i < healthCount; i++)
+	{
+		Image("heart_icon.png", sx + (i * 50), sy, 50.f, 50.f);
+	}
+}
+
 void Widget::Text(const std::wstring& text, D2D1_RECT_F layout)
 {
 	uiSystem.d2dRenderTarget->DrawText(text.c_str(), text.size(),

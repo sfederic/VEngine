@@ -33,3 +33,8 @@ void WidgetComponent::RemoveFromViewport()
 {
     widget.RemoveFromViewport();
 }
+
+void WidgetComponent::SetPosition(XMVECTOR newPosition)
+{
+    widget.pos = newPosition;
+}

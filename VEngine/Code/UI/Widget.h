@@ -22,6 +22,7 @@ struct Widget
 	void AddToViewport();
 	void RemoveFromViewport();
 	void MapToScreenSpace();
+	void DrawHealth(int healthCount);
 
 	void Text(const std::wstring& text, D2D1_RECT_F layout);
 	bool Button(const std::wstring& text, D2D1_RECT_F layout, float lineWidth = 1.0f);
