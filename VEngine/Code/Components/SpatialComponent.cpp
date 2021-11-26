@@ -44,6 +44,11 @@ XMVECTOR SpatialComponent::GetPositionV()
 	return position;
 }
 
+void SpatialComponent::SetPosition(float x, float y, float z)
+{
+	transform.position = XMFLOAT3(x, y, z);
+}
+
 void SpatialComponent::SetPosition(XMFLOAT3 newPosition)
 {
 	transform.position = newPosition;
@@ -65,6 +70,11 @@ XMVECTOR SpatialComponent::GetScaleV()
 	return scale;
 }
 
+void SpatialComponent::SetScale(float x, float y, float z)
+{
+	transform.scale = XMFLOAT3(x, y, z);
+}
+
 void SpatialComponent::SetScale(XMFLOAT3 newScale)
 {
 	transform.scale = newScale;
@@ -79,6 +89,11 @@ XMVECTOR SpatialComponent::GetRotationV()
 {
 	XMVECTOR rotation = XMLoadFloat4(&transform.rotation);
 	return rotation;
+}
+
+void SpatialComponent::SetRotation(float x, float y, float z, float w)
+{
+	transform.rotation = XMFLOAT4(x, y, z, w);
 }
 
 XMFLOAT4 SpatialComponent::GetRotation()
