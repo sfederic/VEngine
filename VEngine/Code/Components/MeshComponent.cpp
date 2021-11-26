@@ -9,7 +9,15 @@
 //Vertex and index buffers linked to a mesh filename to copy over to new PSOs
 std::unordered_map<std::string, MeshBuffers> existingMeshBuffers;
 
-MeshComponent::MeshComponent(const std::string filename_, 
+MeshComponent::MeshComponent()
+{
+	meshDataProxy = new MeshDataProxy();
+	pso = new PipelineStateObject();
+
+	material = new Material("test.png", "DefaultShader.hlsl");
+}
+
+MeshComponent::MeshComponent(const std::string filename_,
 	const std::string textureFilename_,
 	const std::string shaderFilename_)
 {
