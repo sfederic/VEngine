@@ -377,6 +377,9 @@
     <ClCompile Include="Code\Editor\PropertyWidgets\MeshComponentDataWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\Game\DestructibleActor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -698,6 +701,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\PropertyWidgets\MeshComponentDataWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\DestructibleActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
