@@ -151,8 +151,12 @@ void Player::PrimaryAction()
 				{
 					if (gridActor->isDestructible)
 					{
-						gridActor->Destroy();
-						return;
+						gridActor->health -= 1;
+						if (gridActor->health <= 0)
+						{
+							gridActor->Destroy();
+							return;
+						}
 					}
 				}
 			}
