@@ -37,6 +37,9 @@ Console::Console()
 	//Shows actor info while hovering over the actor with mouse
 	executeMap.emplace(L"ACTOR", []() { debugMenu.actorInspectMenuOpen = !debugMenu.actorInspectMenuOpen; });
 
+	//Show actor system stats
+	executeMap.emplace(L"ACTORSYSTEM", []() { debugMenu.actorSystemMenuOpen = !debugMenu.actorSystemMenuOpen; });
+
 	//shows in-world stats (eg. vertex count, actor count)
 	executeMap.emplace(L"STATS", []() { debugMenu.worldStatsMenuOpen = !debugMenu.worldStatsMenuOpen; });
 

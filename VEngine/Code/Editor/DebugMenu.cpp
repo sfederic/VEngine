@@ -71,6 +71,7 @@ void DebugMenu::Tick(float deltaTime)
 	RenderWorldStats();
 	RenderGameInstanceData();
 	RenderMemoryMenu();
+	RenderActorSystemMenu();
 
 	ImGui::EndFrame();
 
@@ -296,6 +297,22 @@ void DebugMenu::RenderMemoryMenu()
 			ImGui::Text("Unloaded");
 			break;
 		}
+	}
+
+	ImGui::End();
+}
+
+void DebugMenu::RenderActorSystemMenu()
+{
+	if (!actorSystemMenuOpen) return;
+
+	ImGui::Begin("Actor Systems");
+
+	for (auto actorSystem : world.activeActorSystems)
+	{
+		ImGui::Text("Name: %s |", actorSystem->name.c_str());
+		ImGui::SameLine();
+		ImGui::Text("Actor Count: %d", actorSystem->GetNumActors());
 	}
 
 	ImGui::End();
