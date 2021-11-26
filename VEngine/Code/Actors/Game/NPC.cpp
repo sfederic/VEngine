@@ -20,7 +20,7 @@ void NPC::Start()
 
 Properties NPC::GetProps()
 {
-    Properties props = Actor::GetProps();
+    Properties props = __super::GetProps();
     props.title = "NPC";
     return props;
 }

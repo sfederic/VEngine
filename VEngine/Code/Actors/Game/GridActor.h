@@ -22,5 +22,6 @@ struct GridActor : Actor
 	bool isDestructible = false;
 
 	GridActor();
+	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 };

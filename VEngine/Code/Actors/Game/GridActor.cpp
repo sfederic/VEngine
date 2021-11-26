@@ -10,6 +10,12 @@ GridActor::GridActor()
 	widget = WidgetComponent::system.Add(this);
 }
 
+void GridActor::Tick(float deltaTime)
+{
+	widget->SetPosition(GetHomogeneousPositionVector());
+	widget->widget.DrawHealth(health);
+}
+
 Properties GridActor::GetProps()
 {
 	auto props = Actor::GetProps();
