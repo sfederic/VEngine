@@ -51,6 +51,7 @@ void Player::Tick(float deltaTime)
 Properties Player::GetProps()
 {
     auto props = Actor::GetProps();
+	props.title = "Player";
 	return props;
 }
 
