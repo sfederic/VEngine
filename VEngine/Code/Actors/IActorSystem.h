@@ -1,9 +1,10 @@
 #pragma once
 #include <string>
-#include "Serialiser.h"
 #include "Transform.h"
 
 struct Actor;
+struct Serialiser;
+struct Deserialiser;
 
 struct IActorSystem
 {
