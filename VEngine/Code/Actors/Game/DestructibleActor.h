@@ -1,15 +1,15 @@
 #pragma once
-#include "../Actor.h"
+#include "GridActor.h"
 #include "../ActorSystem.h"
 
 struct MeshComponent;
 
 //Static Actor that can be destroyed by characters in-world.
-struct DestructibleActor : Actor
+struct DestructibleActor : GridActor
 {
 	ACTOR_SYSTEM(DestructibleActor);
 
-	MeshComponent* mesh = nullptr;
+	//MeshComponent* mesh = nullptr;
 
 	DestructibleActor();
 	virtual Properties GetProps() override;

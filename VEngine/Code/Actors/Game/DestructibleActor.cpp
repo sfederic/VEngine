@@ -3,8 +3,8 @@
 
 DestructibleActor::DestructibleActor()
 {
-	mesh = MeshComponent::system.Add(this);
-	rootComponent = mesh;
+	//mesh = MeshComponent::system.Add(this);
+	//rootComponent = mesh;
 }
 
 Properties DestructibleActor::GetProps()
