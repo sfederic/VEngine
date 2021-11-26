@@ -11,6 +11,8 @@ struct GridActor : Actor
 
 	MeshComponent* mesh = nullptr;
 
+	bool isDestructible = false;
+
 	GridActor();
 	virtual Properties GetProps() override;
 };

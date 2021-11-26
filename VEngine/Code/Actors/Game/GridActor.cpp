@@ -9,5 +9,8 @@ GridActor::GridActor()
 
 Properties GridActor::GetProps()
 {
-	return Actor::GetProps();
+	auto props = Actor::GetProps();
+	props.title = "GridActor";
+	props.Add("Destruct", &isDestructible);
+	return props;
 }
