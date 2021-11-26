@@ -12,5 +12,6 @@ Properties GridActor::GetProps()
 	auto props = Actor::GetProps();
 	props.title = "GridActor";
 	props.Add("Destruct", &isDestructible);
+	props.Add("Health", &health);
 	return props;
 }
