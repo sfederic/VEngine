@@ -11,7 +11,7 @@
 #include "Actors/Game/Pickup.h"
 #include "Components/DialogueComponent.h"
 #include "Actors/Game/BattleGrid.h"
-#include "Actors/Game/DestructibleActor.h"
+#include "Actors/Game/GridActor.h"
 
 DialogueComponent* dialogueComponent;
 
@@ -145,11 +145,14 @@ void Player::PrimaryAction()
 
 			//DESTRUCTIBLE CHECK
 			{
-				auto destructible = dynamic_cast<DestructibleActor*>(ray.hitActor);
-				if (destructible)
+				auto gridActor = dynamic_cast<GridActor*>(ray.hitActor);
+				if (gridActor)
 				{
-					destructible->Destroy();
-					return;
+					if (gridActor->isDestructible)
+					{
+						gridActor->Destroy();
+						return;
+					}
 				}
 			}
 
