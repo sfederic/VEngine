@@ -23,6 +23,7 @@ Texture2D* TextureSystem::FindTexture2D(std::string textureFilename)
 {
 	if (!std::filesystem::exists("Textures/" + textureFilename))
 	{
+		throw std::exception("Texture not found");
 		return nullptr;
 	}
 
