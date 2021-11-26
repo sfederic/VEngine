@@ -11,6 +11,12 @@ struct GridActor : Actor
 
 	MeshComponent* mesh = nullptr;
 
+	//Actor's positions on the level grid
+	int xIndex = -1;
+	int yIndex = -1;
+
+	int health = 0;
+
 	bool isDestructible = false;
 
 	GridActor();
