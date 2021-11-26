@@ -9,7 +9,7 @@ cube.fbx
 Near Z
 0.01
 Position
-4 0.5 6
+4 0.5 4
 Rast State
 solid
 Rotation
@@ -30,10 +30,6 @@ UvScale
 1 1
 next
 AudioActor
-0
-GameEvent
-0
-BattleGrid
 0
 MeshActor
 18
@@ -451,6 +447,35 @@ UvRotation
 UvScale
 1 1
 next
+DestructibleActor
+1
+Mesh
+hollow_barrel.fbx
+Position
+7 0 4
+Rast State
+solid
+Rotation
+-0 0 -0 1
+Scale
+0.5 0.5 0.5
+Shader
+DefaultShader.hlsl
+Texture
+test.png
+UID
+1388452807
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+GameEvent
+0
+BattleGrid
+0
 DirectionalLightActor
 1
 Colour
@@ -466,6 +491,12 @@ Scale
 UID
 202714208
 next
+SavePoint
+0
+PointLightActor
+0
+SpotLightActor
+0
 EntranceTrigger
 1
 Extents
@@ -508,12 +539,6 @@ UvRotation
 UvScale
 1 1
 next
-SavePoint
-0
-PointLightActor
-0
-SpotLightActor
-0
 Unit
 0
 Pickup
