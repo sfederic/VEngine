@@ -26,6 +26,10 @@ struct Player : Actor
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
+
+private:
 	void MovementInput(float deltaTime);
 	void RotationInput(float deltaTime);
+	void ToggleBattleGrid();
+	void PrimaryAction();
 };

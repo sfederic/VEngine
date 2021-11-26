@@ -36,56 +36,9 @@ void Player::Start()
 
 void Player::Tick(float deltaTime)
 {
-	//toggle battlegrid visibility
-	if (Input::GetKeyUp(Keys::B))
-	{
-		auto battleGrid = GameUtils::GetBattleGrid();
-		if (battleGrid)
-		{
-			battleGrid->ToggleActive();
-		}
-	}
+	ToggleBattleGrid();
 
-	if (Input::GetKeyUp(Keys::Down))
-	{
-		Ray ray(this);
-		if (Raycast(ray, GetPositionVector(), GetForwardVectorV(), 1.5f))
-		{
-			//PICKUP CHECK
-			{
-				auto pickup = dynamic_cast<Pickup*>(ray.hitActor);
-				if (pickup)
-				{
-					heldItem = pickup;
-					pickup->AddToPlayerInventory();
-					return;
-				}
-			}
-
-			//DIALOGUE CHECK
-			if (inConversation)
-			{
-				if (!dialogueComponent->NextLine())
-				{
-					inConversation = false;
-				}
-				else
-				{
-					dialogueComponent->ShowTextAtActor();
-				}
-			}
-			else
-			{
-				NPC* npc = dynamic_cast<NPC*>(ray.hitActor);
-				if (npc)
-				{
-					dialogueComponent = npc->dialogue;
-					inConversation = true;
-					dialogueComponent->ShowTextAtActor();
-				}
-			}
-		}
-	}
+	PrimaryAction();
 
 	if (!inConversation)
 	{
@@ -154,6 +107,63 @@ void Player::RotationInput(float deltaTime)
 		{
 			const float angle = XMConvertToRadians(-90.f);
 			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::XMVectorUp(), angle));
+		}
+	}
+}
+
+void Player::ToggleBattleGrid()
+{
+	//toggle battlegrid visibility
+	if (Input::GetKeyUp(Keys::B))
+	{
+		auto battleGrid = GameUtils::GetBattleGrid();
+		if (battleGrid)
+		{
+			battleGrid->ToggleActive();
+		}
+	}
+}
+
+void Player::PrimaryAction()
+{
+	if (Input::GetKeyUp(Keys::Down))
+	{
+		Ray ray(this);
+		if (Raycast(ray, GetPositionVector(), GetForwardVectorV(), 1.5f))
+		{
+			//PICKUP CHECK
+			{
+				auto pickup = dynamic_cast<Pickup*>(ray.hitActor);
+				if (pickup)
+				{
+					heldItem = pickup;
+					pickup->AddToPlayerInventory();
+					return;
+				}
+			}
+
+			//DIALOGUE CHECK
+			if (inConversation)
+			{
+				if (!dialogueComponent->NextLine())
+				{
+					inConversation = false;
+				}
+				else
+				{
+					dialogueComponent->ShowTextAtActor();
+				}
+			}
+			else
+			{
+				NPC* npc = dynamic_cast<NPC*>(ray.hitActor);
+				if (npc)
+				{
+					dialogueComponent = npc->dialogue;
+					inConversation = true;
+					dialogueComponent->ShowTextAtActor();
+				}
+			}
 		}
 	}
 }
