@@ -1,7 +1,6 @@
 #include "NPC.h"
 #include "Components/MeshComponent.h"
 #include "Components/DialogueComponent.h"
-#include "Components/WidgetComponent.h"
 #include "GameUtils.h"
 #include "VString.h"
 #include "UI/Widget.h"
@@ -12,8 +11,6 @@ NPC::NPC()
     rootComponent = mesh;
 
     dialogue = DialogueComponent::system.Add(this);
-
-    widget = WidgetComponent::system.Add(this);
 }
 
 void NPC::Start()

@@ -3,6 +3,7 @@
 #include "../ActorSystem.h"
 
 struct MeshComponent;
+struct WidgetComponent;
 
 //Base struct for every interactive actor that is placed in the level
 struct GridActor : Actor
@@ -10,6 +11,7 @@ struct GridActor : Actor
 	ACTOR_SYSTEM(GridActor);
 
 	MeshComponent* mesh = nullptr;
+	WidgetComponent* widget = nullptr;
 
 	//Actor's positions on the level grid
 	int xIndex = -1;

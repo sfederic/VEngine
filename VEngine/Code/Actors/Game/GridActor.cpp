@@ -1,10 +1,13 @@
 #include "GridActor.h"
 #include "Components/MeshComponent.h"
+#include "Components/WidgetComponent.h"
 
 GridActor::GridActor()
 {
 	mesh = MeshComponent::system.Add(this);
 	rootComponent = mesh;
+
+	widget = WidgetComponent::system.Add(this);
 }
 
 Properties GridActor::GetProps()
