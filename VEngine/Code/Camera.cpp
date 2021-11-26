@@ -43,7 +43,7 @@ XMMATRIX CameraComponent::GetViewMatrix()
 	{
 		XMVECTOR focus = position + forward;
 
-		if (arcBallMovementOn)
+		if (arcBallMovementOn && worldEditor.pickedActor)
 		{
 			focus = worldEditor.pickedActor->GetPositionVector();
 		}
