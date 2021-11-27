@@ -15,16 +15,13 @@ using namespace DirectX;
 //Base widget class for in-game UI.
 struct Widget
 {
-	virtual void Tick(float deltaTime);
-	virtual void Start();
-	void AddToViewport();
-	void RemoveFromViewport();
-	void GetScreenSpaceCoords(int& sx, int& sy);
-
-	void Text(const std::wstring& text, D2D1_RECT_F layout);
-	bool Button(const std::wstring& text, D2D1_RECT_F layout, float lineWidth = 1.0f);
-	void Image(const std::string& filename, int x, int y, int w, int h);
-	void Rect(D2D1_RECT_F layout);
+	enum class TextAlign
+	{
+		Center,
+		Justified,
+		Leading,
+		Trailing
+	};
 
 	enum class Align
 	{
@@ -38,6 +35,17 @@ struct Widget
 		BottomLeft,
 		BottomRight,
 	};
+
+	virtual void Tick(float deltaTime);
+	virtual void Start();
+	void AddToViewport();
+	void RemoveFromViewport();
+	void GetScreenSpaceCoords(int& sx, int& sy);
+
+	void Text(const std::wstring& text, D2D1_RECT_F layout, TextAlign align = TextAlign::Justified);
+	bool Button(const std::wstring& text, D2D1_RECT_F layout, float lineWidth = 1.0f);
+	void Image(const std::string& filename, int x, int y, int w, int h);
+	void Rect(D2D1_RECT_F layout);
 
 	static D2D1_RECT_F AlignLayout(float w, float h, Align align);
 

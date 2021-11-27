@@ -38,8 +38,31 @@ void Widget::GetScreenSpaceCoords(int& sx, int& sy)
 	sy = ((f2 * -0.5f) + 0.5) * renderer.viewport.Height;
 }
 
-void Widget::Text(const std::wstring& text, D2D1_RECT_F layout)
+void Widget::Text(const std::wstring& text, D2D1_RECT_F layout, TextAlign align)
 {
+	DWRITE_TEXT_ALIGNMENT endAlignment{};
+
+	switch (align)
+	{
+	case TextAlign::Center: 
+		endAlignment = DWRITE_TEXT_ALIGNMENT_CENTER;
+		break;
+
+	case TextAlign::Justified:
+		endAlignment = DWRITE_TEXT_ALIGNMENT_JUSTIFIED;
+		break;
+
+	case TextAlign::Leading:
+		endAlignment = DWRITE_TEXT_ALIGNMENT_LEADING;
+		break;
+
+	case TextAlign::Trailing:
+		endAlignment = DWRITE_TEXT_ALIGNMENT_TRAILING;
+		break;
+	}
+
+	uiSystem.textFormat->SetTextAlignment(endAlignment);
+
 	uiSystem.d2dRenderTarget->DrawText(text.c_str(), text.size(),
 		uiSystem.textFormat, layout, uiSystem.brushText);
 }
@@ -132,5 +155,11 @@ D2D1_RECT_F Widget::AlignLayout(float w, float h, Align align)
 	}
 
 	D2D1_RECT_F rect = { vw - w, vh - h, vw + w, vh + h };
+
+	if (rect.left < 0.f) rect.left = 0.f;
+	if (rect.top < 0.f) rect.top = 0.f;
+	if (rect.right > renderer.GetViewportWidth()) rect.right = vw;
+	if (rect.bottom > renderer.GetViewportHeight()) rect.bottom = vh;
+
 	return rect;
 }
