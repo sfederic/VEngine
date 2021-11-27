@@ -75,5 +75,5 @@ void Widget::Image(const std::string& filename, int x, int y, int w, int h)
 
 void Widget::Rect(D2D1_RECT_F layout)
 {
-	uiSystem.d2dRenderTarget->DrawRectangle(layout, uiSystem.brushShapes);
+	uiSystem.d2dRenderTarget->FillRectangle(layout, uiSystem.brushShapes);
 }
