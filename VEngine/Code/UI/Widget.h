@@ -12,6 +12,19 @@ using namespace DirectX;
 //right = The x-coordinate of the lower-right corner of the rectangle
 //bottom = The y-coordinate of the lower-right corner of the rectangle.
 
+enum class Align
+{
+	Center,
+	Right,
+	Left,
+	Bottom,
+	Top,
+	TopLeft,
+	TopRight,
+	BottomLeft,
+	BottomRight,
+};
+
 //Base widget class for in-game UI.
 struct Widget
 {
@@ -27,7 +40,16 @@ struct Widget
 	void Rect(D2D1_RECT_F layout);
 
 	//Rect layout alignment functions
+	static D2D1_RECT_F AlignLayout(float w, float h, Align align);
 	static D2D1_RECT_F AlignLayoutCenter(float w, float h);
+	static D2D1_RECT_F AlignLayoutRight(float w, float h);
+	static D2D1_RECT_F AlignLayoutLeft(float w, float h);
+	static D2D1_RECT_F AlignLayoutTop(float w, float h);
+	static D2D1_RECT_F AlignLayoutBottom(float w, float h);
+	static D2D1_RECT_F AlignLayoutTopLeft(float w, float h);
+	static D2D1_RECT_F AlignLayoutTopRight(float w, float h);
+	static D2D1_RECT_F AlignLayoutBottomLeft(float w, float h);
+	static D2D1_RECT_F AlignLayoutBottomRight(float w, float h);
 
 	XMVECTOR pos;
 	std::wstring displayText;

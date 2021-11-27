@@ -86,3 +86,75 @@ D2D1_RECT_F Widget::AlignLayoutCenter(float w, float h)
 	D2D1_RECT_F rect = { vw - w, vh - h, vw + w, vh + h };
 	return rect;
 }
+
+D2D1_RECT_F Widget::AlignLayoutRight(float w, float h)
+{
+	float vw = renderer.GetViewportWidth() * 0.75f;
+	float vh = renderer.GetViewportHeight() / 2.f;
+
+	D2D1_RECT_F rect = { vw - w, vh - h, vw + w, vh + h };
+	return rect;
+}
+
+D2D1_RECT_F Widget::AlignLayoutLeft(float w, float h)
+{
+	float vw = renderer.GetViewportWidth() * 0.25f;
+	float vh = renderer.GetViewportHeight() / 2.f;
+
+	D2D1_RECT_F rect = { vw - w, vh - h, vw + w, vh + h };
+	return rect;
+}
+
+D2D1_RECT_F Widget::AlignLayoutTop(float w, float h)
+{
+	float vw = renderer.GetViewportWidth() / 2.f;
+	float vh = renderer.GetViewportHeight() * 0.25f;
+
+	D2D1_RECT_F rect = { vw - w, vh - h, vw + w, vh + h };
+	return rect;
+}
+
+D2D1_RECT_F Widget::AlignLayoutBottom(float w, float h)
+{
+	float vw = renderer.GetViewportWidth() / 2.f;
+	float vh = renderer.GetViewportHeight() * 0.75f;
+
+	D2D1_RECT_F rect = { vw - w, vh - h, vw + w, vh + h };
+	return rect;
+}
+
+D2D1_RECT_F Widget::AlignLayoutTopLeft(float w, float h)
+{
+	float vw = renderer.GetViewportWidth() * 0.25f;
+	float vh = renderer.GetViewportHeight() * 0.25f;
+
+	D2D1_RECT_F rect = { vw - w, vh - h, vw + w, vh + h };
+	return rect;
+}
+
+D2D1_RECT_F Widget::AlignLayoutTopRight(float w, float h)
+{
+	float vw = renderer.GetViewportWidth() * 0.75f;
+	float vh = renderer.GetViewportHeight() * 0.25f;
+
+	D2D1_RECT_F rect = { vw - w, vh - h, vw + w, vh + h };
+	return rect;
+}
+
+D2D1_RECT_F Widget::AlignLayoutBottomLeft(float w, float h)
+{
+	float vw = renderer.GetViewportWidth() * 0.25f;
+	float vh = renderer.GetViewportHeight() * 0.75f;
+
+	D2D1_RECT_F rect = { vw - w, vh - h, vw + w, vh + h };
+	return rect;
+}
+
+D2D1_RECT_F Widget::AlignLayoutBottomRight(float w, float h)
+{
+	float vw = renderer.GetViewportWidth() * 0.75f;
+	float vh = renderer.GetViewportHeight() * 0.75f;
+
+	D2D1_RECT_F rect = { vw - w, vh - h, vw + w, vh + h };
+	return rect;
+}
