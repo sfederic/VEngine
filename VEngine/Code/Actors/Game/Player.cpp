@@ -164,15 +164,19 @@ void Player::PrimaryAction()
 
 			//DESTRUCTIBLE CHECK
 			{
-				auto gridActor = dynamic_cast<GridActor*>(ray.hitActor);
-				if (gridActor)
+				if (inCombat)
 				{
-					if (gridActor->isDestructible)
+					auto gridActor = dynamic_cast<GridActor*>(ray.hitActor);
+					if (gridActor)
 					{
-						gridActor->health -= 1;
-						if (gridActor->health <= 0)
+						if (gridActor->isDestructible)
 						{
-							gridActor->Destroy();
+							gridActor->health -= 1;
+							if (gridActor->health <= 0)
+							{
+								gridActor->Destroy();
+							}
+
 							return;
 						}
 					}
