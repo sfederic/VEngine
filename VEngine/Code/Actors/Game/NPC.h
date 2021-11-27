@@ -14,6 +14,7 @@ struct NPC : GridActor
 
 	NPC();
 	virtual void Start() override;
+	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 	void TalkTo();
 };

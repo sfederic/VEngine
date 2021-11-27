@@ -19,6 +19,11 @@ void NPC::Start()
     __super::Start();
 }
 
+void NPC::Tick(float deltaTime)
+{
+    __super::Tick(deltaTime);
+}
+
 Properties NPC::GetProps()
 {
     Properties props = __super::GetProps();
