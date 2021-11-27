@@ -15,7 +15,7 @@ struct CameraComponent : SpatialComponent
 
 	Actor* targetActor = nullptr;
 
-	float FOV = XM_PI / 3.f;
+	float FOV = 60.f;
 	float nearZ = 0.01f;
 	float farZ = 1000.f;
 
