@@ -80,7 +80,10 @@ void UISystem::TickAllWidgets(float deltaTime)
 {
 	for (auto widget : widgetsInViewport)
 	{
-		widget->Tick(deltaTime);
+		if (widget->render)
+		{
+			widget->Tick(deltaTime);
+		}
 	}
 }
 
