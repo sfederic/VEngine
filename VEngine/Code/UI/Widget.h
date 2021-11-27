@@ -12,8 +12,6 @@ using namespace DirectX;
 //right = The x-coordinate of the lower-right corner of the rectangle
 //bottom = The y-coordinate of the lower-right corner of the rectangle.
 
-struct ID3D11ShaderResourceView;
-
 //Base widget class for in-game UI. Gotta figure out whether to use this or a small Direct2d implementation
 struct Widget
 {
@@ -22,7 +20,7 @@ struct Widget
 	void AddToViewport();
 	void RemoveFromViewport();
 	void MapToScreenSpace();
-	void DrawHealth(int healthCount);
+	void GetScreenSpaceCoords(int& sx, int& sy);
 
 	void Text(const std::wstring& text, D2D1_RECT_F layout);
 	bool Button(const std::wstring& text, D2D1_RECT_F layout, float lineWidth = 1.0f);

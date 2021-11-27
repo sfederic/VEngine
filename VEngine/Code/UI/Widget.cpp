@@ -28,34 +28,25 @@ void Widget::RemoveFromViewport()
 
 void Widget::MapToScreenSpace()
 {
-	//What you need to do here it take the actor's position after it's been multiplied 
-	//by the MVP matrix on the CPU side of things, divide it by the W component 
-	//and multiply it out by the viewport.
-	//REF:http://www.windows-tech.info/5/a80747e145dd9062.php
-
-	float f1 = pos.m128_f32[0] / pos.m128_f32[3];
-	float f2 = pos.m128_f32[1] / pos.m128_f32[3];
-
-	int sx = ((f1 * 0.5f) + 0.5) * renderer.viewport.Width;
-	int sy = ((f2 * -0.5f) + 0.5) * renderer.viewport.Height;
+	int sx, sy;
+	GetScreenSpaceCoords(sx, sy);
 
 	Image("speech_bubble.png", (float)sx - 50.f, (float)sy - 50.f, 200.f, 200.f);
 	Text(displayText, { (float)sx, (float)sy, (float)sx + 150.f, (float)sy + 150.f });
 }
 
-void Widget::DrawHealth(int healthCount)
+void Widget::GetScreenSpaceCoords(int& sx, int& sy)
 {
-	//TODO: code duplication between here and MapToScreenSpace()
-	float f1 = pos.m128_f32[0] / pos.m128_f32[3];
-	float f2 = pos.m128_f32[1] / pos.m128_f32[3];
+	//What you need to do here it take the actor's position after it's been multiplied 
+	//by the MVP matrix on the CPU side of things, divide it by the W component 
+	//and multiply it out by the viewport.
+	//REF:http://www.windows-tech.info/5/a80747e145dd9062.php
 
-	int sx = ((f1 * 0.5f) + 0.5) * renderer.viewport.Width;
-	int sy = ((f2 * -0.5f) + 0.5) * renderer.viewport.Height;
+	const float f1 = pos.m128_f32[0] / pos.m128_f32[3];
+	const float f2 = pos.m128_f32[1] / pos.m128_f32[3];
 
-	for (int i = 0; i < healthCount; i++)
-	{
-		Image("heart_icon.png", sx + (i * 50), sy, 50.f, 50.f);
-	}
+	sx = ((f1 * 0.5f) + 0.5) * renderer.viewport.Width;
+	sy = ((f2 * -0.5f) + 0.5) * renderer.viewport.Height;
 }
 
 void Widget::Text(const std::wstring& text, D2D1_RECT_F layout)
