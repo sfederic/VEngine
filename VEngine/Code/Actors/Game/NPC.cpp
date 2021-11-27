@@ -22,6 +22,8 @@ void NPC::Start()
 void NPC::Tick(float deltaTime)
 {
     __super::Tick(deltaTime);
+
+    dialogueWidget->widget->pos = GetHomogeneousPositionVector();
 }
 
 Properties NPC::GetProps()
