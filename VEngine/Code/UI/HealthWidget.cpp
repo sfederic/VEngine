@@ -2,11 +2,6 @@
 
 void HealthWidget::Tick(float deltaTime)
 {
-	DrawHealth();
-}
-
-void HealthWidget::DrawHealth()
-{
 	int sx, sy;
 	GetScreenSpaceCoords(sx, sy);
 
