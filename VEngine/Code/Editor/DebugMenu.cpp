@@ -338,16 +338,18 @@ void DebugMenu::RenderComponentSystemMenu()
 //Handle notifications (eg. "Shaders recompiled", "ERROR: Not X", etc)
 void DebugMenu::RenderNotifications(float deltaTime)
 {
-	float textOffsetX = 20.f;
+	constexpr float textOffsetX = 20.f;
+	constexpr float notificationLifetime = 3.0f;
 
-	const float notificationLifetime = 3.0f;
+	uiSystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
+
 	for (int i = 0; i < debugNotifications.size(); i++)
 	{
 		if (debugNotifications[i].timeOnScreen < notificationLifetime)
 		{
 			debugNotifications[i].timeOnScreen += deltaTime;
 
-			float notificationOffsetY = 20.f * i;
+			const float notificationOffsetY = 20.f * i;
 			uiSystem.d2dRenderTarget->DrawTextA(debugNotifications[i].text.c_str(), debugNotifications[i].text.size(), uiSystem.textFormat,
 				{ 0.f, notificationOffsetY, 1000.f, 1000.f }, uiSystem.debugBrushText);
 		}
