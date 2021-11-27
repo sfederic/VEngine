@@ -15,6 +15,7 @@
 #include "Actors/Game/GridActor.h"
 #include "UI/UISystem.h"
 #include "UI/HealthWidget.h"
+#include "UI/DialogueWidget.h"
 #include "UI/InteractWidget.h"
 
 DialogueComponent* dialogueComponent;
@@ -38,6 +39,7 @@ void Player::Start()
 {
 	camera->targetActor = this;
 
+	widget->widget = uiSystem.CreateWidget<DialogueWidget>();
 	interactWidget = uiSystem.CreateWidget<InteractWidget>();
 
 	nextPos = GetPositionVector();
