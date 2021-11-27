@@ -7,7 +7,7 @@ void WidgetComponent::Tick(float deltaTime)
 
 void WidgetComponent::Start()
 {
-    widget.Start();
+    //widget->Start();
 }
 
 void WidgetComponent::Create()
@@ -21,20 +21,20 @@ Properties WidgetComponent::GetProps()
 
 void WidgetComponent::SetText(std::string text)
 {
-    widget.displayText = stows(text);
+    widget->displayText = stows(text);
 }
 
 void WidgetComponent::AddToViewport()
 {
-    widget.AddToViewport();
+    widget->AddToViewport();
 }
 
 void WidgetComponent::RemoveFromViewport()
 {
-    widget.RemoveFromViewport();
+    widget->RemoveFromViewport();
 }
 
 void WidgetComponent::SetPosition(XMVECTOR newPosition)
 {
-    widget.pos = newPosition;
+    widget->pos = newPosition;
 }

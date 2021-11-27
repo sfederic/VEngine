@@ -62,7 +62,7 @@ void DialogueComponent::ShowTextAtActor()
     for (WidgetComponent* w : wcs)
     {
         w->SetText(dataIt->second.text);
-        w->widget.pos = actor->GetHomogeneousPositionVector();
+        w->widget->pos = actor->GetHomogeneousPositionVector();
         w->AddToViewport();
 
         previousWidgetComponent = w;
