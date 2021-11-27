@@ -26,6 +26,9 @@ struct Widget
 	void Image(const std::string& filename, int x, int y, int w, int h);
 	void Rect(D2D1_RECT_F layout);
 
+	//Rect layout alignment functions
+	static D2D1_RECT_F AlignLayoutCenter(float w, float h);
+
 	XMVECTOR pos;
 	std::wstring displayText;
 

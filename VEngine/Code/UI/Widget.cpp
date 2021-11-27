@@ -77,3 +77,12 @@ void Widget::Rect(D2D1_RECT_F layout)
 {
 	uiSystem.d2dRenderTarget->FillRectangle(layout, uiSystem.brushShapes);
 }
+
+D2D1_RECT_F Widget::AlignLayoutCenter(float w, float h)
+{
+	float vw = renderer.GetViewportWidth() / 2.f;
+	float vh = renderer.GetViewportHeight() / 2.f;
+
+	D2D1_RECT_F rect = { vw - w, vh - h, vw + w, vh + h };
+	return rect;
+}
