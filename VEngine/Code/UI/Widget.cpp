@@ -72,3 +72,8 @@ void Widget::Image(const std::string& filename, int x, int y, int w, int h)
 
 	spriteSystem.CreateScreenSprite(sprite);
 }
+
+void Widget::Rect(D2D1_RECT_F layout)
+{
+	uiSystem.d2dRenderTarget->DrawRectangle(layout, uiSystem.brushShapes);
+}
