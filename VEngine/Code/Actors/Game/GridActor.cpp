@@ -8,8 +8,6 @@ GridActor::GridActor()
 {
 	mesh = MeshComponent::system.Add(this);
 	rootComponent = mesh;
-
-	//widget = WidgetComponent::system.Add(this);
 }
 
 void GridActor::Start()
