@@ -12,14 +12,13 @@ using namespace DirectX;
 //right = The x-coordinate of the lower-right corner of the rectangle
 //bottom = The y-coordinate of the lower-right corner of the rectangle.
 
-//Base widget class for in-game UI. Gotta figure out whether to use this or a small Direct2d implementation
+//Base widget class for in-game UI.
 struct Widget
 {
 	virtual void Tick(float deltaTime);
 	virtual void Start();
 	void AddToViewport();
 	void RemoveFromViewport();
-	void MapToScreenSpace();
 	void GetScreenSpaceCoords(int& sx, int& sy);
 
 	void Text(const std::wstring& text, D2D1_RECT_F layout);

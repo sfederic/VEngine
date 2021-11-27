@@ -8,8 +8,6 @@
 
 void Widget::Tick(float deltaTime)
 {
-	//For NPC dialogue testing (so far I'm just using the base widget for dialogue)
-	MapToScreenSpace();
 }
 
 void Widget::Start()
@@ -24,15 +22,6 @@ void Widget::AddToViewport()
 void Widget::RemoveFromViewport()
 {
 	uiSystem.RemoveWidget(this);
-}
-
-void Widget::MapToScreenSpace()
-{
-	int sx, sy;
-	GetScreenSpaceCoords(sx, sy);
-
-	Image("speech_bubble.png", (float)sx - 50.f, (float)sy - 50.f, 200.f, 200.f);
-	Text(displayText, { (float)sx, (float)sy, (float)sx + 150.f, (float)sy + 150.f });
 }
 
 void Widget::GetScreenSpaceCoords(int& sx, int& sy)
