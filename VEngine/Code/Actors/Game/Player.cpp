@@ -12,6 +12,8 @@
 #include "Components/DialogueComponent.h"
 #include "Actors/Game/BattleGrid.h"
 #include "Actors/Game/GridActor.h"
+#include "UI/UISystem.h"
+#include "UI/HealthWidget.h"
 
 DialogueComponent* dialogueComponent;
 
@@ -116,12 +118,28 @@ void Player::RotationInput(float deltaTime)
 void Player::ToggleBattleGrid()
 {
 	//toggle battlegrid visibility
-	if (Input::GetKeyUp(Keys::B))
+	if (Input::GetKeyUp(Keys::Space))
 	{
+		inCombat = !inCombat;
+
 		auto battleGrid = GameUtils::GetBattleGrid();
 		if (battleGrid)
 		{
 			battleGrid->ToggleActive();
+		}
+
+		//toggle all health widgets on
+		auto healthWidgets = uiSystem.GetAllWidgetsOfType<HealthWidget>();
+		for (auto healthWidget : healthWidgets)
+		{
+			if (inCombat)
+			{
+				healthWidget->AddToViewport();
+			}
+			else
+			{
+				healthWidget->RemoveFromViewport();
+			}
 		}
 	}
 }

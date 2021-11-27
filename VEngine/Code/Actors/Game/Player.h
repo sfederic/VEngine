@@ -21,6 +21,7 @@ struct Player : Actor
 	XMVECTOR nextRot;
 
 	bool inConversation = false;
+	bool inCombat = false;
 
 	Player();
 	virtual void Start() override;
