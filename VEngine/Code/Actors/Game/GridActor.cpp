@@ -27,5 +27,7 @@ Properties GridActor::GetProps()
 	props.title = "GridActor";
 	props.Add("Destruct", &isDestructible);
 	props.Add("Health", &health);
+	props.Add("Interact", &isInteractable);
+	props.Add("Interact Text", &interactText);
 	return props;
 }

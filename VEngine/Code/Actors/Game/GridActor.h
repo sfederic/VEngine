@@ -21,6 +21,9 @@ struct GridActor : Actor
 
 	bool isDestructible = false;
 
+	bool isInteractable = false;
+	std::string interactText;
+
 	GridActor();
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
