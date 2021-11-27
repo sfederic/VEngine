@@ -1,19 +1,27 @@
 #include "GridActor.h"
 #include "Components/MeshComponent.h"
 #include "Components/WidgetComponent.h"
+#include "UI/HealthWidget.h"
+#include "UI/UISystem.h"
 
 GridActor::GridActor()
 {
 	mesh = MeshComponent::system.Add(this);
 	rootComponent = mesh;
 
-	widget = WidgetComponent::system.Add(this);
+	//widget = WidgetComponent::system.Add(this);
+}
+
+void GridActor::Start()
+{
+	healthWidget = uiSystem.CreateWidget<HealthWidget>();
+	healthWidget->healthPoints = &health;
+	healthWidget->AddToViewport();
 }
 
 void GridActor::Tick(float deltaTime)
 {
-	widget->SetPosition(GetHomogeneousPositionVector());
-	widget->widget.DrawHealth(health);
+	healthWidget->pos = GetHomogeneousPositionVector();
 }
 
 Properties GridActor::GetProps()

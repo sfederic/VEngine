@@ -4,6 +4,7 @@
 
 struct MeshComponent;
 struct WidgetComponent;
+struct HealthWidget;
 
 //Base struct for every interactive actor that is placed in the level
 struct GridActor : Actor
@@ -11,7 +12,8 @@ struct GridActor : Actor
 	ACTOR_SYSTEM(GridActor);
 
 	MeshComponent* mesh = nullptr;
-	WidgetComponent* widget = nullptr;
+	//WidgetComponent* widget = nullptr;
+	HealthWidget* healthWidget = nullptr;
 
 	//Actor's positions on the level grid
 	int xIndex = -1;
@@ -22,6 +24,7 @@ struct GridActor : Actor
 	bool isDestructible = false;
 
 	GridActor();
+	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 };
