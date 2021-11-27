@@ -28,5 +28,5 @@ struct Widget
 	XMVECTOR pos;
 	std::wstring displayText;
 
-	bool bRender = true;
+	bool render = true;
 };
