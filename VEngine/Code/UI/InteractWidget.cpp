@@ -2,7 +2,7 @@
 
 void InteractWidget::Tick(float deltaTime)
 {
-	auto rect = AlignLayoutCenter(300.f, 150.f);
+	auto rect = AlignLayout(100.f, 100.f, Align::TopRight);
 
 	Rect(rect);
 	Text(interactText, rect);

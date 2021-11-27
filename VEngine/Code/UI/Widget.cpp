@@ -78,82 +78,58 @@ void Widget::Rect(D2D1_RECT_F layout)
 	uiSystem.d2dRenderTarget->FillRectangle(layout, uiSystem.brushShapes);
 }
 
-D2D1_RECT_F Widget::AlignLayoutCenter(float w, float h)
+D2D1_RECT_F Widget::AlignLayout(float w, float h, Align align)
 {
-	float vw = renderer.GetViewportWidth() / 2.f;
-	float vh = renderer.GetViewportHeight() / 2.f;
+	float vw = renderer.GetViewportWidth();
+	float vh = renderer.GetViewportHeight();
 
-	D2D1_RECT_F rect = { vw - w, vh - h, vw + w, vh + h };
-	return rect;
-}
+	switch (align)
+	{
+	case Align::Center: 
+		vw /= 2.f;
+		vh /= 2.f;
+		break;
 
-D2D1_RECT_F Widget::AlignLayoutRight(float w, float h)
-{
-	float vw = renderer.GetViewportWidth() * 0.75f;
-	float vh = renderer.GetViewportHeight() / 2.f;
+	case Align::Right:
+		vw *= 0.75;
+		vh /= 2.f;
+		break;
 
-	D2D1_RECT_F rect = { vw - w, vh - h, vw + w, vh + h };
-	return rect;
-}
+	case Align::Left:
+		vw *= 0.25f;
+		vh /= 2.f;
+		break;
 
-D2D1_RECT_F Widget::AlignLayoutLeft(float w, float h)
-{
-	float vw = renderer.GetViewportWidth() * 0.25f;
-	float vh = renderer.GetViewportHeight() / 2.f;
+	case Align::Top:
+		vw /= 2.f;
+		vh *= 0.25f;
+		break;
 
-	D2D1_RECT_F rect = { vw - w, vh - h, vw + w, vh + h };
-	return rect;
-}
+	case Align::Bottom:
+		vw /= 2.f;
+		vh *= 0.75f;
+		break;
 
-D2D1_RECT_F Widget::AlignLayoutTop(float w, float h)
-{
-	float vw = renderer.GetViewportWidth() / 2.f;
-	float vh = renderer.GetViewportHeight() * 0.25f;
+	case Align::TopLeft:
+		vw *= 0.25f;
+		vh *= 0.25f;
+		break;
 
-	D2D1_RECT_F rect = { vw - w, vh - h, vw + w, vh + h };
-	return rect;
-}
+	case Align::TopRight:
+		vw *= 0.75f;
+		vh *= 0.25f;
+		break;
 
-D2D1_RECT_F Widget::AlignLayoutBottom(float w, float h)
-{
-	float vw = renderer.GetViewportWidth() / 2.f;
-	float vh = renderer.GetViewportHeight() * 0.75f;
+	case Align::BottomLeft:
+		vw *= 0.25f;
+		vh *= 0.75f;
+		break;
 
-	D2D1_RECT_F rect = { vw - w, vh - h, vw + w, vh + h };
-	return rect;
-}
-
-D2D1_RECT_F Widget::AlignLayoutTopLeft(float w, float h)
-{
-	float vw = renderer.GetViewportWidth() * 0.25f;
-	float vh = renderer.GetViewportHeight() * 0.25f;
-
-	D2D1_RECT_F rect = { vw - w, vh - h, vw + w, vh + h };
-	return rect;
-}
-
-D2D1_RECT_F Widget::AlignLayoutTopRight(float w, float h)
-{
-	float vw = renderer.GetViewportWidth() * 0.75f;
-	float vh = renderer.GetViewportHeight() * 0.25f;
-
-	D2D1_RECT_F rect = { vw - w, vh - h, vw + w, vh + h };
-	return rect;
-}
-
-D2D1_RECT_F Widget::AlignLayoutBottomLeft(float w, float h)
-{
-	float vw = renderer.GetViewportWidth() * 0.25f;
-	float vh = renderer.GetViewportHeight() * 0.75f;
-
-	D2D1_RECT_F rect = { vw - w, vh - h, vw + w, vh + h };
-	return rect;
-}
-
-D2D1_RECT_F Widget::AlignLayoutBottomRight(float w, float h)
-{
-	float vw = renderer.GetViewportWidth() * 0.75f;
-	float vh = renderer.GetViewportHeight() * 0.75f;
+	case Align::BottomRight:
+		vw *= 0.75f;
+		vh *= 0.75f;
+		break;
+	}
 
 	D2D1_RECT_F rect = { vw - w, vh - h, vw + w, vh + h };
 	return rect;
