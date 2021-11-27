@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "Input.h"
 #include "VMath.h"
+#include "VString.h"
 #include "Physics/Raycast.h"
 #include "GameUtils.h"
 #include "Editor/Editor.h"
@@ -14,11 +15,15 @@
 #include "Actors/Game/GridActor.h"
 #include "UI/UISystem.h"
 #include "UI/HealthWidget.h"
+#include "UI/InteractWidget.h"
 
 DialogueComponent* dialogueComponent;
 
 Player::Player()
 {
+	nextPos = XMVectorZero();
+	nextRot = XMVectorZero();
+
 	mesh = MeshComponent::system.Add(this, MeshComponent("cube.fbx", "wall.png"));
 	rootComponent = mesh;
 
@@ -33,6 +38,8 @@ void Player::Start()
 {
 	camera->targetActor = this;
 
+	interactWidget = uiSystem.CreateWidget<InteractWidget>();
+
 	nextPos = GetPositionVector();
 	nextRot = GetRotationVector();
 }
@@ -43,7 +50,7 @@ void Player::Tick(float deltaTime)
 
 	PrimaryAction();
 
-	if (!inConversation)
+	if (!inConversation && !inInteraction)
 	{
 		MovementInput(deltaTime);
 		RotationInput(deltaTime);
@@ -104,12 +111,12 @@ void Player::RotationInput(float deltaTime)
 	{
 		if (Input::GetKeyUp(Keys::Right))
 		{
-			const float angle = XMConvertToRadians(90.f);
+			constexpr float angle = XMConvertToRadians(90.f);
 			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::XMVectorUp(), angle));
 		}
 		if (Input::GetKeyUp(Keys::Left))
 		{
-			const float angle = XMConvertToRadians(-90.f);
+			constexpr float angle = XMConvertToRadians(-90.f);
 			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::XMVectorUp(), angle));
 		}
 	}
@@ -148,6 +155,13 @@ void Player::PrimaryAction()
 {
 	if (Input::GetKeyUp(Keys::Down))
 	{
+		if (inInteraction)
+		{
+			interactWidget->RemoveFromViewport();
+			inInteraction = false;
+			return;
+		}
+
 		Ray ray(this);
 		if (Raycast(ray, GetPositionVector(), GetForwardVectorV(), 1.5f))
 		{
@@ -159,6 +173,24 @@ void Player::PrimaryAction()
 					heldItem = pickup;
 					pickup->AddToPlayerInventory();
 					return;
+				}
+			}
+
+			//INTERACT CHECK
+			{
+				if (!inCombat)
+				{
+					auto gridActor = dynamic_cast<GridActor*>(ray.hitActor);
+					if (gridActor)
+					{
+						if (gridActor->isInteractable)
+						{
+							interactWidget->interactText = stows(gridActor->interactText);
+							interactWidget->AddToViewport();
+							inInteraction = true;
+							//camera->FOV = 400.f;
+						}
+					}
 				}
 			}
 

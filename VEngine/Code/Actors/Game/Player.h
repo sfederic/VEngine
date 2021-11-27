@@ -6,6 +6,7 @@ struct MeshComponent;
 struct CameraComponent;
 struct WidgetComponent;
 struct Pickup;
+struct InteractWidget;
 
 struct Player : Actor
 {
@@ -15,12 +16,15 @@ struct Player : Actor
 	CameraComponent* camera = nullptr;
 	WidgetComponent* widget;
 
+	InteractWidget* interactWidget = nullptr;
+
 	Pickup* heldItem = nullptr;
 
 	XMVECTOR nextPos;
 	XMVECTOR nextRot;
 
 	bool inConversation = false;
+	bool inInteraction = false;
 	bool inCombat = false;
 
 	Player();
