@@ -86,6 +86,16 @@ bool Widget::Button(const std::wstring& text, D2D1_RECT_F layout, float lineWidt
 	return false;
 }
 
+void Widget::Image(const std::string& filename, D2D1_RECT_F layout)
+{
+	Sprite sprite = {};
+	sprite.textureFilename = filename;
+	sprite.dstRect = { (long)layout.left, (long)layout.top, (long)layout.right, (long)layout.bottom };
+	sprite.srcRect = { 0, 0, (long)layout.right, (long)layout.bottom };
+
+	spriteSystem.CreateScreenSprite(sprite);
+}
+
 void Widget::Image(const std::string& filename, int x, int y, int w, int h)
 {
 	Sprite sprite = {};
@@ -160,6 +170,21 @@ D2D1_RECT_F Widget::AlignLayout(float w, float h, Align align)
 	if (rect.top < 0.f) rect.top = 0.f;
 	if (rect.right > renderer.GetViewportWidth()) rect.right = vw;
 	if (rect.bottom > renderer.GetViewportHeight()) rect.bottom = vh;
+
+	return rect;
+}
+
+D2D1_RECT_F Widget::CenterLayoutOnScreenSpaceCoords(float w, float h, float sx, float sy)
+{
+	D2D1_RECT_F rect = {sx - w, sy - h, sx + w, sy + h};
+
+	float vw = renderer.GetViewportWidth();
+	float vh = renderer.GetViewportHeight();
+
+	if (rect.left < 0.f) rect.left = 0.f;
+	if (rect.top < 0.f) rect.top = 0.f;
+	if (rect.right > vw) rect.right = vw;
+	if (rect.bottom > vh) rect.bottom = vh;
 
 	return rect;
 }

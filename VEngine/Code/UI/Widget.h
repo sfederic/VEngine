@@ -42,12 +42,14 @@ struct Widget
 	void RemoveFromViewport();
 	void GetScreenSpaceCoords(int& sx, int& sy);
 
-	void Text(const std::wstring& text, D2D1_RECT_F layout, TextAlign align = TextAlign::Justified);
+	void Text(const std::wstring& text, D2D1_RECT_F layout, TextAlign align = TextAlign::Center);
 	bool Button(const std::wstring& text, D2D1_RECT_F layout, float lineWidth = 1.0f);
+	void Image(const std::string& filename, D2D1_RECT_F layout);
 	void Image(const std::string& filename, int x, int y, int w, int h);
 	void Rect(D2D1_RECT_F layout);
 
-	static D2D1_RECT_F AlignLayout(float w, float h, Align align);
+	D2D1_RECT_F AlignLayout(float w, float h, Align align);
+	D2D1_RECT_F CenterLayoutOnScreenSpaceCoords(float w, float h, float sx, float sy);
 
 	XMVECTOR pos;
 	std::wstring displayText;
