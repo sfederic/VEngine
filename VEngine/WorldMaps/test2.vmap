@@ -1,7 +1,7 @@
 Player
 1
 FOV
-1.0472
+60
 Far Z
 1000
 Mesh
@@ -9,13 +9,13 @@ cube.fbx
 Near Z
 0.01
 Position
-6 0.5 2
+4.99999 0.5 7.00001
 Rast State
 solid
 Rotation
-0 -0.707106 0 -0.707106
+-0 0.707106 -0 0.707108
 Scale
-0.499997 0.499999 0.5
+0.499996 0.499999 0.499999
 Shader
 DefaultShader.hlsl
 Texture
@@ -35,10 +35,16 @@ GridActor
 1
 Destruct
 1
+Health
+1
+Interact
+1
+Interact Text
+its just a crate
 Mesh
 
 Position
-5 0.5 5
+7 0.5 6
 Rast State
 solid
 Rotation
@@ -48,9 +54,9 @@ Scale
 Shader
 DefaultShader.hlsl
 Texture
-test.png
+crate.jpg
 UID
-3550645295
+166384376
 UvOffset
 0 0
 UvRotation
@@ -364,7 +370,40 @@ SpotLightActor
 EntranceTrigger
 0
 NPC
+1
+Destruct
+1
+File
+testdiag
+Health
+2
+Interact
 0
+Interact Text
+
+Mesh
+
+Position
+3 0.5 4
+Rast State
+solid
+Rotation
+-0 0 -0 1
+Scale
+0.5 0.5 0.5
+Shader
+DefaultShader.hlsl
+Texture
+test.png
+UID
+730392693
+UvOffset
+-17 -1
+UvRotation
+0
+UvScale
+1 1
+next
 Unit
 0
 Pickup
