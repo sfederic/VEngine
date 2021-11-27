@@ -16,7 +16,7 @@ struct UISystem
 	ID2D1RenderTarget* d2dRenderTarget = nullptr;
 	IDWriteFactory1* writeFactory = nullptr;
 
-	//D2D11 Brushes
+	//D2D Brushes
 	ID2D1SolidColorBrush* brushText = nullptr;
 	ID2D1SolidColorBrush* debugBrushText = nullptr;
 	ID2D1SolidColorBrush* brushShapes = nullptr;
@@ -40,6 +40,24 @@ struct UISystem
 	void RemoveAllWidgets();
 
 	void TickAllWidgets(float deltaTime);
+
+	template <typename T>
+	std::vector<T*> GetAllWidgetsOfType()
+	{
+		std::vector<T*> outWidgets;
+
+		for (auto widget : widgets)
+		{
+			T* castWidget = dynamic_cast<T*>(widget);
+			if (castWidget)
+			{
+				outWidgets.push_back(castWidget);
+			}
+		}
+		
+		return outWidgets;
+	}
+
 	void EndDraw();
 	void Cleanup();
 };
