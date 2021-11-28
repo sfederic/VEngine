@@ -120,22 +120,6 @@ void World::TickAllComponentSystems(float deltaTime)
 	PROFILE_END
 }
 
-Actor* World::FindComponentOwnerByName(std::string componentName)
-{
-	for (Actor* actor : GetAllActorsInWorld())
-	{
-		for (Component* component : actor->components)
-		{
-			if (component->name == componentName)
-			{
-				return actor;
-			}
-		}
-	}
-
-	return nullptr;
-}
-
 std::vector<Actor*> World::GetAllActorsInWorld()
 {
 	std::vector<Actor*> outActors;

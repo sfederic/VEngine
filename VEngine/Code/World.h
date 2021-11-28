@@ -33,7 +33,6 @@ struct World
 
 	void TickAllActorSystems(float deltaTime);
 	void TickAllComponentSystems(float deltaTime);
-	Actor* FindComponentOwnerByName(std::string componentName);
 	std::vector<Actor*> GetAllActorsInWorld();
 	Actor* GetActorByUID(UID uid);
 	Actor* GetActorByName(std::string actorName);
