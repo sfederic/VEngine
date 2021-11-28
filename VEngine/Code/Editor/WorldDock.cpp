@@ -78,7 +78,7 @@ void WorldDock::PopulateWorldActorList()
 void WorldDock::ClickOnActorInList(QTreeWidgetItem* item, int column)
 {
 	QString actorName = item->text(column);
-	Actor* clickedActor = world.FindActorByName(actorName.toStdString());
+	Actor* clickedActor = world.GetActorByName(actorName.toStdString());
 	if (clickedActor)
 	{
 		worldEditor.pickedActor = clickedActor;

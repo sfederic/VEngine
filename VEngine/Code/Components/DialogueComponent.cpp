@@ -60,7 +60,7 @@ void DialogueComponent::ShowTextAtActor()
     //TODO: the widgetcompent stuff here doesn't feel good. Find a way to subclass WidgetComponent
     //or do something easier, otherwise this is atributing all dialogue as Widgetcomponents, and all widgets
     //would activate here.
-    Actor* actor = world.FindActorByName(dataIt->second.actorName);
+    Actor* actor = world.GetActorByName(dataIt->second.actorName);
     auto wcs = actor->GetComponentsOfType<WidgetComponent>();
     for (WidgetComponent* w : wcs)
     {

@@ -120,21 +120,6 @@ void World::TickAllComponentSystems(float deltaTime)
 	PROFILE_END
 }
 
-Actor* World::FindActorByName(std::string actorName)
-{
-	for (IActorSystem* actorSystem : activeActorSystems)
-	{
-		Actor* foundActor = actorSystem->FindActorByName(actorName);
-
-		if (foundActor)
-		{
-			return foundActor;
-		}
-	}
-
-	return nullptr;
-}
-
 Actor* World::FindComponentOwnerByName(std::string componentName)
 {
 	for (Actor* actor : GetAllActorsInWorld())
@@ -174,10 +159,7 @@ Actor* World::GetActorByUID(UID uid)
 Actor* World::GetActorByName(std::string actorName)
 {
 	auto actorIt = actorNameMap.find(actorName);
-	if (actorIt == actorNameMap.end())
-	{
-		return nullptr;
-	}
+	assert(actorIt != actorNameMap.end());
 	return actorIt->second;
 }
 
