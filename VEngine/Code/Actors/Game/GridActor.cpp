@@ -38,7 +38,6 @@ Properties GridActor::GetProps()
 
 void GridActor::SetIntuition()
 {
-	//Set intuition
 	if (!intuitionName.empty())
 	{
 		auto foundIntuition = intuitionSystem.FindIntution(intuitionName);
