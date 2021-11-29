@@ -174,7 +174,7 @@
     <ClCompile Include="Code\Actors\Game\SavePoint.cpp" />
     <ClCompile Include="Code\Actors\Game\GameEvent.cpp" />
     <ClCompile Include="Code\SystemCache.cpp" />
-    <ClCompile Include="Code\ConditionSystem.cpp" />
+    <ClCompile Include="Code\Game\ConditionSystem.cpp" />
     <ClCompile Include="Code\ThreadSystem.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\TransformWidget.cpp" />
     <ClCompile Include="Code\Particle\ParticleEmitter.cpp" />
@@ -361,7 +361,7 @@
     <ClInclude Include="Code\Actors\Game\SavePoint.h" />
     <ClInclude Include="Code\Actors\Game\GameEvent.h" />
     <ClInclude Include="Code\SystemCache.h" />
-    <ClInclude Include="Code\ConditionSystem.h" />
+    <ClInclude Include="Code\Game\ConditionSystem.h" />
     <ClInclude Include="Code\ThreadSystem.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\TransformWidget.h" />
     <ClInclude Include="Code\Particle\ParticleEmitter.h" />
