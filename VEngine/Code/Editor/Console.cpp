@@ -49,6 +49,9 @@ Console::Console()
 	//Menu for manipulating game instance data
 	executeMap.emplace(L"GAME", []() { debugMenu.gameInstaceMenuOpen = !debugMenu.gameInstaceMenuOpen; });
 
+	//Show all intuition info player has
+	executeMap.emplace(L"INTUITIONS", []() { debugMenu.intuitionsMenuOpen = !debugMenu.intuitionsMenuOpen; });
+
 	//show memory for engine systems
 	executeMap.emplace(L"MEM", []() { debugMenu.memoryMenuOpen = !debugMenu.memoryMenuOpen; });
 
