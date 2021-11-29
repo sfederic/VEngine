@@ -3,6 +3,7 @@
 #include "Components/WidgetComponent.h"
 #include "UI/HealthWidget.h"
 #include "UI/UISystem.h"
+#include "Game/IntuitionSystem.h"
 
 GridActor::GridActor()
 {
@@ -12,6 +13,8 @@ GridActor::GridActor()
 
 void GridActor::Start()
 {
+	SetIntuition();
+
 	healthWidget = uiSystem.CreateWidget<HealthWidget>();
 	healthWidget->healthPoints = &health;
 }
@@ -31,4 +34,14 @@ Properties GridActor::GetProps()
 	props.Add("Interact Text", &interactText);
 	props.Add("Intuition", &intuitionName);
 	return props;
+}
+
+void GridActor::SetIntuition()
+{
+	//Set intuition
+	if (!intuitionName.empty())
+	{
+		auto foundIntuition = intuitionSystem.FindIntution(intuitionName);
+		intuition = foundIntuition;
+	}
 }
