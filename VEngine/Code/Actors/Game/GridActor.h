@@ -4,7 +4,7 @@
 
 struct MeshComponent;
 struct HealthWidget;
-struct Intuition;
+struct IntuitionComponent;
 
 //Base struct for every interactive actor that is placed in the level
 struct GridActor : Actor
@@ -13,9 +13,7 @@ struct GridActor : Actor
 
 	MeshComponent* mesh = nullptr;
 	HealthWidget* healthWidget = nullptr;
-
-	Intuition* intuition = nullptr;
-	std::string intuitionName;
+	IntuitionComponent* intuition = nullptr;
 
 	//Actor's positions on the level grid
 	int xIndex = -1;
@@ -32,5 +30,4 @@ struct GridActor : Actor
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
-	void SetIntuition();
 };

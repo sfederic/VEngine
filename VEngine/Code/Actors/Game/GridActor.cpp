@@ -1,6 +1,7 @@
 #include "GridActor.h"
 #include "Components/MeshComponent.h"
 #include "Components/WidgetComponent.h"
+#include "Components/IntuitionComponent.h"
 #include "UI/HealthWidget.h"
 #include "UI/UISystem.h"
 #include "Gameplay/IntuitionSystem.h"
@@ -9,12 +10,12 @@ GridActor::GridActor()
 {
 	mesh = MeshComponent::system.Add(this);
 	rootComponent = mesh;
+
+	intuition = IntuitionComponent::system.Add(this);
 }
 
 void GridActor::Start()
 {
-	SetIntuition();
-
 	healthWidget = uiSystem.CreateWidget<HealthWidget>();
 	healthWidget->healthPoints = &health;
 }
@@ -32,15 +33,5 @@ Properties GridActor::GetProps()
 	props.Add("Health", &health);
 	props.Add("Interact", &isInteractable);
 	props.Add("Interact Text", &interactText);
-	props.Add("Intuition", &intuitionName);
 	return props;
-}
-
-void GridActor::SetIntuition()
-{
-	if (!intuitionName.empty())
-	{
-		auto foundIntuition = intuitionSystem.FindIntution(intuitionName);
-		intuition = foundIntuition;
-	}
 }
