@@ -1,7 +1,7 @@
 #pragma once
 #include "../Actor.h"
 #include "../ActorSystem.h"
-#include "GridNode.h"
+#include "Gameplay/GridNode.h"
 
 struct InstanceMeshComponent;
 

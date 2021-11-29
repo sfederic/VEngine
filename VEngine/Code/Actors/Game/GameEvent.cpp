@@ -1,6 +1,6 @@
 #include "GameEvent.h"
 #include "Components/EmptyComponent.h"
-#include "GameInstance.h"
+#include "Gameplay/GameInstance.h"
 
 GameEvent::GameEvent()
 {

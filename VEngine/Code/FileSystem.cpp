@@ -8,7 +8,7 @@
 #include "Editor/Editor.h"
 #include "Commands/CommandSystem.h"
 #include "Core.h"
-#include "GameUtils.h"
+#include "Gameplay/GameUtils.h"
 #include "Camera.h"
 #include "Actors/Game/Player.h"
 

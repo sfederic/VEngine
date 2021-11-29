@@ -156,7 +156,7 @@
     <ClCompile Include="Code\Actors\SpotLightActor.cpp" />
     <ClCompile Include="Code\DebugActors\DebugCone.cpp" />
     <ClCompile Include="Code\Actors\Game\Player.cpp" />
-    <ClCompile Include="Code\GameUtils.cpp" />
+    <ClCompile Include="Code\Gameplay\GameUtils.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\TextureDataWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\EntranceTrigger.cpp" />
     <ClCompile Include="Code\DebugActors\DebugCamera.cpp" />
@@ -279,8 +279,8 @@
     <ClCompile Include="Code\Asset\FBXImporter.cpp" />
     <ClInclude Include="Code\Asset\FBXImporter.h" />
     <ClCompile Include="Code\Input.cpp" />
-    <ClInclude Include="Code\GameInstance.h" />
-    <ClInclude Include="Code\GridNode.h" />
+    <ClInclude Include="Code\Gameplay\GameInstance.h" />
+    <ClInclude Include="Code\Gameplay\GridNode.h" />
     <ClInclude Include="Code\Input.h" />
     <ClCompile Include="Code\main.cpp" />
     <ClInclude Include="Code\Editor\RenderViewWidget.h" />
@@ -342,7 +342,7 @@
     <ClInclude Include="Code\Actors\SpotLightActor.h" />
     <ClInclude Include="Code\DebugActors\DebugCone.h" />
     <ClInclude Include="Code\Actors\Game\Player.h" />
-    <ClInclude Include="Code\GameUtils.h" />
+    <ClInclude Include="Code\Gameplay\GameUtils.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\TextureDataWidget.h" />
     <ClInclude Include="Code\Actors\Game\EntranceTrigger.h" />
     <ClInclude Include="Code\DebugActors\DebugCamera.h" />

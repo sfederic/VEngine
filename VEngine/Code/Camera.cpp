@@ -4,7 +4,7 @@
 #include "WorldEditor.h"
 #include "Actors/Actor.h"
 #include "Editor/Editor.h"
-#include "GameUtils.h"
+#include "Gameplay/GameUtils.h"
 #include "Actors/Game/Player.h"
 #include "VMath.h"
 #include "Render/Renderer.h"

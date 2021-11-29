@@ -2,8 +2,8 @@
 
 #include "Unit.h"
 #include <algorithm>
-#include "GridNode.h"
-#include "GameUtils.h"
+#include "Gameplay/GridNode.h"
+#include "Gameplay/GameUtils.h"
 #include "BattleGrid.h"
 #include "Components/MeshComponent.h"
 #include "VMath.h"

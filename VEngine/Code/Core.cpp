@@ -2,7 +2,7 @@
 #include "Input.h"
 #include "Render/Renderer.h"
 #include "Debug.h"
-#include "GameUtils.h"
+#include "Gameplay/GameUtils.h"
 #include "Camera.h"
 #include "Actors/Game/Player.h"
 #include "World.h"

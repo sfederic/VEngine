@@ -1,6 +1,6 @@
 #include "Pickup.h"
 #include "Components/MeshComponent.h"
-#include "GameUtils.h"
+#include "Gameplay/GameUtils.h"
 
 Pickup::Pickup()
 {

@@ -257,7 +257,7 @@
     <ClCompile Include="Code\Actors\Game\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\GameUtils.cpp">
+    <ClCompile Include="Code\Gameplay\GameUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Editor\PropertyWidgets\TextureDataWidget.cpp">
@@ -583,7 +583,7 @@
     <ClInclude Include="Code\Actors\Game\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\GameUtils.h">
+    <ClInclude Include="Code\Gameplay\GameUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\PropertyWidgets\TextureDataWidget.h">
@@ -622,7 +622,7 @@
     <ClInclude Include="Code\Components\WidgetComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\GameInstance.h">
+    <ClInclude Include="Code\Gameplay\GameInstance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\SpriteSystem.h">
@@ -634,7 +634,7 @@
     <ClInclude Include="Code\Actors\Game\BattleGrid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\GridNode.h">
+    <ClInclude Include="Code\Gameplay\GridNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\Unit.h">

@@ -1,7 +1,7 @@
 #include "NPC.h"
 #include "Components/WidgetComponent.h"
 #include "Components/DialogueComponent.h"
-#include "GameUtils.h"
+#include "Gameplay/GameUtils.h"
 #include "VString.h"
 #include "UI/UISystem.h"
 #include "UI/DialogueWidget.h"

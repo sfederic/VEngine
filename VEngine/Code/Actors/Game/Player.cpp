@@ -7,7 +7,7 @@
 #include "VMath.h"
 #include "VString.h"
 #include "Physics/Raycast.h"
-#include "GameUtils.h"
+#include "Gameplay/GameUtils.h"
 #include "Editor/Editor.h"
 #include "Actors/Game/NPC.h"
 #include "Actors/Game/Pickup.h"

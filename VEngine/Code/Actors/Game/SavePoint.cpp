@@ -1,6 +1,6 @@
 #include "SavePoint.h"
 #include "Components/BoxTriggerComponent.h"
-#include "GameUtils.h"
+#include "Gameplay/GameUtils.h"
 #include "Input.h"
 
 SavePoint::SavePoint()

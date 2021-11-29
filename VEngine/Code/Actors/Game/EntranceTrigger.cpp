@@ -1,6 +1,6 @@
 #include "EntranceTrigger.h"
 #include "Components/BoxTriggerComponent.h"
-#include "GameUtils.h"
+#include "Gameplay/GameUtils.h"
 #include "Input.h"
 #include "FileSystem.h"
 

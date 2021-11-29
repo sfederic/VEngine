@@ -1,7 +1,7 @@
 #include "InteractTrigger.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Camera.h"
-#include "GameUtils.h"
+#include "Gameplay/GameUtils.h"
 #include "UI/Widget.h"
 #include "VString.h"
 #include "Input.h"
