@@ -1,19 +1,13 @@
 #pragma once
 #include <string>
+#include <functional>
 
 //Base for all plyaer intuitions in-game.
 struct Intuition
 {
 	std::string name;
+	std::string description;
 
-	//Function to check any additional conditions or effect the Intuition might carry.
-	virtual bool CheckEffect() = 0;
-};
-
-struct TestIntuition : Intuition
-{
-	virtual bool CheckEffect()
-	{
-		return true;
-	}
+	//Function to call in order to add Intuition to Player.
+	std::function<void()> conditionFunc;
 };
