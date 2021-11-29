@@ -9,5 +9,5 @@ struct Intuition
 	std::string description;
 
 	//Function to call in order to add Intuition to Player.
-	std::function<void()> conditionFunc;
+	std::function<bool()> conditionFunc;
 };
