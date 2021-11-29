@@ -10,15 +10,8 @@ struct IntuitionSystem : System
 
 	std::map<std::string, Intuition*> intuitions;
 
-	template <typename T>
-	T* AddIntuition(std::string name)
-	{
-		auto intuition = new T();
-		intuition->name = name;
-		intuitions.insert(name, intuition);
-
-		return intuition;
-	}
+	Intuition* FindIntution(std::string name);
+	void AddIntuition(std::string name, Intuition* intuition);
 };
 
 extern IntuitionSystem intuitionSystem;
