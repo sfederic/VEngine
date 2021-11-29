@@ -15,7 +15,7 @@ struct ConditionSystem
 
 	//Don't call this function directly, just used the ADD_CONDITION macro below to grab the function name.
 	void AddCondition(std::string functionName, std::function<bool()> conditionFunction);
-
+	std::function<bool()> FindCondition(std::string conditionName);
 	bool EvaluateCondition(std::string conditionName);
 };
 
