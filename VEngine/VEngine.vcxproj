@@ -189,6 +189,7 @@
     <ClCompile Include="Code\UI\InteractWidget.cpp" />
     <ClCompile Include="Code\Components\IntuitionComponent.cpp" />
     <ClCompile Include="Code\Gameplay\IntuitionSystem.cpp" />
+    <ClCompile Include="Code\UI\IntuitionMenuWidget.cpp" />
     <ClInclude Include="Code\Actors\AudioActor.h" />
     <ClInclude Include="Code\Actors\Game\GridActor.h" />
     <ClInclude Include="Code\Asset\AssetSystem.h" />
@@ -376,6 +377,7 @@
     <ClInclude Include="Code\UI\InteractWidget.h" />
     <ClInclude Include="Code\Components\IntuitionComponent.h" />
     <ClInclude Include="Code\Gameplay\IntuitionSystem.h" />
+    <ClInclude Include="Code\UI\IntuitionMenuWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
