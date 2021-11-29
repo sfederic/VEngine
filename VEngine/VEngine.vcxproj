@@ -187,6 +187,7 @@
     <ClCompile Include="Code\Editor\PropertyWidgets\MeshComponentDataWidget.cpp" />
     <ClCompile Include="Code\UI\HealthWidget.cpp" />
     <ClCompile Include="Code\UI\InteractWidget.cpp" />
+    <ClCompile Include="Code\Components\IntuitionComponent.cpp" />
     <ClInclude Include="Code\Actors\AudioActor.h" />
     <ClInclude Include="Code\Actors\Game\GridActor.h" />
     <ClInclude Include="Code\Asset\AssetSystem.h" />
@@ -284,6 +285,7 @@
     <ClInclude Include="Code\Editor\RenderViewWidget.h" />
     <ClCompile Include="Code\VMath.cpp" />
     <ClInclude Include="Code\Asset\MeshAssetHeader.h" />
+    <ClInclude Include="Code\Game\Intuition.h" />
     <ClInclude Include="Code\Particle\Particle.h" />
     <ClInclude Include="Code\UID.h" />
     <ClInclude Include="Code\VMath.h" />
@@ -371,6 +373,7 @@
     <ClInclude Include="Code\Editor\PropertyWidgets\MeshComponentDataWidget.h" />
     <ClInclude Include="Code\UI\HealthWidget.h" />
     <ClInclude Include="Code\UI\InteractWidget.h" />
+    <ClInclude Include="Code\Components\IntuitionComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
