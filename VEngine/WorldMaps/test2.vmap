@@ -33,6 +33,8 @@ AudioActor
 0
 GridActor
 1
+Description
+Knows crate
 Destruct
 1
 Health
@@ -43,6 +45,8 @@ Interact Text
 its just a crate
 Mesh
 
+Name
+CrateKnown
 Position
 7 0.5 6
 Rast State
@@ -62,7 +66,7 @@ UvOffset
 UvRotation
 0
 UvScale
-1 1
+-6 1
 next
 GameEvent
 0
@@ -371,6 +375,8 @@ EntranceTrigger
 0
 NPC
 1
+Description
+
 Destruct
 1
 File
@@ -382,6 +388,8 @@ Interact
 Interact Text
 
 Mesh
+
+Name
 
 Position
 3 0.5 4
