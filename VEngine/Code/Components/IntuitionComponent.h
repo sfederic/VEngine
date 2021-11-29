@@ -6,8 +6,10 @@ struct IntuitionComponent : Component
 {
 	COMPONENT_SYSTEM(IntuitionComponent);
 
-	std::string name;
-	std::string description;
+	std::string intName;
+	std::string intDescription;
+
+	bool addOnInteract = false;
 	
 	IntuitionComponent();
 	virtual Properties GetProps() override;
