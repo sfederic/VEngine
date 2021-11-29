@@ -5,8 +5,10 @@
 struct MeshComponent;
 struct CameraComponent;
 struct WidgetComponent;
+struct IntuitionComponent;
 struct Pickup;
 struct InteractWidget;
+struct Intuition;
 
 struct Player : Actor
 {
@@ -20,6 +22,8 @@ struct Player : Actor
 
 	Pickup* heldItem = nullptr;
 
+	std::map<std::string, Intuition*> intuitions;
+
 	XMVECTOR nextPos;
 	XMVECTOR nextRot;
 
@@ -31,6 +35,8 @@ struct Player : Actor
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
+
+	void CreateIntuition(IntuitionComponent* intuitionComponent);
 
 private:
 	void MovementInput(float deltaTime);

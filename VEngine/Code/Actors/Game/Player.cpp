@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Components/MeshComponent.h"
 #include "Components/WidgetComponent.h"
+#include "Components/IntuitionComponent.h"
 #include "Camera.h"
 #include "Input.h"
 #include "VMath.h"
@@ -17,6 +18,8 @@
 #include "UI/HealthWidget.h"
 #include "UI/DialogueWidget.h"
 #include "UI/InteractWidget.h"
+#include "Gameplay/Intuition.h"
+#include "Gameplay/ConditionSystem.h"
 
 DialogueComponent* dialogueComponent;
 
@@ -64,6 +67,41 @@ Properties Player::GetProps()
     auto props = Actor::GetProps();
 	props.title = "Player";
 	return props;
+}
+
+void Player::CreateIntuition(IntuitionComponent* intuitionComponent)
+{
+	auto intuitionIt = intuitions.find(intuitionComponent->intuitionName);
+	if (intuitionIt != intuitions.end())
+	{
+		editor->Log("%s Intuition already known.", intuitionComponent->intuitionName.c_str());
+		return;
+	}
+
+	auto intuition = new Intuition();
+	intuition->name = intuitionComponent->intuitionName;
+	intuition->description = intuitionComponent->intuitionDescription;
+
+	//Check if intuition condition passes
+	if (!intuitionComponent->condition.empty())
+	{
+		intuition->conditionFunc = conditionSystem.FindCondition(intuitionComponent->condition);
+
+		if (intuition->conditionFunc())
+		{
+			intuitions.emplace(intuition->name, intuition);
+			editor->Log("%s Intuition created.", intuition->name.c_str());
+		}
+		else
+		{
+			delete intuition;
+		}
+	}
+	else
+	{
+		intuitions.emplace(intuition->name, intuition);
+		editor->Log("%s Intuition created.", intuition->name.c_str());
+	}
 }
 
 void Player::MovementInput(float deltaTime)
@@ -190,7 +228,12 @@ void Player::PrimaryAction()
 							interactWidget->interactText = stows(gridActor->interactText);
 							interactWidget->AddToViewport();
 							inInteraction = true;
-							//camera->FOV = 400.f;
+
+							auto intuition = gridActor->intuition;
+							if (intuition->addOnInteract)
+							{
+								CreateIntuition(gridActor->intuition);
+							}
 						}
 					}
 				}
