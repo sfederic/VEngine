@@ -22,9 +22,12 @@
 #include "Physics/Raycast.h"
 #include "Input.h"
 #include "World.h"
-#include "GameInstance.h"
+#include "Gameplay/GameInstance.h"
+#include "Gameplay/GameUtils.h"
 #include "SystemCache.h"
 #include "System.h"
+#include "Actors/Game/Player.h"
+#include "Gameplay/Intuition.h"
 
 DebugMenu debugMenu;
 
@@ -73,6 +76,7 @@ void DebugMenu::Tick(float deltaTime)
 	RenderMemoryMenu();
 	RenderActorSystemMenu();
 	RenderComponentSystemMenu();
+	RenderIntuitionsMenu();
 
 	ImGui::EndFrame();
 
@@ -332,6 +336,26 @@ void DebugMenu::RenderComponentSystemMenu()
 		ImGui::Text("Actor Count: %d", componentSystem->GetNumComponents());
 	}
 
+	ImGui::End();
+}
+
+void DebugMenu::RenderIntuitionsMenu()
+{
+	if (!intuitionsMenuOpen) return;
+
+	auto player = GameUtils::GetPlayer();
+
+	ImGui::Begin("Intuitions");
+	for (auto& intuition : player->intuitions)
+	{
+		ImGui::Text("Name: %s", intuition.second->name.c_str());
+		ImGui::Text("Desc: %s", intuition.second->description.c_str());
+		ImGui::Text("Func: %s", intuition.second->conditionFuncName.c_str());
+		ImGui::Text("From World: %s", intuition.second->worldAquiredFrom.c_str());
+		ImGui::Text("From Actor: %s", intuition.second->actorAquiredFrom.c_str());
+		ImGui::Text("Hour: %d | Minute: %d", intuition.second->hourAquired, intuition.second->minuteAquired);
+		ImGui::NewLine();
+	}
 	ImGui::End();
 }
 
