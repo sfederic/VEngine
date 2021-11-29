@@ -20,6 +20,7 @@
 #include "UI/InteractWidget.h"
 #include "Gameplay/Intuition.h"
 #include "Gameplay/ConditionSystem.h"
+#include "Gameplay/GameInstance.h"
 
 DialogueComponent* dialogueComponent;
 
@@ -69,7 +70,7 @@ Properties Player::GetProps()
 	return props;
 }
 
-void Player::CreateIntuition(IntuitionComponent* intuitionComponent)
+void Player::CreateIntuition(IntuitionComponent* intuitionComponent, std::string actorAquiredFromName)
 {
 	auto intuitionIt = intuitions.find(intuitionComponent->intuitionName);
 	if (intuitionIt != intuitions.end())
@@ -82,10 +83,17 @@ void Player::CreateIntuition(IntuitionComponent* intuitionComponent)
 	intuition->name = intuitionComponent->intuitionName;
 	intuition->description = intuitionComponent->intuitionDescription;
 
+	intuition->actorAquiredFrom = actorAquiredFromName;
+	intuition->worldAquiredFrom = world.worldFilename;
+
+	intuition->hourAquired = GameInstance::currentHour;
+	intuition->minuteAquired = GameInstance::currentMinute;
+
 	//Check if intuition condition passes
 	if (!intuitionComponent->condition.empty())
 	{
 		intuition->conditionFunc = conditionSystem.FindCondition(intuitionComponent->condition);
+		intuition->conditionFuncName = intuitionComponent->condition;
 
 		if (intuition->conditionFunc())
 		{
@@ -233,7 +241,7 @@ void Player::PrimaryAction()
 							auto intuition = gridActor->intuition;
 							if (intuition->addOnInteract)
 							{
-								CreateIntuition(gridActor->intuition);
+								CreateIntuition(gridActor->intuition, gridActor->name);
 							}
 						}
 					}

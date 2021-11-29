@@ -36,7 +36,7 @@ struct Player : Actor
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 
-	void CreateIntuition(IntuitionComponent* intuitionComponent);
+	void CreateIntuition(IntuitionComponent* intuitionComponent, std::string actorAquiredFromName);
 
 private:
 	void MovementInput(float deltaTime);
