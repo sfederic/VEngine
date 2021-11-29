@@ -9,3 +9,11 @@ struct Intuition
 	//Function to check any additional conditions or effect the Intuition might carry.
 	virtual bool CheckEffect() = 0;
 };
+
+struct TestIntuition : Intuition
+{
+	virtual bool CheckEffect()
+	{
+		return true;
+	}
+};
