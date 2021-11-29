@@ -90,6 +90,7 @@ void Player::CreateIntuition(IntuitionComponent* intuitionComponent)
 		if (intuition->conditionFunc())
 		{
 			intuitions.emplace(intuition->name, intuition);
+			//TODO: change these logs here to Widget->AddToViewport()'s
 			editor->Log("%s Intuition created.", intuition->name.c_str());
 		}
 		else
