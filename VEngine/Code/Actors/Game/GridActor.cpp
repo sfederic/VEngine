@@ -3,7 +3,7 @@
 #include "Components/WidgetComponent.h"
 #include "UI/HealthWidget.h"
 #include "UI/UISystem.h"
-#include "Game/IntuitionSystem.h"
+#include "Gameplay/IntuitionSystem.h"
 
 GridActor::GridActor()
 {
