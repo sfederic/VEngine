@@ -4,7 +4,6 @@
 #include "Components/IntuitionComponent.h"
 #include "UI/HealthWidget.h"
 #include "UI/UISystem.h"
-#include "Gameplay/IntuitionSystem.h"
 
 GridActor::GridActor()
 {

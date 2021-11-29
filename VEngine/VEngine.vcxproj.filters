@@ -389,9 +389,6 @@
     <ClCompile Include="Code\Components\IntuitionComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Gameplay\IntuitionSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\UI\IntuitionMenuWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -731,9 +728,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Components\IntuitionComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Gameplay\IntuitionSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\IntuitionMenuWidget.h">
