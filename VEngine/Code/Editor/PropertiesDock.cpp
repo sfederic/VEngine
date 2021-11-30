@@ -28,10 +28,16 @@
 
 PropertiesDock::PropertiesDock() : QDockWidget("Properties")
 {
-    actorPropsScrollArea = new QScrollArea(this);
+    setFixedWidth(400);
+
+    actorPropsScrollArea = new QScrollArea();
     actorPropsGridLayout = new QGridLayout();
     actorPropsWidget = new QWidget();
-    setFixedWidth(375);
+    actorPropsWidget->setFixedWidth(400);
+
+    actorPropsWidget->setLayout(actorPropsGridLayout);
+    actorPropsScrollArea->setWidget(actorPropsWidget);
+    setWidget(actorPropsScrollArea);
 }
 
 void PropertiesDock::DisplayActorProperties(Actor* actor)
@@ -57,13 +63,13 @@ void PropertiesDock::DisplayActorProperties(Actor* actor)
     //Go over actor properties
     int gridRow = 0;
 
-    for (auto props : actor->GetAllProps())
+    for (auto& props : actor->GetAllProps())
     {
         IterateOverProperties(props, gridRow);
     }
 
     actorPropsWidget->setLayout(actorPropsGridLayout);
-    setWidget(actorPropsWidget);
+    actorPropsWidget->setFixedWidth(400);
 
     actorPropsScrollArea->setWidget(actorPropsWidget);
 
