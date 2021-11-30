@@ -126,6 +126,7 @@ namespace RenderUtils
 
 		ID3D11Resource* resource;
 		ID3D11ShaderResourceView* srv;
+		//TODO: if the world reset enough times, mem usage from CreateWICTexture() ramps up. Not sure why.
 		HR(CreateWICTextureFromFile(device, path.c_str(), &resource, &srv));
 
 		texture->data = resource;
