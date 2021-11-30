@@ -281,6 +281,7 @@
     <ClInclude Include="Code\Asset\FBXImporter.h" />
     <ClCompile Include="Code\Input.cpp" />
     <ClInclude Include="Code\Gameplay\GameInstance.h" />
+    <ClInclude Include="Code\Gameplay\GameplayTags.h" />
     <ClInclude Include="Code\Gameplay\GridNode.h" />
     <ClInclude Include="Code\Input.h" />
     <ClCompile Include="Code\main.cpp" />
