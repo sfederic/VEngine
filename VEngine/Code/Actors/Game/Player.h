@@ -31,7 +31,7 @@ struct Player : Actor
 	XMVECTOR nextPos;
 	XMVECTOR nextRot;
 
-	int actionPoints = 7;
+	int actionPoints = 10;
 
 	bool inConversation = false;
 	bool inInteraction = false;
@@ -51,4 +51,5 @@ private:
 	void ToggleBattleGrid();
 	void PrimaryAction();
 	void ToggleIntuitionMenu();
+	void ExpendActionPoints(int num);
 };

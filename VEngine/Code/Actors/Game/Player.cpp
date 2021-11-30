@@ -143,19 +143,22 @@ void Player::MovementInput(float deltaTime)
 
 		if (Input::GetAsyncKey(Keys::W))
 		{
-			--actionPoints;
+			ExpendActionPoints(1);
 			nextPos = GetPositionVector() + GetForwardVectorV();
 		}
 		if (Input::GetAsyncKey(Keys::S))
 		{
+			ExpendActionPoints(1);
 			nextPos = GetPositionVector() + -GetForwardVectorV();
 		}
 		if (Input::GetAsyncKey(Keys::A))
 		{
+			ExpendActionPoints(1);
 			nextPos = GetPositionVector() + -GetRightVectorV();
 		}
 		if (Input::GetAsyncKey(Keys::D))
 		{
+			ExpendActionPoints(1);
 			nextPos = GetPositionVector() + GetRightVectorV();
 		}
 
@@ -330,4 +333,10 @@ void Player::ToggleIntuitionMenu()
 			intuitionMenuWidget->RemoveFromViewport();
 		}
 	}
+}
+
+void Player::ExpendActionPoints(int num)
+{
+	actionPoints -= num;
+	actionBarWidget->actionPoints = actionPoints;
 }
