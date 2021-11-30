@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
+#include <set>
 #include <DirectXCollision.h>
 #include "Transform.h"
 #include "Properties.h"
@@ -17,7 +18,7 @@ struct Actor
 	Actor* parent = nullptr;
 	std::vector<Actor*> children;
 
-	std::vector<std::string> tags;
+	std::set<std::string, std::string> tags;
 
 	SpatialComponent* rootComponent = nullptr;
 	std::vector<Component*> components;
