@@ -8,6 +8,7 @@ struct WidgetComponent;
 struct IntuitionComponent;
 struct Pickup;
 struct InteractWidget;
+struct IntuitionMenuWidget;
 struct Intuition;
 
 struct Player : Actor
@@ -19,6 +20,7 @@ struct Player : Actor
 	WidgetComponent* widget;
 
 	InteractWidget* interactWidget = nullptr;
+	IntuitionMenuWidget* intuitionMenuWidget = nullptr;
 
 	Pickup* heldItem = nullptr;
 
@@ -30,6 +32,7 @@ struct Player : Actor
 	bool inConversation = false;
 	bool inInteraction = false;
 	bool inCombat = false;
+	bool intuitionWidgetToggle = false;
 
 	Player();
 	virtual void Start() override;
@@ -43,4 +46,5 @@ private:
 	void RotationInput(float deltaTime);
 	void ToggleBattleGrid();
 	void PrimaryAction();
+	void ToggleIntuitionMenu();
 };

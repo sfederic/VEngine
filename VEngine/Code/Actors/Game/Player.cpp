@@ -18,6 +18,7 @@
 #include "UI/HealthWidget.h"
 #include "UI/DialogueWidget.h"
 #include "UI/InteractWidget.h"
+#include "UI/IntuitionMenuWidget.h"
 #include "Gameplay/Intuition.h"
 #include "Gameplay/ConditionSystem.h"
 #include "Gameplay/GameInstance.h"
@@ -43,8 +44,10 @@ void Player::Start()
 {
 	camera->targetActor = this;
 
+	//Setup widgets
 	widget->widget = uiSystem.CreateWidget<DialogueWidget>();
 	interactWidget = uiSystem.CreateWidget<InteractWidget>();
+	intuitionMenuWidget = uiSystem.CreateWidget<IntuitionMenuWidget>();
 
 	nextPos = GetPositionVector();
 	nextRot = GetRotationVector();
@@ -53,6 +56,7 @@ void Player::Start()
 void Player::Tick(float deltaTime)
 {
 	ToggleBattleGrid();
+	ToggleIntuitionMenu();
 
 	PrimaryAction();
 
@@ -291,6 +295,23 @@ void Player::PrimaryAction()
 					dialogueComponent->ShowTextAtActor();
 				}
 			}
+		}
+	}
+}
+
+void Player::ToggleIntuitionMenu()
+{
+	if (Input::GetKeyUp(Keys::I))
+	{
+		intuitionWidgetToggle = !intuitionWidgetToggle;
+
+		if (intuitionWidgetToggle)
+		{
+			intuitionMenuWidget->AddToViewport();
+		}
+		else
+		{
+			intuitionMenuWidget->RemoveFromViewport();
 		}
 	}
 }
