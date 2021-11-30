@@ -19,6 +19,7 @@
 #include "UI/DialogueWidget.h"
 #include "UI/InteractWidget.h"
 #include "UI/IntuitionMenuWidget.h"
+#include "UI/PlayerActionBarWidget.h"
 #include "Gameplay/Intuition.h"
 #include "Gameplay/ConditionSystem.h"
 #include "Gameplay/GameInstance.h"
@@ -44,10 +45,15 @@ void Player::Start()
 {
 	camera->targetActor = this;
 
+
 	//Setup widgets
 	widget->widget = uiSystem.CreateWidget<DialogueWidget>();
 	interactWidget = uiSystem.CreateWidget<InteractWidget>();
 	intuitionMenuWidget = uiSystem.CreateWidget<IntuitionMenuWidget>();
+
+	actionBarWidget = uiSystem.CreateWidget<PlayerActionBarWidget>();
+	actionBarWidget->actionPoints = &actionPoints;
+
 
 	nextPos = GetPositionVector();
 	nextRot = GetRotationVector();
@@ -59,6 +65,15 @@ void Player::Tick(float deltaTime)
 	ToggleIntuitionMenu();
 
 	PrimaryAction();
+
+	if (inCombat)
+	{
+		actionBarWidget->AddToViewport();
+	}
+	else
+	{
+		actionBarWidget->RemoveFromViewport();
+	}
 
 	if (!inConversation && !inInteraction)
 	{

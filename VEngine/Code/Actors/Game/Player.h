@@ -9,6 +9,7 @@ struct IntuitionComponent;
 struct Pickup;
 struct InteractWidget;
 struct IntuitionMenuWidget;
+struct PlayerActionBarWidget;
 struct Intuition;
 
 struct Player : Actor
@@ -21,6 +22,7 @@ struct Player : Actor
 
 	InteractWidget* interactWidget = nullptr;
 	IntuitionMenuWidget* intuitionMenuWidget = nullptr;
+	PlayerActionBarWidget* actionBarWidget = nullptr;
 
 	Pickup* heldItem = nullptr;
 
@@ -28,6 +30,8 @@ struct Player : Actor
 
 	XMVECTOR nextPos;
 	XMVECTOR nextRot;
+
+	int actionPoints = 7;
 
 	bool inConversation = false;
 	bool inInteraction = false;
