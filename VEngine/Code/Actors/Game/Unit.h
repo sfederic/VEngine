@@ -1,12 +1,12 @@
 #pragma once
-#include "../Actor.h"
+#include "NPC.h"
 #include "../ActorSystem.h"
 
 struct GridNode;
 struct MeshComponent;
 
 //Units are all moveable actors that can be placed in-world
-struct Unit : Actor
+struct Unit : NPC
 {
 	ACTOR_SYSTEM(Unit)
 

@@ -53,7 +53,7 @@ void Unit::Tick(float deltaTime)
 
 Properties Unit::GetProps()
 {
-	auto props = Actor::GetProps();
+	auto props = __super::GetProps();
 	props.Add("Move Points", &movementPoints);
 	props.Add("NextMove", &nextMovePos);
 	return props;
