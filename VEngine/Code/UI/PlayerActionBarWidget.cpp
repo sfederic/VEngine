@@ -10,7 +10,7 @@ void PlayerActionBarWidget::Tick(float deltaTime)
 	{
 		iconRect.left += 20.f;
  		iconRect.right += 20.f;
-		FillRect(iconRect);
+		FillRect(iconRect, {0.f, 0.8f, 0.1f, 1.f}, 0.5f);
 
 		//Padding
 		iconRect.left += 5.f;
