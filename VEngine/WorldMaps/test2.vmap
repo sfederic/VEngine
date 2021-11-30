@@ -9,7 +9,7 @@ cube.fbx
 Near Z
 0.01
 Position
-4.99999 0.5 7.00001
+1 0.5 7
 Rast State
 solid
 Rotation
@@ -32,7 +32,11 @@ next
 AudioActor
 0
 GridActor
+2
+Add On Interact
 1
+Condition
+
 Description
 Knows crate
 Destruct
@@ -66,7 +70,46 @@ UvOffset
 UvRotation
 0
 UvScale
--6 1
+-13 1
+next
+Add On Interact
+1
+Condition
+TestConditionFunction
+Description
+Knows crate
+Destruct
+1
+Health
+1
+Interact
+1
+Interact Text
+its just a crate
+Mesh
+
+Name
+CrateKnown2
+Position
+7 0.5 4
+Rast State
+solid
+Rotation
+-0 0 -0 1
+Scale
+0.5 0.5 0.5
+Shader
+DefaultShader.hlsl
+Texture
+crate.jpg
+UID
+166384376
+UvOffset
+-3 0
+UvRotation
+0
+UvScale
+-13 1
 next
 GameEvent
 0
@@ -375,6 +418,10 @@ EntranceTrigger
 0
 NPC
 1
+Add On Interact
+0
+Condition
+
 Description
 
 Destruct
