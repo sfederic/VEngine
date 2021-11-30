@@ -89,15 +89,15 @@ void Player::Tick(float deltaTime)
 	if (!inConversation && !inInteraction)
 	{
 		//Skip movement if not player's turn during combat
-		if (inCombat && !isPlayerTurn)
-		{
-			return;
-		}
+		//if (inCombat && !isPlayerTurn)
+		//{
+		//	return;
+		//}
 
-		if (inCombat && actionPoints <= 0)
-		{
-			return;
-		}
+		//if (inCombat && actionPoints <= 0)
+		//{
+		//	return;
+		//}
 
 		MovementInput(deltaTime);
 		RotationInput(deltaTime);
