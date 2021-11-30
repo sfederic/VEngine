@@ -10,6 +10,7 @@
 #include "Render/MaterialSystem.h"
 #include "Core.h"
 #include "Audio/AudioSystem.h"
+#include "Render/SpriteSystem.h"
 
 World world;
 
@@ -169,6 +170,7 @@ void World::Cleanup()
 	audioSystem.DeleteLoadedAudioAndChannels();
 	textureSystem.Cleanup();
 	materialSystem.Cleanup();
+	spriteSystem.Reset();
 
 	//CLEANUP COMPONENT SYSTEMS
 	for (IComponentSystem* componentSystem : activeComponentSystems)
