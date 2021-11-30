@@ -20,6 +20,7 @@ struct UISystem
 	ID2D1SolidColorBrush* brushText = nullptr;
 	ID2D1SolidColorBrush* debugBrushText = nullptr;
 	ID2D1SolidColorBrush* brushShapes = nullptr;
+	ID2D1SolidColorBrush* brushShapesAlpha = nullptr;
 
 	IDWriteTextFormat* textFormat = nullptr;
 

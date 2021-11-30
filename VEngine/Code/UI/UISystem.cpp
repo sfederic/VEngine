@@ -40,6 +40,7 @@ void UISystem::Init(void* swapchain)
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.9f, 0.9f, 0.9f, 1.0f), &brushText));
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.1f, 1.0f, 0.4f, 1.0f), &debugBrushText));
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.5f, 0.5f, 0.5f, 1.0f), &brushShapes));
+	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.5f, 0.5f, 0.5f, 0.5f), &brushShapesAlpha));
 }
 
 void UISystem::BeginDraw()
@@ -101,6 +102,7 @@ void UISystem::Cleanup()
 	brushText->Release();
 	debugBrushText->Release();
 	brushShapes->Release();
+	brushShapesAlpha->Release();
 
 	textFormat->Release();
 }
