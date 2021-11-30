@@ -278,6 +278,7 @@ void Player::PrimaryAction()
 					auto gridActor = dynamic_cast<GridActor*>(ray.hitActor);
 					if (gridActor)
 					{
+						ExpendActionPoints(1);
 						gridActor->InflictDamage(1);
 						return;
 					}
