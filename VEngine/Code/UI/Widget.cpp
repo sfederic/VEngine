@@ -112,8 +112,11 @@ void Widget::Rect(D2D1_RECT_F layout)
 	uiSystem.d2dRenderTarget->DrawRectangle(layout, uiSystem.brushShapes);
 }
 
-void Widget::FillRect(D2D1_RECT_F layout)
+void Widget::FillRect(D2D1_RECT_F layout, D2D1_COLOR_F color, float opacity)
 {
+	uiSystem.brushShapesAlpha->SetColor(color);
+	uiSystem.brushShapesAlpha->SetOpacity(opacity);
+
 	uiSystem.d2dRenderTarget->FillRectangle(layout, uiSystem.brushShapesAlpha);
 }
 
