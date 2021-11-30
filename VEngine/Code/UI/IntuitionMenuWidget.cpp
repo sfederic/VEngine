@@ -7,9 +7,7 @@
 
 void IntuitionMenuWidget::Tick(float deltaTime)
 {
-	D2D1_RECT_F rect = CenterLayoutOnScreenSpaceCoords(500.f, 350.f,
-		renderer.GetViewportWidth() / 2.f, renderer.GetViewportHeight() / 2.f);
-
+	D2D1_RECT_F rect = AlignLayout(400.f, 300.f, Align::Center);
 	Rect(rect);
 
 	//Set text rect to begining of layoutrect, then increment in forloop
