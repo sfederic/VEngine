@@ -28,7 +28,8 @@ struct UISystem
 	void BeginDraw();
 	void AddWidget(Widget* widgetToAdd);
 	void RemoveWidget(Widget* widgetToRemove);
-
+	void Reset();
+	
 	template <typename T>
 	T* CreateWidget()
 	{

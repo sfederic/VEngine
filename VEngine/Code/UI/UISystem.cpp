@@ -72,6 +72,17 @@ void UISystem::RemoveWidget(Widget* widgetToRemove)
 	}
 }
 
+void UISystem::Reset()
+{
+	for (auto widget : widgets)
+	{
+		delete widget;
+	}
+
+	widgets.clear();
+	widgetsInViewport.clear();
+}
+
 void UISystem::RemoveAllWidgets()
 {
 	widgetsInViewport.clear();
@@ -95,6 +106,8 @@ void UISystem::EndDraw()
 
 void UISystem::Cleanup()
 {
+	Reset();
+
 	d2dFactory->Release();
 	d2dRenderTarget->Release();
 	writeFactory->Release();

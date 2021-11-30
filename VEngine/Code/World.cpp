@@ -11,6 +11,7 @@
 #include "Core.h"
 #include "Audio/AudioSystem.h"
 #include "Render/SpriteSystem.h"
+#include "UI/UISystem.h"
 
 World world;
 
@@ -171,6 +172,7 @@ void World::Cleanup()
 	textureSystem.Cleanup();
 	materialSystem.Cleanup();
 	spriteSystem.Reset();
+	uiSystem.Reset();
 
 	//CLEANUP COMPONENT SYSTEMS
 	for (IComponentSystem* componentSystem : activeComponentSystems)
