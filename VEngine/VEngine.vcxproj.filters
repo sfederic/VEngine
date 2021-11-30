@@ -392,6 +392,9 @@
     <ClCompile Include="Code\UI\IntuitionMenuWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\UI\PlayerActionBarWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -731,6 +734,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\IntuitionMenuWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\UI\PlayerActionBarWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
