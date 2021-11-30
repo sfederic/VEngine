@@ -34,3 +34,16 @@ Properties GridActor::GetProps()
 	props.Add("Interact Text", &interactText);
 	return props;
 }
+
+void GridActor::InflictDamage(int damage)
+{
+	if (!isDestructible) return;
+
+	health -= damage;
+	healthWidget->healthPoints = health;
+
+	if (health <= 0)
+	{
+		Destroy();
+	}
+}
