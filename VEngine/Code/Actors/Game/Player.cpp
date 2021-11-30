@@ -66,6 +66,17 @@ void Player::Tick(float deltaTime)
 
 	PrimaryAction();
 
+	//End turn input
+	if (Input::GetKeyUp(Keys::Enter))
+	{
+		auto battleGrid = GameUtils::GetBattleGrid();
+		if (battleGrid)
+		{
+			battleGrid->isPlayerTurn = false;
+			isPlayerTurn = false;
+		}
+	}
+
 	if (inCombat)
 	{
 		actionBarWidget->AddToViewport();
@@ -77,6 +88,17 @@ void Player::Tick(float deltaTime)
 
 	if (!inConversation && !inInteraction)
 	{
+		//Skip movement if not player's turn during combat
+		if (inCombat && !isPlayerTurn)
+		{
+			return;
+		}
+
+		if (inCombat && actionPoints <= 0)
+		{
+			return;
+		}
+
 		MovementInput(deltaTime);
 		RotationInput(deltaTime);
 	}
@@ -196,14 +218,16 @@ void Player::RotationInput(float deltaTime)
 
 void Player::ToggleBattleGrid()
 {
-	//toggle battlegrid visibility
 	if (Input::GetKeyUp(Keys::Space))
 	{
 		inCombat = !inCombat;
 
+		//toggle battlegrid
 		auto battleGrid = GameUtils::GetBattleGrid();
 		if (battleGrid)
 		{
+			battleGrid->isPlayerTurn = !battleGrid->isPlayerTurn;
+			isPlayerTurn = battleGrid->isPlayerTurn;
 			battleGrid->ToggleActive();
 		}
 

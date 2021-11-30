@@ -38,6 +38,8 @@ struct Player : Actor
 	bool inCombat = false;
 	bool intuitionWidgetToggle = false;
 
+	bool isPlayerTurn = false;
+
 	Player();
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
