@@ -47,6 +47,7 @@ struct Widget
 	void Image(const std::string& filename, D2D1_RECT_F layout);
 	void Image(const std::string& filename, int x, int y, int w, int h);
 	void Rect(D2D1_RECT_F layout);
+	void FillRect(D2D1_RECT_F layout);
 
 	D2D1_RECT_F AlignLayout(float w, float h, Align align);
 	D2D1_RECT_F CenterLayoutOnScreenSpaceCoords(float w, float h, float sx, float sy);

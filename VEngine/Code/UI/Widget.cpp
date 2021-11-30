@@ -112,6 +112,11 @@ void Widget::Rect(D2D1_RECT_F layout)
 	uiSystem.d2dRenderTarget->DrawRectangle(layout, uiSystem.brushShapes);
 }
 
+void Widget::FillRect(D2D1_RECT_F layout)
+{
+	uiSystem.d2dRenderTarget->FillRectangle(layout, uiSystem.brushShapesAlpha);
+}
+
 D2D1_RECT_F Widget::AlignLayout(float w, float h, Align align)
 {
 	float vw = renderer.GetViewportWidth();
