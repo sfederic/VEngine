@@ -4,7 +4,7 @@
 //Shows player action points remaining during combat.
 struct PlayerActionBarWidget : Widget
 {
-	int* actionPoints = nullptr;
+	int actionPoints = 0;
 
 	virtual void Tick(float deltaTime) override;
 };

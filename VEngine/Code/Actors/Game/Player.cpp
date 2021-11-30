@@ -52,7 +52,7 @@ void Player::Start()
 	intuitionMenuWidget = uiSystem.CreateWidget<IntuitionMenuWidget>();
 
 	actionBarWidget = uiSystem.CreateWidget<PlayerActionBarWidget>();
-	actionBarWidget->actionPoints = &actionPoints;
+	actionBarWidget->actionPoints = actionPoints;
 
 
 	nextPos = GetPositionVector();
@@ -143,6 +143,7 @@ void Player::MovementInput(float deltaTime)
 
 		if (Input::GetAsyncKey(Keys::W))
 		{
+			--actionPoints;
 			nextPos = GetPositionVector() + GetForwardVectorV();
 		}
 		if (Input::GetAsyncKey(Keys::S))

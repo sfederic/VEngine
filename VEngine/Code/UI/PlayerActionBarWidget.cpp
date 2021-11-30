@@ -6,7 +6,7 @@ void PlayerActionBarWidget::Tick(float deltaTime)
 	D2D1_RECT_F iconRect = rect;
 	iconRect.right = rect.left + 20.f;
 
-	for (int i = 0; i < *actionPoints; i++)
+	for (int i = 0; i < actionPoints; i++)
 	{
 		iconRect.left += 20.f;
  		iconRect.right += 20.f;

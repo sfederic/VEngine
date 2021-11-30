@@ -16,7 +16,7 @@ GridActor::GridActor()
 void GridActor::Start()
 {
 	healthWidget = uiSystem.CreateWidget<HealthWidget>();
-	healthWidget->healthPoints = &health;
+	healthWidget->healthPoints = health;
 }
 
 void GridActor::Tick(float deltaTime)
