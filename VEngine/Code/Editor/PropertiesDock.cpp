@@ -18,6 +18,7 @@
 #include "PropertyWidgets/UintWidget.h"
 #include "PropertyWidgets/VectorWidget.h"
 #include "PropertyWidgets/StringWidget.h"
+#include "PropertyWidgets/WStringWidget.h"
 #include "PropertyWidgets/TextureDataWidget.h"
 #include "PropertyWidgets/ShaderDataWidget.h"
 #include "PropertyWidgets/MeshComponentDataWidget.h"
@@ -156,6 +157,12 @@ void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRo
             auto stringWidget = new StringWidget(prop.second);
             actorPropsGridLayout->addWidget(stringWidget, currentGridRow, propertyDataColumn);
             propertyWidgetsToUpdate.push_back((IPropertyWidget*)stringWidget);
+        }    
+        else if (props.CheckType<std::wstring>(name))
+        {
+            auto wstringWidget = new WStringWidget(prop.second);
+            actorPropsGridLayout->addWidget(wstringWidget, currentGridRow, propertyDataColumn);
+            propertyWidgetsToUpdate.push_back((IPropertyWidget*)wstringWidget);
         }       
         else if (props.CheckType<TextureData>(name))
         {
