@@ -205,16 +205,17 @@ void Actor::Destroy()
 
 bool Actor::SetName(std::string newName)
 {
-	for (Actor* actor : world.GetAllActorsInWorld())
+	auto actorIt = world.actorNameMap.find(newName);
+	if (actorIt == world.actorNameMap.end())
 	{
-		if (actor->name == newName)
-		{
-			return false;
-		}
+		world.actorNameMap.erase(name);
+		name = newName;
+		world.actorNameMap.insert(std::make_pair(name, this));
+
+		return true;
 	}
 
-	name = newName;
-	return true;
+	return false;
 }
 
 void Actor::CreateAllComponents()
