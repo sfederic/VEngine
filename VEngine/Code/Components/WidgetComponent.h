@@ -13,7 +13,6 @@ struct WidgetComponent : Component
 	virtual void Start() override;
 	virtual void Create() override;
 	virtual Properties GetProps() override;
-	void SetText(std::string text);
 	void SetPosition(XMVECTOR newPosition);
 	void AddToViewport();
 	void RemoveFromViewport();

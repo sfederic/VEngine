@@ -19,11 +19,6 @@ Properties WidgetComponent::GetProps()
     return Properties();
 }
 
-void WidgetComponent::SetText(std::string text)
-{
-    widget->displayText = stows(text);
-}
-
 void WidgetComponent::AddToViewport()
 {
     widget->AddToViewport();

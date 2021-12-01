@@ -15,5 +15,5 @@ void DialogueWidget::Tick(float deltaTime)
 	};
 
 	Image("speech_bubble.png", imageRect);
-	Text(displayText, textRect);
+	Text(dialogueText, textRect);
 }

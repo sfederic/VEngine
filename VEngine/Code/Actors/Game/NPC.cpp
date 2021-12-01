@@ -39,6 +39,5 @@ void NPC::TalkTo()
 
     auto widget = uiSystem.CreateWidget<DialogueWidget>();
     widget->pos = GetHomogeneousPositionVector();
-    widget->displayText = stows(dialogue->dialogue.data[0].text);
     widget->AddToViewport();
 }

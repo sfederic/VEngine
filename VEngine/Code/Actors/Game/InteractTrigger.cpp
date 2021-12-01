@@ -20,7 +20,6 @@ void InteractTrigger::Start()
 	trigger->target = (Actor*)GameUtils::GetPlayer();
 
 	widget->pos = GetHomogeneousPositionVector();
-	widget->displayText = stows(interactText);
 }
 
 void InteractTrigger::Tick(float deltaTime)
@@ -30,7 +29,6 @@ void InteractTrigger::Tick(float deltaTime)
 		if (Input::GetKeyDown(Keys::Down))
 		{
 			widget->AddToViewport();
-			GameUtils::GetPlayer()->camera->targetActor = this;
 		}
 	}
 	else

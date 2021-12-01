@@ -53,7 +53,6 @@ struct Widget
 	D2D1_RECT_F CenterLayoutOnScreenSpaceCoords(float w, float h, float sx, float sy);
 
 	XMVECTOR pos;
-	std::wstring displayText;
 
 	bool render = true;
 };
