@@ -6,16 +6,18 @@ Far Z
 1000
 Mesh
 cube.fbx
+Name
+Player0
 Near Z
 0.01
 Position
-2.00001 0.5 5
+2.00001 0 1.99999
 Rast State
 solid
 Rotation
-0 1 0 1.40071e-06
+-0 0 -0 1
 Scale
-0.499996 0.499999 0.499999
+0.499994 0.499999 0.499997
 Shader
 DefaultShader.hlsl
 Texture
@@ -32,122 +34,19 @@ next
 AudioActor
 0
 GridActor
-2
-Add On Interact
-1
-Condition
-
-Description
-Knows crate
-Destruct
-1
-Health
-1
-Interact
-1
-Interact Text
-its just a crate
-Mesh
-
-Name
-CrateKnown
-Position
-7 0.5 6
-Rast State
-solid
-Rotation
--0 0 -0 1
-Scale
-0.5 0.5 0.5
-Shader
-DefaultShader.hlsl
-Texture
-crate.jpg
-UID
-166384376
-UvOffset
-0 0
-UvRotation
 0
-UvScale
--13 1
-next
-Add On Interact
-1
-Condition
-TestConditionFunction
-Description
-Knows crate
-Destruct
-1
-Health
-1
-Interact
-1
-Interact Text
-its just a crate
-Mesh
-
-Name
-CrateKnown2
-Position
-7 0.5 4
-Rast State
-solid
-Rotation
--0 0 -0 1
-Scale
-0.5 0.5 0.5
-Shader
-DefaultShader.hlsl
-Texture
-crate.jpg
-UID
-166384376
-UvOffset
--3 0
-UvRotation
-0
-UvScale
--13 1
-next
 GameEvent
 0
 BattleGrid
-1
-Mesh
-node.fbx
-Position
-0 0 0
-Rast State
-solid
-Rotation
-0 0 0 1
-Scale
-1 1 1
-Shader
-InstanceShader.hlsl
-Size X
-9
-Size Y
-9
-Texture
-test.png
-UID
-4162821020
-UvOffset
-0 0
-UvRotation
 0
-UvScale
-1 1
-next
 MeshActor
-12
+11
 Mesh
 plane.fbx
+Name
+MeshActor0
 Position
-4.5 0 4.5
+4.5 -0.5 4.5
 Rast State
 solid
 Rotation
@@ -169,14 +68,16 @@ UvScale
 next
 Mesh
 plane.fbx
+Name
+MeshActor1
 Position
-9.5 1.5 1.5
+9.5 1 1.5
 Rast State
 solid
 Rotation
--0 -0.706934 -0 0.70728
+-0 -0.706934 -0 0.707279
 Scale
-2.00001 1.5 1
+2.00001 1.5 0.999999
 Shader
 DefaultShader.hlsl
 Texture
@@ -192,8 +93,10 @@ UvScale
 next
 Mesh
 plane.fbx
+Name
+MeshActor2
 Position
-7.5 1.5 9.5
+7.5 1 9.5
 Rast State
 solid
 Rotation
@@ -215,8 +118,10 @@ UvScale
 next
 Mesh
 plane.fbx
+Name
+MeshActor3
 Position
-1.00001 1.5 9.5
+1.00001 1 9.5
 Rast State
 solid
 Rotation
@@ -238,8 +143,10 @@ UvScale
 next
 Mesh
 plane.fbx
+Name
+MeshActor4
 Position
-6.5 1.5 -0.500345
+6.5 1 -0.500345
 Rast State
 solid
 Rotation
@@ -261,8 +168,10 @@ UvScale
 next
 Mesh
 plane.fbx
+Name
+MeshActor5
 Position
-1.5 1.5 -0.5
+1.5 1 -0.5
 Rast State
 solid
 Rotation
@@ -284,14 +193,16 @@ UvScale
 next
 Mesh
 plane.fbx
+Name
+MeshActor6
 Position
-9.5 1.5 6.49999
+9.5 1 6.49999
 Rast State
 solid
 Rotation
--0 -0.707107 -0 0.707107
+0 0.707107 0 -0.707107
 Scale
-2.99994 1.5 0.999983
+2.99994 1.5 0.999982
 Shader
 DefaultShader.hlsl
 Texture
@@ -307,14 +218,16 @@ UvScale
 next
 Mesh
 plane.fbx
+Name
+MeshActor7
 Position
--0.5 1.5 1.5
+-0.5 1 1.5
 Rast State
 solid
 Rotation
 0 0.707107 0 0.707107
 Scale
-2 1.5 1
+1.99999 1.5 0.999992
 Shader
 DefaultShader.hlsl
 Texture
@@ -329,21 +242,23 @@ UvScale
 1 1
 next
 Mesh
-plane.fbx
+small_table.fbx
+Name
+Table
 Position
--0.49 1.5 1.51
+0 0 2
 Rast State
 solid
 Rotation
-0.707107 -1.54543e-08 0.707107 -1.54543e-08
+-0 0 -0 1
 Scale
-0.499999 0.5 0.999999
+1 1 1
 Shader
 DefaultShader.hlsl
 Texture
-lisa.jpg
+test.png
 UID
-2218589739
+2820437650
 UvOffset
 0 0
 UvRotation
@@ -353,14 +268,16 @@ UvScale
 next
 Mesh
 plane.fbx
+Name
+MeshActor9
 Position
--0.5 1.5 6.49999
+-0.5 1 6.49999
 Rast State
 solid
 Rotation
 0 0.707107 0 0.707107
 Scale
-2.99998 1.5 0.999995
+2.99997 1.5 0.999994
 Shader
 DefaultShader.hlsl
 Texture
@@ -376,31 +293,10 @@ UvScale
 next
 Mesh
 plane.fbx
+Name
+MeshActor10
 Position
-1.00001 1.5 9.5
-Rast State
-solid
-Rotation
-0 1 0 -2.60274e-07
-Scale
-1.49999 1.5 0.999992
-Shader
-DefaultShader.hlsl
-Texture
-wall03.png
-UID
-2218589739
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-0.2 0.2
-next
-Mesh
-plane.fbx
-Position
-4.00001 1.5 9.5
+4.00001 1 9.5
 Rast State
 solid
 Rotation
@@ -426,6 +322,8 @@ Colour
 1 1 1 1
 LightEnabled
 1
+Name
+DirectionalLightActor0
 Position
 3 4 6
 Rotation
@@ -442,50 +340,26 @@ PointLightActor
 SpotLightActor
 0
 EntranceTrigger
-0
-NPC
 1
-Add On Interact
-0
-Condition
-
-Description
-
-Destruct
+Entrance Active
 1
-File
-testdiag
-Health
-2
-Interact
-0
-Interact Text
-
-Mesh
-
+Extents
+1 1 1
+Level Name
+test.vmap
 Name
-
+EntranceTrigger0
 Position
-3 0.5 4
-Rast State
-solid
+4 0 8
 Rotation
 -0 0 -0 1
 Scale
-0.5 0.5 0.5
-Shader
-DefaultShader.hlsl
-Texture
-test.png
+1 1 1
 UID
-730392693
-UvOffset
--17 -1
-UvRotation
-0
-UvScale
-1 1
+4086838277
 next
+NPC
+0
 Unit
 0
 Pickup
