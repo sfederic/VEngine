@@ -18,7 +18,7 @@ struct InteractTrigger : Actor
 
 	Actor* targetActor = nullptr;
 
-	std::string interactText;
+	std::wstring interactText;
 
 	InteractTrigger();
 	virtual void Start() override;

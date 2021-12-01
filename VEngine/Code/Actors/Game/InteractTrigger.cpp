@@ -19,7 +19,7 @@ void InteractTrigger::Start()
 	trigger->target = (Actor*)GameUtils::GetPlayer();
 	
 	interactWidget = uiSystem.CreateWidget<InteractWidget>();
-	interactWidget->interactText = stows(interactText);
+	interactWidget->interactText = interactText;
 
 	//Interact triggers are stationary, only one pos set is needed
 	interactWidget->pos = GetHomogeneousPositionVector();
