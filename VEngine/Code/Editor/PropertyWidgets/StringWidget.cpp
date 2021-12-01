@@ -10,7 +10,7 @@ StringWidget::StringWidget(Property value_)
 
 	//BUG: previously StringWidget was using ::editingFinished but there's a supposed bug in Qt
 	//where the Signal function is called twice.
-	connect(this, &QLineEdit::returnPressed, this, &StringWidget::SetValue);
+	connect(this, &QLineEdit::editingFinished, this, &StringWidget::SetValue);
 }
 
 void StringWidget::SetValue()
