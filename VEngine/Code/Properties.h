@@ -18,6 +18,9 @@ struct Property
 	//Sets widgets to be inactive/readonly
 	bool readOnly = false;
 
+	//hide property in UI
+	bool hide = false;
+
 	std::function<void(void*)> change;
 };
 
