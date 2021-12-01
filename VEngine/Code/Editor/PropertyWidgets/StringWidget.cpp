@@ -30,6 +30,6 @@ void StringWidget::ResetValue()
 {
 	if (value)
 	{
-		setText(QString::fromStdString(*value));
+		setText(QString::fromStdString(value->data()));
 	}
 }
