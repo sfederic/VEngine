@@ -65,11 +65,19 @@ void WorldDock::PopulateWorldActorList()
 	//Need to block signals because calling functions on tree items makes the connect()ed event fire
 	actorTreeWidget->blockSignals(true);
 
+	//TODO: i don't like these clears() here. They're here because these maps are added to
+	//in ActorSystem::Add() calls but there's no way to refresh them before Deserialising data
+	world.actorNameMap.clear();
+	world.actorUIDMap.clear();
+
 	for (Actor* actor : world.GetAllActorsInWorld())
 	{
 		auto item = new QTreeWidgetItem(actorTreeWidget);
 		item->setText(0, QString::fromStdString(actor->name));
 		item->setFlags(item->flags() | Qt::ItemIsEditable);
+
+		world.actorNameMap.emplace(actor->name, actor);
+		world.actorUIDMap.emplace(actor->uid, actor);
 	}
 
 	actorTreeWidget->blockSignals(false);
@@ -92,12 +100,15 @@ void WorldDock::ActorNameChanged(QTreeWidgetItem* item, int column)
 	QString newActorName = item->text(column);
 
 	Actor* actor = worldEditor.pickedActor;
-	if (actor) //pickedActor should be set before this is hit in the other events
+	assert(actor); //pickedActor should be set before this is hit in the other events
+
+	if (!actor->SetName(newActorName.toStdString()))
 	{
-		if (!actor->SetName(newActorName.toStdString()))
-		{
-			editor->Log(L"Could not change actor name. Name already exists.");
-		}
+		editor->Log("Could not change actor name from %s to %s. Name already exists.",
+			actor->name.c_str(), newActorName.toStdString().c_str());
+
+		//Reset item text
+		item->setText(column, QString::fromStdString(actor->name));
 	}
 }
 
