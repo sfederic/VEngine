@@ -167,6 +167,7 @@ Properties Actor::GetProps()
 	props.Add("Scale", &rootComponent->transform.scale);
 	props.Add("Rotation", &rootComponent->transform.rotation);
 	props.Add("UID", &uid).hide = true;
+	props.Add("Name", &name).hide = true;
 
 	return props;
 }
