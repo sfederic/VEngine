@@ -395,6 +395,9 @@
     <ClCompile Include="Code\UI\PlayerActionBarWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Editor\PropertyWidgets\WStringWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -740,6 +743,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\GameplayTags.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Editor\PropertyWidgets\WStringWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
