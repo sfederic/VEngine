@@ -90,8 +90,13 @@ void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRo
     currentGridRow++;
 
     //Properties
-    for (auto prop : props.propMap)
+    for (auto& prop : props.propMap)
     {
+        if (prop.second.hide)
+        {
+            continue;
+        }
+
         const std::string& name = prop.first;
 
         //Set property name onto label
