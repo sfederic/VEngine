@@ -6,6 +6,7 @@
 #include "Actors/Actor.h"
 #include "World.h"
 #include "Render/RenderTypes.h"
+#include "VString.h"
 
 using namespace DirectX;
 
@@ -68,6 +69,11 @@ void Serialiser::Serialise(Properties props)
 		{
 			std::string* str = props.GetData<std::string>(name);
 			ss << name << "\n" << str->c_str() << "\n";
+		}		
+		else if (props.CheckType<std::wstring>(name))
+		{
+			std::wstring* wstr = props.GetData<std::wstring>(name);
+			ss << name << "\n" << wstos(wstr->data()).c_str() << "\n";
 		}	
 		else if (props.CheckType<TextureData>(name))
 		{
@@ -196,6 +202,14 @@ void Deserialiser::Deserialise(Properties props)
 			is.getline(propString, 512);
 			std::string* str = props.GetData<std::string>(name);
 			str->assign(propString);
+		}
+		else if (props.CheckType<std::wstring>(name))
+		{
+			//wstring is converted to string on Serialise. Convert back to wstring here.
+			char propString[512];
+			is.getline(propString, 512);
+			std::wstring* wstr = props.GetData<std::wstring>(name);
+			wstr->assign(stows(propString));
 		}
 		else if (props.CheckType<TextureData>(name))
 		{
