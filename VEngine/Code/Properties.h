@@ -67,6 +67,9 @@ struct Properties
 		return propMap[name];
 	}
 
+	//Shorthand #define for adding variable pointer and name.
+#define AddProp(x) Add(#x, &x)
+
 	void Merge(Properties propsToMerge)
 	{
 		propMap.merge(propsToMerge.propMap);
