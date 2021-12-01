@@ -5,6 +5,7 @@
 
 struct BoxTriggerComponent;
 struct Widget;
+struct InteractWidget;
 
 //Used to open up a quick prompt/action when the player overlaps
 struct InteractTrigger : Actor
@@ -12,7 +13,8 @@ struct InteractTrigger : Actor
 	ACTOR_SYSTEM(InteractTrigger)
 
 	BoxTriggerComponent* trigger = nullptr;
-	Widget* widget = nullptr;
+
+	InteractWidget* interactWidget = nullptr;
 
 	Actor* targetActor = nullptr;
 

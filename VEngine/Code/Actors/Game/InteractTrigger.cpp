@@ -2,7 +2,8 @@
 #include "Components/BoxTriggerComponent.h"
 #include "Camera.h"
 #include "Gameplay/GameUtils.h"
-#include "UI/Widget.h"
+#include "UI/InteractWidget.h"
+#include "UI/UISystem.h"
 #include "VString.h"
 #include "Input.h"
 #include "Actors/Game/Player.h"
@@ -11,29 +12,28 @@ InteractTrigger::InteractTrigger()
 {
 	trigger = BoxTriggerComponent::system.Add(this);
 	rootComponent = trigger;
-
-	widget = new Widget();
 }
 
 void InteractTrigger::Start()
 {
 	trigger->target = (Actor*)GameUtils::GetPlayer();
+	
+	interactWidget = uiSystem.CreateWidget<InteractWidget>();
+	interactWidget->interactText = stows(interactText);
 
-	widget->pos = GetHomogeneousPositionVector();
+	//Interact triggers are stationary, only one pos set is needed
+	interactWidget->pos = GetHomogeneousPositionVector();
 }
 
 void InteractTrigger::Tick(float deltaTime)
 {
 	if (trigger->ContainsTarget())
 	{
-		if (Input::GetKeyDown(Keys::Down))
-		{
-			widget->AddToViewport();
-		}
+		interactWidget->AddToViewport();
 	}
 	else
 	{
-		widget->RemoveFromViewport();
+		interactWidget->RemoveFromViewport();
 	}
 }
 
