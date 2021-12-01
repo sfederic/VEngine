@@ -13,6 +13,8 @@ struct EntranceTrigger : Actor
 
 	std::string levelToMoveTo;
 
+	bool isEntraceActive = true;
+
 	EntranceTrigger();
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;

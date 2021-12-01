@@ -18,7 +18,7 @@ void EntranceTrigger::Start()
 void EntranceTrigger::Tick(float deltaTime)
 {
     XMVECTOR targetPos = trigger->target->GetPositionVector();
-    if (trigger->Contains(targetPos))
+    if (trigger->Contains(targetPos) && isEntraceActive)
     {
         if (Input::GetKeyUp(Keys::Down))
         {
@@ -33,5 +33,6 @@ Properties EntranceTrigger::GetProps()
     auto props = Actor::GetProps();
     props.title = "EntranceTrigger";
     props.Add("Level Name", &levelToMoveTo);
+    props.Add("Entrance Active", &isEntraceActive);
     return props;
 }
