@@ -3,14 +3,13 @@
 #include "../ActorSystem.h"
 
 struct GridNode;
-struct MeshComponent;
+
+//TODO: think about consolidating Unit and NPC into one struct.
 
 //Units are all moveable actors that can be placed in-world
 struct Unit : NPC
 {
 	ACTOR_SYSTEM(Unit)
-
-	MeshComponent* mesh = nullptr;
 
 	int xIndex = -1;
 	int yIndex = -1;

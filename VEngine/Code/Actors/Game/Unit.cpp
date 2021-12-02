@@ -10,8 +10,6 @@
 
 Unit::Unit()
 {
-	mesh = MeshComponent::system.Add(this, MeshComponent("cube.fbx", "test.png"));
-	rootComponent = mesh;
 }
 
 void Unit::Start()
@@ -22,9 +20,9 @@ void Unit::Start()
 
 	nextMovePos = GetPositionVector();
 
-	BattleGrid* battleGrid = GameUtils::GetBattleGrid();
+	/*BattleGrid* battleGrid = GameUtils::GetBattleGrid();
 	GridNode* destNode = battleGrid->GetNode(0, 0);
-	MoveTo(destNode);
+	MoveTo(destNode);*/
 }
 
 void Unit::Tick(float deltaTime)
