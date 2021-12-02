@@ -11,13 +11,13 @@ Player0
 Near Z
 0.01
 Position
-2.00001 0 1.99999
+3.00001 0 3.00001
 Rast State
 solid
 Rotation
--0 0 -0 1
+0 1.49012e-07 0 -0.999999
 Scale
-0.499994 0.499999 0.499997
+0.5 0.5 0.5
 Shader
 DefaultShader.hlsl
 Texture
@@ -34,13 +34,52 @@ next
 AudioActor
 0
 GridActor
+1
+Add On Interact
 0
+Condition
+
+Description
+
+Destruct
+1
+Health
+2
+Interact
+1
+Interact Text
+Looks like there's something on the table.
+Mesh
+small_table.fbx
+Name
+GridActor0
+Position
+0 0 2
+Rast State
+solid
+Rotation
+-0 0 -0 1
+Scale
+1 1 1
+Shader
+DefaultShader.hlsl
+Texture
+test.png
+UID
+1703165826
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
 GameEvent
 0
 BattleGrid
 0
 MeshActor
-11
+10
 Mesh
 plane.fbx
 Name
@@ -242,29 +281,29 @@ UvScale
 1 1
 next
 Mesh
-small_table.fbx
+plane.fbx
 Name
-Table
+MeshActor8
 Position
-0 0 2
+4.00001 1 9.5
 Rast State
 solid
 Rotation
--0 0 -0 1
+0 1 0 -2.60274e-07
 Scale
-1 1 1
+1.49999 1.5 0.999992
 Shader
 DefaultShader.hlsl
 Texture
-test.png
+wall03.png
 UID
-2820437650
+2218589739
 UvOffset
-0 0
+0.5 0.1
 UvRotation
 0
 UvScale
-1 1
+0.4 0.4
 next
 Mesh
 plane.fbx
@@ -290,31 +329,6 @@ UvRotation
 0
 UvScale
 1 1
-next
-Mesh
-plane.fbx
-Name
-MeshActor10
-Position
-4.00001 1 9.5
-Rast State
-solid
-Rotation
-0 1 0 -2.60274e-07
-Scale
-1.49999 1.5 0.999992
-Shader
-DefaultShader.hlsl
-Texture
-wall03.png
-UID
-2218589739
-UvOffset
-0.5 0.1
-UvRotation
-0
-UvScale
-0.4 0.4
 next
 DirectionalLightActor
 1
@@ -361,7 +375,50 @@ next
 NPC
 0
 Unit
+1
+Add On Interact
 0
+Condition
+
+Description
+
+Destruct
+1
+File
+
+Health
+4
+Interact
+1
+Interact Text
+Ew begone beasant I have no issue with you!
+Mesh
+
+Move Points
+4
+Name
+Unit0
+Position
+4 0 6
+Rast State
+solid
+Rotation
+-0 0 -0 1
+Scale
+0.5 0.5 0.5
+Shader
+DefaultShader.hlsl
+Texture
+test.png
+UID
+1922293766
+UvOffset
+0 -1
+UvRotation
+0
+UvScale
+1 1
+next
 Pickup
 0
 Billboard
