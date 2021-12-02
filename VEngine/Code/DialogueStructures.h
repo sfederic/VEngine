@@ -11,6 +11,7 @@ struct DialogueData
 	std::string text;
 };
 
+//TODO: think about making a widget for Dialogue struct like how Texture/Mesh/Shader have
 struct Dialogue
 {
 	//The filename of the .dialog file to read from
