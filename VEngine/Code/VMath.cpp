@@ -227,24 +227,21 @@ namespace VMath
 
     void UpdateBoundingBox(BoundingOrientedBox& boundingBox, Actor* actor)
     {
-        //XMFLOAT3 actorPosFloat3 = actor->GetPositionFloat3();
-        //XMVECTOR actorPos = XMLoadFloat3(&actorPosFloat3);
-        //XMVECTOR boundingBoxCenter = XMLoadFloat3(&boundingBox.Center);
-        //XMVECTOR offset = actorPos + boundingBoxCenter;
-        //offset.m128_f32[3] = 1.0f;
+        XMVECTOR actorPos = actor->GetPositionVector();
+        XMVECTOR boundingBoxCenter = XMLoadFloat3(&boundingBox.Center);
+        XMVECTOR offset = actorPos + boundingBoxCenter;
+        offset.m128_f32[3] = 1.0f;
 
-        //XMFLOAT3 actorScaleFloat3 = actor->GetScale();
-        //XMVECTOR actorScale = XMLoadFloat3(&actorScaleFloat3);
-        //XMVECTOR extents = XMLoadFloat3(&boundingBox.Extents);
-        //XMVECTOR scale = extents * actorScale;
-        //scale.m128_f32[3] = 1.0f;
+        XMVECTOR actorScale = actor->GetScaleVector();
+        XMVECTOR extents = XMLoadFloat3(&boundingBox.Extents);
+        XMVECTOR scale = extents * actorScale;
+        scale.m128_f32[3] = 1.0f;
 
-        //XMFLOAT4 actorRotFloat4 = actor->GetRotationQuat();
-        //XMVECTOR orientation = XMLoadFloat4(&actorRotFloat4);
+        XMVECTOR orientation = actor->GetRotationVector();
 
-        //XMStoreFloat3(&boundingBox.Center, offset);
-        //XMStoreFloat3(&boundingBox.Extents, scale);
-        //XMStoreFloat4(&boundingBox.Orientation, orientation);
+        XMStoreFloat3(&boundingBox.Center, offset);
+        XMStoreFloat3(&boundingBox.Extents, scale);
+        XMStoreFloat4(&boundingBox.Orientation, orientation);
     }
 
     float RandomRange(float min, float max)
