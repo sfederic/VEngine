@@ -21,9 +21,9 @@ struct GridActor : Actor
 
 	int health = 0;
 
-	bool isDestructible = false;
+	bool isDestructible = true;
 
-	bool isInteractable = false;
+	bool isInteractable = true;
 	std::string interactText;
 
 	GridActor();
