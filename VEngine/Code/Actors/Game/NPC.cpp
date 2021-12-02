@@ -12,6 +12,8 @@ NPC::NPC()
 
     dialogueWidget = WidgetComponent::system.Add(this);
     dialogueWidget->widget = uiSystem.CreateWidget<DialogueWidget>();
+
+    isDestructible = true;
 }
 
 void NPC::Start()
