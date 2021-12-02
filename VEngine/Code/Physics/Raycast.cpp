@@ -1,11 +1,12 @@
 #define NOMINMAX
 
 #include "Raycast.h"
+#include <math.h>
 #include <limits>
 #include "Camera.h"
 #include "Render/Renderer.h"
 #include "Editor/Editor.h"
-#include "Math.h"
+#include "VMath.h"
 #include "Actors/IActorSystem.h"
 #include "Actors/Actor.h"
 #include "Components/MeshComponent.h"
@@ -77,12 +78,7 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 			}
 
 			BoundingOrientedBox boundingBox = spatialComponent->boundingBox;
-
-			boundingBox.Center = spatialComponent->transform.position;
-			boundingBox.Orientation = spatialComponent->transform.rotation;
-			boundingBox.Extents.x *= spatialComponent->transform.scale.x;
-			boundingBox.Extents.y *= spatialComponent->transform.scale.y;
-			boundingBox.Extents.z *= spatialComponent->transform.scale.z;
+			VMath::UpdateBoundingBox(boundingBox, actor);
 
 			if (boundingBox.Intersects(ray.origin, ray.direction, ray.hitDistance))
 			{
