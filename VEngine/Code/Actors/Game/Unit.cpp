@@ -14,6 +14,8 @@ Unit::Unit()
 
 void Unit::Start()
 {
+	__super::Start();
+
 	//Careful here with the naming (x/z)
 	xIndex = std::round(GetPosition().x);
 	yIndex = std::round(GetPosition().z);
@@ -27,6 +29,8 @@ void Unit::Start()
 
 void Unit::Tick(float deltaTime)
 {
+	__super::Tick(deltaTime);
+
 	if (XMVector4Equal(nextMovePos, GetPositionVector()))
 	{
 		if (movementPathNodeIndex < pathNodes.size())
