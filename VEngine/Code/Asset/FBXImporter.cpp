@@ -1,5 +1,6 @@
 #include "FBXImporter.h"
 #include <cassert>
+#include <filesystem>
 
 FBXImporter fbxImporter;
 
@@ -12,9 +13,11 @@ void FBXImporter::Init()
 
 bool FBXImporter::Import(std::string filename, MeshDataProxy* meshData)
 {
-	if (filename.empty())
+	std::string filepath = "Meshes/" + filename;
+	
+	if (filename.empty() || !std::filesystem::exists(filepath))
 	{
-		//just set default model if filename empty
+		//set default model
 		filename = "cube.fbx";
 	}
 
@@ -30,9 +33,6 @@ bool FBXImporter::Import(std::string filename, MeshDataProxy* meshData)
 	{
 		existingMeshDataMap[filename] = new MeshData();
 	}
-
-
-	std::string filepath = "Meshes/" + filename;
 
 	if (!importer->Initialize(filepath.c_str(), -1, manager->GetIOSettings()))
 	{
