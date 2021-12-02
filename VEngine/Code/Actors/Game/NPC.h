@@ -11,6 +11,9 @@ struct NPC : GridActor
 
 	DialogueComponent* dialogueComponent = nullptr;
 
+	bool isQuickDialogueActive = false;
+
+public:
 	NPC();
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
@@ -18,4 +21,5 @@ struct NPC : GridActor
 
 	//a once off dialogue popup used like interact popup is.
 	void QuickTalkTo();
+	void EndQuickTalkTo();
 };

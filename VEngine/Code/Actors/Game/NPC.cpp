@@ -1,8 +1,7 @@
 #include "NPC.h"
 #include "Components/DialogueComponent.h"
-#include "Gameplay/GameUtils.h"
 #include "VString.h"
-#include "UI/UISystem.h"
+#include "TimerSystem.h"
 #include "UI/DialogueWidget.h"
 
 NPC::NPC()
@@ -33,6 +32,18 @@ Properties NPC::GetProps()
 
 void NPC::QuickTalkTo()
 {
+    if (isQuickDialogueActive) return;
+
+    isQuickDialogueActive = true;
+
     dialogueComponent->dialogueWidget->dialogueText = stows(interactText);
     dialogueComponent->AddToViewport();
+
+    timerSystem.SetTimer(3.0f, std::bind(&NPC::EndQuickTalkTo, this));
+}
+
+void NPC::EndQuickTalkTo()
+{
+    isQuickDialogueActive = false;
+    dialogueComponent->RemoveFromViewport();
 }
