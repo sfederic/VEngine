@@ -1,6 +1,8 @@
 #include "DialogueComponent.h"
 #include "World.h"
 #include "Components/WidgetComponent.h"
+#include "UI/UISystem.h"
+#include "UI/DialogueWidget.h"
 
 void DialogueComponent::Tick(float deltaTime)
 {
@@ -8,6 +10,9 @@ void DialogueComponent::Tick(float deltaTime)
 
 void DialogueComponent::Start()
 {
+    dialogueWidget = uiSystem.CreateWidget<DialogueWidget>();
+    widget = dialogueWidget;
+
     dialogue.LoadFromFile();
 }
 
@@ -28,7 +33,7 @@ bool DialogueComponent::NextLine()
 
     if (currentLine >= (dialogue.data.size() - 1))
     {
-        previousWidgetComponent->RemoveFromViewport();
+        previousActiveDialogueWidget->RemoveFromViewport();
         currentLine = 0;
         return false;
     }
@@ -45,7 +50,7 @@ bool DialogueComponent::NextLine()
         }
     }
 
-    previousWidgetComponent->RemoveFromViewport();
+    previousActiveDialogueWidget->RemoveFromViewport();
     return true;
 }
 
@@ -57,17 +62,14 @@ void DialogueComponent::ShowTextAtActor()
         return;
     }
 
-    //TODO: the widgetcompent stuff here doesn't feel good. Find a way to subclass WidgetComponent
-    //or do something easier, otherwise this is atributing all dialogue as Widgetcomponents, and all widgets
-    //would activate here.
     Actor* actor = world.GetActorByName(dataIt->second.actorName);
-    auto wcs = actor->GetComponentsOfType<WidgetComponent>();
-    for (WidgetComponent* w : wcs)
+    auto dcs = actor->GetComponentsOfType<DialogueComponent>();
+    for (auto* d : dcs)
     {
-        w->widget->pos = actor->GetHomogeneousPositionVector();
-        w->AddToViewport();
+        d->dialogueWidget->pos = actor->GetHomogeneousPositionVector();
+        d->dialogueWidget->AddToViewport();
 
-        previousWidgetComponent = w;
+        previousActiveDialogueWidget = d->dialogueWidget;
     }
 }
 

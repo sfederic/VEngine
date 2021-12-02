@@ -1,11 +1,10 @@
 #pragma once
-#include "Component.h"
-#include "ComponentSystem.h"
+#include "WidgetComponent.h"
 #include "DialogueStructures.h"
 
-struct WidgetComponent;
+struct DialogueWidget;
 
-struct DialogueComponent : Component
+struct DialogueComponent : WidgetComponent
 {
 	COMPONENT_SYSTEM(DialogueComponent)
 
@@ -14,7 +13,10 @@ private:
 
 public:
 	Dialogue dialogue;
-	WidgetComponent* previousWidgetComponent = nullptr;
+	DialogueWidget* dialogueWidget = nullptr;
+
+	//previous active widget in conversation to hide when text is progressed.
+	DialogueWidget* previousActiveDialogueWidget = nullptr;
 
 	virtual void Tick(float deltaTime) override;
 	virtual void Start() override;
