@@ -9,12 +9,13 @@ struct NPC : GridActor
 {
 	ACTOR_SYSTEM(NPC)
 
-	DialogueComponent* dialogue = nullptr;
-	WidgetComponent* dialogueWidget = nullptr;
+	DialogueComponent* dialogueComponent = nullptr;
 
 	NPC();
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
-	void TalkTo();
+
+	//a once off dialogue popup used like interact popup is.
+	void QuickTalkTo();
 };

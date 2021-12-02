@@ -1,5 +1,4 @@
 #include "NPC.h"
-#include "Components/WidgetComponent.h"
 #include "Components/DialogueComponent.h"
 #include "Gameplay/GameUtils.h"
 #include "VString.h"
@@ -8,10 +7,7 @@
 
 NPC::NPC()
 {
-    dialogue = DialogueComponent::system.Add(this);
-
-    dialogueWidget = WidgetComponent::system.Add(this);
-    dialogueWidget->widget = uiSystem.CreateWidget<DialogueWidget>();
+    dialogueComponent = DialogueComponent::system.Add(this);
 
     isDestructible = true;
 }
@@ -25,7 +21,7 @@ void NPC::Tick(float deltaTime)
 {
     __super::Tick(deltaTime);
 
-    dialogueWidget->widget->pos = GetHomogeneousPositionVector();
+    dialogueComponent->SetPosition(GetHomogeneousPositionVector());
 }
 
 Properties NPC::GetProps()
@@ -35,11 +31,8 @@ Properties NPC::GetProps()
     return props;
 }
 
-void NPC::TalkTo()
+void NPC::QuickTalkTo()
 {
-    auto player = GameUtils::GetPlayer();
-
-    auto widget = uiSystem.CreateWidget<DialogueWidget>();
-    widget->pos = GetHomogeneousPositionVector();
-    widget->AddToViewport();
+    dialogueComponent->dialogueWidget->dialogueText = stows(interactText);
+    dialogueComponent->AddToViewport();
 }
