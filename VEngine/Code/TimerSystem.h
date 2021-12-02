@@ -14,7 +14,7 @@ struct TimerSystem
 	std::vector<TimerItem> timerItems;
 
 	void Tick(float deltaTime);
-	void SetTimer(double duration, std::function<void()> functionToCall);
+	void SetTimer(float duration, std::function<void()> functionToCall);
 };
 
 extern TimerSystem timerSystem;

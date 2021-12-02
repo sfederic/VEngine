@@ -16,11 +16,11 @@ void TimerSystem::Tick(float deltaTime)
 	}
 }
 
-void TimerSystem::SetTimer(double duration, std::function<void()> functionToCall)
+void TimerSystem::SetTimer(float duration, std::function<void()> functionToCall)
 {
 	TimerItem timerItem = {};
 	timerItem.endTime = duration;
-	timerItem.currentTime = 0.0;
+	timerItem.currentTime = 0.0f;
 	timerItem.functionToCall = functionToCall;
 
 	timerItems.push_back(timerItem);
