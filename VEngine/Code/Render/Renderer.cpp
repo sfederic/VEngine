@@ -500,12 +500,15 @@ void Renderer::RenderBounds()
 					continue;
 				}
 
-				shaderMatrices.model = spatialComponent->GetWorldMatrix();
+				BoundingOrientedBox boundingBox = spatialComponent->boundingBox;
+				XMMATRIX boundsMatrix = VMath::GetBoundingBoxMatrix(boundingBox, actor);
+
+				shaderMatrices.model = boundsMatrix;
 
 				//Set bouding box scale just slightly more than the component to avoid overlap
-				shaderMatrices.model.r[0].m128_f32[0] *= spatialComponent->boundingBox.Extents.x + 0.01f;
-				shaderMatrices.model.r[1].m128_f32[1] *= spatialComponent->boundingBox.Extents.y + 0.01f;
-				shaderMatrices.model.r[2].m128_f32[2] *= spatialComponent->boundingBox.Extents.z + 0.01f;
+				shaderMatrices.model.r[0].m128_f32[0] += 0.01f;
+				shaderMatrices.model.r[1].m128_f32[1] += 0.01f;
+				shaderMatrices.model.r[2].m128_f32[2] += 0.01f;
 
 				shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
 				context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
