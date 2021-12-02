@@ -261,6 +261,8 @@ void Player::PrimaryAction()
 		Ray ray(this);
 		if (Raycast(ray, GetPositionVector(), GetForwardVectorV(), 1.5f))
 		{
+			//TODO: all these checks here are just for testing. throw them into functions later.
+			
 			//PICKUP CHECK
 			{
 				auto pickup = dynamic_cast<Pickup*>(ray.hitActor);
@@ -269,6 +271,22 @@ void Player::PrimaryAction()
 					heldItem = pickup;
 					pickup->AddToPlayerInventory();
 					return;
+				}
+			}
+
+			//QUICK DIALOGUE INTERACT CHECK
+			{
+				if (!inCombat)
+				{
+					auto npc = dynamic_cast<NPC*>(ray.hitActor);
+					if (npc)
+					{
+						if (npc->isInteractable)
+						{
+							npc->QuickTalkTo();
+							return;
+						}
+					}
 				}
 			}
 
@@ -328,7 +346,7 @@ void Player::PrimaryAction()
 				NPC* npc = dynamic_cast<NPC*>(ray.hitActor);
 				if (npc)
 				{
-					dialogueComponent = npc->dialogue;
+					dialogueComponent = npc->dialogueComponent;
 					inConversation = true;
 					dialogueComponent->ShowTextAtActor();
 				}
