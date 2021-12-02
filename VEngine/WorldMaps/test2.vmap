@@ -11,13 +11,13 @@ Player0
 Near Z
 0.01
 Position
-3.00001 0 3.00001
+5 0 3.00001
 Rast State
 solid
 Rotation
-0 1.49012e-07 0 -0.999999
+0 -1.49012e-07 0 1
 Scale
-0.5 0.5 0.5
+1 1 1
 Shader
 DefaultShader.hlsl
 Texture
@@ -44,17 +44,17 @@ Description
 Destruct
 1
 Health
-2
+0
 Interact
 1
 Interact Text
-Looks like there's something on the table.
+Just a table.
 Mesh
 small_table.fbx
 Name
 GridActor0
 Position
-0 0 2
+1 0 2
 Rast State
 solid
 Rotation
@@ -66,7 +66,7 @@ DefaultShader.hlsl
 Texture
 test.png
 UID
-1703165826
+4153433369
 UvOffset
 0 0
 UvRotation
@@ -260,13 +260,13 @@ plane.fbx
 Name
 MeshActor7
 Position
--0.5 1 1.5
+-0.5 1 6.49999
 Rast State
 solid
 Rotation
 0 0.707107 0 0.707107
 Scale
-1.99999 1.5 0.999992
+2.99997 1.5 0.999994
 Shader
 DefaultShader.hlsl
 Texture
@@ -306,23 +306,23 @@ UvScale
 0.4 0.4
 next
 Mesh
-plane.fbx
+small_table.fbx
 Name
-MeshActor9
+small_table9
 Position
--0.5 1 6.49999
+6 0 6
 Rast State
 solid
 Rotation
-0 0.707107 0 0.707107
+0 0 0 1
 Scale
-2.99997 1.5 0.999994
+1 1 1
 Shader
 DefaultShader.hlsl
 Texture
-wall03.png
+test.png
 UID
-2218589739
+1575884781
 UvOffset
 0 0
 UvRotation
@@ -405,7 +405,7 @@ solid
 Rotation
 -0 0 -0 1
 Scale
-0.5 0.5 0.5
+1 1 1
 Shader
 DefaultShader.hlsl
 Texture
