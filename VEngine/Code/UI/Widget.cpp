@@ -38,7 +38,8 @@ void Widget::GetScreenSpaceCoords(int& sx, int& sy)
 	sy = ((f2 * -0.5f) + 0.5) * renderer.viewport.Height;
 }
 
-void Widget::Text(const std::wstring& text, D2D1_RECT_F layout, TextAlign align)
+void Widget::Text(const std::wstring& text, D2D1_RECT_F layout, TextAlign align,
+	D2D1_COLOR_F color, float opacity)
 {
 	DWRITE_TEXT_ALIGNMENT endAlignment{};
 
@@ -62,6 +63,9 @@ void Widget::Text(const std::wstring& text, D2D1_RECT_F layout, TextAlign align)
 	}
 
 	uiSystem.textFormat->SetTextAlignment(endAlignment);
+
+	uiSystem.brushText->SetColor(color);
+	uiSystem.brushText->SetOpacity(opacity);
 
 	uiSystem.d2dRenderTarget->DrawText(text.c_str(), text.size(),
 		uiSystem.textFormat, layout, uiSystem.brushText);

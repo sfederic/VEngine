@@ -38,20 +38,26 @@ struct Widget
 
 	virtual void Tick(float deltaTime);
 	virtual void Start();
+
 	void AddToViewport();
 	void RemoveFromViewport();
 	void GetScreenSpaceCoords(int& sx, int& sy);
 
-	void Text(const std::wstring& text, D2D1_RECT_F layout, TextAlign align = TextAlign::Center);
+	void Text(const std::wstring& text, D2D1_RECT_F layout, TextAlign align = TextAlign::Center,
+		D2D1_COLOR_F color = { 0.f, 0.f, 0.f, 1.f }, float opacity = 1.0f);
+
 	bool Button(const std::wstring& text, D2D1_RECT_F layout, float lineWidth = 1.0f);
+
 	void Image(const std::string& filename, D2D1_RECT_F layout);
 	void Image(const std::string& filename, int x, int y, int w, int h);
+
 	void Rect(D2D1_RECT_F layout);
 	void FillRect(D2D1_RECT_F layout, D2D1_COLOR_F color = {0.5f, 0.5f, 0.5f, 1.f}, float opacity = 1.0f);
 
 	D2D1_RECT_F AlignLayout(float w, float h, Align align);
 	D2D1_RECT_F CenterLayoutOnScreenSpaceCoords(float w, float h, float sx, float sy);
 
+	//pos is the widget's position in world space to be mapped to screen space.
 	XMVECTOR pos;
 
 	bool render = true;
