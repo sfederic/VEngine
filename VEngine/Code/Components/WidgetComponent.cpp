@@ -1,4 +1,5 @@
 #include "WidgetComponent.h"
+#include "UI/Widget.h"
 #include "VString.h"
 
 void WidgetComponent::Tick(float deltaTime)
@@ -7,7 +8,6 @@ void WidgetComponent::Tick(float deltaTime)
 
 void WidgetComponent::Start()
 {
-    //widget->Start();
 }
 
 void WidgetComponent::Create()

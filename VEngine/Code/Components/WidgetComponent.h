@@ -1,8 +1,10 @@
 #pragma once
 #include "Component.h"
 #include "ComponentSystem.h"
-#include "UI/Widget.h"
 
+struct Widget;
+
+//Base for all UI components.
 struct WidgetComponent : Component
 {
 	COMPONENT_SYSTEM(WidgetComponent)
