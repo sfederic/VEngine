@@ -237,6 +237,28 @@ namespace VMath
         XMStoreFloat4(&boundingBox.Orientation, orientation);
     }
 
+    BoundingOrientedBox GetUpdatedBoundingBox(SpatialComponent* sc)
+    {
+        XMVECTOR actorPos = sc->GetPositionV();
+        XMVECTOR boundingBoxCenter = XMLoadFloat3(&sc->boundingBox.Center);
+        XMVECTOR offset = actorPos + boundingBoxCenter;
+        offset.m128_f32[3] = 1.0f;
+
+        XMVECTOR actorScale = sc->GetScaleV();
+        XMVECTOR extents = XMLoadFloat3(&sc->boundingBox.Extents);
+        XMVECTOR scale = extents * actorScale;
+        scale.m128_f32[3] = 1.0f;
+
+        XMVECTOR orientation = sc->GetRotationV();
+
+        BoundingOrientedBox bob;
+        XMStoreFloat3(&bob.Center, offset);
+        XMStoreFloat3(&bob.Extents, scale);
+        XMStoreFloat4(&bob.Orientation, orientation);
+
+        return bob;
+    }
+
     float RandomRange(float min, float max)
     {
         if (max < min)

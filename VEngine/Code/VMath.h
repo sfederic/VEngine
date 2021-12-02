@@ -5,6 +5,7 @@
 
 struct Actor;
 struct Transform;
+struct SpatialComponent;
 
 using namespace DirectX;
 
@@ -43,6 +44,7 @@ namespace VMath
 
 	XMMATRIX GetBoundingBoxMatrix(BoundingOrientedBox& boundingBox, Actor* actor);
 	void UpdateBoundingBox(BoundingOrientedBox& boundingBox, Actor* actor);
+	BoundingOrientedBox GetUpdatedBoundingBox(SpatialComponent* sc);
 
 	float RandomRange(float min, float max);
 }
