@@ -208,21 +208,19 @@ namespace VMath
 
     XMMATRIX GetBoundingBoxMatrix(BoundingOrientedBox& boundingBox, Actor* actor)
     {
-        //XMFLOAT3 actorPosFloat3 = actor->GetPositionFloat3();
-        //XMVECTOR actorPos = XMLoadFloat3(&actorPosFloat3);
-        //XMVECTOR boundingBoxCenter = XMLoadFloat3(&boundingBox.Center);
-        //XMVECTOR offset = actorPos + boundingBoxCenter;
-        //offset.m128_f32[3] = 1.0f;
+        XMVECTOR boundingBoxCenter = XMLoadFloat3(&boundingBox.Center);
+        XMVECTOR offset = actor->GetPositionVector() + boundingBoxCenter;
+        offset.m128_f32[3] = 1.0f;
 
-        //XMFLOAT3 actorScaleFloat3 = actor->GetScale();
-        //XMVECTOR actorScale = XMLoadFloat3(&actorScaleFloat3);
-        //XMVECTOR extents = XMLoadFloat3(&boundingBox.Extents);
-        //extents.m128_f32[3] = 1.0f;
+        XMFLOAT3 actorScaleFloat3 = actor->GetScale();
+        XMVECTOR actorScale = XMLoadFloat3(&actorScaleFloat3);
+        XMVECTOR extents = XMLoadFloat3(&boundingBox.Extents);
+        extents.m128_f32[3] = 1.0f;
 
         XMMATRIX boxBoundsMatrix = XMMatrixIdentity();
-        //boxBoundsMatrix = actor->GetTransformationMatrix(); //This is more just to get the rotation
-        //boxBoundsMatrix *= XMMatrixScalingFromVector(extents);
-        //boxBoundsMatrix.r[3] = offset;
+        boxBoundsMatrix = actor->GetWorldMatrix();
+        boxBoundsMatrix *= XMMatrixScalingFromVector(extents);
+        boxBoundsMatrix.r[3] = offset;
 
         return boxBoundsMatrix;
     }
