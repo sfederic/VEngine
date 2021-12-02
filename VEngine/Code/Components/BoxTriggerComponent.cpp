@@ -1,5 +1,6 @@
 #include "BoxTriggerComponent.h"
 #include "Components/MeshComponent.h"
+#include "VMath.h"
 
 BoxTriggerComponent::BoxTriggerComponent()
 {
@@ -24,15 +25,8 @@ void BoxTriggerComponent::Create()
 
 bool BoxTriggerComponent::Contains(XMVECTOR point)
 {
-	boundingBox.Center = transform.position;
-	boundingBox.Extents = transform.scale;
-
-	if (boundingBox.Contains(point))
-	{
-		return true;
-	}
-
-	return false;
+	BoundingOrientedBox bb = VMath::GetUpdatedBoundingBox(this);
+	return bb.Contains(point);
 }
 
 bool BoxTriggerComponent::ContainsTarget()
