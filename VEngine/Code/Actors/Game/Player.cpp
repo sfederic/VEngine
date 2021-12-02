@@ -34,7 +34,7 @@ Player::Player()
 	mesh = MeshComponent::system.Add(this, MeshComponent("cube.fbx", "wall.png"));
 	rootComponent = mesh;
 
-	camera = CameraComponent::system.Add(this, CameraComponent(XMFLOAT3(4.f, 4.f, -9.f), false));
+	camera = CameraComponent::system.Add(this, CameraComponent(XMFLOAT3(2.f, 2.f, -5.f), false));
 
 	rootComponent->AddChild(camera);
 
@@ -290,6 +290,8 @@ void Player::PrimaryAction()
 							{
 								CreateIntuition(gridActor->intuition, gridActor->name);
 							}
+
+							return;
 						}
 					}
 				}
