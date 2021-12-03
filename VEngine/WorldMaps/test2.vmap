@@ -11,13 +11,13 @@ Player0
 Near Z
 0.01
 Position
-5 0 3.00001
+6.99999 0 5.00001
 Rast State
 solid
 Rotation
-0 -1.49012e-07 0 1
+-0 0 -0 1
 Scale
-1 1 1
+0.999984 1 0.999984
 Shader
 DefaultShader.hlsl
 Texture
@@ -44,17 +44,17 @@ Description
 Destruct
 1
 Health
-0
+2
 Interact
 1
 Interact Text
-Just a table.
+It's just a table.
 Mesh
 small_table.fbx
 Name
 GridActor0
 Position
-1 0 2
+7 0 2
 Rast State
 solid
 Rotation
@@ -66,7 +66,7 @@ DefaultShader.hlsl
 Texture
 test.png
 UID
-4153433369
+256852783
 UvOffset
 0 0
 UvRotation
@@ -266,7 +266,7 @@ solid
 Rotation
 0 0.707107 0 0.707107
 Scale
-2.99997 1.5 0.999994
+2.99996 1.5 0.999993
 Shader
 DefaultShader.hlsl
 Texture
@@ -306,23 +306,23 @@ UvScale
 0.4 0.4
 next
 Mesh
-small_table.fbx
+plane.fbx
 Name
-small_table9
+MeshActor9
 Position
-6 0 6
+-0.5 1 1.5
 Rast State
 solid
 Rotation
-0 0 0 1
+0 0.707107 0 0.707107
 Scale
-1 1 1
+2 1.5 1
 Shader
 DefaultShader.hlsl
 Texture
-test.png
+wall03.png
 UID
-1575884781
+2218589739
 UvOffset
 0 0
 UvRotation
@@ -363,19 +363,21 @@ Level Name
 test.vmap
 Name
 EntranceTrigger0
+Open Text
+Open
 Position
-4 0 8
+0 0 6
 Rotation
 -0 0 -0 1
 Scale
-1 1 1
+0.9 0.9 0.9
 UID
 4086838277
 next
 NPC
 0
 Unit
-1
+2
 Add On Interact
 0
 Condition
@@ -391,7 +393,7 @@ Health
 Interact
 1
 Interact Text
-Ew begone beasant I have no issue with you!
+Go fetch the old man's robes boy. We need them.
 Mesh
 
 Move Points
@@ -399,11 +401,54 @@ Move Points
 Name
 Unit0
 Position
-4 0 6
+1 0 1
 Rast State
 solid
 Rotation
 -0 0 -0 1
+Scale
+1 1 1
+Shader
+DefaultShader.hlsl
+Texture
+test.png
+UID
+1922293766
+UvOffset
+0 -1
+UvRotation
+0
+UvScale
+1 1
+next
+Add On Interact
+0
+Condition
+
+Description
+
+Destruct
+1
+File
+testdiag
+Health
+4
+Interact
+0
+Interact Text
+
+Mesh
+
+Move Points
+4
+Name
+Unit1
+Position
+3 0 8
+Rast State
+solid
+Rotation
+0 0 0 1
 Scale
 1 1 1
 Shader
