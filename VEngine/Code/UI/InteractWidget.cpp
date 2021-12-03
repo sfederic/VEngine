@@ -1,4 +1,5 @@
 #include "InteractWidget.h"
+#include "VString.h"
 
 void InteractWidget::Tick(float deltaTime)
 {
@@ -6,4 +7,9 @@ void InteractWidget::Tick(float deltaTime)
 
 	FillRect(rect, {0.7f, 0.7f, 0.7f, 1.f}, 0.7f);
 	Text(interactText, rect);
+}
+
+void InteractWidget::SetText(std::string text)
+{
+	interactText = stows(text);
 }
