@@ -37,28 +37,14 @@ void Win32Editor::SetMousePos()
 	viewportMouseY = mousePos.y;
 }
 
-void Win32Editor::Log(const std::wstring logMessage, ...)
+void Win32Editor::Log(const std::wstring logMessage)
 {
-	va_list args;
-	va_start(args, logMessage);
-
-	wchar_t msg[1024];
-	_vsnwprintf(msg, 1024, logMessage.c_str(), args);
-	va_end(args);
-
-	OutputDebugStringW(msg);
+	OutputDebugStringW(logMessage.c_str());
 }
 
-void Win32Editor::Log(const std::string logMessage, ...)
+void Win32Editor::Log(const std::string logMessage)
 {
-	va_list args;
-	va_start(args, logMessage);
-
-	char msg[1024];
-	_vsnprintf(msg, 1024, logMessage.c_str(), args);
-	va_end(args);
-
-	OutputDebugString(msg);
+	OutputDebugString(logMessage.c_str());
 }
 
 void Win32Editor::SetActorProps(Actor* actor)

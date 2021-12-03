@@ -60,30 +60,15 @@ void QtEditor::SetMousePos()
     viewportMouseY = mousePos.y();
 }
 
-void QtEditor::Log(const std::wstring logMessage, ...)
+void QtEditor::Log(const std::wstring logMessage)
 {
-    va_list args;
-    va_start(args, logMessage);
-
-    wchar_t msg[1024];
-    _vsnwprintf(msg, 1024, logMessage.c_str(), args);
-    va_end(args);
-
-    mainWindow->logDock->Print(msg);
+    mainWindow->logDock->Print(logMessage);
 }
 
-//TODO: C++'s std::format is good, but it's fucked up currently.
-//Soon as it's green, think about replacing va_args here and in other spots.
-void QtEditor::Log(const std::string logMessage, ...)
+
+void QtEditor::Log(const std::string logMessage)
 {
-    va_list args;
-    va_start(args, logMessage);
-
-    char msg[1024];
-    vsnprintf(msg, 1024, logMessage.c_str(), args);
-    va_end(args);
-
-    mainWindow->logDock->Print(msg);
+    mainWindow->logDock->Print(logMessage);
 }
 
 void QtEditor::SetActorProps(Actor* actor)
