@@ -191,7 +191,7 @@
     <ClCompile Include="Code\UI\IntuitionMenuWidget.cpp" />
     <ClCompile Include="Code\UI\PlayerActionBarWidget.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\WStringWidget.cpp" />
-    <ClCompile Include="Log.cpp" />
+    <ClCompile Include="Code\Log.cpp" />
     <ClInclude Include="Code\Actors\AudioActor.h" />
     <ClInclude Include="Code\Actors\Game\GridActor.h" />
     <ClInclude Include="Code\Asset\AssetSystem.h" />
@@ -382,7 +382,7 @@
     <ClInclude Include="Code\UI\IntuitionMenuWidget.h" />
     <ClInclude Include="Code\UI\PlayerActionBarWidget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\WStringWidget.h" />
-    <ClInclude Include="Log.h" />
+    <ClInclude Include="Code\Log.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

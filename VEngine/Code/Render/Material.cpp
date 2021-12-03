@@ -8,7 +8,7 @@
 #include "WorldEditor.h"
 #include "Actors/Actor.h"
 #include "Components/MeshComponent.h"
-#include "Editor/Editor.h"
+#include "Log.h"
 
 Material::Material()
 {
@@ -44,7 +44,7 @@ static void ReassignTexture(void* data)
 	Texture2D* swapTexture = textureSystem.FindTexture2D(textureData->filename);
 	if (swapTexture == nullptr)
 	{
-		editor->Log("%s wasn't found on texture change.", textureData->filename);
+		Log("%s wasn't found on texture change.", textureData->filename);
 		return;
 	}
 
@@ -63,7 +63,7 @@ static void ReassignRastState(void* data)
 	RastState* foundRastState = renderer.rastStateMap[*rastName];
 	if (foundRastState == nullptr)
 	{
-		editor->Log("%s not found on rast state change.", *rastName);
+		Log("%s not found on rast state change.", *rastName);
 		return;
 	}
 
@@ -80,7 +80,7 @@ static void ReassignShader(void* data)
 	ShaderItem* foundShader = shaderSystem.FindShader(stows(shaderData->filename));
 	if (foundShader == nullptr)
 	{
-		editor->Log("%s not found on shader change.", shaderData->filename);
+		Log("%s not found on shader change.", shaderData->filename);
 		return;
 	}
 

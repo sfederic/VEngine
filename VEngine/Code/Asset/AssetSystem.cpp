@@ -2,8 +2,8 @@
 #include <cstdio>
 #include "FBXImporter.h"
 #include "MeshAssetHeader.h"
-#include "Editor/Editor.h"
 #include "Profile.h"
+#include "Log.h"
 
 AssetSystem assetSystem;
 
@@ -47,7 +47,7 @@ void AssetSystem::WriteAllMeshDataToMeshAssetFiles()
 
 	double elapsedTime = Profile::QuickEnd(startTime);
 
-	editor->Log("Mesh asset build complete.\n\tNum meshes built: %d\n\tTime taken: %f", numberOfMeshFilesBuilt, elapsedTime);
+	Log("Mesh asset build complete.\n\tNum meshes built: %d\n\tTime taken: %f", numberOfMeshFilesBuilt, elapsedTime);
 }
 
 //TODO: This is just testing code. Get rid of it or replace.

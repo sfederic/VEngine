@@ -9,6 +9,7 @@
 #include "Actors/Actor.h"
 #include "Camera.h"
 #include "WorldEditor.h"
+#include "Log.h"
 #include "Editor.h"
 #include "Input.h"
 
@@ -104,7 +105,7 @@ void WorldDock::ActorNameChanged(QTreeWidgetItem* item, int column)
 
 	if (!actor->SetName(newActorName.toStdString()))
 	{
-		editor->Log("Could not change actor name from %s to %s. Name already exists.",
+		Log("Could not change actor name from %s to %s. Name already exists.",
 			actor->name.c_str(), newActorName.toStdString().c_str());
 
 		//Reset item text

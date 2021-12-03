@@ -398,7 +398,7 @@
     <ClCompile Include="Code\Editor\PropertyWidgets\WStringWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Log.cpp">
+    <ClCompile Include="Code\Log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -751,7 +751,7 @@
     <ClInclude Include="Code\Editor\PropertyWidgets\WStringWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Log.h">
+    <ClInclude Include="Code\Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

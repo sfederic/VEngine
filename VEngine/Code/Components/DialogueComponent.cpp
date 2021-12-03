@@ -2,7 +2,7 @@
 #include "World.h"
 #include "Components/WidgetComponent.h"
 #include "UI/DialogueWidget.h"
-#include "Editor/Editor.h"
+#include "Log.h"
 
 void DialogueComponent::Tick(float deltaTime)
 {
@@ -59,7 +59,7 @@ void DialogueComponent::ShowTextAtActor()
     auto dataIt = dialogue.data.find(currentLine);
     if (dataIt == dialogue.data.end())
     {
-        editor->Log("Dialogue line number %s not found.", currentLine);
+        Log("Dialogue line number %s not found.", currentLine);
         return;
     }
 

@@ -7,7 +7,6 @@
 #include "VString.h"
 #include "Physics/Raycast.h"
 #include "Gameplay/GameUtils.h"
-#include "Editor/Editor.h"
 #include "Actors/Game/NPC.h"
 #include "Actors/Game/Pickup.h"
 #include "Components/DialogueComponent.h"
@@ -21,6 +20,7 @@
 #include "Gameplay/Intuition.h"
 #include "Gameplay/ConditionSystem.h"
 #include "Gameplay/GameInstance.h"
+#include "Log.h"
 
 DialogueComponent* dialogueComponent;
 
@@ -112,7 +112,7 @@ void Player::CreateIntuition(IntuitionComponent* intuitionComponent, std::string
 	auto intuitionIt = intuitions.find(intuitionComponent->intuitionName);
 	if (intuitionIt != intuitions.end())
 	{
-		editor->Log("%s Intuition already known.", intuitionComponent->intuitionName.c_str());
+		Log("%s Intuition already known.", intuitionComponent->intuitionName.c_str());
 		return;
 	}
 
@@ -136,7 +136,7 @@ void Player::CreateIntuition(IntuitionComponent* intuitionComponent, std::string
 		{
 			intuitions.emplace(intuition->name, intuition);
 			//TODO: change these logs here to Widget->AddToViewport()'s
-			editor->Log("%s Intuition created.", intuition->name.c_str());
+			Log("%s Intuition created.", intuition->name.c_str());
 		}
 		else
 		{
@@ -146,7 +146,7 @@ void Player::CreateIntuition(IntuitionComponent* intuitionComponent, std::string
 	else
 	{
 		intuitions.emplace(intuition->name, intuition);
-		editor->Log("%s Intuition created.", intuition->name.c_str());
+		Log("%s Intuition created.", intuition->name.c_str());
 	}
 }
 
@@ -258,7 +258,7 @@ void Player::PrimaryAction()
 		auto forward = GetForwardVector();
 		if (Raycast(ray, GetPositionVector(), GetForwardVectorV(), 1.5f))
 		{
-			editor->Log("Player interact: %s", ray.hitActor->name.c_str());
+			Log("Player interact: %s", ray.hitActor->name.c_str());
 
 			//TODO: all these checks here are just for testing. throw them into functions later.
 			
