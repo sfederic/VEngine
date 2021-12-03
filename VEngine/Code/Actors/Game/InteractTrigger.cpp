@@ -3,7 +3,6 @@
 #include "Camera.h"
 #include "Gameplay/GameUtils.h"
 #include "UI/InteractWidget.h"
-#include "UI/UISystem.h"
 #include "VString.h"
 #include "Input.h"
 #include "Actors/Game/Player.h"
@@ -18,8 +17,8 @@ void InteractTrigger::Start()
 {
 	trigger->target = (Actor*)GameUtils::GetPlayer();
 	
-	interactWidget = uiSystem.CreateWidget<InteractWidget>();
-	interactWidget->interactText = interactText;
+	interactWidget = CreateWidget<InteractWidget>();
+	interactWidget->SetText(interactText);
 
 	//Interact triggers are stationary, only one pos set is needed
 	interactWidget->pos = GetHomogeneousPositionVector();

@@ -14,7 +14,6 @@
 #include "Components/DialogueComponent.h"
 #include "Actors/Game/BattleGrid.h"
 #include "Actors/Game/GridActor.h"
-#include "UI/UISystem.h"
 #include "UI/HealthWidget.h"
 #include "UI/DialogueWidget.h"
 #include "UI/InteractWidget.h"
@@ -45,13 +44,12 @@ void Player::Start()
 {
 	camera->targetActor = this;
 
-
 	//Setup widgets
-	widget->widget = uiSystem.CreateWidget<DialogueWidget>();
-	interactWidget = uiSystem.CreateWidget<InteractWidget>();
-	intuitionMenuWidget = uiSystem.CreateWidget<IntuitionMenuWidget>();
+	widget->widget = CreateWidget<DialogueWidget>();
+	interactWidget = CreateWidget<InteractWidget>();
+	intuitionMenuWidget = CreateWidget<IntuitionMenuWidget>();
 
-	actionBarWidget = uiSystem.CreateWidget<PlayerActionBarWidget>();
+	actionBarWidget = CreateWidget<PlayerActionBarWidget>();
 	actionBarWidget->actionPoints = actionPoints;
 
 

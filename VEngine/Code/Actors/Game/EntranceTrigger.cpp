@@ -4,7 +4,6 @@
 #include "Input.h"
 #include "FileSystem.h"
 #include "UI/InteractWidget.h"
-#include "UI/UISystem.h"
 
 EntranceTrigger::EntranceTrigger()
 {
@@ -14,8 +13,8 @@ EntranceTrigger::EntranceTrigger()
 
 void EntranceTrigger::Start()
 {
-    interactWidget = uiSystem.CreateWidget<InteractWidget>();
-    interactWidget->interactText = openText;
+    interactWidget = CreateWidget<InteractWidget>();
+    interactWidget->SetText(openText);
 
     trigger->target = (Actor*)GameUtils::GetPlayer();
 }

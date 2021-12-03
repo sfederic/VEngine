@@ -3,7 +3,6 @@
 #include "Components/WidgetComponent.h"
 #include "Components/IntuitionComponent.h"
 #include "UI/HealthWidget.h"
-#include "UI/UISystem.h"
 
 GridActor::GridActor()
 {
@@ -15,7 +14,7 @@ GridActor::GridActor()
 
 void GridActor::Start()
 {
-	healthWidget = uiSystem.CreateWidget<HealthWidget>();
+	healthWidget = CreateWidget<HealthWidget>();
 	healthWidget->healthPoints = health;
 }
 

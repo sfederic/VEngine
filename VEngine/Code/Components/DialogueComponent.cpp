@@ -1,7 +1,6 @@
 #include "DialogueComponent.h"
 #include "World.h"
 #include "Components/WidgetComponent.h"
-#include "UI/UISystem.h"
 #include "UI/DialogueWidget.h"
 
 void DialogueComponent::Tick(float deltaTime)
@@ -10,7 +9,7 @@ void DialogueComponent::Tick(float deltaTime)
 
 void DialogueComponent::Start()
 {
-    dialogueWidget = uiSystem.CreateWidget<DialogueWidget>();
+    dialogueWidget = CreateWidget<DialogueWidget>();
     widget = dialogueWidget;
 
     dialogue.LoadFromFile();
