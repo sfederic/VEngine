@@ -257,8 +257,11 @@ void Player::PrimaryAction()
 		}
 
 		Ray ray(this);
+		auto forward = GetForwardVector();
 		if (Raycast(ray, GetPositionVector(), GetForwardVectorV(), 1.5f))
 		{
+			editor->Log("Player interact: %s", ray.hitActor->name.c_str());
+
 			//TODO: all these checks here are just for testing. throw them into functions later.
 			
 			//PICKUP CHECK
