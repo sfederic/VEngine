@@ -2,6 +2,7 @@
 #include "World.h"
 #include "Components/WidgetComponent.h"
 #include "UI/DialogueWidget.h"
+#include "Editor/Editor.h"
 
 void DialogueComponent::Tick(float deltaTime)
 {
@@ -58,6 +59,7 @@ void DialogueComponent::ShowTextAtActor()
     auto dataIt = dialogue.data.find(currentLine);
     if (dataIt == dialogue.data.end())
     {
+        editor->Log("Dialogue line number %s not found.", currentLine);
         return;
     }
 
@@ -66,6 +68,7 @@ void DialogueComponent::ShowTextAtActor()
     for (auto* d : dcs)
     {
         d->dialogueWidget->pos = actor->GetHomogeneousPositionVector();
+        d->dialogueWidget->SetText(dataIt->second.text);
         d->dialogueWidget->AddToViewport();
 
         previousActiveDialogueWidget = d->dialogueWidget;
