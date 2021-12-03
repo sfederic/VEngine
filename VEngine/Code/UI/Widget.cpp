@@ -1,6 +1,5 @@
 #include "Widget.h"
 #include <WICTextureLoader.h>
-#include "UI/UISystem.h"
 #include "Input.h"
 #include "Render/Renderer.h"
 #include "Editor/Editor.h"

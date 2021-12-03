@@ -3,6 +3,7 @@
 #include <d2d1_1.h>
 #include <unordered_map>
 #include <DirectXMath.h>
+#include "UISystem.h"
 
 using namespace DirectX;
 
@@ -62,3 +63,10 @@ struct Widget
 
 	bool render = true;
 };
+
+template <typename T>
+T* CreateWidget()
+{
+	T* widget = uiSystem.CreateWidget<T>();
+	return widget;
+}
