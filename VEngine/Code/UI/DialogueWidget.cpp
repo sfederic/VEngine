@@ -1,4 +1,5 @@
 #include "DialogueWidget.h"
+#include "VString.h"
 
 void DialogueWidget::Tick(float deltaTime)
 {
@@ -16,4 +17,9 @@ void DialogueWidget::Tick(float deltaTime)
 
 	Image("speech_bubble.png", imageRect);
 	Text(dialogueText, textRect);
+}
+
+void DialogueWidget::SetText(std::string text)
+{
+	dialogueText = stows(text);
 }
