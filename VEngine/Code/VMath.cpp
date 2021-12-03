@@ -42,6 +42,14 @@ namespace VMath
         float3.z = std::round(float3.z);
     }
 
+    void RoundVector(XMVECTOR& v)
+    {
+        v.m128_f32[0] = std::roundf(v.m128_f32[0]);
+        v.m128_f32[1] = std::roundf(v.m128_f32[1]);
+        v.m128_f32[2] = std::roundf(v.m128_f32[2]);
+        v.m128_f32[3] = std::roundf(v.m128_f32[3]);
+    }
+
     XMVECTOR XMVectorConstantLerp(FXMVECTOR V0, FXMVECTOR V1, float deltaTime, float speed)
     {
         XMVECTOR v = XMVectorLerp(V0, V1, deltaTime * speed);

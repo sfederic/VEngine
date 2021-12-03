@@ -22,6 +22,7 @@ namespace VMath
 	XMMATRIX ZeroMatrix();
 
 	void RoundFloat3(XMFLOAT3& float3);
+	void RoundVector(XMVECTOR& v);
 
 	XMFLOAT3 PitchYawRollFromMatrix(XMMATRIX m);
 	XMFLOAT3 PitchYawRollFromQuaternion(XMFLOAT4 q);
