@@ -3,6 +3,8 @@
 #include "Gameplay/GameUtils.h"
 #include "Input.h"
 #include "FileSystem.h"
+#include "UI/InteractWidget.h"
+#include "UI/UISystem.h"
 
 EntranceTrigger::EntranceTrigger()
 {
@@ -12,6 +14,9 @@ EntranceTrigger::EntranceTrigger()
 
 void EntranceTrigger::Start()
 {
+    interactWidget = uiSystem.CreateWidget<InteractWidget>();
+    interactWidget->interactText = openText;
+
     trigger->target = (Actor*)GameUtils::GetPlayer();
 }
 
@@ -23,11 +28,17 @@ void EntranceTrigger::Tick(float deltaTime)
     //eg. player.pos.x can be 6.997 or something and contained in here.
     if (trigger->Contains(targetPos) && isEntraceActive)
     {
+        interactWidget->AddToViewport();
+
         if (Input::GetKeyUp(Keys::Down))
         {
             //Load new world
             fileSystem.LoadWorld(levelToMoveTo);
         }
+    }
+    else
+    {
+        interactWidget->RemoveFromViewport();
     }
 }
 
@@ -37,5 +48,6 @@ Properties EntranceTrigger::GetProps()
     props.title = "EntranceTrigger";
     props.Add("Level Name", &levelToMoveTo);
     props.Add("Entrance Active", &isEntraceActive);
+    props.Add("Open Text", &openText);
     return props;
 }

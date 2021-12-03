@@ -4,6 +4,7 @@
 #include <string>
 
 struct BoxTriggerComponent;
+struct InteractWidget;
 
 struct EntranceTrigger : Actor
 {
@@ -11,7 +12,10 @@ struct EntranceTrigger : Actor
 
 	BoxTriggerComponent* trigger = nullptr;
 
+	InteractWidget* interactWidget = nullptr;
+
 	std::string levelToMoveTo;
+	std::string openText;
 
 	bool isEntraceActive = true;
 
