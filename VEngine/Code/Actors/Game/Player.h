@@ -5,6 +5,7 @@
 struct MeshComponent;
 struct CameraComponent;
 struct WidgetComponent;
+struct DialogueComponent;
 struct IntuitionComponent;
 struct Pickup;
 struct InteractWidget;
@@ -18,7 +19,7 @@ struct Player : Actor
 
 	MeshComponent* mesh = nullptr;
 	CameraComponent* camera = nullptr;
-	WidgetComponent* widget;
+	DialogueComponent* dialogueComponent = nullptr;
 
 	InteractWidget* interactWidget = nullptr;
 	IntuitionMenuWidget* intuitionMenuWidget = nullptr;

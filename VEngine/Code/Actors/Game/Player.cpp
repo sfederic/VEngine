@@ -1,6 +1,5 @@
 #include "Player.h"
 #include "Components/MeshComponent.h"
-#include "Components/WidgetComponent.h"
 #include "Components/IntuitionComponent.h"
 #include "Camera.h"
 #include "Input.h"
@@ -37,7 +36,7 @@ Player::Player()
 
 	rootComponent->AddChild(camera);
 
-	widget = WidgetComponent::system.Add(this);
+	dialogueComponent = DialogueComponent::system.Add(this);
 }
 
 void Player::Start()
@@ -45,7 +44,6 @@ void Player::Start()
 	camera->targetActor = this;
 
 	//Setup widgets
-	widget->widget = CreateWidget<DialogueWidget>();
 	interactWidget = CreateWidget<InteractWidget>();
 	intuitionMenuWidget = CreateWidget<IntuitionMenuWidget>();
 
