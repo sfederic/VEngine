@@ -19,10 +19,14 @@ struct Unit : GridActor
 
 	bool isInBattle = false;
 
+private:
+	bool isUnitTurn = false;
+
+public:
 	//All the nodes the unit can move to
 	std::vector<GridNode*> movementPathNodes;
 
-	//The end path the unit takes after a call to MoveTo()
+	//The end path the unit takes after a call to MoveToNode()
 	std::vector<GridNode*> pathNodes;
 
 	XMVECTOR nextMovePos;
@@ -33,4 +37,7 @@ struct Unit : GridActor
 	virtual Properties GetProps() override;
 	void MoveToNode(GridNode* destinationNode);
 	void MoveToNode(int x, int y);
+
+	//Figure out movement path and target during battle on turn start
+	void StartTurn();
 };

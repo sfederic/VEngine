@@ -7,6 +7,8 @@
 #include "BattleGrid.h"
 #include "Components/MeshComponent.h"
 #include "VMath.h"
+#include "Actors/Game/Player.h"
+#include "Gameplay/BattleSystem.h"
 
 Unit::Unit()
 {
@@ -21,34 +23,36 @@ void Unit::Start()
 	yIndex = std::round(GetPosition().z);
 
 	nextMovePos = GetPositionVector();
-
-	/*BattleGrid* battleGrid = GameUtils::GetBattleGrid();
-	GridNode* destNode = battleGrid->GetNode(0, 0);
-	MoveTo(destNode);*/
 }
 
 void Unit::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
-	if (XMVector4Equal(nextMovePos, GetPositionVector()))
+	if (isUnitTurn)
 	{
-		xIndex = std::round(GetPosition().x);
-		yIndex = std::round(GetPosition().z);
-
-		if (movementPathNodeIndex < pathNodes.size())
+		if (XMVector4Equal(nextMovePos, GetPositionVector()))
 		{
-			nextMovePos = XMLoadFloat3(&pathNodes[movementPathNodeIndex]->worldPosition);
+			xIndex = std::round(GetPosition().x);
+			yIndex = std::round(GetPosition().z);
 
-			xIndex = pathNodes[movementPathNodeIndex]->xIndex;
-			yIndex = pathNodes[movementPathNodeIndex]->yIndex;
+			if (movementPathNodeIndex < pathNodes.size())
+			{
+				nextMovePos = XMLoadFloat3(&pathNodes[movementPathNodeIndex]->worldPosition);
 
-			movementPathNodeIndex++;
-		}
-		else if (movementPathNodeIndex >= pathNodes.size())
-		{
-			movementPathNodeIndex = 0;
-			pathNodes.clear();
+				xIndex = pathNodes[movementPathNodeIndex]->xIndex;
+				yIndex = pathNodes[movementPathNodeIndex]->yIndex;
+
+				movementPathNodeIndex++;
+			}
+			else if (movementPathNodeIndex >= pathNodes.size())
+			{
+				movementPathNodeIndex = 0;
+				pathNodes.clear();
+				isUnitTurn = false;
+
+				battleSystem.MoveToNextTurn();
+			}
 		}
 	}
 
@@ -150,4 +154,12 @@ void Unit::MoveToNode(int x, int y)
 	GridNode* destinationNode = battleGrid->GetNode(x, y);
 
 	MoveToNode(destinationNode);
+}
+
+void Unit::StartTurn()
+{
+	isUnitTurn = true;
+
+	auto player = GameUtils::GetPlayer();
+	MoveToNode(player->xIndex, player->yIndex);
 }
