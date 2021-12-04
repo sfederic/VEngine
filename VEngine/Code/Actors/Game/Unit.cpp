@@ -19,10 +19,6 @@ void Unit::Start()
 {
 	__super::Start();
 
-	//Careful here with the naming (x/z)
-	xIndex = std::round(GetPosition().x);
-	yIndex = std::round(GetPosition().z);
-
 	nextMovePos = GetPositionVector();
 }
 
