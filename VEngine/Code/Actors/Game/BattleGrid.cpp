@@ -5,6 +5,7 @@
 #include "Render/Renderer.h"
 #include "Physics/Raycast.h"
 #include "VMath.h"
+#include "Actors/Game/GridActor.h"
 
 BattleGrid::BattleGrid()
 {
@@ -81,6 +82,22 @@ void BattleGrid::Start()
                 instanceData.world.r[3] = hitPosVector;
 
                 node.active = true;
+
+                if (ray.hitActor)
+                {
+                    auto gridActor = dynamic_cast<GridActor*>(ray.hitActor);
+                    if (gridActor)
+                    {
+                        if (gridActor->isGridObstacle)
+                        {
+                            //Mul by empty scale matrix to make the node invisible in-scene
+                            XMMATRIX emptyScaleMatrix = XMMatrixScaling(0.f, 0.f, 0.f);
+                            instanceData.world *= emptyScaleMatrix;
+
+                            node.active = false;
+                        }
+                    }
+                }
             }
             else
             {
