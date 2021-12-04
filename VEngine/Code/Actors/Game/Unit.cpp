@@ -69,6 +69,16 @@ Properties Unit::GetProps()
 	return props;
 }
 
+void Unit::InflictDamage(int damage)
+{
+	if (health <= damage && isDestructible)
+	{
+		battleSystem.RemoveUnit(this);
+	}
+
+	__super::InflictDamage(damage);
+}
+
 void Unit::MoveToNode(GridNode* destinationNode)
 {
 	BattleGrid* battleGrid = GameUtils::GetBattleGrid();

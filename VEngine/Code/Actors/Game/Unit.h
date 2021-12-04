@@ -42,6 +42,9 @@ public:
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
+
+	virtual void InflictDamage(int damage) override;
+
 	void MoveToNode(GridNode* destinationNode);
 	void MoveToNode(int x, int y);
 

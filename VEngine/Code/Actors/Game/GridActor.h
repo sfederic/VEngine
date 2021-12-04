@@ -30,5 +30,5 @@ struct GridActor : Actor
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
-	void InflictDamage(int damage);
+	virtual void InflictDamage(int damage);
 };
