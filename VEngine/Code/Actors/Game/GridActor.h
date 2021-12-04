@@ -35,4 +35,7 @@ struct GridActor : Actor
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 	virtual void InflictDamage(int damage);
+
+	//Sets x and y indices on battlegrid for gridactor
+	void SetGridPosition();
 };

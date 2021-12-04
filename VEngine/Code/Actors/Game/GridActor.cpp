@@ -14,6 +14,8 @@ GridActor::GridActor()
 
 void GridActor::Start()
 {
+	SetGridPosition();
+
 	healthWidget = CreateWidget<HealthWidget>();
 	healthWidget->healthPoints = health;
 }
@@ -31,6 +33,7 @@ Properties GridActor::GetProps()
 	props.Add("Health", &health);
 	props.Add("Interact", &isInteractable);
 	props.Add("Interact Text", &interactText);
+	props.Add("Obstacle", &isGridObstacle);
 	return props;
 }
 
@@ -45,4 +48,10 @@ void GridActor::InflictDamage(int damage)
 	{
 		Destroy();
 	}
+}
+
+void GridActor::SetGridPosition()
+{
+	xIndex = std::round(GetPosition().x);
+	yIndex = std::round(GetPosition().z);
 }
