@@ -56,7 +56,7 @@ void Unit::Tick(float deltaTime)
 		}
 	}
 
-	SetPosition(VMath::VectorConstantLerp(GetPositionVector(), nextMovePos, deltaTime, movementSpeed));
+	SetPosition(VMath::VectorConstantLerp(GetPositionVector(), nextMovePos, deltaTime, moveSpeed));
 }
 
 Properties Unit::GetProps()
@@ -64,6 +64,7 @@ Properties Unit::GetProps()
 	auto props = __super::GetProps();
 	props.Add("Move Points", &movementPoints);
 	props.Add("NextMove", &nextMovePos);
+	props.Add("Move Speed", &moveSpeed);
 	return props;
 }
 
@@ -85,11 +86,15 @@ void Unit::MoveToNode(GridNode* destinationNode)
 		}
 
 		nodes.insert(nodes.end(), closedNodes.begin(), closedNodes.end());
+
 		closedNodes.clear();
 	}
 
 	for (GridNode* node : nodes)
 	{
+		//reset the closes state
+		node->closed = false;
+
 		movementPathNodes.push_back(node);
 	}
 

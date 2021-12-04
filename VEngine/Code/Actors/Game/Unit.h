@@ -12,7 +12,7 @@ struct Unit : GridActor
 	int xIndex = -1;
 	int yIndex = -1;
 
-	float movementSpeed = 1.0f;
+	float moveSpeed = 1.0f;
 
 	int movementPoints = 1;
 	int movementPathNodeIndex = 0;
