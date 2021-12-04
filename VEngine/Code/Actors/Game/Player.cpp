@@ -71,6 +71,7 @@ void Player::Tick(float deltaTime)
 	//End turn input
 	if (Input::GetKeyUp(Keys::Enter))
 	{
+		battleSystem.MoveToNextTurn();
 		isPlayerTurn = false;
 	}
 
@@ -220,6 +221,8 @@ void Player::ToggleBattleGrid()
 {
 	if (Input::GetKeyUp(Keys::Space))
 	{
+		battleSystem.StartBattle();
+
 		inCombat = !inCombat;
 
 		//toggle battlegrid
@@ -326,7 +329,9 @@ void Player::PrimaryAction()
 					auto unit = dynamic_cast<Unit*>(ray.hitActor);
 					if (unit)
 					{
-						battleSystem.StartBattle();
+						ExpendActionPoints(1);
+						unit->InflictDamage(1);
+						return;
 					}
 
 					auto gridActor = dynamic_cast<GridActor*>(ray.hitActor);
