@@ -13,11 +13,11 @@ Player0
 Near Z
 0.01
 Position
-2 0 4
+0.999995 0 4
 Rast State
 solid
 Rotation
--0 0.707106 -0 0.707108
+0 0.707108 0 -0.707105
 Scale
 0.999974 1 0.999974
 Shader
@@ -493,9 +493,9 @@ DirectionalLightActor0
 Position
 3 4 6
 Rotation
-0.0348831 0.882087 -0.407191 0.234309
+-0.00411207 0.81595 -0.564699 0.12379
 Scale
-0.999971 0.999993 0.999976
+0.999995 0.999999 0.999999
 UID
 2191012152
 next
@@ -529,50 +529,7 @@ next
 NPC
 0
 Unit
-2
-Add On Interact
-0
-Condition
-
-Description
-
-Destruct
 1
-File
-
-Health
-4
-Interact
-1
-Interact Text
-Go fetch the old man's robes boy. We need them.
-Mesh
-
-Move Points
-4
-Name
-Unit0
-Position
-1 0 1
-Rast State
-solid
-Rotation
--0 0 -0 1
-Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture
-test.png
-UID
-1922293766
-UvOffset
-0 -1
-UvRotation
-0
-UvScale
-1 1
-next
 Add On Interact
 0
 Condition
@@ -594,7 +551,7 @@ Mesh
 Move Points
 4
 Name
-Unit1
+Unit0
 Position
 4 0 8
 Rast State

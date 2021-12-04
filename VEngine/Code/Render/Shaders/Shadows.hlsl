@@ -19,5 +19,5 @@ VS_OUT VSMain(VS_IN i)
 void PSMain(VS_OUT i)
 {
 	float4 diffuse = t.Sample(s, i.uv);
-	clip(diffuse.a - 0.05f);
+	clip(diffuse.a - 0.15f);
 }
