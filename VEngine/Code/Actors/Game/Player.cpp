@@ -408,7 +408,16 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 	int nextXIndex = (int)std::round(nextPos.m128_f32[0]);
 	int nextYIndex = (int)std::round(nextPos.m128_f32[2]);
 
-	auto nextNodeToMoveTo = GameUtils::GetBattleGrid()->GetNode(nextXIndex, nextYIndex);
+	auto battleGrid = GameUtils::GetBattleGrid();
+
+	if (nextXIndex >= battleGrid->sizeX || nextYIndex >= battleGrid->sizeY
+		|| nextXIndex < 0 || nextYIndex < 0)
+	{
+		nextPos = previousPos;
+		return;
+	}
+
+	auto nextNodeToMoveTo = battleGrid->GetNode(nextXIndex, nextYIndex);
 	if (!nextNodeToMoveTo->active)
 	{
 		nextPos = previousPos;
