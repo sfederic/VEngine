@@ -385,6 +385,7 @@ void Renderer::RenderMeshComponents()
 	PROFILE_START
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
+	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
 
 	if (!DirectionalLightComponent::system.components.empty())
 	{
@@ -436,6 +437,7 @@ void Renderer::RenderInstanceMeshComponents()
 
 	//Set matrices
 	shaderMatrices.view = activeCamera->GetViewMatrix();
+	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
 	shaderMatrices.MakeModelViewProjectionMatrix();
 
 	context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
@@ -484,6 +486,7 @@ void Renderer::RenderBounds()
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 		shaderMatrices.view = activeCamera->GetViewMatrix();
+		shaderMatrices.proj = activeCamera->GetProjectionMatrix();
 
 		//Set debug wireframe material colour
 		materialShaderData.ambient = XMFLOAT4(0.75f, 0.75f, 0.75f, 1.0f);
@@ -532,6 +535,7 @@ void Renderer::RenderBounds()
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 		shaderMatrices.view = activeCamera->GetViewMatrix();
+		shaderMatrices.proj = activeCamera->GetProjectionMatrix();
 
 		//Set trigger wireframe material colour
 		materialShaderData.ambient = XMFLOAT4(0.1f, 0.75f, 0.1f, 1.0f);
@@ -579,6 +583,7 @@ void Renderer::RenderCameraMeshes()
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 		shaderMatrices.view = activeCamera->GetViewMatrix();
+		shaderMatrices.proj = activeCamera->GetProjectionMatrix();
 
 		//Make cameras red
 		materialShaderData.ambient = XMFLOAT4(1.0f, 0.0f, 0.f, 1.0f);
@@ -614,6 +619,7 @@ void Renderer::RenderLightMeshes()
 	context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
+	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
 
 	//Set debug sphere wireframe material colour
 	MaterialShaderData materialShaderData;
@@ -669,6 +675,7 @@ void Renderer::RenderParticleEmitters()
 	spriteSystem.BuildSpriteQuadForParticleRendering();
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
+	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
 
 	for (auto emitter : ParticleEmitter::system.components)
 	{
@@ -717,6 +724,7 @@ void Renderer::RenderSpritesInScreenSpace()
 	PROFILE_START
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
+	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
 
 	for (const Sprite& sprite : spriteSystem.screenSprites)
 	{
