@@ -8,6 +8,7 @@
 #include "Components/MeshComponent.h"
 #include "VMath.h"
 #include "Actors/Game/Player.h"
+#include "Actors/Game/BattleGrid.h"
 #include "Gameplay/BattleSystem.h"
 
 Unit::Unit()
@@ -33,9 +34,6 @@ void Unit::Tick(float deltaTime)
 	{
 		if (XMVector4Equal(nextMovePos, GetPositionVector()))
 		{
-			xIndex = std::round(GetPosition().x);
-			yIndex = std::round(GetPosition().z);
-
 			if (movementPathNodeIndex < pathNodes.size())
 			{
 				nextMovePos = XMLoadFloat3(&pathNodes[movementPathNodeIndex]->worldPosition);
@@ -50,6 +48,9 @@ void Unit::Tick(float deltaTime)
 				movementPathNodeIndex = 0;
 				pathNodes.clear();
 				isUnitTurn = false;
+
+				//close gridnode unit ends on
+				GameUtils::GetBattleGrid()->GetNode(xIndex, yIndex)->closed = true;
 
 				battleSystem.MoveToNextTurn();
 			}
@@ -164,6 +165,8 @@ void Unit::MoveToNode(int x, int y)
 void Unit::StartTurn()
 {
 	isUnitTurn = true;
+
+	GameUtils::GetBattleGrid()->GetNode(xIndex, yIndex)->closed = false;
 
 	auto player = GameUtils::GetPlayer();
 	MoveToNode(player->xIndex, player->yIndex);
