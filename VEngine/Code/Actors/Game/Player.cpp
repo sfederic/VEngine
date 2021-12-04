@@ -21,6 +21,7 @@
 #include "Gameplay/ConditionSystem.h"
 #include "Gameplay/GameInstance.h"
 #include "Log.h"
+#include "Gameplay/BattleSystem.h"
 
 DialogueComponent* dialogueComponent;
 
@@ -318,6 +319,12 @@ void Player::PrimaryAction()
 			{
 				if (inCombat)
 				{
+					auto unit = dynamic_cast<Unit*>(ray.hitActor);
+					if (unit)
+					{
+						battleSystem.StartBattle();
+					}
+
 					auto gridActor = dynamic_cast<GridActor*>(ray.hitActor);
 					if (gridActor)
 					{
