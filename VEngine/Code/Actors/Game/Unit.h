@@ -16,9 +16,6 @@ struct Unit : GridActor
 {
 	ACTOR_SYSTEM(Unit)
 
-	int xIndex = -1;
-	int yIndex = -1;
-
 	float moveSpeed = 1.0f;
 
 	int movementPoints = 1;
