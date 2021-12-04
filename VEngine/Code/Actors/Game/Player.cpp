@@ -51,11 +51,12 @@ void Player::Start()
 	actionBarWidget = CreateWidget<PlayerActionBarWidget>();
 	actionBarWidget->actionPoints = actionPoints;
 
-
 	nextPos = GetPositionVector();
 	nextRot = GetRotationVector();
-
 	nextCameraFOV = camera->FOV;
+
+	xIndex = std::round(GetPosition().x);
+	yIndex = std::round(GetPosition().z);
 }
 
 void Player::Tick(float deltaTime)

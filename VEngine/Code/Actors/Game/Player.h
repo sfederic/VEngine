@@ -34,6 +34,9 @@ struct Player : Actor
 
 	int actionPoints = 10;
 
+	int xIndex = -1;
+	int yIndex = -1;
+
 	float nextCameraFOV = 0.f;
 
 	bool inConversation = false;
