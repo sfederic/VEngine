@@ -143,3 +143,11 @@ void Unit::MoveToNode(GridNode* destinationNode)
 
 	movementPathNodes.clear();
 }
+
+void Unit::MoveToNode(int x, int y)
+{
+	BattleGrid* battleGrid = GameUtils::GetBattleGrid();
+	GridNode* destinationNode = battleGrid->GetNode(x, y);
+
+	MoveToNode(destinationNode);
+}

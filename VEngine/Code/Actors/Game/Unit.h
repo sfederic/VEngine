@@ -32,4 +32,5 @@ struct Unit : GridActor
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 	void MoveToNode(GridNode* destinationNode);
+	void MoveToNode(int x, int y);
 };
