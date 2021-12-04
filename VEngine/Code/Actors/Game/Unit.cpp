@@ -31,11 +31,6 @@ void Unit::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
-	if (isInBattle)
-	{
-
-	}
-
 	if (XMVector4Equal(nextMovePos, GetPositionVector()))
 	{
 		xIndex = std::round(GetPosition().x);
@@ -57,8 +52,7 @@ void Unit::Tick(float deltaTime)
 		}
 	}
 
-	const float moveSpeed = 1.5f;
-	SetPosition(VMath::VectorConstantLerp(GetPositionVector(), nextMovePos, deltaTime, moveSpeed));
+	SetPosition(VMath::VectorConstantLerp(GetPositionVector(), nextMovePos, deltaTime, movementSpeed));
 }
 
 Properties Unit::GetProps()
@@ -69,7 +63,7 @@ Properties Unit::GetProps()
 	return props;
 }
 
-void Unit::MoveTo(GridNode* destinationNode)
+void Unit::MoveToNode(GridNode* destinationNode)
 {
 	BattleGrid* battleGrid = GameUtils::GetBattleGrid();
 	GridNode* startingNode = battleGrid->GetNode(xIndex, yIndex);

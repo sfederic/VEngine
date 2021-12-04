@@ -12,8 +12,9 @@ struct Unit : GridActor
 	int xIndex = -1;
 	int yIndex = -1;
 
-	int movementPoints = 1;
+	float movementSpeed = 1.0f;
 
+	int movementPoints = 1;
 	int movementPathNodeIndex = 0;
 
 	bool isInBattle = false;
@@ -30,5 +31,5 @@ struct Unit : GridActor
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
-	void MoveTo(GridNode* destinationNode);
+	void MoveToNode(GridNode* destinationNode);
 };
