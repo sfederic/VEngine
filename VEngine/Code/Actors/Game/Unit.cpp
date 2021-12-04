@@ -31,8 +31,16 @@ void Unit::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
+	if (isInBattle)
+	{
+
+	}
+
 	if (XMVector4Equal(nextMovePos, GetPositionVector()))
 	{
+		xIndex = std::round(GetPosition().x);
+		yIndex = std::round(GetPosition().z);
+
 		if (movementPathNodeIndex < pathNodes.size())
 		{
 			nextMovePos = XMLoadFloat3(&pathNodes[movementPathNodeIndex]->worldPosition);

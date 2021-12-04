@@ -16,6 +16,8 @@ struct Unit : GridActor
 
 	int movementPathNodeIndex = 0;
 
+	bool isInBattle = false;
+
 	//All the nodes the unit can move to
 	std::vector<GridNode*> movementPathNodes;
 

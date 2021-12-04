@@ -158,6 +158,9 @@ void Player::MovementInput(float deltaTime)
 
 	if (XMVector4Equal(GetPositionVector(), nextPos) && XMQuaternionEqual(GetRotationVector(), nextRot))
 	{
+		xIndex = std::round(GetPosition().x);
+		yIndex = std::round(GetPosition().z);
+
 		XMVECTOR previousPos = nextPos;
 
 		if (Input::GetAsyncKey(Keys::W))
