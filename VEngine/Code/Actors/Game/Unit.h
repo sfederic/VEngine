@@ -1,13 +1,11 @@
 #pragma once
-#include "NPC.h"
+#include "GridActor.h"
 #include "../ActorSystem.h"
 
 struct GridNode;
 
-//TODO: think about consolidating Unit and NPC into one struct.
-
-//Units are all moveable actors that can be placed in-world
-struct Unit : NPC
+//Units are battle ready actors and really only move and fight.
+struct Unit : GridActor
 {
 	ACTOR_SYSTEM(Unit)
 

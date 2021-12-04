@@ -1,11 +1,12 @@
 #pragma once
-#include "GridActor.h"
+#include "Unit.h"
 #include "../ActorSystem.h"
 
 struct DialogueComponent;
 struct WidgetComponent;
 
-struct NPC : GridActor
+//Actor that can be talked to and interactied with.
+struct NPC : Unit
 {
 	ACTOR_SYSTEM(NPC)
 
