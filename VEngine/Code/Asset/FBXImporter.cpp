@@ -19,6 +19,7 @@ bool FBXImporter::Import(std::string filename, MeshDataProxy* meshData)
 	{
 		//set default model
 		filename = "cube.fbx";
+		filepath = "Meshes/cube.fbx";
 	}
 
 	//Find if mesh data already exists, push it to meshcomponent data
