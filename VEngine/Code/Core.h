@@ -15,6 +15,9 @@ namespace Core
 
 	extern double timeSinceStartup;
 
+	//Speed at which game runs
+	extern float timeScale;
+
 	extern uint32_t frameCount;
 	extern uint32_t finalFrameCount;
 

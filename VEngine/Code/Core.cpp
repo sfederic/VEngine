@@ -30,6 +30,8 @@ namespace Core
 
 	double timeSinceStartup;
 
+	float timeScale = 1.0f;
+
 	uint32_t frameCount;
 	uint32_t finalFrameCount;
 }
@@ -47,7 +49,7 @@ float Core::GetDeltaTime()
 		deltaTime = 1.0 / 60.0;
 	}
 
-	return (float)deltaTime;
+	return (float)deltaTime * timeScale;
 }
 
 void Core::SetTimerFrequency()
