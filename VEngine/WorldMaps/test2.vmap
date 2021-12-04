@@ -1,4 +1,10 @@
+GridActor
+0
+AudioActor
+0
 Player
+1
+Casts Shadow
 1
 FOV
 59.9982
@@ -13,13 +19,13 @@ Player0
 Near Z
 0.01
 Position
-0.999995 0 4
+-5.00679e-06 0 0
 Rast State
 solid
 Rotation
-0 0.707108 0 -0.707105
+-0 -1.64707e-06 -0 1
 Scale
-0.999974 1 0.999974
+0.999967 1 0.999967
 Shader
 DefaultShader.hlsl
 Texture
@@ -33,42 +39,38 @@ UvRotation
 UvScale
 1 1
 next
-AudioActor
+Pickup
 0
-GridActor
-1
-Add On Interact
+Unit
 0
-Condition
-
-Description
-
-Destruct
+GameEvent
+0
+BattleGrid
 1
-Health
+Casts Shadow
 1
-Interact
-1
-Interact Text
-It looks like a coffin. The Bestowed is most likely inside here.
 Mesh
-shield.fbx
+node.fbx
 Name
-GridActor0
+BattleGrid0
 Position
--0.4 1 5
+1 -1 1
 Rast State
 solid
 Rotation
-0 1 0 1.56958e-07
+0 0 0 1
 Scale
 1 1 1
 Shader
-DefaultShader.hlsl
+InstanceShader.hlsl
+Size X
+3
+Size Y
+3
 Texture
 test.png
 UID
-1011727581
+90875705
 UvOffset
 0 0
 UvRotation
@@ -76,12 +78,10 @@ UvRotation
 UvScale
 1 1
 next
-GameEvent
-0
-BattleGrid
-0
 MeshActor
-16
+9
+Casts Shadow
+1
 Mesh
 plane.fbx
 Name
@@ -107,6 +107,8 @@ UvRotation
 UvScale
 1 1
 next
+Casts Shadow
+1
 Mesh
 plane.fbx
 Name
@@ -132,6 +134,8 @@ UvRotation
 UvScale
 1 1
 next
+Casts Shadow
+1
 Mesh
 plane.fbx
 Name
@@ -157,6 +161,8 @@ UvRotation
 UvScale
 0.4 0.4
 next
+Casts Shadow
+1
 Mesh
 plane.fbx
 Name
@@ -182,6 +188,8 @@ UvRotation
 UvScale
 1 1
 next
+Casts Shadow
+1
 Mesh
 plane.fbx
 Name
@@ -207,6 +215,8 @@ UvRotation
 UvScale
 1 1
 next
+Casts Shadow
+1
 Mesh
 plane.fbx
 Name
@@ -232,6 +242,8 @@ UvRotation
 UvScale
 1 1
 next
+Casts Shadow
+1
 Mesh
 plane.fbx
 Name
@@ -257,6 +269,8 @@ UvRotation
 UvScale
 1 1
 next
+Casts Shadow
+1
 Mesh
 plane.fbx
 Name
@@ -282,6 +296,8 @@ UvRotation
 UvScale
 1 1
 next
+Casts Shadow
+1
 Mesh
 plane.fbx
 Name
@@ -307,181 +323,6 @@ UvRotation
 UvScale
 0.4 0.4
 next
-Mesh
-plane.fbx
-Name
-MeshActor9
-Position
--0.5 1 1.5
-Rast State
-solid
-Rotation
-0 0.707107 0 0.707107
-Scale
-2 1.5 1
-Shader
-DefaultShader.hlsl
-Texture
-wall03.png
-UID
-2218589739
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Mesh
-pillar1.fbx
-Name
-pillar110
-Position
-0 2 9
-Rast State
-solid
-Rotation
-0.707107 0 -0 0.707107
-Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture
-test.png
-UID
-745318235
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Mesh
-pillar1.fbx
-Name
-pillar111
-Position
-9 2 9
-Rast State
-solid
-Rotation
-0.707107 0 -0 0.707107
-Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture
-test.png
-UID
-745318235
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Mesh
-pillar1.fbx
-Name
-pillar112
-Position
-7 2 8
-Rast State
-solid
-Rotation
-0.707107 0 -0 0.707107
-Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture
-test.png
-UID
-745318235
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Mesh
-pillar1.fbx
-Name
-pillar113
-Position
-2 2 8
-Rast State
-solid
-Rotation
-0.707107 0 -0 0.707107
-Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture
-test.png
-UID
-745318235
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Mesh
-pillar2.fbx
-Name
-pillar214
-Position
-3 0 0
-Rast State
-solid
-Rotation
--0 0 -0 1
-Scale
-2 2 2
-Shader
-DefaultShader.hlsl
-Texture
-test.png
-UID
-3659402631
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-Mesh
-pillar2.fbx
-Name
-pillar215
-Position
-6 0 0
-Rast State
-solid
-Rotation
--0 0 -0 1
-Scale
-2 2 2
-Shader
-DefaultShader.hlsl
-Texture
-test.png
-UID
-3659402631
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
 DirectionalLightActor
 1
 Colour
@@ -491,9 +332,9 @@ LightEnabled
 Name
 DirectionalLightActor0
 Position
-3 4 6
+-3 4 3
 Rotation
--0.00411207 0.81595 -0.564699 0.12379
+-0.00411206 0.81595 -0.564699 0.12379
 Scale
 0.999995 0.999999 0.999999
 UID
@@ -527,11 +368,11 @@ UID
 4086838277
 next
 NPC
-0
-Unit
 1
 Add On Interact
 0
+Casts Shadow
+1
 Condition
 
 Description
@@ -539,21 +380,25 @@ Description
 Destruct
 1
 File
-testdiag
+
 Health
-4
+3
 Interact
-0
+1
 Interact Text
 
 Mesh
 
 Move Points
-4
+5
+Move Speed
+2
 Name
-Unit0
+NPC0
+Obstacle
+1
 Position
-4 0 8
+2 0 2
 Rast State
 solid
 Rotation
@@ -565,16 +410,14 @@ DefaultShader.hlsl
 Texture
 test.png
 UID
-1922293766
+3574748858
 UvOffset
-0 -1
+0 0
 UvRotation
 0
 UvScale
 1 1
 next
-Pickup
-0
 Billboard
 0
 InteractTrigger
