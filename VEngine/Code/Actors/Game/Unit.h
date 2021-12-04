@@ -4,6 +4,13 @@
 
 struct GridNode;
 
+enum class BattleStates
+{
+	Fight,
+	Flee,
+	Wander
+};
+
 //Units are battle ready actors and really only move and fight.
 struct Unit : GridActor
 {
