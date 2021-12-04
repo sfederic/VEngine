@@ -1,7 +1,7 @@
 Player
 1
 FOV
-59.9988
+59.9982
 Far Z
 1000
 File
@@ -13,13 +13,13 @@ Player0
 Near Z
 0.01
 Position
-7.99998 0 5.00001
+2 0 4
 Rast State
 solid
 Rotation
-0 1 0 5.9605e-08
+-0 0.707106 -0 0.707108
 Scale
-0.999976 1 0.999976
+0.999974 1 0.999974
 Shader
 DefaultShader.hlsl
 Texture
@@ -36,46 +36,7 @@ next
 AudioActor
 0
 GridActor
-2
-Add On Interact
-0
-Condition
-
-Description
-
-Destruct
 1
-Health
-2
-Interact
-1
-Interact Text
-It's just a table.
-Mesh
-unit_test.fbx
-Name
-GridActor0
-Position
-7 0 2
-Rast State
-solid
-Rotation
--0 0 -0 1
-Scale
-1 1 1
-Shader
-DefaultShader.hlsl
-Texture
-test.png
-UID
-256852783
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
 Add On Interact
 0
 Condition
@@ -91,17 +52,17 @@ Interact
 Interact Text
 It looks like a coffin. The Bestowed is most likely inside here.
 Mesh
-sphere.fbx
+shield.fbx
 Name
-GridActor1
+GridActor0
 Position
-5 0 5
+-0.4 1 5
 Rast State
 solid
 Rotation
--0 0 -0 1
+0 1 0 1.56958e-07
 Scale
-0.5 0.5 0.5
+1 1 1
 Shader
 DefaultShader.hlsl
 Texture
@@ -120,7 +81,7 @@ GameEvent
 BattleGrid
 0
 MeshActor
-10
+16
 Mesh
 plane.fbx
 Name
@@ -371,6 +332,156 @@ UvRotation
 UvScale
 1 1
 next
+Mesh
+pillar1.fbx
+Name
+pillar110
+Position
+0 2 9
+Rast State
+solid
+Rotation
+0.707107 0 -0 0.707107
+Scale
+1 1 1
+Shader
+DefaultShader.hlsl
+Texture
+test.png
+UID
+745318235
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh
+pillar1.fbx
+Name
+pillar111
+Position
+9 2 9
+Rast State
+solid
+Rotation
+0.707107 0 -0 0.707107
+Scale
+1 1 1
+Shader
+DefaultShader.hlsl
+Texture
+test.png
+UID
+745318235
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh
+pillar1.fbx
+Name
+pillar112
+Position
+7 2 8
+Rast State
+solid
+Rotation
+0.707107 0 -0 0.707107
+Scale
+1 1 1
+Shader
+DefaultShader.hlsl
+Texture
+test.png
+UID
+745318235
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh
+pillar1.fbx
+Name
+pillar113
+Position
+2 2 8
+Rast State
+solid
+Rotation
+0.707107 0 -0 0.707107
+Scale
+1 1 1
+Shader
+DefaultShader.hlsl
+Texture
+test.png
+UID
+745318235
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh
+pillar2.fbx
+Name
+pillar214
+Position
+3 0 0
+Rast State
+solid
+Rotation
+-0 0 -0 1
+Scale
+2 2 2
+Shader
+DefaultShader.hlsl
+Texture
+test.png
+UID
+3659402631
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+Mesh
+pillar2.fbx
+Name
+pillar215
+Position
+6 0 0
+Rast State
+solid
+Rotation
+-0 0 -0 1
+Scale
+2 2 2
+Shader
+DefaultShader.hlsl
+Texture
+test.png
+UID
+3659402631
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
 DirectionalLightActor
 1
 Colour
@@ -485,11 +596,11 @@ Move Points
 Name
 Unit1
 Position
-3 0 8
+4 0 8
 Rast State
 solid
 Rotation
-0 0 0 1
+-0 0 -0 1
 Scale
 1 1 1
 Shader
