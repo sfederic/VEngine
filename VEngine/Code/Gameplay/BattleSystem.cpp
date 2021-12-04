@@ -24,6 +24,16 @@ void BattleSystem::StartBattle()
 	}
 }
 
+void BattleSystem::EndBattle()
+{
+	player->inCombat = false;
+
+	battleGrid = nullptr;
+	player = nullptr;
+	activeBattleUnits.clear();
+	currentUnitTurnIndex = 0;
+}
+
 void BattleSystem::MoveToNextTurn()
 {
 	if (currentUnitTurnIndex >= activeBattleUnits.size())
@@ -43,4 +53,14 @@ void BattleSystem::RemoveUnit(Unit* unit)
 		activeBattleUnits.end(),
 		unit),
 		activeBattleUnits.end());
+
+	if (CheckIfBattleIsOver())
+	{
+		EndBattle();
+	}
+}
+
+bool BattleSystem::CheckIfBattleIsOver()
+{
+	return activeBattleUnits.size() == 0;
 }

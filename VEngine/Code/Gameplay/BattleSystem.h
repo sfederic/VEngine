@@ -20,8 +20,10 @@ private:
 public:
 	BattleSystem();
 	void StartBattle();
+	void EndBattle();
 	void MoveToNextTurn();
 	void RemoveUnit(Unit* unit);
+	bool CheckIfBattleIsOver();
 };
 
 extern BattleSystem battleSystem;
