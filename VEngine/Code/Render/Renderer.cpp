@@ -324,6 +324,11 @@ void Renderer::RenderShadowPass()
 
 	for (auto mesh : MeshComponent::system.components)
 	{
+		if (!mesh->castsShadow)
+		{
+			continue;
+		}
+
 		SetRenderPipelineStatesForShadows(mesh);
 
 		//Set matrices
