@@ -167,54 +167,22 @@ void Player::MovementInput(float deltaTime)
 		if (Input::GetAsyncKey(Keys::W))
 		{
 			nextPos = GetPositionVector() + GetForwardVectorV();
-
-			if (CheckNextMoveNode())
-			{
-				ExpendActionPoints(1);
-			}
-			else
-			{
-				nextPos = previousPos;
-			}
+			CheckNextMoveNode(previousPos);
 		}
 		if (Input::GetAsyncKey(Keys::S))
 		{
 			nextPos = GetPositionVector() + -GetForwardVectorV();
-
-			if (CheckNextMoveNode())
-			{
-				ExpendActionPoints(1);
-			}
-			else
-			{
-				nextPos = previousPos;
-			}
+			CheckNextMoveNode(previousPos);
 		}
 		if (Input::GetAsyncKey(Keys::A))
 		{
 			nextPos = GetPositionVector() + -GetRightVectorV();
-
-			if (CheckNextMoveNode())
-			{
-				ExpendActionPoints(1);
-			}
-			else
-			{
-				nextPos = previousPos;
-			}
+			CheckNextMoveNode(previousPos);
 		}
 		if (Input::GetAsyncKey(Keys::D))
 		{
 			nextPos = GetPositionVector() + GetRightVectorV();
-
-			if (CheckNextMoveNode())
-			{
-				ExpendActionPoints(1);
-			}
-			else
-			{
-				nextPos = previousPos;
-			}
+			CheckNextMoveNode(previousPos);
 		}
 
 		/*if (!XMVector4Equal(previousPos, nextPos))
@@ -437,11 +405,17 @@ void Player::LerpPlayerCameraFOV(float deltaTime)
 	}
 }
 
-bool Player::CheckNextMoveNode()
+void Player::CheckNextMoveNode(XMVECTOR previousPos)
 {
 	int nextXIndex = (int)std::round(nextPos.m128_f32[0]);
 	int nextYIndex = (int)std::round(nextPos.m128_f32[2]);
 
 	auto nextNodeToMoveTo = GameUtils::GetBattleGrid()->GetNode(nextXIndex, nextYIndex);
-	return nextNodeToMoveTo->active;
+	if (!nextNodeToMoveTo->active)
+	{
+		nextPos = previousPos;
+		return;
+	}
+
+	ExpendActionPoints(1);
 }
