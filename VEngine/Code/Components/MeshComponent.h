@@ -19,6 +19,8 @@ struct MeshComponent : SpatialComponent
 	MeshDataProxy* meshDataProxy = nullptr;
 	PipelineStateObject* pso = nullptr;
 
+	bool castsShadow = true;
+
 	MeshComponent();
 	MeshComponent(const std::string filename_,
 		const std::string textureFilename_,
