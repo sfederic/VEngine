@@ -69,12 +69,7 @@ void Player::Tick(float deltaTime)
 	//End turn input
 	if (Input::GetKeyUp(Keys::Enter))
 	{
-		auto battleGrid = GameUtils::GetBattleGrid();
-		if (battleGrid)
-		{
-			battleGrid->isPlayerTurn = false;
-			isPlayerTurn = false;
-		}
+		isPlayerTurn = false;
 	}
 
 	if (inCombat)
@@ -226,8 +221,6 @@ void Player::ToggleBattleGrid()
 		auto battleGrid = GameUtils::GetBattleGrid();
 		if (battleGrid)
 		{
-			battleGrid->isPlayerTurn = !battleGrid->isPlayerTurn;
-			isPlayerTurn = battleGrid->isPlayerTurn;
 			battleGrid->ToggleActive();
 		}
 

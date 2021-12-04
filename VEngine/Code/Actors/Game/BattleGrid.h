@@ -28,8 +28,6 @@ struct BattleGrid : Actor
 	int sizeX = 1;
 	int sizeY = 1;
 
-	bool isPlayerTurn = false;
-
 	BattleGrid();
 	virtual void Start() override;
 	virtual Properties GetProps() override;
