@@ -23,8 +23,6 @@
 #include "Log.h"
 #include "Gameplay/BattleSystem.h"
 
-DialogueComponent* dialogueComponent;
-
 Player::Player()
 {
 	nextPos = XMVectorZero();
