@@ -23,7 +23,11 @@ struct GridActor : Actor
 
 	bool isDestructible = true;
 
+	//whether the grid node the gridactor is on is inactive.
+	bool isGridObstacle = true;
+
 	bool isInteractable = true;
+
 	std::string interactText;
 
 	GridActor();
