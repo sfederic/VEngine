@@ -34,6 +34,25 @@ struct World
 	void TickAllActorSystems(float deltaTime);
 	void TickAllComponentSystems(float deltaTime);
 	std::vector<Actor*> GetAllActorsInWorld();
+
+	template <typename T>
+	std::vector<T*> GetAllActorsOfTypeInWorld()
+	{
+		std::vector<T*> outActors;
+
+		auto actors = GetAllActorsInWorld();
+		for (auto actor : actors)
+		{
+			auto actorType = dynamic_cast<T*>(actor);
+			if (actorType)
+			{
+				outActors.push_back(actorType);
+			}
+		}
+
+		return outActors;
+	}
+
 	Actor* GetActorByUID(UID uid);
 	Actor* GetActorByName(std::string actorName);
 	std::vector<Component*> GetAllComponentsInWorld();
