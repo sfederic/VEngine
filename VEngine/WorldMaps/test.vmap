@@ -1,19 +1,23 @@
 Player
 1
 FOV
-1.0472
+60
 Far Z
 1000
+File
+
 Mesh
 cube.fbx
+Name
+Player0
 Near Z
 0.01
 Position
-0 0 0
+0 0 1
 Rast State
 solid
 Rotation
-0 0 0 1
+-0 0 -0 1
 Scale
 1 1 1
 Shader
@@ -31,6 +35,47 @@ UvScale
 next
 AudioActor
 0
+GridActor
+1
+Add On Interact
+0
+Condition
+
+Description
+
+Destruct
+1
+Health
+2
+Interact
+1
+Interact Text
+
+Mesh
+
+Name
+GridActor0
+Position
+-2 0 2
+Rast State
+solid
+Rotation
+0 0 0 1
+Scale
+1 1 1
+Shader
+DefaultShader.hlsl
+Texture
+test.png
+UID
+3866718393
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
 GameEvent
 0
 BattleGrid
@@ -39,15 +84,15 @@ MeshActor
 0
 DirectionalLightActor
 0
-EntranceTrigger
-0
-NPC
-0
 SavePoint
 0
 PointLightActor
 0
 SpotLightActor
+0
+EntranceTrigger
+0
+NPC
 0
 Unit
 0

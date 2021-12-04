@@ -29,7 +29,7 @@ Player::Player()
 	nextPos = XMVectorZero();
 	nextRot = XMVectorZero();
 
-	mesh = MeshComponent::system.Add(this, MeshComponent("cube.fbx", "wall.png"));
+	mesh = MeshComponent::system.Add(this, MeshComponent("unit_test.fbx", "wall.png"));
 	rootComponent = mesh;
 
 	camera = CameraComponent::system.Add(this, CameraComponent(XMFLOAT3(2.f, 2.f, -5.f), false));
@@ -358,7 +358,7 @@ void Player::PrimaryAction()
 					dialogueComponent->ShowTextAtActor();
 
 					//Zoom camera in
-					nextCameraFOV = 40.f;
+					nextCameraFOV = 30.f;
 				}
 			}
 		}
