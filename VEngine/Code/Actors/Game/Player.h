@@ -61,4 +61,5 @@ private:
 	void ToggleIntuitionMenu();
 	void ExpendActionPoints(int num);
 	void LerpPlayerCameraFOV(float deltaTime);
+	bool CheckNextMoveNode();
 };
