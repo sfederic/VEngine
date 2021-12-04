@@ -53,6 +53,8 @@ void Player::Start()
 
 	nextPos = GetPositionVector();
 	nextRot = GetRotationVector();
+
+	nextCameraFOV = camera->FOV;
 }
 
 void Player::Tick(float deltaTime)
@@ -61,6 +63,8 @@ void Player::Tick(float deltaTime)
 	ToggleIntuitionMenu();
 
 	PrimaryAction();
+
+	LerpPlayerCameraFOV(deltaTime);
 
 	//End turn input
 	if (Input::GetKeyUp(Keys::Enter))
@@ -251,6 +255,7 @@ void Player::PrimaryAction()
 		{
 			interactWidget->RemoveFromViewport();
 			inInteraction = false;
+			nextCameraFOV = 60.f;
 			return;
 		}
 
@@ -302,6 +307,8 @@ void Player::PrimaryAction()
 							interactWidget->AddToViewport();
 							inInteraction = true;
 
+							nextCameraFOV = 30.f;
+
 							auto intuition = gridActor->intuition;
 							if (intuition->addOnInteract)
 							{
@@ -334,6 +341,7 @@ void Player::PrimaryAction()
 				if (!dialogueComponent->NextLine())
 				{
 					inConversation = false;
+					nextCameraFOV = 60.f;
 				}
 				else
 				{
@@ -348,6 +356,9 @@ void Player::PrimaryAction()
 					dialogueComponent = npc->dialogueComponent;
 					inConversation = true;
 					dialogueComponent->ShowTextAtActor();
+
+					//Zoom camera in
+					nextCameraFOV = 40.f;
 				}
 			}
 		}
@@ -375,4 +386,12 @@ void Player::ExpendActionPoints(int num)
 {
 	actionPoints -= num;
 	actionBarWidget->actionPoints = actionPoints;
+}
+
+void Player::LerpPlayerCameraFOV(float deltaTime)
+{
+	if (camera->FOV != nextCameraFOV)
+	{
+		camera->FOV = std::lerp(camera->FOV, nextCameraFOV, 4.f * deltaTime);
+	}
 }

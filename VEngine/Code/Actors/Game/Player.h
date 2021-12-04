@@ -34,6 +34,8 @@ struct Player : Actor
 
 	int actionPoints = 10;
 
+	float nextCameraFOV = 0.f;
+
 	bool inConversation = false;
 	bool inInteraction = false;
 	bool inCombat = false;
@@ -55,4 +57,5 @@ private:
 	void PrimaryAction();
 	void ToggleIntuitionMenu();
 	void ExpendActionPoints(int num);
+	void LerpPlayerCameraFOV(float deltaTime);
 };
