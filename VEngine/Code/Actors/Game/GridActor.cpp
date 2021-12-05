@@ -2,18 +2,28 @@
 #include "Components/MeshComponent.h"
 #include "Components/WidgetComponent.h"
 #include "Components/IntuitionComponent.h"
+#include "Components/TimeOfDayComponent.h"
 #include "UI/HealthWidget.h"
+#include "Gameplay/GameUtils.h"
+#include "Actors/Game/BattleGrid.h"
 
 GridActor::GridActor()
 {
 	mesh = MeshComponent::system.Add(this);
 	rootComponent = mesh;
 
+	timeOfDayComponent = TimeOfDayComponent::system.Add(this);
 	intuition = IntuitionComponent::system.Add(this);
 }
 
 void GridActor::Start()
 {
+	if (timeOfDayComponent->CheckIfActiveAtCurrentTime())
+	{
+		SetActive(false);
+		return;
+	}
+
 	SetGridPosition();
 
 	healthWidget = CreateWidget<HealthWidget>();
@@ -54,4 +64,10 @@ void GridActor::SetGridPosition()
 {
 	xIndex = std::round(GetPosition().x);
 	yIndex = std::round(GetPosition().z);
+}
+
+GridNode* GridActor::GeCurrentNode()
+{
+	auto battleGrid = GameUtils::GetBattleGrid();
+	auto node = battleGrid->GetNode(xIndex, yIndex);
 }

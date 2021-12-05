@@ -3,8 +3,10 @@
 #include "../ActorSystem.h"
 
 struct MeshComponent;
+struct TimeOfDayComponent;
 struct HealthWidget;
 struct IntuitionComponent;
+struct GridNode;
 
 //Base struct for every interactive actor that is placed in the level
 struct GridActor : Actor
@@ -14,6 +16,7 @@ struct GridActor : Actor
 	MeshComponent* mesh = nullptr;
 	HealthWidget* healthWidget = nullptr;
 	IntuitionComponent* intuition = nullptr;
+	TimeOfDayComponent* timeOfDayComponent = nullptr;
 
 	//Actor's positions on the level grid
 	int xIndex = -1;
@@ -38,4 +41,7 @@ struct GridActor : Actor
 
 	//Sets x and y indices on battlegrid for gridactor
 	void SetGridPosition();
+	
+	//returns the node the gridactor is currently on.
+	GridNode* GeCurrentNode();
 };
