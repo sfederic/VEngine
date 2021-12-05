@@ -1,6 +1,6 @@
 #include "Grid.h"
 #include "Components/InstanceMeshComponent.h"
-#include "Components/TimeOfDayComponent.h"
+#include "Components/TimeComponent.h"
 #include "Render/RenderUtils.h"
 #include "Render/Material.h"
 #include "Render/Renderer.h"

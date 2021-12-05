@@ -2,7 +2,7 @@
 #include "Components/MeshComponent.h"
 #include "Components/WidgetComponent.h"
 #include "Components/IntuitionComponent.h"
-#include "Components/TimeOfDayComponent.h"
+#include "Components/TimeComponent.h"
 #include "UI/HealthWidget.h"
 #include "Gameplay/GameUtils.h"
 #include "Grid.h"
@@ -12,7 +12,7 @@ GridActor::GridActor()
 	mesh = MeshComponent::system.Add(this);
 	rootComponent = mesh;
 
-	timeOfDayComponent = TimeOfDayComponent::system.Add(this);
+	timeComponent = TimeComponent::system.Add(this);
 	intuition = IntuitionComponent::system.Add(this);
 }
 
@@ -79,7 +79,7 @@ GridNode* GridActor::GetCurrentNode()
 
 bool GridActor::EnableBasedOnTime()
 {
-	if (!timeOfDayComponent->CheckIfActiveAtCurrentTime())
+	if (!timeComponent->CheckIfActiveAtCurrentTime())
 	{
 		auto node = GetCurrentNode();
 		node->active = true;

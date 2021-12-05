@@ -1,11 +1,11 @@
-#include "TimeOfDayComponent.h"
+#include "TimeComponent.h"
 #include "Gameplay/GameInstance.h"
 
-TimeOfDayComponent::TimeOfDayComponent()
+TimeComponent::TimeComponent()
 {
 }
 
-Properties TimeOfDayComponent::GetProps()
+Properties TimeComponent::GetProps()
 {
     Properties props("TimeOfDayComponent");
     props.AddProp(activeStartHour);
@@ -15,7 +15,7 @@ Properties TimeOfDayComponent::GetProps()
     return props;
 }
 
-bool TimeOfDayComponent::CheckIfActiveAtCurrentTime()
+bool TimeComponent::CheckIfActiveAtCurrentTime()
 {
     const int currentHour = GameInstance::currentHour;
     const int currentMinute = GameInstance::currentMinute;

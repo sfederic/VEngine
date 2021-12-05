@@ -196,7 +196,7 @@
     <ClCompile Include="Code\UI\PlayerActionBarWidget.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\WStringWidget.cpp" />
     <ClCompile Include="Code\Log.cpp" />
-    <ClCompile Include="Code\Components\TimeOfDayComponent.cpp" />
+    <ClCompile Include="Code\Components\TimeComponent.cpp" />
     <ClInclude Include="Code\Gameplay\BattleSystem.h" />
     <ClInclude Include="Code\Actors\AudioActor.h" />
     <ClInclude Include="Code\Actors\Game\GridActor.h" />
@@ -390,7 +390,7 @@
     <ClInclude Include="Code\UI\PlayerActionBarWidget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\WStringWidget.h" />
     <ClInclude Include="Code\Log.h" />
-    <ClInclude Include="Code\Components\TimeOfDayComponent.h" />
+    <ClInclude Include="Code\Components\TimeComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

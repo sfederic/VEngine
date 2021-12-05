@@ -3,7 +3,7 @@
 #include "../ActorSystem.h"
 
 struct MeshComponent;
-struct TimeOfDayComponent;
+struct TimeComponent;
 struct HealthWidget;
 struct IntuitionComponent;
 struct GridNode;
@@ -16,7 +16,7 @@ struct GridActor : Actor
 	MeshComponent* mesh = nullptr;
 	HealthWidget* healthWidget = nullptr;
 	IntuitionComponent* intuition = nullptr;
-	TimeOfDayComponent* timeOfDayComponent = nullptr;
+	TimeComponent* timeComponent = nullptr;
 
 	//Actor's positions on the level grid
 	int xIndex = -1;
