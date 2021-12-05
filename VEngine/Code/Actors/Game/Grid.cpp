@@ -18,9 +18,7 @@ Grid::Grid()
     rootComponent = nodeMesh;
 }
 
-//TODO: might need to do something here like how Unity puts priority on gameobject Update()/Start()'s.
-//can probably just get away with a Actor::PreStart() func that calls before Start().
-void Grid::Start()
+void Grid::Awake()
 {
     //This is all pretty lazy, but I need the sizeX and sizeY to determine the buffer sizes on gameplay start
     //and can't do it in the InstanceMeshComponent constructors.
@@ -118,6 +116,11 @@ void Grid::Start()
             rows[x].Add(node);
         }
     }
+}
+
+void Grid::Start()
+{
+    
 }
 
 Properties Grid::GetProps()

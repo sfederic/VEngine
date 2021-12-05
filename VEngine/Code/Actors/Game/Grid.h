@@ -29,6 +29,7 @@ struct Grid : Actor
 	int sizeY = 1;
 
 	Grid();
+	virtual void Awake() override;
 	virtual void Start() override;
 	virtual Properties GetProps() override;
 	GridNode* GetNode(int x, int y);
