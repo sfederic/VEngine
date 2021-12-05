@@ -45,18 +45,16 @@ WorldDock::WorldDock() : QDockWidget("World")
 
 void WorldDock::Tick()
 {
-	QAbstractItemView::SelectionMode selectionMode;
-
 	if (Input::GetAsyncKey(Keys::Ctrl))
 	{
-		selectionMode = QAbstractItemView::SelectionMode::MultiSelection;
+		actorListSelectionMode = QAbstractItemView::SelectionMode::MultiSelection;
 	}
 	else
 	{
-		selectionMode = QAbstractItemView::SelectionMode::SingleSelection;
+		actorListSelectionMode = QAbstractItemView::SelectionMode::SingleSelection;
 	}
 
-	actorTreeWidget->setSelectionMode(selectionMode);
+	actorTreeWidget->setSelectionMode(actorListSelectionMode);
 }
 
 void WorldDock::PopulateWorldActorList()
@@ -91,7 +89,16 @@ void WorldDock::ClickOnActorInList(QTreeWidgetItem* item, int column)
 	if (clickedActor)
 	{
 		worldEditor.pickedActor = clickedActor;
-		worldEditor.pickedActors.insert(clickedActor);
+
+		if (actorListSelectionMode == QAbstractItemView::SelectionMode::MultiSelection)
+		{
+			worldEditor.pickedActors.insert(clickedActor);
+		}
+		else
+		{
+			worldEditor.pickedActors.clear();
+		}
+
 		editor->SetActorProps(clickedActor);
 	}
 }

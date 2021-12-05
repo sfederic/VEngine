@@ -100,17 +100,17 @@ void WorldEditor::DeleteActor()
 	{
 		if (Input::GetKeyUp(Keys::Delete))
 		{
-			pickedActor->Destroy();
-
-			//Destroy all multiple picked actors
-			for (auto actor : pickedActors)
+			if (pickedActors.size() > 1)
 			{
-				if (actor == pickedActor)
+				//Destroy all multiple picked actors
+				for (auto actor : pickedActors)
 				{
-					continue;
+					actor->Destroy();
 				}
-
-				actor->Destroy();
+			}
+			else
+			{
+				pickedActor->Destroy();
 			}
 
 			pickedActors.clear();
