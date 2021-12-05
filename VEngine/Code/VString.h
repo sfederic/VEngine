@@ -12,6 +12,6 @@ namespace VString
 	std::string wstos(const std::wstring& wstr);
 
 	//String formatting functions
-	std::wstring wformat(const std::wstring wstr, va_list args);
-	std::string format(const std::string str, va_list args);
+	std::wstring wformat(const std::wstring wstr, ...);
+	std::string format(const std::string str, ...);
 }

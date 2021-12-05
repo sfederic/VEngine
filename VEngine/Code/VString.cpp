@@ -18,19 +18,27 @@ namespace VString
         return converter.to_bytes(wstr);
     }
 
-    std::wstring wformat(const std::wstring wstr, va_list args)
+    std::wstring wformat(const std::wstring wstr, ...)
     {
-        wchar_t msg[1024];
-        _vsnwprintf_s(msg, 1024, wstr.c_str(), args);
+        va_list args;
+        va_start(args, wstr);
 
-        return std::wstring(msg);
+        wchar_t output[1024];
+        _vsnwprintf_s(output, 1024, wstr.c_str(), args);
+        va_end(args);
+
+        return std::wstring(output);
     }
 
-    std::string format(const std::string str, va_list args)
+    std::string format(const std::string str, ...)
     {
-        char msg[1024];
-        vsnprintf_s(msg, 1024, str.c_str(), args);
+        va_list args;
+        va_start(args, str);
 
-        return std::string(msg);
+        char output[1024];
+        _vsnprintf_s(output, 1024, str.c_str(), args);
+        va_end(args);
+
+        return std::string(output);
     }
 }
