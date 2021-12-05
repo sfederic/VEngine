@@ -10,8 +10,8 @@
 #include "Actors/Game/NPC.h"
 #include "Actors/Game/Pickup.h"
 #include "Components/DialogueComponent.h"
-#include "Actors/Game/BattleGrid.h"
-#include "Actors/Game/GridActor.h"
+#include "Grid.h"
+#include "GridActor.h"
 #include "UI/HealthWidget.h"
 #include "UI/DialogueWidget.h"
 #include "UI/InteractWidget.h"
@@ -227,10 +227,10 @@ void Player::ToggleBattleGrid()
 		inCombat = !inCombat;
 
 		//toggle battlegrid
-		auto battleGrid = GameUtils::GetBattleGrid();
-		if (battleGrid)
+		auto grid = GameUtils::GetGrid();
+		if (grid)
 		{
-			battleGrid->ToggleActive();
+			grid->ToggleActive();
 		}
 
 		//toggle all health widgets on
@@ -411,16 +411,16 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 	int nextXIndex = (int)std::round(nextPos.m128_f32[0]);
 	int nextYIndex = (int)std::round(nextPos.m128_f32[2]);
 
-	auto battleGrid = GameUtils::GetBattleGrid();
+	auto grid = GameUtils::GetGrid();
 
-	if (nextXIndex >= battleGrid->sizeX || nextYIndex >= battleGrid->sizeY
+	if (nextXIndex >= grid->sizeX || nextYIndex >= grid->sizeY
 		|| nextXIndex < 0 || nextYIndex < 0)
 	{
 		nextPos = previousPos;
 		return;
 	}
 
-	auto nextNodeToMoveTo = battleGrid->GetNode(nextXIndex, nextYIndex);
+	auto nextNodeToMoveTo = grid->GetNode(nextXIndex, nextYIndex);
 	if (!nextNodeToMoveTo->active)
 	{
 		nextPos = previousPos;

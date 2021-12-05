@@ -4,7 +4,7 @@
 
 struct Unit;
 struct Player;
-struct BattleGrid;
+struct Grid;
 
 //Handles all units and player turns for battle as well as what units are active.
 struct BattleSystem : System
@@ -13,7 +13,7 @@ struct BattleSystem : System
 
 private:
 	Player* player = nullptr;
-	BattleGrid* battleGrid = nullptr;
+	Grid* grid = nullptr;
 
 	int currentUnitTurnIndex = 0;
 

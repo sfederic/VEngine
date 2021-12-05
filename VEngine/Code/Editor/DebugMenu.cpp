@@ -510,7 +510,7 @@ void DebugMenu::RenderActorInspectMenu()
 				ImGui::Text("Name: %s", actor->name.c_str());
 				ImGui::Text("System: %s", actor->actorSystem->name.c_str());
 				ImGui::Text("SystemIndex: %d", actor->index);
-				ImGui::Text("Active: %d", actor->active);
+				ImGui::Text("Active: %d", actor->IsActive());
 				ImGui::Text("UID: %u", actor->uid);
 				ImGui::Text("Num Components: %d", actor->components.size());
 				ImGui::Text("Parent Actor: %s", actor->parent != nullptr ? actor->parent->name.c_str() : "None");

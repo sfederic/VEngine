@@ -16,10 +16,10 @@ struct GridRow
 };
 
 //Actor that holds all the traversable nodes in the level.
-//BatteGrid needs to always be at (0, 0, 0) in world because of how rows & nodes are created at index.
-struct BattleGrid : Actor
+//Grid needs to always be at (0, 0, 0) in world because of how rows & nodes are created at index.
+struct Grid : Actor
 {
-	ACTOR_SYSTEM(BattleGrid)
+	ACTOR_SYSTEM(Grid)
 
 	InstanceMeshComponent* nodeMesh = nullptr;
 
@@ -28,7 +28,7 @@ struct BattleGrid : Actor
 	int sizeX = 1;
 	int sizeY = 1;
 
-	BattleGrid();
+	Grid();
 	virtual void Start() override;
 	virtual Properties GetProps() override;
 	GridNode* GetNode(int x, int y);

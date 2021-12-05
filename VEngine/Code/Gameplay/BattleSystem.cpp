@@ -2,7 +2,7 @@
 #include "World.h"
 #include "Actors/Game/Unit.h"
 #include "Actors/Game/Player.h"
-#include "Actors/Game/BattleGrid.h"
+#include "Actors/Game/Grid.h"
 #include "Gameplay/GameUtils.h"
 
 BattleSystem battleSystem;
@@ -13,7 +13,7 @@ BattleSystem::BattleSystem() : System("BattleSystem")
 
 void BattleSystem::StartBattle()
 {
-	battleGrid = GameUtils::GetBattleGrid();
+	grid = GameUtils::GetGrid();
 
 	player = GameUtils::GetPlayer();
 
@@ -28,7 +28,7 @@ void BattleSystem::EndBattle()
 {
 	player->inCombat = false;
 
-	battleGrid = nullptr;
+	grid = nullptr;
 	player = nullptr;
 	activeBattleUnits.clear();
 	currentUnitTurnIndex = 0;

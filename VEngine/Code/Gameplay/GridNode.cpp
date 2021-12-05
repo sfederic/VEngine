@@ -1,11 +1,11 @@
 #include "GridNode.h"
 #include "Gameplay/GameUtils.h"
-#include "Actors/Game/BattleGrid.h"
+#include "Actors/Game/Grid.h"
 #include "Components/InstanceMeshComponent.h"
 
 void GridNode::Hide()
 {
-	auto grid = GameUtils::GetBattleGrid();
+	auto grid = GameUtils::GetGrid();
 	auto& meshInstanceData = grid->nodeMesh->instanceData[instancedMeshIndex];
 
 	//Mul by empty scale matrix to make the node invisible in scene
@@ -15,7 +15,7 @@ void GridNode::Hide()
 
 void GridNode::Show()
 {	
-	auto grid = GameUtils::GetBattleGrid();
+	auto grid = GameUtils::GetGrid();
 	auto& meshInstanceData = grid->nodeMesh->instanceData[instancedMeshIndex];
 
 	//Set uniform identity scale

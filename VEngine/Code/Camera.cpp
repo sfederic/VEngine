@@ -236,11 +236,11 @@ void CameraComponent::FrustumCull()
 
 		if (localSpaceFrustum.Contains(actor->rootComponent->boundingBox) == DirectX::DISJOINT)
 		{
-			actor->active = false;
+			actor->SetActive(false);
 		}
 		else
 		{
-			actor->active = true;
+			actor->SetActive(true);
 		}
 	}
 }

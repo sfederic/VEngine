@@ -302,7 +302,7 @@
     <ClCompile Include="Code\Actors\Billboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\BattleGrid.cpp">
+    <ClCompile Include="Code\Actors\Game\Grid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\Game\Unit.cpp">
@@ -655,7 +655,7 @@
     <ClInclude Include="Code\Actors\Billboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\BattleGrid.h">
+    <ClInclude Include="Code\Actors\Game\Grid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\GridNode.h">

@@ -4,11 +4,10 @@
 #include <algorithm>
 #include "Gameplay/GridNode.h"
 #include "Gameplay/GameUtils.h"
-#include "BattleGrid.h"
+#include "Grid.h"
 #include "Components/MeshComponent.h"
 #include "VMath.h"
-#include "Actors/Game/Player.h"
-#include "Actors/Game/BattleGrid.h"
+#include "Player.h"
 #include "Gameplay/BattleSystem.h"
 
 Unit::Unit()
@@ -46,7 +45,7 @@ void Unit::Tick(float deltaTime)
 				isUnitTurn = false;
 
 				//close gridnode unit ends on
-				GameUtils::GetBattleGrid()->GetNode(xIndex, yIndex)->closed = true;
+				GameUtils::GetGrid()->GetNode(xIndex, yIndex)->closed = true;
 
 				battleSystem.MoveToNextTurn();
 			}
@@ -77,19 +76,19 @@ void Unit::InflictDamage(int damage)
 
 void Unit::MoveToNode(GridNode* destinationNode)
 {
-	BattleGrid* battleGrid = GameUtils::GetBattleGrid();
-	GridNode* startingNode = battleGrid->GetNode(xIndex, yIndex);
+	auto grid = GameUtils::GetGrid();
+	GridNode* startingNode = grid->GetNode(xIndex, yIndex);
 
 	std::vector<GridNode*> nodes;
 	std::vector<GridNode*> closedNodes;
 
-	battleGrid->GetNeighbouringNodes(startingNode, nodes);
+	grid->GetNeighbouringNodes(startingNode, nodes);
 
 	for (int moveIndex = 0; moveIndex < movementPoints; moveIndex++)
 	{
 		for (int previewIndex = 0; previewIndex < nodes.size(); previewIndex++)
 		{
-			battleGrid->GetNeighbouringNodes(nodes[previewIndex], closedNodes);
+			grid->GetNeighbouringNodes(nodes[previewIndex], closedNodes);
 		}
 
 		nodes.insert(nodes.end(), closedNodes.begin(), closedNodes.end());
@@ -162,8 +161,8 @@ void Unit::MoveToNode(GridNode* destinationNode)
 
 void Unit::MoveToNode(int x, int y)
 {
-	BattleGrid* battleGrid = GameUtils::GetBattleGrid();
-	GridNode* destinationNode = battleGrid->GetNode(x, y);
+	auto grid = GameUtils::GetGrid();
+	GridNode* destinationNode = grid->GetNode(x, y);
 
 	MoveToNode(destinationNode);
 }

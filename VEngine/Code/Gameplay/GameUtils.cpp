@@ -1,7 +1,7 @@
 #include "GameUtils.h"
 #include <filesystem>
 #include "Actors/Game/Player.h"
-#include "Actors/Game/BattleGrid.h"
+#include "Actors/Game/Grid.h"
 #include "Audio/AudioSystem.h"
 #include "World.h"
 #include "FileSystem.h"
@@ -18,11 +18,11 @@ namespace GameUtils
 		return nullptr;
 	}
 
-	BattleGrid* GetBattleGrid()
+	Grid* GetGrid()
 	{
-		if (!BattleGrid::system.actors.empty())
+		if (!Grid::system.actors.empty())
 		{
-			return BattleGrid::system.actors[0];
+			return Grid::system.actors[0];
 		}
 
 		return nullptr;

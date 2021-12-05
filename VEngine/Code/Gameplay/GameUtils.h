@@ -2,13 +2,13 @@
 #include <string>
 
 struct Player;
-struct BattleGrid;
+struct Grid;
 
 //Utility functions for in-game stuff
 namespace GameUtils
 {
 	Player* GetPlayer();
-	BattleGrid* GetBattleGrid();
+	Grid* GetGrid();
 	void PlayAudio(const std::string audioFilename);
 	void SaveGameWorldState();
 

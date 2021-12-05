@@ -5,7 +5,7 @@
 #include "Components/TimeOfDayComponent.h"
 #include "UI/HealthWidget.h"
 #include "Gameplay/GameUtils.h"
-#include "Actors/Game/BattleGrid.h"
+#include "Grid.h"
 
 GridActor::GridActor()
 {
@@ -79,7 +79,7 @@ void GridActor::SetGridPosition()
 
 GridNode* GridActor::GetCurrentNode()
 {
-	auto battleGrid = GameUtils::GetBattleGrid();
-	auto node = battleGrid->GetNode(xIndex, yIndex);
+	auto grid = GameUtils::GetGrid();
+	auto node = grid->GetNode(xIndex, yIndex);
 	return node;
 }

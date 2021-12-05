@@ -1,4 +1,4 @@
-#include "BattleGrid.h"
+#include "Grid.h"
 #include "Components/InstanceMeshComponent.h"
 #include "Render/RenderUtils.h"
 #include "Render/Material.h"
@@ -9,7 +9,7 @@
 #include "Actors/Game/Unit.h"
 #include "Gameplay/GameUtils.h"
 
-BattleGrid::BattleGrid()
+Grid::Grid()
 {
     nodeMesh = InstanceMeshComponent::system.Add(
         this, InstanceMeshComponent(1, "node.fbx", "test.png"));
@@ -20,7 +20,7 @@ BattleGrid::BattleGrid()
 
 //TODO: might need to do something here like how Unity puts priority on gameobject Update()/Start()'s.
 //can probably just get away with a Actor::PreStart() func that calls before Start().
-void BattleGrid::Start()
+void Grid::Start()
 {
     //This is all pretty lazy, but I need the sizeX and sizeY to determine the buffer sizes on gameplay start
     //and can't do it in the InstanceMeshComponent constructors.
@@ -120,21 +120,21 @@ void BattleGrid::Start()
     }
 }
 
-Properties BattleGrid::GetProps()
+Properties Grid::GetProps()
 {
-    auto props = Actor::GetProps();
+    auto props = __super::GetProps();
     props.title = "BattleNode";
     props.Add("Size X", &sizeX);
     props.Add("Size Y", &sizeY);
     return props;
 }
 
-GridNode* BattleGrid::GetNode(int x, int y)
+GridNode* Grid::GetNode(int x, int y)
 {
     return &rows[x].columns[y];
 }
 
-void BattleGrid::GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode*>& outNodes)
+void Grid::GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode*>& outNodes)
 {
     int currentX = centerNode->xIndex;
     int currentY = centerNode->yIndex;
