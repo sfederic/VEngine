@@ -9,3 +9,9 @@ void GameInstance::ProgressTime()
 		currentMinute = 0;
 	}
 }
+
+void GameInstance::ResetTime()
+{
+	currentHour = 0;
+	currentHour = 0;
+}

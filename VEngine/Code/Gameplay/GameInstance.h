@@ -7,4 +7,5 @@ struct GameInstance
 	inline static int currentMinute;
 
 	static void ProgressTime();
+	static void ResetTime();
 };

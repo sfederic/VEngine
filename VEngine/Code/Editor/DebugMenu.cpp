@@ -275,6 +275,10 @@ void DebugMenu::RenderGameInstanceData()
 
 	ImGui::InputInt("Current Hour", &GameInstance::currentHour);
 	ImGui::InputInt("Current Minute", &GameInstance::currentMinute);
+	if (ImGui::Button("Reset Instance Data"))
+	{
+		GameInstance::ResetTime();
+	}
 
 	ImGui::End();
 }
