@@ -43,6 +43,13 @@ struct GridNode
 		closed = false;
 	}
 
+	void SetActive(bool newActive);
+
+	inline bool IsActive()
+	{
+		return active;
+	}
+
 	GridNode* parentNode = nullptr;
 	XMFLOAT3 worldPosition;
 
@@ -51,6 +58,8 @@ struct GridNode
 	int xIndex = 0;
 	int yIndex = 0;
 	uint32_t instancedMeshIndex = 0;
-	bool active = true;
 	bool closed = false;
+
+private:
+	bool active = true;
 };
