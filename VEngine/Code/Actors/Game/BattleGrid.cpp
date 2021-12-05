@@ -6,6 +6,7 @@
 #include "Physics/Raycast.h"
 #include "VMath.h"
 #include "Actors/Game/GridActor.h"
+#include "Gameplay/GameUtils.h"
 
 BattleGrid::BattleGrid()
 {
@@ -67,6 +68,8 @@ void BattleGrid::Start()
 
             //raycast against the world to set node position
             Ray ray(this);
+            ray.actorsToIgnore.push_back((Actor*)GameUtils::GetPlayer());
+
             if (Raycast(ray, rayOrigin, -VMath::XMVectorUp(), 20.0f))
             {
                 //Scale the node down a little so that nodes aren't touching
