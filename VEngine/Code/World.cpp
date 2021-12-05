@@ -55,14 +55,19 @@ void World::Start()
 
 	if (Core::gameplayOn)
 	{
-		world.StartAllActors();
+		world.WakeAndStartAllActors();
 		world.StartAllComponents();
 	}
 }
 
-void World::StartAllActors()
+void World::WakeAndStartAllActors()
 {
 	auto actors = GetAllActorsInWorld();
+
+	for (auto actor : actors)
+	{
+		actor->Awake();
+	}
 
 	for (auto actor : actors)
 	{

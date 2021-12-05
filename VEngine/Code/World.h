@@ -26,7 +26,7 @@ struct World
 	void Start();
 
 	//Called when gameplay begins
-	void StartAllActors();
+	void WakeAndStartAllActors();
 	void StartAllComponents();
 
 	std::vector<IActorSystem*> GetLayerActorSystems();

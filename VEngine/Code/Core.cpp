@@ -128,7 +128,7 @@ void Core::StartGame()
 	initialStartingWorldFromEditor = world.worldFilename;
 
 	world.StartAllComponents();
-	world.StartAllActors();
+	world.WakeAndStartAllActors();
 
 	worldEditor.pickedActor = nullptr;
 
