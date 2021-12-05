@@ -139,7 +139,7 @@ void Core::EndGame()
 {
 	gameplayOn = false;
 
-	uiSystem.RemoveAllWidgets();
+	uiSystem.Reset();
 	spriteSystem.Reset();
 
 	audioSystem.DeleteLoadedAudioAndChannels();
