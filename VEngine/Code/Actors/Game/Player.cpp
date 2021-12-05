@@ -429,8 +429,7 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 
 	//Check next node height in realtion to player
 	auto node = grid->GetNode(nextXIndex, nextYIndex);
-	const float maxHeightMove = 0.75f;
-	if (node->worldPosition.y > (GetPosition().y + maxHeightMove))
+	if (node->worldPosition.y > (GetPosition().y + Grid::maxHeightMove))
 	{
 		nextPos = previousPos;
 		return;

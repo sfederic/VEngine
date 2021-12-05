@@ -149,9 +149,12 @@ void Grid::GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode*>& ou
         GridNode& node = rows[currentX + 1].columns[currentY];
         if (!node.closed && node.active)
         {
-            node.closed = true;
-            node.parentNode = centerNode;
-            outNodes.push_back(&node);
+            if (node.worldPosition.y < (centerNode->worldPosition.y + Grid::maxHeightMove))
+            {
+                node.closed = true;
+                node.parentNode = centerNode;
+                outNodes.push_back(&node);
+            }
         }
     }
 
@@ -161,9 +164,12 @@ void Grid::GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode*>& ou
         GridNode& node = rows[currentX - 1].columns[currentY];
         if (!node.closed && node.active)
         {
-            node.closed = true;
-            node.parentNode = centerNode;
-            outNodes.push_back(&node);
+            if (node.worldPosition.y < (centerNode->worldPosition.y + Grid::maxHeightMove))
+            {
+                node.closed = true;
+                node.parentNode = centerNode;
+                outNodes.push_back(&node);
+            }
         }
     }
 
@@ -173,9 +179,12 @@ void Grid::GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode*>& ou
         GridNode& node = rows[currentX].columns[currentY + 1];
         if (!node.closed && node.active)
         {
-            node.closed = true;
-            node.parentNode = centerNode;
-            outNodes.push_back(&node);
+            if (node.worldPosition.y < (centerNode->worldPosition.y + Grid::maxHeightMove))
+            {
+                node.closed = true;
+                node.parentNode = centerNode;
+                outNodes.push_back(&node);
+            }
         }
     }
 
@@ -185,9 +194,12 @@ void Grid::GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode*>& ou
         GridNode& node = rows[currentX].columns[currentY - 1];
         if (!node.closed && node.active)
         {
-            node.closed = true;
-            node.parentNode = centerNode;
-            outNodes.push_back(&node);
+            if (node.worldPosition.y < (centerNode->worldPosition.y + Grid::maxHeightMove))
+            {
+                node.closed = true;
+                node.parentNode = centerNode;
+                outNodes.push_back(&node);
+            }
         }
     }
 }
