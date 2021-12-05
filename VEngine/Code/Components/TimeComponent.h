@@ -7,8 +7,8 @@ struct TimeComponent : Component
 {	
 	COMPONENT_SYSTEM(TimeComponent);
 
-	int activeStartHour = 0;
-	int activeStartMinute = 0;
+	int activeBeginHour = 0;
+	int activeBeginMinute = 0;
 	int activeEndHour = 0;
 	int activeEndMinute = 0;
 
