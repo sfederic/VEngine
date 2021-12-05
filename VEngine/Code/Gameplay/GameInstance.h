@@ -5,4 +5,6 @@ struct GameInstance
 {
 	inline static int currentHour;
 	inline static int currentMinute;
+
+	static void ProgressTime();
 };
