@@ -6,6 +6,7 @@
 #include "Physics/Raycast.h"
 #include "VMath.h"
 #include "Actors/Game/GridActor.h"
+#include "Actors/Game/Unit.h"
 #include "Gameplay/GameUtils.h"
 
 BattleGrid::BattleGrid()
@@ -68,10 +69,13 @@ void BattleGrid::Start()
             //create grid node in row
             GridNode node = GridNode(x, y, nodeMesh->instanceData.size());
 
-            //raycast against the world to set node position
+            //Ignore player and units
             Ray ray(this);
             ray.actorsToIgnore.push_back((Actor*)GameUtils::GetPlayer());
+            auto unitActors = world.GetAllActorsOfTypeAsActor<Unit>();
+            ray.AddActorsToIgnore(unitActors);
 
+            //raycast against the world to set node position
             if (Raycast(ray, rayOrigin, -VMath::XMVectorUp(), 20.0f))
             {
                 //Scale the node down a little so that nodes aren't touching
