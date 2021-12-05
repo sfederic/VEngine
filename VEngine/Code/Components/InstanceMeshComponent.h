@@ -27,4 +27,5 @@ public:
 	uint32_t GetInstanceCount();
 	void SetInstanceData(std::vector<InstanceData>& instanceData_);
 	virtual Properties GetProps();
+	void ReleaseBuffers();
 };

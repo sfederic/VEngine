@@ -21,17 +21,7 @@ Grid::Grid()
 
 void Grid::Awake()
 {
-    //This is all pretty lazy, but I need the sizeX and sizeY to determine the buffer sizes on gameplay start
-    //and can't do it in the InstanceMeshComponent constructors.
-    if (nodeMesh->structuredBuffer)
-    {
-        nodeMesh->structuredBuffer->Release();
-    }
-    if (nodeMesh->srv)
-    {
-        nodeMesh->srv->Release();
-    }
-
+    nodeMesh->ReleaseBuffers();
 
     //Set the mesh count as 1 and empty the data just to put dummy data into the buffers
     nodeMesh->instanceData.clear();

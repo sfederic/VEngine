@@ -53,3 +53,15 @@ Properties InstanceMeshComponent::GetProps()
 	props.title = "InstanceMeshComponent";
 	return props;
 }
+
+void InstanceMeshComponent::ReleaseBuffers()
+{
+	if (structuredBuffer)
+	{
+		structuredBuffer->Release();
+	}
+	if (srv)
+	{
+		srv->Release();
+	}
+}
