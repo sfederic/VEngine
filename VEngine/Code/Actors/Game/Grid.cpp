@@ -1,5 +1,6 @@
 #include "Grid.h"
 #include "Components/InstanceMeshComponent.h"
+#include "Components/TimeOfDayComponent.h"
 #include "Render/RenderUtils.h"
 #include "Render/Material.h"
 #include "Render/Renderer.h"
@@ -50,6 +51,19 @@ void Grid::Awake()
     XMVECTOR rayOrigin = XMVectorZero();
 
     nodeMesh->instanceData.clear();
+
+    //Deactive gridactors that aren't active at current time
+    auto gridActors = world.GetAllActorsOfTypeInWorld<GridActor>();
+    for (auto gridActor : gridActors)
+    {
+        if (!gridActor->timeOfDayComponent->CheckIfActiveAtCurrentTime())
+        {
+            gridActor->SetActive(false);
+            auto node = gridActor->GetCurrentNode();
+            node->active = true;
+            node->Show();
+        }
+    }
 
     for (int x = 0; x < sizeX; x++)
     {
