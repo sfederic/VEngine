@@ -11,12 +11,6 @@ using namespace DirectX;
 
 struct Ray
 {
-	Ray() {}
-	Ray(Actor* actorToIgnore)
-	{
-		actorsToIgnore.push_back(actorToIgnore);
-	}
-
 	XMVECTOR origin;
 	XMVECTOR direction;
 	
@@ -40,6 +34,14 @@ struct Ray
 	int actorIndex = 0;
 	int actorSystemIndex = 0;
 	bool bHit = false;
+
+	Ray() {}
+	Ray(Actor* actorToIgnore)
+	{
+		actorsToIgnore.push_back(actorToIgnore);
+	}
+
+	void AddActorsToIgnore(std::vector<Actor*>& actors);
 };
 
 //export void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance)

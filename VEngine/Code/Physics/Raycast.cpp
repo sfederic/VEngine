@@ -221,3 +221,13 @@ bool RaycastFromScreen(Ray& ray)
 
 	return Raycast(ray, ray.origin, ray.direction, range, true);
 }
+
+void Ray::AddActorsToIgnore(std::vector<Actor*>& actors)
+{
+	actorsToIgnore.reserve(actorsToIgnore.size() + actors.size());
+
+	for (auto actor : actors)
+	{
+		actorsToIgnore.push_back(actor);
+	}
+}
