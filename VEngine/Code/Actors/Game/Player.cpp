@@ -427,5 +427,9 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 		return;
 	}
 
+	//Set next pos to node position in-world
+	auto node = grid->GetNode(nextXIndex, nextYIndex);
+	nextPos = XMLoadFloat3(&node->worldPosition);
+
 	ExpendActionPoints(1);
 }
