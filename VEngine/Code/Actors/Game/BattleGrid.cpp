@@ -17,6 +17,8 @@ BattleGrid::BattleGrid()
     rootComponent = nodeMesh;
 }
 
+//TODO: might need to do something here like how Unity puts priority on gameobject Update()/Start()'s.
+//can probably just get away with a Actor::PreStart() func that calls before Start().
 void BattleGrid::Start()
 {
     //This is all pretty lazy, but I need the sizeX and sizeY to determine the buffer sizes on gameplay start
