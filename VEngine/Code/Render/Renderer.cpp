@@ -324,7 +324,7 @@ void Renderer::RenderShadowPass()
 
 	for (auto mesh : MeshComponent::system.components)
 	{
-		if (!mesh->castsShadow)
+		if (!mesh->castsShadow || !mesh->active)
 		{
 			continue;
 		}
