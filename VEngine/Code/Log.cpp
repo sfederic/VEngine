@@ -9,7 +9,7 @@ void Log(std::string logMessage, ...)
     va_start(args, logMessage);
 
     char msg[1024];
-    vsnprintf(msg, 1024, logMessage.c_str(), args);
+    vsnprintf_s(msg, 1024, logMessage.c_str(), args);
     va_end(args);
 
 	editor->Log(msg);
@@ -21,7 +21,7 @@ void Log(std::wstring logMessage, ...)
 	va_start(args, logMessage);
 
 	wchar_t msg[1024];
-	_vsnwprintf(msg, 1024, logMessage.c_str(), args);
+	_vsnwprintf_s(msg, 1024, logMessage.c_str(), args);
 	va_end(args);
 
 	editor->Log(msg);
