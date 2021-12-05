@@ -25,6 +25,7 @@ void GridActor::Start()
 		//Set starting node as inactive.
 		auto node = GetCurrentNode();
 		node->active = false;
+		node->Hide();
 	}
 
 	healthWidget = CreateWidget<HealthWidget>();
@@ -81,10 +82,6 @@ bool GridActor::EnableBasedOnTime()
 {
 	if (!timeComponent->CheckIfActiveAtCurrentTime())
 	{
-		auto node = GetCurrentNode();
-		node->active = true;
-		node->Show();
-
 		SetActive(false);
 		return true;
 	}
