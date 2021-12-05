@@ -3,7 +3,6 @@
 #include "../ActorSystem.h"
 
 struct DialogueComponent;
-struct WidgetComponent;
 
 //Actor that can be talked to and interactied with.
 struct NPC : Unit
