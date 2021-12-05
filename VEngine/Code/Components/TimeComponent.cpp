@@ -9,23 +9,19 @@ Properties TimeComponent::GetProps()
 {
     Properties props("TimeOfDayComponent");
     props.AddProp(activeBeginHour);
-    props.AddProp(activeBeginMinute);
     props.AddProp(activeEndHour);
-    props.AddProp(activeEndMinute);
     return props;
 }
 
 bool TimeComponent::CheckIfActiveAtCurrentTime()
 {
-    const int currentHour = GameInstance::currentHour;
-    const int currentMinute = GameInstance::currentMinute;
+    assert(activeBeginHour < activeEndHour);
 
-    if (activeBeginHour >= currentHour && activeEndHour >= currentHour)
+    const int currentHour = GameInstance::currentHour;
+
+    if (currentHour >= activeBeginHour && currentHour <= activeEndHour)
     {
-        if (activeBeginMinute >= currentMinute && activeEndMinute >= currentMinute)
-        {
-            return true;
-        }
+        return true;
     }
 
     return false;
