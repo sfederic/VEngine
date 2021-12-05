@@ -50,6 +50,9 @@ struct GridNode
 		return active;
 	}
 
+	void Hide();
+	void Show();
+
 	GridNode* parentNode = nullptr;
 	XMFLOAT3 worldPosition;
 
