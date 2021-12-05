@@ -53,6 +53,23 @@ struct World
 		return outActors;
 	}
 
+	template <typename T>
+	std::vector<Actor*> GetAllActorsOfTypeAsActor()
+	{
+		std::vector<Actor*> outActors;
+
+		auto actors = GetAllActorsInWorld();
+		for (auto actor : actors)
+		{
+			if (dynamic_cast<T*>(actor))
+			{
+				outActors.push_back(actor);
+			}
+		}
+
+		return outActors;
+	}
+
 	Actor* GetActorByUID(UID uid);
 	Actor* GetActorByName(std::string actorName);
 	std::vector<Component*> GetAllComponentsInWorld();
