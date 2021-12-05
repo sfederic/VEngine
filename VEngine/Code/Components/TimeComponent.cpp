@@ -15,8 +15,6 @@ Properties TimeComponent::GetProps()
 
 bool TimeComponent::CheckIfActiveAtCurrentTime()
 {
-    assert(activeBeginHour < activeEndHour);
-
     const int currentHour = GameInstance::currentHour;
 
     if (currentHour >= activeBeginHour && currentHour <= activeEndHour)
