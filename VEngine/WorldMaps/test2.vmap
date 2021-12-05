@@ -4,6 +4,12 @@ AudioActor
 0
 Player
 1
+ Position
+0.999986 0 2
+ Rotation
+0 0.707106 0 0.707108
+ Scale
+0.999967 1 0.999967
 Casts Shadow
 1
 FOV
@@ -18,14 +24,8 @@ Name
 Player0
 Near Z
 0.01
-Position
--5.00679e-06 0 0
 Rast State
 solid
-Rotation
--0 -1.64707e-06 -0 1
-Scale
-0.999967 1 0.999967
 Shader
 DefaultShader.hlsl
 Texture
@@ -47,26 +47,26 @@ GameEvent
 0
 BattleGrid
 1
+ Position
+1 -1 1
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
 Casts Shadow
 1
 Mesh
 node.fbx
 Name
 BattleGrid0
-Position
-1 -1 1
 Rast State
 solid
-Rotation
-0 0 0 1
-Scale
-1 1 1
 Shader
 InstanceShader.hlsl
 Size X
-3
+10
 Size Y
-3
+10
 Texture
 test.png
 UID
@@ -80,20 +80,20 @@ UvScale
 next
 MeshActor
 9
+ Position
+4.5 -0.5 4.5
+ Rotation
+-0.707107 0 -0 0.707107
+ Scale
+5 5 1
 Casts Shadow
 1
 Mesh
 plane.fbx
 Name
 MeshActor0
-Position
-4.5 -0.5 4.5
 Rast State
 solid
-Rotation
--0.707107 0 -0 0.707107
-Scale
-5 5 1
 Shader
 DefaultShader.hlsl
 Texture
@@ -107,20 +107,20 @@ UvRotation
 UvScale
 1 1
 next
+ Position
+9.5 1 1.5
+ Rotation
+-0 -0.706934 -0 0.707279
+ Scale
+2.00001 1.5 0.999999
 Casts Shadow
 1
 Mesh
 plane.fbx
 Name
 MeshActor1
-Position
-9.5 1 1.5
 Rast State
 solid
-Rotation
--0 -0.706934 -0 0.707279
-Scale
-2.00001 1.5 0.999999
 Shader
 DefaultShader.hlsl
 Texture
@@ -134,20 +134,20 @@ UvRotation
 UvScale
 1 1
 next
+ Position
+7.5 1 9.5
+ Rotation
+0 1 0 -0.000172637
+ Scale
+2 1.5 1
 Casts Shadow
 1
 Mesh
 plane.fbx
 Name
 MeshActor2
-Position
-7.5 1 9.5
 Rast State
 solid
-Rotation
-0 1 0 -0.000172637
-Scale
-2 1.5 1
 Shader
 DefaultShader.hlsl
 Texture
@@ -161,20 +161,20 @@ UvRotation
 UvScale
 0.4 0.4
 next
+ Position
+1.00001 1 9.5
+ Rotation
+0 1 0 -2.60274e-07
+ Scale
+1.49999 1.5 0.999992
 Casts Shadow
 1
 Mesh
 plane.fbx
 Name
 MeshActor3
-Position
-1.00001 1 9.5
 Rast State
 solid
-Rotation
-0 1 0 -2.60274e-07
-Scale
-1.49999 1.5 0.999992
 Shader
 DefaultShader.hlsl
 Texture
@@ -188,20 +188,20 @@ UvRotation
 UvScale
 1 1
 next
+ Position
+6.5 1 -0.500345
+ Rotation
+-0 0.000172667 -0 1
+ Scale
+3 1.5 1
 Casts Shadow
 1
 Mesh
 plane.fbx
 Name
 MeshActor4
-Position
-6.5 1 -0.500345
 Rast State
 solid
-Rotation
--0 0.000172667 -0 1
-Scale
-3 1.5 1
 Shader
 DefaultShader.hlsl
 Texture
@@ -215,20 +215,20 @@ UvRotation
 UvScale
 1 1
 next
+ Position
+1.5 1 -0.5
+ Rotation
+-0 0.000172667 -0 1
+ Scale
+2 1.5 1
 Casts Shadow
 1
 Mesh
 plane.fbx
 Name
 MeshActor5
-Position
-1.5 1 -0.5
 Rast State
 solid
-Rotation
--0 0.000172667 -0 1
-Scale
-2 1.5 1
 Shader
 DefaultShader.hlsl
 Texture
@@ -242,20 +242,20 @@ UvRotation
 UvScale
 1 1
 next
+ Position
+9.5 1 6.49999
+ Rotation
+0 0.707107 0 -0.707107
+ Scale
+2.99994 1.5 0.999982
 Casts Shadow
 1
 Mesh
 plane.fbx
 Name
 MeshActor6
-Position
-9.5 1 6.49999
 Rast State
 solid
-Rotation
-0 0.707107 0 -0.707107
-Scale
-2.99994 1.5 0.999982
 Shader
 DefaultShader.hlsl
 Texture
@@ -269,20 +269,20 @@ UvRotation
 UvScale
 1 1
 next
+ Position
+-0.5 1 6.49999
+ Rotation
+0 0.707107 0 0.707107
+ Scale
+2.99996 1.5 0.999993
 Casts Shadow
 1
 Mesh
 plane.fbx
 Name
 MeshActor7
-Position
--0.5 1 6.49999
 Rast State
 solid
-Rotation
-0 0.707107 0 0.707107
-Scale
-2.99996 1.5 0.999993
 Shader
 DefaultShader.hlsl
 Texture
@@ -296,20 +296,20 @@ UvRotation
 UvScale
 1 1
 next
+ Position
+4.00001 1 9.5
+ Rotation
+0 1 0 -2.60274e-07
+ Scale
+1.49999 1.5 0.999992
 Casts Shadow
 1
 Mesh
 plane.fbx
 Name
 MeshActor8
-Position
-4.00001 1 9.5
 Rast State
 solid
-Rotation
-0 1 0 -2.60274e-07
-Scale
-1.49999 1.5 0.999992
 Shader
 DefaultShader.hlsl
 Texture
@@ -325,18 +325,18 @@ UvScale
 next
 DirectionalLightActor
 1
+ Position
+-3 4 3
+ Rotation
+-0.00411206 0.81595 -0.564699 0.12379
+ Scale
+0.999995 0.999999 0.999999
 Colour
 1 1 1 1
 LightEnabled
 1
 Name
 DirectionalLightActor0
-Position
--3 4 3
-Rotation
--0.00411206 0.81595 -0.564699 0.12379
-Scale
-0.999995 0.999999 0.999999
 UID
 2191012152
 next
@@ -348,6 +348,12 @@ SpotLightActor
 0
 EntranceTrigger
 1
+ Position
+0 0 6
+ Rotation
+-0 0 -0 1
+ Scale
+0.9 0.9 0.9
 Entrance Active
 1
 Extents
@@ -358,17 +364,17 @@ Name
 EntranceTrigger0
 Open Text
 Open
-Position
-0 0 6
-Rotation
--0 0 -0 1
-Scale
-0.9 0.9 0.9
 UID
 4086838277
 next
 NPC
 1
+ Position
+2 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
 Add On Interact
 0
 Casts Shadow
@@ -397,14 +403,8 @@ Name
 NPC0
 Obstacle
 1
-Position
-2 0 2
 Rast State
 solid
-Rotation
--0 0 -0 1
-Scale
-1 1 1
 Shader
 DefaultShader.hlsl
 Texture
