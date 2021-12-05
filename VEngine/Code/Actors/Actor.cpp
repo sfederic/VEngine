@@ -189,6 +189,10 @@ std::vector<Properties> Actor::GetAllProps()
 	return propsVector;
 }
 
+void Actor::Awake()
+{
+}
+
 void Actor::Start()
 {
 }

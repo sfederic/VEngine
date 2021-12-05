@@ -59,7 +59,13 @@ public:
 	XMVECTOR GetUpVectorV();
 	virtual Properties GetProps() = 0;
 	std::vector<Properties> GetAllProps();
+
+	//called before all Starts()
+	virtual void Awake();
+
+	//called on gameplay start
 	virtual void Start();
+
 	virtual void Tick(float deltaTime);
 	virtual void Create();
 	virtual void Destroy();
