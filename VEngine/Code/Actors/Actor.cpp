@@ -163,9 +163,11 @@ Properties Actor::GetProps()
 {
 	Properties props("Actor");
 
-	props.Add("Position", &rootComponent->transform.position);
-	props.Add("Scale", &rootComponent->transform.scale);
-	props.Add("Rotation", &rootComponent->transform.rotation);
+	//Got the whitespace here because std::map orders by key, don't have time to make an ordered_map,
+	//meaning the whitespace will keep the transform values at the top of the props dock.
+	props.Add(" Position", &rootComponent->transform.position);
+	props.Add(" Scale", &rootComponent->transform.scale);
+	props.Add(" Rotation", &rootComponent->transform.rotation);
 	props.Add("UID", &uid).hide = true;
 	props.Add("Name", &name).hide = true;
 
