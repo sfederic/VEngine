@@ -20,7 +20,7 @@ void GridActor::Start()
 {
 	SetGridPosition();
 
-	if (timeOfDayComponent->CheckIfActiveAtCurrentTime())
+	if (!timeOfDayComponent->CheckIfActiveAtCurrentTime())
 	{
 		auto node = GetCurrentNode();
 		node->active = true;
@@ -29,6 +29,10 @@ void GridActor::Start()
 		SetActive(false);
 		return;
 	}
+
+	//Set starting node as inactive.
+	auto node = GetCurrentNode();
+	node->active = false;
 
 	healthWidget = CreateWidget<HealthWidget>();
 	healthWidget->healthPoints = health;

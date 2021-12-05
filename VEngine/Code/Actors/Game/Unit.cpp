@@ -172,7 +172,8 @@ void Unit::StartTurn()
 {
 	isUnitTurn = true;
 
-	GameUtils::GetBattleGrid()->GetNode(xIndex, yIndex)->closed = false;
+	auto node = GetCurrentNode();
+	node->active = true;
 
 	auto player = GameUtils::GetPlayer();
 	MoveToNode(player->xIndex, player->yIndex);
