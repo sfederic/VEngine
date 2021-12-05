@@ -20,19 +20,12 @@ void GridActor::Start()
 {
 	SetGridPosition();
 
-	/*if (!timeOfDayComponent->CheckIfActiveAtCurrentTime())
+	if (!EnableBasedOnTime())
 	{
+		//Set starting node as inactive.
 		auto node = GetCurrentNode();
-		node->active = true;
-		node->Show();
-
-		SetActive(false);
-		return;
-	}*/
-
-	//Set starting node as inactive.
-	auto node = GetCurrentNode();
-	node->active = false;
+		node->active = false;
+	}
 
 	healthWidget = CreateWidget<HealthWidget>();
 	healthWidget->healthPoints = health;
@@ -82,4 +75,19 @@ GridNode* GridActor::GetCurrentNode()
 	auto grid = GameUtils::GetGrid();
 	auto node = grid->GetNode(xIndex, yIndex);
 	return node;
+}
+
+bool GridActor::EnableBasedOnTime()
+{
+	if (!timeOfDayComponent->CheckIfActiveAtCurrentTime())
+	{
+		auto node = GetCurrentNode();
+		node->active = true;
+		node->Show();
+
+		SetActive(false);
+		return true;
+	}
+
+	return false;
 }

@@ -56,13 +56,7 @@ void Grid::Awake()
     auto gridActors = world.GetAllActorsOfTypeInWorld<GridActor>();
     for (auto gridActor : gridActors)
     {
-        if (!gridActor->timeOfDayComponent->CheckIfActiveAtCurrentTime())
-        {
-            gridActor->SetActive(false);
-            auto node = gridActor->GetCurrentNode();
-            node->active = true;
-            node->Show();
-        }
+        gridActor->EnableBasedOnTime();
     }
 
     for (int x = 0; x < sizeX; x++)
