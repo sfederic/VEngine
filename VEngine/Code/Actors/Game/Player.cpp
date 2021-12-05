@@ -17,6 +17,7 @@
 #include "UI/InteractWidget.h"
 #include "UI/IntuitionMenuWidget.h"
 #include "UI/PlayerActionBarWidget.h"
+#include "UI/TimeOfDayWidget.h"
 #include "Gameplay/Intuition.h"
 #include "Gameplay/ConditionSystem.h"
 #include "Gameplay/GameInstance.h"
@@ -48,6 +49,8 @@ void Player::Start()
 
 	actionBarWidget = CreateWidget<PlayerActionBarWidget>();
 	actionBarWidget->actionPoints = actionPoints;
+
+	CreateWidget<TimeOfDayWidget>()->AddToViewport();
 
 	nextPos = GetPositionVector();
 	nextRot = GetRotationVector();
