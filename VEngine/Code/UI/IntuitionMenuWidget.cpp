@@ -18,11 +18,11 @@ void IntuitionMenuWidget::Tick(float deltaTime)
 	{
 		Intuition* intuition = intuitionPair.second;
 
-		Text(stows(intuition->name), textRect);
+		Text(VString::stows(intuition->name), textRect);
 		textRect.top += 30.f;
 		textRect.bottom += 30.f;
 
-		Text(stows(intuition->description), textRect);
+		Text(VString::stows(intuition->description), textRect);
 		textRect.top += 30.f;
 		textRect.bottom += 30.f;
 	}

@@ -21,5 +21,5 @@ void DialogueWidget::Tick(float deltaTime)
 
 void DialogueWidget::SetText(std::string text)
 {
-	dialogueText = stows(text);
+	dialogueText = VString::stows(text);
 }

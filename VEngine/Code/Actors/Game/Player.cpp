@@ -302,7 +302,7 @@ void Player::PrimaryAction()
 					{
 						if (gridActor->isInteractable)
 						{
-							interactWidget->interactText = stows(gridActor->interactText);
+							interactWidget->interactText = VString::stows(gridActor->interactText);
 							interactWidget->AddToViewport();
 							inInteraction = true;
 

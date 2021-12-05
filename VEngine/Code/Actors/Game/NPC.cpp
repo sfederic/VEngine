@@ -36,7 +36,7 @@ void NPC::QuickTalkTo()
 
     isQuickDialogueActive = true;
 
-    dialogueComponent->dialogueWidget->dialogueText = stows(interactText);
+    dialogueComponent->dialogueWidget->dialogueText = VString::stows(interactText);
     dialogueComponent->AddToViewport();
 
     timerSystem.SetTimer(3.0f, std::bind(&NPC::EndQuickTalkTo, this));

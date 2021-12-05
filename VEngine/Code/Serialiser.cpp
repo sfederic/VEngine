@@ -73,7 +73,7 @@ void Serialiser::Serialise(Properties props)
 		else if (props.CheckType<std::wstring>(name))
 		{
 			std::wstring* wstr = props.GetData<std::wstring>(name);
-			ss << name << "\n" << wstos(wstr->data()).c_str() << "\n";
+			ss << name << "\n" << VString::wstos(wstr->data()).c_str() << "\n";
 		}	
 		else if (props.CheckType<TextureData>(name))
 		{
@@ -209,7 +209,7 @@ void Deserialiser::Deserialise(Properties props)
 			char propString[512];
 			is.getline(propString, 512);
 			std::wstring* wstr = props.GetData<std::wstring>(name);
-			wstr->assign(stows(propString));
+			wstr->assign(VString::stows(propString));
 		}
 		else if (props.CheckType<TextureData>(name))
 		{

@@ -1,10 +1,17 @@
 #include <string>
 
-//Both string functions taken from:
+//string conversion functions taken from:
 //https://stackoverflow.com/questions/4804298/how-to-convert-wstring-into-string
 
-//convert from std::string to std::wstring
-std::wstring stows(const std::string& str);
+namespace VString
+{
+	//convert from std::string to std::wstring
+	std::wstring stows(const std::string& str);
 
-//convert from std::wstring to std::string
-std::string wstos(const std::wstring& wstr);
+	//convert from std::wstring to std::string
+	std::string wstos(const std::wstring& wstr);
+
+	//String formatting functions
+	std::wstring wformat(const std::wstring wstr, va_list args);
+	std::string format(const std::string str, va_list args);
+}

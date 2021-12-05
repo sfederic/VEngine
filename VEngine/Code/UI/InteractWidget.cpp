@@ -11,5 +11,5 @@ void InteractWidget::Tick(float deltaTime)
 
 void InteractWidget::SetText(std::string text)
 {
-	interactText = stows(text);
+	interactText = VString::stows(text);
 }

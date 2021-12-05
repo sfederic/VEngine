@@ -120,7 +120,7 @@ namespace RenderUtils
 
 		Texture2D* texture = textureSystem.FindTexture2D(textureFilename);
 
-		std::wstring path = L"Textures/" + stows(texture->filename);
+		std::wstring path = L"Textures/" + VString::stows(texture->filename);
 
 		assert(std::filesystem::exists(path) && "Texture file doesn't exist");
 

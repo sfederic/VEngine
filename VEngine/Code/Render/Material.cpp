@@ -27,7 +27,7 @@ void Material::Create()
 {
 	texture = textureSystem.FindTexture2D(textureData.filename);
 	sampler = RenderUtils::GetDefaultSampler();
-	shader = shaderSystem.FindShader(stows(shaderData.filename));
+	shader = shaderSystem.FindShader(VString::stows(shaderData.filename));
 	rastState = renderer.rastStateMap[rastStateName];
 	blendState = renderer.blendStateMap["default"];
 }
@@ -77,7 +77,7 @@ static void ReassignRastState(void* data)
 static void ReassignShader(void* data)
 {
 	auto shaderData = (ShaderData*)data;
-	ShaderItem* foundShader = shaderSystem.FindShader(stows(shaderData->filename));
+	ShaderItem* foundShader = shaderSystem.FindShader(VString::stows(shaderData->filename));
 	if (foundShader == nullptr)
 	{
 		Log("%s not found on shader change.", shaderData->filename);
