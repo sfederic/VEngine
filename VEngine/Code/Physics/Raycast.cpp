@@ -59,6 +59,11 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 
 	for (Actor* actor : world.GetAllActorsInWorld())
 	{
+		if (!actor->IsActive())
+		{
+			continue;
+		}
+
 		//Skip if actor is in ignore list
 		for (Actor* actorToIgnore : ray.actorsToIgnore)
 		{
