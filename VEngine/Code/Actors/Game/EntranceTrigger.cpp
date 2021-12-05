@@ -1,6 +1,7 @@
 #include "EntranceTrigger.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Gameplay/GameUtils.h"
+#include "Gameplay/GameInstance.h"
 #include "Input.h"
 #include "FileSystem.h"
 #include "UI/InteractWidget.h"
@@ -32,6 +33,7 @@ void EntranceTrigger::Tick(float deltaTime)
         if (Input::GetKeyUp(Keys::Down))
         {
             //Load new world
+            GameInstance::ProgressTime();
             fileSystem.LoadWorld(levelToMoveTo);
         }
     }
