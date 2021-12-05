@@ -43,13 +43,6 @@ struct GridNode
 		closed = false;
 	}
 
-	void SetActive(bool newActive);
-
-	inline bool IsActive()
-	{
-		return active;
-	}
-
 	void Hide();
 	void Show();
 
@@ -62,7 +55,5 @@ struct GridNode
 	int yIndex = 0;
 	uint32_t instancedMeshIndex = 0;
 	bool closed = false;
-
-private:
 	bool active = true;
 };

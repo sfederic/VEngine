@@ -95,10 +95,6 @@ void BattleGrid::Start()
                     {
                         if (gridActor->isGridObstacle)
                         {
-                            //Mul by empty scale matrix to make the node invisible in-scene
-                            XMMATRIX emptyScaleMatrix = XMMatrixScaling(0.f, 0.f, 0.f);
-                            instanceData.world *= emptyScaleMatrix;
-
                             node.active = false;
                         }
                     }
@@ -106,7 +102,6 @@ void BattleGrid::Start()
             }
             else
             {
-                //Mul by empty scale matrix to make the node invisible in-scene
                 XMMATRIX emptyScaleMatrix = XMMatrixScaling(0.f, 0.f, 0.f);
                 instanceData.world *= emptyScaleMatrix;
 

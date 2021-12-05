@@ -18,13 +18,17 @@ GridActor::GridActor()
 
 void GridActor::Start()
 {
+	SetGridPosition();
+
 	if (timeOfDayComponent->CheckIfActiveAtCurrentTime())
 	{
+		auto node = GetCurrentNode();
+		node->active = true;
+		node->Show();
+
 		SetActive(false);
 		return;
 	}
-
-	SetGridPosition();
 
 	healthWidget = CreateWidget<HealthWidget>();
 	healthWidget->healthPoints = health;
@@ -32,7 +36,10 @@ void GridActor::Start()
 
 void GridActor::Tick(float deltaTime)
 {
-	healthWidget->pos = GetHomogeneousPositionVector();
+	if (healthWidget)
+	{
+		healthWidget->pos = GetHomogeneousPositionVector();
+	}
 }
 
 Properties GridActor::GetProps()
@@ -66,8 +73,9 @@ void GridActor::SetGridPosition()
 	yIndex = std::round(GetPosition().z);
 }
 
-GridNode* GridActor::GeCurrentNode()
+GridNode* GridActor::GetCurrentNode()
 {
 	auto battleGrid = GameUtils::GetBattleGrid();
 	auto node = battleGrid->GetNode(xIndex, yIndex);
+	return node;
 }

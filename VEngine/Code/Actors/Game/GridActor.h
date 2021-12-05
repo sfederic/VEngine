@@ -43,5 +43,5 @@ struct GridActor : Actor
 	void SetGridPosition();
 	
 	//returns the node the gridactor is currently on.
-	GridNode* GeCurrentNode();
+	GridNode* GetCurrentNode();
 };

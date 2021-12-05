@@ -3,13 +3,6 @@
 #include "Actors/Game/BattleGrid.h"
 #include "Components/InstanceMeshComponent.h"
 
-void GridNode::SetActive(bool newActive)
-{
-	active = newActive;
-
-	
-}
-
 void GridNode::Hide()
 {
 	auto grid = GameUtils::GetBattleGrid();
