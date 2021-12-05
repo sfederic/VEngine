@@ -13,4 +13,5 @@ struct TimeOfDayComponent : Component
 
 	TimeOfDayComponent();
 	virtual Properties GetProps() override;
+	bool CheckIfActiveAtCurrentTime();
 };
