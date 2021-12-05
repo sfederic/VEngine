@@ -1,5 +1,6 @@
 #include "AssetDock.h"
 #include <qmenu.h>
+#include <qfiledialog.h>
 #include <filesystem>
 #include <qdockwidget.h>
 #include <qfilesystemmodel.h>
@@ -203,6 +204,10 @@ void AssetDock::ShowContextMenu(const QPoint& point)
 {
     QMenu contextMenu("Context menu", this);
 
+    QAction newMapAction("New Map", this);
+    connect(&newMapAction, &QAction::triggered, this, &AssetDock::CreateNewMapFile);
+    contextMenu.addAction(&newMapAction);
+
     contextMenu.exec(mapToGlobal(point));
 }
 
@@ -234,4 +239,19 @@ void AssetDock::MeshFileClicked(const std::string meshFilename)
 void AssetDock::TextureFileClicked(const std::wstring textureFilename)
 {
     textureSystem.selectedTextureInEditor = textureFilename;
+}
+
+void AssetDock::CreateNewMapFile()
+{
+    QFileDialog dialog;
+    dialog.setFileMode(QFileDialog::AnyFile);
+
+    QString mapFile = dialog.getSaveFileName(NULL, "Create New Map File", "WorldMaps/", ".vmap");
+
+    QFile file(mapFile);
+    file.open(QIODevice::WriteOnly);
+    file.close();
+
+    //refresh asset items in dock
+    AssetFolderClicked();
 }

@@ -24,4 +24,7 @@ struct AssetDock : public QDockWidget
     void OpenAssetItemInDefaultProgram();
     void MeshFileClicked(const std::string meshFilename);
     void TextureFileClicked(const std::wstring textureFilename);
+
+    //Create asset functions
+    void CreateNewMapFile();
 };
