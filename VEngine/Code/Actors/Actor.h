@@ -30,8 +30,10 @@ struct Actor
 	int index = -1;
 	UID uid = 0;
 
+private:
 	bool active = true;
 
+public:
 	Actor();
 	XMMATRIX GetWorldMatrix();
 	void UpdateTransform(XMMATRIX parentWorld);
@@ -70,6 +72,10 @@ struct Actor
 
 	//Set Actor and all components as active/inactive. Active state sets actor components as equivalent.
 	void SetActive(bool newActive);
+	inline bool IsActive()
+	{
+		return active;
+	}
 
 	//Set Actor and components active field as opposite of what it currently is.
 	void ToggleActive();

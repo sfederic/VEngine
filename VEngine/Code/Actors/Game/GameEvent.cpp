@@ -16,7 +16,7 @@ void GameEvent::Start()
 		{
 			for (auto actor : actorsToActivate)
 			{
-				actor->active = false;
+				actor->SetActive(false);
 			}
 		}
 	}
