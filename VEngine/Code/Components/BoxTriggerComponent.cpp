@@ -6,7 +6,7 @@ BoxTriggerComponent::BoxTriggerComponent()
 {
 	//Keep in mind with triggers that you want them just slightly smaller than 1x1x1 on the grid
 	//so you're not always getting Intersects results from the bounding volumes.
-	SetScale(0.95f, 0.95f, 0.95f);
+	boundingBox.Extents = XMFLOAT3(0.9f, 0.9f, 0.9f);
 }
 
 void BoxTriggerComponent::Tick(float deltaTime)

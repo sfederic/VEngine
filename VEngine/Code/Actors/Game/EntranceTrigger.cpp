@@ -9,8 +9,6 @@
 EntranceTrigger::EntranceTrigger()
 {
     trigger = BoxTriggerComponent::system.Add(this);
-    //Set a small default extents so it doesn't overlap everything at 1x1x1
-    trigger->boundingBox.Extents = XMFLOAT3(0.9f, 0.9f, 0.9f);
     rootComponent = trigger;
 }
 
