@@ -222,10 +222,6 @@ void Player::ToggleBattleGrid()
 {
 	if (Input::GetKeyUp(Keys::Space))
 	{
-		battleSystem.StartBattle();
-
-		inCombat = !inCombat;
-
 		//toggle battlegrid
 		auto grid = GameUtils::GetGrid();
 		if (grid)
