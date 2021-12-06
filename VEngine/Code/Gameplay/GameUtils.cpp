@@ -53,12 +53,11 @@ namespace GameUtils
 	{
 		std::string path = "WorldMaps/" + worldName;
 		assert(std::filesystem::exists(path));
-		fileSystem.LoadWorld(path);
+		fileSystem.LoadWorld(worldName);
 	}
+
 	void LoadWorldAndMoveToEntranceTrigger(std::string worldName)
 	{
-		GameInstance::previousMapMovedFrom = world.worldFilename;
-
 		LoadWorld(worldName);
 
 		int matchingEntranceTriggerCount = 0;
@@ -66,15 +65,21 @@ namespace GameUtils
 		auto entranceTriggers = world.GetAllActorsOfTypeInWorld<EntranceTrigger>();
 		for (auto entrance : entranceTriggers)
 		{
-			if (entrance->levelToMoveTo == worldName)
+			if (entrance->levelToMoveTo == GameInstance::previousMapMovedFrom)
 			{
 				matchingEntranceTriggerCount++;
 
 				auto player = GameUtils::GetPlayer();
+
 				player->SetPosition(entrance->GetPosition());
+				player->nextPos = player->GetPositionVector();
+
 				player->SetRotation(entrance->GetRotationVector());
+				player->nextRot = player->GetRotationVector();
 			}
 		}
+
+		GameInstance::previousMapMovedFrom = worldName;
 
 		assert(matchingEntranceTriggerCount < 2 && "Entrances with same name");
 	}
