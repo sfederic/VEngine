@@ -35,6 +35,7 @@ void EntranceTrigger::Tick(float deltaTime)
             //Load new world
             GameInstance::ProgressTime();
             fileSystem.LoadWorld(levelToMoveTo);
+            return;
         }
     }
     else
