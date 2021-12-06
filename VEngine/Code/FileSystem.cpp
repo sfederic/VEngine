@@ -1,4 +1,5 @@
 #include "FileSystem.h"
+#include <filesystem>
 #include "World.h"
 #include "Serialiser.h"
 #include "Actors/IActorSystem.h"
@@ -35,6 +36,7 @@ void FileSystem::LoadWorld(std::string worldName)
 	world.worldFilename = worldName;
 
 	std::string path = "WorldMaps/" + worldName;
+	assert(std::filesystem::exists(path) && "Map file doesn't exist");
 
 	world.Cleanup();
 
