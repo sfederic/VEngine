@@ -21,6 +21,8 @@ LogDock::LogDock() : QDockWidget("Log")
 	logWidget->setLayout(vbLayout);
 
 	setWidget(logWidget);
+
+	setMaximumWidth(400);
 }
 
 void LogDock::Print(const std::wstring message)
