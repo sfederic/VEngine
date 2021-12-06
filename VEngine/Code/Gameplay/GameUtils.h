@@ -11,7 +11,8 @@ namespace GameUtils
 	Grid* GetGrid();
 	void PlayAudio(const std::string audioFilename);
 	void SaveGameWorldState();
+	void LoadWorld(std::string worldName);
 
-	//Make sure to just pass in the world name here, no file exensions (.sav, .vmap)
-	void LoadGameWorldState(std::string worldName);
+	//Move to matching entrance trigger with same name as exited one in loaded world.
+	void LoadWorldAndMoveToEntranceTrigger(std::string worldName);
 };

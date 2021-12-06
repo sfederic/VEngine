@@ -2,9 +2,11 @@
 #include <filesystem>
 #include "Actors/Game/Player.h"
 #include "Actors/Game/Grid.h"
+#include "Actors/Game/EntranceTrigger.h"
 #include "Audio/AudioSystem.h"
 #include "World.h"
 #include "FileSystem.h"
+#include "GameInstance.h"
 
 namespace GameUtils
 {
@@ -41,21 +43,39 @@ namespace GameUtils
 
 		auto firstOf = world.worldFilename.find_first_of(".");
 		std::string str = world.worldFilename.substr(0, firstOf);
-		std::string file = str += ".sav";
+		std::string file = str += ".vmap";
 
 		world.worldFilename = file;
 		fileSystem.WriteAllActorSystems();
 	}
 
-	void LoadGameWorldState(std::string worldName)
+	void LoadWorld(std::string worldName)
 	{
-		if (std::filesystem::exists("WorldMaps/" + worldName + ".sav"))
+		std::string path = "WorldMaps/" + worldName;
+		assert(std::filesystem::exists(path));
+		fileSystem.LoadWorld(path);
+	}
+	void LoadWorldAndMoveToEntranceTrigger(std::string worldName)
+	{
+		GameInstance::previousMapMovedFrom = world.worldFilename;
+
+		LoadWorld(worldName);
+
+		int matchingEntranceTriggerCount = 0;
+		//Set player pos and rot at entrancetrigger in loaded world with same name as previous.
+		auto entranceTriggers = world.GetAllActorsOfTypeInWorld<EntranceTrigger>();
+		for (auto entrance : entranceTriggers)
 		{
-			fileSystem.LoadWorld(worldName + ".sav");
+			if (entrance->levelToMoveTo == worldName)
+			{
+				matchingEntranceTriggerCount++;
+
+				auto player = GameUtils::GetPlayer();
+				player->SetPosition(entrance->GetPosition());
+				player->SetRotation(entrance->GetRotationVector());
+			}
 		}
-		else
-		{
-			fileSystem.LoadWorld(worldName + ".vmap");
-		}
+
+		assert(matchingEntranceTriggerCount < 2 && "Entrances with same name");
 	}
 }

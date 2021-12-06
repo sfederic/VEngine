@@ -9,6 +9,8 @@ struct GameInstance
 
 	inline static const std::string startingMap = "church_hall.vmap";
 
+	inline static std::string previousMapMovedFrom = startingMap;
+
 	static void ProgressTime();
 	static void ResetTime();
 };
