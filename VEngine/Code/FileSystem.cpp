@@ -71,8 +71,6 @@ void FileSystem::LoadWorld(std::string worldName)
 		actorSystem->Deserialise(d);
 	}
 
-	world.Start();
-
 	//Deselect any existing actors, because TransformGizmo will stay at previous positions.
 	worldEditor.pickedActor = nullptr;
 
@@ -84,6 +82,9 @@ void FileSystem::LoadWorld(std::string worldName)
 	{
 		activeCamera = GameUtils::GetPlayer()->camera;
 	}
+
+	//Make sure always after camera gets set
+	world.Start();
 
 	editor->UpdateWorldList();
 	editor->ClearProperties();
