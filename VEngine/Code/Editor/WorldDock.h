@@ -22,7 +22,12 @@ public:
 	void SelectActorInList();
 
 private:
+	//Click on list to select actor(s)
 	void ClickOnActorInList(QTreeWidgetItem* item, int column);
+
+	//navigate with arrow keys to select (single) actor
+	void ArrowSelectActorInList();
+
 	void SearchActors();
 	void ActorNameChanged(QTreeWidgetItem* item, int column);
 	void ActorListContextMenu(const QPoint& pos);

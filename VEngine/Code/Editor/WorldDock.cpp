@@ -30,6 +30,7 @@ WorldDock::WorldDock() : QDockWidget("World")
 	connect(actorTreeWidget, &QTreeWidget::customContextMenuRequested, this, &WorldDock::ActorListContextMenu);
 
 	connect(actorTreeWidget, &QTreeWidget::itemClicked, this, &WorldDock::ClickOnActorInList);
+	connect(actorTreeWidget, &QTreeWidget::itemSelectionChanged, this, &WorldDock::ArrowSelectActorInList);
 	connect(actorTreeWidget, &QTreeWidget::itemChanged, this, &WorldDock::ActorNameChanged);
 
 	//Dock Layout
@@ -100,6 +101,17 @@ void WorldDock::ClickOnActorInList(QTreeWidgetItem* item, int column)
 		}
 
 		editor->SetActorProps(clickedActor);
+	}
+}
+
+void WorldDock::ArrowSelectActorInList()
+{
+	auto items = actorTreeWidget->selectedItems();
+	if (!items.empty())
+	{
+		QString pickedActorName = items[0]->text(0);
+		auto pickedActor = world.GetActorByName(pickedActorName.toStdString());
+		worldEditor.pickedActor = pickedActor;
 	}
 }
 
