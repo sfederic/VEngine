@@ -1,5 +1,5 @@
 #include "WorldDock.h"
-#include <qtreewidget.h>
+#include "ActorTreeWidget.h"
 #include <QTreeWidgetItem>
 #include <qmenu.h>
 #include "World.h"
@@ -21,7 +21,7 @@ WorldDock::WorldDock() : QDockWidget("World")
 	connect(actorSearchBar, &QLineEdit::textChanged, this, &WorldDock::SearchActors);
 
 	//Actor Tree widget
-	actorTreeWidget = new QTreeWidget(this);
+	actorTreeWidget = new ActorTreeWidget(this);
 	actorTreeWidget->setColumnCount(1);
 	actorTreeWidget->setHeaderLabels(QStringList("Actors"));
 	actorTreeWidget->setSelectionMode(QAbstractItemView::SelectionMode::MultiSelection);

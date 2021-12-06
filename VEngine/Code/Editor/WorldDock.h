@@ -2,14 +2,14 @@
 #include <qdockwidget.h>
 #include <qabstractitemview.h>
 
-class QTreeWidget;
+class ActorTreeWidget;
 class QTreeWidgetItem;
 class QLineEdit;
 
 //Holds a list of all the actors (and their parent child relationships) currently in world
 struct WorldDock : public QDockWidget
 {
-	QTreeWidget* actorTreeWidget = nullptr;
+	ActorTreeWidget* actorTreeWidget = nullptr;
 	QLineEdit* actorSearchBar = nullptr;
 
 private:
