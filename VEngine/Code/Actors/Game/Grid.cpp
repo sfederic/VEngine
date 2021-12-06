@@ -121,7 +121,7 @@ void Grid::Awake()
 
 void Grid::Start()
 {
-    
+    SetActive(false);
 }
 
 Properties Grid::GetProps()
