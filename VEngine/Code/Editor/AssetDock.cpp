@@ -195,7 +195,7 @@ void AssetDock::AssetFolderClicked()
         }
 
         QListWidgetItem* item = new QListWidgetItem(icon, list[i]);
-        item->setSizeHint(QSize(100, 100));
+        item->setSizeHint(QSize(150, 100));
         assetIcons->addItem(item);
     }
 }
