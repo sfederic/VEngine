@@ -3,12 +3,14 @@
 
 struct Player;
 struct Grid;
+struct Actor;
 
 //Utility functions for in-game stuff
 namespace GameUtils
 {
 	Player* GetPlayer();
 	Grid* GetGrid();
+	void SetActiveCameraTarget(Actor* newTarget);
 	void PlayAudio(const std::string audioFilename);
 	void SaveGameWorldState();
 	void LoadWorld(std::string worldName);

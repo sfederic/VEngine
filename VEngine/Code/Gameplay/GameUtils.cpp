@@ -7,6 +7,7 @@
 #include "World.h"
 #include "FileSystem.h"
 #include "GameInstance.h"
+#include "Camera.h"
 
 namespace GameUtils
 {
@@ -28,6 +29,11 @@ namespace GameUtils
 		}
 
 		return nullptr;
+	}
+
+	void SetActiveCameraTarget(Actor* newTarget)
+	{
+		activeCamera->targetActor = newTarget;
 	}
 
 	void PlayAudio(const std::string audioFilename)

@@ -346,8 +346,10 @@ void Player::PrimaryAction()
 			{
 				if (!dialogueComponent->NextLine())
 				{
+					//End dialogue
 					inConversation = false;
 					nextCameraFOV = 60.f;
+					GameUtils::SetActiveCameraTarget(this);
 				}
 				else
 				{
@@ -361,10 +363,13 @@ void Player::PrimaryAction()
 				{
 					dialogueComponent = npc->dialogueComponent;
 					inConversation = true;
+
+					//start dialogue
 					dialogueComponent->ShowTextAtActor();
 
-					//Zoom camera in
+					//Camera zoom and focus
 					nextCameraFOV = 30.f;
+					GameUtils::SetActiveCameraTarget(npc);
 				}
 			}
 		}
