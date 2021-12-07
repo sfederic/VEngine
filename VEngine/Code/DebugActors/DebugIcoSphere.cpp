@@ -4,6 +4,6 @@
 DebugIcoSphere::DebugIcoSphere()
 {
 	mesh = new MeshComponent("small_ico_sphere.fbx", "test.png");
-	mesh->layer = Layer::Editor;
+	mesh->layer = CollisionLayers::Editor;
 	mesh->Create();
 }

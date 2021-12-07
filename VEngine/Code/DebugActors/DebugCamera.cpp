@@ -4,6 +4,6 @@
 DebugCamera::DebugCamera()
 {
 	mesh = new MeshComponent("camera.fbx", "test.png");
-	mesh->layer = Layer::Editor;
+	mesh->layer = CollisionLayers::Editor;
 	mesh->Create();
 }

@@ -3,17 +3,9 @@
 #include <DirectXCollision.h>
 #include "Component.h"
 #include "Transform.h"
+#include "Physics/CollisionLayers.h"
 
 using namespace DirectX;
-
-//Collision layers
-enum class Layer
-{
-	All,
-	Ignore,
-	Editor,
-	Game
-};
 
 struct SpatialComponent : Component
 {
@@ -22,7 +14,7 @@ struct SpatialComponent : Component
 	SpatialComponent* parent = nullptr;
 	std::vector<SpatialComponent*> children;
 
-	Layer layer = Layer::All;
+	CollisionLayers layer = CollisionLayers::All;
 
 	void AddChild(SpatialComponent* component);
 	XMMATRIX GetWorldMatrix();
