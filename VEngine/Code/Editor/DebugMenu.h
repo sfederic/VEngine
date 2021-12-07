@@ -6,7 +6,7 @@ struct Properties;
 
 struct DebugNotification
 {
-	DebugNotification(const wchar_t* note)
+	DebugNotification(const std::wstring note)
 	{
 		text = note;
 		timeOnScreen = 0.f;
@@ -37,7 +37,7 @@ struct DebugMenu
 	void Init();
 	void Tick(float deltaTime);
 	void Cleanup();
-	void AddNotification(const wchar_t* note);
+	void AddNotification(const std::wstring note);
 
 private:
 	void RenderNotifications(float deltaTime);

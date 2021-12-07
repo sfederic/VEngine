@@ -91,7 +91,7 @@ void DebugMenu::Cleanup()
 	ImGui::DestroyContext();
 }
 
-void DebugMenu::AddNotification(const wchar_t* note)
+void DebugMenu::AddNotification(const std::wstring note)
 {
 	debugNotifications.push_back(DebugNotification(note));
 }
