@@ -2,6 +2,7 @@
 #include <vector>
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
+#include "Physics/CollisionLayers.h"
 
 struct IActorSystem;
 struct CameraComponent;
@@ -24,6 +25,8 @@ struct Ray
 
 	std::vector<Actor*> hitActors;
 	Actor* hitActor = nullptr;
+
+	CollisionLayers layer = CollisionLayers::All;
 
 	//Cut the raycast off at this point
 	float range = 0.f;

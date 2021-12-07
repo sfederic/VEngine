@@ -1,6 +1,6 @@
 #pragma once
 
-enum class CollisionLayer
+enum class CollisionLayers
 {
 	Ignore,
 	Editor,
