@@ -38,9 +38,9 @@ AudioActor
 Player
 1
  Position
-4 0.05 1
+5 0.05 3
  Rotation
-0 0.707106 0 0.707108
+0 -1.51992e-06 0 1
  Scale
 0.999968 1 0.999968
 Casts Shadow
@@ -376,7 +376,7 @@ Entrance Active
 Extents
 0.9 0.9 0.9
 Level Name
-test.vmap
+church_room2.vmap
 Name
 Room2Trigger
 Open Text
@@ -443,11 +443,11 @@ Destruct
 File
 
 Health
-0
+3
 Interact
 1
 Interact Text
-
+The ceremony is about to begin. Fetch The Bestowed's cloth. 
 Mesh
 
 Move Points
@@ -478,7 +478,7 @@ activeEndHour
 0
 next
  Position
-1 0 0
+2 0 0
  Rotation
 -0 0 -0 1
  Scale
@@ -500,7 +500,7 @@ Health
 Interact
 1
 Interact Text
-
+Only Hands are allowed in the cremation.
 Mesh
 
 Move Points
