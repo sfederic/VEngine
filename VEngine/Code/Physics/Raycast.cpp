@@ -77,9 +77,12 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 		for (SpatialComponent* spatialComponent : actor->GetComponentsOfType<SpatialComponent>())
 		{
 			//Collision layer checks
-			if (spatialComponent->layer != ray.layer || spatialComponent->layer == CollisionLayers::Ignore)
+			if (spatialComponent->layer != CollisionLayers::All)
 			{
-				continue;
+				if (spatialComponent->layer != ray.layer || spatialComponent->layer == CollisionLayers::Ignore)
+				{
+					continue;
+				}
 			}
 
 			//Skip over triggers when not in editor
