@@ -2,6 +2,8 @@
 
 DirectionalLightComponent::DirectionalLightComponent()
 {
+    layer = CollisionLayers::Editor;
+
     lightData.lightType = (int)LightType::Directional;
 }
 

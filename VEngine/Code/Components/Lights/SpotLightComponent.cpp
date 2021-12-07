@@ -2,6 +2,8 @@
 
 SpotLightComponent::SpotLightComponent()
 {
+    layer = CollisionLayers::Editor;
+
     lightData.lightType = (int)LightType::Spot;
 }
 
