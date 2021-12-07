@@ -299,6 +299,7 @@
     <ClInclude Include="Code\Asset\MeshAssetHeader.h" />
     <ClInclude Include="Code\Gameplay\Intuition.h" />
     <ClInclude Include="Code\Particle\Particle.h" />
+    <ClInclude Include="Code\Physics\CollisionLayers.h" />
     <ClInclude Include="Code\UID.h" />
     <ClInclude Include="Code\UI\TimeOfDayWidget.h" />
     <ClInclude Include="Code\VMath.h" />

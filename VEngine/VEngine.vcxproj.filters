@@ -781,6 +781,9 @@
     <ClInclude Include="Code\Editor\ActorTreeWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Physics\CollisionLayers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
