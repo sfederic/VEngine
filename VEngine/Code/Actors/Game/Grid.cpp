@@ -67,6 +67,7 @@ void Grid::Awake()
 
             //Ignore player and units
             Ray ray(this);
+            ray.ignoreLayer = CollisionLayers::Editor;
             ray.actorsToIgnore.push_back((Actor*)GameUtils::GetPlayer());
             auto unitActors = world.GetAllActorsOfTypeAsActor<Unit>();
             ray.AddActorsToIgnore(unitActors);

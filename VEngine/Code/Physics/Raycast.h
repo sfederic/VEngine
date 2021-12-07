@@ -26,7 +26,8 @@ struct Ray
 	std::vector<Actor*> hitActors;
 	Actor* hitActor = nullptr;
 
-	CollisionLayers layer = CollisionLayers::All;
+	//Layer to ignore on raycast
+	CollisionLayers ignoreLayer = CollisionLayers::None;
 
 	//Cut the raycast off at this point
 	float range = 0.f;
