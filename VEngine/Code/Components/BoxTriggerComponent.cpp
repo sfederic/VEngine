@@ -4,6 +4,8 @@
 
 BoxTriggerComponent::BoxTriggerComponent()
 {
+	layer = CollisionLayers::Editor;
+
 	//Keep in mind with triggers that you want them just slightly smaller than 1x1x1 on the grid
 	//so you're not always getting Intersects results from the bounding volumes.
 	boundingBox.Extents = XMFLOAT3(0.9f, 0.9f, 0.9f);
