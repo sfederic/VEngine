@@ -6,12 +6,23 @@
 
 using namespace DirectX;
 
+//Collision layers
+enum class Layer
+{
+	All,
+	Ignore,
+	Editor,
+	Game
+};
+
 struct SpatialComponent : Component
 {
 	Transform transform;
 	BoundingOrientedBox boundingBox;
 	SpatialComponent* parent = nullptr;
 	std::vector<SpatialComponent*> children;
+
+	Layer layer = Layer::All;
 
 	void AddChild(SpatialComponent* component);
 	XMMATRIX GetWorldMatrix();
