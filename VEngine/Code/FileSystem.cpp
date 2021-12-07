@@ -12,6 +12,7 @@
 #include "Gameplay/GameUtils.h"
 #include "Camera.h"
 #include "Actors/Game/Player.h"
+#include "VString.h"
 
 FileSystem fileSystem;
 
@@ -28,7 +29,7 @@ void FileSystem::WriteAllActorSystems()
 		actorSystem->Serialise(s);
 	}
 
-	debugMenu.AddNotification(L"World saved.");
+	debugMenu.AddNotification(VString::wformat(L"%S world saved", world.worldFilename.c_str()));
 }
 
 void FileSystem::LoadWorld(std::string worldName)
@@ -89,7 +90,7 @@ void FileSystem::LoadWorld(std::string worldName)
 	editor->UpdateWorldList();
 	editor->ClearProperties();
 
-	debugMenu.AddNotification(L"World loaded.");
+	debugMenu.AddNotification(VString::wformat(L"%S world loaded", world.worldFilename.c_str()));
 }
 
 void FileSystem::ReloadCurrentWorld()
