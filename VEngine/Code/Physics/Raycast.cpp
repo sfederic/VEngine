@@ -149,11 +149,6 @@ bool RaycastTriangleIntersect(Ray& ray)
 
 		for (MeshComponent* mesh : actor->GetComponentsOfType<MeshComponent>())
 		{
-			if (mesh->ignoreRaycast)
-			{
-				continue;
-			}
-
 			for (int i = 0; i < mesh->meshDataProxy->vertices->size() / 3; i++)
 			{
 				MeshData::indexDataType index0 = mesh->meshDataProxy->indices->at(i * 3);

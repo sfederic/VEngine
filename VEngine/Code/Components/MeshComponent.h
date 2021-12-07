@@ -21,9 +21,6 @@ struct MeshComponent : SpatialComponent
 
 	bool castsShadow = true;
 
-	//TODO: can do bit or'd layers here later.
-	bool ignoreRaycast = false;
-
 	MeshComponent();
 	MeshComponent(const std::string filename_,
 		const std::string textureFilename_,
