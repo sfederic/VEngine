@@ -38,9 +38,9 @@ AudioActor
 Player
 1
  Position
-5 0.05 3
+3 0.05 3
  Rotation
-0 -1.51992e-06 0 1
+0 -1 0 -1.57952e-06
  Scale
 0.999968 1 0.999968
 Casts Shadow
@@ -494,13 +494,13 @@ Description
 Destruct
 1
 File
-
+testdiag
 Health
 0
 Interact
-1
+0
 Interact Text
-Only Hands are allowed in the cremation.
+
 Mesh
 
 Move Points

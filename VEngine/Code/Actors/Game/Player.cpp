@@ -222,26 +222,33 @@ void Player::ToggleBattleGrid()
 {
 	if (Input::GetKeyUp(Keys::Space))
 	{
-		//toggle battlegrid
-		auto grid = GameUtils::GetGrid();
-		if (grid)
-		{
-			grid->ToggleActive();
-		}
+		//test spawn heltitem
+		auto pickupActor = Pickup::system.SpawnActor(Transform());
+		auto pickup = dynamic_cast<Pickup*>(pickupActor);
+		auto dstPickupProps = pickup->GetAllProps();
+		Properties::CopyProperties(GameInstance::pickupProps, dstPickupProps);
+		pickup->CreateAllComponents();
 
-		//toggle all health widgets on
-		auto healthWidgets = uiSystem.GetAllWidgetsOfType<HealthWidget>();
-		for (auto healthWidget : healthWidgets)
-		{
-			if (inCombat)
-			{
-				healthWidget->AddToViewport();
-			}
-			else
-			{
-				healthWidget->RemoveFromViewport();
-			}
-		}
+		////toggle battlegrid
+		//auto grid = GameUtils::GetGrid();
+		//if (grid)
+		//{
+		//	grid->ToggleActive();
+		//}
+
+		////toggle all health widgets on
+		//auto healthWidgets = uiSystem.GetAllWidgetsOfType<HealthWidget>();
+		//for (auto healthWidget : healthWidgets)
+		//{
+		//	if (inCombat)
+		//	{
+		//		healthWidget->AddToViewport();
+		//	}
+		//	else
+		//	{
+		//		healthWidget->RemoveFromViewport();
+		//	}
+		//}
 	}
 }
 
@@ -271,6 +278,7 @@ void Player::PrimaryAction()
 				if (pickup)
 				{
 					heldItem = pickup;
+					GameInstance::pickupProps = pickup->GetAllProps();
 					pickup->AddToPlayerInventory();
 					return;
 				}

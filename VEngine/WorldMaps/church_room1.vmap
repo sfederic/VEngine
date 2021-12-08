@@ -33,6 +33,47 @@ UvScale
 next
 GridActor
 0
+Unit
+0
+Pickup
+1
+ Position
+3 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Casts Shadow
+1
+Condition
+
+Description
+
+Mesh
+small_ico_sphere.fbx
+Name
+Pickup69
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+test_floortile_texture.png
+UID
+2691020947
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+next
 AudioActor
 0
 Player
@@ -72,10 +113,6 @@ UvRotation
 UvScale
 1 1
 next
-Pickup
-0
-Unit
-0
 MeshActor
 5
  Position
