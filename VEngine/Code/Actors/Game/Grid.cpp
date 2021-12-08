@@ -6,8 +6,9 @@
 #include "Render/Renderer.h"
 #include "Physics/Raycast.h"
 #include "VMath.h"
-#include "Actors/Game/GridActor.h"
-#include "Actors/Game/Unit.h"
+#include "GridActor.h"
+#include "Unit.h"
+#include "Pickup.h"
 #include "Gameplay/GameUtils.h"
 
 Grid::Grid()
@@ -71,6 +72,8 @@ void Grid::Awake()
             ray.actorsToIgnore.push_back((Actor*)GameUtils::GetPlayer());
             auto unitActors = world.GetAllActorsOfTypeAsActor<Unit>();
             ray.AddActorsToIgnore(unitActors);
+            auto pickups = world.GetAllActorsOfTypeAsActor<Pickup>();
+            ray.AddActorsToIgnore(pickups);
 
             //raycast against the world to set node position
             if (Raycast(ray, rayOrigin, -VMath::XMVectorUp(), 20.0f))
