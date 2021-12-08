@@ -106,10 +106,10 @@ struct Properties
 
 		if (prop.info == typeid(std::string))
 		{
-			std::string* dst = (std::string*)prop.data;
-			std::string* src = (std::string*)propToCopy.data;
+			auto dst = (std::string*)prop.data;
+			auto src = (std::string*)propToCopy.data;
 
-			*dst = *src;
+			dst->assign(src->data());
 		}
 		else
 		{
@@ -125,9 +125,9 @@ struct Properties
 
 		for (int i = 0; i < src.size(); i++)
 		{
-			for (auto prop : src[i].propMap)
+			for (auto& prop : src[i].propMap)
 			{
-				std::string propname = prop.first;
+				const std::string& propname = prop.first;
 				dst[i].CopyData(propname, prop.second);
 			}
 		}
