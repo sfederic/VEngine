@@ -222,11 +222,8 @@ void Player::ToggleBattleGrid()
 {
 	if (Input::GetKeyUp(Keys::Space))
 	{
-		//test spawn heltitem
-		auto pickupActor = Pickup::system.SpawnActor(Transform());
-		auto pickup = dynamic_cast<Pickup*>(pickupActor);
-		auto dstPickupProps = pickup->GetAllProps();
-		Properties::CopyProperties(GameInstance::pickupProps, dstPickupProps);
+		auto pickup = dynamic_cast<Pickup*>(Pickup::system.SpawnActor(Transform()));
+		pickup->mesh->meshComponentData.filename = GameInstance::pickupSpawnData.meshFilename;
 		pickup->CreateAllComponents();
 
 		////toggle battlegrid
@@ -278,7 +275,8 @@ void Player::PrimaryAction()
 				if (pickup)
 				{
 					heldItem = pickup;
-					GameInstance::pickupProps = pickup->GetAllProps();
+					GameInstance::pickupSpawnData = 
+						PickupSpawnData(pickup->mesh->meshComponentData.filename);
 					pickup->AddToPlayerInventory();
 					return;
 				}

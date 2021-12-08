@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "Properties.h"
+#include "PickupSpawnData.h"
 
 //Instance holding data over the entirety of the game
 struct GameInstance
@@ -9,10 +9,9 @@ struct GameInstance
 	inline static int currentMinute;
 
 	inline static const std::string startingMap = "church_room1.vmap";
-
 	inline static std::string previousMapMovedFrom = startingMap;
 
-	inline static std::vector<Properties> pickupProps;
+	inline static PickupSpawnData pickupSpawnData;
 
 	static void ProgressTime();
 	static void ResetTime();
