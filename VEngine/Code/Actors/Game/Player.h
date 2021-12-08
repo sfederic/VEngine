@@ -62,4 +62,5 @@ private:
 	void ExpendActionPoints(int num);
 	void LerpPlayerCameraFOV(float deltaTime);
 	void CheckNextMoveNode(XMVECTOR previousPos);
+	void PlacePickupDown();
 };

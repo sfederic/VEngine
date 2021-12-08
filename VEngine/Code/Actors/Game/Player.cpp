@@ -67,6 +67,8 @@ void Player::Tick(float deltaTime)
 
 	PrimaryAction();
 
+	PlacePickupDown();
+
 	LerpPlayerCameraFOV(deltaTime);
 
 	//End turn input
@@ -222,30 +224,26 @@ void Player::ToggleBattleGrid()
 {
 	if (Input::GetKeyUp(Keys::Space))
 	{
-		auto pickup = dynamic_cast<Pickup*>(Pickup::system.SpawnActor(Transform()));
-		pickup->mesh->meshComponentData.filename = GameInstance::pickupSpawnData.meshFilename;
-		pickup->CreateAllComponents();
+		//toggle grid
+		auto grid = GameUtils::GetGrid();
+		if (grid)
+		{
+			grid->ToggleActive();
+		}
 
-		////toggle battlegrid
-		//auto grid = GameUtils::GetGrid();
-		//if (grid)
-		//{
-		//	grid->ToggleActive();
-		//}
-
-		////toggle all health widgets on
-		//auto healthWidgets = uiSystem.GetAllWidgetsOfType<HealthWidget>();
-		//for (auto healthWidget : healthWidgets)
-		//{
-		//	if (inCombat)
-		//	{
-		//		healthWidget->AddToViewport();
-		//	}
-		//	else
-		//	{
-		//		healthWidget->RemoveFromViewport();
-		//	}
-		//}
+		//toggle all health widgets on
+		auto healthWidgets = uiSystem.GetAllWidgetsOfType<HealthWidget>();
+		for (auto healthWidget : healthWidgets)
+		{
+			if (inCombat)
+			{
+				healthWidget->AddToViewport();
+			}
+			else
+			{
+				healthWidget->RemoveFromViewport();
+			}
+		}
 	}
 }
 
@@ -445,4 +443,15 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 	nextPos = XMLoadFloat3(&node->worldPosition);
 
 	ExpendActionPoints(1);
+}
+
+void Player::PlacePickupDown()
+{
+	if (Input::GetKeyUp(Keys::Up))
+	{
+		Transform transform = GetTransform();
+		auto pickup = dynamic_cast<Pickup*>(Pickup::system.SpawnActor(transform));
+		pickup->mesh->meshComponentData.filename = GameInstance::pickupSpawnData.meshFilename;
+		pickup->CreateAllComponents();
+	}
 }
