@@ -4,8 +4,7 @@
 
 Pickup::Pickup()
 {
-	mesh = MeshComponent::system.Add(this, MeshComponent("small_ico_sphere.fbx", "test.png"));
-	rootComponent = mesh;
+
 }
 
 void Pickup::AddToPlayerInventory()
