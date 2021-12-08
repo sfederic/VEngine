@@ -784,6 +784,9 @@
     <ClInclude Include="Code\Physics\CollisionLayers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Gameplay\PickupSpawnData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

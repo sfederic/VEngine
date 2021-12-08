@@ -292,6 +292,7 @@
     <ClInclude Include="Code\Gameplay\GameInstance.h" />
     <ClInclude Include="Code\Gameplay\GameplayTags.h" />
     <ClInclude Include="Code\Gameplay\GridNode.h" />
+    <ClInclude Include="Code\Gameplay\PickupSpawnData.h" />
     <ClInclude Include="Code\Input.h" />
     <ClCompile Include="Code\main.cpp" />
     <ClInclude Include="Code\Editor\RenderViewWidget.h" />
