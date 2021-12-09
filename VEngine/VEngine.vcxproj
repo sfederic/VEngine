@@ -129,6 +129,7 @@
     <ClCompile Include="Code\Editor\PropertyWidgets\StringWidget.cpp" />
     <ClCompile Include="Code\Gameplay\GameInstance.cpp" />
     <ClCompile Include="Code\Gameplay\GridNode.cpp" />
+    <ClCompile Include="Code\Gameplay\PickupSpawnData.cpp" />
     <ClCompile Include="Code\Render\PipelineObjects.cpp" />
     <ClCompile Include="Code\Render\RenderTypes.cpp" />
     <ClCompile Include="Code\System.cpp" />
@@ -197,6 +198,7 @@
     <ClCompile Include="Code\Editor\PropertyWidgets\WStringWidget.cpp" />
     <ClCompile Include="Code\Log.cpp" />
     <ClCompile Include="Code\Components\TimeComponent.cpp" />
+    <ClCompile Include="Code\UI\HeldPickupWidget.cpp" />
     <ClInclude Include="Code\Editor\ActorTreeWidget.h" />
     <ClInclude Include="Code\Gameplay\BattleSystem.h" />
     <ClInclude Include="Code\Actors\AudioActor.h" />
@@ -394,6 +396,7 @@
     <ClInclude Include="Code\Editor\PropertyWidgets\WStringWidget.h" />
     <ClInclude Include="Code\Log.h" />
     <ClInclude Include="Code\Components\TimeComponent.h" />
+    <ClInclude Include="Code\UI\HeldPickupWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
