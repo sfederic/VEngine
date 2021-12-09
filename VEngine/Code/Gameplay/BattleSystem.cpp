@@ -36,6 +36,8 @@ void BattleSystem::EndBattle()
 
 void BattleSystem::MoveToNextTurn()
 {
+	if (!player->inCombat) return;
+
 	if (currentUnitTurnIndex >= activeBattleUnits.size())
 	{
 		player->isPlayerTurn = true;
