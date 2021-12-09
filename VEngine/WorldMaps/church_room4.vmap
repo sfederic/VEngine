@@ -42,15 +42,15 @@ AudioActor
 Player
 1
  Position
-1 0.05 2
+2 0.0500009 4
  Rotation
--0 0 -0 1
+0 0.707107 0 0.707107
  Scale
 0.999983 1 0.999983
 Casts Shadow
 1
 FOV
-60
+59.9544
 Far Z
 1000
 File
@@ -258,7 +258,60 @@ UID
 3459943970
 next
 NPC
+1
+ Position
+4 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
 0
+Casts Shadow
+1
+Condition
+
+Description
+
+Destruct
+1
+File
+testdiag3
+Health
+0
+Interact
+0
+Interact Text
+
+Mesh
+
+Move Points
+1
+Move Speed
+1
+Name
+NPC0
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+test.png
+UID
+3904679652
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+3
+next
 Billboard
 0
 InteractTrigger

@@ -161,7 +161,7 @@ void Player::CreateIntuition(IntuitionComponent* intuitionComponent, std::string
 
 void Player::MovementInput(float deltaTime)
 {
-	const float moveSpeed = 5.5f;
+	const float moveSpeed = 4.75f;
 	SetPosition(VMath::VectorConstantLerp(GetPositionVector(), nextPos, deltaTime, moveSpeed));
 
 	if (XMVector4Equal(GetPositionVector(), nextPos) && XMQuaternionEqual(GetRotationVector(), nextRot))
