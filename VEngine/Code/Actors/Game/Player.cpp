@@ -18,6 +18,7 @@
 #include "UI/IntuitionMenuWidget.h"
 #include "UI/PlayerActionBarWidget.h"
 #include "UI/TimeOfDayWidget.h"
+#include "UI/HeldPickupWidget.h"
 #include "Gameplay/Intuition.h"
 #include "Gameplay/ConditionSystem.h"
 #include "Gameplay/GameInstance.h"
@@ -51,6 +52,9 @@ void Player::Start()
 	actionBarWidget->actionPoints = actionPoints;
 
 	CreateWidget<TimeOfDayWidget>()->AddToViewport();
+
+	heldPickupWidget = CreateWidget<HeldPickupWidget>();
+
 
 	nextPos = GetPositionVector();
 	nextRot = GetRotationVector();
@@ -274,6 +278,11 @@ void Player::PrimaryAction()
 				{
 					heldItem = pickup;
 					GameInstance::pickupSpawnData = PickupSpawnData(pickup);
+					
+					//Set pickup widget
+					heldPickupWidget->pickupName = heldItem->pickupName;
+					heldPickupWidget->AddToViewport();
+
 					pickup->AddToPlayerInventory();
 					return;
 				}
@@ -457,5 +466,7 @@ void Player::PlacePickupDown()
 		auto pickup = dynamic_cast<Pickup*>(Pickup::system.SpawnActor(transform));
 		pickup->mesh->meshComponentData.filename = GameInstance::pickupSpawnData.meshFilename;
 		pickup->CreateAllComponents();
+
+		heldPickupWidget->RemoveFromViewport();
 	}
 }

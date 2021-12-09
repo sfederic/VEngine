@@ -11,19 +11,23 @@ struct Pickup;
 struct InteractWidget;
 struct IntuitionMenuWidget;
 struct PlayerActionBarWidget;
+struct HeldPickupWidget;
 struct Intuition;
 
 struct Player : Actor
 {
 	ACTOR_SYSTEM(Player)
 
+	//Components
 	MeshComponent* mesh = nullptr;
 	CameraComponent* camera = nullptr;
 	DialogueComponent* dialogueComponent = nullptr;
 
+	//Widgets
 	InteractWidget* interactWidget = nullptr;
 	IntuitionMenuWidget* intuitionMenuWidget = nullptr;
 	PlayerActionBarWidget* actionBarWidget = nullptr;
+	HeldPickupWidget* heldPickupWidget = nullptr;
 
 	Pickup* heldItem = nullptr;
 
