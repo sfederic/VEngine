@@ -112,6 +112,7 @@ void WorldDock::ArrowSelectActorInList()
 		QString pickedActorName = items[0]->text(0);
 		auto pickedActor = world.GetActorByName(pickedActorName.toStdString());
 		worldEditor.pickedActor = pickedActor;
+		editor->SetActorProps(pickedActor);
 	}
 }
 
