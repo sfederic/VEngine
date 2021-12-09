@@ -10,6 +10,7 @@
 #include <qjsondocument.h>
 #include "World.h"
 #include "Actors/Actor.h"
+#include "Gameplay/ConditionSystem.h"
 
 //columns for QTreeWidget
 const int lineColumn = 0;
@@ -76,6 +77,17 @@ void DialogueDock::PopulateTreeItem(QTreeWidgetItem* item)
 	}
 
 	dialogueTree->setItemWidget(item, actorColumn, actorComboBox);
+
+	//set condition combo box from ConditionSystem functions
+	auto conditionComboBox = new QComboBox(this);
+	conditionComboBox->addItem("");
+	for (auto& condition : conditionSystem.conditions)
+	{
+		QString conditionName = QString::fromStdString(condition.first);
+		conditionComboBox->addItem(conditionName);
+	}
+
+	dialogueTree->setItemWidget(item, conditionColumn, conditionComboBox);
 }
 
 void DialogueDock::AddEmptyDialogueLine()
@@ -117,15 +129,15 @@ void DialogueDock::SaveDialogueToFile()
 		auto gotoText = (*it)->text(gotoColumn);
 
 		//Have to do a bit more to get the text from the combobox
-		QComboBox* actorComboBox = (QComboBox*)dialogueTree->itemWidget(*it, actorColumn);
+		auto actorComboBox = (QComboBox*)dialogueTree->itemWidget(*it, actorColumn);
+		auto conditionComboBox = (QComboBox*)dialogueTree->itemWidget(*it, conditionColumn);
 
-		auto conditionText = (*it)->text(conditionColumn);
 		auto text = (*it)->text(textColumn);
 
 		os << lineText.toStdString() << "\n";
 		os << gotoText.toStdString() << "\n";
 		os << actorComboBox->currentText().toStdString() << "\n";
-		os << conditionText.toStdString() << "\n";
+		os << conditionComboBox->currentText().toStdString() << "\n";
 		os << text.toStdString() << "\n";
 
 		it++;
@@ -181,17 +193,28 @@ void DialogueDock::LoadDialogueFile()
 
 		item->setText(lineColumn, QString::fromStdString(lineText));
 		item->setText(gotoColumn, QString::fromStdString(gotoText));
-		item->setText(conditionColumn, QString::fromStdString(conditionText));
 		item->setText(textColumn, QString::fromStdString(text));
 
-		//Find the matching existing entry in the combobox and set it per the index
-		QComboBox* actorComboBox = (QComboBox*)dialogueTree->itemWidget(item, actorColumn);
+		{
+			//Actor combobox
+			//Find the matching existing entry in the combobox and set it per the index
+			auto actorComboBox = (QComboBox*)dialogueTree->itemWidget(item, actorColumn);
 
-		//findText() returns -1 if nothing is found and will place an empty entry in the combobox.
-		//Have to be careful here on the findText() as well. QStrings work a bit funny with '\n' and '\r' I'm guessing.
-		QString actorStr = QString::fromStdString(actorText);
-		int foundComboEntryIndex = actorComboBox->findText(actorStr);
-		actorComboBox->setCurrentIndex(foundComboEntryIndex);
+			//findText() returns -1 if nothing is found and will place an empty entry in the combobox.
+			//Have to be careful here on the findText() as well. QStrings work a bit funny with '\n' and '\r' I'm guessing.
+			QString actorStr = QString::fromStdString(actorText);
+			int foundActorComboEntryIndex = actorComboBox->findText(actorStr);
+			actorComboBox->setCurrentIndex(foundActorComboEntryIndex);
+		}
+
+		//Condition combobox
+		{
+			auto conditionComboBox = (QComboBox*)dialogueTree->itemWidget(item, conditionColumn);
+
+			QString conditionStr = QString::fromStdString(conditionText);
+			int foundConditionComboEntryIndex = conditionComboBox->findText(conditionStr);
+			conditionComboBox->setCurrentIndex(foundConditionComboEntryIndex);
+		}
 	}
 
 	is.close();

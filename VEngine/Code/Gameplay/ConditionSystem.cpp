@@ -3,6 +3,7 @@
 
 ConditionSystem conditionSystem;
 
+//Global Condition functions
 bool TestConditionFunction()
 {
 	return true;
