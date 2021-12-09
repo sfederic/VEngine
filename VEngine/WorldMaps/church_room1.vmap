@@ -36,7 +36,7 @@ GridActor
 Unit
 0
 Pickup
-1
+2
  Position
 3 0 4
  Rotation
@@ -51,10 +51,20 @@ Condition
 
 Description
 
+Destruct
+1
+Health
+0
+Interact
+1
+Interact Text
+
 Mesh
 small_ico_sphere.fbx
 Name
 Pickup69
+Obstacle
+1
 Rast State
 solid
 Shader
@@ -73,17 +83,68 @@ activeBeginHour
 0
 activeEndHour
 0
+pickupName
+
+next
+ Position
+2 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Casts Shadow
+1
+Condition
+
+Description
+
+Destruct
+1
+Health
+0
+Interact
+1
+Interact Text
+
+Mesh
+shield.fbx
+Name
+Pickup1
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+test_floortile_texture.png
+UID
+2691020947
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+pickupName
+Shield
 next
 AudioActor
 0
 Player
 1
  Position
-2 0.049999 1
+2 0 1
  Rotation
 0 0.707107 0 -0.707107
  Scale
-0.999983 1 0.999983
+0.999984 1 0.999984
 Casts Shadow
 1
 FOV
@@ -120,7 +181,7 @@ MeshActor
  Rotation
 0.707107 0 0 -0.707107
  Scale
-3 2.99997 0.999993
+3 2.99997 0.999994
 Casts Shadow
 1
 Mesh
