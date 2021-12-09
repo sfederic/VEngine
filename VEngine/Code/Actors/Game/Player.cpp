@@ -450,6 +450,11 @@ void Player::PlacePickupDown()
 	if (Input::GetKeyUp(Keys::Up))
 	{
 		Transform transform = GetTransform();
+		auto forwardVector = GetForwardVector();
+		transform.position.x += forwardVector.x;
+		transform.position.y += forwardVector.y;
+		transform.position.z += forwardVector.z;
+
 		auto pickup = dynamic_cast<Pickup*>(Pickup::system.SpawnActor(transform));
 		pickup->mesh->meshComponentData.filename = GameInstance::pickupSpawnData.meshFilename;
 		pickup->CreateAllComponents();
