@@ -34,11 +34,9 @@ DialogueDock::DialogueDock() : QDockWidget("Dialogue")
 	connect(deleteLineButton, &QPushButton::clicked, this, &DialogueDock::DeleteLine);
 
 	auto saveButton = new QPushButton("Save");
-	saveButton->setFixedWidth(50);
 	connect(saveButton, &QPushButton::clicked, this, &DialogueDock::SaveDialogueToFile);
 
 	auto loadButton = new QPushButton("Load");
-	loadButton->setFixedWidth(50);
 	connect(loadButton, &QPushButton::clicked, this, &DialogueDock::LoadDialogueFile);
 
 	//BUTTONS HORIZONTAL LAYOUT
