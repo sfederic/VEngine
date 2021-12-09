@@ -12,7 +12,7 @@ void CommandSystem::Tick()
 		{
 			Undo();
 		}
-		else if (Input::GetKeyUp(Keys::X))
+		else if (Input::GetKeyUp(Keys::R))
 		{
 			Redo();
 		}
