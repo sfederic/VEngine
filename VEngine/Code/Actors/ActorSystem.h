@@ -149,7 +149,7 @@ struct ActorSystem : IActorSystem
 	virtual Actor* SpawnActor(Transform transform) override
 	{
 		Actor* actor = (Actor*)Add(T(), transform);
-		//actor->CreateAllComponents();
+		editor->AddActorToWorldList(actor);
 		return actor;
 	}
 

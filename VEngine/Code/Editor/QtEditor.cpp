@@ -82,6 +82,16 @@ void QtEditor::UpdateWorldList()
     mainWindow->systemDock->PopulateSystemLists();
 }
 
+void QtEditor::AddActorToWorldList(Actor* actor)
+{
+    mainWindow->worldDock->AddActorToList(actor);
+}
+
+void QtEditor::RemoveActorFromWorldList(Actor* actor)
+{
+    mainWindow->worldDock->RemoveActorFromList(actor);
+}
+
 void QtEditor::RefreshAssetList()
 {
     mainWindow->assetDock->AssetFolderClicked();

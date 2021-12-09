@@ -10,6 +10,8 @@ struct Win32Editor : IEditor
 	virtual void Log(const std::string logMessage) override;
 	virtual void SetActorProps(Actor* actor) override;
 	virtual void UpdateWorldList() override;
+	virtual void AddActorToWorldList(Actor* actor) override;
+	virtual void RemoveActorFromWorldList(Actor* actor) override;
 	virtual void RefreshAssetList() override;
 	virtual void ClearProperties() override;
 	virtual void SelectActorInWorldList() override;

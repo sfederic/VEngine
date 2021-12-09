@@ -100,6 +100,8 @@ void WorldEditor::DeleteActor()
 	{
 		if (Input::GetKeyUp(Keys::Delete))
 		{
+			editor->RemoveActorFromWorldList(nullptr);
+
 			if (pickedActors.size() > 1)
 			{
 				//Destroy all multiple picked actors
@@ -116,7 +118,6 @@ void WorldEditor::DeleteActor()
 			pickedActors.clear();
 			pickedActor = nullptr;
 
-			editor->UpdateWorldList();
 			editor->ClearProperties();
 		}
 	}

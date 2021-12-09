@@ -5,6 +5,7 @@
 class ActorTreeWidget;
 class QTreeWidgetItem;
 class QLineEdit;
+struct Actor;
 
 //Holds a list of all the actors (and their parent child relationships) currently in world
 struct WorldDock : public QDockWidget
@@ -20,6 +21,8 @@ public:
 	void Tick();
 	void PopulateWorldActorList();
 	void SelectActorInList();
+	void AddActorToList(Actor* actor);
+	void RemoveActorFromList(Actor* actor);
 
 private:
 	//Click on list to select actor(s)

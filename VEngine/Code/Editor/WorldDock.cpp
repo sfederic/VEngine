@@ -166,6 +166,43 @@ void WorldDock::SelectActorInList()
 	}
 }
 
+void WorldDock::AddActorToList(Actor* actor)
+{
+	actorTreeWidget->blockSignals(true);
+
+	auto item = new QTreeWidgetItem(actorTreeWidget);
+	item->setText(0, QString::fromStdString(actor->name));
+	item->setFlags(item->flags() | Qt::ItemIsEditable);
+
+	world.actorNameMap.emplace(actor->name, actor);
+	world.actorUIDMap.emplace(actor->uid, actor);
+
+	actorTreeWidget->blockSignals(false);
+}
+
+void WorldDock::RemoveActorFromList(Actor* actor)
+{
+	actorTreeWidget->blockSignals(true);
+
+	QList<QTreeWidgetItem*> foundItems;
+	for (auto actor : worldEditor.pickedActors)
+	{
+		std::string actorName = actor->name;
+		foundItems = actorTreeWidget->findItems(QString::fromStdString(actorName), Qt::MatchExactly);
+		assert(foundItems.size() == 1);
+
+		world.actorNameMap.erase(actor->name);
+		world.actorUIDMap.erase(actor->uid);
+	}
+
+	for (auto item : foundItems)
+	{
+		actorTreeWidget->removeItemWidget(item, 0);
+	}
+
+	actorTreeWidget->blockSignals(false);
+}
+
 //This is only working for single columns in the tree. If showing actor parenting through this list 
 //later on, need to change this too in the item->text(int column) below.
 void WorldDock::SearchActors()
