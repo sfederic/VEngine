@@ -7,6 +7,8 @@ struct Pickup : GridActor
 {
 	ACTOR_SYSTEM(Pickup);
 
+	std::string pickupName;
+
 	Pickup();
 	void AddToPlayerInventory();
 	virtual Properties GetProps() override;

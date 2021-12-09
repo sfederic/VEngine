@@ -14,5 +14,7 @@ void Pickup::AddToPlayerInventory()
 
 Properties Pickup::GetProps()
 {
-	return Actor::GetProps();
+	auto props = __super::GetProps();
+	props.AddProp(pickupName);
+	return props;
 }
