@@ -273,8 +273,7 @@ void Player::PrimaryAction()
 				if (pickup)
 				{
 					heldItem = pickup;
-					GameInstance::pickupSpawnData = 
-						PickupSpawnData(pickup->mesh->meshComponentData.filename);
+					GameInstance::pickupSpawnData = PickupSpawnData(pickup);
 					pickup->AddToPlayerInventory();
 					return;
 				}
