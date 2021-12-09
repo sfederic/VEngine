@@ -13,6 +13,7 @@
 #include "Camera.h"
 #include "Actors/Game/Player.h"
 #include "VString.h"
+#include "Input.h"
 
 FileSystem fileSystem;
 
@@ -77,6 +78,9 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	//Clear all commands
 	commandSystem.commands.clear();
+
+	//Clear input as well (can carry over to new levels if not cleared)
+	Input::Reset();
 
 	//Set player camera on world change as active if in-gameplay
 	if (Core::gameplayOn)
