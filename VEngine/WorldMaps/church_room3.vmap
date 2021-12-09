@@ -122,7 +122,7 @@ solid
 Shader
 DefaultShader.hlsl
 Texture
-floor.jpg
+wall02.png
 UID
 3696897037
 UvOffset
@@ -149,7 +149,7 @@ solid
 Shader
 DefaultShader.hlsl
 Texture
-test_atlas.png
+wall.png
 UID
 3696897037
 UvOffset
@@ -176,7 +176,7 @@ solid
 Shader
 DefaultShader.hlsl
 Texture
-wall04.png
+wall.png
 UID
 3696897037
 UvOffset
@@ -203,7 +203,7 @@ solid
 Shader
 DefaultShader.hlsl
 Texture
-wall03.png
+wall.png
 UID
 3696897037
 UvOffset
