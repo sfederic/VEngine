@@ -19,5 +19,6 @@ private:
 	QDoubleSpinBox* xSpinbox;
 	QDoubleSpinBox* ySpinbox;
 	QDoubleSpinBox* zSpinbox;
+	QDoubleSpinBox* wSpinbox;
 	XMVECTOR* _vector;
 };

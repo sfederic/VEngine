@@ -9,22 +9,28 @@ VectorWidget::VectorWidget(XMVECTOR* vector, QWidget* parent)
 	xSpinbox = new QDoubleSpinBox();
 	ySpinbox = new QDoubleSpinBox();
 	zSpinbox = new QDoubleSpinBox();
+	wSpinbox = new QDoubleSpinBox();
 
 	connect(xSpinbox, &QDoubleSpinBox::editingFinished, this, &VectorWidget::SetValue);
 	connect(ySpinbox, &QDoubleSpinBox::editingFinished, this, &VectorWidget::SetValue);
 	connect(zSpinbox, &QDoubleSpinBox::editingFinished, this, &VectorWidget::SetValue);
+	connect(wSpinbox, &QDoubleSpinBox::editingFinished, this, &VectorWidget::SetValue);
 
 	auto hLayout = new QHBoxLayout();
 	hLayout->addWidget(xSpinbox);
 	hLayout->addWidget(ySpinbox);
 	hLayout->addWidget(zSpinbox);
+	hLayout->addWidget(wSpinbox);
 
 	setLayout(hLayout);
 }
 
 void VectorWidget::SetValue()
 {
-	XMVECTOR newVector = XMVectorSet((float)xSpinbox->value(), (float)ySpinbox->value(), (float)zSpinbox->value(), 0.f);
+	XMVECTOR newVector = XMVectorSet(static_cast<float>(xSpinbox->value()),
+		static_cast<float>(ySpinbox->value()),
+		static_cast<float>(zSpinbox->value()),
+		static_cast<float>(wSpinbox->value()));
 	*_vector = newVector;
 }
 
@@ -33,4 +39,5 @@ void VectorWidget::ResetValue()
 	xSpinbox->setValue(_vector->m128_f32[0]);
 	ySpinbox->setValue(_vector->m128_f32[1]);
 	zSpinbox->setValue(_vector->m128_f32[2]);
+	wSpinbox->setValue(_vector->m128_f32[3]);
 }
