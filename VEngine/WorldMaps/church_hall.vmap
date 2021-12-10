@@ -42,9 +42,9 @@ AudioActor
 Player
 1
  Position
-5 0.05 4
+6 0.05 0
  Rotation
-0 1.66893e-06 0 -1
+0 1 0 1.78814e-06
  Scale
 0.999968 1 0.999968
 Casts Shadow
@@ -77,7 +77,7 @@ UvScale
 1 1
 next
 MeshActor
-9
+14
  Position
 4 -0.5 4
  Rotation
@@ -89,7 +89,7 @@ Casts Shadow
 Mesh
 plane.fbx
 Name
-plane0
+ground
 Rast State
 solid
 Shader
@@ -272,7 +272,7 @@ next
  Rotation
 -0 -3.7749e-08 -0 1
  Scale
-4.49996 1.25 0.999994
+5 1.25 1
 Casts Shadow
 1
 Mesh
@@ -314,6 +314,141 @@ Texture
 floor.jpg
 UID
 2614800449
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+4 0.5 -0.9
+ Rotation
+0 0 1 7.94663e-09
+ Scale
+0.999996 0.999996 1
+Casts Shadow
+1
+Mesh
+plane.fbx
+Name
+MainDoor
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+test_door_texture.png
+UID
+2114406910
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+8.9 0.5 1
+ Rotation
+0.707107 5.61917e-09 -0.707107 -5.61917e-09
+ Scale
+0.75 1 1
+Casts Shadow
+1
+Mesh
+plane.fbx
+Name
+Door3
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+test_door_texture.png
+UID
+2114406910
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+8.9 0.5 4
+ Rotation
+0.707107 5.61922e-09 -0.707107 -5.61922e-09
+ Scale
+0.75 1 1
+Casts Shadow
+1
+Mesh
+plane.fbx
+Name
+Door4
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+test_door_texture.png
+UID
+2114406910
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+-0.860309 0.5 3.95374
+ Rotation
+0.707107 5.61928e-09 0.707107 5.61949e-09
+ Scale
+0.75 1 0.960001
+Casts Shadow
+1
+Mesh
+plane.fbx
+Name
+Door2
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+test_door_texture.png
+UID
+2114406910
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+-0.9 0.5 1
+ Rotation
+0.707107 5.61928e-09 0.707107 5.61947e-09
+ Scale
+0.5 1 1
+Casts Shadow
+1
+Mesh
+plane.fbx
+Name
+Door1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+test_door_texture.png
+UID
+2114406910
 UvOffset
 0 0
 UvRotation
