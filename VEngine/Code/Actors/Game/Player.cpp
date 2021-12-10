@@ -75,6 +75,8 @@ void Player::Tick(float deltaTime)
 
 	LerpPlayerCameraFOV(deltaTime);
 
+	dialogueComponent->SetPosition(GetHomogeneousPositionVector());
+
 	//End turn input
 	if (Input::GetKeyUp(Keys::Enter))
 	{
