@@ -3,6 +3,7 @@
 #include "Components/WidgetComponent.h"
 #include "UI/DialogueWidget.h"
 #include "Log.h"
+#include "Gameplay/GameUtils.h"
 
 void DialogueComponent::Tick(float deltaTime)
 {
@@ -64,6 +65,9 @@ void DialogueComponent::ShowTextAtActor()
     }
 
     Actor* actor = world.GetActorByName(dataIt->second.actorName);
+
+    GameUtils::SetActiveCameraTarget(actor);
+
     auto dcs = actor->GetComponentsOfType<DialogueComponent>();
     for (auto* d : dcs)
     {

@@ -9,13 +9,15 @@
 #include "VMath.h"
 #include "Render/Renderer.h"
 #include "World.h"
+#include "Core.h"
 
-CameraComponent editorCamera(XMFLOAT3(0.f, 2.f, -5.f), true);
+CameraComponent editorCamera(XMFLOAT3(0.f, 0.f, 0.f), true);
 CameraComponent* activeCamera;
 
 CameraComponent::CameraComponent(XMFLOAT3 startPos, bool isEditorCamera)
 {
 	focusPoint = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	nextFocusPoint = focusPoint;
 
 	transform.position = startPos;
 	UpdateTransform();
@@ -33,10 +35,16 @@ XMMATRIX CameraComponent::GetViewMatrix()
 	//Player camera logic
 	if (!editorCamera)
 	{
-		if (targetActor)
+		if (targetActor && !XMVector4Equal(focusPoint, nextFocusPoint))
+		{
+			nextFocusPoint = targetActor->GetPositionVector();
+			focusPoint = XMVectorLerp(focusPoint, nextFocusPoint, Core::GetDeltaTime() * 0.5f);
+		}
+		else if(targetActor && XMVector4Equal(focusPoint, nextFocusPoint))
 		{
 			focusPoint = targetActor->GetPositionVector();
 		}
+
 		view = XMMatrixLookAtLH(transform.world.r[3], focusPoint, VMath::XMVectorUp());
 	}
 	else

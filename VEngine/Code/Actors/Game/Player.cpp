@@ -361,6 +361,7 @@ void Player::PrimaryAction()
 					//End dialogue
 					inConversation = false;
 					nextCameraFOV = 60.f;
+					GameUtils::SetActiveCameraTarget(this);
 				}
 				else
 				{
@@ -380,6 +381,7 @@ void Player::PrimaryAction()
 
 					//Camera zoom and focus
 					nextCameraFOV = 30.f;
+					GameUtils::SetActiveCameraTarget(npc);
 				}
 			}
 		}
