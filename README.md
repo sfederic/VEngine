@@ -21,3 +21,5 @@ Qt ver. 5.15.0 - https://download.qt.io/official_releases/qt/5.15/
 The ImGui libs are already included in the repo\
 Dear ImGui - https://github.com/ocornut/imgui
 ImGuizmo - https://github.com/CedricGuillemet/ImGuizmo
+
+![image](https://user-images.githubusercontent.com/45758254/145655495-ab439625-8afd-4868-9dbe-98c0afdd10d1.png)
