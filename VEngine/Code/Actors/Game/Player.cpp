@@ -446,6 +446,7 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 	auto node = grid->GetNode(nextXIndex, nextYIndex);
 	if (node->worldPosition.y > (GetPosition().y + Grid::maxHeightMove))
 	{
+		Log("Node [x:%d, y:%d] too high to move to.", nextXIndex, nextYIndex);
 		nextPos = previousPos;
 		return;
 	}
