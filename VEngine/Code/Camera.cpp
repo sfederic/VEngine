@@ -17,7 +17,6 @@ CameraComponent* activeCamera;
 CameraComponent::CameraComponent(XMFLOAT3 startPos, bool isEditorCamera)
 {
 	focusPoint = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-	nextFocusPoint = focusPoint;
 
 	transform.position = startPos;
 	UpdateTransform();
@@ -35,12 +34,7 @@ XMMATRIX CameraComponent::GetViewMatrix()
 	//Player camera logic
 	if (!editorCamera)
 	{
-		if (targetActor && !XMVector4Equal(focusPoint, nextFocusPoint))
-		{
-			nextFocusPoint = targetActor->GetPositionVector();
-			focusPoint = XMVectorLerp(focusPoint, nextFocusPoint, Core::GetDeltaTime() * 0.5f);
-		}
-		else if(targetActor && XMVector4Equal(focusPoint, nextFocusPoint))
+		if (targetActor)
 		{
 			focusPoint = targetActor->GetPositionVector();
 		}

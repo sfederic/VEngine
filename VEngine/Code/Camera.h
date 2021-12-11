@@ -11,7 +11,6 @@ struct CameraComponent : SpatialComponent
 {
 	COMPONENT_SYSTEM(CameraComponent)
 
-	XMVECTOR nextFocusPoint;
 	XMVECTOR focusPoint;
 
 	Actor* targetActor = nullptr;
