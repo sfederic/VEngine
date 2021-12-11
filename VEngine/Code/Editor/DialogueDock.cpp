@@ -118,6 +118,7 @@ void DialogueDock::SaveDialogueToFile()
 {
 	QFileDialog saveDialog;
 	QString saveName = saveDialog.getSaveFileName(this, "Save Dialogue", "Dialogues/");
+	if (saveName.isEmpty()) return;
 
 	std::ofstream os;
 	os.open(saveName.toStdString(), std::ios_base::out);
@@ -150,6 +151,7 @@ void DialogueDock::LoadDialogueFile()
 {
 	QFileDialog loadDialog;
 	QString loadName = loadDialog.getOpenFileName(this, "Open Dialogue", "Dialogues/");
+	if (loadName.isEmpty()) return;
 
 	std::ifstream is;
 	is.open(loadName.toStdString(), std::ios_base::in);
