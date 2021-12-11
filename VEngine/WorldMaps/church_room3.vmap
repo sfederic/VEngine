@@ -77,7 +77,7 @@ UvScale
 1 1
 next
 MeshActor
-5
+8
  Position
 2 -0.5 2
  Rotation
@@ -206,6 +206,87 @@ Texture
 wall.png
 UID
 3696897037
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+4 -0.25 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 0.5 1
+Casts Shadow
+1
+Mesh
+cube.fbx
+Name
+cube5
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+wall (2).png
+UID
+3756286954
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+2 0.75 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 0.5 1
+Casts Shadow
+1
+Mesh
+cube.fbx
+Name
+MeshActor6
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+wall (2).png
+UID
+3756286954
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+3 0.25 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 0.5 1
+Casts Shadow
+1
+Mesh
+cube.fbx
+Name
+cube7
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+wall (2).png
+UID
+3756286954
 UvOffset
 0 0
 UvRotation
