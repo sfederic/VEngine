@@ -135,18 +135,6 @@ namespace VMath
             fabsf(v1.m128_f32[2] - v2.m128_f32[2]) <= epsilon;
     }
 
-    //bool VecEqual(XMVECTOR v1, XMVECTOR v2, float epsilon)
-    //{
-    //    XMVECTOR v = XMVectorZero();
-    //    v = DirectX::XMVectorEqual(v1, v2);
-    //    if (v.m128_f32[0] > 0)
-    //    {
-    //        return true;
-    //    }
-
-    //    return false;
-    //}
-
     bool Float3Equal(XMFLOAT3& f1, XMFLOAT3& f2)
     {
         if (f1.x == f2.x && f1.y == f2.y && f1.z == f2.z)
