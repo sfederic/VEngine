@@ -18,6 +18,9 @@ private:
 	int currentUnitTurnIndex = 0;
 
 public:
+
+	bool isBattleActive = false;
+
 	BattleSystem();
 	void StartBattle();
 	void EndBattle();

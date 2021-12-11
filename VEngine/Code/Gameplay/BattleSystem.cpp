@@ -4,6 +4,7 @@
 #include "Actors/Game/Player.h"
 #include "Actors/Game/Grid.h"
 #include "Gameplay/GameUtils.h"
+#include "Log.h"
 
 BattleSystem battleSystem;
 
@@ -13,8 +14,13 @@ BattleSystem::BattleSystem() : System("BattleSystem")
 
 void BattleSystem::StartBattle()
 {
-	grid = GameUtils::GetGrid();
+	if (isBattleActive) return;
 
+	Log("Battle started.");
+
+	isBattleActive = true;
+
+	grid = GameUtils::GetGrid();
 	player = GameUtils::GetPlayer();
 
 	activeBattleUnits = world.GetAllActorsOfTypeInWorld<Unit>();
@@ -28,6 +34,10 @@ void BattleSystem::EndBattle()
 {
 	player->inCombat = false;
 
+	Log("Battle ended.");
+
+	isBattleActive = false;
+
 	grid = nullptr;
 	player = nullptr;
 	activeBattleUnits.clear();
@@ -36,15 +46,17 @@ void BattleSystem::EndBattle()
 
 void BattleSystem::MoveToNextTurn()
 {
-	if (!player->inCombat) return;
+	if (!isBattleActive) return;
 
 	if (currentUnitTurnIndex >= activeBattleUnits.size())
 	{
+		Log("Players turn");
 		player->isPlayerTurn = true;
 		currentUnitTurnIndex = 0;
 		return;
 	}
 
+	Log("Unit [%s] turn.", activeBattleUnits[currentUnitTurnIndex]->name.c_str());
 	activeBattleUnits[currentUnitTurnIndex]->StartTurn();
 	currentUnitTurnIndex++;
 }
