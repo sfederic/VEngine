@@ -3,7 +3,9 @@
 
 struct FileSystem
 {
+	//Essentially is SaveWorld()
 	void WriteAllActorSystems();
+
 	void LoadWorld(std::string worldName);
 	void ReloadCurrentWorld();
 

@@ -14,6 +14,7 @@
 #include "Actors/Game/Player.h"
 #include "VString.h"
 #include "Input.h"
+#include "Gameplay/GameInstance.h"
 
 FileSystem fileSystem;
 
@@ -21,7 +22,13 @@ void FileSystem::WriteAllActorSystems()
 {
 	auto lastOf = world.worldFilename.find_last_of("/\\");
 	std::string str = world.worldFilename.substr(lastOf + 1);
+
 	std::string file = "WorldMaps/" + str;
+
+	if (GameInstance::useGameSaves)
+	{
+		file = "GameSaves/" + str;
+	}
 
 	Serialiser s(file, OpenMode::Out);
 
@@ -38,6 +45,12 @@ void FileSystem::LoadWorld(std::string worldName)
 	world.worldFilename = worldName;
 
 	std::string path = "WorldMaps/" + worldName;
+
+	if (GameInstance::useGameSaves)
+	{
+		path = "GameSaves/" + worldName;
+	}
+
 	assert(std::filesystem::exists(path) && "Map file doesn't exist");
 
 	world.Cleanup();

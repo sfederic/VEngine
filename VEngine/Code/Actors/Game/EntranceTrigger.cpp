@@ -34,6 +34,12 @@ void EntranceTrigger::Tick(float deltaTime)
         {
             //Load new world
             GameInstance::ProgressTime();
+
+            if (GameInstance::useGameSaves)
+            {
+                fileSystem.WriteAllActorSystems();
+            }
+
             GameUtils::LoadWorldAndMoveToEntranceTrigger(levelToMoveTo);
             return;
         }
