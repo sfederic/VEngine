@@ -5,6 +5,7 @@
 
 AudioComponent::AudioComponent()
 {
+    layer = CollisionLayers::None;
 }
 
 void AudioComponent::Tick(float deltaTime)
