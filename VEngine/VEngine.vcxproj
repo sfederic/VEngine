@@ -199,6 +199,7 @@
     <ClCompile Include="Code\Log.cpp" />
     <ClCompile Include="Code\Components\TimeComponent.cpp" />
     <ClCompile Include="Code\UI\HeldPickupWidget.cpp" />
+    <ClCompile Include="Code\UI\GuardWidget.cpp" />
     <ClInclude Include="Code\Editor\ActorTreeWidget.h" />
     <ClInclude Include="Code\Gameplay\BattleSystem.h" />
     <ClInclude Include="Code\Actors\AudioActor.h" />
@@ -397,6 +398,7 @@
     <ClInclude Include="Code\Log.h" />
     <ClInclude Include="Code\Components\TimeComponent.h" />
     <ClInclude Include="Code\UI\HeldPickupWidget.h" />
+    <ClInclude Include="Code\UI\GuardWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
