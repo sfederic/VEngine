@@ -5,16 +5,20 @@
 
 void GridNode::Hide()
 {
+	active = false;
+
 	auto grid = GameUtils::GetGrid();
 	auto& meshInstanceData = grid->nodeMesh->instanceData[instancedMeshIndex];
 
-	//Mul by empty scale matrix to make the node invisible in scene
-	XMMATRIX emptyScaleMatrix = XMMatrixScaling(0.f, 0.f, 0.f);
-	meshInstanceData.world *= emptyScaleMatrix;
+	meshInstanceData.world.r[0].m128_f32[0] = 0.f;
+	meshInstanceData.world.r[1].m128_f32[1] = 0.f;
+	meshInstanceData.world.r[2].m128_f32[2] = 0.f;
 }
 
 void GridNode::Show()
 {	
+	active = true;
+
 	auto grid = GameUtils::GetGrid();
 	auto& meshInstanceData = grid->nodeMesh->instanceData[instancedMeshIndex];
 
