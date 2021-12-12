@@ -1,9 +1,11 @@
 #include "AssetSystem.h"
 #include <cstdio>
+#include <filesystem>
 #include "FBXImporter.h"
 #include "MeshAssetHeader.h"
 #include "Profile.h"
 #include "Log.h"
+#include "FileSystem.h"
 
 AssetSystem assetSystem;
 
@@ -69,4 +71,13 @@ void AssetSystem::ReadAllMeshAssetsFromFile()
 	fread(data.indices.data(), sizeof(MeshData::indexDataType), header.indexCount, file);
 
 	return;
+}
+
+void AssetSystem::BuildAllGameplayMapFiles()
+{
+	for (auto const& dirEntry : std::filesystem::recursive_directory_iterator{ "WorldMaps" })
+	{
+		std::string file = dirEntry.path().filename().string();
+		fileSystem.CreateGameplayWorldSave(file);
+	}
 }
