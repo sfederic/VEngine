@@ -22,7 +22,7 @@ float4 PSMain(VS_OUT i) : SV_Target
 	float3 lightDir = float3(0.15f, -0.13f, 0.8f);
 	float diffuse = dot(-lightDir, i.normal);
 
-	float4 baseAmbience = float4(1.5f, 0.5f, 0.5f, 1.f);
+	float4 baseAmbience = float4(0.07f, 0.27f, 0.89f, 0.4f);
 
 	float4 finalColour = baseAmbience + diffuse;
 	return finalColour;

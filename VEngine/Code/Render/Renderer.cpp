@@ -248,7 +248,7 @@ void Renderer::CreateBlendStates()
 		D3D11_BLEND_DESC alphaToCoverageDesc = {};
 		//MSAA has to be set for AlphaToCoverage to work.
 		//alphaToCoverageDesc.AlphaToCoverageEnable = true;
-		alphaToCoverageDesc.RenderTarget[0].BlendEnable = false;
+		alphaToCoverageDesc.RenderTarget[0].BlendEnable = true;
 		alphaToCoverageDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
 		alphaToCoverageDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
 		alphaToCoverageDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
@@ -436,7 +436,7 @@ void Renderer::RenderMeshComponents()
 
 void Renderer::RenderInstanceMeshComponents()
 {
-	//TODO: shadows aren't done yet for instancemeshes
+	//@Todo: shadows aren't done yet for instancemeshes
 
 	PROFILE_START
 
@@ -447,6 +447,9 @@ void Renderer::RenderInstanceMeshComponents()
 
 	context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 	context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+
+	const float factor[4] = { 0.f };
+	context->OMSetBlendState(blendStateMap.find("default")->second->data, factor, 0xFFFFFFFF);
 
 	for (InstanceMeshComponent* instanceMesh : InstanceMeshComponent::system.components)
 	{
