@@ -5,21 +5,21 @@
 
 struct InstanceMeshComponent;
 
-struct GridRow
-{
-	std::vector<GridNode> columns;
-
-	void Add(GridNode node)
-	{
-		columns.emplace_back(node);
-	}
-};
-
 //Actor that holds all the traversable nodes in the level.
 //Grid needs to always be at (0, 0, 0) in world because of how rows & nodes are created at index.
 struct Grid : Actor
 {
-	ACTOR_SYSTEM(Grid)
+	ACTOR_SYSTEM(Grid);
+
+	struct GridRow
+	{
+		std::vector<GridNode> columns;
+
+		void Add(GridNode node)
+		{
+			columns.emplace_back(node);
+		}
+	};
 
 	InstanceMeshComponent* nodeMesh = nullptr;
 
@@ -36,4 +36,5 @@ struct Grid : Actor
 	virtual Properties GetProps() override;
 	GridNode* GetNode(int x, int y);
 	void GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode*>& outNodes);
+	void ResetAllNodes();
 };

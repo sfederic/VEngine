@@ -207,3 +207,14 @@ void Grid::GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode*>& ou
         }
     }
 }
+
+void Grid::ResetAllNodes()
+{
+    for (auto& row : rows)
+    {
+        for (auto& node : row.columns)
+        {
+            node.ResetValues();
+        }
+    }
+}
