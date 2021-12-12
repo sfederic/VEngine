@@ -275,6 +275,7 @@ void DebugMenu::RenderGameInstanceData()
 
 	ImGui::Begin("Game Instance Data");
 
+	ImGui::Checkbox("Use GameSaves", &GameInstance::useGameSaves);
 	ImGui::InputInt("Current Hour", &GameInstance::currentHour);
 	ImGui::InputInt("Current Minute", &GameInstance::currentMinute);
 	if (ImGui::Button("Reset Instance Data"))

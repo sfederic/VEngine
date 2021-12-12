@@ -5,6 +5,9 @@
 //Instance holding data over the entirety of the game
 struct GameInstance
 {
+	//this is to set in the editor to know whether to use map files from WorldMaps/ vs GameSaves/
+	inline static bool useGameSaves = false;
+
 	inline static int currentHour = 0;
 	inline static int currentMinute = 0;
 

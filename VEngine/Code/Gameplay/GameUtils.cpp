@@ -58,6 +58,12 @@ namespace GameUtils
 	void LoadWorld(std::string worldName)
 	{
 		std::string path = "WorldMaps/" + worldName;
+
+		if (GameInstance::useGameSaves)
+		{
+			path = "GameSaves/" + worldName;
+		}
+
 		assert(std::filesystem::exists(path));
 		fileSystem.LoadWorld(worldName);
 	}
