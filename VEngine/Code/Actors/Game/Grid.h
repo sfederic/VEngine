@@ -30,11 +30,16 @@ struct Grid : Actor
 	int sizeX = 1;
 	int sizeY = 1;
 
+	bool lerpOut = false;
+
 	Grid();
 	virtual void Awake() override;
 	virtual void Start() override;
+	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 	GridNode* GetNode(int x, int y);
 	void GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode*>& outNodes);
 	void ResetAllNodes();
+	void LerpInNodes(float deltaTime);
+	void LerpOutNodes(float deltaTime);
 };

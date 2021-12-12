@@ -294,7 +294,11 @@ void Player::ToggleBattleGrid()
 		auto grid = GameUtils::GetGrid();
 		if (grid)
 		{
-			grid->ToggleActive();
+			grid->lerpOut = isWeaponDrawn;
+			if (grid->lerpOut)
+			{
+				grid->SetActive(true);
+			}
 		}
 
 		if (isWeaponDrawn)

@@ -78,8 +78,8 @@ void Grid::Awake()
             //raycast against the world to set node position
             if (Raycast(ray, rayOrigin, -VMath::XMVectorUp(), 20.0f))
             {
-                //Scale the node down a little so that nodes aren't touching
-                XMMATRIX scaleMatrix = XMMatrixScaling(0.9f, 0.9f, 0.9f);
+                //Scale the node down to nothing
+                XMMATRIX scaleMatrix = XMMatrixScaling(0.f, 0.f, 0.f);
                 instanceData.world *= scaleMatrix;
 
                 //Position the node at the raycast's hitpos
@@ -126,6 +126,18 @@ void Grid::Awake()
 void Grid::Start()
 {
     SetActive(false);
+}
+
+void Grid::Tick(float deltaTime)
+{
+    if (!lerpOut)
+    {
+        LerpInNodes(deltaTime);
+    }
+    else
+    {
+        LerpOutNodes(deltaTime);
+    }
 }
 
 Properties Grid::GetProps()
@@ -215,6 +227,43 @@ void Grid::ResetAllNodes()
         for (auto& node : row.columns)
         {
             node.ResetValues();
+        }
+    }
+}
+
+void Grid::LerpInNodes(float deltaTime)
+{
+    const float lerpSpeed = 4.5f;
+
+    for (auto& row : rows)
+    {
+        for (auto& node : row.columns)
+        {
+            auto& data = nodeMesh->instanceData[node.instancedMeshIndex];
+            data.world.r[0].m128_f32[0] = std::lerp(data.world.r[0].m128_f32[0], 0.f, deltaTime * lerpSpeed);
+            data.world.r[1].m128_f32[1] = std::lerp(data.world.r[1].m128_f32[1], 0.f, deltaTime * lerpSpeed);
+            data.world.r[2].m128_f32[2] = std::lerp(data.world.r[2].m128_f32[2], 0.f, deltaTime * lerpSpeed);
+
+            if (data.world.r[2].m128_f32[2] == 0.f)
+            {
+                SetActive(false);
+            }
+        }
+    }
+}
+
+void Grid::LerpOutNodes(float deltaTime)
+{
+    const float lerpSpeed = 4.5f;
+
+    for (auto& row : rows)
+    {
+        for (auto& node : row.columns)
+        {
+            auto& data = nodeMesh->instanceData[node.instancedMeshIndex];
+            data.world.r[0].m128_f32[0] = std::lerp(data.world.r[0].m128_f32[0], 0.9f, deltaTime * lerpSpeed);
+            data.world.r[1].m128_f32[1] = std::lerp(data.world.r[1].m128_f32[1], 0.9f, deltaTime * lerpSpeed);
+            data.world.r[2].m128_f32[2] = std::lerp(data.world.r[2].m128_f32[2], 0.9f, deltaTime * lerpSpeed);
         }
     }
 }
