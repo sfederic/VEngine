@@ -15,6 +15,7 @@
 #include "VString.h"
 #include "Input.h"
 #include "Gameplay/GameInstance.h"
+#include "Gameplay/BattleSystem.h"
 
 FileSystem fileSystem;
 
@@ -94,6 +95,8 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	//Clear input as well (can carry over to new levels if not cleared)
 	Input::Reset();
+
+	battleSystem.Reset();
 
 	//Set player camera on world change as active if in-gameplay
 	if (Core::gameplayOn)

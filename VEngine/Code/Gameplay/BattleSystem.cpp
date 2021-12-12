@@ -12,6 +12,18 @@ BattleSystem::BattleSystem() : System("BattleSystem")
 {
 }
 
+void BattleSystem::Reset()
+{
+	isBattleActive = false;
+
+	grid = nullptr;
+	player = nullptr;
+
+	activeBattleUnits.clear();
+
+	currentUnitTurnIndex = 0;
+}
+
 void BattleSystem::StartBattle()
 {
 	if (isBattleActive) return;

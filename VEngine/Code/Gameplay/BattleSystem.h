@@ -21,6 +21,7 @@ private:
 
 public:
 	BattleSystem();
+	void Reset();
 	void StartBattle();
 	void EndBattle();
 	void MoveToNextTurn();
