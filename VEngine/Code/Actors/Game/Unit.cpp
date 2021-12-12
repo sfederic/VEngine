@@ -48,13 +48,16 @@ void Unit::Tick(float deltaTime)
 
 				GetCurrentNode()->Hide();
 
-				if(Attack())
+				if (Attack())
 				{
 					//deal with attack wind up
 					attackWindingUp = true;
 
 					auto player = GameUtils::GetPlayer();
 					player->guardWidget->AddToViewport();
+
+					player->nextCameraFOV = 30.f;
+					GameUtils::SetActiveCameraTarget(this);
 
 					timerSystem.SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
 				}
@@ -225,6 +228,9 @@ void Unit::WindUpAttack()
 	player->InflictDamage(attackPoints);
 
 	player->guardWidget->RemoveFromViewport();
+
+	player->nextCameraFOV = 60.f;
+	GameUtils::SetActiveCameraTarget(player);
 
 	Log("%s attacked %s", this->name.c_str(), player->name.c_str());
 }
