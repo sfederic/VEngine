@@ -196,6 +196,19 @@ void Player::InflictDamage(int damage)
 	}
 }
 
+void Player::Guard()
+{
+	if (Input::GetKeyUp(Keys::Down) && actionPoints > 0)
+	{
+		guarding = true;
+		guardWidget->guardSuccessful = true;
+
+		ExpendActionPoints(2);
+
+		GameUtils::PlayAudio("equip.wav");
+	}
+}
+
 void Player::MovementInput(float deltaTime)
 {
 	float moveSpeed = 4.75f;
@@ -317,12 +330,7 @@ void Player::PrimaryAction()
 	{
 		if (ableToGuard)
 		{
-			if (Input::GetKeyUp(Keys::Down) && actionPoints > 0)
-			{
-				guarding = true;
-				guardWidget->guardSuccessful = true;
-				ExpendActionPoints(2);
-			}
+			Guard();
 		}
 
 		return;
@@ -416,6 +424,7 @@ void Player::PrimaryAction()
 						battleSystem.StartBattle();
 						ExpendActionPoints(1);
 						unit->InflictDamage(1);
+						GameUtils::PlayAudio("sword_hit.wav");
 						return;
 					}
 
@@ -425,6 +434,7 @@ void Player::PrimaryAction()
 						battleSystem.StartBattle();
 						ExpendActionPoints(1);
 						gridActor->InflictDamage(1);
+						GameUtils::PlayAudio("sword_hit.wav");
 						return;
 					}
 				}

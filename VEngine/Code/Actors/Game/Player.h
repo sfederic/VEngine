@@ -73,6 +73,8 @@ struct Player : Actor
 	
 	void InflictDamage(int damage);
 
+	void Guard();
+
 private:
 	void MovementInput(float deltaTime);
 	void RotationInput(float deltaTime);
