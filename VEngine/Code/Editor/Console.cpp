@@ -60,6 +60,9 @@ Console::Console()
 
 	//Asset Build Commands
 	executeMap.emplace(L"BUILD MESHES", []() { assetSystem.WriteAllMeshDataToMeshAssetFiles(); });
+
+	//Write all game save maps
+	executeMap.emplace(L"BUILD MAPS", []() { assetSystem.BuildAllGameplayMapFiles(); });
 }
 
 void Console::ConsoleInput()
