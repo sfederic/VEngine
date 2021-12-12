@@ -105,7 +105,7 @@ void FileSystem::ReloadCurrentWorld()
 void FileSystem::CreateGameplayWorldSave(std::string worldName)
 {
 	std::ifstream in("WorldMaps/" + worldName);
-	std::ofstream out("WorldMaps/GameSaves/" + worldName);
+	std::ofstream out("GameSaves/" + worldName);
 
 	out << in.rdbuf();
 }
