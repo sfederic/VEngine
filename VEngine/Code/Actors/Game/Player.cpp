@@ -19,6 +19,7 @@
 #include "UI/PlayerActionBarWidget.h"
 #include "UI/TimeOfDayWidget.h"
 #include "UI/HeldPickupWidget.h"
+#include "UI/GuardWidget.h"
 #include "Gameplay/Intuition.h"
 #include "Gameplay/ConditionSystem.h"
 #include "Gameplay/GameInstance.h"
@@ -54,6 +55,7 @@ void Player::Start()
 	CreateWidget<TimeOfDayWidget>()->AddToViewport();
 
 	heldPickupWidget = CreateWidget<HeldPickupWidget>();
+	guardWidget = CreateWidget<GuardWidget>();
 
 
 	nextPos = GetPositionVector();

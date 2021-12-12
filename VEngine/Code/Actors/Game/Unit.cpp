@@ -11,6 +11,7 @@
 #include "Gameplay/BattleSystem.h"
 #include "TimerSystem.h"
 #include "Log.h"
+#include "UI/GuardWidget.h"
 
 Unit::Unit()
 {
@@ -51,6 +52,10 @@ void Unit::Tick(float deltaTime)
 				{
 					//deal with attack wind up
 					attackWindingUp = true;
+
+					auto player = GameUtils::GetPlayer();
+					player->guardWidget->AddToViewport();
+
 					timerSystem.SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
 				}
 				else
@@ -218,6 +223,8 @@ void Unit::WindUpAttack()
 {
 	auto player = GameUtils::GetPlayer();
 	player->InflictDamage(attackPoints);
+
+	player->guardWidget->RemoveFromViewport();
 
 	Log("%s attacked %s", this->name.c_str(), player->name.c_str());
 }

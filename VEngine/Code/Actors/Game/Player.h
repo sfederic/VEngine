@@ -12,6 +12,7 @@ struct InteractWidget;
 struct IntuitionMenuWidget;
 struct PlayerActionBarWidget;
 struct HeldPickupWidget;
+struct GuardWidget;
 struct Intuition;
 struct GridNode;
 
@@ -29,6 +30,7 @@ struct Player : Actor
 	IntuitionMenuWidget* intuitionMenuWidget = nullptr;
 	PlayerActionBarWidget* actionBarWidget = nullptr;
 	HeldPickupWidget* heldPickupWidget = nullptr;
+	GuardWidget* guardWidget = nullptr;
 
 	Pickup* heldItem = nullptr;
 
