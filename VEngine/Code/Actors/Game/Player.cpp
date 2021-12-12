@@ -163,6 +163,7 @@ void Player::CreateIntuition(IntuitionComponent* intuitionComponent, std::string
 void Player::RefreshCombatStats()
 {
 	actionPoints = GameInstance::maxPlayerActionPoints;
+	actionBarWidget->actionPoints = actionPoints;
 }
 
 void Player::MovementInput(float deltaTime)
