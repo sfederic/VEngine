@@ -9,6 +9,7 @@
 #include "VMath.h"
 #include "Player.h"
 #include "Gameplay/BattleSystem.h"
+#include "Log.h"
 
 Unit::Unit()
 {
@@ -42,10 +43,12 @@ void Unit::Tick(float deltaTime)
 			{
 				movementPathNodeIndex = 0;
 				pathNodes.clear();
-				isUnitTurn = false;
 
-				//close gridnode unit ends on
-				GameUtils::GetGrid()->GetNode(xIndex, yIndex)->closed = true;
+				GetCurrentNode()->Hide();
+
+				Attack();
+
+				isUnitTurn = false;
 
 				battleSystem.MoveToNextTurn();
 			}
@@ -61,6 +64,7 @@ Properties Unit::GetProps()
 	props.Add("Move Points", &movementPoints);
 	props.Add("NextMove", &nextMovePos);
 	props.Add("Move Speed", &moveSpeed);
+	props.Add("Attack Points", &attackPoints);
 	return props;
 }
 
@@ -176,4 +180,26 @@ void Unit::StartTurn()
 
 	auto player = GameUtils::GetPlayer();
 	MoveToNode(player->xIndex, player->yIndex);
+}
+
+void Unit::Attack()
+{
+	auto standingNode = GetCurrentNode();
+	auto grid = GameUtils::GetGrid();
+
+	std::vector<GridNode*> attackNodes;
+	grid->GetNeighbouringNodes(standingNode, attackNodes);
+
+	auto player = GameUtils::GetPlayer();
+	auto targetNode = player->GetCurrentNode();
+
+	for (auto node : attackNodes)
+	{
+		if (node->Equals(targetNode))
+		{
+			player->InflictDamage(attackPoints);
+			Log("%s attacked %s", this->name.c_str(), player->name.c_str());
+			return;
+		}
+	}
 }

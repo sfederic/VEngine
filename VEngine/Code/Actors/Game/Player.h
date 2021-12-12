@@ -38,6 +38,7 @@ struct Player : Actor
 	XMVECTOR nextRot;
 
 	int actionPoints = 10;
+	int healthPoints = 10;
 
 	int xIndex = -1;
 	int yIndex = -1;
@@ -62,6 +63,8 @@ struct Player : Actor
 	void RefreshCombatStats();
 
 	GridNode* GetCurrentNode();
+	
+	void InflictDamage(int damage);
 
 private:
 	void MovementInput(float deltaTime);

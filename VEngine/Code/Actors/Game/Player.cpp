@@ -173,6 +173,11 @@ GridNode* Player::GetCurrentNode()
 	return node;
 }
 
+void Player::InflictDamage(int damage)
+{
+	healthPoints -= damage;
+}
+
 void Player::MovementInput(float deltaTime)
 {
 	const float moveSpeed = 4.75f;
