@@ -21,6 +21,8 @@ void BattleSystem::StartBattle()
 	isBattleActive = true;
 
 	grid = GameUtils::GetGrid();
+	grid->SetActive(true);
+
 	player = GameUtils::GetPlayer();
 	player->isPlayerTurn = true;
 
@@ -37,7 +39,7 @@ void BattleSystem::EndBattle()
 	player->isPlayerTurn = false;
 	player->RefreshCombatStats();
 	
-	grid->ToggleActive();
+	grid->SetActive(false);
 
 	Log("Battle ended.");
 
