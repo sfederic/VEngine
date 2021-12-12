@@ -76,6 +76,7 @@ void BattleSystem::MoveToNextTurn()
 		currentUnitTurnIndex = 0;
 
 		GameUtils::SetActiveCameraTarget(player);
+		GameUtils::GetGrid()->ResetAllNodes();
 
 		return;
 	}
@@ -89,6 +90,7 @@ void BattleSystem::MoveToNextTurn()
 	currentUnitTurnIndex++;
 
 	GameUtils::SetActiveCameraTarget(unit);
+	GameUtils::GetGrid()->ResetAllNodes();
 }
 
 void BattleSystem::RemoveUnit(Unit* unit)

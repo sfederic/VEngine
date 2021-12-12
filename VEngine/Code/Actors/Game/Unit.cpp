@@ -63,9 +63,7 @@ void Unit::Tick(float deltaTime)
 				}
 				else
 				{
-					//end turn
-					isUnitTurn = false;
-					battleSystem.MoveToNextTurn();
+					EndTurn();
 				}
 			}
 		}
@@ -191,11 +189,16 @@ void Unit::StartTurn()
 {
 	isUnitTurn = true;
 
-	auto node = GetCurrentNode();
-	node->active = true;
+	GetCurrentNode()->Show();
 
 	auto player = GameUtils::GetPlayer();
 	MoveToNode(player->xIndex, player->yIndex);
+}
+
+void Unit::EndTurn()
+{
+	isUnitTurn = false;
+	battleSystem.MoveToNextTurn();
 }
 
 bool Unit::Attack()
@@ -233,4 +236,8 @@ void Unit::WindUpAttack()
 	GameUtils::SetActiveCameraTarget(player);
 
 	Log("%s attacked %s", this->name.c_str(), player->name.c_str());
+	
+	attackWindingUp = false;
+
+	EndTurn();
 }

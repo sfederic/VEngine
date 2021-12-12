@@ -21,7 +21,7 @@ struct Unit : GridActor
 	int movementPoints = 1;
 	int movementPathNodeIndex = 0;
 
-	int attackPoints = 0;
+	int attackPoints = 1;
 
 	bool isInBattle = false;
 
@@ -50,6 +50,7 @@ public:
 
 	//Figure out movement path and target during battle on turn start
 	void StartTurn();
+	void EndTurn();
 
 	bool Attack();
 	void WindUpAttack();
