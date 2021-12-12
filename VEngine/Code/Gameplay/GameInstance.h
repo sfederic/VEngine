@@ -13,6 +13,9 @@ struct GameInstance
 
 	inline static PickupSpawnData pickupSpawnData;
 
+	//Player stats
+	inline static int maxPlayerActionPoints = 10;
+
 	static void ProgressTime();
 	static void ResetTime();
 };

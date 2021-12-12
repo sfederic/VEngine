@@ -57,6 +57,9 @@ struct Player : Actor
 
 	void CreateIntuition(IntuitionComponent* intuitionComponent, std::string actorAquiredFromName);
 
+	//called at every battle turn end
+	void RefreshCombatStats();
+
 private:
 	void MovementInput(float deltaTime);
 	void RotationInput(float deltaTime);

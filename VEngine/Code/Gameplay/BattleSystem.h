@@ -11,6 +11,8 @@ struct BattleSystem : System
 {
 	std::vector<Unit*> activeBattleUnits;
 
+	bool isBattleActive = false;
+
 private:
 	Player* player = nullptr;
 	Grid* grid = nullptr;
@@ -18,9 +20,6 @@ private:
 	int currentUnitTurnIndex = 0;
 
 public:
-
-	bool isBattleActive = false;
-
 	BattleSystem();
 	void StartBattle();
 	void EndBattle();

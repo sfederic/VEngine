@@ -22,6 +22,7 @@ void BattleSystem::StartBattle()
 
 	grid = GameUtils::GetGrid();
 	player = GameUtils::GetPlayer();
+	player->isPlayerTurn = true;
 
 	activeBattleUnits = world.GetAllActorsOfTypeInWorld<Unit>();
 	for (auto unit : activeBattleUnits)
@@ -33,6 +34,10 @@ void BattleSystem::StartBattle()
 void BattleSystem::EndBattle()
 {
 	player->inCombat = false;
+	player->isPlayerTurn = false;
+	player->RefreshCombatStats();
+	
+	grid->ToggleActive();
 
 	Log("Battle ended.");
 
@@ -48,14 +53,17 @@ void BattleSystem::MoveToNextTurn()
 {
 	if (!isBattleActive) return;
 
+	//Now player's turn
 	if (currentUnitTurnIndex >= activeBattleUnits.size())
 	{
 		Log("Players turn");
 		player->isPlayerTurn = true;
+		player->RefreshCombatStats();
 		currentUnitTurnIndex = 0;
 		return;
 	}
 
+	//next enemy turn
 	Log("Unit [%s] turn.", activeBattleUnits[currentUnitTurnIndex]->name.c_str());
 	activeBattleUnits[currentUnitTurnIndex]->StartTurn();
 	currentUnitTurnIndex++;

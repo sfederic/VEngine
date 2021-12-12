@@ -96,15 +96,15 @@ void Player::Tick(float deltaTime)
 	if (!inConversation && !inInteraction)
 	{
 		//Skip movement if not player's turn during combat
-		//if (inCombat && !isPlayerTurn)
-		//{
-		//	return;
-		//}
+		if (battleSystem.isBattleActive && !isPlayerTurn)
+		{
+			return;
+		}
 
-		//if (inCombat && actionPoints <= 0)
-		//{
-		//	return;
-		//}
+		if (inCombat && actionPoints <= 0)
+		{
+			return;
+		}
 
 		MovementInput(deltaTime);
 		RotationInput(deltaTime);
@@ -159,6 +159,11 @@ void Player::CreateIntuition(IntuitionComponent* intuitionComponent, std::string
 		intuitions.emplace(intuition->name, intuition);
 		Log("%s Intuition created.", intuition->name.c_str());
 	}
+}
+
+void Player::RefreshCombatStats()
+{
+	actionPoints = GameInstance::maxPlayerActionPoints;
 }
 
 void Player::MovementInput(float deltaTime)
@@ -230,6 +235,8 @@ void Player::ToggleBattleGrid()
 {
 	if (Input::GetKeyUp(Keys::Space))
 	{
+		inCombat = !inCombat;
+
 		//toggle grid
 		auto grid = GameUtils::GetGrid();
 		if (grid)
@@ -340,6 +347,7 @@ void Player::PrimaryAction()
 					auto unit = dynamic_cast<Unit*>(ray.hitActor);
 					if (unit)
 					{
+						battleSystem.StartBattle();
 						ExpendActionPoints(1);
 						unit->InflictDamage(1);
 						return;
@@ -348,6 +356,7 @@ void Player::PrimaryAction()
 					auto gridActor = dynamic_cast<GridActor*>(ray.hitActor);
 					if (gridActor)
 					{
+						battleSystem.StartBattle();
 						ExpendActionPoints(1);
 						gridActor->InflictDamage(1);
 						return;
