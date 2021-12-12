@@ -16,6 +16,9 @@ Console::Console()
 
 	//Debug Menu Commands
 
+	//LiSt all console commands
+	executeMap.emplace(L"LS", []() { debugMenu.consoleCommandsMenuOpen = !debugMenu.consoleCommandsMenuOpen; });
+
 	//Show snapping menu
 	executeMap.emplace(L"SNAP", []() { debugMenu.snapMenuOpen = !debugMenu.snapMenuOpen; });
 

@@ -28,6 +28,7 @@
 #include "System.h"
 #include "Actors/Game/Player.h"
 #include "Gameplay/Intuition.h"
+#include "Console.h"
 
 DebugMenu debugMenu;
 
@@ -77,6 +78,7 @@ void DebugMenu::Tick(float deltaTime)
 	RenderActorSystemMenu();
 	RenderComponentSystemMenu();
 	RenderIntuitionsMenu();
+	RenderConsoleCommandsMenu();
 
 	ImGui::EndFrame();
 
@@ -363,6 +365,20 @@ void DebugMenu::RenderIntuitionsMenu()
 		ImGui::Text("Hour: %d | Minute: %d", i->hourAquired, i->minuteAquired);
 
 		ImGui::NewLine();
+	}
+
+	ImGui::End();
+}
+
+void DebugMenu::RenderConsoleCommandsMenu()
+{
+	if (!consoleCommandsMenuOpen) return;
+
+	ImGui::Begin("Console Commands");
+
+	for (auto& command : console.executeMap)
+	{
+		ImGui::Text("%S", command.first.c_str());
 	}
 
 	ImGui::End();
