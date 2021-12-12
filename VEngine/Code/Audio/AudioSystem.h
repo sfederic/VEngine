@@ -8,6 +8,8 @@
 struct AudioChannel;
 struct AudioBase;
 
+//@Todo: Ogg Vorbis loader https://www.gamedev.net/forums/topic/496350-xaudio2-and-ogg/
+
 //Lot of this was inspired by https://gdcvault.com/play/1022061/How-to-Write-an-Audio after 
 //fucking around for hours with XAudio2.
 struct AudioSystem : System
