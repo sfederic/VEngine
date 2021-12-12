@@ -180,6 +180,13 @@ GridNode* Player::GetCurrentNode()
 
 void Player::InflictDamage(int damage)
 {
+	if (guarding)
+	{
+		Log("Guarded attack");
+		guarding = false;
+		return;
+	}
+
 	healthPoints -= damage;
 	healthWidget->healthPoints = healthPoints;
 
@@ -305,6 +312,21 @@ void Player::ToggleBattleGrid()
 
 void Player::PrimaryAction()
 {
+	//Guard
+	if (battleSystem.isBattleActive && !isPlayerTurn)
+	{
+		if (ableToGuard)
+		{
+			if (Input::GetKeyUp(Keys::Down) && actionPoints > 0)
+			{
+				guarding = true;
+				ExpendActionPoints(2);
+			}
+		}
+
+		return;
+	}
+
 	if (Input::GetKeyUp(Keys::Down))
 	{
 		if (inInteraction)

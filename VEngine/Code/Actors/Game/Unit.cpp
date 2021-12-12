@@ -55,8 +55,9 @@ void Unit::Tick(float deltaTime)
 
 					auto player = GameUtils::GetPlayer();
 					player->guardWidget->AddToViewport();
-
+					player->ableToGuard = true;
 					player->nextCameraFOV = 30.f;
+
 					GameUtils::SetActiveCameraTarget(this);
 
 					timerSystem.SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
@@ -230,6 +231,7 @@ void Unit::WindUpAttack()
 	auto player = GameUtils::GetPlayer();
 	player->InflictDamage(attackPoints);
 
+	player->ableToGuard = false;
 	player->guardWidget->RemoveFromViewport();
 
 	player->nextCameraFOV = 60.f;

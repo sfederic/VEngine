@@ -56,6 +56,9 @@ struct Player : Actor
 
 	bool isPlayerTurn = false;
 
+	bool ableToGuard = false;
+	bool guarding = false;
+
 	Player();
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
