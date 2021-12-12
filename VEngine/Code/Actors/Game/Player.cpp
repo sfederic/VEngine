@@ -78,7 +78,7 @@ void Player::Tick(float deltaTime)
 	dialogueComponent->SetPosition(GetHomogeneousPositionVector());
 
 	//End turn input
-	if (Input::GetKeyUp(Keys::Enter))
+	if (battleSystem.isBattleActive && Input::GetKeyUp(Keys::Enter))
 	{
 		battleSystem.MoveToNextTurn();
 	}
