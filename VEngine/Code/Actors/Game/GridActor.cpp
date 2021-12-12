@@ -61,6 +61,7 @@ void GridActor::InflictDamage(int damage)
 
 	if (health <= 0)
 	{
+		GetCurrentNode()->Show();
 		Destroy();
 	}
 }
