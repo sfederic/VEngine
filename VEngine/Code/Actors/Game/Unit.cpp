@@ -9,6 +9,7 @@
 #include "VMath.h"
 #include "Player.h"
 #include "Gameplay/BattleSystem.h"
+#include "TimerSystem.h"
 #include "Log.h"
 
 Unit::Unit()
@@ -26,7 +27,7 @@ void Unit::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
-	if (isUnitTurn)
+	if (isUnitTurn && !attackWindingUp)
 	{
 		if (XMVector4Equal(nextMovePos, GetPositionVector()))
 		{
@@ -46,11 +47,18 @@ void Unit::Tick(float deltaTime)
 
 				GetCurrentNode()->Hide();
 
-				Attack();
-
-				isUnitTurn = false;
-
-				battleSystem.MoveToNextTurn();
+				if(Attack())
+				{
+					//deal with attack wind up
+					attackWindingUp = true;
+					timerSystem.SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
+				}
+				else
+				{
+					//end turn
+					isUnitTurn = false;
+					battleSystem.MoveToNextTurn();
+				}
 			}
 		}
 	}
@@ -182,7 +190,7 @@ void Unit::StartTurn()
 	MoveToNode(player->xIndex, player->yIndex);
 }
 
-void Unit::Attack()
+bool Unit::Attack()
 {
 	auto standingNode = GetCurrentNode();
 	auto grid = GameUtils::GetGrid();
@@ -197,9 +205,19 @@ void Unit::Attack()
 	{
 		if (node->Equals(targetNode))
 		{
-			player->InflictDamage(attackPoints);
-			Log("%s attacked %s", this->name.c_str(), player->name.c_str());
-			return;
+			//Attack can hit
+			return true;
 		}
 	}
+
+	//Attack can't hit
+	return false;
+}
+
+void Unit::WindUpAttack()
+{
+	auto player = GameUtils::GetPlayer();
+	player->InflictDamage(attackPoints);
+
+	Log("%s attacked %s", this->name.c_str(), player->name.c_str());
 }

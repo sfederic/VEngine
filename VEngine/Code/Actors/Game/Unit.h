@@ -27,6 +27,7 @@ struct Unit : GridActor
 
 private:
 	bool isUnitTurn = false;
+	bool attackWindingUp = false;
 
 public:
 	//All the nodes the unit can move to
@@ -50,5 +51,6 @@ public:
 	//Figure out movement path and target during battle on turn start
 	void StartTurn();
 
-	void Attack();
+	bool Attack();
+	void WindUpAttack();
 };
