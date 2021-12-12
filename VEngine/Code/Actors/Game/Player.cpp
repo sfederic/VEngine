@@ -191,7 +191,12 @@ void Player::InflictDamage(int damage)
 
 void Player::MovementInput(float deltaTime)
 {
-	const float moveSpeed = 4.75f;
+	float moveSpeed = 4.75f;
+	if (battleSystem.isBattleActive)
+	{
+		moveSpeed = 6.5f;
+	}
+
 	SetPosition(VMath::VectorConstantLerp(GetPositionVector(), nextPos, deltaTime, moveSpeed));
 
 	if (XMVector4Equal(GetPositionVector(), nextPos) && XMQuaternionEqual(GetRotationVector(), nextRot))
@@ -236,7 +241,12 @@ void Player::MovementInput(float deltaTime)
 
 void Player::RotationInput(float deltaTime)
 {
-	const float rotSpeed = 5.0f;
+	float rotSpeed = 5.0f;
+	if (battleSystem.isBattleActive)
+	{
+		rotSpeed = 6.0f;
+	}
+
 	SetRotation(VMath::QuatConstantLerp(GetRotationVector(), nextRot, deltaTime, rotSpeed));
 
 	if (XMQuaternionEqual(GetRotationVector(), nextRot) && XMVector4Equal(GetPositionVector(), nextPos))
