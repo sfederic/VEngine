@@ -297,13 +297,14 @@ void Player::ToggleBattleGrid()
 			grid->ToggleActive();
 		}
 
-		//toggle health widget for player
 		if (isWeaponDrawn)
 		{
+			GameUtils::PlayAudio("sword_hit.wav");
 			healthWidget->AddToViewport();
 		}
 		else
 		{
+			GameUtils::PlayAudio("sword_sheathe.wav");
 			healthWidget->RemoveFromViewport();
 		}
 
