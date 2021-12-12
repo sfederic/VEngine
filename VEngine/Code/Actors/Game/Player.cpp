@@ -81,7 +81,6 @@ void Player::Tick(float deltaTime)
 	if (Input::GetKeyUp(Keys::Enter))
 	{
 		battleSystem.MoveToNextTurn();
-		isPlayerTurn = false;
 	}
 
 	if (inCombat)
@@ -101,7 +100,7 @@ void Player::Tick(float deltaTime)
 			return;
 		}
 
-		if (inCombat && actionPoints <= 0)
+		if (inCombat && actionPoints < 0)
 		{
 			return;
 		}
@@ -451,7 +450,7 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 		return;
 	}
 
-	//Check next node height in realtion to player
+	//Check next node height in relation to player
 	auto node = grid->GetNode(nextXIndex, nextYIndex);
 	if (node->worldPosition.y > (GetPosition().y + Grid::maxHeightMove))
 	{

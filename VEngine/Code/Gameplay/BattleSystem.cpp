@@ -65,6 +65,8 @@ void BattleSystem::MoveToNextTurn()
 		return;
 	}
 
+	player->isPlayerTurn = false;
+
 	//next enemy turn
 	Log("Unit [%s] turn.", activeBattleUnits[currentUnitTurnIndex]->name.c_str());
 	activeBattleUnits[currentUnitTurnIndex]->StartTurn();
