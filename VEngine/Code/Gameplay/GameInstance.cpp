@@ -13,5 +13,5 @@ void GameInstance::ProgressTime()
 void GameInstance::ResetTime()
 {
 	currentHour = 0;
-	currentHour = 0;
+	currentMinute = 0;
 }
