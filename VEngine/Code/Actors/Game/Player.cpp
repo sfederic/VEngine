@@ -166,6 +166,13 @@ void Player::RefreshCombatStats()
 	actionBarWidget->actionPoints = actionPoints;
 }
 
+GridNode* Player::GetCurrentNode()
+{
+	auto grid = GameUtils::GetGrid();
+	auto node = grid->GetNode(xIndex, yIndex);
+	return node;
+}
+
 void Player::MovementInput(float deltaTime)
 {
 	const float moveSpeed = 4.75f;

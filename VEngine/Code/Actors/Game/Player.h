@@ -13,6 +13,7 @@ struct IntuitionMenuWidget;
 struct PlayerActionBarWidget;
 struct HeldPickupWidget;
 struct Intuition;
+struct GridNode;
 
 struct Player : Actor
 {
@@ -59,6 +60,8 @@ struct Player : Actor
 
 	//called at every battle turn end
 	void RefreshCombatStats();
+
+	GridNode* GetCurrentNode();
 
 private:
 	void MovementInput(float deltaTime);
