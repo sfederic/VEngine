@@ -45,7 +45,7 @@ struct Player : Actor
 
 	bool inConversation = false;
 	bool inInteraction = false;
-	bool inCombat = false;
+	bool isWeaponDrawn = false;
 	bool intuitionWidgetToggle = false;
 
 	bool isPlayerTurn = false;

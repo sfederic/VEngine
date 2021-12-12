@@ -83,7 +83,7 @@ void Player::Tick(float deltaTime)
 		battleSystem.MoveToNextTurn();
 	}
 
-	if (inCombat)
+	if (battleSystem.isBattleActive)
 	{
 		actionBarWidget->AddToViewport();
 	}
@@ -100,7 +100,7 @@ void Player::Tick(float deltaTime)
 			return;
 		}
 
-		if (inCombat && actionPoints < 0)
+		if (battleSystem.isBattleActive && actionPoints < 0)
 		{
 			return;
 		}
@@ -234,7 +234,7 @@ void Player::ToggleBattleGrid()
 {
 	if (Input::GetKeyUp(Keys::Space))
 	{
-		inCombat = !inCombat;
+		isWeaponDrawn = !isWeaponDrawn;
 
 		//toggle grid
 		auto grid = GameUtils::GetGrid();
@@ -247,7 +247,7 @@ void Player::ToggleBattleGrid()
 		auto healthWidgets = uiSystem.GetAllWidgetsOfType<HealthWidget>();
 		for (auto healthWidget : healthWidgets)
 		{
-			if (inCombat)
+			if (isWeaponDrawn)
 			{
 				healthWidget->AddToViewport();
 			}
@@ -298,7 +298,7 @@ void Player::PrimaryAction()
 
 			//QUICK DIALOGUE INTERACT CHECK
 			{
-				if (!inCombat)
+				if (!isWeaponDrawn)
 				{
 					auto npc = dynamic_cast<NPC*>(ray.hitActor);
 					if (npc)
@@ -314,7 +314,7 @@ void Player::PrimaryAction()
 
 			//INTERACT CHECK
 			{
-				if (!inCombat)
+				if (!isWeaponDrawn)
 				{
 					auto gridActor = dynamic_cast<GridActor*>(ray.hitActor);
 					if (gridActor)
@@ -341,7 +341,7 @@ void Player::PrimaryAction()
 
 			//DESTRUCTIBLE CHECK
 			{
-				if (inCombat)
+				if (isWeaponDrawn)
 				{
 					auto unit = dynamic_cast<Unit*>(ray.hitActor);
 					if (unit)

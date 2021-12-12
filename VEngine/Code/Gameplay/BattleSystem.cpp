@@ -35,7 +35,7 @@ void BattleSystem::StartBattle()
 
 void BattleSystem::EndBattle()
 {
-	player->inCombat = false;
+	player->isWeaponDrawn = false;
 	player->isPlayerTurn = false;
 	player->RefreshCombatStats();
 	
