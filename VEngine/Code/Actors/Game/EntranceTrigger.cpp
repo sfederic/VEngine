@@ -2,6 +2,7 @@
 #include "Components/BoxTriggerComponent.h"
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/GameInstance.h"
+#include "Gameplay/BattleSystem.h"
 #include "Input.h"
 #include "FileSystem.h"
 #include "UI/InteractWidget.h"
@@ -26,7 +27,7 @@ void EntranceTrigger::Tick(float deltaTime)
 {
     XMVECTOR targetPos = trigger->target->GetPositionVector();
 
-    if (trigger->ContainsTarget() && isEntraceActive)
+    if (trigger->ContainsTarget() && isEntraceActive && !battleSystem.isBattleActive)
     {
         interactWidget->AddToViewport();
 
@@ -39,6 +40,8 @@ void EntranceTrigger::Tick(float deltaTime)
             {
                 fileSystem.WriteAllActorSystems();
             }
+
+            GameUtils::PlayAudio("door.wav");
 
             GameUtils::LoadWorldAndMoveToEntranceTrigger(levelToMoveTo);
             return;
