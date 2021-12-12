@@ -320,6 +320,7 @@ void Player::PrimaryAction()
 			if (Input::GetKeyUp(Keys::Down) && actionPoints > 0)
 			{
 				guarding = true;
+				guardWidget->guardSuccessful = true;
 				ExpendActionPoints(2);
 			}
 		}

@@ -4,5 +4,7 @@
 //Shows guard information when enemies are attacking player
 struct GuardWidget : Widget
 {
+	bool guardSuccessful = false;
+
 	virtual void Tick(float deltaTime) override;
 };

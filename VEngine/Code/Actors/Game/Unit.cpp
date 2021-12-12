@@ -233,6 +233,9 @@ void Unit::WindUpAttack()
 
 	player->ableToGuard = false;
 	player->guardWidget->RemoveFromViewport();
+	player->guardWidget->guardSuccessful = false;
+
+	GameUtils::PlayAudio("shield_hit.wav");
 
 	player->nextCameraFOV = 60.f;
 	GameUtils::SetActiveCameraTarget(player);
