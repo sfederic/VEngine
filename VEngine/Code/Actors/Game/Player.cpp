@@ -20,6 +20,7 @@
 #include "UI/TimeOfDayWidget.h"
 #include "UI/HeldPickupWidget.h"
 #include "UI/GuardWidget.h"
+#include "UI/PlayerHealthWidget.h"
 #include "Gameplay/Intuition.h"
 #include "Gameplay/ConditionSystem.h"
 #include "Gameplay/GameInstance.h"
@@ -57,6 +58,8 @@ void Player::Start()
 	heldPickupWidget = CreateWidget<HeldPickupWidget>();
 	guardWidget = CreateWidget<GuardWidget>();
 
+	healthWidget = CreateWidget<PlayerHealthWidget>();
+	healthWidget->healthPoints = healthPoints;
 
 	nextPos = GetPositionVector();
 	nextRot = GetRotationVector();
@@ -178,6 +181,12 @@ GridNode* Player::GetCurrentNode()
 void Player::InflictDamage(int damage)
 {
 	healthPoints -= damage;
+	healthWidget->healthPoints = healthPoints;
+
+	if (healthPoints <= 0)
+	{
+		Log("Game Over");
+	}
 }
 
 void Player::MovementInput(float deltaTime)
@@ -258,7 +267,17 @@ void Player::ToggleBattleGrid()
 			grid->ToggleActive();
 		}
 
-		//toggle all health widgets on
+		//toggle health widget for player
+		if (isWeaponDrawn)
+		{
+			healthWidget->AddToViewport();
+		}
+		else
+		{
+			healthWidget->RemoveFromViewport();
+		}
+
+		//toggle all Unit health widgets
 		auto healthWidgets = uiSystem.GetAllWidgetsOfType<HealthWidget>();
 		for (auto healthWidget : healthWidgets)
 		{

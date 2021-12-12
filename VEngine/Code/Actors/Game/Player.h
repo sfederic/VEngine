@@ -12,6 +12,7 @@ struct InteractWidget;
 struct IntuitionMenuWidget;
 struct PlayerActionBarWidget;
 struct HeldPickupWidget;
+struct PlayerHealthWidget;
 struct GuardWidget;
 struct Intuition;
 struct GridNode;
@@ -31,6 +32,7 @@ struct Player : Actor
 	PlayerActionBarWidget* actionBarWidget = nullptr;
 	HeldPickupWidget* heldPickupWidget = nullptr;
 	GuardWidget* guardWidget = nullptr;
+	PlayerHealthWidget* healthWidget = nullptr;
 
 	Pickup* heldItem = nullptr;
 
@@ -40,7 +42,7 @@ struct Player : Actor
 	XMVECTOR nextRot;
 
 	int actionPoints = 10;
-	int healthPoints = 10;
+	int healthPoints = 3;
 
 	int xIndex = -1;
 	int yIndex = -1;
