@@ -261,3 +261,18 @@ void Actor::ToggleActive()
 		child->SetActive(active);
 	}
 }
+
+void Actor::ToggleActive(bool newActive)
+{
+	active = newActive;
+
+	for (auto component : components)
+	{
+		component->active = active;
+	}
+
+	for (auto child : children)
+	{
+		child->SetActive(active);
+	}
+}
