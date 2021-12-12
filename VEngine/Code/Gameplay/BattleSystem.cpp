@@ -62,15 +62,21 @@ void BattleSystem::MoveToNextTurn()
 		player->isPlayerTurn = true;
 		player->RefreshCombatStats();
 		currentUnitTurnIndex = 0;
+
+		GameUtils::SetActiveCameraTarget(player);
+
 		return;
 	}
 
 	player->isPlayerTurn = false;
 
 	//next enemy turn
-	Log("Unit [%s] turn.", activeBattleUnits[currentUnitTurnIndex]->name.c_str());
+	auto unit = activeBattleUnits[currentUnitTurnIndex];
+	Log("Unit [%s] turn.", unit->name.c_str());
 	activeBattleUnits[currentUnitTurnIndex]->StartTurn();
 	currentUnitTurnIndex++;
+
+	GameUtils::SetActiveCameraTarget(unit);
 }
 
 void BattleSystem::RemoveUnit(Unit* unit)
