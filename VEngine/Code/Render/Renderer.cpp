@@ -402,6 +402,9 @@ void Renderer::RenderMeshComponents()
 
 	UpdateLights();
 
+	const float blendFactor[4] = { 1.f, 1.f, 1.f, 1.f };
+	context->OMSetBlendState(nullptr, blendFactor, 0xFFFFFFFF);
+
 	for (auto mesh : MeshComponent::system.components)
 	{
 		if (!mesh->active) continue;
