@@ -21,6 +21,9 @@ struct MeshComponent : SpatialComponent
 
 	bool castsShadow = true;
 
+	//whether nodes that spawn on this mesh are set as inactive
+	bool gridObstacle = false;
+
 	MeshComponent();
 	MeshComponent(const std::string filename_,
 		const std::string textureFilename_,

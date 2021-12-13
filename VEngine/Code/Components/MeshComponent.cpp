@@ -95,6 +95,7 @@ Properties MeshComponent::GetProps()
 	Properties props("MeshComponent");
 	props.Add("Mesh", &meshComponentData).change = ReassignMesh;
 	props.Add("Casts Shadow", &castsShadow);
+	props.Add("Grid Obstacle", &gridObstacle);
 	props.Merge(material->GetProps());
 	return props;
 }
