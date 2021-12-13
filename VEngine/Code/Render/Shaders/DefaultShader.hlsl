@@ -10,7 +10,7 @@ VS_OUT VSMain(VS_IN i)
 float4 PSMain(VS_OUT i) : SV_Target
 {
 	float4 texColour = t.Sample(s, i.uv);
-	clip(texColour.a - 0.15f);
+	clip(texColour.a - 0.10f);
 
 	float3 normal = normalize(i.normal);
 	float4 position = i.posWS;
@@ -23,10 +23,12 @@ float4 PSMain(VS_OUT i) : SV_Target
 
 	float shadowColour = CalcShadowFactor(i.shadowPos);
 
-	float4 localAmbient = float4(0.2f, 0.2f, 0.2f, 1.0f);
+	float4 localAmbient = float4(0.3f, 0.3f, 0.3f, 1.0f);
 
-	//float4 finalColour = (endResult.diffuse + globalAmbient) * texColour;
-	float4 finalColour = (localAmbient + shadowColour) * texColour;
+	//grey colour 
+	//float4 finalColour = endResult.diffuse * shadowColour;
+
+	float4 finalColour = ((endResult.diffuse + localAmbient) * shadowColour) * texColour;
 
 	return finalColour;
 }
