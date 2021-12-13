@@ -1,0 +1,549 @@
+Grid
+1
+ Position
+0 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Mesh
+node.fbx
+Name
+Grid0
+Rast State
+solid
+Shader
+InstanceShader.hlsl
+Size X
+9
+Size Y
+9
+Texture
+test.png
+UID
+3882572174
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+GridActor
+0
+Unit
+0
+Pickup
+0
+AudioActor
+0
+Player
+1
+ Position
+3 0 0
+ Rotation
+-0 -1.49012e-06 -0 1
+ Scale
+0.999999 1 0.999999
+Casts Shadow
+1
+FOV
+60
+Far Z
+1000
+File
+
+Mesh
+unit_test.fbx
+Name
+Player0
+Near Z
+0.01
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+wall.png
+UID
+1722829727
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+MeshActor
+16
+ Position
+4 -0.5 4
+ Rotation
+-0.706934 0 -0 0.70728
+ Scale
+5 5 0.999999
+Casts Shadow
+1
+Mesh
+plane.fbx
+Name
+plane0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+floor.jpg
+UID
+2543448019
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+1 0.5 5
+ Rotation
+-0 -0.707107 -0 0.707107
+ Scale
+2 2 2
+Casts Shadow
+1
+Mesh
+house_1.fbx
+Name
+house_11
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+test_atlas.png
+UID
+4015376228
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+7 0.5 5
+ Rotation
+-0 0 -0 1
+ Scale
+2 2 2
+Casts Shadow
+1
+Mesh
+house_2.fbx
+Name
+house_22
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+test_atlas.png
+UID
+1161963064
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+7 0 2
+ Rotation
+-0 0.707107 -0 0.707107
+ Scale
+1 1 1
+Casts Shadow
+1
+Mesh
+house_3.fbx
+Name
+house_33
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+test_atlas.png
+UID
+2740127619
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+0 0.5 2.5
+ Rotation
+-0 0 -0 1
+ Scale
+2 2 2
+Casts Shadow
+1
+Mesh
+cube.fbx
+Name
+cube4
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+test_atlas.png
+UID
+519851711
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+3 1 7.5
+ Rotation
+-0 -2.0067e-07 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Mesh
+house_3.fbx
+Name
+cube5
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+test_atlas.png
+UID
+2740127619
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+4 -0.5 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Mesh
+step_small.fbx
+Name
+step_small6
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+floor.jpg
+UID
+3930067642
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+3 -0.5 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Mesh
+step_small.fbx
+Name
+step_small7
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+floor.jpg
+UID
+3930067642
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+2 -0.5 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Mesh
+step_small.fbx
+Name
+step_small8
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+floor.jpg
+UID
+3930067642
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+4 -0.5 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Mesh
+step_medium.fbx
+Name
+step_medium9
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+floor_tile.png
+UID
+3785305114
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+3 -0.5 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Mesh
+step_medium.fbx
+Name
+step_medium10
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+floor_tile.png
+UID
+3785305114
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+2 -0.5 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Mesh
+step_medium.fbx
+Name
+step_medium11
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+floor_tile.png
+UID
+3785305114
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+4 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Mesh
+step_medium.fbx
+Name
+step_medium12
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+test.png
+UID
+3035270079
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+3 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Mesh
+step_medium.fbx
+Name
+step_medium13
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+test.png
+UID
+3035270079
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+2 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Mesh
+step_medium.fbx
+Name
+step_medium14
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+test.png
+UID
+3035270079
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+2.5 0.25 6.5
+ Rotation
+-0.706934 0 -0 0.707279
+ Scale
+2 3 0.999996
+Casts Shadow
+1
+Mesh
+plane.fbx
+Name
+MeshActor15
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+floor.jpg
+UID
+2543448019
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+DirectionalLightActor
+1
+ Position
+-3.5 3 1.5
+ Rotation
+-0 0 0.382683 0.92388
+ Scale
+1 1 1
+Colour
+1 1 1 1
+LightEnabled
+1
+Name
+DirectionalLightActor0
+UID
+242809981
+next
+SavePoint
+0
+PointLightActor
+0
+SpotLightActor
+0
+EntranceTrigger
+0
+NPC
+0
+Billboard
+0
+InteractTrigger
+0
+DialogueInstance
+0
+GameEvent
+0
+ParticleSystem
+0
