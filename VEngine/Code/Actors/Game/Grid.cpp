@@ -97,6 +97,15 @@ void Grid::Awake()
 
                 if (ray.hitActor)
                 {
+                    auto meshes = ray.hitActor->GetComponentsOfType<MeshComponent>();
+                    for (auto mesh : meshes)
+                    {
+                        if (mesh->gridObstacle)
+                        {
+                            node.active = false;
+                        }
+                    }
+
                     auto gridActor = dynamic_cast<GridActor*>(ray.hitActor);
                     if (gridActor)
                     {
@@ -239,6 +248,8 @@ void Grid::LerpInNodes(float deltaTime)
     {
         for (auto& node : row.columns)
         {
+            if (!node.active) continue;
+
             auto& data = nodeMesh->instanceData[node.instancedMeshIndex];
             data.world.r[0].m128_f32[0] = std::lerp(data.world.r[0].m128_f32[0], 0.f, deltaTime * lerpSpeed);
             data.world.r[1].m128_f32[1] = std::lerp(data.world.r[1].m128_f32[1], 0.f, deltaTime * lerpSpeed);
@@ -260,6 +271,8 @@ void Grid::LerpOutNodes(float deltaTime)
     {
         for (auto& node : row.columns)
         {
+            if (!node.active) continue;
+
             auto& data = nodeMesh->instanceData[node.instancedMeshIndex];
             data.world.r[0].m128_f32[0] = std::lerp(data.world.r[0].m128_f32[0], 0.9f, deltaTime * lerpSpeed);
             data.world.r[1].m128_f32[1] = std::lerp(data.world.r[1].m128_f32[1], 0.9f, deltaTime * lerpSpeed);
