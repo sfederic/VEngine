@@ -119,7 +119,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 								{
 									//Keys are the keyframes into the animation
 									double keyTime = animCurve->KeyGet(keyIndex).GetTime().GetSecondDouble();
-									FbxTime time;
+									FbxTime time = {};
 									time.SetSecondDouble(keyTime);
 
 									FbxVector4 rot = animEvaluator->GetNodeLocalRotation(node, time);
@@ -136,6 +136,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 									euler.m128_f32[0] = -XMConvertToRadians(rot[0]);
 									euler.m128_f32[1] = -XMConvertToRadians(rot[1]);
 									euler.m128_f32[2] = -XMConvertToRadians(rot[2]);
+
 									XMVECTOR quat = XMQuaternionRotationRollPitchYawFromVector(euler);
 									animFrame.rot.x = quat.m128_f32[0];
 									animFrame.rot.y = quat.m128_f32[1];
@@ -149,6 +150,8 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 									animFrame.pos.x = pos[0];
 									animFrame.pos.y = pos[1];
 									animFrame.pos.z = pos[2];
+
+									meshData->animation.frames.push_back(animFrame);
 								}
 							}
 						}
