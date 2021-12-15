@@ -59,7 +59,7 @@ bool FBXImporter::Import(std::string filename, MeshDataProxy* meshData)
 	int childNodeCount = rootNode->GetChildCount();
 	for (int i = 0; i < childNodeCount; i++)
 	{
-		ProcessAllChildNodes(rootNode->GetChild(childNodeCount - 1), existingMeshDataMap[filename]);
+		ProcessAllChildNodes(rootNode->GetChild(i), existingMeshDataMap[filename]);
 	}
 
 	scene->Destroy();
@@ -166,6 +166,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 	int currentBoneIndex = 0;
 
 	FbxMesh* mesh = node->GetMesh();
+	std::string name = node->GetName();
 	if (mesh)
 	{
 		//OLD WEIGHT AND BONE INDICES CODE
