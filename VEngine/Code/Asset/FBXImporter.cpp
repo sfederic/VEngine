@@ -45,6 +45,10 @@ bool FBXImporter::Import(std::string filename, MeshDataProxy* meshData)
 	FbxScene* scene = FbxScene::Create(manager, "scene0");
 	importer->Import(scene);
 
+	//Automatically triangulate scene
+	FbxGeometryConverter clsConverter(manager);
+	clsConverter.Triangulate(scene, true);
+
 	//This never seemed to do anything, left it here for future reference
 	//scene->GetGlobalSettings().SetAxisSystem(FbxAxisSystem::DirectX);
 
@@ -82,12 +86,6 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 	}
 
 	FbxScene* scene = node->GetScene();
-
-	FbxNodeAttribute* attrib = node->GetNodeAttribute();
-	if (attrib->GetAttributeType() == FbxNodeAttribute::eSkeleton)
-	{
-		throw new std::exception();
-	}
 
 	//Animation code: works for singular transforms, not taking bone weights into account yet
 	FbxInt nodeFlags = node->GetAllObjectFlags();
