@@ -1,6 +1,7 @@
 #include "FBXImporter.h"
 #include <cassert>
 #include <filesystem>
+#include "Animation/AnimationStructures.h"
 
 FBXImporter fbxImporter;
 
@@ -51,7 +52,7 @@ bool FBXImporter::Import(std::string filename, MeshDataProxy* meshData)
 	FbxNode* rootNode = scene->GetRootNode();
 
 	int childNodeCount = rootNode->GetChildCount();
-	//for (int i = 0; i < childNodeCount; i++)
+	for (int i = 0; i < childNodeCount; i++)
 	{
 		ProcessAllChildNodes(rootNode->GetChild(childNodeCount - 1), existingMeshDataMap[filename]);
 	}
@@ -70,23 +71,23 @@ bool FBXImporter::Import(std::string filename, MeshDataProxy* meshData)
 
 void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 {
-	//Recursion code for dealing with nodes in the heirarchy. Come back to this after more work is done.
-	/*int childNodeCount = node->GetChildCount();
+	//Recursion for dealing with nodes in the heirarchy.
+	int childNodeCount = node->GetChildCount();
 	for (int i = 0; i < childNodeCount; i++)
 	{
-		ProcessAllChildNodes(node->GetChild(i));
-	}*/
+		ProcessAllChildNodes(node->GetChild(i), meshData);
+	}
 
 	FbxScene* scene = node->GetScene();
 
-	/*FbxNodeAttribute* attrib = node->GetNodeAttribute();
+	FbxNodeAttribute* attrib = node->GetNodeAttribute();
 	if (attrib->GetAttributeType() == FbxNodeAttribute::eSkeleton)
 	{
-		throw;
-	}*/
+		throw new std::exception();
+	}
 
 	//Animation code: works for singular transforms, not taking bone weights into account yet
-	/*FbxInt nodeFlags = node->GetAllObjectFlags();
+	FbxInt nodeFlags = node->GetAllObjectFlags();
 	if (nodeFlags & FbxPropertyFlags::eAnimated)
 	{
 		int numAnimStacks = scene->GetSrcObjectCount<FbxAnimStack>();
@@ -123,7 +124,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 
 									FbxVector4 rot = animEvaluator->GetNodeLocalRotation(node, time);
 									FbxVector4 scale = animEvaluator->GetNodeLocalScaling(node, time);
-									FbxVector4 pos = animEvaluator->GetNodeLocalTransform(node, time);
+									FbxVector4 pos = animEvaluator->GetNodeLocalTranslation(node, time);
 
 									AnimFrame animFrame = {};
 									animFrame.time = keyTime;
@@ -145,10 +146,9 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 									animFrame.scale.y = 1.f;
 									animFrame.scale.z = 1.f;
 
-									//animFrame.pos.x = pos[0];
-									//animFrame.pos.y = pos[1];
-									//animFrame.pos.z = pos[2];
-
+									animFrame.pos.x = pos[0];
+									animFrame.pos.y = pos[1];
+									animFrame.pos.z = pos[2];
 								}
 							}
 						}
@@ -156,15 +156,16 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 				}
 			}
 		}
-	}*/
+	}
 
-	//std::unordered_map<int, BoneWeights> boneWeightsMap;
+	std::unordered_map<int, BoneWeights> boneWeightsMap;
+	int currentBoneIndex = 0;
 
 	FbxMesh* mesh = node->GetMesh();
 	if (mesh)
 	{
 		//OLD WEIGHT AND BONE INDICES CODE
-		/*const int deformerCount = mesh->GetDeformerCount(FbxDeformer::eSkin);
+		const int deformerCount = mesh->GetDeformerCount(FbxDeformer::eSkin);
 		for (int deformerIndex = 0; deformerIndex < deformerCount; deformerIndex++)
 		{
 			FbxSkin* skin = (FbxSkin*)mesh->GetDeformer(deformerIndex, FbxDeformer::eSkin);
@@ -201,7 +202,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 					}
 				}
 			}
-		}*/
+		}
 
 		//Material 
 		//int materialCount = node->GetMaterialCount();
