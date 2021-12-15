@@ -29,6 +29,7 @@ bool FBXImporter::Import(std::string filename, MeshDataProxy* meshData)
 	{
 		meshData->vertices = &existingMeshIt->second->vertices;
 		meshData->indices = &existingMeshIt->second->indices;
+		meshData->anim = &existingMeshIt->second->animation;
 		return true;
 	}
 	else
@@ -63,8 +64,10 @@ bool FBXImporter::Import(std::string filename, MeshDataProxy* meshData)
 
 	MeshData* newMeshData = existingMeshDataMap.find(filename)->second;
 
+	//Set proxy data for new mesh daata
 	meshData->vertices = &newMeshData->vertices;
 	meshData->indices = &newMeshData->indices;
+	meshData->anim = &newMeshData->animation;
 
 	return true;
 }

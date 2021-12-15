@@ -411,8 +411,22 @@ void Renderer::RenderMeshComponents()
 
 		SetRenderPipelineStates(mesh);
 
+		XMMATRIX meshWorldMatrix = mesh->GetWorldMatrix();
+
+		//Test animation
+		Animation* anim = mesh->meshDataProxy->anim;
+		if (anim && !anim->frames.empty())
+		{
+			if (anim->currentTime >= anim->GetEndTime())
+			{
+				anim->currentTime = 0.f;
+			}
+			anim->currentTime += Core::GetDeltaTime();
+			anim->Interpolate(anim->currentTime, meshWorldMatrix);
+		}
+
 		//Set matrices
-		shaderMatrices.model = mesh->GetWorldMatrix();
+		shaderMatrices.model = meshWorldMatrix;
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		shaderMatrices.MakeTextureMatrix(&mesh->material->materialShaderData);
 	

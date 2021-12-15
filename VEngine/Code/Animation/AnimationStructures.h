@@ -36,4 +36,6 @@ struct Animation
 	std::string name;
 
 	std::vector<AnimFrame> frames;
+
+	float currentTime = 0.f;
 };

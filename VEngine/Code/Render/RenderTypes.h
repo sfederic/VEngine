@@ -9,6 +9,7 @@ using namespace DirectX;
 
 struct MaterialShaderData;
 struct MeshComponent;
+struct Animation;
 
 struct Vertex
 {
@@ -56,6 +57,8 @@ struct MeshDataProxy
 {
 	std::vector<Vertex>* vertices = nullptr;
 	std::vector<MeshData::indexDataType>* indices = nullptr;
+
+	Animation* anim = nullptr;
 
 	uint64_t GetVerticesByteWidth()
 	{
