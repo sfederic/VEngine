@@ -3,6 +3,7 @@
 #include <string>
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
+#include "Animation/AnimationStructures.h"
 
 using namespace DirectX;
 
@@ -23,6 +24,9 @@ struct MeshData
 
 	std::vector<Vertex> vertices;
 	std::vector<indexDataType> indices;
+
+	//TODO: think about splitting this up somewhere else (AnimMeshData?)
+	Animation animation;
 };
 
 //TextureData exists because serialisation needed texture representation that wasn't a Texture2D
