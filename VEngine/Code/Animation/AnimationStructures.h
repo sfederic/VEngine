@@ -5,6 +5,12 @@
 
 using namespace DirectX;
 
+struct BoneWeights
+{
+	std::vector<double> weights;
+	std::vector<int> boneIndex;
+};
+
 struct AnimFrame
 {
 	double time;
