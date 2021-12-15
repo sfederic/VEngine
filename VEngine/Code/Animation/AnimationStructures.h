@@ -31,7 +31,7 @@ struct Animation
 		return frames.back().time;
 	}
 
-	void Interpolate(float t, DirectX::XMFLOAT4X4& m);
+	void Interpolate(float t, DirectX::XMMATRIX& m);
 
 	std::string name;
 

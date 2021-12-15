@@ -1,6 +1,6 @@
 #include "AnimationStructures.h"
 
-void Animation::Interpolate(float t, DirectX::XMFLOAT4X4& m)
+void Animation::Interpolate(float t, DirectX::XMMATRIX& m)
 {
 	for (int i = 0; i < (frames.size() - 1); i++)
 	{
@@ -22,7 +22,7 @@ void Animation::Interpolate(float t, DirectX::XMFLOAT4X4& m)
 			XMVECTOR lerpedScale = XMVectorLerp(scale1, scale2, lerpPercent);
 			XMVECTOR lerpedRot = XMQuaternionSlerp(rot1, rot2, lerpPercent);
 			XMVECTOR zero = XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f);
-			XMStoreFloat4x4(&m, XMMatrixAffineTransformation(lerpedScale, zero, lerpedRot, lerpedPos));
+			m = XMMatrixAffineTransformation(lerpedScale, zero, lerpedRot, lerpedPos);
 
 			return;
 		}
