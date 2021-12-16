@@ -16,8 +16,8 @@ struct Vertex
 	XMFLOAT3 pos;
 	XMFLOAT3 normal;
 	XMFLOAT2 uv;
-	XMFLOAT3 weights;
-	XMUINT4 boneIndices;
+	float weights[3];
+	uint32_t boneIndices[4];
 };
 
 //The actual data for each loaded mesh. Each loaded mesh file will have one of these per its filename.

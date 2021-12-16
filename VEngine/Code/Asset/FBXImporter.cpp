@@ -272,7 +272,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 				}
 
 				//Bone Weights
-				/*if (boneWeightsMap.find(index) != boneWeightsMap.end())
+				if (boneWeightsMap.find(index) != boneWeightsMap.end())
 				{
 					BoneWeights* boneData = &boneWeightsMap.find(index)->second;
 					if (boneData)
@@ -288,7 +288,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 							vert.boneIndices[i] = boneData->boneIndex[i];
 						}
 					}
-				}*/
+				}
 
 				//if (!meshData.CheckDuplicateVertices(vert))
 				//{
