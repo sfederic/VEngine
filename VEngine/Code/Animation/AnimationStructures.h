@@ -13,10 +13,10 @@ struct BoneWeights
 
 struct Joint
 {
-	XMMATRIX invBindPose = XMMatrixIdentity();
 	std::string name;
 	int parentIndex = -1;
 	int index = 0;
+	XMMATRIX invBindPose = XMMatrixIdentity();
 };
 
 struct Skeleton

@@ -55,11 +55,21 @@ bool FBXImporter::Import(std::string filename, MeshDataProxy* meshData)
 	animEvaluator = scene->GetAnimationEvaluator();
 
 	FbxNode* rootNode = scene->GetRootNode();
-
 	int childNodeCount = rootNode->GetChildCount();
+
+	MeshData* foundMeshData = existingMeshDataMap[filename];
+	
+	//Go through all skeleton nodes
+	Skeleton* skeleton = &foundMeshData->animation.skeleton;
 	for (int i = 0; i < childNodeCount; i++)
 	{
-		ProcessAllChildNodes(rootNode->GetChild(i), existingMeshDataMap[filename]);
+		ProcessSkeletonNodes(rootNode->GetChild(i), skeleton, 0);
+	}
+
+	//Go through all nodes
+	for (int i = 0; i < childNodeCount; i++)
+	{
+		ProcessAllChildNodes(rootNode->GetChild(i), foundMeshData);
 	}
 
 	scene->Destroy();
@@ -161,20 +171,6 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 			}
 		}
 	}
-
-
-	//Check if BONE and add as joint
-	FbxNodeAttribute::EType boneType = node->GetNodeAttribute()->GetAttributeType();
-	if (boneType == FbxNodeAttribute::EType::eSkeleton)
-	{
-		Joint joint = {};
-		std::string jointName = node->GetName();
-		joint.name = jointName;
-		meshData->animation.skeleton.AddJoint(joint);
-
-		ProcessSkeletonNodes(node, &meshData->animation.skeleton, joint.index);
-	}
-
 
 	std::unordered_map<int, BoneWeights> boneWeightsMap;
 	int currentBoneIndex = 0;
@@ -336,7 +332,7 @@ void FBXImporter::ProcessSkeletonNodes(FbxNode* node, Skeleton* skeleton, int pa
 			joint.parentIndex = parentIndex;
 			skeleton->AddJoint(joint);
 
-			ProcessSkeletonNodes(child, skeleton, joint.index);
+			ProcessSkeletonNodes(child, skeleton, skeleton->joints.back().index);
 		}
 	}
 }

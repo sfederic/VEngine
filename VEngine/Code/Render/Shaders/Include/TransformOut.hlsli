@@ -15,10 +15,13 @@ struct TransformOut
 		for (int index = 0; index < 4; ++index)
 		{
 			//no nonuniform scaling
-			posL += weights[index] * mul(float4(i.pos, 1.0f),
-				boneTransforms[i.boneIndices[index]]).xyz;
-			normalL += weights[index] * mul(i.normal,
-				(float3x3)boneTransforms[i.boneIndices[index]]);
+			//posL += weights[index] * mul(float4(i.pos, 1.0f),
+			//	boneTransforms[i.boneIndices[index]]).xyz;
+			//normalL += weights[index] * mul(i.normal,
+			//	(float3x3)boneTransforms[i.boneIndices[index]]);
+			
+			posL += weights[index] * mul(mvp, float4(i.pos, 1.0f)).xyz;
+			normalL += weights[index] * mul((float3x3)model, i.normal);
 		}
 
 		o.pos = mul(mvp, float4(posL, 1.0f));
