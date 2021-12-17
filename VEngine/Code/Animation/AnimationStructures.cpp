@@ -35,15 +35,15 @@ void Skeleton::AddJoint(Joint joint)
 	joints.back().index = joints.size() - 1;
 }
 
-Joint* Skeleton::FindJoint(std::string name)
+int Skeleton::FindJointIndexByName(std::string name)
 {
 	for (int i = 0; i < joints.size(); i++)
 	{
 		if (joints[i].name == name)
 		{
-			return &joints[i];
+			return joints[i].index;
 		}
 	}
 
-	return nullptr;
+	return -1;
 }

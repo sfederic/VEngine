@@ -24,7 +24,7 @@ struct Skeleton
 	std::vector<Joint> joints;
 
 	void AddJoint(Joint joint);
-	Joint* FindJoint(std::string name);
+	int FindJointIndexByName(std::string name);
 };
 
 struct AnimFrame
