@@ -16,12 +16,14 @@ struct Joint
 	XMMATRIX invBindPose = XMMatrixIdentity();
 	std::string name;
 	int parentIndex = -1;
+	int index = 0;
 };
 
 struct Skeleton
 {
 	std::vector<Joint> joints;
 
+	void AddJoint(Joint joint);
 	Joint* FindJoint(std::string name);
 };
 

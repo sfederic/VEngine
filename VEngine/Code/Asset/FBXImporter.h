@@ -9,6 +9,8 @@
 
 using namespace fbxsdk;
 
+struct Skeleton;
+
 //REF: https://github.com/peted70/hololens-fbx-viewer/tree/master/HolographicAppForOpenGLES1/include
 //REF: https://peted.azurewebsites.net/hololens-fbx-loading-c/
 
@@ -34,9 +36,11 @@ public:
 
 	void Init();
 	bool Import(std::string filename, MeshDataProxy* meshData);
-	void ProcessAllChildNodes(FbxNode* node, MeshData* meshData);
-	void GetAllChildNode(FbxNode* node, std::vector<std::pair<std::string, FbxNode*>>& nodes);
 	MeshData* FindMesh(std::string meshName);
+
+private:
+	void ProcessAllChildNodes(FbxNode* node, MeshData* meshData);
+	void ProcessSkeletonNodes(FbxNode* node, Skeleton* skeleton, int parentIndex);
 };
 
 extern FBXImporter fbxImporter;

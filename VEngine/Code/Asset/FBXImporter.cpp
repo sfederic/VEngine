@@ -56,16 +56,6 @@ bool FBXImporter::Import(std::string filename, MeshDataProxy* meshData)
 
 	FbxNode* rootNode = scene->GetRootNode();
 
-	//Make a vector map things for debugging to show scene import scene objetcs.
-	std::vector<std::pair<std::string, FbxNode*>> nodeMap;
-	nodeMap.push_back(std::make_pair(rootNode->GetName(), rootNode));
-
-	for (int i = 0; i < rootNode->GetChildCount(); i++)
-	{
-		auto child = rootNode->GetChild(i);
-		GetAllChildNode(child, nodeMap);
-	}
-
 	int childNodeCount = rootNode->GetChildCount();
 	for (int i = 0; i < childNodeCount; i++)
 	{
@@ -172,23 +162,39 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 		}
 	}
 
+
+	//Check if BONE and add as joint
+	FbxNodeAttribute::EType boneType = node->GetNodeAttribute()->GetAttributeType();
+	if (boneType == FbxNodeAttribute::EType::eSkeleton)
+	{
+		Joint joint = {};
+		std::string jointName = node->GetName();
+		joint.name = jointName;
+		meshData->animation.skeleton.AddJoint(joint);
+
+		ProcessSkeletonNodes(node, &meshData->animation.skeleton, joint.index);
+	}
+
+
 	std::unordered_map<int, BoneWeights> boneWeightsMap;
 	int currentBoneIndex = 0;
 
 	FbxMesh* mesh = node->GetMesh();
-	std::string name = node->GetName();
 	if (mesh)
 	{
-		//OLD WEIGHT AND BONE INDICES CODE
+		//WEIGHT AND BONE INDICES CODE
 		const int deformerCount = mesh->GetDeformerCount(FbxDeformer::eSkin);
 		for (int deformerIndex = 0; deformerIndex < deformerCount; deformerIndex++)
 		{
-			FbxSkin* skin = (FbxSkin*)mesh->GetDeformer(deformerIndex, FbxDeformer::eSkin);
+			FbxSkin* skin = reinterpret_cast<FbxSkin*>(mesh->GetDeformer(deformerIndex, FbxDeformer::eSkin));
+			if (!skin) continue;
 
 			const int clusterCount = skin->GetClusterCount();
 			for (int clusterIndex = 0; clusterIndex < clusterCount; clusterIndex++)
 			{
 				FbxCluster* cluster = skin->GetCluster(clusterIndex);
+				FbxNode* joint = cluster->GetLink();
+
 				const int vertexIndexCount = cluster->GetControlPointIndicesCount();
 				for (int i = 0; i < vertexIndexCount; i++)
 				{
@@ -316,13 +322,22 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 	}
 }
 
-void FBXImporter::GetAllChildNode(FbxNode* node, std::vector<std::pair<std::string, FbxNode*>>& nodes)
+void FBXImporter::ProcessSkeletonNodes(FbxNode* node, Skeleton* skeleton, int parentIndex)
 {
-	for (int i = 0; i < node->GetChildCount(); i++)
+	const int childCount = node->GetChildCount();
+	for (int i = 0; i < childCount; i++)
 	{
-		auto childNode = node->GetChild(i);
-		nodes.push_back(std::make_pair(childNode->GetName(), childNode));
-		GetAllChildNode(childNode, nodes);
+		FbxNode* child = node->GetChild(i);
+
+		if (child->GetNodeAttribute()->GetAttributeType() == FbxNodeAttribute::EType::eSkeleton)
+		{
+			Joint joint = {};
+			joint.name = node->GetName();
+			joint.parentIndex = parentIndex;
+			skeleton->AddJoint(joint);
+
+			ProcessSkeletonNodes(child, skeleton, joint.index);
+		}
 	}
 }
 

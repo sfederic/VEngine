@@ -29,6 +29,12 @@ void Animation::Interpolate(float t, DirectX::XMMATRIX& m)
 	}
 }
 
+void Skeleton::AddJoint(Joint joint)
+{
+	joint.index = joints.size();
+	joints.push_back(joint);
+}
+
 Joint* Skeleton::FindJoint(std::string name)
 {
 	for (int i = 0; i < joints.size(); i++)
