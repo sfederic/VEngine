@@ -56,6 +56,16 @@ bool FBXImporter::Import(std::string filename, MeshDataProxy* meshData)
 
 	FbxNode* rootNode = scene->GetRootNode();
 
+	//Make a vector map things for debugging to show scene import scene objetcs.
+	std::vector<std::pair<std::string, FbxNode*>> nodeMap;
+	nodeMap.push_back(std::make_pair(rootNode->GetName(), rootNode));
+
+	for (int i = 0; i < rootNode->GetChildCount(); i++)
+	{
+		auto child = rootNode->GetChild(i);
+		GetAllChildNode(child, nodeMap);
+	}
+
 	int childNodeCount = rootNode->GetChildCount();
 	for (int i = 0; i < childNodeCount; i++)
 	{
@@ -303,6 +313,16 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 		}
 
 		assert(meshData->indices.size() % 3 == 0 && "Num of indices won't be matching vertices");
+	}
+}
+
+void FBXImporter::GetAllChildNode(FbxNode* node, std::vector<std::pair<std::string, FbxNode*>>& nodes)
+{
+	for (int i = 0; i < node->GetChildCount(); i++)
+	{
+		auto childNode = node->GetChild(i);
+		nodes.push_back(std::make_pair(childNode->GetName(), childNode));
+		GetAllChildNode(childNode, nodes);
 	}
 }
 

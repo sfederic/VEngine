@@ -35,6 +35,7 @@ public:
 	void Init();
 	bool Import(std::string filename, MeshDataProxy* meshData);
 	void ProcessAllChildNodes(FbxNode* node, MeshData* meshData);
+	void GetAllChildNode(FbxNode* node, std::vector<std::pair<std::string, FbxNode*>>& nodes);
 	MeshData* FindMesh(std::string meshName);
 };
 
