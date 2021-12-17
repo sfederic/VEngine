@@ -2,6 +2,7 @@
 #include <cassert>
 #include <filesystem>
 #include "Animation/AnimationStructures.h"
+#include "VMath.h"
 
 FBXImporter fbxImporter;
 
@@ -96,6 +97,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 	}
 
 	FbxScene* scene = node->GetScene();
+	std::string nodename = node->GetName();
 
 	//Animation code: works for singular transforms, not taking bone weights into account yet
 	FbxInt nodeFlags = node->GetAllObjectFlags();
@@ -173,7 +175,6 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 	}
 
 	std::unordered_map<int, BoneWeights> boneWeightsMap;
-	int currentBoneIndex = 0;
 
 	FbxMesh* mesh = node->GetMesh();
 	if (mesh)
@@ -189,8 +190,21 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 			for (int clusterIndex = 0; clusterIndex < clusterCount; clusterIndex++)
 			{
 				FbxCluster* cluster = skin->GetCluster(clusterIndex);
-				FbxNode* joint = cluster->GetLink();
 
+				//I think the Link is the joint
+				std::string currentJointName = cluster->GetLink()->GetName();
+				int currentJointIndex = meshData->animation.skeleton.FindJointIndexByName(currentJointName);
+
+				FbxAMatrix clusterMatrix, linkMatrix;
+				cluster->GetTransformMatrix(clusterMatrix);
+				cluster->GetTransformLinkMatrix(linkMatrix);
+
+				//Set inverse bind post for joint
+				FbxAMatrix bindposeInverseMatrix = linkMatrix.Inverse() * clusterMatrix;
+
+				XMFLOAT4X4 matrix = VMath::FbxMatrixToDirectXMathMatrix(bindposeInverseMatrix);
+				meshData->animation.skeleton.joints[currentJointIndex].invBindPose = XMLoadFloat4x4(&matrix);
+					
 				const int vertexIndexCount = cluster->GetControlPointIndicesCount();
 				for (int i = 0; i < vertexIndexCount; i++)
 				{
@@ -210,7 +224,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 
 					if (boneWeightsMap[index].boneIndex.size() < 4)
 					{
-						boneWeightsMap[index].boneIndex.push_back(currentBoneIndex);
+						boneWeightsMap[index].boneIndex.push_back(currentJointIndex);
 					}
 
 					if (boneWeightsMap[index].weights.size() < 3)
