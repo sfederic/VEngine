@@ -28,3 +28,16 @@ void Animation::Interpolate(float t, DirectX::XMMATRIX& m)
 		}
 	}
 }
+
+Joint* Skeleton::FindJoint(std::string name)
+{
+	for (int i = 0; i < joints.size(); i++)
+	{
+		if (joints[i].name == name)
+		{
+			return &joints[i];
+		}
+	}
+
+	return nullptr;
+}

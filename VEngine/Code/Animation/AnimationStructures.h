@@ -13,14 +13,16 @@ struct BoneWeights
 
 struct Joint
 {
-	XMMATRIX invBindPose;
+	XMMATRIX invBindPose = XMMatrixIdentity();
 	std::string name;
-	Joint* parent = nullptr;
+	int parentIndex = -1;
 };
 
 struct Skeleton
 {
 	std::vector<Joint> joints;
+
+	Joint* FindJoint(std::string name);
 };
 
 struct AnimFrame
@@ -46,6 +48,8 @@ struct Animation
 	void Interpolate(float t, DirectX::XMMATRIX& m);
 
 	std::string name;
+
+	Skeleton skeleton;
 
 	std::vector<AnimFrame> frames;
 
