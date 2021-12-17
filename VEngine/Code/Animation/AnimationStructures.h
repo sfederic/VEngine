@@ -11,6 +11,18 @@ struct BoneWeights
 	std::vector<int> boneIndex;
 };
 
+struct Joint
+{
+	XMMATRIX invBindPose;
+	std::string name;
+	Joint* parent = nullptr;
+};
+
+struct Skeleton
+{
+	std::vector<Joint> joints;
+};
+
 struct AnimFrame
 {
 	double time;
