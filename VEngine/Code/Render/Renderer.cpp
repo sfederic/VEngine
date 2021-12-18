@@ -304,6 +304,12 @@ void Renderer::CreateMainConstantBuffers()
 	cbLights = RenderUtils::CreateDefaultBuffer(sizeof(ShaderLights),
 		D3D11_BIND_CONSTANT_BUFFER, &shaderLights);
 	assert(cbLights);
+
+	//Skinning data
+	XMMATRIX skinningMatrices[96] = {};
+	cbSkinningData = RenderUtils::CreateDefaultBuffer(sizeof(XMMATRIX) * 96,
+		D3D11_BIND_CONSTANT_BUFFER, skinningMatrices);
+	assert(cbSkinningData);
 }
 
 void Renderer::CheckSupportedFeatures()
@@ -416,15 +422,36 @@ void Renderer::RenderMeshComponents()
 		XMMATRIX meshWorldMatrix = mesh->GetWorldMatrix();
 
 		//Test animation
-		Animation* anim = mesh->meshDataProxy->anim;
-		if (anim && !anim->frames.empty())
+
+		Skeleton* skeleton = mesh->meshDataProxy->skeleton;
+		if (skeleton && !skeleton->joints.empty())
 		{
-			if (anim->currentTime >= anim->GetEndTime())
+			std::vector<XMMATRIX> skinningData;
+
+			//push meshes' matrix into vector for armature (Identity matrix works as well somehow)
+			skinningData.push_back(meshWorldMatrix);
+
+			for (Joint& joint : skeleton->joints)
 			{
-				anim->currentTime = 0.f;
+				if (!joint.anim.frames.empty())
+				{
+					if (joint.anim.currentTime >= joint.anim.GetEndTime())
+					{
+						joint.anim.currentTime = 0.f;
+					}
+
+					joint.anim.currentTime += Core::GetDeltaTime();
+					joint.anim.Interpolate(joint.anim.currentTime, joint, skeleton);
+
+					skinningData.push_back(joint.invBindPose);
+				}
 			}
-			anim->currentTime += Core::GetDeltaTime();
-			anim->Interpolate(anim->currentTime, meshWorldMatrix);
+
+			if (!skinningData.empty())
+			{
+				context->UpdateSubresource(cbSkinningData, 0, nullptr, skinningData.data(), 0, 0);
+				context->VSSetConstantBuffers(cbSkinningRegister, 1, &cbSkinningData);
+			}
 		}
 
 		//Set matrices

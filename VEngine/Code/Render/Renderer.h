@@ -41,6 +41,7 @@ struct Renderer
 	ID3D11Buffer* cbMatrices;
 	ID3D11Buffer* cbMaterial;
 	ID3D11Buffer* cbLights;
+	ID3D11Buffer* cbSkinningData;
 
 	//Viewport
 	D3D11_VIEWPORT viewport;
