@@ -18,9 +18,6 @@ using namespace fbxsdk;
 // Great GameDev.net reference on using FBX SDK and animation.
 //REF: https://www.gamedev.net/tutorials/_/technical/graphics-programming-and-theory/how-to-work-with-fbx-sdk-r3582/
 
-//NOTE: For the most part, not going to use FBX models with lights, cameras and extra nodes. One model should suffice. Import() code reflects that.
-//NOTE: Models needto be triangluated, not working with control points (see asserts() below)
-
 struct FBXLoader
 {
 private:
