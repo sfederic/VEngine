@@ -41,7 +41,7 @@
     <ClCompile Include="Code\Editor\DebugMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Asset\FBXImporter.cpp">
+    <ClCompile Include="Code\Asset\FBXLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Input.cpp">
@@ -481,7 +481,7 @@
     <ClInclude Include="Code\Core.h" />
     <ClInclude Include="Code\Debug.h" />
     <ClInclude Include="Code\Engine.h" />
-    <ClInclude Include="Code\Asset\FBXImporter.h" />
+    <ClInclude Include="Code\Asset\FBXLoader.h" />
     <ClInclude Include="Code\Input.h" />
     <ClInclude Include="Code\VMath.h" />
     <ClInclude Include="Code\Profile.h" />

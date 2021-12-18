@@ -1,7 +1,7 @@
 #include "AssetSystem.h"
 #include <cstdio>
 #include <filesystem>
-#include "FBXImporter.h"
+#include "FBXLoader.h"
 #include "MeshAssetHeader.h"
 #include "Profile.h"
 #include "Log.h"
@@ -21,7 +21,7 @@ void AssetSystem::WriteAllMeshDataToMeshAssetFiles()
 
 	auto startTime = Profile::QuickStart();
 
-	for (auto meshIt : fbxImporter.existingMeshDataMap)
+	for (auto& meshIt : fbxLoader.existingMeshDataMap)
 	{
 		MeshData* meshData = meshIt.second;
 

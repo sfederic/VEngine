@@ -1,5 +1,5 @@
 #include "MeshComponent.h"
-#include "Asset/FBXImporter.h"
+#include "Asset/FBXLoader.h"
 #include "Render/RenderUtils.h"
 #include "Render/ShaderSystem.h"
 #include "Render/Material.h"
@@ -49,7 +49,7 @@ void MeshComponent::Create()
 	material->Create();
 
 	//Import mesh (set up bounding box in here too so you don't need to re-create bounds)
-	fbxImporter.Import(meshComponentData.filename.c_str(), meshDataProxy);
+	fbxLoader.Import(meshComponentData.filename.c_str(), meshDataProxy);
 
 	//Setup bounds
 	BoundingOrientedBox::CreateFromPoints(boundingBox, meshDataProxy->vertices->size(),

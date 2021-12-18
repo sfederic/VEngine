@@ -291,8 +291,8 @@
     <ClInclude Include="Code\Editor\WorldDock.h" />
     <ClCompile Include="Code\Engine.cpp" />
     <ClInclude Include="Code\Engine.h" />
-    <ClCompile Include="Code\Asset\FBXImporter.cpp" />
-    <ClInclude Include="Code\Asset\FBXImporter.h" />
+    <ClCompile Include="Code\Asset\FBXLoader.cpp" />
+    <ClInclude Include="Code\Asset\FBXLoader.h" />
     <ClCompile Include="Code\Input.cpp" />
     <ClInclude Include="Code\Gameplay\GameInstance.h" />
     <ClInclude Include="Code\Gameplay\GameplayTags.h" />

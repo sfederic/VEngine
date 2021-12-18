@@ -21,7 +21,7 @@ using namespace fbxsdk;
 //NOTE: For the most part, not going to use FBX models with lights, cameras and extra nodes. One model should suffice. Import() code reflects that.
 //NOTE: Models needto be triangluated, not working with control points (see asserts() below)
 
-struct FBXImporter
+struct FBXLoader
 {
 private:
 	FbxManager* manager = nullptr;
@@ -41,4 +41,4 @@ private:
 	void ProcessSkeletonNodes(FbxNode* node, Skeleton* skeleton, int parentIndex);
 };
 
-extern FBXImporter fbxImporter;
+extern FBXLoader fbxLoader;

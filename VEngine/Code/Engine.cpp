@@ -3,7 +3,7 @@
 #include "Core.h"
 #include "Input.h"
 #include "Render/Renderer.h"
-#include "Asset/FBXImporter.h"
+#include "Asset/FBXLoader.h"
 #include "UI/UISystem.h"
 #include "Editor/DebugMenu.h"
 #include "Camera.h"
@@ -35,7 +35,7 @@ void Engine::Init(int argc, char* argv[])
 
 	renderer.Init(editor->windowHwnd, editor->viewportWidth, editor->viewportHeight);
 
-	fbxImporter.Init();
+	fbxLoader.Init();
 
 	uiSystem.Init((void*)renderer.swapchain);
 	debugMenu.Init();

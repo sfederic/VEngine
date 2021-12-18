@@ -1,19 +1,19 @@
-#include "FBXImporter.h"
+#include "FBXLoader.h"
 #include <cassert>
 #include <filesystem>
 #include "Animation/AnimationStructures.h"
 #include "VMath.h"
 
-FBXImporter fbxImporter;
+FBXLoader fbxLoader;
 
-void FBXImporter::Init()
+void FBXLoader::Init()
 {
 	manager = FbxManager::Create();
 	ioSetting = FbxIOSettings::Create(manager, IOSROOT);
 	importer = FbxImporter::Create(manager, "");
 }
 
-bool FBXImporter::Import(std::string filename, MeshDataProxy* meshData)
+bool FBXLoader::Import(std::string filename, MeshDataProxy* meshData)
 {
 	std::string filepath = "Meshes/" + filename;
 	
@@ -89,7 +89,7 @@ bool FBXImporter::Import(std::string filename, MeshDataProxy* meshData)
 	return true;
 }
 
-void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
+void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 {
 	//Recursion for dealing with nodes in the heirarchy.
 	int childNodeCount = node->GetChildCount();
@@ -332,7 +332,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 	}
 }
 
-void FBXImporter::ProcessSkeletonNodes(FbxNode* node, Skeleton* skeleton, int parentIndex)
+void FBXLoader::ProcessSkeletonNodes(FbxNode* node, Skeleton* skeleton, int parentIndex)
 {
 	const int childCount = node->GetChildCount();
 	for (int i = 0; i < childCount; i++)
@@ -351,7 +351,7 @@ void FBXImporter::ProcessSkeletonNodes(FbxNode* node, Skeleton* skeleton, int pa
 	}
 }
 
-MeshData* FBXImporter::FindMesh(std::string meshName)
+MeshData* FBXLoader::FindMesh(std::string meshName)
 {
 	auto meshIt = existingMeshDataMap.find(meshName);
 	if (meshIt == existingMeshDataMap.end())
