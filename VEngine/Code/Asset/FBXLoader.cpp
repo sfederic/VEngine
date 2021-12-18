@@ -130,9 +130,9 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 				FbxAMatrix bindposeInverseMatrix = linkMatrix.Inverse() * clusterMatrix;
 
 				XMFLOAT4X4 matrix = VMath::FbxMatrixToDirectXMathMatrix(bindposeInverseMatrix);
-				meshData->skeleton.joints[currentJointIndex].initialBindPose = XMLoadFloat4x4(&matrix);
-				meshData->skeleton.joints[currentJointIndex].transormPose =
-					meshData->skeleton.joints[currentJointIndex].initialBindPose;
+				meshData->skeleton.joints[currentJointIndex].inverseBindPose = XMLoadFloat4x4(&matrix);
+				meshData->skeleton.joints[currentJointIndex].currentPose =
+					meshData->skeleton.joints[currentJointIndex].inverseBindPose;
 					
 				const int vertexIndexCount = cluster->GetControlPointIndicesCount();
 				for (int i = 0; i < vertexIndexCount; i++)
@@ -235,6 +235,7 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 			}
 		}
 
+		//@Todo: materials for fbx files. see if it's even worth doing later on.
 		//Material 
 		//int materialCount = node->GetMaterialCount();
 		//for (int materialIndex = 0; materialIndex < materialCount; materialIndex++)

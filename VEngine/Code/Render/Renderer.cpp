@@ -716,7 +716,7 @@ void Renderer::AnimateSkeletalMesh(MeshComponent* mesh)
 				joint.anim.currentTime += Core::GetDeltaTime();
 				joint.anim.Interpolate(joint.anim.currentTime, joint, skeleton);
 
-				skinningData.push_back(joint.transormPose);
+				skinningData.push_back(joint.currentPose);
 			}
 		}
 

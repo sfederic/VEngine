@@ -34,7 +34,7 @@ Skeleton MeshData::CreateSkeletonFromExistingData()
 	//reset some joint data
 	for (Joint& joint : newSkeleton.joints)
 	{
-		joint.transormPose = joint.initialBindPose;
+		joint.currentPose = joint.inverseBindPose;
 		joint.anim.currentTime = 0.0;
 	}
 
