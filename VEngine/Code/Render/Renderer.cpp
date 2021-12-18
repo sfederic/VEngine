@@ -419,43 +419,11 @@ void Renderer::RenderMeshComponents()
 
 		SetRenderPipelineStates(mesh);
 
-		XMMATRIX meshWorldMatrix = mesh->GetWorldMatrix();
-
-		//Test animation
-
-		Skeleton* skeleton = mesh->meshDataProxy->skeleton;
-		if (skeleton && !skeleton->joints.empty())
-		{
-			std::vector<XMMATRIX> skinningData;
-
-			//push meshes' matrix into vector for armature (Identity matrix works as well somehow)
-			skinningData.push_back(meshWorldMatrix);
-
-			for (Joint& joint : skeleton->joints)
-			{
-				if (!joint.anim.frames.empty())
-				{
-					if (joint.anim.currentTime >= joint.anim.GetEndTime())
-					{
-						joint.anim.currentTime = 0.f;
-					}
-
-					joint.anim.currentTime += Core::GetDeltaTime();
-					joint.anim.Interpolate(joint.anim.currentTime, joint, skeleton);
-
-					skinningData.push_back(joint.invBindPose);
-				}
-			}
-
-			if (!skinningData.empty())
-			{
-				context->UpdateSubresource(cbSkinningData, 0, nullptr, skinningData.data(), 0, 0);
-				context->VSSetConstantBuffers(cbSkinningRegister, 1, &cbSkinningData);
-			}
-		}
+		//Animation
+		AnimateSkeletalMesh(mesh);
 
 		//Set matrices
-		shaderMatrices.model = meshWorldMatrix;
+		shaderMatrices.model = mesh->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		shaderMatrices.MakeTextureMatrix(&mesh->material->materialShaderData);
 	
@@ -482,7 +450,8 @@ void Renderer::RenderMeshComponents()
 
 void Renderer::RenderInstanceMeshComponents()
 {
-	//@Todo: shadows aren't done yet for instancemeshes
+	//@Todo: shadows for instancemeshes (might not even need it since Grid nodes are the only things rendererd that way)
+	//@Todo: animated instance meshes
 
 	PROFILE_START
 
@@ -719,6 +688,47 @@ void Renderer::RenderLightMeshes()
 
 		context->Draw(debugCone.mesh->meshDataProxy->vertices->size(), 0);
 	}
+}
+
+void Renderer::AnimateSkeletalMesh(MeshComponent* mesh)
+{
+	PROFILE_START
+
+	Skeleton* skeleton = mesh->meshDataProxy->skeleton;
+
+	if (skeleton && !skeleton->joints.empty())
+	{
+		std::vector<XMMATRIX> skinningData;
+
+		//push meshes' matrix into vector for base armature bone (Identity matrix works as well somehow)
+		skinningData.push_back(mesh->GetWorldMatrix());
+
+		//Move through and animate all joints on skeleton
+		for (Joint& joint : skeleton->joints)
+		{
+			if (!joint.anim.frames.empty())
+			{
+				if (joint.anim.currentTime >= joint.anim.GetEndTime())
+				{
+					joint.anim.currentTime = 0.f;
+				}
+
+				joint.anim.currentTime += Core::GetDeltaTime();
+				joint.anim.Interpolate(joint.anim.currentTime, joint, skeleton);
+
+				skinningData.push_back(joint.invBindPose);
+			}
+		}
+
+		//Update skinning constant buffers
+		if (!skinningData.empty())
+		{
+			context->UpdateSubresource(cbSkinningData, 0, nullptr, skinningData.data(), 0, 0);
+			context->VSSetConstantBuffers(cbSkinningRegister, 1, &cbSkinningData);
+		}
+	}
+
+	PROFILE_END
 }
 
 void Renderer::RenderParticleEmitters()

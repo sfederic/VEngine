@@ -89,6 +89,7 @@ private:
 	void RenderBounds();
 	void RenderCameraMeshes();
 	void RenderLightMeshes();
+	void AnimateSkeletalMesh(MeshComponent* mesh);
 	void UpdateLights();
 	void StartGPUQueries();
 	void EndGPUQueries();
