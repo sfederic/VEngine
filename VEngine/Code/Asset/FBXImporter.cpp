@@ -1,6 +1,8 @@
 #include "FBXImporter.h"
 #include <cassert>
 #include <filesystem>
+#include "Animation/AnimationStructures.h"
+#include "VMath.h"
 
 FBXImporter fbxImporter;
 
@@ -28,6 +30,7 @@ bool FBXImporter::Import(std::string filename, MeshDataProxy* meshData)
 	{
 		meshData->vertices = &existingMeshIt->second->vertices;
 		meshData->indices = &existingMeshIt->second->indices;
+		meshData->skeleton = &existingMeshIt->second->skeleton;
 		return true;
 	}
 	else
@@ -43,17 +46,31 @@ bool FBXImporter::Import(std::string filename, MeshDataProxy* meshData)
 	FbxScene* scene = FbxScene::Create(manager, "scene0");
 	importer->Import(scene);
 
+	//Automatically triangulate scene
+	FbxGeometryConverter clsConverter(manager);
+	clsConverter.Triangulate(scene, true);
+
 	//This never seemed to do anything, left it here for future reference
 	//scene->GetGlobalSettings().SetAxisSystem(FbxAxisSystem::DirectX);
 
 	animEvaluator = scene->GetAnimationEvaluator();
 
 	FbxNode* rootNode = scene->GetRootNode();
-
 	int childNodeCount = rootNode->GetChildCount();
-	//for (int i = 0; i < childNodeCount; i++)
+
+	MeshData* foundMeshData = existingMeshDataMap[filename];
+	
+	//Go through all skeleton nodes
+	Skeleton* skeleton = &foundMeshData->skeleton;
+	for (int i = 0; i < childNodeCount; i++)
 	{
-		ProcessAllChildNodes(rootNode->GetChild(childNodeCount - 1), existingMeshDataMap[filename]);
+		ProcessSkeletonNodes(rootNode->GetChild(i), skeleton, 0);
+	}
+
+	//Go through all nodes
+	for (int i = 0; i < childNodeCount; i++)
+	{
+		ProcessAllChildNodes(rootNode->GetChild(i), foundMeshData);
 	}
 
 	scene->Destroy();
@@ -62,93 +79,150 @@ bool FBXImporter::Import(std::string filename, MeshDataProxy* meshData)
 
 	MeshData* newMeshData = existingMeshDataMap.find(filename)->second;
 
+	//Set proxy data for new mesh daata
 	meshData->vertices = &newMeshData->vertices;
 	meshData->indices = &newMeshData->indices;
+	meshData->skeleton = &newMeshData->skeleton;
 
 	return true;
 }
 
 void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 {
-	//Recursion code for dealing with nodes in the heirarchy. Come back to this after more work is done.
-	/*int childNodeCount = node->GetChildCount();
+	//Recursion for dealing with nodes in the heirarchy.
+	int childNodeCount = node->GetChildCount();
 	for (int i = 0; i < childNodeCount; i++)
 	{
-		ProcessAllChildNodes(node->GetChild(i));
-	}*/
+		ProcessAllChildNodes(node->GetChild(i), meshData);
+	}
 
 	FbxScene* scene = node->GetScene();
+	std::string nodename = node->GetName();
 
-	/*FbxNodeAttribute* attrib = node->GetNodeAttribute();
-	if (attrib->GetAttributeType() == FbxNodeAttribute::eSkeleton)
-	{
-		throw;
-	}*/
+	std::unordered_map<int, BoneWeights> boneWeightsMap;
 
-	//Animation code: works for singular transforms, not taking bone weights into account yet
-	/*FbxInt nodeFlags = node->GetAllObjectFlags();
-	if (nodeFlags & FbxPropertyFlags::eAnimated)
+	FbxMesh* mesh = node->GetMesh();
+	if (mesh)
 	{
-		int numAnimStacks = scene->GetSrcObjectCount<FbxAnimStack>();
-		for (int animStackIndex = 0; animStackIndex < numAnimStacks; animStackIndex++)
+		//WEIGHT AND BONE INDICES CODE
+		const int deformerCount = mesh->GetDeformerCount(FbxDeformer::eSkin);
+		for (int deformerIndex = 0; deformerIndex < deformerCount; deformerIndex++)
 		{
-			FbxAnimStack* animStack = scene->GetSrcObject<FbxAnimStack>(animStackIndex);
-			if (animStack)
+			FbxSkin* skin = reinterpret_cast<FbxSkin*>(mesh->GetDeformer(deformerIndex, FbxDeformer::eSkin));
+			if (!skin) continue;
+
+			const int clusterCount = skin->GetClusterCount();
+			for (int clusterIndex = 0; clusterIndex < clusterCount; clusterIndex++)
 			{
-				int numAnimLayers = animStack->GetMemberCount<FbxAnimLayer>();
-				for (int animLayerIndex = 0; animLayerIndex < numAnimLayers; animLayerIndex++)
+				FbxCluster* cluster = skin->GetCluster(clusterIndex);
+
+				//I think the Link is the joint
+				std::string currentJointName = cluster->GetLink()->GetName();
+				int currentJointIndex = meshData->skeleton.FindJointIndexByName(currentJointName);
+
+				FbxAMatrix clusterMatrix, linkMatrix;
+				cluster->GetTransformMatrix(clusterMatrix);
+				cluster->GetTransformLinkMatrix(linkMatrix);
+
+				//Set inverse bind post for joint
+				FbxAMatrix bindposeInverseMatrix = linkMatrix.Inverse() * clusterMatrix;
+
+				XMFLOAT4X4 matrix = VMath::FbxMatrixToDirectXMathMatrix(bindposeInverseMatrix);
+				meshData->skeleton.joints[currentJointIndex].invBindPose = XMLoadFloat4x4(&matrix);
+					
+				const int vertexIndexCount = cluster->GetControlPointIndicesCount();
+				for (int i = 0; i < vertexIndexCount; i++)
 				{
-					FbxAnimLayer* animLayer = animStack->GetMember<FbxAnimLayer>(animLayerIndex);
-					if (animLayer)
+					int index = cluster->GetControlPointIndices()[i];
+					if (index >= vertexIndexCount) continue;
+
+					double weight = cluster->GetControlPointWeights()[i];
+					assert(weight <= 1.f);
+
+					if (boneWeightsMap[index].boneIndex.size() < BoneWeights::MAX_BONE_INDICES)
 					{
-						//Feels like just getting one curve isn't the right answer here.
-						FbxAnimCurveNode* curveNode = node->LclRotation.GetCurveNode(animLayer);
-						if (curveNode)
+						boneWeightsMap[index].boneIndex.push_back(currentJointIndex);
+					}
+
+					if (boneWeightsMap[index].weights.size() < BoneWeights::MAX_WEIGHTS)
+					{
+						boneWeightsMap[index].weights.push_back(weight);
+					}
+				}
+
+				//Animation
+				FbxInt nodeFlags = node->GetAllObjectFlags();
+				if (nodeFlags & FbxPropertyFlags::eAnimated)
+				{
+					int numAnimStacks = scene->GetSrcObjectCount<FbxAnimStack>();
+					for (int animStackIndex = 0; animStackIndex < numAnimStacks; animStackIndex++)
+					{
+						FbxAnimStack* animStack = scene->GetSrcObject<FbxAnimStack>(animStackIndex);
+						if (animStack)
 						{
-							int numCurveNodes = curveNode->GetCurveCount(0);
-							for (int curveIndex = 0; curveIndex < numCurveNodes; curveIndex++)
+							int numAnimLayers = animStack->GetMemberCount<FbxAnimLayer>();
+							for (int animLayerIndex = 0; animLayerIndex < numAnimLayers; animLayerIndex++)
 							{
-								FbxAnimCurve* animCurve = curveNode->GetCurve(curveIndex);
-								int keyCount = animCurve->KeyGetCount();
-
-								//This isn't too bad, but FBX file without animation still have eAnimated flags set
-								//(for some reason) so placing this here is the quick fix. Better fix is doing this in the component.
-
-								for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
+								FbxAnimLayer* animLayer = animStack->GetMember<FbxAnimLayer>(animLayerIndex);
+								if (animLayer)
 								{
-									//Keys are the keyframes into the animation
-									double keyTime = animCurve->KeyGet(keyIndex).GetTime().GetSecondDouble();
-									FbxTime time;
-									time.SetSecondDouble(keyTime);
+									//Link is the joint
+									FbxNode* link = cluster->GetLink();
+									std::string linkName = link->GetName();
 
-									FbxVector4 rot = animEvaluator->GetNodeLocalRotation(node, time);
-									FbxVector4 scale = animEvaluator->GetNodeLocalScaling(node, time);
-									FbxVector4 pos = animEvaluator->GetNodeLocalTransform(node, time);
+									//@Todo: Feels like just getting one curve isn't the right thing here.
+									FbxAnimCurveNode* curveNode = link->LclRotation.GetCurveNode(animLayer);
+									if (curveNode)
+									{
+										int numCurveNodes = curveNode->GetCurveCount(0);
+										for (int curveIndex = 0; curveIndex < numCurveNodes; curveIndex++)
+										{
+											FbxAnimCurve* animCurve = curveNode->GetCurve(curveIndex);
+											int keyCount = animCurve->KeyGetCount();
 
-									AnimFrame animFrame = {};
-									animFrame.time = keyTime;
+											//@Todo: This isn't too bad, but FBX file without animation still have eAnimated flags set
+											//(for some reason) so placing this here is the quick fix. Better fix is doing this in the component.
 
-									XMVECTOR euler = XMVectorZero();
-									//Angles are measured clockwise when looking along the rotation axis toward the
-									//origin. This is a left-handed coordinate system.
-									//To use right-handed coordinates, negate all three angles.
-									euler.m128_f32[0] = -XMConvertToRadians(rot[0]);
-									euler.m128_f32[1] = -XMConvertToRadians(rot[1]);
-									euler.m128_f32[2] = -XMConvertToRadians(rot[2]);
-									XMVECTOR quat = XMQuaternionRotationRollPitchYawFromVector(euler);
-									animFrame.rot.x = quat.m128_f32[0];
-									animFrame.rot.y = quat.m128_f32[1];
-									animFrame.rot.z = quat.m128_f32[2];
-									animFrame.rot.w = quat.m128_f32[3];
+											for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
+											{
+												//Keys are the keyframes into the animation
+												double keyTime = animCurve->KeyGet(keyIndex).GetTime().GetSecondDouble();
+												FbxTime time = {};
+												time.SetSecondDouble(keyTime);
 
-									animFrame.scale.x = 1.f;
-									animFrame.scale.y = 1.f;
-									animFrame.scale.z = 1.f;
+												FbxVector4 rot = animEvaluator->GetNodeLocalRotation(link, time);
+												FbxVector4 scale = animEvaluator->GetNodeLocalScaling(link, time);
+												FbxVector4 pos = animEvaluator->GetNodeLocalTranslation(link, time);
 
-									//animFrame.pos.x = pos[0];
-									//animFrame.pos.y = pos[1];
-									//animFrame.pos.z = pos[2];
+												AnimFrame animFrame = {};
+												animFrame.time = keyTime;
 
+												XMVECTOR euler = XMVectorZero();
+												//Angles are measured clockwise when looking along the rotation axis toward the
+												//origin. This is a left-handed coordinate system.
+												//To use right-handed coordinates, negate all three angles.
+												euler.m128_f32[0] = -XMConvertToRadians(rot[0]);
+												euler.m128_f32[1] = -XMConvertToRadians(rot[1]);
+												euler.m128_f32[2] = -XMConvertToRadians(rot[2]);
+
+												XMVECTOR quat = XMQuaternionRotationRollPitchYawFromVector(euler);
+												animFrame.rot.x = quat.m128_f32[0];
+												animFrame.rot.y = quat.m128_f32[1];
+												animFrame.rot.z = quat.m128_f32[2];
+												animFrame.rot.w = quat.m128_f32[3];
+
+												animFrame.scale.x = 1.f;
+												animFrame.scale.y = 1.f;
+												animFrame.scale.z = 1.f;
+
+												animFrame.pos.x = pos[0];
+												animFrame.pos.y = pos[1];
+												animFrame.pos.z = pos[2];
+
+												meshData->skeleton.joints[currentJointIndex].anim.frames.push_back(animFrame);
+											}
+										}
+									}
 								}
 							}
 						}
@@ -156,52 +230,6 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 				}
 			}
 		}
-	}*/
-
-	//std::unordered_map<int, BoneWeights> boneWeightsMap;
-
-	FbxMesh* mesh = node->GetMesh();
-	if (mesh)
-	{
-		//OLD WEIGHT AND BONE INDICES CODE
-		/*const int deformerCount = mesh->GetDeformerCount(FbxDeformer::eSkin);
-		for (int deformerIndex = 0; deformerIndex < deformerCount; deformerIndex++)
-		{
-			FbxSkin* skin = (FbxSkin*)mesh->GetDeformer(deformerIndex, FbxDeformer::eSkin);
-
-			const int clusterCount = skin->GetClusterCount();
-			for (int clusterIndex = 0; clusterIndex < clusterCount; clusterIndex++)
-			{
-				FbxCluster* cluster = skin->GetCluster(clusterIndex);
-				const int vertexIndexCount = cluster->GetControlPointIndicesCount();
-				for (int i = 0; i < vertexIndexCount; i++)
-				{
-					int index = cluster->GetControlPointIndices()[i];
-
-					if (index >= vertexIndexCount)
-					{
-						continue;
-					}
-
-					double weight = cluster->GetControlPointWeights()[i];
-
-					if (weight == 0.0 || weight >= 1.0)
-					{
-						continue;
-					}
-
-					if (boneWeightsMap[index].boneIndex.size() < 4)
-					{
-						boneWeightsMap[index].boneIndex.push_back(currentBoneIndex);
-					}
-
-					if (boneWeightsMap[index].weights.size() < 3)
-					{
-						boneWeightsMap[index].weights.push_back(weight);
-					}
-				}
-			}
-		}*/
 
 		//Material 
 		//int materialCount = node->GetMaterialCount();
@@ -266,7 +294,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 				}
 
 				//Bone Weights
-				/*if (boneWeightsMap.find(index) != boneWeightsMap.end())
+				if (boneWeightsMap.find(index) != boneWeightsMap.end())
 				{
 					BoneWeights* boneData = &boneWeightsMap.find(index)->second;
 					if (boneData)
@@ -282,7 +310,7 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 							vert.boneIndices[i] = boneData->boneIndex[i];
 						}
 					}
-				}*/
+				}
 
 				//if (!meshData.CheckDuplicateVertices(vert))
 				//{
@@ -297,6 +325,25 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 		}
 
 		assert(meshData->indices.size() % 3 == 0 && "Num of indices won't be matching vertices");
+	}
+}
+
+void FBXImporter::ProcessSkeletonNodes(FbxNode* node, Skeleton* skeleton, int parentIndex)
+{
+	const int childCount = node->GetChildCount();
+	for (int i = 0; i < childCount; i++)
+	{
+		FbxNode* child = node->GetChild(i);
+
+		if (child->GetNodeAttribute()->GetAttributeType() == FbxNodeAttribute::EType::eSkeleton)
+		{
+			Joint joint = {};
+			joint.name = node->GetName();
+			joint.parentIndex = parentIndex;
+			skeleton->AddJoint(joint);
+
+			ProcessSkeletonNodes(child, skeleton, skeleton->joints.back().index);
+		}
 	}
 }
 

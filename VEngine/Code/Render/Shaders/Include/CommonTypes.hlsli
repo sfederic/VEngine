@@ -173,6 +173,8 @@ struct VS_IN
 	float3 pos : POSITION;
 	float2 uv : TEXCOORD;
 	float3 normal : NORMAL;
+	float3 weights : WEIGHTS;
+	uint4 boneIndices : BONEINDICES;
 	uint instanceID : SV_InstanceID;
 };
 

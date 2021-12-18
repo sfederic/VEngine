@@ -188,6 +188,8 @@ void Renderer::CreateInputLayout()
 		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, pos), D3D11_INPUT_PER_VERTEX_DATA, 0},
 		{"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, offsetof(Vertex, uv), D3D11_INPUT_PER_VERTEX_DATA, 0},
 		{"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, normal), D3D11_INPUT_PER_VERTEX_DATA, 0},
+		{"WEIGHTS", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, weights), D3D11_INPUT_PER_VERTEX_DATA, 0},
+		{"BONEINDICES", 0, DXGI_FORMAT_R32G32B32A32_UINT, 0, offsetof(Vertex, boneIndices), D3D11_INPUT_PER_VERTEX_DATA, 0},
 	};
 
 	ShaderItem* shader = shaderSystem.FindShader(L"DefaultShader.hlsl");
@@ -302,6 +304,12 @@ void Renderer::CreateMainConstantBuffers()
 	cbLights = RenderUtils::CreateDefaultBuffer(sizeof(ShaderLights),
 		D3D11_BIND_CONSTANT_BUFFER, &shaderLights);
 	assert(cbLights);
+
+	//Skinning data
+	XMMATRIX skinningMatrices[96] = {};
+	cbSkinningData = RenderUtils::CreateDefaultBuffer(sizeof(XMMATRIX) * 96,
+		D3D11_BIND_CONSTANT_BUFFER, skinningMatrices);
+	assert(cbSkinningData);
 }
 
 void Renderer::CheckSupportedFeatures()
@@ -411,8 +419,43 @@ void Renderer::RenderMeshComponents()
 
 		SetRenderPipelineStates(mesh);
 
+		XMMATRIX meshWorldMatrix = mesh->GetWorldMatrix();
+
+		//Test animation
+
+		Skeleton* skeleton = mesh->meshDataProxy->skeleton;
+		if (skeleton && !skeleton->joints.empty())
+		{
+			std::vector<XMMATRIX> skinningData;
+
+			//push meshes' matrix into vector for armature (Identity matrix works as well somehow)
+			skinningData.push_back(meshWorldMatrix);
+
+			for (Joint& joint : skeleton->joints)
+			{
+				if (!joint.anim.frames.empty())
+				{
+					if (joint.anim.currentTime >= joint.anim.GetEndTime())
+					{
+						joint.anim.currentTime = 0.f;
+					}
+
+					joint.anim.currentTime += Core::GetDeltaTime();
+					joint.anim.Interpolate(joint.anim.currentTime, joint, skeleton);
+
+					skinningData.push_back(joint.invBindPose);
+				}
+			}
+
+			if (!skinningData.empty())
+			{
+				context->UpdateSubresource(cbSkinningData, 0, nullptr, skinningData.data(), 0, 0);
+				context->VSSetConstantBuffers(cbSkinningRegister, 1, &cbSkinningData);
+			}
+		}
+
 		//Set matrices
-		shaderMatrices.model = mesh->GetWorldMatrix();
+		shaderMatrices.model = meshWorldMatrix;
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		shaderMatrices.MakeTextureMatrix(&mesh->material->materialShaderData);
 	

@@ -1,6 +1,6 @@
 #include "AnimationStructures.h"
 
-void Animation::Interpolate(float t, DirectX::XMFLOAT4X4& m)
+void Animation::Interpolate(float t, Joint& joint, Skeleton* skeleton)
 {
 	for (int i = 0; i < (frames.size() - 1); i++)
 	{
@@ -22,9 +22,36 @@ void Animation::Interpolate(float t, DirectX::XMFLOAT4X4& m)
 			XMVECTOR lerpedScale = XMVectorLerp(scale1, scale2, lerpPercent);
 			XMVECTOR lerpedRot = XMQuaternionSlerp(rot1, rot2, lerpPercent);
 			XMVECTOR zero = XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f);
-			XMStoreFloat4x4(&m, XMMatrixAffineTransformation(lerpedScale, zero, lerpedRot, lerpedPos));
+			joint.invBindPose = XMMatrixAffineTransformation(lerpedScale, zero, lerpedRot, lerpedPos);
+
+			int parentIndex = joint.parentIndex;
+			while (parentIndex > 0)
+			{
+				Joint& parentJoint = skeleton->joints[parentIndex];
+				joint.invBindPose *= parentJoint.invBindPose;
+				parentIndex = parentJoint.parentIndex;
+			}
 
 			return;
 		}
 	}
+}
+
+void Skeleton::AddJoint(Joint joint)
+{
+	joints.push_back(joint);
+	joints.back().index = joints.size() - 1;
+}
+
+int Skeleton::FindJointIndexByName(std::string name)
+{
+	for (int i = 0; i < joints.size(); i++)
+	{
+		if (joints[i].name == name)
+		{
+			return joints[i].index;
+		}
+	}
+
+	return -1;
 }

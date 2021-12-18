@@ -3,17 +3,21 @@
 #include <string>
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
+#include "Animation/AnimationStructures.h"
 
 using namespace DirectX;
 
 struct MaterialShaderData;
 struct MeshComponent;
+struct Animation;
 
 struct Vertex
 {
 	XMFLOAT3 pos;
 	XMFLOAT3 normal;
 	XMFLOAT2 uv;
+	float weights[3];
+	uint32_t boneIndices[4];
 };
 
 //The actual data for each loaded mesh. Each loaded mesh file will have one of these per its filename.
@@ -23,6 +27,9 @@ struct MeshData
 
 	std::vector<Vertex> vertices;
 	std::vector<indexDataType> indices;
+
+	//TODO: think about splitting this up somewhere else (AnimMeshData?)
+	Skeleton skeleton;
 };
 
 //TextureData exists because serialisation needed texture representation that wasn't a Texture2D
@@ -52,6 +59,8 @@ struct MeshDataProxy
 {
 	std::vector<Vertex>* vertices = nullptr;
 	std::vector<MeshData::indexDataType>* indices = nullptr;
+
+	Skeleton* skeleton = nullptr;
 
 	uint64_t GetVerticesByteWidth()
 	{
