@@ -23,13 +23,13 @@ void Animation::Interpolate(float t, Joint& joint, Skeleton* skeleton)
 			XMVECTOR lerpedScale = XMVectorLerp(scale1, scale2, lerpPercent);
 			XMVECTOR lerpedRot = XMQuaternionSlerp(rot1, rot2, lerpPercent);
 			XMVECTOR zero = XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f);
-			joint.invBindPose = XMMatrixAffineTransformation(lerpedScale, zero, lerpedRot, lerpedPos);
+			joint.transormPose = XMMatrixAffineTransformation(lerpedScale, zero, lerpedRot, lerpedPos);
 
 			int parentIndex = joint.parentIndex;
 			while (parentIndex > 0)
 			{
 				Joint& parentJoint = skeleton->joints[parentIndex];
-				joint.invBindPose *= parentJoint.invBindPose;
+				joint.transormPose *= parentJoint.transormPose;
 				parentIndex = parentJoint.parentIndex;
 			}
 

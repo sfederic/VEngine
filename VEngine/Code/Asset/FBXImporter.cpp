@@ -28,9 +28,11 @@ bool FBXImporter::Import(std::string filename, MeshDataProxy* meshData)
 	auto existingMeshIt = existingMeshDataMap.find(filename);
 	if (existingMeshIt != existingMeshDataMap.end())
 	{
-		meshData->vertices = &existingMeshIt->second->vertices;
-		meshData->indices = &existingMeshIt->second->indices;
-		meshData->skeleton = &existingMeshIt->second->skeleton;
+		MeshData* existingMeshData = existingMeshIt->second;
+
+		meshData->vertices = &existingMeshData->vertices;
+		meshData->indices = &existingMeshData->indices;
+		*meshData->skeleton = existingMeshData->CreateSkeletonFromExistingData();
 		return true;
 	}
 	else
@@ -124,11 +126,13 @@ void FBXImporter::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 				cluster->GetTransformMatrix(clusterMatrix);
 				cluster->GetTransformLinkMatrix(linkMatrix);
 
-				//Set inverse bind post for joint
+				//Set inverse bind pose for joint
 				FbxAMatrix bindposeInverseMatrix = linkMatrix.Inverse() * clusterMatrix;
 
 				XMFLOAT4X4 matrix = VMath::FbxMatrixToDirectXMathMatrix(bindposeInverseMatrix);
-				meshData->skeleton.joints[currentJointIndex].invBindPose = XMLoadFloat4x4(&matrix);
+				meshData->skeleton.joints[currentJointIndex].initialBindPose = XMLoadFloat4x4(&matrix);
+				meshData->skeleton.joints[currentJointIndex].transormPose =
+					meshData->skeleton.joints[currentJointIndex].initialBindPose;
 					
 				const int vertexIndexCount = cluster->GetControlPointIndicesCount();
 				for (int i = 0; i < vertexIndexCount; i++)

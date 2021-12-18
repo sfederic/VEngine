@@ -5,6 +5,7 @@
 #include "Render/Material.h"
 #include "WorldEditor.h"
 #include "Editor/Editor.h"
+#include "Animation/AnimationStructures.h"
 
 //Vertex and index buffers linked to a mesh filename to copy over to new PSOs
 std::unordered_map<std::string, MeshBuffers> existingMeshBuffers;
@@ -15,6 +16,9 @@ MeshComponent::MeshComponent()
 	pso = new PipelineStateObject();
 
 	material = new Material("test.png", "DefaultShader.hlsl");
+
+	skeleton = new Skeleton();
+	meshDataProxy->skeleton = skeleton;
 }
 
 MeshComponent::MeshComponent(const std::string filename_,
@@ -27,6 +31,9 @@ MeshComponent::MeshComponent(const std::string filename_,
 	meshComponentData.filename = filename_;
 
 	material = new Material(textureFilename_, shaderFilename_);
+
+	skeleton = new Skeleton();
+	meshDataProxy->skeleton = skeleton;
 }
 
 void MeshComponent::Tick(float deltaTime)

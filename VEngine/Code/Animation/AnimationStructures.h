@@ -54,7 +54,8 @@ struct Joint
 	std::string name;
 	int parentIndex = -1;
 	int index = 0;
-	XMMATRIX invBindPose = XMMatrixIdentity();
+	XMMATRIX transormPose = XMMatrixIdentity();
+	XMMATRIX initialBindPose = XMMatrixIdentity();
 
 	Animation anim;
 };
