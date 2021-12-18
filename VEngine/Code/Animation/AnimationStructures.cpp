@@ -1,6 +1,6 @@
 #include "AnimationStructures.h"
 
-void Animation::Interpolate(float t, DirectX::XMMATRIX& m)
+void Animation::Interpolate(float t, Joint& joint, Skeleton* skeleton)
 {
 	for (int i = 0; i < (frames.size() - 1); i++)
 	{
@@ -22,7 +22,15 @@ void Animation::Interpolate(float t, DirectX::XMMATRIX& m)
 			XMVECTOR lerpedScale = XMVectorLerp(scale1, scale2, lerpPercent);
 			XMVECTOR lerpedRot = XMQuaternionSlerp(rot1, rot2, lerpPercent);
 			XMVECTOR zero = XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f);
-			m = XMMatrixAffineTransformation(lerpedScale, zero, lerpedRot, lerpedPos);
+			joint.invBindPose = XMMatrixAffineTransformation(lerpedScale, zero, lerpedRot, lerpedPos);
+
+			int parentIndex = joint.parentIndex;
+			while (parentIndex > 0)
+			{
+				Joint& parentJoint = skeleton->joints[parentIndex];
+				joint.invBindPose *= parentJoint.invBindPose;
+				parentIndex = parentJoint.parentIndex;
+			}
 
 			return;
 		}
