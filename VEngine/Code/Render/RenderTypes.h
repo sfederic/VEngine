@@ -29,7 +29,7 @@ struct MeshData
 	std::vector<indexDataType> indices;
 
 	//TODO: think about splitting this up somewhere else (AnimMeshData?)
-	Animation animation;
+	Skeleton skeleton;
 };
 
 //TextureData exists because serialisation needed texture representation that wasn't a Texture2D
@@ -60,7 +60,7 @@ struct MeshDataProxy
 	std::vector<Vertex>* vertices = nullptr;
 	std::vector<MeshData::indexDataType>* indices = nullptr;
 
-	Animation* anim = nullptr;
+	Skeleton* skeleton = nullptr;
 
 	uint64_t GetVerticesByteWidth()
 	{
