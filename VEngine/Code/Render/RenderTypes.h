@@ -28,8 +28,10 @@ struct MeshData
 	std::vector<Vertex> vertices;
 	std::vector<indexDataType> indices;
 
-	//TODO: think about splitting this up somewhere else (AnimMeshData?)
 	Skeleton skeleton;
+
+	//Creates a new skeleton with empty data based on the meshes' base skeleton
+	Skeleton CreateSkeletonFromExistingData();
 };
 
 //TextureData exists because serialisation needed texture representation that wasn't a Texture2D
@@ -40,7 +42,7 @@ struct TextureData
 	std::string filename;
 };
 
-//TODO: there'll be a nicer way to do these and name these. Maybe try adding in another argument to
+//@Todo: there'll be a nicer way to do these and name these. Maybe try adding in another argument to
 //the 'change' std::function in Properties.
 struct ShaderData
 {

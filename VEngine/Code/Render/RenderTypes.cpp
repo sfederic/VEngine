@@ -25,3 +25,18 @@ void ShaderMatrices::MakeModelViewProjectionMatrix()
 {
 	mvp = model * view * proj;
 }
+
+Skeleton MeshData::CreateSkeletonFromExistingData()
+{
+	Skeleton newSkeleton = {};
+	newSkeleton.joints = skeleton.joints;
+
+	//reset some joint data
+	for (Joint& joint : newSkeleton.joints)
+	{
+		joint.transormPose = joint.initialBindPose;
+		joint.anim.currentTime = 0.0;
+	}
+
+	return newSkeleton;
+}
