@@ -27,10 +27,11 @@ void Animation::Interpolate(float t, Joint& joint, Skeleton* skeleton)
 			joint.currentPose = XMMatrixAffineTransformation(lerpedScale, zero, lerpedRot, lerpedPos);
 
 			int parentIndex = joint.parentIndex;
-			while (parentIndex > 0)
+			while (parentIndex > -1)
 			{
 				Joint& parentJoint = skeleton->joints[parentIndex];
 				joint.currentPose *= parentJoint.currentPose;
+
 				parentIndex = parentJoint.parentIndex;
 			}
 

@@ -66,7 +66,7 @@ bool FBXLoader::Import(std::string filename, MeshDataProxy* meshData)
 	Skeleton* skeleton = &foundMeshData->skeleton;
 	for (int i = 0; i < childNodeCount; i++)
 	{
-		ProcessSkeletonNodes(rootNode->GetChild(i), skeleton, 0);
+		ProcessSkeletonNodes(rootNode->GetChild(i), skeleton, -1);
 	}
 
 	//Go through all nodes
@@ -121,7 +121,7 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 				//I think the Link is the joint
 				std::string currentJointName = cluster->GetLink()->GetName();
 				int currentJointIndex = meshData->skeleton.FindJointIndexByName(currentJointName);
-
+				
 				FbxAMatrix clusterMatrix, linkMatrix;
 				cluster->GetTransformMatrix(clusterMatrix);
 				cluster->GetTransformLinkMatrix(linkMatrix);
@@ -336,6 +336,7 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 void FBXLoader::ProcessSkeletonNodes(FbxNode* node, Skeleton* skeleton, int parentIndex)
 {
 	const int childCount = node->GetChildCount();
+	std::string name = node->GetName();
 	for (int i = 0; i < childCount; i++)
 	{
 		FbxNode* child = node->GetChild(i);
@@ -347,7 +348,27 @@ void FBXLoader::ProcessSkeletonNodes(FbxNode* node, Skeleton* skeleton, int pare
 			joint.parentIndex = parentIndex;
 			skeleton->AddJoint(joint);
 
-			ProcessSkeletonNodes(child, skeleton, skeleton->joints.back().index);
+			//Setup bind pose (Note: inverse bind pose is also figured out in FBXLoader::Import in the animation
+			//segment, this setup is more for base Armature bones)
+			auto pos = node->LclTranslation.Get();
+			auto rot = node->LclRotation.Get();
+			auto scale = node->LclScaling.Get();
+
+			XMVECTOR euler = XMVectorZero();
+			euler.m128_f32[0] = -XMConvertToRadians(rot[0]);
+			euler.m128_f32[1] = -XMConvertToRadians(rot[1]);
+			euler.m128_f32[2] = -XMConvertToRadians(rot[2]);
+			XMVECTOR quat = XMQuaternionRotationRollPitchYawFromVector(euler);
+			XMVECTOR convertedPos = XMVectorSet(pos[0], pos[1], pos[2], 1.0f);
+			XMVECTOR convertedScale = XMVectorSet(scale[0], scale[1], scale[2], 0.f);
+
+			Joint& addedJoint = skeleton->joints.back();
+
+			addedJoint.inverseBindPose = XMMatrixAffineTransformation(convertedScale,
+				XMVectorSet(0.f, 0.f, 0.f, 1.f), quat, convertedPos);
+			addedJoint.currentPose = addedJoint.inverseBindPose;
+
+			ProcessSkeletonNodes(child, skeleton, addedJoint.index);
 		}
 	}
 }

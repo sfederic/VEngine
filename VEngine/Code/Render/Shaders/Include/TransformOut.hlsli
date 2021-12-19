@@ -15,6 +15,8 @@ struct TransformOut
 		float3 normalL = float3(0.0f, 0.0f, 0.0f);
 		for (int index = 0; index < 4; ++index)
 		{
+			if (i.boneIndices[index] == -1) continue;
+
 			//no nonuniform scaling
 			posL += weights[index] * mul(float4(i.pos, 1.0f),
 				boneTransforms[i.boneIndices[index]]).xyz;
