@@ -56,5 +56,5 @@ int Skeleton::FindJointIndexByName(std::string name)
 		}
 	}
 
-	return -1;
+	throw new std::exception("Joint index not found");
 }
