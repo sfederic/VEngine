@@ -15,7 +15,7 @@ MeshActor
  Position
 0 0 3
  Rotation
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
 Casts Shadow
