@@ -194,26 +194,17 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 												FbxTime time = {};
 												time.SetSecondDouble(keyTime);
 
-												FbxVector4 rot = animEvaluator->GetNodeLocalRotation(link, time);
+												FbxQuaternion rot = animEvaluator->GetNodeLocalTransform(link, time).GetQ();
 												FbxVector4 scale = animEvaluator->GetNodeLocalScaling(link, time);
 												FbxVector4 pos = animEvaluator->GetNodeLocalTranslation(link, time);
 
 												AnimFrame animFrame = {};
 												animFrame.time = keyTime;
 
-												XMVECTOR euler = XMVectorZero();
-												//Angles are measured clockwise when looking along the rotation axis toward the
-												//origin. This is a left-handed coordinate system.
-												//To use right-handed coordinates, negate all three angles.
-												euler.m128_f32[0] = -XMConvertToRadians(rot[0]);
-												euler.m128_f32[1] = -XMConvertToRadians(rot[1]);
-												euler.m128_f32[2] = -XMConvertToRadians(rot[2]);
-
-												XMVECTOR quat = XMQuaternionRotationRollPitchYawFromVector(euler);
-												animFrame.rot.x = quat.m128_f32[0];
-												animFrame.rot.y = quat.m128_f32[1];
-												animFrame.rot.z = quat.m128_f32[2];
-												animFrame.rot.w = quat.m128_f32[3];
+												animFrame.rot.x = rot[0];
+												animFrame.rot.y = rot[1];
+												animFrame.rot.z = rot[2];
+												animFrame.rot.w = rot[3];
 
 												animFrame.scale.x = 1.f;
 												animFrame.scale.y = 1.f;
