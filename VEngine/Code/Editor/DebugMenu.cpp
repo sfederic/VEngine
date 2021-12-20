@@ -474,7 +474,7 @@ void DebugMenu::RenderProfileMenu()
 		for (auto& timeFrame : Profile::timeFrames)
 		{
 			ImGui::Text(timeFrame.first.c_str());
-			double time = timeFrame.second->GetAverageTime();
+			double time = timeFrame.second.GetAverageTime();
 			ImGui::Text(std::to_string(time).c_str());
 		}
 

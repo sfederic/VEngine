@@ -3,7 +3,7 @@
 #include <cassert>
 #include <source_location>
 
-std::unordered_map<std::string, TimeFrame*> Profile::timeFrames;
+std::unordered_map<std::string, TimeFrame> Profile::timeFrames;
 
 TimeFrame::TimeFrame() 
 {
@@ -82,12 +82,12 @@ void Profile::Start(std::source_location location)
 	auto timeFramesIt = timeFrames.find(functionName);
 	if (timeFramesIt == timeFrames.end())
 	{
-		TimeFrame* timeFrame = new TimeFrame(startTime);
+		TimeFrame timeFrame = TimeFrame(startTime);
 		timeFrames[functionName] = timeFrame;
 	}
 	else
 	{
-		timeFrames[functionName]->startTime = startTime;
+		timeFrames[functionName].startTime = startTime;
 	}
 }
 
@@ -99,9 +99,9 @@ void Profile::End(std::source_location location)
 	auto functionName = location.function_name();
 
 	auto timeFramesIt = timeFrames.find(functionName);
-	assert(timeFramesIt->second && "Check for matching PROFILE_START in function.");
+	assert(timeFramesIt != timeFrames.end() && "Check for matching PROFILE_START in function.");
 
-	TimeFrame* currentTimeFrame = timeFramesIt->second;
-	currentTimeFrame->endTime = endTime;
-	currentTimeFrame->SetElapsedTime();
+	TimeFrame& currentTimeFrame = timeFramesIt->second;
+	currentTimeFrame.endTime = endTime;
+	currentTimeFrame.SetElapsedTime();
 }
