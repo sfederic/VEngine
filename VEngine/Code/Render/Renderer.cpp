@@ -700,6 +700,11 @@ void Renderer::AnimateSkeletalMesh(MeshComponent* mesh)
 	{
 		std::vector<XMMATRIX> skinningData;
 
+		//Set shader for skeletal animation
+		ShaderItem* shader = shaderSystem.FindShader(L"Animation.hlsl");
+		context->VSSetShader(shader->vertexShader, nullptr, 0);
+		context->PSSetShader(shader->pixelShader, nullptr, 0);
+
 		//Move through and animate all joints on skeleton
 		for (Joint& joint : skeleton->joints)
 		{
