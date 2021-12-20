@@ -700,9 +700,6 @@ void Renderer::AnimateSkeletalMesh(MeshComponent* mesh)
 	{
 		std::vector<XMMATRIX> skinningData;
 
-		//push meshes' base armature bone matrix onto the vector
-		skinningData.push_back(skeleton->joints.front().inverseBindPose);
-
 		//Move through and animate all joints on skeleton
 		for (Joint& joint : skeleton->joints)
 		{
