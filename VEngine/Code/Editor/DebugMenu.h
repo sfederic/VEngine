@@ -34,6 +34,7 @@ struct DebugMenu
 	bool componentSystemMenuOpen = false;
 	bool intuitionsMenuOpen = false;
 	bool consoleCommandsMenuOpen = false;
+	bool skeletonViewMenuOpen = false;
 
 	void Init();
 	void Tick(float deltaTime);
@@ -57,6 +58,7 @@ private:
 	void RenderComponentSystemMenu();
 	void RenderIntuitionsMenu();
 	void RenderConsoleCommandsMenu();
+	void RenderSkeletonViewMenu();
 };
 
 extern DebugMenu debugMenu;

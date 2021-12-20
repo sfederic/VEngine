@@ -79,6 +79,7 @@ void DebugMenu::Tick(float deltaTime)
 	RenderComponentSystemMenu();
 	RenderIntuitionsMenu();
 	RenderConsoleCommandsMenu();
+	RenderSkeletonViewMenu();
 
 	ImGui::EndFrame();
 
@@ -380,6 +381,34 @@ void DebugMenu::RenderConsoleCommandsMenu()
 	for (auto& command : console.executeMap)
 	{
 		ImGui::Text("%S", command.first.c_str());
+	}
+
+	ImGui::End();
+}
+
+void DebugMenu::RenderSkeletonViewMenu()
+{
+	if (!skeletonViewMenuOpen) return;
+
+	ImGui::Begin("Skeleton View");
+
+	auto picked = worldEditor.pickedActor;
+	if (picked)
+	{
+		auto meshes = picked->GetComponentsOfType<MeshComponent>();
+		for (auto mesh : meshes)
+		{
+			ImGui::Text("Mesh: %s", mesh->meshComponentData.filename.c_str());
+
+			for (auto& joint : mesh->meshDataProxy->skeleton->joints)
+			{
+				ImGui::Text("Joint: %s ", joint.name.c_str());
+				ImGui::SameLine();
+				ImGui::Text("Index: %d", joint.index);
+				ImGui::SameLine();
+				ImGui::Text("Parent Index: %d", joint.parentIndex);
+			}
+		}
 	}
 
 	ImGui::End();

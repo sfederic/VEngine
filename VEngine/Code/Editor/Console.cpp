@@ -58,6 +58,9 @@ Console::Console()
 	//show memory for engine systems
 	executeMap.emplace(L"MEM", []() { debugMenu.memoryMenuOpen = !debugMenu.memoryMenuOpen; });
 
+	//Show skeleton heirarchy on actor's meshcomponent
+	executeMap.emplace(L"SKEL", []() { debugMenu.skeletonViewMenuOpen = !debugMenu.skeletonViewMenuOpen; });
+
 	//Reload current world
 	executeMap.emplace(L"RESET", []() { fileSystem.ReloadCurrentWorld(); });
 
