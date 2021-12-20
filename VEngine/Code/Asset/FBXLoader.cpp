@@ -126,14 +126,24 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 				cluster->GetTransformMatrix(clusterMatrix);
 				cluster->GetTransformLinkMatrix(linkMatrix);
 
-				//Set inverse bind pose for joint
-				FbxAMatrix bindposeInverseMatrix = linkMatrix.Inverse() * clusterMatrix;
+				{
+					//Set inverse bind pose for joint
+					FbxAMatrix bindposeInverseMatrix = linkMatrix.Inverse() * clusterMatrix;
 
-				XMFLOAT4X4 matrix = VMath::FbxMatrixToDirectXMathMatrix(bindposeInverseMatrix);
-				meshData->skeleton.joints[currentJointIndex].inverseBindPose = XMLoadFloat4x4(&matrix);
-				meshData->skeleton.joints[currentJointIndex].currentPose =
-					meshData->skeleton.joints[currentJointIndex].inverseBindPose;
-					
+					FbxQuaternion Q = bindposeInverseMatrix.GetQ();
+					FbxVector4 T = bindposeInverseMatrix.GetT();
+
+					XMVECTOR pos = XMVectorSet(T[0], T[1], T[2], 1.0f);
+					XMVECTOR scale = XMVectorSet(1.f, 1.f, 1.f, 0.f);
+					XMVECTOR rot = XMVectorSet(Q[0], Q[1], Q[2], Q[3]);
+
+					XMMATRIX pose = XMMatrixAffineTransformation(scale,
+						XMVectorSet(0.f, 0.f, 0.f, 1.f), rot, pos);
+				
+					meshData->skeleton.joints[currentJointIndex].inverseBindPose = pose;
+					meshData->skeleton.joints[currentJointIndex].currentPose = pose;
+				}
+
 				const int vertexIndexCount = cluster->GetControlPointIndicesCount();
 				for (int i = 0; i < vertexIndexCount; i++)
 				{
