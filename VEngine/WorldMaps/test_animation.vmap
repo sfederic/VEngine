@@ -13,9 +13,9 @@ Player
 MeshActor
 1
  Position
-0 0 3
+0 -2 4
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
 Casts Shadow
@@ -25,7 +25,7 @@ Grid Obstacle
 Mesh
 bone_cylinder.fbx
 Name
-animated_cube0
+MeshActor0
 Rast State
 solid
 Shader
@@ -33,7 +33,7 @@ DefaultShader.hlsl
 Texture
 test.png
 UID
-1906157951
+328110949
 UvOffset
 0 0
 UvRotation
