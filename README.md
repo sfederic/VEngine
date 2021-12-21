@@ -2,6 +2,7 @@
 
 ## Build Notes
 Visual Studio 2022 17.0.2
+Blender 2.93.7
 
 ## Packages
 
