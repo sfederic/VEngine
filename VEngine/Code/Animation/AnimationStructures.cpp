@@ -37,7 +37,7 @@ void Animation::Interpolate(float t, Joint& joint, Skeleton* skeleton)
 				parentIndex = parentJoint.parentIndex;
 			}
 
-			joint.currentPose = endPose;
+			joint.currentPose = joint.inverseBindPose * endPose;
 
 			return;
 		}
