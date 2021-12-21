@@ -147,11 +147,10 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 				const int vertexIndexCount = cluster->GetControlPointIndicesCount();
 				for (int i = 0; i < vertexIndexCount; i++)
 				{
-					int index = cluster->GetControlPointIndices()[i];
-					if (index >= vertexIndexCount) continue;
-
 					double weight = cluster->GetControlPointWeights()[i];
 					assert(weight <= 1.f);
+
+					int index = cluster->GetControlPointIndices()[i];
 
 					if (boneWeightsMap[index].boneIndex.size() < BoneWeights::MAX_BONE_INDICES)
 					{
@@ -213,7 +212,7 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 												animFrame.time = keyTime;
 
 												animFrame.rot.x = rot[0];
-												animFrame.rot.y = -rot[1];
+												animFrame.rot.y = rot[1];
 												animFrame.rot.z = rot[2];
 												animFrame.rot.w = rot[3];
 
@@ -312,7 +311,7 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 							vert.weights[i] = boneData->weights[i];
 						}
 
-						for (int i = 0; i < boneData->weights.size(); i++)
+						for (int i = 0; i < boneData->boneIndex.size(); i++)
 						{
 							vert.boneIndices[i] = boneData->boneIndex[i];
 						}
