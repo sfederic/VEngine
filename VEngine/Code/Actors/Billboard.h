@@ -2,14 +2,13 @@
 #include "Actor.h"
 #include "ActorSystem.h"
 
+struct MeshComponent;
+
 struct Billboard : Actor
 {
 	ACTOR_SYSTEM(Billboard)
 
-	struct MeshComponent* mesh = nullptr;
-
-	XMVECTOR velocity;
-	float lifeTime = 0.f;
+	MeshComponent* mesh = nullptr;
 
 	Billboard();
 	virtual void Tick(float deltaTime) override;
