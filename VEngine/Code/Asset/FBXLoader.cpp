@@ -204,15 +204,16 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 												FbxTime time = {};
 												time.SetSecondDouble(keyTime);
 
-												FbxQuaternion rot = animEvaluator->GetNodeLocalTransform(link, time).GetQ();
-												FbxVector4 scale = animEvaluator->GetNodeLocalScaling(link, time);
-												FbxVector4 pos = animEvaluator->GetNodeLocalTranslation(link, time);
+												FbxAMatrix globalTransform = animEvaluator->GetNodeGlobalTransform(link, time);
+												FbxQuaternion rot = globalTransform.GetQ();
+												FbxVector4 scale = globalTransform.GetS();
+												FbxVector4 pos = globalTransform.GetT();
 
 												AnimFrame animFrame = {};
 												animFrame.time = keyTime;
 
 												animFrame.rot.x = rot[0];
-												animFrame.rot.y = rot[1];
+												animFrame.rot.y = -rot[1];
 												animFrame.rot.z = rot[2];
 												animFrame.rot.w = rot[3];
 
