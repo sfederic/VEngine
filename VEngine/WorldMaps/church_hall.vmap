@@ -8,6 +8,8 @@ Grid
 1 1 1
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 node.fbx
 Name
@@ -48,6 +50,8 @@ Condition
 Description
 
 Destruct
+0
+Grid Obstacle
 0
 Health
 0
@@ -110,21 +114,23 @@ next
 Player
 1
  Position
-3 0.05 5
+3 0 4
  Rotation
-0 -1 0 -5.96046e-08
+0 0 0 1
  Scale
 1 1 1
 Casts Shadow
 1
 FOV
-59.9999
+60
 Far Z
 1000
 File
 
+Grid Obstacle
+0
 Mesh
-unit_test.fbx
+plane.fbx
 Name
 Player0
 Near Z
@@ -134,9 +140,9 @@ solid
 Shader
 DefaultShader.hlsl
 Texture
-test.png
+ramza_back.png
 UID
-4273372237
+4102949568
 UvOffset
 0 0
 UvRotation
@@ -154,6 +160,8 @@ MeshActor
 5 5 1
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 plane.fbx
 Name
@@ -176,11 +184,13 @@ next
  Position
 -0.9 0.5 1
  Rotation
-0.707107 5.61928e-09 0.707107 5.61947e-09
+0.00021193 0.707106 0.000211182 0.707107
  Scale
-0.5 1 1
+0.499999 0.999999 0.999999
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 plane.fbx
 Name
@@ -208,6 +218,8 @@ next
 2 1 2
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 cube.fbx
 Name
@@ -230,11 +242,13 @@ next
  Position
 -0.860309 0.5 3.95374
  Rotation
-0.707107 5.61928e-09 0.707107 5.61949e-09
+-9.97482e-08 0.707107 -9.9748e-08 0.707107
  Scale
-0.75 1 0.960001
+0.749999 1 0.960001
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 plane.fbx
 Name
@@ -262,6 +276,8 @@ next
 2 1 2
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 cube.fbx
 Name
@@ -289,6 +305,8 @@ next
 4.5 1.25 1
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 plane.fbx
 Name
@@ -316,6 +334,8 @@ next
 4.49999 1.25 0.999998
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 plane.fbx
 Name
@@ -343,6 +363,8 @@ next
 5 1.25 1
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 plane.fbx
 Name
@@ -370,6 +392,8 @@ next
 4.50002 2.34375 1.00001
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 plane.fbx
 Name
@@ -392,11 +416,13 @@ next
  Position
 4 0.5 -0.9
  Rotation
-0 0 1 7.94663e-09
+-0 0 -5.1658e-08 1
  Scale
-0.999996 0.999996 1
+0.999992 0.999992 1
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 plane.fbx
 Name
@@ -419,11 +445,13 @@ next
  Position
 8.9 0.5 1
  Rotation
-0.707107 5.61917e-09 -0.707107 -5.61917e-09
+-0.000122083 0.707107 0.000122125 -0.707107
  Scale
-0.75 1 1
+0.75 0.999999 1
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 plane.fbx
 Name
@@ -446,11 +474,13 @@ next
  Position
 8.9 0.5 4
  Rotation
-0.707107 5.61922e-09 -0.707107 -5.61922e-09
+3.10482e-07 0.707107 1.10986e-07 -0.707107
  Scale
-0.75 1 1
+0.749992 0.999988 0.99999
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 plane.fbx
 Name
@@ -593,6 +623,8 @@ Destruct
 1
 File
 testdiag
+Grid Obstacle
+0
 Health
 2
 Interact
@@ -648,6 +680,8 @@ Destruct
 1
 File
 testdiag
+Grid Obstacle
+0
 Health
 2
 Interact
@@ -703,6 +737,8 @@ Destruct
 1
 File
 testdiag
+Grid Obstacle
+0
 Health
 2
 Interact
@@ -739,7 +775,36 @@ activeEndHour
 0
 next
 Billboard
+1
+ Position
+6 0.5 4
+ Rotation
+-0 0 0.000243956 1
+ Scale
+1.00004 1.00004 1
+Casts Shadow
+1
+Grid Obstacle
 0
+Mesh
+plane.fbx
+Name
+Billboard0
+Rast State
+nobackcull
+Shader
+Unlit.hlsl
+Texture
+ramza_back.png
+UID
+1180640186
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
 InteractTrigger
 1
  Position
@@ -762,4 +827,6 @@ DialogueInstance
 GameEvent
 0
 ParticleSystem
+0
+DialogueTrigger
 0
