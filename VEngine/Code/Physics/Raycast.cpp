@@ -13,13 +13,13 @@
 #include "Components/BoxTriggerComponent.h"
 #include "World.h"
 
-//export void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance)
+//void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance)
 //{
 //	Line debugLine = {};
-//	XMStoreFloat3(&debugLine.p1.pos, rayOrigin);
-//	XMVECTOR pos = XMLoadFloat3(&debugLine.p1.pos);
-//	pos += GetActiveCamera()->right;
-//	XMStoreFloat3(&debugLine.p1.pos, pos);
+//	XMStoreFloat3(&debugLine.p1, rayOrigin);
+//	XMVECTOR pos = XMLoadFloat3(&debugLine.p1);
+//	pos += activeCamera->GetRightVectorV();
+//	XMStoreFloat3(&debugLine.p1, pos);
 //
 //	if (distance <= 0.f)
 //	{
@@ -28,7 +28,7 @@
 //
 //	XMVECTOR dist = rayDir * distance;
 //	XMVECTOR rayEnd = rayOrigin + dist;
-//	XMStoreFloat3(&debugLine.p2.pos, rayEnd);
+//	XMStoreFloat3(&debugLine.p2, rayEnd);
 //
 //	debugLines.push_back(debugLine);
 //}
