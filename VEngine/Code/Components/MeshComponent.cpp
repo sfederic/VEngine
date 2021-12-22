@@ -50,6 +50,7 @@ void MeshComponent::Create()
 
 	//Import mesh (set up bounding box in here too so you don't need to re-create bounds)
 	fbxLoader.Import(meshComponentData.filename.c_str(), meshDataProxy);
+	skeleton = meshDataProxy->skeleton;
 
 	//Setup bounds
 	BoundingOrientedBox::CreateFromPoints(boundingBox, meshDataProxy->vertices->size(),

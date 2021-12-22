@@ -174,7 +174,7 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 						if (animStack)
 						{
 							std::string animName = animStack->GetName();
-							meshData->skeleton.animationNames.push_back(animName);
+							meshData->skeleton.animationNames.insert(animName);
 							meshData->skeleton.currentAnimation = animName;
 
 							int numAnimLayers = animStack->GetMemberCount<FbxAnimLayer>();

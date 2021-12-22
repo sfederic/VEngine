@@ -2,6 +2,7 @@
 #include <DirectXMath.h>
 #include <vector>
 #include <string>
+#include <set>
 #include <map>
 
 using namespace DirectX;
@@ -68,7 +69,7 @@ struct Skeleton
 {
 	std::vector<Joint> joints;
 
-	std::vector<std::string> animationNames;
+	std::set<std::string> animationNames;
 	std::string currentAnimation;
 
 	void AddJoint(Joint joint);
