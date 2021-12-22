@@ -7,6 +7,7 @@
 #include "PipelineObjects.h"
 
 struct MeshComponent;
+struct Skeleton;
 
 struct Renderer
 {
@@ -42,6 +43,7 @@ struct Renderer
 	ID3D11Buffer* cbMaterial;
 	ID3D11Buffer* cbLights;
 	ID3D11Buffer* cbSkinningData;
+	ID3D11Buffer* linesBuffer;
 
 	//Viewport
 	D3D11_VIEWPORT viewport;
@@ -89,6 +91,7 @@ private:
 	void RenderBounds();
 	void RenderCameraMeshes();
 	void RenderLightMeshes();
+	void RenderSkeletonBones();
 	void AnimateSkeletalMesh(MeshComponent* mesh);
 	void UpdateLights();
 	void StartGPUQueries();

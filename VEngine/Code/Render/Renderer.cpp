@@ -71,6 +71,9 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 
 	RenderUtils::defaultSampler = RenderUtils::CreateSampler();
 
+	Line lines[1024] = {};
+	linesBuffer = RenderUtils::CreateDynamicBuffer(1024, D3D11_BIND_VERTEX_BUFFER, lines);
+
 	spriteSystem.Init();
 }
 
@@ -387,6 +390,7 @@ void Renderer::Render()
 	RenderMeshComponents();
 	RenderInstanceMeshComponents();
 	RenderBounds();
+	//RenderSkeletonBones();
 	RenderLightMeshes();
 	RenderCameraMeshes();
 
@@ -688,6 +692,63 @@ void Renderer::RenderLightMeshes()
 
 		context->Draw(debugCone.mesh->meshDataProxy->vertices->size(), 0);
 	}
+}
+
+void Renderer::RenderSkeletonBones()
+{
+	std::vector<Line> lines;
+
+	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
+
+	ShaderItem* shader = shaderSystem.FindShader(L"SolidColour.hlsl");
+	context->VSSetShader(shader->vertexShader, nullptr, 0);
+	context->PSSetShader(shader->pixelShader, nullptr, 0);
+
+	MaterialShaderData materialShaderData = {};
+	materialShaderData.ambient = XMFLOAT4(0.54f, 0.80f, 0.92f, 1.0f); //Sky blue
+	context->UpdateSubresource(cbMaterial, 0, nullptr, &materialShaderData, 0, 0);
+	context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
+
+	for (auto mesh : MeshComponent::system.components)
+	{
+		for (Joint& joint : mesh->GetSkeleton()->joints)
+		{
+			if (joint.parentIndex == -1) continue;
+
+			Line line = {};
+
+			Joint& parentJoint = mesh->GetSkeleton()->joints[joint.parentIndex];
+
+			XMMATRIX transformedPose = joint.currentPose;
+			XMMATRIX parentPose = parentJoint.currentPose;
+
+			transformedPose *= mesh->GetWorldMatrix();
+			parentPose *= mesh->GetWorldMatrix();
+
+			XMStoreFloat3(&line.p1, transformedPose.r[3]);
+			XMStoreFloat3(&line.p2, parentPose.r[3]);
+
+			lines.push_back(line);
+		}
+	}
+
+	D3D11_MAPPED_SUBRESOURCE sub = {};
+	sub.RowPitch = sizeof(Line) * lines.size();
+	HR(context->Map(linesBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &sub));
+	memcpy(sub.pData, lines.data(), sizeof(Line) * lines.size());
+	context->Unmap(linesBuffer, 0);
+
+	context->IASetVertexBuffers(0, 1, &linesBuffer, &stride, &offset);
+
+	shaderMatrices.view = activeCamera->GetViewMatrix();
+	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
+	shaderMatrices.model = XMMatrixIdentity();
+	shaderMatrices.MakeModelViewProjectionMatrix();
+
+	context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+	context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+
+	context->Draw(lines.size() * 2, 0);
 }
 
 void Renderer::AnimateSkeletalMesh(MeshComponent* mesh)
