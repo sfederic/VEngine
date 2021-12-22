@@ -173,6 +173,9 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 						FbxAnimStack* animStack = scene->GetSrcObject<FbxAnimStack>(animStackIndex);
 						if (animStack)
 						{
+							std::string animName = animStack->GetName();
+							meshData->skeleton.currentAnimation = animName;
+
 							int numAnimLayers = animStack->GetMemberCount<FbxAnimLayer>();
 							for (int animLayerIndex = 0; animLayerIndex < numAnimLayers; animLayerIndex++)
 							{
@@ -224,7 +227,7 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 												animFrame.pos.y = pos[1];
 												animFrame.pos.z = pos[2];
 
-												meshData->skeleton.joints[currentJointIndex].anim.frames.push_back(animFrame);
+												meshData->skeleton.joints[currentJointIndex].anim[animName].frames.push_back(animFrame);
 											}
 										}
 									}

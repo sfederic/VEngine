@@ -35,7 +35,6 @@ Skeleton MeshData::CreateSkeletonFromExistingData()
 	for (Joint& joint : newSkeleton.joints)
 	{
 		joint.currentPose = joint.inverseBindPose;
-		joint.anim.currentTime = 0.0;
 	}
 
 	return newSkeleton;

@@ -2,7 +2,7 @@
 #include <DirectXMath.h>
 #include <vector>
 #include <string>
-#include <array>
+#include <map>
 
 using namespace DirectX;
 
@@ -61,12 +61,14 @@ struct Joint
 	//Starting bind pose
 	XMMATRIX inverseBindPose = XMMatrixIdentity();
 
-	Animation anim;
+	std::map<std::string, Animation> anim;
 };
 
 struct Skeleton
 {
 	std::vector<Joint> joints;
+
+	std::string currentAnimation;
 
 	void AddJoint(Joint joint);
 	int FindJointIndexByName(std::string name);
