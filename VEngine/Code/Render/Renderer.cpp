@@ -708,6 +708,8 @@ void Renderer::AnimateSkeletalMesh(MeshComponent* mesh)
 		Animation& anim = skeleton->GetCurrentAnimation();
 		if (!anim.frames.empty())
 		{
+			mesh->currentAnimationTime += Core::GetDeltaTime();
+
 			//Move through and animate all joints on skeleton
 			for (Joint& joint : skeleton->joints)
 			{
@@ -716,7 +718,6 @@ void Renderer::AnimateSkeletalMesh(MeshComponent* mesh)
 					mesh->currentAnimationTime = 0.f;
 				}
 
-				mesh->currentAnimationTime += Core::GetDeltaTime();
 				anim.Interpolate(mesh->currentAnimationTime, joint, skeleton);
 
 				skinningData.push_back(joint.currentPose);
