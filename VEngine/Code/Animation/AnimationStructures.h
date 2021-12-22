@@ -68,6 +68,7 @@ struct Skeleton
 {
 	std::vector<Joint> joints;
 
+	std::vector<std::string> animationNames;
 	std::string currentAnimation;
 
 	void AddJoint(Joint joint);
