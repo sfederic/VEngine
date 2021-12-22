@@ -20,6 +20,12 @@ struct Vertex
 	uint32_t boneIndices[4];
 };
 
+struct Line
+{
+	XMFLOAT3 p1;
+	XMFLOAT3 p2;
+};
+
 //The actual data for each loaded mesh. Each loaded mesh file will have one of these per its filename.
 struct MeshData
 {
