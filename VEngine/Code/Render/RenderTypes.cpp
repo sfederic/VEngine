@@ -30,11 +30,18 @@ Skeleton MeshData::CreateSkeletonFromExistingData()
 {
 	Skeleton newSkeleton = {};
 	newSkeleton.joints = skeleton.joints;
+	newSkeleton.animationNames = skeleton.animationNames;
+	newSkeleton.currentAnimation = skeleton.currentAnimation;
 
 	//reset some joint data
 	for (Joint& joint : newSkeleton.joints)
 	{
 		joint.currentPose = joint.inverseBindPose;
+		
+		for (auto& anim : joint.anim)
+		{
+			anim.second.currentTime = 0.f;
+		}
 	}
 
 	return newSkeleton;
