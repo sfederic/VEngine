@@ -400,6 +400,16 @@ void DebugMenu::RenderSkeletonViewMenu()
 		{
 			ImGui::Text("Mesh: %s", mesh->meshComponentData.filename.c_str());
 
+			//@Todo: think about making a Qt based skeleton editor then deleting this
+			//Debug select animation clip to play via buttons
+			for (auto& animationName : mesh->skeleton->animationNames)
+			{
+				if (ImGui::Button(animationName.c_str()))
+				{
+					mesh->skeleton->currentAnimation = animationName;
+				}
+			}
+
 			for (auto& joint : mesh->meshDataProxy->skeleton->joints)
 			{
 				ImGui::Text("Joint: %s ", joint.name.c_str());
