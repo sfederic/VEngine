@@ -3,21 +3,24 @@
 //@Todo: the args here feel shitty. Find a way to put in all in the joint.
 void Animation::Interpolate(float t, Joint& joint, Skeleton* skeleton)
 {
-	for (size_t i = 0; i < (frames.size() - 1); i++)
+	//get anim frames connected to joint
+	std::vector<AnimFrame>& jointFrames = frames[joint.index];
+
+	for (size_t i = 0; i < (jointFrames.size() - 1); i++)
 	{
-		if (t >= frames[i].time && t <= frames[i + 1].time)
+		if (t >= jointFrames[i].time && t <= jointFrames[i + 1].time)
 		{
 			//Get the interpolation difference between input time and frame time.
-			float lerpPercent = (t - frames[i].time) / (frames[i + 1].time - frames[i].time);
+			float lerpPercent = (t - jointFrames[i].time) / (jointFrames[i + 1].time - jointFrames[i].time);
 
-			XMVECTOR currentPos = XMLoadFloat3(&frames[i].pos);
-			XMVECTOR nextPos = XMLoadFloat3(&frames[i + 1].pos);
+			XMVECTOR currentPos = XMLoadFloat3(&jointFrames[i].pos);
+			XMVECTOR nextPos = XMLoadFloat3(&jointFrames[i + 1].pos);
 
-			XMVECTOR currentScale = XMLoadFloat3(&frames[i].scale);
-			XMVECTOR nextScale = XMLoadFloat3(&frames[i + 1].scale);
+			XMVECTOR currentScale = XMLoadFloat3(&jointFrames[i].scale);
+			XMVECTOR nextScale = XMLoadFloat3(&jointFrames[i + 1].scale);
 
-			XMVECTOR currentRot = XMLoadFloat4(&frames[i].rot);
-			XMVECTOR nextRot = XMLoadFloat4(&frames[i + 1].rot);
+			XMVECTOR currentRot = XMLoadFloat4(&jointFrames[i].rot);
+			XMVECTOR nextRot = XMLoadFloat4(&jointFrames[i + 1].rot);
 
 			XMVECTOR lerpedPos = XMVectorLerp(currentPos, nextPos, lerpPercent);
 			XMVECTOR lerpedScale = XMVectorLerp(currentScale, nextScale, lerpPercent);
@@ -61,4 +64,15 @@ int Skeleton::FindJointIndexByName(std::string name)
 	}
 
 	throw new std::exception("Joint index not found");
+}
+
+void Skeleton::CreateAnimation(std::string animationName)
+{
+	animations.emplace(animationName, Animation());
+	assert(animations.find(animationName) != animations.end());
+}
+
+Animation& Skeleton::GetCurrentAnimation()
+{
+	return animations[currentAnimation];
 }

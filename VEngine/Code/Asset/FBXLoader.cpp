@@ -103,9 +103,24 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 
 	std::unordered_map<int, BoneWeights> boneWeightsMap;
 
+	FbxAnimStack* animStack = nullptr;
+
 	FbxMesh* mesh = node->GetMesh();
 	if (mesh)
 	{
+		//Create animations for skeleton
+		int numAnimStacks = scene->GetSrcObjectCount<FbxAnimStack>();
+		for (int animStackIndex = 0; animStackIndex < numAnimStacks; animStackIndex++)
+		{
+			animStack = scene->GetSrcObject<FbxAnimStack>(animStackIndex);
+			if (animStack)
+			{
+				std::string animName = animStack->GetName();
+				meshData->skeleton.CreateAnimation(animName);
+				meshData->skeleton.currentAnimation = animName;
+			}
+		}
+
 		//WEIGHT AND BONE INDICES CODE
 		const int deformerCount = mesh->GetDeformerCount(FbxDeformer::eSkin);
 		for (int deformerIndex = 0; deformerIndex < deformerCount; deformerIndex++)
@@ -170,13 +185,12 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 					int numAnimStacks = scene->GetSrcObjectCount<FbxAnimStack>();
 					for (int animStackIndex = 0; animStackIndex < numAnimStacks; animStackIndex++)
 					{
-						FbxAnimStack* animStack = scene->GetSrcObject<FbxAnimStack>(animStackIndex);
+						animStack = scene->GetSrcObject<FbxAnimStack>(animStackIndex);
 						if (animStack)
 						{
 							std::string animName = animStack->GetName();
-							meshData->skeleton.animationNames.insert(animName);
+							meshData->skeleton.CreateAnimation(animName);
 							meshData->skeleton.currentAnimation = animName;
-
 							int numAnimLayers = animStack->GetMemberCount<FbxAnimLayer>();
 							for (int animLayerIndex = 0; animLayerIndex < numAnimLayers; animLayerIndex++)
 							{
@@ -228,7 +242,7 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 												animFrame.pos.y = pos[1];
 												animFrame.pos.z = pos[2];
 
-												meshData->skeleton.joints[currentJointIndex].anim[animName].frames.push_back(animFrame);
+												meshData->skeleton.animations[animStack->GetName()].frames[currentJointIndex].push_back(animFrame);
 											}
 										}
 									}

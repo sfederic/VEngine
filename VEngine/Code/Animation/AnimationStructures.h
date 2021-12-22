@@ -30,48 +30,46 @@ struct AnimFrame
 
 struct Animation
 {
-	float GetStartTime()
+	//Maps joint index to AnimFrames
+	std::map<int, std::vector<AnimFrame>> frames;
+
+	float currentTime = 0.f;
+
+	float GetStartTime(int jointIndex)
 	{
-		return frames.front().time;
+		return frames[jointIndex].front().time;
 	}
 
-	float GetEndTime()
+	float GetEndTime(int jointIndex)
 	{
-		return frames.back().time;
+		return frames[jointIndex].back().time;
 	}
 
 	void Interpolate(float t, Joint& joint, Skeleton* skeleton);
-
-	std::string name;
-
-	std::vector<AnimFrame> frames;
-
-	float currentTime = 0.f;
 };
-
 
 struct Joint
 {
-	std::string name;
-	int parentIndex = -1;
-	int index = 0;
-
-	//Current transform pose
 	XMMATRIX currentPose = XMMatrixIdentity();
-
-	//Starting bind pose
 	XMMATRIX inverseBindPose = XMMatrixIdentity();
 
-	std::map<std::string, Animation> anim;
+	std::string name;
+
+	int parentIndex = -1; //-1 is the root joint's index or if the bone doesn't have a parent
+	int index = 0;
 };
 
 struct Skeleton
 {
 	std::vector<Joint> joints;
 
-	std::set<std::string> animationNames;
+	//@Todo: think about makint Animation a pointer here,
+	//animframes might be expensive to copy around if map resizes.
+	std::map<std::string, Animation> animations;
 	std::string currentAnimation;
 
 	void AddJoint(Joint joint);
 	int FindJointIndexByName(std::string name);
+	void CreateAnimation(std::string animationName);
+	Animation& GetCurrentAnimation();
 };

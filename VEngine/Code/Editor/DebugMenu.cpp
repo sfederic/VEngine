@@ -402,11 +402,12 @@ void DebugMenu::RenderSkeletonViewMenu()
 
 			//@Todo: think about making a Qt based skeleton editor then deleting this
 			//Debug select animation clip to play via buttons
-			for (auto& animationName : mesh->GetSkeleton()->animationNames)
+			for (auto& animation : mesh->GetSkeleton()->animations)
 			{
+				std::string animationName = animation.first;
 				if (ImGui::Button(animationName.c_str()))
 				{
-					mesh->GetSkeleton()->currentAnimation = animationName;
+					mesh->GetSkeleton()->currentAnimation = animationName.c_str();
 				}
 			}
 

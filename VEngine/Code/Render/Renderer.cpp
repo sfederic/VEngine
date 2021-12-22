@@ -708,11 +708,11 @@ void Renderer::AnimateSkeletalMesh(MeshComponent* mesh)
 		//Move through and animate all joints on skeleton
 		for (Joint& joint : skeleton->joints)
 		{
-			Animation& anim = joint.anim[skeleton->currentAnimation];
+			Animation& anim = skeleton->GetCurrentAnimation();
 
 			if (!anim.frames.empty())
 			{
-				if (anim.currentTime >= anim.GetEndTime())
+				if (anim.currentTime >= anim.GetEndTime(joint.index))
 				{
 					anim.currentTime = 0.f;
 				}
