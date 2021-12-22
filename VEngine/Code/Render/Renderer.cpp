@@ -705,20 +705,19 @@ void Renderer::AnimateSkeletalMesh(MeshComponent* mesh)
 		context->VSSetShader(shader->vertexShader, nullptr, 0);
 		context->PSSetShader(shader->pixelShader, nullptr, 0);
 
-		//Move through and animate all joints on skeleton
-		for (Joint& joint : skeleton->joints)
+		Animation& anim = skeleton->GetCurrentAnimation();
+		if (!anim.frames.empty())
 		{
-			Animation& anim = skeleton->GetCurrentAnimation();
-
-			if (!anim.frames.empty())
+			//Move through and animate all joints on skeleton
+			for (Joint& joint : skeleton->joints)
 			{
-				if (anim.currentTime >= anim.GetEndTime(joint.index))
+				if (mesh->currentAnimationTime >= anim.GetEndTime(joint.index))
 				{
-					anim.currentTime = 0.f;
+					mesh->currentAnimationTime = 0.f;
 				}
 
-				anim.currentTime += Core::GetDeltaTime();
-				anim.Interpolate(anim.currentTime, joint, skeleton);
+				mesh->currentAnimationTime += Core::GetDeltaTime();
+				anim.Interpolate(mesh->currentAnimationTime, joint, skeleton);
 
 				skinningData.push_back(joint.currentPose);
 			}

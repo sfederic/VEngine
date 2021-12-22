@@ -33,8 +33,6 @@ struct Animation
 	//Maps joint index to AnimFrames
 	std::map<int, std::vector<AnimFrame>> frames;
 
-	float currentTime = 0.f;
-
 	float GetStartTime(int jointIndex)
 	{
 		return frames[jointIndex].front().time;

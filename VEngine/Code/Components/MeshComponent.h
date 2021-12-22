@@ -23,8 +23,9 @@ struct MeshComponent : SpatialComponent
 	MeshDataProxy* meshDataProxy = nullptr;
 	PipelineStateObject* pso = nullptr;
 
-	//@Todo: think about splitting this up into an AnimatedMeshComponent or something.
+	//@Todo: think about splitting this up and currentAnimationTime into an AnimatedMeshComponent or something.
 	Skeleton* GetSkeleton() { return meshDataProxy->skeleton; }
+	float currentAnimationTime = 0.f;
 
 	bool castsShadow = true;
 
