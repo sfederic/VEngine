@@ -29,9 +29,6 @@ struct MeshData
 	std::vector<indexDataType> indices;
 
 	Skeleton skeleton;
-
-	//Creates a new skeleton with empty data based on the meshes' base skeleton
-	Skeleton CreateSkeletonFromExistingData();
 };
 
 //TextureData exists because serialisation needed texture representation that wasn't a Texture2D

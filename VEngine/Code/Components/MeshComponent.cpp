@@ -16,9 +16,6 @@ MeshComponent::MeshComponent()
 	pso = new PipelineStateObject();
 
 	material = new Material("test.png", "DefaultShader.hlsl");
-
-	skeleton = new Skeleton();
-	meshDataProxy->skeleton = skeleton;
 }
 
 MeshComponent::MeshComponent(const std::string filename_,
@@ -31,9 +28,6 @@ MeshComponent::MeshComponent(const std::string filename_,
 	meshComponentData.filename = filename_;
 
 	material = new Material(textureFilename_, shaderFilename_);
-
-	skeleton = new Skeleton();
-	meshDataProxy->skeleton = skeleton;
 }
 
 void MeshComponent::Tick(float deltaTime)
@@ -50,7 +44,6 @@ void MeshComponent::Create()
 
 	//Import mesh (set up bounding box in here too so you don't need to re-create bounds)
 	fbxLoader.Import(meshComponentData.filename.c_str(), meshDataProxy);
-	skeleton = meshDataProxy->skeleton;
 
 	//Setup bounds
 	BoundingOrientedBox::CreateFromPoints(boundingBox, meshDataProxy->vertices->size(),

@@ -21,8 +21,7 @@ struct MeshComponent : SpatialComponent
 	PipelineStateObject* pso = nullptr;
 
 	//@Todo: think about splitting this up into an AnimatedMeshComponent or something.
-	//The reason it's here is because you need all the joint transforms and timing per mesh to be unique.
-	Skeleton* skeleton = nullptr;
+	Skeleton* GetSkeleton() { return meshDataProxy->skeleton; }
 
 	bool castsShadow = true;
 
