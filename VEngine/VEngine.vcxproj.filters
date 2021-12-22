@@ -431,6 +431,9 @@
     <ClCompile Include="Code\Actors\Game\DialogueTrigger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Editor\SkeletonEditor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -812,6 +815,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\DialogueTrigger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Editor\SkeletonEditor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
