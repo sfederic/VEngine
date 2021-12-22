@@ -7,9 +7,6 @@
 #include "Editor/Editor.h"
 #include "Animation/AnimationStructures.h"
 
-//Vertex and index buffers linked to a mesh filename to copy over to new PSOs
-std::unordered_map<std::string, MeshBuffers> existingMeshBuffers;
-
 MeshComponent::MeshComponent()
 {
 	meshDataProxy = new MeshDataProxy();

@@ -14,6 +14,9 @@ struct MeshComponent : SpatialComponent
 {
 	COMPONENT_SYSTEM(MeshComponent)
 
+	//Vertex and index buffers linked to a mesh filename to copy over to new PSOs
+	static inline std::unordered_map<std::string, MeshBuffers> existingMeshBuffers;
+
 	MeshComponentData meshComponentData;
 
 	Material* material = nullptr;
