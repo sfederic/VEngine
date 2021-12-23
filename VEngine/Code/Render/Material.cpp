@@ -67,10 +67,13 @@ static void ReassignRastState(void* data)
 		return;
 	}
 
-	auto meshes = worldEditor.pickedActor->GetComponentsOfType<MeshComponent>();
-	for (auto mesh : meshes)
+	if (worldEditor.pickedActor)
 	{
-		mesh->material->rastState = foundRastState;
+		auto meshes = worldEditor.pickedActor->GetComponentsOfType<MeshComponent>();
+		for (auto mesh : meshes)
+		{
+			mesh->material->rastState = foundRastState;
+		}
 	}
 }
 
