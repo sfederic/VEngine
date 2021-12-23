@@ -114,9 +114,9 @@ next
 Player
 1
  Position
-3 0 4
+3 0.05 4
  Rotation
-0 0 0 1
+0 1.78814e-07 0 -1
  Scale
 1 1 1
 Casts Shadow
@@ -130,7 +130,7 @@ File
 Grid Obstacle
 0
 Mesh
-plane.fbx
+unit_test.fbx
 Name
 Player0
 Near Z
@@ -140,9 +140,9 @@ solid
 Shader
 DefaultShader.hlsl
 Texture
-ramza_back.png
+wall.png
 UID
-4102949568
+4185154484
 UvOffset
 0 0
 UvRotation
@@ -151,7 +151,7 @@ UvScale
 1 1
 next
 MeshActor
-12
+15
  Position
 4 -0.5 4
  Rotation
@@ -500,6 +500,93 @@ UvRotation
 UvScale
 1 1
 next
+ Position
+1 1 7
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+vase.fbx
+Name
+vase12
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+test.png
+UID
+1302995071
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+2 0 8
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+vase.fbx
+Name
+vase13
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+test.png
+UID
+3339135096
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+3 0 8
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+vase.fbx
+Name
+vase14
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+floor.jpg
+UID
+3841456893
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
 DirectionalLightActor
 1
  Position
@@ -775,36 +862,7 @@ activeEndHour
 0
 next
 Billboard
-1
- Position
-6 0.5 4
- Rotation
--0 0 0.000243956 1
- Scale
-1.00004 1.00004 1
-Casts Shadow
-1
-Grid Obstacle
 0
-Mesh
-plane.fbx
-Name
-Billboard0
-Rast State
-nobackcull
-Shader
-Unlit.hlsl
-Texture
-ramza_back.png
-UID
-1180640186
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
 InteractTrigger
 1
  Position
