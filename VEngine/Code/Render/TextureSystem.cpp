@@ -2,6 +2,7 @@
 #include "PipelineObjects.h"
 #include "Render/RenderUtils.h"
 #include <filesystem>
+#include "Log.h"
 
 TextureSystem textureSystem;
 
@@ -21,10 +22,11 @@ void TextureSystem::AddTexture2D(Texture2D* texture)
 
 Texture2D* TextureSystem::FindTexture2D(std::string textureFilename)
 {
+	//Set default texture if filename doesn't exist
 	if (!std::filesystem::exists("Textures/" + textureFilename))
 	{
-		throw std::exception("Texture not found");
-		return nullptr;
+		Log("%s not found.", textureFilename.c_str());
+		textureFilename = "test.png";
 	}
 
 	auto textureIt = texture2DMap.find(textureFilename);
