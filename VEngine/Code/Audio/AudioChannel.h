@@ -11,7 +11,6 @@ struct AudioChannel : IXAudio2VoiceCallback
 
 	AudioChannel();
 	~AudioChannel();
-
 	void SetVolume(float volume);
 	float GetVolume();
 	void SetPitch(float pitch);

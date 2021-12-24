@@ -1,4 +1,5 @@
 #include "AudioChannel.h"
+#include "Debug.h"
 
 AudioChannel::AudioChannel()
 {
@@ -6,7 +7,9 @@ AudioChannel::AudioChannel()
 
 AudioChannel::~AudioChannel()
 {
+	HR(sourceVoice->Stop());
 	sourceVoice->DestroyVoice();
+	sourceVoice = nullptr;
 }
 
 void AudioChannel::SetVolume(float volume)

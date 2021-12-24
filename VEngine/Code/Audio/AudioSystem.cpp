@@ -21,11 +21,11 @@ AudioSystem::AudioSystem() : System("AudioSystem")
 void AudioSystem::Init()
 {
 	HR(XAudio2Create(&audioEngine));
-
+	
 #ifdef _DEBUG
 	XAUDIO2_DEBUG_CONFIGURATION debug = {};
-	debug.BreakMask = XAUDIO2_LOG_WARNINGS;
-	debug.TraceMask = XAUDIO2_LOG_WARNINGS;
+	debug.BreakMask = XAUDIO2_LOG_ERRORS;
+	debug.TraceMask = XAUDIO2_LOG_ERRORS;
 	audioEngine->SetDebugConfiguration(&debug);
 #endif
 
@@ -65,19 +65,19 @@ void AudioSystem::Cleanup()
 
 void AudioSystem::DeleteLoadedAudioAndChannels()
 {
-	for (auto& audioIt : loadedAudioMap)
-	{
-		delete audioIt.second;
-	}
-
-	loadedAudioMap.clear();
-
 	for (auto& channel : channelMap)
 	{
 		delete channel.second;
 	}
 
 	channelMap.clear();
+
+	for (auto& audioIt : loadedAudioMap)
+	{
+		delete audioIt.second;
+	}
+
+	loadedAudioMap.clear();
 }
 
 AudioChannel* AudioSystem::GetChannel(uint64_t channelID)

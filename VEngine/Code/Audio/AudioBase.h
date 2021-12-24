@@ -10,4 +10,5 @@ struct AudioBase
 	std::string audioFilename;
 
 	AudioBase(std::string filename);
+	~AudioBase();
 };
