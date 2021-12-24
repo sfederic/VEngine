@@ -72,6 +72,7 @@ struct World
 
 	Actor* GetActorByUID(UID uid);
 	Actor* GetActorByName(std::string actorName);
+	Actor* GetActorByNameAllowNull(std::string actorName);
 	std::vector<Component*> GetAllComponentsInWorld();
 	void Cleanup();
 };

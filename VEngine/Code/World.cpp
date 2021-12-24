@@ -152,6 +152,13 @@ Actor* World::GetActorByName(std::string actorName)
 	return actorIt->second;
 }
 
+Actor* World::GetActorByNameAllowNull(std::string actorName)
+{
+	Actor* foundActor = nullptr;
+	foundActor = actorNameMap[actorName];
+	return foundActor;
+}
+
 std::vector<Component*> World::GetAllComponentsInWorld()
 {
 	std::vector<Component*> outComponents;
