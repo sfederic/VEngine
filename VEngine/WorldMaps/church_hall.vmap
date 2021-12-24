@@ -103,7 +103,7 @@ Loop
 Name
 AudioActor0
 Pitch
-1.24
+0.9
 Play On Start
 1
 UID
@@ -114,15 +114,15 @@ next
 Player
 1
  Position
-3 0.05 4
+5 0.05 2
  Rotation
-0 1.78814e-07 0 -1
+0 -1.2517e-06 0 -1
  Scale
-1 1 1
+0.999997 1 0.999997
 Casts Shadow
 1
 FOV
-60
+59.9717
 Far Z
 1000
 File
@@ -151,7 +151,7 @@ UvScale
 1 1
 next
 MeshActor
-15
+13
  Position
 4 -0.5 4
  Rotation
@@ -501,65 +501,7 @@ UvScale
 1 1
 next
  Position
-1 1 7
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Casts Shadow
-1
-Grid Obstacle
-0
-Mesh
-vase.fbx
-Name
-vase12
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Texture
-test.png
-UID
-1302995071
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
- Position
-2 0 8
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Casts Shadow
-1
-Grid Obstacle
-0
-Mesh
-vase.fbx
-Name
-vase13
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Texture
-test.png
-UID
-3339135096
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
- Position
-3 0 8
+5 0 4
  Rotation
 -0 0 -0 1
  Scale
@@ -567,25 +509,25 @@ next
 Casts Shadow
 1
 Grid Obstacle
-0
+1
 Mesh
-vase.fbx
+save_slate.fbx
 Name
-vase14
+save_slate12
 Rast State
 solid
 Shader
 DefaultShader.hlsl
 Texture
-floor.jpg
+stone_tablet.jpg
 UID
-3841456893
+763925194
 UvOffset
 0 0
 UvRotation
 0
 UvScale
-1 1
+4 2
 next
 DirectionalLightActor
 1
@@ -605,7 +547,20 @@ UID
 816965374
 next
 SavePoint
-0
+1
+ Position
+5 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Extents
+0.9 0.9 0.9
+Name
+SavePoint0
+UID
+3896381671
+next
 PointLightActor
 0
 SpotLightActor
@@ -689,178 +644,7 @@ UID
 1067295734
 next
 NPC
-3
- Position
-2 0.05 1
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
 0
-Attack Points
-1
-Casts Shadow
-1
-Condition
-
-Description
-
-Destruct
-1
-File
-testdiag
-Grid Obstacle
-0
-Health
-2
-Interact
-0
-Interact Text
-
-Mesh
-
-Move Points
-5
-Move Speed
-3
-Name
-NPC0
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Texture
-test.png
-UID
-1981636395
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-next
- Position
-7 0.05 1
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Attack Points
-1
-Casts Shadow
-1
-Condition
-
-Description
-
-Destruct
-1
-File
-testdiag
-Grid Obstacle
-0
-Health
-2
-Interact
-0
-Interact Text
-
-Mesh
-
-Move Points
-5
-Move Speed
-3
-Name
-NPC1
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Texture
-test.png
-UID
-1981636395
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-next
- Position
-7 0.05 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Attack Points
-1
-Casts Shadow
-1
-Condition
-
-Description
-
-Destruct
-1
-File
-testdiag
-Grid Obstacle
-0
-Health
-2
-Interact
-0
-Interact Text
-
-Mesh
-
-Move Points
-5
-Move Speed
-3
-Name
-NPC2
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Texture
-test.png
-UID
-1981636395
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-next
 Billboard
 0
 InteractTrigger
