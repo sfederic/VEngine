@@ -78,17 +78,17 @@ void Serialiser::Serialise(Properties props)
 		else if (props.CheckType<TextureData>(name))
 		{
 			TextureData* textureData = props.GetData<TextureData>(name);
-			ss << name << "\n" << textureData->filename << "\n";
+			ss << name << "\n" << textureData->filename.c_str() << "\n";
 		}
 		else if (props.CheckType<ShaderData>(name))
 		{
 			ShaderData* shaderData = props.GetData<ShaderData>(name);
-			ss << name << "\n" << shaderData->filename << "\n";
+			ss << name << "\n" << shaderData->filename.c_str() << "\n";
 		}		
 		else if (props.CheckType<MeshComponentData>(name))
 		{
 			MeshComponentData* meshComponentData = props.GetData<MeshComponentData>(name);
-			ss << name << "\n" << meshComponentData->filename << "\n";
+			ss << name << "\n" << meshComponentData->filename.c_str() << "\n";
 		}
 		else if (props.CheckType<std::vector<Actor*>>(name))
 		{
