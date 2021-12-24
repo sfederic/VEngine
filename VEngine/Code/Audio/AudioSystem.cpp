@@ -65,14 +65,14 @@ void AudioSystem::Cleanup()
 
 void AudioSystem::DeleteLoadedAudioAndChannels()
 {
-	for (auto audioIt : loadedAudioMap)
+	for (auto& audioIt : loadedAudioMap)
 	{
 		delete audioIt.second;
 	}
 
 	loadedAudioMap.clear();
 
-	for (auto channel : channelMap)
+	for (auto& channel : channelMap)
 	{
 		delete channel.second;
 	}
