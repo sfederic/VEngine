@@ -14,7 +14,7 @@ StringWidget::StringWidget(Property value_)
 void StringWidget::SetValue()
 {
 	QString txt = text();
-	value->assign(txt.toStdString());
+	value->assign(txt.toStdString().c_str());
 
 	if (prop.change)
 	{
