@@ -9,6 +9,7 @@
 #include "Camera.h"
 #include "Actors/MeshActor.h"
 #include "Editor/DebugMenu.h"
+#include "Core.h"
 
 WorldEditor worldEditor;
 
@@ -24,7 +25,7 @@ void WorldEditor::Tick()
 
 void WorldEditor::HandleActorPicking()
 {
-	if (transformGizmo.CheckMouseOver()) 
+	if (transformGizmo.CheckMouseOver() || Core::gameplayOn) 
 	{
 		return;
 	}
