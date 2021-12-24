@@ -2,13 +2,16 @@
 #include "Component.h"
 #include "ComponentSystem.h"
 
-//Holds time of day data for actors.
+//Holds time of day game data for actors.
 struct TimeComponent : Component
 {	
 	COMPONENT_SYSTEM(TimeComponent);
 
 	int activeBeginHour = 0;
 	int activeEndHour = 0;
+
+	//Check if need the actor to be always active (usually for inanimate game objects)
+	bool alwaysActive = false;
 
 	TimeComponent();
 	virtual Properties GetProps() override;
