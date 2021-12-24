@@ -34,7 +34,154 @@ UvScale
 1 1
 next
 GridActor
+3
+ Position
+0 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
 0
+Casts Shadow
+1
+Condition
+
+Description
+
+Destruct
+1
+Grid Obstacle
+0
+Health
+0
+Interact
+1
+Interact Text
+
+Mesh
+
+Name
+GridActor0
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+
+UID
+1689631026
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+next
+ Position
+1 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Casts Shadow
+1
+Condition
+
+Description
+
+Destruct
+1
+Grid Obstacle
+0
+Health
+0
+Interact
+1
+Interact Text
+
+Mesh
+
+Name
+GridActor1
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+
+UID
+1689631026
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+next
+ Position
+4 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Casts Shadow
+1
+Condition
+
+Description
+
+Destruct
+1
+Grid Obstacle
+0
+Health
+0
+Interact
+1
+Interact Text
+
+Mesh
+vase.fbx
+Name
+GridActor2
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+floor.jpg
+UID
+1689631026
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+next
 Unit
 0
 Pickup
@@ -65,15 +212,15 @@ next
 Player
 1
  Position
-2 0.049999 1
+3 0.0500009 3
  Rotation
-0 -8.34465e-07 0 0.999999
+0 -0.707105 0 -0.707107
  Scale
 0.999984 1 0.999984
 Casts Shadow
 1
 FOV
-60
+59.9993
 Far Z
 1000
 File
@@ -102,7 +249,7 @@ UvScale
 1 1
 next
 MeshActor
-6
+11
  Position
 2 -0.5 2
  Rotation
@@ -270,6 +417,151 @@ Texture
 test_door_texture.png
 UID
 2952028752
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+1 -0.49 3
+ Rotation
+0.707107 0 0 -0.707107
+ Scale
+1 0.999988 0.999988
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+carpet
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+carpet.jpg
+UID
+3822190392
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+4 0 2
+ Rotation
+0 0.707107 0 0.707107
+ Scale
+0.999995 1 0.999995
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+table.fbx
+Name
+table7
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+barrel_texture.jpg
+UID
+1522197970
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+4 0.5 1.5
+ Rotation
+-0 0.173818 -0 0.984778
+ Scale
+0.5 0.25 0.5
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+cube.fbx
+Name
+cube8
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+crate.jpg
+UID
+2272155524
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+4 0.75 1.5
+ Rotation
+-0 0.342182 -0 0.939634
+ Scale
+0.5 0.25 0.5
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+cube.fbx
+Name
+cube9
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+crate.jpg
+UID
+2272155524
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+4.05 0.55 2.7
+ Rotation
+-0 0 -0 1
+ Scale
+0.5 0.5 0.5
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+vase.fbx
+Name
+vase10
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Texture
+unnamed.jpg
+UID
+2230135290
 UvOffset
 0 0
 UvRotation
