@@ -2,9 +2,11 @@
 
 #define PX_PHYSX_STATIC_LIB
 
-#include <PxPhysicsAPI.h>
-
 struct PhysicsSystem
 {
 	void Init();
+	void Tick(float deltaTime);
+	void Cleanup();
 };
+
+extern PhysicsSystem physicsSystem;
