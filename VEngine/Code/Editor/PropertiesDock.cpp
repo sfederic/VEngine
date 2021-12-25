@@ -22,6 +22,7 @@
 #include "PropertyWidgets/TextureDataWidget.h"
 #include "PropertyWidgets/ShaderDataWidget.h"
 #include "PropertyWidgets/MeshComponentDataWidget.h"
+#include "PropertyWidgets/ActorWidget.h"
 #include "PropertyWidgets/ActorListWidget.h"
 #include "PropertyWidgets/TransformWidget.h"
 #include "Render/Material.h"
@@ -184,8 +185,7 @@ void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRo
         }
         else if (props.CheckType<Actor*>(name))
         {
-            //For now just keep single actor assignments in-editor as names of the actor.
-            auto actorWidget = new StringWidget(prop.second);
+            auto actorWidget = new ActorWidget(prop.second);
             actorPropsGridLayout->addWidget(actorWidget, currentGridRow, propertyDataColumn);
             propertyWidgetsToUpdate.push_back((IPropertyWidget*)actorWidget);
         }
