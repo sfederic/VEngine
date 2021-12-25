@@ -1,8 +1,8 @@
 # VEngine - Vagrant Tactics 
 
 ## Build Notes
-Visual Studio 2022 17.0.2
-Blender 2.93.7
+-Visual Studio 2022 17.0.2
+-Blender 2.93.7
 
 ## Packages
 
@@ -14,6 +14,8 @@ Qt VS Tools ver. 2.7.1.20 - https://marketplace.visualstudio.com/items?itemName=
 (Currently the engine is using VS2022 tools, the Qt VS extension holds over but VS2022 can't create new Qt projects but builds and settings still work.)
 
 ## Third party libs:
+
+Physx ver 4.1.2 | https://github.com/NVIDIAGameWorks/PhysX (used https://vcpkg.io/en/index.html to download SDK [package name is physx:x64-windows])
 
 FBXSDK ver. 2020.1 | Throw FBXSDK headers/source into Code/FbxSdk - https://www.autodesk.com/developer-network/platform-technologies/fbx-sdk-2020-1
 
