@@ -20,6 +20,7 @@
 #include "Render/MaterialSystem.h"
 #include "Render/SpriteSystem.h"
 #include "Audio/AudioSystem.h"
+#include "Physics/PhysicsSystem.h"
 
 Engine engine;
 
@@ -32,6 +33,8 @@ void Engine::Init(int argc, char* argv[])
 	activeCamera = &editorCamera;
 
 	audioSystem.Init();
+
+	physicsSystem.Init();
 
 	renderer.Init(editor->windowHwnd, editor->viewportWidth, editor->viewportHeight);
 
@@ -55,6 +58,7 @@ void Engine::TickSystems(float deltaTime)
 	activeCamera->Tick(deltaTime);
 	timerSystem.Tick(deltaTime);
 	worldEditor.Tick();
+	physicsSystem.Tick(deltaTime);
 	renderer.Tick();
 
 	if (Core::gameplayOn)
@@ -104,6 +108,7 @@ void Engine::Render(float deltaTime)
 
 void Engine::Cleanup()
 {
+	physicsSystem.Cleanup();
 	shaderSystem.CleanUpShaders();
 	debugMenu.Cleanup();
 	uiSystem.Cleanup();
