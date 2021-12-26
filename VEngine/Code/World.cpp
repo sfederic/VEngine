@@ -13,6 +13,7 @@
 #include "Render/SpriteSystem.h"
 #include "UI/UISystem.h"
 #include "Gameplay/GameInstance.h"
+#include "Physics/PhysicsSystem.h"
 
 World world;
 
@@ -178,6 +179,7 @@ void World::Cleanup()
 	actorNameMap.clear();
 
 	//Cleanup various systems
+	physicsSystem.Reset();
 	audioSystem.DeleteLoadedAudioAndChannels();
 	textureSystem.Cleanup();
 	materialSystem.Cleanup();

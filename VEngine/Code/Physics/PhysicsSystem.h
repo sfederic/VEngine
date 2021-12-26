@@ -14,6 +14,7 @@ struct PhysicsSystem
 	void Init();
 	void Tick(float deltaTime);
 	void Cleanup();
+	void Reset();
 
 	void CreateRigidDynamicPhysicsActor(MeshComponent* mesh);
 	void CreateRigidStaticPhysicsActor(MeshComponent* mesh);

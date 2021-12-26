@@ -73,6 +73,16 @@ void PhysicsSystem::Cleanup()
 	foundation->release();
 }
 
+void PhysicsSystem::Reset()
+{
+	for (auto& rigidActorIt : rigidMap)
+	{
+		rigidActorIt.second->release();
+	}
+
+	rigidMap.clear();
+}
+
 void PhysicsSystem::CreateRigidDynamicPhysicsActor(MeshComponent* mesh)
 {
 	PxTransform pxTransform = {};
