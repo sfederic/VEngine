@@ -29,6 +29,7 @@
 #include "Actors/Game/Player.h"
 #include "Gameplay/Intuition.h"
 #include "Console.h"
+#include "Physics/PhysicsSystem.h"
 
 DebugMenu debugMenu;
 
@@ -422,6 +423,20 @@ void DebugMenu::RenderSkeletonViewMenu()
 				ImGui::Text("Parent Index: %d", joint.parentIndex);
 			}
 		}
+	}
+
+	ImGui::End();
+}
+
+void DebugMenu::RenderPhysicsMenu()
+{
+	if (!physicsMenuOpen) return;
+
+	ImGui::Begin("Rigid Bodies");
+
+	for (auto& rigidActorIt : physicsSystem.rigidMap)
+	{
+		PxRigidActor* rigidActor = rigidActorIt.second;
 	}
 
 	ImGui::End();
