@@ -122,6 +122,10 @@ void QtEditor::EnableDarkMode()
 
         "QWidget { background-color: rgb(45, 45, 45); border-color: rgb(11, 11, 11); border-width: 0.0px; border-style: none; } "
 
+        "QLineEdit { background-color: rgb(40, 40, 40); } "
+        "QSpinBox { background-color: rgb(40, 40, 40); } "
+        "QDoubleSpinBox { background-color: rgb(40, 40, 40); } "
+
         "QPushButton { min-height:30px; min-width:50px; background-color: rgb(53, 53, 53); border-radius: 5px; } "
         "QPushButton:hover { background-color: rgb(80, 80, 80); } "
         "QPushButton:pressed { background-color: rgb(140, 140, 140); } "
