@@ -30,6 +30,10 @@ MeshComponent::MeshComponent(const std::string filename_,
 
 void MeshComponent::Tick(float deltaTime)
 {
+	if (!isStatic)
+	{
+		physicsSystem.GetTransformFromPhysicsActor(this);
+	}
 }
 
 void MeshComponent::Create()
