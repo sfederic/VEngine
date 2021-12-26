@@ -2,11 +2,11 @@
 
 #define PX_PHYSX_STATIC_LIB
 
-#include <PxPhysicsAPI.h>
+#include <foundation/PxTransform.h>
 
 using namespace physx;
 
-struct Actor;
+struct MeshComponent;
 struct Transform;
 
 struct PhysicsSystem
@@ -15,11 +15,11 @@ struct PhysicsSystem
 	void Tick(float deltaTime);
 	void Cleanup();
 
-	void CreateRigidDynamicPhysicsActor(Actor* actor);
-	void CreateRigidStaticPhysicsActor(Actor* actor);
+	void CreateRigidDynamicPhysicsActor(MeshComponent* mesh);
+	void CreateRigidStaticPhysicsActor(MeshComponent* mesh);
 	void ActorToPhysxTransform(const Transform& actorTransform, PxTransform& pxTransform);
 	void PhysxToActorTransform(Transform& actorTransform, const PxTransform& pxTransform);
-	void GetTransformFromPhysicsActor(Actor* actor);
+	void GetTransformFromPhysicsActor(MeshComponent* mesh);
 };
 
 extern PhysicsSystem physicsSystem;

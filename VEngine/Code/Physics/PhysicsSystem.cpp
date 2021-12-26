@@ -1,9 +1,10 @@
 #include "PhysicsSystem.h"
 #include <cassert>
-#include "Actors/Actor.h"
 #include <map>
+#include <PxPhysicsAPI.h>
+#include "Components/MeshComponent.h"
 
-std::map<std::string, PxRigidActor*> rigidMap;
+std::map<UID, PxRigidActor*> rigidMap;
 
 PhysicsSystem physicsSystem;
 
@@ -75,24 +76,24 @@ void PhysicsSystem::Cleanup()
 	foundation->release();
 }
 
-void PhysicsSystem::CreateRigidDynamicPhysicsActor(Actor* actor)
+void PhysicsSystem::CreateRigidDynamicPhysicsActor(MeshComponent* mesh)
 {
 	PxTransform pxTransform = {};
-	Transform actorTransform = actor->GetTransform();
-	ActorToPhysxTransform(actorTransform, pxTransform);
+	Transform transform = mesh->transform;
+	ActorToPhysxTransform(transform, pxTransform);
 
 	auto rigid = physics->createRigidDynamic(pxTransform);
 	auto box = physics->createShape(PxSphereGeometry(0.5f), *material);
 	rigid->attachShape(*box);
 	scene->addActor(*rigid);
-
-	rigidMap.emplace(actor->name, rigid);
+	
+	rigidMap.emplace(mesh->uid, rigid);
 }
 
-void PhysicsSystem::CreateRigidStaticPhysicsActor(Actor* actor)
+void PhysicsSystem::CreateRigidStaticPhysicsActor(MeshComponent* mesh)
 {
 	PxTransform pxTransform = {};
-	Transform actorTransform = actor->GetTransform();
+	Transform actorTransform = mesh->transform;
 	ActorToPhysxTransform(actorTransform, pxTransform);
 
 	auto rigid = physics->createRigidStatic(pxTransform);
@@ -100,7 +101,7 @@ void PhysicsSystem::CreateRigidStaticPhysicsActor(Actor* actor)
 	rigid->attachShape(*box);
 	scene->addActor(*rigid);
 
-	rigidMap.emplace(actor->name, rigid);
+	rigidMap.emplace(mesh->uid, rigid);
 }
 
 void PhysicsSystem::ActorToPhysxTransform(const Transform& actorTransform, PxTransform& pxTransform)
@@ -118,13 +119,14 @@ void PhysicsSystem::PhysxToActorTransform(Transform& actorTransform, const PxTra
 	actorTransform.rotation = XMFLOAT4(pxTransform.q.x, pxTransform.q.y, pxTransform.q.z, pxTransform.q.w);
 }
 
-void PhysicsSystem::GetTransformFromPhysicsActor(Actor* actor)
+void PhysicsSystem::GetTransformFromPhysicsActor(MeshComponent* mesh)
 {
-	auto rigid = rigidMap[actor->name];
+	auto rigid = rigidMap[mesh->uid];
 
 	PxTransform pxTransform = rigid->getGlobalPose();
-	Transform actorTransform = actor->GetTransform();
-	PhysxToActorTransform(actorTransform, pxTransform);
+	Transform transform = mesh->transform;
+	PhysxToActorTransform(transform, pxTransform);
 
-	actor->SetTransform(actorTransform);
+	mesh->transform = transform;
+	mesh->UpdateTransform();
 }
