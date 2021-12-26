@@ -18,7 +18,7 @@ struct Actor
 	Actor* parent = nullptr;
 	std::vector<Actor*> children;
 
-	std::set<std::string, std::string> tags;
+	std::set<std::string> tags;
 
 	SpatialComponent* rootComponent = nullptr;
 	std::vector<Component*> components;

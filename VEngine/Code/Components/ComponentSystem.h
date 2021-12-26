@@ -27,6 +27,7 @@ struct ComponentSystem : IComponentSystem
 		component->owner = owner;
 		component->index = components.size() - 1;
 		component->name = this->name + std::to_string(component->index);
+		component->uid = GenerateUID();
 
 		if (systemState == SystemStates::Loaded)
 		{

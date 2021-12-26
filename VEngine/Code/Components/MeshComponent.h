@@ -29,6 +29,9 @@ struct MeshComponent : SpatialComponent
 
 	bool castsShadow = true;
 
+	//whether the mesh is moved by physics system
+	bool isStatic = true;
+
 	//whether nodes that spawn on this mesh are set as inactive
 	bool gridObstacle = false;
 
