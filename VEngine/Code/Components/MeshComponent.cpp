@@ -6,6 +6,7 @@
 #include "WorldEditor.h"
 #include "Editor/Editor.h"
 #include "Animation/AnimationStructures.h"
+#include "Physics/PhysicsSystem.h"
 
 MeshComponent::MeshComponent()
 {
@@ -67,6 +68,16 @@ void MeshComponent::Create()
 	meshBuffers.vertexBuffer = pso->vertexBuffer;
 	meshBuffers.indexBuffer = pso->indexBuffer;
 	existingMeshBuffers[meshComponentData.filename] = meshBuffers;
+	
+	//Setup physics actors
+	if (isStatic)
+	{
+		physicsSystem.CreateRigidStaticPhysicsActor(this);
+	}
+	else
+	{
+		physicsSystem.CreateRigidDynamicPhysicsActor(this);
+	}
 }
 
 void MeshComponent::Destroy()
@@ -93,6 +104,7 @@ Properties MeshComponent::GetProps()
 	Properties props("MeshComponent");
 	props.Add("Mesh", &meshComponentData).change = ReassignMesh;
 	props.Add("Casts Shadow", &castsShadow);
+	props.Add("Static", &isStatic);
 	props.Add("Grid Obstacle", &gridObstacle);
 	props.Merge(material->GetProps());
 	return props;
