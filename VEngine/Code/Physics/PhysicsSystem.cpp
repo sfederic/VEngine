@@ -1,6 +1,9 @@
 #include "PhysicsSystem.h"
 #include <cassert>
 #include "Actors/Actor.h"
+#include <map>
+
+std::map<std::string, PxRigidActor*> rigidMap;
 
 PhysicsSystem physicsSystem;
 
@@ -37,10 +40,12 @@ void PhysicsSystem::Init()
 
 	//Create scene
 	PxSceneDesc sceneDesc(physics->getTolerancesScale());
-	sceneDesc.gravity = PxVec3(0.0f, -9.81f, 0.0f);
+	sceneDesc.gravity = PxVec3(0.0f, -1.81f, 0.0f);
 	sceneDesc.cpuDispatcher = dispatcher;
 	sceneDesc.filterShader = PxDefaultSimulationFilterShader;
 	scene = physics->createScene(sceneDesc);
+
+	material = physics->createMaterial(0.5f, 0.5f, 0.f);
 }
 
 void PhysicsSystem::Tick(float deltaTime)
@@ -70,18 +75,56 @@ void PhysicsSystem::Cleanup()
 	foundation->release();
 }
 
-void PhysicsSystem::CreatePhysicsActor(Actor* actor)
+void PhysicsSystem::CreateRigidDynamicPhysicsActor(Actor* actor)
 {
 	PxTransform pxTransform = {};
 	Transform actorTransform = actor->GetTransform();
 	ActorToPhysxTransform(actorTransform, pxTransform);
+
+	auto rigid = physics->createRigidDynamic(pxTransform);
+	auto box = physics->createShape(PxSphereGeometry(0.5f), *material);
+	rigid->attachShape(*box);
+	scene->addActor(*rigid);
+
+	rigidMap.emplace(actor->name, rigid);
 }
 
-void PhysicsSystem::ActorToPhysxTransform(Transform& actorTransform, PxTransform& pxTransform)
+void PhysicsSystem::CreateRigidStaticPhysicsActor(Actor* actor)
+{
+	PxTransform pxTransform = {};
+	Transform actorTransform = actor->GetTransform();
+	ActorToPhysxTransform(actorTransform, pxTransform);
+
+	auto rigid = physics->createRigidStatic(pxTransform);
+	auto box = physics->createShape(PxSphereGeometry(0.5f), *material);
+	rigid->attachShape(*box);
+	scene->addActor(*rigid);
+
+	rigidMap.emplace(actor->name, rigid);
+}
+
+void PhysicsSystem::ActorToPhysxTransform(const Transform& actorTransform, PxTransform& pxTransform)
 {
 	pxTransform.p = PxVec3(actorTransform.position.x,
 		actorTransform.position.y, actorTransform.position.z);
 
 	pxTransform.q = PxQuat(actorTransform.rotation.x, actorTransform.rotation.y,
 		actorTransform.rotation.z, actorTransform.rotation.w);
+}
+
+void PhysicsSystem::PhysxToActorTransform(Transform& actorTransform, const PxTransform& pxTransform)
+{
+	actorTransform.position = XMFLOAT3(pxTransform.p.x, pxTransform.p.y, pxTransform.p.z);
+	actorTransform.rotation = XMFLOAT4(pxTransform.q.x, pxTransform.q.y, pxTransform.q.z, pxTransform.q.w);
+}
+
+void PhysicsSystem::GetTransformFromPhysicsActor(Actor* actor)
+{
+	auto rigid = rigidMap[actor->name];
+
+	PxTransform pxTransform = rigid->getGlobalPose();
+	Transform actorTransform = actor->GetTransform();
+	PhysxToActorTransform(actorTransform, pxTransform);
+
+	actor->SetTransform(actorTransform);
 }
