@@ -7,7 +7,6 @@
 std::map<UID, PxRigidActor*> rigidMap;
 
 PhysicsSystem physicsSystem;
-
 PxDefaultAllocator allocator;
 
 //Need to link against PhysXExtensions_static_64.lib for this one. Also it needs to be from the debug folder.
@@ -15,15 +14,10 @@ PxDefaultErrorCallback errorCallback;
 
 PxFoundation* foundation = nullptr;
 PxPhysics* physics = nullptr;
-
 PxDefaultCpuDispatcher* dispatcher = nullptr;
 PxScene* scene = nullptr;
-
 PxMaterial* material = nullptr;
-
 PxPvd* pvd = nullptr;
-
-PxReal stackZ = 10.0f;
 
 void PhysicsSystem::Init()
 {
@@ -36,8 +30,10 @@ void PhysicsSystem::Init()
 	//pvd->connect(*transport, PxPvdInstrumentationFlag::eALL);
 
 	physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, PxTolerancesScale(), true);
+	assert(physics);
 
 	dispatcher = PxDefaultCpuDispatcherCreate(2);
+	assert(dispatcher);
 
 	//Create scene
 	PxSceneDesc sceneDesc(physics->getTolerancesScale());
@@ -46,6 +42,7 @@ void PhysicsSystem::Init()
 	sceneDesc.filterShader = PxDefaultSimulationFilterShader;
 	scene = physics->createScene(sceneDesc);
 
+	//Default material
 	material = physics->createMaterial(0.5f, 0.5f, 0.f);
 }
 
