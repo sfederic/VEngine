@@ -21,12 +21,12 @@ DirectXTK (directxtk_desktop_win10) ver. 2021.8.2.1 - https://github.com/microso
 
 * Qt ver. 5.15.0 - https://download.qt.io/official_releases/qt/5.15/
 
-(The ImGui libs are already included in the repo)\
+(The ImGui libs are already included in the repo)
 * Dear ImGui - https://github.com/ocornut/imgui
 * ImGuizmo - https://github.com/CedricGuillemet/ImGuizmo
 
 ## Uses
-https://opengameart.org/content/jrpg-style-ui-sounds
-https://opengameart.org/content/rpg-sound-pack
+* https://opengameart.org/content/jrpg-style-ui-sounds
+* https://opengameart.org/content/rpg-sound-pack
 
 ![image](https://user-images.githubusercontent.com/45758254/147405666-9535d71b-c29c-4914-8652-f28f04de4b9d.png)
