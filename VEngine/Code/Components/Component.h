@@ -8,10 +8,9 @@ struct Component
 {
 	//TODO: there's something wrong with owner here. It always ends up crashing with junk data.
 	Actor* owner = nullptr; 
-
+	UID uid;
 	std::string name;
 	int index = -1;
-
 	bool active = true;
 
 	virtual void Tick(float deltaTime) {}
