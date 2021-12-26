@@ -83,40 +83,33 @@ void PhysicsSystem::Reset()
 
 //@Todo: for now, createphysicsactor functions are just using AABB boxes based on the DirectXMath bounding 
 //volume vars. See if it's worth cooking collision hulls and how that weighs up with raycasting in Physx.
-void PhysicsSystem::CreateRigidDynamicPhysicsActor(MeshComponent* mesh)
+//Probably ok for grid games. VagrantTactics needs it more than collision hulls.
+void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type)
 {
 	PxTransform pxTransform = {};
 	Transform transform = mesh->transform;
 	ActorToPhysxTransform(transform, pxTransform);
 
-	auto rigid = physics->createRigidDynamic(pxTransform);
+	PxRigidActor* rigidActor = nullptr;
+	switch (type)
+	{
+	case PhysicsType::Static:
+		rigidActor = physics->createRigidStatic(pxTransform);
+		break;
 
-	XMFLOAT3 extents = mesh->boundingBox.Extents;
-	auto box = physics->createShape(PxBoxGeometry(extents.x, extents.y, extents.z), *material);
-
-	rigid->attachShape(*box);
-	scene->addActor(*rigid);
-	
-	rigidActorMap.emplace(mesh->uid, rigid);
-}
-
-//@Todo: can maybe consolidate CreatePhysicsActor functions.
-void PhysicsSystem::CreateRigidStaticPhysicsActor(MeshComponent* mesh)
-{
-	PxTransform pxTransform = {};
-	Transform actorTransform = mesh->transform;
-	ActorToPhysxTransform(actorTransform, pxTransform);
-
-	auto rigid = physics->createRigidStatic(pxTransform);
+	case PhysicsType::Dynamic:
+		rigidActor = physics->createRigidDynamic(pxTransform);
+		break;
+	}
 
 	XMFLOAT3 extents = mesh->boundingBox.Extents;
 	NormaliseExtents(extents.x, extents.y, extents.z);
 	auto box = physics->createShape(PxBoxGeometry(extents.x, extents.y, extents.z), *material);
 
-	rigid->attachShape(*box);
-	scene->addActor(*rigid);
-
-	rigidActorMap.emplace(mesh->uid, rigid);
+	rigidActor->attachShape(*box);
+	scene->addActor(*rigidActor);
+	
+	rigidActorMap.emplace(mesh->uid, rigidActor);
 }
 
 void PhysicsSystem::ActorToPhysxTransform(const Transform& actorTransform, PxTransform& pxTransform)

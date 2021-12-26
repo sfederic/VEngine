@@ -35,11 +35,11 @@ void MeshComponent::Start()
 	//but it enables roughly changing actors between static and dynamic when editing.
 	if (isStatic)
 	{
-		physicsSystem.CreateRigidStaticPhysicsActor(this);
+		physicsSystem.CreatePhysicsActor(this, PhysicsType::Static);
 	}
 	else
 	{
-		physicsSystem.CreateRigidDynamicPhysicsActor(this);
+		physicsSystem.CreatePhysicsActor(this, PhysicsType::Dynamic);
 	}
 }
 

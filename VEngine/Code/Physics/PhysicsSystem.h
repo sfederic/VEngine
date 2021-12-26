@@ -12,6 +12,12 @@ using namespace physx;
 struct MeshComponent;
 struct Transform;
 
+enum class PhysicsType
+{
+	Static,
+	Dynamic
+};
+
 //Interface to PhysX systems
 struct PhysicsSystem
 {
@@ -23,8 +29,7 @@ struct PhysicsSystem
 	void Cleanup();
 	void Reset();
 
-	void CreateRigidDynamicPhysicsActor(MeshComponent* mesh);
-	void CreateRigidStaticPhysicsActor(MeshComponent* mesh);
+	void CreatePhysicsActor(MeshComponent* mesh, PhysicsType type);
 	void ActorToPhysxTransform(const Transform& actorTransform, PxTransform& pxTransform);
 	void PhysxToActorTransform(Transform& actorTransform, const PxTransform& pxTransform);
 	void GetTransformFromPhysicsActor(MeshComponent* mesh);
