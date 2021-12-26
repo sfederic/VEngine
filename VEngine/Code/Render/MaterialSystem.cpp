@@ -46,6 +46,7 @@ void MaterialSystem::Cleanup()
 {
 	for (auto& materialIt : materials)
 	{
+		//@Todo: there's an occasianal crash here I don't know why. Probably the range for loop.
 		delete materialIt.second;
 	}
 
