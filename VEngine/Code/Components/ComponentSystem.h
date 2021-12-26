@@ -24,7 +24,6 @@ struct ComponentSystem : IComponentSystem
 		T* component = new T(std::move(newComponent));
 		components.emplace_back(component);
 
-		component->owner = owner;
 		component->index = components.size() - 1;
 		component->name = this->name + std::to_string(component->index);
 		component->uid = GenerateUID();

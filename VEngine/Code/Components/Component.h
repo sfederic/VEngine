@@ -6,8 +6,6 @@ struct Actor;
 
 struct Component
 {
-	//TODO: there's something wrong with owner here. It always ends up crashing with junk data.
-	Actor* owner = nullptr; 
 	UID uid = 0;
 	std::string name;
 	int index = -1;
