@@ -29,4 +29,4 @@ DirectXTK (directxtk_desktop_win10) ver. 2021.8.2.1 - https://github.com/microso
 https://opengameart.org/content/jrpg-style-ui-sounds
 https://opengameart.org/content/rpg-sound-pack
 
-![image](https://user-images.githubusercontent.com/45758254/145655740-ca2cf678-a924-45e6-abab-efe6337d9de8.png)
+![image](https://user-images.githubusercontent.com/45758254/147405666-9535d71b-c29c-4914-8652-f28f04de4b9d.png)
