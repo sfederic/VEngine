@@ -73,23 +73,17 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 			}
 		}
 
-		//Iterate over actor's spatial components
-		for (SpatialComponent* spatialComponent : actor->GetComponentsOfType<SpatialComponent>())
+		//Iterate over actor's mesh components
+		for (auto mesh : actor->GetComponentsOfType<MeshComponent>())
 		{
 			//Collision layer checks
-			if (spatialComponent->layer == CollisionLayers::None ||
-				spatialComponent->layer == ray.ignoreLayer)
+			if (mesh->layer == CollisionLayers::None ||
+				mesh->layer == ray.ignoreLayer)
 			{
 				continue;
 			}
 
-			//Skip over triggers when not in editor
-			if (dynamic_cast<BoxTriggerComponent*>(spatialComponent) && !fromScreen)
-			{
-				continue;
-			}
-
-			BoundingOrientedBox boundingBox = spatialComponent->boundingBox;
+			BoundingOrientedBox boundingBox = mesh->boundingBox;
 			VMath::UpdateBoundingBox(boundingBox, actor);
 
 			if (boundingBox.Intersects(ray.origin, ray.direction, ray.hitDistance))
@@ -154,7 +148,7 @@ bool RaycastTriangleIntersect(Ray& ray)
 	{
 		XMMATRIX model = actor->GetTransformMatrix();
 
-		for (MeshComponent* mesh : actor->GetComponentsOfType<MeshComponent>())
+		for (auto mesh : actor->GetComponentsOfType<MeshComponent>())
 		{
 			for (int i = 0; i < mesh->meshDataProxy->vertices->size() / 3; i++)
 			{
