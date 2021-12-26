@@ -100,6 +100,7 @@ void PhysicsSystem::CreateRigidDynamicPhysicsActor(MeshComponent* mesh)
 	rigidActorMap.emplace(mesh->uid, rigid);
 }
 
+//@Todo: can maybe consolidate CreatePhysicsActor functions.
 void PhysicsSystem::CreateRigidStaticPhysicsActor(MeshComponent* mesh)
 {
 	PxTransform pxTransform = {};
