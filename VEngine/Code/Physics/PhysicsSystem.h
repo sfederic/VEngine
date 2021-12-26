@@ -5,9 +5,11 @@
 #include <unordered_map>
 #include <foundation/PxTransform.h>
 #include <PxRigidActor.h>
+#include <DirectXMath.h>
 #include "UID.h"
 
 using namespace physx;
+using namespace DirectX;
 
 struct MeshComponent;
 struct Transform;
@@ -36,10 +38,24 @@ struct PhysicsSystem
 	void PhysxToActorTransform(Transform& actorTransform, const PxTransform& pxTransform);
 	void GetTransformFromPhysicsActor(MeshComponent* mesh);
 
-	void Raycast();
-
 private:
 	void NormaliseExtents(float& x, float& y, float& z);
 };
 
 extern PhysicsSystem physicsSystem;
+
+namespace Physics
+{
+	struct RaycastHit
+	{
+		Actor* hitActor = nullptr;
+
+		XMFLOAT3 normal;
+		XMFLOAT3 posiiton;
+		XMFLOAT2 uv;
+
+		float distance = 0.f;
+	};
+
+	bool Raycast(XMFLOAT3 origin, XMFLOAT3 dir, float range, RaycastHit& hit);
+}

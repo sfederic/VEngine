@@ -167,21 +167,32 @@ void PhysicsSystem::GetTransformFromPhysicsActor(MeshComponent* mesh)
 	mesh->UpdateTransform();
 }
 
-void PhysicsSystem::Raycast()
-{
-	PxRaycastBuffer hit;
-	if (scene->raycast(PxVec3(0.f, 0.f, 3.f), PxVec3(0.f, 0.f, -1.f), 100.f, hit))
-	{
-		auto& block = hit.block;
-		auto actor = (Actor*)block.actor->userData;
-		return;
-	}
-}
-
 //Extents can be 0 or less than because of the planes and walls, Physx wants extents above 0.
 void PhysicsSystem::NormaliseExtents(float& x, float& y, float& z)
 {
 	if (x <= 0.f) x = 0.1f;
 	if (y <= 0.f) y = 0.1f;
 	if (z <= 0.f) z = 0.1f;
+}
+
+bool Physics::Raycast(XMFLOAT3 origin, XMFLOAT3 dir, float range, RaycastHit& hit)
+{
+	PxRaycastBuffer hitBuffer;
+	PxVec3 pxOrigin(origin.x, origin.y, origin.z);
+	PxVec3 pxDir(dir.x, dir.y, dir.z);
+
+	if (scene->raycast(pxOrigin, pxDir, range, hitBuffer))
+	{
+		PxRaycastHit& block = hitBuffer.block;
+
+		hit.hitActor = (Actor*)block.actor->userData;
+		hit.distance = block.distance;
+		hit.normal = XMFLOAT3(block.normal.x, block.normal.y, block.normal.z);
+		hit.posiiton = XMFLOAT3(block.position.x, block.position.y, block.position.z);
+		hit.uv = XMFLOAT2(block.u, block.v);
+
+		return true;
+	}
+
+	return false;
 }
