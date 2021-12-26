@@ -73,12 +73,12 @@ void PhysicsSystem::Cleanup()
 
 void PhysicsSystem::Reset()
 {
-	for (auto& rigidActorIt : rigidMap)
+	for (auto& rigidActorIt : rigidActorMap)
 	{
 		rigidActorIt.second->release();
 	}
 
-	rigidMap.clear();
+	rigidActorMap.clear();
 }
 
 void PhysicsSystem::CreateRigidDynamicPhysicsActor(MeshComponent* mesh)
@@ -92,7 +92,7 @@ void PhysicsSystem::CreateRigidDynamicPhysicsActor(MeshComponent* mesh)
 	rigid->attachShape(*box);
 	scene->addActor(*rigid);
 	
-	rigidMap.emplace(mesh->uid, rigid);
+	rigidActorMap.emplace(mesh->uid, rigid);
 }
 
 void PhysicsSystem::CreateRigidStaticPhysicsActor(MeshComponent* mesh)
@@ -106,7 +106,7 @@ void PhysicsSystem::CreateRigidStaticPhysicsActor(MeshComponent* mesh)
 	rigid->attachShape(*box);
 	scene->addActor(*rigid);
 
-	rigidMap.emplace(mesh->uid, rigid);
+	rigidActorMap.emplace(mesh->uid, rigid);
 }
 
 void PhysicsSystem::ActorToPhysxTransform(const Transform& actorTransform, PxTransform& pxTransform)
@@ -126,7 +126,7 @@ void PhysicsSystem::PhysxToActorTransform(Transform& actorTransform, const PxTra
 
 void PhysicsSystem::GetTransformFromPhysicsActor(MeshComponent* mesh)
 {
-	auto rigid = rigidMap[mesh->uid];
+	auto rigid = rigidActorMap[mesh->uid];
 
 	PxTransform pxTransform = rigid->getGlobalPose();
 	Transform transform = mesh->transform;

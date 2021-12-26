@@ -12,10 +12,11 @@ using namespace physx;
 struct MeshComponent;
 struct Transform;
 
+//Interface to PhysX systems
 struct PhysicsSystem
 {
 	//Maps meshcomponent UIDs to rigid actors
-	std::unordered_map<UID, PxRigidActor*> rigidMap;
+	std::unordered_map<UID, PxRigidActor*> rigidActorMap;
 
 	void Init();
 	void Tick(float deltaTime);
