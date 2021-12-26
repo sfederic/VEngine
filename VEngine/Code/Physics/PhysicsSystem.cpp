@@ -3,8 +3,10 @@
 #include <PxPhysicsAPI.h>
 #include "Components/MeshComponent.h"
 #include <PxRigidActor.h>
+#include "World.h"
 
 PhysicsSystem physicsSystem;
+
 PxDefaultAllocator allocator;
 
 //Need to link against PhysXExtensions_static_64.lib for this one. Also it needs to be from the debug folder.
@@ -42,6 +44,30 @@ void PhysicsSystem::Init()
 
 	//Default material
 	material = physics->createMaterial(0.5f, 0.5f, 0.f);
+}
+
+//Setup physics actors on gameplay start
+void PhysicsSystem::Start()
+{
+	//@Todo: it feels like physics will break if the mesh isn't the root of the actor
+	auto actors = world.GetAllActorsInWorld();
+	for (auto actor : actors)
+	{
+		auto meshes = actor->GetComponentsOfType<MeshComponent>();
+		for (auto mesh : meshes)
+		{
+			//@Todo: I don't like doing this and reseting physicssystem on gameplay end. Feels expensive,
+			//but it enables roughly changing actors between static and dynamic when editing.
+			if (mesh->isStatic)
+			{
+				physicsSystem.CreatePhysicsActor(mesh, PhysicsType::Static, actor);
+			}
+			else
+			{
+				physicsSystem.CreatePhysicsActor(mesh, PhysicsType::Dynamic, actor);
+			}
+		}
+	}
 }
 
 void PhysicsSystem::Tick(float deltaTime)
@@ -84,7 +110,7 @@ void PhysicsSystem::Reset()
 //@Todo: for now, createphysicsactor functions are just using AABB boxes based on the DirectXMath bounding 
 //volume vars. See if it's worth cooking collision hulls and how that weighs up with raycasting in Physx.
 //Probably ok for grid games. VagrantTactics needs it more than collision hulls.
-void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type)
+void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Actor* actor)
 {
 	PxTransform pxTransform = {};
 	Transform transform = mesh->transform;
@@ -101,6 +127,8 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type)
 		rigidActor = physics->createRigidDynamic(pxTransform);
 		break;
 	}
+
+	rigidActor->userData = actor;
 
 	XMFLOAT3 extents = mesh->boundingBox.Extents;
 	NormaliseExtents(extents.x, extents.y, extents.z);
@@ -137,6 +165,17 @@ void PhysicsSystem::GetTransformFromPhysicsActor(MeshComponent* mesh)
 
 	mesh->transform = transform;
 	mesh->UpdateTransform();
+}
+
+void PhysicsSystem::Raycast()
+{
+	PxRaycastBuffer hit;
+	if (scene->raycast(PxVec3(0.f, 0.f, 3.f), PxVec3(0.f, 0.f, -1.f), 100.f, hit))
+	{
+		auto& block = hit.block;
+		auto actor = (Actor*)block.actor->userData;
+		return;
+	}
 }
 
 //Extents can be 0 or less than because of the planes and walls, Physx wants extents above 0.

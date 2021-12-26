@@ -11,6 +11,7 @@ using namespace physx;
 
 struct MeshComponent;
 struct Transform;
+struct Actor;
 
 enum class PhysicsType
 {
@@ -25,14 +26,17 @@ struct PhysicsSystem
 	std::unordered_map<UID, PxRigidActor*> rigidActorMap;
 
 	void Init();
+	void Start();
 	void Tick(float deltaTime);
 	void Cleanup();
 	void Reset();
 
-	void CreatePhysicsActor(MeshComponent* mesh, PhysicsType type);
+	void CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Actor* actor);
 	void ActorToPhysxTransform(const Transform& actorTransform, PxTransform& pxTransform);
 	void PhysxToActorTransform(Transform& actorTransform, const PxTransform& pxTransform);
 	void GetTransformFromPhysicsActor(MeshComponent* mesh);
+
+	void Raycast();
 
 private:
 	void NormaliseExtents(float& x, float& y, float& z);

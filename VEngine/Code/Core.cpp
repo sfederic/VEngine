@@ -131,6 +131,8 @@ void Core::StartGame()
 	world.StartAllComponents();
 	world.WakeAndStartAllActors();
 
+	physicsSystem.Start();
+
 	worldEditor.pickedActor = nullptr;
 
 	editor->SetPlayButtonText("Stop");
