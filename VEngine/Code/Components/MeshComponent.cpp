@@ -31,6 +31,8 @@ MeshComponent::MeshComponent(const std::string filename_,
 void MeshComponent::Start()
 {
 	//Setup physics actors on gameplay start
+	//@Todo: I don't like doing this and reseting physicssystem on gameplay end. Feels expensive,
+	//but it enables roughly changing actors between static and dynamic when editing.
 	if (isStatic)
 	{
 		physicsSystem.CreateRigidStaticPhysicsActor(this);
