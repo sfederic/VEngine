@@ -81,6 +81,8 @@ void PhysicsSystem::Reset()
 	rigidActorMap.clear();
 }
 
+//@Todo: for now, createphysicsactor functions are just using AABB boxes based on the DirectXMath bounding 
+//volume vars. See if it's worth cooking collision hulls and how that weighs up with raycasting in Physx.
 void PhysicsSystem::CreateRigidDynamicPhysicsActor(MeshComponent* mesh)
 {
 	PxTransform pxTransform = {};
@@ -88,7 +90,10 @@ void PhysicsSystem::CreateRigidDynamicPhysicsActor(MeshComponent* mesh)
 	ActorToPhysxTransform(transform, pxTransform);
 
 	auto rigid = physics->createRigidDynamic(pxTransform);
-	auto box = physics->createShape(PxSphereGeometry(0.5f), *material);
+
+	XMFLOAT3 extents = mesh->boundingBox.Extents;
+	auto box = physics->createShape(PxBoxGeometry(extents.x, extents.y, extents.z), *material);
+
 	rigid->attachShape(*box);
 	scene->addActor(*rigid);
 	
@@ -102,7 +107,10 @@ void PhysicsSystem::CreateRigidStaticPhysicsActor(MeshComponent* mesh)
 	ActorToPhysxTransform(actorTransform, pxTransform);
 
 	auto rigid = physics->createRigidStatic(pxTransform);
-	auto box = physics->createShape(PxSphereGeometry(0.5f), *material);
+
+	XMFLOAT3 extents = mesh->boundingBox.Extents;
+	auto box = physics->createShape(PxBoxGeometry(extents.x, extents.y, extents.z), *material);
+
 	rigid->attachShape(*box);
 	scene->addActor(*rigid);
 
