@@ -28,6 +28,19 @@ MeshComponent::MeshComponent(const std::string filename_,
 	material = new Material(textureFilename_, shaderFilename_);
 }
 
+void MeshComponent::Start()
+{
+	//Setup physics actors on gameplay start
+	if (isStatic)
+	{
+		physicsSystem.CreateRigidStaticPhysicsActor(this);
+	}
+	else
+	{
+		physicsSystem.CreateRigidDynamicPhysicsActor(this);
+	}
+}
+
 void MeshComponent::Tick(float deltaTime)
 {
 	if (!isStatic)
@@ -72,16 +85,6 @@ void MeshComponent::Create()
 	meshBuffers.vertexBuffer = pso->vertexBuffer;
 	meshBuffers.indexBuffer = pso->indexBuffer;
 	existingMeshBuffers[meshComponentData.filename] = meshBuffers;
-	
-	//Setup physics actors
-	if (isStatic)
-	{
-		physicsSystem.CreateRigidStaticPhysicsActor(this);
-	}
-	else
-	{
-		physicsSystem.CreateRigidDynamicPhysicsActor(this);
-	}
 }
 
 void MeshComponent::Destroy()
