@@ -22,6 +22,8 @@ Size X
 5
 Size Y
 5
+Static
+1
 Texture
 test.png
 UID
@@ -69,6 +71,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 barrel_texture.jpg
 UID
@@ -83,9 +87,11 @@ activeBeginHour
 0
 activeEndHour
 0
+alwaysActive
+0
 next
  Position
-1 0 0
+0 2 0
  Rotation
 -0 0 -0 1
  Scale
@@ -118,6 +124,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+0
 Texture
 barrel_texture.jpg
 UID
@@ -131,6 +139,8 @@ UvScale
 activeBeginHour
 0
 activeEndHour
+0
+alwaysActive
 0
 next
  Position
@@ -167,6 +177,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 floor.jpg
 UID
@@ -180,6 +192,8 @@ UvScale
 activeBeginHour
 0
 activeEndHour
+0
+alwaysActive
 0
 next
 Unit
@@ -212,9 +226,9 @@ next
 Player
 1
  Position
-3 0.0500009 4
+2 0.0500009 3
  Rotation
-0 -0.707107 0 -0.707107
+0 1 0 -2.60274e-07
  Scale
 0.999984 1 0.999984
 Casts Shadow
@@ -237,6 +251,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 wall.png
 UID
@@ -268,6 +284,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 wall02.png
 UID
@@ -297,6 +315,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 wall03.png
 UID
@@ -326,6 +346,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 wall03.png
 UID
@@ -355,6 +377,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 wall03.png
 UID
@@ -384,6 +408,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 wall03.png
 UID
@@ -413,6 +439,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 test_door_texture.png
 UID
@@ -442,6 +470,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 carpet.jpg
 UID
@@ -471,6 +501,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 barrel_texture.jpg
 UID
@@ -500,6 +532,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 crate.jpg
 UID
@@ -529,6 +563,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 crate.jpg
 UID
@@ -558,6 +594,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 unnamed.jpg
 UID
@@ -587,6 +625,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 metal.jpg
 UID
@@ -616,6 +656,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 metal.jpg
 UID
