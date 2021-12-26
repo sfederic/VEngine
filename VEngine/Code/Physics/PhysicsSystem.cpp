@@ -35,7 +35,7 @@ void PhysicsSystem::Init()
 
 	//Create scene
 	PxSceneDesc sceneDesc(physics->getTolerancesScale());
-	sceneDesc.gravity = PxVec3(0.0f, -1.81f, 0.0f);
+	sceneDesc.gravity = PxVec3(0.0f, -9.81f, 0.0f);
 	sceneDesc.cpuDispatcher = dispatcher;
 	sceneDesc.filterShader = PxDefaultSimulationFilterShader;
 	scene = physics->createScene(sceneDesc);
@@ -109,6 +109,7 @@ void PhysicsSystem::CreateRigidStaticPhysicsActor(MeshComponent* mesh)
 	auto rigid = physics->createRigidStatic(pxTransform);
 
 	XMFLOAT3 extents = mesh->boundingBox.Extents;
+	NormaliseExtents(extents.x, extents.y, extents.z);
 	auto box = physics->createShape(PxBoxGeometry(extents.x, extents.y, extents.z), *material);
 
 	rigid->attachShape(*box);
@@ -142,4 +143,12 @@ void PhysicsSystem::GetTransformFromPhysicsActor(MeshComponent* mesh)
 
 	mesh->transform = transform;
 	mesh->UpdateTransform();
+}
+
+//Extents can be 0 or less than because of the planes and walls, Physx wants extents above 0.
+void PhysicsSystem::NormaliseExtents(float& x, float& y, float& z)
+{
+	if (x <= 0.f) x = 0.1f;
+	if (y <= 0.f) y = 0.1f;
+	if (z <= 0.f) z = 0.1f;
 }

@@ -28,6 +28,9 @@ struct PhysicsSystem
 	void ActorToPhysxTransform(const Transform& actorTransform, PxTransform& pxTransform);
 	void PhysxToActorTransform(Transform& actorTransform, const PxTransform& pxTransform);
 	void GetTransformFromPhysicsActor(MeshComponent* mesh);
+
+private:
+	void NormaliseExtents(float& x, float& y, float& z);
 };
 
 extern PhysicsSystem physicsSystem;
