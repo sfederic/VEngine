@@ -81,6 +81,7 @@ void DebugMenu::Tick(float deltaTime)
 	RenderIntuitionsMenu();
 	RenderConsoleCommandsMenu();
 	RenderSkeletonViewMenu();
+	RenderCoreMenu();
 
 	ImGui::EndFrame();
 
@@ -439,6 +440,15 @@ void DebugMenu::RenderPhysicsMenu()
 		PxRigidActor* rigidActor = rigidActorIt.second;
 	}
 
+	ImGui::End();
+}
+
+void DebugMenu::RenderCoreMenu()
+{
+	if (!coreMenuOpen) return;
+
+	ImGui::Begin("Core Engine Variables");
+	ImGui::InputFloat("TimeScale", &Core::timeScale);
 	ImGui::End();
 }
 

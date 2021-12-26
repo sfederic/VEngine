@@ -64,6 +64,9 @@ Console::Console()
 	//Reload current world
 	executeMap.emplace(L"RESET", []() { fileSystem.ReloadCurrentWorld(); });
 
+	//Show core engine variables
+	executeMap.emplace(L"CORE", []() { debugMenu.coreMenuOpen = !debugMenu.coreMenuOpen; });
+
 	//Asset Build Commands
 	executeMap.emplace(L"BUILD MESHES", []() { assetSystem.WriteAllMeshDataToMeshAssetFiles(); });
 
