@@ -1,8 +1,6 @@
 #include "PhysicsSystem.h"
-#include <PxPhysicsAPI.h>
 #include <cassert>
-
-using namespace physx;
+#include "Actors/Actor.h"
 
 PhysicsSystem physicsSystem;
 
@@ -70,4 +68,20 @@ void PhysicsSystem::Cleanup()
 	}
 
 	foundation->release();
+}
+
+void PhysicsSystem::CreatePhysicsActor(Actor* actor)
+{
+	PxTransform pxTransform = {};
+	Transform actorTransform = actor->GetTransform();
+	ActorToPhysxTransform(actorTransform, pxTransform);
+}
+
+void PhysicsSystem::ActorToPhysxTransform(Transform& actorTransform, PxTransform& pxTransform)
+{
+	pxTransform.p = PxVec3(actorTransform.position.x,
+		actorTransform.position.y, actorTransform.position.z);
+
+	pxTransform.q = PxQuat(actorTransform.rotation.x, actorTransform.rotation.y,
+		actorTransform.rotation.z, actorTransform.rotation.w);
 }
