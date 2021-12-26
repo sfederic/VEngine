@@ -2,7 +2,10 @@
 
 #define PX_PHYSX_STATIC_LIB
 
+#include <unordered_map>
 #include <foundation/PxTransform.h>
+#include <PxRigidActor.h>
+#include "UID.h"
 
 using namespace physx;
 
@@ -11,6 +14,9 @@ struct Transform;
 
 struct PhysicsSystem
 {
+	//Maps meshcomponent UIDs to rigid actors
+	std::unordered_map<UID, PxRigidActor*> rigidMap;
+
 	void Init();
 	void Tick(float deltaTime);
 	void Cleanup();

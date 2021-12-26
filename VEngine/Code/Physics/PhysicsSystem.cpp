@@ -1,10 +1,8 @@
 #include "PhysicsSystem.h"
 #include <cassert>
-#include <map>
 #include <PxPhysicsAPI.h>
 #include "Components/MeshComponent.h"
-
-std::map<UID, PxRigidActor*> rigidMap;
+#include <PxRigidActor.h>
 
 PhysicsSystem physicsSystem;
 PxDefaultAllocator allocator;
