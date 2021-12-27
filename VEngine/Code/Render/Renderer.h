@@ -88,7 +88,6 @@ private:
 	void RenderShadowPass();
 	void RenderMeshComponents();
 	void RenderInstanceMeshComponents();
-	void RenderDestructibleMeshComponents();
 	void RenderBounds();
 	void RenderCameraMeshes();
 	void RenderLightMeshes();
@@ -103,8 +102,10 @@ public:
 	void Present();
 	void RenderSetup();
 	void Render();
+
 	//Renders sprites on the viewport as UI elements
 	void RenderSpritesInScreenSpace();
+
 	void RenderParticleEmitters();
 	void* GetSwapchain();
 	float GetAspectRatio();
