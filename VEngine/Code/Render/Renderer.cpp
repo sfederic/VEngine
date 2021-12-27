@@ -515,6 +515,7 @@ void Renderer::RenderDestructibleMeshComponents()
 		for (int i = 0; i < mesh->meshDatas.size(); i++)
 		{
 			PipelineStateObject* pso = &mesh->psos[i]; //index will always match pso to meshData
+			Transform& cellTransform = mesh->cellTransforms[i];
 
 			if (drawAllAsWireframe)
 			{
@@ -538,7 +539,7 @@ void Renderer::RenderDestructibleMeshComponents()
 			context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 
 			//Set matrices
-			shaderMatrices.model = mesh->GetWorldMatrix();
+			shaderMatrices.model = cellTransform.GetAffine();
 			shaderMatrices.MakeModelViewProjectionMatrix();
 			shaderMatrices.MakeTextureMatrix(&mesh->material->materialShaderData);
 

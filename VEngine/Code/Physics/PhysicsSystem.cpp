@@ -2,6 +2,7 @@
 #include <cassert>
 #include <PxPhysicsAPI.h>
 #include "Components/MeshComponent.h"
+#include "Components/DestructibleMeshComponent.h"
 #include <PxRigidActor.h>
 #include "World.h"
 
@@ -71,6 +72,12 @@ void PhysicsSystem::Start()
 			{
 				physicsSystem.CreatePhysicsActor(mesh, PhysicsType::Dynamic, actor);
 			}
+		}
+
+		auto destrutibleMeshes = actor->GetComponentsOfType<DestructibleMeshComponent>();
+		for (auto destructibleMesh : destrutibleMeshes)
+		{
+			physicsSystem.CreatePhysicsForDestructibleMesh(destructibleMesh, actor);
 		}
 	}
 }
@@ -145,6 +152,46 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Ac
 	rigidActorMap.emplace(mesh->uid, rigidActor);
 }
 
+void PhysicsSystem::CreatePhysicsForDestructibleMesh(DestructibleMeshComponent* mesh, Actor* actor)
+{
+	std::vector<PxConvexMeshDesc> meshDescs;
+
+	for (auto& meshData : mesh->meshDatas)
+	{
+		PxConvexMeshDesc convexDesc;
+		convexDesc.points.count = meshData.vertices.size();
+		convexDesc.points.stride = sizeof(XMFLOAT3);
+		convexDesc.points.data = meshData.vertices.data();
+		convexDesc.flags = PxConvexFlag::eCOMPUTE_CONVEX;
+
+		meshDescs.push_back(convexDesc);
+	}
+
+	for (auto& desc : meshDescs)
+	{
+	/*	PxDefaultMemoryOutputStream buf;
+		PxConvexMeshCookingResult::Enum result;
+		if (!cooking->cookConvexMesh(desc, buf, &result)) 
+		{
+			throw new std::exception("Mesh cooking went wrong");
+		}
+
+		PxDefaultMemoryInputData input(buf.getData(), buf.getSize());
+		PxConvexMesh* convexMesh = physics->createConvexMesh(input);*/
+
+		PxTransform pxTransform = {};
+		Transform transform = mesh->transform;
+		ActorToPhysxTransform(transform, pxTransform);
+
+		PxRigidActor* rigidActor = physics->createRigidDynamic(pxTransform);
+		auto box = physics->createShape(PxBoxGeometry(0.2f, 0.2f, 0.2f), *material);
+		rigidActor->attachShape(*box);
+
+		scene->addActor(*rigidActor);
+		rigidCellActorsMap[mesh->uid].push_back(rigidActor);
+	}
+}
+
 void PhysicsSystem::ActorToPhysxTransform(const Transform& actorTransform, PxTransform& pxTransform)
 {
 	pxTransform.p = PxVec3(actorTransform.position.x,
@@ -170,6 +217,23 @@ void PhysicsSystem::GetTransformFromPhysicsActor(MeshComponent* mesh)
 
 	mesh->transform = transform;
 	mesh->UpdateTransform();
+}
+
+void PhysicsSystem::GetCellTransformFromPhysicsActors(DestructibleMeshComponent* mesh)
+{
+	auto& rigidActors = rigidCellActorsMap[mesh->uid];
+
+	for (int i = 0; i < rigidActors.size(); i++)
+	{
+		PxRigidActor* rigid = rigidActors[i];
+		Transform& cellTransform = mesh->cellTransforms[i];
+
+		PxTransform pxTransform = rigid->getGlobalPose();
+		PhysxToActorTransform(cellTransform, pxTransform);
+	}
+
+	/*mesh->transform = transform;
+	mesh->UpdateTransform();*/
 }
 
 //Extents can be 0 or less than because of the planes and walls, Physx wants extents above 0.
