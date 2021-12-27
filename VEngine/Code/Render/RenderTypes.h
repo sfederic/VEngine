@@ -83,43 +83,11 @@ struct MeshDataProxy
 		indices->clear();
 	}
 
-	bool CheckDuplicateVertices(Vertex& vert)
-	{
-		auto pos = XMLoadFloat3(&vert.pos);
-
-		const int size = vertices->size();
-		for (int i = 0; i < size; i++)
-		{
-			XMVECTOR p = XMLoadFloat3(&vertices->at(i).pos);
-			if (XMVector3Equal(p, pos))
-			{
-				return true;
-			}
-		}
-
-		return false;
-	}
+	bool CheckDuplicateVertices(Vertex& vert);
 
 	//Duplicate checks for indices only return true if the index is present in the array
 	//more than once. Eg. For {2, 1, 0}, {3, 1, 2}, 2 and 1 are the duplicates.
-	bool CheckDuplicateIndices(MeshData::indexDataType index)
-	{
-		int duplicateCounter = 0;
-
-		for (int i = 0; i < indices->size(); i++)
-		{
-			if (index == indices->at(i))
-			{
-				duplicateCounter++;
-				if (duplicateCounter >= 2)
-				{
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
+	bool CheckDuplicateIndices(MeshData::indexDataType index);
 };
 
 struct ShaderMatrices
