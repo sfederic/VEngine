@@ -30,7 +30,13 @@ public:
 	std::unordered_map<std::string, MeshData*> existingMeshDataMap;
 
 	void Init();
+
+	//For importing generic fbx assets
 	bool Import(std::string filename, MeshDataProxy* meshData);
+
+	//For importing cell fractured meshes
+	bool ImportFracturedMesh(std::string filename, std::vector<MeshData>& meshDatas);
+
 	MeshData* FindMesh(std::string meshName);
 
 private:

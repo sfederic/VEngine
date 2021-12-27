@@ -373,6 +373,45 @@ void FBXLoader::ProcessSkeletonNodes(FbxNode* node, Skeleton* skeleton, int pare
 	}
 }
 
+bool FBXLoader::ImportFracturedMesh(std::string filename, std::vector<MeshData>& meshDatas)
+{
+	std::string filepath = "Meshes/" + filename;
+
+	if (filename.empty() || !std::filesystem::exists(filepath))
+	{
+		//set default model
+		filename = "cube.fbx";
+		filepath = "Meshes/cube.fbx";
+	}
+
+	if (!importer->Initialize(filepath.c_str(), -1, manager->GetIOSettings()))
+	{
+		throw new std::exception("FBX importer fucked up. filename probably wrong");
+	}
+
+	FbxScene* scene = FbxScene::Create(manager, "scene0");
+	importer->Import(scene);
+
+	//Automatically triangulate scene
+	FbxGeometryConverter clsConverter(manager);
+	clsConverter.Triangulate(scene, true);
+
+	FbxNode* rootNode = scene->GetRootNode();
+	int childNodeCount = rootNode->GetChildCount();
+
+	meshDatas.resize(childNodeCount);
+
+	//Go through all cells nodes
+	for (int i = 0; i < childNodeCount; i++)
+	{
+		ProcessAllChildNodes(rootNode->GetChild(i), &meshDatas[i]);
+	}
+
+	scene->Destroy();
+
+	return true;
+}
+
 MeshData* FBXLoader::FindMesh(std::string meshName)
 {
 	auto meshIt = existingMeshDataMap.find(meshName);
