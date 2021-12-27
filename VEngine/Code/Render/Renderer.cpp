@@ -6,6 +6,7 @@
 #include "Camera.h"
 #include "UI/UISystem.h"
 #include "Components/MeshComponent.h"
+#include "Components/DestructibleMeshComponent.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Components/InstanceMeshComponent.h"
 #include "Components/Lights/DirectionalLightComponent.h"
@@ -389,6 +390,7 @@ void Renderer::Render()
 	RenderShadowPass();
 	RenderMeshComponents();
 	RenderInstanceMeshComponents();
+	RenderDestructibleMeshComponents();
 	RenderBounds();
 	//RenderSkeletonBones();
 	RenderLightMeshes();
@@ -489,6 +491,74 @@ void Renderer::RenderInstanceMeshComponents()
 		context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
 
 		context->DrawIndexedInstanced(instanceMesh->meshDataProxy->indices->size(), instanceMesh->GetInstanceCount(), 0, 0, 0);
+	}
+
+	PROFILE_END
+}
+
+void Renderer::RenderDestructibleMeshComponents()
+{
+	PROFILE_START
+
+	shaderMatrices.view = activeCamera->GetViewMatrix();
+	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
+
+	const float blendFactor[4] = { 1.f, 1.f, 1.f, 1.f };
+	context->OMSetBlendState(nullptr, blendFactor, 0xFFFFFFFF);
+
+	for (auto mesh : DestructibleMeshComponent::system.components)
+	{
+		if (!mesh->active) continue;
+
+		Material* material = mesh->material;
+
+		for (int i = 0; i < mesh->meshDatas.size(); i++)
+		{
+			PipelineStateObject* pso = &mesh->psos[i]; //index will always match pso to meshData
+
+			if (drawAllAsWireframe)
+			{
+				context->RSSetState(rastStateWireframe);
+			}
+			else
+			{
+				context->RSSetState(material->rastState->data);
+			}
+
+			context->VSSetShader(material->shader->vertexShader, nullptr, 0);
+			context->PSSetShader(material->shader->pixelShader, nullptr, 0);
+
+			context->PSSetSamplers(0, 1, &material->sampler->data);
+			context->PSSetShaderResources(0, 1, &material->texture->srv);
+
+			context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &stride, &offset);
+			context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
+
+			context->UpdateSubresource(cbMaterial, 0, nullptr, &material->materialShaderData, 0, 0);
+			context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
+
+			//Set matrices
+			shaderMatrices.model = mesh->GetWorldMatrix();
+			shaderMatrices.MakeModelViewProjectionMatrix();
+			shaderMatrices.MakeTextureMatrix(&mesh->material->materialShaderData);
+
+			context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+			context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+
+			//Set lights buffer
+			context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
+
+			//Set shadow resources
+			context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
+			context->PSSetSamplers(1, 1, &shadowMap->sampler);
+
+			//Draw
+			context->DrawIndexed(mesh->meshDatas[i].indices.size(), 0, 0);
+
+			//Shadow map resources
+			ID3D11ShaderResourceView* nullSRV = nullptr;
+			context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSRV);
+		}
 	}
 
 	PROFILE_END

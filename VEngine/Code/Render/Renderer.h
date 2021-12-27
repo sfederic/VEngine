@@ -88,6 +88,7 @@ private:
 	void RenderShadowPass();
 	void RenderMeshComponents();
 	void RenderInstanceMeshComponents();
+	void RenderDestructibleMeshComponents();
 	void RenderBounds();
 	void RenderCameraMeshes();
 	void RenderLightMeshes();
