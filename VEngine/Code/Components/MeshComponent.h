@@ -16,6 +16,8 @@ struct MeshComponent : SpatialComponent
 
 	//Vertex and index buffers linked to a mesh filename to copy over to new PSOs
 	static inline std::unordered_map<std::string, MeshBuffers> existingMeshBuffers;
+	//@Todo: need to figure out how to call this in World::Cleanup()
+	static void ResetMeshBuffers();
 
 	MeshComponentData meshComponentData;
 
