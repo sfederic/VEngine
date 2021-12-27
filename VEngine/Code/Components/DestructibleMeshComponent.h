@@ -10,10 +10,13 @@ struct DestructibleMeshComponent : MeshComponent
 
 	std::vector<MeshData> meshDatas;
 	std::vector<PipelineStateObject> psos;
+	std::vector<Transform> cellTransforms;
 
 	DestructibleMeshComponent(const std::string filename_,
 		const std::string textureFilename_,
 		const std::string shaderFilename_ = "DefaultShader.hlsl");
 	virtual void Create() override;
+	virtual void Start() override;
+	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 };

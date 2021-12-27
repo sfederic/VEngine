@@ -2,6 +2,7 @@
 #include "Asset/FBXLoader.h"
 #include "Render/Material.h"
 #include "Render/RenderUtils.h"
+#include "Physics/PhysicsSystem.h"
 
 DestructibleMeshComponent::DestructibleMeshComponent(const std::string filename_,
     const std::string textureFilename_,
@@ -37,10 +38,22 @@ void DestructibleMeshComponent::Create()
 
 		pso.vertexBuffer->data = RenderUtils::CreateVertexBuffer(meshDataProxy);
 		pso.indexBuffer->data = RenderUtils::CreateIndexBuffer(meshDataProxy);
+
+		cellTransforms.push_back(this->transform);
 	}
 
 	meshDataProxy->vertices = nullptr;
 	meshDataProxy->indices = nullptr;
+}
+
+void DestructibleMeshComponent::Start()
+{
+	isStatic = false;
+}
+
+void DestructibleMeshComponent::Tick(float deltaTime)
+{
+	physicsSystem.GetCellTransformFromPhysicsActors(this);
 }
 
 Properties DestructibleMeshComponent::GetProps()
