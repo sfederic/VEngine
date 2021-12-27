@@ -94,6 +94,8 @@ void UISystem::TickAllWidgets(float deltaTime)
 	{
 		if (widget->render)
 		{
+			//@Todo: there's a bug here in the editor where if you F11 and make the editor fillscreen,
+			//The interactwidget in front of doors crashes the program.
 			widget->Tick(deltaTime);
 		}
 	}
