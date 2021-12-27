@@ -11,36 +11,7 @@ AudioActor
 Player
 0
 MeshActor
-1
- Position
-0 -2 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Casts Shadow
-1
-Grid Obstacle
 0
-Mesh
-bone_cylinder.fbx
-Name
-MeshActor0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Texture
-test.png
-UID
-328110949
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
 DirectionalLightActor
 1
  Position
@@ -77,6 +48,8 @@ DialogueInstance
 GameEvent
 0
 ParticleSystem
+0
+DestructibleActor
 0
 DialogueTrigger
 0

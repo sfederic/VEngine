@@ -8,6 +8,7 @@ DestructibleMeshComponent::DestructibleMeshComponent(const std::string filename_
     const std::string shaderFilename_)
     : MeshComponent(filename_, textureFilename_, shaderFilename_)
 {
+	meshComponentData.filename = filename_;
 }
 
 void DestructibleMeshComponent::Create()
@@ -18,7 +19,7 @@ void DestructibleMeshComponent::Create()
 
 	fbxLoader.ImportFracturedMesh(meshComponentData.filename.c_str(), meshDatas);
 
-	//todo Setup physx bounds hull
+	//@Todo: Setup physx bounds hull per meshdata object
 
 	//Setup pipeline objects
 	meshDataProxy = new MeshDataProxy();

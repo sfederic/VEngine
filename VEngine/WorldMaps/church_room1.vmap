@@ -36,9 +36,9 @@ UvScale
 1 1
 next
 GridActor
-5
+2
  Position
-0 0 0
+1 0 0
  Rotation
 -0 0 -0 1
  Scale
@@ -62,62 +62,9 @@ Interact
 Interact Text
 
 Mesh
-hollow_barrel.fbx
+destructible_cube.fbx
 Name
-barrel1
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-barrel_texture.jpg
-UID
-1689631026
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-0
-next
- Position
-2 0 0
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Casts Shadow
-1
-Condition
-
-Description
-
-Destruct
-1
-Grid Obstacle
-1
-Health
-0
-Interact
-1
-Interact Text
-
-Mesh
-hollow_barrel.fbx
-Name
-GridActor1
+GridActor0
 Obstacle
 1
 Rast State
@@ -170,7 +117,7 @@ An empty vase.
 Mesh
 vase.fbx
 Name
-vase1
+GridActor1
 Obstacle
 1
 Rast State
@@ -181,112 +128,6 @@ Static
 1
 Texture
 floor.jpg
-UID
-1689631026
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-0
-next
- Position
-1 0 0
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Casts Shadow
-1
-Condition
-
-Description
-
-Destruct
-1
-Grid Obstacle
-1
-Health
-0
-Interact
-1
-Interact Text
-
-Mesh
-hollow_barrel.fbx
-Name
-GridActor3
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-barrel_texture.jpg
-UID
-1689631026
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-0
-next
- Position
-2.77266 3.00537 1.20963
- Rotation
--7.36024e-06 0.317517 3.11046e-05 0.948253
- Scale
-0.999996 0.999996 1
-Add On Interact
-0
-Casts Shadow
-1
-Condition
-
-Description
-
-Destruct
-1
-Grid Obstacle
-1
-Health
-0
-Interact
-1
-Interact Text
-
-Mesh
-hollow_barrel.fbx
-Name
-GridActor4
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-0
-Texture
-barrel_texture.jpg
 UID
 1689631026
 UvOffset
@@ -371,7 +212,7 @@ UvScale
 1 1
 next
 MeshActor
-13
+12
  Position
 2 -0.5 2
  Rotation
@@ -652,29 +493,29 @@ UvScale
 1 1
 next
  Position
-4 1.75 1.9
+3.1 1 4.9
  Rotation
-0.163166 0.336984 0.0594193 0.925359
+-0 -0.707107 -0 0.707107
  Scale
-0.5 0.25 0.5
+1 1 1
 Casts Shadow
 1
 Grid Obstacle
 0
 Mesh
-cube.fbx
+shield.fbx
 Name
-cube9
+MeshActor9
 Rast State
 solid
 Shader
 DefaultShader.hlsl
 Static
-0
+1
 Texture
-crate.jpg
+metal.jpg
 UID
-2272155524
+321336638
 UvOffset
 0 0
 UvRotation
@@ -727,37 +568,6 @@ Mesh
 shield.fbx
 Name
 shield11
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-metal.jpg
-UID
-321336638
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
- Position
-3.1 1 4.9
- Rotation
--0 -0.707107 -0 0.707107
- Scale
-1 1 1
-Casts Shadow
-1
-Grid Obstacle
-0
-Mesh
-shield.fbx
-Name
-shield12
 Rast State
 solid
 Shader
