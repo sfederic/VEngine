@@ -21,7 +21,9 @@ enum class PhysicsType
 	Dynamic
 };
 
+
 //Interface to PhysX systems
+//Ref: https://gameworksdocs.nvidia.com/PhysX/4.1/documentation/physxguide/Index.html
 struct PhysicsSystem
 {
 	//Maps meshcomponent UIDs to rigid actors
