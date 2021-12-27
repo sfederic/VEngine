@@ -14,6 +14,7 @@ PxDefaultErrorCallback errorCallback;
 
 PxFoundation* foundation = nullptr;
 PxPhysics* physics = nullptr;
+PxCooking* cooking = nullptr;
 PxDefaultCpuDispatcher* dispatcher = nullptr;
 PxScene* scene = nullptr;
 PxMaterial* material = nullptr;
@@ -34,6 +35,10 @@ void PhysicsSystem::Init()
 
 	dispatcher = PxDefaultCpuDispatcherCreate(2);
 	assert(dispatcher);
+
+	//Create cooking objects
+	cooking = PxCreateCooking(PX_PHYSICS_VERSION, *foundation, PxCookingParams(PxTolerancesScale()));
+	assert(cooking);
 
 	//Create scene
 	PxSceneDesc sceneDesc(physics->getTolerancesScale());
