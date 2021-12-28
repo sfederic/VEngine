@@ -45,8 +45,6 @@ struct TextureData
 	std::string filename;
 };
 
-//@Todo: there'll be a nicer way to do these and name these. Maybe try adding in another argument to
-//the 'change' std::function in Properties.
 struct ShaderData
 {
 	std::string filename;

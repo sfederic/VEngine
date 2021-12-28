@@ -58,7 +58,7 @@ struct ActorSystem : IActorSystem
 		delete actors.back();
 		actors.pop_back();
 
-		//TODO: just keep an eye on this. Code like this makes me want to seperate editor from game.
+		//@Todo: just keep an eye on this. Code like this makes me want to seperate editor from game.
 		//It shouldn't be too bad during gameplay though, maybe through an #ifdef here later.
 		editor->UpdateWorldList();
 		editor->ClearProperties();

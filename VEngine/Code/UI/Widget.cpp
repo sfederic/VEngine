@@ -111,7 +111,6 @@ void Widget::Image(const std::string& filename, int x, int y, int w, int h)
 
 void Widget::Rect(D2D1_RECT_F layout)
 {
-	//TODO: do an alpha blended rect here. Im sure it'll make the CPU shit the bed
 	uiSystem.d2dRenderTarget->DrawRectangle(layout, uiSystem.brushShapes);
 }
 

@@ -35,7 +35,6 @@ struct World
 	void TickAllComponentSystems(float deltaTime);
 	std::vector<Actor*> GetAllActorsInWorld();
 
-	//@Todo: get rid of this. the actorsystems make this irrelevant.
 	template <typename T>
 	std::vector<T*> GetAllActorsOfTypeInWorld()
 	{

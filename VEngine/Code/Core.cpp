@@ -63,7 +63,7 @@ void Core::SetTimerFrequency()
 void Core::Init()
 {
 	//For the WIC texture functions from DirectXToolkit and XAudio2 threading
-	//TODO: originally CoInitializeEx was using COINIT_MULTITHREADED as an argument which is faster than
+	//@Todo: originally CoInitializeEx was using COINIT_MULTITHREADED as an argument which is faster than
 	//COINIT_APARTMENTTHREADED, however Qt's native file dialog fucks up when COINIT_APARTMENTTHREADED isn't here.
 	HR(CoInitializeEx(NULL, COINIT_APARTMENTTHREADED));
 	SetTimerFrequency();

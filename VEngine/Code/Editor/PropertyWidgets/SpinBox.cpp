@@ -8,7 +8,7 @@ SpinBox::SpinBox(QWidget* parent) : QDoubleSpinBox(parent)
 
 	setButtonSymbols(QAbstractSpinBox::NoButtons);
 
-	//TODO: If you remove this, the entire editor becomes minimised and you have to click maximise twice
+	//@Todo: If you remove this, the entire editor becomes minimised and you have to click maximise twice
 	//to get back to fullscreen. Try figure it out.
 	setFixedWidth(75);
 

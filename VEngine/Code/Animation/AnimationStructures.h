@@ -15,7 +15,6 @@ struct BoneWeights
 	inline static int MAX_WEIGHTS = 3;
 	inline static int MAX_BONE_INDICES = 4;
 
-	//@Todo: these really should be an array, but it's a pain in the ass to fill them up in the FBXImporter
 	std::vector<double> weights;
 	std::vector<int> boneIndex;
 };
@@ -61,8 +60,6 @@ struct Skeleton
 {
 	std::vector<Joint> joints;
 
-	//@Todo: think about makint Animation a pointer here,
-	//animframes might be expensive to copy around if map resizes.
 	std::map<std::string, Animation> animations;
 	std::string currentAnimation;
 

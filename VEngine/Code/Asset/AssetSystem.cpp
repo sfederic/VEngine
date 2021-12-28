@@ -52,7 +52,7 @@ void AssetSystem::WriteAllMeshDataToMeshAssetFiles()
 	Log("Mesh asset build complete.\n\tNum meshes built: %d\n\tTime taken: %f", numberOfMeshFilesBuilt, elapsedTime);
 }
 
-//TODO: This is just testing code. Get rid of it or replace.
+//@Todo: This is just testing code. Get rid of it or replace.
 void AssetSystem::ReadAllMeshAssetsFromFile()
 {
 	FILE* file = nullptr;

@@ -13,12 +13,6 @@ void MaterialSystem::AddMaterial(Material* material)
 	assert(material);
 	material->uid = GenerateUID();
 	materials.emplace(material->uid, material);
-
-	//TODO: keep an eye on this code here and how material->Create() is called in MeshComponent
-	/*if (systemState == SystemStates::Loaded)
-	{
-		material->Create();
-	}*/
 }
 
 Material* MaterialSystem::FindMaterial(UID uid)

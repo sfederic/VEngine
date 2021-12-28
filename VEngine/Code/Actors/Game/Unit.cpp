@@ -126,8 +126,7 @@ void Unit::MoveToNode(GridNode* destinationNode)
 	//Assign all costs
 	for (auto node : movementPathNodes)
 	{
-		//TODO: come back here and see if getting the distances with just the int x/yIndex values is enough.
-		//I'm guessing the Vector distance stuff here was for node height originally.
+		//Assigning g/hCosts here based on world positions to account for node heights
 		XMVECTOR startPos = XMLoadFloat3(&startingNode->worldPosition);
 		XMVECTOR endPos = XMLoadFloat3(&destinationNode->worldPosition);
 		XMVECTOR currentPos = XMLoadFloat3(&node->worldPosition);

@@ -16,7 +16,7 @@ enum class Keys
 	Delete = VK_DELETE,
 	BackSpace = VK_BACK,
 	Alt = VK_LMENU,
-	//TODO: there's all sorts of scancode shit win Win32 and keyboards
+	//@Todo: there's all sorts of scancode shit win Win32 and keyboards
 	//that won't make this work internationally.
 	W = 'W',
 	A = 'A',

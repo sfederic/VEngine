@@ -37,7 +37,6 @@ struct SpriteSystem : System
 	ID3D11Buffer* spriteVertexBuffer = nullptr;
 	ID3D11Buffer* spriteIndexBuffer = nullptr;
 
-	//TODO: The same 4 vertices are used for every quad, can probably do some instancing here later.
 	Vertex verts[4] = {};
 
 	std::vector<Sprite> screenSprites;

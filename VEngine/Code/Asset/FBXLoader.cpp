@@ -202,6 +202,7 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 									std::string linkName = link->GetName();
 
 									//@Todo: Feels like just getting one curve isn't the right thing here.
+									//I'm thinking if there are no rotation curves in the fbx, this won't work.
 									FbxAnimCurveNode* curveNode = link->LclRotation.GetCurveNode(animLayer);
 									if (curveNode)
 									{
@@ -210,9 +211,6 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 										{
 											FbxAnimCurve* animCurve = curveNode->GetCurve(curveIndex);
 											int keyCount = animCurve->KeyGetCount();
-
-											//@Todo: This isn't too bad, but FBX file without animation still have eAnimated flags set
-											//(for some reason) so placing this here is the quick fix. Better fix is doing this in the component.
 
 											for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
 											{
@@ -254,7 +252,7 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 			}
 		}
 
-		//@Todo: materials for fbx files. see if it's even worth doing later on.
+		//@Todo: materials for fbx files.
 		//Material 
 		//int materialCount = node->GetMaterialCount();
 		//for (int materialIndex = 0; materialIndex < materialCount; materialIndex++)

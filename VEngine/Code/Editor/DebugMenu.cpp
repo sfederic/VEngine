@@ -402,8 +402,6 @@ void DebugMenu::RenderSkeletonViewMenu()
 		{
 			ImGui::Text("Mesh: %s", mesh->meshComponentData.filename.c_str());
 
-			//@Todo: think about making a Qt based skeleton editor then deleting this
-			
 			//Debug select animation clip to play via buttons
 			for (auto& animation : mesh->GetSkeleton()->animations)
 			{

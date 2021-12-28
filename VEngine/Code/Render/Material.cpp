@@ -48,7 +48,7 @@ static void ReassignTexture(void* data)
 		return;
 	}
 
-	//TODO: these 'get all mesh' calls aren't really right as each mesh component would
+	//@Todo: these 'get all mesh' calls aren't really right as each mesh component would
 	//have its own properties, but it works ok for simple actors for now.
 	auto meshes = worldEditor.pickedActor->GetComponentsOfType<MeshComponent>();
 	for (auto mesh : meshes)

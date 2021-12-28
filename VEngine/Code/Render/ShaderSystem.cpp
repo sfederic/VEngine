@@ -78,7 +78,7 @@ void ShaderSystem::CreateAllShaders()
     }
 }
 
-//TODO: come back here and swap all this win32 shit to <filesystem>
+//@Todo: come back here and swap all this win32 shit to <filesystem>
 void ShaderSystem::CompileAllShadersFromFile()
 {
     WIN32_FIND_DATAW data;
@@ -150,7 +150,7 @@ void ShaderSystem::CleanUpShaders()
 
 void ShaderSystem::HotReloadShaders()
 {
-    //TODO: right now Im stuck recompiling every single shader if I can't get the filename.
+    //@Todo: right now Im stuck recompiling every single shader if I can't get the filename.
     //Potentially engine could let the previous vertex/shader object buffers be used until new compile is ready
     //REF: https://docs.microsoft.com/en-us/windows/win32/fileio/obtaining-directory-change-notifications
 

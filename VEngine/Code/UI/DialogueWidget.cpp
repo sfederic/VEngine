@@ -3,8 +3,6 @@
 
 void DialogueWidget::Tick(float deltaTime)
 {
-	//TODO: this whole function looks fucking wonky.
-
 	int sx, sy;
 	GetScreenSpaceCoords(sx, sy);
 

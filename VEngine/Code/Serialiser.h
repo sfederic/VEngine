@@ -12,7 +12,7 @@ enum class OpenMode
 	Binary = std::ios_base::binary
 };
 
-//TODO: need to make struct BinaryDe/Serialiser or De/SerialiseBinary()
+//@Todo: need to make struct BinaryDe/Serialiser or De/SerialiseBinary()
 
 struct Serialiser
 {

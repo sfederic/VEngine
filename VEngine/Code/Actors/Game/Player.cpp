@@ -150,7 +150,6 @@ void Player::CreateIntuition(IntuitionComponent* intuitionComponent, std::string
 		if (intuition->conditionFunc())
 		{
 			intuitions.emplace(intuition->name, intuition);
-			//TODO: change these logs here to Widget->AddToViewport()'s
 			Log("%s Intuition created.", intuition->name.c_str());
 		}
 		else
@@ -357,8 +356,6 @@ void Player::PrimaryAction()
 		{
 			Log("Player interact: %s", ray.hitActor->name.c_str());
 
-			//TODO: all these checks here are just for testing. throw them into functions later.
-			
 			//PICKUP CHECK
 			{
 				auto pickup = dynamic_cast<Pickup*>(ray.hitActor);

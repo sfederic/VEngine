@@ -65,8 +65,8 @@ void WorldDock::PopulateWorldActorList()
 	//Need to block signals because calling functions on tree items makes the connect()ed event fire
 	actorTreeWidget->blockSignals(true);
 
-	//TODO: i don't like these clears() here. They're here because these maps are added to
-	//in ActorSystem::Add() calls but there's no way to refresh them before Deserialising data
+	//clear()s are here because these maps are added to in ActorSystem::Add() calls
+	//but there's no way to refresh them before Deserialising data.
 	world.actorNameMap.clear();
 	world.actorUIDMap.clear();
 

@@ -132,7 +132,7 @@ void Renderer::CreateDevice()
 	//	gpuAdaptersDesc.push_back(desc);
 	//}
 
-	//TODO: selecting adapters here isn't working.
+	//@Todo: selecting adapters here isn't working.
 	HR(D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags,
 		featureLevels, _countof(featureLevels), D3D11_SDK_VERSION, &device,
 		&selectedFeatureLevel, &context));
@@ -841,7 +841,7 @@ void Renderer::RenderParticleEmitters()
 			context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 			//Draw
-			//TODO: do instancing here for particles.
+			//@Todo: do instancing here for particles.
 			context->DrawIndexed(6, 0, 0);
 		}
 	}

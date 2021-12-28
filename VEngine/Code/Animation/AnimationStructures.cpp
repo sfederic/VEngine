@@ -1,6 +1,5 @@
 #include "AnimationStructures.h"
 
-//@Todo: the args here feel shitty. Find a way to put in all in the joint.
 void Animation::Interpolate(float t, Joint& joint, Skeleton* skeleton)
 {
 	//get anim frames connected to joint
