@@ -1,0 +1,64 @@
+Grid
+0
+GridActor
+0
+Unit
+0
+Pickup
+0
+AudioActor
+1
+ Position
+-4 -2 9
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Audio Filename
+xeno.wav
+Loop
+1
+Name
+AudioActor0
+Pitch
+0.9
+Play On Start
+1
+UID
+2005706
+Volume
+1
+next
+Player
+0
+MeshActor
+0
+DirectionalLightActor
+0
+SavePoint
+0
+PointLightActor
+0
+SpotLightActor
+0
+EntranceTrigger
+0
+NPC
+0
+Billboard
+0
+InteractTrigger
+0
+DialogueInstance
+0
+GameEvent
+0
+ParticleSystem
+0
+DestructibleActor
+0
+DialogueTrigger
+0
+TitleScreenActor
+1
+next
