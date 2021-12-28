@@ -7,9 +7,6 @@
 
 using namespace DirectX;
 
-//@Todo: there's a bug here in the editor where if you F11 and make the editor fillscreen,
-//widgets disappear and the program crashes in all sorts of weird spot (in GetMouse() calls, TickAllWidgets())
-
 //I can never get the D2D1_RECT_F things right
 //left = The x-coordinate of the upper-left corner of the rectangle
 //top = The y-coordinate of the upper-left corner of the rectangle.

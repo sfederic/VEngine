@@ -4,6 +4,7 @@
 #include "Debug.h"
 #include "UI/Widget.h"
 #include "Editor/Editor.h"
+#include "Core.h"
 
 UISystem uiSystem;
 
@@ -106,7 +107,11 @@ void UISystem::EndDraw()
 
 void UISystem::Cleanup()
 {
-	Reset();
+	//Skip during gameplay because screen resizes cause all gameplay widgets to be deleted otherwise
+	if (!Core::gameplayOn)
+	{ 
+		Reset();
+	}
 
 	d2dFactory->Release();
 	d2dRenderTarget->Release();
