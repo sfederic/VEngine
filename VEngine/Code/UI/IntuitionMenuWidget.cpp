@@ -7,7 +7,7 @@
 
 void IntuitionMenuWidget::Tick(float deltaTime)
 {
-	D2D1_RECT_F rect = AlignLayout(200.f, 200.f, Align::Center);
+	D2D1_RECT_F rect = AlignLayout(0.5f, 0.5f, Align::Center);
 	FillRect(rect);
 
 	//Set text rect to begining of layoutrect, then increment in forloop
