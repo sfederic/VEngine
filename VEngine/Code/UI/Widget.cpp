@@ -175,7 +175,7 @@ D2D1_RECT_F Widget::AlignLayout(float w, float h, Align align)
 		break;
 	}
 
-	D2D1_RECT_F rect = { vw - w, vh - h, vw + w, vh + h };
+	D2D1_RECT_F rect = { vw * w, vh * h, vw, vh };
 
 	if (rect.left < 0.f) rect.left = 0.f;
 	if (rect.top < 0.f) rect.top = 0.f;
