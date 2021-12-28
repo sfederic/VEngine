@@ -22,14 +22,12 @@ enum class PhysicsType
 	Dynamic
 };
 
-
 //Interface to PhysX systems
 //Ref: https://gameworksdocs.nvidia.com/PhysX/4.1/documentation/physxguide/Index.html
 struct PhysicsSystem
 {
 	//Maps meshcomponent UIDs to rigid actors
 	std::unordered_map<UID, PxRigidActor*> rigidActorMap;
-	std::unordered_map<UID, std::vector<PxRigidActor*>> rigidCellActorsMap;
 
 	void Init();
 	void Start();
@@ -42,7 +40,6 @@ struct PhysicsSystem
 	void ActorToPhysxTransform(const Transform& actorTransform, PxTransform& pxTransform);
 	void PhysxToActorTransform(Transform& actorTransform, const PxTransform& pxTransform);
 	void GetTransformFromPhysicsActor(MeshComponent* mesh);
-	void GetCellTransformFromPhysicsActors(DestructibleMeshComponent* mesh);
 
 private:
 	void NormaliseExtents(float& x, float& y, float& z);

@@ -62,22 +62,31 @@ void PhysicsSystem::Start()
 		auto meshes = actor->GetComponentsOfType<MeshComponent>();
 		for (auto mesh : meshes)
 		{
-			//@Todo: I don't like doing this and reseting physicssystem on gameplay end. Feels expensive,
-			//but it enables roughly changing actors between static and dynamic when editing.
-			if (mesh->isStatic)
+			auto dMesh = dynamic_cast<DestructibleMeshComponent*>(mesh);
+			if (dMesh)
 			{
-				physicsSystem.CreatePhysicsActor(mesh, PhysicsType::Static, actor);
+				for (auto child : dMesh->children)
+				{
+					auto meshChild = dynamic_cast<MeshComponent*>(child);
+					if (meshChild)
+					{
+						physicsSystem.CreatePhysicsActor(meshChild, PhysicsType::Dynamic, actor);
+					}
+				}
 			}
 			else
 			{
-				physicsSystem.CreatePhysicsActor(mesh, PhysicsType::Dynamic, actor);
+				//@Todo: I don't like doing this and reseting physicssystem on gameplay end. Feels expensive,
+				//but it enables roughly changing actors between static and dynamic when editing.
+				if (mesh->isStatic)
+				{
+					physicsSystem.CreatePhysicsActor(mesh, PhysicsType::Static, actor);
+				}
+				else
+				{
+					physicsSystem.CreatePhysicsActor(mesh, PhysicsType::Dynamic, actor);
+				}
 			}
-		}
-
-		auto destrutibleMeshes = actor->GetComponentsOfType<DestructibleMeshComponent>();
-		for (auto destructibleMesh : destrutibleMeshes)
-		{
-			physicsSystem.CreatePhysicsForDestructibleMesh(destructibleMesh, actor);
 		}
 	}
 }
@@ -133,6 +142,7 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Ac
 	{
 	case PhysicsType::Static:
 		rigidActor = physics->createRigidStatic(pxTransform);
+
 		break;
 
 	case PhysicsType::Dynamic:
@@ -140,11 +150,12 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Ac
 		break;
 	}
 
+	//Set actor as user data
 	rigidActor->userData = actor;
 
 	XMFLOAT3 extents = mesh->boundingBox.Extents;
 	NormaliseExtents(extents.x, extents.y, extents.z);
-	auto box = physics->createShape(PxBoxGeometry(extents.x, extents.y, extents.z), *material);
+	PxShape* box = physics->createShape(PxBoxGeometry(extents.x, extents.y, extents.z), *material);
 
 	rigidActor->attachShape(*box);
 	scene->addActor(*rigidActor);
@@ -188,7 +199,7 @@ void PhysicsSystem::CreatePhysicsForDestructibleMesh(DestructibleMeshComponent* 
 		rigidActor->attachShape(*box);
 
 		scene->addActor(*rigidActor);
-		rigidCellActorsMap[mesh->uid].push_back(rigidActor);
+		rigidActorMap.emplace(mesh->uid, rigidActor);
 	}
 }
 
@@ -217,23 +228,6 @@ void PhysicsSystem::GetTransformFromPhysicsActor(MeshComponent* mesh)
 
 	mesh->transform = transform;
 	mesh->UpdateTransform();
-}
-
-void PhysicsSystem::GetCellTransformFromPhysicsActors(DestructibleMeshComponent* mesh)
-{
-	auto& rigidActors = rigidCellActorsMap[mesh->uid];
-
-	for (int i = 0; i < rigidActors.size(); i++)
-	{
-		PxRigidActor* rigid = rigidActors[i];
-		Transform& cellTransform = mesh->cellTransforms[i];
-
-		PxTransform pxTransform = rigid->getGlobalPose();
-		PhysxToActorTransform(cellTransform, pxTransform);
-	}
-
-	/*mesh->transform = transform;
-	mesh->UpdateTransform();*/
 }
 
 //Extents can be 0 or less than because of the planes and walls, Physx wants extents above 0.
