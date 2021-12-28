@@ -449,6 +449,9 @@
     <ClCompile Include="Code\Actors\Game\TitleScreenActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\UI\IntuitionTransferWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -848,6 +851,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\TitleScreenActor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\UI\IntuitionTransferWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
