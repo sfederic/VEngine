@@ -17,9 +17,9 @@ Serialiser::Serialiser(const std::string filename_, const OpenMode mode_) :
 
 Serialiser::~Serialiser()
 {
-	//A bit counter-intuitive to put file opening in destructor, but otherwise the entire file
-	//is overwritten from the start, meaning you miss out on the safety stringstream is
-	//lending as a temp buffer during crashes.
+	//A bit counter-intuitive to put file opening for the stringstream in destructor,
+	//but otherwise the entire file is overwritten from the start, meaning you miss out 
+	//on the safety stringstream is lending as a temp buffer during crashes.
 	ofs.open(filename.c_str(), (std::ios_base::openmode)mode);
 	if (ofs.fail())
 	{
