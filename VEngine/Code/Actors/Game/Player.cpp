@@ -17,6 +17,7 @@
 #include "UI/InteractWidget.h"
 #include "UI/IntuitionMenuWidget.h"
 #include "UI/PlayerActionBarWidget.h"
+#include "UI/IntuitionTransferWidget.h"
 #include "UI/TimeOfDayWidget.h"
 #include "UI/HeldPickupWidget.h"
 #include "UI/GuardWidget.h"
@@ -71,6 +72,17 @@ void Player::Start()
 
 void Player::Tick(float deltaTime)
 {
+	if (gameOver)
+	{
+		return;
+	}
+
+	if (healthPoints <= 0)
+	{
+		CreateWidget<IntuitionTransferWidget>()->AddToViewport();
+		gameOver = true;
+	}
+
 	ToggleBattleGrid();
 	ToggleIntuitionMenu();
 
@@ -131,36 +143,32 @@ void Player::CreateIntuition(IntuitionComponent* intuitionComponent, std::string
 		return;
 	}
 
-	auto intuition = new Intuition();
-	intuition->name = intuitionComponent->intuitionName;
-	intuition->description = intuitionComponent->intuitionDescription;
+	auto intuition = Intuition();
+	intuition.name = intuitionComponent->intuitionName;
+	intuition.description = intuitionComponent->intuitionDescription;
 
-	intuition->actorAquiredFrom = actorAquiredFromName;
-	intuition->worldAquiredFrom = world.worldFilename;
+	intuition.actorAquiredFrom = actorAquiredFromName;
+	intuition.worldAquiredFrom = world.worldFilename;
 
-	intuition->hourAquired = GameInstance::currentHour;
-	intuition->minuteAquired = GameInstance::currentMinute;
+	intuition.hourAquired = GameInstance::currentHour;
+	intuition.minuteAquired = GameInstance::currentMinute;
 
 	//Check if intuition condition passes
 	if (!intuitionComponent->condition.empty())
 	{
-		intuition->conditionFunc = conditionSystem.FindCondition(intuitionComponent->condition);
-		intuition->conditionFuncName = intuitionComponent->condition;
+		intuition.conditionFunc = conditionSystem.FindCondition(intuitionComponent->condition);
+		intuition.conditionFuncName = intuitionComponent->condition;
 
-		if (intuition->conditionFunc())
+		if (intuition.conditionFunc())
 		{
-			GameInstance::playerIntuitions.emplace(intuition->name, intuition);
-			Log("%s Intuition created.", intuition->name.c_str());
-		}
-		else
-		{
-			delete intuition;
+			GameInstance::playerIntuitions.emplace(intuition.name, intuition);
+			Log("%s Intuition created.", intuition.name.c_str());
 		}
 	}
 	else
 	{
-		GameInstance::playerIntuitions.emplace(intuition->name, intuition);
-		Log("%s Intuition created.", intuition->name.c_str());
+		GameInstance::playerIntuitions.emplace(intuition.name, intuition);
+		Log("%s Intuition created.", intuition.name.c_str());
 	}
 }
 

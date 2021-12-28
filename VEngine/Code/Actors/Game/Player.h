@@ -56,6 +56,7 @@ struct Player : Actor
 
 	bool ableToGuard = false;
 	bool guarding = false;
+	bool gameOver = false;
 
 	Player();
 	virtual void Start() override;
