@@ -70,10 +70,11 @@ void Widget::Text(const std::wstring& text, D2D1_RECT_F layout, TextAlign align,
 		uiSystem.textFormat, layout, uiSystem.brushText);
 }
 
-bool Widget::Button(const std::wstring& text, D2D1_RECT_F layout, float lineWidth)
+bool Widget::Button(const std::wstring& text, D2D1_RECT_F layout, float lineWidth,
+	TextAlign textAlign, D2D1_COLOR_F textColor, float textOpacity)
 {
 	uiSystem.d2dRenderTarget->DrawRectangle(layout, uiSystem.brushShapes, lineWidth);
-	Text(text, layout);
+	Text(text, layout, textAlign, textColor, textOpacity);
 
 	if (Input::GetMouseLeftUp())
 	{

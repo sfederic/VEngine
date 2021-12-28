@@ -47,7 +47,8 @@ struct Widget
 	void Text(const std::wstring& text, D2D1_RECT_F layout, TextAlign align = TextAlign::Center,
 		D2D1_COLOR_F color = { 0.f, 0.f, 0.f, 1.f }, float opacity = 1.0f);
 
-	bool Button(const std::wstring& text, D2D1_RECT_F layout, float lineWidth = 1.0f);
+	bool Button(const std::wstring& text, D2D1_RECT_F layout, float lineWidth = 1.0f,
+		TextAlign textAlign = TextAlign::Center, D2D1_COLOR_F textColor = {0.f, 0.f, 0.f, 1.f}, float textOpacity = 1.0f);
 
 	void Image(const std::string& filename, D2D1_RECT_F layout);
 	void Image(const std::string& filename, int x, int y, int w, int h);
