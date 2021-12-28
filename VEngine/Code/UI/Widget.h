@@ -58,7 +58,12 @@ struct Widget
 	void Rect(D2D1_RECT_F layout);
 	void FillRect(D2D1_RECT_F layout, D2D1_COLOR_F color = {0.5f, 0.5f, 0.5f, 1.f}, float opacity = 1.0f);
 
+	//Aligns widget via enum with specific width and height
 	D2D1_RECT_F AlignLayout(float w, float h, Align align);
+
+	//Aligns widget to screen percentage where 0.0 is the top left and 1.0 is the bottom right
+	D2D1_RECT_F PercentAlignLayout(float left, float top, float right, float bottom);
+
 	D2D1_RECT_F CenterLayoutOnScreenSpaceCoords(float w, float h, float sx, float sy);
 
 	//pos is the widget's position in world space to be mapped to screen space.

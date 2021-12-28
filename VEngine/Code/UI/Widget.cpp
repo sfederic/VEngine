@@ -175,7 +175,26 @@ D2D1_RECT_F Widget::AlignLayout(float w, float h, Align align)
 		break;
 	}
 
-	D2D1_RECT_F rect = { vw * w, vh * h, vw, vh };
+	D2D1_RECT_F rect = { vw - w, vh - h, vw + w, vh + h };
+
+	if (rect.left < 0.f) rect.left = 0.f;
+	if (rect.top < 0.f) rect.top = 0.f;
+	if (rect.right > renderer.GetViewportWidth()) rect.right = vw;
+	if (rect.bottom > renderer.GetViewportHeight()) rect.bottom = vh;
+
+	return rect;
+}
+
+D2D1_RECT_F Widget::PercentAlignLayout(float left, float top, float right, float bottom)
+{
+	float vw = renderer.GetViewportWidth();
+	float vh = renderer.GetViewportHeight();
+
+	float endLeft = vw * left;
+	float endTop = vh * top;
+	float endRight = vw * right;
+	float endBottom = vh * bottom;
+	D2D1_RECT_F rect = { endLeft, endTop, endRight, endBottom };
 
 	if (rect.left < 0.f) rect.left = 0.f;
 	if (rect.top < 0.f) rect.top = 0.f;
