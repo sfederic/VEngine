@@ -64,8 +64,24 @@ namespace GameUtils
 			path = "GameSaves/" + worldName;
 		}
 
+		GameUtils::SaveGameInstanceData();
+
 		assert(std::filesystem::exists(path));
 		fileSystem.LoadWorld(worldName);
+	}
+
+	void SaveGameInstanceData()
+	{
+		Properties instanceProps = GameInstance::GetInstanceSaveData();
+		Serialiser s(gameInstanceSaveFile, OpenMode::Out);
+		s.Serialise(instanceProps);
+	}
+
+	void LoadGameInstanceData()
+	{
+		Properties instanceProps = GameInstance::GetInstanceSaveData();
+		Deserialiser d(gameInstanceSaveFile, OpenMode::In);
+		d.Deserialise(instanceProps);
 	}
 
 	void LoadWorldAndMoveToEntranceTrigger(std::string worldName)
