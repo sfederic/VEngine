@@ -15,13 +15,13 @@ void IntuitionMenuWidget::Tick(float deltaTime)
 
 	for (auto& intuitionPair : GameInstance::playerIntuitions)
 	{
-		Intuition* intuition = intuitionPair.second;
+		Intuition& intuition = intuitionPair.second;
 
-		Text(VString::stows(intuition->name), textRect);
+		Text(VString::stows(intuition.name), textRect);
 		textRect.top += 30.f;
 		textRect.bottom += 30.f;
 
-		Text(VString::stows(intuition->description), textRect);
+		Text(VString::stows(intuition.description), textRect);
 		textRect.top += 30.f;
 		textRect.bottom += 30.f;
 	}

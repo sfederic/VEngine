@@ -357,14 +357,14 @@ void DebugMenu::RenderIntuitionsMenu()
 
 	for (auto& intuition : GameInstance::playerIntuitions)
 	{
-		Intuition* i = intuition.second;
+		Intuition& i = intuition.second;
 
-		ImGui::Text("Name: %s", i->name.c_str());
-		ImGui::Text("Desc: %s", i->description.c_str());
-		ImGui::Text("Func: %s", i->conditionFuncName.c_str());
-		ImGui::Text("From World: %s", i->worldAquiredFrom.c_str());
-		ImGui::Text("From Actor: %s", i->actorAquiredFrom.c_str());
-		ImGui::Text("Hour: %d | Minute: %d", i->hourAquired, i->minuteAquired);
+		ImGui::Text("Name: %s", i.name.c_str());
+		ImGui::Text("Desc: %s", i.description.c_str());
+		ImGui::Text("Func: %s", i.conditionFuncName.c_str());
+		ImGui::Text("From World: %s", i.worldAquiredFrom.c_str());
+		ImGui::Text("From Actor: %s", i.actorAquiredFrom.c_str());
+		ImGui::Text("Hour: %d | Minute: %d", i.hourAquired, i.minuteAquired);
 
 		ImGui::NewLine();
 	}

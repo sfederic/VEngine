@@ -2,11 +2,6 @@
 
 void GameInstance::DeletePlayerIntuitions()
 {
-	for (auto& intPair : playerIntuitions)
-	{
-		delete intPair.second;
-	}
-
 	playerIntuitions.clear();
 }
 

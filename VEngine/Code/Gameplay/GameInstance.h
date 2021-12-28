@@ -2,8 +2,7 @@
 #include <string>
 #include "PickupSpawnData.h"
 #include "Properties.h"
-
-struct Intuition;
+#include "Intuition.h"
 
 //Instance holding data over the entirety of the game.
 //GameInstane is also used as a global save file of sorts, seperate from .vmaps.
@@ -26,7 +25,7 @@ struct GameInstance
 	//Player stats
 	inline static int maxPlayerActionPoints = 10;
 
-	inline static std::map<std::string, Intuition*> playerIntuitions;
+	inline static std::map<std::string, Intuition> playerIntuitions;
 	static void DeletePlayerIntuitions();
 
 	static void ProgressTime();
