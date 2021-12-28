@@ -8,6 +8,7 @@ struct DestructibleMeshComponent : MeshComponent
 	COMPONENT_SYSTEM(DestructibleMeshComponent);
 
 	std::vector<MeshData> meshDatas;
+	std::vector<MeshComponent*> meshCells;
 
 	DestructibleMeshComponent(const std::string filename_,
 		const std::string textureFilename_,

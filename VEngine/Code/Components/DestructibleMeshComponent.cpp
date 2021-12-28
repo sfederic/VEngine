@@ -25,6 +25,7 @@ void DestructibleMeshComponent::Create()
 
 		//parent all the fractured cell meshes to this.
 		this->AddChild(mesh);
+		meshCells.push_back(mesh);
 
 		mesh->isStatic = false;
 
