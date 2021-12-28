@@ -128,10 +128,10 @@ void Core::StartGame()
 
 	initialStartingWorldFromEditor = world.worldFilename;
 
+	physicsSystem.Start();
+
 	world.StartAllComponents();
 	world.WakeAndStartAllActors();
-
-	physicsSystem.Start();
 
 	worldEditor.pickedActor = nullptr;
 
