@@ -37,6 +37,11 @@ struct Widget
 		BottomRight,
 	};
 
+	//pos is the widget's position in world space to be mapped to screen space.
+	XMVECTOR pos;
+
+	bool render = true;
+
 	virtual void Tick(float deltaTime);
 	virtual void Start();
 
@@ -63,11 +68,6 @@ struct Widget
 	D2D1_RECT_F PercentAlignLayout(float left, float top, float right, float bottom);
 
 	D2D1_RECT_F CenterLayoutOnScreenSpaceCoords(float w, float h, float sx, float sy);
-
-	//pos is the widget's position in world space to be mapped to screen space.
-	XMVECTOR pos;
-
-	bool render = true;
 };
 
 template <typename T>
