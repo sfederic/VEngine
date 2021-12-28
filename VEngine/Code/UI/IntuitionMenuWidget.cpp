@@ -7,14 +7,15 @@
 
 void IntuitionMenuWidget::Tick(float deltaTime)
 {
-	D2D1_RECT_F rect = AlignLayout(400.f, 300.f, Align::Center);
-	Rect(rect);
+	D2D1_RECT_F rect = AlignLayout(200.f, 200.f, Align::Center);
+	FillRect(rect);
 
 	//Set text rect to begining of layoutrect, then increment in forloop
 	D2D1_RECT_F textRect = rect;
 	textRect.bottom = rect.top;
 
-	for (auto& intuitionPair : GameUtils::GetPlayer()->intuitions)
+	auto player = GameUtils::GetPlayer();
+	for (auto& intuitionPair : player->intuitions)
 	{
 		Intuition* intuition = intuitionPair.second;
 
