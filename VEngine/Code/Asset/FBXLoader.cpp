@@ -287,6 +287,8 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 			{
 				int index = mesh->GetPolygonVertex(i, j);
 
+				//@Todo: index buffers aren't actually correct in the engine. they're essentially plain
+				//Draw() calls at this point.
 				//meshData.indices.push_back(index);
 
 				Vertex vert = {};
@@ -334,6 +336,7 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 					}
 				}
 
+				//Indices checking if the engine gets it working...
 				//if (!meshData.CheckDuplicateVertices(vert))
 				//{
 				//	meshData.vertices.push_back(vert);
