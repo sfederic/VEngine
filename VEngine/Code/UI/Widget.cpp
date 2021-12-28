@@ -76,11 +76,14 @@ bool Widget::Button(const std::wstring& text, D2D1_RECT_F layout, float lineWidt
 	uiSystem.d2dRenderTarget->DrawRectangle(layout, uiSystem.brushShapes, lineWidth);
 	Text(text, layout, textAlign, textColor, textOpacity);
 
-	if (Input::GetMouseLeftUp())
+	if (editor->viewportMouseX > layout.left && editor->viewportMouseX < layout.right)
 	{
-		if (editor->viewportMouseX > layout.left && editor->viewportMouseX < layout.right)
+		if (editor->viewportMouseY > layout.top && editor->viewportMouseY < layout.bottom)
 		{
-			if (editor->viewportMouseY > layout.top && editor->viewportMouseY < layout.bottom)
+			//Hover animation/image
+			uiSystem.d2dRenderTarget->DrawRectangle(layout, uiSystem.brushText, lineWidth * 2.f);
+
+			if (Input::GetMouseLeftUp())
 			{
 				return true;
 			}
