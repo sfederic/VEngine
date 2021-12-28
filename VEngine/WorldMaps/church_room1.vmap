@@ -36,60 +36,7 @@ UvScale
 1 1
 next
 GridActor
-2
- Position
-1 0 0
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Casts Shadow
 1
-Condition
-
-Description
-
-Destruct
-1
-Grid Obstacle
-1
-Health
-0
-Interact
-1
-Interact Text
-
-Mesh
-destructible_cube.fbx
-Name
-GridActor0
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-barrel_texture.jpg
-UID
-1689631026
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-0
-next
  Position
 4 0 4
  Rotation
@@ -97,13 +44,13 @@ next
  Scale
 1 1 1
 Add On Interact
-0
+1
 Casts Shadow
 1
 Condition
 
 Description
-
+Now you know the vase is real.
 Destruct
 1
 Grid Obstacle
@@ -114,10 +61,12 @@ Interact
 1
 Interact Text
 An empty vase.
+Intuition Name
+intname
 Mesh
 vase.fbx
 Name
-GridActor1
+GridActor0
 Obstacle
 1
 Rast State
@@ -173,7 +122,7 @@ next
 Player
 1
  Position
-3 0.0599993 3
+2 0.0600002 3
  Rotation
 0 1 0 -7.4506e-07
  Scale
@@ -435,7 +384,7 @@ next
  Rotation
 0 0.707107 0 0.707107
  Scale
-0.999995 1 0.999995
+0.999996 1 0.999996
 Casts Shadow
 1
 Grid Obstacle
@@ -640,6 +589,8 @@ DialogueInstance
 GameEvent
 0
 ParticleSystem
+0
+DestructibleActor
 0
 DialogueTrigger
 0

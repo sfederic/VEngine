@@ -22,6 +22,8 @@ Size X
 9
 Size Y
 9
+Static
+1
 Texture
 test.png
 UID
@@ -59,6 +61,8 @@ Interact
 1
 Interact Text
 The Bestowed lies here, lifeless.
+Intuition Name
+
 Mesh
 
 Name
@@ -69,6 +73,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 test.png
 UID
@@ -82,6 +88,8 @@ UvScale
 activeBeginHour
 0
 activeEndHour
+0
+alwaysActive
 0
 next
 Unit
@@ -116,7 +124,7 @@ Player
  Position
 5 0.05 2
  Rotation
-0 -1.2517e-06 0 -1
+-0 0 -0 1
  Scale
 0.999997 1 0.999997
 Casts Shadow
@@ -139,6 +147,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 wall.png
 UID
@@ -170,6 +180,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 floor_tile.png
 UID
@@ -199,6 +211,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 test_door_texture.png
 UID
@@ -228,6 +242,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 floor.jpg
 UID
@@ -257,6 +273,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 test_door_texture.png
 UID
@@ -286,6 +304,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 floor.jpg
 UID
@@ -315,6 +335,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 floor.jpg
 UID
@@ -344,6 +366,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 floor.jpg
 UID
@@ -373,6 +397,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 floor.jpg
 UID
@@ -402,6 +428,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 floor.jpg
 UID
@@ -431,6 +459,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 test_door_texture.png
 UID
@@ -460,6 +490,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 test_door_texture.png
 UID
@@ -489,6 +521,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 test_door_texture.png
 UID
@@ -518,6 +552,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 stone_tablet.jpg
 UID
@@ -644,7 +680,70 @@ UID
 1067295734
 next
 NPC
+1
+ Position
+3 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
 0
+Attack Points
+1
+Casts Shadow
+1
+Condition
+
+Description
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+2
+Interact
+1
+Interact Text
+
+Intuition Name
+
+Mesh
+
+Move Points
+5
+Move Speed
+1
+Name
+NPC0
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+674642394
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+0
+next
 Billboard
 0
 InteractTrigger
@@ -669,6 +768,8 @@ DialogueInstance
 GameEvent
 0
 ParticleSystem
+0
+DestructibleActor
 0
 DialogueTrigger
 0
