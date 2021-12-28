@@ -7,6 +7,20 @@ void SpatialComponent::AddChild(SpatialComponent* component)
 	children.push_back(component);
 }
 
+void SpatialComponent::RemoveChild(SpatialComponent* component)
+{
+	for (int i = 0; i < children.size(); i++)
+	{
+		if (children[i] == component)
+		{
+			children.erase(children.begin() + i);
+			return;
+		}
+	}
+
+	throw new std::exception("child not found");
+}
+
 XMMATRIX SpatialComponent::GetWorldMatrix()
 {
 	XMMATRIX parentWorld = XMMatrixIdentity();

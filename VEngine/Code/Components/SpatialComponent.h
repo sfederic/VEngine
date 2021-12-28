@@ -17,6 +17,7 @@ struct SpatialComponent : Component
 	CollisionLayers layer = CollisionLayers::All;
 
 	void AddChild(SpatialComponent* component);
+	void RemoveChild(SpatialComponent* component);
 	XMMATRIX GetWorldMatrix();
 	void UpdateTransform(XMMATRIX parentWorld = XMMatrixIdentity());
 
