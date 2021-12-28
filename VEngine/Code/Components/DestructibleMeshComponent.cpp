@@ -9,7 +9,6 @@ DestructibleMeshComponent::DestructibleMeshComponent(const std::string filename_
     const std::string shaderFilename_)
     : MeshComponent(filename_, textureFilename_, shaderFilename_)
 {
-	meshComponentData.filename = filename_;
 }
 
 void DestructibleMeshComponent::Create()
@@ -20,40 +19,27 @@ void DestructibleMeshComponent::Create()
 
 	fbxLoader.ImportFracturedMesh(meshComponentData.filename.c_str(), meshDatas);
 
-	//@Todo: Setup physx bounds hull per meshdata object
-
-	//Setup pipeline objects
-	meshDataProxy = new MeshDataProxy();
-
 	for (auto& meshData : meshDatas)
 	{
-		psos.push_back(PipelineStateObject());
-		auto& pso = psos.back();
+		auto mesh = MeshComponent::system.Add();
 
-		pso.vertexBuffer = new Buffer();
-		pso.indexBuffer = new Buffer();
+		//parent all the fractured cell meshes to this.
+		this->AddChild(mesh);
 
-		meshDataProxy->vertices = &meshData.vertices;
-		meshDataProxy->indices = &meshData.indices;
+		mesh->isStatic = false;
 
-		pso.vertexBuffer->data = RenderUtils::CreateVertexBuffer(meshDataProxy);
-		pso.indexBuffer->data = RenderUtils::CreateIndexBuffer(meshDataProxy);
+		mesh->meshDataProxy->vertices = &meshData.vertices;
+		mesh->meshDataProxy->indices = &meshData.indices;
 
-		cellTransforms.push_back(this->transform);
+		//Setup bounds
+		BoundingOrientedBox::CreateFromPoints(mesh->boundingBox, mesh->meshDataProxy->vertices->size(),
+			&mesh->meshDataProxy->vertices->at(0).pos, sizeof(Vertex));
+
+		mesh->pso->vertexBuffer = new Buffer();
+		mesh->pso->indexBuffer = new Buffer();
+		mesh->pso->vertexBuffer->data = RenderUtils::CreateVertexBuffer(mesh->meshDataProxy);
+		mesh->pso->indexBuffer->data = RenderUtils::CreateIndexBuffer(mesh->meshDataProxy);
 	}
-
-	meshDataProxy->vertices = nullptr;
-	meshDataProxy->indices = nullptr;
-}
-
-void DestructibleMeshComponent::Start()
-{
-	isStatic = false;
-}
-
-void DestructibleMeshComponent::Tick(float deltaTime)
-{
-	physicsSystem.GetCellTransformFromPhysicsActors(this);
 }
 
 Properties DestructibleMeshComponent::GetProps()
