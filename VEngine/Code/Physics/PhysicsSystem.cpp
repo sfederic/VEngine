@@ -65,13 +65,10 @@ void PhysicsSystem::Start()
 			auto dMesh = dynamic_cast<DestructibleMeshComponent*>(mesh);
 			if (dMesh)
 			{
-				for (auto child : dMesh->children)
+				for (auto cell : dMesh->meshCells)
 				{
-					auto meshChild = dynamic_cast<MeshComponent*>(child);
-					if (meshChild)
-					{
-						physicsSystem.CreatePhysicsActor(meshChild, PhysicsType::Dynamic, actor);
-					}
+					physicsSystem.CreatePhysicsActor(cell, PhysicsType::Dynamic, actor);
+					dMesh->RemoveChild(cell);
 				}
 			}
 			else
