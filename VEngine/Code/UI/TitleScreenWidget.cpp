@@ -14,6 +14,7 @@ void TitleScreenWidget::Tick(float deltaTime)
 	if (Button(L"Continue", AlignLayout(100.f, 50.f, Align::BottomRight), 1.f, TextAlign::Center, Colours::White))
 	{
 		GameInstance::useGameSaves = true;
-		//@Todo: load world to continue from 
+		GameUtils::LoadGameInstanceData();
+		GameUtils::LoadWorld(GameInstance::mapToLoadOnContinue);
 	}
 }
