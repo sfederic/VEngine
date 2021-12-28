@@ -1,5 +1,15 @@
 #include "GameInstance.h"
 
+void GameInstance::DeletePlayerIntuitions()
+{
+	for (auto& intPair : playerIntuitions)
+	{
+		delete intPair.second;
+	}
+
+	playerIntuitions.clear();
+}
+
 void GameInstance::ProgressTime()
 {
 	currentMinute += 15;

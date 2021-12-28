@@ -27,6 +27,7 @@ struct GameInstance
 	inline static int maxPlayerActionPoints = 10;
 
 	inline static std::map<std::string, Intuition*> playerIntuitions;
+	static void DeletePlayerIntuitions();
 
 	static void ProgressTime();
 	static void ResetTime();
