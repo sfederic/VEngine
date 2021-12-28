@@ -124,8 +124,8 @@ Properties Player::GetProps()
 
 void Player::CreateIntuition(IntuitionComponent* intuitionComponent, std::string actorAquiredFromName)
 {
-	auto intuitionIt = intuitions.find(intuitionComponent->intuitionName);
-	if (intuitionIt != intuitions.end())
+	auto intuitionIt = GameInstance::playerIntuitions.find(intuitionComponent->intuitionName);
+	if (intuitionIt != GameInstance::playerIntuitions.end())
 	{
 		Log("%s Intuition already known.", intuitionComponent->intuitionName.c_str());
 		return;
@@ -149,7 +149,7 @@ void Player::CreateIntuition(IntuitionComponent* intuitionComponent, std::string
 
 		if (intuition->conditionFunc())
 		{
-			intuitions.emplace(intuition->name, intuition);
+			GameInstance::playerIntuitions.emplace(intuition->name, intuition);
 			Log("%s Intuition created.", intuition->name.c_str());
 		}
 		else
@@ -159,7 +159,7 @@ void Player::CreateIntuition(IntuitionComponent* intuitionComponent, std::string
 	}
 	else
 	{
-		intuitions.emplace(intuition->name, intuition);
+		GameInstance::playerIntuitions.emplace(intuition->name, intuition);
 		Log("%s Intuition created.", intuition->name.c_str());
 	}
 }

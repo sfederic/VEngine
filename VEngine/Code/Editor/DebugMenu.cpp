@@ -353,11 +353,9 @@ void DebugMenu::RenderIntuitionsMenu()
 {
 	if (!intuitionsMenuOpen) return;
 
-	auto player = GameUtils::GetPlayer();
-
 	ImGui::Begin("Intuitions");
 
-	for (auto& intuition : player->intuitions)
+	for (auto& intuition : GameInstance::playerIntuitions)
 	{
 		Intuition* i = intuition.second;
 

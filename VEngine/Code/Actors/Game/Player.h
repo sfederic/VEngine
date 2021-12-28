@@ -36,8 +36,6 @@ struct Player : Actor
 
 	Pickup* heldItem = nullptr;
 
-	std::map<std::string, Intuition*> intuitions;
-
 	XMVECTOR nextPos;
 	XMVECTOR nextRot;
 

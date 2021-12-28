@@ -1,8 +1,7 @@
 #include "IntuitionMenuWidget.h"
 #include "Render/Renderer.h"
-#include "Gameplay/GameUtils.h"
+#include "Gameplay/GameInstance.h"
 #include "Gameplay/Intuition.h"
-#include "Actors/Game/Player.h"
 #include "VString.h"
 
 void IntuitionMenuWidget::Tick(float deltaTime)
@@ -14,8 +13,7 @@ void IntuitionMenuWidget::Tick(float deltaTime)
 	D2D1_RECT_F textRect = rect;
 	textRect.bottom = rect.top;
 
-	auto player = GameUtils::GetPlayer();
-	for (auto& intuitionPair : player->intuitions)
+	for (auto& intuitionPair : GameInstance::playerIntuitions)
 	{
 		Intuition* intuition = intuitionPair.second;
 

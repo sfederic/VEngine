@@ -2,7 +2,7 @@
 #include <string>
 #include <functional>
 
-//Base for all plyaer intuitions in-game.
+//Base for all player intuitions in-game.
 struct Intuition
 {
 	std::string name;
