@@ -207,6 +207,7 @@
     <ClCompile Include="Code\Physics\PhysicsSystem.cpp" />
     <ClCompile Include="Code\Components\DestructibleMeshComponent.cpp" />
     <ClCompile Include="Code\Actors\DestructibleActor.cpp" />
+    <ClCompile Include="Code\Actors\Game\TitleScreenActor.cpp" />
     <ClInclude Include="Code\Editor\PropertyWidgets\ActorWidget.h" />
     <ClInclude Include="Code\Editor\ActorTreeWidget.h" />
     <ClInclude Include="Code\Gameplay\BattleSystem.h" />
@@ -413,6 +414,7 @@
     <ClInclude Include="Code\Physics\PhysicsSystem.h" />
     <ClInclude Include="Code\Components\DestructibleMeshComponent.h" />
     <ClInclude Include="Code\Actors\DestructibleActor.h" />
+    <ClInclude Include="Code\Actors\Game\TitleScreenActor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

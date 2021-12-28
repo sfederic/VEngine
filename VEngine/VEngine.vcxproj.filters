@@ -446,6 +446,9 @@
     <ClCompile Include="Code\Actors\DestructibleActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\Game\TitleScreenActor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -842,6 +845,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\DestructibleActor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\TitleScreenActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
