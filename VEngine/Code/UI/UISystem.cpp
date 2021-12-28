@@ -4,6 +4,7 @@
 #include "Debug.h"
 #include "UI/Widget.h"
 #include "Editor/Editor.h"
+#include "Core.h"
 
 UISystem uiSystem;
 
@@ -74,6 +75,9 @@ void UISystem::RemoveWidget(Widget* widgetToRemove)
 
 void UISystem::Reset()
 {
+	//Skip during gameplay because screen resizes cause all gameplay widgets to be deleted otherwise
+	if (Core::gameplayOn) return;
+
 	for (auto widget : widgets)
 	{
 		delete widget;
