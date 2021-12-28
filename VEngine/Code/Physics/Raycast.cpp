@@ -150,6 +150,12 @@ bool RaycastTriangleIntersect(Ray& ray)
 
 		for (auto mesh : actor->GetComponentsOfType<MeshComponent>())
 		{
+			//This is for dealing with DestructibleMesh's meshproxy nulls
+			if (mesh->meshDataProxy->vertices == nullptr || mesh->meshDataProxy->indices == nullptr)
+			{
+				continue;
+			}
+
 			for (int i = 0; i < mesh->meshDataProxy->vertices->size() / 3; i++)
 			{
 				MeshData::indexDataType index0 = mesh->meshDataProxy->indices->at(i * 3);
