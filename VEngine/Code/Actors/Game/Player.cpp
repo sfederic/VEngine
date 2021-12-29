@@ -502,10 +502,12 @@ void Player::ToggleIntuitionMenu()
 		if (intuitionWidgetToggle)
 		{
 			intuitionMenuWidget->AddToViewport();
+			GameUtils::PlayAudio("confirm.wav");
 		}
 		else
 		{
 			intuitionMenuWidget->RemoveFromViewport();
+			GameUtils::PlayAudio("cursor.wav");
 		}
 	}
 }
