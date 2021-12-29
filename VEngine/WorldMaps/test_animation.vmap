@@ -11,7 +11,224 @@ AudioActor
 Player
 0
 MeshActor
+7
+ Position
+-1 -2 6
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
 0
+Mesh
+bevel_rock.fbx
+Name
+plane0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+2888680008
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+1 -4 12
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+ico_sphere.fbx
+Name
+plane1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+1353816222
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+-6 -5 4
+ Rotation
+-0 0.00029901 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+cone.fbx
+Name
+plane2
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+3868057977
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+-3 -6 6
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+monkey.fbx
+Name
+plane3
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+4260773218
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+3 -8 6
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+small_table.fbx
+Name
+plane4
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+2292458689
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+6 -5 6
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+table.fbx
+Name
+plane5
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+3285376606
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+-1 -9 3
+ Rotation
+-0.000172649 0.707107 0.707107 -0.000172649
+ Scale
+3.50002 3.5 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+plane6
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+1361540650
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
 DirectionalLightActor
 1
  Position
@@ -52,4 +269,6 @@ ParticleSystem
 DestructibleActor
 0
 DialogueTrigger
+0
+TitleScreenActor
 0

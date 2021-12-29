@@ -38,23 +38,23 @@ next
 GridActor
 1
  Position
-4 0 7
+4 0 8
  Rotation
 -0 0 -0 1
  Scale
 1 1 1
 Add On Interact
-0
+1
 Casts Shadow
 1
 Condition
 
 Description
-
+Aden knows about the Bestowed's condition.
 Destruct
 0
 Grid Obstacle
-0
+1
 Health
 0
 Interact
@@ -62,7 +62,7 @@ Interact
 Interact Text
 The Bestowed lies here, lifeless.
 Intuition Name
-
+BestowedCondition
 Mesh
 
 Name
@@ -122,15 +122,15 @@ next
 Player
 1
  Position
-5 0.05 2
+4 0.05 0
  Rotation
--0 0 -0 1
+0 0.999999 0 2.38419e-07
  Scale
 0.999997 1 0.999997
 Casts Shadow
 1
 FOV
-59.9717
+58.8412
 Far Z
 1000
 File
@@ -161,7 +161,7 @@ UvScale
 1 1
 next
 MeshActor
-13
+12
  Position
 4 -0.5 4
  Rotation
@@ -225,7 +225,7 @@ UvScale
 1 1
 next
  Position
-7.5 0 7.5
+7.5 0 8.5
  Rotation
 -0 0 -0 1
  Scale
@@ -287,7 +287,7 @@ UvScale
 1 1
 next
  Position
-0.5 0 7.5
+0.5 0 8.5
  Rotation
 -0 0 -0 1
  Scale
@@ -534,37 +534,6 @@ UvRotation
 UvScale
 1 1
 next
- Position
-5 0 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Casts Shadow
-1
-Grid Obstacle
-1
-Mesh
-save_slate.fbx
-Name
-save_slate12
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-stone_tablet.jpg
-UID
-763925194
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-4 2
-next
 DirectionalLightActor
 1
  Position
@@ -583,20 +552,7 @@ UID
 816965374
 next
 SavePoint
-1
- Position
-5 0 2
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Extents
-0.9 0.9 0.9
-Name
-SavePoint0
-UID
-3896381671
-next
+0
 PointLightActor
 0
 SpotLightActor
@@ -680,7 +636,7 @@ UID
 1067295734
 next
 NPC
-1
+2
  Position
 3 0 2
  Rotation
@@ -744,6 +700,69 @@ activeEndHour
 alwaysActive
 0
 next
+ Position
+7 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Attack Points
+1
+Casts Shadow
+1
+Condition
+
+Description
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+2
+Interact
+1
+Interact Text
+
+Intuition Name
+
+Mesh
+
+Move Points
+5
+Move Speed
+1
+Name
+NPC1
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+674642394
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+0
+next
 Billboard
 0
 InteractTrigger
@@ -757,11 +776,15 @@ InteractTrigger
 Extents
 0.9 0.9 0.9
 Interact Text
-Door locked
+The door won't budge. Is it bolted shut?
 Name
 MainDoorTrigger
 UID
 999717312
+prelimInteractText
+Door locked
+targetActorName
+MainDoor
 next
 DialogueInstance
 0
@@ -772,4 +795,6 @@ ParticleSystem
 DestructibleActor
 0
 DialogueTrigger
+0
+TitleScreenActor
 0
