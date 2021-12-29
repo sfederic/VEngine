@@ -90,7 +90,7 @@ activeBeginHour
 activeEndHour
 0
 alwaysActive
-0
+1
 next
 Unit
 0
@@ -122,15 +122,15 @@ next
 Player
 1
  Position
-4 0.05 4
+2 0.05 4
  Rotation
-0 -0.707105 0 0.707104
+-0 0 -0 1
  Scale
 0.999997 1 0.999997
 Casts Shadow
 1
 FOV
-60
+59.05
 Far Z
 1000
 File
@@ -636,7 +636,7 @@ UID
 1067295734
 next
 NPC
-3
+2
  Position
 3 0 6
  Rotation
@@ -656,7 +656,7 @@ Description
 Destruct
 1
 File
-church_hall/hand01
+church_hall/hand01.dialog
 Grid Obstacle
 0
 Health
@@ -696,12 +696,12 @@ UvScale
 activeBeginHour
 0
 activeEndHour
-0
+2
 alwaysActive
 0
 next
  Position
-8 0 3
+5 0 7
  Rotation
 -0 0 -0 1
  Scale
@@ -719,7 +719,7 @@ Description
 Destruct
 1
 File
-
+church_hall/hand01.dialog
 Grid Obstacle
 0
 Health
@@ -727,13 +727,13 @@ Health
 Interact
 1
 Interact Text
-...
+
 Intuition Name
 
 Mesh
 unit_test.fbx
 Move Points
-5
+3
 Move Speed
 1
 Name
@@ -757,72 +757,9 @@ UvRotation
 UvScale
 1 1
 activeBeginHour
-0
+3
 activeEndHour
-0
-alwaysActive
-0
-next
- Position
-5 0 5
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Attack Points
-1
-Casts Shadow
-1
-Condition
-
-Description
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-2
-Interact
-1
-Interact Text
-None from the town are to enter. The funeral is attended by Hands only.
-Intuition Name
-
-Mesh
-unit_test.fbx
-Move Points
-5
-Move Speed
-1
-Name
-NPC2
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-test.png
-UID
-674642394
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
+12
 alwaysActive
 0
 next
@@ -836,10 +773,18 @@ InteractTrigger
 -0 0 -0 1
  Scale
 1 1 1
+Add On Interact
+0
+Condition
+
+Description
+
 Extents
 0.9 0.9 0.9
 Interact Text
 The door won't budge. Is it bolted shut?
+Intuition Name
+
 Name
 MainDoorTrigger
 UID
