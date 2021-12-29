@@ -84,16 +84,22 @@ namespace GameUtils
 
 	void SaveGameInstanceData()
 	{
-		Properties instanceProps = GameInstance::GetInstanceSaveData();
-		Serialiser s(gameInstanceSaveFile, OpenMode::Out);
-		s.Serialise(instanceProps);
+		if (GameInstance::useGameSaves)
+		{
+			Properties instanceProps = GameInstance::GetInstanceSaveData();
+			Serialiser s(gameInstanceSaveFile, OpenMode::Out);
+			s.Serialise(instanceProps);
+		}
 	}
 
 	void LoadGameInstanceData()
 	{
-		Properties instanceProps = GameInstance::GetInstanceSaveData();
-		Deserialiser d(gameInstanceSaveFile, OpenMode::In);
-		d.Deserialise(instanceProps);
+		if (GameInstance::useGameSaves)
+		{
+			Properties instanceProps = GameInstance::GetInstanceSaveData();
+			Deserialiser d(gameInstanceSaveFile, OpenMode::In);
+			d.Deserialise(instanceProps);
+		}
 	}
 
 	void LoadWorldAndMoveToEntranceTrigger(std::string worldName)
