@@ -36,6 +36,18 @@ namespace GameUtils
 		activeCamera->targetActor = newTarget;
 	}
 
+	void SetActiveCameraTargetAndZoomIn(Actor* newTarget)
+	{
+		activeCamera->targetActor = newTarget;
+		GetPlayer()->nextCameraFOV = 30.f;
+	}	
+	
+	void SetActiveCameraTargetAndZoomOut(Actor* newTarget)
+	{
+		activeCamera->targetActor = newTarget;
+		GetPlayer()->nextCameraFOV = 60.f;
+	}
+
 	void PlayAudio(const std::string audioFilename)
 	{
 		audioSystem.PlayAudio(audioFilename);

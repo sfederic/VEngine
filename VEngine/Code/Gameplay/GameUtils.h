@@ -10,7 +10,11 @@ namespace GameUtils
 {
 	Player* GetPlayer();
 	Grid* GetGrid();
+
 	void SetActiveCameraTarget(Actor* newTarget);
+	void SetActiveCameraTargetAndZoomIn(Actor* newTarget);
+	void SetActiveCameraTargetAndZoomOut(Actor* newTarget);
+
 	void PlayAudio(const std::string audioFilename);
 	void SaveGameWorldState();
 	void LoadWorld(std::string worldName);
