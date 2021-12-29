@@ -18,5 +18,5 @@ struct IntuitionComponent : Component
 	
 	IntuitionComponent();
 	virtual Properties GetProps() override;
-	bool CreateIntuition(Actor* actorAquiredFrom);
+	bool CreateIntuition(std::string actorAquiredFromName);
 };

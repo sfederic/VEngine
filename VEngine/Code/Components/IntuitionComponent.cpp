@@ -21,7 +21,7 @@ Properties IntuitionComponent::GetProps()
 	return props;
 }
 
-bool IntuitionComponent::CreateIntuition(Actor* actorAquiredFrom)
+bool IntuitionComponent::CreateIntuition(std::string actorAquiredFromName)
 {
 	auto intuitionIt = GameInstance::playerIntuitions.find(intuitionName);
 	if (intuitionIt != GameInstance::playerIntuitions.end())
@@ -34,7 +34,7 @@ bool IntuitionComponent::CreateIntuition(Actor* actorAquiredFrom)
 	intuition.name = intuitionName;
 	intuition.description = intuitionDescription;
 
-	intuition.actorAquiredFrom = actorAquiredFrom->name;
+	intuition.actorAquiredFrom = actorAquiredFromName;
 	intuition.worldAquiredFrom = world.worldFilename;
 
 	intuition.hourAquired = GameInstance::currentHour;

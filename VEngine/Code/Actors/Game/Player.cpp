@@ -529,7 +529,7 @@ bool Player::InteractCheck(Actor* hitActor)
 				auto intuition = gridActor->intuition;
 				if (intuition->addOnInteract)
 				{
-					intuition->CreateIntuition(gridActor);
+					intuition->CreateIntuition(gridActor->name);
 				}
 
 				return true;
