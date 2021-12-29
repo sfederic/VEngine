@@ -1,5 +1,6 @@
 #include "InteractTrigger.h"
 #include "Components/BoxTriggerComponent.h"
+#include "Components/IntuitionComponent.h"
 #include "Camera.h"
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/BattleSystem.h"
@@ -12,6 +13,8 @@ InteractTrigger::InteractTrigger()
 {
 	trigger = BoxTriggerComponent::system.Add(this);
 	rootComponent = trigger;
+
+	intuitionComponent = IntuitionComponent::system.Add(this);
 }
 
 void InteractTrigger::Start()
@@ -40,6 +43,8 @@ void InteractTrigger::Tick(float deltaTime)
 				isBeingInteractedWith = true;
 
 				interactWidget->SetText(interactText);
+
+				intuitionComponent->CreateIntuition(targetActorName);
 
 				Actor* targetActor = world.GetActorByName(targetActorName);
 				GameUtils::SetActiveCameraTargetAndZoomIn(targetActor);

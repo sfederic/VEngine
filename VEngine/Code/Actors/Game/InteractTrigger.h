@@ -4,6 +4,7 @@
 #include <string>
 
 struct BoxTriggerComponent;
+struct IntuitionComponent;
 struct Widget;
 struct InteractWidget;
 
@@ -13,6 +14,8 @@ struct InteractTrigger : Actor
 	ACTOR_SYSTEM(InteractTrigger)
 
 	BoxTriggerComponent* trigger = nullptr;
+
+	IntuitionComponent* intuitionComponent = nullptr;
 
 	//Widget shown on interact
 	InteractWidget* interactWidget = nullptr;
