@@ -26,6 +26,8 @@ public:
 
 	//Returns false if dialogue is at end
 	bool NextLine();
-	void ShowTextAtActor();
+
+	bool ShowTextAtActor();
+
 	DialogueData* GetCurrentLine();
 };

@@ -457,7 +457,13 @@ bool Player::DialogueCheck(Actor* hitActor)
 		}
 		else
 		{
-			dialogueComponent->ShowTextAtActor();
+			if (!dialogueComponent->ShowTextAtActor())
+			{
+				//Exist out of dialogue loop if next line not found.
+				inConversation = false;
+				GameUtils::SetActiveCameraTargetAndZoomOut(this);
+			}
+
 			return false;
 		}
 	}
