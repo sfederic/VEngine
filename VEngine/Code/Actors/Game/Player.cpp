@@ -175,6 +175,8 @@ void Player::CreateIntuition(IntuitionComponent* intuitionComponent, std::string
 	intuitionGainedWidget->intuitionToDisplay = &GameInstance::playerIntuitions[intuition.name];
 	intuitionGainedWidget->AddToViewport();
 	
+	GameUtils::PlayAudio("purchase.wav");
+
 	timerSystem.SetTimer(3.0f, std::bind(&IntuitionGainedWidget::RemoveFromViewport, intuitionGainedWidget));
 }
 
