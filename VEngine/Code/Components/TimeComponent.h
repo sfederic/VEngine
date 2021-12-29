@@ -11,7 +11,7 @@ struct TimeComponent : Component
 	int activeEndHour = 0;
 
 	//Check if need the actor to be always active (usually for inanimate game objects)
-	bool alwaysActive = false;
+	bool alwaysActive = true;
 
 	TimeComponent();
 	virtual Properties GetProps() override;
