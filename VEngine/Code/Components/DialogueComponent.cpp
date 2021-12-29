@@ -55,13 +55,13 @@ bool DialogueComponent::NextLine()
     return true;
 }
 
-void DialogueComponent::ShowTextAtActor()
+bool DialogueComponent::ShowTextAtActor()
 {
     auto dataIt = dialogue.data.find(currentLine);
     if (dataIt == dialogue.data.end())
     {
         Log("Dialogue line number %s not found.", currentLine);
-        return;
+        return false;
     }
 
     Actor* actor = world.GetActorByName(dataIt->second.actorName);
@@ -77,6 +77,8 @@ void DialogueComponent::ShowTextAtActor()
 
         previousActiveDialogueWidget = d->dialogueWidget;
     }
+
+    return true;
 }
 
 DialogueData* DialogueComponent::GetCurrentLine()

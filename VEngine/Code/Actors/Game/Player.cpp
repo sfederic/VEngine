@@ -457,7 +457,12 @@ bool Player::DialogueCheck(Actor* hitActor)
 		}
 		else
 		{
-			dialogueComponent->ShowTextAtActor();
+			if (!dialogueComponent->ShowTextAtActor())
+			{
+				inConversation = false;
+				GameUtils::SetActiveCameraTargetAndZoomOut(this);
+			}
+
 			return false;
 		}
 	}
