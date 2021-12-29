@@ -493,7 +493,7 @@ void Player::PrimaryAction()
 
 void Player::ToggleIntuitionMenu()
 {
-	if (Input::GetKeyUp(Keys::I))
+	if (Input::GetKeyUp(Keys::Enter))
 	{
 		intuitionWidgetToggle = !intuitionWidgetToggle;
 
