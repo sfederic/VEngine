@@ -1,6 +1,6 @@
 #include "HealthWidget.h"
 
-void HealthWidget::Tick(float deltaTime)
+void HealthWidget::Draw()
 {
 	int sx, sy;
 	GetScreenSpaceCoords(sx, sy);

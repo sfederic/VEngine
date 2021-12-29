@@ -4,7 +4,7 @@
 #include "Gameplay/Intuition.h"
 #include "VString.h"
 
-void IntuitionMenuWidget::Tick(float deltaTime)
+void IntuitionMenuWidget::Draw()
 {
 	D2D1_RECT_F rect = PercentAlignLayout(0.25f, 0.25f, 0.75f, 0.75f);
 	FillRect(rect);

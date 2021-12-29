@@ -1,7 +1,7 @@
 #include "DialogueWidget.h"
 #include "VString.h"
 
-void DialogueWidget::Tick(float deltaTime)
+void DialogueWidget::Draw()
 {
 	int sx, sy;
 	GetScreenSpaceCoords(sx, sy);

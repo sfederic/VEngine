@@ -1,7 +1,7 @@
 #include "InteractWidget.h"
 #include "VString.h"
 
-void InteractWidget::Tick(float deltaTime)
+void InteractWidget::Draw()
 {
 	auto rect = AlignLayout(150.f, 50.f, Align::Bottom);
 

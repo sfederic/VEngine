@@ -5,7 +5,7 @@
 #include "Editor/Editor.h"
 #include "Render/SpriteSystem.h"
 
-void Widget::Tick(float deltaTime)
+void Widget::Draw()
 {
 }
 

@@ -6,6 +6,6 @@ struct DialogueWidget : Widget
 {
 	std::wstring dialogueText;
 
-	virtual void Tick(float deltaTime) override;
+	virtual void Draw() override;
 	void SetText(std::string text);
 };

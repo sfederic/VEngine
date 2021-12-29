@@ -1,6 +1,6 @@
 #include "PlayerActionBarWidget.h"
 
-void PlayerActionBarWidget::Tick(float deltaTime)
+void PlayerActionBarWidget::Draw()
 {
 	D2D1_RECT_F rect = AlignLayout(150.f, 15.f, Align::Bottom);
 	D2D1_RECT_F iconRect = rect;

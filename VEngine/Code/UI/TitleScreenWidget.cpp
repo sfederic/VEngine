@@ -2,7 +2,7 @@
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/GameInstance.h"
 
-void TitleScreenWidget::Tick(float deltaTime)
+void TitleScreenWidget::Draw()
 {
 	Text(L"Vagrant Tactics", AlignLayout(300.f, 100.f, Align::Center), TextAlign::Center, Colours::White);
 

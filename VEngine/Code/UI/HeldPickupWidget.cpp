@@ -1,7 +1,7 @@
 #include "HeldPickupWidget.h"
 #include "VString.h"
 
-void HeldPickupWidget::Tick(float deltaTime)
+void HeldPickupWidget::Draw()
 {
 	auto layout = AlignLayout(50.f, 50.f, Align::BottomRight);
 	FillRect(layout);

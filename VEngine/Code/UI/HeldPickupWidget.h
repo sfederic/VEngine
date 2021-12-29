@@ -6,5 +6,5 @@ struct HeldPickupWidget : Widget
 {
 	std::string pickupName;
 
-	virtual void Tick(float deltaTime) override;
+	virtual void Draw() override;
 };

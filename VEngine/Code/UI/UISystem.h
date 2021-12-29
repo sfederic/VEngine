@@ -50,7 +50,7 @@ struct UISystem
 	//Called on gameplay end
 	void RemoveAllWidgets();
 
-	void TickAllWidgets(float deltaTime);
+	void DrawAllWidgets();
 
 	template <typename T>
 	std::vector<T*> GetAllWidgetsOfType()
