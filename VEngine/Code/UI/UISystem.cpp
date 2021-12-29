@@ -68,7 +68,7 @@ void UISystem::RemoveWidget(Widget* widgetToRemove)
 	{
 		if (widgetsInViewport[i] == widgetToRemove)
 		{
-			widgetsInViewport.erase(widgetsInViewport.begin() + i, widgetsInViewport.end());
+			widgetsInViewport.erase(widgetsInViewport.begin() + i);
 			return;
 		}
 	}
