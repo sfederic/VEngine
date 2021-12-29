@@ -4,16 +4,13 @@
 
 void IntuitionGainedWidget::Draw()
 {
-	Layout layout = AlignLayout(200.f, 200.f, Align::Top);
+	Layout layout = AlignLayout(200.f, 50.f, Align::Top);
 
 	FillRect(layout);
 	Text(L"Intuition Gained", layout);
 
 	layout.AddVerticalSpace(30.f);
 	Text(VString::stows(intuitionToDisplay->name), layout);
-
-	layout.AddVerticalSpace(30.f);
-	Text(VString::stows(intuitionToDisplay->description), layout);
 }
 
 void IntuitionGainedWidget::DestroyAndRemove()
