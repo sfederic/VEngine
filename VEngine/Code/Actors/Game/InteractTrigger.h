@@ -14,10 +14,16 @@ struct InteractTrigger : Actor
 
 	BoxTriggerComponent* trigger = nullptr;
 
+	//Widget shown on interact
 	InteractWidget* interactWidget = nullptr;
 
-	std::string targetActorName;
+	//text to show on PrimaryAction() player input
 	std::string interactText;
+
+	//Text to show when player is inside the trigger
+	std::string prelimInteractText;
+
+	std::string targetActorName;
 
 	bool isBeingInteractedWith = false;
 
