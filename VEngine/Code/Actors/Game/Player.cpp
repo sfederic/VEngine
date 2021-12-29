@@ -510,6 +510,11 @@ bool Player::DialogueCheck(Actor* hitActor)
 		if (npc)
 		{
 			dialogueComponent = npc->dialogueComponent;
+			if (dialogueComponent->dialogue.filename.empty())
+			{
+				return false;
+			}
+
 			inConversation = true;
 
 			//start dialogue
@@ -518,6 +523,8 @@ bool Player::DialogueCheck(Actor* hitActor)
 			//Camera zoom and focus
 			nextCameraFOV = 30.f;
 			GameUtils::SetActiveCameraTarget(npc);
+
+			return true;
 		}
 	}
 
