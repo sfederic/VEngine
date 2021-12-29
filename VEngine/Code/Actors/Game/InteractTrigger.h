@@ -16,9 +16,10 @@ struct InteractTrigger : Actor
 
 	InteractWidget* interactWidget = nullptr;
 
-	Actor* targetActor = nullptr;
-
+	std::string targetActorName;
 	std::string interactText;
+
+	bool isBeingInteractedWith = false;
 
 	InteractTrigger();
 	virtual void Start() override;

@@ -2,6 +2,7 @@
 #include "Components/BoxTriggerComponent.h"
 #include "Camera.h"
 #include "Gameplay/GameUtils.h"
+#include "Gameplay/BattleSystem.h"
 #include "UI/InteractWidget.h"
 #include "VString.h"
 #include "Input.h"
@@ -26,13 +27,34 @@ void InteractTrigger::Start()
 
 void InteractTrigger::Tick(float deltaTime)
 {
+	//@Todo: this logic is fine for now, but not good splitting up player input like this.
+	//Maybe this todo needs an event-fire-off-once system in place.
 	if (trigger->ContainsTarget())
 	{
-		interactWidget->AddToViewport();
+		if (Input::GetKeyUp(Keys::Down) && !battleSystem.isBattleActive)
+		{
+			if (!isBeingInteractedWith)
+			{
+				isBeingInteractedWith = true;
+
+				interactWidget->AddToViewport();
+
+				Actor* targetActor = world.GetActorByName(targetActorName);
+				GameUtils::SetActiveCameraTargetAndZoomIn(targetActor);
+			}
+			else
+			{
+				isBeingInteractedWith = false;
+				interactWidget->RemoveFromViewport();
+				GameUtils::SetActiveCameraTargetAndZoomOut(GameUtils::GetPlayer());
+			}
+		}
 	}
 	else
 	{
 		interactWidget->RemoveFromViewport();
+		GameUtils::SetActiveCameraTargetAndZoomOut(GameUtils::GetPlayer());
+		isBeingInteractedWith = false;
 	}
 }
 
@@ -40,6 +62,6 @@ Properties InteractTrigger::GetProps()
 {
 	auto props = Actor::GetProps();
 	props.Add("Interact Text", &interactText);
-	props.Add("Target Actor", &targetActor);
+	props.AddProp(targetActorName);
 	return props;
 }
