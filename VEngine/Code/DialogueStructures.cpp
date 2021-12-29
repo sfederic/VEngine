@@ -5,7 +5,12 @@
 
 void Dialogue::LoadFromFile()
 {
-	if (filename.empty() || !std::filesystem::exists(filename))
+	if (filename.empty())
+	{
+		return;
+	}
+
+	if (!std::filesystem::exists("Dialogues/" + filename))
 	{
 		Log("Dialogue file [%s] not found.", filename.c_str());
 		return;
