@@ -4,6 +4,7 @@
 
 struct DialogueWidget;
 
+//Looks like about 70 characters per line is the limit.
 struct DialogueComponent : WidgetComponent
 {
 	COMPONENT_SYSTEM(DialogueComponent)
