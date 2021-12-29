@@ -15,3 +15,10 @@ void IntuitionGainedWidget::Draw()
 	layout.AddVerticalSpace(30.f);
 	Text(VString::stows(intuitionToDisplay->description), layout);
 }
+
+void IntuitionGainedWidget::DestroyAndRemove()
+{
+	this->RemoveFromViewport();
+	uiSystem.DestroyWidget(this);
+	delete this;
+}
