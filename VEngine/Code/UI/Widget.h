@@ -13,6 +13,36 @@ using namespace DirectX;
 //right = The x-coordinate of the lower-right corner of the rectangle
 //bottom = The y-coordinate of the lower-right corner of the rectangle.
 
+struct Layout
+{
+	D2D1_RECT_F rect = {};
+
+	Layout() {}
+	Layout(D2D1_RECT_F rect_) : rect(rect_) {}
+
+	inline void AddVerticalSpace(float spacing)
+	{
+		rect.top += spacing;
+		rect.bottom += spacing;
+	}
+
+	inline void AddHorizontalSpace(float spacing)
+	{
+		rect.left += spacing;
+		rect.right += spacing;
+	}
+
+	inline void PushToLeft()
+	{
+		rect.right = rect.left;
+	}
+
+	inline void PushToTop()
+	{
+		rect.bottom = rect.top;
+	}
+};
+
 //Base widget class for in-game UI.
 struct Widget
 {
@@ -49,25 +79,25 @@ struct Widget
 	void RemoveFromViewport();
 	void GetScreenSpaceCoords(int& sx, int& sy);
 
-	void Text(const std::wstring& text, D2D1_RECT_F layout, TextAlign align = TextAlign::Center,
+	void Text(const std::wstring& text, Layout layout, TextAlign align = TextAlign::Center,
 		D2D1_COLOR_F color = { 0.f, 0.f, 0.f, 1.f }, float opacity = 1.0f);
 
-	bool Button(const std::wstring& text, D2D1_RECT_F layout, float lineWidth = 1.0f,
+	bool Button(const std::wstring& text, Layout layout, float lineWidth = 1.0f,
 		TextAlign textAlign = TextAlign::Center, D2D1_COLOR_F textColor = {0.f, 0.f, 0.f, 1.f}, float textOpacity = 1.0f);
 
-	void Image(const std::string& filename, D2D1_RECT_F layout);
+	void Image(const std::string& filename, Layout layout);
 	void Image(const std::string& filename, int x, int y, int w, int h);
 
-	void Rect(D2D1_RECT_F layout);
-	void FillRect(D2D1_RECT_F layout, D2D1_COLOR_F color = {0.5f, 0.5f, 0.5f, 1.f}, float opacity = 1.0f);
+	void Rect(Layout layout);
+	void FillRect(Layout layout, D2D1_COLOR_F color = {0.5f, 0.5f, 0.5f, 1.f}, float opacity = 1.0f);
 
 	//Aligns widget via enum with specific width and height
-	D2D1_RECT_F AlignLayout(float w, float h, Align align);
+	Layout AlignLayout(float w, float h, Align align);
 
 	//Aligns widget to screen percentage where 0.0 is the top left and 1.0 is the bottom right
-	D2D1_RECT_F PercentAlignLayout(float left, float top, float right, float bottom);
+	Layout PercentAlignLayout(float left, float top, float right, float bottom);
 
-	D2D1_RECT_F CenterLayoutOnScreenSpaceCoords(float w, float h, float sx, float sy);
+	Layout CenterLayoutOnScreenSpaceCoords(float w, float h, float sx, float sy);
 };
 
 template <typename T>

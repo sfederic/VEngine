@@ -37,7 +37,7 @@ void Widget::GetScreenSpaceCoords(int& sx, int& sy)
 	sy = ((f2 * -0.5f) + 0.5) * renderer.viewport.Height;
 }
 
-void Widget::Text(const std::wstring& text, D2D1_RECT_F layout, TextAlign align,
+void Widget::Text(const std::wstring& text, Layout layout, TextAlign align,
 	D2D1_COLOR_F color, float opacity)
 {
 	DWRITE_TEXT_ALIGNMENT endAlignment{};
@@ -67,21 +67,21 @@ void Widget::Text(const std::wstring& text, D2D1_RECT_F layout, TextAlign align,
 	uiSystem.brushText->SetOpacity(opacity);
 
 	uiSystem.d2dRenderTarget->DrawText(text.c_str(), text.size(),
-		uiSystem.textFormat, layout, uiSystem.brushText);
+		uiSystem.textFormat, layout.rect, uiSystem.brushText);
 }
 
-bool Widget::Button(const std::wstring& text, D2D1_RECT_F layout, float lineWidth,
+bool Widget::Button(const std::wstring& text, Layout layout, float lineWidth,
 	TextAlign textAlign, D2D1_COLOR_F textColor, float textOpacity)
 {
-	uiSystem.d2dRenderTarget->DrawRectangle(layout, uiSystem.brushShapes, lineWidth);
-	Text(text, layout, textAlign, textColor, textOpacity);
+	uiSystem.d2dRenderTarget->DrawRectangle(layout.rect, uiSystem.brushShapes, lineWidth);
+	Text(text, layout.rect, textAlign, textColor, textOpacity);
 
-	if (editor->viewportMouseX > layout.left && editor->viewportMouseX < layout.right)
+	if (editor->viewportMouseX > layout.rect.left && editor->viewportMouseX < layout.rect.right)
 	{
-		if (editor->viewportMouseY > layout.top && editor->viewportMouseY < layout.bottom)
+		if (editor->viewportMouseY > layout.rect.top && editor->viewportMouseY < layout.rect.bottom)
 		{
 			//Hover animation/image
-			uiSystem.d2dRenderTarget->DrawRectangle(layout, uiSystem.brushText, lineWidth * 2.f);
+			uiSystem.d2dRenderTarget->DrawRectangle(layout.rect, uiSystem.brushText, lineWidth * 2.f);
 
 			if (Input::GetMouseLeftUp())
 			{
@@ -93,12 +93,12 @@ bool Widget::Button(const std::wstring& text, D2D1_RECT_F layout, float lineWidt
 	return false;
 }
 
-void Widget::Image(const std::string& filename, D2D1_RECT_F layout)
+void Widget::Image(const std::string& filename, Layout layout)
 {
 	Sprite sprite = {};
 	sprite.textureFilename = filename;
-	sprite.dstRect = { (long)layout.left, (long)layout.top, (long)layout.right, (long)layout.bottom };
-	sprite.srcRect = { 0, 0, (long)layout.right, (long)layout.bottom };
+	sprite.dstRect = { (long)layout.rect.left, (long)layout.rect.top, (long)layout.rect.right, (long)layout.rect.bottom };
+	sprite.srcRect = { 0, 0, (long)layout.rect.right, (long)layout.rect.bottom };
 
 	spriteSystem.CreateScreenSprite(sprite);
 }
@@ -113,20 +113,20 @@ void Widget::Image(const std::string& filename, int x, int y, int w, int h)
 	spriteSystem.CreateScreenSprite(sprite);
 }
 
-void Widget::Rect(D2D1_RECT_F layout)
+void Widget::Rect(Layout layout)
 {
-	uiSystem.d2dRenderTarget->DrawRectangle(layout, uiSystem.brushShapes);
+	uiSystem.d2dRenderTarget->DrawRectangle(layout.rect, uiSystem.brushShapes);
 }
 
-void Widget::FillRect(D2D1_RECT_F layout, D2D1_COLOR_F color, float opacity)
+void Widget::FillRect(Layout layout, D2D1_COLOR_F color, float opacity)
 {
 	uiSystem.brushShapesAlpha->SetColor(color);
 	uiSystem.brushShapesAlpha->SetOpacity(opacity);
 
-	uiSystem.d2dRenderTarget->FillRectangle(layout, uiSystem.brushShapesAlpha);
+	uiSystem.d2dRenderTarget->FillRectangle(layout.rect, uiSystem.brushShapesAlpha);
 }
 
-D2D1_RECT_F Widget::AlignLayout(float w, float h, Align align)
+Layout Widget::AlignLayout(float w, float h, Align align)
 {
 	float vw = renderer.GetViewportWidth();
 	float vh = renderer.GetViewportHeight();
@@ -186,10 +186,13 @@ D2D1_RECT_F Widget::AlignLayout(float w, float h, Align align)
 	if (rect.right > renderer.GetViewportWidth()) rect.right = vw;
 	if (rect.bottom > renderer.GetViewportHeight()) rect.bottom = vh;
 
-	return rect;
+	Layout layout = {};
+	layout.rect = rect;
+
+	return layout;
 }
 
-D2D1_RECT_F Widget::PercentAlignLayout(float left, float top, float right, float bottom)
+Layout Widget::PercentAlignLayout(float left, float top, float right, float bottom)
 {
 	float vw = renderer.GetViewportWidth();
 	float vh = renderer.GetViewportHeight();
@@ -208,7 +211,7 @@ D2D1_RECT_F Widget::PercentAlignLayout(float left, float top, float right, float
 	return rect;
 }
 
-D2D1_RECT_F Widget::CenterLayoutOnScreenSpaceCoords(float w, float h, float sx, float sy)
+Layout Widget::CenterLayoutOnScreenSpaceCoords(float w, float h, float sx, float sy)
 {
 	D2D1_RECT_F rect = {sx - w, sy - h, sx + w, sy + h};
 
@@ -220,5 +223,5 @@ D2D1_RECT_F Widget::CenterLayoutOnScreenSpaceCoords(float w, float h, float sx, 
 	if (rect.right > vw) rect.right = vw;
 	if (rect.bottom > vh) rect.bottom = vh;
 
-	return rect;
+	return Layout(rect);
 }
