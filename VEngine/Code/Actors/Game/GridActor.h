@@ -22,7 +22,7 @@ struct GridActor : Actor
 	int xIndex = -1;
 	int yIndex = -1;
 
-	int health = 0;
+	int health = 1;
 
 	bool isDestructible = true;
 
