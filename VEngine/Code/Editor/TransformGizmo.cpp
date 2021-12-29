@@ -21,6 +21,8 @@ TransformGizmo::TransformGizmo()
 
 void TransformGizmo::Tick()
 {
+    if (!Core::isImGUIEnabled) return;
+
     //Set Imgui window
     ImGui::SetNextWindowSize(ImVec2(renderer.GetViewportWidth(), renderer.GetViewportHeight()));
     ImGui::SetNextWindowPos(ImVec2(0, 0));

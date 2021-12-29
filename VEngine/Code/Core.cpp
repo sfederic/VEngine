@@ -24,6 +24,7 @@ namespace Core
 
 	bool mainLoop = true;
 	bool gameplayOn = false;
+	bool isImGUIEnabled = true;
 
 	__int64 tickFrequency;
 	__int64 frameStartTime;

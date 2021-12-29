@@ -56,6 +56,8 @@ void DebugMenu::Init()
 
 void DebugMenu::Tick(float deltaTime)
 {
+	if (!Core::isImGUIEnabled) return;
+
 	//Start ImGui
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
@@ -446,6 +448,7 @@ void DebugMenu::RenderCoreMenu()
 
 	ImGui::Begin("Core Engine Variables");
 	ImGui::InputFloat("TimeScale", &Core::timeScale);
+	ImGui::Checkbox("ImGui Enabled", &Core::isImGUIEnabled);
 	ImGui::End();
 }
 
