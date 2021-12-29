@@ -8,40 +8,37 @@ void IntuitionTransferWidget::Draw()
 {
 	//Display intuitons to select
 	{
-		D2D1_RECT_F rect = AlignLayout(200.f, 200.f, Align::Left);
-		FillRect(rect);
+		Layout layout = AlignLayout(200.f, 200.f, Align::Left);
+		FillRect(layout);
 
-		Text(L"Select Intuitions to carry over.", rect);
+		Text(L"Select Intuitions to carry over.", layout);
 
-		D2D1_RECT_F itemRect = rect;
-		itemRect.bottom = rect.top + 30.f;
+		Layout itemLayout = layout;
+		itemLayout.rect.bottom = itemLayout.rect.top + 30.f;
 
-		itemRect.top += 30.f;
-		itemRect.bottom += 30.f;
+		itemLayout.AddVerticalSpace(30.f);
 
 		for (auto& intuitionPair : GameInstance::playerIntuitions)
 		{
 			Intuition& intuition = intuitionPair.second;
 
-			itemRect.top += 30.f;
-			itemRect.bottom += 30.f;
+			itemLayout.AddVerticalSpace(30.f);
 
 			//Handle selecting intuitions
-			if (Button(VString::stows(intuition.name), itemRect))
+			if (Button(VString::stows(intuition.name), itemLayout))
 			{
 				selectedIntuitionsToTransfer.emplace(intuition.name, intuition);
 			}
 
-			itemRect.top += 30.f;
-			itemRect.bottom += 30.f;
+			itemLayout.AddVerticalSpace(30.f);
 
-			Text(VString::stows(intuition.description), itemRect);
+			Text(VString::stows(intuition.description), itemLayout);
 		}
 	}
 
 	//Display selected intuitions
 	{
-		D2D1_RECT_F layout = AlignLayout(200.f, 30.f, Align::Right);
+		Layout layout = AlignLayout(200.f, 30.f, Align::Right);
 		FillRect(layout);
 
 		for (auto& intuitionPair : selectedIntuitionsToTransfer)
@@ -49,8 +46,7 @@ void IntuitionTransferWidget::Draw()
 			Intuition& intuition = intuitionPair.second;
 
 			Text(VString::stows(intuition.name), layout);
-			layout.top += 30.f;
-			layout.bottom += 30.f;
+			layout.AddVerticalSpace(30.f);
 		}
 
 		if (Button(L"Reconnect", layout))
