@@ -18,12 +18,14 @@
 #include "UI/IntuitionMenuWidget.h"
 #include "UI/PlayerActionBarWidget.h"
 #include "UI/IntuitionTransferWidget.h"
+#include "UI/IntuitionGainedWidget.h"
 #include "UI/TimeOfDayWidget.h"
 #include "UI/HeldPickupWidget.h"
 #include "UI/GuardWidget.h"
 #include "UI/PlayerHealthWidget.h"
 #include "Gameplay/Intuition.h"
 #include "Gameplay/ConditionSystem.h"
+#include "TimerSystem.h"
 #include "Gameplay/GameInstance.h"
 #include "Log.h"
 #include "Gameplay/BattleSystem.h"
@@ -50,6 +52,7 @@ void Player::Start()
 	//Setup widgets
 	interactWidget = CreateWidget<InteractWidget>();
 	intuitionMenuWidget = CreateWidget<IntuitionMenuWidget>();
+	intuitionGainedWidget = CreateWidget<IntuitionGainedWidget>();
 
 	actionBarWidget = CreateWidget<PlayerActionBarWidget>();
 	actionBarWidget->actionPoints = actionPoints;
@@ -159,17 +162,20 @@ void Player::CreateIntuition(IntuitionComponent* intuitionComponent, std::string
 		intuition.conditionFunc = conditionSystem.FindCondition(intuitionComponent->condition);
 		intuition.conditionFuncName = intuitionComponent->condition;
 
-		if (intuition.conditionFunc())
+		if (!intuition.conditionFunc())
 		{
-			GameInstance::playerIntuitions.emplace(intuition.name, intuition);
-			Log("%s Intuition created.", intuition.name.c_str());
+			return;
 		}
 	}
-	else
-	{
-		GameInstance::playerIntuitions.emplace(intuition.name, intuition);
-		Log("%s Intuition created.", intuition.name.c_str());
-	}
+
+	//Create intuiton
+	GameInstance::playerIntuitions.emplace(intuition.name, intuition);
+	Log("%s Intuition created.", intuition.name.c_str());
+
+	intuitionGainedWidget->intuitionToDisplay = &GameInstance::playerIntuitions[intuition.name];
+	intuitionGainedWidget->AddToViewport();
+	
+	timerSystem.SetTimer(3.0f, std::bind(&IntuitionGainedWidget::RemoveFromViewport, intuitionGainedWidget));
 }
 
 void Player::RefreshCombatStats()
