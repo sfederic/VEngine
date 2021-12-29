@@ -19,7 +19,7 @@ void InteractTrigger::Start()
 	trigger->target = (Actor*)GameUtils::GetPlayer();
 	
 	interactWidget = CreateWidget<InteractWidget>();
-	interactWidget->SetText(prelimInteractText);
+	interactWidget->SetText(overlapText);
 
 	//Interact triggers are stationary, only one pos set is needed
 	interactWidget->pos = GetHomogeneousPositionVector();
@@ -48,7 +48,7 @@ void InteractTrigger::Tick(float deltaTime)
 			{
 				isBeingInteractedWith = false;
 
-				interactWidget->SetText(prelimInteractText);
+				interactWidget->SetText(overlapText);
 				interactWidget->RemoveFromViewport();
 
 				GameUtils::SetActiveCameraTargetAndZoomOut(GameUtils::GetPlayer());
@@ -57,12 +57,7 @@ void InteractTrigger::Tick(float deltaTime)
 	}
 	else
 	{
-		interactWidget->SetText(prelimInteractText);
 		interactWidget->RemoveFromViewport();
-
-		GameUtils::SetActiveCameraTargetAndZoomOut(GameUtils::GetPlayer());
-
-		isBeingInteractedWith = false;
 	}
 }
 
@@ -70,7 +65,7 @@ Properties InteractTrigger::GetProps()
 {
 	auto props = Actor::GetProps();
 	props.Add("Interact Text", &interactText);
-	props.AddProp(prelimInteractText);
+	props.AddProp(overlapText);
 	props.AddProp(targetActorName);
 	return props;
 }

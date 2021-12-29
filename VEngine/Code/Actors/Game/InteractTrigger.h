@@ -21,7 +21,7 @@ struct InteractTrigger : Actor
 	std::string interactText;
 
 	//Text to show when player is inside the trigger
-	std::string prelimInteractText;
+	std::string overlapText = "Examine";
 
 	std::string targetActorName;
 
