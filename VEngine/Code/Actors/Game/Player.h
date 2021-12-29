@@ -65,8 +65,6 @@ struct Player : Actor
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 
-	void CreateIntuition(IntuitionComponent* intuitionComponent, std::string actorAquiredFromName);
-
 	//called at every battle turn end
 	void RefreshCombatStats();
 

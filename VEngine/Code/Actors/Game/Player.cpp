@@ -137,49 +137,6 @@ Properties Player::GetProps()
 	return props;
 }
 
-void Player::CreateIntuition(IntuitionComponent* intuitionComponent, std::string actorAquiredFromName)
-{
-	auto intuitionIt = GameInstance::playerIntuitions.find(intuitionComponent->intuitionName);
-	if (intuitionIt != GameInstance::playerIntuitions.end())
-	{
-		Log("%s Intuition already known.", intuitionComponent->intuitionName.c_str());
-		return;
-	}
-
-	auto intuition = Intuition();
-	intuition.name = intuitionComponent->intuitionName;
-	intuition.description = intuitionComponent->intuitionDescription;
-
-	intuition.actorAquiredFrom = actorAquiredFromName;
-	intuition.worldAquiredFrom = world.worldFilename;
-
-	intuition.hourAquired = GameInstance::currentHour;
-	intuition.minuteAquired = GameInstance::currentMinute;
-
-	//Check if intuition condition passes
-	if (!intuitionComponent->condition.empty())
-	{
-		intuition.conditionFunc = conditionSystem.FindCondition(intuitionComponent->condition);
-		intuition.conditionFuncName = intuitionComponent->condition;
-
-		if (!intuition.conditionFunc())
-		{
-			return;
-		}
-	}
-
-	//Create intuiton
-	GameInstance::playerIntuitions.emplace(intuition.name, intuition);
-	Log("%s Intuition created.", intuition.name.c_str());
-
-	intuitionGainedWidget->intuitionToDisplay = &GameInstance::playerIntuitions[intuition.name];
-	intuitionGainedWidget->AddToViewport();
-	
-	GameUtils::PlayAudio("purchase.wav");
-
-	timerSystem.SetTimer(3.0f, std::bind(&IntuitionGainedWidget::RemoveFromViewport, intuitionGainedWidget));
-}
-
 void Player::RefreshCombatStats()
 {
 	actionPoints = GameInstance::maxPlayerActionPoints;
@@ -572,7 +529,7 @@ bool Player::InteractCheck(Actor* hitActor)
 				auto intuition = gridActor->intuition;
 				if (intuition->addOnInteract)
 				{
-					CreateIntuition(gridActor->intuition, gridActor->name);
+					intuition->CreateIntuition(gridActor);
 				}
 
 				return true;

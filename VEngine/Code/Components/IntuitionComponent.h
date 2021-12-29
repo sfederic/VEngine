@@ -2,6 +2,8 @@
 #include "Component.h"
 #include "ComponentSystem.h"
 
+struct Actor;
+
 struct IntuitionComponent : Component
 {
 	COMPONENT_SYSTEM(IntuitionComponent);
@@ -16,4 +18,5 @@ struct IntuitionComponent : Component
 	
 	IntuitionComponent();
 	virtual Properties GetProps() override;
+	bool CreateIntuition(Actor* actorAquiredFrom);
 };
