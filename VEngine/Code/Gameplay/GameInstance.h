@@ -14,7 +14,7 @@ struct GameInstance
 	inline static int currentHour = 0;
 	inline static int currentMinute = 0;
 
-	inline static const std::string startingMap = "church_hall.vmap";
+	inline static const std::string startingMap = "church_room1.vmap";
 	inline static std::string previousMapMovedFrom = startingMap;
 
 	inline static PickupSpawnData pickupSpawnData;

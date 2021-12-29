@@ -122,11 +122,11 @@ next
 Player
 1
  Position
-2 0.0600002 3
+2 0.0599993 2
  Rotation
-0 1 0 -7.4506e-07
+0 0.707107 0 0.707107
  Scale
-0.99998 1 0.99998
+0.999978 1 0.999978
 Casts Shadow
 1
 FOV
@@ -411,19 +411,19 @@ UvScale
 1 1
 next
  Position
-4 0.5 1.5
+3.95 0.35 1.7
  Rotation
--0 0.173818 -0 0.984778
+0 0.819152 0 0.573577
  Scale
-0.5 0.25 0.5
+1 1 1
 Casts Shadow
 1
 Grid Obstacle
 0
 Mesh
-cube.fbx
+book.fbx
 Name
-cube8
+book1
 Rast State
 solid
 Shader
@@ -431,7 +431,7 @@ DefaultShader.hlsl
 Static
 1
 Texture
-crate.jpg
+book.jpg
 UID
 2272155524
 UvOffset
@@ -583,7 +583,34 @@ NPC
 Billboard
 0
 InteractTrigger
-0
+1
+ Position
+3 0 2
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Add On Interact
+1
+Condition
+
+Description
+Aden knows about the pyre that is lit at The Bestowed's funeral
+Extents
+0.9 0.9 0.9
+Interact Text
+"The Bestowed, at death, shall have their body kindled, that their soul reaches the Goddess burning and alight"
+Intuition Name
+The Pyre
+Name
+booktrigger
+UID
+162837439
+overlapText
+Examine Book
+targetActorName
+book1
+next
 DialogueInstance
 0
 GameEvent
@@ -593,4 +620,6 @@ ParticleSystem
 DestructibleActor
 0
 DialogueTrigger
+0
+TitleScreenActor
 0

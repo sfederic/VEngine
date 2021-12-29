@@ -64,7 +64,7 @@ The Bestowed lies here, lifeless.
 Intuition Name
 BestowedCondition
 Mesh
-
+vase.fbx
 Name
 GridActor0
 Obstacle
@@ -122,15 +122,15 @@ next
 Player
 1
  Position
-4 0.05 0
+4 0.05 4
  Rotation
-0 0.999999 0 2.38419e-07
+0 -0.707105 0 0.707104
  Scale
 0.999997 1 0.999997
 Casts Shadow
 1
 FOV
-58.8412
+60
 Far Z
 1000
 File
@@ -636,9 +636,9 @@ UID
 1067295734
 next
 NPC
-2
+3
  Position
-3 0 2
+3 0 6
  Rotation
 -0 0 -0 1
  Scale
@@ -656,7 +656,7 @@ Description
 Destruct
 1
 File
-
+church_hall/hand01
 Grid Obstacle
 0
 Health
@@ -668,9 +668,9 @@ Interact Text
 Intuition Name
 
 Mesh
-
+unit_test.fbx
 Move Points
-5
+3
 Move Speed
 1
 Name
@@ -701,7 +701,7 @@ alwaysActive
 0
 next
  Position
-7 0 2
+8 0 3
  Rotation
 -0 0 -0 1
  Scale
@@ -727,17 +727,80 @@ Health
 Interact
 1
 Interact Text
-
+...
 Intuition Name
 
 Mesh
-
+unit_test.fbx
 Move Points
 5
 Move Speed
 1
 Name
 NPC1
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+674642394
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+0
+next
+ Position
+5 0 5
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Attack Points
+1
+Casts Shadow
+1
+Condition
+
+Description
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+2
+Interact
+1
+Interact Text
+None from the town are to enter. The funeral is attended by Hands only.
+Intuition Name
+
+Mesh
+unit_test.fbx
+Move Points
+5
+Move Speed
+1
+Name
+NPC2
 Obstacle
 1
 Rast State
@@ -781,8 +844,8 @@ Name
 MainDoorTrigger
 UID
 999717312
-prelimInteractText
-Door locked
+overlapText
+Examine
 targetActorName
 MainDoor
 next
