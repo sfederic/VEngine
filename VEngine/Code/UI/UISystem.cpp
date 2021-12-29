@@ -64,14 +64,8 @@ void UISystem::AddWidget(Widget* widgetToAdd)
 
 void UISystem::RemoveWidget(Widget* widgetToRemove)
 {
-	for (int i = 0; i < widgetsInViewport.size(); i++)
-	{
-		if (widgetsInViewport[i] == widgetToRemove)
-		{
-			widgetsInViewport.erase(widgetsInViewport.begin() + i);
-			return;
-		}
-	}
+	widgetsInViewport.erase(std::remove(widgetsInViewport.begin(),
+		widgetsInViewport.end(), widgetToRemove), widgetsInViewport.end());
 }
 
 void UISystem::Reset()
