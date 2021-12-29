@@ -153,6 +153,9 @@ void DialogueDock::LoadDialogueFile()
 	QString loadName = loadDialog.getOpenFileName(this, "Open Dialogue", "Dialogues/");
 	if (loadName.isEmpty()) return;
 
+	//set dock title to filename (strip out the path with QFileInfo)
+	this->setWindowTitle("Dialogue | " + QFileInfo(loadName).fileName());
+
 	std::ifstream is;
 	is.open(loadName.toStdString(), std::ios_base::in);
 
