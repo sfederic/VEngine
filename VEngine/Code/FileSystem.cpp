@@ -115,6 +115,9 @@ void FileSystem::LoadWorld(std::string worldName)
 
 void FileSystem::ReloadCurrentWorld()
 {
+	GameInstance::ResetTime();
+	GameInstance::DeletePlayerIntuitions();
+
 	LoadWorld(world.worldFilename);
 }
 
