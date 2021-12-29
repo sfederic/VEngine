@@ -79,6 +79,13 @@ void UISystem::Reset()
 	widgetsInViewport.clear();
 }
 
+void UISystem::DestroyWidget(Widget* widget)
+{
+	widgets.erase(std::remove(widgets.begin(), widgets.end(), widget), widgets.end());
+	widgetsInViewport.erase(std::remove(widgetsInViewport.begin(),
+		widgetsInViewport.end(), widget), widgetsInViewport.end());
+}
+
 void UISystem::RemoveAllWidgets()
 {
 	widgetsInViewport.clear();

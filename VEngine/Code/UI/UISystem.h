@@ -47,6 +47,8 @@ struct UISystem
 		return newWidget;
 	}
 
+	void DestroyWidget(Widget* widget);
+
 	//Called on gameplay end
 	void RemoveAllWidgets();
 
