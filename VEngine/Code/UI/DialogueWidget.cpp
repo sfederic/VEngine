@@ -10,11 +10,11 @@ void DialogueWidget::Draw()
 	Layout layout = CenterLayoutOnScreenSpaceCoords(100.f, 100.f, sx, sy);
 
 	D2D1_RECT_F imageRect = {
-		layout.rect.left - 50.f, layout.rect.top - 50.f, layout.rect.right + 50.f, layout.rect.bottom + 50.f
+		layout.rect.left - 50.f, layout.rect.top - 25.f, layout.rect.right + 50.f, layout.rect.bottom + 75.f
 	};
 
 	Image("speech_bubble.png", imageRect);
-	Text(dialogueText, imageRect);
+	Text(dialogueText, layout);
 }
 
 void DialogueWidget::SetText(std::string text)
