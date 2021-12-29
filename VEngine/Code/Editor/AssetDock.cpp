@@ -208,6 +208,10 @@ void AssetDock::ShowContextMenu(const QPoint& point)
     connect(&newMapAction, &QAction::triggered, this, &AssetDock::CreateNewMapFile);
     contextMenu.addAction(&newMapAction);
 
+    QAction newDialogueAction("New Dialogue", this);
+    connect(&newDialogueAction, &QAction::triggered, this, &AssetDock::CreateNewDialogueFile);
+    contextMenu.addAction(&newDialogueAction);
+
     contextMenu.exec(mapToGlobal(point));
 }
 
@@ -249,6 +253,21 @@ void AssetDock::CreateNewMapFile()
     QString mapFile = dialog.getSaveFileName(NULL, "Create New Map File", "WorldMaps/", ".vmap");
 
     QFile file(mapFile);
+    file.open(QIODevice::WriteOnly);
+    file.close();
+
+    //refresh asset items in dock
+    AssetFolderClicked();
+}
+
+void AssetDock::CreateNewDialogueFile()
+{
+    QFileDialog dialog;
+    dialog.setFileMode(QFileDialog::AnyFile);
+
+    QString dialogueFile = dialog.getSaveFileName(NULL, "Create New Dialogue File", "Dialogues/", ".dialog");
+
+    QFile file(dialogueFile);
     file.open(QIODevice::WriteOnly);
     file.close();
 
