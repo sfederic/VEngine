@@ -14,6 +14,7 @@
 #include "UI/UISystem.h"
 #include "Gameplay/GameInstance.h"
 #include "Physics/PhysicsSystem.h"
+#include "TimerSystem.h"
 
 World world;
 
@@ -179,6 +180,7 @@ void World::Cleanup()
 	actorNameMap.clear();
 
 	//Cleanup various systems
+	timerSystem.Cleanup();
 	physicsSystem.Reset();
 	audioSystem.DeleteLoadedAudioAndChannels();
 	textureSystem.Cleanup();
