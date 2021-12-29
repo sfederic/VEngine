@@ -16,6 +16,11 @@ void TimerSystem::Tick(float deltaTime)
 	}
 }
 
+void TimerSystem::Cleanup()
+{
+	timerItems.clear();
+}
+
 void TimerSystem::SetTimer(float duration, std::function<void()> functionToCall)
 {
 	TimerItem timerItem = {};
