@@ -1,10 +1,13 @@
 #include "DialogueStructures.h"
 #include <fstream>
+#include <filesystem>
+#include "Log.h"
 
 void Dialogue::LoadFromFile()
 {
-	if (filename.empty())
+	if (filename.empty() || !std::filesystem::exists(filename))
 	{
+		Log("Dialogue file [%s] not found.", filename.c_str());
 		return;
 	}
 
