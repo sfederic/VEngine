@@ -579,7 +579,70 @@ UID
 2132069934
 next
 NPC
+1
+ Position
+3 0 0
+ Rotation
+-0 0 0.00029901 1
+ Scale
+1 1 1
+Add On Interact
 0
+Attack Points
+1
+Casts Shadow
+1
+Condition
+
+Description
+
+Destruct
+1
+File
+church_hall/hand02.dialog
+Grid Obstacle
+0
+Health
+2
+Interact
+0
+Interact Text
+
+Intuition Name
+
+Mesh
+unit_test.fbx
+Move Points
+3
+Move Speed
+1
+Name
+NPC0
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+2174012462
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+1
+alwaysActive
+0
+next
 Billboard
 0
 InteractTrigger
