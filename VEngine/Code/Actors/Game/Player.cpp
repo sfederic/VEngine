@@ -372,123 +372,11 @@ void Player::PrimaryAction()
 		{
 			Log("Player interact: %s", ray.hitActor->name.c_str());
 
-			//PICKUP CHECK
-			{
-				auto pickup = dynamic_cast<Pickup*>(ray.hitActor);
-				if (pickup)
-				{
-					heldItem = pickup;
-					GameInstance::pickupSpawnData = PickupSpawnData(pickup);
-					
-					//Set pickup widget
-					heldPickupWidget->pickupName = heldItem->pickupName;
-					heldPickupWidget->AddToViewport();
-
-					pickup->AddToPlayerInventory();
-					return;
-				}
-			}
-
-			//QUICK DIALOGUE INTERACT CHECK
-			{
-				if (!isWeaponDrawn)
-				{
-					auto npc = dynamic_cast<NPC*>(ray.hitActor);
-					if (npc)
-					{
-						if (npc->isInteractable)
-						{
-							npc->QuickTalkTo();
-							return;
-						}
-					}
-				}
-			}
-
-			//INTERACT CHECK
-			{
-				if (!isWeaponDrawn)
-				{
-					auto gridActor = dynamic_cast<GridActor*>(ray.hitActor);
-					if (gridActor)
-					{
-						if (gridActor->isInteractable)
-						{
-							interactWidget->interactText = VString::stows(gridActor->interactText);
-							interactWidget->AddToViewport();
-							inInteraction = true;
-
-							nextCameraFOV = 30.f;
-
-							auto intuition = gridActor->intuition;
-							if (intuition->addOnInteract)
-							{
-								CreateIntuition(gridActor->intuition, gridActor->name);
-							}
-
-							return;
-						}
-					}
-				}
-			}
-
-			//DESTRUCTIBLE CHECK
-			{
-				if (isWeaponDrawn)
-				{
-					auto unit = dynamic_cast<Unit*>(ray.hitActor);
-					if (unit)
-					{
-						battleSystem.StartBattle();
-						ExpendActionPoints(1);
-						unit->InflictDamage(1);
-						GameUtils::PlayAudio("sword_hit.wav");
-						return;
-					}
-
-					auto gridActor = dynamic_cast<GridActor*>(ray.hitActor);
-					if (gridActor)
-					{
-						battleSystem.StartBattle();
-						ExpendActionPoints(1);
-						gridActor->InflictDamage(1);
-						GameUtils::PlayAudio("sword_hit.wav");
-						return;
-					}
-				}
-			}
-
-			//DIALOGUE CHECK
-			if (inConversation)
-			{
-				if (!dialogueComponent->NextLine())
-				{
-					//End dialogue
-					inConversation = false;
-					nextCameraFOV = 60.f;
-					GameUtils::SetActiveCameraTarget(this);
-				}
-				else
-				{
-					dialogueComponent->ShowTextAtActor();
-				}
-			}
-			else
-			{
-				NPC* npc = dynamic_cast<NPC*>(ray.hitActor);
-				if (npc)
-				{
-					dialogueComponent = npc->dialogueComponent;
-					inConversation = true;
-
-					//start dialogue
-					dialogueComponent->ShowTextAtActor();
-
-					//Camera zoom and focus
-					nextCameraFOV = 30.f;
-					GameUtils::SetActiveCameraTarget(npc);
-				}
-			}
+			if (DialogueCheck(ray.hitActor)) {}
+			else if (QuickTalkCheck(ray.hitActor)) {}
+			else if (InteractCheck(ray.hitActor)) {}
+			else if (PickupCheck(ray.hitActor)) {}
+			else if (DestructibleCheck(ray.hitActor)) {}
 		}
 	}
 }
@@ -577,4 +465,136 @@ void Player::PlacePickupDown()
 
 		heldPickupWidget->RemoveFromViewport();
 	}
+}
+
+bool Player::PickupCheck(Actor* hitActor)
+{
+	auto pickup = dynamic_cast<Pickup*>(hitActor);
+	if (pickup)
+	{
+		heldItem = pickup;
+		GameInstance::pickupSpawnData = PickupSpawnData(pickup);
+
+		//Set pickup widget
+		heldPickupWidget->pickupName = heldItem->pickupName;
+		heldPickupWidget->AddToViewport();
+
+		pickup->AddToPlayerInventory();
+		return true;
+	}
+
+	return false;
+}
+
+bool Player::DialogueCheck(Actor* hitActor)
+{
+	if (inConversation)
+	{
+		if (!dialogueComponent->NextLine())
+		{
+			//End dialogue
+			inConversation = false;
+			nextCameraFOV = 60.f;
+			GameUtils::SetActiveCameraTarget(this);
+			return true;
+		}
+		else
+		{
+			dialogueComponent->ShowTextAtActor();
+			return false;
+		}
+	}
+	else
+	{
+		NPC* npc = dynamic_cast<NPC*>(hitActor);
+		if (npc)
+		{
+			dialogueComponent = npc->dialogueComponent;
+			inConversation = true;
+
+			//start dialogue
+			dialogueComponent->ShowTextAtActor();
+
+			//Camera zoom and focus
+			nextCameraFOV = 30.f;
+			GameUtils::SetActiveCameraTarget(npc);
+		}
+	}
+
+	return false;
+}
+
+bool Player::QuickTalkCheck(Actor* hitActor)
+{
+	if (!isWeaponDrawn&& !inConversation)
+	{
+		auto npc = dynamic_cast<NPC*>(hitActor);
+		if (npc)
+		{
+			if (npc->isInteractable)
+			{
+				npc->QuickTalkTo();
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+bool Player::InteractCheck(Actor* hitActor)
+{
+	if (!isWeaponDrawn && !inConversation)
+	{
+		auto gridActor = dynamic_cast<GridActor*>(hitActor);
+		if (gridActor)
+		{
+			if (gridActor->isInteractable)
+			{
+				interactWidget->interactText = VString::stows(gridActor->interactText);
+				interactWidget->AddToViewport();
+				inInteraction = true;
+
+				nextCameraFOV = 30.f;
+
+				auto intuition = gridActor->intuition;
+				if (intuition->addOnInteract)
+				{
+					CreateIntuition(gridActor->intuition, gridActor->name);
+				}
+
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+bool Player::DestructibleCheck(Actor* hitActor)
+{
+	if (isWeaponDrawn && !inConversation)
+	{
+		auto unit = dynamic_cast<Unit*>(hitActor);
+		if (unit)
+		{
+			battleSystem.StartBattle();
+			ExpendActionPoints(1);
+			unit->InflictDamage(1);
+			GameUtils::PlayAudio("sword_hit.wav");
+			return true;
+		}
+
+		auto gridActor = dynamic_cast<GridActor*>(hitActor);
+		if (gridActor)
+		{
+			battleSystem.StartBattle();
+			ExpendActionPoints(1);
+			gridActor->InflictDamage(1);
+			GameUtils::PlayAudio("sword_hit.wav");
+			return true;
+		}
+	}
+
+	return false;
 }

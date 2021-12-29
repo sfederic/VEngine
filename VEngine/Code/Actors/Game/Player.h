@@ -86,4 +86,11 @@ private:
 	void LerpPlayerCameraFOV(float deltaTime);
 	void CheckNextMoveNode(XMVECTOR previousPos);
 	void PlacePickupDown();
+
+	//PrimaryAction actor check functions
+	bool PickupCheck(Actor* hitActor);
+	bool DialogueCheck(Actor* hitActor);
+	bool QuickTalkCheck(Actor* hitActor);
+	bool InteractCheck(Actor* hitActor);
+	bool DestructibleCheck(Actor* hitActor);
 };
