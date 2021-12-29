@@ -18,14 +18,10 @@
 #include "UI/IntuitionMenuWidget.h"
 #include "UI/PlayerActionBarWidget.h"
 #include "UI/IntuitionTransferWidget.h"
-#include "UI/IntuitionGainedWidget.h"
 #include "UI/TimeOfDayWidget.h"
 #include "UI/HeldPickupWidget.h"
 #include "UI/GuardWidget.h"
 #include "UI/PlayerHealthWidget.h"
-#include "Gameplay/Intuition.h"
-#include "Gameplay/ConditionSystem.h"
-#include "TimerSystem.h"
 #include "Gameplay/GameInstance.h"
 #include "Log.h"
 #include "Gameplay/BattleSystem.h"
@@ -52,7 +48,6 @@ void Player::Start()
 	//Setup widgets
 	interactWidget = CreateWidget<InteractWidget>();
 	intuitionMenuWidget = CreateWidget<IntuitionMenuWidget>();
-	intuitionGainedWidget = CreateWidget<IntuitionGainedWidget>();
 
 	actionBarWidget = CreateWidget<PlayerActionBarWidget>();
 	actionBarWidget->actionPoints = actionPoints;
