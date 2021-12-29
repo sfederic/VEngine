@@ -8,6 +8,8 @@ Grid
 1 1 1
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 node.fbx
 Name
@@ -20,6 +22,8 @@ Size X
 5
 Size Y
 5
+Static
+1
 Texture
 test.png
 UID
@@ -32,7 +36,62 @@ UvScale
 1 1
 next
 GridActor
+1
+ Position
+3 0.5 4
+ Rotation
+-0 0 -0 1
+ Scale
+2 2 1
+Add On Interact
 0
+Casts Shadow
+1
+Condition
+
+Description
+
+Destruct
+1
+Grid Obstacle
+0
+Health
+0
+Interact
+1
+Interact Text
+
+Intuition Name
+
+Mesh
+
+Name
+bookshelf
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+bookshelf.jpg
+UID
+1998949268
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+next
 Unit
 0
 Pickup
@@ -55,6 +114,8 @@ Far Z
 1000
 File
 
+Grid Obstacle
+0
 Mesh
 unit_test.fbx
 Name
@@ -65,6 +126,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 wall.png
 UID
@@ -86,6 +149,8 @@ MeshActor
 3 2.99997 0.999993
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 plane.fbx
 Name
@@ -94,6 +159,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 test.png
 UID
@@ -113,6 +180,8 @@ next
 3 1 1
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 plane.fbx
 Name
@@ -121,6 +190,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 floor.jpg
 UID
@@ -140,6 +211,8 @@ next
 3.00002 1 1
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 plane.fbx
 Name
@@ -148,6 +221,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 test_atlas.png
 UID
@@ -167,6 +242,8 @@ next
 3.00002 1 1
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 plane.fbx
 Name
@@ -175,6 +252,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 wall04.png
 UID
@@ -191,9 +270,11 @@ next
  Rotation
 0 1 0 -0.000172772
  Scale
-3.00008 0.999999 1
+3.00009 0.999999 1
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 plane.fbx
 Name
@@ -202,6 +283,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 wall03.png
 UID
@@ -262,10 +345,43 @@ NPC
 Billboard
 0
 InteractTrigger
+1
+ Position
+3 0 3
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Add On Interact
 0
+Condition
+
+Description
+
+Extents
+0.9 0.9 0.9
+Interact Text
+Glancing over the spines, you notice various titles on the theology of The Goddess
+Intuition Name
+
+Name
+InteractTrigger0
+UID
+157415782
+overlapText
+Examine Bookshelf
+targetActorName
+bookshelf
+next
 DialogueInstance
 0
 GameEvent
 0
 ParticleSystem
+0
+DestructibleActor
+0
+DialogueTrigger
+0
+TitleScreenActor
 0
