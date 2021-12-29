@@ -284,6 +284,7 @@ void DebugMenu::RenderGameInstanceData()
 	if (ImGui::Button("Reset Instance Data"))
 	{
 		GameInstance::ResetTime();
+		GameInstance::DeletePlayerIntuitions();
 	}
 
 	ImGui::End();
