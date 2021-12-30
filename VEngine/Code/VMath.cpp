@@ -312,6 +312,7 @@ namespace VMath
             if (z < minZ) minZ = z;
         }
 
+        //Remember that extents are halfed
         return BoundingOrientedBox(XMFLOAT3(0.f, 0.f, 0.f),
             XMFLOAT3((maxX - minX) / 2.f, (maxY - minY) / 2.f, (maxZ - minZ) / 2.f),
             XMFLOAT4(0.f, 0.f, 0.f, 1.f));
