@@ -128,7 +128,7 @@ void SpatialComponent::SetRotation(XMVECTOR newRotation)
 XMFLOAT3 SpatialComponent::GetForwardVector()
 {
 	XMFLOAT3 forward;
-	XMStoreFloat3(&forward, GetTransformMatrix().r[2]);
+	XMStoreFloat3(&forward, XMVector3Normalize(GetTransformMatrix().r[2]));
 	return forward;
 }
 
@@ -140,7 +140,7 @@ XMVECTOR SpatialComponent::GetForwardVectorV()
 XMFLOAT3 SpatialComponent::GetRightVector()
 {
 	XMFLOAT3 right;
-	XMStoreFloat3(&right, GetTransformMatrix().r[0]);
+	XMStoreFloat3(&right, XMVector3Normalize(GetTransformMatrix().r[0]));
 	return right;
 }
 
@@ -152,7 +152,7 @@ XMVECTOR SpatialComponent::GetRightVectorV()
 XMFLOAT3 SpatialComponent::GetUpVector()
 {
 	XMFLOAT3 up;
-	XMStoreFloat3(&up, GetTransformMatrix().r[1]);
+	XMStoreFloat3(&up, XMVector3Normalize(GetTransformMatrix().r[1]));
 	return up;
 }
 
