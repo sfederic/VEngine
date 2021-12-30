@@ -15,6 +15,7 @@
 #include "Gameplay/GameInstance.h"
 #include "Physics/PhysicsSystem.h"
 #include "TimerSystem.h"
+#include "Log.h"
 
 World world;
 
@@ -158,6 +159,10 @@ Actor* World::GetActorByNameAllowNull(std::string actorName)
 {
 	Actor* foundActor = nullptr;
 	foundActor = actorNameMap[actorName];
+	if (foundActor == nullptr)
+	{
+		Log("%s actor not found.");
+	}
 	return foundActor;
 }
 
