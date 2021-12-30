@@ -4,6 +4,7 @@
 #include <random>
 #include "Actors/Actor.h"
 #include "Camera.h"
+#include "Render/RenderTypes.h"
 
 namespace VMath
 {
@@ -279,6 +280,38 @@ namespace VMath
         XMStoreFloat4(&bob.Orientation, orientation);
 
         return bob;
+    }
+
+    BoundingOrientedBox CreateBoundingBox(Vertex* vertices, size_t verticesCount)
+    {
+        assert(verticesCount > 0);
+
+        float minX = vertices[0].pos.x;
+        float minY = vertices[0].pos.y;
+        float minZ = vertices[0].pos.z;
+
+        float maxX = minX;
+        float maxY = minY;
+        float maxZ = minZ;
+
+        for (size_t i = 0; i < verticesCount; i++)
+        {
+            float x = vertices[i].pos.x;
+            float y = vertices[i].pos.y;
+            float z = vertices[i].pos.z;
+
+            if (x > maxX) maxX = x;
+            if (x < minX) minX = x;
+
+            if (y > maxY) maxY = y;
+            if (y < minY) minY = y;
+
+            if (z > maxZ) maxZ = z;
+            if (z < minZ) minZ = z;
+        }
+
+        return BoundingOrientedBox(XMFLOAT3(0.f, 0.f, 0.f),
+            XMFLOAT3(maxX - minX, maxY - minY, maxZ - minZ), XMFLOAT4(0.f, 0.f, 0.f, 1.f));
     }
 
     float RandomRange(float min, float max)

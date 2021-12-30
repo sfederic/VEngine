@@ -6,6 +6,7 @@
 struct Actor;
 struct Transform;
 struct SpatialComponent;
+struct Vertex;
 
 using namespace DirectX;
 
@@ -53,6 +54,10 @@ namespace VMath
 	XMMATRIX GetBoundingBoxMatrix(BoundingOrientedBox& boundingBox, Actor* actor);
 	void UpdateBoundingBox(BoundingOrientedBox& boundingBox, Actor* actor);
 	BoundingOrientedBox GetUpdatedBoundingBox(SpatialComponent* sc);
+
+	//Engine's own function to create bounds because DirectXMath's one are fucking it up.
+	//Note: don't apply translation offset in Blender when exporting, else the bounds calc will be off center.
+	BoundingOrientedBox CreateBoundingBox(Vertex* vertices, size_t verticesCount);
 
 	float RandomRange(float min, float max);
 }
