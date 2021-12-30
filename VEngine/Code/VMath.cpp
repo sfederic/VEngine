@@ -103,6 +103,27 @@ namespace VMath
         return Q;
     }
 
+    XMVECTOR ForwardFromQuat(XMVECTOR rot)
+    {
+        auto m = XMMatrixRotationQuaternion(rot);
+        auto f = XMVector3Normalize(m.r[2]);
+        return f;
+    }
+
+    XMVECTOR RightFromQuat(XMVECTOR rot)
+    {
+        auto m = XMMatrixRotationQuaternion(rot);
+        auto r = XMVector3Normalize(m.r[0]);
+        return r;
+    }
+
+    XMVECTOR UpFromQuat(XMVECTOR rot)
+    {
+        auto m = XMMatrixRotationQuaternion(rot);
+        auto u = XMVector3Normalize(m.r[1]);
+        return u;
+    }
+
     void RotateTowardsCamera(Transform& transform)
     {
         const float posX = transform.position.x;

@@ -30,6 +30,14 @@ namespace VMath
 	//Builds a matrix to extract a quaternion rotation to return.
 	XMVECTOR LookAtRotation(XMVECTOR lookAtPoint, XMVECTOR currentPosition);
 
+	//Direction vector from quaternion rotation functions.
+	//@Todo: there's something wrong with parenting spatialcompnts and extracting directional vectors after rotations.
+	//For now they're working off of matrices, but below you can extract from the quat directly if needed.
+	//Ref:https://www.gamedev.net/forums/topic/56471-extracting-direction-vectors-from-quaternion/
+	XMVECTOR ForwardFromQuat(XMVECTOR rot);
+	XMVECTOR RightFromQuat(XMVECTOR rot);
+	XMVECTOR UpFromQuat(XMVECTOR rot);
+
 	//Rotates on the Y-axis
 	void RotateTowardsCamera(Transform& transform);
 
