@@ -27,7 +27,8 @@ namespace VMath
 	XMFLOAT3 PitchYawRollFromMatrix(XMMATRIX m);
 	XMFLOAT3 PitchYawRollFromQuaternion(XMFLOAT4 q);
 
-	void LookAtRotation(XMVECTOR lookAtPoint, XMMATRIX& m);
+	//Builds a matrix to extract a quaternion rotation to return.
+	XMVECTOR LookAtRotation(XMVECTOR lookAtPoint, XMVECTOR currentPosition);
 
 	//Rotates on the Y-axis
 	void RotateTowardsCamera(Transform& transform);

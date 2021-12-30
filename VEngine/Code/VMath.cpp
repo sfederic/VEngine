@@ -84,18 +84,23 @@ namespace VMath
         return XMFLOAT3(PitchYawRollFromMatrix(m));
     }
 
-    void LookAtRotation(XMVECTOR lookAtPoint, XMMATRIX& m)
+    XMVECTOR LookAtRotation(XMVECTOR lookAtPoint, XMVECTOR currentPosition)
     {
-        XMVECTOR forward = XMVectorSubtract(lookAtPoint, m.r[3]);
+        XMVECTOR forward = XMVectorSubtract(lookAtPoint, currentPosition);
         forward = XMVector3Normalize(forward);
 
         XMVECTOR right = XMVector3Cross(XMVectorUp(), forward);
         right = XMVector3Normalize(right);
 
         XMVECTOR up = XMVector3Normalize(XMVector3Cross(forward, right));
+        XMMATRIX m = {};
         m.r[0] = right;
         m.r[1] = up;
         m.r[2] = forward;
+        m.r[3] = currentPosition;
+
+        XMVECTOR Q = XMQuaternionRotationMatrix(m);
+        return Q;
     }
 
     void RotateTowardsCamera(Transform& transform)
