@@ -44,7 +44,10 @@ void InteractTrigger::Tick(float deltaTime)
 
 				interactWidget->SetText(interactText);
 
-				intuitionComponent->CreateIntuition(targetActorName);
+				if (intuitionComponent->addOnInteract)
+				{
+					intuitionComponent->CreateIntuition(targetActorName);
+				}
 
 				Actor* targetActor = world.GetActorByName(targetActorName);
 				GameUtils::SetActiveCameraTargetAndZoomIn(targetActor);
