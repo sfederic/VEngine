@@ -340,6 +340,13 @@ void Player::PrimaryAction()
 			else if (InteractCheck(ray.hitActor)) {}
 			else if (PickupCheck(ray.hitActor)) {}
 		}
+		else
+		{
+			if (isWeaponDrawn)
+			{
+				GameUtils::PlayAudio("sword_miss.wav");
+			}
+		}
 	}
 }
 
