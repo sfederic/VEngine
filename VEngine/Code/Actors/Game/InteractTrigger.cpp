@@ -52,8 +52,11 @@ void InteractTrigger::Tick(float deltaTime)
 					}
 				}
 
-				Actor* targetActor = world.GetActorByName(targetActorName);
-				GameUtils::SetActiveCameraTargetAndZoomIn(targetActor);
+				Actor* targetActor = world.GetActorByNameAllowNull(targetActorName);
+				if (targetActor)
+				{
+					GameUtils::SetActiveCameraTargetAndZoomIn(targetActor);
+				}
 			}
 			else
 			{
