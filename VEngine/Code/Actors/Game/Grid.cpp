@@ -89,7 +89,7 @@ void Grid::Awake()
                 hitPosVector.m128_f32[3] = 1.0f;
 
                 //set the y-pos for the node
-                node.worldPosition.y = hitPos.y + 0.45f;
+                node.worldPosition.y = hitPos.y + 0.4f;
 
                 instanceData.world.r[3] = hitPosVector;
 
