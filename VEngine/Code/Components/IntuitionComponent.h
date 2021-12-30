@@ -14,6 +14,9 @@ struct IntuitionComponent : Component
 	//The ConditionSystem function to search for when adding to player.
 	std::string condition;
 
+	//the argument to pass into the above condition function.
+	std::string conditionArg;
+
 	bool addOnInteract = false;
 	
 	IntuitionComponent();

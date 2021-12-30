@@ -4,6 +4,7 @@
 #include "UI/DialogueWidget.h"
 #include "Log.h"
 #include "Gameplay/GameUtils.h"
+#include "Gameplay/ConditionSystem.h"
 
 void DialogueComponent::Tick(float deltaTime)
 {
@@ -67,6 +68,14 @@ bool DialogueComponent::ShowTextAtActor()
     Actor* actor = world.GetActorByName(dataIt->second.actorName);
 
     GameUtils::SetActiveCameraTarget(actor);
+
+    //Check condition
+    std::string& conditionName = dataIt->second.conditionName;
+    if (!conditionName.empty())
+    {
+        auto conditonFunction = conditionSystem.FindCondition(conditionName);
+        conditonFunction(dataIt->second.conditionArg);
+    }
 
     auto dcs = actor->GetComponentsOfType<DialogueComponent>();
     for (auto* d : dcs)

@@ -26,7 +26,8 @@ void Dialogue::LoadFromFile()
 		std::string lineText;
 		std::string gotoText;
 		std::string actorText;
-		std::string intuitionText;
+		std::string conditionText;
+		std::string conditionArgText;
 		std::string text;
 
 		const int lineSize = 1024;
@@ -47,7 +48,10 @@ void Dialogue::LoadFromFile()
 		actorText.assign(line);
 
 		is.getline(line, lineSize);
-		intuitionText.assign(line);
+		conditionText.assign(line);
+
+		is.getline(line, lineSize);
+		conditionArgText.assign(line);
 
 		is.getline(line, lineSize);
 		text.assign(line);
@@ -65,7 +69,8 @@ void Dialogue::LoadFromFile()
 		newData.lineNumber = lineNumber;
 		newData.gotoLine = gotoLine;
 		newData.actorName = actorText;
-		newData.intuitionName = intuitionText;
+		newData.conditionName = conditionText;
+		newData.conditionArg = conditionArgText;
 		newData.text = text;
 
 		data[lineNumber] = newData;

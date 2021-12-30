@@ -17,15 +17,15 @@ const int lineColumn = 0;
 const int gotoColumn = 1;
 const int actorColumn = 2;
 const int conditionColumn = 3;
-const int textColumn = 4;
+const int conditionArgColumn = 4;
+const int textColumn = 5;
 
 DialogueDock::DialogueDock() : QDockWidget("Dialogue")
 {
 	//TREE WIDGET
 	dialogueTree = new QTreeWidget(); 
-	dialogueTree->setColumnCount(5);
-	dialogueTree->setHeaderLabels({ "Line", "Goto", "Actor", "Condition", "Text"});
-
+	dialogueTree->setColumnCount(6);
+	dialogueTree->setHeaderLabels({ "Line", "Goto", "Actor", "Condition", "CondArg", "Text"});
 
 	//BUTTONS
 	auto insertDialogueLineButton = new QPushButton("Insert Line");
@@ -133,12 +133,15 @@ void DialogueDock::SaveDialogueToFile()
 		auto actorComboBox = (QComboBox*)dialogueTree->itemWidget(*it, actorColumn);
 		auto conditionComboBox = (QComboBox*)dialogueTree->itemWidget(*it, conditionColumn);
 
+		auto conditionArgText = (*it)->text(conditionArgColumn);
+
 		auto text = (*it)->text(textColumn);
 
 		os << lineText.toStdString() << "\n";
 		os << gotoText.toStdString() << "\n";
 		os << actorComboBox->currentText().toStdString() << "\n";
 		os << conditionComboBox->currentText().toStdString() << "\n";
+		os << conditionArgText.toStdString() << "\n";
 		os << text.toStdString() << "\n";
 
 		it++;
@@ -169,6 +172,7 @@ void DialogueDock::LoadDialogueFile()
 		std::string gotoText;
 		std::string actorText;
 		std::string conditionText;
+		std::string conditionArgText;
 		std::string text;
 
 		char line[1024];
@@ -190,6 +194,9 @@ void DialogueDock::LoadDialogueFile()
 		conditionText.assign(line);
 
 		is.getline(line, 1024);
+		conditionArgText.assign(line);
+
+		is.getline(line, 1024);
 		text.assign(line);		
 		
 		//Populate widget items
@@ -198,6 +205,7 @@ void DialogueDock::LoadDialogueFile()
 
 		item->setText(lineColumn, QString::fromStdString(lineText));
 		item->setText(gotoColumn, QString::fromStdString(gotoText));
+		item->setText(conditionArgColumn, QString::fromStdString(conditionArgText));
 		item->setText(textColumn, QString::fromStdString(text));
 
 		{

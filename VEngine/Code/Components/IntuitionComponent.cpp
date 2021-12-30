@@ -52,7 +52,7 @@ bool IntuitionComponent::CreateIntuition(std::string actorAquiredFromName)
 		intuition.conditionFunc = conditionSystem.FindCondition(condition);
 		intuition.conditionFuncName = condition;
 
-		if (!intuition.conditionFunc())
+		if (!intuition.conditionFunc(conditionArg))
 		{
 			return false; //intuition not created
 		}

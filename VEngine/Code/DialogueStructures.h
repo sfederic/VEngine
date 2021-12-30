@@ -7,7 +7,8 @@ struct DialogueData
 	int lineNumber = 0;
 	int gotoLine = -1; //-1 denotes that the dialogue continues linearly
 	std::string actorName;
-	std::string intuitionName;
+	std::string conditionName;
+	std::string conditionArg;
 	std::string text;
 };
 

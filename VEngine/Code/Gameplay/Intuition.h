@@ -18,5 +18,5 @@ struct Intuition
 	int minuteAquired = 0;
 
 	//Function to call in order to add Intuition to Player.
-	std::function<bool()> conditionFunc;
+	std::function<bool(std::string)> conditionFunc;
 };
