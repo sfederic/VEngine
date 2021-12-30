@@ -48,7 +48,20 @@ bool DialogueComponent::NextLine()
         }
         else
         {
-            currentLine = dataIt->second.gotoLine;
+            //Hit goto line number if condition passes
+            std::string& conditionName = dataIt->second.conditionName;
+            if (!conditionName.empty())
+            {
+                auto conditionFunction = conditionSystem.FindCondition(conditionName);
+                if (conditionFunction(dataIt->second.conditionArg))
+                {
+                    currentLine = dataIt->second.gotoLine;
+                }
+                else
+                {
+                    currentLine++;
+                }
+            }
         }
     }
 
