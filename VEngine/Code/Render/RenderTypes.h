@@ -34,6 +34,8 @@ struct MeshData
 	std::vector<Vertex> vertices;
 	std::vector<indexDataType> indices;
 
+	XMFLOAT3 extents;
+
 	Skeleton skeleton;
 };
 
@@ -62,6 +64,8 @@ struct MeshDataProxy
 {
 	std::vector<Vertex>* vertices = nullptr;
 	std::vector<MeshData::indexDataType>* indices = nullptr;
+
+	XMFLOAT3* extents = nullptr;
 
 	Skeleton* skeleton = nullptr;
 

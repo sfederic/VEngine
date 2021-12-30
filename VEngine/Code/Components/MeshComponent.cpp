@@ -7,6 +7,7 @@
 #include "Editor/Editor.h"
 #include "Animation/AnimationStructures.h"
 #include "Physics/PhysicsSystem.h"
+#include "VMath.h"
 
 void MeshComponent::ResetMeshBuffers()
 {
@@ -65,12 +66,12 @@ void MeshComponent::Create()
 	//Material's create needs to be called here to deal with serialisation
 	material->Create();
 
-	//Import mesh (set up bounding box in here too so you don't need to re-create bounds)
+	//Import mesh
 	fbxLoader.Import(meshComponentData.filename.c_str(), meshDataProxy);
 
 	//Setup bounds
-	BoundingOrientedBox::CreateFromPoints(boundingBox, meshDataProxy->vertices->size(),
-		&meshDataProxy->vertices->at(0).pos, sizeof(Vertex));
+	boundingBox = BoundingOrientedBox(XMFLOAT3(0.f, 0.f, 0.f), *meshDataProxy->extents, 
+		XMFLOAT4(0.f, 0.f, 0.f, 1.f));
 
 	//Setup pipeline objects
 	auto psoIt = existingMeshBuffers.find(meshComponentData.filename);
