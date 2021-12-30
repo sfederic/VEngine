@@ -45,4 +45,6 @@ struct SpatialComponent : Component
 	XMVECTOR GetRightVectorV();
 	XMFLOAT3 GetUpVector();
 	XMVECTOR GetUpVectorV();
+
+	XMMATRIX GetTransformMatrix();
 };
