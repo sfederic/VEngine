@@ -23,6 +23,12 @@ Properties IntuitionComponent::GetProps()
 
 bool IntuitionComponent::CreateIntuition(std::string actorAquiredFromName)
 {
+	if (intuitionName.empty())
+	{
+		Log("%s Intuition name not set.", actorAquiredFromName.c_str());
+		return false;
+	}
+
 	auto intuitionIt = GameInstance::playerIntuitions.find(intuitionName);
 	if (intuitionIt != GameInstance::playerIntuitions.end())
 	{
