@@ -7,6 +7,9 @@
 
 using namespace DirectX;
 
+//@Todo: SpatialComponent isn't really working with both local and world transforms, neither is Actor.
+//Need to split the Get/Set functions up to include both.
+
 struct SpatialComponent : Component
 {
 	Transform transform;
