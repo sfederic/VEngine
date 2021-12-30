@@ -324,8 +324,8 @@ void Player::PrimaryAction()
 		}
 
 		Ray ray(this);
-		XMVECTOR meshForward = VMath::ForwardFromQuat(mesh->GetRotationV());
-		if (Raycast(ray, GetPositionVector(), meshForward, 1.5f))
+		auto forward = mesh->GetForwardVectorV();
+		if (Raycast(ray, GetPositionVector(), forward, 1.5f))
 		{
 			Log("Player interact: %s", ray.hitActor->name.c_str());
 
