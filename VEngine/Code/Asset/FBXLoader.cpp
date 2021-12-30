@@ -33,7 +33,7 @@ bool FBXLoader::Import(std::string filename, MeshDataProxy* meshData)
 		meshData->vertices = &existingMeshData->vertices;
 		meshData->indices = &existingMeshData->indices;
 		meshData->skeleton = &existingMeshData->skeleton;
-		meshData->extents = &existingMeshData->extents;
+		meshData->boundingBox = &existingMeshData->boudingBox;
 		return true;
 	}
 	else
@@ -81,14 +81,14 @@ bool FBXLoader::Import(std::string filename, MeshDataProxy* meshData)
 	animEvaluator = nullptr;
 
 	MeshData* newMeshData = existingMeshDataMap.find(filename)->second;
-	newMeshData->extents = VMath::CreateBoundingBox(newMeshData->vertices.data(),
-		newMeshData->vertices.size()).Extents;
+	BoundingBox::CreateFromPoints(newMeshData->boudingBox, newMeshData->vertices.size(),
+		&newMeshData->vertices.at(0).pos, sizeof(Vertex));
 
 	//Set proxy data for new mesh daata
 	meshData->vertices = &newMeshData->vertices;
 	meshData->indices = &newMeshData->indices;
 	meshData->skeleton = &newMeshData->skeleton;
-	meshData->extents = &newMeshData->extents;
+	meshData->boundingBox = &newMeshData->boudingBox;
 
 	return true;
 }

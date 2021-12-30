@@ -55,8 +55,8 @@ namespace VMath
 	void UpdateBoundingBox(BoundingOrientedBox& boundingBox, Actor* actor);
 	BoundingOrientedBox GetUpdatedBoundingBox(SpatialComponent* sc);
 
-	//Engine's own function to create bounds because DirectXMath's one are fucking it up.
-	//Note: don't apply translation offset in Blender when exporting, else the bounds calc will be off center.
+	//Note: don't apply translation offset in Blender when exporting and using this,
+	//else the bounds calc will be off center.
 	BoundingOrientedBox CreateBoundingBox(Vertex* vertices, size_t verticesCount);
 
 	float RandomRange(float min, float max);

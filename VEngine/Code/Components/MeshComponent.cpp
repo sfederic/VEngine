@@ -70,8 +70,7 @@ void MeshComponent::Create()
 	fbxLoader.Import(meshComponentData.filename.c_str(), meshDataProxy);
 
 	//Setup bounds
-	boundingBox = BoundingOrientedBox(XMFLOAT3(0.f, 0.f, 0.f), *meshDataProxy->extents, 
-		XMFLOAT4(0.f, 0.f, 0.f, 1.f));
+	BoundingOrientedBox::CreateFromBoundingBox(boundingBox, *meshDataProxy->boundingBox);
 
 	//Setup pipeline objects
 	auto psoIt = existingMeshBuffers.find(meshComponentData.filename);

@@ -34,7 +34,8 @@ struct MeshData
 	std::vector<Vertex> vertices;
 	std::vector<indexDataType> indices;
 
-	XMFLOAT3 extents;
+	//Base extents and offset will be the same for each mesh, fine to cache here.
+	BoundingBox boudingBox;
 
 	Skeleton skeleton;
 };
@@ -65,7 +66,7 @@ struct MeshDataProxy
 	std::vector<Vertex>* vertices = nullptr;
 	std::vector<MeshData::indexDataType>* indices = nullptr;
 
-	XMFLOAT3* extents = nullptr;
+	BoundingBox* boundingBox = nullptr;
 
 	Skeleton* skeleton = nullptr;
 
