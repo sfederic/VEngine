@@ -46,7 +46,10 @@ void InteractTrigger::Tick(float deltaTime)
 
 				if (intuitionComponent->addOnInteract)
 				{
-					intuitionComponent->CreateIntuition(targetActorName);
+					if (intuitionComponent->CreateIntuition(targetActorName))
+					{
+						interactWidget->SetText(interactKnown);
+					}
 				}
 
 				Actor* targetActor = world.GetActorByName(targetActorName);
@@ -74,6 +77,7 @@ Properties InteractTrigger::GetProps()
 	auto props = Actor::GetProps();
 	props.Add("Interact Text", &interactText);
 	props.AddProp(overlapText);
+	props.AddProp(interactKnown);
 	props.AddProp(targetActorName);
 	return props;
 }
