@@ -233,7 +233,9 @@ namespace VMath
     {
         UpdateBoundingBox(boundingBox, actor);
         
-        XMMATRIX boxBoundsMatrix = XMMatrixAffineTransformation(XMLoadFloat3(&boundingBox.Extents),
+        XMFLOAT3 extents = XMFLOAT3(boundingBox.Extents.x * 2.f, boundingBox.Extents.y * 2.f,
+            boundingBox.Extents.z * 2.f);
+        XMMATRIX boxBoundsMatrix = XMMatrixAffineTransformation(XMLoadFloat3(&extents),
             XMVectorSet(0.f, 0.f, 0.f, 1.f),
             XMLoadFloat4(&boundingBox.Orientation),
             XMLoadFloat3(&boundingBox.Center));
@@ -311,7 +313,8 @@ namespace VMath
         }
 
         return BoundingOrientedBox(XMFLOAT3(0.f, 0.f, 0.f),
-            XMFLOAT3(maxX - minX, maxY - minY, maxZ - minZ), XMFLOAT4(0.f, 0.f, 0.f, 1.f));
+            XMFLOAT3((maxX - minX) / 2.f, (maxY - minY) / 2.f, (maxZ - minZ) / 2.f),
+            XMFLOAT4(0.f, 0.f, 0.f, 1.f));
     }
 
     float RandomRange(float min, float max)
