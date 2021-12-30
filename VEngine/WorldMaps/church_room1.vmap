@@ -562,7 +562,7 @@ EntranceTrigger
  Position
 0 0 3
  Rotation
--0 0 -0 1
+0 1 0 1.56958e-07
  Scale
 1 1 1
 Entrance Active

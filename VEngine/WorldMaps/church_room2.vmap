@@ -52,13 +52,13 @@ Condition
 Description
 
 Destruct
-1
+0
 Grid Obstacle
 0
 Health
 0
 Interact
-1
+0
 Interact Text
 
 Intuition Name
@@ -101,7 +101,7 @@ AudioActor
 Player
 1
  Position
-1 0.05 2
+3 0.0500009 3
  Rotation
 -0 0 -0 1
  Scale
@@ -109,7 +109,7 @@ Player
 Casts Shadow
 1
 FOV
-60
+56.465
 Far Z
 1000
 File
