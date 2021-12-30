@@ -39,7 +39,7 @@ XMMATRIX CameraComponent::GetViewMatrix()
 			focusPoint = targetActor->GetPositionVector();
 		}
 
-		view = XMMatrixLookAtLH(transform.world.r[3], focusPoint, VMath::XMVectorUp());
+		view = XMMatrixLookAtLH(position, focusPoint, VMath::XMVectorUp());
 	}
 	else
 	{
@@ -67,13 +67,15 @@ XMMATRIX CameraComponent::GetProjectionMatrix()
 void CameraComponent::Pitch(float angle)
 {
 	XMMATRIX r = XMMatrixRotationAxis(GetRightVectorV(), angle);
-	transform.world *= r;
+	XMVECTOR q = XMQuaternionMultiply(GetRotationV(), XMQuaternionRotationMatrix(r));
+	SetRotation(q);
 }
 
 void CameraComponent::RotateY(float angle)
 {
 	XMMATRIX r = XMMatrixRotationY(angle);
-	transform.world *= r;
+	XMVECTOR q = XMQuaternionMultiply(GetRotationV(), XMQuaternionRotationMatrix(r));
+	SetRotation(q);
 }
 
 void CameraComponent::MouseMove(int x, int y)
