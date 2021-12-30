@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Components/MeshComponent.h"
+#include "Components/EmptyComponent.h"
 #include "Components/IntuitionComponent.h"
 #include "Camera.h"
 #include "Input.h"
@@ -31,8 +32,11 @@ Player::Player()
 	nextPos = XMVectorZero();
 	nextRot = XMVectorZero();
 
+	//Empty as the root to be able to rotate the mesh towards movement input direction.
+	rootComponent = EmptyComponent::system.Add(this);
+
 	mesh = MeshComponent::system.Add(this, MeshComponent("unit_test.fbx", "wall.png"));
-	rootComponent = mesh;
+	rootComponent->AddChild(mesh);
 
 	camera = CameraComponent::system.Add(this, CameraComponent(XMFLOAT3(1.75f, 2.f, -3.5f), false));
 
@@ -214,6 +218,7 @@ void Player::MovementInput(float deltaTime)
 			CheckNextMoveNode(previousPos);
 		}
 
+		//Old raycast check for movement blocking (current check uses grid nodes)
 		/*if (!XMVector4Equal(previousPos, nextPos))
 		{
 			Ray ray(this);
@@ -319,8 +324,8 @@ void Player::PrimaryAction()
 		}
 
 		Ray ray(this);
-		auto forward = GetForwardVector();
-		if (Raycast(ray, GetPositionVector(), GetForwardVectorV(), 1.5f))
+		XMVECTOR meshForward = VMath::ForwardFromQuat(mesh->GetRotationV());
+		if (Raycast(ray, GetPositionVector(), meshForward, 1.5f))
 		{
 			Log("Player interact: %s", ray.hitActor->name.c_str());
 
@@ -375,6 +380,10 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 {
 	int nextXIndex = (int)std::round(nextPos.m128_f32[0]);
 	int nextYIndex = (int)std::round(nextPos.m128_f32[2]);
+
+	//Rotate player mesh towards next direction
+	XMVECTOR lookAtRot = VMath::LookAtRotation(nextPos, previousPos);
+	mesh->SetRotation(lookAtRot);
 
 	auto grid = GameUtils::GetGrid();
 
