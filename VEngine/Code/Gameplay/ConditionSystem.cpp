@@ -1,17 +1,22 @@
 #include "ConditionSystem.h"
 #include <cassert>
+#include "GameInstance.h"
 
 ConditionSystem conditionSystem;
 
-//Global Condition functions
-bool TestConditionFunction(std::string arg)
+//CONDITION FUNCTIONS
+
+bool IntuitionCheck(std::string arg)
 {
-	return true;
+	auto intuitionIt = GameInstance::playerIntuitions.find(arg);
+	return intuitionIt != GameInstance::playerIntuitions.end();
 }
+
+//END CONDITION FUNCTIONS
 
 ConditionSystem::ConditionSystem()
 {
-	ADD_CONDITION(TestConditionFunction);
+	ADD_CONDITION(IntuitionCheck);
 }
 
 void ConditionSystem::AddCondition(std::string functionName, ConditionFunction conditionFunction)
