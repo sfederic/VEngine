@@ -39,7 +39,8 @@ XMMATRIX CameraComponent::GetViewMatrix()
 			focusPoint = targetActor->GetPositionVector();
 		}
 
-		view = XMMatrixLookAtLH(position, focusPoint, VMath::XMVectorUp());
+		//using direct position here from transform
+		view = XMMatrixLookAtLH(transform.world.r[3], focusPoint, VMath::XMVectorUp());
 	}
 	else
 	{
