@@ -17,6 +17,7 @@ Properties IntuitionComponent::GetProps()
 	props.Add("Intuition Name", &intuitionName);
 	props.Add("Description", &intuitionDescription);
 	props.Add("Condition", &condition);
+	props.Add("Condition Value", &conditionArg);
 	props.Add("Add On Interact", &addOnInteract);
 	return props;
 }
