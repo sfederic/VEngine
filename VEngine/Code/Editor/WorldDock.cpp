@@ -25,6 +25,9 @@ WorldDock::WorldDock() : QDockWidget("World")
 	actorTreeWidget->setColumnCount(1);
 	actorTreeWidget->setHeaderLabels(QStringList("Actors"));
 	actorTreeWidget->setSelectionMode(QAbstractItemView::SelectionMode::MultiSelection);
+	//turn on sorting (click on column header to sort)
+	actorTreeWidget->setSortingEnabled(true);
+	actorTreeWidget->sortByColumn(0);
 
 	actorTreeWidget->setContextMenuPolicy(Qt::CustomContextMenu);
 	connect(actorTreeWidget, &QTreeWidget::customContextMenuRequested, this, &WorldDock::ActorListContextMenu);
