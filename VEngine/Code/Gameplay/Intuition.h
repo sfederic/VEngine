@@ -1,6 +1,5 @@
 #pragma once
-#include <string>
-#include <functional>
+#include "ConditionSystem.h"
 
 //Base for all player intuitions in-game.
 struct Intuition
@@ -18,5 +17,5 @@ struct Intuition
 	int minuteAquired = 0;
 
 	//Function to call in order to add Intuition to Player.
-	std::function<bool(std::string)> conditionFunc;
+	ConditionFunction conditionFunc;
 };
