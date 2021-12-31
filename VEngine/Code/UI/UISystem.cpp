@@ -4,6 +4,7 @@
 #include "Debug.h"
 #include "UI/Widget.h"
 #include "UI/IntuitionGainedWidget.h"
+#include "UI/IntuitionRecalledWidget.h"
 #include "Editor/Editor.h"
 #include "Core.h"
 
@@ -89,6 +90,7 @@ void UISystem::Reset()
 void UISystem::CreateGlobalWidgets()
 {
 	intuitionGainedWidget = CreateWidget<IntuitionGainedWidget>();
+	intuitionRecalledWidget = CreateWidget<IntuitionRecalledWidget>();
 }
 
 void UISystem::DestroyWidget(Widget* widget)
