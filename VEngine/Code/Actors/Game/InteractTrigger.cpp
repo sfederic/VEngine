@@ -42,6 +42,8 @@ void InteractTrigger::Tick(float deltaTime)
 			{
 				isBeingInteractedWith = true;
 
+				GameUtils::GetPlayer()->inInteraction = true;
+
 				interactWidget->SetText(interactText);
 
 				if (intuitionComponent->addOnInteract)
@@ -61,6 +63,8 @@ void InteractTrigger::Tick(float deltaTime)
 			else
 			{
 				isBeingInteractedWith = false;
+
+				GameUtils::GetPlayer()->inInteraction = false;
 
 				interactWidget->SetText(overlapText);
 				interactWidget->RemoveFromViewport();
