@@ -36,7 +36,7 @@ UvScale
 1 1
 next
 GridActor
-1
+2
  Position
 4 0 4
  Rotation
@@ -94,6 +94,63 @@ activeEndHour
 alwaysActive
 1
 next
+ Position
+4 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+1
+Grid Obstacle
+1
+Health
+0
+Interact
+1
+Interact Text
+An empty vase.
+Intuition Name
+
+Mesh
+vase.fbx
+Name
+GridActor1
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+floor.jpg
+UID
+1689631026
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+next
 Unit
 0
 Pickup
@@ -124,7 +181,7 @@ next
 Player
 1
  Position
-2 0.0599993 2
+3 0 2
  Rotation
 0 0.707107 0 0.707107
  Scale
@@ -132,7 +189,7 @@ Player
 Casts Shadow
 1
 FOV
-59.9365
+58.4577
 Far Z
 1000
 File
@@ -413,7 +470,7 @@ UvScale
 1 1
 next
  Position
-3.95 0.35 3
+3.95 0.35 1
  Rotation
 0 0.819152 0 0.573577
  Scale
@@ -421,7 +478,7 @@ next
 Casts Shadow
 1
 Grid Obstacle
-0
+1
 Mesh
 book.fbx
 Name
@@ -514,7 +571,7 @@ next
 Casts Shadow
 1
 Grid Obstacle
-0
+1
 Mesh
 book.fbx
 Name
@@ -537,7 +594,7 @@ UvScale
 1 1
 next
  Position
-3.95 0.35 0.9
+3.95 0.35 2.9
  Rotation
 0 0.819152 0 0.573577
  Scale
@@ -545,7 +602,7 @@ next
 Casts Shadow
 1
 Grid Obstacle
-0
+1
 Mesh
 book.fbx
 Name
@@ -683,7 +740,7 @@ Billboard
 InteractTrigger
 3
  Position
-3 0 3
+3 0 1
  Rotation
 -0 0 -0 1
  Scale
@@ -695,13 +752,13 @@ Condition
 Condition Value
 
 Description
-Aden knows about the pyre that is lit at The Bestowed's funeral
+
 Extents
 0.9 0.9 0.9
 Interact Text
 "The Bestowed, at death, shall have their body kindled, that their soul reaches the Goddess burning and alight"
 Intuition Name
-The Pyre
+
 Name
 book1trigger
 UID
@@ -726,11 +783,11 @@ Condition
 Condition Value
 
 Description
-
+Funeral pyres for The Bestowed must be lit with a specific flintawse
 Extents
 0.9 0.9 0.9
 Interact Text
-"The Bestowed, at death, shall have their body kindled, that their soul reaches the Goddess burning and alight"
+"To light the pyre, the flint used must be blessed and of the ore from beneath the isle..."
 Intuition Name
 Flint
 Name
@@ -745,7 +802,7 @@ targetActorName
 book2
 next
  Position
-3 0 1
+3 0 3
  Rotation
 -0 0 -0 1
  Scale
@@ -761,7 +818,7 @@ Aden knows about the pyre that is lit at The Bestowed's funeral
 Extents
 0.9 0.9 0.9
 Interact Text
-Seems Aden can't figure out how to light the pyre.
+Aden reads the pages on lighting the pyre, but can't figure out HOW it's lit.
 Intuition Name
 The Pyre
 Name
@@ -769,7 +826,7 @@ book3trigger
 UID
 162837439
 interactKnown
-"The Bestowed, at death, shall have their body kindled, that their soul reaches the Goddess burning and alight"
+USe the flint to blah blah
 overlapText
 Examine Book
 targetActorName
