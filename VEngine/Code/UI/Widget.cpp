@@ -4,6 +4,7 @@
 #include "Render/Renderer.h"
 #include "Editor/Editor.h"
 #include "Render/SpriteSystem.h"
+#include "TimerSystem.h"
 
 void Widget::Draw()
 {
@@ -13,9 +14,14 @@ void Widget::Start()
 {
 }
 
-void Widget::AddToViewport()
+void Widget::AddToViewport(float removeTimer)
 {
 	uiSystem.AddWidget(this);
+
+	if (removeTimer > 0.f)
+	{
+		timerSystem.SetTimer(removeTimer, std::bind(&Widget::RemoveFromViewport, this));
+	}
 }
 
 void Widget::RemoveFromViewport()

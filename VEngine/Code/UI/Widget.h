@@ -75,7 +75,7 @@ struct Widget
 	virtual void Draw();
 	virtual void Start();
 
-	void AddToViewport();
+	void AddToViewport(float removeTimer = 0.f);
 	void RemoveFromViewport();
 	void GetScreenSpaceCoords(int& sx, int& sy);
 
