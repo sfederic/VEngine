@@ -210,6 +210,7 @@
     <ClCompile Include="Code\Actors\Game\TitleScreenActor.cpp" />
     <ClCompile Include="Code\UI\IntuitionTransferWidget.cpp" />
     <ClCompile Include="Code\UI\IntuitionGainedWidget.cpp" />
+    <ClCompile Include="Code\UI\IntuitionRecalledWidget.cpp" />
     <ClInclude Include="Code\Editor\PropertyWidgets\ActorWidget.h" />
     <ClInclude Include="Code\Editor\ActorTreeWidget.h" />
     <ClInclude Include="Code\Gameplay\BattleSystem.h" />
@@ -419,6 +420,7 @@
     <ClInclude Include="Code\Actors\Game\TitleScreenActor.h" />
     <ClInclude Include="Code\UI\IntuitionTransferWidget.h" />
     <ClInclude Include="Code\UI\IntuitionGainedWidget.h" />
+    <ClInclude Include="Code\UI\IntuitionRecalledWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
