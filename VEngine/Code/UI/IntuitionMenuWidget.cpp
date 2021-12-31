@@ -6,21 +6,21 @@
 
 void IntuitionMenuWidget::Draw()
 {
-	Layout layout = PercentAlignLayout(0.25f, 0.25f, 0.75f, 0.75f);
-	FillRect(layout);
+	Layout layout = PercentAlignLayout(0.1f, 0.1f, 0.9f, 0.9f);
+	FillRect(layout, {0.5f, 0.5f, 0.5f, 0.75f});
 
 	//Set text rect to begining of layoutrect, then increment in forloop
 	Layout textLayout = layout;
-	textLayout.rect.bottom = textLayout.rect.top;
+	textLayout.PushToTop();
 
 	for (auto& intuitionPair : GameInstance::playerIntuitions)
 	{
 		Intuition& intuition = intuitionPair.second;
 
+		textLayout.AddVerticalSpace(30.f);
 		Text(VString::stows(intuition.name), textLayout);
-		textLayout.AddVerticalSpace(30.f);
 
-		Text(VString::stows(intuition.description), textLayout);
 		textLayout.AddVerticalSpace(30.f);
+		Text(VString::stows(intuition.description), textLayout);
 	}
 }
