@@ -578,8 +578,6 @@ bool Player::DestructibleCheck(Actor* hitActor)
 		auto gridActor = dynamic_cast<GridActor*>(hitActor);
 		if (gridActor)
 		{
-			battleSystem.StartBattle();
-			ExpendActionPoints(1);
 			gridActor->InflictDamage(1);
 			GameUtils::PlayAudio("sword_hit.wav");
 			return true;
