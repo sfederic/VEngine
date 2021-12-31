@@ -4,7 +4,7 @@
 
 void IntuitionGainedWidget::Draw()
 {
-	Layout layout = AlignLayout(200.f, 50.f, Align::Top);
+	Layout layout = PercentAlignLayout(0.1f, 0.35f, 0.9f, 0.5f);
 
 	FillRect(layout);
 	Text(L"Intuition Gained", layout);
