@@ -351,6 +351,8 @@ void Player::PrimaryAction()
 
 void Player::ToggleIntuitionMenu()
 {
+	if (isWeaponDrawn) return;
+
 	if (Input::GetKeyUp(Keys::Enter))
 	{
 		intuitionWidgetToggle = !intuitionWidgetToggle;
