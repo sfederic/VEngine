@@ -32,6 +32,7 @@ struct GridActor : Actor
 	bool isInteractable = true;
 
 	std::string interactText;
+	std::string interactKnownText;
 
 	GridActor();
 	virtual void Start() override;

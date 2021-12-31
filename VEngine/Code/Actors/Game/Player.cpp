@@ -547,7 +547,10 @@ bool Player::InteractCheck(Actor* hitActor)
 				auto intuition = gridActor->intuition;
 				if (intuition->addOnInteract)
 				{
-					intuition->CreateIntuition(gridActor->name);
+					if (!intuition->CreateIntuition(gridActor->name))
+					{
+						interactWidget->interactText = VString::stows(gridActor->interactKnownText);
+					}
 				}
 
 				return true;

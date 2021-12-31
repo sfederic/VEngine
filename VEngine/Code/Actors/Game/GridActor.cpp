@@ -48,6 +48,7 @@ Properties GridActor::GetProps()
 	props.Add("Health", &health);
 	props.Add("Interact", &isInteractable);
 	props.Add("Interact Text", &interactText);
+	props.AddProp(interactKnownText);
 	props.Add("Obstacle", &isGridObstacle);
 	return props;
 }
