@@ -329,12 +329,7 @@ void Player::PrimaryAction()
 		{
 			Log("Player interact: %s", ray.hitActor->name.c_str());
 
-			if (battleSystem.isBattleActive)
-			{
-				DestructibleCheck(ray.hitActor);
-				return;
-			}
-
+			if (DestructibleCheck(ray.hitActor)) { return; }
 			if (DialogueCheck(ray.hitActor)) {}
 			else if (QuickTalkCheck(ray.hitActor)) {}
 			else if (InteractCheck(ray.hitActor)) {}
