@@ -6,6 +6,7 @@
 #include "Gameplay/ConditionSystem.h"
 #include "TimerSystem.h"
 #include "UI/IntuitionGainedWidget.h"
+#include "UI/UISystem.h"
 
 IntuitionComponent::IntuitionComponent()
 {
@@ -63,14 +64,12 @@ bool IntuitionComponent::CreateIntuition(std::string actorAquiredFromName)
 	GameInstance::playerIntuitions.emplace(intuition.name, intuition);
 	Log("%s Intuition created.", intuition.name.c_str());
 
-	auto intuitionGainedWidget = CreateWidget<IntuitionGainedWidget>();
-	intuitionGainedWidget->intuitionToDisplay = &GameInstance::playerIntuitions[intuition.name];
-
-	intuitionGainedWidget->AddToViewport();
+	uiSystem.intuitionGainedWidget->intuitionToDisplay = &GameInstance::playerIntuitions[intuition.name];
+	uiSystem.intuitionGainedWidget->AddToViewport();
 
 	GameUtils::PlayAudio("purchase.wav");
 
-	timerSystem.SetTimer(3.0f, std::bind(&IntuitionGainedWidget::DestroyAndRemove, intuitionGainedWidget));
+	timerSystem.SetTimer(3.0f, std::bind(&IntuitionGainedWidget::RemoveFromViewport, uiSystem.intuitionGainedWidget));
 
 	return true; //intuition created
 }
