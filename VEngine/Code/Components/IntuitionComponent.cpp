@@ -65,11 +65,9 @@ bool IntuitionComponent::CreateIntuition(std::string actorAquiredFromName)
 	Log("%s Intuition created.", intuition.name.c_str());
 
 	uiSystem.intuitionGainedWidget->intuitionToDisplay = &GameInstance::playerIntuitions[intuition.name];
-	uiSystem.intuitionGainedWidget->AddToViewport();
+	uiSystem.intuitionGainedWidget->AddToViewport(3.5f);
 
 	GameUtils::PlayAudio("purchase.wav");
-
-	timerSystem.SetTimer(3.0f, std::bind(&IntuitionGainedWidget::RemoveFromViewport, uiSystem.intuitionGainedWidget));
 
 	return true; //intuition created
 }
