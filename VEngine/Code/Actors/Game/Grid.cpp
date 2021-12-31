@@ -74,6 +74,8 @@ void Grid::Awake()
             ray.AddActorsToIgnore(unitActors);
             auto pickups = world.GetAllActorsOfTypeAsActor<Pickup>();
             ray.AddActorsToIgnore(pickups);
+            auto gridActors = world.GetAllActorsOfTypeAsActor<GridActor>();
+            ray.AddActorsToIgnore(gridActors);
 
             //raycast against the world to set node position
             if (Raycast(ray, rayOrigin, -VMath::XMVectorUp(), 20.0f))
