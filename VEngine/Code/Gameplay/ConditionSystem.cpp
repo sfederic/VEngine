@@ -2,6 +2,8 @@
 #include <cassert>
 #include "GameInstance.h"
 #include "GameUtils.h"
+#include "UI/UISystem.h"
+#include "UI/IntuitionRecalledWidget.h"
 
 ConditionSystem conditionSystem;
 
@@ -12,6 +14,8 @@ bool IntuitionCheck(std::string arg)
 	auto intuitionIt = GameInstance::playerIntuitions.find(arg);
 	if (intuitionIt != GameInstance::playerIntuitions.end())
 	{
+		uiSystem.intuitionRecalledWidget->recalledIntuition = &intuitionIt->second;
+		uiSystem.intuitionRecalledWidget->AddToViewport(4.0f);
 		GameUtils::PlayAudio("intuition_check_success.wav");
 		return true;
 	}
