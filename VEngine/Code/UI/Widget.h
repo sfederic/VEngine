@@ -32,14 +32,14 @@ struct Layout
 		rect.right += spacing;
 	}
 
-	inline void PushToLeft()
+	inline void PushToLeft(float spacing = 0.f)
 	{
-		rect.right = rect.left;
+		rect.right = rect.left + spacing;
 	}
 
-	inline void PushToTop()
+	inline void PushToTop(float spacing = 0.f)
 	{
-		rect.bottom = rect.top;
+		rect.bottom = rect.top + spacing;
 	}
 };
 
