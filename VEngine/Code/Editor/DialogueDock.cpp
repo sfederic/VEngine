@@ -117,7 +117,7 @@ void DialogueDock::DeleteLine()
 void DialogueDock::SaveDialogueToFile()
 {
 	QFileDialog saveDialog;
-	QString saveName = saveDialog.getSaveFileName(this, "Save Dialogue", "Dialogues/", ".dialog");
+	QString saveName = saveDialog.getSaveFileName(this, "Save Dialogue", "Dialogues/");
 	if (saveName.isEmpty()) return;
 
 	std::ofstream os;
