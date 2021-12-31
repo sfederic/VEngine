@@ -96,12 +96,6 @@ void Player::Tick(float deltaTime)
 
 	dialogueComponent->SetPosition(GetHomogeneousPositionVector());
 
-	//End turn input
-	if (battleSystem.isBattleActive && Input::GetKeyUp(Keys::Enter))
-	{
-		battleSystem.MoveToNextTurn();
-	}
-
 	if (battleSystem.isBattleActive)
 	{
 		actionBarWidget->AddToViewport();
@@ -302,6 +296,16 @@ void Player::ToggleBattleGrid()
 
 void Player::PrimaryAction()
 {
+	//End turn input
+	if (isPlayerTurn)
+	{
+		if (battleSystem.isBattleActive && Input::GetKeyUp(Keys::Enter))
+		{
+			battleSystem.MoveToNextTurn();
+			return;
+		}
+	}
+
 	//Guard
 	if (battleSystem.isBattleActive && !isPlayerTurn)
 	{
