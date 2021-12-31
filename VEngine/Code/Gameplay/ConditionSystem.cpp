@@ -1,6 +1,7 @@
 #include "ConditionSystem.h"
 #include <cassert>
 #include "GameInstance.h"
+#include "GameUtils.h"
 
 ConditionSystem conditionSystem;
 
@@ -9,7 +10,13 @@ ConditionSystem conditionSystem;
 bool IntuitionCheck(std::string arg)
 {
 	auto intuitionIt = GameInstance::playerIntuitions.find(arg);
-	return intuitionIt != GameInstance::playerIntuitions.end();
+	if (intuitionIt != GameInstance::playerIntuitions.end())
+	{
+		GameUtils::PlayAudio("intuition_check_success.wav");
+		return true;
+	}
+
+	return false;
 }
 
 //END CONDITION FUNCTIONS
