@@ -16,7 +16,9 @@ bool IntuitionCheck(std::string arg)
 	{
 		uiSystem.intuitionRecalledWidget->recalledIntuition = &intuitionIt->second;
 		uiSystem.intuitionRecalledWidget->AddToViewport(4.0f);
+
 		GameUtils::PlayAudio("intuition_check_success.wav");
+
 		return true;
 	}
 

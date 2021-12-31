@@ -6,8 +6,9 @@ void IntuitionRecalledWidget::Draw()
 {
 	if (recalledIntuition)
 	{
-		Layout layout = PercentAlignLayout(0.2f, 0.1f, 0.8f, 0.4f);
+		Layout layout = PercentAlignLayout(0.1f, 0.5f, 0.9f, 0.9f);
 
+		FillRect(layout);
 		Text(L"Intuition Recalled", layout);
 
 		layout.AddVerticalSpace(30.f);
