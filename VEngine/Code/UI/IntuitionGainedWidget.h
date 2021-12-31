@@ -9,5 +9,4 @@ struct IntuitionGainedWidget : Widget
 	Intuition* intuitionToDisplay = nullptr;
 
 	virtual void Draw() override;
-	void DestroyAndRemove();
 };
