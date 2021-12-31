@@ -3,6 +3,7 @@
 #include <dxgi1_6.h>
 #include "Debug.h"
 #include "UI/Widget.h"
+#include "UI/IntuitionGainedWidget.h"
 #include "Editor/Editor.h"
 #include "Core.h"
 
@@ -42,6 +43,8 @@ void UISystem::Init(void* swapchain)
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.1f, 1.0f, 0.4f, 1.0f), &debugBrushText));
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.5f, 0.5f, 0.5f, 1.0f), &brushShapes));
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.5f, 0.5f, 0.5f, 0.5f), &brushShapesAlpha));
+
+	CreateGlobalWidgets();
 }
 
 void UISystem::BeginDraw()
@@ -77,6 +80,11 @@ void UISystem::Reset()
 
 	widgets.clear();
 	widgetsInViewport.clear();
+}
+
+void UISystem::CreateGlobalWidgets()
+{
+	intuitionGainedWidget = CreateWidget<IntuitionGainedWidget>();
 }
 
 void UISystem::DestroyWidget(Widget* widget)

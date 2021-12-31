@@ -4,6 +4,7 @@
 #include <vector>
 
 struct Widget;
+struct IntuitionGainedWidget;
 
 namespace Colours
 {
@@ -13,6 +14,9 @@ namespace Colours
 
 struct UISystem
 {
+	//Global widgets
+	IntuitionGainedWidget* intuitionGainedWidget = nullptr;
+
 	//Every widget added in-game
 	std::vector<Widget*> widgets;
 
@@ -38,7 +42,10 @@ struct UISystem
 	void AddWidget(Widget* widgetToAdd);
 	void RemoveWidget(Widget* widgetToRemove);
 	void Reset();
-	
+
+	//Create all global widgets once-off, contained in UISystem for use during the entire game's run.
+	void CreateGlobalWidgets();
+
 	template <typename T>
 	T* CreateWidget()
 	{
