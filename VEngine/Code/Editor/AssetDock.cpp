@@ -57,6 +57,7 @@ AssetDock::AssetDock() : QDockWidget("Assets")
     assetTreeView->setModel(fileSystemModel);
     assetTreeView->setRootIndex(fileSystemModel->index(QDir::currentPath()));
     assetTreeView->setMaximumWidth(250);
+    assetTreeView->setSortingEnabled(true);
     connect(assetTreeView, &QTreeView::clicked, this, &AssetDock::AssetFolderClicked);
 
     //Hide all columns except for 'Name' (Other columns mirror Win32 usuals. Date, Type, etc.)
