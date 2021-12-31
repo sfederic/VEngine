@@ -50,7 +50,11 @@ void InteractTrigger::Tick(float deltaTime)
 				{
 					if (intuitionComponent->CreateIntuition(targetActorName))
 					{
-						interactWidget->SetText(interactKnown);
+						//Bit of a shit check on whether to use interact or known text
+						if (!interactKnown.empty())
+						{
+							interactWidget->SetText(interactKnown);
+						}
 					}
 				}
 
