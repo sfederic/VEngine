@@ -59,7 +59,10 @@ bool DialogueComponent::NextLine()
                 }
                 else
                 {
-                    currentLine++;
+                    //Go to end of dialogue
+                    previousActiveDialogueWidget->RemoveFromViewport();
+                    currentLine = 0;
+                    return false;
                 }
             }
         }
@@ -74,7 +77,7 @@ bool DialogueComponent::ShowTextAtActor()
     auto dataIt = dialogue.data.find(currentLine);
     if (dataIt == dialogue.data.end())
     {
-        Log("Dialogue line number %s not found.", currentLine);
+        Log("Dialogue line number %d not found.", currentLine);
         return false;
     }
 
@@ -82,13 +85,6 @@ bool DialogueComponent::ShowTextAtActor()
 
     GameUtils::SetActiveCameraTarget(actor);
 
-    //Check condition
-    std::string& conditionName = dataIt->second.conditionName;
-    if (!conditionName.empty())
-    {
-        auto conditonFunction = conditionSystem.FindCondition(conditionName);
-        conditonFunction(dataIt->second.conditionArg);
-    }
 
     auto dcs = actor->GetComponentsOfType<DialogueComponent>();
     for (auto* d : dcs)
