@@ -1,6 +1,6 @@
 #include "PlayerActionBarWidget.h"
 
-void PlayerActionBarWidget::Draw()
+void PlayerActionBarWidget::Draw(float deltaTime)
 {
 	Layout layout = AlignLayout(150.f, 15.f, Align::Bottom);
 	layout.PushToLeft();

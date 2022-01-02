@@ -8,5 +8,5 @@ struct IntuitionGainedWidget : Widget
 {
 	Intuition* intuitionToDisplay = nullptr;
 
-	virtual void Draw() override;
+	virtual void Draw(float deltaTime) override;
 };

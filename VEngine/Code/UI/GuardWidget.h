@@ -6,5 +6,5 @@ struct GuardWidget : Widget
 {
 	bool guardSuccessful = false;
 
-	virtual void Draw() override;
+	virtual void Draw(float deltaTime) override;
 };

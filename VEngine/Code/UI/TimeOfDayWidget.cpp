@@ -2,7 +2,7 @@
 #include "Gameplay/GameInstance.h"
 #include "VString.h"
 
-void TimeOfDayWidget::Draw()
+void TimeOfDayWidget::Draw(float deltaTime)
 {
 	Layout layout = PercentAlignLayout(0.f, 0.f, 0.25f, 0.25f);
 	Text(VString::wformat(L"Hour: %d | Minute: %d",

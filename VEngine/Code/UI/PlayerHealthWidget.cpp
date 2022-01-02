@@ -1,6 +1,6 @@
 #include "PlayerHealthWidget.h"
 
-void PlayerHealthWidget::Draw()
+void PlayerHealthWidget::Draw(float deltaTime)
 {
 	Layout layout = AlignLayout(25.f, 25.f, Align::BottomRight);
 	for (int i = 0; i < healthPoints; i++)

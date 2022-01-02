@@ -4,7 +4,7 @@
 #include "Gameplay/Intuition.h"
 #include "VString.h"
 
-void IntuitionMenuWidget::Draw()
+void IntuitionMenuWidget::Draw(float deltaTime)
 {
 	//Intuiton select scroll menu
 	{

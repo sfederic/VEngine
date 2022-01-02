@@ -8,5 +8,5 @@ struct IntuitionMenuWidget : Widget
 {
 	Intuition* selectedIntuition = nullptr;
 
-	virtual void Draw() override;
+	virtual void Draw(float deltaTime) override;
 };

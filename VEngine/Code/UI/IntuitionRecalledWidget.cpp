@@ -2,7 +2,7 @@
 #include "Gameplay/Intuition.h"
 #include "VString.h"
 
-void IntuitionRecalledWidget::Draw()
+void IntuitionRecalledWidget::Draw(float deltaTime)
 {
 	if (recalledIntuition)
 	{

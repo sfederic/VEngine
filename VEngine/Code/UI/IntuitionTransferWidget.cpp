@@ -4,7 +4,7 @@
 #include "Gameplay/Intuition.h"
 #include "Gameplay/GameUtils.h"
 
-void IntuitionTransferWidget::Draw()
+void IntuitionTransferWidget::Draw(float deltaTime)
 {
 	//Display intuitons to select
 	{

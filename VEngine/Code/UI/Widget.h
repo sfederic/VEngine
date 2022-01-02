@@ -72,7 +72,7 @@ struct Widget
 
 	bool render = true;
 
-	virtual void Draw();
+	virtual void Draw(float deltaTime);
 	virtual void Start();
 
 	void AddToViewport(float removeTimer = 0.f);

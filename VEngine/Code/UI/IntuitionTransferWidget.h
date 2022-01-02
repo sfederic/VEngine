@@ -8,5 +8,5 @@ struct IntuitionTransferWidget : Widget
 {
 	std::map<std::string, Intuition> selectedIntuitionsToTransfer;
 
-	virtual void Draw() override;
+	virtual void Draw(float deltaTime) override;
 };

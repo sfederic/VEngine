@@ -105,13 +105,13 @@ void UISystem::RemoveAllWidgets()
 	widgetsInViewport.clear();
 }
 
-void UISystem::DrawAllWidgets()
+void UISystem::DrawAllWidgets(float deltaTime)
 {
 	for (auto widget : widgetsInViewport)
 	{
 		if (widget->render)
 		{
-			widget->Draw();
+			widget->Draw(deltaTime);
 		}
 	}
 }

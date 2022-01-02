@@ -8,5 +8,5 @@ struct IntuitionRecalledWidget : Widget
 {
 	Intuition* recalledIntuition = nullptr;
 
-	virtual void Draw() override;
+	virtual void Draw(float deltaTime) override;
 };

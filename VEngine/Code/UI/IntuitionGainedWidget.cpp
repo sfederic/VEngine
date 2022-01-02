@@ -2,7 +2,7 @@
 #include "Gameplay/Intuition.h"
 #include "VString.h"
 
-void IntuitionGainedWidget::Draw()
+void IntuitionGainedWidget::Draw(float deltaTime)
 {
 	Layout layout = PercentAlignLayout(0.1f, 0.35f, 0.9f, 0.5f);
 

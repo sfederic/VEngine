@@ -6,5 +6,5 @@ struct PlayerActionBarWidget : Widget
 {
 	int actionPoints = 0;
 
-	virtual void Draw() override;
+	virtual void Draw(float deltaTime) override;
 };

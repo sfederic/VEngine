@@ -6,7 +6,7 @@
 #include "Render/SpriteSystem.h"
 #include "TimerSystem.h"
 
-void Widget::Draw()
+void Widget::Draw(float deltaTime)
 {
 }
 

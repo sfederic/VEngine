@@ -6,6 +6,6 @@ struct InteractWidget : Widget
 {
 	std::wstring interactText;
 
-	virtual void Draw() override;
+	virtual void Draw(float deltaTime) override;
 	void SetText(std::string text);
 };

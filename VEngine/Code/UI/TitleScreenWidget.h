@@ -3,5 +3,5 @@
 
 struct TitleScreenWidget : Widget
 {
-	virtual void Draw() override;
+	virtual void Draw(float deltaTime) override;
 };
