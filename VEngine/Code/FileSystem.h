@@ -5,6 +5,8 @@ struct FileSystem
 {
 	//Essentially is SaveWorld()
 	void WriteAllActorSystems();
+	void WriteAllActorSystemsToBinary();
+	void ReadAllActorSystemsFromBinary();
 
 	void LoadWorld(std::string worldName);
 	void ReloadCurrentWorld();

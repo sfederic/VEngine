@@ -41,6 +41,60 @@ void FileSystem::WriteAllActorSystems()
 	debugMenu.AddNotification(VString::wformat(L"%S world saved", world.worldFilename.c_str()));
 }
 
+void FileSystem::WriteAllActorSystemsToBinary()
+{
+	auto lastOf = world.worldFilename.find_last_of("/\\");
+	std::string str = world.worldFilename.substr(lastOf + 1);
+
+	std::string file = str;
+
+	BinarySerialiser s(file);
+
+	for (IActorSystem* actorSystem : world.activeActorSystems)
+	{
+		actorSystem->SerialiseBinary(s);
+	}
+
+	debugMenu.AddNotification(VString::wformat(L"%S world savedto binary", world.worldFilename.c_str()));
+}
+
+void FileSystem::ReadAllActorSystemsFromBinary()
+{
+	std::string path = "unicode.vmap";
+
+	world.Cleanup();
+
+	BinaryDeserialiser d(path);
+
+	while (!d.is.eof())
+	{
+		std::string actorSystemName;
+
+		size_t stringSize = 0;
+		d.is.read((char*)&stringSize, sizeof(size_t));
+
+		d.is.read(actorSystemName.data(), stringSize);
+
+		size_t numActorsToSpawn = 0;
+		d.is.read((char*)&numActorsToSpawn, sizeof(size_t));
+
+		auto asIt = actorSystemCache.nameToSystemMap->find(actorSystemName.data());
+		if (asIt == actorSystemCache.nameToSystemMap->end())
+		{
+			continue;
+		}
+
+		auto actorSystem = asIt->second;
+
+		for (int i = 0; i < numActorsToSpawn; i++)
+		{
+			actorSystem->SpawnActor(Transform());
+		}
+
+		actorSystem->DeserialiseBinary(d);
+	}
+}
+
 void FileSystem::LoadWorld(std::string worldName)
 {
 	world.worldFilename = worldName;
