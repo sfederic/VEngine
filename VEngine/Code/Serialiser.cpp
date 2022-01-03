@@ -10,6 +10,16 @@
 
 using namespace DirectX;
 
+void BinaryDeserialiser::Deserialise(Properties& props)
+{
+	for (auto& propPair : props.propMap)
+	{
+		auto& prop = propPair.second;
+
+		is.read((char*)&prop.data, prop.size);
+	}
+}
+
 Serialiser::Serialiser(const std::string filename_, const OpenMode mode_) :
 	filename(filename_), mode(mode_)
 {
@@ -289,5 +299,15 @@ void Deserialiser::Deserialise(Properties& props)
 			Actor* foundActor = world.GetActorByName(VString::wstos(actorName));
 			actor[0] = foundActor;
 		}
+	}
+}
+
+void BinarySerialiser::Serialise(Properties& props)
+{
+	for (auto& propPair : props.propMap)
+	{
+		auto& prop = propPair.second;
+
+		os.write((const char*)&prop.data, prop.size);
 	}
 }

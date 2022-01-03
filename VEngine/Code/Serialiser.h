@@ -3,7 +3,8 @@
 #include <string>
 #include <sstream>
 #include <cassert>
-#include "Properties.h"
+
+struct Properties;
 
 enum class OpenMode
 {
@@ -27,15 +28,7 @@ struct BinarySerialiser
 		os.close();
 	}
 
-	void Serialise(Properties& props)
-	{
-		for (auto& propPair : props.propMap)
-		{
-			auto& prop = propPair.second;
-
-			os.write((const char*)&prop.data, prop.size);
-		}
-	}
+	void Serialise(Properties& props);
 
 	void WriteLine(const std::string str)
 	{
@@ -66,15 +59,7 @@ struct BinaryDeserialiser
 		is.close();
 	}
 
-	void Deserialise(Properties& props)
-	{
-		for (auto& propPair : props.propMap)
-		{
-			auto& prop = propPair.second;
-
-			is.read((char*)&prop.data, prop.size);
-		}
-	}
+	void Deserialise(Properties& props);
 };
 
 struct Serialiser
