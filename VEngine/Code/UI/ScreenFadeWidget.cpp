@@ -9,11 +9,11 @@ void ScreenFadeWidget::Draw(float deltaTime)
 	switch (fade)
 	{
 	case FadeValue::FadeOut:
-		fadeValue += (deltaTime * 0.4f);
+		fadeValue += deltaTime;
 		break;
 
 	case FadeValue::FadeIn:
-		fadeValue -= (deltaTime * 0.4f);
+		fadeValue -= deltaTime;
 		break;
 	}
 

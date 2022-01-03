@@ -47,7 +47,7 @@ void EntranceTrigger::Tick(float deltaTime)
             GameUtils::PlayAudio("door.wav");
 
             GameUtils::levelToMoveTo = levelToMoveTo;
-            timerSystem.SetTimer(2.5f, &GameUtils::LoadWorldAndMoveToEntranceTrigger);
+            timerSystem.SetTimer(1.f, &GameUtils::LoadWorldAndMoveToEntranceTrigger);
 
             uiSystem.screenFadeWidget->SetToFadeOut();
             uiSystem.screenFadeWidget->AddToViewport();
