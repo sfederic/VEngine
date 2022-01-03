@@ -4,7 +4,9 @@
 
 struct Actor;
 struct Serialiser;
+struct BinarySerialiser;
 struct Deserialiser;
+struct BinaryDeserialiser;
 
 struct IActorSystem
 {
@@ -18,6 +20,8 @@ struct IActorSystem
 	virtual uint32_t GetNumActors() = 0;
 	virtual void CreateAllActorComponents() = 0;
 	virtual void Serialise(Serialiser& s) = 0;
+	virtual void SerialiseBinary(BinarySerialiser& s) = 0;
 	virtual void Deserialise(Deserialiser& s) = 0;
+	virtual void DeserialiseBinary(BinaryDeserialiser& s) = 0;
 	virtual void Cleanup() = 0;
 };

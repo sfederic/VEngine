@@ -118,6 +118,25 @@ struct ActorSystem : IActorSystem
 		}
 	}
 
+	virtual void SerialiseBinary(BinarySerialiser& s) override
+	{
+		s.WriteLine(this->name);
+		s.Write(this->actors.size());
+
+		for (T* actor : actors)
+		{
+			Properties mergedProps;
+
+			auto propsVector = actor->GetAllProps();
+			for (auto props : propsVector)
+			{
+				mergedProps.Merge(props);
+			}
+
+			s.Serialise(mergedProps);
+		}
+	}
+
 	virtual void Deserialise(Deserialiser& d) override
 	{
 		for (T* actor : actors)
@@ -126,6 +145,22 @@ struct ActorSystem : IActorSystem
 
 			auto propsVector = actor->GetAllProps();
 			for (auto props : propsVector)
+			{
+				mergedProps.Merge(props);
+			}
+
+			d.Deserialise(mergedProps);
+		}
+	}
+
+	virtual void DeserialiseBinary(BinaryDeserialiser& d) override
+	{
+		for (T* actor : actors)
+		{
+			Properties mergedProps;
+
+			auto propsVector = actor->GetAllProps();
+			for (auto& props : propsVector)
 			{
 				mergedProps.Merge(props);
 			}
