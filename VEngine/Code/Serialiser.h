@@ -17,11 +17,11 @@ enum class OpenMode
 struct Serialiser
 {
 private:
-	std::ofstream ofs;
+	std::wofstream ofs;
 
 	//Serialiser uses a stringstream as a temp buffer in memory before writing out to file with std::ofstream.
 	//This way if there's a crash while serialising, partial save files won't be written out.
-	std::stringstream ss;
+	std::wstringstream ss;
 
 	const std::string filename;
 	const OpenMode mode;
@@ -40,7 +40,7 @@ public:
 
 struct Deserialiser
 {
-	std::ifstream is;
+	std::wifstream is;
 
 	Deserialiser(const std::string filename, const OpenMode mode);
 	~Deserialiser();

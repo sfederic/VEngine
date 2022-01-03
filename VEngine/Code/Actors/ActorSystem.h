@@ -7,6 +7,7 @@
 #include "Components/Component.h"
 #include "Editor/Editor.h"
 #include "World.h"
+#include "VString.h"
 
 template <typename T>
 struct ActorSystem : IActorSystem
@@ -100,7 +101,7 @@ struct ActorSystem : IActorSystem
 
 	virtual void Serialise(Serialiser& s) override
 	{
-		s.WriteLine(name); //Use actorsystem name to create again from ActorSystemCache on Deserialise
+		s.WriteLine(VString::stows(name)); //Use actorsystem name to create again from ActorSystemCache on Deserialise
 		s.WriteLine(actors.size()); //Write out num of actors to load the same amount on Deserialise
 
 		for (T* actor : actors)

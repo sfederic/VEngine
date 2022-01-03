@@ -60,7 +60,7 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	while (!d.is.eof())
 	{
-		std::string actorSystemName;
+		std::wstring actorSystemName;
 		d.is >> actorSystemName;
 
 		if (actorSystemName.empty())
@@ -71,7 +71,7 @@ void FileSystem::LoadWorld(std::string worldName)
 		size_t numActorsToSpawn = 0;
 		d.is >> numActorsToSpawn;
 
-		auto asIt = actorSystemCache.nameToSystemMap->find(actorSystemName);
+		auto asIt = actorSystemCache.nameToSystemMap->find(VString::wstos(actorSystemName));
 		if (asIt == actorSystemCache.nameToSystemMap->end())
 		{
 			continue;

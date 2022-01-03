@@ -36,74 +36,75 @@ void Serialiser::Serialise(Properties props)
 {
 	for (auto& prop : props.propMap)
 	{
-		const std::string& name = prop.first;
+		const std::wstring wname = VString::stows(prop.first);
+		const std::string name = prop.first;
 
 		if (props.CheckType<float>(name))
 		{
-			ss << name << "\n" << *props.GetData<float>(name) << "\n";
+			ss << wname << "\n" << *props.GetData<float>(name) << "\n";
 		}
 		else if (props.CheckType<XMFLOAT2>(name))
 		{
 			XMFLOAT2* value = props.GetData<XMFLOAT2>(name);
-			ss << name << "\n" << value->x << " " << value->y << "\n";
+			ss << wname << "\n" << value->x << " " << value->y << "\n";
 		}		
 		else if (props.CheckType<XMFLOAT3>(name))
 		{
 			XMFLOAT3* value = props.GetData<XMFLOAT3>(name);
-			ss << name << "\n" << value->x << " " << value->y << " " << value->z << "\n";
+			ss << wname << "\n" << value->x << " " << value->y << " " << value->z << "\n";
 		}
 		else if (props.CheckType<XMFLOAT4>(name))
 		{
 			XMFLOAT4* value = props.GetData<XMFLOAT4>(name);
-			ss << name << "\n" << value->x << " " << value->y << " " << value->z << " " << value->w << "\n";
+			ss << wname << "\n" << value->x << " " << value->y << " " << value->z << " " << value->w << "\n";
 		}
 		else if (props.CheckType<bool>(name))
 		{
-			ss << name << "\n" << *props.GetData<bool>(name) << "\n";
+			ss << wname << "\n" << *props.GetData<bool>(name) << "\n";
 		}
 		else if (props.CheckType<int>(name))
 		{
-			ss << name << "\n" << *props.GetData<int>(name) << "\n";
+			ss << wname << "\n" << *props.GetData<int>(name) << "\n";
 		}
 		else if (props.CheckType<std::string>(name))
 		{
 			std::string* str = props.GetData<std::string>(name);
-			ss << name << "\n" << str->c_str() << "\n";
+			ss << wname << "\n" << str->c_str() << "\n";
 		}		
 		else if (props.CheckType<std::wstring>(name))
 		{
 			std::wstring* wstr = props.GetData<std::wstring>(name);
-			ss << name << "\n" << VString::wstos(wstr->data()).c_str() << "\n";
+			ss << wname << "\n" << VString::wstos(wstr->data()).c_str() << "\n";
 		}	
 		else if (props.CheckType<TextureData>(name))
 		{
 			TextureData* textureData = props.GetData<TextureData>(name);
-			ss << name << "\n" << textureData->filename.c_str() << "\n";
+			ss << wname << "\n" << textureData->filename.c_str() << "\n";
 		}
 		else if (props.CheckType<ShaderData>(name))
 		{
 			ShaderData* shaderData = props.GetData<ShaderData>(name);
-			ss << name << "\n" << shaderData->filename.c_str() << "\n";
+			ss << wname << "\n" << shaderData->filename.c_str() << "\n";
 		}		
 		else if (props.CheckType<MeshComponentData>(name))
 		{
 			MeshComponentData* meshComponentData = props.GetData<MeshComponentData>(name);
-			ss << name << "\n" << meshComponentData->filename.c_str() << "\n";
+			ss << wname << "\n" << meshComponentData->filename.c_str() << "\n";
 		}
 		else if (props.CheckType<std::vector<Actor*>>(name))
 		{
 			auto actors = props.GetData<std::vector<Actor*>>(name);
-			ss << name << "\n";
+			ss << wname << "\n";
 			ss << actors->size() << "\n";
 			for (auto actor : *actors)
 			{
-				ss << actor->name << "\n";
+				ss << VString::stows(actor->name) << "\n";
 			}
 		}
 		else if (props.CheckType<Transform>(name))
 		{
 			Transform* transform = props.GetData<Transform>(name);
-			ss << name << "\n";
+			ss << wname << "\n";
 			ss << transform->position.x << " " << transform->position.y << " " << transform->position.z << " ";
 			ss << transform->scale.x << " " << transform->scale.y << " " << transform->scale.z << " ";
 			ss << transform->rotation.x << " " << transform->rotation.y << " " << transform->rotation.z << " " << transform->rotation.w << "\n";
@@ -111,7 +112,7 @@ void Serialiser::Serialise(Properties props)
 		else if (props.CheckType<UID>(name))
 		{
 			UID* uid = props.GetData<UID>(name);
-			ss << name << "\n";
+			ss << wname << "\n";
 			ss << *uid << "\n";
 		}
 		else if (props.CheckType<Actor*>(name))
@@ -119,8 +120,8 @@ void Serialiser::Serialise(Properties props)
 			Actor** actor = props.GetData<Actor*>(name);
 			if (actor[0])
 			{
-				ss << name << "\n";
-				ss << actor[0]->name << "\n";
+				ss << wname << "\n";
+				ss << VString::stows(actor[0]->name) << "\n";
 			}
 		}
 	}
@@ -144,18 +145,18 @@ Deserialiser::~Deserialiser()
 
 void Deserialiser::Deserialise(Properties props)
 {
-	char line[512];
+	wchar_t line[512];
 	while (!is.eof())
 	{
 		is.getline(line, 512);
 
-		std::string stringline = line;
-		if (stringline.find("next") != stringline.npos) //Move to next Object
+		std::wstring stringline = line;
+		if (stringline.find(L"next") != stringline.npos) //Move to next Object
 		{
 			return;
 		}
 
-		auto prop = props.propMap.find(line);
+		auto prop = props.propMap.find(VString::wstos(line));
 		if (prop == props.propMap.end())
 		{
 			continue;
@@ -198,43 +199,43 @@ void Deserialiser::Deserialise(Properties props)
 		}
 		else if (props.CheckType<std::string>(name))
 		{
-			char propString[512];
+			wchar_t propString[512];
 			is.getline(propString, 512);
 			std::string* str = props.GetData<std::string>(name);
-			str->assign(propString);
+			str->assign(VString::wstos(propString));
 		}
 		else if (props.CheckType<std::wstring>(name))
 		{
 			//wstring is converted to string on Serialise. Convert back to wstring here.
-			char propString[512];
+			wchar_t propString[512];
 			is.getline(propString, 512);
 			std::wstring* wstr = props.GetData<std::wstring>(name);
-			wstr->assign(VString::stows(propString));
+			wstr->assign(propString);
 		}
 		else if (props.CheckType<TextureData>(name))
 		{
-			char propString[512];
+			wchar_t propString[512];
 			is.getline(propString, 512);
 			TextureData* textureData = props.GetData<TextureData>(name);
-			textureData->filename.assign(propString);
+			textureData->filename.assign(VString::wstos(propString));
 		}
 		else if (props.CheckType<ShaderData>(name))
 		{
-			char propString[512];
+			wchar_t propString[512]{};
 			is.getline(propString, 512);
 			ShaderData* shaderData = props.GetData<ShaderData>(name);
-			shaderData->filename.assign(propString);
+			shaderData->filename.assign(VString::wstos(propString));
 		}		
 		else if (props.CheckType<MeshComponentData>(name))
 		{
-			char propString[512];
+			wchar_t propString[512]{};
 			is.getline(propString, 512);
 			MeshComponentData* meshComponentData = props.GetData<MeshComponentData>(name);
-			meshComponentData->filename.assign(propString);
+			meshComponentData->filename.assign(VString::wstos(propString));
 		}
 		else if (props.CheckType<std::vector<Actor*>>(name))
 		{
-			char actorName[512];
+			wchar_t actorName[512]{};
 			int actorsSize = 0;
 
 			is >> actorsSize;
@@ -248,8 +249,8 @@ void Deserialiser::Deserialise(Properties props)
 			for (int i = 0; i < actorsSize; i++)
 			{
 				is.getline(actorName, 512);
-				std::string actorNameStr(actorName);
-				Actor* foundActor = world.GetActorByName(actorNameStr);
+				std::wstring actorNameStr(actorName);
+				Actor* foundActor = world.GetActorByName(VString::wstos(actorNameStr));
 				actors->push_back(foundActor);
 			}
 		}
@@ -278,9 +279,9 @@ void Deserialiser::Deserialise(Properties props)
 		else if (props.CheckType<Actor*>(name))
 		{
 			Actor** actor = props.GetData<Actor*>(name);
-			std::string actorName;
+			std::wstring actorName;
 			is >> actorName;
-			Actor* foundActor = world.GetActorByName(actorName);
+			Actor* foundActor = world.GetActorByName(VString::wstos(actorName));
 			actor[0] = foundActor;
 		}
 	}
