@@ -86,7 +86,6 @@ bool DialogueComponent::ShowTextAtActor()
 
     GameUtils::SetActiveCameraTarget(actor);
 
-
     auto dcs = actor->GetComponentsOfType<DialogueComponent>();
     for (auto* d : dcs)
     {

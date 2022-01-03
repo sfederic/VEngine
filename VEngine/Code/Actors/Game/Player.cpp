@@ -500,9 +500,7 @@ bool Player::DialogueCheck(Actor* hitActor)
 			//start dialogue
 			dialogueComponent->ShowTextAtActor();
 
-			//Camera zoom and focus
 			nextCameraFOV = 30.f;
-			GameUtils::SetActiveCameraTarget(npc);
 
 			return true;
 		}
