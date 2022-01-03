@@ -32,7 +32,7 @@ Serialiser::~Serialiser()
 	ofs.close();
 }
 
-void Serialiser::Serialise(Properties props)
+void Serialiser::Serialise(Properties& props)
 {
 	for (auto& prop : props.propMap)
 	{
@@ -148,7 +148,7 @@ Deserialiser::~Deserialiser()
 	is.close();
 }
 
-void Deserialiser::Deserialise(Properties props)
+void Deserialiser::Deserialise(Properties& props)
 {
 	wchar_t line[512];
 	while (!is.eof())

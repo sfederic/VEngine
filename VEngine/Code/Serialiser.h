@@ -2,8 +2,8 @@
 #include <fstream>
 #include <string>
 #include <sstream>
-
-struct Properties;
+#include <cassert>
+#include "Properties.h"
 
 enum class OpenMode
 {
@@ -12,7 +12,70 @@ enum class OpenMode
 	Binary = std::ios_base::binary
 };
 
-//@Todo: need to make struct BinaryDe/Serialiser or De/SerialiseBinary()
+struct BinarySerialiser
+{
+	std::ofstream os;
+
+	BinarySerialiser(const std::string filename)
+	{
+		os.open(filename, std::ios_base::binary);
+		if (os.fail()) throw;
+	}
+
+	~BinarySerialiser()
+	{
+		os.close();
+	}
+
+	void Serialise(Properties& props)
+	{
+		for (auto& propPair : props.propMap)
+		{
+			auto& prop = propPair.second;
+
+			os.write((const char*)&prop.data, prop.size);
+		}
+	}
+
+	void WriteLine(const std::string str)
+	{
+		size_t stringSize = str.size() + 1;
+		os.write((const char*)&stringSize, sizeof(size_t));
+		os.write(str.data(), stringSize);
+	}
+
+	template <typename T>
+	void Write(T arg)
+	{
+		os.write((const char*)&arg, sizeof(T));
+	}
+};
+
+struct BinaryDeserialiser
+{
+	std::ifstream is;
+
+	BinaryDeserialiser(const std::string filename)
+	{
+		is.open(filename, std::ios_base::binary);
+		if (is.fail()) throw;
+	}
+
+	~BinaryDeserialiser()
+	{
+		is.close();
+	}
+
+	void Deserialise(Properties& props)
+	{
+		for (auto& propPair : props.propMap)
+		{
+			auto& prop = propPair.second;
+
+			is.read((char*)&prop.data, prop.size);
+		}
+	}
+};
 
 struct Serialiser
 {
@@ -29,7 +92,7 @@ private:
 public:
 	Serialiser(const std::string filename_, const OpenMode mode_);
 	~Serialiser();
-	void Serialise(Properties props);
+	void Serialise(Properties& props);
 
 	template <typename T>
 	void WriteLine(T arg)
@@ -44,5 +107,5 @@ struct Deserialiser
 
 	Deserialiser(const std::string filename, const OpenMode mode);
 	~Deserialiser();
-	void Deserialise(Properties props);
+	void Deserialise(Properties& props);
 };
