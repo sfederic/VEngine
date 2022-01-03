@@ -67,6 +67,10 @@ Console::Console()
 	//Show core engine variables
 	executeMap.emplace(L"CORE", []() { debugMenu.coreMenuOpen = !debugMenu.coreMenuOpen; });
 
+	//Save current world to binary format
+	executeMap.emplace(L"BIN", []() { fileSystem.WriteAllActorSystemsToBinary(); });
+	executeMap.emplace(L"LOADBIN", []() { fileSystem.ReadAllActorSystemsFromBinary(); });
+
 	//Asset Build Commands
 	executeMap.emplace(L"BUILD MESHES", []() { assetSystem.WriteAllMeshDataToMeshAssetFiles(); });
 
