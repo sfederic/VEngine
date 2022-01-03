@@ -120,7 +120,7 @@ void DialogueDock::SaveDialogueToFile()
 	QString saveName = saveDialog.getSaveFileName(this, "Save Dialogue", "Dialogues/");
 	if (saveName.isEmpty()) return;
 
-	std::ofstream os;
+	std::wofstream os;
 	os.open(saveName.toStdString(), std::ios_base::out);
 
 	QTreeWidgetItemIterator it(dialogueTree);
@@ -137,12 +137,12 @@ void DialogueDock::SaveDialogueToFile()
 
 		auto text = (*it)->text(textColumn);
 
-		os << lineText.toStdString() << "\n";
-		os << gotoText.toStdString() << "\n";
-		os << actorComboBox->currentText().toStdString() << "\n";
-		os << conditionComboBox->currentText().toStdString() << "\n";
-		os << conditionArgText.toStdString() << "\n";
-		os << text.toStdString() << "\n";
+		os << lineText.toStdWString() << "\n";
+		os << gotoText.toStdWString() << "\n";
+		os << actorComboBox->currentText().toStdWString() << "\n";
+		os << conditionComboBox->currentText().toStdWString() << "\n";
+		os << conditionArgText.toStdWString() << "\n";
+		os << text.toStdWString() << "\n";
 
 		it++;
 	}
@@ -159,7 +159,7 @@ void DialogueDock::LoadDialogueFile()
 	//set dock title to filename (strip out the path with QFileInfo)
 	this->setWindowTitle("Dialogue | " + QFileInfo(loadName).fileName());
 
-	std::ifstream is;
+	std::wifstream is;
 	is.open(loadName.toStdString(), std::ios_base::in);
 
 	dialogueTree->clear();
@@ -168,14 +168,14 @@ void DialogueDock::LoadDialogueFile()
 	while (!is.eof())
 	{
 		//Get all text
-		std::string lineText;
-		std::string gotoText;
-		std::string actorText;
-		std::string conditionText;
-		std::string conditionArgText;
-		std::string text;
+		std::wstring lineText;
+		std::wstring gotoText;
+		std::wstring actorText;
+		std::wstring conditionText;
+		std::wstring conditionArgText;
+		std::wstring text;
 
-		char line[1024];
+		wchar_t line[1024];
 
 		is.getline(line, 1024); 
 		lineText.assign(line);
@@ -203,10 +203,10 @@ void DialogueDock::LoadDialogueFile()
 		auto item = new QTreeWidgetItem(dialogueTree);
 		PopulateTreeItem(item);
 
-		item->setText(lineColumn, QString::fromStdString(lineText));
-		item->setText(gotoColumn, QString::fromStdString(gotoText));
-		item->setText(conditionArgColumn, QString::fromStdString(conditionArgText));
-		item->setText(textColumn, QString::fromStdString(text));
+		item->setText(lineColumn, QString::fromStdWString(lineText));
+		item->setText(gotoColumn, QString::fromStdWString(gotoText));
+		item->setText(conditionArgColumn, QString::fromStdWString(conditionArgText));
+		item->setText(textColumn, QString::fromStdWString(text));
 
 		{
 			//Actor combobox
@@ -215,7 +215,7 @@ void DialogueDock::LoadDialogueFile()
 
 			//findText() returns -1 if nothing is found and will place an empty entry in the combobox.
 			//Have to be careful here on the findText() as well. QStrings work a bit funny with '\n' and '\r' I'm guessing.
-			QString actorStr = QString::fromStdString(actorText);
+			QString actorStr = QString::fromStdWString(actorText);
 			int foundActorComboEntryIndex = actorComboBox->findText(actorStr);
 			actorComboBox->setCurrentIndex(foundActorComboEntryIndex);
 		}
@@ -224,7 +224,7 @@ void DialogueDock::LoadDialogueFile()
 		{
 			auto conditionComboBox = (QComboBox*)dialogueTree->itemWidget(item, conditionColumn);
 
-			QString conditionStr = QString::fromStdString(conditionText);
+			QString conditionStr = QString::fromStdWString(conditionText);
 			int foundConditionComboEntryIndex = conditionComboBox->findText(conditionStr);
 			conditionComboBox->setCurrentIndex(foundConditionComboEntryIndex);
 		}
