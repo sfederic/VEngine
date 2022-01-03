@@ -21,13 +21,13 @@ struct InteractTrigger : Actor
 	InteractWidget* interactWidget = nullptr;
 
 	//text to show on PrimaryAction() player input
-	std::string interactText;
+	std::wstring interactText;
 
 	//text to show when intuition condition has passed as true
-	std::string interactKnown;
+	std::wstring interactKnown;
 
 	//Text to show when player is inside the trigger
-	std::string overlapText = "Examine";
+	std::wstring overlapText = L"Examine";
 
 	std::string targetActorName;
 

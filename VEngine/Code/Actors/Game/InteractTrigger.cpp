@@ -22,7 +22,7 @@ void InteractTrigger::Start()
 	trigger->target = (Actor*)GameUtils::GetPlayer();
 	
 	interactWidget = CreateWidget<InteractWidget>();
-	interactWidget->SetText(overlapText);
+	interactWidget->interactText = overlapText;
 
 	//Interact triggers are stationary, only one pos set is needed
 	interactWidget->pos = GetHomogeneousPositionVector();
@@ -44,7 +44,7 @@ void InteractTrigger::Tick(float deltaTime)
 
 				GameUtils::GetPlayer()->inInteraction = true;
 
-				interactWidget->SetText(interactText);
+				interactWidget->interactText = interactText;
 
 				if (intuitionComponent->addOnInteract)
 				{
@@ -53,7 +53,7 @@ void InteractTrigger::Tick(float deltaTime)
 						//Bit of a shit check on whether to use interact or known text
 						if (!interactKnown.empty())
 						{
-							interactWidget->SetText(interactKnown);
+							interactWidget->interactText = interactKnown;
 						}
 					}
 				}
@@ -70,7 +70,7 @@ void InteractTrigger::Tick(float deltaTime)
 
 				GameUtils::GetPlayer()->inInteraction = false;
 
-				interactWidget->SetText(overlapText);
+				interactWidget->interactText = overlapText;
 				interactWidget->RemoveFromViewport();
 
 				GameUtils::SetActiveCameraTargetAndZoomOut(GameUtils::GetPlayer());

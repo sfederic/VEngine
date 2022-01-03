@@ -14,14 +14,12 @@ EntranceTrigger::EntranceTrigger()
 {
     trigger = BoxTriggerComponent::system.Add(this);
     rootComponent = trigger;
-
-    openText = "Open";
 }
 
 void EntranceTrigger::Start()
 {
     interactWidget = CreateWidget<InteractWidget>();
-    interactWidget->SetText(openText);
+    interactWidget->interactText = openText;
 
     trigger->target = (Actor*)GameUtils::GetPlayer();
 }

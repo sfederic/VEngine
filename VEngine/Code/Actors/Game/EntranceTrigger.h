@@ -14,7 +14,7 @@ struct EntranceTrigger : Actor
 	InteractWidget* interactWidget = nullptr;
 
 	std::string levelToMoveTo;
-	std::string openText;
+	std::wstring openText = L"Open";
 
 	bool isEntraceActive = true;
 
