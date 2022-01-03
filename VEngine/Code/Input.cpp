@@ -8,6 +8,8 @@ namespace Input
 	bool mouseWheelUp;
 	bool mouseWheelDown;
 
+	bool blockInput = false;
+
 	bool mouseLeftUp;
 	bool mouseLeftDown;
 	bool mouseRightUp;
@@ -44,6 +46,8 @@ namespace Input
 
 	bool GetKeyDown(Keys key)
 	{
+		if (blockInput) return false;
+
 		for (int i = 0; i < currentDownKeys.size(); i++)
 		{
 			if (key == currentDownKeys[i])
@@ -57,6 +61,8 @@ namespace Input
 
 	bool GetKeyUp(Keys key)
 	{
+		if (blockInput) return false;
+
 		for (int i = 0; i < currentUpKeys.size(); i++)
 		{
 			if (key == currentUpKeys[i])
@@ -70,11 +76,13 @@ namespace Input
 
 	bool GetAnyKeyDown()
 	{
+		if (blockInput) return false;
 		return currentDownKeys.size();
 	}
 
 	bool GetAsyncKey(Keys key)
 	{
+		if (blockInput) return false;
 		return GetAsyncKeyState((int)key);
 	}
 
@@ -116,31 +124,37 @@ namespace Input
 
 	bool GetMouseLeftUp()
 	{
+		if (blockInput) return false;
 		return mouseLeftUp;
 	}
 
 	bool GetMouseRightUp()
 	{
+		if (blockInput) return false;
 		return mouseRightUp;
 	}
 
 	bool GetMouseLeftDown()
 	{
+		if (blockInput) return false;
 		return mouseLeftDown;
 	}
 
 	bool GetMouseRightDown()
 	{
+		if (blockInput) return false;
 		return mouseRightDown;
 	}
 
 	bool GetMouseMiddleUp()
 	{
+		if (blockInput) return false;
 		return mouseMiddleUp;
 	}
 
 	bool GetMouseMiddleDown()
 	{
+		if (blockInput) return false;
 		return mouseMiddleDown;
 	}
 }

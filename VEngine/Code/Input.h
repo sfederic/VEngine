@@ -69,6 +69,8 @@ namespace Input
 	extern bool mouseWheelUp;
 	extern bool mouseWheelDown;
 
+	extern bool blockInput;
+
 	void Reset();
 
 	void SetKeyDown(Keys key);
