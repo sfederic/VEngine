@@ -538,7 +538,7 @@ bool Player::InteractCheck(Actor* hitActor)
 		{
 			if (gridActor->isInteractable)
 			{
-				interactWidget->interactText = VString::stows(gridActor->interactText);
+				interactWidget->interactText = gridActor->interactText;
 				interactWidget->AddToViewport();
 				inInteraction = true;
 
@@ -549,7 +549,7 @@ bool Player::InteractCheck(Actor* hitActor)
 				{
 					if (!intuition->CreateIntuition(gridActor->name))
 					{
-						interactWidget->interactText = VString::stows(gridActor->interactKnownText);
+						interactWidget->interactText = gridActor->interactKnownText;
 					}
 				}
 
