@@ -136,6 +136,11 @@ Deserialiser::Deserialiser(const std::string filename, const OpenMode mode)
 	{
 		throw;
 	}
+
+	//@Todo: with wstrings for .vmap text files, reading in wstrings produces junk. Might not be a problem for bianary.
+	//Ref:https://coderedirect.com/questions/456819/is-it-possible-to-set-a-text-file-to-utf-16
+	//std::locale loc(std::locale::classic(), new std::codecvt_utf16<wchar_t, 0x10ffff, std::little_endian>);
+	//ofs.imbue(loc);
 }
 
 Deserialiser::~Deserialiser()
