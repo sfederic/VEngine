@@ -8,6 +8,8 @@
 #include "FileSystem.h"
 #include "GameInstance.h"
 #include "Camera.h"
+#include "UI/UISystem.h"
+#include "UI/ScreenFadeWidget.h"
 
 namespace GameUtils
 {
@@ -107,6 +109,9 @@ namespace GameUtils
 	void LoadWorldAndMoveToEntranceTrigger()
 	{
 		LoadWorld(levelToMoveTo);
+
+		uiSystem.screenFadeWidget->SetToFadeIn();
+		uiSystem.screenFadeWidget->AddToViewport();
 
 		int matchingEntranceTriggerCount = 0;
 		//Set player pos and rot at entrancetrigger in loaded world with same name as previous.
