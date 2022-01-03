@@ -55,7 +55,7 @@ void EntranceTrigger::Tick(float deltaTime)
 
             entranceInteractedWith = true;
 
-            //@Todo: block player input while wating for screen fade
+            Input::blockInput = true;
 
             return;
         }

@@ -10,6 +10,7 @@
 #include "Camera.h"
 #include "UI/UISystem.h"
 #include "UI/ScreenFadeWidget.h"
+#include "Input.h"
 
 namespace GameUtils
 {
@@ -135,5 +136,7 @@ namespace GameUtils
 		GameInstance::previousMapMovedFrom = levelToMoveTo;
 
 		assert(matchingEntranceTriggerCount < 2 && "Entrances with same name");
+
+		Input::blockInput = false;
 	}
 }
