@@ -6,6 +6,7 @@
 struct Widget;
 struct IntuitionGainedWidget;
 struct IntuitionRecalledWidget;
+struct ScreenFadeWidget;
 
 namespace Colours
 {
@@ -18,6 +19,7 @@ struct UISystem
 	//Global widgets
 	IntuitionGainedWidget* intuitionGainedWidget = nullptr;
 	IntuitionRecalledWidget* intuitionRecalledWidget = nullptr;
+	ScreenFadeWidget* screenFadeWidget = nullptr;
 
 	//Every widget added in-game
 	std::vector<Widget*> widgets;
