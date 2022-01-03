@@ -2,6 +2,7 @@
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/GameUtils.h"
 #include "Log.h"
+#include "VString.h"
 #include "World.h"
 #include "Gameplay/ConditionSystem.h"
 #include "TimerSystem.h"
@@ -31,7 +32,7 @@ bool IntuitionComponent::CreateIntuition(std::string actorAquiredFromName)
 		return false;
 	}
 
-	auto intuitionIt = GameInstance::playerIntuitions.find(intuitionName);
+	auto intuitionIt = GameInstance::playerIntuitions.find(VString::wstos(intuitionName));
 	if (intuitionIt != GameInstance::playerIntuitions.end())
 	{
 		Log("%s Intuition already known.", intuitionName.c_str());
@@ -39,8 +40,8 @@ bool IntuitionComponent::CreateIntuition(std::string actorAquiredFromName)
 	}
 
 	auto intuition = Intuition();
-	intuition.name = intuitionName;
-	intuition.description = intuitionDescription;
+	intuition.name = VString::wstos(intuitionName);
+	intuition.description = VString::wstos(intuitionDescription);
 
 	intuition.actorAquiredFrom = actorAquiredFromName;
 	intuition.worldAquiredFrom = world.worldFilename;
