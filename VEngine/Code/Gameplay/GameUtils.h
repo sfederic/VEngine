@@ -25,7 +25,7 @@ namespace GameUtils
 	void LoadGameInstanceData();
 
 	//Used with timers to be able to call LoadWorldAndMoveToEntranceTrigger() through TimerSystem.
-	inline static std::string levelToMoveTo;
+	extern std::string levelToMoveTo;
 
 	//Move to matching entrance trigger with same name as exited one in loaded world.
 	void LoadWorldAndMoveToEntranceTrigger();

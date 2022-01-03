@@ -11,6 +11,8 @@
 
 namespace GameUtils
 {
+	std::string levelToMoveTo;
+
 	Player* GetPlayer()
 	{
 		if (!Player::system.actors.empty())
@@ -126,7 +128,6 @@ namespace GameUtils
 		}
 
 		GameInstance::previousMapMovedFrom = levelToMoveTo;
-		levelToMoveTo = "";
 
 		assert(matchingEntranceTriggerCount < 2 && "Entrances with same name");
 	}
