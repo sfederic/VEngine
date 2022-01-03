@@ -1,7 +1,6 @@
 #pragma once
 #include "../Actor.h"
 #include "../ActorSystem.h"
-#include <string>
 
 struct BoxTriggerComponent;
 struct InteractWidget;
@@ -18,6 +17,9 @@ struct EntranceTrigger : Actor
 	std::string openText;
 
 	bool isEntraceActive = true;
+
+	//Whether the player has used the entrance to move between worlds.
+	bool entranceInteractedWith = false;
 
 	EntranceTrigger();
 	virtual void Start() override;

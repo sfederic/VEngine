@@ -6,6 +6,9 @@
 #include "Input.h"
 #include "FileSystem.h"
 #include "UI/InteractWidget.h"
+#include "UI/ScreenFadeWidget.h"
+#include "UI/UISystem.h"
+#include "TimerSystem.h"
 
 EntranceTrigger::EntranceTrigger()
 {
@@ -27,7 +30,7 @@ void EntranceTrigger::Tick(float deltaTime)
 {
     XMVECTOR targetPos = trigger->target->GetPositionVector();
 
-    if (trigger->ContainsTarget() && isEntraceActive && !battleSystem.isBattleActive)
+    if (trigger->ContainsTarget() && isEntraceActive && !battleSystem.isBattleActive && !entranceInteractedWith)
     {
         interactWidget->AddToViewport();
 
@@ -43,7 +46,17 @@ void EntranceTrigger::Tick(float deltaTime)
 
             GameUtils::PlayAudio("door.wav");
 
-            GameUtils::LoadWorldAndMoveToEntranceTrigger(levelToMoveTo);
+            GameUtils::levelToMoveTo = levelToMoveTo;
+            timerSystem.SetTimer(2.5f, &GameUtils::LoadWorldAndMoveToEntranceTrigger);
+
+            uiSystem.screenFadeWidget->SetToFadeOut();
+            uiSystem.screenFadeWidget->AddToViewport();
+            interactWidget->RemoveFromViewport();
+
+            entranceInteractedWith = true;
+
+            //@Todo: block player input while wating for screen fade
+
             return;
         }
     }
