@@ -56,7 +56,7 @@ Description
 Destruct
 1
 Grid Obstacle
-1
+0
 Health
 0
 Interact
@@ -70,7 +70,7 @@ vase.fbx
 Name
 GridActor0
 Obstacle
-1
+0
 Rast State
 solid
 Shader
@@ -93,6 +93,8 @@ activeEndHour
 0
 alwaysActive
 1
+interactKnownText
+
 next
  Position
 4 0 0
@@ -150,6 +152,8 @@ activeEndHour
 0
 alwaysActive
 1
+interactKnownText
+
 next
 Unit
 0
@@ -181,7 +185,7 @@ next
 Player
 1
  Position
-3 0 2
+3 -9.53674e-07 0
  Rotation
 0 0.707107 0 0.707107
  Scale
@@ -220,7 +224,7 @@ UvScale
 1 1
 next
 MeshActor
-13
+14
  Position
 2 -0.5 2
  Rotation
@@ -624,6 +628,37 @@ UvRotation
 UvScale
 1 1
 next
+ Position
+1 -0.5 4
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+pillar3.fbx
+Name
+pillar313
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+floor.jpg
+UID
+2770078934
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
 DirectionalLightActor
 1
  Position
@@ -669,72 +704,7 @@ UID
 2132069934
 next
 NPC
-1
- Position
-2 0 0
- Rotation
--0 0 0.00029901 1
- Scale
-1 1 1
-Add On Interact
 0
-Attack Points
-1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Description
-
-Destruct
-1
-File
-church_hall/hand02.dialog
-Grid Obstacle
-0
-Health
-2
-Interact
-0
-Interact Text
-
-Intuition Name
-
-Mesh
-unit_test.fbx
-Move Points
-3
-Move Speed
-1
-Name
-NPC0
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-test.png
-UID
-2174012462
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-1
-alwaysActive
-0
-next
 Billboard
 0
 InteractTrigger

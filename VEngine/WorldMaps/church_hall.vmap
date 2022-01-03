@@ -38,9 +38,9 @@ next
 GridActor
 1
  Position
-4 0 8
+4 1 8
  Rotation
--0 0 -0 1
+0.5 0.5 0.5 -0.5
  Scale
 1 1 1
 Add On Interact
@@ -48,6 +48,8 @@ Add On Interact
 Casts Shadow
 1
 Condition
+
+Condition Value
 
 Description
 Aden knows about the Bestowed's condition.
@@ -64,7 +66,7 @@ The Bestowed lies here, lifeless.
 Intuition Name
 BestowedCondition
 Mesh
-vase.fbx
+bestowed_coffin.fbx
 Name
 GridActor0
 Obstacle
@@ -91,6 +93,8 @@ activeEndHour
 0
 alwaysActive
 1
+interactKnownText
+maybe he's here maybe not
 next
 Unit
 0
@@ -122,15 +126,15 @@ next
 Player
 1
  Position
-2 0.05 4
+5 0 3
  Rotation
--0 0 -0 1
+0 0 0 1
  Scale
 0.999997 1 0.999997
 Casts Shadow
 1
 FOV
-59.05
+59.9999
 Far Z
 1000
 File
@@ -225,7 +229,7 @@ UvScale
 1 1
 next
  Position
-7.5 0 8.5
+4 0 7
  Rotation
 -0 0 -0 1
  Scale
@@ -287,11 +291,11 @@ UvScale
 1 1
 next
  Position
-0.5 0 8.5
+4 -0.25 5
  Rotation
 -0 0 -0 1
  Scale
-2 1 2
+2 0.5 2
 Casts Shadow
 1
 Grid Obstacle
@@ -636,9 +640,9 @@ UID
 1067295734
 next
 NPC
-2
+1
  Position
-3 0 6
+3 0 3
  Rotation
 -0 0 -0 1
  Scale
@@ -651,18 +655,20 @@ Casts Shadow
 1
 Condition
 
+Condition Value
+
 Description
 
 Destruct
 1
 File
-church_hall/hand01.dialog
+church_hall/main_hand.dialog
 Grid Obstacle
 0
 Health
 2
 Interact
-1
+0
 Interact Text
 
 Intuition Name
@@ -696,72 +702,11 @@ UvScale
 activeBeginHour
 0
 activeEndHour
-2
+3
 alwaysActive
 0
-next
- Position
-5 0 7
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Attack Points
-1
-Casts Shadow
-1
-Condition
+interactKnownText
 
-Description
-
-Destruct
-1
-File
-church_hall/hand01.dialog
-Grid Obstacle
-0
-Health
-2
-Interact
-1
-Interact Text
-
-Intuition Name
-
-Mesh
-unit_test.fbx
-Move Points
-3
-Move Speed
-1
-Name
-NPC1
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-test.png
-UID
-674642394
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-activeBeginHour
-3
-activeEndHour
-12
-alwaysActive
-0
 next
 Billboard
 0
@@ -777,6 +722,8 @@ Add On Interact
 0
 Condition
 
+Condition Value
+
 Description
 
 Extents
@@ -789,6 +736,8 @@ Name
 MainDoorTrigger
 UID
 999717312
+interactKnown
+
 overlapText
 Examine
 targetActorName
