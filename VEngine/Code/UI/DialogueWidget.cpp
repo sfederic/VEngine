@@ -17,7 +17,7 @@ void DialogueWidget::Draw(float deltaTime)
 	Text(dialogueText, layout);
 }
 
-void DialogueWidget::SetText(std::string text)
+void DialogueWidget::SetText(std::wstring text)
 {
-	dialogueText = VString::stows(text);
+	dialogueText = text;
 }

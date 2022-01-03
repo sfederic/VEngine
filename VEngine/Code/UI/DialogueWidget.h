@@ -7,5 +7,5 @@ struct DialogueWidget : Widget
 	std::wstring dialogueText;
 
 	virtual void Draw(float deltaTime) override;
-	void SetText(std::string text);
+	void SetText(std::wstring text);
 };

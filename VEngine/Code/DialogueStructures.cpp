@@ -18,20 +18,20 @@ void Dialogue::LoadFromFile()
 
 	std::string path = "Dialogues/" + filename;
 
-	std::ifstream is;
+	std::wifstream is;
 	is.open(path, std::ios_base::in);
 
 	while (!is.eof())
 	{
-		std::string lineText;
-		std::string gotoText;
-		std::string actorText;
-		std::string conditionText;
-		std::string conditionArgText;
-		std::string text;
+		std::wstring lineText;
+		std::wstring gotoText;
+		std::wstring actorText;
+		std::wstring conditionText;
+		std::wstring conditionArgText;
+		std::wstring text;
 
 		const int lineSize = 1024;
-		char line[lineSize];
+		wchar_t line[lineSize];
 
 		//Get all text
 		is.getline(line, lineSize);
@@ -60,7 +60,7 @@ void Dialogue::LoadFromFile()
 		//Get values and push them into the map
 		int lineNumber = std::stoi(lineText);
 		int gotoLine = -1;
-		if (gotoText != "next")
+		if (gotoText != L"next")
 		{
 			gotoLine = std::stoi(gotoText);
 		}

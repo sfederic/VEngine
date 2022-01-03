@@ -3,6 +3,7 @@
 #include "Components/WidgetComponent.h"
 #include "UI/DialogueWidget.h"
 #include "Log.h"
+#include "VString.h"
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/ConditionSystem.h"
 
@@ -49,11 +50,11 @@ bool DialogueComponent::NextLine()
         else
         {
             //Hit goto line number if condition passes
-            std::string& conditionName = dataIt->second.conditionName;
+            std::wstring& conditionName = dataIt->second.conditionName;
             if (!conditionName.empty())
             {
-                auto conditionFunction = conditionSystem.FindCondition(conditionName);
-                if (conditionFunction(dataIt->second.conditionArg))
+                auto conditionFunction = conditionSystem.FindCondition(VString::wstos(conditionName));
+                if (conditionFunction(VString::wstos(dataIt->second.conditionArg)))
                 {
                     currentLine = dataIt->second.gotoLine;
                 }
@@ -81,7 +82,7 @@ bool DialogueComponent::ShowTextAtActor()
         return false;
     }
 
-    Actor* actor = world.GetActorByName(dataIt->second.actorName);
+    Actor* actor = world.GetActorByName(VString::wstos(dataIt->second.actorName));
 
     GameUtils::SetActiveCameraTarget(actor);
 

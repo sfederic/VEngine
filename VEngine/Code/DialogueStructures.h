@@ -6,10 +6,10 @@ struct DialogueData
 {
 	int lineNumber = 0;
 	int gotoLine = -1; //-1 denotes that the dialogue continues linearly
-	std::string actorName;
-	std::string conditionName;
-	std::string conditionArg;
-	std::string text;
+	std::wstring actorName;
+	std::wstring conditionName;
+	std::wstring conditionArg;
+	std::wstring text;
 };
 
 //@Todo: think about making a widget for Dialogue struct like how Texture/Mesh/Shader have
