@@ -44,9 +44,14 @@ struct Properties
 
 		if (typeid(T) == typeid(std::string)) 
 		{
-			std::string* str = (std::string*)data;
-			prop.size = str->size();
+			auto str = (std::string*)data;
+			prop.size = str->size() + 1; //'+ 1' is for null terminator '\0'
 		} 
+		else if (typeid(T) == typeid(std::wstring))
+		{
+			auto str = (std::wstring*)data;
+			prop.size = (str->size() * 2) + 1; //Double size for wstring
+		}
 		else 
 		{
 			prop.size = sizeof(T);
@@ -133,8 +138,6 @@ struct Properties
 		}
 	}
 
-	//PROPERTIES FOR BINARY 
-	//Binary props work the same as text, just hash the name passed in
 	//template <typename T>
 	//void Add(const std::string& name, T* data)
 	//{
