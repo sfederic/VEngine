@@ -102,9 +102,9 @@ namespace GameUtils
 		}
 	}
 
-	void LoadWorldAndMoveToEntranceTrigger(std::string worldName)
+	void LoadWorldAndMoveToEntranceTrigger()
 	{
-		LoadWorld(worldName);
+		LoadWorld(levelToMoveTo);
 
 		int matchingEntranceTriggerCount = 0;
 		//Set player pos and rot at entrancetrigger in loaded world with same name as previous.
@@ -125,7 +125,8 @@ namespace GameUtils
 			}
 		}
 
-		GameInstance::previousMapMovedFrom = worldName;
+		GameInstance::previousMapMovedFrom = levelToMoveTo;
+		levelToMoveTo = "";
 
 		assert(matchingEntranceTriggerCount < 2 && "Entrances with same name");
 	}
