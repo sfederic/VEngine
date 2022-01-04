@@ -1,6 +1,5 @@
 #pragma once
 #include "GridActor.h"
-#include "../ActorSystem.h"
 
 struct GridNode;
 

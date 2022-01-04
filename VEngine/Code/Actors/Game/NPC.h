@@ -1,6 +1,5 @@
 #pragma once
 #include "Unit.h"
-#include "../ActorSystem.h"
 
 //Actor that can be talked to and interactied with.
 struct NPC : Unit
