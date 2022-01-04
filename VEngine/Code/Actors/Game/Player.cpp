@@ -361,7 +361,7 @@ void Player::PrimaryAction()
 
 void Player::ToggleIntuitionMenu()
 {
-	if (isWeaponDrawn) return;
+	if (isWeaponDrawn || battleSystem.isBattleActive) return;
 
 	if (Input::GetKeyUp(Keys::Enter))
 	{
@@ -474,20 +474,22 @@ bool Player::DialogueCheck(Actor* hitActor)
 {
 	if (inConversation)
 	{
-		if (!dialogueComponent->NextLine())
+		if (!currentlyActiveDialogueComponent->NextLine())
 		{
 			//End dialogue
 			inConversation = false;
 			nextCameraFOV = 60.f;
 			GameUtils::SetActiveCameraTarget(this);
+			currentlyActiveDialogueComponent = nullptr;
 			return true;
 		}
 		else
 		{
-			if (!dialogueComponent->ShowTextAtActor())
+			if (!currentlyActiveDialogueComponent->ShowTextAtActor())
 			{
 				//Exist out of dialogue loop if next line not found.
 				inConversation = false;
+				currentlyActiveDialogueComponent = nullptr;
 				GameUtils::SetActiveCameraTargetAndZoomOut(this);
 			}
 
@@ -499,8 +501,8 @@ bool Player::DialogueCheck(Actor* hitActor)
 		NPC* npc = dynamic_cast<NPC*>(hitActor);
 		if (npc)
 		{
-			dialogueComponent = npc->dialogueComponent;
-			if (dialogueComponent->dialogue.filename.empty())
+			currentlyActiveDialogueComponent = npc->dialogueComponent;
+			if (currentlyActiveDialogueComponent->dialogue.filename.empty())
 			{
 				return false;
 			}
@@ -508,7 +510,7 @@ bool Player::DialogueCheck(Actor* hitActor)
 			inConversation = true;
 
 			//start dialogue
-			dialogueComponent->ShowTextAtActor();
+			currentlyActiveDialogueComponent->ShowTextAtActor();
 
 			nextCameraFOV = 30.f;
 

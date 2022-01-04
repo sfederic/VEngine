@@ -24,7 +24,12 @@ struct Player : Actor
 	//Components
 	MeshComponent* mesh = nullptr;
 	CameraComponent* camera = nullptr;
+
+	//For dialog files to access
 	DialogueComponent* dialogueComponent = nullptr;
+
+	//For player to cache the current dialog file and progress on input
+	DialogueComponent* currentlyActiveDialogueComponent = nullptr;
 
 	//Widgets
 	InteractWidget* interactWidget = nullptr;
