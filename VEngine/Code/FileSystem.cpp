@@ -105,6 +105,8 @@ void FileSystem::ReadAllActorSystemsFromBinary()
 		actorSystem->DeserialiseBinary(d);
 	}
 
+	ResetWorldState();
+
 	debugMenu.AddNotification(VString::wformat(L"%S world loaded from binary", world.worldFilename.c_str()));
 }
 
@@ -154,6 +156,29 @@ void FileSystem::LoadWorld(std::string worldName)
 		actorSystem->Deserialise(d);
 	}
 
+	ResetWorldState();
+
+	debugMenu.AddNotification(VString::wformat(L"%S world loaded", world.worldFilename.c_str()));
+}
+
+void FileSystem::ReloadCurrentWorld()
+{
+	GameInstance::ResetTime();
+	GameInstance::DeletePlayerIntuitions();
+
+	LoadWorld(world.worldFilename);
+}
+
+void FileSystem::CreateGameplayWorldSave(std::string worldName)
+{
+	std::ifstream in("WorldMaps/" + worldName);
+	std::ofstream out("GameSaves/" + worldName);
+
+	out << in.rdbuf();
+}
+
+void FileSystem::ResetWorldState()
+{
 	//Deselect any existing actors, because TransformGizmo will stay at previous positions.
 	worldEditor.pickedActor = nullptr;
 
@@ -176,22 +201,4 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	editor->UpdateWorldList();
 	editor->ClearProperties();
-
-	debugMenu.AddNotification(VString::wformat(L"%S world loaded", world.worldFilename.c_str()));
-}
-
-void FileSystem::ReloadCurrentWorld()
-{
-	GameInstance::ResetTime();
-	GameInstance::DeletePlayerIntuitions();
-
-	LoadWorld(world.worldFilename);
-}
-
-void FileSystem::CreateGameplayWorldSave(std::string worldName)
-{
-	std::ifstream in("WorldMaps/" + worldName);
-	std::ofstream out("GameSaves/" + worldName);
-
-	out << in.rdbuf();
 }
