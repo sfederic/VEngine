@@ -29,7 +29,6 @@ void Material::Create()
 	sampler = RenderUtils::GetDefaultSampler();
 	shader = shaderSystem.FindShader(VString::stows(shaderData.filename));
 	rastState = renderer.rastStateMap[rastStateName];
-	blendState = renderer.blendStateMap["default"];
 }
 
 void Material::Destroy()
