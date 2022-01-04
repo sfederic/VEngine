@@ -45,6 +45,11 @@ void InteractTrigger::Tick(float deltaTime)
 			{
 				isBeingInteractedWith = true;
 
+				if (!soundEffect.empty())
+				{
+					GameUtils::PlayAudioOneShot(soundEffect);
+				}
+
 				GameUtils::GetPlayer()->inInteraction = true;
 
 				interactWidget->interactText = interactText;
@@ -93,5 +98,6 @@ Properties InteractTrigger::GetProps()
 	props.AddProp(overlapText);
 	props.AddProp(interactKnown);
 	props.AddProp(targetActorName);
+	props.AddProp(soundEffect);
 	return props;
 }

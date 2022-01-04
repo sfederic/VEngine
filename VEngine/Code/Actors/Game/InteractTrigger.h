@@ -31,6 +31,9 @@ struct InteractTrigger : Actor
 
 	std::string targetActorName;
 
+	//Sound to play on interact
+	std::string soundEffect;
+
 	bool isBeingInteractedWith = false;
 
 	InteractTrigger();
