@@ -161,7 +161,7 @@ Actor* World::GetActorByNameAllowNull(std::string actorName)
 	foundActor = actorNameMap[actorName];
 	if (foundActor == nullptr)
 	{
-		Log("%s actor not found.");
+		Log("%s actor not found.", actorName.c_str());
 	}
 	return foundActor;
 }
