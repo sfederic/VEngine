@@ -4,6 +4,7 @@
 #include "GameUtils.h"
 #include "UI/UISystem.h"
 #include "UI/IntuitionRecalledWidget.h"
+#include "Gameplay/BattleSystem.h"
 
 ConditionSystem conditionSystem;
 
@@ -26,11 +27,18 @@ bool IntuitionCheck(std::string arg)
 	return false;
 }
 
+bool StartBattle(std::string arg)
+{
+	battleSystem.StartBattle();
+	return true;
+}
+
 //END CONDITION FUNCTIONS
 
 ConditionSystem::ConditionSystem()
 {
 	ADD_CONDITION(IntuitionCheck);
+	ADD_CONDITION(StartBattle);
 }
 
 void ConditionSystem::AddCondition(std::string functionName, ConditionFunction conditionFunction)
