@@ -3,22 +3,40 @@ next
 NPC0
 
 
-Go do the things
+Are you ready to host the funeral?
 1
 2
 NPC0
 IntuitionCheck
 The Pyre
-Thanks homie
+If you have the knowledge on how to start-
 2
 next
-NPC0
+Coffin
 
 
-Ah so you did it
+mmm....mm...
 3
 next
 NPC0
 
 
-cool!
+The hell was that...
+4
+next
+NPC1
+
+
+The Bestowed is... Still alive? In the coffin?
+5
+next
+NPC2
+
+
+What shall we-
+6
+next
+NPC0
+StartBattle
+
+Start the funeral. Light the pyre. Kill all in attendance. Let none leave.
