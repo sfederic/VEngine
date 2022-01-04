@@ -53,7 +53,7 @@ Console::Console()
 	executeMap.emplace(L"GAME", []() { debugMenu.gameInstaceMenuOpen = !debugMenu.gameInstaceMenuOpen; });
 
 	//Show all intuition info player has
-	executeMap.emplace(L"INTUITIONS", []() { debugMenu.intuitionsMenuOpen = !debugMenu.intuitionsMenuOpen; });
+	executeMap.emplace(L"INT", []() { debugMenu.intuitionsMenuOpen = !debugMenu.intuitionsMenuOpen; });
 
 	//show memory for engine systems
 	executeMap.emplace(L"MEM", []() { debugMenu.memoryMenuOpen = !debugMenu.memoryMenuOpen; });
@@ -67,7 +67,7 @@ Console::Console()
 	//Show core engine variables
 	executeMap.emplace(L"CORE", []() { debugMenu.coreMenuOpen = !debugMenu.coreMenuOpen; });
 
-	//Save current world to binary format
+	//Save/Load current world to/From binary format
 	executeMap.emplace(L"BIN", []() { fileSystem.WriteAllActorSystemsToBinary(); });
 	executeMap.emplace(L"LOADBIN", []() { fileSystem.ReadAllActorSystemsFromBinary(); });
 

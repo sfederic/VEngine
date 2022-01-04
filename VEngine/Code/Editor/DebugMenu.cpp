@@ -358,6 +358,16 @@ void DebugMenu::RenderIntuitionsMenu()
 
 	ImGui::Begin("Intuitions");
 
+	static char intuitionNameAdd[512]{};
+	ImGui::InputText("Intuition Name To Add", intuitionNameAdd, 512);
+	if (ImGui::Button("Add Intuition"))
+	{
+		Intuition debugIntuition = {};
+		debugIntuition.name = intuitionNameAdd;
+		debugIntuition.description = "Aquired from Debug";
+		GameInstance::playerIntuitions.emplace(intuitionNameAdd, debugIntuition);
+	}
+
 	for (auto& intuition : GameInstance::playerIntuitions)
 	{
 		Intuition& i = intuition.second;
