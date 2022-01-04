@@ -36,7 +36,7 @@ UvScale
 1 1
 next
 GridActor
-1
+4
  Position
 3 0.5 4
  Rotation
@@ -49,10 +49,14 @@ Casts Shadow
 1
 Condition
 
+Condition Value
+
 Description
 
 Destruct
 0
+File
+
 Grid Obstacle
 0
 Health
@@ -66,7 +70,7 @@ Intuition Name
 Mesh
 
 Name
-bookshelf
+bookshelf1
 Obstacle
 1
 Rast State
@@ -91,6 +95,191 @@ activeEndHour
 0
 alwaysActive
 1
+interactKnownText
+
+next
+ Position
+1 0.5 4
+ Rotation
+-0 0 -0 1
+ Scale
+2 2 1
+Add On Interact
+0
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+0
+File
+
+Grid Obstacle
+0
+Health
+0
+Interact
+0
+Interact Text
+
+Intuition Name
+
+Mesh
+
+Name
+bookshelf2
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+bookshelf.jpg
+UID
+1998949268
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+interactKnownText
+
+next
+ Position
+1 0.5 0
+ Rotation
+-0 0 -0 1
+ Scale
+2 2 1
+Add On Interact
+0
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+0
+File
+
+Grid Obstacle
+0
+Health
+0
+Interact
+0
+Interact Text
+
+Intuition Name
+
+Mesh
+
+Name
+bookshelf4
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+bookshelf.jpg
+UID
+1998949268
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+interactKnownText
+
+next
+ Position
+3 0.5 0
+ Rotation
+-0 0 -0 1
+ Scale
+2 2 1
+Add On Interact
+0
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+0
+File
+
+Grid Obstacle
+0
+Health
+0
+Interact
+0
+Interact Text
+
+Intuition Name
+
+Mesh
+
+Name
+bookshelf3
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+bookshelf.jpg
+UID
+1998949268
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+interactKnownText
+
 next
 Unit
 0
@@ -101,15 +290,15 @@ AudioActor
 Player
 1
  Position
-3 0.0500009 3
+2 0 2
  Rotation
--0 0 -0 1
+0 -0.707107 0 -0.707107
  Scale
 0.999983 1 0.999983
 Casts Shadow
 1
 FOV
-56.465
+59.9263
 Far Z
 1000
 File
@@ -140,7 +329,7 @@ UvScale
 1 1
 next
 MeshActor
-5
+7
  Position
 2 -0.5 2
  Rotation
@@ -296,6 +485,68 @@ UvRotation
 UvScale
 1 1
 next
+ Position
+2 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+1
+Mesh
+lamp_post.fbx
+Name
+lamp_post5
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+floor.jpg
+UID
+923212848
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+2 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+1
+Mesh
+lamp_post.fbx
+Name
+lamp_post6
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+floor.jpg
+UID
+923212848
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
 DirectionalLightActor
 1
  Position
@@ -345,7 +596,7 @@ NPC
 Billboard
 0
 InteractTrigger
-1
+4
  Position
 3 0 3
  Rotation
@@ -356,6 +607,8 @@ Add On Interact
 0
 Condition
 
+Condition Value
+
 Description
 
 Extents
@@ -365,13 +618,116 @@ Glancing over the spines, you notice various titles on the theology of The Godde
 Intuition Name
 
 Name
-InteractTrigger0
+bookshelf1ifinteract
 UID
 157415782
+interactKnown
+
 overlapText
 Examine Bookshelf
+soundEffect
+
 targetActorName
-bookshelf
+bookshelf1
+next
+ Position
+1 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Condition
+
+Condition Value
+
+Description
+
+Extents
+0.9 0.9 0.9
+Interact Text
+Books about the state of the church across the state are shelved here.
+Intuition Name
+
+Name
+bookshelf2interact
+UID
+157415782
+interactKnown
+
+overlapText
+Examine Bookshelf
+soundEffect
+
+targetActorName
+bookshelf2
+next
+ Position
+1 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Condition
+
+Condition Value
+
+Description
+
+Extents
+0.9 0.9 0.9
+Interact Text
+Various books on religious heads are lined up here. No name stands out.
+Intuition Name
+
+Name
+bookshelf4interact
+UID
+157415782
+interactKnown
+
+overlapText
+Examine bookshelf
+soundEffect
+
+targetActorName
+bookshelf4
+next
+ Position
+3 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Condition
+
+Condition Value
+
+Description
+
+Extents
+0.9 0.9 0.9
+Interact Text
+"To the world born in heat, burning, so too shall the soul of The Bestowed alight."
+Intuition Name
+
+Name
+bookshelf3interact
+UID
+157415782
+interactKnown
+
+overlapText
+Examine Eye Catching Book
+soundEffect
+
+targetActorName
+bookshelf3
 next
 DialogueInstance
 0
