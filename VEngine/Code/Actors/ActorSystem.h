@@ -120,8 +120,12 @@ struct ActorSystem : IActorSystem
 
 	virtual void SerialiseBinary(BinarySerialiser& s) override
 	{
-		s.WriteLine(this->name);
-		s.Write(this->actors.size());
+		size_t stringSize = this->name.size() + 1;
+		fwrite(&stringSize, sizeof(size_t), 1, s.file);
+		fwrite(this->name.data(), sizeof(char), stringSize, s.file);
+
+		int size = actors.size();
+		fwrite(&size, sizeof(int), 1, s.file);
 
 		for (T* actor : actors)
 		{
