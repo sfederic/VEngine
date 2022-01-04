@@ -55,7 +55,7 @@ void FileSystem::WriteAllActorSystemsToBinary()
 		actorSystem->SerialiseBinary(s);
 	}
 
-	debugMenu.AddNotification(VString::wformat(L"%S world savedto binary", world.worldFilename.c_str()));
+	debugMenu.AddNotification(VString::wformat(L"%S world saved to binary", world.worldFilename.c_str()));
 }
 
 void FileSystem::ReadAllActorSystemsFromBinary()
@@ -66,17 +66,28 @@ void FileSystem::ReadAllActorSystemsFromBinary()
 
 	BinaryDeserialiser d(path);
 
-	while (!d.is.eof())
+	while (!feof(d.file))
 	{
-		std::string actorSystemName;
-
 		size_t stringSize = 0;
-		d.is.read((char*)&stringSize, sizeof(size_t));
+		auto res = fread(&stringSize, sizeof(size_t), 1, d.file);
+		if (res == 0)
+		{
+			break;
+		}
 
-		d.is.read(actorSystemName.data(), stringSize);
+		std::string actorSystemName;
+		res = fread(actorSystemName.data(), sizeof(char), stringSize, d.file);
+		if (res == 0)
+		{
+			break;
+		}
 
-		size_t numActorsToSpawn = 0;
-		d.is.read((char*)&numActorsToSpawn, sizeof(size_t));
+		int numActorsToSpawn = 0;
+		res = fread(&numActorsToSpawn, sizeof(int), 1, d.file);
+		if (res == 0)
+		{
+			break;
+		}
 
 		auto asIt = actorSystemCache.nameToSystemMap->find(actorSystemName.data());
 		if (asIt == actorSystemCache.nameToSystemMap->end())
@@ -93,6 +104,8 @@ void FileSystem::ReadAllActorSystemsFromBinary()
 
 		actorSystem->DeserialiseBinary(d);
 	}
+
+	debugMenu.AddNotification(VString::wformat(L"%S world loaded from binary", world.worldFilename.c_str()));
 }
 
 void FileSystem::LoadWorld(std::string worldName)
