@@ -170,3 +170,9 @@ void QtEditor::SetPlayButtonText(std::string text)
 {
     mainWindow->toolbarDock->playButton->setText(QString::fromStdString(text));
 }
+
+void QtEditor::SetEditorTitle(const std::string title)
+{
+    QString world = QString::fromStdString(title);
+    mainWindow->setWindowTitle(editorTitle + world);
+}

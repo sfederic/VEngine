@@ -117,6 +117,8 @@ void FileSystem::ReadAllActorSystemsFromBinary()
 
 void FileSystem::LoadWorld(std::string worldName)
 {
+	editor->SetEditorTitle(worldName);
+
 	world.worldFilename = worldName;
 
 	std::string path = "WorldMaps/" + worldName;

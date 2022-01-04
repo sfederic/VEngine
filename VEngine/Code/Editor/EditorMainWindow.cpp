@@ -43,7 +43,6 @@ EditorMainWindow::EditorMainWindow()
 	worldDock->raise();
 
 	setWindowState(Qt::WindowMaximized);
-	setWindowTitle("VEngine | Vagrant Tactics");
 	show();
 }
 

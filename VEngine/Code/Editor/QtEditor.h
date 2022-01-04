@@ -7,6 +7,8 @@ struct QtEditor : IEditor, QObject
 	struct QApplication* app;
 	struct EditorMainWindow* mainWindow;
 
+	QString editorTitle = "VEngine | Vagrant Tactics | ";
+
 	void Init(int argc, char* argv[]) override;
 	void Tick() override;
 	void SetMousePos() override;
@@ -20,6 +22,7 @@ struct QtEditor : IEditor, QObject
 	virtual void ClearProperties() override;
 	virtual void SelectActorInWorldList() override;
 	virtual void SetPlayButtonText(std::string text) override;
+	virtual void SetEditorTitle(const std::string title) override;
 	void SetEditorFont();
 	void EnableDarkMode();
 };
