@@ -46,7 +46,7 @@ void FileSystem::WriteAllActorSystemsToBinary()
 	auto lastOf = world.worldFilename.find_last_of("/\\");
 	std::string str = world.worldFilename.substr(lastOf + 1);
 
-	std::string file = str;
+	std::string file = "WorldMaps/Binary/" + str;
 
 	BinarySerialiser s(file);
 
@@ -58,9 +58,14 @@ void FileSystem::WriteAllActorSystemsToBinary()
 	debugMenu.AddNotification(VString::wformat(L"%S world saved to binary", world.worldFilename.c_str()));
 }
 
+//@Todo: binary serialisation isn't working too well. Might be some weird alignment errors taken from property sizes.
 void FileSystem::ReadAllActorSystemsFromBinary()
 {
-	std::string path = "unicode.vmap";
+	std::string worldName = world.worldFilename;
+
+	std::string path = "WorldMaps/Binary/" + worldName;
+
+	assert(std::filesystem::exists(path) && "Map file doesn't exist");
 
 	world.Cleanup();
 
