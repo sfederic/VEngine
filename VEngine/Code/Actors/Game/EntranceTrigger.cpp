@@ -35,7 +35,6 @@ void EntranceTrigger::Tick(float deltaTime)
         if (Input::GetKeyUp(Keys::Down))
         {
             //Load new world
-            GameInstance::ProgressTime();
 
             if (GameInstance::useGameSaves)
             {
