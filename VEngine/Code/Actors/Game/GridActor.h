@@ -7,6 +7,7 @@ struct TimeComponent;
 struct HealthWidget;
 struct IntuitionComponent;
 struct GridNode;
+struct DialogueComponent;
 
 //Base struct for every interactive actor that is placed in the level
 struct GridActor : Actor
@@ -17,6 +18,7 @@ struct GridActor : Actor
 	HealthWidget* healthWidget = nullptr;
 	IntuitionComponent* intuition = nullptr;
 	TimeComponent* timeComponent = nullptr;
+	DialogueComponent* dialogueComponent = nullptr;
 
 	//Actor's positions on the level grid
 	int xIndex = -1;

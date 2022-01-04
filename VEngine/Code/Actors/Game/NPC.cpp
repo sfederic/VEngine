@@ -1,13 +1,11 @@
 #include "NPC.h"
-#include "Components/DialogueComponent.h"
 #include "VString.h"
 #include "TimerSystem.h"
 #include "UI/DialogueWidget.h"
+#include "Components/DialogueComponent.h"
 
 NPC::NPC()
 {
-    dialogueComponent = DialogueComponent::system.Add(this);
-
     isDestructible = true;
 }
 
@@ -19,8 +17,6 @@ void NPC::Start()
 void NPC::Tick(float deltaTime)
 {
     __super::Tick(deltaTime);
-
-    dialogueComponent->SetPosition(GetHomogeneousPositionVector());
 }
 
 Properties NPC::GetProps()

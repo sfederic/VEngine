@@ -2,14 +2,10 @@
 #include "Unit.h"
 #include "../ActorSystem.h"
 
-struct DialogueComponent;
-
 //Actor that can be talked to and interactied with.
 struct NPC : Unit
 {
 	ACTOR_SYSTEM(NPC)
-
-	DialogueComponent* dialogueComponent = nullptr;
 
 	bool isQuickDialogueActive = false;
 

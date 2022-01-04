@@ -3,6 +3,7 @@
 #include "Components/WidgetComponent.h"
 #include "Components/IntuitionComponent.h"
 #include "Components/TimeComponent.h"
+#include "Components/DialogueComponent.h"
 #include "UI/HealthWidget.h"
 #include "Gameplay/GameUtils.h"
 #include "Grid.h"
@@ -14,6 +15,7 @@ GridActor::GridActor()
 
 	timeComponent = TimeComponent::system.Add(this);
 	intuition = IntuitionComponent::system.Add(this);
+	dialogueComponent = DialogueComponent::system.Add(this);
 }
 
 void GridActor::Start()
@@ -38,6 +40,8 @@ void GridActor::Tick(float deltaTime)
 	{
 		healthWidget->pos = GetHomogeneousPositionVector();
 	}
+
+	dialogueComponent->SetPosition(GetHomogeneousPositionVector());
 }
 
 Properties GridActor::GetProps()
