@@ -33,10 +33,12 @@ void BattleSystem::StartBattle()
 	isBattleActive = true;
 
 	grid = GameUtils::GetGrid();
+	grid->lerpOut = true;
 	grid->SetActive(true);
 
 	player = GameUtils::GetPlayer();
 	player->isPlayerTurn = true;
+	player->isWeaponDrawn = true;
 
 	activeBattleUnits = world.GetAllActorsOfTypeInWorld<Unit>();
 	for (auto unit : activeBattleUnits)
