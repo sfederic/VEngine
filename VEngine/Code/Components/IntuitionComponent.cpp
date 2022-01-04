@@ -69,7 +69,7 @@ bool IntuitionComponent::CreateIntuition(std::string actorAquiredFromName)
 	uiSystem.intuitionWidgetInViewport = true;
 	uiSystem.intuitionGainedWidget->AddToViewport();
 
-	GameUtils::PlayAudio("purchase.wav");
+	GameUtils::PlayAudioOneShot("purchase.wav");
 
 	return true; //intuition created
 }

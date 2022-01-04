@@ -233,11 +233,11 @@ void Unit::WindUpAttack()
 	player->guardWidget->RemoveFromViewport();
 	player->guardWidget->guardSuccessful = false;
 
-	GameUtils::PlayAudio("sword_hit.wav");
+	GameUtils::PlayAudioOneShot("sword_hit.wav");
 
 	if (player->guarding)
 	{
-		GameUtils::PlayAudio("shield_hit.wav");
+		GameUtils::PlayAudioOneShot("shield_hit.wav");
 	}
 
 	player->InflictDamage(attackPoints);

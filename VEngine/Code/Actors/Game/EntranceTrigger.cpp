@@ -41,7 +41,7 @@ void EntranceTrigger::Tick(float deltaTime)
                 fileSystem.WriteAllActorSystems();
             }
 
-            GameUtils::PlayAudio("door.wav");
+            GameUtils::PlayAudioOneShot("door.wav");
 
             GameUtils::levelToMoveTo = levelToMoveTo;
             timerSystem.SetTimer(1.f, &GameUtils::LoadWorldAndMoveToEntranceTrigger);

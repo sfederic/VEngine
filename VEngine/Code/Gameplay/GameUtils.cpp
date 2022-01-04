@@ -53,7 +53,7 @@ namespace GameUtils
 		GetPlayer()->nextCameraFOV = 60.f;
 	}
 
-	void PlayAudio(const std::string audioFilename)
+	void PlayAudioOneShot(const std::string audioFilename)
 	{
 		audioSystem.PlayAudio(audioFilename);
 	}

@@ -172,7 +172,7 @@ void Player::Guard()
 
 		ExpendActionPoints(2);
 
-		GameUtils::PlayAudio("equip.wav");
+		GameUtils::PlayAudioOneShot("equip.wav");
 	}
 }
 
@@ -271,12 +271,12 @@ void Player::ToggleBattleGrid()
 
 		if (isWeaponDrawn)
 		{
-			GameUtils::PlayAudio("sword_hit.wav");
+			GameUtils::PlayAudioOneShot("sword_hit.wav");
 			healthWidget->AddToViewport();
 		}
 		else
 		{
-			GameUtils::PlayAudio("sword_sheathe.wav");
+			GameUtils::PlayAudioOneShot("sword_sheathe.wav");
 			healthWidget->RemoveFromViewport();
 		}
 
@@ -353,7 +353,7 @@ void Player::PrimaryAction()
 		{
 			if (isWeaponDrawn)
 			{
-				GameUtils::PlayAudio("sword_miss.wav");
+				GameUtils::PlayAudioOneShot("sword_miss.wav");
 			}
 		}
 	}
@@ -370,12 +370,12 @@ void Player::ToggleIntuitionMenu()
 		if (intuitionWidgetToggle)
 		{
 			intuitionMenuWidget->AddToViewport();
-			GameUtils::PlayAudio("confirm.wav");
+			GameUtils::PlayAudioOneShot("confirm.wav");
 		}
 		else
 		{
 			intuitionMenuWidget->RemoveFromViewport();
-			GameUtils::PlayAudio("cursor.wav");
+			GameUtils::PlayAudioOneShot("cursor.wav");
 		}
 	}
 }
@@ -579,7 +579,7 @@ bool Player::DestructibleCheck(Actor* hitActor)
 			battleSystem.StartBattle();
 			ExpendActionPoints(1);
 			unit->InflictDamage(1);
-			GameUtils::PlayAudio("sword_hit.wav");
+			GameUtils::PlayAudioOneShot("sword_hit.wav");
 			return true;
 		}
 
@@ -587,7 +587,7 @@ bool Player::DestructibleCheck(Actor* hitActor)
 		if (gridActor)
 		{
 			gridActor->InflictDamage(1);
-			GameUtils::PlayAudio("sword_hit.wav");
+			GameUtils::PlayAudioOneShot("sword_hit.wav");
 			return true;
 		}
 	}
