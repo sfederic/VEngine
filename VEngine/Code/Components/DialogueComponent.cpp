@@ -36,6 +36,14 @@ bool DialogueComponent::NextLine()
 
     if (currentLine >= (dialogue.data.size() - 1))
     {
+        //Check condition without dialogue branch
+        std::wstring& conditionName = dataIt->second.conditionName;
+        if (!conditionName.empty())
+        {
+            auto conditionFunction = conditionSystem.FindCondition(VString::wstos(conditionName));
+            conditionFunction(VString::wstos(dataIt->second.conditionArg));
+        }
+
         previousActiveDialogueWidget->RemoveFromViewport();
         currentLine = 0;
         return false;
@@ -45,6 +53,14 @@ bool DialogueComponent::NextLine()
     {
         if (dataIt->second.gotoLine == -1)
         {
+            //Check condition without dialogue branch
+            std::wstring& conditionName = dataIt->second.conditionName;
+            if (!conditionName.empty())
+            {
+                auto conditionFunction = conditionSystem.FindCondition(VString::wstos(conditionName));
+                conditionFunction(VString::wstos(dataIt->second.conditionArg));
+            }
+
             currentLine++;
         }
         else
@@ -82,7 +98,12 @@ bool DialogueComponent::ShowTextAtActor()
         return false;
     }
 
-    Actor* actor = world.GetActorByName(VString::wstos(dataIt->second.actorName));
+    Actor* actor = world.GetActorByNameAllowNull(VString::wstos(dataIt->second.actorName));
+    if (actor == nullptr)
+    {
+        Log("Dialogue actor [%s] not found at line [%d]", dataIt->second.actorName.c_str(), currentLine);
+        return false;
+    }
 
     GameUtils::SetActiveCameraTarget(actor);
 
