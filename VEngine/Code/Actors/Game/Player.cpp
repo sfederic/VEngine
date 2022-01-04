@@ -19,6 +19,8 @@
 #include "UI/IntuitionMenuWidget.h"
 #include "UI/PlayerActionBarWidget.h"
 #include "UI/IntuitionTransferWidget.h"
+#include "UI/IntuitionGainedWidget.h"
+#include "UI/IntuitionRecalledWidget.h"
 #include "UI/TimeOfDayWidget.h"
 #include "UI/HeldPickupWidget.h"
 #include "UI/GuardWidget.h"
@@ -319,6 +321,14 @@ void Player::PrimaryAction()
 
 	if (Input::GetKeyUp(Keys::Down))
 	{
+		if (uiSystem.intuitionWidgetInViewport)
+		{
+			uiSystem.intuitionGainedWidget->RemoveFromViewport();
+			uiSystem.intuitionRecalledWidget->RemoveFromViewport();
+			uiSystem.intuitionWidgetInViewport = false;
+			return;
+		}
+
 		if (inInteraction)
 		{
 			interactWidget->RemoveFromViewport();

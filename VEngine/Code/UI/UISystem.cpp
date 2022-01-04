@@ -75,6 +75,8 @@ void UISystem::RemoveWidget(Widget* widgetToRemove)
 
 void UISystem::Reset()
 {
+	intuitionWidgetInViewport = false;
+
 	for (auto widget : widgets)
 	{
 		delete widget;

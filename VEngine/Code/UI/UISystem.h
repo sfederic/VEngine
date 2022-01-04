@@ -21,6 +21,9 @@ struct UISystem
 	IntuitionRecalledWidget* intuitionRecalledWidget = nullptr;
 	ScreenFadeWidget* screenFadeWidget = nullptr;
 
+	//To check whether recalled or gained widgets are on screen so player can click off them.
+	bool intuitionWidgetInViewport = false;
+
 	//Every widget added in-game
 	std::vector<Widget*> widgets;
 
