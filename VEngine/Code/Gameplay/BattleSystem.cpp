@@ -5,6 +5,8 @@
 #include "Actors/Game/Grid.h"
 #include "Gameplay/GameUtils.h"
 #include "Log.h"
+#include "UI/UISystem.h"
+#include "UI/HealthWidget.h"
 
 BattleSystem battleSystem;
 
@@ -44,6 +46,12 @@ void BattleSystem::StartBattle()
 	for (auto unit : activeBattleUnits)
 	{
 		unit->isInBattle = true;
+	}
+
+	auto healthWidgets = uiSystem.GetAllWidgetsOfType<HealthWidget>();
+	for (auto healthWidget : healthWidgets)
+	{
+		healthWidget->AddToViewport();
 	}
 }
 
