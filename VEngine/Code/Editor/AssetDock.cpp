@@ -29,6 +29,7 @@ namespace Icons
     QPixmap* code;
     QPixmap* material;
     QPixmap* dialogue;
+    QPixmap* audio;
 }
 
 AssetDock::AssetDock() : QDockWidget("Assets")
@@ -46,6 +47,7 @@ AssetDock::AssetDock() : QDockWidget("Assets")
     Icons::code = new QPixmap("Icons/code_icon.png");
     Icons::material = new QPixmap("Icons/material_icon.png");
     Icons::dialogue = new QPixmap("Icons/dialogue_icon.png");
+    Icons::audio = new QPixmap("Icons/audio_icon.png");
 
     fileSystemModel = new QFileSystemModel();
     fileSystemModel->setRootPath(QDir::currentPath());
@@ -189,7 +191,11 @@ void AssetDock::AssetFolderClicked()
         else if (str.contains(".dialog"))
         {
             icon = *Icons::dialogue;
-        }     
+        }   
+        else if (str.contains(".wav"))
+        {
+            icon = *Icons::audio;
+        }
         else
         {
             icon = *Icons::play;
