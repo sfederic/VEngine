@@ -3,17 +3,17 @@
 
 struct GridNode;
 
-enum class BattleStates
-{
-	Fight,
-	Flee,
-	Wander
-};
-
 //Units are battle ready actors and really only move and fight.
 struct Unit : GridActor
 {
-	ACTOR_SYSTEM(Unit)
+	ACTOR_SYSTEM(Unit);
+
+	enum class BattleStates
+	{
+		Fight,
+		Flee,
+		Wander
+	};
 
 	float moveSpeed = 1.0f;
 
