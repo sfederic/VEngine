@@ -10,13 +10,67 @@
 
 using namespace DirectX;
 
+void BinarySerialiser::Serialise(Properties& props)
+{
+	for (auto& propPair : props.propMap)
+	{
+		auto& prop = propPair.second;
+
+		if (props.CheckType<std::string>(propPair.first))
+		{
+			auto str = (std::string*)prop.data;
+			if (fwrite(str->data(), sizeof(char), prop.size, file) == 0)
+			{
+				throw;
+			}
+		}
+		else if (props.CheckType<std::wstring>(propPair.first))
+		{
+			auto wstr = (std::wstring*)prop.data;
+			if (fwrite(wstr->data(), sizeof(wchar_t), prop.size, file) == 0)
+			{
+				throw;
+			}
+		}
+		else
+		{
+			if (fwrite(prop.data, prop.size, 1, file) == 0)
+			{
+				throw;
+			}
+		}
+	}
+}
+
 void BinaryDeserialiser::Deserialise(Properties& props)
 {
 	for (auto& propPair : props.propMap)
 	{
 		auto& prop = propPair.second;
 
-		is.read((char*)&prop.data, prop.size);
+		if (props.CheckType<std::string>(propPair.first))
+		{
+			auto str = props.GetData<std::string>(propPair.first);
+			if (fread(str->data(), sizeof(char), prop.size, file) == 0)
+			{
+				throw;
+			}
+		}
+		else if (props.CheckType<std::wstring>(propPair.first))
+		{
+			auto str = props.GetData<std::wstring>(propPair.first);
+			if (fread(str->data(), sizeof(wchar_t), prop.size, file) == 0)
+			{
+				throw;
+			}
+		}
+		else
+		{
+			if (fread(prop.data, prop.size, 1, file) == 0)
+			{
+				throw;
+			}
+		}
 	}
 }
 
@@ -299,15 +353,5 @@ void Deserialiser::Deserialise(Properties& props)
 			Actor* foundActor = world.GetActorByName(VString::wstos(actorName));
 			actor[0] = foundActor;
 		}
-	}
-}
-
-void BinarySerialiser::Serialise(Properties& props)
-{
-	for (auto& propPair : props.propMap)
-	{
-		auto& prop = propPair.second;
-
-		os.write((const char*)&prop.data, prop.size);
 	}
 }

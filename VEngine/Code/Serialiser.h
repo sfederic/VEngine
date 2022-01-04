@@ -15,48 +15,33 @@ enum class OpenMode
 
 struct BinarySerialiser
 {
-	std::ofstream os;
+	FILE* file = nullptr;
 
 	BinarySerialiser(const std::string filename)
 	{
-		os.open(filename, std::ios_base::binary);
-		if (os.fail()) throw;
+		fopen_s(&file, filename.c_str(), "wb");
 	}
 
 	~BinarySerialiser()
 	{
-		os.close();
+		fclose(file);
 	}
 
 	void Serialise(Properties& props);
-
-	void WriteLine(const std::string str)
-	{
-		size_t stringSize = str.size() + 1;
-		os.write((const char*)&stringSize, sizeof(size_t));
-		os.write(str.data(), stringSize);
-	}
-
-	template <typename T>
-	void Write(T arg)
-	{
-		os.write((const char*)&arg, sizeof(T));
-	}
 };
 
 struct BinaryDeserialiser
 {
-	std::ifstream is;
+	FILE* file = nullptr;
 
 	BinaryDeserialiser(const std::string filename)
 	{
-		is.open(filename, std::ios_base::binary);
-		if (is.fail()) throw;
+		fopen_s(&file, filename.c_str(), "rb");
 	}
 
 	~BinaryDeserialiser()
 	{
-		is.close();
+		fclose(file);
 	}
 
 	void Deserialise(Properties& props);
