@@ -430,7 +430,10 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 
 	nextPos = XMLoadFloat3(&node->worldPosition);
 
-	ExpendActionPoints(1);
+	if (battleSystem.isBattleActive)
+	{
+		ExpendActionPoints(1);
+	}
 }
 
 void Player::PlacePickupDown()
