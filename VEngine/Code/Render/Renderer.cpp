@@ -1101,7 +1101,7 @@ void Renderer::SetRenderPipelineStates(MeshComponent* mesh)
 	{
 		context->RSSetState(rastStateWireframe);
 	}
-	else
+	else if (material->rastState)
 	{
 		context->RSSetState(material->rastState->data);
 	}

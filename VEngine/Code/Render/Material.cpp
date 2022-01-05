@@ -62,7 +62,7 @@ static void ReassignRastState(void* data)
 	RastState* foundRastState = renderer.rastStateMap[*rastName];
 	if (foundRastState == nullptr)
 	{
-		Log("%s not found on rast state change.", *rastName);
+		Log("%s not found on rast state change.", rastName->c_str());
 		return;
 	}
 
