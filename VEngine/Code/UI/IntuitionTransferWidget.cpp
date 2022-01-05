@@ -30,15 +30,15 @@ void IntuitionTransferWidget::Draw(float deltaTime)
 				selectedIntuitionsToTransfer.emplace(intuition.name, intuition);
 			}
 
-			itemLayout.AddVerticalSpace(30.f);
-
-			Text(VString::stows(intuition.description), itemLayout);
+			//itemLayout.AddVerticalSpace(30.f);
+			//Text(VString::stows(intuition.description), itemLayout);
 		}
 	}
 
 	//Display selected intuitions
 	{
 		Layout layout = AlignLayout(200.f, 30.f, Align::Right);
+
 		FillRect(layout);
 
 		for (auto& intuitionPair : selectedIntuitionsToTransfer)
