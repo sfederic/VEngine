@@ -416,6 +416,9 @@ void Renderer::RenderMeshComponents()
 
 	UpdateLights();
 
+	const FLOAT blendFactor[4] = { 0.f };
+	context->OMSetBlendState(nullptr, blendFactor, 0xFFFFFFFF);
+
 	for (auto mesh : MeshComponent::system.components)
 	{
 		if (!mesh->active) continue;
@@ -1106,16 +1109,16 @@ void Renderer::SetRenderPipelineStates(MeshComponent* mesh)
 		context->RSSetState(material->rastState->data);
 	}
 
-	const FLOAT blendState[4] = { 0.f };
-	if (material->blendState)
-	{
-		context->OMSetBlendState(material->blendState->data, blendState, 0xFFFFFFFF);
-	}
-	else
-	{
-		//Set default
-		context->OMSetBlendState(nullptr, blendState, 0xFFFFFFFF);
-	}
+	//const FLOAT blendState[4] = { 0.f };
+	//if (material->blendState)
+	//{
+	//	context->OMSetBlendState(material->blendState->data, blendState, 0xFFFFFFFF);
+	//}
+	//else
+	//{
+	//	//Set default
+	//	context->OMSetBlendState(nullptr, blendState, 0xFFFFFFFF);
+	//}
 
 	context->VSSetShader(material->shader->vertexShader, nullptr, 0);
 	context->PSSetShader(material->shader->pixelShader, nullptr, 0);
