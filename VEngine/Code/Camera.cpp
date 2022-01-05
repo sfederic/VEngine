@@ -175,11 +175,11 @@ void CameraComponent::Tick(float deltaTime)
 				}
 				if (Input::GetAsyncKey(Keys::Q))
 				{
-					Move(-moveSpeed, up);
+					Move(-moveSpeed, VMath::XMVectorUp());
 				}
 				if (Input::GetAsyncKey(Keys::E))
 				{
-					Move(moveSpeed, up);
+					Move(moveSpeed, VMath::XMVectorUp());
 				}
 			}
 
