@@ -8,6 +8,8 @@ Grid
 1 1 1
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 node.fbx
 Name
@@ -20,6 +22,8 @@ Size X
 5
 Size Y
 5
+Static
+1
 Texture
 test.png
 UID
@@ -42,9 +46,9 @@ AudioActor
 Player
 1
  Position
-1 0.05 2
+0 0 2
  Rotation
--0 0 -0 1
+0 0 0 1
  Scale
 0.999983 1 0.999983
 Casts Shadow
@@ -55,6 +59,8 @@ Far Z
 1000
 File
 
+Grid Obstacle
+0
 Mesh
 unit_test.fbx
 Name
@@ -65,6 +71,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 wall.png
 UID
@@ -77,7 +85,7 @@ UvScale
 1 1
 next
 MeshActor
-8
+9
  Position
 2 -0.5 2
  Rotation
@@ -86,6 +94,8 @@ MeshActor
 3 2.99997 0.999993
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 plane.fbx
 Name
@@ -94,6 +104,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 test.png
 UID
@@ -113,6 +125,8 @@ next
 3 1 1
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 plane.fbx
 Name
@@ -121,6 +135,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 wall02.png
 UID
@@ -140,6 +156,8 @@ next
 3.00002 1 1
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 plane.fbx
 Name
@@ -148,6 +166,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 wall.png
 UID
@@ -167,6 +187,8 @@ next
 3.00002 1 1
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 plane.fbx
 Name
@@ -175,6 +197,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 wall.png
 UID
@@ -194,6 +218,8 @@ next
 3.00008 0.999999 1
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 plane.fbx
 Name
@@ -202,6 +228,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 wall.png
 UID
@@ -221,6 +249,8 @@ next
 1 0.5 1
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 cube.fbx
 Name
@@ -229,6 +259,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 wall (2).png
 UID
@@ -248,6 +280,8 @@ next
 1 0.5 1
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 cube.fbx
 Name
@@ -256,6 +290,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 wall (2).png
 UID
@@ -275,6 +311,8 @@ next
 1 0.5 1
 Casts Shadow
 1
+Grid Obstacle
+0
 Mesh
 cube.fbx
 Name
@@ -283,10 +321,43 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 wall (2).png
 UID
 3756286954
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+-0.99 0.5 2
+ Rotation
+0.000172651 0.707229 -0.000172746 0.706985
+ Scale
+0.499998 1 0.999995
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+plane8
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test_door_texture.png
+UID
+67571753
 UvOffset
 0 0
 UvRotation
@@ -349,4 +420,10 @@ DialogueInstance
 GameEvent
 0
 ParticleSystem
+0
+DestructibleActor
+0
+DialogueTrigger
+0
+TitleScreenActor
 0

@@ -48,9 +48,9 @@ Add On Interact
 Casts Shadow
 1
 Condition
-
+IntuitionCheck
 Condition Value
-
+Bestowed Alive
 Description
 Aden knows about the Bestowed's condition.
 Destruct
@@ -96,7 +96,7 @@ activeEndHour
 alwaysActive
 1
 interactKnownText
-maybe he's here maybe not
+Listening carefullyl, Aden can hear a faint, ragged breathing from within the coffin.
 next
 Unit
 0
@@ -128,9 +128,9 @@ next
 Player
 1
  Position
-2 0 3
+2 0 4
  Rotation
--0 0 -0 1
+0 0.707107 0 0.707107
  Scale
 0.999997 1 0.999997
 Casts Shadow
@@ -652,7 +652,7 @@ NPC
 Add On Interact
 0
 Attack Points
-1
+2
 Casts Shadow
 1
 Condition
@@ -668,7 +668,7 @@ church_hall/main_hand.dialog
 Grid Obstacle
 0
 Health
-2
+4
 Interact
 0
 Interact Text
@@ -680,7 +680,7 @@ unit_test.fbx
 Move Points
 3
 Move Speed
-1
+3
 Name
 NPC0
 Obstacle
@@ -719,7 +719,7 @@ next
 Add On Interact
 0
 Attack Points
-1
+3
 Casts Shadow
 1
 Condition
@@ -735,7 +735,7 @@ File
 Grid Obstacle
 0
 Health
-1
+5
 Interact
 1
 Interact Text
@@ -745,9 +745,9 @@ Intuition Name
 Mesh
 unit_test.fbx
 Move Points
-1
+6
 Move Speed
-1
+3
 Name
 NPC1
 Obstacle
@@ -786,7 +786,7 @@ next
 Add On Interact
 0
 Attack Points
-1
+3
 Casts Shadow
 1
 Condition
@@ -802,7 +802,7 @@ File
 Grid Obstacle
 0
 Health
-1
+4
 Interact
 1
 Interact Text
@@ -812,9 +812,9 @@ Intuition Name
 Mesh
 unit_test.fbx
 Move Points
-1
+7
 Move Speed
-1
+3
 Name
 NPC2
 Obstacle

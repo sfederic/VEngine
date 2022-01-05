@@ -36,7 +36,7 @@ UvScale
 1 1
 next
 GridActor
-2
+1
  Position
 4 0 4
  Rotation
@@ -55,6 +55,8 @@ Description
 
 Destruct
 1
+File
+
 Grid Obstacle
 0
 Health
@@ -71,65 +73,6 @@ Name
 GridActor0
 Obstacle
 0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-floor.jpg
-UID
-1689631026
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-interactKnownText
-
-next
- Position
-4 0 0
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Description
-
-Destruct
-1
-Grid Obstacle
-1
-Health
-0
-Interact
-1
-Interact Text
-An empty vase.
-Intuition Name
-
-Mesh
-vase.fbx
-Name
-GridActor1
-Obstacle
-1
 Rast State
 solid
 Shader
@@ -185,15 +128,15 @@ next
 Player
 1
  Position
-3 -9.53674e-07 0
+1 0.0100002 3
  Rotation
-0 0.707107 0 0.707107
+0 1 0 1.56958e-07
  Scale
-0.999978 1 0.999978
+0.999971 1 0.999971
 Casts Shadow
 1
 FOV
-58.4577
+60
 Far Z
 1000
 File
@@ -224,7 +167,7 @@ UvScale
 1 1
 next
 MeshActor
-14
+13
  Position
 2 -0.5 2
  Rotation
@@ -238,7 +181,7 @@ Grid Obstacle
 Mesh
 plane.fbx
 Name
-floor
+cube0
 Rast State
 solid
 Shader
@@ -269,7 +212,7 @@ Grid Obstacle
 Mesh
 plane.fbx
 Name
-wall1
+cube1
 Rast State
 solid
 Shader
@@ -300,7 +243,7 @@ Grid Obstacle
 Mesh
 plane.fbx
 Name
-wall2
+cube2
 Rast State
 solid
 Shader
@@ -331,7 +274,7 @@ Grid Obstacle
 Mesh
 plane.fbx
 Name
-wall3
+cube3
 Rast State
 solid
 Shader
@@ -362,7 +305,7 @@ Grid Obstacle
 Mesh
 plane.fbx
 Name
-wall4
+cube4
 Rast State
 solid
 Shader
@@ -381,11 +324,11 @@ UvScale
 1 1
 next
  Position
--0.99 0.5 3
+-0.99 0.5 4
  Rotation
--0 0.707107 -0 0.707107
+0 0.707107 0 0.707107
  Scale
-0.75 1 1
+0.749992 1 0.999992
 Casts Shadow
 1
 Grid Obstacle
@@ -393,7 +336,7 @@ Grid Obstacle
 Mesh
 plane.fbx
 Name
-Door1
+cube5
 Rast State
 solid
 Shader
@@ -424,7 +367,7 @@ Grid Obstacle
 Mesh
 plane.fbx
 Name
-carpet
+cube6
 Rast State
 solid
 Shader
@@ -443,19 +386,19 @@ UvScale
 1 1
 next
  Position
-4 0 2
+0 0 0
  Rotation
--0 -0.706934 -0 0.707279
+-0 0 -0 1
  Scale
-1.5 1 1.5
+1 1 1
 Casts Shadow
 1
 Grid Obstacle
 1
 Mesh
-table.fbx
+small_table.fbx
 Name
-table7
+cube7
 Rast State
 solid
 Shader
@@ -465,7 +408,7 @@ Static
 Texture
 barrel_texture.jpg
 UID
-1522197970
+1014463215
 UvOffset
 0 0
 UvRotation
@@ -474,100 +417,7 @@ UvScale
 1 1
 next
  Position
-3.95 0.35 1
- Rotation
-0 0.819152 0 0.573577
- Scale
-1 1 1
-Casts Shadow
-1
-Grid Obstacle
-1
-Mesh
-book.fbx
-Name
-book1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-book.jpg
-UID
-2272155524
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
- Position
-3.1 1 4.9
- Rotation
-0 0.707107 0 -0.707107
- Scale
-1 1 1
-Casts Shadow
-1
-Grid Obstacle
-0
-Mesh
-shield.fbx
-Name
-MeshActor9
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-metal.jpg
-UID
-321336638
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
- Position
-2 1 4.9
- Rotation
-0 0.707107 0 -0.707107
- Scale
-1 1 1
-Casts Shadow
-1
-Grid Obstacle
-0
-Mesh
-shield.fbx
-Name
-MeshActor10
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-metal.jpg
-UID
-321336638
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
- Position
-3.95 0.35 1.9
+3.95 0.55 2.9
  Rotation
 0 0.819152 0 0.573577
  Scale
@@ -598,7 +448,69 @@ UvScale
 1 1
 next
  Position
-3.95 0.35 2.9
+3.1 1 4.9
+ Rotation
+0 0.707107 0 -0.707107
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+shield.fbx
+Name
+cube9
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+metal.jpg
+UID
+321336638
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+2 1 4.9
+ Rotation
+0 0.707107 0 -0.707107
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+shield.fbx
+Name
+cube10
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+metal.jpg
+UID
+321336638
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+-0.05 0.55 -0.0999999
  Rotation
 0 0.819152 0 0.573577
  Scale
@@ -610,7 +522,7 @@ Grid Obstacle
 Mesh
 book.fbx
 Name
-book3
+book1
 Rast State
 solid
 Shader
@@ -629,19 +541,19 @@ UvScale
 1 1
 next
  Position
-1 -0.5 4
+4 0 3
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
 Casts Shadow
 1
 Grid Obstacle
-0
+1
 Mesh
-pillar3.fbx
+small_table.fbx
 Name
-pillar313
+cube12
 Rast State
 solid
 Shader
@@ -649,9 +561,9 @@ DefaultShader.hlsl
 Static
 1
 Texture
-floor.jpg
+barrel_texture.jpg
 UID
-2770078934
+1014463215
 UvOffset
 0 0
 UvRotation
@@ -685,7 +597,7 @@ SpotLightActor
 EntranceTrigger
 1
  Position
-0 0 3
+0 0 4
  Rotation
 0 1 0 1.56958e-07
  Scale
@@ -705,12 +617,76 @@ UID
 next
 NPC
 0
+FenceActor
+2
+ Position
+1.5 0 4
+ Rotation
+-0.000172588 -0.706985 0.000172563 0.707229
+ Scale
+0.999997 0.99999 0.999997
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+FenceActor0
+Rast State
+nobackcull
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test_fence.png
+UID
+1628174413
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+1.5 0 2
+ Rotation
+-0.000172588 -0.706985 0.000172563 0.707229
+ Scale
+1 0.99999 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+FenceActor1
+Rast State
+nobackcull
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test_fence.png
+UID
+1628174413
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
 Billboard
 0
 InteractTrigger
-3
+2
  Position
-3 0 1
+0 0 1
  Rotation
 -0 0 -0 1
  Scale
@@ -718,30 +694,32 @@ InteractTrigger
 Add On Interact
 1
 Condition
-
+IntuitionCheck
 Condition Value
-
+Flint
 Description
-
+Aden knows about the pyre that is lit at The Bestowed's funeral
 Extents
 0.9 0.9 0.9
 Interact Text
-"The Bestowed, at death, shall have their body kindled, that their soul reaches the Goddess burning and alight"
+Aden reads the pages on lighting the pyre, but can't figure out HOW it's lit.
 Intuition Name
-
+The Pyre
 Name
 book1trigger
 UID
 162837439
 interactKnown
-
+USe the flint to blah blah
 overlapText
 Examine Book
+soundEffect
+
 targetActorName
 book1
 next
  Position
-3 0 2
+3 0 3
  Rotation
 -0 0 -0 1
  Scale
@@ -768,39 +746,10 @@ interactKnown
 
 overlapText
 Examine Book
+soundEffect
+
 targetActorName
 book2
-next
- Position
-3 0 3
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-1
-Condition
-IntuitionCheck
-Condition Value
-Flint
-Description
-Aden knows about the pyre that is lit at The Bestowed's funeral
-Extents
-0.9 0.9 0.9
-Interact Text
-Aden reads the pages on lighting the pyre, but can't figure out HOW it's lit.
-Intuition Name
-The Pyre
-Name
-book3trigger
-UID
-162837439
-interactKnown
-USe the flint to blah blah
-overlapText
-Examine Book
-targetActorName
-book3
 next
 DialogueInstance
 0
