@@ -115,9 +115,17 @@ struct Properties
 			auto src = (std::string*)propToCopy.data;
 
 			dst->assign(src->data());
+		}	
+		else if (prop.info == typeid(std::wstring))
+		{
+			auto dst = (std::wstring*)prop.data;
+			auto src = (std::wstring*)propToCopy.data;
+
+			dst->assign(src->data());
 		}
 		else
 		{
+			assert(prop.size == propToCopy.size);
 			memcpy(prop.data, propToCopy.data, prop.size);
 		}
 	}
