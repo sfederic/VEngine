@@ -10,6 +10,7 @@
 #include "Gameplay/GameUtils.h"
 #include "Actors/Game/NPC.h"
 #include "Actors/Game/Pickup.h"
+#include "Actors/Game/FenceActor.h"
 #include "Components/DialogueComponent.h"
 #include "Grid.h"
 #include "GridActor.h"
@@ -426,6 +427,17 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 		Log("Node [x:%d, y:%d] too high to move to.", nextXIndex, nextYIndex);
 		nextPos = previousPos;
 		return;
+	}
+
+	//FENCE RAYCAST CHECK
+	Ray fenceRay(this);
+	if (Raycast(fenceRay, GetPositionVector(), nextPos))
+	{
+		if (dynamic_cast<FenceActor*>(fenceRay.hitActor))
+		{
+			nextPos = previousPos;
+			return;
+		}
 	}
 
 	nextPos = XMLoadFloat3(&node->worldPosition);
