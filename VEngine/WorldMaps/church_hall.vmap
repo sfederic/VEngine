@@ -564,7 +564,7 @@ PointLightActor
 SpotLightActor
 0
 EntranceTrigger
-4
+5
  Position
 0 0 4
  Rotation
@@ -640,6 +640,25 @@ Open Text
 Open
 UID
 1067295734
+next
+ Position
+4 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Entrance Active
+0
+Extents
+0.9 0.9 0.9
+Level Name
+church_foyer.vmap
+Name
+EntranceTrigger4
+Open Text
+Enter Church Foyer
+UID
+2372518495
 next
 NPC
 3
@@ -844,6 +863,8 @@ alwaysActive
 interactKnownText
 
 next
+FenceActor
+0
 Billboard
 0
 InteractTrigger

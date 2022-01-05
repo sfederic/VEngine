@@ -22,6 +22,8 @@ Size X
 9
 Size Y
 9
+Static
+1
 Texture
 test.png
 UID
@@ -69,6 +71,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 wall.png
 UID
@@ -100,6 +104,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 floor.jpg
 UID
@@ -129,6 +135,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 test_atlas.png
 UID
@@ -158,6 +166,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 test_atlas.png
 UID
@@ -187,6 +197,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 test_atlas.png
 UID
@@ -216,6 +228,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 test_atlas.png
 UID
@@ -245,6 +259,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 test_atlas.png
 UID
@@ -274,6 +290,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 floor.jpg
 UID
@@ -303,6 +321,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 test.png
 UID
@@ -332,6 +352,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 test.png
 UID
@@ -361,6 +383,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 test.png
 UID
@@ -390,6 +414,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 test.png
 UID
@@ -419,6 +445,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 test.png
 UID
@@ -448,6 +476,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Static
+1
 Texture
 test.png
 UID
@@ -483,8 +513,29 @@ PointLightActor
 SpotLightActor
 0
 EntranceTrigger
-0
+1
+ Position
+3 1 5
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+0.9 0.9 0.9
+Level Name
+church_foyer.vmap
+Name
+EntranceTrigger0
+Open Text
+Enter Church
+UID
+1643835419
+next
 NPC
+0
+FenceActor
 0
 Billboard
 0
@@ -495,4 +546,10 @@ DialogueInstance
 GameEvent
 0
 ParticleSystem
+0
+DestructibleActor
+0
+DialogueTrigger
+0
+TitleScreenActor
 0
