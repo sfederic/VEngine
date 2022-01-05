@@ -11,6 +11,7 @@
 #include "UI/UISystem.h"
 #include "UI/ScreenFadeWidget.h"
 #include "Input.h"
+#include "Log.h"
 
 namespace GameUtils
 {
@@ -83,7 +84,6 @@ namespace GameUtils
 
 		GameUtils::SaveGameInstanceData();
 
-		assert(std::filesystem::exists(path));
 		fileSystem.LoadWorld(worldName);
 	}
 
@@ -111,8 +111,6 @@ namespace GameUtils
 	{
 		GameInstance::ProgressTime();
 
-		LoadWorld(levelToMoveTo);
-
 		uiSystem.screenFadeWidget->SetToFadeIn();
 		uiSystem.screenFadeWidget->AddToViewport();
 
@@ -138,6 +136,11 @@ namespace GameUtils
 		GameInstance::previousMapMovedFrom = levelToMoveTo;
 
 		assert(matchingEntranceTriggerCount < 2 && "Entrances with same name");
+
+		if (matchingEntranceTriggerCount == 0)
+		{
+			Log("EntranceTrigger with matching [%s] field not found.", levelToMoveTo.c_str());
+		}
 
 		Input::blockInput = false;
 	}
