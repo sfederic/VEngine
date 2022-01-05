@@ -111,6 +111,7 @@ namespace GameUtils
 	{
 		GameInstance::ProgressTime();
 
+		LoadWorld(levelToMoveTo);
 		uiSystem.screenFadeWidget->SetToFadeIn();
 		uiSystem.screenFadeWidget->AddToViewport();
 

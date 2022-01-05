@@ -1,4 +1,6 @@
 #include "EntranceTrigger.h"
+#include <filesystem>
+#include "Log.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/GameInstance.h"
@@ -35,6 +37,10 @@ void EntranceTrigger::Tick(float deltaTime)
         if (Input::GetKeyUp(Keys::Down))
         {
             //Load new world
+            if (!CheckIfWorldExists(levelToMoveTo))
+            {
+                return;
+            }
 
             if (GameInstance::useGameSaves)
             {
@@ -71,4 +77,23 @@ Properties EntranceTrigger::GetProps()
     props.Add("Entrance Active", &isEntraceActive);
     props.Add("Open Text", &openText);
     return props;
+}
+
+bool EntranceTrigger::CheckIfWorldExists(std::string& worldName)
+{
+    if (GameInstance::useGameSaves)
+    {
+        if (!std::filesystem::exists("GameSaves/" + worldName))
+        {
+            Log("GameSaves/[%s] not found for [%s]", worldName.c_str(), this->name.c_str());
+            return false;
+        }
+    }
+    else if (!std::filesystem::exists("WorldMaps/" + worldName))
+    {
+        Log("WorldMaps/[%s] not found for [%s]", worldName.c_str(), this->name.c_str());
+        return false;
+    }
+
+    return true;
 }
