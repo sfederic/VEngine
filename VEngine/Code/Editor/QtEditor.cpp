@@ -87,9 +87,9 @@ void QtEditor::AddActorToWorldList(Actor* actor)
     mainWindow->worldDock->AddActorToList(actor);
 }
 
-void QtEditor::RemoveActorFromWorldList(Actor* actor)
+void QtEditor::RemoveActorFromWorldList()
 {
-    mainWindow->worldDock->RemoveActorFromList(actor);
+    mainWindow->worldDock->RemoveActorFromList();
 }
 
 void QtEditor::RefreshAssetList()

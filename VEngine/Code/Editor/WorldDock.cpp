@@ -184,7 +184,7 @@ void WorldDock::AddActorToList(Actor* actor)
 	actorTreeWidget->blockSignals(false);
 }
 
-void WorldDock::RemoveActorFromList(Actor* actor)
+void WorldDock::RemoveActorFromList()
 {
 	actorTreeWidget->blockSignals(true);
 

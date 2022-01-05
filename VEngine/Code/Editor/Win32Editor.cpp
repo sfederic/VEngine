@@ -59,7 +59,7 @@ void Win32Editor::AddActorToWorldList(Actor* actor)
 {
 }
 
-void Win32Editor::RemoveActorFromWorldList(Actor* actor)
+void Win32Editor::RemoveActorFromWorldList()
 {
 }
 

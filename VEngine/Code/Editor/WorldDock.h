@@ -22,7 +22,7 @@ public:
 	void PopulateWorldActorList();
 	void SelectActorInList();
 	void AddActorToList(Actor* actor);
-	void RemoveActorFromList(Actor* actor);
+	void RemoveActorFromList();
 
 private:
 	//Click on list to select actor(s)

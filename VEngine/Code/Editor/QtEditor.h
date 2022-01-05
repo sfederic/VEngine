@@ -17,7 +17,7 @@ struct QtEditor : IEditor, QObject
 	virtual void SetActorProps(Actor* actor) override;
 	virtual void UpdateWorldList() override;
 	virtual void AddActorToWorldList(Actor* actor) override;
-	virtual void RemoveActorFromWorldList(Actor* actor) override;
+	virtual void RemoveActorFromWorldList() override;
 	virtual void RefreshAssetList() override;
 	virtual void ClearProperties() override;
 	virtual void SelectActorInWorldList() override;

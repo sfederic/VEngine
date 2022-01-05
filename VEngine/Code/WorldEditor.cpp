@@ -101,7 +101,7 @@ void WorldEditor::DeleteActor()
 	{
 		if (Input::GetKeyUp(Keys::Delete))
 		{
-			editor->RemoveActorFromWorldList(nullptr);
+			editor->RemoveActorFromWorldList();
 
 			if (pickedActors.size() > 1)
 			{
