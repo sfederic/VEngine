@@ -59,6 +59,8 @@ void WorldEditor::DuplicateActor()
 			{
 				pickedActors.clear();
 
+				editor->ClearProperties();
+
 				Transform transform = pickedActor->GetTransform();
 				Actor* newDuplicateActor = pickedActor->actorSystem->SpawnActor(transform);
 
