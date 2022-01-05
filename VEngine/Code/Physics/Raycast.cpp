@@ -139,6 +139,13 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 	return false;
 }
 
+bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR end)
+{
+	XMVECTOR direction = end - origin;
+	float range = XMVector3Length(direction).m128_f32[0];
+	return Raycast(ray, origin, direction, range, false);
+}
+
 bool RaycastTriangleIntersect(Ray& ray)
 {
 	std::vector<Ray> rays;
