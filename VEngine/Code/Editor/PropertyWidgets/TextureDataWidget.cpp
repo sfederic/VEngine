@@ -23,7 +23,7 @@ void TextureDataWidget::SetValue()
 
 	if (!filename.isEmpty())
 	{
-		value->filename = filename.toStdString();
+		value->filename.assign(filename.toStdString());
 		prop.change(value);
 		ResetValue();
 	}
