@@ -18,12 +18,6 @@ void DialogueComponent::Start()
     widget = dialogueWidget;
 
     dialogue.LoadFromFile();
-    spawnDialogue.LoadFromFile();
-
-    if (!spawnDialogue.filename.empty())
-    {
-        ShowSpawnDialogue();
-    }
 }
 
 void DialogueComponent::Create()
@@ -34,61 +28,7 @@ Properties DialogueComponent::GetProps()
 {
     Properties props("Dialogue Component");
     props.Add("File", &dialogue.filename);
-    props.Add("SpawnDialog", &spawnDialogue.filename);
     return props;
-}
-
-void DialogueComponent::ShowSpawnDialogue()
-{
-    auto dataIt = spawnDialogue.data.find(spawnDialogueCurrentLine);
-    if (dataIt == spawnDialogue.data.end())
-    {
-        Log("Dialogue line number %d not found.", spawnDialogueCurrentLine);
-        return;
-    }
-
-    Actor* actor = world.GetActorByNameAllowNull(VString::wstos(dataIt->second.actorName));
-    if (actor == nullptr)
-    {
-        Log("Dialogue actor [%s] not found at line [%d]", dataIt->second.actorName.c_str(), currentLine);
-        return;
-    }
-
-    auto dcs = actor->GetComponentsOfType<DialogueComponent>();
-    for (auto* d : dcs)
-    {
-        d->dialogueWidget->pos = actor->GetHomogeneousPositionVector();
-        d->dialogueWidget->SetText(dataIt->second.text);
-        d->dialogueWidget->AddToViewport();
-
-        previousActiveDialogueWidget = d->dialogueWidget;
-    }
-
-    timerSystem.SetTimer(4.0f, std::bind(&DialogueComponent::NextSpawnLine, this));
-}
-
-void DialogueComponent::NextSpawnLine()
-{
-    auto dataIt = spawnDialogue.data.find(spawnDialogueCurrentLine);
-
-    if (spawnDialogueCurrentLine >= (spawnDialogue.data.size() - 1))
-    {
-        previousActiveDialogueWidget->RemoveFromViewport();
-        spawnDialogueCurrentLine = 0;
-        return;
-    }
-
-    if (dataIt != spawnDialogue.data.end())
-    {
-        if (dataIt->second.gotoLine == -1)
-        {
-            spawnDialogueCurrentLine++;
-            previousActiveDialogueWidget->RemoveFromViewport();
-        }
-    }
-
-    ShowSpawnDialogue();
-    timerSystem.SetTimer(4.0f, std::bind(&DialogueComponent::NextSpawnLine, this));
 }
 
 bool DialogueComponent::NextLine()
