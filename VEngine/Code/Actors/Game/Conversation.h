@@ -12,6 +12,8 @@ struct Conversation : Actor
 
 	DialogueComponent* dialogueComponent = nullptr;
 
+	bool playOnSpawn = true;
+
 	Conversation();
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;

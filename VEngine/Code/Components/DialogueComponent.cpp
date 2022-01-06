@@ -126,15 +126,15 @@ DialogueData* DialogueComponent::GetCurrentLine()
     return &dialogue.data.find(currentLine)->second;
 }
 
-void DialogueComponent::ConversationNextLine()
+bool DialogueComponent::ConversationNextLine()
 {
     auto dataIt = dialogue.data.find(currentLine);
 
-    if (currentLine >= (dialogue.data.size() - 1))
+    if (currentLine >= dialogue.data.size())
     {
         previousActiveDialogueWidget->RemoveFromViewport();
         currentLine = 0;
-        return;
+        return false;
     }
 
     if (dataIt != dialogue.data.end())
@@ -142,13 +142,12 @@ void DialogueComponent::ConversationNextLine()
         if (dataIt->second.gotoLine == -1)
         {
             currentLine++;
-        }
-        else
-        {
-            previousActiveDialogueWidget->RemoveFromViewport();
-            currentLine = 0;
+            return true;
         }
     }
+
+    previousActiveDialogueWidget->RemoveFromViewport();
+    return false;
 }
 
 void DialogueComponent::ConversationShowTextAtActor()

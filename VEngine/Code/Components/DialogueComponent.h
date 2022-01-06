@@ -31,6 +31,6 @@ public:
 	DialogueData* GetCurrentLine();
 
 	//Functions to call in Conversation
-	void ConversationNextLine();
+	bool ConversationNextLine();
 	void ConversationShowTextAtActor();
 };
