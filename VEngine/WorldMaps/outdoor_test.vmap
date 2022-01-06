@@ -46,9 +46,9 @@ AudioActor
 Player
 1
  Position
-3 0.051955 0
+5 0.00195503 0
  Rotation
-0 1.69873e-06 0 -0.999999
+0 0.707107 0 0.707107
  Scale
 0.999999 1 0.999999
 Casts Shadow
@@ -513,7 +513,7 @@ PointLightActor
 SpotLightActor
 0
 EntranceTrigger
-1
+2
  Position
 3 1 5
  Rotation
@@ -532,6 +532,25 @@ Open Text
 Enter Church
 UID
 1643835419
+next
+ Position
+5 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+0.9 0.9 0.9
+Level Name
+test_house.vmap
+Name
+EntranceTrigger1
+Open Text
+Enter Mr. Risotti's Home
+UID
+883507173
 next
 NPC
 0
