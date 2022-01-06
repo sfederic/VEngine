@@ -15,8 +15,9 @@ struct DialogueTrigger : Actor
 	BoxTriggerComponent* boxTriggerComponent = nullptr;
 
 	bool playOnSpawn = false;
-	
 	bool playOnTriggerOverlap = false;
+
+	bool dialogueFinished = false;
 
 	DialogueTrigger();
 	virtual void Start() override;

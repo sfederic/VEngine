@@ -24,10 +24,13 @@ void DialogueTrigger::Start()
 
 void DialogueTrigger::Tick(float deltaTime)
 {
-    if (playOnTriggerOverlap)
+    if (boxTriggerComponent->ContainsTarget())
     {
-        playOnTriggerOverlap = false;
-        NextLine();
+        if (playOnTriggerOverlap)
+        {
+            playOnTriggerOverlap = false;
+            NextLine();
+        }
     }
 }
 
@@ -35,11 +38,17 @@ Properties DialogueTrigger::GetProps()
 {
     auto props = __super::GetProps();
     props.AddProp(playOnSpawn);
+    props.AddProp(playOnTriggerOverlap);
     return props;
 }
 
 void DialogueTrigger::NextLine()
 {
+    if (dialogueFinished)
+    {
+        return;
+    }
+
     if (dialogueComponent->previousActiveDialogueWidget)
     {
         dialogueComponent->previousActiveDialogueWidget->RemoveFromViewport();
@@ -50,5 +59,9 @@ void DialogueTrigger::NextLine()
     if (dialogueComponent->ConversationNextLine())
     {
         timerSystem.SetTimer(4.f, std::bind(&DialogueTrigger::NextLine, this));
+    }
+    else
+    {
+        dialogueFinished = true;
     }
 }
