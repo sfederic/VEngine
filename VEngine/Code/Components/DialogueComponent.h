@@ -29,4 +29,8 @@ public:
 	bool ShowTextAtActor();
 
 	DialogueData* GetCurrentLine();
+
+	//Functions to call in Conversation
+	void ConversationNextLine();
+	void ConversationShowTextAtActor();
 };

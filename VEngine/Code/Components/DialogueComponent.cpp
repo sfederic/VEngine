@@ -125,3 +125,55 @@ DialogueData* DialogueComponent::GetCurrentLine()
 {
     return &dialogue.data.find(currentLine)->second;
 }
+
+void DialogueComponent::ConversationNextLine()
+{
+    auto dataIt = dialogue.data.find(currentLine);
+
+    if (currentLine >= (dialogue.data.size() - 1))
+    {
+        previousActiveDialogueWidget->RemoveFromViewport();
+        currentLine = 0;
+        return;
+    }
+
+    if (dataIt != dialogue.data.end())
+    {
+        if (dataIt->second.gotoLine == -1)
+        {
+            currentLine++;
+        }
+        else
+        {
+            previousActiveDialogueWidget->RemoveFromViewport();
+            currentLine = 0;
+        }
+    }
+}
+
+void DialogueComponent::ConversationShowTextAtActor()
+{
+    auto dataIt = dialogue.data.find(currentLine);
+    if (dataIt == dialogue.data.end())
+    {
+        Log("Dialogue line number %d not found.", currentLine);
+        return;
+    }
+
+    Actor* actor = world.GetActorByNameAllowNull(VString::wstos(dataIt->second.actorName));
+    if (actor == nullptr)
+    {
+        Log("Dialogue actor [%s] not found at line [%d]", dataIt->second.actorName.c_str(), currentLine);
+        return;
+    }
+
+    auto dcs = actor->GetComponentsOfType<DialogueComponent>();
+    for (auto* d : dcs)
+    {
+        d->dialogueWidget->pos = actor->GetHomogeneousPositionVector();
+        d->dialogueWidget->SetText(dataIt->second.text);
+        d->dialogueWidget->AddToViewport();
+
+        previousActiveDialogueWidget = d->dialogueWidget;
+    }
+}
