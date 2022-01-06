@@ -86,6 +86,12 @@ ConditionFunction ConditionSystem::FindCondition(std::string conditionName)
 	return conditionIt->second;
 }
 
+ConditionFunction ConditionSystem::FindConditionAllowNull(std::string conditionName)
+{
+	auto& foundCondition = conditions[conditionName];
+	return foundCondition;
+}
+
 bool ConditionSystem::EvaluateCondition(std::string conditionName, std::string conditionArg)
 {
 	auto conditionIt = conditions.find(conditionName);

@@ -22,6 +22,7 @@ struct ConditionSystem
 	//Don't call this function directly, just used the ADD_CONDITION macro below to grab the function name.
 	void AddCondition(std::string functionName, ConditionFunction conditionFunction);
 	ConditionFunction FindCondition(std::string conditionName);
+	ConditionFunction FindConditionAllowNull(std::string conditionName);
 	bool EvaluateCondition(std::string conditionName, std::string conditionArg);
 };
 
