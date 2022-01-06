@@ -428,9 +428,6 @@
     <ClCompile Include="Code\UI\PlayerHealthWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\DialogueTrigger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Editor\SkeletonEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -845,9 +842,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\PlayerHealthWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\DialogueTrigger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\SkeletonEditor.h">

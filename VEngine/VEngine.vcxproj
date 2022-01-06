@@ -202,7 +202,6 @@
     <ClCompile Include="Code\UI\HeldPickupWidget.cpp" />
     <ClCompile Include="Code\UI\GuardWidget.cpp" />
     <ClCompile Include="Code\UI\PlayerHealthWidget.cpp" />
-    <ClCompile Include="Code\Actors\Game\DialogueTrigger.cpp" />
     <ClCompile Include="Code\Editor\SkeletonEditor.cpp" />
     <ClCompile Include="Code\Physics\PhysicsSystem.cpp" />
     <ClCompile Include="Code\Components\DestructibleMeshComponent.cpp" />
@@ -415,7 +414,6 @@
     <ClInclude Include="Code\UI\HeldPickupWidget.h" />
     <ClInclude Include="Code\UI\GuardWidget.h" />
     <ClInclude Include="Code\UI\PlayerHealthWidget.h" />
-    <ClInclude Include="Code\Actors\Game\DialogueTrigger.h" />
     <ClInclude Include="Code\Editor\SkeletonEditor.h" />
     <ClInclude Include="Code\Physics\PhysicsSystem.h" />
     <ClInclude Include="Code\Components\DestructibleMeshComponent.h" />
