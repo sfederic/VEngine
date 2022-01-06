@@ -32,6 +32,17 @@ void BinarySerialiser::Serialise(Properties& props)
 				throw;
 			}
 		}
+		else if (props.CheckType<MeshComponentData>(propPair.first) ||
+			props.CheckType<TextureData>(propPair.first) ||
+			props.CheckType<ShaderData>(propPair.first))
+		{
+			//Just serialise out strings for Render Data types
+			auto str = (std::string*)prop.data;
+			if (fwrite(str->data(), sizeof(char), str->size() + 1, file) == 0)
+			{
+				throw;
+			}
+		}
 		else
 		{
 			if (fwrite(prop.data, prop.size, 1, file) == 0)
@@ -60,6 +71,16 @@ void BinaryDeserialiser::Deserialise(Properties& props)
 		{
 			auto str = props.GetData<std::wstring>(propPair.first);
 			if (fread(str->data(), sizeof(wchar_t), prop.size, file) == 0)
+			{
+				throw;
+			}
+		}
+		else if (props.CheckType<MeshComponentData>(propPair.first) ||
+			props.CheckType<TextureData>(propPair.first) ||
+			props.CheckType<ShaderData>(propPair.first))
+		{
+			auto wstr = props.GetData<std::wstring>(propPair.first);
+			if (fread(wstr->data(), sizeof(wchar_t), (wstr->size() * 2) + 1, file) == 0)
 			{
 				throw;
 			}
