@@ -95,6 +95,10 @@ static void ReassignShader(void* data)
 
 Properties Material::GetProps()
 {
+	//@Todo: not happy with the amount of serialisation errors rendertypes like TextureData/ShaderData have.
+	//Thinking just make everything std::strings (only cares about the filename anyway, they're only contained in
+	//structs so Qt can amke unique widgets for them per type) and add another std::function to call from
+	//Qt editor widgets and make a small autocomplete box or picker or whatever to compensate.
 	Properties props("Material");
 	props.Add("Texture", &textureData).change = ReassignTexture;
 	props.Add("Shader", &shaderData).change = ReassignShader;
