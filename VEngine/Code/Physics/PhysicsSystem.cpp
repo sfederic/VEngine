@@ -256,3 +256,33 @@ bool Physics::Raycast(XMFLOAT3 origin, XMFLOAT3 dir, float range, RaycastHit& hi
 
 	return false;
 }
+
+PxVec3 Physics::Float3ToPxVec3(XMFLOAT3 float3)
+{
+	return PxVec3(float3.x, float3.y, float3.z);
+}
+
+bool Physics::BoxCast(XMFLOAT3 extents, XMFLOAT3 origin, XMFLOAT3 direction, float distance, RaycastHit& hit)
+{
+	PxVec3 pxExtents = Physics::Float3ToPxVec3(extents);
+	PxVec3 pxDirection = Physics::Float3ToPxVec3(direction);
+
+	//Use identity quaternion for sweep, won't need more than that for now.
+	PxTransform pose(Physics::Float3ToPxVec3(origin));
+
+	PxSweepBuffer sweepBuffer;
+	if (scene->sweep(PxBoxGeometry(pxExtents), PxTransform(), pxDirection, distance, sweepBuffer))
+	{
+		PxSweepHit& block = sweepBuffer.block;
+		
+		hit.hitActor = (Actor*)block.actor->userData;
+		hit.distance = block.distance;
+		hit.normal = XMFLOAT3(block.normal.x, block.normal.y, block.normal.z);
+		hit.posiiton = XMFLOAT3(block.position.x, block.position.y, block.position.z);
+		hit.uv = XMFLOAT2(0.f, 0.f); //No uv coords for sweeps
+
+		return true;
+	}
+
+	return false;
+}
