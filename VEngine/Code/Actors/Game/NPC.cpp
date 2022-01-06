@@ -27,7 +27,10 @@ void NPC::Tick(float deltaTime)
 {
     __super::Tick(deltaTime);
 
-    spawnTextWidget->pos = GetHomogeneousPositionVector();
+    if (spawnTextWidget)
+    {
+        spawnTextWidget->pos = GetHomogeneousPositionVector();
+    }
 }
 
 Properties NPC::GetProps()
