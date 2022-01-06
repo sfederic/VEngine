@@ -213,6 +213,7 @@
     <ClCompile Include="Code\UI\IntuitionRecalledWidget.cpp" />
     <ClCompile Include="Code\UI\ScreenFadeWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\FenceActor.cpp" />
+    <ClCompile Include="Code\Actors\Game\Conversation.cpp" />
     <ClInclude Include="Code\Editor\PropertyWidgets\ActorWidget.h" />
     <ClInclude Include="Code\Editor\ActorTreeWidget.h" />
     <ClInclude Include="Code\Gameplay\BattleSystem.h" />
@@ -425,6 +426,7 @@
     <ClInclude Include="Code\UI\IntuitionRecalledWidget.h" />
     <ClInclude Include="Code\UI\ScreenFadeWidget.h" />
     <ClInclude Include="Code\Actors\Game\FenceActor.h" />
+    <ClInclude Include="Code\Actors\Game\Conversation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
