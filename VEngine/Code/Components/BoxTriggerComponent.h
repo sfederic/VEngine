@@ -8,7 +8,7 @@ struct BoxTriggerComponent : SpatialComponent
 {
 	COMPONENT_SYSTEM(BoxTriggerComponent)
 
-	Actor* target = nullptr;
+	Actor* targetActor = nullptr;
 
 	BoxTriggerComponent();
 	void Tick(float deltaTime);
@@ -16,4 +16,5 @@ struct BoxTriggerComponent : SpatialComponent
 	virtual void Create() override;
 	bool Contains(XMVECTOR point);
 	bool ContainsTarget();
+	void SetTargetAsPlayer();
 };

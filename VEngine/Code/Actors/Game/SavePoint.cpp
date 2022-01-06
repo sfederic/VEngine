@@ -1,7 +1,7 @@
 #include "SavePoint.h"
 #include "Components/BoxTriggerComponent.h"
-#include "Gameplay/GameUtils.h"
 #include "Input.h"
+#include "Gameplay/GameUtils.h"
 
 SavePoint::SavePoint()
 {
@@ -11,7 +11,7 @@ SavePoint::SavePoint()
 
 void SavePoint::Start()
 {
-	trigger->target = (Actor*)GameUtils::GetPlayer();
+	trigger->SetTargetAsPlayer();
 }
 
 void SavePoint::Tick(float deltaTime)

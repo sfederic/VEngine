@@ -19,7 +19,7 @@ InteractTrigger::InteractTrigger()
 
 void InteractTrigger::Start()
 {
-	trigger->target = (Actor*)GameUtils::GetPlayer();
+	trigger->SetTargetAsPlayer();
 	
 	interactWidget = CreateWidget<InteractWidget>();
 	interactWidget->interactText = overlapText;

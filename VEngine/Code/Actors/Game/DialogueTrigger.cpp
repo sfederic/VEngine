@@ -1,7 +1,6 @@
 #include "DialogueTrigger.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Components/DialogueComponent.h"
-#include "Gameplay/GameUtils.h"
 
 DialogueTrigger::DialogueTrigger()
 {
@@ -11,7 +10,7 @@ DialogueTrigger::DialogueTrigger()
 
 void DialogueTrigger::Start()
 {
-	trigger->target = (Actor*)GameUtils::GetPlayer();
+	trigger->SetTargetAsPlayer();
 }
 
 void DialogueTrigger::Tick(float deltaTime)

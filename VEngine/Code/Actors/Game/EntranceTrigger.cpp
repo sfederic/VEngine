@@ -23,12 +23,12 @@ void EntranceTrigger::Start()
     interactWidget = CreateWidget<InteractWidget>();
     interactWidget->interactText = openText;
 
-    trigger->target = (Actor*)GameUtils::GetPlayer();
+    trigger->SetTargetAsPlayer();
 }
 
 void EntranceTrigger::Tick(float deltaTime)
 {
-    XMVECTOR targetPos = trigger->target->GetPositionVector();
+    XMVECTOR targetPos = trigger->targetActor->GetPositionVector();
 
     if (trigger->ContainsTarget() && isEntraceActive && !battleSystem.isBattleActive && !entranceInteractedWith)
     {
