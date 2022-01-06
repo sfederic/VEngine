@@ -155,7 +155,6 @@ void DialogueComponent::ConversationShowTextAtActor()
     auto dataIt = dialogue.data.find(currentLine);
     if (dataIt == dialogue.data.end())
     {
-        Log("Dialogue line number %d not found.", currentLine);
         return;
     }
 
