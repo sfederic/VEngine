@@ -12,22 +12,36 @@ NPC::NPC()
 void NPC::Start()
 {
     __super::Start();
+
+    if (!spawnText.empty())
+    {
+        if (isQuickDialogueActive) return;
+
+        spawnTextWidget = CreateWidget<DialogueWidget>();
+        spawnTextWidget->dialogueText = spawnText;
+        spawnTextWidget->AddToViewport(5.0f);
+    }
 }
 
 void NPC::Tick(float deltaTime)
 {
     __super::Tick(deltaTime);
+
+    spawnTextWidget->pos = GetHomogeneousPositionVector();
 }
 
 Properties NPC::GetProps()
 {
     Properties props = __super::GetProps();
     props.title = "NPC";
+    props.AddProp(spawnText);
     return props;
 }
 
 void NPC::QuickTalkTo()
 {
+    spawnTextWidget->RemoveFromViewport();
+
     if (isQuickDialogueActive) return;
 
     isQuickDialogueActive = true;
@@ -35,7 +49,7 @@ void NPC::QuickTalkTo()
     dialogueComponent->dialogueWidget->dialogueText = interactText;
     dialogueComponent->AddToViewport();
 
-    timerSystem.SetTimer(3.0f, std::bind(&NPC::EndQuickTalkTo, this));
+    timerSystem.SetTimer(5.0f, std::bind(&NPC::EndQuickTalkTo, this));
 }
 
 void NPC::EndQuickTalkTo()
