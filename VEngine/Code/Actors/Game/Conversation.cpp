@@ -1,9 +1,12 @@
 #include "Conversation.h"
 #include "Components/DialogueComponent.h"
+#include "Components/EmptyComponent.h"
 #include "TimerSystem.h"
 
 Conversation::Conversation()
 {
+    rootComponent = EmptyComponent::system.Add(this);
+
     dialogueComponent = DialogueComponent::system.Add(this);
 }
 
