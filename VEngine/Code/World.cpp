@@ -56,8 +56,8 @@ void World::Start()
 
 	if (Core::gameplayOn)
 	{
-		world.WakeAndStartAllActors();
 		world.StartAllComponents();
+		world.WakeAndStartAllActors();
 	}
 }
 
