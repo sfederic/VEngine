@@ -1,6 +1,7 @@
 #include "TimeComponent.h"
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/ConditionSystem.h"
+#include "Log.h"
 
 TimeComponent::TimeComponent()
 {
@@ -46,6 +47,12 @@ bool TimeComponent::CheckIfActiveAtCurrentTime()
 
 bool TimeComponent::CheckIfActiveFromCondition()
 {
-    auto foundConditionFunction = conditionSystem.FindCondition(condition);
-    return foundConditionFunction(conditionArg);
+    auto foundConditionFunction = conditionSystem.FindConditionAllowNull(condition);
+    if (foundConditionFunction)
+    {
+        return foundConditionFunction(conditionArg);
+    }
+
+    Log("Condition [%s] not found for TimeComponent.", condition.c_str());
+    return false;
 }
