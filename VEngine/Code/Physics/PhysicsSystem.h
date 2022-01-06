@@ -60,5 +60,7 @@ namespace Physics
 		float distance = 0.f;
 	};
 
+	//For now, use this raycast if you only want to test against bounding boxes with no mesh triangle intersects.
+	//@Todo: bring in triangle intersects and flesh out the PhysX raycast. Get rid of older Raycast.
 	bool Raycast(XMFLOAT3 origin, XMFLOAT3 dir, float range, RaycastHit& hit);
 }
