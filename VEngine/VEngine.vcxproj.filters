@@ -461,7 +461,7 @@
     <ClCompile Include="Code\Actors\Game\FenceActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\Conversation.cpp">
+    <ClCompile Include="Code\Actors\Game\DialogueTrigger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -877,7 +877,7 @@
     <ClInclude Include="Code\Actors\Game\FenceActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\Conversation.h">
+    <ClInclude Include="Code\Actors\Game\DialogueTrigger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

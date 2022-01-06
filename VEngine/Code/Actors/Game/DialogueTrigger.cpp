@@ -1,36 +1,44 @@
-#include "Conversation.h"
+#include "DialogueTrigger.h"
 #include "Components/DialogueComponent.h"
-#include "Components/EmptyComponent.h"
+#include "Components/BoxTriggerComponent.h"
 #include "UI/DialogueWidget.h"
 #include "TimerSystem.h"
 
-Conversation::Conversation()
+DialogueTrigger::DialogueTrigger()
 {
-    rootComponent = EmptyComponent::system.Add(this);
+    boxTriggerComponent = BoxTriggerComponent::system.Add(this);
+    rootComponent = boxTriggerComponent;
 
     dialogueComponent = DialogueComponent::system.Add(this);
 }
 
-void Conversation::Start()
+void DialogueTrigger::Start()
 {
+    boxTriggerComponent->SetTargetAsPlayer();
+
     if (playOnSpawn)
     {
         NextLine();
     }
 }
 
-void Conversation::Tick(float deltaTime)
+void DialogueTrigger::Tick(float deltaTime)
 {
+    if (playOnTriggerOverlap)
+    {
+        playOnTriggerOverlap = false;
+        NextLine();
+    }
 }
 
-Properties Conversation::GetProps()
+Properties DialogueTrigger::GetProps()
 {
     auto props = __super::GetProps();
     props.AddProp(playOnSpawn);
     return props;
 }
 
-void Conversation::NextLine()
+void DialogueTrigger::NextLine()
 {
     if (dialogueComponent->previousActiveDialogueWidget)
     {
@@ -41,6 +49,6 @@ void Conversation::NextLine()
 
     if (dialogueComponent->ConversationNextLine())
     {
-        timerSystem.SetTimer(4.f, std::bind(&Conversation::NextLine, this));
+        timerSystem.SetTimer(4.f, std::bind(&DialogueTrigger::NextLine, this));
     }
 }

@@ -3,18 +3,22 @@
 #include "../ActorSystem.h"
 
 struct DialogueComponent;
+struct BoxTriggerComponent;
 
 //Conversations are just dialog files that use NPCs to talk with themselves with or without player input.
 //eg. walking into room, walking into a Conversation's trigger.
-struct Conversation : Actor
+struct DialogueTrigger : Actor
 {
-	ACTOR_SYSTEM(Conversation);
+	ACTOR_SYSTEM(DialogueTrigger);
 
 	DialogueComponent* dialogueComponent = nullptr;
+	BoxTriggerComponent* boxTriggerComponent = nullptr;
 
-	bool playOnSpawn = true;
+	bool playOnSpawn = false;
+	
+	bool playOnTriggerOverlap = false;
 
-	Conversation();
+	DialogueTrigger();
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
