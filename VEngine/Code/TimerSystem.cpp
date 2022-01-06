@@ -21,7 +21,7 @@ void TimerSystem::Cleanup()
 	timerItems.clear();
 }
 
-void TimerSystem::SetTimer(float duration, std::function<void()> functionToCall)
+TimerItem* TimerSystem::SetTimer(float duration, std::function<void()> functionToCall)
 {
 	TimerItem timerItem = {};
 	timerItem.endTime = duration;
@@ -29,4 +29,6 @@ void TimerSystem::SetTimer(float duration, std::function<void()> functionToCall)
 	timerItem.functionToCall = functionToCall;
 
 	timerItems.push_back(timerItem);
+
+	return &timerItems.back();
 }
