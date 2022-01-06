@@ -67,9 +67,9 @@ next
 Player
 1
  Position
-1 0.0100002 3
+1 -9.53674e-07 1
  Rotation
-0 1 0 1.56958e-07
+0 7.7486e-07 0 -1
  Scale
 0.999971 1 0.999971
 Casts Shadow
@@ -106,7 +106,7 @@ UvScale
 1 1
 next
 MeshActor
-7
+13
  Position
 2 -0.5 2
  Rotation
@@ -324,6 +324,192 @@ UvRotation
 UvScale
 1 1
 next
+ Position
+4 -0.25 4
+ Rotation
+-0 0 -0.000172633 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+1
+Mesh
+small_table.fbx
+Name
+small_table7
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+barrel_texture.jpg
+UID
+4157800303
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+4 0.2 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+1
+Mesh
+plates.fbx
+Name
+plates1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+floor.jpg
+UID
+3391201460
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+3.7 0.2 3.6
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+1
+Mesh
+plates.fbx
+Name
+plates2
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+floor.jpg
+UID
+3391201460
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+4.89808 0.00033921 0.170001
+ Rotation
+0.0616435 0.704588 -0.0616134 0.704244
+ Scale
+1 0.999999 0.999998
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+pictureframe_square.fbx
+Name
+pictureframe_square10
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+lisa.jpg
+UID
+521281761
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+4.83808 0.00033921 -0.00999951
+ Rotation
+0.0616435 0.704588 -0.0616134 0.704244
+ Scale
+1 0.999999 0.999998
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+pictureframe_square.fbx
+Name
+MeshActor11
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+lisa.jpg
+UID
+521281761
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
+ Position
+4.71851 -0.0889163 -0.00899529
+ Rotation
+0.436147 -0.55524 0.566472 -0.424964
+ Scale
+1 0.999977 0.999997
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+pictureframe_square.fbx
+Name
+MeshActor12
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+lisa.jpg
+UID
+521281761
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+next
 DirectionalLightActor
 1
  Position
@@ -369,7 +555,82 @@ UID
 2132069934
 next
 NPC
+1
+ Position
+3 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
 0
+Attack Points
+1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+1
+Interact
+1
+Interact Text
+I-If you don't leave now I will call someone...
+Intuition Name
+
+Mesh
+unit_test.fbx
+Move Points
+1
+Move Speed
+1
+Name
+NPC0
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+718409267
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+2
+alwaysActive
+1
+condition
+
+conditionArg
+
+interactKnownText
+
+spawnText
+W-Who are you...?
+spawnTextUse
+1
+next
 FenceActor
 0
 Billboard

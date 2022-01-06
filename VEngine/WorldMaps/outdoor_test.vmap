@@ -1,7 +1,7 @@
 Grid
 1
  Position
-0 0 0
+-1 0 0
  Rotation
 -0 0 -0 1
  Scale
@@ -71,6 +71,8 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+SpawnDialog
+
 Static
 1
 Texture
@@ -553,7 +555,157 @@ UID
 883507173
 next
 NPC
+2
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Add On Interact
 0
+Attack Points
+1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+1
+Interact
+1
+Interact Text
+
+Intuition Name
+
+Mesh
+unit_test.fbx
+Move Points
+1
+Move Speed
+1
+Name
+NPC0
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+SpawnDialog
+
+Static
+1
+Texture
+test.png
+UID
+3246343591
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+interactKnownText
+
+spawnText
+
+next
+ Position
+1 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Attack Points
+1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+1
+Interact
+1
+Interact Text
+
+Intuition Name
+
+Mesh
+unit_test.fbx
+Move Points
+1
+Move Speed
+1
+Name
+NPC1
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+SpawnDialog
+test_convo.dialog
+Static
+1
+Texture
+test.png
+UID
+410783329
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+interactKnownText
+
+spawnText
+
+next
 FenceActor
 0
 Billboard
