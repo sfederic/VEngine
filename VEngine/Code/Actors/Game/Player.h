@@ -7,6 +7,7 @@ struct CameraComponent;
 struct WidgetComponent;
 struct DialogueComponent;
 struct IntuitionComponent;
+struct AudioComponent;
 struct Pickup;
 struct InteractWidget;
 struct IntuitionMenuWidget;
@@ -24,6 +25,9 @@ struct Player : Actor
 	//Components
 	MeshComponent* mesh = nullptr;
 	CameraComponent* camera = nullptr;
+
+	//Footstep sounds to play while moving
+	AudioComponent* stepSounds = nullptr;
 
 	//For dialog files to access
 	DialogueComponent* dialogueComponent = nullptr;

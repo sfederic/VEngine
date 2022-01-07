@@ -2,6 +2,7 @@
 #include "Components/MeshComponent.h"
 #include "Components/EmptyComponent.h"
 #include "Components/IntuitionComponent.h"
+#include "Components/AudioComponent.h"
 #include "Camera.h"
 #include "Input.h"
 #include "VMath.h"
@@ -46,6 +47,11 @@ Player::Player()
 	rootComponent->AddChild(camera);
 
 	dialogueComponent = DialogueComponent::system.Add(this);
+
+	stepSounds = AudioComponent::system.Add(this);
+	stepSounds->loop = true;
+	stepSounds->audioFilename = "step.wav";
+	stepSounds->playOnStart = true;
 }
 
 void Player::Start()
@@ -189,6 +195,8 @@ void Player::MovementInput(float deltaTime)
 
 	if (XMVector4Equal(GetPositionVector(), nextPos) && XMQuaternionEqual(GetRotationVector(), nextRot))
 	{
+		stepSounds->volume = 0.f;
+
 		xIndex = std::round(GetPosition().x);
 		yIndex = std::round(GetPosition().z);
 
@@ -225,6 +233,10 @@ void Player::MovementInput(float deltaTime)
 				nextPos = previousPos;
 			}
 		}*/
+	}
+	else
+	{
+		stepSounds->volume = 1.f;
 	}
 }
 
