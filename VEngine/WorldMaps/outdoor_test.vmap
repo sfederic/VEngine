@@ -30,7 +30,11 @@ UID
 3882572174
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -46,7 +50,7 @@ AudioActor
 Player
 1
  Position
-6 0.000977516 2
+6 -0.000977516 6
  Rotation
 0 -0.707106 0 -0.707107
  Scale
@@ -79,13 +83,17 @@ UID
 1722829727
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
 next
 MeshActor
-13
+17
  Position
 4 -0.5 4
  Rotation
@@ -99,7 +107,7 @@ Grid Obstacle
 Mesh
 plane.fbx
 Name
-plane0
+stone_gate0
 Rast State
 solid
 Shader
@@ -112,7 +120,11 @@ UID
 2543448019
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -130,7 +142,7 @@ Grid Obstacle
 Mesh
 house_1.fbx
 Name
-house_11
+stone_gate1
 Rast State
 solid
 Shader
@@ -143,7 +155,11 @@ UID
 4015376228
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -161,7 +177,7 @@ Grid Obstacle
 Mesh
 house_2.fbx
 Name
-house_22
+stone_gate2
 Rast State
 solid
 Shader
@@ -174,7 +190,11 @@ UID
 1161963064
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -192,7 +212,7 @@ Grid Obstacle
 Mesh
 house_3.fbx
 Name
-house_33
+stone_gate3
 Rast State
 solid
 Shader
@@ -205,7 +225,11 @@ UID
 2740127619
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -223,7 +247,7 @@ Grid Obstacle
 Mesh
 cube.fbx
 Name
-cube4
+stone_gate4
 Rast State
 solid
 Shader
@@ -236,7 +260,11 @@ UID
 519851711
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -254,7 +282,7 @@ Grid Obstacle
 Mesh
 house_3.fbx
 Name
-cube5
+stone_gate5
 Rast State
 solid
 Shader
@@ -267,7 +295,11 @@ UID
 2740127619
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -285,7 +317,7 @@ Grid Obstacle
 Mesh
 plane.fbx
 Name
-MeshActor6
+stone_gate6
 Rast State
 solid
 Shader
@@ -298,7 +330,11 @@ UID
 2543448019
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -316,7 +352,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-MeshActor7
+stone_gate7
 Rast State
 solid
 Shader
@@ -329,7 +365,11 @@ UID
 3035270079
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -347,7 +387,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-MeshActor8
+stone_gate8
 Rast State
 solid
 Shader
@@ -360,7 +400,11 @@ UID
 3035270079
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -378,7 +422,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-MeshActor9
+stone_gate9
 Rast State
 solid
 Shader
@@ -391,7 +435,11 @@ UID
 3035270079
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -409,7 +457,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-MeshActor10
+stone_gate10
 Rast State
 solid
 Shader
@@ -422,7 +470,11 @@ UID
 3035270079
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -440,7 +492,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-MeshActor11
+stone_gate11
 Rast State
 solid
 Shader
@@ -453,7 +505,11 @@ UID
 3035270079
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -471,7 +527,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-MeshActor12
+stone_gate12
 Rast State
 solid
 Shader
@@ -484,7 +540,151 @@ UID
 3035270079
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+9 0 8
+ Rotation
+-0 -0.707107 -0 0.707107
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+stone_gate.fbx
+Name
+stone_gate13
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+floor.jpg
+UID
+1872131118
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+2 2
+next
+ Position
+9 1.5 3
+ Rotation
+0.707279 1.54581e-08 -0.706934 1.54505e-08
+ Scale
+4 2 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+plane14
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+floor.jpg
+UID
+2987820756
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+-1 1.5 3
+ Rotation
+0.706934 -1.54505e-08 0.707279 1.5458e-08
+ Scale
+4.00002 2.00002 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+plane15
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+floor.jpg
+UID
+2987820756
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+4 1.5 9
+ Rotation
+1 1.05414e-11 -1.41065e-07 2.18556e-08
+ Scale
+4.00004 2.00003 1.00001
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+plane16
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+floor.jpg
+UID
+2987820756
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -513,7 +713,7 @@ PointLightActor
 SpotLightActor
 0
 EntranceTrigger
-2
+3
  Position
 3 1 5
  Rotation
@@ -529,7 +729,7 @@ church_foyer.vmap
 Locked Text
 Locked
 Name
-EntranceTrigger0
+EntranceChuch
 Open Text
 Enter Church
 UID
@@ -563,6 +763,31 @@ condition
 IntuitionCheck
 conditionArg
 Samuan's Letter
+next
+ Position
+8 0 8
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+0.5 0.45 1
+Level Name
+docks.vmap
+Locked Text
+Locked
+Name
+EntranceDocks
+Open Text
+Docks
+UID
+307871065
+condition
+
+conditionArg
+
 next
 NPC
 3
@@ -620,7 +845,11 @@ UID
 3246343591
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -693,7 +922,11 @@ UID
 410783329
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -766,7 +999,11 @@ UID
 410783329
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
