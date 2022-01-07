@@ -176,14 +176,6 @@ void Serialiser::Serialise(Properties& props)
 			MeshComponentData* meshComponentData = props.GetData<MeshComponentData>(name);
 			ss << wname << "\n" << meshComponentData->filename.c_str() << "\n";
 		}
-		else if (props.CheckType<Transform>(name))
-		{
-			Transform* transform = props.GetData<Transform>(name);
-			ss << wname << "\n";
-			ss << transform->position.x << " " << transform->position.y << " " << transform->position.z << " ";
-			ss << transform->scale.x << " " << transform->scale.y << " " << transform->scale.z << " ";
-			ss << transform->rotation.x << " " << transform->rotation.y << " " << transform->rotation.z << " " << transform->rotation.w << "\n";
-		}
 		else if (props.CheckType<UID>(name))
 		{
 			UID* uid = props.GetData<UID>(name);
@@ -303,23 +295,6 @@ void Deserialiser::Deserialise(Properties& props)
 			is.getline(propString, 512);
 			MeshComponentData* meshComponentData = props.GetData<MeshComponentData>(name);
 			meshComponentData->filename.assign(VString::wstos(propString));
-		}
-		else if (props.CheckType<Transform>(name))
-		{
-			Transform* transform = props.GetData<Transform>(name);
-
-			is >> transform->position.x;
-			is >> transform->position.y;
-			is >> transform->position.z;
-
-			is >> transform->scale.x;
-			is >> transform->scale.y;
-			is >> transform->scale.z;
-
-			is >> transform->rotation.x;
-			is >> transform->rotation.y;
-			is >> transform->rotation.z;
-			is >> transform->rotation.w;
 		}
 		else if (props.CheckType<UID>(name))
 		{
