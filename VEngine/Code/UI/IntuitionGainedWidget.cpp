@@ -4,7 +4,7 @@
 
 void IntuitionGainedWidget::Draw(float deltaTime)
 {
-	Layout layout = PercentAlignLayout(0.1f, 0.8f, 0.9f, 1.f);
+	Layout layout = PercentAlignLayout(0.f, 0.f, 1.f, 0.1f);
 
 	FillRect(layout);
 	Text(L"Intuition Gained", layout);
