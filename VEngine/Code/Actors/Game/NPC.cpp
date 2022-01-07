@@ -1,6 +1,6 @@
 #include "NPC.h"
 #include "VString.h"
-#include "TimerSystem.h"
+#include "Timer.h"
 #include "UI/DialogueWidget.h"
 #include "Components/DialogueComponent.h"
 
@@ -52,7 +52,7 @@ void NPC::QuickTalkTo()
     dialogueComponent->dialogueWidget->dialogueText = interactText;
     dialogueComponent->AddToViewport();
 
-    timerSystem.SetTimer(5.0f, std::bind(&NPC::EndQuickTalkTo, this));
+    Timer::SetTimer(5.0f, std::bind(&NPC::EndQuickTalkTo, this));
 }
 
 void NPC::EndQuickTalkTo()

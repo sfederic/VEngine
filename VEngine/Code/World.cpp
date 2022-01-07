@@ -14,7 +14,7 @@
 #include "UI/UISystem.h"
 #include "Gameplay/GameInstance.h"
 #include "Physics/PhysicsSystem.h"
-#include "TimerSystem.h"
+#include "Timer.h"
 #include "Log.h"
 
 World world;
@@ -188,7 +188,7 @@ void World::Cleanup()
 	
 	//@Todo: Keep an eye on this cleanup, not sure if having timers persist between world loads matters.
 	//It's originally commented out to deal with EntranceTrigger screenfade timers.
-	//timerSystem.Cleanup();
+	//Timer::Cleanup();
 
 	physicsSystem.Reset();
 	audioSystem.DeleteLoadedAudioAndChannels();

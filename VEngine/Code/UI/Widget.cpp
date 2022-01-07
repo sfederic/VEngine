@@ -4,7 +4,7 @@
 #include "Render/Renderer.h"
 #include "Editor/Editor.h"
 #include "Render/SpriteSystem.h"
-#include "TimerSystem.h"
+#include "Timer.h"
 
 void Widget::Draw(float deltaTime)
 {
@@ -20,7 +20,7 @@ void Widget::AddToViewport(float removeTimer)
 
 	if (removeTimer > 0.f)
 	{
-		timerSystem.SetTimer(removeTimer, std::bind(&Widget::RemoveFromViewport, this));
+		Timer::SetTimer(removeTimer, std::bind(&Widget::RemoveFromViewport, this));
 	}
 }
 

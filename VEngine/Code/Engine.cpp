@@ -8,7 +8,7 @@
 #include "Editor/DebugMenu.h"
 #include "Camera.h"
 #include "WorldEditor.h"
-#include "TimerSystem.h"
+#include "Timer.h"
 #include "Editor/Console.h"
 #include "World.h"
 #include "Render/ShaderSystem.h"
@@ -56,7 +56,7 @@ void Engine::TickSystems(float deltaTime)
 	audioSystem.Tick();
 	shaderSystem.Tick();
 	activeCamera->Tick(deltaTime);
-	timerSystem.Tick(deltaTime);
+	Timer::Tick(deltaTime);
 	worldEditor.Tick();
 	physicsSystem.Tick(deltaTime);
 	renderer.Tick();

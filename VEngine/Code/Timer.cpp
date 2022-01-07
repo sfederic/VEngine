@@ -1,8 +1,6 @@
-#include "TimerSystem.h"
+#include "Timer.h"
 
-TimerSystem timerSystem;
-
-void TimerSystem::Tick(float deltaTime)
+void Timer::Tick(float deltaTime)
 {
 	for (int timerIndex = 0; timerIndex < timerItems.size(); timerIndex++)
 	{
@@ -16,12 +14,12 @@ void TimerSystem::Tick(float deltaTime)
 	}
 }
 
-void TimerSystem::Cleanup()
+void Timer::Cleanup()
 {
 	timerItems.clear();
 }
 
-TimerItem* TimerSystem::SetTimer(float duration, std::function<void()> functionToCall)
+TimerItem* Timer::SetTimer(float duration, std::function<void()> functionToCall)
 {
 	TimerItem timerItem = {};
 	timerItem.endTime = duration;

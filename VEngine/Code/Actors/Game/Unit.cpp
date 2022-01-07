@@ -9,7 +9,7 @@
 #include "VMath.h"
 #include "Player.h"
 #include "Gameplay/BattleSystem.h"
-#include "TimerSystem.h"
+#include "Timer.h"
 #include "Log.h"
 #include "UI/GuardWidget.h"
 
@@ -60,7 +60,7 @@ void Unit::Tick(float deltaTime)
 
 					GameUtils::SetActiveCameraTarget(this);
 
-					timerSystem.SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
+					Timer::SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
 				}
 				else
 				{

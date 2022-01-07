@@ -10,7 +10,7 @@
 #include "UI/InteractWidget.h"
 #include "UI/ScreenFadeWidget.h"
 #include "UI/UISystem.h"
-#include "TimerSystem.h"
+#include "Timer.h"
 
 EntranceTrigger::EntranceTrigger()
 {
@@ -50,7 +50,7 @@ void EntranceTrigger::Tick(float deltaTime)
             GameUtils::PlayAudioOneShot("door.wav");
 
             GameUtils::levelToMoveTo = levelToMoveTo;
-            timerSystem.SetTimer(1.f, &GameUtils::LoadWorldAndMoveToEntranceTrigger);
+            Timer::SetTimer(1.f, &GameUtils::LoadWorldAndMoveToEntranceTrigger);
 
             uiSystem.screenFadeWidget->SetToFadeOut();
             uiSystem.screenFadeWidget->AddToViewport();

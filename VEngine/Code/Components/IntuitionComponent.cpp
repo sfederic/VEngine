@@ -5,7 +5,7 @@
 #include "VString.h"
 #include "World.h"
 #include "Gameplay/ConditionSystem.h"
-#include "TimerSystem.h"
+#include "Timer.h"
 #include "UI/IntuitionGainedWidget.h"
 #include "UI/UISystem.h"
 

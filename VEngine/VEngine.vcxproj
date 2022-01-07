@@ -336,9 +336,9 @@
     <ClInclude Include="Code\Render\ShaderSystem.h" />
     <ClCompile Include="Code\Serialiser.cpp" />
     <ClInclude Include="Code\Serialiser.h" />
-    <ClCompile Include="Code\TimerSystem.cpp" />
+    <ClCompile Include="Code\Timer.cpp" />
     <ClInclude Include="Code\SystemStates.h" />
-    <ClInclude Include="Code\TimerSystem.h" />
+    <ClInclude Include="Code\Timer.h" />
     <ClCompile Include="Code\Transform.cpp" />
     <ClInclude Include="Code\Transform.h" />
     <ClCompile Include="Code\Editor\TransformGizmo.cpp" />

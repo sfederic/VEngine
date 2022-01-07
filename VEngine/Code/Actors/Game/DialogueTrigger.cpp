@@ -2,7 +2,7 @@
 #include "Components/DialogueComponent.h"
 #include "Components/BoxTriggerComponent.h"
 #include "UI/DialogueWidget.h"
-#include "TimerSystem.h"
+#include "Timer.h"
 
 DialogueTrigger::DialogueTrigger()
 {
@@ -58,7 +58,7 @@ void DialogueTrigger::NextLine()
 
     if (dialogueComponent->ConversationNextLine())
     {
-        timerSystem.SetTimer(4.f, std::bind(&DialogueTrigger::NextLine, this));
+        Timer::SetTimer(4.f, std::bind(&DialogueTrigger::NextLine, this));
     }
     else
     {
