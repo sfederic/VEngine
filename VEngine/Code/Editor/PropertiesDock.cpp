@@ -22,8 +22,6 @@
 #include "PropertyWidgets/TextureDataWidget.h"
 #include "PropertyWidgets/ShaderDataWidget.h"
 #include "PropertyWidgets/MeshComponentDataWidget.h"
-#include "PropertyWidgets/ActorWidget.h"
-#include "PropertyWidgets/ActorListWidget.h"
 #include "PropertyWidgets/TransformWidget.h"
 #include "Render/Material.h"
 #include "Render/RenderTypes.h"
@@ -182,18 +180,6 @@ void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRo
             auto meshComponentDataWidget = new MeshComponentDataWidget(prop.second);
             actorPropsGridLayout->addWidget(meshComponentDataWidget, currentGridRow, propertyDataColumn);
             propertyWidgetsToUpdate.push_back((IPropertyWidget*)meshComponentDataWidget);
-        }
-        else if (props.CheckType<Actor*>(name))
-        {
-            auto actorWidget = new ActorWidget(prop.second);
-            actorPropsGridLayout->addWidget(actorWidget, currentGridRow, propertyDataColumn);
-            propertyWidgetsToUpdate.push_back((IPropertyWidget*)actorWidget);
-        }
-        else if (props.CheckType<std::vector<Actor*>>(name))
-        {
-            auto actorListWidget = new ActorListWidget(prop.second);
-            actorPropsGridLayout->addWidget(actorListWidget, currentGridRow, propertyDataColumn);
-            propertyWidgetsToUpdate.push_back((IPropertyWidget*)actorListWidget);
         }
         else if (props.CheckType<Transform>(name))
         {
