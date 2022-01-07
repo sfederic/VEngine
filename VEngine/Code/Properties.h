@@ -114,14 +114,14 @@ struct Properties
 			auto dst = (std::string*)prop.data;
 			auto src = (std::string*)propToCopy.data;
 
-			dst->assign(src->c_str());
+			*dst = src->c_str();
 		}	
 		else if (prop.info == typeid(std::wstring))
 		{
 			auto dst = (std::wstring*)prop.data;
 			auto src = (std::wstring*)propToCopy.data;
 
-			dst->assign(src->c_str());
+			*dst = src->c_str();
 		}
 		else
 		{
