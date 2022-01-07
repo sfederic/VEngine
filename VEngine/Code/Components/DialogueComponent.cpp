@@ -142,6 +142,21 @@ bool DialogueComponent::ConversationNextLine()
         if (dataIt->second.gotoLine == -1)
         {
             currentLine++;
+
+            //Simple condition check. Don't do anything fancy in DialogueTriggers
+            std::wstring& conditionName = dataIt->second.conditionName;
+            if (!conditionName.empty())
+            {
+                auto conditionFunction = conditionSystem.FindCondition(VString::wstos(conditionName));
+                if (conditionFunction(VString::wstos(dataIt->second.conditionArg)))
+                {
+                    if (dataIt->second.gotoLine != -1)
+                    {
+                        currentLine = dataIt->second.gotoLine;
+                    }
+                }
+            }
+
             return true;
         }
     }

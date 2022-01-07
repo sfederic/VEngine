@@ -30,7 +30,7 @@ public:
 
 	DialogueData* GetCurrentLine();
 
-	//Functions to call in Conversation
+	//Functions to call in DialogueTriggers
 	bool ConversationNextLine();
 	void ConversationShowTextAtActor();
 };
