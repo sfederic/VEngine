@@ -2,7 +2,6 @@
 #include <functional>
 #include <map>
 #include <string>
-#include <iostream>
 
 //CONDITION FUNCTIONS
 //Condition functions need to be created as free functions in Conditions.cpp and then added to the system.
