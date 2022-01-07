@@ -7,6 +7,7 @@
 DialogueTrigger::DialogueTrigger()
 {
     boxTriggerComponent = BoxTriggerComponent::system.Add(this);
+    boxTriggerComponent->renderWireframeColour = XMFLOAT4(0.1f, 0.45f, 0.9f, 1.f);
     rootComponent = boxTriggerComponent;
 
     dialogueComponent = DialogueComponent::system.Add(this);
