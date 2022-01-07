@@ -26,9 +26,9 @@ void DialogueTrigger::Tick(float deltaTime)
 {
     if (boxTriggerComponent->ContainsTarget())
     {
-        if (playOnTriggerOverlap)
+        if (playOnTriggerOverlap && firstTimePlaying)
         {
-            playOnTriggerOverlap = false;
+            firstTimePlaying = false;
             NextLine();
         }
     }

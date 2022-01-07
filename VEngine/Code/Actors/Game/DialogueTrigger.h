@@ -15,7 +15,9 @@ struct DialogueTrigger : Actor
 	BoxTriggerComponent* boxTriggerComponent = nullptr;
 
 	bool playOnSpawn = false;
+
 	bool playOnTriggerOverlap = false;
+	bool firstTimePlaying = true;
 
 	bool dialogueFinished = false;
 
