@@ -16,9 +16,15 @@ struct EntranceTrigger : Actor
 	InteractWidget* interactWidget = nullptr;
 
 	std::string levelToMoveTo;
+
+	//text to show when entrance is open
 	std::wstring openText = L"Open";
 
-	bool isEntraceActive = true;
+	//text to show when entrance is locked
+	std::wstring lockedText = L"Locked";
+
+	bool isEntranceActive = true;
+	bool isEntranceLocked = false;
 
 	//Whether the player has used the entrance to move between worlds.
 	bool entranceInteractedWith = false;

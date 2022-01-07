@@ -27,26 +27,36 @@ void EntranceTrigger::Start()
     interactWidget->interactText = openText;
 
     trigger->SetTargetAsPlayer();
+
+    if (!conditionComponent->condition.empty())
+    {
+        interactWidget->interactText = lockedText;
+        isEntranceLocked = true;
+    }
 }
 
 void EntranceTrigger::Tick(float deltaTime)
 {
     XMVECTOR targetPos = trigger->targetActor->GetPositionVector();
 
-    if (trigger->ContainsTarget() && isEntraceActive && !battleSystem.isBattleActive && !entranceInteractedWith)
+    if (trigger->ContainsTarget() && isEntranceActive && !battleSystem.isBattleActive && !entranceInteractedWith)
     {
         interactWidget->AddToViewport();
 
         if (Input::GetKeyUp(Keys::Down))
         {
             //Condition check
-            if (!conditionComponent->condition.empty())
+            if (!conditionComponent->condition.empty() && isEntranceLocked)
             {
                 if (!conditionComponent->CheckCondition())
                 {
                     Log("condition failed on [%s] EntranceTrigger", this->name.c_str());
                     return;
                 }
+
+                isEntranceLocked = false;
+                interactWidget->interactText = openText;
+                return;
             }
 
             //Load new world
@@ -87,8 +97,9 @@ Properties EntranceTrigger::GetProps()
     auto props = Actor::GetProps();
     props.title = "EntranceTrigger";
     props.Add("Level Name", &levelToMoveTo);
-    props.Add("Entrance Active", &isEntraceActive);
+    props.Add("Entrance Active", &isEntranceActive);
     props.Add("Open Text", &openText);
+    props.Add("Locked Text", &lockedText);
     return props;
 }
 
