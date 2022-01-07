@@ -129,6 +129,7 @@
     <ClCompile Include="Code\Gameplay\GameInstance.cpp" />
     <ClCompile Include="Code\Gameplay\GridNode.cpp" />
     <ClCompile Include="Code\Gameplay\PickupSpawnData.cpp" />
+    <ClCompile Include="Code\Properties.cpp" />
     <ClCompile Include="Code\Render\PipelineObjects.cpp" />
     <ClCompile Include="Code\Render\RenderTypes.cpp" />
     <ClCompile Include="Code\System.cpp" />

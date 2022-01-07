@@ -6,6 +6,7 @@
 #include <vector>
 #include <functional>
 #include <cassert>
+#include "Render/RenderTypes.h"
 
 struct Property
 {
@@ -51,6 +52,21 @@ struct Properties
 		{
 			auto str = (std::wstring*)data;
 			prop.size = (str->size() * 2) + 1; //Double size for wstring
+		}
+		else if (typeid(T) == typeid(ShaderData))
+		{
+			auto shaderData = (ShaderData*)data;
+			prop.size = shaderData->filename.size() + 1;
+		}
+		else if (typeid(T) == typeid(TextureData))
+		{
+			auto textureData = (TextureData*)data;
+			prop.size = textureData->filename.size() + 1;
+		}
+		else if (typeid(T) == typeid(MeshComponentData))
+		{
+			auto meshComponentData = (MeshComponentData*)data;
+			prop.size = meshComponentData->filename.size() + 1;
 		}
 		else 
 		{
@@ -103,32 +119,7 @@ struct Properties
 	}
 
 	//Used to copy data in from other Properties (types have to be matching)
-	void CopyData(std::string name, Property& propToCopy)
-	{
-		Property& prop = propMap[name];
-
-		assert(prop.info == propToCopy.info && "property types not matching");
-
-		if (prop.info == typeid(std::string))
-		{
-			auto dst = (std::string*)prop.data;
-			auto src = (std::string*)propToCopy.data;
-
-			*dst = src->c_str();
-		}	
-		else if (prop.info == typeid(std::wstring))
-		{
-			auto dst = (std::wstring*)prop.data;
-			auto src = (std::wstring*)propToCopy.data;
-
-			*dst = src->c_str();
-		}
-		else
-		{
-			assert(prop.size == propToCopy.size);
-			memcpy(prop.data, propToCopy.data, prop.size);
-		}
-	}
+	void CopyData(std::string name, Property& propToCopy);
 
 	//Copy matching vectors of properties across (currently only works for exact matching properties collections,
 	//should be able to work with partial matching collections though without the vectors).
