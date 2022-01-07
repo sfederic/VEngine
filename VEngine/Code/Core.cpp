@@ -13,6 +13,7 @@
 #include "Render/SpriteSystem.h"
 #include "Editor/Editor.h"
 #include "Physics/PhysicsSystem.h"
+#include "TimerSystem.h"
 
 double ticks = 0.0;
 double deltaTime = 0.0;
@@ -146,6 +147,7 @@ void Core::EndGame()
 	uiSystem.Reset();
 	spriteSystem.Reset();
 	physicsSystem.Reset();
+	timerSystem.Cleanup();
 
 	audioSystem.DeleteLoadedAudioAndChannels();
 
