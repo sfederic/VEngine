@@ -15,6 +15,16 @@ void ShaderMatrices::Create()
 
 void ShaderMatrices::MakeTextureMatrix(Material* material)
 {
+	//Don't animate while editing, fucks up starting uv offsets and rotations
+	if (!Core::gameplayOn)
+	{
+		XMVECTOR finalOffset = XMLoadFloat2(&material->materialShaderData.uvOffset);
+		XMVECTOR scale = XMLoadFloat2(&material->materialShaderData.uvScale);
+		float rotation = XMConvertToRadians(material->materialShaderData.uvRotation);
+		texMatrix = XMMatrixAffineTransformation2D(scale, XMVectorSet(0.f, 0.f, 0.f, 1.f), rotation, finalOffset);
+		return;
+	}
+
 	//UV panning
 	XMFLOAT2 offset = material->materialShaderData.uvOffset;
 	offset.x += material->uvOffsetSpeed.x * Core::GetDeltaTime();
@@ -22,7 +32,6 @@ void ShaderMatrices::MakeTextureMatrix(Material* material)
 	material->materialShaderData.uvOffset = offset;
 	XMVECTOR finalOffset = XMLoadFloat2(&offset);
 
-	//Scaling isn't done, not much need for it.
 	XMVECTOR scale = XMLoadFloat2(&material->materialShaderData.uvScale);
 
 	//UV rotation
