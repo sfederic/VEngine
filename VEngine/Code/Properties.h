@@ -65,6 +65,8 @@ struct Properties
 		}
 		else if (typeid(T) == typeid(MeshComponentData))
 		{
+			//MeshComponentData has a pointer to a MeshComponent in it too,
+			//but serialising it only deals with the string so it's alright. Might fuck up on binary.
 			auto meshComponentData = (MeshComponentData*)data;
 			prop.size = meshComponentData->filename.size() + 1;
 		}
