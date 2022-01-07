@@ -125,7 +125,6 @@
     <ClCompile Include="Code\Components\BoxTriggerComponent.cpp" />
     <ClCompile Include="Code\Actors\ActorSystemCache.cpp" />
     <ClCompile Include="Code\DialogueStructures.cpp" />
-    <ClCompile Include="Code\Editor\PropertyWidgets\ActorListWidget.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\SpinBox.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\StringWidget.cpp" />
     <ClCompile Include="Code\Gameplay\GameInstance.cpp" />
@@ -283,7 +282,6 @@
     <ClCompile Include="Code\Editor\QtEditor.cpp" />
     <ClCompile Include="Code\Editor\RenderViewWidget.cpp" />
     <ClCompile Include="Code\Editor\ToolbarDock.cpp" />
-    <ClInclude Include="Code\Editor\PropertyWidgets\ActorListWidget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\BoolWidget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\Float3Widget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\FloatWidget.h" />

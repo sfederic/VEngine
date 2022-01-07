@@ -326,9 +326,6 @@
     <ClCompile Include="Code\Actors\Game\GameEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Editor\PropertyWidgets\ActorListWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\VMemory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -734,9 +731,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\GameEvent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Editor\PropertyWidgets\ActorListWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\SystemCache.h">
