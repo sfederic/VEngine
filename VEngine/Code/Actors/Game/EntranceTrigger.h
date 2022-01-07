@@ -3,6 +3,7 @@
 #include "../ActorSystem.h"
 
 struct BoxTriggerComponent;
+struct ConditionComponent;
 struct InteractWidget;
 
 struct EntranceTrigger : Actor
@@ -10,6 +11,7 @@ struct EntranceTrigger : Actor
 	ACTOR_SYSTEM(EntranceTrigger)
 
 	BoxTriggerComponent* trigger = nullptr;
+	ConditionComponent* conditionComponent = nullptr;
 
 	InteractWidget* interactWidget = nullptr;
 

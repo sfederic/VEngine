@@ -2,6 +2,7 @@
 #include <filesystem>
 #include "Log.h"
 #include "Components/BoxTriggerComponent.h"
+#include "Components/ConditionComponent.h"
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/BattleSystem.h"
@@ -16,6 +17,8 @@ EntranceTrigger::EntranceTrigger()
 {
     trigger = BoxTriggerComponent::system.Add(this);
     rootComponent = trigger;
+
+    conditionComponent = ConditionComponent::system.Add(this);
 }
 
 void EntranceTrigger::Start()
@@ -36,6 +39,16 @@ void EntranceTrigger::Tick(float deltaTime)
 
         if (Input::GetKeyUp(Keys::Down))
         {
+            //Condition check
+            if (!conditionComponent->condition.empty())
+            {
+                if (!conditionComponent->CheckCondition())
+                {
+                    Log("condition failed on [%s] EntranceTrigger", this->name.c_str());
+                    return;
+                }
+            }
+
             //Load new world
             if (!CheckIfWorldExists(levelToMoveTo))
             {
