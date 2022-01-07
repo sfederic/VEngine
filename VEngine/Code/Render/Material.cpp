@@ -100,7 +100,9 @@ Properties Material::GetProps()
 	props.Add("Shader", &shaderData).change = ReassignShader;
 	props.Add("Rast State", &rastStateName).change = ReassignRastState;
 	props.Add("UvOffset", &materialShaderData.uvOffset);
+	props.Add("UvOffsetSpeed", &uvOffsetSpeed);
 	props.Add("UvScale", &materialShaderData.uvScale);
 	props.Add("UvRotation", &materialShaderData.uvRotation);
+	props.Add("UvRotationSpeed", &uvRotationSpeed);
 	return props;
 }

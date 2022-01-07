@@ -34,6 +34,9 @@ struct Material
 {
 	UID uid = GenerateUID();
 
+	XMFLOAT2 uvOffsetSpeed = XMFLOAT2(0.f, 0.f);
+	float uvRotationSpeed = 0.f;
+
 	MaterialShaderData materialShaderData;
 
 	Texture2D* texture = nullptr;
