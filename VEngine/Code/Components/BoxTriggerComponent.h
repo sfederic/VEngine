@@ -10,6 +10,9 @@ struct BoxTriggerComponent : SpatialComponent
 
 	Actor* targetActor = nullptr;
 
+	//default is green
+	XMFLOAT4 renderWireframeColour = XMFLOAT4(0.1f, 0.75f, 0.1f, 1.0f);
+
 	BoxTriggerComponent();
 	void Tick(float deltaTime);
 	virtual Properties GetProps() override;

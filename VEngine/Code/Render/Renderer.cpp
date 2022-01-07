@@ -566,11 +566,6 @@ void Renderer::RenderBounds()
 		shaderMatrices.view = activeCamera->GetViewMatrix();
 		shaderMatrices.proj = activeCamera->GetProjectionMatrix();
 
-		//Set trigger wireframe material colour
-		materialShaderData.ambient = XMFLOAT4(0.1f, 0.75f, 0.1f, 1.0f);
-		context->UpdateSubresource(cbMaterial, 0, nullptr, &materialShaderData, 0, 0);
-		context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
-
 		for (auto boxTrigger : BoxTriggerComponent::system.components)
 		{
 			shaderMatrices.model = boxTrigger->GetWorldMatrix();
@@ -582,6 +577,11 @@ void Renderer::RenderBounds()
 
 			shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
 			context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+
+			//Set trigger wireframe material colour
+			materialShaderData.ambient = boxTrigger->renderWireframeColour;
+			context->UpdateSubresource(cbMaterial, 0, nullptr, &materialShaderData, 0, 0);
+			context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 
 			context->Draw(debugBox.boxMesh->meshDataProxy->vertices->size(), 0);
 		}
