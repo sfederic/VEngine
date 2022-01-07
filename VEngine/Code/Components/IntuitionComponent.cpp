@@ -8,6 +8,7 @@
 #include "Timer.h"
 #include "UI/IntuitionGainedWidget.h"
 #include "UI/UISystem.h"
+#include "Audio/AudioSystem.h"
 
 IntuitionComponent::IntuitionComponent()
 {
@@ -69,7 +70,10 @@ bool IntuitionComponent::CreateIntuition(std::string actorAquiredFromName)
 	uiSystem.intuitionWidgetInViewport = true;
 	uiSystem.intuitionGainedWidget->AddToViewport();
 
-	GameUtils::PlayAudioOneShot("purchase.wav");
+	//Mute all channels because Intuition Gained sound fucking with the musical key
+	audioSystem.FadeOutAllAudio();
+	GameUtils::PlayAudioOneShot("intuition_gained.wav");
+	Timer::SetTimer(5.0f, std::bind(&AudioSystem::FadeInAllAudio, audioSystem));
 
 	return true; //intuition created
 }
