@@ -113,7 +113,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Code\Editor\PropertyWidgets\ActorWidget.cpp" />
     <ClCompile Include="Code\Gameplay\BattleSystem.cpp" />
     <ClCompile Include="Code\Actors\AudioActor.cpp" />
     <ClCompile Include="Code\Actors\Game\GridActor.cpp" />
@@ -212,7 +211,6 @@
     <ClCompile Include="Code\UI\ScreenFadeWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\FenceActor.cpp" />
     <ClCompile Include="Code\Actors\Game\DialogueTrigger.cpp" />
-    <ClInclude Include="Code\Editor\PropertyWidgets\ActorWidget.h" />
     <ClInclude Include="Code\Editor\ActorTreeWidget.h" />
     <ClInclude Include="Code\Gameplay\BattleSystem.h" />
     <ClInclude Include="Code\Actors\AudioActor.h" />
