@@ -176,7 +176,6 @@
     <ClCompile Include="Code\Actors\Billboard.cpp" />
     <ClCompile Include="Code\Actors\Game\Unit.cpp" />
     <ClCompile Include="Code\Actors\Game\SavePoint.cpp" />
-    <ClCompile Include="Code\Actors\Game\GameEvent.cpp" />
     <ClCompile Include="Code\SystemCache.cpp" />
     <ClCompile Include="Code\Gameplay\ConditionSystem.cpp" />
     <ClCompile Include="Code\ThreadSystem.cpp" />
@@ -386,7 +385,6 @@
     <ClInclude Include="Code\Actors\Game\Unit.h" />
     <ClInclude Include="Code\System.h" />
     <ClInclude Include="Code\Actors\Game\SavePoint.h" />
-    <ClInclude Include="Code\Actors\Game\GameEvent.h" />
     <ClInclude Include="Code\SystemCache.h" />
     <ClInclude Include="Code\Gameplay\ConditionSystem.h" />
     <ClInclude Include="Code\ThreadSystem.h" />
