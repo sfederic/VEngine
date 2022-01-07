@@ -12,6 +12,7 @@
 InteractTrigger::InteractTrigger()
 {
 	trigger = BoxTriggerComponent::system.Add(this);
+	trigger->renderWireframeColour = XMFLOAT4(0.9f, 0.9f, 0.1f, 1.f);
 	rootComponent = trigger;
 
 	intuitionComponent = IntuitionComponent::system.Add(this);
