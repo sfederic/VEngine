@@ -210,6 +210,7 @@
     <ClCompile Include="Code\UI\ScreenFadeWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\FenceActor.cpp" />
     <ClCompile Include="Code\Actors\Game\DialogueTrigger.cpp" />
+    <ClCompile Include="Code\Components\ConditionComponent.cpp" />
     <ClInclude Include="Code\Editor\ActorTreeWidget.h" />
     <ClInclude Include="Code\Gameplay\BattleSystem.h" />
     <ClInclude Include="Code\Actors\AudioActor.h" />
@@ -419,6 +420,7 @@
     <ClInclude Include="Code\UI\ScreenFadeWidget.h" />
     <ClInclude Include="Code\Actors\Game\FenceActor.h" />
     <ClInclude Include="Code\Actors\Game\DialogueTrigger.h" />
+    <ClInclude Include="Code\Components\ConditionComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
