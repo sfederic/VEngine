@@ -23,12 +23,12 @@ float4 PSMain(VS_OUT i) : SV_Target
 
 	float shadowColour = CalcShadowFactor(i.shadowPos);
 
-	float4 localAmbient = float4(0.5f, 0.5f, 0.5f, 0.0f);
+	float4 localAmbient = float4(0.1f, 0.1f, 0.1f, 0.0f);
 
 	//grey colour 
 	//float4 finalColour = endResult.diffuse * shadowColour;
 
-	float4 finalColour = ((endResult.diffuse + localAmbient) * shadowColour) * texColour;
+	float4 finalColour = ((endResult.diffuse + localAmbient) + shadowColour) * texColour;
 
 	return finalColour;
 }
