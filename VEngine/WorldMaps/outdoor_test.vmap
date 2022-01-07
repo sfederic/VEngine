@@ -46,9 +46,9 @@ AudioActor
 Player
 1
  Position
-5 0.00195503 0
+6 0.000977516 2
  Rotation
-0 0.707107 0 0.707107
+0 -0.707106 0 -0.707107
  Scale
 0.999999 1 0.999999
 Casts Shadow
@@ -149,7 +149,7 @@ UvScale
 1 1
 next
  Position
-7 0.5 5
+7.5 0.5 5
  Rotation
 -0 0 -0 1
  Scale
@@ -180,9 +180,9 @@ UvScale
 1 1
 next
  Position
-7 0 2
+7.5 0 2
  Rotation
--0 0.707107 -0 0.707107
+0 0.707107 0 0.707107
  Scale
 1 1 1
 Casts Shadow
@@ -523,18 +523,24 @@ EntranceTrigger
 Entrance Active
 1
 Extents
-0.9 0.9 0.9
+0.5 0.5 0.5
 Level Name
 church_foyer.vmap
+Locked Text
+Locked
 Name
 EntranceTrigger0
 Open Text
 Enter Church
 UID
 1643835419
+condition
+
+conditionArg
+
 next
  Position
-5 0 2
+6 0 2
  Rotation
 -0 0 -0 1
  Scale
@@ -542,22 +548,28 @@ next
 Entrance Active
 1
 Extents
-0.9 0.9 0.9
+0.5 0.5 0.5
 Level Name
 test_house.vmap
+Locked Text
+Mr. Risotti's Home is Locked
 Name
-EntranceTrigger1
+houseEntrance
 Open Text
 Enter Mr. Risotti's Home
 UID
 883507173
+condition
+IntuitionCheck
+conditionArg
+Samuan's Letter
 next
 NPC
-2
+3
  Position
 0 0 0
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
 Add On Interact
@@ -581,7 +593,7 @@ Grid Obstacle
 Health
 1
 Interact
-1
+0
 Interact Text
 
 Intuition Name
@@ -654,7 +666,7 @@ Grid Obstacle
 Health
 1
 Interact
-1
+0
 Interact Text
 
 Intuition Name
@@ -700,6 +712,79 @@ interactKnownText
 spawnText
 
 next
+ Position
+6 0 8
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Attack Points
+1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+1
+Interact
+1
+Interact Text
+Oh, excuse me.
+Intuition Name
+
+Mesh
+unit_test.fbx
+Move Points
+1
+Move Speed
+1
+Name
+NPC2
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+410783329
+UvOffset
+0 0
+UvRotation
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+interactKnownText
+
+spawnText
+
+next
 FenceActor
 0
 Billboard
@@ -708,12 +793,10 @@ InteractTrigger
 0
 DialogueInstance
 0
-GameEvent
-0
 ParticleSystem
 0
 DialogueTrigger
-1
+2
  Position
 2 0 0
  Rotation
@@ -721,13 +804,32 @@ DialogueTrigger
  Scale
 1 1 1
 Extents
-0.9 0.9 0.9
+3 1 1
 File
 test_convo.dialog
 Name
 DialogueTrigger0
 UID
 62123286
+playOnSpawn
+0
+playOnTriggerOverlap
+1
+next
+ Position
+5 0 6
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Extents
+2 2 0.45
+File
+nervous_man.dialog
+Name
+DialogueTrigger1
+UID
+49500440
 playOnSpawn
 0
 playOnTriggerOverlap
