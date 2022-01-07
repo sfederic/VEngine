@@ -10,6 +10,7 @@ using namespace DirectX;
 struct MaterialShaderData;
 struct MeshComponent;
 struct Animation;
+struct Material;
 
 struct Vertex
 {
@@ -109,7 +110,7 @@ struct ShaderMatrices
 	XMMATRIX lightViewProj; //This is for in Shadows.hlsl to push vertex pos into space
 
 	void Create();
-	void MakeTextureMatrix(MaterialShaderData* shaderData);
+	void MakeTextureMatrix(Material* material);
 	void MakeModelViewProjectionMatrix();
 };
 

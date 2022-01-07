@@ -346,7 +346,7 @@ void Renderer::RenderShadowPass()
 		//Set matrices
 		shaderMatrices.model = mesh->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
-		shaderMatrices.MakeTextureMatrix(&mesh->material->materialShaderData);
+		shaderMatrices.MakeTextureMatrix(mesh->material);
 
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
@@ -428,10 +428,12 @@ void Renderer::RenderMeshComponents()
 		//Animation
 		AnimateSkeletalMesh(mesh);
 
+		Material* material = mesh->material;
+
 		//Set matrices
 		shaderMatrices.model = mesh->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
-		shaderMatrices.MakeTextureMatrix(&mesh->material->materialShaderData);
+		shaderMatrices.MakeTextureMatrix(mesh->material);
 	
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
@@ -479,7 +481,7 @@ void Renderer::RenderInstanceMeshComponents()
 		SetRenderPipelineStates(instanceMesh);
 
 		//update texture matrix
-		shaderMatrices.MakeTextureMatrix(&instanceMesh->material->materialShaderData);
+		shaderMatrices.MakeTextureMatrix(instanceMesh->material);
 		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
