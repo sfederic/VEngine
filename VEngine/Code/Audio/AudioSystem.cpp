@@ -102,6 +102,22 @@ void AudioSystem::UnmuteAllAudio()
 	}
 }
 
+void AudioSystem::FadeOutAllAudio()
+{
+	for (auto audio : AudioComponent::system.components)
+	{
+		audio->SetToFadeOut();
+	}
+}
+
+void AudioSystem::FadeInAllAudio()
+{
+	for (auto audio : AudioComponent::system.components)
+	{
+		audio->SetToFadeIn();
+	}
+}
+
 uint64_t AudioSystem::PlayAudio(const std::string filename, bool loopAudio)
 {
 	auto audioIt = loadedAudioMap.find(filename);
