@@ -30,7 +30,11 @@ UID
 3058985888
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -46,9 +50,9 @@ AudioActor
 Player
 1
  Position
-1 0.181846 8
+1 0.181846 2
  Rotation
-0 -1 0 -8.9407e-08
+0 0.707107 0 -0.707105
  Scale
 1 1 1
 Casts Shadow
@@ -79,13 +83,17 @@ UID
 3941712496
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
 next
 MeshActor
-2
+8
  Position
 1 -0.5 7.5
  Rotation
@@ -99,7 +107,7 @@ Grid Obstacle
 Mesh
 dock.fbx
 Name
-MeshActor0
+cube0
 Rast State
 solid
 Shader
@@ -112,8 +120,12 @@ UID
 1851051745
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
 1.57
+UvRotationSpeed
+0
 UvScale
 3 1
 next
@@ -130,7 +142,7 @@ Grid Obstacle
 Mesh
 dock.fbx
 Name
-MeshActor1
+cube1
 Rast State
 solid
 Shader
@@ -143,17 +155,231 @@ UID
 1851051745
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
-1.57
+90
+UvRotationSpeed
+0
 UvScale
 3 1
+next
+ Position
+1 -2 4
+ Rotation
+-0.707107 0 -0 0.707107
+ Scale
+10 10 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+cube2
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+water.jpg
+UID
+782119853
+UvOffset
+13.4352 -13.1666
+UvOffsetSpeed
+0.01 -0.01
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+3 3
+next
+ Position
+1 -2 12
+ Rotation
+-0 0 -0 1
+ Scale
+10 3 3
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+cube.fbx
+Name
+cube3
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+floor.jpg
+UID
+76975297
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+3 1
+next
+ Position
+6 -3 -1
+ Rotation
+-0.0436194 0 -0 0.999048
+ Scale
+1 1 1
+Casts Shadow
+0
+Grid Obstacle
+0
+Mesh
+pillar3.fbx
+Name
+pillar34
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+dock.jpg
+UID
+159992478
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+9 -4 4
+ Rotation
+0.0435776 -0.00191019 0.0437505 0.99809
+ Scale
+1 1 1
+Casts Shadow
+0
+Grid Obstacle
+0
+Mesh
+pillar3.fbx
+Name
+pillar35
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+dock.jpg
+UID
+159992478
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+-6 -3 -3
+ Rotation
+-0 0 -0.0871558 0.996195
+ Scale
+1 1 1
+Casts Shadow
+0
+Grid Obstacle
+0
+Mesh
+pillar3.fbx
+Name
+pillar36
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+dock.jpg
+UID
+159992478
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+1 -2 -5
+ Rotation
+0 0 0 1
+ Scale
+100 100 100
+Casts Shadow
+0
+Grid Obstacle
+0
+Mesh
+cube.fbx
+Name
+cube7
+Rast State
+nobackcull
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+sky.jpg
+UID
+3524926451
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+3 2
 next
 DirectionalLightActor
 1
  Position
--1 0 6
+-4 0 6
  Rotation
-0 0 0 1
+-0.382683 0 -0 0.92388
  Scale
 1 1 1
 Colour
