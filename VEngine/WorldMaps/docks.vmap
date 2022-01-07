@@ -50,9 +50,9 @@ AudioActor
 Player
 1
  Position
-1 0.181846 2
+1 0.181846 7
  Rotation
-0 0.707107 0 -0.707105
+0 -0.707107 0 0.707105
  Scale
 1 1 1
 Casts Shadow
@@ -93,7 +93,7 @@ UvScale
 1 1
 next
 MeshActor
-8
+9
  Position
 1 -0.5 7.5
  Rotation
@@ -107,7 +107,7 @@ Grid Obstacle
 Mesh
 dock.fbx
 Name
-cube0
+dock1
 Rast State
 solid
 Shader
@@ -142,7 +142,7 @@ Grid Obstacle
 Mesh
 dock.fbx
 Name
-cube1
+dock2
 Rast State
 solid
 Shader
@@ -177,7 +177,7 @@ Grid Obstacle
 Mesh
 plane.fbx
 Name
-cube2
+water
 Rast State
 solid
 Shader
@@ -189,7 +189,7 @@ water.jpg
 UID
 782119853
 UvOffset
-13.4352 -13.1666
+0.169284 -0.169284
 UvOffsetSpeed
 0.01 -0.01
 UvRotation
@@ -212,7 +212,7 @@ Grid Obstacle
 Mesh
 cube.fbx
 Name
-cube3
+port
 Rast State
 solid
 Shader
@@ -267,7 +267,7 @@ UvRotation
 UvRotationSpeed
 0
 UvScale
-1 1
+0.5 0.5
 next
  Position
 9 -4 4
@@ -302,7 +302,7 @@ UvRotation
 UvRotationSpeed
 0
 UvScale
-1 1
+0.2 0.2
 next
  Position
 -6 -3 -3
@@ -337,7 +337,7 @@ UvRotation
 UvRotationSpeed
 0
 UvScale
-1 1
+0.3 0.3
 next
  Position
 1 -2 -5
@@ -352,11 +352,11 @@ Grid Obstacle
 Mesh
 cube.fbx
 Name
-cube7
+skybox
 Rast State
 nobackcull
 Shader
-DefaultShader.hlsl
+Unlit.hlsl
 Static
 1
 Texture
@@ -373,6 +373,41 @@ UvRotationSpeed
 0
 UvScale
 3 2
+next
+ Position
+1 -0.5 7.5
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+dock.fbx
+Name
+MeshActor8
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+dock.jpg
+UID
+1851051745
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+1.57
+UvRotationSpeed
+0
+UvScale
+3 1
 next
 DirectionalLightActor
 1
@@ -398,7 +433,32 @@ PointLightActor
 SpotLightActor
 0
 EntranceTrigger
-0
+1
+ Position
+1 0 9
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+2 0.45 0.45
+Level Name
+outdoor_test.vmap
+Locked Text
+
+Name
+EntranceTrigger0
+Open Text
+Town Center
+UID
+1733768507
+condition
+
+conditionArg
+
+next
 NPC
 0
 FenceActor
