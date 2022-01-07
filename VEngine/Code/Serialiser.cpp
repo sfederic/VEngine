@@ -176,16 +176,6 @@ void Serialiser::Serialise(Properties& props)
 			MeshComponentData* meshComponentData = props.GetData<MeshComponentData>(name);
 			ss << wname << "\n" << meshComponentData->filename.c_str() << "\n";
 		}
-		else if (props.CheckType<std::vector<Actor*>>(name))
-		{
-			auto actors = props.GetData<std::vector<Actor*>>(name);
-			ss << wname << "\n";
-			ss << actors->size() << "\n";
-			for (auto actor : *actors)
-			{
-				ss << VString::stows(actor->name) << "\n";
-			}
-		}
 		else if (props.CheckType<Transform>(name))
 		{
 			Transform* transform = props.GetData<Transform>(name);
@@ -199,15 +189,6 @@ void Serialiser::Serialise(Properties& props)
 			UID* uid = props.GetData<UID>(name);
 			ss << wname << "\n";
 			ss << *uid << "\n";
-		}
-		else if (props.CheckType<Actor*>(name))
-		{
-			Actor** actor = props.GetData<Actor*>(name);
-			if (actor[0])
-			{
-				ss << wname << "\n";
-				ss << VString::stows(actor[0]->name) << "\n";
-			}
 		}
 	}
 
@@ -323,27 +304,6 @@ void Deserialiser::Deserialise(Properties& props)
 			MeshComponentData* meshComponentData = props.GetData<MeshComponentData>(name);
 			meshComponentData->filename.assign(VString::wstos(propString));
 		}
-		else if (props.CheckType<std::vector<Actor*>>(name))
-		{
-			wchar_t actorName[512]{};
-			int actorsSize = 0;
-
-			is >> actorsSize;
-
-			//progress to next line (empty value)
-			is.getline(actorName, 512);
-
-			auto actors = props.GetData<std::vector<Actor*>>(name);
-			actors->reserve(actorsSize);
-
-			for (int i = 0; i < actorsSize; i++)
-			{
-				is.getline(actorName, 512);
-				std::wstring actorNameStr(actorName);
-				Actor* foundActor = world.GetActorByName(VString::wstos(actorNameStr));
-				actors->push_back(foundActor);
-			}
-		}
 		else if (props.CheckType<Transform>(name))
 		{
 			Transform* transform = props.GetData<Transform>(name);
@@ -365,14 +325,6 @@ void Deserialiser::Deserialise(Properties& props)
 		{
 			UID* uid = props.GetData<UID>(name);
 			is >> *uid;
-		}
-		else if (props.CheckType<Actor*>(name))
-		{
-			Actor** actor = props.GetData<Actor*>(name);
-			std::wstring actorName;
-			is >> actorName;
-			Actor* foundActor = world.GetActorByName(VString::wstos(actorName));
-			actor[0] = foundActor;
 		}
 	}
 }
