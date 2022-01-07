@@ -4,6 +4,7 @@
 #include "Debug.h"
 #include "AudioBase.h"
 #include "AudioChannel.h"
+#include "Components/AudioComponent.h"
 
 #define fourccRIFF 'FFIR'
 #define fourccDATA 'atad'
@@ -83,6 +84,22 @@ void AudioSystem::DeleteLoadedAudioAndChannels()
 AudioChannel* AudioSystem::GetChannel(uint64_t channelID)
 {
 	return channelMap.find(channelID)->second;
+}
+
+void AudioSystem::MuteAllAudio()
+{
+	for (auto audio : AudioComponent::system.components)
+	{
+		audio->volume = 0.f;
+	}
+}
+
+void AudioSystem::UnmuteAllAudio()
+{
+	for (auto audio : AudioComponent::system.components)
+	{
+		audio->volume = 1.f;
+	}
 }
 
 uint64_t AudioSystem::PlayAudio(const std::string filename, bool loopAudio)
