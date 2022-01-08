@@ -71,11 +71,11 @@ next
 Player
 1
  Position
-0 0 3
+0.999992 0.181846 4
  Rotation
-0 -0.707104 0 -0.707107
+0 1 0 2.08617e-06
  Scale
-1 1 1
+0.999993 1 0.999993
 Audio Filename
 step.wav
 Casts Shadow
@@ -122,6 +122,116 @@ UvScale
 1 1
 Volume
 0
+next
+EntranceTrigger
+1
+ Position
+1 0 9
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+2 0.45 0.45
+Level Name
+outdoor_test.vmap
+Locked Text
+
+Name
+EntranceTrigger0
+Open Text
+Town Center
+UID
+1733768507
+condition
+
+conditionArg
+
+next
+NPC
+1
+ Position
+2 0.182 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Attack Points
+3
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+1
+File
+docks/samuan.dialog
+Grid Obstacle
+0
+Health
+5
+Interact
+1
+Interact Text
+
+Intuition Name
+
+Mesh
+unit_test.fbx
+Move Points
+5
+Move Speed
+1
+Name
+Samuan
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+2358887493
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+3
+alwaysActive
+0
+battleStartText
+Oh no, not a Hand... Danil...
+condition
+
+conditionArg
+
+deathText
+Danil...
+interactKnownText
+
+spawnText
+
 next
 MeshActor
 10
@@ -220,7 +330,7 @@ water.jpg
 UID
 782119853
 UvOffset
-3.10549 -3.10549
+3.34808 -3.34808
 UvOffsetSpeed
 0.01 -0.01
 UvRotation
@@ -498,112 +608,6 @@ PointLightActor
 0
 SpotLightActor
 0
-EntranceTrigger
-1
- Position
-1 0 9
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Entrance Active
-1
-Extents
-2 0.45 0.45
-Level Name
-outdoor_test.vmap
-Locked Text
-
-Name
-EntranceTrigger0
-Open Text
-Town Center
-UID
-1733768507
-condition
-
-conditionArg
-
-next
-NPC
-1
- Position
-2 0 0
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Attack Points
-3
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Description
-
-Destruct
-1
-File
-docks/samuan.dialog
-Grid Obstacle
-0
-Health
-8
-Interact
-1
-Interact Text
-
-Intuition Name
-
-Mesh
-unit_test.fbx
-Move Points
-5
-Move Speed
-1
-Name
-Samuan
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-test.png
-UID
-2358887493
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-3
-alwaysActive
-0
-condition
-
-conditionArg
-
-interactKnownText
-
-spawnText
-
-next
 FenceActor
 0
 Billboard
