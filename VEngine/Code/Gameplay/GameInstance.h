@@ -30,5 +30,8 @@ struct GameInstance
 
 	static void ProgressTime();
 	static void ResetTime();
+
+	static void AddGuilt();
+
 	static Properties GetInstanceSaveData();
 };

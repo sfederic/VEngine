@@ -1,4 +1,6 @@
 #include "GameInstance.h"
+#include "UI/UISystem.h"
+#include "UI/GuiltWidget.h"
 
 void GameInstance::DeletePlayerIntuitions()
 {
@@ -19,6 +21,13 @@ void GameInstance::ResetTime()
 {
 	currentHour = 0;
 	currentMinute = 0;
+}
+
+void GameInstance::AddGuilt()
+{
+	uiSystem.guiltWidget->AddGuilt();
+	uiSystem.guiltWidget->AddToViewport();
+	CreateWidget<GuiltPopup>()->AddToViewport(4.5f);
 }
 
 Properties GameInstance::GetInstanceSaveData()
