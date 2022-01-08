@@ -145,4 +145,10 @@ namespace GameUtils
 
 		Input::blockInput = false;
 	}
+
+	void TriggerGameOver()
+	{
+		auto player = GetPlayer();
+		player->gameOver = true;
+	}
 }

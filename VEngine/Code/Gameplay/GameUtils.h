@@ -29,4 +29,6 @@ namespace GameUtils
 
 	//Move to matching entrance trigger with same name as exited one in loaded world.
 	void LoadWorldAndMoveToEntranceTrigger();
+
+	void TriggerGameOver();
 };
