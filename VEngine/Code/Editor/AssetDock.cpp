@@ -17,6 +17,7 @@
 #include "PropertiesDock.h"
 #include "Render/TextureSystem.h"
 #include "Render/Material.h"
+#include "Gameplay/GameInstance.h"
 
 namespace Icons
 {
@@ -110,9 +111,12 @@ void AssetDock::AssetItemClicked()
     auto fileExtension = std::filesystem::path(fullPath.toStdString()).extension();
     auto extension = fileExtension.c_str();
 
-    if (std::wcscmp(extension, L".vmap") == 0 || //Map files
-        std::wcscmp(extension, L".sav") == 0) 
+    if (std::wcscmp(extension, L".vmap") == 0) //Map files 
     {
+        //Reassign instance map data so entrance triggers don't mess up.
+        GameInstance::startingMap = assetName.toStdString();
+        GameInstance::previousMapMovedFrom = GameInstance::startingMap;
+
         fileSystem.LoadWorld(assetName.toStdString());
     }   
     else if (std::wcscmp(extension, L".fbx") == 0) //FBX files
