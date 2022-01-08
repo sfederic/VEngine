@@ -28,6 +28,7 @@ struct Player : Actor
 
 	//Footstep sounds to play while moving
 	AudioComponent* stepSounds = nullptr;
+	float stepSoundsVolume = 0.f;
 
 	//For dialog files to access
 	DialogueComponent* dialogueComponent = nullptr;

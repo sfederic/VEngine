@@ -195,7 +195,8 @@ void Player::MovementInput(float deltaTime)
 
 	if (XMVector4Equal(GetPositionVector(), nextPos) && XMQuaternionEqual(GetRotationVector(), nextRot))
 	{
-		stepSounds->volume = 0.f;
+		if (stepSoundsVolume > 0.f) { stepSoundsVolume -= deltaTime * 4.f; }
+		stepSounds->volume = stepSoundsVolume;
 
 		xIndex = std::round(GetPosition().x);
 		yIndex = std::round(GetPosition().z);
@@ -234,10 +235,11 @@ void Player::MovementInput(float deltaTime)
 			}
 		}*/
 	}
-	else
-	{
-		stepSounds->volume = 1.f;
-	}
+	//else
+	//{
+	//	if (stepSoundsVolume < 1.f) { stepSoundsVolume += deltaTime * 4.f; }
+	//	stepSounds->volume = stepSoundsVolume;
+	//}
 }
 
 void Player::RotationInput(float deltaTime)
