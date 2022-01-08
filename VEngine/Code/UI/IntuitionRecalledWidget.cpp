@@ -6,7 +6,7 @@ void IntuitionRecalledWidget::Draw(float deltaTime)
 {
 	if (recalledIntuition)
 	{
-		Layout layout = PercentAlignLayout(0.1f, 0.1f, 0.9f, 0.3f);
+		Layout layout = PercentAlignLayout(0.1f, 0.8f, 0.9f, 1.f);
 
 		FillRect(layout);
 		Text(L"Intuition Recalled", layout);
