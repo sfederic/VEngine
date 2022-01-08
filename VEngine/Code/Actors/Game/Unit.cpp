@@ -88,6 +88,7 @@ void Unit::InflictDamage(int damage)
 {
 	if (health <= damage && isDestructible)
 	{
+		GameUtils::GetPlayer()->AddGuilt();
 		battleSystem.RemoveUnit(this);
 	}
 

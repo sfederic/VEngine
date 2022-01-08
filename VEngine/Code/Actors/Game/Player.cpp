@@ -24,6 +24,7 @@
 #include "UI/IntuitionGainedWidget.h"
 #include "UI/IntuitionRecalledWidget.h"
 #include "UI/TimeOfDayWidget.h"
+#include "UI/GuiltWidget.h"
 #include "UI/HeldPickupWidget.h"
 #include "UI/GuardWidget.h"
 #include "UI/PlayerHealthWidget.h"
@@ -181,6 +182,11 @@ void Player::Guard()
 
 		GameUtils::PlayAudioOneShot("equip.wav");
 	}
+}
+
+void Player::AddGuilt()
+{
+	CreateWidget<GuiltWidget>()->AddToViewport();
 }
 
 void Player::MovementInput(float deltaTime)
