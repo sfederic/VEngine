@@ -50,7 +50,14 @@ bool TimeComponent::CheckIfActiveFromCondition()
     auto foundConditionFunction = conditionSystem.FindConditionAllowNull(condition);
     if (foundConditionFunction)
     {
-        return foundConditionFunction(conditionArg);
+        if (foundConditionFunction(conditionArg))
+        {
+            return true;
+        }
+        else
+        {
+            Log("Condition [%s] failed with arg [%s]", condition.c_str(), conditionArg.c_str());
+        }
     }
 
     Log("Condition [%s] not found for TimeComponent.", condition.c_str());
