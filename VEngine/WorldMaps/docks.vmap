@@ -592,9 +592,9 @@ UvScale
 activeBeginHour
 0
 activeEndHour
-0
+3
 alwaysActive
-1
+0
 condition
 
 conditionArg

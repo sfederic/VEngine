@@ -618,7 +618,7 @@ next
  Position
 4 0.11 0
  Rotation
--0 -0.706934 -0 0.70728
+-0 0 -0 1
  Scale
 1 1 1
 Casts Shadow
@@ -802,7 +802,7 @@ Aden thinks there may be a "Samuan" at the docks.
 Extents
 1 0.5 1
 Interact Text
-"The Bestowed's death was sudden, aye. I fear the Hands will be here soon to cleanup. Come find me at the docks."
+"The Bestowed's death was sudden, aye. I fear the Hands will be here soon to cleanup. Come find me at the docks before noon"
 Intuition Name
 Samuan At The Docks
 Name
