@@ -36,6 +36,7 @@ bool IntuitionCheck(std::string arg)
 		return true;
 	}
 
+	Log("IntuitionCheck [%s] not found.", arg.c_str());
 	return false;
 }
 
