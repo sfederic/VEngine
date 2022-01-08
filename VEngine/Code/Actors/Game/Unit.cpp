@@ -12,6 +12,7 @@
 #include "Timer.h"
 #include "Log.h"
 #include "UI/GuardWidget.h"
+#include "Gameplay/GameInstance.h"
 
 Unit::Unit()
 {
@@ -88,7 +89,8 @@ void Unit::InflictDamage(int damage)
 {
 	if (health <= damage && isDestructible)
 	{
-		GameUtils::GetPlayer()->AddGuilt();
+		GameInstance::AddGuilt();
+
 		battleSystem.RemoveUnit(this);
 	}
 

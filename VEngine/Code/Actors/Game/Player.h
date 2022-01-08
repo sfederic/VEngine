@@ -82,8 +82,6 @@ struct Player : Actor
 
 	void Guard();
 
-	void AddGuilt();
-
 private:
 	void MovementInput(float deltaTime);
 	void RotationInput(float deltaTime);
