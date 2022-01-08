@@ -9,10 +9,18 @@
 #include "Log.h"
 #include "UI/UISystem.h"
 #include "UI/IntuitionGainedWidget.h"
+#include "Audio/AudioSystem.h"
 
 ConditionSystem conditionSystem;
 
 //CONDITION FUNCTIONS
+
+bool PlaySong(std::string arg)
+{
+	audioSystem.MuteAllAudio();
+	audioSystem.PlayAudio(arg, true);
+	return true;
+}
 
 bool IntuitionCheck(std::string arg)
 {
@@ -72,6 +80,7 @@ ConditionSystem::ConditionSystem()
 	ADD_CONDITION(IntuitionCheck);
 	ADD_CONDITION(StartBattle);
 	ADD_CONDITION(GainIntuition);
+	ADD_CONDITION(PlaySong);
 }
 
 void ConditionSystem::AddCondition(std::string functionName, ConditionFunction conditionFunction)
