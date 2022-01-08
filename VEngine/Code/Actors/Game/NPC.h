@@ -14,6 +14,9 @@ struct NPC : Unit
 	std::wstring spawnText;
 	DialogueWidget* spawnTextWidget = nullptr;
 
+	//Text to display on battle start
+	std::wstring battleStartText;
+
 	NPC();
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
@@ -21,6 +24,8 @@ struct NPC : Unit
 
 	//A once off dialogue popup used like interact popup is.
 	void QuickTalkTo();
+
+	void BattleStartDialogue();
 
 private:
 	void EndQuickTalkTo();

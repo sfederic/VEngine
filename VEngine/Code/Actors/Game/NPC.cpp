@@ -38,6 +38,7 @@ Properties NPC::GetProps()
     Properties props = __super::GetProps();
     props.title = "NPC";
     props.AddProp(spawnText);
+    props.AddProp(battleStartText);
     return props;
 }
 
@@ -50,6 +51,28 @@ void NPC::QuickTalkTo()
     isQuickDialogueActive = true;
 
     dialogueComponent->dialogueWidget->dialogueText = interactText;
+    dialogueComponent->AddToViewport();
+
+    Timer::SetTimer(5.0f, std::bind(&NPC::EndQuickTalkTo, this));
+}
+
+void NPC::BattleStartDialogue()
+{
+    if (battleStartText.empty())
+    {
+        return;
+    }
+
+    spawnTextWidget->RemoveFromViewport();
+
+    if (isQuickDialogueActive)
+    {
+        return;
+    }
+
+    isQuickDialogueActive = true;
+
+    dialogueComponent->dialogueWidget->dialogueText = battleStartText;
     dialogueComponent->AddToViewport();
 
     Timer::SetTimer(5.0f, std::bind(&NPC::EndQuickTalkTo, this));
