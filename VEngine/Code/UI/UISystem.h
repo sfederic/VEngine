@@ -7,6 +7,7 @@ struct Widget;
 struct IntuitionGainedWidget;
 struct IntuitionRecalledWidget;
 struct ScreenFadeWidget;
+struct GuiltWidget;
 
 namespace Colours
 {
@@ -20,6 +21,7 @@ struct UISystem
 	IntuitionGainedWidget* intuitionGainedWidget = nullptr;
 	IntuitionRecalledWidget* intuitionRecalledWidget = nullptr;
 	ScreenFadeWidget* screenFadeWidget = nullptr;
+	GuiltWidget* guiltWidget = nullptr;
 
 	//To check whether recalled or gained widgets are on screen so player can click off them.
 	bool intuitionWidgetInViewport = false;

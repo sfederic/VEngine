@@ -6,6 +6,7 @@
 #include "UI/IntuitionGainedWidget.h"
 #include "UI/IntuitionRecalledWidget.h"
 #include "UI/ScreenFadeWidget.h"
+#include "UI/GuiltWidget.h"
 #include "Editor/Editor.h"
 #include "Core.h"
 
@@ -95,6 +96,7 @@ void UISystem::CreateGlobalWidgets()
 	intuitionGainedWidget = CreateWidget<IntuitionGainedWidget>();
 	intuitionRecalledWidget = CreateWidget<IntuitionRecalledWidget>();
 	screenFadeWidget = CreateWidget<ScreenFadeWidget>();
+	guiltWidget = CreateWidget<GuiltWidget>();
 }
 
 void UISystem::DestroyWidget(Widget* widget)
