@@ -3,6 +3,7 @@
 #include "Actors/Game/Unit.h"
 #include "Actors/Game/Player.h"
 #include "Actors/Game/Grid.h"
+#include "Actors/Game/NPC.h"
 #include "Gameplay/GameUtils.h"
 #include "Log.h"
 #include "UI/UISystem.h"
@@ -46,6 +47,12 @@ void BattleSystem::StartBattle()
 	for (auto unit : activeBattleUnits)
 	{
 		unit->isInBattle = true;
+	}
+
+	auto activeBattleNPCs = world.GetAllActorsOfTypeInWorld<NPC>();
+	for (auto npc : activeBattleNPCs)
+	{
+		npc->BattleStartDialogue();
 	}
 
 	auto healthWidgets = uiSystem.GetAllWidgetsOfType<HealthWidget>();
