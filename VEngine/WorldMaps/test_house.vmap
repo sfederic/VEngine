@@ -30,7 +30,11 @@ UID
 469367003
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -72,6 +76,8 @@ Player
 0 -0.707106 0 -0.707107
  Scale
 0.999971 1 0.999971
+Audio Filename
+step.wav
 Casts Shadow
 1
 FOV
@@ -82,12 +88,18 @@ File
 
 Grid Obstacle
 0
+Loop
+1
 Mesh
 unit_test.fbx
 Name
 Player0
 Near Z
 0.01
+Pitch
+1
+Play On Start
+1
 Rast State
 solid
 Shader
@@ -100,10 +112,16 @@ UID
 3552242393
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
+Volume
+1
 next
 MeshActor
 15
@@ -133,7 +151,11 @@ UID
 3822190392
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -164,7 +186,11 @@ UID
 3696897037
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -195,7 +221,11 @@ UID
 3696897037
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -226,7 +256,11 @@ UID
 3696897037
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -257,7 +291,11 @@ UID
 3696897037
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -288,7 +326,11 @@ UID
 2952028752
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -319,7 +361,11 @@ UID
 3822190392
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -350,7 +396,11 @@ UID
 4157800303
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -381,7 +431,11 @@ UID
 3391201460
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -412,7 +466,11 @@ UID
 3391201460
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -443,7 +501,11 @@ UID
 521281761
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -474,7 +536,11 @@ UID
 521281761
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -505,7 +571,11 @@ UID
 521281761
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -536,7 +606,11 @@ UID
 4157800303
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -546,11 +620,11 @@ next
  Rotation
 -0 -0.706934 -0 0.70728
  Scale
-0.999999 1 0.999999
+1 1 1
 Casts Shadow
 1
 Grid Obstacle
-0
+1
 Mesh
 book.fbx
 Name
@@ -567,7 +641,11 @@ UID
 2826232208
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -678,7 +756,11 @@ UID
 718409267
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1

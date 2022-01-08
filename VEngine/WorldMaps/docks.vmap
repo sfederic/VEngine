@@ -46,15 +46,38 @@ Unit
 Pickup
 0
 AudioActor
-0
+1
+ Position
+-3 -1 10
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Audio Filename
+game05.wav
+Loop
+1
+Name
+AudioActor0
+Pitch
+0.95
+Play On Start
+1
+UID
+3779317868
+Volume
+1
+next
 Player
 1
  Position
-1 0.181846 7
+0 0 3
  Rotation
-0 -0.707107 0 0.707105
+0 -0.707104 0 -0.707107
  Scale
 1 1 1
+Audio Filename
+step.wav
 Casts Shadow
 1
 FOV
@@ -65,12 +88,18 @@ File
 
 Grid Obstacle
 0
+Loop
+1
 Mesh
 unit_test.fbx
 Name
 Player0
 Near Z
 0.01
+Pitch
+1
+Play On Start
+1
 Rast State
 solid
 Shader
@@ -91,9 +120,11 @@ UvRotationSpeed
 0
 UvScale
 1 1
+Volume
+0
 next
 MeshActor
-9
+10
  Position
 1 -0.5 7.5
  Rotation
@@ -107,7 +138,7 @@ Grid Obstacle
 Mesh
 dock.fbx
 Name
-dock1
+stone_gate0
 Rast State
 solid
 Shader
@@ -142,7 +173,7 @@ Grid Obstacle
 Mesh
 dock.fbx
 Name
-dock2
+stone_gate1
 Rast State
 solid
 Shader
@@ -177,7 +208,7 @@ Grid Obstacle
 Mesh
 plane.fbx
 Name
-water
+stone_gate2
 Rast State
 solid
 Shader
@@ -189,7 +220,7 @@ water.jpg
 UID
 782119853
 UvOffset
-0.169284 -0.169284
+3.10549 -3.10549
 UvOffsetSpeed
 0.01 -0.01
 UvRotation
@@ -212,7 +243,7 @@ Grid Obstacle
 Mesh
 cube.fbx
 Name
-port
+stone_gate3
 Rast State
 solid
 Shader
@@ -247,7 +278,7 @@ Grid Obstacle
 Mesh
 pillar3.fbx
 Name
-pillar34
+stone_gate4
 Rast State
 solid
 Shader
@@ -282,7 +313,7 @@ Grid Obstacle
 Mesh
 pillar3.fbx
 Name
-pillar35
+stone_gate5
 Rast State
 solid
 Shader
@@ -317,7 +348,7 @@ Grid Obstacle
 Mesh
 pillar3.fbx
 Name
-pillar36
+stone_gate6
 Rast State
 solid
 Shader
@@ -350,9 +381,9 @@ Casts Shadow
 Grid Obstacle
 0
 Mesh
-cube.fbx
+sphere.fbx
 Name
-skybox
+stone_gate7
 Rast State
 nobackcull
 Shader
@@ -364,7 +395,7 @@ sky.jpg
 UID
 3524926451
 UvOffset
-0 0
+-1 0
 UvOffsetSpeed
 0 0
 UvRotation
@@ -372,7 +403,7 @@ UvRotation
 UvRotationSpeed
 0
 UvScale
-3 2
+1 1
 next
  Position
 1 -0.5 7.5
@@ -387,7 +418,7 @@ Grid Obstacle
 Mesh
 dock.fbx
 Name
-MeshActor8
+stone_gate8
 Rast State
 solid
 Shader
@@ -408,6 +439,41 @@ UvRotationSpeed
 0
 UvScale
 3 1
+next
+ Position
+1 0 11
+ Rotation
+0 1 0 -0.000172637
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+stone_gate.fbx
+Name
+stone_gate9
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+floor.jpg
+UID
+62834627
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+-2
+UvRotationSpeed
+0
+UvScale
+2 2
 next
 DirectionalLightActor
 1
@@ -460,7 +526,84 @@ conditionArg
 
 next
 NPC
+1
+ Position
+2 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
 0
+Attack Points
+3
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+1
+File
+docks/samuan.dialog
+Grid Obstacle
+0
+Health
+8
+Interact
+1
+Interact Text
+
+Intuition Name
+
+Mesh
+unit_test.fbx
+Move Points
+5
+Move Speed
+1
+Name
+Samuan
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+2358887493
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+interactKnownText
+
+spawnText
+
+next
 FenceActor
 0
 Billboard

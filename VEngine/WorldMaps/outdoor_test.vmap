@@ -19,9 +19,9 @@ solid
 Shader
 InstanceShader.hlsl
 Size X
-9
+10
 Size Y
-9
+10
 Static
 1
 Texture
@@ -55,6 +55,8 @@ Player
 0 -0.707106 0 -0.707107
  Scale
 0.999999 1 0.999999
+Audio Filename
+step.wav
 Casts Shadow
 1
 FOV
@@ -65,12 +67,18 @@ File
 
 Grid Obstacle
 0
+Loop
+1
 Mesh
 unit_test.fbx
 Name
 Player0
 Near Z
 0.01
+Pitch
+1
+Play On Start
+1
 Rast State
 solid
 Shader
@@ -91,6 +99,8 @@ UvRotationSpeed
 0
 UvScale
 1 1
+Volume
+1
 next
 MeshActor
 17
