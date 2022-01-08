@@ -80,6 +80,7 @@ Properties Unit::GetProps()
 	props.Add("NextMove", &nextMovePos);
 	props.Add("Move Speed", &moveSpeed);
 	props.Add("Attack Points", &attackPoints);
+	props.AddProp(deathText);
 	return props;
 }
 

@@ -8,6 +8,7 @@
 #include "Log.h"
 #include "UI/UISystem.h"
 #include "UI/HealthWidget.h"
+#include "UI/DialogueWidget.h"
 
 BattleSystem battleSystem;
 
@@ -116,6 +117,16 @@ void BattleSystem::RemoveUnit(Unit* unit)
 		activeBattleUnits.end(),
 		unit),
 		activeBattleUnits.end());
+
+	//Show death text.
+	if (!unit->deathText.empty())
+	{
+		//@Todo: currently the death text doesn't hold on the actors position
+		auto deathDialogueWidget = CreateWidget<DialogueWidget>();
+		deathDialogueWidget->pos = unit->GetPositionVector();
+		deathDialogueWidget->SetText(unit->deathText);
+		deathDialogueWidget->AddToViewport(5.0f);
+	}
 
 	if (CheckIfBattleIsOver())
 	{

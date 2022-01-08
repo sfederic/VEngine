@@ -15,6 +15,9 @@ struct Unit : GridActor
 		Wander
 	};
 
+	//Text to display on unit's death during battle
+	std::wstring deathText;
+
 	float moveSpeed = 1.0f;
 
 	int movementPoints = 1;
