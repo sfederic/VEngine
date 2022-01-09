@@ -50,7 +50,7 @@ AudioActor
 Player
 1
  Position
-6 -0.000977516 6
+4 0.00195503 0
  Rotation
 0 -0.707106 0 -0.707107
  Scale
@@ -100,7 +100,329 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
+0
+next
+EntranceTrigger
+3
+ Position
+3 1 5
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Entrance Active
 1
+Extents
+0.5 0.5 0.5
+Level Name
+church_foyer.vmap
+Locked Text
+Locked
+Name
+EntranceChuch
+Open Text
+Enter Church
+UID
+1643835419
+condition
+
+conditionArg
+
+next
+ Position
+6 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+0.5 0.5 0.5
+Level Name
+test_house.vmap
+Locked Text
+Mr. Risotti's Home is Locked
+Name
+houseEntrance
+Open Text
+Enter Mr. Risotti's Home
+UID
+883507173
+condition
+IntuitionCheck
+conditionArg
+Samuan's Letter
+next
+ Position
+8 0 8
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+0.5 0.45 1
+Level Name
+docks.vmap
+Locked Text
+Locked
+Name
+EntranceDocks
+Open Text
+Docks
+UID
+307871065
+condition
+
+conditionArg
+
+next
+NPC
+3
+ Position
+0 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Attack Points
+1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+1
+Interact
+0
+Interact Text
+
+Intuition Name
+
+Mesh
+unit_test.fbx
+Move Points
+1
+Move Speed
+1
+Name
+NPC0
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+3246343591
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+battleStartText
+
+condition
+
+conditionArg
+
+deathText
+
+interactKnownText
+
+spawnText
+
+next
+ Position
+1 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Attack Points
+1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+1
+Interact
+0
+Interact Text
+
+Intuition Name
+
+Mesh
+unit_test.fbx
+Move Points
+1
+Move Speed
+1
+Name
+NPC1
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+410783329
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+battleStartText
+
+condition
+
+conditionArg
+
+deathText
+
+interactKnownText
+
+spawnText
+
+next
+ Position
+6 0 8
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Attack Points
+1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+1
+Interact
+1
+Interact Text
+Oh, excuse me.
+Intuition Name
+
+Mesh
+unit_test.fbx
+Move Points
+1
+Move Speed
+1
+Name
+NPC2
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+410783329
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+battleStartText
+
+condition
+
+conditionArg
+
+deathText
+
+interactKnownText
+
+spawnText
+
 next
 MeshActor
 17
@@ -210,19 +532,19 @@ UvScale
 1 1
 next
  Position
-7.5 0 2
+4 1.5 9
  Rotation
-0 0.707107 0 0.707107
+1 1.05414e-11 -1.41065e-07 2.18556e-08
  Scale
-1 1 1
+4.00004 2.00003 1.00001
 Casts Shadow
 1
 Grid Obstacle
-1
+0
 Mesh
-house_3.fbx
+plane.fbx
 Name
-stone_gate3
+MeshActor3
 Rast State
 solid
 Shader
@@ -230,9 +552,9 @@ DefaultShader.hlsl
 Static
 1
 Texture
-test_atlas.png
+floor.jpg
 UID
-2740127619
+2987820756
 UvOffset
 0 0
 UvOffsetSpeed
@@ -595,11 +917,11 @@ UvScale
 2 2
 next
  Position
-9 1.5 3
+10 1.5 3
  Rotation
 0.707279 1.54581e-08 -0.706934 1.54505e-08
  Scale
-4 2 1
+3.99999 1.99999 0.999997
 Casts Shadow
 1
 Grid Obstacle
@@ -665,19 +987,19 @@ UvScale
 1 1
 next
  Position
-4 1.5 9
+8 1 2
  Rotation
-1 1.05414e-11 -1.41065e-07 2.18556e-08
+0 0.707107 0 0.707107
  Scale
-4.00004 2.00003 1.00001
+0.99999 1 0.99999
 Casts Shadow
-1
-Grid Obstacle
 0
+Grid Obstacle
+1
 Mesh
-plane.fbx
+house04.fbx
 Name
-plane16
+house0416
 Rast State
 solid
 Shader
@@ -685,9 +1007,9 @@ DefaultShader.hlsl
 Static
 1
 Texture
-floor.jpg
+test.png
 UID
-2987820756
+2092761808
 UvOffset
 0 0
 UvOffsetSpeed
@@ -722,316 +1044,6 @@ PointLightActor
 0
 SpotLightActor
 0
-EntranceTrigger
-3
- Position
-3 1 5
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Entrance Active
-1
-Extents
-0.5 0.5 0.5
-Level Name
-church_foyer.vmap
-Locked Text
-Locked
-Name
-EntranceChuch
-Open Text
-Enter Church
-UID
-1643835419
-condition
-
-conditionArg
-
-next
- Position
-6 0 2
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Entrance Active
-1
-Extents
-0.5 0.5 0.5
-Level Name
-test_house.vmap
-Locked Text
-Mr. Risotti's Home is Locked
-Name
-houseEntrance
-Open Text
-Enter Mr. Risotti's Home
-UID
-883507173
-condition
-IntuitionCheck
-conditionArg
-Samuan's Letter
-next
- Position
-8 0 8
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Entrance Active
-1
-Extents
-0.5 0.45 1
-Level Name
-docks.vmap
-Locked Text
-Locked
-Name
-EntranceDocks
-Open Text
-Docks
-UID
-307871065
-condition
-
-conditionArg
-
-next
-NPC
-3
- Position
-0 0 0
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Attack Points
-1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Description
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-1
-Interact
-0
-Interact Text
-
-Intuition Name
-
-Mesh
-unit_test.fbx
-Move Points
-1
-Move Speed
-1
-Name
-NPC0
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-test.png
-UID
-3246343591
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-condition
-
-conditionArg
-
-interactKnownText
-
-spawnText
-
-next
- Position
-1 0 0
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Attack Points
-1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Description
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-1
-Interact
-0
-Interact Text
-
-Intuition Name
-
-Mesh
-unit_test.fbx
-Move Points
-1
-Move Speed
-1
-Name
-NPC1
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-test.png
-UID
-410783329
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-condition
-
-conditionArg
-
-interactKnownText
-
-spawnText
-
-next
- Position
-6 0 8
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Attack Points
-1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Description
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-1
-Interact
-1
-Interact Text
-Oh, excuse me.
-Intuition Name
-
-Mesh
-unit_test.fbx
-Move Points
-1
-Move Speed
-1
-Name
-NPC2
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-test.png
-UID
-410783329
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-condition
-
-conditionArg
-
-interactKnownText
-
-spawnText
-
-next
 FenceActor
 0
 Billboard
