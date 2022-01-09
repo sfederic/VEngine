@@ -3,6 +3,7 @@
 #include "Components/BoxTriggerComponent.h"
 #include "UI/DialogueWidget.h"
 #include "Timer.h"
+#include "Input.h"
 
 DialogueTrigger::DialogueTrigger()
 {
@@ -27,10 +28,17 @@ void DialogueTrigger::Tick(float deltaTime)
 {
     if (boxTriggerComponent->ContainsTarget())
     {
-        if (playOnTriggerOverlap && firstTimePlaying)
+        if (playOnTriggerOverlap && firstTimePlaying) //Play dialogue on overlap
         {
             firstTimePlaying = false;
             NextLine();
+            return;
+        }
+        else if (Input::GetKeyUp(Keys::Down)) //Play dialogue on input
+        {
+            firstTimePlaying = false;
+            NextLine();
+            return;
         }
     }
 }
