@@ -133,23 +133,26 @@ void TransformGizmo::Tick()
         }
 
         //Toggle snap and scale controls
-        if (Input::GetKeyUp(Keys::O))
+        if (Input::GetAsyncKey(Keys::Ctrl))
         {
-            bBoundsToggle = !bBoundsToggle;
-            if (!bBoundsToggle)
+            if (Input::GetKeyUp(Keys::O))
             {
-                memset(bounds, 0.f, sizeof(float) * 6);
-                memset(boundsSnap, 0.f, sizeof(float) * 3);
-            }
-            else if (bBoundsToggle)
-            {
-                bounds[0] = -1.f;
-                bounds[1] = -1.f;
-                bounds[2] = -1.f;
-                bounds[3] = 1.f;
-                bounds[4] = 1.f;
-                bounds[5] = 1.f;
-                memset(boundsSnap, 0.5f, sizeof(float) * 3);
+                bBoundsToggle = !bBoundsToggle;
+                if (!bBoundsToggle)
+                {
+                    memset(bounds, 0.f, sizeof(float) * 6);
+                    memset(boundsSnap, 0.f, sizeof(float) * 3);
+                }
+                else if (bBoundsToggle)
+                {
+                    bounds[0] = -1.f;
+                    bounds[1] = -1.f;
+                    bounds[2] = -1.f;
+                    bounds[3] = 1.f;
+                    bounds[4] = 1.f;
+                    bounds[5] = 1.f;
+                    memset(boundsSnap, 0.5f, sizeof(float) * 3);
+                }
             }
         }
     }
