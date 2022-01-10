@@ -96,6 +96,8 @@ private:
 	void CheckNextMoveNode(XMVECTOR previousPos);
 	void PlacePickupDown();
 
+	void RotatePlayerMeshToNextDirection(XMVECTOR previousPos);
+
 	//PrimaryAction actor check functions
 	bool PickupCheck(Actor* hitActor);
 	bool DialogueCheck(Actor* hitActor);

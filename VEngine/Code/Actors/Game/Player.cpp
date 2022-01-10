@@ -424,9 +424,8 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 	int nextXIndex = (int)std::round(nextPos.m128_f32[0]);
 	int nextYIndex = (int)std::round(nextPos.m128_f32[2]);
 
-	//Rotate player mesh towards next direction
-	XMVECTOR lookAtRot = VMath::LookAtRotation(nextPos, previousPos);
-	mesh->SetRotation(lookAtRot);
+	//Keep the call here so player can face walls and holes on input.
+	RotatePlayerMeshToNextDirection(previousPos);
 
 	auto grid = GameUtils::GetGrid();
 
@@ -488,6 +487,26 @@ void Player::PlacePickupDown()
 
 		heldPickupWidget->RemoveFromViewport();
 	}
+}
+
+void Player::RotatePlayerMeshToNextDirection(XMVECTOR previousPos)
+{
+	XMVECTOR lookAtRot = XMVectorZero();
+	XMVECTOR rootForward = GetForwardVectorV();
+
+	//Because the rotation direction was so hard to get, just flip the LookAtRotation args
+	//so the player's mesh is always facing the right direction during movement.
+	if (VMath::VecEqual(rootForward, VMath::XMVectorRight()) ||
+		VMath::VecEqual(rootForward, -VMath::XMVectorRight()))
+	{
+		lookAtRot = VMath::LookAtRotation(previousPos, nextPos);
+	}
+	else
+	{
+		XMVECTOR lookAtRot = VMath::LookAtRotation(nextPos, previousPos);
+	}
+
+	mesh->SetRotation(XMQuaternionMultiply(lookAtRot, GetRotationVector()));
 }
 
 bool Player::PickupCheck(Actor* hitActor)
