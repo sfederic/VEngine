@@ -81,6 +81,7 @@ bool FBXLoader::Import(std::string filename, MeshDataProxy* meshData)
 	animEvaluator = nullptr;
 
 	MeshData* newMeshData = existingMeshDataMap.find(filename)->second;
+	assert(newMeshData->vertices.size() > 0);
 	BoundingBox::CreateFromPoints(newMeshData->boudingBox, newMeshData->vertices.size(),
 		&newMeshData->vertices.at(0).pos, sizeof(Vertex));
 
