@@ -183,6 +183,16 @@ void Player::Guard()
 	}
 }
 
+void Player::BattleCleanup()
+{
+	isWeaponDrawn = false;
+	isPlayerTurn = false;
+
+	RefreshCombatStats();
+
+	healthWidget->RemoveFromViewport();
+}
+
 void Player::MovementInput(float deltaTime)
 {
 	float moveSpeed = 4.75f;

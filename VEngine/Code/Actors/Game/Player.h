@@ -82,6 +82,9 @@ struct Player : Actor
 
 	void Guard();
 
+	//Call on battle end for player variables housekeeping
+	void BattleCleanup();
+
 private:
 	void MovementInput(float deltaTime);
 	void RotationInput(float deltaTime);

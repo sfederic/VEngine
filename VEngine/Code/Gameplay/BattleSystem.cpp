@@ -65,10 +65,8 @@ void BattleSystem::StartBattle()
 
 void BattleSystem::EndBattle()
 {
-	player->isWeaponDrawn = false;
-	player->isPlayerTurn = false;
-	player->RefreshCombatStats();
-	
+	player->BattleCleanup();
+
 	grid->SetActive(false);
 
 	Log("Battle ended.");
