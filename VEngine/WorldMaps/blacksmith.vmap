@@ -1,0 +1,604 @@
+Grid
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+node.fbx
+Name
+Grid0
+Rast State
+solid
+Shader
+InstanceShader.hlsl
+Size X
+5
+Size Y
+5
+Static
+1
+Texture
+test.png
+UID
+2793164359
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+GridActor
+0
+Unit
+0
+Pickup
+0
+AudioActor
+0
+Player
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Audio Filename
+step.wav
+Casts Shadow
+1
+FOV
+60
+Far Z
+1000
+File
+
+Grid Obstacle
+0
+Loop
+1
+Mesh
+unit_test.fbx
+Name
+Player0
+Near Z
+0.01
+Pitch
+1
+Play On Start
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+wall.png
+UID
+1555666962
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+Volume
+1
+next
+EntranceTrigger
+0
+NPC
+0
+MeshActor
+13
+ Position
+2 -0.5 2
+ Rotation
+-0 0 -0 1
+ Scale
+5 1 5
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+node.fbx
+Name
+node0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+wood.jpg
+UID
+1136496791
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+0 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+cube.fbx
+Name
+node1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+crate.jpg
+UID
+2673577073
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+4 0 0.5
+ Rotation
+-0 0.707107 -0 0.707107
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+table.fbx
+Name
+node2
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+barrel_texture.jpg
+UID
+573759156
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+4 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+barrel.fbx
+Name
+node3
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+barrel_texture.jpg
+UID
+174497458
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+4 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+barrel.fbx
+Name
+node4
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+barrel_texture.jpg
+UID
+174497458
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+0 0 2.5
+ Rotation
+-0 0.707107 -0 0.707107
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+table.fbx
+Name
+node5
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+barrel_texture.jpg
+UID
+573759156
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+1 -0.25 2
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+step_medium.fbx
+Name
+node6
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+crate.jpg
+UID
+3741973658
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+1 0.25 2
+ Rotation
+-0 0.173648 -0 0.984808
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+step_medium.fbx
+Name
+node7
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+crate.jpg
+UID
+3741973658
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+2 2 4.5
+ Rotation
+0.707229 0 0 -0.706984
+ Scale
+5 1 5
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+node.fbx
+Name
+node8
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+wood.jpg
+UID
+1136496791
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+3 1 4.4
+ Rotation
+-0 -0.707107 -0 0.707107
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+shield.fbx
+Name
+node9
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+metal.jpg
+UID
+2134970323
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+2.5 2 4.4
+ Rotation
+-0 -0.707107 -0 0.707107
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+shield.fbx
+Name
+node10
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+metal.jpg
+UID
+2134970323
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+2 1 4.4
+ Rotation
+-0 -0.707107 -0 0.707107
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+shield.fbx
+Name
+node11
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+metal.jpg
+UID
+2134970323
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+3 -0.49 1
+ Rotation
+-0 0.000172633 -0 1
+ Scale
+2 1 2
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+node.fbx
+Name
+node12
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+carpet.jpg
+UID
+3899759074
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+DirectionalLightActor
+1
+ Position
+-4 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Colour
+1 1 1 1
+LightEnabled
+1
+Name
+DirectionalLightActor0
+UID
+2716870089
+next
+SavePoint
+0
+PointLightActor
+0
+SpotLightActor
+0
+FenceActor
+0
+Billboard
+0
+InteractTrigger
+0
+DialogueInstance
+0
+ParticleSystem
+0
+DialogueTrigger
+0
+DestructibleActor
+0
+TitleScreenActor
+0
