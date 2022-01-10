@@ -41,9 +41,8 @@ void CommandSystem::Undo()
 	if (commandIndex > 0)
 	{
 		commandIndex--;
+		commands[commandIndex]->Undo();
 	}
-
-	commands[commandIndex]->Undo();
 }
 
 void CommandSystem::Redo()
