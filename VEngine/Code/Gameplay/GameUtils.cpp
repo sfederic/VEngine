@@ -29,12 +29,7 @@ namespace GameUtils
 
 	Grid* GetGrid()
 	{
-		if (!Grid::system.actors.empty())
-		{
-			return Grid::system.actors[0];
-		}
-
-		return nullptr;
+		return Grid::system.actors[0];
 	}
 
 	void SetActiveCameraTarget(Actor* newTarget)
