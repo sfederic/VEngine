@@ -503,7 +503,7 @@ void Player::RotatePlayerMeshToNextDirection(XMVECTOR previousPos)
 	}
 	else
 	{
-		XMVECTOR lookAtRot = VMath::LookAtRotation(nextPos, previousPos);
+		lookAtRot = VMath::LookAtRotation(nextPos, previousPos);
 	}
 
 	mesh->SetRotation(XMQuaternionMultiply(lookAtRot, GetRotationVector()));
