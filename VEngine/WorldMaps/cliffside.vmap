@@ -1,0 +1,987 @@
+Grid
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+node.fbx
+Name
+Grid0
+Rast State
+solid
+Shader
+InstanceShader.hlsl
+Size X
+5
+Size Y
+5
+Static
+1
+Texture
+test.png
+UID
+3329298995
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+GridActor
+0
+Unit
+0
+Pickup
+0
+AudioActor
+0
+Player
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Audio Filename
+step.wav
+Casts Shadow
+1
+FOV
+60
+Far Z
+1000
+File
+
+Grid Obstacle
+0
+Loop
+1
+Mesh
+unit_test.fbx
+Name
+Player0
+Near Z
+0.01
+Pitch
+1
+Play On Start
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+wall.png
+UID
+2251105095
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+Volume
+0
+next
+EntranceTrigger
+0
+NPC
+3
+ Position
+4 2 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Attack Points
+1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+5
+Interact
+1
+Interact Text
+
+Intuition Name
+
+Mesh
+unit_test.fbx
+Move Points
+1
+Move Speed
+1
+Name
+NPC0
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+2404807331
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+battleStartText
+
+condition
+
+conditionArg
+
+deathText
+
+interactKnownText
+
+spawnText
+
+next
+ Position
+0 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Attack Points
+1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+5
+Interact
+1
+Interact Text
+
+Intuition Name
+
+Mesh
+unit_test.fbx
+Move Points
+1
+Move Speed
+1
+Name
+NPC1
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+2404807331
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+battleStartText
+
+condition
+
+conditionArg
+
+deathText
+
+interactKnownText
+
+spawnText
+
+next
+ Position
+3 1 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Attack Points
+1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+5
+Interact
+1
+Interact Text
+
+Intuition Name
+
+Mesh
+unit_test.fbx
+Move Points
+1
+Move Speed
+1
+Name
+NPC2
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+2404807331
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+battleStartText
+
+condition
+
+conditionArg
+
+deathText
+
+interactKnownText
+
+spawnText
+
+next
+MeshActor
+17
+ Position
+2 -0.5 2
+ Rotation
+-0 0 -0 1
+ Scale
+5 1 5
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+node.fbx
+Name
+node0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+grass02.png
+UID
+2894997905
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+0 -0.5 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+step_medium.fbx
+Name
+step_medium1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+grass02.png
+UID
+3273268340
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+1 -0.5 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+step_medium.fbx
+Name
+MeshActor2
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+grass02.png
+UID
+3273268340
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+1 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+step_medium.fbx
+Name
+MeshActor3
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+grass02.png
+UID
+3273268340
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+3 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+3 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+cube.fbx
+Name
+cube4
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+grass02.png
+UID
+1328962259
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+3 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+3 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+cube.fbx
+Name
+cube5
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+grass02.png
+UID
+1328962259
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+3 1 2
+ Rotation
+-0 0 -0 1
+ Scale
+3 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+cube.fbx
+Name
+cube6
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+grass02.png
+UID
+1328962259
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+3 0.5 3
+ Rotation
+-0 0 -0 1
+ Scale
+3 2 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+cube.fbx
+Name
+cube7
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+grass02.png
+UID
+1328962259
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+3 0.5 4
+ Rotation
+-0 0 -0 1
+ Scale
+3 2 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+cube.fbx
+Name
+cube8
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+grass02.png
+UID
+1328962259
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+4 0.5 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+step_medium.fbx
+Name
+cube9
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+grass02.png
+UID
+3273268340
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+3 1.5 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+step_medium.fbx
+Name
+cube10
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+grass02.png
+UID
+3273268340
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+2 1.5 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+step_medium.fbx
+Name
+cube11
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+grass02.png
+UID
+3273268340
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+2 1.5 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+step_medium.fbx
+Name
+cube12
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+grass02.png
+UID
+3273268340
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+2 2 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+step_medium.fbx
+Name
+cube13
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+grass02.png
+UID
+3273268340
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+2 2 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+step_medium.fbx
+Name
+cube14
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+grass02.png
+UID
+3273268340
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+2 1.5 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+step_medium.fbx
+Name
+cube15
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+grass02.png
+UID
+3273268340
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+2 2.5 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+step_medium.fbx
+Name
+cube16
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+grass02.png
+UID
+3273268340
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+DirectionalLightActor
+1
+ Position
+-3 0 0
+ Rotation
+0.707229 -0.000172864 0.000172498 0.706985
+ Scale
+0.999997 0.999996 1
+Colour
+1 1 1 1
+LightEnabled
+1
+Name
+DirectionalLightActor0
+UID
+554244551
+next
+SavePoint
+0
+PointLightActor
+0
+SpotLightActor
+0
+FenceActor
+0
+Billboard
+0
+InteractTrigger
+0
+DialogueInstance
+0
+ParticleSystem
+0
+DialogueTrigger
+0
+DestructibleActor
+0
+TitleScreenActor
+0
