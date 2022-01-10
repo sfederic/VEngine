@@ -3,7 +3,7 @@ Grid
  Position
 0 0 0
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
 Casts Shadow
@@ -27,7 +27,7 @@ Static
 Texture
 test.png
 UID
-3329298995
+1069129544
 UvOffset
 0 0
 UvOffsetSpeed
@@ -50,9 +50,9 @@ AudioActor
 Player
 1
  Position
-0 0 0
+2 1 1
  Rotation
-0 0 0 1
+0 0 0 0.999999
  Scale
 1 1 1
 Audio Filename
@@ -70,7 +70,7 @@ Grid Obstacle
 Loop
 1
 Mesh
-unit_test.fbx
+character_test.fbx
 Name
 Player0
 Near Z
@@ -88,7 +88,7 @@ Static
 Texture
 wall.png
 UID
-2251105095
+1973438300
 UvOffset
 0 0
 UvOffsetSpeed
@@ -105,250 +105,7 @@ next
 EntranceTrigger
 0
 NPC
-3
- Position
-4 2 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
 0
-Attack Points
-1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Description
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-5
-Interact
-1
-Interact Text
-
-Intuition Name
-
-Mesh
-unit_test.fbx
-Move Points
-1
-Move Speed
-1
-Name
-NPC0
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-test.png
-UID
-2404807331
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-battleStartText
-
-condition
-
-conditionArg
-
-deathText
-
-interactKnownText
-
-spawnText
-
-next
- Position
-0 0 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Attack Points
-1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Description
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-5
-Interact
-1
-Interact Text
-
-Intuition Name
-
-Mesh
-unit_test.fbx
-Move Points
-1
-Move Speed
-1
-Name
-NPC1
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-test.png
-UID
-2404807331
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-battleStartText
-
-condition
-
-conditionArg
-
-deathText
-
-interactKnownText
-
-spawnText
-
-next
- Position
-3 1 1
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Attack Points
-1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Description
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-5
-Interact
-1
-Interact Text
-
-Intuition Name
-
-Mesh
-unit_test.fbx
-Move Points
-1
-Move Speed
-1
-Name
-NPC2
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-test.png
-UID
-2404807331
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-battleStartText
-
-condition
-
-conditionArg
-
-deathText
-
-interactKnownText
-
-spawnText
-
-next
 MeshActor
 17
  Position
