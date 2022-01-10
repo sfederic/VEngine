@@ -245,11 +245,11 @@ void Player::MovementInput(float deltaTime)
 			}
 		}*/
 	}
-	//else
-	//{
-	//	if (stepSoundsVolume < 1.f) { stepSoundsVolume += deltaTime * 4.f; }
-	//	stepSounds->volume = stepSoundsVolume;
-	//}
+	else
+	{
+		if (stepSoundsVolume < 1.f) { stepSoundsVolume += deltaTime * 4.f; }
+		stepSounds->volume = stepSoundsVolume;
+	}
 }
 
 void Player::RotationInput(float deltaTime)
