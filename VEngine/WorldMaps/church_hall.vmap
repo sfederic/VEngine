@@ -30,7 +30,11 @@ UID
 2631137669
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -85,7 +89,11 @@ UID
 1210050394
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -95,6 +103,10 @@ activeEndHour
 0
 alwaysActive
 1
+condition
+
+conditionArg
+
 interactKnownText
 Listening carefullyl, Aden can hear a faint, ragged breathing from within the coffin.
 next
@@ -128,27 +140,35 @@ next
 Player
 1
  Position
-2 0 4
+6 0 4
  Rotation
-0 0.707107 0 0.707107
+-0 0 -0 1
  Scale
 0.999997 1 0.999997
+Audio Filename
+step.wav
 Casts Shadow
 1
 FOV
-59.9998
+59.9997
 Far Z
 1000
 File
 
 Grid Obstacle
 0
+Loop
+1
 Mesh
 unit_test.fbx
 Name
 Player0
 Near Z
 0.01
+Pitch
+1
+Play On Start
+1
 Rast State
 solid
 Shader
@@ -161,408 +181,17 @@ UID
 4185154484
 UvOffset
 0 0
-UvRotation
-0
-UvScale
-1 1
-next
-MeshActor
-12
- Position
-4 -0.5 4
- Rotation
--0.500122 0.499878 0.499878 0.500122
- Scale
-5 5 1
-Casts Shadow
-1
-Grid Obstacle
-0
-Mesh
-plane.fbx
-Name
-ground
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-floor_tile.png
-UID
-3086819152
-UvOffset
+UvOffsetSpeed
 0 0
 UvRotation
 0
-UvScale
-1 1
-next
- Position
--0.9 0.5 1
- Rotation
-0.00021193 0.707106 0.000211182 0.707107
- Scale
-0.499999 0.999999 0.999999
-Casts Shadow
-1
-Grid Obstacle
-0
-Mesh
-plane.fbx
-Name
-MeshActor1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-test_door_texture.png
-UID
-2114406910
-UvOffset
-0 0
-UvRotation
+UvRotationSpeed
 0
 UvScale
 1 1
+Volume
+-0.0588188
 next
- Position
-4 0 7
- Rotation
--0 0 -0 1
- Scale
-2 1 2
-Casts Shadow
-1
-Grid Obstacle
-0
-Mesh
-cube.fbx
-Name
-MeshActor2
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-floor.jpg
-UID
-1393594930
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
- Position
--0.860309 0.5 3.95374
- Rotation
--9.97482e-08 0.707107 -9.9748e-08 0.707107
- Scale
-0.749999 1 0.960001
-Casts Shadow
-1
-Grid Obstacle
-0
-Mesh
-plane.fbx
-Name
-MeshActor3
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-test_door_texture.png
-UID
-2114406910
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
- Position
-4 -0.25 5
- Rotation
--0 0 -0 1
- Scale
-2 0.5 2
-Casts Shadow
-1
-Grid Obstacle
-0
-Mesh
-cube.fbx
-Name
-MeshActor4
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-floor.jpg
-UID
-1393594930
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
- Position
--1 0.75 3.5
- Rotation
--0 0.707107 -0 0.707107
- Scale
-4.5 1.25 1
-Casts Shadow
-1
-Grid Obstacle
-0
-Mesh
-plane.fbx
-Name
-plane5
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-floor.jpg
-UID
-2614800449
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
- Position
-9 0.75 3.5
- Rotation
--0.00012207 0.707107 -0.00012207 -0.707107
- Scale
-4.49999 1.25 0.999998
-Casts Shadow
-1
-Grid Obstacle
-0
-Mesh
-plane.fbx
-Name
-plane6
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-floor.jpg
-UID
-2614800449
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
- Position
-4 0.75 -1
- Rotation
--0 -3.7749e-08 -0 1
- Scale
-5 1.25 1
-Casts Shadow
-1
-Grid Obstacle
-0
-Mesh
-plane.fbx
-Name
-plane7
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-floor.jpg
-UID
-2614800449
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
- Position
-4 1.21875 9
- Rotation
-0 1 0 1.56958e-07
- Scale
-4.50002 2.34375 1.00001
-Casts Shadow
-1
-Grid Obstacle
-0
-Mesh
-plane.fbx
-Name
-plane8
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-floor.jpg
-UID
-2614800449
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
- Position
-4 0.5 -0.9
- Rotation
--0 0 -5.1658e-08 1
- Scale
-0.999992 0.999992 1
-Casts Shadow
-1
-Grid Obstacle
-0
-Mesh
-plane.fbx
-Name
-MainDoor
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-test_door_texture.png
-UID
-2114406910
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
- Position
-8.9 0.5 1
- Rotation
--0.000122083 0.707107 0.000122125 -0.707107
- Scale
-0.75 0.999999 1
-Casts Shadow
-1
-Grid Obstacle
-0
-Mesh
-plane.fbx
-Name
-Door3
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-test_door_texture.png
-UID
-2114406910
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
- Position
-8.9 0.5 4
- Rotation
-3.10482e-07 0.707107 1.10986e-07 -0.707107
- Scale
-0.749992 0.999988 0.99999
-Casts Shadow
-1
-Grid Obstacle
-0
-Mesh
-plane.fbx
-Name
-Door4
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-test_door_texture.png
-UID
-2114406910
-UvOffset
-0 0
-UvRotation
-0
-UvScale
-1 1
-next
-DirectionalLightActor
-1
- Position
--2 1 5
- Rotation
--0.596692 0.706548 -0.37921 0.0307909
- Scale
-0.999981 0.999999 0.999999
-Colour
-1 1 1 1
-LightEnabled
-1
-Name
-DirectionalLightActor0
-UID
-816965374
-next
-SavePoint
-0
-PointLightActor
-0
-SpotLightActor
-0
 EntranceTrigger
 5
  Position
@@ -577,12 +206,18 @@ Extents
 0.9 0.9 0.9
 Level Name
 church_room1.vmap
+Locked Text
+Locked
 Name
 Room1Trigger
 Open Text
 
 UID
 1067295734
+condition
+
+conditionArg
+
 next
  Position
 0 0 1
@@ -596,12 +231,18 @@ Extents
 0.9 0.9 0.9
 Level Name
 church_room2.vmap
+Locked Text
+Locked
 Name
 Room2Trigger
 Open Text
 
 UID
 1067295734
+condition
+
+conditionArg
+
 next
  Position
 8 0 1
@@ -615,12 +256,18 @@ Extents
 0.9 0.9 0.9
 Level Name
 church_room3.vmap
+Locked Text
+Locked
 Name
 Room3Trigger
 Open Text
 Open
 UID
 1067295734
+condition
+
+conditionArg
+
 next
  Position
 8 0 4
@@ -634,12 +281,18 @@ Extents
 0.9 0.9 0.9
 Level Name
 church_room4.vmap
+Locked Text
+Locked
 Name
 Room4Trigger
 Open Text
 Open
 UID
 1067295734
+condition
+
+conditionArg
+
 next
  Position
 4 0 0
@@ -653,12 +306,18 @@ Extents
 0.9 0.9 0.9
 Level Name
 church_foyer.vmap
+Locked Text
+Locked
 Name
 EntranceTrigger4
 Open Text
 Enter Church Foyer
 UID
 2372518495
+condition
+
+conditionArg
+
 next
 NPC
 3
@@ -716,7 +375,11 @@ UID
 674642394
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -726,7 +389,17 @@ activeEndHour
 3
 alwaysActive
 0
+battleStartText
+
+condition
+
+conditionArg
+
+deathText
+
 interactKnownText
+
+spawnText
 
 next
  Position
@@ -783,7 +456,11 @@ UID
 2946896237
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -793,7 +470,17 @@ activeEndHour
 0
 alwaysActive
 1
+battleStartText
+
+condition
+
+conditionArg
+
+deathText
+
 interactKnownText
+
+spawnText
 
 next
  Position
@@ -850,7 +537,11 @@ UID
 4023095901
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -860,9 +551,464 @@ activeEndHour
 0
 alwaysActive
 1
+battleStartText
+
+condition
+
+conditionArg
+
+deathText
+
 interactKnownText
 
+spawnText
+
 next
+MeshActor
+12
+ Position
+4 -0.5 4
+ Rotation
+-0.500122 0.499878 0.499878 0.500122
+ Scale
+5 5 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+ground
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+floor_tile.png
+UID
+3086819152
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+-0.9 0.5 1
+ Rotation
+0.707107 -0.000211181 0.707106 -0.000211846
+ Scale
+0.499997 0.999994 0.999997
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+MeshActor1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test_door_texture.png
+UID
+2114406910
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+4 0 7
+ Rotation
+-0 0 -0 1
+ Scale
+2 1 2
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+cube.fbx
+Name
+MeshActor2
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+floor.jpg
+UID
+1393594930
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+-0.860309 0.5 3.95374
+ Rotation
+0.707107 -0.000122019 0.707107 -0.000122051
+ Scale
+0.749999 1 0.959999
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+MeshActor3
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test_door_texture.png
+UID
+2114406910
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+4 -0.25 5
+ Rotation
+-0 0 -0 1
+ Scale
+2 0.5 2
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+cube.fbx
+Name
+MeshActor4
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+floor.jpg
+UID
+1393594930
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+-1 0.75 3.5
+ Rotation
+-0 0.707107 -0 0.707107
+ Scale
+4.5 1.25 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+plane5
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+floor.jpg
+UID
+2614800449
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+9 0.75 3.5
+ Rotation
+-0.00012207 0.707107 -0.00012207 -0.707107
+ Scale
+4.49999 1.25 0.999998
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+plane6
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+floor.jpg
+UID
+2614800449
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+4 0.75 -1
+ Rotation
+-0 -3.7749e-08 -0 1
+ Scale
+5 1.25 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+plane7
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+floor.jpg
+UID
+2614800449
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+4 1.21875 9
+ Rotation
+0 1 0 1.56958e-07
+ Scale
+4.50002 2.34375 1.00001
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+plane8
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+floor.jpg
+UID
+2614800449
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+4 0.5 -0.9
+ Rotation
+0 0 1 8.14603e-08
+ Scale
+0.999991 0.999991 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+MainDoor
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test_door_texture.png
+UID
+2114406910
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+8.9 0.5 1
+ Rotation
+-0.707107 -0.000244183 0.707107 0.00024412
+ Scale
+0.750001 0.999999 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+Door3
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test_door_texture.png
+UID
+2114406910
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+8.9 0.5 4
+ Rotation
+-0.707107 -6.88394e-08 0.707107 -3.31556e-07
+ Scale
+0.749991 0.999987 0.999989
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+Door4
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test_door_texture.png
+UID
+2114406910
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+DirectionalLightActor
+1
+ Position
+-2 1 5
+ Rotation
+-0.596692 0.706548 -0.37921 0.0307909
+ Scale
+0.999981 0.999999 0.999999
+Colour
+1 1 1 1
+LightEnabled
+1
+Name
+DirectionalLightActor0
+UID
+816965374
+next
+SavePoint
+0
+PointLightActor
+0
+SpotLightActor
+0
 FenceActor
 0
 Billboard
@@ -904,13 +1050,11 @@ MainDoor
 next
 DialogueInstance
 0
-GameEvent
-0
 ParticleSystem
 0
-DestructibleActor
-0
 DialogueTrigger
+0
+DestructibleActor
 0
 TitleScreenActor
 0

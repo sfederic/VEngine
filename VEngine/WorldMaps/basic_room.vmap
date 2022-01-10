@@ -30,7 +30,11 @@ UID
 469367003
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -72,6 +76,8 @@ Player
 0 1 0 1.56958e-07
  Scale
 0.999971 1 0.999971
+Audio Filename
+step.wav
 Casts Shadow
 1
 FOV
@@ -82,12 +88,18 @@ File
 
 Grid Obstacle
 0
+Loop
+1
 Mesh
 unit_test.fbx
 Name
 Player0
 Near Z
 0.01
+Pitch
+1
+Play On Start
+1
 Rast State
 solid
 Shader
@@ -100,11 +112,46 @@ UID
 3552242393
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
+Volume
+1
 next
+EntranceTrigger
+1
+ Position
+0 0 2
+ Rotation
+0 1 0 1.56958e-07
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+0.9 0.9 0.9
+Level Name
+outdoor_test.vmap
+Locked Text
+Locked
+Name
+DoorEntranceTrigger
+Open Text
+Exit Mr Risotto's Home
+UID
+2132069934
+condition
+
+conditionArg
+
+next
+NPC
+0
 MeshActor
 7
  Position
@@ -133,7 +180,11 @@ UID
 3822190392
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -164,7 +215,11 @@ UID
 3696897037
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -195,7 +250,11 @@ UID
 3696897037
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -226,7 +285,11 @@ UID
 3696897037
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -257,7 +320,11 @@ UID
 3696897037
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -265,9 +332,9 @@ next
  Position
 -0.99 0.5 2
  Rotation
-0 0.707107 0 0.707107
+0.707107 -1.54543e-08 0.707107 -1.54543e-08
  Scale
-0.74999 1 0.99999
+0.749987 0.999997 0.999987
 Casts Shadow
 1
 Grid Obstacle
@@ -288,7 +355,11 @@ UID
 2952028752
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -319,7 +390,11 @@ UID
 3822190392
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -347,29 +422,6 @@ PointLightActor
 0
 SpotLightActor
 0
-EntranceTrigger
-1
- Position
-0 0 2
- Rotation
-0 1 0 1.56958e-07
- Scale
-1 1 1
-Entrance Active
-1
-Extents
-0.9 0.9 0.9
-Level Name
-outdoor_test.vmap
-Name
-DoorEntranceTrigger
-Open Text
-Exit Mr Risotto's Home
-UID
-2132069934
-next
-NPC
-0
 FenceActor
 0
 Billboard
@@ -378,13 +430,11 @@ InteractTrigger
 0
 DialogueInstance
 0
-GameEvent
-0
 ParticleSystem
 0
-DestructibleActor
-0
 DialogueTrigger
+0
+DestructibleActor
 0
 TitleScreenActor
 0

@@ -30,7 +30,11 @@ UID
 1763422820
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -51,6 +55,8 @@ Player
 0 -2.02656e-06 0 0.999998
  Scale
 0.999996 1 0.999996
+Audio Filename
+step.wav
 Casts Shadow
 1
 FOV
@@ -61,12 +67,18 @@ File
 
 Grid Obstacle
 0
+Loop
+1
 Mesh
 unit_test.fbx
 Name
 Player0
 Near Z
 0.01
+Pitch
+1
+Play On Start
+1
 Rast State
 solid
 Shader
@@ -79,11 +91,71 @@ UID
 3716518300
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
+Volume
+1
 next
+EntranceTrigger
+2
+ Position
+1 0 6
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+0.9 0.9 0.9
+Level Name
+outdoor_test.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Text
+Leave Church
+UID
+1784445247
+condition
+
+conditionArg
+
+next
+ Position
+1 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+0.9 0.9 0.9
+Level Name
+church_hall.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger1
+Open Text
+Enter Church Hall
+UID
+1784445247
+condition
+
+conditionArg
+
+next
+NPC
+0
 MeshActor
 22
  Position
@@ -112,7 +184,11 @@ UID
 2117701144
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 3 5
@@ -143,7 +219,11 @@ UID
 2117701144
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 3 2
@@ -174,7 +254,11 @@ UID
 2117701144
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 2 2
@@ -205,7 +289,11 @@ UID
 2117701144
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 2 2
@@ -236,7 +324,11 @@ UID
 2117701144
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 3 2
@@ -267,7 +359,11 @@ UID
 332739070
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 3
@@ -275,9 +371,9 @@ next
  Position
 -1 1 1
  Rotation
-0 0.707318 0 0.706896
+0.706896 -1.54589e-08 0.707317 -5.7584e-08
  Scale
-0.999999 1 0.999999
+0.999997 1 0.999997
 Casts Shadow
 1
 Grid Obstacle
@@ -298,7 +394,11 @@ UID
 3021310757
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -329,7 +429,11 @@ UID
 3021310757
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -337,7 +441,7 @@ next
  Position
 2.99 1 5
  Rotation
--0 -0.706723 -0 0.70749
+0.707491 -1.54459e-08 -0.706722 -3.42591e-07
  Scale
 1.00002 0.999999 1.00002
 Casts Shadow
@@ -360,7 +464,11 @@ UID
 3021310757
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -391,7 +499,11 @@ UID
 3021310757
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -399,9 +511,9 @@ next
  Position
 1 0.5 6.99
  Rotation
-0 1 0 -0.000471403
+1 2.18557e-08 0.000471403 -3.94067e-11
  Scale
-0.99999 1 0.99999
+0.99999 0.999999 0.99999
 Casts Shadow
 1
 Grid Obstacle
@@ -422,7 +534,11 @@ UID
 3021310757
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -430,9 +546,9 @@ next
  Position
 1 0.5 -0.99
  Rotation
--0 0.000471376 -0 1
+-0.000471376 -2.12806e-10 1 2.384e-08
  Scale
-0.999984 1 0.999984
+0.999983 0.999999 0.999983
 Casts Shadow
 1
 Grid Obstacle
@@ -453,7 +569,11 @@ UID
 3021310757
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -484,7 +604,11 @@ UID
 107070630
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -515,7 +639,11 @@ UID
 107070630
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -546,7 +674,11 @@ UID
 1339662319
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -577,7 +709,11 @@ UID
 1339662319
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -608,7 +744,11 @@ UID
 4027392689
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 2 2
@@ -639,7 +779,11 @@ UID
 4027392689
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 2 2
@@ -670,7 +814,11 @@ UID
 4027392689
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 2 2
@@ -701,7 +849,11 @@ UID
 4027392689
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 2 2
@@ -709,9 +861,9 @@ next
  Position
 2.99217 1 3
  Rotation
--0 -0.706723 -0 0.70749
+0.707491 -1.54456e-08 -0.706722 -4.26838e-07
  Scale
-0.5 0.5 1
+0.500001 0.500002 1
 Casts Shadow
 1
 Grid Obstacle
@@ -732,7 +884,11 @@ UID
 3021310757
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -740,9 +896,9 @@ next
  Position
 -0.991195 1 3
  Rotation
-0 0.707318 0 0.706896
+0.706896 -0.000211309 0.707318 -0.000211519
  Scale
-1 0.5 1
+0.999996 0.499994 0.999991
 Casts Shadow
 1
 Grid Obstacle
@@ -763,7 +919,11 @@ UID
 3021310757
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -833,48 +993,6 @@ UID
 next
 SpotLightActor
 0
-EntranceTrigger
-2
- Position
-1 0 6
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Entrance Active
-1
-Extents
-0.9 0.9 0.9
-Level Name
-outdoor_test.vmap
-Name
-EntranceTrigger0
-Open Text
-Leave Church
-UID
-1784445247
-next
- Position
-1 0 0
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Entrance Active
-1
-Extents
-0.9 0.9 0.9
-Level Name
-church_hall.vmap
-Name
-EntranceTrigger1
-Open Text
-Enter Church Hall
-UID
-1784445247
-next
-NPC
-0
 FenceActor
 0
 Billboard
@@ -883,13 +1001,11 @@ InteractTrigger
 0
 DialogueInstance
 0
-GameEvent
-0
 ParticleSystem
 0
-DestructibleActor
-0
 DialogueTrigger
+0
+DestructibleActor
 0
 TitleScreenActor
 0

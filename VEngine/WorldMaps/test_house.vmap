@@ -123,6 +123,116 @@ UvScale
 Volume
 1
 next
+EntranceTrigger
+1
+ Position
+0 0 2
+ Rotation
+0 1 0 1.56958e-07
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+0.9 0.9 0.9
+Level Name
+outdoor_test.vmap
+Locked Text
+Locked
+Name
+DoorEntranceTrigger
+Open Text
+Exit Mr Risotto's Home
+UID
+2132069934
+condition
+
+conditionArg
+
+next
+NPC
+1
+ Position
+3 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Attack Points
+1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+1
+Interact
+1
+Interact Text
+I-If you don't leave now I will call someone...
+Intuition Name
+
+Mesh
+unit_test.fbx
+Move Points
+1
+Move Speed
+1
+Name
+NPC0
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+718409267
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+2
+alwaysActive
+1
+battleStartText
+
+condition
+
+conditionArg
+
+deathText
+
+interactKnownText
+
+spawnText
+W-Who are you...?
+next
 MeshActor
 15
  Position
@@ -303,9 +413,9 @@ next
  Position
 -0.99 0.5 2
  Rotation
-0 0.707107 0 0.707107
+0.707107 -1.54543e-08 0.707107 -1.54543e-08
  Scale
-0.74999 1 0.99999
+0.749988 0.999999 0.999988
 Casts Shadow
 1
 Grid Obstacle
@@ -673,112 +783,6 @@ PointLightActor
 0
 SpotLightActor
 0
-EntranceTrigger
-1
- Position
-0 0 2
- Rotation
-0 1 0 1.56958e-07
- Scale
-1 1 1
-Entrance Active
-1
-Extents
-0.9 0.9 0.9
-Level Name
-outdoor_test.vmap
-Locked Text
-Locked
-Name
-DoorEntranceTrigger
-Open Text
-Exit Mr Risotto's Home
-UID
-2132069934
-condition
-
-conditionArg
-
-next
-NPC
-1
- Position
-3 0 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Attack Points
-1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Description
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-1
-Interact
-1
-Interact Text
-I-If you don't leave now I will call someone...
-Intuition Name
-
-Mesh
-unit_test.fbx
-Move Points
-1
-Move Speed
-1
-Name
-NPC0
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-test.png
-UID
-718409267
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-2
-alwaysActive
-1
-condition
-
-conditionArg
-
-interactKnownText
-
-spawnText
-W-Who are you...?
-next
 FenceActor
 0
 Billboard

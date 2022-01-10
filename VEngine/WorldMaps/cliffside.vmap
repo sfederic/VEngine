@@ -50,7 +50,7 @@ AudioActor
 Player
 1
  Position
-2 1 1
+0 0.507051 1
  Rotation
 0 0 0 0.999999
  Scale
@@ -107,7 +107,7 @@ EntranceTrigger
 NPC
 0
 MeshActor
-17
+16
  Position
 2 -0.5 2
  Rotation
@@ -214,7 +214,7 @@ UvScale
 1 1
 next
  Position
-1 0 1
+2 2.5 4
  Rotation
 -0 0 -0 1
  Scale
@@ -647,41 +647,6 @@ Mesh
 step_medium.fbx
 Name
 cube15
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-grass02.png
-UID
-3273268340
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
- Position
-2 2.5 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Casts Shadow
-1
-Grid Obstacle
-0
-Mesh
-step_medium.fbx
-Name
-cube16
 Rast State
 solid
 Shader
