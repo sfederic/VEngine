@@ -496,8 +496,8 @@ void Player::RotatePlayerMeshToNextDirection(XMVECTOR previousPos)
 
 	//Because the rotation direction was so hard to get, just flip the LookAtRotation args
 	//so the player's mesh is always facing the right direction during movement.
-	if (VMath::VecEqual(rootForward, VMath::XMVectorRight()) ||
-		VMath::VecEqual(rootForward, -VMath::XMVectorRight()))
+	if (VMath::VecEqual(rootForward, VMath::XMVectorRight(), 0.01f) ||
+		VMath::VecEqual(rootForward, -VMath::XMVectorRight(), 0.01f))
 	{
 		lookAtRot = VMath::LookAtRotation(previousPos, nextPos);
 	}
