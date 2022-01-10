@@ -30,5 +30,5 @@ float4 PSMain(VS_OUT i) : SV_Target
 
 	float4 finalColour = ((endResult.diffuse + localAmbient) + shadowColour) * texColour;
 
-	return finalColour;
+	return finalColour * material.ambient;
 }
