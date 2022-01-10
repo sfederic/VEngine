@@ -104,5 +104,6 @@ Properties Material::GetProps()
 	props.Add("UvScale", &materialShaderData.uvScale);
 	props.Add("UvRotation", &materialShaderData.uvRotation);
 	props.Add("UvRotationSpeed", &uvRotationSpeed);
+	props.Add("Ambient", &materialShaderData.ambient);
 	return props;
 }
