@@ -107,7 +107,7 @@ EntranceTrigger
 NPC
 0
 MeshActor
-16
+19
  Position
 2 -0.5 2
  Rotation
@@ -121,7 +121,7 @@ Grid Obstacle
 Mesh
 node.fbx
 Name
-node0
+plane0
 Rast State
 solid
 Shader
@@ -156,7 +156,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-step_medium1
+plane1
 Rast State
 solid
 Shader
@@ -191,7 +191,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-MeshActor2
+plane2
 Rast State
 solid
 Shader
@@ -226,7 +226,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-MeshActor3
+plane3
 Rast State
 solid
 Shader
@@ -261,7 +261,7 @@ Grid Obstacle
 Mesh
 cube.fbx
 Name
-cube4
+plane4
 Rast State
 solid
 Shader
@@ -296,7 +296,7 @@ Grid Obstacle
 Mesh
 cube.fbx
 Name
-cube5
+plane5
 Rast State
 solid
 Shader
@@ -331,7 +331,7 @@ Grid Obstacle
 Mesh
 cube.fbx
 Name
-cube6
+plane6
 Rast State
 solid
 Shader
@@ -366,7 +366,7 @@ Grid Obstacle
 Mesh
 cube.fbx
 Name
-cube7
+plane7
 Rast State
 solid
 Shader
@@ -401,7 +401,7 @@ Grid Obstacle
 Mesh
 cube.fbx
 Name
-cube8
+plane8
 Rast State
 solid
 Shader
@@ -436,7 +436,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-cube9
+plane9
 Rast State
 solid
 Shader
@@ -471,7 +471,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-cube10
+plane10
 Rast State
 solid
 Shader
@@ -506,7 +506,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-cube11
+plane11
 Rast State
 solid
 Shader
@@ -541,7 +541,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-cube12
+plane12
 Rast State
 solid
 Shader
@@ -576,7 +576,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-cube13
+plane13
 Rast State
 solid
 Shader
@@ -611,7 +611,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-cube14
+plane14
 Rast State
 solid
 Shader
@@ -646,7 +646,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-cube15
+plane15
 Rast State
 solid
 Shader
@@ -657,6 +657,111 @@ Texture
 grass02.png
 UID
 3273268340
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+0 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+plane16
+Rast State
+nobackcull
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+bush.png
+UID
+3231624493
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+0 0 3
+ Rotation
+0 0.707107 0 0.707107
+ Scale
+0.999999 1 0.999999
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+plane17
+Rast State
+nobackcull
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+bush.png
+UID
+3231624493
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+0 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+tree_base.fbx
+Name
+tree_base18
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+tree_texture.jpg
+UID
+1902958961
 UvOffset
 0 0
 UvOffsetSpeed
