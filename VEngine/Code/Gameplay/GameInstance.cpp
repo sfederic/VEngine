@@ -25,9 +25,9 @@ void GameInstance::ResetTime()
 
 void GameInstance::AddGuilt()
 {
-	uiSystem.guiltWidget->AddGuilt();
-	uiSystem.guiltWidget->AddToViewport();
-	CreateWidget<GuiltPopup>()->AddToViewport(4.5f);
+	//uiSystem.guiltWidget->AddGuilt();
+	//uiSystem.guiltWidget->AddToViewport();
+	//CreateWidget<GuiltPopup>()->AddToViewport(4.5f);
 }
 
 Properties GameInstance::GetInstanceSaveData()
