@@ -233,7 +233,7 @@ next
 Casts Shadow
 1
 Grid Obstacle
-0
+1
 Mesh
 barrel.fbx
 Name
@@ -268,7 +268,7 @@ next
 Casts Shadow
 1
 Grid Obstacle
-0
+1
 Mesh
 vase.fbx
 Name
@@ -338,7 +338,7 @@ next
 Casts Shadow
 1
 Grid Obstacle
-0
+1
 Mesh
 step_medium.fbx
 Name
@@ -373,7 +373,7 @@ next
 Casts Shadow
 1
 Grid Obstacle
-0
+1
 Mesh
 step_medium.fbx
 Name
@@ -408,7 +408,7 @@ next
 Casts Shadow
 1
 Grid Obstacle
-0
+1
 Mesh
 table.fbx
 Name
@@ -544,11 +544,11 @@ next
  Rotation
 0 0.707107 0 -0.707107
  Scale
-0.999996 1 0.999996
+0.999997 1 0.999997
 Casts Shadow
 1
 Grid Obstacle
-0
+1
 Mesh
 step_medium.fbx
 Name
@@ -579,11 +579,11 @@ next
  Rotation
 0 0.707107 0 -0.707107
  Scale
-0.999992 1 0.999992
+0.999993 1 0.999993
 Casts Shadow
 1
 Grid Obstacle
-0
+1
 Mesh
 step_medium.fbx
 Name
@@ -614,11 +614,11 @@ next
  Rotation
 0 0.707107 0 -0.707107
  Scale
-0.999989 1 0.999989
+0.99999 1 0.99999
 Casts Shadow
 1
 Grid Obstacle
-0
+1
 Mesh
 step_medium.fbx
 Name
@@ -649,11 +649,11 @@ next
  Rotation
 0 0.707107 0 -0.707107
  Scale
-0.999987 1 0.999987
+0.999988 1 0.999988
 Casts Shadow
 1
 Grid Obstacle
-0
+1
 Mesh
 step_medium.fbx
 Name
