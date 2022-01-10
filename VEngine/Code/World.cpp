@@ -1,5 +1,8 @@
 #include "World.h"
 #include "Actors/MeshActor.h"
+#include "Actors/Game/Player.h"
+#include "Actors/Game/Grid.h"
+#include "Actors/DirectionalLightActor.h"
 #include "Actors/ActorSystemCache.h"
 #include "Components/ComponentSystemCache.h"
 #include "Components/IComponentSystem.h"
@@ -84,6 +87,15 @@ void World::StartAllComponents()
 	{
 		component->Start();
 	}
+}
+
+void World::CreateDefaultMapActors()
+{
+	Player::system.Add();
+	DirectionalLightActor::system.Add();
+	Grid::system.Add();
+
+	editor->UpdateWorldList();
 }
 
 std::vector<IActorSystem*> World::GetLayerActorSystems()

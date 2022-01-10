@@ -7,6 +7,7 @@
 #include "Render/Renderer.h"
 #include "Asset/AssetSystem.h"
 #include "FileSystem.h"
+#include "World.h"
 
 Console console;
 
@@ -76,6 +77,9 @@ Console::Console()
 
 	//Write all game save maps
 	executeMap.emplace(L"BUILD MAPS", []() { assetSystem.BuildAllGameplayMapFiles(); });
+
+	//Load in default actors for most worlds (Player, Grid, DirectionalLight, etc.)
+	executeMap.emplace(L"DEFAULT", []() { world.CreateDefaultMapActors(); });
 }
 
 void Console::ConsoleInput()

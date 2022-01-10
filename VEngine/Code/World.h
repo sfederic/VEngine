@@ -29,6 +29,9 @@ struct World
 	void WakeAndStartAllActors();
 	void StartAllComponents();
 
+	//Create default starting actors for a map, like Player, Grid.
+	void CreateDefaultMapActors();
+
 	std::vector<IActorSystem*> GetLayerActorSystems();
 
 	void TickAllActorSystems(float deltaTime);
