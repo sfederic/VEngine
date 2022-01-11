@@ -9,6 +9,7 @@
 #include "UI/UISystem.h"
 #include "UI/HealthWidget.h"
 #include "UI/DialogueWidget.h"
+#include "UI/UnitLineupWidget.h"
 
 BattleSystem battleSystem;
 
@@ -37,12 +38,15 @@ void BattleSystem::StartBattle()
 	isBattleActive = true;
 
 	grid = GameUtils::GetGrid();
-	grid->lerpOut = true;
+	grid->lerpValue = Grid::LerpValue::LerpOut;
 	grid->SetActive(true);
+	grid->ResetAllNodes();
 
 	player = GameUtils::GetPlayer();
 	player->isPlayerTurn = true;
 	player->isWeaponDrawn = true;
+
+	uiSystem.unitLineupWidget->AddToViewport();
 
 	activeBattleUnits = world.GetAllActorsOfTypeInWorld<Unit>();
 	for (auto unit : activeBattleUnits)
@@ -68,6 +72,8 @@ void BattleSystem::EndBattle()
 	player->BattleCleanup();
 
 	grid->SetActive(false);
+
+	uiSystem.unitLineupWidget->RemoveFromViewport();
 
 	Log("Battle ended.");
 
