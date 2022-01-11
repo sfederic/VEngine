@@ -37,6 +37,10 @@ void Unit::Tick(float deltaTime)
 			{
 				nextMovePos = XMLoadFloat3(&pathNodes[movementPathNodeIndex]->worldPosition);
 
+				//Set rotation for unit to look at next pos
+				auto lookAtRot = VMath::LookAtRotation(nextMovePos, GetPositionVector());
+				SetRotation(lookAtRot);
+
 				xIndex = pathNodes[movementPathNodeIndex]->xIndex;
 				yIndex = pathNodes[movementPathNodeIndex]->yIndex;
 
