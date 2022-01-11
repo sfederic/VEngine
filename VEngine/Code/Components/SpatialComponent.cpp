@@ -174,15 +174,3 @@ XMVECTOR SpatialComponent::GetUpVectorV()
 {
 	return XMVector3Normalize(GetWorldMatrix().r[1]);
 }
-
-XMMATRIX SpatialComponent::GetTransformMatrix()
-{
-	XMVECTOR rotationOffset = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-
-	if (parent)
-	{
-		rotationOffset = parent->GetPositionV();
-	}
-
-	return transform.GetAffineRotationOrigin(rotationOffset);
-}
