@@ -6,6 +6,8 @@ Grid
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -71,17 +73,19 @@ next
 Player
 1
  Position
-3 -9.53674e-07 0
+2 0 2
  Rotation
-0 -0.707106 0 -0.707107
+0 0 0 1
  Scale
-0.999971 1 0.999971
+1 1 1
+Ambient
+1 1 1 1
 Audio Filename
 step.wav
 Casts Shadow
 1
 FOV
-59.7249
+60
 Far Z
 1000
 File
@@ -91,7 +95,7 @@ Grid Obstacle
 Loop
 1
 Mesh
-unit_test.fbx
+character_test.fbx
 Name
 Player0
 Near Z
@@ -107,9 +111,9 @@ DefaultShader.hlsl
 Static
 1
 Texture
-wall.png
+test.png
 UID
-3552242393
+88811876
 UvOffset
 0 0
 UvOffsetSpeed
@@ -160,6 +164,8 @@ NPC
 1 1 1
 Add On Interact
 0
+Ambient
+1 1 1 1
 Attack Points
 1
 Casts Shadow
@@ -241,6 +247,8 @@ MeshActor
 0.707107 0 0 -0.707107
  Scale
 3 2.99997 0.999994
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -276,6 +284,8 @@ next
 0 0.707229 0 0.706984
  Scale
 3 1.5 0
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -311,6 +321,8 @@ next
 -0 -0.706985 -0 0.707228
  Scale
 3.00002 1.5 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -346,6 +358,8 @@ next
 -0 0.000172756 -0 1
  Scale
 3.00002 1.5 0.75
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -381,6 +395,8 @@ next
 0 1 0 -0.000172772
  Scale
 3.00008 1.5 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -416,6 +432,8 @@ next
 0.707107 -1.54543e-08 0.707107 -1.54543e-08
  Scale
 0.749988 0.999999 0.999988
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -451,6 +469,8 @@ next
 0.707107 0 0 -0.707107
  Scale
 1 0.999986 0.999986
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -486,6 +506,8 @@ next
 -0 0 -0.000172633 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -521,6 +543,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -556,6 +580,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -591,6 +617,8 @@ next
 0.0616435 0.704588 -0.0616134 0.704244
  Scale
 1 0.999999 0.999998
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -626,6 +654,8 @@ next
 0.0616435 0.704588 -0.0616134 0.704244
  Scale
 1 0.999999 0.999998
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -661,6 +691,8 @@ next
 0.436147 -0.55524 0.566472 -0.424964
  Scale
 1 0.999977 0.999997
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -696,6 +728,8 @@ next
 -0 0 -0.000172633 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -731,6 +765,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle

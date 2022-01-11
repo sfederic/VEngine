@@ -52,7 +52,7 @@ AudioActor
 Player
 1
  Position
-3 0 1
+4 1 3
  Rotation
 -0 0 -0 1
  Scale
@@ -92,7 +92,7 @@ Static
 Texture
 test.png
 UID
-779451914
+2877341867
 UvOffset
 0 0
 UvOffsetSpeed
@@ -109,7 +109,90 @@ next
 EntranceTrigger
 0
 NPC
+1
+ Position
+1 1 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
 0
+Ambient
+1 1 1 1
+Attack Points
+1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+5
+Interact
+1
+Interact Text
+
+Intuition Name
+
+Mesh
+character_test.fbx
+Move Points
+7
+Move Speed
+3
+Name
+NPC0
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+1817088856
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+battleStartText
+
+condition
+
+conditionArg
+
+deathText
+
+interactKnownText
+
+spawnText
+
+next
 MeshActor
 26
  Position
@@ -139,7 +222,7 @@ water.jpg
 UID
 1092316532
 UvOffset
-1.68898 0
+1.7783 0
 UvOffsetSpeed
 0.01 0
 UvRotation

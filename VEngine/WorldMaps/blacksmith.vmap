@@ -6,6 +6,8 @@ Grid
 0 0 0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -55,6 +57,8 @@ Player
 0 0 0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Audio Filename
 step.wav
 Casts Shadow
@@ -103,7 +107,32 @@ Volume
 1
 next
 EntranceTrigger
-0
+1
+ Position
+2 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+0.45 0.45 0.45
+Level Name
+outdoor_test.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Text
+Exit Blacksmith
+UID
+3735482732
+condition
+
+conditionArg
+
+next
 NPC
 0
 MeshActor
@@ -114,6 +143,8 @@ MeshActor
 -0 0 -0 1
  Scale
 5 1 5
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -149,6 +180,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -184,6 +217,8 @@ next
 -0 0.707107 -0 0.707107
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -219,6 +254,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -254,6 +291,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -289,6 +328,8 @@ next
 -0 0.707107 -0 0.707107
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -324,6 +365,8 @@ next
 0 0 0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -359,6 +402,8 @@ next
 -0 0.173648 -0 0.984808
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -394,6 +439,8 @@ next
 0.707229 0 0 -0.706984
  Scale
 5 1 5
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -429,6 +476,8 @@ next
 -0 -0.707107 -0 0.707107
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -464,6 +513,8 @@ next
 -0 -0.707107 -0 0.707107
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -499,6 +550,8 @@ next
 -0 -0.707107 -0 0.707107
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -534,6 +587,8 @@ next
 -0 0.000172633 -0 1
  Scale
 2 1 2
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
