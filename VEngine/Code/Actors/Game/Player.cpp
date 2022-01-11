@@ -373,7 +373,9 @@ void Player::PrimaryAction()
 
 		Ray ray(this);
 		//Because the mesh has funny rotations set in RotatePlayerMeshToNextDirection(),
-		//you have to sort of get the "parent forward vector" from the quat multiply.
+		//you have to sort of get the lazy world rotations from the quat multiply.
+		//Todo: There's shorthand for all this that needs to be done in SpatialComponent.
+		//Eg. SpatialComponent::SetWorldRotation()
 		auto meshForward = mesh->GetForwardVectorV();
 		auto rot = XMQuaternionMultiply(mesh->GetRotationV(), GetRotationVector());
 		auto trueForward = VMath::ForwardFromQuat(rot);
