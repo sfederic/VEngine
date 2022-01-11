@@ -149,6 +149,20 @@ XMVECTOR SpatialComponent::GetRightVectorV()
 	return XMVector3Normalize(GetTransformMatrix().r[0]);
 }
 
+void SpatialComponent::SetWorldRotation(XMVECTOR newRotation)
+{
+	XMVECTOR relativeRotation = newRotation;
+
+	if (parent)
+	{
+		//Looks like relative rotations are inversed with quaternions. ParentQuat(-1) * newRot;
+		XMVECTOR parentRot = XMQuaternionInverse(parent->GetRotationV());
+		relativeRotation = XMQuaternionMultiply(parentRot, newRotation);
+	}
+
+	SetRotation(relativeRotation);
+}
+
 XMFLOAT3 SpatialComponent::GetUpVector()
 {
 	XMFLOAT3 up;

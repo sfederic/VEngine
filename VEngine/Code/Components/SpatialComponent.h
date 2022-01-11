@@ -41,6 +41,7 @@ struct SpatialComponent : Component
 	void SetRotation(float x, float y, float z, float w);
 	void SetRotation(XMFLOAT4 newRotation);
 	void SetRotation(XMVECTOR newRotation);
+	void SetWorldRotation(XMVECTOR newRotation);
 
 	XMFLOAT3 GetForwardVector();
 	XMVECTOR GetForwardVectorV();
