@@ -6,6 +6,8 @@ Grid
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -50,11 +52,13 @@ AudioActor
 Player
 1
  Position
-4 0.00195503 0
+2 0.0014658 1
  Rotation
-0 -0.707106 0 -0.707107
+0 7.7486e-07 0 -1
  Scale
 0.999999 1 0.999999
+Ambient
+1 1 1 1
 Audio Filename
 step.wav
 Casts Shadow
@@ -100,10 +104,10 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
-0
+-0.0615626
 next
 EntranceTrigger
-3
+5
  Position
 3 1 5
  Rotation
@@ -179,6 +183,56 @@ condition
 conditionArg
 
 next
+ Position
+0 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+0.45 0.45 0.45
+Level Name
+bar.vmap
+Locked Text
+Locked
+Name
+EntranceBar
+Open Text
+Enter Bar
+UID
+461904067
+condition
+
+conditionArg
+
+next
+ Position
+3 1 6
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+0.45 0.45 0.45
+Level Name
+blacksmith.vmap
+Locked Text
+Locked
+Name
+EntranceBlacksmith
+Open Text
+Enter Blacksmith
+UID
+1367202305
+condition
+
+conditionArg
+
+next
 NPC
 3
  Position
@@ -189,6 +243,8 @@ NPC
 1 1 1
 Add On Interact
 0
+Ambient
+1 1 1 1
 Attack Points
 1
 Casts Shadow
@@ -270,6 +326,8 @@ next
 1 1 1
 Add On Interact
 0
+Ambient
+1 1 1 1
 Attack Points
 1
 Casts Shadow
@@ -351,6 +409,8 @@ next
 1 1 1
 Add On Interact
 0
+Ambient
+1 1 1 1
 Attack Points
 1
 Casts Shadow
@@ -432,6 +492,8 @@ MeshActor
 -0.706934 0 -0 0.70728
  Scale
 5 5 0.999999
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -467,6 +529,8 @@ next
 0 0.707107 0 -0.707107
  Scale
 1.99999 2 1.99999
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -502,6 +566,8 @@ next
 -0 0 -0 1
  Scale
 2 2 2
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -537,6 +603,8 @@ next
 1 1.05414e-11 -1.41065e-07 2.18556e-08
  Scale
 4.00004 2.00003 1.00001
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -572,6 +640,8 @@ next
 -0 0 -0 1
  Scale
 2 2 2
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -607,6 +677,8 @@ next
 -0 -2.0067e-07 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -642,6 +714,8 @@ next
 -0.706934 0 -0 0.70728
  Scale
 2 3 0.999995
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -677,6 +751,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -712,6 +788,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -747,6 +825,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -782,6 +862,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -817,6 +899,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -852,6 +936,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -887,6 +973,8 @@ next
 -0 -0.707107 -0 0.707107
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -922,6 +1010,8 @@ next
 0.707279 1.54581e-08 -0.706934 1.54505e-08
  Scale
 3.99999 1.99999 0.999997
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -957,6 +1047,8 @@ next
 0.706934 -1.54505e-08 0.707279 1.5458e-08
  Scale
 4.00002 2.00002 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -992,6 +1084,8 @@ next
 0 0.707107 0 0.707107
  Scale
 0.99999 1 0.99999
+Ambient
+1 1 1 1
 Casts Shadow
 0
 Grid Obstacle
@@ -1007,7 +1101,7 @@ DefaultShader.hlsl
 Static
 1
 Texture
-test.png
+wall04.png
 UID
 2092761808
 UvOffset
