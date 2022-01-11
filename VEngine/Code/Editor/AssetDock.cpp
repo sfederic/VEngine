@@ -269,6 +269,10 @@ void AssetDock::CreateNewMapFile()
 
     //refresh asset items in dock
     AssetFolderClicked();
+    
+    //Just load the file when creating it
+    QFileInfo fileInfo(file);
+    fileSystem.LoadWorld(fileInfo.fileName().toStdString());
 }
 
 void AssetDock::CreateNewDialogueFile()
