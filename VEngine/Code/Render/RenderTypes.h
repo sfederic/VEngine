@@ -152,4 +152,5 @@ struct ShaderLights
 struct InstanceData
 {
 	XMMATRIX world;
+	XMFLOAT4 colour;
 };

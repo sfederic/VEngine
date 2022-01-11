@@ -46,3 +46,11 @@ void GridNode::DisplayShow()
 	meshInstanceData.world.r[1].m128_f32[1] = 0.9f;
 	meshInstanceData.world.r[2].m128_f32[2] = 0.9f;
 }
+
+void GridNode::SetColour(XMFLOAT4 newColour)
+{
+	auto grid = GameUtils::GetGrid();
+	auto& meshInstanceData = grid->nodeMesh->instanceData[instancedMeshIndex];
+
+	meshInstanceData.colour = newColour;
+}

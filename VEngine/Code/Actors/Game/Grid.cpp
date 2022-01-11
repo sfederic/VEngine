@@ -77,6 +77,8 @@ void Grid::Awake()
             auto gridActors = world.GetAllActorsOfTypeAsActor<GridActor>();
             ray.AddActorsToIgnore(gridActors);
 
+            instanceData.colour = GridNode::normalColour;
+
             //raycast against the world to set node position
             if (Raycast(ray, rayOrigin, -VMath::XMVectorUp(), 20.0f))
             {

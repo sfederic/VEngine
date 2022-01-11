@@ -488,6 +488,7 @@ void Renderer::RenderInstanceMeshComponents()
 		//Update instance data and set SRV
 		context->UpdateSubresource(instanceMesh->structuredBuffer, 0, nullptr, instanceMesh->instanceData.data(), 0, 0);
 		context->VSSetShaderResources(instanceSRVRegister, 1, &instanceMesh->srv);
+		context->PSSetShaderResources(instanceSRVRegister, 1, &instanceMesh->srv);
 
 		//Set lights buffer
 		context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);

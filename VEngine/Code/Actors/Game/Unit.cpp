@@ -269,6 +269,7 @@ void Unit::ShowUnitMovementPath()
 	{
 		node->preview = true;
 		node->DisplayShow();
+		node->SetColour(GridNode::previewColour);
 	}
 }
 
