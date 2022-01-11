@@ -255,3 +255,46 @@ void Unit::WindUpAttack()
 
 	EndTurn();
 }
+
+void Unit::ShowUnitMovementPath()
+{
+	auto grid = GameUtils::GetGrid();
+	GridNode* destinationNode = grid->GetNode(0, 0);
+
+	auto previewMovementNodes = GetMovementPathPreviewNodes(destinationNode);
+
+	grid->DisplayHideAllNodes();
+
+	for (auto node : previewMovementNodes)
+	{
+		node->preview = true;
+		node->DisplayShow();
+	}
+}
+
+std::vector<GridNode*> Unit::GetMovementPathPreviewNodes(GridNode* destinationNode)
+{
+	auto grid = GameUtils::GetGrid();
+	grid->ResetAllNodes();
+
+	GridNode* startingNode = grid->GetNode(xIndex, yIndex);
+
+	std::vector<GridNode*> nodes;
+	std::vector<GridNode*> closedNodes;
+
+	grid->GetNeighbouringNodes(startingNode, nodes);
+
+	for (int moveIndex = 0; moveIndex < movementPoints; moveIndex++)
+	{
+		for (int previewIndex = 0; previewIndex < nodes.size(); previewIndex++)
+		{
+			grid->GetNeighbouringNodes(nodes[previewIndex], closedNodes);
+		}
+
+		nodes.insert(nodes.end(), closedNodes.begin(), closedNodes.end());
+
+		closedNodes.clear();
+	}
+
+	return nodes;
+}

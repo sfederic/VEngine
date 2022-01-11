@@ -56,4 +56,9 @@ public:
 
 	bool Attack();
 	void WindUpAttack();
+
+	void ShowUnitMovementPath();
+
+private:
+	std::vector<GridNode*> GetMovementPathPreviewNodes(GridNode* destinationNode);
 };
