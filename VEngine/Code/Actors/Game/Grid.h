@@ -30,7 +30,13 @@ struct Grid : Actor
 	int sizeX = 1;
 	int sizeY = 1;
 
-	bool lerpOut = false;
+	enum class LerpValue
+	{
+		LerpIn,
+		LerpOut
+	};
+
+	LerpValue lerpValue = LerpValue::LerpOut;
 
 	Grid();
 	virtual void Awake() override;
@@ -42,4 +48,6 @@ struct Grid : Actor
 	void ResetAllNodes();
 	void LerpInNodes(float deltaTime);
 	void LerpOutNodes(float deltaTime);
+	void DisplayHideAllNodes();
+	void DisplayShowAllNodes();
 };

@@ -141,13 +141,15 @@ void Grid::Start()
 
 void Grid::Tick(float deltaTime)
 {
-    if (!lerpOut)
+    switch(lerpValue)
     {
+    case LerpValue::LerpIn:
         LerpInNodes(deltaTime);
-    }
-    else
-    {
+        break;
+
+    case LerpValue::LerpOut:
         LerpOutNodes(deltaTime);
+        break;
     }
 }
 
@@ -250,17 +252,15 @@ void Grid::LerpInNodes(float deltaTime)
     {
         for (auto& node : row.columns)
         {
-            if (!node.active) continue;
+            if (!node.active || node.preview)
+            {
+                continue;
+            }
 
             auto& data = nodeMesh->instanceData[node.instancedMeshIndex];
             data.world.r[0].m128_f32[0] = std::lerp(data.world.r[0].m128_f32[0], 0.f, deltaTime * lerpSpeed);
             data.world.r[1].m128_f32[1] = std::lerp(data.world.r[1].m128_f32[1], 0.f, deltaTime * lerpSpeed);
             data.world.r[2].m128_f32[2] = std::lerp(data.world.r[2].m128_f32[2], 0.f, deltaTime * lerpSpeed);
-
-            if (data.world.r[2].m128_f32[2] == 0.f)
-            {
-                SetActive(false);
-            }
         }
     }
 }
@@ -273,12 +273,41 @@ void Grid::LerpOutNodes(float deltaTime)
     {
         for (auto& node : row.columns)
         {
-            if (!node.active) continue;
+            if (!node.active || node.preview) 
+            {
+                continue; 
+            }
 
             auto& data = nodeMesh->instanceData[node.instancedMeshIndex];
             data.world.r[0].m128_f32[0] = std::lerp(data.world.r[0].m128_f32[0], 0.9f, deltaTime * lerpSpeed);
             data.world.r[1].m128_f32[1] = std::lerp(data.world.r[1].m128_f32[1], 0.9f, deltaTime * lerpSpeed);
             data.world.r[2].m128_f32[2] = std::lerp(data.world.r[2].m128_f32[2], 0.9f, deltaTime * lerpSpeed);
+        }
+    }
+}
+
+void Grid::DisplayHideAllNodes()
+{
+    lerpValue = LerpValue::LerpIn;
+
+    for (auto& row : rows)
+    {
+        for (auto& node : row.columns)
+        {
+            node.DisplayHide();
+        }
+    }
+}
+
+void Grid::DisplayShowAllNodes()
+{
+    lerpValue = LerpValue::LerpOut;
+
+    for (auto& row : rows)
+    {
+        for (auto& node : row.columns)
+        {
+            node.DisplayShow();
         }
     }
 }
