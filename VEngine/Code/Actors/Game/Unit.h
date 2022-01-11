@@ -59,6 +59,8 @@ public:
 
 	void ShowUnitMovementPath();
 
+	void SetUnitLookAt(XMVECTOR lookAtPoint);
+
 private:
 	std::vector<GridNode*> GetMovementPathPreviewNodes(GridNode* destinationNode);
 };

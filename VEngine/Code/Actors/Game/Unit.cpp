@@ -37,9 +37,7 @@ void Unit::Tick(float deltaTime)
 			{
 				nextMovePos = XMLoadFloat3(&pathNodes[movementPathNodeIndex]->worldPosition);
 
-				//Set rotation for unit to look at next pos
-				auto lookAtRot = VMath::LookAtRotation(nextMovePos, GetPositionVector());
-				SetRotation(lookAtRot);
+				SetUnitLookAt(nextMovePos);
 
 				xIndex = pathNodes[movementPathNodeIndex]->xIndex;
 				yIndex = pathNodes[movementPathNodeIndex]->yIndex;
@@ -275,6 +273,12 @@ void Unit::ShowUnitMovementPath()
 		node->DisplayShow();
 		node->SetColour(GridNode::previewColour);
 	}
+}
+
+void Unit::SetUnitLookAt(XMVECTOR lookAtPoint)
+{
+	auto lookAtRot = VMath::LookAtRotation(lookAtPoint, GetPositionVector());
+	SetRotation(lookAtRot);
 }
 
 std::vector<GridNode*> Unit::GetMovementPathPreviewNodes(GridNode* destinationNode)
