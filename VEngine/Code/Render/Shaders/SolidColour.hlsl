@@ -9,6 +9,7 @@ VS_OUT VSMain(VS_IN i)
 	o.uv = i.uv;
 	o.normal = mul((float3x3)model, i.normal);
 	o.shadowPos = float4(1.f, 1.f, 1.f, 1.f);
+	o.instanceID = i.instanceID;
 
 	return o;
 }

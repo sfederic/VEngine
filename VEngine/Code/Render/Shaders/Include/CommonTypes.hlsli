@@ -164,9 +164,10 @@ LightingResult CalcForwardLighting(float3 V, float4 position, float3 normal)
 struct InstanceData
 {
 	float4x4 modelMatrix;
+	float4 colour;
 };
 
-StructuredBuffer<InstanceData> modelMatrices : register(t3);
+StructuredBuffer<InstanceData> instanceData : register(t3);
 
 struct VS_IN
 {
@@ -185,6 +186,7 @@ struct VS_OUT
 	float2 uv : TEXCOORD0;
 	float3 normal : NORMAL;
 	float4 shadowPos : TEXCOORD1;
+	uint instanceID : SV_InstanceID;
 };
 
 Texture2D t : register(t0);
