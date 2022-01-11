@@ -11,7 +11,7 @@
 #include "World.h"
 #include "Core.h"
 
-CameraComponent editorCamera(XMFLOAT3(0.f, 0.f, 0.f), true);
+CameraComponent editorCamera(XMFLOAT3(0.f, 5.f, -5.f), true);
 CameraComponent* activeCamera;
 
 CameraComponent::CameraComponent(XMFLOAT3 startPos, bool isEditorCamera)
