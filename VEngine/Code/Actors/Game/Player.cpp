@@ -372,8 +372,12 @@ void Player::PrimaryAction()
 		}
 
 		Ray ray(this);
-		auto forward = mesh->GetForwardVectorV();
-		if (Raycast(ray, GetPositionVector(), forward, 1.5f))
+		//Because the mesh has funny rotations set in RotatePlayerMeshToNextDirection(),
+		//you have to sort of get the "parent forward vector" from the quat multiply.
+		auto meshForward = mesh->GetForwardVectorV();
+		auto rot = XMQuaternionMultiply(mesh->GetRotationV(), GetRotationVector());
+		auto trueForward = VMath::ForwardFromQuat(rot);
+		if (Raycast(ray, GetPositionVector(), trueForward, 1.5f))
 		{
 			Log("Player interact: %s", ray.hitActor->name.c_str());
 
