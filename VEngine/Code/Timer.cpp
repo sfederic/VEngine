@@ -9,6 +9,15 @@ void Timer::Tick(float deltaTime)
 		if (timerItems[timerIndex].currentTime > timerItems[timerIndex].endTime)
 		{
 			timerItems[timerIndex].functionToCall();
+		}
+	}
+
+	//This looks stupid, but the erase call has to be below the timer function call
+	//for when world's load and all timers are cleared.
+	for (int timerIndex = 0; timerIndex < timerItems.size(); timerIndex++)
+	{
+		if (timerItems[timerIndex].currentTime > timerItems[timerIndex].endTime)
+		{
 			timerItems.erase(timerItems.begin() + timerIndex);
 		}
 	}
