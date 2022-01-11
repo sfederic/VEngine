@@ -52,9 +52,9 @@ AudioActor
 Player
 1
  Position
-2 0.0014658 1
+4 0.00195503 0
  Rotation
-0 7.7486e-07 0 -1
+0 -1 0 -5.96046e-08
  Scale
 0.999999 1 0.999999
 Ambient
@@ -104,10 +104,10 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
--0.0615626
+0.132982
 next
 EntranceTrigger
-5
+6
  Position
 3 1 5
  Rotation
@@ -228,6 +228,31 @@ Open Text
 Enter Blacksmith
 UID
 1367202305
+condition
+
+conditionArg
+
+next
+ Position
+4 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+2 1 1
+Entrance Active
+1
+Extents
+0.45 0.45 0.45
+Level Name
+town_gate.vmap
+Locked Text
+Locked
+Name
+EntranceGate
+Open Text
+Enter Town Gate
+UID
+1678449567
 condition
 
 conditionArg
@@ -485,7 +510,7 @@ spawnText
 
 next
 MeshActor
-17
+18
  Position
 4 -0.5 4
  Rotation
@@ -1114,6 +1139,43 @@ UvRotationSpeed
 0
 UvScale
 1 1
+next
+ Position
+4 0 -1
+ Rotation
+-0 0.000298827 -0 1
+ Scale
+0.999998 1 0.999998
+Ambient
+1 1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+stone_gate.fbx
+Name
+MeshActor17
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+floor.jpg
+UID
+1872131118
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+2 2
 next
 DirectionalLightActor
 1

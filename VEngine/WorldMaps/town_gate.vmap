@@ -52,9 +52,9 @@ AudioActor
 Player
 1
  Position
-1 0 6
+1 0 8.12997
  Rotation
-0 5.06639e-07 0 -0.999999
+0 1 0 0.000244089
  Scale
 1 1 1
 Ambient
@@ -104,16 +104,16 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
--0.0137987
+0.530569
 next
 EntranceTrigger
-1
+2
  Position
 1 0 14
  Rotation
-0 0 0 1
+0 1 0 0.000244089
  Scale
-3 1 1
+3.00001 1 1
 Entrance Active
 1
 Extents
@@ -128,6 +128,31 @@ Open Text
 Enter Forest
 UID
 2495477855
+condition
+
+conditionArg
+
+next
+ Position
+1 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+3 1 1
+Entrance Active
+1
+Extents
+0.45 0.45 0.45
+Level Name
+outdoor_test.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger1
+Open Text
+Enter Town Center
+UID
+3295779955
 condition
 
 conditionArg
