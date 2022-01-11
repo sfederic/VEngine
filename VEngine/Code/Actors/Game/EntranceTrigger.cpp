@@ -45,6 +45,12 @@ void EntranceTrigger::Tick(float deltaTime)
 
         if (Input::GetKeyUp(Keys::Down))
         {
+            if (levelToMoveTo.empty())
+            {
+                Log("EntranceTrigger %s levelToMoveTo empty.", this->name.c_str());
+                return;
+            }
+
             //Condition check
             if (!conditionComponent->condition.empty() && isEntranceLocked)
             {
