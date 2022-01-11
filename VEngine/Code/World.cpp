@@ -197,11 +197,7 @@ void World::Cleanup()
 	actorNameMap.clear();
 
 	//Cleanup various systems
-	
-	//@Todo: Keep an eye on this cleanup, not sure if having timers persist between world loads matters.
-	//It's originally commented out to deal with EntranceTrigger screenfade timers.
-	//Timer::Cleanup();
-
+	Timer::Cleanup();
 	physicsSystem.Reset();
 	audioSystem.DeleteLoadedAudioAndChannels();
 	textureSystem.Cleanup();
