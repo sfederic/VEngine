@@ -6,6 +6,7 @@
 struct Widget;
 struct IntuitionGainedWidget;
 struct IntuitionRecalledWidget;
+struct UnitLineupWidget;
 struct ScreenFadeWidget;
 struct GuiltWidget;
 
@@ -22,6 +23,7 @@ struct UISystem
 	IntuitionRecalledWidget* intuitionRecalledWidget = nullptr;
 	ScreenFadeWidget* screenFadeWidget = nullptr;
 	GuiltWidget* guiltWidget = nullptr;
+	UnitLineupWidget* unitLineupWidget = nullptr;
 
 	//To check whether recalled or gained widgets are on screen so player can click off them.
 	bool intuitionWidgetInViewport = false;
