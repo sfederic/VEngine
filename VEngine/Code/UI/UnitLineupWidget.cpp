@@ -2,6 +2,7 @@
 #include "Gameplay/BattleSystem.h"
 #include "Actors/Game/Unit.h"
 #include "VString.h"
+#include "Gameplay/GameUtils.h"
 
 void UnitLineupWidget::Draw(float deltaTime)
 {
@@ -15,6 +16,7 @@ void UnitLineupWidget::Draw(float deltaTime)
 		if (Button(VString::stows(unit->name.c_str()), layout))
 		{
 			unit->ShowUnitMovementPath();
+			GameUtils::SetActiveCameraTarget(unit);
 		}
 
 		layout.AddVerticalSpace(30.f);
