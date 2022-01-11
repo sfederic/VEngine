@@ -22,7 +22,26 @@ void GridNode::Show()
 	auto grid = GameUtils::GetGrid();
 	auto& meshInstanceData = grid->nodeMesh->instanceData[instancedMeshIndex];
 
-	//Set uniform identity scale
+	meshInstanceData.world.r[0].m128_f32[0] = 0.9f;
+	meshInstanceData.world.r[1].m128_f32[1] = 0.9f;
+	meshInstanceData.world.r[2].m128_f32[2] = 0.9f;
+}
+
+void GridNode::DisplayHide()
+{
+	auto grid = GameUtils::GetGrid();
+	auto& meshInstanceData = grid->nodeMesh->instanceData[instancedMeshIndex];
+
+	meshInstanceData.world.r[0].m128_f32[0] = 0.f;
+	meshInstanceData.world.r[1].m128_f32[1] = 0.f;
+	meshInstanceData.world.r[2].m128_f32[2] = 0.f;
+}
+
+void GridNode::DisplayShow()
+{
+	auto grid = GameUtils::GetGrid();
+	auto& meshInstanceData = grid->nodeMesh->instanceData[instancedMeshIndex];
+
 	meshInstanceData.world.r[0].m128_f32[0] = 0.9f;
 	meshInstanceData.world.r[1].m128_f32[1] = 0.9f;
 	meshInstanceData.world.r[2].m128_f32[2] = 0.9f;

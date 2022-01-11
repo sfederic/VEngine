@@ -41,10 +41,16 @@ struct GridNode
 		hCost = 0.f;
 		parentNode = nullptr;
 		closed = false;
+		preview = false;
 	}
 
+	//These functions also sets the nodes variables
 	void Hide();
 	void Show();
+
+	//These ones only care about the visual display of the node
+	void DisplayHide();
+	void DisplayShow();
 
 	GridNode* parentNode = nullptr;
 	XMFLOAT3 worldPosition;
@@ -56,4 +62,5 @@ struct GridNode
 	uint32_t instancedMeshIndex = 0;
 	bool closed = false;
 	bool active = true;
+	bool preview = false; //If the node is to show preview movements, ignores lerp
 };
