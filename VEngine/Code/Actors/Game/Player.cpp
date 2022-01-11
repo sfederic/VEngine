@@ -372,12 +372,8 @@ void Player::PrimaryAction()
 		}
 
 		Ray ray(this);
-		//Because the mesh has funny rotations set in RotatePlayerMeshToNextDirection(),
-		//you have to sort of get the lazy world rotations from the quat multiply.
 		auto meshForward = mesh->GetForwardVectorV();
-		auto trueForward = XMQuaternionMultiply(mesh->GetRotationV(), GetRotationVector());
-		auto interactDirection = VMath::ForwardFromQuat(trueForward);
-		if (Raycast(ray, GetPositionVector(), interactDirection, 1.5f))
+		if (Raycast(ray, GetPositionVector(), meshForward, 1.5f))
 		{
 			Log("Player interact: %s", ray.hitActor->name.c_str());
 
