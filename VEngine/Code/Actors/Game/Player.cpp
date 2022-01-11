@@ -374,12 +374,10 @@ void Player::PrimaryAction()
 		Ray ray(this);
 		//Because the mesh has funny rotations set in RotatePlayerMeshToNextDirection(),
 		//you have to sort of get the lazy world rotations from the quat multiply.
-		//Todo: There's shorthand for all this that needs to be done in SpatialComponent.
-		//Eg. SpatialComponent::SetWorldRotation()
 		auto meshForward = mesh->GetForwardVectorV();
-		auto rot = XMQuaternionMultiply(mesh->GetRotationV(), GetRotationVector());
-		auto trueForward = VMath::ForwardFromQuat(rot);
-		if (Raycast(ray, GetPositionVector(), trueForward, 1.5f))
+		auto trueForward = XMQuaternionMultiply(mesh->GetRotationV(), GetRotationVector());
+		auto interactDirection = VMath::ForwardFromQuat(trueForward);
+		if (Raycast(ray, GetPositionVector(), interactDirection, 1.5f))
 		{
 			Log("Player interact: %s", ray.hitActor->name.c_str());
 
@@ -440,7 +438,7 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 	int nextYIndex = (int)std::round(nextPos.m128_f32[2]);
 
 	//Keep the call here so player can face walls and holes on input.
-	RotatePlayerMeshToNextDirection(previousPos);
+	mesh->SetWorldRotation(VMath::LookAtRotation(nextPos, previousPos));
 
 	auto grid = GameUtils::GetGrid();
 
@@ -502,26 +500,6 @@ void Player::PlacePickupDown()
 
 		heldPickupWidget->RemoveFromViewport();
 	}
-}
-
-void Player::RotatePlayerMeshToNextDirection(XMVECTOR previousPos)
-{
-	XMVECTOR lookAtRot = XMVectorZero();
-	XMVECTOR rootForward = GetForwardVectorV();
-
-	//Because the rotation direction was so hard to get, just flip the LookAtRotation args
-	//so the player's mesh is always facing the right direction during movement.
-	if (VMath::VecEqual(rootForward, VMath::XMVectorRight(), 0.01f) ||
-		VMath::VecEqual(rootForward, -VMath::XMVectorRight(), 0.01f))
-	{
-		lookAtRot = VMath::LookAtRotation(previousPos, nextPos);
-	}
-	else
-	{
-		lookAtRot = VMath::LookAtRotation(nextPos, previousPos);
-	}
-
-	mesh->SetRotation(XMQuaternionMultiply(lookAtRot, GetRotationVector()));
 }
 
 bool Player::PickupCheck(Actor* hitActor)
