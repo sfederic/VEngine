@@ -104,9 +104,15 @@ namespace GameUtils
 
 	void LoadWorldAndMoveToEntranceTrigger()
 	{
+		if (levelToMoveTo.empty())
+		{
+			return;
+		}
+
 		GameInstance::ProgressTime();
 
 		LoadWorld(levelToMoveTo);
+
 		uiSystem.screenFadeWidget->SetToFadeIn();
 		uiSystem.screenFadeWidget->AddToViewport();
 
