@@ -6,6 +6,8 @@ Grid
 0 0 0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -50,11 +52,13 @@ AudioActor
 Player
 1
  Position
-0 -0.00034523 0
+1 0 6
  Rotation
--0 0.000171341 -0 1
+0 0 0 1
  Scale
 0.999998 1 0.999998
+Ambient
+1 1 1 1
 Audio Filename
 step.wav
 Casts Shadow
@@ -100,10 +104,60 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
-0.798809
+-0.0368639
 next
 EntranceTrigger
-0
+2
+ Position
+1 0 0
+ Rotation
+0 0 0 1
+ Scale
+3 1 1
+Entrance Active
+1
+Extents
+0.45 0.45 0.45
+Level Name
+town_gate.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Text
+Enter Town Gate
+UID
+3241470510
+condition
+
+conditionArg
+
+next
+ Position
+1 0 8
+ Rotation
+0 0 0 1
+ Scale
+3 1 1
+Entrance Active
+1
+Extents
+0.45 0.45 0.45
+Level Name
+cliffside.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger1
+Open Text
+Enter Forst Clifside
+UID
+1345921760
+condition
+
+conditionArg
+
+next
 NPC
 0
 MeshActor
@@ -114,6 +168,8 @@ MeshActor
 -0 0 0.000172667 1
  Scale
 3 0 9
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -121,7 +177,7 @@ Grid Obstacle
 Mesh
 node.fbx
 Name
-tree_base0
+sphere0
 Rast State
 solid
 Shader
@@ -149,6 +205,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -156,7 +214,7 @@ Grid Obstacle
 Mesh
 tree_base.fbx
 Name
-tree_base1
+sphere1
 Rast State
 solid
 Shader
@@ -184,6 +242,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -191,7 +251,7 @@ Grid Obstacle
 Mesh
 tree_base.fbx
 Name
-tree_base2
+sphere2
 Rast State
 solid
 Shader
@@ -219,6 +279,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -226,7 +288,7 @@ Grid Obstacle
 Mesh
 tree_base.fbx
 Name
-tree_base3
+sphere3
 Rast State
 solid
 Shader

@@ -6,6 +6,8 @@ Grid
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -55,6 +57,8 @@ Player
 0 0 0 0.999999
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Audio Filename
 step.wav
 Casts Shadow
@@ -103,7 +107,32 @@ Volume
 0
 next
 EntranceTrigger
-0
+1
+ Position
+0 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+0.45 0.45 0.45
+Level Name
+forest.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Text
+Enter Forest
+UID
+2499625741
+condition
+
+conditionArg
+
+next
 NPC
 0
 MeshActor
@@ -114,6 +143,8 @@ MeshActor
 -0 0 -0 1
  Scale
 5 1 5
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -121,7 +152,7 @@ Grid Obstacle
 Mesh
 node.fbx
 Name
-plane0
+sphere0
 Rast State
 solid
 Shader
@@ -149,6 +180,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -156,7 +189,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-plane1
+sphere1
 Rast State
 solid
 Shader
@@ -184,6 +217,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -191,7 +226,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-plane2
+sphere2
 Rast State
 solid
 Shader
@@ -219,6 +254,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -226,7 +263,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-plane3
+sphere3
 Rast State
 solid
 Shader
@@ -254,6 +291,8 @@ next
 -0 0 -0 1
  Scale
 3 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -261,7 +300,7 @@ Grid Obstacle
 Mesh
 cube.fbx
 Name
-plane4
+sphere4
 Rast State
 solid
 Shader
@@ -289,6 +328,8 @@ next
 -0 0 -0 1
  Scale
 3 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -296,7 +337,7 @@ Grid Obstacle
 Mesh
 cube.fbx
 Name
-plane5
+sphere5
 Rast State
 solid
 Shader
@@ -324,6 +365,8 @@ next
 -0 0 -0 1
  Scale
 3 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -331,7 +374,7 @@ Grid Obstacle
 Mesh
 cube.fbx
 Name
-plane6
+sphere6
 Rast State
 solid
 Shader
@@ -359,6 +402,8 @@ next
 -0 0 -0 1
  Scale
 3 2 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -366,7 +411,7 @@ Grid Obstacle
 Mesh
 cube.fbx
 Name
-plane7
+sphere7
 Rast State
 solid
 Shader
@@ -394,6 +439,8 @@ next
 -0 0 -0 1
  Scale
 3 2 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -401,7 +448,7 @@ Grid Obstacle
 Mesh
 cube.fbx
 Name
-plane8
+sphere8
 Rast State
 solid
 Shader
@@ -429,6 +476,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -436,7 +485,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-plane9
+sphere9
 Rast State
 solid
 Shader
@@ -464,6 +513,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -471,7 +522,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-plane10
+sphere10
 Rast State
 solid
 Shader
@@ -499,6 +550,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -506,7 +559,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-plane11
+sphere11
 Rast State
 solid
 Shader
@@ -534,6 +587,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -541,7 +596,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-plane12
+sphere12
 Rast State
 solid
 Shader
@@ -569,6 +624,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -576,7 +633,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-plane13
+sphere13
 Rast State
 solid
 Shader
@@ -604,6 +661,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -611,7 +670,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-plane14
+sphere14
 Rast State
 solid
 Shader
@@ -639,6 +698,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -646,7 +707,7 @@ Grid Obstacle
 Mesh
 step_medium.fbx
 Name
-plane15
+sphere15
 Rast State
 solid
 Shader
@@ -674,6 +735,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -681,7 +744,7 @@ Grid Obstacle
 Mesh
 plane.fbx
 Name
-plane16
+sphere16
 Rast State
 nobackcull
 Shader
@@ -709,6 +772,8 @@ next
 0 0.707107 0 0.707107
  Scale
 0.999999 1 0.999999
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -716,7 +781,7 @@ Grid Obstacle
 Mesh
 plane.fbx
 Name
-plane17
+sphere17
 Rast State
 nobackcull
 Shader
@@ -744,6 +809,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -751,7 +818,7 @@ Grid Obstacle
 Mesh
 tree_base.fbx
 Name
-tree_base18
+sphere18
 Rast State
 solid
 Shader
