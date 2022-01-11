@@ -213,6 +213,7 @@
     <ClCompile Include="Code\Actors\Game\DialogueTrigger.cpp" />
     <ClCompile Include="Code\Components\ConditionComponent.cpp" />
     <ClCompile Include="Code\UI\GuiltWidget.cpp" />
+    <ClCompile Include="Code\UI\UnitLineupWidget.cpp" />
     <ClInclude Include="Code\Editor\ActorTreeWidget.h" />
     <ClInclude Include="Code\Gameplay\BattleSystem.h" />
     <ClInclude Include="Code\Actors\AudioActor.h" />
@@ -424,6 +425,7 @@
     <ClInclude Include="Code\Actors\Game\DialogueTrigger.h" />
     <ClInclude Include="Code\Components\ConditionComponent.h" />
     <ClInclude Include="Code\UI\GuiltWidget.h" />
+    <ClInclude Include="Code\UI\UnitLineupWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
