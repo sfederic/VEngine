@@ -37,6 +37,7 @@ struct GridActor : Actor
 	std::wstring interactKnownText;
 
 	GridActor();
+	virtual void Interact() {}
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
