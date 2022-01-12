@@ -84,6 +84,8 @@ struct Player : Actor
 
 	//Call on battle end for player variables housekeeping
 	void BattleCleanup();
+	
+	XMVECTOR GetMeshForward();
 
 private:
 	void MovementInput(float deltaTime);

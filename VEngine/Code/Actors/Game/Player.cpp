@@ -191,6 +191,11 @@ void Player::BattleCleanup()
 	healthWidget->RemoveFromViewport();
 }
 
+XMVECTOR Player::GetMeshForward()
+{
+	return mesh->GetForwardVectorV();
+}
+
 void Player::MovementInput(float deltaTime)
 {
 	float moveSpeed = 4.75f;
@@ -592,6 +597,10 @@ bool Player::InteractCheck(Actor* hitActor)
 		if (gridActor)
 		{
 			if (gridActor->isInteractable)
+			{
+				gridActor->Interact();
+			}
+			else if (gridActor->isInspectable)
 			{
 				interactWidget->interactText = gridActor->interactText;
 				interactWidget->AddToViewport();
