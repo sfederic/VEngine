@@ -247,7 +247,7 @@ void Player::MovementInput(float deltaTime)
 	}
 	else
 	{
-		if (stepSoundsVolume < 0.5f) { stepSoundsVolume += deltaTime * 4.f; }
+		if (stepSoundsVolume < 1.0f) { stepSoundsVolume += deltaTime * 4.f; }
 		stepSounds->volume = stepSoundsVolume;
 	}
 }
