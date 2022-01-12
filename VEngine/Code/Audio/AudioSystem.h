@@ -34,6 +34,8 @@ public:
 	void DeleteLoadedAudioAndChannels();
 	AudioChannel* GetChannel(uint64_t channelID);
 	void MuteAllAudio();
+	void StopAllAudio();
+	void StartAllAudio();
 	void UnmuteAllAudio();
 	void FadeOutAllAudio();
 	void FadeInAllAudio();

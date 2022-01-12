@@ -94,6 +94,22 @@ void AudioSystem::MuteAllAudio()
 	}
 }
 
+void AudioSystem::StopAllAudio()
+{
+	for (auto audio : AudioComponent::system.components)
+	{
+		channelMap[audio->channelID]->sourceVoice->Stop();
+	}
+}
+
+void AudioSystem::StartAllAudio()
+{
+	for (auto audio : AudioComponent::system.components)
+	{
+		channelMap[audio->channelID]->sourceVoice->Start();
+	}
+}
+
 void AudioSystem::UnmuteAllAudio()
 {
 	for (auto audio : AudioComponent::system.components)
