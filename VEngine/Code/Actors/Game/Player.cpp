@@ -96,6 +96,7 @@ void Player::Tick(float deltaTime)
 	ToggleIntuitionMenu();
 
 	PrimaryAction();
+	SecondaryAction();
 
 	PlacePickupDown();
 
@@ -396,6 +397,22 @@ void Player::PrimaryAction()
 	}
 }
 
+//Using this for secondary action testing where primary doesn't fit.
+void Player::SecondaryAction()
+{
+	if (Input::GetKeyUp(Keys::Up))
+	{
+		Ray ray(this);
+		auto meshForward = mesh->GetForwardVectorV();
+		if (Raycast(ray, GetPositionVector(), meshForward, 1.5f))
+		{
+			Log("Player interact: %s", ray.hitActor->name.c_str());
+
+			if (CombatInteractCheck(ray.hitActor)) {}
+		}
+	}
+}
+
 void Player::ToggleIntuitionMenu()
 {
 	if (isWeaponDrawn || battleSystem.isBattleActive) return;
@@ -485,20 +502,20 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 
 void Player::PlacePickupDown()
 {
-	if (Input::GetKeyUp(Keys::Up))
-	{
-		Transform transform = GetTransform();
-		auto forwardVector = GetForwardVector();
-		transform.position.x += forwardVector.x;
-		transform.position.y += forwardVector.y;
-		transform.position.z += forwardVector.z;
+	//if (Input::GetKeyUp(Keys::Up))
+	//{
+	//	Transform transform = GetTransform();
+	//	auto forwardVector = GetForwardVector();
+	//	transform.position.x += forwardVector.x;
+	//	transform.position.y += forwardVector.y;
+	//	transform.position.z += forwardVector.z;
 
-		auto pickup = dynamic_cast<Pickup*>(Pickup::system.SpawnActor(transform));
-		pickup->mesh->meshComponentData.filename = GameInstance::pickupSpawnData.meshFilename;
-		pickup->CreateAllComponents();
+	//	auto pickup = dynamic_cast<Pickup*>(Pickup::system.SpawnActor(transform));
+	//	pickup->mesh->meshComponentData.filename = GameInstance::pickupSpawnData.meshFilename;
+	//	pickup->CreateAllComponents();
 
-		heldPickupWidget->RemoveFromViewport();
-	}
+	//	heldPickupWidget->RemoveFromViewport();
+	//}
 }
 
 bool Player::PickupCheck(Actor* hitActor)
@@ -586,6 +603,21 @@ bool Player::QuickTalkCheck(Actor* hitActor)
 		}
 	}
 
+	return false;
+}
+
+bool Player::CombatInteractCheck(Actor* actorToCheck)
+{
+	auto gridActor = dynamic_cast<GridActor*>(actorToCheck);
+	if (gridActor)
+	{
+		if (gridActor->isInteractable)
+		{
+			gridActor->Interact();
+			return true;
+		}
+	}
+			
 	return false;
 }
 

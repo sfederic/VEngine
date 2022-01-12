@@ -92,6 +92,7 @@ private:
 	void RotationInput(float deltaTime);
 	void ToggleBattleGrid();
 	void PrimaryAction();
+	void SecondaryAction();
 	void ToggleIntuitionMenu();
 	void ExpendActionPoints(int num);
 	void LerpPlayerCameraFOV(float deltaTime);
@@ -102,6 +103,7 @@ private:
 	bool PickupCheck(Actor* hitActor);
 	bool DialogueCheck(Actor* hitActor);
 	bool QuickTalkCheck(Actor* hitActor);
+	bool CombatInteractCheck(Actor* actorToCheck);
 	bool InteractCheck(Actor* hitActor);
 	bool DestructibleCheck(Actor* hitActor);
 };
