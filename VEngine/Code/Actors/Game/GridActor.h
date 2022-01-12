@@ -31,7 +31,11 @@ struct GridActor : Actor
 	//whether the grid node the gridactor is on is inactive.
 	bool isGridObstacle = true;
 
+	//Physical interaction, moves/activates actor
 	bool isInteractable = true;
+
+	//Inspection interaction, shows dialogue
+	bool isInspectable = true;
 
 	std::wstring interactText;
 	std::wstring interactKnownText;
