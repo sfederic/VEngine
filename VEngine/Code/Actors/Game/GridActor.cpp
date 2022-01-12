@@ -26,7 +26,6 @@ void GridActor::Start()
 	{
 		//Set starting node as inactive.
 		auto node = GetCurrentNode();
-		node->active = false;
 		node->Hide();
 	}
 
@@ -51,6 +50,7 @@ Properties GridActor::GetProps()
 	props.Add("Destruct", &isDestructible);
 	props.Add("Health", &health);
 	props.Add("Interact", &isInteractable);
+	props.Add("Inspect", &isInspectable);
 	props.Add("Interact Text", &interactText);
 	props.AddProp(interactKnownText);
 	props.Add("Obstacle", &isGridObstacle);

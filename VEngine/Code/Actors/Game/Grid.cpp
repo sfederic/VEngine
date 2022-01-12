@@ -7,8 +7,6 @@
 #include "Physics/Raycast.h"
 #include "VMath.h"
 #include "GridActor.h"
-#include "Unit.h"
-#include "Pickup.h"
 #include "Gameplay/GameUtils.h"
 
 Grid::Grid()
@@ -44,11 +42,20 @@ void Grid::Awake()
     nodeMesh->instanceData.clear();
 
     //Deactive gridactors that aren't active at current time
-    auto gridActors = world.GetAllActorsOfTypeInWorld<GridActor>();
-    for (auto gridActor : gridActors)
     {
-        gridActor->EnableBasedOnTime();
+        auto gridActors = world.GetAllActorsOfTypeInWorld<GridActor>();
+        for (auto gridActor : gridActors)
+        {
+            gridActor->EnableBasedOnTime();
+        }
     }
+
+    //Ignore player and units
+    Ray ray(this);
+    ray.ignoreLayer = CollisionLayers::Editor;
+    ray.actorsToIgnore.push_back((Actor*)GameUtils::GetPlayer());
+    auto gridActors = world.GetAllActorsOfTypeAsActor<GridActor>();
+    ray.AddActorsToIgnore(gridActors);
 
     for (int x = 0; x < sizeX; x++)
     {
@@ -65,17 +72,6 @@ void Grid::Awake()
 
             //create grid node in row
             GridNode node = GridNode(x, y, nodeMesh->instanceData.size());
-
-            //Ignore player and units
-            Ray ray(this);
-            ray.ignoreLayer = CollisionLayers::Editor;
-            ray.actorsToIgnore.push_back((Actor*)GameUtils::GetPlayer());
-            auto unitActors = world.GetAllActorsOfTypeAsActor<Unit>();
-            ray.AddActorsToIgnore(unitActors);
-            auto pickups = world.GetAllActorsOfTypeAsActor<Pickup>();
-            ray.AddActorsToIgnore(pickups);
-            auto gridActors = world.GetAllActorsOfTypeAsActor<GridActor>();
-            ray.AddActorsToIgnore(gridActors);
 
             instanceData.colour = GridNode::normalColour;
 
