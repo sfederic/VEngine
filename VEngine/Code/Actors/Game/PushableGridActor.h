@@ -11,6 +11,9 @@ struct PushableGridActor : GridActor
 
 	bool isMoving = false;
 
+	//How fast the actor moves after being pushed.
+	float pushMoveSpeed = 2.0f;
+
 	PushableGridActor();
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
