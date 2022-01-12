@@ -20,6 +20,8 @@ void StringWidget::SetValue()
 	{
 		prop.change(value);
 	}
+
+	clearFocus();
 }
 
 void StringWidget::ResetValue()
