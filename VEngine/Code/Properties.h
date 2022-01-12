@@ -125,19 +125,7 @@ struct Properties
 
 	//Copy matching vectors of properties across (currently only works for exact matching properties collections,
 	//should be able to work with partial matching collections though without the vectors).
-	static void CopyProperties(std::vector<Properties>& src, std::vector<Properties>& dst)
-	{
-		assert(src.size() == dst.size());
-
-		for (int i = 0; i < src.size(); i++)
-		{
-			for (auto& prop : src[i].propMap)
-			{
-				const std::string& propname = prop.first;
-				dst[i].CopyData(propname, prop.second);
-			}
-		}
-	}
+	static void CopyProperties(std::vector<Properties>& src, std::vector<Properties>& dst);
 
 	//template <typename T>
 	//void Add(const std::string& name, T* data)

@@ -47,3 +47,17 @@ void Properties::CopyData(std::string name, Property& propToCopy)
 		memcpy(prop.data, propToCopy.data, prop.size);
 	}
 }
+
+void Properties::CopyProperties(std::vector<Properties>& src, std::vector<Properties>& dst)
+{
+	assert(src.size() == dst.size());
+
+	for (int i = 0; i < src.size(); i++)
+	{
+		for (auto& prop : src[i].propMap)
+		{
+			const std::string& propname = prop.first;
+			dst[i].CopyData(propname, prop.second);
+		}
+	}
+}
