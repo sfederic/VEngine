@@ -170,7 +170,6 @@
     <ClCompile Include="Code\Actors\Game\InteractTrigger.cpp" />
     <ClCompile Include="Code\Editor\DialogueDock.cpp" />
     <ClCompile Include="Code\Actors\Game\NPC.cpp" />
-    <ClCompile Include="Code\Actors\Game\DialogueInstance.cpp" />
     <ClCompile Include="Code\Components\EmptyComponent.cpp" />
     <ClCompile Include="Code\Components\WidgetComponent.cpp" />
     <ClCompile Include="Code\Render\SpriteSystem.cpp" />
@@ -381,7 +380,6 @@
     <ClInclude Include="Code\Actors\Game\InteractTrigger.h" />
     <ClInclude Include="Code\Editor\DialogueDock.h" />
     <ClInclude Include="Code\Actors\Game\NPC.h" />
-    <ClInclude Include="Code\Actors\Game\DialogueInstance.h" />
     <ClInclude Include="Code\Components\EmptyComponent.h" />
     <ClInclude Include="Code\Components\WidgetComponent.h" />
     <ClInclude Include="Code\Render\SpriteSystem.h" />
