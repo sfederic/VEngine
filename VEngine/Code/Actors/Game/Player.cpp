@@ -20,7 +20,6 @@
 #include "UI/InteractWidget.h"
 #include "UI/IntuitionMenuWidget.h"
 #include "UI/PlayerActionBarWidget.h"
-#include "UI/IntuitionTransferWidget.h"
 #include "UI/IntuitionGainedWidget.h"
 #include "UI/IntuitionRecalledWidget.h"
 #include "UI/TimeOfDayWidget.h"
@@ -90,8 +89,7 @@ void Player::Tick(float deltaTime)
 
 	if (healthPoints <= 0)
 	{
-		CreateWidget<IntuitionTransferWidget>()->AddToViewport();
-		gameOver = true;
+		GameUtils::TriggerGameOver();
 	}
 
 	ToggleBattleGrid();

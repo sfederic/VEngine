@@ -10,6 +10,7 @@
 #include "Camera.h"
 #include "UI/UISystem.h"
 #include "UI/ScreenFadeWidget.h"
+#include "UI/IntuitionTransferWidget.h"
 #include "Input.h"
 #include "Log.h"
 
@@ -151,5 +152,10 @@ namespace GameUtils
 	{
 		auto player = GetPlayer();
 		player->gameOver = true;
+
+		CreateWidget<IntuitionTransferWidget>()->AddToViewport();
+
+		audioSystem.StopAllAudio();
+		audioSystem.PlayAudio("game05.wav", true);
 	}
 }
