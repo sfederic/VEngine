@@ -166,6 +166,8 @@ Properties Grid::GetProps()
 
 GridNode* Grid::GetNode(int x, int y)
 {
+    assert(x < rows.size());
+    assert(y < rows[x].columns.size());
     return &rows[x].columns[y];
 }
 
