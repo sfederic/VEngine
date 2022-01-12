@@ -263,14 +263,20 @@ void AssetDock::CreateNewMapFile()
 
     QString mapFile = dialog.getSaveFileName(NULL, "Create New Map File", "WorldMaps/", ".vmap");
 
+    //Cancel clicked
+    if (mapFile.isEmpty())
+    {
+        return;
+    }
+
     QFile file(mapFile);
     file.open(QIODevice::WriteOnly);
     file.close();
 
     //refresh asset items in dock
     AssetFolderClicked();
-    
-    //Just load the file when creating it
+   
+    //Just load the map when creating it
     QFileInfo fileInfo(file);
     fileSystem.LoadWorld(fileInfo.fileName().toStdString());
 }
