@@ -42,646 +42,7 @@ UvScale
 1 1
 next
 GridActor
-9
- Position
-1 0 2
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
 0
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Description
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-1
-Interact
-1
-Interact Text
-
-Intuition Name
-
-Mesh
-
-Name
-GridActor0
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-barrel_texture.jpg
-UID
-999690841
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-condition
-
-conditionArg
-
-interactKnownText
-
-next
- Position
-5 0 1
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Description
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-1
-Interact
-1
-Interact Text
-
-Intuition Name
-
-Mesh
-
-Name
-GridActor1
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-barrel_texture.jpg
-UID
-999690841
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-condition
-
-conditionArg
-
-interactKnownText
-
-next
- Position
-2 0 1
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Description
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-1
-Interact
-1
-Interact Text
-
-Intuition Name
-
-Mesh
-
-Name
-GridActor2
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-barrel_texture.jpg
-UID
-999690841
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-condition
-
-conditionArg
-
-interactKnownText
-
-next
- Position
-2 0 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Description
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-1
-Interact
-1
-Interact Text
-
-Intuition Name
-
-Mesh
-
-Name
-GridActor3
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-barrel_texture.jpg
-UID
-999690841
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-condition
-
-conditionArg
-
-interactKnownText
-
-next
- Position
-4 0 3
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Description
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-1
-Interact
-1
-Interact Text
-
-Intuition Name
-
-Mesh
-
-Name
-GridActor4
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-barrel_texture.jpg
-UID
-999690841
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-condition
-
-conditionArg
-
-interactKnownText
-
-next
- Position
-5 0 5
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Description
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-1
-Interact
-1
-Interact Text
-
-Intuition Name
-
-Mesh
-
-Name
-GridActor5
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-barrel_texture.jpg
-UID
-999690841
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-condition
-
-conditionArg
-
-interactKnownText
-
-next
- Position
-1 0 5
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Description
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-1
-Interact
-1
-Interact Text
-
-Intuition Name
-
-Mesh
-
-Name
-GridActor6
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-barrel_texture.jpg
-UID
-999690841
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-condition
-
-conditionArg
-
-interactKnownText
-
-next
- Position
-6 0 6
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Description
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-1
-Interact
-1
-Interact Text
-
-Intuition Name
-
-Mesh
-
-Name
-GridActor7
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-barrel_texture.jpg
-UID
-999690841
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-condition
-
-conditionArg
-
-interactKnownText
-
-next
- Position
-6 0 2
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Description
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-1
-Interact
-1
-Interact Text
-
-Intuition Name
-
-Mesh
-
-Name
-GridActor8
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-barrel_texture.jpg
-UID
-999690841
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-condition
-
-conditionArg
-
-interactKnownText
-
-next
 Unit
 0
 Pickup
@@ -714,9 +75,9 @@ Player
  Position
 3 0 0
  Rotation
--0 0 -0 1
+-0 0.000172398 -0 1
  Scale
-1 1 1
+0.999999 1 0.999999
 Ambient
 1 1 1 1
 Audio Filename
@@ -764,7 +125,7 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
-1
+-0.000539578
 next
 EntranceTrigger
 0
@@ -798,6 +159,8 @@ Grid Obstacle
 0
 Health
 15
+Inspect
+1
 Interact
 0
 Interact Text
@@ -921,13 +284,651 @@ Billboard
 0
 InteractTrigger
 0
-DialogueInstance
-0
 ParticleSystem
 0
 DialogueTrigger
+2
+ Position
+3 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+2 1 2
+Extents
+0.45 0.45 0.45
+File
+boss_test.dialog
+Name
+DialogueTrigger0
+UID
+2651864602
+playOnSpawn
 0
+playOnTriggerOverlap
+1
+next
+ Position
+0 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+2.5 1 2.5
+Extents
+0.45 0.45 0.45
+File
+boss01.dialog
+Name
+DialogueTrigger1
+UID
+2340938065
+playOnSpawn
+0
+playOnTriggerOverlap
+1
+next
 DestructibleActor
 0
 TitleScreenActor
 0
+PushableGridActor
+8
+ Position
+2 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Ambient
+1 1 1 1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+Intuition Name
+
+Mesh
+cube.fbx
+Name
+PushableGridActor0
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+barrel_texture.jpg
+UID
+452132645
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+interactKnownText
+
+pushMoveSpeed
+2
+next
+ Position
+5 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Ambient
+1 1 1 1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+Intuition Name
+
+Mesh
+cube.fbx
+Name
+PushableGridActor1
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+barrel_texture.jpg
+UID
+452132645
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+interactKnownText
+
+pushMoveSpeed
+2
+next
+ Position
+1 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Ambient
+1 1 1 1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+Intuition Name
+
+Mesh
+cube.fbx
+Name
+PushableGridActor2
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+barrel_texture.jpg
+UID
+452132645
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+interactKnownText
+
+pushMoveSpeed
+2
+next
+ Position
+6 0 5
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Ambient
+1 1 1 1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+Intuition Name
+
+Mesh
+cube.fbx
+Name
+PushableGridActor3
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+barrel_texture.jpg
+UID
+452132645
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+interactKnownText
+
+pushMoveSpeed
+2
+next
+ Position
+4 0 5
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Ambient
+1 1 1 1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+Intuition Name
+
+Mesh
+cube.fbx
+Name
+PushableGridActor4
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+barrel_texture.jpg
+UID
+452132645
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+interactKnownText
+
+pushMoveSpeed
+2
+next
+ Position
+1 0 5
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Ambient
+1 1 1 1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+Intuition Name
+
+Mesh
+cube.fbx
+Name
+PushableGridActor5
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+barrel_texture.jpg
+UID
+452132645
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+interactKnownText
+
+pushMoveSpeed
+2
+next
+ Position
+5 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Ambient
+1 1 1 1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+Intuition Name
+
+Mesh
+cube.fbx
+Name
+PushableGridActor6
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+barrel_texture.jpg
+UID
+452132645
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+interactKnownText
+
+pushMoveSpeed
+2
+next
+ Position
+1 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Ambient
+1 1 1 1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+Intuition Name
+
+Mesh
+cube.fbx
+Name
+PushableGridActor7
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+barrel_texture.jpg
+UID
+452132645
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+interactKnownText
+
+pushMoveSpeed
+2
+next

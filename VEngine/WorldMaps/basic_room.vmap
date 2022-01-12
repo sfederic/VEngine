@@ -6,6 +6,8 @@ Grid
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -71,11 +73,13 @@ next
 Player
 1
  Position
-1 0.0100002 3
+0 0.0100002 0
  Rotation
 0 1 0 1.56958e-07
  Scale
 0.999971 1 0.999971
+Ambient
+1 1 1 1
 Audio Filename
 step.wav
 Casts Shadow
@@ -160,6 +164,8 @@ MeshActor
 0.707107 0 0 -0.707107
  Scale
 3 2.99997 0.999994
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -195,6 +201,8 @@ next
 0 0.707229 0 0.706984
  Scale
 3 1.5 0
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -230,6 +238,8 @@ next
 -0 -0.706985 -0 0.707228
  Scale
 3.00002 1.5 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -265,6 +275,8 @@ next
 -0 0.000172756 -0 1
  Scale
 3.00002 1.5 0.75
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -300,6 +312,8 @@ next
 0 1 0 -0.000172772
  Scale
 3.00008 1.5 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -335,6 +349,8 @@ next
 0.707107 -1.54543e-08 0.707107 -1.54543e-08
  Scale
 0.749987 0.999997 0.999987
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -370,6 +386,8 @@ next
 0.707107 0 0 -0.707107
  Scale
 1 0.999986 0.999986
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -428,8 +446,6 @@ Billboard
 0
 InteractTrigger
 0
-DialogueInstance
-0
 ParticleSystem
 0
 DialogueTrigger
@@ -438,3 +454,80 @@ DestructibleActor
 0
 TitleScreenActor
 0
+PushableGridActor
+1
+ Position
+2 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Ambient
+1 1 1 1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+Intuition Name
+
+Mesh
+
+Name
+PushableGridActor0
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+4101419628
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+interactKnownText
+
+pushMoveSpeed
+2
+next
