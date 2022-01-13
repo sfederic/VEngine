@@ -3,12 +3,12 @@
 #include "GameInstance.h"
 #include "GameUtils.h"
 #include "UI/UISystem.h"
-#include "UI/IntuitionRecalledWidget.h"
+#include "UI/MemoryRecalledWidget.h"
 #include "Gameplay/BattleSystem.h"
 #include "World.h"
 #include "Log.h"
 #include "UI/UISystem.h"
-#include "UI/IntuitionGainedWidget.h"
+#include "UI/MemoryGainedWidget.h"
 #include "Audio/AudioSystem.h"
 
 ConditionSystem conditionSystem;
@@ -22,21 +22,21 @@ bool PlaySong(std::string arg)
 	return true;
 }
 
-bool IntuitionCheck(std::string arg)
+bool MemoryCheck(std::string arg)
 {
-	auto intuitionIt = GameInstance::playerIntuitions.find(arg);
-	if (intuitionIt != GameInstance::playerIntuitions.end())
+	auto memoryIt = GameInstance::playerMemories.find(arg);
+	if (memoryIt != GameInstance::playerMemories.end())
 	{
-		uiSystem.intuitionRecalledWidget->recalledIntuition = &intuitionIt->second;
-		uiSystem.intuitionWidgetInViewport = true;
-		uiSystem.intuitionRecalledWidget->AddToViewport();
+		uiSystem.memoryRecalledWidget->recalledMemory = &memoryIt->second;
+		uiSystem.memoryWidgetInViewport = true;
+		uiSystem.memoryRecalledWidget->AddToViewport();
 
 		GameUtils::PlayAudioOneShot("intuition_check_success.wav");
 
 		return true;
 	}
 
-	Log("IntuitionCheck [%s] not found.", arg.c_str());
+	Log("MemoryCheck [%s] not found.", arg.c_str());
 	return false;
 }
 
@@ -46,28 +46,28 @@ bool StartBattle(std::string arg)
 	return true;
 }
 
-//Define the intuition as "Name|Description" in the dialogue dock
-bool GainIntuition(std::string arg)
+//Define the memory as "Name|Description" in the dialogue dock
+bool GainMemory(std::string arg)
 {
-	std::string intuitionName = arg.substr(0, arg.find("|"));
-	std::string intuitionDesc = arg.substr(arg.find("|") + 1);
+	std::string memoryName = arg.substr(0, arg.find("|"));
+	std::string memoryDesc = arg.substr(arg.find("|") + 1);
 
-	auto intuition = Intuition();
-	intuition.name = intuitionName;
-	intuition.description = intuitionDesc;
+	auto memory = Memory();
+	memory.name = memoryName;
+	memory.description = memoryDesc;
 
-	intuition.actorAquiredFrom = "Aquired from dialogue.";
-	intuition.worldAquiredFrom = world.worldFilename;
+	memory.actorAquiredFrom = "Aquired from dialogue.";
+	memory.worldAquiredFrom = world.worldFilename;
 
-	intuition.hourAquired = GameInstance::currentHour;
-	intuition.minuteAquired = GameInstance::currentMinute;
+	memory.hourAquired = GameInstance::currentHour;
+	memory.minuteAquired = GameInstance::currentMinute;
 
-	GameInstance::playerIntuitions.emplace(intuition.name, intuition);
-	Log("%s Intuition created.", intuition.name.c_str());
+	GameInstance::playerMemories.emplace(memory.name, memory);
+	Log("%s Memory created.", memory.name.c_str());
 
-	uiSystem.intuitionGainedWidget->intuitionToDisplay = &GameInstance::playerIntuitions[intuition.name];
-	uiSystem.intuitionWidgetInViewport = true;
-	uiSystem.intuitionGainedWidget->AddToViewport();
+	uiSystem.memoryGainedWidget->memoryToDisplay = &GameInstance::playerMemories[memory.name];
+	uiSystem.memoryWidgetInViewport = true;
+	uiSystem.memoryGainedWidget->AddToViewport();
 
 	GameUtils::PlayAudioOneShot("purchase.wav");
 
@@ -78,9 +78,9 @@ bool GainIntuition(std::string arg)
 
 ConditionSystem::ConditionSystem()
 {
-	ADD_CONDITION(IntuitionCheck);
+	ADD_CONDITION(MemoryCheck);
 	ADD_CONDITION(StartBattle);
-	ADD_CONDITION(GainIntuition);
+	ADD_CONDITION(GainMemory);
 	ADD_CONDITION(PlaySong);
 }
 

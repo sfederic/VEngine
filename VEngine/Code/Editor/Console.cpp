@@ -53,11 +53,11 @@ Console::Console()
 	//Menu for manipulating game instance data
 	executeMap.emplace(L"GAME", []() { debugMenu.gameInstaceMenuOpen = !debugMenu.gameInstaceMenuOpen; });
 
-	//Show all intuition info player has
-	executeMap.emplace(L"INT", []() { debugMenu.intuitionsMenuOpen = !debugMenu.intuitionsMenuOpen; });
+	//Show all Memory info player has
+	executeMap.emplace(L"MEM", []() { debugMenu.memoriesMenuOpen = !debugMenu.memoriesMenuOpen; });
 
 	//show memory for engine systems
-	executeMap.emplace(L"MEM", []() { debugMenu.memoryMenuOpen = !debugMenu.memoryMenuOpen; });
+	executeMap.emplace(L"MEMORY", []() { debugMenu.memoryMenuOpen = !debugMenu.memoryMenuOpen; });
 
 	//Show skeleton heirarchy on actor's meshcomponent
 	executeMap.emplace(L"SKEL", []() { debugMenu.skeletonViewMenuOpen = !debugMenu.skeletonViewMenuOpen; });

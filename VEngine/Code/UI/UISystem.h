@@ -4,8 +4,8 @@
 #include <vector>
 
 struct Widget;
-struct IntuitionGainedWidget;
-struct IntuitionRecalledWidget;
+struct MemoryGainedWidget;
+struct MemoryRecalledWidget;
 struct UnitLineupWidget;
 struct ScreenFadeWidget;
 struct GuiltWidget;
@@ -19,14 +19,14 @@ namespace Colours
 struct UISystem
 {
 	//Global widgets
-	IntuitionGainedWidget* intuitionGainedWidget = nullptr;
-	IntuitionRecalledWidget* intuitionRecalledWidget = nullptr;
+	MemoryGainedWidget* memoryGainedWidget = nullptr;
+	MemoryRecalledWidget* memoryRecalledWidget = nullptr;
 	ScreenFadeWidget* screenFadeWidget = nullptr;
 	GuiltWidget* guiltWidget = nullptr;
 	UnitLineupWidget* unitLineupWidget = nullptr;
 
 	//To check whether recalled or gained widgets are on screen so player can click off them.
-	bool intuitionWidgetInViewport = false;
+	bool memoryWidgetInViewport = false;
 
 	//Every widget added in-game
 	std::vector<Widget*> widgets;

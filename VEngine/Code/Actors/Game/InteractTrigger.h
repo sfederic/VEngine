@@ -4,7 +4,7 @@
 #include <string>
 
 struct BoxTriggerComponent;
-struct IntuitionComponent;
+struct MemoryComponent;
 struct Widget;
 struct InteractWidget;
 
@@ -15,7 +15,7 @@ struct InteractTrigger : Actor
 
 	BoxTriggerComponent* trigger = nullptr;
 
-	IntuitionComponent* intuitionComponent = nullptr;
+	MemoryComponent* memoryComponent = nullptr;
 
 	//Widget shown on interact
 	InteractWidget* interactWidget = nullptr;
@@ -23,7 +23,7 @@ struct InteractTrigger : Actor
 	//text to show on PrimaryAction() player input
 	std::wstring interactText;
 
-	//text to show when intuition condition has passed as true
+	//text to show when memory condition has passed as true
 	std::wstring interactKnown;
 
 	//Text to show when player is inside the trigger

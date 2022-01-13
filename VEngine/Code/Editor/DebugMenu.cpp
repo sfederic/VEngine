@@ -27,7 +27,7 @@
 #include "SystemCache.h"
 #include "System.h"
 #include "Actors/Game/Player.h"
-#include "Gameplay/Intuition.h"
+#include "Gameplay/Memory.h"
 #include "Console.h"
 #include "Physics/PhysicsSystem.h"
 
@@ -80,7 +80,7 @@ void DebugMenu::Tick(float deltaTime)
 	RenderMemoryMenu();
 	RenderActorSystemMenu();
 	RenderComponentSystemMenu();
-	RenderIntuitionsMenu();
+	RenderMemoriesMenu();
 	RenderConsoleCommandsMenu();
 	RenderSkeletonViewMenu();
 	RenderCoreMenu();
@@ -286,7 +286,7 @@ void DebugMenu::RenderGameInstanceData()
 	if (ImGui::Button("Reset Instance Data"))
 	{
 		GameInstance::ResetTime();
-		GameInstance::DeletePlayerIntuitions();
+		GameInstance::DeletePlayerMemories();
 	}
 
 	ImGui::End();
@@ -352,32 +352,32 @@ void DebugMenu::RenderComponentSystemMenu()
 	ImGui::End();
 }
 
-void DebugMenu::RenderIntuitionsMenu()
+void DebugMenu::RenderMemoriesMenu()
 {
-	if (!intuitionsMenuOpen) return;
+	if (!memoriesMenuOpen) return;
 
-	ImGui::Begin("Intuitions");
+	ImGui::Begin("Memories");
 
-	static char intuitionNameAdd[512]{};
-	ImGui::InputText("Intuition Name To Add", intuitionNameAdd, 512);
-	if (ImGui::Button("Add Intuition"))
+	static char memoryNameAdd[512]{};
+	ImGui::InputText("Memory Name To Add", memoryNameAdd, 512);
+	if (ImGui::Button("Add Memory"))
 	{
-		Intuition debugIntuition = {};
-		debugIntuition.name = intuitionNameAdd;
-		debugIntuition.description = "Aquired from Debug";
-		GameInstance::playerIntuitions.emplace(intuitionNameAdd, debugIntuition);
+		Memory debugMemory = {};
+		debugMemory.name = memoryNameAdd;
+		debugMemory.description = "Aquired from Debug";
+		GameInstance::playerMemories.emplace(memoryNameAdd, debugMemory);
 	}
 
-	for (auto& intuition : GameInstance::playerIntuitions)
+	for (auto& memory : GameInstance::playerMemories)
 	{
-		Intuition& i = intuition.second;
+		Memory& m = memory.second;
 
-		ImGui::Text("Name: %s", i.name.c_str());
-		ImGui::Text("Desc: %s", i.description.c_str());
-		ImGui::Text("Func: %s", i.conditionFuncName.c_str());
-		ImGui::Text("From World: %s", i.worldAquiredFrom.c_str());
-		ImGui::Text("From Actor: %s", i.actorAquiredFrom.c_str());
-		ImGui::Text("Hour: %d | Minute: %d", i.hourAquired, i.minuteAquired);
+		ImGui::Text("Name: %s", m.name.c_str());
+		ImGui::Text("Desc: %s", m.description.c_str());
+		ImGui::Text("Func: %s", m.conditionFuncName.c_str());
+		ImGui::Text("From World: %s", m.worldAquiredFrom.c_str());
+		ImGui::Text("From Actor: %s", m.actorAquiredFrom.c_str());
+		ImGui::Text("Hour: %d | Minute: %d", m.hourAquired, m.minuteAquired);
 
 		ImGui::NewLine();
 	}

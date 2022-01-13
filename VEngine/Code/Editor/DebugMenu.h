@@ -32,7 +32,7 @@ struct DebugMenu
 	bool memoryMenuOpen = false;
 	bool actorSystemMenuOpen = false;
 	bool componentSystemMenuOpen = false;
-	bool intuitionsMenuOpen = false;
+	bool memoriesMenuOpen = false;
 	bool consoleCommandsMenuOpen = false;
 	bool skeletonViewMenuOpen = false;
 	bool physicsMenuOpen = false;
@@ -58,7 +58,7 @@ private:
 	void RenderMemoryMenu();
 	void RenderActorSystemMenu();
 	void RenderComponentSystemMenu();
-	void RenderIntuitionsMenu();
+	void RenderMemoriesMenu();
 	void RenderConsoleCommandsMenu();
 	void RenderSkeletonViewMenu();
 	void RenderPhysicsMenu();

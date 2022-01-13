@@ -1,8 +1,8 @@
 #pragma once
 #include "ConditionSystem.h"
 
-//Base for all player intuitions in-game.
-struct Intuition
+//Base for all player memories in-game.
+struct Memory
 {
 	std::string name;
 	std::string description;
@@ -16,6 +16,6 @@ struct Intuition
 	int hourAquired = 0;
 	int minuteAquired = 0;
 
-	//Function to call in order to add Intuition to Player.
+	//Function to call in order to add Memory to Player.
 	ConditionFunction conditionFunc;
 };

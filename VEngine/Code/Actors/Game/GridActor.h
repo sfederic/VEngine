@@ -5,7 +5,7 @@
 struct MeshComponent;
 struct TimeComponent;
 struct HealthWidget;
-struct IntuitionComponent;
+struct MemoryComponent;
 struct GridNode;
 struct DialogueComponent;
 
@@ -16,7 +16,7 @@ struct GridActor : Actor
 
 	MeshComponent* mesh = nullptr;
 	HealthWidget* healthWidget = nullptr;
-	IntuitionComponent* intuition = nullptr;
+	MemoryComponent* memoryComponent = nullptr;
 	TimeComponent* timeComponent = nullptr;
 	DialogueComponent* dialogueComponent = nullptr;
 

@@ -4,12 +4,12 @@
 
 struct Actor;
 
-struct IntuitionComponent : Component
+struct MemoryComponent : Component
 {
-	COMPONENT_SYSTEM(IntuitionComponent);
+	COMPONENT_SYSTEM(MemoryComponent);
 
-	std::wstring intuitionName;
-	std::wstring intuitionDescription;
+	std::wstring memoryName;
+	std::wstring memoryDescription;
 
 	//The ConditionSystem function to search for when adding to player.
 	std::string condition;
@@ -19,7 +19,7 @@ struct IntuitionComponent : Component
 
 	bool addOnInteract = false;
 	
-	IntuitionComponent();
+	MemoryComponent();
 	virtual Properties GetProps() override;
-	bool CreateIntuition(std::string actorAquiredFromName);
+	bool CreateMemory(std::string actorAquiredFromName);
 };

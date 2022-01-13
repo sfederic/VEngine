@@ -1,6 +1,6 @@
 #include "InteractTrigger.h"
 #include "Components/BoxTriggerComponent.h"
-#include "Components/IntuitionComponent.h"
+#include "Components/MemoryComponent.h"
 #include "Camera.h"
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/BattleSystem.h"
@@ -15,7 +15,7 @@ InteractTrigger::InteractTrigger()
 	trigger->renderWireframeColour = XMFLOAT4(0.9f, 0.9f, 0.1f, 1.f);
 	rootComponent = trigger;
 
-	intuitionComponent = IntuitionComponent::system.Add(this);
+	memoryComponent = MemoryComponent::system.Add(this);
 }
 
 void InteractTrigger::Start()
@@ -55,9 +55,9 @@ void InteractTrigger::Tick(float deltaTime)
 
 				interactWidget->interactText = interactText;
 
-				if (intuitionComponent->addOnInteract)
+				if (memoryComponent->addOnInteract)
 				{
-					if (intuitionComponent->CreateIntuition(targetActorName))
+					if (memoryComponent->CreateMemory(targetActorName))
 					{
 						//Bit of a shit check on whether to use interact or known text
 						if (!interactKnown.empty())

@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "Components/MeshComponent.h"
 #include "Components/EmptyComponent.h"
-#include "Components/IntuitionComponent.h"
+#include "Components/MemoryComponent.h"
 #include "Components/AudioComponent.h"
 #include "Camera.h"
 #include "Input.h"
@@ -18,10 +18,10 @@
 #include "UI/HealthWidget.h"
 #include "UI/DialogueWidget.h"
 #include "UI/InteractWidget.h"
-#include "UI/IntuitionMenuWidget.h"
+#include "UI/MemoryMenuWidget.h"
 #include "UI/PlayerActionBarWidget.h"
-#include "UI/IntuitionGainedWidget.h"
-#include "UI/IntuitionRecalledWidget.h"
+#include "UI/MemoryGainedWidget.h"
+#include "UI/MemoryRecalledWidget.h"
 #include "UI/TimeOfDayWidget.h"
 #include "UI/HeldPickupWidget.h"
 #include "UI/GuardWidget.h"
@@ -59,7 +59,7 @@ void Player::Start()
 
 	//Setup widgets
 	interactWidget = CreateWidget<InteractWidget>();
-	intuitionMenuWidget = CreateWidget<IntuitionMenuWidget>();
+	memoryMenuWidget = CreateWidget<MemoryMenuWidget>();
 
 	actionBarWidget = CreateWidget<PlayerActionBarWidget>();
 	actionBarWidget->actionPoints = actionPoints;
@@ -93,7 +93,7 @@ void Player::Tick(float deltaTime)
 	}
 
 	ToggleBattleGrid();
-	ToggleIntuitionMenu();
+	ToggleMemoryMenu();
 
 	PrimaryAction();
 	SecondaryAction();
@@ -359,11 +359,11 @@ void Player::PrimaryAction()
 
 	if (Input::GetKeyUp(Keys::Down))
 	{
-		if (uiSystem.intuitionWidgetInViewport)
+		if (uiSystem.memoryWidgetInViewport)
 		{
-			uiSystem.intuitionGainedWidget->RemoveFromViewport();
-			uiSystem.intuitionRecalledWidget->RemoveFromViewport();
-			uiSystem.intuitionWidgetInViewport = false;
+			uiSystem.memoryGainedWidget->RemoveFromViewport();
+			uiSystem.memoryRecalledWidget->RemoveFromViewport();
+			uiSystem.memoryWidgetInViewport = false;
 			return;
 		}
 
@@ -413,22 +413,22 @@ void Player::SecondaryAction()
 	}
 }
 
-void Player::ToggleIntuitionMenu()
+void Player::ToggleMemoryMenu()
 {
 	if (isWeaponDrawn || battleSystem.isBattleActive) return;
 
 	if (Input::GetKeyUp(Keys::Enter))
 	{
-		intuitionWidgetToggle = !intuitionWidgetToggle;
+		memoryWidgetToggle = !memoryWidgetToggle;
 
-		if (intuitionWidgetToggle)
+		if (memoryWidgetToggle)
 		{
-			intuitionMenuWidget->AddToViewport();
+			memoryMenuWidget->AddToViewport();
 			GameUtils::PlayAudioOneShot("confirm.wav");
 		}
 		else
 		{
-			intuitionMenuWidget->RemoveFromViewport();
+			memoryMenuWidget->RemoveFromViewport();
 			GameUtils::PlayAudioOneShot("cursor.wav");
 		}
 	}
@@ -640,10 +640,10 @@ bool Player::InteractCheck(Actor* hitActor)
 
 				nextCameraFOV = 30.f;
 
-				auto intuition = gridActor->intuition;
-				if (intuition->addOnInteract)
+				auto memory = gridActor->memoryComponent;
+				if (memory->addOnInteract)
 				{
-					if (!intuition->CreateIntuition(gridActor->name))
+					if (!memory->CreateMemory(gridActor->name))
 					{
 						interactWidget->interactText = gridActor->interactKnownText;
 					}

@@ -190,8 +190,8 @@
     <ClCompile Include="Code\Editor\PropertyWidgets\MeshComponentDataWidget.cpp" />
     <ClCompile Include="Code\UI\HealthWidget.cpp" />
     <ClCompile Include="Code\UI\InteractWidget.cpp" />
-    <ClCompile Include="Code\Components\IntuitionComponent.cpp" />
-    <ClCompile Include="Code\UI\IntuitionMenuWidget.cpp" />
+    <ClCompile Include="Code\Components\MemoryComponent.cpp" />
+    <ClCompile Include="Code\UI\MemoryMenuWidget.cpp" />
     <ClCompile Include="Code\UI\PlayerActionBarWidget.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\WStringWidget.cpp" />
     <ClCompile Include="Code\Log.cpp" />
@@ -204,9 +204,9 @@
     <ClCompile Include="Code\Components\DestructibleMeshComponent.cpp" />
     <ClCompile Include="Code\Actors\DestructibleActor.cpp" />
     <ClCompile Include="Code\Actors\Game\TitleScreenActor.cpp" />
-    <ClCompile Include="Code\UI\IntuitionTransferWidget.cpp" />
-    <ClCompile Include="Code\UI\IntuitionGainedWidget.cpp" />
-    <ClCompile Include="Code\UI\IntuitionRecalledWidget.cpp" />
+    <ClCompile Include="Code\UI\MemoryTransferWidget.cpp" />
+    <ClCompile Include="Code\UI\MemoryGainedWidget.cpp" />
+    <ClCompile Include="Code\UI\MemoryRecalledWidget.cpp" />
     <ClCompile Include="Code\UI\ScreenFadeWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\FenceActor.cpp" />
     <ClCompile Include="Code\Actors\Game\DialogueTrigger.cpp" />
@@ -314,7 +314,7 @@
     <ClInclude Include="Code\Editor\RenderViewWidget.h" />
     <ClCompile Include="Code\VMath.cpp" />
     <ClInclude Include="Code\Asset\MeshAssetHeader.h" />
-    <ClInclude Include="Code\Gameplay\Intuition.h" />
+    <ClInclude Include="Code\Gameplay\Memory.h" />
     <ClInclude Include="Code\Particle\Particle.h" />
     <ClInclude Include="Code\Physics\CollisionLayers.h" />
     <ClInclude Include="Code\UID.h" />
@@ -402,8 +402,8 @@
     <ClInclude Include="Code\Editor\PropertyWidgets\MeshComponentDataWidget.h" />
     <ClInclude Include="Code\UI\HealthWidget.h" />
     <ClInclude Include="Code\UI\InteractWidget.h" />
-    <ClInclude Include="Code\Components\IntuitionComponent.h" />
-    <ClInclude Include="Code\UI\IntuitionMenuWidget.h" />
+    <ClInclude Include="Code\Components\MemoryComponent.h" />
+    <ClInclude Include="Code\UI\MemoryMenuWidget.h" />
     <ClInclude Include="Code\UI\PlayerActionBarWidget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\WStringWidget.h" />
     <ClInclude Include="Code\Log.h" />
@@ -416,9 +416,9 @@
     <ClInclude Include="Code\Components\DestructibleMeshComponent.h" />
     <ClInclude Include="Code\Actors\DestructibleActor.h" />
     <ClInclude Include="Code\Actors\Game\TitleScreenActor.h" />
-    <ClInclude Include="Code\UI\IntuitionTransferWidget.h" />
-    <ClInclude Include="Code\UI\IntuitionGainedWidget.h" />
-    <ClInclude Include="Code\UI\IntuitionRecalledWidget.h" />
+    <ClInclude Include="Code\UI\MemoryTransferWidget.h" />
+    <ClInclude Include="Code\UI\MemoryGainedWidget.h" />
+    <ClInclude Include="Code\UI\MemoryRecalledWidget.h" />
     <ClInclude Include="Code\UI\ScreenFadeWidget.h" />
     <ClInclude Include="Code\Actors\Game\FenceActor.h" />
     <ClInclude Include="Code\Actors\Game\DialogueTrigger.h" />

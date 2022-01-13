@@ -1,7 +1,7 @@
 #include "GridActor.h"
 #include "Components/MeshComponent.h"
 #include "Components/WidgetComponent.h"
-#include "Components/IntuitionComponent.h"
+#include "Components/MemoryComponent.h"
 #include "Components/TimeComponent.h"
 #include "Components/DialogueComponent.h"
 #include "UI/HealthWidget.h"
@@ -14,7 +14,7 @@ GridActor::GridActor()
 	rootComponent = mesh;
 
 	timeComponent = TimeComponent::system.Add(this);
-	intuition = IntuitionComponent::system.Add(this);
+	memoryComponent = MemoryComponent::system.Add(this);
 	dialogueComponent = DialogueComponent::system.Add(this);
 }
 

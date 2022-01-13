@@ -377,10 +377,10 @@
     <ClCompile Include="Code\UI\InteractWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Components\IntuitionComponent.cpp">
+    <ClCompile Include="Code\Components\MemoryComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\UI\IntuitionMenuWidget.cpp">
+    <ClCompile Include="Code\UI\MemoryMenuWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\UI\PlayerActionBarWidget.cpp">
@@ -434,13 +434,13 @@
     <ClCompile Include="Code\Actors\Game\TitleScreenActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\UI\IntuitionTransferWidget.cpp">
+    <ClCompile Include="Code\UI\MemoryTransferWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\UI\IntuitionGainedWidget.cpp">
+    <ClCompile Include="Code\UI\MemoryGainedWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\UI\IntuitionRecalledWidget.cpp">
+    <ClCompile Include="Code\UI\MemoryRecalledWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\UI\ScreenFadeWidget.cpp">
@@ -790,13 +790,13 @@
     <ClInclude Include="Code\UI\InteractWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Gameplay\Intuition.h">
+    <ClInclude Include="Code\Gameplay\Memory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Components\IntuitionComponent.h">
+    <ClInclude Include="Code\Components\MemoryComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\UI\IntuitionMenuWidget.h">
+    <ClInclude Include="Code\UI\MemoryMenuWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\PlayerActionBarWidget.h">
@@ -853,13 +853,13 @@
     <ClInclude Include="Code\Actors\Game\TitleScreenActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\UI\IntuitionTransferWidget.h">
+    <ClInclude Include="Code\UI\MemoryTransferWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\UI\IntuitionGainedWidget.h">
+    <ClInclude Include="Code\UI\MemoryGainedWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\UI\IntuitionRecalledWidget.h">
+    <ClInclude Include="Code\UI\MemoryRecalledWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\ScreenFadeWidget.h">

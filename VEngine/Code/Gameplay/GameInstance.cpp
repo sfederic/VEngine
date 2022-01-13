@@ -2,9 +2,9 @@
 #include "UI/UISystem.h"
 #include "UI/GuiltWidget.h"
 
-void GameInstance::DeletePlayerIntuitions()
+void GameInstance::DeletePlayerMemories()
 {
-	playerIntuitions.clear();
+	playerMemories.clear();
 }
 
 void GameInstance::ProgressTime()

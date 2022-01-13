@@ -6,16 +6,16 @@ struct MeshComponent;
 struct CameraComponent;
 struct WidgetComponent;
 struct DialogueComponent;
-struct IntuitionComponent;
+struct MemoryComponent;
 struct AudioComponent;
 struct Pickup;
 struct InteractWidget;
-struct IntuitionMenuWidget;
+struct MemoryMenuWidget;
 struct PlayerActionBarWidget;
 struct HeldPickupWidget;
 struct PlayerHealthWidget;
 struct GuardWidget;
-struct Intuition;
+struct Memory;
 struct GridNode;
 
 struct Player : Actor
@@ -38,7 +38,7 @@ struct Player : Actor
 
 	//Widgets
 	InteractWidget* interactWidget = nullptr;
-	IntuitionMenuWidget* intuitionMenuWidget = nullptr;
+	MemoryMenuWidget* memoryMenuWidget = nullptr;
 	PlayerActionBarWidget* actionBarWidget = nullptr;
 	HeldPickupWidget* heldPickupWidget = nullptr;
 	GuardWidget* guardWidget = nullptr;
@@ -60,7 +60,7 @@ struct Player : Actor
 	bool inConversation = false;
 	bool inInteraction = false;
 	bool isWeaponDrawn = false;
-	bool intuitionWidgetToggle = false;
+	bool memoryWidgetToggle = false;
 
 	bool isPlayerTurn = false;
 
@@ -93,7 +93,7 @@ private:
 	void ToggleBattleGrid();
 	void PrimaryAction();
 	void SecondaryAction();
-	void ToggleIntuitionMenu();
+	void ToggleMemoryMenu();
 	void ExpendActionPoints(int num);
 	void LerpPlayerCameraFOV(float deltaTime);
 	void CheckNextMoveNode(XMVECTOR previousPos);

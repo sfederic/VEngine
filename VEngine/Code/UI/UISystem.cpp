@@ -3,8 +3,8 @@
 #include <dxgi1_6.h>
 #include "Debug.h"
 #include "UI/Widget.h"
-#include "UI/IntuitionGainedWidget.h"
-#include "UI/IntuitionRecalledWidget.h"
+#include "UI/MemoryGainedWidget.h"
+#include "UI/MemoryRecalledWidget.h"
 #include "UI/ScreenFadeWidget.h"
 #include "UI/GuiltWidget.h"
 #include "UI/UnitLineupWidget.h"
@@ -77,7 +77,7 @@ void UISystem::RemoveWidget(Widget* widgetToRemove)
 
 void UISystem::Reset()
 {
-	intuitionWidgetInViewport = false;
+	memoryWidgetInViewport = false;
 
 	for (auto widget : widgets)
 	{
@@ -94,8 +94,8 @@ void UISystem::Reset()
 
 void UISystem::CreateGlobalWidgets()
 {
-	intuitionGainedWidget = CreateWidget<IntuitionGainedWidget>();
-	intuitionRecalledWidget = CreateWidget<IntuitionRecalledWidget>();
+	memoryGainedWidget = CreateWidget<MemoryGainedWidget>();
+	memoryRecalledWidget = CreateWidget<MemoryRecalledWidget>();
 	screenFadeWidget = CreateWidget<ScreenFadeWidget>();
 	guiltWidget = CreateWidget<GuiltWidget>();
 	unitLineupWidget = CreateWidget<UnitLineupWidget>();
