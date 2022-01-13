@@ -42,7 +42,80 @@ UvScale
 1 1
 next
 GridActor
+1
+ Position
+2 0 3
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Add On Interact
+1
+Ambient
+1 1 1 1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Description
+Spawn a push block
+Destruct
+1
+File
+
+Grid Obstacle
 0
+Health
+1
+Inspect
+1
+Interact
+0
+Interact Text
+
+Memory Name
+Pushable
+Mesh
+cube.fbx
+Name
+GridActor0
+Obstacle
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+3602354785
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+interactKnownText
+
+next
 Unit
 0
 Pickup
@@ -128,36 +201,11 @@ Volume
 1
 next
 EntranceTrigger
-1
- Position
-0 0 2
- Rotation
-0 1 0 1.56958e-07
- Scale
-1 1 1
-Entrance Active
-1
-Extents
-0.9 0.9 0.9
-Level Name
-outdoor_test.vmap
-Locked Text
-Locked
-Name
-DoorEntranceTrigger
-Open Text
-Exit Mr Risotto's Home
-UID
-2132069934
-condition
-
-conditionArg
-
-next
+0
 NPC
 0
 MeshActor
-7
+5
  Position
 2 -0.5 2
  Rotation
@@ -343,80 +391,6 @@ UvRotationSpeed
 UvScale
 1 1
 next
- Position
--0.99 0.5 2
- Rotation
-0.707107 -1.54543e-08 0.707107 -1.54543e-08
- Scale
-0.749987 0.999997 0.999987
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Grid Obstacle
-0
-Mesh
-plane.fbx
-Name
-door
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-test_door_texture.png
-UID
-2952028752
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
- Position
-1 -0.49 2
- Rotation
-0.707107 0 0 -0.707107
- Scale
-1 0.999986 0.999986
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Grid Obstacle
-0
-Mesh
-plane.fbx
-Name
-cube6
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-carpet.jpg
-UID
-3822190392
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
 DirectionalLightActor
 1
  Position
@@ -455,79 +429,4 @@ DestructibleActor
 TitleScreenActor
 0
 PushableGridActor
-1
- Position
-2 0 2
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
 0
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Description
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-1
-Inspect
-1
-Interact
-1
-Interact Text
-
-Memory Name
-
-Mesh
-
-Name
-PushableGridActor0
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-test.png
-UID
-4101419628
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-condition
-
-conditionArg
-
-interactKnownText
-
-pushMoveSpeed
-2
-next
