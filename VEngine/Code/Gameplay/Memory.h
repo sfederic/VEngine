@@ -1,6 +1,8 @@
 #pragma once
 #include "ConditionSystem.h"
 
+struct IActorSystem;
+
 //Base for all player memories in-game.
 struct Memory
 {
@@ -11,6 +13,10 @@ struct Memory
 	std::string conditionFuncName;
 	std::string actorAquiredFrom;
 	std::string worldAquiredFrom;
+
+	//Info for spawning actors from memory
+	std::string meshName;
+	IActorSystem* spawnActorSystem = nullptr;
 
 	//Time information
 	int hourAquired = 0;
