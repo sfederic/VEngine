@@ -188,7 +188,7 @@ Interact
 1
 Interact Text
 I-If you don't leave now I will call someone...
-Intuition Name
+Memory Name
 
 Mesh
 unit_test.fbx
@@ -843,7 +843,7 @@ Extents
 1 0.5 1
 Interact Text
 "The Bestowed's death was sudden, aye. I fear the Hands will be here soon to cleanup. Come find me at the docks before noon"
-Intuition Name
+Memory Name
 Samuan At The Docks
 Name
 SamuansLetterInteract

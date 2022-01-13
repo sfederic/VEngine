@@ -154,7 +154,7 @@ Enter Mr. Risotti's Home
 UID
 883507173
 condition
-IntuitionCheck
+MemoryCheck
 conditionArg
 Samuan's Letter
 next
@@ -292,7 +292,7 @@ Interact
 0
 Interact Text
 
-Intuition Name
+Memory Name
 
 Mesh
 unit_test.fbx
@@ -375,7 +375,7 @@ Interact
 0
 Interact Text
 
-Intuition Name
+Memory Name
 
 Mesh
 unit_test.fbx
@@ -458,7 +458,7 @@ Interact
 1
 Interact Text
 Oh, excuse me.
-Intuition Name
+Memory Name
 
 Mesh
 unit_test.fbx
