@@ -65,7 +65,7 @@ Interact
 0
 Interact Text
 
-Intuition Name
+Memory Name
 
 Mesh
 
@@ -126,7 +126,7 @@ Interact
 0
 Interact Text
 
-Intuition Name
+Memory Name
 
 Mesh
 
@@ -187,7 +187,7 @@ Interact
 0
 Interact Text
 
-Intuition Name
+Memory Name
 
 Mesh
 
@@ -248,7 +248,7 @@ Interact
 0
 Interact Text
 
-Intuition Name
+Memory Name
 
 Mesh
 
@@ -615,7 +615,7 @@ Extents
 0.9 0.9 0.9
 Interact Text
 Glancing over the spines, you notice various titles on the theology of The Goddess
-Intuition Name
+Memory Name
 
 Name
 bookshelf1ifinteract
@@ -648,7 +648,7 @@ Extents
 0.9 0.9 0.9
 Interact Text
 Books about the state of the church across the state are shelved here.
-Intuition Name
+Memory Name
 
 Name
 bookshelf2interact
@@ -681,7 +681,7 @@ Extents
 0.9 0.9 0.9
 Interact Text
 Various books on religious heads are lined up here. No name stands out.
-Intuition Name
+Memory Name
 
 Name
 bookshelf4interact
@@ -714,7 +714,7 @@ Extents
 0.9 0.9 0.9
 Interact Text
 "To the world born in heat, burning, so too shall the soul of The Bestowed alight."
-Intuition Name
+Memory Name
 
 Name
 bookshelf3interact

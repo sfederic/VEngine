@@ -65,7 +65,7 @@ Interact
 1
 Interact Text
 An empty vase.
-Intuition Name
+Memory Name
 
 Mesh
 vase.fbx
@@ -694,7 +694,7 @@ InteractTrigger
 Add On Interact
 1
 Condition
-IntuitionCheck
+MemoryCheck
 Condition Value
 Flint
 Description
@@ -703,7 +703,7 @@ Extents
 0.9 0.9 0.9
 Interact Text
 Aden reads the pages on lighting the pyre, but can't figure out HOW it's lit.
-Intuition Name
+Memory Name
 The Pyre
 Name
 book1trigger
@@ -736,7 +736,7 @@ Extents
 0.9 0.9 0.9
 Interact Text
 "To light the pyre, the flint used must be blessed and of the ore from beneath the isle..."
-Intuition Name
+Memory Name
 Flint
 Name
 book2trigger

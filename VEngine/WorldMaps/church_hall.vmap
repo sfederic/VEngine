@@ -52,7 +52,7 @@ Add On Interact
 Casts Shadow
 1
 Condition
-IntuitionCheck
+MemoryCheck
 Condition Value
 Bestowed Alive
 Description
@@ -69,7 +69,7 @@ Interact
 1
 Interact Text
 The Bestowed lies here, lifeless.
-Intuition Name
+Memory Name
 BestowedCondition
 Mesh
 bestowed_coffin.fbx
@@ -351,7 +351,7 @@ Interact
 0
 Interact Text
 
-Intuition Name
+Memory Name
 
 Mesh
 unit_test.fbx
@@ -432,7 +432,7 @@ Interact
 1
 Interact Text
 
-Intuition Name
+Memory Name
 
 Mesh
 unit_test.fbx
@@ -513,7 +513,7 @@ Interact
 1
 Interact Text
 
-Intuition Name
+Memory Name
 
 Mesh
 unit_test.fbx
@@ -1033,7 +1033,7 @@ Extents
 0.9 0.9 0.9
 Interact Text
 The door won't budge. Is it bolted shut?
-Intuition Name
+Memory Name
 
 Name
 MainDoorTrigger
