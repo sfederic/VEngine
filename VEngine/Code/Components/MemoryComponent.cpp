@@ -9,6 +9,8 @@
 #include "UI/MemoryGainedWidget.h"
 #include "UI/UISystem.h"
 #include "Audio/AudioSystem.h"
+#include "Components/MeshComponent.h"
+#include "Actors/IActorSystem.h"
 
 MemoryComponent::MemoryComponent()
 {
@@ -40,6 +42,7 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 		return false;
 	}
 
+	//Init memory
 	auto memory = Memory();
 	memory.name = VString::wstos(memoryName);
 	memory.description = VString::wstos(memoryDescription);
@@ -49,6 +52,12 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 
 	memory.hourAquired = GameInstance::currentHour;
 	memory.minuteAquired = GameInstance::currentMinute;
+
+	auto owner = world.GetActorByName(actorAquiredFromName);
+	memory.spawnActorSystem = owner->actorSystem;
+
+	auto meshes = owner->GetComponentsOfType<MeshComponent>();
+	memory.meshName = meshes[0]->meshComponentData.filename;
 
 	//Check if memory condition passes
 	if (!condition.empty())
