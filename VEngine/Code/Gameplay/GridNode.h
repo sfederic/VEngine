@@ -3,6 +3,8 @@
 
 using namespace DirectX;
 
+struct Ray;
+
 struct GridNode
 {
 	GridNode()
@@ -52,6 +54,9 @@ struct GridNode
 	//These ones only care about the visual display of the node
 	void DisplayHide();
 	void DisplayShow();
+
+	//Use a raycast recalculate node's world position height.
+	void RecalcNodeHeight(Ray& ray);
 
 	void SetColour(XMFLOAT4 newColour);
 
