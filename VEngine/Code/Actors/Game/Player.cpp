@@ -505,7 +505,7 @@ void Player::PlacePickupDown()
 	if (Input::GetKeyUp(Keys::Up))
 	{
 		Transform transform = GetTransform();
-		auto forwardVector = GetMeshForward();
+		auto forwardVector = mesh->GetForwardVector();
 		transform.position.x += forwardVector.x;
 		transform.position.y += forwardVector.y;
 		transform.position.z += forwardVector.z;
