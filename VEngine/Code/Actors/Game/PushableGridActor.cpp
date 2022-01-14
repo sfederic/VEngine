@@ -13,6 +13,12 @@ void PushableGridActor::Start()
 {
     __super::Start();
 
+    //Set node on to of pushable to active and recalc height
+    auto currentNode = GetCurrentNode();
+    Ray ray = {};
+    currentNode->RecalcNodeHeight(ray);
+    currentNode->Show();
+    
     nextPushMovePos = GetPositionVector();
 }
 
@@ -30,7 +36,11 @@ void PushableGridActor::Tick(float deltaTime)
         if (XMVector4Equal(nextPushMovePos, GetPositionVector()))
         {
             isMoving = false;
-            GetCurrentNode()->Hide();
+
+            auto currentNode = GetCurrentNode();
+            Ray ray = {};
+            currentNode->RecalcNodeHeight(ray);
+
             GameUtils::GetPlayer()->inInteraction = false;
         }
     }
@@ -56,7 +66,10 @@ void PushableGridActor::Interact()
         nextPushMovePos = endPosition;
         isMoving = true;
 
-        GetCurrentNode()->Show();
+        auto currentNode = GetCurrentNode();
+        Ray ray(this);
+        currentNode->RecalcNodeHeight(ray);
+        currentNode->Show();
 
         //Make sure player can't move while this actor is moving
         player->inInteraction = true;
@@ -69,4 +82,9 @@ Properties PushableGridActor::GetProps()
     props.title = "PushableGridActor";
     props.AddProp(pushMoveSpeed);
     return props;
+}
+
+void PushableGridActor::RecalcNodeHeight()
+{
+
 }

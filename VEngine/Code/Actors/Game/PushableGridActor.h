@@ -19,4 +19,7 @@ struct PushableGridActor : GridActor
 	virtual void Tick(float deltaTime) override;
 	virtual void Interact() override;
 	virtual Properties GetProps() override;
+
+private:
+	void RecalcNodeHeight();
 };
