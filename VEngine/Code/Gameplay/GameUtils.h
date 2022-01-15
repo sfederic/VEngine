@@ -11,6 +11,8 @@ namespace GameUtils
 	Player* GetPlayer();
 	Grid* GetGrid();
 
+	bool CheckIfMemoryExists(const std::string& memoryName);
+
 	void SetActiveCameraTarget(Actor* newTarget);
 	void SetActiveCameraTargetAndZoomIn(Actor* newTarget);
 	void SetActiveCameraTargetAndZoomOut(Actor* newTarget);

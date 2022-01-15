@@ -33,6 +33,12 @@ namespace GameUtils
 		return Grid::system.actors[0];
 	}
 
+	bool CheckIfMemoryExists(const std::string& memoryName)
+	{
+		auto memIt = GameInstance::playerMemories.find(memoryName);
+		return memIt != GameInstance::playerMemories.end();
+	}
+
 	void SetActiveCameraTarget(Actor* newTarget)
 	{
 		activeCamera->targetActor = newTarget;
