@@ -34,8 +34,10 @@ void MemoryMenuWidget::Draw(float deltaTime)
 	{
 		if (selectedMemory)
 		{
-			Layout layout = PercentAlignLayout(0.5f, 0.1f, 0.9f, 0.9f);
+			Layout layout = PercentAlignLayout(0.5f, 0.1f, 0.9f, 0.5f);
 			FillRect(layout, { 0.5f, 0.5f, 0.5f, 0.75f });
+
+			layout = PercentAlignLayout(0.5f, 0.1f, 0.9f, 0.2f);
 
 			Text(VString::wformat(L"Name: %S", selectedMemory->name.c_str()), layout, TextAlign::Leading);
 			layout.AddVerticalSpace(30.f);
@@ -54,6 +56,9 @@ void MemoryMenuWidget::Draw(float deltaTime)
 
 			Text(VString::wformat(L"World GET: %S", selectedMemory->worldAquiredFrom.c_str()), layout, TextAlign::Leading);
 			layout.AddVerticalSpace(30.f);
+
+			layout = PercentAlignLayout(0.5f, 0.5f, 0.9f, 0.9f);
+			Image(selectedMemory->imageFile, layout);
 		}
 	}
 }
