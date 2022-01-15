@@ -17,10 +17,9 @@ struct PlayerDialogueTrigger : Actor
 	//Memory that can optionally activate player dialogue
 	std::string memoryToActivate;
 
-private:
+	//@Todo: wil need to come back here and fiddle with this bool in props for game saves.
 	bool alreadyActivated = false;
 
-public:
 	PlayerDialogueTrigger();
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;

@@ -28,10 +28,12 @@ void PlayerDialogueTrigger::Tick(float deltaTime)
             }
         }
 
-        alreadyActivated = true;
-
         auto player = GameUtils::GetPlayer();
         player->QuickThought(playerThoughtText);
+
+        alreadyActivated = true;
+
+        SetActive(false);
     }
 }
 
