@@ -3,6 +3,7 @@
 #include "../ActorSystem.h"
 
 struct BoxTriggerComponent;
+struct MemoryComponent;
 
 //Trigger for player to interact with to memorise physical objects in-world for use later.
 struct MemoryTrigger : Actor
@@ -10,6 +11,9 @@ struct MemoryTrigger : Actor
 	ACTOR_SYSTEM(MemoryTrigger);
 
 	BoxTriggerComponent* trigger = nullptr;
+	MemoryComponent* memoryComponent = nullptr;
+
+	std::string actorName;
 
 	MemoryTrigger();
 	virtual void Start() override;
