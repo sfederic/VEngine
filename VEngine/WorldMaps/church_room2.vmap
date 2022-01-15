@@ -6,6 +6,8 @@ Grid
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -30,7 +32,11 @@ UID
 469367003
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -45,13 +51,13 @@ GridActor
 2 2 1
 Add On Interact
 0
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Condition
 
 Condition Value
-
-Description
 
 Destruct
 0
@@ -61,9 +67,15 @@ Grid Obstacle
 0
 Health
 0
+Image File
+
+Inspect
+1
 Interact
 0
 Interact Text
+
+Memory Desc
 
 Memory Name
 
@@ -85,7 +97,11 @@ UID
 1998949268
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -95,6 +111,10 @@ activeEndHour
 0
 alwaysActive
 1
+condition
+
+conditionArg
+
 interactKnownText
 
 next
@@ -106,13 +126,13 @@ next
 2 2 1
 Add On Interact
 0
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Condition
 
 Condition Value
-
-Description
 
 Destruct
 0
@@ -122,9 +142,15 @@ Grid Obstacle
 0
 Health
 0
+Image File
+
+Inspect
+1
 Interact
 0
 Interact Text
+
+Memory Desc
 
 Memory Name
 
@@ -146,7 +172,11 @@ UID
 1998949268
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -156,6 +186,10 @@ activeEndHour
 0
 alwaysActive
 1
+condition
+
+conditionArg
+
 interactKnownText
 
 next
@@ -167,13 +201,13 @@ next
 2 2 1
 Add On Interact
 0
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Condition
 
 Condition Value
-
-Description
 
 Destruct
 0
@@ -183,9 +217,15 @@ Grid Obstacle
 0
 Health
 0
+Image File
+
+Inspect
+1
 Interact
 0
 Interact Text
+
+Memory Desc
 
 Memory Name
 
@@ -207,7 +247,11 @@ UID
 1998949268
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -217,6 +261,10 @@ activeEndHour
 0
 alwaysActive
 1
+condition
+
+conditionArg
+
 interactKnownText
 
 next
@@ -228,13 +276,13 @@ next
 2 2 1
 Add On Interact
 0
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Condition
 
 Condition Value
-
-Description
 
 Destruct
 0
@@ -244,9 +292,15 @@ Grid Obstacle
 0
 Health
 0
+Image File
+
+Inspect
+1
 Interact
 0
 Interact Text
+
+Memory Desc
 
 Memory Name
 
@@ -268,7 +322,11 @@ UID
 1998949268
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -278,6 +336,10 @@ activeEndHour
 0
 alwaysActive
 1
+condition
+
+conditionArg
+
 interactKnownText
 
 next
@@ -295,6 +357,10 @@ Player
 0 -0.707107 0 -0.707107
  Scale
 0.999983 1 0.999983
+Ambient
+1 1 1 1
+Audio Filename
+step.wav
 Casts Shadow
 1
 FOV
@@ -305,12 +371,18 @@ File
 
 Grid Obstacle
 0
+Loop
+1
 Mesh
 unit_test.fbx
 Name
 Player0
 Near Z
 0.01
+Pitch
+1
+Play On Start
+1
 Rast State
 solid
 Shader
@@ -323,11 +395,46 @@ UID
 3552242393
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
+Volume
+1
 next
+EntranceTrigger
+1
+ Position
+0 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+0.9 0.9 0.9
+Level Name
+church_hall.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Text
+Open
+UID
+3459943970
+condition
+
+conditionArg
+
+next
+NPC
+0
 MeshActor
 7
  Position
@@ -336,6 +443,8 @@ MeshActor
 0.707107 0 0 -0.707107
  Scale
 3 2.99997 0.999993
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -356,7 +465,11 @@ UID
 3822190392
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -367,6 +480,8 @@ next
 0 0.707229 0 0.706985
  Scale
 3 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -387,7 +502,11 @@ UID
 3696897037
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -398,6 +517,8 @@ next
 -0 -0.706985 -0 0.707229
  Scale
 3.00002 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -418,7 +539,11 @@ UID
 3696897037
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -429,6 +554,8 @@ next
 -0 0.000172756 -0 1
  Scale
 3.00002 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -449,7 +576,11 @@ UID
 3696897037
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -460,6 +591,8 @@ next
 0 1 0 -0.000172772
  Scale
 3.00009 0.999999 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -480,7 +613,11 @@ UID
 3696897037
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -491,6 +628,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -511,7 +650,11 @@ UID
 923212848
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -522,6 +665,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -542,7 +687,11 @@ UID
 923212848
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -570,28 +719,7 @@ PointLightActor
 0
 SpotLightActor
 0
-EntranceTrigger
-1
- Position
-0 0 2
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Entrance Active
-1
-Extents
-0.9 0.9 0.9
-Level Name
-church_hall.vmap
-Name
-EntranceTrigger0
-Open Text
-Open
-UID
-3459943970
-next
-NPC
+FenceActor
 0
 Billboard
 0
@@ -609,12 +737,14 @@ Condition
 
 Condition Value
 
-Description
-
 Extents
 0.9 0.9 0.9
+Image File
+
 Interact Text
 Glancing over the spines, you notice various titles on the theology of The Goddess
+Memory Desc
+
 Memory Name
 
 Name
@@ -642,12 +772,14 @@ Condition
 
 Condition Value
 
-Description
-
 Extents
 0.9 0.9 0.9
+Image File
+
 Interact Text
 Books about the state of the church across the state are shelved here.
+Memory Desc
+
 Memory Name
 
 Name
@@ -675,12 +807,14 @@ Condition
 
 Condition Value
 
-Description
-
 Extents
 0.9 0.9 0.9
+Image File
+
 Interact Text
 Various books on religious heads are lined up here. No name stands out.
+Memory Desc
+
 Memory Name
 
 Name
@@ -708,12 +842,14 @@ Condition
 
 Condition Value
 
-Description
-
 Extents
 0.9 0.9 0.9
+Image File
+
 Interact Text
 "To the world born in heat, burning, so too shall the soul of The Bestowed alight."
+Memory Desc
+
 Memory Name
 
 Name
@@ -729,15 +865,32 @@ soundEffect
 targetActorName
 bookshelf3
 next
-DialogueInstance
-0
-GameEvent
-0
 ParticleSystem
-0
-DestructibleActor
 0
 DialogueTrigger
 0
+DestructibleActor
+0
 TitleScreenActor
 0
+PushableGridActor
+0
+PlayerDialogueTrigger
+1
+ Position
+0 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+2 1 2
+Extents
+0.45 0.45 0.45
+Name
+PlayerDialogueTrigger0
+UID
+1848057570
+memoryToActivate
+
+playerThoughtText
+Looks like a library here for the church.
+next

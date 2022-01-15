@@ -52,9 +52,9 @@ AudioActor
 Player
 1
  Position
-4 1 3
+2.31566 1 4
  Rotation
--0 0 -0 1
+0 -0.707107 -0 0.707107
  Scale
 1 1 1
 Ambient
@@ -104,95 +104,12 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
-1
+0.125871
 next
 EntranceTrigger
 0
 NPC
-1
- Position
-1 1 0
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
 0
-Ambient
-1 1 1 1
-Attack Points
-1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Description
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-5
-Interact
-1
-Interact Text
-
-Memory Name
-
-Mesh
-character_test.fbx
-Move Points
-7
-Move Speed
-3
-Name
-NPC0
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-test.png
-UID
-1817088856
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-battleStartText
-
-condition
-
-conditionArg
-
-deathText
-
-interactKnownText
-
-spawnText
-
-next
 MeshActor
 26
  Position
@@ -222,7 +139,7 @@ water.jpg
 UID
 1092316532
 UvOffset
-1.7783 0
+2.51873 0
 UvOffsetSpeed
 0.01 0
 UvRotation
@@ -1186,8 +1103,6 @@ Billboard
 0
 InteractTrigger
 0
-DialogueInstance
-0
 ParticleSystem
 0
 DialogueTrigger
@@ -1196,3 +1111,24 @@ DestructibleActor
 0
 TitleScreenActor
 0
+PushableGridActor
+0
+PlayerDialogueTrigger
+1
+ Position
+2 1 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Extents
+0.45 0.45 0.45
+Name
+PlayerDialogueTrigger0
+UID
+2381079860
+memoryToActivate
+The Pyre
+playerThoughtText
+This place looks like ass.
+next

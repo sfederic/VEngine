@@ -6,6 +6,8 @@ Grid
 0 0 0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -49,14 +51,14 @@ GridActor
 1 1 1
 Add On Interact
 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Condition
 MemoryCheck
 Condition Value
 Bestowed Alive
-Description
-Aden knows about the Bestowed's condition.
 Destruct
 0
 File
@@ -65,10 +67,16 @@ Grid Obstacle
 1
 Health
 0
+Image File
+
+Inspect
+1
 Interact
 1
 Interact Text
 The Bestowed lies here, lifeless.
+Memory Desc
+
 Memory Name
 BestowedCondition
 Mesh
@@ -140,17 +148,19 @@ next
 Player
 1
  Position
-6 0 4
+1 0 7
  Rotation
--0 0 -0 1
+0 0.707107 0 0.707107
  Scale
 0.999997 1 0.999997
+Ambient
+1 1 1 1
 Audio Filename
 step.wav
 Casts Shadow
 1
 FOV
-59.9997
+51.9087
 Far Z
 1000
 File
@@ -160,7 +170,7 @@ Grid Obstacle
 Loop
 1
 Mesh
-unit_test.fbx
+character_test.fbx
 Name
 Player0
 Near Z
@@ -190,7 +200,7 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
--0.0588188
+-0.0397236
 next
 EntranceTrigger
 5
@@ -329,6 +339,8 @@ NPC
 1 1 1
 Add On Interact
 0
+Ambient
+1 1 1 1
 Attack Points
 2
 Casts Shadow
@@ -336,8 +348,6 @@ Casts Shadow
 Condition
 
 Condition Value
-
-Description
 
 Destruct
 1
@@ -347,9 +357,15 @@ Grid Obstacle
 0
 Health
 4
+Image File
+
+Inspect
+1
 Interact
 0
 Interact Text
+
+Memory Desc
 
 Memory Name
 
@@ -410,6 +426,8 @@ next
 1 1 1
 Add On Interact
 0
+Ambient
+1 1 1 1
 Attack Points
 3
 Casts Shadow
@@ -417,8 +435,6 @@ Casts Shadow
 Condition
 
 Condition Value
-
-Description
 
 Destruct
 1
@@ -428,9 +444,15 @@ Grid Obstacle
 0
 Health
 5
+Image File
+
+Inspect
+1
 Interact
 1
 Interact Text
+
+Memory Desc
 
 Memory Name
 
@@ -491,6 +513,8 @@ next
 1 1 1
 Add On Interact
 0
+Ambient
+1 1 1 1
 Attack Points
 3
 Casts Shadow
@@ -498,8 +522,6 @@ Casts Shadow
 Condition
 
 Condition Value
-
-Description
 
 Destruct
 1
@@ -509,9 +531,15 @@ Grid Obstacle
 0
 Health
 4
+Image File
+
+Inspect
+0
 Interact
 1
 Interact Text
+I know this is all sudden Aden, but please, tend to the pyre.
+Memory Desc
 
 Memory Name
 
@@ -572,6 +600,8 @@ MeshActor
 -0.500122 0.499878 0.499878 0.500122
  Scale
 5 5 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -607,6 +637,8 @@ next
 0.707107 -0.000211181 0.707106 -0.000211846
  Scale
 0.499997 0.999994 0.999997
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -642,6 +674,8 @@ next
 -0 0 -0 1
  Scale
 2 1 2
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -677,6 +711,8 @@ next
 0.707107 -0.000122019 0.707107 -0.000122051
  Scale
 0.749999 1 0.959999
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -712,6 +748,8 @@ next
 -0 0 -0 1
  Scale
 2 0.5 2
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -747,6 +785,8 @@ next
 -0 0.707107 -0 0.707107
  Scale
 4.5 1.25 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -782,6 +822,8 @@ next
 -0.00012207 0.707107 -0.00012207 -0.707107
  Scale
 4.49999 1.25 0.999998
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -817,6 +859,8 @@ next
 -0 -3.7749e-08 -0 1
  Scale
 5 1.25 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -852,6 +896,8 @@ next
 0 1 0 1.56958e-07
  Scale
 4.50002 2.34375 1.00001
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -887,6 +933,8 @@ next
 0 0 1 8.14603e-08
  Scale
 0.999991 0.999991 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -922,6 +970,8 @@ next
 -0.707107 -0.000244183 0.707107 0.00024412
  Scale
 0.750001 0.999999 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -957,6 +1007,8 @@ next
 -0.707107 -6.88394e-08 0.707107 -3.31556e-07
  Scale
 0.749991 0.999987 0.999989
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -1027,12 +1079,14 @@ Condition
 
 Condition Value
 
-Description
-
 Extents
 0.9 0.9 0.9
+Image File
+
 Interact Text
 The door won't budge. Is it bolted shut?
+Memory Desc
+
 Memory Name
 
 Name
@@ -1048,8 +1102,6 @@ soundEffect
 targetActorName
 MainDoor
 next
-DialogueInstance
-0
 ParticleSystem
 0
 DialogueTrigger
@@ -1057,4 +1109,6 @@ DialogueTrigger
 DestructibleActor
 0
 TitleScreenActor
+0
+PushableGridActor
 0
