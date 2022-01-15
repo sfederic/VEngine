@@ -14,6 +14,9 @@ struct PlayerDialogueTrigger : Actor
 	//Text to show on overlap
 	std::wstring playerThoughtText;
 
+	//Memory that can optionally activate player dialogue
+	std::string memoryToActivate;
+
 private:
 	bool alreadyActivated = false;
 

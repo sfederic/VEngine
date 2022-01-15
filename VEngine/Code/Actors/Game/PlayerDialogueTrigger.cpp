@@ -20,6 +20,14 @@ void PlayerDialogueTrigger::Tick(float deltaTime)
 {
     if (trigger->ContainsTarget() && !alreadyActivated)
     {
+        if (!memoryToActivate.empty())
+        {
+            if (!GameUtils::CheckIfMemoryExists(memoryToActivate))
+            {
+                return;
+            }
+        }
+
         alreadyActivated = true;
 
         auto player = GameUtils::GetPlayer();
@@ -31,5 +39,6 @@ Properties PlayerDialogueTrigger::GetProps()
 {
     auto props = __super::GetProps();
     props.AddProp(playerThoughtText);
+    props.AddProp(memoryToActivate);
     return props;
 }
