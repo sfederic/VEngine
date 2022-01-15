@@ -7,6 +7,8 @@ struct BoxTriggerComponent;
 //Actor to trigger quick player dialogue when player overlaps with trigger.
 struct PlayerDialogueTrigger : Actor
 {
+	ACTOR_SYSTEM(PlayerDialogueTrigger);
+
 	BoxTriggerComponent* trigger = nullptr;
 
 	//Text to show on overlap
