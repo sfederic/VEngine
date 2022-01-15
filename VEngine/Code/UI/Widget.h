@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 #include <d2d1_1.h>
-#include <unordered_map>
 #include <DirectXMath.h>
 #include "UISystem.h"
 
