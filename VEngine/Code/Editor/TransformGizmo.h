@@ -27,7 +27,7 @@ struct TransformGizmo
 	float rotationSnapValues[3] = { 90.f, 90.f, 90.f };
 	float scaleSnapValues[3] = { 0.5f, 0.5f, 0.5f };
 
-	float bounds[6] = { -0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f };
+	float bounds[6] = { 0.f, 0.f, 0.f, 0.f, 0.f, 0.f };
 	float boundsSnap[3] = { 0.5f, 0.5f, 0.5f };
 
 	bool bBoundsToggle = false;
