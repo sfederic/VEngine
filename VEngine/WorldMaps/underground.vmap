@@ -52,9 +52,9 @@ AudioActor
 Player
 1
  Position
-2.31566 1 4
+1 1 2
  Rotation
-0 -0.707107 -0 0.707107
+0 -1 0 -1.19209e-07
  Scale
 1 1 1
 Ambient
@@ -104,14 +104,64 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
-0.125871
+-0.00154047
 next
 EntranceTrigger
-0
+2
+ Position
+4 1 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+0.45 0.45 0.45
+Level Name
+church_room3.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Text
+Enter Church
+UID
+3845079527
+condition
+
+conditionArg
+
+next
+ Position
+3 0 7
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+0.45 0.45 0.45
+Level Name
+town_street.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger1
+Open Text
+Enter Town Street
+UID
+107513208
+condition
+
+conditionArg
+
+next
 NPC
 0
 MeshActor
-26
+27
  Position
 2 -0.5 4
  Rotation
@@ -139,7 +189,7 @@ water.jpg
 UID
 1092316532
 UvOffset
-2.51873 0
+2.66536 0
 UvOffsetSpeed
 0.01 0
 UvRotation
@@ -705,7 +755,7 @@ UvScale
 2 4
 next
  Position
-3 -0.4 0
+3 0.1 0
  Rotation
 -0 0 -0 1
  Scale
@@ -968,7 +1018,7 @@ next
  Rotation
 0.707107 -0.707107 -1.54545e-08 1.54543e-08
  Scale
-2.99998 0.999994 8.99991
+2.99998 0.999995 8.99992
 Ambient
 0.5 0.5 1 1
 Casts Shadow
@@ -1073,6 +1123,43 @@ UvRotationSpeed
 0
 UvScale
 1 2
+next
+ Position
+4 0.6 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+step_small.fbx
+Name
+MeshActor26
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+wood.jpg
+UID
+1158157176
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
 next
 DirectionalLightActor
 1

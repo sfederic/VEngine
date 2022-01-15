@@ -107,11 +107,36 @@ Volume
 -0.00106478
 next
 EntranceTrigger
-0
+1
+ Position
+4 0 3
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+0.45 0.45 0.45
+Level Name
+underground.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Text
+Enter Underground
+UID
+591166588
+condition
+
+conditionArg
+
+next
 NPC
 0
 MeshActor
-12
+13
  Position
 2 -0.5 3
  Rotation
@@ -556,6 +581,43 @@ UvRotationSpeed
 UvScale
 1 1
 next
+ Position
+4 0 2.51
+ Rotation
+3.7749e-08 6.51384e-12 1 -0.000172637
+ Scale
+0.5 1 1
+Ambient
+1 1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+plane12
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+fence01.png
+UID
+1822642461
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
 DirectionalLightActor
 1
  Position
@@ -594,4 +656,6 @@ DestructibleActor
 TitleScreenActor
 0
 PushableGridActor
+0
+PlayerDialogueTrigger
 0

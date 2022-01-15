@@ -6,6 +6,8 @@ Grid
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -30,7 +32,11 @@ UID
 469367003
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -46,11 +52,15 @@ AudioActor
 Player
 1
  Position
-0 0 2
+2.38419e-07 0 2.5
  Rotation
-0 0 0 1
+0 1 0 5.96047e-08
  Scale
 0.999983 1 0.999983
+Ambient
+1 1 1 1
+Audio Filename
+step.wav
 Casts Shadow
 1
 FOV
@@ -61,12 +71,18 @@ File
 
 Grid Obstacle
 0
+Loop
+1
 Mesh
 unit_test.fbx
 Name
 Player0
 Near Z
 0.01
+Pitch
+1
+Play On Start
+1
 Rast State
 solid
 Shader
@@ -79,19 +95,81 @@ UID
 3552242393
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
+Volume
+-0.00508508
 next
-MeshActor
-9
+EntranceTrigger
+2
  Position
-2 -0.5 2
+0 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+0.9 0.9 0.9
+Level Name
+church_hall.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Text
+Open
+UID
+3459943970
+condition
+
+conditionArg
+
+next
+ Position
+1 -1.5 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+0.45 0.45 0.45
+Level Name
+underground.vmap
+Locked Text
+Locked
+Name
+EntranceTriggerUnderground
+Open Text
+Enter Under Church
+UID
+4169157765
+condition
+
+conditionArg
+
+next
+NPC
+0
+MeshActor
+10
+ Position
+2 -0.5 1
  Rotation
 0.707107 0 0 -0.707107
  Scale
-3 2.99997 0.999993
+3 2.49998 0.999995
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -112,7 +190,11 @@ UID
 3822190392
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -123,6 +205,8 @@ next
 0 0.707229 0 0.706985
  Scale
 3 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -143,7 +227,11 @@ UID
 3696897037
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -154,6 +242,8 @@ next
 -0 -0.706985 -0 0.707229
  Scale
 3.00002 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -174,7 +264,11 @@ UID
 3696897037
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -185,6 +279,8 @@ next
 -0 0.000172756 -0 1
  Scale
 3.00002 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -205,7 +301,11 @@ UID
 3696897037
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -216,6 +316,8 @@ next
 0 1 0 -0.000172772
  Scale
 3.00008 0.999999 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -236,17 +338,23 @@ UID
 3696897037
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
 next
  Position
-4 -0.25 4
+4 -0.75 4
  Rotation
 -0 0 -0 1
  Scale
 1 0.5 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -267,17 +375,23 @@ UID
 3756286954
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
 next
  Position
-2 0.75 4
+2 -1.75 4
  Rotation
 -0 0 -0 1
  Scale
 1 0.5 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -298,17 +412,23 @@ UID
 3756286954
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
 next
  Position
-3 0.25 4
+3 -1.25 4
  Rotation
 -0 0 -0 1
  Scale
 1 0.5 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -329,7 +449,11 @@ UID
 3756286954
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -337,9 +461,11 @@ next
  Position
 -0.99 0.5 2
  Rotation
-0.000172651 0.707229 -0.000172746 0.706985
+0.707229 -0.000172727 0.706984 0.000172716
  Scale
-0.499998 1 0.999995
+0.499997 0.999996 0.999992
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -360,7 +486,48 @@ UID
 67571753
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+1 -2.25 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 0.5 1
+Ambient
+1 1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+Mesh
+cube.fbx
+Name
+MeshActor9
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+wall (2).png
+UID
+3756286954
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -388,42 +555,38 @@ PointLightActor
 0
 SpotLightActor
 0
-EntranceTrigger
-1
- Position
-0 0 2
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Entrance Active
-1
-Extents
-0.9 0.9 0.9
-Level Name
-church_hall.vmap
-Name
-EntranceTrigger0
-Open Text
-Open
-UID
-3459943970
-next
-NPC
+FenceActor
 0
 Billboard
 0
 InteractTrigger
 0
-DialogueInstance
-0
-GameEvent
-0
 ParticleSystem
-0
-DestructibleActor
 0
 DialogueTrigger
 0
+DestructibleActor
+0
 TitleScreenActor
 0
+PushableGridActor
+0
+PlayerDialogueTrigger
+1
+ Position
+4 0 3
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Extents
+0.45 0.45 0.45
+Name
+PlayerDialogueTrigger0
+UID
+748906392
+memoryToActivate
+
+playerThoughtText
+Looks like this heads underneath the church.
+next
