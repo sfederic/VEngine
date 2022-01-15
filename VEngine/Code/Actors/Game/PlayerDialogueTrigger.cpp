@@ -7,6 +7,7 @@
 PlayerDialogueTrigger::PlayerDialogueTrigger()
 {
     trigger = BoxTriggerComponent::system.Add(this);
+    rootComponent = trigger;
 }
 
 void PlayerDialogueTrigger::Start()
