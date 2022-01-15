@@ -18,6 +18,9 @@ struct Memory
 	std::string meshName;
 	IActorSystem* spawnActorSystem = nullptr;
 
+	//Image to display related to memory
+	std::string imageFile;
+
 	//Time information
 	int hourAquired = 0;
 	int minuteAquired = 0;

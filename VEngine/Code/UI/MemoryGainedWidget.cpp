@@ -11,4 +11,10 @@ void MemoryGainedWidget::Draw(float deltaTime)
 
 	layout.AddVerticalSpace(30.f);
 	Text(VString::stows(memoryToDisplay->name), layout);
+
+	if (!memoryToDisplay->imageFile.empty())
+	{
+		auto imageLayout = PercentAlignLayout(0.1f, 0.2f, 0.9f, 0.9f);
+		Image(memoryToDisplay->imageFile, imageLayout);
+	}
 }

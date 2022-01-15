@@ -17,6 +17,9 @@ struct MemoryComponent : Component
 	//the argument to pass into the above condition function.
 	std::string conditionArg;
 
+	//Image to show related to this memory
+	std::string imageFile;
+
 	bool addOnInteract = false;
 	
 	MemoryComponent();

@@ -20,10 +20,11 @@ Properties MemoryComponent::GetProps()
 {
 	Properties props(name.c_str());
 	props.Add("Memory Name", &memoryName);
-	props.Add("Description", &memoryDescription);
+	props.Add("Memory Desc", &memoryDescription);
 	props.Add("Condition", &condition);
 	props.Add("Condition Value", &conditionArg);
 	props.Add("Add On Interact", &addOnInteract);
+	props.Add("Image File", &imageFile);
 	return props;
 }
 
@@ -58,6 +59,8 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 
 	auto meshes = owner->GetComponentsOfType<MeshComponent>();
 	memory.meshName = meshes[0]->meshComponentData.filename;
+
+	memory.imageFile = this->imageFile;
 
 	//Check if memory condition passes
 	if (!condition.empty())
