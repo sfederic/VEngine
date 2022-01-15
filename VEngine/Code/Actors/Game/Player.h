@@ -87,6 +87,9 @@ struct Player : Actor
 	
 	XMVECTOR GetMeshForward();
 
+	//Show a timer dialogue above player when player character is thinking to themself.
+	void QuickThought(const std::wstring& text);
+
 private:
 	void MovementInput(float deltaTime);
 	void RotationInput(float deltaTime);

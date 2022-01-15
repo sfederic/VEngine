@@ -28,6 +28,7 @@
 #include "UI/PlayerHealthWidget.h"
 #include "Gameplay/GameInstance.h"
 #include "Log.h"
+#include "Timer.h"
 #include "Gameplay/BattleSystem.h"
 
 Player::Player()
@@ -195,6 +196,14 @@ void Player::BattleCleanup()
 XMVECTOR Player::GetMeshForward()
 {
 	return mesh->GetForwardVectorV();
+}
+
+void Player::QuickThought(const std::wstring& text)
+{
+	dialogueComponent->dialogueWidget->dialogueText = text;
+	dialogueComponent->AddToViewport();
+
+	Timer::SetTimer(5.0f, std::bind(&DialogueWidget::RemoveFromViewport, dialogueComponent->dialogueWidget));
 }
 
 void Player::MovementInput(float deltaTime)
