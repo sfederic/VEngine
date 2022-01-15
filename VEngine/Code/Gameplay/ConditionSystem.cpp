@@ -46,11 +46,12 @@ bool StartBattle(std::string arg)
 	return true;
 }
 
-//Define the memory as "Name|Description" in the dialogue dock
+//Define the memory as "Name|Description|Image Filename" in the dialogue dock
 bool GainMemory(std::string arg)
 {
 	std::string memoryName = arg.substr(0, arg.find("|"));
-	std::string memoryDesc = arg.substr(arg.find("|") + 1);
+	std::string memoryDesc = arg.substr(arg.find("|") + 1, arg.find_last_of("|") - memoryName.size());
+	std::string memoryImage = arg.substr(arg.find_last_of("|") + 1);
 
 	auto memory = Memory();
 	memory.name = memoryName;
@@ -61,6 +62,8 @@ bool GainMemory(std::string arg)
 
 	memory.hourAquired = GameInstance::currentHour;
 	memory.minuteAquired = GameInstance::currentMinute;
+
+	memory.imageFile = memoryImage;
 
 	GameInstance::playerMemories.emplace(memory.name, memory);
 	Log("%s Memory created.", memory.name.c_str());
