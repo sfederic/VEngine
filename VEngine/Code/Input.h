@@ -51,6 +51,7 @@ enum class Keys
 	F2 = VK_F2,
 	F3 = VK_F3,
 	F4 = VK_F4,
+	F8 = VK_F8,
 	F11 = VK_F11,
 	Up = VK_UP,
 	Down = VK_DOWN,

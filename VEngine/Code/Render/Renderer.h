@@ -114,6 +114,10 @@ public:
 	void SetViewportWidthHeight(float width, float height);
 	void ResizeSwapchain(int newWidth, int newHeight);
 
+	//Write out viewport as image and save to file as an image.
+	//Ref:https://github.com/Microsoft/DirectXTK/wiki/ScreenGrab
+	void ScreenshotCapture();
+
 private:
 	void SetRenderPipelineStates(MeshComponent* mesh);
 	void SetRenderPipelineStatesForShadows(MeshComponent* mesh);

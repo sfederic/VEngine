@@ -1,4 +1,7 @@
 #include "Renderer.h"
+#include <ScreenGrab.h>
+#include <WinCodec.h> //For GUID_ContainerFormatJpeg
+#include <filesystem>
 #include "Debug.h"
 #include "Core.h"
 #include "VMath.h"
@@ -103,6 +106,9 @@ void Renderer::Tick()
 	{
 		drawAllAsWireframe = !drawAllAsWireframe;
 	}
+
+	//Screenshot
+	ScreenshotCapture();
 }
 
 void Renderer::CreateFactory()
@@ -1097,6 +1103,26 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 	uiSystem.Init((void*)swapchain);
 
 	shaderMatrices.Create();
+}
+
+void Renderer::ScreenshotCapture()
+{
+	if (Input::GetKeyUp(Keys::F8))
+	{
+		//Clear previous notification so nothing appears in the screenshot.
+		debugMenu.debugNotifications.clear();
+
+		ID3D11Texture2D* backBuffer = nullptr;
+		HR(swapchain->GetBuffer(0, IID_PPV_ARGS(&backBuffer)));
+		assert(backBuffer);
+
+		//Use a generated UID so that filenames are unique
+		UID imageFileID = GenerateUID();
+		std::wstring imageFile = L"Screenshots/" + std::to_wstring(imageFileID) + L".jpg";
+		HR(SaveWICTextureToFile(context, backBuffer, GUID_ContainerFormatJpeg, imageFile.c_str()));
+
+		debugMenu.AddNotification(L"Screen shot taken.");
+	}
 }
 
 void Renderer::SetRenderPipelineStates(MeshComponent* mesh)
