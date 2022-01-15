@@ -6,6 +6,8 @@ Grid
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -30,7 +32,11 @@ UID
 469367003
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -38,20 +44,20 @@ next
 GridActor
 1
  Position
-4 0 4
+4 0 0
  Rotation
 -0 0 -0 1
  Scale
 1 1 1
 Add On Interact
-0
+1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Condition
 
 Condition Value
-
-Description
 
 Destruct
 1
@@ -61,12 +67,18 @@ Grid Obstacle
 0
 Health
 0
+Image File
+docks.jpg
+Inspect
+1
 Interact
 1
 Interact Text
 An empty vase.
+Memory Desc
+Just another memory
 Memory Name
-
+Big Memory
 Mesh
 vase.fbx
 Name
@@ -85,7 +97,11 @@ UID
 1689631026
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -95,6 +111,10 @@ activeEndHour
 0
 alwaysActive
 1
+condition
+
+conditionArg
+
 interactKnownText
 
 next
@@ -133,6 +153,10 @@ Player
 0 1 0 1.56958e-07
  Scale
 0.999971 1 0.999971
+Ambient
+1 1 1 1
+Audio Filename
+step.wav
 Casts Shadow
 1
 FOV
@@ -143,12 +167,18 @@ File
 
 Grid Obstacle
 0
+Loop
+1
 Mesh
 unit_test.fbx
 Name
 Player0
 Near Z
 0.01
+Pitch
+1
+Play On Start
+1
 Rast State
 solid
 Shader
@@ -161,11 +191,46 @@ UID
 3552242393
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
+Volume
+1
 next
+EntranceTrigger
+1
+ Position
+0 0 4
+ Rotation
+0 1 0 1.56958e-07
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+0.9 0.9 0.9
+Level Name
+church_hall.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Text
+
+UID
+2132069934
+condition
+
+conditionArg
+
+next
+NPC
+0
 MeshActor
 13
  Position
@@ -174,6 +239,8 @@ MeshActor
 0.707107 0 0 -0.707107
  Scale
 3 2.99997 0.999994
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -194,7 +261,11 @@ UID
 3822190392
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -205,6 +276,8 @@ next
 0 0.707229 0 0.706984
  Scale
 3 1.5 0
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -225,7 +298,11 @@ UID
 3696897037
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -236,6 +313,8 @@ next
 -0 -0.706985 -0 0.707229
  Scale
 3.00002 1.5 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -256,7 +335,11 @@ UID
 3696897037
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -267,6 +350,8 @@ next
 -0 0.000172756 -0 1
  Scale
 3.00002 1.5 0.75
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -287,7 +372,11 @@ UID
 3696897037
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -298,6 +387,8 @@ next
 0 1 0 -0.000172772
  Scale
 3.00008 1.5 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -318,7 +409,11 @@ UID
 3696897037
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -329,6 +424,8 @@ next
 0 0.707107 0 0.707107
  Scale
 0.749992 1 0.999992
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -349,7 +446,11 @@ UID
 2952028752
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -360,6 +461,8 @@ next
 0.707107 0 0 -0.707107
  Scale
 1 0.999988 0.999988
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -380,7 +483,11 @@ UID
 3822190392
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -391,6 +498,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -411,7 +520,11 @@ UID
 1014463215
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -422,6 +535,8 @@ next
 0 0.819152 0 0.573577
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -442,7 +557,11 @@ UID
 2272155524
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -453,6 +572,8 @@ next
 0 0.707107 0 -0.707107
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -473,7 +594,11 @@ UID
 321336638
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -484,6 +609,8 @@ next
 0 0.707107 0 -0.707107
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -504,7 +631,11 @@ UID
 321336638
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -515,6 +646,8 @@ next
 0 0.819152 0 0.573577
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -535,7 +668,11 @@ UID
 2272155524
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -546,6 +683,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -566,7 +705,11 @@ UID
 1014463215
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -594,29 +737,6 @@ PointLightActor
 0
 SpotLightActor
 0
-EntranceTrigger
-1
- Position
-0 0 4
- Rotation
-0 1 0 1.56958e-07
- Scale
-1 1 1
-Entrance Active
-1
-Extents
-0.9 0.9 0.9
-Level Name
-church_hall.vmap
-Name
-EntranceTrigger0
-Open Text
-
-UID
-2132069934
-next
-NPC
-0
 FenceActor
 2
  Position
@@ -625,6 +745,8 @@ FenceActor
 -0.000172588 -0.706985 0.000172563 0.707229
  Scale
 0.999997 0.99999 0.999997
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -645,7 +767,11 @@ UID
 1628174413
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -656,6 +782,8 @@ next
 -0.000172588 -0.706985 0.000172563 0.707229
  Scale
 1 0.99999 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -676,7 +804,11 @@ UID
 1628174413
 UvOffset
 0 0
+UvOffsetSpeed
+0 0
 UvRotation
+0
+UvRotationSpeed
 0
 UvScale
 1 1
@@ -697,12 +829,14 @@ Condition
 MemoryCheck
 Condition Value
 Flint
-Description
-Aden knows about the pyre that is lit at The Bestowed's funeral
 Extents
 0.9 0.9 0.9
+Image File
+
 Interact Text
 Aden reads the pages on lighting the pyre, but can't figure out HOW it's lit.
+Memory Desc
+
 Memory Name
 The Pyre
 Name
@@ -730,12 +864,14 @@ Condition
 
 Condition Value
 
-Description
-Funeral pyres for The Bestowed must be lit with a specific flintawse
 Extents
 0.9 0.9 0.9
+Image File
+
 Interact Text
 "To light the pyre, the flint used must be blessed and of the ore from beneath the isle..."
+Memory Desc
+
 Memory Name
 Flint
 Name
@@ -751,15 +887,13 @@ soundEffect
 targetActorName
 book2
 next
-DialogueInstance
-0
-GameEvent
-0
 ParticleSystem
-0
-DestructibleActor
 0
 DialogueTrigger
 0
+DestructibleActor
+0
 TitleScreenActor
+0
+PushableGridActor
 0
