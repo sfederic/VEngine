@@ -6,6 +6,7 @@
 #include "Gameplay/GameUtils.h"
 #include "Grid.h"
 #include "Components/MeshComponent.h"
+#include "Components/MemoryComponent.h"
 #include "VMath.h"
 #include "Player.h"
 #include "Gameplay/BattleSystem.h"
@@ -16,6 +17,8 @@
 
 Unit::Unit()
 {
+	memoryOnDeath = MemoryComponent::system.Add(this);
+	memoryOnDeath->name = "MemoryOnDeath"; //Seperate the name, GridActor and Unit have two memory components.
 }
 
 void Unit::Start()
@@ -92,6 +95,8 @@ void Unit::InflictDamage(int damage)
 	if (health <= damage && isDestructible)
 	{
 		GameInstance::AddGuilt();
+
+		memoryOnDeath->CreateMemory(this->name);
 
 		battleSystem.RemoveUnit(this);
 	}

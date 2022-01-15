@@ -2,6 +2,7 @@
 #include "GridActor.h"
 
 struct GridNode;
+struct MemoryComponent;
 
 //Units are battle ready actors and really only move and fight.
 struct Unit : GridActor
@@ -14,6 +15,8 @@ struct Unit : GridActor
 		Flee,
 		Wander
 	};
+
+	MemoryComponent* memoryOnDeath = nullptr;
 
 	//Text to display on unit's death during battle
 	std::wstring deathText;

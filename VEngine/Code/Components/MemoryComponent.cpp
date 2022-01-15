@@ -18,7 +18,7 @@ MemoryComponent::MemoryComponent()
 
 Properties MemoryComponent::GetProps()
 {
-	Properties props("MemoryComponent");
+	Properties props(name.c_str());
 	props.Add("Memory Name", &memoryName);
 	props.Add("Description", &memoryDescription);
 	props.Add("Condition", &condition);
