@@ -30,7 +30,7 @@ struct TransformGizmo
 	float bounds[6] = { -0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f };
 	float boundsSnap[3] = { 0.5f, 0.5f, 0.5f };
 
-	bool bBoundsToggle = true;
+	bool bBoundsToggle = false;
 	bool bGridToggle = false;
 
 	bool mousePressAfterGizmoUse = false;
