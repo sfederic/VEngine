@@ -113,6 +113,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\UI\AcceptMemoryWidget.cpp" />
     <ClCompile Include="Code\Gameplay\BattleSystem.cpp" />
     <ClCompile Include="Code\Actors\AudioActor.cpp" />
     <ClCompile Include="Code\Actors\Game\GridActor.cpp" />
@@ -216,6 +217,7 @@
     <ClCompile Include="Code\Actors\Game\PushableGridActor.cpp" />
     <ClCompile Include="Code\Actors\Game\PlayerDialogueTrigger.cpp" />
     <ClCompile Include="Code\Actors\Game\MemoryTrigger.cpp" />
+    <ClInclude Include="Code\UI\AcceptMemoryWidget.h" />
     <ClInclude Include="Code\Editor\ActorTreeWidget.h" />
     <ClInclude Include="Code\Gameplay\BattleSystem.h" />
     <ClInclude Include="Code\Actors\AudioActor.h" />

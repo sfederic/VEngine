@@ -473,6 +473,9 @@
     <ClCompile Include="Code\Actors\Game\MemoryTrigger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\UI\AcceptMemoryWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -893,6 +896,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\MemoryTrigger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\UI\AcceptMemoryWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
