@@ -17,9 +17,9 @@ void MemoryObject::Tick(float deltaTime)
 Properties MemoryObject::GetProps()
 {
 	auto props = __super::GetProps();
-	props.AddProp(energyCost);
-	props.AddProp(attackPoints);
-	props.AddProp(defendPoints);
-	props.AddProp(weight);
+	props.Add("Energy", &weaponData.energyCost);
+	props.Add("Attack", &weaponData.attackPoints);
+	props.Add("Defend", &weaponData.defendPoints);
+	props.Add("Weight", &weaponData.weight);
 	return props;
 }
