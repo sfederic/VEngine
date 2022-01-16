@@ -534,7 +534,7 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 
 	if (battleSystem.isBattleActive)
 	{
-		ExpendActionPoints(1);
+		ExpendActionPoints(activeWeapon->weight);
 	}
 }
 
