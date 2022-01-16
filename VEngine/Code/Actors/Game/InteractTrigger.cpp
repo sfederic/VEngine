@@ -34,8 +34,6 @@ void InteractTrigger::Tick(float deltaTime)
 	//@Todo: this logic is fine for now, but not good splitting up player input like this.
 	//Maybe this todo needs an event-fire-off-once system in place.
 
-	//@Todo: entracetrigger interactwidgets can overlap if the triggers are close to each other.
-
 	if (trigger->ContainsTarget())
 	{
 		interactWidget->AddToViewport();
