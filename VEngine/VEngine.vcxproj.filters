@@ -470,9 +470,6 @@
     <ClCompile Include="Code\Actors\Game\PlayerDialogueTrigger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\MemoryTrigger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -890,9 +887,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\PlayerDialogueTrigger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\MemoryTrigger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
