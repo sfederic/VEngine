@@ -7,6 +7,11 @@ struct MemoryObject : GridActor
 {
 	ACTOR_SYSTEM(MemoryObject);
 
+	int energyCost = 1; //How much energy objects costs to use
+	int attackPoints = 0; //How much damage object does
+	int defendPoints = 0; //How much damage object negates
+	int weight = 0; //Movement cost while moving with item out
+
 	MemoryObject();
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
