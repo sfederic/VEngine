@@ -42,19 +42,165 @@ UvScale
 1 1
 next
 GridActor
+2
+ Position
+0.3 0.4 3
+ Rotation
+0.174137 -0.677862 0.672659 0.240229
+ Scale
+1 1 1
+Add On Interact
 0
-Unit
+Ambient
+1 1 1 1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Destruct
 0
-Pickup
+File
+
+Grid Obstacle
 0
+Health
+1
+Image File
+
+Inspect
+0
+Interact
+0
+Interact Text
+
+Memory Desc
+
+Memory Name
+
+Mesh
+sword.fbx
+Name
+sword
+Obstacle
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+517565005
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+interactKnownText
+
+next
+ Position
+3.2 0 3.9
+ Rotation
+0.0151345 -0.0858317 -0.172987 0.98106
+ Scale
+1 0.999999 1
+Add On Interact
+0
+Ambient
+1 1 1 1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Destruct
+0
+File
+
+Grid Obstacle
+0
+Health
+1
+Image File
+
+Inspect
+0
+Interact
+0
+Interact Text
+
+Memory Desc
+
+Memory Name
+
+Mesh
+spear.fbx
+Name
+spear
+Obstacle
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+metal.jpg
+UID
+4173548554
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+interactKnownText
+
+next
 AudioActor
 0
 Player
 1
  Position
-0 0 0
+2 0 2
  Rotation
-0 0 0 1
+0 -0.707107 0 0.707107
  Scale
 1 1 1
 Ambient
@@ -104,8 +250,10 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
-1
+-0.0500313
 next
+Unit
+0
 EntranceTrigger
 1
  Position
@@ -325,7 +473,7 @@ next
  Position
 0 0 2.5
  Rotation
--0 0.707107 -0 0.707107
+0 0.707107 0 0.707107
  Scale
 1 1 1
 Ambient
@@ -646,9 +794,77 @@ FenceActor
 Billboard
 0
 InteractTrigger
-0
-DialogueInstance
-0
+2
+ Position
+1 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+1
+Condition
+
+Condition Value
+
+Extents
+0.45 0.45 0.45
+Image File
+
+Interact Text
+Gained the memory of the sword.
+Memory Desc
+Looks like you know the sword
+Memory Name
+Sword
+Name
+swordinteract
+UID
+1247485400
+interactKnown
+
+overlapText
+Gain memory of Sword
+soundEffect
+
+targetActorName
+sword
+next
+ Position
+3 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+1
+Condition
+
+Condition Value
+
+Extents
+0.45 0.45 0.45
+Image File
+
+Interact Text
+Gained the memory of the spear.
+Memory Desc
+Spear
+Memory Name
+Spear
+Name
+spearinteract
+UID
+1247485400
+interactKnown
+
+overlapText
+Gain memory of Spear
+soundEffect
+
+targetActorName
+spear
+next
 ParticleSystem
 0
 DialogueTrigger
@@ -656,4 +872,8 @@ DialogueTrigger
 DestructibleActor
 0
 TitleScreenActor
+0
+PushableGridActor
+0
+PlayerDialogueTrigger
 0
