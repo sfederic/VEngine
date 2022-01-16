@@ -10,7 +10,6 @@
 #include "Physics/Raycast.h"
 #include "Gameplay/GameUtils.h"
 #include "Actors/Game/NPC.h"
-#include "Actors/Game/Pickup.h"
 #include "Actors/Game/FenceActor.h"
 #include "Components/DialogueComponent.h"
 #include "Grid.h"
@@ -23,7 +22,6 @@
 #include "UI/MemoryGainedWidget.h"
 #include "UI/MemoryRecalledWidget.h"
 #include "UI/TimeOfDayWidget.h"
-#include "UI/HeldPickupWidget.h"
 #include "UI/GuardWidget.h"
 #include "UI/PlayerHealthWidget.h"
 #include "Gameplay/GameInstance.h"
@@ -67,7 +65,6 @@ void Player::Start()
 
 	CreateWidget<TimeOfDayWidget>()->AddToViewport();
 
-	heldPickupWidget = CreateWidget<HeldPickupWidget>();
 	guardWidget = CreateWidget<GuardWidget>();
 
 	healthWidget = CreateWidget<PlayerHealthWidget>();
@@ -394,7 +391,6 @@ void Player::PrimaryAction()
 			if (DialogueCheck(ray.hitActor)) {}
 			else if (QuickTalkCheck(ray.hitActor)) {}
 			else if (InteractCheck(ray.hitActor)) {}
-			else if (PickupCheck(ray.hitActor)) {}
 		}
 		else
 		{
@@ -523,30 +519,9 @@ void Player::PlacePickupDown()
 		auto& memory = GameInstance::playerMemories["Pushable"];
 
 		auto gridActor = dynamic_cast<GridActor*>(memory.spawnActorSystem->SpawnActor(transform));
-		gridActor->mesh->meshComponentData.filename = GameInstance::pickupSpawnData.meshFilename;
+		gridActor->mesh->meshComponentData.filename = memory.meshName;
 		gridActor->CreateAllComponents();
-
-		//heldPickupWidget->RemoveFromViewport();
 	}
-}
-
-bool Player::PickupCheck(Actor* hitActor)
-{
-	auto pickup = dynamic_cast<Pickup*>(hitActor);
-	if (pickup)
-	{
-		heldItem = pickup;
-		GameInstance::pickupSpawnData = PickupSpawnData(pickup);
-
-		//Set pickup widget
-		heldPickupWidget->pickupName = heldItem->pickupName;
-		heldPickupWidget->AddToViewport();
-
-		pickup->AddToPlayerInventory();
-		return true;
-	}
-
-	return false;
 }
 
 bool Player::DialogueCheck(Actor* hitActor)

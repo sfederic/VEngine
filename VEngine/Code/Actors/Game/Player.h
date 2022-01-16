@@ -8,11 +8,9 @@ struct WidgetComponent;
 struct DialogueComponent;
 struct MemoryComponent;
 struct AudioComponent;
-struct Pickup;
 struct InteractWidget;
 struct MemoryMenuWidget;
 struct PlayerActionBarWidget;
-struct HeldPickupWidget;
 struct PlayerHealthWidget;
 struct GuardWidget;
 struct Memory;
@@ -42,11 +40,8 @@ struct Player : Actor
 	InteractWidget* interactWidget = nullptr;
 	MemoryMenuWidget* memoryMenuWidget = nullptr;
 	PlayerActionBarWidget* actionBarWidget = nullptr;
-	HeldPickupWidget* heldPickupWidget = nullptr;
 	GuardWidget* guardWidget = nullptr;
 	PlayerHealthWidget* healthWidget = nullptr;
-
-	Pickup* heldItem = nullptr;
 
 	XMVECTOR nextPos;
 	XMVECTOR nextRot;
@@ -105,7 +100,6 @@ private:
 	void PlacePickupDown();
 
 	//PrimaryAction actor check functions
-	bool PickupCheck(Actor* hitActor);
 	bool DialogueCheck(Actor* hitActor);
 	bool QuickTalkCheck(Actor* hitActor);
 	bool CombatInteractCheck(Actor* actorToCheck);

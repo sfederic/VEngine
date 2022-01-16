@@ -359,9 +359,6 @@
     <ClCompile Include="Code\UI\DialogueWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\Pickup.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Editor\PropertyWidgets\ShaderDataWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -405,12 +402,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Gameplay\GridNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\UI\HeldPickupWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Gameplay\PickupSpawnData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\UI\GuardWidget.cpp">
@@ -775,9 +766,6 @@
     <ClInclude Include="Code\UI\DialogueWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\Pickup.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Editor\PropertyWidgets\ShaderDataWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -827,12 +815,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Physics\CollisionLayers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Gameplay\PickupSpawnData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\HeldPickupWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\GuardWidget.h">

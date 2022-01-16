@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include "PickupSpawnData.h"
 #include "Properties.h"
 #include "Memory.h"
 
@@ -14,10 +13,8 @@ struct GameInstance
 	inline static int currentHour = 0;
 	inline static int currentMinute = 0;
 
-	inline static std::string startingMap = "boss_fight_test.vmap";
+	inline static std::string startingMap = "blacksmith.vmap";
 	inline static std::string previousMapMovedFrom = startingMap;
-
-	inline static PickupSpawnData pickupSpawnData;
 
 	//Used when continuing from game save files
 	inline static std::string mapToLoadOnContinue;
