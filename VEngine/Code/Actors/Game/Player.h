@@ -22,6 +22,7 @@ struct Player : Actor
 
 	//Components
 	MeshComponent* mesh = nullptr;
+	MeshComponent* weaponMesh = nullptr;
 	CameraComponent* camera = nullptr;
 
 	//Footstep sounds to play while moving
