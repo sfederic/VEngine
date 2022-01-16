@@ -57,6 +57,25 @@ Player::Player()
 	stepSounds->loop = true;
 	stepSounds->audioFilename = "step.wav";
 	stepSounds->playOnStart = true;
+
+	//Set up weapon testing data
+	//Sword
+	weapons[0].attackPoints = 1;
+	weapons[0].defendPoints = 1;
+	weapons[0].energyCost = 1;
+	weapons[0].weight = 1;
+
+	//Spear
+	weapons[0].attackPoints = 2;
+	weapons[0].defendPoints = 0;
+	weapons[0].energyCost = 2;
+	weapons[0].weight = 1;
+
+	//Shield
+	weapons[0].attackPoints = 0;
+	weapons[0].defendPoints = 2;
+	weapons[0].energyCost = 1;
+	weapons[0].weight = 2;
 }
 
 void Player::Start()
@@ -105,6 +124,8 @@ void Player::Tick(float deltaTime)
 
 	PrimaryAction();
 	SecondaryAction();
+
+	SelectWeaponInput();
 
 	SpawnMemoryAsObject();
 
@@ -537,6 +558,22 @@ void Player::SpawnMemoryAsObject()
 		{
 			Log("Memory Spawn: [%s] doesn't exist in player's memories.", memoryNameToSpawn.c_str());
 		}
+	}
+}
+
+void Player::SelectWeaponInput()
+{
+	if (Input::GetKeyUp(Keys::_1))
+	{
+		activeWeapon = &weapons[0];
+	}
+	else if (Input::GetKeyUp(Keys::_2))
+	{
+		activeWeapon = &weapons[1];
+	}
+	else if (Input::GetKeyUp(Keys::_3))
+	{
+		activeWeapon = &weapons[2];
 	}
 }
 
