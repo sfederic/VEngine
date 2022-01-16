@@ -5,6 +5,7 @@
 #include "VString.h"
 #include "World.h"
 #include "Gameplay/Memory.h"
+#include "Gameplay/WeaponMemory.h"
 #include "Gameplay/ConditionSystem.h"
 #include "Timer.h"
 #include "UI/MemoryGainedWidget.h"
@@ -45,8 +46,26 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 		return false;
 	}
 
-	//Init memory
-	auto memory = new Memory();
+	//INIT MEMORY
+
+	auto owner = world.GetActorByName(actorAquiredFromName);
+
+	Memory* memory = nullptr;
+
+	//Check if connected actor is a MemoryWeapon
+	auto memoryWeapon = dynamic_cast<MemoryWeapon*>(owner);
+	if (memoryWeapon)
+	{
+		memory = new WeaponMemory();
+		auto weaponMemory = dynamic_cast<WeaponMemory*>(memory);
+		//Copy weapon data over to memory
+		weaponMemory->weaponData = memoryWeapon->weaponData;
+	}
+	else
+	{
+		memory = new Memory();
+	}
+
 	memory->name = VString::wstos(memoryName);
 	memory->description = VString::wstos(memoryDescription);
 
@@ -56,20 +75,12 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 	memory->hourAquired = GameInstance::currentHour;
 	memory->minuteAquired = GameInstance::currentMinute;
 
-	auto owner = world.GetActorByName(actorAquiredFromName);
 	memory->spawnActorSystem = owner->actorSystem;
 
 	auto meshes = owner->GetComponentsOfType<MeshComponent>();
 	memory->meshName = meshes[0]->meshComponentData.filename;
 
 	memory->imageFile = this->imageFile;
-
-	//Check if connected actor is a MemoryWeapon
-	auto memoryWeapon = dynamic_cast<MemoryWeapon*>(owner);
-	if (memoryWeapon)
-	{
-
-	}
 
 	//Check if memory condition passes
 	if (!condition.empty())
