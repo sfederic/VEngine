@@ -213,6 +213,7 @@
     <ClCompile Include="Code\Actors\Game\PushableGridActor.cpp" />
     <ClCompile Include="Code\Actors\Game\PlayerDialogueTrigger.cpp" />
     <ClCompile Include="Code\Actors\Game\MemoryWeapon.cpp" />
+    <ClCompile Include="Code\UI\WeaponDisplayWidget.cpp" />
     <ClInclude Include="Code\Editor\ActorTreeWidget.h" />
     <ClInclude Include="Code\Gameplay\BattleSystem.h" />
     <ClInclude Include="Code\Actors\AudioActor.h" />
@@ -426,6 +427,7 @@
     <ClInclude Include="Code\Actors\Game\PushableGridActor.h" />
     <ClInclude Include="Code\Actors\Game\PlayerDialogueTrigger.h" />
     <ClInclude Include="Code\Actors\Game\MemoryWeapon.h" />
+    <ClInclude Include="Code\UI\WeaponDisplayWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

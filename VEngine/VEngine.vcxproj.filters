@@ -464,6 +464,9 @@
     <ClCompile Include="Code\Actors\Game\MemoryWeapon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\UI\WeaponDisplayWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -881,6 +884,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\WeaponData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\UI\WeaponDisplayWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
