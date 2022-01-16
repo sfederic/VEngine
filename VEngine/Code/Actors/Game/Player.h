@@ -37,6 +37,8 @@ struct Player : Actor
 	DialogueComponent* currentlyActiveDialogueComponent = nullptr;
 
 	//Widgets
+	//@Todo: I don't like the majority of widgets being here, would rather them in UISystem
+	//or some other global UI manager.
 	InteractWidget* interactWidget = nullptr;
 	MemoryMenuWidget* memoryMenuWidget = nullptr;
 	PlayerActionBarWidget* actionBarWidget = nullptr;
