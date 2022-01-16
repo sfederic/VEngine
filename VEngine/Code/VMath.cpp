@@ -264,9 +264,10 @@ namespace VMath
 
     BoundingOrientedBox GetUpdatedBoundingBox(SpatialComponent* sc)
     {
-        XMVECTOR actorPos = sc->GetPositionV();
+        auto worldMatrix = sc->GetWorldMatrix();
+        XMVECTOR pos = worldMatrix.r[3];
         XMVECTOR boundingBoxCenter = XMLoadFloat3(&sc->boundingBox.Center);
-        XMVECTOR offset = actorPos + boundingBoxCenter;
+        XMVECTOR offset = pos + boundingBoxCenter;
         offset.m128_f32[3] = 1.0f;
 
         XMVECTOR actorScale = sc->GetScaleV();
