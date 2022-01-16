@@ -73,6 +73,16 @@ void Core::Init()
 
 void Core::Tick()
 {
+	//Reset current world
+	if (Input::GetAsyncKey(Keys::Ctrl))
+	{
+		if (Input::GetKeyUp(Keys::R))
+		{
+			fileSystem.ReloadCurrentWorld();
+		}
+	}
+
+	//Toggle gameplay on/off
 	if (Input::GetAsyncKey(Keys::Ctrl))
 	{
 		if (Input::GetKeyUp(Keys::P))
