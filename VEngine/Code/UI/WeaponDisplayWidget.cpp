@@ -5,7 +5,7 @@
 
 void WeaponDisplayWidget::Draw(float deltaTime)
 {
-	auto layout = PercentAlignLayout(0.1f, 0.7f, 0.3f, 0.9f);
+	auto layout = PercentAlignLayout(0.1f, 0.6f, 0.3f, 0.9f);
 
 	FillRect(layout);
 
@@ -22,6 +22,9 @@ void WeaponDisplayWidget::Draw(float deltaTime)
 	auto aw = player->activeWeapon;
 	if (aw)
 	{
+		Text(VString::wformat(L"ATK: %S", aw->name.c_str()), layout);
+		layout.AddVerticalSpace(30.f);
+
 		Text(VString::wformat(L"ATK: %d", aw->attackPoints), layout);
 		layout.AddVerticalSpace(30.f);
 

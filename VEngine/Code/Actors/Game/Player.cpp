@@ -59,17 +59,17 @@ Player::Player()
 	stepSounds->playOnStart = true;
 
 	//Set up weapon testing data
-	//Sword
+	weapons[0].name = "sword";
 	weapons[0].attackPoints = 1;
 	weapons[0].energyCost = 1;
 	weapons[0].weight = 1;
 
-	//Spear
+	weapons[1].name = "Spear";
 	weapons[1].attackPoints = 3;
 	weapons[1].energyCost = 3;
 	weapons[1].weight = 2;
 
-	//Shield
+	weapons[2].name = "Shield";
 	weapons[2].attackPoints = 0;
 	weapons[2].energyCost = 1;
 	weapons[2].weight = 2;
