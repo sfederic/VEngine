@@ -21,6 +21,7 @@ Properties BoxTriggerComponent::GetProps()
 {
 	Properties props("BoxTriggerComponent");
 	props.Add("Extents", &boundingBox.Extents);
+	props.Add("Offset", &boundingBox.Center);
 	return props;
 }
 
