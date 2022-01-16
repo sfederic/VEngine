@@ -61,21 +61,20 @@ Player::Player()
 	//Set up weapon testing data
 	//Sword
 	weapons[0].attackPoints = 1;
-	weapons[0].defendPoints = 1;
 	weapons[0].energyCost = 1;
 	weapons[0].weight = 1;
 
 	//Spear
-	weapons[0].attackPoints = 2;
-	weapons[0].defendPoints = 0;
-	weapons[0].energyCost = 2;
-	weapons[0].weight = 1;
+	weapons[1].attackPoints = 3;
+	weapons[1].energyCost = 3;
+	weapons[1].weight = 2;
 
 	//Shield
-	weapons[0].attackPoints = 0;
-	weapons[0].defendPoints = 2;
-	weapons[0].energyCost = 1;
-	weapons[0].weight = 2;
+	weapons[2].attackPoints = 0;
+	weapons[2].energyCost = 1;
+	weapons[2].weight = 2;
+
+	activeWeapon = &weapons[0];
 }
 
 void Player::Start()
@@ -187,11 +186,11 @@ void Player::InflictDamage(int damage)
 	if (guarding)
 	{
 		Log("Guarded attack");
-		guardPoints = activeWeapon->defendPoints;
 		guarding = false;
+		return;
 	}
 
-	healthPoints -= damage + guardPoints;
+	healthPoints -= damage;
 	healthWidget->healthPoints = healthPoints;
 
 	if (healthPoints <= 0)

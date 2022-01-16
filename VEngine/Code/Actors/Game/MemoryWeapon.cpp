@@ -52,7 +52,6 @@ Properties MemoryWeapon::GetProps()
 	props.title = "MemoryWeapon";
 	props.Add("WeaponEnergy", &weaponData.energyCost);
 	props.Add("WeaponAttack", &weaponData.attackPoints);
-	props.Add("WeaponDefend", &weaponData.defendPoints);
 	props.Add("WeaponWeight", &weaponData.weight);
 	return props;
 }
