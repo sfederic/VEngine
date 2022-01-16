@@ -23,6 +23,7 @@
 #include "UI/MemoryRecalledWidget.h"
 #include "UI/TimeOfDayWidget.h"
 #include "UI/GuardWidget.h"
+#include "UI/WeaponDisplayWidget.h"
 #include "UI/PlayerHealthWidget.h"
 #include "Gameplay/GameInstance.h"
 #include "Log.h"
@@ -70,6 +71,9 @@ void Player::Start()
 	actionBarWidget->actionPoints = actionPoints;
 
 	CreateWidget<TimeOfDayWidget>()->AddToViewport();
+
+	weaponDisplayWidget = CreateWidget<WeaponDisplayWidget>();
+	weaponDisplayWidget->AddToViewport();
 
 	guardWidget = CreateWidget<GuardWidget>();
 

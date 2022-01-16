@@ -11,6 +11,7 @@ struct AudioComponent;
 struct InteractWidget;
 struct MemoryMenuWidget;
 struct PlayerActionBarWidget;
+struct WeaponDisplayWidget;
 struct PlayerHealthWidget;
 struct GuardWidget;
 struct Memory;
@@ -43,6 +44,7 @@ struct Player : Actor
 	PlayerActionBarWidget* actionBarWidget = nullptr;
 	GuardWidget* guardWidget = nullptr;
 	PlayerHealthWidget* healthWidget = nullptr;
+	WeaponDisplayWidget* weaponDisplayWidget = nullptr;
 
 	XMVECTOR nextPos;
 	XMVECTOR nextRot;
