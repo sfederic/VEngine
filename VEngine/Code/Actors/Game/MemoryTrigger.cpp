@@ -4,7 +4,6 @@
 #include "Gameplay/GameUtils.h"
 #include "Input.h"
 #include "World.h"
-#include "UI/AcceptMemoryWidget.h"
 
 MemoryTrigger::MemoryTrigger()
 {
@@ -28,11 +27,7 @@ void MemoryTrigger::Tick(float deltaTime)
             auto linkedActor = world.GetActorByNameAllowNull(actorName);
             if (linkedActor)
             {
-                auto acceptMemoryWidget = CreateWidget<AcceptMemoryWidget>();
-                acceptMemoryWidget->AddToViewport();
-                acceptMemoryWidget->actorName = linkedActor->name;
-                acceptMemoryWidget->acceptButtonCallback = std::bind(
-                    &MemoryComponent::CreateMemory, memoryComponent, linkedActor->name);
+                memoryComponent->CreateMemory(linkedActor->name);
             }
         }
     }
