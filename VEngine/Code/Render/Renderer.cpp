@@ -584,6 +584,8 @@ void Renderer::RenderBounds()
 			shaderMatrices.model.r[1].m128_f32[1] *= boxTrigger->boundingBox.Extents.y * 2.f;
 			shaderMatrices.model.r[2].m128_f32[2] *= boxTrigger->boundingBox.Extents.z * 2.f;
 
+			shaderMatrices.model.r[3] += XMLoadFloat3(&boxTrigger->boundingBox.Center);
+
 			shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
 			context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
 
