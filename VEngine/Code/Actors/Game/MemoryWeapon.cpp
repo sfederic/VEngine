@@ -1,20 +1,20 @@
-#include "MemoryObject.h"
+#include "MemoryWeapon.h"
 
-MemoryObject::MemoryObject()
+MemoryWeapon::MemoryWeapon()
 {
 }
 
-void MemoryObject::Start()
+void MemoryWeapon::Start()
 {
 	__super::Start();
 }
 
-void MemoryObject::Tick(float deltaTime)
+void MemoryWeapon::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 }
 
-Properties MemoryObject::GetProps()
+Properties MemoryWeapon::GetProps()
 {
 	auto props = __super::GetProps();
 	props.Add("Energy", &weaponData.energyCost);

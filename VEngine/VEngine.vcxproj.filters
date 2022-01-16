@@ -461,7 +461,7 @@
     <ClCompile Include="Code\Actors\Game\PlayerDialogueTrigger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\MemoryObject.cpp">
+    <ClCompile Include="Code\Actors\Game\MemoryWeapon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -874,7 +874,7 @@
     <ClInclude Include="Code\Actors\Game\PlayerDialogueTrigger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\MemoryObject.h">
+    <ClInclude Include="Code\Actors\Game\MemoryWeapon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\WeaponMemory.h">
