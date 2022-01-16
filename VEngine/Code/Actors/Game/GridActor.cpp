@@ -22,7 +22,7 @@ void GridActor::Start()
 {
 	SetGridPosition();
 
-	if (!EnableBasedOnTime())
+	if (!EnableBasedOnTime() && isGridObstacle)
 	{
 		//Set starting node as inactive.
 		auto node = GetCurrentNode();
