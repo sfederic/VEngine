@@ -2,6 +2,7 @@
 #include <cassert>
 #include "GameInstance.h"
 #include "GameUtils.h"
+#include "Memory.h"
 #include "UI/UISystem.h"
 #include "UI/MemoryRecalledWidget.h"
 #include "Gameplay/BattleSystem.h"
@@ -27,7 +28,7 @@ bool MemoryCheck(std::string arg)
 	auto memoryIt = GameInstance::playerMemories.find(arg);
 	if (memoryIt != GameInstance::playerMemories.end())
 	{
-		uiSystem.memoryRecalledWidget->recalledMemory = &memoryIt->second;
+		uiSystem.memoryRecalledWidget->recalledMemory = memoryIt->second;
 		uiSystem.memoryWidgetInViewport = true;
 		uiSystem.memoryRecalledWidget->AddToViewport();
 
@@ -53,22 +54,22 @@ bool GainMemory(std::string arg)
 	std::string memoryDesc = arg.substr(arg.find("|") + 1, arg.find_last_of("|") - memoryName.size());
 	std::string memoryImage = arg.substr(arg.find_last_of("|") + 1);
 
-	auto memory = Memory();
-	memory.name = memoryName;
-	memory.description = memoryDesc;
+	auto memory = new Memory();
+	memory->name = memoryName;
+	memory->description = memoryDesc;
 
-	memory.actorAquiredFrom = "Aquired from dialogue.";
-	memory.worldAquiredFrom = world.worldFilename;
+	memory->actorAquiredFrom = "Aquired from dialogue.";
+	memory->worldAquiredFrom = world.worldFilename;
 
-	memory.hourAquired = GameInstance::currentHour;
-	memory.minuteAquired = GameInstance::currentMinute;
+	memory->hourAquired = GameInstance::currentHour;
+	memory->minuteAquired = GameInstance::currentMinute;
 
-	memory.imageFile = memoryImage;
+	memory->imageFile = memoryImage;
 
-	GameInstance::playerMemories.emplace(memory.name, memory);
-	Log("%s Memory created.", memory.name.c_str());
+	GameInstance::playerMemories.emplace(memory->name, memory);
+	Log("%s Memory created.", memory->name.c_str());
 
-	uiSystem.memoryGainedWidget->memoryToDisplay = &GameInstance::playerMemories[memory.name];
+	uiSystem.memoryGainedWidget->memoryToDisplay = GameInstance::playerMemories[memory->name];
 	uiSystem.memoryWidgetInViewport = true;
 	uiSystem.memoryGainedWidget->AddToViewport();
 

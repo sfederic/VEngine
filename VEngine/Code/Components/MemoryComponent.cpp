@@ -4,6 +4,7 @@
 #include "Log.h"
 #include "VString.h"
 #include "World.h"
+#include "Gameplay/Memory.h"
 #include "Gameplay/ConditionSystem.h"
 #include "Timer.h"
 #include "UI/MemoryGainedWidget.h"
@@ -11,6 +12,7 @@
 #include "Audio/AudioSystem.h"
 #include "Components/MeshComponent.h"
 #include "Actors/IActorSystem.h"
+#include "Actors/Game/MemoryWeapon.h"
 
 MemoryComponent::MemoryComponent()
 {
@@ -44,41 +46,48 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 	}
 
 	//Init memory
-	auto memory = Memory();
-	memory.name = VString::wstos(memoryName);
-	memory.description = VString::wstos(memoryDescription);
+	auto memory = new Memory();
+	memory->name = VString::wstos(memoryName);
+	memory->description = VString::wstos(memoryDescription);
 
-	memory.actorAquiredFrom = actorAquiredFromName;
-	memory.worldAquiredFrom = world.worldFilename;
+	memory->actorAquiredFrom = actorAquiredFromName;
+	memory->worldAquiredFrom = world.worldFilename;
 
-	memory.hourAquired = GameInstance::currentHour;
-	memory.minuteAquired = GameInstance::currentMinute;
+	memory->hourAquired = GameInstance::currentHour;
+	memory->minuteAquired = GameInstance::currentMinute;
 
 	auto owner = world.GetActorByName(actorAquiredFromName);
-	memory.spawnActorSystem = owner->actorSystem;
+	memory->spawnActorSystem = owner->actorSystem;
 
 	auto meshes = owner->GetComponentsOfType<MeshComponent>();
-	memory.meshName = meshes[0]->meshComponentData.filename;
+	memory->meshName = meshes[0]->meshComponentData.filename;
 
-	memory.imageFile = this->imageFile;
+	memory->imageFile = this->imageFile;
+
+	//Check if connected actor is a MemoryWeapon
+	auto memoryWeapon = dynamic_cast<MemoryWeapon*>(owner);
+	if (memoryWeapon)
+	{
+
+	}
 
 	//Check if memory condition passes
 	if (!condition.empty())
 	{
-		memory.conditionFunc = conditionSystem.FindCondition(condition);
-		memory.conditionFuncName = condition;
+		memory->conditionFunc = conditionSystem.FindCondition(condition);
+		memory->conditionFuncName = condition;
 
-		if (!memory.conditionFunc(conditionArg))
+		if (!memory->conditionFunc(conditionArg))
 		{
 			return false; //memory not created
 		}
 	}
 
 	//Create intuiton
-	GameInstance::playerMemories.emplace(memory.name, memory);
-	Log("%s memory created.", memory.name.c_str());
+	GameInstance::playerMemories.emplace(memory->name, memory);
+	Log("%s memory created.", memory->name.c_str());
 
-	uiSystem.memoryGainedWidget->memoryToDisplay = &GameInstance::playerMemories[memory.name];
+	uiSystem.memoryGainedWidget->memoryToDisplay = GameInstance::playerMemories[memory->name];
 	uiSystem.memoryWidgetInViewport = true;
 	uiSystem.memoryGainedWidget->AddToViewport();
 

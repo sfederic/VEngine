@@ -22,12 +22,12 @@ void MemoryMenuWidget::Draw(float deltaTime)
 
 		for (auto& memoryPair : GameInstance::playerMemories)
 		{
-			auto& memory = memoryPair.second;
+			auto memory = memoryPair.second;
 
 			textLayout.AddVerticalSpace(30.f);
-			if (Button(VString::stows(memory.name), textLayout))
+			if (Button(VString::stows(memory->name), textLayout))
 			{
-				selectedMemory = &memory;
+				selectedMemory = memory;
 
 				GameUtils::GetPlayer()->memoryNameToSpawn = selectedMemory->name;
 			}

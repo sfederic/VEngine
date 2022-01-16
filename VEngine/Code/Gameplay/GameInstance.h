@@ -1,7 +1,8 @@
 #pragma once
 #include <string>
 #include "Properties.h"
-#include "Memory.h"
+
+struct Memory;
 
 //Instance holding data over the entirety of the game.
 //GameInstane is also used as a global save file of sorts, seperate from .vmaps.
@@ -22,7 +23,7 @@ struct GameInstance
 	//Player stats
 	inline static int maxPlayerActionPoints = 10;
 
-	inline static std::map<std::string, Memory> playerMemories;
+	inline static std::map<std::string, Memory*> playerMemories;
 	static void DeletePlayerMemories();
 
 	static void ProgressTime();

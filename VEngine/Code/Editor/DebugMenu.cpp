@@ -362,22 +362,22 @@ void DebugMenu::RenderMemoriesMenu()
 	ImGui::InputText("Memory Name To Add", memoryNameAdd, 512);
 	if (ImGui::Button("Add Memory"))
 	{
-		Memory debugMemory = {};
-		debugMemory.name = memoryNameAdd;
-		debugMemory.description = "Aquired from Debug";
+		auto debugMemory = new Memory();
+		debugMemory->name = memoryNameAdd;
+		debugMemory->description = "Aquired from Debug";
 		GameInstance::playerMemories.emplace(memoryNameAdd, debugMemory);
 	}
 
 	for (auto& memory : GameInstance::playerMemories)
 	{
-		Memory& m = memory.second;
+		Memory* m = memory.second;
 
-		ImGui::Text("Name: %s", m.name.c_str());
-		ImGui::Text("Desc: %s", m.description.c_str());
-		ImGui::Text("Func: %s", m.conditionFuncName.c_str());
-		ImGui::Text("From World: %s", m.worldAquiredFrom.c_str());
-		ImGui::Text("From Actor: %s", m.actorAquiredFrom.c_str());
-		ImGui::Text("Hour: %d | Minute: %d", m.hourAquired, m.minuteAquired);
+		ImGui::Text("Name: %s", m->name.c_str());
+		ImGui::Text("Desc: %s", m->description.c_str());
+		ImGui::Text("Func: %s", m->conditionFuncName.c_str());
+		ImGui::Text("From World: %s", m->worldAquiredFrom.c_str());
+		ImGui::Text("From Actor: %s", m->actorAquiredFrom.c_str());
+		ImGui::Text("Hour: %d | Minute: %d", m->hourAquired, m->minuteAquired);
 
 		ImGui::NewLine();
 	}

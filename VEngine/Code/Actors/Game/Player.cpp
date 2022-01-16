@@ -28,6 +28,7 @@
 #include "Log.h"
 #include "Timer.h"
 #include "Gameplay/BattleSystem.h"
+#include "Gameplay/Memory.h"
 
 Player::Player()
 {
@@ -524,7 +525,7 @@ void Player::SpawnMemoryAsObject()
 
 			auto& memory = GameInstance::playerMemories[memoryNameToSpawn];
 
-			weaponMesh->meshComponentData.filename = memory.meshName;
+			weaponMesh->meshComponentData.filename = memory->meshName;
 			weaponMesh->Create();
 			weaponMesh->active = true;
 		}

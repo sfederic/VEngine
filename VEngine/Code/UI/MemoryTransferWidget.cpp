@@ -25,9 +25,9 @@ void MemoryTransferWidget::Draw(float deltaTime)
 			itemLayout.AddVerticalSpace(30.f);
 
 			//Handle selecting memories
-			if (Button(VString::stows(memory.name), itemLayout))
+			if (Button(VString::stows(memory->name), itemLayout))
 			{
-				selectedMemoriesToTransfer.emplace(memory.name, memory);
+				selectedMemoriesToTransfer.emplace(memory->name, memory);
 			}
 
 			//itemLayout.AddVerticalSpace(30.f);
@@ -43,9 +43,9 @@ void MemoryTransferWidget::Draw(float deltaTime)
 
 		for (auto& memoryPair : selectedMemoriesToTransfer)
 		{
-			auto& memory = memoryPair.second;
+			auto memory = memoryPair.second;
 
-			Text(VString::stows(memory.name), layout);
+			Text(VString::stows(memory->name), layout);
 			layout.AddVerticalSpace(30.f);
 		}
 
