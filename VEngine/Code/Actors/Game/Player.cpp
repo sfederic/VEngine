@@ -96,7 +96,7 @@ void Player::Tick(float deltaTime)
 	PrimaryAction();
 	SecondaryAction();
 
-	PlacePickupDown();
+	SpawnMemoryAsObject();
 
 	LerpPlayerCameraFOV(deltaTime);
 
@@ -505,22 +505,28 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 	}
 }
 
-void Player::PlacePickupDown()
+void Player::SpawnMemoryAsObject()
 {
 	if (Input::GetKeyUp(Keys::Up))
 	{
-		Transform transform = GetTransform();
-		auto forwardVector = mesh->GetForwardVector();
-		transform.position.x += forwardVector.x;
-		transform.position.y += forwardVector.y;
-		transform.position.z += forwardVector.z;
+		if (GameUtils::CheckIfMemoryExists(memoryNameToSpawn))
+		{
+			Transform transform = GetTransform();
+			auto forwardVector = mesh->GetForwardVector();
+			transform.position.x += forwardVector.x;
+			transform.position.y += forwardVector.y;
+			transform.position.z += forwardVector.z;
 
-		//@Todo: you know what to do
-		auto& memory = GameInstance::playerMemories["Pushable"];
+			auto& memory = GameInstance::playerMemories[memoryNameToSpawn];
 
-		auto gridActor = dynamic_cast<GridActor*>(memory.spawnActorSystem->SpawnActor(transform));
-		gridActor->mesh->meshComponentData.filename = memory.meshName;
-		gridActor->CreateAllComponents();
+			auto gridActor = dynamic_cast<GridActor*>(memory.spawnActorSystem->SpawnActor(transform));
+			gridActor->mesh->meshComponentData.filename = memory.meshName;
+			gridActor->CreateAllComponents();
+		}
+		else
+		{
+			Log("Memory Spawn: [%s] doesn't exist in player's memories.", memoryNameToSpawn.c_str());
+		}
 	}
 }
 

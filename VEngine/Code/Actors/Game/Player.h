@@ -46,6 +46,8 @@ struct Player : Actor
 	XMVECTOR nextPos;
 	XMVECTOR nextRot;
 
+	std::string memoryNameToSpawn;
+
 	int actionPoints = 10;
 	int healthPoints = 3;
 
@@ -97,7 +99,7 @@ private:
 	void ExpendActionPoints(int num);
 	void LerpPlayerCameraFOV(float deltaTime);
 	void CheckNextMoveNode(XMVECTOR previousPos);
-	void PlacePickupDown();
+	void SpawnMemoryAsObject();
 
 	//PrimaryAction actor check functions
 	bool DialogueCheck(Actor* hitActor);
