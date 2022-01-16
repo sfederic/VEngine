@@ -46,6 +46,7 @@ struct Player : Actor
 	XMVECTOR nextPos;
 	XMVECTOR nextRot;
 
+	//Name of the memory selected in MemoryMenuWidget to spawn into world
 	std::string memoryNameToSpawn;
 
 	int actionPoints = 10;

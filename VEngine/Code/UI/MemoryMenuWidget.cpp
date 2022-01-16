@@ -1,7 +1,9 @@
 #include "MemoryMenuWidget.h"
 #include "Render/Renderer.h"
 #include "Gameplay/GameInstance.h"
+#include "Gameplay/GameUtils.h"
 #include "Gameplay/Memory.h"
+#include "Actors/Game/Player.h"
 #include "VString.h"
 
 void MemoryMenuWidget::Draw(float deltaTime)
@@ -26,6 +28,8 @@ void MemoryMenuWidget::Draw(float deltaTime)
 			if (Button(VString::stows(memory.name), textLayout))
 			{
 				selectedMemory = &memory;
+
+				GameUtils::GetPlayer()->memoryNameToSpawn = selectedMemory->name;
 			}
 		}
 	}
