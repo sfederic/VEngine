@@ -631,7 +631,8 @@ bool Player::InteractCheck(Actor* hitActor)
 			{
 				gridActor->Interact();
 			}
-			else if (gridActor->isInspectable)
+
+			if (gridActor->isInspectable)
 			{
 				interactWidget->interactText = gridActor->interactText;
 				interactWidget->AddToViewport();
