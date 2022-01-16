@@ -9,6 +9,7 @@ struct Unit : GridActor
 {
 	ACTOR_SYSTEM(Unit);
 
+	//@Todo: need to make serialisation and qt widget code for this enum.
 	enum class BattleStates
 	{
 		Fight,
