@@ -182,14 +182,16 @@ GridNode* Player::GetCurrentNode()
 
 void Player::InflictDamage(int damage)
 {
+	int guardPoints = 0;
+
 	if (guarding)
 	{
 		Log("Guarded attack");
+		guardPoints = activeWeapon->defendPoints;
 		guarding = false;
-		return;
 	}
 
-	healthPoints -= damage;
+	healthPoints -= damage + guardPoints;
 	healthWidget->healthPoints = healthPoints;
 
 	if (healthPoints <= 0)
@@ -205,7 +207,7 @@ void Player::Guard()
 		guarding = true;
 		guardWidget->guardSuccessful = true;
 
-		ExpendActionPoints(2);
+		ExpendActionPoints(activeWeapon->energyCost);
 
 		GameUtils::PlayAudioOneShot("equip.wav");
 	}
@@ -706,8 +708,8 @@ bool Player::DestructibleCheck(Actor* hitActor)
 		if (unit)
 		{
 			battleSystem.StartBattle();
-			ExpendActionPoints(1);
-			unit->InflictDamage(1);
+			ExpendActionPoints(activeWeapon->energyCost);
+			unit->InflictDamage(activeWeapon->attackPoints);
 			GameUtils::PlayAudioOneShot("sword_hit.wav");
 			return true;
 		}
@@ -715,7 +717,7 @@ bool Player::DestructibleCheck(Actor* hitActor)
 		auto gridActor = dynamic_cast<GridActor*>(hitActor);
 		if (gridActor)
 		{
-			gridActor->InflictDamage(1);
+			gridActor->InflictDamage(activeWeapon->attackPoints);
 			GameUtils::PlayAudioOneShot("sword_hit.wav");
 			return true;
 		}
