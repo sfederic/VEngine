@@ -198,9 +198,9 @@ AudioActor
 Player
 1
  Position
-2 0 2
+1 0 1
  Rotation
-0 -0.707107 0 0.707107
+0 5.96046e-08 0 1
  Scale
 1 1 1
 Ambient
@@ -250,7 +250,7 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
--0.0500313
+0.532121
 next
 Unit
 0
@@ -272,6 +272,8 @@ Locked Text
 Locked
 Name
 EntranceTrigger0
+Offset
+0 0 0
 Open Text
 Exit Blacksmith
 UID
@@ -284,7 +286,7 @@ next
 NPC
 0
 MeshActor
-13
+12
  Position
 2 -0.5 2
  Rotation
@@ -693,43 +695,6 @@ UvScale
 1 1
 next
  Position
-2 1 4.4
- Rotation
--0 -0.707107 -0 0.707107
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Grid Obstacle
-0
-Mesh
-shield.fbx
-Name
-node11
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-metal.jpg
-UID
-2134970323
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
- Position
 3 -0.49 1
  Rotation
 -0 0.000172633 -0 1
@@ -744,7 +709,7 @@ Grid Obstacle
 Mesh
 node.fbx
 Name
-node12
+MeshActor11
 Rast State
 solid
 Shader
@@ -819,6 +784,8 @@ Memory Name
 Sword
 Name
 swordinteract
+Offset
+0 0 0
 UID
 1247485400
 interactKnown
@@ -854,6 +821,8 @@ Memory Name
 Spear
 Name
 spearinteract
+Offset
+0 0 0
 UID
 1247485400
 interactKnown
@@ -867,6 +836,95 @@ spear
 next
 ParticleSystem
 0
+MemoryWeapon
+1
+ Position
+2 1 4.4
+ Rotation
+-0 -0.707107 -0 0.707107
+ Scale
+1 1 1
+Add On Interact
+0
+Ambient
+1 1 1 1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Destruct
+1
+Extents
+0.45 0.45 0.45
+File
+
+Grid Obstacle
+0
+Health
+1
+Image File
+
+Inspect
+1
+Interact
+1
+Interact Text
+
+Memory Desc
+
+Memory Name
+Shield
+Mesh
+shield.fbx
+Name
+MemoryWeapon0
+Obstacle
+0
+Offset
+0 -1 -0.4
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Static
+1
+Texture
+test.png
+UID
+1816719481
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+WeaponAttack
+0
+WeaponDefend
+3
+WeaponEnergy
+2
+WeaponWeight
+1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+interactKnownText
+
+next
 DialogueTrigger
 0
 DestructibleActor
