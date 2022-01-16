@@ -520,8 +520,11 @@ void Player::SpawnMemoryAsObject()
 			auto& memory = GameInstance::playerMemories[memoryNameToSpawn];
 
 			auto gridActor = dynamic_cast<GridActor*>(memory.spawnActorSystem->SpawnActor(transform));
-			gridActor->mesh->meshComponentData.filename = memory.meshName;
-			gridActor->CreateAllComponents();
+			if (gridActor)
+			{
+				gridActor->mesh->meshComponentData.filename = memory.meshName;
+				gridActor->CreateAllComponents();
+			}
 		}
 		else
 		{
