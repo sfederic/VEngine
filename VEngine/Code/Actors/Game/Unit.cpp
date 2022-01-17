@@ -296,7 +296,6 @@ void Unit::ShowUnitMovementPath()
 	{
 		node->preview = true;
 		node->DisplayShow();
-		node->SetColour(GridNode::previewColour);
 	}
 }
 
@@ -314,21 +313,56 @@ std::vector<GridNode*> Unit::GetMovementPathPreviewNodes(GridNode* destinationNo
 	GridNode* startingNode = grid->GetNode(xIndex, yIndex);
 
 	std::vector<GridNode*> nodes;
+	std::vector<GridNode*> attackNodes;
+	std::vector<GridNode*> movementNodes;
 	std::vector<GridNode*> closedNodes;
 
-	grid->GetNeighbouringNodes(startingNode, nodes);
+	grid->GetNeighbouringNodes(startingNode, movementNodes);
 
-	for (int moveIndex = 0; moveIndex < movementPoints; moveIndex++)
+	//MOVEMENT NODES
+	for (int moveIndex = 0; moveIndex < movementPoints - 1; moveIndex++)
 	{
-		for (int previewIndex = 0; previewIndex < nodes.size(); previewIndex++)
+		for (int previewIndex = 0; previewIndex < movementNodes.size(); previewIndex++)
 		{
-			grid->GetNeighbouringNodes(nodes[previewIndex], closedNodes);
+			grid->GetNeighbouringNodes(movementNodes[previewIndex], closedNodes);
 		}
 
-		nodes.insert(nodes.end(), closedNodes.begin(), closedNodes.end());
+		movementNodes.insert(movementNodes.end(), closedNodes.begin(), closedNodes.end());
 
 		closedNodes.clear();
 	}
+
+	//ATTACK NODES
+
+	//Attack nodes will always be on par with num of movement nodes
+	attackNodes.insert(attackNodes.end(), movementNodes.begin(), movementNodes.end());
+
+	for (int rangeIndex = 0; rangeIndex < attackRange; rangeIndex++)
+	{
+		for (int previewIndex = 0; previewIndex < attackNodes.size(); previewIndex++)
+		{
+			grid->GetNeighbouringNodes(attackNodes[previewIndex], closedNodes);
+		}
+
+		attackNodes.insert(attackNodes.end(), closedNodes.begin(), closedNodes.end());
+
+		closedNodes.clear();
+	}
+
+	//Set attack node colours first
+	for (auto node : attackNodes)
+	{
+		node->SetColour(GridNode::previewColour);
+	}
+
+	for (auto node : movementNodes)
+	{
+		node->SetColour(GridNode::normalColour);
+	}
+
+	//END COMBINED NODES
+	nodes.insert(nodes.end(), movementNodes.begin(), movementNodes.end());
+	nodes.insert(nodes.end(), attackNodes.begin(), attackNodes.end());
 
 	return nodes;
 }
