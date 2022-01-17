@@ -1,4 +1,4 @@
-#define NOMINMAX
+#define NOMINMAX //bruh...
 
 #include "Unit.h"
 #include <algorithm>
@@ -15,6 +15,7 @@
 #include "UI/GuardWidget.h"
 #include "UI/HealthWidget.h"
 #include "Gameplay/GameInstance.h"
+#include "Physics/Raycast.h"
 
 Unit::Unit()
 {
@@ -266,17 +267,35 @@ void Unit::WindUpAttack()
 
 	GameUtils::PlayAudioOneShot("sword_hit.wav");
 
-	if (player->guarding)
+	//Do a raycast towards player. Lets player go behind cover.
+	Ray ray(this);
+	ray.actorsToIgnore.push_back(player); //Ignore player too. Attack hits if nothing is hit
+	if (!Raycast(ray, GetPositionVector(), player->GetPositionVector()))
 	{
-		GameUtils::PlayAudioOneShot("shield_hit.wav");
-	}
+		//Attack hit
+		if (player->guarding)
+		{
+			GameUtils::PlayAudioOneShot("shield_hit.wav");
+		}
 
-	player->InflictDamage(attackPoints);
+		player->InflictDamage(attackPoints);
+		Log("%s attacked %s", this->name.c_str(), player->name.c_str());
+	}
+	else if (ray.hitActor)
+	{
+		//Attack miss
+		Log("[%s] attack missed [%s]. Hit [%s] instead.",
+			this->name.c_str(), player->name.c_str(), ray.hitActor->name.c_str());
+
+		auto hitGridActor = dynamic_cast<GridActor*>(ray.hitActor);
+		if (hitGridActor)
+		{
+			hitGridActor->InflictDamage(attackPoints);
+		}
+	}
 
 	player->nextCameraFOV = 60.f;
 	GameUtils::SetActiveCameraTarget(player);
-
-	Log("%s attacked %s", this->name.c_str(), player->name.c_str());
 	
 	attackWindingUp = false;
 
