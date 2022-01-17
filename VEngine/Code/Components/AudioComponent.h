@@ -21,8 +21,8 @@ struct AudioComponent : SpatialComponent
 	float volume = 1.0f;
 	float pitch = 1.0f;
 
-	bool playOnStart = false;
-	bool loop = false;
+	bool playOnStart = true;
+	bool loop = true;
 
 	FadeValue fade = FadeValue::None;
 

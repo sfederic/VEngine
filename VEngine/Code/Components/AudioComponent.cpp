@@ -8,6 +8,14 @@ AudioComponent::AudioComponent()
     layer = CollisionLayers::None;
 }
 
+void AudioComponent::Start()
+{
+    if (playOnStart)
+    {
+        channelID = audioSystem.PlayAudio(audioFilename, loop);
+    }
+}
+
 void AudioComponent::Tick(float deltaTime)
 {
     auto channel = audioSystem.GetChannel(channelID);
@@ -29,14 +37,6 @@ void AudioComponent::Tick(float deltaTime)
     //@Todo: Ideally you want these as Property Changed events, but it's fine for now.
     channel->SetPitch(pitch);
     channel->SetVolume(volume);
-}
-
-void AudioComponent::Start()
-{
-    if (playOnStart)
-    {
-        channelID = audioSystem.PlayAudio(audioFilename, loop);
-    }
 }
 
 void AudioComponent::Create()
