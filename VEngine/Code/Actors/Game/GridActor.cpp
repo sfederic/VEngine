@@ -54,7 +54,10 @@ void GridActor::InflictDamage(int damage)
 	if (!isDestructible) return;
 
 	health -= damage;
-	healthWidget->healthPoints = health;
+	if (healthWidget)
+	{
+		healthWidget->healthPoints = health;
+	}
 
 	if (health <= 0)
 	{
