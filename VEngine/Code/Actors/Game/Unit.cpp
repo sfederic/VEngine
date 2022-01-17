@@ -89,9 +89,9 @@ Properties Unit::GetProps()
 {
 	auto props = __super::GetProps();
 	props.Add("Move Points", &movementPoints);
-	props.Add("NextMove", &nextMovePos);
 	props.Add("Move Speed", &moveSpeed);
 	props.Add("Attack Points", &attackPoints);
+	props.Add("Attack Range", &attackRange);
 	props.AddProp(deathText);
 	return props;
 }
@@ -223,8 +223,22 @@ bool Unit::Attack()
 	auto standingNode = GetCurrentNode();
 	auto grid = GameUtils::GetGrid();
 
+	//Get nodes based on attack range
 	std::vector<GridNode*> attackNodes;
+	std::vector<GridNode*> closedNodes;
 	grid->GetNeighbouringNodes(standingNode, attackNodes);
+
+	for (int rangeIndex = 0; rangeIndex < attackRange; rangeIndex++)
+	{
+		for (int nodeIndex = 0; nodeIndex < attackNodes.size(); nodeIndex++)
+		{
+			grid->GetNeighbouringNodes(attackNodes[nodeIndex], closedNodes);
+		}
+
+		attackNodes.insert(attackNodes.end(), closedNodes.begin(), closedNodes.end());
+
+		closedNodes.clear();
+	}
 
 	auto player = GameUtils::GetPlayer();
 	auto targetNode = player->GetCurrentNode();

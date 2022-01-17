@@ -29,6 +29,8 @@ struct Unit : GridActor
 
 	int attackPoints = 1;
 
+	int attackRange = 1; //Attack range should always be >= 1
+
 	bool isInBattle = false;
 
 private:
