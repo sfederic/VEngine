@@ -7,6 +7,8 @@ using namespace DirectX;
 
 struct Actor;
 
+//@Todo: need a camera shake for combat and whatever else
+
 struct CameraComponent : SpatialComponent
 {
 	COMPONENT_SYSTEM(CameraComponent)
