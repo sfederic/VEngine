@@ -8,6 +8,7 @@
 #include "VMath.h"
 #include "GridActor.h"
 #include "Gameplay/GameUtils.h"
+#include "Gameplay/BattleSystem.h"
 
 Grid::Grid()
 {
@@ -134,7 +135,15 @@ void Grid::Awake()
 
 void Grid::Start()
 {
-    SetActive(false);
+    if (startBattleOnLoad)
+    {
+        SetActive(true);
+        battleSystem.StartBattle();
+    }
+    else
+    {
+        SetActive(false);
+    }
 }
 
 void Grid::Tick(float deltaTime)
@@ -157,6 +166,7 @@ Properties Grid::GetProps()
     props.title = "BattleNode";
     props.Add("Size X", &sizeX);
     props.Add("Size Y", &sizeY);
+    props.AddProp(startBattleOnLoad);
     return props;
 }
 
