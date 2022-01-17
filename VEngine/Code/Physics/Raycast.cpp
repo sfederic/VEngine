@@ -141,8 +141,8 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 
 bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR end)
 {
-	XMVECTOR direction = end - origin;
-	float range = XMVector3Length(direction).m128_f32[0];
+	XMVECTOR direction = XMVector3Normalize(end - origin);
+	float range = XMVector3Length(end - origin).m128_f32[0] + 0.1f;
 	return Raycast(ray, origin, direction, range, false);
 }
 
