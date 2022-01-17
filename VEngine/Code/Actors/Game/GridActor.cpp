@@ -28,18 +28,10 @@ void GridActor::Start()
 		auto node = GetCurrentNode();
 		node->Hide();
 	}
-
-	healthWidget = CreateWidget<HealthWidget>();
-	healthWidget->healthPoints = health;
 }
 
 void GridActor::Tick(float deltaTime)
 {
-	if (healthWidget)
-	{
-		healthWidget->pos = GetHomogeneousPositionVector();
-	}
-
 	dialogueComponent->SetPosition(GetHomogeneousPositionVector());
 }
 

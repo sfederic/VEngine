@@ -13,6 +13,7 @@
 #include "Timer.h"
 #include "Log.h"
 #include "UI/GuardWidget.h"
+#include "UI/HealthWidget.h"
 #include "Gameplay/GameInstance.h"
 
 Unit::Unit()
@@ -25,12 +26,17 @@ void Unit::Start()
 {
 	__super::Start();
 
+	healthWidget = CreateWidget<HealthWidget>();
+	healthWidget->healthPoints = health;
+
 	nextMovePos = GetPositionVector();
 }
 
 void Unit::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
+
+	healthWidget->pos = GetHomogeneousPositionVector();
 
 	if (isUnitTurn && !attackWindingUp)
 	{
