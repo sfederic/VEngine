@@ -14,7 +14,8 @@ void ParticleEmitter::CreateParticle(Particle particle)
 void ParticleEmitter::Tick(float deltaTime)
 {
 	spawnTimer += deltaTime;
-	if (spawnTimer > spawnRate)
+	float spawnRateRange = VMath::RandomRange(spawnRate.x, spawnRate.y);
+	if (spawnTimer > spawnRateRange)
 	{
 		Particle particle = {};
 
@@ -23,9 +24,9 @@ void ParticleEmitter::Tick(float deltaTime)
 		XMStoreFloat3(&particle.transform.position, worldMatrix.r[3]);
 
 		//Set position from radius
-		particle.transform.position.x += VMath::RandomRange(-spawnRadius, spawnRadius);
-		particle.transform.position.y += VMath::RandomRange(-spawnRadius, spawnRadius);
-		particle.transform.position.z += VMath::RandomRange(-spawnRadius, spawnRadius);
+		particle.transform.position.x += VMath::RandomRange(spawnRadius.x, spawnRadius.y);
+		particle.transform.position.y += VMath::RandomRange(spawnRadius.x, spawnRadius.y);
+		particle.transform.position.z += VMath::RandomRange(spawnRadius.x, spawnRadius.y);
 
 		CreateParticle(particle);
 
@@ -37,15 +38,21 @@ void ParticleEmitter::Tick(float deltaTime)
 		Particle& particle = particles[i];
 		particle.lifetime += deltaTime;
 
-		if (particle.lifetime > lifetime)
+		//Get random range between lifetimes
+		float lifetimeRange = VMath::RandomRange(lifetime.x, lifetime.y);
+
+		if (particle.lifetime > lifetimeRange)
 		{
 			std::swap(particle, particles.back());
 			particles.pop_back();
 		}
 
-		particle.transform.position.x += direction.x * (moveSpeed * deltaTime);
-		particle.transform.position.y += direction.y * (moveSpeed * deltaTime);
-		particle.transform.position.z += direction.z * (moveSpeed * deltaTime);
+		//Get random range between move speeds
+		float moveSpeedRange = VMath::RandomRange(moveSpeed.x, moveSpeed.y);
+
+		particle.transform.position.x += direction.x * (moveSpeedRange * deltaTime);
+		particle.transform.position.y += direction.y * (moveSpeedRange * deltaTime);
+		particle.transform.position.z += direction.z * (moveSpeedRange * deltaTime);
 	}
 }
 

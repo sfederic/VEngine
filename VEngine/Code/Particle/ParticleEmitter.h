@@ -15,14 +15,13 @@ struct ParticleEmitter : SpatialComponent
 
 	std::string textureFilename;
 
-	float moveSpeed = 1.0f;
-
-	float lifetime = 1.f;
-	float spawnRate = 0.2f;
-	float spawnRadius = 0.f;
-
-	float rotation = 0.f;
-	float rotateSpeed = 0.f;
+	//The Float2's here are acting as a range [x = min, y = max]
+	XMFLOAT2 moveSpeed = XMFLOAT2(1.f, 1.f);
+	XMFLOAT2 lifetime = XMFLOAT2(1.f, 1.f);
+	XMFLOAT2 spawnRate = XMFLOAT2(0.3f, 0.3f);
+	XMFLOAT2 spawnRadius = XMFLOAT2(0.f, 1.f);
+	XMFLOAT2 rotation = XMFLOAT2(0.f, 0.f);
+	XMFLOAT2 rotateSpeed = XMFLOAT2(0.f, 0.f);
 
 private:
 	float spawnTimer = 0.f;
