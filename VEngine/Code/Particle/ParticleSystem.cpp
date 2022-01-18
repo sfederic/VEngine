@@ -4,7 +4,7 @@
 ParticleSystem::ParticleSystem()
 {
 	auto emitter = ParticleEmitter::system.Add(this);
-	//emitter->textureFilename = "bush.png";
+	emitter->textureFilename = "bush.png";
 	emitter->direction.y = -1.f;
 	AddEmitter(emitter);
 
@@ -18,6 +18,6 @@ void ParticleSystem::AddEmitter(ParticleEmitter* emitter)
 
 Properties ParticleSystem::GetProps()
 {
-	auto props = Actor::GetProps();
+	auto props = __super::GetProps();
 	return props;
 }

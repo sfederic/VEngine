@@ -15,11 +15,19 @@ struct ParticleEmitter : SpatialComponent
 
 	std::string textureFilename;
 
-	float speed = 1.0f;
+	float moveSpeed = 1.0f;
+
 	float lifetime = 1.f;
 	float spawnRate = 0.2f;
+	float spawnRadius = 0.f;
+
+	float rotation = 0.f;
+	float rotateSpeed = 0.f;
+
+private:
 	float spawnTimer = 0.f;
 
+public:
 	ParticleEmitter();
 	void CreateParticle(Particle particle);
 	virtual void Tick(float deltaTime) override;

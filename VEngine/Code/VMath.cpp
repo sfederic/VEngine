@@ -125,7 +125,7 @@ namespace VMath
         return u;
     }
 
-    void RotateTowardsCamera(Transform& transform)
+    void RotateTowardsCamera(Transform& transform, float zAngle)
     {
         const float posX = transform.position.x;
         const float posZ = transform.position.z;
@@ -139,7 +139,12 @@ namespace VMath
 
         const float rotation = XMConvertToRadians(angle);
 
-        const XMMATRIX m = XMMatrixRotationY(rotation);
+        XMMATRIX m = XMMatrixRotationY(rotation);
+        if (zAngle != 0.f)
+        {
+            //Rotate on the "Z-axis" facing towards camera
+            m *= XMMatrixRotationAxis(m.r[2], XMConvertToRadians(zAngle));
+        }
         const XMVECTOR rot = XMQuaternionRotationMatrix(m);
 
         //Set rotation

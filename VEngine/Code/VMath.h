@@ -39,7 +39,7 @@ namespace VMath
 	XMVECTOR UpFromQuat(XMVECTOR rot);
 
 	//Rotates on the Y-axis
-	void RotateTowardsCamera(Transform& transform);
+	void RotateTowardsCamera(Transform& transform, float zAngle = 0.f);
 
 	XMFLOAT4X4 FbxMatrixToDirectXMathMatrix(fbxsdk::FbxMatrix fbxMatrix);
 

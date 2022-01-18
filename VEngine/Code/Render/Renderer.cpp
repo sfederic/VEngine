@@ -845,7 +845,10 @@ void Renderer::RenderParticleEmitters()
 
 		for (auto& particle : emitter->particles)
 		{
-			VMath::RotateTowardsCamera(particle.transform);
+			//Add rotation to particle
+			particle.angle += (emitter->rotation * emitter->rotateSpeed) * Core::GetDeltaTime();
+
+			VMath::RotateTowardsCamera(particle.transform, particle.angle);
 
 			shaderMatrices.model = particle.transform.GetAffine();
 			shaderMatrices.MakeModelViewProjectionMatrix();
