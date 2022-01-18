@@ -41,37 +41,16 @@ UvRotationSpeed
 UvScale
 1 1
 startBattleOnLoad
-1
+0
 next
 GridActor
 0
 AudioActor
-1
- Position
--3 4 4
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Audio Filename
-combat_sample.wav
-Loop
-1
-Name
-AudioActor0
-Pitch
-1
-Play On Start
-1
-UID
-4244436994
-Volume
-1
-next
+0
 Player
 1
  Position
-0 0 0
+2 0 1
  Rotation
 -0 -5.96046e-08 -0 1
  Scale
@@ -130,98 +109,9 @@ Unit
 EntranceTrigger
 0
 NPC
-1
- Position
-6 0 6
- Rotation
-0 1 0 2.44381e-07
- Scale
-1 1 1
-Add On Interact
 0
-Ambient
-1 1 1 1
-Attack Points
-1
-Attack Range
-4
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-3
-Image File
-
-Inspect
-0
-Interact
-0
-Interact Text
-
-Memory Desc
-
-Memory Name
-
-Mesh
-character_test.fbx
-Move Points
-3
-Move Speed
-3
-Name
-NPC0
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-test.png
-UID
-2888764469
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-battleStartText
-
-condition
-
-conditionArg
-
-deathText
-
-interactKnownText
-
-spawnText
-
-next
 MeshActor
-4
+1
  Position
 4 -0.5 4
  Rotation
@@ -248,117 +138,6 @@ Texture
 dock.jpg
 UID
 1288969712
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
- Position
-3 0 3
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Grid Obstacle
-1
-Mesh
-cube.fbx
-Name
-cube1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-test.png
-UID
-4035304350
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
- Position
-4 0 2
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Grid Obstacle
-1
-Mesh
-cube.fbx
-Name
-MeshActor2
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-test.png
-UID
-4035304350
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
- Position
-2 0 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Grid Obstacle
-1
-Mesh
-cube.fbx
-Name
-MeshActor3
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-test.png
-UID
-4035304350
 UvOffset
 0 0
 UvOffsetSpeed
@@ -400,7 +179,34 @@ Billboard
 InteractTrigger
 0
 ParticleSystem
-0
+1
+ Position
+1 0 4
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Direction
+0 1 0
+Lifetime
+1 1.5
+Move Speed
+1 1.7
+Name
+ParticleSystem0
+Rotate
+-45 45
+Rotate Speed
+2 2
+Spawn Radius
+-1 1
+Spawn Rate
+0.2 0.4
+Texture
+smoke.png
+UID
+2250459049
+next
 MemoryWeapon
 0
 DialogueTrigger

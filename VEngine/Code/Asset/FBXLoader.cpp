@@ -206,7 +206,8 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 									FbxNode* link = cluster->GetLink();
 									std::string linkName = link->GetName();
 
-									//@Todo: Feels like just getting one curve isn't the right thing here.
+									//@Todo: Feels like just getting one curve isn't the right thing here,
+									//as it might be null if the skeleton only has translations.
 									//I'm thinking if there are no rotation curves in the fbx, this won't work.
 									FbxAnimCurveNode* curveNode = link->LclRotation.GetCurveNode(animLayer);
 									if (curveNode)
@@ -257,7 +258,7 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 			}
 		}
 
-		//@Todo: materials for fbx files.
+		//@Todo: materials for fbx files. Would need to figure out a workflow from Blender's materials
 		//Material 
 		//int materialCount = node->GetMaterialCount();
 		//for (int materialIndex = 0; materialIndex < materialCount; materialIndex++)
