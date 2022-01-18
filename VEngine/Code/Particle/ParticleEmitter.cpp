@@ -28,6 +28,17 @@ void ParticleEmitter::Tick(float deltaTime)
 		particle.transform.position.y += VMath::RandomRange(spawnRadius.x, spawnRadius.y);
 		particle.transform.position.z += VMath::RandomRange(spawnRadius.x, spawnRadius.y);
 
+		//Get random range between move speeds
+		float moveSpeedRange = VMath::RandomRange(moveSpeed.x, moveSpeed.y);
+		particle.moveSpeed = moveSpeedRange;
+
+		//Set particle rotation values
+		float rotateRange = VMath::RandomRange(rotation.x, rotation.y);
+		particle.angle = rotateRange;
+
+		float rotateSpeedRange = VMath::RandomRange(rotateSpeed.x, rotateSpeed.y);
+		particle.rotateSpeed = rotateSpeedRange;
+
 		CreateParticle(particle);
 
 		spawnTimer = 0.f;
@@ -47,12 +58,7 @@ void ParticleEmitter::Tick(float deltaTime)
 			particles.pop_back();
 		}
 
-		//Get random range between move speeds
-		float moveSpeedRange = VMath::RandomRange(moveSpeed.x, moveSpeed.y);
-
-		particle.transform.position.x += direction.x * (moveSpeedRange * deltaTime);
-		particle.transform.position.y += direction.y * (moveSpeedRange * deltaTime);
-		particle.transform.position.z += direction.z * (moveSpeedRange * deltaTime);
+		particle.AddVelocity(direction, deltaTime);
 	}
 }
 

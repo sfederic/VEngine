@@ -845,10 +845,8 @@ void Renderer::RenderParticleEmitters()
 
 		for (auto& particle : emitter->particles)
 		{
-			//Add rotation to particle
-			float rotateRange = VMath::RandomRange(emitter->rotation.x, emitter->rotation.y);
-			float rotateSpeedRange = VMath::RandomRange(emitter->rotateSpeed.x, emitter->rotateSpeed.y);
-			particle.angle += (rotateRange * rotateSpeedRange) * Core::GetDeltaTime();
+			//Add rotation to particle (keep in mind that rotate speed needs to match angle's +/- value)
+			particle.angle += particle.rotateSpeed * Core::GetDeltaTime();
 
 			VMath::RotateTowardsCamera(particle.transform, particle.angle);
 
