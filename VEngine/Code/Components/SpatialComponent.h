@@ -19,6 +19,8 @@ struct SpatialComponent : Component
 
 	CollisionLayers layer = CollisionLayers::All;
 
+	Properties GetProps() override;
+
 	void AddChild(SpatialComponent* component);
 	void RemoveChild(SpatialComponent* component);
 	XMMATRIX GetWorldMatrix();
