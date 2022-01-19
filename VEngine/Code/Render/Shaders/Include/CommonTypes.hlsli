@@ -196,6 +196,7 @@ SamplerComparisonState shadowSampler : register(s1);
 
 static const float SMAP_SIZE = 2048.0f;
 static const float SMAP_DX = 1.0f / SMAP_SIZE;
+static const float PI = 3.14159265f;
 
 float CalcShadowFactor(float4 shadowPos)
 {
