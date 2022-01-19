@@ -1,3 +1,7 @@
+static const float SMAP_SIZE = 2048.0f;
+static const float SMAP_DX = 1.0f / SMAP_SIZE;
+static const float PI = 3.14159265f;
+
 cbuffer cbMatrices : register(b0)
 {
 	float4x4 model;
@@ -53,6 +57,12 @@ static const int DIRECTIONAL_LIGHT = 0;
 static const int POINT_LIGHT = 1;
 static const int SPOT_LIGHT = 2;
 
+struct LightingResult
+{
+	float4 diffuse;
+	float4 specular;
+};
+
 cbuffer cbLights : register(b3)
 {
 	float4 eyePosition;
@@ -65,20 +75,26 @@ cbuffer cbLights : register(b3)
 float4 CalcDiffuse(Light light, float3 L, float3 N)
 {
 	float NdotL = max(0.0, dot(N, L));
-	return light.colour * NdotL;
+	return (light.colour * NdotL) / PI;
 }
 
-struct LightingResult
+float4 CalcSpecular(Light light, float3 L, float3 N, float3 V)
 {
-	float4 diffuse;
-};
+	float3 R = normalize(reflect(-L, N));
+	float RdotV = max(0, dot(R, V));
+	float3 H = normalize(L + V);
+	float NdotH = max(0, dot(N, H));
 
-LightingResult CalcDirectionalLight(Light light, float3 normal)
+	return light.colour * pow(RdotV, material.specularPower);
+}
+
+LightingResult CalcDirectionalLight(Light light, float3 view, float3 normal)
 {
 	LightingResult result;
 
 	float3 lightDir = -light.direction.xyz;
 	result.diffuse = CalcDiffuse(light, lightDir, normal);
+	result.specular = CalcSpecular(light, lightDir, normal, view);
 
 	return result;
 }
@@ -90,7 +106,9 @@ float CalcAttenuation(Light light, float d)
 
 LightingResult CalcPointLight(Light light, float3 V, float4 P, float3 N)
 {
-	LightingResult result = { 0.f, 0.f, 0.f, 0.f };
+	LightingResult result;
+	result.diffuse = float4(0.f, 0.f, 0.f, 0.f);
+	result.specular = float4(0.f, 0.f, 0.f, 0.f);
 
 	float3 L = (light.position - P).xyz;
 	float distance = length(L);
@@ -99,6 +117,9 @@ LightingResult CalcPointLight(Light light, float3 V, float4 P, float3 N)
 	float attenuation = CalcAttenuation(light, distance);
 
 	result.diffuse = CalcDiffuse(light, L, N) * attenuation;
+
+	result.specular = CalcSpecular(light, L, N, V) * attenuation;
+
 	return result;
 }
 
@@ -122,13 +143,16 @@ LightingResult CalcSpotLight(Light light, float3 V, float4 P, float3 N)
 	float spotIntensity = CalcSpotCone(light, L);
 
 	result.diffuse = CalcDiffuse(light, L, N) * attenuation * spotIntensity;
+	result.specular = CalcSpecular(light, L, N, V) * attenuation * spotIntensity;
 
 	return result;
 }
 
 LightingResult CalcForwardLighting(float3 V, float4 position, float3 normal)
 {
-	LightingResult endResult = { 0.f, 0.f, 0.f, 0.f };
+	LightingResult endResult;
+	endResult.diffuse = float4(0.f, 0.f, 0.f, 0.f);
+	endResult.specular = float4(0.f, 0.f, 0.f, 0.f);
 
 	[unroll]
 	for (int i = 0; i < numLights; i++)
@@ -138,7 +162,9 @@ LightingResult CalcForwardLighting(float3 V, float4 position, float3 normal)
 			continue;
 		}
 
-		LightingResult result = { 0.f, 0.f, 0.f, 0.f };
+		LightingResult result;
+		result.diffuse = float4(0.f, 0.f, 0.f, 0.f);
+		result.specular = float4(0.f, 0.f, 0.f, 0.f);
 
 		switch (lights[i].lightType)
 		{
@@ -151,11 +177,12 @@ LightingResult CalcForwardLighting(float3 V, float4 position, float3 normal)
 			break;
 
 		case DIRECTIONAL_LIGHT:
-			result = CalcDirectionalLight(lights[i], normal);
+			result = CalcDirectionalLight(lights[i], V, normal);
 			break;
 		}
 
 		endResult.diffuse += result.diffuse;
+		endResult.specular += result.specular;
 	}
 
 	return endResult;
@@ -193,10 +220,6 @@ Texture2D t : register(t0);
 Texture2D shadowMap : register(t1);
 SamplerState s : register(s0);
 SamplerComparisonState shadowSampler : register(s1);
-
-static const float SMAP_SIZE = 2048.0f;
-static const float SMAP_DX = 1.0f / SMAP_SIZE;
-static const float PI = 3.14159265f;
 
 float CalcShadowFactor(float4 shadowPos)
 {
