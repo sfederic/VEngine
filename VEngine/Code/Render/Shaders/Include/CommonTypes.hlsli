@@ -78,12 +78,10 @@ float4 CalcDiffuse(Light light, float3 L, float3 N)
 	return (light.colour * NdotL) / PI;
 }
 
-float4 CalcSpecular(Light light, float3 L, float3 N, float3 V)
+float4 CalcSpecular(Light light, float3 V, float3 L, float3 N)
 {
 	float3 R = normalize(reflect(-L, N));
 	float RdotV = max(0, dot(R, V));
-	float3 H = normalize(L + V);
-	float NdotH = max(0, dot(N, H));
 
 	return light.colour * pow(RdotV, material.specularPower);
 }
@@ -94,7 +92,7 @@ LightingResult CalcDirectionalLight(Light light, float3 view, float3 normal)
 
 	float3 lightDir = -light.direction.xyz;
 	result.diffuse = CalcDiffuse(light, lightDir, normal);
-	result.specular = CalcSpecular(light, lightDir, normal, view);
+	result.specular = CalcSpecular(light, view, lightDir, normal);
 
 	return result;
 }
@@ -118,7 +116,7 @@ LightingResult CalcPointLight(Light light, float3 V, float4 P, float3 N)
 
 	result.diffuse = CalcDiffuse(light, L, N) * attenuation;
 
-	result.specular = CalcSpecular(light, L, N, V) * attenuation;
+	result.specular = CalcSpecular(light, V, L, N) * attenuation;
 
 	return result;
 }
@@ -143,7 +141,7 @@ LightingResult CalcSpotLight(Light light, float3 V, float4 P, float3 N)
 	float spotIntensity = CalcSpotCone(light, L);
 
 	result.diffuse = CalcDiffuse(light, L, N) * attenuation * spotIntensity;
-	result.specular = CalcSpecular(light, L, N, V) * attenuation * spotIntensity;
+	result.specular = CalcSpecular(light, V, L, N) * attenuation * spotIntensity;
 
 	return result;
 }
@@ -184,6 +182,9 @@ LightingResult CalcForwardLighting(float3 V, float4 position, float3 normal)
 		endResult.diffuse += result.diffuse;
 		endResult.specular += result.specular;
 	}
+
+	endResult.diffuse = saturate(endResult.diffuse);
+	endResult.specular = saturate(endResult.specular);
 
 	return endResult;
 }
