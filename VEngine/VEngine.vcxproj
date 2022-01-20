@@ -214,6 +214,7 @@
     <ClCompile Include="Code\Actors\Game\PlayerDialogueTrigger.cpp" />
     <ClCompile Include="Code\Actors\Game\MemoryWeapon.cpp" />
     <ClCompile Include="Code\UI\WeaponDisplayWidget.cpp" />
+    <ClCompile Include="Code\Package.cpp" />
     <ClInclude Include="Code\Editor\ActorTreeWidget.h" />
     <ClInclude Include="Code\Gameplay\BattleSystem.h" />
     <ClInclude Include="Code\Actors\AudioActor.h" />

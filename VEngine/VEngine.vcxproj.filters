@@ -467,6 +467,9 @@
     <ClCompile Include="Code\UI\WeaponDisplayWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Package.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
