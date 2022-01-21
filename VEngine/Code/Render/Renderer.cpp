@@ -300,26 +300,34 @@ void Renderer::CreateMainConstantBuffers()
 	//Shader matrix constant buffer
 	shaderMatrices.Create();
 
-	cbMatrices = RenderUtils::CreateDefaultBuffer(sizeof(shaderMatrices), D3D11_BIND_CONSTANT_BUFFER, &shaderMatrices);
+	cbMatrices = RenderUtils::CreateDynamicBuffer(sizeof(shaderMatrices), D3D11_BIND_CONSTANT_BUFFER, &shaderMatrices);
 	assert(cbMatrices);
 
 	//Material buffer
 	MaterialShaderData materialShaderData;
-	cbMaterial = RenderUtils::CreateDefaultBuffer(sizeof(MaterialShaderData), 
+	cbMaterial = RenderUtils::CreateDynamicBuffer(sizeof(MaterialShaderData), 
 		D3D11_BIND_CONSTANT_BUFFER, &materialShaderData);
 	assert(cbMaterial);
 
 	//Lights buffer
 	ShaderLights shaderLights;
-	cbLights = RenderUtils::CreateDefaultBuffer(sizeof(ShaderLights),
+	cbLights = RenderUtils::CreateDynamicBuffer(sizeof(ShaderLights),
 		D3D11_BIND_CONSTANT_BUFFER, &shaderLights);
 	assert(cbLights);
 
 	//Skinning data
 	XMMATRIX skinningMatrices[96] = {};
-	cbSkinningData = RenderUtils::CreateDefaultBuffer(sizeof(XMMATRIX) * 96,
+	cbSkinningData = RenderUtils::CreateDynamicBuffer(sizeof(XMMATRIX) * 96,
 		D3D11_BIND_CONSTANT_BUFFER, skinningMatrices);
 	assert(cbSkinningData);
+}
+
+void Renderer::MapBuffer(ID3D11Resource* resource, const void* src, size_t size)
+{
+	D3D11_MAPPED_SUBRESOURCE mapped = {};
+	HR(context->Map(resource, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped));
+	std::memcpy(mapped.pData, src, size);
+	context->Unmap(resource, 0);
 }
 
 void Renderer::CheckSupportedFeatures()
@@ -354,7 +362,7 @@ void Renderer::RenderShadowPass()
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		shaderMatrices.MakeTextureMatrix(mesh->material);
 
-		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 		//Set textures
@@ -440,8 +448,8 @@ void Renderer::RenderMeshComponents()
 		shaderMatrices.model = mesh->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		shaderMatrices.MakeTextureMatrix(mesh->material);
-	
-		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+
+		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 		//Set lights buffer
@@ -474,7 +482,7 @@ void Renderer::RenderInstanceMeshComponents()
 	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
 	shaderMatrices.MakeModelViewProjectionMatrix();
 
-	context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+	MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
 	context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 	const float factor[4] = { 0.f };
@@ -488,11 +496,11 @@ void Renderer::RenderInstanceMeshComponents()
 
 		//update texture matrix
 		shaderMatrices.MakeTextureMatrix(instanceMesh->material);
-		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 		//Update instance data and set SRV
-		context->UpdateSubresource(instanceMesh->structuredBuffer, 0, nullptr, instanceMesh->instanceData.data(), 0, 0);
+		MapBuffer(instanceMesh->structuredBuffer, instanceMesh->instanceData.data(), sizeof(InstanceData) * instanceMesh->instanceData.size());
 		context->VSSetShaderResources(instanceSRVRegister, 1, &instanceMesh->srv);
 		context->PSSetShaderResources(instanceSRVRegister, 1, &instanceMesh->srv);
 
@@ -528,7 +536,7 @@ void Renderer::RenderBounds()
 
 		//Set debug wireframe material colour
 		materialShaderData.ambient = XMFLOAT4(0.75f, 0.75f, 0.75f, 1.0f);
-		context->UpdateSubresource(cbMaterial, 0, nullptr, &materialShaderData, 0, 0);
+		MapBuffer(cbMaterial, &materialShaderData, sizeof(MaterialShaderData));
 		context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 
 		for (Actor* actor : world.GetAllActorsInWorld())
@@ -552,7 +560,7 @@ void Renderer::RenderBounds()
 				shaderMatrices.model.r[2].m128_f32[2] += 0.01f;
 
 				shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
-				context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+				MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
 
 				context->Draw(debugBox.boxMesh->meshDataProxy->vertices->size(), 0);
 			}
@@ -587,11 +595,11 @@ void Renderer::RenderBounds()
 			shaderMatrices.model.r[3] += XMLoadFloat3(&boxTrigger->boundingBox.Center);
 
 			shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
-			context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+			MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
 
 			//Set trigger wireframe material colour
 			materialShaderData.ambient = boxTrigger->renderWireframeColour;
-			context->UpdateSubresource(cbMaterial, 0, nullptr, &materialShaderData, 0, 0);
+			MapBuffer(cbMaterial, &materialShaderData, sizeof(MaterialShaderData));
 			context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 
 			context->Draw(debugBox.boxMesh->meshDataProxy->vertices->size(), 0);
@@ -628,13 +636,13 @@ void Renderer::RenderCameraMeshes()
 
 		//Make cameras red
 		materialShaderData.ambient = XMFLOAT4(1.0f, 0.0f, 0.f, 1.0f);
-		context->UpdateSubresource(cbMaterial, 0, nullptr, &materialShaderData, 0, 0);
+		MapBuffer(cbMaterial, &materialShaderData, sizeof(MaterialShaderData));
 		context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 
 		shaderMatrices.model = camera->GetWorldMatrix();
 
 		shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
-		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
 
 		context->Draw(debugCamera.mesh->meshDataProxy->vertices->size(), 0);
 	}
@@ -665,7 +673,7 @@ void Renderer::RenderLightMeshes()
 	//Set debug sphere wireframe material colour
 	MaterialShaderData materialShaderData;
 	materialShaderData.ambient = XMFLOAT4(1.f, 1.f, 0.f, 1.0f);
-	context->UpdateSubresource(cbMaterial, 0, nullptr, &materialShaderData, 0, 0);
+	MapBuffer(cbMaterial, &materialShaderData, sizeof(MaterialShaderData));
 	context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 
 
@@ -676,7 +684,7 @@ void Renderer::RenderLightMeshes()
 	{
 		shaderMatrices.model = directionalLight->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
-		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
 
 		context->Draw(debugSphere.sphereMesh->meshDataProxy->vertices->size(), 0);
 	}
@@ -689,7 +697,7 @@ void Renderer::RenderLightMeshes()
 	{
 		shaderMatrices.model = pointLight->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
-		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
 
 		context->Draw(debugIcoSphere.mesh->meshDataProxy->vertices->size(), 0);
 	}
@@ -702,7 +710,7 @@ void Renderer::RenderLightMeshes()
 	{
 		shaderMatrices.model = spotLight->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
-		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
 
 		context->Draw(debugCone.mesh->meshDataProxy->vertices->size(), 0);
 	}
@@ -720,7 +728,7 @@ void Renderer::RenderSkeletonBones()
 
 	MaterialShaderData materialShaderData = {};
 	materialShaderData.ambient = XMFLOAT4(0.54f, 0.80f, 0.92f, 1.0f); //Sky blue
-	context->UpdateSubresource(cbMaterial, 0, nullptr, &materialShaderData, 0, 0);
+	MapBuffer(cbMaterial, &materialShaderData, sizeof(MaterialShaderData));
 	context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 
 	for (auto mesh : MeshComponent::system.components)
@@ -759,7 +767,7 @@ void Renderer::RenderSkeletonBones()
 	shaderMatrices.model = XMMatrixIdentity();
 	shaderMatrices.MakeModelViewProjectionMatrix();
 
-	context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+	MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
 	context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 	context->Draw(lines.size() * 2, 0);
@@ -802,7 +810,7 @@ void Renderer::AnimateSkeletalMesh(MeshComponent* mesh)
 		//Update skinning constant buffers
 		if (!skinningData.empty())
 		{
-			context->UpdateSubresource(cbSkinningData, 0, nullptr, skinningData.data(), 0, 0);
+			MapBuffer(cbSkinningData, skinningData.data(), sizeof(XMMATRIX) * skinningData.size());
 			context->VSSetConstantBuffers(cbSkinningRegister, 1, &cbSkinningData);
 		}
 	}
@@ -853,7 +861,7 @@ void Renderer::RenderParticleEmitters()
 			shaderMatrices.model = particle.transform.GetAffine();
 			shaderMatrices.MakeModelViewProjectionMatrix();
 
-			context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+			MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
 			context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 			//Draw
@@ -901,7 +909,7 @@ void Renderer::RenderSpritesInScreenSpace()
 		shaderMatrices.model = XMMatrixIdentity();
 		shaderMatrices.MakeModelViewProjectionMatrix();
 
-		context->UpdateSubresource(cbMatrices, 0, nullptr, &shaderMatrices, 0, 0);
+		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 		//Draw
@@ -959,7 +967,7 @@ void Renderer::UpdateLights()
 	shaderLights.globalAmbience = XMFLOAT4(0.35f, 0.35f, 0.35f, 1.f);
 	XMStoreFloat4(&shaderLights.eyePosition, activeCamera->transform.world.r[3]);
 
-	context->UpdateSubresource(cbLights, 0, nullptr, &shaderLights, 0, 0);
+	MapBuffer(cbLights, &shaderLights, sizeof(ShaderLights));
 	context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
 
 	PROFILE_END
@@ -1164,7 +1172,7 @@ void Renderer::SetRenderPipelineStates(MeshComponent* mesh)
 	context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &stride, &offset);
 	context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
 
-	context->UpdateSubresource(cbMaterial, 0, nullptr, &material->materialShaderData, 0, 0);
+	MapBuffer(cbMaterial, &material->materialShaderData, sizeof(MaterialShaderData));
 	//context->VSSetConstantBuffers(cbMaterialRegister, 0, &cbMaterial);
 	context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 }

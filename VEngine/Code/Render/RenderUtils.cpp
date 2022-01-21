@@ -78,9 +78,11 @@ namespace RenderUtils
 
 		D3D11_BUFFER_DESC desc = {};
 		desc.ByteWidth = byteWidth;
+		desc.Usage = D3D11_USAGE_DYNAMIC;
 		desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
 		desc.StructureByteStride = byteStride;
 		desc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
+		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 
 		D3D11_SUBRESOURCE_DATA data = {};
 		data.pSysMem = initData;
