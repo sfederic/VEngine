@@ -104,10 +104,11 @@ struct Properties
 		return propMap[name].info.value() == typeid(T);
 	}
 
-	template <typename T>
+	template <typename Base, typename Derived>
 	bool CheckTypeDynamicCast(const std::string name)
 	{
-		return dynamic_cast<T>(propMap[name].data);
+		auto derived = (Derived*)propMap[name].data;
+		return dynamic_cast<Base*>(derived);
 	}
 
 	template <typename T>
