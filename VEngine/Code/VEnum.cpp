@@ -18,7 +18,7 @@ void VEnum::Add(const std::string name)
 	dataIndex++;
 }
 
-auto VEnum::GetAllNames()
+std::vector<std::string> VEnum::GetAllNames()
 {
 	std::vector<std::string> names;
 	for (auto& name : data)

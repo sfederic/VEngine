@@ -16,6 +16,6 @@ public:
 
 	void SetValue(const std::string newValue);
 	void Add(const std::string name);
-	auto GetAllNames();
+	std::vector<std::string> GetAllNames();
 	bool Compare(const std::string valueToCompare);
 };
