@@ -18,7 +18,6 @@ void ShaderSystem::Init()
 {
     CompileAllShadersFromFile();
     CreateAllShaders();
-    InitHotLoading();
 }
 
 void ShaderSystem::Tick()
@@ -106,8 +105,7 @@ void ShaderSystem::CompileAllShadersFromFile()
     {
         shaderMap[shaders[i].filename] = &shaders[i];
 
-        std::wstring directory;
-        directory += L"Code/Render/Shaders/";
+        std::wstring directory = L"Code/Render/Shaders/";
         directory += shaders[i].filename;
 
         const char* vsEntry = "VSMain";
@@ -119,15 +117,6 @@ void ShaderSystem::CompileAllShadersFromFile()
         const char* psTarget = "ps_5_0";
         shaders[i].pixelCode = CreateShaderFromFile(directory.c_str(), psEntry, psTarget);
         assert(shaders[i].pixelCode);
-    }
-}
-
-void ShaderSystem::InitHotLoading()
-{
-    hotreloadHandle = FindFirstChangeNotificationA("Code/Render/Shaders", false, FILE_NOTIFY_CHANGE_LAST_WRITE);
-    if (hotreloadHandle == INVALID_HANDLE_VALUE)
-    {
-        throw;
     }
 }
 
@@ -145,22 +134,18 @@ void ShaderSystem::CleanUpShaders()
 
 void ShaderSystem::HotReloadShaders()
 {
-    //@Todo: right now Im stuck recompiling every single shader if I can't get the filename.
-    //Potentially engine could let the previous vertex/shader object buffers be used until new compile is ready
-    //REF: https://docs.microsoft.com/en-us/windows/win32/fileio/obtaining-directory-change-notifications
+    debugMenu.AddNotification(L"Shader reload start...");
 
-    bool nextChange = FindNextChangeNotification(hotreloadHandle);
-    if (nextChange)
+    //@Todo: can eventually reload shaders based on their last write time.
+    //For now it's ok to just reload them all, there aren't too many.
+    /*for (auto& entry : std::filesystem::directory_iterator("Code/Render/Shaders/"))
     {
-        debugMenu.AddNotification(L"Shader reload start...");
+        auto writeTime = entry.last_write_time();
+    }*/
 
-        CleanUpShaders();
-        CompileAllShadersFromFile();
-        CreateAllShaders();
+    CleanUpShaders();
+    CompileAllShadersFromFile();
+    CreateAllShaders();
 
-        debugMenu.AddNotification(L"Shader reload complete");
-    }
-
-    FindCloseChangeNotification(hotreloadHandle);
-    InitHotLoading();
+    debugMenu.AddNotification(L"Shader reload complete");
 }

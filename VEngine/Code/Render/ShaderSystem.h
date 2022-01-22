@@ -45,7 +45,6 @@ public:
 	void CreateAllShaders();
 	void CompileAllShadersFromFile();
 	void CleanUpShaders();
-	void InitHotLoading();
 	void HotReloadShaders();
 };
 
