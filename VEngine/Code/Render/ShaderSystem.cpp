@@ -55,7 +55,7 @@ ID3DBlob* ShaderSystem::CreateShaderFromFile(const wchar_t* filename, const char
 	{
         const char* errMsg = (char*)error->GetBufferPointer();
         MessageBoxA(0, errMsg, "Shader Compile Error", 0);
-	}
+    }
 
 	return code;
 }
@@ -101,22 +101,20 @@ void ShaderSystem::CompileAllShadersFromFile()
     flags = D3DCOMPILE_SKIP_OPTIMIZATION | D3DCOMPILE_DEBUG;
 #endif
 
-    for (int i = 0; i < shaders.size(); i++)
+    for (ShaderItem& shader : shaders)
     {
-        shaderMap[shaders[i].filename] = &shaders[i];
+        shaderMap[shader.filename] = &shader;
 
         std::wstring directory = L"Code/Render/Shaders/";
-        directory += shaders[i].filename;
+        directory += shader.filename;
 
         const char* vsEntry = "VSMain";
         const char* vsTarget = "vs_5_0";
-        shaders[i].vertexCode = CreateShaderFromFile(directory.c_str(), vsEntry, vsTarget);
-        assert(shaders[i].vertexCode);
+        shader.vertexCode = CreateShaderFromFile(directory.c_str(), vsEntry, vsTarget);
 
         const char* psEntry = "PSMain";
         const char* psTarget = "ps_5_0";
-        shaders[i].pixelCode = CreateShaderFromFile(directory.c_str(), psEntry, psTarget);
-        assert(shaders[i].pixelCode);
+        shader.pixelCode = CreateShaderFromFile(directory.c_str(), psEntry, psTarget);
     }
 }
 
