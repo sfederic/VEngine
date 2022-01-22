@@ -105,6 +105,12 @@ struct Properties
 	}
 
 	template <typename T>
+	bool CheckTypeDynamicCast(const std::string name)
+	{
+		return dynamic_cast<T>(propMap[name].data);
+	}
+
+	template <typename T>
 	T* GetData(std::string name)
 	{
 		return (T*)propMap[name].data;
