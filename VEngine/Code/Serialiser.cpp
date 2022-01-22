@@ -183,7 +183,7 @@ void Serialiser::Serialise(Properties& props)
 			ss << wname << "\n";
 			ss << *uid << "\n";
 		}
-		else if (props.CheckTypeDynamicCast<VEnum>(name))
+		else if (props.CheckType<VEnum>(name))
 		{
 			auto vEnum = props.GetData<VEnum>(name);
 			ss << wname << "\n";
@@ -307,6 +307,13 @@ void Deserialiser::Deserialise(Properties& props)
 		{
 			UID* uid = props.GetData<UID>(name);
 			is >> *uid;
+		}
+		else if (props.CheckType<VEnum>(name))
+		{
+			wchar_t propString[512]{};
+			is.getline(propString, 512);
+			auto vEnum = props.GetData<VEnum>(name);
+			vEnum->SetValue(VString::wstos(propString));
 		}
 	}
 }
