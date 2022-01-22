@@ -11,12 +11,13 @@ VEnumWidget::VEnumWidget(Property value_)
 		addItem(QString::fromStdString(name));
 	}
 
-	connect(this, SIGNAL(QComboBox::currentIndexChanged(int)), this, SLOT(VEnumWidget::SetValue));
+	setCurrentText(QString::fromStdString(value->GetValue()));
+
+	connect(this, &QComboBox::currentTextChanged, this, &VEnumWidget::SetValue);
 }
 
-void VEnumWidget::SetValue(int index)
+void VEnumWidget::SetValue()
 {
-	setCurrentIndex(index);
 	std::string text = currentText().toStdString();
 	value->SetValue(text);
 }
