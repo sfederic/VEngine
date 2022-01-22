@@ -7,6 +7,7 @@
 #include "World.h"
 #include "Render/RenderTypes.h"
 #include "VString.h"
+#include "VEnum.h"
 
 using namespace DirectX;
 
@@ -181,6 +182,12 @@ void Serialiser::Serialise(Properties& props)
 			UID* uid = props.GetData<UID>(name);
 			ss << wname << "\n";
 			ss << *uid << "\n";
+		}
+		else if (props.CheckTypeDynamicCast<VEnum>(name))
+		{
+			auto vEnum = props.GetData<VEnum>(name);
+			ss << wname << "\n";
+			ss << vEnum->GetValue().c_str() << "\n";
 		}
 	}
 
