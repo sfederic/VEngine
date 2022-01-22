@@ -4,6 +4,7 @@
 #include "Renderer.h"
 #include "VString.h"
 #include "Input.h"
+#include "Log.h"
 #include "Editor/DebugMenu.h"
 
 ShaderSystem shaderSystem;
@@ -55,6 +56,7 @@ ID3DBlob* ShaderSystem::CreateShaderFromFile(const wchar_t* filename, const char
 	{
         const char* errMsg = (char*)error->GetBufferPointer();
         MessageBoxA(0, errMsg, "Shader Compile Error", 0);
+        Log("Shader Compile Error: %s", errMsg);
     }
 
 	return code;
