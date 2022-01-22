@@ -168,7 +168,7 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 				for (int i = 0; i < vertexIndexCount; i++)
 				{
 					double weight = cluster->GetControlPointWeights()[i];
-					assert(weight <= 1.f);
+					weight = std::clamp(weight, 0.0, 1.0);
 
 					int index = cluster->GetControlPointIndices()[i];
 
