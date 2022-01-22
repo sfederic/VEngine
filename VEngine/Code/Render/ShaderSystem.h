@@ -41,10 +41,12 @@ public:
 	void Init();
 	void Tick();
 	ShaderItem* FindShader(std::wstring shaderName);
+	void CleanUpShaders();
+
+private:
 	ID3DBlob* CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target);
 	void CreateAllShaders();
 	void CompileAllShadersFromFile();
-	void CleanUpShaders();
 	void HotReloadShaders();
 };
 

@@ -130,9 +130,13 @@ void ShaderSystem::CleanUpShaders()
     }
 }
 
+//@Todo: the code here is junk, but it's allowing the engine to not crash when hotreloading shader
+//by using the previous shader data that was compiled without errors. Try to cleanup.
 void ShaderSystem::HotReloadShaders()
 {
     debugMenu.AddNotification(L"Shader reload start...");
+
+    std::wstring shaderRecompileMsg = L"Shader reload complete";
 
     //@Todo: can eventually reload shaders based on their last write time.
     //For now it's ok to just reload them all, there aren't too many.
@@ -141,9 +145,63 @@ void ShaderSystem::HotReloadShaders()
         auto writeTime = entry.last_write_time();
     }*/
 
-    CleanUpShaders();
-    CompileAllShadersFromFile();
-    CreateAllShaders();
+    UINT flags = 0;
+#ifdef _DEBUG
+    flags = D3DCOMPILE_SKIP_OPTIMIZATION | D3DCOMPILE_DEBUG;
+#endif
 
-    debugMenu.AddNotification(L"Shader reload complete");
+    std::vector<ShaderItem*> shadersToRecompile;
+
+    for (ShaderItem& shader : shaders)
+    {
+        std::wstring directory = L"Code/Render/Shaders/";
+        directory += shader.filename;
+
+        const char* vsEntry = "VSMain";
+        const char* vsTarget = "vs_5_0";
+        ID3DBlob* vertexCode = CreateShaderFromFile(directory.c_str(), vsEntry, vsTarget);
+        if (vertexCode == nullptr)
+        {
+            shaderRecompileMsg = L"Shader reload failed.";
+            continue;
+        }
+
+        const char* psEntry = "PSMain";
+        const char* psTarget = "ps_5_0";
+        ID3DBlob* pixelCode = CreateShaderFromFile(directory.c_str(), psEntry, psTarget);
+        if (pixelCode == nullptr)
+        {
+            shaderRecompileMsg = L"Shader reload failed.";
+            vertexCode->Release();
+            continue;
+        }
+
+        shader.pixelCode->Release();
+        shader.pixelShader->Release();
+
+        shader.vertexCode->Release();
+        shader.vertexShader->Release();
+
+        shader.vertexCode = vertexCode;
+        shader.pixelCode = pixelCode;
+
+        shadersToRecompile.push_back(&shader);
+    }
+
+    for (ShaderItem* shader : shadersToRecompile)
+    {
+        HR(renderer.device->CreateVertexShader(
+            shader->vertexCode->GetBufferPointer(),
+            shader->vertexCode->GetBufferSize(),
+            nullptr,
+            &shader->vertexShader));
+
+        HR(renderer.device->CreatePixelShader(
+            shader->pixelCode->GetBufferPointer(),
+            shader->pixelCode->GetBufferSize(),
+            nullptr,
+            &shader->pixelShader));
+    }
+
+    debugMenu.AddNotification(shaderRecompileMsg);
 }
