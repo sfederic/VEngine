@@ -134,6 +134,7 @@
     <ClCompile Include="Code\System.cpp" />
     <ClCompile Include="Code\UID.cpp" />
     <ClCompile Include="Code\UI\TimeOfDayWidget.cpp" />
+    <ClCompile Include="Code\VEnum.cpp" />
     <ClCompile Include="Code\VMemory.cpp" />
     <ClCompile Include="Code\VString.cpp" />
     <ClCompile Include="Code\UI\Widget.cpp" />
@@ -321,6 +322,7 @@
     <ClInclude Include="Code\Physics\CollisionLayers.h" />
     <ClInclude Include="Code\UID.h" />
     <ClInclude Include="Code\UI\TimeOfDayWidget.h" />
+    <ClInclude Include="Code\VEnum.h" />
     <ClInclude Include="Code\VMath.h" />
     <ClCompile Include="Code\Physics\Raycast.cpp" />
     <ClInclude Include="Code\Physics\Raycast.h" />
