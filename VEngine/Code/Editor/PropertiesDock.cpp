@@ -23,6 +23,8 @@
 #include "PropertyWidgets/ShaderDataWidget.h"
 #include "PropertyWidgets/MeshComponentDataWidget.h"
 #include "PropertyWidgets/TransformWidget.h"
+#include "PropertyWidgets/VEnumWidget.h"
+#include "VEnum.h"
 #include "Render/Material.h"
 #include "Render/RenderTypes.h"
 
@@ -186,6 +188,12 @@ void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRo
             auto transformWidget = new TransformWidget((Transform*)prop.second.data, this);
             actorPropsGridLayout->addWidget(transformWidget, currentGridRow, propertyDataColumn);
             propertyWidgetsToUpdate.push_back((IPropertyWidget*)transformWidget);
+        }  
+        else if (props.CheckType<VEnum>(name))
+        {
+            auto vEnumWidget = new VEnumWidget(prop.second);
+            actorPropsGridLayout->addWidget(vEnumWidget, currentGridRow, propertyDataColumn);
+            propertyWidgetsToUpdate.push_back((IPropertyWidget*)vEnumWidget);
         }
 
         currentGridRow++;
