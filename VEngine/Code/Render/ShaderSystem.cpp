@@ -1,4 +1,5 @@
 #include "ShaderSystem.h"
+#include <filesystem>
 #include "Debug.h"
 #include "Renderer.h"
 #include "VString.h"
@@ -78,29 +79,23 @@ void ShaderSystem::CreateAllShaders()
     }
 }
 
-//@Todo: come back here and swap all this win32 shit to <filesystem>
 void ShaderSystem::CompileAllShadersFromFile()
 {
-    WIN32_FIND_DATAW data;
-    HANDLE file = FindFirstFileW(L"Code/Render/Shaders/*.hlsl", &data);
-
-    if (file == INVALID_HANDLE_VALUE)
-    {
-        HR(GetLastError());
-    }
-
-    ShaderItem shaderItem;
-
     shaders.clear();
     shaderMap.clear();
 
-    do
-    {
-        shaderItem.filename = data.cFileName;
-        shaders.push_back(shaderItem);
-    } while (FindNextFileW(file, &data) != 0);
+    //File names to check for in directory (Doesn't compile the include (.hlsli) files).
+    std::set<std::string> hlslFilenames = { ".hlsl" };
 
-    FindClose(file);
+    for (auto& entry : std::filesystem::directory_iterator("Code/Render/Shaders/"))
+    {
+        ShaderItem shaderItem = {};
+        if (hlslFilenames.find(entry.path().extension().string()) != hlslFilenames.end())
+        {
+            shaderItem.filename = entry.path().filename();
+            shaders.push_back(shaderItem);
+        }
+    }
 
     UINT flags = 0;
 #ifdef _DEBUG
