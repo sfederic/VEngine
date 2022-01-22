@@ -80,9 +80,15 @@ float4 CalcDiffuse(Light light, float3 L, float3 N)
 
 float4 CalcSpecular(Light light, float3 V, float3 L, float3 N)
 {
-	float3 R = normalize(reflect(-L, N));
-	float RdotV = max(0, dot(R, V));
+	[flatten]
+	if (material.specularPower == 0.0)
+	{
+		float4 zeroSpecular = float4(0.f, 0.f, 0.f, 0.f);
+		return zeroSpecular;
+	}
 
+	float3 R = normalize(reflect(-L, N));
+	float RdotV = max(dot(V, R), 0.0);
 	return light.colour * pow(RdotV, material.specularPower);
 }
 
