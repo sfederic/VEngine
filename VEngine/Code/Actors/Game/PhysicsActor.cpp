@@ -1,19 +1,24 @@
 #include "PhysicsActor.h"
 #include "Components/MeshComponent.h"
+#include "Physics/PhysicsSystem.h"
 #include "Physics/Raycast.h"
 #include "VMath.h"
 
 PhysicsActor::PhysicsActor()
 {
-	gravityVector = -VMath::XMVectorUp();
-	moveVector = gravityVector;
+	//gravityVector = -VMath::XMVectorUp();
+	//moveVector = gravityVector;
 
-	sphereMesh = MeshComponent::system.Add(this, MeshComponent("sphere.fbx", "test.png"));
-	rootComponent = sphereMesh;
+	//sphereMesh = MeshComponent::system.Add(this, MeshComponent("sphere.fbx", "test.png"));
+	//rootComponent = sphereMesh;
+
+	baseMesh = MeshComponent::system.Add(this, MeshComponent("cube.fbx", "test.png"));
+	rootComponent = baseMesh;
 }
 
 void PhysicsActor::Start()
 {
+	physicsSystem.CreateConvexPhysicsMesh(baseMesh, this);
 }
 
 bool PhysicsActor::GoOverAllTris()
@@ -23,7 +28,7 @@ bool PhysicsActor::GoOverAllTris()
 
 	for (auto mesh : MeshComponent::system.components)
 	{
-		if (mesh == sphereMesh)
+		if (mesh == baseMesh)
 		{
 			continue;
 		}
@@ -64,11 +69,11 @@ bool PhysicsActor::GoOverAllTris()
 
 void PhysicsActor::Tick(float deltaTime)
 {
-	GoOverAllTris();
+	//GoOverAllTris();
 
-	auto pos = GetPositionVector();
-	pos += moveVector * (deltaTime);
-	SetPosition(pos);
+	//auto pos = GetPositionVector();
+	//pos += moveVector * (deltaTime);
+	//SetPosition(pos);
 }
 
 Properties PhysicsActor::GetProps()

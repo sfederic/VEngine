@@ -4,12 +4,12 @@
 
 struct MeshComponent;
 
-//Just for rough in-engine physics testing (without PhysX)
+//Just for rough in-engine physics testing
 struct PhysicsActor : Actor
 {
 	ACTOR_SYSTEM(PhysicsActor);
 
-	MeshComponent* sphereMesh = nullptr;
+	MeshComponent* baseMesh = nullptr;
 
 	XMVECTOR gravityVector;
 	XMVECTOR moveVector;
