@@ -72,9 +72,10 @@ void PhysicsSystem::Start()
 			auto dMesh = dynamic_cast<DestructibleMeshComponent*>(mesh);
 			if (dMesh)
 			{
+				physicsSystem.CreatePhysicsForDestructibleMesh(dMesh, actor);
+
 				for (auto cell : dMesh->meshCells)
 				{
-					physicsSystem.CreatePhysicsActor(cell, PhysicsType::Dynamic, actor);
 					dMesh->RemoveChild(cell);
 				}
 			}
@@ -168,41 +169,9 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Ac
 
 void PhysicsSystem::CreatePhysicsForDestructibleMesh(DestructibleMeshComponent* mesh, Actor* actor)
 {
-	std::vector<PxConvexMeshDesc> meshDescs;
-
-	for (auto& meshData : mesh->meshDatas)
+	for (auto cell : mesh->meshCells)
 	{
-		PxConvexMeshDesc convexDesc;
-		convexDesc.points.count = meshData.vertices.size();
-		convexDesc.points.stride = sizeof(XMFLOAT3);
-		convexDesc.points.data = meshData.vertices.data();
-		convexDesc.flags = PxConvexFlag::eCOMPUTE_CONVEX;
-
-		meshDescs.push_back(convexDesc);
-	}
-
-	for (auto& desc : meshDescs)
-	{
-	/*	PxDefaultMemoryOutputStream buf;
-		PxConvexMeshCookingResult::Enum result;
-		if (!cooking->cookConvexMesh(desc, buf, &result)) 
-		{
-			throw new std::exception("Mesh cooking went wrong");
-		}
-
-		PxDefaultMemoryInputData input(buf.getData(), buf.getSize());
-		PxConvexMesh* convexMesh = physics->createConvexMesh(input);*/
-
-		PxTransform pxTransform = {};
-		Transform transform = mesh->transform;
-		ActorToPhysxTransform(transform, pxTransform);
-
-		PxRigidActor* rigidActor = physics->createRigidDynamic(pxTransform);
-		auto box = physics->createShape(PxBoxGeometry(0.2f, 0.2f, 0.2f), *material);
-		rigidActor->attachShape(*box);
-
-		scene->addActor(*rigidActor);
-		rigidActorMap.emplace(mesh->uid, rigidActor);
+		CreateConvexPhysicsMesh(cell, actor);
 	}
 }
 
@@ -232,7 +201,10 @@ void PhysicsSystem::CreateCharacterController(CharacterControllerComponent* char
 
 //PhysX says cooking is fairly intensive with larger meshes
 //https://gameworksdocs.nvidia.com/PhysX/4.1/documentation/physxguide/Manual/Geometry.html#convex-mesh-cooking
-//@Todo: Look into a collision hull workflow with blender, try merge this with destructiblemeshes
+//@Todo: look into cooking it outside of runtime
+
+//@Todo: destructible meshes using convex hulls are exploding out based on how close they're starting too each
+//other. Find a way to make this look better, or tighten the convex for destructible cells.
 void PhysicsSystem::CreateConvexPhysicsMesh(MeshComponent* mesh, Actor* actor)
 {
 	PxConvexMeshDesc convexDesc;
@@ -245,7 +217,7 @@ void PhysicsSystem::CreateConvexPhysicsMesh(MeshComponent* mesh, Actor* actor)
 	PxConvexMeshCookingResult::Enum result;
 	if (!cooking->cookConvexMesh(convexDesc, buf, &result))
 	{
-		throw;
+		throw std::exception("PhysX cooking blew up.");
 	}
 
 	PxDefaultMemoryInputData input(buf.getData(), buf.getSize());
