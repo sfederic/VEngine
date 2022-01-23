@@ -7,6 +7,8 @@ Float4Widget::Float4Widget(XMFLOAT4* value_, QWidget* parent) : QWidget(parent)
 
 	connect(&xSpinbox, &QDoubleSpinBox::editingFinished, this, &Float4Widget::SetValue);
 	connect(&ySpinbox, &QDoubleSpinBox::editingFinished, this, &Float4Widget::SetValue);
+	connect(&zSpinbox, &QDoubleSpinBox::editingFinished, this, &Float4Widget::SetValue);
+	connect(&wSpinbox, &QDoubleSpinBox::editingFinished, this, &Float4Widget::SetValue);
 
 	xSpinbox.setValue(value->x);
 	ySpinbox.setValue(value->y);
