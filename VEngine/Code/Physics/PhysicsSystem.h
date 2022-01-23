@@ -4,6 +4,7 @@
 
 #include <unordered_map>
 #include <foundation/PxTransform.h>
+#include<characterkinematic/PxController.h>
 #include <PxRigidActor.h>
 #include <DirectXMath.h>
 #include "UID.h"
@@ -13,6 +14,7 @@ using namespace DirectX;
 
 struct MeshComponent;
 struct DestructibleMeshComponent;
+struct CharacterControllerComponent;
 struct Transform;
 struct Actor;
 
@@ -37,6 +39,7 @@ struct PhysicsSystem
 
 	void CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Actor* actor);
 	void CreatePhysicsForDestructibleMesh(DestructibleMeshComponent* mesh, Actor* actor);
+	void CreateCharacterController(CharacterControllerComponent* characterControllerComponent);
 	void ActorToPhysxTransform(const Transform& actorTransform, PxTransform& pxTransform);
 	void PhysxToActorTransform(Transform& actorTransform, const PxTransform& pxTransform);
 	void GetTransformFromPhysicsActor(MeshComponent* mesh);

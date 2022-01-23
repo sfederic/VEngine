@@ -1,6 +1,8 @@
 #include "PhysicsSystem.h"
 #include <cassert>
 #include <PxPhysicsAPI.h>
+#include <characterkinematic/PxControllerManager.h>
+#include "Components/CharacterControllerComponent.h"
 #include "Components/MeshComponent.h"
 #include "Components/DestructibleMeshComponent.h"
 #include <PxRigidActor.h>
@@ -20,6 +22,7 @@ PxDefaultCpuDispatcher* dispatcher = nullptr;
 PxScene* scene = nullptr;
 PxMaterial* material = nullptr;
 PxPvd* pvd = nullptr;
+PxControllerManager* controllerManager = nullptr;
 
 void PhysicsSystem::Init()
 {
@@ -50,6 +53,10 @@ void PhysicsSystem::Init()
 
 	//Default material
 	material = physics->createMaterial(0.5f, 0.5f, 0.f);
+
+	//Player capsule controller
+	controllerManager = PxCreateControllerManager(*scene);
+	assert(controllerManager);
 }
 
 //Setup physics actors on gameplay start
@@ -198,6 +205,21 @@ void PhysicsSystem::CreatePhysicsForDestructibleMesh(DestructibleMeshComponent* 
 		scene->addActor(*rigidActor);
 		rigidActorMap.emplace(mesh->uid, rigidActor);
 	}
+}
+
+void PhysicsSystem::CreateCharacterController(CharacterControllerComponent* characterControllerComponent)
+{
+	PxCapsuleControllerDesc desc;
+	desc.height = characterControllerComponent->height;
+	desc.radius = characterControllerComponent->radius;
+
+	auto pos = characterControllerComponent->GetPosition();
+	desc.position.x = pos.x;
+	desc.position.y = pos.y;
+	desc.position.z = pos.z;
+
+	PxController* controller = controllerManager->createController(desc);
+	characterControllerComponent->controller = controller;
 }
 
 void PhysicsSystem::ActorToPhysxTransform(const Transform& actorTransform, PxTransform& pxTransform)
