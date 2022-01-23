@@ -231,6 +231,41 @@ void PhysicsSystem::CreateCharacterController(CharacterControllerComponent* char
 	characterControllerComponent->controller = controller;
 }
 
+void PhysicsSystem::CreateConvexPhysicsMesh(MeshComponent* mesh, Actor* actor)
+{
+	PxConvexMeshDesc convexDesc;
+	convexDesc.points.count = mesh->meshDataProxy->vertices->size();
+	convexDesc.points.stride = sizeof(PxVec3);
+	convexDesc.points.data = mesh->meshDataProxy->vertices->data();
+	convexDesc.flags = PxConvexFlag::eCOMPUTE_CONVEX;
+
+	PxDefaultMemoryOutputStream buf;
+	PxConvexMeshCookingResult::Enum result;
+	if (!cooking->cookConvexMesh(convexDesc, buf, &result))
+	{
+		throw;
+	}
+
+	PxDefaultMemoryInputData input(buf.getData(), buf.getSize());
+	PxConvexMesh* convexMesh = physics->createConvexMesh(input);
+
+	PxTransform pxTransform = {};
+	Transform transform = mesh->transform;
+	ActorToPhysxTransform(transform, pxTransform);
+
+	PxRigidActor* rigidActor = nullptr;
+	rigidActor = physics->createRigidDynamic(pxTransform);
+
+	rigidActor->userData = actor;
+
+	PxShape* convexShape = PxRigidActorExt::createExclusiveShape(*rigidActor,
+		PxConvexMeshGeometry(convexMesh), *material);
+
+	rigidActor->attachShape(*convexShape);
+	scene->addActor(*rigidActor);
+	rigidActorMap.emplace(mesh->uid, rigidActor);
+}
+
 void PhysicsSystem::ActorToPhysxTransform(const Transform& actorTransform, PxTransform& pxTransform)
 {
 	pxTransform.p = PxVec3(actorTransform.position.x,
