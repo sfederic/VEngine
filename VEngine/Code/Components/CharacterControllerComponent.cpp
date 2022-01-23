@@ -32,4 +32,7 @@ void CharacterControllerComponent::Move(XMFLOAT3 displacement, float deltaTime)
 	auto disp = Physics::Float3ToPxVec3(displacement);
 	PxControllerFilters filters;
 	controller->move(disp, 0.0001f, deltaTime, filters);
+
+	auto& controllerPos = controller->getPosition();
+	SetPosition(controllerPos.x, controllerPos.y, controllerPos.z);
 }
