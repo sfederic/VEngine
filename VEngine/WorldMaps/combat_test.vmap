@@ -17,9 +17,9 @@ MeshActor
  Position
 0 -2 0
  Rotation
--0 0 -0 1
+-0 0 -0.258347 0.966052
  Scale
-100 1 100
+10 1 5
 Ambient
 1 1 1 1
 Casts Shadow
@@ -91,11 +91,19 @@ MemoryWeapon
 DialogueTrigger
 0
 DestructibleActor
+0
+TitleScreenActor
+0
+PushableGridActor
+0
+PlayerDialogueTrigger
+0
+PhysicsActor
 1
  Position
-0 0 0
+-3 3 0
  Rotation
--0 0 -0 1
+-0.675718 0 -0 0.73716
  Scale
 1 1 1
 Ambient
@@ -105,9 +113,9 @@ Casts Shadow
 Grid Obstacle
 0
 Mesh
-destructible_cube.fbx
+cube.fbx
 Name
-DestructibleActor0
+PhysicsActor0
 Rast State
 solid
 Shader
@@ -117,11 +125,11 @@ Specular
 Specular Power
 0
 Static
-1
+0
 Texture
 test.png
 UID
-1206036475
+1581261382
 UvOffset
 0 0
 UvOffsetSpeed
@@ -133,11 +141,3 @@ UvRotationSpeed
 UvScale
 1 1
 next
-TitleScreenActor
-0
-PushableGridActor
-0
-PlayerDialogueTrigger
-0
-PhysicsActor
-0

@@ -37,10 +37,16 @@ struct PhysicsSystem
 	void Cleanup();
 	void Reset();
 
+	void ReleasePhysicsActor(MeshComponent* mesh);
+
 	void CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Actor* actor);
 	void CreatePhysicsForDestructibleMesh(DestructibleMeshComponent* mesh, Actor* actor);
 	void CreateCharacterController(CharacterControllerComponent* characterControllerComponent);
 	void CreateConvexPhysicsMesh(MeshComponent* mesh, Actor* actor);
+
+	//"Collision mesh" meaning a rough bounds mesh made in DCC tool. Pass in the mesh you want to 
+	//attach the physics actor to, with the filename being the collision mesh.
+	void CreateConvexPhysicsMeshFromCollisionMesh(MeshComponent* mesh, Actor* actor, const std::string filename);
 
 	void ActorToPhysxTransform(const Transform& actorTransform, PxTransform& pxTransform);
 	void PhysxToActorTransform(Transform& actorTransform, const PxTransform& pxTransform);

@@ -98,7 +98,7 @@ void MeshComponent::Create()
 void MeshComponent::Destroy()
 {
 	//Erase physics actor
-	physicsSystem.rigidActorMap.erase(uid);
+	physicsSystem.ReleasePhysicsActor(this);
 
 	material->Destroy();
 	delete material;

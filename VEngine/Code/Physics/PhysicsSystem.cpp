@@ -7,6 +7,7 @@
 #include "Components/DestructibleMeshComponent.h"
 #include <PxRigidActor.h>
 #include "World.h"
+#include "Asset/FBXLoader.h"
 
 PhysicsSystem physicsSystem;
 
@@ -83,7 +84,7 @@ void PhysicsSystem::Start()
 					dMesh->RemoveChild(cell);
 				}
 			}
-			else
+			else if(!mesh->skipPhysicsCreation)
 			{
 				//@Todo: I don't like doing this and reseting physicssystem on gameplay end. Feels expensive,
 				//but it enables roughly changing actors between static and dynamic when editing.
@@ -137,6 +138,13 @@ void PhysicsSystem::Reset()
 	rigidActorMap.clear();
 }
 
+void PhysicsSystem::ReleasePhysicsActor(MeshComponent* mesh)
+{
+	auto rigid = rigidActorMap[mesh->uid];
+	rigid->release();
+	rigidActorMap.erase(mesh->uid);
+}
+
 void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Actor* actor)
 {
 	PxTransform pxTransform = {};
@@ -168,7 +176,7 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Ac
 	rigidActor->attachShape(*box);
 	scene->addActor(*rigidActor);
 
-	rigidActorMap.emplace(mesh->uid, rigidActor);
+	rigidActorMap.insert(std::make_pair(mesh->uid, rigidActor));
 }
 
 void PhysicsSystem::CreatePhysicsForDestructibleMesh(DestructibleMeshComponent* mesh, Actor* actor)
@@ -233,18 +241,32 @@ void PhysicsSystem::CreateConvexPhysicsMesh(MeshComponent* mesh, Actor* actor)
 
 	PxRigidActor* rigidActor = nullptr;
 	rigidActor = physics->createRigidDynamic(pxTransform);
+	assert(rigidActor);
 
 	rigidActor->userData = actor;
 
 	PxConvexMeshGeometry convexGeom(convexMesh);
 	//This flag here is important. Convex hulls are too loose otherwise for DestructibleMesh cells.
 	convexGeom.meshFlags = PxConvexMeshGeometryFlag::eTIGHT_BOUNDS;
-	PxShape* convexShape = PxRigidActorExt::createExclusiveShape(*rigidActor,
-		convexGeom, *destructibleMaterial);
+	PxRigidActorExt::createExclusiveShape(*rigidActor, convexGeom, *destructibleMaterial);
 
-	rigidActor->attachShape(*convexShape);
 	scene->addActor(*rigidActor);
-	rigidActorMap.emplace(mesh->uid, rigidActor);
+	rigidActorMap.insert(std::make_pair(mesh->uid, rigidActor));
+}
+
+void PhysicsSystem::CreateConvexPhysicsMeshFromCollisionMesh(MeshComponent* mesh,
+	Actor* actor, const std::string filename)
+{
+	auto collisionMesh = new MeshComponent();
+	collisionMesh->transform = actor->GetTransform();
+	//Set the UID to the actual mesh so that the physics actor is connected to the mesh, not the collision mesh.
+	collisionMesh->uid = mesh->uid;
+
+	fbxLoader.Import(filename, collisionMesh->meshDataProxy);
+
+	CreateConvexPhysicsMesh(collisionMesh, actor);
+
+	delete collisionMesh;
 }
 
 void PhysicsSystem::ActorToPhysxTransform(const Transform& actorTransform, PxTransform& pxTransform)

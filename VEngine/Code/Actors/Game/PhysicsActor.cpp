@@ -13,12 +13,13 @@ PhysicsActor::PhysicsActor()
 	//rootComponent = sphereMesh;
 
 	baseMesh = MeshComponent::system.Add(this, MeshComponent("cube.fbx", "test.png"));
+	baseMesh->skipPhysicsCreation = true;
 	rootComponent = baseMesh;
 }
 
 void PhysicsActor::Start()
 {
-	physicsSystem.CreateConvexPhysicsMesh(baseMesh, this);
+	physicsSystem.CreateConvexPhysicsMeshFromCollisionMesh(baseMesh, this, "hull_cube.fbx");
 }
 
 bool PhysicsActor::GoOverAllTris()

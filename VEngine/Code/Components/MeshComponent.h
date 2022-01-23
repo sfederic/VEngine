@@ -35,6 +35,8 @@ struct MeshComponent : SpatialComponent
 	//whether the mesh is moved by physics system
 	bool isStatic = true;
 
+	bool skipPhysicsCreation = false;
+
 	//whether nodes that spawn on this mesh are set as inactive
 	bool gridObstacle = false;
 
