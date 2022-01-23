@@ -8,7 +8,8 @@
 // 4. FBXLoader::ImportFracturedMesh() is only working with meshes that have no children in the fbx
 //Ref: https://80.lv/articles/creating-a-destructible-object-in-unreal-engine-4-blender/
 
-//@Todo: destructible meshes are "working", but not well. Maybe come back and fix it all up later.
+//@Todo: destructible meshes are "working", but they blow up outwards, probably because of tight
+//intersecting convex bounds. Find a way to dull it or tighten the hulls.
 
 struct DestructibleMeshComponent : MeshComponent
 {
