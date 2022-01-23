@@ -5,39 +5,31 @@ GridActor
 AudioActor
 0
 Player
+0
+Unit
+0
+EntranceTrigger
+0
+NPC
+0
+MeshActor
 1
  Position
-0 0 1
+0 -2 0
  Rotation
 -0 0 -0 1
  Scale
-1 1 1
+100 1 100
 Ambient
 1 1 1 1
-Audio Filename
-step.wav
 Casts Shadow
 1
-FOV
-60
-Far Z
-1000
-File
-
 Grid Obstacle
 0
-Loop
-1
 Mesh
-character_test.fbx
+cube.fbx
 Name
-Player0
-Near Z
-0.01
-Pitch
-1
-Play On Start
-1
+MeshActor0
 Rast State
 solid
 Shader
@@ -51,62 +43,7 @@ Static
 Texture
 test.png
 UID
-32892026
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-Volume
-1
-height
-2
-radius
-1
-next
-Unit
-0
-EntranceTrigger
-0
-NPC
-0
-MeshActor
-1
- Position
-2 -0.5 3
- Rotation
--0 0 -0 1
- Scale
-5 1 5
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Grid Obstacle
-0
-Mesh
-node.fbx
-Name
-node0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Specular
-1 1 1 1
-Specular Power
-0
-Static
-1
-Texture
-dock.jpg
-UID
-1288969712
+1004295522
 UvOffset
 0 0
 UvOffsetSpeed
@@ -154,7 +91,48 @@ MemoryWeapon
 DialogueTrigger
 0
 DestructibleActor
+1
+ Position
+0 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Casts Shadow
+1
+Grid Obstacle
 0
+Mesh
+destructible_cube.fbx
+Name
+DestructibleActor0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UID
+1206036475
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
 TitleScreenActor
 0
 PushableGridActor
