@@ -4,6 +4,8 @@
 #include <characterkinematic/PxController.h>
 
 //Component creates a Character Controller through PhysX
+//The component 'works' but isn't needed currently. If the engine starts using PhysX more
+//in non-grid projects, then use this for movement.
 struct CharacterControllerComponent : SpatialComponent
 {
 	COMPONENT_SYSTEM(CharacterControllerComponent);
