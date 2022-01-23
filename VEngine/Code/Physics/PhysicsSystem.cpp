@@ -21,6 +21,7 @@ PxCooking* cooking = nullptr;
 PxDefaultCpuDispatcher* dispatcher = nullptr;
 PxScene* scene = nullptr;
 PxMaterial* material = nullptr;
+PxMaterial* destructibleMaterial = nullptr;
 PxPvd* pvd = nullptr;
 PxControllerManager* controllerManager = nullptr;
 
@@ -53,6 +54,9 @@ void PhysicsSystem::Init()
 
 	//Default material
 	material = physics->createMaterial(0.5f, 0.5f, 0.f);
+
+	//Destructible material
+	destructibleMaterial = physics->createMaterial(0.f, 0.f, 0.f);
 	
 	//Player capsule controller
 	controllerManager = PxCreateControllerManager(*scene);
@@ -232,8 +236,11 @@ void PhysicsSystem::CreateConvexPhysicsMesh(MeshComponent* mesh, Actor* actor)
 
 	rigidActor->userData = actor;
 
+	PxConvexMeshGeometry convexGeom(convexMesh);
+	//This flag here is important. Convex hulls are too loose otherwise for DestructibleMesh cells.
+	convexGeom.meshFlags = PxConvexMeshGeometryFlag::eTIGHT_BOUNDS;
 	PxShape* convexShape = PxRigidActorExt::createExclusiveShape(*rigidActor,
-		PxConvexMeshGeometry(convexMesh), *material);
+		convexGeom, *destructibleMaterial);
 
 	rigidActor->attachShape(*convexShape);
 	scene->addActor(*rigidActor);
