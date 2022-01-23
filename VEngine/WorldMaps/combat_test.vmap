@@ -1,48 +1,5 @@
 Grid
-1
- Position
-0 0 0
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Grid Obstacle
 0
-Mesh
-node.fbx
-Name
-Grid0
-Rast State
-solid
-Shader
-InstanceShader.hlsl
-Size X
-9
-Size Y
-9
-Static
-1
-Texture
-test.png
-UID
-267282136
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-startBattleOnLoad
-0
-next
 GridActor
 0
 AudioActor
@@ -50,9 +7,9 @@ AudioActor
 Player
 1
  Position
-2 0 1
+0 0 1
  Rotation
--0 -5.96046e-08 -0 1
+-0 0 -0 1
  Scale
 1 1 1
 Ambient
@@ -85,12 +42,16 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
 test.png
 UID
-1604418507
+32892026
 UvOffset
 0 0
 UvOffsetSpeed
@@ -102,7 +63,11 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
-0
+1
+height
+2
+radius
+1
 next
 Unit
 0
@@ -113,11 +78,11 @@ NPC
 MeshActor
 1
  Position
-4 -0.5 4
+2 -0.5 3
  Rotation
 -0 0 -0 1
  Scale
-9 1 9
+5 1 5
 Ambient
 1 1 1 1
 Casts Shadow
@@ -132,6 +97,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -179,34 +148,7 @@ Billboard
 InteractTrigger
 0
 ParticleSystem
-1
- Position
-1 0 4
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Direction
-0 1 0
-Lifetime
-1 1.5
-Move Speed
-1 1.7
-Name
-ParticleSystem0
-Rotate
--45 45
-Rotate Speed
-2 2
-Spawn Radius
--1 1
-Spawn Rate
-0.2 0.4
-Texture
-smoke.png
-UID
-2250459049
-next
+0
 MemoryWeapon
 0
 DialogueTrigger
@@ -218,4 +160,6 @@ TitleScreenActor
 PushableGridActor
 0
 PlayerDialogueTrigger
+0
+PhysicsActor
 0
