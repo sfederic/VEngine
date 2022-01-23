@@ -4,7 +4,7 @@
 
 #include <unordered_map>
 #include <foundation/PxTransform.h>
-#include<characterkinematic/PxController.h>
+#include <characterkinematic/PxController.h>
 #include <PxRigidActor.h>
 #include <DirectXMath.h>
 #include "UID.h"

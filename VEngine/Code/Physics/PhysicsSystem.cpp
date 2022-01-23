@@ -132,9 +132,6 @@ void PhysicsSystem::Reset()
 	rigidActorMap.clear();
 }
 
-//@Todo: for now, createphysicsactor functions are just using AABB boxes based on the DirectXMath bounding 
-//volume vars. See if it's worth cooking collision hulls and how that weighs up with raycasting in Physx.
-//Probably ok for grid games. VagrantTactics needs it more than collision hulls.
 void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Actor* actor)
 {
 	PxTransform pxTransform = {};
@@ -157,13 +154,15 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Ac
 	//Set actor as user data
 	rigidActor->userData = actor;
 
-	XMFLOAT3 extents = mesh->boundingBox.Extents;
+	XMVECTOR extentsVector = XMLoadFloat3(&mesh->boundingBox.Extents) * mesh->GetScaleV();
+	XMFLOAT3 extents;
+	XMStoreFloat3(&extents, extentsVector);
 	NormaliseExtents(extents.x, extents.y, extents.z);
 	PxShape* box = physics->createShape(PxBoxGeometry(extents.x, extents.y, extents.z), *material);
 
 	rigidActor->attachShape(*box);
 	scene->addActor(*rigidActor);
-	
+
 	rigidActorMap.emplace(mesh->uid, rigidActor);
 }
 
@@ -231,6 +230,9 @@ void PhysicsSystem::CreateCharacterController(CharacterControllerComponent* char
 	characterControllerComponent->controller = controller;
 }
 
+//PhysX says cooking is fairly intensive with larger meshes
+//https://gameworksdocs.nvidia.com/PhysX/4.1/documentation/physxguide/Manual/Geometry.html#convex-mesh-cooking
+//@Todo: Look into a collision hull workflow with blender, try merge this with destructiblemeshes
 void PhysicsSystem::CreateConvexPhysicsMesh(MeshComponent* mesh, Actor* actor)
 {
 	PxConvexMeshDesc convexDesc;
