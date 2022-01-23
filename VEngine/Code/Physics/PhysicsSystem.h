@@ -69,4 +69,5 @@ namespace Physics
 	bool BoxCast(XMFLOAT3 extents, XMFLOAT3 origin, XMFLOAT3 direction, float distance, RaycastHit& hit);
 
 	PxVec3 Float3ToPxVec3(XMFLOAT3 float3);
+	XMFLOAT3 PxVec3ToFloat3(PxVec3 pxVec3);
 }

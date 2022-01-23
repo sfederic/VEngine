@@ -284,6 +284,11 @@ PxVec3 Physics::Float3ToPxVec3(XMFLOAT3 float3)
 	return PxVec3(float3.x, float3.y, float3.z);
 }
 
+XMFLOAT3 Physics::PxVec3ToFloat3(PxVec3 pxVec3)
+{
+	return XMFLOAT3(pxVec3.x, pxVec3.y, pxVec3.z);
+}
+
 bool Physics::BoxCast(XMFLOAT3 extents, XMFLOAT3 origin, XMFLOAT3 direction, float distance, RaycastHit& hit)
 {
 	PxVec3 pxExtents = Physics::Float3ToPxVec3(extents);
