@@ -53,7 +53,7 @@ void PhysicsSystem::Init()
 
 	//Default material
 	material = physics->createMaterial(0.5f, 0.5f, 0.f);
-
+	
 	//Player capsule controller
 	controllerManager = PxCreateControllerManager(*scene);
 	assert(controllerManager);
@@ -209,9 +209,16 @@ void PhysicsSystem::CreatePhysicsForDestructibleMesh(DestructibleMeshComponent* 
 
 void PhysicsSystem::CreateCharacterController(CharacterControllerComponent* characterControllerComponent)
 {
-	PxCapsuleControllerDesc desc;
+	PxCapsuleControllerDesc desc = {};
 	desc.height = characterControllerComponent->height;
 	desc.radius = characterControllerComponent->radius;
+	desc.stepOffset = 0.3f;
+	desc.volumeGrowth = 1.9f;
+	desc.slopeLimit = cosf(XMConvertToRadians(15.f));
+	desc.nonWalkableMode = PxControllerNonWalkableMode::ePREVENT_CLIMBING_AND_FORCE_SLIDING;
+	desc.contactOffset = 0.5f;
+	desc.upDirection = PxVec3(0.f, 1.f, 0.f);
+	desc.material = material;
 
 	auto pos = characterControllerComponent->GetPosition();
 	desc.position.x = pos.x;
@@ -219,6 +226,8 @@ void PhysicsSystem::CreateCharacterController(CharacterControllerComponent* char
 	desc.position.z = pos.z;
 
 	PxController* controller = controllerManager->createController(desc);
+	assert(controller);
+
 	characterControllerComponent->controller = controller;
 }
 
