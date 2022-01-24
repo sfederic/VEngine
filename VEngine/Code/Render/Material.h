@@ -50,7 +50,7 @@ struct Material
 	TextureData textureData;
 	ShaderData shaderData;
 
-	std::string rastStateName = "solid";
+	std::string rastStateName = RastStateNames::solid;
 
 	Material();
 	Material(std::string textureFilename_, std::string shaderFilename_);

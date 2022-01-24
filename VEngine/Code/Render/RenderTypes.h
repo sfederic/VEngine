@@ -29,6 +29,11 @@ struct RastStateNames
 	inline static const std::string shadow = "shadow";
 };
 
+struct BlendStateNames
+{
+	inline static const std::string Default = "default";
+};
+
 struct Line
 {
 	XMFLOAT3 p1;
