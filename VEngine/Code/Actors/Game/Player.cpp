@@ -241,7 +241,7 @@ void Player::MovementInput(float deltaTime)
 
 	SetPosition(VMath::VectorConstantLerp(GetPositionVector(), nextPos, deltaTime, moveSpeed));
 
-	if (XMVector4Equal(GetPositionVector(), nextPos) && XMQuaternionEqual(GetRotationVector(), nextRot))
+	if (CheckIfPlayerMovementAndRotationStopped())
 	{
 		if (stepSoundsVolume > 0.f) { stepSoundsVolume -= deltaTime * 4.f; }
 		stepSounds->volume = stepSoundsVolume;
@@ -300,7 +300,7 @@ void Player::RotationInput(float deltaTime)
 
 	SetRotation(VMath::QuatConstantLerp(GetRotationVector(), nextRot, deltaTime, rotSpeed));
 
-	if (XMQuaternionEqual(GetRotationVector(), nextRot) && XMVector4Equal(GetPositionVector(), nextPos))
+	if (CheckIfPlayerMovementAndRotationStopped())
 	{
 		if (Input::GetKeyUp(Keys::Right))
 		{
