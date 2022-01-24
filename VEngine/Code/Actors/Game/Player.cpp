@@ -22,6 +22,7 @@
 #include "UI/MemoryGainedWidget.h"
 #include "UI/MemoryRecalledWidget.h"
 #include "UI/TimeOfDayWidget.h"
+#include "UI/BulletWidget.h"
 #include "UI/GuardWidget.h"
 #include "UI/PlayerHealthWidget.h"
 #include "Gameplay/GameInstance.h"
@@ -75,6 +76,9 @@ void Player::Start()
 
 	healthWidget = CreateWidget<PlayerHealthWidget>();
 	healthWidget->healthPoints = healthPoints;
+
+	bulletWidget = CreateWidget<BulletWidget>();
+	bulletWidget->AddToViewport();
 
 	nextPos = GetPositionVector();
 	nextRot = GetRotationVector();
