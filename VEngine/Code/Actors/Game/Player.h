@@ -113,4 +113,5 @@ private:
 	bool CombatInteractCheck(Actor* actorToCheck);
 	bool InteractCheck(Actor* hitActor);
 	bool DestructibleCheck(Actor* hitActor);
+	bool GunShotCheck(Actor* hitActor);
 };

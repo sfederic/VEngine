@@ -7,8 +7,13 @@ struct MemoryActor : GridActor
 {
 	ACTOR_SYSTEM(MemoryActor);
 
+	//The memory to instantiate the object
+	std::string memoryName;
+
 	MemoryActor();
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
+
+	virtual void Interact() override;
 };

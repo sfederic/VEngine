@@ -418,6 +418,7 @@ void Player::PrimaryAction()
 		}
 
 		Ray ray(this);
+		Ray gunRay(this);
 		auto meshForward = mesh->GetForwardVectorV();
 		if (Raycast(ray, GetPositionVector(), meshForward, 1.5f))
 		{
@@ -427,6 +428,10 @@ void Player::PrimaryAction()
 			if (DialogueCheck(ray.hitActor)) {}
 			else if (QuickTalkCheck(ray.hitActor)) {}
 			else if (InteractCheck(ray.hitActor)) {}
+		}
+		else if (Raycast(gunRay, GetPositionVector(), meshForward, 10.f)) //Gun check
+		{
+			GunShotCheck(ray.hitActor);
 		}
 		else
 		{
@@ -443,23 +448,6 @@ void Player::SecondaryAction()
 {
 	if (Input::GetKeyUp(Keys::Up))
 	{
-		if (gunModeOn)
-		{
-			if (numBullets > 0)
-			{
-				GameUtils::PlayAudioOneShot("gunshot.wav");
-				numBullets--;
-				bulletWidget->numBulletsPlayerHas = numBullets;
-			}
-			else
-			{
-				GameUtils::PlayAudioOneShot("gun_no_ammo.wav");
-			}
-		}
-	}
-
-	/*if (Input::GetKeyUp(Keys::Up))
-	{
 		Ray ray(this);
 		auto meshForward = mesh->GetForwardVectorV();
 		if (Raycast(ray, GetPositionVector(), meshForward, 1.5f))
@@ -468,7 +456,7 @@ void Player::SecondaryAction()
 
 			if (CombatInteractCheck(ray.hitActor)) {}
 		}
-	}*/
+	}
 }
 
 void Player::ToggleMemoryMenu()
@@ -729,6 +717,32 @@ bool Player::DestructibleCheck(Actor* hitActor)
 		{
 			gridActor->InflictDamage(1);
 			GameUtils::PlayAudioOneShot("sword_hit.wav");
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool Player::GunShotCheck(Actor* hitActor)
+{
+	if (isWeaponDrawn && !inConversation)
+	{
+		auto unit = dynamic_cast<Unit*>(hitActor);
+		if (unit)
+		{
+			battleSystem.StartBattle();
+			ExpendActionPoints(1);
+			unit->InflictDamage(1);
+			GameUtils::PlayAudioOneShot("gunshot.wav");
+			return true;
+		}
+
+		auto gridActor = dynamic_cast<GridActor*>(hitActor);
+		if (gridActor)
+		{
+			gridActor->InflictDamage(1);
+			GameUtils::PlayAudioOneShot("gunshot.wav");
 			return true;
 		}
 	}
