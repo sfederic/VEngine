@@ -50,5 +50,7 @@ struct MeshComponent : SpatialComponent
 	virtual void Destroy() override;
 	virtual Properties GetProps();
 
+	//Material set functions
 	void SetRastState(const std::string newRastStateName);
+	void SetShaderName(const std::string newShaderName);
 };
