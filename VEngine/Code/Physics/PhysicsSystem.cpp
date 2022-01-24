@@ -141,7 +141,10 @@ void PhysicsSystem::Reset()
 void PhysicsSystem::ReleasePhysicsActor(MeshComponent* mesh)
 {
 	auto rigid = rigidActorMap[mesh->uid];
-	rigid->release();
+	if (rigid)
+	{
+		rigid->release();
+	}
 	rigidActorMap.erase(mesh->uid);
 }
 
