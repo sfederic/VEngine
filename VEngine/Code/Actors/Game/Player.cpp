@@ -96,6 +96,26 @@ void Player::Tick(float deltaTime)
 		GameUtils::TriggerGameOver();
 	}
 
+	//Show gun range tiles
+	if (gunModeOn && CheckIfPlayerMovementAndRotationStopped())
+	{
+		auto meshForward = GetMeshForward();
+		auto grid = GameUtils::GetGrid();
+		auto currentNode = GetCurrentNode();
+
+		for (int i = 0; i < 5; i++)
+		{
+			int nextXIndex = xIndex + (i * meshForward.m128_f32[0]);
+			int nextYIndex = yIndex + (i * meshForward.m128_f32[2]);
+
+			if (nextXIndex >= grid->sizeX || nextXIndex < 0) break;
+			if (nextYIndex >= grid->sizeY || nextYIndex < 0) break;
+
+			auto nextNode = grid->GetNode(nextXIndex, nextYIndex);
+			nextNode->SetColour(GridNode::previewColour);
+		}
+	}
+
 	ToggleBattleGrid();
 	ToggleMemoryMenu();
 
@@ -299,6 +319,13 @@ void Player::ToggleBattleGrid()
 {
 	if (Input::GetKeyUp(Keys::Space))
 	{
+		//switch weapons if battle is active
+		if (battleSystem.isBattleActive)
+		{
+			gunModeOn = !gunModeOn;
+			return;
+		}
+
 		isWeaponDrawn = !isWeaponDrawn;
 
 		//toggle grid
@@ -536,6 +563,11 @@ void Player::SpawnMemoryAsObject()
 			Log("Memory Spawn: [%s] doesn't exist in player's memories.", memoryNameToSpawn.c_str());
 		}
 	}
+}
+
+bool Player::CheckIfPlayerMovementAndRotationStopped()
+{
+	return XMVector4Equal(GetPositionVector(), nextPos) && XMQuaternionEqual(GetRotationVector(), nextRot);
 }
 
 bool Player::DialogueCheck(Actor* hitActor)

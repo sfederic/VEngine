@@ -69,6 +69,8 @@ struct Player : Actor
 	bool guarding = false;
 	bool gameOver = false;
 
+	bool gunModeOn = true;
+
 	Player();
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
@@ -102,6 +104,8 @@ private:
 	void LerpPlayerCameraFOV(float deltaTime);
 	void CheckNextMoveNode(XMVECTOR previousPos);
 	void SpawnMemoryAsObject();
+
+	bool CheckIfPlayerMovementAndRotationStopped();
 
 	//PrimaryAction actor check functions
 	bool DialogueCheck(Actor* hitActor);
