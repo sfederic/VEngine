@@ -565,6 +565,7 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 
 void Player::SpawnMemoryAsObject()
 {
+	//@Todo: want to keep this sort of logic for a different mechanic. come back to it.
 	/*if (Input::GetKeyUp(Keys::Up))
 	{
 		if (GameUtils::CheckIfMemoryExists(memoryNameToSpawn))
