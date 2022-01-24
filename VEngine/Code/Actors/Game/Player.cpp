@@ -79,6 +79,7 @@ void Player::Start()
 
 	bulletWidget = CreateWidget<BulletWidget>();
 	bulletWidget->AddToViewport();
+	bulletWidget->numBulletsPlayerHas = numBullets;
 
 	nextPos = GetPositionVector();
 	nextRot = GetRotationVector();
@@ -101,7 +102,8 @@ void Player::Tick(float deltaTime)
 	}
 
 	//Show gun range tiles
-	if (gunModeOn && CheckIfPlayerMovementAndRotationStopped())
+	//@Todo: see if gun range should be a thing
+	/*if (gunModeOn && CheckIfPlayerMovementAndRotationStopped())
 	{
 		auto meshForward = GetMeshForward();
 		auto grid = GameUtils::GetGrid();
@@ -118,7 +120,7 @@ void Player::Tick(float deltaTime)
 			auto nextNode = grid->GetNode(nextXIndex, nextYIndex);
 			nextNode->SetColour(GridNode::previewColour);
 		}
-	}
+	}*/
 
 	ToggleBattleGrid();
 	ToggleMemoryMenu();
@@ -446,6 +448,23 @@ void Player::SecondaryAction()
 {
 	if (Input::GetKeyUp(Keys::Up))
 	{
+		if (gunModeOn)
+		{
+			if (numBullets > 0)
+			{
+				GameUtils::PlayAudioOneShot("gunshot.wav");
+				numBullets--;
+				bulletWidget->numBulletsPlayerHas = numBullets;
+			}
+			else
+			{
+				GameUtils::PlayAudioOneShot("gun_no_ammo.wav");
+			}
+		}
+	}
+
+	/*if (Input::GetKeyUp(Keys::Up))
+	{
 		Ray ray(this);
 		auto meshForward = mesh->GetForwardVectorV();
 		if (Raycast(ray, GetPositionVector(), meshForward, 1.5f))
@@ -454,7 +473,7 @@ void Player::SecondaryAction()
 
 			if (CombatInteractCheck(ray.hitActor)) {}
 		}
-	}
+	}*/
 }
 
 void Player::ToggleMemoryMenu()
@@ -546,7 +565,7 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 
 void Player::SpawnMemoryAsObject()
 {
-	if (Input::GetKeyUp(Keys::Up))
+	/*if (Input::GetKeyUp(Keys::Up))
 	{
 		if (GameUtils::CheckIfMemoryExists(memoryNameToSpawn))
 		{
@@ -566,7 +585,7 @@ void Player::SpawnMemoryAsObject()
 		{
 			Log("Memory Spawn: [%s] doesn't exist in player's memories.", memoryNameToSpawn.c_str());
 		}
-	}
+	}*/
 }
 
 bool Player::CheckIfPlayerMovementAndRotationStopped()

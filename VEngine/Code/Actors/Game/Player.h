@@ -52,6 +52,7 @@ struct Player : Actor
 
 	int actionPoints = 10;
 	int healthPoints = 3;
+	int numBullets = 2;
 
 	int xIndex = -1;
 	int yIndex = -1;
