@@ -113,6 +113,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\UI\BulletWidget.cpp" />
     <ClCompile Include="Code\Components\CharacterControllerComponent.cpp" />
     <ClCompile Include="Code\Gameplay\BattleSystem.cpp" />
     <ClCompile Include="Code\Actors\AudioActor.cpp" />
@@ -217,6 +218,7 @@
     <ClCompile Include="Code\Package.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\VEnumWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\PhysicsActor.cpp" />
+    <ClInclude Include="Code\UI\BulletWidget.h" />
     <ClInclude Include="Code\Components\CharacterControllerComponent.h" />
     <ClInclude Include="Code\Editor\ActorTreeWidget.h" />
     <ClInclude Include="Code\Gameplay\BattleSystem.h" />
