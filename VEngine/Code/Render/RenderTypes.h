@@ -21,6 +21,14 @@ struct Vertex
 	uint32_t boneIndices[4];
 };
 
+struct RastStateNames
+{
+	inline static const std::string solid = "solid";
+	inline static const std::string noBackCull = "nobackcull";
+	inline static const std::string wireframe = "wirefrmae";
+	inline static const std::string shadow = "shadow";
+};
+
 struct Line
 {
 	XMFLOAT3 p1;
