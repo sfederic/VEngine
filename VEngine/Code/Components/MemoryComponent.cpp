@@ -5,7 +5,6 @@
 #include "VString.h"
 #include "World.h"
 #include "Gameplay/Memory.h"
-#include "Gameplay/WeaponMemory.h"
 #include "Gameplay/ConditionSystem.h"
 #include "Timer.h"
 #include "UI/MemoryGainedWidget.h"
@@ -13,7 +12,6 @@
 #include "Audio/AudioSystem.h"
 #include "Components/MeshComponent.h"
 #include "Actors/IActorSystem.h"
-#include "Actors/Game/MemoryWeapon.h"
 
 MemoryComponent::MemoryComponent()
 {
@@ -50,21 +48,7 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 
 	auto owner = world.GetActorByName(actorAquiredFromName);
 
-	Memory* memory = nullptr;
-
-	//Check if connected actor is a MemoryWeapon
-	auto memoryWeapon = dynamic_cast<MemoryWeapon*>(owner);
-	if (memoryWeapon)
-	{
-		memory = new WeaponMemory();
-		auto weaponMemory = dynamic_cast<WeaponMemory*>(memory);
-		//Copy weapon data over to memory
-		weaponMemory->weaponData = memoryWeapon->weaponData;
-	}
-	else
-	{
-		memory = new Memory();
-	}
+	auto memory = new Memory();
 
 	memory->name = VString::wstos(memoryName);
 	memory->description = VString::wstos(memoryDescription);

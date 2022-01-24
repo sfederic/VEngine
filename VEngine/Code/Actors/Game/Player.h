@@ -1,8 +1,6 @@
 #pragma once
 #include "../Actor.h"
 #include "../ActorSystem.h"
-#include "Gameplay/WeaponData.h"
-#include <array>
 
 struct MeshComponent;
 struct CameraComponent;
@@ -13,7 +11,6 @@ struct AudioComponent;
 struct InteractWidget;
 struct MemoryMenuWidget;
 struct PlayerActionBarWidget;
-struct WeaponDisplayWidget;
 struct PlayerHealthWidget;
 struct GuardWidget;
 struct Memory;
@@ -46,16 +43,12 @@ struct Player : Actor
 	PlayerActionBarWidget* actionBarWidget = nullptr;
 	GuardWidget* guardWidget = nullptr;
 	PlayerHealthWidget* healthWidget = nullptr;
-	WeaponDisplayWidget* weaponDisplayWidget = nullptr;
 
 	XMVECTOR nextPos;
 	XMVECTOR nextRot;
 
 	//Name of the memory selected in MemoryMenuWidget to spawn into world
 	std::string memoryNameToSpawn;
-
-	std::array<WeaponData, 3> weapons;
-	WeaponData* activeWeapon = nullptr;
 
 	int actionPoints = 10;
 	int healthPoints = 3;
@@ -109,7 +102,6 @@ private:
 	void LerpPlayerCameraFOV(float deltaTime);
 	void CheckNextMoveNode(XMVECTOR previousPos);
 	void SpawnMemoryAsObject();
-	void SelectWeaponInput();
 
 	//PrimaryAction actor check functions
 	bool DialogueCheck(Actor* hitActor);

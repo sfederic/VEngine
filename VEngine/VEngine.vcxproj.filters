@@ -461,12 +461,6 @@
     <ClCompile Include="Code\Actors\Game\PlayerDialogueTrigger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\MemoryWeapon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\UI\WeaponDisplayWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Package.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -890,18 +884,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\PlayerDialogueTrigger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\MemoryWeapon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Gameplay\WeaponMemory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Gameplay\WeaponData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\WeaponDisplayWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\VEnum.h">

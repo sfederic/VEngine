@@ -23,7 +23,6 @@
 #include "UI/MemoryRecalledWidget.h"
 #include "UI/TimeOfDayWidget.h"
 #include "UI/GuardWidget.h"
-#include "UI/WeaponDisplayWidget.h"
 #include "UI/PlayerHealthWidget.h"
 #include "Gameplay/GameInstance.h"
 #include "Log.h"
@@ -57,24 +56,6 @@ Player::Player()
 	stepSounds->loop = true;
 	stepSounds->audioFilename = "step.wav";
 	stepSounds->playOnStart = true;
-
-	//Set up weapon testing data
-	weapons[0].name = "sword";
-	weapons[0].attackPoints = 1;
-	weapons[0].energyCost = 1;
-	weapons[0].weight = 1;
-
-	weapons[1].name = "Spear";
-	weapons[1].attackPoints = 3;
-	weapons[1].energyCost = 3;
-	weapons[1].weight = 2;
-
-	weapons[2].name = "Shield";
-	weapons[2].attackPoints = 0;
-	weapons[2].energyCost = 1;
-	weapons[2].weight = 2;
-
-	activeWeapon = &weapons[0];
 }
 
 void Player::Start()
@@ -89,9 +70,6 @@ void Player::Start()
 	actionBarWidget->actionPoints = actionPoints;
 
 	CreateWidget<TimeOfDayWidget>()->AddToViewport();
-
-	weaponDisplayWidget = CreateWidget<WeaponDisplayWidget>();
-	weaponDisplayWidget->AddToViewport();
 
 	guardWidget = CreateWidget<GuardWidget>();
 
@@ -123,8 +101,6 @@ void Player::Tick(float deltaTime)
 
 	PrimaryAction();
 	SecondaryAction();
-
-	SelectWeaponInput();
 
 	SpawnMemoryAsObject();
 
@@ -206,7 +182,7 @@ void Player::Guard()
 		guarding = true;
 		guardWidget->guardSuccessful = true;
 
-		ExpendActionPoints(activeWeapon->energyCost);
+		ExpendActionPoints(1);
 
 		GameUtils::PlayAudioOneShot("equip.wav");
 	}
@@ -533,7 +509,7 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 
 	if (battleSystem.isBattleActive)
 	{
-		ExpendActionPoints(activeWeapon->weight);
+		ExpendActionPoints(1);
 	}
 }
 
@@ -559,22 +535,6 @@ void Player::SpawnMemoryAsObject()
 		{
 			Log("Memory Spawn: [%s] doesn't exist in player's memories.", memoryNameToSpawn.c_str());
 		}
-	}
-}
-
-void Player::SelectWeaponInput()
-{
-	if (Input::GetKeyUp(Keys::_1))
-	{
-		activeWeapon = &weapons[0];
-	}
-	else if (Input::GetKeyUp(Keys::_2))
-	{
-		activeWeapon = &weapons[1];
-	}
-	else if (Input::GetKeyUp(Keys::_3))
-	{
-		activeWeapon = &weapons[2];
 	}
 }
 
@@ -707,8 +667,8 @@ bool Player::DestructibleCheck(Actor* hitActor)
 		if (unit)
 		{
 			battleSystem.StartBattle();
-			ExpendActionPoints(activeWeapon->energyCost);
-			unit->InflictDamage(activeWeapon->attackPoints);
+			ExpendActionPoints(1);
+			unit->InflictDamage(1);
 			GameUtils::PlayAudioOneShot("sword_hit.wav");
 			return true;
 		}
@@ -716,7 +676,7 @@ bool Player::DestructibleCheck(Actor* hitActor)
 		auto gridActor = dynamic_cast<GridActor*>(hitActor);
 		if (gridActor)
 		{
-			gridActor->InflictDamage(activeWeapon->attackPoints);
+			gridActor->InflictDamage(1);
 			GameUtils::PlayAudioOneShot("sword_hit.wav");
 			return true;
 		}
