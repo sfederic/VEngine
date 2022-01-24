@@ -141,3 +141,8 @@ void MeshComponent::SetShaderName(const std::string newShaderName)
 {
 	material->shaderData.filename = newShaderName;
 }
+
+void MeshComponent::SetBlendState(const std::string newBlendState)
+{
+	material->blendState = renderer.blendStateMap[newBlendState];
+}
