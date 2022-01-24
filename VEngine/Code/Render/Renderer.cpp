@@ -219,7 +219,7 @@ void Renderer::CreateRasterizerStates()
 	//SOLID
 	{
 		HR(device->CreateRasterizerState(&rastDesc, &rastStateSolid));
-		RastState* rs = new RastState("solid", rastDesc, rastStateSolid);
+		RastState* rs = new RastState(RastStateNames::solid, rastDesc, rastStateSolid);
 		rastStateMap[rs->name] = rs;
 	}
 
@@ -228,7 +228,7 @@ void Renderer::CreateRasterizerStates()
 		rastDesc.FillMode = D3D11_FILL_WIREFRAME;
 		rastDesc.CullMode = D3D11_CULL_NONE;
 		HR(device->CreateRasterizerState(&rastDesc, &rastStateWireframe));
-		RastState* rs = new RastState("wireframe", rastDesc, rastStateWireframe);
+		RastState* rs = new RastState(RastStateNames::wireframe, rastDesc, rastStateWireframe);
 		rastStateMap[rs->name] = rs;
 	}
 
@@ -237,7 +237,7 @@ void Renderer::CreateRasterizerStates()
 		rastDesc.CullMode = D3D11_CULL_NONE;
 		rastDesc.FillMode = D3D11_FILL_SOLID;
 		HR(device->CreateRasterizerState(&rastDesc, &rastStateNoBackCull));
-		RastState* rs = new RastState("nobackcull", rastDesc, rastStateNoBackCull);
+		RastState* rs = new RastState(RastStateNames::noBackCull, rastDesc, rastStateNoBackCull);
 		rastStateMap[rs->name] = rs;
 	}
 
@@ -249,7 +249,7 @@ void Renderer::CreateRasterizerStates()
 		rastDesc.DepthBiasClamp = 0.0f;
 		rastDesc.SlopeScaledDepthBias = 1.0f;
 		HR(device->CreateRasterizerState(&rastDesc, &rastStateShadow));
-		RastState* rs = new RastState("shadow", rastDesc, rastStateShadow);
+		RastState* rs = new RastState(RastStateNames::shadow, rastDesc, rastStateShadow);
 		rastStateMap[rs->name] = rs;
 	}
 }
