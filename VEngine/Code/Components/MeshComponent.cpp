@@ -3,6 +3,7 @@
 #include "Render/RenderUtils.h"
 #include "Render/ShaderSystem.h"
 #include "Render/Material.h"
+#include "Render/Renderer.h"
 #include "WorldEditor.h"
 #include "Editor/Editor.h"
 #include "Animation/AnimationStructures.h"
@@ -126,4 +127,9 @@ Properties MeshComponent::GetProps()
 	props.Add("Grid Obstacle", &gridObstacle);
 	props.Merge(material->GetProps());
 	return props;
+}
+
+void MeshComponent::SetRastState(const std::string newRastStateName)
+{
+	material->rastState = renderer.rastStateMap[newRastStateName];
 }

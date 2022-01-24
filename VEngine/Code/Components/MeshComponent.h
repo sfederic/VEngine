@@ -49,4 +49,6 @@ struct MeshComponent : SpatialComponent
 	virtual void Create() override;
 	virtual void Destroy() override;
 	virtual Properties GetProps();
+
+	void SetRastState(const std::string newRastStateName);
 };
