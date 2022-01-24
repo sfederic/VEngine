@@ -9,8 +9,6 @@ struct MemoryActor : GridActor
 {
 	ACTOR_SYSTEM(MemoryActor);
 
-	MeshComponent* mesh = nullptr;
-
 	MemoryActor();
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;

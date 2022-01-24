@@ -1,10 +1,7 @@
 #include "MemoryActor.h"
-#include "Components/MeshComponent.h"
 
 MemoryActor::MemoryActor()
 {
-    mesh = MeshComponent::system.Add(this);
-    rootComponent = mesh;
 }
 
 void MemoryActor::Start()
