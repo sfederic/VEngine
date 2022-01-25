@@ -482,14 +482,15 @@ void Renderer::RenderInstanceMeshComponents()
 	MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
 	context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
-	const float factor[4] = { 0.f };
-	context->OMSetBlendState(blendStateMap.find("default")->second->data, factor, 0xFFFFFFFF);
-
 	for (InstanceMeshComponent* instanceMesh : InstanceMeshComponent::system.components)
 	{
 		if (!instanceMesh->active) continue;
 
 		SetRenderPipelineStates(instanceMesh);
+
+		//@Todo: clean this up in InstanceMeshComponent
+		const float factor[4] = { 0.f };
+		context->OMSetBlendState(blendStateMap.find("default")->second->data, factor, 0xFFFFFFFF);
 
 		//update texture matrix
 		shaderMatrices.MakeTextureMatrix(instanceMesh->material);
