@@ -2,6 +2,9 @@
 #include "IEditor.h"
 #include <qobject.h>
 
+//@Todo: want a qt editor widget that is a scrollable listview with a searchbar on top so that
+//you can search through string values like Memory names or VEnum values or whatever.
+
 struct QtEditor : IEditor, QObject
 {
 	struct QApplication* app;
