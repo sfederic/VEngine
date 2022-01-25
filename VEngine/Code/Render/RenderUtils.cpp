@@ -129,6 +129,8 @@ namespace RenderUtils
 		ID3D11Resource* resource;
 		ID3D11ShaderResourceView* srv;
 		HR(CreateWICTextureFromFile(device, path.c_str(), &resource, &srv));
+		assert(resource);
+		assert(srv);
 
 		texture->data = resource;
 		texture->srv = srv;
