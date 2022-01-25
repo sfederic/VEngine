@@ -56,7 +56,21 @@ void Grid::Awake()
     ray.ignoreLayer = CollisionLayers::Editor;
     ray.actorsToIgnore.push_back((Actor*)GameUtils::GetPlayer());
     auto gridActors = world.GetAllActorsOfTypeAsActor<GridActor>();
-    ray.AddActorsToIgnore(gridActors);
+    for (auto gridActor : gridActors)
+    {
+        auto castActor = (GridActor*)gridActor;
+        if (castActor)
+        {
+            if (castActor->isGridObstacle)
+            {
+                continue;
+            }
+        }
+
+        ray.actorsToIgnore.push_back(gridActor);
+    }
+
+    rows.clear();
 
     for (int x = 0; x < sizeX; x++)
     {
