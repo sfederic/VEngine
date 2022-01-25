@@ -132,6 +132,9 @@ void BattleSystem::RemoveUnit(Unit* unit)
 		deathDialogueWidget->AddToViewport(5.0f);
 	}
 
+	//Reset camera to player
+	GameUtils::SetActiveCameraTarget(GameUtils::GetPlayer());
+
 	if (CheckIfBattleIsOver())
 	{
 		EndBattle();
