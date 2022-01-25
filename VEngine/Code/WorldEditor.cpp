@@ -79,6 +79,9 @@ void WorldEditor::DuplicateActor()
 				editor->SetActorProps(newDuplicateActor);
 				editor->UpdateWorldList();
 
+				debugMenu.AddNotification(VString::wformat(
+					L"Duplicated new actor [%S]",newActorOriginalName.c_str()));
+
 				//Set new actor as picked in-editor
 				pickedActor = newDuplicateActor;
 			}
