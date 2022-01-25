@@ -118,6 +118,8 @@ void WorldEditor::DeleteActor()
 			}
 			else
 			{
+				debugMenu.AddNotification(VString::wformat(
+					L"Destroyed actor [%S]", pickedActor->name.c_str()));
 				pickedActor->Destroy();
 			}
 
@@ -150,6 +152,9 @@ void WorldEditor::SpawnActorOnClick()
 				XMStoreFloat3(&transform.position, rayEnd);
 
 				Actor* actor = spawnSystem->SpawnActor(transform);
+				debugMenu.AddNotification(VString::wformat(
+					L"Spawned actor [%S]", actor->name.c_str()));
+
 				pickedActor = actor;
 				editor->SetActorProps(pickedActor);
 			}
@@ -172,6 +177,9 @@ void WorldEditor::SpawnActorOnClick()
 				XMStoreFloat3(&transform.position, rayEnd);
 
 				Actor* actor = spawnSystem->SpawnActor(transform);
+				debugMenu.AddNotification(VString::wformat(
+					L"Spawned actor [%S]", actor->name.c_str()));
+
 				pickedActor = actor;
 				editor->SetActorProps(pickedActor);
 			}
