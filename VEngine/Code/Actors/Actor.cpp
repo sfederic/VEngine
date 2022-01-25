@@ -197,6 +197,10 @@ void Actor::Start()
 {
 }
 
+void Actor::LateStart()
+{
+}
+
 void Actor::Tick(float deltaTime)
 {
 }

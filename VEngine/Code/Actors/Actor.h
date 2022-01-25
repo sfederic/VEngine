@@ -76,6 +76,9 @@ public:
 	//called on gameplay start
 	virtual void Start();
 
+	//Called after Start()
+	virtual void LateStart();
+
 	//Called once per frame to update actor and its components
 	virtual void Tick(float deltaTime);
 
