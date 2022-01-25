@@ -19,6 +19,7 @@ Grid::Grid()
     rootComponent = nodeMesh;
 }
 
+//Grid::Awake() can also be used to reset all node world positions during gameplay
 void Grid::Awake()
 {
     nodeMesh->ReleaseBuffers();

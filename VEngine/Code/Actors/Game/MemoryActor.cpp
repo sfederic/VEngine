@@ -2,11 +2,12 @@
 #include "Gameplay/GameUtils.h"
 #include "Render/Material.h"
 #include "Components/MeshComponent.h"
+#include "Actors/Game/Grid.h"
 #include "Gameplay/GridNode.h"
 
 MemoryActor::MemoryActor()
 {
-    isGridObstacle = false;
+    isGridObstacle = isMemoryCreated;
 }
 
 void MemoryActor::Start()
@@ -41,12 +42,17 @@ void MemoryActor::ActivateFromMemory()
         //Stop metarial animation
         mesh->material->uvOffsetSpeed = XMFLOAT2(0.f, 0.f);
         mesh->material->uvRotationSpeed = 0.f;
-
         mesh->SetTexture(mesh->material->textureData.filename);
 
         GetCurrentNode()->Hide();
 
         GameUtils::PlayAudioOneShot("intuition_gained.wav");
+
+        isGridObstacle = true;
+        mesh->gridObstacle = true;
+
+        //Reset world position of all grid nodes
+        GameUtils::GetGrid()->Awake();
 
         isMemoryCreated = true;
     }
