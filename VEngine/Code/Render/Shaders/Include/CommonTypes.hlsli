@@ -72,6 +72,12 @@ cbuffer cbLights : register(b3)
 	Light lights[MAX_LIGHTS];
 }
 
+cbuffer cbTime : register(b4)
+{
+	float deltaTime;
+	float timeSinceStartup;
+}
+
 float4 CalcDiffuse(Light light, float3 L, float3 N)
 {
 	float NdotL = max(0.0, dot(N, L));

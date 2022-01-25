@@ -42,6 +42,7 @@ const int cbMatrixRegister = 0;
 const int cbMaterialRegister = 1;
 const int cbSkinningRegister = 2;
 const int cbLightsRegister = 3;
+const int cbTimeRegister = 4;
 const int instanceSRVRegister = 3;
 const int shadowMapTextureResgiter = 1;
 
@@ -315,6 +316,12 @@ void Renderer::CreateMainConstantBuffers()
 		D3D11_BIND_CONSTANT_BUFFER, &shaderLights);
 	assert(cbLights);
 
+	//Time buffer
+	ShaderTimeData timeData = {};
+	cbTime = RenderUtils::CreateDynamicBuffer(sizeof(ShaderTimeData),
+		D3D11_BIND_CONSTANT_BUFFER, &timeData);
+	assert(cbTime);
+
 	//Skinning data
 	XMMATRIX skinningMatrices[96] = {};
 	cbSkinningData = RenderUtils::CreateDynamicBuffer(sizeof(XMMATRIX) * 96,
@@ -430,6 +437,10 @@ void Renderer::RenderMeshComponents()
 
 	UpdateLights();
 
+	ShaderTimeData timeData = {};
+	timeData.deltaTime = Core::GetDeltaTime();
+	timeData.timeSinceStartup = Core::timeSinceStartup;
+
 	for (auto mesh : MeshComponent::system.components)
 	{
 		if (!mesh->active) continue;
@@ -451,6 +462,11 @@ void Renderer::RenderMeshComponents()
 
 		//Set lights buffer
 		context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
+
+		//Set time constant buffer
+		
+		MapBuffer(cbTime, &timeData, sizeof(ShaderTimeData));
+		context->VSSetConstantBuffers(cbTimeRegister, 1, &cbTime);
 
 		//Set shadow resources
 		context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);

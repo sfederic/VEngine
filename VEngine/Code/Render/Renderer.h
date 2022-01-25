@@ -42,6 +42,7 @@ struct Renderer
 	ID3D11Buffer* cbMatrices;
 	ID3D11Buffer* cbMaterial;
 	ID3D11Buffer* cbLights;
+	ID3D11Buffer* cbTime;
 	ID3D11Buffer* cbSkinningData;
 	ID3D11Buffer* linesBuffer;
 
