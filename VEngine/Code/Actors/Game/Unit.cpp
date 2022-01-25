@@ -19,6 +19,8 @@
 
 Unit::Unit()
 {
+	isGridObstacle = false;
+
 	memoryOnDeath = MemoryComponent::system.Add(this);
 	memoryOnDeath->name = "MemoryOnDeath"; //Seperate the name, GridActor and Unit have two memory components.
 }
