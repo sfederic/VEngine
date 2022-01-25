@@ -77,6 +77,11 @@ void World::WakeAndStartAllActors()
 	{
 		actor->Start();
 	}
+
+	for (auto actor : actors)
+	{
+		actor->LateStart();
+	}
 }
 
 void World::StartAllComponents()
