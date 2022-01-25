@@ -150,6 +150,11 @@ void Grid::Awake()
 
 void Grid::Start()
 {
+
+}
+
+void Grid::LateStart()
+{
     if (startBattleOnLoad)
     {
         SetActive(true);

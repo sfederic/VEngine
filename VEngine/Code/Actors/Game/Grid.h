@@ -43,6 +43,7 @@ struct Grid : Actor
 	Grid();
 	virtual void Awake() override;
 	virtual void Start() override;
+	virtual void LateStart() override;
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 	GridNode* GetNode(int x, int y);
