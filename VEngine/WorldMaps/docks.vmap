@@ -6,6 +6,8 @@ Grid
 0 0 0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -22,6 +24,10 @@ Size X
 3
 Size Y
 10
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -38,12 +44,10 @@ UvRotationSpeed
 0
 UvScale
 1 1
+startBattleOnLoad
+0
 next
 GridActor
-0
-Unit
-0
-Pickup
 0
 AudioActor
 1
@@ -76,6 +80,8 @@ Player
 0 1 0 2.08617e-06
  Scale
 0.999993 1 0.999993
+Ambient
+1 1 1 1
 Audio Filename
 step.wav
 Casts Shadow
@@ -104,6 +110,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -123,6 +133,8 @@ UvScale
 Volume
 0
 next
+Unit
+0
 EntranceTrigger
 1
  Position
@@ -141,6 +153,8 @@ Locked Text
 
 Name
 EntranceTrigger0
+Offset
+0 0 0
 Open Text
 Town Center
 UID
@@ -160,15 +174,17 @@ NPC
 1 1 1
 Add On Interact
 0
+Ambient
+1 1 1 1
 Attack Points
 3
+Attack Range
+1
 Casts Shadow
 1
 Condition
 
 Condition Value
-
-Description
 
 Destruct
 1
@@ -178,9 +194,15 @@ Grid Obstacle
 0
 Health
 5
+Image File
+
+Inspect
+1
 Interact
 1
 Interact Text
+
+Memory Desc
 
 Memory Name
 
@@ -198,6 +220,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -241,6 +267,8 @@ MeshActor
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -253,6 +281,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -276,6 +308,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -288,6 +322,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -308,21 +346,27 @@ next
  Position
 1 -2 4
  Rotation
--0.707107 0 -0 0.707107
+0 0 0 1
  Scale
-10 10 1
+10 1 10
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
 0
 Mesh
-plane.fbx
+grid.fbx
 Name
 stone_gate2
 Rast State
 solid
 Shader
-DefaultShader.hlsl
+Water.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -346,6 +390,8 @@ next
 -0 0 -0 1
  Scale
 10 3 3
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -358,6 +404,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -381,6 +431,8 @@ next
 -0.0436194 0 -0 0.999048
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 0
 Grid Obstacle
@@ -393,6 +445,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -416,6 +472,8 @@ next
 0.0435776 -0.00191019 0.0437505 0.99809
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 0
 Grid Obstacle
@@ -428,6 +486,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -451,6 +513,8 @@ next
 -0 0 -0.0871558 0.996195
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 0
 Grid Obstacle
@@ -463,6 +527,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -486,6 +554,8 @@ next
 0 0 0 1
  Scale
 100 100 100
+Ambient
+1 1 1 1
 Casts Shadow
 0
 Grid Obstacle
@@ -498,6 +568,10 @@ Rast State
 nobackcull
 Shader
 Unlit.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -521,6 +595,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -533,6 +609,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -556,6 +636,8 @@ next
 0 1 0 -0.000172637
  Scale
 1 1 1
+Ambient
+1 1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -568,6 +650,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -614,13 +700,19 @@ Billboard
 0
 InteractTrigger
 0
-DialogueInstance
-0
 ParticleSystem
 0
 DialogueTrigger
 0
 DestructibleActor
 0
+MemoryActor
+0
 TitleScreenActor
+0
+PushableGridActor
+0
+PlayerDialogueTrigger
+0
+PhysicsActor
 0

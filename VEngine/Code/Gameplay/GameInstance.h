@@ -14,7 +14,7 @@ struct GameInstance
 	inline static int currentHour = 0;
 	inline static int currentMinute = 0;
 
-	inline static std::string startingMap = "combat_test.vmap";
+	inline static std::string startingMap = "docks.vmap";
 	inline static std::string previousMapMovedFrom = startingMap;
 
 	//Used when continuing from game save files
