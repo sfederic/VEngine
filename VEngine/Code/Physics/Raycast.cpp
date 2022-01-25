@@ -130,8 +130,7 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 
 	if (ray.hitActor)
 	{
-		ray.hitDistance = nearestDistance;
-		XMVECTOR hitPos = origin + (direction * nearestDistance);
+		XMVECTOR hitPos = origin + (direction * ray.hitDistance);
 		XMStoreFloat3(&ray.hitPos, hitPos);
 		return true;
 	}
