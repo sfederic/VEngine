@@ -121,15 +121,6 @@ void Grid::Awake()
                             node.active = false;
                         }
                     }
-
-                    auto gridActor = dynamic_cast<GridActor*>(ray.hitActor);
-                    if (gridActor)
-                    {
-                        if (gridActor->isGridObstacle)
-                        {
-                            node.active = false;
-                        }
-                    }
                 }
             }
             else

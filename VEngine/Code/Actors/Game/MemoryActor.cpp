@@ -49,7 +49,6 @@ void MemoryActor::ActivateFromMemory()
         GameUtils::PlayAudioOneShot("intuition_gained.wav");
 
         isGridObstacle = true;
-        mesh->gridObstacle = true;
 
         //Reset world position of all grid nodes
         GameUtils::GetGrid()->Awake();
