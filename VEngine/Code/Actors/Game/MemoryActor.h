@@ -10,10 +10,16 @@ struct MemoryActor : GridActor
 	//The memory to instantiate the object
 	std::string memoryName;
 
+	//Whether this actor has already been created via player's memory
+	bool isMemoryCreated = false;
+
 	MemoryActor();
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 
 	virtual void Interact() override;
+
+private:
+	void ActivateFromMemory();
 };
