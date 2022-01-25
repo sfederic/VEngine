@@ -734,7 +734,11 @@ bool Player::GunShotCheck(Actor* hitActor)
 			battleSystem.StartBattle();
 			ExpendActionPoints(1);
 			unit->InflictDamage(1);
+
+			numBullets--;
+			bulletWidget->numBulletsPlayerHas = numBullets;
 			GameUtils::PlayAudioOneShot("gunshot.wav");
+
 			return true;
 		}
 
@@ -742,6 +746,8 @@ bool Player::GunShotCheck(Actor* hitActor)
 		if (gridActor)
 		{
 			gridActor->InflictDamage(1);
+			numBullets--;
+			bulletWidget->numBulletsPlayerHas = numBullets;
 			GameUtils::PlayAudioOneShot("gunshot.wav");
 			return true;
 		}
