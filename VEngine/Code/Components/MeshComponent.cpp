@@ -4,6 +4,7 @@
 #include "Render/ShaderSystem.h"
 #include "Render/Material.h"
 #include "Render/Renderer.h"
+#include "Render/TextureSystem.h"
 #include "WorldEditor.h"
 #include "Editor/Editor.h"
 #include "Animation/AnimationStructures.h"
@@ -145,4 +146,9 @@ void MeshComponent::SetShaderName(const std::string newShaderName)
 void MeshComponent::SetBlendState(const std::string newBlendState)
 {
 	material->blendState = renderer.blendStateMap[newBlendState];
+}
+
+void MeshComponent::SetTexture(const std::string newTextureName)
+{
+	material->texture = textureSystem.FindTexture2D(newTextureName);
 }

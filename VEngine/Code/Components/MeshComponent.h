@@ -54,4 +54,5 @@ struct MeshComponent : SpatialComponent
 	void SetRastState(const std::string newRastStateName);
 	void SetShaderName(const std::string newShaderName);
 	void SetBlendState(const std::string newBlendState);
+	void SetTexture(const std::string newTextureName);
 };
