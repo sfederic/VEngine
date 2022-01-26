@@ -5,6 +5,7 @@
 #include "VString.h"
 #include "Input.h"
 #include "Log.h"
+#include "Profile.h"
 #include "Editor/DebugMenu.h"
 
 ShaderSystem shaderSystem;
@@ -129,6 +130,8 @@ void ShaderSystem::CleanUpShaders()
 
 void ShaderSystem::HotReloadShaders()
 {
+    auto startTime = Profile::QuickStart();
+
     debugMenu.AddNotification(L"Shader reload start...");
 
     std::wstring shaderRecompileMsg = L"Shader reload complete";
@@ -190,4 +193,7 @@ void ShaderSystem::HotReloadShaders()
     }
 
     debugMenu.AddNotification(shaderRecompileMsg);
+
+    auto elapsedTime = Profile::QuickEnd(startTime);
+    Log(L"Shader hotreload took [%f] seconds", elapsedTime);
 }
