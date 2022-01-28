@@ -31,6 +31,7 @@ void Unit::Start()
 
 	healthWidget = CreateWidget<HealthWidget>();
 	healthWidget->healthPoints = health;
+	healthWidget->maxHealthPoints = health;
 
 	nextMovePos = GetPositionVector();
 }
@@ -106,6 +107,8 @@ void Unit::InflictDamage(int damage)
 		GameInstance::AddGuilt();
 
 		memoryOnDeath->CreateMemory(this->name);
+
+		healthWidget->Destroy();
 
 		battleSystem.RemoveUnit(this);
 	}
