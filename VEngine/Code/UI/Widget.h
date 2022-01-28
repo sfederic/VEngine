@@ -73,6 +73,7 @@ struct Widget
 
 	virtual void Draw(float deltaTime);
 	virtual void Start();
+	void Destroy();
 
 	void AddToViewport(float removeTimer = 0.f);
 	void RemoveFromViewport();

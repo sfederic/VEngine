@@ -14,6 +14,13 @@ void Widget::Start()
 {
 }
 
+void Widget::Destroy()
+{
+	RemoveFromViewport();
+	uiSystem.DestroyWidget(this);
+	delete this;
+}
+
 void Widget::AddToViewport(float removeTimer)
 {
 	uiSystem.AddWidget(this);
