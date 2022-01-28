@@ -123,8 +123,6 @@ void Player::Tick(float deltaTime)
 	PrimaryAction();
 	SecondaryAction();
 
-	SpawnMemoryAsObject();
-
 	LerpPlayerCameraFOV(deltaTime);
 
 	dialogueComponent->SetPosition(GetHomogeneousPositionVector());
@@ -165,7 +163,13 @@ Properties Player::GetProps()
 
 void Player::RefreshCombatStats()
 {
-	actionPoints = GameInstance::maxPlayerActionPoints;
+	actionPoints += 5;
+
+	if (actionPoints >= GameInstance::maxPlayerActionPoints)
+	{
+		actionPoints = GameInstance::maxPlayerActionPoints;
+	}
+
 	actionBarWidget->actionPoints = actionPoints;
 }
 
