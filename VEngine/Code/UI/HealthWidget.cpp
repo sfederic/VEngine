@@ -1,4 +1,5 @@
 #include "HealthWidget.h"
+#include "VString.h"
 
 void HealthWidget::Draw(float deltaTime)
 {
@@ -7,9 +8,6 @@ void HealthWidget::Draw(float deltaTime)
 
 	Layout layout = CenterLayoutOnScreenSpaceCoords(25.f, 25.f, (float)sx, (float)sy);
 
-	for (int i = 0; i < healthPoints; i++)
-	{
-		Image("heart_icon.png", layout);
-		layout.AddHorizontalSpace(50.f);
-	}
+	FillRect(layout);
+	Text(VString::wformat(L"%d/%d", healthPoints, maxHealthPoints), layout);
 }
