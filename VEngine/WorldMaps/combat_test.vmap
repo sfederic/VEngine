@@ -48,583 +48,9 @@ startBattleOnLoad
 1
 next
 GridActor
-7
- Position
-0 0 4
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Add On Interact
 0
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-1
-Image File
-
-Inspect
-1
-Interact
-1
-Interact Text
-
-Memory Desc
-
-Memory Name
-
-Mesh
-
-Name
-GridActor0
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Specular
-1 1 1 1
-Specular Power
-0
-Static
-1
-Texture
-test.png
-UID
-1879682030
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-condition
-
-conditionArg
-
-interactKnownText
-
-next
- Position
-5 0 2
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Add On Interact
-0
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-1
-Image File
-
-Inspect
-1
-Interact
-1
-Interact Text
-
-Memory Desc
-
-Memory Name
-
-Mesh
-
-Name
-GridActor1
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Specular
-1 1 1 1
-Specular Power
-0
-Static
-1
-Texture
-test.png
-UID
-2616665786
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-condition
-
-conditionArg
-
-interactKnownText
-
-next
- Position
-2 0 6
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Add On Interact
-0
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-1
-Image File
-
-Inspect
-1
-Interact
-1
-Interact Text
-
-Memory Desc
-
-Memory Name
-
-Mesh
-
-Name
-GridActor2
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Specular
-1 1 1 1
-Specular Power
-0
-Static
-1
-Texture
-test.png
-UID
-2252607066
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-condition
-
-conditionArg
-
-interactKnownText
-
-next
- Position
-2 0 0
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Add On Interact
-0
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-1
-Image File
-
-Inspect
-1
-Interact
-1
-Interact Text
-
-Memory Desc
-
-Memory Name
-
-Mesh
-
-Name
-GridActor3
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Specular
-1 1 1 1
-Specular Power
-0
-Static
-1
-Texture
-test.png
-UID
-1210466118
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-condition
-
-conditionArg
-
-interactKnownText
-
-next
- Position
-2 0 1
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-1
-Image File
-
-Inspect
-1
-Interact
-1
-Interact Text
-
-Memory Desc
-
-Memory Name
-
-Mesh
-
-Name
-GridActor4
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Specular
-1 1 1 1
-Specular Power
-0
-Static
-1
-Texture
-test.png
-UID
-2103612645
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-condition
-
-conditionArg
-
-interactKnownText
-
-next
- Position
-5 0 1
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Add On Interact
-0
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-1
-Image File
-
-Inspect
-1
-Interact
-1
-Interact Text
-
-Memory Desc
-
-Memory Name
-
-Mesh
-
-Name
-GridActor5
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Specular
-1 1 1 1
-Specular Power
-0
-Static
-1
-Texture
-test.png
-UID
-223167514
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-condition
-
-conditionArg
-
-interactKnownText
-
-next
- Position
-3 0 4
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Add On Interact
-0
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-1
-Image File
-
-Inspect
-1
-Interact
-1
-Interact Text
-
-Memory Desc
-
-Memory Name
-
-Mesh
-
-Name
-GridActor6
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Specular
-1 1 1 1
-Specular Power
-0
-Static
-1
-Texture
-test.png
-UID
-452744971
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-condition
-
-conditionArg
-
-interactKnownText
-
-next
 AudioActor
-1
- Position
--1 -1 3
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Audio Filename
-combat_sample.wav
-Loop
-1
-Name
-AudioActor0
-Pitch
-0.8
-Play On Start
-1
-UID
-2200318607
-Volume
-1
-next
+0
 Player
 1
  Position
@@ -687,15 +113,11 @@ Volume
 0
 next
 Unit
-0
-EntranceTrigger
-0
-NPC
-3
+1
  Position
-1 0 5
+0 0 6
  Rotation
-0 1 0 -0.000172637
+-0 0 -0 1
  Scale
 1 1 1
 Add On Interact
@@ -719,7 +141,100 @@ File
 Grid Obstacle
 0
 Health
-4
+5
+Image File
+
+Inspect
+1
+Interact
+1
+Interact Text
+
+Memory Desc
+
+Memory Name
+
+Mesh
+character_test.fbx
+Move Points
+5
+Move Speed
+3
+Name
+Unit0
+Obstacle
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UID
+4134188609
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+deathText
+
+interactKnownText
+
+next
+EntranceTrigger
+0
+NPC
+2
+ Position
+4 0 4
+ Rotation
+-0 -0.706985 -0 0.707228
+ Scale
+1 1 1
+Add On Interact
+0
+Ambient
+1 1 1 1
+Attack Points
+1
+Attack Range
+1
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+5
 Image File
 
 Inspect
@@ -786,9 +301,9 @@ spawnText
 
 next
  Position
-5 0 5
+5 0 1
  Rotation
-0 1 0 -0.000172637
+-0 -0.706985 -0 0.707229
  Scale
 1 1 1
 Add On Interact
@@ -798,7 +313,7 @@ Ambient
 Attack Points
 1
 Attack Range
-1
+3
 Casts Shadow
 1
 Condition
@@ -828,104 +343,11 @@ Memory Name
 Mesh
 character_test.fbx
 Move Points
-3
+2
 Move Speed
 3
 Name
 NPC1
-Obstacle
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Specular
-1 1 1 1
-Specular Power
-0
-Static
-1
-Texture
-test.png
-UID
-1281468768
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-battleStartText
-
-condition
-
-conditionArg
-
-deathText
-
-interactKnownText
-
-spawnText
-
-next
- Position
-4 0 1
- Rotation
--0 -0.706985 -0 0.707229
- Scale
-1 1 1
-Add On Interact
-0
-Ambient
-1 1 1 1
-Attack Points
-1
-Attack Range
-3
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-3
-Image File
-
-Inspect
-1
-Interact
-1
-Interact Text
-
-Memory Desc
-
-Memory Name
-
-Mesh
-character_test.fbx
-Move Points
-3
-Move Speed
-3
-Name
-NPC2
 Obstacle
 0
 Rast State
@@ -1000,7 +422,7 @@ Specular Power
 Static
 1
 Texture
-test.png
+dock.jpg
 UID
 1975823658
 UvOffset
