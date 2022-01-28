@@ -546,32 +546,6 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 	}
 }
 
-void Player::SpawnMemoryAsObject()
-{
-	//@Todo: want to keep this sort of logic for a different mechanic. come back to it.
-	/*if (Input::GetKeyUp(Keys::Up))
-	{
-		if (GameUtils::CheckIfMemoryExists(memoryNameToSpawn))
-		{
-			Transform transform = GetTransform();
-			auto forwardVector = mesh->GetForwardVector();
-			transform.position.x += forwardVector.x;
-			transform.position.y += forwardVector.y;
-			transform.position.z += forwardVector.z;
-
-			auto& memory = GameInstance::playerMemories[memoryNameToSpawn];
-
-			weaponMesh->meshComponentData.filename = memory->meshName;
-			weaponMesh->Create();
-			weaponMesh->active = true;
-		}
-		else
-		{
-			Log("Memory Spawn: [%s] doesn't exist in player's memories.", memoryNameToSpawn.c_str());
-		}
-	}*/
-}
-
 bool Player::CheckIfPlayerMovementAndRotationStopped()
 {
 	return XMVector4Equal(GetPositionVector(), nextPos) && XMQuaternionEqual(GetRotationVector(), nextRot);
