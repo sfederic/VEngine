@@ -2,12 +2,19 @@
 #include "Gameplay/GameUtils.h"
 #include "Render/Material.h"
 #include "Components/MeshComponent.h"
+#include "Components/BoxTriggerComponent.h"
 #include "Actors/Game/Grid.h"
+#include "Input.h"
 #include "Gameplay/GridNode.h"
 
 MemoryActor::MemoryActor()
 {
     isGridObstacle = isMemoryCreated;
+
+    trigger = BoxTriggerComponent::system.Add(this);
+    trigger->renderWireframeColour = XMFLOAT4(1.f, 0.f, 1.f, 1.f);
+    trigger->SetTargetAsPlayer();
+    rootComponent->AddChild(trigger);
 }
 
 void MemoryActor::Start()
@@ -20,6 +27,14 @@ void MemoryActor::Start()
 void MemoryActor::Tick(float deltaTime)
 {
     __super::Tick(deltaTime);
+
+    if (!isMemoryCreated && trigger->ContainsTarget())
+    {
+        if (Input::GetKeyUp(Keys::Down))
+        {
+            ActivateFromMemory();
+        }
+    }
 }
 
 Properties MemoryActor::GetProps()
