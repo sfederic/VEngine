@@ -133,7 +133,7 @@ Properties MeshComponent::GetProps()
 void MeshComponent::SetRastState(const std::string newRastStateName)
 {
 	//If calling before Material::Create() is called, rastStateName is the one.
-	material->rastStateName = newRastStateName;
+	material->rastStateValue.SetValue(newRastStateName);
 	//This set isn't necessary with the above, but fine for after Material::Create() called.
 	material->rastState = renderer.rastStateMap[newRastStateName];
 }

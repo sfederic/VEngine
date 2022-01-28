@@ -3,6 +3,7 @@
 #include <string>
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
+#include "VEnum.h"
 #include "Animation/AnimationStructures.h"
 
 using namespace DirectX;
@@ -21,7 +22,7 @@ struct Vertex
 	uint32_t boneIndices[4];
 };
 
-struct RastStateNames
+struct RastStates
 {
 	inline static const std::string solid = "solid";
 	inline static const std::string noBackCull = "nobackcull";

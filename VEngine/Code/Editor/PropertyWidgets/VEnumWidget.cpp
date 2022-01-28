@@ -20,6 +20,10 @@ void VEnumWidget::SetValue()
 {
 	std::string text = currentText().toStdString();
 	value->SetValue(text);
+	if (prop.change)
+	{
+		prop.change(value);
+	}
 }
 
 void VEnumWidget::ResetValue()

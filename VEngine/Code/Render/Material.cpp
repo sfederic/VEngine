@@ -13,6 +13,11 @@
 Material::Material()
 {
 	materialSystem.AddMaterial(this);
+
+	rastStateValue.Add(RastStates::solid);
+	rastStateValue.Add(RastStates::noBackCull);
+	rastStateValue.Add(RastStates::shadow);
+	rastStateValue.Add(RastStates::wireframe);
 }
 
 Material::Material(std::string textureFilename_, std::string shaderFilename_)
@@ -21,6 +26,12 @@ Material::Material(std::string textureFilename_, std::string shaderFilename_)
 	shaderData.filename = shaderFilename_;
 
 	materialSystem.AddMaterial(this);
+
+	//@Todo: I don't like this. There needs to be a way to check if something inherits from VEnum when serialising
+	rastStateValue.Add(RastStates::solid);
+	rastStateValue.Add(RastStates::noBackCull);
+	rastStateValue.Add(RastStates::shadow);
+	rastStateValue.Add(RastStates::wireframe);
 }
 
 void Material::Create()
@@ -28,7 +39,7 @@ void Material::Create()
 	texture = textureSystem.FindTexture2D(textureData.filename);
 	sampler = RenderUtils::GetDefaultSampler();
 	shader = shaderSystem.FindShader(VString::stows(shaderData.filename));
-	rastState = renderer.rastStateMap[rastStateName];
+	rastState = renderer.rastStateMap[rastStateValue.GetValue()];
 }
 
 void Material::Destroy()
@@ -58,11 +69,12 @@ static void ReassignTexture(void* data)
 
 static void ReassignRastState(void* data)
 {
-	auto rastName = (std::string*)data;
-	RastState* foundRastState = renderer.rastStateMap[*rastName];
+	auto rastState = (VEnum*)data;
+	auto rastName = rastState->GetValue();
+	RastState* foundRastState = renderer.rastStateMap[rastName];
 	if (foundRastState == nullptr)
 	{
-		Log("%s not found on rast state change.", rastName->c_str());
+		Log("%s not found on rast state change.", rastName.c_str());
 		return;
 	}
 
@@ -98,7 +110,7 @@ Properties Material::GetProps()
 	Properties props("Material");
 	props.Add("Texture", &textureData).change = ReassignTexture;
 	props.Add("Shader", &shaderData).change = ReassignShader;
-	props.Add("Rast State", &rastStateName).change = ReassignRastState;
+	props.Add("Rast State", &rastStateValue).change = ReassignRastState;
 	props.Add("UvOffset", &materialShaderData.uvOffset);
 	props.Add("UvOffsetSpeed", &uvOffsetSpeed);
 	props.Add("UvScale", &materialShaderData.uvScale);

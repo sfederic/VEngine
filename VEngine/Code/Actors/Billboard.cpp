@@ -7,7 +7,7 @@
 Billboard::Billboard()
 {
     mesh = MeshComponent::system.Add(this, MeshComponent("plane.fbx", "ramza_back.png", "Unlit.hlsl"));
-    mesh->material->rastStateName = "nobackcull";
+    mesh->material->rastStateValue.SetValue(RastStates::noBackCull);
     rootComponent = mesh;
 }
 
