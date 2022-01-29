@@ -62,7 +62,7 @@ void MeshComponent::Tick(float deltaTime)
 		physicsSystem.GetTransformFromPhysicsActor(this);
 	}
 
-	CullMeshWhenBehindPlayer();
+	CullOnAngleBetweenCameraAndMesh();
 }
 
 void MeshComponent::Create()
@@ -159,17 +159,18 @@ void MeshComponent::SetTexture(const std::string newTextureName)
 	material->texture = textureSystem.FindTexture2D(newTextureName);
 }
 
-void MeshComponent::CullMeshWhenBehindPlayer()
+void MeshComponent::CullOnAngleBetweenCameraAndMesh()
 {
 	if (cull)
 	{
-		XMVECTOR meshPos = GetPositionV();
-		XMVECTOR playerPos = GameUtils::GetPlayer()->GetPositionVector();
-		XMVECTOR cameraPos = activeCamera->GetWorldPositionV();
+		const XMVECTOR meshForward = GetForwardVectorV();
+		const XMVECTOR cameraForward = activeCamera->GetForwardVectorV();
 
-		float cameraToMeshDistance = XMVector3Length(meshPos - cameraPos).m128_f32[0];
-		float cameraToPlayerDistance = XMVector3Length(playerPos - cameraPos).m128_f32[0];
+		const float angle = XMConvertToDegrees(
+			XMVector3AngleBetweenVectors(meshForward, cameraForward).m128_f32[0]);
 
-		cullMesh = cameraToMeshDistance < cameraToPlayerDistance;
+		//The angles here are fairly specific to the player camera's position and lookat.
+		//Use this function mainly for walls.
+		cullMesh = (angle >= 90.f) && (angle <= 180.f);
 	}
 }

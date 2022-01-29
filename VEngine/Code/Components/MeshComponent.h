@@ -64,5 +64,7 @@ public:
 	void SetTexture(const std::string newTextureName);
 
 private:
-	void CullMeshWhenBehindPlayer();
+	void CullOnAngleBetweenCameraAndMesh();
+
+	//@Todo: meshes also need an blend function to hide meshes when they're between player and camera
 };
