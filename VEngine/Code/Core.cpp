@@ -242,6 +242,9 @@ void Core::HandleWin32MessagePump(UINT message, WPARAM wparam, LPARAM lparam)
 			return;
 		}
 
+		//@Todo: if you ever want a low poly look, just divide the width and height here.
+		//Note that it messes with in-game widget layouts. Might come back here and make a main menu
+		//setting that changes it to that jagged PS1 look.
 		UINT resizedWidth = LOWORD(lparam);
 		UINT resizedHeight = HIWORD(lparam);
 		renderer.ResizeSwapchain(resizedWidth, resizedHeight);
