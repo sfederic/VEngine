@@ -63,6 +63,11 @@ XMFLOAT3 SpatialComponent::GetPosition()
 	return transform.position;
 }
 
+XMVECTOR SpatialComponent::GetWorldPositionV()
+{
+	return GetWorldMatrix().r[3];
+}
+
 XMVECTOR SpatialComponent::GetPositionV()
 {
 	XMVECTOR position = XMLoadFloat3(&transform.position);

@@ -28,6 +28,7 @@ struct SpatialComponent : Component
 
 	XMFLOAT3 GetPosition();
 	XMVECTOR GetPositionV();
+	XMVECTOR GetWorldPositionV();
 	void SetPosition(float x, float y, float z);
 	void SetPosition(XMFLOAT3 newPosition);
 	void SetPosition(XMVECTOR newPosition);
