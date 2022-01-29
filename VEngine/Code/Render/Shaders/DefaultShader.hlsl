@@ -28,10 +28,9 @@ float4 PSMain(VS_OUT i) : SV_Target
 		shadowColour = CalcShadowFactor(i.shadowPos);
 	}
 
-	//grey colour (good for looking at shadows)
-	//float4 finalColour = endResult.diffuse + shadowColour;
+	//good at debugging shadow visuals
+	//float4 finalColour = shadowColour;
 
 	float4 finalColour = ((diffuse + specular) + shadowColour) * texColour;
-
-	return finalColour * float4(meshPosition, 1.0f);
+	return finalColour;
 }

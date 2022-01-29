@@ -10,6 +10,8 @@ Ambient
 1 1 1 1
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
@@ -24,6 +26,10 @@ Size X
 5
 Size Y
 5
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -40,17 +46,19 @@ UvRotationSpeed
 0
 UvScale
 1 1
+startBattleOnLoad
+0
 next
 GridActor
 1
  Position
-2 0 3
+2 0 2
  Rotation
 0 0 0 1
  Scale
 1 1 1
 Add On Interact
-1
+0
 Ambient
 1 1 1 1
 Casts Shadow
@@ -59,8 +67,8 @@ Condition
 
 Condition Value
 
-Description
-Spawn a push block
+Cull
+1
 Destruct
 1
 File
@@ -69,16 +77,20 @@ Grid Obstacle
 0
 Health
 1
+Image File
+
 Inspect
 1
 Interact
-0
+1
 Interact Text
 
+Memory Desc
+
 Memory Name
-Pushable
+
 Mesh
-cube.fbx
+
 Name
 GridActor0
 Obstacle
@@ -87,12 +99,16 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
 test.png
 UID
-3602354785
+1539633952
 UvOffset
 0 0
 UvOffsetSpeed
@@ -116,10 +132,6 @@ conditionArg
 interactKnownText
 
 next
-Unit
-0
-Pickup
-0
 AudioActor
 1
  Position
@@ -146,17 +158,19 @@ next
 Player
 1
  Position
-0 0.0100002 0
+0 9.53674e-07 4
  Rotation
-0 1 0 1.56958e-07
+0 0.707106 0 0.707107
  Scale
-0.999971 1 0.999971
+0.999964 1 0.999964
 Ambient
 1 1 1 1
 Audio Filename
 step.wav
 Casts Shadow
 1
+Cull
+0
 FOV
 60
 Far Z
@@ -181,6 +195,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -198,8 +216,10 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
-1
+-0.000281483
 next
+Unit
+0
 EntranceTrigger
 0
 NPC
@@ -216,20 +236,26 @@ Ambient
 1 1 1 1
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
 plane.fbx
 Name
-cube0
+house_front0
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
-wall02.png
+floor.jpg
 UID
 3822190392
 UvOffset
@@ -246,23 +272,29 @@ next
  Position
 -1 1 2
  Rotation
-0 0.707229 0 0.706984
+0 0.707229 0 0.706985
  Scale
 3 1.5 0
 Ambient
 1 1 1 1
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
 plane.fbx
 Name
-cube1
+house_front1
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -290,16 +322,22 @@ Ambient
 1 1 1 1
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
 plane.fbx
 Name
-cube2
+house_front2
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -327,16 +365,22 @@ Ambient
 1 1 1 1
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
 plane.fbx
 Name
-cube3
+house_front3
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -355,31 +399,37 @@ UvScale
 1 1
 next
  Position
-2.00069 1 5
+2 1 5
  Rotation
-0 1 0 -0.000172772
+-0 0 -0 1
  Scale
-3.00008 1.5 1
+2.5 2.5 1
 Ambient
 1 1 1 1
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
-plane.fbx
+house_front.fbx
 Name
-cube4
+house_front4
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
-wall03.png
+floor.jpg
 UID
-3696897037
+1670468111
 UvOffset
 0 0
 UvOffsetSpeed
@@ -394,11 +444,11 @@ next
 DirectionalLightActor
 1
  Position
-4 3 3
+2 1 -1
  Rotation
-0.166322 -0.439123 0.620897 0.62769
+0.21991 -0.604199 0.261949 0.719699
  Scale
-0.999998 0.999998 1
+0.999997 0.999999 0.999997
 Colour
 1 1 1 1
 LightEnabled
@@ -406,7 +456,7 @@ LightEnabled
 Name
 DirectionalLightActor0
 UID
-983067120
+1060802428
 next
 SavePoint
 0
@@ -426,7 +476,13 @@ DialogueTrigger
 0
 DestructibleActor
 0
+MemoryActor
+0
 TitleScreenActor
 0
 PushableGridActor
+0
+PlayerDialogueTrigger
+0
+PhysicsActor
 0
