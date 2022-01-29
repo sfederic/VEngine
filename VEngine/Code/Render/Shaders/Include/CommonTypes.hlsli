@@ -68,7 +68,8 @@ cbuffer cbLights : register(b3)
 	float4 eyePosition;
 	float4 globalAmbient;
 	int numLights;
-	int3 pad;
+	bool shadowsEnabled;
+	int2 pad;
 	Light lights[MAX_LIGHTS];
 }
 

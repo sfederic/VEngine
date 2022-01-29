@@ -431,6 +431,12 @@ void Renderer::RenderMeshComponents()
 	{
 		shaderMatrices.lightMVP = shadowMap->OutputMatrix();
 		shaderMatrices.lightViewProj = shadowMap->GetLightViewMatrix() * shadowMap->GetLightPerspectiveMatrix();
+
+		shaderLights.shadowsEnabled = true;
+	}
+	else
+	{
+		shaderLights.shadowsEnabled = false;
 	}
 
 	RenderSetup();

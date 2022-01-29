@@ -158,7 +158,12 @@ struct ShaderLights
 	XMFLOAT4 eyePosition = XMFLOAT4(0.f, 0.f, 0.f, 1.0);
 	XMFLOAT4 globalAmbience = XMFLOAT4(0.f, 0.f, 0.f, 1.f);
 	int numLights = 0;
-	int pad[3];
+
+	//Shadows for now are based on 1 directional light in the level. Set this to false to avoid the 
+	//shadow map from building from an identity matrix when no directional lights exist in level.
+	bool shadowsEnabled = false;
+
+	int pad[2];
 
 	Light lights[MAX_LIGHTS];
 };

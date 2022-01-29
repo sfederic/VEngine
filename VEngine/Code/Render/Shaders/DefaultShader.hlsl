@@ -22,12 +22,14 @@ float4 PSMain(VS_OUT i) : SV_Target
 	float4 diffuse = endResult.diffuse * material.ambient;
 	float4 specular = endResult.specular * material.specular;
 
-	float shadowColour = CalcShadowFactor(i.shadowPos);
+	float4 shadowColour = float4(0.f, 0.f, 0.f, 0.f);
+	if (shadowsEnabled)
+	{
+		shadowColour = CalcShadowFactor(i.shadowPos);
+	}
 
-	//float4 localAmbient = float4(0.1f, 0.1f, 0.1f, 0.0f);
-
-	//grey colour 
-	//float4 finalColour = endResult.diffuse * shadowColour;
+	//grey colour (good for looking at shadows)
+	//float4 finalColour = endResult.diffuse + shadowColour;
 
 	float4 finalColour = ((diffuse + specular) + shadowColour) * texColour;
 
