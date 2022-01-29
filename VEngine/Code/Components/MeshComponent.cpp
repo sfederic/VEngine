@@ -10,6 +10,9 @@
 #include "Animation/AnimationStructures.h"
 #include "Physics/PhysicsSystem.h"
 #include "VMath.h"
+#include "Camera.h"
+#include "Gameplay/GameUtils.h"
+#include "Actors/Game/Player.h"
 
 void MeshComponent::ResetMeshBuffers()
 {
@@ -58,6 +61,8 @@ void MeshComponent::Tick(float deltaTime)
 	{
 		physicsSystem.GetTransformFromPhysicsActor(this);
 	}
+
+	CullMeshWhenBehindPlayer();
 }
 
 void MeshComponent::Create()
@@ -126,6 +131,7 @@ Properties MeshComponent::GetProps()
 	props.Add("Casts Shadow", &castsShadow);
 	props.Add("Static", &isStatic);
 	props.Add("Grid Obstacle", &gridObstacle);
+	props.Add("Cull", &cull);
 	props.Merge(material->GetProps());
 	return props;
 }
@@ -151,4 +157,19 @@ void MeshComponent::SetBlendState(const std::string newBlendState)
 void MeshComponent::SetTexture(const std::string newTextureName)
 {
 	material->texture = textureSystem.FindTexture2D(newTextureName);
+}
+
+void MeshComponent::CullMeshWhenBehindPlayer()
+{
+	if (cull)
+	{
+		XMVECTOR meshPos = GetPositionV();
+		XMVECTOR playerPos = GameUtils::GetPlayer()->GetPositionVector();
+		XMVECTOR cameraPos = activeCamera->GetWorldPositionV();
+
+		float cameraToMeshDistance = XMVector3Length(meshPos - cameraPos).m128_f32[0];
+		float cameraToPlayerDistance = XMVector3Length(playerPos - cameraPos).m128_f32[0];
+
+		cullMesh = cameraToMeshDistance < cameraToPlayerDistance;
+	}
 }

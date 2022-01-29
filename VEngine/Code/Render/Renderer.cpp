@@ -449,7 +449,7 @@ void Renderer::RenderMeshComponents()
 
 	for (auto mesh : MeshComponent::system.components)
 	{
-		if (!mesh->active) continue;
+		if (!mesh->active || mesh->cullMesh) continue;
 
 		SetRenderPipelineStates(mesh);
 

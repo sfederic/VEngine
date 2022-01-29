@@ -40,6 +40,13 @@ struct MeshComponent : SpatialComponent
 	//whether nodes that spawn on this mesh are set as inactive
 	bool gridObstacle = false;
 
+private:
+	//Only set for meshes that obstruct view between player and camera
+	bool cull = false;
+
+public:
+	bool cullMesh = false;
+
 	MeshComponent();
 	MeshComponent(const std::string filename_,
 		const std::string textureFilename_,
@@ -55,4 +62,7 @@ struct MeshComponent : SpatialComponent
 	void SetShaderName(const std::string newShaderName);
 	void SetBlendState(const std::string newBlendState);
 	void SetTexture(const std::string newTextureName);
+
+private:
+	void CullMeshWhenBehindPlayer();
 };
