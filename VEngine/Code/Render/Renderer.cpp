@@ -493,10 +493,11 @@ void Renderer::RenderMeshComponents()
 
 		//Draw
 		context->DrawIndexed(mesh->meshDataProxy->indices->size(), 0, 0);
-
-		ID3D11ShaderResourceView* nullSRV = nullptr;
-		context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSRV);
 	}	
+
+	//Set to null to remove warnings
+	ID3D11ShaderResourceView* nullSRV = nullptr;
+	context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSRV);
 
 	PROFILE_END
 }
