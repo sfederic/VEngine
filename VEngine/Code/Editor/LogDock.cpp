@@ -27,6 +27,8 @@ LogDock::LogDock() : QDockWidget("Log")
 
 void LogDock::Print(const std::wstring message)
 {
+	//@Todo: it looks like the editor can freeze if the log widget gets too full.
+	//Double check that this is happening and set a max character limit.
 	logMessageBox->insertPlainText(QString::fromStdWString(message) + "\n");
 	logMessageBox->moveCursor(QTextCursor::MoveOperation::End);
 }
