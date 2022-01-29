@@ -33,5 +33,5 @@ float4 PSMain(VS_OUT i) : SV_Target
 
 	float4 finalColour = ((diffuse + specular) + shadowColour) * texColour;
 
-	return finalColour;
+	return finalColour * float4(meshPosition, 1.0f);
 }

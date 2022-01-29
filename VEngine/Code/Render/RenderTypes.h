@@ -175,6 +175,12 @@ struct ShaderTimeData
 	float pad[2]; //D3D11 ConstantBuffers have to be a multiple of 16 bytes
 };
 
+struct ShaderMeshData
+{
+	XMFLOAT3 position;
+	float pad;
+};
+
 struct InstanceData
 {
 	XMMATRIX world;

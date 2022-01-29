@@ -43,6 +43,7 @@ struct Renderer
 	ID3D11Buffer* cbMaterial;
 	ID3D11Buffer* cbLights;
 	ID3D11Buffer* cbTime;
+	ID3D11Buffer* cbMeshData;
 	ID3D11Buffer* cbSkinningData;
 	ID3D11Buffer* linesBuffer;
 
@@ -84,7 +85,7 @@ private:
 	void CreateRasterizerStates();
 	void CreateBlendStates();
 	void CreateQueries();
-	void CreateMainConstantBuffers();
+	void CreateConstantBuffers();
 	void CheckSupportedFeatures();
 	void RenderShadowPass();
 	void RenderMeshComponents();

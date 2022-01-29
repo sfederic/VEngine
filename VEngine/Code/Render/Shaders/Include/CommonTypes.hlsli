@@ -79,6 +79,11 @@ cbuffer cbTime : register(b4)
 	float timeSinceStartup;
 }
 
+cbuffer cbMeshData : register(b5)
+{
+	float3 meshPosition;
+}
+
 float4 CalcDiffuse(Light light, float3 L, float3 N)
 {
 	float NdotL = max(0.0, dot(N, L));

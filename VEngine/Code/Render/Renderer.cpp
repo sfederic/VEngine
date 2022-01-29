@@ -43,6 +43,7 @@ const int cbMaterialRegister = 1;
 const int cbSkinningRegister = 2;
 const int cbLightsRegister = 3;
 const int cbTimeRegister = 4;
+const int cbMeshDataRegister = 5;
 const int instanceSRVRegister = 3;
 const int shadowMapTextureResgiter = 1;
 
@@ -70,7 +71,7 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	CreateInputLayout();
 	CreateRasterizerStates();
 	CreateBlendStates();
-	CreateMainConstantBuffers();
+	CreateConstantBuffers();
 	CreateQueries();
 	CheckSupportedFeatures();
 
@@ -296,7 +297,7 @@ void Renderer::CreateQueries()
 	HR(device->CreateQuery(&qd, &frameEndQuery[1]));
 }
 
-void Renderer::CreateMainConstantBuffers()
+void Renderer::CreateConstantBuffers()
 {
 	//Shader matrix constant buffer
 	shaderMatrices.Create();
@@ -321,6 +322,12 @@ void Renderer::CreateMainConstantBuffers()
 	cbTime = RenderUtils::CreateDynamicBuffer(sizeof(ShaderTimeData),
 		D3D11_BIND_CONSTANT_BUFFER, &timeData);
 	assert(cbTime);
+
+	//Mesh data buffer
+	ShaderMeshData meshData = {};
+	cbMeshData = RenderUtils::CreateDynamicBuffer(sizeof(ShaderMeshData),
+		D3D11_BIND_CONSTANT_BUFFER, &meshData);
+	assert(cbMeshData);
 
 	//Skinning data
 	XMMATRIX skinningMatrices[96] = {};
@@ -470,9 +477,15 @@ void Renderer::RenderMeshComponents()
 		context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
 
 		//Set time constant buffer
-		
 		MapBuffer(cbTime, &timeData, sizeof(ShaderTimeData));
 		context->VSSetConstantBuffers(cbTimeRegister, 1, &cbTime);
+
+		//Set mesh data to shader
+		ShaderMeshData meshData = {};
+		meshData.position = mesh->GetPosition();
+		MapBuffer(cbMeshData, &meshData, sizeof(ShaderMeshData));
+		context->VSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
+		context->PSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
 
 		//Set shadow resources
 		context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
@@ -480,8 +493,7 @@ void Renderer::RenderMeshComponents()
 
 		//Draw
 		context->DrawIndexed(mesh->meshDataProxy->indices->size(), 0, 0);
-		
-		//Setting the shadowmap to null here gets rid of a warning. Can also set this outside of the loop.
+
 		ID3D11ShaderResourceView* nullSRV = nullptr;
 		context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSRV);
 	}	
