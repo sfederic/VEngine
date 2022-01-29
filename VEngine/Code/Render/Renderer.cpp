@@ -130,15 +130,15 @@ void Renderer::CreateDevice()
 	const D3D_FEATURE_LEVEL featureLevels[] = { D3D_FEATURE_LEVEL_11_1 };
 	D3D_FEATURE_LEVEL selectedFeatureLevel;
 
-	//IDXGIAdapter1* adapter;
-	//for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_MINIMUM_POWER,
-	//	IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)
-	//{
-	//	gpuAdapters.push_back(adapter);
-	//	DXGI_ADAPTER_DESC1 desc = {};
-	//	adapter->GetDesc1(&desc);
-	//	gpuAdaptersDesc.push_back(desc);
-	//}
+	IDXGIAdapter1* adapter;
+	for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_MINIMUM_POWER,
+		IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)
+	{
+		gpuAdapters.push_back(adapter);
+		DXGI_ADAPTER_DESC1 desc = {};
+		adapter->GetDesc1(&desc);
+		gpuAdaptersDesc.push_back(desc);
+	}
 
 	//@Todo: selecting adapters here isn't working.
 	HR(D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags,
