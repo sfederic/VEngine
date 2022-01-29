@@ -134,14 +134,12 @@ void Renderer::CreateDevice()
 	for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_MINIMUM_POWER,
 		IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)
 	{
-		gpuAdapters.push_back(adapter);
 		DXGI_ADAPTER_DESC1 desc = {};
 		adapter->GetDesc1(&desc);
 		gpuAdaptersDesc.push_back(desc);
 	}
 
-	//@Todo: selecting adapters here isn't working.
-	HR(D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags,
+	HR(D3D11CreateDevice(adapter, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags,
 		featureLevels, _countof(featureLevels), D3D11_SDK_VERSION, &device,
 		&selectedFeatureLevel, &context));
 

@@ -66,7 +66,6 @@ public:
 	float frameTime;
 
 	//GPU structures
-	std::vector<IDXGIAdapter1*> gpuAdapters;
 	std::vector<DXGI_ADAPTER_DESC1> gpuAdaptersDesc;
 
 	bool drawBoundingBoxes = false;
