@@ -907,7 +907,9 @@ void Renderer::RenderParticleEmitters()
 			context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 			//Draw
-			//@Todo: do instancing here for particles.
+			//@Todo: do instancing here for particles. (was reading on instancing for particles, 
+			//apparently using DrawInstanced() degrades performance when the vertex count it really low
+			//and DrawIndexed is actually faster.
 			context->DrawIndexed(6, 0, 0);
 		}
 	}
