@@ -32,7 +32,8 @@ struct Renderer
 	ID3D11RasterizerState* rastStateShadow;
 
 	//Blendstates
-	ID3D11BlendState* blendStateAlphaToCoverage;
+	ID3D11BlendState* nullBlendState = nullptr;
+	ID3D11BlendState* blendStateAlphaToCoverage = nullptr;
 
 	//DXGI
 	IDXGISwapChain3* swapchain;

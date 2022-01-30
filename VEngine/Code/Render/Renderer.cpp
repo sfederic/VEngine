@@ -256,6 +256,17 @@ void Renderer::CreateRasterizerStates()
 
 void Renderer::CreateBlendStates()
 {
+	//NULL BLEND STATE
+	{
+		D3D11_BLEND_DESC nullBlendDesc = {};
+		nullBlendDesc.RenderTarget[0].BlendEnable = false;
+		HR(device->CreateBlendState(&nullBlendDesc, &blendStateAlphaToCoverage));
+
+		BlendState* bs = new BlendState(BlendStates::null, nullBlendDesc, nullBlendState);
+		blendStateMap[bs->name] = bs;
+	}
+
+	//DEFAULT BLEND STATE
 	{
 		D3D11_BLEND_DESC alphaToCoverageDesc = {};
 		//MSAA has to be set for AlphaToCoverage to work.
@@ -271,7 +282,7 @@ void Renderer::CreateBlendStates()
 
 		HR(device->CreateBlendState(&alphaToCoverageDesc, &blendStateAlphaToCoverage));
 
-		BlendState* bs = new BlendState(BlendStateNames::Default, alphaToCoverageDesc, blendStateAlphaToCoverage);
+		BlendState* bs = new BlendState(BlendStates::Default, alphaToCoverageDesc, blendStateAlphaToCoverage);
 		blendStateMap[bs->name] = bs;
 	}
 }
@@ -1184,15 +1195,7 @@ void Renderer::SetRenderPipelineStates(MeshComponent* mesh)
 	}
 
 	const FLOAT blendState[4] = { 0.f };
-	if (material->blendState)
-	{
-		context->OMSetBlendState(material->blendState->data, blendState, 0xFFFFFFFF);
-	}
-	else
-	{
-		//Set default
-		context->OMSetBlendState(nullptr, blendState, 0xFFFFFFFF);
-	}
+	context->OMSetBlendState(material->blendState->data, blendState, 0xFFFFFFFF);
 
 	context->VSSetShader(material->shader->vertexShader, nullptr, 0);
 	context->PSSetShader(material->shader->pixelShader, nullptr, 0);
