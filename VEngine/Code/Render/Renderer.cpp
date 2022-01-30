@@ -463,6 +463,13 @@ void Renderer::RenderMeshComponents()
 	timeData.deltaTime = Core::GetDeltaTime();
 	timeData.timeSinceStartup = Core::timeSinceStartup;
 
+	//Set time constant buffer
+	MapBuffer(cbTime, &timeData, sizeof(ShaderTimeData));
+	context->VSSetConstantBuffers(cbTimeRegister, 1, &cbTime);
+
+	//Set lights buffer
+	context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
+
 	for (auto mesh : MeshComponent::system.components)
 	{
 		if (!mesh->active || mesh->cullMesh) continue;
@@ -481,13 +488,6 @@ void Renderer::RenderMeshComponents()
 
 		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
-
-		//Set lights buffer
-		context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
-
-		//Set time constant buffer
-		MapBuffer(cbTime, &timeData, sizeof(ShaderTimeData));
-		context->VSSetConstantBuffers(cbTimeRegister, 1, &cbTime);
 
 		//Set mesh data to shader
 		ShaderMeshData meshData = {};
