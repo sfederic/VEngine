@@ -139,7 +139,7 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
-0.127403
+-0.0626004
 next
 Unit
 0
@@ -148,7 +148,7 @@ EntranceTrigger
 NPC
 0
 MeshActor
-8
+10
  Position
 2 -0.5 2
  Rotation
@@ -498,6 +498,96 @@ Texture
 test.png
 UID
 1098364953
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+0 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+bevel_rock2.fbx
+Name
+bevel_rock28
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+floor.jpg
+UID
+3252291698
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+0 0 1
+ Rotation
+0 0.707279 0 -0.706934
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+bevel_rock2.fbx
+Name
+bevel_rock29
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+floor.jpg
+UID
+3252291698
 UvOffset
 0 0
 UvOffsetSpeed
