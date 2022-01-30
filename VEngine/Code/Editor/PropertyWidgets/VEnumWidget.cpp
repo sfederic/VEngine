@@ -24,6 +24,8 @@ void VEnumWidget::SetValue()
 	{
 		prop.change(value);
 	}
+
+	clearFocus();
 }
 
 void VEnumWidget::ResetValue()
