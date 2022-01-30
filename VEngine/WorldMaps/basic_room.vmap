@@ -8,6 +8,8 @@ Grid
 1 1 1
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
 Cull
@@ -50,88 +52,7 @@ startBattleOnLoad
 0
 next
 GridActor
-1
- Position
-2 0 2
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Add On Interact
 0
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Cull
-1
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-1
-Image File
-
-Inspect
-1
-Interact
-1
-Interact Text
-
-Memory Desc
-
-Memory Name
-
-Mesh
-
-Name
-GridActor0
-Obstacle
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Specular
-1 1 1 1
-Specular Power
-0
-Static
-1
-Texture
-test.png
-UID
-1539633952
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-condition
-
-conditionArg
-
-interactKnownText
-
-next
 AudioActor
 1
  Position
@@ -158,15 +79,17 @@ next
 Player
 1
  Position
-0 9.53674e-07 4
+3 -9.53674e-07 1
  Rotation
-0 0.707106 0 0.707107
+0 -0.707106 0 0.707106
  Scale
 0.999964 1 0.999964
 Ambient
 1 1 1 1
 Audio Filename
 step.wav
+Blend State
+null
 Casts Shadow
 1
 Cull
@@ -216,7 +139,7 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
--0.000281483
+0.127403
 next
 Unit
 0
@@ -225,15 +148,17 @@ EntranceTrigger
 NPC
 0
 MeshActor
-5
+8
  Position
 2 -0.5 2
  Rotation
 0.707107 0 0 -0.707107
  Scale
-3 2.99997 0.999994
+3 2.99991 0.999979
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
 Cull
@@ -270,135 +195,6 @@ UvScale
 1 1
 next
  Position
--1 1 2
- Rotation
-0 0.707229 0 0.706985
- Scale
-3 1.5 0
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-plane.fbx
-Name
-house_front1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Specular
-1 1 1 1
-Specular Power
-0
-Static
-1
-Texture
-wall03.png
-UID
-3696897037
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
- Position
-5.00069 1 2
- Rotation
--0 -0.706985 -0 0.707228
- Scale
-3.00002 1.5 1
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-plane.fbx
-Name
-house_front2
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Specular
-1 1 1 1
-Specular Power
-0
-Static
-1
-Texture
-wall03.png
-UID
-3696897037
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
- Position
-2 1 -1
- Rotation
--0 0.000172756 -0 1
- Scale
-3.00002 1.5 0.75
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-plane.fbx
-Name
-house_front3
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Specular
-1 1 1 1
-Specular Power
-0
-Static
-1
-Texture
-wall03.png
-UID
-3696897037
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
- Position
 2 1 5
  Rotation
 -0 0 -0 1
@@ -406,6 +202,8 @@ next
 2.5 2.5 1
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
 Cull
@@ -415,7 +213,7 @@ Grid Obstacle
 Mesh
 house_front.fbx
 Name
-house_front4
+MeshActor1
 Rast State
 solid
 Shader
@@ -441,14 +239,284 @@ UvRotationSpeed
 UvScale
 1 1
 next
+ Position
+1 2 4
+ Rotation
+-0.706863 -1.55109e-08 0.707351 1.53977e-08
+ Scale
+1 0.999991 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+MeshActor2
+Rast State
+nobackcull
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+shop_sign.png
+UID
+2752519588
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+3 2 4
+ Rotation
+-0.706863 -1.55109e-08 0.707351 1.53977e-08
+ Scale
+1 0.999993 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+MeshActor3
+Rast State
+nobackcull
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+shop_sign.png
+UID
+2752519588
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+2 1 4.7
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+lamp.fbx
+Name
+lamp4
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UID
+1006537802
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+4 1 4.7
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+lamp.fbx
+Name
+lamp5
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UID
+1006537802
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+0 1 4.7
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+lamp.fbx
+Name
+lamp6
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UID
+1006537802
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+2 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 0.75 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+lamp_post02.fbx
+Name
+lamp_post027
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UID
+1098364953
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
 DirectionalLightActor
 1
  Position
-2 1 -1
+0 0 3
  Rotation
-0.21991 -0.604199 0.261949 0.719699
+0 0 0 1
  Scale
-0.999997 0.999999 0.999997
+1 1 1
 Colour
 1 1 1 1
 LightEnabled
@@ -456,7 +524,7 @@ LightEnabled
 Name
 DirectionalLightActor0
 UID
-1060802428
+2430550094
 next
 SavePoint
 0
