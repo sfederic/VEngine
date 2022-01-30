@@ -2,7 +2,6 @@
 #include <DirectXMath.h>
 #include <vector>
 #include <string>
-#include <set>
 #include <map>
 
 using namespace DirectX;

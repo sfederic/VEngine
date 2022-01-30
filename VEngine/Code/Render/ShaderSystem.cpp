@@ -1,5 +1,6 @@
 #include "ShaderSystem.h"
 #include <filesystem>
+#include <set>
 #include "Debug.h"
 #include "Renderer.h"
 #include "VString.h"
