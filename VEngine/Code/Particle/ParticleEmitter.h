@@ -1,8 +1,6 @@
 #pragma once
 #include "Components/SpatialComponent.h"
 #include "Components/ComponentSystem.h"
-#include <vector>
-#include <string>
 #include "Particle.h"
 
 struct ParticleEmitter : SpatialComponent
