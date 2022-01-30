@@ -20,9 +20,6 @@ VS_OUT VSMain(VS_IN i)
 
 float4 PSMain(VS_OUT i) : SV_Target
 {
-	float3 lightDir = float3(0.15f, -0.13f, 0.8f);
-	float diffuse = dot(-lightDir, i.normal);
-
-	float4 finalColour = instanceData[i.instanceID].colour + diffuse;
+	float4 finalColour = instanceData[i.instanceID].colour;
 	return finalColour;
 }
