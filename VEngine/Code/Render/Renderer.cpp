@@ -861,6 +861,7 @@ void Renderer::RenderParticleEmitters()
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
 	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
+	shaderMatrices.texMatrix = XMMatrixIdentity();
 
 	for (auto emitter : ParticleEmitter::system.components)
 	{
