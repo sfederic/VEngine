@@ -11,7 +11,6 @@
 #include "Physics/PhysicsSystem.h"
 #include "VMath.h"
 #include "Camera.h"
-#include "Log.h"
 #include "Gameplay/GameUtils.h"
 #include "Actors/Game/Player.h"
 
@@ -63,7 +62,8 @@ void MeshComponent::Tick(float deltaTime)
 		physicsSystem.GetTransformFromPhysicsActor(this);
 	}
 
-	CullOnAngleBetweenCameraAndMesh();
+	//CullOnAngleBetweenCameraAndMesh();
+	//SetBlendWhenBetweenPlayerAndCamera();
 }
 
 void MeshComponent::Create()
@@ -175,6 +175,24 @@ void MeshComponent::CullOnAngleBetweenCameraAndMesh()
 		//The angles here are fairly specific to the player camera's position and lookat.
 		//Use this function mainly for walls.
 		cullMesh = angle > 110.f;
-		Log("angle: %f", angle);
+	}
+}
+
+void MeshComponent::SetBlendWhenBetweenPlayerAndCamera()
+{
+	const XMVECTOR meshPos = GetWorldPositionV();
+	const XMVECTOR cameraPos = activeCamera->GetWorldPositionV();
+	const XMVECTOR playerPos = GameUtils::GetPlayer()->GetPositionVector();
+
+	const float cameraToMeshDistance = XMVector3Length(meshPos - cameraPos).m128_f32[0];
+	const float cameraToPlayerDistance = XMVector3Length(playerPos - cameraPos).m128_f32[0];
+
+	if (cameraToMeshDistance < cameraToPlayerDistance)
+	{
+		SetBlendState(BlendStates::Default);
+	}
+	else
+	{
+		SetBlendState(BlendStates::null);
 	}
 }

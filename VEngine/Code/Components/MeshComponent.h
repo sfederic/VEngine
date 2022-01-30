@@ -65,6 +65,5 @@ public:
 
 private:
 	void CullOnAngleBetweenCameraAndMesh();
-
-	//@Todo: meshes also need an blend function to hide meshes when they're between player and camera
+	void SetBlendWhenBetweenPlayerAndCamera();
 };
