@@ -11,6 +11,7 @@
 #include "Physics/PhysicsSystem.h"
 #include "VMath.h"
 #include "Camera.h"
+#include "Log.h"
 #include "Gameplay/GameUtils.h"
 #include "Actors/Game/Player.h"
 
@@ -164,13 +165,16 @@ void MeshComponent::CullOnAngleBetweenCameraAndMesh()
 	if (cull)
 	{
 		const XMVECTOR meshForward = GetForwardVectorV();
-		const XMVECTOR cameraForward = activeCamera->GetForwardVectorV();
+		const XMVECTOR cameraPos = activeCamera->GetWorldPositionV();
+		const XMVECTOR playerPos = GameUtils::GetPlayer()->GetPositionVector();
+		const XMVECTOR cameraForward = playerPos - cameraPos;
 
 		const float angle = XMConvertToDegrees(
 			XMVector3AngleBetweenVectors(meshForward, cameraForward).m128_f32[0]);
 
 		//The angles here are fairly specific to the player camera's position and lookat.
 		//Use this function mainly for walls.
-		cullMesh = (angle >= 90.f) && (angle <= 180.f);
+		cullMesh = angle > 110.f;
+		Log("angle: %f", angle);
 	}
 }
