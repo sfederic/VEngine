@@ -365,12 +365,6 @@ void Renderer::RenderShadowPass()
 
 	shadowMap->BindDsvAndSetNullRenderTarget(context);
 
-	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-	shaderMatrices.view = activeCamera->GetViewMatrix();
-	shaderMatrices.lightMVP = shadowMap->OutputMatrix();
-	shaderMatrices.lightViewProj = shadowMap->GetLightViewMatrix() * shadowMap->GetLightPerspectiveMatrix();
-
 	for (auto mesh : MeshComponent::system.components)
 	{
 		if (!mesh->castsShadow || !mesh->active)
@@ -424,6 +418,20 @@ void Renderer::Render()
 
 	StartGPUQueries();
 
+	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	shaderMatrices.view = activeCamera->GetViewMatrix();
+	shaderMatrices.lightMVP = shadowMap->OutputMatrix();
+	shaderMatrices.lightViewProj = shadowMap->GetLightViewMatrix() * shadowMap->GetLightPerspectiveMatrix();
+
+	ShaderTimeData timeData = {};
+	timeData.deltaTime = Core::GetDeltaTime();
+	timeData.timeSinceStartup = Core::timeSinceStartup;
+
+	//Set time constant buffer
+	MapBuffer(cbTime, &timeData, sizeof(ShaderTimeData));
+	context->VSSetConstantBuffers(cbTimeRegister, 1, &cbTime);
+
 	RenderShadowPass();
 	RenderMeshComponents();
 	RenderInstanceMeshComponents();
@@ -439,9 +447,6 @@ void Renderer::Render()
 void Renderer::RenderMeshComponents()
 {
 	PROFILE_START
-
-	shaderMatrices.view = activeCamera->GetViewMatrix();
-	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
 
 	if (!DirectionalLightComponent::system.components.empty())
 	{
@@ -459,16 +464,12 @@ void Renderer::RenderMeshComponents()
 
 	UpdateLights();
 
-	ShaderTimeData timeData = {};
-	timeData.deltaTime = Core::GetDeltaTime();
-	timeData.timeSinceStartup = Core::timeSinceStartup;
-
-	//Set time constant buffer
-	MapBuffer(cbTime, &timeData, sizeof(ShaderTimeData));
-	context->VSSetConstantBuffers(cbTimeRegister, 1, &cbTime);
-
 	//Set lights buffer
 	context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
+
+	//Set shadow resources
+	context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
+	context->PSSetSamplers(1, 1, &shadowMap->sampler);
 
 	for (auto mesh : MeshComponent::system.components)
 	{
@@ -495,10 +496,6 @@ void Renderer::RenderMeshComponents()
 		MapBuffer(cbMeshData, &meshData, sizeof(ShaderMeshData));
 		context->VSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
 		context->PSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
-
-		//Set shadow resources
-		context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
-		context->PSSetSamplers(1, 1, &shadowMap->sampler);
 
 		//Draw
 		context->DrawIndexed(mesh->meshDataProxy->indices->size(), 0, 0);
@@ -573,39 +570,37 @@ void Renderer::RenderBounds()
 
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
-		shaderMatrices.view = activeCamera->GetViewMatrix();
-		shaderMatrices.proj = activeCamera->GetProjectionMatrix();
-
 		//Set debug wireframe material colour
 		materialShaderData.ambient = XMFLOAT4(0.75f, 0.75f, 0.75f, 1.0f);
 		MapBuffer(cbMaterial, &materialShaderData, sizeof(MaterialShaderData));
 		context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 
-		for (Actor* actor : world.GetAllActorsInWorld())
+		for(auto mesh : MeshComponent::system.components)
 		{
-			for (SpatialComponent* spatialComponent : actor->GetComponentsOfType<SpatialComponent>())
-			{
-				//Skip any triggers, otherwise you're rendering two wireframe meshes per component
-				if (dynamic_cast<BoxTriggerComponent*>(spatialComponent))
-				{
-					continue;
-				}
+			BoundingOrientedBox boundingBox = mesh->boundingBox;
 
-				BoundingOrientedBox boundingBox = spatialComponent->boundingBox;
-				XMMATRIX boundsMatrix = VMath::GetBoundingBoxMatrix(boundingBox, actor);
+			XMFLOAT3 extents = XMFLOAT3(boundingBox.Extents.x * 2.f, boundingBox.Extents.y * 2.f,
+				boundingBox.Extents.z * 2.f);
 
-				shaderMatrices.model = boundsMatrix;
+			XMVECTOR center = mesh->GetWorldPositionV() + XMLoadFloat3(&boundingBox.Center);
+			XMVECTOR scale = mesh->GetScaleV() * XMLoadFloat3(&extents);
 
-				//Set bouding box scale just slightly more than the component to avoid overlap
-				shaderMatrices.model.r[0].m128_f32[0] += 0.01f;
-				shaderMatrices.model.r[1].m128_f32[1] += 0.01f;
-				shaderMatrices.model.r[2].m128_f32[2] += 0.01f;
+			XMMATRIX boundsMatrix = XMMatrixAffineTransformation(scale,
+				XMVectorSet(0.f, 0.f, 0.f, 1.f),
+				mesh->GetRotationV(),
+				center);
 
-				shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
-				MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
+			shaderMatrices.model = boundsMatrix;
 
-				context->Draw(debugBox.boxMesh->meshDataProxy->vertices->size(), 0);
-			}
+			//Set bouding box scale just slightly more than the component to avoid overlap
+			shaderMatrices.model.r[0].m128_f32[0] += 0.01f;
+			shaderMatrices.model.r[1].m128_f32[1] += 0.01f;
+			shaderMatrices.model.r[2].m128_f32[2] += 0.01f;
+
+			shaderMatrices.MakeModelViewProjectionMatrix();
+			MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
+
+			context->Draw(debugBox.boxMesh->meshDataProxy->vertices->size(), 0);
 		}
 	}
 
@@ -636,7 +631,7 @@ void Renderer::RenderBounds()
 
 			shaderMatrices.model.r[3] += XMLoadFloat3(&boxTrigger->boundingBox.Center);
 
-			shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
+			shaderMatrices.MakeModelViewProjectionMatrix();
 			MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
 
 			//Set trigger wireframe material colour
@@ -660,27 +655,24 @@ void Renderer::RenderCameraMeshes()
 
 	MaterialShaderData materialShaderData;
 
+	context->RSSetState(rastStateWireframe);
+
+	ShaderItem* shader = shaderSystem.FindShader(L"SolidColour.hlsl");
+	context->VSSetShader(shader->vertexShader, nullptr, 0);
+	context->PSSetShader(shader->pixelShader, nullptr, 0);
+
+	context->IASetVertexBuffers(0, 1, &debugCamera.mesh->pso->vertexBuffer->data, &stride, &offset);
+
+	context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+
+	//Make cameras red
+	materialShaderData.ambient = XMFLOAT4(1.0f, 0.0f, 0.f, 1.0f);
+	MapBuffer(cbMaterial, &materialShaderData, sizeof(MaterialShaderData));
+	context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
+
 	//DRAW CAMERAS
 	for (auto camera : CameraComponent::system.components)
 	{
-		context->RSSetState(rastStateWireframe);
-
-		ShaderItem* shader = shaderSystem.FindShader(L"SolidColour.hlsl");
-		context->VSSetShader(shader->vertexShader, nullptr, 0);
-		context->PSSetShader(shader->pixelShader, nullptr, 0);
-
-		context->IASetVertexBuffers(0, 1, &debugCamera.mesh->pso->vertexBuffer->data, &stride, &offset);
-
-		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
-
-		shaderMatrices.view = activeCamera->GetViewMatrix();
-		shaderMatrices.proj = activeCamera->GetProjectionMatrix();
-
-		//Make cameras red
-		materialShaderData.ambient = XMFLOAT4(1.0f, 0.0f, 0.f, 1.0f);
-		MapBuffer(cbMaterial, &materialShaderData, sizeof(MaterialShaderData));
-		context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
-
 		shaderMatrices.model = camera->GetWorldMatrix();
 
 		shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
