@@ -51,6 +51,7 @@ struct Material
 	ShaderData shaderData;
 
 	VEnum rastStateValue;
+	VEnum blendStateValue;
 
 	Material();
 	Material(std::string textureFilename_, std::string shaderFilename_);

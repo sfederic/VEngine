@@ -18,6 +18,9 @@ Material::Material()
 	rastStateValue.Add(RastStates::noBackCull);
 	rastStateValue.Add(RastStates::shadow);
 	rastStateValue.Add(RastStates::wireframe);
+
+	blendStateValue.Add(BlendStates::null);
+	blendStateValue.Add(BlendStates::Default);
 }
 
 Material::Material(std::string textureFilename_, std::string shaderFilename_)
@@ -32,6 +35,9 @@ Material::Material(std::string textureFilename_, std::string shaderFilename_)
 	rastStateValue.Add(RastStates::noBackCull);
 	rastStateValue.Add(RastStates::shadow);
 	rastStateValue.Add(RastStates::wireframe);
+
+	blendStateValue.Add(BlendStates::null);
+	blendStateValue.Add(BlendStates::Default);
 }
 
 void Material::Create()
@@ -40,6 +46,7 @@ void Material::Create()
 	sampler = RenderUtils::GetDefaultSampler();
 	shader = shaderSystem.FindShader(VString::stows(shaderData.filename));
 	rastState = renderer.rastStateMap[rastStateValue.GetValue()];
+	blendState = renderer.blendStateMap[blendStateValue.GetValue()];
 }
 
 void Material::Destroy()
@@ -74,7 +81,7 @@ static void ReassignRastState(void* data)
 	RastState* foundRastState = renderer.rastStateMap[rastName];
 	if (foundRastState == nullptr)
 	{
-		Log("%s not found on rast state change.", rastName.c_str());
+		Log("[%s] not found on rast state change.", rastName.c_str());
 		return;
 	}
 
@@ -84,6 +91,27 @@ static void ReassignRastState(void* data)
 		for (auto mesh : meshes)
 		{
 			mesh->material->rastState = foundRastState;
+		}
+	}
+}
+
+static void ReassignBlendState(void* data)
+{
+	auto blendState = (VEnum*)data;
+	auto blendName = blendState->GetValue();
+	BlendState* foundBlendState = renderer.blendStateMap[blendName];
+	if (foundBlendState == nullptr)
+	{
+		Log("[%s] not found on blend state change.", blendName.c_str());
+		return;
+	}
+
+	if (worldEditor.pickedActor)
+	{
+		auto meshes = worldEditor.pickedActor->GetComponentsOfType<MeshComponent>();
+		for (auto mesh : meshes)
+		{
+			mesh->material->blendState = foundBlendState;
 		}
 	}
 }
@@ -111,6 +139,7 @@ Properties Material::GetProps()
 	props.Add("Texture", &textureData).change = ReassignTexture;
 	props.Add("Shader", &shaderData).change = ReassignShader;
 	props.Add("Rast State", &rastStateValue).change = ReassignRastState;
+	props.Add("Blend State", &blendStateValue).change = ReassignBlendState;
 	props.Add("UvOffset", &materialShaderData.uvOffset);
 	props.Add("UvOffsetSpeed", &uvOffsetSpeed);
 	props.Add("UvScale", &materialShaderData.uvScale);

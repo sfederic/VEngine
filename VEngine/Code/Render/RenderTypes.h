@@ -30,8 +30,9 @@ struct RastStates
 	inline static const std::string shadow = "shadow";
 };
 
-struct BlendStateNames
+struct BlendStates
 {
+	inline static const std::string null = "null";
 	inline static const std::string Default = "default";
 };
 
