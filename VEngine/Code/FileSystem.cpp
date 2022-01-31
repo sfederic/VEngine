@@ -16,6 +16,7 @@
 #include "Input.h"
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/BattleSystem.h"
+#include "Quests/QuestSystem.h"
 
 FileSystem fileSystem;
 
@@ -208,4 +209,10 @@ void FileSystem::ResetWorldState()
 
 	editor->UpdateWorldList();
 	editor->ClearProperties();
+
+	if (Core::gameplayOn) //Don't want actors affected while not in gameplay
+	{
+		//It's important that this is called after editor::UpdateWorldList() for actor names
+		ExecuteQuestsForCurrentHour();
+	}
 }
