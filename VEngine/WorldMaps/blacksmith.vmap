@@ -8,8 +8,12 @@ Grid
 1 1 1
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
@@ -24,6 +28,10 @@ Size X
 5
 Size Y
 5
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -40,6 +48,8 @@ UvRotationSpeed
 0
 UvScale
 1 1
+startBattleOnLoad
+0
 next
 GridActor
 2
@@ -53,12 +63,16 @@ Add On Interact
 0
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
 Condition
 
 Condition Value
 
+Cull
+0
 Destruct
 0
 File
@@ -89,6 +103,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -128,12 +146,16 @@ Add On Interact
 0
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
 Condition
 
 Condition Value
 
+Cull
+0
 Destruct
 0
 File
@@ -164,6 +186,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -207,8 +233,12 @@ Ambient
 1 1 1 1
 Audio Filename
 step.wav
+Blend State
+null
 Casts Shadow
 1
+Cull
+0
 FOV
 60
 Far Z
@@ -233,6 +263,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -284,7 +318,104 @@ conditionArg
 
 next
 NPC
+1
+ Position
+2 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
 0
+Ambient
+1 1 1 1
+Attack Points
+1
+Attack Range
+1
+Blend State
+null
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Cull
+0
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+1
+Image File
+
+Inspect
+1
+Interact
+1
+Interact Text
+
+Memory Desc
+
+Memory Name
+
+Mesh
+
+Move Points
+1
+Move Speed
+3
+Name
+blacksmith
+Obstacle
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UID
+3161115418
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+battleStartText
+
+condition
+
+conditionArg
+
+deathText
+
+interactKnownText
+
+spawnText
+
+next
 MeshActor
 12
  Position
@@ -295,8 +426,12 @@ MeshActor
 5 1 5
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
@@ -307,6 +442,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -332,8 +471,12 @@ next
 1 1 1
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
@@ -344,6 +487,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -369,8 +516,12 @@ next
 1 1 1
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
@@ -381,6 +532,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -406,8 +561,12 @@ next
 1 1 1
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
@@ -418,6 +577,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -443,8 +606,12 @@ next
 1 1 1
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
@@ -455,6 +622,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -480,8 +651,12 @@ next
 1 1 1
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
@@ -492,6 +667,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -517,8 +696,12 @@ next
 1 1 1
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
@@ -529,6 +712,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -554,8 +741,12 @@ next
 1 1 1
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
@@ -566,6 +757,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -591,8 +786,12 @@ next
 5 1 5
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
@@ -603,6 +802,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -628,8 +831,12 @@ next
 1 1 1
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
@@ -640,6 +847,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -665,8 +876,12 @@ next
 1 1 1
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
@@ -677,6 +892,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -702,8 +921,12 @@ next
 2 1 2
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
@@ -714,6 +937,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
 Static
 1
 Texture
@@ -836,102 +1063,17 @@ spear
 next
 ParticleSystem
 0
-MemoryWeapon
-1
- Position
-2 1 4.4
- Rotation
--0 -0.707107 -0 0.707107
- Scale
-1 1 1
-Add On Interact
-0
-Ambient
-1 1 1 1
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Destruct
-1
-Extents
-0.45 0.45 0.45
-File
-
-Grid Obstacle
-0
-Health
-1
-Image File
-
-Inspect
-1
-Interact
-1
-Interact Text
-
-Memory Desc
-
-Memory Name
-Shield
-Mesh
-shield.fbx
-Name
-MemoryWeapon0
-Obstacle
-0
-Offset
-0 -1 -0.4
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Static
-1
-Texture
-test.png
-UID
-1816719481
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-WeaponAttack
-0
-WeaponDefend
-3
-WeaponEnergy
-2
-WeaponWeight
-1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-condition
-
-conditionArg
-
-interactKnownText
-
-next
 DialogueTrigger
 0
 DestructibleActor
+0
+MemoryActor
 0
 TitleScreenActor
 0
 PushableGridActor
 0
 PlayerDialogueTrigger
+0
+PhysicsActor
 0
