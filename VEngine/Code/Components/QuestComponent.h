@@ -7,5 +7,9 @@ struct QuestComponent : Component
 {
 	COMPONENT_SYSTEM(QuestComponent);
 
+	std::string questName;
+
 	virtual Properties GetProps() override;
+
+	bool CheckQuest();
 };
