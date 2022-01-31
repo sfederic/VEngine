@@ -34,10 +34,6 @@ void ExecuteQuestsForCurrentHour()
 			continue;
 		}
 
-		switch (currentHour)
-		{
-		case 0:
-			quest->Hour0();
-		}
+		quest->ActivateOnHour();
 	}
 }
