@@ -1,7 +1,7 @@
 #pragma once
 
 //Quest data that quests inherit from and define their events via the HourN() calls.
-struct QuestLine
+struct Quest
 {
 	virtual bool Hour0() {}
 	virtual bool Hour1() {}

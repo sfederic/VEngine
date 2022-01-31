@@ -1,7 +1,7 @@
 #pragma once
-#include "QuestLine.h"
+#include "Quest.h"
 
-struct BlacksmithQuest : QuestLine
+struct BlacksmithQuest : Quest
 {
 	virtual bool Hour1() override;
 };
