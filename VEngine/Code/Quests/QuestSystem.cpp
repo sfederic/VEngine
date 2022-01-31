@@ -29,6 +29,11 @@ void ExecuteQuestsForCurrentHour()
 	{
 		Quest* quest = questPair.second;
 
+		if (!quest->isActive)
+		{
+			continue;
+		}
+
 		switch (currentHour)
 		{
 		case 0:
