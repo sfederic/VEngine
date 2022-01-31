@@ -114,6 +114,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Code\Quests\BlacksmithQuest.cpp" />
+    <ClCompile Include="Code\Quests\Quest.cpp" />
     <ClCompile Include="Code\UI\BulletWidget.cpp" />
     <ClCompile Include="Code\Components\CharacterControllerComponent.cpp" />
     <ClCompile Include="Code\Gameplay\BattleSystem.cpp" />
