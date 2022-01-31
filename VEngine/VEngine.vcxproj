@@ -221,7 +221,6 @@
     <ClCompile Include="Code\Actors\Game\PhysicsActor.cpp" />
     <ClCompile Include="Code\Actors\Game\MemoryActor.cpp" />
     <ClCompile Include="Code\Quests\QuestSystem.cpp" />
-    <ClInclude Include="Code\Quests\BlacksmithQuest.h" />
     <ClInclude Include="Code\Quests\Quest.h" />
     <ClInclude Include="Code\UI\BulletWidget.h" />
     <ClInclude Include="Code\Components\CharacterControllerComponent.h" />
