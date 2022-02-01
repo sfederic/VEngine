@@ -1,6 +1,7 @@
 #include "QuestComponent.h"
 #include "Quests/QuestSystem.h"
 #include "Quests/Quest.h"
+#include "Log.h"
 
 Properties QuestComponent::GetProps()
 {
@@ -40,5 +41,6 @@ void QuestComponent::DeactivateQuest()
     if (quest)
     {
         quest->isActive = false;
+        Log("Quest [%s] deactivated.", questName.c_str());
     }
 }

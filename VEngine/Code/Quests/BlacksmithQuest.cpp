@@ -18,5 +18,8 @@ bool BlacksmithQuest::Hour0()
 	{
 		actor->SetActive(false);
 	}
+
+	isActive = false;
+
 	return true;
 }
