@@ -32,12 +32,6 @@ void QuestSystem::ExecuteAllQuestsForCurrentHour()
 	for (auto& questPair : *quests)
 	{
 		Quest* quest = questPair.second;
-
-		if (!quest->isActive)
-		{
-			continue;
-		}
-
 		quest->ActivateOnHour();
 	}
 }

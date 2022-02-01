@@ -5,10 +5,10 @@
 struct BlacksmithQuest : Quest
 {
 	BlacksmithQuest() : Quest("Blacksmith") {}
-	virtual bool Hour0() override;
+	virtual bool Hour1() override;
 }blacksmithQuest;
 
-bool BlacksmithQuest::Hour0()
+bool BlacksmithQuest::Hour1()
 {
 	if (world.worldFilename != "blacksmith.vmap") return false;
 
