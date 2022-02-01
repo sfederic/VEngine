@@ -4,6 +4,7 @@
 #include "Components/MemoryComponent.h"
 #include "Components/TimeComponent.h"
 #include "Components/DialogueComponent.h"
+#include "Components/QuestComponent.h"
 #include "UI/HealthWidget.h"
 #include "Gameplay/GameUtils.h"
 #include "Grid.h"
@@ -16,6 +17,7 @@ GridActor::GridActor()
 	timeComponent = TimeComponent::system.Add(this);
 	memoryComponent = MemoryComponent::system.Add(this);
 	dialogueComponent = DialogueComponent::system.Add(this);
+	questComponent = QuestComponent::system.Add(this);
 }
 
 void GridActor::Start()
@@ -61,6 +63,7 @@ void GridActor::InflictDamage(int damage)
 
 	if (health <= 0)
 	{
+		questComponent->
 		GetCurrentNode()->Show();
 		Destroy();
 	}
