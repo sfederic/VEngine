@@ -25,11 +25,20 @@ bool QuestComponent::CheckQuest()
 
 Quest* QuestComponent::GetQuest()
 {
-    return FindQuest(questName.c_str());
+    auto quest = FindQuest(questName.c_str());
+    if (quest)
+    {
+        return quest;
+    }
+
+    return nullptr;
 }
 
 void QuestComponent::DeactivateQuest()
 {
     auto quest = GetQuest();
-    quest->isActive = false;
+    if (quest)
+    {
+        quest->isActive = false;
+    }
 }

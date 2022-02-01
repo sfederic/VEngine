@@ -18,7 +18,13 @@ void AddQuest(const char* questName, Quest* quest)
 
 Quest* FindQuest(const char* questName)
 {
-	return quests->find(questName)->second;
+	auto questIt = quests->find(questName);
+	if (questIt != quests->end())
+	{
+		return questIt->second;
+	}
+
+	return nullptr;
 }
 
 void ExecuteAllQuestsForCurrentHour()
