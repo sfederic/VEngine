@@ -5,7 +5,7 @@
 
 struct BlacksmithQuest : Quest
 {
-	BlacksmithQuest() { AddQuest("BlacksmithQuest", this); }
+	BlacksmithQuest() { questSystem.AddQuest("BlacksmithQuest", this); }
 	virtual bool Hour0() override;
 }blacksmithQuest;
 

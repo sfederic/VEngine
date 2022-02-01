@@ -12,7 +12,7 @@ Properties QuestComponent::GetProps()
 
 bool QuestComponent::CheckQuest()
 {
-    auto quest = FindQuest(questName.c_str());
+    auto quest = questSystem.FindQuest(questName.c_str());
 
     if (!quest->isActive)
     {
@@ -26,7 +26,7 @@ bool QuestComponent::CheckQuest()
 
 Quest* QuestComponent::GetQuest()
 {
-    auto quest = FindQuest(questName.c_str());
+    auto quest = questSystem.FindQuest(questName.c_str());
     if (quest)
     {
         return quest;

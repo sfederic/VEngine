@@ -146,7 +146,7 @@ void Core::StartGame()
 	world.StartAllComponents();
 	world.WakeAndStartAllActors();
 
-	ExecuteAllQuestsForCurrentHour();
+	questSystem.ExecuteAllQuestsForCurrentHour();
 
 	worldEditor.pickedActor = nullptr;
 

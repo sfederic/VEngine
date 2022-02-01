@@ -213,6 +213,6 @@ void FileSystem::ResetWorldState()
 	if (Core::gameplayOn) //Don't want actors affected while not in gameplay
 	{
 		//It's important that this is called after editor::UpdateWorldList() for actor names
-		ExecuteAllQuestsForCurrentHour();
+		questSystem.ExecuteAllQuestsForCurrentHour();
 	}
 }
