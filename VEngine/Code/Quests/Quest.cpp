@@ -1,5 +1,11 @@
 #include "Quest.h"
+#include "QuestSystem.h"
 #include "Gameplay/GameInstance.h"
+
+Quest::Quest(const char* questName)
+{
+	questSystem.AddQuest(questName, this);
+}
 
 bool Quest::ActivateOnHour()
 {

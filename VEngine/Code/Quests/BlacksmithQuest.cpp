@@ -1,11 +1,10 @@
 #include "Quest.h"
-#include "QuestSystem.h"
 #include "World.h"
 #include "Actors/Actor.h"
 
 struct BlacksmithQuest : Quest
 {
-	BlacksmithQuest() { questSystem.AddQuest("BlacksmithQuest", this); }
+	BlacksmithQuest() : Quest("Blacksmith") {}
 	virtual bool Hour0() override;
 }blacksmithQuest;
 

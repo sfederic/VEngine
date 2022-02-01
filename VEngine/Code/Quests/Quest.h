@@ -5,6 +5,7 @@ struct Quest
 {
 	bool isActive = true;
 
+	Quest(const char* questName);
 	bool ActivateOnHour();
 
 private:
