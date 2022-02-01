@@ -26,6 +26,12 @@ void GridActor::Start()
 
 	auto node = GetCurrentNode();
 
+	//Disable actor based on quest
+	if (!questComponent->CheckIfQuestActive())
+	{
+		SetActive(false);
+	}
+
 	if (!EnableBasedOnTime() && isGridObstacle)
 	{
 		node->Hide();
