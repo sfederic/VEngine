@@ -58,9 +58,9 @@ AudioActor
 Player
 1
  Position
-5 0 3
+2 0.00146675 1
  Rotation
-0 1 0 5.96046e-08
+-0 0 -0 1
  Scale
 0.999999 1 0.999999
 Ambient
@@ -118,7 +118,7 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
-0.132982
+0.0149301
 next
 Unit
 0
@@ -342,6 +342,8 @@ Name
 NPC0
 Obstacle
 1
+Quest Name
+
 Rast State
 solid
 Shader
@@ -439,6 +441,8 @@ Name
 NPC1
 Obstacle
 1
+Quest Name
+Blacksmith
 Rast State
 solid
 Shader
