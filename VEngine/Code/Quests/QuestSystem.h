@@ -9,11 +9,11 @@ struct Quest;
 
 struct QuestSystem
 {
-	std::map<std::string, Quest*> quests;
+	std::map<std::string, Quest*>* quests = nullptr;
 
 	void AddQuest(const char* questName, Quest* quest);
 	Quest* FindQuest(const char* questName);
 	void ExecuteAllQuestsForCurrentHour();
 };
 
-inline static QuestSystem questSystem;
+extern QuestSystem questSystem;
