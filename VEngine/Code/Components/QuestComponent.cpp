@@ -22,3 +22,8 @@ bool QuestComponent::CheckQuest()
 
     return false;
 }
+
+Quest* QuestComponent::GetQuest()
+{
+    return FindQuest(questName.c_str());
+}

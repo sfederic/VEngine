@@ -2,6 +2,8 @@
 #include "Component.h"
 #include "ComponentSystem.h"
 
+struct Quest;
+
 //Component to be able to call Quest functions/state from actors on death, interaction, etc.
 struct QuestComponent : Component
 {
@@ -12,4 +14,5 @@ struct QuestComponent : Component
 	virtual Properties GetProps() override;
 
 	bool CheckQuest();
+	Quest* GetQuest();
 };
