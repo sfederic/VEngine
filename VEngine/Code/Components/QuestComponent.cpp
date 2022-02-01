@@ -44,3 +44,14 @@ void QuestComponent::DeactivateQuest()
         Log("Quest [%s] deactivated.", questName.c_str());
     }
 }
+
+bool QuestComponent::CheckIfQuestActive()
+{
+    auto quest = GetQuest();
+    if (quest) //Not every actor will have a quest set to it
+    {
+        return quest->isActive;
+    }
+
+    return true;
+}
