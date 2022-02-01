@@ -15,4 +15,5 @@ struct QuestComponent : Component
 
 	bool CheckQuest();
 	Quest* GetQuest();
+	void DeactivateQuest();
 };

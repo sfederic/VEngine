@@ -27,3 +27,9 @@ Quest* QuestComponent::GetQuest()
 {
     return FindQuest(questName.c_str());
 }
+
+void QuestComponent::DeactivateQuest()
+{
+    auto quest = GetQuest();
+    quest->isActive = false;
+}
