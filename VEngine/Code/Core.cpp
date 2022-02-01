@@ -144,9 +144,10 @@ void Core::StartGame()
 	physicsSystem.Start();
 
 	world.StartAllComponents();
-	world.WakeAndStartAllActors();
 
 	questSystem.ExecuteAllQuestsForCurrentHour();
+
+	world.WakeAndStartAllActors();
 
 	worldEditor.pickedActor = nullptr;
 
