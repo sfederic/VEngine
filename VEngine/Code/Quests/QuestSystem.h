@@ -14,4 +14,4 @@ struct Quest;
 
 void AddQuest(const char* questName, Quest* quest);
 Quest* FindQuest(const char* questName);
-void ExecuteQuestsForCurrentHour();
+void ExecuteAllQuestsForCurrentHour();

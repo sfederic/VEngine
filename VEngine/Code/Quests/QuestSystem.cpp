@@ -21,7 +21,7 @@ Quest* FindQuest(const char* questName)
 	return quests->find(questName)->second;
 }
 
-void ExecuteQuestsForCurrentHour()
+void ExecuteAllQuestsForCurrentHour()
 {
 	int currentHour = GameInstance::currentHour;
 
