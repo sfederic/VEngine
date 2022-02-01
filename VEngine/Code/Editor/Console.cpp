@@ -56,6 +56,9 @@ Console::Console()
 	//Show all Memory info player has
 	executeMap.emplace(L"MEM", []() { debugMenu.memoriesMenuOpen = !debugMenu.memoriesMenuOpen; });
 
+	//Show all in-game quests and their state
+	executeMap.emplace(L"QUEST", []() { debugMenu.questMenuOpen = !debugMenu.questMenuOpen; });
+
 	//show memory for engine systems
 	executeMap.emplace(L"MEMORY", []() { debugMenu.memoryMenuOpen = !debugMenu.memoryMenuOpen; });
 

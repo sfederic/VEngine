@@ -37,6 +37,7 @@ struct DebugMenu
 	bool skeletonViewMenuOpen = false;
 	bool physicsMenuOpen = false;
 	bool coreMenuOpen = false;
+	bool questMenuOpen = false;
 
 	void Init();
 	void Tick(float deltaTime);
@@ -63,6 +64,7 @@ private:
 	void RenderSkeletonViewMenu();
 	void RenderPhysicsMenu();
 	void RenderCoreMenu();
+	void RenderQuestMenu();
 };
 
 extern DebugMenu debugMenu;

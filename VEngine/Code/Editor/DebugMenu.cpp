@@ -30,6 +30,8 @@
 #include "Gameplay/Memory.h"
 #include "Console.h"
 #include "Physics/PhysicsSystem.h"
+#include "Quests/QuestSystem.h"
+#include "Quests/Quest.h"
 
 DebugMenu debugMenu;
 
@@ -84,6 +86,7 @@ void DebugMenu::Tick(float deltaTime)
 	RenderConsoleCommandsMenu();
 	RenderSkeletonViewMenu();
 	RenderCoreMenu();
+	RenderQuestMenu();
 
 	ImGui::EndFrame();
 
@@ -459,6 +462,23 @@ void DebugMenu::RenderCoreMenu()
 	ImGui::Begin("Core Engine Variables");
 	ImGui::InputFloat("TimeScale", &Core::timeScale);
 	ImGui::Checkbox("ImGui Enabled", &Core::isImGUIEnabled);
+	ImGui::End();
+}
+
+void DebugMenu::RenderQuestMenu()
+{
+	if (!questMenuOpen) return;
+
+	ImGui::Begin("Quests");
+
+	for (auto& questPair : *questSystem.quests)
+	{
+		Quest* quest = questPair.second;
+		const std::string& questName = questPair.first;
+
+		ImGui::Text("Name: %s | Active: %d", questName.c_str(), quest->isActive);
+	}
+
 	ImGui::End();
 }
 
