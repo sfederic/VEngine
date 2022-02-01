@@ -1,0 +1,985 @@
+Grid
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+node.fbx
+Name
+Grid0
+Rast State
+solid
+Shader
+InstanceShader.hlsl
+Size X
+9
+Size Y
+9
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UID
+501397538
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+startBattleOnLoad
+0
+next
+GridActor
+0
+AudioActor
+0
+Player
+1
+ Position
+3 0 3
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Audio Filename
+step.wav
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+FOV
+60
+Far Z
+1000
+File
+
+Grid Obstacle
+0
+Loop
+1
+Mesh
+character_test.fbx
+Name
+Player0
+Near Z
+0.01
+Pitch
+1
+Play On Start
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UID
+203280075
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+Volume
+0.141785
+next
+Unit
+0
+EntranceTrigger
+0
+NPC
+0
+MeshActor
+12
+ Position
+4 -0.5 4
+ Rotation
+-0 0 -0 1
+ Scale
+9 1 9
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+node.fbx
+Name
+node0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+ground.jpg
+UID
+342235701
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+0.5 0.5 0.5
+ Rotation
+0 0.707107 0 -0.707107
+ Scale
+0.999997 1 0.999997
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+1
+Mesh
+house07.fbx
+Name
+house071
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wood.jpg
+UID
+1119162151
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+0.5 0.5 3.5
+ Rotation
+0 0.707107 0 -0.707107
+ Scale
+0.999993 1 0.999993
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+1
+Mesh
+house07.fbx
+Name
+house072
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wood.jpg
+UID
+1119162151
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+2.5 0 7.5
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+1
+Mesh
+house_3.fbx
+Name
+house_33
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wood.jpg
+UID
+3788712359
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+7 0 7.5
+ Rotation
+-0 0.706934 -0 0.70728
+ Scale
+0.999999 1 0.999999
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+1
+Mesh
+house_5.fbx
+Name
+house_54
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wood.jpg
+UID
+4230715218
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+6 -0.4 2
+ Rotation
+-0 0 -0 1
+ Scale
+5 1 5
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+node.fbx
+Name
+house_55
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+grass02.png
+UID
+342235701
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+8 -0.5 0
+ Rotation
+0 0.707107 0 0.707107
+ Scale
+0.5 0.5 0.5
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+1
+Mesh
+dome.fbx
+Name
+dome6
+Rast State
+nobackcull
+Shader
+Grass.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+bush.png
+UID
+2102533001
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+8 -0.5 4
+ Rotation
+0 0.707107 0 -0.707107
+ Scale
+0.5 0.5 0.5
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+1
+Mesh
+dome.fbx
+Name
+dome7
+Rast State
+nobackcull
+Shader
+Grass.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+bush.png
+UID
+2102533001
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+4 -0.5 4
+ Rotation
+-0 0 -0 1
+ Scale
+0.5 0.5 0.5
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+1
+Mesh
+dome.fbx
+Name
+dome8
+Rast State
+nobackcull
+Shader
+Grass.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+bush.png
+UID
+2102533001
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+4 -0.5 0
+ Rotation
+-0 0.707107 -0 0.707107
+ Scale
+0.5 0.5 0.5
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+1
+Mesh
+dome.fbx
+Name
+dome9
+Rast State
+nobackcull
+Shader
+Grass.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+bush.png
+UID
+2102533001
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+6 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+1
+Mesh
+tree_base.fbx
+Name
+tree_base10
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wood.jpg
+UID
+3763125418
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+4 -25 4
+ Rotation
+-0 0 -0 1
+ Scale
+50 50 50
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+0
+Cull
+0
+Grid Obstacle
+0
+Mesh
+dome.fbx
+Name
+dome11
+Rast State
+nobackcull
+Shader
+Unlit.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+sky.jpg
+UID
+1017973377
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+DirectionalLightActor
+1
+ Position
+-4 2 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Colour
+1 1 1 1
+LightEnabled
+1
+Name
+DirectionalLightActor0
+UID
+1407835219
+next
+SavePoint
+0
+PointLightActor
+0
+SpotLightActor
+0
+FenceActor
+6
+ Position
+3.5 0 0
+ Rotation
+0.70723 0.000122093 -0.706984 -0.000121955
+ Scale
+0.500003 0.500005 0.5
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+FenceActor0
+Rast State
+nobackcull
+Shader
+DefaultShader.hlsl
+Specular
+-3 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test_fence.png
+UID
+3253903854
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+3.5 0 2
+ Rotation
+0.70723 0.000122092 -0.706984 -0.000121954
+ Scale
+0.500008 0.500015 0.5
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+FenceActor1
+Rast State
+nobackcull
+Shader
+DefaultShader.hlsl
+Specular
+-3 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test_fence.png
+UID
+3253903854
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+3.5 0 3
+ Rotation
+0.70723 0.000122092 -0.706984 -0.000121953
+ Scale
+0.50001 0.50002 0.5
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+FenceActor2
+Rast State
+nobackcull
+Shader
+DefaultShader.hlsl
+Specular
+-3 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test_fence.png
+UID
+3253903854
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+4.5 0 4.5
+ Rotation
+-0.000173912 -9.94197e-08 1 0.000172565
+ Scale
+0.500022 0.500025 0.5
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+FenceActor3
+Rast State
+nobackcull
+Shader
+DefaultShader.hlsl
+Specular
+-3 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test_fence.png
+UID
+3253903854
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+5.5 0 4.5
+ Rotation
+-0.000173912 -9.94201e-08 1 0.000172565
+ Scale
+0.500026 0.500025 0.5
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+FenceActor4
+Rast State
+nobackcull
+Shader
+DefaultShader.hlsl
+Specular
+-3 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test_fence.png
+UID
+3253903854
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+8 0 4.5
+ Rotation
+-0.000173912 -9.9421e-08 1 0.000172565
+ Scale
+0.500034 0.500025 0.5
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+FenceActor5
+Rast State
+nobackcull
+Shader
+DefaultShader.hlsl
+Specular
+-3 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test_fence.png
+UID
+3253903854
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+Billboard
+0
+InteractTrigger
+0
+ParticleSystem
+0
+DialogueTrigger
+0
+DestructibleActor
+0
+MemoryActor
+0
+TitleScreenActor
+0
+PushableGridActor
+0
+PlayerDialogueTrigger
+0
+PhysicsActor
+0
