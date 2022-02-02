@@ -11,12 +11,14 @@ struct Unit : GridActor
 	ACTOR_SYSTEM(Unit);
 
 	//Battle states
-	//@Todo: need to put these somewhere, hate VEnum not being able to be inherited form
-	inline static std::string fight = "fight";
-	inline static std::string flee = "flee";
-	inline static std::string wander = "wander";
+	struct BattleStates
+	{
+		inline static std::string fight = "fight";
+		inline static std::string flee = "flee";
+		inline static std::string wander = "wander";
+	};
 
-	VEnum battleStates;
+	VEnum battleState;
 
 	MemoryComponent* memoryOnDeath = nullptr;
 
