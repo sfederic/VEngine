@@ -123,7 +123,7 @@ void BattleSystem::RemoveUnit(Unit* unit)
 		activeBattleUnits.end());
 
 	//Show death text.
-	if (!unit->deathText.empty())
+	if (!unit->deathText.empty() && unit->health <= 0)
 	{
 		//@Todo: currently the death text doesn't hold on the actors position
 		auto deathDialogueWidget = CreateWidget<DialogueWidget>();
