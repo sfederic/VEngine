@@ -3,7 +3,6 @@
 #include <string>
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
-#include "VEnum.h"
 #include "Animation/AnimationStructures.h"
 
 using namespace DirectX;

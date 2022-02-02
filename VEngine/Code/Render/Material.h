@@ -4,6 +4,7 @@
 #include "Properties.h"
 #include "RenderTypes.h"
 #include "UID.h"
+#include "VEnum.h"
 
 using namespace DirectX;
 
