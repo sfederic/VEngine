@@ -13,9 +13,10 @@ struct Unit : GridActor
 	//Battle states
 	struct BattleStates
 	{
-		inline static std::string fight = "fight";
-		inline static std::string flee = "flee";
-		inline static std::string wander = "wander";
+		inline static std::string fight = "fight"; //Move towards player/destination
+		inline static std::string evade = "evade"; //Move away from destination
+		inline static std::string wander = "wander"; //Move around randomly
+		inline static std::string escape = "escape"; //Esacpe to nearest EntranceTrigger
 	};
 
 	VEnum battleState;

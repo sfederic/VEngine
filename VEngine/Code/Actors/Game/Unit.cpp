@@ -15,6 +15,7 @@
 #include "UI/GuardWidget.h"
 #include "UI/HealthWidget.h"
 #include "Gameplay/GameInstance.h"
+#include "Actors/Game/EntranceTrigger.h"
 #include "Physics/Raycast.h"
 
 Unit::Unit()
@@ -22,7 +23,8 @@ Unit::Unit()
 	isGridObstacle = false;
 
 	battleState.Add(BattleStates::fight);
-	battleState.Add(BattleStates::flee);
+	battleState.Add(BattleStates::evade);
+	battleState.Add(BattleStates::escape);
 	battleState.Add(BattleStates::wander);
 
 	memoryOnDeath = MemoryComponent::system.Add(this);
@@ -169,7 +171,7 @@ void Unit::MoveToNode(GridNode* destinationNode)
 	int lowestHCostIndex = 0;
 
 	//Move to node furthest away from destination
-	if (battleState.Compare(BattleStates::flee))
+	if (battleState.Compare(BattleStates::evade))
 	{
 		float highestHCost = 0.f;
 		for (int i = 0; i < movementPathNodes.size(); i++)
@@ -242,9 +244,31 @@ void Unit::StartTurn()
 	{
 		MoveToNode(player->xIndex, player->yIndex);
 	}
-	else if (battleState.Compare(BattleStates::flee))
+	else if (battleState.Compare(BattleStates::evade))
 	{
 		MoveToNode(player->xIndex, player->yIndex);
+	}
+	else if (battleState.Compare(BattleStates::escape))
+	{
+		//int is the index into EntranceTrigger actor system vector
+		std::vector<std::pair<float, int>> entranceDistances;
+
+		//Find entrance closest to unit and move to it
+		for (int i = 0; i < EntranceTrigger::system.actors.size(); i++)
+		{
+			auto entrance = EntranceTrigger::system.actors[i];
+			float dist = XMVector3Length(entrance->GetPositionVector() - this->GetPositionVector()).m128_f32[0];
+			entranceDistances.push_back(std::make_pair(dist, i));
+		}
+
+		//Sort by distance
+		std::sort(entranceDistances.begin(), entranceDistances.end());
+		auto entranceTriggerToMoveTo = EntranceTrigger::system.actors[entranceDistances.front().second];
+
+		//EntranceTrigger isn't a grid actor, just move to its world position
+		int xIndex = std::round(entranceTriggerToMoveTo->GetPosition().x);
+		int yIndex = std::round(entranceTriggerToMoveTo->GetPosition().y);
+		MoveToNode(xIndex, yIndex);
 	}
 }
 
