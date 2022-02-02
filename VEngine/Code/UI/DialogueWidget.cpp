@@ -6,7 +6,7 @@ void DialogueWidget::Draw(float deltaTime)
 	int sx, sy;
 	GetScreenSpaceCoords(sx, sy);
 
-	sy -= 75.f;
+	sy -= 125.f;
 	Layout layout = CenterLayoutOnScreenSpaceCoords(100.f, 100.f, sx, sy);
 
 	D2D1_RECT_F imageRect = {
