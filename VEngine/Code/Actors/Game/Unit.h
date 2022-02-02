@@ -1,5 +1,6 @@
 #pragma once
 #include "GridActor.h"
+#include "VEnum.h"
 
 struct GridNode;
 struct MemoryComponent;
@@ -9,13 +10,13 @@ struct Unit : GridActor
 {
 	ACTOR_SYSTEM(Unit);
 
-	//@Todo: need to make serialisation and qt widget code for this enum.
-	enum class BattleStates
-	{
-		Fight,
-		Flee,
-		Wander
-	};
+	//Battle states
+	//@Todo: need to put these somewhere, hate VEnum not being able to be inherited form
+	inline static std::string fight = "fight";
+	inline static std::string flee = "flee";
+	inline static std::string wander = "wander";
+
+	VEnum battleStates;
 
 	MemoryComponent* memoryOnDeath = nullptr;
 

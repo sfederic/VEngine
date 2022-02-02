@@ -21,6 +21,10 @@ Unit::Unit()
 {
 	isGridObstacle = false;
 
+	battleStates.Add(fight);
+	battleStates.Add(flee);
+	battleStates.Add(wander);
+
 	memoryOnDeath = MemoryComponent::system.Add(this);
 	memoryOnDeath->name = "MemoryOnDeath"; //Seperate the name, GridActor and Unit have two memory components.
 }
@@ -96,6 +100,7 @@ Properties Unit::GetProps()
 	props.Add("Move Speed", &moveSpeed);
 	props.Add("Attack Points", &attackPoints);
 	props.Add("Attack Range", &attackRange);
+	props.Add("Battle State", &battleStates);
 	props.AddProp(deathText);
 	return props;
 }
