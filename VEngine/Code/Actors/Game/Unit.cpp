@@ -99,6 +99,8 @@ void Unit::Tick(float deltaTime)
 						{
 							battleSystem.RemoveUnit(this);
 							GetCurrentNode()->Show();
+							Log("Unit [%s] escaped through [%s].",
+								this->name.c_str(), entranceToEscapeTo->name.c_str());
 							Destroy();
 							return;
 						}
