@@ -8,7 +8,7 @@ void VEnum::SetValue(const std::string newValue)
 	value = newValue;
 }
 
-void VEnum::Add(const std::string name)
+void VEnum::Add(const std::string& name)
 {
 	data[name] = dataIndex;
 	if (dataIndex == 0) //First Add(), set default value
