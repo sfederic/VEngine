@@ -39,11 +39,6 @@ void NPC::Tick(float deltaTime)
         }
     }
 
-    if (health <= 0)
-    {
-        EndQuickTalkTo();
-    }
-
     __super::Tick(deltaTime);
 }
 

@@ -27,9 +27,6 @@ struct NPC : Unit
 
 	//A once off dialogue popup used like interact popup is.
 	void QuickTalkTo();
-
 	void BattleStartDialogue();
-
-private:
 	void EndQuickTalkTo();
 };

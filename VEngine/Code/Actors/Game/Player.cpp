@@ -680,6 +680,12 @@ bool Player::DestructibleCheck(Actor* hitActor)
 {
 	if (isWeaponDrawn && !inConversation)
 	{
+		auto npc = dynamic_cast<NPC*>(hitActor);
+		if (npc)
+		{
+			npc->EndQuickTalkTo();
+		}
+
 		auto unit = dynamic_cast<Unit*>(hitActor);
 		if (unit)
 		{
