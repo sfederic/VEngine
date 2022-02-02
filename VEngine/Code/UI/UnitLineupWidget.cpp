@@ -17,7 +17,12 @@ void UnitLineupWidget::Draw(float deltaTime)
 		{
 			unit->ShowUnitMovementPath();
 			GameUtils::SetActiveCameraTarget(unit);
+
+			//@Todo: do a little 'unit info' widget here on click
 		}
+
+		layout.AddVerticalSpace(30.f);
+		Text(VString::stows(unit->battleState.GetValue()), layout);
 
 		layout.AddVerticalSpace(30.f);
 	}
