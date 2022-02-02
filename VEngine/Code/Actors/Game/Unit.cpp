@@ -41,6 +41,9 @@ void Unit::Start()
 	healthWidget->maxHealthPoints = health;
 
 	nextMovePos = GetPositionVector();
+
+	auto node = GetCurrentNode();
+	node->Hide();
 }
 
 void Unit::Tick(float deltaTime)
