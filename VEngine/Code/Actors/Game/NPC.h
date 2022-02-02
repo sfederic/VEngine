@@ -17,6 +17,9 @@ struct NPC : Unit
 	//Text to display on battle start
 	std::wstring battleStartText;
 
+	//Have to use a Tick() timer with NPCs for quicktalk because of null destroyed npcs
+	float quickTalkTimer = 0.f;
+
 	NPC();
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;

@@ -30,6 +30,20 @@ void NPC::Tick(float deltaTime)
         spawnTextWidget->pos = GetHomogeneousPositionVector();
     }
 
+    if (isQuickDialogueActive)
+    {
+        quickTalkTimer += deltaTime;
+        if (quickTalkTimer > 4.0f)
+        {
+            EndQuickTalkTo();
+        }
+    }
+
+    if (health <= 0)
+    {
+        EndQuickTalkTo();
+    }
+
     __super::Tick(deltaTime);
 }
 
@@ -52,8 +66,6 @@ void NPC::QuickTalkTo()
 
     dialogueComponent->dialogueWidget->dialogueText = interactText;
     dialogueComponent->AddToViewport();
-
-    Timer::SetTimer(5.0f, std::bind(&NPC::EndQuickTalkTo, this));
 }
 
 void NPC::BattleStartDialogue()
@@ -74,8 +86,6 @@ void NPC::BattleStartDialogue()
 
     dialogueComponent->dialogueWidget->dialogueText = battleStartText;
     dialogueComponent->AddToViewport();
-
-    Timer::SetTimer(5.0f, std::bind(&NPC::EndQuickTalkTo, this));
 }
 
 void NPC::EndQuickTalkTo()
