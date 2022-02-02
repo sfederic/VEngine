@@ -163,22 +163,39 @@ void Unit::MoveToNode(GridNode* destinationNode)
 		node->hCost = XMVector3Length(endPos - currentPos).m128_f32[0];
 	}
 
-
 	GridNode* nextNode = nullptr;
 
 	int highestHCostIndex = 0;
 	int lowestHCostIndex = 0;
 
-	float lowestHCost = std::numeric_limits<float>::max();
-	for (int i = 0; i < movementPathNodes.size(); i++)
+	//Move to node furthest away from destination
+	if (battleState.Compare(BattleStates::flee))
 	{
-		if (movementPathNodes[i]->hCost < lowestHCost)
+		float highestHCost = 0.f;
+		for (int i = 0; i < movementPathNodes.size(); i++)
 		{
-			lowestHCost = movementPathNodes[i]->hCost;
-			lowestHCostIndex = i;
-			nextNode = movementPathNodes[i];
+			if (movementPathNodes[i]->hCost > highestHCost)
+			{
+				highestHCost = movementPathNodes[i]->hCost;
+				highestHCostIndex = i;
+				nextNode = movementPathNodes[i];
+			}
 		}
 	}
+	else //Move towards destination
+	{
+		float lowestHCost = std::numeric_limits<float>::max();
+		for (int i = 0; i < movementPathNodes.size(); i++)
+		{
+			if (movementPathNodes[i]->hCost < lowestHCost)
+			{
+				lowestHCost = movementPathNodes[i]->hCost;
+				lowestHCostIndex = i;
+				nextNode = movementPathNodes[i];
+			}
+		}
+	}
+	
 
 	//This needs to be here if you need Units moving exactly to a point, but most times
 	// the unit is going to be moving to a surrounding node if there is a target, eg. the unit
@@ -220,7 +237,15 @@ void Unit::StartTurn()
 	GetCurrentNode()->Show();
 
 	auto player = GameUtils::GetPlayer();
-	MoveToNode(player->xIndex, player->yIndex);
+
+	if (battleState.Compare(BattleStates::fight))
+	{
+		MoveToNode(player->xIndex, player->yIndex);
+	}
+	else if (battleState.Compare(BattleStates::flee))
+	{
+		MoveToNode(player->xIndex, player->yIndex);
+	}
 }
 
 void Unit::EndTurn()
