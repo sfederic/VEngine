@@ -242,10 +242,12 @@ void Unit::StartTurn()
 
 	if (battleState.Compare(BattleStates::fight))
 	{
+		//Move towards player to attack
 		MoveToNode(player->xIndex, player->yIndex);
 	}
 	else if (battleState.Compare(BattleStates::evade))
 	{
+		//Move away from player to evade
 		MoveToNode(player->xIndex, player->yIndex);
 	}
 	else if (battleState.Compare(BattleStates::escape))
