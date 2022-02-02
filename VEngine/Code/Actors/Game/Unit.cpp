@@ -6,6 +6,7 @@
 #include "Gameplay/GameUtils.h"
 #include "Grid.h"
 #include "Components/MeshComponent.h"
+#include "Components/BoxTriggerComponent.h"
 #include "Components/MemoryComponent.h"
 #include "VMath.h"
 #include "Player.h"
@@ -87,6 +88,18 @@ void Unit::Tick(float deltaTime)
 				else
 				{
 					EndTurn();
+
+					//Destroy Unit if its escaping and within its entrancetrigger to escape with
+					if (battleState.Compare(BattleStates::escape) && entranceToEscapeTo)
+					{
+						if (entranceToEscapeTo->trigger->Contains(GetPositionVector()))
+						{
+							battleSystem.RemoveUnit(this);
+							GetCurrentNode()->Show();
+							Destroy();
+							return;
+						}
+					}
 				}
 			}
 		}
@@ -266,6 +279,8 @@ void Unit::StartTurn()
 		//Sort by distance
 		std::sort(entranceDistances.begin(), entranceDistances.end());
 		auto entranceTriggerToMoveTo = EntranceTrigger::system.actors[entranceDistances.front().second];
+
+		entranceToEscapeTo = entranceTriggerToMoveTo;
 
 		//EntranceTrigger isn't a grid actor, just move to its world position
 		int xIndex = std::round(entranceTriggerToMoveTo->GetPosition().x);

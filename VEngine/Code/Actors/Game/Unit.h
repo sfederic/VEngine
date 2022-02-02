@@ -4,6 +4,7 @@
 
 struct GridNode;
 struct MemoryComponent;
+struct EntranceTrigger;
 
 //Units are battle ready actors and really only move and fight.
 struct Unit : GridActor
@@ -22,6 +23,8 @@ struct Unit : GridActor
 	VEnum battleState;
 
 	MemoryComponent* memoryOnDeath = nullptr;
+
+	EntranceTrigger* entranceToEscapeTo = nullptr;
 
 	//Text to display on unit's death during battle
 	std::wstring deathText;
