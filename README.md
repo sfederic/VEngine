@@ -32,4 +32,7 @@ DirectXTK (directxtk_desktop_win10) ver. 2021.8.2.1 - https://github.com/microso
 * https://opengameart.org/content/gunshot-sounds
 * https://opengameart.org/content/2-metal-weapon-clicks
 
+## Project References
+* FFTactics Maps: https://www.cavesofnarshe.com/fft/maps/index.php
+
 ![image](https://user-images.githubusercontent.com/45758254/147405666-9535d71b-c29c-4914-8652-f28f04de4b9d.png)
