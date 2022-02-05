@@ -99,6 +99,8 @@ Name
 sword
 Obstacle
 0
+Quest Name
+
 Rast State
 solid
 Shader
@@ -182,6 +184,8 @@ Name
 spear
 Obstacle
 0
+Quest Name
+
 Rast State
 solid
 Shader
@@ -301,7 +305,7 @@ Entrance Active
 Extents
 0.45 0.45 0.45
 Level Name
-outdoor_test.vmap
+town_center.vmap
 Locked Text
 Locked
 Name
@@ -318,11 +322,11 @@ conditionArg
 
 next
 NPC
-1
+2
  Position
 2 0 3
  Rotation
--0 0 -0 1
+0 1 0 0.000345296
  Scale
 1 1 1
 Add On Interact
@@ -333,6 +337,8 @@ Attack Points
 1
 Attack Range
 1
+Battle State
+fight
 Blend State
 null
 Casts Shadow
@@ -364,7 +370,7 @@ Memory Desc
 Memory Name
 
 Mesh
-
+character_test.fbx
 Move Points
 1
 Move Speed
@@ -373,6 +379,109 @@ Name
 blacksmith
 Obstacle
 0
+Quest Name
+
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UID
+3161115418
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+battleStartText
+
+condition
+
+conditionArg
+
+deathText
+
+interactKnownText
+
+spawnText
+
+next
+ Position
+3 0 1
+ Rotation
+0 0.707351 0 -0.706863
+ Scale
+1 1 1
+Add On Interact
+0
+Ambient
+1 1 1 1
+Attack Points
+1
+Attack Range
+1
+Battle State
+fight
+Blend State
+null
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Cull
+0
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+1
+Image File
+
+Inspect
+1
+Interact
+1
+Interact Text
+
+Memory Desc
+
+Memory Name
+
+Mesh
+character_test.fbx
+Move Points
+1
+Move Speed
+3
+Name
+survivedblacksmith
+Obstacle
+0
+Quest Name
+
 Rast State
 solid
 Shader

@@ -58,9 +58,9 @@ AudioActor
 Player
 1
  Position
-3 0 3
+2 0 0
  Rotation
-0 0 0 1
+-0 5.96046e-08 -0 1
  Scale
 1 1 1
 Ambient
@@ -118,14 +118,472 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
-0.141785
+-0.0628684
 next
 Unit
 0
 EntranceTrigger
-0
+2
+ Position
+7 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+0.45 0.45 0.45
+Level Name
+
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Offset
+0 0 0
+Open Text
+Open
+UID
+2877120805
+condition
+
+conditionArg
+
+next
+ Position
+2 0 1
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+0.45 0.45 0.45
+Level Name
+blacksmith.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger1
+Offset
+0 0 0
+Open Text
+Enter Blacksmith
+UID
+1282663384
+condition
+
+conditionArg
+
+next
 NPC
+4
+ Position
+4 0 8
+ Rotation
+0 0.707107 0 0.707107
+ Scale
+1 1 1
+Add On Interact
 0
+Ambient
+1 1 1 1
+Attack Points
+1
+Attack Range
+1
+Battle State
+fight
+Blend State
+null
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Cull
+0
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+3
+Image File
+
+Inspect
+1
+Interact
+1
+Interact Text
+
+Memory Desc
+
+Memory Name
+
+Mesh
+character_test.fbx
+Move Points
+2
+Move Speed
+3
+Name
+NPC0
+Obstacle
+0
+Quest Name
+blacksmith
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UID
+2864904414
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+0
+battleStartText
+It's a fucking hand! Watch out Amel!
+condition
+
+conditionArg
+
+deathText
+Amel... Run...
+interactKnownText
+
+spawnText
+
+next
+ Position
+5 0 8
+ Rotation
+0 0.707107 0 -0.707107
+ Scale
+1 1 1
+Add On Interact
+0
+Ambient
+1 1 1 1
+Attack Points
+1
+Attack Range
+1
+Battle State
+fight
+Blend State
+null
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Cull
+0
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+3
+Image File
+
+Inspect
+1
+Interact
+1
+Interact Text
+
+Memory Desc
+
+Memory Name
+
+Mesh
+character_test.fbx
+Move Points
+2
+Move Speed
+3
+Name
+NPC1
+Obstacle
+0
+Quest Name
+Blacksmith
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UID
+2864904414
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+0
+battleStartText
+Is this some priest?!
+condition
+
+conditionArg
+
+deathText
+...
+interactKnownText
+
+spawnText
+
+next
+ Position
+3 0 2
+ Rotation
+-0 0.707107 -0 0.707107
+ Scale
+1 1 1
+Add On Interact
+0
+Ambient
+1 1 1 1
+Attack Points
+1
+Attack Range
+1
+Battle State
+escape
+Blend State
+null
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Cull
+0
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+1
+Image File
+
+Inspect
+1
+Interact
+1
+Interact Text
+
+Memory Desc
+
+Memory Name
+
+Mesh
+character_test.fbx
+Move Points
+2
+Move Speed
+2
+Name
+mum
+Obstacle
+0
+Quest Name
+
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UID
+876973722
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+battleStartText
+Goddess!
+condition
+
+conditionArg
+
+deathText
+u..g..h..
+interactKnownText
+
+spawnText
+Billy! 1 more hour okay?
+next
+ Position
+6 0 1
+ Rotation
+-0 0.707107 -0 0.707107
+ Scale
+0.5 0.5 0.5
+Add On Interact
+0
+Ambient
+1 1 1 1
+Attack Points
+1
+Attack Range
+1
+Battle State
+evade
+Blend State
+null
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Cull
+0
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+1
+Image File
+
+Inspect
+1
+Interact
+1
+Interact Text
+
+Memory Desc
+
+Memory Name
+
+Mesh
+character_test.fbx
+Move Points
+2
+Move Speed
+1
+Name
+kid
+Obstacle
+0
+Quest Name
+
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UID
+876973722
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+battleStartText
+!
+condition
+
+conditionArg
+
+deathText
+Mum...
+interactKnownText
+
+spawnText
+Yes mum...
+next
 MeshActor
 12
  Position
@@ -692,7 +1150,7 @@ PointLightActor
 SpotLightActor
 0
 FenceActor
-6
+7
  Position
 3.5 0 0
  Rotation
@@ -743,7 +1201,7 @@ next
  Rotation
 0.70723 0.000122092 -0.706984 -0.000121954
  Scale
-0.500008 0.500015 0.5
+0.500009 0.500016 0.5
 Ambient
 1 1 1 1
 Blend State
@@ -963,6 +1421,51 @@ UvRotationSpeed
 UvScale
 1 1
 next
+ Position
+0.5 0 7.5
+ Rotation
+-0.000173912 -9.94205e-08 1 0.000172565
+ Scale
+1.00001 0.5 0.5
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+FenceActor6
+Rast State
+nobackcull
+Shader
+DefaultShader.hlsl
+Specular
+-3 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test_fence.png
+UID
+3253903854
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1.5 1
+next
 Billboard
 0
 InteractTrigger
@@ -970,7 +1473,28 @@ InteractTrigger
 ParticleSystem
 0
 DialogueTrigger
+1
+ Position
+4.5 0 6
+ Rotation
+-0 0 -0 1
+ Scale
+4 1 1
+Extents
+0.45 0.45 0.45
+File
+test_convo.dialog
+Name
+DialogueTrigger0
+Offset
+0 0 0
+UID
+779337213
+playOnSpawn
 0
+playOnTriggerOverlap
+1
+next
 DestructibleActor
 0
 MemoryActor
