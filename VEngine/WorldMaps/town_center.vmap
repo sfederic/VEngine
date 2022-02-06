@@ -58,7 +58,7 @@ AudioActor
 Player
 1
  Position
-2 0 0
+3 0 0
  Rotation
 -0 5.96046e-08 -0 1
  Scale
@@ -118,7 +118,7 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
--0.0628684
+-0.000928216
 next
 Unit
 0
@@ -585,7 +585,7 @@ spawnText
 Yes mum...
 next
 MeshActor
-12
+11
  Position
 4 -0.5 4
  Rotation
@@ -1081,59 +1081,14 @@ UvRotationSpeed
 UvScale
 1 1
 next
- Position
-4 -25 4
- Rotation
--0 0 -0 1
- Scale
-50 50 50
-Ambient
-1 1 1 1
-Blend State
-null
-Casts Shadow
-0
-Cull
-0
-Grid Obstacle
-0
-Mesh
-dome.fbx
-Name
-dome11
-Rast State
-nobackcull
-Shader
-Unlit.hlsl
-Specular
-1 1 1 1
-Specular Power
-0
-Static
-1
-Texture
-sky.jpg
-UID
-1017973377
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
 DirectionalLightActor
 1
  Position
 -4 2 0
  Rotation
--0 0 -0 1
+0.772807 0.190496 -0.325939 0.510141
  Scale
-1 1 1
+0.99999 0.999995 0.999997
 Colour
 1 1 1 1
 LightEnabled
