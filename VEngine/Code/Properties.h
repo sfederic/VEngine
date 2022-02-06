@@ -16,6 +16,9 @@ struct Property
 	std::optional<std::type_index> info;
 	std::string name;
 
+	//Path to take filenames from when working with autocomplete on stringwidgets
+	std::string autoCompletePath;
+
 	//Sets widgets to be inactive/readonly
 	bool readOnly = false;
 
