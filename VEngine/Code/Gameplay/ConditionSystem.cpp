@@ -63,9 +63,12 @@ static bool EndQuest(std::string arg)
 //Define the memory as "Name|Description|Image Filename" in the dialogue dock
 static bool GainMemory(std::string arg)
 {
-	std::string memoryName = arg.substr(0, arg.find("|"));
-	std::string memoryDesc = arg.substr(arg.find("|") + 1, arg.find_last_of("|") - memoryName.size());
-	std::string memoryImage = arg.substr(arg.find_last_of("|") + 1);
+	size_t firstOf = arg.find("|");
+	size_t lastOf = arg.find_last_of("|");
+
+	std::string memoryName = arg.substr(0, firstOf);
+	std::string memoryDesc = arg.substr(memoryName.size() + 1, lastOf - memoryName.size() - 1);
+	std::string memoryImage = arg.substr(lastOf + 1);
 
 	auto memory = new Memory();
 	memory->name = memoryName;
