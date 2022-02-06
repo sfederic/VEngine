@@ -30,7 +30,6 @@ float4 PSMain(VS_OUT i) : SV_Target
 
 	//good at debugging shadow visuals
 	//float4 finalColour = shadowColour;
-
-	float4 finalColour = ((diffuse + specular) + shadowColour) * texColour;
+	float4 finalColour = ((globalAmbient + diffuse + specular) * shadowColour) * texColour;
 	return finalColour;
 }
