@@ -35,6 +35,7 @@
 #include "Render/SpriteSystem.h"
 #include "Particle/ParticleSystem.h"
 #include "Particle/ParticleEmitter.h"
+#include "Gameplay/GameInstance.h"
 
 Renderer renderer;
 
@@ -1001,7 +1002,7 @@ void Renderer::UpdateLights()
 
 	shaderLights.numLights = shaderLightsIndex;
 
-	shaderLights.globalAmbience = XMFLOAT4(0.35f, 0.35f, 0.35f, 1.f);
+	shaderLights.globalAmbient = CalcGlobalAmbientBasedOnGameTime();
 	XMStoreFloat4(&shaderLights.eyePosition, activeCamera->transform.world.r[3]);
 
 	MapBuffer(cbLights, &shaderLights, sizeof(ShaderLights));
@@ -1220,4 +1221,21 @@ void Renderer::SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 
 	context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &stride, &offset);
 	context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
+}
+
+XMFLOAT4 Renderer::CalcGlobalAmbientBasedOnGameTime()
+{
+	const int hour = GameInstance::currentHour;
+	const int hoursPerDay = 12; //This is relative to how many game hours there are from start to end.
+
+	//@Todo: after a certain point in the game, light will dim to show night.
+	//Figure out what time the game starts (eg. 12pm, 8am) and change this if based on that.
+	if (hour > 6)
+	{
+		float light = 1.0f - (hour / static_cast<float>(hoursPerDay));
+		light *= 0.5f;
+		return XMFLOAT4(light, light, light, 1.0f);
+	}
+
+	return XMFLOAT4(0.5f, 0.5f, 0.5f, 1.f);
 }

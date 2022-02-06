@@ -124,6 +124,9 @@ public:
 private:
 	void SetRenderPipelineStates(MeshComponent* mesh);
 	void SetRenderPipelineStatesForShadows(MeshComponent* mesh);
+
+	//Changes the global ambient param passed into shaders to change based on the day-night cycle in-game.
+	XMFLOAT4 CalcGlobalAmbientBasedOnGameTime();
 };
 
 extern Renderer renderer;
