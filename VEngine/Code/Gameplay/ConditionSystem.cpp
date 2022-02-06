@@ -16,14 +16,14 @@ ConditionSystem conditionSystem;
 
 //CONDITION FUNCTIONS
 
-bool PlaySong(std::string arg)
+static bool PlaySong(std::string arg)
 {
 	audioSystem.MuteAllAudio();
 	audioSystem.PlayAudio(arg, true);
 	return true;
 }
 
-bool MemoryCheck(std::string arg)
+static bool MemoryCheck(std::string arg)
 {
 	auto memoryIt = GameInstance::playerMemories.find(arg);
 	if (memoryIt != GameInstance::playerMemories.end())
@@ -41,14 +41,14 @@ bool MemoryCheck(std::string arg)
 	return false;
 }
 
-bool StartBattle(std::string arg)
+static bool StartBattle(std::string arg)
 {
 	battleSystem.StartBattle();
 	return true;
 }
 
 //Define the memory as "Name|Description|Image Filename" in the dialogue dock
-bool GainMemory(std::string arg)
+static bool GainMemory(std::string arg)
 {
 	std::string memoryName = arg.substr(0, arg.find("|"));
 	std::string memoryDesc = arg.substr(arg.find("|") + 1, arg.find_last_of("|") - memoryName.size());
