@@ -6,7 +6,11 @@
 //CONDITION FUNCTIONS
 //Condition functions need to be created as free functions in Conditions.cpp and then added to the system.
 //through the ADD_CONDITION macro in the ConditionSystem constructor.
+
 //When a condition returns true, that means the goto line in the dialogueline will be the next line.
+//For example a dialogue tree with a memory check, on the line of the memory check, set the 'goto' to the 
+//desired line.
+
 //If the condition just needs to be used as an event (play sound, add intuiton), return false.
 
 typedef std::function<bool(std::string)> ConditionFunction;
