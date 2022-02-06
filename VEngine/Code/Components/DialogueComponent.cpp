@@ -27,7 +27,7 @@ void DialogueComponent::Create()
 Properties DialogueComponent::GetProps()
 {
     Properties props("Dialogue Component");
-    props.Add("File", &dialogue.filename);
+    props.Add("File", &dialogue.filename).autoCompletePath = "/Dialogues/";
     return props;
 }
 
