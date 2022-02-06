@@ -16,7 +16,8 @@ struct Property
 	std::optional<std::type_index> info;
 	std::string name;
 
-	//Path to take filenames from when working with autocomplete on stringwidgets
+	//Path to take filenames from when working with autocomplete on stringwidgets.
+	//Need to pass in paths with leading & trailing slashes. Eg. "/Dialogues/"
 	std::string autoCompletePath;
 
 	//Sets widgets to be inactive/readonly

@@ -10,4 +10,7 @@ struct StringWidget : public QLineEdit, IPropertyWidget
 	StringWidget(Property value_);
 	void SetValue();
 	virtual void ResetValue() override;
+
+private:
+	void SetAutoComplete(const std::string& directoryPath);
 };

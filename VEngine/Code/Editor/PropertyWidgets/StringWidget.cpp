@@ -1,6 +1,8 @@
 #include "StringWidget.h"
 #include "Properties.h"
 #include <QDir>
+#include <filesystem>
+#include <QDirIterator>
 #include <QStringListModel>
 #include <QCompleter>
 
@@ -11,22 +13,9 @@ StringWidget::StringWidget(Property value_)
 	value = (std::string*)value_.data;
 	setText(QString::fromStdString(value->data()));
 
+	SetAutoComplete(prop.autoCompletePath);
+
 	connect(this, &QLineEdit::editingFinished, this, &StringWidget::SetValue);
-
-	//Set auto complete
-	if (!prop.autoCompletePath.empty())
-	{
-		QString path = QDir::currentPath() + QString::fromStdString(prop.autoCompletePath);
-		QDir dir(path);
-		QStringList dirContents = dir.entryList(QStringList(), QDir::Files);
-
-		auto model = new QStringListModel(dirContents, this);
-
-		QCompleter* fileEditCompleter = new QCompleter(model, this);
-		fileEditCompleter->setCaseSensitivity(Qt::CaseInsensitive);
-		fileEditCompleter->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
-		this->setCompleter(fileEditCompleter);
-	}
 }
 
 void StringWidget::SetValue()
@@ -48,4 +37,30 @@ void StringWidget::ResetValue()
 	{
 		setText(QString::fromStdString(value->data()));
 	}
+}
+
+void StringWidget::SetAutoComplete(const std::string& directoryPath)
+{
+	if (directoryPath.empty()) return;
+
+	std::string path = std::filesystem::current_path().generic_string() + prop.autoCompletePath;
+
+	QStringList dirContents;
+
+	for (auto const& entry : std::filesystem::recursive_directory_iterator(path))
+	{
+		//Use generic_string() here. Windows likes to throw in '\\' when it wants with string().
+		std::string path = entry.path().generic_string();
+
+		//Grab the index so filepaths are displayed correctly on autocomplete. Eg. "test_map/item.png"
+		size_t index = path.find(prop.autoCompletePath);
+		std::string file = path.substr(index + prop.autoCompletePath.size());
+
+		dirContents.append(QString::fromStdString(file));
+	}
+
+	QCompleter* fileEditCompleter = new QCompleter(dirContents, this);
+	fileEditCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+	fileEditCompleter->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+	this->setCompleter(fileEditCompleter);
 }
