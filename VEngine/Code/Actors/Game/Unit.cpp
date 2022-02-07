@@ -121,6 +121,7 @@ Properties Unit::GetProps()
 	props.Add("Attack Points", &attackPoints);
 	props.Add("Attack Range", &attackRange);
 	props.Add("Battle State", &battleState);
+	props.AddProp(actorToFocusOn);
 	props.AddProp(deathText);
 	return props;
 }

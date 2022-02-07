@@ -53,6 +53,9 @@ public:
 
 	XMVECTOR nextMovePos;
 
+	//This is the actor name a Unit is focusing its 'intent' on. It can be another Unit, or Actor.
+	std::string actorToFocusOn;
+
 	Unit();
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
