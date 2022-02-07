@@ -8,8 +8,12 @@ Grid
 1 1 1
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
@@ -75,17 +79,21 @@ next
 Player
 1
  Position
-0.999992 0.181846 4
+1 -0.0372305 2
  Rotation
-0 1 0 2.08617e-06
+0 1 0 2.41399e-06
  Scale
 0.999993 1 0.999993
 Ambient
 1 1 1 1
 Audio Filename
 step.wav
+Blend State
+null
 Casts Shadow
 1
+Cull
+0
 FOV
 60
 Far Z
@@ -131,7 +139,7 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
-0
+-0.0102077
 next
 Unit
 0
@@ -180,12 +188,18 @@ Attack Points
 3
 Attack Range
 1
+Battle State
+fight
+Blend State
+null
 Casts Shadow
 1
 Condition
 
 Condition Value
 
+Cull
+0
 Destruct
 1
 File
@@ -216,6 +230,8 @@ Name
 Samuan
 Obstacle
 1
+Quest Name
+
 Rast State
 solid
 Shader
@@ -244,6 +260,8 @@ activeBeginHour
 0
 activeEndHour
 3
+actorToFocusOn
+
 alwaysActive
 0
 battleStartText
@@ -269,8 +287,12 @@ MeshActor
 1 1 1
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
@@ -310,8 +332,12 @@ next
 1 1 1
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
@@ -351,8 +377,12 @@ next
 10 1 10
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
@@ -374,7 +404,7 @@ water.jpg
 UID
 782119853
 UvOffset
-3.34808 -3.34808
+3.65099 -3.65099
 UvOffsetSpeed
 0.01 -0.01
 UvRotation
@@ -392,8 +422,12 @@ next
 10 3 3
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
@@ -433,7 +467,11 @@ next
 1 1 1
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
+0
+Cull
 0
 Grid Obstacle
 0
@@ -474,7 +512,11 @@ next
 1 1 1
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
+0
+Cull
 0
 Grid Obstacle
 0
@@ -515,7 +557,11 @@ next
 1 1 1
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
+0
+Cull
 0
 Grid Obstacle
 0
@@ -556,12 +602,16 @@ next
 100 100 100
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
+0
+Cull
 0
 Grid Obstacle
 0
 Mesh
-sphere.fbx
+sky_cylinder.fbx
 Name
 stone_gate7
 Rast State
@@ -597,8 +647,12 @@ next
 1 1 1
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
@@ -638,8 +692,12 @@ next
 1 1 1
 Ambient
 1 1 1 1
+Blend State
+null
 Casts Shadow
 1
+Cull
+0
 Grid Obstacle
 0
 Mesh
