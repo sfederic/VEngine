@@ -10,14 +10,8 @@ Actor::Actor()
 
 XMMATRIX Actor::GetWorldMatrix()
 {
-	XMMATRIX parentWorld = XMMatrixIdentity();
-
-	if (parent)
-	{
-		parentWorld = parent->GetWorldMatrix();
-	}
-
-	return rootComponent->transform.world;
+	//@Todo: this isn't going over actor parents and children
+	return rootComponent->GetWorldMatrix();
 }
 
 void Actor::UpdateTransform(XMMATRIX parentWorld)
