@@ -73,7 +73,7 @@ Properties ParticleEmitter::GetProps()
 	props.Add("Spawn Rate", &spawnRate);
 	props.Add("Spawn Radius", &spawnRadius);
 	props.Add("Lifetime", &lifetime);
-	props.Add("Texture", &textureFilename);
+	props.Add("Texture", &textureData);
 	props.Add("Direction", &direction);
 	props.Add("Rotate", &rotation);
 	props.Add("Rotate Speed", &rotateSpeed);

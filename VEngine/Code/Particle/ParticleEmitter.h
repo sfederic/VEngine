@@ -11,7 +11,7 @@ struct ParticleEmitter : SpatialComponent
 
 	XMFLOAT3 direction;
 
-	std::string textureFilename;
+	TextureData textureData;
 
 	//The Float2's here are acting as a range [x = min, y = max]
 	XMFLOAT2 moveSpeed = XMFLOAT2(1.f, 1.f);

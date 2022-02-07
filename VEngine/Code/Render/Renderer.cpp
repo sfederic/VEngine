@@ -883,7 +883,7 @@ void Renderer::RenderParticleEmitters()
 		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
 
 		//Set texture from emitter for every particle
-		context->PSSetShaderResources(0, 1, &textureSystem.FindTexture2D(emitter->textureFilename)->srv);
+		context->PSSetShaderResources(0, 1, &textureSystem.FindTexture2D(emitter->textureData.filename)->srv);
 
 		spriteSystem.UpdateAndSetSpriteBuffers(context);
 
