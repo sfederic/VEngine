@@ -2,11 +2,10 @@
 #include "Components/SpatialComponent.h"
 #include "Components/ComponentSystem.h"
 
-//3d math book, chapter 9.3.3 Polyboards 
-
 struct Buffer;
 struct MeshDataProxy;
 
+//Taken from 'Mathematics for 3D Game Programming and Computer Graphics', Chapter 9.3.3: Polyboards.
 //Polyboard is a line of 'planes' facing the camera for line-like effects (beams, lightning, etc.)
 struct Polyboard : SpatialComponent
 {
