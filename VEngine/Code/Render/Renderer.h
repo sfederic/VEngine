@@ -94,6 +94,7 @@ private:
 	void RenderCameraMeshes();
 	void RenderLightMeshes();
 	void RenderSkeletonBones();
+	void RenderPolyboards();
 	void AnimateSkeletalMesh(MeshComponent* mesh);
 	void UpdateLights();
 	void StartGPUQueries();

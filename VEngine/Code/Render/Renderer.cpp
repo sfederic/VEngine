@@ -35,6 +35,7 @@
 #include "Render/SpriteSystem.h"
 #include "Particle/ParticleSystem.h"
 #include "Particle/ParticleEmitter.h"
+#include "Particle/Polyboard.h"
 #include "Gameplay/GameInstance.h"
 
 Renderer renderer;
@@ -436,6 +437,7 @@ void Renderer::Render()
 	RenderShadowPass();
 	RenderMeshComponents();
 	RenderInstanceMeshComponents();
+	RenderPolyboards();
 	RenderBounds();
 	//RenderSkeletonBones();
 	RenderLightMeshes();
@@ -806,6 +808,53 @@ void Renderer::RenderSkeletonBones()
 	context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
 	context->Draw(lines.size() * 2, 0);
+}
+
+void Renderer::RenderPolyboards()
+{
+	PROFILE_START
+
+	shaderMatrices.view = activeCamera->GetViewMatrix();
+	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
+	shaderMatrices.texMatrix = XMMatrixIdentity();
+	shaderMatrices.model = XMMatrixIdentity();
+	shaderMatrices.MakeModelViewProjectionMatrix();
+
+	MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
+	context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+
+	if (drawAllAsWireframe)
+	{
+		context->RSSetState(rastStateWireframe);
+	}
+	else
+	{
+		context->RSSetState(rastStateMap["nobackcull"]->data);
+	}
+
+	ShaderItem* shader = shaderSystem.FindShader(L"Unlit.hlsl");
+	context->VSSetShader(shader->vertexShader, nullptr, 0);
+	context->PSSetShader(shader->pixelShader, nullptr, 0);
+
+	for (auto polyboard : Polyboard::system.components)
+	{
+		polyboard->CalcVertices();
+
+		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
+		context->PSSetShaderResources(0, 1, &textureSystem.FindTexture2D(polyboard->textureData.filename)->srv);
+
+		D3D11_MAPPED_SUBRESOURCE mappedResource;
+		HR(context->Map(polyboard->vertexBuffer->data, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+		memcpy(mappedResource.pData, polyboard->vertices.data(), sizeof(Vertex) * polyboard->vertices.size());
+		context->Unmap(polyboard->vertexBuffer->data, 0);
+
+		context->IASetVertexBuffers(0, 1, &polyboard->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
+		context->IASetIndexBuffer(polyboard->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
+
+		context->DrawIndexed(polyboard->indices.size(), 0, 0);
+	}
+
+	PROFILE_END
 }
 
 void Renderer::AnimateSkeletalMesh(MeshComponent* mesh)
