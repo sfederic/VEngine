@@ -50,7 +50,7 @@ void Polyboard::CalcVertices()
 {
 	vertices.clear();
 
-	XMVECTOR cameraPos = activeCamera->GetPositionV();
+	XMVECTOR cameraPos = activeCamera->GetWorldPositionV();
 
 	for (int i = 0; i < 8; i++)
 	{
@@ -59,6 +59,9 @@ void Polyboard::CalcVertices()
 
 		XMVECTOR posToCamera = XMVector3Normalize(pos - cameraPos);
 		XMVECTOR tangent = XMVector3Normalize(nextPos - pos);
+
+		//Use this if you need a wavy effect for polyboards
+		//radius = (sinf(i * Core::timeSinceStartup) * 0.2f) + 0.35f;
 
 		XMVECTOR p1 = pos - (radius * XMVector3Cross(tangent, posToCamera));
 		XMVECTOR p2 = pos + (radius * XMVector3Cross(tangent, posToCamera));
