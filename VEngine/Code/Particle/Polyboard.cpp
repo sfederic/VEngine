@@ -45,7 +45,7 @@ void Polyboard::CalcVertices()
 	XMVECTOR startToEndDir = XMVector3Normalize(end - start);
 
 	float length = XMVector3Length(end - start).m128_f32[0];
-	length = std::ceilf(length);
+	length = std::ceilf(length) + 1.f;
 
 	XMVECTOR cameraPos = activeCamera->GetWorldPositionV();
 

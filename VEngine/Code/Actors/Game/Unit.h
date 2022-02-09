@@ -5,6 +5,7 @@
 struct GridNode;
 struct MemoryComponent;
 struct EntranceTrigger;
+struct Polyboard;
 
 //Units are battle ready actors and really only move and fight.
 struct Unit : GridActor
@@ -23,6 +24,9 @@ struct Unit : GridActor
 	VEnum battleState;
 
 	MemoryComponent* memoryOnDeath = nullptr;
+
+	//Meant to show a unit's current focus in battle and in world
+	Polyboard* intentBeam = nullptr;
 
 	EntranceTrigger* entranceToEscapeTo = nullptr;
 

@@ -18,6 +18,7 @@
 #include "Gameplay/GameInstance.h"
 #include "Actors/Game/EntranceTrigger.h"
 #include "Physics/Raycast.h"
+#include "Particle/Polyboard.h"
 
 Unit::Unit()
 {
@@ -30,6 +31,9 @@ Unit::Unit()
 
 	memoryOnDeath = MemoryComponent::system.Add(this);
 	memoryOnDeath->name = "MemoryOnDeath"; //Seperate the name, GridActor and Unit have two memory components.
+
+	intentBeam = Polyboard::system.Add(this);
+	intentBeam->GenerateVertices();
 }
 
 void Unit::Start()
@@ -49,6 +53,9 @@ void Unit::Start()
 void Unit::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
+
+	intentBeam->startPoint = GetPosition();
+	intentBeam->endPoint = world.GetActorByName(actorToFocusOn)->GetPosition();
 
 	healthWidget->pos = GetHomogeneousPositionVector();
 
