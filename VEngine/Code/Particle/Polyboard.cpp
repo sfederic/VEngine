@@ -1,11 +1,12 @@
 #include "Polyboard.h"
 #include "Camera.h"
+#include "Core.h"
 #include "Render/RenderUtils.h"
 
 Polyboard::Polyboard()
 {
 	startPoint = XMFLOAT3(0.f, 0.f, 0.f);
-	endPoint = XMFLOAT3(1.f, 1.f, 1.f);
+	endPoint = XMFLOAT3(0.f, 0.f, 0.f);
 
 	vertexBuffer = new Buffer();
 	indexBuffer = new Buffer();
@@ -20,48 +21,39 @@ Properties Polyboard::GetProps()
 
 void Polyboard::GenerateVertices()
 {
-	XMVECTOR start = XMLoadFloat3(&startPoint);
-	XMVECTOR end = XMLoadFloat3(&endPoint);
-
-	float length = XMVector3Length(end - start).m128_f32[0];
-	float segment = length / size;
-
 	CalcVertices();
 
-	vertexBuffer->data = RenderUtils::CreateDynamicBuffer(sizeof(Vertex) * vertices.size(),
+	vertexBuffer->data = RenderUtils::CreateDynamicBuffer(sizeof(Vertex) * 256,
 		D3D11_BIND_VERTEX_BUFFER, vertices.data());
 
-	for (size_t i = 0; i < vertices.size() / 3; i++) //Because the vertices aren't triangle based, divide by 3
-	{
-		indices.push_back(0 + (2 * i));
-		indices.push_back(2 + (2 * i));
-		indices.push_back(1 + (2 * i));
-
-		indices.push_back(2 + (2 * i));
-		indices.push_back(3 + (2 * i));
-		indices.push_back(1 + (2 * i));
-	}
-
-	indexBuffer->data = RenderUtils::CreateDefaultBuffer(indices.size() * sizeof(MeshData::indexDataType),
+	indexBuffer->data = RenderUtils::CreateDynamicBuffer(256 * sizeof(MeshData::indexDataType),
 		D3D11_BIND_INDEX_BUFFER, indices.data());
 }
 
 void Polyboard::CalcVertices()
 {
 	vertices.clear();
+	indices.clear();
+
+	XMVECTOR start = XMLoadFloat3(&startPoint);
+	XMVECTOR end = XMLoadFloat3(&endPoint);
+	XMVECTOR startToEndDir = XMVector3Normalize(end - start);
+
+	float length = XMVector3Length(end - start).m128_f32[0];
+	length = std::ceilf(length);
 
 	XMVECTOR cameraPos = activeCamera->GetWorldPositionV();
 
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < length; i++)
 	{
-		XMVECTOR pos = XMVectorSet(i, i, i, 1.0f);
-		XMVECTOR nextPos = XMVectorSet(i + 1, i + 1, i + 1, 1.0f);
+		XMVECTOR pos = start + (startToEndDir * i);
+		XMVECTOR nextPos = pos + startToEndDir;
 
 		XMVECTOR posToCamera = XMVector3Normalize(pos - cameraPos);
 		XMVECTOR tangent = XMVector3Normalize(nextPos - pos);
 
 		//Use this if you need a wavy effect for polyboards
-		//radius = (sinf(i * Core::timeSinceStartup) * 0.2f) + 0.35f;
+		radius = (sinf(i * Core::timeSinceStartup) * 0.2f) + 0.1f;
 
 		XMVECTOR p1 = pos - (radius * XMVector3Cross(tangent, posToCamera));
 		XMVECTOR p2 = pos + (radius * XMVector3Cross(tangent, posToCamera));
@@ -76,5 +68,16 @@ void Polyboard::CalcVertices()
 
 		vertices.push_back(vertex1);
 		vertices.push_back(vertex2);
+	}
+
+	for (size_t i = 0; i < (vertices.size() / 3) + 1; i++) //Because the vertices aren't triangle based, divide by 3
+	{
+		indices.push_back(0 + (2 * i));
+		indices.push_back(2 + (2 * i));
+		indices.push_back(1 + (2 * i));
+
+		indices.push_back(2 + (2 * i));
+		indices.push_back(3 + (2 * i));
+		indices.push_back(1 + (2 * i));
 	}
 }
