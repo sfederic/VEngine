@@ -26,7 +26,7 @@ struct Polyboard : SpatialComponent
 	XMFLOAT3 startPoint;
 	XMFLOAT3 endPoint;
 
-	float radius = 0.6f;
+	float radius = 0.8f;
 
 	Polyboard();
 	virtual Properties GetProps() override;

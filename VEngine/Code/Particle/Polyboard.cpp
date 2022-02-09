@@ -23,6 +23,11 @@ void Polyboard::GenerateVertices()
 {
 	CalcVertices();
 
+	if (vertices.size() == 0)
+	{
+		vertices.push_back(Vertex());
+	}
+
 	vertexBuffer->data = RenderUtils::CreateDynamicBuffer(sizeof(Vertex) * 256,
 		D3D11_BIND_VERTEX_BUFFER, vertices.data());
 
@@ -53,7 +58,7 @@ void Polyboard::CalcVertices()
 		XMVECTOR tangent = XMVector3Normalize(nextPos - pos);
 
 		//Use this if you need a wavy effect for polyboards
-		radius = (sinf(i * Core::timeSinceStartup) * 0.2f) + 0.1f;
+		radius = (sinf(i * Core::timeSinceStartup) * 0.15f) + 0.4f;
 
 		XMVECTOR p1 = pos - (radius * XMVector3Cross(tangent, posToCamera));
 		XMVECTOR p2 = pos + (radius * XMVector3Cross(tangent, posToCamera));

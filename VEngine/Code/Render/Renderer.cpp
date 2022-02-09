@@ -823,6 +823,9 @@ void Renderer::RenderPolyboards()
 	MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
 	context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
+	const float blendFactor[4] = { 0.f, 0.f, 0.f, 0.f };
+	context->OMSetBlendState(blendStateMap[BlendStates::Default]->data, blendFactor, 0xFFFFFFFF);
+
 	if (drawAllAsWireframe)
 	{
 		context->RSSetState(rastStateWireframe);
