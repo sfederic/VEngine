@@ -224,6 +224,7 @@
     <ClCompile Include="Code\Quests\QuestSystem.cpp" />
     <ClCompile Include="Code\Components\QuestComponent.cpp" />
     <ClCompile Include="Code\Particle\Polyboard.cpp" />
+    <ClCompile Include="Code\Actors\PolyboardActor.cpp" />
     <ClInclude Include="Code\Quests\Quest.h" />
     <ClInclude Include="Code\UI\BulletWidget.h" />
     <ClInclude Include="Code\Components\CharacterControllerComponent.h" />
@@ -444,6 +445,7 @@
     <ClInclude Include="Code\Quests\QuestSystem.h" />
     <ClInclude Include="Code\Components\QuestComponent.h" />
     <ClInclude Include="Code\Particle\Polyboard.h" />
+    <ClInclude Include="Code\Actors\PolyboardActor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
