@@ -33,12 +33,13 @@ Unit::Unit()
 	memoryOnDeath->name = "MemoryOnDeath"; //Seperate the name, GridActor and Unit have two memory components.
 
 	intentBeam = Polyboard::system.Add(this);
-	intentBeam->GenerateVertices();
 }
 
 void Unit::Start()
 {
 	__super::Start();
+
+	intentBeam->GenerateVertices();
 
 	healthWidget = CreateWidget<HealthWidget>();
 	healthWidget->healthPoints = health;
@@ -54,8 +55,13 @@ void Unit::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
-	intentBeam->startPoint = GetPosition();
-	intentBeam->endPoint = world.GetActorByName(actorToFocusOn)->GetPosition();
+	//@Todo: figure out how to do intent beams better for units.
+	//intentBeam->startPoint = GetPosition();
+	//Actor* intentActor = world.GetActorByNameAllowNull(actorToFocusOn);
+	//if (intentActor)
+	//{
+	//	intentBeam->endPoint = intentActor->GetPosition();
+	//}
 
 	healthWidget->pos = GetHomogeneousPositionVector();
 
