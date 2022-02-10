@@ -226,6 +226,7 @@
     <ClCompile Include="Code\Particle\Polyboard.cpp" />
     <ClCompile Include="Code\Actors\PolyboardActor.cpp" />
     <ClCompile Include="Code\UI\NoteWidget.cpp" />
+    <ClCompile Include="Code\Actors\DebugNoteActor.cpp" />
     <ClInclude Include="Code\Quests\Quest.h" />
     <ClInclude Include="Code\UI\BulletWidget.h" />
     <ClInclude Include="Code\Components\CharacterControllerComponent.h" />
@@ -448,6 +449,7 @@
     <ClInclude Include="Code\Particle\Polyboard.h" />
     <ClInclude Include="Code\Actors\PolyboardActor.h" />
     <ClInclude Include="Code\UI\NoteWidget.h" />
+    <ClInclude Include="Code\Actors\DebugNoteActor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
