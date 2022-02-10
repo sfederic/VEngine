@@ -144,7 +144,7 @@ next
 Unit
 0
 EntranceTrigger
-1
+2
  Position
 1 0 9
  Rotation
@@ -165,6 +165,33 @@ Offset
 0 0 0
 Open Text
 Town Center
+UID
+1733768507
+condition
+
+conditionArg
+
+next
+ Position
+2 0 7
+ Rotation
+-0 0.707107 -0 0.707107
+ Scale
+2 1 1
+Entrance Active
+1
+Extents
+0.45 0.45 0.45
+Level Name
+coastlist.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger1
+Offset
+0 0 0
+Open Text
+Enter Coastline
 UID
 1733768507
 condition
@@ -278,7 +305,7 @@ spawnText
 
 next
 MeshActor
-10
+11
  Position
 1 -0.5 7.5
  Rotation
@@ -729,6 +756,51 @@ UvRotationSpeed
 UvScale
 2 2
 next
+ Position
+6 -0.5 7.5
+ Rotation
+0 0.707157 0 -0.707056
+ Scale
+0.999993 1 0.999993
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+dock.fbx
+Name
+MeshActor10
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+dock.jpg
+UID
+1851051745
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+1.57
+UvRotationSpeed
+0
+UvScale
+3 1
+next
 DirectionalLightActor
 1
  Position
@@ -773,4 +845,6 @@ PushableGridActor
 PlayerDialogueTrigger
 0
 PhysicsActor
+0
+PolyboardActor
 0
