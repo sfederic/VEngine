@@ -40,7 +40,7 @@ void MaterialSystem::Cleanup()
 {
 	for (auto& materialIt : materials)
 	{
-		//@Todo: there's an occasianal crash here I don't know why. Doesn't happen much anymore.
+		//@Todo: there's an occasianal crash here I don't know why.
 		delete materialIt.second;
 	}
 
