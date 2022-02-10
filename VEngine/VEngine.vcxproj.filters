@@ -500,7 +500,7 @@
     <ClCompile Include="Code\Actors\PolyboardActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\UI\NoteWidget.cpp">
+    <ClCompile Include="Code\UI\DebugNoteWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp">
@@ -949,7 +949,7 @@
     <ClInclude Include="Code\Actors\PolyboardActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\UI\NoteWidget.h">
+    <ClInclude Include="Code\UI\DebugNoteWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\DebugNoteActor.h">

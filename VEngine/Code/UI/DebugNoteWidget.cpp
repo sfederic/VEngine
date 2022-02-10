@@ -1,6 +1,6 @@
-#include "NoteWidget.h"
+#include "DebugNoteWidget.h"
 
-void NoteWidget::Draw(float deltaTime)
+void DebugNoteWidget::Draw(float deltaTime)
 {
 	int sx, sy;
 	GetScreenSpaceCoords(sx, sy);

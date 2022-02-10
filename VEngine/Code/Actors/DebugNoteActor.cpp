@@ -1,5 +1,5 @@
 #include "DebugNoteActor.h"
-#include "UI/NoteWidget.h"
+#include "UI/DebugNoteWidget.h"
 #include "Components/EmptyComponent.h"
 
 DebugNoteActor::DebugNoteActor()
@@ -9,7 +9,7 @@ DebugNoteActor::DebugNoteActor()
 
 void DebugNoteActor::Start()
 {
-    noteWidget = CreateWidget<NoteWidget>();
+    noteWidget = CreateWidget<DebugNoteWidget>();
     noteWidget->noteText = noteText;
     noteWidget->pos = GetHomogeneousPositionVector();
     noteWidget->AddToViewport();
