@@ -2,6 +2,7 @@
 
 void DebugNoteWidget::Draw(float deltaTime)
 {
+#ifdef _DEBUG
 	int sx, sy;
 	GetScreenSpaceCoords(sx, sy);
 
@@ -9,4 +10,5 @@ void DebugNoteWidget::Draw(float deltaTime)
 
 	FillRect(layout, {0.5f, 0.5f, 0.5f, 0.5f}, 0.5f);
 	Text(noteText, layout);
+#endif
 }
