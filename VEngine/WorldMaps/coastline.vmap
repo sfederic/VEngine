@@ -58,9 +58,9 @@ AudioActor
 Player
 1
  Position
-1 0 5
+4 0 6
  Rotation
-0 -0.707107 -0 0.707107
+0 -0.707107 0 0.707107
  Scale
 1 1 1
 Ambient
@@ -118,7 +118,7 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
--0.000965454
+-0.0628197
 next
 Unit
 0
@@ -634,3 +634,18 @@ PhysicsActor
 0
 PolyboardActor
 0
+DebugNoteActor
+1
+ Position
+2 0 8
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+DebugNoteActor0
+Note Text
+Got this door thing here so it can go into an underground section of the island.
+UID
+3601621326
+next

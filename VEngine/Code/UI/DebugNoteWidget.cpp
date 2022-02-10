@@ -7,6 +7,6 @@ void DebugNoteWidget::Draw(float deltaTime)
 
 	Layout layout = CenterLayoutOnScreenSpaceCoords(175.f, 75.f, sx, sy);
 
-	FillRect(layout);
+	FillRect(layout, {0.5f, 0.5f, 0.5f, 0.5f}, 0.5f);
 	Text(noteText, layout);
 }

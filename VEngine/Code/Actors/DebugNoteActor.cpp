@@ -11,7 +11,6 @@ void DebugNoteActor::Start()
 {
     noteWidget = CreateWidget<DebugNoteWidget>();
     noteWidget->noteText = noteText;
-    noteWidget->pos = GetHomogeneousPositionVector();
     noteWidget->AddToViewport();
 }
 
