@@ -1,0 +1,513 @@
+Grid
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+node.fbx
+Name
+Grid0
+Rast State
+solid
+Shader
+InstanceShader.hlsl
+Size X
+5
+Size Y
+7
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UID
+868009865
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+startBattleOnLoad
+0
+next
+GridActor
+0
+AudioActor
+0
+Player
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Audio Filename
+step.wav
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+FOV
+60
+Far Z
+1000
+File
+
+Grid Obstacle
+0
+Loop
+1
+Mesh
+character_test.fbx
+Name
+Player0
+Near Z
+0.01
+Pitch
+1
+Play On Start
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UID
+4168234238
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+Volume
+-0.00114448
+next
+Unit
+0
+EntranceTrigger
+0
+NPC
+0
+MeshActor
+7
+ Position
+2 -0.5 1
+ Rotation
+-0 0 -0 1
+ Scale
+5 1 3
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+node.fbx
+Name
+node0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wall (2).png
+UID
+3317960551
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+2 2
+next
+ Position
+-0.5 1 1
+ Rotation
+-0 0 -0.707107 0.707107
+ Scale
+2.99999 0.999997 3
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+node.fbx
+Name
+node1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wall04.png
+UID
+3317960551
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+2 2
+next
+ Position
+4.5 1 3
+ Rotation
+-0.707107 0.707107 0.000122125 -0.000122083
+ Scale
+2.99995 0.99998 6.99995
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+node.fbx
+Name
+node2
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wall04.png
+UID
+3317960551
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1.5 1.5
+next
+ Position
+2 1 6.5
+ Rotation
+-0.500086 0.500086 -0.499914 0.499914
+ Scale
+3 1 5
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+node.fbx
+Name
+node3
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wall04.png
+UID
+3317960551
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1.5 2
+next
+ Position
+2 1 -0.5
+ Rotation
+-0.499914 0.499913 0.500087 -0.500086
+ Scale
+3 0.999998 5
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+node.fbx
+Name
+node4
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wall04.png
+UID
+3317960551
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+2 2
+next
+ Position
+2 -0.5 4.5
+ Rotation
+-0 0 -0 1
+ Scale
+5 1 4
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+node.fbx
+Name
+node5
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wall (2).png
+UID
+3317960551
+UvOffset
+0.5 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+2 2
+next
+ Position
+-0.5 1 4.5
+ Rotation
+-0 0 -0.707107 0.707107
+ Scale
+3 1 4
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+node.fbx
+Name
+node6
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wall04.png
+UID
+3317960551
+UvOffset
+0.2 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+2 2
+next
+DirectionalLightActor
+1
+ Position
+-4 2 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Colour
+1 1 1 1
+LightEnabled
+1
+Name
+DirectionalLightActor0
+UID
+1423645025
+next
+SavePoint
+0
+PointLightActor
+1
+ Position
+2 1 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Colour
+1 1 1 1
+Const Atten.
+0.6
+LightEnabled
+1
+Linear Atten.
+0
+Name
+PointLightActor0
+Quad Atten.
+0
+UID
+2618706807
+next
+SpotLightActor
+0
+FenceActor
+0
+Billboard
+0
+InteractTrigger
+0
+ParticleSystem
+0
+DialogueTrigger
+0
+DestructibleActor
+0
+MemoryActor
+0
+TitleScreenActor
+0
+PushableGridActor
+0
+PlayerDialogueTrigger
+0
+PhysicsActor
+0
+PolyboardActor
+0
