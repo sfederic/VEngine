@@ -42,7 +42,7 @@ Player::Player()
 	mesh = MeshComponent::system.Add(this, MeshComponent("character_test.fbx", "test.png"));
 	rootComponent->AddChild(mesh);
 
-	camera = CameraComponent::system.Add(this, CameraComponent(XMFLOAT3(2.f, 2.f, -3.f), false));
+	camera = CameraComponent::system.Add(this, CameraComponent(XMFLOAT3(1.75f, 1.75f, -2.75f), false));
 
 	rootComponent->AddChild(camera);
 
