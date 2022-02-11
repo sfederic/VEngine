@@ -58,7 +58,7 @@ AudioActor
 Player
 1
  Position
-0 0 0
+2 0 0
  Rotation
 0 0 0 1
  Scale
@@ -118,7 +118,7 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
--0.00114448
+-0.0640499
 next
 Unit
 0
@@ -127,7 +127,7 @@ EntranceTrigger
 NPC
 0
 MeshActor
-7
+14
  Position
 2 -0.5 1
  Rotation
@@ -443,6 +443,321 @@ UvRotationSpeed
 UvScale
 2 2
 next
+ Position
+2 -1 2
+ Rotation
+-0 0.707107 -0 0.707107
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+plane7
+Rast State
+nobackcull
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+foliage.png
+UID
+442043830
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+1 -1 5
+ Rotation
+0 1 0 -0.000172815
+ Scale
+0.999998 1 0.999998
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+MeshActor8
+Rast State
+nobackcull
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+foliage.png
+UID
+442043830
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+4 -1 1
+ Rotation
+-0 -0.706934 -0 0.70728
+ Scale
+0.999999 1 0.999999
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Name
+MeshActor9
+Rast State
+nobackcull
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+foliage.png
+UID
+442043830
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+0.5 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+fountain.fbx
+Name
+fountain10
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wall (2).png
+UID
+4117337098
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+2 2
+next
+ Position
+4 0 6
+ Rotation
+-0 0 -0 1
+ Scale
+2 2 2
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+pillar2.fbx
+Name
+pillar211
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+floor.jpg
+UID
+2434625173
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+0 0 6
+ Rotation
+-0 0 -0 1
+ Scale
+2 2 2
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+pillar2.fbx
+Name
+pillar212
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+floor.jpg
+UID
+2434625173
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+4 -0.4 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 0.2 3
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+cube.fbx
+Name
+cube13
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+-1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wall05.png
+UID
+668164035
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+2 4
+next
 DirectionalLightActor
 1
  Position
@@ -510,4 +825,6 @@ PlayerDialogueTrigger
 PhysicsActor
 0
 PolyboardActor
+0
+DebugNoteActor
 0
