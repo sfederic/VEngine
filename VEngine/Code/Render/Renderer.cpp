@@ -534,7 +534,7 @@ void Renderer::RenderInstanceMeshComponents()
 
 		//@Todo: clean this up in InstanceMeshComponent
 		const float factor[4] = { 0.f };
-		context->OMSetBlendState(blendStateMap.find("default")->second->data, factor, 0xFFFFFFFF);
+		context->OMSetBlendState(blendStateMap.find(BlendStates::Default)->second->data, factor, 0xFFFFFFFF);
 
 		//update texture matrix
 		shaderMatrices.MakeTextureMatrix(instanceMesh->material);
