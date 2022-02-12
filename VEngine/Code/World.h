@@ -57,6 +57,23 @@ struct World
 	}
 
 	template <typename T>
+	std::vector<T*> GetAllComponentSystemsOfType()
+	{
+		std::vector<T*> outComponentSystems;
+
+		for (auto componentSystem : activeComponentSystems)
+		{
+			auto systemType = dynamic_cast<T*>(componentSystem);
+			if (systemType)
+			{
+				outComponentSystems.push_back(systemType);
+			}
+		}
+
+		return outComponentSystems;
+	}
+
+	template <typename T>
 	std::vector<Actor*> GetAllActorsOfTypeAsActor()
 	{
 		std::vector<Actor*> outActors;
