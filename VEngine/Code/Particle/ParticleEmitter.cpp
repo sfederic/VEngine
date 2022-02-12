@@ -60,6 +60,12 @@ void ParticleEmitter::Tick(float deltaTime)
 
 		particle.AddVelocity(direction, deltaTime);
 	}
+
+	emitterLifetimeTimer += deltaTime;
+	if (emitterLifetime > 0.f && emitterLifetimeTimer > emitterLifetime)
+	{
+		this->Remove();
+	}
 }
 
 void ParticleEmitter::Create()

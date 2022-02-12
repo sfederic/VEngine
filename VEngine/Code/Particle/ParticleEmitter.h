@@ -21,8 +21,12 @@ struct ParticleEmitter : SpatialComponent
 	XMFLOAT2 rotation = XMFLOAT2(0.f, 0.f);
 	XMFLOAT2 rotateSpeed = XMFLOAT2(0.f, 0.f);
 
+	//Seperate from individual particle lifetime, Emitter destroys itself when it reaches a max.
+	float emitterLifetime = 0.f;
+
 private:
 	float spawnTimer = 0.f;
+	float emitterLifetimeTimer = 0.f;
 
 public:
 	ParticleEmitter();
