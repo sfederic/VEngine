@@ -227,6 +227,7 @@
     <ClCompile Include="Code\Actors\PolyboardActor.cpp" />
     <ClCompile Include="Code\UI\DebugNoteWidget.cpp" />
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp" />
+    <ClCompile Include="Code\UI\PassTimeWidget.cpp" />
     <ClInclude Include="Code\Particle\FireParticle.h" />
     <ClInclude Include="Code\Quests\Quest.h" />
     <ClInclude Include="Code\UI\BulletWidget.h" />
@@ -451,6 +452,7 @@
     <ClInclude Include="Code\Actors\PolyboardActor.h" />
     <ClInclude Include="Code\UI\DebugNoteWidget.h" />
     <ClInclude Include="Code\Actors\DebugNoteActor.h" />
+    <ClInclude Include="Code\UI\PassTimeWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
