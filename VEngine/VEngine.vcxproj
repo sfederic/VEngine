@@ -227,6 +227,7 @@
     <ClCompile Include="Code\Actors\PolyboardActor.cpp" />
     <ClCompile Include="Code\UI\DebugNoteWidget.cpp" />
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp" />
+    <ClInclude Include="Code\Particle\FireParticle.h" />
     <ClInclude Include="Code\Quests\Quest.h" />
     <ClInclude Include="Code\UI\BulletWidget.h" />
     <ClInclude Include="Code\Components\CharacterControllerComponent.h" />
