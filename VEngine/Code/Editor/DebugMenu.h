@@ -38,6 +38,7 @@ struct DebugMenu
 	bool physicsMenuOpen = false;
 	bool coreMenuOpen = false;
 	bool questMenuOpen = false;
+	bool particleMenuOpen = false;
 
 	void Init();
 	void Tick(float deltaTime);
@@ -65,6 +66,7 @@ private:
 	void RenderPhysicsMenu();
 	void RenderCoreMenu();
 	void RenderQuestMenu();
+	void RenderParticleMenu();
 };
 
 extern DebugMenu debugMenu;

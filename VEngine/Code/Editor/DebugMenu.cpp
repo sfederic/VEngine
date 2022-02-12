@@ -87,6 +87,7 @@ void DebugMenu::Tick(float deltaTime)
 	RenderSkeletonViewMenu();
 	RenderCoreMenu();
 	RenderQuestMenu();
+	RenderParticleMenu();
 
 	ImGui::EndFrame();
 
@@ -478,6 +479,17 @@ void DebugMenu::RenderQuestMenu()
 
 		ImGui::Text("Name: %s | Active: %d", questName.c_str(), quest->isActive);
 	}
+
+	ImGui::End();
+}
+
+//@Todo: this function needs a 'getallcomponentsoftype()' to be able to work properly and display
+//number of particle systems and particles in world
+void DebugMenu::RenderParticleMenu()
+{
+	if (!particleMenuOpen) return;
+
+	ImGui::Begin("Particles");
 
 	ImGui::End();
 }

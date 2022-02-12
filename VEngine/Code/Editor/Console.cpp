@@ -53,6 +53,8 @@ Console::Console()
 	//Menu for manipulating game instance data
 	executeMap.emplace(L"GAME", []() { debugMenu.gameInstaceMenuOpen = !debugMenu.gameInstaceMenuOpen; });
 
+	executeMap.emplace(L"PARTICLE", []() { debugMenu.particleMenuOpen = !debugMenu.particleMenuOpen; });
+
 	//Show all Memory info player has
 	executeMap.emplace(L"MEM", []() { debugMenu.memoriesMenuOpen = !debugMenu.memoriesMenuOpen; });
 
