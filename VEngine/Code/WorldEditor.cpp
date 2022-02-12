@@ -25,7 +25,7 @@ void WorldEditor::Tick()
 
 void WorldEditor::HandleActorPicking()
 {
-	if (transformGizmo.CheckMouseOver()) 
+	if (transformGizmo.CheckMouseOver() || Core::gameplayOn) 
 	{
 		return;
 	}
