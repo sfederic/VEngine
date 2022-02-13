@@ -32,14 +32,14 @@ Unit::Unit()
 	memoryOnDeath = MemoryComponent::system.Add(this);
 	memoryOnDeath->name = "MemoryOnDeath"; //Seperate the name, GridActor and Unit have two memory components.
 
-	intentBeam = Polyboard::system.Add(this);
+	//intentBeam = Polyboard::system.Add(this);
 }
 
 void Unit::Start()
 {
 	__super::Start();
 
-	intentBeam->GenerateVertices();
+	//intentBeam->GenerateVertices();
 
 	healthWidget = CreateWidget<HealthWidget>();
 	healthWidget->healthPoints = health;
