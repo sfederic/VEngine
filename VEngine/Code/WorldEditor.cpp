@@ -155,6 +155,8 @@ void WorldEditor::SpawnActorOnClick()
 				debugMenu.AddNotification(VString::wformat(
 					L"Spawned actor [%S]", actor->name.c_str()));
 
+				actor->CreateAllComponents();
+
 				pickedActor = actor;
 				editor->SetActorProps(pickedActor);
 			}
@@ -179,6 +181,8 @@ void WorldEditor::SpawnActorOnClick()
 				Actor* actor = spawnSystem->SpawnActor(transform);
 				debugMenu.AddNotification(VString::wformat(
 					L"Spawned actor [%S]", actor->name.c_str()));
+
+				actor->CreateAllComponents();
 
 				pickedActor = actor;
 				editor->SetActorProps(pickedActor);
