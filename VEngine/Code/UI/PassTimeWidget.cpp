@@ -4,6 +4,7 @@
 #include "Gameplay/GameInstance.h"
 #include "Actors/Game/GridActor.h"
 #include "Timer.h"
+#include "Input.h"
 #include "World.h"
 
 void PassTimeWidget::Draw(float deltaTime)
@@ -53,6 +54,8 @@ void PassTimeWidget::ConfirmPassageOfTime()
 {
 	if (hoursToPass == 0) return;
 
+	Input::blockInput = true;
+
 	confirmClicked = true;
 
 	GameUtils::PlayAudioOneShot("intuition_gained.wav");
@@ -73,5 +76,6 @@ void PassTimeWidget::ConfirmPassageOfTime()
 	else
 	{
 		this->RemoveFromViewport();
+		Input::blockInput = false;
 	}
 }
