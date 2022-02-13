@@ -8,4 +8,5 @@ struct PassTimeWidget : Widget
 	int tempMinute = 0;
 
 	virtual void Draw(float deltaTime) override;
+	void ConfirmPassageOfTime();
 };

@@ -1,6 +1,10 @@
 #include "PassTimeWidget.h"
 #include "VString.h"
 #include "Gameplay/GameUtils.h"
+#include "Gameplay/GameInstance.h"
+#include "Actors/Game/GridActor.h"
+#include "Timer.h"
+#include "World.h"
 
 void PassTimeWidget::Draw(float deltaTime)
 {
@@ -50,5 +54,30 @@ void PassTimeWidget::Draw(float deltaTime)
 			GameUtils::PlayAudioOneShot("cursor.wav");
 			tempMinute -= 15;
 		}
+	}
+
+	auto layout = PercentAlignLayout(0.35f, 0.6f, 0.65f, 0.7f);
+	if (Button(L"Pray over time?", layout))
+	{
+		ConfirmPassageOfTime();
+		this->RemoveFromViewport();
+	}
+}
+
+void PassTimeWidget::ConfirmPassageOfTime()
+{
+	GameInstance::currentHour++;
+
+	auto gridActors = world.GetAllActorsOfTypeInWorld<GridActor>();
+	for (auto gridActor : gridActors)
+	{
+		gridActor->EnableBasedOnTime();
+	}
+
+	tempHour--;
+	if (tempHour > 0)
+	{
+		GameUtils::PlayAudioOneShot("intuition_gained.wav");
+		Timer::SetTimer(5.0f, std::bind(&PassTimeWidget::ConfirmPassageOfTime, this));
 	}
 }
