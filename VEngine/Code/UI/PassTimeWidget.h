@@ -4,8 +4,9 @@
 //Let's player change time of day via UI input
 struct PassTimeWidget : Widget
 {
-	int tempHour = 0;
-	int tempMinute = 0;
+	int hoursToPass = 0;
+
+	bool confirmClicked = false;
 
 	virtual void Draw(float deltaTime) override;
 	void ConfirmPassageOfTime();

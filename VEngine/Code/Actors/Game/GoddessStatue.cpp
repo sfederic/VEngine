@@ -16,7 +16,6 @@ Properties GoddessStatue::GetProps()
 void GoddessStatue::Interact()
 {
     auto widget = CreateWidget<PassTimeWidget>();
-    widget->tempHour = GameInstance::currentHour;
-    widget->tempMinute = GameInstance::currentMinute;
+    widget->hoursToPass = GameInstance::currentHour;
     widget->AddToViewport();
 }
