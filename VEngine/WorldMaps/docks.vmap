@@ -183,7 +183,7 @@ Entrance Active
 Extents
 0.45 0.45 0.45
 Level Name
-coastlist.vmap
+coastline.vmap
 Locked Text
 Locked
 Name
@@ -844,7 +844,11 @@ PushableGridActor
 0
 PlayerDialogueTrigger
 0
+GoddessStatue
+0
 PhysicsActor
 0
 PolyboardActor
+0
+DebugNoteActor
 0

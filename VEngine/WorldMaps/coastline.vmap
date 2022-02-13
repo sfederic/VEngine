@@ -58,9 +58,9 @@ AudioActor
 Player
 1
  Position
-4 0 6
+3 0 3
  Rotation
-0 -0.707107 0 0.707107
+0 -1 0 -5.96046e-08
  Scale
 1 1 1
 Ambient
@@ -74,7 +74,7 @@ Casts Shadow
 Cull
 0
 FOV
-60
+59.998
 Far Z
 1000
 File
@@ -118,7 +118,7 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
--0.0628197
+0.531092
 next
 Unit
 0
@@ -179,7 +179,110 @@ conditionArg
 
 next
 NPC
+1
+ Position
+1 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
 0
+Ambient
+1 1 1 1
+Attack Points
+1
+Attack Range
+1
+Battle State
+fight
+Blend State
+null
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Cull
+0
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+1
+Image File
+
+Inspect
+1
+Interact
+1
+Interact Text
+
+Memory Desc
+
+Memory Name
+
+Mesh
+
+Move Points
+1
+Move Speed
+3
+Name
+NPC0
+Obstacle
+0
+Quest Name
+
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UID
+3614230909
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+1
+actorToFocusOn
+
+alwaysActive
+0
+battleStartText
+
+condition
+
+conditionArg
+
+deathText
+
+interactKnownText
+
+spawnText
+
+next
 MeshActor
 9
  Position
@@ -630,6 +733,93 @@ PushableGridActor
 0
 PlayerDialogueTrigger
 0
+GoddessStatue
+1
+ Position
+1 0 2
+ Rotation
+-0 -0.707107 -0 0.707107
+ Scale
+1 1 1
+Add On Interact
+0
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Cull
+0
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+1
+Image File
+
+Inspect
+1
+Interact
+1
+Interact Text
+
+Memory Desc
+
+Memory Name
+
+Mesh
+save_slate.fbx
+Name
+GoddessStatue0
+Obstacle
+1
+Quest Name
+
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UID
+939581351
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+interactKnownText
+
+next
 PhysicsActor
 0
 PolyboardActor
