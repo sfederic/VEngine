@@ -126,6 +126,32 @@ void Widget::Image(const std::string& filename, int x, int y, int w, int h)
 	spriteSystem.CreateScreenSprite(sprite);
 }
 
+bool Widget::ImageButton(const std::string& filename, Layout layout)
+{
+	Sprite sprite = {};
+	sprite.textureFilename = filename;
+	sprite.dstRect = { (long)layout.rect.left, (long)layout.rect.top, (long)layout.rect.right, (long)layout.rect.bottom };
+	sprite.srcRect = { 0, 0, (long)layout.rect.right, (long)layout.rect.bottom };
+
+	spriteSystem.CreateScreenSprite(sprite);
+
+	if (editor->viewportMouseX > layout.rect.left && editor->viewportMouseX < layout.rect.right)
+	{
+		if (editor->viewportMouseY > layout.rect.top && editor->viewportMouseY < layout.rect.bottom)
+		{
+			//Hover animation/image
+			uiSystem.d2dRenderTarget->DrawRectangle(layout.rect, uiSystem.brushText, 2.f);
+
+			if (Input::GetMouseLeftUp())
+			{
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
 void Widget::Rect(Layout layout)
 {
 	uiSystem.d2dRenderTarget->DrawRectangle(layout.rect, uiSystem.brushShapes);

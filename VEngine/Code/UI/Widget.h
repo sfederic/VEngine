@@ -87,6 +87,7 @@ struct Widget
 
 	void Image(const std::string& filename, Layout layout);
 	void Image(const std::string& filename, int x, int y, int w, int h);
+	bool ImageButton(const std::string& filename, Layout layout);
 
 	void Rect(Layout layout);
 	void FillRect(Layout layout, D2D1_COLOR_F color = {0.5f, 0.5f, 0.5f, 1.f}, float opacity = 1.0f);
