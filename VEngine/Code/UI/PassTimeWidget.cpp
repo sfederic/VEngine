@@ -8,11 +8,11 @@ void PassTimeWidget::Draw(float deltaTime)
 
 	//HOUR
 	{
-		auto layout = PercentAlignLayout(0.3f, 0.3f, 0.4f, 0.3f);
+		auto layout = PercentAlignLayout(0.3f, 0.3f, 0.35f, 0.3f);
 		layout.rect.bottom += verticalSpacing;
 
 		layout.AddVerticalSpace(verticalSpacing);
-		if (Button(L"Up Hour", layout))
+		if (ImageButton("cross_add.jpg", layout))
 		{
 			GameUtils::PlayAudioOneShot("confirm.wav");
 			tempHour++;
@@ -22,7 +22,7 @@ void PassTimeWidget::Draw(float deltaTime)
 		Text(VString::wformat(L"%d", tempHour), layout);
 
 		layout.AddVerticalSpace(verticalSpacing);
-		if (Button(L"Down Hour", layout))
+		if (ImageButton("cross_minus.jpg", layout))
 		{
 			GameUtils::PlayAudioOneShot("cursor.wav");
 			tempHour--;
@@ -31,11 +31,11 @@ void PassTimeWidget::Draw(float deltaTime)
 
 	//MINUTES
 	{
-		auto layout = PercentAlignLayout(0.5f, 0.3f, 0.6f, 0.3f);
+		auto layout = PercentAlignLayout(0.5f, 0.3f, 0.55f, 0.3f);
 		layout.rect.bottom += verticalSpacing;
 
 		layout.AddVerticalSpace(verticalSpacing);
-		if (Button(L"Up Minutes", layout) && tempMinute < 60)
+		if (ImageButton("cross_add.jpg", layout) && tempMinute < 60)
 		{
 			GameUtils::PlayAudioOneShot("confirm.wav");
 			tempMinute += 15;
@@ -45,7 +45,7 @@ void PassTimeWidget::Draw(float deltaTime)
 		Text(VString::wformat(L"%d", tempMinute), layout);
 
 		layout.AddVerticalSpace(verticalSpacing);
-		if (Button(L"Down Minutes", layout) && tempMinute > 0)
+		if (ImageButton("cross_minus.jpg", layout) && tempMinute > 0)
 		{
 			GameUtils::PlayAudioOneShot("cursor.wav");
 			tempMinute -= 15;
