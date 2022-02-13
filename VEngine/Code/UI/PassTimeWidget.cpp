@@ -1,5 +1,6 @@
 #include "PassTimeWidget.h"
 #include "VString.h"
+#include "Gameplay/GameUtils.h"
 
 void PassTimeWidget::Draw(float deltaTime)
 {
@@ -13,6 +14,7 @@ void PassTimeWidget::Draw(float deltaTime)
 		layout.AddVerticalSpace(verticalSpacing);
 		if (Button(L"Up Hour", layout))
 		{
+			GameUtils::PlayAudioOneShot("confirm.wav");
 			tempHour++;
 		}
 
@@ -22,6 +24,7 @@ void PassTimeWidget::Draw(float deltaTime)
 		layout.AddVerticalSpace(verticalSpacing);
 		if (Button(L"Down Hour", layout))
 		{
+			GameUtils::PlayAudioOneShot("cursor.wav");
 			tempHour--;
 		}
 	}
@@ -34,6 +37,7 @@ void PassTimeWidget::Draw(float deltaTime)
 		layout.AddVerticalSpace(verticalSpacing);
 		if (Button(L"Up Minutes", layout) && tempMinute < 60)
 		{
+			GameUtils::PlayAudioOneShot("confirm.wav");
 			tempMinute += 15;
 		}
 
@@ -43,6 +47,7 @@ void PassTimeWidget::Draw(float deltaTime)
 		layout.AddVerticalSpace(verticalSpacing);
 		if (Button(L"Down Minutes", layout) && tempMinute > 0)
 		{
+			GameUtils::PlayAudioOneShot("cursor.wav");
 			tempMinute -= 15;
 		}
 	}
