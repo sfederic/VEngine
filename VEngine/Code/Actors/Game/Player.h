@@ -16,6 +16,7 @@ struct BulletWidget;
 struct GuardWidget;
 struct Memory;
 struct GridNode;
+struct GridActor;
 
 struct Player : Actor
 {
@@ -45,6 +46,8 @@ struct Player : Actor
 
 	XMVECTOR nextPos;
 	XMVECTOR nextRot;
+
+	GridActor* gridActorInteractingWith = nullptr;
 
 	//Name of the memory selected in MemoryMenuWidget to spawn into world
 	std::string memoryNameToSpawn;

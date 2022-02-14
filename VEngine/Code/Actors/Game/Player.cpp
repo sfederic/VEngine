@@ -415,6 +415,11 @@ void Player::PrimaryAction()
 
 		if (inInteraction)
 		{
+			//End interact with GridActor
+			assert(gridActorInteractingWith);
+			gridActorInteractingWith->EndInteract();
+			gridActorInteractingWith = nullptr;
+
 			interactWidget->RemoveFromViewport();
 			inInteraction = false;
 			nextCameraFOV = 60.f;
@@ -632,6 +637,8 @@ bool Player::CombatInteractCheck(Actor* actorToCheck)
 		if (gridActor->isInteractable)
 		{
 			gridActor->Interact();
+			gridActorInteractingWith = gridActor;
+
 			return true;
 		}
 	}
@@ -649,6 +656,7 @@ bool Player::InteractCheck(Actor* hitActor)
 			if (gridActor->isInteractable)
 			{
 				gridActor->Interact();
+				gridActorInteractingWith = gridActor;
 			}
 
 			if (gridActor->isInspectable)
