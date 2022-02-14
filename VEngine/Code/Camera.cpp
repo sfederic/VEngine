@@ -42,8 +42,10 @@ XMMATRIX CameraComponent::GetViewMatrix()
 
 		//using direct position here from transform
 		view = XMMatrixLookAtLH(transform.world.r[3], focusPoint, VMath::XMVectorUp());
-		auto S = Shake();
-		view.r[3] += S;
+
+		//Camera shaking
+		XMVECTOR shakeVector = Shake();
+		view.r[3] += shakeVector;
 	}
 	else
 	{
@@ -143,21 +145,24 @@ void CameraComponent::ZoomTo(Actor* actor)
 	SetPosition(zoomPos);
 }
 
+//Only works with translation for now.
+//Ref: https://gdcvault.com/play/1023146/Math-for-Game-Programmers-Juicing
 XMVECTOR CameraComponent::Shake()
 {
-	std::random_device randomDevice;
-	std::mt19937 randomGenerator(randomDevice());
-	std::uniform_real_distribution<float> uidDist(-1.f, 1.f);
+	if (shakeLevel <= 0.f) return XMVectorZero();
+	shakeLevel -= Core::GetDeltaTime();
 
-	const float shake = 0.1f;
-	const float max = 0.1f;
-	float yaw = max * shake * uidDist(randomGenerator);
-	float roll = max * shake * uidDist(randomGenerator);
-	float pitch = max * shake * uidDist(randomGenerator);
+	static std::random_device randomDevice;
+	static std::mt19937 randomGenerator(randomDevice());
+	static std::uniform_real_distribution<float> uidDist(-1.f, 1.f);
 
-	XMVECTOR Q = XMVectorSet(yaw, roll, pitch, 1.f);
-	//XMVECTOR Q = XMQuaternionRotationRollPitchYaw(pitch, yaw, roll);
-	return Q;
+	const float maxShake = 0.1f;
+	float xOffset = maxShake * shakeLevel * uidDist(randomGenerator);
+	float yOffset = maxShake * shakeLevel * uidDist(randomGenerator);
+	float zOffset = maxShake * shakeLevel * uidDist(randomGenerator);
+
+	XMVECTOR result = XMVectorSet(xOffset, yOffset, zOffset, 0.f); //Make sure the w here is 0
+	return result;
 }
 
 void CameraComponent::Tick(float deltaTime)
