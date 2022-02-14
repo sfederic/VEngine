@@ -52,7 +52,94 @@ startBattleOnLoad
 0
 next
 GridActor
+1
+ Position
+4 -1.5 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
 0
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Cull
+0
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+1
+Image File
+
+Inspect
+1
+Interact
+1
+Interact Text
+
+Memory Desc
+
+Memory Name
+
+Mesh
+boat.fbx
+Name
+GridActor0
+Obstacle
+1
+Quest Name
+
+Rast State
+solid
+Shader
+WaterFloat.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wood.jpg
+UID
+1142367113
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+1
+activeEndHour
+1
+alwaysActive
+0
+condition
+
+conditionArg
+
+disableGridInteract
+1
+interactKnownText
+
+next
 AudioActor
 1
  Position
@@ -79,7 +166,7 @@ next
 Player
 1
  Position
-1 -0.0372305 2
+1 -0.0372305 8
  Rotation
 0 1 0 2.41399e-06
  Scale
@@ -200,7 +287,7 @@ conditionArg
 
 next
 NPC
-1
+2
  Position
 2 0.182 1
  Rotation
@@ -299,6 +386,113 @@ conditionArg
 
 deathText
 Danil...
+disableGridInteract
+0
+interactKnownText
+
+spawnText
+
+next
+ Position
+1 0.182 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Ambient
+1 1 1 1
+Attack Points
+3
+Attack Range
+1
+Battle State
+fight
+Blend State
+null
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Cull
+0
+Destruct
+1
+File
+docks/samuan.dialog
+Grid Obstacle
+0
+Health
+5
+Image File
+
+Inspect
+1
+Interact
+1
+Interact Text
+
+Memory Desc
+
+Memory Name
+
+Mesh
+unit_test.fbx
+Move Points
+5
+Move Speed
+1
+Name
+NPC1
+Obstacle
+1
+Quest Name
+
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UID
+2358887493
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+3
+actorToFocusOn
+
+alwaysActive
+0
+battleStartText
+Shit...
+condition
+
+conditionArg
+
+deathText
+...
+disableGridInteract
+0
 interactKnownText
 
 spawnText
@@ -833,7 +1027,28 @@ InteractTrigger
 ParticleSystem
 0
 DialogueTrigger
+1
+ Position
+1 0 6
+ Rotation
+-0 0 -0 1
+ Scale
+3.75 1 1
+Extents
+0.45 0.45 0.45
+File
+docks/samuan.dialog
+Name
+DialogueTrigger0
+Offset
+0 0 0
+UID
+3033327154
+playOnSpawn
 0
+playOnTriggerOverlap
+1
+next
 DestructibleActor
 0
 MemoryActor
