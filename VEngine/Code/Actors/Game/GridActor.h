@@ -44,6 +44,7 @@ struct GridActor : Actor
 
 	GridActor();
 	virtual void Interact() {}
+	virtual void EndInteract() {}
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
