@@ -166,9 +166,9 @@ next
 Player
 1
  Position
-1 -0.0372305 8
+2 -0.0372305 4
  Rotation
-0 1 0 2.41399e-06
+0 0.707107 0 0.707107
  Scale
 0.999993 1 0.999993
 Ambient
@@ -226,12 +226,12 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
--0.0102077
+-0.00396131
 next
 Unit
 0
 EntranceTrigger
-2
+3
  Position
 1 0 9
  Rotation
@@ -254,6 +254,12 @@ Open Text
 Town Center
 UID
 1733768507
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
 condition
 
 conditionArg
@@ -281,6 +287,45 @@ Open Text
 Enter Coastline
 UID
 1733768507
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+next
+ Position
+2 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Entrance Active
+1
+Extents
+0.45 0.45 0.45
+Level Name
+Ride boat
+Locked Text
+Locked
+Name
+EntranceTrigger2
+Offset
+0 0 0
+Open Text
+Ride boat?
+UID
+1944186093
+activeBeginHour
+1
+activeEndHour
+1
+alwaysActive
+0
 condition
 
 conditionArg
@@ -625,7 +670,7 @@ water.jpg
 UID
 782119853
 UvOffset
-3.65099 -3.65099
+3.81527 -3.81527
 UvOffsetSpeed
 0.01 -0.01
 UvRotation
