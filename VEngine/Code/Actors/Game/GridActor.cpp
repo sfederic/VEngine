@@ -24,8 +24,6 @@ void GridActor::Start()
 {
 	SetGridPosition();
 
-	auto node = GetCurrentNode();
-
 	//Disable actor based on quest
 	if (!questComponent->CheckIfQuestActive())
 	{
@@ -34,12 +32,20 @@ void GridActor::Start()
 
 	if (!EnableBasedOnTime() && isGridObstacle)
 	{
-		node->Hide();
+		auto node = GetCurrentNode();
+		if(node)
+		{
+			node->Hide();
+		}
 	}
 
 	if (!IsActive())
 	{
-		node->Show();
+		auto node = GetCurrentNode();
+		if (node)
+		{
+			node->Show();
+		}
 	}
 }
 
@@ -58,6 +64,7 @@ Properties GridActor::GetProps()
 	props.Add("Inspect", &isInspectable);
 	props.Add("Interact Text", &interactText);
 	props.AddProp(interactKnownText);
+	props.AddProp(disableGridInteract);
 	props.Add("Obstacle", &isGridObstacle);
 	return props;
 }
@@ -90,6 +97,11 @@ void GridActor::SetGridPosition()
 
 GridNode* GridActor::GetCurrentNode()
 {
+	if (disableGridInteract)
+	{
+		return nullptr;
+	}
+
 	auto grid = GameUtils::GetGrid();
 	auto node = grid->GetNode(xIndex, yIndex);
 	return node;

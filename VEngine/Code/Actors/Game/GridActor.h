@@ -39,6 +39,9 @@ struct GridActor : Actor
 	//Inspection interaction, shows dialogue
 	bool isInspectable = true;
 
+	//Used for when the grid actor is off the main grid, ignores GetNode() calls
+	bool disableGridInteract = false;
+
 	std::wstring interactText;
 	std::wstring interactKnownText;
 
