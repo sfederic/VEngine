@@ -4,6 +4,7 @@
 
 struct BoxTriggerComponent;
 struct ConditionComponent;
+struct TimeComponent;
 struct InteractWidget;
 
 struct EntranceTrigger : Actor
@@ -12,6 +13,7 @@ struct EntranceTrigger : Actor
 
 	BoxTriggerComponent* trigger = nullptr;
 	ConditionComponent* conditionComponent = nullptr;
+	TimeComponent* timeComponent = nullptr;
 
 	InteractWidget* interactWidget = nullptr;
 

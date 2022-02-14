@@ -3,6 +3,7 @@
 #include "Log.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Components/ConditionComponent.h"
+#include "Components/TimeComponent.h"
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/BattleSystem.h"
@@ -19,10 +20,17 @@ EntranceTrigger::EntranceTrigger()
     rootComponent = trigger;
 
     conditionComponent = ConditionComponent::system.Add(this);
+    timeComponent = TimeComponent::system.Add(this);
 }
 
 void EntranceTrigger::Start()
 {
+    if (!timeComponent->CheckIfActiveAtCurrentTime())
+    {
+        SetActive(false);
+        return;
+    }
+
     interactWidget = CreateWidget<InteractWidget>();
     interactWidget->interactText = openText;
 
