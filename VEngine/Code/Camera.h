@@ -7,8 +7,6 @@ using namespace DirectX;
 
 struct Actor;
 
-//@Todo: need a camera shake for combat and whatever else
-
 struct CameraComponent : SpatialComponent
 {
 	COMPONENT_SYSTEM(CameraComponent)
@@ -32,6 +30,7 @@ struct CameraComponent : SpatialComponent
 	void MouseMove(int x, int y);
 	void Move(float d, XMVECTOR axis);
 	void ZoomTo(Actor* actor);
+	XMVECTOR Shake();
 
 	virtual void Tick(float deltaTime) override;
 	virtual void Create() override;

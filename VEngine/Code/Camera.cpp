@@ -10,6 +10,7 @@
 #include "Render/Renderer.h"
 #include "World.h"
 #include "Core.h"
+#include <random>
 
 CameraComponent editorCamera(XMFLOAT3(0.f, 5.f, -5.f), true);
 CameraComponent* activeCamera;
@@ -41,6 +42,8 @@ XMMATRIX CameraComponent::GetViewMatrix()
 
 		//using direct position here from transform
 		view = XMMatrixLookAtLH(transform.world.r[3], focusPoint, VMath::XMVectorUp());
+		auto S = Shake();
+		view.r[3] += S;
 	}
 	else
 	{
@@ -138,6 +141,23 @@ void CameraComponent::ZoomTo(Actor* actor)
 	XMVECTOR zoomPos = actorPos - (forward * 5.f);
 
 	SetPosition(zoomPos);
+}
+
+XMVECTOR CameraComponent::Shake()
+{
+	std::random_device randomDevice;
+	std::mt19937 randomGenerator(randomDevice());
+	std::uniform_real_distribution<float> uidDist(-1.f, 1.f);
+
+	const float shake = 0.1f;
+	const float max = 0.1f;
+	float yaw = max * shake * uidDist(randomGenerator);
+	float roll = max * shake * uidDist(randomGenerator);
+	float pitch = max * shake * uidDist(randomGenerator);
+
+	XMVECTOR Q = XMVectorSet(yaw, roll, pitch, 1.f);
+	//XMVECTOR Q = XMQuaternionRotationRollPitchYaw(pitch, yaw, roll);
+	return Q;
 }
 
 void CameraComponent::Tick(float deltaTime)
