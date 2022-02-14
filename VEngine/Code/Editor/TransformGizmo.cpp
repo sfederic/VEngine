@@ -17,6 +17,8 @@ TransformGizmo::TransformGizmo()
 {
     //Set translate as default startup transform operation
     currentSnapValues = translateSnapValues;
+
+    ImGuizmo::AllowAxisFlip(false);
 }
 
 void TransformGizmo::Tick()
