@@ -8,6 +8,11 @@ GoddessStatue::GoddessStatue()
     mesh->meshComponentData.filename = "save_slate.fbx";
 }
 
+void GoddessStatue::Start()
+{
+    passTimeWidget = CreateWidget<PassTimeWidget>();
+}
+
 Properties GoddessStatue::GetProps()
 {
     return __super::GetProps();
@@ -15,7 +20,11 @@ Properties GoddessStatue::GetProps()
 
 void GoddessStatue::Interact()
 {
-    auto widget = CreateWidget<PassTimeWidget>();
-    widget->hoursToPass = GameInstance::currentHour;
-    widget->AddToViewport();
+    passTimeWidget->hoursToPass = GameInstance::currentHour;
+    passTimeWidget->AddToViewport();
+}
+
+void GoddessStatue::EndInteract()
+{
+    passTimeWidget->RemoveFromViewport();
 }
