@@ -38,6 +38,8 @@ struct Unit : GridActor
 	int movementPoints = 1;
 	int movementPathNodeIndex = 0;
 
+	int numOfAttacks = 1;
+
 	int attackPoints = 1;
 
 	int attackRange = 1; //Attack range should always be >= 1
@@ -47,6 +49,7 @@ struct Unit : GridActor
 private:
 	bool isUnitTurn = false;
 	bool attackWindingUp = false;
+	int currentAttackNumber = 0;
 
 public:
 	//All the nodes the unit can move to

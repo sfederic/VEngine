@@ -135,6 +135,7 @@ Properties Unit::GetProps()
 	props.Add("Attack Range", &attackRange);
 	props.Add("Battle State", &battleState);
 	props.AddProp(actorToFocusOn);
+	props.AddProp(numOfAttacks);
 	props.AddProp(deathText);
 	return props;
 }
@@ -268,6 +269,8 @@ void Unit::StartTurn()
 {
 	isUnitTurn = true;
 
+	currentAttackNumber = numOfAttacks;
+
 	GetCurrentNode()->Show();
 
 	auto player = GameUtils::GetPlayer();
@@ -389,12 +392,21 @@ void Unit::WindUpAttack()
 		}
 	}
 
-	player->nextCameraFOV = 60.f;
-	GameUtils::SetActiveCameraTarget(player);
-	
-	attackWindingUp = false;
+	currentAttackNumber--;
 
-	EndTurn();
+	if (currentAttackNumber > 0)
+	{
+		Timer::SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
+	}
+	else
+	{
+		player->nextCameraFOV = 60.f;
+		GameUtils::SetActiveCameraTarget(player);
+
+		attackWindingUp = false;
+
+		EndTurn();
+	}
 }
 
 void Unit::ShowUnitMovementPath()
