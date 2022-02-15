@@ -18,6 +18,7 @@
 #include "Render/TextureSystem.h"
 #include "Render/Material.h"
 #include "Gameplay/GameInstance.h"
+#include "Log.h"
 
 namespace Icons
 {
@@ -223,6 +224,10 @@ void AssetDock::ShowContextMenu(const QPoint& point)
     connect(&newDialogueAction, &QAction::triggered, this, &AssetDock::CreateNewDialogueFile);
     contextMenu.addAction(&newDialogueAction);
 
+    QAction newActorTemplateAction("New Actor Template", this);
+    connect(&newActorTemplateAction, &QAction::triggered, this, &AssetDock::CreateNewActorTemplateFile);
+    contextMenu.addAction(&newActorTemplateAction);
+
     contextMenu.exec(mapToGlobal(point));
 }
 
@@ -261,7 +266,7 @@ void AssetDock::CreateNewMapFile()
     QFileDialog dialog;
     dialog.setFileMode(QFileDialog::AnyFile);
 
-    QString mapFile = dialog.getSaveFileName(NULL, "Create New Map File", "WorldMaps/", ".vmap");
+    QString mapFile = dialog.getSaveFileName(nullptr, "Create New Map File", "WorldMaps/", ".vmap");
 
     //Cancel clicked
     if (mapFile.isEmpty())
@@ -286,7 +291,7 @@ void AssetDock::CreateNewDialogueFile()
     QFileDialog dialog;
     dialog.setFileMode(QFileDialog::AnyFile);
 
-    QString dialogueFile = dialog.getSaveFileName(NULL, "Create New Dialogue File", "Dialogues/", ".dialog");
+    QString dialogueFile = dialog.getSaveFileName(nullptr, "Create New Dialogue File", "Dialogues/", ".dialog");
 
     QFile file(dialogueFile);
     file.open(QIODevice::WriteOnly);
@@ -294,4 +299,34 @@ void AssetDock::CreateNewDialogueFile()
 
     //refresh asset items in dock
     AssetFolderClicked();
+}
+
+void AssetDock::CreateNewActorTemplateFile()
+{
+    if (worldEditor.pickedActor)
+    {
+        QFileDialog dialog;
+        QString actorTemplateFileName = dialog.getSaveFileName(nullptr, "Create New Actor Template File",
+            "ActorTemplates/", ".actor");
+        if (actorTemplateFileName.isEmpty()) return;
+
+        Serialiser s(actorTemplateFileName.toStdString(), OpenMode::Out);
+
+        //Write out actor's linked actorsystem name
+        s.WriteLine(worldEditor.pickedActor->actorSystem->name.c_str());
+
+        //Serialise all actor and actor's component properties
+        auto pickedActorProps = worldEditor.pickedActor->GetAllProps();
+        for (auto& prop : pickedActorProps)
+        {
+            s.Serialise(prop);
+        }
+
+        QFileInfo fileInfo = actorTemplateFileName;
+        Log("Actor Template [%s] created.", fileInfo.fileName().toStdString().c_str());
+    }
+    else
+    {
+        Log("No selected actor to create template from.");
+    }
 }
