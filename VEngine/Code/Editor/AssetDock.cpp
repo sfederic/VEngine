@@ -124,6 +124,10 @@ void AssetDock::AssetItemClicked()
     {
         MeshFileClicked(assetName.toStdString());
     }
+    else if (std::wcscmp(extension, L".actor") == 0) //Actor Template files
+    {
+        ActorTemplateFileClicked(assetName.toStdString());
+    }
     else if (std::wcscmp(extension, L".jpg") == 0 || //Image files
         std::wcscmp(extension, L".png") == 0)
     {
@@ -253,7 +257,24 @@ void AssetDock::MeshFileClicked(const std::string meshFilename)
 {
     //Set spawner system as MeshActor
     worldEditor.spawnSystem = &MeshActor::system;
+    worldEditor.actorTemplateFilename = "";
+
     MeshActor::spawnMeshFilename = meshFilename;
+}
+
+void AssetDock::ActorTemplateFileClicked(const std::string actorTemplateFilename)
+{
+    std::string path = "ActorTemplates/" + actorTemplateFilename;
+    Deserialiser d(path, OpenMode::In);
+
+    std::wstring actorSystemName;
+    d.is >> actorSystemName;
+
+    IActorSystem* actorSystem = actorSystemCache.Get(VString::wstos(actorSystemName));
+
+    worldEditor.spawnSystem = actorSystem;
+    Log("[%s] set as spawn system", actorSystem->name.c_str());
+    worldEditor.actorTemplateFilename = actorTemplateFilename;
 }
 
 void AssetDock::TextureFileClicked(const std::wstring textureFilename)
