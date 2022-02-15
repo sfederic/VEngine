@@ -1,0 +1,126 @@
+NPC
+ Position
+4 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Attack Points
+1
+Attack Range
+1
+Battle State
+fight
+Destruct
+1
+Health
+5
+Inspect
+1
+Interact
+1
+Interact Text
+
+Move Points
+1
+Move Speed
+3
+Name
+NPC0
+Obstacle
+0
+UID
+2788722786
+actorToFocusOn
+
+battleStartText
+
+deathText
+
+disableGridInteract
+0
+interactKnownText
+
+numOfAttacks
+2
+spawnText
+
+next
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+next
+Add On Interact
+0
+Condition
+
+Condition Value
+
+Image File
+
+Memory Desc
+
+Memory Name
+
+next
+File
+
+next
+Quest Name
+
+next
+Add On Interact
+0
+Condition
+
+Condition Value
+
+Image File
+
+Memory Desc
+
+Memory Name
+
+next
