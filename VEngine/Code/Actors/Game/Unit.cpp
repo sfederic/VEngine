@@ -359,8 +359,7 @@ void Unit::WindUpAttack()
 {
 	auto player = GameUtils::GetPlayer();
 
-	player->ableToGuard = false;
-	player->guardWidget->RemoveFromViewport();
+	player->ableToGuard = true;
 	player->guardWidget->guardSuccessful = false;
 
 	GameUtils::PlayAudioOneShot("sword_hit.wav");
@@ -394,16 +393,19 @@ void Unit::WindUpAttack()
 
 	currentAttackNumber--;
 
-	if (currentAttackNumber > 0)
+	if (currentAttackNumber > 0) //Attack again
 	{
 		Timer::SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
 	}
-	else
+	else //End turn
 	{
 		player->nextCameraFOV = 60.f;
 		GameUtils::SetActiveCameraTarget(player);
 
 		attackWindingUp = false;
+
+		player->ableToGuard = false;
+		player->guardWidget->RemoveFromViewport();
 
 		EndTurn();
 	}
