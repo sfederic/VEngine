@@ -139,58 +139,81 @@ void WorldEditor::SpawnActorOnClick()
 		if (spawnSystem)
 		{
 			Ray ray;
-			if (RaycastFromScreen(ray))
+			if (RaycastFromScreen(ray)) //Spawn actor at ray hit point
 			{
-				//Spawn actor at ray hit point
-				Transform transform;
-
 				XMVECTOR dist = ray.direction * ray.hitDistance;
 				XMVECTOR rayEnd = ray.origin + dist;
+
+				Transform transform;
 
 				//Round the position up for spawning on the grid in increments
 				rayEnd = XMVectorRound(rayEnd);
 				XMStoreFloat3(&transform.position, rayEnd);
 
-				Actor* actor = spawnSystem->SpawnActor(transform);
-				debugMenu.AddNotification(VString::wformat(
-					L"Spawned actor [%S]", actor->name.c_str()));
-
-				actor->CreateAllComponents();
-
-				pickedActor = actor;
-				editor->SetActorProps(pickedActor);
+				SpawnActor(transform);
 			}
-			else
+			else //Spawn actor a bit in front of the camera based on the click
 			{
-				//Spawn actor a bit in front of the camera based on the click
 				XMVECTOR spawnPos = XMLoadFloat3(&activeCamera->transform.position);
 				XMFLOAT3 forward = activeCamera->GetForwardVector();
 				XMVECTOR forwardVec = XMLoadFloat3(&forward);
 				spawnPos += forwardVec * 10.0f;
 
-				Transform transform;
-
 				XMVECTOR dist = ray.direction * 10.f;
 				XMVECTOR rayEnd = ray.origin + dist;
 
+				Transform transform;
+
 				//Round the position up for spawning on the grid in increments
-				XMStoreFloat3(&transform.position, rayEnd);
 				rayEnd = XMVectorRound(rayEnd);
 				XMStoreFloat3(&transform.position, rayEnd);
 
-				Actor* actor = spawnSystem->SpawnActor(transform);
-				debugMenu.AddNotification(VString::wformat(
-					L"Spawned actor [%S]", actor->name.c_str()));
-
-				actor->CreateAllComponents();
-
-				pickedActor = actor;
-				editor->SetActorProps(pickedActor);
+				SpawnActor(transform);
 			}
 
 			editor->UpdateWorldList();
 		}
 	}
+}
+
+void WorldEditor::SpawnActor(Transform& transform)
+{
+	Actor* actor = nullptr;
+
+	if (!actorTemplateFilename.empty()) //Spawn actor through template
+	{
+		std::string path = "ActorTemplates/" + actorTemplateFilename;
+		Deserialiser d(path, OpenMode::In);
+
+		actor = spawnSystem->SpawnActor(transform);
+
+		auto allActorProps = actor->GetAllProps();
+		for (auto& prop : allActorProps)
+		{
+			d.Deserialise(prop);
+		}
+
+		//Set the transform, props will have the original transform data and will be
+		//different from the click position in world.
+		actor->SetTransform(transform);
+
+		std::string newActorName = spawnSystem->name + std::to_string(spawnSystem->GetNumActors());
+		actor->SetName(newActorName);
+
+		debugMenu.AddNotification(VString::wformat(
+			L"Spawned actor [%S] from template", actor->name.c_str()));
+	}
+	else //Spawn MeshActor (usually)
+	{
+		actor = spawnSystem->SpawnActor(transform);
+		debugMenu.AddNotification(VString::wformat(
+			L"Spawned actor [%S] from MeshActor system", actor->name.c_str()));
+	}
+
+	actor->CreateAllComponents();
+
+	pickedActor = actor;
+	editor->SetActorProps(pickedActor);
 }
 
 void WorldEditor::DeselectPickedActor()
