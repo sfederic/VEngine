@@ -970,6 +970,9 @@
     <ClInclude Include="Code\Actors\Game\GoddessStatue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Gameplay\BattleEnums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -229,6 +229,7 @@
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp" />
     <ClCompile Include="Code\UI\PassTimeWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\GoddessStatue.cpp" />
+    <ClInclude Include="Code\Gameplay\BattleEnums.h" />
     <ClInclude Include="Code\Particle\FireParticle.h" />
     <ClInclude Include="Code\Quests\Quest.h" />
     <ClInclude Include="Code\UI\BulletWidget.h" />
