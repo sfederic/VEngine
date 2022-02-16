@@ -177,7 +177,7 @@ void Player::ResetGuard()
 {
 	guardSuccess = false;
 	guarding = false;
-	guardWidget->guardSuccessful = false;
+	guardWidget->ResetGuard();
 	ableToGuard = true;
 }
 
@@ -637,11 +637,20 @@ void Player::ConfirmDefendOnDirection()
 {
 	guarding = true;
 	ExpendActionPoints(1);
-	GameUtils::PlayAudioOneShot("equip.wav");
 
 	//Check if guard matches enemey unit attack direction for successful guard
 	guardSuccess = unitCurrentlyAttackingPlayer->attackDirection == defendDirection;
-	guardWidget->guardSuccessful = guardSuccess;
+
+	if (guardSuccess)
+	{
+		guardWidget->SetGuardSuccess();
+		GameUtils::PlayAudioOneShot("equip.wav");
+	}
+	else
+	{
+		guardWidget->SetGuardFail();
+		GameUtils::PlayAudioOneShot("error.wav");
+	}
 }
 
 bool Player::QuickTalkCheck(Actor* hitActor)
