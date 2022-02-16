@@ -47,8 +47,8 @@ struct Unit : GridActor
 
 	bool isInBattle = false;
 
-	AttackDirection attackDirection;
-	DefendDirection defendDirection;
+	AttackDirection attackDirection = AttackDirection::Down;
+	DefendDirection defendDirection = DefendDirection::Down;
 
 private:
 	bool isUnitTurn = false;

@@ -96,6 +96,9 @@ void Unit::Tick(float deltaTime)
 					player->guardWidget->AddToViewport();
 					player->ableToGuard = true;
 					player->nextCameraFOV = 30.f;
+					player->unitCurrentlyAttackingPlayer = this;
+
+					attackDirection = GetRandomAttackDirection();
 
 					GameUtils::SetActiveCameraTarget(this);
 
@@ -359,23 +362,20 @@ void Unit::WindUpAttack()
 {
 	auto player = GameUtils::GetPlayer();
 
-	attackDirection = GetRandomAttackDirection();
-
-	player->ableToGuard = true;
-	player->unitCurrentlyAttackingPlayer = this;
-	player->guardWidget->guardSuccessful = false;
-
-	GameUtils::PlayAudioOneShot("sword_hit.wav");
+	player->ResetGuard();
 
 	//Do a raycast towards player. Lets player go behind cover.
 	Ray ray(this);
 	ray.actorsToIgnore.push_back(player); //Ignore player too. Attack hits if nothing is hit
 	if (!Raycast(ray, GetPositionVector(), player->GetPositionVector()))
 	{
-		//Attack hit
-		if (player->guarding)
+		if (attackDirection == player->defendDirection && player->guarding) //Successful defend
 		{
 			GameUtils::PlayAudioOneShot("shield_hit.wav");
+		}
+		else //Attack Hit
+		{
+			GameUtils::PlayAudioOneShot("sword_hit.wav");
 		}
 
 		player->InflictDamage(attackPoints);
@@ -398,6 +398,7 @@ void Unit::WindUpAttack()
 
 	if (currentAttackNumber > 0) //Attack again
 	{
+		attackDirection = GetRandomAttackDirection();
 		Timer::SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
 	}
 	else //End turn

@@ -1,6 +1,7 @@
 #pragma once
 #include "../Actor.h"
 #include "../ActorSystem.h"
+#include "Gameplay/BattleEnums.h"
 
 struct MeshComponent;
 struct CameraComponent;
@@ -17,10 +18,14 @@ struct GuardWidget;
 struct Memory;
 struct GridNode;
 struct GridActor;
+struct Unit;
 
 struct Player : Actor
 {
 	ACTOR_SYSTEM(Player)
+
+	AttackDirection attackDirection = AttackDirection::Down;
+	DefendDirection defendDirection = DefendDirection::Down;
 
 	//Components
 	MeshComponent* mesh = nullptr;
@@ -49,6 +54,8 @@ struct Player : Actor
 
 	GridActor* gridActorInteractingWith = nullptr;
 
+	Unit* unitCurrentlyAttackingPlayer = nullptr;
+
 	//Name of the memory selected in MemoryMenuWidget to spawn into world
 	std::string memoryNameToSpawn;
 
@@ -70,6 +77,7 @@ struct Player : Actor
 
 	bool ableToGuard = false;
 	bool guarding = false;
+	bool guardSuccess = false;
 	bool gameOver = false;
 
 	bool gunModeOn = true;
@@ -87,6 +95,7 @@ struct Player : Actor
 	void InflictDamage(int damage);
 
 	void Guard();
+	void ResetGuard();
 
 	//Call on battle end for player variables housekeeping
 	void BattleCleanup();
@@ -116,4 +125,6 @@ private:
 	bool InteractCheck(Actor* hitActor);
 	bool DestructibleCheck(Actor* hitActor);
 	bool GunShotCheck(Actor* hitActor);
+
+	void ConfirmDefendOnDirection();
 };

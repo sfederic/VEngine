@@ -173,6 +173,14 @@ void Player::RefreshCombatStats()
 	actionBarWidget->actionPoints = actionPoints;
 }
 
+void Player::ResetGuard()
+{
+	guardSuccess = false;
+	guarding = false;
+	guardWidget->guardSuccessful = false;
+	ableToGuard = true;
+}
+
 GridNode* Player::GetCurrentNode()
 {
 	auto grid = GameUtils::GetGrid();
@@ -202,14 +210,28 @@ void Player::InflictDamage(int damage)
 
 void Player::Guard()
 {
-	if (Input::GetKeyUp(Keys::Down) && actionPoints > 0)
+	if (actionPoints > 0)
 	{
-		guarding = true;
-		guardWidget->guardSuccessful = true;
-
-		ExpendActionPoints(1);
-
-		GameUtils::PlayAudioOneShot("equip.wav");
+		if (Input::GetKeyUp(Keys::Down))
+		{
+			defendDirection = DefendDirection::Down;
+			ConfirmDefendOnDirection();
+		}
+		else if (Input::GetKeyUp(Keys::Up))
+		{
+			defendDirection = DefendDirection::Up;
+			ConfirmDefendOnDirection();
+		}
+		else if (Input::GetKeyUp(Keys::Left))
+		{
+			defendDirection = DefendDirection::Left;
+			ConfirmDefendOnDirection();
+		}
+		else if (Input::GetKeyUp(Keys::Right))
+		{
+			defendDirection = DefendDirection::Right;
+			ConfirmDefendOnDirection();
+		}
 	}
 }
 
@@ -609,6 +631,17 @@ bool Player::DialogueCheck(Actor* hitActor)
 	}
 
 	return false;
+}
+
+void Player::ConfirmDefendOnDirection()
+{
+	guarding = true;
+	ExpendActionPoints(1);
+	GameUtils::PlayAudioOneShot("equip.wav");
+
+	//Check if guard matches enemey unit attack direction for successful guard
+	guardSuccess = unitCurrentlyAttackingPlayer->attackDirection == defendDirection;
+	guardWidget->guardSuccessful = guardSuccess;
 }
 
 bool Player::QuickTalkCheck(Actor* hitActor)
