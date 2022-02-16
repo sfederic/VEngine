@@ -215,22 +215,22 @@ void Player::Guard()
 		if (Input::GetKeyUp(Keys::Down))
 		{
 			defendDirection = DefendDirection::Down;
-			ConfirmDefendOnDirection();
+			ConfirmGuardOnDirection();
 		}
 		else if (Input::GetKeyUp(Keys::Up))
 		{
 			defendDirection = DefendDirection::Up;
-			ConfirmDefendOnDirection();
+			ConfirmGuardOnDirection();
 		}
 		else if (Input::GetKeyUp(Keys::Left))
 		{
 			defendDirection = DefendDirection::Left;
-			ConfirmDefendOnDirection();
+			ConfirmGuardOnDirection();
 		}
 		else if (Input::GetKeyUp(Keys::Right))
 		{
 			defendDirection = DefendDirection::Right;
-			ConfirmDefendOnDirection();
+			ConfirmGuardOnDirection();
 		}
 	}
 }
@@ -633,7 +633,7 @@ bool Player::DialogueCheck(Actor* hitActor)
 	return false;
 }
 
-void Player::ConfirmDefendOnDirection()
+void Player::ConfirmGuardOnDirection()
 {
 	guarding = true;
 	ExpendActionPoints(1);

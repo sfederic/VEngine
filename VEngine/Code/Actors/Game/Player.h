@@ -126,5 +126,5 @@ private:
 	bool DestructibleCheck(Actor* hitActor);
 	bool GunShotCheck(Actor* hitActor);
 
-	void ConfirmDefendOnDirection();
+	void ConfirmGuardOnDirection();
 };
