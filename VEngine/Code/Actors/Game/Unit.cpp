@@ -371,10 +371,12 @@ void Unit::WindUpAttack()
 	{
 		if (attackDirection == player->defendDirection && player->guarding) //Successful defend
 		{
+			GameUtils::CameraShake(1.f);
 			GameUtils::PlayAudioOneShot("shield_hit.wav");
 		}
 		else //Attack Hit
 		{
+			GameUtils::CameraShake(1.f);
 			GameUtils::PlayAudioOneShot("sword_hit.wav");
 		}
 

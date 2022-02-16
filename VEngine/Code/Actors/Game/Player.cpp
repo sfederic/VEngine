@@ -742,6 +742,7 @@ bool Player::DestructibleCheck(Actor* hitActor)
 			battleSystem.StartBattle();
 			ExpendActionPoints(1);
 			unit->InflictDamage(1);
+			GameUtils::CameraShake(1.f);
 			GameUtils::PlayAudioOneShot("sword_hit.wav");
 			return true;
 		}
@@ -750,6 +751,7 @@ bool Player::DestructibleCheck(Actor* hitActor)
 		if (gridActor)
 		{
 			gridActor->InflictDamage(1);
+			GameUtils::CameraShake(1.f);
 			GameUtils::PlayAudioOneShot("sword_hit.wav");
 			return true;
 		}
