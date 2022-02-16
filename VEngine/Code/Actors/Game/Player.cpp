@@ -192,10 +192,11 @@ void Player::InflictDamage(int damage)
 {
 	int guardPoints = 0;
 
-	if (guarding)
+	if (guarding && guardSuccess)
 	{
 		Log("Guarded attack");
 		guarding = false;
+		guardSuccess = false;
 		return;
 	}
 

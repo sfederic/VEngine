@@ -362,8 +362,6 @@ void Unit::WindUpAttack()
 {
 	auto player = GameUtils::GetPlayer();
 
-	player->ResetGuard();
-
 	//Do a raycast towards player. Lets player go behind cover.
 	Ray ray(this);
 	ray.actorsToIgnore.push_back(player); //Ignore player too. Attack hits if nothing is hit
@@ -381,6 +379,7 @@ void Unit::WindUpAttack()
 		}
 
 		player->InflictDamage(attackPoints);
+
 		Log("%s attacked %s", this->name.c_str(), player->name.c_str());
 	}
 	else if (ray.hitActor)
@@ -395,6 +394,8 @@ void Unit::WindUpAttack()
 			hitGridActor->InflictDamage(attackPoints);
 		}
 	}
+
+	player->ResetGuard();
 
 	currentAttackNumber--;
 
