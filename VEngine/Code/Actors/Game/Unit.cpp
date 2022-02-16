@@ -98,7 +98,7 @@ void Unit::Tick(float deltaTime)
 					player->nextCameraFOV = 30.f;
 					player->unitCurrentlyAttackingPlayer = this;
 
-					attackDirection = GetRandomAttackDirection();
+					SetAttackDirection();
 
 					GameUtils::SetActiveCameraTarget(this);
 
@@ -398,7 +398,7 @@ void Unit::WindUpAttack()
 
 	if (currentAttackNumber > 0) //Attack again
 	{
-		attackDirection = GetRandomAttackDirection();
+		SetAttackDirection();
 		Timer::SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
 	}
 	else //End turn
@@ -414,6 +414,12 @@ void Unit::WindUpAttack()
 
 		EndTurn();
 	}
+}
+
+void Unit::SetAttackDirection()
+{
+	attackDirection = GetRandomAttackDirection();
+	GameUtils::GetPlayer()->guardWidget->attackingUnitAttackDirection = attackDirection;
 }
 
 AttackDirection Unit::GetRandomAttackDirection()

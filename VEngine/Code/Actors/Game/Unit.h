@@ -83,7 +83,7 @@ public:
 
 	bool Attack();
 	void WindUpAttack();
-	AttackDirection GetRandomAttackDirection();
+	void SetAttackDirection();
 
 	void ShowUnitMovementPath();
 
@@ -91,4 +91,5 @@ public:
 
 private:
 	std::vector<GridNode*> GetMovementPathPreviewNodes(GridNode* destinationNode);
+	AttackDirection GetRandomAttackDirection();
 };
