@@ -2,7 +2,7 @@
 
 //Use 'count' as a max to determine random attack/defend directions
 
-enum class AttackDirection
+enum class AttackDirection : int
 {
 	Up,
 	Down,
@@ -11,7 +11,7 @@ enum class AttackDirection
 	Count
 };
 
-enum class DefendDirection
+enum class DefendDirection : int
 {
 	Up,
 	Down,
@@ -19,3 +19,13 @@ enum class DefendDirection
 	Right,
 	Count
 };
+
+inline bool operator==(AttackDirection atk, DefendDirection def)
+{
+	return (static_cast<int>(atk) == static_cast<int>(def));
+}
+
+inline bool operator==(DefendDirection def, AttackDirection atk)
+{
+	return (static_cast<int>(def) == static_cast<int>(atk));
+}
