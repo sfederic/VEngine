@@ -1,6 +1,7 @@
 #pragma once
 #include "GridActor.h"
 #include "VEnum.h"
+#include "Gameplay/BattleEnums.h"
 
 struct GridNode;
 struct MemoryComponent;
@@ -11,15 +12,6 @@ struct Polyboard;
 struct Unit : GridActor
 {
 	ACTOR_SYSTEM(Unit);
-
-	enum class AttackDirection : int
-	{
-		Up,
-		Down,
-		Left,
-		Right,
-		Count //Use count as a max to determine random attack directions
-	};
 
 	//Battle states
 	struct BattleStates
@@ -55,7 +47,8 @@ struct Unit : GridActor
 
 	bool isInBattle = false;
 
-	Unit::AttackDirection attackDirection;
+	AttackDirection attackDirection;
+	DefendDirection defendDirection;
 
 private:
 	bool isUnitTurn = false;
@@ -90,7 +83,7 @@ public:
 
 	bool Attack();
 	void WindUpAttack();
-	Unit::AttackDirection GetRandomAttackDirection();
+	AttackDirection GetRandomAttackDirection();
 
 	void ShowUnitMovementPath();
 

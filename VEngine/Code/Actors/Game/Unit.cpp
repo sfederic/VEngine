@@ -362,6 +362,7 @@ void Unit::WindUpAttack()
 	attackDirection = GetRandomAttackDirection();
 
 	player->ableToGuard = true;
+	player->unitCurrentlyAttackingPlayer = this;
 	player->guardWidget->guardSuccessful = false;
 
 	GameUtils::PlayAudioOneShot("sword_hit.wav");
@@ -408,14 +409,15 @@ void Unit::WindUpAttack()
 
 		player->ableToGuard = false;
 		player->guardWidget->RemoveFromViewport();
+		player->unitCurrentlyAttackingPlayer = nullptr;
 
 		EndTurn();
 	}
 }
 
-Unit::AttackDirection Unit::GetRandomAttackDirection()
+AttackDirection Unit::GetRandomAttackDirection()
 {
-	 return static_cast<Unit::AttackDirection>(rand() % (int)Unit::AttackDirection::Count);
+	 return static_cast<AttackDirection>(rand() % (int)AttackDirection::Count);
 }
 
 void Unit::ShowUnitMovementPath()
