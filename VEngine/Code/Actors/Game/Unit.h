@@ -12,6 +12,15 @@ struct Unit : GridActor
 {
 	ACTOR_SYSTEM(Unit);
 
+	enum class AttackDirection : int
+	{
+		Up,
+		Down,
+		Left,
+		Right,
+		Count //Use count as a max to determine random attack directions
+	};
+
 	//Battle states
 	struct BattleStates
 	{
@@ -46,6 +55,8 @@ struct Unit : GridActor
 
 	bool isInBattle = false;
 
+	Unit::AttackDirection attackDirection;
+
 private:
 	bool isUnitTurn = false;
 	bool attackWindingUp = false;
@@ -79,6 +90,7 @@ public:
 
 	bool Attack();
 	void WindUpAttack();
+	Unit::AttackDirection GetRandomAttackDirection();
 
 	void ShowUnitMovementPath();
 

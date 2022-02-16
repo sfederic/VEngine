@@ -359,6 +359,8 @@ void Unit::WindUpAttack()
 {
 	auto player = GameUtils::GetPlayer();
 
+	attackDirection = GetRandomAttackDirection();
+
 	player->ableToGuard = true;
 	player->guardWidget->guardSuccessful = false;
 
@@ -409,6 +411,11 @@ void Unit::WindUpAttack()
 
 		EndTurn();
 	}
+}
+
+Unit::AttackDirection Unit::GetRandomAttackDirection()
+{
+	 return static_cast<Unit::AttackDirection>(rand() % (int)Unit::AttackDirection::Count);
 }
 
 void Unit::ShowUnitMovementPath()
