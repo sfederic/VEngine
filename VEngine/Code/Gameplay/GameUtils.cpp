@@ -56,6 +56,11 @@ namespace GameUtils
 		GetPlayer()->nextCameraFOV = 60.f;
 	}
 
+	void CameraShake(float shake)
+	{
+		activeCamera->shakeLevel = shake;
+	}
+
 	void PlayAudioOneShot(const std::string audioFilename)
 	{
 		audioSystem.PlayAudio(audioFilename);

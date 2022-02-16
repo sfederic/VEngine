@@ -16,8 +16,10 @@ namespace GameUtils
 	void SetActiveCameraTarget(Actor* newTarget);
 	void SetActiveCameraTargetAndZoomIn(Actor* newTarget);
 	void SetActiveCameraTargetAndZoomOut(Actor* newTarget);
+	void CameraShake(float shake);
 
 	void PlayAudioOneShot(const std::string audioFilename);
+
 	void SaveGameWorldState();
 	void LoadWorld(std::string worldName);
 
