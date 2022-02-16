@@ -3,7 +3,7 @@
 ![image](https://user-images.githubusercontent.com/45758254/147405666-9535d71b-c29c-4914-8652-f28f04de4b9d.png)
 
 ## Build Notes
-* Visual Studio 2022 17.0.5
+* Visual Studio 2022 17.1
 * Blender 2.93.7
 
 ## Packages
