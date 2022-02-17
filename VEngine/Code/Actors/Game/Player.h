@@ -127,4 +127,6 @@ private:
 	bool GunShotCheck(Actor* hitActor);
 
 	void ConfirmGuardOnDirection();
+
+	void PreviewMovementNodesDuringBattle();
 };

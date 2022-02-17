@@ -574,6 +574,7 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 
 	if (battleSystem.isBattleActive)
 	{
+		PreviewMovementNodesDuringBattle();
 		ExpendActionPoints(1);
 	}
 }
@@ -651,6 +652,41 @@ void Player::ConfirmGuardOnDirection()
 	{
 		guardWidget->SetGuardFail();
 		GameUtils::PlayAudioOneShot("error.wav");
+	}
+}
+
+//@Todo: this works fine, there's just a slight polish it needs when you run out of action points and
+//preview nodes for the player's movement remains.
+void Player::PreviewMovementNodesDuringBattle()
+{
+	std::vector<GridNode*> movementNodes;
+	std::vector<GridNode*> closedNodes;
+
+	GridNode* currentNode = GetCurrentNode();
+	Grid* grid = GameUtils::GetGrid();
+
+	grid->GetNeighbouringNodes(currentNode, movementNodes);
+
+	for (int moveIndex = 0; moveIndex < (actionPoints - 1); moveIndex++)
+	{
+		for (int previewIndex = 0; previewIndex < movementNodes.size(); previewIndex++)
+		{
+			grid->GetNeighbouringNodes(movementNodes[previewIndex], closedNodes);
+		}
+
+		movementNodes.insert(movementNodes.end(), closedNodes.begin(), closedNodes.end());
+
+		closedNodes.clear();
+	}
+
+	if (actionPoints > 0)
+	{
+		grid->ResetAllNodes(); //This is more to reset the node colours
+	}
+
+	for (auto node : movementNodes)
+	{
+		node->SetColour(GridNode::previewColour);
 	}
 }
 
