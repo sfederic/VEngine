@@ -180,7 +180,7 @@ File
 Grid Obstacle
 0
 Health
-1
+5
 Image File
 
 Inspect
@@ -234,7 +234,7 @@ activeBeginHour
 activeEndHour
 0
 actorToFocusOn
-lamp_post0
+
 alwaysActive
 1
 battleStartText
@@ -245,8 +245,12 @@ conditionArg
 
 deathText
 
+disableGridInteract
+0
 interactKnownText
 
+numOfAttacks
+2
 spawnText
 
 next
@@ -655,5 +659,11 @@ PushableGridActor
 0
 PlayerDialogueTrigger
 0
+GoddessStatue
+0
 PhysicsActor
+0
+PolyboardActor
+0
+DebugNoteActor
 0
