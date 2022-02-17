@@ -26,13 +26,3 @@ DirectXTK (directxtk_desktop_win10) ver. 2021.8.2.1 - https://github.com/microso
 (The ImGui libs are already included in the repo)
 * Dear ImGui - https://github.com/ocornut/imgui
 * ImGuizmo - https://github.com/CedricGuillemet/ImGuizmo
-
-## Uses
-* https://opengameart.org/content/jrpg-style-ui-sounds
-* https://opengameart.org/content/rpg-sound-pack
-* https://opengameart.org/content/footsteps-leather-cloth-armor
-* https://opengameart.org/content/gunshot-sounds
-* https://opengameart.org/content/2-metal-weapon-clicks
-
-## Project References
-* FFTactics Maps: https://www.cavesofnarshe.com/fft/maps/index.php
