@@ -40,10 +40,11 @@ XMMATRIX CameraComponent::GetViewMatrix()
 			focusPoint = targetActor->GetPositionVector();
 		}
 
-		//using direct position here from transform
+		//Camera rotation shaking
+		//XMVECTOR up = VMath::XMVectorUp() + Shake();
 		view = XMMatrixLookAtLH(transform.world.r[3], focusPoint, VMath::XMVectorUp());
 
-		//Camera shaking
+		//Camera translation shaking
 		XMVECTOR shakeVector = Shake();
 		view.r[3] += shakeVector;
 	}
