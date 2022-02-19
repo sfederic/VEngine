@@ -38,10 +38,10 @@ void MaterialSystem::CreateAllMaterials()
 
 void MaterialSystem::Cleanup()
 {
-	for (auto& materialIt : materials)
+	for (auto it = materials.begin(); it != materials.end();)
 	{
-		//@Todo: there's an occasianal crash here I don't know why.
-		delete materialIt.second;
+		delete it->second;
+		it = materials.erase(it);
 	}
 
 	materials.clear();
