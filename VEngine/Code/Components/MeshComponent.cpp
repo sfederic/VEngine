@@ -3,6 +3,7 @@
 #include "Render/RenderUtils.h"
 #include "Render/ShaderSystem.h"
 #include "Render/Material.h"
+#include "Render/MaterialSystem.h"
 #include "Render/Renderer.h"
 #include "Render/TextureSystem.h"
 #include "WorldEditor.h"
@@ -35,7 +36,7 @@ MeshComponent::MeshComponent()
 	meshDataProxy = new MeshDataProxy();
 	pso = new PipelineStateObject();
 
-	material = new Material("test.png", "DefaultShader.hlsl");
+	material = materialSystem.CreateMaterial();
 }
 
 MeshComponent::MeshComponent(const std::string filename_,

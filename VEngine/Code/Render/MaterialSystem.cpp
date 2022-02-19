@@ -8,11 +8,12 @@ MaterialSystem::MaterialSystem() : System("MaterialSystem")
 {
 }
 
-void MaterialSystem::AddMaterial(Material* material)
+Material* MaterialSystem::CreateMaterial()
 {
-	assert(material);
+	auto material = new Material();
 	material->uid = GenerateUID();
 	materials.emplace(material->uid, material);
+	return material;
 }
 
 Material* MaterialSystem::FindMaterial(UID uid)
@@ -23,7 +24,7 @@ Material* MaterialSystem::FindMaterial(UID uid)
 		return nullptr;
 	}
 
-	return materialIt->second;
+	return materialIt->second.get();
 }
 
 void MaterialSystem::CreateAllMaterials()
@@ -38,11 +39,5 @@ void MaterialSystem::CreateAllMaterials()
 
 void MaterialSystem::Cleanup()
 {
-	for (auto it = materials.begin(); it != materials.end();)
-	{
-		delete it->second;
-		it = materials.erase(it);
-	}
-
 	materials.clear();
 }

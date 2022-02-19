@@ -12,8 +12,6 @@
 
 Material::Material()
 {
-	materialSystem.AddMaterial(this);
-
 	rastStateValue.Add(RastStates::solid);
 	rastStateValue.Add(RastStates::noBackCull);
 	rastStateValue.Add(RastStates::shadow);
@@ -27,8 +25,6 @@ Material::Material(std::string textureFilename_, std::string shaderFilename_)
 {
 	textureData.filename = textureFilename_;
 	shaderData.filename = shaderFilename_;
-
-	materialSystem.AddMaterial(this);
 
 	//@Todo: I don't like this. There needs to be a way to check if something inherits from VEnum when serialising
 	rastStateValue.Add(RastStates::solid);
