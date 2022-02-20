@@ -11,6 +11,8 @@ struct Skeleton;
 
 struct Renderer
 {
+	ID3D11Texture2D* postBuffer = nullptr;
+
 	static const int swapchainCount = 2;
 	static const UINT stride = sizeof(Vertex);
 	static const UINT offset = 0;
@@ -128,6 +130,8 @@ private:
 
 	//Changes the global ambient param passed into shaders to change based on the day-night cycle in-game.
 	XMFLOAT4 CalcGlobalAmbientBasedOnGameTime();
+
+	void CreatePostProcessRenderTarget();
 };
 
 extern Renderer renderer;

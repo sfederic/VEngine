@@ -77,6 +77,8 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	CreateQueries();
 	CheckSupportedFeatures();
 
+	CreatePostProcessRenderTarget();
+
 	RenderUtils::defaultSampler = RenderUtils::CreateSampler();
 
 	Line lines[1024] = {};
@@ -1217,6 +1219,8 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 
 	CreateRTVAndDSV();
 
+	CreatePostProcessRenderTarget();
+
 	uiSystem.Init((void*)swapchain);
 
 	shaderMatrices.Create();
@@ -1304,4 +1308,23 @@ XMFLOAT4 Renderer::CalcGlobalAmbientBasedOnGameTime()
 	}
 
 	return XMFLOAT4(0.5f, 0.5f, 0.5f, 1.f);
+}
+
+void Renderer::CreatePostProcessRenderTarget()
+{
+	if (postBuffer)
+	{
+		postBuffer->Release();
+	}
+
+	D3D11_TEXTURE2D_DESC desc = {};
+	desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	desc.ArraySize = 1;
+	desc.MipLevels = 1;
+	desc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
+	desc.SampleDesc.Count = 1;
+	desc.Width = viewport.Width;
+	desc.Height = viewport.Height;
+
+	HR(device->CreateTexture2D(&desc, nullptr, &postBuffer));
 }
