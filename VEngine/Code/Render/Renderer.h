@@ -136,6 +136,7 @@ private:
 	XMFLOAT4 CalcGlobalAmbientBasedOnGameTime();
 
 	void CreatePostProcessRenderTarget();
+	void PostProcessRender();
 };
 
 extern Renderer renderer;

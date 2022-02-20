@@ -1,35 +1,18 @@
 #include "Include/CommonTypes.hlsli"
 #include "Include/TransformOut.hlsli"
 
-static const float2 arrBasePos[6] = {
-	float2(-1.0, 1.0),
-	float2(1.0, 1.0),
-	float2(-1.0, -1.0),
-	float2(1.0, 1.0),
-	float2(1.0, -1.0),
-	float2(-1.0, -1.0)
-};
-
-static const float2 arrUV[6] = {
-	float2(0.0, 0.0),
-	float2(1.0, 0.0),
-	float2(0.0, 1.0),
-	float2(1.0, 0.0),
-	float2(1.0, 1.0),
-	float2(0.0, 1.0)
-}
-
 VS_OUT VSMain(VS_IN i)
 {
-	VS_OUT o;
 	TransformOut transformOut;
-	o = transformOut.Transform(i);
-
-	o.pos = arrBasePos[i.instanceID];
-	o.uv = arrUV[i.instanceID];
+	VS_OUT o = transformOut.Transform(i);
+	o.pos = float4(i.pos.x + 1.f, -i.pos.y, 0.f, 1.0f);
+	o.uv = i.uv;
+	return o;
 }
 
 float4 PSMain(VS_OUT i) : SV_TARGET
 {
-	return t.Sample(s, i.uv);
+	float4 final = t.Sample(s, i.uv);
+	final.a = 0.2f;
+	return final;
 }

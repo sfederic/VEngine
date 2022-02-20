@@ -445,6 +445,7 @@ void Renderer::Render()
 	//RenderSkeletonBones();
 	RenderLightMeshes();
 	RenderCameraMeshes();
+	PostProcessRender();
 
 	PROFILE_END
 }
@@ -510,11 +511,6 @@ void Renderer::RenderMeshComponents()
 	//Set to null to remove warnings
 	ID3D11ShaderResourceView* nullSRV = nullptr;
 	context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSRV);
-
-	context->CopyResource(backBuffer, postBuffer);
-
-	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
-	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
 
 	PROFILE_END
 }
@@ -1337,4 +1333,41 @@ void Renderer::CreatePostProcessRenderTarget()
 
 	HR(device->CreateRenderTargetView(postBuffer, nullptr, &postRTV));
 	HR(device->CreateShaderResourceView(postBuffer, nullptr, &postSRV));
+}
+
+void Renderer::PostProcessRender()
+{
+	PROFILE_START
+
+	spriteSystem.BuildSpriteQuadForParticleRendering();
+
+	if (drawAllAsWireframe)
+	{
+		context->RSSetState(rastStateWireframe);
+	}
+	else
+	{
+		context->RSSetState(rastStateMap["nobackcull"]->data);
+	}
+
+	context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
+
+	spriteSystem.UpdateAndSetSpriteBuffers(context);
+
+	const float blendFactor[4] = {};
+	context->OMSetBlendState(blendStateMap.find(BlendStates::Default)->second->data, blendFactor, 0xFFFFFFFF);
+
+	context->VSSetShader(shaderSystem.FindShader(L"PostProcess.hlsl")->vertexShader, nullptr, 0);
+	context->PSSetShader(shaderSystem.FindShader(L"PostProcess.hlsl")->pixelShader, nullptr, 0);
+
+	context->PSSetShaderResources(0, 1, &postSRV);
+
+	context->DrawIndexed(6, 0, 0);
+
+	context->CopyResource(backBuffer, postBuffer);
+
+	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
+	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
+
+	PROFILE_END
 }
