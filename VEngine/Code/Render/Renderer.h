@@ -12,6 +12,10 @@ struct Skeleton;
 struct Renderer
 {
 	ID3D11Texture2D* postBuffer = nullptr;
+	ID3D11RenderTargetView* postRTV = nullptr;
+	ID3D11ShaderResourceView* postSRV = nullptr;
+
+	ID3D11Texture2D* backBuffer = nullptr;
 
 	static const int swapchainCount = 2;
 	static const UINT stride = sizeof(Vertex);

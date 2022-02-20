@@ -143,7 +143,7 @@ void Renderer::CreateDevice()
 		gpuAdaptersDesc.push_back(desc);
 	}
 
-	HR(D3D11CreateDevice(adapter, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags,
+	HR(D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags,
 		featureLevels, _countof(featureLevels), D3D11_SDK_VERSION, &device,
 		&selectedFeatureLevel, &context));
 
@@ -170,13 +170,12 @@ void Renderer::CreateSwapchain(HWND window)
 
 void Renderer::CreateRTVAndDSV()
 {
+	swapchain->GetBuffer(0, IID_PPV_ARGS(&backBuffer));
+
 	//Create Render target views
 	for (int i = 0; i < swapchainCount; i++)
 	{
-		ComPtr<ID3D11Texture2D> backBuffer;
-		swapchain->GetBuffer(0, IID_PPV_ARGS(backBuffer.GetAddressOf()));
-		HR(device->CreateRenderTargetView(backBuffer.Get(), nullptr, &rtvs[i]));
-		backBuffer.Reset();
+		HR(device->CreateRenderTargetView(backBuffer, nullptr, &rtvs[i]));
 	}
 
 	//Create depth stencil view
@@ -410,9 +409,11 @@ void Renderer::RenderSetup()
 	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
 
 	context->ClearRenderTargetView(rtvs[frameIndex], clearColour);
+	context->ClearRenderTargetView(postRTV, clearColour);
+
 	context->ClearDepthStencilView(dsv, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 
-	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
+	context->OMSetRenderTargets(1, &postRTV, dsv);
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
@@ -509,6 +510,11 @@ void Renderer::RenderMeshComponents()
 	//Set to null to remove warnings
 	ID3D11ShaderResourceView* nullSRV = nullptr;
 	context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSRV);
+
+	context->CopyResource(backBuffer, postBuffer);
+
+	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
+	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
 
 	PROFILE_END
 }
@@ -1207,6 +1213,7 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 
 	uiSystem.Cleanup();
 
+	backBuffer->Release();
 	HR(swapchain->ResizeBuffers(swapchainCount, newWidth, newHeight, DXGI_FORMAT_R8G8B8A8_UNORM, 0));
 
 	viewport.Width = newWidth;
@@ -1312,10 +1319,9 @@ XMFLOAT4 Renderer::CalcGlobalAmbientBasedOnGameTime()
 
 void Renderer::CreatePostProcessRenderTarget()
 {
-	if (postBuffer)
-	{
-		postBuffer->Release();
-	}
+	if (postBuffer) postBuffer->Release();
+	if (postRTV) postRTV->Release();
+	if (postSRV) postSRV->Release();
 
 	D3D11_TEXTURE2D_DESC desc = {};
 	desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
@@ -1327,4 +1333,8 @@ void Renderer::CreatePostProcessRenderTarget()
 	desc.Height = viewport.Height;
 
 	HR(device->CreateTexture2D(&desc, nullptr, &postBuffer));
+	assert(postBuffer);
+
+	HR(device->CreateRenderTargetView(postBuffer, nullptr, &postRTV));
+	HR(device->CreateShaderResourceView(postBuffer, nullptr, &postSRV));
 }
