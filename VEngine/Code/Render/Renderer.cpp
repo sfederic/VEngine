@@ -134,16 +134,20 @@ void Renderer::CreateDevice()
 	const D3D_FEATURE_LEVEL featureLevels[] = { D3D_FEATURE_LEVEL_11_1 };
 	D3D_FEATURE_LEVEL selectedFeatureLevel;
 
-	IDXGIAdapter1* adapter;
-	for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_MINIMUM_POWER,
+	IDXGIAdapter1* adapter = nullptr;
+	HR(dxgiFactory->EnumAdapterByGpuPreference(0, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&adapter)));
+	DXGI_ADAPTER_DESC1 desc = {};
+	adapter->GetDesc1(&desc);
+	gpuAdaptersDesc.push_back(desc);
+	/*for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_MINIMUM_POWER,
 		IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)
 	{
 		DXGI_ADAPTER_DESC1 desc = {};
 		adapter->GetDesc1(&desc);
 		gpuAdaptersDesc.push_back(desc);
-	}
+	}*/
 
-	HR(D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags,
+	HR(D3D11CreateDevice(adapter, D3D_DRIVER_TYPE_UNKNOWN, nullptr, createDeviceFlags,
 		featureLevels, _countof(featureLevels), D3D11_SDK_VERSION, &device,
 		&selectedFeatureLevel, &context));
 
@@ -153,7 +157,7 @@ void Renderer::CreateDevice()
 void Renderer::CreateSwapchain(HWND window)
 {
 	DXGI_SWAP_CHAIN_DESC sd = {};
-	sd.BufferDesc = { (UINT)viewport.Width, (UINT)viewport.Height, {60, 1}, DXGI_FORMAT_R8G8B8A8_UNORM };
+	sd.BufferDesc = { (UINT)viewport.Width, (UINT)viewport.Height, {60, 1}, DXGI_FORMAT_R16G16B16A16_FLOAT };
 	sd.Windowed = TRUE;
 	sd.SampleDesc.Count = 1;
 	sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
