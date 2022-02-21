@@ -1360,7 +1360,13 @@ void Renderer::PostProcessRender()
 	context->VSSetShader(shaderSystem.FindShader(L"PostProcess.hlsl")->vertexShader, nullptr, 0);
 	context->PSSetShader(shaderSystem.FindShader(L"PostProcess.hlsl")->pixelShader, nullptr, 0);
 
+	//The post processing RTV needs to be unset here and then the SRV to avoid D3D11 warnings
+	ID3D11RenderTargetView* nullRTV = nullptr;
+	context->OMSetRenderTargets(1, &nullRTV, nullptr);
 	context->PSSetShaderResources(0, 1, &postSRV);
+	ID3D11ShaderResourceView* nullSRV = nullptr;
+	context->PSSetShaderResources(0, 1, &nullSRV);
+	context->OMSetRenderTargets(1, &postRTV, dsv);
 
 	context->DrawIndexed(6, 0, 0);
 
