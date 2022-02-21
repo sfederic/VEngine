@@ -36,6 +36,7 @@ void NPC::Tick(float deltaTime)
         if (quickTalkTimer > 4.0f)
         {
             EndQuickTalkTo();
+            quickTalkTimer = 0.f;
         }
     }
 
