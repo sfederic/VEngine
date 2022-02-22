@@ -157,7 +157,7 @@ void Renderer::CreateDevice()
 void Renderer::CreateSwapchain(HWND window)
 {
 	DXGI_SWAP_CHAIN_DESC sd = {};
-	sd.BufferDesc = { (UINT)viewport.Width, (UINT)viewport.Height, {60, 1}, DXGI_FORMAT_R16G16B16A16_FLOAT };
+	sd.BufferDesc = { (UINT)viewport.Width, (UINT)viewport.Height, {60, 1}, DXGI_FORMAT_R8G8B8A8_UNORM };
 	sd.Windowed = TRUE;
 	sd.SampleDesc.Count = 1;
 	sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
@@ -279,8 +279,8 @@ void Renderer::CreateBlendStates()
 		//MSAA has to be set for AlphaToCoverage to work.
 		//alphaToCoverageDesc.AlphaToCoverageEnable = true;
 		alphaToCoverageDesc.RenderTarget[0].BlendEnable = true;
-		alphaToCoverageDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
-		alphaToCoverageDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+		alphaToCoverageDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_COLOR;
+		alphaToCoverageDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_COLOR;
 		alphaToCoverageDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
 		alphaToCoverageDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
 		alphaToCoverageDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
