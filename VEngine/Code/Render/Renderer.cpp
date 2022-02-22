@@ -413,11 +413,13 @@ void Renderer::RenderSetup()
 	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
 
 	context->ClearRenderTargetView(rtvs[frameIndex], clearColour);
-	context->ClearRenderTargetView(postRTV, clearColour);
+	//context->ClearRenderTargetView(postRTV, clearColour);
 
 	context->ClearDepthStencilView(dsv, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 
-	context->OMSetRenderTargets(1, &postRTV, dsv);
+	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
+	//context->OMSetRenderTargets(1, &postRTV, dsv);
+
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
