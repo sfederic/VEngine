@@ -279,8 +279,8 @@ void Renderer::CreateBlendStates()
 		//MSAA has to be set for AlphaToCoverage to work.
 		//alphaToCoverageDesc.AlphaToCoverageEnable = true;
 		alphaToCoverageDesc.RenderTarget[0].BlendEnable = true;
-		alphaToCoverageDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_COLOR;
-		alphaToCoverageDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_COLOR;
+		alphaToCoverageDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+		alphaToCoverageDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
 		alphaToCoverageDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
 		alphaToCoverageDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
 		alphaToCoverageDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
