@@ -449,7 +449,7 @@ void Renderer::Render()
 	//RenderSkeletonBones();
 	RenderLightMeshes();
 	RenderCameraMeshes();
-	PostProcessRender();
+	//PostProcessRender();
 
 	PROFILE_END
 }
@@ -1339,6 +1339,7 @@ void Renderer::CreatePostProcessRenderTarget()
 	HR(device->CreateShaderResourceView(postBuffer, nullptr, &postSRV));
 }
 
+//@Todo: this is using the spritesystem to draw a fullscreen quad. Change it.
 void Renderer::PostProcessRender()
 {
 	PROFILE_START
