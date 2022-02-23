@@ -110,7 +110,6 @@ void MeshComponent::Destroy()
 	physicsSystem.ReleasePhysicsActor(this);
 
 	material->Destroy();
-	delete material;
 	material = nullptr;
 
 	delete meshDataProxy;
