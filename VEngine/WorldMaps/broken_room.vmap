@@ -1,0 +1,1261 @@
+Grid
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+node.fbx
+Name
+Grid0
+Rast State
+solid
+Shader
+InstanceShader.hlsl
+Size X
+5
+Size Y
+7
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UID
+2808557721
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+startBattleOnLoad
+0
+next
+GridActor
+0
+AudioActor
+0
+Player
+1
+ Position
+1 0 4
+ Rotation
+0 -0.999999 0 -9.23872e-07
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Audio Filename
+step.wav
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+FOV
+60
+Far Z
+1000
+File
+
+Grid Obstacle
+0
+Loop
+1
+Mesh
+character_test.fbx
+Name
+Player0
+Near Z
+0.01
+Pitch
+1
+Play On Start
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UID
+2806943237
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+Volume
+-0.00678589
+next
+Unit
+0
+EntranceTrigger
+0
+NPC
+0
+MeshActor
+24
+ Position
+2 -0.5 3
+ Rotation
+-0 0 -0 1
+ Scale
+5 1 7
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+node.fbx
+Name
+bottle20
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wood128x128.jpg
+UID
+3799468868
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+2 1
+next
+ Position
+-0.1 0 1.1
+ Rotation
+-0.183044 0.683131 0.182981 0.682895
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+chair.fbx
+Name
+bottle21
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wood_furniture.jpg
+UID
+1222205776
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+2 2
+next
+ Position
+0 -0.3 3
+ Rotation
+0.541708 0.541865 0.454481 0.454293
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+chair.fbx
+Name
+bottle22
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wood_furniture.jpg
+UID
+1222205776
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+2 2
+next
+ Position
+0 0 2
+ Rotation
+-0 0.0871558 -0 0.996195
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+small_table.fbx
+Name
+bottle23
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wood_furniture.jpg
+UID
+4148349224
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+2 2
+next
+ Position
+2 0 5
+ Rotation
+-0 -0.0434469 -0 0.999056
+ Scale
+1.25 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+table.fbx
+Name
+bottle24
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wood_furniture.jpg
+UID
+726984303
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+3 3
+next
+ Position
+-0.5 1 3
+ Rotation
+-0 0 -0.707107 0.707107
+ Scale
+2.99998 0.999996 7
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+node.fbx
+Name
+bottle25
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wall06.png
+UID
+3799468868
+UvOffset
+0.2 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+4.5 1 3
+ Rotation
+0.707107 -0.707107 4.63629e-08 3.79309e-08
+ Scale
+2.99996 0.99999 6.99999
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+node.fbx
+Name
+bottle26
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wall06.png
+UID
+3799468868
+UvOffset
+0.5 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+2 1 6.5
+ Rotation
+-0.5 0.5 -0.5 0.5
+ Scale
+3 1 5
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+node.fbx
+Name
+bottle27
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wall06.png
+UID
+3799468868
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+180
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+2 1 -0.5
+ Rotation
+0.500174 -0.5 -0.499826 0.5
+ Scale
+3.00002 0.999998 5
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+node.fbx
+Name
+bottle28
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wall06.png
+UID
+3799468868
+UvOffset
+0.7 0
+UvOffsetSpeed
+0 0
+UvRotation
+90
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+0 0.5 2
+ Rotation
+-0 0 -0 1
+ Scale
+0.5 0.5 0.5
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+vase.fbx
+Name
+bottle29
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+ground.jpg
+UID
+838350829
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+4 -0.3 2
+ Rotation
+-0 0 -0 1
+ Scale
+0.5 0.5 0.5
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+vase.fbx
+Name
+bottle210
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+ground.jpg
+UID
+838350829
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+4 -0.3 2.4
+ Rotation
+-0 -0.422618 -0 0.906308
+ Scale
+0.5 0.5 0.5
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+vase.fbx
+Name
+bottle211
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+ground.jpg
+UID
+838350829
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+3.6 -0.3 2.4
+ Rotation
+0 0.965926 0 -0.258819
+ Scale
+0.5 0.5 0.5
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+vase.fbx
+Name
+bottle212
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+ground.jpg
+UID
+838350829
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+4 -0.3 1.5
+ Rotation
+0.582683 -0.323698 -0.27171 0.694171
+ Scale
+0.499999 0.499999 0.5
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+vase.fbx
+Name
+bottle213
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+ground.jpg
+UID
+838350829
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+3.9 2.23517e-08 6.4
+ Rotation
+-2.5921e-08 -0.0871555 0.996195 -4.56463e-08
+ Scale
+0.999991 0.999993 0.999998
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+pictureframe_square.fbx
+Name
+bottle214
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+sophie.jpg
+UID
+675059005
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+3.8 2.23517e-08 6.3
+ Rotation
+-2.5921e-08 -0.0871555 0.996195 -4.56463e-08
+ Scale
+0.999991 0.999993 0.999998
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+pictureframe_square.fbx
+Name
+bottle215
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+sophie.jpg
+UID
+675059005
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+4 2.23517e-08 5.9
+ Rotation
+0.34049 -0.0819068 0.9362 0.0297905
+ Scale
+0.999926 0.999909 0.999996
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+pictureframe_square.fbx
+Name
+bottle216
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+sophie.jpg
+UID
+675059005
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+3.5 0.5 0.2
+ Rotation
+-0 -0.0434469 -0 0.999056
+ Scale
+2 2 2
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+cabinet.fbx
+Name
+bottle217
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+wood_furniture.jpg
+UID
+3389689958
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+4 4
+next
+ Position
+-0.2 0 6
+ Rotation
+-0 0 0.173648 0.984808
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+spear.fbx
+Name
+bottle218
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+metal.jpg
+UID
+911246574
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+-0.2 0 6.3
+ Rotation
+0.0226656 0.128543 0.172162 0.976383
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+spear.fbx
+Name
+bottle219
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+metal.jpg
+UID
+911246574
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+2.1 0.4 4.9
+ Rotation
+0.0308435 0.0308436 0.706433 0.706434
+ Scale
+0.999994 0.999994 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+spear.fbx
+Name
+bottle220
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+metal.jpg
+UID
+911246574
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+2.8 0.6 5
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+bottle2.fbx
+Name
+bottle221
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UID
+1321265010
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+1.8 0.8 6.5
+ Rotation
+0 0 0.999048 0.0436194
+ Scale
+0.999992 0.999993 0.999998
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+pictureframe_square.fbx
+Name
+MeshActor22
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+boat_memory.jpg
+UID
+675059005
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+-0.5 1.3 3.1
+ Rotation
+-0.707107 3.94732e-07 0.707107 -1.60695e-07
+ Scale
+0.999951 0.999914 0.999956
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+pictureframe_square.fbx
+Name
+MeshActor23
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+docks.jpg
+UID
+675059005
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+DirectionalLightActor
+1
+ Position
+2.5 4 3.5
+ Rotation
+0.707279 -0.000172661 0.000172576 0.706934
+ Scale
+1.00001 1.00002 1.00002
+Colour
+1 1 1 1
+LightEnabled
+1
+Name
+DirectionalLightActor0
+UID
+3545998161
+next
+SavePoint
+0
+PointLightActor
+0
+SpotLightActor
+0
+FenceActor
+0
+Billboard
+0
+InteractTrigger
+0
+ParticleSystem
+0
+DialogueTrigger
+0
+DestructibleActor
+0
+MemoryActor
+0
+TitleScreenActor
+0
+PushableGridActor
+0
+PlayerDialogueTrigger
+0
+GoddessStatue
+0
+PhysicsActor
+0
+PolyboardActor
+0
+DebugNoteActor
+0
