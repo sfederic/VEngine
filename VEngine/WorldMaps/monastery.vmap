@@ -6,6 +6,8 @@ Grid
 0 0 0 1
  Scale
 1 1 1
+AO
+0.01
 Ambient
 1 1 1 1
 Blend State
@@ -18,10 +20,14 @@ Grid Obstacle
 0
 Mesh
 node.fbx
+Metallic
+0
 Name
 Grid0
 Rast State
 solid
+Roughness
+0
 Shader
 InstanceShader.hlsl
 Size X
@@ -58,11 +64,13 @@ AudioActor
 Player
 1
  Position
-4 1 1
+4 1 10
  Rotation
--0 0 -0 1
+0 -0.999999 0 -6.55651e-07
  Scale
 1 1 1
+AO
+0.01
 Ambient
 1 1 1 1
 Audio Filename
@@ -85,6 +93,8 @@ Loop
 1
 Mesh
 character_test.fbx
+Metallic
+0
 Name
 Player0
 Near Z
@@ -95,6 +105,8 @@ Play On Start
 1
 Rast State
 solid
+Roughness
+0
 Shader
 DefaultShader.hlsl
 Specular
@@ -118,129 +130,24 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
-1
+-0.00533267
 next
 Unit
 0
 EntranceTrigger
 0
 NPC
-1
- Position
-4 1 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
 0
-Ambient
-1 1 1 1
-Attack Points
-1
-Attack Range
-1
-Battle State
-fight
-Blend State
-null
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Cull
-0
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-10
-Image File
-
-Inspect
-1
-Interact
-1
-Interact Text
-
-Memory Desc
-
-Memory Name
-
-Mesh
-
-Move Points
-1
-Move Speed
-3
-Name
-NPC0
-Obstacle
-0
-Quest Name
-
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Specular
-1 1 1 1
-Specular Power
-0
-Static
-1
-Texture
-test.png
-UID
-3403384827
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-actorToFocusOn
-
-alwaysActive
-1
-battleStartText
-
-condition
-
-conditionArg
-
-deathText
-
-disableGridInteract
-0
-interactKnownText
-
-numOfAttacks
-1
-spawnText
-
-next
 MeshActor
-13
+14
  Position
 5 0 4
  Rotation
 -0 0 -0 1
  Scale
 3 1 5
+AO
+0.01
 Ambient
 1 1 1 1
 Blend State
@@ -253,10 +160,14 @@ Grid Obstacle
 0
 Mesh
 cube.fbx
+Metallic
+0
 Name
 cube0
 Rast State
 solid
+Roughness
+0
 Shader
 DefaultShader.hlsl
 Specular
@@ -286,6 +197,8 @@ next
 -0 0 -0 1
  Scale
 11 1 13
+AO
+0.01
 Ambient
 1 1 1 1
 Blend State
@@ -298,16 +211,20 @@ Grid Obstacle
 0
 Mesh
 node.fbx
+Metallic
+1
 Name
 node1
 Rast State
 solid
+Roughness
+0
 Shader
 DefaultShader.hlsl
 Specular
 1 1 1 1
 Specular Power
-0
+128
 Static
 1
 Texture
@@ -331,6 +248,8 @@ next
 0 0 0 1
  Scale
 1 1 1
+AO
+0.01
 Ambient
 1 1 1 1
 Blend State
@@ -343,10 +262,14 @@ Grid Obstacle
 0
 Mesh
 cube.fbx
+Metallic
+0
 Name
 cube2
 Rast State
 solid
+Roughness
+0
 Shader
 DefaultShader.hlsl
 Specular
@@ -376,6 +299,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+AO
+0.01
 Ambient
 1 1 1 1
 Blend State
@@ -388,16 +313,20 @@ Grid Obstacle
 0
 Mesh
 step_medium.fbx
+Metallic
+1
 Name
 step_medium3
 Rast State
 solid
+Roughness
+1
 Shader
 DefaultShader.hlsl
 Specular
 1 1 1 1
 Specular Power
-0
+64
 Static
 1
 Texture
@@ -421,6 +350,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+AO
+0.01
 Ambient
 1 1 1 1
 Blend State
@@ -433,10 +364,14 @@ Grid Obstacle
 0
 Mesh
 step_medium.fbx
+Metallic
+0
 Name
 step_medium4
 Rast State
 solid
+Roughness
+0
 Shader
 DefaultShader.hlsl
 Specular
@@ -466,6 +401,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+AO
+0.01
 Ambient
 1 1 1 1
 Blend State
@@ -478,10 +415,14 @@ Grid Obstacle
 0
 Mesh
 step_medium.fbx
+Metallic
+0
 Name
 step_medium5
 Rast State
 solid
+Roughness
+0
 Shader
 DefaultShader.hlsl
 Specular
@@ -511,6 +452,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+AO
+0.01
 Ambient
 1 1 1 1
 Blend State
@@ -523,10 +466,14 @@ Grid Obstacle
 0
 Mesh
 cube.fbx
+Metallic
+0
 Name
 step_medium6
 Rast State
 solid
+Roughness
+0
 Shader
 DefaultShader.hlsl
 Specular
@@ -556,6 +503,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+AO
+0.01
 Ambient
 1 1 1 1
 Blend State
@@ -568,10 +517,14 @@ Grid Obstacle
 0
 Mesh
 cube.fbx
+Metallic
+0
 Name
 step_medium7
 Rast State
 solid
+Roughness
+0
 Shader
 DefaultShader.hlsl
 Specular
@@ -601,6 +554,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+AO
+0.01
 Ambient
 1 1 1 1
 Blend State
@@ -613,10 +568,14 @@ Grid Obstacle
 0
 Mesh
 cube.fbx
+Metallic
+0
 Name
 step_medium8
 Rast State
 solid
+Roughness
+0
 Shader
 DefaultShader.hlsl
 Specular
@@ -641,11 +600,13 @@ UvScale
 1 1
 next
  Position
-2 -0.4 5
+1 -0.4 5
  Rotation
 -0 0 -0 1
  Scale
 1.5 1 5.5
+AO
+0.01
 Ambient
 1 1 1 1
 Blend State
@@ -658,10 +619,14 @@ Grid Obstacle
 0
 Mesh
 mound.fbx
+Metallic
+0
 Name
 mound9
 Rast State
 solid
+Roughness
+0
 Shader
 DefaultShader.hlsl
 Specular
@@ -691,6 +656,8 @@ next
 -0 0 -0 1
  Scale
 1.5 1 5.5
+AO
+0.01
 Ambient
 1 1 1 1
 Blend State
@@ -703,10 +670,14 @@ Grid Obstacle
 0
 Mesh
 mound.fbx
+Metallic
+0
 Name
 mound10
 Rast State
 solid
+Roughness
+0
 Shader
 DefaultShader.hlsl
 Specular
@@ -736,6 +707,8 @@ next
 -0 0 -0 1
  Scale
 1 1 1
+AO
+0.01
 Ambient
 1 1 1 1
 Blend State
@@ -748,10 +721,14 @@ Grid Obstacle
 0
 Mesh
 monastery.fbx
+Metallic
+0
 Name
 monastery11
 Rast State
 solid
+Roughness
+10
 Shader
 DefaultShader.hlsl
 Specular
@@ -781,6 +758,8 @@ next
 -0 0 -0 1
  Scale
 3 1 5
+AO
+0.01
 Ambient
 1 1 1 1
 Blend State
@@ -793,10 +772,14 @@ Grid Obstacle
 0
 Mesh
 cube.fbx
+Metallic
+0
 Name
 monastery12
 Rast State
 solid
+Roughness
+0
 Shader
 DefaultShader.hlsl
 Specular
@@ -820,27 +803,84 @@ UvRotationSpeed
 UvScale
 2 5
 next
+ Position
+5 2 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+AO
+0.01
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+sphere_high.fbx
+Metallic
+0
+Name
+sphere13
+Rast State
+solid
+Roughness
+0
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UID
+2186142613
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
 DirectionalLightActor
+0
+SavePoint
+0
+PointLightActor
 1
  Position
--5 2 0
+8 3 6
  Rotation
 -0 0 -0 1
  Scale
 1 1 1
 Colour
 1 1 1 1
+Const Atten.
+0.33
 LightEnabled
 1
+Linear Atten.
+0
 Name
-DirectionalLightActor0
+PointLightActor0
+Quad Atten.
+0
 UID
-3917024756
+4105197682
 next
-SavePoint
-0
-PointLightActor
-0
 SpotLightActor
 0
 FenceActor
