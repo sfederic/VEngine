@@ -12,6 +12,9 @@
 
 Material::Material()
 {
+	textureData.filename = "test.png";
+	shaderData.filename = "DefaultShader.hlsl";
+
 	rastStateValue.Add(RastStates::solid);
 	rastStateValue.Add(RastStates::noBackCull);
 	rastStateValue.Add(RastStates::shadow);
