@@ -25,8 +25,6 @@ void SpriteSheet::Create()
 
 void SpriteSheet::Tick(float deltaTime)
 {
-	__super::Tick(deltaTime);
-
 	animationTimer += deltaTime * animationSpeed;
 	if (animationTimer > 1.0f)
 	{
@@ -45,6 +43,11 @@ void SpriteSheet::Tick(float deltaTime)
 		{
 			currentSheetRow = 0;
 			currentSheetColumn = 0;
+
+			if (!loopAnimation)
+			{
+				this->Remove();
+			}
 		}
 	}
 }
@@ -56,6 +59,7 @@ Properties SpriteSheet::GetProps()
 	props.AddProp(numSheetRows);
 	props.AddProp(numSheetColumns);
 	props.AddProp(animationSpeed);
+	props.AddProp(loopAnimation);
 	return props;
 }
 

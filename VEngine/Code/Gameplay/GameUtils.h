@@ -22,7 +22,7 @@ namespace GameUtils
 	void SetActiveCameraTargetAndZoomOut(Actor* newTarget);
 	void CameraShake(float shake);
 
-	SpriteSheet* SpawnSpriteSheet(std::string textureFilename, XMFLOAT3 position, bool loop);
+	SpriteSheet* SpawnSpriteSheet(std::string textureFilename, XMFLOAT3 position, bool loop, int numRows, int numColumns);
 
 	void PlayAudioOneShot(const std::string audioFilename);
 

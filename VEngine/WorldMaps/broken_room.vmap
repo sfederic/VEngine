@@ -58,9 +58,9 @@ AudioActor
 Player
 1
  Position
-1 0 3
+1 0 2
  Rotation
-0 0.707107 0 -0.707105
+0 0.999999 0 1.49012e-06
  Scale
 1 1 1
 Ambient
@@ -118,14 +118,121 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
--0.000616223
+-9.19998e-05
 next
 Unit
 0
 EntranceTrigger
 0
 NPC
+1
+ Position
+3 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
 0
+Ambient
+1 1 1 1
+Attack Points
+1
+Attack Range
+1
+Battle State
+fight
+Blend State
+null
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Cull
+0
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+3
+Image File
+
+Inspect
+1
+Interact
+1
+Interact Text
+
+Memory Desc
+
+Memory Name
+
+Mesh
+plane.fbx
+Move Points
+1
+Move Speed
+3
+Name
+NPC0
+Obstacle
+0
+Quest Name
+
+Rast State
+nobackcull
+Shader
+DefaultShader.hlsl
+Specular
+1 1 1 1
+Specular Power
+0
+Static
+1
+Texture
+test.png
+UID
+2460757828
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+actorToFocusOn
+
+alwaysActive
+1
+battleStartText
+
+condition
+
+conditionArg
+
+deathText
+
+disableGridInteract
+0
+interactKnownText
+
+numOfAttacks
+1
+spawnText
+
+next
 MeshActor
 24
  Position
@@ -1262,33 +1369,21 @@ DebugNoteActor
 SpriteSheetActor
 1
  Position
-2 0 4
+1 0 3
  Rotation
-0 0.994029 0 -0.109117
+0 0.813255 0 0.581907
  Scale
-1 1 1
-Direction
-0 0 0
-Lifetime
-10 10
-Move Speed
-0 0
+0.99999 1 0.99999
 Name
 SpriteSheetActor0
-Rotate
-0 0
-Rotate Speed
-0 0
-Spawn Radius
-0 1
-Spawn Rate
-0.3 0.3
 Texture
 blood_hit.png
 UID
-2920476501
+2052235394
 animationSpeed
-50
+40
+loopAnimation
+1
 numSheetColumns
 4
 numSheetRows

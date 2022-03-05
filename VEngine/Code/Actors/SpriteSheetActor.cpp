@@ -4,6 +4,11 @@
 SpriteSheetActor::SpriteSheetActor()
 {
 	spriteSheet = SpriteSheet::system.Add(this);
+
+	//@Todo: Careful here, most SpriteSheetActors will loop, but this will hit an error on GetAllComponentsOfType<T>()
+	//where a nullptr component will be accessed after a SpriteSheet is destroyed when not looping.
+	spriteSheet->loopAnimation = true;
+
 	rootComponent = spriteSheet;
 }
 
