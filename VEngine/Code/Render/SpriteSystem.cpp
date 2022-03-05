@@ -3,7 +3,7 @@
 #include "Render/RenderUtils.h"
 #include "Render/TextureSystem.h"
 #include "Debug.h"
-#include "Particle/SpriteSheetEmitter.h"
+#include "Particle/SpriteSheet.h"
 
 SpriteSystem spriteSystem;
 
@@ -37,11 +37,6 @@ void SpriteSystem::Reset()
 void SpriteSystem::CreateScreenSprite(Sprite sprite)
 {
 	screenSprites.push_back(sprite);
-}
-
-void SpriteSystem::CreateSpriteSheet(Sprite sprite)
-{
-	spriteSheets.push_back(sprite);
 }
 
 XMFLOAT3 SpriteSystem::PointToNdc(int x, int y, float z)

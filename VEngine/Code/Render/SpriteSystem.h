@@ -41,7 +41,6 @@ struct SpriteSystem : System
 	Vertex verts[4] = {};
 
 	std::vector<Sprite> screenSprites;
-	std::vector<Sprite> spriteSheets;
 
 	SpriteSystem();
 	void Init();
