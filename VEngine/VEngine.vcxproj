@@ -230,6 +230,7 @@
     <ClCompile Include="Code\UI\PassTimeWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\GoddessStatue.cpp" />
     <ClCompile Include="Code\Particle\SpriteSheetEmitter.cpp" />
+    <ClCompile Include="Code\Actors\SpriteSheetActor.cpp" />
     <ClInclude Include="Code\Gameplay\BattleEnums.h" />
     <ClInclude Include="Code\Particle\FireParticle.h" />
     <ClInclude Include="Code\Quests\Quest.h" />
@@ -458,6 +459,7 @@
     <ClInclude Include="Code\UI\PassTimeWidget.h" />
     <ClInclude Include="Code\Actors\Game\GoddessStatue.h" />
     <ClInclude Include="Code\Particle\SpriteSheetEmitter.h" />
+    <ClInclude Include="Code\Actors\SpriteSheetActor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
