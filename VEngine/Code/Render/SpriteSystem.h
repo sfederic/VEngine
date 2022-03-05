@@ -8,10 +8,11 @@
 
 using namespace DirectX;
 
+struct SpriteSheetEmitter;
+
 //Sprite and text rendering for D3D11
 //REF:http://www.d3dcoder.net/Data/Resources/SpritesAndText.pdf
 
-//Sprites are images that are rendered on the viewport in screen space.
 struct Sprite
 {
 	Transform transform;
@@ -40,12 +41,15 @@ struct SpriteSystem : System
 	Vertex verts[4] = {};
 
 	std::vector<Sprite> screenSprites;
+	std::vector<Sprite> spriteSheets;
 
 	SpriteSystem();
 	void Init();
 	void Reset();
 	void CreateScreenSprite(Sprite sprite);
+	void CreateSpriteSheet(Sprite sprite);
 	void BuildSpriteQuadForViewportRendering(const Sprite& sprite);
+	void BuildSpriteQuadForSpriteSheetRendering(const Sprite& sprite);
 	void BuildSpriteQuadForParticleRendering();
 	void UpdateAndSetSpriteBuffers(ID3D11DeviceContext* context);
 

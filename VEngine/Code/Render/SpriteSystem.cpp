@@ -3,6 +3,7 @@
 #include "Render/RenderUtils.h"
 #include "Render/TextureSystem.h"
 #include "Debug.h"
+#include "Particle/SpriteSheetEmitter.h"
 
 SpriteSystem spriteSystem;
 
@@ -36,6 +37,11 @@ void SpriteSystem::Reset()
 void SpriteSystem::CreateScreenSprite(Sprite sprite)
 {
 	screenSprites.push_back(sprite);
+}
+
+void SpriteSystem::CreateSpriteSheet(Sprite sprite)
+{
+	spriteSheets.push_back(sprite);
 }
 
 XMFLOAT3 SpriteSystem::PointToNdc(int x, int y, float z)
@@ -102,6 +108,37 @@ void SpriteSystem::BuildSpriteQuadForViewportRendering(const Sprite& sprite)
 		p = XMVector3TransformCoord(p, T);
 		XMStoreFloat3(&verts[i].pos, p);
 	}
+}
+
+void SpriteSystem::BuildSpriteQuadForSpriteSheetRendering(const Sprite& sprite)
+{
+	D3D11_RECT src = sprite.srcRect;
+
+	verts[0].pos = XMFLOAT3(-1.f, -1.f, 0.f);
+	verts[1].pos = XMFLOAT3(-1.f, 1.f, 0.f);
+	verts[2].pos = XMFLOAT3(1.f, 1.f, 0.f);
+	verts[3].pos = XMFLOAT3(1.f, -1.f, 0.f);
+
+	verts[0].normal = XMFLOAT3(0.f, 0.f, -1.f);
+	verts[1].normal = XMFLOAT3(0.f, 0.f, -1.f);
+	verts[2].normal = XMFLOAT3(0.f, 0.f, -1.f);
+	verts[3].normal = XMFLOAT3(0.f, 0.f, -1.f);
+
+	Texture2D* texture = textureSystem.FindTexture2D(sprite.textureFilename);
+	int texWidth = texture->desc.Width;
+	int texHeight = texture->desc.Height;
+
+	if (!sprite.useSourceRect)
+	{
+		src.right = texWidth;
+		src.bottom = texHeight;
+	}
+
+	// Source rect defines subset of texture to use from sprite sheet.
+	verts[0].uv = XMFLOAT2((float)src.left / texWidth, (float)src.bottom / texHeight);
+	verts[1].uv = XMFLOAT2((float)src.left / texWidth, (float)src.top / texHeight);
+	verts[2].uv = XMFLOAT2((float)src.right / texWidth, (float)src.top / texHeight);
+	verts[3].uv = XMFLOAT2((float)src.right / texWidth, (float)src.bottom / texHeight);
 }
 
 void SpriteSystem::BuildSpriteQuadForParticleRendering()
