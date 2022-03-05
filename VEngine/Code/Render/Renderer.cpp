@@ -448,6 +448,7 @@ void Renderer::Render()
 	RenderMeshComponents();
 	RenderInstanceMeshComponents();
 	RenderPolyboards();
+	RenderSpriteSheets();
 	RenderBounds();
 	//RenderSkeletonBones();
 	RenderLightMeshes();
