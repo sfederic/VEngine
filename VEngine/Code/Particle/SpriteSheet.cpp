@@ -21,8 +21,6 @@ void SpriteSheet::Create()
 	int y = h * currentSheetRow;
 
 	sprite.srcRect = { x, y, x + w, y + h }; //Only src rect matters for sprite sheets
-
-	spriteSystem.CreateSpriteSheet(sprite);
 }
 
 void SpriteSheet::Tick(float deltaTime)
@@ -54,6 +52,7 @@ void SpriteSheet::Tick(float deltaTime)
 Properties SpriteSheet::GetProps()
 {
 	Properties props("SpriteSheet");
+	props.Add("Texture", &textureData);
 	props.AddProp(numSheetRows);
 	props.AddProp(numSheetColumns);
 	props.AddProp(animationSpeed);

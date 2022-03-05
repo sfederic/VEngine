@@ -58,9 +58,9 @@ AudioActor
 Player
 1
  Position
-1 0 4
+1 0 3
  Rotation
-0 -0.999999 0 -9.23872e-07
+0 0.707107 0 -0.707105
  Scale
 1 1 1
 Ambient
@@ -118,7 +118,7 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
--0.00678589
+-0.000616223
 next
 Unit
 0
@@ -1259,3 +1259,38 @@ PolyboardActor
 0
 DebugNoteActor
 0
+SpriteSheetActor
+1
+ Position
+2 0 4
+ Rotation
+0 0.994029 0 -0.109117
+ Scale
+1 1 1
+Direction
+0 0 0
+Lifetime
+10 10
+Move Speed
+0 0
+Name
+SpriteSheetActor0
+Rotate
+0 0
+Rotate Speed
+0 0
+Spawn Radius
+0 1
+Spawn Rate
+0.3 0.3
+Texture
+blood_hit.png
+UID
+2920476501
+animationSpeed
+50
+numSheetColumns
+4
+numSheetRows
+4
+next

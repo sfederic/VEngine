@@ -46,7 +46,6 @@ struct SpriteSystem : System
 	void Init();
 	void Reset();
 	void CreateScreenSprite(Sprite sprite);
-	void CreateSpriteSheet(Sprite sprite);
 	void BuildSpriteQuadForViewportRendering(const Sprite& sprite);
 	void BuildSpriteQuadForSpriteSheetRendering(const Sprite& sprite);
 	void BuildSpriteQuadForParticleRendering();
