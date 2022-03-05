@@ -101,6 +101,7 @@ private:
 	void RenderLightMeshes();
 	void RenderSkeletonBones();
 	void RenderPolyboards();
+	void RenderSpriteSheets();
 	void AnimateSkeletalMesh(MeshComponent* mesh);
 	void UpdateLights();
 	void StartGPUQueries();

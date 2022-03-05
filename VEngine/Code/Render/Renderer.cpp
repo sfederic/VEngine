@@ -35,6 +35,7 @@
 #include "Render/SpriteSystem.h"
 #include "Particle/ParticleSystem.h"
 #include "Particle/ParticleEmitter.h"
+#include "Particle/SpriteSheetEmitter.h"
 #include "Particle/Polyboard.h"
 #include "Gameplay/GameInstance.h"
 
@@ -884,6 +885,47 @@ void Renderer::RenderPolyboards()
 	PROFILE_END
 }
 
+void Renderer::RenderSpriteSheets()
+{
+	PROFILE_START
+
+	for (auto spriteSheet : SpriteSheetEmitter::system.components)
+	{
+		if (drawAllAsWireframe)
+		{
+			context->RSSetState(rastStateWireframe);
+		}
+		else
+		{
+			context->RSSetState(rastStateMap[RastStates::noBackCull]->data);
+		}
+
+		ShaderItem* shader = shaderSystem.FindShader(L"Unlit.hlsl");
+		context->VSSetShader(shader->vertexShader, nullptr, 0);
+		context->PSSetShader(shader->pixelShader, nullptr, 0);
+
+		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
+		context->PSSetShaderResources(0, 1, &textureSystem.FindTexture2D(spriteSheet->textureData.filename)->srv);
+
+		spriteSheet->UpdateSprite();
+
+		spriteSystem.BuildSpriteQuadForSpriteSheetRendering(spriteSheet->sprite);
+		spriteSystem.UpdateAndSetSpriteBuffers(context);
+
+		VMath::RotateTowardsCamera(spriteSheet->transform);
+
+		shaderMatrices.model = spriteSheet->GetWorldMatrix();
+		shaderMatrices.MakeModelViewProjectionMatrix();
+
+		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
+		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+
+		context->DrawIndexed(6, 0, 0);
+	}
+
+	PROFILE_END
+}
+
 void Renderer::AnimateSkeletalMesh(MeshComponent* mesh)
 {
 	PROFILE_START
@@ -948,7 +990,6 @@ void Renderer::RenderParticleEmitters()
 		}
 		else
 		{
-			//Careful with back culling visibility here for UI
 			context->RSSetState(rastStateMap["nobackcull"]->data);
 		}
 
