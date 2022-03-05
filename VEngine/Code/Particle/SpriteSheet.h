@@ -12,8 +12,8 @@ struct SpriteSheet : SpatialComponent
 
 	TextureData textureData;
 
-	int numSheetRows = 0;
-	int numSheetColumns = 0;
+	int numSheetRows = 1;
+	int numSheetColumns = 1;
 
 	float animationSpeed = 1.f;
 
