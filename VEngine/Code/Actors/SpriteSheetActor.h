@@ -2,13 +2,13 @@
 #include "Actor.h"
 #include "ActorSystem.h"
 
-struct SpriteSheetEmitter;
+struct SpriteSheet;
 
 struct SpriteSheetActor : Actor
 {
 	ACTOR_SYSTEM(SpriteSheetActor);
 
-	SpriteSheetEmitter* spriteSheetEmitter = nullptr;
+	SpriteSheet* spriteSheet = nullptr;
 
 	SpriteSheetActor();
 	virtual Properties GetProps() override;

@@ -1,10 +1,10 @@
 #include "SpriteSheetActor.h"
-#include "Particle/SpriteSheetEmitter.h"
+#include "Particle/SpriteSheet.h"
 
 SpriteSheetActor::SpriteSheetActor()
 {
-	spriteSheetEmitter = SpriteSheetEmitter::system.Add(this);
-	rootComponent = spriteSheetEmitter;
+	spriteSheet = SpriteSheet::system.Add(this);
+	rootComponent = spriteSheet;
 }
 
 Properties SpriteSheetActor::GetProps()

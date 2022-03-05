@@ -35,7 +35,7 @@
 #include "Render/SpriteSystem.h"
 #include "Particle/ParticleSystem.h"
 #include "Particle/ParticleEmitter.h"
-#include "Particle/SpriteSheetEmitter.h"
+#include "Particle/SpriteSheet.h"
 #include "Particle/Polyboard.h"
 #include "Gameplay/GameInstance.h"
 
@@ -890,7 +890,7 @@ void Renderer::RenderSpriteSheets()
 {
 	PROFILE_START
 
-	for (auto spriteSheet : SpriteSheetEmitter::system.components)
+	for (auto spriteSheet : SpriteSheet::system.components)
 	{
 		if (drawAllAsWireframe)
 		{

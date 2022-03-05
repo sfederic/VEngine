@@ -1,13 +1,13 @@
-#include "SpriteSheetEmitter.h"
+#include "SpriteSheet.h"
 #include "Render/SpriteSystem.h"
 #include "Render/TextureSystem.h"
 #include "Render/PipelineObjects.h"
 
-SpriteSheetEmitter::SpriteSheetEmitter()
+SpriteSheet::SpriteSheet()
 {
 }
 
-void SpriteSheetEmitter::Create()
+void SpriteSheet::Create()
 {
 	sprite.useSourceRect = true;
 	sprite.textureFilename = textureData.filename;
@@ -25,7 +25,7 @@ void SpriteSheetEmitter::Create()
 	spriteSystem.CreateSpriteSheet(sprite);
 }
 
-void SpriteSheetEmitter::Tick(float deltaTime)
+void SpriteSheet::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
@@ -51,16 +51,16 @@ void SpriteSheetEmitter::Tick(float deltaTime)
 	}
 }
 
-Properties SpriteSheetEmitter::GetProps()
+Properties SpriteSheet::GetProps()
 {
-	auto props = __super::GetProps();
+	Properties props("SpriteSheet");
 	props.AddProp(numSheetRows);
 	props.AddProp(numSheetColumns);
 	props.AddProp(animationSpeed);
 	return props;
 }
 
-void SpriteSheetEmitter::UpdateSprite()
+void SpriteSheet::UpdateSprite()
 {
 	Texture2D* texture = textureSystem.FindTexture2D(textureData.filename);
 

@@ -512,7 +512,7 @@
     <ClCompile Include="Code\Actors\Game\GoddessStatue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Particle\SpriteSheetEmitter.cpp">
+    <ClCompile Include="Code\Particle\SpriteSheet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\SpriteSheetActor.cpp">
@@ -979,7 +979,7 @@
     <ClInclude Include="Code\Gameplay\BattleEnums.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Particle\SpriteSheetEmitter.h">
+    <ClInclude Include="Code\Particle\SpriteSheet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\SpriteSheetActor.h">

@@ -2,11 +2,15 @@
 #include "ParticleEmitter.h"
 #include "Render/SpriteSystem.h"
 
-struct SpriteSheetEmitter : ParticleEmitter
+//Holds sprite sheet data. Uses the amount of rows and columns against the texture's width and height.
+//Make sure the image ratio of the sprite sheet is even (eg. 1024x1024).
+struct SpriteSheet : SpatialComponent
 {
-	COMPONENT_SYSTEM(SpriteSheetEmitter);
+	COMPONENT_SYSTEM(SpriteSheet);
 
 	Sprite sprite;
+
+	TextureData textureData;
 
 	int numSheetRows = 0;
 	int numSheetColumns = 0;
@@ -22,7 +26,7 @@ public:
 
 	bool loopAnimation = false;
 
-	SpriteSheetEmitter();
+	SpriteSheet();
 	virtual void Tick(float deltaTime) override;
 	virtual void Create() override;
 	virtual Properties GetProps() override;
