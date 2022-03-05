@@ -3,7 +3,6 @@
 
 ParticleEmitter::ParticleEmitter()
 {
-	direction = XMFLOAT3(0.f, 1.f, 0.f);
 }
 
 void ParticleEmitter::CreateParticle(Particle particle)
