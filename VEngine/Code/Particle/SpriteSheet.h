@@ -15,7 +15,7 @@ struct SpriteSheet : SpatialComponent
 	int numSheetRows = 1;
 	int numSheetColumns = 1;
 
-	float animationSpeed = 1.f;
+	float animationSpeed = 40.f;
 
 private:
 	float animationTimer = 0.f;
