@@ -13,6 +13,7 @@
 #include "UI/MemoryTransferWidget.h"
 #include "Input.h"
 #include "Log.h"
+#include "Particle/SpriteSheet.h"
 
 namespace GameUtils
 {
@@ -59,6 +60,15 @@ namespace GameUtils
 	void CameraShake(float shake)
 	{
 		activeCamera->shakeLevel = shake;
+	}
+
+	SpriteSheet* SpawnSpriteSheet(std::string textureFilename, XMFLOAT3 position, bool loop)
+	{
+		auto spriteSheet = SpriteSheet::system.Add();
+		spriteSheet->SetPosition(position);
+		spriteSheet->textureData.filename = textureFilename;
+		spriteSheet->loopAnimation = loop;
+		return spriteSheet;
 	}
 
 	void PlayAudioOneShot(const std::string audioFilename)

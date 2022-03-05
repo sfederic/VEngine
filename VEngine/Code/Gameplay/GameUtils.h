@@ -1,9 +1,13 @@
 #pragma once
 #include <string>
+#include <DirectXMath.h>
+
+using namespace DirectX;
 
 struct Player;
 struct Grid;
 struct Actor;
+struct SpriteSheet;
 
 //Utility functions for in-game stuff
 namespace GameUtils
@@ -17,6 +21,8 @@ namespace GameUtils
 	void SetActiveCameraTargetAndZoomIn(Actor* newTarget);
 	void SetActiveCameraTargetAndZoomOut(Actor* newTarget);
 	void CameraShake(float shake);
+
+	SpriteSheet* SpawnSpriteSheet(std::string textureFilename, XMFLOAT3 position, bool loop);
 
 	void PlayAudioOneShot(const std::string audioFilename);
 
