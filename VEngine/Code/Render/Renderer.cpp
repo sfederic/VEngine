@@ -581,6 +581,10 @@ void Renderer::RenderBounds()
 		context->VSSetShader(shader->vertexShader, nullptr, 0);
 		context->PSSetShader(shader->pixelShader, nullptr, 0);
 
+		//@Todo: there's a weird error here where if you create enough lights in the map (about 40),
+		//the debug mesh actors will crash here. Tried putting the Debug Actors as global pointers
+		//instead of being static, but then Direct2D swapchain/rendertarget errors would happen.
+		//Feels like it might be the GPU doing some funny memory thing.
 		context->IASetVertexBuffers(0, 1, &debugBox.boxMesh->pso->vertexBuffer->data, &stride, &offset);
 
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
