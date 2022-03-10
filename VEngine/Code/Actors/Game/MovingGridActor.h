@@ -9,12 +9,13 @@ struct MovingGridActor : GridActor
 
 	XMFLOAT3 moveDirection;
 
-private:
-	XMVECTOR nextPos;
-
-public:
 	float moveSpeed = 1.0f;
 
+private:
+	XMVECTOR nextPos;
+	bool isMoving = false;
+
+public:
 	MovingGridActor();
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
