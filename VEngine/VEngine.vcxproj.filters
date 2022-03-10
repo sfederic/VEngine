@@ -518,6 +518,9 @@
     <ClCompile Include="Code\Actors\SpriteSheetActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\Game\MovingGridActor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -983,6 +986,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\SpriteSheetActor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\MovingGridActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

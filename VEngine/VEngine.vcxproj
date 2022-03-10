@@ -231,6 +231,7 @@
     <ClCompile Include="Code\Actors\Game\GoddessStatue.cpp" />
     <ClCompile Include="Code\Particle\SpriteSheet.cpp" />
     <ClCompile Include="Code\Actors\SpriteSheetActor.cpp" />
+    <ClCompile Include="Code\Actors\Game\MovingGridActor.cpp" />
     <ClInclude Include="Code\Gameplay\BattleEnums.h" />
     <ClInclude Include="Code\Particle\FireParticle.h" />
     <ClInclude Include="Code\Quests\Quest.h" />
@@ -460,6 +461,7 @@
     <ClInclude Include="Code\Actors\Game\GoddessStatue.h" />
     <ClInclude Include="Code\Particle\SpriteSheet.h" />
     <ClInclude Include="Code\Actors\SpriteSheetActor.h" />
+    <ClInclude Include="Code\Actors\Game\MovingGridActor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
