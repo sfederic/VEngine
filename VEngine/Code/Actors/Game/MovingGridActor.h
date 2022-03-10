@@ -9,8 +9,10 @@ struct MovingGridActor : GridActor
 
 	XMFLOAT3 moveDirection;
 
+private:
 	XMVECTOR nextPos;
 
+public:
 	float moveSpeed = 1.0f;
 
 	MovingGridActor();
