@@ -42,7 +42,9 @@ ShaderItem* ShaderSystem::FindShader(std::wstring shaderName)
     auto shaderIt = shaderMap.find(shaderName);
     if (shaderIt == shaderMap.end())
     {
-        return nullptr;
+        Log("%S shader not found.", shaderName);
+        //@Todo: keep an eye on this. Might be better to always return nullptr
+        return shaderMap.find(L"DefaultShader.hlsl")->second;
     }
 
     return shaderIt->second;
