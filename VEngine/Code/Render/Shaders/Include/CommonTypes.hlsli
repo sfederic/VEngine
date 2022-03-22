@@ -22,10 +22,9 @@ struct Material
 	float2 uvOffset;
 	float2 uvScale;
 	float uvRotation;
-	float specularPower;
+    float roughness;
 	bool useTexture;
-
-	float padding[1];
+    float pad[1];
 };
 
 cbuffer cbMaterials : register(b1)
@@ -84,58 +83,84 @@ cbuffer cbMeshData : register(b5)
 	float3 meshPosition;
 }
 
+//Stole all this PBR code from Frostbite https://www.ea.com/frostbite/news/moving-frostbite-to-pb
+//Some more good references from https://blog.selfshadow.com/publications/s2013-shading-course/#course_content (UE4, Blackops)
+//And also the dudes at Tri-Ace https://research.tri-ace.com/
+float3 F_Schlick(in float3 f0, in float f90, in float u)
+{
+	return f0 + (f90 - f0) * pow(1.f - u , 5.f);
+}
+
+float V_SmithGGXCorrelated(float NdotL, float NdotV, float alphaG)
+{
+	float alphaG2 = alphaG * alphaG;
+	float Lambda_GGXV = NdotL * sqrt((-NdotV * alphaG2 + NdotV) * NdotV + alphaG2);
+	float Lambda_GGXL = NdotV * sqrt((-NdotL * alphaG2 + NdotL) * NdotL + alphaG2);
+	return 0.5f / (Lambda_GGXV + Lambda_GGXL);
+}
+
+float D_GGX(float NdotH, float m)
+{
+	float m2 = m * m;
+	float f = (NdotH * m2 - NdotH) * NdotH + 1;
+	return m2 / (f * f);
+}
+
 float4 CalcDiffuse(Light light, float3 L, float3 N)
 {
 	float NdotL = max(0.0, dot(N, L));
 	return (material.ambient * NdotL) / PI;
 }
 
-float4 CalcSpecular(Light light, float3 V, float3 L, float3 N)
+float4 CalcSpecular(float NdotV, float NdotL, float NdotH, float LdotH, float roughness)
 {
-	[flatten]
-	if (material.specularPower == 0.0)
-	{
-		float4 zeroSpecular = float4(0.f, 0.f, 0.f, 0.f);
-		return zeroSpecular;
-	}
-
-	float3 R = normalize(reflect(-L, N));
-	float RdotV = max(dot(V, R), 0.0);
-	return light.colour * pow(RdotV, material.specularPower);
-}
-
-LightingResult CalcDirectionalLight(Light light, float3 view, float3 normal)
-{
-	LightingResult result;
-
-	float3 lightDir = -light.direction.xyz;
-	result.diffuse = CalcDiffuse(light, lightDir, normal);
-	result.specular = CalcSpecular(light, view, lightDir, normal);
-
-	return result;
+    float3 F = F_Schlick(1.0f, 1.0f, LdotH);
+    float Vis = V_SmithGGXCorrelated(NdotV, NdotL, roughness);
+    float D = D_GGX(NdotH, roughness);
+    float3 Fr = D * F * Vis / PI;
+    return float4(Fr, 1.0f) * material.specular;
 }
 
 float CalcAttenuation(Light light, float d)
 {
-	return 1.0f / (light.constantAtten + light.linearAtten * d + light.quadraticAtten * d * d);
+    return 1.0f / (light.constantAtten + light.linearAtten * d + light.quadraticAtten * d * d);
+}
+
+LightingResult CalcDirectionalLight(Light light, float3 normal, float3 V)
+{
+    float3 L = -light.direction.xyz;
+    float3 H = normalize(V + L);
+
+	//@Todo: gotta consolite all these dots across the functions
+    float NdotV = abs(dot(normal, V)) + 1e-5f;
+    float NdotL = saturate(dot(normal, L));
+    float NdotH = saturate(dot(normal, H));
+    float LdotH = saturate(dot(L, H));
+
+    LightingResult result;
+	result.diffuse = CalcDiffuse(light, L, normal);
+	result.specular = CalcSpecular(NdotV, NdotL, NdotH, LdotH, material.roughness);
+	return result;
 }
 
 LightingResult CalcPointLight(Light light, float3 V, float4 P, float3 N)
 {
-	LightingResult result;
-	result.diffuse = float4(0.f, 0.f, 0.f, 0.f);
-	result.specular = float4(0.f, 0.f, 0.f, 0.f);
-
 	float3 L = (light.position - P).xyz;
 	float distance = length(L);
 	L = L / distance;
 
 	float attenuation = CalcAttenuation(light, distance);
 
+    float3 H = normalize(V + L);
+
+    float NdotV = abs(dot(N, V)) + 1e-5f;
+    float NdotL = saturate(dot(N, -L));
+    float NdotH = saturate(dot(N, H));
+    float LdotH = saturate(dot(-L, H));
+
+    LightingResult result;
 	result.diffuse = CalcDiffuse(light, L, N) * attenuation;
-
-	result.specular = CalcSpecular(light, V, L, N) * attenuation;
-
+	result.specular = CalcSpecular(NdotV, NdotL, NdotH, LdotH, material.roughness) * attenuation;
 	return result;
 }
 
@@ -158,8 +183,15 @@ LightingResult CalcSpotLight(Light light, float3 V, float4 P, float3 N)
 	float attenuation = CalcAttenuation(light, distance);
 	float spotIntensity = CalcSpotCone(light, L);
 
+    float3 H = normalize(V + L);
+
+    float NdotV = abs(dot(N, V)) + 1e-5f;
+    float NdotL = saturate(dot(N, L));
+    float NdotH = saturate(dot(N, H));
+    float LdotH = saturate(dot(L, H));
+
 	result.diffuse = CalcDiffuse(light, L, N) * attenuation * spotIntensity;
-	result.specular = CalcSpecular(light, V, L, N) * attenuation * spotIntensity;
+    result.specular = CalcSpecular(NdotV, NdotL, NdotH, LdotH, material.roughness) * attenuation * spotIntensity;
 
 	return result;
 }
@@ -193,10 +225,11 @@ LightingResult CalcForwardLighting(float3 V, float4 position, float3 normal)
 			break;
 
 		case DIRECTIONAL_LIGHT:
-			result = CalcDirectionalLight(lights[i], V, normal);
+			result = CalcDirectionalLight(lights[i], normal, V);
 			break;
 		}
 
+		//Add the light's colour
         result.diffuse *= lights[i].colour;
         result.specular *= lights[i].colour;
 
