@@ -444,7 +444,7 @@ void Renderer::Render()
 	MapBuffer(cbTime, &timeData, sizeof(ShaderTimeData));
 	context->VSSetConstantBuffers(cbTimeRegister, 1, &cbTime);
 
-	RenderShadowPass();
+	//RenderShadowPass();
 	RenderMeshComponents();
 	RenderInstanceMeshComponents();
 	RenderPolyboards();
