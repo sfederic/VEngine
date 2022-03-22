@@ -87,7 +87,7 @@ cbuffer cbMeshData : register(b5)
 float4 CalcDiffuse(Light light, float3 L, float3 N)
 {
 	float NdotL = max(0.0, dot(N, L));
-	return (light.colour * NdotL) / PI;
+	return (material.ambient * NdotL) / PI;
 }
 
 float4 CalcSpecular(Light light, float3 V, float3 L, float3 N)
@@ -196,6 +196,9 @@ LightingResult CalcForwardLighting(float3 V, float4 position, float3 normal)
 			result = CalcDirectionalLight(lights[i], V, normal);
 			break;
 		}
+
+        result.diffuse *= lights[i].colour;
+        result.specular *= lights[i].colour;
 
 		endResult.diffuse += result.diffuse;
 		endResult.specular += result.specular;
