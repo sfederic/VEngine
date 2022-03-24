@@ -116,6 +116,7 @@ cbuffer cbMeshData : register(b5)
 }
 
 //Stole all this PBR code from Frostbite https://www.ea.com/frostbite/news/moving-frostbite-to-pb
+//because it's specular calcs looked the simplest.
 //Some more good references from https://blog.selfshadow.com/publications/s2013-shading-course/#course_content (UE4, Blackops)
 //And also the dudes at Tri-Ace https://research.tri-ace.com/
 float3 F_Schlick(in float3 f0, in float f90, in float u)
@@ -153,6 +154,7 @@ float4 CalcSpecular(Light light, float NdotV, float NdotL, float NdotH, float Ld
     return float4(Fr, 1.0f) * light.colour;
 }
 
+//@Todo: attenuation can stay for now, but probably want squared falloff for point/spot lights to match PBR
 float CalcAttenuation(Light light, float d)
 {
     return 1.0f / (light.constantAtten + light.linearAtten * d + light.quadraticAtten * d * d);
