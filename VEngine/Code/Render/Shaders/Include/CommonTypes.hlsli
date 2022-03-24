@@ -139,10 +139,9 @@ float D_GGX(float NdotH, float m)
 	return m2 / (f * f);
 }
 
-float4 CalcDiffuse(Light light, float3 L, float3 N)
+float4 CalcDiffuse(Light light, float3 L, float3 N, float LdotH, float NdotL, float NdotV)
 {
-	float NdotL = max(0.0, dot(N, L));
-	return (light.colour * NdotL) / PI;
+    return (light.colour * NdotL) / PI;
 }
 
 float4 CalcSpecularPBR(Light light, float NdotV, float NdotL, float NdotH, float LdotH)
@@ -163,46 +162,29 @@ float4 CalcSpecularBlinnPhong(Light light, float3 normal, float3 lightDir, float
     return spec * light.colour;
 }
 
-//@Todo: attenuation can stay for now, but probably want squared falloff for point/spot lights to match PBR
+//@Todo: attenuation can stay for now, but probably want squared falloff for point/spot lights to match PBR.
+//Makes parameters easier to tune too.
 float CalcAttenuation(Light light, float d)
 {
     return 1.0f / (light.constantAtten + light.linearAtten * d + light.quadraticAtten * d * d);
 }
 
-LightingResult CalcDirectionalLight(Light light, float3 normal, float3 V)
+LightingResult CalcDirectionalLight(Light light, float3 normal, float3 V, float3 L,
+	float distance, float NdotV, float NdotL, float NdotH, float LdotH)
 {
-    float3 L = -light.direction.xyz;
-    float3 H = normalize(V + L);
-
-	//@Todo: gotta consolite all these dots across the functions
-    float NdotV = abs(dot(normal, V)) + 1e-5f;
-    float NdotL = saturate(dot(normal, L));
-    float NdotH = saturate(dot(normal, H));
-    float LdotH = saturate(dot(L, H));
-
     LightingResult result;
-	result.diffuse = CalcDiffuse(light, L, normal);
+	result.diffuse = CalcDiffuse(light, L, normal, LdotH, NdotL, NdotV);
 	result.specular = CalcSpecularPBR(light, NdotV, NdotL, NdotH, LdotH);
 	return result;
 }
 
-LightingResult CalcPointLight(Light light, float3 V, float4 P, float3 N)
+LightingResult CalcPointLight(Light light, float3 V, float4 P, float3 N, float3 L,
+	float distance, float NdotV, float NdotL, float NdotH, float LdotH)
 {
-	float3 L = (light.position - P).xyz;
-	float distance = length(L);
-	L = L / distance;
-
 	float attenuation = CalcAttenuation(light, distance);
 
-    float3 H = normalize(V + L);
-
-    float NdotV = abs(dot(N, V)) + 1e-5f;
-    float NdotL = saturate(dot(N, -L));
-    float NdotH = saturate(dot(N, H));
-    float LdotH = saturate(dot(-L, H));
-
     LightingResult result;
-	result.diffuse = CalcDiffuse(light, L, N) * attenuation;
+    result.diffuse = CalcDiffuse(light, L, N, LdotH, NdotL, NdotV) * attenuation;
     result.specular = CalcSpecularPBR(light, NdotV, NdotL, NdotH, LdotH) * attenuation;
 	return result;
 }
@@ -215,25 +197,15 @@ float CalcSpotCone(Light light, float3 L)
 	return smoothstep(minCos, maxCos, cosAngle);
 }
 
-LightingResult CalcSpotLight(Light light, float3 V, float4 P, float3 N)
+LightingResult CalcSpotLight(Light light, float3 V, float4 P, float3 N, float3 L,
+	float distance, float NdotV, float NdotL, float NdotH, float LdotH)
 {
 	LightingResult result;
-
-	float3 L = (light.position - P).xyz;
-	float distance = length(L);
-	L = L / distance;
 
 	float attenuation = CalcAttenuation(light, distance);
 	float spotIntensity = CalcSpotCone(light, L);
 
-    float3 H = normalize(V + L);
-
-    float NdotV = abs(dot(N, V)) + 1e-5f;
-    float NdotL = saturate(dot(N, L));
-    float NdotH = saturate(dot(N, H));
-    float LdotH = saturate(dot(L, H));
-
-	result.diffuse = CalcDiffuse(light, L, N) * attenuation * spotIntensity;
+    result.diffuse = CalcDiffuse(light, L, N, LdotH, NdotL, NdotV) * attenuation * spotIntensity;
     result.specular = CalcSpecularPBR(light, NdotV, NdotL, NdotH, LdotH) * attenuation * spotIntensity;
 
 	return result;
@@ -245,6 +217,8 @@ LightingResult CalcForwardLighting(float3 V, float4 position, float3 normal)
 	endResult.diffuse = float4(0.f, 0.f, 0.f, 0.f);
 	endResult.specular = float4(0.f, 0.f, 0.f, 0.f);
 
+    float NdotV = abs(dot(normal, V));
+
 	[unroll]
 	for (int i = 0; i < numLights; i++)
 	{
@@ -253,22 +227,34 @@ LightingResult CalcForwardLighting(float3 V, float4 position, float3 normal)
 			continue;
 		}
 
+		//Dot products and vectors
+        float3 L = (lights[i].position - position).xyz;
+        float distance = length(L);
+        L = L / distance;
+
+        float3 H = normalize(V + L);
+
+        float NdotL = saturate(dot(normal, L));
+        float NdotH = saturate(dot(normal, H));
+        float LdotH = saturate(dot(L, H));
+
 		LightingResult result;
 		result.diffuse = float4(0.f, 0.f, 0.f, 0.f);
 		result.specular = float4(0.f, 0.f, 0.f, 0.f);
 
+		//Main light switch calc
 		switch (lights[i].lightType)
 		{
 		case POINT_LIGHT:
-			result = CalcPointLight(lights[i], V, position, normal);
+			result = CalcPointLight(lights[i], V, position, normal, L, distance, NdotV, NdotL, NdotH, LdotH);
 			break;
 
 		case SPOT_LIGHT:
-			result = CalcSpotLight(lights[i], V, position, normal);
+            result = CalcSpotLight(lights[i], V, position, normal, L, distance, NdotV, NdotL, NdotH, LdotH);
 			break;
 
 		case DIRECTIONAL_LIGHT:
-			result = CalcDirectionalLight(lights[i], normal, V);
+            result = CalcDirectionalLight(lights[i], normal, V, L, distance, NdotV, NdotL, NdotH, LdotH);
 			break;
 		}
 
@@ -292,9 +278,9 @@ float CalcShadowFactor(float4 shadowPos)
 
 	const float2 offsets[9] =
 	{
-	float2(-dx, -dx), float2(0.0f, -dx), float2(dx, -dx),
-	float2(-dx, 0.0f), float2(0.0f, 0.0f), float2(dx, 0.0f),
-	float2(-dx, +dx), float2(0.0f, +dx), float2(dx, +dx)
+		float2(-dx, -dx), float2(0.0f, -dx), float2(dx, -dx),
+		float2(-dx, 0.0f), float2(0.0f, 0.0f), float2(dx, 0.0f),
+		float2(-dx, +dx), float2(0.0f, +dx), float2(dx, +dx)
 	};
 
 	[unroll]
