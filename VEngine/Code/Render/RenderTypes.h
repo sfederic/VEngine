@@ -135,20 +135,15 @@ enum class LightType : int
 	Spot = 2
 };
 
-//Still the best tutorial for lighting in D3D11.
-//REF:https://www.3dgep.com/texturing-lighting-directx-11/#Attenuation
 struct Light
 {
 	XMFLOAT4 position = XMFLOAT4(0.f, 0.f, 0.f, 1.f);
 	XMFLOAT4 direction = XMFLOAT4(0.f, 0.f, 0.f, 0.f);
 	XMFLOAT4 colour = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
 	float spotAngle = 90.f;
-	float constantAtten = 0.f;
-	float linearAtten = 0.f;
-	float quadraticAtten = 0.f;
+	float intensity = 1.0f;
 	int lightType = 0;
 	int enabled = 1;
-	float pad[2];
 };
 
 struct ShaderLights
