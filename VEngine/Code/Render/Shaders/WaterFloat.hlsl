@@ -1,6 +1,6 @@
 //Bobs actor/mesh up and down. Meant to be used on water or whatever.
 
-#include "Include/CommonTypes.hlsli"
+#include "Include/Common.hlsli"
 #include "Include/TransformOut.hlsli"
 
 VS_OUT VSMain(VS_IN i)

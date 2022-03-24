@@ -469,7 +469,7 @@
     <ClInclude Include="Code\Editor\imgui_forward_declare.h" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Code\Render\Shaders\Include\CommonTypes.hlsli">
+    <FxCompile Include="Code\Render\Shaders\Include\Common.hlsli">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <FileType>Document</FileType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>

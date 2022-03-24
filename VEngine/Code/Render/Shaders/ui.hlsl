@@ -1,4 +1,4 @@
-#include "Include/CommonTypes.hlsli"
+#include "Include/Common.hlsli"
 
 struct TransformOut
 {
