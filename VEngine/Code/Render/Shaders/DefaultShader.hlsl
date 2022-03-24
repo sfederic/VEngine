@@ -19,6 +19,9 @@ float4 PSMain(VS_OUT i) : SV_Target
 
 	LightingResult endResult = CalcForwardLighting(V, position, normal);
 
+    endResult.diffuse *= material.ambient;
+    endResult.specular *= material.ambient;
+
     //float4 shadowColour = float4(0.f, 0.f, 0.f, 0.f);
     //if (shadowsEnabled)
     //{

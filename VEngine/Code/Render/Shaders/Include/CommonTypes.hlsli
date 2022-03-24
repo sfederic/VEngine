@@ -109,16 +109,16 @@ float D_GGX(float NdotH, float m)
 float4 CalcDiffuse(Light light, float3 L, float3 N)
 {
 	float NdotL = max(0.0, dot(N, L));
-	return (material.ambient * NdotL) / PI;
+	return (light.colour * NdotL) / PI;
 }
 
-float4 CalcSpecular(float NdotV, float NdotL, float NdotH, float LdotH, float roughness)
+float4 CalcSpecular(Light light, float NdotV, float NdotL, float NdotH, float LdotH, float roughness)
 {
     float3 F = F_Schlick(1.0f, 1.0f, LdotH);
     float Vis = V_SmithGGXCorrelated(NdotV, NdotL, roughness);
     float D = D_GGX(NdotH, roughness);
     float3 Fr = D * F * Vis / PI;
-    return float4(Fr, 1.0f) * material.specular;
+    return float4(Fr, 1.0f) * light.colour;
 }
 
 float CalcAttenuation(Light light, float d)
@@ -139,7 +139,7 @@ LightingResult CalcDirectionalLight(Light light, float3 normal, float3 V)
 
     LightingResult result;
 	result.diffuse = CalcDiffuse(light, L, normal);
-	result.specular = CalcSpecular(NdotV, NdotL, NdotH, LdotH, material.roughness);
+	result.specular = CalcSpecular(light, NdotV, NdotL, NdotH, LdotH, material.roughness);
 	return result;
 }
 
@@ -160,7 +160,7 @@ LightingResult CalcPointLight(Light light, float3 V, float4 P, float3 N)
 
     LightingResult result;
 	result.diffuse = CalcDiffuse(light, L, N) * attenuation;
-	result.specular = CalcSpecular(NdotV, NdotL, NdotH, LdotH, material.roughness) * attenuation;
+	result.specular = CalcSpecular(light, NdotV, NdotL, NdotH, LdotH, material.roughness) * attenuation;
 	return result;
 }
 
@@ -191,7 +191,7 @@ LightingResult CalcSpotLight(Light light, float3 V, float4 P, float3 N)
     float LdotH = saturate(dot(L, H));
 
 	result.diffuse = CalcDiffuse(light, L, N) * attenuation * spotIntensity;
-    result.specular = CalcSpecular(NdotV, NdotL, NdotH, LdotH, material.roughness) * attenuation * spotIntensity;
+    result.specular = CalcSpecular(light, NdotV, NdotL, NdotH, LdotH, material.roughness) * attenuation * spotIntensity;
 
 	return result;
 }
@@ -228,10 +228,6 @@ LightingResult CalcForwardLighting(float3 V, float4 position, float3 normal)
 			result = CalcDirectionalLight(lights[i], normal, V);
 			break;
 		}
-
-		//Add the light's colour
-        result.diffuse *= lights[i].colour;
-        result.specular *= lights[i].colour;
 
 		endResult.diffuse += result.diffuse;
 		endResult.specular += result.specular;
