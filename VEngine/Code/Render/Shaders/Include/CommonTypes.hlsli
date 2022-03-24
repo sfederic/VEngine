@@ -2,6 +2,38 @@ static const float SMAP_SIZE = 2048.0f;
 static const float SMAP_DX = 1.0f / SMAP_SIZE;
 static const float PI = 3.14159265f;
 
+struct InstanceData
+{
+    float4x4 modelMatrix;
+    float4 colour;
+};
+
+struct VS_IN
+{
+    float3 pos : POSITION;
+    float2 uv : TEXCOORD;
+    float3 normal : NORMAL;
+    float3 weights : WEIGHTS;
+    uint4 boneIndices : BONEINDICES;
+    uint instanceID : SV_InstanceID;
+};
+
+struct VS_OUT
+{
+    float4 pos : SV_POSITION;
+    float4 posWS : POSITION;
+    float2 uv : TEXCOORD0;
+    float3 normal : NORMAL;
+    float4 shadowPos : TEXCOORD1;
+    uint instanceID : SV_InstanceID;
+};
+
+Texture2D t : register(t0);
+Texture2D shadowMap : register(t1);
+SamplerState s : register(s0);
+SamplerComparisonState shadowSampler : register(s1);
+StructuredBuffer<InstanceData> instanceData : register(t3);
+
 cbuffer cbMatrices : register(b0)
 {
 	float4x4 model;
@@ -238,39 +270,6 @@ LightingResult CalcForwardLighting(float3 V, float4 position, float3 normal)
 
 	return endResult;
 }
-
-struct InstanceData
-{
-	float4x4 modelMatrix;
-	float4 colour;
-};
-
-StructuredBuffer<InstanceData> instanceData : register(t3);
-
-struct VS_IN
-{
-	float3 pos : POSITION;
-	float2 uv : TEXCOORD;
-	float3 normal : NORMAL;
-	float3 weights : WEIGHTS;
-	uint4 boneIndices : BONEINDICES;
-	uint instanceID : SV_InstanceID;
-};
-
-struct VS_OUT
-{
-	float4 pos : SV_POSITION;
-	float4 posWS : POSITION;
-	float2 uv : TEXCOORD0;
-	float3 normal : NORMAL;
-	float4 shadowPos : TEXCOORD1;
-	uint instanceID : SV_InstanceID;
-};
-
-Texture2D t : register(t0);
-Texture2D shadowMap : register(t1);
-SamplerState s : register(s0);
-SamplerComparisonState shadowSampler : register(s1);
 
 float CalcShadowFactor(float4 shadowPos)
 {
