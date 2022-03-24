@@ -24,7 +24,7 @@ struct MaterialShaderData
 	XMFLOAT2 uvOffset = XMFLOAT2(0.f, 0.f);
 	XMFLOAT2 uvScale = XMFLOAT2(1.f, 1.f);
 	float uvRotation = 0.f;
-	float roughness = 0.f;
+	float smoothness = 0.f;
 	int useTexture; //Keep in mind that bools in HLSL are 4 bytes
 private:
 	float padding[1];

@@ -54,7 +54,7 @@ struct Material
 	float2 uvOffset;
 	float2 uvScale;
 	float uvRotation;
-    float roughness;
+    float smoothness;
 	bool useTexture;
     float pad[1];
 };
@@ -143,11 +143,11 @@ float4 CalcDiffuse(Light light, float3 L, float3 N, float LdotH, float NdotL, fl
 
 float4 CalcSpecularPBR(Light light, float NdotV, float NdotL, float NdotH, float LdotH)
 {
-    float roughness = material.roughness;
+    float smoothness = material.smoothness;
 
     float3 F = F_Schlick(1.0f, 1.0f, LdotH);
-    float Vis = V_SmithGGXCorrelated(NdotV, NdotL, roughness);
-    float D = D_GGX(NdotH, roughness);
+    float Vis = V_SmithGGXCorrelated(NdotV, NdotL, smoothness);
+    float D = D_GGX(NdotH, smoothness);
     float3 Fr = D * F * Vis / PI;
     return float4(Fr, 1.0f) * light.colour;
 }
@@ -159,8 +159,6 @@ float4 CalcSpecularBlinnPhong(Light light, float3 normal, float3 lightDir, float
     return spec * light.colour;
 }
 
-//@Todo: attenuation can stay for now, but probably want squared falloff for point/spot lights to match PBR.
-//Makes parameters easier to tune too.
 float CalcFalloff(Light light, float distance)
 {
     return light.intensity / max(pow(distance, 2.f), 0.001f);

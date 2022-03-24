@@ -146,6 +146,6 @@ Properties Material::GetProps()
 	props.Add("UvRotationSpeed", &uvRotationSpeed);
 	props.Add("Ambient", &materialShaderData.ambient);
 	props.Add("Specular", &materialShaderData.specular);
-	props.Add("Roughness", &materialShaderData.roughness);
+	props.Add("Smoothness", &materialShaderData.smoothness);
 	return props;
 }
