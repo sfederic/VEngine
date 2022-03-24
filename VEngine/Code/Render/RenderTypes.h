@@ -140,8 +140,8 @@ struct Light
 	XMFLOAT4 position = XMFLOAT4(0.f, 0.f, 0.f, 1.f);
 	XMFLOAT4 direction = XMFLOAT4(0.f, 0.f, 0.f, 0.f);
 	XMFLOAT4 colour = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
-	float spotAngle = 90.f;
-	float intensity = 1.0f;
+	float spotAngle = 70.f;
+	float intensity = 25.0f;
 	int lightType = 0;
 	int enabled = 1;
 };
