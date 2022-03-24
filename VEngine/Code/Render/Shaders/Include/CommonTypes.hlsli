@@ -75,12 +75,9 @@ struct Light
 	float4 direction;
 	float4 colour;
 	float spotAngle;
-	float constantAtten;
-	float linearAtten;
-	float quadraticAtten;
+    float intensity;
 	int lightType;
 	bool enabled;
-	int2 pad;
 };
 
 static const int MAX_LIGHTS = 8;
@@ -164,9 +161,9 @@ float4 CalcSpecularBlinnPhong(Light light, float3 normal, float3 lightDir, float
 
 //@Todo: attenuation can stay for now, but probably want squared falloff for point/spot lights to match PBR.
 //Makes parameters easier to tune too.
-float CalcAttenuation(Light light, float d)
+float CalcFalloff(Light light, float distance)
 {
-    return 1.0f / (light.constantAtten + light.linearAtten * d + light.quadraticAtten * d * d);
+    return light.intensity / max(pow(distance, 2.f), 0.001f);
 }
 
 LightingResult CalcDirectionalLight(Light light, float3 normal, float3 V, float3 L,
@@ -181,11 +178,11 @@ LightingResult CalcDirectionalLight(Light light, float3 normal, float3 V, float3
 LightingResult CalcPointLight(Light light, float3 V, float4 P, float3 N, float3 L,
 	float distance, float NdotV, float NdotL, float NdotH, float LdotH)
 {
-	float attenuation = CalcAttenuation(light, distance);
+	float falloff = CalcFalloff(light, distance);
 
     LightingResult result;
-    result.diffuse = CalcDiffuse(light, L, N, LdotH, NdotL, NdotV) * attenuation;
-    result.specular = CalcSpecularPBR(light, NdotV, NdotL, NdotH, LdotH) * attenuation;
+    result.diffuse = CalcDiffuse(light, L, N, LdotH, NdotL, NdotV) * falloff;
+    result.specular = CalcSpecularPBR(light, NdotV, NdotL, NdotH, LdotH) * falloff;
 	return result;
 }
 
@@ -202,11 +199,11 @@ LightingResult CalcSpotLight(Light light, float3 V, float4 P, float3 N, float3 L
 {
 	LightingResult result;
 
-	float attenuation = CalcAttenuation(light, distance);
+	float falloff = CalcFalloff(light, distance);
 	float spotIntensity = CalcSpotCone(light, L);
 
-    result.diffuse = CalcDiffuse(light, L, N, LdotH, NdotL, NdotV) * attenuation * spotIntensity;
-    result.specular = CalcSpecularPBR(light, NdotV, NdotL, NdotH, LdotH) * attenuation * spotIntensity;
+    result.diffuse = CalcDiffuse(light, L, N, LdotH, NdotL, NdotV) * falloff * spotIntensity;
+    result.specular = CalcSpecularPBR(light, NdotV, NdotL, NdotH, LdotH) * falloff * spotIntensity;
 
 	return result;
 }
