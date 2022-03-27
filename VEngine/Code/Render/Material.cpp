@@ -147,5 +147,6 @@ Properties Material::GetProps()
 	props.Add("Ambient", &materialShaderData.ambient);
 	props.Add("Specular", &materialShaderData.specular);
 	props.Add("Smoothness", &materialShaderData.smoothness);
+	props.Add("Metallic", &materialShaderData.metallic);
 	return props;
 }

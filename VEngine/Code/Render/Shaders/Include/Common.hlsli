@@ -55,8 +55,8 @@ struct Material
 	float2 uvScale;
 	float uvRotation;
     float smoothness;
+    float metallic;
 	bool useTexture;
-    float pad[1];
 };
 
 cbuffer cbMaterials : register(b1)
@@ -145,10 +145,10 @@ float4 CalcSpecularPBR(Light light, float NdotV, float NdotL, float NdotH, float
 {
     float smoothness = material.smoothness;
 
-    float3 F = F_Schlick(1.0f, 1.0f, LdotH);
+    float3 F = F_Schlick(NdotH, NdotV, LdotH);
     float Vis = V_SmithGGXCorrelated(NdotV, NdotL, smoothness);
     float D = D_GGX(NdotH, smoothness);
-    float3 Fr = D * F * Vis / PI;
+    float3 Fr = D * F * Vis;
     return float4(Fr, 1.0f) * light.colour;
 }
 
