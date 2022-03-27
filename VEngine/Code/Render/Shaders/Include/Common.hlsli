@@ -116,9 +116,9 @@ cbuffer cbMeshData : register(b5)
 //because it's specular calcs looked the simplest.
 //Some more good references from https://blog.selfshadow.com/publications/s2013-shading-course/#course_content (UE4, Blackops)
 //And also the dudes at Tri-Ace https://research.tri-ace.com/
-float3 F_Schlick(in float3 f0, in float f90, in float u)
+float3 F_Schlick(in float3 f0, in float u)
 {
-	return f0 + (f90 - f0) * pow(1.f - u , 5.f);
+	return f0 + (1.f - f0) * pow(1.f - u , 5.f);
 }
 
 float V_SmithGGXCorrelated(float NdotL, float NdotV, float alphaG)
@@ -141,14 +141,17 @@ float4 CalcDiffuse(Light light, float3 L, float3 N, float LdotH, float NdotL, fl
     return (light.colour * NdotL) / PI;
 }
 
-float4 CalcSpecularPBR(Light light, float NdotV, float NdotL, float NdotH, float LdotH)
+float4 CalcSpecularPBR(Light light, float NdotV, float NdotL, float NdotH, float LdotH, float HdotV)
 {
-    float smoothness = material.smoothness;
+    float smoothness = (1.f - material.smoothness) + 0.01f;
 
-    float3 F = F_Schlick(NdotH, NdotV, LdotH);
+    float3 f0 = float3(0.0f, 0.0f, 0.0f);
+    f0 = lerp(f0, material.ambient.xyz, material.metallic);
+	
+    float3 F = F_Schlick(f0, HdotV);
     float Vis = V_SmithGGXCorrelated(NdotV, NdotL, smoothness);
     float D = D_GGX(NdotH, smoothness);
-    float3 Fr = D * F * Vis;
+    float3 Fr = D * F * Vis / PI;
     return float4(Fr, 1.0f) * light.colour;
 }
 
@@ -165,22 +168,22 @@ float CalcFalloff(Light light, float distance)
 }
 
 LightingResult CalcDirectionalLight(Light light, float3 normal, float3 V, float3 L,
-	float distance, float NdotV, float NdotL, float NdotH, float LdotH)
+	float distance, float NdotV, float NdotL, float NdotH, float LdotH, float HdotV)
 {
     LightingResult result;
 	result.diffuse = CalcDiffuse(light, L, normal, LdotH, NdotL, NdotV);
-	result.specular = CalcSpecularPBR(light, NdotV, NdotL, NdotH, LdotH);
+	result.specular = CalcSpecularPBR(light, NdotV, NdotL, NdotH, LdotH, HdotV);
 	return result;
 }
 
 LightingResult CalcPointLight(Light light, float3 V, float4 P, float3 N, float3 L,
-	float distance, float NdotV, float NdotL, float NdotH, float LdotH)
+	float distance, float NdotV, float NdotL, float NdotH, float LdotH, float HdotV)
 {
 	float falloff = CalcFalloff(light, distance);
 
     LightingResult result;
     result.diffuse = CalcDiffuse(light, L, N, LdotH, NdotL, NdotV) * falloff;
-    result.specular = CalcSpecularPBR(light, NdotV, NdotL, NdotH, LdotH) * falloff;
+    result.specular = CalcSpecularPBR(light, NdotV, NdotL, NdotH, LdotH, HdotV) * falloff;
 	return result;
 }
 
@@ -193,7 +196,7 @@ float CalcSpotCone(Light light, float3 L)
 }
 
 LightingResult CalcSpotLight(Light light, float3 V, float4 P, float3 N, float3 L,
-	float distance, float NdotV, float NdotL, float NdotH, float LdotH)
+	float distance, float NdotV, float NdotL, float NdotH, float LdotH, float HdotV)
 {
 	LightingResult result;
 
@@ -201,7 +204,7 @@ LightingResult CalcSpotLight(Light light, float3 V, float4 P, float3 N, float3 L
 	float spotIntensity = CalcSpotCone(light, L);
 
     result.diffuse = CalcDiffuse(light, L, N, LdotH, NdotL, NdotV) * falloff * spotIntensity;
-    result.specular = CalcSpecularPBR(light, NdotV, NdotL, NdotH, LdotH) * falloff * spotIntensity;
+    result.specular = CalcSpecularPBR(light, NdotV, NdotL, NdotH, LdotH, HdotV) * falloff * spotIntensity;
 
 	return result;
 }
@@ -232,7 +235,8 @@ LightingResult CalcForwardLighting(float3 V, float4 position, float3 normal)
         float NdotL = saturate(dot(normal, L));
         float NdotH = saturate(dot(normal, H));
         float LdotH = saturate(dot(L, H));
-
+        float HdotV = saturate(dot(H, V));
+		
 		LightingResult result;
 		result.diffuse = float4(0.f, 0.f, 0.f, 0.f);
 		result.specular = float4(0.f, 0.f, 0.f, 0.f);
@@ -241,15 +245,15 @@ LightingResult CalcForwardLighting(float3 V, float4 position, float3 normal)
 		switch (lights[i].lightType)
 		{
 		case POINT_LIGHT:
-			result = CalcPointLight(lights[i], V, position, normal, L, distance, NdotV, NdotL, NdotH, LdotH);
+			result = CalcPointLight(lights[i], V, position, normal, L, distance, NdotV, NdotL, NdotH, LdotH, HdotV);
 			break;
 
 		case SPOT_LIGHT:
-            result = CalcSpotLight(lights[i], V, position, normal, L, distance, NdotV, NdotL, NdotH, LdotH);
+            result = CalcSpotLight(lights[i], V, position, normal, L, distance, NdotV, NdotL, NdotH, LdotH, HdotV);
 			break;
 
 		case DIRECTIONAL_LIGHT:
-            result = CalcDirectionalLight(lights[i], normal, V, L, distance, NdotV, NdotL, NdotH, LdotH);
+            result = CalcDirectionalLight(lights[i], normal, V, L, distance, NdotV, NdotL, NdotH, LdotH, HdotV);
 			break;
 		}
 
