@@ -162,9 +162,9 @@ float4 CalcSpecularBlinnPhong(Light light, float3 normal, float3 lightDir, float
     return spec * light.colour;
 }
 
-float CalcFalloff(Light light, float distance)
+float CalcFalloff(float intensity, float distance)
 {
-    return light.intensity / max(pow(distance, 2.f), 0.001f);
+    return intensity / max(pow(distance, 2.f), 0.001f);
 }
 
 LightingResult CalcDirectionalLight(Light light, float3 normal, float3 V, float3 L,
@@ -179,7 +179,7 @@ LightingResult CalcDirectionalLight(Light light, float3 normal, float3 V, float3
 LightingResult CalcPointLight(Light light, float3 V, float4 P, float3 N, float3 L,
 	float distance, float NdotV, float NdotL, float NdotH, float LdotH, float HdotV)
 {
-	float falloff = CalcFalloff(light, distance);
+	float falloff = CalcFalloff(light.intensity, distance);
 
     LightingResult result;
     result.diffuse = CalcDiffuse(light, L, N, LdotH, NdotL, NdotV) * falloff;
@@ -200,7 +200,7 @@ LightingResult CalcSpotLight(Light light, float3 V, float4 P, float3 N, float3 L
 {
 	LightingResult result;
 
-	float falloff = CalcFalloff(light, distance);
+	float falloff = CalcFalloff(light.intensity, distance);
 	float spotIntensity = CalcSpotCone(light, L);
 
     result.diffuse = CalcDiffuse(light, L, N, LdotH, NdotL, NdotV) * falloff * spotIntensity;
