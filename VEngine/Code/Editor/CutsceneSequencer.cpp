@@ -16,14 +16,22 @@ void CutsceneSequencer::Tick()
 	ImGui::InputInt("Frame Max", &frameMax);
 	ImGui::PopItemWidth();
 
+	if (ImGui::Button("New"))
+	{
+		Add(0);
+	}
+
 	ImSequencer::Sequencer(this, &currentFrame, &expanded, &selectedEntry, &firstFrame,
 		ImSequencer::SEQUENCER_EDIT_STARTEND | ImSequencer::SEQUENCER_ADD | ImSequencer::SEQUENCER_DEL | ImSequencer::SEQUENCER_COPYPASTE | ImSequencer::SEQUENCER_CHANGE_FRAME);
 
-	if (selectedEntry != -1)
-	{
-		const CutsceneSequenceItem& item = items[selectedEntry];
-		//...
-	}
+	const CutsceneSequenceItem& item = items[currentItemIndex];
+
+	ImGui::Text("Name: %s", item.name.c_str());
+	ImGui::Text("FrameStart: %d", item.frameStart);
+	ImGui::Text("Frame End: %d", item.frameEnd);
+
+	//@Todo: put more timeline specific things here
+	//E.g. actor references, Commands, events, Conditions, etc.
 }
 
 void CutsceneSequencer::Get(int index, int** start, int** end, int* type, unsigned int* color)
@@ -49,6 +57,8 @@ void CutsceneSequencer::Add(int type)
 
 void CutsceneSequencer::DoubleClick(int index)
 {
+	currentItemIndex = index;
+
 	if (items[index].expanded)
 	{
 		items[index].expanded = false;

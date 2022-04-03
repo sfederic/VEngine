@@ -23,6 +23,8 @@ struct CutsceneSequencer : ImSequencer::SequenceInterface
 	bool expanded = true;
 	int currentFrame = 0;
 
+	int currentItemIndex = 0;
+
 	std::vector<CutsceneSequenceItem> items;
 
 	CutsceneSequencer();
