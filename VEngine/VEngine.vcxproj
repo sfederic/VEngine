@@ -113,6 +113,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Editor\ImGuizmo\ImSequencer.cpp" />
     <ClCompile Include="Code\Quests\BlacksmithQuest.cpp" />
     <ClCompile Include="Code\Quests\Quest.cpp" />
     <ClCompile Include="Code\UI\BulletWidget.cpp" />
@@ -232,6 +233,7 @@
     <ClCompile Include="Code\Particle\SpriteSheet.cpp" />
     <ClCompile Include="Code\Actors\SpriteSheetActor.cpp" />
     <ClCompile Include="Code\Actors\Game\MovingGridActor.cpp" />
+    <ClInclude Include="Code\Editor\ImGuizmo\ImSequencer.h" />
     <ClInclude Include="Code\Gameplay\BattleEnums.h" />
     <ClInclude Include="Code\Particle\FireParticle.h" />
     <ClInclude Include="Code\Quests\Quest.h" />
