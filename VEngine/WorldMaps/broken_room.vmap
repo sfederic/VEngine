@@ -18,6 +18,8 @@ Grid Obstacle
 0
 Mesh
 node.fbx
+Metallic
+0
 Name
 Grid0
 Rast State
@@ -28,10 +30,10 @@ Size X
 5
 Size Y
 7
+Smoothness
+0
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
@@ -58,11 +60,11 @@ AudioActor
 Player
 1
  Position
-1 0 2
+2 0 1
  Rotation
-0 0.999999 0 1.49012e-06
+0 -3.27826e-07 0 0.999998
  Scale
-1 1 1
+0.999996 1 0.999996
 Ambient
 1 1 1 1
 Audio Filename
@@ -85,6 +87,8 @@ Loop
 1
 Mesh
 character_test.fbx
+Metallic
+0
 Name
 Player0
 Near Z
@@ -97,10 +101,10 @@ Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+0
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
@@ -118,123 +122,16 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
--9.19998e-05
+-0.000457458
 next
 Unit
 0
 EntranceTrigger
 0
 NPC
-1
- Position
-3 0 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
 0
-Ambient
-1 1 1 1
-Attack Points
-1
-Attack Range
-1
-Battle State
-fight
-Blend State
-null
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Cull
-0
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-3
-Image File
-
-Inspect
-1
-Interact
-1
-Interact Text
-
-Memory Desc
-
-Memory Name
-
-Mesh
-plane.fbx
-Move Points
-1
-Move Speed
-3
-Name
-NPC0
-Obstacle
-0
-Quest Name
-
-Rast State
-nobackcull
-Shader
-DefaultShader.hlsl
-Specular
-1 1 1 1
-Specular Power
-0
-Static
-1
-Texture
-test.png
-UID
-2460757828
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-actorToFocusOn
-
-alwaysActive
-1
-battleStartText
-
-condition
-
-conditionArg
-
-deathText
-
-disableGridInteract
-0
-interactKnownText
-
-numOfAttacks
-1
-spawnText
-
-next
 MeshActor
-24
+25
  Position
 2 -0.5 3
  Rotation
@@ -253,16 +150,18 @@ Grid Obstacle
 0
 Mesh
 node.fbx
+Metallic
+1
 Name
 bottle20
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+0.3
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
@@ -298,16 +197,18 @@ Grid Obstacle
 0
 Mesh
 chair.fbx
+Metallic
+0
 Name
 bottle21
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+0
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
@@ -343,16 +244,18 @@ Grid Obstacle
 0
 Mesh
 chair.fbx
+Metallic
+0
 Name
 bottle22
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+0
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
@@ -388,16 +291,18 @@ Grid Obstacle
 0
 Mesh
 small_table.fbx
+Metallic
+0
 Name
 bottle23
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+0
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
@@ -418,7 +323,7 @@ next
  Position
 2 0 5
  Rotation
--0 -0.0434469 -0 0.999056
+-0 -0.0434467 -0 0.999056
  Scale
 1.25 1 1
 Ambient
@@ -433,16 +338,18 @@ Grid Obstacle
 0
 Mesh
 table.fbx
+Metallic
+0
 Name
 bottle24
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+0
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
@@ -478,16 +385,18 @@ Grid Obstacle
 0
 Mesh
 node.fbx
+Metallic
+0
 Name
 bottle25
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+0
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
@@ -510,7 +419,7 @@ next
  Rotation
 0.707107 -0.707107 4.63629e-08 3.79309e-08
  Scale
-2.99996 0.99999 6.99999
+2.99996 0.999991 7
 Ambient
 1 1 1 1
 Blend State
@@ -523,20 +432,22 @@ Grid Obstacle
 0
 Mesh
 node.fbx
+Metallic
+1
 Name
 bottle26
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+1
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
-wall06.png
+metal_smooth.jpg
 UID
 3799468868
 UvOffset
@@ -548,12 +459,12 @@ UvRotation
 UvRotationSpeed
 0
 UvScale
-1 1
+0.5 0.5
 next
  Position
 2 1 6.5
  Rotation
--0.5 0.5 -0.5 0.5
+0.5 -0.5 0.5 -0.5
  Scale
 3 1 5
 Ambient
@@ -568,20 +479,22 @@ Grid Obstacle
 0
 Mesh
 node.fbx
+Metallic
+0
 Name
 bottle27
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+1
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
-wall06.png
+wall_white.png
 UID
 3799468868
 UvOffset
@@ -589,11 +502,11 @@ UvOffset
 UvOffsetSpeed
 0 0
 UvRotation
-180
+-90
 UvRotationSpeed
 0
 UvScale
-1 1
+1 2
 next
  Position
 2 1 -0.5
@@ -613,16 +526,18 @@ Grid Obstacle
 0
 Mesh
 node.fbx
+Metallic
+0
 Name
 bottle28
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+0
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
@@ -658,16 +573,18 @@ Grid Obstacle
 0
 Mesh
 vase.fbx
+Metallic
+0
 Name
 bottle29
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+0
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
@@ -703,16 +620,18 @@ Grid Obstacle
 0
 Mesh
 vase.fbx
+Metallic
+0
 Name
 bottle210
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+0
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
@@ -748,16 +667,18 @@ Grid Obstacle
 0
 Mesh
 vase.fbx
+Metallic
+0
 Name
 bottle211
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+0
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
@@ -793,16 +714,18 @@ Grid Obstacle
 0
 Mesh
 vase.fbx
+Metallic
+1
 Name
 bottle212
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+0.7
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
@@ -838,16 +761,18 @@ Grid Obstacle
 0
 Mesh
 vase.fbx
+Metallic
+0
 Name
 bottle213
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+0
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
@@ -883,16 +808,18 @@ Grid Obstacle
 0
 Mesh
 pictureframe_square.fbx
+Metallic
+0
 Name
 bottle214
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+0
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
@@ -928,16 +855,18 @@ Grid Obstacle
 0
 Mesh
 pictureframe_square.fbx
+Metallic
+0
 Name
 bottle215
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+0
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
@@ -973,16 +902,18 @@ Grid Obstacle
 0
 Mesh
 pictureframe_square.fbx
+Metallic
+0
 Name
 bottle216
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+0
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
@@ -1018,16 +949,18 @@ Grid Obstacle
 0
 Mesh
 cabinet.fbx
+Metallic
+0
 Name
 bottle217
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+0
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
@@ -1063,16 +996,18 @@ Grid Obstacle
 0
 Mesh
 spear.fbx
+Metallic
+0
 Name
 bottle218
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+0
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
@@ -1108,16 +1043,18 @@ Grid Obstacle
 0
 Mesh
 spear.fbx
+Metallic
+0
 Name
 bottle219
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+0
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
@@ -1138,9 +1075,9 @@ next
  Position
 2.1 0.4 4.9
  Rotation
-0.0308435 0.0308436 0.706433 0.706434
+0.0308435 0.0308436 0.706433 0.706435
  Scale
-0.999994 0.999994 1
+0.999993 0.999993 1
 Ambient
 1 1 1 1
 Blend State
@@ -1153,16 +1090,18 @@ Grid Obstacle
 0
 Mesh
 spear.fbx
+Metallic
+1
 Name
 bottle220
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+0.4
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
@@ -1198,16 +1137,18 @@ Grid Obstacle
 0
 Mesh
 bottle2.fbx
+Metallic
+0
 Name
 bottle221
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+0.77
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
@@ -1243,16 +1184,18 @@ Grid Obstacle
 0
 Mesh
 pictureframe_square.fbx
+Metallic
+0
 Name
 MeshActor22
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+0
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
@@ -1288,16 +1231,18 @@ Grid Obstacle
 0
 Mesh
 pictureframe_square.fbx
+Metallic
+0
 Name
 MeshActor23
 Rast State
 solid
 Shader
 DefaultShader.hlsl
+Smoothness
+0
 Specular
 1 1 1 1
-Specular Power
-0
 Static
 1
 Texture
@@ -1315,27 +1260,110 @@ UvRotationSpeed
 UvScale
 1 1
 next
-DirectionalLightActor
-1
  Position
-2.5 4 3.5
+3 0 4
  Rotation
-0.707279 -0.000172661 0.000172576 0.706934
+0 0 0 1
  Scale
-1.00001 1.00002 1.00002
-Colour
+1 1 1
+Ambient
 1 1 1 1
-LightEnabled
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+cube.fbx
+Metallic
 1
 Name
-DirectionalLightActor0
+MeshActor24
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+1
+Specular
+1 1 1 1
+Static
+1
+Texture
+metal_smooth.jpg
 UID
-3545998161
+3499802893
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
 next
+DirectionalLightActor
+0
 SavePoint
 0
 PointLightActor
-0
+3
+ Position
+3 1 5
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Colour
+1 1 1 1
+Intensity
+5
+LightEnabled
+1
+Name
+PointLightActor0
+UID
+2353664585
+next
+ Position
+0 1 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Colour
+1 1 1 1
+Intensity
+10
+LightEnabled
+1
+Name
+PointLightActor1
+UID
+2353664585
+next
+ Position
+3 2 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Colour
+0.1 0.5 1 1
+Intensity
+10
+LightEnabled
+1
+Name
+PointLightActor2
+UID
+2353664585
+next
 SpotLightActor
 0
 FenceActor
@@ -1367,25 +1395,6 @@ PolyboardActor
 DebugNoteActor
 0
 SpriteSheetActor
-1
- Position
-1 0 3
- Rotation
-0 0.813255 0 0.581907
- Scale
-0.99999 1 0.99999
-Name
-SpriteSheetActor0
-Texture
-blood_hit.png
-UID
-2052235394
-animationSpeed
-40
-loopAnimation
-1
-numSheetColumns
-4
-numSheetRows
-4
-next
+0
+MovingGridActor
+0
