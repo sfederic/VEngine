@@ -1,6 +1,7 @@
 #include <Windows.h>
 #include "imgui.h"
 #include "ImGuizmo.h"
+#include "ImGuizmo/ImSequencer.h"
 #include "backends/imgui_impl_win32.h"
 #include "backends/imgui_impl_dx11.h"
 #include "DebugMenu.h"
@@ -56,6 +57,83 @@ void DebugMenu::Init()
 	ImGui_ImplDX11_Init(renderer.device, renderer.context);
 }
 
+struct CutsceneSequenceItem
+{
+	std::string name;
+	int type;
+	int frameStart, frameEnd;
+	bool expanded;
+};
+
+struct CutsceneSequence : ImSequencer::SequenceInterface
+{
+	bool focused = false;
+	int frameMin = 0;
+	int frameMax = 250;
+
+	virtual int GetFrameMin() const { return frameMin; }
+	virtual int GetFrameMax() const { return frameMax; };
+	virtual int GetItemCount() const { return items.size(); };
+
+	virtual void BeginEdit(int index) {}
+	virtual void EndEdit() {}
+	virtual int GetItemTypeCount() const { return 0; }
+	virtual const char* GetItemTypeName(int typeIndex) const { return items[typeIndex].name.c_str(); }
+	virtual const char* GetItemLabel(int index) const { return items[index].name.c_str(); }
+
+	virtual void Get(int index, int** start, int** end, int* type, unsigned int* color) 
+	{
+		CutsceneSequenceItem& item = items[index];
+		if (color)
+			*color = 0xFFAA8080; // same color for everyone, return color based on type
+		if (start)
+			*start = &item.frameStart;
+		if (end)
+			*end = &item.frameEnd;
+		if (type)
+			*type = item.type;
+	};
+
+	virtual void Add(int type) 
+	{
+		CutsceneSequenceItem item;
+		item.expanded = false;
+		item.frameStart = 0;
+		item.frameEnd = 25;
+		item.type = 0;
+		item.name = "test" + std::to_string(type);
+		items.push_back(item);
+	}
+
+	virtual void Del(int index) { items.erase(items.begin() + index); }
+	virtual void Duplicate(int index) { items.push_back(items[index]); }
+
+	virtual void Copy() {}
+	virtual void Paste() {}
+
+	virtual size_t GetCustomHeight(int index) { return 0; }
+	virtual void DoubleClick(int index)
+	{
+		if (items[index].expanded)
+		{
+			items[index].expanded = false;
+			return;
+		}
+
+		for (auto& item : items)
+		{
+			item.expanded = false;
+		}
+
+		items[index].expanded = !items[index].expanded;
+	}
+
+	virtual void CustomDraw(int index, ImDrawList* draw_list, const ImRect& rc, const ImRect& legendRect, const ImRect& clippingRect, const ImRect& legendClippingRect) {}
+	virtual void CustomDrawCompact(int index, ImDrawList* draw_list, const ImRect& rc, const ImRect& clippingRect) {}
+
+	std::vector<CutsceneSequenceItem> items;
+};
+
 void DebugMenu::Tick(float deltaTime)
 {
 	if (!Core::isImGUIEnabled) return;
@@ -70,6 +148,27 @@ void DebugMenu::Tick(float deltaTime)
 	//ImGuizmo has to be called here, it's part of ImGui
 	transformGizmo.Tick();
 
+	static CutsceneSequence seq;
+	static int selectedEntry = -1;
+	static int firstFrame = 0;
+	static bool expanded = true;
+	static int currentFrame = 100;
+	if (ImGui::CollapsingHeader("Sequencer"))
+	{
+		ImGui::PushItemWidth(130);
+		ImGui::InputInt("Frame Min", &seq.frameMin);
+		ImGui::SameLine();
+		ImGui::InputInt("Frame ", &currentFrame);
+		ImGui::SameLine();
+		ImGui::InputInt("Frame Max", &seq.frameMax);
+		ImGui::PopItemWidth();
+		ImSequencer::Sequencer(&seq, &currentFrame, &expanded, &selectedEntry, &firstFrame, ImSequencer::SEQUENCER_EDIT_STARTEND | ImSequencer::SEQUENCER_ADD | ImSequencer::SEQUENCER_DEL | ImSequencer::SEQUENCER_COPYPASTE | ImSequencer::SEQUENCER_CHANGE_FRAME);
+		if (selectedEntry != -1)
+		{
+			const CutsceneSequenceItem& item = seq.items[selectedEntry];
+			// switch (type) 
+		}
+	}
 	RenderFPSMenu(deltaTime);
 	RenderGPUMenu();
 	RenderProfileMenu();
