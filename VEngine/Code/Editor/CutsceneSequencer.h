@@ -25,6 +25,8 @@ struct CutsceneSequencer : ImSequencer::SequenceInterface
 
 	std::vector<CutsceneSequenceItem> items;
 
+	CutsceneSequencer();
+
 	void Tick();
 
 	virtual int GetFrameMin() const { return frameMin; }

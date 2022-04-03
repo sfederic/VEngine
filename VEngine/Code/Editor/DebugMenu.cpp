@@ -72,7 +72,10 @@ void DebugMenu::Tick(float deltaTime)
 	//ImGuizmo has to be called here, it's part of ImGui
 	transformGizmo.Tick();
 
-	cutsceneSequencer.Tick();
+	if (cutsceneSequencerOpen)
+	{
+		cutsceneSequencer.Tick();
+	}
 
 	RenderFPSMenu(deltaTime);
 	RenderGPUMenu();

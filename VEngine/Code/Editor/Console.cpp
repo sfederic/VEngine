@@ -85,6 +85,9 @@ Console::Console()
 
 	//Load in default actors for most worlds (Player, Grid, DirectionalLight, etc.)
 	executeMap.emplace(L"DEFAULT", []() { world.CreateDefaultMapActors(); });
+
+	//Open cutscene sequencer
+	executeMap.emplace(L"CUTSCENE", []() { debugMenu.cutsceneSequencerOpen = !debugMenu.cutsceneSequencerOpen; });
 }
 
 void Console::ConsoleInput()

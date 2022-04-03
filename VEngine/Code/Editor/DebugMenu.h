@@ -39,6 +39,7 @@ struct DebugMenu
 	bool coreMenuOpen = false;
 	bool questMenuOpen = false;
 	bool particleMenuOpen = false;
+	bool cutsceneSequencerOpen = false;
 
 	void Init();
 	void Tick(float deltaTime);

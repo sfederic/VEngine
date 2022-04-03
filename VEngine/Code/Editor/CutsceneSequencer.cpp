@@ -1,24 +1,28 @@
 #include "CutsceneSequencer.h"
 #include "imgui/imgui.h"
 
+CutsceneSequencer::CutsceneSequencer()
+{
+	items.push_back(CutsceneSequenceItem());
+}
+
 void CutsceneSequencer::Tick()
 {
-	if (ImGui::CollapsingHeader("Sequencer"))
+	ImGui::PushItemWidth(130);
+	ImGui::InputInt("Frame ", &currentFrame);
+	ImGui::SameLine();
+	ImGui::InputInt("Frame Min", &frameMin);
+	ImGui::SameLine();
+	ImGui::InputInt("Frame Max", &frameMax);
+	ImGui::PopItemWidth();
+
+	ImSequencer::Sequencer(this, &currentFrame, &expanded, &selectedEntry, &firstFrame,
+		ImSequencer::SEQUENCER_EDIT_STARTEND | ImSequencer::SEQUENCER_ADD | ImSequencer::SEQUENCER_DEL | ImSequencer::SEQUENCER_COPYPASTE | ImSequencer::SEQUENCER_CHANGE_FRAME);
+
+	if (selectedEntry != -1)
 	{
-		ImGui::PushItemWidth(130);
-		ImGui::InputInt("Frame ", &currentFrame);
-		ImGui::SameLine();
-		ImGui::InputInt("Frame Min", &frameMin);
-		ImGui::SameLine();
-		ImGui::InputInt("Frame Max", &frameMax);
-		ImGui::PopItemWidth();
-		ImSequencer::Sequencer(this, &currentFrame, &expanded, &selectedEntry, &firstFrame,
-			ImSequencer::SEQUENCER_EDIT_STARTEND | ImSequencer::SEQUENCER_ADD | ImSequencer::SEQUENCER_DEL | ImSequencer::SEQUENCER_COPYPASTE | ImSequencer::SEQUENCER_CHANGE_FRAME);
-		if (selectedEntry != -1)
-		{
-			const CutsceneSequenceItem& item = items[selectedEntry];
-			//...
-		}
+		const CutsceneSequenceItem& item = items[selectedEntry];
+		//...
 	}
 }
 
