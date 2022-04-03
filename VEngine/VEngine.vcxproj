@@ -233,6 +233,7 @@
     <ClCompile Include="Code\Particle\SpriteSheet.cpp" />
     <ClCompile Include="Code\Actors\SpriteSheetActor.cpp" />
     <ClCompile Include="Code\Actors\Game\MovingGridActor.cpp" />
+    <ClCompile Include="Code\Editor\CutsceneSequencer.cpp" />
     <ClInclude Include="Code\Editor\ImGuizmo\ImSequencer.h" />
     <ClInclude Include="Code\Gameplay\BattleEnums.h" />
     <ClInclude Include="Code\Particle\FireParticle.h" />
@@ -464,6 +465,7 @@
     <ClInclude Include="Code\Particle\SpriteSheet.h" />
     <ClInclude Include="Code\Actors\SpriteSheetActor.h" />
     <ClInclude Include="Code\Actors\Game\MovingGridActor.h" />
+    <ClInclude Include="Code\Editor\CutsceneSequencer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
