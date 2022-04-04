@@ -18,5 +18,6 @@ Properties CutsceneActor::GetProps()
 
 void CutsceneActor::PlayCutscene(bool loop = false)
 {
+    cutsceneSequencer.LoadCutscene(cutsceneFilename);
     cutsceneSequencer.StartPlayback(loop);
 }

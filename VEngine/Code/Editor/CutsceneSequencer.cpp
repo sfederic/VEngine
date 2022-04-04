@@ -102,7 +102,7 @@ void CutsceneSequencer::UITick(float deltaTime)
 
 	if (ImGui::Button("Load"))
 	{
-		LoadCutsceneFile();
+		LoadCutsceneFileEditor();
 	}
 
 	//@Todo: There's a way to get selectedEntry on ImSequencer::Sequencer() click (it returns a bool) but can't figure it out.
@@ -168,58 +168,63 @@ void CutsceneSequencer::SaveCutsceneFile()
 	}
 }
 
-void CutsceneSequencer::LoadCutsceneFile()
+void CutsceneSequencer::LoadCutscene(std::string cutsceneFilename)
+{
+	std::ifstream is;
+	is.open(cutsceneFilename, std::ios_base::in);
+
+	items.clear();
+
+	while (!is.eof())
+	{
+		const int lineSize = 1024;
+		char line[lineSize]{};
+
+		std::string name;
+		std::string condition;
+		std::string conditionArg;
+		std::string frameStart;
+		std::string frameEnd;
+
+		is.getline(line, lineSize);
+		name.assign(line);
+		if (name.empty())
+		{
+			break;
+		}
+
+		is.getline(line, lineSize);
+		condition.assign(line);
+
+		is.getline(line, lineSize);
+		conditionArg.assign(line);
+
+		is.getline(line, lineSize);
+		frameStart.assign(line);
+
+		is.getline(line, lineSize);
+		frameEnd.assign(line);
+
+		CutsceneSequenceItem newItem = {};
+		newItem.name = name;
+		newItem.condition = condition;
+		newItem.conditionArg = conditionArg;
+		newItem.frameStart = std::stoi(frameStart);
+		newItem.frameEnd = std::stoi(frameEnd);
+
+		items.push_back(newItem);
+	}
+
+	is.close();
+}
+
+void CutsceneSequencer::LoadCutsceneFileEditor()
 {
 	QFileDialog loadDialog;
 	QString loadName = loadDialog.getOpenFileName(nullptr, "Open Cutscene File", "Cutscenes/");
 	if (!loadName.isEmpty())
 	{
-		std::ifstream is;
-		is.open(loadName.toStdString(), std::ios_base::in);
-
-		items.clear();
-
-		while (!is.eof())
-		{
-			const int lineSize = 1024;
-			char line[lineSize]{};
-
-			std::string name;
-			std::string condition;
-			std::string conditionArg;
-			std::string frameStart;
-			std::string frameEnd;
-
-			is.getline(line, lineSize);
-			name.assign(line);
-			if (name.empty())
-			{
-				break;
-			}
-
-			is.getline(line, lineSize);
-			condition.assign(line);
-
-			is.getline(line, lineSize);
-			conditionArg.assign(line);
-
-			is.getline(line, lineSize);
-			frameStart.assign(line);
-
-			is.getline(line, lineSize);
-			frameEnd.assign(line);
-
-			CutsceneSequenceItem newItem = {};
-			newItem.name = name;
-			newItem.condition = condition;
-			newItem.conditionArg = conditionArg;
-			newItem.frameStart = std::stoi(frameStart);
-			newItem.frameEnd = std::stoi(frameEnd);
-
-			items.push_back(newItem);
-		}
-
-		is.close();
+		LoadCutscene(loadName.toStdString());
 
 		//Set name widget on load
 		if (items.size() > 0)

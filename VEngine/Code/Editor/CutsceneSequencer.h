@@ -40,7 +40,8 @@ public:
 	void UITick(float deltaTime);
 	void PlaybackTick(float deltaTime);
 
-	void LoadCutsceneFile();
+	void LoadCutsceneFileEditor();
+	void LoadCutscene(std::string cutsceneFilename);
 	void SaveCutsceneFile();
 
 	void StartPlayback(bool loop);
