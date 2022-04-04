@@ -1,5 +1,6 @@
 #include "CutsceneSequencer.h"
 #include "imgui/imgui.h"
+#include "Gameplay/ConditionSystem.h"
 
 CutsceneSequencer::CutsceneSequencer()
 {
@@ -8,6 +9,7 @@ CutsceneSequencer::CutsceneSequencer()
 
 void CutsceneSequencer::Tick()
 {
+	//Sequencer frame data
 	ImGui::PushItemWidth(130);
 	ImGui::InputInt("Frame ", &currentFrame);
 	ImGui::SameLine();
@@ -16,22 +18,44 @@ void CutsceneSequencer::Tick()
 	ImGui::InputInt("Frame Max", &frameMax);
 	ImGui::PopItemWidth();
 
+	//Add new sequencer item
 	if (ImGui::Button("New"))
 	{
 		Add(0);
 	}
 
+	//Main Sequencer function
 	ImSequencer::Sequencer(this, &currentFrame, &expanded, &selectedEntry, &firstFrame,
 		ImSequencer::SEQUENCER_EDIT_STARTEND | ImSequencer::SEQUENCER_ADD | ImSequencer::SEQUENCER_DEL | ImSequencer::SEQUENCER_COPYPASTE | ImSequencer::SEQUENCER_CHANGE_FRAME);
 
-	const CutsceneSequenceItem& item = items[currentItemIndex];
+	//@Todo: There's a way to get selectedEntry on ImSequencer::Sequencer() click (it returns a bool) but can't figure it out.
+	//Right now currentItemIndex is set in DoubleClick().
+	CutsceneSequenceItem& item = items[currentItemIndex];
 
+	//Item Frame data
 	ImGui::Text("Name: %s", item.name.c_str());
 	ImGui::Text("FrameStart: %d", item.frameStart);
 	ImGui::Text("Frame End: %d", item.frameEnd);
 
-	//@Todo: put more timeline specific things here
-	//E.g. actor references, Commands, events, Conditions, etc.
+	//Combo box to set ConditionFunction to Sequencer item
+	//Ref:https://github.com/ocornut/imgui/issues/1658
+	if (ImGui::BeginCombo("Condition Functions", item.condition.c_str()))
+	{
+		auto& conditionFunctions = conditionSystem.conditions;
+		for (auto& conditionFuncPair : conditionFunctions)
+		{
+			bool selected = false;
+			if (ImGui::Selectable(conditionFuncPair.first.c_str(), selected))
+			{
+				item.condition = conditionFuncPair.first;
+			}
+			if (selected)
+			{
+				ImGui::SetItemDefaultFocus();
+			}
+		}
+		ImGui::EndCombo();
+	}
 }
 
 void CutsceneSequencer::Get(int index, int** start, int** end, int* type, unsigned int* color)

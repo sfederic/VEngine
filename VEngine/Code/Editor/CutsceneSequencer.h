@@ -5,6 +5,7 @@
 
 struct CutsceneSequenceItem
 {
+	std::string condition;
 	std::string name;
 	int type;
 	int frameStart, frameEnd;
