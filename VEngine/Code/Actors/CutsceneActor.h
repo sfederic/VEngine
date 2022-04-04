@@ -11,12 +11,12 @@ struct CutsceneActor : Actor
 
 	BoxTriggerComponent* boxTriggerComponent = nullptr;
 
-	std::string cutsceneFile;
+	std::string cutsceneFilename;
 
 	bool playCutsceneOnTriggerOverlap = false;
 
 	CutsceneActor();
 	virtual Properties GetProps() override;
 
-	void PlayCutscene();
+	void PlayCutscene(bool loop);
 };

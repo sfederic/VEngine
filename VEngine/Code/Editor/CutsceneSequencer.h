@@ -16,6 +16,7 @@ struct CutsceneSequenceItem
 //Editor using ImGuizmo for timelining cutscene events
 struct CutsceneSequencer : ImSequencer::SequenceInterface
 {
+private:
 	bool focused = false;
 	int frameMax = 250;
 
@@ -28,9 +29,11 @@ struct CutsceneSequencer : ImSequencer::SequenceInterface
 
 	float playbackTimer = 0.f;
 	bool playingBack = false;
+	bool playbackLooping = false;
 
 	std::vector<CutsceneSequenceItem> items;
 
+public:
 	CutsceneSequencer();
 
 	//Seperate out the ticks for handling UI and Cutscene playback logic
@@ -39,6 +42,8 @@ struct CutsceneSequencer : ImSequencer::SequenceInterface
 
 	void LoadCutsceneFile();
 	void SaveCutsceneFile();
+
+	void StartPlayback(bool loop);
 
 	//ImSequencer::SequenceInterface virtual functions
 	virtual int GetFrameMin() const { return 0; }

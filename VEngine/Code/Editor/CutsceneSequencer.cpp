@@ -20,6 +20,7 @@ void CutsceneSequencer::PlaybackTick(float deltaTime)
 	if (playingBack)
 	{
 		currentFrame++; //Keep in mind whatever FPS here
+		playbackTimer += deltaTime;
 
 		//Call conditions from sequencer items
 		for (auto& item : items)
@@ -41,8 +42,22 @@ void CutsceneSequencer::PlaybackTick(float deltaTime)
 		if (currentFrame >= frameMax)
 		{
 			currentFrame = 0;
+			playbackTimer = 0.f;
+
+			if (playbackLooping)
+			{
+				playingBack = false;
+			}
 		}
 	}
+}
+
+void CutsceneSequencer::StartPlayback(bool loop)
+{
+	playingBack = true;
+	playbackTimer = 0.f;
+	currentFrame = 0;
+	playbackLooping = loop;
 }
 
 void CutsceneSequencer::UITick(float deltaTime)

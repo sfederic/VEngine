@@ -1,5 +1,6 @@
 #include "CutsceneActor.h"
 #include "Components/BoxTriggerComponent.h"
+#include "Editor/CutsceneSequencer.h"
 
 CutsceneActor::CutsceneActor()
 {
@@ -11,12 +12,11 @@ CutsceneActor::CutsceneActor()
 Properties CutsceneActor::GetProps()
 {
     auto props = __super::GetProps();
-    props.AddProp(cutsceneFile);
+    props.AddProp(cutsceneFilename);
     return props;
 }
 
-void CutsceneActor::PlayCutscene()
+void CutsceneActor::PlayCutscene(bool loop = false)
 {
-    //@Todo: need to consolidate CutsceneSequencer and CutsceneActor.
-    //Make CutsceneSequencer a global and run everything here related to playing through that.
+    cutsceneSequencer.StartPlayback(loop);
 }
