@@ -21,6 +21,7 @@
 #include "Render/SpriteSystem.h"
 #include "Audio/AudioSystem.h"
 #include "Physics/PhysicsSystem.h"
+#include "Editor/CutsceneSequencer.h"
 
 Engine engine;
 
@@ -55,8 +56,12 @@ void Engine::TickSystems(float deltaTime)
 
 	audioSystem.Tick();
 	shaderSystem.Tick();
+
+	cutsceneSequencer.PlaybackTick(deltaTime);
 	activeCamera->Tick(deltaTime);
+
 	Timer::Tick(deltaTime);
+
 	worldEditor.Tick();
 	physicsSystem.Tick(deltaTime);
 	renderer.Tick();
