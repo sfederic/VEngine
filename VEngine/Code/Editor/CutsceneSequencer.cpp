@@ -2,6 +2,8 @@
 #include "imgui/imgui.h"
 #include "Gameplay/ConditionSystem.h"
 
+char itemNameInput[64] = {};
+
 CutsceneSequencer::CutsceneSequencer()
 {
 	items.push_back(CutsceneSequenceItem());
@@ -25,11 +27,13 @@ void CutsceneSequencer::Tick()
 	}
 
 	//@Todo: There's a way to get selectedEntry on ImSequencer::Sequencer() click (it returns a bool) but can't figure it out.
-//Right now currentItemIndex is set in DoubleClick().
+	//Right now currentItemIndex is set in DoubleClick().
 	CutsceneSequenceItem& item = items[currentItemIndex];
 
 	//Item Frame data
-	ImGui::Text("Name: %s", item.name.c_str());
+	ImGui::InputText("Name", itemNameInput, 64);
+	item.name = itemNameInput;
+
 	ImGui::Text("FrameStart: %d", item.frameStart);
 	ImGui::Text("Frame End: %d", item.frameEnd);
 
@@ -82,6 +86,8 @@ void CutsceneSequencer::Add(int type)
 void CutsceneSequencer::DoubleClick(int index)
 {
 	currentItemIndex = index;
+
+	strcpy(itemNameInput, items[currentItemIndex].name.c_str());
 
 	if (items[index].expanded)
 	{
