@@ -28,6 +28,7 @@ struct CutsceneSequencer : ImSequencer::SequenceInterface
 	int currentItemIndex = 0;
 
 	float playbackTimer = 0.f;
+	bool playingBack = false;
 
 	std::vector<CutsceneSequenceItem> items;
 

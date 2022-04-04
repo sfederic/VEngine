@@ -17,7 +17,7 @@ void CutsceneSequencer::Tick(float deltaTime)
 {
 	//Sequencer frame data
 	ImGui::PushItemWidth(130);
-	ImGui::InputInt("Frame ", &currentFrame);
+	ImGui::InputInt("Current Frame", &currentFrame);
 	ImGui::SameLine();
 	ImGui::InputInt("Frame Min", &frameMin);
 	ImGui::SameLine();
@@ -26,7 +26,26 @@ void CutsceneSequencer::Tick(float deltaTime)
 
 	if (ImGui::Button("Play"))
 	{
+		playingBack = true;
+		currentFrame = frameMin;
+	}
 
+	if (playingBack)
+	{
+		currentFrame++; //Keep in mind whatever FPS here
+
+		if (currentFrame >= frameMax)
+		{
+			currentFrame = frameMin;
+		}
+	}
+
+	ImGui::SameLine();
+
+	if (ImGui::Button("Stop"))
+	{
+		playingBack = false;
+		currentFrame = frameMin;
 	}
 
 	//Add new sequencer item
