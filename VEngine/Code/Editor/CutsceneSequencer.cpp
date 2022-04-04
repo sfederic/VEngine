@@ -6,6 +6,7 @@
 #include "Log.h"
 
 char itemNameInput[64] = {};
+char conditionArgInput[128] = {};
 
 CutsceneSequencer::CutsceneSequencer()
 {
@@ -28,7 +29,9 @@ void CutsceneSequencer::Tick()
 	{
 		Add(0);
 	}
+
 	ImGui::SameLine();
+
 	//Qt-based save/load code
 	if (ImGui::Button("Save"))
 	{
@@ -43,6 +46,7 @@ void CutsceneSequencer::Tick()
 			{
 				os << item.name << "\n";
 				os << item.condition << "\n";
+				os << item.conditionArg << "\n";
 				os << item.frameStart << "\n";
 				os << item.frameEnd << "\n";
 			}
@@ -51,7 +55,9 @@ void CutsceneSequencer::Tick()
 			Log("[%s] saved.", saveName.toStdString().c_str());
 		}
 	}	
+
 	ImGui::SameLine();
+
 	if (ImGui::Button("Load"))
 	{
 		QFileDialog loadDialog;
@@ -70,6 +76,7 @@ void CutsceneSequencer::Tick()
 
 				std::string name;
 				std::string condition;
+				std::string conditionArg;
 				std::string frameStart;
 				std::string frameEnd;
 
@@ -84,6 +91,9 @@ void CutsceneSequencer::Tick()
 				condition.assign(line);
 
 				is.getline(line, lineSize);
+				conditionArg.assign(line);
+
+				is.getline(line, lineSize);
 				frameStart.assign(line);
 
 				is.getline(line, lineSize);
@@ -92,6 +102,7 @@ void CutsceneSequencer::Tick()
 				CutsceneSequenceItem newItem = {};
 				newItem.name = name;
 				newItem.condition = condition;
+				newItem.conditionArg = conditionArg;
 				newItem.frameStart = std::stoi(frameStart);
 				newItem.frameEnd = std::stoi(frameEnd);
 
@@ -112,7 +123,7 @@ void CutsceneSequencer::Tick()
 	//Right now currentItemIndex is set in DoubleClick().
 	CutsceneSequenceItem& currentItem = items[currentItemIndex];
 
-	//Item Frame data
+	//Item data inputs
 	ImGui::InputText("Name", itemNameInput, 64);
 	currentItem.name = itemNameInput;
 
@@ -121,7 +132,7 @@ void CutsceneSequencer::Tick()
 
 	//Combo box to set ConditionFunction to Sequencer item
 	//Ref:https://github.com/ocornut/imgui/issues/1658
-	if (ImGui::BeginCombo("Condition Functions", currentItem.condition.c_str()))
+	if (ImGui::BeginCombo("Condition Function", currentItem.condition.c_str()))
 	{
 		auto& conditionFunctions = conditionSystem.conditions;
 		for (auto& conditionFuncPair : conditionFunctions)
@@ -139,6 +150,10 @@ void CutsceneSequencer::Tick()
 		ImGui::EndCombo();
 	}
 
+	//Condition Arg
+	ImGui::InputText("Condition Arg", conditionArgInput, 128);
+	currentItem.conditionArg = conditionArgInput;
+
 	//Main Sequencer function
 	ImSequencer::Sequencer(this, &currentFrame, &expanded, &selectedEntry, &firstFrame,
 		ImSequencer::SEQUENCER_EDIT_STARTEND | ImSequencer::SEQUENCER_ADD | ImSequencer::SEQUENCER_DEL | ImSequencer::SEQUENCER_COPYPASTE | ImSequencer::SEQUENCER_CHANGE_FRAME);
@@ -155,13 +170,12 @@ void CutsceneSequencer::Get(int index, int** start, int** end, int* type, unsign
 
 void CutsceneSequencer::Add(int type)
 {
-	//testing
 	CutsceneSequenceItem item;
 	item.expanded = false;
 	item.frameStart = 0;
 	item.frameEnd = 25;
 	item.type = 0;
-	item.name = "test" + std::to_string(type);
+	item.name = "New";
 	items.push_back(item);
 }
 
