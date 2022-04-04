@@ -1398,3 +1398,22 @@ SpriteSheetActor
 0
 MovingGridActor
 0
+CutsceneActor
+1
+ Position
+1 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Extents
+0.45 0.45 0.45
+Name
+CutsceneActor0
+Offset
+0 0 0
+UID
+492697300
+cutsceneFilename
+test.cutscene
+next
