@@ -24,6 +24,7 @@ void CutsceneSequencer::Tick(float deltaTime)
 	ImGui::InputInt("Frame Max", &frameMax);
 	ImGui::PopItemWidth();
 
+	//Playback buttons
 	if (ImGui::Button("Play"))
 	{
 		playingBack = true;
@@ -33,6 +34,22 @@ void CutsceneSequencer::Tick(float deltaTime)
 	if (playingBack)
 	{
 		currentFrame++; //Keep in mind whatever FPS here
+
+		//Call conditions from sequencer items
+		for (auto& item : items)
+		{
+			if (currentFrame >= item.frameStart)
+			{
+				//@Todo: there needs to be some more logic here to deal with start/end frame times
+				//and how they work into conditions called with time + position arguements.
+				//e.g. camera movement
+				auto foundCondition = conditionSystem.FindConditionAllowNull(item.condition);
+				if (foundCondition)
+				{
+					foundCondition(item.conditionArg);
+				}
+			}
+		}
 
 		if (currentFrame >= frameMax)
 		{
