@@ -13,7 +13,7 @@ CutsceneSequencer::CutsceneSequencer()
 	items.push_back(CutsceneSequenceItem());
 }
 
-void CutsceneSequencer::Tick()
+void CutsceneSequencer::Tick(float deltaTime)
 {
 	//Sequencer frame data
 	ImGui::PushItemWidth(130);
@@ -23,6 +23,11 @@ void CutsceneSequencer::Tick()
 	ImGui::SameLine();
 	ImGui::InputInt("Frame Max", &frameMax);
 	ImGui::PopItemWidth();
+
+	if (ImGui::Button("Play"))
+	{
+
+	}
 
 	//Add new sequencer item
 	if (ImGui::Button("Add"))

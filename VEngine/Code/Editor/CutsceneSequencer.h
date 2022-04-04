@@ -27,11 +27,13 @@ struct CutsceneSequencer : ImSequencer::SequenceInterface
 
 	int currentItemIndex = 0;
 
+	float playbackTimer = 0.f;
+
 	std::vector<CutsceneSequenceItem> items;
 
 	CutsceneSequencer();
 
-	void Tick();
+	void Tick(float deltaTime);
 
 	virtual int GetFrameMin() const { return frameMin; }
 	virtual int GetFrameMax() const { return frameMax; };
