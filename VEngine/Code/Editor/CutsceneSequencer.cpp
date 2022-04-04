@@ -24,12 +24,8 @@ void CutsceneSequencer::Tick()
 		Add(0);
 	}
 
-	//Main Sequencer function
-	ImSequencer::Sequencer(this, &currentFrame, &expanded, &selectedEntry, &firstFrame,
-		ImSequencer::SEQUENCER_EDIT_STARTEND | ImSequencer::SEQUENCER_ADD | ImSequencer::SEQUENCER_DEL | ImSequencer::SEQUENCER_COPYPASTE | ImSequencer::SEQUENCER_CHANGE_FRAME);
-
 	//@Todo: There's a way to get selectedEntry on ImSequencer::Sequencer() click (it returns a bool) but can't figure it out.
-	//Right now currentItemIndex is set in DoubleClick().
+//Right now currentItemIndex is set in DoubleClick().
 	CutsceneSequenceItem& item = items[currentItemIndex];
 
 	//Item Frame data
@@ -56,6 +52,10 @@ void CutsceneSequencer::Tick()
 		}
 		ImGui::EndCombo();
 	}
+
+	//Main Sequencer function
+	ImSequencer::Sequencer(this, &currentFrame, &expanded, &selectedEntry, &firstFrame,
+		ImSequencer::SEQUENCER_EDIT_STARTEND | ImSequencer::SEQUENCER_ADD | ImSequencer::SEQUENCER_DEL | ImSequencer::SEQUENCER_COPYPASTE | ImSequencer::SEQUENCER_CHANGE_FRAME);
 }
 
 void CutsceneSequencer::Get(int index, int** start, int** end, int* type, unsigned int* color)
