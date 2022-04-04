@@ -17,7 +17,6 @@ struct CutsceneSequenceItem
 struct CutsceneSequencer : ImSequencer::SequenceInterface
 {
 	bool focused = false;
-	int frameMin = 0;
 	int frameMax = 250;
 
 	int selectedEntry = -1;
@@ -42,7 +41,7 @@ struct CutsceneSequencer : ImSequencer::SequenceInterface
 	void SaveCutsceneFile();
 
 	//ImSequencer::SequenceInterface virtual functions
-	virtual int GetFrameMin() const { return frameMin; }
+	virtual int GetFrameMin() const { return 0; }
 	virtual int GetFrameMax() const { return frameMax; };
 	virtual int GetItemCount() const { return items.size(); };
 

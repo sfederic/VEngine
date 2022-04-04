@@ -40,7 +40,7 @@ void CutsceneSequencer::PlaybackTick(float deltaTime)
 
 		if (currentFrame >= frameMax)
 		{
-			currentFrame = frameMin;
+			currentFrame = 0;
 		}
 	}
 }
@@ -51,8 +51,6 @@ void CutsceneSequencer::UITick(float deltaTime)
 	ImGui::PushItemWidth(130);
 	ImGui::InputInt("Current Frame", &currentFrame);
 	ImGui::SameLine();
-	ImGui::InputInt("Frame Min", &frameMin);
-	ImGui::SameLine();
 	ImGui::InputInt("Frame Max", &frameMax);
 	ImGui::PopItemWidth();
 
@@ -60,7 +58,7 @@ void CutsceneSequencer::UITick(float deltaTime)
 	if (ImGui::Button("Play"))
 	{
 		playingBack = true;
-		currentFrame = frameMin;
+		currentFrame = 0;
 	}
 
 	ImGui::SameLine();
@@ -68,7 +66,7 @@ void CutsceneSequencer::UITick(float deltaTime)
 	if (ImGui::Button("Stop"))
 	{
 		playingBack = false;
-		currentFrame = frameMin;
+		currentFrame = 0;
 	}
 
 	//Add new sequencer item
