@@ -35,7 +35,6 @@
 #include "Quests/Quest.h"
 
 DebugMenu debugMenu;
-CutsceneSequencer cutsceneSequencer;
 
 void DebugMenu::Init()
 {

@@ -5,6 +5,8 @@
 #include "Gameplay/ConditionSystem.h"
 #include "Log.h"
 
+CutsceneSequencer cutsceneSequencer;
+
 char itemNameInput[64] = {};
 char conditionArgInput[128] = {};
 
