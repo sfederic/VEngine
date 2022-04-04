@@ -1,5 +1,7 @@
 #include "CutsceneSequencer.h"
 #include <fstream>
+#include <filesystem>
+#include <cassert>
 #include "imgui/imgui.h"
 #include <qfiledialog.h>
 #include "Gameplay/ConditionSystem.h"
@@ -25,7 +27,7 @@ void CutsceneSequencer::PlaybackTick(float deltaTime)
 		//Call conditions from sequencer items
 		for (auto& item : items)
 		{
-			if (currentFrame >= item.frameStart)
+			if (currentFrame >= item.frameStart && !item.active)
 			{
 				//@Todo: there needs to be some more logic here to deal with start/end frame times
 				//and how they work into conditions called with time + position arguements.
@@ -34,6 +36,7 @@ void CutsceneSequencer::PlaybackTick(float deltaTime)
 				auto foundCondition = conditionSystem.FindConditionAllowNull(item.condition);
 				if (foundCondition)
 				{
+					item.active = true; //testing to make sure shit doesn't play on loop
 					foundCondition(item.conditionArg);
 				}
 			}
@@ -170,8 +173,11 @@ void CutsceneSequencer::SaveCutsceneFile()
 
 void CutsceneSequencer::LoadCutscene(std::string cutsceneFilename)
 {
+	std::string path = "Cutscenes/" + cutsceneFilename;
+	assert(std::filesystem::exists(path));
+
 	std::ifstream is;
-	is.open(cutsceneFilename, std::ios_base::in);
+	is.open(path, std::ios_base::in);
 
 	items.clear();
 

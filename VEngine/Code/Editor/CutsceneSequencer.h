@@ -11,6 +11,7 @@ struct CutsceneSequenceItem
 	int type;
 	int frameStart, frameEnd;
 	bool expanded;
+	bool active = false;
 };
 
 //Editor using ImGuizmo for timelining cutscene events
