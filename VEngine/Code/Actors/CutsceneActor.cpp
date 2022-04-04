@@ -9,6 +9,20 @@ CutsceneActor::CutsceneActor()
     rootComponent = boxTriggerComponent;
 }
 
+void CutsceneActor::Start()
+{
+    boxTriggerComponent->SetTargetAsPlayer();
+}
+
+void CutsceneActor::Tick(float deltaTime)
+{
+    if (boxTriggerComponent->ContainsTarget() && !cutscenePlayed)
+    {
+        PlayCutscene();
+        cutscenePlayed = true;
+    }
+}
+
 Properties CutsceneActor::GetProps()
 {
     auto props = __super::GetProps();
@@ -16,7 +30,7 @@ Properties CutsceneActor::GetProps()
     return props;
 }
 
-void CutsceneActor::PlayCutscene(bool loop = false)
+void CutsceneActor::PlayCutscene(bool loop)
 {
     cutsceneSequencer.LoadCutscene(cutsceneFilename);
     cutsceneSequencer.StartPlayback(loop);

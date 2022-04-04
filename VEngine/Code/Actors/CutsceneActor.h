@@ -15,8 +15,14 @@ struct CutsceneActor : Actor
 
 	bool playCutsceneOnTriggerOverlap = false;
 
+private:
+	bool cutscenePlayed = false;
+
+public:
 	CutsceneActor();
+	virtual void Start() override;
+	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 
-	void PlayCutscene(bool loop);
+	void PlayCutscene(bool loop = false);
 };
