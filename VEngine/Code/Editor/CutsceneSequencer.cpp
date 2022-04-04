@@ -1,6 +1,9 @@
 #include "CutsceneSequencer.h"
+#include <fstream>
 #include "imgui/imgui.h"
+#include <qfiledialog.h>
 #include "Gameplay/ConditionSystem.h"
+#include "Log.h"
 
 char itemNameInput[64] = {};
 
@@ -21,25 +24,54 @@ void CutsceneSequencer::Tick()
 	ImGui::PopItemWidth();
 
 	//Add new sequencer item
-	if (ImGui::Button("New"))
+	if (ImGui::Button("Add"))
 	{
 		Add(0);
+	}
+	ImGui::SameLine();
+	//Qt-based save/load code
+	if (ImGui::Button("Save"))
+	{
+		QFileDialog saveDialog;
+		QString saveName = saveDialog.getSaveFileName(nullptr, "Save Cutscene File", "Cutscenes/");
+		if (!saveName.isEmpty())
+		{
+			std::wofstream os;
+			os.open(saveName.toStdString(), std::ios_base::out);
+
+			for (auto& item : items)
+			{
+				os << item.name.c_str() << "\n";
+				os << item.condition.c_str() << "\n";
+				os << item.frameStart << "\n";
+				os << item.frameEnd << "\n";
+			}
+
+			os.close();
+			Log("[%s] saved.", saveName.toStdString().c_str());
+		}
+	}	
+	ImGui::SameLine();
+	if (ImGui::Button("Load"))
+	{
+		QFileDialog loadDialog;
+		QString loadName = loadDialog.getOpenFileName(nullptr, "Open Cutscene File", "Cutscenes/");
 	}
 
 	//@Todo: There's a way to get selectedEntry on ImSequencer::Sequencer() click (it returns a bool) but can't figure it out.
 	//Right now currentItemIndex is set in DoubleClick().
-	CutsceneSequenceItem& item = items[currentItemIndex];
+	CutsceneSequenceItem& currentItem = items[currentItemIndex];
 
 	//Item Frame data
 	ImGui::InputText("Name", itemNameInput, 64);
-	item.name = itemNameInput;
+	currentItem.name = itemNameInput;
 
-	ImGui::Text("FrameStart: %d", item.frameStart);
-	ImGui::Text("Frame End: %d", item.frameEnd);
+	ImGui::Text("FrameStart: %d", currentItem.frameStart);
+	ImGui::Text("Frame End: %d", currentItem.frameEnd);
 
 	//Combo box to set ConditionFunction to Sequencer item
 	//Ref:https://github.com/ocornut/imgui/issues/1658
-	if (ImGui::BeginCombo("Condition Functions", item.condition.c_str()))
+	if (ImGui::BeginCombo("Condition Functions", currentItem.condition.c_str()))
 	{
 		auto& conditionFunctions = conditionSystem.conditions;
 		for (auto& conditionFuncPair : conditionFunctions)
@@ -47,7 +79,7 @@ void CutsceneSequencer::Tick()
 			bool selected = false;
 			if (ImGui::Selectable(conditionFuncPair.first.c_str(), selected))
 			{
-				item.condition = conditionFuncPair.first;
+				currentItem.condition = conditionFuncPair.first;
 			}
 			if (selected)
 			{
