@@ -34,8 +34,14 @@ struct CutsceneSequencer : ImSequencer::SequenceInterface
 
 	CutsceneSequencer();
 
-	void Tick(float deltaTime);
+	//Seperate out the ticks for handling UI and Cutscene playback logic
+	void UITick(float deltaTime);
+	void PlaybackTick(float deltaTime);
 
+	void LoadCutsceneFile();
+	void SaveCutsceneFile();
+
+	//ImSequencer::SequenceInterface virtual functions
 	virtual int GetFrameMin() const { return frameMin; }
 	virtual int GetFrameMax() const { return frameMax; };
 	virtual int GetItemCount() const { return items.size(); };

@@ -73,7 +73,7 @@ void DebugMenu::Tick(float deltaTime)
 
 	if (cutsceneSequencerOpen)
 	{
-		cutsceneSequencer.Tick(deltaTime);
+		cutsceneSequencer.UITick(deltaTime);
 	}
 
 	RenderFPSMenu(deltaTime);

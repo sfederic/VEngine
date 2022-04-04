@@ -15,7 +15,37 @@ CutsceneSequencer::CutsceneSequencer()
 	items.push_back(CutsceneSequenceItem());
 }
 
-void CutsceneSequencer::Tick(float deltaTime)
+void CutsceneSequencer::PlaybackTick(float deltaTime)
+{
+	if (playingBack)
+	{
+		currentFrame++; //Keep in mind whatever FPS here
+
+		//Call conditions from sequencer items
+		for (auto& item : items)
+		{
+			if (currentFrame >= item.frameStart)
+			{
+				//@Todo: there needs to be some more logic here to deal with start/end frame times
+				//and how they work into conditions called with time + position arguements.
+				//Best use would be curve editor, might be too complicated for what the game needs.
+				//e.g. camera movement
+				auto foundCondition = conditionSystem.FindConditionAllowNull(item.condition);
+				if (foundCondition)
+				{
+					foundCondition(item.conditionArg);
+				}
+			}
+		}
+
+		if (currentFrame >= frameMax)
+		{
+			currentFrame = frameMin;
+		}
+	}
+}
+
+void CutsceneSequencer::UITick(float deltaTime)
 {
 	//Sequencer frame data
 	ImGui::PushItemWidth(130);
@@ -31,32 +61,6 @@ void CutsceneSequencer::Tick(float deltaTime)
 	{
 		playingBack = true;
 		currentFrame = frameMin;
-	}
-
-	if (playingBack)
-	{
-		currentFrame++; //Keep in mind whatever FPS here
-
-		//Call conditions from sequencer items
-		for (auto& item : items)
-		{
-			if (currentFrame >= item.frameStart)
-			{
-				//@Todo: there needs to be some more logic here to deal with start/end frame times
-				//and how they work into conditions called with time + position arguements.
-				//e.g. camera movement
-				auto foundCondition = conditionSystem.FindConditionAllowNull(item.condition);
-				if (foundCondition)
-				{
-					foundCondition(item.conditionArg);
-				}
-			}
-		}
-
-		if (currentFrame >= frameMax)
-		{
-			currentFrame = frameMin;
-		}
 	}
 
 	ImGui::SameLine();
@@ -78,88 +82,14 @@ void CutsceneSequencer::Tick(float deltaTime)
 	//Qt-based save/load code
 	if (ImGui::Button("Save"))
 	{
-		QFileDialog saveDialog;
-		QString saveName = saveDialog.getSaveFileName(nullptr, "Save Cutscene File", "Cutscenes/");
-		if (!saveName.isEmpty())
-		{
-			std::ofstream os;
-			os.open(saveName.toStdString(), std::ios_base::out);
-
-			for (auto& item : items)
-			{
-				os << item.name << "\n";
-				os << item.condition << "\n";
-				os << item.conditionArg << "\n";
-				os << item.frameStart << "\n";
-				os << item.frameEnd << "\n";
-			}
-
-			os.close();
-			Log("[%s] saved.", saveName.toStdString().c_str());
-		}
+		SaveCutsceneFile();
 	}	
 
 	ImGui::SameLine();
 
 	if (ImGui::Button("Load"))
 	{
-		QFileDialog loadDialog;
-		QString loadName = loadDialog.getOpenFileName(nullptr, "Open Cutscene File", "Cutscenes/");
-		if (!loadName.isEmpty())
-		{
-			std::ifstream is;
-			is.open(loadName.toStdString(), std::ios_base::in);
-
-			items.clear();
-
-			while (!is.eof())
-			{
-				const int lineSize = 1024;
-				char line[lineSize]{};
-
-				std::string name;
-				std::string condition;
-				std::string conditionArg;
-				std::string frameStart;
-				std::string frameEnd;
-
-				is.getline(line, lineSize);
-				name.assign(line);
-				if (name.empty())
-				{
-					break;
-				}
-
-				is.getline(line, lineSize);
-				condition.assign(line);
-
-				is.getline(line, lineSize);
-				conditionArg.assign(line);
-
-				is.getline(line, lineSize);
-				frameStart.assign(line);
-
-				is.getline(line, lineSize);
-				frameEnd.assign(line);
-
-				CutsceneSequenceItem newItem = {};
-				newItem.name = name;
-				newItem.condition = condition;
-				newItem.conditionArg = conditionArg;
-				newItem.frameStart = std::stoi(frameStart);
-				newItem.frameEnd = std::stoi(frameEnd);
-
-				items.push_back(newItem);
-			}
-
-			is.close();
-
-			//Set name widget on load
-			if (items.size() > 0)
-			{
-				strcpy(itemNameInput, items[0].name.c_str());
-			}
-		}
+		LoadCutsceneFile();
 	}
 
 	//@Todo: There's a way to get selectedEntry on ImSequencer::Sequencer() click (it returns a bool) but can't figure it out.
@@ -200,6 +130,90 @@ void CutsceneSequencer::Tick(float deltaTime)
 	//Main Sequencer function
 	ImSequencer::Sequencer(this, &currentFrame, &expanded, &selectedEntry, &firstFrame,
 		ImSequencer::SEQUENCER_EDIT_STARTEND | ImSequencer::SEQUENCER_ADD | ImSequencer::SEQUENCER_DEL | ImSequencer::SEQUENCER_COPYPASTE | ImSequencer::SEQUENCER_CHANGE_FRAME);
+}
+
+void CutsceneSequencer::SaveCutsceneFile()
+{
+	QFileDialog saveDialog;
+	QString saveName = saveDialog.getSaveFileName(nullptr, "Save Cutscene File", "Cutscenes/");
+	if (!saveName.isEmpty())
+	{
+		std::ofstream os;
+		os.open(saveName.toStdString(), std::ios_base::out);
+
+		for (auto& item : items)
+		{
+			os << item.name << "\n";
+			os << item.condition << "\n";
+			os << item.conditionArg << "\n";
+			os << item.frameStart << "\n";
+			os << item.frameEnd << "\n";
+		}
+
+		os.close();
+		Log("[%s] saved.", saveName.toStdString().c_str());
+	}
+}
+
+void CutsceneSequencer::LoadCutsceneFile()
+{
+	QFileDialog loadDialog;
+	QString loadName = loadDialog.getOpenFileName(nullptr, "Open Cutscene File", "Cutscenes/");
+	if (!loadName.isEmpty())
+	{
+		std::ifstream is;
+		is.open(loadName.toStdString(), std::ios_base::in);
+
+		items.clear();
+
+		while (!is.eof())
+		{
+			const int lineSize = 1024;
+			char line[lineSize]{};
+
+			std::string name;
+			std::string condition;
+			std::string conditionArg;
+			std::string frameStart;
+			std::string frameEnd;
+
+			is.getline(line, lineSize);
+			name.assign(line);
+			if (name.empty())
+			{
+				break;
+			}
+
+			is.getline(line, lineSize);
+			condition.assign(line);
+
+			is.getline(line, lineSize);
+			conditionArg.assign(line);
+
+			is.getline(line, lineSize);
+			frameStart.assign(line);
+
+			is.getline(line, lineSize);
+			frameEnd.assign(line);
+
+			CutsceneSequenceItem newItem = {};
+			newItem.name = name;
+			newItem.condition = condition;
+			newItem.conditionArg = conditionArg;
+			newItem.frameStart = std::stoi(frameStart);
+			newItem.frameEnd = std::stoi(frameEnd);
+
+			items.push_back(newItem);
+		}
+
+		is.close();
+
+		//Set name widget on load
+		if (items.size() > 0)
+		{
+			strcpy(itemNameInput, items[0].name.c_str());
+		}
+	}
 }
 
 void CutsceneSequencer::Get(int index, int** start, int** end, int* type, unsigned int* color)
