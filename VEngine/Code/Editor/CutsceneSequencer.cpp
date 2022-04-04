@@ -36,13 +36,13 @@ void CutsceneSequencer::Tick()
 		QString saveName = saveDialog.getSaveFileName(nullptr, "Save Cutscene File", "Cutscenes/");
 		if (!saveName.isEmpty())
 		{
-			std::wofstream os;
+			std::ofstream os;
 			os.open(saveName.toStdString(), std::ios_base::out);
 
 			for (auto& item : items)
 			{
-				os << item.name.c_str() << "\n";
-				os << item.condition.c_str() << "\n";
+				os << item.name << "\n";
+				os << item.condition << "\n";
 				os << item.frameStart << "\n";
 				os << item.frameEnd << "\n";
 			}
@@ -56,6 +56,50 @@ void CutsceneSequencer::Tick()
 	{
 		QFileDialog loadDialog;
 		QString loadName = loadDialog.getOpenFileName(nullptr, "Open Cutscene File", "Cutscenes/");
+		if (!loadName.isEmpty())
+		{
+			std::ifstream is;
+			is.open(loadName.toStdString(), std::ios_base::in);
+
+			items.clear();
+
+			while (!is.eof())
+			{
+				const int lineSize = 1024;
+				char line[lineSize]{};
+
+				std::string name;
+				std::string condition;
+				std::string frameStart;
+				std::string frameEnd;
+
+				is.getline(line, lineSize);
+				name.assign(line);
+				if (name.empty())
+				{
+					break;
+				}
+
+				is.getline(line, lineSize);
+				condition.assign(line);
+
+				is.getline(line, lineSize);
+				frameStart.assign(line);
+
+				is.getline(line, lineSize);
+				frameEnd.assign(line);
+
+				CutsceneSequenceItem newItem = {};
+				newItem.name = name;
+				newItem.condition = condition;
+				newItem.frameStart = std::stoi(frameStart);
+				newItem.frameEnd = std::stoi(frameEnd);
+
+				items.push_back(newItem);
+			}
+
+			is.close();
+		}
 	}
 
 	//@Todo: There's a way to get selectedEntry on ImSequencer::Sequencer() click (it returns a bool) but can't figure it out.
