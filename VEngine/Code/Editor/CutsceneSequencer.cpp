@@ -99,6 +99,12 @@ void CutsceneSequencer::Tick()
 			}
 
 			is.close();
+
+			//Set name widget on load
+			if (items.size() > 0)
+			{
+				strcpy(itemNameInput, items[0].name.c_str());
+			}
 		}
 	}
 
