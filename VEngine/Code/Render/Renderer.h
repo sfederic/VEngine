@@ -64,6 +64,7 @@ struct Renderer
 	ID3D11RenderTargetView* reflectionRTV;
 	ID3D11SamplerState* reflectionSampler;
 	ID3D11Texture2D* reflectionBackBuffer;
+	ID3D11ShaderResourceView* reflectionSRV;
 
 private:
 	//Queries for GPU profiling (Note that the queires are double buffered to deal with two frames for the GPU

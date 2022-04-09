@@ -92,6 +92,12 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	//planar reflection buffer setup
 	HR(swapchain->GetBuffer(0, IID_PPV_ARGS(&reflectionBackBuffer)));
 	HR(device->CreateRenderTargetView(reflectionBackBuffer, nullptr, &reflectionRTV));
+	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
+	srvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.Texture2D.MipLevels = 1;
+	srvDesc.Texture2D.MostDetailedMip = 0;
+	HR(device->CreateShaderResourceView(reflectionBackBuffer, &srvDesc, &reflectionSRV));
 }
 
 void Renderer::Tick()
@@ -489,6 +495,9 @@ void Renderer::RenderMeshComponents()
 	//Set shadow resources
 	context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
 	context->PSSetSamplers(1, 1, &shadowMap->sampler);
+
+	//Set reflection resources
+	context->PSSetShaderResources(reflectionTextureResgiter, 1, &reflectionSRV);
 
 	for (auto mesh : MeshComponent::system.components)
 	{
