@@ -30,6 +30,7 @@ struct VS_OUT
 
 Texture2D t : register(t0);
 Texture2D shadowMap : register(t1);
+Texture2D reflectionMap : register(t2);
 SamplerState s : register(s0);
 SamplerComparisonState shadowSampler : register(s1);
 StructuredBuffer<InstanceData> instanceData : register(t3);
