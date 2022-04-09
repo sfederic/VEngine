@@ -55,6 +55,8 @@ const int reflectionTextureResgiter = 2;
 ShaderMatrices shaderMatrices;
 ShaderLights shaderLights;
 
+CameraComponent planarReflectionCamera(XMFLOAT3(10.f, 0.f, -5.f), false);
+
 void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 {
 	viewport.Width = viewportWidth;
@@ -457,9 +459,9 @@ void Renderer::Render()
 	context->VSSetConstantBuffers(cbTimeRegister, 1, &cbTime);
 
 	//RenderShadowPass();
+	RenderPlanarReflections();
 	RenderMeshComponents();
 	RenderInstanceMeshComponents();
-	RenderPlanarReflections();
 	RenderPolyboards();
 	RenderSpriteSheets();
 	RenderBounds();
@@ -539,18 +541,6 @@ void Renderer::RenderPlanarReflections()
 
 	if (ReflectionPlane::system.actors.empty()) return;
 
-	if (!DirectionalLightComponent::system.components.empty())
-	{
-		shaderMatrices.lightMVP = shadowMap->OutputMatrix();
-		shaderMatrices.lightViewProj = shadowMap->GetLightViewMatrix() * shadowMap->GetLightPerspectiveMatrix();
-
-		shaderLights.shadowsEnabled = true;
-	}
-	else
-	{
-		shaderLights.shadowsEnabled = false;
-	}
-
 	context->RSSetViewports(1, &viewport);
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	context->OMSetRenderTargets(1, &reflectionRTV, dsv);
@@ -591,6 +581,7 @@ void Renderer::RenderPlanarReflections()
 		context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 
 		//Set matrices
+		shaderMatrices.view = XMMatrixLookAtLH(planarReflectionCamera.GetPositionV(), XMVectorSet(0.f, 2.f, 5.f, 0.f), VMath::XMVectorUp());
 		shaderMatrices.model = mesh->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		shaderMatrices.MakeTextureMatrix(mesh->material);
