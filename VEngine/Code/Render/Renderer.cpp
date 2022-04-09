@@ -465,7 +465,6 @@ void Renderer::Render()
 	PROFILE_END
 }
 
-//@Todo: I think you can do instancing here based on the mesh filename to up performance.
 void Renderer::RenderMeshComponents()
 {
 	PROFILE_START
