@@ -559,6 +559,8 @@ void Renderer::RenderPlanarReflections()
 	//context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
 	//context->PSSetSamplers(1, 1, &shadowMap->sampler);
 
+	ShaderItem* planarReflectionShader = shaderSystem.FindShader(L"DefaultShader.hlsl");
+
 	for (auto mesh : MeshComponent::system.components)
 	{
 		if (!mesh->active || mesh->cullMesh) continue;
@@ -568,7 +570,6 @@ void Renderer::RenderPlanarReflections()
 		const FLOAT blendState[4] = { 0.f };
 		context->OMSetBlendState(nullptr, blendState, 0xFFFFFFFF);
 
-		ShaderItem* planarReflectionShader = shaderSystem.FindShader(L"PlanarReflection.hlsl");
 		context->VSSetShader(planarReflectionShader->vertexShader, nullptr, 0);
 		context->PSSetShader(planarReflectionShader->pixelShader, nullptr, 0);
 
