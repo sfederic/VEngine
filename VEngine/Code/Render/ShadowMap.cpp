@@ -20,7 +20,7 @@ ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
 	//Be mindful of the formats here. The Comparison sampler at and the call to SampleCmp/SampleCmpLevelZero
 	//is very picky about the formats. 
 
-	D3D11_TEXTURE2D_DESC texDesc;
+	D3D11_TEXTURE2D_DESC texDesc = {};
 	texDesc.Width = width;
 	texDesc.Height = height;
 	texDesc.MipLevels = 1;
@@ -36,7 +36,7 @@ ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
 	ID3D11Texture2D* depthMap = nullptr;
 	HR(device->CreateTexture2D(&texDesc, 0, &depthMap));
 
-	D3D11_DEPTH_STENCIL_VIEW_DESC dsvDesc;
+	D3D11_DEPTH_STENCIL_VIEW_DESC dsvDesc = {};
 	dsvDesc.Flags = 0;
 	dsvDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
 	dsvDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
@@ -45,7 +45,7 @@ ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
 	assert(depthMap);
 	HR(device->CreateDepthStencilView(depthMap, &dsvDesc, &depthMapDSV));
 
-	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc;
+	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 	srvDesc.Format = DXGI_FORMAT_R24_UNORM_X8_TYPELESS;
 	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
 	srvDesc.Texture2D.MipLevels = texDesc.MipLevels;
