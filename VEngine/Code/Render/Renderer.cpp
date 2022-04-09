@@ -18,6 +18,7 @@
 #include "Components/WidgetComponent.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Actors/Actor.h"
+#include "Actors/ReflectionPlane.h"
 #include "ShaderSystem.h"
 #include "DebugActors/DebugBox.h"
 #include "DebugActors/DebugSphere.h"
@@ -49,6 +50,7 @@ const int cbTimeRegister = 4;
 const int cbMeshDataRegister = 5;
 const int instanceSRVRegister = 3;
 const int shadowMapTextureResgiter = 1;
+const int reflectionTextureResgiter = 2;
 
 ShaderMatrices shaderMatrices;
 ShaderLights shaderLights;
@@ -86,6 +88,10 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	linesBuffer = RenderUtils::CreateDynamicBuffer(1024, D3D11_BIND_VERTEX_BUFFER, lines);
 
 	spriteSystem.Init();
+
+	//planar reflection buffer setup
+	HR(swapchain->GetBuffer(0, IID_PPV_ARGS(&reflectionBackBuffer)));
+	HR(device->CreateRenderTargetView(reflectionBackBuffer, nullptr, &reflectionRTV));
 }
 
 void Renderer::Tick()
@@ -447,6 +453,7 @@ void Renderer::Render()
 	//RenderShadowPass();
 	RenderMeshComponents();
 	RenderInstanceMeshComponents();
+	RenderPlanarReflections();
 	RenderPolyboards();
 	RenderSpriteSheets();
 	RenderBounds();
@@ -475,8 +482,6 @@ void Renderer::RenderMeshComponents()
 		shaderLights.shadowsEnabled = false;
 	}
 
-	RenderSetup();
-
 	UpdateLights();
 
 	//Set lights buffer
@@ -491,9 +496,6 @@ void Renderer::RenderMeshComponents()
 		if (!mesh->active || mesh->cullMesh) continue;
 
 		SetRenderPipelineStates(mesh);
-
-		//Animation
-		AnimateSkeletalMesh(mesh);
 
 		Material* material = mesh->material;
 
@@ -519,6 +521,93 @@ void Renderer::RenderMeshComponents()
 	//Set to null to remove warnings
 	ID3D11ShaderResourceView* nullSRV = nullptr;
 	context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSRV);
+
+	PROFILE_END
+}
+
+void Renderer::RenderPlanarReflections()
+{
+	PROFILE_START
+
+	if (ReflectionPlane::system.actors.empty()) return;
+
+	if (!DirectionalLightComponent::system.components.empty())
+	{
+		shaderMatrices.lightMVP = shadowMap->OutputMatrix();
+		shaderMatrices.lightViewProj = shadowMap->GetLightViewMatrix() * shadowMap->GetLightPerspectiveMatrix();
+
+		shaderLights.shadowsEnabled = true;
+	}
+	else
+	{
+		shaderLights.shadowsEnabled = false;
+	}
+
+	context->RSSetViewports(1, &viewport);
+	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	context->OMSetRenderTargets(1, &reflectionRTV, dsv);
+	context->ClearDepthStencilView(dsv, D3D11_CLEAR_DEPTH, 1.0f, 0);
+	const float clearColour[4] = { 0.f, 0.f, 0.f, 0.f };
+	context->ClearRenderTargetView(reflectionRTV, clearColour);
+
+	UpdateLights();
+
+	//Set lights buffer
+	context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
+
+	//Set shadow resources (not now for reflections)
+	//context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
+	//context->PSSetSamplers(1, 1, &shadowMap->sampler);
+
+	for (auto mesh : MeshComponent::system.components)
+	{
+		if (!mesh->active || mesh->cullMesh) continue;
+
+		Material* material = mesh->material;
+
+		const FLOAT blendState[4] = { 0.f };
+		context->OMSetBlendState(nullptr, blendState, 0xFFFFFFFF);
+
+		ShaderItem* planarReflectionShader = shaderSystem.FindShader(L"PlanarReflection.hlsl");
+		context->VSSetShader(planarReflectionShader->vertexShader, nullptr, 0);
+		context->PSSetShader(planarReflectionShader->pixelShader, nullptr, 0);
+
+		context->PSSetSamplers(0, 1, &material->sampler->data);
+		context->PSSetShaderResources(0, 1, &material->texture->srv);
+
+		context->IASetVertexBuffers(0, 1, &mesh->pso->vertexBuffer->data, &stride, &offset);
+		context->IASetIndexBuffer(mesh->pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
+
+		MapBuffer(cbMaterial, &material->materialShaderData, sizeof(MaterialShaderData));
+		context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
+
+		//Set matrices
+		shaderMatrices.model = mesh->GetWorldMatrix();
+		shaderMatrices.MakeModelViewProjectionMatrix();
+		shaderMatrices.MakeTextureMatrix(mesh->material);
+
+		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
+		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+
+		//Set mesh data to shader
+		ShaderMeshData meshData = {};
+		meshData.position = mesh->GetPosition();
+		MapBuffer(cbMeshData, &meshData, sizeof(ShaderMeshData));
+		context->VSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
+		context->PSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
+
+		//Draw
+		context->DrawIndexed(mesh->meshDataProxy->indices->size(), 0, 0);
+	}
+
+	//Set to null to remove warnings
+	ID3D11ShaderResourceView* nullSRV = nullptr;
+	context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSRV);
+
+	//Remove reflection RTV
+	ID3D11RenderTargetView* nullRTV = nullptr;
+	context->OMSetRenderTargets(1, &nullRTV, nullptr);
+	context->RSSetState(0);
 
 	PROFILE_END
 }

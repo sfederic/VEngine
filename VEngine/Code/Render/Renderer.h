@@ -59,6 +59,11 @@ struct Renderer
 
 	//Shadow maps
 	struct ShadowMap* shadowMap;
+	
+	//Reflection
+	ID3D11RenderTargetView* reflectionRTV;
+	ID3D11SamplerState* reflectionSampler;
+	ID3D11Texture2D* reflectionBackBuffer;
 
 private:
 	//Queries for GPU profiling (Note that the queires are double buffered to deal with two frames for the GPU
@@ -95,6 +100,7 @@ private:
 	void CheckSupportedFeatures();
 	void RenderShadowPass();
 	void RenderMeshComponents();
+	void RenderPlanarReflections();
 	void RenderInstanceMeshComponents();
 	void RenderBounds();
 	void RenderCameraMeshes();
