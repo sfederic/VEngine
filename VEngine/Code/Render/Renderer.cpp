@@ -55,7 +55,7 @@ const int reflectionTextureResgiter = 2;
 ShaderMatrices shaderMatrices;
 ShaderLights shaderLights;
 
-CameraComponent planarReflectionCamera(XMFLOAT3(10.f, 0.f, -5.f), false);
+CameraComponent planarReflectionCamera(XMFLOAT3(5.f, 0.f, -2.f), false);
 
 void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 {
@@ -92,14 +92,27 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	spriteSystem.Init();
 
 	//planar reflection buffer setup
-	HR(swapchain->GetBuffer(0, IID_PPV_ARGS(&reflectionBackBuffer)));
-	HR(device->CreateRenderTargetView(reflectionBackBuffer, nullptr, &reflectionRTV));
+	D3D11_TEXTURE2D_DESC texDesc = {};
+	texDesc.Width = viewport.Width;
+	texDesc.Height = viewport.Height;
+	texDesc.MipLevels = 1;
+	texDesc.ArraySize = 1;
+	texDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	texDesc.SampleDesc.Count = 1;
+	texDesc.Usage = D3D11_USAGE_DEFAULT;
+	texDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
+
+	ID3D11Texture2D* reflectionTex = nullptr;
+	HR(device->CreateTexture2D(&texDesc, 0, &reflectionTex));
+
 	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 	srvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
 	srvDesc.Texture2D.MipLevels = 1;
 	srvDesc.Texture2D.MostDetailedMip = 0;
-	HR(device->CreateShaderResourceView(reflectionBackBuffer, &srvDesc, &reflectionSRV));
+	HR(device->CreateShaderResourceView(reflectionTex, &srvDesc, &reflectionSRV));
+
+	HR(device->CreateRenderTargetView(reflectionTex, nullptr, &reflectionRTV));
 }
 
 void Renderer::Tick()
@@ -489,23 +502,26 @@ void Renderer::RenderMeshComponents()
 		shaderLights.shadowsEnabled = false;
 	}
 
+	RenderSetup();
 	UpdateLights();
 
-	//Set lights buffer
-	context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
-
-	//Set shadow resources
-	context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
-	context->PSSetSamplers(1, 1, &shadowMap->sampler);
-
-	//Set reflection resources
-	context->PSSetShaderResources(reflectionTextureResgiter, 1, &reflectionSRV);
+	shaderMatrices.view = activeCamera->GetViewMatrix();
 
 	for (auto mesh : MeshComponent::system.components)
 	{
 		if (!mesh->active || mesh->cullMesh) continue;
 
 		SetRenderPipelineStates(mesh);
+
+		//Set lights buffer
+		context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
+
+		//Set shadow resources
+		context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
+		context->PSSetSamplers(1, 1, &shadowMap->sampler);
+
+		//Set reflection resources
+		context->PSSetShaderResources(reflectionTextureResgiter, 1, &reflectionSRV);
 
 		Material* material = mesh->material;
 
@@ -532,6 +548,8 @@ void Renderer::RenderMeshComponents()
 	ID3D11ShaderResourceView* nullSRV = nullptr;
 	context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSRV);
 
+	context->PSSetShaderResources(reflectionTextureResgiter, 1, &nullSRV);
+
 	PROFILE_END
 }
 
@@ -539,12 +557,11 @@ void Renderer::RenderPlanarReflections()
 {
 	PROFILE_START
 
-	if (ReflectionPlane::system.actors.empty()) return;
+	//if (ReflectionPlane::system.actors.empty()) return;
 
 	context->RSSetViewports(1, &viewport);
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	context->OMSetRenderTargets(1, &reflectionRTV, dsv);
-	context->ClearDepthStencilView(dsv, D3D11_CLEAR_DEPTH, 1.0f, 0);
+	context->OMSetRenderTargets(1, &reflectionRTV, nullptr);
 	const float clearColour[4] = { 0.f, 0.f, 0.f, 0.f };
 	context->ClearRenderTargetView(reflectionRTV, clearColour);
 
@@ -599,10 +616,6 @@ void Renderer::RenderPlanarReflections()
 		//Draw
 		context->DrawIndexed(mesh->meshDataProxy->indices->size(), 0, 0);
 	}
-
-	//Set to null to remove warnings
-	ID3D11ShaderResourceView* nullSRV = nullptr;
-	context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSRV);
 
 	//Remove reflection RTV
 	ID3D11RenderTargetView* nullRTV = nullptr;

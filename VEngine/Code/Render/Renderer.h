@@ -62,8 +62,6 @@ struct Renderer
 	
 	//Reflection
 	ID3D11RenderTargetView* reflectionRTV;
-	ID3D11SamplerState* reflectionSampler;
-	ID3D11Texture2D* reflectionBackBuffer;
 	ID3D11ShaderResourceView* reflectionSRV;
 
 private:
