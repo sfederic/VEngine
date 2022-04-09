@@ -6,5 +6,5 @@ struct ReflectionPlane : Actor
 {
 	ACTOR_SYSTEM(ReflectionPlane);
 
-
+	virtual Properties GetProps() override;
 };
