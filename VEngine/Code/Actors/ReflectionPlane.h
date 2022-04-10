@@ -5,6 +5,8 @@
 struct CameraComponent;
 struct MeshComponent;
 
+//Engine really should only be working with one ReflectionPlane per level. Asserts in rederer code for that.
+//@Todo: planar reflection code is junk. See if it's worth fixing up.
 struct ReflectionPlane : Actor
 {
 	ACTOR_SYSTEM(ReflectionPlane);
