@@ -71,6 +71,8 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 
 	shadowMap = new ShadowMap(device, 2048, 2048);
 
+	CheckSupportedFeatures();
+
 	CreateSwapchain((HWND)window);
 	CreateRTVAndDSV();
 	CreateInputLayout();
@@ -78,13 +80,12 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	CreateBlendStates();
 	CreateConstantBuffers();
 	CreateQueries();
-	CheckSupportedFeatures();
 
 	CreatePostProcessRenderTarget();
 
 	RenderUtils::defaultSampler = RenderUtils::CreateSampler();
 
-	Line lines[1024] = {};
+	Line lines[128] = {};
 	linesBuffer = RenderUtils::CreateDynamicBuffer(1024, D3D11_BIND_VERTEX_BUFFER, lines);
 
 	spriteSystem.Init();
@@ -164,10 +165,10 @@ void Renderer::CreateSwapchain(HWND window)
 	DXGI_SWAP_CHAIN_DESC sd = {};
 	sd.BufferDesc = { (UINT)viewport.Width, (UINT)viewport.Height, {60, 1}, DXGI_FORMAT_R8G8B8A8_UNORM };
 	sd.Windowed = TRUE;
-	sd.SampleDesc.Count = 1;
+	sd.SampleDesc = sampleDesc;
 	sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 	sd.OutputWindow = window;
-	sd.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
+	sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	sd.BufferCount = swapchainCount;
 
 	ComPtr<IDXGISwapChain> tempSwapchain;
@@ -193,7 +194,7 @@ void Renderer::CreateRTVAndDSV()
 	dsDesc.ArraySize = 1;
 	dsDesc.MipLevels = 1;
 	dsDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-	dsDesc.SampleDesc.Count = 1;
+	dsDesc.SampleDesc = sampleDesc;
 	dsDesc.Width = viewport.Width;
 	dsDesc.Height = viewport.Height;
 
@@ -418,9 +419,17 @@ void Renderer::CheckSupportedFeatures()
 	D3D11_FEATURE_DATA_THREADING threadFeature = {};
 	HR(device->CheckFeatureSupport(D3D11_FEATURE_THREADING, &threadFeature, sizeof(threadFeature)));
 
-	//MSAA check
+	//Setting sample count higher (4, 8) is ramps up GPU usage by 5-6%
+	const int sampleCount = 1;
+
+	//MSAA check and set
 	UINT msaaQualityLevel;
-	HR(device->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM, 4, &msaaQualityLevel));
+	HR(device->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM, sampleCount, &msaaQualityLevel));
+	assert(msaaQualityLevel > 0);
+
+	//Quality has to be one less than what CheckMultisampleQualityLevels() spits out for some reason
+	sampleDesc.Quality = msaaQualityLevel - 1;
+	sampleDesc.Count = sampleCount;
 }
 
 void Renderer::RenderShadowPass()

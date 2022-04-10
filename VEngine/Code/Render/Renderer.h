@@ -74,6 +74,9 @@ private:
 	int frameQueryIndex = 0;
 	int framesCollected = -1;
 
+	//Quality = 0 and Count = 1 are the 'default'
+	DXGI_SAMPLE_DESC sampleDesc;
+
 public:
 	float frameTime;
 
