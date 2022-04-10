@@ -414,8 +414,13 @@ void Renderer::MapBuffer(ID3D11Resource* resource, const void* src, size_t size)
 
 void Renderer::CheckSupportedFeatures()
 {
+	//Threading check
 	D3D11_FEATURE_DATA_THREADING threadFeature = {};
-	device->CheckFeatureSupport(D3D11_FEATURE_THREADING, &threadFeature, sizeof(threadFeature));
+	HR(device->CheckFeatureSupport(D3D11_FEATURE_THREADING, &threadFeature, sizeof(threadFeature)));
+
+	//MSAA check
+	UINT msaaQualityLevel;
+	HR(device->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM, 4, &msaaQualityLevel));
 }
 
 void Renderer::RenderShadowPass()
