@@ -55,8 +55,6 @@ const int reflectionTextureResgiter = 2;
 ShaderMatrices shaderMatrices;
 ShaderLights shaderLights;
 
-CameraComponent planarReflectionCamera(XMFLOAT3(6.f, 1.f, 5.f), false);
-
 void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 {
 	viewport.Width = viewportWidth;
@@ -583,7 +581,10 @@ void Renderer::RenderPlanarReflections()
 {
 	PROFILE_START
 
-	//if (ReflectionPlane::system.actors.empty()) return;
+	if (ReflectionPlane::system.actors.empty()) return;
+	assert(ReflectionPlane::system.actors.size() == 1);
+
+	auto reflectionPlane = ReflectionPlane::system.actors[0];
 
 	context->RSSetViewports(1, &viewport);
 	const float clearColour[4] = { 1.f, 0.f, 0.f, 0.f };
@@ -626,7 +627,7 @@ void Renderer::RenderPlanarReflections()
 		context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 
 		//Set matrices
-		shaderMatrices.view = XMMatrixLookAtLH(planarReflectionCamera.GetPositionV(), XMVectorSet(0.f, 0.f, 5.f, 0.f), VMath::XMVectorUp());
+		shaderMatrices.view = reflectionPlane->GetReflectionViewMatrix();
 		shaderMatrices.model = mesh->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		shaderMatrices.MakeTextureMatrix(mesh->material);
