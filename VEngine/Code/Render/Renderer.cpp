@@ -55,7 +55,7 @@ const int reflectionTextureResgiter = 2;
 ShaderMatrices shaderMatrices;
 ShaderLights shaderLights;
 
-CameraComponent planarReflectionCamera(XMFLOAT3(5.f, 0.f, -2.f), false);
+CameraComponent planarReflectionCamera(XMFLOAT3(6.f, 1.f, 5.f), false);
 
 void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 {
@@ -91,28 +91,7 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 
 	spriteSystem.Init();
 
-	//planar reflection buffer setup
-	D3D11_TEXTURE2D_DESC texDesc = {};
-	texDesc.Width = viewport.Width;
-	texDesc.Height = viewport.Height;
-	texDesc.MipLevels = 1;
-	texDesc.ArraySize = 1;
-	texDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	texDesc.SampleDesc.Count = 1;
-	texDesc.Usage = D3D11_USAGE_DEFAULT;
-	texDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
-
-	ID3D11Texture2D* reflectionTex = nullptr;
-	HR(device->CreateTexture2D(&texDesc, 0, &reflectionTex));
-
-	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
-	srvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
-	srvDesc.Texture2D.MipLevels = 1;
-	srvDesc.Texture2D.MostDetailedMip = 0;
-	HR(device->CreateShaderResourceView(reflectionTex, &srvDesc, &reflectionSRV));
-
-	HR(device->CreateRenderTargetView(reflectionTex, nullptr, &reflectionRTV));
+	CreatePlanarReflectionBuffers();
 }
 
 void Renderer::Tick()
@@ -380,6 +359,53 @@ void Renderer::CreateConstantBuffers()
 	assert(cbSkinningData);
 }
 
+void Renderer::CreatePlanarReflectionBuffers()
+{
+	if (reflectionTex)
+	{
+		reflectionTex->Release();
+	}
+
+	//Create texture
+	D3D11_TEXTURE2D_DESC texDesc = {};
+	texDesc.Width = viewport.Width;
+	texDesc.Height = viewport.Height;
+	texDesc.MipLevels = 1;
+	texDesc.ArraySize = 1;
+	texDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
+	texDesc.SampleDesc.Count = 1;
+	texDesc.Usage = D3D11_USAGE_DEFAULT;
+	texDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
+
+	HR(device->CreateTexture2D(&texDesc, 0, &reflectionTex));
+
+	if (reflectionSRV)
+	{
+		reflectionSRV->Release();
+	}
+
+	//Create SRV
+	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
+	srvDesc.Format = texDesc.Format;
+	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.Texture2D.MipLevels = 1;
+	srvDesc.Texture2D.MostDetailedMip = 0;
+	assert(reflectionTex);
+	HR(device->CreateShaderResourceView(reflectionTex, &srvDesc, &reflectionSRV));
+
+	if (reflectionRTV)
+	{
+		reflectionRTV->Release();
+	}
+
+	//Create RTV
+	D3D11_RENDER_TARGET_VIEW_DESC rtvDesc = {};
+	rtvDesc.Format = texDesc.Format;
+	rtvDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
+	rtvDesc.Texture2D.MipSlice = 0;
+	HR(device->CreateRenderTargetView(reflectionTex, &rtvDesc, &reflectionRTV));
+}
+
 void Renderer::MapBuffer(ID3D11Resource* resource, const void* src, size_t size)
 {
 	D3D11_MAPPED_SUBRESOURCE mapped = {};
@@ -560,10 +586,12 @@ void Renderer::RenderPlanarReflections()
 	//if (ReflectionPlane::system.actors.empty()) return;
 
 	context->RSSetViewports(1, &viewport);
+	const float clearColour[4] = { 1.f, 0.f, 0.f, 0.f };
+	context->ClearRenderTargetView(reflectionRTV, clearColour);
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	context->OMSetRenderTargets(1, &reflectionRTV, nullptr);
-	const float clearColour[4] = { 0.f, 0.f, 0.f, 0.f };
-	context->ClearRenderTargetView(reflectionRTV, clearColour);
+
+	context->RSSetState(rastStateMap[RastStates::solid]->data);
 
 	UpdateLights();
 
@@ -598,7 +626,7 @@ void Renderer::RenderPlanarReflections()
 		context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 
 		//Set matrices
-		shaderMatrices.view = XMMatrixLookAtLH(planarReflectionCamera.GetPositionV(), XMVectorSet(0.f, 2.f, 5.f, 0.f), VMath::XMVectorUp());
+		shaderMatrices.view = XMMatrixLookAtLH(planarReflectionCamera.GetPositionV(), XMVectorSet(0.f, 0.f, 5.f, 0.f), VMath::XMVectorUp());
 		shaderMatrices.model = mesh->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		shaderMatrices.MakeTextureMatrix(mesh->material);
@@ -1377,6 +1405,8 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 	CreateRTVAndDSV();
 
 	CreatePostProcessRenderTarget();
+
+	CreatePlanarReflectionBuffers();
 
 	uiSystem.Init((void*)swapchain);
 

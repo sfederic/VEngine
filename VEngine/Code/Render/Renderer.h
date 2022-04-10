@@ -63,6 +63,7 @@ struct Renderer
 	//Reflection
 	ID3D11RenderTargetView* reflectionRTV;
 	ID3D11ShaderResourceView* reflectionSRV;
+	ID3D11Texture2D* reflectionTex;
 
 private:
 	//Queries for GPU profiling (Note that the queires are double buffered to deal with two frames for the GPU
@@ -96,6 +97,7 @@ private:
 	void CreateBlendStates();
 	void CreateQueries();
 	void CreateConstantBuffers();
+	void CreatePlanarReflectionBuffers();
 	void CheckSupportedFeatures();
 	void RenderShadowPass();
 	void RenderMeshComponents();
