@@ -359,49 +359,49 @@ void Renderer::CreateConstantBuffers()
 
 void Renderer::CreatePlanarReflectionBuffers()
 {
-	if (reflectionTex)
-	{
-		reflectionTex->Release();
-	}
+	//if (reflectionTex)
+	//{
+	//	reflectionTex->Release();
+	//}
 
-	//Create texture
-	D3D11_TEXTURE2D_DESC texDesc = {};
-	texDesc.Width = viewport.Width;
-	texDesc.Height = viewport.Height;
-	texDesc.MipLevels = 1;
-	texDesc.ArraySize = 1;
-	texDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
-	texDesc.SampleDesc.Count = 1;
-	texDesc.Usage = D3D11_USAGE_DEFAULT;
-	texDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
+	////Create texture
+	//D3D11_TEXTURE2D_DESC texDesc = {};
+	//texDesc.Width = viewport.Width;
+	//texDesc.Height = viewport.Height;
+	//texDesc.MipLevels = 1;
+	//texDesc.ArraySize = 1;
+	//texDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
+	//texDesc.SampleDesc.Count = 1;
+	//texDesc.Usage = D3D11_USAGE_DEFAULT;
+	//texDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
 
-	HR(device->CreateTexture2D(&texDesc, 0, &reflectionTex));
+	//HR(device->CreateTexture2D(&texDesc, 0, &reflectionTex));
 
-	if (reflectionSRV)
-	{
-		reflectionSRV->Release();
-	}
+	//if (reflectionSRV)
+	//{
+	//	reflectionSRV->Release();
+	//}
 
-	//Create SRV
-	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
-	srvDesc.Format = texDesc.Format;
-	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
-	srvDesc.Texture2D.MipLevels = 1;
-	srvDesc.Texture2D.MostDetailedMip = 0;
-	assert(reflectionTex);
-	HR(device->CreateShaderResourceView(reflectionTex, &srvDesc, &reflectionSRV));
+	////Create SRV
+	//D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
+	//srvDesc.Format = texDesc.Format;
+	//srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+	//srvDesc.Texture2D.MipLevels = 1;
+	//srvDesc.Texture2D.MostDetailedMip = 0;
+	//assert(reflectionTex);
+	//HR(device->CreateShaderResourceView(reflectionTex, &srvDesc, &reflectionSRV));
 
-	if (reflectionRTV)
-	{
-		reflectionRTV->Release();
-	}
+	//if (reflectionRTV)
+	//{
+	//	reflectionRTV->Release();
+	//}
 
-	//Create RTV
-	D3D11_RENDER_TARGET_VIEW_DESC rtvDesc = {};
-	rtvDesc.Format = texDesc.Format;
-	rtvDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
-	rtvDesc.Texture2D.MipSlice = 0;
-	HR(device->CreateRenderTargetView(reflectionTex, &rtvDesc, &reflectionRTV));
+	////Create RTV
+	//D3D11_RENDER_TARGET_VIEW_DESC rtvDesc = {};
+	//rtvDesc.Format = texDesc.Format;
+	//rtvDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
+	//rtvDesc.Texture2D.MipSlice = 0;
+	//HR(device->CreateRenderTargetView(reflectionTex, &rtvDesc, &reflectionRTV));
 }
 
 void Renderer::MapBuffer(ID3D11Resource* resource, const void* src, size_t size)
@@ -496,7 +496,7 @@ void Renderer::Render()
 	context->VSSetConstantBuffers(cbTimeRegister, 1, &cbTime);
 
 	//RenderShadowPass();
-	RenderPlanarReflections();
+	//RenderPlanarReflections();
 	RenderMeshComponents();
 	RenderInstanceMeshComponents();
 	RenderPolyboards();
