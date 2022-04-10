@@ -43,6 +43,7 @@ Player::Player()
 	rootComponent->AddChild(mesh);
 
 	camera = CameraComponent::system.Add(this, CameraComponent(XMFLOAT3(1.75f, 1.75f, -2.75f), false));
+	camera->targetActor = this;
 
 	rootComponent->AddChild(camera);
 
