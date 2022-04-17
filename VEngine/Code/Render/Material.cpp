@@ -136,6 +136,7 @@ Properties Material::GetProps()
 {
 	Properties props("Material");
 	props.Add("Texture", &textureData).change = ReassignTexture;
+	props.Add("Use Texture", &materialShaderData.useTexture);
 	props.Add("Shader", &shaderData).change = ReassignShader;
 	props.Add("Rast State", &rastStateValue).change = ReassignRastState;
 	props.Add("Blend State", &blendStateValue).change = ReassignBlendState;
