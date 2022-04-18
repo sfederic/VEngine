@@ -172,7 +172,8 @@ LightingResult CalcDirectionalLight(Light light, float3 normal, float3 V, float3
 	float distance, float NdotV, float NdotL, float NdotH, float LdotH, float HdotV)
 {
     LightingResult result;
-	result.diffuse = CalcDiffuse(light, L, normal, LdotH, NdotL, NdotV);
+    float lightDot = saturate(dot(light.direction.xyz, normal));
+    result.diffuse = (light.colour * lightDot) / PI;
 	result.specular = CalcSpecularPBR(light, NdotV, NdotL, NdotH, LdotH, HdotV);
 	return result;
 }
