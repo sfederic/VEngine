@@ -110,6 +110,7 @@ private:
 	void CheckSupportedFeatures();
 	void RenderShadowPass();
 	void RenderMeshComponents();
+	void RenderLightProbeView();
 	void RenderPlanarReflections();
 	void RenderInstanceMeshComponents();
 	void RenderBounds();

@@ -512,6 +512,7 @@ void Renderer::Render()
 
 	//RenderShadowPass();
 	//RenderPlanarReflections();
+	RenderLightProbeView();
 	RenderMeshComponents();
 	RenderInstanceMeshComponents();
 	RenderPolyboards();
@@ -588,6 +589,79 @@ void Renderer::RenderMeshComponents()
 	context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSRV);
 
 	context->PSSetShaderResources(reflectionTextureResgiter, 1, &nullSRV);
+
+	PROFILE_END
+}
+
+void Renderer::RenderLightProbeView()
+{
+	PROFILE_START
+
+	context->RSSetViewports(1, &viewport);
+	const float clearColour[4] = { 1.f, 0.f, 0.f, 0.f };
+	context->ClearRenderTargetView(lightProbeRTV, clearColour);
+	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	context->OMSetRenderTargets(1, &lightProbeRTV, nullptr);
+
+	context->RSSetState(rastStateMap[RastStates::solid]->data);
+
+	UpdateLights();
+
+	//Set lights buffer
+	context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
+
+	//Set shadow resources (not now for lightprobes)
+	//context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
+	//context->PSSetSamplers(1, 1, &shadowMap->sampler);
+
+	ShaderItem* lightProbeShader = shaderSystem.FindShader(L"DefaultShader.hlsl");
+
+	for (auto mesh : MeshComponent::system.components)
+	{
+		if (!mesh->active || mesh->cullMesh) continue;
+
+		Material* material = mesh->material;
+
+		const FLOAT blendState[4] = { 0.f };
+		context->OMSetBlendState(nullptr, blendState, 0xFFFFFFFF);
+
+		context->VSSetShader(lightProbeShader->vertexShader, nullptr, 0);
+		context->PSSetShader(lightProbeShader->pixelShader, nullptr, 0);
+
+		context->PSSetSamplers(0, 1, &material->sampler->data);
+		context->PSSetShaderResources(0, 1, &material->texture->srv);
+
+		context->IASetVertexBuffers(0, 1, &mesh->pso->vertexBuffer->data, &stride, &offset);
+		context->IASetIndexBuffer(mesh->pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
+
+		MapBuffer(cbMaterial, &material->materialShaderData, sizeof(MaterialShaderData));
+		context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
+
+		//Set matrices
+		shaderMatrices.view = XMMatrixLookAtLH(XMVectorSet(0.f, 0.f, 0.f, 1.f),
+			XMVectorSet(1.f, 0.f, 0.f, 1.f), VMath::XMVectorUp()); //test lookat direction
+		shaderMatrices.model = mesh->GetWorldMatrix();
+		shaderMatrices.MakeModelViewProjectionMatrix();
+		shaderMatrices.MakeTextureMatrix(mesh->material);
+
+		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
+		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+
+		//Set mesh data to shader
+		ShaderMeshData meshData = {};
+		meshData.position = mesh->GetPosition();
+		MapBuffer(cbMeshData, &meshData, sizeof(ShaderMeshData));
+		context->VSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
+		context->PSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
+
+		//Draw
+		context->DrawIndexed(mesh->meshDataProxy->indices->size(), 0, 0);
+	}
+
+	//Remove lightprobe RTV
+	ID3D11RenderTargetView* nullRTV = nullptr;
+	context->OMSetRenderTargets(1, &nullRTV, nullptr);
+	context->RSSetState(0);
 
 	PROFILE_END
 }
@@ -813,8 +887,8 @@ void Renderer::CreateLightProbeBuffers()
 {
 	//Texture
 	D3D11_TEXTURE2D_DESC texDesc = {};
-	texDesc.Width = viewport.Width;
-	texDesc.Height = viewport.Height;
+	texDesc.Width = 64;
+	texDesc.Height = 64;
 	texDesc.MipLevels = 1;
 	texDesc.ArraySize = 1;
 	texDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
