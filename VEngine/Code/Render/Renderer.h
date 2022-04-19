@@ -65,6 +65,11 @@ struct Renderer
 	ID3D11ShaderResourceView* reflectionSRV;
 	ID3D11Texture2D* reflectionTex;
 
+	//Light probe buffers
+	ID3D11RenderTargetView* lightProbeRTV = nullptr;
+	ID3D11ShaderResourceView* lightProbeSRV = nullptr;
+	ID3D11Texture2D* lightProbeTexture = nullptr;
+
 private:
 	//Queries for GPU profiling (Note that the queires are double buffered to deal with two frames for the GPU
 	//being ahead of the GPU)
@@ -101,6 +106,7 @@ private:
 	void CreateQueries();
 	void CreateConstantBuffers();
 	void CreatePlanarReflectionBuffers();
+	void CreateLightProbeBuffers();
 	void CheckSupportedFeatures();
 	void RenderShadowPass();
 	void RenderMeshComponents();

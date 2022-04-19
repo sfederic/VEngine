@@ -82,6 +82,7 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	CreateQueries();
 
 	CreatePostProcessRenderTarget();
+	CreateLightProbeBuffers();
 
 	RenderUtils::defaultSampler = RenderUtils::CreateSampler();
 
@@ -806,6 +807,38 @@ void Renderer::RenderBounds()
 			context->Draw(debugBox.boxMesh->meshDataProxy->vertices->size(), 0);
 		}
 	}
+}
+
+void Renderer::CreateLightProbeBuffers()
+{
+	//Texture
+	D3D11_TEXTURE2D_DESC texDesc = {};
+	texDesc.Width = viewport.Width;
+	texDesc.Height = viewport.Height;
+	texDesc.MipLevels = 1;
+	texDesc.ArraySize = 1;
+	texDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
+	texDesc.SampleDesc.Count = 1;
+	texDesc.Usage = D3D11_USAGE_DEFAULT;
+	texDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
+
+	HR(device->CreateTexture2D(&texDesc, 0, &lightProbeTexture));
+	assert(lightProbeTexture);
+
+	//SRV
+	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
+	srvDesc.Format = texDesc.Format;
+	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.Texture2D.MipLevels = 1;
+	srvDesc.Texture2D.MostDetailedMip = 0;
+	HR(device->CreateShaderResourceView(lightProbeTexture, &srvDesc, &lightProbeSRV));
+
+	//RTV
+	D3D11_RENDER_TARGET_VIEW_DESC rtvDesc = {};
+	rtvDesc.Format = texDesc.Format;
+	rtvDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
+	rtvDesc.Texture2D.MipSlice = 0;
+	HR(device->CreateRenderTargetView(lightProbeTexture, &rtvDesc, &lightProbeRTV));
 }
 
 void Renderer::RenderCameraMeshes()
