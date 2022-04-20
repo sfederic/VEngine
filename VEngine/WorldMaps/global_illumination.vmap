@@ -1,0 +1,486 @@
+Grid
+0
+GridActor
+0
+AudioActor
+0
+Player
+0
+Unit
+0
+EntranceTrigger
+0
+NPC
+0
+MeshActor
+8
+ Position
+0 0 0
+ Rotation
+0.000172634 0.707107 0.707107 -0.000172603
+ Scale
+1.00001 1.00001 1.00001
+Ambient
+0.8 0.8 0.8 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Metallic
+0
+Name
+sphere_high0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+UID
+3725289809
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+-1 1 0
+ Rotation
+0.500122 0.499878 0.500122 0.499878
+ Scale
+1.00001 1.00001 1.00001
+Ambient
+0.9 0.2 0.2 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Metallic
+0
+Name
+sphere_high1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+UID
+3725289809
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+1 1 0
+ Rotation
+-0.500122 -0.499878 0.500122 0.499878
+ Scale
+1.00001 1.00001 1.00001
+Ambient
+0.2 0.2 0.9 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Metallic
+0
+Name
+sphere_high2
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+UID
+3725289809
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+0 1 1
+ Rotation
+0.707279 0.706934 4.92394e-09 1.54505e-08
+ Scale
+1.00001 1.00001 1.00001
+Ambient
+0.8 0.8 0.8 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Metallic
+0
+Name
+sphere_high3
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+UID
+3725289809
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+0 2 0
+ Rotation
+0.707107 -0.000172618 0.000172659 0.707107
+ Scale
+1.00001 1.00001 1.00001
+Ambient
+0.8 0.8 0.8 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Metallic
+0
+Name
+sphere_high4
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+UID
+3725289809
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+0.3 0.7 0
+ Rotation
+-0 -0.34202 -0 0.939693
+ Scale
+0.75 1.25 0.75
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+cube.fbx
+Metallic
+0
+Name
+sphere_high5
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+UID
+3761708571
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+-0.6 0.2 -0.4
+ Rotation
+-0 -0.0873277 -0 0.99618
+ Scale
+0.5 0.5 0.5
+Ambient
+0.9 0.9 0.1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+cube.fbx
+Metallic
+0
+Name
+sphere_high6
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+UID
+238427179
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+0 0.2 -0.7
+ Rotation
+-0 0 -0 1
+ Scale
+0.25 0.25 0.25
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+sphere_high.fbx
+Metallic
+1
+Name
+sphere_high7
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0.5
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+UID
+1455451136
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+DirectionalLightActor
+1
+ Position
+4 -3 6
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Colour
+1 1 1 1
+LightEnabled
+1
+Name
+DirectionalLightActor0
+UID
+2509474614
+next
+SavePoint
+0
+PointLightActor
+1
+ Position
+0 1.8 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Colour
+1 1 1 1
+Intensity
+5
+LightEnabled
+1
+Name
+PointLightActor0
+UID
+456045139
+next
+SpotLightActor
+0
+FenceActor
+0
+Billboard
+0
+InteractTrigger
+0
+ParticleSystem
+0
+DialogueTrigger
+0
+DestructibleActor
+0
+MemoryActor
+0
+TitleScreenActor
+0
+PushableGridActor
+0
+PlayerDialogueTrigger
+0
+GoddessStatue
+0
+PhysicsActor
+0
+PolyboardActor
+0
+DebugNoteActor
+0
+SpriteSheetActor
+0
+MovingGridActor
+0
+CutsceneActor
+0
+ReflectionPlane
+0
+DiffuseProbeMap
+0
