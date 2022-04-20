@@ -40,6 +40,8 @@ Texture
 test.png
 UID
 2808557721
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -111,6 +113,8 @@ Texture
 test.png
 UID
 2806943237
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -168,6 +172,8 @@ Texture
 wood128x128.jpg
 UID
 3799468868
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -215,6 +221,8 @@ Texture
 wood_furniture.jpg
 UID
 1222205776
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -262,6 +270,8 @@ Texture
 wood_furniture.jpg
 UID
 1222205776
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -309,6 +319,8 @@ Texture
 wood_furniture.jpg
 UID
 4148349224
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -356,6 +368,8 @@ Texture
 wood_furniture.jpg
 UID
 726984303
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -403,6 +417,8 @@ Texture
 wall06.png
 UID
 3799468868
+Use Texture
+1
 UvOffset
 0.2 0
 UvOffsetSpeed
@@ -450,6 +466,8 @@ Texture
 metal_smooth.jpg
 UID
 3799468868
+Use Texture
+1
 UvOffset
 0.5 0
 UvOffsetSpeed
@@ -497,6 +515,8 @@ Texture
 wall_white.png
 UID
 3799468868
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -544,6 +564,8 @@ Texture
 wall06.png
 UID
 3799468868
+Use Texture
+1
 UvOffset
 0.7 0
 UvOffsetSpeed
@@ -591,6 +613,8 @@ Texture
 ground.jpg
 UID
 838350829
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -638,6 +662,8 @@ Texture
 ground.jpg
 UID
 838350829
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -685,6 +711,8 @@ Texture
 ground.jpg
 UID
 838350829
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -732,6 +760,8 @@ Texture
 ground.jpg
 UID
 838350829
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -779,6 +809,8 @@ Texture
 ground.jpg
 UID
 838350829
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -826,6 +858,8 @@ Texture
 sophie.jpg
 UID
 675059005
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -873,6 +907,8 @@ Texture
 sophie.jpg
 UID
 675059005
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -920,6 +956,8 @@ Texture
 sophie.jpg
 UID
 675059005
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -967,6 +1005,8 @@ Texture
 wood_furniture.jpg
 UID
 3389689958
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -1014,6 +1054,8 @@ Texture
 metal.jpg
 UID
 911246574
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -1061,6 +1103,8 @@ Texture
 metal.jpg
 UID
 911246574
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -1108,6 +1152,8 @@ Texture
 metal.jpg
 UID
 911246574
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -1155,6 +1201,8 @@ Texture
 test.png
 UID
 1321265010
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -1202,6 +1250,8 @@ Texture
 boat_memory.jpg
 UID
 675059005
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -1249,6 +1299,8 @@ Texture
 docks.jpg
 UID
 675059005
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -1296,6 +1348,8 @@ Texture
 metal_smooth.jpg
 UID
 3499802893
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -1416,4 +1470,25 @@ UID
 492697300
 cutsceneFilename
 test.cutscene
+next
+ReflectionPlane
+0
+DiffuseProbeMap
+1
+ Position
+1 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+DiffuseProbeMap0
+UID
+1784643783
+sizeX
+193260785
+sizeY
+32759
+sizeZ
+-1422331624
 next
