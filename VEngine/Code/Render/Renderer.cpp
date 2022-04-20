@@ -512,7 +512,7 @@ void Renderer::Render()
 
 	//RenderShadowPass();
 	//RenderPlanarReflections();
-	RenderLightProbeView();
+	//RenderLightProbeView();
 	RenderMeshComponents();
 	RenderInstanceMeshComponents();
 	RenderPolyboards();
@@ -598,7 +598,7 @@ void Renderer::RenderLightProbeView()
 	PROFILE_START
 
 	context->RSSetViewports(1, &viewport);
-	const float clearColour[4] = { 1.f, 0.f, 0.f, 0.f };
+	const float clearColour[4] = { 0.f, 0.f, 0.f, 0.f };
 	context->ClearRenderTargetView(lightProbeRTV, clearColour);
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	context->OMSetRenderTargets(1, &lightProbeRTV, nullptr);
@@ -638,8 +638,8 @@ void Renderer::RenderLightProbeView()
 		context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 
 		//Set matrices
-		shaderMatrices.view = XMMatrixLookAtLH(XMVectorSet(0.f, 0.f, 0.f, 1.f),
-			XMVectorSet(1.f, 0.f, 0.f, 1.f), VMath::XMVectorUp()); //test lookat direction
+		shaderMatrices.view = XMMatrixLookAtLH(XMVectorSet(0.5f, 1.f, 0.5f, 1.f),
+			XMVectorSet(0.5f, 1.f, 0.5f, 1.f) + VMath::XMVectorRight(), VMath::XMVectorUp()); //test lookat direction
 		shaderMatrices.model = mesh->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		shaderMatrices.MakeTextureMatrix(mesh->material);
@@ -886,9 +886,11 @@ void Renderer::RenderBounds()
 void Renderer::CreateLightProbeBuffers()
 {
 	//Texture
+	if (lightProbeTexture) lightProbeTexture->Release();
+
 	D3D11_TEXTURE2D_DESC texDesc = {};
-	texDesc.Width = 64;
-	texDesc.Height = 64;
+	texDesc.Width = 128;
+	texDesc.Height = 128;
 	texDesc.MipLevels = 1;
 	texDesc.ArraySize = 1;
 	texDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
@@ -900,6 +902,8 @@ void Renderer::CreateLightProbeBuffers()
 	assert(lightProbeTexture);
 
 	//SRV
+	if (lightProbeSRV) lightProbeSRV->Release();
+
 	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 	srvDesc.Format = texDesc.Format;
 	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
@@ -908,6 +912,8 @@ void Renderer::CreateLightProbeBuffers()
 	HR(device->CreateShaderResourceView(lightProbeTexture, &srvDesc, &lightProbeSRV));
 
 	//RTV
+	if (lightProbeRTV) lightProbeRTV->Release();
+
 	D3D11_RENDER_TARGET_VIEW_DESC rtvDesc = {};
 	rtvDesc.Format = texDesc.Format;
 	rtvDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
@@ -1527,7 +1533,7 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 	CreateRTVAndDSV();
 
 	CreatePostProcessRenderTarget();
-
+	//CreateLightProbeBuffers();
 	CreatePlanarReflectionBuffers();
 
 	uiSystem.Init((void*)swapchain);
