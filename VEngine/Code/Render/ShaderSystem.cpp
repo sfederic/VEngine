@@ -19,6 +19,9 @@ const char* vsTarget = "vs_5_0";
 const char* psEntry = "PSMain";
 const char* psTarget = "ps_5_0";
 
+const char* csEntry = "CSMain";
+const char* csTarget = "cs_5_0";
+
 ShaderSystem::ShaderSystem() : System("ShaderSystem")
 {
 }
@@ -56,11 +59,11 @@ ID3DBlob* ShaderSystem::CreateShaderFromFile(const wchar_t* filename, const char
 #ifdef _DEBUG
 	compileFlags = D3DCOMPILE_SKIP_OPTIMIZATION | D3DCOMPILE_DEBUG;
 #endif
-	ID3DBlob* code;
-	ComPtr<ID3DBlob> error;
+	ID3DBlob* code = nullptr;
+	ID3DBlob* error = nullptr;
 
-	D3DCompileFromFile(filename, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
-		entry, target, compileFlags, 0, &code, error.GetAddressOf());
+	HR(D3DCompileFromFile(filename, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
+		entry, target, compileFlags, 0, &code, &error));
 
 	if (error)
 	{
@@ -74,25 +77,35 @@ ID3DBlob* ShaderSystem::CreateShaderFromFile(const wchar_t* filename, const char
 
 void ShaderSystem::CreateAllShaders()
 {
-    for (ShaderItem& shader : shaders)
+    for (ShaderItem* shader : shaders)
     {
         HR(renderer.device->CreateVertexShader(
-            shader.vertexCode->GetBufferPointer(),
-            shader.vertexCode->GetBufferSize(),
+            shader->vertexCode->GetBufferPointer(),
+            shader->vertexCode->GetBufferSize(),
             nullptr,
-            &shader.vertexShader));
+            &shader->vertexShader));
 
         HR(renderer.device->CreatePixelShader(
-            shader.pixelCode->GetBufferPointer(),
-            shader.pixelCode->GetBufferSize(),
+            shader->pixelCode->GetBufferPointer(),
+            shader->pixelCode->GetBufferSize(),
             nullptr,
-            &shader.pixelShader));
+            &shader->pixelShader));
+    }
+
+    for (ShaderItem* shader : computeShaders)
+    {
+        HR(renderer.device->CreateComputeShader(
+            shader->computeCode->GetBufferPointer(),
+            shader->computeCode->GetBufferSize(),
+            nullptr,
+            &shader->computeShader));
     }
 }
 
 void ShaderSystem::CompileAllShadersFromFile()
 {
     shaders.clear();
+    computeShaders.clear();
     shaderMap.clear();
 
     //File names to check for in directory (Doesn't compile the include (.hlsli) files).
@@ -100,22 +113,42 @@ void ShaderSystem::CompileAllShadersFromFile()
 
     for (auto& entry : std::filesystem::directory_iterator("Code/Render/Shaders/"))
     {
-        ShaderItem shaderItem = {};
         if (hlslFilenames.find(entry.path().extension().string()) != hlslFilenames.end())
         {
-            shaderItem.filename = entry.path().filename();
+            auto shaderItem = new ShaderItem();
+            shaderItem->filename = entry.path().filename();
             shaders.push_back(shaderItem);
         }
     }
 
-    for (ShaderItem& shader : shaders)
+    for (ShaderItem* shader : shaders)
     {
-        shaderMap[shader.filename] = &shader;
+        shaderMap[shader->filename] = shader;
 
-        std::wstring path = shaderDirectory + shader.filename;
+        std::wstring path = shaderDirectory + shader->filename;
 
-        shader.vertexCode = CreateShaderFromFile(path.c_str(), vsEntry, vsTarget);
-        shader.pixelCode = CreateShaderFromFile(path.c_str(), psEntry, psTarget);
+        shader->vertexCode = CreateShaderFromFile(path.c_str(), vsEntry, vsTarget);
+        shader->pixelCode = CreateShaderFromFile(path.c_str(), psEntry, psTarget);
+    }
+
+    //Get compute shaders
+    for (auto& entry : std::filesystem::directory_iterator("Code/Render/Shaders/Compute"))
+    {
+        auto shaderItem = new ShaderItem();
+        if (hlslFilenames.find(entry.path().extension().string()) != hlslFilenames.end())
+        {
+            shaderItem->filename = L"Compute/" + entry.path().filename().wstring();
+            computeShaders.push_back(shaderItem);
+        }
+    }
+
+    for (ShaderItem* computeShader : computeShaders)
+    {
+        shaderMap[computeShader->filename] = computeShader;
+
+        std::wstring path = shaderDirectory + computeShader->filename;
+
+        computeShader->computeCode = CreateShaderFromFile(path.c_str(), csEntry, csTarget);
     }
 }
 
@@ -123,11 +156,17 @@ void ShaderSystem::CleanUpShaders()
 {
     for (int i = 0; i < shaders.size(); i++)
     {
-        shaders[i].vertexCode->Release();
-        shaders[i].pixelCode->Release();
+        shaders[i]->vertexCode->Release();
+        shaders[i]->pixelCode->Release();
 
-        shaders[i].vertexShader->Release();
-        shaders[i].pixelShader->Release();
+        shaders[i]->vertexShader->Release();
+        shaders[i]->pixelShader->Release();
+    }
+
+    for (int i = 0; i < computeShaders.size(); i++)
+    {
+        computeShaders[i]->computeCode->Release();
+        computeShaders[i]->computeShader->Release();
     }
 }
 
@@ -149,9 +188,9 @@ void ShaderSystem::HotReloadShaders()
 
     std::vector<ShaderItem*> shadersToRecompile;
 
-    for (ShaderItem& shader : shaders)
+    for (ShaderItem* shader : shaders)
     {
-        std::wstring path = shaderDirectory + shader.filename;
+        std::wstring path = shaderDirectory + shader->filename;
 
         ID3DBlob* vertexCode = CreateShaderFromFile(path.c_str(), vsEntry, vsTarget);
         if (vertexCode == nullptr)
@@ -168,16 +207,16 @@ void ShaderSystem::HotReloadShaders()
             continue;
         }
 
-        shader.pixelCode->Release();
-        shader.pixelShader->Release();
+        shader->pixelCode->Release();
+        shader->pixelShader->Release();
 
-        shader.vertexCode->Release();
-        shader.vertexShader->Release();
+        shader->vertexCode->Release();
+        shader->vertexShader->Release();
 
-        shader.vertexCode = vertexCode;
-        shader.pixelCode = pixelCode;
+        shader->vertexCode = vertexCode;
+        shader->pixelCode = pixelCode;
 
-        shadersToRecompile.push_back(&shader);
+        shadersToRecompile.push_back(shader);
     }
 
     for (ShaderItem* shader : shadersToRecompile)

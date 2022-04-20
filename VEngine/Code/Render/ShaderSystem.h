@@ -6,6 +6,10 @@
 #include <wrl.h>
 #include "System.h"
 
+struct ID3D11VertexShader;
+struct ID3D11PixelShader;
+struct ID3D11ComputeShader;
+
 using namespace Microsoft::WRL;
 
 struct ShaderItem
@@ -21,11 +25,13 @@ struct ShaderItem
 
 	std::wstring filename;
 
-	ID3DBlob* vertexCode;
-	ID3DBlob* pixelCode;
+	ID3DBlob* vertexCode = nullptr;
+	ID3DBlob* pixelCode = nullptr;
+	ID3DBlob* computeCode = nullptr;
 
-	struct ID3D11VertexShader* vertexShader;
-	struct ID3D11PixelShader* pixelShader;
+	ID3D11VertexShader* vertexShader = nullptr;
+	ID3D11PixelShader* pixelShader = nullptr;
+	ID3D11ComputeShader* computeShader = nullptr;
 };
 
 //@Todo: need to make a CompileShaderFromFile() function eventually to work with compiled files over text
@@ -33,7 +39,8 @@ struct ShaderItem
 struct ShaderSystem : System
 {
 private:
-	std::vector<ShaderItem> shaders;
+	std::vector<ShaderItem*> shaders;
+	std::vector<ShaderItem*> computeShaders;
 	std::unordered_map<std::wstring, ShaderItem*> shaderMap;
 
 public:
