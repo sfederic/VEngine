@@ -116,6 +116,9 @@
     <ClCompile Include="Code\Editor\ImGuizmo\ImSequencer.cpp" />
     <ClCompile Include="Code\Quests\BlacksmithQuest.cpp" />
     <ClCompile Include="Code\Quests\Quest.cpp" />
+    <ClCompile Include="Code\SHMath\DirectXSH.cpp" />
+    <ClCompile Include="Code\SHMath\DirectXSHD3D11.cpp" />
+    <ClCompile Include="Code\SHMath\DirectXSHD3D12.cpp" />
     <ClCompile Include="Code\UI\BulletWidget.cpp" />
     <ClCompile Include="Code\Components\CharacterControllerComponent.cpp" />
     <ClCompile Include="Code\Gameplay\BattleSystem.cpp" />
@@ -241,6 +244,7 @@
     <ClInclude Include="Code\Gameplay\BattleEnums.h" />
     <ClInclude Include="Code\Particle\FireParticle.h" />
     <ClInclude Include="Code\Quests\Quest.h" />
+    <ClInclude Include="Code\SHMath\DirectXSH.h" />
     <ClInclude Include="Code\UI\BulletWidget.h" />
     <ClInclude Include="Code\Components\CharacterControllerComponent.h" />
     <ClInclude Include="Code\Editor\ActorTreeWidget.h" />
