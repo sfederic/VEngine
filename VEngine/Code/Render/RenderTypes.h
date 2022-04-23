@@ -172,12 +172,13 @@ struct ShaderTimeData
 
 struct ShaderMeshData
 {
-	XMFLOAT3 position;
+	XMFLOAT4 probeColour = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
+	XMFLOAT3 position = XMFLOAT3(0.f, 0.f, 0.f);
 	float pad;
 };
 
 struct InstanceData
 {
 	XMMATRIX world = XMMatrixIdentity();
-	XMFLOAT4 colour = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
+	XMFLOAT4 colour = XMFLOAT4(0.f, 0.f, 0.f, 1.f);
 };
