@@ -57,6 +57,9 @@ const int reflectionTextureResgiter = 2;
 const int instanceSRVRegister = 3;
 const int lightProbeTextureRegister = 4;
 
+const int lightProbeTextureWidth = 16;
+const int lightProbeTextureHeight = 16;
+
 ShaderMatrices shaderMatrices;
 ShaderLights shaderLights;
 
@@ -157,7 +160,7 @@ void Renderer::CreateDevice()
 		DXGI_ADAPTER_DESC1 desc = {};
 		adapter->GetDesc1(&desc);
 		gpuAdaptersDesc.push_back(desc);
-	}*/
+	}*/ 
 
 	HR(D3D11CreateDevice(adapter, D3D_DRIVER_TYPE_UNKNOWN, nullptr, createDeviceFlags,
 		featureLevels, _countof(featureLevels), D3D11_SDK_VERSION, &device,
@@ -567,6 +570,12 @@ void Renderer::RenderMeshComponents()
 		//Set reflection resources
 		context->PSSetShaderResources(reflectionTextureResgiter, 1, &reflectionSRV);
 
+		//Set light probe resources
+		if (!DiffuseProbeMap::system.actors.empty())
+		{
+			context->PSSetShaderResources(lightProbeTextureRegister, 1, &DiffuseProbeMap::system.actors[0]->probeMapSRV);
+		}
+
 		Material* material = mesh->material;
 
 		//Set matrices
@@ -600,6 +609,10 @@ void Renderer::RenderMeshComponents()
 void Renderer::RenderLightProbeViews()
 {
 	auto startTime = Profile::QuickStart();
+
+	int previousWiewportWidth = viewport.Width;
+	int previousWiewportHeight = viewport.Height;
+	ResizeSwapchain(lightProbeTextureWidth, lightProbeTextureHeight);
 
 	//Directions match with D3D11_TEXTURECUBE_FACE
 	XMVECTOR faces[6] =
@@ -687,15 +700,18 @@ void Renderer::RenderLightProbeViews()
 				context->RSSetState(0);
 			}
 
-			//Colour channel output from SH
-			float SH_R = 0.f, SH_G = 0.f, SH_B = 0.f;
-			HR(DirectX::SHProjectCubeMap(context, 1, lightProbeTexture, &SH_R, &SH_G, &SH_B));
-			SH_R = std::clamp(SH_R, 0.f, 1.f);
-			SH_G = std::clamp(SH_G, 0.f, 1.f);
-			SH_B = std::clamp(SH_B, 0.f, 1.f);
-			probeData.colour = XMFLOAT4(SH_R, SH_G, SH_B, 1.0f);
+			//Remember that there are 9 coefficients with 3rd order SH per channel
+			float SH_R[9] = {}, SH_G[9] = {}, SH_B[9] = {};
+			HR(DirectX::SHProjectCubeMap(context, 3, lightProbeTexture, SH_R, SH_G, SH_B));
 		}
+
+		probeMap->CreateProbeMapTexture();
 	}
+
+	ResizeSwapchain(previousWiewportWidth, previousWiewportHeight);
+
+	//Set main RTV and DSV back on
+	RenderSetup();
 
 	double endTime = Profile::QuickEnd(startTime);
 	Log("Light probe bake took [%f] ms", endTime);
@@ -924,8 +940,8 @@ void Renderer::CreateLightProbeBuffers()
 	if (lightProbeTexture) lightProbeTexture->Release();
 
 	D3D11_TEXTURE2D_DESC texDesc = {};
-	texDesc.Width = 16;
-	texDesc.Height = 16;
+	texDesc.Width = lightProbeTextureWidth;
+	texDesc.Height = lightProbeTextureWidth;
 	texDesc.MipLevels = 1;
 	texDesc.ArraySize = 6;
 	texDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
