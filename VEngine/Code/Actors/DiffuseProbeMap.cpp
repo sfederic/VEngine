@@ -3,11 +3,16 @@
 
 DiffuseProbeMap::DiffuseProbeMap()
 {
-	int meshCount = sizeX * sizeY * sizeZ;
-	instanceMeshComponent = InstanceMeshComponent::system.Add(this, InstanceMeshComponent(meshCount, "cube.fbx", "test.png"));
+	instanceMeshComponent = InstanceMeshComponent::system.Add(this, InstanceMeshComponent(1, "cube.fbx", "test.png"));
 	instanceMeshComponent->SetShaderName("InstanceShader.hlsl");
 	rootComponent = instanceMeshComponent;
 
+}
+
+void DiffuseProbeMap::Create()
+{
+	int meshCount = sizeX * sizeY * sizeZ;
+	instanceMeshComponent->SetInstanceCount(meshCount);
 	SetInstanceMeshData();
 }
 
@@ -33,6 +38,11 @@ void DiffuseProbeMap::SetInstanceMeshData()
 			{
 				InstanceData data = {};
 				data.world = XMMatrixTranslation((float)x, (float)y, (float)z);
+
+				data.world.r[0].m128_f32[0] = 0.2f;
+				data.world.r[1].m128_f32[1] = 0.2f;
+				data.world.r[2].m128_f32[2] = 0.2f;
+
 				instanceData.push_back(data);
 			}
 		}

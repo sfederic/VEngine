@@ -20,6 +20,7 @@ struct DiffuseProbeMap : Actor
 	int sizeZ = 1;
 
 	DiffuseProbeMap();
+	virtual void Create() override;
 	virtual Properties GetProps() override;
 	void SetInstanceMeshData();
 };
