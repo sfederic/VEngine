@@ -1,5 +1,7 @@
 #include "DiffuseProbeMap.h"
 #include "Components/InstanceMeshComponent.h"
+#include "Render/RenderUtils.h"
+#include "Debug.h"
 
 DiffuseProbeMap::DiffuseProbeMap()
 {
@@ -13,6 +15,8 @@ void DiffuseProbeMap::Create()
 {
 	instanceMeshComponent->SetInstanceCount(GetProbeCount());
 	SetInstanceMeshData();
+
+	CreateProbeMapTexture();
 }
 
 Properties DiffuseProbeMap::GetProps()
@@ -80,4 +84,27 @@ XMFLOAT4 DiffuseProbeMap::FindClosestProbe(XMVECTOR pos)
 	}
 
 	return distanceMap.begin()->second;
+}
+
+void DiffuseProbeMap::CreateProbeMapTexture()
+{
+	if (probeMapTexture)
+	{
+		probeMapTexture->Release();
+	}
+
+	D3D11_TEXTURE3D_DESC t3dDesc = {};
+	t3dDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+	t3dDesc.Width = sizeX;
+	t3dDesc.Height = sizeY;
+	t3dDesc.Depth = sizeZ;
+	t3dDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+	t3dDesc.MipLevels = 1;
+
+	D3D11_SUBRESOURCE_DATA data = {};
+	data.pSysMem = instanceMeshComponent->instanceData.data();
+	data.SysMemPitch = (sizeof(float) * 4) * sizeX;
+	data.SysMemSlicePitch = (sizeof(float) * 4) * sizeZ;
+	HR(RenderUtils::device->CreateTexture3D(&t3dDesc, &data, &probeMapTexture));
+	assert(probeMapTexture);
 }

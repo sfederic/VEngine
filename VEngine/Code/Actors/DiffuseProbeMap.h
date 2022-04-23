@@ -3,6 +3,7 @@
 #include "ActorSystem.h"
 
 struct InstanceMeshComponent;
+struct ID3D11Texture3D;
 
 struct ProbeData
 {
@@ -14,6 +15,8 @@ struct DiffuseProbeMap : Actor
 	ACTOR_SYSTEM(DiffuseProbeMap);
 
 	ProbeData probeData;
+
+	ID3D11Texture3D* probeMapTexture = nullptr;
 
 	InstanceMeshComponent* instanceMeshComponent = nullptr;
 
@@ -29,5 +32,7 @@ struct DiffuseProbeMap : Actor
 	uint32_t GetProbeCount();
 	XMFLOAT4 GetProbe(int x, int y, int z);
 	XMFLOAT4 FindClosestProbe(XMVECTOR pos);
+
+	void CreateProbeMapTexture();
 };
 
