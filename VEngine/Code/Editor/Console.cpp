@@ -111,6 +111,21 @@ void Console::ConsoleInput()
 //Make sure D2D render target calls have been made (Begin/End Draw)
 void Console::Tick()
 {
+	if (bConsoleActive)
+	{
+		float width = (float)renderer.GetViewportWidth();
+		float height = (float)renderer.GetViewportHeight();
+
+		uiSystem.d2dRenderTarget->DrawRectangle({ 0, height - 50.f, width, height }, uiSystem.debugBrushText);
+
+		uiSystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
+		uiSystem.d2dRenderTarget->DrawText(consoleString.c_str(), consoleString.size(), uiSystem.textFormat,
+			{ 0, height - 50.f, width, height }, uiSystem.debugBrushText);
+	}
+}
+
+void Console::InputTick()
+{
 	if (Input::GetKeyUp(Keys::Tilde)) //~ key, like doom and unreal
 	{
 		bConsoleActive = !bConsoleActive;
@@ -128,15 +143,6 @@ void Console::Tick()
 		}
 
 		ConsoleInput();
-
-		float width = (float)renderer.GetViewportWidth();
-		float height = (float)renderer.GetViewportHeight();
-
-		uiSystem.d2dRenderTarget->DrawRectangle({ 0, height - 50.f, width, height }, uiSystem.debugBrushText);
-
-		uiSystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
-		uiSystem.d2dRenderTarget->DrawText(consoleString.c_str(), consoleString.size(), uiSystem.textFormat,
-			{ 0, height - 50.f, width, height }, uiSystem.debugBrushText);
 	}
 }
 

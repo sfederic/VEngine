@@ -100,6 +100,8 @@ void Engine::Render(float deltaTime)
 	renderer.Render();
 	renderer.RenderParticleEmitters();
 
+	console.InputTick();
+
 	uiSystem.BeginDraw();
 	uiSystem.DrawAllWidgets(deltaTime);
 	renderer.RenderSpritesInScreenSpace();
