@@ -107,4 +107,17 @@ void DiffuseProbeMap::CreateProbeMapTexture()
 	data.SysMemSlicePitch = (sizeof(float) * 4) * sizeZ;
 	HR(RenderUtils::device->CreateTexture3D(&t3dDesc, &data, &probeMapTexture));
 	assert(probeMapTexture);
+
+	if (probeMapSRV)
+	{
+		probeMapSRV->Release();
+	}
+
+	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
+	srvDesc.Format = t3dDesc.Format;
+	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.Texture2D.MipLevels = 1;
+	srvDesc.Texture2D.MostDetailedMip = 0;
+	HR(RenderUtils::device->CreateShaderResourceView(probeMapTexture, &srvDesc, &probeMapSRV));
+	assert(probeMapSRV);
 }

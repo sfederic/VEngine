@@ -4,6 +4,7 @@
 
 struct InstanceMeshComponent;
 struct ID3D11Texture3D;
+struct ID3D11ShaderResourceView;
 
 struct ProbeData
 {
@@ -17,6 +18,7 @@ struct DiffuseProbeMap : Actor
 	ProbeData probeData;
 
 	ID3D11Texture3D* probeMapTexture = nullptr;
+	ID3D11ShaderResourceView* probeMapSRV = nullptr;
 
 	InstanceMeshComponent* instanceMeshComponent = nullptr;
 
