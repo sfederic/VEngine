@@ -178,6 +178,6 @@ struct ShaderMeshData
 
 struct InstanceData
 {
-	XMMATRIX world;
-	XMFLOAT4 colour;
+	XMMATRIX world = XMMatrixIdentity();
+	XMFLOAT4 colour = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
 };
