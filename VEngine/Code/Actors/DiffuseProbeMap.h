@@ -8,7 +8,7 @@ struct ID3D11ShaderResourceView;
 
 struct ProbeData
 {
-	std::vector<std::vector<std::vector<XMFLOAT4>>> data;
+	std::vector<XMFLOAT4> data;
 };
 
 struct DiffuseProbeMap : Actor
@@ -32,7 +32,6 @@ struct DiffuseProbeMap : Actor
 	void SetInstanceMeshData();
 	void SetProbeColour(XMFLOAT3 colour, uint32_t instanceMeshIndex);
 	uint32_t GetProbeCount();
-	XMFLOAT4 GetProbe(int x, int y, int z);
 	XMFLOAT4 FindClosestProbe(XMVECTOR pos);
 
 	void CreateProbeMapTexture();

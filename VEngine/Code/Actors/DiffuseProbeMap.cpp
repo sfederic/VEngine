@@ -34,12 +34,8 @@ void DiffuseProbeMap::SetInstanceMeshData()
 
 	for (int x = 0; x < sizeX; x++)
 	{
-		probeData.data.push_back(std::vector<std::vector<XMFLOAT4>>());
-
 		for (int y = 0; y < sizeY; y++)
 		{
-			probeData.data[x].push_back(std::vector<XMFLOAT4>());
-
 			for (int z = 0; z < sizeZ; z++)
 			{
 				InstanceData data = {};
@@ -51,7 +47,7 @@ void DiffuseProbeMap::SetInstanceMeshData()
 
 				instanceData.push_back(data);
 
-				probeData.data[x][y].push_back(data.colour);
+				probeData.data.push_back(data.colour);
 			}
 		}
 	}
@@ -66,11 +62,6 @@ void DiffuseProbeMap::SetProbeColour(XMFLOAT3 colour, uint32_t instanceMeshIndex
 uint32_t DiffuseProbeMap::GetProbeCount()
 {
 	return sizeX * sizeY * sizeZ;
-}
-
-XMFLOAT4 DiffuseProbeMap::GetProbe(int x, int y, int z)
-{
-	return probeData.data[x][y][z];
 }
 
 XMFLOAT4 DiffuseProbeMap::FindClosestProbe(XMVECTOR pos)
@@ -101,7 +92,7 @@ void DiffuseProbeMap::CreateProbeMapTexture()
 	t3dDesc.MipLevels = 1;
 
 	D3D11_SUBRESOURCE_DATA data = {};
-	data.pSysMem = instanceMeshComponent->instanceData.data();
+	data.pSysMem = probeData.data.data();
 	data.SysMemPitch = sizeof(XMFLOAT4) * sizeX;
 	data.SysMemSlicePitch = sizeof(XMFLOAT4) * sizeZ;
 	HR(RenderUtils::device->CreateTexture3D(&t3dDesc, &data, &probeMapTexture));

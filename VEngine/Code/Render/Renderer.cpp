@@ -627,6 +627,8 @@ void Renderer::RenderLightProbeViews()
 
 	for (auto probeMap : DiffuseProbeMap::system.actors)
 	{
+		probeMap->probeData.data.clear();
+
 		for (auto& probeData : probeMap->instanceMeshComponent->instanceData)
 		{
 			XMMATRIX& probeMatrix = probeData.world;
@@ -703,6 +705,9 @@ void Renderer::RenderLightProbeViews()
 			//Remember that there are 9 coefficients with 3rd order SH per channel
 			float SH_R[9] = {}, SH_G[9] = {}, SH_B[9] = {};
 			HR(DirectX::SHProjectCubeMap(context, 3, lightProbeTexture, SH_R, SH_G, SH_B));
+			//probeData.colour = XMFLOAT4(SH_R[0], SH_G[0], SH_B[0], 1.0);
+
+			probeMap->probeData.data.push_back(XMFLOAT4(0.8f, 0.1f, 0.23f, 1.0f));
 		}
 
 		probeMap->CreateProbeMapTexture();
