@@ -689,7 +689,7 @@ void Renderer::RenderLightProbeViews()
 
 			//Colour channel output from SH
 			float SH_R = 0.f, SH_G = 0.f, SH_B = 0.f;
-			DirectX::SHProjectCubeMap(context, 2, lightProbeTexture, &SH_R, &SH_G, &SH_B);
+			HR(DirectX::SHProjectCubeMap(context, 1, lightProbeTexture, &SH_R, &SH_G, &SH_B));
 			SH_R = std::clamp(SH_R, 0.f, 1.f);
 			SH_G = std::clamp(SH_G, 0.f, 1.f);
 			SH_B = std::clamp(SH_B, 0.f, 1.f);
