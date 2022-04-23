@@ -11,6 +11,8 @@ struct ProbeData
 	std::vector<XMFLOAT4> data;
 };
 
+//@Todo: Light probe maps aren't working great, if at all. Levels still look flat at this point with directional
+//lighting so it'll help to integrate Spherical Harmonics into the engine properly.
 struct DiffuseProbeMap : Actor
 {
 	ACTOR_SYSTEM(DiffuseProbeMap);
