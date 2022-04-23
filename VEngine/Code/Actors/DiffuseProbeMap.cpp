@@ -15,7 +15,6 @@ void DiffuseProbeMap::Create()
 {
 	instanceMeshComponent->SetInstanceCount(GetProbeCount());
 	SetInstanceMeshData();
-
 	CreateProbeMapTexture();
 }
 
@@ -103,8 +102,8 @@ void DiffuseProbeMap::CreateProbeMapTexture()
 
 	D3D11_SUBRESOURCE_DATA data = {};
 	data.pSysMem = instanceMeshComponent->instanceData.data();
-	data.SysMemPitch = (sizeof(float) * 4) * sizeX;
-	data.SysMemSlicePitch = (sizeof(float) * 4) * sizeZ;
+	data.SysMemPitch = sizeof(XMFLOAT4) * sizeX;
+	data.SysMemSlicePitch = sizeof(XMFLOAT4) * sizeZ;
 	HR(RenderUtils::device->CreateTexture3D(&t3dDesc, &data, &probeMapTexture));
 	assert(probeMapTexture);
 
@@ -115,7 +114,7 @@ void DiffuseProbeMap::CreateProbeMapTexture()
 
 	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 	srvDesc.Format = t3dDesc.Format;
-	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE3D;
 	srvDesc.Texture2D.MipLevels = 1;
 	srvDesc.Texture2D.MostDetailedMip = 0;
 	HR(RenderUtils::device->CreateShaderResourceView(probeMapTexture, &srvDesc, &probeMapSRV));
