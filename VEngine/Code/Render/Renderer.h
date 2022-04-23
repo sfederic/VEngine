@@ -133,6 +133,7 @@ public:
 	//Renders sprites on the viewport as UI elements
 	void RenderSpritesInScreenSpace();
 
+	//Called as a 'baking' function once-off through editor
 	void RenderLightProbeViews();
 
 	void RenderParticleEmitters();

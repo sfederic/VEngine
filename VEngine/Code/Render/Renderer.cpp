@@ -5,6 +5,7 @@
 #include <filesystem>
 #include "Debug.h"
 #include "Core.h"
+#include "Log.h"
 #include "VMath.h"
 #include "ShaderSystem.h"
 #include "Camera.h"
@@ -597,7 +598,7 @@ void Renderer::RenderMeshComponents()
 
 void Renderer::RenderLightProbeViews()
 {
-	PROFILE_START
+	auto startTime = Profile::QuickStart();
 
 	//Directions match with D3D11_TEXTURECUBE_FACE
 	XMVECTOR faces[6] =
@@ -682,7 +683,8 @@ void Renderer::RenderLightProbeViews()
 	float r = 0.f, g = 0.f, b = 0.f;
 	DirectX::SHProjectCubeMap(context, 2, lightProbeTexture, &g, &g, &b);
 
-	PROFILE_END
+	double endTime = Profile::QuickEnd(startTime);
+	Log("Light probe bake took [%f] ms", endTime);
 }
 
 void Renderer::RenderPlanarReflections()
