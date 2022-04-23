@@ -595,7 +595,7 @@ void Renderer::RenderMeshComponents()
 	PROFILE_END
 }
 
-void Renderer::RenderLightProbeView()
+void Renderer::RenderLightProbeViews()
 {
 	PROFILE_START
 

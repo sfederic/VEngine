@@ -110,7 +110,6 @@ private:
 	void CheckSupportedFeatures();
 	void RenderShadowPass();
 	void RenderMeshComponents();
-	void RenderLightProbeView();
 	void RenderPlanarReflections();
 	void RenderInstanceMeshComponents();
 	void RenderBounds();
@@ -133,6 +132,8 @@ public:
 
 	//Renders sprites on the viewport as UI elements
 	void RenderSpritesInScreenSpace();
+
+	void RenderLightProbeViews();
 
 	void RenderParticleEmitters();
 	void* GetSwapchain();
