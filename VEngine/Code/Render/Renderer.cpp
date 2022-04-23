@@ -20,6 +20,7 @@
 #include "Components/WidgetComponent.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Actors/Actor.h"
+#include "Actors/DiffuseProbeMap.h"
 #include "Actors/ReflectionPlane.h"
 #include "ShaderSystem.h"
 #include "DebugActors/DebugBox.h"
@@ -611,77 +612,90 @@ void Renderer::RenderLightProbeViews()
 		XMVectorSet(0.f, 0.f, -1.f, 0.f), //-Z
 	};
 
-	for (int i = 0; i < 6; i++)
+	for (auto probeMap : DiffuseProbeMap::system.actors)
 	{
-		context->RSSetViewports(1, &viewport);
-		const float clearColour[4] = { 0.f, 0.f, 0.f, 0.f };
-		context->ClearRenderTargetView(lightProbeRTVs[i], clearColour);
-		context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-		context->OMSetRenderTargets(1, &lightProbeRTVs[i], nullptr);
-
-		context->RSSetState(rastStateMap[RastStates::solid]->data);
-
-		UpdateLights();
-
-		//Set lights buffer
-		context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
-
-		//Set shadow resources (not now for lightprobes)
-		//context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
-		//context->PSSetSamplers(1, 1, &shadowMap->sampler);
-
-		ShaderItem* lightProbeShader = shaderSystem.FindShader(L"DefaultShader.hlsl");
-
-		for (auto mesh : MeshComponent::system.components)
+		for (auto& probeData : probeMap->instanceMeshComponent->instanceData)
 		{
-			if (!mesh->active || mesh->cullMesh) continue;
+			XMMATRIX& probeMatrix = probeData.world;
 
-			Material* material = mesh->material;
+			for (int i = 0; i < 6; i++)
+			{
+				context->RSSetViewports(1, &viewport);
+				const float clearColour[4] = { 0.f, 0.f, 0.f, 0.f };
+				context->ClearRenderTargetView(lightProbeRTVs[i], clearColour);
+				context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+				context->OMSetRenderTargets(1, &lightProbeRTVs[i], nullptr);
 
-			const FLOAT blendState[4] = { 0.f };
-			context->OMSetBlendState(nullptr, blendState, 0xFFFFFFFF);
+				context->RSSetState(rastStateMap[RastStates::solid]->data);
 
-			context->VSSetShader(lightProbeShader->vertexShader, nullptr, 0);
-			context->PSSetShader(lightProbeShader->pixelShader, nullptr, 0);
+				UpdateLights();
 
-			context->PSSetSamplers(0, 1, &material->sampler->data);
-			context->PSSetShaderResources(0, 1, &material->texture->srv);
+				//Set lights buffer
+				context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
 
-			context->IASetVertexBuffers(0, 1, &mesh->pso->vertexBuffer->data, &stride, &offset);
-			context->IASetIndexBuffer(mesh->pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
+				//Set shadow resources (not now for lightprobes)
+				//context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
+				//context->PSSetSamplers(1, 1, &shadowMap->sampler);
 
-			MapBuffer(cbMaterial, &material->materialShaderData, sizeof(MaterialShaderData));
-			context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
+				ShaderItem* lightProbeShader = shaderSystem.FindShader(L"DefaultShader.hlsl");
 
-			//Set matrices
-			shaderMatrices.view = XMMatrixLookAtLH(XMVectorSet(0.5f, 1.f, 0.5f, 1.f),
-				XMVectorSet(0.5f, 1.f, 0.5f, 1.f) + faces[i], VMath::XMVectorUp()); //test lookat direction
-			shaderMatrices.model = mesh->GetWorldMatrix();
-			shaderMatrices.MakeModelViewProjectionMatrix();
-			shaderMatrices.MakeTextureMatrix(mesh->material);
+				for (auto mesh : MeshComponent::system.components)
+				{
+					if (!mesh->active || mesh->cullMesh) continue;
 
-			MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
-			context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+					Material* material = mesh->material;
 
-			//Set mesh data to shader
-			ShaderMeshData meshData = {};
-			meshData.position = mesh->GetPosition();
-			MapBuffer(cbMeshData, &meshData, sizeof(ShaderMeshData));
-			context->VSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
-			context->PSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
+					const FLOAT blendState[4] = { 0.f };
+					context->OMSetBlendState(nullptr, blendState, 0xFFFFFFFF);
 
-			//Draw
-			context->DrawIndexed(mesh->meshDataProxy->indices->size(), 0, 0);
+					context->VSSetShader(lightProbeShader->vertexShader, nullptr, 0);
+					context->PSSetShader(lightProbeShader->pixelShader, nullptr, 0);
+
+					context->PSSetSamplers(0, 1, &material->sampler->data);
+					context->PSSetShaderResources(0, 1, &material->texture->srv);
+
+					context->IASetVertexBuffers(0, 1, &mesh->pso->vertexBuffer->data, &stride, &offset);
+					context->IASetIndexBuffer(mesh->pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
+
+					MapBuffer(cbMaterial, &material->materialShaderData, sizeof(MaterialShaderData));
+					context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
+
+					//Set matrices
+					shaderMatrices.view = XMMatrixLookAtLH(probeMatrix.r[3],
+						probeMatrix.r[3] + faces[i], VMath::XMVectorUp());
+					shaderMatrices.model = mesh->GetWorldMatrix();
+					shaderMatrices.MakeModelViewProjectionMatrix();
+					shaderMatrices.MakeTextureMatrix(mesh->material);
+
+					MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
+					context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+
+					//Set mesh data to shader
+					ShaderMeshData meshData = {};
+					meshData.position = mesh->GetPosition();
+					MapBuffer(cbMeshData, &meshData, sizeof(ShaderMeshData));
+					context->VSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
+					context->PSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
+
+					//Draw
+					context->DrawIndexed(mesh->meshDataProxy->indices->size(), 0, 0);
+				}
+
+				//Remove lightprobe RTV
+				ID3D11RenderTargetView* nullRTV = nullptr;
+				context->OMSetRenderTargets(1, &nullRTV, nullptr);
+				context->RSSetState(0);
+			}
+
+			//Colour channel output from SH
+			float SH_R = 0.f, SH_G = 0.f, SH_B = 0.f;
+			DirectX::SHProjectCubeMap(context, 2, lightProbeTexture, &SH_R, &SH_G, &SH_B);
+			SH_R = std::clamp(SH_R, 0.f, 1.f);
+			SH_G = std::clamp(SH_G, 0.f, 1.f);
+			SH_B = std::clamp(SH_B, 0.f, 1.f);
+			probeData.colour = XMFLOAT4(SH_R, SH_G, SH_B, 1.0f);
 		}
-
-		//Remove lightprobe RTV
-		ID3D11RenderTargetView* nullRTV = nullptr;
-		context->OMSetRenderTargets(1, &nullRTV, nullptr);
-		context->RSSetState(0);
 	}
-
-	float r = 0.f, g = 0.f, b = 0.f;
-	DirectX::SHProjectCubeMap(context, 2, lightProbeTexture, &g, &g, &b);
 
 	double endTime = Profile::QuickEnd(startTime);
 	Log("Light probe bake took [%f] ms", endTime);
