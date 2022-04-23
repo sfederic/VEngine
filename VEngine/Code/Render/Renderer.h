@@ -66,7 +66,7 @@ struct Renderer
 	ID3D11Texture2D* reflectionTex;
 
 	//Light probe buffers
-	ID3D11RenderTargetView* lightProbeRTV = nullptr;
+	ID3D11RenderTargetView* lightProbeRTVs[6]; //Cubemap
 	ID3D11ShaderResourceView* lightProbeSRV = nullptr;
 	ID3D11Texture2D* lightProbeTexture = nullptr;
 
