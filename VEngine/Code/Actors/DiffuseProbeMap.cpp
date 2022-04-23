@@ -69,3 +69,15 @@ XMFLOAT4 DiffuseProbeMap::GetProbe(int x, int y, int z)
 {
 	return probeData.data[x][y][z];
 }
+
+XMFLOAT4 DiffuseProbeMap::FindClosestProbe(XMVECTOR pos)
+{
+	std::map<float, XMFLOAT4> distanceMap;
+
+	for (auto& probe : instanceMeshComponent->instanceData)
+	{
+		distanceMap[XMVector3Length(probe.world.r[3] - pos).m128_f32[0]] = probe.colour;
+	}
+
+	return distanceMap.begin()->second;
+}

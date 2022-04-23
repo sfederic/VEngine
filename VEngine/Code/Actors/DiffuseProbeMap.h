@@ -28,5 +28,6 @@ struct DiffuseProbeMap : Actor
 	void SetProbeColour(XMFLOAT3 colour, uint32_t instanceMeshIndex);
 	uint32_t GetProbeCount();
 	XMFLOAT4 GetProbe(int x, int y, int z);
+	XMFLOAT4 FindClosestProbe(XMVECTOR pos);
 };
 
