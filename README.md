@@ -22,6 +22,8 @@ DirectXTK (directxtk_desktop_win10) ver. 2021.8.2.1 - https://github.com/microso
 
 * FBXSDK ver. 2020.1 | Throw FBXSDK headers/source into Code/FbxSdk - https://www.autodesk.com/developer-network/platform-technologies/fbx-sdk-2020-1
 
+* DirectXMath | Spherical Harmonics (included in repo) https://github.com/microsoft/DirectXMath/tree/main/SHMath
+
 * Qt ver. 5.15.0 - https://download.qt.io/official_releases/qt/5.15/
 
 (The ImGui libs are already included in the repo)
