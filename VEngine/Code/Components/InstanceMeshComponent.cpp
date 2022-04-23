@@ -22,7 +22,10 @@ void InstanceMeshComponent::Create()
 {
 	MeshComponent::Create();
 
-	instanceData.push_back(InstanceData());
+	if (instanceData.empty())
+	{
+		instanceData.push_back(InstanceData());
+	}
 
 	//Setup shader buffers
 	structuredBuffer = RenderUtils::CreateStructuredBuffer(sizeof(InstanceData) * meshInstanceRenderCount,
