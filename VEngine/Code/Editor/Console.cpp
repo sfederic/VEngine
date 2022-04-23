@@ -74,7 +74,7 @@ Console::Console()
 	executeMap.emplace(L"CORE", []() { debugMenu.coreMenuOpen = !debugMenu.coreMenuOpen; });
 
 	//Work through light probes in map and get their RBG values from a cubemap rendering
-	executeMap.emplace(L"BAKE", []() { renderer.RenderLightProbeViews() });
+	executeMap.emplace(L"BAKE", []() { renderer.RenderLightProbeViews(); });
 
 	//Save/Load current world to/From binary format
 	executeMap.emplace(L"BIN", []() { fileSystem.WriteAllActorSystemsToBinary(); });
