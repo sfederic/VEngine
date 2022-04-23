@@ -23,4 +23,7 @@ struct DiffuseProbeMap : Actor
 	virtual void Create() override;
 	virtual Properties GetProps() override;
 	void SetInstanceMeshData();
+	void SetProbeColour(XMFLOAT3 colour, uint32_t instanceMeshIndex);
+	uint32_t GetProbeCount();
 };
+
