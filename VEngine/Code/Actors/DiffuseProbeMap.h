@@ -6,12 +6,14 @@ struct InstanceMeshComponent;
 
 struct ProbeData
 {
-	float radiance;
+	std::vector<std::vector<std::vector<XMFLOAT4>>> data;
 };
 
 struct DiffuseProbeMap : Actor
 {
 	ACTOR_SYSTEM(DiffuseProbeMap);
+
+	ProbeData probeData;
 
 	InstanceMeshComponent* instanceMeshComponent = nullptr;
 
@@ -25,5 +27,6 @@ struct DiffuseProbeMap : Actor
 	void SetInstanceMeshData();
 	void SetProbeColour(XMFLOAT3 colour, uint32_t instanceMeshIndex);
 	uint32_t GetProbeCount();
+	XMFLOAT4 GetProbe(int x, int y, int z);
 };
 
