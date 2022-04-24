@@ -57,8 +57,8 @@ const int reflectionTextureResgiter = 2;
 const int instanceSRVRegister = 3;
 const int lightProbeTextureRegister = 4;
 
-const int lightProbeTextureWidth = 16;
-const int lightProbeTextureHeight = 16;
+const int lightProbeTextureWidth = 64;
+const int lightProbeTextureHeight = 64;
 
 ShaderMatrices shaderMatrices;
 ShaderLights shaderLights;
