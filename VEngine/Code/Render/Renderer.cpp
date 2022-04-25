@@ -570,12 +570,6 @@ void Renderer::RenderMeshComponents()
 		//Set reflection resources
 		context->PSSetShaderResources(reflectionTextureResgiter, 1, &reflectionSRV);
 
-		//Set light probe resources
-		if (!DiffuseProbeMap::system.actors.empty())
-		{
-			context->PSSetShaderResources(lightProbeTextureRegister, 1, &DiffuseProbeMap::system.actors[0]->probeMapSRV);
-		}
-
 		Material* material = mesh->material;
 
 		//Set matrices
@@ -589,6 +583,14 @@ void Renderer::RenderMeshComponents()
 		//Set mesh data to shader
 		ShaderMeshData meshData = {};
 		meshData.position = mesh->GetPosition();
+		
+		//Set light probe resources
+		if (!DiffuseProbeMap::system.actors.empty())
+		{
+			ProbeData probeData = DiffuseProbeMap::system.actors[0]->FindClosestProbe(mesh->GetWorldPositionV());
+			memcpy(meshData.SH, probeData.SH, sizeof(XMFLOAT4) * 9);
+		}
+
 		MapBuffer(cbMeshData, &meshData, sizeof(ShaderMeshData));
 		context->VSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
 		context->PSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
@@ -627,7 +629,9 @@ void Renderer::RenderLightProbeViews()
 
 	for (auto probeMap : DiffuseProbeMap::system.actors)
 	{
-		probeMap->probeData.data.clear();
+		probeMap->probeData.clear();
+
+		int probeIndex = 0;
 
 		for (auto& probeData : probeMap->instanceMeshComponent->instanceData)
 		{
@@ -706,15 +710,72 @@ void Renderer::RenderLightProbeViews()
 			float SH_R[9] = {}, SH_G[9] = {}, SH_B[9] = {};
 			HR(DirectX::SHProjectCubeMap(context, 3, lightProbeTexture, SH_R, SH_G, SH_B));
 
-			//Sample random colours for probes (testing)
-			float randR = VMath::RandomRange(0.f, 1.f);
-			float randG = VMath::RandomRange(0.f, 1.f);
-			float randB = VMath::RandomRange(0.f, 1.f);
-			probeData.colour = XMFLOAT4(randR, randG, randB, 1.0f);
-			probeMap->probeData.data.push_back(XMFLOAT4(randR, randG, randB, 1.0f));
-		}
+			XMFLOAT4 coefs[9] = {};
 
-		probeMap->CreateProbeMapTexture();
+			for (int co_index = 0; co_index < 9; co_index++)
+			{
+				coefs[co_index] = XMFLOAT4(SH_R[co_index], SH_G[co_index], SH_B[co_index], 1.0f);
+			}
+
+			//@Todo: this is all just copied from the Common.hlsli to figure out probe colour.
+			//You could probably do all this in the InstanceShader and just return the 'nearest probe' as itself.
+			const float PI = 3.14159265f;
+
+			float SQRT_PI = 1.7724538509f;
+			float SQRT_5 = 2.2360679775f;
+			float SQRT_15 = 3.8729833462f;
+			float SQRT_3 = 1.7320508076f;
+
+			float AO = 1.0f;
+
+			float Y[9] =
+			{
+				1.0f / (2.0f * SQRT_PI),
+				-SQRT_3 / (2.0f * SQRT_PI),
+				SQRT_3 / (2.0f * SQRT_PI),
+				-SQRT_3 / (2.0f * SQRT_PI),
+				SQRT_15 / (2.0f * SQRT_PI),
+				-SQRT_15 / (2.0f * SQRT_PI),
+				SQRT_5 / (4.0f * SQRT_PI),
+				-SQRT_15 / (2.0f * SQRT_PI),
+				SQRT_15 / (4.0f * SQRT_PI)
+			};
+
+			float t = acos(sqrt(1 - AO));
+
+			float a = sin(t);
+			float b = cos(t);
+
+			float A0 = sqrt(4 * PI) * (sqrt(PI) / 2) * a * a;
+			float A1 = sqrt(4 * PI / 3) * (sqrt(3 * PI) / 3) * (1 - b * b * b);
+			float A2 = sqrt(4 * PI / 5) * (sqrt(5 * PI) / 16) * a * a * (2 + 6 * b * b);
+
+			XMFLOAT3 n = XMFLOAT3(0.f, 0.f, 0.f); //Essentially put in a random normal
+			XMStoreFloat3(&n, XMVector3Normalize(probeMatrix.r[3]));
+
+			XMVECTOR irradiance =
+				XMLoadFloat4(&coefs[0]) * A0 * Y[0] +
+				XMLoadFloat4(&coefs[0]) * A1 * Y[1] * n.y +
+				XMLoadFloat4(&coefs[0]) * A1 * Y[2] * n.z +
+				XMLoadFloat4(&coefs[0]) * A1 * Y[3] * n.x +
+				XMLoadFloat4(&coefs[0]) * A2 * Y[4] * (n.y * n.x) +
+				XMLoadFloat4(&coefs[0]) * A2 * Y[5] * (n.y * n.z) +
+				XMLoadFloat4(&coefs[0]) * A2 * Y[6] * (3.0 * n.z * n.z - 1.0) +
+				XMLoadFloat4(&coefs[0]) * A2 * Y[7] * (n.z * n.x) +
+				XMLoadFloat4(&coefs[0]) * A2 * Y[8] * (n.x * n.x - n.y * n.y);
+
+			irradiance = DirectX::XMVectorMax(irradiance, XMVectorZero());
+			irradiance.m128_f32[3] = 1.0f; //Make sure alpha is set
+			XMStoreFloat4(&probeData.colour, irradiance);
+
+			ProbeData pd = {};
+			pd.index = probeIndex;
+			memcpy(pd.SH, coefs, sizeof(XMFLOAT4) * 9);
+			XMStoreFloat3(&pd.position, probeMatrix.r[3]);
+			probeMap->probeData.push_back(pd);
+
+			probeIndex++;
+		}
 	}
 
 	ResizeSwapchain(previousWiewportWidth, previousWiewportHeight);
@@ -1596,7 +1657,7 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 	CreateRTVAndDSV();
 
 	CreatePostProcessRenderTarget();
-	//CreateLightProbeBuffers();
+	CreateLightProbeBuffers();
 	CreatePlanarReflectionBuffers();
 
 	uiSystem.Init((void*)swapchain);
