@@ -17,8 +17,12 @@ struct ProbeData
 //3. Use the 'BAKE' cmdline command 
 //		Renderer will renderout cubemaps for every probe in the world and setup all spherical harmonic data.
 //		SH data at this point is just a single ambient colour per probe. Meshes will take its closest light probe
-//		and add its colour to its pixel output. Very simple stuff, mainly just for testing visuals.
+//		and add its colour to its pixel output.
 //4. Reload the world 
+
+//@Todo: The diffuse GI here is mainly just for visual testing, just to get an idea on how it would look with low-poly.
+//To make it work properly, the light probe data needs to be serialised out. It honestly looks pretty shit against
+//low-poly environments, a better approach might be light mapping.
 
 struct DiffuseProbeMap : Actor
 {

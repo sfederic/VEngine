@@ -39,10 +39,8 @@ float4 PSMain(VS_OUT i) : SV_Target
     //    shadowColour = CalcShadowFactor(i.shadowPos);
     //}
     
-    //float4 shIrradiance = float4(GetSHIrradiance(i.normal, SH), 1.0f) / PI;
+    //float4 shIrradiance = float4(GetSHIrradiance(i.normal, SH), 1.0f);
     
-    float4 ambient = float4(0.1, 0.1, 0.1, 0.1);
     float4 finalColour = (globalAmbient + endResult.diffuse + endResult.specular) * texColour;
-	//return finalColour + shIrradiance;
-    return finalColour;
+	return finalColour;
 }
