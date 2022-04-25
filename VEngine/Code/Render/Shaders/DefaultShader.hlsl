@@ -37,7 +37,7 @@ float4 PSMain(VS_OUT i) : SV_Target
     //    shadowColour = CalcShadowFactor(i.shadowPos);
     //}
     
-    //float4 probeColour = probeMap.Sample(s, i.normal) / PI;
+    //float4 probeColour = probeMap.Sample(s, i.normal, 0);
     
     float4 finalColour = ((globalAmbient + endResult.diffuse + endResult.specular) * texColour);
 	return finalColour;
