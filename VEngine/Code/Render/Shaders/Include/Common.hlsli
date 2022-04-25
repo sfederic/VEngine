@@ -126,7 +126,7 @@ float3 GetSHIrradiance(float3 n, float4 SH[9])
     float SQRT_15 = 3.8729833462f;
     float SQRT_3 = 1.7320508076f;
 	
-    float AO = 1.0f; //No ambient occlusion, but just keep this here.
+    float AO = 0.075f;
 	
     float Y[9] =
     {
