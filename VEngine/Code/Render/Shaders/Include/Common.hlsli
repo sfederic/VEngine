@@ -112,11 +112,59 @@ cbuffer cbTime : register(b4)
 
 cbuffer cbMeshData : register(b5)
 {
-    float4 probeColour;
+    float4 SH[9]; //Spherical Harmonics
 	float3 meshPosition;
+    float cbMeshDataPad;
 }
 
-//Stole all this PBR code from Frostbite https://www.ea.com/frostbite/news/moving-frostbite-to-pb
+//Stole all this from https://interplayoflight.wordpress.com/2021/12/31/occlusion-and-directionality-in-image-based-lighting-implementation-details/ for simple diffuse testing.
+//Was the only online example working with DXMath's SH lib.
+float3 GetSHIrradiance(float3 n, float4 SH[9])
+{
+    float SQRT_PI = 1.7724538509f;
+    float SQRT_5 = 2.2360679775f;
+    float SQRT_15 = 3.8729833462f;
+    float SQRT_3 = 1.7320508076f;
+	
+    float AO = 1.0f; //No ambient occlusion, but just keep this here.
+	
+    float Y[9] =
+    {
+        1.0f / (2.0f * SQRT_PI),
+        -SQRT_3 / (2.0f * SQRT_PI), 
+        SQRT_3 / (2.0f * SQRT_PI),
+        -SQRT_3 / (2.0f * SQRT_PI),
+        SQRT_15 / (2.0f * SQRT_PI), 
+        -SQRT_15 / (2.0f * SQRT_PI), 
+        SQRT_5 / (4.0f * SQRT_PI),
+        -SQRT_15 / (2.0f * SQRT_PI),
+        SQRT_15 / (4.0f * SQRT_PI)
+    };
+	
+    float t = acos(sqrt(1 - AO));
+
+    float a = sin(t);
+    float b = cos(t);
+	
+    float A0 = sqrt(4 * PI) * (sqrt(PI) / 2) * a * a;
+    float A1 = sqrt(4 * PI / 3) * (sqrt(3 * PI) / 3) * (1 - b * b * b);
+    float A2 = sqrt(4 * PI / 5) * (sqrt(5 * PI) / 16) * a * a * (2 + 6 * b * b);
+ 
+    float3 irradiance =
+        SH[0].xyz * A0 * Y[0] +
+        SH[1].xyz * A1 * Y[1] * n.y +
+        SH[2].xyz * A1 * Y[2] * n.z +
+        SH[3].xyz * A1 * Y[3] * n.x +
+        SH[4].xyz * A2 * Y[4] * (n.y * n.x) +
+        SH[5].xyz * A2 * Y[5] * (n.y * n.z) +
+        SH[6].xyz * A2 * Y[6] * (3.0 * n.z * n.z - 1.0) +
+        SH[7].xyz * A2 * Y[7] * (n.z * n.x) +
+        SH[8].xyz * A2 * Y[8] * (n.x * n.x - n.y * n.y);
+ 
+    return max(irradiance, 0);
+}
+
+//Stole most of this PBR code from Frostbite https://www.ea.com/frostbite/news/moving-frostbite-to-pb
 //because it's specular calcs looked the simplest.
 //Some more good references from https://blog.selfshadow.com/publications/s2013-shading-course/#course_content (UE4, Blackops)
 //And also the dudes at Tri-Ace https://research.tri-ace.com/
