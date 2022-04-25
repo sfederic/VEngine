@@ -15,7 +15,6 @@ void DiffuseProbeMap::Create()
 {
 	instanceMeshComponent->SetInstanceCount(GetProbeCount());
 	SetInstanceMeshData();
-	CreateProbeMapTexture();
 }
 
 Properties DiffuseProbeMap::GetProps()
@@ -32,6 +31,8 @@ void DiffuseProbeMap::SetInstanceMeshData()
 {
 	std::vector<InstanceData> instanceData;
 
+	int probeIndex = 0;
+
 	for (int x = 0; x < sizeX; x++)
 	{
 		for (int y = 0; y < sizeY; y++)
@@ -40,14 +41,19 @@ void DiffuseProbeMap::SetInstanceMeshData()
 			{
 				InstanceData data = {};
 				data.world = XMMatrixTranslation((float)x, (float)y, (float)z);
-
+				
 				data.world.r[0].m128_f32[0] = 0.15f;
 				data.world.r[1].m128_f32[1] = 0.15f;
 				data.world.r[2].m128_f32[2] = 0.15f;
 
 				instanceData.push_back(data);
 
-				probeData.data.push_back(data.colour);
+				ProbeData pd = {};
+				pd.index = probeIndex;
+				XMStoreFloat3(&pd.position,data.world.r[3]);
+				probeData.push_back(pd);
+
+				probeIndex++;
 			}
 		}
 	}
@@ -64,50 +70,14 @@ uint32_t DiffuseProbeMap::GetProbeCount()
 	return sizeX * sizeY * sizeZ;
 }
 
-XMFLOAT4 DiffuseProbeMap::FindClosestProbe(XMVECTOR pos)
+ProbeData DiffuseProbeMap::FindClosestProbe(XMVECTOR pos)
 {
-	std::map<float, XMFLOAT4> distanceMap;
+	std::map<float, ProbeData> distanceMap;
 
-	for (auto& probe : instanceMeshComponent->instanceData)
+	for (auto& probe : probeData)
 	{
-		distanceMap[XMVector3Length(probe.world.r[3] - pos).m128_f32[0]] = probe.colour;
+		distanceMap[XMVector3Length(XMLoadFloat3(&probe.position) - pos).m128_f32[0]] = probe;
 	}
 
 	return distanceMap.begin()->second;
-}
-
-void DiffuseProbeMap::CreateProbeMapTexture()
-{
-	if (probeMapTexture)
-	{
-		probeMapTexture->Release();
-	}
-
-	D3D11_TEXTURE3D_DESC t3dDesc = {};
-	t3dDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-	t3dDesc.Width = sizeX;
-	t3dDesc.Height = sizeY;
-	t3dDesc.Depth = sizeZ;
-	t3dDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
-	t3dDesc.MipLevels = 1;
-
-	D3D11_SUBRESOURCE_DATA data = {};
-	data.pSysMem = probeData.data.data();
-	data.SysMemPitch = sizeof(XMFLOAT4) * sizeX;
-	data.SysMemSlicePitch = sizeof(XMFLOAT4) * sizeZ;
-	HR(RenderUtils::device->CreateTexture3D(&t3dDesc, &data, &probeMapTexture));
-	assert(probeMapTexture);
-
-	if (probeMapSRV)
-	{
-		probeMapSRV->Release();
-	}
-
-	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
-	srvDesc.Format = t3dDesc.Format;
-	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE3D;
-	srvDesc.Texture2D.MipLevels = 1;
-	srvDesc.Texture2D.MostDetailedMip = 0;
-	HR(RenderUtils::device->CreateShaderResourceView(probeMapTexture, &srvDesc, &probeMapSRV));
-	assert(probeMapSRV);
 }

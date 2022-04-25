@@ -3,12 +3,12 @@
 #include "ActorSystem.h"
 
 struct InstanceMeshComponent;
-struct ID3D11Texture3D;
-struct ID3D11ShaderResourceView;
 
 struct ProbeData
 {
-	std::vector<XMFLOAT4> data;
+	XMFLOAT4 SH[9];
+	XMFLOAT3 position;
+	int index = 0;
 };
 
 //@Todo: Light probe maps aren't working great, if at all. Levels still look flat at this point with directional
@@ -17,10 +17,7 @@ struct DiffuseProbeMap : Actor
 {
 	ACTOR_SYSTEM(DiffuseProbeMap);
 
-	ProbeData probeData;
-
-	ID3D11Texture3D* probeMapTexture = nullptr;
-	ID3D11ShaderResourceView* probeMapSRV = nullptr;
+	std::vector<ProbeData> probeData;
 
 	InstanceMeshComponent* instanceMeshComponent = nullptr;
 
@@ -34,8 +31,5 @@ struct DiffuseProbeMap : Actor
 	void SetInstanceMeshData();
 	void SetProbeColour(XMFLOAT3 colour, uint32_t instanceMeshIndex);
 	uint32_t GetProbeCount();
-	XMFLOAT4 FindClosestProbe(XMVECTOR pos);
-
-	void CreateProbeMapTexture();
+	ProbeData FindClosestProbe(XMVECTOR pos);
 };
-
