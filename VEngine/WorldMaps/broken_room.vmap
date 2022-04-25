@@ -62,9 +62,9 @@ AudioActor
 Player
 1
  Position
-2 0 1
+0 0 0
  Rotation
-0 -3.27826e-07 0 0.999998
+-0 -3.27825e-07 -0 1
  Scale
 0.999996 1 0.999996
 Ambient
@@ -1508,7 +1508,7 @@ Static
 Texture
 test.png
 UID
-1784643783
+1710040832
 Use Texture
 1
 UvOffset
