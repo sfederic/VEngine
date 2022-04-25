@@ -11,8 +11,15 @@ struct ProbeData
 	int index = 0;
 };
 
-//@Todo: Light probe maps aren't working great, if at all. Levels still look flat at this point with directional
-//lighting so it'll help to integrate Spherical Harmonics into the engine properly.
+//DiffuseProbeMap workflow:
+//1. Place a DiffuseProbeMap in the world
+//2. Set up the X, Y, Z extents to cover the world
+//3. Use the 'BAKE' cmdline command 
+//		Renderer will renderout cubemaps for every probe in the world and setup all spherical harmonic data.
+//		SH data at this point is just a single ambient colour per probe. Meshes will take its closest light probe
+//		and add its colour to its pixel output. Very simple stuff, mainly just for testing visuals.
+//4. Reload the world 
+
 struct DiffuseProbeMap : Actor
 {
 	ACTOR_SYSTEM(DiffuseProbeMap);
