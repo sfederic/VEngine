@@ -172,7 +172,7 @@ struct ShaderTimeData
 
 struct ShaderMeshData
 {
-	XMFLOAT4 probeColour = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
+	XMFLOAT4 SH[9];
 	XMFLOAT3 position = XMFLOAT3(0.f, 0.f, 0.f);
 	float pad;
 };
