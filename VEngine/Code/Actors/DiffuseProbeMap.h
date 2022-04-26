@@ -32,6 +32,7 @@ struct ProbeData
 //Ref:https://chetanjags.wordpress.com/2015/08/26/image-based-lighting/
 //Ref:https://www.flipcode.com/archives/Light_Mapping_Theory_and_Implementation.shtml
 //Ref:https://interplayoflight.wordpress.com/2021/12/28/notes-on-occlusion-and-directionality-in-image-based-lighting/
+//Ref:https://www.activision.com/cdn/research/Volumetric_Global_Illumination_at_Treyarch.pdf
 
 struct DiffuseProbeMap : Actor
 {
