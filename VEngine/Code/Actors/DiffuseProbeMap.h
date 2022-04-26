@@ -24,6 +24,15 @@ struct ProbeData
 //To make it work properly, the light probe data needs to be serialised out. It honestly looks pretty shit against
 //low-poly environments, a better approach might be light mapping.
 
+//There are a fuckload of references to do with GI, SH, Lightmapping and whatever else. Here are the best ones.
+//Ref:https://therealmjp.github.io/posts/sg-series-part-1-a-brief-and-incomplete-history-of-baked-lighting-representations/
+//Ref:https://therealmjp.github.io/posts/radiosity-dx11-style/
+//Ref:https://morgan3d.github.io/articles/2019-04-01-ddgi/overview.html
+//Ref:https://www.gdcvault.com/play/1428/Global-Illumination-in-SONIC
+//Ref:https://chetanjags.wordpress.com/2015/08/26/image-based-lighting/
+//Ref:https://www.flipcode.com/archives/Light_Mapping_Theory_and_Implementation.shtml
+//Ref:https://interplayoflight.wordpress.com/2021/12/28/notes-on-occlusion-and-directionality-in-image-based-lighting/
+
 struct DiffuseProbeMap : Actor
 {
 	ACTOR_SYSTEM(DiffuseProbeMap);
