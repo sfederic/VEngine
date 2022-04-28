@@ -13,13 +13,13 @@ EntranceTrigger
 NPC
 0
 MeshActor
-8
+9
  Position
-0 0 0
+1 -0.2 1
  Rotation
 0.000172634 0.707107 0.707107 -0.000172603
  Scale
-1.00001 1.00001 1.00001
+1.2 1.2 1.2
 Ambient
 0.8 0.8 0.8 1
 Blend State
@@ -64,11 +64,11 @@ UvScale
 1 1
 next
  Position
--1 1 0
+-0.2 1 1
  Rotation
 0.500122 0.499878 0.500122 0.499878
  Scale
-1.00001 1.00001 1.00001
+1.2 1.2 1.2
 Ambient
 0.9 0.2 0.2 1
 Blend State
@@ -113,11 +113,11 @@ UvScale
 1 1
 next
  Position
-1 1 0
+2.2 1 1
  Rotation
 -0.500122 -0.499878 0.500122 0.499878
  Scale
-1.00001 1.00001 1.00001
+1.2 1.2 1.2
 Ambient
 0.2 0.2 0.9 1
 Blend State
@@ -162,11 +162,11 @@ UvScale
 1 1
 next
  Position
-0 1 1
+1 1 2.2
  Rotation
-0.707279 0.706934 4.92394e-09 1.54505e-08
+0.707279 0.706934 4.92396e-09 1.54505e-08
  Scale
-1.00001 1.00001 1.00001
+1.2 1.2 1.2
 Ambient
 0.8 0.8 0.8 1
 Blend State
@@ -211,11 +211,11 @@ UvScale
 1 1
 next
  Position
-0 2 0
+1 2.2 1
  Rotation
 0.707107 -0.000172618 0.000172659 0.707107
  Scale
-1.00001 1.00001 1.00001
+1.2 1.2 1.2
 Ambient
 0.8 0.8 0.8 1
 Blend State
@@ -260,7 +260,7 @@ UvScale
 1 1
 next
  Position
-0.3 0.7 0
+1.3 0.7 1
  Rotation
 -0 -0.34202 -0 0.939693
  Scale
@@ -309,7 +309,7 @@ UvScale
 1 1
 next
  Position
--0.6 0.2 -0.4
+0.4 0.2 0.6
  Rotation
 -0 -0.0873277 -0 0.99618
  Scale
@@ -358,7 +358,7 @@ UvScale
 1 1
 next
  Position
-0 0.2 -0.7
+1 0.2 0.3
  Rotation
 -0 0 -0 1
  Scale
@@ -406,29 +406,63 @@ UvRotationSpeed
 UvScale
 1 1
 next
-DirectionalLightActor
-1
  Position
-4 -3 6
+1 1 -0.2
  Rotation
-0 0 0 1
+-1.20113e-07 -4.63516e-08 0.707279 0.706934
  Scale
-1 1 1
-Colour
-1 1 1 1
-LightEnabled
+1.2 1.2 1.2
+Ambient
+0.8 0.8 0.8 1
+Blend State
+null
+Casts Shadow
 1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Metallic
+0
 Name
-DirectionalLightActor0
+MeshActor8
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
 UID
-2509474614
+3725289809
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
 next
+DirectionalLightActor
+0
 SavePoint
 0
 PointLightActor
 1
  Position
-0 1.8 0
+1 1.8 1
  Rotation
 -0 0 -0 1
  Scale
@@ -483,4 +517,59 @@ CutsceneActor
 ReflectionPlane
 0
 DiffuseProbeMap
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
 0
+Grid Obstacle
+0
+Mesh
+cube.fbx
+Metallic
+0
+Name
+DiffuseProbeMap0
+Rast State
+solid
+Shader
+InstanceShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+UID
+2574862475
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+sizeX
+3
+sizeY
+3
+sizeZ
+3
+next
