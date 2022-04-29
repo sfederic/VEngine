@@ -55,7 +55,7 @@ const int cbMeshDataRegister = 5;
 const int shadowMapTextureResgiter = 1;
 const int reflectionTextureResgiter = 2;
 const int instanceSRVRegister = 3;
-const int lightProbeTextureRegister = 4;
+const int environmentMapTextureRegister = 4;
 
 const int lightProbeTextureWidth = 64;
 const int lightProbeTextureHeight = 64;
@@ -90,7 +90,7 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	CreateQueries();
 
 	CreatePostProcessRenderTarget();
-	CreateLightProbeBuffers();
+	//CreateLightProbeBuffers();
 
 	RenderUtils::defaultSampler = RenderUtils::CreateSampler();
 
@@ -587,6 +587,8 @@ void Renderer::RenderMeshComponents()
 		//Set light probe resources
 		if (!DiffuseProbeMap::system.actors.empty())
 		{
+			context->PSSetShaderResources(environmentMapTextureRegister, 1, &lightProbeSRV);
+
 			ProbeData probeData = DiffuseProbeMap::system.actors[0]->FindClosestProbe(mesh->GetWorldPositionV());
 			memcpy(meshData.SH, probeData.SH, sizeof(XMFLOAT4) * 9);
 		}
@@ -626,6 +628,8 @@ void Renderer::RenderLightProbeViews()
 		XMVectorSet(0.f, 0.f, 1.f, 0.f), //+Z
 		XMVectorSet(0.f, 0.f, -1.f, 0.f), //-Z
 	};
+
+	CreateLightProbeBuffers();
 
 	for (auto probeMap : DiffuseProbeMap::system.actors)
 	{
@@ -1017,7 +1021,8 @@ void Renderer::CreateLightProbeBuffers()
 	texDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
 	texDesc.SampleDesc.Count = 1;
 	texDesc.Usage = D3D11_USAGE_DEFAULT;
-	texDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
+	texDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET;
+	texDesc.MiscFlags = D3D11_RESOURCE_MISC_TEXTURECUBE;
 
 	HR(device->CreateTexture2D(&texDesc, 0, &lightProbeTexture));
 	assert(lightProbeTexture);
@@ -1027,20 +1032,20 @@ void Renderer::CreateLightProbeBuffers()
 
 	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 	srvDesc.Format = texDesc.Format;
-	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
-	srvDesc.Texture2D.MipLevels = 1;
-	srvDesc.Texture2D.MostDetailedMip = 0;
+	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURECUBE;
+	srvDesc.TextureCube.MipLevels = 1;
 	HR(device->CreateShaderResourceView(lightProbeTexture, &srvDesc, &lightProbeSRV));
 
-	//RTV
+	//RTVs
+	D3D11_RENDER_TARGET_VIEW_DESC rtvDesc = {};
+	rtvDesc.Format = texDesc.Format;
+	rtvDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2DARRAY;
+	rtvDesc.Texture2DArray.ArraySize = 1;
+
 	for (int i = 0; i < 6; i++)
 	{
 		if (lightProbeRTVs[i]) lightProbeRTVs[i]->Release();
-
-		D3D11_RENDER_TARGET_VIEW_DESC rtvDesc = {};
-		rtvDesc.Format = texDesc.Format;
-		rtvDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
-		rtvDesc.Texture2D.MipSlice = 0;
+		rtvDesc.Texture2DArray.FirstArraySlice = i;
 		HR(device->CreateRenderTargetView(lightProbeTexture, &rtvDesc, &lightProbeRTVs[i]));
 	}
 }
@@ -1657,7 +1662,6 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 	CreateRTVAndDSV();
 
 	CreatePostProcessRenderTarget();
-	CreateLightProbeBuffers();
 	CreatePlanarReflectionBuffers();
 
 	uiSystem.Init((void*)swapchain);
