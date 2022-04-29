@@ -193,6 +193,8 @@ void WorldEditor::SpawnActor(Transform& transform)
 			d.Deserialise(prop);
 		}
 
+		actor->Create();
+
 		//Set the transform, props will have the original transform data and will be
 		//different from the click position in world.
 		actor->SetTransform(transform);
