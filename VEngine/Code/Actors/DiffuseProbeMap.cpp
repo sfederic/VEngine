@@ -33,11 +33,13 @@ void DiffuseProbeMap::SetInstanceMeshData()
 
 	int probeIndex = 0;
 
-	for (int x = 0; x < sizeX; x++)
+	XMFLOAT3 pos = GetPosition();
+
+	for (int x = pos.x; x < (sizeX + pos.x); x++)
 	{
-		for (int y = 0; y < sizeY; y++)
+		for (int y = pos.y; y < (sizeY + pos.y); y++)
 		{
-			for (int z = 0; z < sizeZ; z++)
+			for (int z = pos.z; z < (sizeZ + pos.z); z++)
 			{
 				InstanceData data = {};
 				data.world = XMMatrixTranslation((float)x, (float)y, (float)z);
@@ -79,5 +81,13 @@ ProbeData DiffuseProbeMap::FindClosestProbe(XMVECTOR pos)
 		distanceMap[XMVector3Length(XMLoadFloat3(&probe.position) - pos).m128_f32[0]] = probe;
 	}
 
-	return distanceMap.begin()->second;
+	if (!distanceMap.empty())
+	{
+		return distanceMap.begin()->second;
+	}
+	else
+	{
+		//return an empty Probe if none are found.
+		return ProbeData();
+	}
 }
