@@ -1,22 +1,21 @@
 #pragma once
 #include <vector>
-//@Todo: https://aras-p.info/blog/2018/01/12/Minimizing-windows.h/
-#include <Windows.h>
 
+//All the 0x codes here are from the Win32 virtual key values. They're like this to avoid including Windows.h here.
 enum class Keys
 {
 	None = 0,
-	Space = VK_SPACE,
-	Enter = VK_RETURN,
-	Esc = VK_ESCAPE,
-	Tab = VK_TAB,
-	Tilde = VK_OEM_3,
-	Ctrl = VK_CONTROL,
-	ShiftLeft = VK_LSHIFT,
-	ShiftRight = VK_RSHIFT,
-	Delete = VK_DELETE,
-	BackSpace = VK_BACK,
-	Alt = VK_LMENU,
+	Space = 0x20,
+	Enter = 0x0D,
+	Esc = 0x1B,
+	Tab = 0x09,
+	Tilde = 0xC0,
+	Ctrl = 0x11,
+	ShiftLeft = 0xA0,
+	ShiftRight = 0xA1,
+	Delete = 0x2E,
+	BackSpace = 0x08,
+	Alt = 0xA4,
 	//@Todo: there's all sorts of scancode shit win Win32 and keyboards
 	//that won't make this work internationally.
 	W = 'W',
@@ -47,19 +46,19 @@ enum class Keys
 	_8 = '8',
 	_9 = '9',
 	_0 = '0',
-	F1 = VK_F1,
-	F2 = VK_F2,
-	F3 = VK_F3,
-	F4 = VK_F4,
-	F8 = VK_F8,
-	F11 = VK_F11,
-	Up = VK_UP,
-	Down = VK_DOWN,
-	Right = VK_RIGHT,
-	Left = VK_LEFT,
-	MouseLeft = VK_LBUTTON,
-	MouseRight = VK_RBUTTON,
-	MouseMiddle = VK_MBUTTON
+	F1 = 0x70,
+	F2 = 0x71,
+	F3 = 0x72,
+	F4 = 0x73,
+	F8 = 0x77,
+	F11 = 0x7A,
+	Up = 0x26,
+	Down = 0x28,
+	Right = 0x27,
+	Left = 0x25,
+	MouseLeft = 0x01,
+	MouseRight = 0x02,
+	MouseMiddle = 0x04
 };
 
 namespace Input
