@@ -1,4 +1,5 @@
 #include "Console.h"
+#include <thread>
 #include <dwrite.h>
 #include <d2d1.h>
 #include "Input.h"
@@ -81,7 +82,10 @@ Console::Console()
 	executeMap.emplace(L"LOADBIN", []() { fileSystem.ReadAllActorSystemsFromBinary(); });
 
 	//Asset Build Commands
-	executeMap.emplace(L"BUILD MESHES", []() { assetSystem.WriteAllMeshDataToMeshAssetFiles(); });
+	executeMap.emplace(L"BUILD MESHES", []() { 
+		std::thread thrd(&AssetSystem::WriteAllMeshDataToMeshAssetFiles, assetSystem);
+		thrd.join();
+	});
 
 	//Write all game save maps
 	executeMap.emplace(L"BUILD MAPS", []() { assetSystem.BuildAllGameplayMapFiles(); });
