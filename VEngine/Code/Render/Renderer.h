@@ -125,6 +125,7 @@ private:
 	void GetGPUQueryData();
 	void MapBuffer(ID3D11Resource* resource, const void* src, size_t size);
 	void SetNullRTV();
+	void SetShadowData();
 
 public:
 	void Present();

@@ -428,6 +428,21 @@ void Renderer::SetNullRTV()
 	context->RSSetState(0);
 }
 
+void Renderer::SetShadowData()
+{
+	if (!DirectionalLightComponent::system.components.empty())
+	{
+		shaderMatrices.lightMVP = shadowMap->OutputMatrix();
+		shaderMatrices.lightViewProj = shadowMap->GetLightViewMatrix() * shadowMap->GetLightPerspectiveMatrix();
+
+		shaderLights.shadowsEnabled = true;
+	}
+	else
+	{
+		shaderLights.shadowsEnabled = false;
+	}
+}
+
 void Renderer::CheckSupportedFeatures()
 {
 	//Threading check
@@ -541,18 +556,7 @@ void Renderer::RenderMeshComponents()
 {
 	PROFILE_START
 
-	if (!DirectionalLightComponent::system.components.empty())
-	{
-		shaderMatrices.lightMVP = shadowMap->OutputMatrix();
-		shaderMatrices.lightViewProj = shadowMap->GetLightViewMatrix() * shadowMap->GetLightPerspectiveMatrix();
-
-		shaderLights.shadowsEnabled = true;
-	}
-	else
-	{
-		shaderLights.shadowsEnabled = false;
-	}
-
+	SetShadowData();
 	RenderSetup();
 	UpdateLights();
 
