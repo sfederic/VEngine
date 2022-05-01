@@ -1841,6 +1841,29 @@ XMFLOAT4 Renderer::CalcGlobalAmbientBasedOnGameTime()
 	return XMFLOAT4(0.5f, 0.5f, 0.5f, 1.f);
 }
 
+void Renderer::RenderPostProcess2()
+{
+	const int downScaleConstantsRegister = 0;
+
+	struct DownScaleConstants
+	{
+		uint32_t Res[2];
+		uint32_t Domain;
+		uint32_t GroupSize;
+	};
+
+	auto shader = shaderSystem.FindShader(L"Compute/PostProcess.hlsl");
+	context->CSSetShader(shader->computeShader, nullptr, 0);
+
+	DownScaleConstants downScaleConstants = {};
+	downScaleConstants.Res[0] = viewport.Width / 4;
+	downScaleConstants.Res[1] = viewport.Height / 4;
+	downScaleConstants.Domain = (viewport.Width * viewport.Height) / 16;
+	downScaleConstants.GroupSize = ((viewport.Width * viewport.Height) / 16) * 1024;
+	MapBuffer(postProcessCB1, &downScaleConstants, sizeof(DownScaleConstants));
+	context->CSSetConstantBuffers(downScaleConstantsRegister, 1, &postProcessCB1);
+}
+
 void Renderer::CreatePostProcessRenderTarget()
 {
 	if (postBuffer) postBuffer->Release();

@@ -151,6 +151,8 @@ private:
 	void SetMatricesFromMesh(MeshComponent* mesh);
 	void SetShaderMeshData(MeshComponent* mesh);
 
+	void RenderPostProcess2();
+
 public:
 	void Present();
 	void RenderSetup();
