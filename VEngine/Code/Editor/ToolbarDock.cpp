@@ -30,6 +30,7 @@ ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 	//TRANSFORMGIZMO SNAP INPUTS
 	//Translation
 	translationSnapSpinBox = new SpinBox(this);
+	translationSnapSpinBox->setFixedWidth(75);
 	translationSnapSpinBox->setValue(transformGizmo.translateSnapValues[0]);
 	connect(translationSnapSpinBox, &SpinBox::editingFinished, this, &ToolbarDock::SetTranslationSnapValue);
 
@@ -38,6 +39,7 @@ ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 
 	//Scale
 	scaleSnapSpinBox = new SpinBox(this);
+	scaleSnapSpinBox->setFixedWidth(75);
 	scaleSnapSpinBox->setValue(transformGizmo.scaleSnapValues[0]);
 	connect(scaleSnapSpinBox, &SpinBox::editingFinished, this, &ToolbarDock::SetScaleSnapValue);
 
@@ -46,6 +48,7 @@ ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 
 	//Rotation
 	rotationSnapSpinBox = new SpinBox(this);
+	rotationSnapSpinBox->setFixedWidth(75);
 	rotationSnapSpinBox->setValue(transformGizmo.rotationSnapValues[0]);
 	connect(rotationSnapSpinBox, &SpinBox::editingFinished, this, &ToolbarDock::SetRotationSnapValue);
 
