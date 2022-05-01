@@ -898,23 +898,23 @@ void Renderer::CreatePostProcessResources()
 	bd.StructureByteStride = sizeof(float) * 4;
 	bd.ByteWidth = (4 * totalBackBufferPixels) / (16 * 1024);
 	bd.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
-	HR(device->CreateBuffer(&bd, nullptr, &postProcessBuffer));
-	assert(postProcessBuffer);
+	HR(device->CreateBuffer(&bd, nullptr, &HDRBuffer));
+	assert(HDRBuffer);
 
 	//Create UAV
 	D3D11_UNORDERED_ACCESS_VIEW_DESC uavDesc = {};
 	uavDesc.Format = DXGI_FORMAT_UNKNOWN;
 	uavDesc.ViewDimension = D3D11_UAV_DIMENSION_BUFFER;
 	uavDesc.Buffer.NumElements = totalBackBufferPixels / (16 * 1024);
-	HR(device->CreateUnorderedAccessView(postProcessBuffer, &uavDesc, &postProcessUAV));
-	assert(postProcessUAV);
+	HR(device->CreateUnorderedAccessView(HDRBuffer, &uavDesc, &HDR_UAV));
+	assert(HDR_UAV);
 
 	//Create SRV
 	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 	srvDesc.Format = DXGI_FORMAT_UNKNOWN;
 	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFER;
-	HR(device->CreateShaderResourceView(postProcessBuffer, &srvDesc, &postProcessSRV));
-	assert(postProcessSRV);
+	HR(device->CreateShaderResourceView(HDRBuffer, &srvDesc, &HDR_SRV));
+	assert(HDR_SRV);
 
 	//Create Luminance buffer
 	D3D11_BUFFER_DESC lumBufferDesc = {};
@@ -922,20 +922,20 @@ void Renderer::CreatePostProcessResources()
 	lumBufferDesc.StructureByteStride = sizeof(float);
 	lumBufferDesc.ByteWidth = 4;
 	lumBufferDesc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
-	HR(device->CreateBuffer(&lumBufferDesc, nullptr, &averageLuminanceBuffer));
-	assert(averageLuminanceBuffer);
+	HR(device->CreateBuffer(&lumBufferDesc, nullptr, &luminanceBuffer));
+	assert(luminanceBuffer);
 
 	//Create luminance UAV
 	D3D11_UNORDERED_ACCESS_VIEW_DESC lumUAVDesc = {};
 	lumUAVDesc.Format = DXGI_FORMAT_UNKNOWN;
 	lumUAVDesc.ViewDimension = D3D11_UAV_DIMENSION_BUFFER;
 	lumUAVDesc.Buffer.NumElements = 1;
-	HR(device->CreateUnorderedAccessView(averageLuminanceBuffer, &lumUAVDesc, &luminanceUAV));
-	assert(postProcessUAV);
+	HR(device->CreateUnorderedAccessView(luminanceBuffer, &lumUAVDesc, &luminanceUAV));
+	assert(luminanceUAV);
 
 	//Create luminance SRV (use the previous SRV desc)
-	HR(device->CreateShaderResourceView(averageLuminanceBuffer, &srvDesc, &luminanceSRV));
-	assert(postProcessSRV);
+	HR(device->CreateShaderResourceView(luminanceBuffer, &srvDesc, &luminanceSRV));
+	assert(luminanceSRV);
 
 	//Create constant buffers
 	D3D11_BUFFER_DESC cbDesc = {};

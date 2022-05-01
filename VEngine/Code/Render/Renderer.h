@@ -71,12 +71,12 @@ struct Renderer
 	ID3D11Texture2D* lightProbeTexture = nullptr;
 
 	//Post processing 2.0
-	ID3D11Buffer* postProcessBuffer = nullptr;
-	ID3D11UnorderedAccessView* postProcessUAV = nullptr;
-	ID3D11ShaderResourceView* postProcessSRV = nullptr;
+	ID3D11Buffer* HDRBuffer = nullptr;
+	ID3D11UnorderedAccessView* HDR_UAV = nullptr;
+	ID3D11ShaderResourceView* HDR_SRV = nullptr;
 
 	//Post process luminance resources
-	ID3D11Buffer* averageLuminanceBuffer = nullptr;
+	ID3D11Buffer* luminanceBuffer = nullptr;
 	ID3D11UnorderedAccessView* luminanceUAV = nullptr;
 	ID3D11ShaderResourceView* luminanceSRV = nullptr;
 
