@@ -440,7 +440,7 @@ void Player::PrimaryAction()
 		if (inInteraction)
 		{
 			//End interact with GridActor
-			assert(gridActorInteractingWith);
+			if (gridActorInteractingWith == nullptr) return;
 			gridActorInteractingWith->EndInteract();
 			gridActorInteractingWith = nullptr;
 
