@@ -90,7 +90,6 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	CreateQueries();
 
 	CreatePostProcessRenderTarget();
-	//CreateLightProbeBuffers();
 
 	RenderUtils::defaultSampler = RenderUtils::CreateSampler();
 
