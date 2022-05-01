@@ -36,7 +36,7 @@ struct Sampler
 
 struct RastState
 {
-	D3D11_RASTERIZER_DESC desc;
+	D3D11_RASTERIZER_DESC desc = {};
 	ID3D11RasterizerState* data = nullptr;
 	std::string name;
 
@@ -46,7 +46,7 @@ struct RastState
 
 struct BlendState
 {
-	D3D11_BLEND_DESC desc;
+	D3D11_BLEND_DESC desc = {};
 	ID3D11BlendState* data = nullptr;
 	std::string name;
 
