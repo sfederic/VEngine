@@ -107,10 +107,7 @@ Serialiser::~Serialiser()
 	//but otherwise the entire file is overwritten from the start, meaning you miss out 
 	//on the safety stringstream is lending as a temp buffer during crashes.
 	ofs.open(filename.c_str(), (std::ios_base::openmode)mode);
-	if (ofs.fail())
-	{
-		throw;
-	}
+	assert(!ofs.fail());
 
 	ofs << ss.str();
 
