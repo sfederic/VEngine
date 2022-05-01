@@ -159,7 +159,6 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Ac
 	{
 	case PhysicsType::Static:
 		rigidActor = physics->createRigidStatic(pxTransform);
-
 		break;
 
 	case PhysicsType::Dynamic:
@@ -168,6 +167,7 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Ac
 	}
 
 	//Set actor as user data
+	assert(rigidActor);
 	rigidActor->userData = actor;
 
 	XMVECTOR extentsVector = XMLoadFloat3(&mesh->boundingBox.Extents) * mesh->GetScaleV();
