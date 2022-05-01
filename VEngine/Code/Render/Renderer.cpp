@@ -888,6 +888,68 @@ void Renderer::RenderPlanarReflections()
 	PROFILE_END
 }
 
+void Renderer::CreatePostProcessResources()
+{
+	const uint32_t totalBackBufferPixels = viewport.Width * viewport.Height;
+
+	//Create buffer
+	D3D11_BUFFER_DESC bd = {};
+	bd.BindFlags = D3D11_BIND_UNORDERED_ACCESS | D3D11_BIND_SHADER_RESOURCE;
+	bd.StructureByteStride = sizeof(float) * 4;
+	bd.ByteWidth = (4 * totalBackBufferPixels) / (16 * 1024);
+	bd.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
+	HR(device->CreateBuffer(&bd, nullptr, &postProcessBuffer));
+	assert(postProcessBuffer);
+
+	//Create UAV
+	D3D11_UNORDERED_ACCESS_VIEW_DESC uavDesc = {};
+	uavDesc.Format = DXGI_FORMAT_UNKNOWN;
+	uavDesc.ViewDimension = D3D11_UAV_DIMENSION_BUFFER;
+	uavDesc.Buffer.NumElements = totalBackBufferPixels / (16 * 1024);
+	HR(device->CreateUnorderedAccessView(postProcessBuffer, &uavDesc, &postProcessUAV));
+	assert(postProcessUAV);
+
+	//Create SRV
+	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
+	srvDesc.Format = DXGI_FORMAT_UNKNOWN;
+	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFER;
+	HR(device->CreateShaderResourceView(postProcessBuffer, &srvDesc, &postProcessSRV));
+	assert(postProcessSRV);
+
+	//Create Luminance buffer
+	D3D11_BUFFER_DESC lumBufferDesc = {};
+	lumBufferDesc.BindFlags = D3D11_BIND_UNORDERED_ACCESS | D3D11_BIND_SHADER_RESOURCE;
+	lumBufferDesc.StructureByteStride = sizeof(float);
+	lumBufferDesc.ByteWidth = 4;
+	lumBufferDesc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
+	HR(device->CreateBuffer(&lumBufferDesc, nullptr, &averageLuminanceBuffer));
+	assert(averageLuminanceBuffer);
+
+	//Create luminance UAV
+	D3D11_UNORDERED_ACCESS_VIEW_DESC lumUAVDesc = {};
+	lumUAVDesc.Format = DXGI_FORMAT_UNKNOWN;
+	lumUAVDesc.ViewDimension = D3D11_UAV_DIMENSION_BUFFER;
+	lumUAVDesc.Buffer.NumElements = 1;
+	HR(device->CreateUnorderedAccessView(averageLuminanceBuffer, &lumUAVDesc, &luminanceUAV));
+	assert(postProcessUAV);
+
+	//Create luminance SRV (use the previous SRV desc)
+	HR(device->CreateShaderResourceView(averageLuminanceBuffer, &srvDesc, &luminanceSRV));
+	assert(postProcessSRV);
+
+	//Create constant buffers
+	D3D11_BUFFER_DESC cbDesc = {};
+	cbDesc.Usage = D3D11_USAGE_DYNAMIC;
+	cbDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	cbDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	cbDesc.ByteWidth = 4;
+
+	HR(device->CreateBuffer(&cbDesc, nullptr, &postProcessCB1));
+	assert(postProcessCB1);
+	HR(device->CreateBuffer(&cbDesc, nullptr, &postProcessCB2));
+	assert(postProcessCB2);
+}
+
 void Renderer::RenderInstanceMeshComponents()
 {
 	//@Todo: shadows for instancemeshes (might not even need it since Grid nodes are the only things rendererd that way)
