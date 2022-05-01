@@ -1,5 +1,4 @@
 #include "Console.h"
-#include <thread>
 #include <dwrite.h>
 #include <d2d1.h>
 #include "Input.h"
@@ -9,6 +8,7 @@
 #include "Asset/AssetSystem.h"
 #include "FileSystem.h"
 #include "World.h"
+#include "ThreadSystem.h"
 
 Console console;
 
@@ -82,9 +82,8 @@ Console::Console()
 	executeMap.emplace(L"LOADBIN", []() { fileSystem.ReadAllActorSystemsFromBinary(); });
 
 	//Asset Build Commands
-	executeMap.emplace(L"BUILD MESHES", []() { 
-		std::thread thrd(&AssetSystem::WriteAllMeshDataToMeshAssetFiles, assetSystem);
-		thrd.join();
+	executeMap.emplace(L"BUILD MESHES", []() {
+		ThreadSystem::CreateThread(std::bind(&AssetSystem::WriteAllMeshDataToMeshAssetFiles, assetSystem));
 	});
 
 	//Write all game save maps
