@@ -4,7 +4,7 @@
 struct ThreadSystem : System
 {
 	ThreadSystem();
-	uint32_t GetNunHardwareThreads();
+	uint32_t GetNumHardwareThreads();
 };
 
 extern ThreadSystem threadSystem;

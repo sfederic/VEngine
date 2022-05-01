@@ -7,7 +7,7 @@ ThreadSystem::ThreadSystem(): System("ThreadSystem")
 {
 }
 
-uint32_t ThreadSystem::GetNunHardwareThreads()
+uint32_t ThreadSystem::GetNumHardwareThreads()
 {
 	return std::thread::hardware_concurrency();
 }
