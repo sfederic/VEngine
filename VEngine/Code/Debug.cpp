@@ -9,7 +9,7 @@ void HR(HRESULT hr)
 	{
 		_com_error err(hr);
 		char errMsg[1024];
-		snprintf(errMsg, 1024, "HR: %ls\nFile: %s\nFunction: %s\nLine: %u",
+		snprintf(errMsg, 1024, "HR: %s\nFile: %s\nFunction: %s\nLine: %u",
 			err.ErrorMessage(), location.file_name(), location.function_name(), location.line());
 		OutputDebugString(errMsg);
 		throw;
