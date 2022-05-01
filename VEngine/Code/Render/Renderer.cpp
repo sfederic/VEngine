@@ -443,6 +443,11 @@ void Renderer::SetShadowData()
 	}
 }
 
+void Renderer::DrawMesh(MeshComponent* mesh)
+{
+	context->DrawIndexed(mesh->meshDataProxy->indices->size(), 0, 0);
+}
+
 void Renderer::CheckSupportedFeatures()
 {
 	//Threading check
@@ -517,6 +522,12 @@ void Renderer::RenderSetup()
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
+void Renderer::SetShadowResources()
+{
+	context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
+	context->PSSetSamplers(1, 1, &shadowMap->sampler);
+}
+
 void Renderer::Render()
 {
 	PROFILE_START
@@ -552,6 +563,41 @@ void Renderer::Render()
 	PROFILE_END
 }
 
+void Renderer::SetReflectionResources()
+{
+	context->PSSetShaderResources(reflectionTextureResgiter, 1, &reflectionSRV);
+}
+
+void Renderer::SetMatricesFromMesh(MeshComponent* mesh)
+{
+	shaderMatrices.model = mesh->GetWorldMatrix();
+	shaderMatrices.MakeModelViewProjectionMatrix();
+	shaderMatrices.MakeTextureMatrix(mesh->material);
+
+	MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
+	context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+}
+
+void Renderer::SetShaderMeshData(MeshComponent* mesh)
+{
+	ShaderMeshData meshData = {};
+	meshData.position = mesh->GetPosition();
+
+	//@Todo: light probe data should have its own constant buffer, for now in testing, it's part of ShaderMeshData
+	//Set light probe resources
+	if (!DiffuseProbeMap::system.actors.empty())
+	{
+		context->PSSetShaderResources(environmentMapTextureRegister, 1, &lightProbeSRV);
+
+		ProbeData probeData = DiffuseProbeMap::system.actors[0]->FindClosestProbe(mesh->GetWorldPositionV());
+		memcpy(meshData.SH, probeData.SH, sizeof(XMFLOAT4) * 9);
+	}
+
+	MapBuffer(cbMeshData, &meshData, sizeof(ShaderMeshData));
+	context->VSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
+	context->PSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
+}
+
 void Renderer::RenderMeshComponents()
 {
 	PROFILE_START
@@ -568,51 +614,21 @@ void Renderer::RenderMeshComponents()
 
 		SetRenderPipelineStates(mesh);
 
-		//Set lights buffer
-		context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
+		//Shader Resources
+		SetLightResources();
+		SetShadowResources();
+		SetReflectionResources();
 
-		//Set shadow resources
-		context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
-		context->PSSetSamplers(1, 1, &shadowMap->sampler);
+		//Constant buffer data
+		SetMatricesFromMesh(mesh);
+		SetShaderMeshData(mesh);
 
-		//Set reflection resources
-		context->PSSetShaderResources(reflectionTextureResgiter, 1, &reflectionSRV);
-
-		Material* material = mesh->material;
-
-		//Set matrices
-		shaderMatrices.model = mesh->GetWorldMatrix();
-		shaderMatrices.MakeModelViewProjectionMatrix();
-		shaderMatrices.MakeTextureMatrix(mesh->material);
-
-		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
-		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
-
-		//Set mesh data to shader
-		ShaderMeshData meshData = {};
-		meshData.position = mesh->GetPosition();
-		
-		//Set light probe resources
-		if (!DiffuseProbeMap::system.actors.empty())
-		{
-			context->PSSetShaderResources(environmentMapTextureRegister, 1, &lightProbeSRV);
-
-			ProbeData probeData = DiffuseProbeMap::system.actors[0]->FindClosestProbe(mesh->GetWorldPositionV());
-			memcpy(meshData.SH, probeData.SH, sizeof(XMFLOAT4) * 9);
-		}
-
-		MapBuffer(cbMeshData, &meshData, sizeof(ShaderMeshData));
-		context->VSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
-		context->PSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
-
-		//Draw
-		context->DrawIndexed(mesh->meshDataProxy->indices->size(), 0, 0);
+		DrawMesh(mesh);
 	}	
 
 	//Set to null to remove warnings
 	ID3D11ShaderResourceView* nullSRV = nullptr;
 	context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSRV);
-
 	context->PSSetShaderResources(reflectionTextureResgiter, 1, &nullSRV);
 
 	PROFILE_END
@@ -1608,6 +1624,12 @@ void Renderer::Present()
 	HR(swapchain->Present(1, 0));
 
 	EndGPUQueries();
+}
+
+void Renderer::SetLightResources()
+{
+	//Set lights buffer
+	context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
 }
 
 void* Renderer::GetSwapchain()

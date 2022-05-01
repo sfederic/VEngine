@@ -124,8 +124,17 @@ private:
 	void EndGPUQueries();
 	void GetGPUQueryData();
 	void MapBuffer(ID3D11Resource* resource, const void* src, size_t size);
+
+	void DrawMesh(MeshComponent* mesh);
+
+	//Inner render functions to set shader resources
 	void SetNullRTV();
 	void SetShadowData();
+	void SetLightResources();
+	void SetShadowResources();
+	void SetReflectionResources();
+	void SetMatricesFromMesh(MeshComponent* mesh);
+	void SetShaderMeshData(MeshComponent* mesh);
 
 public:
 	void Present();
