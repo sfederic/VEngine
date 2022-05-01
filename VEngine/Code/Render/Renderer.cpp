@@ -519,6 +519,8 @@ void Renderer::RenderSetup()
 	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
 	//context->OMSetRenderTargets(1, &postRTV, dsv);
 
+	context->IASetInputLayout(inputLayout);
+
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
@@ -559,6 +561,7 @@ void Renderer::Render()
 	RenderLightMeshes();
 	RenderCameraMeshes();
 	//PostProcessRender();
+	RenderPostProcess2();
 
 	PROFILE_END
 }
@@ -1843,25 +1846,50 @@ XMFLOAT4 Renderer::CalcGlobalAmbientBasedOnGameTime()
 
 void Renderer::RenderPostProcess2()
 {
-	const int downScaleConstantsRegister = 0;
+	//const int downScaleConstantsRegister = 0;
 
-	struct DownScaleConstants
+	//const int totalBackBufferPixels = viewport.Width * viewport.Height;
+
+	//struct DownScaleConstants
+	//{
+	//	uint32_t Res[2];
+	//	uint32_t Domain;
+	//	uint32_t GroupSize;
+	//};
+
+	//auto shader = shaderSystem.FindShader(L"Compute/HDRDownscale.hlsl");
+	//context->CSSetShader(shader->computeShader, nullptr, 0);
+
+	//DownScaleConstants downScaleConstants = {};
+	//downScaleConstants.Res[0] = viewport.Width / 4;
+	//downScaleConstants.Res[1] = viewport.Height / 4;
+	//downScaleConstants.Domain = (viewport.Width * viewport.Height) / 16;
+	//downScaleConstants.GroupSize = ((viewport.Width * viewport.Height) / 16) * 1024;
+	//MapBuffer(postProcessCB1, &downScaleConstants, sizeof(DownScaleConstants));
+	//context->CSSetConstantBuffers(downScaleConstantsRegister, 1, &postProcessCB1);
+
+	//context->Dispatch(totalBackBufferPixels / (16 * 1024), 0, 0);
+
+	if (drawAllAsWireframe)
 	{
-		uint32_t Res[2];
-		uint32_t Domain;
-		uint32_t GroupSize;
-	};
+		context->RSSetState(rastStateWireframe);
+	}
+	else
+	{
+		context->RSSetState(rastStateMap["nobackcull"]->data);
+	}
 
-	auto shader = shaderSystem.FindShader(L"Compute/PostProcess.hlsl");
-	context->CSSetShader(shader->computeShader, nullptr, 0);
+	//const float blendFactor[4] = {};
+	//context->OMSetBlendState(blendStateMap.find(BlendStates::Default)->second->data, blendFactor, 0xFFFFFFFF);
 
-	DownScaleConstants downScaleConstants = {};
-	downScaleConstants.Res[0] = viewport.Width / 4;
-	downScaleConstants.Res[1] = viewport.Height / 4;
-	downScaleConstants.Domain = (viewport.Width * viewport.Height) / 16;
-	downScaleConstants.GroupSize = ((viewport.Width * viewport.Height) / 16) * 1024;
-	MapBuffer(postProcessCB1, &downScaleConstants, sizeof(DownScaleConstants));
-	context->CSSetConstantBuffers(downScaleConstantsRegister, 1, &postProcessCB1);
+	context->IASetInputLayout(nullptr);
+	context->IASetVertexBuffers(0, 0, nullptr, nullptr, nullptr);
+	context->IASetIndexBuffer(nullptr, DXGI_FORMAT_UNKNOWN, 0);
+
+	auto quadShader = shaderSystem.FindShader(L"FullScreenQuad.hlsl");
+	context->VSSetShader(quadShader->vertexShader, nullptr, 0);
+	context->PSSetShader(quadShader->pixelShader, nullptr, 0);
+	context->Draw(6, 0);
 }
 
 void Renderer::CreatePostProcessRenderTarget()
