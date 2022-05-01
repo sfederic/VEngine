@@ -38,9 +38,9 @@ bool PhysicsActor::GoOverAllTris()
 
 		for (int i = 0; i < mesh->meshDataProxy->vertices->size() / 3; i++)
 		{
-			MeshData::indexDataType index0 = mesh->meshDataProxy->indices->at(i * 3);
-			MeshData::indexDataType index1 = mesh->meshDataProxy->indices->at(i * 3 + 1);
-			MeshData::indexDataType index2 = mesh->meshDataProxy->indices->at(i * 3 + 2);
+			MeshData::indexDataType index0 = mesh->meshDataProxy->indices->at(static_cast<std::vector<MeshData::indexDataType, std::allocator<MeshData::indexDataType>>::size_type>(i) * 3);
+			MeshData::indexDataType index1 = mesh->meshDataProxy->indices->at(static_cast<std::vector<MeshData::indexDataType, std::allocator<MeshData::indexDataType>>::size_type>(i) * 3 + 1);
+			MeshData::indexDataType index2 = mesh->meshDataProxy->indices->at(static_cast<std::vector<MeshData::indexDataType, std::allocator<MeshData::indexDataType>>::size_type>(i) * 3 + 2);
 
 			XMVECTOR v0 = XMLoadFloat3(&mesh->meshDataProxy->vertices->at(index0).pos);
 			v0 = XMVector3TransformCoord(v0, model);
