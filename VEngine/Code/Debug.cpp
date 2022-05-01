@@ -11,6 +11,7 @@ void HR(HRESULT hr)
 		char errMsg[1024];
 		snprintf(errMsg, 1024, "HR: %ls\nFile: %s\nFunction: %s\nLine: %u",
 			err.ErrorMessage(), location.file_name(), location.function_name(), location.line());
+		OutputDebugString(errMsg);
 		throw;
 	}
 }
