@@ -421,6 +421,13 @@ void Renderer::MapBuffer(ID3D11Resource* resource, const void* src, size_t size)
 	context->Unmap(resource, 0);
 }
 
+void Renderer::SetNullRTV()
+{
+	ID3D11RenderTargetView* nullRTV = nullptr;
+	context->OMSetRenderTargets(1, &nullRTV, nullptr);
+	context->RSSetState(0);
+}
+
 void Renderer::CheckSupportedFeatures()
 {
 	//Threading check
@@ -472,9 +479,7 @@ void Renderer::RenderShadowPass()
 		context->DrawIndexed(mesh->meshDataProxy->indices->size(), 0, 0);
 	}
 
-	ID3D11RenderTargetView* nullRTV = nullptr;
-	context->OMSetRenderTargets(1, &nullRTV, nullptr);
-	context->RSSetState(0);
+	SetNullRTV();
 
 	PROFILE_END
 }
@@ -704,9 +709,7 @@ void Renderer::RenderLightProbeViews()
 				}
 
 				//Remove lightprobe RTV
-				ID3D11RenderTargetView* nullRTV = nullptr;
-				context->OMSetRenderTargets(1, &nullRTV, nullptr);
-				context->RSSetState(0);
+				SetNullRTV();
 			}
 
 			//Remember that there are 9 coefficients with 3rd order SH per channel
@@ -860,9 +863,7 @@ void Renderer::RenderPlanarReflections()
 	}
 
 	//Remove reflection RTV
-	ID3D11RenderTargetView* nullRTV = nullptr;
-	context->OMSetRenderTargets(1, &nullRTV, nullptr);
-	context->RSSetState(0);
+	SetNullRTV();
 
 	PROFILE_END
 }
@@ -1801,8 +1802,8 @@ void Renderer::PostProcessRender()
 	context->PSSetShader(shaderSystem.FindShader(L"PostProcess.hlsl")->pixelShader, nullptr, 0);
 
 	//The post processing RTV needs to be unset here and then the SRV to avoid D3D11 warnings
-	ID3D11RenderTargetView* nullRTV = nullptr;
-	context->OMSetRenderTargets(1, &nullRTV, nullptr);
+	SetNullRTV();
+
 	context->PSSetShaderResources(0, 1, &postSRV);
 	ID3D11ShaderResourceView* nullSRV = nullptr;
 	context->PSSetShaderResources(0, 1, &nullSRV);

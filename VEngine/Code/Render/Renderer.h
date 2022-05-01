@@ -124,6 +124,7 @@ private:
 	void EndGPUQueries();
 	void GetGPUQueryData();
 	void MapBuffer(ID3D11Resource* resource, const void* src, size_t size);
+	void SetNullRTV();
 
 public:
 	void Present();
