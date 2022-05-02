@@ -13,8 +13,8 @@ static const float2 arrUV[6] =
     float2(0.0, 0.0),
     float2(1.0, 0.0),
     float2(0.0, 1.0),
-    float2(1.0, 1.0), //these uvs aren't correct
-    float2(1.0, 1.0),
+    float2(0.0, 1.0),
+    float2(1.0, 0.0),
     float2(1.0, 1.0),
 };
 
