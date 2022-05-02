@@ -90,6 +90,7 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	CreateQueries();
 
 	CreatePostProcessRenderTarget();
+	CreatePostProcessResources();
 
 	RenderUtils::defaultSampler = RenderUtils::CreateSampler();
 
@@ -896,15 +897,27 @@ void Renderer::CreatePostProcessResources()
 	const uint32_t totalBackBufferPixels = viewport.Width * viewport.Height;
 
 	//Create buffer
+	if (HDRBuffer) HDRBuffer->Release();
+
 	D3D11_BUFFER_DESC bd = {};
 	bd.BindFlags = D3D11_BIND_UNORDERED_ACCESS | D3D11_BIND_SHADER_RESOURCE;
-	bd.StructureByteStride = sizeof(float) * 4;
+	bd.StructureByteStride = sizeof(float);
 	bd.ByteWidth = (4 * totalBackBufferPixels) / (16 * 1024);
 	bd.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
+
+	//Because of editor resizing viewport all over the place
+	int leftOver = bd.ByteWidth % bd.StructureByteStride;
+	if (leftOver > 0)
+	{
+		bd.ByteWidth -= leftOver;
+	}
+
 	HR(device->CreateBuffer(&bd, nullptr, &HDRBuffer));
 	assert(HDRBuffer);
 
 	//Create UAV
+	if (HDR_UAV) HDR_UAV->Release();
+
 	D3D11_UNORDERED_ACCESS_VIEW_DESC uavDesc = {};
 	uavDesc.Format = DXGI_FORMAT_UNKNOWN;
 	uavDesc.ViewDimension = D3D11_UAV_DIMENSION_BUFFER;
@@ -913,13 +926,18 @@ void Renderer::CreatePostProcessResources()
 	assert(HDR_UAV);
 
 	//Create SRV
+	if (HDR_SRV) HDR_SRV->Release();
+
 	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 	srvDesc.Format = DXGI_FORMAT_UNKNOWN;
 	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFER;
+	srvDesc.Buffer.NumElements = 1;
 	HR(device->CreateShaderResourceView(HDRBuffer, &srvDesc, &HDR_SRV));
 	assert(HDR_SRV);
 
 	//Create Luminance buffer
+	if (luminanceBuffer) luminanceBuffer->Release();
+
 	D3D11_BUFFER_DESC lumBufferDesc = {};
 	lumBufferDesc.BindFlags = D3D11_BIND_UNORDERED_ACCESS | D3D11_BIND_SHADER_RESOURCE;
 	lumBufferDesc.StructureByteStride = sizeof(float);
@@ -929,6 +947,8 @@ void Renderer::CreatePostProcessResources()
 	assert(luminanceBuffer);
 
 	//Create luminance UAV
+	if (luminanceUAV) luminanceUAV->Release();
+
 	D3D11_UNORDERED_ACCESS_VIEW_DESC lumUAVDesc = {};
 	lumUAVDesc.Format = DXGI_FORMAT_UNKNOWN;
 	lumUAVDesc.ViewDimension = D3D11_UAV_DIMENSION_BUFFER;
@@ -937,6 +957,7 @@ void Renderer::CreatePostProcessResources()
 	assert(luminanceUAV);
 
 	//Create luminance SRV (use the previous SRV desc)
+	if (luminanceSRV) luminanceSRV->Release();
 	HR(device->CreateShaderResourceView(luminanceBuffer, &srvDesc, &luminanceSRV));
 	assert(luminanceSRV);
 
@@ -945,10 +966,13 @@ void Renderer::CreatePostProcessResources()
 	cbDesc.Usage = D3D11_USAGE_DYNAMIC;
 	cbDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 	cbDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-	cbDesc.ByteWidth = 4;
+	cbDesc.ByteWidth = 16;
 
+	if (postProcessCB1) postProcessCB1->Release();
 	HR(device->CreateBuffer(&cbDesc, nullptr, &postProcessCB1));
 	assert(postProcessCB1);
+
+	if (postProcessCB2) postProcessCB2->Release();
 	HR(device->CreateBuffer(&cbDesc, nullptr, &postProcessCB2));
 	assert(postProcessCB2);
 }
@@ -1753,6 +1777,8 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 	CreateRTVAndDSV();
 
 	CreatePostProcessRenderTarget();
+	CreatePostProcessResources();
+
 	CreatePlanarReflectionBuffers();
 
 	uiSystem.Init((void*)swapchain);
@@ -1846,29 +1872,29 @@ XMFLOAT4 Renderer::CalcGlobalAmbientBasedOnGameTime()
 
 void Renderer::RenderPostProcess2()
 {
-	//const int downScaleConstantsRegister = 0;
+	const int downScaleConstantsRegister = 0;
 
-	//const int totalBackBufferPixels = viewport.Width * viewport.Height;
+	const int totalBackBufferPixels = viewport.Width * viewport.Height;
 
-	//struct DownScaleConstants
-	//{
-	//	uint32_t Res[2];
-	//	uint32_t Domain;
-	//	uint32_t GroupSize;
-	//};
+	struct DownScaleConstants
+	{
+		uint32_t Res[2];
+		uint32_t Domain;
+		uint32_t GroupSize;
+	};
 
-	//auto shader = shaderSystem.FindShader(L"Compute/HDRDownscale.hlsl");
-	//context->CSSetShader(shader->computeShader, nullptr, 0);
+	auto shader = shaderSystem.FindShader(L"Compute/HDRDownscale.hlsl");
+	context->CSSetShader(shader->computeShader, nullptr, 0);
 
-	//DownScaleConstants downScaleConstants = {};
-	//downScaleConstants.Res[0] = viewport.Width / 4;
-	//downScaleConstants.Res[1] = viewport.Height / 4;
-	//downScaleConstants.Domain = (viewport.Width * viewport.Height) / 16;
-	//downScaleConstants.GroupSize = ((viewport.Width * viewport.Height) / 16) * 1024;
-	//MapBuffer(postProcessCB1, &downScaleConstants, sizeof(DownScaleConstants));
-	//context->CSSetConstantBuffers(downScaleConstantsRegister, 1, &postProcessCB1);
+	DownScaleConstants downScaleConstants = {};
+	downScaleConstants.Res[0] = viewport.Width / 4;
+	downScaleConstants.Res[1] = viewport.Height / 4;
+	downScaleConstants.Domain = (viewport.Width * viewport.Height) / 16;
+	downScaleConstants.GroupSize = ((viewport.Width * viewport.Height) / 16) * 1024;
+	MapBuffer(postProcessCB1, &downScaleConstants, sizeof(DownScaleConstants));
+	context->CSSetConstantBuffers(downScaleConstantsRegister, 1, &postProcessCB1);
 
-	//context->Dispatch(totalBackBufferPixels / (16 * 1024), 0, 0);
+	context->Dispatch(totalBackBufferPixels / (16 * 1024), 0, 0);
 
 	if (drawAllAsWireframe)
 	{
@@ -1899,7 +1925,7 @@ void Renderer::CreatePostProcessRenderTarget()
 	if (postSRV) postSRV->Release();
 
 	D3D11_TEXTURE2D_DESC desc = {};
-	desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	desc.Format = DXGI_FORMAT_R16G16B16A16_FLOAT;
 	desc.ArraySize = 1;
 	desc.MipLevels = 1;
 	desc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
