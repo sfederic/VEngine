@@ -148,8 +148,7 @@ void Renderer::CreateDevice()
 	const D3D_FEATURE_LEVEL featureLevels[] = { D3D_FEATURE_LEVEL_11_1 };
 	D3D_FEATURE_LEVEL selectedFeatureLevel;
 
-	//@Todo: this shit always causes problems. From HDR to graphics debugging. For now going to leave
-	//CreateDevice() using nullptr and D3D_DRIVER_TYPE_HARDWARE. Come back to this later.
+	//@Todo: this shit always causes problems. From HDR to graphics debugging, all sorts of issues.
 	//IDXGIAdapter1* adapter = nullptr;
 	//HR(dxgiFactory->EnumAdapterByGpuPreference(0, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&adapter)));
 	//DXGI_ADAPTER_DESC1 desc = {};
@@ -188,12 +187,12 @@ void Renderer::CreateSwapchain(HWND window)
 	HR(swapchain->SetColorSpace1(DXGI_COLOR_SPACE_RGB_FULL_G10_NONE_P709));
 
 	//Check for colour space (HDR, sRGB)
-	IDXGIOutput* output = nullptr;
-	HR(swapchain->GetContainingOutput(&output));
-	IDXGIOutput6* output6 = nullptr;
-	HR(output->QueryInterface<IDXGIOutput6>(&output6));
-	DXGI_OUTPUT_DESC1 outputDesc = {};
-	HR(output6->GetDesc1(&outputDesc));
+	//IDXGIOutput* output = nullptr;
+	//HR(swapchain->GetContainingOutput(&output));
+	//IDXGIOutput6* output6 = nullptr;
+	//HR(output->QueryInterface<IDXGIOutput6>(&output6));
+	//DXGI_OUTPUT_DESC1 outputDesc = {};
+	//HR(output6->GetDesc1(&outputDesc));
 
 	dxgiFactory->MakeWindowAssociation(window, DXGI_MWA_NO_WINDOW_CHANGES | DXGI_MWA_NO_ALT_ENTER);
 }
@@ -523,15 +522,27 @@ void Renderer::RenderSetup()
 	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
 
 	context->ClearRenderTargetView(rtvs[frameIndex], clearColour);
-	//context->ClearRenderTargetView(postRTV, clearColour);
-
 	context->ClearDepthStencilView(dsv, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 
 	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
-	//context->OMSetRenderTargets(1, &postRTV, dsv);
 
 	context->IASetInputLayout(inputLayout);
+	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+}
 
+void Renderer::RenderPostProcessSetup()
+{
+	context->RSSetViewports(1, &viewport);
+
+	const float clearColour[4] = { 0.f, 0.f, 0.f, 1.f };
+	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
+
+	context->ClearRenderTargetView(postRTV, clearColour);
+	context->ClearDepthStencilView(dsv, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
+
+	context->OMSetRenderTargets(1, &postRTV, dsv);
+
+	context->IASetInputLayout(inputLayout);
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
@@ -571,7 +582,7 @@ void Renderer::Render()
 	//RenderSkeletonBones();
 	RenderLightMeshes();
 	RenderCameraMeshes();
-	RenderPostProcess();
+	//RenderPostProcess();
 
 	PROFILE_END
 }
@@ -616,6 +627,7 @@ void Renderer::RenderMeshComponents()
 	PROFILE_START
 
 	RenderSetup();
+	//RenderPostProcessSetup();
 	SetShadowData();
 	UpdateLights();
 
@@ -1807,7 +1819,7 @@ void Renderer::RenderPostProcess()
 	context->IASetVertexBuffers(0, 0, nullptr, nullptr, nullptr);
 	context->IASetIndexBuffer(nullptr, DXGI_FORMAT_UNKNOWN, 0);
 
-	auto quadShader = shaderSystem.FindShader(L"FullScreenQuad.hlsl");
+	auto quadShader = shaderSystem.FindShader(L"PostProcess.hlsl");
 	context->VSSetShader(quadShader->vertexShader, nullptr, 0);
 	context->PSSetShader(quadShader->pixelShader, nullptr, 0);
 

@@ -141,6 +141,7 @@ private:
 public:
 	void Present();
 	void RenderSetup();
+	void RenderPostProcessSetup();
 	void Render();
 
 	//Renders sprites on the viewport as UI elements
