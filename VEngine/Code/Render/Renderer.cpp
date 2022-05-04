@@ -1812,7 +1812,6 @@ void Renderer::RenderPostProcess()
 	ID3D11ShaderResourceView* nullSRV = nullptr;
 	ID3D11UnorderedAccessView* nullUAV = nullptr;
 
-	context->OMSetBlendState(nullptr, nullptr, 0);
 	context->RSSetState(rastStateMap[RastStates::solid]->data);
 
 	context->IASetInputLayout(nullptr);
@@ -1828,6 +1827,9 @@ void Renderer::RenderPostProcess()
 
 	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
 	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
+
+	const float clearColour[4] = { 0.f, 0.f, 0.f, 0.f };
+	context->ClearRenderTargetView(rtvs[frameIndex], clearColour);
 
 	//@Todo: there's an idea from the old post processing code that I liked.
 	//Basically instead of drawing a stupid quad and rendering a texture onto it, copy to the backbuffer like below:
