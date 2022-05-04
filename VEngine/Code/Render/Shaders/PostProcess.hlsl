@@ -79,7 +79,7 @@ float4 PSMain(VS_OUTPUT i) : SV_Target
     // Tone mapping
     //color = ToneMapping(color);
     
-    //color = Rec709ToRec2020(color);
+    color = Rec709ToRec2020(color);
     
     return float4(color, 1.0);
 }
