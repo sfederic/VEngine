@@ -11,10 +11,6 @@ struct Skeleton;
 
 struct Renderer
 {
-	ID3D11Texture2D* postBuffer = nullptr;
-	ID3D11RenderTargetView* postRTV = nullptr;
-	ID3D11ShaderResourceView* postSRV = nullptr;
-
 	ID3D11Texture2D* backBuffer = nullptr;
 
 	static const int swapchainCount = 2;
@@ -70,19 +66,10 @@ struct Renderer
 	ID3D11ShaderResourceView* lightProbeSRV = nullptr;
 	ID3D11Texture2D* lightProbeTexture = nullptr;
 
-	//Post processing 2.0
-	ID3D11Buffer* HDRBuffer = nullptr;
-	ID3D11UnorderedAccessView* HDR_UAV = nullptr;
-	ID3D11ShaderResourceView* HDR_SRV = nullptr;
-
-	//Post process luminance resources
-	ID3D11Buffer* luminanceBuffer = nullptr;
-	ID3D11UnorderedAccessView* luminanceUAV = nullptr;
-	ID3D11ShaderResourceView* luminanceSRV = nullptr;
-
-	//Post process 2.0 constant buffers
-	ID3D11Buffer* postProcessCB1 = nullptr;
-	ID3D11Buffer* postProcessCB2 = nullptr;
+	//Post process
+	ID3D11Texture2D* postBuffer = nullptr;
+	ID3D11RenderTargetView* postRTV = nullptr;
+	ID3D11ShaderResourceView* postSRV = nullptr;
 
 private:
 	//Queries for GPU profiling (Note that the queires are double buffered to deal with two frames for the GPU
@@ -121,7 +108,6 @@ private:
 	void CreateConstantBuffers();
 	void CreatePlanarReflectionBuffers();
 	void CreateLightProbeBuffers();
-	void CreatePostProcessResources();
 	void CheckSupportedFeatures();
 	void RenderShadowPass();
 	void RenderMeshComponents();

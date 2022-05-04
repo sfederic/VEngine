@@ -90,7 +90,6 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	CreateQueries();
 
 	CreatePostProcessRenderTarget();
-	CreatePostProcessResources();
 
 	RenderUtils::defaultSampler = RenderUtils::CreateSampler();
 
@@ -172,17 +171,27 @@ void Renderer::CreateDevice()
 void Renderer::CreateSwapchain(HWND window)
 {
 	DXGI_SWAP_CHAIN_DESC sd = {};
-	sd.BufferDesc = { (UINT)viewport.Width, (UINT)viewport.Height, {60, 1}, DXGI_FORMAT_R8G8B8A8_UNORM };
+	sd.BufferDesc = { (UINT)viewport.Width, (UINT)viewport.Height, {60, 1}, DXGI_FORMAT_R16G16B16A16_FLOAT };
 	sd.Windowed = TRUE;
 	sd.SampleDesc = sampleDesc;
 	sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 	sd.OutputWindow = window;
-	sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
+	sd.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
 	sd.BufferCount = swapchainCount;
 
 	ComPtr<IDXGISwapChain> tempSwapchain;
 	HR(dxgiFactory->CreateSwapChain(device, &sd, tempSwapchain.GetAddressOf()));
 	HR(tempSwapchain->QueryInterface(&swapchain));
+
+	HR(swapchain->SetColorSpace1(DXGI_COLOR_SPACE_RGB_FULL_G10_NONE_P709));
+
+	//Check for colour space (HDR, sRGB)
+	IDXGIOutput* output = nullptr;
+	HR(swapchain->GetContainingOutput(&output));
+	IDXGIOutput6* output6 = nullptr;
+	HR(output->QueryInterface<IDXGIOutput6>(&output6));
+	DXGI_OUTPUT_DESC1 outputDesc = {};
+	HR(output6->GetDesc1(&outputDesc));
 
 	dxgiFactory->MakeWindowAssociation(window, DXGI_MWA_NO_WINDOW_CHANGES | DXGI_MWA_NO_ALT_ENTER);
 }
@@ -426,7 +435,6 @@ void Renderer::SetNullRTV()
 {
 	ID3D11RenderTargetView* nullRTV = nullptr;
 	context->OMSetRenderTargets(1, &nullRTV, nullptr);
-	context->RSSetState(0);
 }
 
 void Renderer::SetShadowData()
@@ -562,7 +570,7 @@ void Renderer::Render()
 	RenderLightMeshes();
 	RenderCameraMeshes();
 	//PostProcessRender();
-	RenderPostProcess2();
+	//RenderPostProcess2();
 
 	PROFILE_END
 }
@@ -606,8 +614,8 @@ void Renderer::RenderMeshComponents()
 {
 	PROFILE_START
 
-	SetShadowData();
 	RenderSetup();
+	SetShadowData();
 	UpdateLights();
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
@@ -890,91 +898,6 @@ void Renderer::RenderPlanarReflections()
 	SetNullRTV();
 
 	PROFILE_END
-}
-
-void Renderer::CreatePostProcessResources()
-{
-	const uint32_t totalBackBufferPixels = viewport.Width * viewport.Height;
-
-	//Create buffer
-	if (HDRBuffer) HDRBuffer->Release();
-
-	D3D11_BUFFER_DESC bd = {};
-	bd.BindFlags = D3D11_BIND_UNORDERED_ACCESS | D3D11_BIND_SHADER_RESOURCE;
-	bd.StructureByteStride = sizeof(float);
-	bd.ByteWidth = (4 * totalBackBufferPixels) / (16 * 1024);
-	bd.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
-
-	//Because of editor resizing viewport all over the place
-	int leftOver = bd.ByteWidth % bd.StructureByteStride;
-	if (leftOver > 0)
-	{
-		bd.ByteWidth -= leftOver;
-	}
-
-	HR(device->CreateBuffer(&bd, nullptr, &HDRBuffer));
-	assert(HDRBuffer);
-
-	//Create UAV
-	if (HDR_UAV) HDR_UAV->Release();
-
-	D3D11_UNORDERED_ACCESS_VIEW_DESC uavDesc = {};
-	uavDesc.Format = DXGI_FORMAT_UNKNOWN;
-	uavDesc.ViewDimension = D3D11_UAV_DIMENSION_BUFFER;
-	uavDesc.Buffer.NumElements = totalBackBufferPixels / (16 * 1024);
-	HR(device->CreateUnorderedAccessView(HDRBuffer, &uavDesc, &HDR_UAV));
-	assert(HDR_UAV);
-
-	//Create SRV
-	if (HDR_SRV) HDR_SRV->Release();
-
-	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
-	srvDesc.Format = DXGI_FORMAT_UNKNOWN;
-	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFER;
-	srvDesc.Buffer.NumElements = 1;
-	HR(device->CreateShaderResourceView(HDRBuffer, &srvDesc, &HDR_SRV));
-	assert(HDR_SRV);
-
-	//Create Luminance buffer
-	if (luminanceBuffer) luminanceBuffer->Release();
-
-	D3D11_BUFFER_DESC lumBufferDesc = {};
-	lumBufferDesc.BindFlags = D3D11_BIND_UNORDERED_ACCESS | D3D11_BIND_SHADER_RESOURCE;
-	lumBufferDesc.StructureByteStride = sizeof(float);
-	lumBufferDesc.ByteWidth = 4;
-	lumBufferDesc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
-	HR(device->CreateBuffer(&lumBufferDesc, nullptr, &luminanceBuffer));
-	assert(luminanceBuffer);
-
-	//Create luminance UAV
-	if (luminanceUAV) luminanceUAV->Release();
-
-	D3D11_UNORDERED_ACCESS_VIEW_DESC lumUAVDesc = {};
-	lumUAVDesc.Format = DXGI_FORMAT_UNKNOWN;
-	lumUAVDesc.ViewDimension = D3D11_UAV_DIMENSION_BUFFER;
-	lumUAVDesc.Buffer.NumElements = 1;
-	HR(device->CreateUnorderedAccessView(luminanceBuffer, &lumUAVDesc, &luminanceUAV));
-	assert(luminanceUAV);
-
-	//Create luminance SRV (use the previous SRV desc)
-	if (luminanceSRV) luminanceSRV->Release();
-	HR(device->CreateShaderResourceView(luminanceBuffer, &srvDesc, &luminanceSRV));
-	assert(luminanceSRV);
-
-	//Create constant buffers
-	D3D11_BUFFER_DESC cbDesc = {};
-	cbDesc.Usage = D3D11_USAGE_DYNAMIC;
-	cbDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	cbDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-	cbDesc.ByteWidth = 16;
-
-	if (postProcessCB1) postProcessCB1->Release();
-	HR(device->CreateBuffer(&cbDesc, nullptr, &postProcessCB1));
-	assert(postProcessCB1);
-
-	if (postProcessCB2) postProcessCB2->Release();
-	HR(device->CreateBuffer(&cbDesc, nullptr, &postProcessCB2));
-	assert(postProcessCB2);
 }
 
 void Renderer::RenderInstanceMeshComponents()
@@ -1777,7 +1700,6 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 	CreateRTVAndDSV();
 
 	CreatePostProcessRenderTarget();
-	CreatePostProcessResources();
 
 	CreatePlanarReflectionBuffers();
 
@@ -1872,41 +1794,12 @@ XMFLOAT4 Renderer::CalcGlobalAmbientBasedOnGameTime()
 
 void Renderer::RenderPostProcess2()
 {
-	const int downScaleConstantsRegister = 0;
+	SetNullRTV();
 
-	const int totalBackBufferPixels = viewport.Width * viewport.Height;
+	ID3D11ShaderResourceView* nullSRV = nullptr;
+	ID3D11UnorderedAccessView* nullUAV = nullptr;
 
-	struct DownScaleConstants
-	{
-		uint32_t Res[2];
-		uint32_t Domain;
-		uint32_t GroupSize;
-	};
-
-	auto shader = shaderSystem.FindShader(L"Compute/HDRDownscale.hlsl");
-	context->CSSetShader(shader->computeShader, nullptr, 0);
-
-	DownScaleConstants downScaleConstants = {};
-	downScaleConstants.Res[0] = viewport.Width / 4;
-	downScaleConstants.Res[1] = viewport.Height / 4;
-	downScaleConstants.Domain = (viewport.Width * viewport.Height) / 16;
-	downScaleConstants.GroupSize = ((viewport.Width * viewport.Height) / 16) * 1024;
-	MapBuffer(postProcessCB1, &downScaleConstants, sizeof(DownScaleConstants));
-	context->CSSetConstantBuffers(downScaleConstantsRegister, 1, &postProcessCB1);
-
-	context->Dispatch(totalBackBufferPixels / (16 * 1024), 0, 0);
-
-	if (drawAllAsWireframe)
-	{
-		context->RSSetState(rastStateWireframe);
-	}
-	else
-	{
-		context->RSSetState(rastStateMap["nobackcull"]->data);
-	}
-
-	//const float blendFactor[4] = {};
-	//context->OMSetBlendState(blendStateMap.find(BlendStates::Default)->second->data, blendFactor, 0xFFFFFFFF);
+	context->RSSetState(rastStateMap[RastStates::solid]->data);
 
 	context->IASetInputLayout(nullptr);
 	context->IASetVertexBuffers(0, 0, nullptr, nullptr, nullptr);
@@ -1915,7 +1808,16 @@ void Renderer::RenderPostProcess2()
 	auto quadShader = shaderSystem.FindShader(L"FullScreenQuad.hlsl");
 	context->VSSetShader(quadShader->vertexShader, nullptr, 0);
 	context->PSSetShader(quadShader->pixelShader, nullptr, 0);
+
+	context->PSSetShaderResources(0, 1, &postSRV);
+	context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
+
+	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
+	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
+
 	context->Draw(6, 0);
+
+	context->PSSetShaderResources(0, 1, &nullSRV);
 }
 
 void Renderer::CreatePostProcessRenderTarget()
@@ -1967,8 +1869,8 @@ void Renderer::PostProcessRender()
 	context->PSSetShader(shaderSystem.FindShader(L"PostProcess.hlsl")->pixelShader, nullptr, 0);
 
 	//The post processing RTV needs to be unset here and then the SRV to avoid D3D11 warnings
-	SetNullRTV();
-
+	ID3D11RenderTargetView* nullRTV = nullptr;
+	context->OMSetRenderTargets(1, &nullRTV, nullptr);
 	context->PSSetShaderResources(0, 1, &postSRV);
 	ID3D11ShaderResourceView* nullSRV = nullptr;
 	context->PSSetShaderResources(0, 1, &nullSRV);
