@@ -148,18 +148,20 @@ void Renderer::CreateDevice()
 	const D3D_FEATURE_LEVEL featureLevels[] = { D3D_FEATURE_LEVEL_11_1 };
 	D3D_FEATURE_LEVEL selectedFeatureLevel;
 
-	IDXGIAdapter1* adapter = nullptr;
-	HR(dxgiFactory->EnumAdapterByGpuPreference(0, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&adapter)));
-	DXGI_ADAPTER_DESC1 desc = {};
-	adapter->GetDesc1(&desc);
-	gpuAdaptersDesc.push_back(desc);
-	for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_MINIMUM_POWER,
-		IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)
-	{
-		DXGI_ADAPTER_DESC1 desc = {};
-		adapter->GetDesc1(&desc);
-		gpuAdaptersDesc.push_back(desc);
-	}
+	//@Todo: this shit always causes problems. From HDR to graphics debugging. For now going to leave
+	//CreateDevice() using nullptr and D3D_DRIVER_TYPE_HARDWARE. Come back to this later.
+	//IDXGIAdapter1* adapter = nullptr;
+	//HR(dxgiFactory->EnumAdapterByGpuPreference(0, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&adapter)));
+	//DXGI_ADAPTER_DESC1 desc = {};
+	//adapter->GetDesc1(&desc);
+	//gpuAdaptersDesc.push_back(desc);
+	//for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_MINIMUM_POWER,
+	//	IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)
+	//{
+	//	DXGI_ADAPTER_DESC1 desc = {};
+	//	adapter->GetDesc1(&desc);
+	//	gpuAdaptersDesc.push_back(desc);
+	//}
 
 	HR(D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags,
 		featureLevels, _countof(featureLevels), D3D11_SDK_VERSION, &device,
