@@ -153,15 +153,15 @@ void Renderer::CreateDevice()
 	DXGI_ADAPTER_DESC1 desc = {};
 	adapter->GetDesc1(&desc);
 	gpuAdaptersDesc.push_back(desc);
-	/*for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_MINIMUM_POWER,
+	for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_MINIMUM_POWER,
 		IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)
 	{
 		DXGI_ADAPTER_DESC1 desc = {};
 		adapter->GetDesc1(&desc);
 		gpuAdaptersDesc.push_back(desc);
-	}*/ 
+	}
 
-	HR(D3D11CreateDevice(adapter, D3D_DRIVER_TYPE_UNKNOWN, nullptr, createDeviceFlags,
+	HR(D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags,
 		featureLevels, _countof(featureLevels), D3D11_SDK_VERSION, &device,
 		&selectedFeatureLevel, &context));
 
@@ -186,12 +186,12 @@ void Renderer::CreateSwapchain(HWND window)
 	HR(swapchain->SetColorSpace1(DXGI_COLOR_SPACE_RGB_FULL_G10_NONE_P709));
 
 	//Check for colour space (HDR, sRGB)
-	IDXGIOutput* output = nullptr;
-	HR(swapchain->GetContainingOutput(&output));
-	IDXGIOutput6* output6 = nullptr;
-	HR(output->QueryInterface<IDXGIOutput6>(&output6));
-	DXGI_OUTPUT_DESC1 outputDesc = {};
-	HR(output6->GetDesc1(&outputDesc));
+	//IDXGIOutput* output = nullptr;
+	//HR(swapchain->GetContainingOutput(&output));
+	//IDXGIOutput6* output6 = nullptr;
+	//HR(output->QueryInterface<IDXGIOutput6>(&output6));
+	//DXGI_OUTPUT_DESC1 outputDesc = {};
+	//HR(output6->GetDesc1(&outputDesc));
 
 	dxgiFactory->MakeWindowAssociation(window, DXGI_MWA_NO_WINDOW_CHANGES | DXGI_MWA_NO_ALT_ENTER);
 }
@@ -569,8 +569,7 @@ void Renderer::Render()
 	//RenderSkeletonBones();
 	RenderLightMeshes();
 	RenderCameraMeshes();
-	//PostProcessRender();
-	//RenderPostProcess2();
+	RenderPostProcess();
 
 	PROFILE_END
 }
@@ -1792,13 +1791,14 @@ XMFLOAT4 Renderer::CalcGlobalAmbientBasedOnGameTime()
 	return XMFLOAT4(0.5f, 0.5f, 0.5f, 1.f);
 }
 
-void Renderer::RenderPostProcess2()
+void Renderer::RenderPostProcess()
 {
 	SetNullRTV();
 
 	ID3D11ShaderResourceView* nullSRV = nullptr;
 	ID3D11UnorderedAccessView* nullUAV = nullptr;
 
+	context->OMSetBlendState(nullptr, nullptr, 0);
 	context->RSSetState(rastStateMap[RastStates::solid]->data);
 
 	context->IASetInputLayout(nullptr);
@@ -1814,6 +1814,11 @@ void Renderer::RenderPostProcess2()
 
 	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
 	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
+
+	//@Todo: there's an idea from the old post processing code that I liked.
+	//Basically instead of drawing a stupid quad and rendering a texture onto it, copy to the backbuffer like below:
+	//context->CopyResource(backBuffer, postBuffer);
+	//There are typecasting errors with this (e.g. 16_FLOAT can't be cast to 8_UNORM) but it felt better.
 
 	context->Draw(6, 0);
 
@@ -1840,48 +1845,4 @@ void Renderer::CreatePostProcessRenderTarget()
 
 	HR(device->CreateRenderTargetView(postBuffer, nullptr, &postRTV));
 	HR(device->CreateShaderResourceView(postBuffer, nullptr, &postSRV));
-}
-
-//@Todo: this is using the spritesystem to draw a fullscreen quad. Change it.
-void Renderer::PostProcessRender()
-{
-	PROFILE_START
-
-	spriteSystem.BuildSpriteQuadForParticleRendering();
-
-	if (drawAllAsWireframe)
-	{
-		context->RSSetState(rastStateWireframe);
-	}
-	else
-	{
-		context->RSSetState(rastStateMap["nobackcull"]->data);
-	}
-
-	context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
-
-	spriteSystem.UpdateAndSetSpriteBuffers(context);
-
-	const float blendFactor[4] = {};
-	context->OMSetBlendState(blendStateMap.find(BlendStates::Default)->second->data, blendFactor, 0xFFFFFFFF);
-
-	context->VSSetShader(shaderSystem.FindShader(L"PostProcess.hlsl")->vertexShader, nullptr, 0);
-	context->PSSetShader(shaderSystem.FindShader(L"PostProcess.hlsl")->pixelShader, nullptr, 0);
-
-	//The post processing RTV needs to be unset here and then the SRV to avoid D3D11 warnings
-	ID3D11RenderTargetView* nullRTV = nullptr;
-	context->OMSetRenderTargets(1, &nullRTV, nullptr);
-	context->PSSetShaderResources(0, 1, &postSRV);
-	ID3D11ShaderResourceView* nullSRV = nullptr;
-	context->PSSetShaderResources(0, 1, &nullSRV);
-	context->OMSetRenderTargets(1, &postRTV, dsv);
-
-	context->DrawIndexed(6, 0, 0);
-
-	context->CopyResource(backBuffer, postBuffer);
-
-	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
-	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
-
-	PROFILE_END
 }

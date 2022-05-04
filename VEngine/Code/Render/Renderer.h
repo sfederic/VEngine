@@ -119,6 +119,7 @@ private:
 	void RenderSkeletonBones();
 	void RenderPolyboards();
 	void RenderSpriteSheets();
+	void RenderPostProcess();
 	void AnimateSkeletalMesh(MeshComponent* mesh);
 	void UpdateLights();
 	void StartGPUQueries();
@@ -136,8 +137,6 @@ private:
 	void SetReflectionResources();
 	void SetMatricesFromMesh(MeshComponent* mesh);
 	void SetShaderMeshData(MeshComponent* mesh);
-
-	void RenderPostProcess2();
 
 public:
 	void Present();
@@ -170,7 +169,6 @@ private:
 	XMFLOAT4 CalcGlobalAmbientBasedOnGameTime();
 
 	void CreatePostProcessRenderTarget();
-	void PostProcessRender();
 };
 
 extern Renderer renderer;
