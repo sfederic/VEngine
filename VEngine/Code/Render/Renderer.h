@@ -48,6 +48,7 @@ struct Renderer
 	ID3D11Buffer* cbTime;
 	ID3D11Buffer* cbMeshData;
 	ID3D11Buffer* cbSkinningData;
+	ID3D11Buffer* cbPostProcess;
 	ID3D11Buffer* linesBuffer;
 
 	//Viewport

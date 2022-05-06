@@ -376,6 +376,12 @@ void Renderer::CreateConstantBuffers()
 	cbSkinningData = RenderUtils::CreateDynamicBuffer(sizeof(XMMATRIX) * 96,
 		D3D11_BIND_CONSTANT_BUFFER, skinningMatrices);
 	assert(cbSkinningData);
+
+	//Post process data
+	ShaderPostProcessData postProcessData = {};
+	cbPostProcess = RenderUtils::CreateDynamicBuffer(sizeof(ShaderPostProcessData),
+		D3D11_BIND_CONSTANT_BUFFER, &postProcessData);
+	assert(cbPostProcess);
 }
 
 void Renderer::CreatePlanarReflectionBuffers()
@@ -627,7 +633,7 @@ void Renderer::RenderMeshComponents()
 {
 	PROFILE_START
 
-	PostProcessInstance::system.GetNumActors() == 0 ? RenderSetup() : RenderPostProcess();
+	PostProcessInstance::system.GetNumActors() == 0 ? RenderSetup() : RenderPostProcessSetup();
 
 	SetShadowData();
 	UpdateLights();
@@ -1808,7 +1814,11 @@ XMFLOAT4 Renderer::CalcGlobalAmbientBasedOnGameTime()
 
 void Renderer::RenderPostProcess()
 {
-	if (PostProcessInstance::system.GetNumActors() == 0) return;
+	uint32_t numPostProcessInstances = PostProcessInstance::system.GetNumActors();
+	if (numPostProcessInstances == 0) return;
+
+	assert(numPostProcessInstances == 1);
+	auto postProcessIntance = PostProcessInstance::system.actors[0];
 
 	SetNullRTV();
 
@@ -1824,6 +1834,12 @@ void Renderer::RenderPostProcess()
 	auto quadShader = shaderSystem.FindShader(L"PostProcess.hlsl");
 	context->VSSetShader(quadShader->vertexShader, nullptr, 0);
 	context->PSSetShader(quadShader->pixelShader, nullptr, 0);
+
+	//Set constant buffer data
+	ShaderPostProcessData postProcessShaderData = {};
+	postProcessShaderData.gamma = postProcessIntance->gamma;
+	MapBuffer(cbPostProcess, &postProcessShaderData, sizeof(ShaderPostProcessData));
+	context->PSSetConstantBuffers(0, 1, &cbPostProcess);
 
 	context->PSSetShaderResources(0, 1, &postSRV);
 	context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
