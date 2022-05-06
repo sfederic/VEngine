@@ -177,6 +177,11 @@ struct ShaderMeshData
 	float pad;
 };
 
+struct ShaderPostProcessData
+{
+	float gamma = 0.f;
+};
+
 struct InstanceData
 {
 	XMMATRIX world = XMMatrixIdentity();
