@@ -22,6 +22,7 @@
 #include "Actors/Actor.h"
 #include "Actors/DiffuseProbeMap.h"
 #include "Actors/ReflectionPlane.h"
+#include "Actors/PostProcessInstance.h"
 #include "ShaderSystem.h"
 #include "DebugActors/DebugBox.h"
 #include "DebugActors/DebugSphere.h"
@@ -582,7 +583,7 @@ void Renderer::Render()
 	//RenderSkeletonBones();
 	RenderLightMeshes();
 	RenderCameraMeshes();
-	//RenderPostProcess();
+	RenderPostProcess();
 
 	PROFILE_END
 }
@@ -626,8 +627,8 @@ void Renderer::RenderMeshComponents()
 {
 	PROFILE_START
 
-	RenderSetup();
-	//RenderPostProcessSetup();
+	PostProcessInstance::system.GetNumActors() == 0 ? RenderSetup() : RenderPostProcess();
+
 	SetShadowData();
 	UpdateLights();
 
@@ -1807,6 +1808,8 @@ XMFLOAT4 Renderer::CalcGlobalAmbientBasedOnGameTime()
 
 void Renderer::RenderPostProcess()
 {
+	if (PostProcessInstance::system.GetNumActors() == 0) return;
+
 	SetNullRTV();
 
 	ID3D11ShaderResourceView* nullSRV = nullptr;
