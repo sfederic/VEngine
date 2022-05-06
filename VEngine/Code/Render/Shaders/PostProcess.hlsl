@@ -1,7 +1,8 @@
 cbuffer ShaderPostProcessData : register(b0)
 {
     float gamma;
-    float3 shaderPostProcessDataPadding;
+    float exposure;
+    float2 shaderPostProcessDataPadding;
 };
 
 Texture2D<float4> HDRTexture : register(t0);
@@ -58,7 +59,10 @@ static const float4 LUM_FACTOR = float4(0.299, 0.587, 0.114, 0);
 float3 ToneMapping(float3 HDRColor)
 {
     // reinhard tone mapping
-    float3 mapped = HDRColor / (HDRColor + float3(1.f, 1.f, 1.f));
+    //float3 mapped = HDRColor / (HDRColor + float3(1.f, 1.f, 1.f));
+    
+    // exposure tone mapping
+    float3 mapped = float3(1.0, 1.0, 1.0) - exp(-HDRColor * exposure);
     
     // gamma correction 
     mapped = pow(mapped, float3(1.0 / gamma, 1.0 / gamma, 1.0 / gamma));
