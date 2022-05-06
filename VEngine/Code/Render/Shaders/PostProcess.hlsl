@@ -1,3 +1,12 @@
+cbuffer ShaderPostProcessData : register(b0)
+{
+    float gamma;
+};
+
+Texture2D<float4> HDRTexture : register(t0);
+
+SamplerState s : register(s0);
+
 static const float2 positions[6] =
 {
     float2(-1.f, -1.f),
@@ -17,9 +26,6 @@ static const float2 uvs[6] =
     float2(1.0, 0.0),
     float2(0.0, 0.0)
 };
-
-Texture2D<float4> HDRTexture : register(t0);
-SamplerState s : register(s0);
 
 struct VS_OUTPUT
 {
@@ -46,17 +52,10 @@ float3 Rec709ToRec2020(float3 color)
     return mul(conversion, color);
 }
 
-cbuffer FinalPassConstants : register(b0)
-{
-    float MiddleGrey : packoffset(c0);
-    float LumWhiteSqr : packoffset(c0.y);
-}
-
 static const float4 LUM_FACTOR = float4(0.299, 0.587, 0.114, 0);
 
 float3 ToneMapping(float3 HDRColor)
 {
-    const float gamma = 1.0;
     const float exposure = 5.0;
     
     // reinhard tone mapping
@@ -73,13 +72,11 @@ float3 ToneMapping(float3 HDRColor)
 
 float4 PSMain(VS_OUTPUT i) : SV_Target
 {
-    // Get the color sample
     float3 color = HDRTexture.Sample(s, i.uv).xyz;
     
-    // Tone mapping
-    //color = ToneMapping(color);
+    color = ToneMapping(color);
     
-    color = Rec709ToRec2020(color);
+    //color = Rec709ToRec2020(color);
     
     return float4(color, 1.0);
 }
