@@ -545,6 +545,9 @@
     <ClCompile Include="Code\SHMath\DirectXSHD3D12.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\PostProcessInstance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -1031,6 +1034,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\SHMath\DirectXSH.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\PostProcessInstance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
