@@ -1837,7 +1837,7 @@ void Renderer::RenderPostProcess()
 
 	//Set constant buffer data
 	ShaderPostProcessData postProcessShaderData = {};
-	postProcessShaderData.gamma = postProcessIntance->gamma;
+	postProcessIntance->SetShaderPostProcessData(postProcessShaderData);
 	MapBuffer(cbPostProcess, &postProcessShaderData, sizeof(ShaderPostProcessData));
 	context->PSSetConstantBuffers(0, 1, &cbPostProcess);
 
