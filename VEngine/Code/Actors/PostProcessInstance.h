@@ -9,7 +9,8 @@ struct PostProcessInstance : Actor
 {
 	ACTOR_SYSTEM(PostProcessInstance);
 
-	float gamma = 2.2f;
+	float gamma = 1.0f;
+	float exposure = 1.0f;
 
 	PostProcessInstance();
 	virtual Properties GetProps() override;

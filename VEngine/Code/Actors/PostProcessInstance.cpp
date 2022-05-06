@@ -9,6 +9,8 @@ PostProcessInstance::PostProcessInstance()
 Properties PostProcessInstance::GetProps()
 {
     auto props = __super::GetProps();
+    props.title = "PostProcessInstance";
     props.Add("Gamma", &gamma);
+    props.Add("Exposure", &exposure);
     return props;
 }
