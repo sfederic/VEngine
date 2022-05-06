@@ -1491,6 +1491,21 @@ GoddessStatue
 0
 PhysicsActor
 0
+PostProcessInstance
+1
+ Position
+0 2 -1
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Gamma
+2.2
+Name
+PostProcessInstance0
+UID
+687344732
+next
 PolyboardActor
 0
 DebugNoteActor
