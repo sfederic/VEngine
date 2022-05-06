@@ -1,6 +1,7 @@
 cbuffer ShaderPostProcessData : register(b0)
 {
     float gamma;
+    float3 shaderPostProcessDataPadding;
 };
 
 Texture2D<float4> HDRTexture : register(t0);
@@ -56,13 +57,8 @@ static const float4 LUM_FACTOR = float4(0.299, 0.587, 0.114, 0);
 
 float3 ToneMapping(float3 HDRColor)
 {
-    const float exposure = 5.0;
-    
     // reinhard tone mapping
     float3 mapped = HDRColor / (HDRColor + float3(1.f, 1.f, 1.f));
-    
-    // exposure tone mapping
-    //float3 mapped = float3(1.0, 1.0, 1.0) - exp(-HDRColor * exposure);
     
     // gamma correction 
     mapped = pow(mapped, float3(1.0 / gamma, 1.0 / gamma, 1.0 / gamma));
@@ -73,10 +69,6 @@ float3 ToneMapping(float3 HDRColor)
 float4 PSMain(VS_OUTPUT i) : SV_Target
 {
     float3 color = HDRTexture.Sample(s, i.uv).xyz;
-    
     color = ToneMapping(color);
-    
-    //color = Rec709ToRec2020(color);
-    
     return float4(color, 1.0);
 }

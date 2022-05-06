@@ -183,6 +183,7 @@ struct ShaderMeshData
 struct ShaderPostProcessData
 {
 	float gamma = 0.f;
+	float pad[3];
 };
 
 struct InstanceData
