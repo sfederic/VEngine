@@ -11,13 +11,13 @@ Properties PostProcessInstance::GetProps()
 {
     auto props = __super::GetProps();
     props.title = "PostProcessInstance";
-    props.Add("Gamma", &gamma);
-    props.Add("Exposure", &exposure);
+    props.Add("Exposure", &postProcessData.exposure);
+    props.Add("Shoulder Str.", &postProcessData.shoulderStrength);
+    props.Add("Linear Str.", &postProcessData.linearStrength);
+    props.Add("Linear Angle", &postProcessData.linearAngle);
+    props.Add("Toe Str.", &postProcessData.toeStrenth);
+    props.Add("Toe Numerator", &postProcessData.toeNumerator);
+    props.Add("Toe Denominator", &postProcessData.toeDenominator);
+    props.Add("White Value", &postProcessData.linearWhitePointValue);
     return props;
-}
-
-void PostProcessInstance::SetShaderPostProcessData(ShaderPostProcessData& data)
-{
-    data.gamma = this->gamma;
-    data.exposure = this->exposure;
 }

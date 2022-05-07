@@ -1,6 +1,7 @@
 #pragma once
 #include "Actor.h"
 #include "ActorSystem.h"
+#include "Render/RenderTypes.h"
 
 struct ShaderPostProcessData;
 
@@ -11,10 +12,8 @@ struct PostProcessInstance : Actor
 {
 	ACTOR_SYSTEM(PostProcessInstance);
 
-	float gamma = 1.0f;
-	float exposure = 1.0f;
+	ShaderPostProcessData postProcessData;
 
 	PostProcessInstance();
 	virtual Properties GetProps() override;
-	void SetShaderPostProcessData(ShaderPostProcessData& data);
 };

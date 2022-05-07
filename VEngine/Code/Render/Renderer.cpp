@@ -1965,9 +1965,7 @@ void RenderPostProcess()
 	context->PSSetShader(quadShader->pixelShader, nullptr, 0);
 
 	//Set constant buffer data
-	ShaderPostProcessData postProcessShaderData = {};
-	postProcessIntance->SetShaderPostProcessData(postProcessShaderData);
-	MapBuffer(cbPostProcess, &postProcessShaderData, sizeof(ShaderPostProcessData));
+	MapBuffer(cbPostProcess, &postProcessIntance->postProcessData, sizeof(ShaderPostProcessData));
 	context->PSSetConstantBuffers(0, 1, &cbPostProcess);
 
 	context->PSSetShaderResources(0, 1, &postSRV);
