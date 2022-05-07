@@ -3,6 +3,9 @@
 
 ThreadSystem threadSystem;
 
+//@Todo: this needs a lot more work. Make a 'good enough' thread pool for the editor side of the engine.
+std::vector<std::thread> threadPool;
+
 ThreadSystem::ThreadSystem(): System("ThreadSystem")
 {
 }
@@ -14,6 +17,5 @@ uint32_t ThreadSystem::GetNumHardwareThreads()
 
 void ThreadSystem::CreateThread(std::function<void()> function)
 {
-	std::thread newThread(function);
-	newThread.join();
+	threadPool.push_back(std::thread(function));
 }
