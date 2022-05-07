@@ -71,7 +71,9 @@ float3 FilmicToneMap()
     return outColour;
 }
 
-//Ref:https://www.gdcvault.com/play/1012351/Uncharted-2-HDR
+//Same reference, GDC and blog pair
+//https://www.gdcvault.com/play/1012351/Uncharted-2-HDR
+//http://filmicworlds.com/blog/filmic-tonemapping-operators/
 float3 NaughtDogFilmicToneMap(float3 outColour)
 {
     const float shoulderStrength = 0.22;
@@ -80,32 +82,27 @@ float3 NaughtDogFilmicToneMap(float3 outColour)
     const float toeStrenth = 0.2;
     const float toeNumerator = 0.01;
     const float toeDenominator = 0.3;
-    const float linearWhitePointValue = 11.2;
     
     outColour = ((outColour * (shoulderStrength * outColour + linearAngle * linearStrength)
         + toeStrenth * toeNumerator) / (outColour * (shoulderStrength * outColour + linearStrength)
         + toeStrenth * toeDenominator)) - toeNumerator / toeDenominator;
 
-    return outColour / linearWhitePointValue;
-}
-
-float3 ToneMapping(float3 HDRColor)
-{
-    // reinhard tone mapping
-    //float3 mapped = HDRColor / (HDRColor + float3(1.f, 1.f, 1.f));
-    
-    // exposure tone mapping
-    float3 mapped = float3(1.0, 1.0, 1.0) - exp(-HDRColor * exposure);
-    
-    // gamma correction 
-    mapped = pow(mapped, float3(1.0 / gamma, 1.0 / gamma, 1.0 / gamma));
-  
-    return mapped;
+    return outColour;
 }
 
 float4 PSMain(VS_OUTPUT i) : SV_Target
 {
-    float3 colour = HDRTexture.Sample(s, i.uv).xyz;
-    colour = NaughtDogFilmicToneMap(colour);
-    return float4(colour, 1.0);
+    float3 texColour = HDRTexture.Sample(s, i.uv).xyz;
+    texColour *= exposure;
+    
+    float exposureBias = 2.0f;
+    float3 curr = NaughtDogFilmicToneMap(exposureBias * texColour);
+    
+    const float linearWhitePointValue = 11.2;
+    float3 whiteScale = 1.0f / NaughtDogFilmicToneMap(linearWhitePointValue);
+    
+    float3 colour = curr * whiteScale;
+    
+    float3 finalColour = pow(colour, 1 / 2.2);
+    return float4(finalColour, 1.0);
 }
