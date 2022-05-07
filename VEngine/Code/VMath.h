@@ -10,7 +10,6 @@ struct Vertex;
 
 using namespace DirectX;
 
-//It's called VMath because the C libs fuck around with the includes
 namespace VMath
 {
 	void MatrixAddScale(float s, XMMATRIX& m);
@@ -19,7 +18,7 @@ namespace VMath
 	XMVECTOR XMVectorUp();
 	XMVECTOR XMVectorForward();
 
-	//returns matrix with all 0's
+	//Returns matrix with all 0's
 	XMMATRIX ZeroMatrix();
 
 	void RoundFloat3(XMFLOAT3& float3);
