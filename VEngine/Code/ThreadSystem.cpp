@@ -1,16 +1,10 @@
 #include "ThreadSystem.h"
 #include <thread>
 
-ThreadSystem threadSystem;
-
 //@Todo: this needs a lot more work. Make a 'good enough' thread pool for the editor side of the engine.
 std::vector<std::thread> threadPool;
 
 std::vector<std::thread> frameThreads;
-
-ThreadSystem::ThreadSystem(): System("ThreadSystem")
-{
-}
 
 void ThreadSystem::Tick()
 {
