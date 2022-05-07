@@ -12,6 +12,14 @@ ThreadSystem::ThreadSystem(): System("ThreadSystem")
 {
 }
 
+void ThreadSystem::Tick()
+{
+	for (auto& frameThread : frameThreads)
+	{
+		frameThread.join();
+	}
+}
+
 uint32_t ThreadSystem::GetNumHardwareThreads()
 {
 	return std::thread::hardware_concurrency();

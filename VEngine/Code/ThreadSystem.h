@@ -6,6 +6,8 @@ struct ThreadSystem : System
 {
 	ThreadSystem();
 
+	static void Tick();
+
 	static uint32_t GetNumHardwareThreads();
 
 	//Normal threads that fire off and cleanup when they're done, independant of frames.
