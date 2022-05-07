@@ -1,5 +1,6 @@
 #include "Profile.h"
-#include <Windows.h>
+#define _AMD64_
+#include <profileapi.h>
 #include <cassert>
 #include <source_location>
 
