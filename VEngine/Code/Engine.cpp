@@ -24,8 +24,6 @@
 #include "Editor/CutsceneSequencer.h"
 #include "ThreadSystem.h"
 
-Engine engine;
-
 void Engine::Init(int argc, char* argv[])
 {
 	Core::Init();

@@ -2,9 +2,9 @@
 
 int main(int argc, char *argv[])
 {
-	engine.Init(argc, argv);
-	engine.MainLoop();
-	engine.Cleanup();
+	Engine::Init(argc, argv);
+	Engine::MainLoop();
+	Engine::Cleanup();
 	 
 	return 0;
 }
