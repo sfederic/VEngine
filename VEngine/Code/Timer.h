@@ -1,5 +1,4 @@
 #pragma once
-#include <vector>
 #include <functional>
 
 struct TimerItem
@@ -9,11 +8,9 @@ struct TimerItem
 	std::function<void()> functionToCall;
 };
 
-struct Timer
+namespace Timer
 {
-	inline static std::vector<TimerItem> timerItems;
-
-	static void Tick(float deltaTime);
-	static void Cleanup();
-	static TimerItem* SetTimer(float duration, std::function<void()> functionToCall);
+	void Tick(float deltaTime);
+	void Cleanup();
+	TimerItem* SetTimer(float duration, std::function<void()> functionToCall);
 };

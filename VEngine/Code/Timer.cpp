@@ -1,4 +1,7 @@
 #include "Timer.h"
+#include <vector>
+
+std::vector<TimerItem> timerItems;
 
 void Timer::Tick(float deltaTime)
 {
