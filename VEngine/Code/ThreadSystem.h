@@ -6,6 +6,7 @@ struct ThreadSystem : System
 {
 	ThreadSystem();
 
+	//Iterate over all active Frame Threads and join them.
 	static void Tick();
 
 	static uint32_t GetNumHardwareThreads();

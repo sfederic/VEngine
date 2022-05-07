@@ -22,6 +22,7 @@
 #include "Audio/AudioSystem.h"
 #include "Physics/PhysicsSystem.h"
 #include "Editor/CutsceneSequencer.h"
+#include "ThreadSystem.h"
 
 Engine engine;
 
@@ -88,6 +89,8 @@ void Engine::MainLoop()
 
 		TickSystems(deltaTime);
 		Render(deltaTime);
+
+		ThreadSystem::Tick();
 
 		ResetSystems();
 
