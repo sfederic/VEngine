@@ -1,5 +1,4 @@
 #pragma once
-#include <vector>
 
 //All the 0x codes here are from the Win32 virtual key values. They're like this to avoid including Windows.h here.
 enum class Keys
@@ -63,9 +62,6 @@ enum class Keys
 
 namespace Input
 {
-	extern std::vector<Keys> currentDownKeys;
-	extern std::vector<Keys> currentUpKeys;
-
 	extern bool mouseWheelUp;
 	extern bool mouseWheelDown;
 
@@ -94,4 +90,7 @@ namespace Input
 	bool GetMouseRightDown();
 	bool GetMouseMiddleUp();
 	bool GetMouseMiddleDown();
+
+	unsigned int GetNumCurrentKeysDown();
+	Keys GetLastPressedKeyDown();
 }
