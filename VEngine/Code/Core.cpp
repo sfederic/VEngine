@@ -79,7 +79,7 @@ void Core::Tick()
 	{
 		if (Input::GetKeyUp(Keys::R))
 		{
-			fileSystem.ReloadCurrentWorld();
+			FileSystem::ReloadCurrentWorld();
 		}
 	}
 

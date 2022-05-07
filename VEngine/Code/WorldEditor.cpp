@@ -95,7 +95,7 @@ void WorldEditor::SaveWorld()
 	{
 		if (Input::GetKeyUp(Keys::S))
 		{
-			fileSystem.WriteAllActorSystems();
+			FileSystem::WriteAllActorSystems();
 		}
 	}
 }

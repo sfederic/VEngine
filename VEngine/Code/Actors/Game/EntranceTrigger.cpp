@@ -81,7 +81,7 @@ void EntranceTrigger::Tick(float deltaTime)
 
             if (GameInstance::useGameSaves)
             {
-                fileSystem.WriteAllActorSystems();
+                FileSystem::WriteAllActorSystems();
             }
 
             GameUtils::PlayAudioOneShot("door.wav");

@@ -93,7 +93,7 @@ namespace GameUtils
 		std::string file = str += ".vmap";
 
 		world.worldFilename = file;
-		fileSystem.WriteAllActorSystems();
+		FileSystem::WriteAllActorSystems();
 	}
 
 	void LoadWorld(std::string worldName)
@@ -107,7 +107,7 @@ namespace GameUtils
 
 		GameUtils::SaveGameInstanceData();
 
-		fileSystem.LoadWorld(worldName);
+		FileSystem::LoadWorld(worldName);
 	}
 
 	void SaveGameInstanceData()

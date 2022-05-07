@@ -18,8 +18,6 @@
 #include "Gameplay/BattleSystem.h"
 #include "Quests/QuestSystem.h"
 
-FileSystem fileSystem;
-
 void FileSystem::WriteAllActorSystems()
 {
 	auto lastOf = world.worldFilename.find_last_of("/\\");

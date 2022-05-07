@@ -37,7 +37,7 @@ void World::Init()
 	}
 
 	//Load starting map
-	fileSystem.LoadWorld(GameInstance::startingMap);
+	FileSystem::LoadWorld(GameInstance::startingMap);
 }
 
 void World::Start()

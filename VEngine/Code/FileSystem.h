@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-struct FileSystem
+namespace FileSystem
 {
 	//Essentially is SaveWorld()
 	void WriteAllActorSystems();
@@ -15,8 +15,5 @@ struct FileSystem
 	//Creates an equivalent map save to load during gameplay (to avoid having a seperate save file format)
 	void CreateGameplayWorldSave(std::string worldName);
 
-private:
 	void ResetWorldState();
 };
-
-extern FileSystem fileSystem;

@@ -78,12 +78,12 @@ void ToolbarDock::StartPlay()
 
 void ToolbarDock::ResetWorldState()
 {
-	fileSystem.ReloadCurrentWorld();
+	FileSystem::ReloadCurrentWorld();
 }
 
 void ToolbarDock::SaveWorld()
 {
-	fileSystem.WriteAllActorSystems();
+	FileSystem::WriteAllActorSystems();
 }
 
 void ToolbarDock::SetTranslationSnapValue()

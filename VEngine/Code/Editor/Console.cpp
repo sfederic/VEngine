@@ -69,7 +69,7 @@ Console::Console()
 	executeMap.emplace(L"SKEL", []() { debugMenu.skeletonViewMenuOpen = !debugMenu.skeletonViewMenuOpen; });
 
 	//Reload current world
-	executeMap.emplace(L"RESET", []() { fileSystem.ReloadCurrentWorld(); });
+	executeMap.emplace(L"RESET", []() { FileSystem::ReloadCurrentWorld(); });
 
 	//Show core engine variables
 	executeMap.emplace(L"CORE", []() { debugMenu.coreMenuOpen = !debugMenu.coreMenuOpen; });
@@ -78,8 +78,8 @@ Console::Console()
 	executeMap.emplace(L"BAKE", []() { Renderer::RenderLightProbeViews(); });
 
 	//Save/Load current world to/From binary format
-	executeMap.emplace(L"BIN", []() { fileSystem.WriteAllActorSystemsToBinary(); });
-	executeMap.emplace(L"LOADBIN", []() { fileSystem.ReadAllActorSystemsFromBinary(); });
+	executeMap.emplace(L"BIN", []() { FileSystem::WriteAllActorSystemsToBinary(); });
+	executeMap.emplace(L"LOADBIN", []() { FileSystem::ReadAllActorSystemsFromBinary(); });
 
 	//Asset Build Commands
 	executeMap.emplace(L"BUILD MESHES", []() {

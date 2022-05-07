@@ -118,7 +118,7 @@ void AssetDock::AssetItemClicked()
         GameInstance::startingMap = assetName.toStdString();
         GameInstance::previousMapMovedFrom = GameInstance::startingMap;
 
-        fileSystem.LoadWorld(assetName.toStdString());
+        FileSystem::LoadWorld(assetName.toStdString());
     }   
     else if (std::wcscmp(extension, L".fbx") == 0) //FBX files
     {
@@ -304,7 +304,7 @@ void AssetDock::CreateNewMapFile()
    
     //Just load the map when creating it
     QFileInfo fileInfo(file);
-    fileSystem.LoadWorld(fileInfo.fileName().toStdString());
+    FileSystem::LoadWorld(fileInfo.fileName().toStdString());
 }
 
 void AssetDock::CreateNewDialogueFile()

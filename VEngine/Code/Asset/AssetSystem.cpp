@@ -78,6 +78,6 @@ void AssetSystem::BuildAllGameplayMapFiles()
 	for (auto const& dirEntry : std::filesystem::recursive_directory_iterator{ "WorldMaps" })
 	{
 		std::string file = dirEntry.path().filename().string();
-		fileSystem.CreateGameplayWorldSave(file);
+		FileSystem::CreateGameplayWorldSave(file);
 	}
 }
