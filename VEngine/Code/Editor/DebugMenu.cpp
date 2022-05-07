@@ -33,6 +33,7 @@
 #include "Physics/PhysicsSystem.h"
 #include "Quests/QuestSystem.h"
 #include "Quests/Quest.h"
+#include "Render/RenderUtils.h"
 
 DebugMenu debugMenu;
 
@@ -54,7 +55,7 @@ void DebugMenu::Init()
 
 	ImGui::StyleColorsDark();
 	ImGui_ImplWin32_Init((HWND)editor->windowHwnd);
-	ImGui_ImplDX11_Init(renderer.device, renderer.context);
+	ImGui_ImplDX11_Init(RenderUtils::device, RenderUtils::context);
 }
 
 void DebugMenu::Tick(float deltaTime)
@@ -129,7 +130,7 @@ void DebugMenu::RenderActorProps()
 	ImGui::Begin("Actor Properties");
 
 	//Iterate over actor props
-	for (auto props : worldEditor.pickedActor->GetAllProps())
+	for (auto& props : worldEditor.pickedActor->GetAllProps())
 	{
 		IterateOverProperties(props);
 	}
@@ -141,7 +142,7 @@ void DebugMenu::IterateOverProperties(Properties& props)
 {
 	ImGui::Text(props.title.c_str());
 
-	for (auto prop : props.propMap)
+	for (auto& prop : props.propMap)
 	{
 		const std::string& name = prop.first;
 
@@ -311,7 +312,7 @@ void DebugMenu::RenderMemoryMenu()
 
 	ImGui::Begin("Memory");
 
-	for (auto systemIt : *systemCache.nameToSystemMap)
+	for (auto& systemIt : *systemCache.nameToSystemMap)
 	{
 		System* system = systemIt.second;
 		ImGui::Text(system->name.c_str());
@@ -532,7 +533,7 @@ void DebugMenu::RenderFPSMenu(float deltaTime)
 		ImGui::Begin("FPS");
 
 		ImGui::Text("FPS: %d", Core::finalFrameCount);
-		ImGui::Text("GPU Render Time: %f", renderer.frameTime);
+		ImGui::Text("GPU Render Time: %f", Renderer::frameTime);
 		ImGui::Text("Delta Time (ms): %f", deltaTime);
 		ImGui::Text("Time Since Startup: %f", Core::timeSinceStartup);
 
@@ -542,7 +543,7 @@ void DebugMenu::RenderFPSMenu(float deltaTime)
 
 void DebugMenu::RenderGPUMenu()
 {
-	if (gpuMenuOpen)
+	/*if (gpuMenuOpen)
 	{
 		ImGui::Begin("GPU Info");
 
@@ -577,7 +578,7 @@ void DebugMenu::RenderGPUMenu()
 		}
 
 		ImGui::End();
-	}
+	}*/
 }
 
 void DebugMenu::RenderProfileMenu()

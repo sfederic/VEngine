@@ -46,8 +46,8 @@ void Widget::GetScreenSpaceCoords(int& sx, int& sy)
 	const float f1 = pos.m128_f32[0] / pos.m128_f32[3];
 	const float f2 = pos.m128_f32[1] / pos.m128_f32[3];
 
-	sx = ((f1 * 0.5f) + 0.5) * renderer.viewport.Width;
-	sy = ((f2 * -0.5f) + 0.5) * renderer.viewport.Height;
+	sx = ((f1 * 0.5f) + 0.5) * Renderer::GetViewportWidth();
+	sy = ((f2 * -0.5f) + 0.5) * Renderer::GetViewportHeight();
 }
 
 void Widget::Text(const std::wstring& text, Layout layout, TextAlign align,
@@ -167,8 +167,8 @@ void Widget::FillRect(Layout layout, D2D1_COLOR_F color, float opacity)
 
 Layout Widget::AlignLayout(float w, float h, Align align)
 {
-	float vw = renderer.GetViewportWidth();
-	float vh = renderer.GetViewportHeight();
+	float vw = Renderer::GetViewportWidth();
+	float vh = Renderer::GetViewportHeight();
 
 	switch (align)
 	{
@@ -222,8 +222,8 @@ Layout Widget::AlignLayout(float w, float h, Align align)
 
 	if (rect.left < 0.f) rect.left = 0.f;
 	if (rect.top < 0.f) rect.top = 0.f;
-	if (rect.right > renderer.GetViewportWidth()) rect.right = vw;
-	if (rect.bottom > renderer.GetViewportHeight()) rect.bottom = vh;
+	if (rect.right > Renderer::GetViewportWidth()) rect.right = vw;
+	if (rect.bottom > Renderer::GetViewportHeight()) rect.bottom = vh;
 
 	Layout layout = {};
 	layout.rect = rect;
@@ -233,8 +233,8 @@ Layout Widget::AlignLayout(float w, float h, Align align)
 
 Layout Widget::PercentAlignLayout(float left, float top, float right, float bottom)
 {
-	float vw = renderer.GetViewportWidth();
-	float vh = renderer.GetViewportHeight();
+	float vw = Renderer::GetViewportWidth();
+	float vh = Renderer::GetViewportHeight();
 
 	float endLeft = vw * left;
 	float endTop = vh * top;
@@ -244,8 +244,8 @@ Layout Widget::PercentAlignLayout(float left, float top, float right, float bott
 
 	if (rect.left < 0.f) rect.left = 0.f;
 	if (rect.top < 0.f) rect.top = 0.f;
-	if (rect.right > renderer.GetViewportWidth()) rect.right = vw;
-	if (rect.bottom > renderer.GetViewportHeight()) rect.bottom = vh;
+	if (rect.right > Renderer::GetViewportWidth()) rect.right = vw;
+	if (rect.bottom > Renderer::GetViewportHeight()) rect.bottom = vh;
 
 	return rect;
 }
@@ -254,8 +254,8 @@ Layout Widget::CenterLayoutOnScreenSpaceCoords(float w, float h, float sx, float
 {
 	D2D1_RECT_F rect = {sx - w, sy - h, sx + w, sy + h};
 
-	float vw = renderer.GetViewportWidth();
-	float vh = renderer.GetViewportHeight();
+	float vw = Renderer::GetViewportWidth();
+	float vh = Renderer::GetViewportHeight();
 
 	if (rect.left < 0.f) rect.left = 0.f;
 	if (rect.top < 0.f) rect.top = 0.f;

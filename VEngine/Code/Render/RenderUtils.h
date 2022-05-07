@@ -7,6 +7,7 @@ struct MeshDataProxy;
 namespace RenderUtils
 {
 	extern ID3D11Device* device;
+	extern ID3D11DeviceContext* context;
 	extern Sampler* defaultSampler;
 
 	ID3D11Buffer* CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, const void* initData);

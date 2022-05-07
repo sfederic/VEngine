@@ -38,11 +38,11 @@ void Engine::Init(int argc, char* argv[])
 
 	physicsSystem.Init();
 
-	renderer.Init(editor->windowHwnd, editor->viewportWidth, editor->viewportHeight);
+	Renderer::Init(editor->windowHwnd, editor->viewportWidth, editor->viewportHeight);
 
 	fbxLoader.Init();
 
-	uiSystem.Init((void*)renderer.swapchain);
+	uiSystem.Init(Renderer::GetSwapchain());
 	debugMenu.Init();
 
 	world.Init();
@@ -65,7 +65,7 @@ void Engine::TickSystems(float deltaTime)
 
 	worldEditor.Tick();
 	physicsSystem.Tick(deltaTime);
-	renderer.Tick();
+	Renderer::Tick();
 
 	if (Core::gameplayOn)
 	{
@@ -100,20 +100,21 @@ void Engine::MainLoop()
 
 void Engine::Render(float deltaTime)
 {
-	renderer.Render();
-	renderer.RenderParticleEmitters();
+	Renderer::Render();
+	Renderer::RenderParticleEmitters();
 
 	console.InputTick();
 
 	uiSystem.BeginDraw();
 	uiSystem.DrawAllWidgets(deltaTime);
-	renderer.RenderSpritesInScreenSpace();
+
+	Renderer::RenderSpritesInScreenSpace();
 
 	console.Tick();
 	debugMenu.Tick(deltaTime);
 	uiSystem.EndDraw();
 
-	renderer.Present();
+	Renderer::Present();
 }
 
 void Engine::Cleanup()

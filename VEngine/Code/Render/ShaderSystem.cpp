@@ -2,7 +2,7 @@
 #include <filesystem>
 #include <set>
 #include "Debug.h"
-#include "Renderer.h"
+#include "RenderUtils.h"
 #include "VString.h"
 #include "Input.h"
 #include "Log.h"
@@ -79,13 +79,13 @@ void ShaderSystem::CreateAllShaders()
 {
     for (ShaderItem* shader : shaders)
     {
-        HR(renderer.device->CreateVertexShader(
+        HR(RenderUtils::device->CreateVertexShader(
             shader->vertexCode->GetBufferPointer(),
             shader->vertexCode->GetBufferSize(),
             nullptr,
             &shader->vertexShader));
 
-        HR(renderer.device->CreatePixelShader(
+        HR(RenderUtils::device->CreatePixelShader(
             shader->pixelCode->GetBufferPointer(),
             shader->pixelCode->GetBufferSize(),
             nullptr,
@@ -94,7 +94,7 @@ void ShaderSystem::CreateAllShaders()
 
     for (ShaderItem* shader : computeShaders)
     {
-        HR(renderer.device->CreateComputeShader(
+        HR(RenderUtils::device->CreateComputeShader(
             shader->computeCode->GetBufferPointer(),
             shader->computeCode->GetBufferSize(),
             nullptr,
@@ -221,13 +221,13 @@ void ShaderSystem::HotReloadShaders()
 
     for (ShaderItem* shader : shadersToRecompile)
     {
-        HR(renderer.device->CreateVertexShader(
+        HR(RenderUtils::device->CreateVertexShader(
             shader->vertexCode->GetBufferPointer(),
             shader->vertexCode->GetBufferSize(),
             nullptr,
             &shader->vertexShader));
 
-        HR(renderer.device->CreatePixelShader(
+        HR(RenderUtils::device->CreatePixelShader(
             shader->pixelCode->GetBufferPointer(),
             shader->pixelCode->GetBufferSize(),
             nullptr,

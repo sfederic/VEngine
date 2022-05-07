@@ -1,4 +1,10 @@
 #include "Renderer.h"
+#include <vector>
+#include <unordered_map>
+#include <d3d11.h>
+#include <dxgi1_6.h>
+#include "RenderTypes.h"
+#include "PipelineObjects.h"
 #include <ScreenGrab.h>
 #include <SHMath/DirectXSH.h>
 #include <WinCodec.h> //For GUID_ContainerFormatJpeg
@@ -44,7 +50,129 @@
 #include "Particle/Polyboard.h"
 #include "Gameplay/GameInstance.h"
 
-Renderer renderer;
+void CreateFactory();
+void CreateDevice();
+void CreateSwapchain(HWND window);
+void CreateRTVAndDSV();
+void CreateInputLayout();
+void CreateRasterizerStates();
+void CreateBlendStates();
+void CreateQueries();
+void CreateConstantBuffers();
+void CreatePlanarReflectionBuffers();
+void CreateLightProbeBuffers();
+void CheckSupportedFeatures();
+void RenderShadowPass();
+void RenderMeshComponents();
+void RenderPlanarReflections();
+void RenderInstanceMeshComponents();
+void RenderBounds();
+void RenderCameraMeshes();
+void RenderLightMeshes();
+void RenderSkeletonBones();
+void RenderPolyboards();
+void RenderSpriteSheets();
+void RenderPostProcess();
+void AnimateSkeletalMesh(MeshComponent* mesh);
+void UpdateLights();
+void StartGPUQueries();
+void EndGPUQueries();
+void GetGPUQueryData();
+void MapBuffer(ID3D11Resource* resource, const void* src, size_t size);
+void DrawMesh(MeshComponent* mesh);
+//Inner render functions to set shader resources
+void SetNullRTV();
+void SetShadowData();
+void SetLightResources();
+void SetShadowResources();
+void SetReflectionResources();
+void SetMatricesFromMesh(MeshComponent* mesh);
+void SetShaderMeshData(MeshComponent* mesh);
+void SetRenderPipelineStates(MeshComponent* mesh);
+void SetRenderPipelineStatesForShadows(MeshComponent* mesh);
+//Changes the global ambient param passed into shaders to change based on the day-night cycle in-game.
+XMFLOAT4 CalcGlobalAmbientBasedOnGameTime();
+
+void CreatePostProcessRenderTarget();
+
+float Renderer::frameTime;
+bool Renderer::drawBoundingBoxes = false;
+bool Renderer::drawTriggers = true;
+bool Renderer::drawAllAsWireframe = false;
+
+unsigned int Renderer::stride = sizeof(Vertex);
+unsigned int Renderer::offset = 0;
+
+ID3D11Texture2D* backBuffer = nullptr;
+
+static const int swapchainCount = 2;
+
+
+ID3D11Device* device;
+ID3D11DeviceContext* context;
+
+ID3D11RenderTargetView* rtvs[swapchainCount];
+
+ID3D11DepthStencilView* dsv;
+ID3D11InputLayout* inputLayout;
+
+//Rasterizer states
+std::unordered_map<std::string, RastState*> rastStateMap;
+std::unordered_map<std::string, BlendState*> blendStateMap;
+ID3D11RasterizerState* rastStateSolid;
+ID3D11RasterizerState* rastStateWireframe;
+ID3D11RasterizerState* rastStateNoBackCull;
+ID3D11RasterizerState* rastStateShadow;
+
+//Blendstates
+ID3D11BlendState* nullBlendState = nullptr;
+ID3D11BlendState* blendStateAlphaToCoverage = nullptr;
+
+//DXGI
+IDXGISwapChain3* swapchain;
+IDXGIFactory6* dxgiFactory;
+
+//Constant buffers and data
+ID3D11Buffer* cbMatrices;
+ID3D11Buffer* cbMaterial;
+ID3D11Buffer* cbLights;
+ID3D11Buffer* cbTime;
+ID3D11Buffer* cbMeshData;
+ID3D11Buffer* cbSkinningData;
+ID3D11Buffer* cbPostProcess;
+ID3D11Buffer* linesBuffer;
+
+//Viewport
+D3D11_VIEWPORT viewport;
+
+//Shadow maps
+struct ShadowMap* shadowMap;
+
+//Reflection
+ID3D11RenderTargetView* reflectionRTV;
+ID3D11ShaderResourceView* reflectionSRV;
+ID3D11Texture2D* reflectionTex;
+
+//Light probe buffers
+ID3D11RenderTargetView* lightProbeRTVs[6]; //Cubemap
+ID3D11ShaderResourceView* lightProbeSRV = nullptr;
+ID3D11Texture2D* lightProbeTexture = nullptr;
+
+//Post process
+ID3D11Texture2D* postBuffer = nullptr;
+ID3D11RenderTargetView* postRTV = nullptr;
+ID3D11ShaderResourceView* postSRV = nullptr;
+
+//Queries for GPU profiling (Note that the queires are double buffered to deal with two frames for the GPU
+//being ahead of the GPU)
+ID3D11Query* frameStartQuery[2];
+ID3D11Query* frameEndQuery[2];
+ID3D11Query* timeDisjointQuery[2];
+int frameQueryIndex = 0;
+int framesCollected = -1;
+
+//Quality = 0 and Count = 1 are the 'default'
+DXGI_SAMPLE_DESC sampleDesc;
 
 const int cbMatrixRegister = 0;
 const int cbMaterialRegister = 1;
@@ -132,14 +260,14 @@ void Renderer::Tick()
 	ScreenshotCapture();
 }
 
-void Renderer::CreateFactory()
+void CreateFactory()
 {
 	ComPtr<IDXGIFactory> tempDxgiFactory;
 	HR(CreateDXGIFactory(IID_PPV_ARGS(tempDxgiFactory.GetAddressOf())));
 	HR(tempDxgiFactory->QueryInterface(&dxgiFactory));
 }
 
-void Renderer::CreateDevice()
+void CreateDevice()
 {
 	//BGRA support needed for DirectWrite and Direct2D
 	UINT createDeviceFlags = D3D11_CREATE_DEVICE_BGRA_SUPPORT;
@@ -168,9 +296,10 @@ void Renderer::CreateDevice()
 		&selectedFeatureLevel, &context));
 
 	RenderUtils::device = device;
+	RenderUtils::context = context;
 }
 
-void Renderer::CreateSwapchain(HWND window)
+void CreateSwapchain(HWND window)
 {
 	DXGI_SWAP_CHAIN_DESC sd = {};
 	sd.BufferDesc = { (UINT)viewport.Width, (UINT)viewport.Height, {60, 1}, DXGI_FORMAT_R16G16B16A16_FLOAT };
@@ -198,7 +327,7 @@ void Renderer::CreateSwapchain(HWND window)
 	dxgiFactory->MakeWindowAssociation(window, DXGI_MWA_NO_WINDOW_CHANGES | DXGI_MWA_NO_ALT_ENTER);
 }
 
-void Renderer::CreateRTVAndDSV()
+void CreateRTVAndDSV()
 {
 	swapchain->GetBuffer(0, IID_PPV_ARGS(&backBuffer));
 
@@ -224,7 +353,7 @@ void Renderer::CreateRTVAndDSV()
 	depthStencilBuffer.Reset();
 }
 
-void Renderer::CreateInputLayout()
+void CreateInputLayout()
 {
 	D3D11_INPUT_ELEMENT_DESC inputDesc[] =
 	{
@@ -241,7 +370,7 @@ void Renderer::CreateInputLayout()
 	context->IASetInputLayout(inputLayout);
 }
 
-void Renderer::CreateRasterizerStates()
+void CreateRasterizerStates()
 {
 	D3D11_RASTERIZER_DESC rastDesc = {};
 	rastDesc.FillMode = D3D11_FILL_SOLID;
@@ -287,7 +416,7 @@ void Renderer::CreateRasterizerStates()
 	}
 }
 
-void Renderer::CreateBlendStates()
+void CreateBlendStates()
 {
 	//NULL BLEND STATE
 	{
@@ -320,7 +449,7 @@ void Renderer::CreateBlendStates()
 	}
 }
 
-void Renderer::CreateQueries()
+void CreateQueries()
 {
 	D3D11_QUERY_DESC qd = {};
 
@@ -339,7 +468,7 @@ void Renderer::CreateQueries()
 	HR(device->CreateQuery(&qd, &frameEndQuery[1]));
 }
 
-void Renderer::CreateConstantBuffers()
+void CreateConstantBuffers()
 {
 	//Shader matrix constant buffer
 	shaderMatrices.Create();
@@ -384,7 +513,7 @@ void Renderer::CreateConstantBuffers()
 	assert(cbPostProcess);
 }
 
-void Renderer::CreatePlanarReflectionBuffers()
+void CreatePlanarReflectionBuffers()
 {
 	//if (reflectionTex)
 	//{
@@ -431,7 +560,7 @@ void Renderer::CreatePlanarReflectionBuffers()
 	//HR(device->CreateRenderTargetView(reflectionTex, &rtvDesc, &reflectionRTV));
 }
 
-void Renderer::MapBuffer(ID3D11Resource* resource, const void* src, size_t size)
+void MapBuffer(ID3D11Resource* resource, const void* src, size_t size)
 {
 	D3D11_MAPPED_SUBRESOURCE mapped = {};
 	HR(context->Map(resource, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped));
@@ -439,13 +568,13 @@ void Renderer::MapBuffer(ID3D11Resource* resource, const void* src, size_t size)
 	context->Unmap(resource, 0);
 }
 
-void Renderer::SetNullRTV()
+void SetNullRTV()
 {
 	ID3D11RenderTargetView* nullRTV = nullptr;
 	context->OMSetRenderTargets(1, &nullRTV, nullptr);
 }
 
-void Renderer::SetShadowData()
+void SetShadowData()
 {
 	if (!DirectionalLightComponent::system.components.empty())
 	{
@@ -460,12 +589,12 @@ void Renderer::SetShadowData()
 	}
 }
 
-void Renderer::DrawMesh(MeshComponent* mesh)
+void DrawMesh(MeshComponent* mesh)
 {
 	context->DrawIndexed(mesh->meshDataProxy->indices->size(), 0, 0);
 }
 
-void Renderer::CheckSupportedFeatures()
+void CheckSupportedFeatures()
 {
 	//Threading check
 	D3D11_FEATURE_DATA_THREADING threadFeature = {};
@@ -484,7 +613,7 @@ void Renderer::CheckSupportedFeatures()
 	sampleDesc.Count = sampleCount;
 }
 
-void Renderer::RenderShadowPass()
+void RenderShadowPass()
 {
 	PROFILE_START
 
@@ -521,7 +650,7 @@ void Renderer::RenderShadowPass()
 	PROFILE_END
 }
 
-void Renderer::RenderSetup()
+void RenderSetup()
 {
 	context->RSSetViewports(1, &viewport);
 
@@ -537,7 +666,7 @@ void Renderer::RenderSetup()
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
-void Renderer::RenderPostProcessSetup()
+void RenderPostProcessSetup()
 {
 	context->RSSetViewports(1, &viewport);
 
@@ -553,7 +682,7 @@ void Renderer::RenderPostProcessSetup()
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
-void Renderer::SetShadowResources()
+void SetShadowResources()
 {
 	context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
 	context->PSSetSamplers(1, 1, &shadowMap->sampler);
@@ -594,12 +723,12 @@ void Renderer::Render()
 	PROFILE_END
 }
 
-void Renderer::SetReflectionResources()
+void SetReflectionResources()
 {
 	context->PSSetShaderResources(reflectionTextureResgiter, 1, &reflectionSRV);
 }
 
-void Renderer::SetMatricesFromMesh(MeshComponent* mesh)
+void SetMatricesFromMesh(MeshComponent* mesh)
 {
 	shaderMatrices.model = mesh->GetWorldMatrix();
 	shaderMatrices.MakeModelViewProjectionMatrix();
@@ -609,7 +738,7 @@ void Renderer::SetMatricesFromMesh(MeshComponent* mesh)
 	context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 }
 
-void Renderer::SetShaderMeshData(MeshComponent* mesh)
+void SetShaderMeshData(MeshComponent* mesh)
 {
 	ShaderMeshData meshData = {};
 	meshData.position = mesh->GetPosition();
@@ -629,7 +758,7 @@ void Renderer::SetShaderMeshData(MeshComponent* mesh)
 	context->PSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
 }
 
-void Renderer::RenderMeshComponents()
+void RenderMeshComponents()
 {
 	PROFILE_START
 
@@ -845,7 +974,7 @@ void Renderer::RenderLightProbeViews()
 	Log("Light probe bake took [%f] ms", endTime);
 }
 
-void Renderer::RenderPlanarReflections()
+void RenderPlanarReflections()
 {
 	PROFILE_START
 
@@ -888,7 +1017,7 @@ void Renderer::RenderPlanarReflections()
 		context->PSSetSamplers(0, 1, &material->sampler->data);
 		context->PSSetShaderResources(0, 1, &material->texture->srv);
 
-		context->IASetVertexBuffers(0, 1, &mesh->pso->vertexBuffer->data, &stride, &offset);
+		context->IASetVertexBuffers(0, 1, &mesh->pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
 		context->IASetIndexBuffer(mesh->pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
 
 		MapBuffer(cbMaterial, &material->materialShaderData, sizeof(MaterialShaderData));
@@ -920,7 +1049,7 @@ void Renderer::RenderPlanarReflections()
 	PROFILE_END
 }
 
-void Renderer::RenderInstanceMeshComponents()
+void RenderInstanceMeshComponents()
 {
 	//@Todo: shadows for instancemeshes (might not even need it since Grid nodes are the only things rendererd that way)
 	//@Todo: animated instance meshes
@@ -964,13 +1093,13 @@ void Renderer::RenderInstanceMeshComponents()
 	PROFILE_END
 }
 
-void Renderer::RenderBounds()
+void RenderBounds()
 {
 	static DebugBox debugBox;
 
 	MaterialShaderData materialShaderData;
 
-	if (drawBoundingBoxes)
+	if (Renderer::drawBoundingBoxes)
 	{
 		context->RSSetState(rastStateWireframe);
 
@@ -982,7 +1111,7 @@ void Renderer::RenderBounds()
 		//the debug mesh actors will crash here. Tried putting the Debug Actors as global pointers
 		//instead of being static, but then Direct2D swapchain/rendertarget errors would happen.
 		//Feels like it might be the GPU doing some funny memory thing.
-		context->IASetVertexBuffers(0, 1, &debugBox.boxMesh->pso->vertexBuffer->data, &stride, &offset);
+		context->IASetVertexBuffers(0, 1, &debugBox.boxMesh->pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
 
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
@@ -1021,7 +1150,7 @@ void Renderer::RenderBounds()
 	}
 
 	//DRAW TRIGGER BOUNDS
-	if(drawTriggers)
+	if(Renderer::drawTriggers)
 	{
 		context->RSSetState(rastStateWireframe);
 
@@ -1029,7 +1158,7 @@ void Renderer::RenderBounds()
 		context->VSSetShader(shader->vertexShader, nullptr, 0);
 		context->PSSetShader(shader->pixelShader, nullptr, 0);
 
-		context->IASetVertexBuffers(0, 1, &debugBox.boxMesh->pso->vertexBuffer->data, &stride, &offset);
+		context->IASetVertexBuffers(0, 1, &debugBox.boxMesh->pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
 
 		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
@@ -1060,7 +1189,7 @@ void Renderer::RenderBounds()
 	}
 }
 
-void Renderer::CreateLightProbeBuffers()
+void CreateLightProbeBuffers()
 {
 	//Texture
 	if (lightProbeTexture) lightProbeTexture->Release();
@@ -1102,7 +1231,7 @@ void Renderer::CreateLightProbeBuffers()
 	}
 }
 
-void Renderer::RenderCameraMeshes()
+void RenderCameraMeshes()
 {
 	if (Core::gameplayOn)
 	{
@@ -1119,7 +1248,7 @@ void Renderer::RenderCameraMeshes()
 	context->VSSetShader(shader->vertexShader, nullptr, 0);
 	context->PSSetShader(shader->pixelShader, nullptr, 0);
 
-	context->IASetVertexBuffers(0, 1, &debugCamera.mesh->pso->vertexBuffer->data, &stride, &offset);
+	context->IASetVertexBuffers(0, 1, &debugCamera.mesh->pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
 
 	context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
@@ -1140,7 +1269,7 @@ void Renderer::RenderCameraMeshes()
 	}
 }
 
-void Renderer::RenderLightMeshes()
+void RenderLightMeshes()
 {
 	static DebugSphere debugSphere;
 	static DebugIcoSphere debugIcoSphere;
@@ -1170,7 +1299,7 @@ void Renderer::RenderLightMeshes()
 
 
 	//DIRECTIONAL LIGHTS
-	context->IASetVertexBuffers(0, 1, &debugSphere.sphereMesh->pso->vertexBuffer->data, &stride, &offset);
+	context->IASetVertexBuffers(0, 1, &debugSphere.sphereMesh->pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
 
 	for (auto directionalLight : DirectionalLightComponent::system.components)
 	{
@@ -1183,7 +1312,7 @@ void Renderer::RenderLightMeshes()
 
 
 	//POINT LIGHTS
-	context->IASetVertexBuffers(0, 1, &debugIcoSphere.mesh->pso->vertexBuffer->data, &stride, &offset);
+	context->IASetVertexBuffers(0, 1, &debugIcoSphere.mesh->pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
 
 	for (auto pointLight : PointLightComponent::system.components)
 	{
@@ -1196,7 +1325,7 @@ void Renderer::RenderLightMeshes()
 
 
 	//SPOT LIGHTS
-	context->IASetVertexBuffers(0, 1, &debugCone.mesh->pso->vertexBuffer->data, &stride, &offset);
+	context->IASetVertexBuffers(0, 1, &debugCone.mesh->pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
 
 	for (auto spotLight : SpotLightComponent::system.components)
 	{
@@ -1208,7 +1337,7 @@ void Renderer::RenderLightMeshes()
 	}
 }
 
-void Renderer::RenderSkeletonBones()
+void RenderSkeletonBones()
 {
 	std::vector<Line> lines;
 
@@ -1252,7 +1381,7 @@ void Renderer::RenderSkeletonBones()
 	memcpy(sub.pData, lines.data(), sizeof(Line) * lines.size());
 	context->Unmap(linesBuffer, 0);
 
-	context->IASetVertexBuffers(0, 1, &linesBuffer, &stride, &offset);
+	context->IASetVertexBuffers(0, 1, &linesBuffer, &Renderer::stride, &Renderer::offset);
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
 	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
@@ -1265,7 +1394,7 @@ void Renderer::RenderSkeletonBones()
 	context->Draw(lines.size() * 2, 0);
 }
 
-void Renderer::RenderPolyboards()
+void RenderPolyboards()
 {
 	PROFILE_START
 
@@ -1281,7 +1410,7 @@ void Renderer::RenderPolyboards()
 	const float blendFactor[4] = { 0.f, 0.f, 0.f, 0.f };
 	context->OMSetBlendState(blendStateMap[BlendStates::Default]->data, blendFactor, 0xFFFFFFFF);
 
-	if (drawAllAsWireframe)
+	if (Renderer::drawAllAsWireframe)
 	{
 		context->RSSetState(rastStateWireframe);
 	}
@@ -1329,13 +1458,13 @@ void Renderer::RenderPolyboards()
 	PROFILE_END
 }
 
-void Renderer::RenderSpriteSheets()
+void RenderSpriteSheets()
 {
 	PROFILE_START
 
 	for (auto spriteSheet : SpriteSheet::system.components)
 	{
-		if (drawAllAsWireframe)
+		if (Renderer::drawAllAsWireframe)
 		{
 			context->RSSetState(rastStateWireframe);
 		}
@@ -1370,7 +1499,7 @@ void Renderer::RenderSpriteSheets()
 	PROFILE_END
 }
 
-void Renderer::AnimateSkeletalMesh(MeshComponent* mesh)
+void AnimateSkeletalMesh(MeshComponent* mesh)
 {
 	PROFILE_START
 
@@ -1519,7 +1648,7 @@ void Renderer::RenderSpritesInScreenSpace()
 }
 
 //Loops over every light component and moves their data into the lights constant buffer
-void Renderer::UpdateLights()
+void UpdateLights()
 {
 	PROFILE_START
 
@@ -1574,7 +1703,7 @@ void Renderer::UpdateLights()
 
 //Not many good references on D3D11 Querying 
 //REF:https://www.reedbeta.com/blog/gpu-profiling-101/
-void Renderer::StartGPUQueries()
+void StartGPUQueries()
 {
 	if (debugMenu.fpsMenuOpen)
 	{
@@ -1585,7 +1714,7 @@ void Renderer::StartGPUQueries()
 	}
 }
 
-void Renderer::EndGPUQueries()
+void EndGPUQueries()
 {
 	static bool firstRun = true;
 
@@ -1605,7 +1734,7 @@ void Renderer::EndGPUQueries()
 }
 
 //Called after Present()
-void Renderer::GetGPUQueryData()
+void GetGPUQueryData()
 {
 	PROFILE_START
 
@@ -1645,7 +1774,7 @@ void Renderer::GetGPUQueryData()
 		{
 		}
 
-		frameTime = (float)(timeStampEndFrame - timeStampStartFrame) / (float)timeStampDisjoint.Frequency * 1000.f;
+		Renderer::frameTime = (float)(timeStampEndFrame - timeStampStartFrame) / (float)timeStampDisjoint.Frequency * 1000.f;
 	}
 
 	PROFILE_END
@@ -1658,7 +1787,7 @@ void Renderer::Present()
 	EndGPUQueries();
 }
 
-void Renderer::SetLightResources()
+void SetLightResources()
 {
 	//Set lights buffer
 	context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
@@ -1748,12 +1877,12 @@ void Renderer::ScreenshotCapture()
 	}
 }
 
-void Renderer::SetRenderPipelineStates(MeshComponent* mesh)
+void SetRenderPipelineStates(MeshComponent* mesh)
 {
 	Material* material = mesh->material;
 	PipelineStateObject* pso = mesh->pso;
 
-	if (drawAllAsWireframe)
+	if (Renderer::drawAllAsWireframe)
 	{
 		context->RSSetState(rastStateWireframe);
 	}
@@ -1771,7 +1900,7 @@ void Renderer::SetRenderPipelineStates(MeshComponent* mesh)
 	context->PSSetSamplers(0, 1, &material->sampler->data);
 	context->PSSetShaderResources(0, 1, &material->texture->srv);
 
-	context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &stride, &offset);
+	context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
 	context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
 
 	MapBuffer(cbMaterial, &material->materialShaderData, sizeof(MaterialShaderData));
@@ -1779,7 +1908,7 @@ void Renderer::SetRenderPipelineStates(MeshComponent* mesh)
 	context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 }
 
-void Renderer::SetRenderPipelineStatesForShadows(MeshComponent* mesh)
+void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 {
 	Material* material = mesh->material;
 	PipelineStateObject* pso = mesh->pso;
@@ -1791,11 +1920,11 @@ void Renderer::SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 	context->VSSetShader(shader->vertexShader, nullptr, 0);
 	context->PSSetShader(shader->pixelShader, nullptr, 0);
 
-	context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &stride, &offset);
+	context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
 	context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
 }
 
-XMFLOAT4 Renderer::CalcGlobalAmbientBasedOnGameTime()
+XMFLOAT4 CalcGlobalAmbientBasedOnGameTime()
 {
 	const int hour = GameInstance::currentHour;
 	const int hoursPerDay = 12; //This is relative to how many game hours there are from start to end.
@@ -1812,7 +1941,7 @@ XMFLOAT4 Renderer::CalcGlobalAmbientBasedOnGameTime()
 	return XMFLOAT4(0.5f, 0.5f, 0.5f, 1.f);
 }
 
-void Renderer::RenderPostProcess()
+void RenderPostProcess()
 {
 	uint32_t numPostProcessInstances = PostProcessInstance::system.GetNumActors();
 	if (numPostProcessInstances == 0) return;
@@ -1860,7 +1989,7 @@ void Renderer::RenderPostProcess()
 	context->PSSetShaderResources(0, 1, &nullSRV);
 }
 
-void Renderer::CreatePostProcessRenderTarget()
+void CreatePostProcessRenderTarget()
 {
 	if (postBuffer) postBuffer->Release();
 	if (postRTV) postRTV->Release();
@@ -1880,4 +2009,14 @@ void Renderer::CreatePostProcessRenderTarget()
 
 	HR(device->CreateRenderTargetView(postBuffer, nullptr, &postRTV));
 	HR(device->CreateShaderResourceView(postBuffer, nullptr, &postSRV));
+}
+
+RastState* Renderer::GetRastState(std::string rastStateName)
+{
+	return rastStateMap[rastStateName];
+}
+
+BlendState* Renderer::GetBlendState(std::string blendStateName)
+{
+	return blendStateMap[blendStateName];
 }

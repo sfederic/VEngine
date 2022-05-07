@@ -251,7 +251,7 @@ void Core::HandleWin32MessagePump(UINT message, WPARAM wparam, LPARAM lparam)
 		//setting that changes it to that jagged PS1 look.
 		UINT resizedWidth = LOWORD(lparam);
 		UINT resizedHeight = HIWORD(lparam);
-		renderer.ResizeSwapchain(resizedWidth, resizedHeight);
+		Renderer::ResizeSwapchain(resizedWidth, resizedHeight);
 
 		break;
 	}

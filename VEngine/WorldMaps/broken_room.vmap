@@ -1435,7 +1435,7 @@ MeshActor26
 Rast State
 solid
 Shader
-ReflectionEnvMap.hlsl
+DefaultShader.hlsl
 Smoothness
 0
 Specular
@@ -1464,7 +1464,24 @@ DirectionalLightActor
 SavePoint
 0
 PointLightActor
-0
+1
+ Position
+0 1 6
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
+Name
+PointLightActor0
+UID
+1218085174
+next
 SpotLightActor
 0
 FenceActor
@@ -1492,20 +1509,7 @@ GoddessStatue
 PhysicsActor
 0
 PostProcessInstance
-1
- Position
-0 2 -1
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Gamma
-2.2
-Name
-PostProcessInstance0
-UID
-687344732
-next
+0
 PolyboardActor
 0
 DebugNoteActor

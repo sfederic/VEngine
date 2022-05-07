@@ -4,6 +4,7 @@
 #include "Render/TextureSystem.h"
 #include "Debug.h"
 #include "Particle/SpriteSheet.h"
+#include "RenderTypes.h"
 
 SpriteSystem spriteSystem;
 
@@ -41,9 +42,9 @@ void SpriteSystem::CreateScreenSprite(Sprite sprite)
 
 XMFLOAT3 SpriteSystem::PointToNdc(int x, int y, float z)
 {
-	XMFLOAT3 p;
-	p.x = 2.0f * (float)x / renderer.GetViewportWidth() -1.0f;
-	p.y = 1.0f - 2.0f * (float)y / renderer.GetViewportHeight();
+	XMFLOAT3 p = {};
+	p.x = 2.0f * (float)x / Renderer::GetViewportWidth() -1.0f;
+	p.y = 1.0f - 2.0f * (float)y / Renderer::GetViewportHeight();
 	p.z = z;
 	return p;
 }

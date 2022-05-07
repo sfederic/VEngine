@@ -44,8 +44,8 @@ void Material::Create()
 	texture = textureSystem.FindTexture2D(textureData.filename);
 	sampler = RenderUtils::GetDefaultSampler();
 	shader = shaderSystem.FindShader(VString::stows(shaderData.filename));
-	rastState = renderer.rastStateMap[rastStateValue.GetValue()];
-	blendState = renderer.blendStateMap[blendStateValue.GetValue()];
+	rastState = Renderer::GetRastState(rastStateValue.GetValue());
+	blendState = Renderer::GetBlendState(blendStateValue.GetValue());
 }
 
 void Material::Destroy()
@@ -77,7 +77,7 @@ static void ReassignRastState(void* data)
 {
 	auto rastState = (VEnum*)data;
 	auto rastName = rastState->GetValue();
-	RastState* foundRastState = renderer.rastStateMap[rastName];
+	RastState* foundRastState = Renderer::GetRastState(rastName);
 	if (foundRastState == nullptr)
 	{
 		Log("[%s] not found on rast state change.", rastName.c_str());
@@ -98,7 +98,7 @@ static void ReassignBlendState(void* data)
 {
 	auto blendState = (VEnum*)data;
 	auto blendName = blendState->GetValue();
-	BlendState* foundBlendState = renderer.blendStateMap[blendName];
+	BlendState* foundBlendState = Renderer::GetBlendState(blendName);
 	if (foundBlendState == nullptr)
 	{
 		Log("[%s] not found on blend state change.", blendName.c_str());

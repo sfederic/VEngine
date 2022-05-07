@@ -10,6 +10,7 @@
 namespace RenderUtils
 {
 	ID3D11Device* device;
+	ID3D11DeviceContext* context;
 	Sampler* defaultSampler;
 
 	ID3D11Buffer* CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, const void* initData)

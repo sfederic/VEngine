@@ -142,7 +142,7 @@ void MeshComponent::SetRastState(const std::string newRastStateName)
 	//If calling before Material::Create() is called, rastStateName is the one.
 	material->rastStateValue.SetValue(newRastStateName);
 	//This set isn't necessary with the above, but fine for after Material::Create() called.
-	material->rastState = renderer.rastStateMap[newRastStateName];
+	material->rastState = Renderer::GetRastState(newRastStateName);
 }
 
 void MeshComponent::SetShaderName(const std::string newShaderName)
@@ -152,7 +152,7 @@ void MeshComponent::SetShaderName(const std::string newShaderName)
 
 void MeshComponent::SetBlendState(const std::string newBlendState)
 {
-	material->blendState = renderer.blendStateMap[newBlendState];
+	material->blendState = Renderer::GetBlendState(newBlendState);
 }
 
 void MeshComponent::SetTexture(const std::string newTextureName)

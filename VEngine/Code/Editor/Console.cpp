@@ -75,7 +75,7 @@ Console::Console()
 	executeMap.emplace(L"CORE", []() { debugMenu.coreMenuOpen = !debugMenu.coreMenuOpen; });
 
 	//Work through light probes in map and get their RBG values from a cubemap rendering
-	executeMap.emplace(L"BAKE", []() { renderer.RenderLightProbeViews(); });
+	executeMap.emplace(L"BAKE", []() { Renderer::RenderLightProbeViews(); });
 
 	//Save/Load current world to/From binary format
 	executeMap.emplace(L"BIN", []() { fileSystem.WriteAllActorSystemsToBinary(); });
@@ -116,8 +116,8 @@ void Console::Tick()
 {
 	if (bConsoleActive)
 	{
-		float width = (float)renderer.GetViewportWidth();
-		float height = (float)renderer.GetViewportHeight();
+		float width = (float)Renderer::GetViewportWidth();
+		float height = (float)Renderer::GetViewportHeight();
 
 		uiSystem.d2dRenderTarget->DrawRectangle({ 0, height - 50.f, width, height }, uiSystem.debugBrushText);
 
