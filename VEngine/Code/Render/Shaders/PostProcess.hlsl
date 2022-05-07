@@ -1,8 +1,13 @@
 cbuffer ShaderPostProcessData : register(b0)
 {
-    float gamma;
     float exposure;
-    float2 shaderPostProcessDataPadding;
+    float shoulderStrength;
+    float linearStrength;
+    float linearAngle;
+    float toeStrenth;
+    float toeNumerator;
+    float toeDenominator;
+    float linearWhitePointValue;
 };
 
 Texture2D<float4> HDRTexture : register(t0);
@@ -75,14 +80,7 @@ float3 FilmicToneMap()
 //https://www.gdcvault.com/play/1012351/Uncharted-2-HDR
 //http://filmicworlds.com/blog/filmic-tonemapping-operators/
 float3 NaughtDogFilmicToneMap(float3 outColour)
-{
-    const float shoulderStrength = 0.22;
-    const float linearStrength = 0.3;
-    const float linearAngle = 0.1;
-    const float toeStrenth = 0.2;
-    const float toeNumerator = 0.01;
-    const float toeDenominator = 0.3;
-    
+{    
     outColour = ((outColour * (shoulderStrength * outColour + linearAngle * linearStrength)
         + toeStrenth * toeNumerator) / (outColour * (shoulderStrength * outColour + linearStrength)
         + toeStrenth * toeDenominator)) - toeNumerator / toeDenominator;
@@ -98,7 +96,6 @@ float4 PSMain(VS_OUTPUT i) : SV_Target
     float exposureBias = 2.0f;
     float3 curr = NaughtDogFilmicToneMap(exposureBias * texColour);
     
-    const float linearWhitePointValue = 11.2;
     float3 whiteScale = 1.0f / NaughtDogFilmicToneMap(linearWhitePointValue);
     
     float3 colour = curr * whiteScale;

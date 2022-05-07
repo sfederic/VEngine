@@ -182,9 +182,14 @@ struct ShaderMeshData
 
 struct ShaderPostProcessData
 {
-	float gamma = 0.f;
-	float exposure = 0.f;
-	float pad[2];
+	float exposure = 1.1f;
+	float shoulderStrength = 0.22f;
+	float linearStrength = 2.0f;
+	float linearAngle = 0.01f;
+	float toeStrenth = 0.2f;
+	float toeNumerator = 0.011f;
+	float toeDenominator = 0.33f;
+	float linearWhitePointValue = 3.3f;
 };
 
 struct InstanceData
