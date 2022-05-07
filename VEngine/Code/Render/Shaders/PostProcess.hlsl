@@ -48,38 +48,9 @@ VS_OUTPUT VSMain(uint vertexID : SV_VertexID)
     return o;
 }
 
-float3 Rec709ToRec2020(float3 color)
-{
-    static const float3x3 conversion =
-    {
-        0.627402, 0.329292, 0.043306,
-		0.069095, 0.919544, 0.011360,
-		0.016394, 0.088028, 0.895578
-    };
-    return mul(conversion, color);
-}
-
-static const float4 LUM_FACTOR = float4(0.299, 0.587, 0.114, 0);
-
-float3 FilmicToneMap()
-{
-    float3 outColour = 0.0;
-    
-    float3 ld = 0.002;
-    float linReference = 0.18;
-    float logReference = 444;
-    float logGamma = 0.45;
-    
-    outColour = (log10(0.4 * outColour / linReference) / ld * logGamma + logReference) / 1023.f;
-    outColour = clamp(outColour, 0, 1);
-    
-    return outColour;
-}
-
-//Same reference, GDC and blog pair
-//https://www.gdcvault.com/play/1012351/Uncharted-2-HDR
-//http://filmicworlds.com/blog/filmic-tonemapping-operators/
-float3 NaughtDogFilmicToneMap(float3 outColour)
+//Ref:https://www.gdcvault.com/play/1012351/Uncharted-2-HDR
+//Ref:http://filmicworlds.com/blog/filmic-tonemapping-operators/
+float3 Uncharted2ToneMap(float3 outColour)
 {    
     outColour = ((outColour * (shoulderStrength * outColour + linearAngle * linearStrength)
         + toeStrenth * toeNumerator) / (outColour * (shoulderStrength * outColour + linearStrength)
@@ -94,9 +65,9 @@ float4 PSMain(VS_OUTPUT i) : SV_Target
     texColour *= exposure;
     
     float exposureBias = 2.0f;
-    float3 curr = NaughtDogFilmicToneMap(exposureBias * texColour);
+    float3 curr = Uncharted2ToneMap(exposureBias * texColour);
     
-    float3 whiteScale = 1.0f / NaughtDogFilmicToneMap(linearWhitePointValue);
+    float3 whiteScale = 1.0f / Uncharted2ToneMap(linearWhitePointValue);
     
     float3 colour = curr * whiteScale;
     
