@@ -104,9 +104,9 @@ void Console::ConsoleInput()
 		{
 			consoleString.pop_back();
 		}
-		else if (Input::currentDownKeys.size() > 0)
+		else if (Input::GetNumCurrentKeysDown() > 0)
 		{
-			consoleString.push_back((int)Input::currentDownKeys.back());
+			consoleString.push_back((int)Input::GetLastPressedKeyDown());
 		}
 	}
 }

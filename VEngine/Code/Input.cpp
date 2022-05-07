@@ -1,11 +1,12 @@
 #include "Input.h"
-#include <Windows.h>
+#include <vector>
+#include <Windows.h> //@Todo: can probably get rid of this, only needed for GetAsyncKey()
+
+std::vector<Keys> currentDownKeys;
+std::vector<Keys> currentUpKeys;
 
 namespace Input
 {
-	std::vector<Keys> currentDownKeys;
-	std::vector<Keys> currentUpKeys;
-
 	bool mouseWheelUp;
 	bool mouseWheelDown;
 
@@ -157,5 +158,15 @@ namespace Input
 	{
 		if (blockInput) return false;
 		return mouseMiddleDown;
+	}
+
+	unsigned int GetNumCurrentKeysDown()
+	{
+		return currentDownKeys.size();
+	}
+
+	Keys GetLastPressedKeyDown()
+	{
+		return currentDownKeys.back();
 	}
 }
