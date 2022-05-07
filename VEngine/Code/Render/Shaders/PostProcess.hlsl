@@ -56,6 +56,39 @@ float3 Rec709ToRec2020(float3 color)
 
 static const float4 LUM_FACTOR = float4(0.299, 0.587, 0.114, 0);
 
+float3 FilmicToneMap()
+{
+    float3 outColour = 0.0;
+    
+    float3 ld = 0.002;
+    float linReference = 0.18;
+    float logReference = 444;
+    float logGamma = 0.45;
+    
+    outColour = (log10(0.4 * outColour / linReference) / ld * logGamma + logReference) / 1023.f;
+    outColour = clamp(outColour, 0, 1);
+    
+    return outColour;
+}
+
+//Ref:https://www.gdcvault.com/play/1012351/Uncharted-2-HDR
+float3 NaughtDogFilmicToneMap(float3 outColour)
+{
+    const float shoulderStrength = 0.22;
+    const float linearStrength = 0.3;
+    const float linearAngle = 0.1;
+    const float toeStrenth = 0.2;
+    const float toeNumerator = 0.01;
+    const float toeDenominator = 0.3;
+    const float linearWhitePointValue = 11.2;
+    
+    outColour = ((outColour * (shoulderStrength * outColour + linearAngle * linearStrength)
+        + toeStrenth * toeNumerator) / (outColour * (shoulderStrength * outColour + linearStrength)
+        + toeStrenth * toeDenominator)) - toeNumerator / toeDenominator;
+
+    return outColour / linearWhitePointValue;
+}
+
 float3 ToneMapping(float3 HDRColor)
 {
     // reinhard tone mapping
@@ -72,7 +105,7 @@ float3 ToneMapping(float3 HDRColor)
 
 float4 PSMain(VS_OUTPUT i) : SV_Target
 {
-    float3 color = HDRTexture.Sample(s, i.uv).xyz;
-    color = ToneMapping(color);
-    return float4(color, 1.0);
+    float3 colour = HDRTexture.Sample(s, i.uv).xyz;
+    colour = NaughtDogFilmicToneMap(colour);
+    return float4(colour, 1.0);
 }
