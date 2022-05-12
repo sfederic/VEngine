@@ -42,5 +42,6 @@ float4 PSMain(VS_OUT i) : SV_Target
     //float4 shIrradiance = float4(GetSHIrradiance(i.normal, SH), 1.0f);
     
     float4 finalColour = (globalAmbient + endResult.diffuse + endResult.specular) * texColour;
+    finalColour.a = material.ambient.a;
 	return finalColour;
 }
