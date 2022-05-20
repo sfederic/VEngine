@@ -1,4 +1,5 @@
 #pragma once
+#include "imgui/imgui.h"
 #include "ImGuizmo.h"
 
 //REF: Blog about building custom imgui gizmos.
