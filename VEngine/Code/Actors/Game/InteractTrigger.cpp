@@ -5,7 +5,6 @@
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/BattleSystem.h"
 #include "UI/InteractWidget.h"
-#include "VString.h"
 #include "Input.h"
 #include "Actors/Game/Player.h"
 

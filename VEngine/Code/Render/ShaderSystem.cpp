@@ -3,7 +3,6 @@
 #include <set>
 #include "Debug.h"
 #include "RenderUtils.h"
-#include "VString.h"
 #include "Input.h"
 #include "Log.h"
 #include "Profile.h"

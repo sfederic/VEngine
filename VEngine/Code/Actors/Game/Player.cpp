@@ -6,7 +6,6 @@
 #include "Camera.h"
 #include "Input.h"
 #include "VMath.h"
-#include "VString.h"
 #include "Physics/Raycast.h"
 #include "Gameplay/GameUtils.h"
 #include "Actors/Game/NPC.h"
@@ -29,7 +28,6 @@
 #include "Log.h"
 #include "Timer.h"
 #include "Gameplay/BattleSystem.h"
-#include "Gameplay/Memory.h"
 
 Player::Player()
 {

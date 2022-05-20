@@ -2,7 +2,6 @@
 #include "Components/MeshComponent.h"
 #include "Physics/PhysicsSystem.h"
 #include "Physics/Raycast.h"
-#include "VMath.h"
 
 PhysicsActor::PhysicsActor()
 {

@@ -2,7 +2,6 @@
 #include <vector>
 #include <string>
 #include <set>
-#include <DirectXCollision.h>
 #include "Transform.h"
 #include "Properties.h"
 #include "UID.h"

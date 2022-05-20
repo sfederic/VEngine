@@ -12,7 +12,6 @@
 #include <QUrl>
 #include "FileSystem.h"
 #include "Actors/MeshActor.h"
-#include "Editor.h"
 #include "WorldEditor.h"
 #include "PropertiesDock.h"
 #include "Render/TextureSystem.h"

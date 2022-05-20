@@ -5,10 +5,8 @@
 #include "Actors/IActorSystem.h"
 #include "Actors/Actor.h"
 #include "Actors/ActorSystemCache.h"
-#include "Components/IComponentSystem.h"
 #include "Components/Component.h"
 #include "WorldEditor.h"
-#include "Editor.h"
 #include <qlabel.h>
 #include <qlineedit.h>
 

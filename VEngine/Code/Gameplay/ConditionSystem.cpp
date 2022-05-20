@@ -8,7 +8,6 @@
 #include "Gameplay/BattleSystem.h"
 #include "World.h"
 #include "Log.h"
-#include "UI/UISystem.h"
 #include "UI/MemoryGainedWidget.h"
 #include "Audio/AudioSystem.h"
 #include "Quests/QuestSystem.h"

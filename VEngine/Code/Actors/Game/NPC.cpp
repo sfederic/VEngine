@@ -1,5 +1,4 @@
 #include "NPC.h"
-#include "VString.h"
 #include "Timer.h"
 #include "UI/DialogueWidget.h"
 #include "Components/DialogueComponent.h"

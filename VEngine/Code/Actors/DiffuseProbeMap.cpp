@@ -1,6 +1,5 @@
 #include "DiffuseProbeMap.h"
 #include "Components/InstanceMeshComponent.h"
-#include "Render/RenderUtils.h"
 #include "Debug.h"
 
 DiffuseProbeMap::DiffuseProbeMap()
@@ -85,9 +84,7 @@ ProbeData DiffuseProbeMap::FindClosestProbe(XMVECTOR pos)
 	{
 		return distanceMap.begin()->second;
 	}
-	else
-	{
-		//return an empty Probe if none are found.
-		return ProbeData();
-	}
+	
+	//return an empty Probe if none are found.
+	return ProbeData();
 }

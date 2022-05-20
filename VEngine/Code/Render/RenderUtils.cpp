@@ -5,7 +5,6 @@
 #include "TextureSystem.h"
 #include <filesystem>
 #include "VString.h"
-#include "Debug.h"
 
 namespace RenderUtils
 {

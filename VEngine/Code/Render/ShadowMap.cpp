@@ -1,7 +1,6 @@
 #include "ShadowMap.h"
 #include "Debug.h"
 #include <cassert>
-#include "Core.h"
 #include "VMath.h"
 #include "Components/Lights/DirectionalLightComponent.h"
 

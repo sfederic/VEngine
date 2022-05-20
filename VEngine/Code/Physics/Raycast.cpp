@@ -1,16 +1,13 @@
 #define NOMINMAX
 
 #include "Raycast.h"
-#include <math.h>
 #include <limits>
 #include "Camera.h"
 #include "Render/Renderer.h"
 #include "Editor/Editor.h"
 #include "VMath.h"
-#include "Actors/IActorSystem.h"
 #include "Actors/Actor.h"
 #include "Components/MeshComponent.h"
-#include "Components/BoxTriggerComponent.h"
 #include "World.h"
 
 //void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance)

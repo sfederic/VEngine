@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
 #include <DirectXMath.h>
-#include <DirectXCollision.h>
 #include "Physics/CollisionLayers.h"
 
 struct IActorSystem;

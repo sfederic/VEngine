@@ -19,24 +19,24 @@ struct Layout
 	Layout() {}
 	Layout(D2D1_RECT_F rect_) : rect(rect_) {}
 
-	inline void AddVerticalSpace(float spacing)
+	void AddVerticalSpace(float spacing)
 	{
 		rect.top += spacing;
 		rect.bottom += spacing;
 	}
 
-	inline void AddHorizontalSpace(float spacing)
+	void AddHorizontalSpace(float spacing)
 	{
 		rect.left += spacing;
 		rect.right += spacing;
 	}
 
-	inline void PushToLeft(float spacing = 0.f)
+	void PushToLeft(float spacing = 0.f)
 	{
 		rect.right = rect.left + spacing;
 	}
 
-	inline void PushToTop(float spacing = 0.f)
+	void PushToTop(float spacing = 0.f)
 	{
 		rect.bottom = rect.top + spacing;
 	}

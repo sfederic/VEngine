@@ -14,7 +14,7 @@ private:
 	std::string value;
 
 public:
-	inline std::string GetValue() { return value; }
+	std::string GetValue() { return value; }
 
 	void SetValue(const std::string newValue);
 	void Add(const std::string& name);

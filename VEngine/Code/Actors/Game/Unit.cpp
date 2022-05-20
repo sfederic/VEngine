@@ -18,7 +18,6 @@
 #include "Gameplay/GameInstance.h"
 #include "Actors/Game/EntranceTrigger.h"
 #include "Physics/Raycast.h"
-#include "Particle/Polyboard.h"
 
 Unit::Unit()
 {

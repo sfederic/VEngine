@@ -8,7 +8,6 @@
 #include "UI/ScreenFadeWidget.h"
 #include "UI/GuiltWidget.h"
 #include "UI/UnitLineupWidget.h"
-#include "Editor/Editor.h"
 #include "Core.h"
 
 UISystem uiSystem;

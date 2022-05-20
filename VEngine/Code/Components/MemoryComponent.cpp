@@ -11,7 +11,6 @@
 #include "UI/UISystem.h"
 #include "Audio/AudioSystem.h"
 #include "Components/MeshComponent.h"
-#include "Actors/IActorSystem.h"
 
 MemoryComponent::MemoryComponent()
 {

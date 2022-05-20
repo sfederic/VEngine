@@ -2,7 +2,6 @@
 #include <xaudio2.h>
 #include <string>
 #include <map>
-#include <vector>
 #include "System.h"
 
 struct AudioChannel;

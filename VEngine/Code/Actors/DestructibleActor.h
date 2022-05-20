@@ -14,7 +14,7 @@ struct DestructibleActor : Actor
 	DestructibleMeshComponent* destructibleMesh = nullptr;
 
 	DestructibleActor();
-	virtual void Start() override;
-	virtual void Tick(float deltaTime) override;
-	virtual Properties GetProps() override;
+	void Start() override;
+	void Tick(float deltaTime) override;
+	Properties GetProps() override;
 };

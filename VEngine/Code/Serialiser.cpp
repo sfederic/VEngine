@@ -2,7 +2,6 @@
 #include <DirectXMath.h>
 #include <typeindex>
 #include "Properties.h"
-#include "Render/PipelineObjects.h"
 #include "Actors/Actor.h"
 #include "World.h"
 #include "Render/RenderTypes.h"

@@ -4,7 +4,6 @@
 #include "ComponentSystem.h"
 #include "Render/RenderTypes.h"
 #include "Render/PipelineObjects.h"
-#include "Transform.h"
 
 struct ShaderItem;
 struct Material;

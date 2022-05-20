@@ -1,5 +1,5 @@
 #include "Log.h"
-#include <stdarg.h>
+#include <cstdarg>
 #include <vadefs.h>
 #include "Editor/Editor.h"
 #include "VString.h"
