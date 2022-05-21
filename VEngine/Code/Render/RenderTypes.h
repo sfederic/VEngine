@@ -24,6 +24,14 @@ struct Vertex
 	uint32_t boneIndices[4];
 };
 
+struct VRect
+{
+	int left;
+	int top;
+	int right;
+	int bottom;
+};
+
 struct RastStates
 {
 	inline static const std::string solid = "solid";
