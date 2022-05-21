@@ -15,6 +15,11 @@
 
 void MeshComponent::ResetMeshBuffers()
 {
+	for (auto& meshBuffer : existingMeshBuffers)
+	{
+		meshBuffer.second.Destroy();
+	}
+
 	existingMeshBuffers.clear();
 }
 
