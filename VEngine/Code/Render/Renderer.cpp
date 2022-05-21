@@ -99,10 +99,10 @@ bool Renderer::drawAllAsWireframe = false;
 unsigned int Renderer::stride = sizeof(Vertex);
 unsigned int Renderer::offset = 0;
 
-ID3D11Texture2D* backBuffer = nullptr;
+ID3D11Texture2D* backBuffer;
+ID3D11Texture2D* depthStencilBuffer;
 
 static const int swapchainCount = 2;
-
 
 ID3D11Device* device;
 ID3D11DeviceContext* context;
@@ -258,9 +258,10 @@ void Renderer::Tick()
 
 void CreateFactory()
 {
-	ComPtr<IDXGIFactory> tempDxgiFactory;
-	HR(CreateDXGIFactory(IID_PPV_ARGS(tempDxgiFactory.GetAddressOf())));
+	IDXGIFactory* tempDxgiFactory = nullptr;
+	HR(CreateDXGIFactory(IID_PPV_ARGS(&tempDxgiFactory)));
 	HR(tempDxgiFactory->QueryInterface(&dxgiFactory));
+	tempDxgiFactory->Release();
 }
 
 void CreateDevice()
@@ -306,9 +307,10 @@ void CreateSwapchain(HWND window)
 	sd.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
 	sd.BufferCount = swapchainCount;
 
-	ComPtr<IDXGISwapChain> tempSwapchain;
-	HR(dxgiFactory->CreateSwapChain(device, &sd, tempSwapchain.GetAddressOf()));
+	IDXGISwapChain* tempSwapchain = nullptr;
+	HR(dxgiFactory->CreateSwapChain(device, &sd, &tempSwapchain));
 	HR(tempSwapchain->QueryInterface(&swapchain));
+	tempSwapchain->Release();
 
 	HR(swapchain->SetColorSpace1(DXGI_COLOR_SPACE_RGB_FULL_G10_NONE_P709));
 
@@ -343,10 +345,8 @@ void CreateRTVAndDSV()
 	dsDesc.Width = viewport.Width;
 	dsDesc.Height = viewport.Height;
 
-	ComPtr<ID3D11Texture2D> depthStencilBuffer;
-	HR(device->CreateTexture2D(&dsDesc, nullptr, depthStencilBuffer.GetAddressOf()));
-	HR(device->CreateDepthStencilView(depthStencilBuffer.Get(), nullptr, &dsv));
-	depthStencilBuffer.Reset();
+	HR(device->CreateTexture2D(&dsDesc, nullptr, &depthStencilBuffer));
+	HR(device->CreateDepthStencilView(depthStencilBuffer, nullptr, &dsv));
 }
 
 void CreateInputLayout()

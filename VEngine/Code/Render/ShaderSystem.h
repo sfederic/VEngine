@@ -3,14 +3,11 @@
 #include <vector>
 #include <unordered_map>
 #include <d3dcompiler.h>
-#include <wrl.h>
 #include "System.h"
 
 struct ID3D11VertexShader;
 struct ID3D11PixelShader;
 struct ID3D11ComputeShader;
-
-using namespace Microsoft::WRL;
 
 struct ShaderItem
 {
