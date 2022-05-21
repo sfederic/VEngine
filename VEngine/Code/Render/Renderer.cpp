@@ -88,6 +88,8 @@ void SetRenderPipelineStatesForShadows(MeshComponent* mesh);
 void SetShader(std::wstring shaderName);
 void SetRastState(std::string rastStateName);
 void SetConstantBufferVertexPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer);
+void SetVertexBuffer(Buffer* vertexBuffer);
+void SetIndexBuffer(Buffer* indexBuffer);
 
 //Changes the global ambient param passed into shaders to change based on the day-night cycle in-game.
 XMFLOAT4 CalcGlobalAmbientBasedOnGameTime();
@@ -101,6 +103,8 @@ bool Renderer::drawAllAsWireframe = false;
 
 unsigned int Renderer::stride = sizeof(Vertex);
 unsigned int Renderer::offset = 0;
+
+DXGI_FORMAT indexBufferFormat = DXGI_FORMAT_R32_UINT;
 
 ID3D11Texture2D* backBuffer;
 ID3D11Texture2D* depthStencilBuffer;
@@ -1233,37 +1237,28 @@ void CreateLightProbeBuffers()
 
 void RenderCameraMeshes()
 {
-	if (Core::gameplayOn)
-	{
-		return;
-	}
+	if (Core::gameplayOn) return;
 
-	static DebugCamera debugCamera;;
+	static DebugCamera debugCamera;
 
-	MaterialShaderData materialShaderData;
+	MaterialShaderData materialShaderData = {};
 
-	context->RSSetState(rastStateWireframe);
-
+	SetRastState(RastStates::wireframe);
 	SetShader(L"SolidColour.hlsl");
-
-	context->IASetVertexBuffers(0, 1, &debugCamera.mesh->pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
-
+	SetVertexBuffer(debugCamera.mesh->GetVertexBuffer());
 	SetConstantBufferVertexPixel(cbMatrixRegister, cbMatrices);
 
-	//Make cameras red
-	materialShaderData.ambient = XMFLOAT4(1.0f, 0.0f, 0.f, 1.0f);
+	materialShaderData.ambient = XMFLOAT4(1.0f, 0.0f, 0.f, 1.0f); //Make cameras red
 	MapBuffer(cbMaterial, &materialShaderData, sizeof(MaterialShaderData));
 	SetConstantBufferVertexPixel(cbMaterialRegister, cbMaterial);
 
-	//DRAW CAMERAS
 	for (auto camera : CameraComponent::system.components)
 	{
 		shaderMatrices.model = camera->GetWorldMatrix();
-
-		shaderMatrices.mvp = shaderMatrices.model * shaderMatrices.view * shaderMatrices.proj;
+		shaderMatrices.MakeModelViewProjectionMatrix();
 		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
 
-		context->Draw(debugCamera.mesh->meshDataProxy->vertices->size(), 0);
+		DrawMesh(debugCamera.mesh);
 	}
 }
 
@@ -1936,6 +1931,16 @@ void SetConstantBufferVertexPixel(uint32_t shaderRegister, ID3D11Buffer* constan
 {
 	context->VSSetConstantBuffers(shaderRegister, 1, &constantBuffer);
 	context->PSSetConstantBuffers(shaderRegister, 1, &constantBuffer);
+}
+
+void SetVertexBuffer(Buffer* vertexBuffer)
+{
+	context->IASetVertexBuffers(0, 1, &vertexBuffer->data, &Renderer::stride, &Renderer::offset);
+}
+
+void SetIndexBuffer(Buffer* indexBuffer)
+{
+	context->IASetIndexBuffer(indexBuffer->data, indexBufferFormat, 0);
 }
 
 XMFLOAT4 CalcGlobalAmbientBasedOnGameTime()
