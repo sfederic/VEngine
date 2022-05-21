@@ -55,7 +55,7 @@ struct MeshBuffers
 	Buffer* vertexBuffer = nullptr;
 	Buffer* indexBuffer = nullptr;
 
-	~MeshBuffers();
+	void Destroy();
 };
 
 struct PipelineStateObject

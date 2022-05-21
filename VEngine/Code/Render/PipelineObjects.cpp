@@ -9,7 +9,10 @@ RastState::RastState(std::string name_, ID3D11RasterizerState* data_)
 
 RastState::~RastState()
 {
-	data->Release();
+	if (data)
+	{
+		data->Release();
+	}
 }
 
 Sampler::Sampler(ID3D11SamplerState* data_)
@@ -19,7 +22,10 @@ Sampler::Sampler(ID3D11SamplerState* data_)
 
 Sampler::~Sampler()
 {
-	data->Release();
+	if (data)
+	{
+		data->Release();
+	}
 }
 
 PipelineStateObject::PipelineStateObject()
@@ -48,20 +54,29 @@ BlendState::BlendState(std::string name_, ID3D11BlendState* data_)
 
 BlendState::~BlendState()
 {
-	data->Release();
+	if (data)
+	{
+		data->Release();
+	}
 }
 
 Buffer::~Buffer()
 {
-	data->Release();
+	if (data)
+	{
+		data->Release();
+	}
 }
 
 ShaderResourceView::~ShaderResourceView()
 {
-	data->Release();
+	if (data)
+	{
+		data->Release();
+	}
 }
 
-MeshBuffers::~MeshBuffers()
+void MeshBuffers::Destroy()
 {
 	delete vertexBuffer;
 	delete indexBuffer;

@@ -15,8 +15,8 @@ InstanceMeshComponent::InstanceMeshComponent(uint32_t meshInstanceRenderCount_,
 
 InstanceMeshComponent::~InstanceMeshComponent()
 {
-	structuredBuffer->Release();
-	srv->Release();
+	if (structuredBuffer) structuredBuffer->Release();
+	if (srv) srv->Release();
 }
 
 void InstanceMeshComponent::Create()
