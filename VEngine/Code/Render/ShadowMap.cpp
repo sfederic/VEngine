@@ -1,4 +1,5 @@
 #include "ShadowMap.h"
+#include <d3d11.h>
 #include "Debug.h"
 #include <cassert>
 #include "VMath.h"
@@ -8,13 +9,6 @@ ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
 {
 	width = width_;
 	height = height_;
-
-	viewport.TopLeftX = 0.0f;
-	viewport.TopLeftY = 0.0f;
-	viewport.Width = static_cast<float>(width_);
-	viewport.Height = static_cast<float>(height_);
-	viewport.MinDepth = 0.0f;
-	viewport.MaxDepth = 1.0f;
 
 	//Be mindful of the formats here. The Comparison sampler at and the call to SampleCmp/SampleCmpLevelZero
 	//is very picky about the formats. 
@@ -77,6 +71,13 @@ ShadowMap::~ShadowMap()
 
 void ShadowMap::BindDsvAndSetNullRenderTarget(ID3D11DeviceContext* dc)
 {
+	D3D11_VIEWPORT viewport = {};
+	viewport.TopLeftX = 0.0f;
+	viewport.TopLeftY = 0.0f;
+	viewport.Width = static_cast<float>(width);
+	viewport.Height = static_cast<float>(height);
+	viewport.MinDepth = 0.0f;
+	viewport.MaxDepth = 1.0f;
 	dc->RSSetViewports(1, &viewport);
 
 	ID3D11RenderTargetView* nullRTV = nullptr;
