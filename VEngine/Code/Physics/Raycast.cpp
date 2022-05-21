@@ -196,7 +196,7 @@ bool RaycastTriangleIntersect(Ray& ray)
 		}
 	}
 
-	float lowestDistance = D3D11_FLOAT32_MAX;
+	float lowestDistance = std::numeric_limits<float>::max();
 	int rayIndex = -1;
 	for (int i = 0; i < rays.size(); i++)
 	{
