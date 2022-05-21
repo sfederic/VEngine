@@ -11,7 +11,9 @@ private:
 		None,
 		Success,
 		Fail
-	} guardState;
+	};
+
+	GuardState guardState = GuardState::None;
 
 public:
 

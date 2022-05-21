@@ -14,7 +14,8 @@ struct WorldDock : public QDockWidget
 	QLineEdit* actorSearchBar = nullptr;
 
 private:
-	QAbstractItemView::SelectionMode actorListSelectionMode;
+	QAbstractItemView::SelectionMode actorListSelectionMode =
+		QAbstractItemView::SelectionMode::SingleSelection;
 
 public:
 	WorldDock();

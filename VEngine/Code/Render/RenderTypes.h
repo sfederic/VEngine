@@ -166,7 +166,7 @@ struct ShaderLights
 	//shadow map from building from an identity matrix when no directional lights exist in level.
 	bool shadowsEnabled = false;
 
-	int pad[2];
+	int pad[2] = {};
 
 	Light lights[MAX_LIGHTS] = {};
 };

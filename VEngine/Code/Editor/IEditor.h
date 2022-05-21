@@ -7,13 +7,13 @@ struct IActorSystem;
 //Base class for Toolkit and Native editors
 struct IEditor
 {
-	void* windowHwnd;
+	void* windowHwnd = nullptr;
 
-	int viewportMouseX;
-	int viewportMouseY;
+	int viewportMouseX = 0;
+	int viewportMouseY = 0;
 
-	int viewportWidth;
-	int viewportHeight;
+	int viewportWidth = 0;
+	int viewportHeight = 0;
 
 	virtual void Init(int argc, char* argv[]) = 0;
 	virtual void Tick() = 0;

@@ -11,13 +11,13 @@ using namespace DirectX;
 
 struct Ray
 {
-	XMVECTOR origin;
-	XMVECTOR direction;
+	XMVECTOR origin = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	XMVECTOR direction = XMVectorSet(0.f, 0.f, 0.f, 0.f);
 	
 	//Position the ray has hit in world
-	XMFLOAT3 hitPos;
-	XMFLOAT3 normal;
-	XMFLOAT2 uv;
+	XMFLOAT3 hitPos = XMFLOAT3(0.f, 0.f, 0.f);
+	XMFLOAT3 normal = XMFLOAT3(0.f, 0.f, 0.f);
+	XMFLOAT2 uv = XMFLOAT2(0.f, 0.f);
 
 	//List of actors to ignore when cast
 	std::vector<Actor*> actorsToIgnore;

@@ -8,9 +8,10 @@ struct CutsceneSequenceItem
 	std::string condition;
 	std::string conditionArg;
 	std::string name;
-	int type;
-	int frameStart, frameEnd;
-	bool expanded;
+	int type = 0;
+	int frameStart = 0;
+	int frameEnd = 0;
+	bool expanded = false;
 	bool active = false;
 };
 

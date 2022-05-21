@@ -67,7 +67,7 @@ struct Widget
 	};
 
 	//pos is the widget's position in world space to be mapped to screen space.
-	XMVECTOR pos;
+	XMVECTOR pos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 
 	bool render = true;
 

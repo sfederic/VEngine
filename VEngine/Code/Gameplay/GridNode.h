@@ -61,7 +61,7 @@ struct GridNode
 	void SetColour(XMFLOAT4 newColour);
 
 	GridNode* parentNode = nullptr;
-	XMFLOAT3 worldPosition;
+	XMFLOAT3 worldPosition = XMFLOAT3(0.f, 0.f, 0.f);
 
 	//COLOURS
 	inline static XMFLOAT4 normalColour = XMFLOAT4(0.07f, 0.27f, 0.89f, 0.4f);
