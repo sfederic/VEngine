@@ -1275,7 +1275,7 @@ void RenderLightMeshes()
 	SetRastState(RastStates::wireframe);
 	SetShader(L"SolidColour.hlsl");
 
-	context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+	SetConstantBufferVertex(cbMatrixRegister, cbMatrices);
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
 	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
@@ -1284,11 +1284,10 @@ void RenderLightMeshes()
 	MaterialShaderData materialShaderData;
 	materialShaderData.ambient = XMFLOAT4(1.f, 1.f, 0.f, 1.0f);
 	MapBuffer(cbMaterial, &materialShaderData, sizeof(MaterialShaderData));
-	context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
-
+	SetConstantBufferPixel(cbMaterialRegister, cbMaterial);
 
 	//DIRECTIONAL LIGHTS
-	context->IASetVertexBuffers(0, 1, &debugSphere.sphereMesh->pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
+	SetVertexBuffer(debugSphere.sphereMesh->GetVertexBuffer());
 
 	for (auto directionalLight : DirectionalLightComponent::system.components)
 	{
@@ -1296,12 +1295,11 @@ void RenderLightMeshes()
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
 
-		context->Draw(debugSphere.sphereMesh->meshDataProxy->vertices->size(), 0);
+		DrawMesh(debugSphere.sphereMesh);
 	}
 
-
 	//POINT LIGHTS
-	context->IASetVertexBuffers(0, 1, &debugIcoSphere.mesh->pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
+	SetVertexBuffer(debugIcoSphere.mesh->GetVertexBuffer());
 
 	for (auto pointLight : PointLightComponent::system.components)
 	{
@@ -1309,12 +1307,11 @@ void RenderLightMeshes()
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
 
-		context->Draw(debugIcoSphere.mesh->meshDataProxy->vertices->size(), 0);
+		DrawMesh(debugIcoSphere.mesh);
 	}
 
-
 	//SPOT LIGHTS
-	context->IASetVertexBuffers(0, 1, &debugCone.mesh->pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
+	SetVertexBuffer(debugCone.mesh->GetVertexBuffer());
 
 	for (auto spotLight : SpotLightComponent::system.components)
 	{
@@ -1322,7 +1319,7 @@ void RenderLightMeshes()
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
 
-		context->Draw(debugCone.mesh->meshDataProxy->vertices->size(), 0);
+		DrawMesh(debugCone.mesh);
 	}
 }
 
