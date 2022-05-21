@@ -1,5 +1,7 @@
 #include "RenderUtils.h"
 #include "RenderTypes.h"
+#include "Texture2D.h"
+#include "PipelineObjects.h"
 #include "Debug.h"
 #include <WICTextureLoader.h>
 #include "TextureSystem.h"

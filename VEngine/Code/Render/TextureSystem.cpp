@@ -1,5 +1,5 @@
 #include "TextureSystem.h"
-#include "PipelineObjects.h"
+#include "Render/Texture2D.h"
 #include "Render/RenderUtils.h"
 #include <filesystem>
 #include "Log.h"

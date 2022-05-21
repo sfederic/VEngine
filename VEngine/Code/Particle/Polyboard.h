@@ -1,6 +1,7 @@
 #pragma once
 #include "Components/SpatialComponent.h"
 #include "Components/ComponentSystem.h"
+#include "Render/RenderTypes.h"
 
 struct Buffer;
 struct MeshDataProxy;

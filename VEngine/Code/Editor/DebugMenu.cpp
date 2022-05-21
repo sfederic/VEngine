@@ -32,6 +32,7 @@
 #include "Quests/QuestSystem.h"
 #include "Quests/Quest.h"
 #include "Render/RenderUtils.h"
+#include "Render/Texture2D.h"
 
 DebugMenu debugMenu;
 

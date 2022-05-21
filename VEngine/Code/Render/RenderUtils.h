@@ -1,8 +1,11 @@
 #pragma once
+#include <string>
 #include <d3d11.h>
-#include "PipelineObjects.h"
 
 struct MeshDataProxy;
+struct Texture2D;
+struct ID3D11ShaderResourceView;
+struct Sampler;
 
 namespace RenderUtils
 {

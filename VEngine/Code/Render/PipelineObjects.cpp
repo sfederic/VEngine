@@ -12,17 +12,6 @@ Sampler::Sampler(ID3D11SamplerState* data_)
 	data = data_;
 }
 
-Texture2D::Texture2D(std::string filename_)
-{
-	filename = filename_;
-}
-
-Texture2D::~Texture2D()
-{
-	data->Release();
-	srv->Release();
-}
-
 PipelineStateObject::PipelineStateObject()
 {
 }

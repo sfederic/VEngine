@@ -2,9 +2,10 @@
 #include "System.h"
 #include <DirectXMath.h>
 #include <d3d11.h>
+#include <vector>
 #include <string>
 #include "Transform.h"
-#include "Render/RenderTypes.h"
+#include "RenderTypes.h"
 
 using namespace DirectX;
 

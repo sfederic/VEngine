@@ -2,6 +2,7 @@
 #include "Camera.h"
 #include "Core.h"
 #include "Render/RenderUtils.h"
+#include "Render/PipelineObjects.h"
 
 Polyboard::Polyboard()
 {

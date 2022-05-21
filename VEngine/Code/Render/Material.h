@@ -2,7 +2,6 @@
 #include <DirectXMath.h>
 #include <string>
 #include "Properties.h"
-#include "RenderTypes.h"
 #include "UID.h"
 #include "VEnum.h"
 

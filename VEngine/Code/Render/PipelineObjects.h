@@ -3,7 +3,6 @@
 
 struct ShaderItem;
 struct ID3D11Buffer;
-struct ID3D11Resource;
 struct ID3D11ShaderResourceView;
 struct ID3D11SamplerState;
 struct ID3D11BlendState;
@@ -12,21 +11,6 @@ struct ID3D11RasterizerState;
 struct Buffer
 {
 	ID3D11Buffer* data = nullptr;
-};
-
-struct Texture2D
-{
-	std::string filename;
-
-	ID3D11Resource* data = nullptr;
-	ID3D11ShaderResourceView* srv = nullptr;
-
-	uint32_t width = 0;
-	uint32_t height = 0;
-
-	Texture2D() {}
-	Texture2D(std::string filename_);
-	~Texture2D();
 };
 
 struct ShaderResourceView

@@ -1,10 +1,10 @@
 #include "SpriteSystem.h"
-#include "Render/Renderer.h"
-#include "Render/RenderUtils.h"
-#include "Render/TextureSystem.h"
+#include "Renderer.h"
+#include "RenderUtils.h"
+#include "TextureSystem.h"
 #include "Debug.h"
 #include "Particle/SpriteSheet.h"
-#include "RenderTypes.h"
+#include "Texture2D.h"
 
 SpriteSystem spriteSystem;
 

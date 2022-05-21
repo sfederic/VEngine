@@ -44,6 +44,7 @@
 #include "Particle/SpriteSheet.h"
 #include "Particle/Polyboard.h"
 #include "Gameplay/GameInstance.h"
+#include "Texture2D.h"
 
 void CreateFactory();
 void CreateDevice();

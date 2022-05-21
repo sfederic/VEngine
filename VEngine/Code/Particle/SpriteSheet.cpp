@@ -1,7 +1,7 @@
 #include "SpriteSheet.h"
 #include "Render/SpriteSystem.h"
 #include "Render/TextureSystem.h"
-#include "Render/PipelineObjects.h"
+#include "Render/Texture2D.h"
 
 SpriteSheet::SpriteSheet()
 {
