@@ -1,4 +1,5 @@
 #include "InstanceMeshComponent.h"
+#include <d3d11.h> //@Todo: no good. put the Instancemesh srv and buffer into the engine structs
 #include "Render/RenderUtils.h"
 #include "Render/Material.h"
 
@@ -14,8 +15,8 @@ InstanceMeshComponent::InstanceMeshComponent(uint32_t meshInstanceRenderCount_,
 
 InstanceMeshComponent::~InstanceMeshComponent()
 {
-	if(structuredBuffer) structuredBuffer->Release();
-	if(srv) srv->Release();
+	structuredBuffer->Release();
+	srv->Release();
 }
 
 void InstanceMeshComponent::Create()

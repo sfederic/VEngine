@@ -1,4 +1,5 @@
 #include "RenderUtils.h"
+#include <d3d11.h>
 #include "RenderTypes.h"
 #include "Texture2D.h"
 #include "PipelineObjects.h"
@@ -14,7 +15,7 @@ namespace RenderUtils
 	ID3D11DeviceContext* context;
 	Sampler* defaultSampler;
 
-	ID3D11Buffer* CreateDefaultBuffer(UINT byteWidth, UINT bindFlags, const void* initData)
+	ID3D11Buffer* CreateDefaultBuffer(uint32_t byteWidth, uint32_t bindFlags, const void* initData)
 	{
 		ID3D11Buffer* buffer;
 
@@ -31,7 +32,7 @@ namespace RenderUtils
 		return buffer;
 	}
 
-	ID3D11Buffer* CreateDynamicBuffer(UINT byteWidth, UINT bindFlags, const void* initData)
+	ID3D11Buffer* CreateDynamicBuffer(uint32_t byteWidth, uint32_t bindFlags, const void* initData)
 	{
 		ID3D11Buffer* buffer;
 
@@ -61,7 +62,7 @@ namespace RenderUtils
 			D3D11_BIND_INDEX_BUFFER, meshData->indices->data());
 	}
 
-	ID3D11ShaderResourceView* CreateSRVForMeshInstance(ID3D11Buffer* structuredBuffer, UINT numBufferElements)
+	ID3D11ShaderResourceView* CreateSRVForMeshInstance(ID3D11Buffer* structuredBuffer, uint32_t numBufferElements)
 	{
 		D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 		srvDesc.Format = DXGI_FORMAT_UNKNOWN;
@@ -74,7 +75,7 @@ namespace RenderUtils
 		return srv;
 	}
 
-	ID3D11Buffer* CreateStructuredBuffer(UINT byteWidth, UINT byteStride, const void* initData)
+	ID3D11Buffer* CreateStructuredBuffer(uint32_t byteWidth, uint32_t byteStride, const void* initData)
 	{
 		ID3D11Buffer* buffer;
 
