@@ -14,17 +14,6 @@
 
 void MeshComponent::ResetMeshBuffers()
 {
-	for (auto& meshIt : existingMeshBuffers)
-	{
-		MeshBuffers& buffers = meshIt.second;
-
-		buffers.vertexBuffer->data->Release();
-		delete buffers.vertexBuffer;
-
-		buffers.indexBuffer->data->Release();
-		delete buffers.indexBuffer;
-	}
-
 	existingMeshBuffers.clear();
 }
 
