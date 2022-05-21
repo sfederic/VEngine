@@ -346,6 +346,7 @@ void CreateRTVAndDSV()
 	dsDesc.Height = viewport.Height;
 
 	HR(device->CreateTexture2D(&dsDesc, nullptr, &depthStencilBuffer));
+	assert(depthStencilBuffer);
 	HR(device->CreateDepthStencilView(depthStencilBuffer, nullptr, &dsv));
 }
 
