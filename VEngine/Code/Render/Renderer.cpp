@@ -74,6 +74,7 @@ void EndGPUQueries();
 void GetGPUQueryData();
 void MapBuffer(ID3D11Resource* resource, const void* src, size_t size);
 void DrawMesh(MeshComponent* mesh);
+
 //Inner render functions to set shader resources
 void SetNullRTV();
 void SetShadowData();
@@ -84,6 +85,7 @@ void SetMatricesFromMesh(MeshComponent* mesh);
 void SetShaderMeshData(MeshComponent* mesh);
 void SetRenderPipelineStates(MeshComponent* mesh);
 void SetRenderPipelineStatesForShadows(MeshComponent* mesh);
+
 //Changes the global ambient param passed into shaders to change based on the day-night cycle in-game.
 XMFLOAT4 CalcGlobalAmbientBasedOnGameTime();
 
@@ -140,7 +142,7 @@ ID3D11Buffer* linesBuffer;
 D3D11_VIEWPORT viewport;
 
 //Shadow maps
-struct ShadowMap* shadowMap;
+ShadowMap* shadowMap;
 
 //Reflection
 ID3D11RenderTargetView* reflectionRTV;
