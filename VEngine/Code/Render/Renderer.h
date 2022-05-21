@@ -19,7 +19,6 @@ namespace Renderer
 	void Tick();
 
 	void Present();
-	void RenderPostProcessSetup();
 	void Render();
 
 	//Renders sprites on the viewport as UI elements
