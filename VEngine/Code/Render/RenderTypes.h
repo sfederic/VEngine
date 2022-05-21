@@ -168,7 +168,7 @@ struct ShaderLights
 
 	int pad[2];
 
-	Light lights[MAX_LIGHTS];
+	Light lights[MAX_LIGHTS] = {};
 };
 
 struct ShaderTimeData
