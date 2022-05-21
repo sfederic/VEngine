@@ -1,7 +1,5 @@
 #include "vpch.h"
 #include "Renderer.h"
-#include <vector>
-#include <unordered_map>
 #include <dxgi1_6.h>
 #include "RenderTypes.h"
 #include "PipelineObjects.h"

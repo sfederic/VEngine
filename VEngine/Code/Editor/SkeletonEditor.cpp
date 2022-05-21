@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "SkeletonEditor.h"
-#include <map>
 #include <cassert>
 #include <qtreewidget.h>
 #include "WorldEditor.h"
