@@ -1,16 +1,16 @@
 #pragma once
 
+//This is for std::numeric_limits clashes with Windows.h
 #define NOMINMAX
 
-#include "Properties.h"
+//Lot of the includes here are for Properties.h
+#include <vector>
 #include <map>
 #include <unordered_map>
 #include <string>
-#include <vector>
+#include <optional>
+#include <typeindex>
+#include <functional>
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
 #include <d3d11.h>
-#include "Actors/Actor.h"
-#include "Actors/ActorSystem.h"
-#include "Components/Component.h"
-#include "Components/ComponentSystem.h"
