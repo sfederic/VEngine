@@ -115,12 +115,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Code\Editor\ImGuizmo\ImSequencer.cpp" />
+    <ClCompile Include="Code\Editor\ImGuizmo\ImSequencer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Code\Quests\BlacksmithQuest.cpp" />
     <ClCompile Include="Code\Quests\Quest.cpp" />
-    <ClCompile Include="Code\SHMath\DirectXSH.cpp" />
-    <ClCompile Include="Code\SHMath\DirectXSHD3D11.cpp" />
-    <ClCompile Include="Code\SHMath\DirectXSHD3D12.cpp" />
+    <ClCompile Include="Code\SHMath\DirectXSH.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Code\SHMath\DirectXSHD3D11.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Code\SHMath\DirectXSHD3D12.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Code\UI\BulletWidget.cpp" />
     <ClCompile Include="Code\Components\CharacterControllerComponent.cpp" />
     <ClCompile Include="Code\Gameplay\BattleSystem.cpp" />
@@ -295,11 +303,21 @@
     <ClCompile Include="Code\Editor\AssetDock.cpp" />
     <ClInclude Include="Code\Editor\AssetDock.h" />
     <ClCompile Include="Code\Editor\Editor.cpp" />
-    <ClCompile Include="Code\Editor\ImGuizmo\ImGuizmo.cpp" />
-    <ClCompile Include="Code\Editor\imgui\imgui.cpp" />
-    <ClCompile Include="Code\Editor\imgui\imgui_draw.cpp" />
-    <ClCompile Include="Code\Editor\imgui\imgui_tables.cpp" />
-    <ClCompile Include="Code\Editor\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Code\Editor\ImGuizmo\ImGuizmo.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Code\Editor\imgui\imgui.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Code\Editor\imgui\imgui_draw.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Code\Editor\imgui\imgui_tables.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Code\Editor\imgui\imgui_widgets.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Code\Editor\LogDock.cpp" />
     <ClInclude Include="Code\Editor\ImGuizmo\ImGuizmo.h" />
     <ClInclude Include="Code\Editor\imgui\imconfig.h" />
@@ -311,8 +329,12 @@
     <ClInclude Include="Code\Editor\LogDock.h" />
     <ClInclude Include="Code\Editor\Editor.h" />
     <ClCompile Include="Code\Editor\EditorMainWindow.cpp" />
-    <ClCompile Include="Code\Editor\imgui\backends\imgui_impl_dx11.cpp" />
-    <ClCompile Include="Code\Editor\imgui\backends\imgui_impl_win32.cpp" />
+    <ClCompile Include="Code\Editor\imgui\backends\imgui_impl_dx11.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Code\Editor\imgui\backends\imgui_impl_win32.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Code\Editor\PropertiesDock.cpp" />
     <ClInclude Include="Code\Editor\PropertiesDock.h" />
     <ClCompile Include="Code\Editor\PropertyWidgets\BoolWidget.cpp" />
