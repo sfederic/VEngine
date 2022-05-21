@@ -62,6 +62,9 @@ public:
 	void SetBlendState(const std::string newBlendState);
 	void SetTexture(const std::string newTextureName);
 
+	Buffer* GetVertexBuffer() const;
+	Buffer* GetIndexBuffer() const;
+
 private:
 	void CullOnAngleBetweenCameraAndMesh();
 	void SetBlendWhenBetweenPlayerAndCamera();

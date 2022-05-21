@@ -152,6 +152,17 @@ void MeshComponent::SetTexture(const std::string newTextureName)
 	material->texture = textureSystem.FindTexture2D(newTextureName);
 }
 
+Buffer* MeshComponent::GetVertexBuffer() const 
+{
+	return pso->vertexBuffer;
+}
+
+Buffer* MeshComponent::GetIndexBuffer() const
+{
+	pso->indexBuffer = pso->indexBuffer;
+	return pso->indexBuffer;
+}
+
 void MeshComponent::CullOnAngleBetweenCameraAndMesh()
 {
 	if (cull)
