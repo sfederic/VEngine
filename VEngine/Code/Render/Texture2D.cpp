@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "Texture2D.h"
-#include <d3d11.h>
 
 Texture2D::Texture2D(std::string filename_)
 {

@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "SpriteSystem.h"
-#include <d3d11.h>
 #include "Renderer.h"
 #include "RenderUtils.h"
 #include "TextureSystem.h"

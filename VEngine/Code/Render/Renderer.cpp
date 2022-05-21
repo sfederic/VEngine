@@ -2,7 +2,6 @@
 #include "Renderer.h"
 #include <vector>
 #include <unordered_map>
-#include <d3d11.h>
 #include <dxgi1_6.h>
 #include "RenderTypes.h"
 #include "PipelineObjects.h"

@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "ShadowMap.h"
-#include <d3d11.h>
 #include "Debug.h"
 #include <cassert>
 #include "VMath.h"

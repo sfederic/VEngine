@@ -2,7 +2,6 @@
 #include "ShaderSystem.h"
 #include <filesystem>
 #include <set>
-#include <d3d11.h>
 #include "Debug.h"
 #include "RenderUtils.h"
 #include "Input.h"

@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "PipelineObjects.h"
-#include <d3d11.h>
 
 RastState::RastState(std::string name_, ID3D11RasterizerState* data_)
 {
