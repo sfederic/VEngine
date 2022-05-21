@@ -376,7 +376,7 @@ void CreateRasterizerStates()
 	//SOLID
 	{
 		HR(device->CreateRasterizerState(&rastDesc, &rastStateSolid));
-		RastState* rs = new RastState(RastStates::solid, rastDesc, rastStateSolid);
+		RastState* rs = new RastState(RastStates::solid, rastStateSolid);
 		rastStateMap[rs->name] = rs;
 	}
 
@@ -385,7 +385,7 @@ void CreateRasterizerStates()
 		rastDesc.FillMode = D3D11_FILL_WIREFRAME;
 		rastDesc.CullMode = D3D11_CULL_NONE;
 		HR(device->CreateRasterizerState(&rastDesc, &rastStateWireframe));
-		RastState* rs = new RastState(RastStates::wireframe, rastDesc, rastStateWireframe);
+		RastState* rs = new RastState(RastStates::wireframe, rastStateWireframe);
 		rastStateMap[rs->name] = rs;
 	}
 
@@ -394,7 +394,7 @@ void CreateRasterizerStates()
 		rastDesc.CullMode = D3D11_CULL_NONE;
 		rastDesc.FillMode = D3D11_FILL_SOLID;
 		HR(device->CreateRasterizerState(&rastDesc, &rastStateNoBackCull));
-		RastState* rs = new RastState(RastStates::noBackCull, rastDesc, rastStateNoBackCull);
+		RastState* rs = new RastState(RastStates::noBackCull, rastStateNoBackCull);
 		rastStateMap[rs->name] = rs;
 	}
 
@@ -406,7 +406,7 @@ void CreateRasterizerStates()
 		rastDesc.DepthBiasClamp = 0.0f;
 		rastDesc.SlopeScaledDepthBias = 1.0f;
 		HR(device->CreateRasterizerState(&rastDesc, &rastStateShadow));
-		RastState* rs = new RastState(RastStates::shadow, rastDesc, rastStateShadow);
+		RastState* rs = new RastState(RastStates::shadow, rastStateShadow);
 		rastStateMap[rs->name] = rs;
 	}
 }
@@ -419,7 +419,7 @@ void CreateBlendStates()
 		nullBlendDesc.RenderTarget[0].BlendEnable = false;
 		HR(device->CreateBlendState(&nullBlendDesc, &blendStateAlphaToCoverage));
 
-		BlendState* bs = new BlendState(BlendStates::null, nullBlendDesc, nullBlendState);
+		BlendState* bs = new BlendState(BlendStates::null, nullBlendState);
 		blendStateMap[bs->name] = bs;
 	}
 
@@ -439,7 +439,7 @@ void CreateBlendStates()
 
 		HR(device->CreateBlendState(&alphaToCoverageDesc, &blendStateAlphaToCoverage));
 
-		BlendState* bs = new BlendState(BlendStates::Default, alphaToCoverageDesc, blendStateAlphaToCoverage);
+		BlendState* bs = new BlendState(BlendStates::Default, blendStateAlphaToCoverage);
 		blendStateMap[bs->name] = bs;
 	}
 }

@@ -1,15 +1,14 @@
 #include "PipelineObjects.h"
+#include <d3d11.h>
 
-RastState::RastState(std::string name_, D3D11_RASTERIZER_DESC desc_, ID3D11RasterizerState* data_)
+RastState::RastState(std::string name_, ID3D11RasterizerState* data_)
 {
 	name = name_;
-	desc = desc_;
 	data = data_;
 }
 
-Sampler::Sampler(D3D11_SAMPLER_DESC desc_, ID3D11SamplerState* data_)
+Sampler::Sampler(ID3D11SamplerState* data_)
 {
-	desc = desc_;
 	data = data_;
 }
 
@@ -20,8 +19,8 @@ Texture2D::Texture2D(std::string filename_)
 
 Texture2D::~Texture2D()
 {
-	if (data) data->Release();
-	if(srv) srv->Release();
+	data->Release();
+	srv->Release();
 }
 
 PipelineStateObject::PipelineStateObject()
@@ -30,7 +29,6 @@ PipelineStateObject::PipelineStateObject()
 
 void PipelineStateObject::Create()
 {
-	
 }
 
 void PipelineStateObject::SetVertexBuffer(Buffer* vertexBuffer_)
@@ -43,9 +41,8 @@ void PipelineStateObject::SetIndexBuffer(Buffer* indexBuffer_)
 	indexBuffer = indexBuffer;
 }
 
-BlendState::BlendState(std::string name_, D3D11_BLEND_DESC desc_, ID3D11BlendState* data_)
+BlendState::BlendState(std::string name_, ID3D11BlendState* data_)
 {
 	name = name_;
-	desc = desc_;
 	data = data_;
 }

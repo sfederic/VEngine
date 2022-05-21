@@ -103,7 +103,7 @@ namespace RenderUtils
 		ID3D11SamplerState* samplerState;
 		HR(device->CreateSamplerState(&sampDesc, &samplerState));
 
-		auto sampler = new Sampler(sampDesc, samplerState);
+		auto sampler = new Sampler(samplerState);
 		return sampler;
 	}
 
@@ -139,7 +139,12 @@ namespace RenderUtils
 		//to get the texture Desc.
 		ID3D11Texture2D* textureResource = nullptr;
 		HR(resource->QueryInterface(&textureResource));
-		textureResource->GetDesc(&texture->desc);
+
+		D3D11_TEXTURE2D_DESC texDesc = {};
+		textureResource->GetDesc(&texDesc);
+
+		texture->width = texDesc.Width;
+		texture->height = texDesc.Height;
 
 		return texture;
 	}
