@@ -73,6 +73,8 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(UniversalCRT_IncludePath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>vpch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;libfbxsdk.lib;d2d1.lib;dwrite.lib;PhysXCommon_64.lib;PhysX_64.lib;PhysXFoundation_64.lib;PhysXCooking_64.lib;PhysXExtensions_static_64.lib;PhysXCharacterKinematic_static_64.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -144,6 +146,9 @@
     <ClCompile Include="Code\UI\TimeOfDayWidget.cpp" />
     <ClCompile Include="Code\VEnum.cpp" />
     <ClCompile Include="Code\VMemory.cpp" />
+    <ClCompile Include="Code\vpch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Code\VString.cpp" />
     <ClCompile Include="Code\UI\Widget.cpp" />
     <ClCompile Include="Code\Components\SpatialComponent.cpp" />
@@ -379,6 +384,7 @@
     <ClInclude Include="Code\Editor\TransformGizmo.h" />
     <ClInclude Include="Code\UI\UISystem.h" />
     <ClInclude Include="Code\VMemory.h" />
+    <ClInclude Include="Code\vpch.h" />
     <ClInclude Include="Code\World.h" />
     <ClInclude Include="Code\WorldEditor.h" />
     <ClCompile Include="Code\UI\UISystem.cpp" />
