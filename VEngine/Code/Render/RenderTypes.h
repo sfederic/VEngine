@@ -1,5 +1,4 @@
 #pragma once
-#include "vpch.h"
 #include <DirectXCollision.h>
 #include "Animation/AnimationStructures.h"
 

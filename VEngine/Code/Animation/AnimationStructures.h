@@ -1,5 +1,7 @@
 #pragma once
-#include "vpch.h"
+#include <vector>
+#include <map>
+#include <DirectXMath.h>
 
 using namespace DirectX;
 
