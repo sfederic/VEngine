@@ -1,7 +1,7 @@
 #pragma once
+#include "Properties.h"
 #include <DirectXMath.h>
 #include <string>
-#include "Properties.h"
 #include "UID.h"
 #include "VEnum.h"
 

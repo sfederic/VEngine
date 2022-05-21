@@ -1,8 +1,6 @@
 #pragma once
+#include "vpch.h"
 #include "System.h"
-#include <DirectXMath.h>
-#include <vector>
-#include <string>
 #include "Transform.h"
 #include "RenderTypes.h"
 

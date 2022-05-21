@@ -1,7 +1,4 @@
 #include "vpch.h"
-
-#define NOMINMAX //bruh...
-
 #include "Unit.h"
 #include <algorithm>
 #include "Gameplay/GridNode.h"

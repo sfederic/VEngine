@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "TransformGizmo.h"
-#include <DirectXMath.h>
 #include "Render/Renderer.h"
 #include "Camera.h"
 #include "Input.h"

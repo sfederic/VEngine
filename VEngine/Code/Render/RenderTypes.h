@@ -1,7 +1,5 @@
 #pragma once
-#include <vector>
-#include <string>
-#include <DirectXMath.h>
+#include "vpch.h"
 #include <DirectXCollision.h>
 #include "Animation/AnimationStructures.h"
 

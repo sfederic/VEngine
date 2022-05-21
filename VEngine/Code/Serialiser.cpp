@@ -1,7 +1,5 @@
 #include "vpch.h"
 #include "Serialiser.h"
-#include <DirectXMath.h>
-#include <typeindex>
 #include "Properties.h"
 #include "Actors/Actor.h"
 #include "World.h"

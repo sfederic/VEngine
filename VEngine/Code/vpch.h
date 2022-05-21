@@ -1,10 +1,16 @@
 #pragma once
 
+#define NOMINMAX
+
+#include "Properties.h"
 #include <map>
-#include <optional>
+#include <unordered_map>
 #include <string>
-#include <typeindex>
 #include <vector>
-#include <functional>
-#include <cassert>
-#include "Render/RenderTypes.h"
+#include <DirectXMath.h>
+#include <DirectXCollision.h>
+#include <d3d11.h>
+#include "Actors/Actor.h"
+#include "Actors/ActorSystem.h"
+#include "Components/Component.h"
+#include "Components/ComponentSystem.h"

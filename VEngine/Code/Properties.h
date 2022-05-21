@@ -1,5 +1,11 @@
 #pragma once
-#include "vpch.h"
+#include <map>
+#include <optional>
+#include <string>
+#include <typeindex>
+#include <vector>
+#include <functional>
+#include "Render/RenderTypes.h"
 
 struct Property
 {

@@ -1,6 +1,4 @@
 #include "vpch.h"
-#define NOMINMAX
-
 #include "Raycast.h"
 #include <limits>
 #include "Camera.h"
