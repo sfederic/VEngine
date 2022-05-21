@@ -1,3 +1,4 @@
+#include "vpch.h"
 //#include "VMemory.h"
 //
 //uint64_t AllocSystem::GetAllocationSystemMemoryUsage()

@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "AudioChannel.h"
 #include "Debug.h"
 

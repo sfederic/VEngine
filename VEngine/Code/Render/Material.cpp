@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "Material.h"
 #include "RenderUtils.h"
 #include "Renderer.h"

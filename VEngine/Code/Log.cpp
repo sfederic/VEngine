@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "Log.h"
 #include <cstdarg>
 #include <vadefs.h>

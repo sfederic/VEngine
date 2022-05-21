@@ -1,3 +1,4 @@
+#include "vpch.h"
 #define NOMINMAX
 #include "SpinBox.h"
 

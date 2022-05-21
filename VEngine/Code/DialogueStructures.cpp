@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "DialogueStructures.h"
 #include <fstream>
 #include <filesystem>

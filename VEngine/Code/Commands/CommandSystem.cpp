@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "CommandSystem.h"
 #include "ICommand.h"
 #include "Input.h"

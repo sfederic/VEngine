@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "FloatWidget.h"
 #include <QHBoxLayout>
 #include <QLabel>

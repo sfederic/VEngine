@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "GuardWidget.h"
 
 void GuardWidget::Draw(float deltaTime)

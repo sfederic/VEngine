@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "AssetDock.h"
 #include <qmenu.h>
 #include <qfiledialog.h>

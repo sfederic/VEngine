@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "PointLightComponent.h"
 
 PointLightComponent::PointLightComponent()

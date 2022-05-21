@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "RenderUtils.h"
 #include <d3d11.h>
 #include "RenderTypes.h"

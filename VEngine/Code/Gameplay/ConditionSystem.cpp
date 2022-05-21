@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "ConditionSystem.h"
 #include <cassert>
 #include "GameInstance.h"

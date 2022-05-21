@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "StringWidget.h"
 #include "Properties.h"
 #include <QDir>

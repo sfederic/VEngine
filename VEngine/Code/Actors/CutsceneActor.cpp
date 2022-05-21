@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "CutsceneActor.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Editor/CutsceneSequencer.h"

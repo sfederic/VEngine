@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "Actor.h"
 #include "Actors/IActorSystem.h"
 #include "Components/SpatialComponent.h"

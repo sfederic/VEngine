@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "EntranceTrigger.h"
 #include <filesystem>
 #include "Log.h"

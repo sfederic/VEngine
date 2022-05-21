@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "NPC.h"
 #include "Timer.h"
 #include "UI/DialogueWidget.h"

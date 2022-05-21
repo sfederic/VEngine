@@ -1,4 +1,5 @@
 #pragma once
+#include "vpch.h"
 #include <DirectXMath.h>
 #include <vector>
 #include <string>

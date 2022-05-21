@@ -1,4 +1,5 @@
 #pragma once
+#include "vpch.h"
 #include <string>
 #include "SystemStates.h"
 

@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "Editor.h"
 #include "QtEditor.h"
 //#include "Win32Editor.h"

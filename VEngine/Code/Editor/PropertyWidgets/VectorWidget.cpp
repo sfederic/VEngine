@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "VectorWidget.h"
 #include <QHBoxLayout>
 #include <QDoubleSpinBox>

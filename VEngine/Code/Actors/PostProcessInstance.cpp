@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "PostProcessInstance.h"
 #include "Components/EmptyComponent.h"
 #include "Render/RenderTypes.h"

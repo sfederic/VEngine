@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "PipelineObjects.h"
 #include <d3d11.h>
 

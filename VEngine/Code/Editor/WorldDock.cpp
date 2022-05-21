@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "WorldDock.h"
 #include "ActorTreeWidget.h"
 #include <QTreeWidgetItem>

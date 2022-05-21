@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "DebugIcoSphere.h"
 #include "Components/MeshComponent.h"
 

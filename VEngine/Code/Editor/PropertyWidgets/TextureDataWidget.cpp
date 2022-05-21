@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "TextureDataWidget.h"
 #include <qfiledialog.h>
 #include "Render/RenderTypes.h"

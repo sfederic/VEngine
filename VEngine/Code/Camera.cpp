@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "Camera.h"
 #include "Input.h"
 #include "WorldEditor.h"

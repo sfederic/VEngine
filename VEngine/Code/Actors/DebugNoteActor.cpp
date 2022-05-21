@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "DebugNoteActor.h"
 #include "UI/DebugNoteWidget.h"
 #include "Components/EmptyComponent.h"

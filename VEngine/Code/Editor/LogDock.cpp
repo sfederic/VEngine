@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "LogDock.h"
 #include <qtextedit.h>
 #include <QVBoxLayout>

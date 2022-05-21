@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "AudioComponent.h"
 #include "Audio/AudioSystem.h"
 #include "Audio/AudioChannel.h"

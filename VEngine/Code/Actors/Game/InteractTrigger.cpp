@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "InteractTrigger.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Components/MemoryComponent.h"

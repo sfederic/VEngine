@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "MemoryComponent.h"
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/GameUtils.h"

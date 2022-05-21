@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "FenceActor.h"
 #include "Components/MeshComponent.h"
 #include "Render/Material.h"

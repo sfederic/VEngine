@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "UISystem.h"
 #include <cassert>
 #include <dxgi1_6.h>

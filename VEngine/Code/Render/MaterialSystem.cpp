@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "MaterialSystem.h"
 #include "Material.h"
 #include <cassert>

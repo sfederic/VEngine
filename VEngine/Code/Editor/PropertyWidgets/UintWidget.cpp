@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "UintWidget.h"
 
 UintWidget::UintWidget(uint32_t* value, bool readOnly, QWidget* parent) : UintSpinBox(parent)

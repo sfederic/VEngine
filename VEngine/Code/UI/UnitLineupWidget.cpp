@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "UnitLineupWidget.h"
 #include "Gameplay/BattleSystem.h"
 #include "Actors/Game/Unit.h"

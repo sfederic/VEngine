@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "AnimationStructures.h"
 
 void Animation::Interpolate(float t, Joint& joint, Skeleton* skeleton)

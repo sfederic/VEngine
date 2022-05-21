@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "FBXLoader.h"
 #include <cassert>
 #include <filesystem>

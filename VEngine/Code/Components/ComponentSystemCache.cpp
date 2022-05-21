@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "ComponentSystemCache.h"
 #include "IComponentSystem.h"
 

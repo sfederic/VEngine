@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "TextureSystem.h"
 #include "Render/Texture2D.h"
 #include "Render/RenderUtils.h"

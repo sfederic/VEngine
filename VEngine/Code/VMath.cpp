@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "VMath.h"
 #include <cmath>
 #include <algorithm>

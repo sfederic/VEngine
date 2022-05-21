@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "SpatialComponent.h"
 
 void SpatialComponent::AddChild(SpatialComponent* component)

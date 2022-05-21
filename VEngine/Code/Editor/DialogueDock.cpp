@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "DialogueDock.h"
 #include <fstream>
 #include <qtreewidget.h>

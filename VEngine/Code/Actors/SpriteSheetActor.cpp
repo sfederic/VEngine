@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "SpriteSheetActor.h"
 #include "Particle/SpriteSheet.h"
 

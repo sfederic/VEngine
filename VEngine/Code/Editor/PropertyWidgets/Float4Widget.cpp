@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "Float4Widget.h"
 #include <qboxlayout.h>
 

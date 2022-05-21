@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "PlayerActionBarWidget.h"
 
 void PlayerActionBarWidget::Draw(float deltaTime)

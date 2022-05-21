@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "BoolWidget.h"
 
 BoolWidget::BoolWidget(bool* value, QWidget* parent) : QCheckBox(parent)

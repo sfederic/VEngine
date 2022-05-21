@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "SpriteSheet.h"
 #include "Render/SpriteSystem.h"
 #include "Render/TextureSystem.h"

@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "Properties.h"
 
 void Properties::CopyData(std::string name, Property& propToCopy)

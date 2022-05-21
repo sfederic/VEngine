@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "VString.h"
 #include <locale>
 #include <stdarg.h>

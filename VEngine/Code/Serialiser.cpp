@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "Serialiser.h"
 #include <DirectXMath.h>
 #include <typeindex>

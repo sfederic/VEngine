@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "WStringWidget.h"
 #include "Properties.h"
 

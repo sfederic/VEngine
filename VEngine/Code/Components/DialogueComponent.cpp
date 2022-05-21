@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "DialogueComponent.h"
 #include "World.h"
 #include "Components/WidgetComponent.h"

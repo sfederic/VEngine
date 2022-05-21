@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "BoxTriggerComponent.h"
 #include "Components/MeshComponent.h"
 #include "VMath.h"

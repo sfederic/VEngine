@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "QuestComponent.h"
 #include "Quests/QuestSystem.h"
 #include "Quests/Quest.h"

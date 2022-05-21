@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "MemoryGainedWidget.h"
 #include "Gameplay/Memory.h"
 #include "VString.h"

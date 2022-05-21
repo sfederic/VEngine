@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "QtEditor.h"
 #include <QtWidgets/QApplication>
 #include <QWidget>

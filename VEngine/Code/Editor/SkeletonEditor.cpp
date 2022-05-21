@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "SkeletonEditor.h"
 #include <map>
 #include <cassert>

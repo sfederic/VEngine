@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "DialogueWidget.h"
 #include "VString.h"
 

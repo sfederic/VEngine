@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "MemoryActor.h"
 #include "Gameplay/GameUtils.h"
 #include "Render/Material.h"

@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "DiffuseProbeMap.h"
 #include "Components/InstanceMeshComponent.h"
 #include "Debug.h"

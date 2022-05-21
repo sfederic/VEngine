@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "TimeOfDayWidget.h"
 #include "Gameplay/GameInstance.h"
 #include "VString.h"

@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "Widget.h"
 #include <WICTextureLoader.h>
 #include "Input.h"

@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "PropertiesDock.h"
 #include <qwidget.h>
 #include <qboxlayout.h>

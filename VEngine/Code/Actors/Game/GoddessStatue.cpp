@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "GoddessStatue.h"
 #include "UI/PassTimeWidget.h"
 #include "Components/MeshComponent.h"

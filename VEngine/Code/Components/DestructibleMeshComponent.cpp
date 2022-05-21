@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "DestructibleMeshComponent.h"
 #include "Asset/FBXLoader.h"
 #include "Render/Material.h"

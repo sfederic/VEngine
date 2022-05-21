@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "InstanceMeshComponent.h"
 #include <d3d11.h> //@Todo: no good. put the Instancemesh srv and buffer into the engine structs
 #include "Render/RenderUtils.h"

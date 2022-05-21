@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "RenderTypes.h"
 #include "Material.h"
 #include "Camera.h"

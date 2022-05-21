@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "DialogueTrigger.h"
 #include "Components/DialogueComponent.h"
 #include "Components/BoxTriggerComponent.h"

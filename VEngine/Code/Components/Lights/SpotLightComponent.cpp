@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "SpotLightComponent.h"
 
 SpotLightComponent::SpotLightComponent()

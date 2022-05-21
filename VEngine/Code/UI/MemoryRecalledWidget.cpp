@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "MemoryRecalledWidget.h"
 #include "Gameplay/Memory.h"
 #include "VString.h"
@@ -18,3 +19,4 @@ void MemoryRecalledWidget::Draw(float deltaTime)
 		Text(VString::stows(recalledMemory->description), layout);
 	}
 }
+#include "vpch.h"

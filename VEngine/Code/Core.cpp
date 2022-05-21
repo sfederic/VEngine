@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "Core.h"
 #include "Input.h"
 #include "Render/Renderer.h"

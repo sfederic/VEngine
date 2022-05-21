@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "AssetSystem.h"
 #include <cstdio>
 #include <filesystem>

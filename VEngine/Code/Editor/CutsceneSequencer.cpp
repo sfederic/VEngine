@@ -1,3 +1,4 @@
+#include "vpch.h"
 #include "CutsceneSequencer.h"
 #include <fstream>
 #include <filesystem>
