@@ -85,6 +85,7 @@ void SetMatricesFromMesh(MeshComponent* mesh);
 void SetShaderMeshData(MeshComponent* mesh);
 void SetRenderPipelineStates(MeshComponent* mesh);
 void SetRenderPipelineStatesForShadows(MeshComponent* mesh);
+void SetShader(std::wstring shaderName);
 
 //Changes the global ambient param passed into shaders to change based on the day-night cycle in-game.
 XMFLOAT4 CalcGlobalAmbientBasedOnGameTime();
@@ -1241,9 +1242,7 @@ void RenderCameraMeshes()
 
 	context->RSSetState(rastStateWireframe);
 
-	ShaderItem* shader = shaderSystem.FindShader(L"SolidColour.hlsl");
-	context->VSSetShader(shader->vertexShader, nullptr, 0);
-	context->PSSetShader(shader->pixelShader, nullptr, 0);
+	SetShader(L"SolidColour.hlsl");
 
 	context->IASetVertexBuffers(0, 1, &debugCamera.mesh->pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
 
@@ -1919,6 +1918,13 @@ void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 
 	context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
 	context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
+}
+
+void SetShader(std::wstring shaderName)
+{
+	ShaderItem* shader = shaderSystem.FindShader(shaderName);
+	context->VSSetShader(shader->vertexShader, nullptr, 0);
+	context->PSSetShader(shader->pixelShader, nullptr, 0);
 }
 
 XMFLOAT4 CalcGlobalAmbientBasedOnGameTime()
