@@ -88,6 +88,8 @@ void SetRenderPipelineStatesForShadows(MeshComponent* mesh);
 void SetShader(std::wstring shaderName);
 void SetRastState(std::string rastStateName);
 void SetConstantBufferVertexPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer);
+void SetConstantBufferVertex(uint32_t shaderRegister, ID3D11Buffer* constantBuffer);
+void SetConstantBufferPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer);
 void SetVertexBuffer(Buffer* vertexBuffer);
 void SetIndexBuffer(Buffer* indexBuffer);
 
@@ -1237,9 +1239,9 @@ void CreateLightProbeBuffers()
 
 void RenderCameraMeshes()
 {
-	if (Core::gameplayOn) return;
-
 	static DebugCamera debugCamera;
+
+	if (Core::gameplayOn) return;
 
 	MaterialShaderData materialShaderData = {};
 
@@ -1268,10 +1270,7 @@ void RenderLightMeshes()
 	static DebugIcoSphere debugIcoSphere;
 	static DebugCone debugCone;
 
-	if (Core::gameplayOn)
-	{
-		return;
-	}
+	if (Core::gameplayOn) return;
 
 	SetRastState(RastStates::wireframe);
 	SetShader(L"SolidColour.hlsl");
@@ -1930,6 +1929,16 @@ void SetRastState(std::string rastStateName)
 void SetConstantBufferVertexPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer)
 {
 	context->VSSetConstantBuffers(shaderRegister, 1, &constantBuffer);
+	context->PSSetConstantBuffers(shaderRegister, 1, &constantBuffer);
+}
+
+void SetConstantBufferVertex(uint32_t shaderRegister, ID3D11Buffer* constantBuffer)
+{
+	context->VSSetConstantBuffers(shaderRegister, 1, &constantBuffer);
+}
+
+void SetConstantBufferPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer)
+{
 	context->PSSetConstantBuffers(shaderRegister, 1, &constantBuffer);
 }
 
