@@ -87,6 +87,7 @@ void SetRenderPipelineStates(MeshComponent* mesh);
 void SetRenderPipelineStatesForShadows(MeshComponent* mesh);
 void SetShader(std::wstring shaderName);
 void SetRastState(std::string rastStateName);
+void SetConstantBufferVertexPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer);
 
 //Changes the global ambient param passed into shaders to change based on the day-night cycle in-game.
 XMFLOAT4 CalcGlobalAmbientBasedOnGameTime();
@@ -1247,12 +1248,12 @@ void RenderCameraMeshes()
 
 	context->IASetVertexBuffers(0, 1, &debugCamera.mesh->pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
 
-	context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+	SetConstantBufferVertexPixel(cbMatrixRegister, cbMatrices);
 
 	//Make cameras red
 	materialShaderData.ambient = XMFLOAT4(1.0f, 0.0f, 0.f, 1.0f);
 	MapBuffer(cbMaterial, &materialShaderData, sizeof(MaterialShaderData));
-	context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
+	SetConstantBufferVertexPixel(cbMaterialRegister, cbMaterial);
 
 	//DRAW CAMERAS
 	for (auto camera : CameraComponent::system.components)
@@ -1278,10 +1279,7 @@ void RenderLightMeshes()
 	}
 
 	SetRastState(RastStates::wireframe);
-
-	ShaderItem* shader = shaderSystem.FindShader(L"SolidColour.hlsl");
-	context->VSSetShader(shader->vertexShader, nullptr, 0);
-	context->PSSetShader(shader->pixelShader, nullptr, 0);
+	SetShader(L"SolidColour.hlsl");
 
 	context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
 
@@ -1932,6 +1930,12 @@ void SetRastState(std::string rastStateName)
 {
 	auto rastState = rastStateMap[rastStateName];
 	context->RSSetState(rastState->data);
+}
+
+void SetConstantBufferVertexPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer)
+{
+	context->VSSetConstantBuffers(shaderRegister, 1, &constantBuffer);
+	context->PSSetConstantBuffers(shaderRegister, 1, &constantBuffer);
 }
 
 XMFLOAT4 CalcGlobalAmbientBasedOnGameTime()
