@@ -1,4 +1,5 @@
 #include "SpriteSystem.h"
+#include <d3d11.h>
 #include "Renderer.h"
 #include "RenderUtils.h"
 #include "TextureSystem.h"
@@ -63,8 +64,8 @@ void SpriteSystem::UpdateAndSetSpriteBuffers(ID3D11DeviceContext* context)
 
 void SpriteSystem::BuildSpriteQuadForViewportRendering(const Sprite& sprite)
 {
-	D3D11_RECT dst = sprite.dstRect;
-	D3D11_RECT src = sprite.srcRect;
+	VRect dst = sprite.dstRect;
+	VRect src = sprite.srcRect;
 
 	// Dest rect defines target in screen space.
 	verts[0].pos = PointToNdc(dst.left, dst.bottom, sprite.z);
@@ -108,7 +109,7 @@ void SpriteSystem::BuildSpriteQuadForViewportRendering(const Sprite& sprite)
 
 void SpriteSystem::BuildSpriteQuadForSpriteSheetRendering(const Sprite& sprite)
 {
-	D3D11_RECT src = sprite.srcRect;
+	VRect src = sprite.srcRect;
 
 	verts[0].pos = XMFLOAT3(-1.f, -1.f, 0.f);
 	verts[1].pos = XMFLOAT3(-1.f, 1.f, 0.f);

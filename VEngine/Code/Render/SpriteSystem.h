@@ -1,7 +1,6 @@
 #pragma once
 #include "System.h"
 #include <DirectXMath.h>
-#include <d3d11.h>
 #include <vector>
 #include <string>
 #include "Transform.h"
@@ -10,6 +9,8 @@
 using namespace DirectX;
 
 struct SpriteSheetEmitter;
+struct ID3D11Buffer;
+struct ID3D11DeviceContext;
 
 //Sprite and text rendering for D3D11
 //REF:http://www.d3dcoder.net/Data/Resources/SpritesAndText.pdf
@@ -18,8 +19,8 @@ struct Sprite
 {
 	Transform transform;
 
-	D3D11_RECT srcRect;
-	D3D11_RECT dstRect;
+	VRect srcRect;
+	VRect dstRect;
 
 	std::string textureFilename;
 
