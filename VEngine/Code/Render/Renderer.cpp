@@ -1389,30 +1389,16 @@ void RenderPolyboards()
 {
 	PROFILE_START
 
-	shaderMatrices.view = activeCamera->GetViewMatrix();
-	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
 	shaderMatrices.texMatrix = XMMatrixIdentity();
 	shaderMatrices.model = XMMatrixIdentity();
 	shaderMatrices.MakeModelViewProjectionMatrix();
 
 	MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
-	context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+	SetConstantBufferVertex(cbMatrixRegister, cbMatrices);
 
-	const float blendFactor[4] = { 0.f, 0.f, 0.f, 0.f };
-	context->OMSetBlendState(blendStateMap[BlendStates::Default]->data, blendFactor, 0xFFFFFFFF);
-
-	if (Renderer::drawAllAsWireframe)
-	{
-		context->RSSetState(rastStateWireframe);
-	}
-	else
-	{
-		context->RSSetState(rastStateMap["nobackcull"]->data);
-	}
-
-	ShaderItem* shader = shaderSystem.FindShader(L"Unlit.hlsl");
-	context->VSSetShader(shader->vertexShader, nullptr, 0);
-	context->PSSetShader(shader->pixelShader, nullptr, 0);
+	SetBlendState(BlendStates::Default);
+	SetRastState(RastStates::noBackCull);
+	SetShader(L"Unlit.hlsl");
 
 	for (auto polyboard : Polyboard::system.components)
 	{
@@ -1421,12 +1407,10 @@ void RenderPolyboards()
 		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
 		context->PSSetShaderResources(0, 1, &textureSystem.FindTexture2D(polyboard->textureData.filename)->srv);
 
-		//@Todo: I don't know what it is with d3d11, but mapping to vertex/index buffers without NO_OVERWRITE
-		//causes flickering on meshes, as if they're sharing memory space or something. Nothing really to fix
-		//if I want to keep this, but worth keeping tabs on.
+		//Note: mapping to vertex/index buffers without NO_OVERWRITE causes flickering on meshes
 		//VERTEX MAP
 		{
-			D3D11_MAPPED_SUBRESOURCE mappedResource;
+			D3D11_MAPPED_SUBRESOURCE mappedResource = {};
 			HR(context->Map(polyboard->vertexBuffer->data, 0, D3D11_MAP_WRITE_NO_OVERWRITE, 0, &mappedResource));
 			memcpy(mappedResource.pData, polyboard->vertices.data(), sizeof(Vertex) * polyboard->vertices.size());
 			context->Unmap(polyboard->vertexBuffer->data, 0);
@@ -1434,14 +1418,14 @@ void RenderPolyboards()
 
 		//INDEX MAP
 		{
-			D3D11_MAPPED_SUBRESOURCE mappedResource;
+			D3D11_MAPPED_SUBRESOURCE mappedResource = {};
 			HR(context->Map(polyboard->indexBuffer->data, 0, D3D11_MAP_WRITE_NO_OVERWRITE, 0, &mappedResource));
 			memcpy(mappedResource.pData, polyboard->indices.data(), sizeof(Vertex) * polyboard->indices.size());
 			context->Unmap(polyboard->indexBuffer->data, 0);
 		}
 
-		context->IASetVertexBuffers(0, 1, &polyboard->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
-		context->IASetIndexBuffer(polyboard->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
+		SetIndexBuffer(polyboard->vertexBuffer);
+		SetIndexBuffer(polyboard->indexBuffer);
 
 		context->DrawIndexed(polyboard->indices.size(), 0, 0);
 	}
@@ -1922,6 +1906,12 @@ void SetShader(std::wstring shaderName)
 
 void SetRastState(std::string rastStateName)
 {
+	if (Renderer::drawAllAsWireframe)
+	{
+		context->RSSetState(rastStateWireframe);
+		return;
+	}
+
 	auto rastState = rastStateMap[rastStateName];
 	context->RSSetState(rastState->data);
 }
