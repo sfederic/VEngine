@@ -3,7 +3,7 @@
 #include <DirectXMath.h>
 #include "Physics/CollisionLayers.h"
 
-struct IActorSystem;
+class IActorSystem;
 struct CameraComponent;
 struct Actor;
 

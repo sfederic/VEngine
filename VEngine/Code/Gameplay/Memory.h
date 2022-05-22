@@ -1,7 +1,7 @@
 #pragma once
 #include "ConditionSystem.h"
 
-struct IActorSystem;
+class IActorSystem;
 
 //Base for all player memories in-game.
 struct Memory

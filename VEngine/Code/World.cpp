@@ -110,8 +110,8 @@ std::vector<IActorSystem*> World::GetLayerActorSystems()
 
 	for (auto actorSystem : activeActorSystems)
 	{
-		if (actorSystem->name == "EntranceTrigger" ||
-			actorSystem->name == "MeshActor")
+		if (actorSystem->GetName() == "EntranceTrigger" ||
+			actorSystem->GetName() == "MeshActor")
 		{
 			continue;
 		}

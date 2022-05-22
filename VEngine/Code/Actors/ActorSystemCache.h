@@ -4,7 +4,7 @@
 #include <optional>
 #include <string>
 
-struct IActorSystem;
+class IActorSystem;
 
 struct ActorSystemCache
 {

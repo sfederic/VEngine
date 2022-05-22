@@ -17,7 +17,7 @@ void ActorSystemCache::Add(std::type_index type, IActorSystem* actorSystem)
 	}
 
 	typeToSystemMap->insert(std::make_pair(type, actorSystem));
-	nameToSystemMap->insert(std::make_pair(actorSystem->name, actorSystem));
+	nameToSystemMap->insert(std::make_pair(actorSystem->GetName(), actorSystem));
 }
 
 IActorSystem* ActorSystemCache::Get(std::string systemName)

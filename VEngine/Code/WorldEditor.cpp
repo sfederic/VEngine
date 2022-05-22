@@ -200,7 +200,7 @@ void WorldEditor::SpawnActor(Transform& transform)
 		//different from the click position in world.
 		actor->SetTransform(transform);
 
-		std::string newActorName = spawnSystem->name + std::to_string(spawnSystem->GetNumActors());
+		std::string newActorName = spawnSystem->GetName() + std::to_string(spawnSystem->GetNumActors());
 		actor->SetName(newActorName);
 
 		debugMenu.AddNotification(VString::wformat(

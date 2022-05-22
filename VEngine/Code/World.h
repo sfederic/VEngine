@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include "UID.h"
 
-struct IActorSystem;
+class IActorSystem;
 struct IComponentSystem;
 struct Component;
 struct Actor;

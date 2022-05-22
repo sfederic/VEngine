@@ -48,7 +48,7 @@ void SystemDock::AddActorSystemsToWidget()
 	for (IActorSystem* actorSystem : world.activeActorSystems)
 	{
 		auto item = new QListWidgetItem(actorSystemList);
-		item->setText(QString::fromStdString(actorSystem->name));
+		item->setText(QString::fromStdString(actorSystem->GetName()));
 	}
 
 	actorSystemList->sortItems(Qt::SortOrder::AscendingOrder);

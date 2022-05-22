@@ -273,7 +273,7 @@ void AssetDock::ActorTemplateFileClicked(const std::string actorTemplateFilename
     IActorSystem* actorSystem = actorSystemCache.Get(VString::wstos(actorSystemName));
 
     worldEditor.spawnSystem = actorSystem;
-    Log("[%s] set as spawn system", actorSystem->name.c_str());
+    Log("[%s] set as spawn system", actorSystem->GetName().c_str());
     worldEditor.actorTemplateFilename = actorTemplateFilename;
 }
 
@@ -334,7 +334,7 @@ void AssetDock::CreateNewActorTemplateFile()
         Serialiser s(actorTemplateFileName.toStdString(), OpenMode::Out);
 
         //Write out actor's linked actorsystem name
-        s.WriteLine(worldEditor.pickedActor->actorSystem->name.c_str());
+        s.WriteLine(worldEditor.pickedActor->actorSystem->GetName().c_str());
 
         //Serialise all actor and actor's component properties
         auto pickedActorProps = worldEditor.pickedActor->GetAllProps();

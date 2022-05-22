@@ -339,7 +339,7 @@ void DebugMenu::RenderActorSystemMenu()
 
 	for (auto actorSystem : world.activeActorSystems)
 	{
-		ImGui::Text("Name: %s |", actorSystem->name.c_str());
+		ImGui::Text("Name: %s |", actorSystem->GetName().c_str());
 		ImGui::SameLine();
 		ImGui::Text("Actor Count: %d", actorSystem->GetNumActors());
 	}
@@ -645,7 +645,7 @@ void DebugMenu::RenderActorInspectMenu()
 				ImGui::SetWindowPos(ImVec2(editor->viewportMouseX, editor->viewportMouseY));
 
 				ImGui::Text("Name: %s", actor->name.c_str());
-				ImGui::Text("System: %s", actor->actorSystem->name.c_str());
+				ImGui::Text("System: %s", actor->actorSystem->GetName().c_str());
 				ImGui::Text("SystemIndex: %d", actor->index);
 				ImGui::Text("Active: %d", actor->IsActive());
 				ImGui::Text("UID: %u", actor->uid);

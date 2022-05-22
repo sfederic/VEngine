@@ -2,7 +2,7 @@
 #include <string>
 
 struct Actor;
-struct IActorSystem;
+class IActorSystem;
 
 //Base class for Toolkit and Native editors
 struct IEditor

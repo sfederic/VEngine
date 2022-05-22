@@ -14,6 +14,7 @@ struct ActorSystem : IActorSystem
 {
 	std::vector<T*> actors;
 
+public:
 	ActorSystem()
 	{
 		std::string typeName = typeid(T).name();
@@ -49,7 +50,7 @@ struct ActorSystem : IActorSystem
 
 		std::swap(actors[index], actors.back());
 		actors[index]->index = index;
-		actors[index]->name = this->name + std::to_string(index);
+		actors[index]->name = GetName() + std::to_string(index);
 
 		world.actorUIDMap.erase(actors.back()->uid);
 		world.actorNameMap.erase(actors.back()->name);
@@ -99,7 +100,7 @@ struct ActorSystem : IActorSystem
 
 	virtual void Serialise(Serialiser& s) override
 	{
-		s.WriteLine(VString::stows(name)); //Use actorsystem name to create again from ActorSystemCache on Deserialise
+		s.WriteLine(VString::stows(GetName())); //Use actorsystem name to create again from ActorSystemCache on Deserialise
 		s.WriteLine(actors.size()); //Write out num of actors to load the same amount on Deserialise
 
 		for (T* actor : actors)
@@ -118,9 +119,9 @@ struct ActorSystem : IActorSystem
 
 	virtual void SerialiseBinary(BinarySerialiser& s) override
 	{
-		size_t stringSize = this->name.size() + 1;
+		size_t stringSize = GetName().size() + 1;
 		fwrite(&stringSize, sizeof(size_t), 1, s.file);
-		fwrite(this->name.data(), sizeof(char), stringSize, s.file);
+		fwrite(GetName().data(), sizeof(char), stringSize, s.file);
 
 		int size = actors.size();
 		fwrite(&size, sizeof(int), 1, s.file);

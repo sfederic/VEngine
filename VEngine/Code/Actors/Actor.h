@@ -8,7 +8,7 @@
 
 struct Component;
 struct SpatialComponent;
-struct IActorSystem;
+class IActorSystem;
 
 using namespace DirectX;
 

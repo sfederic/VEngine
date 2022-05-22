@@ -3,7 +3,7 @@
 #include <string>
 
 struct Actor;
-struct IActorSystem;
+class IActorSystem;
 struct Transform;
 
 struct WorldEditor
