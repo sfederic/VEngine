@@ -1973,22 +1973,20 @@ void RenderPostProcess()
 	ID3D11ShaderResourceView* nullSRV = nullptr;
 	ID3D11UnorderedAccessView* nullUAV = nullptr;
 
-	context->RSSetState(rastStateMap[RastStates::solid]->data);
+	SetRastState(RastStates::solid);
 
 	context->IASetInputLayout(nullptr);
 	context->IASetVertexBuffers(0, 0, nullptr, nullptr, nullptr);
 	context->IASetIndexBuffer(nullptr, DXGI_FORMAT_UNKNOWN, 0);
 
-	auto quadShader = shaderSystem.FindShader(L"PostProcess.hlsl");
-	context->VSSetShader(quadShader->vertexShader, nullptr, 0);
-	context->PSSetShader(quadShader->pixelShader, nullptr, 0);
+	SetShader(L"PostProcess.hlsl");
 
 	//Set constant buffer data
 	MapBuffer(cbPostProcess, &postProcessIntance->postProcessData, sizeof(ShaderPostProcessData));
-	context->PSSetConstantBuffers(0, 1, &cbPostProcess);
+	SetConstantBufferPixel(0, cbPostProcess);
 
 	context->PSSetShaderResources(0, 1, &postSRV);
-	context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
+	SetSampler(0, RenderUtils::GetDefaultSampler());
 
 	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
 	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
