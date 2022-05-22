@@ -74,6 +74,7 @@ void EndGPUQueries();
 void GetGPUQueryData();
 void MapBuffer(ID3D11Resource* resource, const void* src, size_t size);
 void DrawMesh(MeshComponent* mesh);
+void DrawMeshInstanced(InstanceMeshComponent* mesh);
 
 //Inner render functions to set shader resources
 void SetNullRTV();
@@ -600,6 +601,11 @@ void DrawMesh(MeshComponent* mesh)
 	context->DrawIndexed(mesh->meshDataProxy->indices->size(), 0, 0);
 }
 
+void DrawMeshInstanced(InstanceMeshComponent* mesh)
+{
+	context->DrawIndexedInstanced(mesh->meshDataProxy->indices->size(), mesh->GetInstanceCount(), 0, 0, 0);
+}
+
 void CheckSupportedFeatures()
 {
 	//Threading check
@@ -1062,9 +1068,8 @@ void RenderInstanceMeshComponents()
 
 	PROFILE_START
 
-	//Set matrices
-	shaderMatrices.view = activeCamera->GetViewMatrix();
-	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
+	//Set matrices (Instance mesh model matrices placed in a structured buffer)
+	shaderMatrices.model = XMMatrixIdentity();
 	shaderMatrices.MakeModelViewProjectionMatrix();
 
 	MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
@@ -1080,10 +1085,10 @@ void RenderInstanceMeshComponents()
 		const float factor[4] = { 0.f };
 		context->OMSetBlendState(blendStateMap.find(BlendStates::Default)->second->data, factor, 0xFFFFFFFF);
 
-		//update texture matrix
+		//Update texture matrix
 		shaderMatrices.MakeTextureMatrix(instanceMesh->material);
 		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
-		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+		SetConstantBufferVertex(cbMatrixRegister, cbMatrices);
 
 		//Update instance data and set SRV
 		MapBuffer(instanceMesh->structuredBuffer, instanceMesh->instanceData.data(), sizeof(InstanceData) * instanceMesh->instanceData.size());
@@ -1091,9 +1096,9 @@ void RenderInstanceMeshComponents()
 		context->PSSetShaderResources(instanceSRVRegister, 1, &instanceMesh->srv);
 
 		//Set lights buffer
-		context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
+		SetConstantBufferPixel(cbLightsRegister, cbLights);
 
-		context->DrawIndexedInstanced(instanceMesh->meshDataProxy->indices->size(), instanceMesh->GetInstanceCount(), 0, 0, 0);
+		DrawMeshInstanced(instanceMesh);
 	}
 
 	PROFILE_END
