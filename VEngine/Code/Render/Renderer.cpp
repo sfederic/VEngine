@@ -94,6 +94,8 @@ void SetConstantBufferVertex(uint32_t shaderRegister, ID3D11Buffer* constantBuff
 void SetConstantBufferPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer);
 void SetVertexBuffer(Buffer* vertexBuffer);
 void SetIndexBuffer(Buffer* indexBuffer);
+void SetDefaultSampler(uint32_t shaderRegister, Sampler* sampler);
+void SetShaderResourcePixel(uint32_t shaderRegister, std::string textureName);
 
 //Changes the global ambient param passed into shaders to change based on the day-night cycle in-game.
 XMFLOAT4 CalcGlobalAmbientBasedOnGameTime();
@@ -1108,28 +1110,25 @@ void RenderBounds()
 {
 	static DebugBox debugBox;
 
-	MaterialShaderData materialShaderData;
+	MaterialShaderData materialShaderData = {};
 
 	if (Renderer::drawBoundingBoxes)
 	{
-		context->RSSetState(rastStateWireframe);
-
-		ShaderItem* shader = shaderSystem.FindShader(L"SolidColour.hlsl");
-		context->VSSetShader(shader->vertexShader, nullptr, 0);
-		context->PSSetShader(shader->pixelShader, nullptr, 0);
+		SetRastState(RastStates::wireframe);
+		SetShader(L"SolidColour.hlsl");
 
 		//@Todo: there's a weird error here where if you create enough lights in the map (about 40),
 		//the debug mesh actors will crash here. Tried putting the Debug Actors as global pointers
 		//instead of being static, but then Direct2D swapchain/rendertarget errors would happen.
 		//Feels like it might be the GPU doing some funny memory thing.
-		context->IASetVertexBuffers(0, 1, &debugBox.boxMesh->pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
+		SetVertexBuffer(debugBox.boxMesh->GetVertexBuffer());
 
-		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+		SetConstantBufferVertex(cbMatrixRegister, cbMatrices);
 
 		//Set debug wireframe material colour
 		materialShaderData.ambient = XMFLOAT4(0.75f, 0.75f, 0.75f, 1.0f);
 		MapBuffer(cbMaterial, &materialShaderData, sizeof(MaterialShaderData));
-		context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
+		SetConstantBufferPixel(cbMaterialRegister, cbMaterial);
 
 		for(auto mesh : MeshComponent::system.components)
 		{
@@ -1148,33 +1147,27 @@ void RenderBounds()
 
 			shaderMatrices.model = boundsMatrix;
 
-			//Set bouding box scale just slightly more than the component to avoid overlap
+			//Set bouding box scale just slightly more than the component to avoid mesh overlap
 			shaderMatrices.model.r[0].m128_f32[0] += 0.01f;
 			shaderMatrices.model.r[1].m128_f32[1] += 0.01f;
 			shaderMatrices.model.r[2].m128_f32[2] += 0.01f;
 
 			shaderMatrices.MakeModelViewProjectionMatrix();
 			MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
+			SetConstantBufferVertex(cbMatrixRegister, cbMatrices);
 
-			context->Draw(debugBox.boxMesh->meshDataProxy->vertices->size(), 0);
+			DrawMesh(debugBox.boxMesh);
 		}
 	}
 
 	//DRAW TRIGGER BOUNDS
 	if(Renderer::drawTriggers)
 	{
-		context->RSSetState(rastStateWireframe);
+		SetRastState(RastStates::wireframe);
+		SetShader(L"SolidColour.hlsl");
 
-		ShaderItem* shader = shaderSystem.FindShader(L"SolidColour.hlsl");
-		context->VSSetShader(shader->vertexShader, nullptr, 0);
-		context->PSSetShader(shader->pixelShader, nullptr, 0);
-
-		context->IASetVertexBuffers(0, 1, &debugBox.boxMesh->pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
-
-		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
-
-		shaderMatrices.view = activeCamera->GetViewMatrix();
-		shaderMatrices.proj = activeCamera->GetProjectionMatrix();
+		SetVertexBuffer(debugBox.boxMesh->GetVertexBuffer());
+		SetConstantBufferVertex(cbMatrixRegister, cbMatrices);
 
 		for (auto boxTrigger : BoxTriggerComponent::system.components)
 		{
@@ -1195,7 +1188,7 @@ void RenderBounds()
 			MapBuffer(cbMaterial, &materialShaderData, sizeof(MaterialShaderData));
 			context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
 
-			context->Draw(debugBox.boxMesh->meshDataProxy->vertices->size(), 0);
+			DrawMesh(debugBox.boxMesh);
 		}
 	}
 }
@@ -1439,21 +1432,11 @@ void RenderSpriteSheets()
 
 	for (auto spriteSheet : SpriteSheet::system.components)
 	{
-		if (Renderer::drawAllAsWireframe)
-		{
-			context->RSSetState(rastStateWireframe);
-		}
-		else
-		{
-			context->RSSetState(rastStateMap[RastStates::noBackCull]->data);
-		}
+		SetRastState(RastStates::noBackCull);
+		SetShader(L"Unlit.hlsl");
 
-		ShaderItem* shader = shaderSystem.FindShader(L"Unlit.hlsl");
-		context->VSSetShader(shader->vertexShader, nullptr, 0);
-		context->PSSetShader(shader->pixelShader, nullptr, 0);
-
-		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
-		context->PSSetShaderResources(0, 1, &textureSystem.FindTexture2D(spriteSheet->textureData.filename)->srv);
+		SetSampler(0, RenderUtils::GetDefaultSampler());
+		SetShaderResourcePixel(0, spriteSheet->textureData.filename);
 
 		spriteSheet->UpdateSprite();
 
@@ -1466,7 +1449,7 @@ void RenderSpriteSheets()
 		shaderMatrices.MakeModelViewProjectionMatrix();
 
 		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
-		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+		SetConstantBufferVertex(cbMatrixRegister, cbMatrices);
 
 		context->DrawIndexed(6, 0, 0);
 	}
@@ -1947,6 +1930,17 @@ void SetVertexBuffer(Buffer* vertexBuffer)
 void SetIndexBuffer(Buffer* indexBuffer)
 {
 	context->IASetIndexBuffer(indexBuffer->data, indexBufferFormat, 0);
+}
+
+void SetSampler(uint32_t shaderRegister, Sampler* sampler)
+{
+	context->PSSetSamplers(shaderRegister, 1, &sampler->data);
+}
+
+void SetShaderResourcePixel(uint32_t shaderRegister, std::string textureName)
+{
+	auto texture = textureSystem.FindTexture2D(textureName);
+	context->PSSetShaderResources(shaderRegister, 1, &texture->srv);
 }
 
 XMFLOAT4 CalcGlobalAmbientBasedOnGameTime()
