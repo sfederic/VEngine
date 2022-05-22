@@ -700,17 +700,15 @@ void Renderer::Render()
 
 	StartGPUQueries();
 
-	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
 	shaderMatrices.view = activeCamera->GetViewMatrix();
 	shaderMatrices.lightMVP = shadowMap->OutputMatrix();
 	shaderMatrices.lightViewProj = shadowMap->GetLightViewMatrix() * shadowMap->GetLightPerspectiveMatrix();
 
+	//Set time constant buffer
 	ShaderTimeData timeData = {};
 	timeData.deltaTime = Core::GetDeltaTime();
 	timeData.timeSinceStartup = Core::timeSinceStartup;
 
-	//Set time constant buffer
 	MapBuffer(cbTime, &timeData, sizeof(ShaderTimeData));
 	context->VSSetConstantBuffers(cbTimeRegister, 1, &cbTime);
 
