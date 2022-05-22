@@ -88,6 +88,7 @@ void SetRenderPipelineStates(MeshComponent* mesh);
 void SetRenderPipelineStatesForShadows(MeshComponent* mesh);
 void SetShader(std::wstring shaderName);
 void SetRastState(std::string rastStateName);
+void SetBlendState(std::string blendStateName);
 void SetConstantBufferVertexPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer);
 void SetConstantBufferVertex(uint32_t shaderRegister, ID3D11Buffer* constantBuffer);
 void SetConstantBufferPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer);
@@ -1081,9 +1082,8 @@ void RenderInstanceMeshComponents()
 
 		SetRenderPipelineStates(instanceMesh);
 
-		//@Todo: clean this up in InstanceMeshComponent
-		const float factor[4] = { 0.f };
-		context->OMSetBlendState(blendStateMap.find(BlendStates::Default)->second->data, factor, 0xFFFFFFFF);
+		//@Todo: clean this up in InstanceMeshComponent, can't every instance mesh as transparent
+		SetBlendState(BlendStates::Default);
 
 		//Update texture matrix
 		shaderMatrices.MakeTextureMatrix(instanceMesh->material);
@@ -1924,6 +1924,13 @@ void SetRastState(std::string rastStateName)
 {
 	auto rastState = rastStateMap[rastStateName];
 	context->RSSetState(rastState->data);
+}
+
+void SetBlendState(std::string blendStateName)
+{
+	auto blendState = blendStateMap[blendStateName];
+	const float factor[4] = {};
+	context->OMSetBlendState(blendState->data, factor, 0xFFFFFFFF);
 }
 
 void SetConstantBufferVertexPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer)
