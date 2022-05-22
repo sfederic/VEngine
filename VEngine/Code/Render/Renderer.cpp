@@ -96,6 +96,7 @@ void SetVertexBuffer(Buffer* vertexBuffer);
 void SetIndexBuffer(Buffer* indexBuffer);
 void SetSampler(uint32_t shaderRegister, Sampler* sampler);
 void SetShaderResourcePixel(uint32_t shaderRegister, std::string textureName);
+void SetShaderResourceFromMaterial(uint32_t shaderRegister, Material* material);
 
 //Changes the global ambient param passed into shaders to change based on the day-night cycle in-game.
 XMFLOAT4 CalcGlobalAmbientBasedOnGameTime();
@@ -654,7 +655,7 @@ void RenderShadowPass()
 		//Set textures
 		Material* mat = mesh->material;
 		context->PSSetSamplers(0, 1, &mat->sampler->data);
-		context->PSSetShaderResources(0, 1, &mat->texture->srv);
+		SetShaderResourceFromMaterial(0, mesh->material);
 
 		//Draw
 		context->DrawIndexed(mesh->meshDataProxy->indices->size(), 0, 0);
@@ -875,7 +876,8 @@ void Renderer::RenderLightProbeViews()
 					context->PSSetShader(lightProbeShader->pixelShader, nullptr, 0);
 
 					context->PSSetSamplers(0, 1, &material->sampler->data);
-					context->PSSetShaderResources(0, 1, &material->texture->srv);
+
+					SetShaderResourceFromMaterial(0, material);
 
 					context->IASetVertexBuffers(0, 1, &mesh->pso->vertexBuffer->data, &stride, &offset);
 					context->IASetIndexBuffer(mesh->pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
@@ -1030,7 +1032,8 @@ void RenderPlanarReflections()
 		context->PSSetShader(planarReflectionShader->pixelShader, nullptr, 0);
 
 		context->PSSetSamplers(0, 1, &material->sampler->data);
-		context->PSSetShaderResources(0, 1, &material->texture->srv);
+
+		SetShaderResourceFromMaterial(0, material);
 
 		context->IASetVertexBuffers(0, 1, &mesh->pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
 		context->IASetIndexBuffer(mesh->pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
@@ -1398,7 +1401,8 @@ void RenderPolyboards()
 		polyboard->CalcVertices();
 
 		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
-		context->PSSetShaderResources(0, 1, &textureSystem.FindTexture2D(polyboard->textureData.filename)->srv);
+
+		SetShaderResourcePixel(0, polyboard->textureData.filename);
 
 		//Note: mapping to vertex/index buffers without NO_OVERWRITE causes flickering on meshes
 		//VERTEX MAP
@@ -1531,7 +1535,7 @@ void Renderer::RenderParticleEmitters()
 		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
 
 		//Set texture from emitter for every particle
-		context->PSSetShaderResources(0, 1, &textureSystem.FindTexture2D(emitter->textureData.filename)->srv);
+		SetShaderResourcePixel(0, emitter->textureData.filename);
 
 		spriteSystem.UpdateAndSetSpriteBuffers(context);
 
@@ -1585,7 +1589,8 @@ void Renderer::RenderSpritesInScreenSpace()
 		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
 
 		//Set texture from sprite
-		context->PSSetShaderResources(0, 1, &textureSystem.FindTexture2D(sprite.textureFilename)->srv);
+		auto textureSRV = textureSystem.FindTexture2D(sprite.textureFilename)->GetSRV();
+		context->PSSetShaderResources(0, 1, &textureSRV);
 
 		spriteSystem.BuildSpriteQuadForViewportRendering(sprite);
 
@@ -1855,7 +1860,7 @@ void SetRenderPipelineStates(MeshComponent* mesh)
 	context->PSSetShader(material->shader->pixelShader, nullptr, 0);
 
 	context->PSSetSamplers(0, 1, &material->sampler->data);
-	context->PSSetShaderResources(0, 1, &material->texture->srv);
+	SetShaderResourceFromMaterial(0, material);
 
 	SetVertexBuffer(pso->vertexBuffer);
 	SetIndexBuffer(pso->indexBuffer);
@@ -1937,10 +1942,17 @@ void SetSampler(uint32_t shaderRegister, Sampler* sampler)
 	context->PSSetSamplers(shaderRegister, 1, &sampler->data);
 }
 
+void SetShaderResourceFromMaterial(uint32_t shaderRegister, Material* material)
+{
+	auto textureSRV = material->texture->GetSRV();
+	context->PSSetShaderResources(shaderRegister, 1, &textureSRV);
+}
+
 void SetShaderResourcePixel(uint32_t shaderRegister, std::string textureName)
 {
 	auto texture = textureSystem.FindTexture2D(textureName);
-	context->PSSetShaderResources(shaderRegister, 1, &texture->srv);
+	auto textureSRV = texture->GetSRV();
+	context->PSSetShaderResources(shaderRegister, 1, &textureSRV);
 }
 
 XMFLOAT4 CalcGlobalAmbientBasedOnGameTime()
