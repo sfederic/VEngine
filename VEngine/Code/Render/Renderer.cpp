@@ -712,6 +712,9 @@ void Renderer::Render()
 	MapBuffer(cbTime, &timeData, sizeof(ShaderTimeData));
 	context->VSSetConstantBuffers(cbTimeRegister, 1, &cbTime);
 
+	//Setup render calls
+	PostProcessInstance::system.GetNumActors() == 0 ? RenderSetup() : RenderPostProcessSetup();
+
 	//RenderShadowPass();
 	//RenderPlanarReflections();
 	RenderMeshComponents();
@@ -765,8 +768,6 @@ void SetShaderMeshData(MeshComponent* mesh)
 void RenderMeshComponents()
 {
 	PROFILE_START
-
-	PostProcessInstance::system.GetNumActors() == 0 ? RenderSetup() : RenderPostProcessSetup();
 
 	SetShadowData();
 	UpdateLights();
