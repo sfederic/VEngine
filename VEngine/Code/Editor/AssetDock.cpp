@@ -256,7 +256,7 @@ void AssetDock::FilterAssets()
 void AssetDock::MeshFileClicked(const std::string meshFilename)
 {
     //Set spawner system as MeshActor
-    worldEditor.spawnSystem = &MeshActor::system;
+    worldEditor.spawnSystem = (IActorSystem*)&MeshActor::system;
     worldEditor.actorTemplateFilename = "";
 
     MeshActor::spawnMeshFilename = meshFilename;

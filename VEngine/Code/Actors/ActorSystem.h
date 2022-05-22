@@ -10,7 +10,7 @@
 #include "VString.h"
 
 template <typename T>
-struct ActorSystem : IActorSystem
+class ActorSystem : IActorSystem
 {
 	std::vector<T*> actors;
 
@@ -91,6 +91,11 @@ public:
 		{
 			actor->CreateAllComponents();
 		}
+	}
+
+	std::vector<T*>& GetActors() 
+	{
+		return actors;
 	}
 
 	virtual uint32_t GetNumActors() override
@@ -192,7 +197,7 @@ public:
 		return actor;
 	}
 
-	virtual std::vector<Actor*> GetActors() override
+	virtual std::vector<Actor*> GetActorsAsBaseClass() override
 	{
 		std::vector<Actor*> outActors;
 

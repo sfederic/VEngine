@@ -163,7 +163,7 @@ void FileSystem::LoadWorld(std::string worldName)
 		actorSystem->Deserialise(d);
 
 		//Make sure create()s are after deserialisation
-		for (auto actor : actorSystem->GetActors())
+		for (auto actor : actorSystem->GetActorsAsBaseClass())
 		{
 			actor->Create();
 		}

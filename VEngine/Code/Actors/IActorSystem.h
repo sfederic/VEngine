@@ -17,7 +17,7 @@ public:
 	virtual void Tick(float deltaTime) = 0;
 	virtual void Init() = 0;
 	std::string GetName() { return name; }
-	virtual std::vector<Actor*> GetActors() = 0;
+	virtual std::vector<Actor*> GetActorsAsBaseClass() = 0;
 	virtual Actor* SpawnActor(Transform transform) = 0;
 	virtual Actor* FindActorByName(std::string actorName) = 0;
 	virtual uint32_t GetNumActors() = 0;

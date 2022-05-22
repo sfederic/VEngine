@@ -264,7 +264,7 @@ void DebugMenu::RenderWorldStats()
 	uint64_t actorCount = 0;
 	for (auto actorSystem : world.activeActorSystems)
 	{
-		actorCount += actorSystem->GetActors().size();
+		actorCount += actorSystem->GetActorsAsBaseClass().size();
 	}
 
 	ImGui::Text("Active Actors: %d", actorCount);

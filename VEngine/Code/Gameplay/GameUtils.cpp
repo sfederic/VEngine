@@ -22,9 +22,9 @@ namespace GameUtils
 
 	Player* GetPlayer()
 	{
-		if (!Player::system.actors.empty())
+		if (!Player::system.GetActors().empty())
 		{
-			return Player::system.actors[0];
+			return Player::system.GetActors()[0];
 		}
 
 		return nullptr;
@@ -32,7 +32,7 @@ namespace GameUtils
 
 	Grid* GetGrid()
 	{
-		return Grid::system.actors[0];
+		return Grid::system.GetActors()[0];
 	}
 
 	bool CheckIfMemoryExists(const std::string& memoryName)

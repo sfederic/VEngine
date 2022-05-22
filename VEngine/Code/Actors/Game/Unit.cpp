@@ -292,16 +292,16 @@ void Unit::StartTurn()
 		std::vector<std::pair<float, int>> entranceDistances;
 
 		//Find entrance closest to unit and move to it
-		for (int i = 0; i < EntranceTrigger::system.actors.size(); i++)
+		for (int i = 0; i < EntranceTrigger::system.GetActors().size(); i++)
 		{
-			auto entrance = EntranceTrigger::system.actors[i];
+			auto entrance = EntranceTrigger::system.GetActors()[i];
 			float dist = XMVector3Length(entrance->GetPositionVector() - this->GetPositionVector()).m128_f32[0];
 			entranceDistances.push_back(std::make_pair(dist, i));
 		}
 
 		//Sort by distance
 		std::sort(entranceDistances.begin(), entranceDistances.end());
-		auto entranceTriggerToMoveTo = EntranceTrigger::system.actors[entranceDistances.front().second];
+		auto entranceTriggerToMoveTo = EntranceTrigger::system.GetActors()[entranceDistances.front().second];
 
 		entranceToEscapeTo = entranceTriggerToMoveTo;
 

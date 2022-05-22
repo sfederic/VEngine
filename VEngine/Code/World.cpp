@@ -152,7 +152,7 @@ std::vector<Actor*> World::GetAllActorsInWorld()
 
 	for (IActorSystem* actorSystem : activeActorSystems)
 	{
-		auto actors = actorSystem->GetActors();
+		auto actors = actorSystem->GetActorsAsBaseClass();
 		outActors.insert(outActors.end(), actors.begin(), actors.end());
 	}
 

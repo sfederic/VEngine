@@ -767,11 +767,11 @@ void SetShaderMeshData(MeshComponent* mesh)
 
 	//@Todo: light probe data should have its own constant buffer, for now in testing, it's part of ShaderMeshData
 	//Set light probe resources
-	if (!DiffuseProbeMap::system.actors.empty())
+	if (!DiffuseProbeMap::system.GetActors().empty())
 	{
 		context->PSSetShaderResources(environmentMapTextureRegister, 1, &lightProbeSRV);
 
-		ProbeData probeData = DiffuseProbeMap::system.actors[0]->FindClosestProbe(mesh->GetWorldPositionV());
+		ProbeData probeData = DiffuseProbeMap::system.GetActors()[0]->FindClosestProbe(mesh->GetWorldPositionV());
 		memcpy(meshData.SH, probeData.SH, sizeof(XMFLOAT4) * 9);
 	}
 
@@ -832,7 +832,7 @@ void Renderer::RenderLightProbeViews()
 
 	CreateLightProbeBuffers();
 
-	for (auto probeMap : DiffuseProbeMap::system.actors)
+	for (auto probeMap : DiffuseProbeMap::system.GetActors())
 	{
 		probeMap->probeData.clear();
 
@@ -995,10 +995,10 @@ void RenderPlanarReflections()
 {
 	PROFILE_START
 
-	if (ReflectionPlane::system.actors.empty()) return;
-	assert(ReflectionPlane::system.actors.size() == 1);
+	if (ReflectionPlane::system.GetActors().empty()) return;
+	assert(ReflectionPlane::system.GetActors().size() == 1);
 
-	auto reflectionPlane = ReflectionPlane::system.actors[0];
+	auto reflectionPlane = ReflectionPlane::system.GetActors()[0];
 
 	context->RSSetViewports(1, &viewport);
 	const float clearColour[4] = { 1.f, 0.f, 0.f, 0.f };
@@ -1978,7 +1978,7 @@ void RenderPostProcess()
 	if (numPostProcessInstances == 0) return;
 
 	assert(numPostProcessInstances == 1);
-	auto postProcessIntance = PostProcessInstance::system.actors[0];
+	auto postProcessIntance = PostProcessInstance::system.GetActors()[0];
 
 	SetNullRTV();
 
