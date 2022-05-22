@@ -717,6 +717,11 @@ void Renderer::Render()
 
 	//RenderShadowPass();
 	//RenderPlanarReflections();
+
+	SetShadowData();
+
+	UpdateLights();
+
 	RenderMeshComponents();
 	RenderInstanceMeshComponents();
 	RenderPolyboards();
@@ -768,9 +773,6 @@ void SetShaderMeshData(MeshComponent* mesh)
 void RenderMeshComponents()
 {
 	PROFILE_START
-
-	SetShadowData();
-	UpdateLights();
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
 
