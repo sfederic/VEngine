@@ -1887,12 +1887,11 @@ void SetRenderPipelineStates(MeshComponent* mesh)
 	context->PSSetSamplers(0, 1, &material->sampler->data);
 	context->PSSetShaderResources(0, 1, &material->texture->srv);
 
-	context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
-	context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
+	SetVertexBuffer(pso->vertexBuffer);
+	SetIndexBuffer(pso->indexBuffer);
 
 	MapBuffer(cbMaterial, &material->materialShaderData, sizeof(MaterialShaderData));
-	//context->VSSetConstantBuffers(cbMaterialRegister, 0, &cbMaterial);
-	context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
+	SetConstantBufferPixel(cbMaterialRegister, cbMaterial);
 }
 
 void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
