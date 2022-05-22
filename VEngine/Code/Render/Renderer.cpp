@@ -94,7 +94,7 @@ void SetConstantBufferVertex(uint32_t shaderRegister, ID3D11Buffer* constantBuff
 void SetConstantBufferPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer);
 void SetVertexBuffer(Buffer* vertexBuffer);
 void SetIndexBuffer(Buffer* indexBuffer);
-void SetDefaultSampler(uint32_t shaderRegister, Sampler* sampler);
+void SetSampler(uint32_t shaderRegister, Sampler* sampler);
 void SetShaderResourcePixel(uint32_t shaderRegister, std::string textureName);
 
 //Changes the global ambient param passed into shaders to change based on the day-night cycle in-game.
