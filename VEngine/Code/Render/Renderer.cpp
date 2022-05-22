@@ -747,7 +747,7 @@ void SetMatricesFromMesh(MeshComponent* mesh)
 	shaderMatrices.MakeTextureMatrix(mesh->material);
 
 	MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
-	context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+	SetConstantBufferVertex(cbMatrixRegister, cbMatrices);
 }
 
 void SetShaderMeshData(MeshComponent* mesh)
@@ -766,8 +766,7 @@ void SetShaderMeshData(MeshComponent* mesh)
 	}
 
 	MapBuffer(cbMeshData, &meshData, sizeof(ShaderMeshData));
-	context->VSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
-	context->PSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
+	SetConstantBufferVertexPixel(cbMeshDataRegister, cbMeshData);
 }
 
 void RenderMeshComponents()
@@ -1776,8 +1775,7 @@ void Renderer::Present()
 
 void SetLightResources()
 {
-	//Set lights buffer
-	context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
+	SetConstantBufferPixel(cbLightsRegister, cbLights);
 }
 
 void* Renderer::GetSwapchain()
