@@ -7,7 +7,7 @@
 
 using namespace DirectX;
 
-struct Texture2D;
+class Texture2D;
 struct Sampler;
 struct RastState;
 struct ShaderItem;

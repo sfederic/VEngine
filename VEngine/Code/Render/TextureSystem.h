@@ -3,7 +3,7 @@
 #include <string>
 #include "System.h"
 
-struct Texture2D;
+class Texture2D;
 
 //Maps and manages various texture (2D, 3D, etc.) formats to their filenames on disk.
 struct TextureSystem : System

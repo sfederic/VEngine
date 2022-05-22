@@ -2,7 +2,7 @@
 #include <string>
 
 struct MeshDataProxy;
-struct Texture2D;
+class Texture2D;
 struct ID3D11Buffer;
 struct ID3D11Device;
 struct ID3D11DeviceContext;

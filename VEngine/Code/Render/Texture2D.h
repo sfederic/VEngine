@@ -4,9 +4,8 @@
 struct ID3D11Resource;
 struct ID3D11ShaderResourceView;
 
-struct Texture2D
+class Texture2D
 {
-private:
 	std::string filename;
 
 	ID3D11Resource* data = nullptr;
