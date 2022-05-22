@@ -15,8 +15,8 @@ void SpriteSheet::Create()
 	
 	Texture2D* texture = textureSystem.FindTexture2D(textureData.filename);
 
-	int w = texture->width / numSheetColumns;
-	int h = texture->height / numSheetRows;
+	int w = texture->GetWidth() / numSheetColumns;
+	int h = texture->GetHeight() / numSheetRows;
 
 	int x = w * currentSheetColumn;
 	int y = h * currentSheetRow;
@@ -68,8 +68,8 @@ void SpriteSheet::UpdateSprite()
 {
 	Texture2D* texture = textureSystem.FindTexture2D(textureData.filename);
 
-	int w = texture->width / numSheetColumns;
-	int h = texture->height / numSheetRows;
+	int w = texture->GetWidth() / numSheetColumns;
+	int h = texture->GetHeight() / numSheetRows;
 
 	int x = w * currentSheetColumn;
 	int y = h * currentSheetRow;

@@ -13,11 +13,11 @@ TextureSystem::TextureSystem() : System("TextureSystem")
 
 void TextureSystem::AddTexture2D(Texture2D* texture)
 {
-	texture2DMap[texture->filename] = texture;
+	texture2DMap[texture->GetFilename()] = texture;
 
 	if (systemState == SystemStates::Loaded)
 	{
-		texture = RenderUtils::CreateTexture(texture->filename);
+		texture = RenderUtils::CreateTexture(texture->GetFilename());
 	}
 }
 

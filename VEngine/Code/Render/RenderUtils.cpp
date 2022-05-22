@@ -125,7 +125,7 @@ namespace RenderUtils
 
 		Texture2D* texture = textureSystem.FindTexture2D(textureFilename);
 
-		std::wstring path = L"Textures/" + VString::stows(texture->filename);
+		std::wstring path = L"Textures/" + VString::stows(texture->GetFilename());
 
 		assert(std::filesystem::exists(path) && "Texture file doesn't exist");
 
@@ -135,8 +135,8 @@ namespace RenderUtils
 		assert(resource);
 		assert(srv);
 
-		texture->data = resource;
-		texture->srv = srv;
+		texture->SetTextureData(resource);
+		texture->SetSRV(srv);
 
 		//CreateWICTextureFromFile() doesn't like ID3D11Texture2D, so casting down here
 		//to get the texture Desc.
@@ -146,8 +146,8 @@ namespace RenderUtils
 		D3D11_TEXTURE2D_DESC texDesc = {};
 		textureResource->GetDesc(&texDesc);
 
-		texture->width = texDesc.Width;
-		texture->height = texDesc.Height;
+		texture->SetWidth(texDesc.Width);
+		texture->SetHeight(texDesc.Height);
 
 		return texture;
 	}

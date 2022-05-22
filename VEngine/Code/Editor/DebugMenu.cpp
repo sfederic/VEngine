@@ -186,7 +186,7 @@ void DebugMenu::IterateOverProperties(Properties& props)
 			Texture2D* texture = props.GetData<Texture2D>(name);
 			ImGui::Text(name.c_str());
 			ImGui::SameLine();
-			ImGui::Text(texture->filename.c_str());
+			ImGui::Text(texture->GetFilename().c_str());
 		}
 		else if (props.CheckType<Transform>(name))
 		{
