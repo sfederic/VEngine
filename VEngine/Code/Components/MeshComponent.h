@@ -6,7 +6,7 @@
 #include "Render/PipelineObjects.h"
 
 struct ShaderItem;
-struct Material;
+class Material;
 struct Skeleton;
 
 struct MeshComponent : SpatialComponent

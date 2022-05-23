@@ -10,7 +10,7 @@ using namespace DirectX;
 struct MaterialShaderData;
 struct MeshComponent;
 struct Animation;
-struct Material;
+class Material;
 
 struct Vertex
 {

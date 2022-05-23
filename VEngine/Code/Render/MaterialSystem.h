@@ -4,7 +4,7 @@
 #include <memory>
 #include "System.h"
 
-struct Material;
+class Material;
 
 struct MaterialSystem : System
 {

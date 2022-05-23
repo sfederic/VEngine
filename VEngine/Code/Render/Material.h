@@ -28,32 +28,34 @@ struct MaterialShaderData
 	int useTexture = true; //Keep in mind that bools in HLSL are 4 bytes
 };
 
-struct Material
+class Material
 {
 	UID uid = GenerateUID();
 
-	XMFLOAT2 uvOffsetSpeed = XMFLOAT2(0.f, 0.f);
-	float uvRotationSpeed = 0.f;
-
-	MaterialShaderData materialShaderData;
-
+public:
 	Texture2D* texture = nullptr;
 	Sampler* sampler = nullptr;
 	RastState* rastState = nullptr;
 	ShaderItem* shader = nullptr;
 	BlendState* blendState = nullptr;
 
-	std::string name;
-
 	TextureData textureData;
 	ShaderData shaderData;
+
+	XMFLOAT2 uvOffsetSpeed = XMFLOAT2(0.f, 0.f);
+	float uvRotationSpeed = 0.f;
+
+	MaterialShaderData materialShaderData;
 
 	VEnum rastStateValue;
 	VEnum blendStateValue;
 
+public:
 	Material();
 	Material(std::string textureFilename_, std::string shaderFilename_);
 	virtual void Create();
 	virtual void Destroy();
 	virtual Properties GetProps();
+
+	UID GetUID() { return uid; }
 };

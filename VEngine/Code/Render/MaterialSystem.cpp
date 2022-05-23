@@ -12,8 +12,7 @@ MaterialSystem::MaterialSystem() : System("MaterialSystem")
 Material* MaterialSystem::CreateMaterial()
 {
 	auto material = new Material();
-	material->uid = GenerateUID();
-	materials.emplace(material->uid, material);
+	materials.emplace(material->GetUID(), material);
 	return material;
 }
 
