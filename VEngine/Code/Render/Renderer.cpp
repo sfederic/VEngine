@@ -148,7 +148,7 @@ ConstantBuffer<ShaderMatrices>* cbMatrices;
 ConstantBuffer<MaterialShaderData>* cbMaterial;
 ConstantBuffer<ShaderLights>* cbLights;
 ConstantBuffer<ShaderTimeData>* cbTime;
-ID3D11Buffer* cbMeshData;
+ConstantBuffer<ShaderMeshData>* cbMeshData;
 ID3D11Buffer* cbSkinningData;
 ID3D11Buffer* cbPostProcess;
 ID3D11Buffer* linesBuffer;
@@ -505,8 +505,7 @@ void CreateConstantBuffers()
 
 	//Mesh data buffer
 	ShaderMeshData meshData = {};
-	cbMeshData = RenderUtils::CreateDynamicBuffer(sizeof(ShaderMeshData),
-		D3D11_BIND_CONSTANT_BUFFER, &meshData);
+	cbMeshData = new ConstantBuffer<ShaderMeshData>(&meshData, cbMeshDataRegister);
 	assert(cbMeshData);
 
 	//Skinning data
@@ -778,8 +777,8 @@ void SetShaderMeshData(MeshComponent* mesh)
 		memcpy(meshData.SH, probeData.SH, sizeof(XMFLOAT4) * 9);
 	}
 
-	MapBuffer(cbMeshData, &meshData, sizeof(ShaderMeshData));
-	SetConstantBufferVertexPixel(cbMeshDataRegister, cbMeshData);
+	cbMeshData->Map(&meshData);
+	cbMeshData->SetVSAndPS();
 }
 
 void RenderMeshComponents()
@@ -906,9 +905,8 @@ void Renderer::RenderLightProbeViews()
 					//Set mesh data to shader
 					ShaderMeshData meshData = {};
 					meshData.position = mesh->GetPosition();
-					MapBuffer(cbMeshData, &meshData, sizeof(ShaderMeshData));
-					context->VSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
-					context->PSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
+					cbMeshData->Map(&meshData);
+					cbMeshData->SetVSAndPS();
 
 					//Draw
 					context->DrawIndexed(mesh->meshDataProxy->indices->size(), 0, 0);
@@ -1061,9 +1059,8 @@ void RenderPlanarReflections()
 		//Set mesh data to shader
 		ShaderMeshData meshData = {};
 		meshData.position = mesh->GetPosition();
-		MapBuffer(cbMeshData, &meshData, sizeof(ShaderMeshData));
-		context->VSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
-		context->PSSetConstantBuffers(cbMeshDataRegister, 1, &cbMeshData);
+		cbMeshData->Map(&meshData);
+		cbMeshData->SetVSAndPS();
 
 		//Draw
 		context->DrawIndexed(mesh->meshDataProxy->indices->size(), 0, 0);
