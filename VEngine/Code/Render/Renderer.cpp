@@ -147,7 +147,7 @@ IDXGIFactory6* dxgiFactory;
 ConstantBuffer<ShaderMatrices>* cbMatrices;
 ConstantBuffer<MaterialShaderData>* cbMaterial;
 ConstantBuffer<ShaderLights>* cbLights;
-ID3D11Buffer* cbTime;
+ConstantBuffer<ShaderTimeData>* cbTime;
 ID3D11Buffer* cbMeshData;
 ID3D11Buffer* cbSkinningData;
 ID3D11Buffer* cbPostProcess;
@@ -500,8 +500,7 @@ void CreateConstantBuffers()
 
 	//Time buffer
 	ShaderTimeData timeData = {};
-	cbTime = RenderUtils::CreateDynamicBuffer(sizeof(ShaderTimeData),
-		D3D11_BIND_CONSTANT_BUFFER, &timeData);
+	cbTime = new ConstantBuffer<ShaderTimeData>(&timeData, cbTimeRegister);
 	assert(cbTime);
 
 	//Mesh data buffer
@@ -723,8 +722,8 @@ void Renderer::Render()
 	timeData.deltaTime = Core::GetDeltaTime();
 	timeData.timeSinceStartup = Core::timeSinceStartup;
 
-	MapBuffer(cbTime, &timeData, sizeof(ShaderTimeData));
-	context->VSSetConstantBuffers(cbTimeRegister, 1, &cbTime);
+	cbTime->Map(&timeData);
+	cbTime->SetVS();
 
 	//Setup render calls
 	PostProcessInstance::system.GetNumActors() == 0 ? RenderSetup() : RenderPostProcessSetup();
