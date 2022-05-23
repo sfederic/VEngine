@@ -185,6 +185,12 @@ struct ShaderMeshData
 	float pad;
 };
 
+struct ShaderSkinningData
+{
+	inline static const int MAX_SKINNING_DATA = 96;
+	XMMATRIX skinningMatrices[MAX_SKINNING_DATA];
+};
+
 struct ShaderPostProcessData
 {
 	float exposure = 1.1f;
