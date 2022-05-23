@@ -46,6 +46,7 @@ namespace RenderUtils
 		data.pSysMem = initData;
 
 		HR(device->CreateBuffer(&desc, &data, &buffer));
+		assert(buffer);
 
 		return buffer;
 	}
