@@ -43,6 +43,7 @@
 #include "Particle/Polyboard.h"
 #include "Gameplay/GameInstance.h"
 #include "Texture2D.h"
+#include "ConstantBuffer.h"
 
 void CreateFactory();
 void CreateDevice();
@@ -143,7 +144,7 @@ IDXGISwapChain3* swapchain;
 IDXGIFactory6* dxgiFactory;
 
 //Constant buffers and data
-ID3D11Buffer* cbMatrices;
+ConstantBuffer<ShaderMatrices>* cbMatrices;
 ID3D11Buffer* cbMaterial;
 ID3D11Buffer* cbLights;
 ID3D11Buffer* cbTime;
@@ -484,7 +485,7 @@ void CreateConstantBuffers()
 	//Shader matrix constant buffer
 	shaderMatrices.Create();
 
-	cbMatrices = RenderUtils::CreateDynamicBuffer(sizeof(shaderMatrices), D3D11_BIND_CONSTANT_BUFFER, &shaderMatrices);
+	cbMatrices = new ConstantBuffer<ShaderMatrices>(&shaderMatrices, cbMatrixRegister);
 	assert(cbMatrices);
 
 	//Material buffer
@@ -649,8 +650,8 @@ void RenderShadowPass()
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		shaderMatrices.MakeTextureMatrix(mesh->material);
 
-		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
-		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+		cbMatrices->Map(&shaderMatrices);
+		cbMatrices->SetVS();
 
 		//Set textures
 		Material* mat = mesh->material;
@@ -756,8 +757,8 @@ void SetMatricesFromMesh(MeshComponent* mesh)
 	shaderMatrices.MakeModelViewProjectionMatrix();
 	shaderMatrices.MakeTextureMatrix(mesh->material);
 
-	MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
-	SetConstantBufferVertex(cbMatrixRegister, cbMatrices);
+	cbMatrices->Map(&shaderMatrices);
+	cbMatrices->SetVS();
 }
 
 void SetShaderMeshData(MeshComponent* mesh)
@@ -892,8 +893,8 @@ void Renderer::RenderLightProbeViews()
 					shaderMatrices.MakeModelViewProjectionMatrix();
 					shaderMatrices.MakeTextureMatrix(mesh->material);
 
-					MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
-					context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+					cbMatrices->Map(&shaderMatrices);
+					cbMatrices->SetVS();
 
 					//Set mesh data to shader
 					ShaderMeshData meshData = {};
@@ -1047,8 +1048,8 @@ void RenderPlanarReflections()
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		shaderMatrices.MakeTextureMatrix(mesh->material);
 
-		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
-		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+		cbMatrices->Map(&shaderMatrices);
+		cbMatrices->SetVS();
 
 		//Set mesh data to shader
 		ShaderMeshData meshData = {};
@@ -1078,8 +1079,8 @@ void RenderInstanceMeshComponents()
 	shaderMatrices.model = XMMatrixIdentity();
 	shaderMatrices.MakeModelViewProjectionMatrix();
 
-	MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
-	context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+	cbMatrices->Map(&shaderMatrices);
+	cbMatrices->SetVS();
 
 	for (InstanceMeshComponent* instanceMesh : InstanceMeshComponent::system.components)
 	{
@@ -1092,8 +1093,8 @@ void RenderInstanceMeshComponents()
 
 		//Update texture matrix
 		shaderMatrices.MakeTextureMatrix(instanceMesh->material);
-		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
-		SetConstantBufferVertex(cbMatrixRegister, cbMatrices);
+		cbMatrices->Map(&shaderMatrices);
+		cbMatrices->SetVS();
 
 		//Update instance data and set SRV
 		MapBuffer(instanceMesh->structuredBuffer, instanceMesh->instanceData.data(), sizeof(InstanceData) * instanceMesh->instanceData.size());
@@ -1126,8 +1127,6 @@ void RenderBounds()
 		//Feels like it might be the GPU doing some funny memory thing.
 		SetVertexBuffer(debugBox.boxMesh->GetVertexBuffer());
 
-		SetConstantBufferVertex(cbMatrixRegister, cbMatrices);
-
 		//Set debug wireframe material colour
 		materialShaderData.ambient = XMFLOAT4(0.75f, 0.75f, 0.75f, 1.0f);
 		MapBuffer(cbMaterial, &materialShaderData, sizeof(MaterialShaderData));
@@ -1156,8 +1155,8 @@ void RenderBounds()
 			shaderMatrices.model.r[2].m128_f32[2] += 0.01f;
 
 			shaderMatrices.MakeModelViewProjectionMatrix();
-			MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
-			SetConstantBufferVertex(cbMatrixRegister, cbMatrices);
+			cbMatrices->Map(&shaderMatrices);
+			cbMatrices->SetVS();
 
 			DrawMesh(debugBox.boxMesh);
 		}
@@ -1170,7 +1169,6 @@ void RenderBounds()
 		SetShader(L"SolidColour.hlsl");
 
 		SetVertexBuffer(debugBox.boxMesh->GetVertexBuffer());
-		SetConstantBufferVertex(cbMatrixRegister, cbMatrices);
 
 		for (auto boxTrigger : BoxTriggerComponent::system.components)
 		{
@@ -1184,7 +1182,8 @@ void RenderBounds()
 			shaderMatrices.model.r[3] += XMLoadFloat3(&boxTrigger->boundingBox.Center);
 
 			shaderMatrices.MakeModelViewProjectionMatrix();
-			MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
+			cbMatrices->Map(&shaderMatrices);
+			cbMatrices->SetVS();
 
 			//Set trigger wireframe material colour
 			materialShaderData.ambient = boxTrigger->renderWireframeColour;
@@ -1249,7 +1248,6 @@ void RenderCameraMeshes()
 	SetRastState(RastStates::wireframe);
 	SetShader(L"SolidColour.hlsl");
 	SetVertexBuffer(debugCamera.mesh->GetVertexBuffer());
-	SetConstantBufferVertexPixel(cbMatrixRegister, cbMatrices);
 
 	materialShaderData.ambient = XMFLOAT4(1.0f, 0.0f, 0.f, 1.0f); //Make cameras red
 	MapBuffer(cbMaterial, &materialShaderData, sizeof(MaterialShaderData));
@@ -1259,7 +1257,8 @@ void RenderCameraMeshes()
 	{
 		shaderMatrices.model = camera->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
-		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
+		cbMatrices->Map(&shaderMatrices);
+		cbMatrices->SetVS();
 
 		DrawMesh(debugCamera.mesh);
 	}
@@ -1275,8 +1274,6 @@ void RenderLightMeshes()
 
 	SetRastState(RastStates::wireframe);
 	SetShader(L"SolidColour.hlsl");
-
-	SetConstantBufferVertex(cbMatrixRegister, cbMatrices);
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
 	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
@@ -1294,7 +1291,8 @@ void RenderLightMeshes()
 	{
 		shaderMatrices.model = directionalLight->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
-		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
+		cbMatrices->Map(&shaderMatrices);
+		cbMatrices->SetVS();
 
 		DrawMesh(debugSphere.sphereMesh);
 	}
@@ -1306,7 +1304,8 @@ void RenderLightMeshes()
 	{
 		shaderMatrices.model = pointLight->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
-		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
+		cbMatrices->Map(&shaderMatrices);
+		cbMatrices->SetVS();
 
 		DrawMesh(debugIcoSphere.mesh);
 	}
@@ -1318,7 +1317,8 @@ void RenderLightMeshes()
 	{
 		shaderMatrices.model = spotLight->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
-		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
+		cbMatrices->Map(&shaderMatrices);
+		cbMatrices->SetVS();
 
 		DrawMesh(debugCone.mesh);
 	}
@@ -1375,8 +1375,8 @@ void RenderSkeletonBones()
 	shaderMatrices.model = XMMatrixIdentity();
 	shaderMatrices.MakeModelViewProjectionMatrix();
 
-	MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
-	context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+	cbMatrices->Map(&shaderMatrices);
+	cbMatrices->SetVS();
 
 	context->Draw(lines.size() * 2, 0);
 }
@@ -1389,8 +1389,8 @@ void RenderPolyboards()
 	shaderMatrices.model = XMMatrixIdentity();
 	shaderMatrices.MakeModelViewProjectionMatrix();
 
-	MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
-	SetConstantBufferVertex(cbMatrixRegister, cbMatrices);
+	cbMatrices->Map(&shaderMatrices);
+	cbMatrices->SetVS();
 
 	SetBlendState(BlendStates::Default);
 	SetRastState(RastStates::noBackCull);
@@ -1452,8 +1452,8 @@ void RenderSpriteSheets()
 		shaderMatrices.model = spriteSheet->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
 
-		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
-		SetConstantBufferVertex(cbMatrixRegister, cbMatrices);
+		cbMatrices->Map(&shaderMatrices);
+		cbMatrices->SetVS();
 
 		context->DrawIndexed(6, 0, 0);
 	}
@@ -1549,8 +1549,8 @@ void Renderer::RenderParticleEmitters()
 			shaderMatrices.model = particle.transform.GetAffine();
 			shaderMatrices.MakeModelViewProjectionMatrix();
 
-			MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
-			context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+			cbMatrices->Map(&shaderMatrices);
+			cbMatrices->SetVS();
 
 			//Draw
 			//@Todo: do instancing here for particles. (was reading on instancing for particles, 
@@ -1600,8 +1600,8 @@ void Renderer::RenderSpritesInScreenSpace()
 		shaderMatrices.model = XMMatrixIdentity();
 		shaderMatrices.MakeModelViewProjectionMatrix();
 
-		MapBuffer(cbMatrices, &shaderMatrices, sizeof(ShaderMatrices));
-		context->VSSetConstantBuffers(cbMatrixRegister, 1, &cbMatrices);
+		cbMatrices->Map(&shaderMatrices);
+		cbMatrices->SetVS();
 
 		//Draw
 		context->DrawIndexed(6, 0, 0);
