@@ -185,13 +185,6 @@ int framesCollected = -1;
 //Quality = 0 and Count = 1 are the 'default'
 DXGI_SAMPLE_DESC sampleDesc;
 
-const int cbMatrixRegister = 0;
-const int cbMaterialRegister = 1;
-const int cbSkinningRegister = 2;
-const int cbLightsRegister = 3;
-const int cbTimeRegister = 4;
-const int cbMeshDataRegister = 5;
-
 const int shadowMapTextureResgiter = 1;
 const int reflectionTextureResgiter = 2;
 const int instanceSRVRegister = 3;
@@ -482,6 +475,14 @@ void CreateQueries()
 
 void CreateConstantBuffers()
 {
+	//Registers
+	const int cbMatrixRegister = 0;
+	const int cbMaterialRegister = 1;
+	const int cbSkinningRegister = 2;
+	const int cbLightsRegister = 3;
+	const int cbTimeRegister = 4;
+	const int cbMeshDataRegister = 5;
+
 	//Shader matrix constant buffer
 	shaderMatrices.Create();
 
