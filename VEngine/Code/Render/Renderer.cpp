@@ -146,7 +146,7 @@ IDXGIFactory6* dxgiFactory;
 //Constant buffers and data
 ConstantBuffer<ShaderMatrices>* cbMatrices;
 ConstantBuffer<MaterialShaderData>* cbMaterial;
-ID3D11Buffer* cbLights;
+ConstantBuffer<ShaderLights>* cbLights;
 ID3D11Buffer* cbTime;
 ID3D11Buffer* cbMeshData;
 ID3D11Buffer* cbSkinningData;
@@ -494,9 +494,8 @@ void CreateConstantBuffers()
 	assert(cbMaterial);
 
 	//Lights buffer
-	ShaderLights shaderLights;
-	cbLights = RenderUtils::CreateDynamicBuffer(sizeof(ShaderLights),
-		D3D11_BIND_CONSTANT_BUFFER, &shaderLights);
+	ShaderLights shaderLights = {};
+	cbLights = new ConstantBuffer<ShaderLights>(&shaderLights, cbLightsRegister);
 	assert(cbLights);
 
 	//Time buffer
@@ -598,6 +597,11 @@ void SetShadowData()
 	{
 		shaderLights.shadowsEnabled = false;
 	}
+}
+
+void SetLightResources()
+{
+	cbLights->SetPS();
 }
 
 void DrawMesh(MeshComponent* mesh)
@@ -860,7 +864,7 @@ void Renderer::RenderLightProbeViews()
 				UpdateLights();
 
 				//Set lights buffer
-				context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
+				cbLights->SetPS();
 
 				//Set shadow resources (not now for lightprobes)
 				//context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
@@ -1016,7 +1020,7 @@ void RenderPlanarReflections()
 	UpdateLights();
 
 	//Set lights buffer
-	context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
+	cbLights->SetPS();
 
 	//Set shadow resources (not now for reflections)
 	//context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
@@ -1106,7 +1110,7 @@ void RenderInstanceMeshComponents()
 		context->PSSetShaderResources(instanceSRVRegister, 1, &instanceMesh->srv);
 
 		//Set lights buffer
-		SetConstantBufferPixel(cbLightsRegister, cbLights);
+		cbLights->SetPS();
 
 		DrawMeshInstanced(instanceMesh);
 	}
@@ -1665,8 +1669,8 @@ void UpdateLights()
 	shaderLights.globalAmbient = CalcGlobalAmbientBasedOnGameTime();
 	XMStoreFloat4(&shaderLights.eyePosition, activeCamera->transform.world.r[3]);
 
-	MapBuffer(cbLights, &shaderLights, sizeof(ShaderLights));
-	context->PSSetConstantBuffers(cbLightsRegister, 1, &cbLights);
+	cbLights->Map(&shaderLights);
+	cbLights->SetPS();
 
 	PROFILE_END
 }
@@ -1755,11 +1759,6 @@ void Renderer::Present()
 	HR(swapchain->Present(1, 0));
 
 	EndGPUQueries();
-}
-
-void SetLightResources()
-{
-	SetConstantBufferPixel(cbLightsRegister, cbLights);
 }
 
 void* Renderer::GetSwapchain()
