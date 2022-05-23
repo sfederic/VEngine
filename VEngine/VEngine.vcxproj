@@ -257,6 +257,7 @@
     <ClCompile Include="Code\Actors\DiffuseProbeMap.cpp" />
     <ClCompile Include="Code\Actors\PostProcessInstance.cpp" />
     <ClCompile Include="Code\Render\Texture2D.cpp" />
+    <ClCompile Include="Code\Render\ConstantBuffer.cpp" />
     <ClInclude Include="Code\Editor\ImGuizmo\ImSequencer.h" />
     <ClInclude Include="Code\Gameplay\BattleEnums.h" />
     <ClInclude Include="Code\Particle\FireParticle.h" />
@@ -512,6 +513,7 @@
     <ClInclude Include="Code\Actors\DiffuseProbeMap.h" />
     <ClInclude Include="Code\Actors\PostProcessInstance.h" />
     <ClInclude Include="Code\Render\Texture2D.h" />
+    <ClInclude Include="Code\Render\ConstantBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
