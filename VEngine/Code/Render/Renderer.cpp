@@ -150,7 +150,7 @@ ConstantBuffer<ShaderLights>* cbLights;
 ConstantBuffer<ShaderTimeData>* cbTime;
 ConstantBuffer<ShaderMeshData>* cbMeshData;
 ConstantBuffer<ShaderSkinningData>* cbSkinningData;
-ID3D11Buffer* cbPostProcess;
+ConstantBuffer<ShaderPostProcessData>* cbPostProcess;
 ID3D11Buffer* linesBuffer;
 
 //Viewport
@@ -515,8 +515,7 @@ void CreateConstantBuffers()
 
 	//Post process data
 	ShaderPostProcessData postProcessData = {};
-	cbPostProcess = RenderUtils::CreateDynamicBuffer(sizeof(ShaderPostProcessData),
-		D3D11_BIND_CONSTANT_BUFFER, &postProcessData);
+	cbPostProcess = new ConstantBuffer<ShaderPostProcessData>(&postProcessData, 0);
 	assert(cbPostProcess);
 }
 
@@ -1995,8 +1994,8 @@ void RenderPostProcess()
 	SetShader(L"PostProcess.hlsl");
 
 	//Set constant buffer data
-	MapBuffer(cbPostProcess, &postProcessIntance->postProcessData, sizeof(ShaderPostProcessData));
-	SetConstantBufferPixel(0, cbPostProcess);
+	cbPostProcess->Map(&postProcessIntance->postProcessData);
+	cbPostProcess->SetPS();
 
 	context->PSSetShaderResources(0, 1, &postSRV);
 	SetSampler(0, RenderUtils::GetDefaultSampler());
