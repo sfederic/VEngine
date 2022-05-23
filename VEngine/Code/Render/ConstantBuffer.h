@@ -22,7 +22,7 @@ public:
 	{
 		D3D11_MAPPED_SUBRESOURCE mapped = {};
 		HR(RenderUtils::context->Map(buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped));
-		std::memcpy(mapped.pData, &shaderData, sizeof(T));
+		std::memcpy(mapped.pData, shaderData, sizeof(T));
 		RenderUtils::context->Unmap(buffer, 0);
 	}
 
