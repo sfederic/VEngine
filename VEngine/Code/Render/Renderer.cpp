@@ -1985,7 +1985,7 @@ void RenderPostProcess()
 	ID3D11ShaderResourceView* nullSRV = nullptr;
 	ID3D11UnorderedAccessView* nullUAV = nullptr;
 
-	SetRastState(RastStates::solid);
+	context->RSSetState(rastStateMap[RastStates::solid]->data);
 
 	context->IASetInputLayout(nullptr);
 	context->IASetVertexBuffers(0, 0, nullptr, nullptr, nullptr);
