@@ -800,6 +800,11 @@ void RenderMeshComponents()
 		SetMatricesFromMesh(mesh);
 		SetShaderMeshData(mesh);
 
+		if (!mesh->GetSkeleton()->animations.empty())
+		{
+			AnimateSkeletalMesh(mesh);
+		}
+
 		DrawMesh(mesh);
 	}	
 
@@ -1468,7 +1473,8 @@ void AnimateSkeletalMesh(MeshComponent* mesh)
 
 	if (skeleton && !skeleton->joints.empty())
 	{
-		std::vector<XMMATRIX> skinningData;
+		int skinningDataIndex = 0;
+		ShaderSkinningData skinningData = {};
 
 		//Set shader for skeletal animation
 		ShaderItem* shader = shaderSystem.FindShader(L"Animation.hlsl");
@@ -1490,14 +1496,16 @@ void AnimateSkeletalMesh(MeshComponent* mesh)
 
 				anim.Interpolate(mesh->currentAnimationTime, joint, skeleton);
 
-				skinningData.push_back(joint.currentPose);
+				skinningData.skinningMatrices[skinningDataIndex] = joint.currentPose;
+				skinningDataIndex++;
+				assert(skinningDataIndex < ShaderSkinningData::MAX_SKINNING_DATA);
 			}
 		}
 
 		//Update skinning constant buffers
-		if (!skinningData.empty())
+		if (skinningDataIndex > 0)
 		{
-			MapBuffer(cbSkinningData, skinningData.data(), sizeof(XMMATRIX) * skinningData.size());
+			MapBuffer(cbSkinningData, &skinningData, sizeof(ShaderSkinningData));
 			context->VSSetConstantBuffers(cbSkinningRegister, 1, &cbSkinningData);
 		}
 	}
