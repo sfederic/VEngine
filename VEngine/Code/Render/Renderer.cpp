@@ -145,7 +145,7 @@ IDXGIFactory6* dxgiFactory;
 
 //Constant buffers and data
 ConstantBuffer<ShaderMatrices>* cbMatrices;
-ID3D11Buffer* cbMaterial;
+ConstantBuffer<MaterialShaderData>* cbMaterial;
 ID3D11Buffer* cbLights;
 ID3D11Buffer* cbTime;
 ID3D11Buffer* cbMeshData;
@@ -489,9 +489,8 @@ void CreateConstantBuffers()
 	assert(cbMatrices);
 
 	//Material buffer
-	MaterialShaderData materialShaderData;
-	cbMaterial = RenderUtils::CreateDynamicBuffer(sizeof(MaterialShaderData), 
-		D3D11_BIND_CONSTANT_BUFFER, &materialShaderData);
+	MaterialShaderData materialShaderData = {};
+	cbMaterial = new ConstantBuffer<MaterialShaderData>(&materialShaderData, cbMaterialRegister);
 	assert(cbMaterial);
 
 	//Lights buffer
@@ -883,8 +882,8 @@ void Renderer::RenderLightProbeViews()
 					context->IASetVertexBuffers(0, 1, &mesh->pso->vertexBuffer->data, &stride, &offset);
 					context->IASetIndexBuffer(mesh->pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
 
-					MapBuffer(cbMaterial, &material->materialShaderData, sizeof(MaterialShaderData));
-					context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
+					cbMaterial->Map(&material->materialShaderData);
+					cbMaterial->SetPS();
 
 					//Set matrices
 					shaderMatrices.view = XMMatrixLookAtLH(probeMatrix.r[3],
@@ -1039,8 +1038,8 @@ void RenderPlanarReflections()
 		context->IASetVertexBuffers(0, 1, &mesh->pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
 		context->IASetIndexBuffer(mesh->pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
 
-		MapBuffer(cbMaterial, &material->materialShaderData, sizeof(MaterialShaderData));
-		context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
+		cbMaterial->Map(&material->materialShaderData);
+		cbMaterial->SetPS();
 
 		//Set matrices
 		shaderMatrices.view = reflectionPlane->GetReflectionViewMatrix();
@@ -1129,8 +1128,8 @@ void RenderBounds()
 
 		//Set debug wireframe material colour
 		materialShaderData.ambient = XMFLOAT4(0.75f, 0.75f, 0.75f, 1.0f);
-		MapBuffer(cbMaterial, &materialShaderData, sizeof(MaterialShaderData));
-		SetConstantBufferPixel(cbMaterialRegister, cbMaterial);
+		cbMaterial->Map(&materialShaderData);
+		cbMaterial->SetPS();
 
 		for(auto mesh : MeshComponent::system.components)
 		{
@@ -1187,8 +1186,8 @@ void RenderBounds()
 
 			//Set trigger wireframe material colour
 			materialShaderData.ambient = boxTrigger->renderWireframeColour;
-			MapBuffer(cbMaterial, &materialShaderData, sizeof(MaterialShaderData));
-			context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
+			cbMaterial->Map(&materialShaderData);
+			cbMaterial->SetPS();
 
 			DrawMesh(debugBox.boxMesh);
 		}
@@ -1250,8 +1249,8 @@ void RenderCameraMeshes()
 	SetVertexBuffer(debugCamera.mesh->GetVertexBuffer());
 
 	materialShaderData.ambient = XMFLOAT4(1.0f, 0.0f, 0.f, 1.0f); //Make cameras red
-	MapBuffer(cbMaterial, &materialShaderData, sizeof(MaterialShaderData));
-	SetConstantBufferVertexPixel(cbMaterialRegister, cbMaterial);
+	cbMaterial->Map(&materialShaderData);
+	cbMaterial->SetPS();
 
 	for (auto camera : CameraComponent::system.components)
 	{
@@ -1279,10 +1278,10 @@ void RenderLightMeshes()
 	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
 
 	//Set debug sphere wireframe material colour
-	MaterialShaderData materialShaderData;
+	MaterialShaderData materialShaderData = {};
 	materialShaderData.ambient = XMFLOAT4(1.f, 1.f, 0.f, 1.0f);
-	MapBuffer(cbMaterial, &materialShaderData, sizeof(MaterialShaderData));
-	SetConstantBufferPixel(cbMaterialRegister, cbMaterial);
+	cbMaterial->Map(&materialShaderData);
+	cbMaterial->SetPS();
 
 	//DIRECTIONAL LIGHTS
 	SetVertexBuffer(debugSphere.sphereMesh->GetVertexBuffer());
@@ -1336,8 +1335,8 @@ void RenderSkeletonBones()
 
 	MaterialShaderData materialShaderData = {};
 	materialShaderData.ambient = XMFLOAT4(0.54f, 0.80f, 0.92f, 1.0f); //Sky blue
-	MapBuffer(cbMaterial, &materialShaderData, sizeof(MaterialShaderData));
-	context->PSSetConstantBuffers(cbMaterialRegister, 1, &cbMaterial);
+	cbMaterial->Map(&materialShaderData);
+	cbMaterial->SetPS();
 
 	for (auto mesh : MeshComponent::system.components)
 	{
@@ -1865,8 +1864,8 @@ void SetRenderPipelineStates(MeshComponent* mesh)
 	SetVertexBuffer(pso->vertexBuffer);
 	SetIndexBuffer(pso->indexBuffer);
 
-	MapBuffer(cbMaterial, &material->materialShaderData, sizeof(MaterialShaderData));
-	SetConstantBufferPixel(cbMaterialRegister, cbMaterial);
+	cbMaterial->Map(&material->materialShaderData);
+	cbMaterial->SetPS();
 }
 
 void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
