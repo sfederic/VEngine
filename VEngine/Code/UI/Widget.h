@@ -6,12 +6,6 @@
 
 using namespace DirectX;
 
-//I can never get the D2D1_RECT_F things right
-//left = The x-coordinate of the upper-left corner of the rectangle
-//top = The y-coordinate of the upper-left corner of the rectangle.
-//right = The x-coordinate of the lower-right corner of the rectangle
-//bottom = The y-coordinate of the lower-right corner of the rectangle.
-
 struct Layout
 {
 	D2D1_RECT_F rect = {};
