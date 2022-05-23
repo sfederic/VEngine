@@ -149,7 +149,7 @@ ConstantBuffer<MaterialShaderData>* cbMaterial;
 ConstantBuffer<ShaderLights>* cbLights;
 ConstantBuffer<ShaderTimeData>* cbTime;
 ConstantBuffer<ShaderMeshData>* cbMeshData;
-ID3D11Buffer* cbSkinningData;
+ConstantBuffer<ShaderSkinningData>* cbSkinningData;
 ID3D11Buffer* cbPostProcess;
 ID3D11Buffer* linesBuffer;
 
@@ -509,9 +509,8 @@ void CreateConstantBuffers()
 	assert(cbMeshData);
 
 	//Skinning data
-	XMMATRIX skinningMatrices[96] = {};
-	cbSkinningData = RenderUtils::CreateDynamicBuffer(sizeof(XMMATRIX) * 96,
-		D3D11_BIND_CONSTANT_BUFFER, skinningMatrices);
+	ShaderSkinningData skinningData = {};
+	cbSkinningData = new ConstantBuffer<ShaderSkinningData>(&skinningData, cbSkinningRegister);
 	assert(cbSkinningData);
 
 	//Post process data
@@ -1505,8 +1504,8 @@ void AnimateSkeletalMesh(MeshComponent* mesh)
 		//Update skinning constant buffers
 		if (skinningDataIndex > 0)
 		{
-			MapBuffer(cbSkinningData, &skinningData, sizeof(ShaderSkinningData));
-			context->VSSetConstantBuffers(cbSkinningRegister, 1, &cbSkinningData);
+			cbSkinningData->Map(&skinningData);
+			cbSkinningData->SetVS();
 		}
 	}
 
