@@ -1289,6 +1289,7 @@ void RenderLightMeshes()
 
 	//DIRECTIONAL LIGHTS
 	SetVertexBuffer(debugSphere.sphereMesh->GetVertexBuffer());
+	SetIndexBuffer(debugSphere.sphereMesh->GetIndexBuffer());
 
 	for (auto directionalLight : DirectionalLightComponent::system.components)
 	{
@@ -1302,6 +1303,7 @@ void RenderLightMeshes()
 
 	//POINT LIGHTS
 	SetVertexBuffer(debugIcoSphere.mesh->GetVertexBuffer());
+	SetIndexBuffer(debugIcoSphere.mesh->GetIndexBuffer());
 
 	for (auto pointLight : PointLightComponent::system.components)
 	{
@@ -1315,6 +1317,7 @@ void RenderLightMeshes()
 
 	//SPOT LIGHTS
 	SetVertexBuffer(debugCone.mesh->GetVertexBuffer());
+	SetIndexBuffer(debugCone.mesh->GetIndexBuffer());
 
 	for (auto spotLight : SpotLightComponent::system.components)
 	{
