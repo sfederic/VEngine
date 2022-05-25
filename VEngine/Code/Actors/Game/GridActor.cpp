@@ -118,3 +118,12 @@ bool GridActor::EnableBasedOnTime()
 
 	return false;
 }
+
+void GridActor::SetAnimation(std::string animationName)
+{
+	auto skeleton = mesh->GetSkeleton();
+	if (!skeleton->animations.empty())
+	{
+		skeleton->currentAnimation = animationName;
+	}
+}
