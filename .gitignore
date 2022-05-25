@@ -9,6 +9,7 @@ VEngine/Code/Physx/
  
 # User-specific files
 *.dll
+*.lib
 *.rsuser
 *.suo
 *.user
