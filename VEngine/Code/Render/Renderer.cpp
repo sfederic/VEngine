@@ -1129,6 +1129,7 @@ void RenderBounds()
 		//instead of being static, but then Direct2D swapchain/rendertarget errors would happen.
 		//Feels like it might be the GPU doing some funny memory thing.
 		SetVertexBuffer(debugBox.boxMesh->GetVertexBuffer());
+		SetIndexBuffer(debugBox.boxMesh->GetIndexBuffer());
 
 		//Set debug wireframe material colour
 		materialShaderData.ambient = XMFLOAT4(0.75f, 0.75f, 0.75f, 1.0f);
@@ -1172,6 +1173,7 @@ void RenderBounds()
 		SetShader(L"SolidColour.hlsl");
 
 		SetVertexBuffer(debugBox.boxMesh->GetVertexBuffer());
+		SetIndexBuffer(debugBox.boxMesh->GetIndexBuffer());
 
 		for (auto boxTrigger : BoxTriggerComponent::system.components)
 		{
