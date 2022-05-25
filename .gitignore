@@ -8,6 +8,7 @@ VEngine/Code/FbxSdk/
 VEngine/Code/Physx/
  
 # User-specific files
+*.dll
 *.rsuser
 *.suo
 *.user
