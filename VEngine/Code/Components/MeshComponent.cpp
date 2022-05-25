@@ -159,7 +159,6 @@ Buffer* MeshComponent::GetVertexBuffer() const
 
 Buffer* MeshComponent::GetIndexBuffer() const
 {
-	pso->indexBuffer = pso->indexBuffer;
 	return pso->indexBuffer;
 }
 
