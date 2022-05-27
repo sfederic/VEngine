@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "FBXLoader.h"
 #include <cassert>
+#include <unordered_set>
 #include <filesystem>
 #include "Animation/AnimationStructures.h"
 #include "VMath.h"
@@ -279,50 +280,34 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 		FbxGeometryElementUV* uvs = mesh->GetElementUV();
 
 		int polyIndexCounter = 0; //Used to index into normals and UVs on a per vertex basis
-		int polyCount = mesh->GetPolygonCount();
+		int triangleCount = mesh->GetPolygonCount();
 
-		meshData->vertices.reserve(polyCount);
-		meshData->indices.reserve(polyCount);
+		meshData->vertices.reserve(triangleCount);
+		meshData->indices.reserve(triangleCount);
+
+		//@Todo: Part of index buffer create code
+		//std::unordered_map<int, std::pair<int, Vertex>> indexToPolyCount;
+		//std::unordered_set<int> existingIndices;
 
 		//Main import loop
-		for (int i = 0; i < polyCount; i++)
+		for (int i = 0; i < triangleCount; i++)
 		{
-			int polySize = mesh->GetPolygonSize(i);
-			assert((polySize % 3) == 0 && "FBX model isn't triangulated");
+			int triangleSize = mesh->GetPolygonSize(i);
+			assert((triangleSize % 3) == 0 && "FBX model isn't triangulated");
 
-			for (int j = 0; j < polySize; j++)
+			for (int j = 0; j < triangleSize; j++)
 			{
 				int index = mesh->GetPolygonVertex(i, j);
 
-				//@Todo: index buffers aren't actually correct in the engine. they're essentially plain
-				//Draw() calls at this point.
-				//meshData.indices.push_back(index);
-
 				Vertex vert = {};
+				auto controlPoint = mesh->GetControlPointAt(index);
+				vert.pos.x = controlPoint.mData[0];
+				vert.pos.y = controlPoint.mData[1];
+				vert.pos.z = controlPoint.mData[2];
 
-				//Position
-				FbxVector4 pos = mesh->GetControlPointAt(index);
-				vert.pos.x = (float)pos.mData[0];
-				vert.pos.y = (float)pos.mData[1];
-				vert.pos.z = (float)pos.mData[2];
+				ReadUVs(mesh, index, polyIndexCounter, vert.uv);
 
-				//UV
-				if (uvs)
-				{
-					int uvIndex = uvs->GetIndexArray().GetAt(polyIndexCounter);
-					FbxVector2 uv = uvs->GetDirectArray().GetAt(uvIndex);
-					vert.uv.x = (float)uv.mData[0];
-					vert.uv.y = (float)uv.mData[1];
-				}
-
-				//Normal
-				if (normals)
-				{
-					FbxVector4 normal = normals->GetDirectArray().GetAt(polyIndexCounter);
-					vert.normal.x = (float)normal.mData[0];
-					vert.normal.y = (float)normal.mData[1];
-					vert.normal.z = (float)normal.mData[2];
-				}
+				ReadNormal(mesh, index, polyIndexCounter, vert.normal);
 
 				//Bone Weights
 				if (boneWeightsMap.find(index) != boneWeightsMap.end())
@@ -343,15 +328,21 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 					}
 				}
 
-				//Indices checking if the engine gets it working...
-				//if (!meshData.CheckDuplicateVertices(vert))
-				//{
-				//	meshData.vertices.push_back(vert);
-				//}
+				//@Todo: fix up index buffer creation code here
+				//Raycasting doesn't work and the textures are stretched out
+				/*if (existingIndices.find(index) == existingIndices.end())
+				{
+					indexToPolyCount.emplace(index, std::make_pair(polyIndexCounter, vert));
+					meshData->vertices.push_back(indexToPolyCount[index].second);
+					polyIndexCounter++;
+				}
 
-				meshData->vertices.push_back(vert);
-				meshData->indices.push_back(polyIndexCounter);
+				meshData->indices.push_back(indexToPolyCount[index].first);
 
+				existingIndices.emplace(index);*/
+
+				meshData->vertices.emplace_back(vert);
+				meshData->indices.emplace_back(polyIndexCounter);
 				polyIndexCounter++;
 			}
 		}
@@ -429,4 +420,130 @@ MeshData* FBXLoader::FindMesh(std::string meshName)
 	}
 
 	return meshIt->second;
+}
+
+void FBXLoader::ReadNormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT3& outNormal)
+{
+	if (inMesh->GetElementNormalCount() < 1) { throw std::exception("Invalid Normal Number"); }
+
+	FbxGeometryElementNormal* vertexNormal = inMesh->GetElementNormal(0);
+
+	switch (vertexNormal->GetMappingMode())
+	{
+	case FbxGeometryElement::eByControlPoint:
+		switch (vertexNormal->GetReferenceMode())
+		{
+		case FbxGeometryElement::eDirect:
+		{
+			outNormal.x = static_cast<float>(vertexNormal->GetDirectArray().GetAt(inCtrlPointIndex).mData[0]);
+			outNormal.y = static_cast<float>(vertexNormal->GetDirectArray().GetAt(inCtrlPointIndex).mData[1]);
+			outNormal.z = static_cast<float>(vertexNormal->GetDirectArray().GetAt(inCtrlPointIndex).mData[2]);
+		}
+		break;
+
+		case FbxGeometryElement::eIndexToDirect:
+		{
+			int index = vertexNormal->GetIndexArray().GetAt(inCtrlPointIndex);
+			outNormal.x = static_cast<float>(vertexNormal->GetDirectArray().GetAt(index).mData[0]);
+			outNormal.y = static_cast<float>(vertexNormal->GetDirectArray().GetAt(index).mData[1]);
+			outNormal.z = static_cast<float>(vertexNormal->GetDirectArray().GetAt(index).mData[2]);
+		}
+		break;
+		default:
+			throw std::exception("Invalid Reference");
+		}
+		break;
+	case FbxGeometryElement::eByPolygonVertex:
+		switch (vertexNormal->GetReferenceMode())
+		{
+		case FbxGeometryElement::eDirect:
+		{
+			outNormal.x = static_cast<float>(vertexNormal->GetDirectArray().GetAt(inVertexCounter).mData[0]);
+			outNormal.y = static_cast<float>(vertexNormal->GetDirectArray().GetAt(inVertexCounter).mData[1]);
+			outNormal.z = static_cast<float>(vertexNormal->GetDirectArray().GetAt(inVertexCounter).mData[2]);
+		}
+		break;
+		case FbxGeometryElement::eIndexToDirect:
+		{
+			int index = vertexNormal->GetIndexArray().GetAt(inVertexCounter);
+			outNormal.x = static_cast<float>(vertexNormal->GetDirectArray().GetAt(index).mData[0]);
+			outNormal.y = static_cast<float>(vertexNormal->GetDirectArray().GetAt(index).mData[1]);
+			outNormal.z = static_cast<float>(vertexNormal->GetDirectArray().GetAt(index).mData[2]);
+		}
+		break;
+		default: throw std::exception("Invalid Reference");
+		}
+
+		break;
+	}
+}
+
+void FBXLoader::ReadUVs(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT2& outUVs)
+{
+	if (inMesh->GetElementNormalCount() < 1) { throw std::exception("Invalid Normal Number"); }
+
+	FbxGeometryElementUV* vertexUVs = inMesh->GetElementUV(0);
+
+	switch (vertexUVs->GetMappingMode())
+	{
+	case FbxGeometryElement::eByControlPoint:
+		switch (vertexUVs->GetReferenceMode())
+		{
+		case FbxGeometryElement::eDirect:
+		{
+			outUVs.x = static_cast<float>(vertexUVs->GetDirectArray().GetAt(inCtrlPointIndex).mData[0]);
+			outUVs.y = static_cast<float>(vertexUVs->GetDirectArray().GetAt(inCtrlPointIndex).mData[1]);
+		}
+		break;
+
+		case FbxGeometryElement::eIndexToDirect:
+		{
+			int index = vertexUVs->GetIndexArray().GetAt(inCtrlPointIndex);
+			outUVs.x = static_cast<float>(vertexUVs->GetDirectArray().GetAt(index).mData[0]);
+			outUVs.y = static_cast<float>(vertexUVs->GetDirectArray().GetAt(index).mData[1]);
+		}
+		break;
+		default:
+			throw std::exception("Invalid Reference");
+		}
+		break;
+	case FbxGeometryElement::eByPolygonVertex:
+		switch (vertexUVs->GetReferenceMode())
+		{
+		case FbxGeometryElement::eDirect:
+		{
+			outUVs.x = static_cast<float>(vertexUVs->GetDirectArray().GetAt(inVertexCounter).mData[0]);
+			outUVs.y = static_cast<float>(vertexUVs->GetDirectArray().GetAt(inVertexCounter).mData[1]);
+		}
+		break;
+		case FbxGeometryElement::eIndexToDirect:
+		{
+			int index = vertexUVs->GetIndexArray().GetAt(inVertexCounter);
+			outUVs.x = static_cast<float>(vertexUVs->GetDirectArray().GetAt(index).mData[0]);
+			outUVs.y = static_cast<float>(vertexUVs->GetDirectArray().GetAt(index).mData[1]);
+		}
+		break;
+		default: throw std::exception("Invalid Reference");
+		}
+
+		break;
+	}
+}
+
+std::vector<XMFLOAT3> FBXLoader::ProcessControlPoints(FbxMesh* currMesh)
+{
+	unsigned int ctrlPointCount = currMesh->GetControlPointsCount();
+
+	std::vector<XMFLOAT3> controlPoints;
+
+	for (int i = 0; i < ctrlPointCount; i++)
+	{
+		XMFLOAT3 currPosition = {};
+		currPosition.x = static_cast<float>(currMesh->GetControlPointAt(i).mData[0]);
+		currPosition.y = static_cast<float>(currMesh->GetControlPointAt(i).mData[1]);
+		currPosition.z = static_cast<float>(currMesh->GetControlPointAt(i).mData[2]);
+		controlPoints.emplace_back(currPosition);
+	}
+
+	return controlPoints;
 }

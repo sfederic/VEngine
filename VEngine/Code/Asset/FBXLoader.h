@@ -42,6 +42,10 @@ public:
 private:
 	void ProcessAllChildNodes(FbxNode* node, MeshData* meshData);
 	void ProcessSkeletonNodes(FbxNode* node, Skeleton* skeleton, int parentIndex);
+
+	void ReadNormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT3& outNormal);
+	void ReadUVs(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT2& outUVs);
+	std::vector<XMFLOAT3> ProcessControlPoints(FbxMesh* currMesh);
 };
 
 extern FBXLoader fbxLoader;
