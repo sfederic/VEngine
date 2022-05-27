@@ -288,6 +288,7 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 		//@Todo: Part of index buffer create code
 		//std::unordered_map<int, std::pair<int, Vertex>> indexToPolyCount;
 		//std::unordered_set<int> existingIndices;
+		//int vertexCount = 0;
 
 		//Main import loop
 		for (int i = 0; i < triangleCount; i++)
@@ -328,18 +329,18 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 					}
 				}
 
-				//@Todo: fix up index buffer creation code here
-				//Raycasting doesn't work and the textures are stretched out
-				/*if (existingIndices.find(index) == existingIndices.end())
-				{
-					indexToPolyCount.emplace(index, std::make_pair(polyIndexCounter, vert));
-					meshData->vertices.push_back(indexToPolyCount[index].second);
-					polyIndexCounter++;
-				}
+				//@Todo: fix up index buffer creation code here.
+				//Raycasting doesn't work and the textures are stretched out, but the positions look correct.
+				//if (existingIndices.find(index) == existingIndices.end())
+				//{
+				//	indexToPolyCount.emplace(index, std::make_pair(vertexCount, vert));
+				//	meshData->vertices.push_back(indexToPolyCount[index].second);
+				//	vertexCount++;
+				//}
 
-				meshData->indices.push_back(indexToPolyCount[index].first);
+				//meshData->indices.push_back(indexToPolyCount[index].first);
 
-				existingIndices.emplace(index);*/
+				//existingIndices.emplace(index);
 
 				meshData->vertices.emplace_back(vert);
 				meshData->indices.emplace_back(polyIndexCounter);
