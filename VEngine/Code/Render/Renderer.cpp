@@ -1583,38 +1583,19 @@ void Renderer::RenderSpritesInScreenSpace()
 
 	for (const Sprite& sprite : spriteSystem.screenSprites)
 	{
-		if (drawAllAsWireframe)
-		{
-			context->RSSetState(rastStateWireframe);
-		}
-		else
-		{
-			//Careful with back culling visibility here for UI (as every sprite's a quad)
-			context->RSSetState(rastStateMap["solid"]->data);
-		}
-
-		ShaderItem* shader = shaderSystem.FindShader(L"ui.hlsl");
-		context->VSSetShader(shader->vertexShader, nullptr, 0);
-		context->PSSetShader(shader->pixelShader, nullptr, 0);
-
-		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
-
-		//Set texture from sprite
-		auto textureSRV = textureSystem.FindTexture2D(sprite.textureFilename)->GetSRV();
-		context->PSSetShaderResources(0, 1, &textureSRV);
+		SetRastState(RastStates::solid);
+		SetShader(L"ui.hlsl");
+		SetSampler(0, RenderUtils::GetDefaultSampler());
+		SetShaderResourcePixel(0, sprite.textureFilename);
 
 		spriteSystem.BuildSpriteQuadForViewportRendering(sprite);
-
-		//Update vertex buffer
 		spriteSystem.UpdateAndSetSpriteBuffers(context);
 
 		shaderMatrices.model = XMMatrixIdentity();
 		shaderMatrices.MakeModelViewProjectionMatrix();
-
 		cbMatrices->Map(&shaderMatrices);
 		cbMatrices->SetVS();
 
-		//Draw
 		context->DrawIndexed(6, 0, 0);
 	}
 
