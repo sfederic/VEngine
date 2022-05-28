@@ -26,8 +26,8 @@ public:
 	void SetSRV(ID3D11ShaderResourceView* srv_) { srv = srv_; }
 	ID3D11ShaderResourceView* GetSRV() { return srv; }
 
-	void SetWidth(uint32_t width_) { width_ = width; }
-	void SetHeight(uint32_t height_) { height_ = height; }
+	void SetWidth(uint32_t width_) { width = width_; }
+	void SetHeight(uint32_t height_) { height = height_; }
 	uint32_t GetWidth() { return width; }
 	uint32_t GetHeight() { return height; }
 };
