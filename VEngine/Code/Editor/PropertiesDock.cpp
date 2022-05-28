@@ -28,9 +28,6 @@
 #include "Render/Material.h"
 #include "Render/RenderTypes.h"
 
-#include "Profile.h"
-#include "Log.h"
-
 std::unordered_map<std::type_index, std::function<void(Property&, int)>> typeToFunctionMap;
 
 PropertiesDock::PropertiesDock() : QDockWidget("Properties")
@@ -64,8 +61,6 @@ PropertiesDock::PropertiesDock() : QDockWidget("Properties")
 
 void PropertiesDock::DisplayActorProperties(Actor* actor)
 {
-    auto s = Profile::QuickStart();
-
     //Set the inner values in the Qt widgets instead of remaking all the widgets below
     if (previousActor == actor)
     {
@@ -100,9 +95,6 @@ void PropertiesDock::DisplayActorProperties(Actor* actor)
     setWidget(actorPropsScrollArea);
 
     previousActor = actor;
-
-    auto e = Profile::QuickEnd(s);
-    Log("Prop Time: %f", e);
 }
 
 void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRow)

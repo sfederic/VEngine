@@ -2,9 +2,6 @@
 #include <qdockwidget.h>
 #include <qgridlayout.h>
 #include <vector>
-#include <unordered_map>
-#include <typeindex>
-#include <functional>
 
 struct Actor;
 struct IPropertyWidget;
@@ -35,13 +32,13 @@ public:
 	void ResetPropertyWidgetValues();
 	void Clear();
 
-	std::unordered_map<std::type_index, std::function<void(Property&, int)>> typeToFunctionMap;
+private:
 
-	 template <typename PropType, typename WidgetType>
-	 void CreateWidget(Property& prop, int row) 
-	 {
-	     auto widget = new WidgetType(prop);
-		 actorPropsGridLayout->addWidget(widget, row, propertyDataColumn);
-	     propertyWidgetsToUpdate.push_back((IPropertyWidget*)widget);
-	 }
+	template <typename PropType, typename WidgetType>
+	void CreateWidget(Property& prop, int row) 
+	{
+	    auto widget = new WidgetType(prop);
+		actorPropsGridLayout->addWidget(widget, row, propertyDataColumn);
+	    propertyWidgetsToUpdate.push_back((IPropertyWidget*)widget);
+	}
 };
