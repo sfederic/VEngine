@@ -2,17 +2,18 @@
 #include "Float3Widget.h"
 #include <qboxlayout.h>
 
-Float3Widget::Float3Widget(XMFLOAT3* value, QWidget* parent) : QWidget(parent)
+Float3Widget::Float3Widget(Property& prop_, QWidget* parent) : QWidget(parent)
 {
-	_value = value;
+	prop = prop_;
+	_value = prop.GetData<XMFLOAT3>();
 
 	connect(&xSpinbox, &QDoubleSpinBox::editingFinished, this, &Float3Widget::SetValue);
 	connect(&ySpinbox, &QDoubleSpinBox::editingFinished, this, &Float3Widget::SetValue);
 	connect(&zSpinbox, &QDoubleSpinBox::editingFinished, this, &Float3Widget::SetValue);
 
-	xSpinbox.setValue(value->x);
-	ySpinbox.setValue(value->y);
-	zSpinbox.setValue(value->z);
+	xSpinbox.setValue(_value->x);
+	ySpinbox.setValue(_value->y);
+	zSpinbox.setValue(_value->z);
 
 	auto hLayout = new QHBoxLayout();
 	hLayout->addWidget(&xSpinbox);

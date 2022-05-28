@@ -8,7 +8,7 @@ using namespace DirectX;
 class Float3Widget : public QWidget, IPropertyWidget
 {
 public:
-	Float3Widget(XMFLOAT3* value, QWidget* parent = 0);
+	Float3Widget(Property& prop_, QWidget* parent = 0);
 	void SetValue();
 	virtual void ResetValue() override;
 
