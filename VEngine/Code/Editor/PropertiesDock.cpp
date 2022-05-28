@@ -160,6 +160,15 @@ void PropertiesDock::ResetPropertyWidgetValues()
     }
 }
 
+//@Todo: able to change all these create widget functions to a single template.
+//e.g. 
+// template <typename PropType, WidgetType>
+// void CreateWidget(Property& prop, int row) {
+//     auto widget = new WidgetType(prop.GetData<PropType>());
+//     actorPropsGridLayout->addWidget(widget, row, propertyDataColumn);
+//     propertyWidgetsToUpdate.push_back((IPropertyWidget*)widget);
+// }
+//     
 void PropertiesDock::CreateBoolWidget(Property& prop, int currentGridRow)
 {
     auto boolWidget = new BoolWidget(prop.GetData<bool>());
