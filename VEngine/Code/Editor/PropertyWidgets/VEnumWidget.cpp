@@ -2,10 +2,10 @@
 #include "VEnumWidget.h"
 #include "VEnum.h"
 
-VEnumWidget::VEnumWidget(Property value_)
+VEnumWidget::VEnumWidget(Property& value_)
 {
 	prop = value_;
-	value = (VEnum*)value_.data;
+	value = value_.GetData<VEnum>();
 
 	for (auto& name : value->GetAllNames())
 	{

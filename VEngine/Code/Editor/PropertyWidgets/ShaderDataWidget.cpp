@@ -3,10 +3,10 @@
 #include <qfiledialog.h>
 #include "Render/RenderTypes.h"
 
-ShaderDataWidget::ShaderDataWidget(Property prop_)
+ShaderDataWidget::ShaderDataWidget(Property& prop_)
 {
 	prop = prop_;
-	value = (ShaderData*)prop.data;
+	value = prop.GetData<ShaderData>();
 
 	setText(QString::fromStdString(value->filename));
 	connect(this, &QPushButton::clicked, this, &ShaderDataWidget::SetValue);

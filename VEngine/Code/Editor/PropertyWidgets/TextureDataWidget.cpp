@@ -3,7 +3,7 @@
 #include <qfiledialog.h>
 #include "Render/RenderTypes.h"
 
-TextureDataWidget::TextureDataWidget(Property prop_)
+TextureDataWidget::TextureDataWidget(Property& prop_)
 {
 	prop = prop_;
 	value = (TextureData*)prop.data;

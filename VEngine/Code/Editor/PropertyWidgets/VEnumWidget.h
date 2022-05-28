@@ -8,7 +8,7 @@ struct VEnumWidget : public QComboBox, IPropertyWidget
 {
 	VEnum* value = nullptr;
 
-	VEnumWidget(Property value_);
+	VEnumWidget(Property& value_);
 	void SetValue();
 	virtual void ResetValue() override;
 };

@@ -7,11 +7,11 @@
 #include <QStringListModel>
 #include <QCompleter>
 
-StringWidget::StringWidget(Property value_)
+StringWidget::StringWidget(Property& value_)
 {
 	prop = value_;
 
-	value = (std::string*)value_.data;
+	value = value_.GetData<std::string>();
 	setText(QString::fromStdString(value->data()));
 
 	SetAutoComplete(prop.autoCompletePath);

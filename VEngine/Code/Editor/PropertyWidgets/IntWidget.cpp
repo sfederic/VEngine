@@ -1,9 +1,10 @@
 #include "vpch.h"
 #include "IntWidget.h"
 
-IntWidget::IntWidget(int* value, bool readOnly, QWidget* parent) : IntSpinBox(parent)
+IntWidget::IntWidget(Property& prop_, bool readOnly, QWidget* parent) : IntSpinBox(parent)
 {
-	_value = value;
+	prop = prop_;
+	_value = prop.GetData<int>();
 
 	if (readOnly)
 	{

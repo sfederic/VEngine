@@ -10,7 +10,7 @@ struct ShaderDataWidget : public QPushButton, IPropertyWidget
 	ShaderData* value;
 	Property prop;
 
-	ShaderDataWidget(Property prop_);
+	ShaderDataWidget(Property& prop_);
 	void SetValue();
 	virtual void ResetValue() override;
 };

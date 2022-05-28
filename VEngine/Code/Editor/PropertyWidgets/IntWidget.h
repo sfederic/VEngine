@@ -6,7 +6,7 @@
 class IntWidget : public IntSpinBox, IPropertyWidget
 {
 public:
-	IntWidget(int* value, bool readOnly = false, QWidget* parent = 0);
+	IntWidget(Property& prop_, bool readOnly = false, QWidget* parent = 0);
 
 private:
 	void SetValue();

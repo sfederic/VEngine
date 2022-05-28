@@ -3,9 +3,10 @@
 #include <QHBoxLayout>
 #include <QDoubleSpinBox>
 
-VectorWidget::VectorWidget(XMVECTOR* vector, QWidget* parent)
+VectorWidget::VectorWidget(Property& prop_, QWidget* parent)
 {
-	_vector = vector;
+	prop = prop_;
+	_vector = prop.GetData<XMVECTOR>();
 
 	xSpinbox = new QDoubleSpinBox();
 	ySpinbox = new QDoubleSpinBox();

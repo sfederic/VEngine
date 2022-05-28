@@ -10,7 +10,7 @@ struct MeshComponentDataWidget : public QPushButton, IPropertyWidget
 	MeshComponentData* value;
 	Property prop;
 
-	MeshComponentDataWidget(Property prop_);
+	MeshComponentDataWidget(Property& prop_);
 	void SetValue();
 	virtual void ResetValue() override;
 };

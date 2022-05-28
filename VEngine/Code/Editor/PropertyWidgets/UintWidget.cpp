@@ -1,9 +1,10 @@
 #include "vpch.h"
 #include "UintWidget.h"
 
-UintWidget::UintWidget(uint32_t* value, bool readOnly, QWidget* parent) : UintSpinBox(parent)
+UintWidget::UintWidget(Property& prop_, bool readOnly, QWidget* parent) : UintSpinBox(parent)
 {
-	value_ = value;
+	prop = prop_;
+	value_ = prop.GetData<uint32_t>();
 
 	if (readOnly)
 	{

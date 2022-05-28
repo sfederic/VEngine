@@ -1,5 +1,6 @@
 #pragma once
 #include <qdockwidget.h>
+#include <qgridlayout.h>
 #include <vector>
 #include <unordered_map>
 #include <typeindex>
@@ -34,14 +35,13 @@ public:
 	void ResetPropertyWidgetValues();
 	void Clear();
 
-private:
 	std::unordered_map<std::type_index, std::function<void(Property&, int)>> typeToFunctionMap;
 
 	 template <typename PropType, typename WidgetType>
 	 void CreateWidget(Property& prop, int row) 
 	 {
-	     auto widget = new WidgetType(prop.GetData<PropType>());
-	     actorPropsGridLayout->addWidget(widget, row, propertyDataColumn);
+	     auto widget = new WidgetType(prop);
+		 actorPropsGridLayout->addWidget(widget, row, propertyDataColumn);
 	     propertyWidgetsToUpdate.push_back((IPropertyWidget*)widget);
 	 }
 };

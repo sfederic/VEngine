@@ -23,7 +23,6 @@
 #include "PropertyWidgets/TextureDataWidget.h"
 #include "PropertyWidgets/ShaderDataWidget.h"
 #include "PropertyWidgets/MeshComponentDataWidget.h"
-#include "PropertyWidgets/TransformWidget.h"
 #include "PropertyWidgets/VEnumWidget.h"
 #include "VEnum.h"
 #include "Render/Material.h"
@@ -60,7 +59,6 @@ PropertiesDock::PropertiesDock() : QDockWidget("Properties")
     typeToFunctionMap[typeid(TextureData)] = [&](Property& prop, int row) { CreateWidget<TextureData, TextureDataWidget>(prop, row); };
     typeToFunctionMap[typeid(ShaderData)] = [&](Property& prop, int row) { CreateWidget<ShaderData, ShaderDataWidget>(prop, row); };
     typeToFunctionMap[typeid(MeshComponentData)] = [&](Property& prop, int row) { CreateWidget<MeshComponentData, MeshComponentDataWidget>(prop, row); };
-    typeToFunctionMap[typeid(Transform)] = [&](Property& prop, int row) { CreateWidget<Transform, TransformWidget>(prop, row); };
     typeToFunctionMap[typeid(VEnum)] = [&](Property& prop, int row) { CreateWidget<VEnum, VEnumWidget>(prop, row); };
 }
 

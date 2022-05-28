@@ -3,10 +3,10 @@
 #include <qfiledialog.h>
 #include "Render/RenderTypes.h"
 
-MeshComponentDataWidget::MeshComponentDataWidget(Property prop_)
+MeshComponentDataWidget::MeshComponentDataWidget(Property& prop_)
 {
 	prop = prop_;
-	value = (MeshComponentData*)prop.data;
+	value = prop.GetData<MeshComponentData>();
 
 	setText(QString::fromStdString(value->filename));
 	connect(this, &QPushButton::clicked, this, &MeshComponentDataWidget::SetValue);

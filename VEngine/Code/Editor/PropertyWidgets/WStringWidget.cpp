@@ -2,7 +2,7 @@
 #include "WStringWidget.h"
 #include "Properties.h"
 
-WStringWidget::WStringWidget(Property value_)
+WStringWidget::WStringWidget(Property& value_)
 {
 	prop = value_;
 

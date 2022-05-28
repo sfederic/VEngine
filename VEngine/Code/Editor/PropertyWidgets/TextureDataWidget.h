@@ -10,7 +10,7 @@ struct TextureDataWidget : public QPushButton, IPropertyWidget
 	TextureData* value;
 	Property prop;
 
-	TextureDataWidget(Property prop_);
+	TextureDataWidget(Property& prop_);
 	void SetValue();
 	virtual void ResetValue() override;
 };

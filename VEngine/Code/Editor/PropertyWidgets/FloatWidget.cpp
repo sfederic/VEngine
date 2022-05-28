@@ -3,9 +3,10 @@
 #include <QHBoxLayout>
 #include <QLabel>
 
-FloatWidget::FloatWidget(float* value, QWidget* parent) : SpinBox(parent)
+FloatWidget::FloatWidget(Property& prop_, QWidget* parent) : SpinBox(parent)
 {
-	_value = value;
+	prop = prop_;
+	_value = prop.GetData<float>();
 	connect(this, &SpinBox::editingFinished, this, &FloatWidget::SetValue);
 	setValue(*_value);
 }

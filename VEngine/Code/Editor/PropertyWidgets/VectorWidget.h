@@ -11,7 +11,7 @@ class QDoubleSpinBox;
 class VectorWidget : public QWidget, IPropertyWidget
 {
 public: 
-	VectorWidget(XMVECTOR* vector, QWidget* parent = 0);
+	VectorWidget(Property& prop_, QWidget* parent = 0);
 private:
 	void SetValue();
 	virtual void ResetValue() override;

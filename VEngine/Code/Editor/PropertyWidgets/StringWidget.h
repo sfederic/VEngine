@@ -7,7 +7,7 @@ struct StringWidget : public QLineEdit, IPropertyWidget
 {
 	std::string* value;
 
-	StringWidget(Property value_);
+	StringWidget(Property& value_);
 	void SetValue();
 	virtual void ResetValue() override;
 
