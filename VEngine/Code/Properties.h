@@ -26,6 +26,12 @@ struct Property
 	bool hide = false;
 
 	std::function<void(void*)> change;
+
+	template <typename T>
+	T* GetData()
+	{
+		return (T*)data;
+	}
 };
 
 struct Properties
