@@ -53,9 +53,9 @@ XMFLOAT3 SpriteSystem::PointToNdc(int x, int y, float z)
 void SpriteSystem::UpdateAndSetSpriteBuffers(ID3D11DeviceContext* context)
 {
 	//Update vertex buffer
-	D3D11_MAPPED_SUBRESOURCE mappedResource;
+	D3D11_MAPPED_SUBRESOURCE mappedResource{};
 	HR(context->Map(spriteSystem.spriteVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
-	memcpy(mappedResource.pData, spriteSystem.verts, sizeof(spriteSystem.verts));
+	memcpy(mappedResource.pData, &spriteSystem.verts, sizeof(spriteSystem.verts));
 	context->Unmap(spriteSystem.spriteVertexBuffer, 0);
 
 	context->IASetVertexBuffers(0, 1, &spriteSystem.spriteVertexBuffer, &Renderer::stride, &Renderer::offset);
