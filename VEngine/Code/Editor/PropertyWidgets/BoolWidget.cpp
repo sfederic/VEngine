@@ -1,10 +1,12 @@
 #include "vpch.h"
 #include "BoolWidget.h"
 
-BoolWidget::BoolWidget(bool* value, QWidget* parent) : QCheckBox(parent)
+BoolWidget::BoolWidget(Property& prop_, QWidget* parent) : QCheckBox(parent)
 {
-	_value = value;
-	if (*_value == true)
+	prop = prop_;
+	value = prop.GetData<bool>();
+
+	if (*value == true)
 	{
 		setCheckState(Qt::CheckState::Checked);
 	}
@@ -16,17 +18,17 @@ BoolWidget::BoolWidget(bool* value, QWidget* parent) : QCheckBox(parent)
 	connect(this, &QCheckBox::stateChanged, this, &BoolWidget::SetValue);
 }
 
-void BoolWidget::SetValue(int value)
+void BoolWidget::SetValue(int value_)
 {
-	if (_value)
+	if (value)
 	{
-		*_value = value;
+		*value = value_;
 	}
 }
 
 void BoolWidget::ResetValue()
 {
-	if (*_value == true)
+	if (*value == true)
 	{
 		setCheckState(Qt::CheckState::Checked);
 	}
