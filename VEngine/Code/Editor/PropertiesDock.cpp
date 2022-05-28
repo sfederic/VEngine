@@ -29,6 +29,11 @@
 #include "Render/Material.h"
 #include "Render/RenderTypes.h"
 
+#include "Profile.h"
+#include "Log.h"
+
+std::unordered_map<std::type_index, std::function<void(Property&, int)>> typeToFunctionMap;
+
 PropertiesDock::PropertiesDock() : QDockWidget("Properties")
 {
     setFixedWidth(400);
@@ -41,10 +46,28 @@ PropertiesDock::PropertiesDock() : QDockWidget("Properties")
     actorPropsWidget->setLayout(actorPropsGridLayout);
     actorPropsScrollArea->setWidget(actorPropsWidget);
     setWidget(actorPropsScrollArea);
+
+    //Setup map
+    typeToFunctionMap[typeid(bool)] = [&](Property& prop, int row) { CreateBoolWidget(prop, row); };
+    typeToFunctionMap[typeid(int)] = [&](Property& prop, int row) { CreateIntWidget(prop, row); };
+    typeToFunctionMap[typeid(float)] = [&](Property& prop, int row) { CreateFloatWidget(prop, row); };
+    typeToFunctionMap[typeid(XMFLOAT3)] = [&](Property& prop, int row) { CreateFloat3Widget(prop, row); };
+    typeToFunctionMap[typeid(XMFLOAT4)] = [&](Property& prop, int row) { CreateFloat4Widget(prop, row); };
+    typeToFunctionMap[typeid(XMFLOAT2)] = [&](Property& prop, int row) { CreateFloat2Widget(prop, row); };
+    typeToFunctionMap[typeid(XMVECTOR)] = [&](Property& prop, int row) { CreateVectorWidget(prop, row); };
+    typeToFunctionMap[typeid(std::string)] = [&](Property& prop, int row) { CreateStringWidget(prop, row); };
+    typeToFunctionMap[typeid(std::wstring)] = [&](Property& prop, int row) { CreateWStringWidget(prop, row); };
+    typeToFunctionMap[typeid(TextureData)] = [&](Property& prop, int row) { CreateTextureDataWidget(prop, row); };
+    typeToFunctionMap[typeid(ShaderData)] = [&](Property& prop, int row) { CreateShaderDataWidget(prop, row); };
+    typeToFunctionMap[typeid(MeshComponentData)] = [&](Property& prop, int row) { CreateMeshComponentDataWidget(prop, row); };
+    typeToFunctionMap[typeid(Transform)] = [&](Property& prop, int row) { CreateTransformWidget(prop, row); };
+    typeToFunctionMap[typeid(VEnum)] = [&](Property& prop, int row) { CreateVEnumWidget(prop, row); };
 }
 
 void PropertiesDock::DisplayActorProperties(Actor* actor)
 {
+    auto s = Profile::QuickStart();
+
     //Set the inner values in the Qt widgets instead of remaking all the widgets below
     if (previousActor == actor)
     {
@@ -79,13 +102,13 @@ void PropertiesDock::DisplayActorProperties(Actor* actor)
     setWidget(actorPropsScrollArea);
 
     previousActor = actor;
+
+    auto e = Profile::QuickEnd(s);
+    Log("Prop Time: %f", e);
 }
 
 void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRow)
 {
-    const int propertyNameColumn = 0;
-    const int propertyDataColumn = 1;
-
     //Set title to seperate components/actor properties
     auto titleLabel = new QLabel(props.title.c_str(), this);
     titleLabel->setStyleSheet("font-weight: bold");
@@ -93,109 +116,22 @@ void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRo
     currentGridRow++;
 
     //Properties
-    for (auto& prop : props.propMap)
+    for (auto& propPair : props.propMap)
     {
-        if (prop.second.hide)
+        const std::string& name = propPair.first;
+        Property& prop = propPair.second;
+
+        if (prop.hide)
         {
             continue;
         }
 
-        const std::string& name = prop.first;
-
         //Set property name onto label
         actorPropsGridLayout->addWidget(new QLabel(name.c_str()), currentGridRow, propertyNameColumn);
 
-        //Set property data into grid
-        if (props.CheckType<bool>(name))
-        {
-            auto boolWidget = new BoolWidget(props.GetData<bool>(name));
-            actorPropsGridLayout->addWidget(boolWidget, currentGridRow, propertyDataColumn);
-            propertyWidgetsToUpdate.push_back((IPropertyWidget*)boolWidget);
-        }
-        else if (props.CheckType<int>(name))
-        {
-            auto intWidget = new IntWidget(props.GetData<int>(name));
-            actorPropsGridLayout->addWidget(intWidget, currentGridRow, propertyDataColumn);
-            propertyWidgetsToUpdate.push_back((IPropertyWidget*)intWidget);
-        }
-        else if (props.CheckType<uint32_t>(name))
-        {
-            auto intWidget = new UintWidget(props.GetData<uint32_t>(name), props.GetProperty(name)->readOnly);
-            actorPropsGridLayout->addWidget(intWidget, currentGridRow, propertyDataColumn);
-            propertyWidgetsToUpdate.push_back((IPropertyWidget*)intWidget);
-        }
-        else if (props.CheckType<float>(name))
-        {
-            auto floatWidget = new FloatWidget(props.GetData<float>(name));
-            actorPropsGridLayout->addWidget(floatWidget, currentGridRow, propertyDataColumn);
-            propertyWidgetsToUpdate.push_back((IPropertyWidget*)floatWidget);
-        }
-        else if (props.CheckType<XMFLOAT3>(name))
-        {
-            auto float3Widget = new Float3Widget(props.GetData<XMFLOAT3>(name));
-            actorPropsGridLayout->addWidget(float3Widget, currentGridRow, propertyDataColumn);
-            propertyWidgetsToUpdate.push_back((IPropertyWidget*)float3Widget);
-        }      
-        else if (props.CheckType<XMFLOAT4>(name))
-        {
-            auto float4Widget = new Float4Widget(props.GetData<XMFLOAT4>(name));
-            actorPropsGridLayout->addWidget(float4Widget, currentGridRow, propertyDataColumn);
-            propertyWidgetsToUpdate.push_back((IPropertyWidget*)float4Widget);
-        }
-        else if (props.CheckType<XMFLOAT2>(name))
-        {
-            auto float2Widget = new Float2Widget(props.GetData<XMFLOAT2>(name));
-            actorPropsGridLayout->addWidget(float2Widget, currentGridRow, propertyDataColumn);
-            propertyWidgetsToUpdate.push_back((IPropertyWidget*)float2Widget);
-        }
-        else if (props.CheckType<XMVECTOR>(name))
-        {
-            auto vectorWidget = new VectorWidget(props.GetData<XMVECTOR>(name));
-            actorPropsGridLayout->addWidget(vectorWidget, currentGridRow, propertyDataColumn);
-            propertyWidgetsToUpdate.push_back((IPropertyWidget*)vectorWidget);
-        }
-        else if (props.CheckType<std::string>(name))
-        {
-            auto stringWidget = new StringWidget(prop.second);
-            actorPropsGridLayout->addWidget(stringWidget, currentGridRow, propertyDataColumn);
-            propertyWidgetsToUpdate.push_back((IPropertyWidget*)stringWidget);
-        }    
-        else if (props.CheckType<std::wstring>(name))
-        {
-            auto wstringWidget = new WStringWidget(prop.second);
-            actorPropsGridLayout->addWidget(wstringWidget, currentGridRow, propertyDataColumn);
-            propertyWidgetsToUpdate.push_back((IPropertyWidget*)wstringWidget);
-        }       
-        else if (props.CheckType<TextureData>(name))
-        {
-            auto textureDataWidget = new TextureDataWidget(prop.second);
-            actorPropsGridLayout->addWidget(textureDataWidget, currentGridRow, propertyDataColumn);
-            propertyWidgetsToUpdate.push_back((IPropertyWidget*)textureDataWidget);
-        }
-        else if (props.CheckType<ShaderData>(name))
-        {
-            auto shaderDataWidget = new ShaderDataWidget(prop.second);
-            actorPropsGridLayout->addWidget(shaderDataWidget, currentGridRow, propertyDataColumn);
-            propertyWidgetsToUpdate.push_back((IPropertyWidget*)shaderDataWidget);
-        }     
-        else if (props.CheckType<MeshComponentData>(name))
-        {
-            auto meshComponentDataWidget = new MeshComponentDataWidget(prop.second);
-            actorPropsGridLayout->addWidget(meshComponentDataWidget, currentGridRow, propertyDataColumn);
-            propertyWidgetsToUpdate.push_back((IPropertyWidget*)meshComponentDataWidget);
-        }
-        else if (props.CheckType<Transform>(name))
-        {
-            auto transformWidget = new TransformWidget((Transform*)prop.second.data, this);
-            actorPropsGridLayout->addWidget(transformWidget, currentGridRow, propertyDataColumn);
-            propertyWidgetsToUpdate.push_back((IPropertyWidget*)transformWidget);
-        }  
-        else if (props.CheckType<VEnum>(name))
-        {
-            auto vEnumWidget = new VEnumWidget(prop.second);
-            actorPropsGridLayout->addWidget(vEnumWidget, currentGridRow, propertyDataColumn);
-            propertyWidgetsToUpdate.push_back((IPropertyWidget*)vEnumWidget);
-        }
+        //Call create widget function based on property type
+        auto& createWidgetFunc = typeToFunctionMap[prop.info.value()];
+        createWidgetFunc(prop, currentGridRow);
 
         currentGridRow++;
     }
@@ -222,4 +158,102 @@ void PropertiesDock::ResetPropertyWidgetValues()
     {
         propertyWidget->ResetValue();
     }
+}
+
+void PropertiesDock::CreateBoolWidget(Property& prop, int currentGridRow)
+{
+    auto boolWidget = new BoolWidget(prop.GetData<bool>());
+    actorPropsGridLayout->addWidget(boolWidget, currentGridRow, propertyDataColumn);
+    propertyWidgetsToUpdate.push_back((IPropertyWidget*)boolWidget);
+}
+
+void PropertiesDock::CreateIntWidget(Property& prop, int currentGridRow)
+{
+    auto intWidget = new IntWidget(prop.GetData<int>());
+    actorPropsGridLayout->addWidget(intWidget, currentGridRow, propertyDataColumn);
+    propertyWidgetsToUpdate.push_back((IPropertyWidget*)intWidget);
+}
+
+void PropertiesDock::CreateFloatWidget(Property& prop, int currentGridRow)
+{
+    auto floatWidget = new FloatWidget(prop.GetData<float>());
+    actorPropsGridLayout->addWidget(floatWidget, currentGridRow, propertyDataColumn);
+    propertyWidgetsToUpdate.push_back((IPropertyWidget*)floatWidget);
+}
+
+void PropertiesDock::CreateFloat3Widget(Property& prop, int currentGridRow)
+{
+    auto float3Widget = new Float3Widget(prop.GetData<XMFLOAT3>());
+    actorPropsGridLayout->addWidget(float3Widget, currentGridRow, propertyDataColumn);
+    propertyWidgetsToUpdate.push_back((IPropertyWidget*)float3Widget);
+}
+
+void PropertiesDock::CreateFloat4Widget(Property& prop, int currentGridRow)
+{
+    auto float4Widget = new Float4Widget(prop.GetData<XMFLOAT4>());
+    actorPropsGridLayout->addWidget(float4Widget, currentGridRow, propertyDataColumn);
+    propertyWidgetsToUpdate.push_back((IPropertyWidget*)float4Widget);
+}
+
+void PropertiesDock::CreateFloat2Widget(Property& prop, int currentGridRow)
+{
+    auto float2Widget = new Float2Widget(prop.GetData<XMFLOAT2>());
+    actorPropsGridLayout->addWidget(float2Widget, currentGridRow, propertyDataColumn);
+    propertyWidgetsToUpdate.push_back((IPropertyWidget*)float2Widget);
+}
+
+void PropertiesDock::CreateVectorWidget(Property& prop, int currentGridRow)
+{
+    auto vectorWidget = new VectorWidget(prop.GetData<XMVECTOR>());
+    actorPropsGridLayout->addWidget(vectorWidget, currentGridRow, propertyDataColumn);
+    propertyWidgetsToUpdate.push_back((IPropertyWidget*)vectorWidget);
+}
+
+void PropertiesDock::CreateStringWidget(Property& prop, int currentGridRow)
+{
+    auto stringWidget = new StringWidget(prop);
+    actorPropsGridLayout->addWidget(stringWidget, currentGridRow, propertyDataColumn);
+    propertyWidgetsToUpdate.push_back((IPropertyWidget*)stringWidget);
+}
+
+void PropertiesDock::CreateWStringWidget(Property& prop, int currentGridRow)
+{
+    auto wstringWidget = new WStringWidget(prop);
+    actorPropsGridLayout->addWidget(wstringWidget, currentGridRow, propertyDataColumn);
+    propertyWidgetsToUpdate.push_back((IPropertyWidget*)wstringWidget);
+}
+
+void PropertiesDock::CreateTextureDataWidget(Property& prop, int currentGridRow)
+{
+    auto textureDataWidget = new TextureDataWidget(prop);
+    actorPropsGridLayout->addWidget(textureDataWidget, currentGridRow, propertyDataColumn);
+    propertyWidgetsToUpdate.push_back((IPropertyWidget*)textureDataWidget);
+}
+
+void PropertiesDock::CreateShaderDataWidget(Property& prop, int currentGridRow)
+{
+    auto shaderDataWidget = new ShaderDataWidget(prop);
+    actorPropsGridLayout->addWidget(shaderDataWidget, currentGridRow, propertyDataColumn);
+    propertyWidgetsToUpdate.push_back((IPropertyWidget*)shaderDataWidget);
+}
+
+void PropertiesDock::CreateMeshComponentDataWidget(Property& prop, int currentGridRow)
+{
+    auto meshComponentDataWidget = new MeshComponentDataWidget(prop);
+    actorPropsGridLayout->addWidget(meshComponentDataWidget, currentGridRow, propertyDataColumn);
+    propertyWidgetsToUpdate.push_back((IPropertyWidget*)meshComponentDataWidget);
+}
+
+void PropertiesDock::CreateTransformWidget(Property& prop, int currentGridRow)
+{
+    auto transformWidget = new TransformWidget(prop.GetData<Transform>(), this);
+    actorPropsGridLayout->addWidget(transformWidget, currentGridRow, propertyDataColumn);
+    propertyWidgetsToUpdate.push_back((IPropertyWidget*)transformWidget);
+}
+
+void PropertiesDock::CreateVEnumWidget(Property& prop, int currentGridRow)
+{
+    auto vEnumWidget = new VEnumWidget(prop);
+    actorPropsGridLayout->addWidget(vEnumWidget, currentGridRow, propertyDataColumn);
+    propertyWidgetsToUpdate.push_back((IPropertyWidget*)vEnumWidget);
 }
