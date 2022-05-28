@@ -61,6 +61,8 @@ struct Skeleton
 	std::map<std::string, Animation> animations;
 	std::string currentAnimation;
 
+	Skeleton();
+
 	void AddJoint(Joint joint);
 	int FindJointIndexByName(std::string name);
 	void CreateAnimation(std::string animationName);

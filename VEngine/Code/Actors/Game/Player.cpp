@@ -38,7 +38,7 @@ Player::Player()
 	//Empty as the root to be able to rotate the mesh towards movement input direction.
 	rootComponent = EmptyComponent::system.Add(this);
 
-	mesh = MeshComponent::system.Add(this, MeshComponent("character_test.fbx", "test.png"));
+	mesh = MeshComponent::system.Add(this, MeshComponent("test_character_animation.fbx", "test.png"));
 	rootComponent->AddChild(mesh);
 
 	camera = CameraComponent::system.Add(this, CameraComponent(XMFLOAT3(1.75f, 1.75f, -2.75f), false));
@@ -56,6 +56,8 @@ Player::Player()
 
 void Player::Start()
 {
+	mesh->GetSkeleton()->currentAnimation = "None";
+
 	camera->targetActor = this;
 
 	//Setup widgets
@@ -271,6 +273,8 @@ void Player::MovementInput(float deltaTime)
 
 	if (CheckIfPlayerMovementAndRotationStopped())
 	{
+		mesh->GetSkeleton()->currentAnimation = "Armature|ArmatureAction";
+
 		if (stepSoundsVolume > 0.f) { stepSoundsVolume -= deltaTime * 4.f; }
 		stepSounds->volume = stepSoundsVolume;
 
