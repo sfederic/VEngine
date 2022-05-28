@@ -13,7 +13,7 @@ struct Float4Widget : public QWidget, IPropertyWidget
 	SpinBox wSpinbox;
 	XMFLOAT4* value;
 
-	Float4Widget(XMFLOAT4* value_, QWidget* parent = 0);
+	Float4Widget(Property& prop_, QWidget* parent = 0);
 	void SetValue();
 	virtual void ResetValue() override;
 };

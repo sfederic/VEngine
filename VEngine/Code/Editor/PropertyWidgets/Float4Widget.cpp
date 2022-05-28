@@ -2,9 +2,10 @@
 #include "Float4Widget.h"
 #include <qboxlayout.h>
 
-Float4Widget::Float4Widget(XMFLOAT4* value_, QWidget* parent) : QWidget(parent)
+Float4Widget::Float4Widget(Property& prop_, QWidget* parent) : QWidget(parent)
 {
-	value = value_;
+	prop = prop_;
+	value = prop.GetData<XMFLOAT4>();
 
 	connect(&xSpinbox, &QDoubleSpinBox::editingFinished, this, &Float4Widget::SetValue);
 	connect(&ySpinbox, &QDoubleSpinBox::editingFinished, this, &Float4Widget::SetValue);
