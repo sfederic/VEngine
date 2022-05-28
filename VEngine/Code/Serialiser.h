@@ -2,8 +2,12 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <unordered_map>
+#include <typeindex>
+#include <functional>
 
 struct Properties;
+struct Property;
 
 enum class OpenMode
 {
@@ -58,6 +62,8 @@ private:
 	const std::string filename;
 	const OpenMode mode;
 
+	std::unordered_map<std::type_index, std::function<void(Property& prop, std::wstring& name)>> typeToWriteFuncMap;
+
 public:
 	Serialiser(const std::string filename_, const OpenMode mode_);
 	~Serialiser();
@@ -73,6 +79,8 @@ public:
 struct Deserialiser
 {
 	std::wifstream is;
+
+	std::unordered_map<std::type_index, std::function<void(Property& prop)>> typeToReadFuncMap;
 
 	Deserialiser(const std::string filename, const OpenMode mode);
 	~Deserialiser();

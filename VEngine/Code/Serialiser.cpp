@@ -9,8 +9,6 @@
 
 using namespace DirectX;
 
-std::unordered_map<std::type_index, std::function<void(Property& prop, std::wstring& name)>> typeToWriteFuncMap;
-
 void BinarySerialiser::Serialise(Properties& props)
 {
 	for (auto& propPair : props.propMap)
@@ -210,6 +208,88 @@ Deserialiser::Deserialiser(const std::string filename, const OpenMode mode)
 	//Ref:https://coderedirect.com/questions/456819/is-it-possible-to-set-a-text-file-to-utf-16
 	//std::locale loc(std::locale::classic(), new std::codecvt_utf16<wchar_t, 0x10ffff, std::little_endian>);
 	//ofs.imbue(loc);
+
+	//Setup read map
+	typeToReadFuncMap[typeid(float)] = [&](Property& prop) {
+		is >> *prop.GetData<float>();
+	};
+
+	typeToReadFuncMap[typeid(XMFLOAT2)] = [&](Property& prop) {
+		auto float2 = prop.GetData<XMFLOAT2>();
+		is >> float2->x;
+		is >> float2->y;
+	};
+
+	typeToReadFuncMap[typeid(XMFLOAT3)] = [&](Property& prop) {
+		auto float3 = prop.GetData<XMFLOAT3>();
+		is >> float3->x;
+		is >> float3->y;
+		is >> float3->z;
+	};
+	
+	typeToReadFuncMap[typeid(XMFLOAT4)] = [&](Property& prop) {
+		auto float4 = prop.GetData<XMFLOAT4>();
+		is >> float4->x;
+		is >> float4->y;
+		is >> float4->z;
+		is >> float4->w;
+	};
+
+	typeToReadFuncMap[typeid(bool)] = [&](Property& prop) {
+		is >> *prop.GetData<bool>();
+	};
+
+	typeToReadFuncMap[typeid(int)] = [&](Property& prop) {
+		is >> *prop.GetData<int>();
+	};
+
+	typeToReadFuncMap[typeid(std::string)] = [&](Property& prop) {
+		wchar_t propString[512]{};
+		is.getline(propString, 512);
+		auto str = prop.GetData<std::string>();
+		str->assign(VString::wstos(propString));
+	};
+		
+	typeToReadFuncMap[typeid(std::wstring)] = [&](Property& prop) {
+		//wstring is converted to string on Serialise. Convert back to wstring here.
+		wchar_t propString[512]{};
+		is.getline(propString, 512);
+		auto str = prop.GetData<std::wstring>();
+		str->assign(propString);
+	};
+	
+	typeToReadFuncMap[typeid(TextureData)] = [&](Property& prop) {
+		wchar_t propString[512];
+		is.getline(propString, 512);
+		auto textureData = prop.GetData<TextureData>();
+		textureData->filename.assign(VString::wstos(propString));
+	};
+
+	typeToReadFuncMap[typeid(ShaderData)] = [&](Property& prop) {
+		wchar_t propString[512]{};
+		is.getline(propString, 512);
+		auto shaderData = prop.GetData<ShaderData>();
+		shaderData->filename.assign(VString::wstos(propString));
+	};
+
+	typeToReadFuncMap[typeid(MeshComponentData)] = [&](Property& prop) {
+		wchar_t propString[512]{};
+		is.getline(propString, 512);
+		auto meshComponentData = prop.GetData<MeshComponentData>();
+		meshComponentData->filename.assign(VString::wstos(propString));
+	};
+
+	typeToReadFuncMap[typeid(UID)] = [&](Property& prop) {
+		UID* uid = prop.GetData<UID>();
+		is >> *uid;
+	};
+
+	typeToReadFuncMap[typeid(VEnum)] = [&](Property& prop) {
+		wchar_t propString[512]{};
+		is.getline(propString, 512);
+		auto vEnum = prop.GetData<VEnum>();
+		vEnum->SetValue(VString::wstos(propString));
+	};
 }
 
 Deserialiser::~Deserialiser()
@@ -230,94 +310,17 @@ void Deserialiser::Deserialise(Properties& props)
 			return;
 		}
 
-		auto prop = props.propMap.find(VString::wstos(line));
-		if (prop == props.propMap.end())
+		auto propIt = props.propMap.find(VString::wstos(line));
+		if (propIt == props.propMap.end())
 		{
 			continue;
 		}
 
-		const std::string& name = prop->first;
+		const std::string& name = propIt->first;
+		Property& prop = propIt->second;
 
-		if (props.CheckType<float>(name))
-		{
-			is >> *props.GetData<float>(name);
-		}
-		else if (props.CheckType<XMFLOAT2>(name))
-		{
-			XMFLOAT2* float2 = props.GetData<XMFLOAT2>(name);
-			is >> float2->x;
-			is >> float2->y;
-		}
-		else if (props.CheckType<XMFLOAT3>(name))
-		{
-			XMFLOAT3* float3 = props.GetData<XMFLOAT3>(name);
-			is >> float3->x;
-			is >> float3->y;
-			is >> float3->z;
-		}
-		else if (props.CheckType<XMFLOAT4>(name))
-		{
-			XMFLOAT4* float4 = props.GetData<XMFLOAT4>(name);
-			is >> float4->x;
-			is >> float4->y;
-			is >> float4->z;
-			is >> float4->w;
-		}
-		else if (props.CheckType<bool>(name))
-		{
-			is >> *props.GetData<bool>(name);
-		}
-		else if (props.CheckType<int>(name))
-		{
-			is >> *props.GetData<int>(name);
-		}
-		else if (props.CheckType<std::string>(name))
-		{
-			wchar_t propString[512];
-			is.getline(propString, 512);
-			std::string* str = props.GetData<std::string>(name);
-			str->assign(VString::wstos(propString));
-		}
-		else if (props.CheckType<std::wstring>(name))
-		{
-			//wstring is converted to string on Serialise. Convert back to wstring here.
-			wchar_t propString[512];
-			is.getline(propString, 512);
-			std::wstring* wstr = props.GetData<std::wstring>(name);
-			wstr->assign(propString);
-		}
-		else if (props.CheckType<TextureData>(name))
-		{
-			wchar_t propString[512];
-			is.getline(propString, 512);
-			TextureData* textureData = props.GetData<TextureData>(name);
-			textureData->filename.assign(VString::wstos(propString));
-		}
-		else if (props.CheckType<ShaderData>(name))
-		{
-			wchar_t propString[512]{};
-			is.getline(propString, 512);
-			ShaderData* shaderData = props.GetData<ShaderData>(name);
-			shaderData->filename.assign(VString::wstos(propString));
-		}		
-		else if (props.CheckType<MeshComponentData>(name))
-		{
-			wchar_t propString[512]{};
-			is.getline(propString, 512);
-			MeshComponentData* meshComponentData = props.GetData<MeshComponentData>(name);
-			meshComponentData->filename.assign(VString::wstos(propString));
-		}
-		else if (props.CheckType<UID>(name))
-		{
-			UID* uid = props.GetData<UID>(name);
-			is >> *uid;
-		}
-		else if (props.CheckType<VEnum>(name))
-		{
-			wchar_t propString[512]{};
-			is.getline(propString, 512);
-			auto vEnum = props.GetData<VEnum>(name);
-			vEnum->SetValue(VString::wstos(propString));
-		}
+		auto funcIt = typeToReadFuncMap.find(prop.info.value());
+		assert(funcIt != typeToReadFuncMap.end() && "Matching type_info not found");
+		funcIt->second(prop);
 	}
 }
