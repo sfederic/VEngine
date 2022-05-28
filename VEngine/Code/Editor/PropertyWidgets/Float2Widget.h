@@ -11,7 +11,7 @@ struct Float2Widget : public QWidget, IPropertyWidget
 	SpinBox ySpinbox;
 	XMFLOAT2* value;
 
-	Float2Widget(XMFLOAT2* value_, QWidget* parent = 0);
+	Float2Widget(Property& prop_, QWidget* parent = 0);
 	void SetValue();
 	virtual void ResetValue() override;
 };
