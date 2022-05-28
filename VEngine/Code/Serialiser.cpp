@@ -9,6 +9,8 @@
 
 using namespace DirectX;
 
+std::unordered_map<std::type_index, std::function<void(Property& prop, std::wstring& name)>> typeToWriteFuncMap;
+
 void BinarySerialiser::Serialise(Properties& props)
 {
 	for (auto& propPair : props.propMap)
@@ -97,6 +99,74 @@ void BinaryDeserialiser::Deserialise(Properties& props)
 Serialiser::Serialiser(const std::string filename_, const OpenMode mode_) :
 	filename(filename_), mode(mode_)
 {
+	typeToWriteFuncMap[typeid(bool)] = [&](Property& prop, std::wstring& name) {
+		ss << name << "\n" << *prop.GetData<bool>() << "\n"; 
+	};
+
+	typeToWriteFuncMap[typeid(float)] = [&](Property& prop, std::wstring& name) {
+		ss << name << "\n" << *prop.GetData<float>() << "\n";
+	};
+
+	typeToWriteFuncMap[typeid(XMFLOAT2)] = [&](Property& prop, std::wstring& name) {
+		auto value = prop.GetData<XMFLOAT2>();
+		ss << name << "\n" << value->x << " " << value->y << "\n";
+	};
+
+	typeToWriteFuncMap[typeid(XMFLOAT3)] = [&](Property& prop, std::wstring& name) {
+		auto value = prop.GetData<XMFLOAT3>();
+		ss << name << "\n" << value->x << " " << value->y << " " << value->z << "\n"; 
+	};
+
+	typeToWriteFuncMap[typeid(XMFLOAT4)] = [&](Property& prop, std::wstring& name) {
+		auto value = prop.GetData<XMFLOAT4>();
+		ss << name << "\n" << value->x << " " << value->y << " " << value->z << " " << value->w << "\n";
+	};
+
+	typeToWriteFuncMap[typeid(int)] = [&](Property& prop, std::wstring& name) {
+		ss << name << "\n" << *prop.GetData<int>() << "\n";
+	};
+
+	typeToWriteFuncMap[typeid(std::string)] = [&](Property& prop, std::wstring& name) {
+		auto str = prop.GetData<std::string>();
+		ss << name << "\n" << str->c_str() << "\n";
+	};
+
+	typeToWriteFuncMap[typeid(std::wstring)] = [&](Property& prop, std::wstring& name) {
+		auto wstr = prop.GetData<std::wstring>();
+		ss << name << "\n" << VString::wstos(wstr->data()).c_str() << "\n";
+	};
+
+	typeToWriteFuncMap[typeid(TextureData)] = [&](Property& prop, std::wstring& name) {
+		auto textureData = prop.GetData<TextureData>();
+		ss << name << "\n" << textureData->filename.c_str() << "\n";
+	};
+
+	typeToWriteFuncMap[typeid(std::string)] = [&](Property& prop, std::wstring& name) {
+		auto shaderData = prop.GetData<ShaderData>();
+		ss << name << "\n" << shaderData->filename.c_str() << "\n";
+	};
+
+	typeToWriteFuncMap[typeid(MeshComponentData)] = [&](Property& prop, std::wstring& name) {
+		auto meshComponentData = prop.GetData<MeshComponentData>();
+		ss << name << "\n" << meshComponentData->filename.c_str() << "\n";
+	};
+
+	typeToWriteFuncMap[typeid(ShaderData)] = [&](Property& prop, std::wstring& name) {
+		auto shaderData = prop.GetData<ShaderData>();
+		ss << name << "\n" << shaderData->filename.c_str() << "\n";
+	};
+
+	typeToWriteFuncMap[typeid(UID)] = [&](Property& prop, std::wstring& name) {
+		auto uid = prop.GetData<UID>();
+		ss << name << "\n";
+		ss << *uid << "\n";
+	};
+
+	typeToWriteFuncMap[typeid(VEnum)] = [&](Property& prop, std::wstring& name) {
+		auto vEnum = prop.GetData<VEnum>();
+		ss << name << "\n";
+		ss << vEnum->GetValue().c_str() << "\n";
+	};
 }
 
 Serialiser::~Serialiser()
@@ -115,75 +185,14 @@ Serialiser::~Serialiser()
 
 void Serialiser::Serialise(Properties& props)
 {
-	for (auto& prop : props.propMap)
+	for (auto& propPair : props.propMap)
 	{
-		const std::wstring wname = VString::stows(prop.first);
-		const std::string name = prop.first;
+		std::wstring wname = VString::stows(propPair.first);
+		Property& prop = propPair.second;
 
-		if (props.CheckType<float>(name))
-		{
-			ss << wname << "\n" << *props.GetData<float>(name) << "\n";
-		}
-		else if (props.CheckType<XMFLOAT2>(name))
-		{
-			XMFLOAT2* value = props.GetData<XMFLOAT2>(name);
-			ss << wname << "\n" << value->x << " " << value->y << "\n";
-		}		
-		else if (props.CheckType<XMFLOAT3>(name))
-		{
-			XMFLOAT3* value = props.GetData<XMFLOAT3>(name);
-			ss << wname << "\n" << value->x << " " << value->y << " " << value->z << "\n";
-		}
-		else if (props.CheckType<XMFLOAT4>(name))
-		{
-			XMFLOAT4* value = props.GetData<XMFLOAT4>(name);
-			ss << wname << "\n" << value->x << " " << value->y << " " << value->z << " " << value->w << "\n";
-		}
-		else if (props.CheckType<bool>(name))
-		{
-			ss << wname << "\n" << *props.GetData<bool>(name) << "\n";
-		}
-		else if (props.CheckType<int>(name))
-		{
-			ss << wname << "\n" << *props.GetData<int>(name) << "\n";
-		}
-		else if (props.CheckType<std::string>(name))
-		{
-			std::string* str = props.GetData<std::string>(name);
-			ss << wname << "\n" << str->c_str() << "\n";
-		}		
-		else if (props.CheckType<std::wstring>(name))
-		{
-			std::wstring* wstr = props.GetData<std::wstring>(name);
-			ss << wname << "\n" << VString::wstos(wstr->data()).c_str() << "\n";
-		}	
-		else if (props.CheckType<TextureData>(name))
-		{
-			TextureData* textureData = props.GetData<TextureData>(name);
-			ss << wname << "\n" << textureData->filename.c_str() << "\n";
-		}
-		else if (props.CheckType<ShaderData>(name))
-		{
-			ShaderData* shaderData = props.GetData<ShaderData>(name);
-			ss << wname << "\n" << shaderData->filename.c_str() << "\n";
-		}		
-		else if (props.CheckType<MeshComponentData>(name))
-		{
-			MeshComponentData* meshComponentData = props.GetData<MeshComponentData>(name);
-			ss << wname << "\n" << meshComponentData->filename.c_str() << "\n";
-		}
-		else if (props.CheckType<UID>(name))
-		{
-			UID* uid = props.GetData<UID>(name);
-			ss << wname << "\n";
-			ss << *uid << "\n";
-		}
-		else if (props.CheckType<VEnum>(name))
-		{
-			auto vEnum = props.GetData<VEnum>(name);
-			ss << wname << "\n";
-			ss << vEnum->GetValue().c_str() << "\n";
-		}
+		auto typeIt = typeToWriteFuncMap.find(prop.info.value());
+		assert(typeIt != typeToWriteFuncMap.end() && "Matching type_info won't be found in map");
+		typeIt->second(prop, wname);
 	}
 
 	ss << "next\n"; //"next" moves the forloop onto the next 'Object'
