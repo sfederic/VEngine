@@ -37,18 +37,11 @@ public:
 private:
 	std::unordered_map<std::type_index, std::function<void(Property&, int)>> typeToFunctionMap;
 
-	void CreateBoolWidget(Property& prop, int currentGridRow);
-	void CreateIntWidget(Property& prop, int currentGridRow);
-	void CreateFloatWidget(Property& prop, int currentGridRow);
-	void CreateFloat3Widget(Property& prop, int currentGridRow);
-	void CreateFloat4Widget(Property& prop, int currentGridRow);
-	void CreateFloat2Widget(Property& prop, int currentGridRow);
-	void CreateVectorWidget(Property& prop, int currentGridRow);
-	void CreateStringWidget(Property& prop, int currentGridRow);
-	void CreateWStringWidget(Property& prop, int currentGridRow);
-	void CreateTextureDataWidget(Property& prop, int currentGridRow);
-	void CreateShaderDataWidget(Property& prop, int currentGridRow);
-	void CreateMeshComponentDataWidget(Property& prop, int currentGridRow);
-	void CreateTransformWidget(Property& prop, int currentGridRow);
-	void CreateVEnumWidget(Property& prop, int currentGridRow);
+	 template <typename PropType, typename WidgetType>
+	 void CreateWidget(Property& prop, int row) 
+	 {
+	     auto widget = new WidgetType(prop.GetData<PropType>());
+	     actorPropsGridLayout->addWidget(widget, row, propertyDataColumn);
+	     propertyWidgetsToUpdate.push_back((IPropertyWidget*)widget);
+	 }
 };
