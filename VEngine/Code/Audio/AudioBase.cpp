@@ -1,9 +1,8 @@
 #include "vpch.h"
 #include "AudioBase.h"
 
-AudioBase::AudioBase(std::string filename)
+AudioBase::AudioBase()
 {
-	audioFilename = filename;
 }
 
 AudioBase::~AudioBase()

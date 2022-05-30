@@ -7,8 +7,7 @@ struct AudioBase
 {
 	WAVEFORMATEXTENSIBLE waveFormat = {};
 	XAUDIO2_BUFFER buffer = {};
-	std::string audioFilename;
 
-	AudioBase(std::string filename);
+	AudioBase();
 	~AudioBase();
 };
