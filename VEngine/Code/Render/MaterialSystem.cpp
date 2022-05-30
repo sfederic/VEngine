@@ -40,4 +40,6 @@ void MaterialSystem::CreateAllMaterials()
 void MaterialSystem::Cleanup()
 {
 	materials.clear();
+
+	systemState = SystemStates::Unloaded;
 }
