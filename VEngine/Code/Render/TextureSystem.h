@@ -5,8 +5,6 @@
 #include "Render/Texture2D.h"
 #include "System.h"
 
-class Texture2D;
-
 struct TextureSystem : System
 {
 	std::unordered_map<std::string, std::unique_ptr<Texture2D>> texture2DMap;
