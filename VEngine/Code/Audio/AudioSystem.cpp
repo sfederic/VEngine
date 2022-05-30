@@ -3,8 +3,6 @@
 #include <filesystem>
 #include <cassert>
 #include "Debug.h"
-#include "AudioBase.h"
-#include "AudioChannel.h"
 #include "Components/AudioComponent.h"
 
 #define fourccRIFF 'FFIR'
@@ -48,7 +46,6 @@ void AudioSystem::Tick()
 
 	for (auto& it : stoppedChannels)
 	{
-		delete it->second;
 		channelMap.erase(it);
 	}
 }
@@ -67,24 +64,13 @@ void AudioSystem::Cleanup()
 
 void AudioSystem::DeleteLoadedAudioAndChannels()
 {
-	for (auto& channel : channelMap)
-	{
-		delete channel.second;
-	}
-
 	channelMap.clear();
-
-	for (auto& audioIt : loadedAudioMap)
-	{
-		delete audioIt.second;
-	}
-
 	loadedAudioMap.clear();
 }
 
 AudioChannel* AudioSystem::GetChannel(uint64_t channelID)
 {
-	return channelMap.find(channelID)->second;
+	return channelMap.find(channelID)->second.get();
 }
 
 void AudioSystem::MuteAllAudio()
@@ -144,12 +130,10 @@ uint64_t AudioSystem::PlayAudio(const std::string filename, bool loopAudio)
 		audioIt = loadedAudioMap.find(filename);
 	}
 
-	AudioBase* audio = audioIt->second;
+	AudioBase* audio = audioIt->second.get();
 
-	auto channel = new AudioChannel(); 
+	auto channel = CreateAudioChannel();
 	channel->isPlaying = true;
-	nextChannelID++;
-	channelMap[nextChannelID] = channel;
 
 	IXAudio2SourceVoice* sourceVoice = nullptr;
 	HR(audioEngine->CreateSourceVoice(&sourceVoice, (WAVEFORMATEX*)&audio->waveFormat, 0, 2.0f, channel));
@@ -173,8 +157,7 @@ void AudioSystem::LoadAudio(const std::string filename)
 	std::string path = "Audio/" + filename;
 	assert(std::filesystem::exists(path) && "Audio file not found.");
 
-	auto audio = new AudioBase(filename);
-	loadedAudioMap.insert(std::make_pair(filename, audio));
+	auto audio = CreateAudioBase(filename);
 
 	//Initilization of audio is bad if nothing is zeroed out, source voice fails
 	HR(LoadWAV(path, audio->waveFormat, audio->buffer));
@@ -185,7 +168,6 @@ void AudioSystem::UnloadAudio(const std::string filename)
 	auto audioIt = loadedAudioMap.find(filename);
 	assert(audioIt != loadedAudioMap.end());
 
-	delete audioIt->second;
 	loadedAudioMap.erase(audioIt);
 }
 
@@ -258,6 +240,18 @@ HRESULT AudioSystem::ReadChunkData(HANDLE file, void* buffer, DWORD bufferSize, 
 	}
 
 	return hr;
+}
+
+AudioChannel* AudioSystem::CreateAudioChannel()
+{
+	channelMap.insert(std::make_pair(++nextChannelID, std::make_unique<AudioChannel>()));
+	return channelMap[nextChannelID].get();
+}
+
+AudioBase* AudioSystem::CreateAudioBase(std::string audioFilename)
+{
+	loadedAudioMap.insert(std::make_pair(audioFilename, std::make_unique<AudioBase>()));
+	return loadedAudioMap[audioFilename].get();
 }
 
 //REF::https://docs.microsoft.com/en-us/windows/win32/xaudio2/how-to--load-audio-data-files-in-xaudio2

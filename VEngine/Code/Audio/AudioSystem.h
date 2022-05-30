@@ -1,11 +1,11 @@
 #pragma once
 #include <xaudio2.h>
 #include <string>
+#include <memory>
 #include <map>
+#include "AudioBase.h"
+#include "AudioChannel.h"
 #include "System.h"
-
-struct AudioChannel;
-struct AudioBase;
 
 //@Todo: Ogg Vorbis loader if file size becomes an issue https://www.gamedev.net/forums/topic/496350-xaudio2-and-ogg/
 
@@ -19,10 +19,10 @@ private:
 	IXAudio2* audioEngine = nullptr; //Main XAudio2 sound engine
 	IXAudio2MasteringVoice* masteringVoice = nullptr; //Main track	
 
-	typedef std::map<std::string, AudioBase*> AudioMap;
+	typedef std::map<std::string, std::unique_ptr<AudioBase>> AudioMap;
 	AudioMap loadedAudioMap;
 
-	typedef std::map<uint64_t, AudioChannel*> ChannelMap;
+	typedef std::map<uint64_t, std::unique_ptr<AudioChannel>> ChannelMap;
 	ChannelMap channelMap;
 
 public:
@@ -49,6 +49,9 @@ private:
 	HRESULT LoadWAV(const std::string filename, WAVEFORMATEXTENSIBLE& waveFormat, XAUDIO2_BUFFER& buffer);
 	HRESULT FindChunk(HANDLE file, DWORD fourcc, DWORD* dwChunkSize, DWORD* dwChunkDataPosition);
 	HRESULT ReadChunkData(HANDLE file, void* buffer, DWORD bufferSize, DWORD bufferOffset);
+
+	AudioChannel* CreateAudioChannel();
+	AudioBase* CreateAudioBase(std::string audioFilename);
 };
 
 extern AudioSystem audioSystem;
