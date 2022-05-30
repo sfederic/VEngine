@@ -48,4 +48,6 @@ void TextureSystem::CreateAllTextures()
 void TextureSystem::Cleanup()
 {
 	texture2DMap.clear();
+
+	systemState = SystemStates::Unloaded;
 }
