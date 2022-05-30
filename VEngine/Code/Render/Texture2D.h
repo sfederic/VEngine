@@ -15,10 +15,12 @@ class Texture2D
 	uint32_t height = 0;
 
 public:
+	Texture2D() {}
 	Texture2D(std::string filename_) : filename(filename_) {}
 	~Texture2D();
 
 	std::string GetFilename() { return filename; }
+	void SetFilename(std::string filename_) { filename = filename_; }
 
 	void SetTextureData(ID3D11Resource* data_) { data = data_; }
 	ID3D11Resource* GetTextureData() { return data; }
