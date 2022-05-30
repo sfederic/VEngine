@@ -117,21 +117,19 @@ namespace RenderUtils
 		return defaultSampler;
 	}
 
-	Texture2D* CreateTexture(std::string textureFilename)
+	void CreateTexture(Texture2D* texture)
 	{
-		if (textureFilename.empty())
+		if (texture->GetFilename().empty())
 		{
-			textureFilename = "test.png";
+			texture->SetFilename("test.png");
 		}
-
-		Texture2D* texture = textureSystem.FindTexture2D(textureFilename);
 
 		std::wstring path = L"Textures/" + VString::stows(texture->GetFilename());
 
 		assert(std::filesystem::exists(path) && "Texture file doesn't exist");
 
-		ID3D11Resource* resource;
-		ID3D11ShaderResourceView* srv;
+		ID3D11Resource* resource = nullptr;
+		ID3D11ShaderResourceView* srv = nullptr;
 		HR(CreateWICTextureFromFile(device, path.c_str(), &resource, &srv));
 		assert(resource);
 		assert(srv);
@@ -149,7 +147,5 @@ namespace RenderUtils
 
 		texture->SetWidth(texDesc.Width);
 		texture->SetHeight(texDesc.Height);
-
-		return texture;
 	}
 }

@@ -1,25 +1,10 @@
 #include "vpch.h"
 #include "TextureSystem.h"
-#include "Render/Texture2D.h"
 #include "Render/RenderUtils.h"
 #include <filesystem>
 #include "Log.h"
 
 TextureSystem textureSystem;
-
-TextureSystem::TextureSystem() : System("TextureSystem")
-{
-}
-
-void TextureSystem::AddTexture2D(Texture2D* texture)
-{
-	texture2DMap[texture->GetFilename()] = texture;
-
-	if (systemState == SystemStates::Loaded)
-	{
-		texture = RenderUtils::CreateTexture(texture->GetFilename());
-	}
-}
 
 Texture2D* TextureSystem::FindTexture2D(std::string textureFilename)
 {
@@ -31,22 +16,30 @@ Texture2D* TextureSystem::FindTexture2D(std::string textureFilename)
 	}
 
 	auto textureIt = texture2DMap.find(textureFilename);
+
+	//Add texture2d to system
 	if (textureIt == texture2DMap.end())
 	{
-		auto texture = new Texture2D(textureFilename);
-		AddTexture2D(texture);
-		return texture;
+		texture2DMap.insert(std::make_pair(textureFilename, std::make_unique<Texture2D>(textureFilename)));
+
+		auto& texture = texture2DMap[textureFilename];
+
+		if (systemState == SystemStates::Loaded)
+		{
+			RenderUtils::CreateTexture(texture.get());
+		}
+
+		return texture.get();
 	}
 
-	return textureIt->second;
+	return textureIt->second.get();
 }
 
 void TextureSystem::CreateAllTextures()
 {
 	for (auto& textureIt : texture2DMap)
 	{
-		Texture2D* texture = textureIt.second;
-		texture = RenderUtils::CreateTexture(textureIt.first);
+		RenderUtils::CreateTexture(textureIt.second.get());
 	}
 
 	systemState = SystemStates::Loaded;
@@ -54,11 +47,5 @@ void TextureSystem::CreateAllTextures()
 
 void TextureSystem::Cleanup()
 {
-	for (auto& textureIt : texture2DMap)
-	{
-		Texture2D* texture = textureIt.second;
-		delete texture;
-	}
-
 	texture2DMap.clear();
 }
