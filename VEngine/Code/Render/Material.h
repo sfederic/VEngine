@@ -30,7 +30,7 @@ struct MaterialShaderData
 
 class Material
 {
-	UID uid = GenerateUID();
+	UID uid = 0;
 
 public:
 	Texture2D* texture = nullptr;
@@ -51,11 +51,13 @@ public:
 	VEnum blendStateValue;
 
 public:
-	Material();
 	Material(std::string textureFilename_, std::string shaderFilename_);
+
 	virtual void Create();
 	virtual void Destroy();
+
 	virtual Properties GetProps();
 
 	UID GetUID() { return uid; }
+	void SetUID(UID uid_) { uid = uid_; }
 };

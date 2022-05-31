@@ -9,10 +9,12 @@ MaterialSystem::MaterialSystem() : System("MaterialSystem")
 {
 }
 
-Material* MaterialSystem::CreateMaterial()
+Material* MaterialSystem::CreateMaterial(std::string textureFilename, std::string shaderFilename)
 {
-	auto material = new Material();
-	materials.emplace(material->GetUID(), material);
+	auto uid = GenerateUID();
+	materials.emplace(uid, std::make_unique<Material>(textureFilename, shaderFilename));
+	auto material = materials[uid].get();
+	material->SetUID(uid);
 	return material;
 }
 

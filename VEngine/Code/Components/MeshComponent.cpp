@@ -28,7 +28,8 @@ MeshComponent::MeshComponent()
 	meshDataProxy = new MeshDataProxy();
 	pso = new PipelineStateObject();
 
-	material = materialSystem.CreateMaterial();
+	//default values for material
+	material = materialSystem.CreateMaterial("test.png", "DefaultShader.hlsl");
 }
 
 MeshComponent::MeshComponent(const std::string filename_,

@@ -12,20 +12,6 @@
 #include "Components/MeshComponent.h"
 #include "Log.h"
 
-Material::Material()
-{
-	textureData.filename = "test.png";
-	shaderData.filename = "DefaultShader.hlsl";
-
-	rastStateValue.Add(RastStates::solid);
-	rastStateValue.Add(RastStates::noBackCull);
-	rastStateValue.Add(RastStates::shadow);
-	rastStateValue.Add(RastStates::wireframe);
-
-	blendStateValue.Add(BlendStates::null);
-	blendStateValue.Add(BlendStates::Default);
-}
-
 Material::Material(std::string textureFilename_, std::string shaderFilename_)
 {
 	textureData.filename = textureFilename_;

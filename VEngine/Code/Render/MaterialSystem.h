@@ -11,7 +11,7 @@ struct MaterialSystem : System
 	std::unordered_map<UID, std::unique_ptr<Material>> materials;
 
 	MaterialSystem();
-	Material *CreateMaterial();
+	Material* CreateMaterial(std::string textureFilename, std::string shaderFilename);
 	Material* FindMaterial(UID uid);
 	void CreateAllMaterials();
 	void Cleanup();
