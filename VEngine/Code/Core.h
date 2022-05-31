@@ -1,9 +1,5 @@
 #pragma once
 
-//For windef.h
-#define _AMD64_
-#include <windef.h>
-
 #include <cstdint>
 #include <string>
 
