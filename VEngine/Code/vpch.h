@@ -11,6 +11,7 @@
 #include <optional>
 #include <typeindex>
 #include <functional>
+#include <memory>
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
 #include <d3d11.h>
