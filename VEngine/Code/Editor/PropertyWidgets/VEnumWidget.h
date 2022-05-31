@@ -3,6 +3,7 @@
 #include "IPropertyWidget.h"
 
 struct VEnum;
+class QWheelEvent;
 
 struct VEnumWidget : public QComboBox, IPropertyWidget
 {
@@ -11,4 +12,6 @@ struct VEnumWidget : public QComboBox, IPropertyWidget
 	VEnumWidget(Property& value_);
 	void SetValue();
 	virtual void ResetValue() override;
+
+	void wheelEvent(QWheelEvent* event_) override;
 };

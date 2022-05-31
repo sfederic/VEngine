@@ -1,5 +1,6 @@
 #include "vpch.h"
 #include "VEnumWidget.h"
+#include <QWheelEvent>
 #include "VEnum.h"
 
 VEnumWidget::VEnumWidget(Property& value_)
@@ -13,7 +14,7 @@ VEnumWidget::VEnumWidget(Property& value_)
 	}
 
 	setCurrentText(QString::fromStdString(value->GetValue()));
-
+	setFocusPolicy(Qt::StrongFocus);
 	connect(this, &QComboBox::currentTextChanged, this, &VEnumWidget::SetValue);
 }
 
@@ -31,4 +32,9 @@ void VEnumWidget::SetValue()
 
 void VEnumWidget::ResetValue()
 {
+}
+
+void VEnumWidget::wheelEvent(QWheelEvent* event_)
+{
+	!hasFocus() ? event_->ignore() : QComboBox::wheelEvent(event_);
 }
