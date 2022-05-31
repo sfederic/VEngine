@@ -5,13 +5,13 @@ std::vector<TimerItem> timerItems;
 
 void Timer::Tick(float deltaTime)
 {
-	for (int timerIndex = 0; timerIndex < timerItems.size(); timerIndex++)
+	for(auto& timerItem : timerItems)
 	{
-		timerItems[timerIndex].currentTime += deltaTime;
+		timerItem.currentTime += deltaTime;
 
-		if (timerItems[timerIndex].currentTime > timerItems[timerIndex].endTime)
+		if (timerItem.currentTime > timerItem.endTime)
 		{
-			timerItems[timerIndex].functionToCall();
+			timerItem.functionToCall();
 		}
 	}
 
