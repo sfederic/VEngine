@@ -1,5 +1,6 @@
 #include "vpch.h"
 #include "SpinBox.h"
+#include <QWheelEvent>
 
 SpinBox::SpinBox(QWidget* parent) : QDoubleSpinBox(parent)
 {
@@ -9,6 +10,13 @@ SpinBox::SpinBox(QWidget* parent) : QDoubleSpinBox(parent)
 	setButtonSymbols(QAbstractSpinBox::NoButtons);
 
 	setDecimals(3);
+
+	setFocusPolicy(Qt::StrongFocus);
+}
+
+void SpinBox::wheelEvent(QWheelEvent* event_)
+{
+	!hasFocus() ? event_->ignore() : QDoubleSpinBox::wheelEvent(event_);
 }
 
 IntSpinBox::IntSpinBox(QWidget* parent)
@@ -17,6 +25,13 @@ IntSpinBox::IntSpinBox(QWidget* parent)
 	setMaximum(std::numeric_limits<int>::max());
 
 	setButtonSymbols(QAbstractSpinBox::NoButtons);
+
+	setFocusPolicy(Qt::StrongFocus);
+}
+
+void IntSpinBox::wheelEvent(QWheelEvent* event_)
+{
+	!hasFocus() ? event_->ignore() : QSpinBox::wheelEvent(event_);
 }
 
 UintSpinBox::UintSpinBox(QWidget* parent)
@@ -25,4 +40,11 @@ UintSpinBox::UintSpinBox(QWidget* parent)
 	setMaximum(std::numeric_limits<uint32_t>::max());
 
 	setButtonSymbols(QAbstractSpinBox::NoButtons);
+
+	setFocusPolicy(Qt::StrongFocus);
+}
+
+void UintSpinBox::wheelEvent(QWheelEvent* event_)
+{
+	!hasFocus() ? event_->ignore() : QSpinBox::wheelEvent(event_);
 }
