@@ -7,5 +7,5 @@ AudioBase::AudioBase()
 
 AudioBase::~AudioBase()
 {
-	free((void*)buffer.pAudioData);
+	delete buffer.pAudioData;
 }
