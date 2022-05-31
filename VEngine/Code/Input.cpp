@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "Input.h"
 #include <vector>
-#include <Windows.h> //@Todo: can probably get rid of this, only needed for GetAsyncKey()
+#include <Windows.h>
 
 std::vector<Keys> currentDownKeys;
 std::vector<Keys> currentUpKeys;
