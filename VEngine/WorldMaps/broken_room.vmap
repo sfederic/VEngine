@@ -62,11 +62,11 @@ AudioActor
 Player
 1
  Position
-0 0 0
+1 0 0
  Rotation
-0 -0.707106 0 -0.707107
+0 -1.19209e-06 -0 1
  Scale
-0.999996 1 0.999996
+0.2 0.2 0.2
 Ambient
 1 1 1 1
 Audio Filename
@@ -88,7 +88,7 @@ Grid Obstacle
 Loop
 1
 Mesh
-character_test.fbx
+test_character_animation.fbx
 Metallic
 0
 Name
@@ -126,7 +126,7 @@ UvRotationSpeed
 UvScale
 1 1
 Volume
-0.069585
+-0.0342699
 next
 Unit
 0

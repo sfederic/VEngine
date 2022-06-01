@@ -273,8 +273,6 @@ void Player::MovementInput(float deltaTime)
 
 	if (CheckIfPlayerMovementAndRotationStopped())
 	{
-		mesh->GetSkeleton()->currentAnimation = "Armature|ArmatureAction";
-
 		if (stepSoundsVolume > 0.f) { stepSoundsVolume -= deltaTime * 4.f; }
 		stepSounds->volume = stepSoundsVolume;
 
@@ -285,9 +283,17 @@ void Player::MovementInput(float deltaTime)
 
 		if (Input::GetAsyncKey(Keys::W))
 		{
+			mesh->GetSkeleton()->currentAnimation = "Armature|ArmatureAction";
+
 			nextPos = GetPositionVector() + GetForwardVectorV();
 			CheckNextMoveNode(previousPos);
 		}
+		else
+		{
+			//Testing code for animation states. Keep in mind it would need to be like this for player.
+			mesh->GetSkeleton()->currentAnimation.clear();
+		}
+
 		if (Input::GetAsyncKey(Keys::S))
 		{
 			nextPos = GetPositionVector() + -GetForwardVectorV();
