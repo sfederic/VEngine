@@ -1475,6 +1475,11 @@ void AnimateSkeletalMesh(MeshComponent* mesh)
 
 	Skeleton* skeleton = mesh->meshDataProxy->skeleton;
 
+	if (skeleton->currentAnimation.empty())
+	{
+		return;
+	}
+
 	if (skeleton && !skeleton->joints.empty())
 	{
 		int skinningDataIndex = 0;
