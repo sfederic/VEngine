@@ -27,6 +27,8 @@ struct AnimFrame
 
 struct Animation
 {
+	bool isPlaying = true;
+
 	//Maps joint index to AnimFrames
 	std::map<int, std::vector<AnimFrame>> frames;
 

@@ -3,6 +3,11 @@
 
 void Animation::Interpolate(float t, Joint& joint, Skeleton* skeleton)
 {
+	if (!isPlaying)
+	{
+		return;
+	}
+
 	//get anim frames connected to joint
 	std::vector<AnimFrame>& jointFrames = frames[joint.index];
 
