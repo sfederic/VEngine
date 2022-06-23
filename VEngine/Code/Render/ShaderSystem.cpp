@@ -132,7 +132,9 @@ void ShaderSystem::CompileAllShadersFromFile()
     }
 
     //Get compute shaders
-    for (auto& entry : std::filesystem::directory_iterator("Code/Render/Shaders/Compute"))
+    //@Todo: compute shader folder can go missing if empty on project cleans, causing directory_iterator to fail.
+    //Uncomment this if you need computer shaders down the line.
+    /*for (auto& entry : std::filesystem::directory_iterator("Code/Render/Shaders/Compute"))
     {
         auto shaderItem = new ShaderItem();
         if (hlslFilenames.find(entry.path().extension().string()) != hlslFilenames.end())
@@ -149,7 +151,7 @@ void ShaderSystem::CompileAllShadersFromFile()
         std::wstring path = shaderDirectory + computeShader->filename;
 
         computeShader->computeCode = CreateShaderFromFile(path.c_str(), csEntry, csTarget);
-    }
+    }*/
 }
 
 void ShaderSystem::CleanUpShaders()
