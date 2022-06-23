@@ -801,6 +801,7 @@ void RenderMeshComponents()
 		SetMatricesFromMesh(mesh);
 		SetShaderMeshData(mesh);
 
+		//@Todo: find a better spot to put this.
 		if (!mesh->GetSkeleton()->animations.empty())
 		{
 			AnimateSkeletalMesh(mesh);
