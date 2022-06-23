@@ -83,7 +83,7 @@ void Skeleton::CreateAnimation(std::string animationName)
 	assert(animations.find(animationName) != animations.end());
 }
 
-Animation& Skeleton::GetCurrentAnimation()
+Animation& Skeleton::GetCurrentAnimation(std::string currentAnimation_)
 {
-	return animations[currentAnimation];
+	return animations[currentAnimation_];
 }

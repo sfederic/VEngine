@@ -283,7 +283,7 @@ void Player::MovementInput(float deltaTime)
 
 		if (Input::GetAsyncKey(Keys::W))
 		{
-			mesh->GetSkeleton()->currentAnimation = "Armature|ArmatureAction";
+			mesh->currentAnimation = "Armature|ArmatureAction";
 
 			nextPos = GetPositionVector() + GetForwardVectorV();
 			CheckNextMoveNode(previousPos);
@@ -291,7 +291,7 @@ void Player::MovementInput(float deltaTime)
 		else
 		{
 			//Testing code for animation states. Keep in mind it would need to be like this for player.
-			mesh->GetSkeleton()->currentAnimation.clear();
+			mesh->currentAnimation.clear();
 		}
 
 		if (Input::GetAsyncKey(Keys::S))

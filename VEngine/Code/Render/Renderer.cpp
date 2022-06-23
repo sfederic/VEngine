@@ -1476,7 +1476,7 @@ void AnimateSkeletalMesh(MeshComponent* mesh)
 
 	Skeleton* skeleton = mesh->meshDataProxy->skeleton;
 
-	if (skeleton->currentAnimation.empty())
+	if (mesh->currentAnimation.empty())
 	{
 		return;
 	}
@@ -1491,7 +1491,7 @@ void AnimateSkeletalMesh(MeshComponent* mesh)
 		context->VSSetShader(shader->vertexShader, nullptr, 0);
 		context->PSSetShader(shader->pixelShader, nullptr, 0);
 
-		Animation& anim = skeleton->GetCurrentAnimation();
+		Animation& anim = skeleton->GetCurrentAnimation(mesh->currentAnimation);
 		if (!anim.frames.empty())
 		{
 			mesh->currentAnimationTime += Core::GetDeltaTime();
