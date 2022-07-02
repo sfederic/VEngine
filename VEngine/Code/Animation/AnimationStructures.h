@@ -42,6 +42,8 @@ struct Animation
 		return frames[jointIndex].back().time;
 	}
 
+	float GetFinalTime();
+
 	void Interpolate(float t, Joint& joint, Skeleton* skeleton);
 };
 

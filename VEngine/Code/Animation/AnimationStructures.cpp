@@ -1,6 +1,24 @@
 #include "vpch.h"
 #include "AnimationStructures.h"
 
+float Animation::GetFinalTime()
+{
+	float highestTime = 0.f;
+
+	for (auto& framePair : frames)
+	{
+		for (auto& frame : framePair.second)
+		{
+			if (frame.time > highestTime)
+			{
+				highestTime = frame.time;
+			}
+		}
+	}
+
+	return highestTime;
+}
+
 void Animation::Interpolate(float t, Joint& joint, Skeleton* skeleton)
 {
 	if (!isPlaying)
