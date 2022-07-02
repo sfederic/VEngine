@@ -84,7 +84,7 @@ Console::Console()
 
 	//Asset Build Commands
 	executeMap.emplace(L"BUILD MESHES", []() {
-		ThreadSystem::CreateThread(std::bind(&AssetSystem::WriteAllMeshDataToMeshAssetFiles, assetSystem));
+		assetSystem.WriteAllMeshDataToMeshAssetFiles();
 	});
 
 	//Write all game save maps
