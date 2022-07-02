@@ -432,7 +432,7 @@ void DebugMenu::RenderSkeletonViewMenu()
 				std::string animationName = animation.first;
 				if (ImGui::Button(animationName.c_str()))
 				{
-					mesh->GetSkeleton()->currentAnimation = animationName.c_str();
+					mesh->currentAnimation = animationName.c_str();
 					mesh->currentAnimationTime = 0.f;
 				}
 			}
