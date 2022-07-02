@@ -100,6 +100,8 @@ void DebugMenu::Tick(float deltaTime)
 
 	ImGui::Render();
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+
+	hasMouseFocus = ImGui::GetIO().WantCaptureMouse;
 }
 
 void DebugMenu::Cleanup()

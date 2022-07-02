@@ -16,8 +16,12 @@ WorldEditor worldEditor;
 
 void WorldEditor::Tick()
 {
-	SpawnActorOnClick();
-	HandleActorPicking();
+	if (!debugMenu.hasMouseFocus)
+	{
+		SpawnActorOnClick();
+		HandleActorPicking();
+	}
+
 	DuplicateActor();
 	DeleteActor();
 

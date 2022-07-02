@@ -41,6 +41,9 @@ struct DebugMenu
 	bool particleMenuOpen = false;
 	bool cutsceneSequencerOpen = false;
 
+	//Whether the Imgui windows have been clicked
+	bool hasMouseFocus = false;
+
 	void Init();
 	void Tick(float deltaTime);
 	void Cleanup();
