@@ -19,10 +19,10 @@ struct BoneWeights
 
 struct AnimFrame
 {
-	double time;
 	XMFLOAT4 rot; //Quaternion
 	XMFLOAT3 pos;
 	XMFLOAT3 scale;
+	double time;
 };
 
 struct Animation
