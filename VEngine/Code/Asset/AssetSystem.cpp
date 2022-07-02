@@ -42,6 +42,23 @@ void AssetSystem::WriteAllMeshDataToMeshAssetFiles()
 		fwrite(meshData->vertices.data(), sizeof(Vertex), meshData->vertices.size(), file);
 		fwrite(meshData->indices.data(), sizeof(MeshData::indexDataType), meshData->indices.size(), file);
 
+		if (!meshData->skeleton.animations.empty())
+		{
+			for (auto& animationPair : meshData->skeleton.animations)
+			{
+				for (auto& framePair : animationPair.second.frames)
+				{
+					for (auto& frame : framePair.second)
+					{
+						int jointIndex = framePair.first;
+						fwrite(&jointIndex, sizeof(int), 1, file);
+
+						fwrite(&frame, sizeof(AnimFrame), 1, file);
+					}
+				}
+			}
+		}
+
 		fclose(file);
 		file = nullptr;
 
@@ -60,8 +77,8 @@ void AssetSystem::ReadAllMeshAssetsFromFile()
 	fopen_s(&file, "Meshes/cube.vmesh", "rb");
 	assert(file);
 
-	MeshAssetHeader header;
-	MeshData data;
+	MeshAssetHeader header{};
+	MeshData data{};
 
 	fread(&header, sizeof(MeshAssetHeader), 1, file);
 
@@ -70,6 +87,8 @@ void AssetSystem::ReadAllMeshAssetsFromFile()
 
 	fread(data.vertices.data(), sizeof(Vertex), header.vertexCount, file);
 	fread(data.indices.data(), sizeof(MeshData::indexDataType), header.indexCount, file);
+
+	//@Todo: read in binary animation data
 
 	return;
 }
