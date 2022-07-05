@@ -1,4 +1,31 @@
+// https://github.com/CedricGuillemet/ImGuizmo
+// v 1.84 WIP
+//
+// The MIT License(MIT)
+//
+// Copyright(c) 2021 Cedric Guillemet
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files(the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and / or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions :
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
 #pragma once
+
+#include <stdint.h>     // intptr_t
 
 #if defined(_WIN32)
 // dont bother adding library
@@ -6,7 +33,7 @@
 #define WINDOWS_LEAN_AND_MEAN
 #include <Windows.h>
 #include <GL/GL.h>
-#  define glGetProcAddress(name) wglGetProcAddress((LPCSTR)name)
+#  define glGetProcAddress(name) (void *)wglGetProcAddress((LPCSTR)name)
 #elif defined(__APPLE__) && !defined(GLEW_APPLE_GLX)
 #  define glGetProcAddress(name) NSGLGetProcAddress(name)
 #elif defined(__sgi) || defined(__sun)
@@ -2579,7 +2606,7 @@ typedef float GLfloat;
 #else
 #define GLEXTERN 
 #endif
-#ifdef _MSC_VER
+#ifdef _WIN32
 GLEXTERN void(APIENTRY* glActiveTexture) (GLenum texture);
 #endif
 GLEXTERN void(APIENTRY* glUniform1i) (GLint location, GLint v0);
@@ -2699,7 +2726,7 @@ namespace ImApp
          info->hInstance = GetModuleHandle(0);
 
          static DEVMODEA screenSettings = { { 0 },
-#if _MSC_VER < 1400
+#if defined(_MSC_VER) && _MSC_VER < 1400
                 0,0,148,0,0x001c0000,{ 0 },0,0,0,0,0,0,0,0,0,{ 0 },0,32,config.mWidth,config.mHeight,0,0,      // Visual C++ 6.0
 #else
                 0,0,156,0,0x001c0000,{ 0 },0,0,0,0,0,{ 0 },0,32,static_cast<DWORD>(config.mWidth), static_cast<DWORD>(config.mHeight),{ 0 }, 0,           // Visuatl Studio 2005
@@ -2879,6 +2906,7 @@ namespace ImApp
       int WindowInit(WININFO* info)
       {
          unsigned int    PixelFormat;
+         
          DWORD            dwExStyle, dwStyle;
          DEVMODE            dmScreenSettings;
          RECT            rec;
@@ -2895,8 +2923,8 @@ namespace ImApp
          WndClsEx.hCursor = LoadCursor(NULL, IDC_ARROW);
          WndClsEx.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
          WndClsEx.lpszMenuName = NULL;
-         WndClsEx.lpszClassName = info->wndclass;
-         WndClsEx.hInstance = info->hInstance;
+         WndClsEx.lpszClassName = "ImGuizmoWndClass";
+         WndClsEx.hInstance = GetModuleHandle(NULL);
          WndClsEx.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
 
          if (!RegisterClassExA(&WndClsEx))
@@ -2921,22 +2949,22 @@ namespace ImApp
          else
          {
             dwExStyle = 0;
-            dwStyle = WS_VISIBLE | WS_CAPTION | WS_SYSMENU | WS_MAXIMIZEBOX | WS_OVERLAPPED;
+            //dwStyle = WS_VISIBLE | WS_CAPTION | WS_SYSMENU | WS_MAXIMIZEBOX | WS_OVERLAPPED;
             dwStyle = WS_VISIBLE | WS_OVERLAPPEDWINDOW | WS_POPUP;
          }
-
+         
          rec.left = 0;
          rec.top = 0;
          rec.right = mConfig.mWidth;
          rec.bottom = mConfig.mHeight;
-
          AdjustWindowRect(&rec, dwStyle, 0);
 
-         info->hWnd = CreateWindowExA(dwExStyle, WndClsEx.lpszClassName, "", dwStyle | WS_MAXIMIZE,
+         info->hWnd = CreateWindowExA(dwExStyle, "ImGuizmoWndClass", " ", dwStyle | WS_MAXIMIZE,
             (GetSystemMetrics(SM_CXSCREEN) - rec.right + rec.left) >> 1,
             (GetSystemMetrics(SM_CYSCREEN) - rec.bottom + rec.top) >> 1,
-            rec.right - rec.left, rec.bottom - rec.top, 0, 0, info->hInstance, 0);
-
+            rec.right - rec.left, rec.bottom - rec.top,
+            0, 0, info->hInstance, 0);
+            
          if (!info->hWnd)
             return(0);
 
@@ -2995,7 +3023,7 @@ namespace ImApp
 
          LE(glUniform1i); //GLint location, GLint v0);
          LE(glUniformMatrix3fv) // GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-#ifdef _MSC_VER
+#ifdef _WIN32
             LE(glActiveTexture); //GLenum texture);
 #endif
          LE(glBindFramebuffer); //GLenum target, TextureID framebuffer);
@@ -3084,7 +3112,7 @@ namespace ImApp
       static bool IsAnyMouseButtonDown()
       {
          ImGuiIO& io = ImGui::GetIO();
-         for (int n = 0; n < ARRAYSIZE(io.MouseDown); n++)
+         for (int n = 0; n < IM_ARRAYSIZE(io.MouseDown); n++)
             if (io.MouseDown[n])
                return true;
          return false;
