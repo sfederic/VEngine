@@ -385,6 +385,7 @@
     <ClInclude Include="Code\UID.h" />
     <ClInclude Include="Code\UI\TimeOfDayWidget.h" />
     <ClInclude Include="Code\VEnum.h" />
+    <ClInclude Include="Code\VFunction.h" />
     <ClInclude Include="Code\VMath.h" />
     <ClCompile Include="Code\Physics\Raycast.cpp" />
     <ClInclude Include="Code\Physics\Raycast.h" />
