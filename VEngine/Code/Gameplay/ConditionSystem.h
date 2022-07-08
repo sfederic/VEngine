@@ -2,6 +2,7 @@
 #include <functional>
 #include <map>
 #include <string>
+#include "VFunction.h"
 
 //CONDITION FUNCTIONS
 //Condition functions need to be created as free functions in Conditions.cpp and then added to the system.
@@ -32,3 +33,6 @@ struct ConditionSystem
 extern ConditionSystem conditionSystem;
 
 #define ADD_CONDITION(func) conditionSystem.AddCondition(#func, func)
+
+bool PlaySong(std::string arg);
+static VFunction<std::string> PlaySongVFunction("PlaySong", &PlaySong);

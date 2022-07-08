@@ -18,7 +18,7 @@ ConditionSystem conditionSystem;
 
 //CONDITION FUNCTIONS
 
-static bool PlaySong(std::string arg)
+bool PlaySong(std::string arg)
 {
 	audioSystem.MuteAllAudio();
 	audioSystem.PlayAudio(arg, true);

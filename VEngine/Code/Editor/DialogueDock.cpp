@@ -5,6 +5,7 @@
 #include <qstandarditemmodel.h>
 #include <qpushbutton.h>
 #include <qlayout.h>
+#include <qlineedit.h>
 #include <qfiledialog.h>
 #include <qcombobox.h>
 #include <qjsonobject.h>
@@ -12,6 +13,7 @@
 #include "World.h"
 #include "Actors/Actor.h"
 #include "Gameplay/ConditionSystem.h"
+#include "Log.h"
 
 //columns for QTreeWidget
 const int lineColumn = 0;
@@ -86,6 +88,10 @@ void DialogueDock::PopulateTreeItem(QTreeWidgetItem* item)
 	{
 		QString conditionName = QString::fromStdString(condition.first);
 		conditionComboBox->addItem(conditionName);
+
+		//Ref:https://forum.qt.io/topic/20998/qt5-new-signals-slots-syntax-does-not-work-solved/8
+		connect(conditionComboBox, static_cast<void(QComboBox::*)(const QString&)>(&QComboBox::currentIndexChanged),
+			this, &DialogueDock::SetConditionArgWidgets);
 	}
 
 	dialogueTree->setItemWidget(item, conditionColumn, conditionComboBox);
@@ -232,4 +238,23 @@ void DialogueDock::LoadDialogueFile()
 	}
 
 	is.close();
+}
+
+void DialogueDock::SetConditionArgWidgets(const QString& conditionName)
+{
+	auto foundFunction = functionSystem.FindFunction(conditionName.toStdString());
+
+	auto argTypes = foundFunction->GetArgTypes();
+	for (auto& type : argTypes)
+	{
+		if (type == typeid(std::string))
+		{
+			auto vLayout = new QVBoxLayout();
+			vLayout->addWidget(new QPushButton());
+			vLayout->addWidget(new QPushButton());
+			auto widg = new QWidget();
+			widg->setLayout(vLayout);
+			dialogueTree->setItemWidget(dialogueTree->currentItem(), conditionArgColumn, widg);
+		}
+	}
 }

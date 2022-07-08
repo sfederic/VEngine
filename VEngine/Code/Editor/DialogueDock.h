@@ -27,4 +27,7 @@ private:
 	void DeleteLine();
 	void SaveDialogueToFile();
 	void LoadDialogueFile();
+
+	//Set Condition arg widgets from VFunction definition of Condition
+	void SetConditionArgWidgets(const QString& conditionName);
 };

@@ -258,6 +258,7 @@
     <ClCompile Include="Code\Render\Texture2D.cpp" />
     <ClCompile Include="Code\Render\ConstantBuffer.cpp" />
     <ClCompile Include="Code\Scripts\ScriptSystem.cpp" />
+    <ClCompile Include="Code\VFunction.cpp" />
     <ClInclude Include="Code\Editor\ImGuizmo\ImSequencer.h" />
     <ClInclude Include="Code\Gameplay\BattleEnums.h" />
     <ClInclude Include="Code\Particle\FireParticle.h" />
