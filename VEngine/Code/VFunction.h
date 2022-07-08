@@ -18,7 +18,7 @@ public:
 		IterateTypes();
 	}
 
-	void Call(args... arg)
+	void Call(Args... arg)
 	{
 		function(arg...);
 	}
