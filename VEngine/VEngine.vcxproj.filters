@@ -1054,7 +1054,7 @@
     <ClInclude Include="Code\VFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Script.h">
+    <ClInclude Include="Code\Scripts\Script.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
