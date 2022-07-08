@@ -1,6 +1,6 @@
 #pragma once
 #include "WidgetComponent.h"
-#include "DialogueStructures.h"
+#include "Gameplay/DialogueStructures.h"
 
 struct DialogueWidget;
 
