@@ -31,6 +31,6 @@ public:
 private:
 	void IterateTypes()
 	{
-		argTypes.insert(argTypes.end(), { typeid(args)... });
+		argTypes.insert(argTypes.end(), { typeid(Args)... });
 	}
 };
