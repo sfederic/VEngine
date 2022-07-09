@@ -262,6 +262,7 @@
     <ClCompile Include="VFunctionSystem.cpp" />
     <ClInclude Include="Code\Editor\ImGuizmo\ImSequencer.h" />
     <ClInclude Include="Code\Gameplay\BattleEnums.h" />
+    <ClInclude Include="Code\IFunction.h" />
     <ClInclude Include="Code\Particle\FireParticle.h" />
     <ClInclude Include="Code\Quests\Quest.h" />
     <ClInclude Include="Code\Scripts\Script.h" />

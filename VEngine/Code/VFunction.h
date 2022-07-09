@@ -2,17 +2,6 @@
 #include <functional>
 #include <vector>
 
-class IFunction
-{
-public:
-	std::vector<std::type_index> argTypes;
-
-	auto GetArgTypes()
-	{
-		return argTypes;
-	}
-};
-
 //Acts as a defined information for a function, holding types via packed params.
 template <typename... Args>
 class VFunction : public IFunction
