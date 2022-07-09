@@ -16,6 +16,7 @@ public:
 		argNames = argNames_;
 		function = function_;
 		IterateTypes();
+		assert(argTypes.size() == argNames.size());
 	}
 
 	void Call(Args... arg)
