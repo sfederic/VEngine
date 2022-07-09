@@ -259,6 +259,7 @@
     <ClCompile Include="Code\Render\ConstantBuffer.cpp" />
     <ClCompile Include="Code\Scripts\ScriptSystem.cpp" />
     <ClCompile Include="Code\VFunction.cpp" />
+    <ClCompile Include="VFunctionSystem.cpp" />
     <ClInclude Include="Code\Editor\ImGuizmo\ImSequencer.h" />
     <ClInclude Include="Code\Gameplay\BattleEnums.h" />
     <ClInclude Include="Code\Particle\FireParticle.h" />
@@ -517,6 +518,7 @@
     <ClInclude Include="Code\Render\Texture2D.h" />
     <ClInclude Include="Code\Render\ConstantBuffer.h" />
     <ClInclude Include="Code\Scripts\ScriptSystem.h" />
+    <ClInclude Include="VFunctionSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
