@@ -60,16 +60,8 @@ static bool EndQuest(std::string arg)
 	return false;
 }
 
-//Define the memory as "Name|Description|Image Filename" in the dialogue dock
-static bool GainMemory(std::string arg)
+static bool GainMemory(std::string memoryName, std::string memoryDesc, std::string memoryImage)
 {
-	size_t firstOf = arg.find("|");
-	size_t lastOf = arg.find_last_of("|");
-
-	std::string memoryName = arg.substr(0, firstOf);
-	std::string memoryDesc = arg.substr(memoryName.size() + 1, lastOf - memoryName.size() - 1);
-	std::string memoryImage = arg.substr(lastOf + 1);
-
 	auto memory = new Memory();
 	memory->name = memoryName;
 	memory->description = memoryDesc;
@@ -92,7 +84,7 @@ static bool GainMemory(std::string arg)
 	GameUtils::PlayAudioOneShot("purchase.wav");
 
 	return true;
-}
+} VFunction<std::string, std::string, std::string> GainMemoryVFunc("GainMemory", &GainMemory, { "Name", "Desc.", "Image" });
 
 //END CONDITION FUNCTIONS
 
@@ -100,7 +92,7 @@ ConditionSystem::ConditionSystem()
 {
 	ADD_CONDITION(MemoryCheck);
 	ADD_CONDITION(StartBattle);
-	ADD_CONDITION(GainMemory);
+	//ADD_CONDITION(GainMemory);
 	ADD_CONDITION(PlaySong);
 	ADD_CONDITION(EndQuest);
 }
