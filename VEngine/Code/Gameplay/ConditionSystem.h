@@ -16,6 +16,8 @@
 
 typedef std::function<bool(std::string)> ConditionFunction;
 
+//@Todo: Conditionsystem and function system are clashing. Get rid of condition system.
+
 //Evaluates and contains all in-game event conditions.
 class ConditionSystem
 {
