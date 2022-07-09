@@ -1,7 +1,6 @@
 #pragma once
 #include <map>
-
-class IFunction;
+#include "IFunction.h"
 
 class VFunctionSystem
 {
