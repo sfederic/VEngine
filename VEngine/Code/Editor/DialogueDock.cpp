@@ -82,12 +82,12 @@ void DialogueDock::PopulateTreeItem(QTreeWidgetItem* item)
 
 	dialogueTree->setItemWidget(item, actorColumn, actorComboBox);
 
-	//set condition combo box from ConditionSystem functions
+	//set condition combo box from FunctionSystem functions
 	auto conditionComboBox = new QComboBox(this);
 	conditionComboBox->addItem("");
-	for (auto& condition : conditionSystem.GetConditions())
+	for (auto& functionName : functionSystem->GetFunctionNames())
 	{
-		QString conditionName = QString::fromStdString(condition.first);
+		QString conditionName = QString::fromStdString(functionName);
 		conditionComboBox->addItem(conditionName);
 
 		//Ref:https://forum.qt.io/topic/20998/qt5-new-signals-slots-syntax-does-not-work-solved/8
