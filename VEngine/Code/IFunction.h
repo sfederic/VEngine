@@ -13,7 +13,7 @@ protected:
 	std::vector<std::string> argNames;
 
 public:
-	IFunction(std::string name_) : name(name_) {}
+	IFunction(std::string name_);
 
 	auto GetArgTypes()
 	{

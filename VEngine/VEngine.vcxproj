@@ -120,6 +120,7 @@
     <ClCompile Include="Code\Editor\ImGuizmo\ImSequencer.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Code\IFunction.cpp" />
     <ClCompile Include="Code\Quests\BlacksmithQuest.cpp" />
     <ClCompile Include="Code\Quests\Quest.cpp" />
     <ClCompile Include="Code\SHMath\DirectXSH.cpp">
