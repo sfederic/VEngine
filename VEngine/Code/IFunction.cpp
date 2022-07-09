@@ -4,5 +4,10 @@
 
 IFunction::IFunction(std::string name_)
 {
-	functionSystem.AddFunction(name_, this);
+	if (functionSystem == nullptr)
+	{
+		functionSystem = new VFunctionSystem();
+	}
+
+	functionSystem->AddFunction(name_, this);
 }
