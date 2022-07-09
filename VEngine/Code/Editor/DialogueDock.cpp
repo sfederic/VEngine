@@ -14,6 +14,7 @@
 #include "Actors/Actor.h"
 #include "Gameplay/ConditionSystem.h"
 #include "VFunctionSystem.h"
+#include "VString.h"
 
 //columns for QTreeWidget
 const int lineColumn = 0;
@@ -84,7 +85,7 @@ void DialogueDock::PopulateTreeItem(QTreeWidgetItem* item)
 	//set condition combo box from ConditionSystem functions
 	auto conditionComboBox = new QComboBox(this);
 	conditionComboBox->addItem("");
-	for (auto& condition : conditionSystem.conditions)
+	for (auto& condition : conditionSystem.GetConditions())
 	{
 		QString conditionName = QString::fromStdString(condition.first);
 		conditionComboBox->addItem(conditionName);
@@ -148,6 +149,27 @@ void DialogueDock::SaveDialogueToFile()
 		os << gotoText.toStdWString() << "\n";
 		os << actorComboBox->currentText().toStdWString() << "\n";
 		os << conditionComboBox->currentText().toStdWString() << "\n";
+
+		{
+			auto widget = (QWidget*)dialogueTree->itemWidget(*it, conditionArgColumn);
+			auto conditionString = conditionComboBox->currentText().toStdString();
+			auto foundFunction = functionSystem->FindFunction(conditionString);
+
+			auto args = foundFunction->GetArgTypes();
+			int itemIndex = 0;
+			for (auto& arg : args)
+			{
+				if (arg == typeid(std::string))
+				{
+					auto layout = (QVBoxLayout*)widget->layout();
+					auto argWidget = (QLineEdit*)layout->itemAt(itemIndex)->widget();
+					os << argWidget->text().toStdWString() << "\n";
+				}
+
+				itemIndex++;
+			}
+		}
+
 		os << conditionArgText.toStdWString() << "\n";
 		os << text.toStdWString() << "\n";
 
@@ -179,7 +201,7 @@ void DialogueDock::LoadDialogueFile()
 		std::wstring gotoText;
 		std::wstring actorText;
 		std::wstring conditionText;
-		std::wstring conditionArgText;
+		std::vector<std::wstring> conditionArgText;
 		std::wstring text;
 
 		wchar_t line[1024];
@@ -200,19 +222,32 @@ void DialogueDock::LoadDialogueFile()
 		is.getline(line, 1024);
 		conditionText.assign(line);
 
-		is.getline(line, 1024);
-		conditionArgText.assign(line);
+
+		//Condition arg loading
+		auto foundFunction = functionSystem->FindFunction(VString::wstos(conditionText));
+		auto args = foundFunction->GetArgTypes();
+		int itemIndex = 0;
+		for (auto& arg : args)
+		{
+			if (arg == typeid(std::string))
+			{
+				is.getline(line, 1024);
+				conditionArgText.emplace_back(line);
+			}
+
+			itemIndex++;
+		}
 
 		is.getline(line, 1024);
 		text.assign(line);		
 		
+
 		//Populate widget items
 		auto item = new QTreeWidgetItem(dialogueTree);
 		PopulateTreeItem(item);
 
 		item->setText(lineColumn, QString::fromStdWString(lineText));
 		item->setText(gotoColumn, QString::fromStdWString(gotoText));
-		item->setText(conditionArgColumn, QString::fromStdWString(conditionArgText));
 		item->setText(textColumn, QString::fromStdWString(text));
 
 		{
@@ -235,6 +270,22 @@ void DialogueDock::LoadDialogueFile()
 			int foundConditionComboEntryIndex = conditionComboBox->findText(conditionStr);
 			conditionComboBox->setCurrentIndex(foundConditionComboEntryIndex);
 		}
+
+		//Condition Arg widgets
+		{
+			itemIndex = 0;
+			for (auto& type : args)
+			{
+				if (type == typeid(std::string))
+				{
+					auto vLayout = new QVBoxLayout();
+					vLayout->addWidget(new QLineEdit(foundFunction->GetName(itemIndex).c_str()));
+					auto widg = new QWidget();
+					widg->setLayout(vLayout);
+					dialogueTree->setItemWidget(item, conditionArgColumn, widg);
+				}
+			}
+		}
 	}
 
 	is.close();
@@ -252,7 +303,7 @@ void DialogueDock::SetConditionArgWidgets(const QString& conditionName)
 		if (type == typeid(std::string))
 		{
 			auto vLayout = new QVBoxLayout();
-			vLayout->addWidget(new QPushButton(foundFunction->GetName(nameIndex).c_str()));
+			vLayout->addWidget(new QLineEdit(foundFunction->GetName(nameIndex).c_str()));
 			auto widg = new QWidget();
 			widg->setLayout(vLayout);
 			dialogueTree->setItemWidget(dialogueTree->currentItem(), conditionArgColumn, widg);
