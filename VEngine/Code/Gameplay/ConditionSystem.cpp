@@ -18,12 +18,12 @@ ConditionSystem conditionSystem;
 
 //CONDITION FUNCTIONS
 
-bool PlaySong(std::string arg)
+static bool PlaySong(std::string arg)
 {
 	audioSystem.MuteAllAudio();
 	audioSystem.PlayAudio(arg, true);
 	return true;
-}
+} VFunction<std::string> PlaySongVFunc("PlaySong", &PlaySong, { "Song Name" });
 
 static bool MemoryCheck(std::string arg)
 {

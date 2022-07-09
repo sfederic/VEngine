@@ -242,7 +242,9 @@ void DialogueDock::LoadDialogueFile()
 
 void DialogueDock::SetConditionArgWidgets(const QString& conditionName)
 {
-	auto foundFunction = functionSystem.FindFunction(conditionName.toStdString());
+	auto foundFunction = functionSystem->FindFunction(conditionName.toStdString());
+
+	int nameIndex = 0;
 
 	auto argTypes = foundFunction->GetArgTypes();
 	for (auto& type : argTypes)
@@ -250,11 +252,12 @@ void DialogueDock::SetConditionArgWidgets(const QString& conditionName)
 		if (type == typeid(std::string))
 		{
 			auto vLayout = new QVBoxLayout();
-			vLayout->addWidget(new QPushButton());
-			vLayout->addWidget(new QPushButton());
+			vLayout->addWidget(new QPushButton(foundFunction->GetName(nameIndex).c_str()));
 			auto widg = new QWidget();
 			widg->setLayout(vLayout);
 			dialogueTree->setItemWidget(dialogueTree->currentItem(), conditionArgColumn, widg);
 		}
+
+		nameIndex++;
 	}
 }

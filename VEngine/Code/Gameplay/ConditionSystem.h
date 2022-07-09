@@ -33,6 +33,3 @@ struct ConditionSystem
 extern ConditionSystem conditionSystem;
 
 #define ADD_CONDITION(func) conditionSystem.AddCondition(#func, func)
-
-bool PlaySong(std::string arg);
-static VFunction<std::string> PlaySongVFunction("PlaySong", &PlaySong);
