@@ -4,6 +4,8 @@
 
 IFunction::IFunction(std::string name_)
 {
+	name = name_;
+
 	if (functionSystem == nullptr)
 	{
 		functionSystem = new VFunctionSystem();
