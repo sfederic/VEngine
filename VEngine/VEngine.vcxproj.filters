@@ -560,7 +560,7 @@
     <ClCompile Include="Code\VFunction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VFunctionSystem.cpp">
+    <ClCompile Include="Code\VFunctionSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1069,7 +1069,7 @@
     <ClInclude Include="Code\Scripts\ScriptSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VFunctionSystem.h">
+    <ClInclude Include="Code\VFunctionSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\IFunction.h">
