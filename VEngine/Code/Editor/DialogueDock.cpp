@@ -13,7 +13,7 @@
 #include "World.h"
 #include "Actors/Actor.h"
 #include "Gameplay/ConditionSystem.h"
-#include "Log.h"
+#include "VFunctionSystem.h"
 
 //columns for QTreeWidget
 const int lineColumn = 0;
