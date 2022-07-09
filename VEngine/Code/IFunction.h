@@ -15,13 +15,6 @@ protected:
 public:
 	IFunction(std::string name_);
 
-	auto GetArgTypes()
-	{
-		return argTypes;
-	}
-
-	std::string GetName(int index)
-	{
-		return argNames[index];
-	}
+	auto GetArgTypes() { return argTypes; }
+	std::string GetName(int index) { return argNames[index]; }
 };
