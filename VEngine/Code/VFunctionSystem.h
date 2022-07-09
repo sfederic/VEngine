@@ -17,6 +17,8 @@ public:
 	{
 		return functionMap[name];
 	}
+
+	std::vector<std::string> GetFunctionNames();
 };
 
 extern VFunctionSystem* functionSystem;
