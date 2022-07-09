@@ -124,7 +124,7 @@ void CutsceneSequencer::UITick(float deltaTime)
 	//Ref:https://github.com/ocornut/imgui/issues/1658
 	if (ImGui::BeginCombo("Condition Function", currentItem.condition.c_str()))
 	{
-		auto& conditionFunctions = conditionSystem.conditions;
+		auto& conditionFunctions = conditionSystem.GetConditions();
 		for (auto& conditionFuncPair : conditionFunctions)
 		{
 			bool selected = false;

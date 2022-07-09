@@ -17,10 +17,12 @@
 typedef std::function<bool(std::string)> ConditionFunction;
 
 //Evaluates and contains all in-game event conditions.
-struct ConditionSystem
+class ConditionSystem
 {
+private:
 	std::map<std::string, ConditionFunction> conditions;
 
+public:
 	ConditionSystem();
 
 	//Don't call this function directly, just used the ADD_CONDITION macro below to grab the function name.
@@ -28,6 +30,7 @@ struct ConditionSystem
 	ConditionFunction FindCondition(std::string conditionName);
 	ConditionFunction FindConditionAllowNull(std::string conditionName);
 	bool EvaluateCondition(std::string conditionName, std::string conditionArg);
+	auto& GetConditions() { return conditions; }
 };
 
 extern ConditionSystem conditionSystem;
