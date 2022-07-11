@@ -20,13 +20,13 @@ struct AssetDock : public QDockWidget
     void ShowContextMenu(const QPoint&);
     void FilterAssets();
 
+private:
     //Asset open functions
     void OpenAssetItemInDefaultProgram();
     void MeshFileClicked(const std::string meshFilename);
     void ActorTemplateFileClicked(const std::string actorTemplateFilename);
     void TextureFileClicked(const std::wstring textureFilename);
 
-private:
     //Create asset functions
     void CreateNewMapFile();
     void CreateNewDialogueFile();
