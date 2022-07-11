@@ -19,6 +19,7 @@ TransformGizmo::TransformGizmo()
     currentSnapValues = translateSnapValues;
 
     ImGuizmo::AllowAxisFlip(false);
+    ImGuizmo::SetGizmoSizeClipSpace(0.14f);
 }
 
 void TransformGizmo::Tick()
