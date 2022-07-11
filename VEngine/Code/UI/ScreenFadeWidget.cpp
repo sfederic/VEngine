@@ -17,11 +17,6 @@ void ScreenFadeWidget::Draw(float deltaTime)
 		fadeValue -= deltaTime;
 		break;
 	}
-
-	if (fadeValue >= 1.0f || fadeValue <= 0.f)
-	{
-		this->RemoveFromViewport();
-	}
 }
 
 void ScreenFadeWidget::SetToFadeIn()
