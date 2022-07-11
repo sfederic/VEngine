@@ -112,26 +112,43 @@ void AssetDock::AssetItemClicked()
     auto fileExtension = std::filesystem::path(fullPath.toStdString()).extension();
     auto extension = fileExtension.c_str();
 
+    //Get the parent folder of the asset name (Only works one folder deep for now)
+    auto parentPath = std::filesystem::path(fullPath.toStdString()).parent_path();
+    std::string parentFolderName = parentPath.string().substr(parentPath.string().find_last_of("\//") + 1);
+
+    std::string assetPath;
+
+    //Since it's only one parent folder deep, ignore base folders for assets
+    std::set<std::string> parentFoldersToIgnore{ "Meshes", "Textures", "WorldMaps", "ActorTemplates" };
+    if (!parentFoldersToIgnore.contains(parentFolderName))
+    {
+        assetPath = parentFolderName + "/" + assetName.toStdString();
+    }
+    else
+    {
+        assetPath = assetName.toStdString();
+    }
+
     if (std::wcscmp(extension, L".vmap") == 0) //Map files 
     {
         //Reassign instance map data so entrance triggers don't mess up.
-        GameInstance::startingMap = assetName.toStdString();
+        GameInstance::startingMap = assetPath;
         GameInstance::previousMapMovedFrom = GameInstance::startingMap;
 
-        FileSystem::LoadWorld(assetName.toStdString());
+        FileSystem::LoadWorld(assetPath);
     }   
     else if (std::wcscmp(extension, L".fbx") == 0) //FBX files
     {
-        MeshFileClicked(assetName.toStdString());
+        MeshFileClicked(assetPath);
     }
     else if (std::wcscmp(extension, L".actor") == 0) //Actor Template files
     {
-        ActorTemplateFileClicked(assetName.toStdString());
+        ActorTemplateFileClicked(assetPath);
     }
     else if (std::wcscmp(extension, L".jpg") == 0 || //Image files
         std::wcscmp(extension, L".png") == 0)
     {
-        TextureFileClicked(assetName.toStdWString());
+        TextureFileClicked(VString::stows(assetPath));
     }
 }
 
