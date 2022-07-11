@@ -1,6 +1,6 @@
 #pragma once
-#include "Component.h"
-#include "ComponentSystem.h"
+#include "../Component.h"
+#include "../ComponentSystem.h"
 
 //Holds time of day game data for actors.
 struct TimeComponent : Component

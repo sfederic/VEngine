@@ -2,7 +2,7 @@
 #include "NPC.h"
 #include "Timer.h"
 #include "UI/DialogueWidget.h"
-#include "Components/DialogueComponent.h"
+#include "Components/Game/DialogueComponent.h"
 
 NPC::NPC()
 {

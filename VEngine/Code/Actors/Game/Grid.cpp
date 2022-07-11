@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "Grid.h"
 #include "Components/InstanceMeshComponent.h"
-#include "Components/TimeComponent.h"
+#include "Components/Game/TimeComponent.h"
 #include "Render/RenderUtils.h"
 #include "Render/Material.h"
 #include "Physics/Raycast.h"

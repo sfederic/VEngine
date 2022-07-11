@@ -6,7 +6,7 @@
 #include "Grid.h"
 #include "Components/MeshComponent.h"
 #include "Components/BoxTriggerComponent.h"
-#include "Components/MemoryComponent.h"
+#include "Components/Game/MemoryComponent.h"
 #include "VMath.h"
 #include "Player.h"
 #include "Gameplay/BattleSystem.h"

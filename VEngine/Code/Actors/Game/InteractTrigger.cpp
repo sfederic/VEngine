@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "InteractTrigger.h"
 #include "Components/BoxTriggerComponent.h"
-#include "Components/MemoryComponent.h"
+#include "Components/Game/MemoryComponent.h"
 #include "Camera.h"
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/BattleSystem.h"

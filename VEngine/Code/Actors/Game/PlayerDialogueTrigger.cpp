@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "PlayerDialogueTrigger.h"
 #include "Components/BoxTriggerComponent.h"
-#include "Components/DialogueComponent.h"
+#include "Components/Game/DialogueComponent.h"
 #include "Gameplay/GameUtils.h"
 #include "Actors/Game/Player.h"
 

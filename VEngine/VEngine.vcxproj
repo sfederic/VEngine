@@ -190,7 +190,7 @@
     <ClCompile Include="Code\Actors\Game\EntranceTrigger.cpp" />
     <ClCompile Include="Code\DebugActors\DebugCamera.cpp" />
     <ClCompile Include="Code\Render\ShadowMap.cpp" />
-    <ClCompile Include="Code\Components\DialogueComponent.cpp" />
+    <ClCompile Include="Code\Components\Game\DialogueComponent.cpp" />
     <ClCompile Include="Code\Actors\Game\InteractTrigger.cpp" />
     <ClCompile Include="Code\Editor\DialogueDock.cpp" />
     <ClCompile Include="Code\Actors\Game\NPC.cpp" />
@@ -212,12 +212,12 @@
     <ClCompile Include="Code\Editor\PropertyWidgets\MeshComponentDataWidget.cpp" />
     <ClCompile Include="Code\UI\HealthWidget.cpp" />
     <ClCompile Include="Code\UI\InteractWidget.cpp" />
-    <ClCompile Include="Code\Components\MemoryComponent.cpp" />
+    <ClCompile Include="Code\Components\Game\MemoryComponent.cpp" />
     <ClCompile Include="Code\UI\MemoryMenuWidget.cpp" />
     <ClCompile Include="Code\UI\PlayerActionBarWidget.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\WStringWidget.cpp" />
     <ClCompile Include="Code\Log.cpp" />
-    <ClCompile Include="Code\Components\TimeComponent.cpp" />
+    <ClCompile Include="Code\Components\Game\TimeComponent.cpp" />
     <ClCompile Include="Code\UI\GuardWidget.cpp" />
     <ClCompile Include="Code\UI\PlayerHealthWidget.cpp" />
     <ClCompile Include="Code\Editor\SkeletonEditor.cpp" />
@@ -231,7 +231,7 @@
     <ClCompile Include="Code\UI\ScreenFadeWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\FenceActor.cpp" />
     <ClCompile Include="Code\Actors\Game\DialogueTrigger.cpp" />
-    <ClCompile Include="Code\Components\ConditionComponent.cpp" />
+    <ClCompile Include="Code\Components\Game\ConditionComponent.cpp" />
     <ClCompile Include="Code\UI\GuiltWidget.cpp" />
     <ClCompile Include="Code\UI\UnitLineupWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\PushableGridActor.cpp" />
@@ -241,7 +241,7 @@
     <ClCompile Include="Code\Actors\Game\PhysicsActor.cpp" />
     <ClCompile Include="Code\Actors\Game\MemoryActor.cpp" />
     <ClCompile Include="Code\Quests\QuestSystem.cpp" />
-    <ClCompile Include="Code\Components\QuestComponent.cpp" />
+    <ClCompile Include="Code\Components\Game\QuestComponent.cpp" />
     <ClCompile Include="Code\Particle\Polyboard.cpp" />
     <ClCompile Include="Code\Actors\PolyboardActor.cpp" />
     <ClCompile Include="Code\UI\DebugNoteWidget.cpp" />
@@ -450,7 +450,7 @@
     <ClInclude Include="Code\Actors\Game\EntranceTrigger.h" />
     <ClInclude Include="Code\DebugActors\DebugCamera.h" />
     <ClInclude Include="Code\Render\ShadowMap.h" />
-    <ClInclude Include="Code\Components\DialogueComponent.h" />
+    <ClInclude Include="Code\Components\Game\DialogueComponent.h" />
     <ClInclude Include="Code\Actors\Game\InteractTrigger.h" />
     <ClInclude Include="Code\Editor\DialogueDock.h" />
     <ClInclude Include="Code\Actors\Game\NPC.h" />
@@ -473,12 +473,12 @@
     <ClInclude Include="Code\Editor\PropertyWidgets\MeshComponentDataWidget.h" />
     <ClInclude Include="Code\UI\HealthWidget.h" />
     <ClInclude Include="Code\UI\InteractWidget.h" />
-    <ClInclude Include="Code\Components\MemoryComponent.h" />
+    <ClInclude Include="Code\Components\Game\MemoryComponent.h" />
     <ClInclude Include="Code\UI\MemoryMenuWidget.h" />
     <ClInclude Include="Code\UI\PlayerActionBarWidget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\WStringWidget.h" />
     <ClInclude Include="Code\Log.h" />
-    <ClInclude Include="Code\Components\TimeComponent.h" />
+    <ClInclude Include="Code\Components\Game\TimeComponent.h" />
     <ClInclude Include="Code\UI\GuardWidget.h" />
     <ClInclude Include="Code\UI\PlayerHealthWidget.h" />
     <ClInclude Include="Code\Editor\SkeletonEditor.h" />
@@ -492,7 +492,7 @@
     <ClInclude Include="Code\UI\ScreenFadeWidget.h" />
     <ClInclude Include="Code\Actors\Game\FenceActor.h" />
     <ClInclude Include="Code\Actors\Game\DialogueTrigger.h" />
-    <ClInclude Include="Code\Components\ConditionComponent.h" />
+    <ClInclude Include="Code\Components\Game\ConditionComponent.h" />
     <ClInclude Include="Code\UI\GuiltWidget.h" />
     <ClInclude Include="Code\UI\UnitLineupWidget.h" />
     <ClInclude Include="Code\Actors\Game\PushableGridActor.h" />
@@ -501,7 +501,7 @@
     <ClInclude Include="Code\Actors\Game\PhysicsActor.h" />
     <ClInclude Include="Code\Actors\Game\MemoryActor.h" />
     <ClInclude Include="Code\Quests\QuestSystem.h" />
-    <ClInclude Include="Code\Components\QuestComponent.h" />
+    <ClInclude Include="Code\Components\Game\QuestComponent.h" />
     <ClInclude Include="Code\Particle\Polyboard.h" />
     <ClInclude Include="Code\Actors\PolyboardActor.h" />
     <ClInclude Include="Code\UI\DebugNoteWidget.h" />

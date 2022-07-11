@@ -3,8 +3,8 @@
 #include <filesystem>
 #include "Log.h"
 #include "Components/BoxTriggerComponent.h"
-#include "Components/ConditionComponent.h"
-#include "Components/TimeComponent.h"
+#include "Components/Game/ConditionComponent.h"
+#include "Components/Game/TimeComponent.h"
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/BattleSystem.h"

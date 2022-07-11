@@ -272,7 +272,7 @@
     <ClCompile Include="Code\Render\ShadowMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Components\DialogueComponent.cpp">
+    <ClCompile Include="Code\Components\Game\DialogueComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\Game\InteractTrigger.cpp">
@@ -371,7 +371,7 @@
     <ClCompile Include="Code\UI\InteractWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Components\MemoryComponent.cpp">
+    <ClCompile Include="Code\Components\Game\MemoryComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\UI\MemoryMenuWidget.cpp">
@@ -395,7 +395,7 @@
     <ClCompile Include="Code\Gameplay\GameInstance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Components\TimeComponent.cpp">
+    <ClCompile Include="Code\Components\Game\TimeComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Gameplay\GridNode.cpp">
@@ -440,7 +440,7 @@
     <ClCompile Include="Code\Actors\Game\DialogueTrigger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Components\ConditionComponent.cpp">
+    <ClCompile Include="Code\Components\Game\ConditionComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Properties.cpp">
@@ -485,7 +485,7 @@
     <ClCompile Include="Code\Quests\QuestSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Components\QuestComponent.cpp">
+    <ClCompile Include="Code\Components\Game\QuestComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Quests\Quest.cpp">
@@ -769,7 +769,7 @@
     <ClInclude Include="Code\Render\ShadowMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Components\DialogueComponent.h">
+    <ClInclude Include="Code\Components\Game\DialogueComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\InteractTrigger.h">
@@ -883,7 +883,7 @@
     <ClInclude Include="Code\Gameplay\Memory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Components\MemoryComponent.h">
+    <ClInclude Include="Code\Components\Game\MemoryComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\MemoryMenuWidget.h">
@@ -907,7 +907,7 @@
     <ClInclude Include="Code\UI\TimeOfDayWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Components\TimeComponent.h">
+    <ClInclude Include="Code\Components\Game\TimeComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\ActorTreeWidget.h">
@@ -955,7 +955,7 @@
     <ClInclude Include="Code\Actors\Game\DialogueTrigger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Components\ConditionComponent.h">
+    <ClInclude Include="Code\Components\Game\ConditionComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\GuiltWidget.h">
@@ -994,7 +994,7 @@
     <ClInclude Include="Code\Quests\QuestSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Components\QuestComponent.h">
+    <ClInclude Include="Code\Components\Game\QuestComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Particle\Polyboard.h">
