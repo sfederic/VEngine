@@ -24,7 +24,9 @@ void TextureDataWidget::SetValue()
 
 	if (!filename.isEmpty())
 	{
-		value->filename.assign(filename.toStdString().c_str());
+		value->filename.assign(filepath.toStdString());
+
+		setToolTip(QString::fromStdString(value->filename));
 
 		if (prop.change)
 		{
