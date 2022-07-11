@@ -1,4 +1,5 @@
 #include "vpch.h"
+#include <random>
 #include "Camera.h"
 #include "Input.h"
 #include "WorldEditor.h"
@@ -8,7 +9,7 @@
 #include "Render/Renderer.h"
 #include "World.h"
 #include "Core.h"
-#include <random>
+#include "Editor/DebugMenu.h"
 
 CameraComponent editorCamera(XMFLOAT3(0.f, 5.f, -5.f), true);
 CameraComponent* activeCamera;
@@ -220,13 +221,16 @@ void CameraComponent::Tick(float deltaTime)
 			//MOUSE WHEEL ZOOM
 			const float zoomSpeed = 55.f * deltaTime;
 
-			if (Input::mouseWheelUp)
+			if (!debugMenu.hasMouseFocus) //Don't allow mousescroll camera zoom if Imgui debug menu is open
 			{
-				Move(zoomSpeed, forward);
-			}
-			else if (Input::mouseWheelDown)
-			{
-				Move(-zoomSpeed, forward);
+				if (Input::mouseWheelUp)
+				{
+					Move(zoomSpeed, forward);
+				}
+				else if (Input::mouseWheelDown)
+				{
+					Move(-zoomSpeed, forward);
+				}
 			}
 		}
 	}
