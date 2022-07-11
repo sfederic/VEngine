@@ -111,8 +111,13 @@ ConditionFunction ConditionSystem::FindCondition(std::string conditionName)
 
 ConditionFunction ConditionSystem::FindConditionAllowNull(std::string conditionName)
 {
-	auto& foundCondition = conditions[conditionName];
-	return foundCondition;
+	auto conditionIt = conditions.find(conditionName);
+	if (conditionIt == conditions.end())
+	{
+		Log("Condition [%s] not found.", conditionName.c_str());
+		return nullptr;
+	}
+	return conditionIt->second;
 }
 
 bool ConditionSystem::EvaluateCondition(std::string conditionName, std::string conditionArg)
