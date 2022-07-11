@@ -16,6 +16,8 @@ public:
 	void CreateAllTextures();
 	void Cleanup();
 
+	//@Todo: this 'fullpath' stuff here on finding textures feels off.
+	//Might be better to just always use the full path of the texture/asset.
 	Texture2D* FindTexture2D(std::string textureFilename, bool useFullPath = false);
 };
 
