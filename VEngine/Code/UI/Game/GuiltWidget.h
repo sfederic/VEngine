@@ -1,5 +1,5 @@
 #pragma once
-#include "Widget.h"
+#include "../Widget.h"
 
 //Displays a 'dirt mask' relative to the player's guilt over combat.
 //There are 3 levels of guilt for killing 'civilians'. Each increment changes the image and the third level 

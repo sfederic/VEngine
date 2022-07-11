@@ -1,5 +1,5 @@
 #pragma once
-#include "Widget.h"
+#include "../Widget.h"
 
 struct InteractWidget : Widget
 {

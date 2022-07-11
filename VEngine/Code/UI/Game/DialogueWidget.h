@@ -1,5 +1,5 @@
 #pragma once
-#include "Widget.h"
+#include "../Widget.h"
 
 //Shows dialogue text for actors
 struct DialogueWidget : Widget

@@ -8,9 +8,9 @@
 #include "Gameplay/GameUtils.h"
 #include "Log.h"
 #include "UI/UISystem.h"
-#include "UI/HealthWidget.h"
-#include "UI/DialogueWidget.h"
-#include "UI/UnitLineupWidget.h"
+#include "UI/Game/HealthWidget.h"
+#include "UI/Game/DialogueWidget.h"
+#include "UI/Game/UnitLineupWidget.h"
 
 BattleSystem battleSystem;
 

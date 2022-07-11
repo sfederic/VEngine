@@ -1,6 +1,6 @@
 #include "vpch.h"
 #include "GameInstance.h"
-#include "UI/GuiltWidget.h"
+#include "UI/Game/GuiltWidget.h"
 
 void GameInstance::DeletePlayerMemories()
 {

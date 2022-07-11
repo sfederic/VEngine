@@ -4,11 +4,11 @@
 #include <dxgi1_6.h>
 #include "Debug.h"
 #include "UI/Widget.h"
-#include "UI/MemoryGainedWidget.h"
-#include "UI/MemoryRecalledWidget.h"
+#include "UI/Game/MemoryGainedWidget.h"
+#include "UI/Game/MemoryRecalledWidget.h"
 #include "UI/ScreenFadeWidget.h"
-#include "UI/GuiltWidget.h"
-#include "UI/UnitLineupWidget.h"
+#include "UI/Game/GuiltWidget.h"
+#include "UI/Game/UnitLineupWidget.h"
 #include "Core.h"
 
 UISystem uiSystem;

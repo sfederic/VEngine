@@ -2,7 +2,7 @@
 #include "DialogueTrigger.h"
 #include "Components/Game/DialogueComponent.h"
 #include "Components/BoxTriggerComponent.h"
-#include "UI/DialogueWidget.h"
+#include "UI/Game/DialogueWidget.h"
 #include "Timer.h"
 #include "Input.h"
 

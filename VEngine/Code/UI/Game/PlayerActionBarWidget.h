@@ -1,5 +1,5 @@
 #pragma once
-#include "Widget.h"
+#include "../Widget.h"
 
 //Shows player action points remaining during combat.
 struct PlayerActionBarWidget : Widget

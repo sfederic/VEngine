@@ -1,5 +1,5 @@
 #pragma once
-#include "Widget.h"
+#include "../Widget.h"
 #include "Gameplay/BattleEnums.h"
 
 //Shows guard information when enemies are attacking player

@@ -6,7 +6,7 @@
 #include "Components/Game/TimeComponent.h"
 #include "Components/Game/DialogueComponent.h"
 #include "Components/Game/QuestComponent.h"
-#include "UI/HealthWidget.h"
+#include "UI/Game/HealthWidget.h"
 #include "Gameplay/GameUtils.h"
 #include "Grid.h"
 

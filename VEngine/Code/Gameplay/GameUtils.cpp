@@ -11,7 +11,7 @@
 #include "Camera.h"
 #include "UI/UISystem.h"
 #include "UI/ScreenFadeWidget.h"
-#include "UI/MemoryTransferWidget.h"
+#include "UI/Game/MemoryTransferWidget.h"
 #include "Input.h"
 #include "Log.h"
 #include "Particle/SpriteSheet.h"

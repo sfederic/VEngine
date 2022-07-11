@@ -2,7 +2,7 @@
 #include "DialogueComponent.h"
 #include "World.h"
 #include "Components/WidgetComponent.h"
-#include "UI/DialogueWidget.h"
+#include "UI/Game/DialogueWidget.h"
 #include "Log.h"
 #include "VString.h"
 #include "Gameplay/GameUtils.h"

@@ -5,7 +5,7 @@
 #include "Camera.h"
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/BattleSystem.h"
-#include "UI/InteractWidget.h"
+#include "UI/Game/InteractWidget.h"
 #include "Input.h"
 #include "Actors/Game/Player.h"
 

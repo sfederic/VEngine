@@ -10,7 +10,7 @@
 #include "Gameplay/BattleSystem.h"
 #include "Input.h"
 #include "FileSystem.h"
-#include "UI/InteractWidget.h"
+#include "UI/Game/InteractWidget.h"
 #include "UI/ScreenFadeWidget.h"
 #include "UI/UISystem.h"
 #include "Timer.h"

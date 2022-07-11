@@ -8,7 +8,7 @@
 #include "Gameplay/Memory.h"
 #include "Gameplay/ConditionSystem.h"
 #include "Timer.h"
-#include "UI/MemoryGainedWidget.h"
+#include "UI/Game/MemoryGainedWidget.h"
 #include "UI/UISystem.h"
 #include "Audio/AudioSystem.h"
 #include "Components/MeshComponent.h"

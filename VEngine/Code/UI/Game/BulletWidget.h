@@ -1,5 +1,5 @@
 #pragma once
-#include "Widget.h"
+#include "../Widget.h"
 
 //Shows remaining player bullet count during combat and bullet types.
 struct BulletWidget : Widget

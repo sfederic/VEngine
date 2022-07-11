@@ -1,6 +1,6 @@
 #include "vpch.h"
 #include "GoddessStatue.h"
-#include "UI/PassTimeWidget.h"
+#include "UI/Game/PassTimeWidget.h"
 #include "Components/MeshComponent.h"
 #include "Gameplay/GameInstance.h"
 
