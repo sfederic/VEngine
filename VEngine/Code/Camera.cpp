@@ -181,7 +181,7 @@ void CameraComponent::Tick(float deltaTime)
 		{
 			if (Input::GetAsyncKey(Keys::MouseRight))
 			{
-				const float moveSpeed = 7.5f * deltaTime;
+				const float moveSpeed = cameraMoveSpeed * deltaTime;
 
 				if (Input::GetAsyncKey(Keys::W))
 				{
@@ -219,7 +219,7 @@ void CameraComponent::Tick(float deltaTime)
 			}
 
 			//MOUSE WHEEL ZOOM
-			const float zoomSpeed = 55.f * deltaTime;
+			const float zoomSpeed = cameraMoveSpeed * 6.f * deltaTime;
 
 			if (!debugMenu.hasMouseFocus) //Don't allow mousescroll camera zoom if Imgui debug menu is open
 			{

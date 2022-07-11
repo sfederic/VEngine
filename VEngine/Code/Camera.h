@@ -20,6 +20,7 @@ struct CameraComponent : SpatialComponent
 	float FOV = 60.f;
 	float nearZ = 0.01f;
 	float farZ = 1000.f;
+	float cameraMoveSpeed = 7.5f;
 
 	bool editorCamera = false;
 	bool arcBallMovementOn = false;
