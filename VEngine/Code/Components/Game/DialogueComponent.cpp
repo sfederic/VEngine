@@ -147,12 +147,15 @@ bool DialogueComponent::ConversationNextLine()
             std::wstring& conditionName = dataIt->second.conditionName;
             if (!conditionName.empty())
             {
-                auto conditionFunction = conditionSystem.FindCondition(VString::wstos(conditionName));
-                if (conditionFunction(VString::wstos(dataIt->second.conditionArg)))
+                auto conditionFunction = conditionSystem.FindConditionAllowNull(VString::wstos(conditionName));
+                if (conditionFunction != nullptr)
                 {
-                    if (dataIt->second.gotoLine != -1)
+                    if (conditionFunction(VString::wstos(dataIt->second.conditionArg)))
                     {
-                        currentLine = dataIt->second.gotoLine;
+                        if (dataIt->second.gotoLine != -1)
+                        {
+                            currentLine = dataIt->second.gotoLine;
+                        }
                     }
                 }
             }
