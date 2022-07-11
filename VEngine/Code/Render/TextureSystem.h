@@ -16,7 +16,7 @@ public:
 	void CreateAllTextures();
 	void Cleanup();
 
-	Texture2D* FindTexture2D(std::string textureFilename);
+	Texture2D* FindTexture2D(std::string textureFilename, bool useFullPath = false);
 };
 
 extern TextureSystem textureSystem;

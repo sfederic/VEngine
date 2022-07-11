@@ -6,13 +6,16 @@
 
 TextureSystem textureSystem;
 
-Texture2D* TextureSystem::FindTexture2D(std::string textureFilename)
+Texture2D* TextureSystem::FindTexture2D(std::string textureFilename, bool useFullPath)
 {
 	//Set default texture if filename doesn't exist
-	if (!std::filesystem::exists("Textures/" + textureFilename))
+	if (!useFullPath)
 	{
-		Log("%s not found.", textureFilename.c_str());
-		textureFilename = "test.png";
+		if (!std::filesystem::exists("Textures/" + textureFilename))
+		{
+			Log("%s not found.", textureFilename.c_str());
+			textureFilename = "test.png";
+		}
 	}
 
 	auto textureIt = texture2DMap.find(textureFilename);
@@ -26,7 +29,7 @@ Texture2D* TextureSystem::FindTexture2D(std::string textureFilename)
 
 		if (systemState == SystemStates::Loaded)
 		{
-			RenderUtils::CreateTexture(texture.get());
+			RenderUtils::CreateTexture(texture.get(), useFullPath);
 		}
 
 		return texture.get();

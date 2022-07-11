@@ -21,7 +21,7 @@ namespace RenderUtils
 	ID3D11Buffer* CreateIndexBuffer(MeshDataProxy* meshData);
 	ID3D11ShaderResourceView* CreateSRVForMeshInstance(ID3D11Buffer* structuredBuffer, uint32_t numBufferElements);
 	ID3D11Buffer* CreateStructuredBuffer(uint32_t byteWidth, uint32_t byteStride, const void* initData);
-	void CreateTexture(Texture2D* texture);
+	void CreateTexture(Texture2D* texture, bool useFullPath = false);
 	Sampler* CreateSampler();
 	Sampler* GetDefaultSampler();
 };
