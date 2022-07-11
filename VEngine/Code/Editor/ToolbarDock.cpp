@@ -18,14 +18,17 @@ ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 
 	//gameplay buttons
 	playButton = new QPushButton("Play");
+	playButton->setToolTip("Ctrl+P");
 	connect(playButton, &QPushButton::clicked, this, &ToolbarDock::StartPlay);
 	hLayout->addWidget(playButton);
 
 	resetWorldButton = new QPushButton("Reset");
+	resetWorldButton->setToolTip("Ctrl+R");
 	connect(resetWorldButton, &QPushButton::clicked, this, &ToolbarDock::ResetWorldState);
 	hLayout->addWidget(resetWorldButton);
 
 	saveWorldButton = new QPushButton("Save");
+	saveWorldButton->setToolTip("Ctrl+S");
 	connect(saveWorldButton, &QPushButton::clicked, this, &ToolbarDock::SaveWorld);
 	hLayout->addWidget(saveWorldButton);
 
