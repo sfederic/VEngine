@@ -7,6 +7,7 @@
 #include "Core.h"
 #include "TransformGizmo.h"
 #include "FileSystem.h"
+#include "Camera.h"
 
 ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 {
@@ -56,6 +57,15 @@ ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 	hLayout->addWidget(new QLabel("Rotation:"));
 	hLayout->addWidget(rotationSnapSpinBox);
 
+	//Camera movespeed
+	hLayout->addWidget(new QLabel("Camera Speed:"));
+
+	cameraMoveSpeedSpinBox = new SpinBox(this);
+	cameraMoveSpeedSpinBox->setFixedWidth(75);
+	cameraMoveSpeedSpinBox->setValue(editorCamera.cameraMoveSpeed);
+	hLayout->addWidget(cameraMoveSpeedSpinBox);
+	connect(cameraMoveSpeedSpinBox, &SpinBox::editingFinished,
+		this, [&]() {editorCamera.cameraMoveSpeed = cameraMoveSpeedSpinBox->value(); });
 
 	auto toolbarWidget = new QWidget();
 	toolbarWidget->setLayout(hLayout);

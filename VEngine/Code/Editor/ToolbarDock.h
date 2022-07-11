@@ -14,6 +14,8 @@ struct ToolbarDock : public QDockWidget
 	SpinBox* scaleSnapSpinBox;
 	SpinBox* rotationSnapSpinBox;
 
+	SpinBox* cameraMoveSpeedSpinBox;
+
 	ToolbarDock();
 
 private:
