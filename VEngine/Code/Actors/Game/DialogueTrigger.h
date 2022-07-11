@@ -14,6 +14,7 @@ struct DialogueTrigger : Actor
 	DialogueComponent* dialogueComponent = nullptr;
 	BoxTriggerComponent* boxTriggerComponent = nullptr;
 
+private:
 	bool playOnSpawn = false;
 
 	bool playOnTriggerOverlap = false;
@@ -21,6 +22,7 @@ struct DialogueTrigger : Actor
 
 	bool dialogueFinished = false;
 
+public:
 	DialogueTrigger();
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
