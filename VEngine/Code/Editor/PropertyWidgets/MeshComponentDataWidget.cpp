@@ -3,7 +3,7 @@
 #include <qfiledialog.h>
 #include "Render/RenderTypes.h"
 #include "VString.h"
-#include "Asset/AssetBaseFolders.h"
+#include "Asset/AssetPaths.h"
 
 MeshComponentDataWidget::MeshComponentDataWidget(Property& prop_)
 {
@@ -27,7 +27,7 @@ void MeshComponentDataWidget::SetValue()
 	if (!filename.isEmpty())
 	{
 		value->filename.assign(
-			VString::GetSubStringAtFoundOffset(filename.toStdString(), AssetBaseFolders::mesh);
+			VString::GetSubStringAtFoundOffset(filename.toStdString(), AssetBaseFolders::mesh));
 
 		setToolTip(filepath);
 

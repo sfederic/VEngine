@@ -3,7 +3,7 @@
 #include <qfiledialog.h>
 #include "Render/RenderTypes.h"
 #include "VString.h"
-#include "Asset/AssetBaseFolders.h"
+#include "Asset/AssetPaths.h"
 
 ShaderDataWidget::ShaderDataWidget(Property& prop_)
 {

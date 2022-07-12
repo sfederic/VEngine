@@ -5,6 +5,7 @@
 #include <filesystem>
 #include "Animation/AnimationStructures.h"
 #include "VMath.h"
+#include "AssetPaths.h"
 
 FBXLoader fbxLoader;
 
@@ -17,7 +18,7 @@ void FBXLoader::Init()
 
 bool FBXLoader::Import(std::string filename, MeshDataProxy* meshData)
 {
-	std::string filepath = "Meshes/" + filename;
+	std::string filepath = AssetBaseFolders::mesh + filename;
 	
 	if (filename.empty() || !std::filesystem::exists(filepath))
 	{
@@ -375,7 +376,7 @@ void FBXLoader::ProcessSkeletonNodes(FbxNode* node, Skeleton* skeleton, int pare
 
 bool FBXLoader::ImportFracturedMesh(std::string filename, std::vector<MeshData>& meshDatas)
 {
-	std::string filepath = "Meshes/" + filename;
+	std::string filepath = AssetBaseFolders::mesh + filename;
 
 	if (filename.empty() || !std::filesystem::exists(filepath))
 	{

@@ -3,13 +3,14 @@
 #include "Render/RenderUtils.h"
 #include <filesystem>
 #include "Log.h"
+#include "Asset/AssetPaths.h"
 
 TextureSystem textureSystem;
 
 Texture2D* TextureSystem::FindTexture2D(std::string textureFilename)
 {
 	//Set default texture if filename doesn't exist
-	if (!std::filesystem::exists("Textures/" + textureFilename))
+	if (!std::filesystem::exists(AssetBaseFolders::texture + textureFilename))
 	{
 		Log("%s not found.", textureFilename.c_str());
 		textureFilename = "test.png";

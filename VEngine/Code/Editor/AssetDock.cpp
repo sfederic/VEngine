@@ -19,7 +19,7 @@
 #include "Render/Material.h"
 #include "Gameplay/GameInstance.h"
 #include "Log.h"
-#include "Asset/AssetBaseFolders.h"
+#include "Asset/AssetPaths.h"
 
 namespace Icons
 {
@@ -271,7 +271,7 @@ void AssetDock::MeshFileClicked(const std::string meshFilename)
 
 void AssetDock::ActorTemplateFileClicked(const std::string actorTemplateFilename)
 {
-    std::string path = "ActorTemplates/" + actorTemplateFilename;
+    std::string path = AssetBaseFolders::actorTemplate + actorTemplateFilename;
     Deserialiser d(path, OpenMode::In);
 
     std::wstring actorSystemName;
@@ -335,7 +335,7 @@ void AssetDock::CreateNewActorTemplateFile()
     {
         QFileDialog dialog;
         QString actorTemplateFileName = dialog.getSaveFileName(nullptr, "Create New Actor Template File",
-            "ActorTemplates/", ".actor");
+            QString::fromStdString(AssetBaseFolders::actorTemplate), ".actor");
         if (actorTemplateFileName.isEmpty()) return;
 
         Serialiser s(actorTemplateFileName.toStdString(), OpenMode::Out);

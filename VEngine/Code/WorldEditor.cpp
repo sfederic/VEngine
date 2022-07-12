@@ -11,6 +11,7 @@
 #include "Actors/MeshActor.h"
 #include "Editor/DebugMenu.h"
 #include "Core.h"
+#include "Asset/AssetPaths.h"
 
 WorldEditor worldEditor;
 
@@ -187,7 +188,7 @@ void WorldEditor::SpawnActor(Transform& transform)
 
 	if (!actorTemplateFilename.empty()) //Spawn actor through template
 	{
-		std::string path = "ActorTemplates/" + actorTemplateFilename;
+		std::string path = AssetBaseFolders::actorTemplate + actorTemplateFilename;
 		Deserialiser d(path, OpenMode::In);
 
 		actor = spawnSystem->SpawnActor(transform);

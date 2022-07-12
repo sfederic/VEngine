@@ -8,6 +8,7 @@
 #include "TextureSystem.h"
 #include <filesystem>
 #include "VString.h"
+#include "Asset/AssetPaths.h"
 
 namespace RenderUtils
 {
@@ -128,7 +129,7 @@ namespace RenderUtils
 		}
 		else
 		{
-			path = L"Textures/" + VString::stows(texture->GetFilename());
+			path = VString::stows(AssetBaseFolders::texture + texture->GetFilename());
 		}
 
 		assert(std::filesystem::exists(path) && "Texture file doesn't exist");

@@ -7,6 +7,7 @@
 #include "Profile.h"
 #include "Log.h"
 #include "FileSystem.h"
+#include "Asset/AssetPaths.h"
 
 AssetSystem assetSystem;
 
@@ -33,7 +34,7 @@ void AssetSystem::WriteAllMeshDataToMeshAssetFiles()
 
 		const std::string& filename = meshIt.first;
 		const std::string meshName = filename.substr(0, filename.find("."));
-		const std::string meshFilePath = "Meshes/" + meshName + ".vmesh";
+		const std::string meshFilePath = AssetBaseFolders::mesh + meshName + ".vmesh";
 
 		fopen_s(&file, meshFilePath.c_str(), "wb");
 		assert(file);
@@ -74,7 +75,7 @@ void AssetSystem::WriteAllMeshDataToMeshAssetFiles()
 void AssetSystem::ReadAllMeshAssetsFromFile()
 {
 	FILE* file = nullptr;
-	fopen_s(&file, "Meshes/cube.vmesh", "rb");
+	fopen_s(&file, "Meshess/cube.vmesh", "rb");
 	assert(file);
 
 	MeshAssetHeader header{};
