@@ -15,6 +15,7 @@
 #include "Input.h"
 #include "Log.h"
 #include "Particle/SpriteSheet.h"
+#include "Asset/AssetFileExtensions.h"
 
 namespace GameUtils
 {
@@ -91,7 +92,7 @@ namespace GameUtils
 
 		auto firstOf = world.worldFilename.find_first_of(".");
 		std::string str = world.worldFilename.substr(0, firstOf);
-		std::string file = str += ".vmap";
+		std::string file = str += AssetFileExtensions::gameSave;
 
 		world.worldFilename = file;
 		FileSystem::WriteAllActorSystems();

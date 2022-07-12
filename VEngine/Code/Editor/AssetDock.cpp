@@ -20,6 +20,7 @@
 #include "Gameplay/GameInstance.h"
 #include "Log.h"
 #include "Asset/AssetPaths.h"
+#include "Asset/AssetFileExtensions.h"
 
 namespace Icons
 {
@@ -294,7 +295,10 @@ void AssetDock::CreateNewMapFile()
     QFileDialog dialog;
     dialog.setFileMode(QFileDialog::AnyFile);
 
-    QString mapFile = dialog.getSaveFileName(nullptr, "Create New Map File", "WorldMaps/", ".vmap");
+    QString mapFile = dialog.getSaveFileName(nullptr,
+        "Create New Map File",
+        QString::fromStdString(AssetBaseFolders::worldMap),
+        QString::fromStdString(AssetFileExtensions::worldMap));
 
     //Cancel clicked
     if (mapFile.isEmpty())
@@ -319,7 +323,10 @@ void AssetDock::CreateNewDialogueFile()
     QFileDialog dialog;
     dialog.setFileMode(QFileDialog::AnyFile);
 
-    QString dialogueFile = dialog.getSaveFileName(nullptr, "Create New Dialogue File", "Dialogues/", ".dialog");
+    QString dialogueFile = dialog.getSaveFileName(nullptr,
+        "Create New Dialogue File",
+        QString::fromStdString(AssetBaseFolders::dialogue),
+        QString::fromStdString(AssetFileExtensions::dialogue));
 
     QFile file(dialogueFile);
     file.open(QIODevice::WriteOnly);
@@ -335,7 +342,9 @@ void AssetDock::CreateNewActorTemplateFile()
     {
         QFileDialog dialog;
         QString actorTemplateFileName = dialog.getSaveFileName(nullptr, "Create New Actor Template File",
-            QString::fromStdString(AssetBaseFolders::actorTemplate), ".actor");
+            QString::fromStdString(AssetBaseFolders::actorTemplate),
+            QString::fromStdString(AssetFileExtensions::actorTemplate));
+
         if (actorTemplateFileName.isEmpty()) return;
 
         Serialiser s(actorTemplateFileName.toStdString(), OpenMode::Out);
