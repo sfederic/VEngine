@@ -1075,7 +1075,7 @@
     <ClInclude Include="Code\IFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Asset\AssetBaseFolders.h">
+    <ClInclude Include="Code\Asset\AssetPaths.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -10,6 +10,6 @@ struct AssetBaseFolders
 	inline static std::string actorTemplate = "ActorTemplates/";
 	inline static std::string shader = "Code/Render/Shaders/";
 	inline static std::string audio = "Audio/";
-	inline static std::string audio = "Cutscenes/";
-	inline static std::string audio = "Dialogues/";
+	inline static std::string cutscene = "Cutscenes/";
+	inline static std::string dialogue = "Dialogues/";
 };
