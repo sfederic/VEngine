@@ -119,21 +119,25 @@ namespace RenderUtils
 
 	void CreateTexture(Texture2D* texture, bool useFullPath)
 	{
+		std::wstring path;
+
 		if (texture->GetFilename().empty())
 		{
 			texture->SetFilename("test.png");
 		}
-
-		std::wstring path;
-		if (!useFullPath)
-		{
-			path = L"Textures/" + VString::stows(texture->GetFilename());
-		}
 		else
 		{
-			path = VString::stows(texture->GetFilename());
+			if (!useFullPath)
+			{
+				path = L"Textures/" + VString::stows(texture->GetFilename());
+			}
+			else
+			{
+				path = VString::stows(texture->GetFilename());
+			}
+
+			assert(std::filesystem::exists(path) && "Texture file doesn't exist");
 		}
-		assert(std::filesystem::exists(path) && "Texture file doesn't exist");
 
 		ID3D11Resource* resource = nullptr;
 		ID3D11ShaderResourceView* srv = nullptr;
