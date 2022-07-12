@@ -19,6 +19,7 @@
 #include "Render/Material.h"
 #include "Gameplay/GameInstance.h"
 #include "Log.h"
+#include "Asset/AssetBaseFolders.h"
 
 namespace Icons
 {
@@ -120,23 +121,23 @@ void AssetDock::AssetItemClicked()
         GameInstance::startingMap = assetPath;
         GameInstance::previousMapMovedFrom = GameInstance::startingMap;
 
-        assetPath = VString::GetSubStringAtFoundOffset(assetPath, "WorldMaps/");
+        assetPath = VString::GetSubStringAtFoundOffset(assetPath, AssetBaseFolders::worldMap);
         FileSystem::LoadWorld(assetPath);
     }   
     else if (std::wcscmp(extension, L".fbx") == 0) //FBX files
     {
-        assetPath = VString::GetSubStringAtFoundOffset(assetPath, "Meshes/");
+        assetPath = VString::GetSubStringAtFoundOffset(assetPath, AssetBaseFolders::mesh);
         MeshFileClicked(assetPath);
     }
     else if (std::wcscmp(extension, L".actor") == 0) //Actor Template files
     {
-        assetPath = VString::GetSubStringAtFoundOffset(assetPath, "ActorTemplates/");
+        assetPath = VString::GetSubStringAtFoundOffset(assetPath, AssetBaseFolders::actorTemplate);
         ActorTemplateFileClicked(assetPath);
     }
     else if (std::wcscmp(extension, L".jpg") == 0 || //Image files
         std::wcscmp(extension, L".png") == 0)
     {
-        assetPath = VString::GetSubStringAtFoundOffset(assetPath, "Textures/");
+        assetPath = VString::GetSubStringAtFoundOffset(assetPath, AssetBaseFolders::texture);
         TextureFileClicked(VString::stows(assetPath));
     }
 }
