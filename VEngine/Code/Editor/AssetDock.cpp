@@ -112,22 +112,7 @@ void AssetDock::AssetItemClicked()
     auto fileExtension = std::filesystem::path(fullPath.toStdString()).extension();
     auto extension = fileExtension.c_str();
 
-    //Get the parent folder of the asset name (Only works one folder deep for now)
-    auto parentPath = std::filesystem::path(fullPath.toStdString()).parent_path();
-    std::string parentFolderName = parentPath.string().substr(parentPath.string().find_last_of("\//") + 1);
-
-    std::string assetPath;
-
-    //Since it's only one parent folder deep, ignore base folders for assets
-    std::set<std::string> parentFoldersToIgnore{ "Meshes", "Textures", "WorldMaps", "ActorTemplates" };
-    if (!parentFoldersToIgnore.contains(parentFolderName))
-    {
-        assetPath = parentFolderName + "/" + assetName.toStdString();
-    }
-    else
-    {
-        assetPath = assetName.toStdString();
-    }
+    std::string assetPath = fullPath.toStdString();
 
     if (std::wcscmp(extension, L".vmap") == 0) //Map files 
     {
@@ -135,19 +120,28 @@ void AssetDock::AssetItemClicked()
         GameInstance::startingMap = assetPath;
         GameInstance::previousMapMovedFrom = GameInstance::startingMap;
 
+        std::string mapsFolder = "WorldMaps/";
+        assetPath = assetPath.substr(assetPath.find(mapsFolder) + mapsFolder.size());
+
         FileSystem::LoadWorld(assetPath);
     }   
     else if (std::wcscmp(extension, L".fbx") == 0) //FBX files
     {
+        std::string meshesFolder = "Meshes/";
+        assetPath = assetPath.substr(assetPath.find(meshesFolder) + meshesFolder.size());
         MeshFileClicked(assetPath);
     }
     else if (std::wcscmp(extension, L".actor") == 0) //Actor Template files
     {
+        std::string actorTemplatesFolder = "ActorTemplates/";
+        assetPath = assetPath.substr(assetPath.find(actorTemplatesFolder) + actorTemplatesFolder.size());
         ActorTemplateFileClicked(assetPath);
     }
     else if (std::wcscmp(extension, L".jpg") == 0 || //Image files
         std::wcscmp(extension, L".png") == 0)
     {
+        std::string texturesFolder = "Textures/";
+        assetPath = assetPath.substr(assetPath.find(texturesFolder) + texturesFolder.size());
         TextureFileClicked(VString::stows(assetPath));
     }
 }
