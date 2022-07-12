@@ -2,6 +2,8 @@
 #include "MeshComponentDataWidget.h"
 #include <qfiledialog.h>
 #include "Render/RenderTypes.h"
+#include "VString.h"
+#include "Asset/AssetBaseFolders.h"
 
 MeshComponentDataWidget::MeshComponentDataWidget(Property& prop_)
 {
@@ -15,14 +17,20 @@ MeshComponentDataWidget::MeshComponentDataWidget(Property& prop_)
 void MeshComponentDataWidget::SetValue()
 {
 	QString filepath = QFileDialog::getOpenFileName(this,
-		tr("Set Mesh"), "Meshes/", tr("Meshes (*.fbx *.vmesh)"));
+		tr("Set Mesh"),
+		QString::fromStdString(AssetBaseFolders::mesh),
+		tr("Meshes (*.fbx *.vmesh)"));
 
 	QFileInfo info(filepath);
 	QString filename = info.fileName();
 
 	if (!filename.isEmpty())
 	{
-		value->filename.assign(filename.toStdString().c_str());
+		value->filename.assign(
+			VString::GetSubStringAtFoundOffset(filename.toStdString(), AssetBaseFolders::mesh);
+
+		setToolTip(filepath);
+
 		prop.change(value);
 		ResetValue();
 	}
