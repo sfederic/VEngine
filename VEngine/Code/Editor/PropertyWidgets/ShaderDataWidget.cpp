@@ -2,6 +2,8 @@
 #include "ShaderDataWidget.h"
 #include <qfiledialog.h>
 #include "Render/RenderTypes.h"
+#include "VString.h"
+#include "Asset/AssetBaseFolders.h"
 
 ShaderDataWidget::ShaderDataWidget(Property& prop_)
 {
@@ -22,7 +24,10 @@ void ShaderDataWidget::SetValue()
 
 	if (!filename.isEmpty())
 	{
-		value->filename.assign(filename.toStdString().c_str());
+		value->filename.assign(
+			VString::GetSubStringAtFoundOffset(filename.toStdString(), AssetBaseFolders::shader));
+		setToolTip(filepath);
+
 		prop.change(value);
 		ResetValue();
 	}
