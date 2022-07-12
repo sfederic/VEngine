@@ -120,28 +120,23 @@ void AssetDock::AssetItemClicked()
         GameInstance::startingMap = assetPath;
         GameInstance::previousMapMovedFrom = GameInstance::startingMap;
 
-        std::string mapsFolder = "WorldMaps/";
-        assetPath = assetPath.substr(assetPath.find(mapsFolder) + mapsFolder.size());
-
+        assetPath = VString::GetSubStringAtFoundOffset(assetPath, "WorldMaps/");
         FileSystem::LoadWorld(assetPath);
     }   
     else if (std::wcscmp(extension, L".fbx") == 0) //FBX files
     {
-        std::string meshesFolder = "Meshes/";
-        assetPath = assetPath.substr(assetPath.find(meshesFolder) + meshesFolder.size());
+        assetPath = VString::GetSubStringAtFoundOffset(assetPath, "Meshes/");
         MeshFileClicked(assetPath);
     }
     else if (std::wcscmp(extension, L".actor") == 0) //Actor Template files
     {
-        std::string actorTemplatesFolder = "ActorTemplates/";
-        assetPath = assetPath.substr(assetPath.find(actorTemplatesFolder) + actorTemplatesFolder.size());
+        assetPath = VString::GetSubStringAtFoundOffset(assetPath, "ActorTemplates/");
         ActorTemplateFileClicked(assetPath);
     }
     else if (std::wcscmp(extension, L".jpg") == 0 || //Image files
         std::wcscmp(extension, L".png") == 0)
     {
-        std::string texturesFolder = "Textures/";
-        assetPath = assetPath.substr(assetPath.find(texturesFolder) + texturesFolder.size());
+        assetPath = VString::GetSubStringAtFoundOffset(assetPath, "Textures/");
         TextureFileClicked(VString::stows(assetPath));
     }
 }
