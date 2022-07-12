@@ -1078,6 +1078,9 @@
     <ClInclude Include="Code\Asset\AssetPaths.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Asset\AssetFileExtensions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

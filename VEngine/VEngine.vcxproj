@@ -260,6 +260,7 @@
     <ClCompile Include="Code\Render\ConstantBuffer.cpp" />
     <ClCompile Include="Code\Scripts\ScriptSystem.cpp" />
     <ClCompile Include="Code\VFunctionSystem.cpp" />
+    <ClInclude Include="Code\Asset\AssetFileExtensions.h" />
     <ClInclude Include="Code\Asset\AssetPaths.h" />
     <ClInclude Include="Code\Editor\ImGuizmo\ImSequencer.h" />
     <ClInclude Include="Code\Gameplay\BattleEnums.h" />
