@@ -42,4 +42,9 @@ namespace VString
 
         return std::string(output);
     }
+
+    std::string GetSubStringAtFoundOffset(std::string mainString, std::string findCase)
+    {
+        return mainString.substr(mainString.find(findCase) + findCase.size());
+    }
 }

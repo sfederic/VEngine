@@ -15,4 +15,8 @@ namespace VString
 	//String formatting functions
 	std::wstring wformat(const std::wstring wstr, ...);
 	std::string format(const std::string str, ...);
+
+	//Returns the string that is found at the matching input to the end of the string.
+	//Using this mainly for file path stuff to get the path from a specific folder's name.
+	std::string GetSubStringAtFoundOffset(std::string mainString, std::string findCase);
 }
