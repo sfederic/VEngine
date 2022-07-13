@@ -213,7 +213,7 @@ void Player::InflictDamage(int damage)
 
 void Player::Guard()
 {
-	if (actionPoints > 0)
+	if (actionPoints > 0 && !guarding)
 	{
 		if (Input::GetKeyUp(Keys::Down))
 		{
