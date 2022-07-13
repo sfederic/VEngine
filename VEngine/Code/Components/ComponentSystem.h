@@ -19,7 +19,7 @@ struct ComponentSystem : IComponentSystem
 		componentSystemCache.Add(typeid(T), this);
 	}
 
-	T* Add(Actor* owner = nullptr, T newComponent = T())
+	T* Add(Actor* owner = nullptr, T newComponent = T(), bool callCreate = true)
 	{
 		T* component = new T(std::move(newComponent));
 		components.emplace_back(component);
@@ -28,7 +28,7 @@ struct ComponentSystem : IComponentSystem
 		component->name = this->name + std::to_string(component->index);
 		component->uid = GenerateUID();
 
-		if (systemState == SystemStates::Loaded)
+		if (systemState == SystemStates::Loaded && callCreate)
 		{
 			component->Create();
 		}
@@ -70,11 +70,11 @@ struct ComponentSystem : IComponentSystem
 
 	virtual void Tick(float deltaTime) override
 	{
-		for (T* component : components)
+		for (int i = 0; i < components.size(); i++)
 		{
-			if (component->active)
+			if (components[i]->active)
 			{
-				component->Tick(deltaTime);
+				components[i]->Tick(deltaTime);
 			}
 		}
 	}

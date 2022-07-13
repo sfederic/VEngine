@@ -66,7 +66,7 @@ namespace GameUtils
 
 	SpriteSheet* SpawnSpriteSheet(std::string textureFilename, XMFLOAT3 position, bool loop, int numRows, int numColumns)
 	{
-		auto spriteSheet = SpriteSheet::system.Add();
+		auto spriteSheet = SpriteSheet::system.Add(nullptr, SpriteSheet(), false);
 
 		spriteSheet->SetPosition(position);
 		spriteSheet->textureData.filename = textureFilename;
@@ -74,7 +74,7 @@ namespace GameUtils
 		spriteSheet->numSheetRows = numRows;
 		spriteSheet->numSheetColumns = numColumns;
 
-		spriteSheet->Create(); //Call Create() here again (it's called already in SpriteSheet::system.Add)
+		spriteSheet->Create();
 
 		return spriteSheet;
 	}
