@@ -1,0 +1,622 @@
+Grid
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+node.fbx
+Metallic
+0
+Name
+Grid0
+Rast State
+solid
+Shader
+InstanceShader.hlsl
+Size X
+5
+Size Y
+7
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+UID
+3239230627
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+startBattleOnLoad
+0
+next
+GridActor
+0
+AudioActor
+0
+Player
+1
+ Position
+0 0 0
+ Rotation
+-0 -1.49012e-07 -0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Audio Filename
+step.wav
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+FOV
+60
+Far Z
+1000
+File
+
+Grid Obstacle
+0
+Loop
+1
+Mesh
+character_test.fbx
+Metallic
+0
+Name
+Player0
+Near Z
+0.01
+Pitch
+1
+Play On Start
+1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+UID
+3050896867
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+Volume
+-0.00143557
+next
+Unit
+3
+ Position
+4 0 6
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Ambient
+1 1 1 1
+Attack Points
+1
+Attack Range
+1
+Battle State
+fight
+Blend State
+null
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Cull
+0
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+3
+Image File
+
+Inspect
+1
+Interact
+1
+Interact Text
+
+Memory Desc
+
+Memory Name
+
+Mesh
+
+Metallic
+0
+Move Points
+4
+Move Speed
+4
+Name
+Unit0
+Obstacle
+0
+Quest Name
+
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+UID
+3292401003
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+actorToFocusOn
+
+alwaysActive
+1
+condition
+
+conditionArg
+
+deathText
+
+disableGridInteract
+0
+interactKnownText
+
+numOfAttacks
+1
+next
+ Position
+4 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Ambient
+1 1 1 1
+Attack Points
+1
+Attack Range
+1
+Battle State
+fight
+Blend State
+null
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Cull
+0
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+3
+Image File
+
+Inspect
+1
+Interact
+1
+Interact Text
+
+Memory Desc
+
+Memory Name
+
+Mesh
+
+Metallic
+0
+Move Points
+4
+Move Speed
+4
+Name
+Unit1
+Obstacle
+0
+Quest Name
+
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+UID
+3292401003
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+actorToFocusOn
+
+alwaysActive
+1
+condition
+
+conditionArg
+
+deathText
+
+disableGridInteract
+0
+interactKnownText
+
+numOfAttacks
+1
+next
+ Position
+1 0 5
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Add On Interact
+0
+Ambient
+1 1 1 1
+Attack Points
+1
+Attack Range
+1
+Battle State
+fight
+Blend State
+null
+Casts Shadow
+1
+Condition
+
+Condition Value
+
+Cull
+0
+Destruct
+1
+File
+
+Grid Obstacle
+0
+Health
+3
+Image File
+
+Inspect
+1
+Interact
+1
+Interact Text
+
+Memory Desc
+
+Memory Name
+
+Mesh
+
+Metallic
+0
+Move Points
+4
+Move Speed
+4
+Name
+Unit2
+Obstacle
+0
+Quest Name
+
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+UID
+3292401003
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+activeBeginHour
+0
+activeEndHour
+0
+actorToFocusOn
+
+alwaysActive
+1
+condition
+
+conditionArg
+
+deathText
+
+disableGridInteract
+0
+interactKnownText
+
+numOfAttacks
+1
+next
+EntranceTrigger
+0
+NPC
+0
+MeshActor
+2
+ Position
+2 -0.5 3
+ Rotation
+-0 0 -0 1
+ Scale
+5 1 7
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+node.fbx
+Metallic
+0
+Name
+chair0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+UID
+4149422810
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Position
+-0.5 1.5 3
+ Rotation
+-0 0.707107 -0 0.707107
+ Scale
+3.5 2 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Metallic
+0
+Name
+chair1
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+UID
+3257111667
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+DirectionalLightActor
+0
+SavePoint
+0
+PointLightActor
+1
+ Position
+1 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Colour
+0 1 1 1
+Intensity
+25
+LightEnabled
+1
+Name
+PointLightActor0
+UID
+2293580300
+next
+SpotLightActor
+0
+FenceActor
+0
+Billboard
+0
+InteractTrigger
+0
+ParticleSystem
+0
+DialogueTrigger
+0
+DestructibleActor
+0
+MemoryActor
+0
+TitleScreenActor
+0
+PushableGridActor
+0
+PlayerDialogueTrigger
+0
+GoddessStatue
+0
+PhysicsActor
+0
+PostProcessInstance
+0
+PolyboardActor
+0
+DebugNoteActor
+0
+SpriteSheetActor
+0
+MovingGridActor
+0
+CutsceneActor
+0
+ReflectionPlane
+0
+DiffuseProbeMap
+0
