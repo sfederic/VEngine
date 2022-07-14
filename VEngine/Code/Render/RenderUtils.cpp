@@ -124,8 +124,9 @@ namespace RenderUtils
 
 		if (texture->GetFilename().empty())
 		{
+			//Set default texture if filename empty
 			texture->SetFilename("test.png");
-			path = VString::stows(texture->GetFilename());
+			path = VString::stows(AssetBaseFolders::texture + texture->GetFilename());
 		}
 		else
 		{
