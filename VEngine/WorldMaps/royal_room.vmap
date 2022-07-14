@@ -129,328 +129,7 @@ Volume
 -0.00143557
 next
 Unit
-3
- Position
-4 0 6
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
 0
-Ambient
-1 1 1 1
-Attack Points
-1
-Attack Range
-1
-Battle State
-fight
-Blend State
-null
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Cull
-0
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-3
-Image File
-
-Inspect
-1
-Interact
-1
-Interact Text
-
-Memory Desc
-
-Memory Name
-
-Mesh
-
-Metallic
-0
-Move Points
-4
-Move Speed
-4
-Name
-Unit0
-Obstacle
-0
-Quest Name
-
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-UID
-3292401003
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-actorToFocusOn
-
-alwaysActive
-1
-condition
-
-conditionArg
-
-deathText
-
-disableGridInteract
-0
-interactKnownText
-
-numOfAttacks
-1
-next
- Position
-4 0 2
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Ambient
-1 1 1 1
-Attack Points
-1
-Attack Range
-1
-Battle State
-fight
-Blend State
-null
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Cull
-0
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-3
-Image File
-
-Inspect
-1
-Interact
-1
-Interact Text
-
-Memory Desc
-
-Memory Name
-
-Mesh
-
-Metallic
-0
-Move Points
-4
-Move Speed
-4
-Name
-Unit1
-Obstacle
-0
-Quest Name
-
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-UID
-3292401003
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-actorToFocusOn
-
-alwaysActive
-1
-condition
-
-conditionArg
-
-deathText
-
-disableGridInteract
-0
-interactKnownText
-
-numOfAttacks
-1
-next
- Position
-1 0 5
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Add On Interact
-0
-Ambient
-1 1 1 1
-Attack Points
-1
-Attack Range
-1
-Battle State
-fight
-Blend State
-null
-Casts Shadow
-1
-Condition
-
-Condition Value
-
-Cull
-0
-Destruct
-1
-File
-
-Grid Obstacle
-0
-Health
-3
-Image File
-
-Inspect
-1
-Interact
-1
-Interact Text
-
-Memory Desc
-
-Memory Name
-
-Mesh
-
-Metallic
-0
-Move Points
-4
-Move Speed
-4
-Name
-Unit2
-Obstacle
-0
-Quest Name
-
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-UID
-3292401003
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-activeBeginHour
-0
-activeEndHour
-0
-actorToFocusOn
-
-alwaysActive
-1
-condition
-
-conditionArg
-
-deathText
-
-disableGridInteract
-0
-interactKnownText
-
-numOfAttacks
-1
-next
 EntranceTrigger
 0
 NPC
@@ -587,7 +266,34 @@ Billboard
 InteractTrigger
 0
 ParticleSystem
-0
+1
+ Position
+1 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Direction
+0 1 0
+Lifetime
+1 1
+Move Speed
+1 1
+Name
+ParticleSystem0
+Rotate
+0 0
+Rotate Speed
+0 0
+Spawn Radius
+0 1
+Spawn Rate
+0.3 0.3
+Texture
+cross_mark.png
+UID
+3676904950
+next
 DialogueTrigger
 0
 DestructibleActor
