@@ -27,6 +27,7 @@
 #include "VEnum.h"
 #include "Render/Material.h"
 #include "Render/RenderTypes.h"
+#include "ButtonProperty.h"
 
 std::unordered_map<std::type_index, std::function<void(Property&, int)>> typeToFunctionMap;
 
@@ -57,6 +58,14 @@ PropertiesDock::PropertiesDock() : QDockWidget("Properties")
     typeToFunctionMap[typeid(ShaderData)] = [&](Property& prop, int row) { CreateWidget<ShaderData, ShaderDataWidget>(prop, row); };
     typeToFunctionMap[typeid(MeshComponentData)] = [&](Property& prop, int row) { CreateWidget<MeshComponentData, MeshComponentDataWidget>(prop, row); };
     typeToFunctionMap[typeid(VEnum)] = [&](Property& prop, int row) { CreateWidget<VEnum, VEnumWidget>(prop, row); };
+    typeToFunctionMap[typeid(ButtonProperty)] = [&](Property& prop, int row)
+    {
+        auto buttonProp = prop.GetData<ButtonProperty>();
+        auto button = new QPushButton();
+        button->setText(QString::fromStdString(buttonProp->GetButtonText()));
+        connect(button, &QPushButton::pressed, this, buttonProp->GetClickFunction());
+        actorPropsGridLayout->addWidget(button, row, propertyDataColumn);
+    };
 }
 
 void PropertiesDock::DisplayActorProperties(Actor* actor)
