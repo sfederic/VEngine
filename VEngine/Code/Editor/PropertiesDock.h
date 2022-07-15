@@ -10,9 +10,14 @@ struct Property;
 class QWidget;
 class QGridLayout;
 class QScrollArea;
+class QPushButton;
+class QComboBox;
 
 struct PropertiesDock : public QDockWidget
 {
+	QPushButton* addComponentButton = nullptr;
+	QComboBox* componentComboBox = nullptr;
+
 	QWidget* actorPropsWidget = nullptr;
 	QGridLayout* actorPropsGridLayout = nullptr;
 	QScrollArea* actorPropsScrollArea = nullptr;
@@ -20,6 +25,7 @@ struct PropertiesDock : public QDockWidget
 	std::vector<IPropertyWidget*> propertyWidgetsToUpdate;
 
 	Actor* previousActor = nullptr;
+	Actor* currentDisplayingActor = nullptr;
 
 private:
 	static const int propertyNameColumn = 0;
@@ -41,4 +47,6 @@ private:
 		actorPropsGridLayout->addWidget(widget, row, propertyDataColumn);
 	    propertyWidgetsToUpdate.push_back((IPropertyWidget*)widget);
 	}
+
+	void AddComponentButtonClick(bool checked);
 };

@@ -4,11 +4,14 @@
 #include <qboxlayout.h>
 #include <QDoubleSpinBox>
 #include <QLabel>
+#include <QScrollBar>
 #include <qscrollarea.h>
 #include <QCheckBox>
 #include <QLineEdit>
 #include "Actors/Actor.h"
 #include "Components/Component.h"
+#include "Components/IComponentSystem.h"
+#include "Components/ComponentSystemCache.h"
 #include "Render/PipelineObjects.h"
 #include "PropertyWidgets/BoolWidget.h" 
 #include "PropertyWidgets/Float2Widget.h"
@@ -27,7 +30,6 @@
 #include "VEnum.h"
 #include "Render/Material.h"
 #include "Render/RenderTypes.h"
-#include "ButtonProperty.h"
 
 std::unordered_map<std::type_index, std::function<void(Property&, int)>> typeToFunctionMap;
 
@@ -58,14 +60,6 @@ PropertiesDock::PropertiesDock() : QDockWidget("Properties")
     typeToFunctionMap[typeid(ShaderData)] = [&](Property& prop, int row) { CreateWidget<ShaderData, ShaderDataWidget>(prop, row); };
     typeToFunctionMap[typeid(MeshComponentData)] = [&](Property& prop, int row) { CreateWidget<MeshComponentData, MeshComponentDataWidget>(prop, row); };
     typeToFunctionMap[typeid(VEnum)] = [&](Property& prop, int row) { CreateWidget<VEnum, VEnumWidget>(prop, row); };
-    typeToFunctionMap[typeid(ButtonProperty)] = [&](Property& prop, int row)
-    {
-        auto buttonProp = prop.GetData<ButtonProperty>();
-        auto button = new QPushButton();
-        button->setText(QString::fromStdString(buttonProp->GetButtonText()));
-        connect(button, &QPushButton::pressed, this, buttonProp->GetClickFunction());
-        actorPropsGridLayout->addWidget(button, row, propertyDataColumn);
-    };
 }
 
 void PropertiesDock::DisplayActorProperties(Actor* actor)
@@ -77,19 +71,48 @@ void PropertiesDock::DisplayActorProperties(Actor* actor)
         return;
     }
 
+    currentDisplayingActor = actor;
+
     if (actorPropsWidget && actorPropsGridLayout)
     {
-        propertyWidgetsToUpdate.clear();
+        //@Todo: deleting everything here is junk. There has to be a removeWidget() right?
+
+        delete addComponentButton;
+        addComponentButton = nullptr;
+
+        delete componentComboBox;
+        componentComboBox = nullptr;
+
         delete actorPropsGridLayout;
+        actorPropsGridLayout = nullptr;
+
         delete actorPropsWidget;
+        actorPropsWidget = nullptr;
     }
+
+    propertyWidgetsToUpdate.clear();
 
     actorPropsWidget = new QWidget();
     actorPropsGridLayout = new QGridLayout();
+
     actorPropsGridLayout->setAlignment(Qt::AlignTop);
 
+    //Component 'add' widgets
+    addComponentButton = new QPushButton("Add", this);
+    connect(addComponentButton, &QPushButton::clicked, this, &PropertiesDock::AddComponentButtonClick);
+
+    componentComboBox = new QComboBox(this);
+    for (auto& csPair : *componentSystemCache.nameToSystemMap)
+    {
+        auto cs = csPair.second;
+        componentComboBox->addItem(QString::fromStdString(cs->name));
+    }
+
+    actorPropsGridLayout->addWidget(addComponentButton, 0, 0, 1, 1);
+    actorPropsGridLayout->addWidget(componentComboBox, 0, 1, 1, 1);
+
     //Go over actor properties
-    int gridRow = 0;
+    int gridRow = 1;
 
     for (auto& props : actor->GetAllProps())
     {
@@ -149,6 +172,20 @@ void PropertiesDock::Clear()
         delete actorPropsWidget;
         actorPropsWidget = nullptr;
     }
+}
+
+void PropertiesDock::AddComponentButtonClick(bool checked)
+{
+    QString selectedComponentName = componentComboBox->currentText();
+    IComponentSystem* componentSystem = componentSystemCache.Get(selectedComponentName.toStdString());
+    componentSystem->SpawnComponent(currentDisplayingActor);
+
+    previousActor = nullptr; //set to null so same actor can update
+
+    DisplayActorProperties(currentDisplayingActor); //Reset actor props display
+    ResetPropertyWidgetValues();
+    actorPropsScrollArea->verticalScrollBar()->setValue(
+        actorPropsScrollArea->verticalScrollBar()->maximum()); //Move scroll bar to its end
 }
 
 void PropertiesDock::ResetPropertyWidgetValues()
