@@ -72,7 +72,7 @@ public:
 	template <typename T>
 	void WriteLine(T arg)
 	{
-		ss << arg << "\n";
+		ss << arg << L"\n";
 	}
 };
 
