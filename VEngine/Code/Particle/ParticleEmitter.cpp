@@ -74,7 +74,8 @@ void ParticleEmitter::Create()
 
 Properties ParticleEmitter::GetProps()
 {
-	Properties props("ParticleEmitter");
+	auto props = __super::GetProps();
+	props.title = "ParticleEmitter";
 	props.Add("Move Speed", &moveSpeed);
 	props.Add("Spawn Rate", &spawnRate);
 	props.Add("Spawn Radius", &spawnRadius);
