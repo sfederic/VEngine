@@ -35,7 +35,8 @@ public:
 		actor->SetTransform(transform);
 		actor->name = this->name + std::to_string(actor->index);
 
-		world.actorNameMap.emplace(actor->name, actor);
+		world.actorNameMap[actor->name] = actor;
+		world.actorUIDMap[actor->uid] = actor;
 
 		return actor;
 	}
