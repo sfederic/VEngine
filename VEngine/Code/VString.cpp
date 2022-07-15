@@ -45,6 +45,11 @@ namespace VString
 
     std::string GetSubStringAtFoundOffset(std::string mainString, std::string findCase)
     {
-        return mainString.substr(mainString.find(findCase) + findCase.size());
+        if (mainString.find(findCase) != std::string::npos)
+        {
+            return mainString.substr(mainString.find(findCase) + findCase.size());
+        }
+
+        return mainString;
     }
 }
