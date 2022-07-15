@@ -13,7 +13,7 @@ void ComponentSystemCache::Add(std::type_index type, IComponentSystem* component
 
 	if (nameToSystemMap == nullptr)
 	{
-		nameToSystemMap = new std::unordered_map<std::string, IComponentSystem*>();
+		nameToSystemMap = new std::map<std::string, IComponentSystem*>();
 	}
 
 	typeToSystemMap->insert(std::make_pair(type, componentSystem));
