@@ -151,6 +151,12 @@ void FileSystem::LoadWorld(std::string worldName)
 			break;
 		}
 
+		if (actorSystemName.empty())
+		{
+			d.is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			continue;
+		}
+
 		size_t numActorsToSpawn = 0;
 		d.is >> numActorsToSpawn;
 		if (numActorsToSpawn == 0)
@@ -195,18 +201,24 @@ void FileSystem::LoadWorld(std::string worldName)
 		{
 			IActorSystem* actorSystem = asIt->second;
 
+			std::vector<Actor*> newActors;
+
 			for (int i = 0; i < numActorsToSpawn; i++)
 			{
-				actorSystem->SpawnActor(Transform());
+				auto actor = actorSystem->SpawnActor(Transform());
+				newActors.push_back(actor);
 			}
 
-			actorSystem->Deserialise(d);
-
 			//Make sure create()s are after deserialisation
-			for (auto actor : actorSystem->GetActorsAsBaseClass())
+			for (auto actor : newActors)
 			{
+				auto props = actor->GetProps();
+				d.Deserialise(props);
+
 				actor->Create();
+
 				world.actorUIDMap[actor->uid] = actor;
+				world.actorNameMap[actor->name] = actor;
 			}
 		}
 	}
