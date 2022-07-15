@@ -38,6 +38,13 @@ void FileSystem::WriteAllActorSystems()
 		actorSystem->Serialise(s);
 	}
 
+	for (auto cs : world.activeComponentSystems)
+	{
+		cs->Serialise(s);
+	}
+
+	s.WriteLine(L"end");
+
 	debugMenu.AddNotification(VString::wformat(L"%S world saved", world.worldFilename.c_str()));
 }
 
@@ -139,33 +146,68 @@ void FileSystem::LoadWorld(std::string worldName)
 		std::wstring actorSystemName;
 		d.is >> actorSystemName;
 
-		if (actorSystemName.empty())
+		if (actorSystemName == L"end")
 		{
 			break;
 		}
 
 		size_t numActorsToSpawn = 0;
 		d.is >> numActorsToSpawn;
-
-		auto asIt = actorSystemCache.nameToSystemMap->find(VString::wstos(actorSystemName));
-		if (asIt == actorSystemCache.nameToSystemMap->end())
+		if (numActorsToSpawn == 0)
 		{
 			continue;
 		}
 
-		IActorSystem* actorSystem = asIt->second;
-
-		for (int i = 0; i < numActorsToSpawn; i++)
+		auto asIt = actorSystemCache.nameToSystemMap->find(VString::wstos(actorSystemName));
+		if (asIt == actorSystemCache.nameToSystemMap->end())
 		{
-			actorSystem->SpawnActor(Transform());
+			auto csIt = componentSystemCache.nameToSystemMap->find(VString::wstos(actorSystemName));
+			if (csIt == componentSystemCache.nameToSystemMap->end())
+			{
+				continue;
+			}
+			else
+			{
+				IComponentSystem* cs = csIt->second;
+
+				//Push new components into here because the ComponentSystem can have
+				//references to Components created with Actors.
+				std::vector<Component*> newComponents;
+
+				for (int i = 0; i < numActorsToSpawn; i++)
+				{
+					auto component = cs->SpawnComponent(nullptr);
+					newComponents.push_back(component);
+				}
+
+				for (auto component : newComponents)
+				{
+					auto props = component->GetProps();
+					d.Deserialise(props);
+
+					component->Create();
+
+					world.GetActorByUID(component->ownerUID)->components.push_back(component);
+				}
+			}
 		}
-
-		actorSystem->Deserialise(d);
-
-		//Make sure create()s are after deserialisation
-		for (auto actor : actorSystem->GetActorsAsBaseClass())
+		else
 		{
-			actor->Create();
+			IActorSystem* actorSystem = asIt->second;
+
+			for (int i = 0; i < numActorsToSpawn; i++)
+			{
+				actorSystem->SpawnActor(Transform());
+			}
+
+			actorSystem->Deserialise(d);
+
+			//Make sure create()s are after deserialisation
+			for (auto actor : actorSystem->GetActorsAsBaseClass())
+			{
+				actor->Create();
+				world.actorUIDMap[actor->uid] = actor;
+			}
 		}
 	}
 
