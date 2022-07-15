@@ -2,12 +2,11 @@
 #include "Properties.h"
 #include "UID.h"
 
-struct Actor;
-
 struct Component
 {
 	UID uid = 0;
 	std::string name;
+	UID ownerUID = 0;
 	int index = -1;
 	bool active = true;
 
@@ -22,5 +21,5 @@ struct Component
 	//COMPONENT_SYSTEM macro and doesn't need to be added explicity.
 	virtual void Remove() = 0;
 
-	virtual Properties GetProps() = 0;
+	virtual Properties GetProps();
 };
