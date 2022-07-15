@@ -3,6 +3,7 @@
 #include <string>
 
 struct Component;
+struct Actor;
 
 struct IComponentSystem
 {
@@ -14,6 +15,7 @@ struct IComponentSystem
 	virtual void Tick(float deltaTime) = 0;
 	virtual void Start() = 0;
 	virtual void Cleanup() = 0;
+	virtual void SpawnComponent(Actor* owner) = 0;
 	virtual std::vector<Component*> GetComponents() = 0;
 	virtual uint32_t GetNumComponents() = 0;
 	virtual Component* FindComponentByName(std::string componentName) = 0;

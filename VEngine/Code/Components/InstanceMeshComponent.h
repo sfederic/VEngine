@@ -18,6 +18,7 @@ private:
 	uint32_t meshInstanceRenderCount = 0;
 
 public:
+	InstanceMeshComponent() {}
 	InstanceMeshComponent(uint32_t meshInstanceRenderCount_,
 		const std::string filename, 
 		const std::string textureFilename);

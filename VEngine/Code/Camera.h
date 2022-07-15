@@ -25,6 +25,7 @@ struct CameraComponent : SpatialComponent
 	bool editorCamera = false;
 	bool arcBallMovementOn = false;
 
+	CameraComponent() {}
 	CameraComponent(XMFLOAT3 startPos, bool isEditorCamera);
 	XMMATRIX GetViewMatrix();
 	XMMATRIX GetProjectionMatrix();

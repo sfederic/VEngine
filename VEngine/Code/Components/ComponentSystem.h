@@ -41,6 +41,11 @@ struct ComponentSystem : IComponentSystem
 		return component;
 	}
 
+	virtual void SpawnComponent(Actor* owner) override
+	{
+		Add(owner);
+	}
+
 	void Remove(int index)
 	{
 		std::swap(components[index], components.back());
