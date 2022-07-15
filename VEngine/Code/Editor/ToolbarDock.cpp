@@ -97,7 +97,7 @@ void ToolbarDock::ResetWorldState()
 
 void ToolbarDock::SaveWorld()
 {
-	FileSystem::WriteAllActorSystems();
+	FileSystem::SerialiseAllSystems();
 }
 
 void ToolbarDock::SetTranslationSnapValue()

@@ -3,8 +3,7 @@
 
 namespace FileSystem
 {
-	//Essentially is SaveWorld()
-	void WriteAllActorSystems();
+	void SerialiseAllSystems();
 
 	void WriteAllActorSystemsToBinary();
 	void ReadAllActorSystemsFromBinary();

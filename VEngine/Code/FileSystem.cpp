@@ -19,7 +19,7 @@
 #include "Gameplay/BattleSystem.h"
 #include "Quests/QuestSystem.h"
 
-void FileSystem::WriteAllActorSystems()
+void FileSystem::SerialiseAllSystems()
 {
 	auto lastOf = world.worldFilename.find_last_of("/\\");
 	std::string str = world.worldFilename.substr(lastOf + 1);
@@ -33,7 +33,7 @@ void FileSystem::WriteAllActorSystems()
 
 	Serialiser s(file, OpenMode::Out);
 
-	for (IActorSystem* actorSystem : world.activeActorSystems)
+	for (auto actorSystem : world.activeActorSystems)
 	{
 		actorSystem->Serialise(s);
 	}

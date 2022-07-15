@@ -101,7 +101,7 @@ void WorldEditor::SaveWorld()
 	{
 		if (Input::GetKeyUp(Keys::S))
 		{
-			FileSystem::WriteAllActorSystems();
+			FileSystem::SerialiseAllSystems();
 		}
 	}
 }

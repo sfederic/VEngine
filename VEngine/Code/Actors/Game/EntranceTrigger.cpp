@@ -82,7 +82,7 @@ void EntranceTrigger::Tick(float deltaTime)
 
             if (GameInstance::useGameSaves)
             {
-                FileSystem::WriteAllActorSystems();
+                FileSystem::SerialiseAllSystems();
             }
 
             GameUtils::PlayAudioOneShot("door.wav");

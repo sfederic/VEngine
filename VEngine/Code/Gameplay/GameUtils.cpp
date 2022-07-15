@@ -95,7 +95,7 @@ namespace GameUtils
 		std::string file = str += AssetFileExtensions::gameSave;
 
 		world.worldFilename = file;
-		FileSystem::WriteAllActorSystems();
+		FileSystem::SerialiseAllSystems();
 	}
 
 	void LoadWorld(std::string worldName)
