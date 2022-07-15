@@ -192,8 +192,6 @@ void Serialiser::Serialise(Properties& props)
 		assert(typeIt != typeToWriteFuncMap.end() && "Matching type_info won't be found in map");
 		typeIt->second(prop, wname);
 	}
-
-	ss << "next\n"; //"next" moves the forloop onto the next 'Object'
 }
 
 Deserialiser::Deserialiser(const std::string filename, const OpenMode mode)
@@ -321,6 +319,7 @@ void Deserialiser::Deserialise(Properties& props)
 
 		auto funcIt = typeToReadFuncMap.find(prop.info.value());
 		assert(funcIt != typeToReadFuncMap.end() && "Matching type_info not found");
-		funcIt->second(prop);
+		auto& func = funcIt->second;
+		func(prop);
 	}
 }
