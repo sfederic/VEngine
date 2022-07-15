@@ -35,7 +35,6 @@ public:
 		actor->SetTransform(transform);
 		actor->name = this->name + std::to_string(actor->index);
 
-		world.actorUIDMap.emplace(actor->uid, actor);
 		world.actorNameMap.emplace(actor->name, actor);
 
 		return actor;
@@ -110,15 +109,9 @@ public:
 
 		for (T* actor : actors)
 		{
-			Properties mergedProps;
-
-			auto propsVector = actor->GetAllProps();
-			for (auto props : propsVector)
-			{
-				mergedProps.Merge(props);
-			}
-
-			s.Serialise(mergedProps);
+			auto props = actor->GetProps();
+			s.Serialise(props);
+			s.WriteLine(L"next");
 		}
 	}
 
@@ -133,15 +126,11 @@ public:
 
 		for (T* actor : actors)
 		{
-			Properties mergedProps;
-
 			auto propsVector = actor->GetAllProps();
-			for (auto props : propsVector)
+			for (auto& props : propsVector)
 			{
-				mergedProps.Merge(props);
+				s.Serialise(props);
 			}
-
-			s.Serialise(mergedProps);
 		}
 	}
 
@@ -149,15 +138,11 @@ public:
 	{
 		for (T* actor : actors)
 		{
-			Properties mergedProps;
-
 			auto propsVector = actor->GetAllProps();
-			for (auto props : propsVector)
+			for (auto& props : propsVector)
 			{
-				mergedProps.Merge(props);
+				d.Deserialise(props);
 			}
-
-			d.Deserialise(mergedProps);
 		}
 	}
 
@@ -165,15 +150,11 @@ public:
 	{
 		for (T* actor : actors)
 		{
-			Properties mergedProps;
-
 			auto propsVector = actor->GetAllProps();
 			for (auto& props : propsVector)
 			{
-				mergedProps.Merge(props);
+				d.Deserialise(props);
 			}
-
-			d.Deserialise(mergedProps);
 		}
 	}
 
