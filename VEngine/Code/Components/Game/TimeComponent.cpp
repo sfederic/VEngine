@@ -10,7 +10,8 @@ TimeComponent::TimeComponent()
 
 Properties TimeComponent::GetProps()
 {
-    Properties props("TimeComponent");
+    auto props = __super::GetProps();
+    props.title = "TimeComponent";
     props.AddProp(activeBeginHour);
     props.AddProp(activeEndHour);
     props.AddProp(alwaysActive);

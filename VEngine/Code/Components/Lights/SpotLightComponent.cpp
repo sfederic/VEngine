@@ -18,7 +18,8 @@ void SpotLightComponent::Create()
 
 Properties SpotLightComponent::GetProps()
 {
-    Properties props("SpotLightComponent");
+    auto props = __super::GetProps();
+    props.title = "SpotLight";
     props.Add("Colour", &lightData.colour);
     props.Add("Spot Angle", &lightData.spotAngle);
     props.Add("Intensity", &lightData.intensity);

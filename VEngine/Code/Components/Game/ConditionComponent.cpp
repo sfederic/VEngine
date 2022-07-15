@@ -8,7 +8,8 @@ ConditionComponent::ConditionComponent()
 
 Properties ConditionComponent::GetProps()
 {
-	Properties props("ConditionComponent");
+	auto props = __super::GetProps();
+	props.title = "ConditionComponent";
 	props.AddProp(condition);
 	props.AddProp(conditionArg);
 	return props;

@@ -4,6 +4,9 @@
 #include "SystemStates.h"
 #include "Actors/Actor.h"
 #include "ComponentSystemCache.h"
+#include "Serialiser.h"
+#include "VString.h"
+#include "World.h"
 
 template <typename T>
 struct ComponentSystem : IComponentSystem
@@ -35,15 +38,16 @@ struct ComponentSystem : IComponentSystem
 
 		if (owner)
 		{
+			component->ownerUID = owner->uid;
 			owner->components.push_back(component);
 		}
 
 		return component;
 	}
 
-	virtual void SpawnComponent(Actor* owner) override
+	virtual Component* SpawnComponent(Actor* owner) override
 	{
-		Add(owner);
+		return (Component*)Add(owner);
 	}
 
 	void Remove(int index)
@@ -81,6 +85,28 @@ struct ComponentSystem : IComponentSystem
 			{
 				components[i]->Tick(deltaTime);
 			}
+		}
+	}
+
+	virtual void Serialise(Serialiser& s) override
+	{
+		s.WriteLine(VString::stows(name));
+		s.WriteLine(components.size());
+
+		for (T* component : components)
+		{
+			auto props = component->GetProps();
+			s.Serialise(props);
+			s.WriteLine(L"next");
+		}
+	}
+
+	virtual void Deserialise(Deserialiser& d) override
+	{
+		for (T* component : components)
+		{
+			auto props = component->GetProps();
+			d.Deserialise(props);
 		}
 	}
 

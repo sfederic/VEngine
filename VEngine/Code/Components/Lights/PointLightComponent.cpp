@@ -18,7 +18,8 @@ void PointLightComponent::Create()
 
 Properties PointLightComponent::GetProps()
 {
-	Properties props("PointLightComponent");
+	auto props = __super::GetProps();
+	props.title = "PointLight";
 	props.Add("Colour", &lightData.colour);
 	props.Add("Intensity", &lightData.intensity);
 	props.Add("LightEnabled", &lightData.enabled);

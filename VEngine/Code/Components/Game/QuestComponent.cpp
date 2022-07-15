@@ -6,7 +6,8 @@
 
 Properties QuestComponent::GetProps()
 {
-    Properties props("QuestComponent");
+    auto props = __super::GetProps();
+    props.title = "QuetComponent";
     props.Add("Quest Name", &questName);
     return props;
 }
