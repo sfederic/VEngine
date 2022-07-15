@@ -12,7 +12,6 @@ struct ParticleSystem : Actor
 	
 	ParticleSystem();
 	void AddEmitter(ParticleEmitter* emitter);
-	void NewEmitter();
 	virtual Properties GetProps() override;
 };
 
