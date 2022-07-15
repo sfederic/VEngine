@@ -120,7 +120,8 @@ static void ReassignMesh(void* data)
 
 Properties MeshComponent::GetProps()
 {
-	Properties props("MeshComponent");
+	auto props = __super::GetProps();
+	props.title = "MeshComponent";
 	props.Add("Mesh", &meshComponentData).change = ReassignMesh;
 	props.Add("Casts Shadow", &castsShadow);
 	props.Add("Static", &isStatic);

@@ -21,7 +21,8 @@ void CharacterControllerComponent::Create()
 
 Properties CharacterControllerComponent::GetProps()
 {
-	Properties props("CharacterController");
+	auto props = __super::GetProps();
+	props.title = "CharacterController";
 	props.AddProp(radius);
 	props.AddProp(height);
 	return props;

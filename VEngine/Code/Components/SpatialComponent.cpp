@@ -56,7 +56,7 @@ Properties SpatialComponent::GetProps()
 	//props.Add("rot", &transform.rotation);
 	//props.Add("scale", &transform.scale);
 	//return props;
-	return Properties();
+	return __super::GetProps();
 }
 
 XMFLOAT3 SpatialComponent::GetPosition()

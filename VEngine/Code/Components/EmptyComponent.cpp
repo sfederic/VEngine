@@ -15,5 +15,5 @@ void EmptyComponent::Create()
 
 Properties EmptyComponent::GetProps()
 {
-    return Properties();
+    return __super::GetProps();
 }

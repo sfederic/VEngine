@@ -16,7 +16,7 @@ void WidgetComponent::Create()
 
 Properties WidgetComponent::GetProps()
 {
-    return Properties();
+    return __super::GetProps();
 }
 
 void WidgetComponent::AddToViewport()

@@ -20,7 +20,8 @@ void BoxTriggerComponent::Tick(float deltaTime)
 
 Properties BoxTriggerComponent::GetProps()
 {
-	Properties props("BoxTriggerComponent");
+	auto props = __super::GetProps();
+	props.title = "BoxTriggerComponent";
 	props.Add("Extents", &boundingBox.Extents);
 	props.Add("Offset", &boundingBox.Center);
 	return props;
