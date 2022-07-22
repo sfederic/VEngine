@@ -52,6 +52,7 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 
 	bool bRayHit = false;
 	ray.hitActors.clear();
+	ray.hitComponents.clear();
 
 	for (Actor* actor : world.GetAllActorsInWorld())
 	{
@@ -86,6 +87,7 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 			{
 				distances.push_back(ray.hitDistance);
 				ray.hitActors.push_back(actor);
+				ray.hitComponents.push_back(mesh);
 				bRayHit = true;
 			}
 		}
@@ -145,11 +147,12 @@ bool RaycastTriangleIntersect(Ray& ray)
 {
 	std::vector<Ray> rays;
 
-	for (Actor* actor : ray.hitActors)
+	for (auto component : ray.hitComponents)
 	{
-		XMMATRIX model = actor->GetTransformMatrix();
+		XMMATRIX model = component->GetWorldMatrix();
 
-		for (auto mesh : actor->GetComponentsOfType<MeshComponent>())
+		auto mesh = dynamic_cast<MeshComponent*>(component);
+		if(mesh)
 		{
 			//This is for dealing with DestructibleMesh's meshproxy nulls
 			if (mesh->meshDataProxy->vertices == nullptr || mesh->meshDataProxy->indices == nullptr)
@@ -187,7 +190,9 @@ bool RaycastTriangleIntersect(Ray& ray)
 
 					XMStoreFloat3(&tempRay.normal, normal);
 
-					tempRay.hitActor = actor;
+					tempRay.hitComponent = mesh;
+
+					tempRay.hitActor = world.GetActorByUID(mesh->ownerUID);
 
 					rays.push_back(tempRay);
 				}
