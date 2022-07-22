@@ -157,9 +157,9 @@ void FileSystem::LoadWorld(std::string worldName)
 			continue;
 		}
 
-		size_t numActorsToSpawn = 0;
-		d.is >> numActorsToSpawn;
-		if (numActorsToSpawn == 0)
+		size_t numObjectsToSpawn = 0;
+		d.is >> numObjectsToSpawn;
+		if (numObjectsToSpawn == 0)
 		{
 			continue;
 		}
@@ -174,23 +174,27 @@ void FileSystem::LoadWorld(std::string worldName)
 			}
 			else
 			{
-				IComponentSystem* cs = csIt->second;
+				auto cs = csIt->second;
 
-				//Push new components into here because the ComponentSystem can have
-				//references to Components created with Actors.
-				std::vector<Component*> newComponents;
-
-				for (int i = 0; i < numActorsToSpawn; i++)
-				{
-					auto component = cs->SpawnComponent(nullptr);
-					newComponents.push_back(component);
-				}
-
-				for (auto component : newComponents)
+				//Deserialise the existing components created in Actor constructors
+				for (auto component : cs->GetComponents())
 				{
 					auto props = component->GetProps();
 					d.Deserialise(props);
+					component->Create();
 
+					//Decrement the amount of components to spawn
+					numObjectsToSpawn--;
+				}
+
+				//Deserialise the rest of the components that aren't defined in Actor constructors,
+				//but were serialised out through the editor or runtime.
+				for (int i = 0; i < numObjectsToSpawn; i++)
+				{
+					auto component = cs->SpawnComponent(nullptr);
+
+					auto props = component->GetProps();
+					d.Deserialise(props);
 					component->Create();
 
 					world.GetActorByUID(component->ownerUID)->components.push_back(component);
@@ -203,7 +207,7 @@ void FileSystem::LoadWorld(std::string worldName)
 
 			std::vector<Actor*> newActors;
 
-			for (int i = 0; i < numActorsToSpawn; i++)
+			for (int i = 0; i < numObjectsToSpawn; i++)
 			{
 				auto actor = actorSystem->SpawnActor(Transform());
 				newActors.push_back(actor);
@@ -216,6 +220,8 @@ void FileSystem::LoadWorld(std::string worldName)
 				d.Deserialise(props);
 
 				actor->Create();
+
+				actor->ResetOwnerUIDToComponents();
 
 				world.actorUIDMap[actor->uid] = actor;
 				world.actorNameMap[actor->name] = actor;
