@@ -22,13 +22,18 @@ struct ComponentSystem : IComponentSystem
 		componentSystemCache.Add(typeid(T), this);
 	}
 
-	T* Add(Actor* owner = nullptr, T newComponent = T(), bool callCreate = true)
+	T* Add(Actor* owner = nullptr, T newComponent = T(), std::string name = "", bool callCreate = true)
 	{
 		T* component = new T(std::move(newComponent));
 		components.emplace_back(component);
 
 		component->index = components.size() - 1;
-		component->name = this->name + std::to_string(component->index);
+
+		if (name.empty())
+		{
+			component->name = this->name + std::to_string(component->index);
+		}
+
 		component->uid = GenerateUID();
 
 		if (systemState == SystemStates::Loaded && callCreate)
