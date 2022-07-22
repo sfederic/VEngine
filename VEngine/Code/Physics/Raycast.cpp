@@ -80,8 +80,7 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 				continue;
 			}
 
-			BoundingOrientedBox boundingBox = mesh->boundingBox;
-			VMath::UpdateBoundingBox(boundingBox, actor);
+			BoundingOrientedBox boundingBox = VMath::GetUpdatedBoundingBox(mesh);
 
 			if (boundingBox.Intersects(ray.origin, ray.direction, ray.hitDistance))
 			{
