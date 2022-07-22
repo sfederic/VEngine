@@ -1,133 +1,11 @@
 Grid
-1
- Position
-0 0 0
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
-Casts Shadow
-1
-Cull
 0
-Grid Obstacle
-0
-Mesh
-node.fbx
-Metallic
-0
-Name
-Grid0
-Rast State
-solid
-Shader
-InstanceShader.hlsl
-Size X
-5
-Size Y
-7
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-UID
-3239230627
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-startBattleOnLoad
-0
-next
 GridActor
 0
 AudioActor
 0
 Player
-1
- Position
-0 0 0
- Rotation
--0 -1.49012e-07 -0 1
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Audio Filename
-step.wav
-Blend State
-null
-Casts Shadow
-1
-Cull
 0
-FOV
-60
-Far Z
-1000
-File
-
-Grid Obstacle
-0
-Loop
-1
-Mesh
-character_test.fbx
-Metallic
-0
-Name
-Player0
-Near Z
-0.01
-Pitch
-1
-Play On Start
-1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-UID
-3050896867
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-Volume
--0.00143557
-next
 Unit
 0
 EntranceTrigger
@@ -137,126 +15,33 @@ NPC
 MeshActor
 2
  Position
-2 -0.5 3
+-3 4 5
  Rotation
 -0 0 -0 1
  Scale
-5 1 7
-Ambient
-1 1 1 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-node.fbx
-Metallic
-0
+1 1 1
 Name
-chair0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
+MeshActor0
 UID
-4149422810
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
+547201280
 next
  Position
--0.5 1.5 3
+1 4 5
  Rotation
--0 0.707107 -0 0.707107
+-0 0 -0 1
  Scale
-3.5 2 1
-Ambient
-1 1 1 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-plane.fbx
-Metallic
-0
+1 1 1
 Name
-chair1
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
+MeshActor1
 UID
-3257111667
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
+547201280
 next
 DirectionalLightActor
 0
 SavePoint
 0
 PointLightActor
-1
- Position
-1 0 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Colour
-0 1 1 1
-Intensity
-25
-LightEnabled
-1
-Name
-PointLightActor0
-UID
-2293580300
-next
+0
 SpotLightActor
 0
 FenceActor
@@ -266,34 +51,7 @@ Billboard
 InteractTrigger
 0
 ParticleSystem
-1
- Position
-1 0 1
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Direction
-0 1 0
-Lifetime
-1 1
-Move Speed
-1 1
-Name
-ParticleSystem0
-Rotate
-0 0
-Rotate Speed
-0 0
-Spawn Radius
-0 1
-Spawn Rate
-0.3 0.3
-Texture
-cross_mark.png
-UID
-3676904950
-next
+0
 DialogueTrigger
 0
 DestructibleActor
@@ -326,3 +84,122 @@ ReflectionPlane
 0
 DiffuseProbeMap
 0
+CharacterControllerComponent
+0
+QuestComponent
+0
+TimeComponent
+0
+WidgetComponent
+0
+AudioComponent
+0
+DialogueComponent
+0
+MemoryComponent
+0
+EmptyComponent
+0
+MeshComponent
+2
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+barrel.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+barrel.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+InstanceMeshComponent
+0
+BoxTriggerComponent
+0
+CameraComponent
+0
+DirectionalLightComponent
+0
+PointLightComponent
+0
+SpotLightComponent
+0
+ParticleEmitter
+0
+SpriteSheet
+0
+ConditionComponent
+0
+DestructibleMeshComponent
+0
+Polyboard
+0
+end
