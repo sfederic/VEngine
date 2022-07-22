@@ -2,6 +2,7 @@
 #include "ToolbarDock.h"
 #include <qpushbutton.h>
 #include <qboxlayout.h>
+#include <qcombobox.h>
 #include <qlabel.h>
 #include "PropertyWidgets/SpinBox.h"
 #include "Core.h"
@@ -14,7 +15,6 @@ ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 	auto hLayout = new QHBoxLayout();
 	hLayout->setSpacing(10);
 	hLayout->setAlignment(Qt::AlignHCenter);
-
 
 	//gameplay buttons
 	playButton = new QPushButton("Play");
@@ -69,6 +69,14 @@ ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 	hLayout->addWidget(cameraMoveSpeedSpinBox);
 	connect(cameraMoveSpeedSpinBox, &SpinBox::editingFinished,
 		this, [&]() {editorCamera.cameraMoveSpeed = cameraMoveSpeedSpinBox->value(); });
+
+	//Picker mode
+	hLayout->addWidget(new QLabel("Pick Mode", this));
+
+	worldEditorPickMode = new QComboBox(this);
+	worldEditorPickMode->addItem(pickerStringActor);
+	worldEditorPickMode->addItem(pickerStringComponent);
+	hLayout->addWidget(worldEditorPickMode);
 
 	auto toolbarWidget = new QWidget();
 	toolbarWidget->setLayout(hLayout);

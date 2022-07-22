@@ -2,6 +2,7 @@
 #include <qdockwidget.h>
 
 class QPushButton;
+class QComboBox;
 struct SpinBox;
 
 struct ToolbarDock : public QDockWidget
@@ -15,6 +16,12 @@ struct ToolbarDock : public QDockWidget
 	SpinBox* rotationSnapSpinBox;
 
 	SpinBox* cameraMoveSpeedSpinBox;
+
+	QComboBox* worldEditorPickMode = nullptr;
+
+	//values for pick mode combobox
+	QString pickerStringActor = "Actor";
+	QString pickerStringComponent = "Component";
 
 	ToolbarDock();
 
