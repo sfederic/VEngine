@@ -34,8 +34,6 @@ struct ComponentSystem : IComponentSystem
 			component->name = this->name + std::to_string(component->index);
 		}
 
-		component->uid = GenerateUID();
-
 		if (systemState == SystemStates::Loaded && callCreate)
 		{
 			component->Create();

@@ -31,7 +31,6 @@ public:
 
 		actor->actorSystem = this;
 		actor->index = actors.size() - 1;
-		actor->uid = GenerateUID();
 		actor->SetTransform(transform);
 		actor->name = this->name + std::to_string(actor->index);
 
