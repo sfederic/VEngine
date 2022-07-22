@@ -5,5 +5,6 @@
 Properties Component::GetProps()
 {
     Properties props{};
+    props.Add("OwnerUID", &ownerUID).hide = true;
     return props;
 }
