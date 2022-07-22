@@ -21,6 +21,7 @@
 #include "Log.h"
 #include "Asset/AssetPaths.h"
 #include "Asset/AssetFileExtensions.h"
+#include "Components/IComponentSystem.h"
 
 namespace Icons
 {
@@ -353,11 +354,22 @@ void AssetDock::CreateNewActorTemplateFile()
         s.WriteLine(worldEditor.pickedActor->actorSystem->GetName().c_str());
 
         //Serialise all actor and actor's component properties
-        auto pickedActorProps = worldEditor.pickedActor->GetAllProps();
-        for (auto& prop : pickedActorProps)
+        auto pickedActorProps = worldEditor.pickedActor->GetProps();
+        s.Serialise(pickedActorProps);
+        s.WriteLine(L"next");
+
+        for (auto component : worldEditor.pickedActor->components)
         {
-            s.Serialise(prop);
+            //Write each component's linked componentsystem name
+            s.WriteLine(component->componentSystem->name.c_str());
+
+            auto componentProps = component->GetProps();
+            s.Serialise(componentProps);
+
+            s.WriteLine(L"next");
         }
+
+        s.WriteLine(L"end");
 
         QFileInfo fileInfo = actorTemplateFileName;
         Log("Actor Template [%s] created.", fileInfo.fileName().toStdString().c_str());

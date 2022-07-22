@@ -203,13 +203,17 @@ void WorldEditor::SpawnActor(Transform& transform)
 
 		actor = spawnSystem->SpawnActor(transform);
 
-		auto allActorProps = actor->GetAllProps();
-		for (auto& prop : allActorProps)
-		{
-			d.Deserialise(prop);
-		}
-
+		auto actorProps = actor->GetProps();
+		d.Deserialise(actorProps);
 		actor->Create();
+		actor->ResetOwnerUIDToComponents();
+
+		for (auto component : actor->components)
+		{
+			auto componentProps = component->GetProps();
+			d.Deserialise(componentProps);
+			component->Create();
+		}
 
 		//Set the transform, props will have the original transform data and will be
 		//different from the click position in world.
