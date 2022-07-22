@@ -251,3 +251,11 @@ void Actor::ToggleActive()
 	active = !active;
 	SetActive(active);
 }
+
+void Actor::ResetOwnerUIDToComponents()
+{
+	for (auto component : components)
+	{
+		component->ownerUID = uid;
+	}
+}

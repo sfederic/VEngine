@@ -117,4 +117,6 @@ public:
 
 		return outComponents;
 	}
+
+	void ResetOwnerUIDToComponents();
 };
