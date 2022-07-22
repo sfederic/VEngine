@@ -32,4 +32,5 @@ private:
 	void SetTranslationSnapValue();
 	void SetScaleSnapValue();
 	void SetRotationSnapValue();
+	void PickModeChanged(const QString& item);
 };

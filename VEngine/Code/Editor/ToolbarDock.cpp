@@ -9,6 +9,7 @@
 #include "TransformGizmo.h"
 #include "FileSystem.h"
 #include "Camera.h"
+#include "Editor.h"
 
 ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 {
@@ -76,6 +77,8 @@ ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 	worldEditorPickMode = new QComboBox(this);
 	worldEditorPickMode->addItem(pickerStringActor);
 	worldEditorPickMode->addItem(pickerStringComponent);
+	connect(worldEditorPickMode, static_cast<void(QComboBox::*)(const QString&)>(&QComboBox::currentIndexChanged),
+		this, &ToolbarDock::PickModeChanged);
 	hLayout->addWidget(worldEditorPickMode);
 
 	auto toolbarWidget = new QWidget();
@@ -124,4 +127,16 @@ void ToolbarDock::SetRotationSnapValue()
 {
 	float value = (float)rotationSnapSpinBox->value();
 	transformGizmo.SetRotationSnapValue(value);
+}
+
+void ToolbarDock::PickModeChanged(const QString& item)
+{
+	if (item == pickerStringActor)
+	{
+		editor->pickMode = PickMode::Actor;
+	}
+	else if (item == pickerStringComponent)
+	{
+		editor->pickMode = PickMode::Component;
+	}
 }
