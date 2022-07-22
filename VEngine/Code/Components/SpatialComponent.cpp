@@ -91,6 +91,19 @@ void SpatialComponent::SetPosition(XMVECTOR newPosition)
 	XMStoreFloat3(&transform.position, newPosition);
 }
 
+void SpatialComponent::SetWorldPosition(XMVECTOR position)
+{
+	XMVECTOR relativePosition = position;
+
+	if (parent)
+	{
+		XMVECTOR parentPosition = parent->GetPositionV();
+		relativePosition = XMVectorSubtract(relativePosition, parentPosition);
+	}
+
+	SetPosition(relativePosition);
+}
+
 XMFLOAT3 SpatialComponent::GetScale()
 {
 	return transform.scale;
@@ -115,6 +128,19 @@ void SpatialComponent::SetScale(XMFLOAT3 newScale)
 void SpatialComponent::SetScale(XMVECTOR newScale)
 {
 	XMStoreFloat3(&transform.scale, newScale);
+}
+
+void SpatialComponent::SetWorldScale(XMVECTOR scale)
+{
+	XMVECTOR relativeScale = scale;
+
+	if (parent)
+	{
+		XMVECTOR parentScale = parent->GetScaleV();
+		relativeScale = XMVectorMultiply(relativeScale, parentScale);
+	}
+
+	SetScale(relativeScale);
 }
 
 XMVECTOR SpatialComponent::GetRotationV()

@@ -29,12 +29,14 @@ struct SpatialComponent : Component
 	void SetPosition(float x, float y, float z);
 	void SetPosition(XMFLOAT3 newPosition);
 	void SetPosition(XMVECTOR newPosition);
+	void SetWorldPosition(XMVECTOR position);
 
 	XMFLOAT3 GetScale();
 	XMVECTOR GetScaleV();
 	void SetScale(float x, float y, float z);
 	void SetScale(XMFLOAT3 newScale);
 	void SetScale(XMVECTOR newScale);
+	void SetWorldScale(XMVECTOR scale);
 
 	XMFLOAT4 GetRotation();
 	XMVECTOR GetRotationV();
