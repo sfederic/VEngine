@@ -150,6 +150,16 @@ void TransformGizmo::Tick()
                     component->SetWorldPosition(trans);
                     component->SetWorldScale(scale);
                     component->SetWorldRotation(rot);
+
+                    auto owner = world.GetActorByUID(component->ownerUID);
+                    if (owner)
+                    {
+                        editor->SetActorProps(owner);
+                    }
+                    else
+                    {
+                        Log("Component [%s] couldn't find Actor owner to set props from TransformGizmo");
+                    }
                 }
                 break;
             }
