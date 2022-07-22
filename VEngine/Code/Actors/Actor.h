@@ -29,7 +29,7 @@ struct Actor
 	//The index of the Actor to its ActorSystem
 	int index = -1;
 
-	UID uid = 0;
+	UID uid = GenerateUID();
 
 private:
 	bool active = true;
