@@ -4,7 +4,7 @@
 
 struct Component
 {
-	UID uid = 0;
+	UID uid = GenerateUID();
 	std::string name;
 	UID ownerUID = 0;
 	int index = -1;
