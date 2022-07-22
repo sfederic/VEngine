@@ -150,6 +150,7 @@ void Core::StartGame()
 	world.WakeAndStartAllActors();
 
 	worldEditor.pickedActor = nullptr;
+	worldEditor.pickedComponent = nullptr;
 
 	editor->SetPlayButtonText("Stop");
 }
