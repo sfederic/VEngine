@@ -2,8 +2,11 @@
 #include "Properties.h"
 #include "UID.h"
 
+struct IComponentSystem;
+
 struct Component
 {
+	IComponentSystem* componentSystem = nullptr;
 	UID uid = GenerateUID();
 	std::string name;
 	UID ownerUID = 0;

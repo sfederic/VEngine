@@ -29,6 +29,8 @@ struct ComponentSystem : IComponentSystem
 
 		component->index = components.size() - 1;
 
+		component->componentSystem = this;
+
 		if (name.empty())
 		{
 			component->name = this->name + std::to_string(component->index);
