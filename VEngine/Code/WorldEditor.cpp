@@ -41,16 +41,25 @@ void WorldEditor::HandleActorPicking()
 		Ray screenPickRay;
 		if (RaycastFromScreen(screenPickRay))
 		{
-			if (Input::GetAsyncKey(Keys::Ctrl) || pickedActors.empty())
+			switch (editor->pickMode)
 			{
-				pickedActors.insert(screenPickRay.hitActor);
-			}
-			else
-			{
-				pickedActors.clear();
-			}
+			case PickMode::Actor:
+				if (Input::GetAsyncKey(Keys::Ctrl) || pickedActors.empty())
+				{
+					pickedActors.insert(screenPickRay.hitActor);
+				}
+				else
+				{
+					pickedActors.clear();
+				}
 
-			SetPickedActor(screenPickRay.hitActor);
+				SetPickedActor(screenPickRay.hitActor);
+				break;
+
+			case PickMode::Component:
+				SetPickedComponent(screenPickRay.hitComponent);
+				break;
+			}
 		}
 	}
 }
@@ -239,4 +248,10 @@ void WorldEditor::SetPickedActor(Actor* actor)
 
 	editor->SetActorProps(pickedActor);
 	editor->SelectActorInWorldList();
+}
+
+void WorldEditor::SetPickedComponent(SpatialComponent* spatialComponent)
+{
+	assert(spatialComponent);
+	pickedComponent = spatialComponent;
 }
