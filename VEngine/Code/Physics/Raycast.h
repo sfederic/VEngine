@@ -6,6 +6,7 @@
 class IActorSystem;
 struct CameraComponent;
 struct Actor;
+struct SpatialComponent;
 
 using namespace DirectX;
 
@@ -24,6 +25,9 @@ struct Ray
 
 	std::vector<Actor*> hitActors;
 	Actor* hitActor = nullptr;
+
+	std::vector<SpatialComponent*> hitComponents;
+	SpatialComponent* hitComponent = nullptr;
 
 	//Layer to ignore on raycast
 	CollisionLayers ignoreLayer = CollisionLayers::None;
