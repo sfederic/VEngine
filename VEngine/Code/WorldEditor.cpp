@@ -140,6 +140,7 @@ void WorldEditor::DeleteActor()
 
 			pickedActors.clear();
 			pickedActor = nullptr;
+			pickedComponent = nullptr;
 
 			editor->ClearProperties();
 		}
