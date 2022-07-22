@@ -36,12 +36,10 @@ void TransformGizmo::Tick()
     float windowHeight = (float)ImGui::GetWindowHeight();
     ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
 
-
     //Setup camera matrices
-    XMFLOAT4X4 view, proj, actorMatrix;
+    XMFLOAT4X4 view, proj, pickedObjectMatrix;
     XMStoreFloat4x4(&view, activeCamera->GetViewMatrix());
     XMStoreFloat4x4(&proj, activeCamera->GetProjectionMatrix());
-
 
     //Toggle and draw grid
     if (Input::GetAsyncKey(Keys::ShiftLeft))
@@ -59,7 +57,6 @@ void TransformGizmo::Tick()
         ImGuizmo::DrawGrid(&view.m[0][0], &proj.m[0][0], &identity.m[0][0], 20.f);
     }
 
-
     //Exit early if console is active
     if (console.bConsoleActive)
     {
@@ -67,95 +64,129 @@ void TransformGizmo::Tick()
         return;
     }
 
-
-    if (worldEditor.pickedActor)
+    //Set transform operation
+    if (!Input::GetAsyncKey(Keys::MouseRight))
     {
-        //Set transform operation
-        if (!Input::GetAsyncKey(Keys::MouseRight))
+        if (Input::GetKeyDown(Keys::W))
         {
-            if (Input::GetKeyDown(Keys::W))
-            {
-                currentTransformOperation = ImGuizmo::TRANSLATE;
-                currentSnapValues = translateSnapValues;
-            }
-            else if (Input::GetKeyDown(Keys::E))
-            {
-                currentTransformOperation = ImGuizmo::SCALE;
-                currentSnapValues = scaleSnapValues;
-            }
-            else if (Input::GetKeyDown(Keys::R))
-            {
-                currentTransformOperation = ImGuizmo::ROTATE;
-                currentSnapValues = rotationSnapValues;
-            }
+            currentTransformOperation = ImGuizmo::TRANSLATE;
+            currentSnapValues = translateSnapValues;
         }
-
-        //Set Transform mode between world and local for gizmo
-        if (Input::GetKeyUp(Keys::Space))
+        else if (Input::GetKeyDown(Keys::E))
         {
-            if (currentTransformMode == ImGuizmo::MODE::LOCAL)
+            currentTransformOperation = ImGuizmo::SCALE;
+            currentSnapValues = scaleSnapValues;
+        }
+        else if (Input::GetKeyDown(Keys::R))
+        {
+            currentTransformOperation = ImGuizmo::ROTATE;
+            currentSnapValues = rotationSnapValues;
+        }
+    }
+
+    //Set Transform mode between world and local for gizmo
+    if (Input::GetKeyUp(Keys::Space))
+    {
+        if (currentTransformMode == ImGuizmo::MODE::LOCAL)
+        {
+            currentTransformMode = ImGuizmo::MODE::WORLD;
+        }
+        else if (currentTransformMode == ImGuizmo::MODE::WORLD)
+        {
+            currentTransformMode = ImGuizmo::MODE::LOCAL;
+        }
+    }
+
+    switch (editor->pickMode)
+    {
+        case PickMode::Actor:
+        {
+            if (worldEditor.pickedActor)
             {
-                currentTransformMode = ImGuizmo::MODE::WORLD;
+                XMStoreFloat4x4(&pickedObjectMatrix, worldEditor.pickedActor->GetWorldMatrix());
             }
-            else if (currentTransformMode == ImGuizmo::MODE::WORLD)
+            break;
+        }
+        case PickMode::Component:
+        {
+            if (worldEditor.pickedComponent)
             {
-                currentTransformMode = ImGuizmo::MODE::LOCAL;
+                XMStoreFloat4x4(&pickedObjectMatrix, worldEditor.pickedComponent->GetWorldMatrix());
             }
+            break;
         }
+    }
+    
+    ImGuizmo::Manipulate(*view.m, *proj.m, currentTransformOperation, currentTransformMode,
+        *pickedObjectMatrix.m, nullptr, currentSnapValues, bounds, boundsSnap);
 
+    XMVECTOR scale, rot, trans;
+    XMMatrixDecompose(&scale, &rot, &trans, XMLoadFloat4x4(&pickedObjectMatrix));
 
-        XMStoreFloat4x4(&actorMatrix, worldEditor.pickedActor->GetWorldMatrix());
-
-        //Render gizmos and set component values back to actor
-        ImGuizmo::Manipulate(*view.m, *proj.m, currentTransformOperation, currentTransformMode,
-            *actorMatrix.m, nullptr, currentSnapValues, bounds, boundsSnap);
-
-        if (CheckInUse())
+    if (CheckInUse())
+    {
+        switch (editor->pickMode)
         {
-            Actor* actor = worldEditor.pickedActor;
-
-            XMVECTOR scale, rot, trans;
-            XMMatrixDecompose(&scale, &rot, &trans, XMLoadFloat4x4(&actorMatrix));
-
-            actor->SetPosition(trans);
-            actor->SetScale(scale);
-            actor->SetRotation(rot);
-
-            editor->SetActorProps(actor);
-
-            mousePressAfterGizmoUse = true;
-        }
-
-        //When gizmo input ends, add change to CommandSystem
-        if (mousePressAfterGizmoUse && Input::GetMouseLeftUp())
-        {
-            mousePressAfterGizmoUse = false;
-
-            Actor* actor = worldEditor.pickedActor;
-            commandSystem.Add(new Command<Transform>(&actor->rootComponent->transform));
-        }
-
-        //Toggle snap and scale controls
-        if (Input::GetAsyncKey(Keys::Ctrl))
-        {
-            if (Input::GetKeyUp(Keys::O))
+            case PickMode::Actor:
             {
-                bBoundsToggle = !bBoundsToggle;
-                if (!bBoundsToggle)
+                if (worldEditor.pickedActor)
                 {
-                    memset(bounds, 0.f, sizeof(float) * 6);
-                    memset(boundsSnap, 0.f, sizeof(float) * 3);
+                    auto actor = worldEditor.pickedActor;
+
+                    actor->SetPosition(trans);
+                    actor->SetScale(scale);
+                    actor->SetRotation(rot);
+
+                    editor->SetActorProps(actor);
                 }
-                else if (bBoundsToggle)
+                break;
+            }
+            case PickMode::Component:
+            {
+                if (worldEditor.pickedComponent)
                 {
-                    bounds[0] = -1.f;
-                    bounds[1] = -1.f;
-                    bounds[2] = -1.f;
-                    bounds[3] = 1.f;
-                    bounds[4] = 1.f;
-                    bounds[5] = 1.f;
-                    memset(boundsSnap, 0.5f, sizeof(float) * 3);
+                    auto component = worldEditor.pickedComponent;
+
+                    component->SetWorldPosition(trans);
+                    component->SetWorldScale(scale);
+                    component->SetWorldRotation(rot);
                 }
+                break;
+            }
+        }
+
+        mousePressAfterGizmoUse = true;
+    }
+
+    //When gizmo input ends, add change to CommandSystem
+    if (mousePressAfterGizmoUse && Input::GetMouseLeftUp())
+    {
+        mousePressAfterGizmoUse = false;
+
+        //Actor* actor = worldEditor.pickedActor;
+        //commandSystem.Add(new Command<Transform>(&actor->rootComponent->transform));
+    }
+
+    //Toggle snap and scale controls
+    if (Input::GetAsyncKey(Keys::Ctrl))
+    {
+        if (Input::GetKeyUp(Keys::O))
+        {
+            bBoundsToggle = !bBoundsToggle;
+            if (!bBoundsToggle)
+            {
+                memset(bounds, 0.f, sizeof(float) * 6);
+                memset(boundsSnap, 0.f, sizeof(float) * 3);
+            }
+            else if (bBoundsToggle)
+            {
+                bounds[0] = -1.f;
+                bounds[1] = -1.f;
+                bounds[2] = -1.f;
+                bounds[3] = 1.f;
+                bounds[4] = 1.f;
+                bounds[5] = 1.f;
+                memset(boundsSnap, 0.5f, sizeof(float) * 3);
             }
         }
     }
