@@ -110,6 +110,7 @@ public:
 		for (T* actor : actors)
 		{
 			auto props = actor->GetProps();
+			actor->ResetOwnerUIDToComponents();
 			s.Serialise(props);
 			s.WriteLine(L"next");
 		}
