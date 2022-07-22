@@ -5,6 +5,7 @@
 #include "Transform.h"
 #include "Properties.h"
 #include "UID.h"
+#include "Log.h"
 
 struct Component;
 struct SpatialComponent;
@@ -116,6 +117,21 @@ public:
 		}
 
 		return outComponents;
+	}
+
+	template <typename T>
+	T* GetComponentByName(std::string componentName)
+	{
+		for (auto component : components)
+		{
+			if (component->name == componentName)
+			{
+				return static_cast<T*>(component);
+			}
+		}
+
+		Log("Component [%s] not found on Actor [%s].", componentName.c_str(), this->name.c_str());
+		return nullptr;
 	}
 
 	void ResetOwnerUIDToComponents();
