@@ -51,13 +51,12 @@ void SpatialComponent::UpdateTransform(XMMATRIX parentWorld)
 
 Properties SpatialComponent::GetProps()
 {
-	//@Todo: think long and hard about adding transform props to spatialcomponent for other components
-	//Properties props("SpatialComponent");
-	//props.Add("pos", &transform.position);
-	//props.Add("rot", &transform.rotation);
-	//props.Add("scale", &transform.scale);
-	//return props;
-	return __super::GetProps();
+	auto props = __super::GetProps();
+	props.title = "SpatialComponent";
+	props.Add(" Pos", &transform.position);
+	props.Add(" Rot", &transform.rotation);
+	props.Add(" Scale", &transform.scale);
+	return props;
 }
 
 XMFLOAT3 SpatialComponent::GetPosition()
