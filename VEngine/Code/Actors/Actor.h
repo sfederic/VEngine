@@ -102,6 +102,8 @@ public:
 	//Set Actor and components active field as opposite of what it currently is.
 	void ToggleActive();
 
+	void AddChild(Actor* actor);
+
 	template <typename T>
 	std::vector<T*> GetComponentsOfType()
 	{

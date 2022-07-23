@@ -252,6 +252,18 @@ void Actor::ToggleActive()
 	SetActive(active);
 }
 
+void Actor::AddChild(Actor* actor)
+{
+	assert(actor);
+
+	for (auto child : children)
+	{
+		assert(child != actor && "Actor trying to add child already in list. Recursive set found.");
+	}
+
+	children.push_back(actor);
+}
+
 void Actor::ResetOwnerUIDToComponents()
 {
 	for (auto component : components)
