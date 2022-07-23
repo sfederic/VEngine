@@ -263,7 +263,6 @@
     <ClCompile Include="Code\Scripts\ScriptSystem.cpp" />
     <ClCompile Include="Code\VFunctionSystem.cpp" />
     <ClCompile Include="Code\Actors\TestActor.cpp" />
-    <ClCompile Include="Code\Editor\ComponentTreeWidget.cpp" />
     <ClInclude Include="Code\Asset\AssetFileExtensions.h" />
     <ClInclude Include="Code\Asset\AssetPaths.h" />
     <ClInclude Include="Code\Editor\ImGuizmo\ImSequencer.h" />
@@ -527,7 +526,6 @@
     <ClInclude Include="Code\Scripts\ScriptSystem.h" />
     <ClInclude Include="Code\VFunctionSystem.h" />
     <ClInclude Include="Code\Actors\TestActor.h" />
-    <ClInclude Include="Code\Editor\ComponentTreeWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
