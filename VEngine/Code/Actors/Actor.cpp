@@ -262,6 +262,10 @@ void Actor::AddChild(Actor* actor)
 	}
 
 	children.push_back(actor);
+
+	//Set parent
+	assert(actor->parent != actor);
+	actor->parent = this;
 }
 
 void Actor::ResetOwnerUIDToComponents()
