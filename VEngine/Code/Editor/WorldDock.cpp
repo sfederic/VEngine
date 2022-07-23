@@ -157,10 +157,10 @@ void WorldDock::SelectActorInList()
 	for (auto actor : worldEditor.pickedActors)
 	{
 		std::string actorName = actor->name;
-		auto foundItems = actorTreeWidget->findItems(QString::fromStdString(actorName), Qt::MatchExactly);
 
-		//Names should be unique in list, even though findItems() returns a collection
-		assert(foundItems.size() == 1);
+		//The Qt::MatchRecursive flag is what moves the find through the entire actor tree
+		auto foundItems = actorTreeWidget->findItems(
+			QString::fromStdString(actorName), Qt::MatchExactly|Qt::MatchRecursive);
 
 		listItems.append(foundItems);
 	}
