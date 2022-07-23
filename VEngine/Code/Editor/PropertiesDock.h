@@ -13,6 +13,10 @@ class QScrollArea;
 class QPushButton;
 class QComboBox;
 
+//@Todo: figure out if doing a ComponentTreeWidget to be able to sort through an Actor's
+//components and see their spatial relationships (like Unreal) would be good. 
+//Previously attempted it and didn't work out well with the mess of code in PropertiesDock.
+
 struct PropertiesDock : public QDockWidget
 {
 	QPushButton* addComponentButton = nullptr;
