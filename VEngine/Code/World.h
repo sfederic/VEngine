@@ -17,8 +17,6 @@ struct World
 	std::unordered_map<UID, Actor*> actorUIDMap;
 	std::unordered_map<std::string, Actor*> actorNameMap;
 
-	std::unordered_map<UID, Component*> componentUIDMap;
-
 	std::string worldFilename;
 
 	//Called at engine startup
