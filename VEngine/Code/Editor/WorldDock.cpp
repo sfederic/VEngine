@@ -176,8 +176,9 @@ void WorldDock::AddActorToList(Actor* actor)
 	actorTreeWidget->blockSignals(true);
 
 	auto item = new QTreeWidgetItem(actorTreeWidget);
+
 	item->setText(0, QString::fromStdString(actor->name));
-	item->setFlags(item->flags() | Qt::ItemIsEditable);
+	item->setFlags(item->flags() | Qt::ItemIsEditable | Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled);
 
 	world.actorNameMap.emplace(actor->name, actor);
 	world.actorUIDMap.emplace(actor->uid, actor);
