@@ -111,12 +111,16 @@ void PropertiesDock::DisplayActorProperties(Actor* actor)
     actorPropsGridLayout->addWidget(addComponentButton, 0, 0, 1, 1);
     actorPropsGridLayout->addWidget(componentComboBox, 0, 1, 1, 1);
 
-    //Go over actor properties
+    //Iterate over actor properties
     int gridRow = 1;
+    auto actorProps = actor->GetProps();
+    IterateOverProperties(actorProps, gridRow);
 
-    for (auto& props : actor->GetAllProps())
+    //Iterate over actor's component properties
+    for (auto component : actor->components)
     {
-        IterateOverProperties(props, gridRow);
+        auto componentProps = component->GetProps();
+        IterateOverProperties(componentProps, gridRow);
     }
 
     actorPropsWidget->setLayout(actorPropsGridLayout);
