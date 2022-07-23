@@ -122,7 +122,7 @@ public:
 	}
 
 	template <typename T>
-	T* GetComponentByName(std::string componentName)
+	T* GetComponentByNameAndType(std::string componentName)
 	{
 		for (auto component : components)
 		{
@@ -135,6 +135,8 @@ public:
 		Log("Component [%s] not found on Actor [%s].", componentName.c_str(), this->name.c_str());
 		return nullptr;
 	}
+
+	Component* GetComponentByName(std::string componentName);
 
 	void ResetOwnerUIDToComponents();
 };

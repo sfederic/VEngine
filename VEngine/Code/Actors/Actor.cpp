@@ -268,6 +268,20 @@ void Actor::AddChild(Actor* actor)
 	actor->parent = this;
 }
 
+Component* Actor::GetComponentByName(std::string componentName)
+{
+	for (auto component : components)
+	{
+		if (component->name == componentName)
+		{
+			return component;
+		}
+	}
+
+	Log("Component [%s] not found on Actor [%s].", componentName.c_str(), this->name.c_str());
+	return nullptr;
+}
+
 void Actor::ResetOwnerUIDToComponents()
 {
 	for (auto component : components)
