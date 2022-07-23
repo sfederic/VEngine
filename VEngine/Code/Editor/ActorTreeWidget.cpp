@@ -1,6 +1,8 @@
 #include "vpch.h"
 #include "ActorTreeWidget.h"
 #include <qevent.h>
+#include "World.h"
+#include "Actors/Actor.h"
 
 ActorTreeWidget::ActorTreeWidget(QWidget* parent) : QTreeWidget(parent)
 {
@@ -16,6 +18,31 @@ void ActorTreeWidget::dropEvent(QDropEvent* event)
 {
 	QModelIndex index = indexAt(event->pos());
 	QTreeWidgetItem* item = itemFromIndex(index);
+	if (item == nullptr) return;
+
+	auto parentActorName = item->text(0).toStdString();
+	auto parentActor = world.GetActorByName(parentActorName);
+
+	//Assign dragged actor entry to the dropped actor
+	if (dragChildActor != nullptr)
+	{
+		parentActor->AddChild(dragChildActor);
+	}
+
+	dragChildActor = nullptr;
 
 	QTreeWidget::dropEvent(event);
+}
+
+void ActorTreeWidget::dragEnterEvent(QDragEnterEvent* event)
+{
+	//Grab the child actor currently being dragged
+	QModelIndex index = indexAt(event->pos());
+	QTreeWidgetItem* item = itemFromIndex(index);
+	if (item == nullptr) return;
+
+	auto childActorName = item->text(0).toStdString();
+	dragChildActor = world.GetActorByName(childActorName);
+
+	QTreeWidget::dragEnterEvent(event);
 }
