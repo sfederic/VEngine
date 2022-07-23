@@ -1,18 +1,16 @@
 #pragma once
 #include <qtreewidget.h>
 
+class QDropEvent;
+
 struct ActorTreeWidget : public QTreeWidget
 {
-	ActorTreeWidget(QWidget* parent = nullptr) : QTreeWidget(parent)
-	{
-		//Ref:https://doc.qt.io/archives/qt-4.8/model-view-programming.html#using-drag-and-drop-with-item-views
-		//Item flags need to be set as well for dragging/dropping to work
-		setDragEnabled(true);
-		viewport()->setAcceptDrops(true);	
-		setDropIndicatorShown(true);
-		setDragDropMode(QAbstractItemView::InternalMove);
-	}
-
-	//disables key press searching in treewidgets by redefining as empty.
+	ActorTreeWidget(QWidget* parent = nullptr);
+	
+	//Disables key press searching in treewidgets by redefining as empty.
 	virtual void keyboardSearch(const QString& search) {};
+
+protected:
+	//Event called when actors in world list are dragged and dropped on each other in list.
+	virtual void dropEvent(QDropEvent* event) override;
 };
