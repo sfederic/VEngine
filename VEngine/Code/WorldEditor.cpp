@@ -204,7 +204,11 @@ void WorldEditor::SpawnActor(Transform& transform)
 		actor = spawnSystem->SpawnActor(transform);
 
 		auto actorProps = actor->GetProps();
+
+		//@Todo: there needs to be an actortemplate specific Deserialse() to be able to create components.
+		//Somethng like, 'when L"next" is hit, lookup Component System by name and spawn'.
 		d.Deserialise(actorProps);
+
 		actor->Create();
 		actor->ResetOwnerUIDToComponents();
 
