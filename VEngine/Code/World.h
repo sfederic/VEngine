@@ -7,7 +7,7 @@
 class IActorSystem;
 struct IComponentSystem;
 struct Component;
-struct Actor;
+class Actor;
 
 struct World
 {

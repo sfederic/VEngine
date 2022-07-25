@@ -22,13 +22,13 @@ void MeshActor::Create()
 	if (!spawnMeshFilename.empty())
 	{
 		std::string meshName = spawnMeshFilename.substr(0, spawnMeshFilename.find("."));
-		name = meshName + std::to_string(index);
+		SetName(meshName + std::to_string(GetSystemIndex()));
 	}
 }
 
 Properties MeshActor::GetProps()
 {
 	Properties props = Actor::GetProps();
-	props.title = name;
+	props.title = GetName();
 	return props;
 }

@@ -77,13 +77,13 @@ void WorldEditor::DuplicateActor()
 				editor->ClearProperties();
 
 				Transform transform = pickedActor->GetTransform();
-				Actor* newDuplicateActor = pickedActor->actorSystem->SpawnActor(transform);
+				Actor* newDuplicateActor = pickedActor->GetActorSystem()->SpawnActor(transform);
 
 				//The props copying below will overwrite the new actor's name, so keep it here then copy it back.
-				const std::string newActorOriginalName = newDuplicateActor->name;
+				const std::string newActorOriginalName = newDuplicateActor->GetName();
 
 				//Make a new UID for the actor
-				UID newActorOriginalUID = newDuplicateActor->uid;
+				UID newActorOriginalUID = newDuplicateActor->GetUID();
 
 				//Remove actor over UID and name conflicts, then back into world again later
 				world.RemoveActorFromWorld(newDuplicateActor);
@@ -95,8 +95,8 @@ void WorldEditor::DuplicateActor()
 
 				newDuplicateActor->CreateAllComponents();
 
-				newDuplicateActor->name = newActorOriginalName;
-				newDuplicateActor->uid = newActorOriginalUID;
+				newDuplicateActor->SetName(newActorOriginalName);
+				newDuplicateActor->SetUID(newActorOriginalUID);
 
 				newDuplicateActor->ResetOwnerUIDToComponents();
 
@@ -145,7 +145,7 @@ void WorldEditor::DeleteActor()
 			else
 			{
 				debugMenu.AddNotification(VString::wformat(
-					L"Destroyed actor [%S]", pickedActor->name.c_str()));
+					L"Destroyed actor [%S]", pickedActor->GetName().c_str()));
 				pickedActor->Destroy();
 			}
 
@@ -238,13 +238,13 @@ void WorldEditor::SpawnActor(Transform& transform)
 		actor->SetName(newActorName);
 
 		debugMenu.AddNotification(VString::wformat(
-			L"Spawned actor [%S] from template", actor->name.c_str()));
+			L"Spawned actor [%S] from template", actor->GetName().c_str()));
 	}
 	else //Spawn MeshActor (usually)
 	{
 		actor = spawnSystem->SpawnActor(transform);
 		debugMenu.AddNotification(VString::wformat(
-			L"Spawned actor [%S] from MeshActor system", actor->name.c_str()));
+			L"Spawned actor [%S] from MeshActor system", actor->GetName().c_str()));
 	}
 
 	pickedActor = actor;

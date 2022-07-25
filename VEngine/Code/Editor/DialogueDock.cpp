@@ -76,7 +76,7 @@ void DialogueDock::PopulateTreeItem(QTreeWidgetItem* item)
 	auto actorsInWorld = world.GetAllActorsInWorld();
 	for (auto actor : actorsInWorld)
 	{
-		QString actorName = QString::fromStdString(actor->name);
+		QString actorName = QString::fromStdString(actor->GetName());
 		actorComboBox->addItem(actorName);
 	}
 

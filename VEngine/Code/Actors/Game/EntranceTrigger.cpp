@@ -56,7 +56,7 @@ void EntranceTrigger::Tick(float deltaTime)
         {
             if (levelToMoveTo.empty())
             {
-                Log("EntranceTrigger %s levelToMoveTo empty.", this->name.c_str());
+                Log("EntranceTrigger %s levelToMoveTo empty.", this->GetName().c_str());
                 return;
             }
 
@@ -65,7 +65,7 @@ void EntranceTrigger::Tick(float deltaTime)
             {
                 if (!conditionComponent->CheckCondition())
                 {
-                    Log("condition failed on [%s] EntranceTrigger", this->name.c_str());
+                    Log("condition failed on [%s] EntranceTrigger", this->GetName().c_str());
                     return;
                 }
 
@@ -124,13 +124,13 @@ bool EntranceTrigger::CheckIfWorldExists(std::string& worldName)
     {
         if (!std::filesystem::exists("GameSaves/" + worldName))
         {
-            Log("GameSaves/[%s] not found for [%s]", worldName.c_str(), this->name.c_str());
+            Log("GameSaves/[%s] not found for [%s]", worldName.c_str(), this->GetName().c_str());
             return false;
         }
     }
     else if (!std::filesystem::exists("WorldMaps/" + worldName))
     {
-        Log("WorldMaps/[%s] not found for [%s]", worldName.c_str(), this->name.c_str());
+        Log("WorldMaps/[%s] not found for [%s]", worldName.c_str(), this->GetName().c_str());
         return false;
     }
 

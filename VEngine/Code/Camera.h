@@ -5,7 +5,7 @@
 
 using namespace DirectX;
 
-struct Actor;
+class Actor;
 
 struct CameraComponent : SpatialComponent
 {

@@ -108,7 +108,7 @@ void BattleSystem::MoveToNextTurn()
 
 	//next enemy turn
 	auto unit = activeBattleUnits[currentUnitTurnIndex];
-	Log("Unit [%s] turn.", unit->name.c_str());
+	Log("Unit [%s] turn.", unit->GetName().c_str());
 	activeBattleUnits[currentUnitTurnIndex]->StartTurn();
 	currentUnitTurnIndex++;
 

@@ -2,7 +2,7 @@
 #include "../Component.h"
 #include "../ComponentSystem.h"
 
-struct Actor;
+class Actor;
 
 struct MemoryComponent : Component
 {

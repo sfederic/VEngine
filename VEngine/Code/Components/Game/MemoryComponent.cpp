@@ -60,7 +60,7 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 	memory->hourAquired = GameInstance::currentHour;
 	memory->minuteAquired = GameInstance::currentMinute;
 
-	memory->spawnActorSystem = owner->actorSystem;
+	memory->spawnActorSystem = owner->GetActorSystem();
 
 	auto meshes = owner->GetComponentsOfType<MeshComponent>();
 	memory->meshName = meshes[0]->meshComponentData.filename;

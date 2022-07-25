@@ -12,6 +12,8 @@
 template <typename T>
 class ActorSystem : IActorSystem
 {
+	friend class Actor;
+
 	std::vector<T*> actors;
 
 public:
@@ -29,10 +31,10 @@ public:
 		T* actor = new T(std::move(newActor));
 		actors.emplace_back(actor);
 
-		actor->actorSystem = this;
-		actor->index = actors.size() - 1;
+		actor->SetActorSystem(this);
+		actor->SetSystemIndex(actors.size() - 1);
 		actor->SetTransform(transform);
-		actor->name = this->name + std::to_string(actor->index);
+		actor->SetName(this->name + std::to_string(actor->GetSystemIndex()));
 
 		world.AddActorToWorld(actor);
 
@@ -47,8 +49,8 @@ public:
 		}
 
 		std::swap(actors[index], actors.back());
-		actors[index]->index = index;
-		actors[index]->name = GetName() + std::to_string(index);
+		actors[index]->SetSystemIndex(index);
+		actors[index]->SetName(GetName() + std::to_string(index));
 
 		world.RemoveActorFromWorld(actors.back());
 
@@ -161,7 +163,7 @@ public:
 	{
 		for (T* actor : actors)
 		{
-			if (actor->name == actorName)
+			if (actor->GetName() == actorName)
 			{
 				return (Actor*)actor;
 			}
@@ -201,4 +203,4 @@ public:
 };
 
 #define ACTOR_SYSTEM(type) inline static ActorSystem<type> system; \
-virtual void Destroy() override { system.Remove(index); } \
+virtual void Destroy() override { system.Remove(GetSystemIndex()); } \

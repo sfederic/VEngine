@@ -13,27 +13,28 @@ class IActorSystem;
 
 using namespace DirectX;
 
-struct Actor
+class Actor
 {
+public:
 	Actor* parent = nullptr;
 	std::vector<Actor*> children;
 
 	std::set<std::string> tags;
 
-	SpatialComponent* rootComponent = nullptr;
 	std::vector<Component*> components;
 
+	SpatialComponent* rootComponent = nullptr;
+
+private:
 	IActorSystem* actorSystem = nullptr;
 
 	std::string name;
 
-	//The index of the Actor to its ActorSystem
-	int index = -1;
-
 	UID uid = GenerateUID();
 
-private:
 	bool active = true;
+
+	int actorSystemIndex = -1;
 
 public:
 	//Constructor for actors is called when world is loaded in editor.
@@ -91,6 +92,8 @@ public:
 	//Iterates over every actor from the actor's system to avoid a rename collision. bool denotes if collision occured.
 	bool SetName(std::string newName);
 
+	std::string GetName() { return name; }
+
 	//This shouldn't be called too often, only when ComponentSystem::Init() can't be called.
 	void CreateAllComponents();
 
@@ -139,4 +142,13 @@ public:
 	Component* GetComponentByName(std::string componentName);
 
 	void ResetOwnerUIDToComponents();
+
+	UID GetUID() { return uid; }
+	void SetUID(UID uid_) { uid = uid_; }
+
+	int GetSystemIndex() { return actorSystemIndex; }
+	void SetSystemIndex(int index) { actorSystemIndex = index; }
+
+	IActorSystem* GetActorSystem() { return actorSystem; }
+	void SetActorSystem(IActorSystem* system) { actorSystem = system; }
 };

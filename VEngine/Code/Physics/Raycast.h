@@ -5,7 +5,7 @@
 
 class IActorSystem;
 struct CameraComponent;
-struct Actor;
+class Actor;
 struct SpatialComponent;
 
 using namespace DirectX;

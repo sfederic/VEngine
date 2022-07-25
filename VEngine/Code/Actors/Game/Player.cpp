@@ -464,7 +464,7 @@ void Player::PrimaryAction()
 		auto meshForward = mesh->GetForwardVectorV();
 		if (Raycast(ray, GetPositionVector(), meshForward, 1.5f))
 		{
-			Log("Player interact: %s", ray.hitActor->name.c_str());
+			Log("Player interact: %s", ray.hitActor->GetName().c_str());
 
 			if (DestructibleCheck(ray.hitActor)) { return; }
 			if (DialogueCheck(ray.hitActor)) {}
@@ -494,7 +494,7 @@ void Player::SecondaryAction()
 		auto meshForward = mesh->GetForwardVectorV();
 		if (Raycast(ray, GetPositionVector(), meshForward, 1.5f))
 		{
-			Log("Player interact: %s", ray.hitActor->name.c_str());
+			Log("Player interact: %s", ray.hitActor->GetName().c_str());
 
 			if (CombatInteractCheck(ray.hitActor)) {}
 		}
@@ -759,7 +759,7 @@ bool Player::InteractCheck(Actor* hitActor)
 				auto memory = gridActor->memoryComponent;
 				if (memory->addOnInteract)
 				{
-					if (!memory->CreateMemory(gridActor->name))
+					if (!memory->CreateMemory(gridActor->GetName()))
 					{
 						interactWidget->interactText = gridActor->interactKnownText;
 					}

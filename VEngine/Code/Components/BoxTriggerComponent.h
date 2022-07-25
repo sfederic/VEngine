@@ -2,7 +2,7 @@
 #include "SpatialComponent.h"
 #include "ComponentSystem.h"
 
-struct Actor;
+class Actor;
 
 struct BoxTriggerComponent : SpatialComponent
 {

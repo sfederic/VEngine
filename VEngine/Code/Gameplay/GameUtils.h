@@ -6,7 +6,7 @@ using namespace DirectX;
 
 struct Player;
 struct Grid;
-struct Actor;
+class Actor;
 struct SpriteSheet;
 
 //Utility functions for in-game stuff

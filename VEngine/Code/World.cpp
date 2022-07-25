@@ -199,17 +199,20 @@ std::vector<Component*> World::GetAllComponentsInWorld()
 
 void World::AddActorToWorld(Actor* actor)
 {
-	assert(actorUIDMap.find(actor->uid) == actorUIDMap.end());
-	assert(actorNameMap.find(actor->name) == actorNameMap.end());
+	std::string actorName = actor->GetName();
+	UID actorUID = actor->GetUID();
 
-	actorUIDMap.emplace(actor->uid, actor);
-	actorNameMap.emplace(actor->name, actor);
+	assert(actorUIDMap.find(actorUID) == actorUIDMap.end());
+	assert(actorNameMap.find(actorName) == actorNameMap.end());
+
+	actorUIDMap.emplace(actorUID, actor);
+	actorNameMap.emplace(actorName, actor);
 }
 
 void World::RemoveActorFromWorld(Actor* actor)
 {
-	actorUIDMap.erase(actor->uid);
-	actorNameMap.erase(actor->name);
+	actorUIDMap.erase(actor->GetUID());
+	actorNameMap.erase(actor->GetName());
 }
 
 void World::ClearAllActorsFromWorld()

@@ -4,7 +4,7 @@
 class QDropEvent;
 class QDragMoveEvent;
 class QDragEnterEvent;
-struct Actor;
+class Actor;
 
 struct ActorTreeWidget : public QTreeWidget
 {

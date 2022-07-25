@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-struct Actor;
+class Actor;
 class IActorSystem;
 
 enum class PickMode

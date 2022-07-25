@@ -3,7 +3,7 @@
 #include <string>
 
 struct Component;
-struct Actor;
+class Actor;
 struct Serialiser;
 struct Deserialiser;
 

@@ -2,7 +2,7 @@
 #include <set>
 #include <string>
 
-struct Actor;
+class Actor;
 class IActorSystem;
 struct Transform;
 struct SpatialComponent;

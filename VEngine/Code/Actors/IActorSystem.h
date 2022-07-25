@@ -2,7 +2,7 @@
 #include <string>
 #include "Transform.h"
 
-struct Actor;
+class Actor;
 struct Serialiser;
 struct BinarySerialiser;
 struct Deserialiser;

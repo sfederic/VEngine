@@ -114,7 +114,7 @@ void Unit::Tick(float deltaTime)
 							battleSystem.RemoveUnit(this);
 							GetCurrentNode()->Show();
 							Log("Unit [%s] escaped through [%s].",
-								this->name.c_str(), entranceToEscapeTo->name.c_str());
+								this->GetName().c_str(), entranceToEscapeTo->GetName().c_str());
 							Destroy();
 							return;
 						}
@@ -147,7 +147,7 @@ void Unit::InflictDamage(int damage)
 	{
 		GameInstance::AddGuilt();
 
-		memoryOnDeath->CreateMemory(this->name);
+		memoryOnDeath->CreateMemory(this->GetName());
 
 		healthWidget->Destroy();
 
@@ -378,13 +378,13 @@ void Unit::WindUpAttack()
 
 		player->InflictDamage(attackPoints);
 
-		Log("%s attacked %s", this->name.c_str(), player->name.c_str());
+		Log("%s attacked %s", this->GetName().c_str(), player->GetName().c_str());
 	}
 	else if (ray.hitActor)
 	{
 		//Attack miss
 		Log("[%s] attack missed [%s]. Hit [%s] instead.",
-			this->name.c_str(), player->name.c_str(), ray.hitActor->name.c_str());
+			this->GetName().c_str(), player->GetName().c_str(), ray.hitActor->GetName().c_str());
 
 		auto hitGridActor = dynamic_cast<GridActor*>(ray.hitActor);
 		if (hitGridActor)

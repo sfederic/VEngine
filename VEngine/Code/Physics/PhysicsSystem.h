@@ -16,7 +16,7 @@ struct MeshComponent;
 struct DestructibleMeshComponent;
 struct CharacterControllerComponent;
 struct Transform;
-struct Actor;
+class Actor;
 
 enum class PhysicsType
 {

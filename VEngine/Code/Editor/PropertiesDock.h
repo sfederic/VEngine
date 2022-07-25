@@ -3,7 +3,7 @@
 #include <qgridlayout.h>
 #include <vector>
 
-struct Actor;
+class Actor;
 struct IPropertyWidget;
 struct Properties;
 struct Property;

@@ -3,7 +3,7 @@
 #include <DirectXCollision.h>
 #include <fbxsdk/core/math/fbxmatrix.h>
 
-struct Actor;
+class Actor;
 struct Transform;
 struct SpatialComponent;
 struct Vertex;

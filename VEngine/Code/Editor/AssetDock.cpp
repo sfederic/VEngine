@@ -351,7 +351,7 @@ void AssetDock::CreateNewActorTemplateFile()
         Serialiser s(actorTemplateFileName.toStdString(), OpenMode::Out);
 
         //Write out actor's linked actorsystem name
-        s.WriteLine(worldEditor.pickedActor->actorSystem->GetName().c_str());
+        s.WriteLine(worldEditor.pickedActor->GetActorSystem()->GetName().c_str());
 
         //Serialise all actor and actor's component properties
         auto pickedActorProps = worldEditor.pickedActor->GetProps();

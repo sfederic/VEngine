@@ -43,7 +43,7 @@ struct ComponentSystem : IComponentSystem
 
 		if (owner)
 		{
-			component->ownerUID = owner->uid;
+			component->ownerUID = owner->GetUID();
 			owner->components.push_back(component);
 		}
 

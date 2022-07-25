@@ -14,7 +14,7 @@ void UnitLineupWidget::Draw(float deltaTime)
 
 	for (auto unit : battleSystem.activeBattleUnits)
 	{
-		if (Button(VString::stows(unit->name.c_str()), layout))
+		if (Button(VString::stows(unit->GetName().c_str()), layout))
 		{
 			unit->ShowUnitMovementPath();
 			GameUtils::SetActiveCameraTarget(unit);

@@ -76,7 +76,7 @@ void WorldDock::PopulateWorldActorList()
 	for (Actor* actor : world.GetAllActorsInWorld())
 	{
 		auto item = new QTreeWidgetItem(actorTreeWidget);
-		item->setText(0, QString::fromStdString(actor->name));
+		item->setText(0, QString::fromStdString(actor->GetName()));
 		item->setFlags(item->flags() | Qt::ItemIsEditable);
 
 		world.AddActorToWorld(actor);
@@ -128,10 +128,10 @@ void WorldDock::ActorNameChanged(QTreeWidgetItem* item, int column)
 	if (!actor->SetName(newActorName.toStdString()))
 	{
 		Log("Could not change actor name from %s to %s. Name already exists.",
-			actor->name.c_str(), newActorName.toStdString().c_str());
+			actor->GetName().c_str(), newActorName.toStdString().c_str());
 
 		//Reset item text
-		item->setText(column, QString::fromStdString(actor->name));
+		item->setText(column, QString::fromStdString(actor->GetName()));
 	}
 }
 
@@ -154,7 +154,7 @@ void WorldDock::SelectActorInList()
 
 	for (auto actor : worldEditor.pickedActors)
 	{
-		std::string actorName = actor->name;
+		std::string actorName = actor->GetName();
 
 		//The Qt::MatchRecursive flag is what moves the find through the entire actor tree
 		auto foundItems = actorTreeWidget->findItems(
@@ -175,7 +175,7 @@ void WorldDock::AddActorToList(Actor* actor)
 
 	auto item = new QTreeWidgetItem(actorTreeWidget);
 
-	item->setText(0, QString::fromStdString(actor->name));
+	item->setText(0, QString::fromStdString(actor->GetName()));
 	item->setFlags(item->flags() | Qt::ItemIsEditable | Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled);
 
 	actorTreeWidget->blockSignals(false);
@@ -188,7 +188,7 @@ void WorldDock::RemoveActorFromList()
 	QList<QTreeWidgetItem*> foundItems;
 	for (auto actor : worldEditor.pickedActors)
 	{
-		std::string actorName = actor->name;
+		std::string actorName = actor->GetName();
 		foundItems = actorTreeWidget->findItems(QString::fromStdString(actorName), Qt::MatchExactly);
 		assert(foundItems.size() == 1);
 

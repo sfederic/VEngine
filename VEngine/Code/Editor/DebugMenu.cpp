@@ -650,13 +650,13 @@ void DebugMenu::RenderActorInspectMenu()
 				ImGui::Begin("Actor Inspect");
 				ImGui::SetWindowPos(ImVec2(editor->viewportMouseX, editor->viewportMouseY));
 
-				ImGui::Text("Name: %s", actor->name.c_str());
-				ImGui::Text("System: %s", actor->actorSystem->GetName().c_str());
-				ImGui::Text("SystemIndex: %d", actor->index);
+				ImGui::Text("Name: %s", actor->GetName().c_str());
+				ImGui::Text("System: %s", actor->GetActorSystem()->GetName().c_str());
+				ImGui::Text("SystemIndex: %d", actor->GetSystemIndex());
 				ImGui::Text("Active: %d", actor->IsActive());
-				ImGui::Text("UID: %u", actor->uid);
+				ImGui::Text("UID: %u", actor->GetUID());
 				ImGui::Text("Num Components: %d", actor->components.size());
-				ImGui::Text("Parent Actor: %s", actor->parent != nullptr ? actor->parent->name.c_str() : "None");
+				ImGui::Text("Parent Actor: %s", actor->parent != nullptr ? actor->parent->GetName().c_str() : "None");
 				ImGui::Text("Num Children: %d", actor->children.size());
 
 				ImGui::End();
