@@ -34,8 +34,7 @@ public:
 		actor->SetTransform(transform);
 		actor->name = this->name + std::to_string(actor->index);
 
-		world.actorNameMap[actor->name] = actor;
-		world.actorUIDMap[actor->uid] = actor;
+		world.AddActorToWorld(actor);
 
 		return actor;
 	}
@@ -51,8 +50,7 @@ public:
 		actors[index]->index = index;
 		actors[index]->name = GetName() + std::to_string(index);
 
-		world.actorUIDMap.erase(actors.back()->uid);
-		world.actorNameMap.erase(actors.back()->name);
+		world.RemoveActorFromWorld(actors.back());
 
 		delete actors.back();
 		actors.pop_back();
