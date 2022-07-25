@@ -37,13 +37,17 @@ PropertiesDock::PropertiesDock() : QDockWidget("Properties")
 {
     setFixedWidth(400);
 
-    actorPropsScrollArea = new QScrollArea();
-    actorPropsGridLayout = new QGridLayout();
-    actorPropsWidget = new QWidget();
+    actorPropsScrollArea = new QScrollArea(this);
+
+    actorPropsWidget = new QWidget(actorPropsScrollArea);
     actorPropsWidget->setFixedWidth(400);
 
+    actorPropsGridLayout = new QGridLayout(actorPropsWidget);
+
     actorPropsWidget->setLayout(actorPropsGridLayout);
+
     actorPropsScrollArea->setWidget(actorPropsWidget);
+
     setWidget(actorPropsScrollArea);
 
     //Setup map
@@ -75,33 +79,23 @@ void PropertiesDock::DisplayActorProperties(Actor* actor)
 
     if (actorPropsWidget && actorPropsGridLayout)
     {
-        //@Todo: deleting everything here is junk. There has to be a removeWidget() right?
-
-        delete addComponentButton;
-        addComponentButton = nullptr;
-
-        delete componentComboBox;
-        componentComboBox = nullptr;
-
-        delete actorPropsGridLayout;
-        actorPropsGridLayout = nullptr;
-
         delete actorPropsWidget;
         actorPropsWidget = nullptr;
     }
 
     propertyWidgetsToUpdate.clear();
 
-    actorPropsWidget = new QWidget();
-    actorPropsGridLayout = new QGridLayout();
+    actorPropsWidget = new QWidget(actorPropsScrollArea);
 
+    actorPropsGridLayout = new QGridLayout(actorPropsWidget);
     actorPropsGridLayout->setAlignment(Qt::AlignTop);
 
-    //Component 'add' widgets
-    addComponentButton = new QPushButton("Add", this);
+    //Component 'add' widgets 
+    //@Todo: this is too heavy to be here. Consider putting it into a seperate widget instead.
+    addComponentButton = new QPushButton("Add", actorPropsWidget);
     connect(addComponentButton, &QPushButton::clicked, this, &PropertiesDock::AddComponentButtonClick);
 
-    componentComboBox = new QComboBox(this);
+    componentComboBox = new QComboBox(actorPropsWidget);
     for (auto& csPair : *componentSystemCache.nameToSystemMap)
     {
         auto cs = csPair.second;
@@ -112,7 +106,7 @@ void PropertiesDock::DisplayActorProperties(Actor* actor)
     actorPropsGridLayout->addWidget(componentComboBox, 0, 1, 1, 1);
 
     //Iterate over actor properties
-    int gridRow = 1;
+    int gridRow = 1; //Leave row space for Add Component button
     auto actorProps = actor->GetProps();
     IterateOverProperties(actorProps, gridRow);
 
