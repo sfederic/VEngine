@@ -176,7 +176,7 @@
     <ClCompile Include="Code\Components\SpatialComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\DebugActors\DebugBox.cpp">
+    <ClCompile Include="Code\Actors\DebugActors\DebugBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\FileSystem.cpp">
@@ -230,7 +230,7 @@
     <ClCompile Include="Code\Actors\DirectionalLightActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\DebugActors\DebugSphere.cpp">
+    <ClCompile Include="Code\Actors\DebugActors\DebugSphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Editor\PropertyWidgets\Float4Widget.cpp">
@@ -239,7 +239,7 @@
     <ClCompile Include="Code\Components\Lights\PointLightComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\DebugActors\DebugIcoSphere.cpp">
+    <ClCompile Include="Code\Actors\DebugActors\DebugIcoSphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\PointLightActor.cpp">
@@ -251,7 +251,7 @@
     <ClCompile Include="Code\Actors\SpotLightActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\DebugActors\DebugCone.cpp">
+    <ClCompile Include="Code\Actors\DebugActors\DebugCone.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\Game\Player.cpp">
@@ -266,7 +266,7 @@
     <ClCompile Include="Code\Actors\Game\EntranceTrigger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\DebugActors\DebugCamera.cpp">
+    <ClCompile Include="Code\Actors\DebugActors\DebugCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Render\ShadowMap.cpp">
@@ -676,7 +676,7 @@
     <ClInclude Include="Code\Components\SpatialComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\DebugActors\DebugBox.h">
+    <ClInclude Include="Code\Actors\DebugActors\DebugBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\PropertyWidgets\Float3Widget.h">
@@ -730,7 +730,7 @@
     <ClInclude Include="Code\Actors\DirectionalLightActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\DebugActors\DebugSphere.h">
+    <ClInclude Include="Code\Actors\DebugActors\DebugSphere.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\PropertyWidgets\Float4Widget.h">
@@ -739,7 +739,7 @@
     <ClInclude Include="Code\Components\Lights\PointLightComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\DebugActors\DebugIcoSphere.h">
+    <ClInclude Include="Code\Actors\DebugActors\DebugIcoSphere.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\PointLightActor.h">
@@ -751,7 +751,7 @@
     <ClInclude Include="Code\Actors\SpotLightActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\DebugActors\DebugCone.h">
+    <ClInclude Include="Code\Actors\DebugActors\DebugCone.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\Player.h">
@@ -766,7 +766,7 @@
     <ClInclude Include="Code\Actors\Game\EntranceTrigger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\DebugActors\DebugCamera.h">
+    <ClInclude Include="Code\Actors\DebugActors\DebugCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\ShadowMap.h">
