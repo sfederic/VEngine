@@ -10,8 +10,6 @@ struct Property;
 class QWidget;
 class QGridLayout;
 class QScrollArea;
-class QPushButton;
-class QComboBox;
 
 //@Todo: figure out if doing a ComponentTreeWidget to be able to sort through an Actor's
 //components and see their spatial relationships (like Unreal) would be good. 
@@ -22,8 +20,8 @@ struct PropertiesDock : public QDockWidget
 private:
 	std::vector<IPropertyWidget*> propertyWidgetsToUpdate;
 
-	QPushButton* addComponentButton = nullptr;
-	QComboBox* componentComboBox = nullptr;
+	//QPushButton* addComponentButton = nullptr;
+	//QComboBox* componentComboBox = nullptr;
 
 	QWidget* actorPropsWidget = nullptr;
 	QGridLayout* actorPropsGridLayout = nullptr;
