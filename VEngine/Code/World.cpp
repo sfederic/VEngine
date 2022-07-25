@@ -197,6 +197,15 @@ std::vector<Component*> World::GetAllComponentsInWorld()
 	return outComponents;
 }
 
+void World::AddActorToWorld(Actor* actor)
+{
+	assert(actorUIDMap.find(actor->uid) == actorUIDMap.end());
+	assert(actorNameMap.find(actor->name) == actorNameMap.end());
+
+	actorUIDMap.emplace(actor->uid, actor);
+	actorNameMap.emplace(actor->name, actor);
+}
+
 void World::Cleanup()
 {
 	actorUIDMap.clear();
