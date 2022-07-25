@@ -87,9 +87,15 @@ void WorldEditor::DuplicateActor()
 				auto newProps = newDuplicateActor->GetAllProps();
 				Properties::CopyProperties(oldProps, newProps);
 
+				//Make a new UID for the actor
+				newDuplicateActor->uid = GenerateUID();
+
 				newDuplicateActor->CreateAllComponents();
+				newDuplicateActor->ResetOwnerUIDToComponents();
 
 				newDuplicateActor->name = newActorOriginalName;
+
+				world.AddActorToWorld(newDuplicateActor);
 
 				editor->SetActorProps(newDuplicateActor);
 				editor->UpdateWorldList();
