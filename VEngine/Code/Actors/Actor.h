@@ -92,6 +92,9 @@ public:
 	//Iterates over every actor from the actor's system to avoid a rename collision. bool denotes if collision occured.
 	bool SetName(std::string newName);
 
+	//Use this for when world state updates aren't an issue
+	void SimpleSetName(std::string newName) { name = newName; }
+
 	std::string GetName() { return name; }
 
 	//This shouldn't be called too often, only when ComponentSystem::Init() can't be called.

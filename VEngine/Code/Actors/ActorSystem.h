@@ -34,7 +34,7 @@ public:
 		actor->SetActorSystem(this);
 		actor->SetSystemIndex(actors.size() - 1);
 		actor->SetTransform(transform);
-		actor->SetName(this->name + std::to_string(actor->GetSystemIndex()));
+		actor->SimpleSetName(this->name + std::to_string(actor->GetSystemIndex()));
 
 		world.AddActorToWorld(actor);
 
