@@ -13,9 +13,9 @@ EntranceTrigger
 NPC
 0
 MeshActor
-2
+10
  Position
--3 4 5
+-4 3 4
  Rotation
 -0 0 -0 1
  Scale
@@ -23,10 +23,10 @@ MeshActor
 Name
 MeshActor0
 UID
-547201280
+382890835
 next
  Position
-1 4 5
+0 3 5
  Rotation
 -0 0 -0 1
  Scale
@@ -34,7 +34,95 @@ next
 Name
 MeshActor1
 UID
-547201280
+2376663945
+next
+ Position
+-6 4 3
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Name
+MeshActor2
+UID
+204339977
+next
+ Position
+-2 7 5
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Name
+MeshActor3
+UID
+26822859
+next
+ Position
+5 7 4
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Name
+MeshActor4
+UID
+1579011732
+next
+ Position
+5 2 3
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Name
+MeshActor5
+UID
+2073276994
+next
+ Position
+-1 1 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+MeshActor6
+UID
+3727097420
+next
+ Position
+-2 3 5
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Name
+MeshActor7
+UID
+2437602194
+next
+ Position
+2 6 5
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Name
+MeshActor8
+UID
+3547046873
+next
+ Position
+3 3 4
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Name
+MeshActor9
+UID
+863866291
 next
 DirectionalLightActor
 0
@@ -84,6 +172,8 @@ ReflectionPlane
 0
 DiffuseProbeMap
 0
+TestActor
+0
 CharacterControllerComponent
 0
 QuestComponent
@@ -101,7 +191,13 @@ MemoryComponent
 EmptyComponent
 0
 MeshComponent
-2
+10
+ Pos
+-4 3 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
 Ambient
 1 1 1 1
 Blend State
@@ -116,6 +212,10 @@ Mesh
 barrel.fbx
 Metallic
 0
+Name
+MeshComponent0
+OwnerUID
+382890835
 Rast State
 solid
 Shader
@@ -141,6 +241,12 @@ UvRotationSpeed
 UvScale
 1 1
 next
+ Pos
+0 3 5
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
 Ambient
 1 1 1 1
 Blend State
@@ -155,6 +261,59 @@ Mesh
 barrel.fbx
 Metallic
 0
+Name
+MeshComponent1
+OwnerUID
+2376663945
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+carpet.jpg
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Pos
+-6 4 3
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+bridge.fbx
+Metallic
+0
+Name
+MeshComponent2
+OwnerUID
+204339977
 Rast State
 solid
 Shader
@@ -167,6 +326,349 @@ Static
 1
 Texture
 test.png
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Pos
+-2 7 5
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+bridge.fbx
+Metallic
+0
+Name
+MeshComponent3
+OwnerUID
+26822859
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Pos
+5 7 4
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+bridge.fbx
+Metallic
+0
+Name
+MeshComponent4
+OwnerUID
+1579011732
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Pos
+5 2 3
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+bevel_rock2.fbx
+Metallic
+0
+Name
+MeshComponent5
+OwnerUID
+2073276994
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Pos
+-1 1 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+bevel_rock2.fbx
+Metallic
+0
+Name
+MeshComponent6
+OwnerUID
+3727097420
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+blue_particles.png
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Pos
+-2 3 5
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+bevel_rock2.fbx
+Metallic
+0
+Name
+MeshComponent7
+OwnerUID
+2437602194
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Pos
+2 6 5
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+bevel_rock2.fbx
+Metallic
+0
+Name
+MeshComponent8
+OwnerUID
+3547046873
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Pos
+3 3 4
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+character.fbx
+Metallic
+0
+Name
+MeshComponent9
+OwnerUID
+863866291
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+book.jpg
 Use Texture
 1
 UvOffset
@@ -191,7 +693,64 @@ DirectionalLightComponent
 PointLightComponent
 0
 SpotLightComponent
-0
+3
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
+Name
+SpotLightComponent0
+OwnerUID
+3727097420
+Spot Angle
+70
+next
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Colour
+1 1 1 1
+Intensity
+69
+LightEnabled
+1
+Name
+SpotLightComponent1
+OwnerUID
+3727097420
+Spot Angle
+70
+next
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Colour
+1 1 1 1
+Intensity
+50
+LightEnabled
+1
+Name
+SpotLightComponent2
+OwnerUID
+2376663945
+Spot Angle
+70
+next
 ParticleEmitter
 0
 SpriteSheet
