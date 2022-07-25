@@ -99,7 +99,11 @@ public:
 	std::vector<Component*> GetAllComponentsInWorld();
 
 	void AddActorToWorld(Actor* actor);
+
 	void RemoveActorFromWorld(Actor* actor);
+	void RemoveActorFromWorld(UID actorUID);
+	void RemoveActorFromWorld(std::string actorName);
+
 	void ClearAllActorsFromWorld();
 
 	bool CheckIfActorExistsInWorld(std::string actorName);
