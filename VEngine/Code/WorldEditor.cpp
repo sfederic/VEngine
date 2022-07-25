@@ -82,18 +82,23 @@ void WorldEditor::DuplicateActor()
 				//The props copying below will overwrite the new actor's name, so keep it here then copy it back.
 				const std::string newActorOriginalName = newDuplicateActor->name;
 
+				//Make a new UID for the actor
+				UID newActorOriginalUID = newDuplicateActor->uid;
+
+				//Remove actor over UID and name conflicts, then back into world again later
+				world.RemoveActorFromWorld(newDuplicateActor);
+
 				//Copy values across
 				auto oldProps = pickedActor->GetAllProps();
 				auto newProps = newDuplicateActor->GetAllProps();
 				Properties::CopyProperties(oldProps, newProps);
 
-				//Make a new UID for the actor
-				newDuplicateActor->uid = GenerateUID();
-
 				newDuplicateActor->CreateAllComponents();
-				newDuplicateActor->ResetOwnerUIDToComponents();
 
 				newDuplicateActor->name = newActorOriginalName;
+				newDuplicateActor->uid = newActorOriginalUID;
+
+				newDuplicateActor->ResetOwnerUIDToComponents();
 
 				world.AddActorToWorld(newDuplicateActor);
 
@@ -241,8 +246,6 @@ void WorldEditor::SpawnActor(Transform& transform)
 		debugMenu.AddNotification(VString::wformat(
 			L"Spawned actor [%S] from MeshActor system", actor->name.c_str()));
 	}
-
-	actor->CreateAllComponents();
 
 	pickedActor = actor;
 	editor->SetActorProps(pickedActor);
