@@ -206,6 +206,28 @@ void World::AddActorToWorld(Actor* actor)
 	actorNameMap.emplace(actor->name, actor);
 }
 
+void World::RemoveActorFromWorld(Actor* actor)
+{
+	actorUIDMap.erase(actor->uid);
+	actorNameMap.erase(actor->name);
+}
+
+void World::ClearAllActorsFromWorld()
+{
+	actorUIDMap.clear();
+	actorNameMap.clear();
+}
+
+bool World::CheckIfActorExistsInWorld(std::string actorName)
+{
+	return actorNameMap.find(actorName) != actorNameMap.end();
+}
+
+bool World::CheckIfActorExistsInWorld(UID actorUID)
+{
+	return actorUIDMap.find(actorUID) != actorUIDMap.end();
+}
+
 void World::Cleanup()
 {
 	actorUIDMap.clear();

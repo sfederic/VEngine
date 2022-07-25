@@ -11,11 +11,13 @@ struct Actor;
 
 struct World
 {
-	std::vector<IActorSystem*> activeActorSystems;
-	std::vector<IComponentSystem*> activeComponentSystems;
-
+private:
 	std::unordered_map<UID, Actor*> actorUIDMap;
 	std::unordered_map<std::string, Actor*> actorNameMap;
+
+public:
+	std::vector<IActorSystem*> activeActorSystems;
+	std::vector<IComponentSystem*> activeComponentSystems;
 
 	std::string worldFilename;
 
@@ -97,6 +99,11 @@ struct World
 	std::vector<Component*> GetAllComponentsInWorld();
 
 	void AddActorToWorld(Actor* actor);
+	void RemoveActorFromWorld(Actor* actor);
+	void ClearAllActorsFromWorld();
+
+	bool CheckIfActorExistsInWorld(std::string actorName);
+	bool CheckIfActorExistsInWorld(UID actorUID);
 
 	void Cleanup();
 };
