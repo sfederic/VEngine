@@ -83,10 +83,10 @@ void WorldEditor::DuplicateActor()
 				const std::string newActorOriginalName = newDuplicateActor->GetName();
 
 				//Make a new UID for the actor
-				UID newActorOriginalUID = newDuplicateActor->GetUID();
+				const UID newActorOriginalUID = newDuplicateActor->GetUID();
 
 				//Remove actor over UID and name conflicts, then back into world again later
-				world.RemoveActorFromWorld(newDuplicateActor);
+				world.RemoveActorFromWorld(newActorOriginalName);
 
 				//Copy values across
 				auto oldProps = pickedActor->GetAllProps();
@@ -95,7 +95,7 @@ void WorldEditor::DuplicateActor()
 
 				newDuplicateActor->CreateAllComponents();
 
-				newDuplicateActor->SetName(newActorOriginalName);
+				newDuplicateActor->SimpleSetName(newActorOriginalName);
 				newDuplicateActor->SetUID(newActorOriginalUID);
 
 				newDuplicateActor->ResetOwnerUIDToComponents();

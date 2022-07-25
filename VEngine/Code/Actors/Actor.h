@@ -92,7 +92,7 @@ public:
 	//Iterates over every actor from the actor's system to avoid a rename collision. bool denotes if collision occured.
 	bool SetName(std::string newName);
 
-	//Use this for when world state updates aren't an issue
+	//Use this for when world state update order is an issue (e.g. ActorSystem, serialisation, WorldEditor)
 	void SimpleSetName(std::string newName) { name = newName; }
 
 	std::string GetName() { return name; }
