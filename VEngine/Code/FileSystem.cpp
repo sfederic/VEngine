@@ -111,7 +111,7 @@ void FileSystem::ReadAllActorSystemsFromBinary()
 
 		for (int i = 0; i < numActorsToSpawn; i++)
 		{
-			actorSystem->SpawnActor(Transform());
+			Actor* actor = actorSystem->SpawnActor(Transform());
 		}
 
 		actorSystem->DeserialiseBinary(d);
@@ -209,7 +209,7 @@ void FileSystem::LoadWorld(std::string worldName)
 
 			for (int i = 0; i < numObjectsToSpawn; i++)
 			{
-				auto actor = actorSystem->SpawnActor(Transform());
+				Actor* actor = actorSystem->SpawnActor(Transform());
 				newActors.push_back(actor);
 			}
 
@@ -223,8 +223,7 @@ void FileSystem::LoadWorld(std::string worldName)
 
 				actor->ResetOwnerUIDToComponents();
 
-				world.actorUIDMap[actor->uid] = actor;
-				world.actorNameMap[actor->name] = actor;
+				world.AddActorToWorld(actor);
 			}
 		}
 	}
