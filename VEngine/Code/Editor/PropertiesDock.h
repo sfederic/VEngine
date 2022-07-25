@@ -19,6 +19,9 @@ class QComboBox;
 
 struct PropertiesDock : public QDockWidget
 {
+private:
+	std::vector<IPropertyWidget*> propertyWidgetsToUpdate;
+
 	QPushButton* addComponentButton = nullptr;
 	QComboBox* componentComboBox = nullptr;
 
@@ -26,12 +29,9 @@ struct PropertiesDock : public QDockWidget
 	QGridLayout* actorPropsGridLayout = nullptr;
 	QScrollArea* actorPropsScrollArea = nullptr;
 
-	std::vector<IPropertyWidget*> propertyWidgetsToUpdate;
-
 	Actor* previousActor = nullptr;
 	Actor* currentDisplayingActor = nullptr;
 
-private:
 	static const int propertyNameColumn = 0;
 	static const int propertyDataColumn = 1;
 
@@ -43,7 +43,6 @@ public:
 	void Clear();
 
 private:
-
 	template <typename PropType, typename WidgetType>
 	void CreateWidget(Property& prop, int row) 
 	{
