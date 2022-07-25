@@ -210,12 +210,12 @@ void Actor::Destroy()
 
 bool Actor::SetName(std::string newName)
 {
-	auto actorIt = world.actorNameMap.find(newName);
-	if (actorIt == world.actorNameMap.end())
+	//Check for duplicate names in world
+	if (!world.CheckIfActorExistsInWorld(newName))
 	{
-		world.actorNameMap.erase(name);
+		world.RemoveActorFromWorld(this);
 		name = newName;
-		world.actorNameMap.insert(std::make_pair(name, this));
+		world.AddActorToWorld(this);
 
 		return true;
 	}
