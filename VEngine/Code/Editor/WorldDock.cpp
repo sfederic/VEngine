@@ -71,8 +71,7 @@ void WorldDock::PopulateWorldActorList()
 
 	//clear()s are here because these maps are added to in ActorSystem::Add() calls
 	//but there's no way to refresh them before Deserialising data.
-	world.actorNameMap.clear();
-	world.actorUIDMap.clear();
+	world.ClearAllActorsFromWorld();
 
 	for (Actor* actor : world.GetAllActorsInWorld())
 	{
@@ -80,8 +79,7 @@ void WorldDock::PopulateWorldActorList()
 		item->setText(0, QString::fromStdString(actor->name));
 		item->setFlags(item->flags() | Qt::ItemIsEditable);
 
-		world.actorNameMap.emplace(actor->name, actor);
-		world.actorUIDMap.emplace(actor->uid, actor);
+		world.AddActorToWorld(actor);
 	}
 
 	actorTreeWidget->blockSignals(false);
@@ -180,9 +178,6 @@ void WorldDock::AddActorToList(Actor* actor)
 	item->setText(0, QString::fromStdString(actor->name));
 	item->setFlags(item->flags() | Qt::ItemIsEditable | Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled);
 
-	world.actorNameMap.emplace(actor->name, actor);
-	world.actorUIDMap.emplace(actor->uid, actor);
-
 	actorTreeWidget->blockSignals(false);
 }
 
@@ -197,8 +192,7 @@ void WorldDock::RemoveActorFromList()
 		foundItems = actorTreeWidget->findItems(QString::fromStdString(actorName), Qt::MatchExactly);
 		assert(foundItems.size() == 1);
 
-		world.actorNameMap.erase(actor->name);
-		world.actorUIDMap.erase(actor->uid);
+		world.RemoveActorFromWorld(actor);
 	}
 
 	for (auto item : foundItems)
