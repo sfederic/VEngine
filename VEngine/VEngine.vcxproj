@@ -203,7 +203,6 @@
     <ClCompile Include="Code\Actors\Game\SavePoint.cpp" />
     <ClCompile Include="Code\SystemCache.cpp" />
     <ClCompile Include="Code\Gameplay\ConditionSystem.cpp" />
-    <ClCompile Include="Code\ThreadSystem.cpp" />
     <ClCompile Include="Code\Particle\ParticleEmitter.cpp" />
     <ClCompile Include="Code\Particle\ParticleSystem.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\UintWidget.cpp" />
@@ -466,7 +465,6 @@
     <ClInclude Include="Code\Actors\Game\SavePoint.h" />
     <ClInclude Include="Code\SystemCache.h" />
     <ClInclude Include="Code\Gameplay\ConditionSystem.h" />
-    <ClInclude Include="Code\ThreadSystem.h" />
     <ClInclude Include="Code\Particle\ParticleEmitter.h" />
     <ClInclude Include="Code\Particle\ParticleSystem.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\UintWidget.h" />

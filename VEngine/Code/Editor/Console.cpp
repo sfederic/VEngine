@@ -9,7 +9,6 @@
 #include "Asset/AssetSystem.h"
 #include "FileSystem.h"
 #include "World.h"
-#include "ThreadSystem.h"
 
 Console console;
 
@@ -83,9 +82,7 @@ Console::Console()
 	executeMap.emplace(L"LOADBIN", []() { FileSystem::ReadAllActorSystemsFromBinary(); });
 
 	//Asset Build Commands
-	executeMap.emplace(L"BUILD MESHES", []() {
-		assetSystem.WriteAllMeshDataToMeshAssetFiles();
-	});
+	executeMap.emplace(L"BUILD MESHES", []() { assetSystem.WriteAllMeshDataToMeshAssetFiles(); });
 
 	//Write all game save maps
 	executeMap.emplace(L"BUILD MAPS", []() { assetSystem.BuildAllGameplayMapFiles(); });
