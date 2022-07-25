@@ -158,7 +158,6 @@
     <ClCompile Include="Code\UID.cpp" />
     <ClCompile Include="Code\UI\Game\TimeOfDayWidget.cpp" />
     <ClCompile Include="Code\VEnum.cpp" />
-    <ClCompile Include="Code\VMemory.cpp" />
     <ClCompile Include="Code\vpch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
@@ -420,7 +419,6 @@
     <ClCompile Include="Code\Editor\TransformGizmo.cpp" />
     <ClInclude Include="Code\Editor\TransformGizmo.h" />
     <ClInclude Include="Code\UI\UISystem.h" />
-    <ClInclude Include="Code\VMemory.h" />
     <ClInclude Include="Code\vpch.h" />
     <ClInclude Include="Code\World.h" />
     <ClInclude Include="Code\WorldEditor.h" />

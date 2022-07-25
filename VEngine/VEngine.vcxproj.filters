@@ -320,9 +320,6 @@
     <ClCompile Include="Code\Actors\Game\SavePoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\VMemory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\System.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -815,9 +812,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\Unit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\VMemory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Audio\AudioBase.h">
