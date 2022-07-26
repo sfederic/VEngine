@@ -1,1 +1,273 @@
+Grid
+0
+GridActor
+0
+AudioActor
+0
+Player
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Name
+Player0
+UID
+4081121672
+next
+Unit
+0
+EntranceTrigger
+0
+NPC
+0
+MeshActor
+1
+ Position
+2 -0.5 2
+ Rotation
+-0 0 -0 1
+ Scale
+5 1 5
+Name
+MeshActor0
+UID
+3108876758
+next
+DirectionalLightActor
+0
+SavePoint
+0
+PointLightActor
+0
+SpotLightActor
+0
+FenceActor
+0
+Billboard
+0
+InteractTrigger
+0
+ParticleSystem
+0
+DialogueTrigger
+0
+DestructibleActor
+0
+MemoryActor
+0
+TitleScreenActor
+0
+PushableGridActor
+0
+PlayerDialogueTrigger
+0
+GoddessStatue
+0
+PhysicsActor
+0
+PostProcessInstance
+0
+PolyboardActor
+0
+DebugNoteActor
+0
+SpriteSheetActor
+0
+MovingGridActor
+0
+CutsceneActor
+0
+ReflectionPlane
+0
+DiffuseProbeMap
+0
+TestActor
+0
+CharacterControllerComponent
+0
+QuestComponent
+0
+TimeComponent
+0
+WidgetComponent
+0
+AudioComponent
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Audio Filename
+step.wav
+Loop
+1
+Name
+AudioComponent0
+OwnerUID
+4081121672
+Pitch
+1
+Play On Start
+1
+Volume
+-0.000151716
+next
+DialogueComponent
+1
+File
+
+Name
+DialogueComponent0
+OwnerUID
+4081121672
+next
+MemoryComponent
+0
+EmptyComponent
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Name
+EmptyComponent0
+OwnerUID
+4081121672
+next
+MeshComponent
+2
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+character_test.fbx
+Metallic
+0
+Name
+MeshComponent0
+OwnerUID
+4081121672
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+ Pos
+2 -0.5 2
+ Rot
+-0 0 -0 1
+ Scale
+5 1 5
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+node.fbx
+Metallic
+0
+Name
+MeshComponent1
+OwnerUID
+3108876758
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+InstanceMeshComponent
+0
+BoxTriggerComponent
+0
+CameraComponent
+1
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
+next
+DirectionalLightComponent
+0
+PointLightComponent
+0
+SpotLightComponent
+0
+ParticleEmitter
+0
+SpriteSheet
+0
+ConditionComponent
+0
+DestructibleMeshComponent
+0
+Polyboard
+0
 end
