@@ -210,6 +210,7 @@ void FileSystem::LoadWorld(std::string worldName)
 			for (int i = 0; i < numObjectsToSpawn; i++)
 			{
 				Actor* actor = actorSystem->SpawnActor(Transform());
+				world.RemoveActorFromWorld(actor);
 				newActors.push_back(actor);
 			}
 
