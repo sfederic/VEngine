@@ -33,6 +33,7 @@ namespace GameUtils
 
 	Grid* GetGrid()
 	{
+		assert(Grid::system.GetNumActors());
 		return Grid::system.GetActors()[0];
 	}
 
