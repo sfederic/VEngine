@@ -268,6 +268,16 @@ void Actor::AddChild(Actor* actor)
 	actor->parent = this;
 }
 
+void Actor::AddComponent(Component* component)
+{
+	for (Component* c : components)
+	{
+		assert(c != component);
+	}
+
+	components.push_back(component);
+}
+
 Component* Actor::GetComponentByName(std::string componentName)
 {
 	for (auto component : components)

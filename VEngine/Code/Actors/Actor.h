@@ -110,6 +110,8 @@ public:
 
 	void AddChild(Actor* actor);
 
+	void AddComponent(Component* component);
+
 	template <typename T>
 	std::vector<T*> GetComponentsOfType()
 	{
