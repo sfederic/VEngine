@@ -116,6 +116,12 @@ public:
 	Component* FindComponent(std::string componentName);
 
 	template <typename T>
+	T* CreateComponent(T component, std::string componentName)
+	{
+		return T::system.Add(this, std::move(component), componentName);
+	}
+
+	template <typename T>
 	std::vector<T*> GetComponentsOfType()
 	{
 		std::vector<T*> outComponents;
