@@ -152,15 +152,6 @@ namespace VMath
         XMStoreFloat4(&transform.rotation, rot);
     }
 
-    XMFLOAT4X4 FbxMatrixToDirectXMathMatrix(fbxsdk::FbxMatrix fbxMatrix)
-    {
-        //Note: Fbx likes to work in units of 100 IF it's set when exporting. Set it to LocalScale on export instead of FBX Units.
-        return XMFLOAT4X4(fbxMatrix.mData[0].mData[0], fbxMatrix.mData[0].mData[1], fbxMatrix.mData[0].mData[2], fbxMatrix.mData[0].mData[3],
-            fbxMatrix.mData[1].mData[0], fbxMatrix.mData[1].mData[1], fbxMatrix.mData[1].mData[2], fbxMatrix.mData[1].mData[3],
-            fbxMatrix.mData[2].mData[0], fbxMatrix.mData[2].mData[1], fbxMatrix.mData[2].mData[2], fbxMatrix.mData[2].mData[3],
-            fbxMatrix.mData[3].mData[0], fbxMatrix.mData[3].mData[1], fbxMatrix.mData[3].mData[2], fbxMatrix.mData[3].mData[3]);
-    }
-
     bool VecEqual(XMVECTOR v1, XMVECTOR v2, float epsilon)
     {
         return fabsf(v1.m128_f32[0] - v2.m128_f32[0]) <= epsilon &&

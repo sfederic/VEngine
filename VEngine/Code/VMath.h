@@ -1,7 +1,6 @@
 #pragma once
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
-#include <fbxsdk/core/math/fbxmatrix.h>
 
 class Actor;
 struct Transform;
@@ -39,8 +38,6 @@ namespace VMath
 
 	//Rotates on the Y-axis
 	void RotateTowardsCamera(Transform& transform, float zAngle = 0.f);
-
-	XMFLOAT4X4 FbxMatrixToDirectXMathMatrix(fbxsdk::FbxMatrix fbxMatrix);
 
 	bool VecEqual(XMVECTOR v1, XMVECTOR v2, float epsilon = 9.9999999747e-05f);
 	bool Float3Equal(XMFLOAT3& f1, XMFLOAT3& f2);
