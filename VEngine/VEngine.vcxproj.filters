@@ -542,9 +542,6 @@
     <ClCompile Include="Code\vpch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Render\ConstantBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\VFunctionSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

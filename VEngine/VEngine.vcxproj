@@ -255,7 +255,6 @@
     <ClCompile Include="Code\Actors\DiffuseProbeMap.cpp" />
     <ClCompile Include="Code\Actors\PostProcessInstance.cpp" />
     <ClCompile Include="Code\Render\Texture2D.cpp" />
-    <ClCompile Include="Code\Render\ConstantBuffer.cpp" />
     <ClCompile Include="Code\VFunctionSystem.cpp" />
     <ClCompile Include="Code\Actors\TestActor.cpp" />
     <ClInclude Include="Code\Asset\AssetFileExtensions.h" />
