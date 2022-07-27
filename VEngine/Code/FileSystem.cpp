@@ -202,6 +202,16 @@ void FileSystem::LoadWorld(std::string worldName)
 				{
 					auto component = cs->SpawnComponent(nullptr);
 
+					UID ownerUID = 0;
+					d.is >> ownerUID;
+
+					std::wstring componentWName;
+					d.is >> componentWName;
+					std::string componentName = VString::wstos(componentWName);
+
+					component->ownerUID = ownerUID;
+					component->name = componentName;
+
 					auto props = component->GetProps();
 					d.Deserialise(props);
 
