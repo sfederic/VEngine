@@ -21,7 +21,7 @@ void ActorTreeWidget::dropEvent(QDropEvent* event)
 	if (item == nullptr) return;
 
 	auto parentActorName = item->text(0).toStdString();
-	auto parentActor = world.GetActorByName(parentActorName);
+	auto parentActor = World::GetActorByName(parentActorName);
 
 	//Assign dragged actor entry to the dropped actor
 	if (dragChildActor != nullptr)
@@ -42,7 +42,7 @@ void ActorTreeWidget::dragEnterEvent(QDragEnterEvent* event)
 	if (item == nullptr) return;
 
 	auto childActorName = item->text(0).toStdString();
-	dragChildActor = world.GetActorByName(childActorName);
+	dragChildActor = World::GetActorByName(childActorName);
 
 	QTreeWidget::dragEnterEvent(event);
 }

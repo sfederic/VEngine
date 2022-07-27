@@ -251,7 +251,7 @@ Properties CameraComponent::GetProps()
 
 void CameraComponent::FrustumCull()
 {
-	for (auto actor : world.GetAllActorsInWorld())
+	for (auto actor : World::GetAllActorsInWorld())
 	{
 		XMMATRIX cameraView = GetViewMatrix();
 		XMVECTOR cameraViewDet = XMMatrixDeterminant(cameraView);

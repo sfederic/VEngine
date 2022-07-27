@@ -211,11 +211,11 @@ void Actor::Destroy()
 bool Actor::SetName(std::string newName)
 {
 	//Check for duplicate names in world
-	if (!world.CheckIfActorExistsInWorld(newName))
+	if (!World::CheckIfActorExistsInWorld(newName))
 	{
-		world.RemoveActorFromWorld(this);
+		World::RemoveActorFromWorld(this);
 		name = newName;
-		world.AddActorToWorld(this);
+		World::AddActorToWorld(this);
 
 		return true;
 	}

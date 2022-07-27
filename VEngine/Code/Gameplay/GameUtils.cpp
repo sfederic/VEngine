@@ -91,11 +91,11 @@ namespace GameUtils
 		//and the .sav version of it is based on in-game player saves. So if a .sav version exists, that is loaded
 		//instead of the .vmap file, during gameplay.
 
-		auto firstOf = world.worldFilename.find_first_of(".");
-		std::string str = world.worldFilename.substr(0, firstOf);
+		auto firstOf = World::worldFilename.find_first_of(".");
+		std::string str = World::worldFilename.substr(0, firstOf);
 		std::string file = str += AssetFileExtensions::gameSave;
 
-		world.worldFilename = file;
+		World::worldFilename = file;
 		FileSystem::SerialiseAllSystems();
 	}
 
@@ -149,7 +149,7 @@ namespace GameUtils
 
 		int matchingEntranceTriggerCount = 0;
 		//Set player pos and rot at entrancetrigger in loaded world with same name as previous.
-		auto entranceTriggers = world.GetAllActorsOfTypeInWorld<EntranceTrigger>();
+		auto entranceTriggers = World::GetAllActorsOfTypeInWorld<EntranceTrigger>();
 		for (auto entrance : entranceTriggers)
 		{
 			if (entrance->levelToMoveTo == GameInstance::previousMapMovedFrom)

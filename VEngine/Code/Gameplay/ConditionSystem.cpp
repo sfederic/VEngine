@@ -67,7 +67,7 @@ static bool GainMemory(std::string memoryName, std::string memoryDesc, std::stri
 	memory->description = memoryDesc;
 
 	memory->actorAquiredFrom = "Aquired from dialogue.";
-	memory->worldAquiredFrom = world.worldFilename;
+	memory->worldAquiredFrom = World::worldFilename;
 
 	memory->hourAquired = GameInstance::currentHour;
 	memory->minuteAquired = GameInstance::currentMinute;

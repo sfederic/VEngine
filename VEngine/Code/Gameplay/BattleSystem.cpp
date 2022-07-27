@@ -49,13 +49,13 @@ void BattleSystem::StartBattle()
 
 	uiSystem.unitLineupWidget->AddToViewport();
 
-	activeBattleUnits = world.GetAllActorsOfTypeInWorld<Unit>();
+	activeBattleUnits = World::GetAllActorsOfTypeInWorld<Unit>();
 	for (auto unit : activeBattleUnits)
 	{
 		unit->isInBattle = true;
 	}
 
-	auto activeBattleNPCs = world.GetAllActorsOfTypeInWorld<NPC>();
+	auto activeBattleNPCs = World::GetAllActorsOfTypeInWorld<NPC>();
 	for (auto npc : activeBattleNPCs)
 	{
 		npc->BattleStartDialogue();

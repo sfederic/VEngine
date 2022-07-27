@@ -38,7 +38,7 @@ void Engine::Init(int argc, char* argv[])
 	uiSystem.Init(Renderer::GetSwapchain());
 	debugMenu.Init();
 
-	world.Init();
+	World::Init();
 	editor->UpdateWorldList();
 }
 
@@ -62,8 +62,8 @@ void Engine::TickSystems(float deltaTime)
 
 	if (Core::gameplayOn)
 	{
-		world.TickAllActorSystems(deltaTime);
-		world.TickAllComponentSystems(deltaTime);
+		World::TickAllActorSystems(deltaTime);
+		World::TickAllComponentSystems(deltaTime);
 	}
 }
 

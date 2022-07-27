@@ -45,7 +45,7 @@ void Grid::Awake()
 
     //Deactive gridactors that aren't active at current time
     {
-        auto gridActors = world.GetAllActorsOfTypeInWorld<GridActor>();
+        auto gridActors = World::GetAllActorsOfTypeInWorld<GridActor>();
         for (auto gridActor : gridActors)
         {
             gridActor->EnableBasedOnTime();
@@ -56,7 +56,7 @@ void Grid::Awake()
     Ray ray(this);
     ray.ignoreLayer = CollisionLayers::Editor;
     ray.actorsToIgnore.push_back((Actor*)GameUtils::GetPlayer());
-    auto gridActors = world.GetAllActorsOfTypeAsActor<GridActor>();
+    auto gridActors = World::GetAllActorsOfTypeAsActor<GridActor>();
     for (auto gridActor : gridActors)
     {
         auto castActor = (GridActor*)gridActor;

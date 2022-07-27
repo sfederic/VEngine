@@ -151,7 +151,7 @@ void TransformGizmo::Tick()
                     component->SetWorldScale(scale);
                     component->SetWorldRotation(rot);
 
-                    auto owner = world.GetActorByUID(component->ownerUID);
+                    auto owner = World::GetActorByUID(component->ownerUID);
                     if (owner)
                     {
                         editor->SetActorProps(owner);

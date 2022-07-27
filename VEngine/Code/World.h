@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
 #include <string>
-#include <unordered_map>
 #include "UID.h"
 
 class IActorSystem;
@@ -9,19 +8,16 @@ struct IComponentSystem;
 struct Component;
 class Actor;
 
-struct World
+namespace World
 {
-private:
-	std::unordered_map<UID, Actor*> actorUIDMap;
-	std::unordered_map<std::string, Actor*> actorNameMap;
+	extern std::string worldFilename;
 
-public:
-	std::vector<IActorSystem*> activeActorSystems;
-	std::vector<IComponentSystem*> activeComponentSystems;
+	extern std::unordered_map<UID, Actor*> actorUIDMap;
+	extern std::unordered_map<std::string, Actor*> actorNameMap;
 
-	std::string worldFilename;
+	extern std::vector<IActorSystem*> activeActorSystems;
+	extern std::vector<IComponentSystem*> activeComponentSystems;
 
-	//Called at engine startup
 	void Init();
 
 	//Called on level load
@@ -111,5 +107,3 @@ public:
 
 	void Cleanup();
 };
-
-extern World world;

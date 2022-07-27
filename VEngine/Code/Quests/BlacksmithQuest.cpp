@@ -11,9 +11,9 @@ struct BlacksmithQuest : Quest
 
 bool BlacksmithQuest::Hour1()
 {
-	if (world.worldFilename != "blacksmith.vmap") return false;
+	if (World::worldFilename != "blacksmith.vmap") return false;
 
-	auto actor = world.GetActorByNameAllowNull("blacksmith");
+	auto actor = World::GetActorByNameAllowNull("blacksmith");
 	if (actor)
 	{
 		actor->SetActive(false);

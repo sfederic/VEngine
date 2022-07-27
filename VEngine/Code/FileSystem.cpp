@@ -33,8 +33,8 @@ std::pair<UID, std::string> GetComponentOwnerUIDAndNameOnDeserialise(Deserialise
 
 void FileSystem::SerialiseAllSystems()
 {
-	auto lastOf = world.worldFilename.find_last_of("/\\");
-	std::string str = world.worldFilename.substr(lastOf + 1);
+	auto lastOf = World::worldFilename.find_last_of("/\\");
+	std::string str = World::worldFilename.substr(lastOf + 1);
 
 	std::string file = "WorldMaps/" + str;
 
@@ -45,48 +45,48 @@ void FileSystem::SerialiseAllSystems()
 
 	Serialiser s(file, OpenMode::Out);
 
-	for (auto actorSystem : world.activeActorSystems)
+	for (auto actorSystem : World::activeActorSystems)
 	{
 		actorSystem->Serialise(s);
 	}
 
-	for (auto cs : world.activeComponentSystems)
+	for (auto cs : World::activeComponentSystems)
 	{
 		cs->Serialise(s);
 	}
 
 	s.WriteLine(L"end");
 
-	debugMenu.AddNotification(VString::wformat(L"%S world saved", world.worldFilename.c_str()));
+	debugMenu.AddNotification(VString::wformat(L"%S world saved", World::worldFilename.c_str()));
 }
 
 void FileSystem::WriteAllActorSystemsToBinary()
 {
-	auto lastOf = world.worldFilename.find_last_of("/\\");
-	std::string str = world.worldFilename.substr(lastOf + 1);
+	auto lastOf = World::worldFilename.find_last_of("/\\");
+	std::string str = World::worldFilename.substr(lastOf + 1);
 
 	std::string file = "WorldMaps/Binary/" + str;
 
 	BinarySerialiser s(file);
 
-	for (IActorSystem* actorSystem : world.activeActorSystems)
+	for (IActorSystem* actorSystem : World::activeActorSystems)
 	{
 		actorSystem->SerialiseBinary(s);
 	}
 
-	debugMenu.AddNotification(VString::wformat(L"%S world saved to binary", world.worldFilename.c_str()));
+	debugMenu.AddNotification(VString::wformat(L"%S world saved to binary", World::worldFilename.c_str()));
 }
 
 //@Todo: binary serialisation isn't working too well. Might be some weird alignment errors taken from property sizes.
 void FileSystem::ReadAllActorSystemsFromBinary()
 {
-	std::string worldName = world.worldFilename;
+	std::string worldName = World::worldFilename;
 
 	std::string path = "WorldMaps/Binary/" + worldName;
 
 	assert(std::filesystem::exists(path) && "Map file doesn't exist");
 
-	world.Cleanup();
+	World::Cleanup();
 
 	BinaryDeserialiser d(path);
 
@@ -131,14 +131,14 @@ void FileSystem::ReadAllActorSystemsFromBinary()
 
 	ResetWorldState();
 
-	debugMenu.AddNotification(VString::wformat(L"%S world loaded from binary", world.worldFilename.c_str()));
+	debugMenu.AddNotification(VString::wformat(L"%S world loaded from binary", World::worldFilename.c_str()));
 }
 
 void FileSystem::LoadWorld(std::string worldName)
 {
 	editor->SetEditorTitle(worldName);
 
-	world.worldFilename = worldName;
+	World::worldFilename = worldName;
 
 	std::string path = "WorldMaps/" + worldName;
 
@@ -149,7 +149,7 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	assert(std::filesystem::exists(path) && "Map file doesn't exist");
 
-	world.Cleanup();
+	World::Cleanup();
 
 	Deserialiser d(path, OpenMode::In);
 
@@ -193,7 +193,7 @@ void FileSystem::LoadWorld(std::string worldName)
 				{
 					auto ownerUIDAndName = GetComponentOwnerUIDAndNameOnDeserialise(d);
 
-					Actor* owner = world.GetActorByUID(ownerUIDAndName.first);
+					Actor* owner = World::GetActorByUID(ownerUIDAndName.first);
 					Component* foundComponent = owner->FindComponent(ownerUIDAndName.second);
 
 					auto props = foundComponent->GetProps();
@@ -217,7 +217,7 @@ void FileSystem::LoadWorld(std::string worldName)
 					auto props = component->GetProps();
 					d.Deserialise(props);
 
-					Actor* owner = world.GetActorByUID(component->ownerUID);
+					Actor* owner = World::GetActorByUID(component->ownerUID);
 					owner->AddComponent(component);
 				}
 			}
@@ -242,14 +242,14 @@ void FileSystem::LoadWorld(std::string worldName)
 
 				actor->ResetOwnerUIDToComponents();
 
-				world.AddActorToWorld(actor);
+				World::AddActorToWorld(actor);
 			}
 		}
 	}
 
 	ResetWorldState();
 
-	debugMenu.AddNotification(VString::wformat(L"%S world loaded", world.worldFilename.c_str()));
+	debugMenu.AddNotification(VString::wformat(L"%S world loaded", World::worldFilename.c_str()));
 }
 
 void FileSystem::ReloadCurrentWorld()
@@ -257,7 +257,7 @@ void FileSystem::ReloadCurrentWorld()
 	GameInstance::ResetTime();
 	GameInstance::DeletePlayerMemories();
 
-	LoadWorld(world.worldFilename);
+	LoadWorld(World::worldFilename);
 }
 
 void FileSystem::CreateGameplayWorldSave(std::string worldName)
@@ -288,7 +288,7 @@ void FileSystem::ResetWorldState()
 	}
 
 	//Make sure always after camera gets set
-	world.Start();
+	World::Start();
 
 	editor->UpdateWorldList();
 	editor->ClearProperties();

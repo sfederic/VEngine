@@ -21,7 +21,13 @@
 #include "Timer.h"
 #include "Log.h"
 
-World world;
+std::string World::worldFilename;
+
+std::unordered_map<UID, Actor*> World::actorUIDMap;
+std::unordered_map<std::string, Actor*> World::actorNameMap;
+
+std::vector<IActorSystem*> World::activeActorSystems;
+std::vector<IComponentSystem*> World::activeComponentSystems;
 
 void World::Init()
 {
@@ -60,8 +66,8 @@ void World::Start()
 
 	if (Core::gameplayOn)
 	{
-		world.StartAllComponents();
-		world.WakeAndStartAllActors();
+		StartAllComponents();
+		WakeAndStartAllActors();
 	}
 }
 

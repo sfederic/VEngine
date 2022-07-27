@@ -45,7 +45,7 @@ void SystemDock::AddActorSystemsToWidget()
 {
 	actorSystemList->clear();
 
-	for (IActorSystem* actorSystem : world.activeActorSystems)
+	for (IActorSystem* actorSystem : World::activeActorSystems)
 	{
 		auto item = new QListWidgetItem(actorSystemList);
 		item->setText(QString::fromStdString(actorSystem->GetName()));

@@ -98,7 +98,7 @@ void DuplicateActor()
 				const UID newActorOriginalUID = newDuplicateActor->GetUID();
 
 				//Remove actor over UID and name conflicts, then back into world again later
-				world.RemoveActorFromWorld(newActorOriginalName);
+				World::RemoveActorFromWorld(newActorOriginalName);
 
 				//Copy values across
 				auto oldProps = pickedActor->GetAllProps();
@@ -112,7 +112,7 @@ void DuplicateActor()
 
 				newDuplicateActor->ResetOwnerUIDToComponents();
 
-				world.AddActorToWorld(newDuplicateActor);
+				World::AddActorToWorld(newDuplicateActor);
 
 				editor->SetActorProps(newDuplicateActor);
 				editor->UpdateWorldList();

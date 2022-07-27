@@ -69,7 +69,7 @@ void PhysicsSystem::Init()
 void PhysicsSystem::Start()
 {
 	//@Todo: it feels like physics will break if the mesh isn't the root of the actor
-	auto actors = world.GetAllActorsInWorld();
+	auto actors = World::GetAllActorsInWorld();
 	for (auto actor : actors)
 	{
 		auto meshes = actor->GetComponentsOfType<MeshComponent>();

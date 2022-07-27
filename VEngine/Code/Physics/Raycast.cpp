@@ -54,7 +54,7 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 	ray.hitActors.clear();
 	ray.hitComponents.clear();
 
-	for (Actor* actor : world.GetAllActorsInWorld())
+	for (Actor* actor : World::GetAllActorsInWorld())
 	{
 		if (!actor->IsActive())
 		{
@@ -191,7 +191,7 @@ bool RaycastTriangleIntersect(Ray& ray)
 
 					tempRay.hitComponent = mesh;
 
-					tempRay.hitActor = world.GetActorByUID(mesh->ownerUID);
+					tempRay.hitActor = World::GetActorByUID(mesh->ownerUID);
 
 					rays.push_back(tempRay);
 				}

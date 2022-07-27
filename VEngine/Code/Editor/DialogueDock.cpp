@@ -73,7 +73,7 @@ void DialogueDock::PopulateTreeItem(QTreeWidgetItem* item)
 
 	//Grab all actors in world and add their names to a combobox
 	auto actorComboBox = new QComboBox(this);
-	auto actorsInWorld = world.GetAllActorsInWorld();
+	auto actorsInWorld = World::GetAllActorsInWorld();
 	for (auto actor : actorsInWorld)
 	{
 		QString actorName = QString::fromStdString(actor->GetName());

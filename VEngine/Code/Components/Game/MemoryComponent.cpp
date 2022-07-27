@@ -47,7 +47,7 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 
 	//INIT MEMORY
 
-	auto owner = world.GetActorByName(actorAquiredFromName);
+	auto owner = World::GetActorByName(actorAquiredFromName);
 
 	auto memory = new Memory();
 
@@ -55,7 +55,7 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 	memory->description = VString::wstos(memoryDescription);
 
 	memory->actorAquiredFrom = actorAquiredFromName;
-	memory->worldAquiredFrom = world.worldFilename;
+	memory->worldAquiredFrom = World::worldFilename;
 
 	memory->hourAquired = GameInstance::currentHour;
 	memory->minuteAquired = GameInstance::currentMinute;

@@ -71,15 +71,15 @@ void WorldDock::PopulateWorldActorList()
 
 	//clear()s are here because these maps are added to in ActorSystem::Add() calls
 	//but there's no way to refresh them before Deserialising data.
-	world.ClearAllActorsFromWorld();
+	World::ClearAllActorsFromWorld();
 
-	for (Actor* actor : world.GetAllActorsInWorld())
+	for (Actor* actor : World::GetAllActorsInWorld())
 	{
 		auto item = new QTreeWidgetItem(actorTreeWidget);
 		item->setText(0, QString::fromStdString(actor->GetName()));
 		item->setFlags(item->flags() | Qt::ItemIsEditable);
 
-		world.AddActorToWorld(actor);
+		World::AddActorToWorld(actor);
 	}
 
 	actorTreeWidget->blockSignals(false);
@@ -88,7 +88,7 @@ void WorldDock::PopulateWorldActorList()
 void WorldDock::ClickOnActorInList(QTreeWidgetItem* item, int column)
 {
 	QString actorName = item->text(column);
-	Actor* clickedActor = world.GetActorByName(actorName.toStdString());
+	Actor* clickedActor = World::GetActorByName(actorName.toStdString());
 	if (clickedActor)
 	{
 		WorldEditor::SetPickedActor(clickedActor);
@@ -112,7 +112,7 @@ void WorldDock::ArrowSelectActorInList()
 	if (!items.empty())
 	{
 		QString pickedActorName = items[0]->text(0);
-		auto pickedActor = world.GetActorByName(pickedActorName.toStdString());
+		auto pickedActor = World::GetActorByName(pickedActorName.toStdString());
 		WorldEditor::SetPickedActor(pickedActor);
 		editor->SetActorProps(pickedActor);
 	}
@@ -192,7 +192,7 @@ void WorldDock::RemoveActorFromList()
 		foundItems = actorTreeWidget->findItems(QString::fromStdString(actorName), Qt::MatchExactly);
 		assert(foundItems.size() == 1);
 
-		world.RemoveActorFromWorld(actor);
+		World::RemoveActorFromWorld(actor);
 	}
 
 	for (auto item : foundItems)

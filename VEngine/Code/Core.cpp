@@ -139,15 +139,15 @@ void Core::StartGame()
 		}
 	}
 
-	initialStartingWorldFromEditor = world.worldFilename;
+	initialStartingWorldFromEditor = World::worldFilename;
 
 	physicsSystem.Start();
 
-	world.StartAllComponents();
+	World::StartAllComponents();
 
 	questSystem.ExecuteAllQuestsForCurrentHour();
 
-	world.WakeAndStartAllActors();
+	World::WakeAndStartAllActors();
 
 	WorldEditor::DeselectAll();
 

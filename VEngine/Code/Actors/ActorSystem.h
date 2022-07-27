@@ -36,7 +36,7 @@ public:
 		actor->SetTransform(transform);
 		actor->SimpleSetName(this->name + std::to_string(actor->GetSystemIndex()));
 
-		world.AddActorToWorld(actor);
+		World::AddActorToWorld(actor);
 
 		return actor;
 	}
@@ -52,7 +52,7 @@ public:
 		actors[index]->SetSystemIndex(index);
 		actors[index]->SetName(GetName() + std::to_string(index));
 
-		world.RemoveActorFromWorld(actors.back());
+		World::RemoveActorFromWorld(actors.back());
 
 		delete actors.back();
 		actors.pop_back();
