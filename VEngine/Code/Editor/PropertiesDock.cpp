@@ -93,18 +93,18 @@ void PropertiesDock::DisplayActorProperties(Actor* actor)
     //Component 'add' widgets 
     //@Todo: This is too heavy to be here. Consider putting it into a seperate widget instead.
     //Taking it out for now because I can't be bothered.
-    //addComponentButton = new QPushButton("Add", actorPropsWidget);
-    //connect(addComponentButton, &QPushButton::clicked, this, &PropertiesDock::AddComponentButtonClick);
+    addComponentButton = new QPushButton("Add", actorPropsWidget);
+    connect(addComponentButton, &QPushButton::clicked, this, &PropertiesDock::AddComponentButtonClick);
 
-    //componentComboBox = new QComboBox(actorPropsWidget);
-    //for (auto& csPair : *componentSystemCache.nameToSystemMap)
-    //{
-    //    auto cs = csPair.second;
-    //    componentComboBox->addItem(QString::fromStdString(cs->name));
-    //}
+    componentComboBox = new QComboBox(actorPropsWidget);
+    for (auto& csPair : *componentSystemCache.nameToSystemMap)
+    {
+        auto cs = csPair.second;
+        componentComboBox->addItem(QString::fromStdString(cs->name));
+    }
 
-    //actorPropsGridLayout->addWidget(addComponentButton, 0, 0, 1, 1);
-    //actorPropsGridLayout->addWidget(componentComboBox, 0, 1, 1, 1);
+    actorPropsGridLayout->addWidget(addComponentButton, 0, 0, 1, 1);
+    actorPropsGridLayout->addWidget(componentComboBox, 0, 1, 1, 1);
 
     //Iterate over actor properties
     int gridRow = 1; //Leave row space for Add Component button
@@ -175,16 +175,16 @@ void PropertiesDock::Clear()
 
 void PropertiesDock::AddComponentButtonClick(bool checked)
 {
-    //QString selectedComponentName = componentComboBox->currentText();
-    //IComponentSystem* componentSystem = componentSystemCache.Get(selectedComponentName.toStdString());
-    //componentSystem->SpawnComponent(currentDisplayingActor);
+    QString selectedComponentName = componentComboBox->currentText();
+    IComponentSystem* componentSystem = componentSystemCache.Get(selectedComponentName.toStdString());
+    componentSystem->SpawnComponent(currentDisplayingActor);
 
-    //previousActor = nullptr; //set to null so same actor can update
+    previousActor = nullptr; //set to null so same actor can update
 
-    //DisplayActorProperties(currentDisplayingActor); //Reset actor props display
-    //ResetPropertyWidgetValues();
-    //actorPropsScrollArea->verticalScrollBar()->setValue(
-    //    actorPropsScrollArea->verticalScrollBar()->maximum()); //Move scroll bar to its end
+    DisplayActorProperties(currentDisplayingActor); //Reset actor props display
+    ResetPropertyWidgetValues();
+    actorPropsScrollArea->verticalScrollBar()->setValue(
+        actorPropsScrollArea->verticalScrollBar()->maximum()); //Move scroll bar to its end
 }
 
 void PropertiesDock::ResetPropertyWidgetValues()
