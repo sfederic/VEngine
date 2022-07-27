@@ -557,9 +557,6 @@
     <ClCompile Include="Code\IFunction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Components\Component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\TestActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

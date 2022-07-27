@@ -24,5 +24,16 @@ struct Component
 	//COMPONENT_SYSTEM macro and doesn't need to be added explicity.
 	virtual void Remove() = 0;
 
-	virtual Properties GetProps();
+	virtual Properties GetProps()
+	{
+		Properties props{};
+
+		//Because the serialise file format changed for components, had to put the Name and OwnerUID
+		//separate from the other props so that components can find their owners on spawn (when defined in c++).
+		//Leaving this here just for rough clarity.
+
+		//props.Add("Name", &name).hide = true;
+		//props.Add("OwnerUID", &ownerUID).hide = true;
+		return props;
+	}
 };
