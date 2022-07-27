@@ -1,13 +1,27 @@
 #include "vpch.h"
 #include "FBXLoader.h"
+#define FBXSDK_SHARED //Needs to be defined for static linking
+#include <fbxsdk.h>
 #include <cassert>
-#include <unordered_set>
 #include <filesystem>
-#include "Animation/AnimationStructures.h"
-#include "VMath.h"
 #include "AssetPaths.h"
+#include "Animation/AnimationStructures.h"
 
-FBXLoader fbxLoader;
+using namespace fbxsdk;
+
+FbxManager* manager;
+FbxIOSettings* ioSetting;
+FbxImporter* importer;
+FbxAnimEvaluator* animEvaluator;
+
+std::unordered_map<std::string, MeshData*> FBXLoader::existingMeshDataMap;
+
+void ProcessAllChildNodes(FbxNode* node, MeshData* meshData);
+void ProcessSkeletonNodes(FbxNode* node, Skeleton* skeleton, int parentIndex);
+
+void ReadNormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT3& outNormal);
+void ReadUVs(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT2& outUVs);
+std::vector<XMFLOAT3> ProcessControlPoints(FbxMesh* currMesh);
 
 void FBXLoader::Init()
 {
@@ -97,7 +111,7 @@ bool FBXLoader::Import(std::string filename, MeshDataProxy* meshData)
 	return true;
 }
 
-void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
+void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 {
 	//Recursion for dealing with nodes in the heirarchy.
 	int childNodeCount = node->GetChildCount();
@@ -353,7 +367,7 @@ void FBXLoader::ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 	}
 }
 
-void FBXLoader::ProcessSkeletonNodes(FbxNode* node, Skeleton* skeleton, int parentIndex)
+void ProcessSkeletonNodes(FbxNode* node, Skeleton* skeleton, int parentIndex)
 {
 	const int childCount = node->GetChildCount();
 	for (int i = 0; i < childCount; i++)
@@ -424,7 +438,7 @@ MeshData* FBXLoader::FindMesh(std::string meshName)
 	return meshIt->second;
 }
 
-void FBXLoader::ReadNormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT3& outNormal)
+void ReadNormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT3& outNormal)
 {
 	if (inMesh->GetElementNormalCount() < 1) { throw std::exception("Invalid Normal Number"); }
 
@@ -480,7 +494,7 @@ void FBXLoader::ReadNormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCo
 	}
 }
 
-void FBXLoader::ReadUVs(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT2& outUVs)
+void ReadUVs(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT2& outUVs)
 {
 	if (inMesh->GetElementNormalCount() < 1) { throw std::exception("Invalid Normal Number"); }
 
@@ -532,7 +546,7 @@ void FBXLoader::ReadUVs(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCount
 	}
 }
 
-std::vector<XMFLOAT3> FBXLoader::ProcessControlPoints(FbxMesh* currMesh)
+std::vector<XMFLOAT3> ProcessControlPoints(FbxMesh* currMesh)
 {
 	unsigned int ctrlPointCount = currMesh->GetControlPointsCount();
 

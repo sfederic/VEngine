@@ -23,7 +23,7 @@ void AssetSystem::WriteAllMeshDataToMeshAssetFiles()
 
 	auto startTime = Profile::QuickStart();
 
-	for (auto& meshIt : fbxLoader.existingMeshDataMap)
+	for (auto& meshIt : FBXLoader::existingMeshDataMap)
 	{
 		MeshData* meshData = meshIt.second;
 

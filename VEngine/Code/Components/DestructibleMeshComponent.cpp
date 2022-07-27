@@ -17,7 +17,7 @@ void DestructibleMeshComponent::Create()
 
 	material->Create();
 
-	fbxLoader.ImportFracturedMesh(meshComponentData.filename.c_str(), meshDatas);
+	FBXLoader::ImportFracturedMesh(meshComponentData.filename.c_str(), meshDatas);
 
 	for (auto& meshData : meshDatas)
 	{

@@ -33,7 +33,7 @@ void Engine::Init(int argc, char* argv[])
 
 	Renderer::Init(editor->windowHwnd, editor->viewportWidth, editor->viewportHeight);
 
-	fbxLoader.Init();
+	FBXLoader::Init();
 
 	uiSystem.Init(Renderer::GetSwapchain());
 	debugMenu.Init();

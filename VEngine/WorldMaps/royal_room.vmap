@@ -13,48 +13,15 @@ EntranceTrigger
 NPC
 0
 MeshActor
-4
+1
  Position
--3 -2 6
+1 0 0
  Rotation
 -0 0 -0 1
  Scale
 1 1 1
 Name
 MeshActor0
-UID
-2955963615
-next
- Position
-1 -1 7
- Rotation
--0 0 -0.000244141 1
- Scale
-1 1 1
-Name
-MeshActor1
-UID
-861210359
-next
- Position
--2 1 7
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Name
-MeshActor2
-UID
-561850064
-next
- Position
-2 1 7
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Name
-MeshActor3
 UID
 3875785185
 next
@@ -125,11 +92,11 @@ MemoryComponent
 EmptyComponent
 0
 MeshComponent
-4
-2955963615
+2
+3875785185
 MeshComponent0
  Pos
--3 -2 6
+1 0 0
  Rot
 -0 0 -0 1
  Scale
@@ -145,7 +112,7 @@ Cull
 Grid Obstacle
 0
 Mesh
-fountain.fbx
+barrel.fbx
 Metallic
 0
 Rast State
@@ -173,57 +140,10 @@ UvRotationSpeed
 UvScale
 1 1
 next
-861210359
+3875785185
 MeshComponent1
  Pos
-1 -1 7
- Rot
--0 0 -0.000244141 1
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-dock.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-bush.png
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-561850064
-MeshComponent2
- Pos
--2 1 7
+-1 0 0
  Rot
 -0 0 -0 1
  Scale
@@ -239,54 +159,7 @@ Cull
 Grid Obstacle
 0
 Mesh
-boat.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-carpet.jpg
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-3875785185
-MeshComponent3
- Pos
-2 1 7
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-barrel.fbx
+
 Metallic
 0
 Rast State
