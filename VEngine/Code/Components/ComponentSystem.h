@@ -35,6 +35,10 @@ struct ComponentSystem : IComponentSystem
 		{
 			component->name = this->name + std::to_string(component->index);
 		}
+		else
+		{
+			component->name = name;
+		}
 
 		if (systemState == SystemStates::Loaded && callCreate)
 		{
