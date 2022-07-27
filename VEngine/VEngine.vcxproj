@@ -256,7 +256,6 @@
     <ClCompile Include="Code\Actors\PostProcessInstance.cpp" />
     <ClCompile Include="Code\Render\Texture2D.cpp" />
     <ClCompile Include="Code\Render\ConstantBuffer.cpp" />
-    <ClCompile Include="Code\Scripts\ScriptSystem.cpp" />
     <ClCompile Include="Code\VFunctionSystem.cpp" />
     <ClCompile Include="Code\Actors\TestActor.cpp" />
     <ClInclude Include="Code\Asset\AssetFileExtensions.h" />
@@ -266,7 +265,6 @@
     <ClInclude Include="Code\IFunction.h" />
     <ClInclude Include="Code\Particle\FireParticle.h" />
     <ClInclude Include="Code\Quests\Quest.h" />
-    <ClInclude Include="Code\Scripts\Script.h" />
     <ClInclude Include="Code\SHMath\DirectXSH.h" />
     <ClInclude Include="Code\UI\Game\BulletWidget.h" />
     <ClInclude Include="Code\Components\CharacterControllerComponent.h" />
@@ -516,7 +514,6 @@
     <ClInclude Include="Code\Actors\PostProcessInstance.h" />
     <ClInclude Include="Code\Render\Texture2D.h" />
     <ClInclude Include="Code\Render\ConstantBuffer.h" />
-    <ClInclude Include="Code\Scripts\ScriptSystem.h" />
     <ClInclude Include="Code\VFunctionSystem.h" />
     <ClInclude Include="Code\Actors\TestActor.h" />
   </ItemGroup>
