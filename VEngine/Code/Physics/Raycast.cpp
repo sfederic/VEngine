@@ -9,26 +9,6 @@
 #include "Components/MeshComponent.h"
 #include "World.h"
 
-//void DrawRayDebug(XMVECTOR rayOrigin, XMVECTOR rayDir, float distance)
-//{
-//	Line debugLine = {};
-//	XMStoreFloat3(&debugLine.p1, rayOrigin);
-//	XMVECTOR pos = XMLoadFloat3(&debugLine.p1);
-//	pos += activeCamera->GetRightVectorV();
-//	XMStoreFloat3(&debugLine.p1, pos);
-//
-//	if (distance <= 0.f)
-//	{
-//		distance = 0.f;
-//	}
-//
-//	XMVECTOR dist = rayDir * distance;
-//	XMVECTOR rayEnd = rayOrigin + dist;
-//	XMStoreFloat3(&debugLine.p2, rayEnd);
-//
-//	debugLines.push_back(debugLine);
-//}
-
 bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fromScreen)
 {
 	ray.origin = origin;
