@@ -147,6 +147,8 @@ void WorldDock::ActorListContextMenu(const QPoint& pos)
 
 void WorldDock::SelectActorInList()
 {
+	actorTreeWidget->blockSignals(true);
+
 	actorTreeWidget->clearSelection();
 
 	std::vector<std::string> actorNames;
@@ -167,6 +169,8 @@ void WorldDock::SelectActorInList()
 	{
 		actorTreeWidget->setItemSelected(item, true);
 	}
+
+	actorTreeWidget->blockSignals(false);
 }
 
 void WorldDock::AddActorToList(Actor* actor)
