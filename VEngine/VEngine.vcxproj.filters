@@ -401,9 +401,6 @@
     <ClCompile Include="Code\UI\Game\PlayerHealthWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Editor\SkeletonEditor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Physics\PhysicsSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -914,9 +911,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\PlayerHealthWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Editor\SkeletonEditor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Physics\PhysicsSystem.h">

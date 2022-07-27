@@ -219,7 +219,6 @@
     <ClCompile Include="Code\Components\Game\TimeComponent.cpp" />
     <ClCompile Include="Code\UI\Game\GuardWidget.cpp" />
     <ClCompile Include="Code\UI\Game\PlayerHealthWidget.cpp" />
-    <ClCompile Include="Code\Editor\SkeletonEditor.cpp" />
     <ClCompile Include="Code\Physics\PhysicsSystem.cpp" />
     <ClCompile Include="Code\Components\DestructibleMeshComponent.cpp" />
     <ClCompile Include="Code\Actors\DestructibleActor.cpp" />
@@ -481,7 +480,6 @@
     <ClInclude Include="Code\Components\Game\TimeComponent.h" />
     <ClInclude Include="Code\UI\Game\GuardWidget.h" />
     <ClInclude Include="Code\UI\Game\PlayerHealthWidget.h" />
-    <ClInclude Include="Code\Editor\SkeletonEditor.h" />
     <ClInclude Include="Code\Physics\PhysicsSystem.h" />
     <ClInclude Include="Code\Components\DestructibleMeshComponent.h" />
     <ClInclude Include="Code\Actors\DestructibleActor.h" />
