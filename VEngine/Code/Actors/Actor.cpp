@@ -277,6 +277,7 @@ void Actor::AddComponent(Component* component)
 
 	component->ownerUID = uid;
 
+	assert(componentMap.find(component->name) == componentMap.end());
 	componentMap.emplace(component->name, component);
 }
 
