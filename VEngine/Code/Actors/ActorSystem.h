@@ -43,9 +43,9 @@ public:
 
 	void Remove(int index)
 	{
-		for (Component* component : actors[index]->components)
+		for (auto& componentPair : actors[index]->componentMap)
 		{
-			component->Remove();
+			componentPair.second->Remove();
 		}
 
 		std::swap(actors[index], actors.back());
@@ -110,7 +110,7 @@ public:
 		for (T* actor : actors)
 		{
 			auto props = actor->GetProps();
-			actor->ResetOwnerUIDToComponents();
+			//actor->ResetOwnerUIDToComponents();
 			s.Serialise(props);
 			s.WriteLine(L"next");
 		}

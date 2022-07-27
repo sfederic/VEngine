@@ -223,11 +223,11 @@ void WorldEditor::SpawnActor(Transform& transform)
 		actor->Create();
 		actor->ResetOwnerUIDToComponents();
 
-		for (auto component : actor->components)
+		for (auto& componentPair : actor->componentMap)
 		{
-			auto componentProps = component->GetProps();
+			auto componentProps = componentPair.second->GetProps();
 			d.Deserialise(componentProps);
-			component->Create();
+			componentPair.second->Create();
 		}
 
 		//Set the transform, props will have the original transform data and will be

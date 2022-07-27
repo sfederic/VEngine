@@ -5,18 +5,7 @@ GridActor
 AudioActor
 0
 Player
-1
- Position
-0 0 0
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Name
-Player0
-UID
-4081121672
-next
+0
 Unit
 0
 EntranceTrigger
@@ -24,17 +13,50 @@ EntranceTrigger
 NPC
 0
 MeshActor
-1
+4
  Position
-2 -0.5 2
+-3 -2 6
  Rotation
 -0 0 -0 1
  Scale
-5 1 5
+1 1 1
 Name
 MeshActor0
 UID
-3108876758
+2955963615
+next
+ Position
+1 -1 7
+ Rotation
+-0 0 -0.000244141 1
+ Scale
+1 1 1
+Name
+MeshActor1
+UID
+861210359
+next
+ Position
+-2 1 7
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+MeshActor2
+UID
+561850064
+next
+ Position
+2 1 7
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+MeshActor3
+UID
+3875785185
 next
 DirectionalLightActor
 0
@@ -95,58 +117,21 @@ TimeComponent
 WidgetComponent
 0
 AudioComponent
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
-Audio Filename
-step.wav
-Loop
-1
-Name
-AudioComponent0
-OwnerUID
-4081121672
-Pitch
-1
-Play On Start
-1
-Volume
--0.000151716
-next
+0
 DialogueComponent
-1
-File
-
-Name
-DialogueComponent0
-OwnerUID
-4081121672
-next
+0
 MemoryComponent
 0
 EmptyComponent
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
-Name
-EmptyComponent0
-OwnerUID
-4081121672
-next
+0
 MeshComponent
-2
+4
+2955963615
+MeshComponent0
  Pos
-0 0 0
+-3 -2 6
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
 Ambient
@@ -160,13 +145,9 @@ Cull
 Grid Obstacle
 0
 Mesh
-character_test.fbx
+fountain.fbx
 Metallic
 0
-Name
-MeshComponent0
-OwnerUID
-4081121672
 Rast State
 solid
 Shader
@@ -192,12 +173,14 @@ UvRotationSpeed
 UvScale
 1 1
 next
+861210359
+MeshComponent1
  Pos
-2 -0.5 2
+1 -1 7
  Rot
--0 0 -0 1
+-0 0 -0.000244141 1
  Scale
-5 1 5
+1 1 1
 Ambient
 1 1 1 1
 Blend State
@@ -209,13 +192,103 @@ Cull
 Grid Obstacle
 0
 Mesh
-node.fbx
+dock.fbx
 Metallic
 0
-Name
-MeshComponent1
-OwnerUID
-3108876758
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+bush.png
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+561850064
+MeshComponent2
+ Pos
+-2 1 7
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+boat.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+carpet.jpg
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+3875785185
+MeshComponent3
+ Pos
+2 1 7
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+barrel.fbx
+Metallic
+0
 Rast State
 solid
 Shader
@@ -246,14 +319,7 @@ InstanceMeshComponent
 BoxTriggerComponent
 0
 CameraComponent
-1
-FOV
-60
-Far Z
-1000
-Near Z
-0.01
-next
+0
 DirectionalLightComponent
 0
 PointLightComponent

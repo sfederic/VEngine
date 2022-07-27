@@ -175,9 +175,9 @@ std::vector<Properties> Actor::GetAllProps()
 
 	propsVector.push_back(GetProps());
 
-	for (Component* component : components)
+	for (auto& componentPair : componentMap)
 	{
-		Properties componentProps = component->GetProps();
+		Properties componentProps = componentPair.second->GetProps();
 		propsVector.push_back(componentProps);
 	}
 
@@ -225,9 +225,9 @@ bool Actor::SetName(std::string newName)
 
 void Actor::CreateAllComponents()
 {
-	for (Component* component : components)
+	for (auto& componentPair : componentMap)
 	{
-		component->Create();
+		componentPair.second->Create();
 	}
 }
 
@@ -235,9 +235,9 @@ void Actor::SetActive(bool newActiveValue)
 {
 	active = newActiveValue;
 
-	for (auto component : components)
+	for (auto& componentPair : componentMap)
 	{
-		component->active = newActiveValue;
+		componentPair.second->active = newActiveValue;
 	}
 
 	for (auto child : children)
@@ -270,21 +270,30 @@ void Actor::AddChild(Actor* actor)
 
 void Actor::AddComponent(Component* component)
 {
-	for (Component* c : components)
+	for (auto& componentPair : componentMap)
 	{
-		assert(c != component);
+		assert(componentPair.second != component);
 	}
 
-	components.push_back(component);
+	component->ownerUID = uid;
+
+	componentMap.emplace(component->name, component);
+}
+
+Component* Actor::FindComponent(std::string componentName)
+{
+	auto it = componentMap.find(componentName);
+	assert(it != componentMap.end());
+	return it->second;
 }
 
 Component* Actor::GetComponentByName(std::string componentName)
 {
-	for (auto component : components)
+	for (auto& componentPair : componentMap)
 	{
-		if (component->name == componentName)
+		if (componentPair.second->name == componentName)
 		{
-			return component;
+			return componentPair.second;
 		}
 	}
 
@@ -294,8 +303,8 @@ Component* Actor::GetComponentByName(std::string componentName)
 
 void Actor::ResetOwnerUIDToComponents()
 {
-	for (auto component : components)
+	for (auto& componentPair : componentMap)
 	{
-		component->ownerUID = uid;
+		componentPair.second->ownerUID = uid;
 	}
 }

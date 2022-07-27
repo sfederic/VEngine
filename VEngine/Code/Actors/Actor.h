@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
+#include <map>
 #include <set>
 #include "Transform.h"
 #include "Properties.h"
@@ -21,7 +22,7 @@ public:
 
 	std::set<std::string> tags;
 
-	std::vector<Component*> components;
+	std::map<std::string, Component*> componentMap;
 
 	SpatialComponent* rootComponent = nullptr;
 
@@ -112,14 +113,16 @@ public:
 
 	void AddComponent(Component* component);
 
+	Component* FindComponent(std::string componentName);
+
 	template <typename T>
 	std::vector<T*> GetComponentsOfType()
 	{
 		std::vector<T*> outComponents;
 
-		for (Component* component : components)
+		for (auto& componentPair : componentMap)
 		{
-			T* outComponent = dynamic_cast<T*>(component);
+			T* outComponent = dynamic_cast<T*>(componentPair.second);
 			if (outComponent)
 			{
 				outComponents.push_back(outComponent);
@@ -132,11 +135,11 @@ public:
 	template <typename T>
 	T* GetComponentByNameAndType(std::string componentName)
 	{
-		for (auto component : components)
+		for (auto& componentPair : componentMap)
 		{
-			if (component->name == componentName)
+			if (componentPair.second->name == componentName)
 			{
-				return static_cast<T*>(component);
+				return static_cast<T*>(componentPair.second);
 			}
 		}
 

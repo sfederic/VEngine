@@ -177,16 +177,20 @@ void FileSystem::LoadWorld(std::string worldName)
 				auto cs = csIt->second;
 
 				//Deserialise the existing components created in Actor constructors
-				for (auto component : cs->GetComponents())
+				for (int i = 0; i < cs->GetNumComponents(); i++)
 				{
-					UID previousUIDFromOwner = component->ownerUID;
+					UID ownerUID = 0;
+					d.is >> ownerUID;
 
-					auto props = component->GetProps();
+					std::wstring componentWName;
+					d.is >> componentWName;
+					std::string componentName = VString::wstos(componentWName);
+
+					Actor* owner = world.GetActorByUID(ownerUID);
+					Component* foundComponent = owner->FindComponent(componentName);
+
+					auto props = foundComponent->GetProps();
 					d.Deserialise(props);
-
-					component->ownerUID = previousUIDFromOwner;
-
-					component->Create();
 
 					//Decrement the amount of components to spawn
 					numObjectsToSpawn--;
@@ -200,7 +204,6 @@ void FileSystem::LoadWorld(std::string worldName)
 
 					auto props = component->GetProps();
 					d.Deserialise(props);
-					component->Create();
 
 					Actor* owner = world.GetActorByUID(component->ownerUID);
 					owner->AddComponent(component);
@@ -216,7 +219,6 @@ void FileSystem::LoadWorld(std::string worldName)
 			for (int i = 0; i < numObjectsToSpawn; i++)
 			{
 				Actor* actor = actorSystem->SpawnActor(Transform());
-				world.RemoveActorFromWorld(actor);
 				newActors.push_back(actor);
 			}
 
@@ -225,8 +227,6 @@ void FileSystem::LoadWorld(std::string worldName)
 			{
 				auto props = actor->GetProps();
 				d.Deserialise(props);
-
-				actor->Create();
 
 				actor->ResetOwnerUIDToComponents();
 

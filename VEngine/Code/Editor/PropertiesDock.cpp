@@ -112,9 +112,9 @@ void PropertiesDock::DisplayActorProperties(Actor* actor)
     IterateOverProperties(actorProps, gridRow);
 
     //Iterate over actor's component properties
-    for (auto component : actor->components)
+    for (auto& componentPair : actor->componentMap)
     {
-        auto componentProps = component->GetProps();
+        auto componentProps = componentPair.second->GetProps();
         IterateOverProperties(componentProps, gridRow);
     }
 

@@ -43,8 +43,7 @@ struct ComponentSystem : IComponentSystem
 
 		if (owner)
 		{
-			component->ownerUID = owner->GetUID();
-			owner->components.push_back(component);
+			owner->AddComponent(component);
 		}
 
 		return component;
@@ -100,8 +99,12 @@ struct ComponentSystem : IComponentSystem
 
 		for (T* component : components)
 		{
+			s.WriteLine(component->ownerUID);
+			s.WriteLine(VString::stows(component->name));
+
 			auto props = component->GetProps();
 			s.Serialise(props);
+
 			s.WriteLine(L"next");
 		}
 	}
