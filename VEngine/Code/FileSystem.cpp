@@ -19,6 +19,18 @@
 #include "Gameplay/BattleSystem.h"
 #include "Quests/QuestSystem.h"
 
+std::pair<UID, std::string> GetComponentOwnerUIDAndNameOnDeserialise(Deserialiser& d)
+{
+	UID ownerUID = 0;
+	d.is >> ownerUID;
+
+	std::wstring componentWName;
+	d.is >> componentWName;
+	std::string componentName = VString::wstos(componentWName);
+
+	return std::pair<UID, std::string>(ownerUID, componentName);
+}
+
 void FileSystem::SerialiseAllSystems()
 {
 	auto lastOf = world.worldFilename.find_last_of("/\\");
@@ -287,16 +299,4 @@ void FileSystem::ResetWorldState()
 		//It's important that this is called after editor::UpdateWorldList() for actor names
 		questSystem.ExecuteAllQuestsForCurrentHour();
 	}
-}
-
-std::pair<UID, std::string> GetComponentOwnerUIDAndNameOnDeserialise(Deserialiser& d)
-{
-	UID ownerUID = 0;
-	d.is >> ownerUID;
-
-	std::wstring componentWName;
-	d.is >> componentWName;
-	std::string componentName = VString::wstos(componentWName);
-
-	return std::pair<UID, std::string>(ownerUID, componentName);
 }
