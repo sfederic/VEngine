@@ -179,15 +179,10 @@ void FileSystem::LoadWorld(std::string worldName)
 				//Deserialise the existing components created in Actor constructors
 				for (int i = 0; i < cs->GetNumComponents(); i++)
 				{
-					UID ownerUID = 0;
-					d.is >> ownerUID;
+					auto ownerUIDAndName = GetComponentOwnerUIDAndNameOnDeserialise(d);
 
-					std::wstring componentWName;
-					d.is >> componentWName;
-					std::string componentName = VString::wstos(componentWName);
-
-					Actor* owner = world.GetActorByUID(ownerUID);
-					Component* foundComponent = owner->FindComponent(componentName);
+					Actor* owner = world.GetActorByUID(ownerUIDAndName.first);
+					Component* foundComponent = owner->FindComponent(ownerUIDAndName.second);
 
 					auto props = foundComponent->GetProps();
 					d.Deserialise(props);
@@ -202,15 +197,10 @@ void FileSystem::LoadWorld(std::string worldName)
 				{
 					auto component = cs->SpawnComponent(nullptr);
 
-					UID ownerUID = 0;
-					d.is >> ownerUID;
+					auto ownerUIDAndName = GetComponentOwnerUIDAndNameOnDeserialise(d);
 
-					std::wstring componentWName;
-					d.is >> componentWName;
-					std::string componentName = VString::wstos(componentWName);
-
-					component->ownerUID = ownerUID;
-					component->name = componentName;
+					component->ownerUID = ownerUIDAndName.first;
+					component->name = ownerUIDAndName.second;
 
 					auto props = component->GetProps();
 					d.Deserialise(props);
@@ -297,4 +287,16 @@ void FileSystem::ResetWorldState()
 		//It's important that this is called after editor::UpdateWorldList() for actor names
 		questSystem.ExecuteAllQuestsForCurrentHour();
 	}
+}
+
+std::pair<UID, std::string> GetComponentOwnerUIDAndNameOnDeserialise(Deserialiser& d)
+{
+	UID ownerUID = 0;
+	d.is >> ownerUID;
+
+	std::wstring componentWName;
+	d.is >> componentWName;
+	std::string componentName = VString::wstos(componentWName);
+
+	return std::pair<UID, std::string>(ownerUID, componentName);
 }
