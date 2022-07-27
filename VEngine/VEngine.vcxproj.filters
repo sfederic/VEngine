@@ -1057,6 +1057,9 @@
     <ClInclude Include="Code\Actors\TestActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Property.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

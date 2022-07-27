@@ -1,38 +1,8 @@
 #pragma once
 #include <map>
-#include <optional>
-#include <string>
-#include <typeindex>
 #include <vector>
-#include <functional>
+#include "Property.h"
 #include "Render/RenderTypes.h"
-
-struct Property
-{
-	void* data = nullptr;
-	//uint64_t offset = 0;
-	uint64_t size = 0;
-	std::optional<std::type_index> info;
-	std::string name;
-
-	//Path to take filenames from when working with autocomplete on stringwidgets.
-	//Need to pass in paths with leading & trailing slashes. Eg. "/Dialogues/"
-	std::string autoCompletePath;
-
-	//Sets widgets to be inactive/readonly
-	bool readOnly = false;
-
-	//hide property in UI
-	bool hide = false;
-
-	std::function<void(void*)> change;
-
-	template <typename T>
-	T* GetData()
-	{
-		return (T*)data;
-	}
-};
 
 struct Properties
 {

@@ -1,5 +1,5 @@
 #pragma once
-#include "Properties.h"
+#include "Property.h"
 
 struct IPropertyWidget
 {
