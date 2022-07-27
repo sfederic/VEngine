@@ -3,15 +3,11 @@
 #include <map>
 #include <functional>
 
-struct Console
+namespace Console
 {
-	//Holds the functions to call that are paired to their console command text
-	std::map<std::wstring, std::function<void()>> executeMap;
+	extern bool bConsoleActive;
 
-	std::wstring consoleString;
-	bool bConsoleActive = false;
-
-	Console();
+	void Init();
 	void ConsoleInput();
 	void Tick();
 
@@ -21,5 +17,3 @@ struct Console
 
 	void ExecuteString();
 };
-
-extern Console console;

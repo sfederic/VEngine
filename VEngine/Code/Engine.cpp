@@ -23,6 +23,8 @@ void Engine::Init(int argc, char* argv[])
 {
 	Core::Init();
 
+	Console::Init();
+
 	editor->Init(argc, argv);
 
 	activeCamera = &editorCamera;
@@ -94,14 +96,14 @@ void Engine::Render(float deltaTime)
 	Renderer::Render();
 	Renderer::RenderParticleEmitters();
 
-	console.InputTick();
+	Console::InputTick();
 
 	uiSystem.BeginDraw();
 	uiSystem.DrawAllWidgets(deltaTime);
 
 	Renderer::RenderSpritesInScreenSpace();
 
-	console.Tick();
+	Console::Tick();
 	debugMenu.Tick(deltaTime);
 	uiSystem.EndDraw();
 

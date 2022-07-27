@@ -10,9 +10,14 @@
 #include "FileSystem.h"
 #include "World.h"
 
-Console console;
+//Holds the functions to call that are paired to their console command text
+std::map<std::wstring, std::function<void()>> executeMap;
 
-Console::Console()
+bool Console::bConsoleActive;
+
+std::wstring consoleString;
+
+void Console::Init()
 {
 	//NOTE: command strings need to be uppercase with WndProc
 

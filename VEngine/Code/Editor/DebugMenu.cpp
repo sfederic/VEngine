@@ -90,7 +90,6 @@ void DebugMenu::Tick(float deltaTime)
 	RenderActorSystemMenu();
 	RenderComponentSystemMenu();
 	RenderMemoriesMenu();
-	RenderConsoleCommandsMenu();
 	RenderSkeletonViewMenu();
 	RenderCoreMenu();
 	RenderQuestMenu();
@@ -393,20 +392,6 @@ void DebugMenu::RenderMemoriesMenu()
 		ImGui::Text("Hour: %d | Minute: %d", m->hourAquired, m->minuteAquired);
 
 		ImGui::NewLine();
-	}
-
-	ImGui::End();
-}
-
-void DebugMenu::RenderConsoleCommandsMenu()
-{
-	if (!consoleCommandsMenuOpen) return;
-
-	ImGui::Begin("Console Commands");
-
-	for (auto& command : console.executeMap)
-	{
-		ImGui::Text("%S", command.first.c_str());
 	}
 
 	ImGui::End();

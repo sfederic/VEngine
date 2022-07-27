@@ -65,7 +65,6 @@ private:
 	void RenderActorSystemMenu();
 	void RenderComponentSystemMenu();
 	void RenderMemoriesMenu();
-	void RenderConsoleCommandsMenu();
 	void RenderSkeletonViewMenu();
 	void RenderPhysicsMenu();
 	void RenderCoreMenu();

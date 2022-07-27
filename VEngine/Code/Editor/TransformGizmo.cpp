@@ -58,7 +58,7 @@ void TransformGizmo::Tick()
     }
 
     //Exit early if console is active
-    if (console.bConsoleActive)
+    if (Console::bConsoleActive)
     {
         ImGui::End();
         return;
