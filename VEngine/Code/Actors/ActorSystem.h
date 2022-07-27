@@ -12,8 +12,6 @@
 template <typename T>
 class ActorSystem : IActorSystem
 {
-	friend class Actor;
-
 	std::vector<T*> actors;
 
 public:

@@ -5,10 +5,6 @@
 #include "World.h"
 #include "Camera.h"
 
-Actor::Actor()
-{
-}
-
 XMMATRIX Actor::GetWorldMatrix()
 {
 	//@Todo: this isn't going over actor parents and children

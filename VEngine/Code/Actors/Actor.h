@@ -38,8 +38,7 @@ private:
 	int actorSystemIndex = -1;
 
 public:
-	//Constructor for actors is called when world is loaded in editor.
-	Actor();
+	Actor() {}
 
 	XMMATRIX GetWorldMatrix();
 	void UpdateTransform(XMMATRIX parentWorld);
