@@ -7,6 +7,12 @@ class IActorSystem;
 struct Transform;
 struct SpatialComponent;
 
+enum class PickMode
+{
+	Actor,
+	Component
+};
+
 struct WorldEditor
 {
 	std::set<Actor*> pickedActors;
@@ -16,6 +22,8 @@ struct WorldEditor
 
 	IActorSystem* spawnSystem = nullptr;
 	std::string actorTemplateFilename;
+
+	PickMode pickMode = PickMode::Actor;
 
 	void Tick();
 	void DeselectPickedActor();

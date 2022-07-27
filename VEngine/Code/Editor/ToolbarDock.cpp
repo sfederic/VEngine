@@ -9,7 +9,7 @@
 #include "TransformGizmo.h"
 #include "FileSystem.h"
 #include "Camera.h"
-#include "Editor.h"
+#include "WorldEditor.h"
 
 ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 {
@@ -133,10 +133,10 @@ void ToolbarDock::PickModeChanged(const QString& item)
 {
 	if (item == pickerStringActor)
 	{
-		editor->pickMode = PickMode::Actor;
+		worldEditor.pickMode = PickMode::Actor;
 	}
 	else if (item == pickerStringComponent)
 	{
-		editor->pickMode = PickMode::Component;
+		worldEditor.pickMode = PickMode::Component;
 	}
 }

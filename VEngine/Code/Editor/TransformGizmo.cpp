@@ -97,7 +97,7 @@ void TransformGizmo::Tick()
         }
     }
 
-    switch (editor->pickMode)
+    switch (worldEditor.pickMode)
     {
         case PickMode::Actor:
         {
@@ -125,7 +125,7 @@ void TransformGizmo::Tick()
 
     if (CheckInUse())
     {
-        switch (editor->pickMode)
+        switch (worldEditor.pickMode)
         {
             case PickMode::Actor:
             {

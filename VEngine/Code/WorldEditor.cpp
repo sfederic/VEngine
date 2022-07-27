@@ -41,7 +41,7 @@ void WorldEditor::HandleActorPicking()
 		Ray screenPickRay;
 		if (RaycastFromScreen(screenPickRay))
 		{
-			switch (editor->pickMode)
+			switch (worldEditor.pickMode)
 			{
 			case PickMode::Actor:
 				if (Input::GetAsyncKey(Keys::Ctrl) || pickedActors.empty())

@@ -4,12 +4,6 @@
 class Actor;
 class IActorSystem;
 
-enum class PickMode
-{
-	Actor,
-	Component
-};
-
 //Base class for Toolkit and Native editors
 struct IEditor
 {
@@ -20,8 +14,6 @@ struct IEditor
 
 	int viewportWidth = 0;
 	int viewportHeight = 0;
-
-	PickMode pickMode = PickMode::Actor;
 
 	virtual void Init(int argc, char* argv[]) = 0;
 	virtual void Tick() = 0;
