@@ -56,7 +56,7 @@ void Engine::TickSystems(float deltaTime)
 
 	Timer::Tick(deltaTime);
 
-	worldEditor.Tick();
+	WorldEditor::Tick();
 	physicsSystem.Tick(deltaTime);
 	Renderer::Tick();
 

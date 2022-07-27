@@ -97,21 +97,21 @@ void TransformGizmo::Tick()
         }
     }
 
-    switch (worldEditor.pickMode)
+    switch (WorldEditor::GetPickMode())
     {
-        case PickMode::Actor:
+        case WorldEditor::PickMode::Actor:
         {
-            if (worldEditor.pickedActor)
+            if (WorldEditor::GetPickedActor())
             {
-                XMStoreFloat4x4(&pickedObjectMatrix, worldEditor.pickedActor->GetWorldMatrix());
+                XMStoreFloat4x4(&pickedObjectMatrix, WorldEditor::GetPickedActor()->GetWorldMatrix());
             }
             break;
         }
-        case PickMode::Component:
+        case WorldEditor::PickMode::Component:
         {
-            if (worldEditor.pickedComponent)
+            if (WorldEditor::GetPickedComponent())
             {
-                XMStoreFloat4x4(&pickedObjectMatrix, worldEditor.pickedComponent->GetWorldMatrix());
+                XMStoreFloat4x4(&pickedObjectMatrix, WorldEditor::GetPickedComponent()->GetWorldMatrix());
             }
             break;
         }
@@ -125,13 +125,13 @@ void TransformGizmo::Tick()
 
     if (CheckInUse())
     {
-        switch (worldEditor.pickMode)
+        switch (WorldEditor::GetPickMode())
         {
-            case PickMode::Actor:
+            case WorldEditor::PickMode::Actor:
             {
-                if (worldEditor.pickedActor)
+                if (WorldEditor::GetPickedActor())
                 {
-                    auto actor = worldEditor.pickedActor;
+                    auto actor = WorldEditor::GetPickedActor();
 
                     actor->SetPosition(trans);
                     actor->SetScale(scale);
@@ -141,11 +141,11 @@ void TransformGizmo::Tick()
                 }
                 break;
             }
-            case PickMode::Component:
+            case WorldEditor::PickMode::Component:
             {
-                if (worldEditor.pickedComponent)
+                if (WorldEditor::GetPickedComponent())
                 {
-                    auto component = worldEditor.pickedComponent;
+                    auto component = WorldEditor::GetPickedComponent();
 
                     component->SetWorldPosition(trans);
                     component->SetWorldScale(scale);

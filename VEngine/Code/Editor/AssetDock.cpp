@@ -265,8 +265,8 @@ void AssetDock::FilterAssets()
 void AssetDock::MeshFileClicked(const std::string meshFilename)
 {
     //Set spawner system as MeshActor
-    worldEditor.spawnSystem = (IActorSystem*)&MeshActor::system;
-    worldEditor.actorTemplateFilename = "";
+    WorldEditor::SetSpawnSystem((IActorSystem*)&MeshActor::system);
+    WorldEditor::SetActorTemplateFilename("");
 
     MeshActor::spawnMeshFilename = meshFilename;
 }
@@ -281,9 +281,9 @@ void AssetDock::ActorTemplateFileClicked(const std::string actorTemplateFilename
 
     IActorSystem* actorSystem = actorSystemCache.Get(VString::wstos(actorSystemName));
 
-    worldEditor.spawnSystem = actorSystem;
+    WorldEditor::SetSpawnSystem(actorSystem);
     Log("[%s] set as spawn system", actorSystem->GetName().c_str());
-    worldEditor.actorTemplateFilename = actorTemplateFilename;
+    WorldEditor::SetActorTemplateFilename(actorTemplateFilename);
 }
 
 void AssetDock::TextureFileClicked(const std::wstring textureFilename)
@@ -339,7 +339,7 @@ void AssetDock::CreateNewDialogueFile()
 
 void AssetDock::CreateNewActorTemplateFile()
 {
-    if (worldEditor.pickedActor)
+    if (WorldEditor::GetPickedActor())
     {
         QFileDialog dialog;
         QString actorTemplateFileName = dialog.getSaveFileName(nullptr, "Create New Actor Template File",
@@ -351,14 +351,14 @@ void AssetDock::CreateNewActorTemplateFile()
         Serialiser s(actorTemplateFileName.toStdString(), OpenMode::Out);
 
         //Write out actor's linked actorsystem name
-        s.WriteLine(worldEditor.pickedActor->GetActorSystem()->GetName().c_str());
+        s.WriteLine(WorldEditor::GetPickedActor()->GetActorSystem()->GetName().c_str());
 
         //Serialise all actor and actor's component properties
-        auto pickedActorProps = worldEditor.pickedActor->GetProps();
+        auto pickedActorProps = WorldEditor::GetPickedActor()->GetProps();
         s.Serialise(pickedActorProps);
         s.WriteLine(L"next");
 
-        for (auto& componentPair : worldEditor.pickedActor->componentMap)
+        for (auto& componentPair : WorldEditor::GetPickedActor()->componentMap)
         {
             //Write each component's linked componentsystem name
             s.WriteLine(componentPair.second->componentSystem->name.c_str());

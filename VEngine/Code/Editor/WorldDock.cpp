@@ -91,15 +91,15 @@ void WorldDock::ClickOnActorInList(QTreeWidgetItem* item, int column)
 	Actor* clickedActor = world.GetActorByName(actorName.toStdString());
 	if (clickedActor)
 	{
-		worldEditor.pickedActor = clickedActor;
+		WorldEditor::SetPickedActor(clickedActor);
 
 		if (actorListSelectionMode == QAbstractItemView::SelectionMode::MultiSelection)
 		{
-			worldEditor.pickedActors.insert(clickedActor);
+			WorldEditor::AddPickedActor(clickedActor);
 		}
 		else
 		{
-			worldEditor.pickedActors.clear();
+			WorldEditor::ClearPickedActors();
 		}
 
 		editor->SetActorProps(clickedActor);
@@ -113,7 +113,7 @@ void WorldDock::ArrowSelectActorInList()
 	{
 		QString pickedActorName = items[0]->text(0);
 		auto pickedActor = world.GetActorByName(pickedActorName.toStdString());
-		worldEditor.pickedActor = pickedActor;
+		WorldEditor::SetPickedActor(pickedActor);
 		editor->SetActorProps(pickedActor);
 	}
 }
@@ -122,7 +122,7 @@ void WorldDock::ActorNameChanged(QTreeWidgetItem* item, int column)
 {
 	QString newActorName = item->text(column);
 
-	Actor* actor = worldEditor.pickedActor;
+	Actor* actor = WorldEditor::GetPickedActor();
 	assert(actor); //pickedActor should be set before this is hit in the other events
 
 	if (!actor->SetName(newActorName.toStdString()))
@@ -152,7 +152,7 @@ void WorldDock::SelectActorInList()
 	std::vector<std::string> actorNames;
 	QList<QTreeWidgetItem*> listItems;
 
-	for (auto actor : worldEditor.pickedActors)
+	for (auto actor : WorldEditor::GetPickedActors())
 	{
 		std::string actorName = actor->GetName();
 
@@ -186,7 +186,7 @@ void WorldDock::RemoveActorFromList()
 	actorTreeWidget->blockSignals(true);
 
 	QList<QTreeWidgetItem*> foundItems;
-	for (auto actor : worldEditor.pickedActors)
+	for (Actor* actor : WorldEditor::GetPickedActors())
 	{
 		std::string actorName = actor->GetName();
 		foundItems = actorTreeWidget->findItems(QString::fromStdString(actorName), Qt::MatchExactly);

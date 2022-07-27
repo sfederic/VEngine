@@ -1,42 +1,41 @@
 #pragma once
+
 #include <set>
 #include <string>
 
 class Actor;
 class IActorSystem;
-struct Transform;
 struct SpatialComponent;
 
-enum class PickMode
+namespace WorldEditor
 {
-	Actor,
-	Component
-};
-
-struct WorldEditor
-{
-	std::set<Actor*> pickedActors;
-	Actor* pickedActor = nullptr;
-
-	SpatialComponent* pickedComponent = nullptr;
-
-	IActorSystem* spawnSystem = nullptr;
-	std::string actorTemplateFilename;
-
-	PickMode pickMode = PickMode::Actor;
+	enum class PickMode
+	{
+		Actor,
+		Component
+	};
 
 	void Tick();
+
 	void DeselectPickedActor();
+	void DeselectAll();
+
 	void SetPickedActor(Actor* actor);
+	Actor* GetPickedActor();
+
+	void AddPickedActor(Actor* actor);
+	std::set<Actor*>& GetPickedActors();
+	void ClearPickedActors();
+
 	void SetPickedComponent(SpatialComponent* spatialComponent);
+	SpatialComponent* GetPickedComponent();
 
-private:
-	void HandleActorPicking();
-	void DuplicateActor();
-	void SaveWorld();
-	void DeleteActor();
-	void SpawnActorOnClick();
-	void SpawnActor(Transform& transform);
+	void SetSpawnSystem(IActorSystem* newSpawnSystem);
+	IActorSystem* GetSpawnSystem();
+
+	void SetPickMode(PickMode newPickMode);
+	PickMode GetPickMode();
+
+	std::string GetActorTempateFilename();
+	void SetActorTemplateFilename(std::string netActorTempateFilename);
 };
-
-extern WorldEditor worldEditor;

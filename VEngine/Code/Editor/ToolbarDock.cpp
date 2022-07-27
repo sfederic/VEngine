@@ -133,10 +133,10 @@ void ToolbarDock::PickModeChanged(const QString& item)
 {
 	if (item == pickerStringActor)
 	{
-		worldEditor.pickMode = PickMode::Actor;
+		WorldEditor::SetPickMode(WorldEditor::PickMode::Actor);
 	}
 	else if (item == pickerStringComponent)
 	{
-		worldEditor.pickMode = PickMode::Component;
+		WorldEditor::SetPickMode(WorldEditor::PickMode::Component);
 	}
 }

@@ -149,8 +149,7 @@ void Core::StartGame()
 
 	world.WakeAndStartAllActors();
 
-	worldEditor.pickedActor = nullptr;
-	worldEditor.pickedComponent = nullptr;
+	WorldEditor::DeselectAll();
 
 	editor->SetPlayButtonText("Stop");
 }
@@ -169,7 +168,7 @@ void Core::EndGame()
 	activeCamera = &editorCamera;
 
 	//Clear the properties dock or you'll end up with pointer problems
-	worldEditor.DeselectPickedActor();
+	WorldEditor::DeselectPickedActor();
 
 	editor->SetPlayButtonText("Play");
 }

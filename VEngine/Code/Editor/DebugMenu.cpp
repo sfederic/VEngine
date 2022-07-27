@@ -123,7 +123,7 @@ void DebugMenu::RenderActorProps()
 		return;
 	}
 
-	if (worldEditor.pickedActor == nullptr)
+	if (WorldEditor::GetPickedActor() == nullptr)
 	{
 		return;
 	}
@@ -132,7 +132,7 @@ void DebugMenu::RenderActorProps()
 	ImGui::Begin("Actor Properties");
 
 	//Iterate over actor props
-	for (auto& props : worldEditor.pickedActor->GetAllProps())
+	for (auto& props : WorldEditor::GetPickedActor()->GetAllProps())
 	{
 		IterateOverProperties(props);
 	}
@@ -418,7 +418,7 @@ void DebugMenu::RenderSkeletonViewMenu()
 
 	ImGui::Begin("Skeleton View");
 
-	auto picked = worldEditor.pickedActor;
+	auto picked = WorldEditor::GetPickedActor();
 	if (picked)
 	{
 		auto meshes = picked->GetComponentsOfType<MeshComponent>();

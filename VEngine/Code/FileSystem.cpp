@@ -271,8 +271,7 @@ void FileSystem::CreateGameplayWorldSave(std::string worldName)
 void FileSystem::ResetWorldState()
 {
 	//Deselect any existing actors, because TransformGizmo will stay at previous positions.
-	worldEditor.pickedActor = nullptr;
-	worldEditor.pickedComponent = nullptr;
+	WorldEditor::DeselectAll();
 
 	//Clear all commands
 	commandSystem.commands.clear();

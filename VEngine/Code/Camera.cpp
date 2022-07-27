@@ -51,9 +51,9 @@ XMMATRIX CameraComponent::GetViewMatrix()
 	{
 		XMVECTOR focus = position + forward;
 
-		if (arcBallMovementOn && worldEditor.pickedActor)
+		if (arcBallMovementOn && WorldEditor::GetPickedActor())
 		{
-			focus = worldEditor.pickedActor->GetPositionVector();
+			focus = WorldEditor::GetPickedActor()->GetPositionVector();
 		}
 
 		view = XMMatrixLookAtLH(position, focus, VMath::XMVectorUp());
@@ -103,7 +103,7 @@ void CameraComponent::MouseMove(int x, int y)
 		arcBallMovementOn = true;
 
 		auto pos = GetPositionV();
-		auto pivot = worldEditor.pickedActor->GetPositionVector();
+		auto pivot = WorldEditor::GetPickedActor()->GetPositionVector();
 		focusPoint = pivot;
 
 		XMMATRIX xRot = XMMatrixIdentity();
@@ -212,9 +212,9 @@ void CameraComponent::Tick(float deltaTime)
 			//Zoom onto selected actor
 			if (Input::GetKeyUp(Keys::F))
 			{
-				if (worldEditor.pickedActor)
+				if (WorldEditor::GetPickedActor())
 				{
-					ZoomTo(worldEditor.pickedActor);
+					ZoomTo(WorldEditor::GetPickedActor());
 				}
 			}
 

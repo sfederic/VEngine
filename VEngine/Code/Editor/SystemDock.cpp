@@ -59,7 +59,7 @@ void SystemDock::ClickOnActorSystemItem(QListWidgetItem* item)
 	QString actorSystemName = item->text();
 
 	//Set spawn system based on the actorsystem clicked in the dock
-	worldEditor.spawnSystem = actorSystemCache.Get(actorSystemName.toStdString());
+	WorldEditor::SetSpawnSystem(actorSystemCache.Get(actorSystemName.toStdString()));
 
 	selectedActorSystemLabel->setText(actorSystemName);
 }

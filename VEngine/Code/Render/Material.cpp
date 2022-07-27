@@ -54,7 +54,7 @@ static void ReassignTexture(void* data)
 
 	//@Todo: these 'get all mesh' calls aren't really right as each mesh component would
 	//have its own properties, but it works ok for simple actors for now.
-	auto meshes = worldEditor.pickedActor->GetComponentsOfType<MeshComponent>();
+	auto meshes = WorldEditor::GetPickedActor()->GetComponentsOfType<MeshComponent>();
 	for (auto mesh : meshes)
 	{
 		mesh->material->texture = swapTexture;
@@ -72,9 +72,9 @@ static void ReassignRastState(void* data)
 		return;
 	}
 
-	if (worldEditor.pickedActor)
+	if (WorldEditor::GetPickedActor())
 	{
-		auto meshes = worldEditor.pickedActor->GetComponentsOfType<MeshComponent>();
+		auto meshes = WorldEditor::GetPickedActor()->GetComponentsOfType<MeshComponent>();
 		for (auto mesh : meshes)
 		{
 			mesh->material->rastState = foundRastState;
@@ -93,9 +93,9 @@ static void ReassignBlendState(void* data)
 		return;
 	}
 
-	if (worldEditor.pickedActor)
+	if (WorldEditor::GetPickedActor())
 	{
-		auto meshes = worldEditor.pickedActor->GetComponentsOfType<MeshComponent>();
+		auto meshes = WorldEditor::GetPickedActor()->GetComponentsOfType<MeshComponent>();
 		for (auto mesh : meshes)
 		{
 			mesh->material->blendState = foundBlendState;
@@ -113,7 +113,7 @@ static void ReassignShader(void* data)
 		return;
 	}
 
-	auto meshes = worldEditor.pickedActor->GetComponentsOfType<MeshComponent>();
+	auto meshes = WorldEditor::GetPickedActor()->GetComponentsOfType<MeshComponent>();
 	for (auto mesh : meshes)
 	{
 		mesh->material->shader = foundShader;

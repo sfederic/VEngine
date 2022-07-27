@@ -12,7 +12,7 @@ SkeletonEditor::SkeletonEditor(QWidget* parent) : QWidget(parent)
 	boneTreeWidget->setWindowTitle("Skeleton Editor");
 	boneTreeWidget->setHeaderLabel("Bones");
 
-	auto meshes = worldEditor.pickedActor->GetComponentsOfType<MeshComponent>();
+	auto meshes = WorldEditor::GetPickedActor()->GetComponentsOfType<MeshComponent>();
 	auto mesh = meshes.front();
 	auto skeleton = mesh->GetSkeleton();
 

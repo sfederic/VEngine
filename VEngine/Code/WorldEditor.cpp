@@ -13,7 +13,19 @@
 #include "Core.h"
 #include "Asset/AssetPaths.h"
 
-WorldEditor worldEditor;
+std::set<Actor*> pickedActors;
+Actor* pickedActor;
+SpatialComponent* pickedComponent;
+IActorSystem* spawnSystem;
+std::string actorTemplateFilename;
+WorldEditor::PickMode pickMode = WorldEditor::PickMode::Actor;
+
+void HandleActorPicking();
+void DuplicateActor();
+void SaveWorld();
+void DeleteActor();
+void SpawnActorOnClick();
+void SpawnActor(Transform& transform);
 
 void WorldEditor::Tick()
 {
@@ -29,7 +41,7 @@ void WorldEditor::Tick()
 	SaveWorld();
 }
 
-void WorldEditor::HandleActorPicking()
+void HandleActorPicking()
 {
 	if (transformGizmo.CheckMouseOver() || Core::gameplayOn) 
 	{
@@ -41,9 +53,9 @@ void WorldEditor::HandleActorPicking()
 		Ray screenPickRay;
 		if (RaycastFromScreen(screenPickRay))
 		{
-			switch (worldEditor.pickMode)
+			switch (pickMode)
 			{
-			case PickMode::Actor:
+			case WorldEditor::PickMode::Actor:
 				if (Input::GetAsyncKey(Keys::Ctrl) || pickedActors.empty())
 				{
 					pickedActors.insert(screenPickRay.hitActor);
@@ -53,18 +65,18 @@ void WorldEditor::HandleActorPicking()
 					pickedActors.clear();
 				}
 
-				SetPickedActor(screenPickRay.hitActor);
+				WorldEditor::SetPickedActor(screenPickRay.hitActor);
 				break;
 
-			case PickMode::Component:
-				SetPickedComponent(screenPickRay.hitComponent);
+			case WorldEditor::PickMode::Component:
+				WorldEditor::SetPickedComponent(screenPickRay.hitComponent);
 				break;
 			}
 		}
 	}
 }
 
-void WorldEditor::DuplicateActor()
+void DuplicateActor()
 {
 	if (Input::GetAsyncKey(Keys::Ctrl))
 	{
@@ -115,7 +127,7 @@ void WorldEditor::DuplicateActor()
 	}
 }
 
-void WorldEditor::SaveWorld()
+void SaveWorld()
 {
 	if (Input::GetAsyncKey(Keys::Ctrl))
 	{
@@ -126,7 +138,7 @@ void WorldEditor::SaveWorld()
 	}
 }
 
-void WorldEditor::DeleteActor()
+void DeleteActor()
 {
 	if (pickedActor)
 	{
@@ -159,7 +171,7 @@ void WorldEditor::DeleteActor()
 }
 
 //Spawn actor on middle mouse click in viewport
-void WorldEditor::SpawnActorOnClick()
+void SpawnActorOnClick()
 {
 	if (Input::GetMouseMiddleUp())
 	{
@@ -203,7 +215,7 @@ void WorldEditor::SpawnActorOnClick()
 	}
 }
 
-void WorldEditor::SpawnActor(Transform& transform)
+void SpawnActor(Transform& transform)
 {
 	Actor* actor = nullptr;
 
@@ -257,6 +269,12 @@ void WorldEditor::DeselectPickedActor()
 	editor->ClearProperties();
 }
 
+void WorldEditor::DeselectAll()
+{
+	DeselectPickedActor();
+	pickedComponent = nullptr;
+}
+
 void WorldEditor::SetPickedActor(Actor* actor)
 {
 	assert(actor);
@@ -273,3 +291,61 @@ void WorldEditor::SetPickedComponent(SpatialComponent* spatialComponent)
 	assert(spatialComponent);
 	pickedComponent = spatialComponent;
 }
+
+Actor* WorldEditor::GetPickedActor()
+{
+	return pickedActor;
+}
+
+std::set<Actor*>& WorldEditor::GetPickedActors()
+{
+	return pickedActors;
+}
+
+WorldEditor::PickMode WorldEditor::GetPickMode()
+{
+	return pickMode;
+}
+
+SpatialComponent* WorldEditor::GetPickedComponent()
+{
+	return pickedComponent;
+}
+
+void WorldEditor::SetPickMode(PickMode newPickMode)
+{
+	pickMode = newPickMode;
+}
+
+void WorldEditor::SetSpawnSystem(IActorSystem* newSpawnSystem)
+{
+	assert(newSpawnSystem);
+	spawnSystem = newSpawnSystem;
+}
+
+IActorSystem* WorldEditor::GetSpawnSystem()
+{
+	return spawnSystem;
+}
+
+void WorldEditor::AddPickedActor(Actor* actor)
+{
+	assert(actor);
+	pickedActors.insert(actor);
+}
+
+void WorldEditor::ClearPickedActors()
+{
+	pickedActors.clear();
+}
+
+std::string WorldEditor::GetActorTempateFilename()
+{
+	return actorTemplateFilename;
+}
+
+void WorldEditor::SetActorTemplateFilename(std::string netActorTempateFilename)
+{
+	actorTemplateFilename = netActorTempateFilename;
+}
+
