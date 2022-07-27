@@ -11,17 +11,12 @@ namespace Core
 
 	extern bool isImGUIEnabled;
 
-	extern __int64 tickFrequency;
-	extern __int64 frameStartTime;
-	extern __int64 frameEndTime;
-
 	extern double timeSinceStartup;
+
+	extern uint32_t finalFrameCount;
 
 	//Speed at which game runs
 	extern float timeScale;
-
-	extern uint32_t frameCount;
-	extern uint32_t finalFrameCount;
 
 	//When starting a gameplay session, keep the first loaded world's name here to switch back
 	//to this level when gameplay stops in-editor.

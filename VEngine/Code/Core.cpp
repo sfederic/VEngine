@@ -21,6 +21,12 @@ double ticks = 0.0;
 double deltaTime = 0.0;
 double deltaAccum = 0.0;
 
+__int64 tickFrequency;
+__int64 frameStartTime;
+__int64 frameEndTime;
+
+uint32_t frameCount;
+
 namespace Core
 {
 	std::string initialStartingWorldFromEditor;
@@ -29,16 +35,11 @@ namespace Core
 	bool gameplayOn = false;
 	bool isImGUIEnabled = true;
 
-	__int64 tickFrequency;
-	__int64 frameStartTime;
-	__int64 frameEndTime;
-
 	double timeSinceStartup;
 
-	float timeScale = 1.0f;
-
-	uint32_t frameCount;
 	uint32_t finalFrameCount;
+
+	float timeScale = 1.0f;
 }
 
 float Core::GetDeltaTime()
@@ -115,11 +116,11 @@ void Core::EndTimer()
 
 	deltaAccum += deltaTime;
 	timeSinceStartup += deltaTime;
-	Core::frameCount++;
+	frameCount++;
 
 	if (deltaAccum > 1.0)
 	{
-		finalFrameCount = Core::frameCount;
+		finalFrameCount = frameCount;
 
 		frameCount = 0;
 		deltaAccum = 0.0;
