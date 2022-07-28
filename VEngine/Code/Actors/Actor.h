@@ -112,6 +112,8 @@ public:
 
 	void AddComponent(Component* component);
 
+	void RemoveComponent(std::string componentName);
+
 	Component* FindComponent(std::string componentName);
 
 	template <typename T>

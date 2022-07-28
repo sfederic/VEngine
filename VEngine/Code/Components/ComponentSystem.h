@@ -60,6 +60,9 @@ struct ComponentSystem : IComponentSystem
 
 	void Remove(int index)
 	{
+		Actor* owner = World::GetActorByUID(components[index]->ownerUID);
+		owner->RemoveComponent(components[index]->name);
+
 		std::swap(components[index], components.back());
 		components[index]->index = index;
 		components[index]->name = this->name + std::to_string(index);

@@ -277,6 +277,28 @@ void Actor::AddComponent(Component* component)
 	componentMap.emplace(component->name, component);
 }
 
+void Actor::RemoveComponent(std::string componentName)
+{
+	Component* component = componentMap[componentName];
+
+	assert(component != rootComponent && "Cannot remove Root Component of Actor");
+
+	//Re-parent SpatialComponent's children to its own parent 
+	auto spatialComponent = dynamic_cast<SpatialComponent*>(component);
+	if (spatialComponent)
+	{
+		if (spatialComponent->parent)
+		{
+			for (auto child : spatialComponent->children)
+			{
+				child->parent = spatialComponent->parent;
+			}
+		}
+	}
+
+	componentMap.erase(componentName);
+}
+
 Component* Actor::FindComponent(std::string componentName)
 {
 	auto it = componentMap.find(componentName);
