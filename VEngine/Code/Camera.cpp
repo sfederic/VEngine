@@ -103,7 +103,12 @@ void CameraComponent::MouseMove(int x, int y)
 		arcBallMovementOn = true;
 
 		auto pos = GetPositionV();
-		auto pivot = WorldEditor::GetPickedActor()->GetPositionVector();
+
+		Actor* pickedActor = WorldEditor::GetPickedActor();
+		if (pickedActor == nullptr) return;
+
+		auto pivot = pickedActor->GetPositionVector();
+
 		focusPoint = pivot;
 
 		XMMATRIX xRot = XMMatrixIdentity();
