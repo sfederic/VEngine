@@ -632,7 +632,7 @@ void CheckSupportedFeatures()
 
 void RenderShadowPass()
 {
-	PROFILE_START
+	Profile::Start();
 
 	shadowMap->BindDsvAndSetNullRenderTarget(context);
 
@@ -664,7 +664,7 @@ void RenderShadowPass()
 
 	SetNullRTV();
 
-	PROFILE_END
+	Profile::End();
 }
 
 void RenderSetup()
@@ -707,7 +707,7 @@ void SetShadowResources()
 
 void Renderer::Render()
 {
-	PROFILE_START
+	Profile::Start();
 
 	StartGPUQueries();
 
@@ -743,7 +743,7 @@ void Renderer::Render()
 	RenderCameraMeshes();
 	RenderPostProcess();
 
-	PROFILE_END
+	Profile::End();
 }
 
 void SetReflectionResources()
@@ -782,7 +782,7 @@ void SetShaderMeshData(MeshComponent* mesh)
 
 void RenderMeshComponents()
 {
-	PROFILE_START
+	Profile::Start();
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
 
@@ -815,7 +815,7 @@ void RenderMeshComponents()
 	context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSRV);
 	context->PSSetShaderResources(reflectionTextureResgiter, 1, &nullSRV);
 
-	PROFILE_END
+	Profile::End();
 }
 
 void Renderer::RenderLightProbeViews()
@@ -999,7 +999,7 @@ void Renderer::RenderLightProbeViews()
 
 void RenderPlanarReflections()
 {
-	PROFILE_START
+	Profile::Start();
 
 	if (ReflectionPlane::system.GetActors().empty()) return;
 	assert(ReflectionPlane::system.GetActors().size() == 1);
@@ -1069,7 +1069,7 @@ void RenderPlanarReflections()
 	//Remove reflection RTV
 	SetNullRTV();
 
-	PROFILE_END
+	Profile::End();
 }
 
 void RenderInstanceMeshComponents()
@@ -1077,7 +1077,7 @@ void RenderInstanceMeshComponents()
 	//@Todo: shadows for instancemeshes (might not even need it since Grid nodes are the only things rendererd that way)
 	//@Todo: animated instance meshes
 
-	PROFILE_START
+	Profile::Start();
 
 	//Set matrices (Instance mesh model matrices placed in a structured buffer)
 	shaderMatrices.model = XMMatrixIdentity();
@@ -1111,7 +1111,7 @@ void RenderInstanceMeshComponents()
 		DrawMeshInstanced(instanceMesh);
 	}
 
-	PROFILE_END
+	Profile::End();
 }
 
 void RenderBounds()
@@ -1392,7 +1392,7 @@ void RenderSkeletonBones()
 
 void RenderPolyboards()
 {
-	PROFILE_START
+	Profile::Start();
 
 	shaderMatrices.texMatrix = XMMatrixIdentity();
 	shaderMatrices.model = XMMatrixIdentity();
@@ -1436,12 +1436,12 @@ void RenderPolyboards()
 		context->DrawIndexed(polyboard->indices.size(), 0, 0);
 	}
 
-	PROFILE_END
+	Profile::End();
 }
 
 void RenderSpriteSheets()
 {
-	PROFILE_START
+	Profile::Start();
 
 	for (auto spriteSheet : SpriteSheet::system.components)
 	{
@@ -1467,12 +1467,12 @@ void RenderSpriteSheets()
 		context->DrawIndexed(6, 0, 0);
 	}
 
-	PROFILE_END
+	Profile::End();
 }
 
 void AnimateSkeletalMesh(MeshComponent* mesh)
 {
-	PROFILE_START
+	Profile::Start();
 
 	Skeleton* skeleton = mesh->meshDataProxy->skeleton;
 
@@ -1520,12 +1520,12 @@ void AnimateSkeletalMesh(MeshComponent* mesh)
 		}
 	}
 
-	PROFILE_END
+	Profile::End();
 }
 
 void Renderer::RenderParticleEmitters()
 {
-	PROFILE_START
+	Profile::Start();
 
 	//Only need to build sprite quad once for in-world rendering
 	spriteSystem.BuildSpriteQuadForParticleRendering();
@@ -1577,12 +1577,12 @@ void Renderer::RenderParticleEmitters()
 		}
 	}
 
-	PROFILE_END
+	Profile::End();
 }
 
 void Renderer::RenderSpritesInScreenSpace()
 {
-	PROFILE_START
+	Profile::Start();
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
 	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
@@ -1605,13 +1605,13 @@ void Renderer::RenderSpritesInScreenSpace()
 		context->DrawIndexed(6, 0, 0);
 	}
 
-	PROFILE_END
+	Profile::End();
 }
 
 //Loops over every light component and moves their data into the lights constant buffer
 void UpdateLights()
 {
-	PROFILE_START
+	Profile::Start();
 
 	int shaderLightsIndex = 0;
 
@@ -1659,7 +1659,7 @@ void UpdateLights()
 	cbLights->Map(&shaderLights);
 	cbLights->SetPS();
 
-	PROFILE_END
+	Profile::End();
 }
 
 //Not many good references on D3D11 Querying 
@@ -1697,7 +1697,7 @@ void EndGPUQueries()
 //Called after Present()
 void GetGPUQueryData()
 {
-	PROFILE_START
+	Profile::Start();
 
 	if (debugMenu.fpsMenuOpen)
 	{
@@ -1738,7 +1738,7 @@ void GetGPUQueryData()
 		Renderer::frameTime = (float)(timeStampEndFrame - timeStampStartFrame) / (float)timeStampDisjoint.Frequency * 1000.f;
 	}
 
-	PROFILE_END
+	Profile::End();
 }
 
 void Renderer::Present()

@@ -130,26 +130,26 @@ std::vector<IActorSystem*> World::GetLayerActorSystems()
 
 void World::TickAllActorSystems(float deltaTime)
 {
-	PROFILE_START
+	Profile::Start();
 
 	for (IActorSystem* actorSystem : activeActorSystems)
 	{
 		actorSystem->Tick(deltaTime);
 	}
 
-	PROFILE_END
+	Profile::End();
 }
 
 void World::TickAllComponentSystems(float deltaTime)
 {
-	PROFILE_START
+	Profile::Start();
 
 	for (IComponentSystem* componentSystem : activeComponentSystems)
 	{
 		componentSystem->Tick(deltaTime);
 	}
 
-	PROFILE_END
+	Profile::End();
 }
 
 std::vector<Actor*> World::GetAllActorsInWorld()

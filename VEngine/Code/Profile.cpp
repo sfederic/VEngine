@@ -1,7 +1,5 @@
 #include "vpch.h"
 #include "Profile.h"
-#define _AMD64_
-#include <profileapi.h>
 #include <cassert>
 #include <source_location>
 

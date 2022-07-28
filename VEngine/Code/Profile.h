@@ -21,14 +21,11 @@ namespace Profile
 {
 	extern std::unordered_map<std::string, TimeFrame> timeFrames;
 
-	void Start(std::source_location location);
-	void End(std::source_location location);
+	void Start(std::source_location location = std::source_location::current());
+	void End(std::source_location location = std::source_location::current());
 	void Reset();
 
 	//Quick timing functions that need to be called once off without need for constant profiling.
 	__int64 QuickStart();
 	double QuickEnd(__int64 startTime);
 }
-
-#define PROFILE_START Profile::Start(std::source_location::current());
-#define PROFILE_END Profile::End(std::source_location::current());
