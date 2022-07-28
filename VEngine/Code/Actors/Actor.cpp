@@ -161,6 +161,7 @@ Properties Actor::GetProps()
 	props.Add(" Rotation", &rootComponent->transform.rotation);
 	props.Add("UID", &uid).hide = true;
 	props.Add("Name", &name).hide = true;
+	props.Add(" Enabled", &active);
 
 	return props;
 }

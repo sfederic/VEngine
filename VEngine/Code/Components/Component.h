@@ -34,6 +34,8 @@ struct Component
 
 		//props.Add("Name", &name).hide = true;
 		//props.Add("OwnerUID", &ownerUID).hide = true;
+		props.Add(" Enabled", &active);
+
 		return props;
 	}
 };

@@ -46,7 +46,7 @@ Player::Player()
 
 	rootComponent->AddChild(camera);
 
-	dialogueComponent = DialogueComponent::system.Add("DialogueComponent", this);
+	dialogueComponent = DialogueComponent::system.Add("Dialogue", this);
 
 	stepSounds = AudioComponent::system.Add("StepSounds", this);
 	stepSounds->loop = true;
