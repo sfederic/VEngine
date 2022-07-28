@@ -52,7 +52,6 @@ void CreateRTVAndDSV();
 void CreateInputLayout();
 void CreateRasterizerStates();
 void CreateBlendStates();
-void CreateQueries();
 void CreateConstantBuffers();
 void CreatePlanarReflectionBuffers();
 void CreateLightProbeBuffers();
@@ -70,9 +69,6 @@ void RenderSpriteSheets();
 void RenderPostProcess();
 void AnimateSkeletalMesh(MeshComponent* mesh);
 void UpdateLights();
-void StartGPUQueries();
-void EndGPUQueries();
-void GetGPUQueryData();
 void MapBuffer(ID3D11Resource* resource, const void* src, size_t size);
 void DrawMesh(MeshComponent* mesh);
 void DrawMeshInstanced(InstanceMeshComponent* mesh);
@@ -174,14 +170,6 @@ ID3D11Texture2D* postBuffer = nullptr;
 ID3D11RenderTargetView* postRTV = nullptr;
 ID3D11ShaderResourceView* postSRV = nullptr;
 
-//Queries for GPU profiling (Note that the queires are double buffered to deal with two frames for the GPU
-//being ahead of the GPU)
-ID3D11Query* frameStartQuery[2];
-ID3D11Query* frameEndQuery[2];
-ID3D11Query* timeDisjointQuery[2];
-int frameQueryIndex = 0;
-int framesCollected = -1;
-
 //Quality = 0 and Count = 1 are the 'default'
 DXGI_SAMPLE_DESC sampleDesc;
 
@@ -220,7 +208,6 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	CreateRasterizerStates();
 	CreateBlendStates();
 	CreateConstantBuffers();
-	CreateQueries();
 
 	CreatePostProcessRenderTarget();
 
@@ -452,25 +439,6 @@ void CreateBlendStates()
 		BlendState* bs = new BlendState(BlendStates::Default, blendStateAlphaToCoverage);
 		blendStateMap[bs->name] = bs;
 	}
-}
-
-void CreateQueries()
-{
-	D3D11_QUERY_DESC qd = {};
-
-	//Create disjoint queries
-	qd.Query = D3D11_QUERY_TIMESTAMP_DISJOINT;
-	HR(device->CreateQuery(&qd, &timeDisjointQuery[0]));
-	HR(device->CreateQuery(&qd, &timeDisjointQuery[1]));
-
-	//Create frame start/end queries
-	qd.Query = D3D11_QUERY_TIMESTAMP;
-
-	HR(device->CreateQuery(&qd, &frameStartQuery[0]));
-	HR(device->CreateQuery(&qd, &frameStartQuery[1]));
-
-	HR(device->CreateQuery(&qd, &frameEndQuery[0]));
-	HR(device->CreateQuery(&qd, &frameEndQuery[1]));
 }
 
 void CreateConstantBuffers()
@@ -708,8 +676,6 @@ void SetShadowResources()
 void Renderer::Render()
 {
 	Profile::Start();
-
-	StartGPUQueries();
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
 	shaderMatrices.lightMVP = shadowMap->OutputMatrix();
@@ -1662,90 +1628,9 @@ void UpdateLights()
 	Profile::End();
 }
 
-//Not many good references on D3D11 Querying 
-//REF:https://www.reedbeta.com/blog/gpu-profiling-101/
-void StartGPUQueries()
-{
-	if (debugMenu.fpsMenuOpen)
-	{
-		context->Begin(timeDisjointQuery[frameQueryIndex]);
-		context->End(frameStartQuery[frameQueryIndex]);
-
-		GetGPUQueryData();
-	}
-}
-
-void EndGPUQueries()
-{
-	static bool firstRun = true;
-
-	if (debugMenu.fpsMenuOpen)
-	{
-		if (firstRun)
-		{
-			firstRun = false;
-			return;
-		}
-
-		context->End(frameEndQuery[frameQueryIndex]);
-		context->End(timeDisjointQuery[frameQueryIndex]);
-
-		++frameQueryIndex &= 1;
-	}
-}
-
-//Called after Present()
-void GetGPUQueryData()
-{
-	Profile::Start();
-
-	if (debugMenu.fpsMenuOpen)
-	{
-		//No frame data has been collected yet
-		if (framesCollected < 0)
-		{
-			framesCollected = 0;
-			return;
-		}
-
-		while (context->GetData(timeDisjointQuery[framesCollected], nullptr, 0, 0) == S_FALSE)
-		{
-			Sleep(1);
-		}
-
-		int frameIndex = framesCollected;
-		++framesCollected &= 1;
-
-		//Check whether timestamps were disjoint during the last frame
-		D3D11_QUERY_DATA_TIMESTAMP_DISJOINT timeStampDisjoint;
-		context->GetData(timeDisjointQuery[frameIndex], &timeStampDisjoint, sizeof(timeStampDisjoint), 0);
-		if (timeStampDisjoint.Disjoint)
-		{
-			return;
-		}
-
-		//Get all the timestamps
-		UINT64 timeStampStartFrame = 0;
-		while (context->GetData(frameStartQuery[frameIndex], &timeStampStartFrame, sizeof(UINT64), 0) != S_OK)
-		{
-		}
-
-		UINT64 timeStampEndFrame = 0;
-		while (context->GetData(frameEndQuery[frameIndex], &timeStampEndFrame, sizeof(UINT64), 0) != S_OK)
-		{
-		}
-
-		Renderer::frameTime = (float)(timeStampEndFrame - timeStampStartFrame) / (float)timeStampDisjoint.Frequency * 1000.f;
-	}
-
-	Profile::End();
-}
-
 void Renderer::Present()
 {
 	HR(swapchain->Present(1, 0));
-
-	EndGPUQueries();
 }
 
 void* Renderer::GetSwapchain()
