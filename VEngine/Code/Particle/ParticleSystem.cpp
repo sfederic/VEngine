@@ -4,7 +4,7 @@
 
 ParticleSystem::ParticleSystem()
 {
-	auto emitter = ParticleEmitter::system.Add(this);
+	auto emitter = ParticleEmitter::system.Add("Emitter", this);
 	AddEmitter(emitter);
 	rootComponent = emitter;
 }

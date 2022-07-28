@@ -4,7 +4,7 @@
 
 DestructibleActor::DestructibleActor()
 {
-    destructibleMesh = DestructibleMeshComponent::system.Add(this,
+    destructibleMesh = DestructibleMeshComponent::system.Add("Destructible", this,
         DestructibleMeshComponent("destructible_cube.fbx", "test.png"));
     rootComponent = destructibleMesh;
 }

@@ -4,7 +4,7 @@
 
 PointLightActor::PointLightActor()
 {
-    pointLight = PointLightComponent::system.Add(this);
+    pointLight = PointLightComponent::system.Add("PointLight", this);
     rootComponent = pointLight;
 }
 

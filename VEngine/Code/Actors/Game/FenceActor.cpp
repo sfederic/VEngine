@@ -5,7 +5,7 @@
 
 FenceActor::FenceActor()
 {
-    mesh = MeshComponent::system.Add(this, MeshComponent("plane.fbx", "test_fence.png"));
+    mesh = MeshComponent::system.Add("Mesh", this, MeshComponent("plane.fbx", "test_fence.png"));
     rootComponent = mesh;
     mesh->material->rastStateValue.SetValue(RastStates::noBackCull);
 }

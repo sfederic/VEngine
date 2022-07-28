@@ -5,7 +5,7 @@
 
 TitleScreenActor::TitleScreenActor()
 {
-    rootComponent = EmptyComponent::system.Add();
+    rootComponent = EmptyComponent::system.Add("Root", this);
 }
 
 void TitleScreenActor::Start()

@@ -4,7 +4,7 @@
 
 SpotLightActor::SpotLightActor()
 {
-    spotLight = SpotLightComponent::system.Add(this);
+    spotLight = SpotLightComponent::system.Add("SpotLight", this);
     rootComponent = spotLight;
 }
 

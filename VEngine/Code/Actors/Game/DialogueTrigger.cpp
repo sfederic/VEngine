@@ -8,11 +8,11 @@
 
 DialogueTrigger::DialogueTrigger()
 {
-    boxTriggerComponent = BoxTriggerComponent::system.Add(this);
+    boxTriggerComponent = BoxTriggerComponent::system.Add("BoxTrigger", this);
     boxTriggerComponent->renderWireframeColour = XMFLOAT4(0.1f, 0.45f, 0.9f, 1.f);
     rootComponent = boxTriggerComponent;
 
-    dialogueComponent = DialogueComponent::system.Add(this);
+    dialogueComponent = DialogueComponent::system.Add("Dialogue", this);
 }
 
 void DialogueTrigger::Start()

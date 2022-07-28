@@ -5,7 +5,7 @@
 
 CutsceneActor::CutsceneActor()
 {
-    boxTriggerComponent = BoxTriggerComponent::system.Add(this);
+    boxTriggerComponent = BoxTriggerComponent::system.Add("BoxTrigger", this);
     boxTriggerComponent->renderWireframeColour = XMFLOAT4(0.3f, 0.2f, 0.75f, 1.f);
     rootComponent = boxTriggerComponent;
 }

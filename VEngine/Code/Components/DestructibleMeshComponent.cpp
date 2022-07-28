@@ -21,7 +21,7 @@ void DestructibleMeshComponent::Create()
 
 	for (auto& meshData : meshDatas)
 	{
-		auto mesh = MeshComponent::system.Add();
+		auto mesh = MeshComponent::system.Add("TempDestructibleMesh");
 
 		//parent all the fractured cell meshes to this to be able to move it around before breaking.
 		this->AddChild(mesh);

@@ -281,8 +281,6 @@ void Actor::RemoveComponent(std::string componentName)
 {
 	Component* component = componentMap[componentName];
 
-	assert(component != rootComponent && "Cannot remove Root Component of Actor");
-
 	//Re-parent SpatialComponent's children to its own parent 
 	auto spatialComponent = dynamic_cast<SpatialComponent*>(component);
 	if (spatialComponent)

@@ -4,7 +4,7 @@
 
 PolyboardActor::PolyboardActor()
 {
-    polyboard = Polyboard::system.Add(this);
+    polyboard = Polyboard::system.Add("PolyBoard", this);
 }
 
 Properties PolyboardActor::GetProps()

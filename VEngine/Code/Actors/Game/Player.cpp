@@ -36,19 +36,19 @@ Player::Player()
 	nextRot = XMVectorZero();
 
 	//Empty as the root to be able to rotate the mesh towards movement input direction.
-	rootComponent = EmptyComponent::system.Add(this);
+	rootComponent = EmptyComponent::system.Add("Root", this);
 
-	mesh = MeshComponent::system.Add(this, MeshComponent("character_test.fbx", "test.png"));
+	mesh = MeshComponent::system.Add("Mesh", this, MeshComponent("character_test.fbx", "test.png"));
 	rootComponent->AddChild(mesh);
 
-	camera = CameraComponent::system.Add(this, CameraComponent(XMFLOAT3(1.75f, 1.75f, -2.75f), false));
+	camera = CameraComponent::system.Add("Camera", this, CameraComponent(XMFLOAT3(1.75f, 1.75f, -2.75f), false));
 	camera->targetActor = this;
 
 	rootComponent->AddChild(camera);
 
-	dialogueComponent = DialogueComponent::system.Add(this);
+	dialogueComponent = DialogueComponent::system.Add("DialogueComponent", this);
 
-	stepSounds = AudioComponent::system.Add(this);
+	stepSounds = AudioComponent::system.Add("StepSounds", this);
 	stepSounds->loop = true;
 	stepSounds->audioFilename = "step.wav";
 	stepSounds->playOnStart = true;

@@ -12,7 +12,7 @@
 
 Grid::Grid()
 {
-    nodeMesh = InstanceMeshComponent::system.Add(
+    nodeMesh = InstanceMeshComponent::system.Add("NodeMesh",
         this, InstanceMeshComponent(1, "node.fbx", "test.png"));
 
     nodeMesh->material->shaderData.filename = "InstanceShader.hlsl";

@@ -17,11 +17,11 @@
 
 EntranceTrigger::EntranceTrigger()
 {
-    trigger = BoxTriggerComponent::system.Add(this);
+    trigger = BoxTriggerComponent::system.Add("Trigger", this);
     rootComponent = trigger;
 
-    conditionComponent = ConditionComponent::system.Add(this);
-    timeComponent = TimeComponent::system.Add(this);
+    conditionComponent = ConditionComponent::system.Add("Condition", this);
+    timeComponent = TimeComponent::system.Add("Time", this);
 }
 
 void EntranceTrigger::Start()

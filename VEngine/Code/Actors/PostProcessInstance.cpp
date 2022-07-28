@@ -5,7 +5,7 @@
 
 PostProcessInstance::PostProcessInstance()
 {
-    rootComponent = EmptyComponent::system.Add(this);
+    rootComponent = EmptyComponent::system.Add("Root", this);
 }
 
 Properties PostProcessInstance::GetProps()

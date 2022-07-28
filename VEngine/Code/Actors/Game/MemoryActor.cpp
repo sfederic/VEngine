@@ -12,7 +12,7 @@ MemoryActor::MemoryActor()
 {
     isGridObstacle = isMemoryCreated;
 
-    trigger = BoxTriggerComponent::system.Add(this);
+    trigger = BoxTriggerComponent::system.Add("Trigger", this);
     trigger->renderWireframeColour = XMFLOAT4(1.f, 0.f, 1.f, 1.f);
     trigger->SetTargetAsPlayer();
     rootComponent->AddChild(trigger);

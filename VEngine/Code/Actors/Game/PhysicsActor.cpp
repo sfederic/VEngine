@@ -12,7 +12,7 @@ PhysicsActor::PhysicsActor()
 	//sphereMesh = MeshComponent::system.Add(this, MeshComponent("sphere.fbx", "test.png"));
 	//rootComponent = sphereMesh;
 
-	baseMesh = MeshComponent::system.Add(this, MeshComponent("cube.fbx", "test.png"));
+	baseMesh = MeshComponent::system.Add("BaseMesh", this, MeshComponent("cube.fbx", "test.png"));
 	baseMesh->skipPhysicsCreation = true;
 	rootComponent = baseMesh;
 }

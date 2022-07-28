@@ -23,7 +23,6 @@
 #include "Components/WidgetComponent.h"
 #include "Actors/Actor.h"
 #include "Actors/DiffuseProbeMap.h"
-#include "Actors/ReflectionPlane.h"
 #include "Actors/PostProcessInstance.h"
 #include "Actors/DebugActors/DebugBox.h"
 #include "Actors/DebugActors/DebugSphere.h"

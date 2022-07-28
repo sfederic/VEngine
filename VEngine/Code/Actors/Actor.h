@@ -119,7 +119,7 @@ public:
 	template <typename T>
 	T* CreateComponent(T component, std::string componentName)
 	{
-		return T::system.Add(this, std::move(component), componentName);
+		return T::system.Add(componentName, this, std::move(component));
 	}
 
 	template <typename T>

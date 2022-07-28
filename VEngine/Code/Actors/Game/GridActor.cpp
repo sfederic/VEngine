@@ -12,13 +12,13 @@
 
 GridActor::GridActor()
 {
-	mesh = MeshComponent::system.Add(this);
+	mesh = MeshComponent::system.Add("Mesh", this);
 	rootComponent = mesh;
 
-	timeComponent = TimeComponent::system.Add(this);
-	memoryComponent = MemoryComponent::system.Add(this);
-	dialogueComponent = DialogueComponent::system.Add(this);
-	questComponent = QuestComponent::system.Add(this);
+	timeComponent = TimeComponent::system.Add("Time", this);
+	memoryComponent = MemoryComponent::system.Add("Memory", this);
+	dialogueComponent = DialogueComponent::system.Add("Dialogue", this);
+	questComponent = QuestComponent::system.Add("Quest", this);
 }
 
 void GridActor::Start()

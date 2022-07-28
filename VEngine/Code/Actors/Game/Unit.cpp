@@ -27,7 +27,7 @@ Unit::Unit()
 	battleState.Add(BattleStates::escape);
 	battleState.Add(BattleStates::wander);
 
-	memoryOnDeath = MemoryComponent::system.Add(this);
+	memoryOnDeath = MemoryComponent::system.Add("MemoryOnDeath", this);
 	memoryOnDeath->name = "MemoryOnDeath"; //Seperate the name, GridActor and Unit have two memory components.
 
 	//intentBeam = Polyboard::system.Add(this);

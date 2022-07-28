@@ -7,12 +7,12 @@ MeshActor::MeshActor()
 {
 	if (!spawnMeshFilename.empty())
 	{
-		mesh = MeshComponent::system.Add(this, MeshComponent(spawnMeshFilename.c_str(), "test.png"));
+		mesh = MeshComponent::system.Add("Mesh", this, MeshComponent(spawnMeshFilename.c_str(), "test.png"));
 		rootComponent = mesh;
 	}
 	else
 	{
-		mesh = MeshComponent::system.Add(this, MeshComponent("cube.fbx", "test.png"));
+		mesh = MeshComponent::system.Add("Mesh", this, MeshComponent("cube.fbx", "test.png"));
 		rootComponent = mesh;
 	}
 }

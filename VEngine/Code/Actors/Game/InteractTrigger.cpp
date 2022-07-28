@@ -11,11 +11,11 @@
 
 InteractTrigger::InteractTrigger()
 {
-	trigger = BoxTriggerComponent::system.Add(this);
+	trigger = BoxTriggerComponent::system.Add("Trigger", this);
 	trigger->renderWireframeColour = XMFLOAT4(0.9f, 0.9f, 0.1f, 1.f);
 	rootComponent = trigger;
 
-	memoryComponent = MemoryComponent::system.Add(this);
+	memoryComponent = MemoryComponent::system.Add("MemoryComponent", this);
 }
 
 void InteractTrigger::Start()
