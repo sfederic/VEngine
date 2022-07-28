@@ -119,9 +119,9 @@ void QtEditor::EnableDarkMode()
     app->setStyleSheet(
         "QMainWindow { background-color: rgb(255, 0, 0); border: none; } "
 
-        "QDockWidget { background-color: rgb(37, 37, 37); border:0px; } "
-
         "QWidget { background-color: rgb(45, 45, 45); border-color: rgb(11, 11, 11); border-width: 0.0px; border-style: none; } "
+
+        "QDockWidget { background-color: rgb(37, 37, 37); border: 5px solid black; } "
 
         "QLineEdit { background-color: rgb(40, 40, 40); } "
         "QSpinBox { background-color: rgb(40, 40, 40); } "
