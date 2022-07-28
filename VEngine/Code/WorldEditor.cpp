@@ -140,33 +140,50 @@ void SaveWorld()
 
 void DeleteActor()
 {
-	if (pickedActor)
+	if (Input::GetKeyUp(Keys::Delete))
 	{
-		if (Input::GetKeyUp(Keys::Delete))
+		switch (pickMode)
 		{
-			editor->RemoveActorFromWorldList();
-
-			if (pickedActors.size() > 1)
+			case WorldEditor::PickMode::Actor:
 			{
-				//Destroy all multiple picked actors
-				for (auto actor : pickedActors)
+				if (pickedActor)
 				{
-					actor->Destroy();
+					editor->RemoveActorFromWorldList();
+
+					if (pickedActors.size() > 1)
+					{
+						//Destroy all multiple picked actors
+						for (auto actor : pickedActors)
+						{
+							actor->Destroy();
+						}
+					}
+					else
+					{
+						debugMenu.AddNotification(VString::wformat(
+							L"Destroyed actor [%S]", pickedActor->GetName().c_str()));
+						pickedActor->Destroy();
+					}
 				}
+
+				break;
 			}
-			else
+			case WorldEditor::PickMode::Component:
 			{
-				debugMenu.AddNotification(VString::wformat(
-					L"Destroyed actor [%S]", pickedActor->GetName().c_str()));
-				pickedActor->Destroy();
+				if (pickedComponent)
+				{
+					pickedComponent->Remove();
+				}
+
+				break;
 			}
-
-			pickedActors.clear();
-			pickedActor = nullptr;
-			pickedComponent = nullptr;
-
-			editor->ClearProperties();
 		}
+
+		pickedActors.clear();
+		pickedActor = nullptr;
+		pickedComponent = nullptr;
+
+		editor->ClearProperties();
 	}
 }
 
