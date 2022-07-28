@@ -91,13 +91,22 @@ void PropertiesDock::DisplayActorProperties(Actor* actor)
     actorPropsGridLayout->setAlignment(Qt::AlignTop);
 
     //Iterate over actor properties
-    int gridRow = 1; //Leave row space for Add Component button
+    int gridRow = 0;
+
+    actorPropsGridLayout->addWidget(
+        new QLabel(actor->GetName().c_str(), actorPropsWidget), gridRow, 0, 1, 1);
+
     auto actorProps = actor->GetProps();
     IterateOverProperties(actorProps, gridRow);
 
     //Iterate over actor's component properties
     for (auto& componentPair : actor->componentMap)
     {
+        Component* component = componentPair.second;
+
+        actorPropsGridLayout->addWidget(
+            new QLabel(component->name.c_str(), actorPropsWidget), gridRow, 0, 1, 1);
+
         auto componentProps = componentPair.second->GetProps();
         IterateOverProperties(componentProps, gridRow);
     }
@@ -117,7 +126,7 @@ void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRo
     //Set title to seperate components/actor properties
     auto titleLabel = new QLabel(props.title.c_str(), this);
     titleLabel->setStyleSheet("font-weight: bold");
-    actorPropsGridLayout->addWidget(titleLabel, currentGridRow, 0, 1, 2, Qt::AlignCenter);
+    actorPropsGridLayout->addWidget(titleLabel, currentGridRow, 1, 1, 1);
     currentGridRow++;
 
     //Properties
