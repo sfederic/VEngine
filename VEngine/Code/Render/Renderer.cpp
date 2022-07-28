@@ -242,7 +242,6 @@ void Renderer::Tick()
 		drawAllAsWireframe = !drawAllAsWireframe;
 	}
 
-	//Screenshot
 	ScreenshotCapture();
 }
 
@@ -305,12 +304,12 @@ void CreateSwapchain(HWND window)
 	HR(swapchain->SetColorSpace1(DXGI_COLOR_SPACE_RGB_FULL_G10_NONE_P709));
 
 	//Check for colour space (HDR, sRGB)
-	//IDXGIOutput* output = nullptr;
-	//HR(swapchain->GetContainingOutput(&output));
-	//IDXGIOutput6* output6 = nullptr;
-	//HR(output->QueryInterface<IDXGIOutput6>(&output6));
-	//DXGI_OUTPUT_DESC1 outputDesc = {};
-	//HR(output6->GetDesc1(&outputDesc));
+	IDXGIOutput* output = nullptr;
+	HR(swapchain->GetContainingOutput(&output));
+	IDXGIOutput6* output6 = nullptr;
+	HR(output->QueryInterface<IDXGIOutput6>(&output6));
+	DXGI_OUTPUT_DESC1 outputDesc = {};
+	HR(output6->GetDesc1(&outputDesc));
 
 	dxgiFactory->MakeWindowAssociation(window, DXGI_MWA_NO_WINDOW_CHANGES | DXGI_MWA_NO_ALT_ENTER);
 }
