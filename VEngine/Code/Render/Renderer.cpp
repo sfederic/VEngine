@@ -53,12 +53,10 @@ void CreateInputLayout();
 void CreateRasterizerStates();
 void CreateBlendStates();
 void CreateConstantBuffers();
-void CreatePlanarReflectionBuffers();
 void CreateLightProbeBuffers();
 void CheckSupportedFeatures();
 void RenderShadowPass();
 void RenderMeshComponents();
-void RenderPlanarReflections();
 void RenderInstanceMeshComponents();
 void RenderBounds();
 void RenderCameraMeshes();
@@ -77,7 +75,6 @@ void SetNullRTV();
 void SetShadowData();
 void SetLightResources();
 void SetShadowResources();
-void SetReflectionResources();
 void SetMatricesFromMesh(MeshComponent* mesh);
 void SetShaderMeshData(MeshComponent* mesh);
 void SetRenderPipelineStates(MeshComponent* mesh);
@@ -153,11 +150,6 @@ D3D11_VIEWPORT viewport;
 //Shadow maps
 ShadowMap* shadowMap;
 
-//Reflection
-ID3D11RenderTargetView* reflectionRTV;
-ID3D11ShaderResourceView* reflectionSRV;
-ID3D11Texture2D* reflectionTex;
-
 //Light probe buffers
 ID3D11RenderTargetView* lightProbeRTVs[6]; //Cubemap
 ID3D11ShaderResourceView* lightProbeSRV = nullptr;
@@ -212,8 +204,6 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	RenderUtils::defaultSampler = RenderUtils::CreateSampler();
 
 	spriteSystem.Init();
-
-	CreatePlanarReflectionBuffers();
 }
 
 void Renderer::Tick()
@@ -482,53 +472,6 @@ void CreateConstantBuffers()
 	assert(cbPostProcess);
 }
 
-void CreatePlanarReflectionBuffers()
-{
-	//if (reflectionTex)
-	//{
-	//	reflectionTex->Release();
-	//}
-
-	////Create texture
-	//D3D11_TEXTURE2D_DESC texDesc = {};
-	//texDesc.Width = viewport.Width;
-	//texDesc.Height = viewport.Height;
-	//texDesc.MipLevels = 1;
-	//texDesc.ArraySize = 1;
-	//texDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
-	//texDesc.SampleDesc.Count = 1;
-	//texDesc.Usage = D3D11_USAGE_DEFAULT;
-	//texDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
-
-	//HR(device->CreateTexture2D(&texDesc, 0, &reflectionTex));
-
-	//if (reflectionSRV)
-	//{
-	//	reflectionSRV->Release();
-	//}
-
-	////Create SRV
-	//D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
-	//srvDesc.Format = texDesc.Format;
-	//srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
-	//srvDesc.Texture2D.MipLevels = 1;
-	//srvDesc.Texture2D.MostDetailedMip = 0;
-	//assert(reflectionTex);
-	//HR(device->CreateShaderResourceView(reflectionTex, &srvDesc, &reflectionSRV));
-
-	//if (reflectionRTV)
-	//{
-	//	reflectionRTV->Release();
-	//}
-
-	////Create RTV
-	//D3D11_RENDER_TARGET_VIEW_DESC rtvDesc = {};
-	//rtvDesc.Format = texDesc.Format;
-	//rtvDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
-	//rtvDesc.Texture2D.MipSlice = 0;
-	//HR(device->CreateRenderTargetView(reflectionTex, &rtvDesc, &reflectionRTV));
-}
-
 void MapBuffer(ID3D11Resource* resource, const void* src, size_t size)
 {
 	D3D11_MAPPED_SUBRESOURCE mapped = {};
@@ -706,11 +649,6 @@ void Renderer::Render()
 	Profile::End();
 }
 
-void SetReflectionResources()
-{
-	context->PSSetShaderResources(reflectionTextureResgiter, 1, &reflectionSRV);
-}
-
 void SetMatricesFromMesh(MeshComponent* mesh)
 {
 	shaderMatrices.model = mesh->GetWorldMatrix();
@@ -755,7 +693,6 @@ void RenderMeshComponents()
 		//Shader Resources
 		SetLightResources();
 		SetShadowResources();
-		SetReflectionResources();
 
 		//Constant buffer data
 		SetMatricesFromMesh(mesh);
@@ -955,81 +892,6 @@ void Renderer::RenderLightProbeViews()
 
 	double endTime = Profile::QuickEnd(startTime);
 	Log("Light probe bake took [%f] ms", endTime);
-}
-
-void RenderPlanarReflections()
-{
-	Profile::Start();
-
-	if (ReflectionPlane::system.GetActors().empty()) return;
-	assert(ReflectionPlane::system.GetActors().size() == 1);
-
-	auto reflectionPlane = ReflectionPlane::system.GetActors()[0];
-
-	context->RSSetViewports(1, &viewport);
-	const float clearColour[4] = { 1.f, 0.f, 0.f, 0.f };
-	context->ClearRenderTargetView(reflectionRTV, clearColour);
-	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	context->OMSetRenderTargets(1, &reflectionRTV, nullptr);
-
-	context->RSSetState(rastStateMap[RastStates::solid]->data);
-
-	UpdateLights();
-
-	//Set lights buffer
-	cbLights->SetPS();
-
-	//Set shadow resources (not now for reflections)
-	//context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
-	//context->PSSetSamplers(1, 1, &shadowMap->sampler);
-
-	ShaderItem* planarReflectionShader = shaderSystem.FindShader(L"DefaultShader.hlsl");
-
-	for (auto mesh : MeshComponent::system.components)
-	{
-		if (!mesh->active || mesh->cullMesh) continue;
-
-		Material* material = mesh->material;
-
-		const FLOAT blendState[4] = { 0.f };
-		context->OMSetBlendState(nullptr, blendState, 0xFFFFFFFF);
-
-		context->VSSetShader(planarReflectionShader->vertexShader, nullptr, 0);
-		context->PSSetShader(planarReflectionShader->pixelShader, nullptr, 0);
-
-		context->PSSetSamplers(0, 1, &material->sampler->data);
-
-		SetShaderResourceFromMaterial(0, material);
-
-		context->IASetVertexBuffers(0, 1, &mesh->pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
-		context->IASetIndexBuffer(mesh->pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
-
-		cbMaterial->Map(&material->materialShaderData);
-		cbMaterial->SetPS();
-
-		//Set matrices
-		shaderMatrices.view = reflectionPlane->GetReflectionViewMatrix();
-		shaderMatrices.model = mesh->GetWorldMatrix();
-		shaderMatrices.MakeModelViewProjectionMatrix();
-		shaderMatrices.MakeTextureMatrix(mesh->material);
-
-		cbMatrices->Map(&shaderMatrices);
-		cbMatrices->SetVS();
-
-		//Set mesh data to shader
-		ShaderMeshData meshData = {};
-		meshData.position = mesh->GetPosition();
-		cbMeshData->Map(&meshData);
-		cbMeshData->SetVSAndPS();
-
-		//Draw
-		context->DrawIndexed(mesh->meshDataProxy->indices->size(), 0, 0);
-	}
-
-	//Remove reflection RTV
-	SetNullRTV();
-
-	Profile::End();
 }
 
 void RenderInstanceMeshComponents()
@@ -1626,8 +1488,6 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 	CreateRTVAndDSV();
 
 	CreatePostProcessRenderTarget();
-
-	CreatePlanarReflectionBuffers();
 
 	uiSystem.Init((void*)swapchain);
 
