@@ -226,17 +226,13 @@ void FileSystem::LoadWorld(std::string worldName)
 		{
 			IActorSystem* actorSystem = asIt->second;
 
-			std::vector<Actor*> newActors;
-
 			for (int i = 0; i < numObjectsToSpawn; i++)
 			{
 				Actor* actor = actorSystem->SpawnActor(Transform());
-				newActors.push_back(actor);
-			}
 
-			//Make sure create()s are after deserialisation
-			for (auto actor : newActors)
-			{
+				//ActorSystem will add in actor. Remove it here before getting correct UID and name on serialise.
+				World::RemoveActorFromWorld(actor);
+
 				auto props = actor->GetProps();
 				d.Deserialise(props);
 
