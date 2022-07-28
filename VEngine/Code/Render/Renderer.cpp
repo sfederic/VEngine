@@ -63,7 +63,6 @@ void RenderInstanceMeshComponents();
 void RenderBounds();
 void RenderCameraMeshes();
 void RenderLightMeshes();
-void RenderSkeletonBones();
 void RenderPolyboards();
 void RenderSpriteSheets();
 void RenderPostProcess();
@@ -1297,63 +1296,6 @@ void RenderLightMeshes()
 
 		DrawMesh(debugCone.mesh);
 	}
-}
-
-void RenderSkeletonBones()
-{
-	std::vector<Line> lines;
-
-	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
-
-	ShaderItem* shader = shaderSystem.FindShader(L"SolidColour.hlsl");
-	context->VSSetShader(shader->vertexShader, nullptr, 0);
-	context->PSSetShader(shader->pixelShader, nullptr, 0);
-
-	MaterialShaderData materialShaderData = {};
-	materialShaderData.ambient = XMFLOAT4(0.54f, 0.80f, 0.92f, 1.0f); //Sky blue
-	cbMaterial->Map(&materialShaderData);
-	cbMaterial->SetPS();
-
-	for (auto mesh : MeshComponent::system.components)
-	{
-		for (Joint& joint : mesh->GetSkeleton()->joints)
-		{
-			if (joint.parentIndex == -1) continue;
-
-			Line line = {};
-
-			Joint& parentJoint = mesh->GetSkeleton()->joints[joint.parentIndex];
-
-			XMMATRIX transformedPose = joint.currentPose;
-			XMMATRIX parentPose = parentJoint.currentPose;
-
-			transformedPose *= mesh->GetWorldMatrix();
-			parentPose *= mesh->GetWorldMatrix();
-
-			XMStoreFloat3(&line.p1, transformedPose.r[3]);
-			XMStoreFloat3(&line.p2, parentPose.r[3]);
-
-			lines.push_back(line);
-		}
-	}
-
-	D3D11_MAPPED_SUBRESOURCE sub = {};
-	sub.RowPitch = sizeof(Line) * lines.size();
-	HR(context->Map(linesBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &sub));
-	memcpy(sub.pData, lines.data(), sizeof(Line) * lines.size());
-	context->Unmap(linesBuffer, 0);
-
-	context->IASetVertexBuffers(0, 1, &linesBuffer, &Renderer::stride, &Renderer::offset);
-
-	shaderMatrices.view = activeCamera->GetViewMatrix();
-	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
-	shaderMatrices.model = XMMatrixIdentity();
-	shaderMatrices.MakeModelViewProjectionMatrix();
-
-	cbMatrices->Map(&shaderMatrices);
-	cbMatrices->SetVS();
-
-	context->Draw(lines.size() * 2, 0);
 }
 
 void RenderPolyboards()
