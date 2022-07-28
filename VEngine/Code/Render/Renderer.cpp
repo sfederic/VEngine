@@ -146,7 +146,6 @@ ConstantBuffer<ShaderTimeData>* cbTime;
 ConstantBuffer<ShaderMeshData>* cbMeshData;
 ConstantBuffer<ShaderSkinningData>* cbSkinningData;
 ConstantBuffer<ShaderPostProcessData>* cbPostProcess;
-ID3D11Buffer* linesBuffer;
 
 //Viewport
 D3D11_VIEWPORT viewport;
@@ -211,9 +210,6 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	CreatePostProcessRenderTarget();
 
 	RenderUtils::defaultSampler = RenderUtils::CreateSampler();
-
-	Line lines[128] = {};
-	linesBuffer = RenderUtils::CreateDynamicBuffer(1024, D3D11_BIND_VERTEX_BUFFER, lines);
 
 	spriteSystem.Init();
 
