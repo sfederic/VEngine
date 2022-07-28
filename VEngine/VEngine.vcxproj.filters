@@ -518,9 +518,6 @@
     <ClCompile Include="Code\Actors\CutsceneActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\ReflectionPlane.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\DiffuseProbeMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1016,9 +1013,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\CutsceneActor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\ReflectionPlane.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\DiffuseProbeMap.h">

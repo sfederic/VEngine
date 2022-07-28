@@ -251,7 +251,6 @@
     <ClCompile Include="Code\Actors\Game\MovingGridActor.cpp" />
     <ClCompile Include="Code\Editor\CutsceneSequencer.cpp" />
     <ClCompile Include="Code\Actors\CutsceneActor.cpp" />
-    <ClCompile Include="Code\Actors\ReflectionPlane.cpp" />
     <ClCompile Include="Code\Actors\DiffuseProbeMap.cpp" />
     <ClCompile Include="Code\Actors\PostProcessInstance.cpp" />
     <ClCompile Include="Code\Render\Texture2D.cpp" />
@@ -508,7 +507,6 @@
     <ClInclude Include="Code\Actors\Game\MovingGridActor.h" />
     <ClInclude Include="Code\Editor\CutsceneSequencer.h" />
     <ClInclude Include="Code\Actors\CutsceneActor.h" />
-    <ClInclude Include="Code\Actors\ReflectionPlane.h" />
     <ClInclude Include="Code\Actors\DiffuseProbeMap.h" />
     <ClInclude Include="Code\Actors\PostProcessInstance.h" />
     <ClInclude Include="Code\Render\Texture2D.h" />
