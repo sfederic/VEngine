@@ -1,6 +1,5 @@
 #pragma once
 
-//All the 0x codes here are from the Win32 virtual key values. They're like this to avoid including Windows.h here.
 enum class Keys
 {
 	None = 0,
@@ -15,8 +14,7 @@ enum class Keys
 	Delete = 0x2E,
 	BackSpace = 0x08,
 	Alt = 0xA4,
-	//@Todo: there's all sorts of scancode shit win Win32 and keyboards
-	//that won't make this work internationally.
+	//@Todo: there's all sorts of scancode shit win Win32 and keyboards that won't make this work internationally.
 	W = 'W',
 	A = 'A',
 	S = 'S',

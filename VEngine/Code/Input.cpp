@@ -1,7 +1,5 @@
 #include "vpch.h"
 #include "Input.h"
-#include <vector>
-#include <Windows.h>
 
 std::vector<Keys> currentDownKeys;
 std::vector<Keys> currentUpKeys;
