@@ -254,18 +254,9 @@ void CreateDevice()
 	D3D_FEATURE_LEVEL selectedFeatureLevel;
 
 	//@Todo: this shit always causes problems. From HDR to graphics debugging, all sorts of issues.
+	//For now, keep adapter CreateDevice() input as nullptr. Change on release.
 	//IDXGIAdapter1* adapter = nullptr;
 	//HR(dxgiFactory->EnumAdapterByGpuPreference(0, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&adapter)));
-	//DXGI_ADAPTER_DESC1 desc = {};
-	//adapter->GetDesc1(&desc);
-	//gpuAdaptersDesc.push_back(desc);
-	//for (int i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_MINIMUM_POWER,
-	//	IID_PPV_ARGS(&adapter)) != DXGI_ERROR_NOT_FOUND; i++)
-	//{
-	//	DXGI_ADAPTER_DESC1 desc = {};
-	//	adapter->GetDesc1(&desc);
-	//	gpuAdaptersDesc.push_back(desc);
-	//}
 
 	HR(D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags,
 		featureLevels, _countof(featureLevels), D3D11_SDK_VERSION, &device,
@@ -629,10 +620,8 @@ void Renderer::Render()
 	//Setup render calls
 	PostProcessInstance::system.GetNumActors() == 0 ? RenderSetup() : RenderPostProcessSetup();
 
+	//SetShadowData();
 	//RenderShadowPass();
-	//RenderPlanarReflections();
-
-	SetShadowData();
 
 	UpdateLights();
 
@@ -641,7 +630,6 @@ void Renderer::Render()
 	RenderPolyboards();
 	RenderSpriteSheets();
 	RenderBounds();
-	//RenderSkeletonBones();
 	RenderLightMeshes();
 	RenderCameraMeshes();
 	RenderPostProcess();
@@ -1334,9 +1322,7 @@ void Renderer::RenderParticleEmitters()
 			cbMatrices->Map(&shaderMatrices);
 			cbMatrices->SetVS();
 
-			//Draw
-			//@Todo: do instancing here for particles. (was reading on instancing for particles, 
-			//apparently using DrawInstanced() degrades performance when the vertex count it really low
+			//Note: Apparently using DrawInstanced() degrades performance when the vertex count it really low
 			//and DrawIndexed is actually faster.
 			context->DrawIndexed(6, 0, 0);
 		}
