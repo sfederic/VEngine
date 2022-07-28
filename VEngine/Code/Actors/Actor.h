@@ -114,6 +114,8 @@ public:
 
 	void RemoveComponent(std::string componentName);
 
+	void RemoveComponent(Component* componentToRemove);
+
 	Component* FindComponent(std::string componentName);
 
 	template <typename T>
@@ -121,6 +123,8 @@ public:
 	{
 		return T::system.Add(componentName, this, std::move(component));
 	}
+
+	std::vector<Component*> GetAllComponents();
 
 	template <typename T>
 	std::vector<T*> GetComponentsOfType()

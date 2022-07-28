@@ -41,9 +41,12 @@ public:
 
 	void Remove(int index)
 	{
-		for (auto& componentPair : actors[index]->componentMap)
+		auto components = actors[index]->GetAllComponents();
+		for (int i = 0; i < components.size(); i++)
 		{
-			componentPair.second->Remove();
+			Component* component = components[i];
+			actors[index]->RemoveComponent(component);
+			component->Remove();
 		}
 
 		std::swap(actors[index], actors.back());

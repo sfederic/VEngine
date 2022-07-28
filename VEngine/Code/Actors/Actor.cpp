@@ -165,6 +165,16 @@ Properties Actor::GetProps()
 	return props;
 }
 
+std::vector<Component*> Actor::GetAllComponents()
+{
+	std::vector<Component*> result;
+	for (auto& componentPair : componentMap)
+	{
+		result.push_back(componentPair.second);
+	}
+	return result;
+}
+
 std::vector<Properties> Actor::GetAllProps()
 {
 	std::vector<Properties> propsVector;
@@ -277,12 +287,10 @@ void Actor::AddComponent(Component* component)
 	componentMap.emplace(component->name, component);
 }
 
-void Actor::RemoveComponent(std::string componentName)
+void Actor::RemoveComponent(Component* componentToRemove)
 {
-	Component* component = componentMap[componentName];
-
 	//Re-parent SpatialComponent's children to its own parent 
-	auto spatialComponent = dynamic_cast<SpatialComponent*>(component);
+	auto spatialComponent = dynamic_cast<SpatialComponent*>(componentToRemove);
 	if (spatialComponent)
 	{
 		if (spatialComponent->parent)
@@ -294,7 +302,13 @@ void Actor::RemoveComponent(std::string componentName)
 		}
 	}
 
-	componentMap.erase(componentName);
+	componentMap.erase(componentToRemove->name);
+}
+
+void Actor::RemoveComponent(std::string componentName)
+{
+	Component* component = componentMap[componentName];
+	RemoveComponent(component);
 }
 
 Component* Actor::FindComponent(std::string componentName)
