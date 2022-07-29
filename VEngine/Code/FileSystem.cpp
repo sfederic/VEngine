@@ -194,10 +194,20 @@ void FileSystem::LoadWorld(std::string worldName)
 					auto ownerUIDAndName = GetComponentOwnerUIDAndNameOnDeserialise(d);
 
 					Actor* owner = World::GetActorByUID(ownerUIDAndName.first);
-					Component* foundComponent = owner->FindComponent(ownerUIDAndName.second);
-
-					auto props = foundComponent->GetProps();
-					d.Deserialise(props);
+					Component* foundComponent = owner->FindComponentAllowNull(ownerUIDAndName.second);
+					if (foundComponent)
+					{
+						auto props = foundComponent->GetProps();
+						d.Deserialise(props);
+					}
+					else //Component doesn't exist on any actor, skip its props
+					{
+						std::wstring nextToken;
+						while (nextToken != L"next" && nextToken != L"end")
+						{
+							d.is >> nextToken;
+						}
+					}
 				}
 			}
 		}
