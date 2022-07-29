@@ -189,7 +189,7 @@ void FileSystem::LoadWorld(std::string worldName)
 				auto cs = csIt->second;
 
 				//Deserialise the existing components created in Actor constructors
-				for (int i = 0; i < cs->GetNumComponents(); i++)
+				for (int i = 0; i < numObjectsToSpawn; i++)
 				{
 					auto ownerUIDAndName = GetComponentOwnerUIDAndNameOnDeserialise(d);
 
@@ -198,27 +198,6 @@ void FileSystem::LoadWorld(std::string worldName)
 
 					auto props = foundComponent->GetProps();
 					d.Deserialise(props);
-
-					//Decrement the amount of components to spawn
-					numObjectsToSpawn--;
-				}
-
-				//Deserialise the rest of the components that aren't defined in Actor constructors,
-				//but were serialised out through the editor or runtime.
-				for (int i = 0; i < numObjectsToSpawn; i++)
-				{
-					auto component = cs->SpawnComponent(nullptr);
-
-					auto ownerUIDAndName = GetComponentOwnerUIDAndNameOnDeserialise(d);
-
-					component->ownerUID = ownerUIDAndName.first;
-					component->name = ownerUIDAndName.second;
-
-					auto props = component->GetProps();
-					d.Deserialise(props);
-
-					Actor* owner = World::GetActorByUID(component->ownerUID);
-					owner->AddComponent(component);
 				}
 			}
 		}
