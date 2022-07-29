@@ -47,7 +47,7 @@ Properties AudioComponent::GetProps()
 {
     auto props = __super::GetProps();
     props.title = "AudioComponent";
-    props.Add("Audio Filename", &audioFilename);
+    props.Add("Audio Filename", &audioFilename).autoCompletePath = "/Audio/";
     props.Add("Play On Start", &playOnStart);
     props.Add("Volume", &volume);
     props.Add("Pitch", &pitch);
