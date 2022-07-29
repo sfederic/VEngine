@@ -1,15 +1,14 @@
 #pragma once
 #include "SpinBox.h"
-#include <DirectXMath.h>
 #include "IPropertyWidget.h"
 
-using namespace DirectX;
+struct DirectX::XMFLOAT2;
 
 struct Float2Widget : public QWidget, IPropertyWidget
 {
 	SpinBox xSpinbox;
 	SpinBox ySpinbox;
-	XMFLOAT2* value;
+	DirectX::XMFLOAT2* value;
 
 	Float2Widget(Property& prop_, QWidget* parent = 0);
 	void SetValue();
