@@ -312,10 +312,13 @@ void Actor::RemoveComponent(std::string componentName)
 	RemoveComponent(component);
 }
 
-Component* Actor::FindComponent(std::string componentName)
+Component* Actor::FindComponentAllowNull(std::string componentName)
 {
 	auto it = componentMap.find(componentName);
-	assert(it != componentMap.end());
+	if (it == componentMap.end())
+	{
+		return nullptr;
+	}
 	return it->second;
 }
 

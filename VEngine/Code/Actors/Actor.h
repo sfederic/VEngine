@@ -116,7 +116,7 @@ public:
 
 	void RemoveComponent(Component* componentToRemove);
 
-	Component* FindComponent(std::string componentName);
+	Component* FindComponentAllowNull(std::string componentName);
 
 	template <typename T>
 	T* CreateComponent(T component, std::string componentName)
