@@ -1,4 +1,5 @@
 #pragma once
+
 #include <qspinbox.h>
 
 class QWheelEvent;

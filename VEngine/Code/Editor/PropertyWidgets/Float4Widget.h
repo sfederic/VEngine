@@ -1,18 +1,18 @@
 #pragma once
+
 #include "SpinBox.h"
-#include <DirectXMath.h>
 #include "IPropertyWidget.h"
 
-using namespace DirectX;
-
-struct Float4Widget : public QWidget, IPropertyWidget
+class Float4Widget : public QWidget, IPropertyWidget
 {
+private:
 	SpinBox xSpinbox;
 	SpinBox ySpinbox;
 	SpinBox zSpinbox;
 	SpinBox wSpinbox;
-	XMFLOAT4* value;
+	DirectX::XMFLOAT4* value = nullptr;
 
+public:
 	Float4Widget(Property& prop_, QWidget* parent = 0);
 	void SetValue();
 	virtual void ResetValue() override;

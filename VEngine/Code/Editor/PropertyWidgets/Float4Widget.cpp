@@ -1,6 +1,9 @@
 #include "vpch.h"
 #include "Float4Widget.h"
 #include <qboxlayout.h>
+#include <DirectXMath.h>
+
+using namespace DirectX;
 
 Float4Widget::Float4Widget(Property& prop_, QWidget* parent) : QWidget(parent)
 {

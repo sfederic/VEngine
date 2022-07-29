@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 #include <qlineedit.h>
 #include "IPropertyWidget.h"
