@@ -13,7 +13,7 @@ void CommandSystem::Tick()
 		{
 			Undo();
 		}
-		else if (Input::GetKeyUp(Keys::R))
+		else if (Input::GetKeyUp(Keys::Y))
 		{
 			Redo();
 		}
@@ -39,10 +39,11 @@ void CommandSystem::Add(ICommand* command)
 
 void CommandSystem::Undo()
 {
+	commands[commandIndex]->Undo();
+
 	if (commandIndex > 0)
 	{
 		commandIndex--;
-		commands[commandIndex]->Undo();
 	}
 }
 
