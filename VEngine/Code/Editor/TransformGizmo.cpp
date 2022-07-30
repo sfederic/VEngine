@@ -173,8 +173,8 @@ void TransformGizmo::Tick()
     {
         mousePressAfterGizmoUse = false;
 
-        //Actor* actor = worldEditor.pickedActor;
-        //commandSystem.Add(new Command<Transform>(&actor->rootComponent->transform));
+        Actor* actor = WorldEditor::GetPickedActor();
+        commandSystem.Add(new Command<Transform>(&actor->rootComponent->transform));
     }
 
     //Toggle snap and scale controls
