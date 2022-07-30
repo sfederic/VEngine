@@ -316,6 +316,11 @@ namespace VMath
             XMFLOAT4(0.f, 0.f, 0.f, 1.f));
     }
 
+    float Distance(XMVECTOR pos1, XMVECTOR pos2)
+    {
+        return XMVector3Length(pos1 - pos2).m128_f32[0];
+    }
+
     float RandomRange(float min, float max)
     {
         if (max < min)

@@ -55,5 +55,7 @@ namespace VMath
 	//else the bounds calc will be off center.
 	BoundingOrientedBox CreateBoundingBox(Vertex* vertices, size_t verticesCount);
 
+	float Distance(XMVECTOR pos1, XMVECTOR pos2);
+
 	float RandomRange(float min, float max);
 }
