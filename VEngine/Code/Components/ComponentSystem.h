@@ -53,7 +53,6 @@ struct ComponentSystem : IComponentSystem
 	{
 		std::swap(components[index], components.back());
 		components[index]->index = index;
-		components[index]->name = this->name + std::to_string(index);
 		delete components.back();
 		components.pop_back();
 	}
