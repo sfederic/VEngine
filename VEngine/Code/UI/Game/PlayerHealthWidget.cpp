@@ -7,6 +7,6 @@ void PlayerHealthWidget::Draw(float deltaTime)
 	for (int i = 0; i < healthPoints; i++)
 	{
 		layout.AddHorizontalSpace(50.f);
-		Image("heart_icon.png", layout);
+		Image("UI/heart_icon.png", layout);
 	}
 }
