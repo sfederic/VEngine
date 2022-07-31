@@ -317,6 +317,8 @@ Component* Actor::FindComponentAllowNull(std::string componentName)
 	auto it = componentMap.find(componentName);
 	if (it == componentMap.end())
 	{
+		Log("Component [%s] not found on Actor [%s] in FindComponentAllowNull",
+			componentName.c_str(), GetName().c_str());
 		return nullptr;
 	}
 	return it->second;
