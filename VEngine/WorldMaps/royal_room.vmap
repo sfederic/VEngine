@@ -1,1 +1,685 @@
+Grid
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Name
+Grid0
+Size X
+5
+Size Y
+5
+UID
+3703861153
+startBattleOnLoad
+0
+next
+GridActor
+0
+AudioActor
+0
+Player
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Name
+Player0
+UID
+3518862378
+next
+Unit
+0
+EntranceTrigger
+0
+NPC
+0
+MeshActor
+5
+ Enabled
+1
+ Position
+-1 1 2
+ Rotation
+0 0.707229 0 0.706985
+ Scale
+3 1.5 1
+Name
+plane0
+UID
+2478654919
+next
+ Enabled
+1
+ Position
+2 -0.5 2
+ Rotation
+-0.707 -0.0002114 0.000211464 0.707213
+ Scale
+3 2.99909 0.9997
+Name
+plane1
+UID
+2395008998
+next
+ Enabled
+1
+ Position
+5 1 2
+ Rotation
+-0 -0.706985 -0 0.707228
+ Scale
+3 1.5 1
+Name
+plane2
+UID
+1885008978
+next
+ Enabled
+1
+ Position
+2 1 5
+ Rotation
+0 1 0 -0.000345298
+ Scale
+3 1.5 1
+Name
+plane3
+UID
+3565991756
+next
+ Enabled
+1
+ Position
+2 1 -1
+ Rotation
+-0 0.000589512 -0 1
+ Scale
+3 1.5 0.999999
+Name
+plane4
+UID
+478345328
+next
+DirectionalLightActor
+0
+SavePoint
+0
+PointLightActor
+2
+ Enabled
+1
+ Position
+4 1 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+PointLightActor0
+UID
+4131240712
+next
+ Enabled
+1
+ Position
+0 1 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+PointLightActor1
+UID
+2422146173
+next
+SpotLightActor
+1
+ Enabled
+1
+ Position
+2 2 0
+ Rotation
+0.906411 0 0 0.422397
+ Scale
+1 0.999999 0.999999
+Name
+SpotLightActor0
+UID
+155948816
+next
+FenceActor
+0
+Billboard
+0
+InteractTrigger
+0
+ParticleSystem
+0
+DialogueTrigger
+0
+DestructibleActor
+0
+MemoryActor
+0
+TitleScreenActor
+0
+PushableGridActor
+0
+PlayerDialogueTrigger
+0
+GoddessStatue
+0
+PhysicsActor
+0
+PostProcessInstance
+0
+PolyboardActor
+0
+DebugNoteActor
+0
+SpriteSheetActor
+0
+MovingGridActor
+0
+CutsceneActor
+0
+DiffuseProbeMap
+0
+TestActor
+0
+CharacterControllerComponent
+0
+QuestComponent
+0
+TimeComponent
+0
+WidgetComponent
+0
+AudioComponent
+1
+3518862378
+StepSounds
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Audio Filename
+step.wav
+Loop
+1
+Pitch
+1
+Play On Start
+1
+Volume
+1
+next
+DialogueComponent
+1
+3518862378
+Dialogue
+ Enabled
+1
+File
+
+next
+MemoryComponent
+0
+EmptyComponent
+1
+3518862378
+Root
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+next
+MeshComponent
+6
+3518862378
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+character_test.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+2478654919
+Mesh
+ Enabled
+1
+ Pos
+-1 1 2
+ Rot
+0 0.707229 0 0.706985
+ Scale
+3 1.5 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+Walls/wall05.png
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+2 1.5
+next
+2395008998
+Mesh
+ Enabled
+1
+ Pos
+2 -0.5 2
+ Rot
+-0.707 -0.0002114 0.000211464 0.707213
+ Scale
+3 2.99909 0.9997
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+Floors/floor.jpg
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+3 3
+next
+1885008978
+Mesh
+ Enabled
+1
+ Pos
+5 1 2
+ Rot
+-0 -0.706985 -0 0.707228
+ Scale
+3 1.5 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+Walls/wall05.png
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+3565991756
+Mesh
+ Enabled
+1
+ Pos
+2 1 5
+ Rot
+0 1 0 -0.000345298
+ Scale
+3 1.5 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+Walls/wall05.png
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+478345328
+Mesh
+ Enabled
+1
+ Pos
+2 1 -1
+ Rot
+-0 0.000589512 -0 1
+ Scale
+3 1.5 0.999999
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+plane.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+Walls/wall05.png
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+2 1.5
+next
+InstanceMeshComponent
+1
+3703861153
+NodeMesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+node.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+InstanceShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+BoxTriggerComponent
+0
+CameraComponent
+1
+3518862378
+Camera
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
+next
+DirectionalLightComponent
+0
+PointLightComponent
+2
+4131240712
+PointLight
+ Enabled
+1
+ Pos
+4 1 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Colour
+1 1 1 1
+Intensity
+5
+LightEnabled
+1
+next
+2422146173
+PointLight
+ Enabled
+1
+ Pos
+0 1 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Colour
+1 1 1 1
+Intensity
+10
+LightEnabled
+1
+next
+SpotLightComponent
+1
+155948816
+SpotLight
+ Enabled
+1
+ Pos
+2 2 0
+ Rot
+0.906411 0 0 0.422397
+ Scale
+1 0.999999 0.999999
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
+Spot Angle
+70
+next
+ParticleEmitter
+0
+SpriteSheet
+0
+ConditionComponent
+0
+DestructibleMeshComponent
+0
+Polyboard
+0
 end
