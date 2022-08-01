@@ -9,6 +9,7 @@
 #include "Asset/AssetSystem.h"
 #include "FileSystem.h"
 #include "World.h"
+#include "WorldEditor.h"
 
 //Holds the functions to call that are paired to their console command text
 std::map<std::wstring, std::function<void()>> executeMap;
@@ -97,6 +98,9 @@ void Console::Init()
 
 	//Open cutscene sequencer
 	executeMap.emplace(L"CUTSCENE", []() { debugMenu.cutsceneSequencerOpen = !debugMenu.cutsceneSequencerOpen; });
+
+	//Enable texture placement mode in editor
+	executeMap.emplace(L"TEXTURE", []() { WorldEditor::texturePlacement = !WorldEditor::texturePlacement; });
 }
 
 void Console::ConsoleInput()

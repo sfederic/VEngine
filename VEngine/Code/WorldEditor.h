@@ -15,6 +15,8 @@ namespace WorldEditor
 		Component
 	};
 
+	extern bool texturePlacement;
+	
 	void Tick();
 
 	void DeselectPickedActor();

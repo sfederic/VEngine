@@ -12,6 +12,9 @@
 #include "Editor/DebugMenu.h"
 #include "Core.h"
 #include "Asset/AssetPaths.h"
+#include "Render/TextureSystem.h"
+#include "Render/Material.h"
+#include "Components/MeshComponent.h"
 
 std::set<Actor*> pickedActors;
 Actor* pickedActor;
@@ -19,6 +22,7 @@ SpatialComponent* pickedComponent;
 IActorSystem* spawnSystem;
 std::string actorTemplateFilename;
 WorldEditor::PickMode pickMode = WorldEditor::PickMode::Actor;
+bool WorldEditor::texturePlacement = false;
 
 void HandleActorPicking();
 void DuplicateActor();
@@ -53,6 +57,17 @@ void HandleActorPicking()
 		Ray screenPickRay;
 		if (RaycastFromScreen(screenPickRay))
 		{
+			//Assign selected texture in editor to mesh on click
+			if (!textureSystem.selectedTextureInEditor.empty() && WorldEditor::texturePlacement)
+			{
+				auto mesh = dynamic_cast<MeshComponent*>(screenPickRay.hitComponent);
+				if (mesh)
+				{
+					mesh->SetTexture(VString::wstos(textureSystem.selectedTextureInEditor));
+					return;
+				}
+			}
+
 			switch (pickMode)
 			{
 				case WorldEditor::PickMode::Actor:

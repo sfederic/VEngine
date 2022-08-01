@@ -289,6 +289,7 @@ void AssetDock::ActorTemplateFileClicked(const std::string actorTemplateFilename
 void AssetDock::TextureFileClicked(const std::wstring textureFilename)
 {
     textureSystem.selectedTextureInEditor = textureFilename;
+    Log("[%S] texture selected in editor.", textureFilename.c_str());
 }
 
 void AssetDock::CreateNewMapFile()
