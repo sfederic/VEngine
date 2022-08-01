@@ -9,11 +9,13 @@ struct QLineEdit;
 
 struct AssetDock : public QDockWidget
 {
+private:
     QFileSystemModel* fileSystemModel;
     QTreeView* assetTreeView;
     QListWidget* assetIcons;
     QLineEdit* assetFilterLineEdit;
 
+public:
     AssetDock();
     void AssetItemClicked();
     void AssetFolderClicked();
