@@ -14,7 +14,7 @@ void DialogueWidget::Draw(float deltaTime)
 		layout.rect.left - 50.f, layout.rect.top - 25.f, layout.rect.right + 50.f, layout.rect.bottom + 75.f
 	};
 
-	Image("speech_bubble.png", imageRect);
+	Image("UI/speech_bubble.png", imageRect);
 	Text(dialogueText, layout);
 }
 
