@@ -153,20 +153,24 @@ void DialogueDock::SaveDialogueToFile()
 		{
 			auto widget = (QWidget*)dialogueTree->itemWidget(*it, conditionArgColumn);
 			auto conditionString = conditionComboBox->currentText().toStdString();
-			auto foundFunction = functionSystem->FindFunction(conditionString);
 
-			auto args = foundFunction->GetArgTypes();
-			int itemIndex = 0;
-			for (auto& arg : args)
+			if (!conditionString.empty())
 			{
-				if (arg == typeid(std::string))
-				{
-					auto layout = (QVBoxLayout*)widget->layout();
-					auto argWidget = (QLineEdit*)layout->itemAt(itemIndex)->widget();
-					os << argWidget->text().toStdWString() << "\n";
-				}
+				auto foundFunction = functionSystem->FindFunction(conditionString);
 
-				itemIndex++;
+				auto args = foundFunction->GetArgTypes();
+				int itemIndex = 0;
+				for (auto& arg : args)
+				{
+					if (arg == typeid(std::string))
+					{
+						auto layout = (QVBoxLayout*)widget->layout();
+						auto argWidget = (QLineEdit*)layout->itemAt(itemIndex)->widget();
+						os << argWidget->text().toStdWString() << "\n";
+					}
+
+					itemIndex++;
+				}
 			}
 		}
 
