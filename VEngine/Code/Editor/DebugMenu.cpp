@@ -9,6 +9,7 @@
 #include "Editor.h"
 #include "Render/Renderer.h"
 #include "Render/PipelineObjects.h"
+#include "Render/TextureSystem.h"
 #include "TransformGizmo.h"
 #include "Core.h"
 #include "Profile.h"
@@ -67,9 +68,6 @@ void DebugMenu::Tick(float deltaTime)
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
-	SetupPermanentNotifications();
-	RenderPermanentNotifications();
-
 	RenderNotifications(deltaTime);
 
 	//ImGuizmo has to be called here, it's part of ImGui
@@ -97,6 +95,7 @@ void DebugMenu::Tick(float deltaTime)
 	RenderCoreMenu();
 	RenderQuestMenu();
 	RenderParticleMenu();
+	RenderTexturePlacementMenu();
 
 	ImGui::EndFrame();
 
@@ -104,8 +103,6 @@ void DebugMenu::Tick(float deltaTime)
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
 	hasMouseFocus = ImGui::GetIO().WantCaptureMouse;
-
-	ResetPermanentNotifications();
 }
 
 void DebugMenu::Cleanup()
@@ -522,36 +519,14 @@ void DebugMenu::RenderNotifications(float deltaTime)
 	}
 }
 
-void DebugMenu::SetupPermanentNotifications()
+void DebugMenu::RenderTexturePlacementMenu()
 {
 	if (WorldEditor::texturePlacement)
 	{
-		permanentNotifications.emplace_back(DebugNotification(L"TEXTURE PLACEMENT ON"));
+		ImGui::Begin("Texture Placement = ON: (Place selected texture with left click)");
+		ImGui::Text("Selected Texture: %S", textureSystem.selectedTextureInEditor.c_str());
+		ImGui::End();
 	}
-}
-
-void DebugMenu::RenderPermanentNotifications()
-{
-	constexpr float textOffsetX = 20.f;
-	constexpr float notificationLifetime = 3.0f;
-
-	uiSystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
-
-	int offsetIndex = 1;
-	for (auto& note : permanentNotifications)
-	{
-		const float notificationOffsetY = Renderer::GetViewportHeight() - (80.f * offsetIndex);
-		
-		uiSystem.d2dRenderTarget->DrawTextA(note.text.c_str(), note.text.size(), uiSystem.textFormat,
-			{ 0.f, notificationOffsetY, 1000.f, 1000.f }, uiSystem.debugBrushText);
-
-		offsetIndex++;
-	}
-}
-
-void DebugMenu::ResetPermanentNotifications()
-{
-	permanentNotifications.clear();
 }
 
 void DebugMenu::RenderFPSMenu(float deltaTime)
