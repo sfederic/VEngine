@@ -18,6 +18,10 @@ struct DebugNotification
 
 struct DebugMenu
 {
+private:
+	std::vector<DebugNotification> permanentNotifications;
+
+public:
 	std::vector<DebugNotification> debugNotifications;
 
 	bool fpsMenuOpen = false;
@@ -51,6 +55,12 @@ struct DebugMenu
 
 private:
 	void RenderNotifications(float deltaTime);
+
+	//Permanent notifications are based on states of other systems. They aren't on the screen for a select time.
+	void SetupPermanentNotifications();
+	void RenderPermanentNotifications();
+	void ResetPermanentNotifications();
+
 	void RenderFPSMenu(float deltaTime);
 	void RenderGPUMenu();
 	void RenderProfileMenu();
