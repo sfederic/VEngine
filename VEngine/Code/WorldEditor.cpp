@@ -55,22 +55,25 @@ void HandleActorPicking()
 		{
 			switch (pickMode)
 			{
-			case WorldEditor::PickMode::Actor:
-				if (Input::GetAsyncKey(Keys::Ctrl) || pickedActors.empty())
+				case WorldEditor::PickMode::Actor:
 				{
-					pickedActors.insert(screenPickRay.hitActor);
+					if (Input::GetAsyncKey(Keys::Ctrl) || pickedActors.empty())
+					{
+						pickedActors.insert(screenPickRay.hitActor);
+					}
+					else
+					{
+						pickedActors.clear();
+					}
+
+					WorldEditor::SetPickedActor(screenPickRay.hitActor);
+					break;
 				}
-				else
+				case WorldEditor::PickMode::Component:
 				{
-					pickedActors.clear();
+					WorldEditor::SetPickedComponent(screenPickRay.hitComponent);
+					break;
 				}
-
-				WorldEditor::SetPickedActor(screenPickRay.hitActor);
-				break;
-
-			case WorldEditor::PickMode::Component:
-				WorldEditor::SetPickedComponent(screenPickRay.hitComponent);
-				break;
 			}
 		}
 	}
