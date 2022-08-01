@@ -28,9 +28,9 @@ Player
  Enabled
 1
  Position
-0 0 0
+2 0 1
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
 Name
@@ -43,7 +43,154 @@ Unit
 EntranceTrigger
 0
 NPC
+3
+ Enabled
+1
+ Position
+2 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Attack Points
+1
+Attack Range
+1
+Battle State
+fight
+Destruct
+1
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+Move Points
+1
+Move Speed
+3
+Name
+HeadPriest
+Obstacle
 0
+UID
+3256519230
+actorToFocusOn
+
+battleStartText
+
+deathText
+
+disableGridInteract
+0
+interactKnownText
+
+numOfAttacks
+1
+spawnText
+
+next
+ Enabled
+1
+ Position
+4 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Attack Points
+1
+Attack Range
+1
+Battle State
+fight
+Destruct
+1
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+Move Points
+1
+Move Speed
+3
+Name
+NPC1
+Obstacle
+0
+UID
+1221181567
+actorToFocusOn
+
+battleStartText
+
+deathText
+
+disableGridInteract
+0
+interactKnownText
+
+numOfAttacks
+1
+spawnText
+
+next
+ Enabled
+1
+ Position
+0 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Attack Points
+1
+Attack Range
+1
+Battle State
+fight
+Destruct
+1
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+Move Points
+1
+Move Speed
+3
+Name
+NPC2
+Obstacle
+0
+UID
+4147699990
+actorToFocusOn
+
+battleStartText
+
+deathText
+
+disableGridInteract
+0
+interactKnownText
+
+numOfAttacks
+1
+spawnText
+
+next
 MeshActor
 5
  Enabled
@@ -105,7 +252,7 @@ next
  Rotation
 -0 0.000589512 -0 1
  Scale
-3 1.5 0.999999
+3 1.5 0.999992
 Name
 plane4
 UID
@@ -167,7 +314,24 @@ InteractTrigger
 ParticleSystem
 0
 DialogueTrigger
+1
+ Enabled
+1
+ Position
+2 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+DialogueTrigger0
+UID
+1312075167
+playOnSpawn
+1
+playOnTriggerOverlap
 0
+next
 DestructibleActor
 0
 MemoryActor
@@ -201,9 +365,75 @@ TestActor
 CharacterControllerComponent
 0
 QuestComponent
-0
+3
+3256519230
+Quest
+ Enabled
+1
+Quest Name
+
+next
+1221181567
+Quest
+ Enabled
+1
+Quest Name
+
+next
+4147699990
+Quest
+ Enabled
+1
+Quest Name
+
+next
 TimeComponent
+3
+3256519230
+Time
+ Enabled
+1
+activeBeginHour
 0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+next
+1221181567
+Time
+ Enabled
+1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+next
+4147699990
+Time
+ Enabled
+1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+next
 WidgetComponent
 0
 AudioComponent
@@ -230,7 +460,7 @@ Volume
 1
 next
 DialogueComponent
-1
+5
 3518862378
 Dialogue
  Enabled
@@ -238,8 +468,138 @@ Dialogue
 File
 
 next
+3256519230
+Dialogue
+ Enabled
+1
+File
+
+next
+1221181567
+Dialogue
+ Enabled
+1
+File
+
+next
+4147699990
+Dialogue
+ Enabled
+1
+File
+
+next
+1312075167
+Dialogue
+ Enabled
+1
+File
+church_hall/head_priests.dialog
+next
 MemoryComponent
+6
+3256519230
+Memory
+ Enabled
+1
+Add On Interact
 0
+Condition
+
+Condition Value
+
+Image File
+
+Memory Desc
+
+Memory Name
+
+next
+3256519230
+MemoryOnDeath
+ Enabled
+1
+Add On Interact
+0
+Condition
+
+Condition Value
+
+Image File
+
+Memory Desc
+
+Memory Name
+
+next
+1221181567
+Memory
+ Enabled
+1
+Add On Interact
+0
+Condition
+
+Condition Value
+
+Image File
+
+Memory Desc
+
+Memory Name
+
+next
+1221181567
+MemoryOnDeath
+ Enabled
+1
+Add On Interact
+0
+Condition
+
+Condition Value
+
+Image File
+
+Memory Desc
+
+Memory Name
+
+next
+4147699990
+Memory
+ Enabled
+1
+Add On Interact
+0
+Condition
+
+Condition Value
+
+Image File
+
+Memory Desc
+
+Memory Name
+
+next
+4147699990
+MemoryOnDeath
+ Enabled
+1
+Add On Interact
+0
+Condition
+
+Condition Value
+
+Image File
+
+Memory Desc
+
+Memory Name
+
+next
 EmptyComponent
 1
 3518862378
@@ -247,14 +607,14 @@ Root
  Enabled
 1
  Pos
-0 0 0
+2 0 1
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
 next
 MeshComponent
-6
+9
 3518862378
 Mesh
  Enabled
@@ -277,6 +637,153 @@ Grid Obstacle
 0
 Mesh
 character_test.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+3256519230
+Mesh
+ Enabled
+1
+ Pos
+2 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+1221181567
+Mesh
+ Enabled
+1
+ Pos
+4 0 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+Use Texture
+1
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+4147699990
+Mesh
+ Enabled
+1
+ Pos
+0 0 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+
 Metallic
 0
 Rast State
@@ -509,7 +1016,7 @@ Mesh
  Rot
 -0 0.000589512 -0 1
  Scale
-3 1.5 0.999999
+3 1.5 0.999992
 Ambient
 1 1 1 1
 Blend State
@@ -601,7 +1108,22 @@ UvScale
 1 1
 next
 BoxTriggerComponent
-0
+1
+1312075167
+BoxTrigger
+ Enabled
+1
+ Pos
+2 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+next
 CameraComponent
 1
 3518862378
