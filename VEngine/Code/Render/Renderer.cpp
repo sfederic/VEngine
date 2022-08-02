@@ -512,7 +512,7 @@ void CheckSupportedFeatures()
 	D3D11_FEATURE_DATA_THREADING threadFeature = {};
 	HR(device->CheckFeatureSupport(D3D11_FEATURE_THREADING, &threadFeature, sizeof(threadFeature)));
 
-	//Setting sample count higher (4, 8) is ramps up GPU usage by 5-6%
+	//Swapchain's SwapEffect needs to be DXGI_SWAP_EFFECT_DISCARD for MSAA to work.
 	const int sampleCount = 1;
 
 	//MSAA check and set
