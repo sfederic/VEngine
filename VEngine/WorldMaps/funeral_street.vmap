@@ -1,26 +1,3 @@
-Grid
-1
- Enabled
-1
- Position
-0 0 0
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Name
-Grid0
-Size X
-3
-Size Y
-11
-UID
-2653523241
-startBattleOnLoad
-0
-next
-GridActor
-0
 AudioActor
 1
  Enabled
@@ -37,21 +14,27 @@ UID
 1953176639
 next
 Player
+0
+Unit
+0
+CameraActor
 1
  Enabled
 1
  Position
-0 0 0
+1 2 -2
  Rotation
-0 0 0 1
+0.130768 0 -0 0.991413
  Scale
 1 1 1
 Name
-Player0
+CameraActor0
 UID
-3511121757
+2364905173
 next
-Unit
+Grid
+0
+GridActor
 0
 EntranceTrigger
 0
@@ -68,7 +51,7 @@ MeshActor
  Scale
 7 1 11
 Name
-character_test0
+node0
 UID
 58559731
 next
@@ -81,7 +64,7 @@ next
  Scale
 5 0.5 1
 Name
-character_test1
+node1
 UID
 2430559559
 next
@@ -94,7 +77,7 @@ next
  Scale
 5 0.5 1
 Name
-character_test2
+node2
 UID
 180844165
 next
@@ -107,7 +90,7 @@ next
  Scale
 1 1 1
 Name
-character_test3
+node3
 UID
 2299821989
 next
@@ -120,7 +103,7 @@ next
  Scale
 1 1 1
 Name
-character_test4
+node4
 UID
 1129412239
 next
@@ -133,7 +116,7 @@ next
  Scale
 1 1 1
 Name
-character_test5
+node5
 UID
 3641849023
 next
@@ -146,7 +129,7 @@ next
  Scale
 1 1 1
 Name
-character_test6
+node6
 UID
 2126602705
 next
@@ -159,7 +142,7 @@ next
  Scale
 2 2 2
 Name
-character_test7
+node7
 UID
 2718249145
 next
@@ -172,7 +155,7 @@ next
  Scale
 1 1 1
 Name
-character_test8
+node8
 UID
 1436970128
 next
@@ -185,7 +168,7 @@ next
  Scale
 1 1 1
 Name
-character_test9
+node9
 UID
 4269255041
 next
@@ -198,7 +181,7 @@ next
  Scale
 1 1 1
 Name
-character_test10
+node10
 UID
 2326902329
 next
@@ -211,7 +194,7 @@ next
  Scale
 1 1 1
 Name
-character_test11
+node11
 UID
 351960882
 next
@@ -224,7 +207,7 @@ next
  Scale
 1 1 1
 Name
-character_test12
+node12
 UID
 1304177200
 next
@@ -237,7 +220,7 @@ next
  Scale
 1 1 1
 Name
-character_test13
+node13
 UID
 829577286
 next
@@ -250,7 +233,7 @@ next
  Scale
 1 1 1
 Name
-character_test14
+node14
 UID
 165718430
 next
@@ -263,7 +246,7 @@ next
  Scale
 1 1 1
 Name
-character_test15
+node15
 UID
 2595423963
 next
@@ -276,7 +259,7 @@ next
  Scale
 1 1 1
 Name
-character_test16
+node16
 UID
 3731781677
 next
@@ -289,7 +272,7 @@ next
  Scale
 1 1 1
 Name
-character_test17
+node17
 UID
 556718077
 next
@@ -302,7 +285,7 @@ next
  Scale
 1 1 1
 Name
-character_test18
+node18
 UID
 3186828283
 next
@@ -315,7 +298,7 @@ next
  Scale
 1 1 1
 Name
-MeshActor19
+node19
 UID
 3877294665
 next
@@ -409,16 +392,27 @@ DiffuseProbeMap
 0
 TestActor
 0
-CharacterControllerComponent
+CameraComponent
+1
+2364905173
+Camera
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
+next
+TimeComponent
 0
 QuestComponent
 0
-TimeComponent
+CharacterControllerComponent
 0
 WidgetComponent
 0
 AudioComponent
-2
+1
 1953176639
 Audio
  Enabled
@@ -440,51 +434,12 @@ Play On Start
 Volume
 1
 next
-3511121757
-StepSounds
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
-Audio Filename
-step.wav
-Loop
-1
-Pitch
-1
-Play On Start
-1
-Volume
-1
-next
 DialogueComponent
-1
-3511121757
-Dialogue
- Enabled
-1
-File
-
-next
+0
 MemoryComponent
 0
 EmptyComponent
-2
-3511121757
-Root
- Enabled
 1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
-next
 3281437188
 Root
  Enabled
@@ -497,15 +452,15 @@ Root
 1 1 1
 next
 MeshComponent
-21
-3511121757
+20
+3877294665
 Mesh
  Enabled
 1
  Pos
-0 0 0
+1 0 4
  Rot
-0 0 0 1
+0.707229 0 0 -0.706985
  Scale
 1 1 1
 Ambient
@@ -519,7 +474,7 @@ Cull
 Grid Obstacle
 0
 Mesh
-character_test.fbx
+bestowed_coffin.fbx
 Metallic
 0
 Rast State
@@ -1478,119 +1433,10 @@ UvRotationSpeed
 UvScale
 1 1
 next
-3877294665
-Mesh
- Enabled
-1
- Pos
-1 0 4
- Rot
-0.707229 0 0 -0.706985
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-bestowed_coffin.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
 InstanceMeshComponent
-1
-2653523241
-NodeMesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
-Casts Shadow
-1
-Cull
 0
-Grid Obstacle
-0
-Mesh
-node.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-InstanceShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
 BoxTriggerComponent
 0
-CameraComponent
-1
-3511121757
-Camera
-FOV
-60
-Far Z
-1000
-Near Z
-0.01
-next
 DirectionalLightComponent
 1
 1379531862
