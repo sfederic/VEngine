@@ -18,12 +18,14 @@ struct ID3D11Device;
 
 struct ShadowMap
 {
+private:
 	int width = 0;
 	int height = 0;
 
-	//Radius needs to be big otherwise the orthomatrix sort of wraps underneath and over the world
-	float levelRadius = 50.f;
+	//Keep in mind that lower shadowOrthoSize helps with shadow quality.
+	float shadowOrthoSize = 15.f;
 
+public:
 	ID3D11ShaderResourceView* depthMapSRV = nullptr;;
 	ID3D11DepthStencilView* depthMapDSV = nullptr;
 	ID3D11SamplerState* sampler = nullptr;

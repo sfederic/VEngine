@@ -93,14 +93,14 @@ XMMATRIX ShadowMap::GetLightPerspectiveMatrix()
 	}
 
 	auto light = DirectionalLightComponent::system.components[0];
-	XMFLOAT3 center = XMFLOAT3(0.f, 0.f, 0.f);
+	XMFLOAT3 center = light->GetPosition();
 
-	float l = center.x - levelRadius;
-	float b = center.y - levelRadius;
-	float n = center.z - levelRadius;
-	float r = center.x + levelRadius;
-	float t = center.y + levelRadius;
-	float f = center.z + levelRadius;
+	float l = center.x - shadowOrthoSize;
+	float b = center.y - shadowOrthoSize;
+	float n = center.z - shadowOrthoSize;
+	float r = center.x + shadowOrthoSize;
+	float t = center.y + shadowOrthoSize;
+	float f = center.z + shadowOrthoSize;
 
 	XMMATRIX P = XMMatrixOrthographicOffCenterLH(l, r, b, t, n, f);
 	return P;
@@ -115,10 +115,10 @@ XMMATRIX ShadowMap::GetLightViewMatrix()
 
 	auto light = DirectionalLightComponent::system.components[0];
 
-	XMVECTOR backVec = -XMVector3Normalize(light->transform.world.r[2]);
-	XMVECTOR eye = XMVectorSet(0.f, 0.f, 0.f, 1.f) + (backVec * levelRadius);
+	XMVECTOR lookAt = light->GetPositionV() + light->GetForwardVectorV();
+	XMVECTOR lightPos = light->GetPositionV();
 
-	return XMMatrixLookAtLH(eye, XMVectorSet(0.f, 0.f, 0.f, 1.f), VMath::XMVectorUp());
+	return XMMatrixLookAtLH(lightPos, lookAt, VMath::XMVectorUp());
 }
 
 XMMATRIX ShadowMap::GetLightTextureMatrix()
