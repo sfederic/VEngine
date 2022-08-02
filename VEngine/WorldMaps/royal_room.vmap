@@ -1,7 +1,28 @@
-Grid
+AudioActor
+0
+Player
 1
  Enabled
 1
+ Position
+4 -0.000597954 2
+ Rotation
+0 0.707107 0 0.707107
+ Scale
+0.999988 1 0.999988
+Name
+Player0
+UID
+3518862378
+next
+Unit
+0
+CameraActor
+0
+Grid
+1
+ Enabled
+0
  Position
 0 0 0
  Rotation
@@ -21,178 +42,12 @@ startBattleOnLoad
 next
 GridActor
 0
-AudioActor
-0
-Player
-1
- Enabled
-1
- Position
-2 0 1
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Name
-Player0
-UID
-3518862378
-next
-Unit
-0
 EntranceTrigger
 0
 NPC
-3
- Enabled
-1
- Position
-2 0 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Attack Points
-1
-Attack Range
-1
-Battle State
-fight
-Destruct
-1
-Health
-1
-Inspect
-1
-Interact
-1
-Interact Text
-
-Move Points
-1
-Move Speed
-3
-Name
-HeadPriest
-Obstacle
 0
-UID
-3256519230
-actorToFocusOn
-
-battleStartText
-
-deathText
-
-disableGridInteract
-0
-interactKnownText
-
-numOfAttacks
-1
-spawnText
-
-next
- Enabled
-1
- Position
-4 0 1
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Attack Points
-1
-Attack Range
-1
-Battle State
-fight
-Destruct
-1
-Health
-1
-Inspect
-1
-Interact
-1
-Interact Text
-
-Move Points
-1
-Move Speed
-3
-Name
-NPC1
-Obstacle
-0
-UID
-1221181567
-actorToFocusOn
-
-battleStartText
-
-deathText
-
-disableGridInteract
-0
-interactKnownText
-
-numOfAttacks
-1
-spawnText
-
-next
- Enabled
-1
- Position
-0 0 1
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Attack Points
-1
-Attack Range
-1
-Battle State
-fight
-Destruct
-1
-Health
-1
-Inspect
-1
-Interact
-1
-Interact Text
-
-Move Points
-1
-Move Speed
-3
-Name
-NPC2
-Obstacle
-0
-UID
-4147699990
-actorToFocusOn
-
-battleStartText
-
-deathText
-
-disableGridInteract
-0
-interactKnownText
-
-numOfAttacks
-1
-spawnText
-
-next
 MeshActor
-5
+7
  Enabled
 1
  Position
@@ -258,63 +113,6 @@ plane4
 UID
 478345328
 next
-DirectionalLightActor
-0
-SavePoint
-0
-PointLightActor
-2
- Enabled
-1
- Position
-4 1 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Name
-PointLightActor0
-UID
-4131240712
-next
- Enabled
-1
- Position
-0 1 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Name
-PointLightActor1
-UID
-2422146173
-next
-SpotLightActor
-1
- Enabled
-1
- Position
-2 2 0
- Rotation
-0.906411 0 0 0.422397
- Scale
-1 0.999999 0.999999
-Name
-SpotLightActor0
-UID
-155948816
-next
-FenceActor
-0
-Billboard
-0
-InteractTrigger
-0
-ParticleSystem
-0
-DialogueTrigger
-1
  Enabled
 1
  Position
@@ -324,14 +122,54 @@ DialogueTrigger
  Scale
 1 1 1
 Name
-DialogueTrigger0
+MeshActor5
 UID
-1312075167
-playOnSpawn
-1
-playOnTriggerOverlap
-0
+407560948
 next
+ Enabled
+1
+ Position
+0 1 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+MeshActor6
+UID
+1557630750
+next
+DirectionalLightActor
+1
+ Enabled
+1
+ Position
+3 2 1
+ Rotation
+0.0989872 0.943081 -0.208833 0.239142
+ Scale
+1 1 1
+Name
+DirectionalLightActor0
+UID
+2445262463
+next
+SavePoint
+0
+PointLightActor
+0
+SpotLightActor
+0
+FenceActor
+0
+Billboard
+0
+InteractTrigger
+0
+ParticleSystem
+0
+DialogueTrigger
+0
 DestructibleActor
 0
 MemoryActor
@@ -362,78 +200,23 @@ DiffuseProbeMap
 0
 TestActor
 0
-CharacterControllerComponent
-0
-QuestComponent
-3
-3256519230
-Quest
- Enabled
+CameraComponent
 1
-Quest Name
-
-next
-1221181567
-Quest
- Enabled
-1
-Quest Name
-
-next
-4147699990
-Quest
- Enabled
-1
-Quest Name
-
+3518862378
+Camera
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
 next
 TimeComponent
-3
-3256519230
-Time
- Enabled
-1
-activeBeginHour
 0
-activeEndHour
+QuestComponent
 0
-alwaysActive
-1
-condition
-
-conditionArg
-
-next
-1221181567
-Time
- Enabled
-1
-activeBeginHour
+CharacterControllerComponent
 0
-activeEndHour
-0
-alwaysActive
-1
-condition
-
-conditionArg
-
-next
-4147699990
-Time
- Enabled
-1
-activeBeginHour
-0
-activeEndHour
-0
-alwaysActive
-1
-condition
-
-conditionArg
-
-next
 WidgetComponent
 0
 AudioComponent
@@ -457,10 +240,10 @@ Pitch
 Play On Start
 1
 Volume
-1
+-0.00251533
 next
 DialogueComponent
-5
+1
 3518862378
 Dialogue
  Enabled
@@ -468,138 +251,8 @@ Dialogue
 File
 
 next
-3256519230
-Dialogue
- Enabled
-1
-File
-
-next
-1221181567
-Dialogue
- Enabled
-1
-File
-
-next
-4147699990
-Dialogue
- Enabled
-1
-File
-
-next
-1312075167
-Dialogue
- Enabled
-1
-File
-church_hall/head_priests.dialog
-next
 MemoryComponent
-6
-3256519230
-Memory
- Enabled
-1
-Add On Interact
 0
-Condition
-
-Condition Value
-
-Image File
-
-Memory Desc
-
-Memory Name
-
-next
-3256519230
-MemoryOnDeath
- Enabled
-1
-Add On Interact
-0
-Condition
-
-Condition Value
-
-Image File
-
-Memory Desc
-
-Memory Name
-
-next
-1221181567
-Memory
- Enabled
-1
-Add On Interact
-0
-Condition
-
-Condition Value
-
-Image File
-
-Memory Desc
-
-Memory Name
-
-next
-1221181567
-MemoryOnDeath
- Enabled
-1
-Add On Interact
-0
-Condition
-
-Condition Value
-
-Image File
-
-Memory Desc
-
-Memory Name
-
-next
-4147699990
-Memory
- Enabled
-1
-Add On Interact
-0
-Condition
-
-Condition Value
-
-Image File
-
-Memory Desc
-
-Memory Name
-
-next
-4147699990
-MemoryOnDeath
- Enabled
-1
-Add On Interact
-0
-Condition
-
-Condition Value
-
-Image File
-
-Memory Desc
-
-Memory Name
-
-next
 EmptyComponent
 1
 3518862378
@@ -607,14 +260,14 @@ Root
  Enabled
 1
  Pos
-2 0 1
+4 -0.000597954 2
  Rot
--0 0 -0 1
+0 0.707107 0 0.707107
  Scale
-1 1 1
+0.999988 1 0.999988
 next
 MeshComponent
-9
+8
 3518862378
 Mesh
  Enabled
@@ -622,7 +275,7 @@ Mesh
  Pos
 0 0 0
  Rot
-0 0 0 1
+0 1 0 1.19209e-07
  Scale
 1 1 1
 Ambient
@@ -652,154 +305,7 @@ Static
 Texture
 test.png
 Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
 0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-3256519230
-Mesh
- Enabled
-1
- Pos
-2 0 4
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-1221181567
-Mesh
- Enabled
-1
- Pos
-4 0 1
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-4147699990
-Mesh
- Enabled
-1
- Pos
-0 0 1
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-Use Texture
-1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -822,7 +328,7 @@ Mesh
  Scale
 3 1.5 1
 Ambient
-1 1 1 1
+0.5 0.5 0.5 1
 Blend State
 null
 Casts Shadow
@@ -848,7 +354,7 @@ Static
 Texture
 Walls/wall05.png
 Use Texture
-1
+0
 UvOffset
 0 0
 UvOffsetSpeed
@@ -871,7 +377,7 @@ Mesh
  Scale
 3 2.99909 0.9997
 Ambient
-1 1 1 1
+0.5 0.5 0.5 1
 Blend State
 null
 Casts Shadow
@@ -897,7 +403,7 @@ Static
 Texture
 Floors/floor.jpg
 Use Texture
-1
+0
 UvOffset
 0 0
 UvOffsetSpeed
@@ -920,7 +426,7 @@ Mesh
  Scale
 3 1.5 1
 Ambient
-1 1 1 1
+0.5 0.5 0.5 1
 Blend State
 null
 Casts Shadow
@@ -946,7 +452,7 @@ Static
 Texture
 Walls/wall05.png
 Use Texture
-1
+0
 UvOffset
 0 0
 UvOffsetSpeed
@@ -969,7 +475,7 @@ Mesh
  Scale
 3 1.5 1
 Ambient
-1 1 1 1
+0.5 0.5 0.5 1
 Blend State
 null
 Casts Shadow
@@ -995,7 +501,7 @@ Static
 Texture
 Walls/wall05.png
 Use Texture
-1
+0
 UvOffset
 0 0
 UvOffsetSpeed
@@ -1018,7 +524,7 @@ Mesh
  Scale
 3 1.5 0.999992
 Ambient
-1 1 1 1
+0.5 0.5 0.5 1
 Blend State
 null
 Casts Shadow
@@ -1044,7 +550,7 @@ Static
 Texture
 Walls/wall05.png
 Use Texture
-1
+0
 UvOffset
 0 0
 UvOffsetSpeed
@@ -1056,12 +562,110 @@ UvRotationSpeed
 UvScale
 2 1.5
 next
+407560948
+Mesh
+ Enabled
+1
+ Pos
+2 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+1 1 1 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+barrel.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+1557630750
+Mesh
+ Enabled
+1
+ Pos
+0 1 3
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+0.5 0.5 0.5 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+sphere_high.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
 InstanceMeshComponent
 1
 3703861153
 NodeMesh
  Enabled
-1
+0
  Pos
 0 0 0
  Rot
@@ -1108,92 +712,28 @@ UvScale
 1 1
 next
 BoxTriggerComponent
-1
-1312075167
-BoxTrigger
- Enabled
-1
- Pos
-2 0 4
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Extents
-0.45 0.45 0.45
-Offset
-0 0 0
-next
-CameraComponent
-1
-3518862378
-Camera
-FOV
-60
-Far Z
-1000
-Near Z
-0.01
-next
-DirectionalLightComponent
 0
+DirectionalLightComponent
+1
+2445262463
+DirectionalLight
+ Enabled
+1
+ Pos
+3 2 1
+ Rot
+0.0989872 0.943081 -0.208833 0.239142
+ Scale
+1 1 1
+Colour
+1 1 1 1
+LightEnabled
+1
+next
 PointLightComponent
-2
-4131240712
-PointLight
- Enabled
-1
- Pos
-4 1 4
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Colour
-1 1 1 1
-Intensity
-5
-LightEnabled
-1
-next
-2422146173
-PointLight
- Enabled
-1
- Pos
-0 1 4
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Colour
-1 1 1 1
-Intensity
-10
-LightEnabled
-1
-next
+0
 SpotLightComponent
-1
-155948816
-SpotLight
- Enabled
-1
- Pos
-2 2 0
- Rot
-0.906411 0 0 0.422397
- Scale
-1 0.999999 0.999999
-Colour
-1 1 1 1
-Intensity
-25
-LightEnabled
-1
-Spot Angle
-70
-next
+0
 ParticleEmitter
 0
 SpriteSheet

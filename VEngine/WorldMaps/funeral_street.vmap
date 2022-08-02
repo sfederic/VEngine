@@ -41,7 +41,7 @@ EntranceTrigger
 NPC
 0
 MeshActor
-20
+9
  Enabled
 1
  Position
@@ -149,156 +149,13 @@ next
  Enabled
 1
  Position
--2 0 1
- Rotation
-0 0.707279 0 0.706934
- Scale
-1 1 1
-Name
-node8
-UID
-1436970128
-next
- Enabled
-1
- Position
--1.5 0 2
- Rotation
-0 0.707279 0 0.706934
- Scale
-1 1 1
-Name
-node9
-UID
-4269255041
-next
- Enabled
-1
- Position
--2 0 4
- Rotation
-0 0.707279 0 0.706934
- Scale
-1 1 1
-Name
-node10
-UID
-2326902329
-next
- Enabled
-1
- Position
--1.5 0 3.5
- Rotation
-0 0.707279 0 0.706934
- Scale
-1 1 1
-Name
-node11
-UID
-351960882
-next
- Enabled
-1
- Position
--1.5 0 5
- Rotation
-0 0.707279 0 0.706934
- Scale
-1 1 1
-Name
-node12
-UID
-1304177200
-next
- Enabled
-1
- Position
--1.5 0 6
- Rotation
-0 0.707279 0 0.706934
- Scale
-1 1 1
-Name
-node13
-UID
-829577286
-next
- Enabled
-1
- Position
--2 0 5.5
- Rotation
-0 0.707279 0 0.706934
- Scale
-1 1 1
-Name
-node14
-UID
-165718430
-next
- Enabled
-1
- Position
--2 0 7.5
- Rotation
-0 0.707279 0 0.706934
- Scale
-1 1 1
-Name
-node15
-UID
-2595423963
-next
- Enabled
-1
- Position
--2 0 8.5
- Rotation
-0 0.707279 0 0.706934
- Scale
-1 1 1
-Name
-node16
-UID
-3731781677
-next
- Enabled
-1
- Position
--1.5 0 8
- Rotation
-0 0.707279 0 0.706934
- Scale
-1 1 1
-Name
-node17
-UID
-556718077
-next
- Enabled
-1
- Position
--1.5 0 9
- Rotation
-0 0.707279 0 0.706934
- Scale
-1 1 1
-Name
-node18
-UID
-3186828283
-next
- Enabled
-1
- Position
 1 0 4
  Rotation
 0.707229 0 0 -0.706985
  Scale
 1 1 1
 Name
-node19
+MeshActor8
 UID
 3877294665
 next
@@ -452,56 +309,7 @@ Root
 1 1 1
 next
 MeshComponent
-20
-3877294665
-Mesh
- Enabled
-1
- Pos
-1 0 4
- Rot
-0.707229 0 0 -0.706985
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-bestowed_coffin.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
+9
 58559731
 Mesh
  Enabled
@@ -513,7 +321,7 @@ Mesh
  Scale
 7 1 11
 Ambient
-1 1 1 1
+0.5 0.5 0.5 1
 Blend State
 null
 Casts Shadow
@@ -539,7 +347,7 @@ Static
 Texture
 Floors/floor.jpg
 Use Texture
-1
+0
 UvOffset
 0 0
 UvOffsetSpeed
@@ -588,7 +396,7 @@ Static
 Texture
 test_fence.png
 Use Texture
-1
+0
 UvOffset
 0 0
 UvOffsetSpeed
@@ -637,7 +445,7 @@ Static
 Texture
 test_fence.png
 Use Texture
-1
+0
 UvOffset
 0 0
 UvOffsetSpeed
@@ -686,7 +494,7 @@ Static
 Texture
 test.png
 Use Texture
-1
+0
 UvOffset
 0 0
 UvOffsetSpeed
@@ -735,7 +543,7 @@ Static
 Texture
 test.png
 Use Texture
-1
+0
 UvOffset
 0 0
 UvOffsetSpeed
@@ -784,7 +592,7 @@ Static
 Texture
 test.png
 Use Texture
-1
+0
 UvOffset
 0 0
 UvOffsetSpeed
@@ -833,7 +641,7 @@ Static
 Texture
 test.png
 Use Texture
-1
+0
 UvOffset
 0 0
 UvOffsetSpeed
@@ -882,7 +690,7 @@ Static
 Texture
 test.png
 Use Texture
-1
+0
 UvOffset
 0 0
 UvOffsetSpeed
@@ -894,18 +702,18 @@ UvRotationSpeed
 UvScale
 1 1
 next
-1436970128
+3877294665
 Mesh
  Enabled
 1
  Pos
--2 0 1
+1 0 4
  Rot
-0 0.707279 0 0.706934
+0.707229 0 0 -0.706985
  Scale
 1 1 1
 Ambient
-1 1 1 1
+0.5 0.5 0.5 1
 Blend State
 null
 Casts Shadow
@@ -915,7 +723,7 @@ Cull
 Grid Obstacle
 0
 Mesh
-character_test.fbx
+bestowed_coffin.fbx
 Metallic
 0
 Rast State
@@ -931,497 +739,7 @@ Static
 Texture
 test.png
 Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
 0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-4269255041
-Mesh
- Enabled
-1
- Pos
--1.5 0 2
- Rot
-0 0.707279 0 0.706934
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-character_test.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-2326902329
-Mesh
- Enabled
-1
- Pos
--2 0 4
- Rot
-0 0.707279 0 0.706934
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-character_test.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-351960882
-Mesh
- Enabled
-1
- Pos
--1.5 0 3.5
- Rot
-0 0.707279 0 0.706934
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-character_test.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-1304177200
-Mesh
- Enabled
-1
- Pos
--1.5 0 5
- Rot
-0 0.707279 0 0.706934
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-character_test.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-829577286
-Mesh
- Enabled
-1
- Pos
--1.5 0 6
- Rot
-0 0.707279 0 0.706934
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-character_test.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-165718430
-Mesh
- Enabled
-1
- Pos
--2 0 5.5
- Rot
-0 0.707279 0 0.706934
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-character_test.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-2595423963
-Mesh
- Enabled
-1
- Pos
--2 0 7.5
- Rot
-0 0.707279 0 0.706934
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-character_test.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-3731781677
-Mesh
- Enabled
-1
- Pos
--2 0 8.5
- Rot
-0 0.707279 0 0.706934
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-character_test.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-556718077
-Mesh
- Enabled
-1
- Pos
--1.5 0 8
- Rot
-0 0.707279 0 0.706934
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-character_test.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-3186828283
-Mesh
- Enabled
-1
- Pos
--1.5 0 9
- Rot
-0 0.707279 0 0.706934
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-character_test.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-Use Texture
-1
 UvOffset
 0 0
 UvOffsetSpeed
