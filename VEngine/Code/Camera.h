@@ -11,7 +11,7 @@ struct CameraComponent : SpatialComponent
 {
 	COMPONENT_SYSTEM(CameraComponent)
 
-	XMVECTOR focusPoint;
+	XMVECTOR focusPoint = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 
 	Actor* targetActor = nullptr;
 
@@ -22,11 +22,11 @@ struct CameraComponent : SpatialComponent
 	float farZ = 1000.f;
 	float cameraMoveSpeed = 7.5f;
 
-	bool editorCamera = false;
+	bool isEditorCamera = false;
 	bool arcBallMovementOn = false;
 
 	CameraComponent() {}
-	CameraComponent(XMFLOAT3 startPos, bool isEditorCamera);
+	CameraComponent(XMFLOAT3 startPos, bool isEditorCamera_);
 	XMMATRIX GetViewMatrix();
 	XMMATRIX GetProjectionMatrix();
 	void Pitch(float angle);

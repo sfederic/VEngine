@@ -14,14 +14,12 @@
 CameraComponent editorCamera(XMFLOAT3(0.f, 1.f, -3.f), true);
 CameraComponent* activeCamera;
 
-CameraComponent::CameraComponent(XMFLOAT3 startPos, bool isEditorCamera)
+CameraComponent::CameraComponent(XMFLOAT3 startPos, bool isEditorCamera_)
 {
-	focusPoint = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-
 	transform.position = startPos;
 	UpdateTransform();
 
-	editorCamera = isEditorCamera;
+	isEditorCamera = isEditorCamera_;
 }
 
 XMMATRIX CameraComponent::GetViewMatrix()
@@ -32,7 +30,7 @@ XMMATRIX CameraComponent::GetViewMatrix()
 	XMMATRIX view = XMMatrixIdentity();
 
 	//Player camera logic
-	if (!editorCamera)
+	if (!isEditorCamera)
 	{
 		if (targetActor)
 		{
@@ -177,7 +175,7 @@ void CameraComponent::Tick(float deltaTime)
 	XMVECTOR up = GetUpVectorV();
 	XMVECTOR forward = GetForwardVectorV();
 
-	if (editorCamera)
+	if (isEditorCamera)
 	{
 		MouseMove(editor->viewportMouseX, editor->viewportMouseY);
 
