@@ -31,17 +31,17 @@ float4 PSMain(VS_OUT i) : SV_Target
     endResult.diffuse *= material.ambient;
     endResult.specular *= material.ambient;
 
-    //LIGHT PROBES AND SHADOWS COMMENTED OUT FOR NOW
-    
-    //float4 shadowColour = float4(0.f, 0.f, 0.f, 0.f);
-    //if (shadowsEnabled)
-    //{
-    //    shadowColour = CalcShadowFactor(i.shadowPos);
-    //}
+    float4 shadowColour = float4(0.f, 0.f, 0.f, 0.f);
+    if (shadowsEnabled)
+    {
+        shadowColour = CalcShadowFactor(i.shadowPos);
+    }
     
     //float4 shIrradiance = float4(GetSHIrradiance(i.normal, SH), 1.0f);
     
-    float4 finalColour = (globalAmbient + endResult.diffuse + endResult.specular) * texColour;
+    shadowColour /= 4.f;
+    
+    float4 finalColour = ((globalAmbient + endResult.diffuse + endResult.specular) + shadowColour) * texColour;
     finalColour.a = material.ambient.a;
-	return finalColour;
+    return finalColour;
 }

@@ -616,11 +616,11 @@ void Renderer::Render()
 	cbTime->Map(&timeData);
 	cbTime->SetVS();
 
+	SetShadowData();
+	RenderShadowPass();
+
 	//Setup render calls
 	PostProcessInstance::system.GetNumActors() == 0 ? RenderSetup() : RenderPostProcessSetup();
-
-	//SetShadowData();
-	//RenderShadowPass();
 
 	UpdateLights();
 
