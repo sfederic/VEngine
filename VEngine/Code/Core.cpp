@@ -132,12 +132,16 @@ void Core::StartGame()
 	gameplayOn = true;
 
 	Player* player = GameUtils::GetPlayer();
-	if (player)
+	if (player) //Try set player camera as active
 	{
 		if (player->camera)
 		{
 			activeCamera = player->camera;
 		}
+	}
+	else if(!CameraComponent::system.components.empty()) //try to find another camera that isn't the editor's camera
+	{
+		activeCamera = CameraComponent::system.components[0];
 	}
 
 	initialStartingWorldFromEditor = World::worldFilename;
