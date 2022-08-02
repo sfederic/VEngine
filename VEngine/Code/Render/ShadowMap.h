@@ -22,9 +22,6 @@ private:
 	int width = 0;
 	int height = 0;
 
-	//Keep in mind that lower shadowOrthoSize helps with shadow quality.
-	float shadowOrthoSize = 15.f;
-
 public:
 	ID3D11ShaderResourceView* depthMapSRV = nullptr;;
 	ID3D11DepthStencilView* depthMapDSV = nullptr;

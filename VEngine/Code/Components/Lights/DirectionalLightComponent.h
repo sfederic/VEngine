@@ -9,8 +9,8 @@ struct DirectionalLightComponent : SpatialComponent
 
 	Light lightData;
 
+	float shadowMapOrthoSize = 15.f;
+
 	DirectionalLightComponent();
-	virtual void Tick(float deltaTime) override;
-	virtual void Create() override;
 	virtual Properties GetProps() override;
 };

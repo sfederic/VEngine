@@ -95,6 +95,8 @@ XMMATRIX ShadowMap::GetLightPerspectiveMatrix()
 	auto light = DirectionalLightComponent::system.components[0];
 	XMFLOAT3 center = light->GetPosition();
 
+	float shadowOrthoSize = light->shadowMapOrthoSize;
+
 	float l = center.x - shadowOrthoSize;
 	float b = center.y - shadowOrthoSize;
 	float n = center.z - shadowOrthoSize;

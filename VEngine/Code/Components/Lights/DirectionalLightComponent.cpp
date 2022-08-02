@@ -8,19 +8,12 @@ DirectionalLightComponent::DirectionalLightComponent()
     lightData.lightType = (int)LightType::Directional;
 }
 
-void DirectionalLightComponent::Tick(float deltaTime)
-{
-}
-
-void DirectionalLightComponent::Create()
-{
-}
-
 Properties DirectionalLightComponent::GetProps()
 {
     auto props = __super::GetProps();
     props.title = "DirectionalLight";
     props.Add("Colour", &lightData.colour);
     props.Add("LightEnabled", &lightData.enabled);
+    props.Add("ShadowMap Size", &shadowMapOrthoSize);
     return props;
 }
