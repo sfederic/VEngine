@@ -16,7 +16,7 @@ struct BlendState;
 //The data passed into a shader's constant buffer. Has to be seperate because of byte packing.
 struct MaterialShaderData
 {
-	XMFLOAT4 ambient = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
+	XMFLOAT4 ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.f);
 	XMFLOAT4 emissive = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
 	XMFLOAT4 diffuse = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
 	XMFLOAT4 specular = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
@@ -25,7 +25,7 @@ struct MaterialShaderData
 	float uvRotation = 0.f;
 	float smoothness = 0.f;
 	float metallic = 0.f;
-	int useTexture = true; //Keep in mind that bools in HLSL are 4 bytes
+	int useTexture = false; //Keep in mind that bools in HLSL are 4 bytes
 };
 
 class Material
