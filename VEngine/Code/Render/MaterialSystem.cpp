@@ -5,10 +5,6 @@
 
 MaterialSystem materialSystem;
 
-MaterialSystem::MaterialSystem() : System("MaterialSystem")
-{
-}
-
 Material* MaterialSystem::CreateMaterial(std::string textureFilename, std::string shaderFilename)
 {
 	auto uid = GenerateUID();
@@ -16,6 +12,11 @@ Material* MaterialSystem::CreateMaterial(std::string textureFilename, std::strin
 	auto material = materials[uid].get();
 	material->SetUID(uid);
 	return material;
+}
+
+void MaterialSystem::DestroyMaterial(UID materialUID)
+{
+	materials.erase(materialUID);
 }
 
 Material* MaterialSystem::FindMaterial(UID uid)

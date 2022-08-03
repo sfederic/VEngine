@@ -38,7 +38,7 @@ void Material::Create()
 
 void Material::Destroy()
 {
-	materialSystem.materials.erase(uid);
+	materialSystem.DestroyMaterial(uid);
 }
 
 static void ReassignTexture(void* data)
