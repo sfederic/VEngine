@@ -16,6 +16,7 @@ namespace WorldEditor
 	};
 
 	extern bool texturePlacement;
+	extern bool materialPlacement;
 	
 	void Tick();
 

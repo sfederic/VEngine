@@ -10,4 +10,5 @@ struct AssetFileExtensions
 	inline static const std::string cutscene = ".cutscene";
 	inline static const std::string worldMap = ".vmap";
 	inline static const std::string gameSave = ".vmap";
+	inline static const std::string material = ".vmat";
 };

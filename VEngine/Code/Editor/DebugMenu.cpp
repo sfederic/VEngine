@@ -35,6 +35,8 @@
 #include "Quests/Quest.h"
 #include "Render/RenderUtils.h"
 #include "Render/Texture2D.h"
+#include "Render/MaterialSystem.h"
+#include "Render/Material.h"
 
 DebugMenu debugMenu;
 
@@ -525,6 +527,16 @@ void DebugMenu::RenderTexturePlacementMenu()
 	{
 		ImGui::Begin("Texture Placement = ON: (Place selected texture with left click)");
 		ImGui::Text("Selected Texture: %S", textureSystem.selectedTextureInEditor.c_str());
+		ImGui::End();
+	}
+}
+
+void DebugMenu::RenderMaterialPlacementMenu()
+{
+	if (WorldEditor::materialPlacement)
+	{
+		ImGui::Begin("Material Placement = ON: (Place selected material with left click)");
+		ImGui::Text("Selected Material: %S", materialSystem.selectedMaterialInEditor.c_str());
 		ImGui::End();
 	}
 }

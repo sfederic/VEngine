@@ -1,7 +1,8 @@
 #pragma once
-#include "Properties.h"
-#include <DirectXMath.h>
+
 #include <string>
+#include <DirectXMath.h>
+#include "Properties.h"
 #include "UID.h"
 #include "VEnum.h"
 
@@ -30,6 +31,7 @@ struct MaterialShaderData
 
 class Material
 {
+private:
 	UID uid = 0;
 
 public:

@@ -17,6 +17,7 @@
 #include "PropertiesDock.h"
 #include "Render/TextureSystem.h"
 #include "Render/Material.h"
+#include "Render/MaterialSystem.h"
 #include "Gameplay/GameInstance.h"
 #include "Log.h"
 #include "Asset/AssetPaths.h"
@@ -136,6 +137,11 @@ void AssetDock::AssetItemClicked()
         assetPath = VString::GetSubStringAtFoundOffset(assetPath, AssetBaseFolders::actorTemplate);
         ActorTemplateFileClicked(assetPath);
     }
+    else if (std::wcscmp(extension, L".vmat") == 0) //Material files
+    {
+        assetPath = VString::GetSubStringAtFoundOffset(assetPath, AssetBaseFolders::material);
+        MaterialFileClicked(assetPath);
+    }
     else if (std::wcscmp(extension, L".jpg") == 0 || //Image files
         std::wcscmp(extension, L".png") == 0)
     {
@@ -202,7 +208,7 @@ void AssetDock::AssetFolderClicked()
         {
             icon = *Icons::icon;
         }       
-        else if (str.contains(".mt"))
+        else if (str.contains(".vmat"))
         {
             icon = *Icons::material;
         }         
@@ -240,6 +246,10 @@ void AssetDock::ShowContextMenu(const QPoint& point)
     QAction newActorTemplateAction("New Actor Template", this);
     connect(&newActorTemplateAction, &QAction::triggered, this, &AssetDock::CreateNewActorTemplateFile);
     contextMenu.addAction(&newActorTemplateAction);
+
+    QAction newMaterialAction("New Material", this);
+    connect(&newMaterialAction, &QAction::triggered, this, &AssetDock::CreateNewMaterialFile);
+    contextMenu.addAction(&newMaterialAction);
 
     contextMenu.exec(mapToGlobal(point));
 }
@@ -290,6 +300,12 @@ void AssetDock::TextureFileClicked(const std::wstring textureFilename)
 {
     textureSystem.selectedTextureInEditor = textureFilename;
     Log("[%S] texture selected in editor.", textureFilename.c_str());
+}
+
+void AssetDock::MaterialFileClicked(const std::string materialFilename)
+{
+    materialSystem.selectedMaterialInEditor = materialFilename;
+    Log("[%s] material selected in editor.", materialFilename.c_str());
 }
 
 void AssetDock::CreateNewMapFile()
@@ -379,4 +395,21 @@ void AssetDock::CreateNewActorTemplateFile()
     {
         Log("No selected actor to create template from.");
     }
+}
+
+void AssetDock::CreateNewMaterialFile()
+{
+    //Create empty material
+    auto material = Material("test.png", "DefaultShader.hlsl");
+
+    QFileDialog dialog;
+    QString materialFileName = dialog.getSaveFileName(nullptr, "Create Material File",
+        QString::fromStdString(AssetBaseFolders::material),
+        QString::fromStdString(AssetFileExtensions::material));
+
+    Serialiser s(materialFileName.toStdString(), OpenMode::Out);
+    auto materialProps = material.GetProps();
+    s.Serialise(materialProps);
+
+    Log("Material [%s] created.", materialFileName.toStdString().c_str());
 }

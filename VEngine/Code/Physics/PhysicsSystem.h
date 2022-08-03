@@ -24,6 +24,9 @@ enum class PhysicsType
 	Dynamic
 };
 
+//@Todo: if non static meshcomponents are inside a skybox for example, they'll explode out because that
+//skybox hasn't disabled its boundingbox and/or physicscomponent. make a flag that turns it off.
+
 //Interface to PhysX systems
 //Ref: https://gameworksdocs.nvidia.com/PhysX/4.1/documentation/physxguide/Index.html
 struct PhysicsSystem

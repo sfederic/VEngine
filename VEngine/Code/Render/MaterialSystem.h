@@ -13,10 +13,13 @@ private:
 	std::unordered_map<UID, std::unique_ptr<Material>> materials;
 
 public:
+	std::string selectedMaterialInEditor;
+
 	MaterialSystem() : System("MaterialSystem") {}
 	Material* CreateMaterial(std::string textureFilename, std::string shaderFilename);
 	void DestroyMaterial(UID materialUID);
 	Material* FindMaterial(UID uid);
+	Material LoadMaterialFromFile(const std::string filename);
 	void CreateAllMaterials();
 	void Cleanup();
 };

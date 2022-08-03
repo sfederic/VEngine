@@ -101,6 +101,9 @@ void Console::Init()
 
 	//Enable texture placement mode in editor
 	executeMap.emplace(L"TEXTURE", []() { WorldEditor::texturePlacement = !WorldEditor::texturePlacement; });
+
+	//Enable material placement mode in editor
+	executeMap.emplace(L"MATERIAL", []() { WorldEditor::materialPlacement = !WorldEditor::materialPlacement; });
 }
 
 void Console::ConsoleInput()

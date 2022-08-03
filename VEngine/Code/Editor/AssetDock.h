@@ -1,4 +1,5 @@
 #pragma once
+
 #include <qdockwidget.h>
 #include <string>
 
@@ -28,6 +29,7 @@ private:
     void MeshFileClicked(const std::string meshFilename);
     void ActorTemplateFileClicked(const std::string actorTemplateFilename);
     void TextureFileClicked(const std::wstring textureFilename);
+    void MaterialFileClicked(const std::string materialFilename);
 
     //Create asset functions
     void CreateNewMapFile();
@@ -36,4 +38,6 @@ private:
     //Select the picked actor in the editor and create a template from it by writing its properties and 
     //component properties to file.
     void CreateNewActorTemplateFile();
+
+    void CreateNewMaterialFile();
 };

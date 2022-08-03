@@ -1,20 +1,7 @@
 AudioActor
 0
 Player
-1
- Enabled
-1
- Position
-4 -0.000597954 2
- Rotation
-0 0.707107 0 0.707107
- Scale
-0.999988 1 0.999988
-Name
-Player0
-UID
-3518862378
-next
+0
 Unit
 0
 CameraActor
@@ -32,9 +19,9 @@ Grid
 Name
 Grid0
 Size X
-5
+10
 Size Y
-5
+10
 UID
 3703861153
 startBattleOnLoad
@@ -47,20 +34,7 @@ EntranceTrigger
 NPC
 0
 MeshActor
-7
- Enabled
-1
- Position
--1 1 2
- Rotation
-0 0.707229 0 0.706985
- Scale
-3 1.5 1
-Name
-plane0
-UID
-2478654919
-next
+18
  Enabled
 1
  Position
@@ -68,50 +42,24 @@ next
  Rotation
 -0.707 -0.0002114 0.000211464 0.707213
  Scale
-3 2.99909 0.9997
+50 50 50
 Name
-plane1
+sword0
 UID
 2395008998
 next
  Enabled
 1
  Position
-5 1 2
+1 0 10
  Rotation
--0 -0.706985 -0 0.707228
+-2.98023e-08 0.5 -5.16192e-08 0.866025
  Scale
-3 1.5 1
+0.999999 0.999999 1
 Name
-plane2
+sword1
 UID
-1885008978
-next
- Enabled
-1
- Position
-2 1 5
- Rotation
-0 1 0 -0.000345298
- Scale
-3 1.5 1
-Name
-plane3
-UID
-3565991756
-next
- Enabled
-1
- Position
-2 1 -1
- Rotation
--0 0.000589512 -0 1
- Scale
-3 1.5 0.999992
-Name
-plane4
-UID
-478345328
+4136765408
 next
  Enabled
 1
@@ -122,33 +70,215 @@ next
  Scale
 1 1 1
 Name
-MeshActor5
+sword2
 UID
-407560948
+2517094038
 next
  Enabled
 1
  Position
-0 1 3
+5 5.9 1
  Rotation
 -0 0 -0 1
  Scale
 1 1 1
 Name
-MeshActor6
+sword3
 UID
-1557630750
+4234875231
+next
+ Enabled
+1
+ Position
+7 -0.5 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+sword4
+UID
+1977561392
+next
+ Enabled
+1
+ Position
+2 0 -1
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Name
+sword5
+UID
+3296850605
+next
+ Enabled
+1
+ Position
+-2 0.5 -2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+sword6
+UID
+4237592277
+next
+ Enabled
+1
+ Position
+0 0 -3.9
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+sword7
+UID
+641179793
+next
+ Enabled
+1
+ Position
+3.2 -0.3 1.2
+ Rotation
+0.271654 0.323744 0.582564 0.694272
+ Scale
+0.999999 1 0.999999
+Name
+sword8
+UID
+2305666381
+next
+ Enabled
+1
+ Position
+2.7 5.9 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+MeshActor9
+UID
+2033650840
+next
+ Enabled
+1
+ Position
+0.3 5.9 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+MeshActor10
+UID
+2601834547
+next
+ Enabled
+1
+ Position
+0.3 7.7 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+MeshActor11
+UID
+4072313756
+next
+ Enabled
+1
+ Position
+3 7.7 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+MeshActor12
+UID
+585455875
+next
+ Enabled
+1
+ Position
+4.9 7.7 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+MeshActor13
+UID
+103248452
+next
+ Enabled
+1
+ Position
+5.1 7.7 -0.9
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+MeshActor14
+UID
+3795284440
+next
+ Enabled
+1
+ Position
+3.1 7.7 -1.1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+MeshActor15
+UID
+2544153410
+next
+ Enabled
+1
+ Position
+0.2 7.7 -0.7
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+MeshActor16
+UID
+137013015
+next
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+50 50 50
+Name
+MeshActor17
+UID
+4076738088
 next
 DirectionalLightActor
 1
  Enabled
 1
  Position
-3 2 1
+-2 5 7
  Rotation
-0.0989872 0.943081 -0.208833 0.239142
+0.0151766 0.981039 -0.172984 -0.0860711
  Scale
-1 1 1
+0.999989 0.999982 0.999995
 Name
 DirectionalLightActor0
 UID
@@ -197,20 +327,30 @@ MovingGridActor
 CutsceneActor
 0
 DiffuseProbeMap
-0
+1
+ Enabled
+1
+ Position
+-4 1 6
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Name
+DiffuseProbeMap0
+UID
+2571328140
+sizeX
+10
+sizeY
+10
+sizeZ
+10
+next
 TestActor
 0
 CameraComponent
-1
-3518862378
-Camera
-FOV
-60
-Far Z
-1000
-Near Z
-0.01
-next
+0
 TimeComponent
 0
 QuestComponent
@@ -220,152 +360,15 @@ CharacterControllerComponent
 WidgetComponent
 0
 AudioComponent
-1
-3518862378
-StepSounds
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
-Audio Filename
-step.wav
-Loop
-1
-Pitch
-1
-Play On Start
-1
-Volume
--0.00251533
-next
+0
 DialogueComponent
-1
-3518862378
-Dialogue
- Enabled
-1
-File
-
-next
+0
 MemoryComponent
 0
 EmptyComponent
-1
-3518862378
-Root
- Enabled
-1
- Pos
-4 -0.000597954 2
- Rot
-0 0.707107 0 0.707107
- Scale
-0.999988 1 0.999988
-next
+0
 MeshComponent
-8
-3518862378
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 1 0 1.19209e-07
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-character_test.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-2478654919
-Mesh
- Enabled
-1
- Pos
--1 1 2
- Rot
-0 0.707229 0 0.706985
- Scale
-3 1.5 1
-Ambient
-0.5 0.5 0.5 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-plane.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-Walls/wall05.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-2 1.5
-next
+18
 2395008998
 Mesh
  Enabled
@@ -375,7 +378,7 @@ Mesh
  Rot
 -0.707 -0.0002114 0.000211464 0.707213
  Scale
-3 2.99909 0.9997
+50 50 50
 Ambient
 0.5 0.5 0.5 1
 Blend State
@@ -415,16 +418,16 @@ UvRotationSpeed
 UvScale
 3 3
 next
-1885008978
+4136765408
 Mesh
  Enabled
 1
  Pos
-5 1 2
+1 0 10
  Rot
--0 -0.706985 -0 0.707228
+-2.98023e-08 0.5 -5.16192e-08 0.866025
  Scale
-3 1.5 1
+0.999999 0.999999 1
 Ambient
 0.5 0.5 0.5 1
 Blend State
@@ -436,7 +439,7 @@ Cull
 Grid Obstacle
 0
 Mesh
-plane.fbx
+boat.fbx
 Metallic
 0
 Rast State
@@ -450,9 +453,9 @@ Specular
 Static
 1
 Texture
-Walls/wall05.png
+barrel_texture.jpg
 Use Texture
-0
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -464,105 +467,7 @@ UvRotationSpeed
 UvScale
 1 1
 next
-3565991756
-Mesh
- Enabled
-1
- Pos
-2 1 5
- Rot
-0 1 0 -0.000345298
- Scale
-3 1.5 1
-Ambient
-0.5 0.5 0.5 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-plane.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-Walls/wall05.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-478345328
-Mesh
- Enabled
-1
- Pos
-2 1 -1
- Rot
--0 0.000589512 -0 1
- Scale
-3 1.5 0.999992
-Ambient
-0.5 0.5 0.5 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-plane.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-Walls/wall05.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-2 1.5
-next
-407560948
+2517094038
 Mesh
  Enabled
 1
@@ -573,7 +478,7 @@ Mesh
  Scale
 1 1 1
 Ambient
-1 1 1 1
+0.5 0.5 0.5 1
 Blend State
 null
 Casts Shadow
@@ -583,7 +488,7 @@ Cull
 Grid Obstacle
 0
 Mesh
-barrel.fbx
+fountain.fbx
 Metallic
 0
 Rast State
@@ -611,12 +516,12 @@ UvRotationSpeed
 UvScale
 1 1
 next
-1557630750
+4234875231
 Mesh
  Enabled
 1
  Pos
-0 1 3
+5 5.9 1
  Rot
 -0 0 -0 1
  Scale
@@ -632,7 +537,56 @@ Cull
 Grid Obstacle
 0
 Mesh
-sphere_high.fbx
+small_table.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+0
+Texture
+test.png
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+1977561392
+Mesh
+ Enabled
+1
+ Pos
+7 -0.5 3
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+0.5 0.5 0.5 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+tabletop.fbx
 Metallic
 0
 Rast State
@@ -649,6 +603,643 @@ Texture
 test.png
 Use Texture
 0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+3296850605
+Mesh
+ Enabled
+1
+ Pos
+2 0 -1
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Ambient
+0.5 0.5 0.5 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+cone.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+4237592277
+Mesh
+ Enabled
+1
+ Pos
+-2 0.5 -2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+0.5 0.5 0.5 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+ico_sphere.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+641179793
+Mesh
+ Enabled
+1
+ Pos
+0 0 -3.9
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+0.5 0.5 0.5 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+lamp_post02.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+2305666381
+Mesh
+ Enabled
+1
+ Pos
+3.2 -0.3 1.2
+ Rot
+0.271654 0.323744 0.582564 0.694272
+ Scale
+0.999999 1 0.999999
+Ambient
+0.5 0.5 0.5 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+sword.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+2033650840
+Mesh
+ Enabled
+1
+ Pos
+2.7 5.9 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+0.5 0.5 0.5 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+small_table.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+0
+Texture
+test.png
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+2601834547
+Mesh
+ Enabled
+1
+ Pos
+0.3 5.9 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+0.5 0.5 0.5 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+small_table.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+0
+Texture
+test.png
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+4072313756
+Mesh
+ Enabled
+1
+ Pos
+0.3 7.7 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+0.5 0.5 0.5 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+small_table.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+0
+Texture
+test.png
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+585455875
+Mesh
+ Enabled
+1
+ Pos
+3 7.7 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+0.5 0.5 0.5 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+small_table.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+0
+Texture
+test.png
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+103248452
+Mesh
+ Enabled
+1
+ Pos
+4.9 7.7 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+0.5 0.5 0.5 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+small_table.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+0
+Texture
+test.png
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+3795284440
+Mesh
+ Enabled
+1
+ Pos
+5.1 7.7 -0.9
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+0.5 0.5 0.5 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+small_table.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+0
+Texture
+test.png
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+2544153410
+Mesh
+ Enabled
+1
+ Pos
+3.1 7.7 -1.1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+0.5 0.5 0.5 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+small_table.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+0
+Texture
+test.png
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+137013015
+Mesh
+ Enabled
+1
+ Pos
+0.2 7.7 -0.7
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Ambient
+0.5 0.5 0.5 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+small_table.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+DefaultShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+0
+Texture
+test.png
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
+4076738088
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+50 50 50
+Ambient
+0.5 0.5 0.5 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+ico_sphere.fbx
+Metallic
+0
+Rast State
+nobackcull
+Shader
+Unlit.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+Sky/sky.jpg
+Use Texture
+1
 UvOffset
 0 0
 UvOffsetSpeed
@@ -661,7 +1252,7 @@ UvScale
 1 1
 next
 InstanceMeshComponent
-1
+2
 3703861153
 NodeMesh
  Enabled
@@ -711,6 +1302,55 @@ UvRotationSpeed
 UvScale
 1 1
 next
+2571328140
+InstanceMesh
+ Enabled
+1
+ Pos
+-4 1 6
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Ambient
+0.5 0.5 0.5 1
+Blend State
+null
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+Mesh
+cube.fbx
+Metallic
+0
+Rast State
+solid
+Shader
+InstanceShader.hlsl
+Smoothness
+0
+Specular
+1 1 1 1
+Static
+1
+Texture
+test.png
+Use Texture
+0
+UvOffset
+0 0
+UvOffsetSpeed
+0 0
+UvRotation
+0
+UvRotationSpeed
+0
+UvScale
+1 1
+next
 BoxTriggerComponent
 0
 DirectionalLightComponent
@@ -720,15 +1360,17 @@ DirectionalLight
  Enabled
 1
  Pos
-3 2 1
+-2 5 7
  Rot
-0.0989872 0.943081 -0.208833 0.239142
+0.0151766 0.981039 -0.172984 -0.0860711
  Scale
-1 1 1
+0.999989 0.999982 0.999995
 Colour
 1 1 1 1
 LightEnabled
 1
+ShadowMap Size
+15
 next
 PointLightComponent
 0

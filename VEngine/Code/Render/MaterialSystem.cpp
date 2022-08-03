@@ -1,7 +1,8 @@
 #include "vpch.h"
 #include "MaterialSystem.h"
-#include "Material.h"
 #include <cassert>
+#include "Material.h"
+#include "Serialiser.h"
 
 MaterialSystem materialSystem;
 
@@ -28,6 +29,19 @@ Material* MaterialSystem::FindMaterial(UID uid)
 	}
 
 	return materialIt->second.get();
+}
+
+Material MaterialSystem::LoadMaterialFromFile(const std::string filename)
+{
+	const std::string filepath = "Materials/" + filename;
+	
+	auto material = Material("", "");
+	auto materialProps = material.GetProps();
+
+	Deserialiser d(filepath, OpenMode::In);
+	d.Deserialise(materialProps);
+
+	return material;
 }
 
 void MaterialSystem::CreateAllMaterials()

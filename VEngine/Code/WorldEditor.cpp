@@ -14,6 +14,7 @@
 #include "Asset/AssetPaths.h"
 #include "Render/TextureSystem.h"
 #include "Render/Material.h"
+#include "Render/MaterialSystem.h"
 #include "Components/MeshComponent.h"
 
 std::set<Actor*> pickedActors;
@@ -22,7 +23,9 @@ SpatialComponent* pickedComponent;
 IActorSystem* spawnSystem;
 std::string actorTemplateFilename;
 WorldEditor::PickMode pickMode = WorldEditor::PickMode::Actor;
+
 bool WorldEditor::texturePlacement = false;
+bool WorldEditor::materialPlacement = false;
 
 void HandleActorPicking();
 void DuplicateActor();
@@ -64,6 +67,19 @@ void HandleActorPicking()
 				if (mesh)
 				{
 					mesh->SetTexture(VString::wstos(textureSystem.selectedTextureInEditor));
+					return;
+				}
+			}
+
+			//Assign selected material in editor to mesh on click
+			if (!materialSystem.selectedMaterialInEditor.empty() && WorldEditor::materialPlacement)
+			{
+				auto mesh = dynamic_cast<MeshComponent*>(screenPickRay.hitComponent);
+				if (mesh)
+				{
+					Material loadedMaterial = materialSystem.LoadMaterialFromFile(materialSystem.selectedMaterialInEditor);
+					loadedMaterial.Create();
+					*mesh->material = loadedMaterial;
 					return;
 				}
 			}
