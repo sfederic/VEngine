@@ -98,6 +98,7 @@ void DebugMenu::Tick(float deltaTime)
 	RenderQuestMenu();
 	RenderParticleMenu();
 	RenderTexturePlacementMenu();
+	RenderConsoleCommandsMenu();
 
 	ImGui::EndFrame();
 
@@ -494,6 +495,24 @@ void DebugMenu::RenderParticleMenu()
 	ImGui::Begin("Particles");
 
 	ImGui::End();
+}
+
+void DebugMenu::RenderConsoleCommandsMenu()
+{
+	if (consoleCommandsMenuOpen)
+	{
+		ImGui::Begin("Console Commands");
+
+		for (auto& consoleMapPair : Console::executeMap)
+		{
+			std::wstring functionName = consoleMapPair.first;
+			std::string functionDescription = consoleMapPair.second.second;
+
+			ImGui::Text("%S | %s", functionName.c_str(), functionDescription.c_str());
+		}
+
+		ImGui::End();
+	}
 }
 
 //Handle notifications (eg. "Shaders recompiled", "ERROR: Not X", etc)

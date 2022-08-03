@@ -72,6 +72,7 @@ private:
 	void RenderCoreMenu();
 	void RenderQuestMenu();
 	void RenderParticleMenu();
+	void RenderConsoleCommandsMenu();
 
 	void RenderTexturePlacementMenu();
 	void RenderMaterialPlacementMenu();

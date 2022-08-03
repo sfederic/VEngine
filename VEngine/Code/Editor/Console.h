@@ -1,8 +1,15 @@
 #pragma once
 
+#include <map>
+#include <string>
+#include <functional>
+
 namespace Console
 {
 	extern bool bConsoleActive;
+
+	//Holds the functions to call that are paired to their console command text
+	extern std::map<std::wstring, std::pair<std::function<void()>, std::string>> executeMap;
 
 	void Init();
 	void ConsoleInput();

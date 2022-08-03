@@ -11,8 +11,7 @@
 #include "World.h"
 #include "WorldEditor.h"
 
-//Holds the functions to call that are paired to their console command text
-std::map<std::wstring, std::function<void()>> executeMap;
+std::map<std::wstring, std::pair<std::function<void()>, std::string>> Console::executeMap;
 
 bool Console::bConsoleActive;
 
@@ -24,86 +23,117 @@ void Console::Init()
 
 	//Debug Menu Commands
 
-	//LiSt all console commands
-	executeMap.emplace(L"LS", []() { debugMenu.consoleCommandsMenuOpen = !debugMenu.consoleCommandsMenuOpen; });
+	executeMap.emplace(L"LS",
+		std::make_pair([]() { debugMenu.consoleCommandsMenuOpen = !debugMenu.consoleCommandsMenuOpen; },
+		"List all console commands"));
 
-	//Show snapping menu
-	executeMap.emplace(L"SNAP", []() { debugMenu.snapMenuOpen = !debugMenu.snapMenuOpen; });
+	executeMap.emplace(L"SNAP",
+		std::make_pair([]() { debugMenu.snapMenuOpen = !debugMenu.snapMenuOpen; },
+		"Show snapping menu"));
 
-	//Show profile stats
-	executeMap.emplace(L"PROFILE", []() { debugMenu.profileMenuOpen = !debugMenu.profileMenuOpen; });
+	executeMap.emplace(L"PROFILE",
+		std::make_pair([]() { debugMenu.profileMenuOpen = !debugMenu.profileMenuOpen; },
+		"Show profile stats"));
 
-	//Show FPS and GPU timing info
-	executeMap.emplace(L"FPS", []() { debugMenu.fpsMenuOpen = !debugMenu.fpsMenuOpen; });
+	executeMap.emplace(L"FPS",
+		std::make_pair([]() { debugMenu.fpsMenuOpen = !debugMenu.fpsMenuOpen; },
+		"Show FPS and GPU timing info"));
 
-	//Show actor props
-	executeMap.emplace(L"PROPS", []() { debugMenu.propsMenuOpen = !debugMenu.propsMenuOpen; });
+	executeMap.emplace(L"PROPS",
+		std::make_pair([]() { debugMenu.propsMenuOpen = !debugMenu.propsMenuOpen; },
+		"Show actor props"));
 
-	//Shows current undo/redo commands in buffer
-	executeMap.emplace(L"COMMANDS", []() { debugMenu.commandsMenuOpen = !debugMenu.commandsMenuOpen; });
+	executeMap.emplace(L"COMMANDS",
+		std::make_pair([]() { debugMenu.commandsMenuOpen = !debugMenu.commandsMenuOpen; },
+		"Shows current undo / redo commands in buffer"));
 
-	//Show GPU info
-	executeMap.emplace(L"GPU", []() { debugMenu.gpuMenuOpen = !debugMenu.gpuMenuOpen; });
+	executeMap.emplace(L"GPU",
+		std::make_pair([]() { debugMenu.gpuMenuOpen = !debugMenu.gpuMenuOpen; },
+		"Show GPU info"));
 
-	//Shows actor info while hovering over the actor with mouse
-	executeMap.emplace(L"ACTOR", []() { debugMenu.actorInspectMenuOpen = !debugMenu.actorInspectMenuOpen; });
+	executeMap.emplace(L"ACTOR",
+		std::make_pair([]() { debugMenu.actorInspectMenuOpen = !debugMenu.actorInspectMenuOpen; },
+		"Shows actor info while hovering over the actor with mouse"));
 
-	//Show actor system stats
-	executeMap.emplace(L"ACTORSYSTEM", []() { debugMenu.actorSystemMenuOpen = !debugMenu.actorSystemMenuOpen; });
+	executeMap.emplace(L"ACTORSYSTEM",
+		std::make_pair([]() { debugMenu.actorSystemMenuOpen = !debugMenu.actorSystemMenuOpen; },
+		"Show actor system stats"));
 
-	//show component system stats
-	executeMap.emplace(L"COMPONENTSYSTEM", []() { debugMenu.componentSystemMenuOpen = !debugMenu.componentSystemMenuOpen; });
+	executeMap.emplace(L"COMPONENTSYSTEM",
+		std::make_pair([]() { debugMenu.componentSystemMenuOpen = !debugMenu.componentSystemMenuOpen; },
+		"Show component system stats"));
 
-	//shows in-world stats (eg. vertex count, actor count)
-	executeMap.emplace(L"STATS", []() { debugMenu.worldStatsMenuOpen = !debugMenu.worldStatsMenuOpen; });
+	executeMap.emplace(L"STATS",
+		std::make_pair([]() { debugMenu.worldStatsMenuOpen = !debugMenu.worldStatsMenuOpen; },
+		"shows in - world stats (e.g.vertex count, actor count)"));
 
-	//Menu for manipulating game instance data
-	executeMap.emplace(L"GAME", []() { debugMenu.gameInstaceMenuOpen = !debugMenu.gameInstaceMenuOpen; });
+	executeMap.emplace(L"GAME",
+		std::make_pair([]() { debugMenu.gameInstaceMenuOpen = !debugMenu.gameInstaceMenuOpen; },
+		"Menu for manipulating game instance data"));
 
-	executeMap.emplace(L"PARTICLE", []() { debugMenu.particleMenuOpen = !debugMenu.particleMenuOpen; });
+	executeMap.emplace(L"PARTICLE",
+		std::make_pair([]() { debugMenu.particleMenuOpen = !debugMenu.particleMenuOpen; },
+		"Particle"));
 
-	//Show all Memory info player has
-	executeMap.emplace(L"MEM", []() { debugMenu.memoriesMenuOpen = !debugMenu.memoriesMenuOpen; });
+	executeMap.emplace(L"MEM", 
+		std::make_pair([]() { debugMenu.memoriesMenuOpen = !debugMenu.memoriesMenuOpen; },
+		"Show all Memory info player has"));
 
-	//Show all in-game quests and their state
-	executeMap.emplace(L"QUEST", []() { debugMenu.questMenuOpen = !debugMenu.questMenuOpen; });
+	executeMap.emplace(L"QUEST",
+		std::make_pair([]() { debugMenu.questMenuOpen = !debugMenu.questMenuOpen; },
+		"Show all in-game quests and their state"));
 
-	//show memory for engine systems
-	executeMap.emplace(L"MEMORY", []() { debugMenu.memoryMenuOpen = !debugMenu.memoryMenuOpen; });
+	executeMap.emplace(L"MEMORY",
+		std::make_pair([]() { debugMenu.memoryMenuOpen = !debugMenu.memoryMenuOpen; },
+		"show memory for engine systems"));
 
-	//Show skeleton heirarchy on actor's meshcomponent
-	executeMap.emplace(L"SKEL", []() { debugMenu.skeletonViewMenuOpen = !debugMenu.skeletonViewMenuOpen; });
+	executeMap.emplace(L"SKEL",
+		std::make_pair([]() { debugMenu.skeletonViewMenuOpen = !debugMenu.skeletonViewMenuOpen; },
+		"Show skeleton heirarchy on actor's meshcomponent"));
 
-	//Reload current world
-	executeMap.emplace(L"RESET", []() { FileSystem::ReloadCurrentWorld(); });
+	executeMap.emplace(L"RESET",
+		std::make_pair([]() { FileSystem::ReloadCurrentWorld(); },
+		"Reload current world"));
 
-	//Show core engine variables
-	executeMap.emplace(L"CORE", []() { debugMenu.coreMenuOpen = !debugMenu.coreMenuOpen; });
+	executeMap.emplace(L"CORE",
+		std::make_pair([]() { debugMenu.coreMenuOpen = !debugMenu.coreMenuOpen; },
+		"Show core engine variables"));
 
-	//Work through light probes in map and get their RBG values from a cubemap rendering
-	executeMap.emplace(L"BAKE", []() { Renderer::RenderLightProbeViews(); });
+	executeMap.emplace(L"BAKE",
+		std::make_pair([]() { Renderer::RenderLightProbeViews(); },
+		"Work through light probes in map and get their RBG values from a cubemap rendering"));
 
-	//Save/Load current world to/From binary format
-	executeMap.emplace(L"BIN", []() { FileSystem::WriteAllActorSystemsToBinary(); });
-	executeMap.emplace(L"LOADBIN", []() { FileSystem::ReadAllActorSystemsFromBinary(); });
+	executeMap.emplace(L"BIN",
+		std::make_pair([]() { FileSystem::WriteAllActorSystemsToBinary(); },
+		"Save current world to binary format"));
 
-	//Asset Build Commands
-	executeMap.emplace(L"BUILD MESHES", []() { assetSystem.WriteAllMeshDataToMeshAssetFiles(); });
+	executeMap.emplace(L"LOADBIN",
+		std::make_pair([]() { FileSystem::ReadAllActorSystemsFromBinary(); },
+		"Load current world from existing binary file"));
 
-	//Write all game save maps
-	executeMap.emplace(L"BUILD MAPS", []() { assetSystem.BuildAllGameplayMapFiles(); });
+	executeMap.emplace(L"BUILD MESHES",
+		std::make_pair([]() { assetSystem.WriteAllMeshDataToMeshAssetFiles(); },
+		"Build meshes as their engine specific file format."));
 
-	//Load in default actors for most worlds (Player, Grid, DirectionalLight, etc.)
-	executeMap.emplace(L"DEFAULT", []() { World::CreateDefaultMapActors(); });
+	executeMap.emplace(L"BUILD MAPS",
+		std::make_pair([]() { assetSystem.BuildAllGameplayMapFiles(); },
+		"Write all game save maps."));
 
-	//Open cutscene sequencer
-	executeMap.emplace(L"CUTSCENE", []() { debugMenu.cutsceneSequencerOpen = !debugMenu.cutsceneSequencerOpen; });
+	executeMap.emplace(L"DEFAULT",
+		std::make_pair([]() { World::CreateDefaultMapActors(); },
+		"Load in default actors for most worlds (Player, Grid, DirectionalLight, etc.)"));
 
-	//Enable texture placement mode in editor
-	executeMap.emplace(L"TEXTURE", []() { WorldEditor::texturePlacement = !WorldEditor::texturePlacement; });
+	executeMap.emplace(L"CUTSCENE",
+		std::make_pair([]() { debugMenu.cutsceneSequencerOpen = !debugMenu.cutsceneSequencerOpen; },
+		"Open Cutscene Sequencer."));
 
-	//Enable material placement mode in editor
-	executeMap.emplace(L"MATERIAL", []() { WorldEditor::materialPlacement = !WorldEditor::materialPlacement; });
+	executeMap.emplace(L"TEXTURE",
+		std::make_pair([]() { WorldEditor::texturePlacement = !WorldEditor::texturePlacement; },
+		"Enable texture placement mode in editor"));
+
+	executeMap.emplace(L"MATERIAL",
+		std::make_pair([]() { WorldEditor::materialPlacement = !WorldEditor::materialPlacement; },
+		"Enable material placement mode in editor"));
 }
 
 void Console::ConsoleInput()
@@ -164,7 +194,7 @@ void Console::ExecuteString()
 	auto executeIt = executeMap.find(consoleString);
 	if (executeIt != executeMap.end())
 	{
-		executeIt->second();
+		executeIt->second.first();
 	}
 	else
 	{
