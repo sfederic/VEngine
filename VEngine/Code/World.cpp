@@ -12,6 +12,7 @@
 #include "Profile.h"
 #include "Render/TextureSystem.h"
 #include "Render/MaterialSystem.h"
+#include "Render/Material.h"
 #include "Core.h"
 #include "Audio/AudioSystem.h"
 #include "Render/SpriteSystem.h"
