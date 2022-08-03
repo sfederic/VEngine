@@ -9,6 +9,9 @@
 #include "World.h"
 #include "VString.h"
 
+//Actor systems were based on UE4 talk from Rare
+//Ref: https://www.unrealengine.com/en-US/events/unreal-fest-europe-2019/aggregating-ticks-to-manage-scale-in-sea-of-thieves
+
 template <typename T>
 class ActorSystem : IActorSystem
 {
