@@ -1,9 +1,9 @@
 #include "Include/Common.hlsli"
 
-VS_OUT VSMain(VS_IN i)
+VS_OUT main(VS_IN i)
 {
 	VS_OUT o;
-
+	
 	o.pos = mul(model, float4(i.pos, 1.0f));
 	o.pos = mul(lightViewProj, o.pos);
 	o.posWS = mul(model, float4(i.pos, 1.0f));
@@ -17,8 +17,3 @@ VS_OUT VSMain(VS_IN i)
 	return o;
 }
 
-void PSMain(VS_OUT i)
-{
-	float4 diffuse = t.Sample(s, i.uv);
-	clip(diffuse.a - 0.15f);
-}

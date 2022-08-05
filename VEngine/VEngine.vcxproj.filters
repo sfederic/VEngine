@@ -1066,9 +1066,19 @@
     <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Code\Render\Shaders\SolidColour.hlsl" />
-    <FxCompile Include="Code\Render\Shaders\DefaultShader.hlsl" />
+    <FxCompile Include="Code\Render\Shaders\Default_vs.hlsl" />
     <FxCompile Include="Code\Render\Shaders\Include\Common.hlsli" />
-    <FxCompile Include="Code\Render\Shaders\InstanceShader.hlsl" />
+    <FxCompile Include="Code\Render\Shaders\Default_ps.hlsl" />
+    <FxCompile Include="Code\Render\Shaders\Grass_vs.hlsl" />
+    <FxCompile Include="Code\Render\Shaders\TextureClip_ps.hlsl" />
+    <FxCompile Include="Code\Render\Shaders\SolidColour_ps.hlsl" />
+    <FxCompile Include="Code\Render\Shaders\InstanceShader_ps.hlsl" />
+    <FxCompile Include="Code\Render\Shaders\InstanceShader_vs.hlsl" />
+    <FxCompile Include="Code\Render\Shaders\PostProcess_vs.hlsl" />
+    <FxCompile Include="Code\Render\Shaders\PostProcess_ps.hlsl" />
+    <FxCompile Include="Code\Render\Shaders\Animation_vs.hlsl" />
+    <FxCompile Include="Code\Render\Shaders\Shadows_vs.hlsl" />
+    <FxCompile Include="Code\Render\Shaders\Water_vs.hlsl" />
+    <FxCompile Include="Code\Render\Shaders\WaterFloat_vs.hlsl" />
   </ItemGroup>
 </Project>

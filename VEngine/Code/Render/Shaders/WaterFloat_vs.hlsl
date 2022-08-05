@@ -1,9 +1,8 @@
-//Bobs actor/mesh up and down. Meant to be used on water or whatever.
-
 #include "Include/Common.hlsli"
 #include "Include/TransformOut.hlsli"
 
-VS_OUT VSMain(VS_IN i)
+//Bobs actor/mesh up and down. Meant to be used on water or whatever.
+VS_OUT main(VS_IN i)
 {
 	VS_OUT o;
 
@@ -22,9 +21,4 @@ VS_OUT VSMain(VS_IN i)
 	o.pos = mul(mvp, float4(i.pos, 1.0f));
 
 	return o;
-}
-
-float4 PSMain(VS_OUT i) : SV_Target
-{
-	return t.Sample(s, i.uv);
 }

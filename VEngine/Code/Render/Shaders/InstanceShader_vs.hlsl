@@ -1,6 +1,6 @@
 #include "Include/Common.hlsli"
 
-VS_OUT VSMain(VS_IN i)
+VS_OUT main(VS_IN i)
 {
 	VS_OUT o;
 
@@ -18,8 +18,3 @@ VS_OUT VSMain(VS_IN i)
 	return o;
 }
 
-float4 PSMain(VS_OUT i) : SV_Target
-{
-	float4 finalColour = instanceData[i.instanceID].colour;
-	return finalColour;
-}

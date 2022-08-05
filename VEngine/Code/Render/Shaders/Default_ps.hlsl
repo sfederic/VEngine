@@ -1,17 +1,10 @@
 #include "Include/Common.hlsli"
-#include "Include/TransformOut.hlsli"
 
-VS_OUT VSMain(VS_IN i)
-{
-	TransformOut o;
-	return o.Transform(i);
-}
-
-float4 PSMain(VS_OUT i) : SV_Target
+float4 main(VS_OUT i) : SV_Target
 {
     float4 texColour = float4(0.f, 0.f, 0.f, 0.f);
     
-	if(material.useTexture)
+    if (material.useTexture)
     {
         texColour = t.Sample(s, i.uv);
         clip(texColour.a - 0.10f);
@@ -21,12 +14,12 @@ float4 PSMain(VS_OUT i) : SV_Target
         texColour = material.ambient;
     }
 
-	float3 normal = normalize(i.normal);
-	float4 position = i.posWS;
+    float3 normal = normalize(i.normal);
+    float4 position = i.posWS;
 
-	float3 V = normalize(eyePosition - position).xyz;
+    float3 V = normalize(eyePosition - position).xyz;
 
-	LightingResult endResult = CalcForwardLighting(V, position, normal);
+    LightingResult endResult = CalcForwardLighting(V, position, normal);
 
     endResult.diffuse *= material.ambient;
     endResult.specular *= material.ambient;
