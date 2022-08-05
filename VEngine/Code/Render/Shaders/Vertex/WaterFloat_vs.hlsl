@@ -1,5 +1,5 @@
-#include "Include/Common.hlsli"
-#include "Include/TransformOut.hlsli"
+#include "../Include/Common.hlsli"
+#include "../Include/TransformOut.hlsli"
 
 //Bobs actor/mesh up and down. Meant to be used on water or whatever.
 VS_OUT main(VS_IN i)
@@ -12,7 +12,7 @@ VS_OUT main(VS_IN i)
 	o.posWS = mul(model, float4(i.pos, 1.0f));
 	o.shadowPos = mul(lightMVP, o.posWS);
 	o.instanceID = i.instanceID;
-
+	
 	//mainly bob up on y-axis, give x and z small offset for effect to look 'natural'
 	i.pos.y += sin(timeSinceStartup) * 0.1f;
 	i.pos.x += sin(timeSinceStartup) * 0.05f;

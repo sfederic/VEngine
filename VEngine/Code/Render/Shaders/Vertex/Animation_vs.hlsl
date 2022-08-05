@@ -1,5 +1,5 @@
-#include "Include/Common.hlsli"
-#include "Include/TransformOut.hlsli"
+#include "../Include/Common.hlsli"
+#include "../Include/TransformOut.hlsli"
 
 VS_OUT main(VS_IN i)
 {

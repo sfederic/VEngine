@@ -1,7 +1,7 @@
-#include "Include/Common.hlsli"
-#include "Include/TransformOut.hlsli"
+#include "../Include/Common.hlsli"
+#include "../Include/TransformOut.hlsli"
 
-VS_OUT main(VS_IN i) 
+VS_OUT main(VS_IN i)
 {
 	VS_OUT o;
 
@@ -12,10 +12,9 @@ VS_OUT main(VS_IN i)
 	o.shadowPos = mul(lightMVP, o.posWS);
 	o.instanceID = i.instanceID;
 
-	i.pos.y = sin((newUv.x + newUv.y) * timeSinceStartup) * 0.1f;
-
+	//Simple wave
+	i.pos.z += (sin(timeSinceStartup) * i.pos.y) * 0.1f;
+	i.pos.x += (sin(timeSinceStartup) * i.pos.y) * 0.1f;
 	o.pos = mul(mvp, float4(i.pos, 1.0f));
-
 	return o;
 }
-
