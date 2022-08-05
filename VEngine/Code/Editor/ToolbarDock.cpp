@@ -61,6 +61,11 @@ ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 	hLayout->addWidget(new QLabel("Rotation:"));
 	hLayout->addWidget(rotationSnapSpinBox);
 
+	//World/Local transform
+	worldLocalTransformSetting = new QLabel("|WORLD|", this);
+	worldLocalTransformSetting->setFixedWidth(75);
+	hLayout->addWidget(worldLocalTransformSetting);
+
 	//Camera movespeed
 	hLayout->addWidget(new QLabel("Camera Speed:"));
 
@@ -85,6 +90,11 @@ ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 	toolbarWidget->setLayout(hLayout);
 
 	setWidget(toolbarWidget);
+}
+
+void ToolbarDock::SetTransformDisplay(std::string currentTransformSettingName)
+{
+	
 }
 
 void ToolbarDock::StartPlay()

@@ -28,5 +28,6 @@ struct IEditor
 	virtual void ClearProperties() = 0;
 	virtual void SelectActorInWorldList() = 0;
 	virtual void SetPlayButtonText(std::string text) = 0;
+	virtual void SetCurrentTransformMode(const std::string trasnformMode) {}
 	virtual void SetEditorTitle(const std::string title) {}
 };

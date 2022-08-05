@@ -3,6 +3,7 @@
 
 class QPushButton;
 class QComboBox;
+class QLabel;
 struct SpinBox;
 
 struct ToolbarDock : public QDockWidget
@@ -19,11 +20,14 @@ struct ToolbarDock : public QDockWidget
 
 	QComboBox* worldEditorPickMode = nullptr;
 
+	QLabel* worldLocalTransformSetting = nullptr;
+
 	//values for pick mode combobox
 	QString pickerStringActor = "Actor";
 	QString pickerStringComponent = "Component";
 
 	ToolbarDock();
+	void SetTransformDisplay(std::string currentTransformSettingName);
 
 private:
 	void StartPlay();

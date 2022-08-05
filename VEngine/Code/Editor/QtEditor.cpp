@@ -3,6 +3,7 @@
 #include <QtWidgets/QApplication>
 #include <QWidget>
 #include <QFont>
+#include <qlabel.h>
 #include <qgridlayout.h>
 #include <qscrollarea.h>
 #include <qpushbutton.h>
@@ -176,4 +177,9 @@ void QtEditor::SetEditorTitle(const std::string title)
 {
     QString world = QString::fromStdString(title);
     mainWindow->setWindowTitle(editorTitle + world);
+}
+
+void QtEditor::SetCurrentTransformMode(const std::string transformMode)
+{
+    mainWindow->toolbarDock->worldLocalTransformSetting->setText(QString::fromStdString(transformMode));
 }

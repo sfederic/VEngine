@@ -30,6 +30,7 @@ struct QtEditor : IEditor, QObject
 	virtual void SelectActorInWorldList() override;
 	virtual void SetPlayButtonText(std::string text) override;
 	virtual void SetEditorTitle(const std::string title) override;
+	virtual void SetCurrentTransformMode(const std::string transformMode) override;
 	void SetEditorFont();
 	void EnableDarkMode();
 };

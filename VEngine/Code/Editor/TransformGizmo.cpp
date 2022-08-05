@@ -90,10 +90,12 @@ void TransformGizmo::Tick()
         if (currentTransformMode == ImGuizmo::MODE::LOCAL)
         {
             currentTransformMode = ImGuizmo::MODE::WORLD;
+            editor->SetCurrentTransformMode("|WORLD|");
         }
         else if (currentTransformMode == ImGuizmo::MODE::WORLD)
         {
             currentTransformMode = ImGuizmo::MODE::LOCAL;
+            editor->SetCurrentTransformMode("|LOCAL|");
         }
     }
 
@@ -117,6 +119,12 @@ void TransformGizmo::Tick()
         }
     }
     
+    if (WorldEditor::GetPickedActor() == nullptr && WorldEditor::GetPickedComponent() == nullptr)
+    {
+        ImGui::End();
+        return;
+    }
+
     ImGuizmo::Manipulate(*view.m, *proj.m, currentTransformOperation, currentTransformMode,
         *pickedObjectMatrix.m, nullptr, currentSnapValues, bounds, boundsSnap);
 
