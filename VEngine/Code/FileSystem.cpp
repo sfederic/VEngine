@@ -45,14 +45,20 @@ void FileSystem::SerialiseAllSystems()
 
 	Serialiser s(file, OpenMode::Out);
 
-	for (auto actorSystem : World::activeActorSystems)
+	for (IActorSystem* actorSystem : World::activeActorSystems)
 	{
-		actorSystem->Serialise(s);
+		if (actorSystem->GetNumActors() > 0)
+		{
+			actorSystem->Serialise(s);
+		}
 	}
 
-	for (auto cs : World::activeComponentSystems)
+	for (IComponentSystem* componentSystem : World::activeComponentSystems)
 	{
-		cs->Serialise(s);
+		if (componentSystem->GetNumComponents() > 0)
+		{
+			componentSystem->Serialise(s);
+		}
 	}
 
 	s.WriteLine(L"end");
