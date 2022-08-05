@@ -123,19 +123,20 @@ static void ReassignShader(void* data)
 Properties Material::GetProps()
 {
 	Properties props("Material");
-	props.Add("Texture", &textureData).change = ReassignTexture;
-	props.Add("Use Texture", &materialShaderData.useTexture);
-	props.Add("Shader", &shaderData).change = ReassignShader;
-	props.Add("Rast State", &rastStateValue).change = ReassignRastState;
-	props.Add("Blend State", &blendStateValue).change = ReassignBlendState;
-	props.Add("UvOffset", &materialShaderData.uvOffset);
-	props.Add("UvOffsetSpeed", &uvOffsetSpeed);
-	props.Add("UvScale", &materialShaderData.uvScale);
-	props.Add("UvRotation", &materialShaderData.uvRotation);
-	props.Add("UvRotationSpeed", &uvRotationSpeed);
-	props.Add("Ambient", &materialShaderData.ambient);
-	props.Add("Specular", &materialShaderData.specular);
-	props.Add("Smoothness", &materialShaderData.smoothness);
-	props.Add("Metallic", &materialShaderData.metallic);
+	//Prop names using 'M_' notation here becauase they merge with MeshComponent props
+	props.Add("M_Texture", &textureData).change = ReassignTexture;
+	props.Add("M_Use Texture", &materialShaderData.useTexture);
+	props.Add("M_Shader", &shaderData).change = ReassignShader;
+	props.Add("M_Rast State", &rastStateValue).change = ReassignRastState;
+	props.Add("M_Blend State", &blendStateValue).change = ReassignBlendState;
+	props.Add("M_UvOffset", &materialShaderData.uvOffset);
+	props.Add("M_UvOffsetSpeed", &uvOffsetSpeed);
+	props.Add("M_UvScale", &materialShaderData.uvScale);
+	props.Add("M_UvRotation", &materialShaderData.uvRotation);
+	props.Add("M_UvRotationSpeed", &uvRotationSpeed);
+	props.Add("M_Ambient", &materialShaderData.ambient);
+	props.Add("M_Specular", &materialShaderData.specular);
+	props.Add("M_Smoothness", &materialShaderData.smoothness);
+	props.Add("M_Metallic", &materialShaderData.metallic);
 	return props;
 }
