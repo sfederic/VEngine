@@ -18,9 +18,12 @@
 #include "Audio/AudioSystem.h"
 #include "Physics/PhysicsSystem.h"
 #include "Editor/CutsceneSequencer.h"
+#include "Profile.h"
 
 void Engine::Init(int argc, char* argv[])
 {
+	auto startTime = Profile::QuickStart();
+
 	Core::Init();
 
 	Console::Init();
@@ -42,6 +45,9 @@ void Engine::Init(int argc, char* argv[])
 
 	World::Init();
 	editor->UpdateWorldList();
+
+	double endTime = Profile::QuickEnd(startTime);
+	Log("Startup took: %f ms", endTime);
 }
 
 void Engine::TickSystems(float deltaTime)
