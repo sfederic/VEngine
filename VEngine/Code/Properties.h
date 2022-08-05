@@ -35,7 +35,7 @@ struct Properties
 		else if (typeid(T) == typeid(ShaderData))
 		{
 			auto shaderData = (ShaderData*)data;
-			prop.size = shaderData->filename.size() + 1;
+			prop.size = shaderData->pixelShaderFilename.size() + shaderData->vertexShaderFilename.size();
 		}
 		else if (typeid(T) == typeid(TextureData))
 		{

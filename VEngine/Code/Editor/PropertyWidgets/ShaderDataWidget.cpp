@@ -10,7 +10,7 @@ ShaderDataWidget::ShaderDataWidget(Property& prop_)
 	prop = prop_;
 	value = prop.GetData<ShaderData>();
 
-	setText(QString::fromStdString(value->filename));
+	//setText(QString::fromStdString(value->filename));
 	connect(this, &QPushButton::clicked, this, &ShaderDataWidget::SetValue);
 }
 
@@ -24,9 +24,9 @@ void ShaderDataWidget::SetValue()
 
 	if (!filename.isEmpty())
 	{
-		value->filename.assign(
+		/*value->filename.assign(
 			VString::GetSubStringAtFoundOffset(filename.toStdString(), AssetBaseFolders::shader));
-		setToolTip(filepath);
+		setToolTip(filepath);*/
 
 		prop.change(value);
 		ResetValue();
@@ -37,6 +37,6 @@ void ShaderDataWidget::ResetValue()
 {
 	if (value)
 	{
-		setText(QString::fromStdString(value->filename));
+		//setText(QString::fromStdString(value->filename));
 	}
 }

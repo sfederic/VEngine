@@ -11,11 +11,15 @@
 #include "Actors/Actor.h"
 #include "Components/MeshComponent.h"
 #include "Log.h"
+#include "Render/VertexShader.h"
+#include "Render/PixelShader.h"
 
-Material::Material(std::string textureFilename_, std::string shaderFilename_)
+Material::Material(std::string textureFilename_, ShaderPairNames shaderPairName)
 {
 	textureData.filename = textureFilename_;
-	shaderData.filename = shaderFilename_;
+
+	shaderData.vertexShaderFilename = VString::wstos(shaderPairName.first);
+	shaderData.pixelShaderFilename = VString::wstos(shaderPairName.second);
 
 	//@Todo: I don't like this. There needs to be a way to check if something inherits from VEnum when serialising
 	rastStateValue.Add(RastStates::solid);
@@ -31,9 +35,11 @@ void Material::Create()
 {
 	texture = textureSystem.FindTexture2D(textureData.filename);
 	sampler = RenderUtils::GetDefaultSampler();
-	shader = shaderSystem.FindShader(VString::stows(shaderData.filename));
 	rastState = Renderer::GetRastState(rastStateValue.GetValue());
 	blendState = Renderer::GetBlendState(blendStateValue.GetValue());
+
+	vertexShader = shaderSystem.FindVertexShader(VString::stows(shaderData.vertexShaderFilename));
+	pixelShader = shaderSystem.FindPixelShader(VString::stows(shaderData.pixelShaderFilename));
 }
 
 void Material::Destroy()
@@ -105,19 +111,19 @@ static void ReassignBlendState(void* data)
 
 static void ReassignShader(void* data)
 {
-	auto shaderData = (ShaderData*)data;
-	ShaderItem* foundShader = shaderSystem.FindShader(VString::stows(shaderData->filename));
-	if (foundShader == nullptr)
-	{
-		Log("%s not found on shader change.", shaderData->filename);
-		return;
-	}
+	//auto shaderData = (ShaderData*)data;
+	//ShaderItem* foundShader = shaderSystem.FindShader(VString::stows(shaderData->filename));
+	//if (foundShader == nullptr)
+	//{
+	//	Log("%s not found on shader change.", shaderData->filename);
+	//	return;
+	//}
 
-	auto meshes = WorldEditor::GetPickedActor()->GetComponentsOfType<MeshComponent>();
-	for (auto mesh : meshes)
-	{
-		mesh->material->shader = foundShader;
-	}
+	//auto meshes = WorldEditor::GetPickedActor()->GetComponentsOfType<MeshComponent>();
+	//for (auto mesh : meshes)
+	//{
+	//	mesh->material->shader = foundShader;
+	//}
 }
 
 Properties Material::GetProps()

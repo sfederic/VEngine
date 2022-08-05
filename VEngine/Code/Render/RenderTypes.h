@@ -78,7 +78,8 @@ struct TextureData
 
 struct ShaderData
 {
-	std::string filename;
+	std::string vertexShaderFilename;
+	std::string pixelShaderFilename;
 };
 
 struct MeshComponentData

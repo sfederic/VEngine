@@ -1,1302 +1,158 @@
-AudioActor
-0
-Player
-0
-Unit
-0
-CameraActor
-0
-Grid
-1
- Enabled
-0
- Position
-0 0 0
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Name
-Grid0
-Size X
-10
-Size Y
-10
-UID
-3703861153
-startBattleOnLoad
-0
-next
-GridActor
-0
-EntranceTrigger
-0
-NPC
-0
 MeshActor
-18
+2
  Enabled
 1
  Position
-2 -0.5 2
- Rotation
--0.707 -0.0002114 0.000211464 0.707213
- Scale
-50 50 50
-Name
-sword0
-UID
-2395008998
-next
- Enabled
-1
- Position
-1 0 10
- Rotation
--2.98023e-08 0.5 -5.16192e-08 0.866025
- Scale
-0.999999 0.999999 1
-Name
-sword1
-UID
-4136765408
-next
- Enabled
-1
- Position
-2 0 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Name
-sword2
-UID
-2517094038
-next
- Enabled
-1
- Position
-5 5.9 1
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Name
-sword3
-UID
-4234875231
-next
- Enabled
-1
- Position
-7 -0.5 3
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Name
-sword4
-UID
-1977561392
-next
- Enabled
-1
- Position
-2 0 -1
+-4 -2 6
  Rotation
 0 0 0 1
  Scale
 1 1 1
 Name
-sword5
+MeshActor0
 UID
-3296850605
+2095846208
 next
  Enabled
 1
  Position
--2 0.5 -2
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Name
-sword6
-UID
-4237592277
-next
- Enabled
-1
- Position
-0 0 -3.9
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Name
-sword7
-UID
-641179793
-next
- Enabled
-1
- Position
-3.2 -0.3 1.2
- Rotation
-0.271654 0.323744 0.582564 0.694272
- Scale
-0.999999 1 0.999999
-Name
-sword8
-UID
-2305666381
-next
- Enabled
-1
- Position
-2.7 5.9 1
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Name
-MeshActor9
-UID
-2033650840
-next
- Enabled
-1
- Position
-0.3 5.9 1
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Name
-MeshActor10
-UID
-2601834547
-next
- Enabled
-1
- Position
-0.3 7.7 1
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Name
-MeshActor11
-UID
-4072313756
-next
- Enabled
-1
- Position
-3 7.7 1
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Name
-MeshActor12
-UID
-585455875
-next
- Enabled
-1
- Position
-4.9 7.7 1
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Name
-MeshActor13
-UID
-103248452
-next
- Enabled
-1
- Position
-5.1 7.7 -0.9
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Name
-MeshActor14
-UID
-3795284440
-next
- Enabled
-1
- Position
-3.1 7.7 -1.1
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Name
-MeshActor15
-UID
-2544153410
-next
- Enabled
-1
- Position
-0.2 7.7 -0.7
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Name
-MeshActor16
-UID
-137013015
-next
- Enabled
-1
- Position
-0 0 0
+-5 -3 6
  Rotation
 0 0 0 1
  Scale
-50 50 50
+10 1 10
 Name
-MeshActor17
+MeshActor1
 UID
-4076738088
+1223897648
 next
 DirectionalLightActor
 1
  Enabled
 1
  Position
--2 5 7
+-8 1 4
  Rotation
-0.0151766 0.981039 -0.172984 -0.0860711
+0.196316 0.769707 -0.539084 0.28
  Scale
-0.999989 0.999982 0.999995
+0.999997 0.999992 0.999995
 Name
 DirectionalLightActor0
 UID
-2445262463
+1602421545
 next
-SavePoint
-0
-PointLightActor
-0
-SpotLightActor
-0
-FenceActor
-0
-Billboard
-0
-InteractTrigger
-0
-ParticleSystem
-0
-DialogueTrigger
-0
-DestructibleActor
-0
-MemoryActor
-0
-TitleScreenActor
-0
-PushableGridActor
-0
-PlayerDialogueTrigger
-0
-GoddessStatue
-0
-PhysicsActor
-0
-PostProcessInstance
-0
-PolyboardActor
-0
-DebugNoteActor
-0
-SpriteSheetActor
-0
-MovingGridActor
-0
-CutsceneActor
-0
-DiffuseProbeMap
-0
-TestActor
-0
-CameraComponent
-0
-TimeComponent
-0
-QuestComponent
-0
-CharacterControllerComponent
-0
-WidgetComponent
-0
-AudioComponent
-0
-DialogueComponent
-0
-MemoryComponent
-0
-EmptyComponent
-0
 MeshComponent
-18
-2395008998
+2
+2095846208
 Mesh
  Enabled
 1
  Pos
-2 -0.5 2
- Rot
--0.707 -0.0002114 0.000211464 0.707213
- Scale
-50 50 50
-Ambient
-0.5 0.5 0.5 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-plane.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-Floors/floor.jpg
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-3 3
-next
-4136765408
-Mesh
- Enabled
-1
- Pos
-1 0 10
- Rot
--2.98023e-08 0.5 -5.16192e-08 0.866025
- Scale
-0.999999 0.999999 1
-Ambient
-0.5 0.5 0.5 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-boat.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-barrel_texture.jpg
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-2517094038
-Mesh
- Enabled
-1
- Pos
-2 0 4
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Ambient
-0.5 0.5 0.5 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-fountain.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-4234875231
-Mesh
- Enabled
-1
- Pos
-5 5.9 1
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Ambient
-0.5 0.5 0.5 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-small_table.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-0
-Texture
-test.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-1977561392
-Mesh
- Enabled
-1
- Pos
-7 -0.5 3
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Ambient
-0.5 0.5 0.5 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-tabletop.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-3296850605
-Mesh
- Enabled
-1
- Pos
-2 0 -1
+-4 -2 6
  Rot
 0 0 0 1
  Scale
 1 1 1
-Ambient
-0.5 0.5 0.5 1
-Blend State
-null
 Casts Shadow
 1
 Cull
 0
 Grid Obstacle
 0
-Mesh
-cone.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-4237592277
-Mesh
- Enabled
-1
- Pos
--2 0.5 -2
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Ambient
+M_Ambient
 0.5 0.5 0.5 1
-Blend State
+M_Blend State
 null
-Casts Shadow
-1
-Cull
+M_Metallic
 0
-Grid Obstacle
-0
-Mesh
-ico_sphere.fbx
-Metallic
-0
-Rast State
+M_Rast State
 solid
-Shader
-DefaultShader.hlsl
-Smoothness
+M_Shader
+Default_vs.cso Default_ps.cso
+M_Smoothness
 0
-Specular
+M_Specular
 1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+barrel.fbx
 Static
 1
-Texture
-test.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
 next
-641179793
+1223897648
 Mesh
  Enabled
 1
  Pos
-0 0 -3.9
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Ambient
-0.5 0.5 0.5 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-lamp_post02.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-2305666381
-Mesh
- Enabled
-1
- Pos
-3.2 -0.3 1.2
- Rot
-0.271654 0.323744 0.582564 0.694272
- Scale
-0.999999 1 0.999999
-Ambient
-0.5 0.5 0.5 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-sword.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-2033650840
-Mesh
- Enabled
-1
- Pos
-2.7 5.9 1
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Ambient
-0.5 0.5 0.5 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-small_table.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-0
-Texture
-test.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-2601834547
-Mesh
- Enabled
-1
- Pos
-0.3 5.9 1
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Ambient
-0.5 0.5 0.5 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-small_table.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-0
-Texture
-test.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-4072313756
-Mesh
- Enabled
-1
- Pos
-0.3 7.7 1
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Ambient
-0.5 0.5 0.5 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-small_table.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-0
-Texture
-test.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-585455875
-Mesh
- Enabled
-1
- Pos
-3 7.7 1
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Ambient
-0.5 0.5 0.5 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-small_table.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-0
-Texture
-test.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-103248452
-Mesh
- Enabled
-1
- Pos
-4.9 7.7 1
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Ambient
-0.5 0.5 0.5 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-small_table.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-0
-Texture
-test.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-3795284440
-Mesh
- Enabled
-1
- Pos
-5.1 7.7 -0.9
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Ambient
-0.5 0.5 0.5 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-small_table.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-0
-Texture
-test.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-2544153410
-Mesh
- Enabled
-1
- Pos
-3.1 7.7 -1.1
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Ambient
-0.5 0.5 0.5 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-small_table.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-0
-Texture
-test.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-137013015
-Mesh
- Enabled
-1
- Pos
-0.2 7.7 -0.7
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Ambient
-0.5 0.5 0.5 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-small_table.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-0
-Texture
-test.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-4076738088
-Mesh
- Enabled
-1
- Pos
-0 0 0
+-5 -3 6
  Rot
 0 0 0 1
  Scale
-50 50 50
-Ambient
+10 1 10
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+M_Ambient
 0.5 0.5 0.5 1
-Blend State
+M_Blend State
 null
-Casts Shadow
-1
-Cull
+M_Metallic
 0
-Grid Obstacle
+M_Rast State
+solid
+M_Shader
+Default_vs.cso Default_ps.cso
+M_Smoothness
 0
-Mesh
-ico_sphere.fbx
-Metallic
-0
-Rast State
-nobackcull
-Shader
-Unlit.hlsl
-Smoothness
-0
-Specular
+M_Specular
 1 1 1 1
-Static
+M_Texture
+test.png
+M_Use Texture
 1
-Texture
-Sky/sky.jpg
-Use Texture
-1
-UvOffset
+M_UvOffset
 0 0
-UvOffsetSpeed
+M_UvOffsetSpeed
 0 0
-UvRotation
+M_UvRotation
 0
-UvRotationSpeed
+M_UvRotationSpeed
 0
-UvScale
+M_UvScale
 1 1
-next
-InstanceMeshComponent
-1
-3703861153
-NodeMesh
- Enabled
-0
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
 Mesh
 node.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-InstanceShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
 Static
 1
-Texture
-test.png
-Use Texture
-1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
 next
-BoxTriggerComponent
-0
 DirectionalLightComponent
 1
-2445262463
+1602421545
 DirectionalLight
  Enabled
 1
  Pos
--2 5 7
+-8 1 4
  Rot
-0.0151766 0.981039 -0.172984 -0.0860711
+0.196316 0.769707 -0.539084 0.28
  Scale
-0.999989 0.999982 0.999995
+0.999997 0.999992 0.999995
 Colour
 1 1 1 1
 LightEnabled
@@ -1304,18 +160,4 @@ LightEnabled
 ShadowMap Size
 15
 next
-PointLightComponent
-0
-SpotLightComponent
-0
-ParticleEmitter
-0
-SpriteSheet
-0
-ConditionComponent
-0
-DestructibleMeshComponent
-0
-Polyboard
-0
 end

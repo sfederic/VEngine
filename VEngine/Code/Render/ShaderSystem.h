@@ -1,57 +1,36 @@
 #pragma once
+
 #include <string>
 #include <vector>
-#include <unordered_map>
+#include <set>
+#include <memory>
 #include <d3dcompiler.h>
 #include "System.h"
+#include "Render/ShaderPair.h"
 
-struct ID3D11VertexShader;
-struct ID3D11PixelShader;
-struct ID3D11ComputeShader;
-
-struct ShaderItem
-{
-	ShaderItem()
-	{
-	}
-
-	ShaderItem(const wchar_t* _filename)
-	{
-		filename = _filename;
-	}
-
-	std::wstring filename;
-
-	ID3DBlob* vertexCode = nullptr;
-	ID3DBlob* pixelCode = nullptr;
-	ID3DBlob* computeCode = nullptr;
-
-	ID3D11VertexShader* vertexShader = nullptr;
-	ID3D11PixelShader* pixelShader = nullptr;
-	ID3D11ComputeShader* computeShader = nullptr;
-};
-
-//@Todo: need to make a CompileShaderFromFile() function eventually to work with compiled files over text
+struct VertexShader;
+struct PixelShader;
 
 struct ShaderSystem : System
 {
-private:
-	std::vector<ShaderItem*> shaders;
-	std::vector<ShaderItem*> computeShaders;
-	std::unordered_map<std::wstring, ShaderItem*> shaderMap;
-
 public:
-	ShaderSystem();
+	ShaderSystem() : System("ShaderSystem") {}
 	void Init();
 	void Tick();
-	ShaderItem* FindShader(std::wstring shaderName);
-	void CleanUpShaders();
+
+	VertexShader* FindVertexShader(const std::wstring filename);
+	PixelShader* FindPixelShader(const std::wstring filename);
+	ShaderPair FindShaderPair(ShaderPairNames shaderPairNames);
+
+	void ClearShaders();
 
 private:
 	ID3DBlob* CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target);
-	void CreateAllShaders();
 	void CompileAllShadersFromFile();
 	void HotReloadShaders();
+
+	std::map<std::wstring, std::unique_ptr<VertexShader>> vertexShaders;
+	std::map<std::wstring, std::unique_ptr<PixelShader>> pixelShaders;
 };
 
 extern ShaderSystem shaderSystem;

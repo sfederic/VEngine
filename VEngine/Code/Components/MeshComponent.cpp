@@ -12,6 +12,8 @@
 #include "Camera.h"
 #include "Gameplay/GameUtils.h"
 #include "Actors/Game/Player.h"
+#include "Render/VertexShader.h"
+#include "Render/PixelShader.h"
 
 void MeshComponent::ResetMeshBuffers()
 {
@@ -29,19 +31,19 @@ MeshComponent::MeshComponent()
 	pso = new PipelineStateObject();
 
 	//default values for material
-	material = materialSystem.CreateMaterial("test.png", "DefaultShader.hlsl");
+	material = materialSystem.CreateMaterial("test.png", ShaderPairs::Default);
 }
 
 MeshComponent::MeshComponent(const std::string filename_,
 	const std::string textureFilename_,
-	const std::string shaderFilename_)
+	ShaderPairNames shaderPair)
 {
 	meshDataProxy = new MeshDataProxy();
 	pso = new PipelineStateObject();
 
 	meshComponentData.filename = filename_;
 
-	material = new Material(textureFilename_, shaderFilename_);
+	material = new Material(textureFilename_, shaderPair);
 }
 
 void MeshComponent::Start()
@@ -139,11 +141,6 @@ void MeshComponent::SetRastState(const std::string newRastStateName)
 	material->rastState = Renderer::GetRastState(newRastStateName);
 }
 
-void MeshComponent::SetShaderName(const std::string newShaderName)
-{
-	material->shaderData.filename = newShaderName;
-}
-
 void MeshComponent::SetBlendState(const std::string newBlendState)
 {
 	material->blendState = Renderer::GetBlendState(newBlendState);
@@ -153,6 +150,12 @@ void MeshComponent::SetTexture(const std::string newTextureName)
 {
 	material->texture = textureSystem.FindTexture2D(newTextureName);
 	material->textureData.filename = newTextureName;
+}
+
+void MeshComponent::SetShaderPair(ShaderPairNames shaderPair)
+{
+	material->shaderData.vertexShaderFilename = VString::wstos(shaderPair.first);
+	material->shaderData.pixelShaderFilename = VString::wstos(shaderPair.second);
 }
 
 Buffer* MeshComponent::GetVertexBuffer() const 

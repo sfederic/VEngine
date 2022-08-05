@@ -1,11 +1,16 @@
 #pragma once
 
-#include <vector>
+#include <wrl.h>
+#include "Shader.h"
 
 struct ID3D11VertexShader;
 
-struct VertexShader
+class VertexShader : public Shader
 {
-	std::vector<uint8_t> code;
-	ID3D11VertexShader* shader = nullptr;
+public:
+	ID3D11VertexShader* GetShader() { return shader.Get(); }
+	ID3D11VertexShader** GetShaderAddress() { return shader.GetAddressOf(); }
+
+private:
+	Microsoft::WRL::ComPtr<ID3D11VertexShader> shader;
 };

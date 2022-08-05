@@ -3,6 +3,8 @@
 #include <filesystem>
 #include <algorithm>
 #include <execution>
+#include <execution>
+#include <fstream>
 #include <set>
 #include "Debug.h"
 #include "RenderUtils.h"
@@ -10,28 +12,14 @@
 #include "Log.h"
 #include "Profile.h"
 #include "Editor/DebugMenu.h"
+#include "Render/VertexShader.h"
+#include "Render/PixelShader.h"
 
 ShaderSystem shaderSystem;
-
-std::wstring shaderDirectory = L"Code/Render/Shaders/";
-
-const char* vsEntry = "VSMain";
-const char* vsTarget = "vs_5_0";
-
-const char* psEntry = "PSMain";
-const char* psTarget = "ps_5_0";
-
-const char* csEntry = "CSMain";
-const char* csTarget = "cs_5_0";
-
-ShaderSystem::ShaderSystem() : System("ShaderSystem")
-{
-}
 
 void ShaderSystem::Init()
 {
     CompileAllShadersFromFile();
-    CreateAllShaders();
 }
 
 void ShaderSystem::Tick()
@@ -42,17 +30,22 @@ void ShaderSystem::Tick()
     }
 }
 
-ShaderItem* ShaderSystem::FindShader(std::wstring shaderName)
+VertexShader* ShaderSystem::FindVertexShader(const std::wstring filename)
 {
-    auto shaderIt = shaderMap.find(shaderName);
-    if (shaderIt == shaderMap.end())
-    {
-        Log("%S shader not found.", shaderName);
-        //@Todo: keep an eye on this. Might be better to always return nullptr
-        return shaderMap.find(L"DefaultShader.hlsl")->second;
-    }
+    return vertexShaders[filename].get();
+}
 
-    return shaderIt->second;
+PixelShader* ShaderSystem::FindPixelShader(const std::wstring filename)
+{
+    return pixelShaders[filename].get();
+}
+
+ShaderPair ShaderSystem::FindShaderPair(ShaderPairNames shaderPairNames)
+{
+    VertexShader* vs = vertexShaders[shaderPairNames.first].get();
+    PixelShader* ps = pixelShaders[shaderPairNames.second].get();
+
+    return ShaderPair(vs, ps);
 }
 
 ID3DBlob* ShaderSystem::CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target)
@@ -77,119 +70,60 @@ ID3DBlob* ShaderSystem::CreateShaderFromFile(const wchar_t* filename, const char
 	return code;
 }
 
-void ShaderSystem::CreateAllShaders()
-{
-    for (ShaderItem* shader : shaders)
-    {
-        HR(RenderUtils::device->CreateVertexShader(
-            shader->vertexCode->GetBufferPointer(),
-            shader->vertexCode->GetBufferSize(),
-            nullptr,
-            &shader->vertexShader));
-
-        HR(RenderUtils::device->CreatePixelShader(
-            shader->pixelCode->GetBufferPointer(),
-            shader->pixelCode->GetBufferSize(),
-            nullptr,
-            &shader->pixelShader));
-    }
-
-    for (ShaderItem* shader : computeShaders)
-    {
-        HR(RenderUtils::device->CreateComputeShader(
-            shader->computeCode->GetBufferPointer(),
-            shader->computeCode->GetBufferSize(),
-            nullptr,
-            &shader->computeShader));
-    }
-}
-
 void ShaderSystem::CompileAllShadersFromFile()
 {
-    shaders.clear();
-    computeShaders.clear();
-    shaderMap.clear();
+    ClearShaders();
 
-    //File names to check for in directory (Doesn't compile the include (.hlsli) files).
-    std::set<std::string> hlslFilenames = { ".hlsl" };
-
-    for (auto& entry : std::filesystem::directory_iterator("Code/Render/Shaders/"))
+    //@Todo: enable parallel for
+    //std::for_each(std::execution::par, shaders.begin(), shaders.end(),
+    //    [&](ShaderItem* shader)
+    
+    //Go through all vertex shaders
+    for (auto& entry : std::filesystem::directory_iterator("Shaders/Vertex"))
     {
-        if (hlslFilenames.find(entry.path().extension().string()) != hlslFilenames.end())
-        {
-            auto shaderItem = new ShaderItem();
-            shaderItem->filename = entry.path().filename();
-            shaders.push_back(shaderItem);
-        }
+        auto vertexShader = std::make_unique<VertexShader>();
+
+        vertexShader->ReadData(entry.path().c_str());
+
+        HR(RenderUtils::device->CreateVertexShader(
+            vertexShader->GetByteCodeData(),
+            vertexShader->GetByteCodeSize(),
+            nullptr,
+            vertexShader->GetShaderAddress()));
+
+        vertexShaders.emplace(entry.path().filename(), std::move(vertexShader));
     }
 
-    std::for_each(std::execution::par, shaders.begin(), shaders.end(),
-        [&](ShaderItem* shader)
+    //Go through all pixel shaders
+    for (auto& entry : std::filesystem::directory_iterator("Shaders/Pixel"))
     {
-        shaderMap[shader->filename] = shader;
+        auto pixelShader = std::make_unique<PixelShader>();
 
-        std::wstring path = shaderDirectory + shader->filename;
+        pixelShader->ReadData(entry.path().c_str());
 
-        shader->vertexCode = CreateShaderFromFile(path.c_str(), vsEntry, vsTarget);
-        shader->pixelCode = CreateShaderFromFile(path.c_str(), psEntry, psTarget);
-    });
+        HR(RenderUtils::device->CreatePixelShader(
+            pixelShader->GetByteCodeData(),
+            pixelShader->GetByteCodeSize(),
+            nullptr,
+            pixelShader->GetShaderAddress()));
 
-    //Get compute shaders
-    //@Todo: compute shader folder can go missing if empty on project cleans, causing directory_iterator to fail.
-    //Uncomment this if you need computer shaders down the line.
-    /*for (auto& entry : std::filesystem::directory_iterator("Code/Render/Shaders/Compute"))
-    {
-        auto shaderItem = new ShaderItem();
-        if (hlslFilenames.find(entry.path().extension().string()) != hlslFilenames.end())
-        {
-            shaderItem->filename = L"Compute/" + entry.path().filename().wstring();
-            computeShaders.push_back(shaderItem);
-        }
+        pixelShaders.emplace(entry.path().filename(), std::move(pixelShader));
     }
-
-    for (ShaderItem* computeShader : computeShaders)
-    {
-        shaderMap[computeShader->filename] = computeShader;
-
-        std::wstring path = shaderDirectory + computeShader->filename;
-
-        computeShader->computeCode = CreateShaderFromFile(path.c_str(), csEntry, csTarget);
-    }*/
 }
 
-void ShaderSystem::CleanUpShaders()
+void ShaderSystem::ClearShaders()
 {
-    for (int i = 0; i < shaders.size(); i++)
-    {
-        shaders[i]->vertexCode->Release();
-        shaders[i]->pixelCode->Release();
-
-        shaders[i]->vertexShader->Release();
-        shaders[i]->pixelShader->Release();
-    }
-
-    for (int i = 0; i < computeShaders.size(); i++)
-    {
-        computeShaders[i]->computeCode->Release();
-        computeShaders[i]->computeShader->Release();
-    }
+    vertexShaders.clear();
+    pixelShaders.clear();
 }
 
 void ShaderSystem::HotReloadShaders()
 {
-    auto startTime = Profile::QuickStart();
+   /* auto startTime = Profile::QuickStart();
 
     debugMenu.AddNotification(L"Shader reload start...");
 
     std::wstring shaderRecompileMsg = L"Shader reload complete";
-
-    //@Todo: can reload shaders based on their last write time.
-    //For now it's ok to just reload them all, there aren't too many.
-    /*for (auto& entry : std::filesystem::directory_iterator("Code/Render/Shaders/"))
-    {
-        auto writeTime = entry.last_write_time();
-        //recompile shaders within a timeframe of 1 minute from current time for example
-    }*/
 
     std::vector<ShaderItem*> shadersToRecompile;
 
@@ -212,35 +146,18 @@ void ShaderSystem::HotReloadShaders()
             continue;
         }
 
-        shader->pixelCode->Release();
         shader->pixelShader->Release();
-
-        shader->vertexCode->Release();
         shader->vertexShader->Release();
-
-        shader->vertexCode = vertexCode;
-        shader->pixelCode = pixelCode;
 
         shadersToRecompile.push_back(shader);
     }
 
     for (ShaderItem* shader : shadersToRecompile)
     {
-        HR(RenderUtils::device->CreateVertexShader(
-            shader->vertexCode->GetBufferPointer(),
-            shader->vertexCode->GetBufferSize(),
-            nullptr,
-            &shader->vertexShader));
-
-        HR(RenderUtils::device->CreatePixelShader(
-            shader->pixelCode->GetBufferPointer(),
-            shader->pixelCode->GetBufferSize(),
-            nullptr,
-            &shader->pixelShader));
     }
 
     debugMenu.AddNotification(shaderRecompileMsg);
 
     auto elapsedTime = Profile::QuickEnd(startTime);
-    Log(L"Shader hotreload took [%f] seconds", elapsedTime);
+    Log(L"Shader hotreload took [%f] seconds", elapsedTime);*/
 }

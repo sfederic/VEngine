@@ -5,14 +5,16 @@
 #include "Properties.h"
 #include "UID.h"
 #include "VEnum.h"
+#include "ShaderPair.h"
 
 using namespace DirectX;
 
 class Texture2D;
 struct Sampler;
 struct RastState;
-struct ShaderItem;
 struct BlendState;
+class VertexShader;
+class PixelShader;
 
 //The data passed into a shader's constant buffer. Has to be seperate because of byte packing.
 struct MaterialShaderData
@@ -38,8 +40,10 @@ public:
 	Texture2D* texture = nullptr;
 	Sampler* sampler = nullptr;
 	RastState* rastState = nullptr;
-	ShaderItem* shader = nullptr;
 	BlendState* blendState = nullptr;
+
+	VertexShader* vertexShader = nullptr;
+	PixelShader* pixelShader = nullptr;
 
 	TextureData textureData;
 	ShaderData shaderData;
@@ -53,7 +57,7 @@ public:
 	VEnum blendStateValue;
 
 public:
-	Material(std::string textureFilename_, std::string shaderFilename_);
+	Material(std::string textureFilename_, ShaderPairNames shaderPairName);
 
 	virtual void Create();
 	virtual void Destroy();

@@ -7,8 +7,10 @@
 
 Billboard::Billboard()
 {
-    mesh = MeshComponent::system.Add("Mesh", this, MeshComponent("plane.fbx", "ramza_back.png", "Unlit.hlsl"));
-    mesh->material->rastStateValue.SetValue(RastStates::noBackCull);
+    mesh = MeshComponent::system.Add("Mesh", this,
+        MeshComponent("plane.fbx", "ramza_back.png", ShaderPairs::Unlit));
+
+    mesh->SetRastState(RastStates::noBackCull);
     rootComponent = mesh;
 }
 

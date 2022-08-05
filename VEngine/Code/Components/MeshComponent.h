@@ -4,8 +4,8 @@
 #include "ComponentSystem.h"
 #include "Render/RenderTypes.h"
 #include "Render/PipelineObjects.h"
+#include "Render/ShaderPair.h"
 
-struct ShaderItem;
 class Material;
 struct Skeleton;
 
@@ -50,7 +50,7 @@ public:
 	MeshComponent();
 	MeshComponent(const std::string filename_,
 		const std::string textureFilename_,
-		const std::string shaderFilename_ = "DefaultShader.hlsl");
+		ShaderPairNames shaderPair = ShaderPairs::Default);
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
 	virtual void Create() override;
@@ -59,9 +59,9 @@ public:
 
 	//Material set functions
 	void SetRastState(const std::string newRastStateName);
-	void SetShaderName(const std::string newShaderName);
 	void SetBlendState(const std::string newBlendState);
 	void SetTexture(const std::string newTextureName);
+	void SetShaderPair(ShaderPairNames shaderPair);
 
 	Buffer* GetVertexBuffer() const;
 	Buffer* GetIndexBuffer() const;

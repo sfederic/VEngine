@@ -13,9 +13,8 @@
 Grid::Grid()
 {
     nodeMesh = InstanceMeshComponent::system.Add("NodeMesh",
-        this, InstanceMeshComponent(1, "node.fbx", "test.png"));
+        this, InstanceMeshComponent(1, "node.fbx", "test.png", ShaderPairs::Instance));
 
-    nodeMesh->material->shaderData.filename = "InstanceShader.hlsl";
     rootComponent = nodeMesh;
 }
 

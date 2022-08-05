@@ -6,8 +6,10 @@
 DiffuseProbeMap::DiffuseProbeMap()
 {
 	//Set mesh count as 1
-	instanceMeshComponent = InstanceMeshComponent::system.Add("InstanceMesh", this, InstanceMeshComponent(1, "cube.fbx", "test.png"));
-	instanceMeshComponent->SetShaderName("InstanceShader.hlsl");
+	instanceMeshComponent = InstanceMeshComponent::system.Add(
+		"InstanceMesh",
+		this,
+		InstanceMeshComponent(1, "cube.fbx", "test.png", ShaderPairs::Instance));
 	rootComponent = instanceMeshComponent;
 }
 

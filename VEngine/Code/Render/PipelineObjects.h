@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 
-struct ShaderItem;
 struct ID3D11Buffer;
 struct ID3D11ShaderResourceView;
 struct ID3D11SamplerState;

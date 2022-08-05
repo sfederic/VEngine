@@ -37,6 +37,8 @@
 #include "ShadowMap.h"
 #include "TextureSystem.h"
 #include "Render/SpriteSystem.h"
+#include "Render/VertexShader.h"
+#include "Render/PixelShader.h"
 #include "Particle/ParticleEmitter.h"
 #include "Particle/SpriteSheet.h"
 #include "Particle/Polyboard.h"
@@ -78,7 +80,7 @@ void SetMatricesFromMesh(MeshComponent* mesh);
 void SetShaderMeshData(MeshComponent* mesh);
 void SetRenderPipelineStates(MeshComponent* mesh);
 void SetRenderPipelineStatesForShadows(MeshComponent* mesh);
-void SetShader(std::wstring shaderName);
+void SetShaders(ShaderPairNames shaderPair);
 void SetRastState(std::string rastStateName);
 void SetBlendState(std::string blendStateName);
 void SetConstantBufferVertexPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer);
@@ -330,9 +332,9 @@ void CreateInputLayout()
 		{"BONEINDICES", 0, DXGI_FORMAT_R32G32B32A32_UINT, 0, offsetof(Vertex, boneIndices), D3D11_INPUT_PER_VERTEX_DATA, 0},
 	};
 
-	ShaderItem* shader = shaderSystem.FindShader(L"DefaultShader.hlsl");
-
-	HR(device->CreateInputLayout(inputDesc, _countof(inputDesc), shader->vertexCode->GetBufferPointer(), shader->vertexCode->GetBufferSize(), &inputLayout));
+	VertexShader* shader = shaderSystem.FindVertexShader(L"Default_vs.cso");
+	
+	HR(device->CreateInputLayout(inputDesc, _countof(inputDesc), shader->GetByteCodeData(), shader->GetByteCodeSize(), &inputLayout));
 	context->IASetInputLayout(inputLayout);
 }
 
@@ -761,7 +763,7 @@ void Renderer::RenderLightProbeViews()
 				//context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
 				//context->PSSetSamplers(1, 1, &shadowMap->sampler);
 
-				ShaderItem* lightProbeShader = shaderSystem.FindShader(L"DefaultShader.hlsl");
+				ShaderPair lightProbeShaderPair = shaderSystem.FindShaderPair(ShaderPairs::Default);
 
 				for (auto mesh : MeshComponent::system.components)
 				{
@@ -772,8 +774,8 @@ void Renderer::RenderLightProbeViews()
 					const FLOAT blendState[4] = { 0.f };
 					context->OMSetBlendState(nullptr, blendState, 0xFFFFFFFF);
 
-					context->VSSetShader(lightProbeShader->vertexShader, nullptr, 0);
-					context->PSSetShader(lightProbeShader->pixelShader, nullptr, 0);
+					context->VSSetShader(lightProbeShaderPair.GetVertexShader(), nullptr, 0);
+					context->PSSetShader(lightProbeShaderPair.GetPixelShader(), nullptr, 0);
 
 					context->PSSetSamplers(0, 1, &material->sampler->data);
 
@@ -941,7 +943,7 @@ void RenderBounds()
 	if (Renderer::drawBoundingBoxes)
 	{
 		SetRastState(RastStates::wireframe);
-		SetShader(L"SolidColour.hlsl");
+		SetShaders(ShaderPairs::SolidColour);
 
 		//@Todo: there's a weird error here where if you create enough lights in the map (about 40),
 		//the debug mesh actors will crash here. Tried putting the Debug Actors as global pointers
@@ -989,7 +991,7 @@ void RenderBounds()
 	if(Renderer::drawTriggers)
 	{
 		SetRastState(RastStates::wireframe);
-		SetShader(L"SolidColour.hlsl");
+		SetShaders(ShaderPairs::SolidColour);
 
 		SetVertexBuffer(debugBox.boxMesh->GetVertexBuffer());
 		SetIndexBuffer(debugBox.boxMesh->GetIndexBuffer());
@@ -1070,7 +1072,7 @@ void RenderCameraMeshes()
 	MaterialShaderData materialShaderData = {};
 
 	SetRastState(RastStates::wireframe);
-	SetShader(L"SolidColour.hlsl");
+	SetShaders(ShaderPairs::SolidColour);
 	SetVertexBuffer(debugCamera.mesh->GetVertexBuffer());
 
 	materialShaderData.ambient = XMFLOAT4(1.0f, 0.0f, 0.f, 1.0f); //Make cameras red
@@ -1097,7 +1099,7 @@ void RenderLightMeshes()
 	if (Core::gameplayOn) return;
 
 	SetRastState(RastStates::wireframe);
-	SetShader(L"SolidColour.hlsl");
+	SetShaders(ShaderPairs::SolidColour);
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
 	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
@@ -1164,7 +1166,7 @@ void RenderPolyboards()
 
 	SetBlendState(BlendStates::Default);
 	SetRastState(RastStates::noBackCull);
-	SetShader(L"Unlit.hlsl");
+	SetShaders(ShaderPairs::DefaultClip);
 
 	for (auto polyboard : Polyboard::system.components)
 	{
@@ -1207,7 +1209,7 @@ void RenderSpriteSheets()
 	for (auto spriteSheet : SpriteSheet::system.components)
 	{
 		SetRastState(RastStates::noBackCull);
-		SetShader(L"Unlit.hlsl");
+		SetShaders(ShaderPairs::DefaultClip);
 
 		SetSampler(0, RenderUtils::GetDefaultSampler());
 		SetShaderResourcePixel(0, spriteSheet->textureData.filename);
@@ -1248,9 +1250,9 @@ void AnimateSkeletalMesh(MeshComponent* mesh)
 		ShaderSkinningData skinningData = {};
 
 		//Set shader for skeletal animation
-		ShaderItem* shader = shaderSystem.FindShader(L"Animation.hlsl");
-		context->VSSetShader(shader->vertexShader, nullptr, 0);
-		context->PSSetShader(shader->pixelShader, nullptr, 0);
+		ShaderPair shaderPair = shaderSystem.FindShaderPair(ShaderPairs::Animation);
+		context->VSSetShader(shaderPair.GetVertexShader(), nullptr, 0);
+		context->PSSetShader(shaderPair.GetPixelShader(), nullptr, 0);
 
 		Animation& anim = skeleton->GetCurrentAnimation(mesh->currentAnimation);
 		if (!anim.frames.empty())
@@ -1306,9 +1308,7 @@ void Renderer::RenderParticleEmitters()
 			context->RSSetState(rastStateMap["nobackcull"]->data);
 		}
 
-		ShaderItem* shader = shaderSystem.FindShader(L"Unlit.hlsl");
-		context->VSSetShader(shader->vertexShader, nullptr, 0);
-		context->PSSetShader(shader->pixelShader, nullptr, 0);
+		SetShaders(ShaderPairs::DefaultClip);
 
 		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
 
@@ -1349,7 +1349,7 @@ void Renderer::RenderSpritesInScreenSpace()
 	for (const Sprite& sprite : spriteSystem.screenSprites)
 	{
 		SetRastState(RastStates::solid);
-		SetShader(L"ui.hlsl");
+		SetShaders(ShaderPairs::UI);
 		SetSampler(0, RenderUtils::GetDefaultSampler());
 		SetShaderResourcePixel(0, sprite.textureFilename);
 
@@ -1525,8 +1525,8 @@ void SetRenderPipelineStates(MeshComponent* mesh)
 	const FLOAT blendState[4] = { 0.f };
 	context->OMSetBlendState(material->blendState->data, blendState, 0xFFFFFFFF);
 
-	context->VSSetShader(material->shader->vertexShader, nullptr, 0);
-	context->PSSetShader(material->shader->pixelShader, nullptr, 0);
+	context->VSSetShader(material->vertexShader->GetShader(), nullptr, 0);
+	context->PSSetShader(material->pixelShader->GetShader(), nullptr, 0);
 
 	context->PSSetSamplers(0, 1, &material->sampler->data);
 	SetShaderResourceFromMaterial(0, material);
@@ -1545,20 +1545,21 @@ void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 
 	context->RSSetState(rastStateMap["shadow"]->data);
 
-	ShaderItem* shader = shaderSystem.FindShader(L"Shadows.hlsl");
+	ShaderPair shaderPair = shaderSystem.FindShaderPair(ShaderPairs::Shadow);
 
-	context->VSSetShader(shader->vertexShader, nullptr, 0);
-	context->PSSetShader(shader->pixelShader, nullptr, 0);
+	context->VSSetShader(shaderPair.GetVertexShader(), nullptr, 0);
+	context->PSSetShader(shaderPair.GetPixelShader(), nullptr, 0);
 
 	context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
 	context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
 }
 
-void SetShader(std::wstring shaderName)
+void SetShaders(ShaderPairNames shaderPairNames)
 {
-	ShaderItem* shader = shaderSystem.FindShader(shaderName);
-	context->VSSetShader(shader->vertexShader, nullptr, 0);
-	context->PSSetShader(shader->pixelShader, nullptr, 0);
+	ShaderPair shaderPair = shaderSystem.FindShaderPair(shaderPairNames);
+
+	context->VSSetShader(shaderPair.GetVertexShader(), nullptr, 0);
+	context->PSSetShader(shaderPair.GetPixelShader(), nullptr, 0);
 }
 
 void SetRastState(std::string rastStateName)
@@ -1660,7 +1661,7 @@ void RenderPostProcess()
 	context->IASetVertexBuffers(0, 0, nullptr, nullptr, nullptr);
 	context->IASetIndexBuffer(nullptr, DXGI_FORMAT_UNKNOWN, 0);
 
-	SetShader(L"PostProcess.hlsl");
+	SetShaders(ShaderPairs::PostProcess);
 
 	//Set constant buffer data
 	cbPostProcess->Map(&postProcessIntance->postProcessData);

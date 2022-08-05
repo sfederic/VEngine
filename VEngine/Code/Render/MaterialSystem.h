@@ -4,6 +4,7 @@
 #include <memory>
 #include "System.h"
 #include "UID.h"
+#include "Render/ShaderPair.h"
 
 class Material;
 
@@ -16,7 +17,7 @@ public:
 	std::string selectedMaterialInEditor;
 
 	MaterialSystem() : System("MaterialSystem") {}
-	Material* CreateMaterial(std::string textureFilename, std::string shaderFilename);
+	Material* CreateMaterial(std::string textureFilename, ShaderPairNames shaderPair);
 	void DestroyMaterial(UID materialUID);
 	Material* FindMaterial(UID uid);
 	Material LoadMaterialFromFile(const std::string filename);

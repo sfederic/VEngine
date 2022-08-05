@@ -4,6 +4,8 @@
 #include "Core.h"
 #include "Input.h"
 #include "Render/Renderer.h"
+#include "Render/VertexShader.h"
+#include "Render/PixelShader.h"
 #include "Asset/FBXLoader.h"
 #include "UI/UISystem.h"
 #include "Editor/DebugMenu.h"
@@ -119,7 +121,7 @@ void Engine::Render(float deltaTime)
 void Engine::Cleanup()
 {
 	physicsSystem.Cleanup();
-	shaderSystem.CleanUpShaders();
+	shaderSystem.ClearShaders();
 	debugMenu.Cleanup();
 	uiSystem.Cleanup();
 }
