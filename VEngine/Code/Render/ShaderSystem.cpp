@@ -1,6 +1,8 @@
 #include "vpch.h"
 #include "ShaderSystem.h"
 #include <filesystem>
+#include <algorithm>
+#include <execution>
 #include <set>
 #include "Debug.h"
 #include "RenderUtils.h"
@@ -121,7 +123,8 @@ void ShaderSystem::CompileAllShadersFromFile()
         }
     }
 
-    for (ShaderItem* shader : shaders)
+    std::for_each(std::execution::par, shaders.begin(), shaders.end(),
+        [&](ShaderItem* shader)
     {
         shaderMap[shader->filename] = shader;
 
@@ -129,7 +132,7 @@ void ShaderSystem::CompileAllShadersFromFile()
 
         shader->vertexCode = CreateShaderFromFile(path.c_str(), vsEntry, vsTarget);
         shader->pixelCode = CreateShaderFromFile(path.c_str(), psEntry, psTarget);
-    }
+    });
 
     //Get compute shaders
     //@Todo: compute shader folder can go missing if empty on project cleans, causing directory_iterator to fail.
