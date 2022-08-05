@@ -74,10 +74,6 @@ void ShaderSystem::CompileAllShadersFromFile()
 {
     ClearShaders();
 
-    //@Todo: enable parallel for
-    //std::for_each(std::execution::par, shaders.begin(), shaders.end(),
-    //    [&](ShaderItem* shader)
-    
     //Go through all vertex shaders
     for (auto& entry : std::filesystem::directory_iterator("Shaders/Vertex"))
     {
