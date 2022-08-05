@@ -152,6 +152,7 @@ void MeshComponent::SetBlendState(const std::string newBlendState)
 void MeshComponent::SetTexture(const std::string newTextureName)
 {
 	material->texture = textureSystem.FindTexture2D(newTextureName);
+	material->textureData.filename = newTextureName;
 }
 
 Buffer* MeshComponent::GetVertexBuffer() const 
