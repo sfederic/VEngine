@@ -13,10 +13,6 @@ AudioActor0
 UID
 1953176639
 next
-Player
-0
-Unit
-0
 CameraActor
 1
  Enabled
@@ -32,14 +28,6 @@ CameraActor0
 UID
 2364905173
 next
-Grid
-0
-GridActor
-0
-EntranceTrigger
-0
-NPC
-0
 MeshActor
 9
  Enabled
@@ -49,7 +37,7 @@ MeshActor
  Rotation
 -0 0 -0 1
  Scale
-7 1 11
+15 1 15
 Name
 node0
 UID
@@ -166,44 +154,14 @@ DirectionalLightActor
  Position
 2 1 2
  Rotation
--0 0.706985 -0 0.707229
+-0 -0.573718 -0 0.819053
  Scale
-1 1 1
+0.999998 1 0.999998
 Name
 DirectionalLightActor0
 UID
 1379531862
 next
-SavePoint
-0
-PointLightActor
-0
-SpotLightActor
-0
-FenceActor
-0
-Billboard
-0
-InteractTrigger
-0
-ParticleSystem
-0
-DialogueTrigger
-0
-DestructibleActor
-0
-MemoryActor
-0
-TitleScreenActor
-0
-PushableGridActor
-0
-PlayerDialogueTrigger
-0
-GoddessStatue
-0
-PhysicsActor
-0
 PostProcessInstance
 1
  Enabled
@@ -235,20 +193,6 @@ UID
 White Value
 3.3
 next
-PolyboardActor
-0
-DebugNoteActor
-0
-SpriteSheetActor
-0
-MovingGridActor
-0
-CutsceneActor
-0
-DiffuseProbeMap
-0
-TestActor
-0
 CameraComponent
 1
 2364905173
@@ -260,14 +204,6 @@ Far Z
 Near Z
 0.01
 next
-TimeComponent
-0
-QuestComponent
-0
-CharacterControllerComponent
-0
-WidgetComponent
-0
 AudioComponent
 1
 1953176639
@@ -291,10 +227,6 @@ Play On Start
 Volume
 1
 next
-DialogueComponent
-0
-MemoryComponent
-0
 EmptyComponent
 1
 3281437188
@@ -319,7 +251,7 @@ Mesh
  Rot
 -0 0 -0 1
  Scale
-7 1 11
+15 1 15
 Ambient
 0.5 0.5 0.5 1
 Blend State
@@ -751,10 +683,6 @@ UvRotationSpeed
 UvScale
 1 1
 next
-InstanceMeshComponent
-0
-BoxTriggerComponent
-0
 DirectionalLightComponent
 1
 1379531862
@@ -764,26 +692,14 @@ DirectionalLight
  Pos
 2 1 2
  Rot
--0 0.706985 -0 0.707229
+-0 -0.573718 -0 0.819053
  Scale
-1 1 1
+0.999998 1 0.999998
 Colour
 1 1 1 1
 LightEnabled
 1
+ShadowMap Size
+15
 next
-PointLightComponent
-0
-SpotLightComponent
-0
-ParticleEmitter
-0
-SpriteSheet
-0
-ConditionComponent
-0
-DestructibleMeshComponent
-0
-Polyboard
-0
 end

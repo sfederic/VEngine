@@ -327,26 +327,7 @@ MovingGridActor
 CutsceneActor
 0
 DiffuseProbeMap
-1
- Enabled
-1
- Position
--4 1 6
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Name
-DiffuseProbeMap0
-UID
-2571328140
-sizeX
-10
-sizeY
-10
-sizeZ
-10
-next
+0
 TestActor
 0
 CameraComponent
@@ -1252,7 +1233,7 @@ UvScale
 1 1
 next
 InstanceMeshComponent
-2
+1
 3703861153
 NodeMesh
  Enabled
@@ -1291,55 +1272,6 @@ Texture
 test.png
 Use Texture
 1
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
-next
-2571328140
-InstanceMesh
- Enabled
-1
- Pos
--4 1 6
- Rot
-0 0 0 1
- Scale
-1 1 1
-Ambient
-0.5 0.5 0.5 1
-Blend State
-null
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-Mesh
-cube.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-InstanceShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
-Static
-1
-Texture
-test.png
-Use Texture
-0
 UvOffset
 0 0
 UvOffsetSpeed
