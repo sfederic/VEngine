@@ -2,6 +2,7 @@
 #include <d2d1_1.h>
 #include <dwrite_1.h>
 #include <vector>
+#include "System.h"
 
 struct Widget;
 struct MemoryGainedWidget;
@@ -16,7 +17,7 @@ namespace Colours
 	static D2D1_COLOR_F Black = { 0.f, 0.f, 0.f, 1.f };
 }
 
-struct UISystem
+struct UISystem : public System
 {
 	//Global widgets
 	MemoryGainedWidget* memoryGainedWidget = nullptr;
@@ -47,6 +48,8 @@ struct UISystem
 	ID2D1SolidColorBrush* debugBrushText = nullptr;
 	ID2D1SolidColorBrush* brushShapes = nullptr;
 	ID2D1SolidColorBrush* brushShapesAlpha = nullptr;
+
+	UISystem() : System("UISystem") {}
 
 	void Init(void* swapchain);
 	void BeginDraw();

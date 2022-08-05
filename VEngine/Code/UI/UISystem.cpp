@@ -49,6 +49,8 @@ void UISystem::Init(void* swapchain)
 	HR(d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.5f, 0.5f, 0.5f, 0.5f), &brushShapesAlpha));
 
 	CreateGlobalWidgets();
+
+	systemState = SystemStates::Loaded;
 }
 
 void UISystem::BeginDraw()
@@ -135,6 +137,11 @@ void UISystem::Cleanup()
 	if (!Core::gameplayOn)
 	{ 
 		Reset();
+	}
+
+	if (systemState == SystemStates::Unloaded)
+	{
+		return;
 	}
 
 	d2dFactory->Release();
