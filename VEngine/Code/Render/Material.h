@@ -26,7 +26,7 @@ struct MaterialShaderData
 	float uvRotation = 0.f;
 	float smoothness = 0.f;
 	float metallic = 0.f;
-	int useTexture = false; //Keep in mind that bools in HLSL are 4 bytes
+	int useTexture = true; //Keep in mind that bools in HLSL are 4 bytes
 };
 
 class Material
