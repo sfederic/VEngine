@@ -529,6 +529,9 @@ void RenderShadowPass()
 {
 	Profile::Start();
 
+	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	context->IASetInputLayout(inputLayout);
+
 	shadowMap->BindDsvAndSetNullRenderTarget(context);
 
 	for (auto mesh : MeshComponent::system.components)
@@ -619,8 +622,14 @@ void Renderer::Render()
 	SetShadowData();
 	RenderShadowPass();
 
-	//Setup render calls
-	PostProcessInstance::system.GetNumActors() == 0 ? RenderSetup() : RenderPostProcessSetup();
+	if (PostProcessInstance::system.GetNumActors() > 0)
+	{
+		RenderPostProcessSetup();
+	}
+	else
+	{
+		RenderSetup();
+	}
 
 	UpdateLights();
 
