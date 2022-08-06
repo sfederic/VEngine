@@ -125,8 +125,10 @@
     <ClCompile Include="Code\IFunction.cpp" />
     <ClCompile Include="Code\Quests\BlacksmithQuest.cpp" />
     <ClCompile Include="Code\Quests\Quest.cpp" />
+    <ClCompile Include="Code\Render\PixelShader.cpp" />
     <ClCompile Include="Code\Render\Shader.cpp" />
     <ClCompile Include="Code\Render\ShaderPair.cpp" />
+    <ClCompile Include="Code\Render\VertexShader.cpp" />
     <ClCompile Include="Code\SHMath\DirectXSH.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
