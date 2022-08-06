@@ -20,13 +20,3 @@ void PixelShader::Reset()
     shader.Reset();
     byteCode.clear();
 }
-
-void PixelShader::ReCreate()
-{
-    Reset();
-    HR(RenderUtils::device->CreatePixelShader(
-        GetByteCodeData(),
-        GetByteCodeSize(),
-        nullptr,
-        GetShaderAddress()));
-}

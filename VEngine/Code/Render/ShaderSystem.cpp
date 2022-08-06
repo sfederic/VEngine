@@ -1,11 +1,9 @@
 #include "vpch.h"
 #include "ShaderSystem.h"
 #include <filesystem>
-#include <algorithm>
-#include <execution>
-#include <execution>
 #include <fstream>
-#include <set>
+#include <d3dcompiler.h>
+#include <d3dcommon.h>
 #include "Debug.h"
 #include "RenderUtils.h"
 #include "Input.h"
@@ -48,61 +46,43 @@ ShaderPair ShaderSystem::FindShaderPair(ShaderPairNames shaderPairNames)
     return ShaderPair(vs, ps);
 }
 
-ID3DBlob* ShaderSystem::CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target)
+ID3DBlob* CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target)
 {
-	UINT compileFlags = 0;
+    UINT compileFlags = 0;
 #ifdef _DEBUG
-	compileFlags = D3DCOMPILE_SKIP_OPTIMIZATION | D3DCOMPILE_DEBUG;
+    compileFlags = D3DCOMPILE_SKIP_OPTIMIZATION | D3DCOMPILE_DEBUG;
 #endif
-	ID3DBlob* code = nullptr;
-	ID3DBlob* error = nullptr;
+    ID3DBlob* code = nullptr;
+    ID3DBlob* error = nullptr;
 
-	D3DCompileFromFile(filename, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
-		entry, target, compileFlags, 0, &code, &error);
+    D3DCompileFromFile(filename, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
+        entry, target, compileFlags, 0, &code, &error);
 
-	if (error)
-	{
+    if (error)
+    {
         const char* errMsg = (char*)error->GetBufferPointer();
         MessageBoxA(0, errMsg, "Shader Compile Error", 0);
         Log("Shader Compile Error: %s", errMsg);
     }
 
-	return code;
+    return code;
 }
 
 void ShaderSystem::CompileAllShadersFromFile()
 {
     ClearShaders();
 
-    //Go through all vertex shaders
     for (auto& entry : std::filesystem::directory_iterator("Shaders/Vertex"))
     {
         auto vertexShader = std::make_unique<VertexShader>();
-
-        vertexShader->ReadData(entry.path().c_str());
-
-        HR(RenderUtils::device->CreateVertexShader(
-            vertexShader->GetByteCodeData(),
-            vertexShader->GetByteCodeSize(),
-            nullptr,
-            vertexShader->GetShaderAddress()));
-
+        vertexShader->Create(entry.path().c_str());
         vertexShaders.emplace(entry.path().filename(), std::move(vertexShader));
     }
 
-    //Go through all pixel shaders
     for (auto& entry : std::filesystem::directory_iterator("Shaders/Pixel"))
     {
         auto pixelShader = std::make_unique<PixelShader>();
-
-        pixelShader->ReadData(entry.path().c_str());
-
-        HR(RenderUtils::device->CreatePixelShader(
-            pixelShader->GetByteCodeData(),
-            pixelShader->GetByteCodeSize(),
-            nullptr,
-            pixelShader->GetShaderAddress()));
-
+        pixelShader->Create(entry.path().c_str());
         pixelShaders.emplace(entry.path().filename(), std::move(pixelShader));
     }
 }
@@ -115,45 +95,5 @@ void ShaderSystem::ClearShaders()
 
 void ShaderSystem::HotReloadShaders()
 {
-   /* auto startTime = Profile::QuickStart();
-
-    debugMenu.AddNotification(L"Shader reload start...");
-
-    std::wstring shaderRecompileMsg = L"Shader reload complete";
-
-    std::vector<ShaderItem*> shadersToRecompile;
-
-    for (ShaderItem* shader : shaders)
-    {
-        std::wstring path = shaderDirectory + shader->filename;
-
-        ID3DBlob* vertexCode = CreateShaderFromFile(path.c_str(), vsEntry, vsTarget);
-        if (vertexCode == nullptr)
-        {
-            shaderRecompileMsg = L"Shader reload failed.";
-            continue;
-        }
-
-        ID3DBlob* pixelCode = CreateShaderFromFile(path.c_str(), psEntry, psTarget);
-        if (pixelCode == nullptr)
-        {
-            shaderRecompileMsg = L"Shader reload failed.";
-            vertexCode->Release();
-            continue;
-        }
-
-        shader->pixelShader->Release();
-        shader->vertexShader->Release();
-
-        shadersToRecompile.push_back(shader);
-    }
-
-    for (ShaderItem* shader : shadersToRecompile)
-    {
-    }
-
-    debugMenu.AddNotification(shaderRecompileMsg);
-
-    auto elapsedTime = Profile::QuickEnd(startTime);
-    Log(L"Shader hotreload took [%f] seconds", elapsedTime);*/
+    //@Todo:
 }

@@ -1,17 +1,15 @@
 #pragma once
 
 #include <string>
-#include <vector>
-#include <set>
 #include <memory>
-#include <d3dcompiler.h>
+#include <map>
 #include "System.h"
 #include "Render/ShaderPair.h"
 
 struct VertexShader;
 struct PixelShader;
 
-struct ShaderSystem : System
+class ShaderSystem : public System
 {
 public:
 	ShaderSystem() : System("ShaderSystem") {}
@@ -25,7 +23,6 @@ public:
 	void ClearShaders();
 
 private:
-	ID3DBlob* CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target);
 	void CompileAllShadersFromFile();
 	void HotReloadShaders();
 
