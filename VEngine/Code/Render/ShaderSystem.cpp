@@ -1,31 +1,14 @@
 #include "vpch.h"
 #include "ShaderSystem.h"
 #include <filesystem>
-#include <fstream>
-#include <d3dcompiler.h>
-#include <d3dcommon.h>
-#include "Debug.h"
-#include "RenderUtils.h"
-#include "Input.h"
-#include "Log.h"
-#include "Profile.h"
-#include "Editor/DebugMenu.h"
-#include "Render/VertexShader.h"
-#include "Render/PixelShader.h"
+#include "VertexShader.h"
+#include "PixelShader.h"
 
 ShaderSystem shaderSystem;
 
 void ShaderSystem::Init()
 {
     CompileAllShadersFromFile();
-}
-
-void ShaderSystem::Tick()
-{
-    if (Input::GetKeyUp(Keys::F4))
-    {
-        HotReloadShaders();
-    }
 }
 
 VertexShader* ShaderSystem::FindVertexShader(const std::wstring filename)
@@ -44,28 +27,6 @@ ShaderPair ShaderSystem::FindShaderPair(ShaderPairNames shaderPairNames)
     PixelShader* ps = pixelShaders[shaderPairNames.second].get();
 
     return ShaderPair(vs, ps);
-}
-
-ID3DBlob* CreateShaderFromFile(const wchar_t* filename, const char* entry, const char* target)
-{
-    UINT compileFlags = 0;
-#ifdef _DEBUG
-    compileFlags = D3DCOMPILE_SKIP_OPTIMIZATION | D3DCOMPILE_DEBUG;
-#endif
-    ID3DBlob* code = nullptr;
-    ID3DBlob* error = nullptr;
-
-    D3DCompileFromFile(filename, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
-        entry, target, compileFlags, 0, &code, &error);
-
-    if (error)
-    {
-        const char* errMsg = (char*)error->GetBufferPointer();
-        MessageBoxA(0, errMsg, "Shader Compile Error", 0);
-        Log("Shader Compile Error: %s", errMsg);
-    }
-
-    return code;
 }
 
 void ShaderSystem::CompileAllShadersFromFile()
@@ -91,9 +52,4 @@ void ShaderSystem::ClearShaders()
 {
     vertexShaders.clear();
     pixelShaders.clear();
-}
-
-void ShaderSystem::HotReloadShaders()
-{
-    //@Todo:
 }

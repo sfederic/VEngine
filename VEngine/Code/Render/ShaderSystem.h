@@ -14,7 +14,6 @@ class ShaderSystem : public System
 public:
 	ShaderSystem() : System("ShaderSystem") {}
 	void Init();
-	void Tick();
 
 	VertexShader* FindVertexShader(const std::wstring filename);
 	PixelShader* FindPixelShader(const std::wstring filename);
@@ -24,7 +23,6 @@ public:
 
 private:
 	void CompileAllShadersFromFile();
-	void HotReloadShaders();
 
 	std::map<std::wstring, std::unique_ptr<VertexShader>> vertexShaders;
 	std::map<std::wstring, std::unique_ptr<PixelShader>> pixelShaders;
