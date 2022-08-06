@@ -9,31 +9,17 @@ void Shader::ReadData(const std::wstring filename)
 
     if (!inFile)
     {
-        throw std::runtime_error("ReadData");
+        throw std::runtime_error("No file found");
     }
 
     const std::streampos len = inFile.tellg();
-    if (!inFile)
-    {
-        throw std::runtime_error("ReadData");
-    }
 
-    std::vector<uint8_t> blob;
-    blob.resize(size_t(len));
+    byteCode.clear();
+    byteCode.resize(size_t(len));
 
     inFile.seekg(0, std::ios::beg);
-    if (!inFile)
-    {
-        throw std::runtime_error("ReadData");
-    }
 
-    inFile.read(reinterpret_cast<char*>(blob.data()), len);
-    if (!inFile)
-    {
-        throw std::runtime_error("ReadData");
-    }
+    inFile.read(reinterpret_cast<char*>(byteCode.data()), len);
 
     inFile.close();
-
-    byteCode = blob;
 }
