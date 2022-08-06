@@ -4,7 +4,6 @@
 #include <memory>
 #include <map>
 #include "System.h"
-#include "Render/ShaderItem.h"
 
 struct VertexShader;
 struct PixelShader;
@@ -17,7 +16,6 @@ public:
 
 	VertexShader* FindVertexShader(const std::wstring filename);
 	PixelShader* FindPixelShader(const std::wstring filename);
-	ShaderItem FindShader(ShaderItemNames shaderPairNames);
 
 	void ClearShaders();
 

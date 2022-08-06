@@ -80,7 +80,7 @@ void SetMatricesFromMesh(MeshComponent* mesh);
 void SetShaderMeshData(MeshComponent* mesh);
 void SetRenderPipelineStates(MeshComponent* mesh);
 void SetRenderPipelineStatesForShadows(MeshComponent* mesh);
-void SetShaders(ShaderItemNames shaderItemNames);
+void SetShaders(ShaderItem& shaderItem);
 void SetRastState(std::string rastStateName);
 void SetBlendState(std::string blendStateName);
 void SetConstantBufferVertexPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer);
@@ -763,7 +763,7 @@ void Renderer::RenderLightProbeViews()
 				//context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
 				//context->PSSetSamplers(1, 1, &shadowMap->sampler);
 
-				ShaderItem lightProbeShader = shaderSystem.FindShader(ShaderItems::Default);
+				ShaderItem& lightProbeShader = ShaderItems::Default;
 
 				for (auto mesh : MeshComponent::system.components)
 				{
@@ -1250,7 +1250,7 @@ void AnimateSkeletalMesh(MeshComponent* mesh)
 		ShaderSkinningData skinningData = {};
 
 		//Set shader for skeletal animation
-		ShaderItem shaderItem = shaderSystem.FindShader(ShaderItems::Animation);
+		ShaderItem& shaderItem = ShaderItems::Animation;
 		context->VSSetShader(shaderItem.GetVertexShader(), nullptr, 0);
 		context->PSSetShader(shaderItem.GetPixelShader(), nullptr, 0);
 
@@ -1545,7 +1545,7 @@ void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 
 	context->RSSetState(rastStateMap["shadow"]->data);
 
-	ShaderItem shader = shaderSystem.FindShader(ShaderItems::Shadow);
+	ShaderItem& shader = ShaderItems::Shadow;
 
 	context->VSSetShader(shader.GetVertexShader(), nullptr, 0);
 	context->PSSetShader(shader.GetPixelShader(), nullptr, 0);
@@ -1554,12 +1554,10 @@ void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 	context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
 }
 
-void SetShaders(ShaderItemNames shaderItemNames)
+void SetShaders(ShaderItem& shaderItem)
 {
-	ShaderItem shader = shaderSystem.FindShader(shaderItemNames);
-
-	context->VSSetShader(shader.GetVertexShader(), nullptr, 0);
-	context->PSSetShader(shader.GetPixelShader(), nullptr, 0);
+	context->VSSetShader(shaderItem.GetVertexShader(), nullptr, 0);
+	context->PSSetShader(shaderItem.GetPixelShader(), nullptr, 0);
 }
 
 void SetRastState(std::string rastStateName)

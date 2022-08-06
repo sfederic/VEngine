@@ -557,7 +557,7 @@
     <ClCompile Include="Code\Render\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Render\ShaderPair.cpp">
+    <ClCompile Include="Code\Render\ShaderItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Render\VertexShader.cpp">
@@ -1090,7 +1090,6 @@
     <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Code\Render\Shaders\Vertex\Default_vs.hlsl" />
     <FxCompile Include="Code\Render\Shaders\Include\Common.hlsli" />
     <FxCompile Include="Code\Render\Shaders\Pixel\Default_ps.hlsl" />
     <FxCompile Include="Code\Render\Shaders\Vertex\Grass_vs.hlsl" />
@@ -1105,5 +1104,6 @@
     <FxCompile Include="Code\Render\Shaders\Vertex\Water_vs.hlsl" />
     <FxCompile Include="Code\Render\Shaders\Vertex\WaterFloat_vs.hlsl" />
     <FxCompile Include="Code\Render\Shaders\Pixel\Shadows_ps.hlsl" />
+    <FxCompile Include="Code\Render\Shaders\Vertex\Default_vs.hlsl" />
   </ItemGroup>
 </Project>

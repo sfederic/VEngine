@@ -57,7 +57,7 @@ public:
 	VEnum blendStateValue;
 
 public:
-	Material(std::string textureFilename_, ShaderItemNames shaderItemNames);
+	Material(std::string textureFilename_, ShaderItem& shaderItem);
 
 	virtual void Create();
 	virtual void Destroy();

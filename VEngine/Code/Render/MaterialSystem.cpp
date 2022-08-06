@@ -6,10 +6,10 @@
 
 MaterialSystem materialSystem;
 
-Material* MaterialSystem::CreateMaterial(std::string textureFilename, ShaderItemNames shaderPair)
+Material* MaterialSystem::CreateMaterial(std::string textureFilename, ShaderItem& shaderItem)
 {
 	auto uid = GenerateUID();
-	materials.emplace(uid, std::make_unique<Material>(textureFilename, shaderPair));
+	materials.emplace(uid, std::make_unique<Material>(textureFilename, shaderItem));
 	auto material = materials[uid].get();
 	material->SetUID(uid);
 	return material;

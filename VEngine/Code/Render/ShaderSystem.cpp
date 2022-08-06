@@ -3,12 +3,23 @@
 #include <filesystem>
 #include "VertexShader.h"
 #include "PixelShader.h"
+#include "ShaderItem.h"
 
 ShaderSystem shaderSystem;
 
 void ShaderSystem::Init()
 {
     CompileAllShadersFromFile();
+
+    ShaderItems::Default = ShaderItem(L"Default_vs.cso", L"Default_ps.cso");
+    ShaderItems::DefaultClip = ShaderItem(L"Default_vs.cso", L"TextureClip_ps.cso");
+    ShaderItems::Unlit = ShaderItem(L"Unlit_vs.cso", L"TextureClip_ps.cso");
+    ShaderItems::Animation = ShaderItem(L"Animation_vs.cso", L"Default_ps.cso");
+    ShaderItems::Shadow = ShaderItem(L"Shadows_vs.cso", L"Shadows_ps.cso");
+    ShaderItems::Instance = ShaderItem(L"Instance_vs.cso", L"Instance_ps.cso");
+    ShaderItems::SolidColour = ShaderItem(L"Default_vs.cso", L"SolidColour_ps.cso");
+    ShaderItems::UI = ShaderItem(L"ui_vs.cso", L"TextureClip_ps.cso");
+    ShaderItems::PostProcess = ShaderItem(L"PostProcess_vs.cso", L"PostProcess_ps.cso");
 }
 
 VertexShader* ShaderSystem::FindVertexShader(const std::wstring filename)
@@ -19,14 +30,6 @@ VertexShader* ShaderSystem::FindVertexShader(const std::wstring filename)
 PixelShader* ShaderSystem::FindPixelShader(const std::wstring filename)
 {
     return pixelShaders[filename].get();
-}
-
-ShaderItem ShaderSystem::FindShader(ShaderItemNames shaderPairNames)
-{
-    VertexShader* vs = vertexShaders[shaderPairNames.first].get();
-    PixelShader* ps = pixelShaders[shaderPairNames.second].get();
-
-    return ShaderItem(vs, ps);
 }
 
 void ShaderSystem::CompileAllShadersFromFile()

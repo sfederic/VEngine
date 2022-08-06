@@ -50,7 +50,7 @@ public:
 	MeshComponent();
 	MeshComponent(const std::string filename_,
 		const std::string textureFilename_,
-		ShaderItemNames shaderItemNames = ShaderItems::Default);
+		ShaderItem shaderItem = ShaderItems::Default);
 	virtual void Tick(float deltaTime) override;
 	virtual void Create() override;
 	virtual void Destroy() override;
@@ -60,7 +60,7 @@ public:
 	void SetRastState(const std::string newRastStateName);
 	void SetBlendState(const std::string newBlendState);
 	void SetTexture(const std::string newTextureName);
-	void SetShaderPair(ShaderItemNames shaderItemNames);
+	void SetShaderFilenames(ShaderItem& shaderItem);
 
 	Buffer* GetVertexBuffer() const;
 	Buffer* GetIndexBuffer() const;
