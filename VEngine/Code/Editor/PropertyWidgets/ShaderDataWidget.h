@@ -1,10 +1,10 @@
 #pragma once
 #include "IPropertyWidget.h"
-#include <qpushbutton.h>
+#include <qlineedit.h>
 
 struct ShaderData;
 
-class ShaderDataWidget : public QPushButton, IPropertyWidget
+class ShaderDataWidget : public QLineEdit, IPropertyWidget
 {
 private:
 	ShaderData* value;

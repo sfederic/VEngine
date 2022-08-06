@@ -109,19 +109,19 @@ static void ReassignBlendState(void* data)
 
 static void ReassignShader(void* data)
 {
-	//auto shaderData = (ShaderData*)data;
-	//ShaderItem* foundShader = shaderSystem.FindShader(VString::stows(shaderData->filename));
-	//if (foundShader == nullptr)
-	//{
-	//	Log("%s not found on shader change.", shaderData->filename);
-	//	return;
-	//}
+	auto shaderData = (ShaderData*)data;
+	ShaderItem* foundShader = shaderSystem.FindShaderItem(shaderData->shaderItemName);
+	if (foundShader == nullptr)
+	{
+		Log("%s not found on shader change.", shaderData->shaderItemName.c_str());
+		return;
+	}
 
-	//auto meshes = WorldEditor::GetPickedActor()->GetComponentsOfType<MeshComponent>();
-	//for (auto mesh : meshes)
-	//{
-	//	mesh->material->shader = foundShader;
-	//}
+	auto meshes = WorldEditor::GetPickedActor()->GetComponentsOfType<MeshComponent>();
+	for (auto mesh : meshes)
+	{
+		mesh->material->shader = foundShader;
+	}
 }
 
 Properties Material::GetProps()
