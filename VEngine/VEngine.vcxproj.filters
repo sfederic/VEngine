@@ -1104,5 +1104,6 @@
     <FxCompile Include="Code\Render\Shaders\Vertex\Shadows_vs.hlsl" />
     <FxCompile Include="Code\Render\Shaders\Vertex\Water_vs.hlsl" />
     <FxCompile Include="Code\Render\Shaders\Vertex\WaterFloat_vs.hlsl" />
+    <FxCompile Include="Code\Render\Shaders\Pixel\Shadows_ps.hlsl" />
   </ItemGroup>
 </Project>
