@@ -3,7 +3,7 @@
 #include <fstream>
 
 //Ref:https://raw.githubusercontent.com/wiki/microsoft/DirectXTK/ReadData.h
-void Shader::ReadData(const wchar_t* filename)
+void Shader::ReadData(const std::wstring filename)
 {
     std::ifstream inFile(filename, std::ios::in | std::ios::binary | std::ios::ate);
 

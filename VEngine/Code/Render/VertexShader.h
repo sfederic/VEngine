@@ -8,7 +8,7 @@ struct ID3D11VertexShader;
 class VertexShader : public Shader
 {
 public:
-	virtual void Create(const wchar_t* filename) override;
+	virtual void Create(const std::wstring filename) override;
 	virtual void Reset() override;
 
 	ID3D11VertexShader* GetShader() { return shader.Get(); }

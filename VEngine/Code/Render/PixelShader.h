@@ -8,7 +8,7 @@ struct ID3D11PixelShader;
 class PixelShader : public Shader
 {
 public:
-	virtual void Create(const wchar_t* filename) override;
+	virtual void Create(const std::wstring filename) override;
 	virtual void Reset() override;
 
 	ID3D11PixelShader* GetShader() { return shader.Get(); }

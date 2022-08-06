@@ -3,7 +3,7 @@
 #include "RenderUtils.h"
 #include "Debug.h"
 
-void VertexShader::Create(const wchar_t* filename)
+void VertexShader::Create(const std::wstring filename)
 {
     ReadData(filename);
 
