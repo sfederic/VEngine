@@ -17,7 +17,7 @@
 #include "PropertiesDock.h"
 #include "Render/TextureSystem.h"
 #include "Render/Material.h"
-#include "Render/ShaderPair.h"
+#include "Render/ShaderItem.h"
 #include "Render/MaterialSystem.h"
 #include "Gameplay/GameInstance.h"
 #include "Log.h"
@@ -401,7 +401,7 @@ void AssetDock::CreateNewActorTemplateFile()
 void AssetDock::CreateNewMaterialFile()
 {
     //Create empty material
-    auto material = Material("test.png", ShaderPairs::Default);
+    auto material = Material("test.png", ShaderItems::Default);
 
     QFileDialog dialog;
     QString materialFileName = dialog.getSaveFileName(nullptr, "Create Material File",

@@ -5,7 +5,7 @@
 #include "Properties.h"
 #include "UID.h"
 #include "VEnum.h"
-#include "ShaderPair.h"
+#include "ShaderItem.h"
 
 using namespace DirectX;
 
@@ -57,7 +57,7 @@ public:
 	VEnum blendStateValue;
 
 public:
-	Material(std::string textureFilename_, ShaderPairNames shaderPairName);
+	Material(std::string textureFilename_, ShaderItemNames shaderItemNames);
 
 	virtual void Create();
 	virtual void Destroy();

@@ -21,7 +21,7 @@ struct DestructibleMeshComponent : MeshComponent
 	DestructibleMeshComponent() {}
 	DestructibleMeshComponent(const std::string filename_,
 		const std::string textureFilename_,
-		ShaderPairNames shaderPair = ShaderPairs::Default);
+		ShaderItemNames shaderItemNames = ShaderItems::Default);
 	virtual void Create() override;
 	virtual Properties GetProps() override;
 };

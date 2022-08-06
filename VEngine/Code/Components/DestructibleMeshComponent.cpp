@@ -6,8 +6,8 @@
 
 DestructibleMeshComponent::DestructibleMeshComponent(const std::string filename_,
     const std::string textureFilename_,
-    ShaderPairNames shaderPair)
-    : MeshComponent(filename_, textureFilename_, shaderPair)
+    ShaderItemNames shaderItemNames)
+    : MeshComponent(filename_, textureFilename_, shaderItemNames)
 {
 }
 

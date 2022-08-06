@@ -9,7 +9,7 @@ DiffuseProbeMap::DiffuseProbeMap()
 	instanceMeshComponent = InstanceMeshComponent::system.Add(
 		"InstanceMesh",
 		this,
-		InstanceMeshComponent(1, "cube.fbx", "test.png", ShaderPairs::Instance));
+		InstanceMeshComponent(1, "cube.fbx", "test.png", ShaderItems::Instance));
 	rootComponent = instanceMeshComponent;
 }
 

@@ -14,12 +14,12 @@
 #include "Render/VertexShader.h"
 #include "Render/PixelShader.h"
 
-Material::Material(std::string textureFilename_, ShaderPairNames shaderPairName)
+Material::Material(std::string textureFilename_, ShaderItemNames shaderItemNames)
 {
 	textureData.filename = textureFilename_;
 
-	shaderData.vertexShaderFilename = VString::wstos(shaderPairName.first);
-	shaderData.pixelShaderFilename = VString::wstos(shaderPairName.second);
+	shaderData.vertexShaderFilename = VString::wstos(shaderItemNames.first);
+	shaderData.pixelShaderFilename = VString::wstos(shaderItemNames.second);
 
 	//@Todo: I don't like this. There needs to be a way to check if something inherits from VEnum when serialising
 	rastStateValue.Add(RastStates::solid);

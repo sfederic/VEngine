@@ -6,8 +6,8 @@
 InstanceMeshComponent::InstanceMeshComponent(uint32_t meshInstanceRenderCount_,
 	const std::string filename,
 	const std::string textureFilename,
-	ShaderPairNames shaderPair)
-	: MeshComponent(filename, textureFilename, shaderPair)
+	ShaderItemNames shaderItemNames)
+	: MeshComponent(filename, textureFilename, shaderItemNames)
 {
 	meshInstanceRenderCount = meshInstanceRenderCount_;
 

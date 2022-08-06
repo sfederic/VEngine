@@ -6,7 +6,7 @@
 
 MaterialSystem materialSystem;
 
-Material* MaterialSystem::CreateMaterial(std::string textureFilename, ShaderPairNames shaderPair)
+Material* MaterialSystem::CreateMaterial(std::string textureFilename, ShaderItemNames shaderPair)
 {
 	auto uid = GenerateUID();
 	materials.emplace(uid, std::make_unique<Material>(textureFilename, shaderPair));
@@ -35,7 +35,7 @@ Material MaterialSystem::LoadMaterialFromFile(const std::string filename)
 {
 	const std::string filepath = "Materials/" + filename;
 	
-	auto material = Material("test.png", ShaderPairs::Default);
+	auto material = Material("test.png", ShaderItems::Default);
 	auto materialProps = material.GetProps();
 
 	Deserialiser d(filepath, OpenMode::In);

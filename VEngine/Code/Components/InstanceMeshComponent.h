@@ -22,7 +22,7 @@ public:
 	InstanceMeshComponent(uint32_t meshInstanceRenderCount_,
 		const std::string filename,
 		const std::string textureFilename,
-		ShaderPairNames shaderPair);
+		ShaderItemNames shaderItemNames);
 	~InstanceMeshComponent();
 	virtual void Create();
 	void SetInstanceCount(uint32_t count);

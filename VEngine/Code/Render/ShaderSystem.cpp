@@ -21,12 +21,12 @@ PixelShader* ShaderSystem::FindPixelShader(const std::wstring filename)
     return pixelShaders[filename].get();
 }
 
-ShaderPair ShaderSystem::FindShaderPair(ShaderPairNames shaderPairNames)
+ShaderItem ShaderSystem::FindShader(ShaderItemNames shaderPairNames)
 {
     VertexShader* vs = vertexShaders[shaderPairNames.first].get();
     PixelShader* ps = pixelShaders[shaderPairNames.second].get();
 
-    return ShaderPair(vs, ps);
+    return ShaderItem(vs, ps);
 }
 
 void ShaderSystem::CompileAllShadersFromFile()

@@ -31,24 +31,19 @@ MeshComponent::MeshComponent()
 	pso = new PipelineStateObject();
 
 	//default values for material
-	material = materialSystem.CreateMaterial("test.png", ShaderPairs::Default);
+	material = materialSystem.CreateMaterial("test.png", ShaderItems::Default);
 }
 
 MeshComponent::MeshComponent(const std::string filename_,
 	const std::string textureFilename_,
-	ShaderPairNames shaderPair)
+	ShaderItemNames shaderItemNames)
 {
 	meshDataProxy = new MeshDataProxy();
 	pso = new PipelineStateObject();
 
 	meshComponentData.filename = filename_;
 
-	material = new Material(textureFilename_, shaderPair);
-}
-
-void MeshComponent::Start()
-{
-
+	material = new Material(textureFilename_, shaderItemNames);
 }
 
 void MeshComponent::Tick(float deltaTime)
@@ -152,10 +147,10 @@ void MeshComponent::SetTexture(const std::string newTextureName)
 	material->textureData.filename = newTextureName;
 }
 
-void MeshComponent::SetShaderPair(ShaderPairNames shaderPair)
+void MeshComponent::SetShaderPair(ShaderItemNames shaderItemNames)
 {
-	material->shaderData.vertexShaderFilename = VString::wstos(shaderPair.first);
-	material->shaderData.pixelShaderFilename = VString::wstos(shaderPair.second);
+	material->shaderData.vertexShaderFilename = VString::wstos(shaderItemNames.first);
+	material->shaderData.pixelShaderFilename = VString::wstos(shaderItemNames.second);
 }
 
 Buffer* MeshComponent::GetVertexBuffer() const 
