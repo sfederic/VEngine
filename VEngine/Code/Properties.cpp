@@ -26,8 +26,7 @@ void Properties::CopyData(std::string name, Property& propToCopy)
 		auto dst = (ShaderData*)prop.data;
 		auto src = (ShaderData*)propToCopy.data;
 
-		dst->vertexShaderFilename = src->vertexShaderFilename.c_str();
-		dst->pixelShaderFilename = src->pixelShaderFilename.c_str();
+		dst->shaderItemName = src->shaderItemName.c_str();
 	}
 	else if (prop.info == typeid(TextureData))
 	{

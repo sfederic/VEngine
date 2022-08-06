@@ -80,7 +80,7 @@ void SetMatricesFromMesh(MeshComponent* mesh);
 void SetShaderMeshData(MeshComponent* mesh);
 void SetRenderPipelineStates(MeshComponent* mesh);
 void SetRenderPipelineStatesForShadows(MeshComponent* mesh);
-void SetShaders(ShaderItem& shaderItem);
+void SetShaders(ShaderItem* shaderItem);
 void SetRastState(std::string rastStateName);
 void SetBlendState(std::string blendStateName);
 void SetConstantBufferVertexPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer);
@@ -763,7 +763,7 @@ void Renderer::RenderLightProbeViews()
 				//context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
 				//context->PSSetSamplers(1, 1, &shadowMap->sampler);
 
-				ShaderItem& lightProbeShader = ShaderItems::Default;
+				ShaderItem* lightProbeShader = ShaderItems::Default;
 
 				for (auto mesh : MeshComponent::system.components)
 				{
@@ -774,8 +774,8 @@ void Renderer::RenderLightProbeViews()
 					const FLOAT blendState[4] = { 0.f };
 					context->OMSetBlendState(nullptr, blendState, 0xFFFFFFFF);
 
-					context->VSSetShader(lightProbeShader.GetVertexShader(), nullptr, 0);
-					context->PSSetShader(lightProbeShader.GetPixelShader(), nullptr, 0);
+					context->VSSetShader(lightProbeShader->GetVertexShader(), nullptr, 0);
+					context->PSSetShader(lightProbeShader->GetPixelShader(), nullptr, 0);
 
 					context->PSSetSamplers(0, 1, &material->sampler->data);
 
@@ -1250,9 +1250,9 @@ void AnimateSkeletalMesh(MeshComponent* mesh)
 		ShaderSkinningData skinningData = {};
 
 		//Set shader for skeletal animation
-		ShaderItem& shaderItem = ShaderItems::Animation;
-		context->VSSetShader(shaderItem.GetVertexShader(), nullptr, 0);
-		context->PSSetShader(shaderItem.GetPixelShader(), nullptr, 0);
+		ShaderItem* shaderItem = ShaderItems::Animation;
+		context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
+		context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 
 		Animation& anim = skeleton->GetCurrentAnimation(mesh->currentAnimation);
 		if (!anim.frames.empty())
@@ -1525,8 +1525,8 @@ void SetRenderPipelineStates(MeshComponent* mesh)
 	const FLOAT blendState[4] = { 0.f };
 	context->OMSetBlendState(material->blendState->data, blendState, 0xFFFFFFFF);
 
-	context->VSSetShader(material->vertexShader->GetShader(), nullptr, 0);
-	context->PSSetShader(material->pixelShader->GetShader(), nullptr, 0);
+	context->VSSetShader(material->GetVertexShader(), nullptr, 0);
+	context->PSSetShader(material->GetPixelShader(), nullptr, 0);
 
 	context->PSSetSamplers(0, 1, &material->sampler->data);
 	SetShaderResourceFromMaterial(0, material);
@@ -1545,19 +1545,19 @@ void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 
 	context->RSSetState(rastStateMap["shadow"]->data);
 
-	ShaderItem& shader = ShaderItems::Shadow;
+	ShaderItem* shader = ShaderItems::Shadow;
 
-	context->VSSetShader(shader.GetVertexShader(), nullptr, 0);
-	context->PSSetShader(shader.GetPixelShader(), nullptr, 0);
+	context->VSSetShader(shader->GetVertexShader(), nullptr, 0);
+	context->PSSetShader(shader->GetPixelShader(), nullptr, 0);
 
 	context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
 	context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
 }
 
-void SetShaders(ShaderItem& shaderItem)
+void SetShaders(ShaderItem* shaderItem)
 {
-	context->VSSetShader(shaderItem.GetVertexShader(), nullptr, 0);
-	context->PSSetShader(shaderItem.GetPixelShader(), nullptr, 0);
+	context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
+	context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 }
 
 void SetRastState(std::string rastStateName)

@@ -6,7 +6,7 @@
 
 DestructibleMeshComponent::DestructibleMeshComponent(const std::string filename_,
     const std::string textureFilename_,
-    ShaderItem shaderItem)
+    ShaderItem* shaderItem)
     : MeshComponent(filename_, textureFilename_, shaderItem)
 {
 }

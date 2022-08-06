@@ -17,7 +17,7 @@ public:
 	std::string selectedMaterialInEditor;
 
 	MaterialSystem() : System("MaterialSystem") {}
-	Material* CreateMaterial(std::string textureFilename, ShaderItem& shaderItem);
+	Material* CreateMaterial(std::string textureFilename, ShaderItem* shaderItem);
 	void DestroyMaterial(UID materialUID);
 	Material* FindMaterial(UID uid);
 	Material LoadMaterialFromFile(const std::string filename);

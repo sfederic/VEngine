@@ -141,7 +141,7 @@ Serialiser::Serialiser(const std::string filename_, const OpenMode mode_) :
 
 	typeToWriteFuncMap[typeid(ShaderData)] = [&](Property& prop, std::wstring& name) {
 		auto shaderData = prop.GetData<ShaderData>();
-		ss << name << "\n" << shaderData->vertexShaderFilename.c_str() << " " << shaderData->pixelShaderFilename.c_str() << "\n";
+		ss << name << "\n" << shaderData->shaderItemName.c_str() << "\n";
 	};
 
 	typeToWriteFuncMap[typeid(MeshComponentData)] = [&](Property& prop, std::wstring& name) {
@@ -252,7 +252,7 @@ Deserialiser::Deserialiser(const std::string filename, const OpenMode mode)
 	};
 	
 	typeToReadFuncMap[typeid(TextureData)] = [&](Property& prop) {
-		wchar_t propString[512];
+		wchar_t propString[512]{};
 		is.getline(propString, 512);
 		auto textureData = prop.GetData<TextureData>();
 		textureData->filename.assign(VString::wstos(propString));
@@ -261,14 +261,9 @@ Deserialiser::Deserialiser(const std::string filename, const OpenMode mode)
 	typeToReadFuncMap[typeid(ShaderData)] = [&](Property& prop) {
 		auto shaderData = prop.GetData<ShaderData>();
 
-		wchar_t vertexFilename[512]{};
-		wchar_t pixelFilename[512]{};
-
-		is >> vertexFilename;
-		is >> pixelFilename;
-
-		shaderData->vertexShaderFilename.assign(VString::wstos(vertexFilename));
-		shaderData->pixelShaderFilename.assign(VString::wstos(pixelFilename));
+		wchar_t shaderItemName[512]{};
+		is >> shaderItemName;
+		shaderData->shaderItemName.assign(VString::wstos(shaderItemName));
 	};
 
 	typeToReadFuncMap[typeid(MeshComponentData)] = [&](Property& prop) {

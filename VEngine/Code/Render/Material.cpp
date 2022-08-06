@@ -11,15 +11,15 @@
 #include "Actors/Actor.h"
 #include "Components/MeshComponent.h"
 #include "Log.h"
-#include "Render/VertexShader.h"
-#include "Render/PixelShader.h"
+#include "VertexShader.h"
+#include "PixelShader.h"
+#include "ShaderItem.h"
 
-Material::Material(std::string textureFilename_, ShaderItem& shaderItem)
+Material::Material(std::string textureFilename_, ShaderItem* shaderItem)
 {
 	textureData.filename = textureFilename_;
 
-	shaderData.vertexShaderFilename = VString::wstos(shaderItem.GetVertexShaderFilename());
-	shaderData.pixelShaderFilename = VString::wstos(shaderItem.GetPixelShaderFilename());
+	shaderData.shaderItemName = shaderItem->GetName();
 
 	//@Todo: I don't like this. There needs to be a way to check if something inherits from VEnum when serialising
 	rastStateValue.Add(RastStates::solid);
@@ -37,9 +37,7 @@ void Material::Create()
 	sampler = RenderUtils::GetDefaultSampler();
 	rastState = Renderer::GetRastState(rastStateValue.GetValue());
 	blendState = Renderer::GetBlendState(blendStateValue.GetValue());
-
-	vertexShader = shaderSystem.FindVertexShader(VString::stows(shaderData.vertexShaderFilename));
-	pixelShader = shaderSystem.FindPixelShader(VString::stows(shaderData.pixelShaderFilename));
+	shader = shaderSystem.FindShaderItem(shaderData.shaderItemName);
 }
 
 void Material::Destroy()
@@ -145,4 +143,14 @@ Properties Material::GetProps()
 	props.Add("M_Smoothness", &materialShaderData.smoothness);
 	props.Add("M_Metallic", &materialShaderData.metallic);
 	return props;
+}
+
+ID3D11VertexShader* Material::GetVertexShader()
+{
+	return shader->GetVertexShader();
+}
+
+ID3D11PixelShader* Material::GetPixelShader()
+{
+	return shader->GetPixelShader();
 }

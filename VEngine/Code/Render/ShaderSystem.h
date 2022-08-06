@@ -7,6 +7,7 @@
 
 struct VertexShader;
 struct PixelShader;
+class ShaderItem;
 
 class ShaderSystem : public System
 {
@@ -17,6 +18,9 @@ public:
 	VertexShader* FindVertexShader(const std::wstring filename);
 	PixelShader* FindPixelShader(const std::wstring filename);
 
+	void AddShaderItem(ShaderItem* shaderItem);
+	ShaderItem* FindShaderItem(std::string shaderItemName);
+
 	void ClearShaders();
 
 private:
@@ -24,6 +28,8 @@ private:
 
 	std::map<std::wstring, std::unique_ptr<VertexShader>> vertexShaders;
 	std::map<std::wstring, std::unique_ptr<PixelShader>> pixelShaders;
+
+	std::map<std::string, ShaderItem*> shaderItems;
 };
 
 extern ShaderSystem shaderSystem;
