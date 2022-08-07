@@ -42,16 +42,16 @@ void BinarySerialiser::Serialise(Properties& props)
 void BinarySerialiser::WriteString(const std::string str)
 {
 	size_t stringSize = str.length();
-	os << stringSize;
-	os << str;
+	os.write((const char*)&stringSize, sizeof(stringSize));
+	os.write(str.data(), stringSize);
 }
 
 void BinarySerialiser::WriteWString(const std::wstring wstr)
 {
 	const size_t stringSize = wstr.length();
 	const std::string str = VString::wstos(wstr);
-	os << stringSize;
-	os << str;
+	os.write((const char*)&stringSize, sizeof(stringSize));
+	os.write(str.data(), stringSize);
 }
 
 void BinaryDeserialiser::Deserialise(Properties& props)
@@ -87,7 +87,7 @@ void BinaryDeserialiser::Deserialise(Properties& props)
 void BinaryDeserialiser::ReadString(std::string* str)
 {
 	size_t stringSize = 0;
-	is >> stringSize;
+	is.read((char*)&stringSize, sizeof(stringSize));
 
 	std::vector<char> buff(stringSize);
 	is.read(buff.data(), stringSize);
@@ -100,12 +100,14 @@ void BinaryDeserialiser::ReadString(std::string* str)
 void BinaryDeserialiser::ReadWString(std::wstring* wstr)
 {
 	size_t stringSize = 0;
-	is >> stringSize;
+	is.read((char*)&stringSize, sizeof(stringSize));
 
-	std::string str;
-	is.read(str.data(), stringSize);
+	std::vector<char> buff(stringSize);
+	is.read(buff.data(), stringSize);
+	assert(buff.size() == stringSize);
 
-	*wstr = VString::stows(str);
+	std::string newStr(buff.data(), stringSize);
+	*wstr = VString::stows(newStr);
 }
 
 Serialiser::Serialiser(const std::string filename_, const OpenMode mode_) :
