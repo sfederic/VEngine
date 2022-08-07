@@ -49,7 +49,7 @@ void Engine::Init(int argc, char* argv[])
 	editor->UpdateWorldList();
 
 	double endTime = Profile::QuickEnd(startTime);
-	Log("Startup took: %f ms", endTime);
+	Log("Startup took: %f seconds", endTime);
 }
 
 void Engine::TickSystems(float deltaTime)
