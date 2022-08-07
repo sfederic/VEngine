@@ -25,27 +25,27 @@ struct Properties
 		if (typeid(T) == typeid(std::string)) 
 		{
 			auto str = (std::string*)data;
-			prop.size = str->size() + 1;
+			prop.size = str->size();
 		} 
 		else if (typeid(T) == typeid(std::wstring))
 		{
 			auto str = (std::wstring*)data;
-			prop.size = (str->size() * sizeof(wchar_t)) + 1;
+			prop.size = (str->size() * sizeof(wchar_t));
 		}
 		else if (typeid(T) == typeid(ShaderData))
 		{
 			auto shaderData = (ShaderData*)data;
-			prop.size = (shaderData->shaderItemName.size() * sizeof(char)) + 1;
+			prop.size = (shaderData->shaderItemName.size() * sizeof(char));
 		}
 		else if (typeid(T) == typeid(TextureData))
 		{
 			auto textureData = (TextureData*)data;
-			prop.size = (textureData->filename.size() * sizeof(char)) + 1;
+			prop.size = (textureData->filename.size() * sizeof(char));
 		}
 		else if (typeid(T) == typeid(MeshComponentData))
 		{
 			auto meshComponentData = (MeshComponentData*)data;
-			prop.size = (meshComponentData->filename.size() * sizeof(char)) + 1;
+			prop.size = (meshComponentData->filename.size() * sizeof(char));
 		}
 		else 
 		{
