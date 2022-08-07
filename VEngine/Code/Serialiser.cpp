@@ -49,17 +49,27 @@ void BinarySerialiser::Serialise(Properties& props)
 
 void BinarySerialiser::WriteString(const std::string str)
 {
+	size_t lastFilePos = os.tellp();
+
 	size_t stringSize = str.length();
-	os.write((const char*)&stringSize, sizeof(stringSize));
+	os.write((const char*)&stringSize, sizeof(size_t));
 	os.write(str.data(), stringSize);
+
+	size_t currentFilePos = os.tellp();
+	assert((currentFilePos - lastFilePos) == stringSize);
 }
 
 void BinarySerialiser::WriteWString(const std::wstring wstr)
 {
+	size_t lastFilePos = os.tellp();
+
 	const size_t stringSize = wstr.length();
 	const std::string str = VString::wstos(wstr);
 	os.write((const char*)&stringSize, sizeof(stringSize));
 	os.write(str.data(), stringSize);
+
+	size_t currentFilePos = os.tellp();
+	assert((currentFilePos - lastFilePos) == stringSize);
 }
 
 void BinaryDeserialiser::Deserialise(Properties& props)
@@ -102,6 +112,8 @@ void BinaryDeserialiser::Deserialise(Properties& props)
 
 void BinaryDeserialiser::ReadString(std::string* str)
 {
+	size_t lastFilePos = is.tellg();
+
 	size_t stringSize = 0;
 	is.read((char*)&stringSize, sizeof(stringSize));
 
@@ -111,10 +123,15 @@ void BinaryDeserialiser::ReadString(std::string* str)
 
 	std::string newStr(buff.data(), stringSize);
 	*str = newStr;
+
+	size_t currentFilePos = is.tellg();
+	assert((currentFilePos - lastFilePos) == stringSize);
 }
 
 void BinaryDeserialiser::ReadWString(std::wstring* wstr)
 {
+	size_t lastFilePos = is.tellg();
+
 	size_t stringSize = 0;
 	is.read((char*)&stringSize, sizeof(stringSize));
 
@@ -124,6 +141,9 @@ void BinaryDeserialiser::ReadWString(std::wstring* wstr)
 
 	std::string newStr(buff.data(), stringSize);
 	*wstr = VString::stows(newStr);
+
+	size_t currentFilePos = is.tellg();
+	assert((currentFilePos - lastFilePos) == stringSize);
 }
 
 Serialiser::Serialiser(const std::string filename_, const OpenMode mode_) :
