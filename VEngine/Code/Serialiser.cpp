@@ -49,14 +49,14 @@ void BinarySerialiser::Serialise(Properties& props)
 
 void BinarySerialiser::WriteString(const std::string str)
 {
-	size_t stringSize = str.length() + 1;
+	size_t stringSize = str.length();
 	os.write((const char*)&stringSize, sizeof(stringSize));
 	os.write(str.data(), stringSize);
 }
 
 void BinarySerialiser::WriteWString(const std::wstring wstr)
 {
-	const size_t stringSize = wstr.length() + 1;
+	const size_t stringSize = wstr.length();
 	const std::string str = VString::wstos(wstr);
 	os.write((const char*)&stringSize, sizeof(stringSize));
 	os.write(str.data(), stringSize);
