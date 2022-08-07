@@ -66,7 +66,7 @@ void FileSystem::SerialiseAllSystems()
 	debugMenu.AddNotification(VString::wformat(L"%S world saved", World::worldFilename.c_str()));
 }
 
-void FileSystem::WriteAllActorSystemsToBinary()
+void FileSystem::WriteAllSystemsToBinary()
 {
 	auto lastOf = World::worldFilename.find_last_of("/\\");
 	std::string str = World::worldFilename.substr(lastOf + 1);
@@ -95,7 +95,7 @@ void FileSystem::WriteAllActorSystemsToBinary()
 }
 
 //@Todo: binary serialisation isn't working too well. Might be some weird alignment errors taken from property sizes.
-void FileSystem::ReadAllActorSystemsFromBinary()
+void FileSystem::ReadAllSystemsFromBinary()
 {
 	std::string worldName = World::worldFilename;
 

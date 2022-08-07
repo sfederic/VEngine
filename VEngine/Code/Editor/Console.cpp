@@ -104,11 +104,11 @@ void Console::Init()
 		"Work through light probes in map and get their RBG values from a cubemap rendering"));
 
 	executeMap.emplace(L"BIN",
-		std::make_pair([]() { FileSystem::WriteAllActorSystemsToBinary(); },
+		std::make_pair([]() { FileSystem::WriteAllSystemsToBinary(); },
 		"Save current world to binary format"));
 
 	executeMap.emplace(L"LOADBIN",
-		std::make_pair([]() { FileSystem::ReadAllActorSystemsFromBinary(); },
+		std::make_pair([]() { FileSystem::ReadAllSystemsFromBinary(); },
 		"Load current world from existing binary file"));
 
 	executeMap.emplace(L"BUILD MESHES",

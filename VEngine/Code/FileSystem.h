@@ -5,8 +5,8 @@ namespace FileSystem
 {
 	void SerialiseAllSystems();
 
-	void WriteAllActorSystemsToBinary();
-	void ReadAllActorSystemsFromBinary();
+	void WriteAllSystemsToBinary();
+	void ReadAllSystemsFromBinary();
 
 	void LoadWorld(std::string worldName);
 	void ReloadCurrentWorld();
