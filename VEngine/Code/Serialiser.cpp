@@ -18,38 +18,40 @@ void BinarySerialiser::Serialise(Properties& props)
 		if (props.CheckType<std::string>(propPair.first))
 		{
 			auto str = (std::string*)prop.data;
-			if (fwrite(str->data(), sizeof(char), prop.size, file) == 0)
-			{
-				throw;
-			}
+			WriteString(*str);
 		}
 		else if (props.CheckType<std::wstring>(propPair.first))
 		{
 			auto wstr = (std::wstring*)prop.data;
-			if (fwrite(wstr->data(), sizeof(wchar_t), prop.size, file) == 0)
-			{
-				throw;
-			}
+			WriteWString(*wstr);
 		}
 		else if (props.CheckType<MeshComponentData>(propPair.first) ||
 			props.CheckType<TextureData>(propPair.first) ||
 			props.CheckType<ShaderData>(propPair.first))
 		{
-			//Just serialise out strings for Render Data types
 			auto str = (std::string*)prop.data;
-			if (fwrite(str->data(), sizeof(char), str->size() + 1, file) == 0)
-			{
-				throw;
-			}
+			WriteString(*str);
 		}
 		else
 		{
-			if (fwrite(prop.data, prop.size, 1, file) == 0)
-			{
-				throw;
-			}
+			os.write((const char*)&prop.data, prop.size);
 		}
 	}
+}
+
+void BinarySerialiser::WriteString(const std::string str)
+{
+	size_t stringSize = str.length();
+	os << stringSize;
+	os << str;
+}
+
+void BinarySerialiser::WriteWString(const std::wstring wstr)
+{
+	const size_t stringSize = wstr.length();
+	const std::string str = VString::wstos(wstr);
+	os << stringSize;
+	os << str;
 }
 
 void BinaryDeserialiser::Deserialise(Properties& props)
@@ -61,37 +63,49 @@ void BinaryDeserialiser::Deserialise(Properties& props)
 		if (props.CheckType<std::string>(propPair.first))
 		{
 			auto str = props.GetData<std::string>(propPair.first);
-			if (fread(str->data(), sizeof(char), prop.size, file) == 0)
-			{
-				throw;
-			}
+			ReadString(str);
 		}
 		else if (props.CheckType<std::wstring>(propPair.first))
 		{
 			auto str = props.GetData<std::wstring>(propPair.first);
-			if (fread(str->data(), sizeof(wchar_t), prop.size, file) == 0)
-			{
-				throw;
-			}
+			ReadWString(str);
 		}
 		else if (props.CheckType<MeshComponentData>(propPair.first) ||
 			props.CheckType<TextureData>(propPair.first) ||
 			props.CheckType<ShaderData>(propPair.first))
 		{
-			auto wstr = props.GetData<std::wstring>(propPair.first);
-			if (fread(wstr->data(), sizeof(wchar_t), (wstr->size() * 2) + 1, file) == 0)
-			{
-				throw;
-			}
+			auto str = props.GetData<std::string>(propPair.first);
+			ReadString(str);
 		}
 		else
 		{
-			if (fread(prop.data, prop.size, 1, file) == 0)
-			{
-				throw;
-			}
+			is.read((char*)prop.data, prop.size);
 		}
 	}
+}
+
+void BinaryDeserialiser::ReadString(std::string* str)
+{
+	size_t stringSize = 0;
+	is >> stringSize;
+
+	std::vector<char> buff(stringSize);
+	is.read(buff.data(), stringSize);
+	assert(buff.size() == stringSize);
+
+	std::string newStr(buff.data(), stringSize);
+	*str = newStr;
+}
+
+void BinaryDeserialiser::ReadWString(std::wstring* wstr)
+{
+	size_t stringSize = 0;
+	is >> stringSize;
+
+	std::string str;
+	is.read(str.data(), stringSize);
+
+	*wstr = VString::stows(str);
 }
 
 Serialiser::Serialiser(const std::string filename_, const OpenMode mode_) :

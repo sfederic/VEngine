@@ -1,4 +1,5 @@
 #pragma once
+
 #include <fstream>
 #include <string>
 #include <sstream>
@@ -18,36 +19,54 @@ enum class OpenMode
 
 struct BinarySerialiser
 {
-	FILE* file = nullptr;
+	std::ofstream os;
 
 	BinarySerialiser(const std::string filename)
 	{
-		fopen_s(&file, filename.c_str(), "wb");
+		os.open(filename, std::ios::binary | std::ios::out);
 	}
 
 	~BinarySerialiser()
 	{
-		fclose(file);
+		os.flush();
+		os.close();
 	}
 
 	void Serialise(Properties& props);
+	void WriteString(const std::string str);
+	void WriteWString(const std::wstring wstr);
+
+	template <typename T>
+	void Write(T value)
+	{
+		os.write((const char*)&value, sizeof(T));
+	}
 };
 
 struct BinaryDeserialiser
 {
-	FILE* file = nullptr;
+	std::ifstream is;
 
 	BinaryDeserialiser(const std::string filename)
 	{
-		fopen_s(&file, filename.c_str(), "rb");
+		is.open(filename, std::ios::binary | std::ios::in);
 	}
 
 	~BinaryDeserialiser()
 	{
-		fclose(file);
+		is.close();
 	}
 
 	void Deserialise(Properties& props);
+
+	void ReadString(std::string* str);
+	void ReadWString(std::wstring* wstr);
+	
+	template <typename T>
+	void Read(T* value)
+	{
+		is.read((char*)value, sizeof(T));
+	}
 };
 
 struct Serialiser

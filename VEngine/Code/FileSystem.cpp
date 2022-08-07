@@ -77,7 +77,18 @@ void FileSystem::WriteAllActorSystemsToBinary()
 
 	for (IActorSystem* actorSystem : World::activeActorSystems)
 	{
-		actorSystem->SerialiseBinary(s);
+		if (actorSystem->GetNumActors() > 0)
+		{
+			actorSystem->SerialiseBinary(s);
+		}
+	}
+
+	for (IComponentSystem* componentSystem : World::activeComponentSystems)
+	{
+		if (componentSystem->GetNumComponents() > 0)
+		{
+			componentSystem->SerialiseBinary(s);
+		}
 	}
 
 	debugMenu.AddNotification(VString::wformat(L"%S world saved to binary", World::worldFilename.c_str()));
@@ -96,43 +107,50 @@ void FileSystem::ReadAllActorSystemsFromBinary()
 
 	BinaryDeserialiser d(path);
 
-	while (!feof(d.file))
+	while (!d.is.eof())
 	{
-		size_t stringSize = 0;
-		auto res = fread(&stringSize, sizeof(size_t), 1, d.file);
-		if (res == 0)
-		{
-			break;
-		}
+		std::string systemName;
+		d.ReadString(&systemName);
 
-		std::string actorSystemName;
-		res = fread(actorSystemName.data(), sizeof(char), stringSize, d.file);
-		if (res == 0)
-		{
-			break;
-		}
+		int numObjectsToSpawn = 0;
+		d.Read(&numObjectsToSpawn);
 
-		int numActorsToSpawn = 0;
-		res = fread(&numActorsToSpawn, sizeof(int), 1, d.file);
-		if (res == 0)
-		{
-			break;
-		}
-
-		auto asIt = actorSystemCache.nameToSystemMap->find(actorSystemName.data());
-		if (asIt == actorSystemCache.nameToSystemMap->end())
+		if (numObjectsToSpawn == 0)
 		{
 			continue;
 		}
 
-		auto actorSystem = asIt->second;
+		auto actorSystem = actorSystemCache.Get(systemName);
+		auto componentSystem = componentSystemCache.Get(systemName);
 
-		for (int i = 0; i < numActorsToSpawn; i++)
+		if (actorSystem != nullptr)
 		{
-			Actor* actor = actorSystem->SpawnActor(Transform());
-		}
+			for (int i = 0; i < numObjectsToSpawn; i++)
+			{
+				Actor* actor = actorSystem->SpawnActor(Transform());
+			}
 
-		actorSystem->DeserialiseBinary(d);
+			actorSystem->DeserialiseBinary(d);
+		}
+		else if (componentSystem != nullptr)
+		{
+			for (int i = 0; i < numObjectsToSpawn; i++)
+			{
+				UID ownerUID = 0;
+				d.Read(&ownerUID);
+
+				std::string componentName;
+				d.ReadString(&componentName);
+
+				Actor* owner = World::GetActorByUID(ownerUID);
+				Component* foundComponent = owner->FindComponentAllowNull(componentName);
+				if (foundComponent)
+				{
+					auto props = foundComponent->GetProps();
+					d.Deserialise(props);
+				}
+			}
+		}
 	}
 
 	ResetWorldState();

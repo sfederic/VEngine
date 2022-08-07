@@ -122,20 +122,13 @@ public:
 
 	virtual void SerialiseBinary(BinarySerialiser& s) override
 	{
-		size_t stringSize = GetName().size() + 1;
-		fwrite(&stringSize, sizeof(size_t), 1, s.file);
-		fwrite(GetName().data(), sizeof(char), stringSize, s.file);
-
-		int size = actors.size();
-		fwrite(&size, sizeof(int), 1, s.file);
+		s.WriteString(GetName());
+		s.Write(actors.size());
 
 		for (T* actor : actors)
 		{
-			auto propsVector = actor->GetAllProps();
-			for (auto& props : propsVector)
-			{
-				s.Serialise(props);
-			}
+			auto props = actor->GetProps();
+			s.Serialise(props);
 		}
 	}
 
@@ -143,11 +136,8 @@ public:
 	{
 		for (T* actor : actors)
 		{
-			auto propsVector = actor->GetAllProps();
-			for (auto& props : propsVector)
-			{
-				d.Deserialise(props);
-			}
+			auto props = actor->GetProps();
+			d.Deserialise(props);
 		}
 	}
 
@@ -155,11 +145,8 @@ public:
 	{
 		for (T* actor : actors)
 		{
-			auto propsVector = actor->GetAllProps();
-			for (auto& props : propsVector)
-			{
-				d.Deserialise(props);
-			}
+			auto props = actor->GetProps();
+			d.Deserialise(props);
 		}
 	}
 

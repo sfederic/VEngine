@@ -103,7 +103,31 @@ struct ComponentSystem : IComponentSystem
 		}
 	}
 
+	virtual void SerialiseBinary(BinarySerialiser& s) override
+	{
+		s.WriteString(name);
+		s.Write(components.size());
+
+		for (T* component : components)
+		{
+			s.Write(component->ownerUID);
+			s.WriteString(component->name);
+
+			auto props = component->GetProps();
+			s.Serialise(props);
+		}
+	}
+
 	virtual void Deserialise(Deserialiser& d) override
+	{
+		for (T* component : components)
+		{
+			auto props = component->GetProps();
+			d.Deserialise(props);
+		}
+	}
+
+	virtual void DeserialiseBinary(BinaryDeserialiser& d) override
 	{
 		for (T* component : components)
 		{

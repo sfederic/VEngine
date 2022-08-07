@@ -22,7 +22,13 @@ void ComponentSystemCache::Add(std::type_index type, IComponentSystem* component
 
 IComponentSystem* ComponentSystemCache::Get(std::string systemName)
 {
-	return nameToSystemMap->find(systemName)->second;
+	auto csIt = nameToSystemMap->find(systemName);
+	if (csIt == nameToSystemMap->end())
+	{
+		return nullptr;
+	}
+
+	return csIt->second;
 }
 
 IComponentSystem* ComponentSystemCache::Get(std::type_index actorType)

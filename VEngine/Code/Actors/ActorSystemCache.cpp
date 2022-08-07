@@ -13,7 +13,7 @@ void ActorSystemCache::Add(std::type_index type, IActorSystem* actorSystem)
 
 	if (nameToSystemMap == nullptr)
 	{
-		nameToSystemMap = new std::unordered_map<std::string, IActorSystem*>();
+		nameToSystemMap = new std::map<std::string, IActorSystem*>();
 	}
 
 	typeToSystemMap->insert(std::make_pair(type, actorSystem));
@@ -22,7 +22,13 @@ void ActorSystemCache::Add(std::type_index type, IActorSystem* actorSystem)
 
 IActorSystem* ActorSystemCache::Get(std::string systemName)
 {
-	return nameToSystemMap->find(systemName)->second;
+	auto asIt = nameToSystemMap->find(systemName);
+	if (asIt == nameToSystemMap->end())
+	{
+		return nullptr;
+	}
+
+	return asIt->second;
 }
 
 IActorSystem* ActorSystemCache::Get(std::type_index actorType)
