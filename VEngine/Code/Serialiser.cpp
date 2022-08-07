@@ -49,27 +49,20 @@ void BinarySerialiser::Serialise(Properties& props)
 
 void BinarySerialiser::WriteString(const std::string str)
 {
-	size_t lastFilePos = os.tellp();
+	const size_t lastFilePos = os.tellp();
 
-	size_t stringSize = str.length();
+	const size_t stringSize = str.length();
 	os.write((const char*)&stringSize, sizeof(size_t));
 	os.write(str.data(), stringSize);
 
-	size_t currentFilePos = os.tellp();
+	const size_t currentFilePos = os.tellp();
 	assert((currentFilePos - lastFilePos) == stringSize);
 }
 
 void BinarySerialiser::WriteWString(const std::wstring wstr)
 {
-	size_t lastFilePos = os.tellp();
-
-	const size_t stringSize = wstr.length();
 	const std::string str = VString::wstos(wstr);
-	os.write((const char*)&stringSize, sizeof(stringSize));
-	os.write(str.data(), stringSize);
-
-	size_t currentFilePos = os.tellp();
-	assert((currentFilePos - lastFilePos) == stringSize);
+	WriteString(str);
 }
 
 void BinaryDeserialiser::Deserialise(Properties& props)
@@ -112,7 +105,7 @@ void BinaryDeserialiser::Deserialise(Properties& props)
 
 void BinaryDeserialiser::ReadString(std::string* str)
 {
-	size_t lastFilePos = is.tellg();
+	const size_t lastFilePos = is.tellg();
 
 	size_t stringSize = 0;
 	is.read((char*)&stringSize, sizeof(stringSize));
@@ -121,29 +114,18 @@ void BinaryDeserialiser::ReadString(std::string* str)
 	is.read(buff.data(), stringSize);
 	assert(buff.size() == stringSize);
 
-	std::string newStr(buff.data(), stringSize);
+	const std::string newStr(buff.data(), stringSize);
 	*str = newStr;
 
-	size_t currentFilePos = is.tellg();
+	const size_t currentFilePos = is.tellg();
 	assert((currentFilePos - lastFilePos) == stringSize);
 }
 
 void BinaryDeserialiser::ReadWString(std::wstring* wstr)
 {
-	size_t lastFilePos = is.tellg();
-
-	size_t stringSize = 0;
-	is.read((char*)&stringSize, sizeof(stringSize));
-
-	std::vector<char> buff(stringSize);
-	is.read(buff.data(), stringSize);
-	assert(buff.size() == stringSize);
-
-	std::string newStr(buff.data(), stringSize);
-	*wstr = VString::stows(newStr);
-
-	size_t currentFilePos = is.tellg();
-	assert((currentFilePos - lastFilePos) == stringSize);
+	std::string str;
+	ReadString(&str);
+	*wstr = VString::stows(str);
 }
 
 Serialiser::Serialiser(const std::string filename_, const OpenMode mode_) :
