@@ -25,29 +25,27 @@ struct Properties
 		if (typeid(T) == typeid(std::string)) 
 		{
 			auto str = (std::string*)data;
-			prop.size = str->size();
+			prop.size = str->size() + 1;
 		} 
 		else if (typeid(T) == typeid(std::wstring))
 		{
 			auto str = (std::wstring*)data;
-			prop.size = str->size() * sizeof(wchar_t);
+			prop.size = (str->size() * sizeof(wchar_t)) + 1;
 		}
 		else if (typeid(T) == typeid(ShaderData))
 		{
 			auto shaderData = (ShaderData*)data;
-			prop.size = shaderData->shaderItemName.size() * sizeof(char);
+			prop.size = (shaderData->shaderItemName.size() * sizeof(char)) + 1;
 		}
 		else if (typeid(T) == typeid(TextureData))
 		{
 			auto textureData = (TextureData*)data;
-			prop.size = textureData->filename.size() * sizeof(char);
+			prop.size = (textureData->filename.size() * sizeof(char)) + 1;
 		}
 		else if (typeid(T) == typeid(MeshComponentData))
 		{
-			//MeshComponentData has a pointer to a MeshComponent in it too,
-			//but serialising it only deals with the string so it's alright. Might fuck up on binary.
 			auto meshComponentData = (MeshComponentData*)data;
-			prop.size = meshComponentData->filename.size() * sizeof(char);
+			prop.size = (meshComponentData->filename.size() * sizeof(char)) + 1;
 		}
 		else 
 		{
