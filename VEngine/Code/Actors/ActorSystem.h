@@ -123,7 +123,8 @@ public:
 	virtual void SerialiseBinary(BinarySerialiser& s) override
 	{
 		s.WriteString(GetName());
-		s.Write(actors.size());
+		size_t numActors = actors.size();
+		s.Write(&numActors);
 
 		for (T* actor : actors)
 		{

@@ -37,9 +37,9 @@ struct BinarySerialiser
 	void WriteWString(const std::wstring wstr);
 
 	template <typename T>
-	void Write(T value)
+	void Write(T* value)
 	{
-		os.write((const char*)&value, sizeof(T));
+		os.write(reinterpret_cast<const char*>(value), sizeof(T));
 	}
 };
 
@@ -65,7 +65,7 @@ struct BinaryDeserialiser
 	template <typename T>
 	void Read(T* value)
 	{
-		is.read((char*)value, sizeof(T));
+		is.read(reinterpret_cast<char*>(value), sizeof(T));
 	}
 };
 

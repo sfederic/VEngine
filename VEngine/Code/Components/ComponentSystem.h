@@ -106,11 +106,13 @@ struct ComponentSystem : IComponentSystem
 	virtual void SerialiseBinary(BinarySerialiser& s) override
 	{
 		s.WriteString(name);
-		s.Write(components.size());
+		size_t numComponents = components.size();
+		s.Write(&numComponents);
 
 		for (T* component : components)
 		{
-			s.Write(component->ownerUID);
+			UID ownerUID = component->ownerUID;
+			s.Write(&ownerUID);
 			s.WriteString(component->name);
 
 			auto props = component->GetProps();
