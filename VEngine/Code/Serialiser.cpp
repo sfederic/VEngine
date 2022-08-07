@@ -25,30 +25,38 @@ void BinarySerialiser::Serialise(Properties& props)
 			auto wstr = (std::wstring*)prop.data;
 			WriteWString(*wstr);
 		}
-		else if (props.CheckType<MeshComponentData>(propPair.first) ||
-			props.CheckType<TextureData>(propPair.first) ||
-			props.CheckType<ShaderData>(propPair.first))
+		else if (props.CheckType<MeshComponentData>(propPair.first))
 		{
-			auto str = (std::string*)prop.data;
-			WriteString(*str);
+			auto meshComponentData = (MeshComponentData*)prop.data;
+			WriteString(meshComponentData->filename);
+		}
+		else if (props.CheckType<ShaderData>(propPair.first))
+		{
+			auto shaderData = (ShaderData*)prop.data;
+			WriteString(shaderData->shaderItemName);
+		}
+		else if (props.CheckType<TextureData>(propPair.first))
+		{
+			auto textureData = (TextureData*)prop.data;
+			WriteString(textureData->filename);
 		}
 		else
 		{
-			os.write((const char*)&prop.data, prop.size);
+			os.write(reinterpret_cast<const char*>(prop.data), prop.size);
 		}
 	}
 }
 
 void BinarySerialiser::WriteString(const std::string str)
 {
-	size_t stringSize = str.length();
+	size_t stringSize = str.length() + 1;
 	os.write((const char*)&stringSize, sizeof(stringSize));
 	os.write(str.data(), stringSize);
 }
 
 void BinarySerialiser::WriteWString(const std::wstring wstr)
 {
-	const size_t stringSize = wstr.length();
+	const size_t stringSize = wstr.length() + 1;
 	const std::string str = VString::wstos(wstr);
 	os.write((const char*)&stringSize, sizeof(stringSize));
 	os.write(str.data(), stringSize);
@@ -70,16 +78,24 @@ void BinaryDeserialiser::Deserialise(Properties& props)
 			auto str = props.GetData<std::wstring>(propPair.first);
 			ReadWString(str);
 		}
-		else if (props.CheckType<MeshComponentData>(propPair.first) ||
-			props.CheckType<TextureData>(propPair.first) ||
-			props.CheckType<ShaderData>(propPair.first))
+		else if (props.CheckType<MeshComponentData>(propPair.first))
 		{
-			auto str = props.GetData<std::string>(propPair.first);
-			ReadString(str);
+			auto meshComponentData = props.GetData<MeshComponentData>(propPair.first);
+			ReadString(&meshComponentData->filename);
+		}
+		else if (props.CheckType<ShaderData>(propPair.first))
+		{
+			auto shaderData = props.GetData<ShaderData>(propPair.first);
+			ReadString(&shaderData->shaderItemName);
+		}
+		else if (props.CheckType<TextureData>(propPair.first))
+		{
+			auto textureData = props.GetData<TextureData>(propPair.first);
+			ReadString(&textureData->filename);
 		}
 		else
 		{
-			is.read((char*)prop.data, prop.size);
+			is.read(reinterpret_cast<char*>(prop.data), prop.size);
 		}
 	}
 }
