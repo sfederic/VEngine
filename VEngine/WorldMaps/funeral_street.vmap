@@ -252,44 +252,44 @@ Mesh
 -0 0 -0 1
  Scale
 15 1 15
-Ambient
-0.5 0.5 0.5 1
-Blend State
-null
 Casts Shadow
 1
 Cull
 0
 Grid Obstacle
 0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
 Mesh
 node.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
 Static
 1
-Texture
-Floors/floor.jpg
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-3 7
 next
 2430559559
 Mesh
@@ -301,44 +301,44 @@ Mesh
 0.707107 -0.000244099 0.707106 -0.000244436
  Scale
 5 0.5 1
-Ambient
-1 1 1 1
-Blend State
-null
 Casts Shadow
 1
 Cull
 0
 Grid Obstacle
 0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
 Mesh
 plane.fbx
-Metallic
-0
-Rast State
-nobackcull
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
 Static
 1
-Texture
-test_fence.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-5 1.5
 next
 180844165
 Mesh
@@ -350,44 +350,44 @@ Mesh
 0.707107 -0.000244099 0.707106 -0.000244436
  Scale
 5 0.5 1
-Ambient
-1 1 1 1
-Blend State
-null
 Casts Shadow
 1
 Cull
 0
 Grid Obstacle
 0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
 Mesh
 plane.fbx
-Metallic
-0
-Rast State
-nobackcull
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
 Static
 1
-Texture
-test_fence.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-5 1.5
 next
 2299821989
 Mesh
@@ -399,44 +399,44 @@ Mesh
 -0 -0.706895 -0 0.707318
  Scale
 1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
 Casts Shadow
 1
 Cull
 0
 Grid Obstacle
 0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
 Mesh
 house04.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
 Static
 1
-Texture
-test.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
 next
 1129412239
 Mesh
@@ -448,44 +448,44 @@ Mesh
 -0 0.707107 -0 0.707107
  Scale
 1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
 Casts Shadow
 1
 Cull
 0
 Grid Obstacle
 0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
 Mesh
 house07.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
 Static
 1
-Texture
-test.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
 next
 3641849023
 Mesh
@@ -497,44 +497,44 @@ Mesh
 -0 -0.707107 -0 0.707107
  Scale
 1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
 Casts Shadow
 1
 Cull
 0
 Grid Obstacle
 0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
 Mesh
 house_3.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
 Static
 1
-Texture
-test.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
 next
 2126602705
 Mesh
@@ -546,44 +546,44 @@ Mesh
 -0 0 -0 1
  Scale
 1 1 1
-Ambient
-1 1 1 1
-Blend State
-null
 Casts Shadow
 1
 Cull
 0
 Grid Obstacle
 0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
 Mesh
 house_5.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
 Static
 1
-Texture
-test.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
 next
 2718249145
 Mesh
@@ -595,44 +595,44 @@ Mesh
 0 0.707318 0 0.706895
  Scale
 2 2 2
-Ambient
-1 1 1 1
-Blend State
-null
 Casts Shadow
 1
 Cull
 0
 Grid Obstacle
 0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
 Mesh
 house_5.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
 Static
 1
-Texture
-test.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
 next
 3877294665
 Mesh
@@ -644,44 +644,44 @@ Mesh
 0.707229 0 0 -0.706985
  Scale
 1 1 1
-Ambient
-0.5 0.5 0.5 1
-Blend State
-null
 Casts Shadow
 1
 Cull
 0
 Grid Obstacle
 0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
 Mesh
 bestowed_coffin.fbx
-Metallic
-0
-Rast State
-solid
-Shader
-DefaultShader.hlsl
-Smoothness
-0
-Specular
-1 1 1 1
 Static
 1
-Texture
-test.png
-Use Texture
-0
-UvOffset
-0 0
-UvOffsetSpeed
-0 0
-UvRotation
-0
-UvRotationSpeed
-0
-UvScale
-1 1
 next
 DirectionalLightComponent
 1

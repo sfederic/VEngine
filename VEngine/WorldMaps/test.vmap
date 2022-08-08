@@ -1,163 +1,39 @@
-MeshActor
-2
+AudioActor
+1
  Enabled
 1
  Position
--4 -2 6
+-6 -3 6
  Rotation
 0 0 0 1
  Scale
 1 1 1
 Name
-MeshActor0
+AudioActor0
 UID
-2095846208
+1045388896
 next
- Enabled
+AudioComponent
 1
- Position
--5 -3 6
- Rotation
-0 0 0 1
- Scale
-10 1 10
-Name
-MeshActor1
-UID
-1223897648
-next
-DirectionalLightActor
-1
- Enabled
-1
- Position
--8 1 4
- Rotation
-0.196316 0.769707 -0.539084 0.28
- Scale
-0.999997 0.999992 0.999995
-Name
-DirectionalLightActor0
-UID
-1602421545
-next
-MeshComponent
-2
-2095846208
-Mesh
+1045388896
+Audio
  Enabled
 1
  Pos
--4 -2 6
+-6 -3 6
  Rot
 0 0 0 1
  Scale
 1 1 1
-Casts Shadow
+Audio Filename
+xeno.wav
+Loop
 1
-Cull
-0
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
+Pitch
 1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-barrel.fbx
-Static
+Play On Start
 1
-next
-1223897648
-Mesh
- Enabled
+Volume
 1
- Pos
--5 -3 6
- Rot
-0 0 0 1
- Scale
-10 1 10
-Casts Shadow
-1
-Cull
-0
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.fbx
-Static
-1
-next
-DirectionalLightComponent
-1
-1602421545
-DirectionalLight
- Enabled
-1
- Pos
--8 1 4
- Rot
-0.196316 0.769707 -0.539084 0.28
- Scale
-0.999997 0.999992 0.999995
-Colour
-1 1 1 1
-LightEnabled
-1
-ShadowMap Size
-15
 next
 end

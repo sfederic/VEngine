@@ -3,9 +3,9 @@ Player
  Enabled
 1
  Position
-4 0 0
+4 0 4
  Rotation
--0 0 -0 1
+0 -1 0 -5.96046e-08
  Scale
 1 1 1
 Name
@@ -16,7 +16,7 @@ next
 Grid
 1
  Enabled
-1
+0
  Position
 0 0 0
  Rotation
@@ -309,20 +309,100 @@ MeshActor20
 UID
 1775048051
 next
-DirectionalLightActor
-1
+PointLightActor
+2
  Enabled
 1
  Position
-0 0 0
+4 4 8
  Rotation
-0.180088 0.48882 -0.103902 0.847247
+-0 0 -0 1
  Scale
-0.999999 1 0.999999
+1 1 1
 Name
-DirectionalLightActor0
+PointLightActor0
 UID
-2139624517
+90532847
+next
+ Enabled
+1
+ Position
+4 4 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+PointLightActor1
+UID
+2498914498
+next
+SpotLightActor
+5
+ Enabled
+1
+ Position
+4 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+SpotLightActor0
+UID
+535474010
+next
+ Enabled
+1
+ Position
+0 2 3
+ Rotation
+0.500086 0.500086 -0.499914 0.499914
+ Scale
+1 1 1
+Name
+SpotLightActor1
+UID
+2322224799
+next
+ Enabled
+1
+ Position
+0 2 7
+ Rotation
+0.500086 0.500086 -0.499914 0.499914
+ Scale
+1 1 1
+Name
+SpotLightActor2
+UID
+4148039178
+next
+ Enabled
+1
+ Position
+8 2 7
+ Rotation
+0.500086 0.500086 -0.499914 0.499914
+ Scale
+1 1 1
+Name
+SpotLightActor3
+UID
+983806525
+next
+ Enabled
+1
+ Position
+8 2 3
+ Rotation
+0.500086 0.500086 -0.499914 0.499914
+ Scale
+1 1 1
+Name
+SpotLightActor4
+UID
+3462882972
 next
 CameraComponent
 1
@@ -356,7 +436,7 @@ Pitch
 Play On Start
 1
 Volume
-1
+0.205212
 next
 DialogueComponent
 1
@@ -374,9 +454,9 @@ Root
  Enabled
 1
  Pos
-4 0 0
+4 0 4
  Rot
--0 0 -0 1
+0 -1 0 -5.96046e-08
  Scale
 1 1 1
 next
@@ -389,7 +469,7 @@ Mesh
  Pos
 0 0 0
  Rot
-0 0 0 1
+0 1 0 5.96046e-08
  Scale
 1 1 1
 Casts Shadow
@@ -448,17 +528,17 @@ Cull
 Grid Obstacle
 0
 M_Ambient
-0.5 0.5 0.5 1
+1 1 1 1
 M_Blend State
 null
 M_Metallic
-0
+1
 M_Rast State
 solid
 M_Shader
 Default
 M_Smoothness
-0
+1
 M_Specular
 1 1 1 1
 M_Texture
@@ -501,13 +581,13 @@ M_Ambient
 M_Blend State
 null
 M_Metallic
-0
+1
 M_Rast State
 solid
 M_Shader
 Default
 M_Smoothness
-0
+1
 M_Specular
 1 1 1 1
 M_Texture
@@ -550,13 +630,13 @@ M_Ambient
 M_Blend State
 null
 M_Metallic
-0
+1
 M_Rast State
 solid
 M_Shader
 Default
 M_Smoothness
-0
+1
 M_Specular
 1 1 1 1
 M_Texture
@@ -1465,7 +1545,7 @@ InstanceMeshComponent
 3578676722
 NodeMesh
  Enabled
-1
+0
  Pos
 0 0 0
  Rot
@@ -1511,23 +1591,137 @@ node.fbx
 Static
 1
 next
-DirectionalLightComponent
-1
-2139624517
-DirectionalLight
+PointLightComponent
+2
+90532847
+PointLight
  Enabled
 1
  Pos
-0 0 0
+4 4 8
  Rot
-0.180088 0.48882 -0.103902 0.847247
+-0 0 -0 1
  Scale
-0.999999 1 0.999999
+1 1 1
 Colour
 1 1 1 1
+Intensity
+25
 LightEnabled
 1
-ShadowMap Size
-15
+next
+2498914498
+PointLight
+ Enabled
+1
+ Pos
+4 4 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
+next
+SpotLightComponent
+5
+535474010
+SpotLight
+ Enabled
+1
+ Pos
+4 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
+Spot Angle
+70
+next
+2322224799
+SpotLight
+ Enabled
+1
+ Pos
+0 2 3
+ Rot
+0.500086 0.500086 -0.499914 0.499914
+ Scale
+1 1 1
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
+Spot Angle
+70
+next
+4148039178
+SpotLight
+ Enabled
+1
+ Pos
+0 2 7
+ Rot
+0.500086 0.500086 -0.499914 0.499914
+ Scale
+1 1 1
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
+Spot Angle
+70
+next
+983806525
+SpotLight
+ Enabled
+1
+ Pos
+8 2 7
+ Rot
+0.500086 0.500086 -0.499914 0.499914
+ Scale
+1 1 1
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
+Spot Angle
+70
+next
+3462882972
+SpotLight
+ Enabled
+1
+ Pos
+8 2 3
+ Rot
+0.500086 0.500086 -0.499914 0.499914
+ Scale
+1 1 1
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
+Spot Angle
+70
 next
 end
