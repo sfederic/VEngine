@@ -18,6 +18,7 @@
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/BattleSystem.h"
 #include "Quests/QuestSystem.h"
+#include "Profile.h"
 
 std::pair<UID, std::string> GetComponentOwnerUIDAndNameOnDeserialise(Deserialiser& d)
 {
@@ -160,6 +161,8 @@ void FileSystem::ReadAllSystemsFromBinary()
 
 void FileSystem::LoadWorld(std::string worldName)
 {
+	auto startTime = Profile::QuickStart();
+
 	editor->SetEditorTitle(worldName);
 
 	World::worldFilename = worldName;
@@ -259,6 +262,9 @@ void FileSystem::LoadWorld(std::string worldName)
 	ResetWorldState();
 
 	debugMenu.AddNotification(VString::wformat(L"%S world loaded", World::worldFilename.c_str()));
+
+	double endTime = Profile::QuickEnd(startTime);
+	Log("World load took %f sec.", endTime);
 }
 
 void FileSystem::ReloadCurrentWorld()
