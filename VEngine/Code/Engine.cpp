@@ -31,21 +31,21 @@ void Engine::Init(int argc, char* argv[])
 
 	activeCamera = &editorCamera;
 
-	auto coreInit = std::async(std::launch::async, [&]() { Core::Init(); });
-	auto consoleInit = std::async(std::launch::async, [&]() { Console::Init(); });
+	auto coreInit = std::async(std::launch::async, []() { Core::Init(); });
+	auto consoleInit = std::async(std::launch::async, []() { Console::Init(); });
 
 	coreInit.wait();
-	auto audioInit = std::async(std::launch::async, [&]() { audioSystem.Init(); });
+	auto audioInit = std::async(std::launch::async, []() { audioSystem.Init(); });
 
-	auto physicsInit = std::async(std::launch::async, [&]() { physicsSystem.Init(); });
-	auto fbxInit = std::async(std::launch::async, [&]() { FBXLoader::Init(); });
+	auto physicsInit = std::async(std::launch::async, []() { physicsSystem.Init(); });
+	auto fbxInit = std::async(std::launch::async, []() { FBXLoader::Init(); });
 
 	editor->Init(argc, argv);
-	auto rendererInit = std::async(std::launch::async, [&]() { Renderer::Init(editor->windowHwnd, editor->viewportWidth, editor->viewportHeight); });
+	auto rendererInit = std::async(std::launch::async, []() { Renderer::Init(editor->windowHwnd, editor->viewportWidth, editor->viewportHeight); });
 
 	rendererInit.wait();
-	auto debugMenuInit = std::async(std::launch::async, [&]() { debugMenu.Init(); });
-	auto uiInit = std::async(std::launch::async, [&]() { uiSystem.Init(Renderer::GetSwapchain()); });
+	auto debugMenuInit = std::async(std::launch::async, []() { debugMenu.Init(); });
+	auto uiInit = std::async(std::launch::async, []() { uiSystem.Init(Renderer::GetSwapchain()); });
 
 	audioInit.wait();
 	physicsInit.wait();
