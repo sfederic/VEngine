@@ -1,4 +1,4 @@
-# VEngine - Vagrant Tactics 
+# VEngine
 
 ![image](https://user-images.githubusercontent.com/45758254/164871735-21b7a40f-fc77-441d-8868-10376bb659dc.png)
 
