@@ -615,8 +615,7 @@ void Renderer::Render()
 	Profile::Start();
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
-	shaderMatrices.lightMVP = shadowMap->OutputMatrix();
-	shaderMatrices.lightViewProj = shadowMap->GetLightViewMatrix() * shadowMap->GetLightPerspectiveMatrix();
+	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
 
 	//Set time constant buffer
 	ShaderTimeData timeData = {};
@@ -684,8 +683,6 @@ void SetShaderMeshData(MeshComponent* mesh)
 void RenderMeshComponents()
 {
 	Profile::Start();
-
-	shaderMatrices.view = activeCamera->GetViewMatrix();
 
 	for (auto mesh : MeshComponent::system.components)
 	{
@@ -1106,9 +1103,6 @@ void RenderLightMeshes()
 	SetRastState(RastStates::wireframe);
 	SetShaders(ShaderItems::SolidColour);
 
-	shaderMatrices.view = activeCamera->GetViewMatrix();
-	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
-
 	//Set debug sphere wireframe material colour
 	MaterialShaderData materialShaderData = {};
 	materialShaderData.ambient = XMFLOAT4(1.f, 1.f, 0.f, 1.0f);
@@ -1347,9 +1341,6 @@ void Renderer::RenderParticleEmitters()
 void Renderer::RenderSpritesInScreenSpace()
 {
 	Profile::Start();
-
-	shaderMatrices.view = activeCamera->GetViewMatrix();
-	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
 
 	for (const Sprite& sprite : spriteSystem.screenSprites)
 	{
