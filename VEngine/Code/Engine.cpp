@@ -1,5 +1,8 @@
 #include "vpch.h"
 #include "Engine.h"
+
+#include <future>
+
 #include "Editor/Editor.h"
 #include "Core.h"
 #include "Input.h"
@@ -26,27 +29,34 @@ void Engine::Init(int argc, char* argv[])
 {
 	auto startTime = Profile::QuickStart();
 
-	Core::Init();
-
-	Console::Init();
-
-	editor->Init(argc, argv);
-
 	activeCamera = &editorCamera;
 
-	audioSystem.Init();
+	auto coreInit = std::async(std::launch::async, [&]() { Core::Init(); });
+	auto consoleInit = std::async(std::launch::async, [&]() { Console::Init(); });
 
-	physicsSystem.Init();
+	coreInit.wait();
+	auto audioInit = std::async(std::launch::async, [&]() { audioSystem.Init(); });
 
-	Renderer::Init(editor->windowHwnd, editor->viewportWidth, editor->viewportHeight);
+	auto physicsInit = std::async(std::launch::async, [&]() { physicsSystem.Init(); });
+	auto fbxInit = std::async(std::launch::async, [&]() { FBXLoader::Init(); });
 
-	FBXLoader::Init();
+	editor->Init(argc, argv);
+	auto rendererInit = std::async(std::launch::async, [&]() { Renderer::Init(editor->windowHwnd, editor->viewportWidth, editor->viewportHeight); });
 
-	uiSystem.Init(Renderer::GetSwapchain());
-	debugMenu.Init();
+	rendererInit.wait();
+	auto debugMenuInit = std::async(std::launch::async, [&]() { debugMenu.Init(); });
+	auto uiInit = std::async(std::launch::async, [&]() { uiSystem.Init(Renderer::GetSwapchain()); });
+
+	audioInit.wait();
+	physicsInit.wait();
+	fbxInit.wait();
+	uiInit.wait();
 
 	World::Init();
 	editor->UpdateWorldList();
+
+	debugMenuInit.wait();
+	consoleInit.wait();
 
 	double endTime = Profile::QuickEnd(startTime);
 	Log("Startup took: %f seconds", endTime);
