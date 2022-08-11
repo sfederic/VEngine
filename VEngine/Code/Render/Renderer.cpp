@@ -531,6 +531,11 @@ void RenderShadowPass()
 {
 	Profile::Start();
 
+	if (!shaderLights.shadowsEnabled)
+	{
+		return;
+	}
+
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	context->IASetInputLayout(inputLayout);
 
