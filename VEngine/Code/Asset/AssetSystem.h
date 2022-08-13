@@ -1,11 +1,13 @@
 #pragma once
+
 #include "System.h"
+#include "Render/RenderTypes.h"
 
 struct AssetSystem : System
 {
 	AssetSystem();
 	void WriteAllMeshDataToMeshAssetFiles();
-	void ReadAllMeshAssetsFromFile();
+	MeshData ReadAllMeshAssetsFromFile(const char* filename);
 	void BuildAllGameplayMapFiles();
 };
 
