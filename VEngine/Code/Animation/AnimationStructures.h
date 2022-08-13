@@ -49,10 +49,15 @@ struct Animation
 
 struct Joint
 {
+	void SetName(const char* name_)
+	{
+		strcpy_s(name, sizeof(name), name_);
+	}
+
 	XMMATRIX currentPose = XMMatrixIdentity();
 	XMMATRIX inverseBindPose = XMMatrixIdentity();
 
-	std::string name;
+	char name[32];
 
 	int parentIndex = -1; //-1 is the root joint's index or if the bone doesn't have a parent
 	int index = 0;
