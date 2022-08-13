@@ -115,6 +115,10 @@ void Console::Init()
 		std::make_pair([]() { assetSystem.WriteAllMeshDataToMeshAssetFiles(); },
 		"Build meshes as their engine specific file format."));
 
+	executeMap.emplace(L"READ MESHES",
+		std::make_pair([]() { assetSystem.ReadAllMeshAssetsFromFile("Meshes/animated_cube.vmesh"); },
+			"test case for cube.vmesh"));
+
 	executeMap.emplace(L"BUILD MAPS",
 		std::make_pair([]() { assetSystem.BuildAllGameplayMapFiles(); },
 		"Write all game save maps."));

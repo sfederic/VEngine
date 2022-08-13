@@ -14,7 +14,7 @@ FbxIOSettings* ioSetting;
 FbxImporter* importer;
 FbxAnimEvaluator* animEvaluator;
 
-std::unordered_map<std::string, MeshData*> FBXLoader::existingMeshDataMap;
+std::map<std::string, MeshData> FBXLoader::existingMeshDataMap;
 
 void ProcessAllChildNodes(FbxNode* node, MeshData* meshData);
 void ProcessSkeletonNodes(FbxNode* node, Skeleton* skeleton, int parentIndex);
@@ -45,7 +45,7 @@ bool FBXLoader::Import(std::string filename, MeshDataProxy* meshData)
 	auto existingMeshIt = existingMeshDataMap.find(filename);
 	if (existingMeshIt != existingMeshDataMap.end())
 	{
-		MeshData* existingMeshData = existingMeshIt->second;
+		MeshData* existingMeshData = &existingMeshIt->second;
 
 		meshData->vertices = &existingMeshData->vertices;
 		meshData->indices = &existingMeshData->indices;
@@ -55,7 +55,7 @@ bool FBXLoader::Import(std::string filename, MeshDataProxy* meshData)
 	}
 	else
 	{
-		existingMeshDataMap[filename] = new MeshData();
+		existingMeshDataMap[filename] = MeshData();
 	}
 
 	if (!importer->Initialize(filepath.c_str(), -1, manager->GetIOSettings()))
@@ -78,7 +78,7 @@ bool FBXLoader::Import(std::string filename, MeshDataProxy* meshData)
 	FbxNode* rootNode = scene->GetRootNode();
 	int childNodeCount = rootNode->GetChildCount();
 
-	MeshData* foundMeshData = existingMeshDataMap[filename];
+	MeshData* foundMeshData = &existingMeshDataMap[filename];
 	
 	//Go through all skeleton nodes
 	Skeleton* skeleton = &foundMeshData->skeleton;
@@ -97,7 +97,7 @@ bool FBXLoader::Import(std::string filename, MeshDataProxy* meshData)
 
 	animEvaluator = nullptr;
 
-	MeshData* newMeshData = existingMeshDataMap.find(filename)->second;
+	MeshData* newMeshData = &existingMeshDataMap.find(filename)->second;
 	assert(newMeshData->vertices.size() > 0);
 	BoundingBox::CreateFromPoints(newMeshData->boudingBox, newMeshData->vertices.size(),
 		&newMeshData->vertices.at(0).pos, sizeof(Vertex));
@@ -377,7 +377,7 @@ void ProcessSkeletonNodes(FbxNode* node, Skeleton* skeleton, int parentIndex)
 		if (child->GetNodeAttribute()->GetAttributeType() == FbxNodeAttribute::EType::eSkeleton)
 		{
 			Joint joint = {};
-			joint.name = child->GetName();
+			joint.SetName(child->GetName());
 			joint.parentIndex = parentIndex;
 			skeleton->AddJoint(joint);
 
@@ -435,7 +435,7 @@ MeshData* FBXLoader::FindMesh(std::string meshName)
 		return nullptr;
 	}
 
-	return meshIt->second;
+	return &meshIt->second;
 }
 
 void ReadNormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT3& outNormal)

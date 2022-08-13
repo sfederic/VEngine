@@ -2,7 +2,7 @@
 
 #include <string>
 #include <vector>
-#include <unordered_map>
+#include <map>
 #include "Render/RenderTypes.h"
 
 //The oficial docs on the FBX SDK (the current version is hard to find, google brings you to 2014 docs)
@@ -13,7 +13,7 @@
 
 namespace FBXLoader
 {
-	extern std::unordered_map<std::string, MeshData*> existingMeshDataMap;
+	extern std::map<std::string, MeshData> existingMeshDataMap;
 
 	void Init();
 
