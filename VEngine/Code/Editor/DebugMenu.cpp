@@ -424,16 +424,19 @@ void DebugMenu::RenderSkeletonViewMenu()
 			for (auto& animation : mesh->GetSkeleton()->animations)
 			{
 				std::string animationName = animation.first;
-				if (ImGui::Button(animationName.c_str()))
+				if (!animationName.empty())
 				{
-					mesh->currentAnimation = animationName.c_str();
-					mesh->currentAnimationTime = 0.f;
+					if (ImGui::Button(animationName.c_str()))
+					{
+						mesh->currentAnimation = animationName.c_str();
+						mesh->currentAnimationTime = 0.f;
+					}
 				}
 			}
 
 			for (auto& joint : mesh->meshDataProxy->skeleton->joints)
 			{
-				ImGui::Text("Joint: %s ", joint.name.c_str());
+				ImGui::Text("Joint: %s ", joint.name);
 				ImGui::SameLine();
 				ImGui::Text("Index: %d", joint.index);
 				ImGui::SameLine();
