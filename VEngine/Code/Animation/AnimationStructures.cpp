@@ -72,8 +72,6 @@ void Animation::Interpolate(float t, Joint& joint, Skeleton* skeleton)
 
 Skeleton::Skeleton()
 {
-	CreateAnimation("None");
-	currentAnimation = "None";
 }
 
 void Skeleton::AddJoint(Joint joint)
