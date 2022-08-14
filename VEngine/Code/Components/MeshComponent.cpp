@@ -17,11 +17,6 @@
 
 void MeshComponent::ResetMeshBuffers()
 {
-	for (auto& meshBuffer : existingMeshBuffers)
-	{
-		meshBuffer.second->Destroy();
-	}
-
 	existingMeshBuffers.clear();
 }
 
@@ -44,9 +39,6 @@ void MeshComponent::Tick(float deltaTime)
 	{
 		physicsSystem.GetTransformFromPhysicsActor(this);
 	}
-
-	//CullOnAngleBetweenCameraAndMesh();
-	//SetBlendWhenBetweenPlayerAndCamera();
 }
 
 void MeshComponent::Create()

@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 
 struct ID3D11Buffer;
@@ -53,8 +54,6 @@ struct MeshBuffers
 {
 	Buffer vertexBuffer;
 	Buffer indexBuffer;
-
-	void Destroy();
 };
 
 struct PipelineStateObject
