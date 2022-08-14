@@ -108,12 +108,6 @@ struct MeshDataProxy
 		return (sizeof(MeshData::indexDataType) * indices->size());
 	}
 
-	void Clear()
-	{
-		vertices->clear();
-		indices->clear();
-	}
-
 	bool CheckDuplicateVertices(Vertex& vert);
 
 	//Duplicate checks for indices only return true if the index is present in the array
