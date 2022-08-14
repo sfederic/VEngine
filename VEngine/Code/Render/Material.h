@@ -67,4 +67,6 @@ public:
 
 	UID GetUID() { return uid; }
 	void SetUID(UID uid_) { uid = uid_; }
+
+	static void SetupBlendAndRastStateValues();
 };

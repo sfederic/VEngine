@@ -6,6 +6,11 @@
 
 MaterialSystem materialSystem;
 
+MaterialSystem::MaterialSystem() : System("MaterialSystem")
+{
+	Material::SetupBlendAndRastStateValues();
+}
+
 Material* MaterialSystem::CreateMaterial(std::string textureFilename, ShaderItem* shaderItem)
 {
 	auto uid = GenerateUID();

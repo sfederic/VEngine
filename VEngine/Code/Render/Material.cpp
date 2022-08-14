@@ -15,20 +15,28 @@
 #include "PixelShader.h"
 #include "ShaderItem.h"
 
+VEnum rastStates;
+VEnum blendStates;
+
+void Material::SetupBlendAndRastStateValues()
+{
+	rastStates.Add(RastStates::solid);
+	rastStates.Add(RastStates::noBackCull);
+	rastStates.Add(RastStates::shadow);
+	rastStates.Add(RastStates::wireframe);
+
+	blendStates.Add(BlendStates::null);
+	blendStates.Add(BlendStates::Default);
+}
+
 Material::Material(std::string textureFilename_, ShaderItem* shaderItem)
 {
 	textureData.filename = textureFilename_;
 
 	shaderData.shaderItemName = shaderItem->GetName();
 
-	//@Todo: I don't like this. There needs to be a way to check if something inherits from VEnum when serialising
-	rastStateValue.Add(RastStates::solid);
-	rastStateValue.Add(RastStates::noBackCull);
-	rastStateValue.Add(RastStates::shadow);
-	rastStateValue.Add(RastStates::wireframe);
-
-	blendStateValue.Add(BlendStates::null);
-	blendStateValue.Add(BlendStates::Default);
+	rastStateValue = rastStates;
+	blendStateValue = blendStates;
 }
 
 void Material::Create()
