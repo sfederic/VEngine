@@ -121,8 +121,8 @@ ID3D11DepthStencilView* dsv;
 ID3D11InputLayout* inputLayout;
 
 //Rasterizer states
-std::unordered_map<std::string, RastState*> rastStateMap;
-std::unordered_map<std::string, BlendState*> blendStateMap;
+std::map<std::string, std::unique_ptr<RastState>> rastStateMap;
+std::map<std::string, std::unique_ptr<BlendState>> blendStateMap;
 ID3D11RasterizerState* rastStateSolid;
 ID3D11RasterizerState* rastStateWireframe;
 ID3D11RasterizerState* rastStateNoBackCull;
@@ -349,8 +349,8 @@ void CreateRasterizerStates()
 	//SOLID
 	{
 		HR(device->CreateRasterizerState(&rastDesc, &rastStateSolid));
-		RastState* rs = new RastState(RastStates::solid, rastStateSolid);
-		rastStateMap[rs->name] = rs;
+
+		rastStateMap.emplace(RastStates::solid, std::make_unique<RastState>(RastStates::solid, rastStateSolid));
 	}
 
 	//WIREFRAME
@@ -358,8 +358,8 @@ void CreateRasterizerStates()
 		rastDesc.FillMode = D3D11_FILL_WIREFRAME;
 		rastDesc.CullMode = D3D11_CULL_NONE;
 		HR(device->CreateRasterizerState(&rastDesc, &rastStateWireframe));
-		RastState* rs = new RastState(RastStates::wireframe, rastStateWireframe);
-		rastStateMap[rs->name] = rs;
+
+		rastStateMap.emplace(RastStates::wireframe, std::make_unique<RastState>(RastStates::wireframe, rastStateWireframe));
 	}
 
 	//SOLID, NO BACK CULL
@@ -367,8 +367,8 @@ void CreateRasterizerStates()
 		rastDesc.CullMode = D3D11_CULL_NONE;
 		rastDesc.FillMode = D3D11_FILL_SOLID;
 		HR(device->CreateRasterizerState(&rastDesc, &rastStateNoBackCull));
-		RastState* rs = new RastState(RastStates::noBackCull, rastStateNoBackCull);
-		rastStateMap[rs->name] = rs;
+
+		rastStateMap.emplace(RastStates::noBackCull, std::make_unique<RastState>(RastStates::noBackCull, rastStateNoBackCull));
 	}
 
 	//SHADOWS
@@ -379,8 +379,8 @@ void CreateRasterizerStates()
 		rastDesc.DepthBiasClamp = 0.0f;
 		rastDesc.SlopeScaledDepthBias = 1.0f;
 		HR(device->CreateRasterizerState(&rastDesc, &rastStateShadow));
-		RastState* rs = new RastState(RastStates::shadow, rastStateShadow);
-		rastStateMap[rs->name] = rs;
+
+		rastStateMap.emplace(RastStates::shadow, std::make_unique<RastState>(RastStates::shadow, rastStateShadow));
 	}
 }
 
@@ -392,8 +392,7 @@ void CreateBlendStates()
 		nullBlendDesc.RenderTarget[0].BlendEnable = false;
 		HR(device->CreateBlendState(&nullBlendDesc, &blendStateAlphaToCoverage));
 
-		BlendState* bs = new BlendState(BlendStates::null, nullBlendState);
-		blendStateMap[bs->name] = bs;
+		blendStateMap.emplace(BlendStates::null, std::make_unique<BlendState>(BlendStates::null, nullBlendState));
 	}
 
 	//DEFAULT BLEND STATE
@@ -412,8 +411,7 @@ void CreateBlendStates()
 
 		HR(device->CreateBlendState(&alphaToCoverageDesc, &blendStateAlphaToCoverage));
 
-		BlendState* bs = new BlendState(BlendStates::Default, blendStateAlphaToCoverage);
-		blendStateMap[bs->name] = bs;
+		blendStateMap.emplace(BlendStates::Default, std::make_unique<BlendState>(BlendStates::Default, blendStateAlphaToCoverage));
 	}
 }
 
@@ -1564,13 +1562,13 @@ void SetRastState(std::string rastStateName)
 		return;
 	}
 
-	auto rastState = rastStateMap[rastStateName];
+	auto& rastState = rastStateMap[rastStateName];
 	context->RSSetState(rastState->data);
 }
 
 void SetBlendState(std::string blendStateName)
 {
-	auto blendState = blendStateMap[blendStateName];
+	auto& blendState = blendStateMap[blendStateName];
 	const float factor[4] = {};
 	context->OMSetBlendState(blendState->data, factor, 0xFFFFFFFF);
 }
@@ -1704,10 +1702,10 @@ void CreatePostProcessRenderTarget()
 
 RastState* Renderer::GetRastState(std::string rastStateName)
 {
-	return rastStateMap[rastStateName];
+	return rastStateMap[rastStateName].get();
 }
 
 BlendState* Renderer::GetBlendState(std::string blendStateName)
 {
-	return blendStateMap[blendStateName];
+	return blendStateMap[blendStateName].get();
 }
