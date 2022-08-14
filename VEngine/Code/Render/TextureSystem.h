@@ -7,7 +7,7 @@
 
 struct TextureSystem : System
 {
-	std::unordered_map<std::string, std::unique_ptr<Texture2D>> texture2DMap;
+	std::unordered_map<std::string, std::shared_ptr<Texture2D>> texture2DMap;
 
 public:
 	std::wstring selectedTextureInEditor;
@@ -16,7 +16,7 @@ public:
 	void CreateAllTextures();
 	void Cleanup();
 
-	Texture2D* FindTexture2D(std::string textureFilename);
+	std::shared_ptr<Texture2D> FindTexture2D(std::string textureFilename);
 };
 
 extern TextureSystem textureSystem;

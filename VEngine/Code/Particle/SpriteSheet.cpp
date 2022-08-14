@@ -13,7 +13,7 @@ void SpriteSheet::Create()
 	sprite.useSourceRect = true;
 	sprite.textureFilename = textureData.filename;
 	
-	Texture2D* texture = textureSystem.FindTexture2D(textureData.filename);
+	auto texture = textureSystem.FindTexture2D(textureData.filename);
 
 	int w = texture->GetWidth() / numSheetColumns;
 	int h = texture->GetHeight() / numSheetRows;
@@ -66,7 +66,7 @@ Properties SpriteSheet::GetProps()
 
 void SpriteSheet::UpdateSprite()
 {
-	Texture2D* texture = textureSystem.FindTexture2D(textureData.filename);
+	auto texture = textureSystem.FindTexture2D(textureData.filename);
 
 	int w = texture->GetWidth() / numSheetColumns;
 	int h = texture->GetHeight() / numSheetRows;

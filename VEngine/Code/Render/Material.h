@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <memory>
 #include <DirectXMath.h>
 #include "Properties.h"
 #include "UID.h"
@@ -37,7 +38,7 @@ private:
 	UID uid = 0;
 
 public:
-	Texture2D* texture = nullptr;
+	std::shared_ptr<Texture2D> texture;
 	Sampler* sampler = nullptr;
 	RastState* rastState = nullptr;
 	BlendState* blendState = nullptr;

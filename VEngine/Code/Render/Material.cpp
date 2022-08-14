@@ -57,7 +57,7 @@ static void ReassignTexture(void* data)
 {
 	auto textureData = (TextureData*)data;
 
-	Texture2D* swapTexture = textureSystem.FindTexture2D(textureData->filename);
+	auto swapTexture = textureSystem.FindTexture2D(textureData->filename);
 	if (swapTexture == nullptr)
 	{
 		Log("%s wasn't found on texture change.", textureData->filename);

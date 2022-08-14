@@ -73,7 +73,7 @@ void SpriteSystem::BuildSpriteQuadForViewportRendering(const Sprite& sprite)
 	verts[2].pos = PointToNdc(dst.right, dst.top, sprite.z);
 	verts[3].pos = PointToNdc(dst.right, dst.bottom, sprite.z);
 
-	Texture2D* texture = textureSystem.FindTexture2D(sprite.textureFilename);
+	auto texture = textureSystem.FindTexture2D(sprite.textureFilename);
 	auto texWidth = texture->GetWidth();
 	auto texHeight = texture->GetHeight();
 
@@ -121,7 +121,7 @@ void SpriteSystem::BuildSpriteQuadForSpriteSheetRendering(const Sprite& sprite)
 	verts[2].normal = XMFLOAT3(0.f, 0.f, -1.f);
 	verts[3].normal = XMFLOAT3(0.f, 0.f, -1.f);
 
-	Texture2D* texture = textureSystem.FindTexture2D(sprite.textureFilename);
+	auto texture = textureSystem.FindTexture2D(sprite.textureFilename);
 	auto texWidth = texture->GetWidth();
 	auto texHeight = texture->GetHeight();
 

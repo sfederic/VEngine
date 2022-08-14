@@ -7,7 +7,7 @@
 
 TextureSystem textureSystem;
 
-Texture2D* TextureSystem::FindTexture2D(std::string textureFilename)
+std::shared_ptr<Texture2D> TextureSystem::FindTexture2D(std::string textureFilename)
 {
 	//Set default texture if filename doesn't exist
 	if (!std::filesystem::exists(AssetBaseFolders::texture + textureFilename))
@@ -30,10 +30,10 @@ Texture2D* TextureSystem::FindTexture2D(std::string textureFilename)
 			RenderUtils::CreateTexture(texture.get());
 		}
 
-		return texture.get();
+		return texture;
 	}
 
-	return textureIt->second.get();
+	return textureIt->second;
 }
 
 void TextureSystem::CreateAllTextures()
