@@ -39,7 +39,7 @@ void ShaderSystem::AddShaderItem(ShaderItem* shaderItem)
     shaderItems.emplace(shaderItem->GetName(), shaderItem);
 }
 
-ShaderItem* ShaderSystem::FindShaderItem(std::string shaderItemName)
+std::shared_ptr<ShaderItem> ShaderSystem::FindShaderItem(std::string shaderItemName)
 {
     assert(shaderItems.find(shaderItemName) != shaderItems.end());
     return shaderItems[shaderItemName];

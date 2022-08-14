@@ -19,7 +19,7 @@ public:
 	PixelShader* FindPixelShader(const std::wstring filename);
 
 	void AddShaderItem(ShaderItem* shaderItem);
-	ShaderItem* FindShaderItem(std::string shaderItemName);
+	std::shared_ptr<ShaderItem> FindShaderItem(std::string shaderItemName);
 
 	void ClearShaders();
 
@@ -29,7 +29,7 @@ private:
 	std::map<std::wstring, std::unique_ptr<VertexShader>> vertexShaders;
 	std::map<std::wstring, std::unique_ptr<PixelShader>> pixelShaders;
 
-	std::map<std::string, ShaderItem*> shaderItems;
+	std::map<std::string, std::shared_ptr<ShaderItem>> shaderItems;
 };
 
 extern ShaderSystem shaderSystem;

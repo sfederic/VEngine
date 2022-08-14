@@ -39,10 +39,10 @@ private:
 
 public:
 	std::shared_ptr<Texture2D> texture;
+	std::shared_ptr<ShaderItem> shader;
 	Sampler* sampler = nullptr;
 	RastState* rastState = nullptr;
 	BlendState* blendState = nullptr;
-	ShaderItem* shader = nullptr;
 
 	TextureData textureData;
 	ShaderData shaderData;

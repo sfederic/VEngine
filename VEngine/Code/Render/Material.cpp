@@ -119,7 +119,7 @@ static void ReassignBlendState(void* data)
 static void ReassignShader(void* data)
 {
 	auto shaderData = (ShaderData*)data;
-	ShaderItem* foundShader = shaderSystem.FindShaderItem(shaderData->shaderItemName);
+	auto foundShader = shaderSystem.FindShaderItem(shaderData->shaderItemName);
 	if (foundShader == nullptr)
 	{
 		Log("%s not found on shader change.", shaderData->shaderItemName.c_str());
