@@ -500,12 +500,12 @@ void SetLightResources()
 
 void DrawMesh(MeshComponent* mesh)
 {
-	context->DrawIndexed(mesh->meshDataProxy->indices->size(), 0, 0);
+	context->DrawIndexed(mesh->meshDataProxy.indices->size(), 0, 0);
 }
 
 void DrawMeshInstanced(InstanceMeshComponent* mesh)
 {
-	context->DrawIndexedInstanced(mesh->meshDataProxy->indices->size(), mesh->GetInstanceCount(), 0, 0, 0);
+	context->DrawIndexedInstanced(mesh->meshDataProxy.indices->size(), mesh->GetInstanceCount(), 0, 0, 0);
 }
 
 void CheckSupportedFeatures()
@@ -564,7 +564,7 @@ void RenderShadowPass()
 		SetShaderResourceFromMaterial(0, mesh->material);
 
 		//Draw
-		context->DrawIndexed(mesh->meshDataProxy->indices->size(), 0, 0);
+		context->DrawIndexed(mesh->meshDataProxy.indices->size(), 0, 0);
 	}
 
 	SetNullRTV();
@@ -806,7 +806,7 @@ void Renderer::RenderLightProbeViews()
 					cbMeshData->SetVSAndPS();
 
 					//Draw
-					context->DrawIndexed(mesh->meshDataProxy->indices->size(), 0, 0);
+					context->DrawIndexed(mesh->meshDataProxy.indices->size(), 0, 0);
 				}
 
 				//Remove lightprobe RTV
@@ -1236,7 +1236,7 @@ void AnimateSkeletalMesh(MeshComponent* mesh)
 {
 	Profile::Start();
 
-	Skeleton* skeleton = mesh->meshDataProxy->skeleton;
+	Skeleton* skeleton = mesh->meshDataProxy.skeleton;
 
 	if (mesh->currentAnimation.empty())
 	{

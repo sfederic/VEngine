@@ -27,7 +27,6 @@ void MeshComponent::ResetMeshBuffers()
 
 MeshComponent::MeshComponent()
 {
-	meshDataProxy = new MeshDataProxy();
 	pso = new PipelineStateObject();
 
 	//default values for material
@@ -38,7 +37,6 @@ MeshComponent::MeshComponent(const std::string filename_,
 	const std::string textureFilename_,
 	ShaderItem* shaderItem)
 {
-	meshDataProxy = new MeshDataProxy();
 	pso = new PipelineStateObject();
 
 	meshComponentData.filename = filename_;
@@ -69,7 +67,7 @@ void MeshComponent::Create()
 	FBXLoader::Import(meshComponentData.filename.c_str(), meshDataProxy);
 
 	//Setup bounds
-	BoundingOrientedBox::CreateFromBoundingBox(boundingBox, *meshDataProxy->boundingBox);
+	BoundingOrientedBox::CreateFromBoundingBox(boundingBox, *meshDataProxy.boundingBox);
 
 	//Setup pipeline objects
 	auto psoIt = existingMeshBuffers.find(meshComponentData.filename);
@@ -101,9 +99,6 @@ void MeshComponent::Destroy()
 
 	material->Destroy();
 	material = nullptr;
-
-	delete meshDataProxy;
-	meshDataProxy = nullptr;
 
 	delete pso;
 	pso = nullptr;

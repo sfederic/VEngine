@@ -30,7 +30,7 @@ void FBXLoader::Init()
 	importer = FbxImporter::Create(manager, "");
 }
 
-bool FBXLoader::Import(std::string filename, MeshDataProxy* meshData)
+bool FBXLoader::Import(std::string filename, MeshDataProxy& meshData)
 {
 	std::string filepath = AssetBaseFolders::mesh + filename;
 	
@@ -47,10 +47,10 @@ bool FBXLoader::Import(std::string filename, MeshDataProxy* meshData)
 	{
 		MeshData* existingMeshData = &existingMeshIt->second;
 
-		meshData->vertices = &existingMeshData->vertices;
-		meshData->indices = &existingMeshData->indices;
-		meshData->skeleton = &existingMeshData->skeleton;
-		meshData->boundingBox = &existingMeshData->boudingBox;
+		meshData.vertices = &existingMeshData->vertices;
+		meshData.indices = &existingMeshData->indices;
+		meshData.skeleton = &existingMeshData->skeleton;
+		meshData.boundingBox = &existingMeshData->boudingBox;
 		return true;
 	}
 	else
@@ -103,10 +103,10 @@ bool FBXLoader::Import(std::string filename, MeshDataProxy* meshData)
 		&newMeshData->vertices.at(0).pos, sizeof(Vertex));
 
 	//Set proxy data for new mesh daata
-	meshData->vertices = &newMeshData->vertices;
-	meshData->indices = &newMeshData->indices;
-	meshData->skeleton = &newMeshData->skeleton;
-	meshData->boundingBox = &newMeshData->boudingBox;
+	meshData.vertices = &newMeshData->vertices;
+	meshData.indices = &newMeshData->indices;
+	meshData.skeleton = &newMeshData->skeleton;
+	meshData.boundingBox = &newMeshData->boudingBox;
 
 	return true;
 }

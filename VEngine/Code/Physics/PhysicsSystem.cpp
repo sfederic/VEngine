@@ -224,9 +224,9 @@ void PhysicsSystem::CreateCharacterController(CharacterControllerComponent* char
 void PhysicsSystem::CreateConvexPhysicsMesh(MeshComponent* mesh, Actor* actor)
 {
 	PxConvexMeshDesc convexDesc;
-	convexDesc.points.count = mesh->meshDataProxy->vertices->size();
+	convexDesc.points.count = mesh->meshDataProxy.vertices->size();
 	convexDesc.points.stride = sizeof(PxVec3);
-	convexDesc.points.data = mesh->meshDataProxy->vertices->data();
+	convexDesc.points.data = mesh->meshDataProxy.vertices->data();
 	convexDesc.flags = PxConvexFlag::eCOMPUTE_CONVEX;
 
 	PxDefaultMemoryOutputStream buf;

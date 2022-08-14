@@ -30,12 +30,12 @@ void DestructibleMeshComponent::Create()
 
 		mesh->isStatic = false;
 
-		mesh->meshDataProxy->vertices = &meshData.vertices;
-		mesh->meshDataProxy->indices = &meshData.indices;
+		mesh->meshDataProxy.vertices = &meshData.vertices;
+		mesh->meshDataProxy.indices = &meshData.indices;
 
 		//Setup bounds
-		BoundingOrientedBox::CreateFromPoints(mesh->boundingBox, mesh->meshDataProxy->vertices->size(),
-			&mesh->meshDataProxy->vertices->at(0).pos, sizeof(Vertex));
+		BoundingOrientedBox::CreateFromPoints(mesh->boundingBox, mesh->meshDataProxy.vertices->size(),
+			&mesh->meshDataProxy.vertices->at(0).pos, sizeof(Vertex));
 
 		mesh->pso->vertexBuffer = new Buffer();
 		mesh->pso->indexBuffer = new Buffer();

@@ -256,12 +256,12 @@ void DebugMenu::RenderWorldStats()
 
 	for (auto mesh : MeshComponent::system.components)
 	{
-		totalVerticesInWorld += mesh->meshDataProxy->vertices->size();
+		totalVerticesInWorld += mesh->meshDataProxy.vertices->size();
 	}
 
 	for (auto instanceMesh : InstanceMeshComponent::system.components)
 	{
-		totalVerticesInWorld += instanceMesh->meshDataProxy->vertices->size();
+		totalVerticesInWorld += instanceMesh->meshDataProxy.vertices->size();
 	}
 
 	ImGui::Text("Vertex Count: %d", totalVerticesInWorld);
@@ -434,7 +434,7 @@ void DebugMenu::RenderSkeletonViewMenu()
 				}
 			}
 
-			for (auto& joint : mesh->meshDataProxy->skeleton->joints)
+			for (auto& joint : mesh->meshDataProxy.skeleton->joints)
 			{
 				ImGui::Text("Joint: %s ", joint.name);
 				ImGui::SameLine();

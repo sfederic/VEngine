@@ -52,16 +52,16 @@ namespace RenderUtils
 		return buffer;
 	}
 
-	ID3D11Buffer* CreateVertexBuffer(MeshDataProxy* meshData)
+	ID3D11Buffer* CreateVertexBuffer(MeshDataProxy& meshData)
 	{
-		return CreateDefaultBuffer(meshData->GetVerticesByteWidth(),
-			D3D11_BIND_VERTEX_BUFFER, meshData->vertices->data());
+		return CreateDefaultBuffer(meshData.GetVerticesByteWidth(),
+			D3D11_BIND_VERTEX_BUFFER, meshData.vertices->data());
 	}
 
-	ID3D11Buffer* CreateIndexBuffer(MeshDataProxy* meshData)
+	ID3D11Buffer* CreateIndexBuffer(MeshDataProxy& meshData)
 	{
-		return CreateDefaultBuffer(meshData->GetIndicesByteWidth(),
-			D3D11_BIND_INDEX_BUFFER, meshData->indices->data());
+		return CreateDefaultBuffer(meshData.GetIndicesByteWidth(),
+			D3D11_BIND_INDEX_BUFFER, meshData.indices->data());
 	}
 
 	ID3D11ShaderResourceView* CreateSRVForMeshInstance(ID3D11Buffer* structuredBuffer, uint32_t numBufferElements)
