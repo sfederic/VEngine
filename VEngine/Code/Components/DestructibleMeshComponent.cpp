@@ -37,10 +37,10 @@ void DestructibleMeshComponent::Create()
 		BoundingOrientedBox::CreateFromPoints(mesh->boundingBox, mesh->meshDataProxy.vertices->size(),
 			&mesh->meshDataProxy.vertices->at(0).pos, sizeof(Vertex));
 
-		mesh->pso->vertexBuffer = new Buffer();
-		mesh->pso->indexBuffer = new Buffer();
-		mesh->pso->vertexBuffer->data = RenderUtils::CreateVertexBuffer(mesh->meshDataProxy);
-		mesh->pso->indexBuffer->data = RenderUtils::CreateIndexBuffer(mesh->meshDataProxy);
+		mesh->pso.vertexBuffer = new Buffer();
+		mesh->pso.indexBuffer = new Buffer();
+		mesh->pso.vertexBuffer->data = RenderUtils::CreateVertexBuffer(mesh->meshDataProxy);
+		mesh->pso.indexBuffer->data = RenderUtils::CreateIndexBuffer(mesh->meshDataProxy);
 	}
 }
 

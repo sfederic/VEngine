@@ -27,9 +27,6 @@ void MeshComponent::ResetMeshBuffers()
 
 MeshComponent::MeshComponent()
 {
-	pso = new PipelineStateObject();
-
-	//default values for material
 	material = materialSystem.CreateMaterial("test.png", ShaderItems::Default);
 }
 
@@ -37,10 +34,7 @@ MeshComponent::MeshComponent(const std::string filename_,
 	const std::string textureFilename_,
 	ShaderItem* shaderItem)
 {
-	pso = new PipelineStateObject();
-
 	meshComponentData.filename = filename_;
-
 	material = new Material(textureFilename_, shaderItem);
 }
 
@@ -73,22 +67,22 @@ void MeshComponent::Create()
 	auto psoIt = existingMeshBuffers.find(meshComponentData.filename);
 	if (psoIt == existingMeshBuffers.end())
 	{
-		pso->vertexBuffer = new Buffer();
-		pso->indexBuffer = new Buffer();
-		pso->vertexBuffer->data = RenderUtils::CreateVertexBuffer(meshDataProxy);
-		pso->indexBuffer->data = RenderUtils::CreateIndexBuffer(meshDataProxy);
+		pso.vertexBuffer = new Buffer();
+		pso.indexBuffer = new Buffer();
+		pso.vertexBuffer->data = RenderUtils::CreateVertexBuffer(meshDataProxy);
+		pso.indexBuffer->data = RenderUtils::CreateIndexBuffer(meshDataProxy);
 	}
 	else
 	{
-		pso->vertexBuffer = psoIt->second.vertexBuffer;
-		pso->indexBuffer = psoIt->second.indexBuffer;
+		pso.vertexBuffer = psoIt->second.vertexBuffer;
+		pso.indexBuffer = psoIt->second.indexBuffer;
 	}
 
-	pso->Create();
+	pso.Create();
 
 	MeshBuffers meshBuffers = {};
-	meshBuffers.vertexBuffer = pso->vertexBuffer;
-	meshBuffers.indexBuffer = pso->indexBuffer;
+	meshBuffers.vertexBuffer = pso.vertexBuffer;
+	meshBuffers.indexBuffer = pso.indexBuffer;
 	existingMeshBuffers[meshComponentData.filename] = meshBuffers;
 }
 
@@ -99,9 +93,6 @@ void MeshComponent::Destroy()
 
 	material->Destroy();
 	material = nullptr;
-
-	delete pso;
-	pso = nullptr;
 }
 
 static void ReassignMesh(void* data)
@@ -149,12 +140,12 @@ void MeshComponent::SetShaderFilenames(ShaderItem& shaderItem)
 
 Buffer* MeshComponent::GetVertexBuffer() const 
 {
-	return pso->vertexBuffer;
+	return pso.vertexBuffer;
 }
 
 Buffer* MeshComponent::GetIndexBuffer() const
 {
-	return pso->indexBuffer;
+	return pso.indexBuffer;
 }
 
 void MeshComponent::CullOnAngleBetweenCameraAndMesh()

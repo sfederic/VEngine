@@ -783,8 +783,8 @@ void Renderer::RenderLightProbeViews()
 
 					SetShaderResourceFromMaterial(0, material);
 
-					context->IASetVertexBuffers(0, 1, &mesh->pso->vertexBuffer->data, &stride, &offset);
-					context->IASetIndexBuffer(mesh->pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
+					context->IASetVertexBuffers(0, 1, &mesh->pso.vertexBuffer->data, &stride, &offset);
+					context->IASetIndexBuffer(mesh->pso.indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
 
 					cbMaterial->Map(&material->materialShaderData);
 					cbMaterial->SetPS();
@@ -1507,7 +1507,7 @@ void Renderer::ScreenshotCapture()
 void SetRenderPipelineStates(MeshComponent* mesh)
 {
 	Material* material = mesh->material;
-	PipelineStateObject* pso = mesh->pso;
+	PipelineStateObject& pso = mesh->pso;
 
 	if (Renderer::drawAllAsWireframe)
 	{
@@ -1527,8 +1527,8 @@ void SetRenderPipelineStates(MeshComponent* mesh)
 	context->PSSetSamplers(0, 1, &material->sampler->data);
 	SetShaderResourceFromMaterial(0, material);
 
-	SetVertexBuffer(pso->vertexBuffer);
-	SetIndexBuffer(pso->indexBuffer);
+	SetVertexBuffer(pso.vertexBuffer);
+	SetIndexBuffer(pso.indexBuffer);
 
 	cbMaterial->Map(&material->materialShaderData);
 	cbMaterial->SetPS();
@@ -1537,7 +1537,7 @@ void SetRenderPipelineStates(MeshComponent* mesh)
 void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 {
 	Material* material = mesh->material;
-	PipelineStateObject* pso = mesh->pso;
+	PipelineStateObject& pso = mesh->pso;
 
 	context->RSSetState(rastStateMap["shadow"]->data);
 
@@ -1546,8 +1546,8 @@ void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 	context->VSSetShader(shader->GetVertexShader(), nullptr, 0);
 	context->PSSetShader(shader->GetPixelShader(), nullptr, 0);
 
-	context->IASetVertexBuffers(0, 1, &pso->vertexBuffer->data, &Renderer::stride, &Renderer::offset);
-	context->IASetIndexBuffer(pso->indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
+	context->IASetVertexBuffers(0, 1, &pso.vertexBuffer->data, &Renderer::stride, &Renderer::offset);
+	context->IASetIndexBuffer(pso.indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
 }
 
 void SetShaders(ShaderItem* shaderItem)
