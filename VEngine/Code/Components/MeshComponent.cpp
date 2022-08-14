@@ -67,23 +67,22 @@ void MeshComponent::Create()
 	auto psoIt = existingMeshBuffers.find(meshComponentData.filename);
 	if (psoIt == existingMeshBuffers.end())
 	{
-		pso.vertexBuffer = new Buffer();
-		pso.indexBuffer = new Buffer();
-		pso.vertexBuffer->data = RenderUtils::CreateVertexBuffer(meshDataProxy);
-		pso.indexBuffer->data = RenderUtils::CreateIndexBuffer(meshDataProxy);
+		existingMeshBuffers[meshComponentData.filename] = MeshBuffers();
+		MeshBuffers& meshBuffers = existingMeshBuffers[meshComponentData.filename];
+
+		meshBuffers.vertexBuffer.data = RenderUtils::CreateVertexBuffer(meshDataProxy);
+		meshBuffers.indexBuffer.data = RenderUtils::CreateIndexBuffer(meshDataProxy);
+
+		pso.vertexBuffer = &meshBuffers.vertexBuffer;
+		pso.indexBuffer = &meshBuffers.indexBuffer;
 	}
 	else
 	{
-		pso.vertexBuffer = psoIt->second.vertexBuffer;
-		pso.indexBuffer = psoIt->second.indexBuffer;
+		pso.vertexBuffer = &psoIt->second.vertexBuffer;
+		pso.indexBuffer = &psoIt->second.indexBuffer;
 	}
 
 	pso.Create();
-
-	MeshBuffers meshBuffers = {};
-	meshBuffers.vertexBuffer = pso.vertexBuffer;
-	meshBuffers.indexBuffer = pso.indexBuffer;
-	existingMeshBuffers[meshComponentData.filename] = meshBuffers;
 }
 
 void MeshComponent::Destroy()

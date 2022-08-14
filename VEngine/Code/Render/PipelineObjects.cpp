@@ -30,6 +30,8 @@ Sampler::~Sampler()
 
 PipelineStateObject::PipelineStateObject()
 {
+	vertexBuffer = new Buffer();
+	indexBuffer = new Buffer();
 }
 
 void PipelineStateObject::Create()
@@ -78,6 +80,4 @@ ShaderResourceView::~ShaderResourceView()
 
 void MeshBuffers::Destroy()
 {
-	delete vertexBuffer;
-	delete indexBuffer;
 }

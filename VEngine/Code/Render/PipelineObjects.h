@@ -51,8 +51,8 @@ struct BlendState
 
 struct MeshBuffers
 {
-	Buffer* vertexBuffer = nullptr;
-	Buffer* indexBuffer = nullptr;
+	Buffer vertexBuffer;
+	Buffer indexBuffer;
 
 	void Destroy();
 };
