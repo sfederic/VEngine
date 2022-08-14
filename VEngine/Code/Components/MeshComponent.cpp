@@ -106,7 +106,6 @@ Properties MeshComponent::GetProps()
 	props.Add("Casts Shadow", &castsShadow);
 	props.Add("Static", &isStatic);
 	props.Add("Grid Obstacle", &gridObstacle);
-	props.Add("Cull", &cull);
 	props.Merge(material->GetProps());
 	return props;
 }
@@ -143,41 +142,4 @@ Buffer* MeshComponent::GetVertexBuffer() const
 Buffer* MeshComponent::GetIndexBuffer() const
 {
 	return pso.indexBuffer;
-}
-
-void MeshComponent::CullOnAngleBetweenCameraAndMesh()
-{
-	if (cull)
-	{
-		const XMVECTOR meshForward = GetForwardVectorV();
-		const XMVECTOR cameraPos = activeCamera->GetWorldPositionV();
-		const XMVECTOR playerPos = GameUtils::GetPlayer()->GetPositionVector();
-		const XMVECTOR cameraForward = playerPos - cameraPos;
-
-		const float angle = XMConvertToDegrees(
-			XMVector3AngleBetweenVectors(meshForward, cameraForward).m128_f32[0]);
-
-		//The angles here are fairly specific to the player camera's position and lookat.
-		//Use this function mainly for walls.
-		cullMesh = angle > 110.f;
-	}
-}
-
-void MeshComponent::SetBlendWhenBetweenPlayerAndCamera()
-{
-	const XMVECTOR meshPos = GetWorldPositionV();
-	const XMVECTOR cameraPos = activeCamera->GetWorldPositionV();
-	const XMVECTOR playerPos = GameUtils::GetPlayer()->GetPositionVector();
-
-	const float cameraToMeshDistance = XMVector3Length(meshPos - cameraPos).m128_f32[0];
-	const float cameraToPlayerDistance = XMVector3Length(playerPos - cameraPos).m128_f32[0];
-
-	if (cameraToMeshDistance < cameraToPlayerDistance)
-	{
-		SetBlendState(BlendStates::Default);
-	}
-	else
-	{
-		SetBlendState(BlendStates::null);
-	}
 }

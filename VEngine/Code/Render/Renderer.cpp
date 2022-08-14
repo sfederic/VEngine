@@ -686,7 +686,7 @@ void RenderMeshComponents()
 
 	for (auto mesh : MeshComponent::system.components)
 	{
-		if (!mesh->active || mesh->cullMesh) continue;
+		if (!mesh->active) { continue; }
 
 		SetRenderPipelineStates(mesh);
 
@@ -769,7 +769,7 @@ void Renderer::RenderLightProbeViews()
 
 				for (auto mesh : MeshComponent::system.components)
 				{
-					if (!mesh->active || mesh->cullMesh) continue;
+					if (!mesh->active) { continue; }
 
 					Material* material = mesh->material;
 
