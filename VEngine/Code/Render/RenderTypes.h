@@ -107,12 +107,6 @@ struct MeshDataProxy
 	{
 		return (sizeof(MeshData::indexDataType) * indices->size());
 	}
-
-	bool CheckDuplicateVertices(Vertex& vert);
-
-	//Duplicate checks for indices only return true if the index is present in the array
-	//more than once. Eg. For {2, 1, 0}, {3, 1, 2}, 2 and 1 are the duplicates.
-	bool CheckDuplicateIndices(MeshData::indexDataType index);
 };
 
 struct ShaderMatrices
