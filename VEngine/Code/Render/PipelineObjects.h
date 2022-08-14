@@ -62,8 +62,6 @@ struct PipelineStateObject
 	Buffer* vertexBuffer = nullptr;
 	Buffer* indexBuffer = nullptr;
 
-	PipelineStateObject();
-	void Create();
 	void SetVertexBuffer(Buffer* vertexBuffer);
 	void SetIndexBuffer(Buffer* indexBuffer);
 };

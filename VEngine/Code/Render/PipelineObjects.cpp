@@ -28,16 +28,6 @@ Sampler::~Sampler()
 	}
 }
 
-PipelineStateObject::PipelineStateObject()
-{
-	vertexBuffer = new Buffer();
-	indexBuffer = new Buffer();
-}
-
-void PipelineStateObject::Create()
-{
-}
-
 void PipelineStateObject::SetVertexBuffer(Buffer* vertexBuffer_)
 {
 	vertexBuffer = vertexBuffer_;

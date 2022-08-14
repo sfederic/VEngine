@@ -19,7 +19,7 @@ void MeshComponent::ResetMeshBuffers()
 {
 	for (auto& meshBuffer : existingMeshBuffers)
 	{
-		meshBuffer.second.Destroy();
+		meshBuffer.second->Destroy();
 	}
 
 	existingMeshBuffers.clear();
@@ -67,22 +67,20 @@ void MeshComponent::Create()
 	auto psoIt = existingMeshBuffers.find(meshComponentData.filename);
 	if (psoIt == existingMeshBuffers.end())
 	{
-		existingMeshBuffers[meshComponentData.filename] = MeshBuffers();
-		MeshBuffers& meshBuffers = existingMeshBuffers[meshComponentData.filename];
+		existingMeshBuffers[meshComponentData.filename] = std::make_unique<MeshBuffers>();
+		auto& meshBuffers = existingMeshBuffers[meshComponentData.filename];
 
-		meshBuffers.vertexBuffer.data = RenderUtils::CreateVertexBuffer(meshDataProxy);
-		meshBuffers.indexBuffer.data = RenderUtils::CreateIndexBuffer(meshDataProxy);
+		meshBuffers->vertexBuffer.data = RenderUtils::CreateVertexBuffer(meshDataProxy);
+		meshBuffers->indexBuffer.data = RenderUtils::CreateIndexBuffer(meshDataProxy);
 
-		pso.vertexBuffer = &meshBuffers.vertexBuffer;
-		pso.indexBuffer = &meshBuffers.indexBuffer;
+		pso.vertexBuffer = &meshBuffers->vertexBuffer;
+		pso.indexBuffer = &meshBuffers->indexBuffer;
 	}
 	else
 	{
-		pso.vertexBuffer = &psoIt->second.vertexBuffer;
-		pso.indexBuffer = &psoIt->second.indexBuffer;
+		pso.vertexBuffer = &psoIt->second->vertexBuffer;
+		pso.indexBuffer = &psoIt->second->indexBuffer;
 	}
-
-	pso.Create();
 }
 
 void MeshComponent::Destroy()
