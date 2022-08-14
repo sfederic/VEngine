@@ -28,16 +28,6 @@ Sampler::~Sampler()
 	}
 }
 
-void PipelineStateObject::SetVertexBuffer(Buffer* vertexBuffer_)
-{
-	vertexBuffer = vertexBuffer_;
-}
-
-void PipelineStateObject::SetIndexBuffer(Buffer* indexBuffer_)
-{
-	indexBuffer = indexBuffer;
-}
-
 BlendState::BlendState(std::string name_, ID3D11BlendState* data_)
 {
 	name = name_;

@@ -61,7 +61,4 @@ struct PipelineStateObject
 {
 	Buffer* vertexBuffer = nullptr;
 	Buffer* indexBuffer = nullptr;
-
-	void SetVertexBuffer(Buffer* vertexBuffer);
-	void SetIndexBuffer(Buffer* indexBuffer);
 };
