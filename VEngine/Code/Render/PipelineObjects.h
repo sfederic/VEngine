@@ -45,7 +45,6 @@ struct BlendState
 	ID3D11BlendState* data = nullptr;
 	std::string name;
 
-	BlendState() {}
 	BlendState(std::string name_, ID3D11BlendState* data_);
 	~BlendState();
 };
