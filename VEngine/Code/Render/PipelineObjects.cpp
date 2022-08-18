@@ -30,7 +30,10 @@ BlendState::BlendState(std::string name_, ID3D11BlendState* data_)
 
 BlendState::~BlendState()
 {
-	data->Release();
+	if (data)
+	{
+		data->Release();
+	}
 }
 
 Buffer::~Buffer()
