@@ -44,7 +44,7 @@ struct Animation
 
 	float GetFinalTime();
 
-	void Interpolate(float t, Joint& joint, Skeleton* skeleton);
+	void Interpolate(float t, Joint& joint, Skeleton* skeleton, Animation* animToBlendTo, float blendPercent);
 };
 
 struct Joint

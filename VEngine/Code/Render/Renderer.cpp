@@ -1264,7 +1264,20 @@ void AnimateSkeletalMesh(MeshComponent* mesh)
 					mesh->currentAnimationTime = 0.f;
 				}
 
-				anim.Interpolate(mesh->currentAnimationTime, joint, skeleton);
+				//Blend testing
+				if (!mesh->nextAnimation.empty())
+				{
+					auto nextAnimIt = skeleton->animations.find(mesh->nextAnimation);
+					if (nextAnimIt != skeleton->animations.end())
+					{
+						anim.Interpolate(mesh->currentAnimationTime, joint, skeleton, &nextAnimIt->second, 50.f);
+					}
+				}
+				else
+				{
+					anim.Interpolate(mesh->currentAnimationTime, joint, skeleton, nullptr, 0.f);
+				}
+
 
 				skinningData.skinningMatrices[skinningDataIndex] = joint.currentPose;
 				skinningDataIndex++;

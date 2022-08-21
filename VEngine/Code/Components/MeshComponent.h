@@ -30,6 +30,7 @@ struct MeshComponent : SpatialComponent
 	//@Todo: think about splitting this up and currentAnimationTime into an AnimatedMeshComponent or something.
 	Skeleton* GetSkeleton() { return meshDataProxy.skeleton; }
 	std::string currentAnimation;
+	std::string nextAnimation;
 	float currentAnimationTime = 0.f;
 
 	bool castsShadow = true;

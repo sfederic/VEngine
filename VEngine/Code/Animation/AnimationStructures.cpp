@@ -19,7 +19,7 @@ float Animation::GetFinalTime()
 	return highestTime;
 }
 
-void Animation::Interpolate(float t, Joint& joint, Skeleton* skeleton)
+void Animation::Interpolate(float t, Joint& joint, Skeleton* skeleton, Animation* animToBlendTo, float blendPercent)
 {
 	if (!isPlaying)
 	{
@@ -37,12 +37,11 @@ void Animation::Interpolate(float t, Joint& joint, Skeleton* skeleton)
 			float lerpPercent = (t - jointFrames[i].time) / (jointFrames[i + 1].time - jointFrames[i].time);
 
 			XMVECTOR currentPos = XMLoadFloat3(&jointFrames[i].pos);
-			XMVECTOR nextPos = XMLoadFloat3(&jointFrames[i + 1].pos);
-
 			XMVECTOR currentScale = XMLoadFloat3(&jointFrames[i].scale);
-			XMVECTOR nextScale = XMLoadFloat3(&jointFrames[i + 1].scale);
-
 			XMVECTOR currentRot = XMLoadFloat4(&jointFrames[i].rot);
+			
+			XMVECTOR nextPos = XMLoadFloat3(&jointFrames[i + 1].pos);
+			XMVECTOR nextScale = XMLoadFloat3(&jointFrames[i + 1].scale);
 			XMVECTOR nextRot = XMLoadFloat4(&jointFrames[i + 1].rot);
 
 			XMVECTOR lerpedPos = XMVectorLerp(currentPos, nextPos, lerpPercent);
@@ -51,6 +50,36 @@ void Animation::Interpolate(float t, Joint& joint, Skeleton* skeleton)
 			XMVECTOR zero = XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f);
 
 			joint.currentPose = XMMatrixAffineTransformation(lerpedScale, zero, lerpedRot, lerpedPos);
+
+			if (animToBlendTo != nullptr)
+			{
+				auto interpolateFrameIt = animToBlendTo->frames.find(joint.index);
+				if (interpolateFrameIt != animToBlendTo->frames.end())
+				{
+					std::vector<AnimFrame>& interpolateFrames = interpolateFrameIt->second;
+
+					AnimFrame& interpFrame = interpolateFrames.back();
+
+					if (interpolateFrames.size() > i)
+					{
+						interpFrame = interpolateFrames[i];
+					}
+
+					if (interpFrame.time < t)
+					{
+						XMVECTOR nextAnimPos = XMLoadFloat3(&interpFrame.pos);
+						XMVECTOR nextAnimScale = XMLoadFloat3(&interpFrame.scale);
+						XMVECTOR nextAnimRot = XMLoadFloat4(&interpFrame.rot);
+
+						XMVECTOR lerpedPos = XMVectorLerp(currentPos, nextAnimPos, blendPercent);
+						XMVECTOR lerpedScale = XMVectorLerp(currentScale, nextAnimScale, blendPercent);
+						XMVECTOR lerpedRot = XMQuaternionSlerp(currentRot, nextAnimRot, blendPercent);
+						XMVECTOR zero = XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f);
+
+						joint.currentPose = XMMatrixAffineTransformation(lerpedScale, zero, lerpedRot, lerpedPos);
+					}
+				}
+			}
 
 			XMMATRIX endPose = joint.currentPose;
 			int parentIndex = joint.parentIndex;
