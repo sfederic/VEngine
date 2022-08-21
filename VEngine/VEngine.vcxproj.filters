@@ -566,6 +566,9 @@
     <ClCompile Include="Code\Render\PixelShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Animation\AnimationBlend.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -1082,6 +1085,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Animation\AnimationBlend.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

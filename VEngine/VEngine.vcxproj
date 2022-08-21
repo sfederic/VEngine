@@ -118,6 +118,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Code\Actors\CameraActor.cpp" />
+    <ClCompile Include="Code\Animation\AnimationBlend.cpp" />
     <ClCompile Include="Code\Editor\ActorTreeWidget.cpp" />
     <ClCompile Include="Code\Editor\ImGuizmo\ImSequencer.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
@@ -265,6 +266,7 @@
     <ClCompile Include="Code\Render\Texture2D.cpp" />
     <ClCompile Include="Code\VFunctionSystem.cpp" />
     <ClCompile Include="Code\Actors\TestActor.cpp" />
+    <ClInclude Include="Code\Animation\AnimationBlend.h" />
     <ClInclude Include="Code\Actors\CameraActor.h" />
     <ClInclude Include="Code\Asset\AssetFileExtensions.h" />
     <ClInclude Include="Code\Asset\AssetPaths.h" />
