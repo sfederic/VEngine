@@ -265,6 +265,7 @@
     <ClCompile Include="Code\Render\Texture2D.cpp" />
     <ClCompile Include="Code\VFunctionSystem.cpp" />
     <ClCompile Include="Code\Actors\TestActor.cpp" />
+    <ClInclude Include="Code\Animation\AnimationBlend.h" />
     <ClInclude Include="Code\Actors\CameraActor.h" />
     <ClInclude Include="Code\Asset\AssetFileExtensions.h" />
     <ClInclude Include="Code\Asset\AssetPaths.h" />
