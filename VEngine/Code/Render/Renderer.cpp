@@ -1270,7 +1270,7 @@ void AnimateSkeletalMesh(MeshComponent* mesh)
 					auto nextAnimIt = skeleton->animations.find(mesh->nextAnimation);
 					if (nextAnimIt != skeleton->animations.end())
 					{
-						anim.Interpolate(mesh->currentAnimationTime, joint, skeleton, &nextAnimIt->second, 50.f);
+						anim.Interpolate(mesh->currentAnimationTime, joint, skeleton, &nextAnimIt->second, 0.5f);
 					}
 				}
 				else
