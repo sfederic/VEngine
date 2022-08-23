@@ -34,11 +34,13 @@ struct Animation
 
 	float GetStartTime(int jointIndex)
 	{
+		if (frames[jointIndex].empty()) return 0.f;
 		return frames[jointIndex].front().time;
 	}
 
 	float GetEndTime(int jointIndex)
 	{
+		if (frames[jointIndex].empty()) return 0.f;
 		return frames[jointIndex].back().time;
 	}
 

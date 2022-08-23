@@ -29,6 +29,8 @@ void Animation::Interpolate(float t, Joint& joint, Skeleton* skeleton, Animation
 	//get anim frames connected to joint
 	std::vector<AnimFrame>& jointFrames = frames[joint.index];
 
+	if (jointFrames.empty()) return;
+
 	for (size_t i = 0; i < (jointFrames.size() - 1); i++)
 	{
 		if (t >= jointFrames[i].time && t <= jointFrames[i + 1].time)
