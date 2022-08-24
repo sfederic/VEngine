@@ -299,7 +299,7 @@ void SpawnActor(Transform& transform)
 		//different from the click position in world.
 		actor->SetTransform(transform);
 
-		std::string newActorName = spawnSystem->GetName() + std::to_string(spawnSystem->GetNumActors());
+		std::string newActorName = spawnSystem->GetName() + std::to_string(spawnSystem->GetNumActors() - 1);
 		actor->SetName(newActorName);
 
 		debugMenu.AddNotification(VString::wformat(
