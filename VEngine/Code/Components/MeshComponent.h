@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include <memory>
 #include "SpatialComponent.h"
 #include "ComponentSystem.h"
 #include "Render/RenderTypes.h"
@@ -15,8 +14,6 @@ struct MeshComponent : SpatialComponent
 {
 	COMPONENT_SYSTEM(MeshComponent)
 
-	//Vertex and index buffers linked to a mesh filename to copy over to new PSOs
-	static inline std::unordered_map<std::string, std::unique_ptr<MeshBuffers>> existingMeshBuffers;
 	//@Todo: need to figure out how to call this in World::Cleanup() because meshcomponent::create()
 	//is called once on world load.
 	static void ResetMeshBuffers();

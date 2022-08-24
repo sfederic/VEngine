@@ -15,6 +15,9 @@
 #include "Render/VertexShader.h"
 #include "Render/PixelShader.h"
 
+//Vertex and index buffers linked to a mesh filename to copy over to new PSOs
+std::unordered_map<std::string, std::unique_ptr<MeshBuffers>> existingMeshBuffers;
+
 void MeshComponent::ResetMeshBuffers()
 {
 	existingMeshBuffers.clear();
