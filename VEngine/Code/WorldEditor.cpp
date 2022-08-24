@@ -175,7 +175,8 @@ void SaveWorld()
 
 void DeleteActor()
 {
-	if (Input::GetKeyUp(Keys::Delete))
+	if (Input::GetKeyUp(Keys::Delete) || 
+		(Input::GetAsyncKey(Keys::Ctrl) && Input::GetKeyUp(Keys::X)))
 	{
 		switch (pickMode)
 		{
