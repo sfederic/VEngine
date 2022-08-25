@@ -80,9 +80,14 @@ void BattleSystem::EndBattle()
 
 	isBattleActive = false;
 
+	grid->ResetAllNodes();
+	grid->DisplayHideAllNodes();
 	grid = nullptr;
+
 	player = nullptr;
+
 	activeBattleUnits.clear();
+
 	currentUnitTurnIndex = 0;
 }
 
