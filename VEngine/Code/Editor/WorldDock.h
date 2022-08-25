@@ -1,19 +1,23 @@
 #pragma once
+
 #include <qdockwidget.h>
 #include <qabstractitemview.h>
 
 class ActorTreeWidget;
 class QTreeWidgetItem;
 class QLineEdit;
+class QComboBox;
 class Actor;
 
 //Holds a list of all the actors (and their parent child relationships) currently in world
 struct WorldDock : public QDockWidget
 {
+private:
 	ActorTreeWidget* actorTreeWidget = nullptr;
 	QLineEdit* actorSearchBar = nullptr;
 
-private:
+	QComboBox* actorTypeComboBox = nullptr;
+
 	QAbstractItemView::SelectionMode actorListSelectionMode =
 		QAbstractItemView::SelectionMode::SingleSelection;
 
@@ -35,4 +39,6 @@ private:
 	void SearchActors();
 	void ActorNameChanged(QTreeWidgetItem* item, int column);
 	void ActorListContextMenu(const QPoint& pos);
+
+	void ActorTypeFilterChanged(const QString& index);
 };

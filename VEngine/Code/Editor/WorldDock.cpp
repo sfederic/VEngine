@@ -1,13 +1,15 @@
 #include "vpch.h"
 #include "WorldDock.h"
-#include "ActorTreeWidget.h"
 #include <QTreeWidgetItem>
 #include <qmenu.h>
-#include "World.h"
 #include <qboxlayout.h>
+#include <qcombobox.h>
 #include <qlineedit.h>
+#include "ActorTreeWidget.h"
 #include "Actors/IActorSystem.h"
 #include "Actors/Actor.h"
+#include "Actors/ActorSystemCache.h"
+#include "World.h"
 #include "Camera.h"
 #include "WorldEditor.h"
 #include "Log.h"
@@ -20,6 +22,16 @@ WorldDock::WorldDock() : QDockWidget("World")
 	actorSearchBar = new QLineEdit(this);
 	actorSearchBar->setPlaceholderText("Search Actors...");
 	connect(actorSearchBar, &QLineEdit::textChanged, this, &WorldDock::SearchActors);
+
+	//System filter combobox
+	actorTypeComboBox = new QComboBox(this);
+	actorTypeComboBox->addItem("All");
+	for (std::string& actorSystemName : actorSystemCache.GetAllActorSystemNames())
+	{
+		actorTypeComboBox->addItem(QString::fromStdString(actorSystemName));
+	}
+	connect(actorTypeComboBox, static_cast<void(QComboBox::*)(const QString&)>(&QComboBox::currentIndexChanged),
+		this, &WorldDock::ActorTypeFilterChanged);
 
 	//Actor Tree widget
 	actorTreeWidget = new ActorTreeWidget(this);
@@ -40,6 +52,7 @@ WorldDock::WorldDock() : QDockWidget("World")
 	//Dock Layout
 	auto vLayout = new QVBoxLayout(this);
 	vLayout->addWidget(actorSearchBar);
+	vLayout->addWidget(actorTypeComboBox);
 	vLayout->addWidget(actorTreeWidget);
 
 	auto worldWidget = new QWidget(this);
@@ -143,6 +156,32 @@ void WorldDock::ActorListContextMenu(const QPoint& pos)
 	actorListMenu.addAction("Clear Selection", actorTreeWidget, &QTreeWidget::clearSelection);
 
 	actorListMenu.exec(globalPos);
+}
+
+void WorldDock::ActorTypeFilterChanged(const QString& index)
+{
+	//Set all actors
+	if (index == "All")
+	{
+		PopulateWorldActorList();
+		return;
+	}
+
+	//Populate world actor list based on actor type
+
+	actorTreeWidget->clear();
+	actorTreeWidget->blockSignals(true);
+
+	IActorSystem* actorSystem = actorSystemCache.Get(index.toStdString());
+
+	for (Actor* actor : actorSystem->GetActorsAsBaseClass())
+	{
+		auto item = new QTreeWidgetItem(actorTreeWidget);
+		item->setText(0, QString::fromStdString(actor->GetName()));
+		item->setFlags(item->flags() | Qt::ItemIsEditable);
+	}
+
+	actorTreeWidget->blockSignals(false);
 }
 
 void WorldDock::SelectActorInList()
