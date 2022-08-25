@@ -10,7 +10,7 @@ AudioComponent::AudioComponent()
 
 void AudioComponent::Start()
 {
-    if (playOnStart)
+    if (playOnStart && !audioFilename.empty())
     {
         channelID = audioSystem.PlayAudio(audioFilename, loop);
     }
