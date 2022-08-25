@@ -46,10 +46,19 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 	}
 
 	//INIT MEMORY
-
-	auto owner = World::GetActorByName(actorAquiredFromName);
-
 	auto memory = new Memory();
+
+	//For spawning meshes attribute to a memory when remembering it
+	Actor* owner = nullptr;
+	if (!actorAquiredFromName.empty())
+	{
+		owner = World::GetActorByName(actorAquiredFromName);
+
+		memory->spawnActorSystem = owner->GetActorSystem();
+
+		auto meshes = owner->GetComponentsOfType<MeshComponent>();
+		memory->meshName = meshes[0]->meshComponentData.filename;
+	}
 
 	memory->name = VString::wstos(memoryName);
 	memory->description = VString::wstos(memoryDescription);
@@ -59,11 +68,6 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 
 	memory->hourAquired = GameInstance::currentHour;
 	memory->minuteAquired = GameInstance::currentMinute;
-
-	memory->spawnActorSystem = owner->GetActorSystem();
-
-	auto meshes = owner->GetComponentsOfType<MeshComponent>();
-	memory->meshName = meshes[0]->meshComponentData.filename;
 
 	memory->imageFile = this->imageFile;
 
