@@ -55,7 +55,7 @@ void InteractTrigger::Tick(float deltaTime)
 
 				if (memoryComponent->addOnInteract)
 				{
-					if (memoryComponent->CreateMemory(targetActorName))
+					if (!memoryComponent->CreateMemory(targetActorName))
 					{
 						//Bit of a shit check on whether to use interact or known text
 						if (!interactKnown.empty())
