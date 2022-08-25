@@ -229,23 +229,30 @@ void DialogueDock::LoadDialogueFile()
 
 		//Condition arg loading
 		auto foundFunction = functionSystem->FindFunction(VString::wstos(conditionText));
-		auto args = foundFunction->GetArgTypes();
-		int itemIndex = 0;
-		for (auto& arg : args)
+		if (foundFunction)
 		{
-			if (arg == typeid(std::string))
+			auto args = foundFunction->GetArgTypes();
+			int itemIndex = 0;
+			for (auto& arg : args)
 			{
-				is.getline(line, 1024);
-				conditionArgText.emplace_back(line);
-			}
+				if (arg == typeid(std::string))
+				{
+					is.getline(line, 1024);
+					conditionArgText.emplace_back(line);
+				}
 
-			itemIndex++;
+				itemIndex++;
+			}
+		}
+		else
+		{
+			is.getline(line, 1024);
+			conditionArgText.emplace_back(line);
 		}
 
 		is.getline(line, 1024);
 		text.assign(line);		
 		
-
 		//Populate widget items
 		auto item = new QTreeWidgetItem(dialogueTree);
 		PopulateTreeItem(item);
@@ -276,9 +283,10 @@ void DialogueDock::LoadDialogueFile()
 		}
 
 		//Condition Arg widgets
+		if (foundFunction)
 		{
-			itemIndex = 0;
-			for (auto& type : args)
+			int itemIndex = 0;
+			for (auto& type : foundFunction->GetArgTypes())
 			{
 				if (type == typeid(std::string))
 				{
@@ -298,6 +306,10 @@ void DialogueDock::LoadDialogueFile()
 void DialogueDock::SetConditionArgWidgets(const QString& conditionName)
 {
 	auto foundFunction = functionSystem->FindFunction(conditionName.toStdString());
+	if (foundFunction == nullptr)
+	{
+		return;
+	}
 
 	int nameIndex = 0;
 
