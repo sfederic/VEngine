@@ -5,7 +5,7 @@ Player
  Position
 4 0 1
  Rotation
-0 0.707107 0 -0.707107
+-0 -2.08616e-07 -0 1
  Scale
 0.999996 1 0.999996
 Name
@@ -33,6 +33,178 @@ UID
 3578676722
 startBattleOnLoad
 0
+next
+EntranceTrigger
+1
+ Enabled
+1
+ Position
+0 0 3
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Entrance Active
+1
+Level Name
+church_store_room.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Text
+Enter
+UID
+3256536706
+next
+NPC
+3
+ Enabled
+1
+ Position
+4 0 5
+ Rotation
+0 0.707279 0 0.706935
+ Scale
+1 1 1
+Attack Points
+1
+Attack Range
+1
+Battle State
+fight
+Destruct
+1
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+Move along priest.
+Move Points
+1
+Move Speed
+3
+Name
+NPC0
+Obstacle
+0
+UID
+2644931087
+actorToFocusOn
+
+battleStartText
+
+deathText
+
+disableGridInteract
+0
+interactKnownText
+
+numOfAttacks
+1
+spawnText
+
+next
+ Enabled
+1
+ Position
+5 0 5
+ Rotation
+-0 -0.706812 -0 0.707401
+ Scale
+1.00001 1 1.00001
+Attack Points
+1
+Attack Range
+1
+Battle State
+fight
+Destruct
+1
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+Move Points
+1
+Move Speed
+3
+Name
+NPC1
+Obstacle
+0
+UID
+3327798308
+actorToFocusOn
+
+battleStartText
+
+deathText
+
+disableGridInteract
+0
+interactKnownText
+
+numOfAttacks
+1
+spawnText
+
+next
+ Enabled
+1
+ Position
+3 0 0
+ Rotation
+-0 0.000243583 -0 1
+ Scale
+1 1 1
+Attack Points
+1
+Attack Range
+1
+Battle State
+fight
+Destruct
+1
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+Move Points
+1
+Move Speed
+3
+Name
+Doorman
+Obstacle
+0
+UID
+2203687179
+actorToFocusOn
+
+battleStartText
+
+deathText
+
+disableGridInteract
+0
+interactKnownText
+
+numOfAttacks
+1
+spawnText
+
 next
 MeshActor
 22
@@ -312,15 +484,15 @@ next
  Enabled
 1
  Position
-4 0 4
+-0.49 0.5 3
  Rotation
-0 0 0 1
+0.707229 -0.000122084 0.706985 -0.000122045
  Scale
-1 1 1
+1 0.99998 0.99998
 Name
 MeshActor21
 UID
-4090508731
+4059144598
 next
 PointLightActor
 2
@@ -417,6 +589,42 @@ SpotLightActor4
 UID
 3462882972
 next
+DialogueTrigger
+2
+ Enabled
+1
+ Position
+4.5 0 5
+ Rotation
+-0 0 -0 1
+ Scale
+3 1 3
+Name
+DialogueTrigger0
+UID
+2681322935
+playOnSpawn
+0
+playOnTriggerOverlap
+1
+next
+ Enabled
+1
+ Position
+4 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+3 1 1.5
+Name
+DialogueTrigger1
+UID
+3499730695
+playOnSpawn
+0
+playOnTriggerOverlap
+1
+next
 CameraComponent
 1
 659028996
@@ -427,6 +635,91 @@ Far Z
 1000
 Near Z
 0.01
+next
+TimeComponent
+4
+3256536706
+Time
+ Enabled
+1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+next
+2644931087
+Time
+ Enabled
+1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+next
+3327798308
+Time
+ Enabled
+1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+next
+2203687179
+Time
+ Enabled
+1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+next
+QuestComponent
+3
+2644931087
+Quest
+ Enabled
+1
+Quest Name
+
+next
+3327798308
+Quest
+ Enabled
+1
+Quest Name
+
+next
+2203687179
+Quest
+ Enabled
+1
+Quest Name
+
 next
 AudioComponent
 1
@@ -449,15 +742,154 @@ Pitch
 Play On Start
 1
 Volume
--0.0503844
+-0.0665072
 next
 DialogueComponent
-1
+6
 659028996
 Dialogue
  Enabled
 1
 File
+
+next
+2644931087
+Dialogue
+ Enabled
+1
+File
+
+next
+3327798308
+Dialogue
+ Enabled
+1
+File
+
+next
+2203687179
+Dialogue
+ Enabled
+1
+File
+
+next
+2681322935
+Dialogue
+ Enabled
+1
+File
+test_convo.dialog
+next
+3499730695
+Dialogue
+ Enabled
+1
+File
+church/doorman.dialog
+next
+MemoryComponent
+6
+2644931087
+Memory
+ Enabled
+1
+Add On Interact
+0
+Condition
+
+Condition Value
+
+Image File
+
+Memory Desc
+
+Memory Name
+
+next
+2644931087
+MemoryOnDeath
+ Enabled
+1
+Add On Interact
+0
+Condition
+
+Condition Value
+
+Image File
+
+Memory Desc
+
+Memory Name
+
+next
+3327798308
+Memory
+ Enabled
+1
+Add On Interact
+0
+Condition
+
+Condition Value
+
+Image File
+
+Memory Desc
+
+Memory Name
+
+next
+3327798308
+MemoryOnDeath
+ Enabled
+1
+Add On Interact
+0
+Condition
+
+Condition Value
+
+Image File
+
+Memory Desc
+
+Memory Name
+
+next
+2203687179
+Memory
+ Enabled
+1
+Add On Interact
+0
+Condition
+
+Condition Value
+
+Image File
+
+Memory Desc
+
+Memory Name
+
+next
+2203687179
+MemoryOnDeath
+ Enabled
+1
+Add On Interact
+0
+Condition
+
+Condition Value
+
+Image File
+
+Memory Desc
+
+Memory Name
 
 next
 EmptyComponent
@@ -469,12 +901,12 @@ Root
  Pos
 4 0 1
  Rot
-0 0.707107 0 -0.707107
+-0 -2.08616e-07 -0 1
  Scale
 0.999996 1 0.999996
 next
 MeshComponent
-23
+26
 659028996
 Mesh
  Enabled
@@ -482,7 +914,148 @@ Mesh
  Pos
 0 0 0
  Rot
-0 0.707107 -0 0.707107
+0 1 0 2.98026e-08
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.fbx
+Static
+1
+next
+2644931087
+Mesh
+ Enabled
+1
+ Pos
+4 0 5
+ Rot
+0 0.707279 0 0.706935
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.fbx
+Static
+1
+next
+3327798308
+Mesh
+ Enabled
+1
+ Pos
+5 0 5
+ Rot
+-0 -0.706812 -0 0.707401
+ Scale
+1.00001 1 1.00001
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.fbx
+Static
+1
+next
+2203687179
+Mesh
+ Enabled
+1
+ Pos
+3 0 0
+ Rot
+-0 0.000243583 -0 1
  Scale
 1 1 1
 Casts Shadow
@@ -1509,16 +2082,16 @@ Furniture/chair.fbx
 Static
 1
 next
-4090508731
+4059144598
 Mesh
  Enabled
 1
  Pos
-4 0 4
+-0.49 0.5 3
  Rot
-0 0 0 1
+0.707229 -0.000122084 0.706985 -0.000122045
  Scale
-1 1 1
+1 0.99998 0.99998
 Casts Shadow
 1
 Grid Obstacle
@@ -1538,7 +2111,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+test_door_texture.png
 M_Use Texture
 1
 M_UvOffset
@@ -1552,7 +2125,7 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-double_animation_test_cylinder.fbx
+plane.fbx
 Static
 1
 next
@@ -1604,6 +2177,53 @@ Mesh
 node.fbx
 Static
 1
+next
+BoxTriggerComponent
+3
+3256536706
+Trigger
+ Enabled
+1
+ Pos
+0 0 3
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+next
+2681322935
+BoxTrigger
+ Enabled
+1
+ Pos
+4.5 0 5
+ Rot
+-0 0 -0 1
+ Scale
+3 1 3
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+next
+3499730695
+BoxTrigger
+ Enabled
+1
+ Pos
+4 0 0
+ Rot
+-0 0 -0 1
+ Scale
+3 1 1.5
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
 next
 PointLightComponent
 2
@@ -1737,5 +2357,16 @@ LightEnabled
 1
 Spot Angle
 70
+next
+ConditionComponent
+1
+3256536706
+Condition
+ Enabled
+1
+condition
+
+conditionArg
+
 next
 end

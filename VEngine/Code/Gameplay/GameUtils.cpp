@@ -52,7 +52,7 @@ namespace GameUtils
 	{
 		activeCamera->targetActor = newTarget;
 		GetPlayer()->nextCameraFOV = 30.f;
-	}	
+	}
 	
 	void SetActiveCameraTargetAndZoomOut(Actor* newTarget)
 	{
