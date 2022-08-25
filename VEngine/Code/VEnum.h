@@ -10,6 +10,8 @@ private:
 	std::string value;
 
 public:
+	~VEnum() {}
+
 	std::string GetValue() { return value; }
 
 	void SetValue(const std::string newValue);
