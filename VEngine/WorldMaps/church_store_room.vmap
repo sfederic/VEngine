@@ -1,0 +1,1014 @@
+AudioActor
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+AudioActor0
+UID
+409180099
+next
+Player
+1
+ Enabled
+1
+ Position
+1 0 2
+ Rotation
+0 0.707106 0 0.707107
+ Scale
+1 1 1
+Name
+Player0
+UID
+459649572
+next
+Grid
+1
+ Enabled
+0
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Name
+Grid0
+Size X
+5
+Size Y
+5
+UID
+1336188193
+startBattleOnLoad
+0
+next
+EntranceTrigger
+1
+ Enabled
+1
+ Position
+1 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Entrance Active
+1
+Level Name
+church.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Text
+Enter Church Main Hall
+UID
+4000682586
+next
+MeshActor
+9
+ Enabled
+1
+ Position
+2 -0.5 2
+ Rotation
+-0 0 -0 1
+ Scale
+5 1 5
+Name
+plane0
+UID
+3555099401
+next
+ Enabled
+1
+ Position
+0.5 0.5 4
+ Rotation
+-0 0 -0 1
+ Scale
+2 2 2
+Name
+plane1
+UID
+2322183082
+next
+ Enabled
+1
+ Position
+3.5 0.5 4
+ Rotation
+-0 -2.0067e-07 -0 1
+ Scale
+2 2 2
+Name
+shelf2
+UID
+195669511
+next
+ Enabled
+1
+ Position
+3.5 0.5 0
+ Rotation
+0 1 0 1.56958e-07
+ Scale
+2 2 2
+Name
+plane3
+UID
+3338200199
+next
+ Enabled
+1
+ Position
+2 1 4.5
+ Rotation
+0 1 0 -0.000172398
+ Scale
+2.5 1.5 1
+Name
+plane4
+UID
+2892056817
+next
+ Enabled
+1
+ Position
+4.5 1 2
+ Rotation
+-0 -0.706985 -0 0.707229
+ Scale
+2.50003 1.5 1
+Name
+plane5
+UID
+3653023755
+next
+ Enabled
+1
+ Position
+-0.5 1 2
+ Rotation
+0 0.707229 0 0.706985
+ Scale
+2.50004 1.5 0.999996
+Name
+plane6
+UID
+4114092712
+next
+ Enabled
+1
+ Position
+2 1 -0.5
+ Rotation
+-0 0.000416601 -0 1
+ Scale
+2.50002 1.5 1
+Name
+plane7
+UID
+720614790
+next
+ Enabled
+1
+ Position
+1 0.5 -0.49
+ Rotation
+0 0 1 -0.000172549
+ Scale
+1 1 1
+Name
+plane8
+UID
+500800205
+next
+DirectionalLightActor
+1
+ Enabled
+1
+ Position
+2.00138 4 1.99896
+ Rotation
+0.353648 0.454414 -0.541614 0.61245
+ Scale
+1 1 1
+Name
+DirectionalLightActor0
+UID
+3763643380
+next
+InteractTrigger
+1
+ Enabled
+1
+ Position
+3.5 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+2 1 1
+Interact Text
+
+Name
+InteractTrigger0
+UID
+1359948754
+interactKnown
+Fire already known.
+overlapText
+Memorise funeral fire technique?
+soundEffect
+
+targetActorName
+shelf2
+next
+ParticleSystem
+2
+ Enabled
+1
+ Position
+0 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+ParticleSystem0
+UID
+1131184540
+next
+ Enabled
+1
+ Position
+0 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+ParticleSystem1
+UID
+1556334715
+next
+CameraComponent
+1
+459649572
+Camera
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
+next
+TimeComponent
+1
+4000682586
+Time
+ Enabled
+1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+next
+AudioComponent
+2
+409180099
+Audio
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Audio Filename
+xeno.wav
+Loop
+1
+Pitch
+0.88
+Play On Start
+1
+Volume
+1
+next
+459649572
+StepSounds
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Audio Filename
+step.wav
+Loop
+1
+Pitch
+1
+Play On Start
+1
+Volume
+-0.0654421
+next
+DialogueComponent
+1
+459649572
+Dialogue
+ Enabled
+1
+File
+
+next
+MemoryComponent
+1
+1359948754
+MemoryComponent
+ Enabled
+1
+Add On Interact
+1
+Condition
+
+Condition Value
+
+Image File
+
+Memory Desc
+Aden now knows how to light the funeral fire
+Memory Name
+Funeral Fire
+next
+EmptyComponent
+1
+459649572
+Root
+ Enabled
+1
+ Pos
+1 0 2
+ Rot
+0 0.707106 0 0.707107
+ Scale
+1 1 1
+next
+MeshComponent
+10
+459649572
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 1 0 4.47035e-07
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.fbx
+Static
+1
+next
+3555099401
+Mesh
+ Enabled
+1
+ Pos
+2 -0.5 2
+ Rot
+-0 0 -0 1
+ Scale
+5 1 5
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wood.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.fbx
+Static
+1
+next
+2322183082
+Mesh
+ Enabled
+1
+ Pos
+0.5 0.5 4
+ Rot
+-0 0 -0 1
+ Scale
+2 2 2
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+crate.jpg
+M_Use Texture
+1
+M_UvOffset
+0.5 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+2 2
+Mesh
+cabinet.fbx
+Static
+1
+next
+195669511
+Mesh
+ Enabled
+1
+ Pos
+3.5 0.5 4
+ Rot
+-0 -2.0067e-07 -0 1
+ Scale
+2 2 2
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+crate.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+2 2
+Mesh
+cabinet.fbx
+Static
+1
+next
+3338200199
+Mesh
+ Enabled
+1
+ Pos
+3.5 0.5 0
+ Rot
+0 1 0 1.56958e-07
+ Scale
+2 2 2
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+crate.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+2 2
+Mesh
+cabinet.fbx
+Static
+1
+next
+2892056817
+Mesh
+ Enabled
+1
+ Pos
+2 1 4.5
+ Rot
+0 1 0 -0.000172398
+ Scale
+2.5 1.5 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wood.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.fbx
+Static
+1
+next
+3653023755
+Mesh
+ Enabled
+1
+ Pos
+4.5 1 2
+ Rot
+-0 -0.706985 -0 0.707229
+ Scale
+2.50003 1.5 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wood.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.fbx
+Static
+1
+next
+4114092712
+Mesh
+ Enabled
+1
+ Pos
+-0.5 1 2
+ Rot
+0 0.707229 0 0.706985
+ Scale
+2.50004 1.5 0.999996
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wood.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.fbx
+Static
+1
+next
+720614790
+Mesh
+ Enabled
+1
+ Pos
+2 1 -0.5
+ Rot
+-0 0.000416601 -0 1
+ Scale
+2.50002 1.5 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wood.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.fbx
+Static
+1
+next
+500800205
+Mesh
+ Enabled
+1
+ Pos
+1 0.5 -0.49
+ Rot
+0 0 1 -0.000172549
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test_door_texture.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.fbx
+Static
+1
+next
+InstanceMeshComponent
+1
+1336188193
+NodeMesh
+ Enabled
+0
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Instance
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.fbx
+Static
+1
+next
+BoxTriggerComponent
+2
+4000682586
+Trigger
+ Enabled
+1
+ Pos
+1 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+next
+1359948754
+Trigger
+ Enabled
+1
+ Pos
+3.5 0 3
+ Rot
+-0 0 -0 1
+ Scale
+2 1 1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+next
+DirectionalLightComponent
+1
+3763643380
+DirectionalLight
+ Enabled
+1
+ Pos
+2.00138 4 1.99896
+ Rot
+0.353648 0.454414 -0.541614 0.61245
+ Scale
+1 1 1
+Colour
+1 1 1 1
+LightEnabled
+1
+ShadowMap Size
+15
+next
+ParticleEmitter
+2
+1131184540
+Emitter
+ Enabled
+1
+ Pos
+0 0 3
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Direction
+0.1 1 0.1
+Lifetime
+0.75 1
+Move Speed
+0.5 0.75
+Rotate
+0 10
+Rotate Speed
+0 0
+Spawn Radius
+0 0.2
+Spawn Rate
+0.2 0.3
+Texture
+Particle/fire.png
+next
+1556334715
+Emitter
+ Enabled
+1
+ Pos
+0 0 3
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Direction
+0.1 1 0.1
+Lifetime
+0.75 1
+Move Speed
+0.5 1
+Rotate
+0 10
+Rotate Speed
+0 0
+Spawn Radius
+0 0.1
+Spawn Rate
+0.3 0.3
+Texture
+Particle/smoke.png
+next
+ConditionComponent
+1
+4000682586
+Condition
+ Enabled
+1
+condition
+
+conditionArg
+
+next
+end
