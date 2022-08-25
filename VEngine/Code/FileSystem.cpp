@@ -288,12 +288,8 @@ void FileSystem::ResetWorldState()
 	//Deselect any existing actors, because TransformGizmo will stay at previous positions.
 	WorldEditor::DeselectAll();
 
-	//Clear all commands
-	commandSystem.commands.clear();
-
-	//Clear input as well (can carry over to new levels if not cleared)
+	commandSystem.Reset();
 	Input::Reset();
-
 	battleSystem.Reset();
 
 	//Set player camera on world change as active if in-gameplay
