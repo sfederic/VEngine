@@ -111,7 +111,7 @@ Properties EntranceTrigger::GetProps()
 {
     auto props = Actor::GetProps();
     props.title = "EntranceTrigger";
-    props.Add("Level Name", &levelToMoveTo);
+    props.Add("Level Name", &levelToMoveTo).autoCompletePath = "/WorldMaps/";
     props.Add("Entrance Active", &isEntranceActive);
     props.Add("Open Text", &openText);
     props.Add("Locked Text", &lockedText);
