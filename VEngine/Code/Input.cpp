@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "Input.h"
-#include <set>
 
 std::set<Keys> currentDownKeys;
 std::set<Keys> currentUpKeys;
@@ -32,6 +31,7 @@ namespace Input
 	void SetKeyDown(Keys key)
 	{
 		currentDownKeys.insert(key);
+		currentUpKeys.erase(key);
 	}
 
 	void SetKeyUp(Keys key)
