@@ -62,11 +62,27 @@ void QtEditor::SetMousePos()
     viewportMouseY = mousePos.y();
 }
 
+//For first person camera controls during gameplay
+void QtEditor::SetMousePosGameplay()
+{
+    viewportWidth = mainWindow->renderView->size().width();
+    viewportHeight = mainWindow->renderView->size().height();
+
+    QPoint mousePos = mainWindow->renderView->mapFromGlobal(QCursor::pos());
+    viewportMouseX = mousePos.x();
+    viewportMouseY = mousePos.y();
+
+    centerOffsetX = (((viewportWidth / 2) - viewportMouseX));
+    centerOffsetY = (((viewportHeight / 2) - viewportMouseY));
+
+    QPoint glob = mainWindow->renderView->mapToGlobal(QPoint(viewportWidth / 2, viewportHeight / 2));
+    QCursor::setPos(glob);
+}
+
 void QtEditor::Log(const std::wstring logMessage)
 {
     mainWindow->logDock->Print(logMessage);
 }
-
 
 void QtEditor::Log(const std::string logMessage)
 {

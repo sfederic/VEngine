@@ -15,9 +15,13 @@ struct IEditor
 	int viewportWidth = 0;
 	int viewportHeight = 0;
 
+	int centerOffsetX = 0;
+	int centerOffsetY = 0;
+
 	virtual void Init(int argc, char* argv[]) = 0;
 	virtual void Tick() = 0;
 	virtual void SetMousePos() = 0;
+	virtual void SetMousePosGameplay() {}
 	virtual void Log(const std::wstring logMessage) = 0;
 	virtual void Log(const std::string logMessage) = 0;
 	virtual void SetActorProps(Actor* actor) = 0;
