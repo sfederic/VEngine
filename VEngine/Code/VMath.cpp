@@ -5,6 +5,7 @@
 #include <random>
 #include "Actors/Actor.h"
 #include "Camera.h"
+#include "Components/CameraComponent.h"
 #include "Render/RenderTypes.h"
 
 namespace VMath

@@ -13,6 +13,7 @@
 #include "VMath.h"
 #include "ShaderSystem.h"
 #include "Camera.h"
+#include "Components/CameraComponent.h"
 #include "UI/UISystem.h"
 #include "Components/MeshComponent.h"
 #include "Components/BoxTriggerComponent.h"

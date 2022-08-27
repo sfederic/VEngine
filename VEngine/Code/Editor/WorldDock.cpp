@@ -11,6 +11,7 @@
 #include "Actors/ActorSystemCache.h"
 #include "World.h"
 #include "Camera.h"
+#include "Components/CameraComponent.h"
 #include "WorldEditor.h"
 #include "Log.h"
 #include "Editor.h"

@@ -9,6 +9,7 @@
 #include "FileSystem.h"
 #include "GameInstance.h"
 #include "Camera.h"
+#include "Components/CameraComponent.h"
 #include "UI/UISystem.h"
 #include "UI/ScreenFadeWidget.h"
 #include "UI/Game/MemoryTransferWidget.h"

@@ -12,6 +12,7 @@
 #include "Core.h"
 #include "Gameplay/GameUtils.h"
 #include "Camera.h"
+#include "Components/CameraComponent.h"
 #include "Actors/Game/Player.h"
 #include "VString.h"
 #include "Input.h"
