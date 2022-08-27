@@ -23,6 +23,7 @@ namespace Input
 		currentUpKeys.clear();
 
 		mouseWheelUp = false;
+		mouseWheelDown = false;
 		mouseLeftUp = false;
 		mouseRightUp = false;
 		mouseMiddleUp = false;
