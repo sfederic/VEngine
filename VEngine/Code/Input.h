@@ -1,5 +1,7 @@
 #pragma once
 
+#include <set>
+
 enum class Keys
 {
 	None = 0,
@@ -74,6 +76,7 @@ namespace Input
 	bool GetKeyDown(Keys key);
 	bool GetKeyUp(Keys key);
 	bool GetAnyKeyDown();
+	bool GetAnyKeyUp();
 	bool GetAsyncKey(Keys key);
 
 	void SetLeftMouseUp();
@@ -90,6 +93,9 @@ namespace Input
 	bool GetMouseMiddleUp();
 	bool GetMouseMiddleDown();
 
-	unsigned int GetNumCurrentKeysDown();
-	Keys GetLastPressedKeyDown();
+	size_t GetNumCurrentKeysDown();
+	size_t GetNumCurrentKeysUp();
+
+	std::set<Keys> GetAllDownKeys();
+	std::set<Keys> GetAllUpKeys();
 }

@@ -1,8 +1,9 @@
 #include "vpch.h"
 #include "Input.h"
+#include <set>
 
-std::vector<Keys> currentDownKeys;
-std::vector<Keys> currentUpKeys;
+std::set<Keys> currentDownKeys;
+std::set<Keys> currentUpKeys;
 
 namespace Input
 {
@@ -21,7 +22,6 @@ namespace Input
 	void Reset()
 	{
 		currentUpKeys.clear();
-		currentDownKeys.clear();
 
 		mouseWheelUp = false;
 		mouseWheelDown = false;
@@ -37,48 +37,37 @@ namespace Input
 
 	void SetKeyDown(Keys key)
 	{
-		currentDownKeys.push_back(key);
+		currentDownKeys.insert(key);
 	}
 
 	void SetKeyUp(Keys key)
 	{
-		currentUpKeys.push_back(key);
+		currentUpKeys.insert(key);
+		currentDownKeys.erase(key);
 	}
 
 	bool GetKeyDown(Keys key)
 	{
 		if (blockInput) return false;
-
-		for (int i = 0; i < currentDownKeys.size(); i++)
-		{
-			if (key == currentDownKeys[i])
-			{
-				return true;
-			}
-		}
-
-		return false;
+		return currentDownKeys.find(key) != currentDownKeys.end();
 	}
 
 	bool GetKeyUp(Keys key)
 	{
 		if (blockInput) return false;
-
-		for (int i = 0; i < currentUpKeys.size(); i++)
-		{
-			if (key == currentUpKeys[i])
-			{
-				return true;
-			}
-		}
-
-		return false;
+		return currentUpKeys.find(key) != currentUpKeys.end();
 	}
 
 	bool GetAnyKeyDown()
 	{
 		if (blockInput) return false;
 		return currentDownKeys.size();
+	}
+
+	bool GetAnyKeyUp()
+	{
+		if (blockInput) return false;
+		return currentUpKeys.size();
 	}
 
 	bool GetAsyncKey(Keys key)
@@ -159,13 +148,23 @@ namespace Input
 		return mouseMiddleDown;
 	}
 
-	unsigned int GetNumCurrentKeysDown()
+	size_t GetNumCurrentKeysDown()
 	{
 		return currentDownKeys.size();
 	}
 
-	Keys GetLastPressedKeyDown()
+	size_t GetNumCurrentKeysUp()
 	{
-		return currentDownKeys.back();
+		return currentUpKeys.size();
+	}
+
+	std::set<Keys> GetAllDownKeys()
+	{
+		return currentDownKeys;
+	}
+
+	std::set<Keys> GetAllUpKeys()
+	{
+		return currentUpKeys;
 	}
 }
