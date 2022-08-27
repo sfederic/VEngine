@@ -49,7 +49,12 @@ void MemoryMenuWidget::Draw(float deltaTime)
 
 		if (!memories.empty())
 		{
-			if (Input::GetKeyUp(Keys::S))
+			if (memories.size() == 1)
+			{
+				selectedMemory = memories.at(0);
+				GameUtils::GetPlayer()->memoryNameToSpawn = selectedMemory->name;
+			}
+			else if (Input::GetKeyUp(Keys::S))
 			{
 				if (selectedMemoryIndex < memories.size() - 1)
 				{
