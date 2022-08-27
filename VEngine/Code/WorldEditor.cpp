@@ -89,7 +89,7 @@ void HandleActorPicking()
 			{
 				case WorldEditor::PickMode::Actor:
 				{
-					if (Input::GetAsyncKey(Keys::Ctrl) || pickedActors.empty())
+					if (Input::GetKeyDown(Keys::Ctrl) || pickedActors.empty())
 					{
 						pickedActors.insert(screenPickRay.hitActor);
 					}
@@ -113,7 +113,7 @@ void HandleActorPicking()
 
 void DuplicateActor()
 {
-	if (Input::GetAsyncKey(Keys::Ctrl))
+	if (Input::GetKeyDown(Keys::Ctrl))
 	{
 		if (Input::GetKeyDown(Keys::W))
 		{
@@ -164,7 +164,7 @@ void DuplicateActor()
 
 void SaveWorld()
 {
-	if (Input::GetAsyncKey(Keys::Ctrl))
+	if (Input::GetKeyDown(Keys::Ctrl))
 	{
 		if (Input::GetKeyUp(Keys::S))
 		{
@@ -176,7 +176,7 @@ void SaveWorld()
 void DeleteActor()
 {
 	if (Input::GetKeyUp(Keys::Delete) || 
-		(Input::GetAsyncKey(Keys::Ctrl) && Input::GetKeyUp(Keys::D)))
+		(Input::GetKeyDown(Keys::Ctrl) && Input::GetKeyUp(Keys::D)))
 	{
 		switch (pickMode)
 		{

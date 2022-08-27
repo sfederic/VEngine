@@ -211,7 +211,7 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 void Renderer::Tick()
 {
 	//BOUNDING BOXES HOTKEY
-	if (Input::GetAsyncKey(Keys::Ctrl))
+	if (Input::GetKeyDown(Keys::Ctrl))
 	{
 		if (Input::GetKeyUp(Keys::B))
 		{
@@ -220,7 +220,7 @@ void Renderer::Tick()
 	}
 
 	//RENDER TRIGGERS HOTKEY
-	if (Input::GetAsyncKey(Keys::Ctrl))
+	if (Input::GetKeyDown(Keys::Ctrl))
 	{
 		if (Input::GetKeyUp(Keys::T))
 		{

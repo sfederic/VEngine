@@ -18,31 +18,31 @@ void EditorCamera::Tick(float deltaTime)
 	//WASD MOVEMENT
 	if (!Console::bConsoleActive)
 	{
-		if (Input::GetAsyncKey(Keys::MouseRight))
+		if (Input::GetMouseRightDown())
 		{
 			const float moveSpeed = cameraMoveSpeed * deltaTime;
 
-			if (Input::GetAsyncKey(Keys::W))
+			if (Input::GetKeyDown(Keys::W))
 			{
 				Move(moveSpeed, forward);
 			}
-			if (Input::GetAsyncKey(Keys::S))
+			if (Input::GetKeyDown(Keys::S))
 			{
 				Move(-moveSpeed, forward);
 			}
-			if (Input::GetAsyncKey(Keys::D))
+			if (Input::GetKeyDown(Keys::D))
 			{
 				Move(moveSpeed, right);
 			}
-			if (Input::GetAsyncKey(Keys::A))
+			if (Input::GetKeyDown(Keys::A))
 			{
 				Move(-moveSpeed, right);
 			}
-			if (Input::GetAsyncKey(Keys::Q))
+			if (Input::GetKeyDown(Keys::Q))
 			{
 				Move(-moveSpeed, VMath::XMVectorUp());
 			}
-			if (Input::GetAsyncKey(Keys::E))
+			if (Input::GetKeyDown(Keys::E))
 			{
 				Move(moveSpeed, VMath::XMVectorUp());
 			}
@@ -101,7 +101,7 @@ void EditorCamera::MouseMove(int x, int y)
 
 	arcBallMovementOn = false;
 
-	if (Input::GetAsyncKey(Keys::MouseRight) && Input::GetAsyncKey(Keys::Alt))
+	if (Input::GetMouseRightDown() && Input::GetKeyDown(Keys::Ctrl))
 	{
 		//Arcball camera movement
 		//REF:https://asliceofrendering.com/camera/2019/11/30/ArcballCamera/
@@ -129,7 +129,7 @@ void EditorCamera::MouseMove(int x, int y)
 
 		SetPosition(pos);
 	}
-	else if (Input::GetAsyncKey(Keys::MouseRight))
+	else if (Input::GetMouseRightDown())
 	{
 		Pitch(dy);
 		RotateY(dx);

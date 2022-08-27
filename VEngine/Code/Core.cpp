@@ -78,7 +78,7 @@ void Core::Init()
 void Core::Tick()
 {
 	//Reset current world
-	if (Input::GetAsyncKey(Keys::Ctrl))
+	if (Input::GetKeyDown(Keys::Ctrl))
 	{
 		if (Input::GetKeyUp(Keys::R))
 		{
@@ -87,7 +87,7 @@ void Core::Tick()
 	}
 
 	//Toggle gameplay on/off
-	if (Input::GetAsyncKey(Keys::Ctrl))
+	if (Input::GetKeyDown(Keys::Ctrl))
 	{
 		if (Input::GetKeyUp(Keys::P))
 		{

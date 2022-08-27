@@ -7,7 +7,7 @@ CommandSystem commandSystem;
 
 void CommandSystem::Tick()
 {
-	if (Input::GetAsyncKey(Keys::Ctrl))
+	if (Input::GetKeyDown(Keys::Ctrl))
 	{
 		if (Input::GetKeyUp(Keys::Z))
 		{

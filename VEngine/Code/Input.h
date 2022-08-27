@@ -15,7 +15,6 @@ enum class Keys
 	ShiftRight = 0xA1,
 	Delete = 0x2E,
 	BackSpace = 0x08,
-	Alt = 0xA4,
 	//@Todo: there's all sorts of scancode shit win Win32 and keyboards that won't make this work internationally.
 	W = 'W',
 	A = 'A',
@@ -56,9 +55,6 @@ enum class Keys
 	Down = 0x28,
 	Right = 0x27,
 	Left = 0x25,
-	MouseLeft = 0x01,
-	MouseRight = 0x02,
-	MouseMiddle = 0x04
 };
 
 namespace Input
@@ -77,7 +73,6 @@ namespace Input
 	bool GetKeyUp(Keys key);
 	bool GetAnyKeyDown();
 	bool GetAnyKeyUp();
-	bool GetAsyncKey(Keys key);
 
 	void SetLeftMouseUp();
 	void SetLeftMouseDown();

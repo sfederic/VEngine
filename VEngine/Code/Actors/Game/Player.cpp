@@ -282,7 +282,7 @@ void Player::MovementInput(float deltaTime)
 
 		XMVECTOR previousPos = nextPos;
 
-		if (Input::GetAsyncKey(Keys::W))
+		if (Input::GetKeyDown(Keys::W))
 		{
 			mesh->currentAnimation = "Armature|ArmatureAction";
 
@@ -295,17 +295,17 @@ void Player::MovementInput(float deltaTime)
 			mesh->currentAnimation.clear();
 		}
 
-		if (Input::GetAsyncKey(Keys::S))
+		if (Input::GetKeyDown(Keys::S))
 		{
 			nextPos = GetPositionVector() + -GetForwardVectorV();
 			CheckNextMoveNode(previousPos);
 		}
-		if (Input::GetAsyncKey(Keys::A))
+		if (Input::GetKeyDown(Keys::A))
 		{
 			nextPos = GetPositionVector() + -GetRightVectorV();
 			CheckNextMoveNode(previousPos);
 		}
-		if (Input::GetAsyncKey(Keys::D))
+		if (Input::GetKeyDown(Keys::D))
 		{
 			nextPos = GetPositionVector() + GetRightVectorV();
 			CheckNextMoveNode(previousPos);

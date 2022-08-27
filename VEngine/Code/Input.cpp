@@ -24,14 +24,8 @@ namespace Input
 		currentUpKeys.clear();
 
 		mouseWheelUp = false;
-		mouseWheelDown = false;
-
 		mouseLeftUp = false;
-		mouseLeftDown = false;
-
 		mouseRightUp = false;
-		mouseRightDown = false;
-
 		mouseMiddleUp = false;
 	}
 
@@ -68,12 +62,6 @@ namespace Input
 	{
 		if (blockInput) return false;
 		return currentUpKeys.size();
-	}
-
-	bool GetAsyncKey(Keys key)
-	{
-		if (blockInput) return false;
-		return GetAsyncKeyState((int)key);
 	}
 
 	void SetLeftMouseDown()
