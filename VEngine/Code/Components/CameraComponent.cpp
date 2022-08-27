@@ -1,15 +1,10 @@
 #include "vpch.h"
 #include <random>
 #include "CameraComponent.h"
-#include "Input.h"
-#include "WorldEditor.h"
-#include "Actors/Actor.h"
-#include "Editor/Editor.h"
 #include "VMath.h"
-#include "Render/Renderer.h"
-#include "World.h"
 #include "Core.h"
-#include "Editor/DebugMenu.h"
+#include "Actors/Actor.h"
+#include "Render/Renderer.h"
 
 CameraComponent::CameraComponent(XMFLOAT3 startPos)
 {

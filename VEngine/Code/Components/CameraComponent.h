@@ -1,10 +1,7 @@
 #pragma once
 
-#include "Components/SpatialComponent.h"
-#include "Components/ComponentSystem.h"
-#include <DirectXMath.h>
-
-using namespace DirectX;
+#include "SpatialComponent.h"
+#include "ComponentSystem.h"
 
 class Actor;
 
