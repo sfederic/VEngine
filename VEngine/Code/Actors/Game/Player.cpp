@@ -341,12 +341,12 @@ void Player::RotationInput(float deltaTime)
 
 	if (CheckIfPlayerMovementAndRotationStopped())
 	{
-		if (Input::GetKeyUp(Keys::Right))
+		if (Input::GetKeyDown(Keys::Right))
 		{
 			constexpr float angle = XMConvertToRadians(90.f);
 			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::XMVectorUp(), angle));
 		}
-		if (Input::GetKeyUp(Keys::Left))
+		if (Input::GetKeyDown(Keys::Left))
 		{
 			constexpr float angle = XMConvertToRadians(-90.f);
 			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::XMVectorUp(), angle));
