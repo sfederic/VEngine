@@ -23,10 +23,10 @@ struct Vertex
 
 struct VRect
 {
-	int left;
-	int top;
-	int right;
-	int bottom;
+	int left = 0;
+	int top = 0;
+	int right = 0;
+	int bottom = 0;
 };
 
 struct RastStates
