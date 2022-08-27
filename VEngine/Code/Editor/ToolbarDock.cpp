@@ -9,6 +9,7 @@
 #include "TransformGizmo.h"
 #include "FileSystem.h"
 #include "Camera.h"
+#include "Components/CameraComponent.h"
 #include "WorldEditor.h"
 
 ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")

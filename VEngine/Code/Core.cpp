@@ -5,6 +5,7 @@
 #include "Debug.h"
 #include "Gameplay/GameUtils.h"
 #include "Camera.h"
+#include "Components/CameraComponent.h"
 #include "Actors/Game/Player.h"
 #include "World.h"
 #include "UI/UISystem.h"

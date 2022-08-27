@@ -122,7 +122,7 @@
     <ClCompile Include="Code\Debug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Camera.cpp">
+    <ClCompile Include="Code\Components\CameraComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Editor\ImGuizmo\ImGuizmo.cpp">
@@ -566,6 +566,12 @@
     <ClCompile Include="Code\Render\PixelShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\EditorCamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -612,7 +618,7 @@
     <ClInclude Include="Code\Actors\ActorSystem.h" />
     <ClInclude Include="Code\Actors\ActorSystemCache.h" />
     <ClInclude Include="Code\Actors\IActorSystem.h" />
-    <ClInclude Include="Code\Camera.h" />
+    <ClInclude Include="Code\Components\CameraComponent.h" />
     <ClInclude Include="Code\Core.h" />
     <ClInclude Include="Code\Debug.h" />
     <ClInclude Include="Code\Engine.h" />
@@ -1082,6 +1088,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\EditorCamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -118,6 +118,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Code\Actors\CameraActor.cpp" />
+    <ClCompile Include="Code\Camera.cpp" />
     <ClCompile Include="Code\Editor\ActorTreeWidget.cpp" />
     <ClCompile Include="Code\Editor\ImGuizmo\ImSequencer.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
@@ -265,9 +266,11 @@
     <ClCompile Include="Code\Render\Texture2D.cpp" />
     <ClCompile Include="Code\VFunctionSystem.cpp" />
     <ClCompile Include="Code\Actors\TestActor.cpp" />
+    <ClCompile Include="Code\EditorCamera.cpp" />
     <ClInclude Include="Code\Actors\CameraActor.h" />
     <ClInclude Include="Code\Asset\AssetFileExtensions.h" />
     <ClInclude Include="Code\Asset\AssetPaths.h" />
+    <ClInclude Include="Code\Camera.h" />
     <ClInclude Include="Code\Editor\ImGuizmo\ImSequencer.h" />
     <ClInclude Include="Code\Gameplay\BattleEnums.h" />
     <ClInclude Include="Code\IFunction.h" />
@@ -299,8 +302,8 @@
     <ClCompile Include="Code\Actors\Actor.cpp" />
     <ClCompile Include="Code\Audio\AudioSystem.cpp" />
     <ClInclude Include="Code\Audio\AudioSystem.h" />
-    <ClInclude Include="Code\Camera.h" />
-    <ClCompile Include="Code\Camera.cpp" />
+    <ClInclude Include="Code\Components\CameraComponent.h" />
+    <ClCompile Include="Code\Components\CameraComponent.cpp" />
     <ClCompile Include="Code\Commands\CommandSystem.cpp" />
     <ClInclude Include="Code\Commands\CommandSystem.h" />
     <ClInclude Include="Code\Commands\Command.h" />
@@ -532,6 +535,7 @@
     <ClInclude Include="Code\Render\ConstantBuffer.h" />
     <ClInclude Include="Code\VFunctionSystem.h" />
     <ClInclude Include="Code\Actors\TestActor.h" />
+    <ClInclude Include="Code\EditorCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

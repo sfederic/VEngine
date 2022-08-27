@@ -1,8 +1,6 @@
 #include "vpch.h"
 #include "Engine.h"
-
 #include <future>
-
 #include "Editor/Editor.h"
 #include "Core.h"
 #include "Input.h"
@@ -13,6 +11,7 @@
 #include "UI/UISystem.h"
 #include "Editor/DebugMenu.h"
 #include "Camera.h"
+#include "Components/CameraComponent.h"
 #include "WorldEditor.h"
 #include "Timer.h"
 #include "Editor/Console.h"
