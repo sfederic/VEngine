@@ -78,7 +78,7 @@ void Engine::TickSystems(float deltaTime)
 	physicsSystem.Tick(deltaTime);
 	Renderer::Tick();
 
-	if (Core::gameplayOn)
+	if (Core::gameplayOn && !Core::gameWorldPaused)
 	{
 		World::TickAllActorSystems(deltaTime);
 		World::TickAllComponentSystems(deltaTime);

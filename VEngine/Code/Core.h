@@ -8,6 +8,7 @@ namespace Core
 {
 	extern bool mainLoop;
 	extern bool gameplayOn;
+	extern bool gameWorldPaused;
 
 	extern bool isImGUIEnabled;
 

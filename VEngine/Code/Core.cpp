@@ -34,6 +34,7 @@ namespace Core
 
 	bool mainLoop = true;
 	bool gameplayOn = false;
+	bool gameWorldPaused = false;
 	bool isImGUIEnabled = true;
 
 	double timeSinceStartup;
@@ -69,7 +70,7 @@ void Core::SetTimerFrequency()
 void Core::Init()
 {
 	//For the WIC texture functions from DirectXToolkit and XAudio2 threading
-	//Note: Need COINIT_APARTMENTTHREADED here else Qt's native file dialog fucks up.
+	//Note: Need COINIT_APARTMENTTHREADED here else Qt's native file dialog defaults to its own implementation.
 	HR(CoInitializeEx(NULL, COINIT_APARTMENTTHREADED));
 	SetTimerFrequency();
 }
