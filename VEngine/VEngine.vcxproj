@@ -267,6 +267,7 @@
     <ClCompile Include="Code\VFunctionSystem.cpp" />
     <ClCompile Include="Code\Actors\TestActor.cpp" />
     <ClCompile Include="Code\EditorCamera.cpp" />
+    <ClCompile Include="Code\Actors\Game\MemoryCheckGridActor.cpp" />
     <ClInclude Include="Code\Actors\CameraActor.h" />
     <ClInclude Include="Code\Asset\AssetFileExtensions.h" />
     <ClInclude Include="Code\Asset\AssetPaths.h" />
@@ -536,6 +537,7 @@
     <ClInclude Include="Code\VFunctionSystem.h" />
     <ClInclude Include="Code\Actors\TestActor.h" />
     <ClInclude Include="Code\EditorCamera.h" />
+    <ClInclude Include="Code\Actors\Game\MemoryCheckGridActor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
