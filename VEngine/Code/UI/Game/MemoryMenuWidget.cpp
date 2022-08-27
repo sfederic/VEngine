@@ -5,10 +5,23 @@
 #include "Gameplay/Memory.h"
 #include "Actors/Game/Player.h"
 #include "VString.h"
+#include "Input.h"
+#include "Core.h"
 
 void MemoryMenuWidget::Draw(float deltaTime)
 {
-	//Intuiton select scroll menu
+	if (Core::gameWorldPaused)
+	{
+		if (Input::GetKeyDown(Keys::Enter)) //Sneaky 'GetKeyDown' so that it works with player's input
+		{
+			RemoveFromViewport();
+			GameUtils::PlayAudioOneShot("cursor.wav");
+			Core::gameWorldPaused = false;
+			return;
+		}
+	}
+
+	//Memory select scroll menu
 	{
 		Layout layout = PercentAlignLayout(0.1f, 0.1f, 0.4f, 0.9f);
 		FillRect(layout, { 0.5f, 0.5f, 0.5f, 0.75f });

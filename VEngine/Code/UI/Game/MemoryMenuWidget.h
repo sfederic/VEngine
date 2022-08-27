@@ -3,7 +3,7 @@
 
 struct Memory;
 
-//Draws all current known intuitons the player has in a game setting.
+//Draws all current known Memories the player has in a game setting.
 struct MemoryMenuWidget : Widget
 {
 	Memory* selectedMemory = nullptr;

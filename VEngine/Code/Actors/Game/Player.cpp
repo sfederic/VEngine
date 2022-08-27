@@ -7,6 +7,7 @@
 #include "Camera.h"
 #include "Input.h"
 #include "VMath.h"
+#include "Core.h"
 #include "Physics/Raycast.h"
 #include "Gameplay/GameUtils.h"
 #include "Actors/Game/NPC.h"
@@ -119,11 +120,11 @@ void Player::Tick(float deltaTime)
 		}
 	}*/
 
-	ToggleBattleGrid();
-	ToggleMemoryMenu();
-
 	PrimaryAction();
 	SecondaryAction();
+
+	ToggleBattleGrid();
+	ToggleMemoryMenu();
 
 	LerpPlayerCameraFOV(deltaTime);
 
@@ -511,13 +512,10 @@ void Player::ToggleMemoryMenu()
 
 		if (memoryWidgetToggle)
 		{
+			//Toggling off memory widget is handled in its own class because it pauses the game world.
+			Core::gameWorldPaused = true;
 			memoryMenuWidget->AddToViewport();
 			GameUtils::PlayAudioOneShot("confirm.wav");
-		}
-		else
-		{
-			memoryMenuWidget->RemoveFromViewport();
-			GameUtils::PlayAudioOneShot("cursor.wav");
 		}
 	}
 }
