@@ -84,14 +84,12 @@ XMVECTOR CameraComponent::Shake()
 
 	shakeLevel -= Core::GetDeltaTime();
 
-	std::random_device randomDevice;
-	std::mt19937 randomGenerator(randomDevice());
-	std::uniform_real_distribution<float> uidDist(-1.f, 1.f);
+	const float range = VMath::RandomRange(-1.f, 1.f);
 
 	const float maxShake = 0.1f;
-	const float xOffset = maxShake * shakeLevel * uidDist(randomGenerator);
-	const float yOffset = maxShake * shakeLevel * uidDist(randomGenerator);
-	const float zOffset = maxShake * shakeLevel * uidDist(randomGenerator);
+	const float xOffset = maxShake * shakeLevel * range;
+	const float yOffset = maxShake * shakeLevel * range;
+	const float zOffset = maxShake * shakeLevel * range;
 
 	return XMVectorSet(xOffset, yOffset, zOffset, 0.f); //Make sure the w here is 0
 }
