@@ -5,8 +5,9 @@
 
 class Actor;
 
-struct CameraComponent : SpatialComponent
+class CameraComponent : public SpatialComponent
 {
+public:
 	COMPONENT_SYSTEM(CameraComponent)
 
 	XMVECTOR focusPoint = XMVectorSet(0.f, 0.f, 0.f, 1.f);
@@ -17,6 +18,9 @@ struct CameraComponent : SpatialComponent
 
 	CameraComponent() {}
 	CameraComponent(XMFLOAT3 startPos);
+	virtual void Tick(float deltaTime) override {};
+	virtual Properties GetProps() override;
+
 	virtual XMMATRIX GetViewMatrix();
 	XMMATRIX GetProjectionMatrix();
 	void Pitch(float angle);
@@ -24,10 +28,6 @@ struct CameraComponent : SpatialComponent
 	void Move(float d, XMVECTOR axis);
 	void ZoomTo(Actor* actor);
 	XMVECTOR Shake();
-
-	virtual void Tick(float deltaTime) override {};
-	virtual Properties GetProps() override;
-	void FrustumCull();
 
 private:
 	float nearZ = 0.01f;

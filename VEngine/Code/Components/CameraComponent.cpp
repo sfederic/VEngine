@@ -103,33 +103,3 @@ Properties CameraComponent::GetProps()
 	props.Add("Far Z", &farZ);
 	return props;
 }
-
-void CameraComponent::FrustumCull()
-{
-	for (auto actor : World::GetAllActorsInWorld())
-	{
-		XMMATRIX cameraView = GetViewMatrix();
-		XMVECTOR cameraViewDet = XMMatrixDeterminant(cameraView);
-		XMMATRIX invView = XMMatrixInverse(&cameraViewDet, cameraView);
-
-		XMMATRIX actorWorld = actor->GetWorldMatrix();
-		XMVECTOR actorWorldDet = XMMatrixDeterminant(actorWorld);
-		XMMATRIX invWorld = XMMatrixInverse(&actorWorldDet, actorWorld);
-
-		XMMATRIX viewToLocal = XMMatrixMultiply(invView, invWorld);
-
-		XMMATRIX proj = GetProjectionMatrix();
-		BoundingFrustum frustum, localSpaceFrustum;
-		BoundingFrustum::CreateFromMatrix(frustum, proj);
-		frustum.Transform(localSpaceFrustum, viewToLocal);
-
-		if (localSpaceFrustum.Contains(actor->rootComponent->boundingBox) == DirectX::DISJOINT)
-		{
-			actor->SetActive(false);
-		}
-		else
-		{
-			actor->SetActive(true);
-		}
-	}
-}
