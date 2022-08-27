@@ -17,7 +17,6 @@ void MemoryMenuWidget::Draw(float deltaTime)
 			RemoveFromViewport();
 			GameUtils::PlayAudioOneShot("cursor.wav");
 			Core::gameWorldPaused = false;
-			return;
 		}
 	}
 
@@ -31,19 +30,48 @@ void MemoryMenuWidget::Draw(float deltaTime)
 		textLayout.PushToTop();
 		textLayout.rect.bottom += 30.f;
 
+		selectedMemoryHighlightLayout = textLayout;
+
 		Text(L"Memories", textLayout);
+
+		std::vector<Memory*> memories;
 
 		for (auto& memoryPair : GameInstance::playerMemories)
 		{
-			auto memory = memoryPair.second;
+			Memory* memory = memoryPair.second;
+			memories.push_back(memory);
 
 			textLayout.AddVerticalSpace(30.f);
-			if (Button(VString::stows(memory->name), textLayout))
-			{
-				selectedMemory = memory;
+			Text(VString::stows(memory->name), textLayout);
+		}
 
-				GameUtils::GetPlayer()->memoryNameToSpawn = selectedMemory->name;
+		//Show selected memory highlight
+
+		if (!memories.empty())
+		{
+			if (Input::GetKeyUp(Keys::S))
+			{
+				if (selectedMemoryIndex < memories.size() - 1)
+				{
+					selectedMemoryIndex++;
+					selectedMemory = memories.at(selectedMemoryIndex);
+					GameUtils::GetPlayer()->memoryNameToSpawn = selectedMemory->name;
+					GameUtils::PlayAudioOneShot("cursor.wav");
+				}
 			}
+			else if (Input::GetKeyUp(Keys::W))
+			{
+				if (selectedMemoryIndex > 0)
+				{
+					selectedMemoryIndex--;
+					selectedMemory = memories.at(selectedMemoryIndex);
+					GameUtils::GetPlayer()->memoryNameToSpawn = selectedMemory->name;
+					GameUtils::PlayAudioOneShot("cursor.wav");
+				}
+			}
+
+			selectedMemoryHighlightLayout.AddVerticalSpace(30.f * (selectedMemoryIndex + 1)); //'+1' for the header
+			Rect(selectedMemoryHighlightLayout);
 		}
 	}
 

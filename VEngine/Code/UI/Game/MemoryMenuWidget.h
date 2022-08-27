@@ -7,6 +7,8 @@ struct Memory;
 struct MemoryMenuWidget : Widget
 {
 	Memory* selectedMemory = nullptr;
+	Layout selectedMemoryHighlightLayout;
+	int selectedMemoryIndex = 0;
 
 	virtual void Draw(float deltaTime) override;
 };
