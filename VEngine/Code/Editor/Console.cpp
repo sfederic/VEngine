@@ -142,15 +142,19 @@ void Console::Init()
 
 void Console::ConsoleInput()
 {
-	if (Input::GetAnyKeyDown())
+	if (Input::GetAnyKeyUp())
 	{
 		if (Input::GetKeyDown(Keys::BackSpace) && !consoleString.empty())
 		{
 			consoleString.pop_back();
 		}
-		else if (Input::GetNumCurrentKeysDown() > 0)
+		else
 		{
-			consoleString.push_back((int)Input::GetLastPressedKeyDown());
+			std::set<Keys> upKeys = Input::GetAllUpKeys();
+			for (Keys key : upKeys)
+			{
+				consoleString.push_back((int)key);
+			}
 		}
 	}
 }
@@ -183,7 +187,6 @@ void Console::InputTick()
 	{
 		if (Input::GetKeyUp(Keys::Enter))
 		{
-			consoleString.pop_back(); //Remove '\r' return carriage
 			ExecuteString();
 			bConsoleActive = false;
 			return;
