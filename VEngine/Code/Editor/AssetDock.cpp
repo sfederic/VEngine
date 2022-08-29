@@ -25,6 +25,8 @@
 #include "Asset/AssetFileExtensions.h"
 #include "Components/IComponentSystem.h"
 
+std::unordered_map<std::string, std::function<void(QIcon&, std::string&)>> fileExtensionToFunctionMap;
+
 namespace Icons
 {
     QPixmap* play;
@@ -104,6 +106,25 @@ AssetDock::AssetDock() : QDockWidget("Assets")
 
     QFileSystemModel* fileModel = new QFileSystemModel();
     fileModel->setRootPath(QDir::currentPath());
+
+    //Create file extension map
+    fileExtensionToFunctionMap.emplace(".jpg", [&](QIcon& icon, std::string& filePath) {
+        icon = QPixmap(VString::GetSubStringWithFoundOffset(filePath, AssetBaseFolders::texture).c_str());
+    });
+    fileExtensionToFunctionMap.emplace(".png", [&](QIcon& icon, std::string& filePath) {
+        icon = QPixmap(VString::GetSubStringWithFoundOffset(filePath, AssetBaseFolders::texture).c_str());
+    });
+    fileExtensionToFunctionMap.emplace(".fbx", [&](QIcon& icon, std::string& filePath) { icon = *Icons::mesh; });
+    fileExtensionToFunctionMap.emplace(".ttf", [&](QIcon& icon, std::string& filePath) { icon = *Icons::font; });
+    fileExtensionToFunctionMap.emplace(".lib", [&](QIcon& icon, std::string& filePath) { icon = *Icons::lib; });
+    fileExtensionToFunctionMap.emplace(".dll", [&](QIcon& icon, std::string& filePath) { icon = *Icons::lib; });
+    fileExtensionToFunctionMap.emplace(".vmap", [&](QIcon& icon, std::string& filePath) { icon = *Icons::world; });
+    fileExtensionToFunctionMap.emplace(".vmat", [&](QIcon& icon, std::string& filePath) { icon = *Icons::material; });
+    fileExtensionToFunctionMap.emplace(".dialog", [&](QIcon& icon, std::string& filePath) { icon = *Icons::dialogue; });
+    fileExtensionToFunctionMap.emplace(".sav", [&](QIcon& icon, std::string& filePath) { icon = *Icons::world; });
+    fileExtensionToFunctionMap.emplace(".wav", [&](QIcon& icon, std::string& filePath) { icon = *Icons::audio; });
+    fileExtensionToFunctionMap.emplace(".h", [&](QIcon& icon, std::string& filePath) { icon = *Icons::code; });
+    fileExtensionToFunctionMap.emplace(".cpp", [&](QIcon& icon, std::string& filePath) { icon = *Icons::code; });
 }
 
 void AssetDock::AssetItemClicked()
@@ -182,44 +203,14 @@ void AssetDock::AssetFolderClicked()
         std::string filePath = fileInfo.absoluteFilePath().toStdString();
         auto fileExtension = std::filesystem::path(filePath).extension();
         
-        if (fileExtension == ".ttf")
+        auto extToFuncIt = fileExtensionToFunctionMap.find(fileExtension.string());
+        if (extToFuncIt != fileExtensionToFunctionMap.end())
         {
-            icon = *Icons::font;
-        }
-        else if (fileExtension == ".fbx")
-        {
-            icon = *Icons::mesh;
-        }
-        else if (fileExtension == ".lib" || fileExtension == ".dll")
-        {
-            icon = *Icons::lib;
-        }
-        else if (fileExtension == ".vmap" || fileExtension == ".sav")
-        {
-            icon = *Icons::world;
-        }
-        else if (fileExtension == ".h" || fileExtension == ".cpp")
-        {
-            icon = *Icons::code;
-        } 
-        else if (fileExtension == ".png" || fileExtension == ".jpg")
-        {
-            icon = QPixmap(VString::GetSubStringWithFoundOffset(filePath, AssetBaseFolders::texture).c_str());
-        }       
-        else if (fileExtension == ".vmat")
-        {
-            icon = *Icons::material;
-        }         
-        else if (fileExtension == ".dialog")
-        {
-            icon = *Icons::dialogue;
-        }   
-        else if (fileExtension == ".wav")
-        {
-            icon = *Icons::audio;
+            extToFuncIt->second(icon, filePath);
         }
         else
         {
+            //Set Defaut icon
             icon = *Icons::play;
         }
 
