@@ -138,6 +138,10 @@ void Console::Init()
 	executeMap.emplace(L"MATERIAL",
 		std::make_pair([]() { WorldEditor::materialPlacement = !WorldEditor::materialPlacement; },
 		"Enable material placement mode in editor"));
+
+	executeMap.emplace(L"MS",
+		std::make_pair([]() { Renderer::MeshIconImageCapture(); },
+		"Take an editor icon image of the currently selected mesh (MS stands for Mesh Snap, like Pokemon 'Snap')"));
 }
 
 void Console::ConsoleInput()

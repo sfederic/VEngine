@@ -13,6 +13,7 @@
 #include "VMath.h"
 #include "ShaderSystem.h"
 #include "Camera.h"
+#include "WorldEditor.h"
 #include "Components/CameraComponent.h"
 #include "UI/UISystem.h"
 #include "Components/MeshComponent.h"
@@ -1511,8 +1512,27 @@ void Renderer::ScreenshotCapture()
 		UID imageFileID = GenerateUID();
 		std::wstring imageFile = L"Screenshots/" + std::to_wstring(imageFileID) + L".jpg";
 		HR(SaveWICTextureToFile(context, backBuffer, GUID_ContainerFormatJpeg, imageFile.c_str()));
-
 		debugMenu.AddNotification(L"Screen shot taken.");
+	}
+}
+
+void Renderer::MeshIconImageCapture()
+{
+	Actor* actor = WorldEditor::GetPickedActor();
+	std::vector<MeshComponent*> meshComponents = actor->GetComponentsOfType<MeshComponent>();
+
+	//@Todo: isn't working with multiple meshes nicely
+	if (!meshComponents.empty())
+	{
+		MeshComponent* mesh = meshComponents.front();
+
+		ID3D11Texture2D* backBuffer = nullptr;
+		HR(swapchain->GetBuffer(0, IID_PPV_ARGS(&backBuffer)));
+		assert(backBuffer);
+
+		std::wstring imageFile = L"Icons/MeshIcons/" + VString::stows(mesh->meshComponentData.filename) + L".jpg";
+		HR(SaveWICTextureToFile(context, backBuffer, GUID_ContainerFormatJpeg, imageFile.c_str()));
+		debugMenu.AddNotification(L"Mesh Icon created.");
 	}
 }
 

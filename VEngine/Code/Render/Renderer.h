@@ -38,6 +38,7 @@ namespace Renderer
 	//Write out viewport as image and save to file as an image.
 	//Ref:https://github.com/Microsoft/DirectXTK/wiki/ScreenGrab
 	void ScreenshotCapture();
+	void MeshIconImageCapture();
 
 	RastState* GetRastState(std::string rastStateName);
 	BlendState* GetBlendState(std::string blendStateName);
