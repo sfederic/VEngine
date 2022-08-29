@@ -144,7 +144,7 @@ void Console::ConsoleInput()
 {
 	if (Input::GetAnyKeyUp())
 	{
-		if (Input::GetKeyDown(Keys::BackSpace) && !consoleString.empty())
+		if (Input::GetKeyUp(Keys::BackSpace) && !consoleString.empty())
 		{
 			consoleString.pop_back();
 		}

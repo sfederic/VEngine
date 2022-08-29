@@ -55,7 +55,7 @@ void HandleActorPicking()
 		return;
 	}
 
-	if (Input::GetMouseLeftDown())
+	if (Input::GetMouseLeftUp())
 	{
 		Ray screenPickRay;
 		if (RaycastFromScreen(screenPickRay))
@@ -115,7 +115,7 @@ void DuplicateActor()
 {
 	if (Input::GetKeyDown(Keys::Ctrl))
 	{
-		if (Input::GetKeyDown(Keys::W))
+		if (Input::GetKeyUp(Keys::W))
 		{
 			if (pickedActor)
 			{
