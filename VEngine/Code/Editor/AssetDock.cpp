@@ -169,55 +169,52 @@ void AssetDock::OpenAssetItemInDefaultProgram()
 void AssetDock::AssetFolderClicked()
 {
     QModelIndex index = assetTreeView->currentIndex();
-    QString path = fileSystemModel->filePath(index);
+    QString folderPath = fileSystemModel->filePath(index);
 
-    QDir directory(path);
-    QStringList list = directory.entryList(QDir::NoDotAndDotDot | QDir::AllEntries);
+    QDir directory(folderPath);
+    QFileInfoList fileInfoList = directory.entryInfoList(QDir::NoDotAndDotDot | QDir::AllEntries);
 
     assetIcons->clear();
 
-    auto fileExtension = std::filesystem::path(path.toStdString()).extension();
-    auto extension = fileExtension.c_str();
-
-    for (int i = 0; i < list.count(); i++)
+    for (QFileInfo& fileInfo : fileInfoList)
     {
         QIcon icon;
-
-        QString str = list[i];
-
-        if (str.contains(".ttf"))
+        std::string filePath = fileInfo.absoluteFilePath().toStdString();
+        auto fileExtension = std::filesystem::path(filePath).extension();
+        
+        if (fileExtension == ".ttf")
         {
             icon = *Icons::font;
         }
-        else if (str.contains(".fbx"))
+        else if (fileExtension == ".fbx")
         {
             icon = *Icons::mesh;
         }
-        else if (str.contains(".lib") || str.contains(".dll"))
+        else if (fileExtension == ".lib" || fileExtension == ".dll")
         {
             icon = *Icons::lib;
         }
-        else if (str.contains(".vmap") || str.contains(".sav"))
+        else if (fileExtension == ".vmap" || fileExtension == ".sav")
         {
             icon = *Icons::world;
         }
-        else if (str.contains(".h") || str.contains(".cpp"))
+        else if (fileExtension == ".h" || fileExtension == ".cpp")
         {
             icon = *Icons::code;
         } 
-        else if (str.contains(".png") || str.contains(".jpg"))
+        else if (fileExtension == ".png" || fileExtension == ".jpg")
         {
-            icon = *Icons::icon;
+            icon = QPixmap(VString::GetSubStringWithFoundOffset(filePath, AssetBaseFolders::texture).c_str());
         }       
-        else if (str.contains(".vmat"))
+        else if (fileExtension == ".vmat")
         {
             icon = *Icons::material;
         }         
-        else if (str.contains(".dialog"))
+        else if (fileExtension == ".dialog")
         {
             icon = *Icons::dialogue;
         }   
-        else if (str.contains(".wav"))
+        else if (fileExtension == ".wav")
         {
             icon = *Icons::audio;
         }
@@ -226,7 +223,7 @@ void AssetDock::AssetFolderClicked()
             icon = *Icons::play;
         }
 
-        QListWidgetItem* item = new QListWidgetItem(icon, list[i]);
+        QListWidgetItem* item = new QListWidgetItem(icon, fileInfo.fileName());
         item->setSizeHint(QSize(150, 100));
         assetIcons->addItem(item);
     }
