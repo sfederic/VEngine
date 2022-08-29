@@ -114,7 +114,7 @@ AssetDock::AssetDock() : QDockWidget("Assets")
     fileExtensionToFunctionMap.emplace(".png", [&](QIcon& icon, std::string& filePath) {
         icon = QPixmap(VString::GetSubStringWithFoundOffset(filePath, AssetBaseFolders::texture).c_str());
     });
-    fileExtensionToFunctionMap.emplace(".fbx", [&](QIcon& icon, std::string& filePath) { icon = *Icons::mesh; });
+    fileExtensionToFunctionMap.emplace(".vmesh", [&](QIcon& icon, std::string& filePath) { icon = *Icons::mesh; });
     fileExtensionToFunctionMap.emplace(".ttf", [&](QIcon& icon, std::string& filePath) { icon = *Icons::font; });
     fileExtensionToFunctionMap.emplace(".lib", [&](QIcon& icon, std::string& filePath) { icon = *Icons::lib; });
     fileExtensionToFunctionMap.emplace(".dll", [&](QIcon& icon, std::string& filePath) { icon = *Icons::lib; });
@@ -207,6 +207,19 @@ void AssetDock::AssetFolderClicked()
         if (extToFuncIt != fileExtensionToFunctionMap.end())
         {
             extToFuncIt->second(icon, filePath);
+        }
+        else if (fileExtension == ".fbx")
+        {
+            std::string meshIconPath = "Icons/MeshIcons/" + fileInfo.fileName().toStdString() + ".jpg";
+            if (std::filesystem::exists(meshIconPath))
+            {
+                auto pix = QPixmap(meshIconPath.c_str());
+                icon = pix.scaled(QSize(720, 512));
+            }
+            else
+            {
+                icon = *Icons::mesh;
+            }
         }
         else
         {
