@@ -180,14 +180,14 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	Deserialiser d(path, OpenMode::In);
 
-	std::wstring actorSystemName;
+	std::wstring systemName;
 
 	//@Todo: there's a feature missing here where if you remove a component/actor system,
 	//the deserialise will fall apart. Best case is you remove the component/actor system
 	//and the deserialise should just skip over it.
-	while (d.is >> actorSystemName)
+	while (d.is >> systemName)
 	{
-		if (actorSystemName == L"end")
+		if (systemName == L"end")
 		{
 			break;
 		}
@@ -199,10 +199,10 @@ void FileSystem::LoadWorld(std::string worldName)
 			continue;
 		}
 
-		auto asIt = actorSystemCache.nameToSystemMap->find(VString::wstos(actorSystemName));
+		auto asIt = actorSystemCache.nameToSystemMap->find(VString::wstos(systemName));
 		if (asIt == actorSystemCache.nameToSystemMap->end())
 		{
-			auto csIt = componentSystemCache.nameToSystemMap->find(VString::wstos(actorSystemName));
+			auto csIt = componentSystemCache.nameToSystemMap->find(VString::wstos(systemName));
 			if (csIt != componentSystemCache.nameToSystemMap->end())
 			{
 				auto cs = csIt->second;
@@ -250,7 +250,7 @@ void FileSystem::LoadWorld(std::string worldName)
 			}
 		}
 
-		actorSystemName.clear();
+		systemName.clear();
 	}
 
 	ResetWorldState();
