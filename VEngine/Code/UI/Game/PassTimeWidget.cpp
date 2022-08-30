@@ -63,12 +63,6 @@ void PassTimeWidget::ConfirmPassageOfTime()
 
 	GameInstance::currentHour++;
 
-	auto gridActors = World::GetAllActorsOfTypeInWorld<GridActor>();
-	for (auto gridActor : gridActors)
-	{
-		gridActor->EnableBasedOnTime();
-	}
-
 	hoursToPass--;
 	if (hoursToPass > 0)
 	{

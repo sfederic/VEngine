@@ -1,7 +1,6 @@
 #include "vpch.h"
 #include "Grid.h"
 #include "Components/InstanceMeshComponent.h"
-#include "Components/Game/TimeComponent.h"
 #include "Render/RenderUtils.h"
 #include "Render/Material.h"
 #include "Physics/Raycast.h"
@@ -41,15 +40,6 @@ void Grid::Awake()
     XMVECTOR rayOrigin = XMVectorZero();
 
     nodeMesh->instanceData.clear();
-
-    //Deactive gridactors that aren't active at current time
-    {
-        auto gridActors = World::GetAllActorsOfTypeInWorld<GridActor>();
-        for (auto gridActor : gridActors)
-        {
-            gridActor->EnableBasedOnTime();
-        }
-    }
 
     //Ignore player and units
     Ray ray(this);

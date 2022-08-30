@@ -59,8 +59,5 @@ struct GridActor : Actor
 	//returns the node the gridactor is currently on.
 	GridNode* GetCurrentNode();
 
-	//Set actor as active/inactive based on current in-game time
-	void EnableBasedOnTime();
-
 	void SetAnimation(std::string animationName);
 };

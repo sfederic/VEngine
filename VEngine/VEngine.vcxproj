@@ -226,7 +226,6 @@
     <ClCompile Include="Code\UI\Game\PlayerActionBarWidget.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\WStringWidget.cpp" />
     <ClCompile Include="Code\Log.cpp" />
-    <ClCompile Include="Code\Components\Game\TimeComponent.cpp" />
     <ClCompile Include="Code\UI\Game\GuardWidget.cpp" />
     <ClCompile Include="Code\UI\Game\PlayerHealthWidget.cpp" />
     <ClCompile Include="Code\Physics\PhysicsSystem.cpp" />
@@ -496,7 +495,6 @@
     <ClInclude Include="Code\UI\Game\PlayerActionBarWidget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\WStringWidget.h" />
     <ClInclude Include="Code\Log.h" />
-    <ClInclude Include="Code\Components\Game\TimeComponent.h" />
     <ClInclude Include="Code\UI\Game\GuardWidget.h" />
     <ClInclude Include="Code\UI\Game\PlayerHealthWidget.h" />
     <ClInclude Include="Code\Physics\PhysicsSystem.h" />

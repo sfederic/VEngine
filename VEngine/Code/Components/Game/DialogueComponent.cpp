@@ -2,7 +2,6 @@
 #include "DialogueComponent.h"
 #include "World.h"
 #include "Components/WidgetComponent.h"
-#include "Components/Game/TimeComponent.h"
 #include "UI/Game/DialogueWidget.h"
 #include "Log.h"
 #include "VString.h"
@@ -183,16 +182,6 @@ void DialogueComponent::ConversationShowTextAtActor()
     {
         Log("Dialogue actor [%s] not found at line [%d]", dataIt->second.actorName.c_str(), currentLine);
         return;
-    }
-
-    //Skip over dialogue if actor isn't active based on time mechanic
-    TimeComponent* timeComponent = actor->GetFirstComponentOfTypeAllowNull<TimeComponent>();
-    if (timeComponent != nullptr)
-    {
-        if (!timeComponent->CheckIfActiveAtCurrentTime())
-        {
-            return;
-        }
     }
 
     auto dcs = actor->GetComponentsOfType<DialogueComponent>();

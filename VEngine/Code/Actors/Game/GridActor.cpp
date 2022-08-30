@@ -3,7 +3,6 @@
 #include "Components/MeshComponent.h"
 #include "Components/WidgetComponent.h"
 #include "Components/Game/MemoryComponent.h"
-#include "Components/Game/TimeComponent.h"
 #include "Components/Game/DialogueComponent.h"
 #include "Components/Game/QuestComponent.h"
 #include "UI/Game/HealthWidget.h"
@@ -16,7 +15,6 @@ GridActor::GridActor()
 	mesh = MeshComponent::system.Add("Mesh", this);
 	rootComponent = mesh;
 
-	timeComponent = TimeComponent::system.Add("Time", this);
 	memoryComponent = MemoryComponent::system.Add("Memory", this);
 	dialogueComponent = DialogueComponent::system.Add("Dialogue", this);
 	questComponent = QuestComponent::system.Add("Quest", this);
@@ -31,8 +29,6 @@ void GridActor::Start()
 	{
 		SetActive(false);
 	}
-
-	EnableBasedOnTime();
 
 	if (!IsActive())
 	{
@@ -102,14 +98,6 @@ GridNode* GridActor::GetCurrentNode()
 	auto grid = GameUtils::GetGrid();
 	auto node = grid->GetNode(xIndex, yIndex);
 	return node;
-}
-
-void GridActor::EnableBasedOnTime()
-{
-	if (timeComponent->CheckIfActiveAtCurrentTime())
-	{
-		SetActive(false);
-	}
 }
 
 void GridActor::SetAnimation(std::string animationName)

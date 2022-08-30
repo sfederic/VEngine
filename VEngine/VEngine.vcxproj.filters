@@ -389,9 +389,6 @@
     <ClCompile Include="Code\Gameplay\GameInstance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Components\Game\TimeComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Gameplay\GridNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -911,9 +908,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\TimeOfDayWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Components\Game\TimeComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\ActorTreeWidget.h">
