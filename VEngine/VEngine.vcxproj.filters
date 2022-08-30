@@ -383,9 +383,6 @@
     <ClCompile Include="Code\Gameplay\BattleSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\UI\Game\TimeOfDayWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Gameplay\GameInstance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -477,9 +474,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\UI\Game\PassTimeWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\Game\GoddessStatue.cpp">
@@ -895,9 +889,6 @@
     <ClInclude Include="Code\Gameplay\BattleSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\UI\Game\TimeOfDayWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Editor\ActorTreeWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -983,9 +974,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\DebugNoteActor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\Game\PassTimeWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\GoddessStatue.h">

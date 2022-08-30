@@ -23,7 +23,6 @@
 #include "UI/Game/PlayerActionBarWidget.h"
 #include "UI/Game/MemoryGainedWidget.h"
 #include "UI/Game/MemoryRecalledWidget.h"
-#include "UI/Game/TimeOfDayWidget.h"
 #include "UI/Game/BulletWidget.h"
 #include "UI/Game/GuardWidget.h"
 #include "UI/Game/PlayerHealthWidget.h"
@@ -68,8 +67,6 @@ void Player::Start()
 
 	actionBarWidget = CreateWidget<PlayerActionBarWidget>();
 	actionBarWidget->actionPoints = actionPoints;
-
-	CreateWidget<TimeOfDayWidget>()->AddToViewport();
 
 	guardWidget = CreateWidget<GuardWidget>();
 
