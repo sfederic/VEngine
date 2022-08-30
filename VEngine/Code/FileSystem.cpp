@@ -180,11 +180,10 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	Deserialiser d(path, OpenMode::In);
 
-	while (!d.is.eof())
-	{
-		std::wstring actorSystemName;
-		d.is >> actorSystemName;
+	std::wstring actorSystemName;
 
+	while (d.is >> actorSystemName)
+	{
 		if (actorSystemName == L"end")
 		{
 			break;
@@ -192,7 +191,6 @@ void FileSystem::LoadWorld(std::string worldName)
 
 		if (actorSystemName.empty())
 		{
-			d.is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			continue;
 		}
 
