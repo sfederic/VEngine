@@ -196,53 +196,10 @@ void FileSystem::LoadWorld(std::string worldName)
 			continue;
 		}
 
-		auto asIt = actorSystemCache.nameToSystemMap->find(VString::wstos(systemName));
-		if (asIt == actorSystemCache.nameToSystemMap->end())
+		if (actorSystemCache.nameToSystemMap->find(VString::wstos(systemName)) !=
+			actorSystemCache.nameToSystemMap->end())
 		{
-			auto csIt = componentSystemCache.nameToSystemMap->find(VString::wstos(systemName));
-			if (csIt != componentSystemCache.nameToSystemMap->end())
-			{
-				auto cs = csIt->second;
-
-				//Deserialise the existing components created in Actor constructors
-				for (int i = 0; i < numObjectsToSpawn; i++)
-				{
-					auto ownerUIDAndName = GetComponentOwnerUIDAndNameOnDeserialise(d);
-
-					Actor* owner = World::GetActorByUID(ownerUIDAndName.first);
-					Component* foundComponent = owner->FindComponentAllowNull(ownerUIDAndName.second);
-					if (foundComponent)
-					{
-						auto props = foundComponent->GetProps();
-						d.Deserialise(props);
-					}
-					else //Component doesn't exist on any actor, skip its props
-					{
-						std::wstring nextToken;
-						while (nextToken != L"next" && nextToken != L"end")
-						{
-							d.is >> nextToken;
-						}
-					}
-				}
-			}
-			else
-			{
-				std::wstring tmp;
-				//@Todo: do this for actor systems too.
-				//Get the previous post so subsequent system name reads work
-				std::streampos lastPos = d.is.tellg();
-				while (componentSystemCache.nameToSystemMap->find(VString::wstos(tmp)) ==
-					componentSystemCache.nameToSystemMap->end())
-				{
-					lastPos = d.is.tellg();
-					d.is >> tmp;
-				}
-				d.is.seekg(lastPos);
-			}
-		}
-		else
-		{
+			auto asIt = actorSystemCache.nameToSystemMap->find(VString::wstos(systemName));
 			IActorSystem* actorSystem = asIt->second;
 
 			for (int i = 0; i < numObjectsToSpawn; i++)
@@ -259,6 +216,52 @@ void FileSystem::LoadWorld(std::string worldName)
 
 				World::AddActorToWorld(actor);
 			}
+		}
+		else if (componentSystemCache.nameToSystemMap->find(VString::wstos(systemName)) !=
+			componentSystemCache.nameToSystemMap->end())
+		{
+			auto csIt = componentSystemCache.nameToSystemMap->find(VString::wstos(systemName));
+			auto cs = csIt->second;
+
+			//Deserialise the existing components created in Actor constructors
+			for (int i = 0; i < numObjectsToSpawn; i++)
+			{
+				auto ownerUIDAndName = GetComponentOwnerUIDAndNameOnDeserialise(d);
+
+				Actor* owner = World::GetActorByUID(ownerUIDAndName.first);
+				Component* foundComponent = owner->FindComponentAllowNull(ownerUIDAndName.second);
+				if (foundComponent)
+				{
+					auto props = foundComponent->GetProps();
+					d.Deserialise(props);
+				}
+				else //Component doesn't exist on any actor, skip its props
+				{
+					std::wstring nextToken;
+					while (nextToken != L"next" && nextToken != L"end")
+					{
+						d.is >> nextToken;
+					}
+				}
+			}
+		}
+		else
+		{
+			//Get the previous post so subsequent system name reads work
+			std::streampos lastPos = d.is.tellg();
+
+			std::wstring missingProp;
+
+			while ((componentSystemCache.nameToSystemMap->find(VString::wstos(missingProp)) ==
+				componentSystemCache.nameToSystemMap->end()) ||
+				actorSystemCache.nameToSystemMap->find(VString::wstos(missingProp)) ==
+				actorSystemCache.nameToSystemMap->end())
+			{
+				lastPos = d.is.tellg();
+				d.is >> missingProp;
+			}
+
+			d.is.seekg(lastPos);
 		}
 
 		systemName.clear();
