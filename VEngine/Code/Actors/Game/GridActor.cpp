@@ -9,6 +9,7 @@
 #include "UI/Game/HealthWidget.h"
 #include "Gameplay/GameUtils.h"
 #include "Grid.h"
+#include "Physics/Raycast.h"
 
 GridActor::GridActor()
 {
@@ -31,14 +32,7 @@ void GridActor::Start()
 		SetActive(false);
 	}
 
-	if (!EnableBasedOnTime() && isGridObstacle)
-	{
-		auto node = GetCurrentNode();
-		if(node)
-		{
-			node->Hide();
-		}
-	}
+	EnableBasedOnTime();
 
 	if (!IsActive())
 	{
@@ -86,10 +80,9 @@ void GridActor::InflictDamage(int damage)
 		questComponent->DeactivateQuest();
 		
 		GetCurrentNode()->Show();
+		Ray ray = {};
+		GetCurrentNode()->RecalcNodeHeight(ray);
 		Destroy();
-
-		//@Todo: this should be okay to call to respawn grid nodes. Keep an eye on performance.
-		GameUtils::GetGrid()->Awake();
 	}
 }
 
@@ -111,15 +104,12 @@ GridNode* GridActor::GetCurrentNode()
 	return node;
 }
 
-bool GridActor::EnableBasedOnTime()
+void GridActor::EnableBasedOnTime()
 {
-	if (!timeComponent->CheckIfActiveAtCurrentTime())
+	if (timeComponent->CheckIfActiveAtCurrentTime())
 	{
 		SetActive(false);
-		return true;
 	}
-
-	return false;
 }
 
 void GridActor::SetAnimation(std::string animationName)

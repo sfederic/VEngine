@@ -60,7 +60,7 @@ struct GridActor : Actor
 	GridNode* GetCurrentNode();
 
 	//Set actor as active/inactive based on current in-game time
-	bool EnableBasedOnTime();
+	void EnableBasedOnTime();
 
 	void SetAnimation(std::string animationName);
 };
