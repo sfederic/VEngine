@@ -3,7 +3,6 @@
 #include "../ActorSystem.h"
 
 struct MeshComponent;
-struct TimeComponent;
 struct HealthWidget;
 struct MemoryComponent;
 struct QuestComponent;
@@ -18,7 +17,6 @@ struct GridActor : Actor
 	MeshComponent* mesh = nullptr;
 	HealthWidget* healthWidget = nullptr;
 	MemoryComponent* memoryComponent = nullptr;
-	TimeComponent* timeComponent = nullptr;
 	DialogueComponent* dialogueComponent = nullptr;
 	QuestComponent* questComponent = nullptr;
 
