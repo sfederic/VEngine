@@ -144,6 +144,18 @@ public:
 	}
 
 	template <typename T>
+	T* GetFirstComponentOfTypeAllowNull()
+	{
+		std::vector<T*> componentsOfType = GetComponentsOfType<T>();
+		if (!componentsOfType.empty())
+		{
+			return componentsOfType.front();
+		}
+
+		return nullptr;
+	}
+
+	template <typename T>
 	T* GetComponentByNameAndType(std::string componentName)
 	{
 		for (auto& componentPair : componentMap)
