@@ -125,8 +125,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Code\IFunction.cpp" />
-    <ClCompile Include="Code\Quests\BlacksmithQuest.cpp" />
-    <ClCompile Include="Code\Quests\Quest.cpp" />
     <ClCompile Include="Code\Render\PixelShader.cpp" />
     <ClCompile Include="Code\Render\Shader.cpp" />
     <ClCompile Include="Code\Render\ShaderItem.cpp" />
@@ -247,8 +245,6 @@
     <ClCompile Include="Code\Editor\PropertyWidgets\VEnumWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\PhysicsActor.cpp" />
     <ClCompile Include="Code\Actors\Game\MemoryActor.cpp" />
-    <ClCompile Include="Code\Quests\QuestSystem.cpp" />
-    <ClCompile Include="Code\Components\Game\QuestComponent.cpp" />
     <ClCompile Include="Code\Particle\Polyboard.cpp" />
     <ClCompile Include="Code\Actors\PolyboardActor.cpp" />
     <ClCompile Include="Code\UI\DebugNoteWidget.cpp" />
@@ -275,7 +271,6 @@
     <ClInclude Include="Code\Gameplay\BattleEnums.h" />
     <ClInclude Include="Code\IFunction.h" />
     <ClInclude Include="Code\Property.h" />
-    <ClInclude Include="Code\Quests\Quest.h" />
     <ClInclude Include="Code\Render\PixelShader.h" />
     <ClInclude Include="Code\Render\Shader.h" />
     <ClInclude Include="Code\Render\ShaderItem.h" />
@@ -515,8 +510,6 @@
     <ClInclude Include="Code\Editor\PropertyWidgets\VEnumWidget.h" />
     <ClInclude Include="Code\Actors\Game\PhysicsActor.h" />
     <ClInclude Include="Code\Actors\Game\MemoryActor.h" />
-    <ClInclude Include="Code\Quests\QuestSystem.h" />
-    <ClInclude Include="Code\Components\Game\QuestComponent.h" />
     <ClInclude Include="Code\Particle\Polyboard.h" />
     <ClInclude Include="Code\Actors\PolyboardActor.h" />
     <ClInclude Include="Code\UI\DebugNoteWidget.h" />

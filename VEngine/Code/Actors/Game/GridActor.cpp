@@ -4,7 +4,6 @@
 #include "Components/WidgetComponent.h"
 #include "Components/Game/MemoryComponent.h"
 #include "Components/Game/DialogueComponent.h"
-#include "Components/Game/QuestComponent.h"
 #include "UI/Game/HealthWidget.h"
 #include "Gameplay/GameUtils.h"
 #include "Grid.h"
@@ -17,18 +16,11 @@ GridActor::GridActor()
 
 	memoryComponent = MemoryComponent::system.Add("Memory", this);
 	dialogueComponent = DialogueComponent::system.Add("Dialogue", this);
-	questComponent = QuestComponent::system.Add("Quest", this);
 }
 
 void GridActor::Start()
 {
 	SetGridPosition();
-
-	//Disable actor based on quest
-	if (!questComponent->CheckIfQuestActive())
-	{
-		SetActive(false);
-	}
 
 	if (!IsActive())
 	{
@@ -72,9 +64,6 @@ void GridActor::InflictDamage(int damage)
 
 	if (health <= 0)
 	{
-		//Deactive quest linked to GridActor on death/destruction
-		questComponent->DeactivateQuest();
-		
 		GetCurrentNode()->Show();
 		Ray ray = {};
 		GetCurrentNode()->RecalcNodeHeight(ray);

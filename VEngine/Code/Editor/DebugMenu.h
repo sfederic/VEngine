@@ -70,7 +70,6 @@ private:
 	void RenderSkeletonViewMenu();
 	void RenderPhysicsMenu();
 	void RenderCoreMenu();
-	void RenderQuestMenu();
 	void RenderParticleMenu();
 	void RenderConsoleCommandsMenu();
 

@@ -11,8 +11,6 @@
 #include "Log.h"
 #include "UI/Game/MemoryGainedWidget.h"
 #include "Audio/AudioSystem.h"
-#include "Quests/QuestSystem.h"
-#include "Quests/Quest.h"
 
 ConditionSystem conditionSystem;
 
@@ -49,17 +47,6 @@ static bool StartBattle(std::string arg)
 	return true;
 }
 
-static bool EndQuest(std::string arg)
-{
-	Quest* quest = questSystem.FindQuest(arg.c_str());
-	if (quest) 
-	{
-		quest->isActive = false;
-	}
-
-	return false;
-}
-
 static bool GainMemory(std::string memoryName, std::string memoryDesc, std::string memoryImage)
 {
 	auto memory = new Memory();
@@ -94,7 +81,6 @@ ConditionSystem::ConditionSystem()
 	ADD_CONDITION(StartBattle);
 	//ADD_CONDITION(GainMemory);
 	ADD_CONDITION(PlaySong);
-	ADD_CONDITION(EndQuest);
 }
 
 void ConditionSystem::AddCondition(std::string functionName, ConditionFunction conditionFunction)

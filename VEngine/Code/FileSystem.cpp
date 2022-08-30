@@ -18,7 +18,6 @@
 #include "Input.h"
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/BattleSystem.h"
-#include "Quests/QuestSystem.h"
 #include "Profile.h"
 
 std::pair<UID, std::string> GetComponentOwnerUIDAndNameOnDeserialise(Deserialiser& d)
@@ -304,10 +303,4 @@ void FileSystem::ResetWorldState()
 
 	editor->UpdateWorldList();
 	editor->ClearProperties();
-
-	if (Core::gameplayOn) //Don't want actors affected while not in gameplay
-	{
-		//It's important that this is called after editor::UpdateWorldList() for actor names
-		questSystem.ExecuteAllQuestsForCurrentHour();
-	}
 }

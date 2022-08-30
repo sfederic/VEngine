@@ -16,7 +16,6 @@
 #include "Editor/Editor.h"
 #include "Physics/PhysicsSystem.h"
 #include "Timer.h"
-#include "Quests/QuestSystem.h"
 
 double ticks = 0.0;
 double deltaTime = 0.0;
@@ -151,8 +150,6 @@ void Core::StartGame()
 	physicsSystem.Start();
 
 	World::StartAllComponents();
-
-	questSystem.ExecuteAllQuestsForCurrentHour();
 
 	World::WakeAndStartAllActors();
 
