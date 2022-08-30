@@ -182,9 +182,6 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	std::wstring systemName;
 
-	//@Todo: there's a feature missing here where if you remove a component/actor system,
-	//the deserialise will fall apart. Best case is you remove the component/actor system
-	//and the deserialise should just skip over it.
 	while (d.is >> systemName)
 	{
 		if (systemName == L"end")
@@ -228,6 +225,20 @@ void FileSystem::LoadWorld(std::string worldName)
 						}
 					}
 				}
+			}
+			else
+			{
+				std::wstring tmp;
+				//@Todo: do this for actor systems too.
+				//Get the previous post so subsequent system name reads work
+				std::streampos lastPos = d.is.tellg();
+				while (componentSystemCache.nameToSystemMap->find(VString::wstos(tmp)) ==
+					componentSystemCache.nameToSystemMap->end())
+				{
+					lastPos = d.is.tellg();
+					d.is >> tmp;
+				}
+				d.is.seekg(lastPos);
 			}
 		}
 		else
