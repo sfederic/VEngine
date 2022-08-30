@@ -182,16 +182,14 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	std::wstring actorSystemName;
 
+	//@Todo: there's a feature missing here where if you remove a component/actor system,
+	//the deserialise will fall apart. Best case is you remove the component/actor system
+	//and the deserialise should just skip over it.
 	while (d.is >> actorSystemName)
 	{
 		if (actorSystemName == L"end")
 		{
 			break;
-		}
-
-		if (actorSystemName.empty())
-		{
-			continue;
 		}
 
 		size_t numObjectsToSpawn = 0;
@@ -205,11 +203,7 @@ void FileSystem::LoadWorld(std::string worldName)
 		if (asIt == actorSystemCache.nameToSystemMap->end())
 		{
 			auto csIt = componentSystemCache.nameToSystemMap->find(VString::wstos(actorSystemName));
-			if (csIt == componentSystemCache.nameToSystemMap->end())
-			{
-				continue;
-			}
-			else
+			if (csIt != componentSystemCache.nameToSystemMap->end())
 			{
 				auto cs = csIt->second;
 
@@ -255,6 +249,8 @@ void FileSystem::LoadWorld(std::string worldName)
 				World::AddActorToWorld(actor);
 			}
 		}
+
+		actorSystemName.clear();
 	}
 
 	ResetWorldState();
