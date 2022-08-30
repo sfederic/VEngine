@@ -87,6 +87,9 @@ void GridActor::InflictDamage(int damage)
 		
 		GetCurrentNode()->Show();
 		Destroy();
+
+		//@Todo: this should be okay to call to respawn grid nodes. Keep an eye on performance.
+		GameUtils::GetGrid()->Awake();
 	}
 }
 
