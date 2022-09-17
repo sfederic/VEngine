@@ -6,6 +6,8 @@
 # Engine-specific folders
 VEngine/Code/FbxSdk/
 VEngine/Code/Physx/
+VEngine/Shaders/Vertex/
+VEngine/Shaders/Pixel/
  
 # User-specific files
 *.dll

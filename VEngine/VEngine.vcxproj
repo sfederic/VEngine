@@ -118,25 +118,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Code\Actors\CameraActor.cpp" />
-    <ClCompile Include="Code\Actors\Game\Door.cpp" />
-    <ClCompile Include="Code\Actors\Game\DoorSwitch.cpp" />
-    <ClCompile Include="Code\Actors\Game\InteractActor.cpp" />
-    <ClCompile Include="Code\Actors\Game\LevelEntranceTrigger.cpp" />
-    <ClCompile Include="Code\Actors\Game\NoteActor.cpp" />
-    <ClCompile Include="Code\Actors\Game\PhotoActor.cpp" />
-    <ClCompile Include="Code\Actors\Game\PlayerShip.cpp" />
     <ClCompile Include="Code\Camera.cpp" />
-    <ClCompile Include="Code\Components\Game\PhotoComponent.cpp" />
+    <ClCompile Include="Code\Components\Game\ConditionComponent.cpp" />
     <ClCompile Include="Code\Editor\ActorTreeWidget.cpp" />
     <ClCompile Include="Code\Editor\ImGuizmo\ImSequencer.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Code\Gameplay\ConditionSystem.cpp" />
     <ClCompile Include="Code\IFunction.cpp" />
     <ClCompile Include="Code\Render\PixelShader.cpp" />
     <ClCompile Include="Code\Render\Shader.cpp" />
     <ClCompile Include="Code\Render\ShaderItem.cpp" />
     <ClCompile Include="Code\Render\VertexShader.cpp" />
+    <ClCompile Include="Code\Salvages\TestSalvage.cpp" />
     <ClCompile Include="Code\SHMath\DirectXSH.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
@@ -149,9 +144,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Code\UI\Game\BulletWidget.cpp" />
     <ClCompile Include="Code\Components\CharacterControllerComponent.cpp" />
-    <ClCompile Include="Code\Gameplay\BattleSystem.cpp" />
     <ClCompile Include="Code\Actors\AudioActor.cpp" />
     <ClCompile Include="Code\Asset\AssetSystem.cpp" />
     <ClCompile Include="Code\Components\AudioComponent.cpp" />
@@ -159,11 +152,9 @@
     <ClCompile Include="Code\Audio\AudioChannel.cpp" />
     <ClCompile Include="Code\Components\BoxTriggerComponent.cpp" />
     <ClCompile Include="Code\Actors\ActorSystemCache.cpp" />
-    <ClCompile Include="Code\Gameplay\DialogueStructures.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\SpinBox.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\StringWidget.cpp" />
     <ClCompile Include="Code\Gameplay\GameInstance.cpp" />
-    <ClCompile Include="Code\Gameplay\GridNode.cpp" />
     <ClCompile Include="Code\Properties.cpp" />
     <ClCompile Include="Code\Render\PipelineObjects.cpp" />
     <ClCompile Include="Code\Render\RenderTypes.cpp" />
@@ -207,32 +198,18 @@
     <ClCompile Include="Code\Render\SpriteSystem.cpp" />
     <ClCompile Include="Code\Actors\Billboard.cpp" />
     <ClCompile Include="Code\SystemCache.cpp" />
-    <ClCompile Include="Code\Gameplay\ConditionSystem.cpp" />
     <ClCompile Include="Code\Particle\ParticleEmitter.cpp" />
     <ClCompile Include="Code\Particle\ParticleSystem.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\UintWidget.cpp" />
     <ClCompile Include="Code\UI\TitleScreenWidget.cpp" />
-    <ClCompile Include="Code\UI\Game\DialogueWidget.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\ShaderDataWidget.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\MeshComponentDataWidget.cpp" />
-    <ClCompile Include="Code\UI\Game\HealthWidget.cpp" />
-    <ClCompile Include="Code\UI\Game\InteractWidget.cpp" />
-    <ClCompile Include="Code\UI\Game\MemoryMenuWidget.cpp" />
-    <ClCompile Include="Code\UI\Game\PlayerActionBarWidget.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\WStringWidget.cpp" />
     <ClCompile Include="Code\Log.cpp" />
-    <ClCompile Include="Code\UI\Game\GuardWidget.cpp" />
-    <ClCompile Include="Code\UI\Game\PlayerHealthWidget.cpp" />
     <ClCompile Include="Code\Physics\PhysicsSystem.cpp" />
     <ClCompile Include="Code\Components\DestructibleMeshComponent.cpp" />
     <ClCompile Include="Code\Actors\DestructibleActor.cpp" />
-    <ClCompile Include="Code\UI\Game\MemoryTransferWidget.cpp" />
-    <ClCompile Include="Code\UI\Game\MemoryGainedWidget.cpp" />
-    <ClCompile Include="Code\UI\Game\MemoryRecalledWidget.cpp" />
     <ClCompile Include="Code\UI\ScreenFadeWidget.cpp" />
-    <ClCompile Include="Code\Components\Game\ConditionComponent.cpp" />
-    <ClCompile Include="Code\UI\Game\GuiltWidget.cpp" />
-    <ClCompile Include="Code\UI\Game\UnitLineupWidget.cpp" />
     <ClCompile Include="Code\Package.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\VEnumWidget.cpp" />
     <ClCompile Include="Code\Particle\Polyboard.cpp" />
@@ -247,33 +224,43 @@
     <ClCompile Include="Code\Actors\PostProcessInstance.cpp" />
     <ClCompile Include="Code\Render\Texture2D.cpp" />
     <ClCompile Include="Code\VFunctionSystem.cpp" />
-    <ClCompile Include="Code\Actors\TestActor.cpp" />
     <ClCompile Include="Code\EditorCamera.cpp" />
+    <ClCompile Include="Code\Actors\Game\Player.cpp" />
+    <ClCompile Include="Code\UI\Game\ScanWidget.cpp" />
+    <ClCompile Include="Code\Actors\Game\PlayerShip.cpp" />
+    <ClCompile Include="Code\Actors\Game\NoteActor.cpp" />
+    <ClCompile Include="Code\UI\Game\NoteWidget.cpp" />
+    <ClCompile Include="Code\Actors\Game\InteractActor.cpp" />
+    <ClCompile Include="Code\Actors\Game\Door.cpp" />
+    <ClCompile Include="Code\Actors\Game\DoorSwitch.cpp" />
+    <ClCompile Include="Code\UI\Game\PhotoWidget.cpp" />
+    <ClCompile Include="Code\Components\Game\PhotoComponent.cpp" />
+    <ClCompile Include="Code\Actors\Game\PhotoActor.cpp" />
+    <ClCompile Include="Code\Salvages\SalvageMission.cpp" />
+    <ClCompile Include="Code\Salvages\SalvageSystem.cpp" />
+    <ClCompile Include="Code\UI\Game\SalvageMissionWidget.cpp" />
+    <ClCompile Include="Code\Actors\Game\LevelEntranceTrigger.cpp" />
+    <ClCompile Include="Code\UI\Game\LevelEntranceWidget.cpp" />
+    <ClCompile Include="Code\UI\Game\DialogueWidget.cpp" />
+    <ClCompile Include="Code\Actors\Game\DialogueTrigger.cpp" />
+    <ClCompile Include="Code\Gameplay\DialogueStructures.cpp" />
     <ClInclude Include="Code\Actors\CameraActor.h" />
-    <ClInclude Include="Code\Actors\Game\Door.h" />
-    <ClInclude Include="Code\Actors\Game\DoorSwitch.h" />
-    <ClInclude Include="Code\Actors\Game\InteractActor.h" />
-    <ClInclude Include="Code\Actors\Game\LevelEntranceTrigger.h" />
-    <ClInclude Include="Code\Actors\Game\NoteActor.h" />
-    <ClInclude Include="Code\Actors\Game\PhotoActor.h" />
-    <ClInclude Include="Code\Actors\Game\PlayerShip.h" />
     <ClInclude Include="Code\Asset\AssetFileExtensions.h" />
     <ClInclude Include="Code\Asset\AssetPaths.h" />
     <ClInclude Include="Code\Camera.h" />
-    <ClInclude Include="Code\Components\Game\PhotoComponent.h" />
+    <ClInclude Include="Code\Components\Game\ConditionComponent.h" />
     <ClInclude Include="Code\Editor\ImGuizmo\ImSequencer.h" />
-    <ClInclude Include="Code\Gameplay\BattleEnums.h" />
+    <ClInclude Include="Code\Gameplay\ConditionSystem.h" />
     <ClInclude Include="Code\IFunction.h" />
     <ClInclude Include="Code\Property.h" />
     <ClInclude Include="Code\Render\PixelShader.h" />
     <ClInclude Include="Code\Render\Shader.h" />
     <ClInclude Include="Code\Render\ShaderItem.h" />
     <ClInclude Include="Code\Render\VertexShader.h" />
+    <ClInclude Include="Code\Salvages\TestSalvage.h" />
     <ClInclude Include="Code\SHMath\DirectXSH.h" />
-    <ClInclude Include="Code\UI\Game\BulletWidget.h" />
     <ClInclude Include="Code\Components\CharacterControllerComponent.h" />
     <ClInclude Include="Code\Editor\ActorTreeWidget.h" />
-    <ClInclude Include="Code\Gameplay\BattleSystem.h" />
     <ClInclude Include="Code\Actors\AudioActor.h" />
     <ClInclude Include="Code\Asset\AssetSystem.h" />
     <ClInclude Include="Code\Components\AudioComponent.h" />
@@ -302,7 +289,6 @@
     <ClInclude Include="Code\Components\MeshComponent.h" />
     <ClCompile Include="Code\Debug.cpp" />
     <ClCompile Include="Code\Editor\Console.cpp" />
-    <ClInclude Include="Code\Gameplay\DialogueStructures.h" />
     <ClInclude Include="Code\Editor\Console.h" />
     <ClCompile Include="Code\Core.cpp" />
     <ClInclude Include="Code\Debug.h" />
@@ -384,13 +370,11 @@
     <ClCompile Include="Code\Input.cpp" />
     <ClInclude Include="Code\Gameplay\GameInstance.h" />
     <ClInclude Include="Code\Gameplay\GameplayTags.h" />
-    <ClInclude Include="Code\Gameplay\GridNode.h" />
     <ClInclude Include="Code\Input.h" />
     <ClCompile Include="Code\main.cpp" />
     <ClInclude Include="Code\Editor\RenderViewWidget.h" />
     <ClCompile Include="Code\VMath.cpp" />
     <ClInclude Include="Code\Asset\MeshAssetHeader.h" />
-    <ClInclude Include="Code\Gameplay\Memory.h" />
     <ClInclude Include="Code\Particle\Particle.h" />
     <ClInclude Include="Code\Physics\CollisionLayers.h" />
     <ClInclude Include="Code\UID.h" />
@@ -459,32 +443,18 @@
     <ClInclude Include="Code\Actors\Billboard.h" />
     <ClInclude Include="Code\System.h" />
     <ClInclude Include="Code\SystemCache.h" />
-    <ClInclude Include="Code\Gameplay\ConditionSystem.h" />
     <ClInclude Include="Code\Particle\ParticleEmitter.h" />
     <ClInclude Include="Code\Particle\ParticleSystem.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\UintWidget.h" />
     <ClInclude Include="Code\UI\TitleScreenWidget.h" />
-    <ClInclude Include="Code\UI\Game\DialogueWidget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\ShaderDataWidget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\MeshComponentDataWidget.h" />
-    <ClInclude Include="Code\UI\Game\HealthWidget.h" />
-    <ClInclude Include="Code\UI\Game\InteractWidget.h" />
-    <ClInclude Include="Code\UI\Game\MemoryMenuWidget.h" />
-    <ClInclude Include="Code\UI\Game\PlayerActionBarWidget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\WStringWidget.h" />
     <ClInclude Include="Code\Log.h" />
-    <ClInclude Include="Code\UI\Game\GuardWidget.h" />
-    <ClInclude Include="Code\UI\Game\PlayerHealthWidget.h" />
     <ClInclude Include="Code\Physics\PhysicsSystem.h" />
     <ClInclude Include="Code\Components\DestructibleMeshComponent.h" />
     <ClInclude Include="Code\Actors\DestructibleActor.h" />
-    <ClInclude Include="Code\UI\Game\MemoryTransferWidget.h" />
-    <ClInclude Include="Code\UI\Game\MemoryGainedWidget.h" />
-    <ClInclude Include="Code\UI\Game\MemoryRecalledWidget.h" />
     <ClInclude Include="Code\UI\ScreenFadeWidget.h" />
-    <ClInclude Include="Code\Components\Game\ConditionComponent.h" />
-    <ClInclude Include="Code\UI\Game\GuiltWidget.h" />
-    <ClInclude Include="Code\UI\Game\UnitLineupWidget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\VEnumWidget.h" />
     <ClInclude Include="Code\Particle\Polyboard.h" />
     <ClInclude Include="Code\Actors\PolyboardActor.h" />
@@ -499,8 +469,26 @@
     <ClInclude Include="Code\Render\Texture2D.h" />
     <ClInclude Include="Code\Render\ConstantBuffer.h" />
     <ClInclude Include="Code\VFunctionSystem.h" />
-    <ClInclude Include="Code\Actors\TestActor.h" />
     <ClInclude Include="Code\EditorCamera.h" />
+    <ClInclude Include="Code\Actors\Game\Player.h" />
+    <ClInclude Include="Code\UI\Game\ScanWidget.h" />
+    <ClInclude Include="Code\Actors\Game\PlayerShip.h" />
+    <ClInclude Include="Code\Actors\Game\NoteActor.h" />
+    <ClInclude Include="Code\UI\Game\NoteWidget.h" />
+    <ClInclude Include="Code\Actors\Game\InteractActor.h" />
+    <ClInclude Include="Code\Actors\Game\Door.h" />
+    <ClInclude Include="Code\Actors\Game\DoorSwitch.h" />
+    <ClInclude Include="Code\UI\Game\PhotoWidget.h" />
+    <ClInclude Include="Code\Components\Game\PhotoComponent.h" />
+    <ClInclude Include="Code\Actors\Game\PhotoActor.h" />
+    <ClInclude Include="Code\Salvages\SalvageMission.h" />
+    <ClInclude Include="Code\Salvages\SalvageSystem.h" />
+    <ClInclude Include="Code\UI\Game\SalvageMissionWidget.h" />
+    <ClInclude Include="Code\Actors\Game\LevelEntranceTrigger.h" />
+    <ClInclude Include="Code\UI\Game\LevelEntranceWidget.h" />
+    <ClInclude Include="Code\UI\Game\DialogueWidget.h" />
+    <ClInclude Include="Code\Actors\Game\DialogueTrigger.h" />
+    <ClInclude Include="Code\Gameplay\DialogueStructures.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
@@ -536,6 +524,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)\Shaders\Vertex\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
     <FxCompile Include="Code\Render\Shaders\Vertex\Grass_vs.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
