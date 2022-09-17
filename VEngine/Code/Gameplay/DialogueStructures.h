@@ -1,4 +1,5 @@
 #pragma once
+
 #include <map>
 #include <string>
 
@@ -21,4 +22,5 @@ struct Dialogue
 	std::map<int, DialogueData> data;
 
 	void LoadFromFile();
+	void Reset();
 };

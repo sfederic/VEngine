@@ -37,8 +37,9 @@ struct Layout
 };
 
 //Base widget class for in-game UI.
-struct Widget
+class Widget
 {
+public:
 	enum class TextAlign
 	{
 		Center,
@@ -65,12 +66,14 @@ struct Widget
 
 	bool render = true;
 
-	virtual void Draw(float deltaTime);
-	virtual void Start();
+	virtual void Draw(float deltaTime) = 0;
+	virtual void Start() {}
 	void Destroy();
 
 	void AddToViewport(float removeTimer = 0.f);
 	void RemoveFromViewport();
+
+protected:
 	void GetScreenSpaceCoords(int& sx, int& sy);
 
 	void Text(const std::wstring& text, Layout layout, TextAlign align = TextAlign::Center,

@@ -2,7 +2,6 @@
 #include "World.h"
 #include "Actors/MeshActor.h"
 #include "Actors/Game/Player.h"
-#include "Actors/Game/Grid.h"
 #include "Actors/DirectionalLightActor.h"
 #include "Actors/ActorSystemCache.h"
 #include "Components/ComponentSystemCache.h"
@@ -106,7 +105,6 @@ void World::CreateDefaultMapActors()
 {
 	Player::system.Add();
 	DirectionalLightActor::system.Add();
-	Grid::system.Add();
 
 	editor->UpdateWorldList();
 }

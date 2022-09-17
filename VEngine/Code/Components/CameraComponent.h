@@ -11,14 +11,22 @@ public:
 	COMPONENT_SYSTEM(CameraComponent)
 
 	XMVECTOR focusPoint = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	XMVECTOR upViewVector = XMVectorZero();
+
 	Actor* targetActor = nullptr;
+
 	float shakeLevel = 0.f;
 	float FOV = 60.f;
 	float cameraMoveSpeed = 7.5f;
 
-	CameraComponent() {}
+private:
+	float nearZ = 0.01f;
+	float farZ = 1000.f;
+
+public:
+	CameraComponent();
 	CameraComponent(XMFLOAT3 startPos);
-	virtual void Tick(float deltaTime) override {};
+	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 
 	virtual XMMATRIX GetViewMatrix();
@@ -28,8 +36,4 @@ public:
 	void Move(float d, XMVECTOR axis);
 	void ZoomTo(Actor* actor);
 	XMVECTOR Shake();
-
-private:
-	float nearZ = 0.01f;
-	float farZ = 1000.f;
 };

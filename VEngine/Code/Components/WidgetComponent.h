@@ -2,7 +2,7 @@
 #include "Component.h"
 #include "ComponentSystem.h"
 
-struct Widget;
+class Widget;
 
 //Base for all UI components.
 struct WidgetComponent : Component
@@ -11,6 +11,7 @@ struct WidgetComponent : Component
 
 	Widget* widget = nullptr;
 
+	WidgetComponent() {}
 	virtual void Tick(float deltaTime) override;
 	virtual void Start() override;
 	virtual void Create() override;

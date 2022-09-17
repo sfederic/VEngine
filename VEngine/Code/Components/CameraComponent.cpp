@@ -1,30 +1,48 @@
 #include "vpch.h"
-#include <random>
 #include "CameraComponent.h"
+#include <algorithm>
 #include "VMath.h"
 #include "Core.h"
-#include "Actors/Actor.h"
 #include "Render/Renderer.h"
+#include "Editor/Editor.h"
+
+CameraComponent::CameraComponent()
+{
+	upViewVector = VMath::GlobalUpVector();
+}
 
 CameraComponent::CameraComponent(XMFLOAT3 startPos)
 {
-	transform.position = startPos;
+	upViewVector = VMath::GlobalUpVector();
 	UpdateTransform();
+}
+
+void CameraComponent::Tick(float deltaTime)
+{
+	const int x = editor->centerOffsetX;
+	const int y = editor->centerOffsetY;
+
+	const float dx = -XMConvertToRadians(0.25f * (float)x);
+	const float dy = -XMConvertToRadians(0.25f * (float)y);
+
+	Pitch(dy);
+	RotateY(dx);
 }
 
 XMMATRIX CameraComponent::GetViewMatrix()
 {
-	XMVECTOR forward = GetForwardVectorV();
-	XMVECTOR position = GetPositionV();
-
-	XMMATRIX view = XMMatrixIdentity();
+	XMVECTOR worldPos = GetWorldPositionV();
 
 	if (targetActor)
 	{
-		focusPoint = targetActor->GetPositionVector();
+		focusPoint = targetActor->GetPositionV() + targetActor->GetForwardVectorV();
+	}
+	else
+	{
+		focusPoint = worldPos + GetForwardVectorV();
 	}
 
-	view = XMMatrixLookAtLH(transform.world.r[3], focusPoint, VMath::XMVectorUp());
+	XMMATRIX view = XMMatrixLookAtLH(worldPos, focusPoint, upViewVector);
 
 	//Camera translation shaking
 	XMVECTOR shakeVector = Shake();
@@ -41,8 +59,19 @@ XMMATRIX CameraComponent::GetProjectionMatrix()
 
 void CameraComponent::Pitch(float angle)
 {
-	const XMMATRIX r = XMMatrixRotationAxis(GetRightVectorV(), angle);
-	const XMVECTOR q = XMQuaternionMultiply(GetRotationV(), XMQuaternionRotationMatrix(r));
+	//The RightFromQuat is important here as GetRightVector() grabs the global directional vector, 
+	//meaning the wall crawling mechanic would mess up FPS controls.
+	const XMMATRIX r = XMMatrixRotationAxis(VMath::RightFromQuat(GetRotationV()), angle);
+	XMVECTOR q = XMQuaternionMultiply(GetRotationV(), XMQuaternionRotationMatrix(r));
+
+	float roll = 0.f, pitch = 0.f, yaw = 0.f;
+	VMath::PitchYawRollFromQuaternion(roll, pitch, yaw, q);
+	pitch = XMConvertToDegrees(pitch);
+	if (pitch > 80.f || pitch < -80.f) 
+	{
+		return; 
+	}
+
 	SetRotation(q);
 }
 
@@ -66,7 +95,7 @@ void CameraComponent::ZoomTo(Actor* actor)
 	XMVECTOR forward = GetForwardVectorV();
 
 	//Trace the camera down the line its pointing towards the actor
-	XMVECTOR actorPos = actor->GetPositionVector();
+	XMVECTOR actorPos = actor->GetPositionV();
 	XMVECTOR zoomPos = actorPos - (forward * 5.f);
 
 	SetPosition(zoomPos);

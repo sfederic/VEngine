@@ -22,29 +22,29 @@ void EditorCamera::Tick(float deltaTime)
 		{
 			const float moveSpeed = cameraMoveSpeed * deltaTime;
 
-			if (Input::GetKeyDown(Keys::W))
+			if (Input::GetKeyHeld(Keys::W))
 			{
 				Move(moveSpeed, forward);
 			}
-			if (Input::GetKeyDown(Keys::S))
+			if (Input::GetKeyHeld(Keys::S))
 			{
 				Move(-moveSpeed, forward);
 			}
-			if (Input::GetKeyDown(Keys::D))
+			if (Input::GetKeyHeld(Keys::D))
 			{
 				Move(moveSpeed, right);
 			}
-			if (Input::GetKeyDown(Keys::A))
+			if (Input::GetKeyHeld(Keys::A))
 			{
 				Move(-moveSpeed, right);
 			}
-			if (Input::GetKeyDown(Keys::Q))
+			if (Input::GetKeyHeld(Keys::Q))
 			{
-				Move(-moveSpeed, VMath::XMVectorUp());
+				Move(-moveSpeed, VMath::GlobalUpVector());
 			}
-			if (Input::GetKeyDown(Keys::E))
+			if (Input::GetKeyHeld(Keys::E))
 			{
-				Move(moveSpeed, VMath::XMVectorUp());
+				Move(moveSpeed, VMath::GlobalUpVector());
 			}
 		}
 
@@ -85,10 +85,10 @@ XMMATRIX EditorCamera::GetViewMatrix()
 
 	if (arcBallMovementOn && WorldEditor::GetPickedActor())
 	{
-		focus = WorldEditor::GetPickedActor()->GetPositionVector();
+		focus = WorldEditor::GetPickedActor()->GetPositionV();
 	}
 
-	view = XMMatrixLookAtLH(position, focus, VMath::XMVectorUp());
+	view = XMMatrixLookAtLH(position, focus, VMath::GlobalUpVector());
 	return view;
 }
 
@@ -101,7 +101,7 @@ void EditorCamera::MouseMove(int x, int y)
 
 	arcBallMovementOn = false;
 
-	if (Input::GetMouseRightDown() && Input::GetKeyDown(Keys::Ctrl))
+	if (Input::GetMouseRightDown() && Input::GetKeyHeld(Keys::Ctrl))
 	{
 		//Arcball camera movement
 		//REF:https://asliceofrendering.com/camera/2019/11/30/ArcballCamera/
@@ -115,7 +115,7 @@ void EditorCamera::MouseMove(int x, int y)
 		Actor* pickedActor = WorldEditor::GetPickedActor();
 		if (pickedActor == nullptr) return;
 
-		auto pivot = pickedActor->GetPositionVector();
+		auto pivot = pickedActor->GetPositionV();
 
 		focusPoint = pivot;
 

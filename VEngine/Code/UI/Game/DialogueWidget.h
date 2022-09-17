@@ -1,11 +1,13 @@
 #pragma once
+
 #include "../Widget.h"
 
-//Shows dialogue text for actors
-struct DialogueWidget : Widget
+//Shows on screen dialogue from a character in-game.
+class DialogueWidget : public Widget
 {
-	std::wstring dialogueText;
-
+public:
 	virtual void Draw(float deltaTime) override;
-	void SetText(std::wstring text);
+
+	std::wstring speakerName;
+	std::wstring dialogueText;
 };

@@ -1,77 +1,38 @@
 #include "vpch.h"
 #include "DialogueTrigger.h"
-#include "Components/Game/DialogueComponent.h"
 #include "Components/BoxTriggerComponent.h"
-#include "UI/Game/DialogueWidget.h"
-#include "Timer.h"
-#include "Input.h"
+#include "Actors/Game/Player.h"
 
 DialogueTrigger::DialogueTrigger()
 {
-    boxTriggerComponent = BoxTriggerComponent::system.Add("BoxTrigger", this);
-    boxTriggerComponent->renderWireframeColour = XMFLOAT4(0.1f, 0.45f, 0.9f, 1.f);
+    boxTriggerComponent = CreateComponent(BoxTriggerComponent(), "BoxTrigger");
     rootComponent = boxTriggerComponent;
-
-    dialogueComponent = DialogueComponent::system.Add("Dialogue", this);
 }
 
 void DialogueTrigger::Start()
 {
     boxTriggerComponent->SetTargetAsPlayer();
-
-    if (playOnSpawn)
-    {
-        NextLine();
-    }
 }
 
 void DialogueTrigger::Tick(float deltaTime)
 {
+    if (dialogueCurrentlyPlaying) return;
+
     if (boxTriggerComponent->ContainsTarget())
     {
-        if (playOnTriggerOverlap && firstTimePlaying) //Play dialogue on overlap
+        Player* player = Player::system.GetFirstActor();
+        if (player)
         {
-            firstTimePlaying = false;
-            NextLine();
-            return;
-        }
-        else if (Input::GetKeyUp(Keys::Down)) //Play dialogue on input
-        {
-            firstTimePlaying = false;
-            NextLine();
-            return;
+            player->StartDialogue(dialogueFile);
+
+            dialogueCurrentlyPlaying = true;
         }
     }
 }
 
 Properties DialogueTrigger::GetProps()
 {
-    auto props = __super::GetProps();
-    props.AddProp(playOnSpawn);
-    props.AddProp(playOnTriggerOverlap);
+    Properties props = __super::GetProps();
+    props.Add("Dialogue File", &dialogueFile).autoCompletePath = "/Dialogue/";
     return props;
-}
-
-void DialogueTrigger::NextLine()
-{
-    if (dialogueFinished)
-    {
-        return;
-    }
-
-    if (dialogueComponent->previousActiveDialogueWidget)
-    {
-        dialogueComponent->previousActiveDialogueWidget->RemoveFromViewport();
-    }
-
-    dialogueComponent->ConversationShowTextAtActor();
-
-    if (dialogueComponent->ConversationNextLine())
-    {
-        Timer::SetTimer(4.f, std::bind(&DialogueTrigger::NextLine, this));
-    }
-    else
-    {
-        dialogueFinished = true;
-    }
 }

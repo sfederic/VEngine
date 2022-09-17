@@ -41,7 +41,15 @@ void QtEditor::Tick()
     mainWindow->Tick();
 
     app->processEvents();
-    SetMousePos();
+
+    if (Core::gameplayOn && mainWindow->isActiveWindow())
+    {
+        SetMousePosFPSGameplay();
+    }
+    else
+    {
+        SetMousePos();
+    }
 
     //update property dock values if game is running
     if (Core::gameplayOn)
@@ -63,7 +71,7 @@ void QtEditor::SetMousePos()
 }
 
 //For first person camera controls during gameplay
-void QtEditor::SetMousePosGameplay()
+void QtEditor::SetMousePosFPSGameplay()
 {
     viewportWidth = mainWindow->renderView->size().width();
     viewportHeight = mainWindow->renderView->size().height();
@@ -72,8 +80,8 @@ void QtEditor::SetMousePosGameplay()
     viewportMouseX = mousePos.x();
     viewportMouseY = mousePos.y();
 
-    centerOffsetX = (((viewportWidth / 2) - viewportMouseX));
-    centerOffsetY = (((viewportHeight / 2) - viewportMouseY));
+    centerOffsetX = (viewportWidth / 2) - viewportMouseX;
+    centerOffsetY = (viewportHeight / 2) - viewportMouseY;
 
     QPoint glob = mainWindow->renderView->mapToGlobal(QPoint(viewportWidth / 2, viewportHeight / 2));
     QCursor::setPos(glob);

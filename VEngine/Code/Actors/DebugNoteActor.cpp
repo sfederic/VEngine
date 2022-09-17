@@ -17,7 +17,7 @@ void DebugNoteActor::Start()
 
 void DebugNoteActor::Tick(float deltaTime)
 {
-    noteWidget->pos = GetHomogeneousPositionVector();
+    noteWidget->pos = GetHomogeneousPositionV();
 }
 
 Properties DebugNoteActor::GetProps()

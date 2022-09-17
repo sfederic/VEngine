@@ -3,6 +3,7 @@
 #include "Components/MeshComponent.h"
 #include "VMath.h"
 #include "Gameplay/GameUtils.h"
+#include "Actors/Game/Player.h"
 
 BoxTriggerComponent::BoxTriggerComponent()
 {
@@ -42,7 +43,7 @@ bool BoxTriggerComponent::ContainsTarget()
 {
 	if (targetActor)
 	{
-		XMVECTOR targetPos = targetActor->GetPositionVector();
+		XMVECTOR targetPos = targetActor->GetPositionV();
 		bool result = Contains(targetPos);
 		return result;
 	}

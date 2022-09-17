@@ -13,9 +13,9 @@ namespace VMath
 {
 	void MatrixAddScale(float s, XMMATRIX& m);
 
-	XMVECTOR XMVectorRight();
-	XMVECTOR XMVectorUp();
-	XMVECTOR XMVectorForward();
+	XMVECTOR GlobalRightVector();
+	XMVECTOR GlobalUpVector();
+	XMVECTOR GlobalForwardVector();
 
 	//Returns matrix with all 0's
 	XMMATRIX ZeroMatrix();
@@ -24,7 +24,7 @@ namespace VMath
 	void RoundVector(XMVECTOR& v);
 
 	XMFLOAT3 PitchYawRollFromMatrix(XMMATRIX m);
-	XMFLOAT3 PitchYawRollFromQuaternion(XMFLOAT4 q);
+	void PitchYawRollFromQuaternion(float& roll, float& pitch, float& yaw, XMVECTOR quat);
 
 	//Builds a matrix to extract a quaternion rotation to return.
 	XMVECTOR LookAtRotation(XMVECTOR lookAtPoint, XMVECTOR currentPosition);
@@ -58,4 +58,7 @@ namespace VMath
 	float Distance(XMVECTOR pos1, XMVECTOR pos2);
 
 	float RandomRange(float min, float max);
+
+	XMFLOAT3 Float3Subtract(XMFLOAT3& f0, XMFLOAT3& f1);
+	XMFLOAT2 Float2Subtract(XMFLOAT2& f0, XMFLOAT2& f1);
 }

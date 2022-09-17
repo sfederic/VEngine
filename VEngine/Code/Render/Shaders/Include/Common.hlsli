@@ -1,3 +1,6 @@
+#ifndef COMMON
+#define COMMON
+
 static const float SMAP_SIZE = 2048.0f;
 static const float SMAP_DX = 1.0f / SMAP_SIZE;
 static const float PI = 3.14159265f;
@@ -11,10 +14,11 @@ struct InstanceData
 struct VS_IN
 {
     float3 pos : POSITION;
-    float2 uv : TEXCOORD;
     float3 normal : NORMAL;
-    float3 weights : WEIGHTS;
+    float3 tangent : TANGENT;
+    float2 uv : TEXCOORD;
     uint4 boneIndices : BONEINDICES;
+    float3 weights : WEIGHTS;
     uint instanceID : SV_InstanceID;
 };
 
@@ -22,8 +26,9 @@ struct VS_OUT
 {
     float4 pos : SV_POSITION;
     float4 posWS : POSITION;
-    float2 uv : TEXCOORD0;
     float3 normal : NORMAL;
+	float3 tangent : TANGENT0;
+    float2 uv : TEXCOORD0;
     float4 shadowPos : TEXCOORD1;
     uint instanceID : SV_InstanceID;
 };
@@ -33,6 +38,7 @@ Texture2D shadowMap : register(t1);
 Texture2D reflectionMap : register(t2);
 StructuredBuffer<InstanceData> instanceData : register(t3);
 TextureCube environmentMap : register(t4);
+Texture2D normalMap : register(t5);
 
 SamplerState s : register(s0);
 SamplerComparisonState shadowSampler : register(s1);
@@ -343,3 +349,5 @@ float CalcShadowFactor(float4 shadowPos)
 
 	return percentLit /= 9.f;
 }
+
+#endif 

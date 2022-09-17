@@ -120,7 +120,7 @@ XMMATRIX ShadowMap::GetLightViewMatrix()
 	XMVECTOR lookAt = light->GetPositionV() + light->GetForwardVectorV();
 	XMVECTOR lightPos = light->GetPositionV();
 
-	return XMMatrixLookAtLH(lightPos, lookAt, VMath::XMVectorUp());
+	return XMMatrixLookAtLH(lightPos, lookAt, VMath::GlobalUpVector());
 }
 
 XMMATRIX ShadowMap::GetLightTextureMatrix()

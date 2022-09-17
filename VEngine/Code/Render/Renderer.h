@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 
 struct RastState;
@@ -39,6 +40,7 @@ namespace Renderer
 	//Ref:https://github.com/Microsoft/DirectXTK/wiki/ScreenGrab
 	void ScreenshotCapture();
 	void MeshIconImageCapture();
+	void PlayerPhotoCapture(std::wstring outputFilename);
 
 	RastState* GetRastState(std::string rastStateName);
 	BlendState* GetBlendState(std::string blendStateName);

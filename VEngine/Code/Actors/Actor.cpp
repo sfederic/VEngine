@@ -40,7 +40,7 @@ XMFLOAT3 Actor::GetPosition()
 	return XMFLOAT3(rootComponent->transform.position);
 }
 
-XMVECTOR Actor::GetPositionVector()
+XMVECTOR Actor::GetPositionV()
 {
 	XMFLOAT3 pos = GetPosition();
 	return XMLoadFloat3(&pos);
@@ -48,7 +48,7 @@ XMVECTOR Actor::GetPositionVector()
 
 //This is mainly used for Widgets rendering to screen-space.
 //Because the W component is needed as-is, there's no Float3 function for this yet.
-XMVECTOR Actor::GetHomogeneousPositionVector()
+XMVECTOR Actor::GetHomogeneousPositionV()
 {
 	XMMATRIX view = activeCamera->GetViewMatrix();
 	XMMATRIX proj = activeCamera->GetProjectionMatrix();
@@ -62,7 +62,7 @@ XMFLOAT3 Actor::GetScale()
 	return XMFLOAT3(rootComponent->transform.scale);
 }
 
-XMVECTOR Actor::GetScaleVector()
+XMVECTOR Actor::GetScaleV()
 {
 	XMFLOAT3 scale = GetScale();
 	return XMLoadFloat3(&scale);
@@ -73,7 +73,7 @@ XMFLOAT4 Actor::GetRotation()
 	return XMFLOAT4(rootComponent->transform.rotation);
 }
 
-XMVECTOR Actor::GetRotationVector()
+XMVECTOR Actor::GetRotationV()
 {
 	XMFLOAT4 rotation = GetRotation();
 	return XMLoadFloat4(&rotation);
@@ -162,6 +162,7 @@ Properties Actor::GetProps()
 	props.Add("UID", &uid).hide = true;
 	props.Add("Name", &name).hide = true;
 	props.Add(" Enabled", &active);
+	props.Add("Scan Text", &scanText);
 
 	return props;
 }
@@ -284,7 +285,7 @@ void Actor::AddComponent(Component* component)
 
 	component->ownerUID = uid;
 
-	assert(componentMap.find(component->name) == componentMap.end());
+	assert(componentMap.find(component->name) == componentMap.end() && "Duplicate Component name");
 	componentMap.emplace(component->name, component);
 }
 

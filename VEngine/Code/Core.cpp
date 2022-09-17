@@ -77,18 +77,18 @@ void Core::Init()
 void Core::Tick()
 {
 	//Reset current world
-	if (Input::GetKeyDown(Keys::Ctrl))
+	if (Input::GetKeyHeld(Keys::Ctrl))
 	{
-		if (Input::GetKeyUp(Keys::R))
+		if (Input::GetKeyDown(Keys::R))
 		{
 			FileSystem::ReloadCurrentWorld();
 		}
 	}
 
 	//Toggle gameplay on/off
-	if (Input::GetKeyDown(Keys::Ctrl))
+	if (Input::GetKeyHeld(Keys::Ctrl))
 	{
-		if (Input::GetKeyUp(Keys::P))
+		if (Input::GetKeyDown(Keys::P))
 		{
 			SetGameplayState();
 		}
@@ -152,8 +152,6 @@ void Core::StartGame()
 	World::StartAllComponents();
 
 	World::WakeAndStartAllActors();
-
-	WorldEditor::DeselectAll();
 
 	editor->SetPlayButtonText("Stop");
 }

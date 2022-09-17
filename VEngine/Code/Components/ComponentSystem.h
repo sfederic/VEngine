@@ -79,7 +79,7 @@ struct ComponentSystem : IComponentSystem
 	{
 		for (int i = 0; i < components.size(); i++)
 		{
-			if (components[i]->active)
+			if (components[i]->active && components[i]->tickEnabled)
 			{
 				components[i]->Tick(deltaTime);
 			}

@@ -7,13 +7,13 @@ CommandSystem commandSystem;
 
 void CommandSystem::Tick()
 {
-	if (Input::GetKeyDown(Keys::Ctrl))
+	if (Input::GetKeyHeld(Keys::Ctrl))
 	{
-		if (Input::GetKeyUp(Keys::Z))
+		if (Input::GetKeyDown(Keys::Z))
 		{
 			Undo();
 		}
-		else if (Input::GetKeyUp(Keys::Y))
+		else if (Input::GetKeyDown(Keys::Y))
 		{
 			Redo();
 		}

@@ -64,7 +64,7 @@ WorldDock::WorldDock() : QDockWidget("World")
 
 void WorldDock::Tick()
 {
-	if (Input::GetKeyDown(Keys::Ctrl))
+	if (Input::GetKeyHeld(Keys::Ctrl))
 	{
 		actorListSelectionMode = QAbstractItemView::SelectionMode::MultiSelection;
 	}

@@ -8,12 +8,13 @@ VS_OUT main(VS_IN i)
 	float4x4 viewProj = mul(proj, view);
 	float4x4 modelViewProj = mul(viewProj, world);
 
-	o.pos = mul(modelViewProj, float4(i.pos, 1.0f));
-	o.posWS = mul(model, float4(i.pos, 1.0f));
+	o.pos = mul(modelViewProj, float4(i.pos.xyz, 1.0f));
+	o.posWS = mul(model, float4(i.pos.xyz, 1.0f));
 	o.uv = i.uv;
 	o.normal = mul((float3x3)world, i.normal);
 	o.shadowPos = float4(1.0f, 1.0f, 1.0f, 1.0f);
 	o.instanceID = i.instanceID;
+    o.tangent = i.tangent;
 
 	return o;
 }

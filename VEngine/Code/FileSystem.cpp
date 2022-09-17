@@ -17,7 +17,6 @@
 #include "VString.h"
 #include "Input.h"
 #include "Gameplay/GameInstance.h"
-#include "Gameplay/BattleSystem.h"
 #include "Profile.h"
 
 std::pair<UID, std::string> GetComponentOwnerUIDAndNameOnDeserialise(Deserialiser& d)
@@ -277,9 +276,6 @@ void FileSystem::LoadWorld(std::string worldName)
 
 void FileSystem::ReloadCurrentWorld()
 {
-	GameInstance::ResetTime();
-	GameInstance::DeletePlayerMemories();
-
 	LoadWorld(World::worldFilename);
 }
 
@@ -298,7 +294,6 @@ void FileSystem::ResetWorldState()
 
 	commandSystem.Reset();
 	Input::Reset();
-	battleSystem.Reset();
 
 	//Set player camera on world change as active if in-gameplay
 	if (Core::gameplayOn)

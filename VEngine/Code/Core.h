@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <string>
+#include <Windows.h>
 
 //Any utility functions or variables that are 'core' to the engine live here.
 namespace Core

@@ -70,7 +70,11 @@ void Engine::TickSystems(float deltaTime)
 	audioSystem.Tick();
 
 	cutsceneSequencer.PlaybackTick(deltaTime);
-	activeCamera->Tick(deltaTime);
+
+	if (!Core::gameplayOn) //Tick editor camera
+	{
+		activeCamera->Tick(deltaTime);
+	}
 
 	Timer::Tick(deltaTime);
 

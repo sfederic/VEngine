@@ -1,132 +1,68 @@
 #pragma once
+
 #include "../Actor.h"
 #include "../ActorSystem.h"
-#include "Gameplay/BattleEnums.h"
 
-struct MeshComponent;
 struct CameraComponent;
-struct WidgetComponent;
-struct DialogueComponent;
-struct MemoryComponent;
-struct AudioComponent;
-struct InteractWidget;
-struct MemoryMenuWidget;
-struct PlayerActionBarWidget;
-struct PlayerHealthWidget;
-struct BulletWidget;
-struct GuardWidget;
-struct Memory;
-struct GridNode;
-struct GridActor;
-struct Unit;
+class ScanWidget;
+class PhotoWidget;
+class DialogueWidget;
+class SalvageMissionWidget;
 
-struct Player : Actor
+class Player : public Actor
 {
-	ACTOR_SYSTEM(Player)
-
-	AttackDirection attackDirection = AttackDirection::Down;
-	DefendDirection defendDirection = DefendDirection::Down;
-
-	//Components
-	MeshComponent* mesh = nullptr;
-	CameraComponent* camera = nullptr;
-
-	//Footstep sounds to play while moving
-	AudioComponent* stepSounds = nullptr;
-	float stepSoundsVolume = 0.f;
-
-	//For dialog files to access
-	DialogueComponent* dialogueComponent = nullptr;
-
-	//For player to cache the current dialog file and progress on input
-	DialogueComponent* currentlyActiveDialogueComponent = nullptr;
-
-	//Widgets
-	InteractWidget* interactWidget = nullptr;
-	MemoryMenuWidget* memoryMenuWidget = nullptr;
-	PlayerActionBarWidget* actionBarWidget = nullptr;
-	GuardWidget* guardWidget = nullptr;
-	PlayerHealthWidget* healthWidget = nullptr;
-	BulletWidget* bulletWidget = nullptr;
-
-	XMVECTOR nextPos;
-	XMVECTOR nextRot;
-
-	GridActor* gridActorInteractingWith = nullptr;
-
-	Unit* unitCurrentlyAttackingPlayer = nullptr;
-
-	//Name of the memory selected in MemoryMenuWidget to spawn into world
-	std::string memoryNameToSpawn;
-
-	int actionPoints = 10;
-	int healthPoints = 3;
-	int numBullets = 2;
-
-	int xIndex = -1;
-	int yIndex = -1;
-
-	float nextCameraFOV = 0.f;
-
-	bool inConversation = false;
-	bool inInteraction = false;
-	bool isWeaponDrawn = false;
-	bool memoryWidgetToggle = false;
-
-	bool isPlayerTurn = false;
-
-	bool ableToGuard = false;
-	bool guarding = false;
-	bool guardSuccess = false;
-	bool gameOver = false;
-
-	bool gunModeOn = true;
+public:
+	ACTOR_SYSTEM(Player);
 
 	Player();
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 
-	//called at every battle turn end
-	void RefreshCombatStats();
-
-	GridNode* GetCurrentNode();
-	
-	void InflictDamage(int damage);
-
-	void Guard();
-	void ResetGuard();
-
-	//Call on battle end for player variables housekeeping
-	void BattleCleanup();
-	
-	XMVECTOR GetMeshForward();
-
-	//Show a timer dialogue above player when player character is thinking to themself.
-	void QuickThought(const std::wstring& text);
+	void StartDialogue(std::string dialogueFilename);
 
 private:
 	void MovementInput(float deltaTime);
-	void RotationInput(float deltaTime);
-	void ToggleBattleGrid();
-	void PrimaryAction();
-	void SecondaryAction();
-	void ToggleMemoryMenu();
-	void ExpendActionPoints(int num);
-	void LerpPlayerCameraFOV(float deltaTime);
-	void CheckNextMoveNode(XMVECTOR previousPos);
-
 	bool CheckIfPlayerMovementAndRotationStopped();
+	void SetMovementAxis();
+	bool RotatePlayerOnWallMoveHit(XMVECTOR movementAxis, XMVECTOR raycastAxis,
+		float rightAngle, float forwardAngle, float leftAngle, float backAngle);
+	void ShootInput();
+	void Interact();
+	bool IsFloorEmptyOnNextMove();
+	void Scan();
+	void TakePhoto();
+	void RaycastAgainstActorWithPhotoComponent();
+	void ScanVisorInputToggle();
+	void CreatePlayerWidgets();
+	void SpawnNote();
+	void ToggleSalvageMissionStats();
+	void ProgressDialogue();
+	void EndDialogue();
 
-	//PrimaryAction actor check functions
-	bool DialogueCheck(Actor* hitActor);
-	bool QuickTalkCheck(Actor* hitActor);
-	bool CombatInteractCheck(Actor* actorToCheck);
-	bool InteractCheck(Actor* hitActor);
-	bool DestructibleCheck(Actor* hitActor);
-	bool GunShotCheck(Actor* hitActor);
+public:
+	CameraComponent* camera = nullptr;
 
-	void ConfirmGuardOnDirection();
+private:
+	ScanWidget* scanWidget = nullptr;
+	PhotoWidget* photoWidget = nullptr;
+	SalvageMissionWidget* salvageMissionWidget = nullptr;
+	DialogueWidget* dialogueWidget = nullptr;
 
-	void PreviewMovementNodesDuringBattle();
+	XMVECTOR movementAxes[4]{};
+
+	XMVECTOR forwardAxis = XMVectorZero();
+	XMVECTOR rightAxis = XMVectorZero();
+
+	XMVECTOR nextPos = XMVectorZero();
+	XMVECTOR nextRot = XMVectorZero();
+
+	float moveSpeed = 3.f;
+	float rotSpeed = 2.5f;
+
+	bool scanVisorActive = false;
+
+	bool shakeOnWallRotateEnd = false;
+
+	bool salvageMissionMenuOpen = false;
 };

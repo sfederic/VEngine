@@ -7,14 +7,6 @@
 #include "Render/SpriteSystem.h"
 #include "Timer.h"
 
-void Widget::Draw(float deltaTime)
-{
-}
-
-void Widget::Start()
-{
-}
-
 void Widget::Destroy()
 {
 	RemoveFromViewport();

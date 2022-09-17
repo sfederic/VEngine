@@ -94,9 +94,6 @@ void SetSampler(uint32_t shaderRegister, Sampler* sampler);
 void SetShaderResourcePixel(uint32_t shaderRegister, std::string textureName);
 void SetShaderResourceFromMaterial(uint32_t shaderRegister, Material* material);
 
-//Changes the global ambient param passed into shaders to change based on the day-night cycle in-game.
-XMFLOAT4 CalcGlobalAmbientBasedOnGameTime();
-
 void CreatePostProcessRenderTarget();
 
 float Renderer::frameTime;
@@ -170,6 +167,7 @@ const int shadowMapTextureResgiter = 1;
 const int reflectionTextureResgiter = 2;
 const int instanceSRVRegister = 3;
 const int environmentMapTextureRegister = 4;
+const int normalMapTexureRegister = 5;
 
 const int lightProbeTextureWidth = 64;
 const int lightProbeTextureHeight = 64;
@@ -212,18 +210,18 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 void Renderer::Tick()
 {
 	//BOUNDING BOXES HOTKEY
-	if (Input::GetKeyDown(Keys::Ctrl))
+	if (Input::GetKeyHeld(Keys::Ctrl))
 	{
-		if (Input::GetKeyUp(Keys::B))
+		if (Input::GetKeyDown(Keys::B))
 		{
 			drawBoundingBoxes = !drawBoundingBoxes;
 		}
 	}
 
 	//RENDER TRIGGERS HOTKEY
-	if (Input::GetKeyDown(Keys::Ctrl))
+	if (Input::GetKeyHeld(Keys::Ctrl))
 	{
-		if (Input::GetKeyUp(Keys::T))
+		if (Input::GetKeyDown(Keys::T))
 		{
 			drawTriggers = !drawTriggers;
 		}
@@ -328,10 +326,11 @@ void CreateInputLayout()
 	D3D11_INPUT_ELEMENT_DESC inputDesc[] =
 	{
 		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, pos), D3D11_INPUT_PER_VERTEX_DATA, 0},
-		{"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, offsetof(Vertex, uv), D3D11_INPUT_PER_VERTEX_DATA, 0},
 		{"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, normal), D3D11_INPUT_PER_VERTEX_DATA, 0},
-		{"WEIGHTS", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, weights), D3D11_INPUT_PER_VERTEX_DATA, 0},
+		{"TANGENT", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, tangent), D3D11_INPUT_PER_VERTEX_DATA, 0},
+		{"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, offsetof(Vertex, uv), D3D11_INPUT_PER_VERTEX_DATA, 0},
 		{"BONEINDICES", 0, DXGI_FORMAT_R32G32B32A32_UINT, 0, offsetof(Vertex, boneIndices), D3D11_INPUT_PER_VERTEX_DATA, 0},
+		{"WEIGHTS", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, weights), D3D11_INPUT_PER_VERTEX_DATA, 0},
 	};
 
 	VertexShader* shader = shaderSystem.FindVertexShader(L"Default_vs.cso");
@@ -791,7 +790,7 @@ void Renderer::RenderLightProbeViews()
 
 					//Set matrices
 					shaderMatrices.view = XMMatrixLookAtLH(probeMatrix.r[3],
-						probeMatrix.r[3] + faces[i], VMath::XMVectorUp());
+						probeMatrix.r[3] + faces[i], VMath::GlobalUpVector());
 					shaderMatrices.model = mesh->GetWorldMatrix();
 					shaderMatrices.MakeModelViewProjectionMatrix();
 					shaderMatrices.MakeTextureMatrix(mesh->material);
@@ -1421,7 +1420,7 @@ void UpdateLights()
 
 	shaderLights.numLights = shaderLightsIndex;
 
-	shaderLights.globalAmbient = CalcGlobalAmbientBasedOnGameTime();
+	shaderLights.globalAmbient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.f);
 	XMStoreFloat4(&shaderLights.eyePosition, activeCamera->transform.world.r[3]);
 
 	cbLights->Map(&shaderLights);
@@ -1536,6 +1535,19 @@ void Renderer::MeshIconImageCapture()
 	}
 }
 
+void Renderer::PlayerPhotoCapture(std::wstring outputFilename)
+{
+	debugMenu.debugNotifications.clear();
+
+	ID3D11Texture2D* backBuffer = nullptr;
+	HR(swapchain->GetBuffer(0, IID_PPV_ARGS(&backBuffer)));
+	assert(backBuffer);
+
+	std::wstring imageFile = L"Textures/" + outputFilename;
+	HR(SaveWICTextureToFile(context, backBuffer, GUID_ContainerFormatJpeg, imageFile.c_str()));
+	Log("Photo taken [%S]", imageFile.c_str());
+}
+
 void SetRenderPipelineStates(MeshComponent* mesh)
 {
 	Material* material = mesh->material;
@@ -1640,6 +1652,11 @@ void SetSampler(uint32_t shaderRegister, Sampler* sampler)
 
 void SetShaderResourceFromMaterial(uint32_t shaderRegister, Material* material)
 {
+	//Testing code for normal map SRV set
+	/*auto normalMapTexture = textureSystem.FindTexture2D("wall_normal_map.png");
+	auto normalMapSRV = normalMapTexture->GetSRV();
+	context->PSSetShaderResources(normalMapTexureRegister, 1, &normalMapSRV);*/
+
 	auto textureSRV = material->texture->GetSRV();
 	context->PSSetShaderResources(shaderRegister, 1, &textureSRV);
 }
@@ -1649,23 +1666,6 @@ void SetShaderResourcePixel(uint32_t shaderRegister, std::string textureName)
 	auto texture = textureSystem.FindTexture2D(textureName);
 	auto textureSRV = texture->GetSRV();
 	context->PSSetShaderResources(shaderRegister, 1, &textureSRV);
-}
-
-XMFLOAT4 CalcGlobalAmbientBasedOnGameTime()
-{
-	const int hour = GameInstance::currentHour;
-	const int hoursPerDay = 12; //This is relative to how many game hours there are from start to end.
-
-	//@Todo: after a certain point in the game, light will dim to show night.
-	//Figure out what time the game starts (eg. 12pm, 8am) and change this if based on that.
-	if (hour > 6)
-	{
-		float light = 1.0f - (hour / static_cast<float>(hoursPerDay));
-		light *= 0.5f;
-		return XMFLOAT4(light, light, light, 1.0f);
-	}
-
-	return XMFLOAT4(0.5f, 0.5f, 0.5f, 1.f);
 }
 
 void RenderPostProcess()

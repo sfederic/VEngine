@@ -4,6 +4,7 @@
 #include <fbxsdk.h>
 #include <cassert>
 #include <filesystem>
+#include "VMath.h"
 #include "AssetPaths.h"
 #include "Animation/AnimationStructures.h"
 
@@ -311,6 +312,8 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 			int triangleSize = mesh->GetPolygonSize(i);
 			assert((triangleSize % 3) == 0 && "FBX model isn't triangulated");
 
+			Vertex* verts[3]{};
+
 			for (int j = 0; j < triangleSize; j++)
 			{
 				int index = mesh->GetPolygonVertex(i, j);
@@ -360,7 +363,34 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 				meshData->vertices.emplace_back(vert);
 				meshData->indices.emplace_back(polyIndexCounter);
 				polyIndexCounter++;
+
+				verts[j] = &vert;
 			}
+
+			//tangent/bitangent testing
+			//Ref:https://learnopengl.com/Advanced-Lighting/Normal-Mapping
+			const XMFLOAT3 edge1 = VMath::Float3Subtract(verts[1]->pos, verts[0]->pos);
+			const XMFLOAT3 edge2 = VMath::Float3Subtract(verts[2]->pos, verts[0]->pos);
+
+			const XMFLOAT2 deltaUV1 = VMath::Float2Subtract(verts[1]->uv, verts[0]->uv);
+			const XMFLOAT2 deltaUV2 = VMath::Float2Subtract(verts[2]->uv, verts[0]->uv);
+
+			const float f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
+
+			XMFLOAT3 tangent1{};
+			XMFLOAT3 bitangent1{};
+
+			tangent1.x = f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x);
+			tangent1.y = f * (deltaUV2.y * edge1.y - deltaUV1.y * edge2.y);
+			tangent1.z = f * (deltaUV2.y * edge1.z - deltaUV1.y * edge2.z);
+
+			bitangent1.x = f * (-deltaUV2.x * edge1.x + deltaUV1.x * edge2.x);
+			bitangent1.y = f * (-deltaUV2.x * edge1.y + deltaUV1.x * edge2.y);
+			bitangent1.z = f * (-deltaUV2.x * edge1.z + deltaUV1.x * edge2.z);
+
+			verts[0]->tangent = tangent1;
+			verts[1]->tangent = tangent1;
+			verts[2]->tangent = tangent1;
 		}
 
 		assert(meshData->indices.size() % 3 == 0 && "Num of indices won't be matching vertices");

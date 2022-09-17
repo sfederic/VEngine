@@ -12,6 +12,7 @@ struct Component
 	UID ownerUID = 0;
 	int index = -1;
 	bool active = true;
+	bool tickEnabled = true;
 
 	virtual void Tick(float deltaTime) {}
 	virtual void Start() {}

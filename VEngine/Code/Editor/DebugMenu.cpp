@@ -28,7 +28,6 @@
 #include "SystemCache.h"
 #include "System.h"
 #include "Actors/Game/Player.h"
-#include "Gameplay/Memory.h"
 #include "Console.h"
 #include "Physics/PhysicsSystem.h"
 #include "Render/RenderUtils.h"
@@ -87,10 +86,8 @@ void DebugMenu::Tick(float deltaTime)
 	RenderActorInspectMenu();
 	RenderWorldStats();
 	RenderGameInstanceData();
-	RenderMemoryMenu();
 	RenderActorSystemMenu();
 	RenderComponentSystemMenu();
-	RenderMemoriesMenu();
 	RenderSkeletonViewMenu();
 	RenderCoreMenu();
 	RenderParticleMenu();
@@ -287,50 +284,9 @@ void DebugMenu::RenderWorldStats()
 
 void DebugMenu::RenderGameInstanceData()
 {
-	if (!gameInstaceMenuOpen)
-	{
-		return;
-	}
+	if (!gameInstaceMenuOpen) return;
 
 	ImGui::Begin("Game Instance Data");
-
-	ImGui::Checkbox("Use GameSaves", &GameInstance::useGameSaves);
-	ImGui::InputInt("Current Hour", &GameInstance::currentHour);
-	ImGui::InputInt("Current Minute", &GameInstance::currentMinute);
-	if (ImGui::Button("Reset Instance Data"))
-	{
-		GameInstance::ResetTime();
-		GameInstance::DeletePlayerMemories();
-	}
-
-	ImGui::End();
-}
-
-void DebugMenu::RenderMemoryMenu()
-{
-	if (!memoryMenuOpen)
-	{
-		return;
-	}
-
-	ImGui::Begin("Memory");
-
-	for (auto& systemIt : *systemCache.nameToSystemMap)
-	{
-		System* system = systemIt.second;
-		ImGui::Text(system->name.c_str());
-		switch (system->systemState)
-		{
-		case SystemStates::Loaded:
-			ImGui::Text("Loaded");
-			break;
-
-		case SystemStates::Unloaded:
-			ImGui::Text("Unloaded");
-			break;
-		}
-	}
-
 	ImGui::End();
 }
 
@@ -361,39 +317,6 @@ void DebugMenu::RenderComponentSystemMenu()
 		ImGui::Text("Name: %s |", componentSystem->name.c_str());
 		ImGui::SameLine();
 		ImGui::Text("Actor Count: %d", componentSystem->GetNumComponents());
-	}
-
-	ImGui::End();
-}
-
-void DebugMenu::RenderMemoriesMenu()
-{
-	if (!memoriesMenuOpen) return;
-
-	ImGui::Begin("Memories");
-
-	static char memoryNameAdd[512]{};
-	ImGui::InputText("Memory Name To Add", memoryNameAdd, 512);
-	if (ImGui::Button("Add Memory"))
-	{
-		auto debugMemory = new Memory();
-		debugMemory->name = memoryNameAdd;
-		debugMemory->description = "Aquired from Debug";
-		GameInstance::playerMemories.emplace(memoryNameAdd, debugMemory);
-	}
-
-	for (auto& memory : GameInstance::playerMemories)
-	{
-		Memory* m = memory.second;
-
-		ImGui::Text("Name: %s", m->name.c_str());
-		ImGui::Text("Desc: %s", m->description.c_str());
-		ImGui::Text("Func: %s", m->conditionFuncName.c_str());
-		ImGui::Text("From World: %s", m->worldAquiredFrom.c_str());
-		ImGui::Text("From Actor: %s", m->actorAquiredFrom.c_str());
-		ImGui::Text("Hour: %d | Minute: %d", m->hourAquired, m->minuteAquired);
-
-		ImGui::NewLine();
 	}
 
 	ImGui::End();

@@ -101,6 +101,16 @@ public:
 		return actors;
 	}
 
+	T* GetFirstActor()
+	{
+		if (actors.empty())
+		{
+			return nullptr;
+		}
+
+		return actors.front();
+	}
+
 	virtual uint32_t GetNumActors() override
 	{
 		return actors.size();

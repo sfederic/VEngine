@@ -18,17 +18,17 @@ namespace VMath
     }
 
     //GLOBAL VECTOR DIRECTIONS (X+ = Right, Y+ = Up, Z+ = forward)
-    XMVECTOR XMVectorRight()
+    XMVECTOR GlobalRightVector()
     {
         return XMVectorSet(1.f, 0.f, 0.f, 0.f);
     }
 
-    XMVECTOR XMVectorUp()
+    XMVECTOR GlobalUpVector()
     {
         return XMVectorSet(0.f, 1.f, 0.f, 0.f);
     }
 
-    XMVECTOR XMVectorForward()
+    XMVECTOR GlobalForwardVector()
     {
         return XMVectorSet(0.f, 0.f, 1.f, 0.f);
     }
@@ -81,10 +81,17 @@ namespace VMath
         return XMFLOAT3(pitch, yaw, roll);
     }
 
-    XMFLOAT3 PitchYawRollFromQuaternion(XMFLOAT4 q)
+    //Finding this was the fucking worst. All sorts of wrong mathematical answers on established sites
+    //where answers/proofs were mistaking roll for pitch, converting to degrees in radian operations,
+    //incorrect asin/atan2 operations. What a fucking mess. In the end, a Unity answer was correct.
+    //Ref:https://answers.unity.com/questions/416169/finding-pitchrollyaw-from-quaternions.html
+    void PitchYawRollFromQuaternion(float& roll, float& pitch, float& yaw, XMVECTOR quat)
     {
-        XMMATRIX m = XMMatrixRotationQuaternion(XMLoadFloat4(&q));
-        return XMFLOAT3(PitchYawRollFromMatrix(m));
+        XMFLOAT4 q{};
+        XMStoreFloat4(&q, quat);
+        roll = std::atan2(2 * q.y * q.w - 2 * q.x * q.z, 1 - 2 * q.y * q.y - 2 * q.z * q.z);
+        pitch = std::atan2(2 * q.x * q.w - 2 * q.y * q.z, 1 - 2 * q.x * q.x - 2 * q.z * q.z);
+        yaw = std::asin(2 * q.x * q.y + 2 * q.z * q.w);
     }
 
     XMVECTOR LookAtRotation(XMVECTOR lookAtPoint, XMVECTOR currentPosition)
@@ -92,7 +99,7 @@ namespace VMath
         XMVECTOR forward = XMVectorSubtract(lookAtPoint, currentPosition);
         forward = XMVector3Normalize(forward);
 
-        XMVECTOR right = XMVector3Cross(XMVectorUp(), forward);
+        XMVECTOR right = XMVector3Cross(GlobalUpVector(), forward);
         right = XMVector3Normalize(right);
 
         XMVECTOR up = XMVector3Normalize(XMVector3Cross(forward, right));
@@ -243,17 +250,17 @@ namespace VMath
 
     void UpdateBoundingBox(BoundingOrientedBox& boundingBox, Actor* actor)
     {
-        XMVECTOR actorPos = actor->GetPositionVector();
+        XMVECTOR actorPos = actor->GetPositionV();
         XMVECTOR boundingBoxCenter = XMLoadFloat3(&boundingBox.Center);
         XMVECTOR offset = actorPos + boundingBoxCenter;
         offset.m128_f32[3] = 1.0f;
 
-        XMVECTOR actorScale = actor->GetScaleVector();
+        XMVECTOR actorScale = actor->GetScaleV();
         XMVECTOR extents = XMLoadFloat3(&boundingBox.Extents);
         XMVECTOR scale = extents * actorScale;
         scale.m128_f32[3] = 1.0f;
 
-        XMVECTOR orientation = actor->GetRotationVector();
+        XMVECTOR orientation = actor->GetRotationV();
 
         XMStoreFloat3(&boundingBox.Center, offset);
         XMStoreFloat3(&boundingBox.Extents, scale);
@@ -334,10 +341,20 @@ namespace VMath
             return max;
         }
 
-        static std::random_device rd;
-        static std::mt19937 gen(rd());
+        std::random_device rd;
+        std::mt19937 gen(rd());
         std::uniform_real_distribution dist(min, max);
         float result = dist(gen);
         return result;
+    }
+
+    XMFLOAT3 Float3Subtract(XMFLOAT3& f0, XMFLOAT3& f1)
+    {
+        return XMFLOAT3(f0.x - f1.x, f0.y - f1.y, f0.z - f1.z);
+    }
+
+    XMFLOAT2 Float2Subtract(XMFLOAT2& f0, XMFLOAT2& f1)
+    {
+        return XMFLOAT2(f0.x - f1.x, f0.y - f1.y);
     }
 }

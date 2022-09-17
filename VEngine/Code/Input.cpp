@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "Input.h"
 
+std::set<Keys> currentHeldKeys;
 std::set<Keys> currentDownKeys;
 std::set<Keys> currentUpKeys;
 
@@ -21,6 +22,7 @@ namespace Input
 	void Reset()
 	{
 		currentUpKeys.clear();
+		currentDownKeys.clear();
 
 		mouseWheelUp = false;
 		mouseWheelDown = false;
@@ -32,6 +34,7 @@ namespace Input
 	void SetKeyDown(Keys key)
 	{
 		currentDownKeys.insert(key);
+		currentHeldKeys.insert(key);
 		currentUpKeys.erase(key);
 	}
 
@@ -39,6 +42,7 @@ namespace Input
 	{
 		currentUpKeys.insert(key);
 		currentDownKeys.erase(key);
+		currentHeldKeys.erase(key);
 	}
 
 	bool GetKeyDown(Keys key)
@@ -51,6 +55,12 @@ namespace Input
 	{
 		if (blockInput) return false;
 		return currentUpKeys.find(key) != currentUpKeys.end();
+	}
+
+	bool GetKeyHeld(Keys key)
+	{
+		if (blockInput) return false;
+		return currentHeldKeys.find(key) != currentHeldKeys.end();
 	}
 
 	bool GetAnyKeyDown()

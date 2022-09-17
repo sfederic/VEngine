@@ -63,10 +63,8 @@ private:
 	void RenderCommandsMenu();
 	void RenderWorldStats();
 	void RenderGameInstanceData();
-	void RenderMemoryMenu();
 	void RenderActorSystemMenu();
 	void RenderComponentSystemMenu();
-	void RenderMemoriesMenu();
 	void RenderSkeletonViewMenu();
 	void RenderPhysicsMenu();
 	void RenderCoreMenu();

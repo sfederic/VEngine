@@ -42,9 +42,9 @@ void TransformGizmo::Tick()
     XMStoreFloat4x4(&proj, activeCamera->GetProjectionMatrix());
 
     //Toggle and draw grid
-    if (Input::GetKeyDown(Keys::ShiftLeft))
+    if (Input::GetKeyHeld(Keys::ShiftLeft))
     {
-        if (Input::GetKeyUp(Keys::G))
+        if (Input::GetKeyDown(Keys::G))
         {
             bGridToggle = !bGridToggle;
         }
@@ -189,9 +189,9 @@ void TransformGizmo::Tick()
     }
 
     //Toggle snap and scale controls
-    if (Input::GetKeyDown(Keys::Ctrl))
+    if (Input::GetKeyHeld(Keys::Ctrl))
     {
-        if (Input::GetKeyUp(Keys::O))
+        if (Input::GetKeyDown(Keys::O))
         {
             bBoundsToggle = !bBoundsToggle;
             if (!bBoundsToggle)

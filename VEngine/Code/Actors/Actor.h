@@ -38,6 +38,10 @@ private:
 	int actorSystemIndex = -1;
 
 public:
+	//GAME SPECIFIC VARS
+	std::wstring scanText;
+
+public:
 	Actor() {}
 
 	XMMATRIX GetWorldMatrix();
@@ -47,14 +51,14 @@ public:
 	Transform GetTransform();
 
 	XMFLOAT3 GetPosition();
-	XMVECTOR GetPositionVector();
-	XMVECTOR GetHomogeneousPositionVector();
+	XMVECTOR GetPositionV();
+	XMVECTOR GetHomogeneousPositionV();
 
 	XMFLOAT3 GetScale();
-	XMVECTOR GetScaleVector();
+	XMVECTOR GetScaleV();
 
 	XMFLOAT4 GetRotation();
-	XMVECTOR GetRotationVector();
+	XMVECTOR GetRotationV();
 
 	void SetPosition(XMVECTOR position);
 	void SetPosition(XMFLOAT3 position);
