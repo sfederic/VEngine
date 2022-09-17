@@ -254,16 +254,10 @@
     <ClCompile Include="Code\Actors\DebugActors\DebugCone.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Gameplay\GameUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Editor\PropertyWidgets\TextureDataWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Actors\Game\EntranceTrigger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\DebugActors\DebugCamera.cpp">
@@ -272,16 +266,7 @@
     <ClCompile Include="Code\Render\ShadowMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Components\Game\DialogueComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Actors\Game\InteractTrigger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Editor\DialogueDock.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Actors\Game\NPC.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Gameplay\DialogueStructures.cpp">
@@ -299,12 +284,6 @@
     <ClCompile Include="Code\Actors\Billboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\Grid.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Actors\Game\Unit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Audio\AudioBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -315,9 +294,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\AudioActor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Actors\Game\SavePoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\System.cpp">
@@ -356,16 +332,10 @@
     <ClCompile Include="Code\Editor\PropertyWidgets\MeshComponentDataWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\GridActor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\UI\Game\HealthWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\UI\Game\InteractWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Components\Game\MemoryComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\UI\Game\MemoryMenuWidget.cpp">
@@ -404,9 +374,6 @@
     <ClCompile Include="Code\Actors\DestructibleActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\TitleScreenActor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\UI\Game\MemoryTransferWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -417,12 +384,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\UI\ScreenFadeWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Actors\Game\FenceActor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Actors\Game\DialogueTrigger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Components\Game\ConditionComponent.cpp">
@@ -437,12 +398,6 @@
     <ClCompile Include="Code\UI\Game\UnitLineupWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\PushableGridActor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Actors\Game\PlayerDialogueTrigger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Package.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -452,16 +407,10 @@
     <ClCompile Include="Code\Editor\PropertyWidgets\VEnumWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\PhysicsActor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Components\CharacterControllerComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\UI\Game\BulletWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Actors\Game\MemoryActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Particle\Polyboard.cpp">
@@ -476,16 +425,10 @@
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\GoddessStatue.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Particle\SpriteSheet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\SpriteSheetActor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Actors\Game\MovingGridActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Editor\ImGuizmo\ImSequencer.cpp">
@@ -551,7 +494,28 @@
     <ClCompile Include="Code\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\MemoryCheckGridActor.cpp">
+    <ClCompile Include="Code\Components\Game\PhotoComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Actors\Game\Door.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Actors\Game\DoorSwitch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Actors\Game\InteractActor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Actors\Game\LevelEntranceTrigger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Actors\Game\NoteActor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Actors\Game\PhotoActor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Actors\Game\PlayerShip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -742,16 +706,10 @@
     <ClInclude Include="Code\Actors\DebugActors\DebugCone.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Gameplay\GameUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\PropertyWidgets\TextureDataWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\EntranceTrigger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\DebugActors\DebugCamera.h">
@@ -760,16 +718,7 @@
     <ClInclude Include="Code\Render\ShadowMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Components\Game\DialogueComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\InteractTrigger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Editor\DialogueDock.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\NPC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\DialogueStructures.h">
@@ -790,13 +739,7 @@
     <ClInclude Include="Code\Actors\Billboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\Grid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Gameplay\GridNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\Unit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Audio\AudioBase.h">
@@ -812,9 +755,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\System.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\SavePoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\SystemCache.h">
@@ -856,9 +796,6 @@
     <ClInclude Include="Code\Editor\PropertyWidgets\MeshComponentDataWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\GridActor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\UI\Game\HealthWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -866,9 +803,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\Memory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Components\Game\MemoryComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\MemoryMenuWidget.h">
@@ -910,9 +844,6 @@
     <ClInclude Include="Code\Actors\DestructibleActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\TitleScreenActor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\UI\Game\MemoryTransferWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -925,12 +856,6 @@
     <ClInclude Include="Code\UI\ScreenFadeWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\FenceActor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\DialogueTrigger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Components\Game\ConditionComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -940,28 +865,16 @@
     <ClInclude Include="Code\UI\Game\UnitLineupWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\PushableGridActor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\PlayerDialogueTrigger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\VEnum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\PropertyWidgets\VEnumWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\PhysicsActor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Components\CharacterControllerComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\BulletWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\MemoryActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Particle\Polyboard.h">
@@ -976,9 +889,6 @@
     <ClInclude Include="Code\Actors\DebugNoteActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\GoddessStatue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Gameplay\BattleEnums.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -986,9 +896,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\SpriteSheetActor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\MovingGridActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\ImGuizmo\ImSequencer.h">
@@ -1060,7 +967,28 @@
     <ClInclude Include="Code\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\MemoryCheckGridActor.h">
+    <ClInclude Include="Code\Components\Game\PhotoComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\Door.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\DoorSwitch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\InteractActor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\LevelEntranceTrigger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\NoteActor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\PhotoActor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\PlayerShip.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
