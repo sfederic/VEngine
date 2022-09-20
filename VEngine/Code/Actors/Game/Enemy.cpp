@@ -39,6 +39,15 @@ Properties Enemy::GetProps()
 	return __super::GetProps();
 }
 
+void Enemy::InflictDamage(int damageAmount)
+{
+	healthPoints -= damageAmount;
+	if (healthPoints <= 0)
+	{
+		Destroy();
+	}
+}
+
 void Enemy::PlayerEnteredAggroTrigger()
 {
 	inCombat = true;

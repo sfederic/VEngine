@@ -18,6 +18,8 @@ public:
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 
+	void InflictDamage(int damageAmount);
+
 private:
 	void PlayerEnteredAggroTrigger();
 
@@ -28,7 +30,7 @@ private:
 
 	WidgetComponent* healthWidget = nullptr;
 
-	int healthPoints = 1;
+	int healthPoints = 3;
 
 	bool inCombat = false;
 };

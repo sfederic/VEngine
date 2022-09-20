@@ -6,6 +6,7 @@
 #include "VMath.h"
 #include "Actors/Game/NoteActor.h"
 #include "Actors/Game/InteractActor.h"
+#include "Actors/Game/Enemy.h"
 #include "Components/CameraComponent.h"
 #include "Components/EmptyComponent.h"
 #include "Components/Game/PhotoComponent.h"
@@ -311,7 +312,11 @@ void Player::ShootInput()
 		const float shootDistance = 50.f;
 		if (Raycast(ray, GetPositionV(), GetPositionV() + (camera->GetForwardVectorV() * shootDistance)))
 		{
-			ray.hitActor->Destroy();
+			auto enemy = dynamic_cast<Enemy*>(ray.hitActor);
+			if (enemy)
+			{
+				enemy->InflictDamage(1);
+			}
 		}
 	}
 }
