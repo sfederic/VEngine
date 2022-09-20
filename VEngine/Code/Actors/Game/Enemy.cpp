@@ -26,6 +26,7 @@ void Enemy::Start()
 void Enemy::Tick(float deltaTime)
 {
 	healthWidget->SetPosition(GetHomogeneousPositionV());
+	healthWidget->GetWidget<EnemyHealthWidget>()->healthPoints = healthPoints;
 
 	if (aggroTrigger->ContainsTarget() && !inCombat)
 	{

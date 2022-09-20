@@ -28,5 +28,7 @@ private:
 
 	WidgetComponent* healthWidget = nullptr;
 
+	int healthPoints = 1;
+
 	bool inCombat = false;
 };
