@@ -246,6 +246,7 @@
     <ClCompile Include="Code\Actors\Game\DialogueTrigger.cpp" />
     <ClCompile Include="Code\Gameplay\DialogueStructures.cpp" />
     <ClCompile Include="Code\Actors\Game\Enemy.cpp" />
+    <ClCompile Include="Code\UI\Game\PlayerActionBarWidget.cpp" />
     <ClInclude Include="Code\Actors\CameraActor.h" />
     <ClInclude Include="Code\Asset\AssetFileExtensions.h" />
     <ClInclude Include="Code\Asset\AssetPaths.h" />
@@ -493,6 +494,7 @@
     <ClInclude Include="Code\Actors\Game\DialogueTrigger.h" />
     <ClInclude Include="Code\Gameplay\DialogueStructures.h" />
     <ClInclude Include="Code\Actors\Game\Enemy.h" />
+    <ClInclude Include="Code\UI\Game\PlayerActionBarWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

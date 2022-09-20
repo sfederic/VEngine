@@ -509,6 +509,9 @@
     <ClCompile Include="Code\UI\Game\EnemyHealthWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\UI\Game\PlayerActionBarWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -965,6 +968,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\EnemyHealthWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\UI\Game\PlayerActionBarWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
