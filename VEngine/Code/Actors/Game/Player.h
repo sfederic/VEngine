@@ -42,6 +42,7 @@ private:
 	void ProgressDialogue();
 	void EndDialogue();
 	bool CombatMoveCheck();
+	void EndCombatTurn();
 
 public:
 	CameraComponent* camera = nullptr;
@@ -64,7 +65,8 @@ private:
 	float moveSpeed = 3.f;
 	float rotSpeed = 2.5f;
 
-	int combatActionPoints = 7;
+	static const int MAX_ACTION_POINTS = 7;
+	int combatActionPoints = MAX_ACTION_POINTS;
 	bool inCombat = false;
 
 	bool scanVisorActive = false;

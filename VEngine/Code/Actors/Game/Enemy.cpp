@@ -5,6 +5,7 @@
 #include "Components/WidgetComponent.h"
 #include "UI/Game/EnemyHealthWidget.h"
 #include "Gameplay/GameUtils.h"
+#include "Gameplay/CombatManager.h"
 
 Enemy::Enemy()
 {
@@ -52,7 +53,12 @@ void Enemy::PlayerEnteredAggroTrigger()
 {
 	inCombat = true;
 	Log("Combat started with Enemy [%s].", GetName().c_str());
+
 	GameUtils::SetPlayerCombatOn();
+
 	aggroTrigger->renderWireframeColour = XMFLOAT4(1.f, 0.f, 0.f, 1.f); //Set trigger to red.
+
 	healthWidget->AddToViewport();
+
+	CombatManager::AddActiveEnemy(this);
 }

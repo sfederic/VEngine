@@ -20,6 +20,7 @@
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/DialogueStructures.h"
+#include "Gameplay/CombatManager.h"
 
 const int movementIncrement = 1;
 
@@ -157,6 +158,19 @@ bool Player::CombatMoveCheck()
 	}
 
 	return true;
+}
+
+void Player::EndCombatTurn()
+{
+	if (inCombat)
+	{
+		if (Input::GetKeyDown(Keys::Space))
+		{
+			combatActionPoints = MAX_ACTION_POINTS;
+
+			CombatManager::ChangeToEnemyTurn();
+		}
+	}
 }
 
 void Player::MovementInput(float deltaTime)
