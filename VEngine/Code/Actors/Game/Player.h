@@ -8,6 +8,7 @@ class ScanWidget;
 class PhotoWidget;
 class DialogueWidget;
 class SalvageMissionWidget;
+class PlayerActionBarWidget;
 
 class Player : public Actor
 {
@@ -20,7 +21,7 @@ public:
 	virtual Properties GetProps() override;
 
 	void StartDialogue(std::string dialogueFilename);
-	void SetInCombat(bool inCombat_) { inCombat = inCombat; }
+	void SetInCombat(bool combatActive);
 
 private:
 	void MovementInput(float deltaTime);
@@ -49,6 +50,7 @@ private:
 	PhotoWidget* photoWidget = nullptr;
 	SalvageMissionWidget* salvageMissionWidget = nullptr;
 	DialogueWidget* dialogueWidget = nullptr;
+	PlayerActionBarWidget* actionBarWidget = nullptr;
 
 	XMVECTOR movementAxes[4]{};
 
@@ -61,8 +63,10 @@ private:
 	float moveSpeed = 3.f;
 	float rotSpeed = 2.5f;
 
+	int combatActionPoints = 7;
+	bool inCombat = false;
+
 	bool scanVisorActive = false;
 	bool shakeOnWallRotateEnd = false;
 	bool salvageMissionMenuOpen = false;
-	bool inCombat = false;
 };

@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 #include <DirectXMath.h>
 
@@ -8,7 +9,7 @@ class Player;
 class Actor;
 struct SpriteSheet;
 
-//Utility functions for in-game stuff
+//Utility functions for in-game stuff.
 namespace GameUtils
 {
 	Player* GetPlayer();

@@ -15,6 +15,7 @@
 #include "UI/Game/PhotoWidget.h"
 #include "UI/Game/SalvageMissionWidget.h"
 #include "UI/Game/DialogueWidget.h"
+#include "UI/Game/PlayerActionBarWidget.h"
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/DialogueStructures.h"
@@ -99,6 +100,14 @@ void Player::StartDialogue(std::string dialogueFilename)
 	{
 		EndDialogue();
 	}
+}
+
+void Player::SetInCombat(bool combatActive)
+{
+	inCombat = combatActive;
+
+	actionBarWidget->actionPoints = combatActionPoints;
+	actionBarWidget->AddToViewport();
 }
 
 void Player::ProgressDialogue()
@@ -397,6 +406,7 @@ void Player::CreatePlayerWidgets()
 	photoWidget = CreateWidget<PhotoWidget>();
 	salvageMissionWidget = CreateWidget<SalvageMissionWidget>();
 	dialogueWidget = CreateWidget<DialogueWidget>();
+	actionBarWidget = CreateWidget<PlayerActionBarWidget>();
 }
 
 void Player::SpawnNote()
