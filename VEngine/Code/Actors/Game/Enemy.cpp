@@ -2,6 +2,7 @@
 #include "Enemy.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Components/MeshComponent.h"
+#include "Gameplay/GameUtils.h"
 
 Enemy::Enemy()
 {
@@ -33,9 +34,7 @@ Properties Enemy::GetProps()
 void Enemy::PlayerEnteredAggroTrigger()
 {
 	inCombat = true;
-
 	Log("Combat started with Enemy [%s].", GetName().c_str());
-
-	//Set trigger to red.
-	aggroTrigger->renderWireframeColour = XMFLOAT4(1.f, 0.f, 0.f, 1.f);
+	GameUtils::SetPlayerCombatOn();
+	aggroTrigger->renderWireframeColour = XMFLOAT4(1.f, 0.f, 0.f, 1.f); //Set trigger to red.
 }

@@ -20,6 +20,7 @@ public:
 	virtual Properties GetProps() override;
 
 	void StartDialogue(std::string dialogueFilename);
+	void SetInCombat(bool inCombat_) { inCombat = inCombat; }
 
 private:
 	void MovementInput(float deltaTime);
@@ -61,8 +62,7 @@ private:
 	float rotSpeed = 2.5f;
 
 	bool scanVisorActive = false;
-
 	bool shakeOnWallRotateEnd = false;
-
 	bool salvageMissionMenuOpen = false;
+	bool inCombat = false;
 };

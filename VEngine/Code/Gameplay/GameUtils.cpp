@@ -29,6 +29,16 @@ namespace GameUtils
 		return nullptr;
 	}
 
+	void SetPlayerCombatOn()
+	{
+		GetPlayer()->SetInCombat(true);
+	}
+
+	void SetPlayerCombatOff()
+	{
+		GetPlayer()->SetInCombat(false);
+	}
+
 	void SetActiveCameraTarget(Actor* newTarget)
 	{
 		activeCamera->targetActor = newTarget;

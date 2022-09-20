@@ -12,6 +12,8 @@ struct SpriteSheet;
 namespace GameUtils
 {
 	Player* GetPlayer();
+	void SetPlayerCombatOn();
+	void SetPlayerCombatOff();
 
 	void SetActiveCameraTarget(Actor* newTarget);
 	void CameraShake(float shake);
