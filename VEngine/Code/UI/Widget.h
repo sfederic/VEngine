@@ -95,7 +95,7 @@ protected:
 	//Aligns widget to viewport percentage where 0.0 is the top left and 1.0 is the bottom right
 	Layout PercentAlignLayout(float left, float top, float right, float bottom);
 
-	Layout CenterLayoutOnScreenSpaceCoords(float w, float h, float sx, float sy);
+	Layout CenterLayoutOnScreenSpaceCoords(float w, float h);
 };
 
 template <typename T>
