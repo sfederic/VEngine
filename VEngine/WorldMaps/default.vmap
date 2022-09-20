@@ -109,79 +109,22 @@ Scan Text
 UID
 3212415464
 next
-DialogueTrigger
+Enemy
 1
  Enabled
 1
  Position
-0 0 1
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Dialogue File
-test.dialog
-Name
-DialogueTrigger0
-Scan Text
-
-UID
-2444997292
-next
-Door
-1
- Enabled
-1
- Position
--1 0 3
- Rotation
--0 0 -0 1
- Scale
-7 3.5 1
-Name
-Door0
-Open
-0
-Scan Text
-
-UID
-2039728654
-next
-DoorSwitch
-1
- Enabled
-1
- Position
-2 4 0
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Door Name
-Door0
-Name
-DoorSwitch0
-Scan Text
-A switch to a connected door.
-UID
-3949077971
-next
-PhotoActor
-1
- Enabled
-1
- Position
--4 1 -1
+-1 0 2
  Rotation
 0 0 0 1
  Scale
 1 1 1
 Name
-PhotoActor0
+Enemy0
 Scan Text
-Looks like it's very photogenic.
+An enemy.
 UID
-2525783966
+991682626
 next
 CameraComponent
 1
@@ -192,7 +135,7 @@ Camera
  Pos
 0 0 0
  Rot
--0.299407 0.395253 0.138029 0.85737
+0 0 0 1
  Scale
 1 1 1
 FOV
@@ -204,23 +147,23 @@ Near Z
 next
 BoxTriggerComponent
 1
-2444997292
-BoxTrigger
+991682626
+AggroTrigger
  Enabled
 1
  Pos
-0 0 1
+0 0 0
  Rot
 0 0 0 1
  Scale
 1 1 1
 Extents
-0.45 0.45 0.45
+2 2 2
 Offset
-0 0 0
+0 1.5 0
 next
 MeshComponent
-8
+6
 2369940409
 Mesh
  Enabled
@@ -456,106 +399,12 @@ cube.fbx
 Static
 1
 next
-2039728654
+991682626
 Mesh
  Enabled
 1
  Pos
--1 0 3
- Rot
--0 0 -0 1
- Scale
-7 3.5 1
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-
-Static
-1
-next
-3949077971
-Mesh
- Enabled
-1
- Pos
-2 4 0
- Rot
-0 0 0 1
- Scale
-1 1 1
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-
-Static
-1
-next
-2525783966
-Mesh
- Enabled
-1
- Pos
--4 1 -1
+-1 0 2
  Rot
 0 0 0 1
  Scale
@@ -628,14 +477,5 @@ Root
 -0 0 -0 1
  Scale
 1 1 1
-next
-PhotoComponent
-1
-2525783966
-Photo
- Enabled
-1
-Photo Tag
-test1
 next
 end
