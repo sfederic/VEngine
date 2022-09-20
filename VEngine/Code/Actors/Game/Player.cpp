@@ -54,6 +54,11 @@ void Player::Tick(float deltaTime)
 {
 	camera->upViewVector = GetUpVectorV();
 
+	if (inCombat)
+	{
+		actionBarWidget->actionPoints = combatActionPoints;
+	}
+
 	SetMovementAxis();
     MovementInput(deltaTime);
 
@@ -136,6 +141,23 @@ void Player::EndDialogue()
 	dialogue.Reset();
 }
 
+bool Player::CombatMoveCheck()
+{
+	if (inCombat)
+	{
+		if (combatActionPoints > 0)
+		{
+			combatActionPoints--;
+			return true;
+		}
+
+		Log("Cannot move. Not enough action points during combat.");
+		return false;
+	}
+
+	return true;
+}
+
 void Player::MovementInput(float deltaTime)
 {
 	if (CheckIfPlayerMovementAndRotationStopped())
@@ -152,11 +174,14 @@ void Player::MovementInput(float deltaTime)
 		{
 			if (!RotatePlayerOnWallMoveHit(rightAxis, forwardAxis, -90.f, -90.f, 90.f, 90.f))
 			{
-				nextPos = GetPositionV() + (forwardAxis * movementIncrement);
-
-				if (IsFloorEmptyOnNextMove())
+				if (CombatMoveCheck())
 				{
-					nextPos = previousPos;
+					nextPos = GetPositionV() + (forwardAxis * movementIncrement);
+
+					if (IsFloorEmptyOnNextMove())
+					{
+						nextPos = previousPos;
+					}
 				}
 			}
 		}
@@ -164,11 +189,14 @@ void Player::MovementInput(float deltaTime)
 		{
 			if (!RotatePlayerOnWallMoveHit(rightAxis, -forwardAxis, 90.f, 90.f, -90.f, -90.f))
 			{
-				nextPos = GetPositionV() - (forwardAxis * movementIncrement);
-
-				if (IsFloorEmptyOnNextMove())
+				if (CombatMoveCheck())
 				{
-					nextPos = previousPos;
+					nextPos = GetPositionV() - (forwardAxis * movementIncrement);
+
+					if (IsFloorEmptyOnNextMove())
+					{
+						nextPos = previousPos;
+					}
 				}
 			}
 		}
@@ -176,11 +204,14 @@ void Player::MovementInput(float deltaTime)
 		{
 			if (!RotatePlayerOnWallMoveHit(forwardAxis, -rightAxis, -90.f, -90.f, 90.f, 90.f))
 			{
-				nextPos = GetPositionV() - (rightAxis * movementIncrement);
-
-				if (IsFloorEmptyOnNextMove())
+				if (CombatMoveCheck())
 				{
-					nextPos = previousPos;
+					nextPos = GetPositionV() - (rightAxis * movementIncrement);
+
+					if (IsFloorEmptyOnNextMove())
+					{
+						nextPos = previousPos;
+					}
 				}
 			}
 		}
@@ -188,11 +219,14 @@ void Player::MovementInput(float deltaTime)
 		{
 			if (!RotatePlayerOnWallMoveHit(forwardAxis, rightAxis, 90.f, 90.f, -90.f, -90.f))
 			{
-				nextPos = GetPositionV() + (rightAxis * movementIncrement);
-
-				if (IsFloorEmptyOnNextMove())
+				if (CombatMoveCheck())
 				{
-					nextPos = previousPos;
+					nextPos = GetPositionV() + (rightAxis * movementIncrement);
+
+					if (IsFloorEmptyOnNextMove())
+					{
+						nextPos = previousPos;
+					}
 				}
 			}
 		}

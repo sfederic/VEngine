@@ -41,6 +41,7 @@ private:
 	void ToggleSalvageMissionStats();
 	void ProgressDialogue();
 	void EndDialogue();
+	bool CombatMoveCheck();
 
 public:
 	CameraComponent* camera = nullptr;
