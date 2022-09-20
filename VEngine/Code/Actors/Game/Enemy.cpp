@@ -2,6 +2,8 @@
 #include "Enemy.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Components/MeshComponent.h"
+#include "Components/WidgetComponent.h"
+#include "UI/Game/EnemyHealthWidget.h"
 #include "Gameplay/GameUtils.h"
 
 Enemy::Enemy()
@@ -11,6 +13,9 @@ Enemy::Enemy()
 	mesh = CreateComponent(MeshComponent(), "Mesh");
 	rootComponent = mesh;
 	rootComponent->AddChild(aggroTrigger);
+
+	healthWidget = CreateComponent(WidgetComponent(), "HealthWidget");
+	healthWidget->CreateWidget<EnemyHealthWidget>();
 }
 
 void Enemy::Start()
@@ -20,6 +25,8 @@ void Enemy::Start()
 
 void Enemy::Tick(float deltaTime)
 {
+	healthWidget->SetPosition(GetHomogeneousPositionV());
+
 	if (aggroTrigger->ContainsTarget() && !inCombat)
 	{
 		PlayerEnteredAggroTrigger();
@@ -37,4 +44,5 @@ void Enemy::PlayerEnteredAggroTrigger()
 	Log("Combat started with Enemy [%s].", GetName().c_str());
 	GameUtils::SetPlayerCombatOn();
 	aggroTrigger->renderWireframeColour = XMFLOAT4(1.f, 0.f, 0.f, 1.f); //Set trigger to red.
+	healthWidget->AddToViewport();
 }

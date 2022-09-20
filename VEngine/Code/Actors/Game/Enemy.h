@@ -5,6 +5,8 @@
 
 struct BoxTriggerComponent;
 struct MeshComponent;
+class EnemyHealthWidget;
+struct WidgetComponent;
 
 class Enemy : public Actor
 {
@@ -23,6 +25,8 @@ private:
 	BoxTriggerComponent* aggroTrigger = nullptr;
 
 	MeshComponent* mesh = nullptr;
+
+	WidgetComponent* healthWidget = nullptr;
 
 	bool inCombat = false;
 };
