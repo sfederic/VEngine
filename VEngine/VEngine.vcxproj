@@ -125,6 +125,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Code\Gameplay\CombatManager.cpp" />
     <ClCompile Include="Code\Gameplay\ConditionSystem.cpp" />
     <ClCompile Include="Code\IFunction.cpp" />
     <ClCompile Include="Code\Render\PixelShader.cpp" />
@@ -253,6 +254,7 @@
     <ClInclude Include="Code\Camera.h" />
     <ClInclude Include="Code\Components\Game\ConditionComponent.h" />
     <ClInclude Include="Code\Editor\ImGuizmo\ImSequencer.h" />
+    <ClInclude Include="Code\Gameplay\CombatManager.h" />
     <ClInclude Include="Code\Gameplay\ConditionSystem.h" />
     <ClInclude Include="Code\IFunction.h" />
     <ClInclude Include="Code\Property.h" />
