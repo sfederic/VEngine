@@ -23,6 +23,7 @@
 #include "Physics/PhysicsSystem.h"
 #include "Editor/CutsceneSequencer.h"
 #include "Profile.h"
+#include "Gameplay/MissionSystem.h"
 
 void Engine::Init(int argc, char* argv[])
 {
@@ -56,6 +57,8 @@ void Engine::Init(int argc, char* argv[])
 
 	debugMenuInit.wait();
 	consoleInit.wait();
+
+	MissionSystem::Init();
 
 	double endTime = Profile::QuickEnd(startTime);
 	Log("Startup took: %f seconds", endTime);
