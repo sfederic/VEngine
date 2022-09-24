@@ -20,6 +20,7 @@
 #include "Serialiser.h"
 #include "Core.h"
 #include "Render/MaterialSystem.h"
+#include "Actors/Game/PlayerShip.h"
 
 void QtEditor::Init(int argc, char* argv[])
 {
@@ -42,7 +43,9 @@ void QtEditor::Tick()
 
     app->processEvents();
 
-    if (Core::gameplayOn && mainWindow->isActiveWindow())
+    //Don't want FPS mouse controls for overworld
+    PlayerShip* playerShip = PlayerShip::system.GetFirstActor();
+    if (Core::gameplayOn && playerShip == nullptr && mainWindow->isActiveWindow())
     {
         SetMousePosFPSGameplay();
     }
