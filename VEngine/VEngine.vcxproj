@@ -161,6 +161,7 @@
     <ClCompile Include="Code\Render\RenderTypes.cpp" />
     <ClCompile Include="Code\System.cpp" />
     <ClCompile Include="Code\UID.cpp" />
+    <ClCompile Include="Code\UI\Game\ClientSalvageMenu.cpp" />
     <ClCompile Include="Code\UI\Game\EnemyHealthWidget.cpp" />
     <ClCompile Include="Code\VEnum.cpp" />
     <ClCompile Include="Code\vpch.cpp">
@@ -383,6 +384,7 @@
     <ClInclude Include="Code\Particle\Particle.h" />
     <ClInclude Include="Code\Physics\CollisionLayers.h" />
     <ClInclude Include="Code\UID.h" />
+    <ClInclude Include="Code\UI\Game\ClientSalvageMenu.h" />
     <ClInclude Include="Code\UI\Game\EnemyHealthWidget.h" />
     <ClInclude Include="Code\VEnum.h" />
     <ClInclude Include="Code\VFunction.h" />
