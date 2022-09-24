@@ -249,6 +249,7 @@
     <ClCompile Include="Code\Gameplay\DialogueStructures.cpp" />
     <ClCompile Include="Code\Actors\Game\Enemy.cpp" />
     <ClCompile Include="Code\UI\Game\PlayerActionBarWidget.cpp" />
+    <ClCompile Include="Code\Gameplay\MissionManager.cpp" />
     <ClInclude Include="Code\Actors\CameraActor.h" />
     <ClInclude Include="Code\Asset\AssetFileExtensions.h" />
     <ClInclude Include="Code\Asset\AssetPaths.h" />
@@ -257,6 +258,7 @@
     <ClInclude Include="Code\Editor\ImGuizmo\ImSequencer.h" />
     <ClInclude Include="Code\Gameplay\CombatManager.h" />
     <ClInclude Include="Code\Gameplay\ConditionSystem.h" />
+    <ClInclude Include="Code\Gameplay\Mission.h" />
     <ClInclude Include="Code\IFunction.h" />
     <ClInclude Include="Code\Property.h" />
     <ClInclude Include="Code\Render\PixelShader.h" />
@@ -499,6 +501,7 @@
     <ClInclude Include="Code\Gameplay\DialogueStructures.h" />
     <ClInclude Include="Code\Actors\Game\Enemy.h" />
     <ClInclude Include="Code\UI\Game\PlayerActionBarWidget.h" />
+    <ClInclude Include="Code\Gameplay\MissionManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

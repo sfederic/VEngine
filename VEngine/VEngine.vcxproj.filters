@@ -518,6 +518,9 @@
     <ClCompile Include="Code\UI\Game\ClientSalvageMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Gameplay\MissionManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -983,6 +986,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\ClientSalvageMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Gameplay\MissionManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Gameplay\Mission.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
