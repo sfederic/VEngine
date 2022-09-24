@@ -13,7 +13,7 @@ void ClientSalvageMenu::DrawMissionSelectMenu()
 	FillRect(selectMenuLayout);
 
 	selectMenuLayout.PushToTop();
-	selectMenuLayout.AddVerticalSpace(30.f);
+	selectMenuLayout.rect.bottom += 30.f;
 
 	if (Button(L"Mission 1", selectMenuLayout))
 	{

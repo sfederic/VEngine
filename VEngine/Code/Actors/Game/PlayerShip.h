@@ -4,6 +4,7 @@
 #include "../ActorSystem.h"
 
 class CameraComponent;
+class ClientSalvageMenu;
 
 //Ship that travels around world map.
 class PlayerShip : public Actor
@@ -20,6 +21,8 @@ private:
 	void MovementInput(float deltaTime);
 
 	CameraComponent* camera = nullptr;
+
+	ClientSalvageMenu* clientSalvageMenu = nullptr;
 
 	float moveSpeed = 4.f;
 	float rotateSpeed = 2.5f;

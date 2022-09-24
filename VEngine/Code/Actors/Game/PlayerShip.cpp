@@ -3,6 +3,7 @@
 #include "Input.h"
 #include "Components/MeshComponent.h"
 #include "Components/CameraComponent.h"
+#include "UI/Game/ClientSalvageMenu.h"
 
 PlayerShip::PlayerShip()
 {
@@ -16,12 +17,26 @@ PlayerShip::PlayerShip()
 
 void PlayerShip::Start()
 {
+    clientSalvageMenu = CreateWidget<ClientSalvageMenu>();
+
     camera->targetActor = this;
 }
 
 void PlayerShip::Tick(float deltaTime)
 {
     MovementInput(deltaTime);
+
+    if (Input::GetKeyUp(Keys::Enter))
+    {
+        if (clientSalvageMenu->IsInViewport())
+        {
+            clientSalvageMenu->RemoveFromViewport();
+        }
+        else
+        {
+            clientSalvageMenu->AddToViewport();
+        }
+    }
 }
 
 Properties PlayerShip::GetProps()
