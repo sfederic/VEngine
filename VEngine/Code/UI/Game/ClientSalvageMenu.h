@@ -2,6 +2,8 @@
 
 #include "../Widget.h"
 
+struct Mission;
+
 //Menu to show current undertakable salvage missions.
 class ClientSalvageMenu : public Widget
 {
@@ -12,5 +14,5 @@ private:
 	void DrawMissionSelectMenu();
 	void DrawMissionDetails();
 
-	int selectedMission = -1;
+	Mission* selectedMission = nullptr;
 };
