@@ -29,6 +29,19 @@ void Widget::RemoveFromViewport()
 	uiSystem.RemoveWidget(this);
 }
 
+bool Widget::IsInViewport()
+{
+	for (Widget* widget : uiSystem.widgetsInViewport)
+	{
+		if (widget == this)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 void Widget::GetScreenSpaceCoords(int& sx, int& sy)
 {
 	//What you need to do here it take the actor's position after it's been multiplied 

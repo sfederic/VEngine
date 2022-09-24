@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 #include <d2d1_1.h>
 #include <DirectXMath.h>
@@ -72,6 +73,8 @@ public:
 
 	void AddToViewport(float removeTimer = 0.f);
 	void RemoveFromViewport();
+
+	bool IsInViewport();
 
 protected:
 	void GetScreenSpaceCoords(int& sx, int& sy);
