@@ -53,7 +53,7 @@ void GridNode::DisplayShow()
 void GridNode::RecalcNodeHeight(Ray& ray)
 {
 	XMVECTOR origin = XMVectorSet((float)xIndex, 20.f, (float)yIndex, 1.f);
-	if (Raycast(ray, origin, -VMath::XMVectorUp(), 40.f))
+	if (Raycast(ray, origin, -VMath::GlobalUpVector(), 40.f))
 	{
 		auto grid = GameUtils::GetGrid();
 		auto& meshInstanceData = grid->nodeMesh->instanceData[instancedMeshIndex];

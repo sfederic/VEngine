@@ -133,7 +133,7 @@ void BattleSystem::RemoveUnit(Unit* unit)
 	{
 		//@Todo: currently the death text doesn't hold on the actors position
 		auto deathDialogueWidget = CreateWidget<DialogueWidget>();
-		deathDialogueWidget->pos = unit->GetHomogeneousPositionVector();
+		deathDialogueWidget->pos = unit->GetHomogeneousPositionV();
 		deathDialogueWidget->SetText(unit->deathText);
 		deathDialogueWidget->AddToViewport(5.0f);
 	}

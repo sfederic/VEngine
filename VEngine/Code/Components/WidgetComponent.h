@@ -19,17 +19,5 @@ struct WidgetComponent : Component
 	void AddToViewport();
 	void RemoveFromViewport();
 
-	template <typename T>
-	void CreateWidget() { widget = new T(); }
-
-	template <typename T>
-	T* GetWidget() 
-	{ 
-		T* result = dynamic_cast<T*>(widget);
-		assert(result && "Wrong typename");
-		return result;
-	}
-
-private:
 	Widget* widget = nullptr;
 };

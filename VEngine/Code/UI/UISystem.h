@@ -1,10 +1,16 @@
 #pragma once
+
 #include <d2d1_1.h>
 #include <dwrite_1.h>
 #include <vector>
 #include "System.h"
 
 class Widget;
+struct MemoryGainedWidget;
+struct MemoryRecalledWidget;
+struct UnitLineupWidget;
+struct ScreenFadeWidget;
+struct GuiltWidget;
 
 namespace Colours
 {
@@ -14,6 +20,13 @@ namespace Colours
 
 struct UISystem : public System
 {
+	//Global widgets
+	MemoryGainedWidget* memoryGainedWidget = nullptr;
+	MemoryRecalledWidget* memoryRecalledWidget = nullptr;
+	ScreenFadeWidget* screenFadeWidget = nullptr;
+	GuiltWidget* guiltWidget = nullptr;
+	UnitLineupWidget* unitLineupWidget = nullptr;
+
 	//Every widget added in-game
 	std::vector<Widget*> widgets;
 

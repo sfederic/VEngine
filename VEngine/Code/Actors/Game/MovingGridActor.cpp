@@ -16,15 +16,15 @@ void MovingGridActor::Start()
 {
 	__super::Start();
 
-	nextPos = GetPositionVector();
+	nextPos = GetPositionV();
 }
 
 void MovingGridActor::Tick(float deltaTime)
 {
-	SetPosition(VMath::VectorConstantLerp(GetPositionVector(), nextPos, deltaTime, moveSpeed));
+	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, moveSpeed));
 
 	//Taken from PushableGridActor
-	if (XMVector4Equal(nextPos, GetPositionVector()))
+	if (XMVector4Equal(nextPos, GetPositionV()))
 	{
 		isMoving = false;
 
@@ -39,8 +39,8 @@ void MovingGridActor::Tick(float deltaTime)
 void MovingGridActor::Interact()
 {
 	Ray ray(this);
-	XMVECTOR end = GetPositionVector() + (XMLoadFloat3(&moveDirection) * 20.f);
-	if (Raycast(ray, GetPositionVector(), end))
+	XMVECTOR end = GetPositionV() + (XMLoadFloat3(&moveDirection) * 20.f);
+	if (Raycast(ray, GetPositionV(), end))
 	{
 		nextPos = XMLoadFloat3(&ray.hitPos) - (XMLoadFloat3(&moveDirection) / 2.f);
 

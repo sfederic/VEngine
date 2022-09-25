@@ -81,7 +81,7 @@ void Grid::Awake()
             instanceData.colour = GridNode::normalColour;
 
             //raycast against the world to set node position
-            if (Raycast(ray, rayOrigin, -VMath::XMVectorUp(), 20.0f))
+            if (Raycast(ray, rayOrigin, -VMath::GlobalUpVector(), 20.0f))
             {
                 //Scale the node down to nothing
                 XMMATRIX scaleMatrix = XMMatrixScaling(0.f, 0.f, 0.f);

@@ -2,6 +2,7 @@
 #include "DialogueComponent.h"
 #include "World.h"
 #include "Components/WidgetComponent.h"
+#include "UI/Widget.h"
 #include "UI/Game/DialogueWidget.h"
 #include "Log.h"
 #include "VString.h"
@@ -112,7 +113,7 @@ bool DialogueComponent::ShowTextAtActor()
     auto dcs = actor->GetComponentsOfType<DialogueComponent>();
     for (auto* d : dcs)
     {
-        d->dialogueWidget->pos = actor->GetHomogeneousPositionVector();
+        d->dialogueWidget->pos = actor->GetHomogeneousPositionV();
         d->dialogueWidget->SetText(dataIt->second.text);
         d->dialogueWidget->AddToViewport();
 
@@ -187,7 +188,7 @@ void DialogueComponent::ConversationShowTextAtActor()
     auto dcs = actor->GetComponentsOfType<DialogueComponent>();
     for (auto* d : dcs)
     {
-        d->dialogueWidget->pos = actor->GetHomogeneousPositionVector();
+        d->dialogueWidget->pos = actor->GetHomogeneousPositionV();
         d->dialogueWidget->SetText(dataIt->second.text);
         d->dialogueWidget->AddToViewport();
 

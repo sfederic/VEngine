@@ -29,7 +29,6 @@ static bool MemoryCheck(std::string arg)
 	if (memoryIt != GameInstance::playerMemories.end())
 	{
 		uiSystem.memoryRecalledWidget->recalledMemory = memoryIt->second;
-		uiSystem.memoryWidgetInViewport = true;
 		uiSystem.memoryRecalledWidget->AddToViewport();
 
 		GameUtils::PlayAudioOneShot("intuition_check_success.wav");
@@ -65,7 +64,6 @@ static bool GainMemory(std::string memoryName, std::string memoryDesc, std::stri
 	Log("%s Memory created.", memory->name.c_str());
 
 	uiSystem.memoryGainedWidget->memoryToDisplay = GameInstance::playerMemories[memory->name];
-	uiSystem.memoryWidgetInViewport = true;
 	uiSystem.memoryGainedWidget->AddToViewport();
 
 	GameUtils::PlayAudioOneShot("purchase.wav");

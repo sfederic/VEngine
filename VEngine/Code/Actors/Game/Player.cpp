@@ -77,8 +77,8 @@ void Player::Start()
 	bulletWidget->AddToViewport();
 	bulletWidget->numBulletsPlayerHas = numBullets;
 
-	nextPos = GetPositionVector();
-	nextRot = GetRotationVector();
+	nextPos = GetPositionV();
+	nextRot = GetRotationV();
 	nextCameraFOV = camera->FOV;
 
 	xIndex = std::round(GetPosition().x);
@@ -126,7 +126,7 @@ void Player::Tick(float deltaTime)
 
 	LerpPlayerCameraFOV(deltaTime);
 
-	dialogueComponent->SetPosition(GetHomogeneousPositionVector());
+	dialogueComponent->SetPosition(GetHomogeneousPositionV());
 
 	if (battleSystem.isBattleActive)
 	{
@@ -268,7 +268,7 @@ void Player::MovementInput(float deltaTime)
 		moveSpeed = 6.5f;
 	}
 
-	SetPosition(VMath::VectorConstantLerp(GetPositionVector(), nextPos, deltaTime, moveSpeed));
+	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, moveSpeed));
 
 	if (CheckIfPlayerMovementAndRotationStopped())
 	{
@@ -284,7 +284,7 @@ void Player::MovementInput(float deltaTime)
 		{
 			mesh->currentAnimation = "Armature|ArmatureAction";
 
-			nextPos = GetPositionVector() + GetForwardVectorV();
+			nextPos = GetPositionV() + GetForwardVectorV();
 			CheckNextMoveNode(previousPos);
 		}
 		else
@@ -295,17 +295,17 @@ void Player::MovementInput(float deltaTime)
 
 		if (Input::GetKeyDown(Keys::S))
 		{
-			nextPos = GetPositionVector() + -GetForwardVectorV();
+			nextPos = GetPositionV() + -GetForwardVectorV();
 			CheckNextMoveNode(previousPos);
 		}
 		if (Input::GetKeyDown(Keys::A))
 		{
-			nextPos = GetPositionVector() + -GetRightVectorV();
+			nextPos = GetPositionV() + -GetRightVectorV();
 			CheckNextMoveNode(previousPos);
 		}
 		if (Input::GetKeyDown(Keys::D))
 		{
-			nextPos = GetPositionVector() + GetRightVectorV();
+			nextPos = GetPositionV() + GetRightVectorV();
 			CheckNextMoveNode(previousPos);
 		}
 
@@ -335,19 +335,19 @@ void Player::RotationInput(float deltaTime)
 		rotSpeed = 6.0f;
 	}
 
-	SetRotation(VMath::QuatConstantLerp(GetRotationVector(), nextRot, deltaTime, rotSpeed));
+	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotSpeed));
 
 	if (CheckIfPlayerMovementAndRotationStopped())
 	{
 		if (Input::GetKeyDown(Keys::Right))
 		{
 			constexpr float angle = XMConvertToRadians(90.f);
-			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::XMVectorUp(), angle));
+			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), angle));
 		}
 		if (Input::GetKeyDown(Keys::Left))
 		{
 			constexpr float angle = XMConvertToRadians(-90.f);
-			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::XMVectorUp(), angle));
+			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), angle));
 		}
 	}
 }
@@ -437,11 +437,10 @@ void Player::PrimaryAction()
 
 	if (Input::GetKeyUp(Keys::Down))
 	{
-		if (uiSystem.memoryWidgetInViewport)
+		if (uiSystem.memoryRecalledWidget->IsInViewport())
 		{
 			uiSystem.memoryGainedWidget->RemoveFromViewport();
 			uiSystem.memoryRecalledWidget->RemoveFromViewport();
-			uiSystem.memoryWidgetInViewport = false;
 			return;
 		}
 
@@ -461,7 +460,7 @@ void Player::PrimaryAction()
 		Ray ray(this);
 		Ray gunRay(this);
 		auto meshForward = mesh->GetForwardVectorV();
-		if (Raycast(ray, GetPositionVector(), meshForward, 1.5f))
+		if (Raycast(ray, GetPositionV(), meshForward, 1.5f))
 		{
 			Log("Player interact: %s", ray.hitActor->GetName().c_str());
 
@@ -470,7 +469,7 @@ void Player::PrimaryAction()
 			else if (QuickTalkCheck(ray.hitActor)) {}
 			else if (InteractCheck(ray.hitActor)) {}
 		}
-		else if (Raycast(gunRay, GetPositionVector(), meshForward, 10.f)) //Gun check
+		else if (Raycast(gunRay, GetPositionV(), meshForward, 10.f)) //Gun check
 		{
 			GunShotCheck(ray.hitActor);
 		}
@@ -491,7 +490,7 @@ void Player::SecondaryAction()
 	{
 		Ray ray(this);
 		auto meshForward = mesh->GetForwardVectorV();
-		if (Raycast(ray, GetPositionVector(), meshForward, 1.5f))
+		if (Raycast(ray, GetPositionV(), meshForward, 1.5f))
 		{
 			Log("Player interact: %s", ray.hitActor->GetName().c_str());
 
@@ -567,7 +566,7 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 
 	//FENCE RAYCAST CHECK
 	Ray fenceRay(this);
-	if (Raycast(fenceRay, GetPositionVector(), nextPos))
+	if (Raycast(fenceRay, GetPositionV(), nextPos))
 	{
 		if (dynamic_cast<FenceActor*>(fenceRay.hitActor))
 		{
@@ -587,7 +586,7 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 
 bool Player::CheckIfPlayerMovementAndRotationStopped()
 {
-	return XMVector4Equal(GetPositionVector(), nextPos) && XMQuaternionEqual(GetRotationVector(), nextRot);
+	return XMVector4Equal(GetPositionV(), nextPos) && XMQuaternionEqual(GetRotationV(), nextRot);
 }
 
 bool Player::DialogueCheck(Actor* hitActor)

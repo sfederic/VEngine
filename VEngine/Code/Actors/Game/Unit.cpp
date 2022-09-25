@@ -43,7 +43,7 @@ void Unit::Start()
 	healthWidget->healthPoints = health;
 	healthWidget->maxHealthPoints = health;
 
-	nextMovePos = GetPositionVector();
+	nextMovePos = GetPositionV();
 
 	if (IsActive())
 	{
@@ -64,11 +64,11 @@ void Unit::Tick(float deltaTime)
 	//	intentBeam->endPoint = intentActor->GetPosition();
 	//}
 
-	healthWidget->pos = GetHomogeneousPositionVector();
+	healthWidget->pos = GetHomogeneousPositionV();
 
 	if (isUnitTurn && !attackWindingUp)
 	{
-		if (XMVector4Equal(nextMovePos, GetPositionVector()))
+		if (XMVector4Equal(nextMovePos, GetPositionV()))
 		{
 			if (movementPathNodeIndex < pathNodes.size())
 			{
@@ -112,7 +112,7 @@ void Unit::Tick(float deltaTime)
 					//Destroy Unit if its escaping and within its entrancetrigger to escape with
 					if (battleState.Compare(BattleStates::escape) && entranceToEscapeTo)
 					{
-						if (entranceToEscapeTo->trigger->Contains(GetPositionVector()))
+						if (entranceToEscapeTo->trigger->Contains(GetPositionV()))
 						{
 							battleSystem.RemoveUnit(this);
 							GetCurrentNode()->Show();
@@ -127,7 +127,7 @@ void Unit::Tick(float deltaTime)
 		}
 	}
 
-	SetPosition(VMath::VectorConstantLerp(GetPositionVector(), nextMovePos, deltaTime, moveSpeed));
+	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextMovePos, deltaTime, moveSpeed));
 }
 
 Properties Unit::GetProps()
@@ -298,7 +298,7 @@ void Unit::StartTurn()
 		for (int i = 0; i < EntranceTrigger::system.GetActors().size(); i++)
 		{
 			auto entrance = EntranceTrigger::system.GetActors()[i];
-			float dist = XMVector3Length(entrance->GetPositionVector() - this->GetPositionVector()).m128_f32[0];
+			float dist = XMVector3Length(entrance->GetPositionV() - this->GetPositionV()).m128_f32[0];
 			entranceDistances.push_back(std::make_pair(dist, i));
 		}
 
@@ -366,7 +366,7 @@ void Unit::WindUpAttack()
 	//Do a raycast towards player. Lets player go behind cover.
 	Ray ray(this);
 	ray.actorsToIgnore.push_back(player); //Ignore player too. Attack hits if nothing is hit
-	if (!Raycast(ray, GetPositionVector(), player->GetPositionVector()))
+	if (!Raycast(ray, GetPositionV(), player->GetPositionV()))
 	{
 		if (attackDirection == player->defendDirection && player->guarding) //Successful defend
 		{
@@ -449,7 +449,7 @@ void Unit::ShowUnitMovementPath()
 
 void Unit::SetUnitLookAt(XMVECTOR lookAtPoint)
 {
-	auto lookAtRot = VMath::LookAtRotation(lookAtPoint, GetPositionVector());
+	auto lookAtRot = VMath::LookAtRotation(lookAtPoint, GetPositionV());
 	SetRotation(lookAtRot);
 }
 

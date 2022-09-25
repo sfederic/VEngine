@@ -20,7 +20,7 @@ void PushableGridActor::Start()
     currentNode->RecalcNodeHeight(ray);
     currentNode->Show();
     
-    nextPushMovePos = GetPositionVector();
+    nextPushMovePos = GetPositionV();
 }
 
 void PushableGridActor::Tick(float deltaTime)
@@ -32,9 +32,9 @@ void PushableGridActor::Tick(float deltaTime)
         //Keep and eye on this call, the wrong CurrentNode can be gotten if x/y index is too early
         SetGridPosition();
 
-        SetPosition(VMath::VectorConstantLerp(GetPositionVector(), nextPushMovePos, deltaTime, pushMoveSpeed));
+        SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPushMovePos, deltaTime, pushMoveSpeed));
 
-        if (XMVector4Equal(nextPushMovePos, GetPositionVector()))
+        if (XMVector4Equal(nextPushMovePos, GetPositionV()))
         {
             isMoving = false;
 
@@ -61,8 +61,8 @@ void PushableGridActor::Interact()
 
     Ray ray(this);
     ray.actorsToIgnore.push_back(player);
-    XMVECTOR endPosition = GetPositionVector() + playerMeshForward;
-    if (!Raycast(ray, GetPositionVector(), endPosition)) //If there's nothing in the way...
+    XMVECTOR endPosition = GetPositionV() + playerMeshForward;
+    if (!Raycast(ray, GetPositionV(), endPosition)) //If there's nothing in the way...
     {
         nextPushMovePos = endPosition;
         isMoving = true;

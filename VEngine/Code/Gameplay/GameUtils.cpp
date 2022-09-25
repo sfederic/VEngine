@@ -160,10 +160,10 @@ namespace GameUtils
 				auto player = GameUtils::GetPlayer();
 
 				player->SetPosition(entrance->GetPosition());
-				player->nextPos = player->GetPositionVector();
+				player->nextPos = player->GetPositionV();
 
-				player->SetRotation(entrance->GetRotationVector());
-				player->nextRot = player->GetRotationVector();
+				player->SetRotation(entrance->GetRotationV());
+				player->nextRot = player->GetRotationV();
 			}
 		}
 

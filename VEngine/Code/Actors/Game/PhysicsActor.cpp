@@ -24,7 +24,7 @@ void PhysicsActor::Start()
 
 bool PhysicsActor::GoOverAllTris()
 {
-	XMVECTOR sphereCenter = GetPositionVector();
+	XMVECTOR sphereCenter = GetPositionV();
 	const float radius = 1.0f;
 
 	for (auto mesh : MeshComponent::system.components)

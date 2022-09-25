@@ -26,7 +26,7 @@ void InteractTrigger::Start()
 	interactWidget->interactText = overlapText;
 
 	//Interact triggers are stationary, only one pos set is needed
-	interactWidget->pos = GetHomogeneousPositionVector();
+	interactWidget->pos = GetHomogeneousPositionV();
 }
 
 void InteractTrigger::Tick(float deltaTime)

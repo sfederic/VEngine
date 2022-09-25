@@ -34,7 +34,7 @@ void GridActor::Start()
 
 void GridActor::Tick(float deltaTime)
 {
-	dialogueComponent->SetPosition(GetHomogeneousPositionVector());
+	dialogueComponent->SetPosition(GetHomogeneousPositionV());
 }
 
 Properties GridActor::GetProps()

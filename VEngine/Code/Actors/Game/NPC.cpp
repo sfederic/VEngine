@@ -27,7 +27,7 @@ void NPC::Tick(float deltaTime)
 {
     if (spawnTextWidget)
     {
-        spawnTextWidget->pos = GetHomogeneousPositionVector();
+        spawnTextWidget->pos = GetHomogeneousPositionV();
     }
 
     if (isQuickDialogueActive)

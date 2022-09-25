@@ -261,7 +261,12 @@ Layout Widget::CenterLayoutOnScreenSpaceCoords(float w, float h)
 	int sx = 0, sy = 0;
 	GetScreenSpaceCoords(sx, sy);
 
-	D2D1_RECT_F rect = {sx - w, sy - h, sx + w, sy + h};
+	return CenterLayoutOnScreenSpaceCoords(w, h, sx, sy);
+}
+
+Layout Widget::CenterLayoutOnScreenSpaceCoords(float w, float h, float sx, float sy)
+{
+	D2D1_RECT_F rect = { sx - w, sy - h, sx + w, sy + h };
 
 	float vw = Renderer::GetViewportWidth();
 	float vh = Renderer::GetViewportHeight();
