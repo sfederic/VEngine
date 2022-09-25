@@ -10,7 +10,7 @@ void PlayerActionBarWidget::Draw(float deltaTime)
 	for (int i = 0; i < actionPoints; i++)
 	{
 		layout.AddHorizontalSpace(20.f);
-		FillRect(layout, { 0.f, 0.8f, 0.1f, 1.f }, 0.5f);
+		FillRect(layout, {0.f, 0.8f, 0.1f, 1.f}, 0.5f);
 
 		//Padding
 		layout.AddHorizontalSpace(5.f);
