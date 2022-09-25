@@ -11,7 +11,6 @@ public:
 	COMPONENT_SYSTEM(CameraComponent)
 
 	XMVECTOR focusPoint = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-	XMVECTOR upViewVector = XMVectorZero();
 
 	Actor* targetActor = nullptr;
 

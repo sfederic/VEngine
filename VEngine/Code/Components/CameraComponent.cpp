@@ -8,12 +8,10 @@
 
 CameraComponent::CameraComponent()
 {
-	upViewVector = VMath::GlobalUpVector();
 }
 
 CameraComponent::CameraComponent(XMFLOAT3 startPos)
 {
-	upViewVector = VMath::GlobalUpVector();
 	UpdateTransform();
 }
 
@@ -27,14 +25,14 @@ XMMATRIX CameraComponent::GetViewMatrix()
 
 	if (targetActor)
 	{
-		focusPoint = targetActor->GetPositionV() + targetActor->GetForwardVectorV();
+		focusPoint = targetActor->GetPositionV();
 	}
 	else
 	{
 		focusPoint = worldPos + GetForwardVectorV();
 	}
 
-	XMMATRIX view = XMMatrixLookAtLH(worldPos, focusPoint, upViewVector);
+	XMMATRIX view = XMMatrixLookAtLH(worldPos, focusPoint, VMath::GlobalUpVector());
 
 	//Camera translation shaking
 	XMVECTOR shakeVector = Shake();
