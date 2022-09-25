@@ -8,6 +8,7 @@
 #include "Log.h"
 #include "Actors/MeshActor.h"
 #include "Actors/Game/Player.h"
+#include "Actors/Game/Grid.h"
 #include "Actors/DirectionalLightActor.h"
 #include "Actors/ActorSystemCache.h"
 #include "Components/ComponentSystemCache.h"
@@ -110,6 +111,18 @@ void World::CreateDefaultMapActors()
 	//Set light pointing down because shadows looks nice.
 	dlight->SetRotation(
 		VMath::LookAtRotation(dlight->GetPositionV() - VMath::GlobalUpVector(), dlight->GetPositionV()));
+	dlight->SetPosition(XMVectorSet(0.f, 5.f, 0.f, 1.f));
+
+	auto grid = Grid::system.Add();
+	grid->sizeX = 5;
+	grid->sizeY = 5;
+
+	//Set a ground plane to work off
+	MeshActor::spawnMeshFilename = "node.fbx";
+	auto mesh = MeshActor::system.Add();
+	mesh->SetPosition(XMFLOAT3(2.f, -0.5f, 2.f));
+	mesh->SetScale(XMVectorSet(5.f, 1.f, 5.f, 1.0f));
+	MeshActor::spawnMeshFilename.clear();
 
 	editor->UpdateWorldList();
 }
