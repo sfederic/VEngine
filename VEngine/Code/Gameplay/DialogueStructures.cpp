@@ -11,13 +11,13 @@ void Dialogue::LoadFromFile()
 		return;
 	}
 
-	if (!std::filesystem::exists("Dialogue/" + filename))
+	if (!std::filesystem::exists("Dialogues/" + filename))
 	{
 		Log("Dialogue file [%s] not found.", filename.c_str());
 		return;
 	}
 
-	std::string path = "Dialogue/" + filename;
+	std::string path = "Dialogues/" + filename;
 
 	std::wifstream is;
 	is.open(path, std::ios_base::in);
@@ -78,10 +78,4 @@ void Dialogue::LoadFromFile()
 	}
 
 	is.close();
-}
-
-void Dialogue::Reset()
-{
-	data.clear();
-	filename.clear();
 }

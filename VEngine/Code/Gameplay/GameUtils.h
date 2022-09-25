@@ -1,22 +1,25 @@
 #pragma once
-
 #include <string>
 #include <DirectXMath.h>
 
 using namespace DirectX;
 
-class Player;
+struct Player;
+struct Grid;
 class Actor;
 struct SpriteSheet;
 
-//Utility functions for in-game stuff.
+//Utility functions for in-game stuff
 namespace GameUtils
 {
 	Player* GetPlayer();
-	void SetPlayerCombatOn();
-	void SetPlayerCombatOff();
+	Grid* GetGrid();
+
+	bool CheckIfMemoryExists(const std::string& memoryName);
 
 	void SetActiveCameraTarget(Actor* newTarget);
+	void SetActiveCameraTargetAndZoomIn(Actor* newTarget);
+	void SetActiveCameraTargetAndZoomOut(Actor* newTarget);
 	void CameraShake(float shake);
 
 	SpriteSheet* SpawnSpriteSheet(std::string textureFilename, XMFLOAT3 position, bool loop, int numRows, int numColumns);
@@ -33,4 +36,9 @@ namespace GameUtils
 
 	//Used with timers to be able to call LoadWorldAndMoveToEntranceTrigger() through Timer.
 	extern std::string levelToMoveTo;
+
+	//Move to matching entrance trigger with same name as exited one in loaded world.
+	void LoadWorldAndMoveToEntranceTrigger();
+
+	void TriggerGameOver();
 };

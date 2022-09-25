@@ -2,6 +2,8 @@
 #include "GameUtils.h"
 #include <filesystem>
 #include "Actors/Game/Player.h"
+#include "Actors/Game/Grid.h"
+#include "Actors/Game/EntranceTrigger.h"
 #include "Audio/AudioSystem.h"
 #include "World.h"
 #include "FileSystem.h"
@@ -10,6 +12,7 @@
 #include "Components/CameraComponent.h"
 #include "UI/UISystem.h"
 #include "UI/ScreenFadeWidget.h"
+#include "UI/Game/MemoryTransferWidget.h"
 #include "Input.h"
 #include "Log.h"
 #include "Particle/SpriteSheet.h"
@@ -29,19 +32,33 @@ namespace GameUtils
 		return nullptr;
 	}
 
-	void SetPlayerCombatOn()
+	Grid* GetGrid()
 	{
-		GetPlayer()->SetInCombat(true);
+		assert(Grid::system.GetNumActors());
+		return Grid::system.GetActors()[0];
 	}
 
-	void SetPlayerCombatOff()
+	bool CheckIfMemoryExists(const std::string& memoryName)
 	{
-		GetPlayer()->SetInCombat(false);
+		auto memIt = GameInstance::playerMemories.find(memoryName);
+		return memIt != GameInstance::playerMemories.end();
 	}
 
 	void SetActiveCameraTarget(Actor* newTarget)
 	{
 		activeCamera->targetActor = newTarget;
+	}
+
+	void SetActiveCameraTargetAndZoomIn(Actor* newTarget)
+	{
+		activeCamera->targetActor = newTarget;
+		GetPlayer()->nextCameraFOV = 30.f;
+	}
+	
+	void SetActiveCameraTargetAndZoomOut(Actor* newTarget)
+	{
+		activeCamera->targetActor = newTarget;
+		GetPlayer()->nextCameraFOV = 60.f;
 	}
 
 	void CameraShake(float shake)
@@ -115,5 +132,61 @@ namespace GameUtils
 			Deserialiser d(gameInstanceSaveFile, OpenMode::In);
 			d.Deserialise(instanceProps);
 		}
+	}
+
+	void LoadWorldAndMoveToEntranceTrigger()
+	{
+		if (levelToMoveTo.empty())
+		{
+			return;
+		}
+
+		GameInstance::ProgressTime();
+
+		LoadWorld(levelToMoveTo);
+
+		uiSystem.screenFadeWidget->SetToFadeIn();
+		uiSystem.screenFadeWidget->AddToViewport();
+
+		int matchingEntranceTriggerCount = 0;
+		//Set player pos and rot at entrancetrigger in loaded world with same name as previous.
+		auto entranceTriggers = World::GetAllActorsOfTypeInWorld<EntranceTrigger>();
+		for (auto entrance : entranceTriggers)
+		{
+			if (entrance->levelToMoveTo == GameInstance::previousMapMovedFrom)
+			{
+				matchingEntranceTriggerCount++;
+
+				auto player = GameUtils::GetPlayer();
+
+				player->SetPosition(entrance->GetPosition());
+				player->nextPos = player->GetPositionVector();
+
+				player->SetRotation(entrance->GetRotationVector());
+				player->nextRot = player->GetRotationVector();
+			}
+		}
+
+		GameInstance::previousMapMovedFrom = levelToMoveTo;
+
+		assert(matchingEntranceTriggerCount < 2 && "Entrances with same name");
+
+		if (matchingEntranceTriggerCount == 0)
+		{
+			Log("EntranceTrigger with matching [%s] field not found.", levelToMoveTo.c_str());
+		}
+
+		Input::blockInput = false;
+	}
+
+	void TriggerGameOver()
+	{
+		auto player = GetPlayer();
+		player->gameOver = true;
+
+		CreateWidget<MemoryTransferWidget>()->AddToViewport();
+
+		audioSystem.StopAllAudio();
+		audioSystem.PlayAudio("game05.wav", true);
 	}
 }
