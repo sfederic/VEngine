@@ -1,0 +1,155 @@
+NPC
+ Enabled
+1
+ Position
+4 0 5
+ Rotation
+0 1 0 1.56958e-07
+ Scale
+1 1 1
+Attack Points
+1
+Attack Range
+1
+Battle State
+fight
+Destruct
+1
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+Move Points
+1
+Move Speed
+3
+Name
+NPC0
+Obstacle
+0
+UID
+2322260943
+actorToFocusOn
+
+battleStartText
+
+deathText
+
+disableGridInteract
+0
+interactKnownText
+
+numOfAttacks
+1
+spawnText
+
+next
+DialogueComponent
+ Enabled
+1
+File
+
+next
+MemoryComponent
+ Enabled
+1
+Add On Interact
+0
+Condition
+
+Condition Value
+
+Image File
+
+Memory Desc
+
+Memory Name
+
+next
+MemoryComponent
+ Enabled
+1
+Add On Interact
+0
+Condition
+
+Condition Value
+
+Image File
+
+Memory Desc
+
+Memory Name
+
+next
+MeshComponent
+ Enabled
+1
+ Pos
+4 0 5
+ Rot
+0 1 0 1.56958e-07
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.fbx
+Static
+1
+next
+QuestComponent
+ Enabled
+1
+Quest Name
+
+next
+TimeComponent
+ Enabled
+1
+activeBeginHour
+0
+activeEndHour
+0
+alwaysActive
+1
+condition
+
+conditionArg
+
+next
+end
