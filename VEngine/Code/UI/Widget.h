@@ -99,6 +99,7 @@ protected:
 	Layout PercentAlignLayout(float left, float top, float right, float bottom);
 
 	Layout CenterLayoutOnScreenSpaceCoords(float w, float h);
+	Layout CenterLayoutOnScreenSpaceCoords(float w, float h, float sx, float sy);
 };
 
 template <typename T>

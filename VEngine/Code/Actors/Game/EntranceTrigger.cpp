@@ -38,7 +38,7 @@ void EntranceTrigger::Start()
 
 void EntranceTrigger::Tick(float deltaTime)
 {
-    XMVECTOR targetPos = trigger->targetActor->GetPositionVector();
+    XMVECTOR targetPos = trigger->targetActor->GetPositionV();
 
     if (trigger->ContainsTarget() && isEntranceActive && !battleSystem.isBattleActive && !entranceInteractedWith)
     {
