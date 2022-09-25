@@ -12,6 +12,7 @@ CameraComponent::CameraComponent()
 
 CameraComponent::CameraComponent(XMFLOAT3 startPos)
 {
+	SetPosition(startPos);
 	UpdateTransform();
 }
 
