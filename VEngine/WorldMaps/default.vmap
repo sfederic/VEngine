@@ -33,7 +33,7 @@ UID
 3619576521
 next
 MeshActor
-5
+6
  Enabled
 1
  Position
@@ -71,7 +71,7 @@ next
  Rotation
 -0 0 -0 1
  Scale
-5 5 5
+12.5 5 5
 Name
 MeshActor2
 Scan Text
@@ -109,37 +109,20 @@ Scan Text
 UID
 3212415464
 next
-Enemy
-2
  Enabled
 1
  Position
--1 0 2
+2 0 1
  Rotation
 0 0 0 1
  Scale
 1 1 1
 Name
-Enemy0
+MeshActor5
 Scan Text
-An enemy.
+
 UID
-991682626
-next
- Enabled
-1
- Position
-2 0 2
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Name
-Enemy1
-Scan Text
-An enemy.
-UID
-2797210742
+3243818616
 next
 CameraComponent
 1
@@ -160,40 +143,8 @@ Far Z
 Near Z
 0.01
 next
-BoxTriggerComponent
-2
-991682626
-AggroTrigger
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
-Extents
-2 2 2
-Offset
-0 1.5 0
-next
-2797210742
-AggroTrigger
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
-Extents
-2 2 2
-Offset
-0 1.5 0
-next
 MeshComponent
-7
+6
 2369940409
 Mesh
  Enabled
@@ -297,7 +248,7 @@ Mesh
  Rot
 -0 0 -0 1
  Scale
-5 5 5
+12.5 5 5
 Casts Shadow
 1
 Grid Obstacle
@@ -429,12 +380,12 @@ cube.fbx
 Static
 1
 next
-991682626
+3243818616
 Mesh
  Enabled
 1
  Pos
--1 0 2
+2 0 1
  Rot
 0 0 0 1
  Scale
@@ -472,54 +423,7 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-
-Static
-1
-next
-2797210742
-Mesh
- Enabled
-1
- Pos
-2 0 2
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-
+cube.fbx
 Static
 1
 next
@@ -554,17 +458,5 @@ Root
 -0 0 -0 1
  Scale
 1 1 1
-next
-WidgetComponent
-2
-991682626
-HealthWidget
- Enabled
-1
-next
-2797210742
-HealthWidget
- Enabled
-1
 next
 end
