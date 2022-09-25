@@ -1,5 +1,11 @@
 #include "vpch.h"
 #include "World.h"
+#include "VMath.h"
+#include "FileSystem.h"
+#include "Profile.h"
+#include "Core.h"
+#include "Timer.h"
+#include "Log.h"
 #include "Actors/MeshActor.h"
 #include "Actors/Game/Player.h"
 #include "Actors/DirectionalLightActor.h"
@@ -7,19 +13,14 @@
 #include "Components/ComponentSystemCache.h"
 #include "Components/IComponentSystem.h"
 #include "Components/MeshComponent.h"
-#include "FileSystem.h"
-#include "Profile.h"
 #include "Render/TextureSystem.h"
 #include "Render/MaterialSystem.h"
 #include "Render/Material.h"
-#include "Core.h"
 #include "Audio/AudioSystem.h"
 #include "Render/SpriteSystem.h"
 #include "UI/UISystem.h"
 #include "Gameplay/GameInstance.h"
 #include "Physics/PhysicsSystem.h"
-#include "Timer.h"
-#include "Log.h"
 
 std::string World::worldFilename;
 
@@ -104,7 +105,11 @@ void World::StartAllComponents()
 void World::CreateDefaultMapActors()
 {
 	Player::system.Add();
-	DirectionalLightActor::system.Add();
+
+	auto dlight = DirectionalLightActor::system.Add();
+	//Set light pointing down because shadows looks nice.
+	dlight->SetRotation(
+		VMath::LookAtRotation(dlight->GetPositionV() - VMath::GlobalUpVector(), dlight->GetPositionV()));
 
 	editor->UpdateWorldList();
 }
