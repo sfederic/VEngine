@@ -280,7 +280,7 @@ void Player::MovementInput(float deltaTime)
 
 		XMVECTOR previousPos = nextPos;
 
-		if (Input::GetKeyDown(Keys::W))
+		if (Input::GetKeyHeld(Keys::W))
 		{
 			mesh->currentAnimation = "Armature|ArmatureAction";
 
@@ -293,17 +293,17 @@ void Player::MovementInput(float deltaTime)
 			mesh->currentAnimation.clear();
 		}
 
-		if (Input::GetKeyDown(Keys::S))
+		if (Input::GetKeyHeld(Keys::S))
 		{
 			nextPos = GetPositionV() + -GetForwardVectorV();
 			CheckNextMoveNode(previousPos);
 		}
-		if (Input::GetKeyDown(Keys::A))
+		if (Input::GetKeyHeld(Keys::A))
 		{
 			nextPos = GetPositionV() + -GetRightVectorV();
 			CheckNextMoveNode(previousPos);
 		}
-		if (Input::GetKeyDown(Keys::D))
+		if (Input::GetKeyHeld(Keys::D))
 		{
 			nextPos = GetPositionV() + GetRightVectorV();
 			CheckNextMoveNode(previousPos);
@@ -339,12 +339,12 @@ void Player::RotationInput(float deltaTime)
 
 	if (CheckIfPlayerMovementAndRotationStopped())
 	{
-		if (Input::GetKeyDown(Keys::Right))
+		if (Input::GetKeyHeld(Keys::Right))
 		{
 			constexpr float angle = XMConvertToRadians(90.f);
 			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), angle));
 		}
-		if (Input::GetKeyDown(Keys::Left))
+		if (Input::GetKeyHeld(Keys::Left))
 		{
 			constexpr float angle = XMConvertToRadians(-90.f);
 			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), angle));
