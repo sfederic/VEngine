@@ -19,14 +19,6 @@ CameraComponent::CameraComponent(XMFLOAT3 startPos)
 
 void CameraComponent::Tick(float deltaTime)
 {
-	const int x = editor->centerOffsetX;
-	const int y = editor->centerOffsetY;
-
-	const float dx = -XMConvertToRadians(0.25f * (float)x);
-	const float dy = -XMConvertToRadians(0.25f * (float)y);
-
-	Pitch(dy);
-	RotateY(dx);
 }
 
 XMMATRIX CameraComponent::GetViewMatrix()
@@ -121,6 +113,18 @@ XMVECTOR CameraComponent::Shake()
 	const float zOffset = maxShake * shakeLevel * range;
 
 	return XMVectorSet(xOffset, yOffset, zOffset, 0.f); //Make sure the w here is 0
+}
+
+void CameraComponent::FPSCameraRotation()
+{
+	const int x = editor->centerOffsetX;
+	const int y = editor->centerOffsetY;
+
+	const float dx = -XMConvertToRadians(0.25f * (float)x);
+	const float dy = -XMConvertToRadians(0.25f * (float)y);
+
+	Pitch(dy);
+	RotateY(dx);
 }
 
 Properties CameraComponent::GetProps()

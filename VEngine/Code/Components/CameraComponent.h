@@ -36,4 +36,7 @@ public:
 	void Move(float d, XMVECTOR axis);
 	void ZoomTo(Actor* actor);
 	XMVECTOR Shake();
+
+private:
+	void FPSCameraRotation();
 };
