@@ -1,0 +1,705 @@
+AudioActor
+1
+ Enabled
+1
+ Position
+1 2 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+AudioActor0
+UID
+1953176639
+next
+CameraActor
+1
+ Enabled
+1
+ Position
+1 2 -2
+ Rotation
+0.130768 0 -0 0.991413
+ Scale
+1 1 1
+Name
+CameraActor0
+UID
+2364905173
+next
+MeshActor
+9
+ Enabled
+1
+ Position
+1 -0.5 5
+ Rotation
+-0 0 -0 1
+ Scale
+15 1 15
+Name
+node0
+UID
+58559731
+next
+ Enabled
+1
+ Position
+-1 0 5
+ Rotation
+0.707107 -0.000244099 0.707106 -0.000244436
+ Scale
+5 0.5 1
+Name
+node1
+UID
+2430559559
+next
+ Enabled
+1
+ Position
+3 0 5
+ Rotation
+0.707107 -0.000244099 0.707106 -0.000244436
+ Scale
+5 0.5 1
+Name
+node2
+UID
+180844165
+next
+ Enabled
+1
+ Position
+-4 1 1
+ Rotation
+-0 -0.706895 -0 0.707318
+ Scale
+1 1 1
+Name
+node3
+UID
+2299821989
+next
+ Enabled
+1
+ Position
+-4 0 3.5
+ Rotation
+-0 0.707107 -0 0.707107
+ Scale
+1 1 1
+Name
+node4
+UID
+1129412239
+next
+ Enabled
+1
+ Position
+-5 0 6
+ Rotation
+-0 -0.707107 -0 0.707107
+ Scale
+1 1 1
+Name
+node5
+UID
+3641849023
+next
+ Enabled
+1
+ Position
+-4 0 9
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+node6
+UID
+2126602705
+next
+ Enabled
+1
+ Position
+1 0 13
+ Rotation
+0 0.707318 0 0.706895
+ Scale
+2 2 2
+Name
+node7
+UID
+2718249145
+next
+ Enabled
+1
+ Position
+1 0 4
+ Rotation
+0.707229 0 0 -0.706985
+ Scale
+1 1 1
+Name
+MeshActor8
+UID
+3877294665
+next
+DirectionalLightActor
+1
+ Enabled
+1
+ Position
+2 1 2
+ Rotation
+-0 -0.573718 -0 0.819053
+ Scale
+0.999998 1 0.999998
+Name
+DirectionalLightActor0
+UID
+1379531862
+next
+PostProcessInstance
+1
+ Enabled
+1
+ Position
+2 0.5 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Exposure
+1.1
+Linear Angle
+0.01
+Linear Str.
+2
+Name
+PostProcessInstance0
+Shoulder Str.
+0.22
+Toe Denominator
+0.33
+Toe Numerator
+0.011
+Toe Str.
+0.2
+UID
+3281437188
+White Value
+3.3
+next
+CameraComponent
+1
+2364905173
+Camera
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
+next
+AudioComponent
+1
+1953176639
+Audio
+ Enabled
+1
+ Pos
+1 2 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Audio Filename
+game01.wav
+Loop
+1
+Pitch
+1
+Play On Start
+1
+Volume
+1
+next
+EmptyComponent
+1
+3281437188
+Root
+ Enabled
+1
+ Pos
+2 0.5 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+next
+MeshComponent
+9
+58559731
+Mesh
+ Enabled
+1
+ Pos
+1 -0.5 5
+ Rot
+-0 0 -0 1
+ Scale
+15 1 15
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.fbx
+Static
+1
+next
+2430559559
+Mesh
+ Enabled
+1
+ Pos
+-1 0 5
+ Rot
+0.707107 -0.000244099 0.707106 -0.000244436
+ Scale
+5 0.5 1
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.fbx
+Static
+1
+next
+180844165
+Mesh
+ Enabled
+1
+ Pos
+3 0 5
+ Rot
+0.707107 -0.000244099 0.707106 -0.000244436
+ Scale
+5 0.5 1
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.fbx
+Static
+1
+next
+2299821989
+Mesh
+ Enabled
+1
+ Pos
+-4 1 1
+ Rot
+-0 -0.706895 -0 0.707318
+ Scale
+1 1 1
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+house04.fbx
+Static
+1
+next
+1129412239
+Mesh
+ Enabled
+1
+ Pos
+-4 0 3.5
+ Rot
+-0 0.707107 -0 0.707107
+ Scale
+1 1 1
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+house07.fbx
+Static
+1
+next
+3641849023
+Mesh
+ Enabled
+1
+ Pos
+-5 0 6
+ Rot
+-0 -0.707107 -0 0.707107
+ Scale
+1 1 1
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+house_3.fbx
+Static
+1
+next
+2126602705
+Mesh
+ Enabled
+1
+ Pos
+-4 0 9
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+house_5.fbx
+Static
+1
+next
+2718249145
+Mesh
+ Enabled
+1
+ Pos
+1 0 13
+ Rot
+0 0.707318 0 0.706895
+ Scale
+2 2 2
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+house_5.fbx
+Static
+1
+next
+3877294665
+Mesh
+ Enabled
+1
+ Pos
+1 0 4
+ Rot
+0.707229 0 0 -0.706985
+ Scale
+1 1 1
+Casts Shadow
+1
+Cull
+0
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+bestowed_coffin.fbx
+Static
+1
+next
+DirectionalLightComponent
+1
+1379531862
+DirectionalLight
+ Enabled
+1
+ Pos
+2 1 2
+ Rot
+-0 -0.573718 -0 0.819053
+ Scale
+0.999998 1 0.999998
+Colour
+1 1 1 1
+LightEnabled
+1
+ShadowMap Size
+15
+next
+end
