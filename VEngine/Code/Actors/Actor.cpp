@@ -162,7 +162,6 @@ Properties Actor::GetProps()
 	props.Add("UID", &uid).hide = true;
 	props.Add("Name", &name).hide = true;
 	props.Add(" Enabled", &active);
-	props.Add("Scan Text", &scanText);
 
 	return props;
 }

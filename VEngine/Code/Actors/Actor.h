@@ -39,7 +39,6 @@ private:
 
 public:
 	//GAME SPECIFIC VARS
-	std::wstring scanText;
 
 public:
 	Actor() {}
