@@ -184,7 +184,7 @@ void Player::ResetGuard()
 
 GridNode* Player::GetCurrentNode()
 {
-	auto grid = GameUtils::GetGrid();
+	auto grid = Grid::system.GetFirstActor();
 	auto node = grid->GetNode(xIndex, yIndex);
 	return node;
 }
@@ -366,7 +366,7 @@ void Player::ToggleBattleGrid()
 		isWeaponDrawn = !isWeaponDrawn;
 
 		//toggle grid
-		auto grid = GameUtils::GetGrid();
+		auto grid = Grid::system.GetFirstActor();
 		if (grid)
 		{
 			switch (isWeaponDrawn)
@@ -539,7 +539,7 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 	//Keep the call here so player can face walls and holes on input.
 	mesh->SetWorldRotation(VMath::LookAtRotation(nextPos, previousPos));
 
-	auto grid = GameUtils::GetGrid();
+	auto grid = Grid::system.GetFirstActor();
 
 	if (nextXIndex >= grid->sizeX || nextYIndex >= grid->sizeY
 		|| nextXIndex < 0 || nextYIndex < 0)
@@ -668,7 +668,7 @@ void Player::PreviewMovementNodesDuringBattle()
 	std::vector<GridNode*> closedNodes;
 
 	GridNode* currentNode = GetCurrentNode();
-	Grid* grid = GameUtils::GetGrid();
+	Grid* grid = Grid::system.GetFirstActor();
 
 	grid->GetNeighbouringNodes(currentNode, movementNodes);
 

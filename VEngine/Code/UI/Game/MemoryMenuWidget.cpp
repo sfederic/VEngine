@@ -52,7 +52,7 @@ void MemoryMenuWidget::Draw(float deltaTime)
 			if (memories.size() == 1)
 			{
 				selectedMemory = memories.at(0);
-				GameUtils::GetPlayer()->memoryNameToSpawn = selectedMemory->name;
+				Player::system.GetFirstActor()->memoryNameToSpawn = selectedMemory->name;
 			}
 			else if (Input::GetKeyUp(Keys::S))
 			{
@@ -60,7 +60,7 @@ void MemoryMenuWidget::Draw(float deltaTime)
 				{
 					selectedMemoryIndex++;
 					selectedMemory = memories.at(selectedMemoryIndex);
-					GameUtils::GetPlayer()->memoryNameToSpawn = selectedMemory->name;
+					Player::system.GetFirstActor()->memoryNameToSpawn = selectedMemory->name;
 					GameUtils::PlayAudioOneShot("cursor.wav");
 				}
 			}
@@ -70,7 +70,7 @@ void MemoryMenuWidget::Draw(float deltaTime)
 				{
 					selectedMemoryIndex--;
 					selectedMemory = memories.at(selectedMemoryIndex);
-					GameUtils::GetPlayer()->memoryNameToSpawn = selectedMemory->name;
+					Player::system.GetFirstActor()->memoryNameToSpawn = selectedMemory->name;
 					GameUtils::PlayAudioOneShot("cursor.wav");
 				}
 			}

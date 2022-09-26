@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "PushableGridActor.h"
-#include "Gameplay/GameUtils.h"
 #include "Player.h"
 #include "Physics/Raycast.h"
 #include "VMath.h"
@@ -42,7 +41,7 @@ void PushableGridActor::Tick(float deltaTime)
             Ray ray = {};
             currentNode->RecalcNodeHeight(ray);
 
-            GameUtils::GetPlayer()->inInteraction = false;
+            Player::system.GetFirstActor()->inInteraction = false;
         }
     }
 }
@@ -54,7 +53,7 @@ void PushableGridActor::Interact()
         return;
     }
 
-    auto player = GameUtils::GetPlayer();
+    auto player = Player::system.GetFirstActor();
 
     //The direction to push this actor
     auto playerMeshForward = player->GetMeshForward();

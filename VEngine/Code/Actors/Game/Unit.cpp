@@ -93,7 +93,7 @@ void Unit::Tick(float deltaTime)
 					//deal with attack wind up
 					attackWindingUp = true;
 
-					auto player = GameUtils::GetPlayer();
+					auto player = Player::system.GetFirstActor();
 					player->guardWidget->AddToViewport();
 					player->ableToGuard = true;
 					player->nextCameraFOV = 30.f;
@@ -162,7 +162,7 @@ void Unit::InflictDamage(int damage)
 
 void Unit::MoveToNode(GridNode* destinationNode)
 {
-	auto grid = GameUtils::GetGrid();
+	auto grid = Grid::system.GetFirstActor();
 	GridNode* startingNode = grid->GetNode(xIndex, yIndex);
 
 	std::vector<GridNode*> nodes;
@@ -263,7 +263,7 @@ void Unit::MoveToNode(GridNode* destinationNode)
 
 void Unit::MoveToNode(int x, int y)
 {
-	auto grid = GameUtils::GetGrid();
+	auto grid = Grid::system.GetFirstActor();
 	GridNode* destinationNode = grid->GetNode(x, y);
 
 	MoveToNode(destinationNode);
@@ -277,7 +277,7 @@ void Unit::StartTurn()
 
 	GetCurrentNode()->Show();
 
-	auto player = GameUtils::GetPlayer();
+	auto player = Player::system.GetFirstActor();
 
 	if (battleState.Compare(BattleStates::fight))
 	{
@@ -324,7 +324,7 @@ void Unit::EndTurn()
 bool Unit::Attack()
 {
 	auto standingNode = GetCurrentNode();
-	auto grid = GameUtils::GetGrid();
+	auto grid = Grid::system.GetFirstActor();
 
 	//Get nodes based on attack range
 	std::vector<GridNode*> attackNodes;
@@ -343,7 +343,7 @@ bool Unit::Attack()
 		closedNodes.clear();
 	}
 
-	auto player = GameUtils::GetPlayer();
+	auto player = Player::system.GetFirstActor();
 	auto targetNode = player->GetCurrentNode();
 
 	for (auto node : attackNodes)
@@ -361,7 +361,7 @@ bool Unit::Attack()
 
 void Unit::WindUpAttack()
 {
-	auto player = GameUtils::GetPlayer();
+	auto player = Player::system.GetFirstActor();
 
 	//Do a raycast towards player. Lets player go behind cover.
 	Ray ray(this);
@@ -423,7 +423,7 @@ void Unit::WindUpAttack()
 void Unit::SetAttackDirection()
 {
 	attackDirection = GetRandomAttackDirection();
-	GameUtils::GetPlayer()->guardWidget->attackingUnitAttackDirection = attackDirection;
+	Player::system.GetFirstActor()->guardWidget->attackingUnitAttackDirection = attackDirection;
 }
 
 AttackDirection Unit::GetRandomAttackDirection()
@@ -433,7 +433,7 @@ AttackDirection Unit::GetRandomAttackDirection()
 
 void Unit::ShowUnitMovementPath()
 {
-	auto grid = GameUtils::GetGrid();
+	auto grid = Grid::system.GetFirstActor();
 	GridNode* destinationNode = grid->GetNode(0, 0);
 
 	auto previewMovementNodes = GetMovementPathPreviewNodes(destinationNode);
@@ -455,7 +455,7 @@ void Unit::SetUnitLookAt(XMVECTOR lookAtPoint)
 
 std::vector<GridNode*> Unit::GetMovementPathPreviewNodes(GridNode* destinationNode)
 {
-	auto grid = GameUtils::GetGrid();
+	auto grid = Grid::system.GetFirstActor();
 	grid->ResetAllNodes();
 
 	GridNode* startingNode = grid->GetNode(xIndex, yIndex);

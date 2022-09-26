@@ -132,7 +132,7 @@ void Core::StartGame()
 {
 	gameplayOn = true;
 
-	Player* player = GameUtils::GetPlayer();
+	Player* player = Player::system.GetFirstActor();
 	if (player) //Try set player camera as active
 	{
 		if (player->camera)

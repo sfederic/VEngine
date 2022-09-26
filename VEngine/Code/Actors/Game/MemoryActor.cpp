@@ -67,7 +67,7 @@ void MemoryActor::ActivateFromMemory()
         isGridObstacle = true;
 
         //Reset world position of all grid nodes
-        GameUtils::GetGrid()->Awake();
+        Grid::system.GetFirstActor()->Awake();
 
         isMemoryCreated = true;
     }

@@ -5,7 +5,6 @@
 #include "Components/Game/MemoryComponent.h"
 #include "Components/Game/DialogueComponent.h"
 #include "UI/Game/HealthWidget.h"
-#include "Gameplay/GameUtils.h"
 #include "Grid.h"
 #include "Physics/Raycast.h"
 
@@ -84,7 +83,7 @@ GridNode* GridActor::GetCurrentNode()
 		return nullptr;
 	}
 
-	auto grid = GameUtils::GetGrid();
+	auto grid = Grid::system.GetFirstActor();
 	auto node = grid->GetNode(xIndex, yIndex);
 	return node;
 }

@@ -3,7 +3,6 @@
 #include "Physics/Raycast.h"
 #include "VMath.h"
 #include "Gameplay/GridNode.h"
-#include "Gameplay/GameUtils.h"
 #include "Player.h"
 
 MovingGridActor::MovingGridActor()
@@ -32,7 +31,7 @@ void MovingGridActor::Tick(float deltaTime)
 		Ray ray = {};
 		currentNode->RecalcNodeHeight(ray);
 
-		GameUtils::GetPlayer()->inInteraction = false;
+		Player::system.GetFirstActor()->inInteraction = false;
 	}
 }
 
@@ -53,7 +52,7 @@ void MovingGridActor::Interact()
 		currentNode->Show();
 
 		//Make sure player can't move while this actor is moving
-		GameUtils::GetPlayer()->inInteraction = true;
+		Player::system.GetFirstActor()->inInteraction = true;
 	}
 }
 

@@ -38,12 +38,12 @@ void BattleSystem::StartBattle()
 
 	isBattleActive = true;
 
-	grid = GameUtils::GetGrid();
+	grid = Grid::system.GetFirstActor();
 	grid->lerpValue = Grid::LerpValue::LerpOut;
 	grid->SetActive(true);
 	grid->ResetAllNodes();
 
-	player = GameUtils::GetPlayer();
+	player = Player::system.GetFirstActor();
 	player->isPlayerTurn = true;
 	player->isWeaponDrawn = true;
 
@@ -104,7 +104,7 @@ void BattleSystem::MoveToNextTurn()
 		currentUnitTurnIndex = 0;
 
 		GameUtils::SetActiveCameraTarget(player);
-		GameUtils::GetGrid()->ResetAllNodes();
+		Grid::system.GetFirstActor()->ResetAllNodes();
 
 		return;
 	}
@@ -118,7 +118,7 @@ void BattleSystem::MoveToNextTurn()
 	currentUnitTurnIndex++;
 
 	GameUtils::SetActiveCameraTarget(unit);
-	GameUtils::GetGrid()->ResetAllNodes();
+	Grid::system.GetFirstActor()->ResetAllNodes();
 }
 
 void BattleSystem::RemoveUnit(Unit* unit)
@@ -139,7 +139,7 @@ void BattleSystem::RemoveUnit(Unit* unit)
 	}
 
 	//Reset camera to player
-	GameUtils::SetActiveCameraTarget(GameUtils::GetPlayer());
+	GameUtils::SetActiveCameraTarget(Player::system.GetFirstActor());
 
 	if (CheckIfBattleIsOver())
 	{

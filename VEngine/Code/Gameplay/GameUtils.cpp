@@ -22,22 +22,6 @@ namespace GameUtils
 {
 	std::string levelToMoveTo;
 
-	Player* GetPlayer()
-	{
-		if (!Player::system.GetActors().empty())
-		{
-			return Player::system.GetActors()[0];
-		}
-
-		return nullptr;
-	}
-
-	Grid* GetGrid()
-	{
-		assert(Grid::system.GetNumActors());
-		return Grid::system.GetActors()[0];
-	}
-
 	bool CheckIfMemoryExists(const std::string& memoryName)
 	{
 		auto memIt = GameInstance::playerMemories.find(memoryName);
@@ -52,13 +36,13 @@ namespace GameUtils
 	void SetActiveCameraTargetAndZoomIn(Actor* newTarget)
 	{
 		activeCamera->targetActor = newTarget;
-		GetPlayer()->nextCameraFOV = 30.f;
+		Player::system.GetFirstActor()->nextCameraFOV = 30.f;
 	}
 	
 	void SetActiveCameraTargetAndZoomOut(Actor* newTarget)
 	{
 		activeCamera->targetActor = newTarget;
-		GetPlayer()->nextCameraFOV = 60.f;
+		Player::system.GetFirstActor()->nextCameraFOV = 60.f;
 	}
 
 	void CameraShake(float shake)
@@ -157,7 +141,7 @@ namespace GameUtils
 			{
 				matchingEntranceTriggerCount++;
 
-				auto player = GameUtils::GetPlayer();
+				auto player = Player::system.GetFirstActor();
 
 				player->SetPosition(entrance->GetPosition());
 				player->nextPos = player->GetPositionV();
@@ -181,7 +165,7 @@ namespace GameUtils
 
 	void TriggerGameOver()
 	{
-		auto player = GetPlayer();
+		auto player = Player::system.GetFirstActor();
 		player->gameOver = true;
 
 		CreateWidget<MemoryTransferWidget>()->AddToViewport();

@@ -14,7 +14,7 @@ PlayerDialogueTrigger::PlayerDialogueTrigger()
 
 void PlayerDialogueTrigger::Start()
 {
-    trigger->targetActor = (Actor*)GameUtils::GetPlayer();
+    trigger->targetActor = (Actor*)Player::system.GetFirstActor();
 }
 
 void PlayerDialogueTrigger::Tick(float deltaTime)
@@ -29,7 +29,7 @@ void PlayerDialogueTrigger::Tick(float deltaTime)
             }
         }
 
-        auto player = GameUtils::GetPlayer();
+        auto player = Player::system.GetFirstActor();
         player->QuickThought(playerThoughtText);
 
         alreadyActivated = true;

@@ -1,20 +1,16 @@
 #pragma once
+
 #include <string>
 #include <DirectXMath.h>
 
 using namespace DirectX;
 
-struct Player;
-struct Grid;
 class Actor;
 struct SpriteSheet;
 
 //Utility functions for in-game stuff
 namespace GameUtils
 {
-	Player* GetPlayer();
-	Grid* GetGrid();
-
 	bool CheckIfMemoryExists(const std::string& memoryName);
 
 	void SetActiveCameraTarget(Actor* newTarget);

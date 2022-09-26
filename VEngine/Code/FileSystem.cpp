@@ -10,7 +10,6 @@
 #include "Editor/Editor.h"
 #include "Commands/CommandSystem.h"
 #include "Core.h"
-#include "Gameplay/GameUtils.h"
 #include "Camera.h"
 #include "Components/CameraComponent.h"
 #include "Actors/Game/Player.h"
@@ -298,7 +297,7 @@ void FileSystem::ResetWorldState()
 	//Set player camera on world change as active if in-gameplay
 	if (Core::gameplayOn)
 	{
-		activeCamera = GameUtils::GetPlayer()->camera;
+		activeCamera = Player::system.GetFirstActor()->camera;
 	}
 
 	//Make sure always after camera gets set

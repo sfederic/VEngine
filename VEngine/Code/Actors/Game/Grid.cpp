@@ -6,8 +6,8 @@
 #include "Physics/Raycast.h"
 #include "VMath.h"
 #include "GridActor.h"
-#include "Gameplay/GameUtils.h"
 #include "Gameplay/BattleSystem.h"
+#include "Actors/Game/Player.h"
 
 Grid::Grid()
 {
@@ -44,7 +44,7 @@ void Grid::Awake()
     //Ignore player and units
     Ray ray(this);
     ray.ignoreLayer = CollisionLayers::Editor;
-    ray.actorsToIgnore.push_back((Actor*)GameUtils::GetPlayer());
+    ray.actorsToIgnore.push_back((Actor*)Player::system.GetFirstActor());
     auto gridActors = World::GetAllActorsOfTypeAsActor<GridActor>();
     for (auto gridActor : gridActors)
     {

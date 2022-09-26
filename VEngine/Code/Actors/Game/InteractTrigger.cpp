@@ -49,7 +49,7 @@ void InteractTrigger::Tick(float deltaTime)
 					GameUtils::PlayAudioOneShot(soundEffect);
 				}
 
-				GameUtils::GetPlayer()->inInteraction = true;
+				Player::system.GetFirstActor()->inInteraction = true;
 
 				interactWidget->interactText = interactText;
 
@@ -75,12 +75,12 @@ void InteractTrigger::Tick(float deltaTime)
 			{
 				isBeingInteractedWith = false;
 
-				GameUtils::GetPlayer()->inInteraction = false;
+				Player::system.GetFirstActor()->inInteraction = false;
 
 				interactWidget->interactText = overlapText;
 				interactWidget->RemoveFromViewport();
 
-				GameUtils::SetActiveCameraTargetAndZoomOut(GameUtils::GetPlayer());
+				GameUtils::SetActiveCameraTargetAndZoomOut(Player::system.GetFirstActor());
 			}
 		}
 	}

@@ -2,7 +2,6 @@
 #include "BoxTriggerComponent.h"
 #include "Components/MeshComponent.h"
 #include "VMath.h"
-#include "Gameplay/GameUtils.h"
 #include "Actors/Game/Player.h"
 
 BoxTriggerComponent::BoxTriggerComponent()
@@ -53,5 +52,5 @@ bool BoxTriggerComponent::ContainsTarget()
 
 void BoxTriggerComponent::SetTargetAsPlayer()
 {
-	targetActor = (Actor*)GameUtils::GetPlayer();
+	targetActor = (Actor*)Player::system.GetFirstActor();
 }
