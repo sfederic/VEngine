@@ -286,6 +286,8 @@ void SpawnActor(Transform& transform)
 		d.Deserialise(actorProps);
 
 		actor->Create();
+
+		actor->SetUID(GenerateUID());
 		actor->ResetOwnerUIDToComponents();
 
 		for (auto& componentPair : actor->componentMap)
@@ -300,7 +302,7 @@ void SpawnActor(Transform& transform)
 		actor->SetTransform(transform);
 
 		std::string newActorName = spawnSystem->GetName() + std::to_string(spawnSystem->GetNumActors() - 1);
-		actor->SetName(newActorName);
+		actor->SimpleSetName(newActorName);
 
 		debugMenu.AddNotification(VString::wformat(
 			L"Spawned actor [%S] from template", actor->GetName().c_str()));
