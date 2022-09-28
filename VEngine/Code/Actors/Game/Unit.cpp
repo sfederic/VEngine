@@ -162,6 +162,11 @@ void Unit::InflictDamage(int damage)
 
 void Unit::MoveToNode(GridNode* destinationNode)
 {
+	if (movementPoints <= 0)
+	{
+		return;
+	}
+
 	auto grid = Grid::system.GetFirstActor();
 	GridNode* startingNode = grid->GetNode(xIndex, yIndex);
 
