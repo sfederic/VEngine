@@ -64,7 +64,7 @@ void GridActor::InflictDamage(int damage)
 	if (health <= 0)
 	{
 		GetCurrentNode()->Show();
-		Ray ray = {};
+		Ray ray(this);
 		GetCurrentNode()->RecalcNodeHeight(ray);
 		Destroy();
 	}
