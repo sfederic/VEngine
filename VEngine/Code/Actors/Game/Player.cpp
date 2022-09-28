@@ -822,7 +822,7 @@ bool Player::AttackGridActorBasedOnNode()
 
 	for (auto gridActor : World::GetAllActorsOfTypeInWorld<GridActor>())
 	{
-		if (gridActor->GetCurrentNode() == attackNode)
+		if (gridActor->GetCurrentNode()->Equals(attackNode))
 		{
 			gridActor->InflictDamage(1);
 			return true;
