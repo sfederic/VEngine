@@ -460,7 +460,7 @@ void Player::PrimaryAction()
 		Ray ray(this);
 		Ray gunRay(this);
 		auto meshForward = mesh->GetForwardVectorV();
-		if (Raycast(ray, GetPositionV(), meshForward, 1.5f))
+		if (Raycast(ray, GetPositionV(), meshForward, 1.0f))
 		{
 			Log("Player interact: %s", ray.hitActor->GetName().c_str());
 
@@ -468,16 +468,19 @@ void Player::PrimaryAction()
 			if (DialogueCheck(ray.hitActor)) {}
 			else if (QuickTalkCheck(ray.hitActor)) {}
 			else if (InteractCheck(ray.hitActor)) {}
-		}
-		else if (Raycast(gunRay, GetPositionV(), meshForward, 10.f)) //Gun check
-		{
-			GunShotCheck(ray.hitActor);
+			else if (Raycast(gunRay, GetPositionV(), meshForward, 10.f)) //Gun check
+			{
+				GunShotCheck(ray.hitActor);
+			}
 		}
 		else
 		{
-			if (isWeaponDrawn)
+			if (!AttackGridActorBasedOnNode())
 			{
-				GameUtils::PlayAudioOneShot("sword_miss.wav");
+				if (isWeaponDrawn)
+				{
+					GameUtils::PlayAudioOneShot("sword_miss.wav");
+				}
 			}
 		}
 	}
@@ -802,6 +805,25 @@ bool Player::DestructibleCheck(Actor* hitActor)
 			GameUtils::CameraShake(1.f);
 			GameUtils::SpawnSpriteSheet("Sprites/blood_hit.png", gridActor->GetPosition(), false, 4, 4);
 			GameUtils::PlayAudioOneShot("sword_hit.wav");
+			gridActor->InflictDamage(1);
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool Player::AttackGridActorBasedOnNode()
+{
+	auto grid = Grid::system.GetFirstActor();
+	const int attackNodeIndexX = xIndex + GetForwardVector().x;
+	const int attackNodeIndexY = yIndex + GetForwardVector().z;
+	auto attackNode = grid->GetNodeLimit(attackNodeIndexX, attackNodeIndexY);
+
+	for (auto gridActor : World::GetAllActorsOfTypeInWorld<GridActor>())
+	{
+		if (gridActor->GetCurrentNode() == attackNode)
+		{
 			gridActor->InflictDamage(1);
 			return true;
 		}

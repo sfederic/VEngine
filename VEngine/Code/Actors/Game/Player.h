@@ -124,6 +124,7 @@ private:
 	bool CombatInteractCheck(Actor* actorToCheck);
 	bool InteractCheck(Actor* hitActor);
 	bool DestructibleCheck(Actor* hitActor);
+	bool AttackGridActorBasedOnNode();
 	bool GunShotCheck(Actor* hitActor);
 
 	void ConfirmGuardOnDirection();
