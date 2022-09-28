@@ -47,6 +47,10 @@ struct Grid : Actor
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 	GridNode* GetNode(int x, int y);
+
+	//Limit the node gotten between 0 and the size of the grid.
+	GridNode* GetNodeLimit(int x, int y);
+
 	void GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode*>& outNodes);
 	void ResetAllNodes();
 	void LerpInNodes(float deltaTime);

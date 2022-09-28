@@ -177,6 +177,15 @@ GridNode* Grid::GetNode(int x, int y)
     return &rows[x].columns[y];
 }
 
+GridNode* Grid::GetNodeLimit(int x, int y)
+{
+    if (x < 0) x = 0;
+    if (y < 0) y = 0;
+    if (x >= sizeX) x = sizeX - 1;
+    if (y >= sizeY) y = sizeY - 1;
+    return &rows[x].columns[y];
+}
+
 void Grid::GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode*>& outNodes)
 {
     int currentX = centerNode->xIndex;
