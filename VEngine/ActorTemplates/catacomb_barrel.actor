@@ -1,0 +1,99 @@
+GridActor
+ Enabled
+1
+ Position
+2 0 4
+ Rotation
+0 1 0 -0.000244163
+ Scale
+1 1 1
+Destruct
+1
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+Just a normal barrel. With enough force, Aden could break it.
+Name
+GridActor0
+Obstacle
+1
+UID
+2094301729
+disableGridInteract
+0
+interactKnownText
+
+next
+DialogueComponent
+ Enabled
+1
+File
+
+next
+MemoryComponent
+ Enabled
+1
+Add On Interact
+0
+Condition
+
+Condition Value
+
+Image File
+
+Memory Desc
+
+Memory Name
+
+next
+MeshComponent
+ Enabled
+1
+ Pos
+2 0 4
+ Rot
+0 1 0 -0.000244163
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+barrel_texture.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+barrel.fbx
+Static
+1
+next
+end
