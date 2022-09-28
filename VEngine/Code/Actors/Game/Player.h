@@ -73,7 +73,7 @@ struct Player : Actor
 	bool isWeaponDrawn = false;
 	bool memoryWidgetToggle = false;
 
-	bool isPlayerTurn = false;
+	bool isPlayerTurn = true;
 
 	bool ableToGuard = false;
 	bool guarding = false;
