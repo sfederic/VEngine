@@ -89,6 +89,7 @@ namespace World
 	}
 
 	Actor* GetActorByUID(UID uid);
+	Actor* GetActorByUIDAllowNull(UID uid);
 	Actor* GetActorByName(std::string actorName);
 	Actor* GetActorByNameAllowNull(std::string actorName);
 

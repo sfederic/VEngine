@@ -189,6 +189,17 @@ Actor* World::GetActorByUID(UID uid)
 	return actorIt->second;
 }
 
+Actor* World::GetActorByUIDAllowNull(UID uid)
+{
+	auto actorIt = actorUIDMap.find(uid);
+	if (actorIt == actorUIDMap.end())
+	{
+		return nullptr;
+	}
+
+	return actorIt->second;
+}
+
 Actor* World::GetActorByName(std::string actorName)
 {
 	auto actorIt = actorNameMap.find(actorName);
