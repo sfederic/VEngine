@@ -6,6 +6,7 @@
 class Actor;
 class IActorSystem;
 struct SpatialComponent;
+struct Transform;
 
 namespace WorldEditor
 {
@@ -41,4 +42,6 @@ namespace WorldEditor
 
 	std::string GetActorTempateFilename();
 	void SetActorTemplateFilename(std::string netActorTempateFilename);
+
+	Actor* SpawnActorFromTemplateFile(std::string templateFilename, Transform& transform);
 };

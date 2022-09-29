@@ -274,38 +274,7 @@ void SpawnActor(Transform& transform)
 
 	if (!actorTemplateFilename.empty()) //Spawn actor through template
 	{
-		std::string path = AssetBaseFolders::actorTemplate + actorTemplateFilename;
-		Deserialiser d(path, OpenMode::In);
-
-		actor = spawnSystem->SpawnActor(transform);
-
-		auto actorProps = actor->GetProps();
-
-		//@Todo: there needs to be an actortemplate specific Deserialse() to be able to create components.
-		//Somethng like, 'when L"next" is hit, lookup Component System by name and spawn'.
-		d.Deserialise(actorProps);
-
-		actor->Create();
-
-		actor->SetUID(GenerateUID());
-		actor->ResetOwnerUIDToComponents();
-
-		for (auto& componentPair : actor->componentMap)
-		{
-			auto componentProps = componentPair.second->GetProps();
-			d.Deserialise(componentProps);
-			componentPair.second->Create();
-		}
-
-		//Set the transform, props will have the original transform data and will be
-		//different from the click position in world.
-		actor->SetTransform(transform);
-
-		std::string newActorName = spawnSystem->GetName() + std::to_string(spawnSystem->GetNumActors() - 1);
-		actor->SimpleSetName(newActorName);
-
-		debugMenu.AddNotification(VString::wformat(
-			L"Spawned actor [%S] from template", actor->GetName().c_str()));
+		WorldEditor::SpawnActorFromTemplateFile(actorTemplateFilename, transform);
 	}
 	else //Spawn MeshActor (usually)
 	{
@@ -402,5 +371,45 @@ std::string WorldEditor::GetActorTempateFilename()
 void WorldEditor::SetActorTemplateFilename(std::string netActorTempateFilename)
 {
 	actorTemplateFilename = netActorTempateFilename;
+}
+
+Actor* WorldEditor::SpawnActorFromTemplateFile(std::string templateFilename, Transform& transform)
+{
+	std::string path = AssetBaseFolders::actorTemplate + templateFilename;
+	Deserialiser d(path, OpenMode::In);
+
+	std::wstring actorSystemName;
+	d.is >> actorSystemName;
+
+	IActorSystem* actorSystem = actorSystemCache.Get(VString::wstos(actorSystemName));
+
+	Actor* actor = actorSystem->SpawnActor(transform);
+
+	auto actorProps = actor->GetProps();
+
+	d.Deserialise(actorProps);
+
+	actor->Create();
+
+	actor->SetUID(GenerateUID());
+	actor->ResetOwnerUIDToComponents();
+
+	for (auto& componentPair : actor->componentMap)
+	{
+		auto componentProps = componentPair.second->GetProps();
+		d.Deserialise(componentProps);
+		componentPair.second->Create();
+	}
+
+	//Set the transform, props will have the original transform data.
+	actor->SetTransform(transform);
+
+	std::string newActorName = spawnSystem->GetName() + std::to_string(spawnSystem->GetNumActors() - 1);
+	actor->SimpleSetName(newActorName);
+
+	debugMenu.AddNotification(VString::wformat(
+		L"Spawned actor [%s] from template", actor->GetName().c_str()));	
+
+	return actor;
 }
 
