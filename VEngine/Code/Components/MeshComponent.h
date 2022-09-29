@@ -57,4 +57,6 @@ struct MeshComponent : SpatialComponent
 
 	Buffer* GetVertexBuffer() const;
 	Buffer* GetIndexBuffer() const;
+
+	Material* GetMaterial() { return material; }
 };
