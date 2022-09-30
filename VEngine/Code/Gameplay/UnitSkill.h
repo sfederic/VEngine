@@ -14,5 +14,5 @@ protected:
 
 public:
 	//Spawn AOE esque nodes for every grid node in range of this skill.
-	virtual void SetNodesForSkillRange(int unitIndexX, int unitIndexY) {}
+	virtual void SetNodesForSkillRange(int unitIndexX, int unitIndexY) = 0;
 };

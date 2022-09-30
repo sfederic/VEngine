@@ -262,6 +262,7 @@
     <ClCompile Include="Code\Actors\Game\DialogueTrigger.cpp" />
     <ClCompile Include="Code\Gameplay\DialogueStructures.cpp" />
     <ClCompile Include="Code\UI\Game\PlayerActionBarWidget.cpp" />
+    <ClCompile Include="Code\Gameplay\LineAttackSkill.cpp" />
     <ClInclude Include="Code\Gameplay\AreaAttackSkill.h" />
     <ClInclude Include="Code\Gameplay\UnitSkill.h" />
     <ClInclude Include="Code\Actors\Effects\AOELine.h" />
@@ -529,6 +530,7 @@
     <ClInclude Include="Code\Actors\Game\DialogueTrigger.h" />
     <ClInclude Include="Code\Gameplay\DialogueStructures.h" />
     <ClInclude Include="Code\UI\Game\PlayerActionBarWidget.h" />
+    <ClInclude Include="Code\Gameplay\LineAttackSkill.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
