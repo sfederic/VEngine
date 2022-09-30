@@ -17,6 +17,8 @@
 #include "Gameplay/GameInstance.h"
 #include "Actors/Game/EntranceTrigger.h"
 #include "Physics/Raycast.h"
+#include "Gameplay/UnitSkill.h"
+#include "Gameplay/LineAttackSkill.h"
 
 Unit::Unit()
 {
@@ -32,7 +34,7 @@ Unit::Unit()
 
 	//intentBeam = Polyboard::system.Add(this);
 
-	skills.emplace("test", UnitSkill());
+	skills.emplace("test", new LineAttackSkill());
 }
 
 void Unit::Start()
@@ -107,7 +109,7 @@ void Unit::Tick(float deltaTime)
 
 					Timer::SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
 
-					skills["test"].SetNodesForSkillRange(xIndex, yIndex);
+					skills["test"]->SetNodesForSkillRange(xIndex, yIndex);
 				}
 				else
 				{
