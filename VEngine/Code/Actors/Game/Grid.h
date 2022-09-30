@@ -47,6 +47,7 @@ struct Grid : Actor
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 	GridNode* GetNode(int x, int y);
+	GridNode* GetNodeAllowNull(int x, int y);
 
 	//Limit the node gotten between 0 and the size of the grid.
 	GridNode* GetNodeLimit(int x, int y);

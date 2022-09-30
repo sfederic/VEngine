@@ -177,6 +177,15 @@ GridNode* Grid::GetNode(int x, int y)
     return &rows[x].columns[y];
 }
 
+GridNode* Grid::GetNodeAllowNull(int x, int y)
+{
+    if (x < 0) return nullptr;
+    if (y < 0) return nullptr;
+    if (x >= sizeX) return nullptr;
+    if (y >= sizeY) return nullptr;
+    return &rows[x].columns[y];
+}
+
 GridNode* Grid::GetNodeLimit(int x, int y)
 {
     if (x < 0) x = 0;
