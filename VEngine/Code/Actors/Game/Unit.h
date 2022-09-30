@@ -1,7 +1,9 @@
 #pragma once
+
 #include "GridActor.h"
 #include "VEnum.h"
 #include "Gameplay/BattleEnums.h"
+#include "Gameplay/UnitSkill.h"
 
 struct GridNode;
 struct MemoryComponent;
@@ -66,6 +68,8 @@ public:
 
 	//This is the actor name a Unit is focusing its 'intent' on. It can be another Unit, or Actor.
 	std::string actorToFocusOn;
+
+	std::map<std::string, UnitSkill> skills;
 
 	Unit();
 	virtual void Start() override;

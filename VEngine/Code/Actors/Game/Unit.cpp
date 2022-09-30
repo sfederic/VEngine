@@ -31,6 +31,8 @@ Unit::Unit()
 	memoryOnDeath->name = "MemoryOnDeath"; //Seperate the name, GridActor and Unit have two memory components.
 
 	//intentBeam = Polyboard::system.Add(this);
+
+	skills.emplace("test", UnitSkill());
 }
 
 void Unit::Start()
@@ -104,6 +106,8 @@ void Unit::Tick(float deltaTime)
 					GameUtils::SetActiveCameraTarget(this);
 
 					Timer::SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
+
+					skills["test"].SetNodesForSkillRange(xIndex, yIndex);
 				}
 				else
 				{
