@@ -563,6 +563,9 @@
     <ClCompile Include="Code\Actors\Game\Units\LineAttackerUnit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Gameplay\UnitSkill.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">

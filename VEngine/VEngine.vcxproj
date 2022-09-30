@@ -150,6 +150,7 @@
     <ClCompile Include="Code\Gameplay\BattleSystem.cpp" />
     <ClCompile Include="Code\Gameplay\ConditionSystem.cpp" />
     <ClCompile Include="Code\Gameplay\GridNode.cpp" />
+    <ClCompile Include="Code\Gameplay\UnitSkill.cpp" />
     <ClCompile Include="Code\IFunction.cpp" />
     <ClCompile Include="Code\Render\PixelShader.cpp" />
     <ClCompile Include="Code\Render\Shader.cpp" />

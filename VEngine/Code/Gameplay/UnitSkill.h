@@ -19,4 +19,6 @@ public:
 	virtual void SetNodesForSkillRange(GridNode* startingNode, GridNode* targetNode) = 0;
 
 	int GetRange() { return range; }
+
+	bool GetAllNodesInRange(GridNode* startingNode, GridNode* targetNode);
 };
