@@ -2,9 +2,10 @@
 #include "UnitSkill.h"
 #include "Actors/Game/Grid.h"
 
-bool UnitSkill::GetAllNodesInRange(GridNode* startingNode, GridNode* targetNode)
+bool UnitSkill::IsTargetNodeInRange(GridNode* startingNode, GridNode* targetNode)
 {
 	auto grid = Grid::system.GetFirstActor();
+	grid->ResetAllNodes();
 
 	//Get nodes based on skill range
 	std::vector<GridNode*> rangeNodes;

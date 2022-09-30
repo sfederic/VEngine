@@ -100,4 +100,5 @@ private:
 	AttackDirection GetRandomAttackDirection();
 
 	int GetHighestSkillRange();
+	bool IsTargetInRangeOfSkills(GridNode* targetNode);
 };

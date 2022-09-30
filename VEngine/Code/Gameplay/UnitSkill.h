@@ -20,5 +20,5 @@ public:
 
 	int GetRange() { return range; }
 
-	bool GetAllNodesInRange(GridNode* startingNode, GridNode* targetNode);
+	bool IsTargetNodeInRange(GridNode* startingNode, GridNode* targetNode);
 };

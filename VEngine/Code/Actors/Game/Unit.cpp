@@ -88,12 +88,13 @@ void Unit::Tick(float deltaTime)
 
 				GetCurrentNode()->Hide();
 
+				auto player = Player::system.GetFirstActor();
+
 				if (Attack())
 				{
 					//deal with attack wind up
 					attackWindingUp = true;
 
-					auto player = Player::system.GetFirstActor();
 					player->guardWidget->AddToViewport();
 					player->ableToGuard = true;
 					player->nextCameraFOV = 30.f;
@@ -104,11 +105,15 @@ void Unit::Tick(float deltaTime)
 					GameUtils::SetActiveCameraTarget(this);
 
 					Timer::SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
-
-					skills["line"]->SetNodesForSkillRange(GetCurrentNode(), player->GetCurrentNode());
 				}
 				else
 				{
+					//Use a skill on turn end if target is out of range of normal attack.
+					if (IsTargetInRangeOfSkills(player->GetCurrentNode()))
+					{
+						skills["line"]->SetNodesForSkillRange(GetCurrentNode(), player->GetCurrentNode());
+					}
+
 					EndTurn();
 
 					//Destroy Unit if its escaping and within its entrancetrigger to escape with
@@ -453,6 +458,20 @@ int Unit::GetHighestSkillRange()
 	}
 
 	return highestRange;
+}
+
+bool Unit::IsTargetInRangeOfSkills(GridNode* targetNode)
+{
+	for (auto& skillIt : skills)
+	{
+		auto& skill = skillIt.second;
+		if (skill->IsTargetNodeInRange(GetCurrentNode(), targetNode))
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
 void Unit::ShowUnitMovementPath()
