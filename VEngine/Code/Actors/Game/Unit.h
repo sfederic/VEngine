@@ -98,4 +98,6 @@ public:
 private:
 	std::vector<GridNode*> GetMovementPathPreviewNodes(GridNode* destinationNode);
 	AttackDirection GetRandomAttackDirection();
+
+	int GetHighestSkillRange();
 };

@@ -338,6 +338,8 @@ bool Unit::Attack()
 	std::vector<GridNode*> closedNodes;
 	grid->GetNeighbouringNodes(standingNode, attackNodes);
 
+	
+
 	for (int rangeIndex = 0; rangeIndex < attackRange; rangeIndex++)
 	{
 		for (int nodeIndex = 0; nodeIndex < attackNodes.size(); nodeIndex++)
@@ -436,6 +438,23 @@ void Unit::SetAttackDirection()
 AttackDirection Unit::GetRandomAttackDirection()
 {
 	 return static_cast<AttackDirection>(rand() % (int)AttackDirection::Count);
+}
+
+int Unit::GetHighestSkillRange()
+{
+	int highestRange = 0;
+
+	for (auto& skillIt : skills)
+	{
+		auto& skill = skillIt.second;
+		const int skillRange = skill->GetRange();
+		if (skillRange > highestRange)
+		{
+			highestRange = skillRange;
+		}
+	}
+
+	return highestRange;
 }
 
 void Unit::ShowUnitMovementPath()
