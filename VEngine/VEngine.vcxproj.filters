@@ -554,6 +554,9 @@
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Gameplay\UnitSkill.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -1064,6 +1067,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Effects\AOELine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Gameplay\UnitSkill.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
