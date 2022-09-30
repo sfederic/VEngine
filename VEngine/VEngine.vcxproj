@@ -117,7 +117,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Code\Gameplay\UnitSkill.cpp" />
+    <ClCompile Include="Code\Gameplay\AreaAttackSkill.cpp" />
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp" />
     <ClCompile Include="Code\Actors\Effects\AOELine.cpp" />
     <ClCompile Include="Code\Actors\CameraActor.cpp" />
@@ -262,6 +262,7 @@
     <ClCompile Include="Code\Actors\Game\DialogueTrigger.cpp" />
     <ClCompile Include="Code\Gameplay\DialogueStructures.cpp" />
     <ClCompile Include="Code\UI\Game\PlayerActionBarWidget.cpp" />
+    <ClInclude Include="Code\Gameplay\AreaAttackSkill.h" />
     <ClInclude Include="Code\Gameplay\UnitSkill.h" />
     <ClInclude Include="Code\Actors\Effects\AOELine.h" />
     <ClInclude Include="Code\Actors\CameraActor.h" />

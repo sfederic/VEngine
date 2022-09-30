@@ -3,7 +3,7 @@
 //A skill with a grid range and effect a unit in level can perform.
 class UnitSkill
 {
-public:
+protected:
 	enum class SkillType
 	{
 		Damage
@@ -12,6 +12,7 @@ public:
 	int range = 1;
 	SkillType skillType = SkillType::Damage;
 
+public:
 	//Spawn AOE esque nodes for every grid node in range of this skill.
-	virtual void SetNodesForSkillRange(int unitIndexX, int unitIndexY);
+	virtual void SetNodesForSkillRange(int unitIndexX, int unitIndexY) {}
 };

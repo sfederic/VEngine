@@ -1,9 +1,9 @@
 #include "vpch.h"
-#include "UnitSkill.h"
+#include "AreaAttackSkill.h"
 #include "Actors/Game/Grid.h"
 #include "Actors/Effects/AOELine.h"
 
-void UnitSkill::SetNodesForSkillRange(int unitIndexX, int unitIndexY)
+void AreaAttackSkill::SetNodesForSkillRange(int unitIndexX, int unitIndexY)
 {
 	Grid* grid = Grid::system.GetFirstActor();
 	GridNode* unitNode = grid->GetNode(unitIndexX, unitIndexY);
