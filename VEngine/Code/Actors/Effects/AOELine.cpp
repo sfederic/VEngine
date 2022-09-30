@@ -9,7 +9,9 @@ AOELine::AOELine()
 	rootComponent = mesh;
 
 	mesh->SetBlendState(BlendStates::Default);
-	mesh->GetMaterial()->materialShaderData.ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 0.5f);
+	Material* material = mesh->GetMaterial();
+	material->materialShaderData.ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 0.5f);
+	material->uvOffsetSpeed = XMFLOAT2(0.5f, 0.5f);
 }
 
 Properties AOELine::GetProps()
