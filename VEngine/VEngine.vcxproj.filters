@@ -548,7 +548,7 @@
     <ClCompile Include="Code\UI\Game\UnitLineupWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Effects\AOELine.cpp">
+    <ClCompile Include="Code\Actors\Game\SkillNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp">
@@ -1069,7 +1069,7 @@
     <ClInclude Include="Code\UI\Game\UnitLineupWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Effects\AOELine.h">
+    <ClInclude Include="Code\Actors\Game\SkillNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\UnitSkill.h">

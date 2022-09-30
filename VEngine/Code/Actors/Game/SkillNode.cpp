@@ -1,9 +1,9 @@
 #include "vpch.h"
-#include "AOELine.h"
+#include "SkillNode.h"
 #include "Components/MeshComponent.h"
 #include "Render/Material.h"
 
-AOELine::AOELine()
+SkillNode::SkillNode()
 {
 	mesh = CreateComponent(MeshComponent("node.fbx", "Particle/orange_gradient.png"), "Mesh");
 	rootComponent = mesh;
@@ -14,7 +14,7 @@ AOELine::AOELine()
 	material->uvOffsetSpeed = XMFLOAT2(0.5f, 0.5f);
 }
 
-Properties AOELine::GetProps()
+Properties SkillNode::GetProps()
 {
 	return __super::GetProps();
 }

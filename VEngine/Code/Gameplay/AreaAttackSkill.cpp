@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "AreaAttackSkill.h"
 #include "Actors/Game/Grid.h"
-#include "Actors/Effects/AOELine.h"
+#include "Actors/Game/SkillNode.h"
 
 void AreaAttackSkill::SetNodesForSkillRange(int unitIndexX, int unitIndexY)
 {
@@ -16,6 +16,6 @@ void AreaAttackSkill::SetNodesForSkillRange(int unitIndexX, int unitIndexY)
 		Transform transform{};
 		transform.position = node->worldPosition;
 		transform.position.y -= 0.35f;
-		AOELine::system.Add(AOELine(), transform);
+		SkillNode::system.Add(SkillNode(), transform);
 	}
 }

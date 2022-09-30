@@ -5,12 +5,12 @@
 
 struct MeshComponent;
 
-class AOELine : public Actor
+class SkillNode : public Actor
 {
 public:
-	ACTOR_SYSTEM(AOELine);
+	ACTOR_SYSTEM(SkillNode);
 
-	AOELine();
+	SkillNode();
 	virtual Properties GetProps() override;
 
 private:

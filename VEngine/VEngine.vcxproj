@@ -119,7 +119,7 @@
   <ItemGroup>
     <ClCompile Include="Code\Gameplay\AreaAttackSkill.cpp" />
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp" />
-    <ClCompile Include="Code\Actors\Effects\AOELine.cpp" />
+    <ClCompile Include="Code\Actors\Game\SkillNode.cpp" />
     <ClCompile Include="Code\Actors\CameraActor.cpp" />
     <ClCompile Include="Code\Actors\Game\EntranceTrigger.cpp" />
     <ClCompile Include="Code\Actors\Game\FenceActor.cpp" />
@@ -265,7 +265,7 @@
     <ClCompile Include="Code\Gameplay\LineAttackSkill.cpp" />
     <ClInclude Include="Code\Gameplay\AreaAttackSkill.h" />
     <ClInclude Include="Code\Gameplay\UnitSkill.h" />
-    <ClInclude Include="Code\Actors\Effects\AOELine.h" />
+    <ClInclude Include="Code\Actors\Game\SkillNode.h" />
     <ClInclude Include="Code\Actors\CameraActor.h" />
     <ClInclude Include="Code\Actors\Game\EntranceTrigger.h" />
     <ClInclude Include="Code\Actors\Game\FenceActor.h" />

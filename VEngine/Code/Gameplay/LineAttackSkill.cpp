@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "LineAttackSkill.h"
 #include "Actors/Game/Grid.h"
-#include "Actors/Effects/AOELine.h"
+#include "Actors/Game/SkillNode.h"
 
 LineAttackSkill::LineAttackSkill()
 {
@@ -32,6 +32,6 @@ void LineAttackSkill::SetNodesForSkillRange(int unitIndexX, int unitIndexY)
 		Transform transform{};
 		transform.position = node->worldPosition;
 		transform.position.y -= 0.35f;
-		AOELine::system.Add(AOELine(), transform);
+		SkillNode::system.Add(SkillNode(), transform);
 	}
 }
