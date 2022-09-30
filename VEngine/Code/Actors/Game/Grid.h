@@ -52,6 +52,10 @@ struct Grid : Actor
 	GridNode* GetNodeLimit(int x, int y);
 
 	void GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode*>& outNodes);
+
+	//Get neighbouring nodes without consideration for whether they're closed or their world position (only active nodes count).
+	void GetNeighbouringNodesForceful(GridNode* centerNode, std::vector<GridNode*>& outNodes);
+
 	void ResetAllNodes();
 	void LerpInNodes(float deltaTime);
 	void LerpOutNodes(float deltaTime);
