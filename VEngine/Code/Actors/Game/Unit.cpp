@@ -17,8 +17,6 @@
 #include "Gameplay/GameInstance.h"
 #include "Actors/Game/EntranceTrigger.h"
 #include "Physics/Raycast.h"
-#include "Gameplay/UnitSkill.h"
-#include "Gameplay/LineAttackSkill.h"
 
 Unit::Unit()
 {
@@ -33,8 +31,6 @@ Unit::Unit()
 	memoryOnDeath->name = "MemoryOnDeath"; //Seperate the name, GridActor and Unit have two memory components.
 
 	//intentBeam = Polyboard::system.Add(this);
-
-	skills.emplace("test", new LineAttackSkill());
 }
 
 void Unit::Start()
@@ -109,7 +105,7 @@ void Unit::Tick(float deltaTime)
 
 					Timer::SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
 
-					skills["test"]->SetNodesForSkillRange(xIndex, yIndex);
+					skills["line"]->SetNodesForSkillRange(xIndex, yIndex);
 				}
 				else
 				{
