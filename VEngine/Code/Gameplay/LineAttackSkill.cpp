@@ -8,18 +8,17 @@ LineAttackSkill::LineAttackSkill()
 	range = 3;
 }
 
-void LineAttackSkill::SetNodesForSkillRange(int unitIndexX, int unitIndexY)
+void LineAttackSkill::SetNodesForSkillRange(GridNode* startingNode, GridNode* targetNode)
 {
 	Grid* grid = Grid::system.GetFirstActor();
-	GridNode* unitNode = grid->GetNode(unitIndexX, unitIndexY);
 
 	std::vector<GridNode*> nodes;
 
-	int nextXIndex = unitIndexX - 1; //testing increment
+	int nextXIndex = startingNode->xIndex - 1; //testing increment
 
 	for (int i = 0; i < range; i++)
 	{
-		GridNode* node = grid->GetNodeAllowNull(nextXIndex, unitIndexY);
+		GridNode* node = grid->GetNodeAllowNull(nextXIndex, startingNode->yIndex);
 		if (node)
 		{
 			nodes.push_back(node);

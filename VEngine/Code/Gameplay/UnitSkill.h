@@ -1,5 +1,7 @@
 #pragma once
 
+struct GridNode;
+
 //A skill with a grid range and effect a unit in level can perform.
 class UnitSkill
 {
@@ -14,7 +16,7 @@ protected:
 
 public:
 	//Spawn AOE esque nodes for every grid node in range of this skill.
-	virtual void SetNodesForSkillRange(int unitIndexX, int unitIndexY) = 0;
+	virtual void SetNodesForSkillRange(GridNode* startingNode, GridNode* targetNode) = 0;
 
 	int GetRange() { return range; }
 };

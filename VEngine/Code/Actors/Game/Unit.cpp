@@ -105,7 +105,7 @@ void Unit::Tick(float deltaTime)
 
 					Timer::SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
 
-					skills["line"]->SetNodesForSkillRange(xIndex, yIndex);
+					skills["line"]->SetNodesForSkillRange(GetCurrentNode(), player->GetCurrentNode());
 				}
 				else
 				{

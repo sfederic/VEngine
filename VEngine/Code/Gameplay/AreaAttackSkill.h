@@ -5,5 +5,5 @@
 class AreaAttackSkill : public UnitSkill
 {
 public:
-	virtual void SetNodesForSkillRange(int unitIndexX, int unitIndexY) override;
+	virtual void SetNodesForSkillRange(GridNode* startingNode, GridNode* targetNode) override;
 };
