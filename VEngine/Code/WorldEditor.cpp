@@ -73,12 +73,12 @@ void HandleActorPicking()
 			}
 
 			//Assign selected material in editor to mesh on click
-			if (!materialSystem.selectedMaterialInEditor.empty() && WorldEditor::materialPlacement)
+			if (!MaterialSystem::selectedMaterialInEditor.empty() && WorldEditor::materialPlacement)
 			{
 				auto mesh = dynamic_cast<MeshComponent*>(screenPickRay.hitComponent);
 				if (mesh)
 				{
-					Material loadedMaterial = materialSystem.LoadMaterialFromFile(materialSystem.selectedMaterialInEditor);
+					Material loadedMaterial = MaterialSystem::LoadMaterialFromFile(MaterialSystem::selectedMaterialInEditor);
 					loadedMaterial.Create();
 					*mesh->material = loadedMaterial;
 					return;

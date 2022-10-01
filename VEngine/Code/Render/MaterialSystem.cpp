@@ -3,10 +3,16 @@
 #include <cassert>
 #include "Material.h"
 #include "Serialiser.h"
+#include "Render/ShaderItem.h"
+#include "SystemStates.h"
 
-MaterialSystem materialSystem;
+SystemStates systemState = SystemStates::Unloaded;
 
-MaterialSystem::MaterialSystem() : System("MaterialSystem")
+std::unordered_map<UID, std::unique_ptr<Material>> materials;
+
+std::string MaterialSystem::selectedMaterialInEditor;
+
+void MaterialSystem::Init()
 {
 	Material::SetupBlendAndRastStateValues();
 }

@@ -50,7 +50,7 @@ void Material::Create()
 
 void Material::Destroy()
 {
-	materialSystem.DestroyMaterial(uid);
+	MaterialSystem::DestroyMaterial(uid);
 }
 
 static void ReassignTexture(void* data)

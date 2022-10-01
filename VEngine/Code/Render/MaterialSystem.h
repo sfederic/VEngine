@@ -1,22 +1,16 @@
 #pragma once
 
-#include <unordered_map>
-#include <memory>
-#include "System.h"
+#include <string>
 #include "UID.h"
-#include "Render/ShaderItem.h"
 
 class Material;
+class ShaderItem;
 
-class MaterialSystem : public System
+namespace MaterialSystem
 {
-private:
-	std::unordered_map<UID, std::unique_ptr<Material>> materials;
+	extern std::string selectedMaterialInEditor;
 
-public:
-	std::string selectedMaterialInEditor;
-
-	MaterialSystem();
+	void Init();
 	Material* CreateMaterial(std::string textureFilename, ShaderItem* shaderItem);
 	void DestroyMaterial(UID materialUID);
 	Material* FindMaterial(UID uid);
@@ -24,5 +18,3 @@ public:
 	void CreateAllMaterials();
 	void Cleanup();
 };
-
-extern MaterialSystem materialSystem;

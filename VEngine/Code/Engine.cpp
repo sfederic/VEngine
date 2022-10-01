@@ -17,6 +17,7 @@
 #include "Editor/Console.h"
 #include "World.h"
 #include "Render/ShaderSystem.h"
+#include "Render/MaterialSystem.h"
 #include "Commands/CommandSystem.h"
 #include "Render/SpriteSystem.h"
 #include "Audio/AudioSystem.h"
@@ -27,6 +28,8 @@
 void Engine::Init(int argc, char* argv[])
 {
 	auto startTime = Profile::QuickStart();
+
+	MaterialSystem::Init();
 
 	activeCamera = &editorCamera;
 

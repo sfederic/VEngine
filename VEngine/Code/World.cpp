@@ -51,7 +51,7 @@ void World::Init()
 
 void World::Start()
 {
-	materialSystem.CreateAllMaterials();
+	MaterialSystem::CreateAllMaterials();
 	textureSystem.CreateAllTextures();
 
 	//Init actor systems
@@ -289,7 +289,7 @@ void World::Cleanup()
 	physicsSystem.Reset();
 	audioSystem.DeleteLoadedAudioAndChannels();
 	textureSystem.Cleanup();
-	materialSystem.Cleanup();
+	MaterialSystem::Cleanup();
 	spriteSystem.Reset();
 	uiSystem.Reset();
 

@@ -25,7 +25,7 @@ void MeshComponent::ResetMeshBuffers()
 
 MeshComponent::MeshComponent()
 {
-	material = materialSystem.CreateMaterial("test.png", ShaderItems::Default);
+	material = MaterialSystem::CreateMaterial("test.png", ShaderItems::Default);
 }
 
 MeshComponent::MeshComponent(const std::string filename_,
