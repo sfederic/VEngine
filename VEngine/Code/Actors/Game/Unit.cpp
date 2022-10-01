@@ -108,11 +108,12 @@ void Unit::Tick(float deltaTime)
 				}
 				else
 				{
+					//@Todo: come back and see if skills on units are worth keeping. Might be too much work.
 					//Use a skill on turn end if target is out of range of normal attack.
-					if (IsTargetInRangeOfSkills(player->GetCurrentNode()))
+					/*if (IsTargetInRangeOfSkills(player->GetCurrentNode()))
 					{
 						skills["line"]->SetNodesForSkillRange(GetCurrentNode(), player->GetCurrentNode());
-					}
+					}*/
 
 					EndTurn();
 
