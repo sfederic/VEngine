@@ -9,6 +9,19 @@
 #include "Components/MeshComponent.h"
 #include "World.h"
 
+bool IsIgnoredActor(Actor* actor, Ray& ray)
+{
+	for (auto actorToIgnore : ray.actorsToIgnore)
+	{
+		if (actor == actorToIgnore)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fromScreen)
 {
 	ray.origin = origin;
@@ -217,6 +230,29 @@ bool RaycastFromScreen(Ray& ray)
 	constexpr float range = std::numeric_limits<float>::max();
 
 	return Raycast(ray, ray.origin, ray.direction, range, true);
+}
+
+bool BoxCast(Ray& ray, XMFLOAT3 extents, XMFLOAT3 origin)
+{
+	DirectX::BoundingBox boundingBox(origin, extents);
+
+	for (auto actor : World::GetAllActorsInWorld())
+	{
+		if (IsIgnoredActor(actor, ray))
+		{
+			continue;
+		}
+
+		for (auto mesh : actor->GetComponentsOfType<MeshComponent>())
+		{
+			if (boundingBox.Intersects(mesh->boundingBox))
+			{
+				ray.hitActors.push_back(actor);
+			}
+		}
+	}
+
+	return ray.hitActors.size();
 }
 
 void Ray::AddActorsToIgnore(std::vector<Actor*>& actors)

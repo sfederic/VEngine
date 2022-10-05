@@ -55,3 +55,5 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR end);
 bool RaycastTriangleIntersect(Ray& ray);
 bool RaycastFromScreen(Ray& ray);
+
+bool BoxCast(Ray& ray, XMFLOAT3 extents, XMFLOAT3 origin);
