@@ -232,9 +232,9 @@ bool RaycastFromScreen(Ray& ray)
 	return Raycast(ray, ray.origin, ray.direction, range, true);
 }
 
-bool BoxCast(Ray& ray, XMFLOAT3 extents, XMFLOAT3 origin)
+bool OrientedBoxCast(Ray& ray, XMFLOAT3 center, XMFLOAT3 extents, XMFLOAT4 orientation)
 {
-	DirectX::BoundingBox boundingBox(origin, extents);
+	DirectX::BoundingOrientedBox boundingOrientedBox(center, extents, orientation);
 
 	for (auto actor : World::GetAllActorsInWorld())
 	{
@@ -245,7 +245,7 @@ bool BoxCast(Ray& ray, XMFLOAT3 extents, XMFLOAT3 origin)
 
 		for (auto mesh : actor->GetComponentsOfType<MeshComponent>())
 		{
-			if (boundingBox.Intersects(mesh->boundingBox))
+			if (boundingOrientedBox.Intersects(mesh->boundingBox))
 			{
 				ray.hitActors.push_back(actor);
 			}
