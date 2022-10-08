@@ -17,17 +17,12 @@ float4 main(VS_OUT i) : SV_Target
     float3 normal = normalize(i.normal);
     float4 position = i.posWS;
 
-    float3 bitangent = cross(i.tangent, normal);
-    float3x3 TBN = float3x3(i.tangent, bitangent, normal);
-    //TBN = transpose(TBN);
-    
-    float3 bumpNormal = normalMap.Sample(s, i.uv).rgb;
-    bumpNormal = bumpNormal * 2.0 - 1.0;
-    bumpNormal = normalize(mul(TBN, bumpNormal));
+    //Put bump normal into CalcForwardLighting() if result is needed
+    //float3 bumpNormal = CalcBumpNormalFromTangentBitangent(normal, i.tangent, i.uv);
     
     float3 V = normalize(eyePosition - position).xyz;
 
-    LightingResult endResult = CalcForwardLighting(V, position, bumpNormal);
+    LightingResult endResult = CalcForwardLighting(V, position, normal);
 
     endResult.diffuse *= material.ambient;
     endResult.specular *= material.ambient;

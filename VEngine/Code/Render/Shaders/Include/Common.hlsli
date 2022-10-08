@@ -350,4 +350,17 @@ float CalcShadowFactor(float4 shadowPos)
 	return percentLit /= 9.f;
 }
 
+float3 CalcBumpNormalFromTangentBitangent(float3 normal, float3 tangent, float2 uv)
+{
+	float3 bitangent = cross(tangent, normal);
+    float3x3 TBN = float3x3(tangent, bitangent, normal);
+    TBN = transpose(TBN);
+    
+    float3 bumpNormal = normalMap.Sample(s, uv).rgb;
+    bumpNormal = bumpNormal * 2.0 - 1.0;
+    bumpNormal = normalize(mul(TBN, bumpNormal));
+	
+    return bumpNormal;
+}
+
 #endif 
