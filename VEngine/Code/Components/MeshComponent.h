@@ -18,6 +18,8 @@ struct MeshComponent : SpatialComponent
 	//is called once on world load.
 	static void ResetMeshBuffers();
 
+	static std::vector<MeshComponent*> OrderMeshComponentsByDistanceToCamera();
+
 	MeshComponentData meshComponentData;
 
 	Material* material = nullptr;

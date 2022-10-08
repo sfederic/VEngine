@@ -23,6 +23,26 @@ void MeshComponent::ResetMeshBuffers()
 	existingMeshBuffers.clear();
 }
 
+std::vector<MeshComponent*> MeshComponent::OrderMeshComponentsByDistanceToCamera()
+{
+	XMVECTOR cameraPos = activeCamera->GetWorldPositionV();
+
+	std::map<float, MeshComponent*> meshDistanceMap;
+	for (auto mesh : system.components)
+	{
+		const float distance = XMVector3Length(cameraPos - mesh->GetWorldPositionV()).m128_f32[0];
+		meshDistanceMap.emplace(distance, mesh);
+	}
+
+	std::vector<MeshComponent*> sortedMeshes;
+	for (auto& meshPair : meshDistanceMap)
+	{
+		sortedMeshes.emplace_back(meshPair.second);
+	}
+
+	return sortedMeshes;
+}
+
 MeshComponent::MeshComponent()
 {
 	material = MaterialSystem::CreateMaterial("test.png", ShaderItems::Default);
