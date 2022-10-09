@@ -39,6 +39,7 @@ std::vector<MeshComponent*> MeshComponent::OrderMeshComponentsByDistanceToCamera
 	{
 		sortedMeshes.emplace_back(meshPair.second);
 	}
+	std::reverse(sortedMeshes.begin(), sortedMeshes.end());
 
 	return sortedMeshes;
 }
