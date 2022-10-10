@@ -11,6 +11,7 @@
 #include "UI/Game/HealthWidget.h"
 #include "UI/Game/DialogueWidget.h"
 #include "UI/Game/UnitLineupWidget.h"
+#include "UI/Game/PlayerHealthWidget.h"
 
 BattleSystem battleSystem;
 
@@ -46,6 +47,7 @@ void BattleSystem::StartBattle()
 	player = Player::system.GetFirstActor();
 	player->isPlayerTurn = true;
 	player->isWeaponDrawn = true;
+	player->healthWidget->AddToViewport();
 
 	uiSystem.unitLineupWidget->AddToViewport();
 
