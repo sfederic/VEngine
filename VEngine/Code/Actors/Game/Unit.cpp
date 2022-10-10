@@ -4,6 +4,7 @@
 #include "Gameplay/GridNode.h"
 #include "Gameplay/GameUtils.h"
 #include "Grid.h"
+#include "SkillNode.h"
 #include "Components/MeshComponent.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Components/Game/MemoryComponent.h"
@@ -70,7 +71,33 @@ void Unit::Tick(float deltaTime)
 	{
 		if (XMVector4Equal(nextMovePos, GetPositionV()))
 		{
-			if (movementPathNodeIndex < pathNodes.size())
+			if (!activeSkillNodes.empty())
+			{
+				movementPathNodeIndex = 0;
+				pathNodes.clear();
+
+				GetCurrentNode()->Hide();
+
+				auto player = Player::system.GetFirstActor();
+
+				//deal with attack wind up
+				attackWindingUp = true;
+
+				//Set player guard setup if skill can hit
+				auto& skill = skills[skillName];
+				if (skill->IsTargetNodeInRange(GetCurrentNode(), player->GetCurrentNode()))
+				{
+					player->guardWidget->AddToViewport();
+					player->ableToGuard = true;
+					player->unitCurrentlyAttackingPlayer = this;
+				}
+
+				//Still show animations and camera focus even if skill won't connect
+				player->nextCameraFOV = 30.f;
+				GameUtils::SetActiveCameraTarget(this);
+				Timer::SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
+			}
+			else if (movementPathNodeIndex < pathNodes.size())
 			{
 				nextMovePos = XMLoadFloat3(&pathNodes[movementPathNodeIndex]->worldPosition);
 
@@ -92,6 +119,8 @@ void Unit::Tick(float deltaTime)
 
 				if (Attack())
 				{
+					ClearActiveSkillNodes();
+
 					//deal with attack wind up
 					attackWindingUp = true;
 
@@ -144,6 +173,7 @@ Properties Unit::GetProps()
 	props.AddProp(actorToFocusOn);
 	props.AddProp(numOfAttacks);
 	props.AddProp(deathText);
+	props.Add("Skill", &skillName);
 	return props;
 }
 
@@ -371,6 +401,30 @@ void Unit::WindUpAttack()
 {
 	auto player = Player::system.GetFirstActor();
 
+	if (!activeSkillNodes.empty())
+	{
+		if (skills[skillName]->IsTargetNodeInRange(GetCurrentNode(), Player::system.GetFirstActor()->GetCurrentNode()))
+		{
+			GameUtils::CameraShake(1.f);
+			GameUtils::PlayAudioOneShot("sword_hit.wav");
+			player->InflictDamage(attackPoints);
+		}
+
+		player->nextCameraFOV = 60.f;
+		GameUtils::SetActiveCameraTarget(player);
+
+		attackWindingUp = false;
+
+		ClearActiveSkillNodes();
+
+		player->ableToGuard = false;
+		player->guardWidget->RemoveFromViewport();
+		player->unitCurrentlyAttackingPlayer = nullptr;
+
+		EndTurn();
+		return;
+	}
+
 	//Do a raycast towards player. Lets player go behind cover.
 	Ray ray(this);
 	ray.actorsToIgnore.push_back(player); //Ignore player too. Attack hits if nothing is hit
@@ -419,6 +473,8 @@ void Unit::WindUpAttack()
 		GameUtils::SetActiveCameraTarget(player);
 
 		attackWindingUp = false;
+
+		ClearActiveSkillNodes();
 
 		player->ableToGuard = false;
 		player->guardWidget->RemoveFromViewport();
@@ -475,14 +531,26 @@ void Unit::ActivateSkill()
 	//@Todo: come back and see if skills on units are worth keeping. Might be too much work.
 	if (!skillName.empty())
 	{
+		ClearActiveSkillNodes();
+
 		auto skillIt = skills.find(skillName);
 		if (skillIt == skills.end())
 		{
 			Log("Skill [%s] not found in Unit [%s]'s skill map.", skillName.c_str(), GetName().c_str());
 		}
 
-		skills[skillName]->SetNodesForSkillRange(GetCurrentNode(), Player::system.GetFirstActor()->GetCurrentNode());
+		activeSkillNodes = skills[skillName]->SetNodesForSkillRange(GetCurrentNode(), Player::system.GetFirstActor()->GetCurrentNode());
 	}
+}
+
+void Unit::ClearActiveSkillNodes()
+{
+	for (auto skillNode : activeSkillNodes)
+	{
+		skillNode->Destroy();
+	}
+
+	activeSkillNodes.clear();
 }
 
 void Unit::ShowUnitMovementPath()

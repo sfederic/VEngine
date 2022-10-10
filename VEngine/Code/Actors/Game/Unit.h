@@ -11,6 +11,7 @@ struct MemoryComponent;
 struct EntranceTrigger;
 struct Polyboard;
 class UnitSkill;
+class SkillNode;
 
 //Units are battle ready actors and really only move and fight.
 struct Unit : GridActor
@@ -60,6 +61,7 @@ private:
 	int currentAttackNumber = 0;
 
 	std::string skillName;
+	std::vector<SkillNode*> activeSkillNodes;
 
 public:
 	//All the nodes the unit can move to
@@ -104,4 +106,5 @@ private:
 	int GetHighestSkillRange();
 	bool IsTargetInRangeOfSkills(GridNode* targetNode);
 	void ActivateSkill();
+	void ClearActiveSkillNodes();
 };
