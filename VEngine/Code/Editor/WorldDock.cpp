@@ -125,9 +125,13 @@ void WorldDock::ArrowSelectActorInList()
 	auto items = actorTreeWidget->selectedItems();
 	if (!items.empty())
 	{
+		WorldEditor::ClearPickedActors();
+
 		QString pickedActorName = items[0]->text(0);
 		auto pickedActor = World::GetActorByName(pickedActorName.toStdString());
+
 		WorldEditor::SetPickedActor(pickedActor);
+
 		editor->SetActorProps(pickedActor);
 	}
 }
