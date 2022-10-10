@@ -1,5 +1,10 @@
 # VEngine
 
+## Engine Overview 
+The purpose of this repository is to build a beginner to intermediate level game engine with the intent of documenting all the more minute parts of engine as a reference and/or tutorial for onlooking users. The engine itself is being used to create a low-poly, grid-based RPG to be used as a base for the technical aspects of the engine so as to make technical decisions fall within a manageable scope and not push too far in trying to mimic AAA game development techniques.
+
+The engine attempts to keep itself within the C++ realm, opting for several more modern approaches of the language in more of a learning attempt for more recent C++ language standards and concepts. Along with that approach is the attempt to keep the engine purely in C/C++ and not involve outside libraries or languages (either scripting or markup) when dealing with implementations around reflection, serialisation or memory allocation.
+
 ![image](https://user-images.githubusercontent.com/45758254/164871735-21b7a40f-fc77-441d-8868-10376bb659dc.png)
 
 ## Build Notes
