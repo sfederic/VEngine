@@ -7,6 +7,26 @@ The engine attempts to keep itself within the C++ realm, opting for several more
 
 ![image](https://user-images.githubusercontent.com/45758254/164871735-21b7a40f-fc77-441d-8868-10376bb659dc.png)
 
+## Editor
+
+## Actors and Components
+
+## Serialisation
+
+## Rendering
+
+## Lighting
+
+## Particles
+
+## Animation
+
+## Audio
+
+## User Interface (Gameplay)
+
+## FBX Importing
+
 ## Build Notes
 * Visual Studio 2022 17.3
 * Blender 2.93.7
