@@ -6,5 +6,5 @@ class LineAttackSkill : public UnitSkill
 {
 public:
 	LineAttackSkill();
-	virtual void SetNodesForSkillRange(GridNode* startingNode, GridNode* targetNode) override;
+	virtual std::vector<SkillNode*> SetNodesForSkillRange(GridNode* startingNode, GridNode* targetNode) override;
 };

@@ -5,5 +5,5 @@
 class AreaAttackSkill : public UnitSkill
 {
 public:
-	virtual void SetNodesForSkillRange(GridNode* startingNode, GridNode* targetNode) override;
+	virtual std::vector<SkillNode*> SetNodesForSkillRange(GridNode* startingNode, GridNode* targetNode) override;
 };

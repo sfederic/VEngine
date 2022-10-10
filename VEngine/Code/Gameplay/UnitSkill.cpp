@@ -1,6 +1,22 @@
 #include "vpch.h"
 #include "UnitSkill.h"
 #include "Actors/Game/Grid.h"
+#include "Actors/Game/SkillNode.h"
+
+std::vector<SkillNode*> UnitSkill::SpawnSkillNodes(std::vector<GridNode*>& gridNodes)
+{
+	std::vector<SkillNode*> skillNodes;
+
+	for (GridNode* node : gridNodes)
+	{
+		Transform transform{};
+		transform.position = node->worldPosition;
+		transform.position.y -= 0.35f;
+		skillNodes.push_back(SkillNode::system.Add(SkillNode(), transform));
+	}
+
+	return skillNodes;
+}
 
 bool UnitSkill::IsTargetNodeInRange(GridNode* startingNode, GridNode* targetNode)
 {

@@ -8,7 +8,7 @@ LineAttackSkill::LineAttackSkill()
 	range = 3;
 }
 
-void LineAttackSkill::SetNodesForSkillRange(GridNode* startingNode, GridNode* targetNode)
+std::vector<SkillNode*> LineAttackSkill::SetNodesForSkillRange(GridNode* startingNode, GridNode* targetNode)
 {
 	Grid* grid = Grid::system.GetFirstActor();
 
@@ -26,11 +26,5 @@ void LineAttackSkill::SetNodesForSkillRange(GridNode* startingNode, GridNode* ta
 		nextXIndex -= 1;
 	}
 
-	for (GridNode* node : nodes)
-	{
-		Transform transform{};
-		transform.position = node->worldPosition;
-		transform.position.y -= 0.35f;
-		SkillNode::system.Add(SkillNode(), transform);
-	}
+	return SpawnSkillNodes(nodes);
 }
