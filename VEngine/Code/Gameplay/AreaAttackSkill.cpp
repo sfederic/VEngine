@@ -3,6 +3,11 @@
 #include "Actors/Game/Grid.h"
 #include "Actors/Game/SkillNode.h"
 
+AreaAttackSkill::AreaAttackSkill()
+{
+	range = 1;
+}
+
 std::vector<SkillNode*> AreaAttackSkill::SetNodesForSkillRange(GridNode* startingNode, GridNode* targetNode)
 {
 	Grid* grid = Grid::system.GetFirstActor();
