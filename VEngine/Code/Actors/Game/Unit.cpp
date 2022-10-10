@@ -108,12 +108,7 @@ void Unit::Tick(float deltaTime)
 				}
 				else
 				{
-					//@Todo: come back and see if skills on units are worth keeping. Might be too much work.
-					//Use a skill on turn end if target is out of range of normal attack.
-					/*if (IsTargetInRangeOfSkills(player->GetCurrentNode()))
-					{
-						skills["line"]->SetNodesForSkillRange(GetCurrentNode(), player->GetCurrentNode());
-					}*/
+					ActivateSkill();
 
 					EndTurn();
 
@@ -473,6 +468,21 @@ bool Unit::IsTargetInRangeOfSkills(GridNode* targetNode)
 	}
 
 	return false;
+}
+
+void Unit::ActivateSkill()
+{
+	//@Todo: come back and see if skills on units are worth keeping. Might be too much work.
+	if (!skillName.empty())
+	{
+		auto skillIt = skills.find(skillName);
+		if (skillIt == skills.end())
+		{
+			Log("Skill [%s] not found in Unit [%s]'s skill map.", skillName.c_str(), GetName().c_str());
+		}
+
+		skills[skillName]->SetNodesForSkillRange(GetCurrentNode(), Player::system.GetFirstActor()->GetCurrentNode());
+	}
 }
 
 void Unit::ShowUnitMovementPath()

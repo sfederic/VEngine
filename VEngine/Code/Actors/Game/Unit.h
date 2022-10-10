@@ -59,6 +59,8 @@ private:
 	bool attackWindingUp = false;
 	int currentAttackNumber = 0;
 
+	std::string skillName;
+
 public:
 	//All the nodes the unit can move to
 	std::vector<GridNode*> movementPathNodes;
@@ -101,4 +103,5 @@ private:
 
 	int GetHighestSkillRange();
 	bool IsTargetInRangeOfSkills(GridNode* targetNode);
+	void ActivateSkill();
 };
