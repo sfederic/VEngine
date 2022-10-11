@@ -1,6 +1,6 @@
 #include "vpch.h"
 #include "LineAttackerUnit.h"
-#include "Gameplay/AreaAttackSkill.h"
+#include "Gameplay/UnitSkills/AreaAttackSkill.h"
 
 LineAttackUnit::LineAttackUnit()
 {

@@ -4,7 +4,7 @@
 #include <memory>
 #include "VEnum.h"
 #include "Gameplay/BattleEnums.h"
-#include "Gameplay/UnitSkill.h"
+#include "Gameplay/UnitSkills/UnitSkill.h"
 
 struct GridNode;
 struct MemoryComponent;

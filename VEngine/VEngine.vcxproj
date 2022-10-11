@@ -118,7 +118,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Code\Actors\Game\Units\LineAttackerUnit.cpp" />
-    <ClCompile Include="Code\Gameplay\AreaAttackSkill.cpp" />
+    <ClCompile Include="Code\Gameplay\UnitSkills\AreaAttackSkill.cpp" />
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp" />
     <ClCompile Include="Code\Actors\Game\SkillNode.cpp" />
     <ClCompile Include="Code\Actors\CameraActor.cpp" />
@@ -150,7 +150,7 @@
     <ClCompile Include="Code\Gameplay\BattleSystem.cpp" />
     <ClCompile Include="Code\Gameplay\ConditionSystem.cpp" />
     <ClCompile Include="Code\Gameplay\GridNode.cpp" />
-    <ClCompile Include="Code\Gameplay\UnitSkill.cpp" />
+    <ClCompile Include="Code\Gameplay\UnitSkills\UnitSkill.cpp" />
     <ClCompile Include="Code\IFunction.cpp" />
     <ClCompile Include="Code\Render\PixelShader.cpp" />
     <ClCompile Include="Code\Render\Shader.cpp" />
@@ -264,10 +264,10 @@
     <ClCompile Include="Code\Actors\Game\DialogueTrigger.cpp" />
     <ClCompile Include="Code\Gameplay\DialogueStructures.cpp" />
     <ClCompile Include="Code\UI\Game\PlayerActionBarWidget.cpp" />
-    <ClCompile Include="Code\Gameplay\LineAttackSkill.cpp" />
+    <ClCompile Include="Code\Gameplay\UnitSkills\LineAttackSkill.cpp" />
     <ClInclude Include="Code\Actors\Game\Units\LineAttackerUnit.h" />
-    <ClInclude Include="Code\Gameplay\AreaAttackSkill.h" />
-    <ClInclude Include="Code\Gameplay\UnitSkill.h" />
+    <ClInclude Include="Code\Gameplay\UnitSkills\AreaAttackSkill.h" />
+    <ClInclude Include="Code\Gameplay\UnitSkills\UnitSkill.h" />
     <ClInclude Include="Code\Actors\Game\SkillNode.h" />
     <ClInclude Include="Code\Actors\CameraActor.h" />
     <ClInclude Include="Code\Actors\Game\EntranceTrigger.h" />
@@ -533,7 +533,7 @@
     <ClInclude Include="Code\Actors\Game\DialogueTrigger.h" />
     <ClInclude Include="Code\Gameplay\DialogueStructures.h" />
     <ClInclude Include="Code\UI\Game\PlayerActionBarWidget.h" />
-    <ClInclude Include="Code\Gameplay\LineAttackSkill.h" />
+    <ClInclude Include="Code\Gameplay\UnitSkills\LineAttackSkill.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
