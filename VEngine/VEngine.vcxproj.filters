@@ -566,6 +566,9 @@
     <ClCompile Include="Code\Gameplay\UnitSkills\UnitSkill.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Gameplay\UnitSkills\EntireAreaAttackSkill.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -1088,6 +1091,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\Units\LineAttackerUnit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Gameplay\UnitSkills\EntireAreaAttackSkill.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
