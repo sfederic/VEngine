@@ -186,6 +186,21 @@ GridNode* Grid::GetNodeAllowNull(int x, int y)
     return &rows[x].columns[y];
 }
 
+std::vector<GridNode*> Grid::GetAllNodes()
+{
+    std::vector<GridNode*> outNodes;
+
+    for (int x = 0; x < sizeX; x++)
+    {
+        for (int y = 0; y < sizeX; y++)
+        {
+            outNodes.push_back(GetNode(x, y));
+        }
+    }
+
+    return outNodes;
+}
+
 GridNode* Grid::GetNodeLimit(int x, int y)
 {
     if (x < 0) x = 0;

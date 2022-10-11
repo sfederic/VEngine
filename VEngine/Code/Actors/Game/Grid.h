@@ -49,6 +49,8 @@ struct Grid : Actor
 	GridNode* GetNode(int x, int y);
 	GridNode* GetNodeAllowNull(int x, int y);
 
+	std::vector<GridNode*> GetAllNodes();
+
 	//Limit the node gotten between 0 and the size of the grid.
 	GridNode* GetNodeLimit(int x, int y);
 
