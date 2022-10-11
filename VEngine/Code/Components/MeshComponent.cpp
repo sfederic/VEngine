@@ -27,7 +27,7 @@ std::vector<MeshComponent*> MeshComponent::OrderMeshComponentsByDistanceToCamera
 {
 	XMVECTOR cameraPos = activeCamera->GetWorldPositionV();
 
-	std::map<float, MeshComponent*> meshDistanceMap;
+	std::multimap<float, MeshComponent*> meshDistanceMap;
 	for (auto mesh : system.components)
 	{
 		const float distance = XMVector3Length(cameraPos - mesh->GetWorldPositionV()).m128_f32[0];

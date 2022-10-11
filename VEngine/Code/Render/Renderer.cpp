@@ -683,8 +683,7 @@ void RenderMeshComponents()
 {
 	Profile::Start();
 
-	//@Todo: Put OrderMeshComponentsByDistanceToCamera() back here. Currently causing visual artifactcs.
-	for (auto mesh : MeshComponent::system.components)
+	for (auto mesh : MeshComponent::OrderMeshComponentsByDistanceToCamera())
 	{
 		if (!mesh->active) { continue; }
 
