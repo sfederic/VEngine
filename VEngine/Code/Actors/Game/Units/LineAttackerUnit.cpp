@@ -1,8 +1,8 @@
 #include "vpch.h"
 #include "LineAttackerUnit.h"
-#include "Gameplay/UnitSkills/AreaAttackSkill.h"
+#include "Gameplay/UnitSkills/EntireAreaAttackSkill.h"
 
 LineAttackUnit::LineAttackUnit()
 {
-	skills.emplace("area", std::make_unique<AreaAttackSkill>());
+	skills.emplace("area", std::make_unique<EntireAreaAttackSkill>());
 }
