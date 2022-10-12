@@ -18,6 +18,23 @@ std::vector<SkillNode*> UnitSkill::SpawnSkillNodes(std::vector<GridNode*>& gridN
 	return skillNodes;
 }
 
+void UnitSkill::GetOffsetsForTargetQuadrant(GridNode* startingNode, GridNode* targetNode, int& xOffset, int& yOffset)
+{
+	const int startingX = startingNode->xIndex;
+	const int startingY = startingNode->yIndex;
+
+	const int targetX = targetNode->xIndex;
+	const int targetY = targetNode->yIndex;
+
+	if (targetX < startingX) xOffset = -1;
+	else if (targetX == startingX) xOffset = 0;
+	else xOffset = 1;
+
+	if (targetY < startingY) yOffset = -1;
+	else if (targetY == startingY) yOffset = 0;
+	else yOffset = 1;
+}
+
 bool UnitSkill::IsTargetNodeInRange(GridNode* startingNode, GridNode* targetNode)
 {
 	auto grid = Grid::system.GetFirstActor();

@@ -19,6 +19,10 @@ protected:
 
 	std::vector<SkillNode*> SpawnSkillNodes(std::vector<GridNode*>& gridNodes);
 
+	//This function is for getting a x and y offset direction based on the target.
+	//e.g. if the player is at [2, 2] on the grid, this will return the x and y needed to 'target' that target.
+	void GetOffsetsForTargetQuadrant(GridNode* startingNode, GridNode* targetNode, int& xOffset, int& yOffset);
+
 public:
 	//Spawn AOE esque nodes for every grid node in range of this skill.
 	virtual std::vector<SkillNode*> SetNodesForSkillRange(GridNode* startingNode, GridNode* targetNode) = 0;
