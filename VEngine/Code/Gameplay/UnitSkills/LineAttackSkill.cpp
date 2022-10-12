@@ -10,20 +10,26 @@ LineAttackSkill::LineAttackSkill()
 
 std::vector<SkillNode*> LineAttackSkill::SetNodesForSkillRange(GridNode* startingNode, GridNode* targetNode)
 {
-	Grid* grid = Grid::system.GetFirstActor();
-
+	auto grid = Grid::system.GetFirstActor();
 	std::vector<GridNode*> nodes;
 
-	int nextXIndex = startingNode->xIndex - 1; //testing increment
+	int xOffset = 0; 
+	int yOffset = 0;
+	GetOffsetsForTargetQuadrant(startingNode, targetNode, xOffset, yOffset);
+
+	int xIndex = startingNode->xIndex;
+	int yIndex = startingNode->yIndex;
 
 	for (int i = 0; i < range; i++)
 	{
-		GridNode* node = grid->GetNodeAllowNull(nextXIndex, startingNode->yIndex);
-		if (node)
+		xIndex += xOffset;
+		yIndex += yOffset;
+
+		GridNode* node = grid->GetNodeAllowNull(xIndex, yIndex);
+		if (node != nullptr)
 		{
 			nodes.push_back(node);
 		}
-		nextXIndex -= 1;
 	}
 
 	return SpawnSkillNodes(nodes);
