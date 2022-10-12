@@ -57,3 +57,4 @@ bool RaycastTriangleIntersect(Ray& ray);
 bool RaycastFromScreen(Ray& ray);
 
 bool OrientedBoxCast(Ray& ray, XMFLOAT3 center, XMFLOAT3 extents, XMFLOAT4 orientation);
+bool SimpleBoxCast(XMFLOAT3 center, XMFLOAT3 extents, Ray& hit);

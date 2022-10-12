@@ -247,12 +247,37 @@ bool OrientedBoxCast(Ray& ray, XMFLOAT3 center, XMFLOAT3 extents, XMFLOAT4 orien
 		{
 			if (boundingOrientedBox.Intersects(mesh->boundingBox))
 			{
+				ray.hitComponents.push_back(mesh);
 				ray.hitActors.push_back(actor);
 			}
 		}
 	}
 
 	return ray.hitActors.size();
+}
+
+bool SimpleBoxCast(XMFLOAT3 center, XMFLOAT3 extents, Ray& hit)
+{
+	DirectX::BoundingBox boundingBox(center, extents);
+
+	for (auto actor : World::GetAllActorsInWorld())
+	{
+		if (IsIgnoredActor(actor, hit))
+		{
+			continue;
+		}
+
+		for (auto mesh : actor->GetComponentsOfType<MeshComponent>())
+		{
+			if (boundingBox.Intersects(mesh->boundingBox))
+			{
+				hit.hitComponents.push_back(mesh);
+				hit.hitActors.push_back(actor);
+			}
+		}
+	}
+
+	return hit.hitActors.size();
 }
 
 void Ray::AddActorsToIgnore(std::vector<Actor*>& actors)
