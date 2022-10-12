@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "HeightAreaAttackSkill.h"
 #include "Actors/Game/Grid.h"
+#include "VMath.h"
 
 HeightAreaAttackSkill::HeightAreaAttackSkill()
 {
@@ -13,7 +14,7 @@ std::vector<SkillNode*> HeightAreaAttackSkill::SetNodesForSkillRange(GridNode* s
 
 	for (auto node : grid->GetAllNodes())
 	{
-		if (node->worldPosition.y == startingNode->worldPosition.y)
+		if (VMath::FloatEqualRange(node->worldPosition.y, startingNode->worldPosition.y, 0.25f))
 		{
 			nodesWithSameHeightAsUnit.push_back(node);
 		}
