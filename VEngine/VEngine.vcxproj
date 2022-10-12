@@ -266,6 +266,7 @@
     <ClCompile Include="Code\UI\Game\PlayerActionBarWidget.cpp" />
     <ClCompile Include="Code\Gameplay\UnitSkills\LineAttackSkill.cpp" />
     <ClCompile Include="Code\Gameplay\UnitSkills\EntireAreaAttackSkill.cpp" />
+    <ClCompile Include="Code\Gameplay\UnitSkills\HeightAreaAttackSkill.cpp" />
     <ClInclude Include="Code\Actors\Game\Units\LineAttackerUnit.h" />
     <ClInclude Include="Code\Gameplay\UnitSkills\AreaAttackSkill.h" />
     <ClInclude Include="Code\Gameplay\UnitSkills\UnitSkill.h" />
@@ -536,6 +537,7 @@
     <ClInclude Include="Code\UI\Game\PlayerActionBarWidget.h" />
     <ClInclude Include="Code\Gameplay\UnitSkills\LineAttackSkill.h" />
     <ClInclude Include="Code\Gameplay\UnitSkills\EntireAreaAttackSkill.h" />
+    <ClInclude Include="Code\Gameplay\UnitSkills\HeightAreaAttackSkill.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
