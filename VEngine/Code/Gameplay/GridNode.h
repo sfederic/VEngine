@@ -19,7 +19,7 @@ struct GridNode
 		yIndex = y;
 		instancedMeshIndex = instancedMeshIndex_;
 
-		worldPosition = XMFLOAT3((float)x, (float)0.f, (float)y);
+		worldPosition = XMFLOAT3((float)x, 0.f, (float)y);
 	}
 
 	bool Equals(int x, int y)
