@@ -167,7 +167,7 @@ namespace VMath
             fabsf(v1.m128_f32[2] - v2.m128_f32[2]) <= epsilon;
     }
 
-    bool FloatEqual(float f1, float f2, float epsilon)
+    bool FloatEqualRange(float f1, float f2, float epsilon)
     {
         return fabsf(f1 - f2) <= epsilon;
     }

@@ -40,7 +40,7 @@ namespace VMath
 	void RotateTowardsCamera(Transform& transform, float zAngle = 0.f);
 
 	bool VecEqual(XMVECTOR v1, XMVECTOR v2, float epsilon = 9.9999999747e-05f);
-	bool FloatEqual(float f1, float f2, float epsilon);
+	bool FloatEqualRange(float f1, float f2, float epsilon);
 	bool Float3Equal(XMFLOAT3& f1, XMFLOAT3& f2);
 	float FindMaxInVector(XMVECTOR v);
 	XMVECTOR VectorConstantLerp(XMVECTOR current, XMVECTOR target, float deltaTime, float interpSpeed);
