@@ -464,7 +464,7 @@ void Player::PrimaryAction()
 		auto boxCastOrigin = center + meshForward;
 		XMFLOAT3 boxCastOriginFloat3;
 		XMStoreFloat3(&boxCastOriginFloat3, boxCastOrigin);
-		if (SimpleBoxCast(boxCastOriginFloat3, XMFLOAT3(0.75f, 0.75f, 0.75f), ray))
+		if (SimpleBoxCast(boxCastOriginFloat3, XMFLOAT3(0.25f, 0.25f, 0.25f), ray))
 		{
 			//@Todo: won't work later on for multiple hit actors
 			ray.hitActor = ray.hitActors.front();
