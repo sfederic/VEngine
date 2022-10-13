@@ -460,8 +460,14 @@ void Player::PrimaryAction()
 		Ray ray(this);
 		Ray gunRay(this);
 		auto meshForward = mesh->GetForwardVectorV();
-		if (Raycast(ray, GetPositionV(), meshForward, 1.0f))
+		auto center = GetPositionV();
+		auto boxCastOrigin = center + meshForward;
+		XMFLOAT3 boxCastOriginFloat3;
+		XMStoreFloat3(&boxCastOriginFloat3, boxCastOrigin);
+		if (SimpleBoxCast(boxCastOriginFloat3, XMFLOAT3(0.75f, 0.75f, 0.75f), ray))
 		{
+			//@Todo: won't work later on for multiple hit actors
+			ray.hitActor = ray.hitActors.front();
 			Log("Player interact: %s", ray.hitActor->GetName().c_str());
 
 			if (DestructibleCheck(ray.hitActor)) { return; }
