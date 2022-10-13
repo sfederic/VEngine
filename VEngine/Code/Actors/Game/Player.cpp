@@ -458,7 +458,6 @@ void Player::PrimaryAction()
 		}
 
 		Ray ray(this);
-		Ray gunRay(this);
 		auto meshForward = mesh->GetForwardVectorV();
 		auto center = GetPositionV();
 		auto boxCastOrigin = center + meshForward;
@@ -474,10 +473,6 @@ void Player::PrimaryAction()
 			if (DialogueCheck(ray.hitActor)) {}
 			else if (QuickTalkCheck(ray.hitActor)) {}
 			else if (InteractCheck(ray.hitActor)) {}
-			else if (Raycast(gunRay, GetPositionV(), meshForward, 10.f)) //Gun check
-			{
-				GunShotCheck(ray.hitActor);
-			}
 		}
 		else
 		{
@@ -497,14 +492,21 @@ void Player::SecondaryAction()
 {
 	if (Input::GetKeyUp(Keys::Up))
 	{
-		Ray ray(this);
-		auto meshForward = mesh->GetForwardVectorV();
-		if (Raycast(ray, GetPositionV(), meshForward, 1.5f))
+		Ray gunRay(this);
+		if (Raycast(gunRay, GetPositionV(), mesh->GetForwardVectorV(), 10.f))
 		{
-			Log("Player interact: %s", ray.hitActor->GetName().c_str());
-
-			if (CombatInteractCheck(ray.hitActor)) {}
+			GunShotCheck(gunRay.hitActor);
+			return;
 		}
+
+		//Ray ray(this);
+		//auto meshForward = mesh->GetForwardVectorV();
+		//if (Raycast(ray, GetPositionV(), meshForward, 1.5f))
+		//{
+		//	Log("Player interact: %s", ray.hitActor->GetName().c_str());
+
+		//	if (CombatInteractCheck(ray.hitActor)) {}
+		//}
 	}
 }
 
