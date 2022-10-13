@@ -421,6 +421,8 @@ void Unit::WindUpAttack()
 		player->guardWidget->RemoveFromViewport();
 		player->unitCurrentlyAttackingPlayer = nullptr;
 
+		GameUtils::SpawnSpriteSheet("Sprites/explosion.png", player->GetPosition(), false, 4, 4);
+
 		EndTurn();
 		return;
 	}
