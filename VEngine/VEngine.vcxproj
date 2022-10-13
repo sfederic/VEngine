@@ -269,6 +269,7 @@
     <ClCompile Include="Code\Gameplay\UnitSkills\HeightAreaAttackSkill.cpp" />
     <ClCompile Include="Code\Gameplay\UnitSkills\DiagonalAttackSkill.cpp" />
     <ClCompile Include="Code\Gameplay\UnitSkills\CrossAttackSkill.cpp" />
+    <ClCompile Include="Code\UI\Game\PopupWidget.cpp" />
     <ClInclude Include="Code\Actors\Game\Units\LineAttackerUnit.h" />
     <ClInclude Include="Code\Gameplay\UnitSkills\AreaAttackSkill.h" />
     <ClInclude Include="Code\Gameplay\UnitSkills\UnitSkill.h" />
@@ -542,6 +543,7 @@
     <ClInclude Include="Code\Gameplay\UnitSkills\HeightAreaAttackSkill.h" />
     <ClInclude Include="Code\Gameplay\UnitSkills\DiagonalAttackSkill.h" />
     <ClInclude Include="Code\Gameplay\UnitSkills\CrossAttackSkill.h" />
+    <ClInclude Include="Code\UI\Game\PopupWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

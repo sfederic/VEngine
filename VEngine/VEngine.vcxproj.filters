@@ -578,6 +578,9 @@
     <ClCompile Include="Code\Gameplay\UnitSkills\CrossAttackSkill.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\UI\Game\PopupWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -1112,6 +1115,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\UnitSkills\CrossAttackSkill.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\UI\Game\PopupWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
