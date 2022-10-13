@@ -245,8 +245,27 @@ MeshActor6
 UID
 4150886768
 next
-EmptyComponent
+PopupActor
 1
+ Enabled
+1
+ Position
+0 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Display at Load
+1
+Name
+PopupActor0
+Popup Text
+
+UID
+760108717
+next
+EmptyComponent
+2
 2804592718
 Root
  Enabled
@@ -255,6 +274,17 @@ Root
 0 0 0
  Rot
 0 0 0 1
+ Scale
+1 1 1
+next
+760108717
+Root
+ Enabled
+1
+ Pos
+0 0 1
+ Rot
+-0 0 -0 1
  Scale
 1 1 1
 next
