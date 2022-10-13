@@ -1,4 +1,5 @@
 #pragma once
+
 #include <vector>
 #include <string>
 #include <map>
@@ -118,6 +119,8 @@ public:
 	void RemoveComponent(std::string componentName);
 
 	void RemoveComponent(Component* componentToRemove);
+
+	void SetEmptyRootComponent();
 
 	Component* FindComponentAllowNull(std::string componentName);
 

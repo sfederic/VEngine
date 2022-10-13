@@ -2,6 +2,7 @@
 #include "Actor.h"
 #include "Actors/IActorSystem.h"
 #include "Components/SpatialComponent.h"
+#include "Components/EmptyComponent.h"
 #include "World.h"
 #include "Camera.h"
 
@@ -304,6 +305,11 @@ void Actor::RemoveComponent(Component* componentToRemove)
 	}
 
 	componentMap.erase(componentToRemove->name);
+}
+
+void Actor::SetEmptyRootComponent()
+{
+	rootComponent = CreateComponent(EmptyComponent(), "Root");
 }
 
 void Actor::RemoveComponent(std::string componentName)
