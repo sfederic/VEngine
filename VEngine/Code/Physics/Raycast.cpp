@@ -269,7 +269,9 @@ bool SimpleBoxCast(XMFLOAT3 center, XMFLOAT3 extents, Ray& hit)
 
 		for (auto mesh : actor->GetComponentsOfType<MeshComponent>())
 		{
-			if (boundingBox.Intersects(mesh->boundingBox))
+			BoundingOrientedBox meshWorldBounds = VMath::GetUpdatedBoundingBox(mesh);
+
+			if (boundingBox.Intersects(meshWorldBounds))
 			{
 				hit.hitComponents.push_back(mesh);
 				hit.hitActors.push_back(actor);
