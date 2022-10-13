@@ -34,20 +34,33 @@ Player0
 UID
 3703631843
 next
-DirectionalLightActor
-1
+PointLightActor
+2
  Enabled
 1
  Position
-0 5 0
+0 2 0
  Rotation
-0.707107 0 0 0.707107
+-0 0 -0 1
  Scale
 1 1 1
 Name
-DirectionalLightActor0
+PointLightActor0
 UID
-2035319500
+1810583155
+next
+ Enabled
+1
+ Position
+4 2 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+PointLightActor1
+UID
+1471739447
 next
 MeshActor
 18
@@ -597,7 +610,7 @@ Casts Shadow
 Grid Obstacle
 0
 M_Ambient
-0.5 0.5 0.5 1
+0.5 0.5 0.5 0.5
 M_Blend State
 null
 M_Metallic
@@ -1067,9 +1080,9 @@ Casts Shadow
 Grid Obstacle
 0
 M_Ambient
-0.5 0.5 0.5 1
+0.5 0.5 0.5 0.5
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1293,23 +1306,40 @@ Play On Start
 Volume
 -0.0150498
 next
-DirectionalLightComponent
-1
-2035319500
-DirectionalLight
+PointLightComponent
+2
+1810583155
+PointLight
  Enabled
 1
  Pos
-0 5 0
+0 2 0
  Rot
-0.707107 0 0 0.707107
+-0 0 -0 1
  Scale
 1 1 1
 Colour
 1 1 1 1
+Intensity
+10
 LightEnabled
 1
-ShadowMap Size
-15
+next
+1471739447
+PointLight
+ Enabled
+1
+ Pos
+4 2 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Colour
+1 1 1 1
+Intensity
+10
+LightEnabled
+1
 next
 end
