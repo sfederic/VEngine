@@ -15,6 +15,7 @@
 #include "Gameplay/ConditionSystem.h"
 #include "VFunctionSystem.h"
 #include "VString.h"
+#include "Asset/AssetPaths.h"
 
 //columns for QTreeWidget
 const int lineColumn = 0;
@@ -125,7 +126,7 @@ void DialogueDock::DeleteLine()
 void DialogueDock::SaveDialogueToFile()
 {
 	QFileDialog saveDialog;
-	QString saveName = saveDialog.getSaveFileName(this, "Save Dialogue", "Dialogues/");
+	QString saveName = saveDialog.getSaveFileName(this, "Save Dialogue", AssetBaseFolders::dialogue.c_str());
 	if (saveName.isEmpty()) return;
 
 	std::wofstream os;
@@ -186,7 +187,7 @@ void DialogueDock::SaveDialogueToFile()
 void DialogueDock::LoadDialogueFile()
 {
 	QFileDialog loadDialog;
-	QString loadName = loadDialog.getOpenFileName(this, "Open Dialogue", "Dialogues/");
+	QString loadName = loadDialog.getOpenFileName(this, "Open Dialogue", AssetBaseFolders::dialogue.c_str());
 	if (loadName.isEmpty()) return;
 
 	//set dock title to filename (strip out the path with QFileInfo)

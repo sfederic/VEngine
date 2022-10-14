@@ -29,7 +29,7 @@ Properties DialogueComponent::GetProps()
 {
     auto props = __super::GetProps();
     props.title = "DialogueComponent";
-    props.Add("File", &dialogue.filename).autoCompletePath = "/Dialogues/";
+    props.Add("File", &dialogue.filename).autoCompletePath = "/Dialogue/";
     return props;
 }
 

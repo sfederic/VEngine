@@ -3,6 +3,7 @@
 #include <fstream>
 #include <filesystem>
 #include "Log.h"
+#include "Asset/AssetPaths.h"
 
 void Dialogue::LoadFromFile()
 {
@@ -11,13 +12,13 @@ void Dialogue::LoadFromFile()
 		return;
 	}
 
-	if (!std::filesystem::exists("Dialogues/" + filename))
+	if (!std::filesystem::exists(AssetBaseFolders::dialogue + filename))
 	{
 		Log("Dialogue file [%s] not found.", filename.c_str());
 		return;
 	}
 
-	std::string path = "Dialogues/" + filename;
+	std::string path = AssetBaseFolders::dialogue + filename;
 
 	std::wifstream is;
 	is.open(path, std::ios_base::in);
