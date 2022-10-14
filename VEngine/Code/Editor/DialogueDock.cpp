@@ -83,17 +83,13 @@ void DialogueDock::PopulateTreeItem(QTreeWidgetItem* item)
 
 	dialogueTree->setItemWidget(item, actorColumn, actorComboBox);
 
-	//set condition combo box from FunctionSystem functions
+	//set combo box from ConditionSystem
 	auto conditionComboBox = new QComboBox(this);
 	conditionComboBox->addItem("");
-	for (auto& functionName : functionSystem->GetFunctionNames())
+	for (auto& conditionPair : conditionSystem.GetConditions())
 	{
-		QString conditionName = QString::fromStdString(functionName);
+		QString conditionName = QString::fromStdString(conditionPair.first);
 		conditionComboBox->addItem(conditionName);
-
-		//Ref:https://forum.qt.io/topic/20998/qt5-new-signals-slots-syntax-does-not-work-solved/8
-		connect(conditionComboBox, static_cast<void(QComboBox::*)(const QString&)>(&QComboBox::currentIndexChanged),
-			this, &DialogueDock::SetConditionArgWidgets);
 	}
 
 	dialogueTree->setItemWidget(item, conditionColumn, conditionComboBox);
@@ -150,31 +146,6 @@ void DialogueDock::SaveDialogueToFile()
 		os << gotoText.toStdWString() << "\n";
 		os << actorComboBox->currentText().toStdWString() << "\n";
 		os << conditionComboBox->currentText().toStdWString() << "\n";
-
-		{
-			auto widget = (QWidget*)dialogueTree->itemWidget(*it, conditionArgColumn);
-			auto conditionString = conditionComboBox->currentText().toStdString();
-
-			if (!conditionString.empty())
-			{
-				auto foundFunction = functionSystem->FindFunction(conditionString);
-
-				auto args = foundFunction->GetArgTypes();
-				int itemIndex = 0;
-				for (auto& arg : args)
-				{
-					if (arg == typeid(std::string))
-					{
-						auto layout = (QVBoxLayout*)widget->layout();
-						auto argWidget = (QLineEdit*)layout->itemAt(itemIndex)->widget();
-						os << argWidget->text().toStdWString() << "\n";
-					}
-
-					itemIndex++;
-				}
-			}
-		}
-
 		os << conditionArgText.toStdWString() << "\n";
 		os << text.toStdWString() << "\n";
 
@@ -206,7 +177,7 @@ void DialogueDock::LoadDialogueFile()
 		std::wstring gotoText;
 		std::wstring actorText;
 		std::wstring conditionText;
-		std::vector<std::wstring> conditionArgText;
+		std::wstring conditionArgText;
 		std::wstring text;
 
 		wchar_t line[1024];
@@ -227,29 +198,8 @@ void DialogueDock::LoadDialogueFile()
 		is.getline(line, 1024);
 		conditionText.assign(line);
 
-
-		//Condition arg loading
-		auto foundFunction = functionSystem->FindFunction(VString::wstos(conditionText));
-		if (foundFunction)
-		{
-			auto args = foundFunction->GetArgTypes();
-			int itemIndex = 0;
-			for (auto& arg : args)
-			{
-				if (arg == typeid(std::string))
-				{
-					is.getline(line, 1024);
-					conditionArgText.emplace_back(line);
-				}
-
-				itemIndex++;
-			}
-		}
-		else
-		{
-			is.getline(line, 1024);
-			conditionArgText.emplace_back(line);
-		}
+		is.getline(line, 1024);
+		conditionArgText.assign(line);
 
 		is.getline(line, 1024);
 		text.assign(line);		
@@ -262,8 +212,8 @@ void DialogueDock::LoadDialogueFile()
 		item->setText(gotoColumn, QString::fromStdWString(gotoText));
 		item->setText(textColumn, QString::fromStdWString(text));
 
+		//Actor combobox
 		{
-			//Actor combobox
 			//Find the matching existing entry in the combobox and set it per the index
 			auto actorComboBox = (QComboBox*)dialogueTree->itemWidget(item, actorColumn);
 
@@ -283,49 +233,11 @@ void DialogueDock::LoadDialogueFile()
 			conditionComboBox->setCurrentIndex(foundConditionComboEntryIndex);
 		}
 
-		//Condition Arg widgets
-		if (foundFunction)
+		//Condition Arg
 		{
-			int itemIndex = 0;
-			for (auto& type : foundFunction->GetArgTypes())
-			{
-				if (type == typeid(std::string))
-				{
-					auto vLayout = new QVBoxLayout();
-					vLayout->addWidget(new QLineEdit(foundFunction->GetName(itemIndex).c_str()));
-					auto widg = new QWidget();
-					widg->setLayout(vLayout);
-					dialogueTree->setItemWidget(item, conditionArgColumn, widg);
-				}
-			}
+			item->setText(conditionArgColumn, QString::fromStdWString(conditionArgText));
 		}
 	}
 
 	is.close();
-}
-
-void DialogueDock::SetConditionArgWidgets(const QString& conditionName)
-{
-	auto foundFunction = functionSystem->FindFunction(conditionName.toStdString());
-	if (foundFunction == nullptr)
-	{
-		return;
-	}
-
-	int nameIndex = 0;
-
-	auto argTypes = foundFunction->GetArgTypes();
-	for (auto& type : argTypes)
-	{
-		if (type == typeid(std::string))
-		{
-			auto vLayout = new QVBoxLayout();
-			vLayout->addWidget(new QLineEdit(foundFunction->GetName(nameIndex).c_str()));
-			auto widg = new QWidget();
-			widg->setLayout(vLayout);
-			dialogueTree->setItemWidget(dialogueTree->currentItem(), conditionArgColumn, widg);
-		}
-
-		nameIndex++;
-	}
 }
