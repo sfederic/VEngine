@@ -56,7 +56,7 @@ void MemoryTransferWidget::Draw(float deltaTime)
 			GameInstance::DeletePlayerMemories();
 			GameInstance::playerMemories = selectedMemoriesToTransfer;
 
-			GameUtils::LoadWorld("church_hall.vmap");
+			GameUtils::LoadWorld("church.vmap");
 		}
 	}
 }
