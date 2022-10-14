@@ -11,6 +11,6 @@ struct AssetBaseFolders
 	inline static const std::string shader = "Code/Render/Shaders/";
 	inline static const std::string audio = "Audio/";
 	inline static const std::string cutscene = "Cutscenes/";
-	inline static const std::string dialogue = "Dialogues/";
+	inline static const std::string dialogue = "Dialogue/";
 	inline static const std::string material = "Materials/";
 };
