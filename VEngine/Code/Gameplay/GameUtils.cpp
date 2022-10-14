@@ -17,6 +17,7 @@
 #include "Log.h"
 #include "Particle/SpriteSheet.h"
 #include "Asset/AssetFileExtensions.h"
+#include "Gameplay/BattleSystem.h"
 
 namespace GameUtils
 {
@@ -94,6 +95,8 @@ namespace GameUtils
 		}
 
 		GameUtils::SaveGameInstanceData();
+
+		battleSystem.Reset();
 
 		FileSystem::LoadWorld(worldName);
 	}
