@@ -409,6 +409,8 @@ void AssetDock::CreateNewMaterialFile()
         QString::fromStdString(AssetBaseFolders::material),
         QString::fromStdString(AssetFileExtensions::material));
 
+    if (materialFileName.isEmpty()) return;
+
     Serialiser s(materialFileName.toStdString(), OpenMode::Out);
     auto materialProps = material.GetProps();
     s.Serialise(materialProps);
