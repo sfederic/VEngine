@@ -1,4 +1,5 @@
 #pragma once
+
 #include "ConditionSystem.h"
 
 class IActorSystem;
@@ -26,6 +27,10 @@ struct Memory
 	//Time information
 	int hourAquired = 0;
 	int minuteAquired = 0;
+
+	//Vars to either increase or decrease player stats
+	int attackIncrease = 0;
+	int lifeIncrease = 0;
 
 	//Function to call in order to add Memory to Player.
 	ConditionFunction conditionFunc;
