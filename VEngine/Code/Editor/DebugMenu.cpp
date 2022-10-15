@@ -98,6 +98,7 @@ void DebugMenu::Tick(float deltaTime)
 	RenderConsoleCommandsMenu();
 	RenderGameplayMemoryMenu();
 	RenderWorldMenu();
+	RenderMaterialPlacementMenu();
 
 	ImGui::EndFrame();
 
@@ -512,7 +513,7 @@ void DebugMenu::RenderMaterialPlacementMenu()
 	if (WorldEditor::materialPlacement)
 	{
 		ImGui::Begin("Material Placement = ON: (Place selected material with left click)");
-		ImGui::Text("Selected Material: %S", MaterialSystem::selectedMaterialInEditor.c_str());
+		ImGui::Text("Selected Material: %s", MaterialSystem::selectedMaterialInEditor.c_str());
 		ImGui::End();
 	}
 }
