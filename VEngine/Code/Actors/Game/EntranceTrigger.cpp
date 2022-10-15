@@ -10,9 +10,11 @@
 #include "Input.h"
 #include "FileSystem.h"
 #include "UI/Game/InteractWidget.h"
+#include "UI/Game/PopupWidget.h"
 #include "UI/ScreenFadeWidget.h"
 #include "UI/UISystem.h"
 #include "Timer.h"
+#include "Camera.h"
 
 EntranceTrigger::EntranceTrigger()
 {
@@ -142,6 +144,8 @@ void EntranceTrigger::UnlockEntrance()
     isEntranceActive = true;
     isEntranceLocked = false;
     interactWidget->interactText = openText;
+
+    SetCameraZoomFocusAndPopupWidget(" entrance unlocked.");
 }
 
 void EntranceTrigger::LockEntrance()
@@ -149,4 +153,19 @@ void EntranceTrigger::LockEntrance()
     isEntranceActive = false;
     isEntranceLocked = true;
     interactWidget->interactText = lockedText;
+
+    SetCameraZoomFocusAndPopupWidget(" entrance locked.");
+}
+
+//@Todo: this funcion isn't working too well when called from .dialog files. It's not zooming in or showing widget.
+void EntranceTrigger::SetCameraZoomFocusAndPopupWidget(std::string popupText)
+{
+    const float removePeriod = 2.f;
+
+    GameUtils::SetActiveCameraTargetAndZoomIn(this);
+    Timer::SetTimer(removePeriod, &GameUtils::SetCameraBackToPlayer);
+
+    auto entrancePopup = CreateWidget<PopupWidget>();
+    entrancePopup->popupText = VString::stows(GetName() + popupText);
+    entrancePopup->AddToViewport(removePeriod);
 }
