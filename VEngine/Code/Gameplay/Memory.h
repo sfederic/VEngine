@@ -8,11 +8,15 @@ class IActorSystem;
 //Base for all player memories in-game.
 struct Memory
 {
-	inline static std::map<std::string, Memory*> memories;
+	inline static std::map<std::string, Memory*>* memories = nullptr;
 
 	Memory(std::string name_) : name(name_)
 	{
-		memories.emplace(name, this);
+		if (memories == nullptr)
+		{
+			memories = new std::map<std::string, Memory*>();
+		}
+		memories->emplace(name, this);
 	}
 
 	Memory(std::string name_,
@@ -28,7 +32,11 @@ struct Memory
 			attackIncrease(attackIncrease_),
 			lifeIncrease(lifeIncrease_) 
 	{
-		memories.emplace(name, this);
+		if (memories == nullptr)
+		{
+			memories = new std::map<std::string, Memory*>();
+		}
+		memories->emplace(name, this);
 	}
 
 	virtual ~Memory() {} //Needs to be here for dynamic_cast's, to recognise as polymorphic.

@@ -118,6 +118,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Code\Actors\Game\Units\LineAttackerUnit.cpp" />
+    <ClCompile Include="Code\Gameplay\Memories\AttackUpMemory.cpp" />
     <ClCompile Include="Code\Gameplay\UnitSkills\AreaAttackSkill.cpp" />
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp" />
     <ClCompile Include="Code\Actors\Game\SkillNode.cpp" />
