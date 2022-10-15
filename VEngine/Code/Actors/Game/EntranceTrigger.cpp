@@ -25,7 +25,15 @@ EntranceTrigger::EntranceTrigger()
 void EntranceTrigger::Start()
 {
     interactWidget = CreateWidget<InteractWidget>();
-    interactWidget->interactText = openText;
+
+    if (isEntranceActive)
+    {
+        interactWidget->interactText = openText;
+    }
+    else
+    {
+        interactWidget->interactText = lockedText;
+    }
 
     trigger->SetTargetAsPlayer();
 
@@ -127,4 +135,18 @@ bool EntranceTrigger::CheckIfWorldExists(std::string& worldName)
     }
 
     return true;
+}
+
+void EntranceTrigger::UnlockEntrance()
+{
+    isEntranceActive = true;
+    isEntranceLocked = false;
+    interactWidget->interactText = openText;
+}
+
+void EntranceTrigger::LockEntrance()
+{
+    isEntranceActive = false;
+    isEntranceLocked = true;
+    interactWidget->interactText = lockedText;
 }

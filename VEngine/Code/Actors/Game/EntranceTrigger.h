@@ -35,4 +35,7 @@ struct EntranceTrigger : Actor
 	virtual Properties GetProps() override;
 
 	bool CheckIfWorldExists(std::string& worldName);
+
+	void UnlockEntrance();
+	void LockEntrance();
 };
