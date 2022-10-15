@@ -71,7 +71,6 @@ void Player::Start()
 	guardWidget = CreateWidget<GuardWidget>();
 
 	healthWidget = CreateWidget<PlayerHealthWidget>();
-	healthWidget->healthPoints = healthPoints;
 
 	bulletWidget = CreateWidget<BulletWidget>();
 	bulletWidget->AddToViewport();
@@ -202,7 +201,6 @@ void Player::InflictDamage(int damage)
 	}
 
 	healthPoints -= damage;
-	healthWidget->healthPoints = healthPoints;
 
 	if (healthPoints <= 0)
 	{
