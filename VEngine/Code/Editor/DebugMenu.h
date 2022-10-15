@@ -70,6 +70,7 @@ private:
 	void RenderCoreMenu();
 	void RenderParticleMenu();
 	void RenderConsoleCommandsMenu();
+	void RenderGameplayMemoryMenu();
 
 	void RenderTexturePlacementMenu();
 	void RenderMaterialPlacementMenu();

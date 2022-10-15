@@ -25,6 +25,7 @@
 #include "Physics/Raycast.h"
 #include "World.h"
 #include "Gameplay/GameInstance.h"
+#include "Gameplay/Memory.h"
 #include "SystemCache.h"
 #include "System.h"
 #include "Actors/Game/Player.h"
@@ -93,6 +94,7 @@ void DebugMenu::Tick(float deltaTime)
 	RenderParticleMenu();
 	RenderTexturePlacementMenu();
 	RenderConsoleCommandsMenu();
+	RenderGameplayMemoryMenu();
 
 	ImGui::EndFrame();
 
@@ -419,6 +421,35 @@ void DebugMenu::RenderConsoleCommandsMenu()
 
 		ImGui::End();
 	}
+}
+
+void DebugMenu::RenderGameplayMemoryMenu()
+{
+	if (!memoriesMenuOpen) return;
+
+	ImGui::Begin("Player Memory menu");
+
+	//Input fields to create Memory for debugging
+	static char debugMemoryName[512]{};
+	ImGui::InputText("Debug Memory Name", debugMemoryName, sizeof(debugMemoryName));
+	if (ImGui::Button("Create Memory"))
+	{
+		auto debugMemory = new Memory();
+		debugMemory->actorAquiredFrom = "Debug Menu";
+		debugMemory->name = debugMemoryName;
+		GameInstance::playerMemories.emplace(debugMemoryName, debugMemory);
+	}
+
+	//Show all memories
+	for (auto& memoryPair : GameInstance::playerMemories)
+	{
+		auto memory = memoryPair.second;
+		auto& memoryName = memoryPair.first;
+
+		ImGui::Text("Memory: %s", memoryName.c_str());
+	}
+
+	ImGui::End();
 }
 
 //Handle notifications (eg. "Shaders recompiled", "ERROR: Not X", etc)
