@@ -49,7 +49,7 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 	}
 
 	//INIT MEMORY
-	auto memory = new Memory();
+	auto memory = new Memory(VString::wstos(memoryName));
 
 	//For spawning meshes attribute to a memory when remembering it
 	Actor* owner = nullptr;
@@ -63,7 +63,6 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 		memory->meshName = meshes[0]->meshComponentData.filename;
 	}
 
-	memory->name = VString::wstos(memoryName);
 	memory->description = VString::wstos(memoryDescription);
 
 	memory->actorAquiredFrom = actorAquiredFromName;

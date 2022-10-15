@@ -65,8 +65,7 @@ static bool GainMemory(std::string arg)
 	std::string memoryDesc = arg.substr(memoryName.size() + 1, lastOf - memoryName.size() - 1);
 	std::string memoryImage = arg.substr(lastOf + 1);
 
-	auto memory = new Memory();
-	memory->name = memoryName;
+	auto memory = new Memory(memoryName);
 	memory->description = memoryDesc;
 
 	memory->actorAquiredFrom = "Aquired from dialogue.";

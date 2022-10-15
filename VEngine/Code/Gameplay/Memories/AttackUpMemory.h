@@ -4,6 +4,8 @@
 
 struct AttackUpMemory : public Memory
 {
+	static AttackUpMemory instance;
+
 	AttackUpMemory() : 
 		Memory("Attack Up",
 		"Increases attack by 1",

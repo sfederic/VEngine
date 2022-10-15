@@ -437,9 +437,8 @@ void DebugMenu::RenderGameplayMemoryMenu()
 	ImGui::InputText("Debug Memory Name", debugMemoryName, sizeof(debugMemoryName));
 	if (ImGui::Button("Create Memory"))
 	{
-		auto debugMemory = new Memory();
+		auto debugMemory = new Memory(debugMemoryName);
 		debugMemory->actorAquiredFrom = "Debug Menu";
-		debugMemory->name = debugMemoryName;
 		GameInstance::playerMemories.emplace(debugMemoryName, debugMemory);
 	}
 
