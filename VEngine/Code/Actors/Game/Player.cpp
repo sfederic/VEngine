@@ -476,7 +476,8 @@ void Player::PrimaryAction()
 		}
 		else
 		{
-			if (!AttackGridActorBasedOnNode())
+			//@Todo: was causing weird raycast issues. Come back to this for smaller enemies and whatever else.
+			//if (!AttackGridActorBasedOnNode())
 			{
 				if (isWeaponDrawn)
 				{
