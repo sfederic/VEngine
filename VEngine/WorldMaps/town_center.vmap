@@ -11,417 +11,355 @@ Grid
 Name
 Grid0
 Size X
-5
+10
 Size Y
-5
+10
 UID
-701618251
+3265355813
 startBattleOnLoad
 0
-next
-GridActor
-1
- Enabled
-1
- Position
-2 0 0
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Destruct
-1
-Health
-1
-Inspect
-1
-Interact
-1
-Interact Text
-
-Name
-GridActor0
-Obstacle
-1
-UID
-2015024410
-disableGridInteract
-0
-interactKnownText
-
 next
 Player
 1
  Enabled
 1
  Position
-3 0.0100002 1
+0 0 0
  Rotation
-0 -0.707106 0 -0.707106
+0 1 0 -5.96046e-08
  Scale
 1 1 1
 Name
 Player0
 UID
-3703631843
+2472428344
 next
 PointLightActor
-2
+4
  Enabled
 1
  Position
-0 2 0
+2 2 6
  Rotation
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
 Name
 PointLightActor0
 UID
-1810583155
+477850433
 next
  Enabled
 1
  Position
-4 2 4
+2 2 2
  Rotation
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
 Name
 PointLightActor1
 UID
-1471739447
+3595125771
 next
-MeshActor
-18
  Enabled
 1
  Position
-2 -0.5 2
+6 2 2
  Rotation
 0 0 0 1
+ Scale
+1 1 1
+Name
+PointLightActor2
+UID
+1822083589
+next
+ Enabled
+1
+ Position
+6 2 6
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Name
+PointLightActor3
+UID
+4225859423
+next
+MeshActor
+19
+ Enabled
+1
+ Position
+4 -0.5 4
+ Rotation
+-0 0 -0 1
+ Scale
+10 1 10
+Name
+house040
+UID
+3684592620
+next
+ Enabled
+1
+ Position
+4 -0.25 4
+ Rotation
+-0 0 -0 1
  Scale
 5 1 5
 Name
-node0
+house041
 UID
-1550192231
+3092752239
 next
  Enabled
 1
  Position
-2 1 4.5
- Rotation
-0 1 0 1.56958e-07
- Scale
-2.5 1.5 1
-Name
-node1
-UID
-3403146495
-next
- Enabled
-1
- Position
-2 1 -0.5
- Rotation
--0 -3.7749e-08 -0 1
- Scale
-2.5 1.5 1
-Name
-node2
-UID
-2052539359
-next
- Enabled
-1
- Position
--0.5 1 2
- Rotation
-0 0.707279 0 0.706935
- Scale
-2.5 1.5 0.999999
-Name
-node3
-UID
-2952527885
-next
- Enabled
-1
- Position
-4.5 1 2
- Rotation
--0 -0.706934 -0 0.70728
- Scale
-2.5 1.5 0.999999
-Name
-node4
-UID
-4064461732
-next
- Enabled
-1
- Position
-4 0.25 2
- Rotation
-0 0.707107 0 0.707107
- Scale
-1.49999 1.5 0.999993
-Name
-node5
-UID
-4187645091
-next
- Enabled
-1
- Position
-0 -0.1 2
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Name
-node6
-UID
-2533989811
-next
- Enabled
-1
- Position
-0 0 1
+6 0 2
  Rotation
 -0 0 -0 1
  Scale
 1 1 1
 Name
-node7
+house042
 UID
-456504537
+275335345
 next
  Enabled
 1
  Position
-0 0 3
- Rotation
-0 1 0 1.56958e-07
- Scale
-1 1 1
-Name
-node8
-UID
-992676859
-next
- Enabled
-1
- Position
-2 -0.49 2
- Rotation
--0 0 -0 1
- Scale
-2 1 2
-Name
-node9
-UID
-3548486082
-next
- Enabled
-1
- Position
-4 0.5 0.5
- Rotation
--0 0 -0 1
- Scale
-0.5 0.5 0.5
-Name
-MeshActor10
-UID
-3584852849
-next
- Enabled
-1
- Position
-4 -0.1 0.5
+2 0 2
  Rotation
 -0 0 -0 1
  Scale
 1 1 1
 Name
-MeshActor11
+house043
 UID
-1290401489
+1028400124
 next
  Enabled
 1
  Position
-4.5 1 0.5
+2 0 6
  Rotation
--0 0.707107 -0 0.707107
+-0 0 -0 1
  Scale
 1 1 1
 Name
-MeshActor12
+house044
 UID
-2230372128
+3384337485
 next
  Enabled
 1
  Position
-3 0 3.5
+6 0 6
  Rotation
--0 0.707107 -0 0.707107
+-0 0 -0 1
  Scale
 1 1 1
 Name
-MeshActor13
+house045
 UID
-754138935
+2739800579
 next
  Enabled
 1
  Position
--0.5 1 1.5
+4 -0.5 1.3
  Rotation
-0 0.707107 0 -0.707107
+-0 0 -0 1
  Scale
-0.5 0.5 0.5
+5 0.5 0.5
 Name
-MeshActor14
+house046
 UID
-3518239249
+126796672
 next
  Enabled
 1
  Position
--0.5 1 2.5
+4 -0.5 6.7
  Rotation
-0 0.707107 0 -0.707107
+0 1 0 -0.000172772
  Scale
-0.499995 0.5 0.499995
+5.00009 0.5 0.5
 Name
-MeshActor15
+house047
 UID
-3974831292
+1127351701
 next
  Enabled
 1
  Position
-3 0.5 4.49
+6.7 -0.5 4
  Rotation
-1 -0.000244103 -1.56957e-07 -3.83123e-11
+-0 -0.706985 -0 0.707229
  Scale
-0.75 0.750005 0.750005
+5.00018 0.5 0.5
 Name
-MeshActor16
+house048
 UID
-3306255672
+1689001716
 next
  Enabled
 1
  Position
-1 0.5 4.49
+1.4 -0.5 4
  Rotation
-1 -0.000244103 -1.56957e-07 -3.83123e-11
+0 0.707229 0 0.706984
  Scale
-0.75 0.750013 0.750013
+5.0002 0.5 0.499999
 Name
-MeshActor17
+house049
 UID
-3182242077
+2534581860
+next
+ Enabled
+1
+ Position
+2.8 0.3 2
+ Rotation
+0 0 1 -0.000345208
+ Scale
+0.5 0.5 1
+Name
+house0410
+UID
+3093915894
+next
+ Enabled
+1
+ Position
+5.2 0.3 2
+ Rotation
+0 0 1 -0.000345208
+ Scale
+0.5 0.5 1
+Name
+house0411
+UID
+875171637
+next
+ Enabled
+1
+ Position
+5.2 0.3 6.1
+ Rotation
+0 0 1 -0.000345208
+ Scale
+0.5 0.5 1
+Name
+house0412
+UID
+4033220632
+next
+ Enabled
+1
+ Position
+2.8 0.3 6.1
+ Rotation
+0 0 1 -0.000345208
+ Scale
+0.5 0.5 1
+Name
+house0413
+UID
+2212585564
+next
+ Enabled
+1
+ Position
+6.1 0.3 5.1
+ Rotation
+0.707107 -0.000244101 0.707107 -0.000244097
+ Scale
+0.5 0.500009 1
+Name
+house0414
+UID
+3029549443
+next
+ Enabled
+1
+ Position
+6.1 0.3 2.8
+ Rotation
+0.707107 -0.000244102 0.707107 -0.000244096
+ Scale
+0.5 0.500015 1
+Name
+house0415
+UID
+2750954489
+next
+ Enabled
+1
+ Position
+1.9 0.3 2.8
+ Rotation
+0.707107 -0.000244104 0.707107 -0.000244094
+ Scale
+0.5 0.500024 1
+Name
+house0416
+UID
+4188649704
+next
+ Enabled
+1
+ Position
+1.9 0.3 5.2
+ Rotation
+0.707107 -0.000244107 0.707107 -0.000244092
+ Scale
+0.5 0.500034 1
+Name
+house0417
+UID
+92856556
+next
+ Enabled
+1
+ Position
+4 0.3 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+house0418
+UID
+712025585
 next
 EmptyComponent
 1
-3703631843
+2472428344
 Root
  Enabled
 1
  Pos
-3 0.0100002 1
+0 0 0
  Rot
-0 -0.707106 0 -0.707106
+0 1 0 -5.96046e-08
  Scale
 1 1 1
-next
-MemoryComponent
-1
-2015024410
-Memory
- Enabled
-1
-Add On Interact
-1
-Atk Increase
-1
-Condition
-
-Condition Value
-
-Image File
-
-Life Increase
-1
-Memory Desc
-Attack and life increase
-Memory Name
-Way of the Sword
 next
 MeshComponent
 20
-2015024410
-Mesh
- Enabled
-1
- Pos
-2 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-
-Static
-1
-next
-3703631843
+2472428344
 Mesh
  Enabled
 1
  Pos
 0 0 0
  Rot
--0 -0.707107 0 -0.707108
+0 -1 0 -5.96047e-08
  Scale
 1 1 1
 Casts Shadow
@@ -445,7 +383,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -461,14 +399,61 @@ char.fbx
 Static
 1
 next
-1550192231
+3684592620
 Mesh
  Enabled
 1
  Pos
-2 -0.5 2
+4 -0.5 4
  Rot
-0 0 0 1
+-0 0 -0 1
+ Scale
+10 1 10
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wall.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+5 5
+Mesh
+node.fbx
+Static
+1
+next
+3092752239
+Mesh
+ Enabled
+1
+ Pos
+4 -0.25 4
+ Rot
+-0 0 -0 1
  Scale
 5 1 5
 Casts Shadow
@@ -490,7 +475,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-wood128x128.jpg
+stone.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -508,294 +493,12 @@ node.fbx
 Static
 1
 next
-3403146495
+275335345
 Mesh
  Enabled
 1
  Pos
-2 1 4.5
- Rot
-0 1 0 1.56958e-07
- Scale
-2.5 1.5 1
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Walls/wall06.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-plane.fbx
-Static
-1
-next
-2052539359
-Mesh
- Enabled
-1
- Pos
-2 1 -0.5
- Rot
--0 -3.7749e-08 -0 1
- Scale
-2.5 1.5 1
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Walls/wall06.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-plane.fbx
-Static
-1
-next
-2952527885
-Mesh
- Enabled
-1
- Pos
--0.5 1 2
- Rot
-0 0.707279 0 0.706935
- Scale
-2.5 1.5 0.999999
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Walls/wall06.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-plane.fbx
-Static
-1
-next
-4064461732
-Mesh
- Enabled
-1
- Pos
-4.5 1 2
- Rot
--0 -0.706934 -0 0.70728
- Scale
-2.5 1.5 0.999999
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Walls/wall06.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-plane.fbx
-Static
-1
-next
-4187645091
-Mesh
- Enabled
-1
- Pos
-4 0.25 2
- Rot
-0 0.707107 0 0.707107
- Scale
-1.49999 1.5 0.999993
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 0.5
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-wood_furniture.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cabinet.fbx
-Static
-1
-next
-2533989811
-Mesh
- Enabled
-1
- Pos
-0 -0.1 2
- Rot
-0 0 0 1
- Scale
-1 1 1
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-wood_furniture.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-small_table.fbx
-Static
-1
-next
-456504537
-Mesh
- Enabled
-1
- Pos
-0 0 1
+6 0 2
  Rot
 -0 0 -0 1
  Scale
@@ -819,7 +522,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-wood_furniture.jpg
+metal.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -833,157 +536,16 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-Furniture/chair.fbx
+lamp_post02.fbx
 Static
 1
 next
-992676859
+1028400124
 Mesh
  Enabled
 1
  Pos
-0 0 3
- Rot
-0 1 0 1.56958e-07
- Scale
-1 1 1
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-wood_furniture.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-Furniture/chair.fbx
-Static
-1
-next
-3548486082
-Mesh
- Enabled
-1
- Pos
-2 -0.49 2
- Rot
--0 0 -0 1
- Scale
-2 1 2
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Floors/carpet.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.fbx
-Static
-1
-next
-3584852849
-Mesh
- Enabled
-1
- Pos
-4 0.5 0.5
- Rot
--0 0 -0 1
- Scale
-0.5 0.5 0.5
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-metal_smooth.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-vase.fbx
-Static
-1
-next
-1290401489
-Mesh
- Enabled
-1
- Pos
-4 -0.1 0.5
+2 0 2
  Rot
 -0 0 -0 1
  Scale
@@ -1007,7 +569,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-wood_furniture.jpg
+metal.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1021,18 +583,18 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-small_table.fbx
+lamp_post02.fbx
 Static
 1
 next
-2230372128
+3384337485
 Mesh
  Enabled
 1
  Pos
-4.5 1 0.5
+2 0 6
  Rot
--0 0.707107 -0 0.707107
+-0 0 -0 1
  Scale
 1 1 1
 Casts Shadow
@@ -1054,7 +616,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-sophie.jpg
+metal.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1068,18 +630,18 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-pictureframe_square.fbx
+lamp_post02.fbx
 Static
 1
 next
-754138935
+2739800579
 Mesh
  Enabled
 1
  Pos
-3 0 3.5
+6 0 6
  Rot
--0 0.707107 -0 0.707107
+-0 0 -0 1
  Scale
 1 1 1
 Casts Shadow
@@ -1101,7 +663,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-crate.jpg
+metal.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1115,20 +677,20 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-stairs_wooden.fbx
+lamp_post02.fbx
 Static
 1
 next
-3518239249
+126796672
 Mesh
  Enabled
 1
  Pos
--0.5 1 1.5
+4 -0.5 1.3
  Rot
-0 0.707107 0 -0.707107
+-0 0 -0 1
  Scale
-0.5 0.5 0.5
+5 0.5 0.5
 Casts Shadow
 1
 Grid Obstacle
@@ -1148,7 +710,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-lisa.jpg
+stone.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1162,67 +724,20 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-pictureframe_square.fbx
+stairs.fbx
 Static
 1
 next
-3974831292
+1127351701
 Mesh
  Enabled
 1
  Pos
--0.5 1 2.5
+4 -0.5 6.7
  Rot
-0 0.707107 0 -0.707107
+0 1 0 -0.000172772
  Scale
-0.499995 0.5 0.499995
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 0.5
-M_Blend State
-default
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-sophie.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-pictureframe_square.fbx
-Static
-1
-next
-3306255672
-Mesh
- Enabled
-1
- Pos
-3 0.5 4.49
- Rot
-1 -0.000244103 -1.56957e-07 -3.83123e-11
- Scale
-0.75 0.750005 0.750005
+5.00009 0.5 0.5
 Casts Shadow
 1
 Grid Obstacle
@@ -1242,7 +757,148 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test_window_texture.png
+stone.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+stairs.fbx
+Static
+1
+next
+1689001716
+Mesh
+ Enabled
+1
+ Pos
+6.7 -0.5 4
+ Rot
+-0 -0.706985 -0 0.707229
+ Scale
+5.00018 0.5 0.5
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+stone.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+stairs.fbx
+Static
+1
+next
+2534581860
+Mesh
+ Enabled
+1
+ Pos
+1.4 -0.5 4
+ Rot
+0 0.707229 0 0.706984
+ Scale
+5.0002 0.5 0.499999
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+stone.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+stairs.fbx
+Static
+1
+next
+3093915894
+Mesh
+ Enabled
+1
+ Pos
+2.8 0.3 2
+ Rot
+0 0 1 -0.000345208
+ Scale
+0.5 0.5 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+fence01.png
 M_Use Texture
 1
 M_UvOffset
@@ -1260,16 +916,345 @@ plane.fbx
 Static
 1
 next
-3182242077
+875171637
 Mesh
  Enabled
 1
  Pos
-1 0.5 4.49
+5.2 0.3 2
  Rot
-1 -0.000244103 -1.56957e-07 -3.83123e-11
+0 0 1 -0.000345208
  Scale
-0.75 0.750013 0.750013
+0.5 0.5 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+fence01.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.fbx
+Static
+1
+next
+4033220632
+Mesh
+ Enabled
+1
+ Pos
+5.2 0.3 6.1
+ Rot
+0 0 1 -0.000345208
+ Scale
+0.5 0.5 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+fence01.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.fbx
+Static
+1
+next
+2212585564
+Mesh
+ Enabled
+1
+ Pos
+2.8 0.3 6.1
+ Rot
+0 0 1 -0.000345208
+ Scale
+0.5 0.5 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+fence01.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.fbx
+Static
+1
+next
+3029549443
+Mesh
+ Enabled
+1
+ Pos
+6.1 0.3 5.1
+ Rot
+0.707107 -0.000244101 0.707107 -0.000244097
+ Scale
+0.5 0.500009 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+fence01.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.fbx
+Static
+1
+next
+2750954489
+Mesh
+ Enabled
+1
+ Pos
+6.1 0.3 2.8
+ Rot
+0.707107 -0.000244102 0.707107 -0.000244096
+ Scale
+0.5 0.500015 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+fence01.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.fbx
+Static
+1
+next
+4188649704
+Mesh
+ Enabled
+1
+ Pos
+1.9 0.3 2.8
+ Rot
+0.707107 -0.000244104 0.707107 -0.000244094
+ Scale
+0.5 0.500024 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+fence01.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.fbx
+Static
+1
+next
+92856556
+Mesh
+ Enabled
+1
+ Pos
+1.9 0.3 5.2
+ Rot
+0.707107 -0.000244107 0.707107 -0.000244092
+ Scale
+0.5 0.500034 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+fence01.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.fbx
+Static
+1
+next
+712025585
+Mesh
+ Enabled
+1
+ Pos
+4 0.3 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -1289,7 +1274,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test_window_texture.png
+metal.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1303,13 +1288,13 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-plane.fbx
+fountain.fbx
 Static
 1
 next
 CameraComponent
 1
-3703631843
+2472428344
 Camera
  Enabled
 1
@@ -1328,7 +1313,7 @@ Near Z
 next
 InstanceMeshComponent
 1
-701618251
+3265355813
 NodeMesh
  Enabled
 0
@@ -1376,15 +1361,8 @@ Static
 1
 next
 DialogueComponent
-2
-2015024410
-Dialogue
- Enabled
 1
-File
-
-next
-3703631843
+2472428344
 Dialogue
  Enabled
 1
@@ -1393,7 +1371,7 @@ File
 next
 AudioComponent
 1
-3703631843
+2472428344
 StepSounds
  Enabled
 1
@@ -1412,41 +1390,75 @@ Pitch
 Play On Start
 1
 Volume
--0.0150498
+0.257337
 next
 PointLightComponent
-2
-1810583155
+4
+477850433
 PointLight
  Enabled
 1
  Pos
-0 2 0
+2 2 6
  Rot
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
 Colour
 1 1 1 1
 Intensity
-10
+25
 LightEnabled
 1
 next
-1471739447
+3595125771
 PointLight
  Enabled
 1
  Pos
-4 2 4
+2 2 2
  Rot
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
 Colour
 1 1 1 1
 Intensity
-10
+25
+LightEnabled
+1
+next
+1822083589
+PointLight
+ Enabled
+1
+ Pos
+6 2 2
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
+next
+4225859423
+PointLight
+ Enabled
+1
+ Pos
+6 2 6
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Colour
+1 1 1 1
+Intensity
+25
 LightEnabled
 1
 next
