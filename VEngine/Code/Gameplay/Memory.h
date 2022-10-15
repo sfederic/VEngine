@@ -1,5 +1,6 @@
 #pragma once
 
+#include <map>
 #include "ConditionSystem.h"
 
 class IActorSystem;
@@ -7,7 +8,12 @@ class IActorSystem;
 //Base for all player memories in-game.
 struct Memory
 {
-	Memory() {}
+	inline static std::map<std::string, Memory*> memories;
+
+	Memory(std::string name_) : name(name_)
+	{
+		memories.emplace(name, this);
+	}
 
 	Memory(std::string name_,
 		std::string description_,
@@ -20,7 +26,10 @@ struct Memory
 			conditionFuncName(conditionFuncName_),
 			imageFile(imageFile_),
 			attackIncrease(attackIncrease_),
-			lifeIncrease(lifeIncrease) {}
+			lifeIncrease(lifeIncrease_) 
+	{
+		memories.emplace(name, this);
+	}
 
 	virtual ~Memory() {} //Needs to be here for dynamic_cast's, to recognise as polymorphic.
 
