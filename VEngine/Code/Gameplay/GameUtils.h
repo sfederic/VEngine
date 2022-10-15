@@ -16,6 +16,10 @@ namespace GameUtils
 	void SetActiveCameraTarget(Actor* newTarget);
 	void SetActiveCameraTargetAndZoomIn(Actor* newTarget);
 	void SetActiveCameraTargetAndZoomOut(Actor* newTarget);
+
+	//Mainly for timer based calls.
+	void SetCameraBackToPlayer();
+
 	void CameraShake(float shake);
 
 	SpriteSheet* SpawnSpriteSheet(std::string textureFilename, XMFLOAT3 position, bool loop, int numRows, int numColumns);

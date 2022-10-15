@@ -46,6 +46,13 @@ namespace GameUtils
 		Player::system.GetFirstActor()->nextCameraFOV = 60.f;
 	}
 
+	void SetCameraBackToPlayer()
+	{
+		auto player = Player::system.GetFirstActor();
+		player->nextCameraFOV = 60.f;
+		activeCamera->targetActor = player;
+	}
+
 	void CameraShake(float shake)
 	{
 		activeCamera->shakeLevel = shake;
