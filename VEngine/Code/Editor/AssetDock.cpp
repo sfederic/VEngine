@@ -24,6 +24,7 @@
 #include "Asset/AssetPaths.h"
 #include "Asset/AssetFileExtensions.h"
 #include "Components/IComponentSystem.h"
+#include "Components/MeshComponent.h"
 
 std::unordered_map<std::string, std::function<void(QIcon&, std::string&)>> fileExtensionToFunctionMap;
 
@@ -253,6 +254,10 @@ void AssetDock::ShowContextMenu(const QPoint& point)
     connect(&newMaterialAction, &QAction::triggered, this, &AssetDock::CreateNewMaterialFile);
     contextMenu.addAction(&newMaterialAction);
 
+    QAction newMaterialPickedActorAction("Create Material From Picked Actor", this);
+    connect(&newMaterialPickedActorAction, &QAction::triggered, this, &AssetDock::CopyMaterialToMaterialFileFromSelectedActor);
+    contextMenu.addAction(&newMaterialPickedActorAction);
+
     contextMenu.exec(mapToGlobal(point));
 }
 
@@ -403,16 +408,39 @@ void AssetDock::CreateNewMaterialFile()
 {
     //Create empty material
     auto material = Material("test.png", ShaderItems::Default);
+    SerialiseMaterialPropsToFile(&material);
+}
 
-    QFileDialog dialog;
-    QString materialFileName = dialog.getSaveFileName(nullptr, "Create Material File",
+void AssetDock::CopyMaterialToMaterialFileFromSelectedActor()
+{
+    Actor* pickedActor = WorldEditor::GetPickedActor();
+    if (pickedActor == nullptr)
+    {
+        Log("No picked actor to create material file with.");
+        return;
+    }
+
+    MeshComponent* mesh = pickedActor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
+    if (mesh == nullptr)
+    {
+        Log("No mesh on picked actor to create material file with.");
+        return;
+    }
+
+    Material* material = mesh->GetMaterial();
+    SerialiseMaterialPropsToFile(material);
+}
+
+void AssetDock::SerialiseMaterialPropsToFile(Material* material)
+{
+    QString materialFileName = QFileDialog::getSaveFileName(nullptr, "Create Material File",
         QString::fromStdString(AssetBaseFolders::material),
         QString::fromStdString(AssetFileExtensions::material));
 
     if (materialFileName.isEmpty()) return;
 
     Serialiser s(materialFileName.toStdString(), OpenMode::Out);
-    auto materialProps = material.GetProps();
+    Properties materialProps = material->GetProps();
     s.Serialise(materialProps);
 
     Log("Material [%s] created.", materialFileName.toStdString().c_str());

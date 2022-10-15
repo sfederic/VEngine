@@ -7,6 +7,7 @@ struct QFileSystemModel;
 struct QTreeView;
 struct QListWidget;
 struct QLineEdit;
+class Material;
 
 struct AssetDock : public QDockWidget
 {
@@ -40,4 +41,6 @@ private:
     void CreateNewActorTemplateFile();
 
     void CreateNewMaterialFile();
+    void CopyMaterialToMaterialFileFromSelectedActor();
+    void SerialiseMaterialPropsToFile(Material* material);
 };
