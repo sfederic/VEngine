@@ -17,7 +17,7 @@ ConditionSystem conditionSystem;
 
 //CONDITION FUNCTIONS
 
-static bool UnlockEntrace(std::string arg)
+static bool UnlockEntrance(std::string arg)
 {
 	Actor* actor = World::GetActorByName(arg);
 	auto entranceTrigger = dynamic_cast<EntranceTrigger*>(actor);
@@ -96,7 +96,7 @@ ConditionSystem::ConditionSystem()
 	ADD_CONDITION(StartBattle);
 	ADD_CONDITION(GainMemory);
 	ADD_CONDITION(PlaySong);
-	ADD_CONDITION(UnlockEntrace);
+	ADD_CONDITION(UnlockEntrance);
 }
 
 void ConditionSystem::AddCondition(std::string functionName, ConditionFunction conditionFunction)

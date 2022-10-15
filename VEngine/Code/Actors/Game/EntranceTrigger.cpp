@@ -157,7 +157,6 @@ void EntranceTrigger::LockEntrance()
     SetCameraZoomFocusAndPopupWidget(" entrance locked.");
 }
 
-//@Todo: this funcion isn't working too well when called from .dialog files. It's not zooming in or showing widget.
 void EntranceTrigger::SetCameraZoomFocusAndPopupWidget(std::string popupText)
 {
     const float removePeriod = 2.f;
