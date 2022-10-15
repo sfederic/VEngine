@@ -22,9 +22,7 @@ static bool UnlockEntrace(std::string arg)
 	Actor* actor = World::GetActorByName(arg);
 	auto entranceTrigger = dynamic_cast<EntranceTrigger*>(actor);
 	assert(entranceTrigger);
-	entranceTrigger->isEntranceActive = true;
-	entranceTrigger->isEntranceLocked = false;
-	entranceTrigger->openText = L"Enter";
+	entranceTrigger->UnlockEntrance();
 	return true;
 }
 
