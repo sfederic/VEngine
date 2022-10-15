@@ -12,6 +12,7 @@
 #include "UI/UISystem.h"
 #include "Audio/AudioSystem.h"
 #include "Components/MeshComponent.h"
+#include "Actors/Game/Player.h"
 
 MemoryComponent::MemoryComponent()
 {
@@ -27,6 +28,8 @@ Properties MemoryComponent::GetProps()
 	props.Add("Condition Value", &conditionArg);
 	props.Add("Add On Interact", &addOnInteract);
 	props.Add("Image File", &imageFile);
+	props.Add("Atk Increase", &attackIncrease);
+	props.Add("Life Increase", &lifeIncrease);
 	return props;
 }
 
@@ -83,7 +86,15 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 		}
 	}
 
-	//Create intuiton
+	//Increase player stats if part of memory
+	memory->attackIncrease = attackIncrease;
+	memory->lifeIncrease = lifeIncrease;
+
+	auto player = Player::system.GetFirstActor();
+	player->attackPoints += memory->attackIncrease;
+	player->healthPoints += memory->lifeIncrease;
+
+	//Create Memory
 	GameInstance::playerMemories.emplace(memory->name, memory);
 	Log("%s memory created.", memory->name.c_str());
 

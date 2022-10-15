@@ -21,6 +21,9 @@ struct MemoryComponent : Component
 	std::string imageFile;
 
 	bool addOnInteract = false;
+
+	int attackIncrease = 0;
+	int lifeIncrease = 0;
 	
 	MemoryComponent();
 	virtual Properties GetProps() override;
