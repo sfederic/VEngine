@@ -273,6 +273,7 @@
     <ClCompile Include="Code\Actors\Game\PopupActor.cpp" />
     <ClCompile Include="Code\Actors\Game\ConditionTrigger.cpp" />
     <ClInclude Include="Code\Actors\Game\Units\LineAttackerUnit.h" />
+    <ClInclude Include="Code\Gameplay\Memories\AttackUpMemory.h" />
     <ClInclude Include="Code\Gameplay\UnitSkills\AreaAttackSkill.h" />
     <ClInclude Include="Code\Gameplay\UnitSkills\UnitSkill.h" />
     <ClInclude Include="Code\Actors\Game\SkillNode.h" />
