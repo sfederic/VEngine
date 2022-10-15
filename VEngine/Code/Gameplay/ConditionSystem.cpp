@@ -11,10 +11,22 @@
 #include "Log.h"
 #include "UI/Game/MemoryGainedWidget.h"
 #include "Audio/AudioSystem.h"
+#include "Actors/Game/EntranceTrigger.h"
 
 ConditionSystem conditionSystem;
 
 //CONDITION FUNCTIONS
+
+static bool UnlockEntrace(std::string arg)
+{
+	Actor* actor = World::GetActorByName(arg);
+	auto entranceTrigger = dynamic_cast<EntranceTrigger*>(actor);
+	assert(entranceTrigger);
+	entranceTrigger->isEntranceActive = true;
+	entranceTrigger->isEntranceLocked = false;
+	entranceTrigger->openText = L"Enter";
+	return true;
+}
 
 static bool PlaySong(std::string arg)
 {
@@ -86,6 +98,7 @@ ConditionSystem::ConditionSystem()
 	ADD_CONDITION(StartBattle);
 	ADD_CONDITION(GainMemory);
 	ADD_CONDITION(PlaySong);
+	ADD_CONDITION(UnlockEntrace);
 }
 
 void ConditionSystem::AddCondition(std::string functionName, ConditionFunction conditionFunction)
