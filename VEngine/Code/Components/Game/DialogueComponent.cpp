@@ -33,6 +33,9 @@ Properties DialogueComponent::GetProps()
     return props;
 }
 
+//For reference, if you want branching dialogue, there's only one branch able to be taken per .dialog file.
+//If the 'goto line' field isn't 'next' (-1) then a condition will check. If it doesn't meet a true state, 
+//you'll hit the end of the dialog file and the conversation will end.
 bool DialogueComponent::NextLine()
 {
     auto dataIt = dialogue.data.find(currentLine);
