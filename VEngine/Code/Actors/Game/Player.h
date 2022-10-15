@@ -59,6 +59,7 @@ struct Player : Actor
 	//Name of the memory selected in MemoryMenuWidget to spawn into world
 	std::string memoryNameToSpawn;
 
+	int attackPoints = 1;
 	int actionPoints = 10;
 	int healthPoints = 3;
 	int numBullets = 2;
