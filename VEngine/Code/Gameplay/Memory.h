@@ -7,6 +7,21 @@ class IActorSystem;
 //Base for all player memories in-game.
 struct Memory
 {
+	Memory() {}
+
+	Memory(std::string name_,
+		std::string description_,
+		std::string conditionFuncName_,
+		std::string imageFile_,
+		int attackIncrease_,
+		int lifeIncrease_) :
+			name(name_),
+			description(description_),
+			conditionFuncName(conditionFuncName_),
+			imageFile(imageFile_),
+			attackIncrease(attackIncrease_),
+			lifeIncrease(lifeIncrease) {}
+
 	virtual ~Memory() {} //Needs to be here for dynamic_cast's, to recognise as polymorphic.
 
 	std::string name;
