@@ -271,6 +271,7 @@
     <ClCompile Include="Code\Gameplay\UnitSkills\CrossAttackSkill.cpp" />
     <ClCompile Include="Code\UI\Game\PopupWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\PopupActor.cpp" />
+    <ClCompile Include="Code\Actors\Game\ConditionTrigger.cpp" />
     <ClInclude Include="Code\Actors\Game\Units\LineAttackerUnit.h" />
     <ClInclude Include="Code\Gameplay\UnitSkills\AreaAttackSkill.h" />
     <ClInclude Include="Code\Gameplay\UnitSkills\UnitSkill.h" />
@@ -546,6 +547,7 @@
     <ClInclude Include="Code\Gameplay\UnitSkills\CrossAttackSkill.h" />
     <ClInclude Include="Code\UI\Game\PopupWidget.h" />
     <ClInclude Include="Code\Actors\Game\PopupActor.h" />
+    <ClInclude Include="Code\Actors\Game\ConditionTrigger.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
