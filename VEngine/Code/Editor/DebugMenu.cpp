@@ -1,4 +1,5 @@
 #include "vpch.h"
+#include <filesystem>
 #include <Windows.h>
 #include "imgui.h"
 #include "ImGuizmo.h"
@@ -25,6 +26,7 @@
 #include "Physics/Raycast.h"
 #include "World.h"
 #include "Gameplay/GameInstance.h"
+#include "Gameplay/GameUtils.h"
 #include "Gameplay/Memory.h"
 #include "SystemCache.h"
 #include "System.h"
@@ -95,6 +97,7 @@ void DebugMenu::Tick(float deltaTime)
 	RenderTexturePlacementMenu();
 	RenderConsoleCommandsMenu();
 	RenderGameplayMemoryMenu();
+	RenderWorldMenu();
 
 	ImGui::EndFrame();
 
@@ -447,6 +450,24 @@ void DebugMenu::RenderGameplayMemoryMenu()
 		auto& memoryName = memoryPair.first;
 
 		ImGui::Text("Memory: %s", memoryName.c_str());
+	}
+
+	ImGui::End();
+}
+
+void DebugMenu::RenderWorldMenu()
+{
+	if (!worldMenuOpen) return;
+
+	ImGui::Begin("Worlds");
+
+	for (auto& worldEntry : std::filesystem::directory_iterator("WorldMaps"))
+	{
+		const std::string worldFilename = worldEntry.path().filename().string();
+		if (ImGui::Button(worldFilename.c_str()))
+		{
+			GameUtils::LoadWorld(worldFilename);
+		}
 	}
 
 	ImGui::End();

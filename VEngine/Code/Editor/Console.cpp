@@ -142,6 +142,10 @@ void Console::Init()
 	executeMap.emplace(L"MS",
 		std::make_pair([]() { Renderer::MeshIconImageCapture(); },
 		"Take an editor icon image of the currently selected mesh (MS stands for Mesh Snap, like Pokemon 'Snap')"));
+
+	executeMap.emplace(L"WORLD",
+		std::make_pair([]() { debugMenu.worldMenuOpen = !debugMenu.worldMenuOpen; },
+			"Menu to open worlds at runtime during gameplay."));
 }
 
 void Console::ConsoleInput()
