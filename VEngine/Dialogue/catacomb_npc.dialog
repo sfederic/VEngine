@@ -1,0 +1,18 @@
+0
+next
+NPC0
+
+
+'Alasha'. Was the operation a suc-
+1
+next
+NPC0
+GainMemory
+Keyword from Stranger|'Alasha', a word spoken by a stranger in the catacombs below the church.|
+...
+2
+next
+NPC0
+StartBattle
+
+Wait, you're not...
