@@ -38,8 +38,6 @@ struct Ray
 	//Output distance from ray origin and hit point
 	float hitDistance = 0.f;
 
-	int actorIndex = 0;
-	int actorSystemIndex = 0;
 	bool bHit = false;
 
 	Ray() {}
