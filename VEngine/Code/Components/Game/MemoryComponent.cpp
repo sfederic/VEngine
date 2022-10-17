@@ -68,9 +68,6 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 	memory->actorAquiredFrom = actorAquiredFromName;
 	memory->worldAquiredFrom = World::worldFilename;
 
-	memory->hourAquired = GameInstance::currentHour;
-	memory->minuteAquired = GameInstance::currentMinute;
-
 	memory->imageFile = this->imageFile;
 
 	//Check if memory condition passes

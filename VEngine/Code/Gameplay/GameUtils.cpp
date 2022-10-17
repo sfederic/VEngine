@@ -135,8 +135,6 @@ namespace GameUtils
 			return;
 		}
 
-		GameInstance::ProgressTime();
-
 		LoadWorld(levelToMoveTo);
 
 		uiSystem.screenFadeWidget->SetToFadeIn();

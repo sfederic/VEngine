@@ -98,12 +98,6 @@ void MemoryMenuWidget::Draw(float deltaTime)
 			Text(VString::wformat(L"Actor GET: %S", selectedMemory->actorAquiredFrom.c_str()), layout, TextAlign::Leading);
 			layout.AddVerticalSpace(30.f);
 
-			Text(VString::wformat(L"Hour GET: %d", selectedMemory->hourAquired), layout, TextAlign::Leading);
-			layout.AddVerticalSpace(30.f);
-
-			Text(VString::wformat(L"Minute GET: %d", selectedMemory->minuteAquired), layout, TextAlign::Leading);
-			layout.AddVerticalSpace(30.f);
-
 			Text(VString::wformat(L"World GET: %S", selectedMemory->worldAquiredFrom.c_str()), layout, TextAlign::Leading);
 			layout.AddVerticalSpace(30.f);
 

@@ -56,10 +56,6 @@ struct Memory
 	//Image to display related to memory
 	std::string imageFile;
 
-	//Time information
-	int hourAquired = 0;
-	int minuteAquired = 0;
-
 	//Vars to either increase or decrease player stats
 	int attackIncrease = 0;
 	int lifeIncrease = 0;

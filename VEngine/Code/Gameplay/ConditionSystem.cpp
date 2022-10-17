@@ -71,9 +71,6 @@ static bool GainMemory(std::string arg)
 	memory->actorAquiredFrom = "Aquired from dialogue.";
 	memory->worldAquiredFrom = World::worldFilename;
 
-	memory->hourAquired = GameInstance::currentHour;
-	memory->minuteAquired = GameInstance::currentMinute;
-
 	memory->imageFile = memoryImage;
 
 	GameInstance::playerMemories.emplace(memory->name, memory);

@@ -12,10 +12,7 @@ struct GameInstance
 	//this is to set in the editor to know whether to use map files from WorldMaps/ vs GameSaves/
 	inline static bool useGameSaves = false;
 
-	inline static int currentHour = 0;
-	inline static int currentMinute = 0;
-
-	inline static std::string startingMap = "town_center.vmap";
+	inline static std::string startingMap = "house.vmap";
 	inline static std::string previousMapMovedFrom = startingMap;
 
 	//Used when continuing from game save files
@@ -26,9 +23,6 @@ struct GameInstance
 
 	inline static std::map<std::string, Memory*> playerMemories;
 	static void DeletePlayerMemories();
-
-	static void ProgressTime();
-	static void ResetTime();
 
 	static void AddGuilt();
 
