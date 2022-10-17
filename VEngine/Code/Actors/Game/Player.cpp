@@ -1,21 +1,22 @@
 #include "vpch.h"
 #include "Player.h"
-#include "Components/MeshComponent.h"
-#include "Components/EmptyComponent.h"
-#include "Components/Game/MemoryComponent.h"
-#include "Components/AudioComponent.h"
 #include "Camera.h"
 #include "Input.h"
 #include "VMath.h"
 #include "Core.h"
+#include "Log.h"
+#include "Timer.h"
 #include "Physics/Raycast.h"
-#include "Gameplay/GameUtils.h"
 #include "Actors/Game/NPC.h"
 #include "Actors/Game/FenceActor.h"
 #include "Actors/Game/MemoryCheckGridActor.h"
-#include "Components/Game/DialogueComponent.h"
 #include "Grid.h"
 #include "GridActor.h"
+#include "Components/MeshComponent.h"
+#include "Components/EmptyComponent.h"
+#include "Components/Game/MemoryComponent.h"
+#include "Components/AudioComponent.h"
+#include "Components/Game/DialogueComponent.h"
 #include "UI/Game/HealthWidget.h"
 #include "UI/Game/DialogueWidget.h"
 #include "UI/Game/InteractWidget.h"
@@ -27,9 +28,9 @@
 #include "UI/Game/GuardWidget.h"
 #include "UI/Game/PlayerHealthWidget.h"
 #include "Gameplay/GameInstance.h"
-#include "Log.h"
-#include "Timer.h"
 #include "Gameplay/BattleSystem.h"
+#include "Gameplay/GameUtils.h"
+#include "Render/Material.h"
 
 Player::Player()
 {
@@ -124,6 +125,8 @@ void Player::Tick(float deltaTime)
 	ToggleMemoryMenu();
 
 	LerpPlayerCameraFOV(deltaTime);
+
+	MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
 	dialogueComponent->SetPosition(GetHomogeneousPositionV());
 
@@ -702,6 +705,51 @@ void Player::PreviewMovementNodesDuringBattle()
 	for (auto node : movementNodes)
 	{
 		node->SetColour(GridNode::previewColour);
+	}
+}
+
+//Note: Default blend state needs to already be set for the mesh.
+//@Todo: isn't working with multiple meshes between player and camera.
+void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
+{
+	static Actor* previousHitActor = nullptr;
+
+	auto SetActorAlpha = [](Actor* actor, float alpha) {
+		auto mesh = actor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
+		if (mesh)
+		{
+			auto ambientColour = mesh->GetAmbientColour();
+			ambientColour.w = alpha;
+			mesh->SetAmbientColour(ambientColour);
+		}
+	};
+
+	constexpr float transparentValue = 0.35f;
+	constexpr float solidValue = 1.f;
+
+	Ray ray(this);
+	if (Raycast(ray, camera->GetWorldPositionV(), GetPositionV()))
+	{
+		if (previousHitActor == nullptr)
+		{
+			previousHitActor = ray.hitActor;
+			SetActorAlpha(ray.hitActor, transparentValue);
+		}
+		else if (previousHitActor != ray.hitActor)
+		{
+			SetActorAlpha(previousHitActor, solidValue);
+
+			SetActorAlpha(ray.hitActor, transparentValue);
+			previousHitActor = ray.hitActor;
+		}
+	}
+	else
+	{
+		if (previousHitActor)
+		{
+			SetActorAlpha(previousHitActor, solidValue);
+			previousHitActor = nullptr;
+		}
 	}
 }
 

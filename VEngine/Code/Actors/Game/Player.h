@@ -131,4 +131,6 @@ private:
 	void ConfirmGuardOnDirection();
 
 	void PreviewMovementNodesDuringBattle();
+
+	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 };
