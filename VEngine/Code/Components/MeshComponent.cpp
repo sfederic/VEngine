@@ -150,6 +150,16 @@ void MeshComponent::SetShaderFilenames(ShaderItem& shaderItem)
 	material->shaderData.shaderItemName = shaderItem.GetName();
 }
 
+void MeshComponent::SetAmbientColour(const XMFLOAT4 ambientColour)
+{
+	material->materialShaderData.ambient = ambientColour;
+}
+
+XMFLOAT4 MeshComponent::GetAmbientColour()
+{
+	return material->materialShaderData.ambient;
+}
+
 Buffer* MeshComponent::GetVertexBuffer() const 
 {
 	return pso.vertexBuffer;

@@ -57,6 +57,9 @@ struct MeshComponent : SpatialComponent
 	void SetTexture(const std::string newTextureName);
 	void SetShaderFilenames(ShaderItem& shaderItem);
 
+	void SetAmbientColour(const XMFLOAT4 ambientColour);
+	XMFLOAT4 GetAmbientColour();
+
 	Buffer* GetVertexBuffer() const;
 	Buffer* GetIndexBuffer() const;
 
