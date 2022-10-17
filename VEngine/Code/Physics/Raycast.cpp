@@ -78,7 +78,6 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 			if (boundingBox.Intersects(ray.origin, ray.direction, ray.hitDistance))
 			{
 				distances.push_back(ray.hitDistance);
-				ray.hitActors.push_back(actor);
 				ray.hitComponents.push_back(mesh);
 				bRayHit = true;
 			}
@@ -169,7 +168,6 @@ bool RaycastTriangleIntersect(Ray& ray)
 
 				Ray tempRay = {};
 				tempRay = ray;
-				tempRay.hitActors.clear();
 
 				if (DirectX::TriangleTests::Intersects(ray.origin, ray.direction, v0, v1, v2, tempRay.hitDistance))
 				{
@@ -192,6 +190,14 @@ bool RaycastTriangleIntersect(Ray& ray)
 		}
 	}
 
+	//Get all hit actors
+	std::vector<Actor*> hitActors;
+	for (Ray& ray : rays)
+	{
+		hitActors.push_back(ray.hitActor);
+	}
+
+	//Set nearest hit actor
 	float lowestDistance = std::numeric_limits<float>::max();
 	int rayIndex = -1;
 	for (int i = 0; i < rays.size(); i++)
@@ -206,6 +212,7 @@ bool RaycastTriangleIntersect(Ray& ray)
 	if (rayIndex > -1)
 	{
 		ray = rays[rayIndex];
+		ray.hitActors = hitActors;
 		return true;
 	}
 
