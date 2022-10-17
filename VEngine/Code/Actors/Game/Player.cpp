@@ -709,10 +709,9 @@ void Player::PreviewMovementNodesDuringBattle()
 }
 
 //Note: Default blend state needs to already be set for the mesh.
-//@Todo: isn't working with multiple meshes between player and camera.
 void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 {
-	static Actor* previousHitActor = nullptr;
+	static std::vector<Actor*> previousHitActors;
 
 	auto SetActorAlpha = [](Actor* actor, float alpha) {
 		auto mesh = actor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
@@ -724,32 +723,32 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 		}
 	};
 
-	constexpr float transparentValue = 0.35f;
-	constexpr float solidValue = 1.f;
+	const float transparentValue = 0.35f;
+	const float solidValue = 1.f;
 
 	Ray ray(this);
 	if (Raycast(ray, camera->GetWorldPositionV(), GetPositionV()))
 	{
-		if (previousHitActor == nullptr)
+		for (auto actor : previousHitActors)
 		{
-			previousHitActor = ray.hitActor;
-			SetActorAlpha(ray.hitActor, transparentValue);
+			SetActorAlpha(actor, solidValue);
 		}
-		else if (previousHitActor != ray.hitActor)
-		{
-			SetActorAlpha(previousHitActor, solidValue);
 
-			SetActorAlpha(ray.hitActor, transparentValue);
-			previousHitActor = ray.hitActor;
+		for (auto actor : ray.hitActors)
+		{
+			SetActorAlpha(actor, transparentValue);
 		}
+
+		previousHitActors = ray.hitActors;
 	}
 	else
 	{
-		if (previousHitActor)
+		for(auto actor : previousHitActors)
 		{
-			SetActorAlpha(previousHitActor, solidValue);
-			previousHitActor = nullptr;
+			SetActorAlpha(actor, solidValue);
 		}
+
+		previousHitActors.clear();
 	}
 }
 
