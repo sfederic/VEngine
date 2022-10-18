@@ -8,6 +8,7 @@ struct SermonKnowledgeMemory : public Memory
 		"Aden now knows how the funeral will be conducted for the Bestowed.",
 		"",
 		"",
+		"",
 		0, 0
 	) {}
 }instance;

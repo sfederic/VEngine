@@ -23,13 +23,7 @@ Properties MemoryComponent::GetProps()
 	auto props = __super::GetProps();
 	props.title = "MemoryComponent";
 	props.Add("Memory Name", &memoryName);
-	props.Add("Memory Desc", &memoryDescription);
-	props.Add("Condition", &condition);
-	props.Add("Condition Value", &conditionArg);
 	props.Add("Add On Interact", &addOnInteract);
-	props.Add("Image File", &imageFile);
-	props.Add("Atk Increase", &attackIncrease);
-	props.Add("Life Increase", &lifeIncrease);
 	return props;
 }
 
@@ -48,10 +42,9 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 		return false;
 	}
 
-	//INIT MEMORY
-	auto memory = new Memory(VString::wstos(memoryName));
+	auto memory = Memory::FindMemory(VString::wstos(memoryName));
 
-	//For spawning meshes attribute to a memory when remembering it
+	//For spawning meshes attributed to a memory when remembering it
 	Actor* owner = nullptr;
 	if (!actorAquiredFromName.empty())
 	{
@@ -63,34 +56,19 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 		memory->meshName = meshes[0]->meshComponentData.filename;
 	}
 
-	memory->description = VString::wstos(memoryDescription);
-
 	memory->actorAquiredFrom = actorAquiredFromName;
 	memory->worldAquiredFrom = World::worldFilename;
 
-	memory->imageFile = this->imageFile;
-
-	//Check if memory condition passes
-	if (!condition.empty())
+	if (!memory->CheckCondition())
 	{
-		memory->conditionFunc = conditionSystem.FindCondition(condition);
-		memory->conditionFuncName = condition;
-
-		if (!memory->conditionFunc(conditionArg))
-		{
-			return false; //memory not created
-		}
+		return false;
 	}
-
-	//Increase player stats if part of memory
-	memory->attackIncrease = attackIncrease;
-	memory->lifeIncrease = lifeIncrease;
 
 	auto player = Player::system.GetFirstActor();
 	player->attackPoints += memory->attackIncrease;
 	player->healthPoints += memory->lifeIncrease;
 
-	//Create Memory
+	//Create Memory for player
 	GameInstance::playerMemories.emplace(memory->name, memory);
 	Log("%s memory created.", memory->name.c_str());
 

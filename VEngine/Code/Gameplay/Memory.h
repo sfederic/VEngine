@@ -29,12 +29,14 @@ struct Memory
 	Memory(std::string name_,
 		std::string description_,
 		std::string conditionFuncName_,
+		std::string conditionArg_,
 		std::string imageFile_,
 		int attackIncrease_,
 		int lifeIncrease_) :
 			name(name_),
 			description(description_),
 			conditionFuncName(conditionFuncName_),
+			conditionArg(conditionArg_),
 			imageFile(imageFile_),
 			attackIncrease(attackIncrease_),
 			lifeIncrease(lifeIncrease_) 
@@ -48,11 +50,15 @@ struct Memory
 
 	virtual ~Memory() {} //Needs to be here for dynamic_cast's, to recognise as polymorphic.
 
+	bool CheckCondition();
+
 	std::string name;
 	std::string description;
 	
-	//Debug menu information
 	std::string conditionFuncName;
+	std::string conditionArg;
+
+	//Debug menu information
 	std::string actorAquiredFrom;
 	std::string worldAquiredFrom;
 
@@ -68,5 +74,5 @@ struct Memory
 	int lifeIncrease = 0;
 
 	//Function to call in order to add Memory to Player.
-	ConditionFunction conditionFunc;
+	ConditionFunction conditionFunc = nullptr;
 };
