@@ -1,4 +1,12 @@
 #include "vpch.h"
-#include "AttackUpMemory.h"
+#include "../Memory.h"
 
-AttackUpMemory attackUpMemory;
+struct AttackUpMemory : public Memory
+{
+	AttackUpMemory() :
+		Memory("Attack Up",
+			"Increases attack by 1",
+			"",
+			"",
+			1, 0) {}
+}instance;
