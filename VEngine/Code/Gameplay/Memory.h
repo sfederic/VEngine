@@ -10,6 +10,13 @@ struct Memory
 {
 	inline static std::map<std::string, Memory*>* memories = nullptr;
 
+	static Memory* FindMemory(std::string memoryName) 
+	{
+		auto memoryIt = memories->find(memoryName);
+		assert(memoryIt != memories->end());
+		return memoryIt->second;
+	}
+
 	Memory(std::string name_) : name(name_)
 	{
 		if (memories == nullptr)
