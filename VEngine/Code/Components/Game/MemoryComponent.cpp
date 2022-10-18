@@ -44,18 +44,6 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 
 	auto memory = Memory::FindMemory(VString::wstos(memoryName));
 
-	//For spawning meshes attributed to a memory when remembering it
-	Actor* owner = nullptr;
-	if (!actorAquiredFromName.empty())
-	{
-		owner = World::GetActorByName(actorAquiredFromName);
-
-		memory->spawnActorSystem = owner->GetActorSystem();
-
-		auto meshes = owner->GetComponentsOfType<MeshComponent>();
-		memory->meshName = meshes[0]->meshComponentData.filename;
-	}
-
 	memory->actorAquiredFrom = actorAquiredFromName;
 	memory->worldAquiredFrom = World::worldFilename;
 
@@ -65,8 +53,6 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 	}
 
 	auto player = Player::system.GetFirstActor();
-	player->attackPoints += memory->attackIncrease;
-	player->healthPoints += memory->lifeIncrease;
 
 	//Create Memory for player
 	GameInstance::playerMemories.emplace(memory->name, memory);

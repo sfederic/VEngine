@@ -8,6 +8,5 @@ struct AttackUpMemory : public Memory
 			"Increases attack by 1",
 			"",
 			"",
-			"",
-			1, 0) {}
+			"") {}
 }instance;
