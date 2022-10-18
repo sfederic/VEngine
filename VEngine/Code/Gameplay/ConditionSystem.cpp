@@ -12,12 +12,29 @@
 #include "UI/Game/MemoryGainedWidget.h"
 #include "Audio/AudioSystem.h"
 #include "Actors/Game/EntranceTrigger.h"
+#include "Actors/Game/Player.h"
+#include "Components/MeshComponent.h"
 
 ConditionSystem conditionSystem;
 
 //CONDITION FUNCTIONS
 
-static bool UnlockEntrance(std::string arg)
+bool AttackUp(std::string arg)
+{
+	auto player = Player::system.GetFirstActor();
+	try
+	{
+		player->attackPoints += std::stoi(arg);
+	}
+	catch (std::exception ex)
+	{
+		throw;
+	}
+
+	return true;
+}
+
+bool UnlockEntrance(std::string arg)
 {
 	Actor* actor = World::GetActorByName(arg);
 	auto entranceTrigger = dynamic_cast<EntranceTrigger*>(actor);
@@ -26,14 +43,14 @@ static bool UnlockEntrance(std::string arg)
 	return true;
 }
 
-static bool PlaySong(std::string arg)
+bool PlaySong(std::string arg)
 {
 	audioSystem.MuteAllAudio();
 	audioSystem.PlayAudio(arg, true);
 	return true;
 }
 
-static bool MemoryCheck(std::string arg)
+bool MemoryCheck(std::string arg)
 {
 	auto memoryIt = GameInstance::playerMemories.find(arg);
 	if (memoryIt != GameInstance::playerMemories.end())
@@ -50,13 +67,13 @@ static bool MemoryCheck(std::string arg)
 	return false;
 }
 
-static bool StartBattle(std::string arg)
+bool StartBattle(std::string arg)
 {
 	battleSystem.StartBattle();
 	return true;
 }
 
-static bool GainMemory(std::string arg)
+bool GainMemory(std::string arg)
 {
 	size_t firstOf = arg.find("|");
 	size_t lastOf = arg.find_last_of("|");
