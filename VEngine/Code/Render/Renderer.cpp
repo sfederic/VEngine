@@ -683,7 +683,7 @@ void RenderMeshComponents()
 {
 	Profile::Start();
 
-	for (auto mesh : MeshComponent::OrderMeshComponentsByDistanceToCamera())
+	for (auto mesh : MeshComponent::SortMeshComponentsByDistanceToCamera())
 	{
 		if (!mesh->active) { continue; }
 

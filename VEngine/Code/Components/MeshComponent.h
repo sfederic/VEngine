@@ -18,7 +18,7 @@ struct MeshComponent : SpatialComponent
 	//is called once on world load.
 	static void ResetMeshBuffers();
 
-	static std::vector<MeshComponent*> OrderMeshComponentsByDistanceToCamera();
+	static std::vector<MeshComponent*> SortMeshComponentsByDistanceToCamera();
 
 	MeshComponentData meshComponentData;
 
@@ -41,6 +41,9 @@ struct MeshComponent : SpatialComponent
 
 	//whether nodes that spawn on this mesh are set as inactive
 	bool gridObstacle = false;
+
+	//Whether to make transparent when in between player and camera
+	bool transparentOcclude = false;
 
 	MeshComponent();
 	MeshComponent(const std::string filename_,

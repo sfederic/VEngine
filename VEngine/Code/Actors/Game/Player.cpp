@@ -715,7 +715,7 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 
 	auto SetActorAlpha = [](Actor* actor, float alpha) {
 		auto mesh = actor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
-		if (mesh)
+		if (mesh && mesh->transparentOcclude)
 		{
 			auto ambientColour = mesh->GetAmbientColour();
 			ambientColour.w = alpha;

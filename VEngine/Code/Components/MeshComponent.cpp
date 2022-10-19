@@ -23,7 +23,7 @@ void MeshComponent::ResetMeshBuffers()
 	existingMeshBuffers.clear();
 }
 
-std::vector<MeshComponent*> MeshComponent::OrderMeshComponentsByDistanceToCamera()
+std::vector<MeshComponent*> MeshComponent::SortMeshComponentsByDistanceToCamera()
 {
 	XMVECTOR cameraPos = activeCamera->GetWorldPositionV();
 
@@ -122,6 +122,7 @@ Properties MeshComponent::GetProps()
 	props.Add("Casts Shadow", &castsShadow);
 	props.Add("Static", &isStatic);
 	props.Add("Grid Obstacle", &gridObstacle);
+	props.Add("Trans. Occlude", &transparentOcclude);
 	props.Merge(material->GetProps());
 	return props;
 }
