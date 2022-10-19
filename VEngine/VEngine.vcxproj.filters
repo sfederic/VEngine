@@ -596,6 +596,9 @@
     <ClCompile Include="Code\Gameplay\Memory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Gameplay\WorldFunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -1139,6 +1142,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\ConditionTrigger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Gameplay\WorldFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

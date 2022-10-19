@@ -153,6 +153,7 @@
     <ClCompile Include="Code\Gameplay\ConditionSystem.cpp" />
     <ClCompile Include="Code\Gameplay\GridNode.cpp" />
     <ClCompile Include="Code\Gameplay\UnitSkills\UnitSkill.cpp" />
+    <ClCompile Include="Code\Gameplay\WorldFunctions.cpp" />
     <ClCompile Include="Code\IFunction.cpp" />
     <ClCompile Include="Code\Render\PixelShader.cpp" />
     <ClCompile Include="Code\Render\Shader.cpp" />
@@ -309,6 +310,7 @@
     <ClInclude Include="Code\Gameplay\GridNode.h" />
     <ClInclude Include="Code\Gameplay\Memory.h" />
     <ClInclude Include="Code\Gameplay\Mission.h" />
+    <ClInclude Include="Code\Gameplay\WorldFunctions.h" />
     <ClInclude Include="Code\IFunction.h" />
     <ClInclude Include="Code\Property.h" />
     <ClInclude Include="Code\Render\PixelShader.h" />

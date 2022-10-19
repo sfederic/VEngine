@@ -1,33 +1,36 @@
 #include "vpch.h"
 #include "Engine.h"
 #include <future>
-#include "Editor/Editor.h"
 #include "Core.h"
+#include "Profile.h"
 #include "Input.h"
+#include "Camera.h"
+#include "Timer.h"
+#include "World.h"
+#include "WorldEditor.h"
 #include "Render/Renderer.h"
 #include "Render/VertexShader.h"
 #include "Render/PixelShader.h"
+#include "Render/ShaderSystem.h"
+#include "Render/MaterialSystem.h"
+#include "Render/SpriteSystem.h"
 #include "Asset/FBXLoader.h"
 #include "UI/UISystem.h"
 #include "Editor/DebugMenu.h"
 #include "Components/CameraComponent.h"
-#include "Camera.h"
-#include "WorldEditor.h"
-#include "Timer.h"
 #include "Editor/Console.h"
-#include "World.h"
-#include "Render/ShaderSystem.h"
-#include "Render/MaterialSystem.h"
+#include "Editor/Editor.h"
 #include "Commands/CommandSystem.h"
-#include "Render/SpriteSystem.h"
 #include "Audio/AudioSystem.h"
 #include "Physics/PhysicsSystem.h"
 #include "Editor/CutsceneSequencer.h"
-#include "Profile.h"
+#include "Gameplay/WorldFunctions.h"
 
 void Engine::Init(int argc, char* argv[])
 {
 	auto startTime = Profile::QuickStart();
+
+	WorldFunctions::SetupWorldStartFunctions();
 
 	MaterialSystem::Init();
 

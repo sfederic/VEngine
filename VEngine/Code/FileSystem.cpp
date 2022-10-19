@@ -16,6 +16,7 @@
 #include "VString.h"
 #include "Input.h"
 #include "Gameplay/GameInstance.h"
+#include "Gameplay/WorldFunctions.h"
 #include "Profile.h"
 
 std::pair<UID, std::string> GetComponentOwnerUIDAndNameOnDeserialise(Deserialiser& d)
@@ -266,6 +267,8 @@ void FileSystem::LoadWorld(std::string worldName)
 	}
 
 	ResetWorldState();
+
+	WorldFunctions::CallWorldStartFunction(World::worldFilename);
 
 	debugMenu.AddNotification(VString::wformat(L"%S world loaded", World::worldFilename.c_str()));
 
