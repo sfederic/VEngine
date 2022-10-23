@@ -19,5 +19,7 @@ private:
 	std::string actorToRotateName;
 	Actor* actorToRotate = nullptr;
 	XMVECTOR nextRotation = XMVectorZero();
+	XMFLOAT3 rotationAxis = XMFLOAT3(0.f, 0.f, 0.f);
+	float rotationIncrement = 90.f; //Degrees
 	bool rotationFinished = true;
 };

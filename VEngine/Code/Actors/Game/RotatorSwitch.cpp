@@ -26,6 +26,10 @@ void RotatorSwitch::Tick(float deltaTime)
 			actorToRotate->SetRotation(
 				VMath::QuatConstantLerp(currentRotation, nextRotation, deltaTime, rotationSpeed));
 		}
+		else
+		{
+			rotationFinished = true;
+		}
 	}
 }
 
@@ -34,6 +38,8 @@ Properties RotatorSwitch::GetProps()
 	auto props = __super::GetProps();
 	props.title = "RotatorSwitch";
 	props.Add("Actor to Rotate", &actorToRotateName);
+	props.Add("Rotation Axis", &rotationAxis);
+	props.Add("Rotation Increment", &rotationIncrement);
 	return props;
 }
 
@@ -41,9 +47,8 @@ void RotatorSwitch::Interact()
 {
 	rotationFinished = false;
 
-	constexpr float rotationIncrement = 90.f;
-	constexpr float angle = XMConvertToRadians(rotationIncrement);
-
+	const float angle = XMConvertToRadians(rotationIncrement);
+	const XMVECTOR rotationAxisV = XMLoadFloat3(&rotationAxis);
 	nextRotation = XMQuaternionMultiply(
-		actorToRotate->GetRotationV(), DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), angle));
+		actorToRotate->GetRotationV(), DirectX::XMQuaternionRotationAxis(rotationAxisV, angle));
 }
