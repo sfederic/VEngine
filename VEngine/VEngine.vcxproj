@@ -276,6 +276,7 @@
     <ClCompile Include="Code\Actors\Game\PopupActor.cpp" />
     <ClCompile Include="Code\Actors\Game\ConditionTrigger.cpp" />
     <ClCompile Include="Code\Gameplay\Memories\SermonKnowledgeMemory.cpp" />
+    <ClCompile Include="Code\Actors\Game\RotatorSwitch.cpp" />
     <ClInclude Include="Code\Actors\Game\Units\LineAttackerUnit.h" />
     <ClInclude Include="Code\Gameplay\UnitSkills\AreaAttackSkill.h" />
     <ClInclude Include="Code\Gameplay\UnitSkills\UnitSkill.h" />
@@ -553,6 +554,7 @@
     <ClInclude Include="Code\UI\Game\PopupWidget.h" />
     <ClInclude Include="Code\Actors\Game\PopupActor.h" />
     <ClInclude Include="Code\Actors\Game\ConditionTrigger.h" />
+    <ClInclude Include="Code\Actors\Game\RotatorSwitch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
