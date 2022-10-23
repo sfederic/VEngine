@@ -11,12 +11,16 @@ RotatorSwitch::RotatorSwitch()
 
 void RotatorSwitch::Start()
 {
+	__super::Start();
+
 	actorToRotate = World::GetActorByName(actorToRotateName);
 	nextRotation = actorToRotate->GetRotationV();
 }
 
 void RotatorSwitch::Tick(float deltaTime)
 {
+	__super::Tick(deltaTime);
+
 	if (!rotationFinished)
 	{
 		XMVECTOR currentRotation = actorToRotate->GetRotationV();
