@@ -153,7 +153,7 @@ struct ShaderLights
 	static const int MAX_LIGHTS = 32;
 
 	XMFLOAT4 eyePosition = XMFLOAT4(0.f, 0.f, 0.f, 1.0);
-	XMFLOAT4 globalAmbient = XMFLOAT4(0.f, 0.f, 0.f, 1.f);
+	XMFLOAT4 globalAmbient = XMFLOAT4(0.25f, 0.25f, 0.25f, 1.f);
 	int numLights = 0;
 
 	//Shadows for now are based on 1 directional light in the level. Set this to false to avoid the 

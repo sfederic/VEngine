@@ -1420,7 +1420,6 @@ void UpdateLights()
 
 	shaderLights.numLights = shaderLightsIndex;
 
-	shaderLights.globalAmbient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.f);
 	XMStoreFloat4(&shaderLights.eyePosition, activeCamera->transform.world.r[3]);
 
 	cbLights->Map(&shaderLights);
