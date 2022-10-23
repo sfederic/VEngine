@@ -59,6 +59,8 @@ struct Player : Actor
 	//Name of the memory selected in MemoryMenuWidget to spawn into world
 	std::string memoryNameToSpawn;
 
+	std::vector<Actor*> previousHitTransparentActors;
+
 	int attackPoints = 1;
 	int actionPoints = 10;
 	int healthPoints = 3;
@@ -85,6 +87,7 @@ struct Player : Actor
 
 	Player();
 	virtual void Start() override;
+	virtual void End() override;
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 

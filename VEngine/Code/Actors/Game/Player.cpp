@@ -85,6 +85,11 @@ void Player::Start()
 	yIndex = std::round(GetPosition().z);
 }
 
+void Player::End()
+{
+	previousHitTransparentActors.clear();
+}
+
 void Player::Tick(float deltaTime)
 {
 	if (gameOver)
@@ -711,8 +716,6 @@ void Player::PreviewMovementNodesDuringBattle()
 //Note: Default blend state needs to already be set for the mesh.
 void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 {
-	static std::vector<Actor*> previousHitActors;
-
 	auto SetActorAlpha = [](Actor* actor, float alpha) {
 		auto mesh = actor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
 		if (mesh && mesh->transparentOcclude)
@@ -729,7 +732,7 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 	Ray ray(this);
 	if (Raycast(ray, camera->GetWorldPositionV(), GetPositionV()))
 	{
-		for (auto actor : previousHitActors)
+		for (auto actor : previousHitTransparentActors)
 		{
 			SetActorAlpha(actor, solidValue);
 		}
@@ -739,16 +742,16 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 			SetActorAlpha(actor, transparentValue);
 		}
 
-		previousHitActors = ray.hitActors;
+		previousHitTransparentActors = ray.hitActors;
 	}
 	else
 	{
-		for(auto actor : previousHitActors)
+		for(auto actor : previousHitTransparentActors)
 		{
 			SetActorAlpha(actor, solidValue);
 		}
 
-		previousHitActors.clear();
+		previousHitTransparentActors.clear();
 	}
 }
 
