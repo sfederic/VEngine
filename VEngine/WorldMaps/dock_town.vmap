@@ -50,7 +50,7 @@ UID
 2903250022
 next
 MeshActor
-17
+20
  Enabled
 1
  Position
@@ -272,6 +272,86 @@ house0416
 UID
 582369612
 next
+ Enabled
+1
+ Position
+0 1 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+MeshActor17
+UID
+3822066245
+next
+ Enabled
+1
+ Position
+6 1 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+MeshActor18
+UID
+1818849118
+next
+ Enabled
+1
+ Position
+5 1 7
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+MeshActor19
+UID
+1415584536
+next
+SpotLightActor
+3
+ Enabled
+1
+ Position
+0 3.5 4
+ Rotation
+0.707107 0 -0 0.707107
+ Scale
+1 0.999983 0.999983
+Name
+SpotLightActor0
+UID
+3537139206
+next
+ Enabled
+1
+ Position
+6 3.5 3
+ Rotation
+0.707107 0 -0 0.707107
+ Scale
+1 0.999978 0.999978
+Name
+SpotLightActor1
+UID
+3645290310
+next
+ Enabled
+1
+ Position
+5 3.5 7
+ Rotation
+0.707107 0 -0 0.707107
+ Scale
+1 0.999974 0.999974
+Name
+SpotLightActor2
+UID
+1402801734
+next
 EmptyComponent
 1
 3978823613
@@ -286,7 +366,7 @@ Root
 1 1 1
 next
 MeshComponent
-18
+21
 3978823613
 Mesh
  Enabled
@@ -349,7 +429,7 @@ Mesh
 Casts Shadow
 1
 Grid Obstacle
-0
+1
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -1169,6 +1249,153 @@ Static
 Trans. Occlude
 0
 next
+3822066245
+Mesh
+ Enabled
+1
+ Pos
+0 1 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+lamp_post02.fbx
+Static
+1
+Trans. Occlude
+0
+next
+1818849118
+Mesh
+ Enabled
+1
+ Pos
+6 1 3
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+lamp_post02.fbx
+Static
+1
+Trans. Occlude
+0
+next
+1415584536
+Mesh
+ Enabled
+1
+ Pos
+5 1 7
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+lamp_post02.fbx
+Static
+1
+Trans. Occlude
+0
+next
 CameraComponent
 1
 3978823613
@@ -1289,5 +1516,64 @@ LightEnabled
 1
 ShadowMap Size
 15
+next
+SpotLightComponent
+3
+3537139206
+SpotLight
+ Enabled
+1
+ Pos
+0 3.5 4
+ Rot
+0.707107 0 -0 0.707107
+ Scale
+1 0.999983 0.999983
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
+Spot Angle
+70
+next
+3645290310
+SpotLight
+ Enabled
+1
+ Pos
+6 3.5 3
+ Rot
+0.707107 0 -0 0.707107
+ Scale
+1 0.999978 0.999978
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
+Spot Angle
+70
+next
+1402801734
+SpotLight
+ Enabled
+1
+ Pos
+5 3.5 7
+ Rot
+0.707107 0 -0 0.707107
+ Scale
+1 0.999974 0.999974
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
+Spot Angle
+70
 next
 end
