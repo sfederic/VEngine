@@ -2,17 +2,10 @@
 #include "GridActor.h"
 
 //Grid actor that can be interacted with to be pushed by the player.
-struct PushableGridActor : GridActor
+class PushableGridActor : public GridActor
 {
+public:
 	ACTOR_SYSTEM(PushableGridActor);
-
-	//The next position the actor has been pushed to.
-	XMVECTOR nextPushMovePos;
-
-	bool isMoving = false;
-
-	//How fast the actor moves after being pushed.
-	float pushMoveSpeed = 2.0f;
 
 	PushableGridActor();
 	virtual void Start() override;
@@ -22,4 +15,12 @@ struct PushableGridActor : GridActor
 
 private:
 	void RecalcNodeHeight();
+
+	//The next position the actor has been pushed to.
+	XMVECTOR nextPushMovePos = XMVectorZero();
+
+	bool isMoving = false;
+
+	//How fast the actor moves after being pushed.
+	float pushMoveSpeed = 2.0f;
 };
