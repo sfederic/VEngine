@@ -7,6 +7,7 @@
 
 PushableGridActor::PushableGridActor()
 {
+    isInspectable = false;
 }
 
 void PushableGridActor::Start()
