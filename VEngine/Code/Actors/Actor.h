@@ -81,6 +81,9 @@ public:
 	//called on gameplay start
 	virtual void Start();
 
+	//Called on gameplay end (level load, editor stop and start)
+	virtual void End() {}
+
 	//Called after Start()
 	virtual void LateStart();
 

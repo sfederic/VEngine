@@ -27,6 +27,9 @@ namespace World
 	void WakeAndStartAllActors();
 	void StartAllComponents();
 
+	//Call End() on all actors on gameplay end
+	void EndAllActors();
+
 	//Create default starting actors for a map, like Player, Grid.
 	void CreateDefaultMapActors();
 

@@ -103,6 +103,14 @@ void World::StartAllComponents()
 	}
 }
 
+void World::EndAllActors()
+{
+	for (auto actor : GetAllActorsInWorld())
+	{
+		actor->End();
+	}
+}
+
 void World::CreateDefaultMapActors()
 {
 	Player::system.Add();

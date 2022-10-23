@@ -158,6 +158,8 @@ void Core::StartGame()
 
 void Core::EndGame()
 {
+	World::EndAllActors();
+
 	gameplayOn = false;
 
 	uiSystem.Reset();
