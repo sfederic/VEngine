@@ -8,7 +8,7 @@ class RotatorSwitch : public GridActor
 public:
 	ACTOR_SYSTEM(RotatorSwitch);
 
-	RotatorSwitch() {}
+	RotatorSwitch();
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;

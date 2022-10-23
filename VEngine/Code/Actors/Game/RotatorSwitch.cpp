@@ -4,6 +4,11 @@
 #include "VMath.h"
 #include "Components/MeshComponent.h"
 
+RotatorSwitch::RotatorSwitch()
+{
+	isDestructible = false;
+}
+
 void RotatorSwitch::Start()
 {
 	actorToRotate = World::GetActorByName(actorToRotateName);
@@ -27,6 +32,7 @@ void RotatorSwitch::Tick(float deltaTime)
 Properties RotatorSwitch::GetProps()
 {
 	auto props = __super::GetProps();
+	props.title = "RotatorSwitch";
 	props.Add("Actor to Rotate", &actorToRotateName);
 	return props;
 }
