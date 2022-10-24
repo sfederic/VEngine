@@ -15,16 +15,11 @@ class Material;
 struct Vertex
 {
 	XMFLOAT3 pos;
-	float p1;
 	XMFLOAT3 normal;
-	float p2;
 	XMFLOAT3 tangent;
-	float p3;
 	XMFLOAT2 uv;
-	float pad[2];
 	uint32_t boneIndices[4];
 	float weights[3];
-	float p4;
 };
 
 struct VRect
