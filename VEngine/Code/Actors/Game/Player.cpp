@@ -189,6 +189,12 @@ void Player::ResetGuard()
 	ableToGuard = true;
 }
 
+void Player::ResetBulletsToMax()
+{
+	numBullets = GameInstance::maxPlayerBullets;
+	Log("Bullet count reset to max.");
+}
+
 GridNode* Player::GetCurrentNode()
 {
 	auto grid = Grid::system.GetFirstActor();

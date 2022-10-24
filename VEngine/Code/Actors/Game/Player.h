@@ -101,6 +101,8 @@ struct Player : Actor
 	void Guard();
 	void ResetGuard();
 
+	void ResetBulletsToMax();
+
 	//Call on battle end for player variables housekeeping
 	void BattleCleanup();
 	
