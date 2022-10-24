@@ -20,6 +20,7 @@ struct GameInstance
 
 	//Player stats
 	inline static int maxPlayerActionPoints = 10;
+	inline static int maxPlayerBullets = 2;
 
 	inline static std::map<std::string, Memory*> playerMemories;
 	static void DeletePlayerMemories();
