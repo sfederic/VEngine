@@ -117,6 +117,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Actors\Game\BulletCache.cpp" />
     <ClCompile Include="Code\Actors\Game\Units\LineAttackerUnit.cpp" />
     <ClCompile Include="Code\Gameplay\Memories\AttackUpMemory.cpp" />
     <ClCompile Include="Code\Gameplay\Memory.cpp" />
@@ -277,6 +278,7 @@
     <ClCompile Include="Code\Actors\Game\ConditionTrigger.cpp" />
     <ClCompile Include="Code\Gameplay\Memories\SermonKnowledgeMemory.cpp" />
     <ClCompile Include="Code\Actors\Game\RotatorSwitch.cpp" />
+    <ClInclude Include="Code\Actors\Game\BulletCache.h" />
     <ClInclude Include="Code\Actors\Game\Units\LineAttackerUnit.h" />
     <ClInclude Include="Code\Gameplay\UnitSkills\AreaAttackSkill.h" />
     <ClInclude Include="Code\Gameplay\UnitSkills\UnitSkill.h" />
