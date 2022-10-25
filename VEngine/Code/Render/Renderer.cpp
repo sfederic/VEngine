@@ -671,7 +671,7 @@ void SetShaderMeshData(MeshComponent* mesh)
 	{
 		context->PSSetShaderResources(environmentMapTextureRegister, 1, &lightProbeSRV);
 
-		ProbeData probeData = DiffuseProbeMap::system.GetActors()[0]->FindClosestProbe(mesh->GetWorldPositionV());
+		ProbeData probeData = DiffuseProbeMap::system.GetFirstActor()->FindClosestProbe(mesh->GetWorldPositionV());
 		memcpy(meshData.SH, probeData.SH, sizeof(XMFLOAT4) * 9);
 	}
 
