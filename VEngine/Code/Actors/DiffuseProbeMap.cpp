@@ -87,7 +87,6 @@ ProbeData DiffuseProbeMap::FindClosestProbe(XMVECTOR pos)
 	{
 		return distanceMap.begin()->second;
 	}
-	
-	//return an empty Probe if none are found.
-	return ProbeData();
+
+	throw new std::exception("No probe found");
 }
