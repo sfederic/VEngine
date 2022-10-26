@@ -37,13 +37,13 @@ Player::Player()
 	nextPos = XMVectorZero();
 	nextRot = XMVectorZero();
 
-	//Empty as the root to be able to rotate the mesh towards movement input direction.
-	rootComponent = EmptyComponent::system.Add("Root", this);
+	//Empty root to be able to rotate the mesh towards movement input direction.
+	SetEmptyRootComponent();
 
-	mesh = MeshComponent::system.Add("Mesh", this, MeshComponent("char.fbx", "test.png"));
+	mesh = CreateComponent(MeshComponent("char.fbx", "test.png"), "Mesh");
 	rootComponent->AddChild(mesh);
 
-	camera = CameraComponent::system.Add("Camera", this, CameraComponent(XMFLOAT3(1.75f, 1.75f, -2.75f)));
+	camera = CreateComponent(CameraComponent(XMFLOAT3(1.75f, 1.75f, -2.75f)), "Camera");
 	camera->targetActor = this;
 
 	rootComponent->AddChild(camera);
