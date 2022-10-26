@@ -627,7 +627,8 @@ void Renderer::Render()
 	SetShadowData();
 	RenderShadowPass();
 
-	if (PostProcessInstance::system.GetNumActors() > 0)
+	if (PostProcessInstance::system.GetNumActors() > 0 
+		&& PostProcessInstance::system.GetFirstActor()->IsActive())
 	{
 		RenderPostProcessSetup();
 	}
@@ -1673,7 +1674,8 @@ void RenderPostProcess()
 	if (numPostProcessInstances == 0) return;
 
 	assert(numPostProcessInstances == 1);
-	auto postProcessIntance = PostProcessInstance::system.GetActors()[0];
+	auto postProcessIntance = PostProcessInstance::system.GetFirstActor();
+	if (!postProcessIntance->IsActive()) return;
 
 	SetNullRTV();
 
