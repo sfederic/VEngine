@@ -15,7 +15,7 @@ Size X
 Size Y
 9
 UID
-2642635743
+2959597962
 startBattleOnLoad
 0
 next
@@ -327,20 +327,20 @@ PointLightActor
  Enabled
 1
  Position
-0 1 9
+0 2 1
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
 Name
 PointLightActor0
 UID
-1291675540
+304990333
 next
  Enabled
 1
  Position
-8 2 0
+0 2 8
  Rotation
 0 0 0 1
  Scale
@@ -348,20 +348,20 @@ next
 Name
 PointLightActor1
 UID
-933462732
+3621130393
 next
  Enabled
 1
  Position
-0 2 0
+8 1 6
  Rotation
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
 Name
 PointLightActor2
 UID
-3833509931
+1123415709
 next
 EmptyComponent
 1
@@ -1526,7 +1526,7 @@ Near Z
 next
 InstanceMeshComponent
 1
-2642635743
+2959597962
 NodeMesh
  Enabled
 1
@@ -1609,48 +1609,48 @@ Volume
 next
 PointLightComponent
 3
-1291675540
+304990333
 PointLight
  Enabled
 1
  Pos
-0 1 9
- Rot
-0 0 0 1
- Scale
-1 1 1
-Colour
-1 1 1 1
-Intensity
-25
-LightEnabled
-1
-next
-933462732
-PointLight
- Enabled
-1
- Pos
-8 2 0
- Rot
-0 0 0 1
- Scale
-1 1 1
-Colour
-1 1 1 1
-Intensity
-25
-LightEnabled
-1
-next
-3833509931
-PointLight
- Enabled
-1
- Pos
-0 2 0
+0 2 1
  Rot
 -0 0 -0 1
+ Scale
+1 1 1
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
+next
+3621130393
+PointLight
+ Enabled
+1
+ Pos
+0 2 8
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
+next
+1123415709
+PointLight
+ Enabled
+1
+ Pos
+8 1 6
+ Rot
+0 0 0 1
  Scale
 1 1 1
 Colour
