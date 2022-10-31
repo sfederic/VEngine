@@ -12,21 +12,15 @@ ShaderItem::ShaderItem(const std::string shaderItemName_,
     pixelShaderFilename(pixelShaderFilename_),
     vertexShaderFilename(vertexShaderFilename_)
 {
-    vertexShader = shaderSystem.FindVertexShader(vertexShaderFilename);
-    pixelShader = shaderSystem.FindPixelShader(pixelShaderFilename);
-
-    assert(vertexShader);
-    assert(pixelShader);
-
     shaderSystem.AddShaderItem(this);
 }
 
 ID3D11VertexShader* ShaderItem::GetVertexShader()
 {
-    return vertexShader->GetShader();
+    return shaderSystem.FindVertexShader(vertexShaderFilename)->GetShader();
 }
 
 ID3D11PixelShader* ShaderItem::GetPixelShader()
 {
-    return pixelShader->GetShader();
+    return shaderSystem.FindPixelShader(pixelShaderFilename)->GetShader();
 }

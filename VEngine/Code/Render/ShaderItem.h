@@ -24,9 +24,6 @@ public:
 	std::wstring GetPixelShaderFilename() { return pixelShaderFilename; }
 
 private:
-	VertexShader* vertexShader = nullptr;
-	PixelShader* pixelShader = nullptr;
-
 	std::string shaderItemName;
 
 	std::wstring vertexShaderFilename;
