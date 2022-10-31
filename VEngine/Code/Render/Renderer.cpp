@@ -494,7 +494,7 @@ void SetShadowData()
 
 void SetLightResources()
 {
-	cbLights->SetPS();
+	cbLights->SetVSAndPS();
 }
 
 void DrawMesh(MeshComponent* mesh)
@@ -1424,7 +1424,7 @@ void UpdateLights()
 	XMStoreFloat4(&shaderLights.eyePosition, activeCamera->transform.world.r[3]);
 
 	cbLights->Map(&shaderLights);
-	cbLights->SetPS();
+	cbLights->SetVSAndPS();
 
 	Profile::End();
 }
@@ -1575,7 +1575,7 @@ void SetRenderPipelineStates(MeshComponent* mesh)
 	SetIndexBuffer(pso.indexBuffer);
 
 	cbMaterial->Map(&material->materialShaderData);
-	cbMaterial->SetPS();
+	cbMaterial->SetVSAndPS();
 }
 
 void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
