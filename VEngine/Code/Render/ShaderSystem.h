@@ -14,6 +14,7 @@ class ShaderSystem : public System
 public:
 	ShaderSystem() : System("ShaderSystem") {}
 	void Init();
+	void Tick();
 
 	VertexShader* FindVertexShader(const std::wstring filename);
 	PixelShader* FindPixelShader(const std::wstring filename);

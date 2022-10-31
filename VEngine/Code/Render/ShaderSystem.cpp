@@ -1,6 +1,10 @@
 #include "vpch.h"
 #include "ShaderSystem.h"
 #include <filesystem>
+#include <fstream>
+#include <iostream>
+#include "Input.h"
+#include "Log.h"
 #include "VertexShader.h"
 #include "PixelShader.h"
 #include "ShaderItem.h"
@@ -20,6 +24,38 @@ void ShaderSystem::Init()
     ShaderItems::SolidColour = new ShaderItem("SolidColour", L"Default_vs.cso", L"SolidColour_ps.cso");
     ShaderItems::UI = new ShaderItem("UI", L"UI_vs.cso", L"TextureClip_ps.cso");
     ShaderItems::PostProcess = new ShaderItem("PostProcess", L"PostProcess_vs.cso", L"PostProcess_ps.cso");
+}
+
+void ShaderSystem::Tick()
+{
+    if (Input::GetKeyUp(Keys::F4))
+    {
+        //Vertex
+        for (const auto& entry : std::filesystem::directory_iterator("Code/Render/Shaders/Vertex/"))
+        {
+            auto filename = entry.path().filename();
+            std::string outputFilepath = "Shaders/Vertex/";
+
+            std::string outputFile = outputFilepath + filename.replace_extension(".cso").string();
+
+            std::string command = "fxc /Od /Zi /T vs_5_0 /Fo " + outputFile + " Code/Render/Shaders/Vertex/" + entry.path().filename().string();
+            std::system(command.c_str());
+        }
+
+        //Pixel
+        for (const auto& entry : std::filesystem::directory_iterator("Code/Render/Shaders/Pixel/"))
+        {
+            auto filename = entry.path().filename();
+            std::string outputFilepath = "Shaders/Pixel/";
+
+            std::string outputFile = outputFilepath + filename.replace_extension(".cso").string();
+
+            std::string command = "fxc /Od /Zi /T ps_5_0 /Fo " + outputFile + " Code/Render/Shaders/Pixel/" + entry.path().filename().string();
+            std::system(command.c_str());
+        }
+
+        CompileAllShadersFromFile();
+    }
 }
 
 VertexShader* ShaderSystem::FindVertexShader(const std::wstring filename)
