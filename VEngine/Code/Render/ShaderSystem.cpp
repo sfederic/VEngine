@@ -28,34 +28,7 @@ void ShaderSystem::Init()
 
 void ShaderSystem::Tick()
 {
-    if (Input::GetKeyUp(Keys::F4))
-    {
-        //Vertex
-        for (const auto& entry : std::filesystem::directory_iterator("Code/Render/Shaders/Vertex/"))
-        {
-            auto filename = entry.path().filename();
-            std::string outputFilepath = "Shaders/Vertex/";
-
-            std::string outputFile = outputFilepath + filename.replace_extension(".cso").string();
-
-            std::string command = "fxc /Od /Zi /T vs_5_0 /Fo " + outputFile + " Code/Render/Shaders/Vertex/" + entry.path().filename().string();
-            std::system(command.c_str());
-        }
-
-        //Pixel
-        for (const auto& entry : std::filesystem::directory_iterator("Code/Render/Shaders/Pixel/"))
-        {
-            auto filename = entry.path().filename();
-            std::string outputFilepath = "Shaders/Pixel/";
-
-            std::string outputFile = outputFilepath + filename.replace_extension(".cso").string();
-
-            std::string command = "fxc /Od /Zi /T ps_5_0 /Fo " + outputFile + " Code/Render/Shaders/Pixel/" + entry.path().filename().string();
-            std::system(command.c_str());
-        }
-
-        CompileAllShadersFromFile();
-    }
+    HotreloadShaders();
 }
 
 VertexShader* ShaderSystem::FindVertexShader(const std::wstring filename)
@@ -97,6 +70,31 @@ void ShaderSystem::CompileAllShadersFromFile()
         auto pixelShader = std::make_unique<PixelShader>();
         pixelShader->Create(entry.path().c_str());
         pixelShaders.emplace(entry.path().filename(), std::move(pixelShader));
+    }
+}
+
+void ShaderSystem::HotreloadShaders()
+{
+    if (Input::GetKeyUp(Keys::F4))
+    {
+        RecompileShaderTypesForHotreload("Vertex", "vs_5_0");
+        RecompileShaderTypesForHotreload("Pixel", "ps_5_0");
+
+        CompileAllShadersFromFile();
+    }
+}
+
+void ShaderSystem::RecompileShaderTypesForHotreload(const std::string shaderType, const std::string version)
+{
+    for (const auto& entry : std::filesystem::directory_iterator("Code/Render/Shaders/" + shaderType + "/"))
+    {
+        auto filename = entry.path().filename();
+        std::string outputFilepath = "Shaders/" + shaderType + "/";
+
+        std::string outputFile = outputFilepath + filename.replace_extension(".cso").string();
+
+        std::string command = "fxc /Od /Zi /T " + version + " /Fo " + outputFile + " Code/Render/Shaders/" + shaderType + "/" + entry.path().filename().string();
+        std::system(command.c_str());
     }
 }
 

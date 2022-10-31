@@ -26,6 +26,8 @@ public:
 
 private:
 	void CompileAllShadersFromFile();
+	void HotreloadShaders();
+	void RecompileShaderTypesForHotreload(const std::string shaderType, const std::string version);
 
 	std::map<std::wstring, std::unique_ptr<VertexShader>> vertexShaders;
 	std::map<std::wstring, std::unique_ptr<PixelShader>> pixelShaders;
