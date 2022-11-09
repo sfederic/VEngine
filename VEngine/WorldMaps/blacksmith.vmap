@@ -244,6 +244,110 @@ Player0
 UID
 2845528469
 next
+NPC
+2
+ Enabled
+1
+ Position
+4 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Attack Points
+1
+Attack Range
+1
+Battle State
+fight
+Destruct
+1
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+Move Points
+1
+Move Speed
+3
+Name
+NPC0
+Obstacle
+0
+Skill
+
+UID
+965438251
+actorToFocusOn
+
+battleStartText
+
+deathText
+
+disableGridInteract
+0
+interactKnownText
+
+numOfAttacks
+1
+spawnText
+
+next
+ Enabled
+1
+ Position
+2 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Attack Points
+1
+Attack Range
+1
+Battle State
+fight
+Destruct
+1
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+Move Points
+1
+Move Speed
+3
+Name
+NPC1
+Obstacle
+0
+Skill
+
+UID
+3990293285
+actorToFocusOn
+
+battleStartText
+
+deathText
+
+disableGridInteract
+0
+interactKnownText
+
+numOfAttacks
+1
+spawnText
+
+next
 DirectionalLightActor
 1
  Enabled
@@ -274,8 +378,39 @@ PointLightActor0
 UID
 3758365050
 next
-EmptyComponent
+PostProcessInstance
 1
+ Enabled
+0
+ Position
+3 2 -1
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Exposure
+1.75
+Linear Angle
+0.01
+Linear Str.
+2
+Name
+PostProcessInstance0
+Shoulder Str.
+0.25
+Toe Denominator
+0.33
+Toe Numerator
+0.013
+Toe Str.
+1
+UID
+2544492658
+White Value
+2.5
+next
+EmptyComponent
+2
 2845528469
 Root
  Enabled
@@ -287,8 +422,57 @@ Root
  Scale
 1 1 1
 next
+2544492658
+Root
+ Enabled
+1
+ Pos
+3 2 -1
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+next
+MemoryComponent
+4
+965438251
+Memory
+ Enabled
+1
+Add On Interact
+0
+Memory Name
+
+next
+965438251
+MemoryOnDeath
+ Enabled
+1
+Add On Interact
+0
+Memory Name
+
+next
+3990293285
+Memory
+ Enabled
+1
+Add On Interact
+0
+Memory Name
+
+next
+3990293285
+MemoryOnDeath
+ Enabled
+1
+Add On Interact
+0
+Memory Name
+
+next
 MeshComponent
-17
+19
 1437470180
 Mesh
  Enabled
@@ -1122,6 +1306,104 @@ Static
 Trans. Occlude
 0
 next
+965438251
+Mesh
+ Enabled
+1
+ Pos
+4 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+
+Static
+1
+Trans. Occlude
+0
+next
+3990293285
+Mesh
+ Enabled
+1
+ Pos
+2 0 3
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+
+Static
+1
+Trans. Occlude
+0
+next
 CameraComponent
 1
 2845528469
@@ -1193,8 +1475,22 @@ Trans. Occlude
 0
 next
 DialogueComponent
-1
+3
 2845528469
+Dialogue
+ Enabled
+1
+File
+
+next
+965438251
+Dialogue
+ Enabled
+1
+File
+
+next
+3990293285
 Dialogue
  Enabled
 1
