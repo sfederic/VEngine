@@ -736,7 +736,7 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 	const float solidValue = 1.f;
 
 	Ray ray(this);
-	if (Raycast(ray, camera->GetWorldPositionV(), GetPositionV()))
+	if (OrientedBoxCast(ray, camera->GetWorldPositionV(), GetPositionV(), XMFLOAT2(0.5f, 0.5f), true))
 	{
 		for (auto actor : previousHitTransparentActors)
 		{
