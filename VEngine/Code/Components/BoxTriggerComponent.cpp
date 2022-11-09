@@ -34,7 +34,7 @@ void BoxTriggerComponent::Create()
 
 bool BoxTriggerComponent::Contains(XMVECTOR point)
 {
-	BoundingOrientedBox bb = VMath::GetUpdatedBoundingBox(this);
+	BoundingOrientedBox bb = VMath::GetBoundingBoxInWorld(this);
 	return bb.Contains(point);
 }
 

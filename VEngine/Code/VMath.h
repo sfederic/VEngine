@@ -1,4 +1,5 @@
 #pragma once
+
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
 
@@ -50,7 +51,9 @@ namespace VMath
 
 	XMMATRIX GetBoundingBoxMatrix(BoundingOrientedBox& boundingBox, Actor* actor);
 	void UpdateBoundingBox(BoundingOrientedBox& boundingBox, Actor* actor);
-	BoundingOrientedBox GetUpdatedBoundingBox(SpatialComponent* sc);
+
+	//Returns a SpatialComponent's BoundingOrientedBox in world coordinates.
+	BoundingOrientedBox GetBoundingBoxInWorld(SpatialComponent* sc);
 
 	//Note: don't apply translation offset in Blender when exporting and using this,
 	//else the bounds calc will be off center.

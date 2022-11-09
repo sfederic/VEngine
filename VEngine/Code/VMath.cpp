@@ -272,27 +272,29 @@ namespace VMath
         XMStoreFloat4(&boundingBox.Orientation, orientation);
     }
 
-    BoundingOrientedBox GetUpdatedBoundingBox(SpatialComponent* sc)
+    BoundingOrientedBox GetBoundingBoxInWorld(SpatialComponent* sc)
     {
-        auto worldMatrix = sc->GetWorldMatrix();
-        XMVECTOR pos = worldMatrix.r[3];
+        //Position
+        XMVECTOR worldPos = sc->GetWorldPositionV();
         XMVECTOR boundingBoxCenter = XMLoadFloat3(&sc->boundingBox.Center);
-        XMVECTOR offset = pos + boundingBoxCenter;
+        XMVECTOR offset = worldPos + boundingBoxCenter;
         offset.m128_f32[3] = 1.0f;
 
-        XMVECTOR actorScale = sc->GetScaleV();
+        //Scale
+        XMVECTOR spatialComponentScale = sc->GetScaleV();
         XMVECTOR extents = XMLoadFloat3(&sc->boundingBox.Extents);
-        XMVECTOR scale = extents * actorScale;
+        XMVECTOR scale = extents * spatialComponentScale;
         scale.m128_f32[3] = 1.0f;
 
+        //Rotation
         XMVECTOR orientation = sc->GetRotationV();
 
-        BoundingOrientedBox bob;
-        XMStoreFloat3(&bob.Center, offset);
-        XMStoreFloat3(&bob.Extents, scale);
-        XMStoreFloat4(&bob.Orientation, orientation);
+        BoundingOrientedBox orientedBox{};
+        XMStoreFloat3(&orientedBox.Center, offset);
+        XMStoreFloat3(&orientedBox.Extents, scale);
+        XMStoreFloat4(&orientedBox.Orientation, orientation);
 
-        return bob;
+        return orientedBox;
     }
 
     BoundingOrientedBox CreateBoundingBox(Vertex* vertices, size_t verticesCount)

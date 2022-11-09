@@ -73,7 +73,7 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 				continue;
 			}
 
-			BoundingOrientedBox boundingBox = VMath::GetUpdatedBoundingBox(mesh);
+			BoundingOrientedBox boundingBox = VMath::GetBoundingBoxInWorld(mesh);
 
 			if (boundingBox.Intersects(ray.origin, ray.direction, ray.hitDistance))
 			{
@@ -239,9 +239,27 @@ bool RaycastFromScreen(Ray& ray)
 	return Raycast(ray, ray.origin, ray.direction, range, true);
 }
 
-bool OrientedBoxCast(Ray& ray, XMFLOAT3 center, XMFLOAT3 extents, XMFLOAT4 orientation)
+bool OrientedBoxCast(Ray& ray, XMVECTOR origin, XMVECTOR end, XMFLOAT2 extents, bool drawDebug)
 {
-	DirectX::BoundingOrientedBox boundingOrientedBox(center, extents, orientation);
+	XMVECTOR orientationV = VMath::LookAtRotation(end, origin);
+
+	XMFLOAT4 orientation{};
+	XMStoreFloat4(&orientation, orientationV);
+
+	XMVECTOR centerV = VMath::CalcMidPoint(origin, end);
+	XMFLOAT3 center{};
+	XMStoreFloat3(&center, centerV);
+
+	XMFLOAT3 extentsFloat3 = { extents.x, extents.y, 0.f };
+	extentsFloat3.z = XMVector3Length(end - origin).m128_f32[0] / 2.f;
+
+	DirectX::BoundingOrientedBox boundingOrientedBox(center, extentsFloat3, orientation);
+
+	if (drawDebug)
+	{
+		Renderer::ClearBounds();
+		Renderer::AddDebugDrawOrientedBox(boundingOrientedBox);
+	}
 
 	for (auto actor : World::GetAllActorsInWorld())
 	{
@@ -252,7 +270,8 @@ bool OrientedBoxCast(Ray& ray, XMFLOAT3 center, XMFLOAT3 extents, XMFLOAT4 orien
 
 		for (auto mesh : actor->GetComponentsOfType<MeshComponent>())
 		{
-			if (boundingOrientedBox.Intersects(mesh->boundingBox))
+			auto meshBoundsInWorld = VMath::GetBoundingBoxInWorld(mesh);
+			if (boundingOrientedBox.Intersects(meshBoundsInWorld))
 			{
 				ray.hitComponents.push_back(mesh);
 				ray.hitActors.push_back(actor);
@@ -276,7 +295,7 @@ bool SimpleBoxCast(XMFLOAT3 center, XMFLOAT3 extents, Ray& hit)
 
 		for (auto mesh : actor->GetComponentsOfType<MeshComponent>())
 		{
-			BoundingOrientedBox meshWorldBounds = VMath::GetUpdatedBoundingBox(mesh);
+			BoundingOrientedBox meshWorldBounds = VMath::GetBoundingBoxInWorld(mesh);
 
 			if (boundingBox.Intersects(meshWorldBounds))
 			{
