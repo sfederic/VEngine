@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <DirectXCollision.h>
 
 struct RastState;
 struct BlendState;
@@ -44,4 +45,7 @@ namespace Renderer
 
 	RastState* GetRastState(std::string rastStateName);
 	BlendState* GetBlendState(std::string blendStateName);
+
+	void AddDebugDrawOrientedBox(DirectX::BoundingOrientedBox& orientedBox);
+	void ClearBounds();
 };

@@ -175,6 +175,9 @@ const int lightProbeTextureHeight = 64;
 ShaderMatrices shaderMatrices;
 ShaderLights shaderLights;
 
+//Debug object maps
+std::vector<DirectX::BoundingOrientedBox> debugOrientedBoxesOnTimerToRender;
+
 void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 {
 	viewport.Width = viewportWidth;
@@ -961,7 +964,7 @@ void RenderBounds()
 
 		for(auto mesh : MeshComponent::system.components)
 		{
-			BoundingOrientedBox boundingBox = mesh->boundingBox;
+			DirectX::BoundingOrientedBox boundingBox = mesh->boundingBox;
 
 			XMFLOAT3 extents = XMFLOAT3(boundingBox.Extents.x * 2.f, boundingBox.Extents.y * 2.f,
 				boundingBox.Extents.z * 2.f);
@@ -980,6 +983,28 @@ void RenderBounds()
 			shaderMatrices.model.r[0].m128_f32[0] += 0.01f;
 			shaderMatrices.model.r[1].m128_f32[1] += 0.01f;
 			shaderMatrices.model.r[2].m128_f32[2] += 0.01f;
+
+			shaderMatrices.MakeModelViewProjectionMatrix();
+			cbMatrices->Map(&shaderMatrices);
+			cbMatrices->SetVS();
+
+			DrawMesh(debugBox.boxMesh);
+		}
+
+		for (auto& box : debugOrientedBoxesOnTimerToRender)
+		{
+			XMFLOAT3 extents = XMFLOAT3(box.Extents.x * 2.f, box.Extents.y * 2.f, box.Extents.z * 2.f);
+
+			XMVECTOR center = XMLoadFloat3(&box.Center);
+			XMVECTOR scale = XMLoadFloat3(&extents);
+			XMVECTOR rotation = XMLoadFloat4(&box.Orientation);
+
+			XMMATRIX boundsMatrix = XMMatrixAffineTransformation(scale,
+				XMVectorSet(0.f, 0.f, 0.f, 1.f),
+				rotation,
+				center);
+
+			shaderMatrices.model = boundsMatrix;
 
 			shaderMatrices.MakeModelViewProjectionMatrix();
 			cbMatrices->Map(&shaderMatrices);
@@ -1743,4 +1768,14 @@ RastState* Renderer::GetRastState(std::string rastStateName)
 BlendState* Renderer::GetBlendState(std::string blendStateName)
 {
 	return blendStateMap[blendStateName].get();
+}
+
+void Renderer::AddDebugDrawOrientedBox(DirectX::BoundingOrientedBox& orientedBox)
+{
+	debugOrientedBoxesOnTimerToRender.push_back(orientedBox);
+}
+
+void Renderer::ClearBounds()
+{
+	debugOrientedBoxesOnTimerToRender.clear();
 }
