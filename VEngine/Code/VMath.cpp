@@ -334,6 +334,11 @@ namespace VMath
         return XMVector3Length(pos1 - pos2).m128_f32[0];
     }
 
+    XMVECTOR CalcMidPoint(XMVECTOR p0, XMVECTOR p1)
+    {
+        return (p0 + p1) / 2;
+    }
+
     float RandomRange(float min, float max)
     {
         if (max < min)

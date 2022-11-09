@@ -58,6 +58,9 @@ namespace VMath
 
 	float Distance(XMVECTOR pos1, XMVECTOR pos2);
 
+	//Calculate middle position between two points in-world.
+	XMVECTOR CalcMidPoint(XMVECTOR p0, XMVECTOR p1);
+
 	float RandomRange(float min, float max);
 
 	XMFLOAT3 Float3Subtract(XMFLOAT3& f0, XMFLOAT3& f1);
