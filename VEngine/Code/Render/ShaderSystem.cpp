@@ -93,7 +93,7 @@ void ShaderSystem::RecompileShaderTypesForHotreload(const std::string shaderType
 
         std::string outputFile = outputFilepath + filename.replace_extension(".cso").string();
 
-        std::string command = "fxc /Od /Zi /T " + version + " /Fo " + outputFile + " Code/Render/Shaders/" + shaderType + "/" + entry.path().filename().string();
+        std::string command = "Tools/fxc /Od /Zi /T " + version + " /Fo " + outputFile + " Code/Render/Shaders/" + shaderType + "/" + entry.path().filename().string();
         std::system(command.c_str());
     }
 }
