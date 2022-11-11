@@ -18,6 +18,7 @@ VEngine/Shaders/Pixel/
 *.userosscache
 *.sln.docstates
 *.cso
+Log.txt
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
