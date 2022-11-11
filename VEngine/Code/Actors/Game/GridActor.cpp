@@ -8,6 +8,7 @@
 #include "Grid.h"
 #include "VMath.h"
 #include "Physics/Raycast.h"
+#include "Gameplay/GameUtils.h"
 
 GridActor::GridActor()
 {
@@ -46,6 +47,8 @@ void GridActor::Tick(float deltaTime)
 		else
 		{
 			isInPushback = false;
+			GameUtils::SpawnSpriteSheet("Sprites/explosion.png", GetPosition(), false, 4, 4);
+			GameUtils::PlayAudioOneShot("Audio/armor_light.wav");
 			Destroy();
 		}
 	}
