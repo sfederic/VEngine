@@ -54,13 +54,9 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 			continue;
 		}
 
-		//Skip if actor is in ignore list
-		for (Actor* actorToIgnore : ray.actorsToIgnore)
+		if (IsIgnoredActor(actor, ray))
 		{
-			if (actorToIgnore == actor)
-			{
-				goto endActorIteration;
-			}
+			continue;
 		}
 
 		//Iterate over actor's mesh components
@@ -82,14 +78,10 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 				bRayHit = true;
 			}
 		}
-
-		endActorIteration:
-		continue;
 	}
 
 	float nearestDistance = std::numeric_limits<float>::max();
 
-	//Figure out the distance
 	if (!bRayHit)
 	{
 		return false;
