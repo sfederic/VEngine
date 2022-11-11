@@ -26,9 +26,18 @@
 #include "Editor/CutsceneSequencer.h"
 #include "Gameplay/WorldFunctions.h"
 
+void ClearLog()
+{
+	std::ofstream ofs;
+	ofs.open("Log.txt", std::ofstream::out | std::ofstream::trunc);
+	ofs.close();
+}
+
 void Engine::Init(int argc, char* argv[])
 {
 	auto startTime = Profile::QuickStart();
+
+	ClearLog();
 
 	WorldFunctions::SetupWorldStartFunctions();
 
