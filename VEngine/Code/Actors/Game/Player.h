@@ -132,6 +132,7 @@ private:
 	bool DestructibleCheck(Actor* hitActor);
 	bool AttackGridActorBasedOnNode();
 	bool GunShotCheck(Actor* hitActor);
+	void PushbackObject();
 
 	void ConfirmGuardOnDirection();
 

@@ -126,6 +126,11 @@ void Player::Tick(float deltaTime)
 	PrimaryAction();
 	SecondaryAction();
 
+	if (Input::GetKeyUp(Keys::P))
+	{
+		PushbackObject();
+	}
+
 	ToggleBattleGrid();
 	ToggleMemoryMenu();
 
@@ -925,4 +930,36 @@ bool Player::GunShotCheck(Actor* hitActor)
 	}
 
 	return false;
+}
+
+void Player::PushbackObject()
+{
+	Ray ray(this);
+	XMVECTOR end = GetPositionV() + GetForwardVectorV();
+	if (Raycast(ray, GetPositionV(), end))
+	{
+		Actor* hitActor = ray.hitActor;
+		auto gridActor = dynamic_cast<GridActor*>(hitActor);
+		if (gridActor == nullptr)
+		{
+			Log("Cannot pushback a non GridActor. Actor [%s].", hitActor->GetName().c_str());
+			return;
+		}
+
+		Ray secondRay(this);
+		secondRay.actorsToIgnore.push_back(gridActor);
+		if (Raycast(secondRay, GetPositionV(), GetForwardVectorV(), 20.f))
+		{
+			//@Todo: floor here won't work for every direction. Just for evening out testing visuals.
+			XMVECTOR flooredHitPos = DirectX::XMVectorFloor(XMLoadFloat3(&secondRay.hitPos));
+			hitActor->SetPosition(flooredHitPos);
+
+			Ray nodeRecalcRay(gridActor);
+			gridActor->GetCurrentNode()->RecalcNodeHeight(nodeRecalcRay);
+		}
+		else
+		{
+			Log("Actor [%s] pushedback but did not hit anything.", gridActor->GetName().c_str());
+		}
+	}
 }
