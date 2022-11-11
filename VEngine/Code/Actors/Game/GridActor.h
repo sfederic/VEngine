@@ -40,6 +40,9 @@ struct GridActor : Actor
 	//Used for when the grid actor is off the main grid, ignores GetNode() calls
 	bool disableGridInteract = false;
 
+	bool isInPushback = false;
+	XMVECTOR nextPushbackPosition = DirectX::XMVectorZero();
+
 	std::wstring interactText;
 	std::wstring interactKnownText;
 

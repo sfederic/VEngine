@@ -948,11 +948,10 @@ void Player::PushbackObject()
 
 		Ray secondRay(this);
 		secondRay.actorsToIgnore.push_back(gridActor);
-		if (Raycast(secondRay, GetPositionV(), GetForwardVectorV(), 20.f))
+		if (Raycast(secondRay, GetPositionV(), GetForwardVectorV(), 50.f))
 		{
-			//@Todo: floor here won't work for every direction. Just for evening out testing visuals.
-			XMVECTOR flooredHitPos = DirectX::XMVectorFloor(XMLoadFloat3(&secondRay.hitPos));
-			hitActor->SetPosition(flooredHitPos);
+			gridActor->nextPushbackPosition = XMLoadFloat3(&secondRay.hitPos);
+			gridActor->isInPushback = true;
 
 			Ray nodeRecalcRay(gridActor);
 			gridActor->GetCurrentNode()->RecalcNodeHeight(nodeRecalcRay);

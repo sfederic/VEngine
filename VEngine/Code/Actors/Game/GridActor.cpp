@@ -6,6 +6,7 @@
 #include "Components/Game/DialogueComponent.h"
 #include "UI/Game/HealthWidget.h"
 #include "Grid.h"
+#include "VMath.h"
 #include "Physics/Raycast.h"
 
 GridActor::GridActor()
@@ -34,6 +35,20 @@ void GridActor::Start()
 void GridActor::Tick(float deltaTime)
 {
 	dialogueComponent->SetPosition(GetHomogeneousPositionV());
+
+	if (isInPushback)
+	{
+		XMVECTOR position = GetPositionV();
+		if (!VMath::VecEqual(position, nextPushbackPosition, 0.25f))
+		{
+			SetPosition(XMVectorLerp(GetPositionV(), nextPushbackPosition, deltaTime * 6.5));
+		}
+		else
+		{
+			isInPushback = false;
+			Destroy();
+		}
+	}
 }
 
 Properties GridActor::GetProps()
