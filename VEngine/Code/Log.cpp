@@ -1,6 +1,8 @@
 #include "vpch.h"
 #include "Log.h"
 #include <cstdarg>
+#include <fstream>
+#include <chrono>
 #include <vadefs.h>
 #include "Editor/Editor.h"
 #include "VString.h"
@@ -15,6 +17,10 @@ void Log(std::string logMessage, ...)
 	va_end(args);
 
 	editor->Log(msg);
+
+	std::ofstream os;
+	os.open("Log.txt", std::ios_base::app);
+	os << std::chrono::system_clock::now() << " | " << msg << std::endl;
 }
 
 void Log(std::wstring logMessage, ...)
@@ -27,4 +33,8 @@ void Log(std::wstring logMessage, ...)
 	va_end(args);
 
 	editor->Log(msg);
+
+	std::wofstream os;
+	os.open("Log.txt", std::ios_base::app);
+	os << std::chrono::system_clock::now() << " | " << msg << std::endl;
 }
