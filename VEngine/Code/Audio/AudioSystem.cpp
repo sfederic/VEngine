@@ -127,7 +127,14 @@ uint64_t AudioSystem::PlayAudio(const std::string filename, bool loopAudio)
 	if (audioIt == loadedAudioMap.end())
 	{
 		LoadAudio(filename);
+
+		//Do a second check if audio can't be loaded.
 		audioIt = loadedAudioMap.find(filename);
+		if (audioIt == loadedAudioMap.end())
+		{
+			Log("Audio file [%s] in PlayAudio() not found.", filename.c_str());
+			return 0; //@Todo: could this be an issue?
+		}
 	}
 
 	AudioBase* audio = audioIt->second.get();
@@ -155,7 +162,11 @@ uint64_t AudioSystem::PlayAudio(const std::string filename, bool loopAudio)
 void AudioSystem::LoadAudio(const std::string filename)
 {
 	std::string path = "Audio/" + filename;
-	assert(std::filesystem::exists(path) && "Audio file not found.");
+	if (!std::filesystem::exists(path))
+	{
+		Log("Audio file [%s] not found.", path.c_str());
+		return;
+	}
 
 	auto audio = CreateAudioBase(filename);
 
