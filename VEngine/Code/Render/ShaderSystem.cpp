@@ -8,6 +8,7 @@
 #include "VertexShader.h"
 #include "PixelShader.h"
 #include "ShaderItem.h"
+#include "Profile.h"
 
 ShaderSystem shaderSystem;
 
@@ -77,10 +78,18 @@ void ShaderSystem::HotreloadShaders()
 {
     if (Input::GetKeyUp(Keys::F4))
     {
+        auto startTime = Profile::QuickStart();
+
         RecompileShaderTypesForHotreload("Vertex", "vs_5_0");
         RecompileShaderTypesForHotreload("Pixel", "ps_5_0");
 
         CompileAllShadersFromFile();
+
+        Log("%d vertex shaders recompiled.", vertexShaders.size());
+        Log("%d pixel shaders recompiled.", vertexShaders.size());
+
+        double endTime = Profile::QuickEnd(startTime);
+        Log("Shader hotreload took %f seconds.", endTime);
     }
 }
 
