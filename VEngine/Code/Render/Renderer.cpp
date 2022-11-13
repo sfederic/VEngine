@@ -1422,9 +1422,7 @@ void UpdateLights()
 	//Point lights
 	for (auto light : PointLightComponent::system.components)
 	{
-		light->lightData.position = XMFLOAT4(light->transform.position.x,
-			light->transform.position.y,
-			light->transform.position.z, 1.0f);
+		XMStoreFloat4(&light->lightData.position, light->GetWorldPositionV());
 
 		shaderLights.lights[shaderLightsIndex] = light->lightData;
 		shaderLightsIndex++;
@@ -1433,9 +1431,7 @@ void UpdateLights()
 	//Spot lights
 	for (auto light : SpotLightComponent::system.components)
 	{
-		light->lightData.position = XMFLOAT4(light->transform.position.x,
-			light->transform.position.y,
-			light->transform.position.z, 1.0f);
+		XMStoreFloat4(&light->lightData.position, light->GetWorldPositionV());
 
 		XMFLOAT3 forwardVector = light->GetForwardVector();
 		light->lightData.direction = XMFLOAT4(forwardVector.x, forwardVector.y, forwardVector.z, 0.f);
