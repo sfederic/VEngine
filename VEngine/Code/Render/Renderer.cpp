@@ -1411,6 +1411,8 @@ void UpdateLights()
 	//Directional lights
 	for (auto light : DirectionalLightComponent::system.components)
 	{
+		if (!light->active) continue;
+
 		Light lightData = light->lightData;
 		XMFLOAT3 forwardVector = light->GetForwardVector();
 		lightData.direction = XMFLOAT4(forwardVector.x, forwardVector.y, forwardVector.z, 0.f);
@@ -1422,6 +1424,8 @@ void UpdateLights()
 	//Point lights
 	for (auto light : PointLightComponent::system.components)
 	{
+		if (!light->active) continue;
+
 		XMStoreFloat4(&light->lightData.position, light->GetWorldPositionV());
 
 		shaderLights.lights[shaderLightsIndex] = light->lightData;
@@ -1431,6 +1435,8 @@ void UpdateLights()
 	//Spot lights
 	for (auto light : SpotLightComponent::system.components)
 	{
+		if (!light->active) continue;
+
 		XMStoreFloat4(&light->lightData.position, light->GetWorldPositionV());
 
 		XMFLOAT3 forwardVector = light->GetForwardVector();
