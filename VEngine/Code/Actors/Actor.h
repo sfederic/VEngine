@@ -128,7 +128,7 @@ public:
 	Component* FindComponentAllowNull(std::string componentName);
 
 	template <typename T>
-	T* CreateComponent(T component, std::string componentName)
+	T* CreateComponent(T component, const std::string componentName)
 	{
 		return T::system.Add(componentName, this, std::move(component));
 	}
