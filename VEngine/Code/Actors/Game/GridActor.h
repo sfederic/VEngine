@@ -5,7 +5,6 @@
 struct MeshComponent;
 struct HealthWidget;
 struct MemoryComponent;
-struct QuestComponent;
 struct GridNode;
 struct DialogueComponent;
 
@@ -18,7 +17,6 @@ struct GridActor : Actor
 	HealthWidget* healthWidget = nullptr;
 	MemoryComponent* memoryComponent = nullptr;
 	DialogueComponent* dialogueComponent = nullptr;
-	QuestComponent* questComponent = nullptr;
 
 	//Actor's positions on the level grid
 	int xIndex = -1;
