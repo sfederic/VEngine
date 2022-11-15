@@ -126,7 +126,7 @@ void Player::Tick(float deltaTime)
 	PrimaryAction();
 	SecondaryAction();
 
-	if (Input::GetKeyUp(Keys::P))
+	if (Input::GetKeyUp(Keys::O))
 	{
 		PushbackObject();
 	}
@@ -935,8 +935,8 @@ bool Player::GunShotCheck(Actor* hitActor)
 void Player::PushbackObject()
 {
 	Ray ray(this);
-	XMVECTOR end = GetPositionV() + GetForwardVectorV();
-	if (Raycast(ray, GetPositionV(), end))
+	XMVECTOR end = mesh->GetWorldPositionV() + mesh->GetForwardVectorV();
+	if (Raycast(ray, mesh->GetWorldPositionV(), end))
 	{
 		Actor* hitActor = ray.hitActor;
 		auto gridActor = dynamic_cast<GridActor*>(hitActor);
@@ -948,10 +948,11 @@ void Player::PushbackObject()
 
 		Ray secondRay(this);
 		secondRay.actorsToIgnore.push_back(gridActor);
-		if (Raycast(secondRay, GetPositionV(), GetForwardVectorV(), 50.f))
+		if (Raycast(secondRay, GetPositionV(), mesh->GetForwardVectorV(), 50.f))
 		{
 			gridActor->nextPushbackPosition = XMLoadFloat3(&secondRay.hitPos);
 			gridActor->isInPushback = true;
+			gridActor->hitActorOnPushback = dynamic_cast<GridActor*>(secondRay.hitActor);
 
 			Ray nodeRecalcRay(gridActor);
 			gridActor->GetCurrentNode()->RecalcNodeHeight(nodeRecalcRay);

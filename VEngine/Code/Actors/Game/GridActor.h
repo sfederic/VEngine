@@ -40,6 +40,7 @@ struct GridActor : Actor
 
 	bool isInPushback = false;
 	XMVECTOR nextPushbackPosition = DirectX::XMVectorZero();
+	GridActor* hitActorOnPushback = nullptr;
 
 	std::wstring interactText;
 	std::wstring interactKnownText;

@@ -49,6 +49,11 @@ void GridActor::Tick(float deltaTime)
 		}
 		else
 		{
+			if (hitActorOnPushback)
+			{
+				hitActorOnPushback->InflictDamage(1);
+			}
+
 			isInPushback = false;
 			GameUtils::SpawnSpriteSheet("Sprites/explosion.png", GetPosition(), false, 4, 4);
 			GameUtils::PlayAudioOneShot("Audio/armor_light.wav");
