@@ -11,28 +11,247 @@ Grid
 Name
 Grid0
 Size X
-5
+7
 Size Y
-5
+7
 UID
 3121765306
 startBattleOnLoad
 0
 next
-MeshActor
-1
+GridActor
+4
  Enabled
 1
  Position
-2 -0.5 2
+1 0 2
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
-5 1 5
+1 1 1
+Destruct
+1
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+Name
+GridActor0
+Obstacle
+1
+UID
+722209656
+disableGridInteract
+0
+interactKnownText
+
+next
+ Enabled
+1
+ Position
+4 0 5
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Destruct
+1
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+Name
+GridActor1
+Obstacle
+1
+UID
+1823196280
+disableGridInteract
+0
+interactKnownText
+
+next
+ Enabled
+1
+ Position
+1 0 5
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Destruct
+1
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+Name
+GridActor2
+Obstacle
+1
+UID
+1813542265
+disableGridInteract
+0
+interactKnownText
+
+next
+ Enabled
+1
+ Position
+4 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Destruct
+1
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+Name
+GridActor3
+Obstacle
+1
+UID
+1096967812
+disableGridInteract
+0
+interactKnownText
+
+next
+MeshActor
+5
+ Enabled
+1
+ Position
+3 -0.5 3
+ Rotation
+-0 0 -0 1
+ Scale
+7 1 7
 Name
 MeshActor0
 UID
 279537626
+next
+ Enabled
+1
+ Position
+-0.5 1 3
+ Rotation
+0 0 0.707229 -0.706985
+ Scale
+3 1 7
+Name
+MeshActor1
+UID
+649909470
+next
+ Enabled
+1
+ Position
+6.5 1 3
+ Rotation
+0.707229 -0.706985 0.00017262 -0.000172547
+ Scale
+3.00002 1 7
+Name
+MeshActor2
+UID
+1948300198
+next
+ Enabled
+1
+ Position
+3 1 6.5
+ Rotation
+0.499964 -0.499792 0.500208 -0.500036
+ Scale
+3.00002 1 7.00002
+Name
+MeshActor3
+UID
+1281015868
+next
+ Enabled
+1
+ Position
+3 1 -0.5
+ Rotation
+0.500122 -0.499949 -0.500051 0.499878
+ Scale
+3.00002 1 7.00003
+Name
+MeshActor4
+UID
+167629347
+next
+Unit
+1
+ Enabled
+1
+ Position
+4 0 3
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Attack Points
+1
+Attack Range
+1
+Battle State
+fight
+Destruct
+1
+Health
+10
+Inspect
+1
+Interact
+1
+Interact Text
+
+Move Points
+4
+Move Speed
+3
+Name
+Unit0
+Obstacle
+0
+Skill
+
+UID
+3099553879
+actorToFocusOn
+
+deathText
+
+disableGridInteract
+0
+interactKnownText
+
+numOfAttacks
+1
 next
 Player
 1
@@ -49,36 +268,20 @@ Player0
 UID
 30296875
 next
-LightSwitch
+PointLightActor
 1
  Enabled
 1
  Position
-3 0 2
+2 3 2
  Rotation
 -0 0 -0 1
  Scale
 1 1 1
-Destruct
-1
-Health
-1
-Inspect
-1
-Interact
-1
-Interact Text
-
 Name
-LightSwitch0
-Obstacle
-1
+PointLightActor0
 UID
-1004479975
-disableGridInteract
-0
-interactKnownText
-
+3357290393
 next
 EmptyComponent
 1
@@ -94,8 +297,8 @@ Root
 1 1 1
 next
 MemoryComponent
-1
-1004479975
+6
+722209656
 Memory
  Enabled
 1
@@ -104,18 +307,504 @@ Add On Interact
 Memory Name
 
 next
+1823196280
+Memory
+ Enabled
+1
+Add On Interact
+0
+Memory Name
+
+next
+1813542265
+Memory
+ Enabled
+1
+Add On Interact
+0
+Memory Name
+
+next
+1096967812
+Memory
+ Enabled
+1
+Add On Interact
+0
+Memory Name
+
+next
+3099553879
+Memory
+ Enabled
+1
+Add On Interact
+0
+Memory Name
+
+next
+3099553879
+MemoryOnDeath
+ Enabled
+1
+Add On Interact
+0
+Memory Name
+
+next
 MeshComponent
-3
+11
+722209656
+Mesh
+ Enabled
+1
+ Pos
+1 0 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+crate.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+
+Static
+1
+Trans. Occlude
+0
+next
+1823196280
+Mesh
+ Enabled
+1
+ Pos
+4 0 5
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+crate.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+
+Static
+1
+Trans. Occlude
+0
+next
+1813542265
+Mesh
+ Enabled
+1
+ Pos
+1 0 5
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+crate.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+
+Static
+1
+Trans. Occlude
+0
+next
+1096967812
+Mesh
+ Enabled
+1
+ Pos
+4 0 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+crate.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+
+Static
+1
+Trans. Occlude
+0
+next
 279537626
 Mesh
  Enabled
 1
  Pos
-2 -0.5 2
+3 -0.5 3
+ Rot
+-0 0 -0 1
+ Scale
+7 1 7
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.fbx
+Static
+1
+Trans. Occlude
+0
+next
+649909470
+Mesh
+ Enabled
+1
+ Pos
+-0.5 1 3
+ Rot
+0 0 0.707229 -0.706985
+ Scale
+3 1 7
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.fbx
+Static
+1
+Trans. Occlude
+0
+next
+1948300198
+Mesh
+ Enabled
+1
+ Pos
+6.5 1 3
+ Rot
+0.707229 -0.706985 0.00017262 -0.000172547
+ Scale
+3.00002 1 7
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.fbx
+Static
+1
+Trans. Occlude
+0
+next
+1281015868
+Mesh
+ Enabled
+1
+ Pos
+3 1 6.5
+ Rot
+0.499964 -0.499792 0.500208 -0.500036
+ Scale
+3.00002 1 7.00002
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.fbx
+Static
+1
+Trans. Occlude
+0
+next
+167629347
+Mesh
+ Enabled
+1
+ Pos
+3 1 -0.5
+ Rot
+0.500122 -0.499949 -0.500051 0.499878
+ Scale
+3.00002 1 7.00003
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.fbx
+Static
+1
+Trans. Occlude
+0
+next
+3099553879
+Mesh
+ Enabled
+1
+ Pos
+4 0 3
  Rot
 0 0 0 1
  Scale
-5 1 5
+1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -149,7 +838,7 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-node.fbx
+
 Static
 1
 Trans. Occlude
@@ -199,55 +888,6 @@ M_UvScale
 1 1
 Mesh
 char.fbx
-Static
-1
-Trans. Occlude
-0
-next
-1004479975
-Mesh
- Enabled
-1
- Pos
-3 0 2
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-
 Static
 1
 Trans. Occlude
@@ -324,15 +964,43 @@ Trans. Occlude
 0
 next
 DialogueComponent
-2
-30296875
+6
+722209656
 Dialogue
  Enabled
 1
 File
 
 next
-1004479975
+1823196280
+Dialogue
+ Enabled
+1
+File
+
+next
+1813542265
+Dialogue
+ Enabled
+1
+File
+
+next
+1096967812
+Dialogue
+ Enabled
+1
+File
+
+next
+3099553879
+Dialogue
+ Enabled
+1
+File
+
+next
+30296875
 Dialogue
  Enabled
 1
@@ -364,20 +1032,20 @@ Volume
 next
 PointLightComponent
 1
-1004479975
+3357290393
 PointLight
  Enabled
 1
  Pos
-0 0 0
+2 3 2
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
 Colour
 1 1 1 1
 Intensity
-25
+50
 LightEnabled
 1
 next
