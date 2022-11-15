@@ -43,6 +43,9 @@ void GridActor::Tick(float deltaTime)
 		if (!VMath::VecEqual(position, nextPushbackPosition, 0.25f))
 		{
 			SetPosition(XMVectorLerp(GetPositionV(), nextPushbackPosition, deltaTime * 6.5));
+
+			XMVECTOR rot = GetRotationV();
+			SetRotation(XMQuaternionMultiply(rot, XMQuaternionRotationAxis(-GetForwardVectorV(), 5.f * deltaTime)));
 		}
 		else
 		{
