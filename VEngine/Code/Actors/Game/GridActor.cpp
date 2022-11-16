@@ -123,7 +123,7 @@ void GridActor::SetAnimation(std::string animationName)
 	}
 }
 
-void GridActor::Pushback(XMVECTOR direction, float movementSpeed)
+bool GridActor::Pushback(XMVECTOR direction)
 {
 	Ray ray(this);
 	if (Raycast(ray, GetPositionV(), direction, 50.f))
@@ -134,5 +134,9 @@ void GridActor::Pushback(XMVECTOR direction, float movementSpeed)
 
 		Ray nodeRecalcRay(this);
 		GetCurrentNode()->RecalcNodeHeight(nodeRecalcRay);
+
+		return true;
 	}
+
+	return false;
 }

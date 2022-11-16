@@ -68,5 +68,5 @@ struct GridActor : Actor
 
 	//Called when the actor is 'pushedback'ed by player or other actor, exploding the actor
 	//back into contact with something.
-	void Pushback(XMVECTOR direction, float movementSpeed);
+	bool Pushback(XMVECTOR direction);
 };

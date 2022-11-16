@@ -959,18 +959,7 @@ void Player::PushbackObject()
 			return;
 		}
 
-		Ray secondRay(this);
-		secondRay.actorsToIgnore.push_back(gridActor);
-		if (Raycast(secondRay, GetPositionV(), mesh->GetForwardVectorV(), 50.f))
-		{
-			gridActor->nextPushbackPosition = XMLoadFloat3(&secondRay.hitPos);
-			gridActor->isInPushback = true;
-			gridActor->hitActorOnPushback = dynamic_cast<GridActor*>(secondRay.hitActor);
-
-			Ray nodeRecalcRay(gridActor);
-			gridActor->GetCurrentNode()->RecalcNodeHeight(nodeRecalcRay);
-		}
-		else
+		if (!gridActor->Pushback(mesh->GetForwardVectorV()))
 		{
 			Log("Actor [%s] pushedback but did not hit anything.", gridActor->GetName().c_str());
 		}
