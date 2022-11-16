@@ -51,6 +51,7 @@ void GridActor::Tick(float deltaTime)
 		{
 			if (hitActorOnPushback)
 			{
+				hitActorOnPushback->Attacked();
 				hitActorOnPushback->InflictDamage(1);
 			}
 
