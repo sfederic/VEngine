@@ -863,7 +863,10 @@ bool Player::DestructibleCheck(Actor* hitActor)
 			GameUtils::CameraShake(1.f);
 			GameUtils::SpawnSpriteSheet("Sprites/blood_hit.png", unit->GetPosition(), false, 4, 4);
 			GameUtils::PlayAudioOneShot("sword_hit.wav");
+
+			unit->Attacked();
 			unit->InflictDamage(attackPoints);
+
 			return true;
 		}
 
@@ -873,7 +876,10 @@ bool Player::DestructibleCheck(Actor* hitActor)
 			GameUtils::CameraShake(1.f);
 			GameUtils::SpawnSpriteSheet("Sprites/blood_hit.png", gridActor->GetPosition(), false, 4, 4);
 			GameUtils::PlayAudioOneShot("sword_hit.wav");
+
+			gridActor->Attacked();
 			gridActor->InflictDamage(attackPoints);
+
 			return true;
 		}
 	}
@@ -909,10 +915,13 @@ bool Player::GunShotCheck(Actor* hitActor)
 		{
 			battleSystem.StartBattle();
 			ExpendActionPoints(1);
+
+			unit->Attacked();
 			unit->InflictDamage(attackPoints);
 
 			numBullets--;
 			bulletWidget->numBulletsPlayerHas = numBullets;
+
 			GameUtils::PlayAudioOneShot("gunshot.wav");
 
 			return true;
@@ -921,10 +930,14 @@ bool Player::GunShotCheck(Actor* hitActor)
 		auto gridActor = dynamic_cast<GridActor*>(hitActor);
 		if (gridActor)
 		{
+			gridActor->Attacked();
 			gridActor->InflictDamage(attackPoints);
+
 			numBullets--;
 			bulletWidget->numBulletsPlayerHas = numBullets;
+
 			GameUtils::PlayAudioOneShot("gunshot.wav");
+
 			return true;
 		}
 	}
