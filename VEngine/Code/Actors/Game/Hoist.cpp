@@ -4,6 +4,7 @@
 
 Hoist::Hoist()
 {
+	isDestructible = false;
 }
 
 void Hoist::Attacked()
@@ -20,4 +21,12 @@ void Hoist::Attacked()
 	{
 		gridActor->Pushback(-VMath::GlobalUpVector());
 	}
+}
+
+Properties Hoist::GetProps()
+{
+	auto props = __super::GetProps();
+	props.title = "Hoist";
+	props.Add("Hoisted Actor", &hoistedActorName);
+	return props;
 }

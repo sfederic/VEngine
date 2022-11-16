@@ -11,6 +11,7 @@ public:
 
 	Hoist();
 	virtual void Attacked() override;
+	virtual Properties GetProps() override;
 
 private:
 	std::string hoistedActorName;
