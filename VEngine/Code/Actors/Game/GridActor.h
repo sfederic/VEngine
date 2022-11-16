@@ -46,8 +46,12 @@ struct GridActor : Actor
 	std::wstring interactKnownText;
 
 	GridActor();
+
 	virtual void Interact() {}
-	virtual void GunInteract() {}
+
+	//Called when this GridActor is attacked.
+	virtual void Attacked() {}
+
 	virtual void EndInteract() {}
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;

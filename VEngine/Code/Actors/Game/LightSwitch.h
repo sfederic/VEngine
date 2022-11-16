@@ -14,6 +14,7 @@ public:
 	virtual Properties GetProps() override;
 
 	virtual void Interact() override;
+	virtual void Attacked() override;
 
 private:
 	PointLightComponent* pointLight = nullptr;

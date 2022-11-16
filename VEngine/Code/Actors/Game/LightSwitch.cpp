@@ -4,6 +4,8 @@
 
 LightSwitch::LightSwitch()
 {
+    isDestructible = false;
+
     pointLight = CreateComponent(PointLightComponent(), "PointLight");
     rootComponent->AddChild(pointLight);
 }
@@ -16,4 +18,9 @@ Properties LightSwitch::GetProps()
 void LightSwitch::Interact()
 {
     pointLight->active = !pointLight->active;
+}
+
+void LightSwitch::Attacked()
+{
+    Interact();
 }
