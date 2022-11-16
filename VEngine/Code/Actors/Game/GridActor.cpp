@@ -122,3 +122,17 @@ void GridActor::SetAnimation(std::string animationName)
 		skeleton->currentAnimation = animationName;
 	}
 }
+
+void GridActor::Pushback(XMVECTOR direction, float movementSpeed)
+{
+	Ray ray(this);
+	if (Raycast(ray, GetPositionV(), direction, 50.f))
+	{
+		nextPushbackPosition = XMLoadFloat3(&ray.hitPos);
+		isInPushback = true;
+		hitActorOnPushback = dynamic_cast<GridActor*>(ray.hitActor);
+
+		Ray nodeRecalcRay(this);
+		GetCurrentNode()->RecalcNodeHeight(nodeRecalcRay);
+	}
+}

@@ -65,4 +65,8 @@ struct GridActor : Actor
 	GridNode* GetCurrentNode();
 
 	void SetAnimation(std::string animationName);
+
+	//Called when the actor is 'pushedback'ed by player or other actor, exploding the actor
+	//back into contact with something.
+	void Pushback(XMVECTOR direction, float movementSpeed);
 };
