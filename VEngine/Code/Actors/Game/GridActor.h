@@ -47,6 +47,7 @@ struct GridActor : Actor
 
 	GridActor();
 	virtual void Interact() {}
+	virtual void GunInteract() {}
 	virtual void EndInteract() {}
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
