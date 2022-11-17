@@ -1,7 +1,7 @@
 Grid
 1
  Enabled
-1
+0
  Position
 0 0 0
  Rotation
@@ -18,37 +18,6 @@ UID
 3121765306
 startBattleOnLoad
 0
-next
-GridActor
-1
- Enabled
-1
- Position
-3 4 3
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Destruct
-1
-Health
-1
-Inspect
-1
-Interact
-1
-Interact Text
-
-Name
-GridActor0
-Obstacle
-1
-UID
-2195187659
-disableGridInteract
-0
-interactKnownText
-
 next
 MeshActor
 5
@@ -117,6 +86,55 @@ MeshActor4
 UID
 167629347
 next
+Unit
+1
+ Enabled
+1
+ Position
+3 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Attack Points
+1
+Attack Range
+1
+Battle State
+fight
+Destruct
+1
+Health
+3
+Inspect
+1
+Interact
+1
+Interact Text
+
+Move Points
+1
+Move Speed
+3
+Name
+Unit0
+Obstacle
+0
+Skill
+
+UID
+1299045192
+actorToFocusOn
+
+deathText
+
+disableGridInteract
+0
+interactKnownText
+
+numOfAttacks
+1
+next
 Player
 1
  Enabled
@@ -132,40 +150,22 @@ Player0
 UID
 30296875
 next
-Hoist
+PointLightActor
 1
  Enabled
 1
  Position
-0 0 3
+3 2 3
  Rotation
 -0 0 -0 1
  Scale
 1 1 1
-Destruct
-0
-Health
-1
-Hoisted Actor
-GridActor0
-Inspect
-1
-Interact
-1
-Interact Text
-
 Name
-Hoist0
-Obstacle
-1
+PointLightActor0
 UID
-2993109513
-disableGridInteract
-0
-interactKnownText
-
+670105959
 next
-LightSwitch
+ExplodingObject
 1
  Enabled
 1
@@ -176,7 +176,7 @@ LightSwitch
  Scale
 1 1 1
 Destruct
-0
+1
 Health
 1
 Inspect
@@ -186,11 +186,11 @@ Interact
 Interact Text
 
 Name
-LightSwitch0
+ExplodingObject0
 Obstacle
 1
 UID
-4173232694
+2593599515
 disableGridInteract
 0
 interactKnownText
@@ -211,7 +211,7 @@ Root
 next
 MemoryComponent
 3
-2195187659
+1299045192
 Memory
  Enabled
 1
@@ -220,8 +220,8 @@ Add On Interact
 Memory Name
 
 next
-2993109513
-Memory
+1299045192
+MemoryOnDeath
  Enabled
 1
 Add On Interact
@@ -229,7 +229,7 @@ Add On Interact
 Memory Name
 
 next
-4173232694
+2593599515
 Memory
  Enabled
 1
@@ -239,56 +239,7 @@ Memory Name
 
 next
 MeshComponent
-9
-2195187659
-Mesh
- Enabled
-1
- Pos
-3 4 3
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-
-Static
-1
-Trans. Occlude
-0
-next
+8
 279537626
 Mesh
  Enabled
@@ -534,6 +485,55 @@ Static
 Trans. Occlude
 0
 next
+1299045192
+Mesh
+ Enabled
+1
+ Pos
+3 0 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+
+Static
+1
+Trans. Occlude
+0
+next
 30296875
 Mesh
  Enabled
@@ -583,56 +583,7 @@ Static
 Trans. Occlude
 0
 next
-2993109513
-Mesh
- Enabled
-1
- Pos
-0 0 3
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-
-Static
-1
-Trans. Occlude
-0
-next
-4173232694
+2593599515
 Mesh
  Enabled
 1
@@ -705,7 +656,7 @@ InstanceMeshComponent
 3121765306
 NodeMesh
  Enabled
-1
+0
  Pos
 0 0 0
  Rot
@@ -752,8 +703,8 @@ Trans. Occlude
 0
 next
 DialogueComponent
-4
-2195187659
+3
+1299045192
 Dialogue
  Enabled
 1
@@ -767,14 +718,7 @@ Dialogue
 File
 
 next
-2993109513
-Dialogue
- Enabled
-1
-File
-
-next
-4173232694
+2593599515
 Dialogue
  Enabled
 1
@@ -802,24 +746,24 @@ Pitch
 Play On Start
 1
 Volume
-1
+0
 next
 PointLightComponent
 1
-4173232694
+670105959
 PointLight
  Enabled
 1
  Pos
-0 0 0
+3 2 3
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
 Colour
 1 1 1 1
 Intensity
-25
+40
 LightEnabled
 1
 next
