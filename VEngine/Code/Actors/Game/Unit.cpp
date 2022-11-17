@@ -179,6 +179,11 @@ Properties Unit::GetProps()
 
 void Unit::InflictDamage(int damage)
 {
+	if (!battleSystem.isBattleActive)
+	{
+		battleSystem.StartBattle();
+	}
+
 	if (health <= damage && isDestructible)
 	{
 		GameInstance::AddGuilt();
