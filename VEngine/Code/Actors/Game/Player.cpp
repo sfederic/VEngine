@@ -743,6 +743,8 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 	Ray ray(this);
 	if (OrientedBoxCast(ray, camera->GetWorldPositionV(), GetPositionV(), XMFLOAT2(0.5f, 0.5f), true))
 	{
+		std::vector<Actor*> ableActors;
+
 		for (auto actor : previousHitTransparentActors)
 		{
 			SetActorAlpha(actor, solidValue);
@@ -750,10 +752,14 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 
 		for (auto actor : ray.hitActors)
 		{
-			SetActorAlpha(actor, transparentValue);
+			if (actor->CanBeTransparentlyOccluded())
+			{
+				ableActors.push_back(actor);
+				SetActorAlpha(actor, transparentValue);
+			}
 		}
 
-		previousHitTransparentActors = ray.hitActors;
+		previousHitTransparentActors = ableActors;
 	}
 	else
 	{

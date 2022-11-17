@@ -191,4 +191,9 @@ public:
 
 	IActorSystem* GetActorSystem() { return actorSystem; }
 	void SetActorSystem(IActorSystem* system) { actorSystem = system; }
+
+	//Helper for whether the Actor's mesh can be occluded by player and camera.
+	//This function is needed because player to camera transparency can mess with previously hit actors
+	//for example if they're Destroy()ed in battle or by whatever else.
+	bool CanBeTransparentlyOccluded();
 };

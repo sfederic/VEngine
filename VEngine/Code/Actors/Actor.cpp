@@ -2,6 +2,7 @@
 #include "Actor.h"
 #include "Actors/IActorSystem.h"
 #include "Components/SpatialComponent.h"
+#include "Components/MeshComponent.h"
 #include "Components/EmptyComponent.h"
 #include "World.h"
 #include "Camera.h"
@@ -350,4 +351,15 @@ void Actor::ResetOwnerUIDToComponents()
 	{
 		componentPair.second->ownerUID = uid;
 	}
+}
+
+bool Actor::CanBeTransparentlyOccluded()
+{
+	auto mesh = GetFirstComponentOfTypeAllowNull<MeshComponent>();
+	if (mesh && mesh->transparentOcclude)
+	{
+		return true;
+	}
+
+	return false;
 }
