@@ -927,7 +927,6 @@ bool Player::GunShotCheck(Actor* hitActor)
 		auto gridActor = dynamic_cast<GridActor*>(hitActor);
 		if (gridActor)
 		{
-			gridActor->Attacked();
 			gridActor->InflictDamage(attackPoints);
 
 			numBullets--;
