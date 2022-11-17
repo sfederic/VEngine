@@ -4,6 +4,7 @@
 #include "Gameplay/GridNode.h"
 
 struct InstanceMeshComponent;
+class Unit;
 
 //Actor that holds all the traversable nodes in the level.
 //Grid needs to always be at (0, 0, 0) in world because of how rows & nodes are created at index.
@@ -58,6 +59,9 @@ struct Grid : Actor
 
 	//Get neighbouring nodes without consideration for whether they're closed or their world position (only active nodes count).
 	void GetNeighbouringNodesForceful(GridNode* centerNode, std::vector<GridNode*>& outNodes);
+
+	//Returns Unit currently at GridNode x and y index (only returns first found Unit)
+	Unit* GetUnitAtNode(GridNode* node);
 
 	void ResetAllNodes();
 	void LerpInNodes(float deltaTime);

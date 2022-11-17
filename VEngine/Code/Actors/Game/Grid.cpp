@@ -6,6 +6,7 @@
 #include "Physics/Raycast.h"
 #include "VMath.h"
 #include "GridActor.h"
+#include "Unit.h"
 #include "Gameplay/BattleSystem.h"
 #include "Actors/Game/Player.h"
 
@@ -320,6 +321,19 @@ void Grid::GetNeighbouringNodesForceful(GridNode* centerNode, std::vector<GridNo
             outNodes.push_back(&node);
         }
     }
+}
+
+Unit* Grid::GetUnitAtNode(GridNode* node)
+{
+    for (auto unit : Unit::system.GetActors())
+    {
+        if (node->Equals(unit->xIndex, unit->yIndex))
+        {
+            return unit;
+        }
+    }
+
+    return nullptr;
 }
 
 void Grid::ResetAllNodes()
