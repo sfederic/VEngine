@@ -518,9 +518,6 @@
     <ClCompile Include="Code\UI\Game\GuardWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\UI\Game\GuiltWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\UI\Game\HealthWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1091,9 +1088,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\GuardWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\Game\GuiltWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\HealthWidget.h">

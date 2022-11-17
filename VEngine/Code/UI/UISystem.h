@@ -10,7 +10,6 @@ struct MemoryGainedWidget;
 struct MemoryRecalledWidget;
 struct UnitLineupWidget;
 struct ScreenFadeWidget;
-struct GuiltWidget;
 
 namespace Colours
 {
@@ -24,7 +23,6 @@ struct UISystem : public System
 	MemoryGainedWidget* memoryGainedWidget = nullptr;
 	MemoryRecalledWidget* memoryRecalledWidget = nullptr;
 	ScreenFadeWidget* screenFadeWidget = nullptr;
-	GuiltWidget* guiltWidget = nullptr;
 	UnitLineupWidget* unitLineupWidget = nullptr;
 
 	//Every widget added in-game

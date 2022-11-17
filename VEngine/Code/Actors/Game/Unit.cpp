@@ -186,8 +186,6 @@ void Unit::InflictDamage(int damage)
 
 	if (health <= damage && isDestructible)
 	{
-		GameInstance::AddGuilt();
-
 		memoryOnDeath->CreateMemory(this->GetName());
 
 		healthWidget->Destroy();

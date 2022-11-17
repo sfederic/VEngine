@@ -25,7 +25,5 @@ struct GameInstance
 	inline static std::map<std::string, Memory*> playerMemories;
 	static void DeletePlayerMemories();
 
-	static void AddGuilt();
-
 	static Properties GetInstanceSaveData();
 };

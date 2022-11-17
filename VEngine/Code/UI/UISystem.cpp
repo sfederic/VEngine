@@ -9,7 +9,6 @@
 #include "UI/Game/MemoryGainedWidget.h"
 #include "UI/Game/MemoryRecalledWidget.h"
 #include "UI/ScreenFadeWidget.h"
-#include "UI/Game/GuiltWidget.h"
 #include "UI/Game/UnitLineupWidget.h"
 
 UISystem uiSystem;
@@ -98,7 +97,6 @@ void UISystem::CreateGlobalWidgets()
 	memoryGainedWidget = CreateWidget<MemoryGainedWidget>();
 	memoryRecalledWidget = CreateWidget<MemoryRecalledWidget>();
 	screenFadeWidget = CreateWidget<ScreenFadeWidget>();
-	guiltWidget = CreateWidget<GuiltWidget>();
 	unitLineupWidget = CreateWidget<UnitLineupWidget>();
 }
 

@@ -190,7 +190,6 @@
     <ClCompile Include="Code\UID.cpp" />
     <ClCompile Include="Code\UI\Game\BulletWidget.cpp" />
     <ClCompile Include="Code\UI\Game\GuardWidget.cpp" />
-    <ClCompile Include="Code\UI\Game\GuiltWidget.cpp" />
     <ClCompile Include="Code\UI\Game\HealthWidget.cpp" />
     <ClCompile Include="Code\UI\Game\InteractWidget.cpp" />
     <ClCompile Include="Code\UI\Game\MemoryGainedWidget.cpp" />
@@ -445,7 +444,6 @@
     <ClInclude Include="Code\UID.h" />
     <ClInclude Include="Code\UI\Game\BulletWidget.h" />
     <ClInclude Include="Code\UI\Game\GuardWidget.h" />
-    <ClInclude Include="Code\UI\Game\GuiltWidget.h" />
     <ClInclude Include="Code\UI\Game\HealthWidget.h" />
     <ClInclude Include="Code\UI\Game\InteractWidget.h" />
     <ClInclude Include="Code\UI\Game\MemoryGainedWidget.h" />
