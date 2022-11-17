@@ -280,6 +280,7 @@
     <ClCompile Include="Code\Actors\Game\RotatorSwitch.cpp" />
     <ClCompile Include="Code\Actors\Game\LightSwitch.cpp" />
     <ClCompile Include="Code\Actors\Game\Hoist.cpp" />
+    <ClCompile Include="Code\Actors\Game\ExplodingObject.cpp" />
     <ClInclude Include="Code\Actors\Game\BulletCache.h" />
     <ClInclude Include="Code\Actors\Game\Units\LineAttackerUnit.h" />
     <ClInclude Include="Code\Gameplay\UnitSkills\AreaAttackSkill.h" />
@@ -561,6 +562,7 @@
     <ClInclude Include="Code\Actors\Game\RotatorSwitch.h" />
     <ClInclude Include="Code\Actors\Game\LightSwitch.h" />
     <ClInclude Include="Code\Actors\Game\Hoist.h" />
+    <ClInclude Include="Code\Actors\Game\ExplodingObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
