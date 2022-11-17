@@ -323,6 +323,40 @@ void Grid::GetNeighbouringNodesForceful(GridNode* centerNode, std::vector<GridNo
     }
 }
 
+void Grid::GetNeighbouringActiveAndInactiveNodesForceful(GridNode* centerNode, std::vector<GridNode*>& outNodes)
+{
+    int currentX = centerNode->xIndex;
+    int currentY = centerNode->yIndex;
+
+    //+X
+    if (currentX < (sizeX - 1))
+    {
+        GridNode& node = rows[currentX + 1].columns[currentY];
+        outNodes.push_back(&node);
+    }
+
+    //-X
+    if (currentX > 0)
+    {
+        GridNode& node = rows[currentX - 1].columns[currentY];
+        outNodes.push_back(&node);
+    }
+
+    //+Y
+    if (currentY < (sizeY - 1))
+    {
+        GridNode& node = rows[currentX].columns[currentY + 1];
+        outNodes.push_back(&node);
+    }
+
+    //-Y
+    if (currentY > 0)
+    {
+        GridNode& node = rows[currentX].columns[currentY - 1];
+        outNodes.push_back(&node);
+    }
+}
+
 Unit* Grid::GetUnitAtNode(GridNode* node)
 {
     for (auto unit : Unit::system.GetActors())

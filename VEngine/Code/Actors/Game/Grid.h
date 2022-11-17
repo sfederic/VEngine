@@ -60,6 +60,9 @@ struct Grid : Actor
 	//Get neighbouring nodes without consideration for whether they're closed or their world position (only active nodes count).
 	void GetNeighbouringNodesForceful(GridNode* centerNode, std::vector<GridNode*>& outNodes);
 
+	//Same as GetNeighbouringNodesForceful() except gets all inactive nodes too.
+	void GetNeighbouringActiveAndInactiveNodesForceful(GridNode* centerNode, std::vector<GridNode*>& outNodes);
+
 	//Returns Unit currently at GridNode x and y index (only returns first found Unit)
 	Unit* GetUnitAtNode(GridNode* node);
 
