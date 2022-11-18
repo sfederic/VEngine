@@ -24,6 +24,7 @@
 #include "UI/Game/PlayerActionBarWidget.h"
 #include "UI/Game/MemoryGainedWidget.h"
 #include "UI/Game/MemoryRecalledWidget.h"
+#include "UI/Game/MemorySelectWidget.h"
 #include "UI/Game/BulletWidget.h"
 #include "UI/Game/GuardWidget.h"
 #include "UI/Game/PlayerHealthWidget.h"
@@ -129,6 +130,11 @@ void Player::Tick(float deltaTime)
 	if (Input::GetKeyUp(Keys::O))
 	{
 		PushbackObject();
+	}
+
+	if (Input::GetKeyUp(Keys::I))
+	{
+		CreateWidget<MemorySelectWidget>()->AddToViewport();
 	}
 
 	ToggleBattleGrid();
