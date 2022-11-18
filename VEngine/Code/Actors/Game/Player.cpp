@@ -460,7 +460,8 @@ void Player::PrimaryAction()
 
 	if (Input::GetKeyUp(Keys::Down))
 	{
-		if (uiSystem.memoryRecalledWidget->IsInViewport())
+		if (uiSystem.memoryRecalledWidget->IsInViewport() 
+			|| uiSystem.memoryGainedWidget->IsInViewport())
 		{
 			uiSystem.memoryGainedWidget->RemoveFromViewport();
 			uiSystem.memoryRecalledWidget->RemoveFromViewport();
