@@ -4,7 +4,7 @@
 
 void MemoryGainedWidget::Draw(float deltaTime)
 {
-	Layout layout = PercentAlignLayout(0.f, 0.f, 1.f, 0.1f);
+	Layout layout = PercentAlignLayout(0.f, 0.f, 1.f, 0.2f);
 
 	FillRect(layout);
 	Text(L"Memory Gained", layout);
