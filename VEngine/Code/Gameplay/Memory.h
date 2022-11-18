@@ -10,15 +10,11 @@ struct Memory
 {
 	inline static std::map<std::string, Memory*>* memories = nullptr;
 
-	static Memory* FindMemoryAllowNull(std::string memoryName) 
+	static Memory* FindMemory(std::string memoryName) 
 	{
 		auto memoryIt = memories->find(memoryName);
-		if (memoryIt != memories->end())
-		{
-			return memoryIt->second;
-		}
-
-		return nullptr;
+		assert(memoryIt != memories->end());
+		return memoryIt->second;
 	}
 
 	Memory(std::string name_) : name(name_)

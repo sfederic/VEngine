@@ -42,14 +42,7 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 		return false;
 	}
 
-	auto memory = Memory::FindMemoryAllowNull(VString::wstos(memoryName));
-	if (memory != nullptr)
-	{
-		Log("Memory [%s] name already exists.", memoryName.c_str());
-		return false;
-	}
-
-	memory = new Memory(VString::wstos(memoryName));
+	auto memory = Memory::FindMemory(VString::wstos(memoryName));
 
 	memory->actorAquiredFrom = actorAquiredFromName;
 	memory->worldAquiredFrom = World::worldFilename;
