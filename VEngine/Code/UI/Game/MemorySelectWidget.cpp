@@ -14,15 +14,12 @@ void MemorySelectWidget::Draw(float deltaTime)
 
 	for (const auto& [name, memory] : GameInstance::playerMemories)
 	{
-		if (layoutsIndex == selectedMemoryIndex)
-		{
-			FillRect(layouts[layoutsIndex]);
-		}
-
-		if (Button(name, layouts[layoutsIndex]))
+		if (ImageButton(memory->imageFile, layouts[layoutsIndex]))
 		{
 			selectedMemoryIndex = layoutsIndex;
 		}
+
+		Text(name, layouts[layoutsIndex]);
 
 		layoutsIndex++;
 	}
