@@ -120,6 +120,7 @@
     <ClCompile Include="Code\Actors\Game\BulletCache.cpp" />
     <ClCompile Include="Code\Actors\Game\Units\LineAttackerUnit.cpp" />
     <ClCompile Include="Code\Gameplay\Memories\AttackUpMemory.cpp" />
+    <ClCompile Include="Code\Gameplay\Memories\SymbolMemories.cpp" />
     <ClCompile Include="Code\Gameplay\Memory.cpp" />
     <ClCompile Include="Code\Gameplay\UnitSkills\AreaAttackSkill.cpp" />
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp" />
