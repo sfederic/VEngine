@@ -118,6 +118,11 @@ bool Widget::Button(const std::wstring text, Layout layout, float lineWidth,
 	return false;
 }
 
+bool Widget::Button(const std::string text, Layout layout, float lineWidth, TextAlign textAlign, D2D1_COLOR_F textColor, float textOpacity)
+{
+	return Button(VString::stows(text), layout, lineWidth, textAlign, textColor, textOpacity);
+}
+
 void Widget::Image(const std::string filename, Layout layout)
 {
 	Sprite sprite = {};
