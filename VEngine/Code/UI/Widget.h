@@ -79,15 +79,18 @@ public:
 protected:
 	void GetScreenSpaceCoords(int& sx, int& sy);
 
-	void Text(const std::wstring& text, Layout layout, TextAlign align = TextAlign::Center,
+	void Text(const std::wstring text, Layout layout, TextAlign align = TextAlign::Center,
 		D2D1_COLOR_F color = { 0.f, 0.f, 0.f, 1.f }, float opacity = 1.0f);
 
-	bool Button(const std::wstring& text, Layout layout, float lineWidth = 1.0f,
+	void Text(const std::string text, Layout layout, TextAlign align = TextAlign::Center,
+		D2D1_COLOR_F color = { 0.f, 0.f, 0.f, 1.f }, float opacity = 1.0f);
+
+	bool Button(const std::wstring text, Layout layout, float lineWidth = 1.0f,
 		TextAlign textAlign = TextAlign::Center, D2D1_COLOR_F textColor = {0.f, 0.f, 0.f, 1.f}, float textOpacity = 1.0f);
 
-	void Image(const std::string& filename, Layout layout);
-	void Image(const std::string& filename, int x, int y, int w, int h);
-	bool ImageButton(const std::string& filename, Layout layout);
+	void Image(const std::string filename, Layout layout);
+	void Image(const std::string filename, int x, int y, int w, int h);
+	bool ImageButton(const std::string filename, Layout layout);
 
 	void Rect(Layout layout);
 	void FillRect(Layout layout, D2D1_COLOR_F color = {0.5f, 0.5f, 0.5f, 1.f}, float opacity = 1.0f);

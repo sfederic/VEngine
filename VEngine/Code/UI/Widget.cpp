@@ -6,6 +6,7 @@
 #include "Editor/Editor.h"
 #include "Render/SpriteSystem.h"
 #include "Timer.h"
+#include "VString.h"
 
 void Widget::Destroy()
 {
@@ -56,7 +57,7 @@ void Widget::GetScreenSpaceCoords(int& sx, int& sy)
 	sy = ((f2 * -0.5f) + 0.5) * Renderer::GetViewportHeight();
 }
 
-void Widget::Text(const std::wstring& text, Layout layout, TextAlign align,
+void Widget::Text(const std::wstring text, Layout layout, TextAlign align,
 	D2D1_COLOR_F color, float opacity)
 {
 	DWRITE_TEXT_ALIGNMENT endAlignment{};
@@ -89,7 +90,12 @@ void Widget::Text(const std::wstring& text, Layout layout, TextAlign align,
 		uiSystem.textFormat, layout.rect, uiSystem.brushText);
 }
 
-bool Widget::Button(const std::wstring& text, Layout layout, float lineWidth,
+void Widget::Text(const std::string text, Layout layout, TextAlign align, D2D1_COLOR_F color, float opacity)
+{
+	Text(VString::stows(text), layout, align, color, opacity);
+}
+
+bool Widget::Button(const std::wstring text, Layout layout, float lineWidth,
 	TextAlign textAlign, D2D1_COLOR_F textColor, float textOpacity)
 {
 	uiSystem.d2dRenderTarget->DrawRectangle(layout.rect, uiSystem.brushShapes, lineWidth);
@@ -112,7 +118,7 @@ bool Widget::Button(const std::wstring& text, Layout layout, float lineWidth,
 	return false;
 }
 
-void Widget::Image(const std::string& filename, Layout layout)
+void Widget::Image(const std::string filename, Layout layout)
 {
 	Sprite sprite = {};
 	sprite.textureFilename = filename;
@@ -122,7 +128,7 @@ void Widget::Image(const std::string& filename, Layout layout)
 	spriteSystem.CreateScreenSprite(sprite);
 }
 
-void Widget::Image(const std::string& filename, int x, int y, int w, int h)
+void Widget::Image(const std::string filename, int x, int y, int w, int h)
 {
 	Sprite sprite = {};
 	sprite.textureFilename = filename;
@@ -132,7 +138,7 @@ void Widget::Image(const std::string& filename, int x, int y, int w, int h)
 	spriteSystem.CreateScreenSprite(sprite);
 }
 
-bool Widget::ImageButton(const std::string& filename, Layout layout)
+bool Widget::ImageButton(const std::string filename, Layout layout)
 {
 	Sprite sprite = {};
 	sprite.textureFilename = filename;
