@@ -435,10 +435,13 @@ void DebugMenu::RenderGameplayMemoryMenu()
 
 	//Input fields to create Memory for debugging
 	static char debugMemoryName[512]{};
+	static char debugMemoryImageFilename[512]{};
 	ImGui::InputText("Debug Memory Name", debugMemoryName, sizeof(debugMemoryName));
+	ImGui::InputText("Memory Image", debugMemoryImageFilename, sizeof(debugMemoryImageFilename));
 	if (ImGui::Button("Create Memory"))
 	{
 		auto debugMemory = new Memory(debugMemoryName);
+		debugMemory->imageFile = debugMemoryImageFilename;
 		debugMemory->actorAquiredFrom = "Debug Menu";
 		GameInstance::playerMemories.emplace(debugMemoryName, debugMemory);
 	}
