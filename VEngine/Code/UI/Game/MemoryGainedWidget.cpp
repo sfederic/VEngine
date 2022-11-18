@@ -1,7 +1,6 @@
 #include "vpch.h"
 #include "MemoryGainedWidget.h"
 #include "Gameplay/Memory.h"
-#include "VString.h"
 
 void MemoryGainedWidget::Draw(float deltaTime)
 {
@@ -11,7 +10,10 @@ void MemoryGainedWidget::Draw(float deltaTime)
 	Text(L"Memory Gained", layout);
 
 	layout.AddVerticalSpace(30.f);
-	Text(VString::stows(memoryToDisplay->name), layout);
+	Text(memoryToDisplay->name, layout);
+
+	layout.AddVerticalSpace(30.f);
+	Text(memoryToDisplay->description, layout);
 
 	if (!memoryToDisplay->imageFile.empty())
 	{
