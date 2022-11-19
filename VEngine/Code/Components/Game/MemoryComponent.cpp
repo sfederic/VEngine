@@ -51,6 +51,10 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 	{
 		return false;
 	}
+	if (!memory->RunCondition())
+	{
+		return false;
+	}
 
 	auto player = Player::system.GetFirstActor();
 
