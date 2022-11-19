@@ -11,7 +11,7 @@ struct SpriteSheet;
 //Utility functions for in-game stuff
 namespace GameUtils
 {
-	bool CheckIfMemoryExists(const std::string& memoryName);
+	bool CheckIfMemoryExists(const std::string memoryName);
 
 	void SetActiveCameraTarget(Actor* newTarget);
 	void SetActiveCameraTargetAndZoomIn(Actor* newTarget);

@@ -23,7 +23,7 @@ namespace GameUtils
 {
 	std::string levelToMoveTo;
 
-	bool CheckIfMemoryExists(const std::string& memoryName)
+	bool CheckIfMemoryExists(const std::string memoryName)
 	{
 		auto memIt = GameInstance::playerMemories.find(memoryName);
 		return memIt != GameInstance::playerMemories.end();

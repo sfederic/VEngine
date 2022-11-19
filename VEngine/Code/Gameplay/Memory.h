@@ -46,6 +46,10 @@ struct Memory
 
 	virtual ~Memory() {} //Needs to be here for dynamic_cast's, to recognise as polymorphic.
 
+	//Code-based condition to check against memory.
+	virtual bool RunCondition() { return true; }
+
+	//Editor-based simple condition to check against memory.
 	bool CheckCondition();
 
 	std::string name;
