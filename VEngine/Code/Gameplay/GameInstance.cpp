@@ -1,6 +1,8 @@
 #include "vpch.h"
 #include "GameInstance.h"
 
+std::string GameInstance::startingMap = "dock_town.vmap";
+
 void GameInstance::DeletePlayerMemories()
 {
 	playerMemories.clear();
