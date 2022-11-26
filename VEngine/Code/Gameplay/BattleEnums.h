@@ -18,6 +18,11 @@ inline bool operator&(AttackPosition lhs, AttackPosition rhs)
 		static_cast<std::underlying_type_t<AttackPosition>>(rhs);
 }
 
+inline AttackPosition operator|(AttackPosition lhs, AttackPosition rhs)
+{
+	return static_cast<AttackPosition>(static_cast<char>(lhs) | static_cast<char>(rhs));
+}
+
 //Attack Direction is used for the attack itself (e.g. sword swipes)
 enum class AttackDirection : int
 {
