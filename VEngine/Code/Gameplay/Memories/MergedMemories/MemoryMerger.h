@@ -5,6 +5,6 @@
 namespace MemoryMerger
 {
 	static void Init();
-	static void MergeMemories(std::string memoryName1, std::string memoryName2);
+	static void MergeMemories(const std::string memoryName1, const std::string memoryName2);
 };
 
