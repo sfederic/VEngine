@@ -15,11 +15,6 @@ The purpose of this being open source is to detail the more lower level programm
 
 DirectXTK (directxtk_desktop_win10) ver. 2021.8.2.1 - https://github.com/microsoft/DirectXTK
 
-## Extensions
-
-* Qt VS Tools ver. 2.8.0 - https://marketplace.visualstudio.com/items?itemName=TheQtCompany.QtVisualStudioTools2022
-* HLSL Tools for Visual Studio - https://marketplace.visualstudio.com/items?itemName=TimGJones.HLSLToolsforVisualStudio
-
 ## Third party libs:
 
 * Physx ver 4.1.2 | Throw PhysX headers/source into Code/Physx - https://github.com/NVIDIAGameWorks/PhysX (used https://vcpkg.io/en/index.html to download SDK [package name is physx:x64-windows])
@@ -33,3 +28,8 @@ DirectXTK (directxtk_desktop_win10) ver. 2021.8.2.1 - https://github.com/microso
 (The ImGui libs are already included in the repo)
 * Dear ImGui - https://github.com/ocornut/imgui
 * ImGuizmo - https://github.com/CedricGuillemet/ImGuizmo
+
+## Helpful Extensions
+
+* Qt VS Tools ver. 2.8.0 - https://marketplace.visualstudio.com/items?itemName=TheQtCompany.QtVisualStudioTools2022
+* HLSL Tools for Visual Studio - https://marketplace.visualstudio.com/items?itemName=TimGJones.HLSLToolsforVisualStudio
