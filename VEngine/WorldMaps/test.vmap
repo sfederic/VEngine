@@ -91,9 +91,9 @@ Unit
  Enabled
 1
  Position
-3 0 2
+3 0 3
  Rotation
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
 Attack Points
@@ -105,7 +105,7 @@ fight
 Destruct
 1
 Health
-3
+20
 Inspect
 1
 Interact
@@ -123,7 +123,7 @@ Obstacle
 Skill
 
 UID
-1299045192
+2184663060
 actorToFocusOn
 
 deathText
@@ -165,37 +165,6 @@ PointLightActor0
 UID
 670105959
 next
-ExplodingObject
-1
- Enabled
-1
- Position
-3 0 3
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Destruct
-1
-Health
-1
-Inspect
-1
-Interact
-1
-Interact Text
-
-Name
-ExplodingObject0
-Obstacle
-1
-UID
-2593599515
-disableGridInteract
-0
-interactKnownText
-
-next
 EmptyComponent
 1
 30296875
@@ -210,8 +179,8 @@ Root
 1 1 1
 next
 MemoryComponent
-3
-1299045192
+2
+2184663060
 Memory
  Enabled
 1
@@ -220,7 +189,7 @@ Add On Interact
 Memory Name
 
 next
-1299045192
+2184663060
 MemoryOnDeath
  Enabled
 1
@@ -229,17 +198,8 @@ Add On Interact
 Memory Name
 
 next
-2593599515
-Memory
- Enabled
-1
-Add On Interact
-0
-Memory Name
-
-next
 MeshComponent
-8
+7
 279537626
 Mesh
  Enabled
@@ -485,55 +445,6 @@ Static
 Trans. Occlude
 0
 next
-1299045192
-Mesh
- Enabled
-1
- Pos
-3 0 2
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-
-Static
-1
-Trans. Occlude
-0
-next
 30296875
 Mesh
  Enabled
@@ -583,14 +494,14 @@ Static
 Trans. Occlude
 0
 next
-2593599515
+2184663060
 Mesh
  Enabled
 1
  Pos
 3 0 3
  Rot
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
 Casts Shadow
@@ -703,14 +614,7 @@ Trans. Occlude
 0
 next
 DialogueComponent
-3
-1299045192
-Dialogue
- Enabled
-1
-File
-
-next
+2
 30296875
 Dialogue
  Enabled
@@ -718,7 +622,7 @@ Dialogue
 File
 
 next
-2593599515
+2184663060
 Dialogue
  Enabled
 1

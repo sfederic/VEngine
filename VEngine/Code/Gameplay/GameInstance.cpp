@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "GameInstance.h"
 
-std::string GameInstance::startingMap = "dock_town.vmap";
+std::string GameInstance::startingMap = "test.vmap";
 
 void GameInstance::DeletePlayerMemories()
 {
