@@ -120,6 +120,7 @@
     <ClCompile Include="Code\Actors\Game\BulletCache.cpp" />
     <ClCompile Include="Code\Actors\Game\Units\LineAttackerUnit.cpp" />
     <ClCompile Include="Code\Gameplay\Memories\AttackUpMemory.cpp" />
+    <ClCompile Include="Code\Gameplay\Memories\MergedMemories\TestMergedMemory.cpp" />
     <ClCompile Include="Code\Gameplay\Memories\SymbolMemories.cpp" />
     <ClCompile Include="Code\Gameplay\Memory.cpp" />
     <ClCompile Include="Code\Gameplay\UnitSkills\AreaAttackSkill.cpp" />
@@ -282,8 +283,10 @@
     <ClCompile Include="Code\Actors\Game\Hoist.cpp" />
     <ClCompile Include="Code\Actors\Game\ExplodingObject.cpp" />
     <ClCompile Include="Code\UI\Game\MemorySelectWidget.cpp" />
+    <ClCompile Include="Code\Gameplay\Memories\MergedMemories\MemoryMerger.cpp" />
     <ClInclude Include="Code\Actors\Game\BulletCache.h" />
     <ClInclude Include="Code\Actors\Game\Units\LineAttackerUnit.h" />
+    <ClInclude Include="Code\Gameplay\Memories\MergedMemories\TestMergedMemory.h" />
     <ClInclude Include="Code\Gameplay\UnitSkills\AreaAttackSkill.h" />
     <ClInclude Include="Code\Gameplay\UnitSkills\UnitSkill.h" />
     <ClInclude Include="Code\Actors\Game\SkillNode.h" />
@@ -564,6 +567,7 @@
     <ClInclude Include="Code\Actors\Game\Hoist.h" />
     <ClInclude Include="Code\Actors\Game\ExplodingObject.h" />
     <ClInclude Include="Code\UI\Game\MemorySelectWidget.h" />
+    <ClInclude Include="Code\Gameplay\Memories\MergedMemories\MemoryMerger.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

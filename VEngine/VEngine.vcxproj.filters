@@ -617,6 +617,12 @@
     <ClCompile Include="Code\Gameplay\Memories\SymbolMemories.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Gameplay\Memories\MergedMemories\TestMergedMemory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Gameplay\Memories\MergedMemories\MemoryMerger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -1178,6 +1184,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\MemorySelectWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Gameplay\Memories\MergedMemories\TestMergedMemory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Gameplay\Memories\MergedMemories\MemoryMerger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
