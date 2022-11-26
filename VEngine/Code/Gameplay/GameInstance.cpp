@@ -14,6 +14,11 @@ void GameInstance::AddPlayerMemory(Memory* memory)
 	playerMemories.emplace(memory->name, memory);
 }
 
+void GameInstance::DeletePlayerMemory(const std::string memoryName)
+{
+	playerMemories.erase(memoryName);
+}
+
 Properties GameInstance::GetInstanceSaveData()
 {
 	Properties props("GameInstance");
