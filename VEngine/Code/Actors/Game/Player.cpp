@@ -872,12 +872,16 @@ bool Player::DestructibleCheck(Actor* hitActor)
 		if (unit)
 		{
 			battleSystem.StartBattle();
-			ExpendActionPoints(1);
-			GameUtils::CameraShake(1.f);
-			GameUtils::SpawnSpriteSheet("Sprites/blood_hit.png", unit->GetPosition(), false, 4, 4);
-			GameUtils::PlayAudioOneShot("sword_hit.wav");
 
-			unit->InflictDamage(attackPoints);
+			if (CheckAttackPositionAgainstUnitDirection(unit))
+			{
+				ExpendActionPoints(1);
+				GameUtils::CameraShake(1.f);
+				GameUtils::SpawnSpriteSheet("Sprites/blood_hit.png", unit->GetPosition(), false, 4, 4);
+				GameUtils::PlayAudioOneShot("sword_hit.wav");
+
+				unit->InflictDamage(attackPoints);
+			}
 
 			return true;
 		}
@@ -973,4 +977,45 @@ void Player::PushbackObject()
 			Log("Actor [%s] pushedback but did not hit anything.", gridActor->GetName().c_str());
 		}
 	}
+}
+
+bool Player::CheckAttackPositionAgainstUnitDirection(Unit* unit)
+{
+	//@Todo: I don't like these vector checks because maybe units could be titled after navigation.
+	//Come back to this and think about making some sort of, "ForwardFacingIndex" var.
+
+	if (unit->validAttackPositions & AttackPosition::All)
+	{
+		return true;
+	}
+	else if (XMVector4Equal(unit->GetForwardVectorV(), -GetForwardVectorV()))
+	{
+		if (unit->validAttackPositions & AttackPosition::Front)
+		{
+			return true;
+		}
+	}
+	else if (XMVector4Equal(unit->GetForwardVectorV(), GetForwardVectorV()))
+	{
+		if (unit->validAttackPositions & AttackPosition::Back)
+		{
+			return true;
+		}
+	}
+	else if (XMVector4Equal(unit->GetRightVectorV(), GetRightVectorV()))
+	{
+		if (unit->validAttackPositions & AttackPosition::Right)
+		{
+			return true;
+		}
+	}
+	else if (XMVector4Equal(unit->GetRightVectorV(), -GetRightVectorV()))
+	{
+		if (unit->validAttackPositions & AttackPosition::Left)
+		{
+			return true;
+		}
+	}
+
+	return false;
 }

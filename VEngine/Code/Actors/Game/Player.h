@@ -134,6 +134,8 @@ private:
 	bool GunShotCheck(Actor* hitActor);
 	void PushbackObject();
 
+	bool CheckAttackPositionAgainstUnitDirection(Unit* unit);
+
 	void ConfirmGuardOnDirection();
 
 	void PreviewMovementNodesDuringBattle();
