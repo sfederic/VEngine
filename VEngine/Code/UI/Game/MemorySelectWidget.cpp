@@ -70,4 +70,9 @@ void MemorySelectWidget::MergeMemories()
 	}
 
 	MemoryMerger::MergeMemories(memoriesToMerge[0]->name, memoriesToMerge[1]->name);
+
+	//@Todo: see if deletion makes sense gameplay-wise
+	//Delete both memories, replace with merged memory
+	GameInstance::DeletePlayerMemory(memoriesToMerge[0]->name);
+	GameInstance::DeletePlayerMemory(memoriesToMerge[1]->name);
 }
