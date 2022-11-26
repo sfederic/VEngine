@@ -2,6 +2,8 @@
 #include "MemorySelectWidget.h"
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/Memory.h"
+#include "Gameplay/Memories/MergedMemories/MemoryMerger.h"
+#include "Log.h"
 
 void MemorySelectWidget::Draw(float deltaTime)
 {
@@ -56,8 +58,16 @@ void MemorySelectWidget::DrawMemoryMergeMenu()
 
 void MemorySelectWidget::MergeMemories()
 {
-	for (auto memory : memoriesToMerge)
+	if (memoriesToMerge.size() < 2)
 	{
-		
+		Log("not enough memories selected to merge.");
+		return;
 	}
+	if (memoriesToMerge.size() > 2)
+	{
+		Log("too many memories selected to merge.");
+		return;
+	}
+
+	MemoryMerger::MergeMemories(memoriesToMerge[0]->name, memoriesToMerge[1]->name);
 }
