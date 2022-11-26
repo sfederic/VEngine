@@ -55,7 +55,8 @@ struct Unit : GridActor
 	AttackDirection attackDirection = AttackDirection::Down;
 	DefendDirection defendDirection = DefendDirection::Down;
 
-	AttackPosition validAttackPositions = 
+	//Every position this Unit can be attacked from.
+	AttackPosition validAttackPositions = AttackPosition::All;
 
 private:
 	bool isUnitTurn = false;
