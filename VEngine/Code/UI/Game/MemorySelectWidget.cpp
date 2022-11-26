@@ -5,6 +5,12 @@
 
 void MemorySelectWidget::Draw(float deltaTime)
 {
+	DrawMemoryMergeMenu();
+	DrawMemories();
+}
+
+void MemorySelectWidget::DrawMemories()
+{
 	std::vector<Layout> layouts;
 	layouts.push_back(PercentAlignLayout(0.45f, 0.3f, 0.55f, 0.5f));
 	layouts.push_back(PercentAlignLayout(0.3f, 0.6f, 0.4f, 0.8f));
@@ -17,10 +23,41 @@ void MemorySelectWidget::Draw(float deltaTime)
 		if (ImageButton(memory->imageFile, layouts[layoutsIndex]))
 		{
 			selectedMemoryIndex = layoutsIndex;
+
+			if (memoryMergeModeActive)
+			{
+				memoriesToMerge.push_back(memory);
+			}
 		}
 
 		Text(name, layouts[layoutsIndex]);
 
 		layoutsIndex++;
+	}
+}
+
+void MemorySelectWidget::DrawMemoryMergeMenu()
+{
+	if (Button("Merge Memories", PercentAlignLayout(0.4f, 0.1f, 0.6f, 0.2f)))
+	{
+		memoryMergeModeActive = !memoryMergeModeActive;
+	}
+
+	if (memoryMergeModeActive)
+	{
+		Text("Select Memories to merge", PercentAlignLayout(0.4f, 0.2f, 0.6f, 0.3f));
+
+		if (Button("Merge", PercentAlignLayout(0.4f, 0.4f, 0.6f, 0.5f)))
+		{
+			MergeMemories();
+		}
+	}
+}
+
+void MemorySelectWidget::MergeMemories()
+{
+	for (auto memory : memoriesToMerge)
+	{
+		
 	}
 }
