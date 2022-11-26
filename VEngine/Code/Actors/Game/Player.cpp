@@ -882,6 +882,10 @@ bool Player::DestructibleCheck(Actor* hitActor)
 
 				unit->InflictDamage(attackPoints);
 			}
+			else
+			{
+				Log("Attack positional miss on Unit [%s].", unit->GetName().c_str());
+			}
 
 			return true;
 		}
@@ -984,32 +988,32 @@ bool Player::CheckAttackPositionAgainstUnitDirection(Unit* unit)
 	//@Todo: I don't like these vector checks because maybe units could be titled after navigation.
 	//Come back to this and think about making some sort of, "ForwardFacingIndex" var.
 
-	if (unit->validAttackPositions & AttackPosition::All)
+	if (unit->validAttackPositions == AttackPosition::All)
 	{
 		return true;
 	}
-	else if (XMVector4Equal(unit->GetForwardVectorV(), -GetForwardVectorV()))
+	else if (XMVector4Equal(unit->GetForwardVectorV(), -mesh->GetForwardVectorV()))
 	{
 		if (unit->validAttackPositions & AttackPosition::Front)
 		{
 			return true;
 		}
 	}
-	else if (XMVector4Equal(unit->GetForwardVectorV(), GetForwardVectorV()))
+	else if (XMVector4Equal(unit->GetForwardVectorV(), mesh->GetForwardVectorV()))
 	{
 		if (unit->validAttackPositions & AttackPosition::Back)
 		{
 			return true;
 		}
 	}
-	else if (XMVector4Equal(unit->GetRightVectorV(), GetRightVectorV()))
+	else if (XMVector4Equal(unit->GetRightVectorV(), mesh->GetRightVectorV()))
 	{
 		if (unit->validAttackPositions & AttackPosition::Right)
 		{
 			return true;
 		}
 	}
-	else if (XMVector4Equal(unit->GetRightVectorV(), -GetRightVectorV()))
+	else if (XMVector4Equal(unit->GetRightVectorV(), -mesh->GetRightVectorV()))
 	{
 		if (unit->validAttackPositions & AttackPosition::Left)
 		{
