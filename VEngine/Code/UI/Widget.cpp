@@ -98,7 +98,7 @@ void Widget::Text(const std::string text, Layout layout, TextAlign align, D2D1_C
 bool Widget::Button(const std::wstring text, Layout layout, float lineWidth,
 	TextAlign textAlign, D2D1_COLOR_F textColor, float textOpacity)
 {
-	uiSystem.d2dRenderTarget->DrawRectangle(layout.rect, uiSystem.brushShapes, lineWidth);
+	uiSystem.d2dRenderTarget->FillRectangle(layout.rect, uiSystem.brushShapes);
 	Text(text, layout.rect, textAlign, textColor, textOpacity);
 
 	if (editor->viewportMouseX > layout.rect.left && editor->viewportMouseX < layout.rect.right)
