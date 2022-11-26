@@ -25,6 +25,7 @@
 #include "Physics/PhysicsSystem.h"
 #include "Editor/CutsceneSequencer.h"
 #include "Gameplay/WorldFunctions.h"
+#include "Gameplay/Memories/MergedMemories/MemoryMerger.h"
 
 void ClearLog()
 {
@@ -38,6 +39,8 @@ void Engine::Init(int argc, char* argv[])
 	auto startTime = Profile::QuickStart();
 
 	ClearLog();
+
+	MemoryMerger::Init();
 
 	WorldFunctions::SetupWorldStartFunctions();
 
