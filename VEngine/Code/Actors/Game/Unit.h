@@ -12,6 +12,7 @@ struct EntranceTrigger;
 struct Polyboard;
 class UnitSkill;
 class SkillNode;
+struct Memory;
 
 //Units are battle ready actors and really only move and fight.
 struct Unit : GridActor
@@ -101,6 +102,10 @@ public:
 	void ShowUnitMovementPath();
 
 	void SetUnitLookAt(XMVECTOR lookAtPoint);
+
+protected:
+	void DisplayImpartedMemoryToPlayerOnAttack(Memory* memoryToDisplay);
+	virtual void ImpartMemoryToPlayerOnAttack() {}
 
 private:
 	std::vector<GridNode*> GetMovementPathPreviewNodes(GridNode* destinationNode);
