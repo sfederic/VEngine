@@ -86,55 +86,6 @@ MeshActor4
 UID
 167629347
 next
-Unit
-1
- Enabled
-1
- Position
-3 0 3
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Attack Points
-1
-Attack Range
-1
-Battle State
-fight
-Destruct
-1
-Health
-20
-Inspect
-1
-Interact
-1
-Interact Text
-
-Move Points
-1
-Move Speed
-3
-Name
-Unit0
-Obstacle
-0
-Skill
-
-UID
-2184663060
-actorToFocusOn
-
-deathText
-
-disableGridInteract
-0
-interactKnownText
-
-numOfAttacks
-1
-next
 Player
 1
  Enabled
@@ -165,6 +116,55 @@ PointLightActor0
 UID
 670105959
 next
+MemoryImpartUnit
+1
+ Enabled
+1
+ Position
+3 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Attack Points
+1
+Attack Range
+1
+Battle State
+fight
+Destruct
+1
+Health
+5
+Inspect
+1
+Interact
+1
+Interact Text
+
+Move Points
+1
+Move Speed
+3
+Name
+MemoryImpartUnit0
+Obstacle
+0
+Skill
+
+UID
+3145141531
+actorToFocusOn
+
+deathText
+
+disableGridInteract
+0
+interactKnownText
+
+numOfAttacks
+1
+next
 EmptyComponent
 1
 30296875
@@ -180,7 +180,7 @@ Root
 next
 MemoryComponent
 2
-2184663060
+3145141531
 Memory
  Enabled
 1
@@ -189,7 +189,7 @@ Add On Interact
 Memory Name
 
 next
-2184663060
+3145141531
 MemoryOnDeath
  Enabled
 1
@@ -494,14 +494,14 @@ Static
 Trans. Occlude
 0
 next
-2184663060
+3145141531
 Mesh
  Enabled
 1
  Pos
-3 0 3
+3 0 2
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
 Casts Shadow
@@ -622,7 +622,7 @@ Dialogue
 File
 
 next
-2184663060
+3145141531
 Dialogue
  Enabled
 1
