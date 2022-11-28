@@ -130,8 +130,6 @@ void Unit::Tick(float deltaTime)
 					player->nextCameraFOV = 30.f;
 					player->unitCurrentlyAttackingPlayer = this;
 
-					SetAttackDirection();
-
 					GameUtils::SetActiveCameraTarget(this);
 
 					Timer::SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
@@ -438,7 +436,7 @@ void Unit::WindUpAttack()
 	ray.actorsToIgnore.push_back(player); //Ignore player too. Attack hits if nothing is hit
 	if (!Raycast(ray, GetPositionV(), player->GetPositionV()))
 	{
-		if (attackDirection == player->defendDirection && player->guarding) //Successful defend
+		if (player->guarding) //Successful defend
 		{
 			GameUtils::CameraShake(1.f);
 			GameUtils::PlayAudioOneShot("shield_hit.wav");
@@ -473,7 +471,6 @@ void Unit::WindUpAttack()
 
 	if (currentAttackNumber > 0) //Attack again
 	{
-		SetAttackDirection();
 		Timer::SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
 	}
 	else //End turn
@@ -491,17 +488,6 @@ void Unit::WindUpAttack()
 
 		EndTurn();
 	}
-}
-
-void Unit::SetAttackDirection()
-{
-	attackDirection = GetRandomAttackDirection();
-	Player::system.GetFirstActor()->guardWidget->attackingUnitAttackDirection = attackDirection;
-}
-
-AttackDirection Unit::GetRandomAttackDirection()
-{
-	 return static_cast<AttackDirection>(rand() % (int)AttackDirection::Count);
 }
 
 int Unit::GetHighestSkillRange()

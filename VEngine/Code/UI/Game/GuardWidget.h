@@ -16,9 +16,6 @@ private:
 	GuardState guardState = GuardState::None;
 
 public:
-
-	AttackDirection attackingUnitAttackDirection = AttackDirection::Down;
-
 	virtual void Draw(float deltaTime) override;
 	inline void SetGuardSuccess() { guardState = GuardState::Success; }
 	inline void SetGuardFail() { guardState = GuardState::Fail; }

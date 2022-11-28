@@ -24,9 +24,6 @@ struct Player : Actor
 {
 	ACTOR_SYSTEM(Player)
 
-	AttackDirection attackDirection = AttackDirection::Down;
-	DefendDirection defendDirection = DefendDirection::Down;
-
 	//Components
 	MeshComponent* mesh = nullptr;
 	CameraComponent* camera = nullptr;

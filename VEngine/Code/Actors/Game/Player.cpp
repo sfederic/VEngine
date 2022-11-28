@@ -237,25 +237,18 @@ void Player::Guard()
 {
 	if (actionPoints > 0 && !guarding)
 	{
-		if (Input::GetKeyUp(Keys::Down))
+		guarding = true;
+		ExpendActionPoints(1);
+
+		if (guardSuccess)
 		{
-			defendDirection = DefendDirection::Down;
-			ConfirmGuardOnDirection();
+			guardWidget->SetGuardSuccess();
+			GameUtils::PlayAudioOneShot("equip.wav");
 		}
-		else if (Input::GetKeyUp(Keys::Up))
+		else
 		{
-			defendDirection = DefendDirection::Up;
-			ConfirmGuardOnDirection();
-		}
-		else if (Input::GetKeyUp(Keys::Left))
-		{
-			defendDirection = DefendDirection::Left;
-			ConfirmGuardOnDirection();
-		}
-		else if (Input::GetKeyUp(Keys::Right))
-		{
-			defendDirection = DefendDirection::Right;
-			ConfirmGuardOnDirection();
+			guardWidget->SetGuardFail();
+			GameUtils::PlayAudioOneShot("error.wav");
 		}
 	}
 }
@@ -674,26 +667,6 @@ bool Player::DialogueCheck(Actor* hitActor)
 	}
 
 	return false;
-}
-
-void Player::ConfirmGuardOnDirection()
-{
-	guarding = true;
-	ExpendActionPoints(1);
-
-	//Check if guard matches enemey unit attack direction for successful guard
-	guardSuccess = unitCurrentlyAttackingPlayer->attackDirection == defendDirection;
-
-	if (guardSuccess)
-	{
-		guardWidget->SetGuardSuccess();
-		GameUtils::PlayAudioOneShot("equip.wav");
-	}
-	else
-	{
-		guardWidget->SetGuardFail();
-		GameUtils::PlayAudioOneShot("error.wav");
-	}
 }
 
 //@Todo: this works fine, there's just a slight polish it needs when you run out of action points and

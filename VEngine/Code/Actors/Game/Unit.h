@@ -53,9 +53,6 @@ struct Unit : GridActor
 
 	bool isInBattle = false;
 
-	AttackDirection attackDirection = AttackDirection::Down;
-	DefendDirection defendDirection = DefendDirection::Down;
-
 	//Every position this Unit can be attacked from.
 	AttackPosition validAttackPositions = AttackPosition::All;
 
@@ -97,7 +94,6 @@ public:
 
 	bool Attack();
 	void WindUpAttack();
-	void SetAttackDirection();
 
 	void ShowUnitMovementPath();
 
@@ -109,7 +105,6 @@ protected:
 
 private:
 	std::vector<GridNode*> GetMovementPathPreviewNodes(GridNode* destinationNode);
-	AttackDirection GetRandomAttackDirection();
 
 	int GetHighestSkillRange();
 	bool IsTargetInRangeOfSkills(GridNode* targetNode);
