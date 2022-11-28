@@ -245,6 +245,9 @@ void FileSystem::LoadWorld(std::string worldName)
 		}
 		else
 		{
+			//@Todo: Currently, if a Component class/struct is deleted, this code will work work ok.
+			//But if an Actor class/struct is deleted, this code will loop infinitely.
+
 			//Get the previous post so subsequent system name reads work
 			std::streampos lastPos = d.is.tellg();
 
