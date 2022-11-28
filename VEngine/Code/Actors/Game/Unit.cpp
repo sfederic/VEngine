@@ -410,7 +410,6 @@ void Unit::WindUpAttack()
 			GameUtils::CameraShake(1.f);
 			GameUtils::PlayAudioOneShot("sword_hit.wav");
 
-			ImpartMemoryToPlayerOnAttack();
 			player->InflictDamage(attackPoints);
 		}
 
@@ -447,7 +446,6 @@ void Unit::WindUpAttack()
 			GameUtils::PlayAudioOneShot("sword_hit.wav");
 		}
 
-		ImpartMemoryToPlayerOnAttack();
 		player->InflictDamage(attackPoints);
 
 		Log("%s attacked %s", this->GetName().c_str(), player->GetName().c_str());
@@ -568,12 +566,6 @@ void Unit::SetUnitLookAt(XMVECTOR lookAtPoint)
 {
 	auto lookAtRot = VMath::LookAtRotation(lookAtPoint, GetPositionV());
 	SetRotation(lookAtRot);
-}
-
-void Unit::DisplayImpartedMemoryToPlayerOnAttack(Memory* memoryToDisplay)
-{
-	uiSystem.memoryGainedWidget->memoryToDisplay = memoryToDisplay;
-	uiSystem.memoryGainedWidget->AddToViewport(3.0f);
 }
 
 std::vector<GridNode*> Unit::GetMovementPathPreviewNodes(GridNode* destinationNode)

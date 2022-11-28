@@ -99,10 +99,6 @@ public:
 
 	void SetUnitLookAt(XMVECTOR lookAtPoint);
 
-protected:
-	void DisplayImpartedMemoryToPlayerOnAttack(Memory* memoryToDisplay);
-	virtual void ImpartMemoryToPlayerOnAttack() {}
-
 private:
 	std::vector<GridNode*> GetMovementPathPreviewNodes(GridNode* destinationNode);
 
