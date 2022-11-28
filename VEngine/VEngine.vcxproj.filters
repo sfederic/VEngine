@@ -611,9 +611,6 @@
     <ClCompile Include="Code\Actors\Game\ExplodingObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\UI\Game\MemorySelectWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Gameplay\Memories\SymbolMemories.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1184,9 +1181,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\ExplodingObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\Game\MemorySelectWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\Memories\MergedMemories\TestMergedMemory.h">

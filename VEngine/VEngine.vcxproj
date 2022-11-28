@@ -282,7 +282,6 @@
     <ClCompile Include="Code\Actors\Game\LightSwitch.cpp" />
     <ClCompile Include="Code\Actors\Game\Hoist.cpp" />
     <ClCompile Include="Code\Actors\Game\ExplodingObject.cpp" />
-    <ClCompile Include="Code\UI\Game\MemorySelectWidget.cpp" />
     <ClCompile Include="Code\Gameplay\Memories\MergedMemories\MemoryMerger.cpp" />
     <ClCompile Include="Code\Actors\Game\Units\MemoryImpartUnit.cpp" />
     <ClInclude Include="Code\Actors\Game\BulletCache.h" />
@@ -567,7 +566,6 @@
     <ClInclude Include="Code\Actors\Game\LightSwitch.h" />
     <ClInclude Include="Code\Actors\Game\Hoist.h" />
     <ClInclude Include="Code\Actors\Game\ExplodingObject.h" />
-    <ClInclude Include="Code\UI\Game\MemorySelectWidget.h" />
     <ClInclude Include="Code\Gameplay\Memories\MergedMemories\MemoryMerger.h" />
     <ClInclude Include="Code\Actors\Game\Units\MemoryImpartUnit.h" />
   </ItemGroup>
