@@ -194,7 +194,6 @@ void Player::RefreshCombatStats()
 
 void Player::ResetGuard()
 {
-	guardSuccess = false;
 	guarding = false;
 	guardWidget->ResetGuard();
 	ableToGuard = true;
@@ -217,11 +216,10 @@ void Player::InflictDamage(int damage)
 {
 	int guardPoints = 0;
 
-	if (guarding && guardSuccess)
+	if (guarding)
 	{
 		Log("Guarded attack");
 		guarding = false;
-		guardSuccess = false;
 		return;
 	}
 
@@ -240,16 +238,8 @@ void Player::Guard()
 		guarding = true;
 		ExpendActionPoints(1);
 
-		if (guardSuccess)
-		{
-			guardWidget->SetGuardSuccess();
-			GameUtils::PlayAudioOneShot("equip.wav");
-		}
-		else
-		{
-			guardWidget->SetGuardFail();
-			GameUtils::PlayAudioOneShot("error.wav");
-		}
+		guardWidget->SetGuardSuccess();
+		GameUtils::PlayAudioOneShot("equip.wav");
 	}
 }
 
@@ -440,19 +430,19 @@ void Player::PrimaryAction()
 		}
 	}
 
-	//Guard
-	if (battleSystem.isBattleActive && !isPlayerTurn)
-	{
-		if (ableToGuard)
-		{
-			Guard();
-		}
-
-		return;
-	}
-
 	if (Input::GetKeyUp(Keys::Down))
 	{
+		//Guard
+		if (battleSystem.isBattleActive && !isPlayerTurn)
+		{
+			if (ableToGuard)
+			{
+				Guard();
+			}
+
+			return;
+		}
+
 		if (uiSystem.memoryRecalledWidget->IsInViewport() 
 			|| uiSystem.memoryGainedWidget->IsInViewport())
 		{

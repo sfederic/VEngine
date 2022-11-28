@@ -77,7 +77,6 @@ struct Player : Actor
 
 	bool ableToGuard = false;
 	bool guarding = false;
-	bool guardSuccess = false;
 	bool gameOver = false;
 
 	bool gunModeOn = true;
