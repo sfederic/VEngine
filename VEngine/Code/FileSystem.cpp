@@ -216,8 +216,7 @@ void FileSystem::LoadWorld(std::string worldName)
 				World::AddActorToWorld(actor);
 			}
 		}
-		else if (componentSystemCache.nameToSystemMap->find(VString::wstos(systemName)) !=
-			componentSystemCache.nameToSystemMap->end())
+		else if (componentSystemCache.nameToSystemMap->find(VString::wstos(systemName)) != componentSystemCache.nameToSystemMap->end())
 		{
 			auto csIt = componentSystemCache.nameToSystemMap->find(VString::wstos(systemName));
 			auto cs = csIt->second;
