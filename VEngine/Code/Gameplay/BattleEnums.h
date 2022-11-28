@@ -1,9 +1,7 @@
 #pragma once
 
-//Use 'count' as a max to determine random attack/defend directions
-
-//Attack Position is the position in world a player or Unit can attack an from (e.g. standing behind)
-enum class AttackPosition : int
+//The direction in world a player or Unit can attack an from (e.g. standing behind)
+enum class AttackDirection : int
 {
 	Front = 0b00000001,
 	Back  = 0b00000010,
@@ -12,13 +10,13 @@ enum class AttackPosition : int
 	All   = 0b00001111
 };
 
-inline bool operator&(AttackPosition lhs, AttackPosition rhs) 
+inline bool operator&(AttackDirection lhs, AttackDirection rhs)
 {
-	return static_cast<std::underlying_type_t<AttackPosition>>(lhs) &
-		static_cast<std::underlying_type_t<AttackPosition>>(rhs);
+	return static_cast<std::underlying_type_t<AttackDirection>>(lhs) &
+		static_cast<std::underlying_type_t<AttackDirection>>(rhs);
 }
 
-inline AttackPosition operator|(AttackPosition lhs, AttackPosition rhs)
+inline AttackDirection operator|(AttackDirection lhs, AttackDirection rhs)
 {
-	return static_cast<AttackPosition>(static_cast<char>(lhs) | static_cast<char>(rhs));
+	return static_cast<AttackDirection>(static_cast<char>(lhs) | static_cast<char>(rhs));
 }

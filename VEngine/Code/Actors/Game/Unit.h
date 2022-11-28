@@ -53,8 +53,7 @@ struct Unit : GridActor
 
 	bool isInBattle = false;
 
-	//Every position this Unit can be attacked from.
-	AttackPosition validAttackPositions = AttackPosition::All;
+	AttackDirection validAttackDirections = AttackDirection::All;
 
 private:
 	bool isUnitTurn = false;
