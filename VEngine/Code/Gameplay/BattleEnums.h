@@ -18,5 +18,6 @@ inline bool operator&(AttackDirection lhs, AttackDirection rhs)
 
 inline AttackDirection operator|(AttackDirection lhs, AttackDirection rhs)
 {
-	return static_cast<AttackDirection>(static_cast<char>(lhs) | static_cast<char>(rhs));
+	return static_cast<AttackDirection>(static_cast<std::underlying_type_t<AttackDirection>>(lhs) 
+		| static_cast<std::underlying_type_t<AttackDirection>>(rhs));
 }
