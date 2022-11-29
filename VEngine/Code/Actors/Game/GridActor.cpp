@@ -147,8 +147,8 @@ ForwardFace GridActor::GetCurrentForwardFace()
 {
 	const XMFLOAT3 forward = GetForwardVector();
 
-	const int forwardIndex = static_cast<int>(forward.z);
-	const int rightIndex = static_cast<int>(forward.x);
+	const int forwardIndex = static_cast<int>(std::lroundf(forward.z));
+	const int rightIndex = static_cast<int>(std::lroundf(forward.x));
 
 	if (forwardIndex > 0) return ForwardFace::positiveZ;
 	else if (forwardIndex < 0) return ForwardFace::negativeZ;
