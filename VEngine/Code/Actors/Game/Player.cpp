@@ -949,28 +949,28 @@ bool Player::CheckAttackPositionAgainstUnitDirection(Unit* unit)
 	{
 		return true;
 	}
-	else if (VMath::VecEqual(unit->GetForwardVectorV(), -mesh->GetForwardVectorV()))
+	else if (DirectX::XMVector4Equal(unit->GetForwardVectorV(), -mesh->GetForwardVectorV()))
 	{
 		if (unit->attackDirections & AttackDirection::Front)
 		{
 			return true;
 		}
 	}
-	else if (VMath::VecEqual(unit->GetForwardVectorV(), mesh->GetForwardVectorV()))
+	else if (DirectX::XMVector4Equal(unit->GetForwardVectorV(), mesh->GetForwardVectorV()))
 	{
 		if (unit->attackDirections & AttackDirection::Back)
 		{
 			return true;
 		}
 	}
-	else if (VMath::VecEqual(unit->GetRightVectorV(), mesh->GetRightVectorV()))
+	else if (DirectX::XMVector4Equal(unit->GetRightVectorV(), mesh->GetRightVectorV()))
 	{
 		if (unit->attackDirections & AttackDirection::Right)
 		{
 			return true;
 		}
 	}
-	else if (VMath::VecEqual(unit->GetRightVectorV(), -mesh->GetRightVectorV()))
+	else if (DirectX::XMVector4Equal(unit->GetRightVectorV(), -mesh->GetRightVectorV()))
 	{
 		if (unit->attackDirections & AttackDirection::Left)
 		{
