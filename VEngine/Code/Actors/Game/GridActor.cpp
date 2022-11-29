@@ -142,3 +142,18 @@ bool GridActor::Pushback(XMVECTOR direction)
 
 	return false;
 }
+
+ForwardFace GridActor::GetCurrentForwardFace()
+{
+	const XMFLOAT3 forward = GetForwardVector();
+
+	const int forwardIndex = static_cast<int>(forward.z);
+	const int rightIndex = static_cast<int>(forward.x);
+
+	if (forwardIndex > 0) return ForwardFace::positiveZ;
+	else if (forwardIndex < 0) return ForwardFace::negativeZ;
+	else if (rightIndex > 0) return ForwardFace::positiveX;
+	else if (rightIndex < 0) return ForwardFace::negativeX;
+
+	throw new std::exception("something went wrong with forward vector");
+}

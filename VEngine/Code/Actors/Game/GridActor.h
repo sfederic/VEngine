@@ -1,6 +1,8 @@
 #pragma once
+
 #include "../Actor.h"
 #include "../ActorSystem.h"
+#include "Gameplay/ForwardFace.h"
 
 struct MeshComponent;
 struct HealthWidget;
@@ -69,4 +71,7 @@ struct GridActor : Actor
 	//Called when the actor is 'pushedback'ed by player or other actor, exploding the actor
 	//back into contact with something.
 	bool Pushback(XMVECTOR direction);
+
+	//Get forward face in grid terms based on forward vector and current grid position.
+	ForwardFace GetCurrentForwardFace();
 };
