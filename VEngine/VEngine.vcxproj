@@ -283,6 +283,7 @@
     <ClCompile Include="Code\Actors\Game\Hoist.cpp" />
     <ClCompile Include="Code\Actors\Game\ExplodingObject.cpp" />
     <ClCompile Include="Code\Gameplay\Memories\MergedMemories\MemoryMerger.cpp" />
+    <ClCompile Include="Code\Actors\Game\Units\ShieldUnit.cpp" />
     <ClInclude Include="Code\Actors\Game\BulletCache.h" />
     <ClInclude Include="Code\Actors\Game\Units\LineAttackerUnit.h" />
     <ClInclude Include="Code\Gameplay\Memories\MergedMemories\TestMergedMemory.h" />
@@ -566,6 +567,7 @@
     <ClInclude Include="Code\Actors\Game\Hoist.h" />
     <ClInclude Include="Code\Actors\Game\ExplodingObject.h" />
     <ClInclude Include="Code\Gameplay\Memories\MergedMemories\MemoryMerger.h" />
+    <ClInclude Include="Code\Actors\Game\Units\ShieldUnit.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

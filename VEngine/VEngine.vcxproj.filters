@@ -620,6 +620,9 @@
     <ClCompile Include="Code\Gameplay\Memories\MergedMemories\MemoryMerger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\Game\Units\ShieldUnit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -1184,6 +1187,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\Memories\MergedMemories\MemoryMerger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\Units\ShieldUnit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
