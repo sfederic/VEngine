@@ -1192,6 +1192,9 @@
     <ClInclude Include="Code\Actors\Game\Units\ShieldUnit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Gameplay\ForwardFace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

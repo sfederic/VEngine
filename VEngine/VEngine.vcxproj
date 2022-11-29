@@ -286,6 +286,7 @@
     <ClCompile Include="Code\Actors\Game\Units\ShieldUnit.cpp" />
     <ClInclude Include="Code\Actors\Game\BulletCache.h" />
     <ClInclude Include="Code\Actors\Game\Units\LineAttackerUnit.h" />
+    <ClInclude Include="Code\Gameplay\ForwardFace.h" />
     <ClInclude Include="Code\Gameplay\Memories\MergedMemories\TestMergedMemory.h" />
     <ClInclude Include="Code\Gameplay\UnitSkills\AreaAttackSkill.h" />
     <ClInclude Include="Code\Gameplay\UnitSkills\UnitSkill.h" />
