@@ -942,35 +942,42 @@ void Player::PushbackObject()
 
 bool Player::CheckAttackPositionAgainstUnitDirection(Unit* unit)
 {
-	//@Todo: I don't like these vector checks because maybe units could be titled after navigation.
-	//Come back to this and think about making some sort of, "ForwardFacingIndex" var.
-
 	if (unit->attackDirections == AttackDirection::All)
 	{
 		return true;
 	}
-	else if (DirectX::XMVector4Equal(unit->GetForwardVectorV(), -mesh->GetForwardVectorV()))
+
+	auto playerForward = mesh->GetForwardVectorV();
+	VMath::RoundVector(playerForward);
+
+	auto unitForward = unit->GetForwardVectorV();
+	VMath::RoundVector(unitForward);
+
+	auto unitRight = unit->GetRightVectorV();
+	VMath::RoundVector(unitRight);
+
+	if (DirectX::XMVector4Equal(unitForward, -playerForward))
 	{
 		if (unit->attackDirections & AttackDirection::Front)
 		{
 			return true;
 		}
 	}
-	else if (DirectX::XMVector4Equal(unit->GetForwardVectorV(), mesh->GetForwardVectorV()))
+	else if (DirectX::XMVector4Equal(unitForward, playerForward))
 	{
 		if (unit->attackDirections & AttackDirection::Back)
 		{
 			return true;
 		}
 	}
-	else if (DirectX::XMVector4Equal(unit->GetRightVectorV(), mesh->GetRightVectorV()))
+	else if (DirectX::XMVector4Equal(unitRight, playerForward))
 	{
 		if (unit->attackDirections & AttackDirection::Right)
 		{
 			return true;
 		}
 	}
-	else if (DirectX::XMVector4Equal(unit->GetRightVectorV(), -mesh->GetRightVectorV()))
+	else if (DirectX::XMVector4Equal(-unitRight, playerForward))
 	{
 		if (unit->attackDirections & AttackDirection::Left)
 		{
