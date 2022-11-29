@@ -132,8 +132,6 @@ private:
 
 	bool CheckAttackPositionAgainstUnitDirection(Unit* unit);
 
-	void ConfirmGuardOnDirection();
-
 	void PreviewMovementNodesDuringBattle();
 
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();

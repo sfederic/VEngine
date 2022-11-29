@@ -53,7 +53,8 @@ struct Unit : GridActor
 
 	bool isInBattle = false;
 
-	AttackDirection validAttackDirections = AttackDirection::All;
+	//All directions the Unit can be successfully attacked from.
+	AttackDirection attackDirections = AttackDirection::All;
 
 private:
 	bool isUnitTurn = false;

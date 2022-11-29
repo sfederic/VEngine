@@ -945,34 +945,34 @@ bool Player::CheckAttackPositionAgainstUnitDirection(Unit* unit)
 	//@Todo: I don't like these vector checks because maybe units could be titled after navigation.
 	//Come back to this and think about making some sort of, "ForwardFacingIndex" var.
 
-	if (unit->validAttackDirections == AttackDirection::All)
+	if (unit->attackDirections == AttackDirection::All)
 	{
 		return true;
 	}
-	else if (XMVector4Equal(unit->GetForwardVectorV(), -mesh->GetForwardVectorV()))
+	else if (VMath::VecEqual(unit->GetForwardVectorV(), -mesh->GetForwardVectorV()))
 	{
-		if (unit->validAttackDirections & AttackDirection::Front)
+		if (unit->attackDirections & AttackDirection::Front)
 		{
 			return true;
 		}
 	}
-	else if (XMVector4Equal(unit->GetForwardVectorV(), mesh->GetForwardVectorV()))
+	else if (VMath::VecEqual(unit->GetForwardVectorV(), mesh->GetForwardVectorV()))
 	{
-		if (unit->validAttackDirections & AttackDirection::Back)
+		if (unit->attackDirections & AttackDirection::Back)
 		{
 			return true;
 		}
 	}
-	else if (XMVector4Equal(unit->GetRightVectorV(), mesh->GetRightVectorV()))
+	else if (VMath::VecEqual(unit->GetRightVectorV(), mesh->GetRightVectorV()))
 	{
-		if (unit->validAttackDirections & AttackDirection::Right)
+		if (unit->attackDirections & AttackDirection::Right)
 		{
 			return true;
 		}
 	}
-	else if (XMVector4Equal(unit->GetRightVectorV(), -mesh->GetRightVectorV()))
+	else if (VMath::VecEqual(unit->GetRightVectorV(), -mesh->GetRightVectorV()))
 	{
-		if (unit->validAttackDirections & AttackDirection::Left)
+		if (unit->attackDirections & AttackDirection::Left)
 		{
 			return true;
 		}
