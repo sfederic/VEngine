@@ -41,4 +41,6 @@ namespace GameUtils
 	void LoadWorldAndMoveToEntranceTrigger();
 
 	void TriggerGameOver();
+
+	void DisablePlayer();
 };

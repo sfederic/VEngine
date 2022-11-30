@@ -181,4 +181,10 @@ namespace GameUtils
 		audioSystem.StopAllAudio();
 		audioSystem.PlayAudio("game05.wav", true);
 	}
+
+	void DisablePlayer()
+	{
+		auto player = Player::system.GetFirstActor();
+		player->SetActive(false);
+	}
 }
