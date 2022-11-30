@@ -187,4 +187,9 @@ namespace GameUtils
 		auto player = Player::system.GetFirstActor();
 		player->SetActive(false);
 	}
+
+	void SetActiveCamera(CameraComponent* camera)
+	{
+		activeCamera = camera;
+	}
 }

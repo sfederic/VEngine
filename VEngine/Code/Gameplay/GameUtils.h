@@ -7,6 +7,7 @@ using namespace DirectX;
 
 class Actor;
 struct SpriteSheet;
+class CameraComponent;
 
 //Utility functions for in-game stuff
 namespace GameUtils
@@ -43,4 +44,6 @@ namespace GameUtils
 	void TriggerGameOver();
 
 	void DisablePlayer();
+
+	void SetActiveCamera(CameraComponent* camera);
 };
