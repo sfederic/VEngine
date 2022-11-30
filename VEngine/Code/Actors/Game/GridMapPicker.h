@@ -4,6 +4,7 @@
 #include "../ActorSystem.h"
 
 class CameraComponent;
+class GridMapPickerSelectionInfo;
 
 class GridMapPicker : public Actor
 {
@@ -16,4 +17,7 @@ public:
 	virtual Properties GetProps() override;
 
 	CameraComponent* camera = nullptr;
+
+private:
+	GridMapPickerSelectionInfo* gridMapPickerSelectionInfo = nullptr;
 };
