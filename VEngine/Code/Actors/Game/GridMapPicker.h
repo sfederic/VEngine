@@ -15,6 +15,5 @@ public:
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 
-private:
 	CameraComponent* camera = nullptr;
 };

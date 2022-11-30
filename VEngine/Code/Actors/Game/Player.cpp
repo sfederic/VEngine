@@ -172,6 +172,11 @@ void Player::Tick(float deltaTime)
 		Transform transform{};
 		transform.position = GetPosition();
 		auto gridMapPicker = GridMapPicker::system.Add(GridMapPicker(), transform);
+
+		gridMapPicker->camera->targetActor = gridMapPicker;
+		GameUtils::SetActiveCamera(gridMapPicker->camera);
+
+		SetActive(false);
 	}
 }
 
