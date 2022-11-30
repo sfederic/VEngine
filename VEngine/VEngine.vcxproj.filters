@@ -623,6 +623,9 @@
     <ClCompile Include="Code\Actors\Game\Units\ShieldUnit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\Game\GridMapPicker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -1193,6 +1196,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\ForwardFace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\GridMapPicker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
