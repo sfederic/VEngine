@@ -2,7 +2,7 @@
 #include "GridMapPicker.h"
 #include "Input.h"
 #include "Components/CameraComponent.h"
-#include "Gameplay/GameUtils.h"
+#include "Physics/Raycast.h"
 
 GridMapPicker::GridMapPicker()
 {
@@ -17,11 +17,18 @@ GridMapPicker::GridMapPicker()
 
 void GridMapPicker::Start()
 {
-	GameUtils::DisablePlayer();
 }
 
 void GridMapPicker::Tick(float deltaTime)
 {
+	if (Input::GetMouseLeftUp())
+	{
+		Ray ray(this);
+		if (RaycastFromScreen(ray))
+		{
+			SetPosition(ray.hitActor->GetPosition());
+		}
+	}
 }
 
 Properties GridMapPicker::GetProps()
