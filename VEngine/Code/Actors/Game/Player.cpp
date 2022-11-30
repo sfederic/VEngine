@@ -9,6 +9,7 @@
 #include "Physics/Raycast.h"
 #include "Actors/Game/NPC.h"
 #include "Actors/Game/FenceActor.h"
+#include "Actors/Game/GridMapPicker.h"
 #include "Actors/Game/MemoryCheckGridActor.h"
 #include "Grid.h"
 #include "GridActor.h"
@@ -164,6 +165,13 @@ void Player::Tick(float deltaTime)
 
 		MovementInput(deltaTime);
 		RotationInput(deltaTime);
+	}
+
+	if (Input::GetKeyUp(Keys::I))
+	{
+		Transform transform{};
+		transform.position = GetPosition();
+		auto gridMapPicker = GridMapPicker::system.Add(GridMapPicker(), transform);
 	}
 }
 
