@@ -12,10 +12,14 @@ public:
 	ACTOR_SYSTEM(GridMapPicker);
 
 	GridMapPicker();
+	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 
 private:
+	void RotationInput();
+	void MovementInput();
+
 	void DisplayHitActorSelectionInfo();
 	void ReenablePlayer();
 
@@ -23,6 +27,8 @@ public:
 	CameraComponent* camera = nullptr;
 
 private:
+	XMVECTOR nextRotation = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+
 	GridMapPickerSelectionInfoWidget* gridMapPickerSelectionInfoWidget = nullptr;
 
 	//This is a rough bool to get around starting input for this actor in player and

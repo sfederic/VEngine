@@ -25,10 +25,48 @@ GridMapPicker::GridMapPicker()
 	gridMapPickerSelectionInfoWidget->AddToViewport();
 }
 
+void GridMapPicker::Start()
+{
+	nextRotation = GetRotationV();
+}
+
 void GridMapPicker::Tick(float deltaTime)
 {
 	DisplayHitActorSelectionInfo();
 
+	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRotation, deltaTime, 7.0f));
+
+	RotationInput();
+
+	MovementInput();
+
+	ReenablePlayer();
+}
+
+Properties GridMapPicker::GetProps()
+{
+	return __super::GetProps();
+}
+
+void GridMapPicker::RotationInput()
+{
+	if (XMQuaternionEqual(GetRotationV(), nextRotation))
+	{
+		if (Input::GetKeyUp(Keys::Right))
+		{
+			constexpr float angle = XMConvertToRadians(90.f);
+			nextRotation = XMQuaternionMultiply(nextRotation, DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), angle));
+		}
+		if (Input::GetKeyUp(Keys::Left))
+		{
+			constexpr float angle = XMConvertToRadians(-90.f);
+			nextRotation = XMQuaternionMultiply(nextRotation, DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), angle));
+		}
+	}
+}
+
+void GridMapPicker::MovementInput()
+{
 	if (Input::GetKeyDown(Keys::W))
 	{
 		AddPositionV(GetForwardVectorV());
@@ -46,13 +84,6 @@ void GridMapPicker::Tick(float deltaTime)
 	{
 		AddPositionV(GetRightVectorV());
 	}
-
-	ReenablePlayer();
-}
-
-Properties GridMapPicker::GetProps()
-{
-	return __super::GetProps();
 }
 
 void GridMapPicker::DisplayHitActorSelectionInfo()
