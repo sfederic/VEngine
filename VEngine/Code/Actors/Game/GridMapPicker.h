@@ -4,7 +4,7 @@
 #include "../ActorSystem.h"
 
 class CameraComponent;
-class GridMapPickerSelectionInfo;
+class GridMapPickerSelectionInfoWidget;
 
 class GridMapPicker : public Actor
 {
@@ -19,5 +19,5 @@ public:
 	CameraComponent* camera = nullptr;
 
 private:
-	GridMapPickerSelectionInfo* gridMapPickerSelectionInfo = nullptr;
+	GridMapPickerSelectionInfoWidget* gridMapPickerSelectionInfoWidget = nullptr;
 };

@@ -3,7 +3,7 @@
 #include "Input.h"
 #include "Actors/Game/GridActor.h"
 #include "Components/CameraComponent.h"
-#include "UI/Game/GridMapPickerSelectionInfo.h"
+#include "UI/Game/GridMapPickerSelectionInfoWidget.h"
 #include "Physics/Raycast.h"
 
 GridMapPicker::GridMapPicker()
@@ -17,8 +17,8 @@ GridMapPicker::GridMapPicker()
 	rootComponent->AddChild(camera);
 
 	//Selection Widget setup
-	gridMapPickerSelectionInfo = CreateWidget<GridMapPickerSelectionInfo>();
-	gridMapPickerSelectionInfo->AddToViewport();
+	gridMapPickerSelectionInfoWidget = CreateWidget<GridMapPickerSelectionInfoWidget>();
+	gridMapPickerSelectionInfoWidget->AddToViewport();
 }
 
 void GridMapPicker::Start()
@@ -37,7 +37,7 @@ void GridMapPicker::Tick(float deltaTime)
 			{
 				SetPosition(gridActor->GetPosition());
 
-				gridMapPickerSelectionInfo->selectedGridActor = gridActor;
+				gridMapPickerSelectionInfoWidget->selectedGridActor = gridActor;
 			}
 		}
 	}

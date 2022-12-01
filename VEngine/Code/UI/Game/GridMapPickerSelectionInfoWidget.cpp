@@ -1,8 +1,8 @@
 #include "vpch.h"
-#include "GridMapPickerSelectionInfo.h"
+#include "GridMapPickerSelectionInfoWidget.h"
 #include "Actors/Game/GridActor.h"
 
-void GridMapPickerSelectionInfo::Draw(float deltaTime)
+void GridMapPickerSelectionInfoWidget::Draw(float deltaTime)
 {
 	auto layout = PercentAlignLayout(0.3f, 0.3f, 0.7f, 0.7f);
 
