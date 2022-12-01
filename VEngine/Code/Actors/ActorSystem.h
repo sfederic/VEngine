@@ -73,7 +73,7 @@ public:
 		//actors can be destroyed in-game and its pointer popped off its actorsystem.
 		for (int i = 0; i < actors.size(); i++)
 		{
-			if (actors[i]->IsActive())
+			if (actors[i]->IsTickEnabled() && actors[i]->IsActive())
 			{
 				actors[i]->Tick(deltaTime);
 			}
