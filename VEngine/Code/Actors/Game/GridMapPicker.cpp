@@ -4,6 +4,7 @@
 #include "VMath.h"
 #include "Actors/Game/GridActor.h"
 #include "Actors/Game/Player.h"
+#include "Actors/Game/Grid.h"
 #include "Components/CameraComponent.h"
 #include "UI/Game/GridMapPickerSelectionInfoWidget.h"
 #include "Physics/Raycast.h"
@@ -92,6 +93,8 @@ void GridMapPicker::ReenablePlayer()
 		auto player = Player::system.GetFirstActor();
 		GameUtils::SetActiveCamera(player->camera);
 		player->SetTickEnabled(true);
+
+		Grid::system.GetFirstActor()->SetActive(false);
 
 		Destroy();
 	}

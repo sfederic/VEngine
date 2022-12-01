@@ -751,6 +751,8 @@ void Player::ActivateGridMapPicker()
 		gridMapPicker->camera->targetActor = gridMapPicker;
 		GameUtils::SetActiveCamera(gridMapPicker->camera);
 
+		Grid::system.GetFirstActor()->SetActive(true);
+
 		SetTickEnabled(false);
 	}
 }
