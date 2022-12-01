@@ -288,6 +288,7 @@
     <ClCompile Include="Code\UI\Game\GridMapPickerSelectionInfoWidget.cpp" />
     <ClInclude Include="Code\Actors\Game\BulletCache.h" />
     <ClInclude Include="Code\Actors\Game\GridMapPicker.h" />
+    <ClInclude Include="Code\Gameplay\TrapNodes\TrapNode.h" />
     <ClInclude Include="Code\Actors\Game\Units\LineAttackerUnit.h" />
     <ClInclude Include="Code\Gameplay\ForwardFace.h" />
     <ClInclude Include="Code\Gameplay\Memories\MergedMemories\TestMergedMemory.h" />

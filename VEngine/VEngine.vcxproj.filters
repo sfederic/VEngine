@@ -1207,6 +1207,9 @@
     <ClInclude Include="Code\UI\Game\GridMapPickerSelectionInfoWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Gameplay\TrapNodes\TrapNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
