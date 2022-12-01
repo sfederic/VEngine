@@ -17,10 +17,15 @@ public:
 
 private:
 	void DisplayHitActorSelectionInfo();
+	void ReenablePlayer();
 
 public:
 	CameraComponent* camera = nullptr;
 
 private:
 	GridMapPickerSelectionInfoWidget* gridMapPickerSelectionInfoWidget = nullptr;
+
+	//This is a rough bool to get around starting input for this actor in player and
+	//the GetKey call there also hitting the deactivate code in this class.
+	bool firstTimeActivated = true;
 };

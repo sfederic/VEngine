@@ -3,9 +3,11 @@
 #include "Input.h"
 #include "VMath.h"
 #include "Actors/Game/GridActor.h"
+#include "Actors/Game/Player.h"
 #include "Components/CameraComponent.h"
 #include "UI/Game/GridMapPickerSelectionInfoWidget.h"
 #include "Physics/Raycast.h"
+#include "Gameplay/GameUtils.h"
 
 GridMapPicker::GridMapPicker()
 {
@@ -43,6 +45,8 @@ void GridMapPicker::Tick(float deltaTime)
 	{
 		AddPositionV(GetRightVectorV());
 	}
+
+	ReenablePlayer();
 }
 
 Properties GridMapPicker::GetProps()
@@ -69,5 +73,26 @@ void GridMapPicker::DisplayHitActorSelectionInfo()
 	else
 	{
 		gridMapPickerSelectionInfoWidget->selectedGridActor = nullptr;
+	}
+}
+
+void GridMapPicker::ReenablePlayer()
+{
+	if (Input::GetKeyUp(Keys::I))
+	{
+		if (firstTimeActivated)
+		{
+			firstTimeActivated = false;
+			return;
+		}
+
+		gridMapPickerSelectionInfoWidget->RemoveFromViewport();
+		gridMapPickerSelectionInfoWidget->Destroy();
+
+		auto player = Player::system.GetFirstActor();
+		GameUtils::SetActiveCamera(player->camera);
+		player->SetActive(true);
+
+		Destroy();
 	}
 }

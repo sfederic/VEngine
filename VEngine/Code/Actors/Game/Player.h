@@ -135,4 +135,6 @@ private:
 	void PreviewMovementNodesDuringBattle();
 
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
+
+	void ActivateGridMapPicker();
 };

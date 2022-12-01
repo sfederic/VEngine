@@ -167,17 +167,7 @@ void Player::Tick(float deltaTime)
 		RotationInput(deltaTime);
 	}
 
-	if (Input::GetKeyUp(Keys::I))
-	{
-		Transform transform{};
-		transform.position = GetPosition();
-		auto gridMapPicker = GridMapPicker::system.Add(GridMapPicker(), transform);
-
-		gridMapPicker->camera->targetActor = gridMapPicker;
-		GameUtils::SetActiveCamera(gridMapPicker->camera);
-
-		SetActive(false);
-	}
+	ActivateGridMapPicker();
 }
 
 Properties Player::GetProps()
@@ -746,6 +736,21 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 		}
 
 		previousHitTransparentActors.clear();
+	}
+}
+
+void Player::ActivateGridMapPicker()
+{
+	if (Input::GetKeyUp(Keys::I))
+	{
+		Transform transform;
+		transform.position = GetPosition();
+		auto gridMapPicker = GridMapPicker::system.Add(GridMapPicker(), transform);
+
+		gridMapPicker->camera->targetActor = gridMapPicker;
+		GameUtils::SetActiveCamera(gridMapPicker->camera);
+
+		SetActive(false);
 	}
 }
 
