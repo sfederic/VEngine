@@ -62,6 +62,7 @@ public:
 
 	void SetPosition(XMVECTOR position);
 	void SetPosition(XMFLOAT3 position);
+	void AddPositionV(const XMVECTOR offset);
 	void SetScale(XMVECTOR scale);
 	void SetRotation(XMVECTOR rotation);
 

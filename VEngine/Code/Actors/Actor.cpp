@@ -93,6 +93,11 @@ void Actor::SetPosition(XMFLOAT3 position)
 	rootComponent->UpdateTransform();
 }
 
+void Actor::AddPositionV(const XMVECTOR offset)
+{
+	SetPosition(GetPositionV() + offset);
+}
+
 void Actor::SetScale(XMVECTOR scale)
 {
 	XMStoreFloat3(&rootComponent->transform.scale, scale);
