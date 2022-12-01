@@ -12,10 +12,13 @@ public:
 	ACTOR_SYSTEM(GridMapPicker);
 
 	GridMapPicker();
-	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 
+private:
+	void DisplayHitActorSelectionInfo();
+
+public:
 	CameraComponent* camera = nullptr;
 
 private:

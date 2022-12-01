@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "GridMapPicker.h"
 #include "Input.h"
+#include "VMath.h"
 #include "Actors/Game/GridActor.h"
 #include "Components/CameraComponent.h"
 #include "UI/Game/GridMapPickerSelectionInfoWidget.h"
@@ -21,29 +22,52 @@ GridMapPicker::GridMapPicker()
 	gridMapPickerSelectionInfoWidget->AddToViewport();
 }
 
-void GridMapPicker::Start()
-{
-}
-
 void GridMapPicker::Tick(float deltaTime)
 {
-	if (Input::GetMouseLeftUp())
-	{
-		Ray ray(this);
-		if (RaycastFromScreen(ray))
-		{
-			auto gridActor = dynamic_cast<GridActor*>(ray.hitActor);
-			if (gridActor)
-			{
-				SetPosition(gridActor->GetPosition());
+	DisplayHitActorSelectionInfo();
 
-				gridMapPickerSelectionInfoWidget->selectedGridActor = gridActor;
-			}
-		}
+	if (Input::GetKeyDown(Keys::W))
+	{
+		AddPositionV(GetForwardVectorV());
+	}
+	else if (Input::GetKeyDown(Keys::S))
+	{
+		AddPositionV(-GetForwardVectorV());
+	}
+
+	if (Input::GetKeyDown(Keys::A))
+	{
+		AddPositionV(-GetRightVectorV());
+	}
+	else if (Input::GetKeyDown(Keys::D))
+	{
+		AddPositionV(GetRightVectorV());
 	}
 }
 
 Properties GridMapPicker::GetProps()
 {
 	return __super::GetProps();
+}
+
+void GridMapPicker::DisplayHitActorSelectionInfo()
+{
+	XMVECTOR pos = GetPositionV();
+	XMVECTOR origin = pos + XMVectorSet(0.f, 20.f, 0.f, 0.f); //Set origin high on the y-axis
+
+	Ray ray(this);
+	if (Raycast(ray, origin, pos))
+	{
+		auto gridActor = dynamic_cast<GridActor*>(ray.hitActor);
+		if (gridActor)
+		{
+			SetPosition(gridActor->GetPosition());
+
+			gridMapPickerSelectionInfoWidget->selectedGridActor = gridActor;
+		}
+	}
+	else
+	{
+		gridMapPickerSelectionInfoWidget->selectedGridActor = nullptr;
+	}
 }
