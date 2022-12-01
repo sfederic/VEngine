@@ -13,7 +13,7 @@ XMMATRIX Actor::GetWorldMatrix()
 	return rootComponent->GetWorldMatrix();
 }
 
-void Actor::UpdateTransform(XMMATRIX parentWorld)
+void Actor::UpdateTransform(const XMMATRIX parentWorld)
 {
 	XMMATRIX world = GetTransformMatrix() * parentWorld;
 
@@ -81,13 +81,13 @@ XMVECTOR Actor::GetRotationV()
 	return XMLoadFloat4(&rotation);
 }
 
-void Actor::SetPosition(XMVECTOR position)
+void Actor::SetPosition(const XMVECTOR position)
 {
 	XMStoreFloat3(&rootComponent->transform.position, position);
 	rootComponent->UpdateTransform();
 }
 
-void Actor::SetPosition(XMFLOAT3 position)
+void Actor::SetPosition(const XMFLOAT3 position)
 {
 	rootComponent->transform.position = position;
 	rootComponent->UpdateTransform();
@@ -98,19 +98,19 @@ void Actor::AddPositionV(const XMVECTOR offset)
 	SetPosition(GetPositionV() + offset);
 }
 
-void Actor::SetScale(XMVECTOR scale)
+void Actor::SetScale(const XMVECTOR scale)
 {
 	XMStoreFloat3(&rootComponent->transform.scale, scale);
 	rootComponent->UpdateTransform();
 }
 
-void Actor::SetRotation(XMVECTOR rotation)
+void Actor::SetRotation(const XMVECTOR rotation)
 {
 	XMStoreFloat4(&rootComponent->transform.rotation, rotation);
 	rootComponent->UpdateTransform();
 }
 
-void Actor::SetTransform(Transform transform)
+void Actor::SetTransform(const Transform transform)
 {
 	rootComponent->transform = transform;
 	rootComponent->UpdateTransform();
@@ -222,7 +222,7 @@ void Actor::Destroy()
 {
 }
 
-bool Actor::SetName(std::string newName)
+bool Actor::SetName(const std::string newName)
 {
 	//Check for duplicate names in world
 	if (!World::CheckIfActorExistsInWorld(newName))
@@ -324,7 +324,7 @@ void Actor::RemoveComponent(std::string componentName)
 	RemoveComponent(component);
 }
 
-Component* Actor::FindComponentAllowNull(std::string componentName)
+Component* Actor::FindComponentAllowNull(const std::string componentName)
 {
 	auto it = componentMap.find(componentName);
 	if (it == componentMap.end())
@@ -336,7 +336,7 @@ Component* Actor::FindComponentAllowNull(std::string componentName)
 	return it->second;
 }
 
-Component* Actor::GetComponentByName(std::string componentName)
+Component* Actor::GetComponentByName(const std::string componentName)
 {
 	for (auto& componentPair : componentMap)
 	{

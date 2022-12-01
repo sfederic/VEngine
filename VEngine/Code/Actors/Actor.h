@@ -45,9 +45,9 @@ public:
 	Actor() {}
 
 	XMMATRIX GetWorldMatrix();
-	void UpdateTransform(XMMATRIX parentWorld);
+	void UpdateTransform(const XMMATRIX parentWorld);
 	XMMATRIX GetTransformMatrix();
-	void SetTransform(Transform transform);
+	void SetTransform(const Transform transform);
 	Transform GetTransform();
 
 	XMFLOAT3 GetPosition();
@@ -60,11 +60,11 @@ public:
 	XMFLOAT4 GetRotation();
 	XMVECTOR GetRotationV();
 
-	void SetPosition(XMVECTOR position);
-	void SetPosition(XMFLOAT3 position);
+	void SetPosition(const XMVECTOR position);
+	void SetPosition(const XMFLOAT3 position);
 	void AddPositionV(const XMVECTOR offset);
-	void SetScale(XMVECTOR scale);
-	void SetRotation(XMVECTOR rotation);
+	void SetScale(const XMVECTOR scale);
+	void SetRotation(const XMVECTOR rotation);
 
 	XMFLOAT3 GetForwardVector();
 	XMVECTOR GetForwardVectorV();
@@ -98,10 +98,10 @@ public:
 	virtual void Destroy();
 
 	//Iterates over every actor from the actor's system to avoid a rename collision. bool denotes if collision occured.
-	bool SetName(std::string newName);
+	bool SetName(const std::string newName);
 
 	//Use this for when world state update order is an issue (e.g. ActorSystem, serialisation, WorldEditor)
-	void SimpleSetName(std::string newName) { name = newName; }
+	void SimpleSetName(const std::string newName) { name = newName; }
 
 	std::string GetName() { return name; }
 
@@ -126,7 +126,7 @@ public:
 
 	void SetEmptyRootComponent();
 
-	Component* FindComponentAllowNull(std::string componentName);
+	Component* FindComponentAllowNull(const std::string componentName);
 
 	template <typename T>
 	T* CreateComponent(T component, const std::string componentName)
@@ -180,15 +180,15 @@ public:
 		return nullptr;
 	}
 
-	Component* GetComponentByName(std::string componentName);
+	Component* GetComponentByName(const std::string componentName);
 
 	void ResetOwnerUIDToComponents();
 
 	UID GetUID() { return uid; }
-	void SetUID(UID uid_) { uid = uid_; }
+	void SetUID(const UID uid_) { uid = uid_; }
 
 	int GetSystemIndex() { return actorSystemIndex; }
-	void SetSystemIndex(int index) { actorSystemIndex = index; }
+	void SetSystemIndex(const int index) { actorSystemIndex = index; }
 
 	IActorSystem* GetActorSystem() { return actorSystem; }
 	void SetActorSystem(IActorSystem* system) { actorSystem = system; }
