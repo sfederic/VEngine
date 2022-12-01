@@ -3,13 +3,15 @@
 ## Overview
 A beginner to intermediate game engine built with the intent of creating an RPG in the style of games such as Vagrant Story and Final Fantasy Tactics.
 
-The purpose of this being open source is to detail the more lower level programming concepts that get overlooked and build a reference for onlookeers, from programming to design concepts, when working on an engine from the ground up, and building a game alongside, through a beginner's perspective.
+The purpose of this being open source is to detail the lower level programming concepts that get overlooked and build a reference for onlookers, from programming to design concepts, when working on an engine from the ground up alongside a game, through a beginner's perspective.
+
+As many hobby engines are more focused on graphical and technical implementations, this engine's graphical and technical scopes are more simplified in order to cater for a more average game development use case. 
 
 ![image](https://user-images.githubusercontent.com/45758254/164871735-21b7a40f-fc77-441d-8868-10376bb659dc.png)
 
 ## Build Notes
 * Visual Studio 2022 17.4
-* Blender 2.93.7
+* Blender 2.93.7 (For FBX SDK)
 
 ## Packages
 
