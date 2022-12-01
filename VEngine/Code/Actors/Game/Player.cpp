@@ -745,6 +745,7 @@ void Player::ActivateGridMapPicker()
 	{
 		Transform transform;
 		transform.position = GetPosition();
+		transform.rotation = GetRotation();
 		auto gridMapPicker = GridMapPicker::system.Add(GridMapPicker(), transform);
 
 		gridMapPicker->camera->targetActor = gridMapPicker;
