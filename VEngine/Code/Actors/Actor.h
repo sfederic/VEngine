@@ -34,9 +34,11 @@ private:
 
 	UID uid = GenerateUID();
 
+	int actorSystemIndex = -1;
+
 	bool active = true;
 
-	int actorSystemIndex = -1;
+	bool tickEnabled = true;
 
 public:
 	//GAME SPECIFIC VARS
@@ -112,6 +114,9 @@ public:
 	void SetActive(bool newActive);
 
 	inline bool IsActive() { return active; }
+
+	void SetTickEnabled(const bool enabled);
+	inline bool IsTickEnabled() { return tickEnabled; }
 
 	//Set Actor and components active field as opposite of what it currently is.
 	void ToggleActive();

@@ -260,6 +260,11 @@ void Actor::SetActive(bool newActiveValue)
 	}
 }
 
+void Actor::SetTickEnabled(const bool enabled)
+{
+	tickEnabled = enabled;
+}
+
 void Actor::ToggleActive()
 {
 	active = !active;
