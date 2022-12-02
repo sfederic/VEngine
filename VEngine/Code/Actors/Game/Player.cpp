@@ -207,13 +207,6 @@ void Player::ResetBulletsToMax()
 	Log("Bullet count reset to max.");
 }
 
-GridNode* Player::GetCurrentNode()
-{
-	auto grid = Grid::system.GetFirstActor();
-	auto node = grid->GetNode(xIndex, yIndex);
-	return node;
-}
-
 void Player::InflictDamage(int damage)
 {
 	int guardPoints = 0;
@@ -538,70 +531,11 @@ void Player::ToggleMemoryMenu()
 	}
 }
 
-void Player::ExpendActionPoints(int num)
-{
-	actionPoints -= num;
-	actionBarWidget->actionPoints = actionPoints;
-}
-
 void Player::LerpPlayerCameraFOV(float deltaTime)
 {
 	if (camera->FOV != nextCameraFOV)
 	{
 		camera->FOV = std::lerp(camera->FOV, nextCameraFOV, 4.f * deltaTime);
-	}
-}
-
-void Player::CheckNextMoveNode(XMVECTOR previousPos)
-{
-	int nextXIndex = (int)std::round(nextPos.m128_f32[0]);
-	int nextYIndex = (int)std::round(nextPos.m128_f32[2]);
-
-	//Keep the call here so player can face walls and holes on input.
-	mesh->SetWorldRotation(VMath::LookAtRotation(nextPos, previousPos));
-
-	auto grid = Grid::system.GetFirstActor();
-
-	if (nextXIndex >= grid->sizeX || nextYIndex >= grid->sizeY
-		|| nextXIndex < 0 || nextYIndex < 0)
-	{
-		nextPos = previousPos;
-		return;
-	}
-
-	auto nextNodeToMoveTo = grid->GetNode(nextXIndex, nextYIndex);
-	if (!nextNodeToMoveTo->active)
-	{
-		nextPos = previousPos;
-		return;
-	}
-
-	//Check next node height in relation to player
-	auto node = grid->GetNode(nextXIndex, nextYIndex);
-	if (node->worldPosition.y > (GetPosition().y + Grid::maxHeightMove))
-	{
-		Log("Node [x:%d, y:%d] too high to move to.", nextXIndex, nextYIndex);
-		nextPos = previousPos;
-		return;
-	}
-
-	//FENCE RAYCAST CHECK
-	Ray fenceRay(this);
-	if (Raycast(fenceRay, GetPositionV(), nextPos))
-	{
-		if (dynamic_cast<FenceActor*>(fenceRay.hitActor))
-		{
-			nextPos = previousPos;
-			return;
-		}
-	}
-
-	nextPos = XMLoadFloat3(&node->worldPosition);
-
-	if (battleSystem.isBattleActive)
-	{
-		PreviewMovementNodesDuringBattle();
-		ExpendActionPoints(1);
 	}
 }
 
@@ -659,44 +593,6 @@ bool Player::DialogueCheck(Actor* hitActor)
 	}
 
 	return false;
-}
-
-//@Todo: this works fine, there's just a slight polish it needs when you run out of action points and
-//preview nodes for the player's movement remains.
-void Player::PreviewMovementNodesDuringBattle()
-{
-	std::vector<GridNode*> movementNodes;
-	std::vector<GridNode*> closedNodes;
-
-	GridNode* currentNode = GetCurrentNode();
-	Grid* grid = Grid::system.GetFirstActor();
-
-	grid->GetNeighbouringNodes(currentNode, movementNodes);
-
-	for (int moveIndex = 0; moveIndex < (actionPoints - 1); moveIndex++)
-	{
-		for (int previewIndex = 0; previewIndex < movementNodes.size(); previewIndex++)
-		{
-			grid->GetNeighbouringNodes(movementNodes[previewIndex], closedNodes);
-		}
-
-		movementNodes.insert(movementNodes.end(), closedNodes.begin(), closedNodes.end());
-
-		closedNodes.clear();
-	}
-
-	if (actionPoints > 0)
-	{
-		grid->ResetAllNodes(); //This is more to reset the node colours
-	}
-
-	for (auto node : movementNodes)
-	{
-		if (node->trapNode == nullptr)
-		{
-			node->SetColour(GridNode::previewColour);
-		}
-	}
 }
 
 //Note: Default blend state needs to already be set for the mesh.

@@ -557,7 +557,7 @@
     <ClCompile Include="Code\Gameplay\UnitSkills\LineAttackSkill.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\Units\LineAttackerUnit.cpp">
+    <ClCompile Include="Code\Actors\Game\EnemyUnits\LineAttackerUnit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Gameplay\UnitSkills\UnitSkill.cpp">
@@ -620,7 +620,7 @@
     <ClCompile Include="Code\Gameplay\Memories\MergedMemories\MemoryMerger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\Units\ShieldUnit.cpp">
+    <ClCompile Include="Code\Actors\Game\EnemyUnits\ShieldUnit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\Game\GridMapPicker.cpp">
@@ -630,6 +630,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Gameplay\TrapNodes\DamageTrapNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Gameplay\PlayerInputController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Actors\Game\PlayerUnit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1150,7 +1156,7 @@
     <ClInclude Include="Code\Gameplay\UnitSkills\LineAttackSkill.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\Units\LineAttackerUnit.h">
+    <ClInclude Include="Code\Actors\Game\EnemyUnits\LineAttackerUnit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\UnitSkills\EntireAreaAttackSkill.h">
@@ -1198,7 +1204,7 @@
     <ClInclude Include="Code\Gameplay\Memories\MergedMemories\MemoryMerger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\Units\ShieldUnit.h">
+    <ClInclude Include="Code\Actors\Game\EnemyUnits\ShieldUnit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\ForwardFace.h">
@@ -1214,6 +1220,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\TrapNodes\DamageTrapNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Gameplay\PlayerInputController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\PlayerUnit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

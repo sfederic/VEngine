@@ -1,9 +1,8 @@
 #pragma once
-#include "../Actor.h"
-#include "../ActorSystem.h"
+
+#include "PlayerUnit.h"
 #include "Gameplay/BattleEnums.h"
 
-struct MeshComponent;
 struct CameraComponent;
 struct WidgetComponent;
 struct DialogueComponent;
@@ -11,21 +10,17 @@ struct MemoryComponent;
 struct AudioComponent;
 struct InteractWidget;
 struct MemoryMenuWidget;
-struct PlayerActionBarWidget;
 struct PlayerHealthWidget;
 struct BulletWidget;
-struct GuardWidget;
 struct Memory;
-struct GridNode;
 struct GridActor;
 struct Unit;
 
-struct Player : Actor
+struct Player : public PlayerUnit
 {
 	ACTOR_SYSTEM(Player)
 
 	//Components
-	MeshComponent* mesh = nullptr;
 	CameraComponent* camera = nullptr;
 
 	//Footstep sounds to play while moving
@@ -41,13 +36,8 @@ struct Player : Actor
 	//Widgets
 	InteractWidget* interactWidget = nullptr;
 	MemoryMenuWidget* memoryMenuWidget = nullptr;
-	PlayerActionBarWidget* actionBarWidget = nullptr;
-	GuardWidget* guardWidget = nullptr;
 	PlayerHealthWidget* healthWidget = nullptr;
 	BulletWidget* bulletWidget = nullptr;
-
-	XMVECTOR nextPos;
-	XMVECTOR nextRot;
 
 	GridActor* gridActorInteractingWith = nullptr;
 
@@ -90,8 +80,6 @@ struct Player : Actor
 	//called at every battle turn end
 	void RefreshCombatStats();
 
-	GridNode* GetCurrentNode();
-	
 	void InflictDamage(int damage);
 
 	void Guard();
@@ -114,9 +102,7 @@ private:
 	void PrimaryAction();
 	void SecondaryAction();
 	void ToggleMemoryMenu();
-	void ExpendActionPoints(int num);
 	void LerpPlayerCameraFOV(float deltaTime);
-	void CheckNextMoveNode(XMVECTOR previousPos);
 
 	bool CheckIfPlayerMovementAndRotationStopped();
 
@@ -131,8 +117,6 @@ private:
 	void PushbackObject();
 
 	bool CheckAttackPositionAgainstUnitDirection(Unit* unit);
-
-	void PreviewMovementNodesDuringBattle();
 
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
