@@ -121,7 +121,11 @@ void GridMapPicker::DisplayTrapNodeInformation()
 
 	if (node->trapNode)
 	{
-		//@Todo: widget for trap node effect description
+		gridMapPickerSelectionInfoWidget->selectedTrapNode = node->trapNode;
+	}
+	else
+	{
+		gridMapPickerSelectionInfoWidget->selectedTrapNode = nullptr;
 	}
 }
 
