@@ -11,9 +11,10 @@ class PlayerInputController
 {
 public:
 	void Tick(float deltaTime);
-
-	PlayerUnit* playerUnitToControl = nullptr;
+	void SetPlayerUnitToControl(PlayerUnit* playerUnit) { playerUnitToControl = playerUnit; }
 
 private:
-	void CheckNextMoveNode(XMVECTOR previousPos);
+	PlayerUnit* playerUnitToControl = nullptr;
 };
+
+extern PlayerInputController playerInputController;

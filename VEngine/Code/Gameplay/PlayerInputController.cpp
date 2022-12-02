@@ -7,6 +7,5 @@ void PlayerInputController::Tick(float deltaTime)
 {
 	if (playerUnitToControl)
 	{
-		//if(Input::GetKEy)
 	}
 }
