@@ -106,6 +106,7 @@ void Player::Tick(float deltaTime)
 	}
 
 	PlaceTrap();
+	DisarmTrap();
 
 	//Show gun range tiles
 	//@Todo: see if gun range should be a thing
@@ -764,7 +765,6 @@ void Player::ActivateGridMapPicker()
 	}
 }
 
-//Testing code for placing trap nodes.
 //Places a trap node on the current node the player is standing on.
 void Player::PlaceTrap()
 {
@@ -780,6 +780,23 @@ void Player::PlaceTrap()
 
 		currentNode->trapNode = new DamageTrapNode();
 		currentNode->SetColour(GridNode::trapNodeColour);
+	}
+}
+
+//Delete trap and set node colour back to normal
+void Player::DisarmTrap()
+{
+	if (Input::GetKeyUp(Keys::Y))
+	{
+		auto currentNode = GetCurrentNode();
+
+		if (currentNode->trapNode != nullptr)
+		{
+			delete currentNode->trapNode;
+			currentNode->trapNode = nullptr;
+		}
+
+		currentNode->SetColour(GridNode::normalColour);
 	}
 }
 

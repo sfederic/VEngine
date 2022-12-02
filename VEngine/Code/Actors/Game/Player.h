@@ -137,5 +137,7 @@ private:
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
 	void ActivateGridMapPicker();
+
 	void PlaceTrap();
+	void DisarmTrap();
 };
