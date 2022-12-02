@@ -448,3 +448,15 @@ void Grid::DisplayShowAllNodes()
         }
     }
 }
+
+void Grid::DisarmAllTrapNodes()
+{
+    for (auto node : GetAllNodes())
+    {
+        if (node->trapNode)
+        {
+            delete node->trapNode;
+            node->trapNode = nullptr;
+        }
+    }
+}

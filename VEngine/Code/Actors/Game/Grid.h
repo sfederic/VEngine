@@ -71,4 +71,5 @@ struct Grid : Actor
 	void LerpOutNodes(float deltaTime);
 	void DisplayHideAllNodes();
 	void DisplayShowAllNodes();
+	void DisarmAllTrapNodes();
 };
