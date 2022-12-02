@@ -11,6 +11,7 @@
 #include "VMath.h"
 #include "Player.h"
 #include "Gameplay/BattleSystem.h"
+#include "Gameplay/TrapNodes/TrapNode.h"
 #include "Timer.h"
 #include "Log.h"
 #include "UI/Game/GuardWidget.h"
@@ -106,6 +107,13 @@ void Unit::Tick(float deltaTime)
 
 				xIndex = pathNodes[movementPathNodeIndex]->xIndex;
 				yIndex = pathNodes[movementPathNodeIndex]->yIndex;
+
+				//Trap node logic
+				auto currentNode = GetCurrentNode();
+				if (currentNode->trapNode)
+				{
+					currentNode->trapNode->Activate(this);
+				}
 
 				movementPathNodeIndex++;
 			}
