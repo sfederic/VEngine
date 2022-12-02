@@ -1,4 +1,5 @@
 #pragma once
+
 #include <DirectXMath.h>
 
 using namespace DirectX;
@@ -8,11 +9,7 @@ class TrapNode;
 
 struct GridNode
 {
-	GridNode()
-	{
-		xIndex = 0;
-		yIndex = 0;
-	}
+	GridNode() {}
 
 	GridNode(int x, int y, int instancedMeshIndex_)
 	{
@@ -71,6 +68,7 @@ struct GridNode
 	//COLOURS
 	inline static XMFLOAT4 normalColour = XMFLOAT4(0.07f, 0.27f, 0.89f, 0.4f);
 	inline static XMFLOAT4 previewColour = XMFLOAT4(0.89f, 0.07f, 0.07f, 0.4f);
+	inline static XMFLOAT4 trapNodeColour = XMFLOAT4(0.9f, 0.45f, 0.1f, 0.7f);
 
 	float gCost = 0.f; //Distance from start node
 	float hCost = 0.f; //Distance to end node

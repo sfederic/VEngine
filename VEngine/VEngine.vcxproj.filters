@@ -629,6 +629,9 @@
     <ClCompile Include="Code\UI\Game\GridMapPickerSelectionInfoWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Gameplay\TrapNodes\DamageTrapNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -1208,6 +1211,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\TrapNodes\TrapNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Gameplay\TrapNodes\DamageTrapNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
