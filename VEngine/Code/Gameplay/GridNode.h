@@ -42,7 +42,6 @@ struct GridNode
 		parentNode = nullptr;
 		closed = false;
 		preview = false;
-		SetColour(normalColour);
 	}
 
 	//These functions also sets the nodes variables

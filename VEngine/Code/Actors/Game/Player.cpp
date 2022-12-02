@@ -691,7 +691,10 @@ void Player::PreviewMovementNodesDuringBattle()
 
 	for (auto node : movementNodes)
 	{
-		node->SetColour(GridNode::previewColour);
+		if (node->trapNode == nullptr)
+		{
+			node->SetColour(GridNode::previewColour);
+		}
 	}
 }
 
