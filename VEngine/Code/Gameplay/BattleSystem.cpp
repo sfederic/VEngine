@@ -84,6 +84,7 @@ void BattleSystem::EndBattle()
 
 	grid->ResetAllNodes();
 	grid->DisplayHideAllNodes();
+	grid->DisarmAllTrapNodes();
 	grid = nullptr;
 
 	player = nullptr;
