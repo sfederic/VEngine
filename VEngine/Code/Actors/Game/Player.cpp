@@ -33,6 +33,8 @@
 #include "Gameplay/GameUtils.h"
 #include "Render/Material.h"
 
+#include "Gameplay/TrapNodes/DamageTrapNode.h"
+
 Player::Player()
 {
 	nextPos = XMVectorZero();
@@ -102,6 +104,8 @@ void Player::Tick(float deltaTime)
 	{
 		GameUtils::TriggerGameOver();
 	}
+
+	PlaceTrap();
 
 	//Show gun range tiles
 	//@Todo: see if gun range should be a thing
@@ -754,6 +758,25 @@ void Player::ActivateGridMapPicker()
 		Grid::system.GetFirstActor()->SetActive(true);
 
 		SetTickEnabled(false);
+	}
+}
+
+//Testing code for placing trap nodes.
+//Places a trap node on the current node the player is standing on.
+void Player::PlaceTrap()
+{
+	if (Input::GetKeyUp(Keys::T))
+	{
+		auto currentNode = GetCurrentNode();
+
+		if (currentNode->trapNode != nullptr)
+		{
+			delete currentNode->trapNode;
+			currentNode->trapNode = nullptr;
+		}
+
+		currentNode->trapNode = new DamageTrapNode();
+		currentNode->SetColour(GridNode::trapNodeColour);
 	}
 }
 
