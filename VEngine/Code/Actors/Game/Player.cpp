@@ -768,7 +768,7 @@ void Player::PlaceTrap()
 	if (Input::GetKeyUp(Keys::T))
 	{
 		auto currentNode = GetCurrentNode();
-
+		
 		if (currentNode->trapNode != nullptr)
 		{
 			delete currentNode->trapNode;

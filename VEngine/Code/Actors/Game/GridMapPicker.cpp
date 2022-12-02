@@ -9,6 +9,7 @@
 #include "UI/Game/GridMapPickerSelectionInfoWidget.h"
 #include "Physics/Raycast.h"
 #include "Gameplay/GameUtils.h"
+#include "Gameplay/TrapNodes/TrapNode.h"
 
 GridMapPicker::GridMapPicker()
 {
@@ -33,6 +34,8 @@ void GridMapPicker::Start()
 void GridMapPicker::Tick(float deltaTime)
 {
 	DisplayHitActorSelectionInfo();
+
+	DisplayTrapNodeInformation();
 
 	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRotation, deltaTime, 7.0f));
 
@@ -105,6 +108,20 @@ void GridMapPicker::DisplayHitActorSelectionInfo()
 	else
 	{
 		gridMapPickerSelectionInfoWidget->selectedGridActor = nullptr;
+	}
+}
+
+void GridMapPicker::DisplayTrapNodeInformation()
+{
+	const int gridIndexX = GetPosition().x;
+	const int gridIndexY = GetPosition().z;
+
+	auto grid = Grid::system.GetFirstActor();
+	auto node = grid->GetNode(gridIndexX, gridIndexY);
+
+	if (node->trapNode)
+	{
+		//@Todo: widget for trap node effect description
 	}
 }
 

@@ -21,6 +21,10 @@ private:
 	void MovementInput();
 
 	void DisplayHitActorSelectionInfo();
+
+	//If picker hovers over a node with a linked trap, display that info.
+	void DisplayTrapNodeInformation();
+
 	void ReenablePlayer();
 
 public:
