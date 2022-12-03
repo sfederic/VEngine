@@ -52,11 +52,6 @@ Player::Player()
 	rootComponent->AddChild(camera);
 
 	dialogueComponent = DialogueComponent::system.Add("Dialogue", this);
-
-	stepSounds = AudioComponent::system.Add("StepSounds", this);
-	stepSounds->loop = true;
-	stepSounds->audioFilename = "step.wav";
-	stepSounds->playOnStart = true;
 }
 
 void Player::Start()
@@ -75,10 +70,6 @@ void Player::Start()
 	guardWidget = CreateWidget<GuardWidget>();
 
 	healthWidget = CreateWidget<PlayerHealthWidget>();
-
-	bulletWidget = CreateWidget<BulletWidget>();
-	bulletWidget->AddToViewport();
-	bulletWidget->numBulletsPlayerHas = numBullets;
 
 	nextPos = GetPositionV();
 	nextRot = GetRotationV();
@@ -110,29 +101,7 @@ void Player::Tick(float deltaTime)
 	PlaceTrap();
 	DisarmTrap();
 
-	//Show gun range tiles
-	//@Todo: see if gun range should be a thing
-	/*if (gunModeOn && CheckIfPlayerMovementAndRotationStopped())
-	{
-		auto meshForward = GetMeshForward();
-		auto grid = GameUtils::GetGrid();
-		auto currentNode = GetCurrentNode();
-
-		for (int i = 0; i < 5; i++)
-		{
-			int nextXIndex = xIndex + (i * meshForward.m128_f32[0]);
-			int nextYIndex = yIndex + (i * meshForward.m128_f32[2]);
-
-			if (nextXIndex >= grid->sizeX || nextXIndex < 0) break;
-			if (nextYIndex >= grid->sizeY || nextYIndex < 0) break;
-
-			auto nextNode = grid->GetNode(nextXIndex, nextYIndex);
-			nextNode->SetColour(GridNode::previewColour);
-		}
-	}*/
-
 	PrimaryAction();
-	SecondaryAction();
 
 	if (Input::GetKeyUp(Keys::O))
 	{
@@ -203,12 +172,6 @@ void Player::ResetGuard()
 	ableToGuard = true;
 }
 
-void Player::ResetBulletsToMax()
-{
-	numBullets = GameInstance::maxPlayerBullets;
-	Log("Bullet count reset to max.");
-}
-
 void Player::InflictDamage(int damage)
 {
 	int guardPoints = 0;
@@ -267,13 +230,6 @@ void Player::ToggleBattleGrid()
 {
 	if (Input::GetKeyUp(Keys::Space))
 	{
-		//switch weapons if battle is active
-		if (battleSystem.isBattleActive)
-		{
-			gunModeOn = !gunModeOn;
-			return;
-		}
-
 		isWeaponDrawn = !isWeaponDrawn;
 
 		//toggle grid
@@ -397,29 +353,6 @@ void Player::PrimaryAction()
 				}
 			}
 		}
-	}
-}
-
-//Using this for secondary action testing where primary doesn't fit.
-void Player::SecondaryAction()
-{
-	if (Input::GetKeyUp(Keys::Up))
-	{
-		Ray gunRay(this);
-		if (Raycast(gunRay, GetPositionV(), mesh->GetForwardVectorV(), 10.f))
-		{
-			GunShotCheck(gunRay.hitActor);
-			return;
-		}
-
-		//Ray ray(this);
-		//auto meshForward = mesh->GetForwardVectorV();
-		//if (Raycast(ray, GetPositionV(), meshForward, 1.5f))
-		//{
-		//	Log("Player interact: %s", ray.hitActor->GetName().c_str());
-
-		//	if (CombatInteractCheck(ray.hitActor)) {}
-		//}
 	}
 }
 
@@ -740,43 +673,6 @@ bool Player::AttackGridActorBasedOnNode()
 		if (gridActor->GetCurrentNode()->Equals(attackNode))
 		{
 			gridActor->InflictDamage(attackPoints);
-			return true;
-		}
-	}
-
-	return false;
-}
-
-bool Player::GunShotCheck(Actor* hitActor)
-{
-	if (isWeaponDrawn && !inConversation)
-	{
-		auto unit = dynamic_cast<Unit*>(hitActor);
-		if (unit)
-		{
-			battleSystem.StartBattle();
-			ExpendActionPoints(1);
-
-			unit->InflictDamage(attackPoints);
-
-			numBullets--;
-			bulletWidget->numBulletsPlayerHas = numBullets;
-
-			GameUtils::PlayAudioOneShot("gunshot.wav");
-
-			return true;
-		}
-
-		auto gridActor = dynamic_cast<GridActor*>(hitActor);
-		if (gridActor)
-		{
-			gridActor->InflictDamage(attackPoints);
-
-			numBullets--;
-			bulletWidget->numBulletsPlayerHas = numBullets;
-
-			GameUtils::PlayAudioOneShot("gunshot.wav");
-
 			return true;
 		}
 	}

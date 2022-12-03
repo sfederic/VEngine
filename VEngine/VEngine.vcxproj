@@ -118,7 +118,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Code\Actors\Game\AllyUnits\AttackUnit.cpp" />
-    <ClCompile Include="Code\Actors\Game\BulletCache.cpp" />
     <ClCompile Include="Code\Actors\Game\GridMapPicker.cpp" />
     <ClCompile Include="Code\Actors\Game\EnemyUnits\LineAttackerUnit.cpp" />
     <ClCompile Include="Code\Gameplay\Memories\AttackUpMemory.cpp" />
@@ -291,7 +290,6 @@
     <ClCompile Include="Code\Gameplay\PlayerInputController.cpp" />
     <ClCompile Include="Code\Actors\Game\PlayerUnit.cpp" />
     <ClInclude Include="Code\Actors\Game\AllyUnits\AttackUnit.h" />
-    <ClInclude Include="Code\Actors\Game\BulletCache.h" />
     <ClInclude Include="Code\Actors\Game\GridMapPicker.h" />
     <ClInclude Include="Code\Gameplay\TrapNodes\DamageTrapNode.h" />
     <ClInclude Include="Code\Gameplay\TrapNodes\TrapNode.h" />

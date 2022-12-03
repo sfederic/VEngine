@@ -7,4 +7,6 @@ class AttackUnit : public PlayerUnit
 {
 public:
 	ACTOR_SYSTEM(AttackUnit);
+
+	virtual Properties GetProps() override;
 };

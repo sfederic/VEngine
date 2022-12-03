@@ -3,7 +3,7 @@
 #include <vector>
 
 struct Unit;
-struct Player;
+class Player;
 struct Grid;
 
 //Handles all units and player turns for battle as well as what units are active.

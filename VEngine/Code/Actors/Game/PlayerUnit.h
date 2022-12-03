@@ -37,12 +37,16 @@ public:
 
 	MeshComponent* mesh = nullptr;
 
-protected:
-	int actionPoints = 5;
+	int attackPoints = 1;
+	int actionPoints = 10;
+	int healthPoints = 3;
 
 	float moveSpeed = 5.f;
 	float rotSpeed = 3.5f;
 
 	int xIndex = -1;
 	int yIndex = -1;
+
+	bool ableToGuard = false;
+	bool guarding = false;
 };
