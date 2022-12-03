@@ -12,11 +12,14 @@
 
 void PlayerUnit::Tick(float deltaTime)
 {
-	MovementInput(deltaTime);
-	RotationInput(deltaTime);
-
 	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, moveSpeed));
 	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotSpeed));
+}
+
+void PlayerUnit::ControllerInput(float deltaTime)
+{
+	MovementInput(deltaTime);
+	RotationInput(deltaTime);
 }
 
 void PlayerUnit::CheckNextMoveNode(XMVECTOR previousPos)

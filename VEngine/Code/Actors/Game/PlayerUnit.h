@@ -15,6 +15,8 @@ class PlayerUnit : public Actor
 public:
 	virtual void Tick(float deltaTime) override;
 
+	void ControllerInput(float deltaTime);
+
 	void CheckNextMoveNode(XMVECTOR previousPos);
 	GridNode* GetCurrentNode();
 

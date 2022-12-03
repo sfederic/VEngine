@@ -25,6 +25,7 @@
 #include "Physics/PhysicsSystem.h"
 #include "Editor/CutsceneSequencer.h"
 #include "Gameplay/WorldFunctions.h"
+#include "Gameplay/PlayerInputController.h"
 #include "Gameplay/Memories/MergedMemories/MemoryMerger.h"
 
 void ClearLog()
@@ -99,6 +100,8 @@ void Engine::TickSystems(float deltaTime)
 	WorldEditor::Tick();
 	physicsSystem.Tick(deltaTime);
 	Renderer::Tick();
+
+	playerInputController.Tick(deltaTime);
 
 	if (Core::gameplayOn && !Core::gameWorldPaused)
 	{

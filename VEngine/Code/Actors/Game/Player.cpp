@@ -95,6 +95,8 @@ void Player::End()
 
 void Player::Tick(float deltaTime)
 {
+	__super::Tick(deltaTime);
+
 	if (gameOver)
 	{
 		return;

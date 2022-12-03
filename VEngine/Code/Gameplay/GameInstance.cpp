@@ -2,7 +2,7 @@
 #include "GameInstance.h"
 #include "Memory.h"
 
-std::string GameInstance::startingMap = "test.vmap";
+std::string GameInstance::startingMap = "combat_maze_test.vmap";
 
 void GameInstance::DeletePlayerMemories()
 {
