@@ -13,12 +13,18 @@ struct GridNode;
 class PlayerUnit : public Actor
 {
 public:
+	virtual void Tick(float deltaTime) override;
+
 	void CheckNextMoveNode(XMVECTOR previousPos);
 	GridNode* GetCurrentNode();
 
 protected:
 	void ExpendActionPoints(int num);
 	void PreviewMovementNodesDuringBattle();
+
+	bool CheckIfMovementAndRotationStopped();
+	void MovementInput(float deltaTime);
+	void RotationInput(float deltaTime);
 
 public:
 	XMVECTOR nextPos;
@@ -29,9 +35,12 @@ public:
 
 	MeshComponent* mesh = nullptr;
 
+protected:
 	int actionPoints = 5;
 
-private:
+	float moveSpeed = 5.f;
+	float rotSpeed = 3.5f;
+
 	int xIndex = -1;
 	int yIndex = -1;
 };

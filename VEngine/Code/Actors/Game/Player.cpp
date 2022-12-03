@@ -261,98 +261,6 @@ void Player::QuickThought(const std::wstring& text)
 	Timer::SetTimer(5.0f, std::bind(&DialogueWidget::RemoveFromViewport, dialogueComponent->dialogueWidget));
 }
 
-void Player::MovementInput(float deltaTime)
-{
-	float moveSpeed = 4.75f;
-	if (battleSystem.isBattleActive)
-	{
-		moveSpeed = 6.5f;
-	}
-
-	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, moveSpeed));
-
-	if (CheckIfPlayerMovementAndRotationStopped())
-	{
-		if (stepSoundsVolume > 0.f) { stepSoundsVolume -= deltaTime * 4.f; }
-		stepSounds->volume = stepSoundsVolume;
-
-		xIndex = std::round(GetPosition().x);
-		yIndex = std::round(GetPosition().z);
-
-		XMVECTOR previousPos = nextPos;
-
-		if (Input::GetKeyHeld(Keys::W))
-		{
-			mesh->currentAnimation = "Armature|ArmatureAction";
-
-			nextPos = GetPositionV() + GetForwardVectorV();
-			CheckNextMoveNode(previousPos);
-		}
-		else
-		{
-			//Testing code for animation states. Keep in mind it would need to be like this for player.
-			mesh->currentAnimation.clear();
-		}
-
-		if (Input::GetKeyHeld(Keys::S))
-		{
-			nextPos = GetPositionV() + -GetForwardVectorV();
-			CheckNextMoveNode(previousPos);
-		}
-		if (Input::GetKeyHeld(Keys::A))
-		{
-			nextPos = GetPositionV() + -GetRightVectorV();
-			CheckNextMoveNode(previousPos);
-		}
-		if (Input::GetKeyHeld(Keys::D))
-		{
-			nextPos = GetPositionV() + GetRightVectorV();
-			CheckNextMoveNode(previousPos);
-		}
-
-		//Old raycast check for movement blocking (current check uses grid nodes)
-		/*if (!XMVector4Equal(previousPos, nextPos))
-		{
-			Ray ray(this);
-			XMVECTOR direction = XMVector3Normalize(nextPos - previousPos);
-			if (Raycast(ray, GetPositionVector(), direction, 1.f))
-			{
-				nextPos = previousPos;
-			}
-		}*/
-	}
-	else
-	{
-		if (stepSoundsVolume < 1.0f) { stepSoundsVolume += deltaTime * 4.f; }
-		stepSounds->volume = stepSoundsVolume;
-	}
-}
-
-void Player::RotationInput(float deltaTime)
-{
-	float rotSpeed = 5.0f;
-	if (battleSystem.isBattleActive)
-	{
-		rotSpeed = 6.0f;
-	}
-
-	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotSpeed));
-
-	if (CheckIfPlayerMovementAndRotationStopped())
-	{
-		if (Input::GetKeyHeld(Keys::Right))
-		{
-			constexpr float angle = XMConvertToRadians(90.f);
-			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), angle));
-		}
-		if (Input::GetKeyHeld(Keys::Left))
-		{
-			constexpr float angle = XMConvertToRadians(-90.f);
-			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), angle));
-		}
-	}
-}
-
 void Player::ToggleBattleGrid()
 {
 	if (Input::GetKeyUp(Keys::Space))
@@ -537,11 +445,6 @@ void Player::LerpPlayerCameraFOV(float deltaTime)
 	{
 		camera->FOV = std::lerp(camera->FOV, nextCameraFOV, 4.f * deltaTime);
 	}
-}
-
-bool Player::CheckIfPlayerMovementAndRotationStopped()
-{
-	return XMVector4Equal(GetPositionV(), nextPos) && XMQuaternionEqual(GetRotationV(), nextRot);
 }
 
 bool Player::DialogueCheck(Actor* hitActor)

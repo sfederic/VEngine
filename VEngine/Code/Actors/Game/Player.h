@@ -96,15 +96,11 @@ struct Player : public PlayerUnit
 	void QuickThought(const std::wstring& text);
 
 private:
-	void MovementInput(float deltaTime);
-	void RotationInput(float deltaTime);
 	void ToggleBattleGrid();
 	void PrimaryAction();
 	void SecondaryAction();
 	void ToggleMemoryMenu();
 	void LerpPlayerCameraFOV(float deltaTime);
-
-	bool CheckIfPlayerMovementAndRotationStopped();
 
 	//PrimaryAction actor check functions
 	bool DialogueCheck(Actor* hitActor);

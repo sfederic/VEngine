@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "PlayerUnit.h"
 #include "VMath.h"
+#include "Input.h"
 #include "Components/MeshComponent.h"
 #include "Actors/Game/Grid.h"
 #include "Actors/Game/FenceActor.h"
@@ -9,12 +10,21 @@
 #include "Gameplay/GridNode.h"
 #include "UI/Game/PlayerActionBarWidget.h"
 
+void PlayerUnit::Tick(float deltaTime)
+{
+	MovementInput(deltaTime);
+	RotationInput(deltaTime);
+
+	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, moveSpeed));
+	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotSpeed));
+}
+
 void PlayerUnit::CheckNextMoveNode(XMVECTOR previousPos)
 {
 	int nextXIndex = (int)std::round(nextPos.m128_f32[0]);
 	int nextYIndex = (int)std::round(nextPos.m128_f32[2]);
 
-	//Keep the call here so player can face walls and holes on input.
+	//Keep the call here so playerunit can face walls and holes on input.
 	mesh->SetWorldRotation(VMath::LookAtRotation(nextPos, previousPos));
 
 	auto grid = Grid::system.GetFirstActor();
@@ -96,6 +106,61 @@ void PlayerUnit::PreviewMovementNodesDuringBattle()
 		if (node->trapNode == nullptr)
 		{
 			node->SetColour(GridNode::previewColour);
+		}
+	}
+}
+
+bool PlayerUnit::CheckIfMovementAndRotationStopped()
+{
+	return XMVector4Equal(GetPositionV(), nextPos) && XMQuaternionEqual(GetRotationV(), nextRot);
+}
+
+void PlayerUnit::MovementInput(float deltaTime)
+{
+	if (CheckIfMovementAndRotationStopped())
+	{
+		xIndex = std::round(GetPosition().x);
+		yIndex = std::round(GetPosition().z);
+
+		XMVECTOR previousPos = nextPos;
+
+		if (Input::GetKeyHeld(Keys::W))
+		{
+			nextPos = GetPositionV() + GetForwardVectorV();
+			CheckNextMoveNode(previousPos);
+		}
+
+		if (Input::GetKeyHeld(Keys::S))
+		{
+			nextPos = GetPositionV() + -GetForwardVectorV();
+			CheckNextMoveNode(previousPos);
+		}
+		if (Input::GetKeyHeld(Keys::A))
+		{
+			nextPos = GetPositionV() + -GetRightVectorV();
+			CheckNextMoveNode(previousPos);
+		}
+		if (Input::GetKeyHeld(Keys::D))
+		{
+			nextPos = GetPositionV() + GetRightVectorV();
+			CheckNextMoveNode(previousPos);
+		}
+	}
+}
+
+void PlayerUnit::RotationInput(float deltaTime)
+{
+	if (CheckIfMovementAndRotationStopped())
+	{
+		if (Input::GetKeyHeld(Keys::Right))
+		{
+			constexpr float angle = XMConvertToRadians(90.f);
+			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), angle));
+		}
+		if (Input::GetKeyHeld(Keys::Left))
+		{
+			constexpr float angle = XMConvertToRadians(-90.f);
+			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), angle));
 		}
 	}
 }
