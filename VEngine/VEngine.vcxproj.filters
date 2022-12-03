@@ -536,9 +536,6 @@
     <ClCompile Include="Code\UI\Game\MemoryTransferWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\UI\Game\BulletWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\UI\Game\PlayerHealthWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1133,9 +1130,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\MemoryTransferWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\Game\BulletWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\PlayerHealthWidget.h">

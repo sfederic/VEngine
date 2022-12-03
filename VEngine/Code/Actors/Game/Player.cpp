@@ -25,7 +25,6 @@
 #include "UI/Game/PlayerActionBarWidget.h"
 #include "UI/Game/MemoryGainedWidget.h"
 #include "UI/Game/MemoryRecalledWidget.h"
-#include "UI/Game/BulletWidget.h"
 #include "UI/Game/GuardWidget.h"
 #include "UI/Game/PlayerHealthWidget.h"
 #include "Gameplay/GameInstance.h"

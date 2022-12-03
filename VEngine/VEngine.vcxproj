@@ -192,7 +192,6 @@
     <ClCompile Include="Code\Render\RenderTypes.cpp" />
     <ClCompile Include="Code\System.cpp" />
     <ClCompile Include="Code\UID.cpp" />
-    <ClCompile Include="Code\UI\Game\BulletWidget.cpp" />
     <ClCompile Include="Code\UI\Game\GuardWidget.cpp" />
     <ClCompile Include="Code\UI\Game\HealthWidget.cpp" />
     <ClCompile Include="Code\UI\Game\InteractWidget.cpp" />
@@ -456,7 +455,6 @@
     <ClInclude Include="Code\Particle\Particle.h" />
     <ClInclude Include="Code\Physics\CollisionLayers.h" />
     <ClInclude Include="Code\UID.h" />
-    <ClInclude Include="Code\UI\Game\BulletWidget.h" />
     <ClInclude Include="Code\UI\Game\GuardWidget.h" />
     <ClInclude Include="Code\UI\Game\HealthWidget.h" />
     <ClInclude Include="Code\UI\Game\InteractWidget.h" />
