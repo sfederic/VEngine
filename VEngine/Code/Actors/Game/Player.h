@@ -85,4 +85,6 @@ private:
 
 	void PlaceTrap();
 	void DisarmTrap();
+
+	void SummonAllyUnit();
 };

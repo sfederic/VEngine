@@ -13,7 +13,11 @@ struct GridNode;
 class PlayerUnit : public Actor
 {
 public:
+	PlayerUnit();
+
+	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
+	Properties GetProps() { return __super::GetProps(); }
 
 	void ControllerInput(float deltaTime);
 

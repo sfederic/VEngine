@@ -33,14 +33,12 @@
 #include "Render/Material.h"
 
 #include "Gameplay/TrapNodes/DamageTrapNode.h"
+#include "Actors/Game/AllyUnits/AttackUnit.h"
 
 Player::Player()
 {
 	nextPos = XMVectorZero();
 	nextRot = XMVectorZero();
-
-	//Empty root to be able to rotate the mesh towards movement input direction.
-	SetEmptyRootComponent();
 
 	mesh = CreateComponent(MeshComponent("char.fbx", "test.png"), "Mesh");
 	rootComponent->AddChild(mesh);
@@ -101,6 +99,7 @@ void Player::Tick(float deltaTime)
 	DisarmTrap();
 
 	PrimaryAction();
+	SummonAllyUnit();
 
 	if (Input::GetKeyUp(Keys::O))
 	{
@@ -530,6 +529,20 @@ void Player::DisarmTrap()
 		}
 
 		currentNode->SetColour(GridNode::normalColour);
+	}
+}
+
+//Testing code for a single type
+void Player::SummonAllyUnit()
+{
+	if (Input::GetKeyUp(Keys::Up))
+	{
+		Transform transform;
+		XMStoreFloat3(&transform.position, GetPositionV() + mesh->GetForwardVectorV());
+		transform.rotation = mesh->GetRotation();
+
+		auto attackUnit = AttackUnit::system.Add(AttackUnit(), transform);
+		attackUnit->Start();
 	}
 }
 

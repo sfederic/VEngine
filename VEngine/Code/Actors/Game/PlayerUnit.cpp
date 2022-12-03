@@ -10,6 +10,17 @@
 #include "Gameplay/GridNode.h"
 #include "UI/Game/PlayerActionBarWidget.h"
 
+PlayerUnit::PlayerUnit()
+{
+	SetEmptyRootComponent();
+}
+
+void PlayerUnit::Start()
+{
+	nextPos = GetPositionV();
+	nextRot = GetRotationV();
+}
+
 void PlayerUnit::Tick(float deltaTime)
 {
 	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, moveSpeed));
