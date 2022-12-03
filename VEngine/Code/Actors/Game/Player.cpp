@@ -550,6 +550,13 @@ void Player::SwitchInputBetweenAllyUnitsAndPlayer()
 			activePlayerUnitIndex++;
 
 			PlayerUnit* nextUnitToControl = activePlayerUnits[activePlayerUnitIndex];
+
+			//make switching between ally units and player less jarring by using previous unit rotation
+			XMVECTOR previousPlayerUnitMeshRotation = nextUnitToControl->mesh->GetRotationV();
+			nextUnitToControl->SetRotation(GetRotationV());
+			nextUnitToControl->nextRot = GetRotationV();
+			nextUnitToControl->mesh->SetRotation(previousPlayerUnitMeshRotation);
+
 			playerInputController.SetPlayerUnitToControl(nextUnitToControl);
 		}
 		else
