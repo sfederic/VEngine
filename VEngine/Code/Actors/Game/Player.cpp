@@ -51,6 +51,8 @@ void Player::Start()
 {
 	__super::Start();
 
+	activePlayerUnits.push_back(this);
+
 	nextCameraFOV = camera->FOV;
 
 	//Setup widgets
@@ -89,6 +91,7 @@ void Player::Tick(float deltaTime)
 
 	PrimaryAction();
 	SummonAllyUnit();
+	SwitchInputBetweenAllyUnitsAndPlayer();
 
 	if (Input::GetKeyUp(Keys::O))
 	{
@@ -531,6 +534,30 @@ void Player::SummonAllyUnit()
 		attackUnit->Start();
 
 		playerInputController.SetPlayerUnitToControl(attackUnit);
+
+		activePlayerUnits.push_back(attackUnit);
+		activePlayerUnitIndex = activePlayerUnits.size() - 1;
+		playerInputController.SetPlayerUnitToControl(attackUnit);
+	}
+}
+
+void Player::SwitchInputBetweenAllyUnitsAndPlayer()
+{
+	if (Input::GetKeyUp(Keys::X))
+	{
+		if (activePlayerUnitIndex < activePlayerUnits.size() - 1)
+		{
+			activePlayerUnitIndex++;
+
+			PlayerUnit* nextUnitToControl = activePlayerUnits[activePlayerUnitIndex];
+			playerInputController.SetPlayerUnitToControl(nextUnitToControl);
+		}
+		else
+		{
+			activePlayerUnitIndex = 0;
+
+			playerInputController.SetPlayerUnitToControl(this);
+		}
 	}
 }
 

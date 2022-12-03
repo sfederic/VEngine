@@ -85,4 +85,8 @@ private:
 	void DisarmTrap();
 
 	void SummonAllyUnit();
+	void SwitchInputBetweenAllyUnitsAndPlayer();
+
+	std::vector<PlayerUnit*> activePlayerUnits;
+	int activePlayerUnitIndex = 0;
 };
