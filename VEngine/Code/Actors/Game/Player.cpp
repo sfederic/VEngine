@@ -125,9 +125,6 @@ void Player::Tick(float deltaTime)
 		{
 			return;
 		}
-
-		MovementInput(deltaTime);
-		RotationInput(deltaTime);
 	}
 
 	ActivateGridMapPicker();
