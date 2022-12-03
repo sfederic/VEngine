@@ -34,6 +34,7 @@
 
 #include "Gameplay/TrapNodes/DamageTrapNode.h"
 #include "Actors/Game/AllyUnits/AttackUnit.h"
+#include "Gameplay/PlayerInputController.h"
 
 Player::Player()
 {
@@ -43,19 +44,14 @@ Player::Player()
 	mesh = CreateComponent(MeshComponent("char.fbx", "test.png"), "Mesh");
 	rootComponent->AddChild(mesh);
 
-	camera = CreateComponent(CameraComponent(XMFLOAT3(1.75f, 1.75f, -2.75f)), "Camera");
-	camera->targetActor = this;
-
-	rootComponent->AddChild(camera);
-
 	dialogueComponent = DialogueComponent::system.Add("Dialogue", this);
 }
 
 void Player::Start()
 {
-	mesh->GetSkeleton()->currentAnimation = "None";
+	__super::Start();
 
-	camera->targetActor = this;
+	nextCameraFOV = camera->FOV;
 
 	//Setup widgets
 	interactWidget = CreateWidget<InteractWidget>();
@@ -67,13 +63,6 @@ void Player::Start()
 	guardWidget = CreateWidget<GuardWidget>();
 
 	healthWidget = CreateWidget<PlayerHealthWidget>();
-
-	nextPos = GetPositionV();
-	nextRot = GetRotationV();
-	nextCameraFOV = camera->FOV;
-
-	xIndex = std::round(GetPosition().x);
-	yIndex = std::round(GetPosition().z);
 }
 
 void Player::End()
@@ -543,6 +532,8 @@ void Player::SummonAllyUnit()
 
 		auto attackUnit = AttackUnit::system.Add(AttackUnit(), transform);
 		attackUnit->Start();
+
+		playerInputController.SetPlayerUnitToControl(attackUnit);
 	}
 }
 

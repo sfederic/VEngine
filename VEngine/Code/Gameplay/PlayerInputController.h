@@ -11,7 +11,7 @@ class PlayerInputController
 {
 public:
 	void Tick(float deltaTime);
-	void SetPlayerUnitToControl(PlayerUnit* playerUnit) { playerUnitToControl = playerUnit; }
+	void SetPlayerUnitToControl(PlayerUnit* playerUnit);
 
 private:
 	PlayerUnit* playerUnitToControl = nullptr;

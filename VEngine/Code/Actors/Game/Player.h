@@ -3,7 +3,6 @@
 #include "PlayerUnit.h"
 #include "Gameplay/BattleEnums.h"
 
-struct CameraComponent;
 struct DialogueComponent;
 struct MemoryComponent;
 struct InteractWidget;
@@ -18,7 +17,6 @@ class Player : public PlayerUnit
 public:
 	ACTOR_SYSTEM(Player)
 
-	CameraComponent* camera = nullptr;
 	DialogueComponent* dialogueComponent = nullptr;
 	DialogueComponent* currentlyActiveDialogueComponent = nullptr;
 

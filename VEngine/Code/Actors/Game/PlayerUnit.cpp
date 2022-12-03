@@ -3,6 +3,7 @@
 #include "VMath.h"
 #include "Input.h"
 #include "Components/MeshComponent.h"
+#include "Components/CameraComponent.h"
 #include "Actors/Game/Grid.h"
 #include "Actors/Game/FenceActor.h"
 #include "Physics/Raycast.h"
@@ -13,12 +14,20 @@
 PlayerUnit::PlayerUnit()
 {
 	SetEmptyRootComponent();
+
+	camera = CreateComponent(CameraComponent(XMFLOAT3(1.75f, 1.75f, -2.75f)), "Camera");
+	rootComponent->AddChild(camera);
 }
 
 void PlayerUnit::Start()
 {
 	nextPos = GetPositionV();
 	nextRot = GetRotationV();
+
+	xIndex = std::round(GetPosition().x);
+	yIndex = std::round(GetPosition().z);
+
+	camera->targetActor = this;
 }
 
 void PlayerUnit::Tick(float deltaTime)
