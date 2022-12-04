@@ -26,8 +26,8 @@ struct UISystem : public System
 	UnitLineupWidget* unitLineupWidget = nullptr;
 
 	//Every widget added in-game
+	//@Todo: these two vectors need to be smart pointers else mem leaks everywhere
 	std::vector<Widget*> widgets;
-
 	//Every widget currently being displayed on screen
 	std::vector<Widget*> widgetsInViewport;
 
