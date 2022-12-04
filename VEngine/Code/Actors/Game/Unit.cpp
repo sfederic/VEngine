@@ -16,6 +16,7 @@
 #include "Log.h"
 #include "UI/Game/HealthWidget.h"
 #include "UI/Game/MemoryGainedWidget.h"
+#include "UI/Game/ActivateTrapWidget.h"
 #include "Gameplay/GameInstance.h"
 #include "Actors/Game/EntranceTrigger.h"
 #include "Physics/Raycast.h"
@@ -68,7 +69,7 @@ void Unit::Tick(float deltaTime)
 
 	healthWidget->pos = GetHomogeneousPositionV();
 
-	if (isUnitTurn && !attackWindingUp)
+	if (isUnitTurn && !attackWindingUp && !isInTrapNode)
 	{
 		if (XMVector4Equal(nextMovePos, GetPositionV()))
 		{
@@ -109,7 +110,11 @@ void Unit::Tick(float deltaTime)
 				auto currentNode = GetCurrentNode();
 				if (currentNode->trapNode)
 				{
-					currentNode->trapNode->Activate(this);
+					isInTrapNode = true;
+					auto activateTrapWidget = CreateWidget<ActivateTrapWidget>();
+					activateTrapWidget->OnceOffAddToViewport(3.f);
+					activateTrapWidget->SetLinkedUnit(this);
+					activateTrapWidget->SetLinkedTrapNode(currentNode->trapNode);
 				}
 
 				movementPathNodeIndex++;
