@@ -632,6 +632,9 @@
     <ClCompile Include="Code\Actors\Game\AllyUnits\AttackUnit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\UI\Game\ActivateTrapWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -1214,6 +1217,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\AllyUnits\AttackUnit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\UI\Game\ActivateTrapWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
