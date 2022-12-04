@@ -72,7 +72,9 @@ public:
 	void Destroy();
 
 	void AddToViewport(float removeTimer = 0.f);
+	void OnceOffAddToViewport(float removeTimer);
 	void RemoveFromViewport();
+	void RemoveFromViewportAndDelete();
 
 	bool IsInViewport();
 

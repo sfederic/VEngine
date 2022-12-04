@@ -25,9 +25,22 @@ void Widget::AddToViewport(float removeTimer)
 	}
 }
 
+void Widget::OnceOffAddToViewport(float removeTimer)
+{
+	uiSystem.AddWidget(this);
+	assert(removeTimer > 0.f);
+	Timer::SetTimer(removeTimer, std::bind(&Widget::RemoveFromViewportAndDelete, this));
+}
+
 void Widget::RemoveFromViewport()
 {
 	uiSystem.RemoveWidget(this);
+}
+
+void Widget::RemoveFromViewportAndDelete()
+{
+	RemoveFromViewport();
+	uiSystem.DestroyWidget(this);
 }
 
 bool Widget::IsInViewport()
