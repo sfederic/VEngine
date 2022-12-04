@@ -6,7 +6,6 @@
 struct MeshComponent;
 struct CameraComponent;
 struct PlayerActionBarWidget;
-struct GuardWidget;
 struct GridNode;
 
 //Base class for all player controllable units.
@@ -38,7 +37,6 @@ public:
 	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 
 	PlayerActionBarWidget* actionBarWidget = nullptr;
-	GuardWidget* guardWidget = nullptr;
 
 	MeshComponent* mesh = nullptr;
 	CameraComponent* camera = nullptr;
@@ -52,7 +50,4 @@ public:
 
 	int xIndex = -1;
 	int yIndex = -1;
-
-	bool ableToGuard = false;
-	bool guarding = false;
 };

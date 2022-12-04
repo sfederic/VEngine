@@ -49,9 +49,6 @@ public:
 
 	void InflictDamage(int damage);
 
-	void Guard();
-	void ResetGuard();
-
 	//Call on battle end for player variables housekeeping
 	void BattleCleanup();
 	

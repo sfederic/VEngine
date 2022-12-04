@@ -14,7 +14,6 @@
 #include "Gameplay/TrapNodes/TrapNode.h"
 #include "Timer.h"
 #include "Log.h"
-#include "UI/Game/GuardWidget.h"
 #include "UI/Game/HealthWidget.h"
 #include "UI/Game/MemoryGainedWidget.h"
 #include "Gameplay/GameInstance.h"
@@ -89,8 +88,6 @@ void Unit::Tick(float deltaTime)
 				auto& skill = skills[skillName];
 				if (skill->IsTargetNodeInRange(GetCurrentNode(), player->GetCurrentNode()))
 				{
-					player->guardWidget->AddToViewport();
-					player->ableToGuard = true;
 					player->unitCurrentlyAttackingPlayer = this;
 				}
 
@@ -133,8 +130,6 @@ void Unit::Tick(float deltaTime)
 					//deal with attack wind up
 					attackWindingUp = true;
 
-					player->guardWidget->AddToViewport();
-					player->ableToGuard = true;
 					player->nextCameraFOV = 30.f;
 					player->unitCurrentlyAttackingPlayer = this;
 
@@ -428,8 +423,6 @@ void Unit::WindUpAttack()
 
 		ClearActiveSkillNodes();
 
-		player->ableToGuard = false;
-		player->guardWidget->RemoveFromViewport();
 		player->unitCurrentlyAttackingPlayer = nullptr;
 
 		GameUtils::SpawnSpriteSheet("Sprites/explosion.png", player->GetPosition(), false, 4, 4);
@@ -443,22 +436,14 @@ void Unit::WindUpAttack()
 	ray.actorsToIgnore.push_back(player); //Ignore player too. Attack hits if nothing is hit
 	if (!Raycast(ray, GetPositionV(), player->GetPositionV()))
 	{
-		if (player->guarding) //Successful defend
-		{
-			GameUtils::CameraShake(1.f);
-			GameUtils::PlayAudioOneShot("shield_hit.wav");
-		}
-		else //Attack Hit
-		{
-			GameUtils::CameraShake(1.f);
-			GameUtils::PlayAudioOneShot("sword_hit.wav");
-		}
+		GameUtils::CameraShake(1.f);
+		GameUtils::PlayAudioOneShot("sword_hit.wav");
 
 		player->InflictDamage(attackPoints);
 
 		Log("%s attacked %s", this->GetName().c_str(), player->GetName().c_str());
 	}
-	else if (ray.hitActor)
+	else
 	{
 		//Attack miss
 		Log("[%s] attack missed [%s]. Hit [%s] instead.",
@@ -470,8 +455,6 @@ void Unit::WindUpAttack()
 			hitGridActor->InflictDamage(attackPoints);
 		}
 	}
-
-	player->ResetGuard();
 
 	currentAttackNumber--;
 
@@ -488,8 +471,6 @@ void Unit::WindUpAttack()
 
 		ClearActiveSkillNodes();
 
-		player->ableToGuard = false;
-		player->guardWidget->RemoveFromViewport();
 		player->unitCurrentlyAttackingPlayer = nullptr;
 
 		EndTurn();

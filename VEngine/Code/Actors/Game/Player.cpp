@@ -25,7 +25,6 @@
 #include "UI/Game/PlayerActionBarWidget.h"
 #include "UI/Game/MemoryGainedWidget.h"
 #include "UI/Game/MemoryRecalledWidget.h"
-#include "UI/Game/GuardWidget.h"
 #include "UI/Game/PlayerHealthWidget.h"
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/BattleSystem.h"
@@ -61,8 +60,6 @@ void Player::Start()
 
 	actionBarWidget = CreateWidget<PlayerActionBarWidget>();
 	actionBarWidget->actionPoints = actionPoints;
-
-	guardWidget = CreateWidget<GuardWidget>();
 
 	healthWidget = CreateWidget<PlayerHealthWidget>();
 }
@@ -152,41 +149,13 @@ void Player::RefreshCombatStats()
 	actionBarWidget->actionPoints = actionPoints;
 }
 
-void Player::ResetGuard()
-{
-	guarding = false;
-	guardWidget->ResetGuard();
-	ableToGuard = true;
-}
-
 void Player::InflictDamage(int damage)
 {
-	int guardPoints = 0;
-
-	if (guarding)
-	{
-		Log("Guarded attack");
-		guarding = false;
-		return;
-	}
-
 	healthPoints -= damage;
 
 	if (healthPoints <= 0)
 	{
 		Log("Game Over");
-	}
-}
-
-void Player::Guard()
-{
-	if (actionPoints > 0 && !guarding)
-	{
-		guarding = true;
-		ExpendActionPoints(1);
-
-		guardWidget->SetGuardSuccess();
-		GameUtils::PlayAudioOneShot("equip.wav");
 	}
 }
 
@@ -280,17 +249,6 @@ void Player::PrimaryAction()
 
 	if (Input::GetKeyUp(Keys::Down))
 	{
-		//Guard
-		if (battleSystem.isBattleActive && !isPlayerTurn)
-		{
-			if (ableToGuard)
-			{
-				Guard();
-			}
-
-			return;
-		}
-
 		if (uiSystem.memoryRecalledWidget->IsInViewport() 
 			|| uiSystem.memoryGainedWidget->IsInViewport())
 		{
