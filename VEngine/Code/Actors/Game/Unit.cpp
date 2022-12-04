@@ -113,7 +113,7 @@ void Unit::Tick(float deltaTime)
 					//@Todo: this has the problem where if there are two traps adjacent, the unit will enter a loop
 					isInTrapNode = true;
 					auto activateTrapWidget = CreateWidget<ActivateTrapWidget>();
-					activateTrapWidget->OnceOffAddToViewport(3.f);
+					activateTrapWidget->AddToViewport();
 					activateTrapWidget->SetLinkedUnit(this);
 					activateTrapWidget->SetLinkedTrapNode(currentNode->trapNode);
 				}
