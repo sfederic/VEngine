@@ -288,6 +288,7 @@
     <ClCompile Include="Code\UI\Game\GridMapPickerSelectionInfoWidget.cpp" />
     <ClCompile Include="Code\Gameplay\PlayerInputController.cpp" />
     <ClCompile Include="Code\Actors\Game\PlayerUnit.cpp" />
+    <ClCompile Include="Code\UI\Game\CrystalsTurnHandWidget.cpp" />
     <ClInclude Include="Code\Actors\Game\AllyUnits\AttackUnit.h" />
     <ClInclude Include="Code\Actors\Game\GridMapPicker.h" />
     <ClInclude Include="Code\Gameplay\TrapNodes\DamageTrapNode.h" />
@@ -578,6 +579,7 @@
     <ClInclude Include="Code\UI\Game\GridMapPickerSelectionInfoWidget.h" />
     <ClInclude Include="Code\Gameplay\PlayerInputController.h" />
     <ClInclude Include="Code\Actors\Game\PlayerUnit.h" />
+    <ClInclude Include="Code\UI\Game\CrystalsTurnHandWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
