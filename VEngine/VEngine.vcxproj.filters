@@ -635,7 +635,7 @@
     <ClCompile Include="Code\UI\Game\ActivateTrapWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\UI\Game\CrystalsTurnHandWidget.cpp">
+    <ClCompile Include="Code\UI\Game\BattleCardHandWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1225,7 +1225,10 @@
     <ClInclude Include="Code\UI\Game\ActivateTrapWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\UI\Game\CrystalsTurnHandWidget.h">
+    <ClInclude Include="Code\UI\Game\BattleCardHandWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Gameplay\BattleCard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

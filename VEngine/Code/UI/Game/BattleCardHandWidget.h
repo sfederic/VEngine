@@ -2,7 +2,7 @@
 
 #include "../Widget.h"
 
-class CrystalsTurnHandWidget : public Widget
+class BattleCardHandWidget : public Widget
 {
 public:
 	virtual void Draw(float deltaTime) override;
