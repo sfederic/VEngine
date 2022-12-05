@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "BattleCardHandWidget.h"
 #include "Actors/Game/Player.h"
-#include "Gameplay/BattleCard.h"
+#include "Gameplay/BattleCards/BattleCard.h"
 
 void BattleCardHandWidget::Draw(float deltaTime)
 {

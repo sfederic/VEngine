@@ -638,6 +638,9 @@
     <ClCompile Include="Code\UI\Game\BattleCardHandWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Gameplay\BattleCards\TrapCards.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -1228,7 +1231,7 @@
     <ClInclude Include="Code\UI\Game\BattleCardHandWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Gameplay\BattleCard.h">
+    <ClInclude Include="Code\Gameplay\BattleCards\BattleCard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
