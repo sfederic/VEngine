@@ -1,3 +1,18 @@
+Player
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Name
+Player0
+UID
+281019942
+next
 Grid
 1
  Enabled
@@ -18,6 +33,85 @@ UID
 2918152107
 startBattleOnLoad
 0
+next
+Unit
+1
+ Enabled
+1
+ Position
+2 0 2
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Attack Points
+1
+Attack Range
+1
+Battle State
+fight
+Destruct
+1
+Health
+5
+Inspect
+1
+Interact
+1
+Interact Text
+
+Move Points
+3
+Move Speed
+3
+Name
+Unit0
+Obstacle
+0
+Skill
+
+UID
+1007057042
+actorToFocusOn
+
+deathText
+
+disableGridInteract
+0
+interactKnownText
+
+numOfAttacks
+1
+next
+DirectionalLightActor
+1
+ Enabled
+1
+ Position
+0 5 0
+ Rotation
+0.707107 0 0 0.707107
+ Scale
+1 1 1
+Name
+DirectionalLightActor0
+UID
+886408614
+next
+PointLightActor
+1
+ Enabled
+1
+ Position
+2 1 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+PointLightActor0
+UID
+84398830
 next
 MeshActor
 8
@@ -125,136 +219,28 @@ plane7
 UID
 1859342562
 next
-Player
-1
+MemoryComponent
+2
+1007057042
+Memory
  Enabled
 1
- Position
-0 0 0
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Name
-Player0
-UID
-281019942
+Add On Interact
+0
+Memory Name
+
 next
-DirectionalLightActor
-1
+1007057042
+MemoryOnDeath
  Enabled
 1
- Position
-0 5 0
- Rotation
-0.707107 0 0 0.707107
- Scale
-1 1 1
-Name
-DirectionalLightActor0
-UID
-886408614
-next
-PointLightActor
-1
- Enabled
-1
- Position
-2 1 2
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Name
-PointLightActor0
-UID
-84398830
-next
-CameraComponent
-1
-281019942
-Camera
- Enabled
-1
- Pos
-1.75 1.75 -2.75
- Rot
-0 0 0 1
- Scale
-1 1 1
-FOV
-60
-Far Z
-1000
-Near Z
-0.01
-next
-InstanceMeshComponent
-1
-2918152107
-NodeMesh
- Enabled
+Add On Interact
 0
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Instance
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.fbx
-Static
-1
-Trans. Occlude
-0
-next
-EmptyComponent
-1
-281019942
-Root
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
+Memory Name
+
 next
 MeshComponent
-9
+10
 4268800847
 Mesh
  Enabled
@@ -696,19 +682,129 @@ Static
 Trans. Occlude
 0
 next
-DialogueComponent
-1
-281019942
-Dialogue
+1007057042
+Mesh
  Enabled
 1
-File
+ Pos
+2 0 2
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
 
+Static
+1
+Trans. Occlude
+0
 next
-AudioComponent
+CameraComponent
 1
 281019942
-StepSounds
+Camera
+ Enabled
+1
+ Pos
+1.75 1.75 -2.75
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
+next
+InstanceMeshComponent
+1
+2918152107
+NodeMesh
+ Enabled
+0
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Instance
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.fbx
+Static
+1
+Trans. Occlude
+0
+next
+EmptyComponent
+1
+281019942
+Root
  Enabled
 1
  Pos
@@ -717,16 +813,22 @@ StepSounds
 0 0 0 1
  Scale
 1 1 1
-Audio Filename
-step.wav
-Loop
+next
+DialogueComponent
+2
+281019942
+Dialogue
+ Enabled
 1
-Pitch
+File
+
+next
+1007057042
+Dialogue
+ Enabled
 1
-Play On Start
-1
-Volume
-0
+File
+
 next
 DirectionalLightComponent
 1
