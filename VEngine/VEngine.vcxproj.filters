@@ -644,6 +644,9 @@
     <ClCompile Include="Code\Gameplay\BattleCards\BattleCard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Gameplay\BattleCards\BattleCardSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -1235,6 +1238,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\BattleCards\BattleCard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Gameplay\BattleCards\BattleCardSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
