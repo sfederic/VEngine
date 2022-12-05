@@ -7,7 +7,7 @@
 class BattleCardSystem
 {
 public:
-	BattleCardSystem& Get()
+	static BattleCardSystem& Get()
 	{
 		static BattleCardSystem battleCardSystem;
 		return battleCardSystem;
