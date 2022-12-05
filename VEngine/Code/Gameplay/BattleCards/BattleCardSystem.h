@@ -2,7 +2,8 @@
 
 #include <map>
 #include <memory>
-#include "Gameplay/BattleCards/BattleCard.h"
+
+struct BattleCard;
 
 class BattleCardSystem
 {
@@ -13,13 +14,9 @@ public:
 		return battleCardSystem;
 	}
 
-	template <typename T>
-	void AddCard()
-	{
-		auto card = std::make_unique<T>();
-		battleCardMap.emplace(card->name, std::move(card));
-	}
+	void AddCard(BattleCard* card);
+	BattleCard* DrawCardAtRandom();
 
 private:
-	std::map<std::string, std::unique_ptr<BattleCard>> battleCardMap;
+	std::map<std::string, BattleCard*>* battleCardMap = nullptr;
 };
