@@ -2,11 +2,10 @@
 #include "BattleCard.h"
 #include "BattleCardSystem.h"
 
-class TestTrapNodeCard : BattleCard
+struct TestTrapNodeCard : BattleCard
 {
-public:
 	TestTrapNodeCard() : BattleCard("TestTrapNodeCard", "test.png")
 	{
-		BattleCardSystem::Get().AddCard<TestTrapNodeCard>();
+		BattleCardSystem::Get().AddCard(this);
 	}
 }testTrapNodeCard;

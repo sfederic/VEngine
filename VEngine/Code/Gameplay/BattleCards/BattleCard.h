@@ -3,9 +3,8 @@
 #include <string>
 
 //Holds data for 'card's the player can use during combat.
-class BattleCard
+struct BattleCard
 {
-public:
 	BattleCard() {}
 	BattleCard(std::string name_, std::string imageFilename_);
 
