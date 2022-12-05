@@ -29,6 +29,7 @@
 #include "UI/Game/BattleCardHandWidget.h"
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/BattleSystem.h"
+#include "Gameplay/BattleCards/BattleCard.h"
 #include "Gameplay/GameUtils.h"
 #include "Render/Material.h"
 
@@ -546,7 +547,7 @@ void Player::DrawBattleCard()
 	{
 		if (Input::GetKeyDown(Keys::Num1))
 		{
-			battleCardsInHand.emplace_back(std::make_unique<BattleCard>());
+			//battleCardsInHand.emplace_back(std::make_unique<BattleCard>());
 		}
 	}
 }

@@ -1,9 +1,7 @@
 #pragma once
 
 #include "PlayerUnit.h"
-#include <memory>
 #include "Gameplay/BattleEnums.h"
-#include "Gameplay/BattleCard.h"
 
 struct DialogueComponent;
 struct MemoryComponent;
@@ -14,6 +12,7 @@ struct Memory;
 struct GridActor;
 struct Unit;
 class BattleCardHandWidget;
+class BattleCard;
 
 class Player : public PlayerUnit
 {
@@ -33,7 +32,7 @@ public:
 
 	std::vector<Actor*> previousHitTransparentActors;
 
-	std::vector<std::unique_ptr<BattleCard>> battleCardsInHand;
+	std::vector<BattleCard*> battleCardsInHand;
 	
 	float nextCameraFOV = 0.f;
 
