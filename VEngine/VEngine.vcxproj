@@ -120,6 +120,7 @@
     <ClCompile Include="Code\Actors\Game\AllyUnits\AttackUnit.cpp" />
     <ClCompile Include="Code\Actors\Game\GridMapPicker.cpp" />
     <ClCompile Include="Code\Actors\Game\EnemyUnits\LineAttackerUnit.cpp" />
+    <ClCompile Include="Code\Gameplay\BattleCards\BattleCard.cpp" />
     <ClCompile Include="Code\Gameplay\BattleCards\TrapCards.cpp" />
     <ClCompile Include="Code\Gameplay\Memories\AttackUpMemory.cpp" />
     <ClCompile Include="Code\Gameplay\Memories\MergedMemories\TestMergedMemory.cpp" />

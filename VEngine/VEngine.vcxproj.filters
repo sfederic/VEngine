@@ -641,6 +641,9 @@
     <ClCompile Include="Code\Gameplay\BattleCards\TrapCards.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Gameplay\BattleCards\BattleCard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">

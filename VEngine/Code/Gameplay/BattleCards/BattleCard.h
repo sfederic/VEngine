@@ -6,8 +6,7 @@
 class BattleCard
 {
 public:
-	BattleCard(std::string name_, std::string imageFilename_)
-		: name(name_), imageFilename(imageFilename_) {}
+	BattleCard(std::string name_, std::string imageFilename_);
 
 	std::string name;
 	std::string imageFilename;
