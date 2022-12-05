@@ -17,7 +17,7 @@ public:
 	void AddCard()
 	{
 		auto card = std::make_unique<T>();
-		battleCardMap.emplace(card->name, card);
+		battleCardMap.emplace(card->name, std::move(card));
 	}
 
 private:
