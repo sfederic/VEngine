@@ -1,7 +1,9 @@
 #pragma once
 
 #include "PlayerUnit.h"
+#include <memory>
 #include "Gameplay/BattleEnums.h"
+#include "Gameplay/BattleCard.h"
 
 struct DialogueComponent;
 struct MemoryComponent;
@@ -29,6 +31,8 @@ public:
 
 	std::vector<Actor*> previousHitTransparentActors;
 
+	std::vector<std::unique_ptr<BattleCard>> battleCardsInHand;
+	
 	float nextCameraFOV = 0.f;
 
 	bool inConversation = false;
@@ -83,6 +87,8 @@ private:
 
 	void SummonAllyUnit();
 	void SwitchInputBetweenAllyUnitsAndPlayer();
+
+	void DrawBattleCard();
 
 	std::vector<PlayerUnit*> activePlayerUnits;
 	int activePlayerUnitIndex = 0;

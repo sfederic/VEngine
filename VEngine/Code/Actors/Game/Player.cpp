@@ -86,6 +86,8 @@ void Player::Tick(float deltaTime)
 	PlaceTrap();
 	DisarmTrap();
 
+	DrawBattleCard();
+
 	PrimaryAction();
 	SummonAllyUnit();
 	SwitchInputBetweenAllyUnitsAndPlayer();
@@ -522,6 +524,17 @@ void Player::SwitchInputBetweenAllyUnitsAndPlayer()
 			activePlayerUnitIndex = 0;
 
 			playerInputController.SetPlayerUnitToControl(this);
+		}
+	}
+}
+
+void Player::DrawBattleCard()
+{
+	if (battleSystem.isBattleActive)
+	{
+		if (Input::GetKeyDown(Keys::Num1))
+		{
+			battleCardsInHand.emplace_back(std::make_unique<BattleCard>());
 		}
 	}
 }
