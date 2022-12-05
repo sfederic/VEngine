@@ -45,9 +45,7 @@ void BattleSystem::StartBattle()
 	grid->ResetAllNodes();
 
 	player = Player::system.GetFirstActor();
-	player->isPlayerTurn = true;
-	player->isWeaponDrawn = true;
-	player->healthWidget->AddToViewport();
+	player->SetupForBattle();
 
 	uiSystem.unitLineupWidget->AddToViewport();
 

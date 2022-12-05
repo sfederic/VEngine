@@ -26,6 +26,7 @@
 #include "UI/Game/MemoryGainedWidget.h"
 #include "UI/Game/MemoryRecalledWidget.h"
 #include "UI/Game/PlayerHealthWidget.h"
+#include "UI/Game/BattleCardHandWidget.h"
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/BattleSystem.h"
 #include "Gameplay/GameUtils.h"
@@ -62,6 +63,8 @@ void Player::Start()
 	actionBarWidget->actionPoints = actionPoints;
 
 	healthWidget = CreateWidget<PlayerHealthWidget>();
+
+	battleCardHandWidget = CreateWidget<BattleCardHandWidget>();
 }
 
 void Player::End()
@@ -169,6 +172,15 @@ void Player::BattleCleanup()
 	RefreshCombatStats();
 
 	healthWidget->RemoveFromViewport();
+}
+
+void Player::SetupForBattle()
+{
+	isPlayerTurn = true;
+	isWeaponDrawn = true;
+
+	healthWidget->AddToViewport();
+	battleCardHandWidget->AddToViewport();
 }
 
 XMVECTOR Player::GetMeshForward()

@@ -13,6 +13,7 @@ struct PlayerHealthWidget;
 struct Memory;
 struct GridActor;
 struct Unit;
+class BattleCardHandWidget;
 
 class Player : public PlayerUnit
 {
@@ -25,6 +26,7 @@ public:
 	InteractWidget* interactWidget = nullptr;
 	MemoryMenuWidget* memoryMenuWidget = nullptr;
 	PlayerHealthWidget* healthWidget = nullptr;
+	BattleCardHandWidget* battleCardHandWidget = nullptr;
 
 	GridActor* gridActorInteractingWith = nullptr;
 	Unit* unitCurrentlyAttackingPlayer = nullptr;
@@ -56,6 +58,8 @@ public:
 	//Call on battle end for player variables housekeeping
 	void BattleCleanup();
 	
+	void SetupForBattle();
+
 	XMVECTOR GetMeshForward();
 
 	//Show a timer dialogue above player when player character is thinking to themself.
