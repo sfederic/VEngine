@@ -6,10 +6,11 @@
 struct BattleCard
 {
 	BattleCard() {}
-	BattleCard(std::string name_, std::string imageFilename_);
+	BattleCard(std::wstring name_, std::wstring desc_, std::string imageFilename_);
 
 	virtual void Activate() = 0;
 
-	std::string name;
+	std::wstring name;
+	std::wstring desc;
 	std::string imageFilename;
 };

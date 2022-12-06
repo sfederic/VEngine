@@ -2,6 +2,7 @@
 
 #include "PlayerUnit.h"
 #include "Gameplay/BattleEnums.h"
+#include "Gameplay/GridNode.h"
 
 struct DialogueComponent;
 struct MemoryComponent;
@@ -66,7 +67,22 @@ public:
 
 	void DrawTurnBattleCardHand();
 
-	void PlaceTrap();
+	template <typename T>
+	void PlaceTrap()
+	{
+		//static_assert(std::derived_from<T, BattleCard> == true)
+
+		auto currentNode = GetCurrentNode();
+
+		if (currentNode->trapCard != nullptr)
+		{
+			delete currentNode->trapCard;
+			currentNode->trapCard = nullptr;
+		}
+
+		currentNode->trapCard = new T();
+		currentNode->SetColour(GridNode::trapNodeColour);
+	}
 
 private:
 	void ToggleBattleGrid();

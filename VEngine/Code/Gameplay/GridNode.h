@@ -5,7 +5,7 @@
 using namespace DirectX;
 
 struct Ray;
-class TrapNode;
+class BattleCard;
 
 struct GridNode
 {
@@ -61,8 +61,8 @@ struct GridNode
 	GridNode* parentNode = nullptr;
 	XMFLOAT3 worldPosition = XMFLOAT3(0.f, 0.f, 0.f);
 
-	//Linked TrapNode attached to this GridNode
-	TrapNode* trapNode = nullptr;
+	//Linked Trap BattleCard attached to this GridNode
+	BattleCard* trapCard = nullptr;
 
 	//COLOURS
 	inline static XMFLOAT4 normalColour = XMFLOAT4(0.07f, 0.27f, 0.89f, 0.4f);

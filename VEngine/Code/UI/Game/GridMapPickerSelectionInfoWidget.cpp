@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "GridMapPickerSelectionInfoWidget.h"
 #include "Actors/Game/GridActor.h"
-#include "Gameplay/TrapNodes/TrapNode.h"
+#include "Gameplay/BattleCards/BattleCard.h"
 
 void GridMapPickerSelectionInfoWidget::Draw(float deltaTime)
 {
@@ -27,8 +27,8 @@ void GridMapPickerSelectionInfoWidget::DrawTrapNodeInfo()
 
 	FillRect(layout);
 
-	if (selectedTrapNode)
+	if (selectedTrapCard)
 	{
-		Text(selectedTrapNode->effectDescription, layout);
+		Text(selectedTrapCard->desc, layout);
 	}
 }

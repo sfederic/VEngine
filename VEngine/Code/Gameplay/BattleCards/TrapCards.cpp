@@ -5,13 +5,13 @@
 
 struct TestTrapNodeCard : BattleCard
 {
-	TestTrapNodeCard() : BattleCard("TestTrapNodeCard", "test.png")
+	TestTrapNodeCard() : BattleCard(L"TestTrapNodeCard", L"Testing", "test.png")
 	{
 		BattleCardSystem::Get().AddCard(this);
 	}
 
 	virtual void Activate() override
 	{
-		Player::system.GetFirstActor()->PlaceTrap();
+		Player::system.GetFirstActor()->PlaceTrap<TestTrapNodeCard>();
 	}
 }testTrapNodeCard;

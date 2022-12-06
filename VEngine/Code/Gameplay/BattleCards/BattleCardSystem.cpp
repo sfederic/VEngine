@@ -6,7 +6,7 @@ void BattleCardSystem::AddCard(BattleCard* card)
 {
 	if (battleCardMap == nullptr)
 	{
-		battleCardMap = new std::map<std::string, BattleCard*>();
+		battleCardMap = new std::map<std::wstring, BattleCard*>();
 	}
 
 	battleCardMap->emplace(card->name, card);

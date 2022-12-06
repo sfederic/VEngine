@@ -9,7 +9,6 @@
 #include "UI/Game/GridMapPickerSelectionInfoWidget.h"
 #include "Physics/Raycast.h"
 #include "Gameplay/GameUtils.h"
-#include "Gameplay/TrapNodes/TrapNode.h"
 
 GridMapPicker::GridMapPicker()
 {
@@ -119,13 +118,13 @@ void GridMapPicker::DisplayTrapNodeInformation()
 	auto grid = Grid::system.GetFirstActor();
 	auto node = grid->GetNode(gridIndexX, gridIndexY);
 
-	if (node->trapNode)
+	if (node->trapCard)
 	{
-		gridMapPickerSelectionInfoWidget->selectedTrapNode = node->trapNode;
+		gridMapPickerSelectionInfoWidget->selectedTrapCard = node->trapCard;
 	}
 	else
 	{
-		gridMapPickerSelectionInfoWidget->selectedTrapNode = nullptr;
+		gridMapPickerSelectionInfoWidget->selectedTrapCard = nullptr;
 	}
 }
 

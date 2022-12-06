@@ -127,7 +127,6 @@
     <ClCompile Include="Code\Gameplay\Memories\MergedMemories\TestMergedMemory.cpp" />
     <ClCompile Include="Code\Gameplay\Memories\SymbolMemories.cpp" />
     <ClCompile Include="Code\Gameplay\Memory.cpp" />
-    <ClCompile Include="Code\Gameplay\TrapNodes\DamageTrapNode.cpp" />
     <ClCompile Include="Code\Gameplay\UnitSkills\AreaAttackSkill.cpp" />
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp" />
     <ClCompile Include="Code\Actors\Game\SkillNode.cpp" />
@@ -296,8 +295,6 @@
     <ClInclude Include="Code\Actors\Game\AllyUnits\AttackUnit.h" />
     <ClInclude Include="Code\Actors\Game\GridMapPicker.h" />
     <ClInclude Include="Code\Gameplay\BattleCards\BattleCard.h" />
-    <ClInclude Include="Code\Gameplay\TrapNodes\DamageTrapNode.h" />
-    <ClInclude Include="Code\Gameplay\TrapNodes\TrapNode.h" />
     <ClInclude Include="Code\Actors\Game\EnemyUnits\LineAttackerUnit.h" />
     <ClInclude Include="Code\Gameplay\ForwardFace.h" />
     <ClInclude Include="Code\Gameplay\Memories\MergedMemories\TestMergedMemory.h" />

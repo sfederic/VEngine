@@ -18,5 +18,5 @@ public:
 	BattleCard* DrawCardAtRandom();
 
 private:
-	std::map<std::string, BattleCard*>* battleCardMap = nullptr;
+	std::map<std::wstring, BattleCard*>* battleCardMap = nullptr;
 };

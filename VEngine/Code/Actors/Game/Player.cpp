@@ -34,7 +34,6 @@
 #include "Gameplay/GameUtils.h"
 #include "Render/Material.h"
 
-#include "Gameplay/TrapNodes/DamageTrapNode.h"
 #include "Actors/Game/AllyUnits/AttackUnit.h"
 #include "Gameplay/PlayerInputController.h"
 
@@ -457,21 +456,6 @@ void Player::ActivateGridMapPicker()
 
 		SetTickEnabled(false);
 	}
-}
-
-//Places a trap node on the current node the player is standing on.
-void Player::PlaceTrap()
-{
-	auto currentNode = GetCurrentNode();
-		
-	if (currentNode->trapNode != nullptr)
-	{
-		delete currentNode->trapNode;
-		currentNode->trapNode = nullptr;
-	}
-
-	currentNode->trapNode = new DamageTrapNode();
-	currentNode->SetColour(GridNode::trapNodeColour);
 }
 
 //Testing code for a single type

@@ -453,10 +453,10 @@ void Grid::DisarmAllTrapNodes()
 {
     for (auto node : GetAllNodes())
     {
-        if (node->trapNode)
+        if (node->trapCard)
         {
-            delete node->trapNode;
-            node->trapNode = nullptr;
+            delete node->trapCard;
+            node->trapCard = nullptr;
         }
     }
 }
