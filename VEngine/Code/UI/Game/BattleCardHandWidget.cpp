@@ -9,7 +9,10 @@ void BattleCardHandWidget::Draw(float deltaTime)
 
 	for (auto card : Player::system.GetFirstActor()->battleCardsInHand)
 	{
-		Image(card->imageFilename, layout);
+		if (ImageButton(card->imageFilename, layout))
+		{
+			card->Activate();
+		}
 
 		layout.AddHorizontalSpace(75.f);
 	}

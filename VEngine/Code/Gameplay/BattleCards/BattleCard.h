@@ -8,6 +8,8 @@ struct BattleCard
 	BattleCard() {}
 	BattleCard(std::string name_, std::string imageFilename_);
 
+	virtual void Activate() = 0;
+
 	std::string name;
 	std::string imageFilename;
 };

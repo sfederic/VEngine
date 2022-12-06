@@ -66,6 +66,8 @@ public:
 
 	void DrawTurnBattleCardHand();
 
+	void PlaceTrap();
+
 private:
 	void ToggleBattleGrid();
 	void PrimaryAction();
@@ -87,7 +89,6 @@ private:
 
 	void ActivateGridMapPicker();
 
-	void PlaceTrap();
 	void DisarmTrap();
 
 	void SummonAllyUnit();
