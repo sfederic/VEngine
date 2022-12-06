@@ -88,9 +88,6 @@ void Player::Tick(float deltaTime)
 		GameUtils::TriggerGameOver();
 	}
 
-	PlaceTrap();
-	DisarmTrap();
-
 	DrawBattleCard();
 
 	PrimaryAction();
@@ -465,36 +462,16 @@ void Player::ActivateGridMapPicker()
 //Places a trap node on the current node the player is standing on.
 void Player::PlaceTrap()
 {
-	if (Input::GetKeyUp(Keys::T))
-	{
-		auto currentNode = GetCurrentNode();
+	auto currentNode = GetCurrentNode();
 		
-		if (currentNode->trapNode != nullptr)
-		{
-			delete currentNode->trapNode;
-			currentNode->trapNode = nullptr;
-		}
-
-		currentNode->trapNode = new DamageTrapNode();
-		currentNode->SetColour(GridNode::trapNodeColour);
-	}
-}
-
-//Delete trap and set node colour back to normal
-void Player::DisarmTrap()
-{
-	if (Input::GetKeyUp(Keys::Y))
+	if (currentNode->trapNode != nullptr)
 	{
-		auto currentNode = GetCurrentNode();
-
-		if (currentNode->trapNode != nullptr)
-		{
-			delete currentNode->trapNode;
-			currentNode->trapNode = nullptr;
-		}
-
-		currentNode->SetColour(GridNode::normalColour);
+		delete currentNode->trapNode;
+		currentNode->trapNode = nullptr;
 	}
+
+	currentNode->trapNode = new DamageTrapNode();
+	currentNode->SetColour(GridNode::trapNodeColour);
 }
 
 //Testing code for a single type

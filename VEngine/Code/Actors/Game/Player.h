@@ -89,8 +89,6 @@ private:
 
 	void ActivateGridMapPicker();
 
-	void DisarmTrap();
-
 	void SummonAllyUnit();
 	void SwitchInputBetweenAllyUnitsAndPlayer();
 
