@@ -67,18 +67,10 @@ public:
 
 	void DrawTurnBattleCardHand();
 
-	template <typename T>
-	void PlaceTrap()
+	void PlaceTrap(BattleCard* trapCard)
 	{
 		auto currentNode = GetCurrentNode();
-
-		if (currentNode->trapCard != nullptr)
-		{
-			delete currentNode->trapCard;
-			currentNode->trapCard = nullptr;
-		}
-
-		currentNode->trapCard = new T();
+		currentNode->trapCard = trapCard;
 		currentNode->SetColour(GridNode::trapNodeColour);
 	}
 
