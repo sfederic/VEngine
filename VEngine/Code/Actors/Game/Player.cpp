@@ -182,6 +182,8 @@ void Player::SetupForBattle()
 	isWeaponDrawn = true;
 
 	healthWidget->AddToViewport();
+
+	DrawTurnBattleCardHand();
 	battleCardHandWidget->AddToViewport();
 }
 
@@ -551,6 +553,15 @@ void Player::DrawBattleCard()
 			auto card = BattleCardSystem::Get().DrawCardAtRandom();
 			battleCardsInHand.push_back(card);
 		}
+	}
+}
+
+void Player::DrawTurnBattleCardHand()
+{
+	for (int i = battleCardsInHand.size(); i < battleCardHandSizeLimit; i++)
+	{
+		auto card = BattleCardSystem::Get().DrawCardAtRandom();
+		battleCardsInHand.push_back(card);
 	}
 }
 

@@ -100,8 +100,11 @@ void BattleSystem::MoveToNextTurn()
 	if (currentUnitTurnIndex >= activeBattleUnits.size())
 	{
 		Log("Players turn");
+
 		player->isPlayerTurn = true;
 		player->RefreshCombatStats();
+		player->DrawTurnBattleCardHand();
+
 		currentUnitTurnIndex = 0;
 
 		GameUtils::SetActiveCameraTarget(player);

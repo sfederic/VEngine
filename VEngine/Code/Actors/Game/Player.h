@@ -64,6 +64,8 @@ public:
 	//Show a timer dialogue above player when player character is thinking to themself.
 	void QuickThought(const std::wstring& text);
 
+	void DrawTurnBattleCardHand();
+
 private:
 	void ToggleBattleGrid();
 	void PrimaryAction();
@@ -95,4 +97,5 @@ private:
 
 	std::vector<PlayerUnit*> activePlayerUnits;
 	int activePlayerUnitIndex = 0;
+	const static int battleCardHandSizeLimit = 5;
 };
