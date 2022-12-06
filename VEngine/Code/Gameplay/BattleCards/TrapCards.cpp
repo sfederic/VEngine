@@ -12,6 +12,7 @@ struct TestTrapNodeCard : BattleCard
 
 	virtual void Activate() override
 	{
+		__super::Activate();
 		Player::system.GetFirstActor()->PlaceTrap<TestTrapNodeCard>();
 	}
 }testTrapNodeCard;
