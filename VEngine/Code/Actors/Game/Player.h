@@ -70,8 +70,6 @@ public:
 	template <typename T>
 	void PlaceTrap()
 	{
-		//static_assert(std::derived_from<T, BattleCard> == true)
-
 		auto currentNode = GetCurrentNode();
 
 		if (currentNode->trapCard != nullptr)
