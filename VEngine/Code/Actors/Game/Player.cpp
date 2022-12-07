@@ -622,7 +622,7 @@ bool Player::DestructibleCheck(Actor* hitActor)
 
 			if (CheckAttackPositionAgainstUnitDirection(unit))
 			{
-				ExpendActionPoints(1);
+				CheckAndExpendActionPoints(1);
 				GameUtils::CameraShake(1.f);
 				GameUtils::SpawnSpriteSheet("Sprites/blood_hit.png", unit->GetPosition(), false, 4, 4);
 				GameUtils::PlayAudioOneShot("sword_hit.wav");

@@ -91,7 +91,7 @@ void PlayerUnit::CheckNextMoveNode(XMVECTOR previousPos)
 	if (battleSystem.isBattleActive)
 	{
 		PreviewMovementNodesDuringBattle();
-		ExpendActionPoints(1);
+		CheckAndExpendActionPoints(1);
 	}
 }
 
@@ -188,10 +188,17 @@ void PlayerUnit::RotationInput(float deltaTime)
 	}
 }
 
-void PlayerUnit::ExpendActionPoints(int num)
+bool PlayerUnit::CheckAndExpendActionPoints(int num)
 {
+	if (num > actionPoints)
+	{
+		return false;
+	}
+
 	actionPoints -= num;
 	actionBarWidget->actionPoints = actionPoints;
+
+	return true;
 }
 
 GridNode* PlayerUnit::GetCurrentNode()

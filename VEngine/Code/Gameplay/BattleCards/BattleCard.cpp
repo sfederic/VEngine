@@ -14,7 +14,10 @@ void BattleCard::Activate()
 {
 	auto player = Player::system.GetFirstActor();
 
-	player->ExpendActionPoints(cost);
+	if (!player->CheckAndExpendActionPoints(cost))
+	{
+		return;
+	}
 
 	for (int i = 0; i < player->battleCardsInHand.size(); i++)
 	{
