@@ -67,12 +67,9 @@ public:
 
 	void DrawTurnBattleCardHand();
 
-	void PlaceTrap(BattleCard* trapCard)
-	{
-		auto currentNode = GetCurrentNode();
-		currentNode->trapCard = trapCard;
-		currentNode->SetColour(GridNode::trapNodeColour);
-	}
+	void SummonAllyUnit();
+
+	void PlaceTrap(BattleCard* trapCard);
 
 private:
 	void ToggleBattleGrid();
