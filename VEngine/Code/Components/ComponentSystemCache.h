@@ -1,4 +1,5 @@
 #pragma once
+
 #include <typeindex>
 #include <map>
 #include <optional>
@@ -6,6 +7,7 @@
 
 struct IComponentSystem;
 
+//@Todo: this needs to be done up like ActorSystemCache, but it's causing propblems in LoadWorld()
 struct ComponentSystemCache
 {
 	std::unordered_map<std::optional<std::type_index>, IComponentSystem*>* typeToSystemMap = nullptr;
