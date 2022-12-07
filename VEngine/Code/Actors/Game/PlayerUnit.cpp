@@ -107,7 +107,7 @@ void PlayerUnit::PreviewMovementNodesDuringBattle()
 
 	grid->GetNeighbouringNodes(currentNode, movementNodes);
 
-	for (int moveIndex = 0; moveIndex < (actionPoints - 1); moveIndex++)
+	for (int moveIndex = 0; moveIndex < (battleSystem.playerActionPoints - 1); moveIndex++)
 	{
 		for (int previewIndex = 0; previewIndex < movementNodes.size(); previewIndex++)
 		{
@@ -119,7 +119,7 @@ void PlayerUnit::PreviewMovementNodesDuringBattle()
 		closedNodes.clear();
 	}
 
-	if (actionPoints > 0)
+	if (battleSystem.playerActionPoints > 0)
 	{
 		grid->ResetAllNodes(); //This is more to reset the node colours
 	}
@@ -190,13 +190,13 @@ void PlayerUnit::RotationInput(float deltaTime)
 
 bool PlayerUnit::CheckAndExpendActionPoints(int num)
 {
-	if (num > actionPoints)
+	if (num > battleSystem.playerActionPoints)
 	{
 		return false;
 	}
 
-	actionPoints -= num;
-	actionBarWidget->actionPoints = actionPoints;
+	battleSystem.playerActionPoints -= num;
+	battleSystem.actionBarWidget->actionPoints = battleSystem.playerActionPoints;
 
 	return true;
 }

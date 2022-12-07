@@ -5,7 +5,6 @@
 
 struct MeshComponent;
 struct CameraComponent;
-struct PlayerActionBarWidget;
 struct GridNode;
 
 //Base class for all player controllable units.
@@ -37,13 +36,10 @@ public:
 	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 
-	PlayerActionBarWidget* actionBarWidget = nullptr;
-
 	MeshComponent* mesh = nullptr;
 	CameraComponent* camera = nullptr;
 
 	int attackPoints = 1;
-	int actionPoints = 10;
 	int healthPoints = 3;
 
 	float moveSpeed = 5.f;

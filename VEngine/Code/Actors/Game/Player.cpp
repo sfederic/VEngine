@@ -60,8 +60,8 @@ void Player::Start()
 	interactWidget = CreateWidget<InteractWidget>();
 	memoryMenuWidget = CreateWidget<MemoryMenuWidget>();
 
-	actionBarWidget = CreateWidget<PlayerActionBarWidget>();
-	actionBarWidget->actionPoints = actionPoints;
+	battleSystem.actionBarWidget = CreateWidget<PlayerActionBarWidget>();
+	battleSystem.actionBarWidget->actionPoints = battleSystem.playerActionPoints;
 
 	healthWidget = CreateWidget<PlayerHealthWidget>();
 
@@ -108,11 +108,11 @@ void Player::Tick(float deltaTime)
 
 	if (battleSystem.isBattleActive)
 	{
-		actionBarWidget->AddToViewport();
+		battleSystem.actionBarWidget->AddToViewport();
 	}
 	else
 	{
-		actionBarWidget->RemoveFromViewport();
+		battleSystem.actionBarWidget->RemoveFromViewport();
 	}
 
 	if (!inConversation && !inInteraction)
@@ -123,7 +123,7 @@ void Player::Tick(float deltaTime)
 			return;
 		}
 
-		if (battleSystem.isBattleActive && actionPoints < 0)
+		if (battleSystem.isBattleActive && battleSystem.playerActionPoints < 0)
 		{
 			return;
 		}
@@ -141,14 +141,14 @@ Properties Player::GetProps()
 
 void Player::RefreshCombatStats()
 {
-	actionPoints += 5;
+	battleSystem.playerActionPoints += 5;
 
-	if (actionPoints >= GameInstance::maxPlayerActionPoints)
+	if (battleSystem.playerActionPoints >= GameInstance::maxPlayerActionPoints)
 	{
-		actionPoints = GameInstance::maxPlayerActionPoints;
+		battleSystem.playerActionPoints = GameInstance::maxPlayerActionPoints;
 	}
 
-	actionBarWidget->actionPoints = actionPoints;
+	battleSystem.actionBarWidget->actionPoints = battleSystem.playerActionPoints;
 }
 
 void Player::InflictDamage(int damage)

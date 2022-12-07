@@ -5,6 +5,7 @@
 struct Unit;
 class Player;
 struct Grid;
+struct PlayerActionBarWidget;
 
 //Handles all units and player turns for battle as well as what units are active.
 struct BattleSystem : System
@@ -12,6 +13,9 @@ struct BattleSystem : System
 	std::vector<Unit*> activeBattleUnits;
 
 	bool isBattleActive = false;
+
+	int playerActionPoints = 10;
+	PlayerActionBarWidget* actionBarWidget = nullptr;
 
 private:
 	Player* player = nullptr;
