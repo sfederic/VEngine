@@ -296,7 +296,7 @@ void AssetDock::ActorTemplateFileClicked(const std::string actorTemplateFilename
     std::wstring actorSystemName;
     d.is >> actorSystemName;
 
-    IActorSystem* actorSystem = actorSystemCache.Get(VString::wstos(actorSystemName));
+    IActorSystem* actorSystem = actorSystemCache.GetSystem(VString::wstos(actorSystemName));
 
     WorldEditor::SetSpawnSystem(actorSystem);
     Log("[%s] set as spawn system", actorSystem->GetName().c_str());

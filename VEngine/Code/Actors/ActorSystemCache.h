@@ -9,13 +9,12 @@ class IActorSystem;
 
 struct ActorSystemCache
 {
-	//Maps are pointers because of static init order.
-	std::unordered_map<std::optional<std::type_index>, IActorSystem*>* typeToSystemMap = nullptr;
-	std::map<std::string, IActorSystem*>* nameToSystemMap = nullptr;
+	std::unordered_map<std::optional<std::type_index>, IActorSystem*> typeToSystemMap;
+	std::map<std::string, IActorSystem*> nameToSystemMap;
 
-	void Add(std::type_index type, IActorSystem* actorSystem);
-	IActorSystem* Get(std::string systemName);
-	IActorSystem* Get(std::type_index actorType);
+	void AddSystem(std::type_index type, IActorSystem* actorSystem);
+	IActorSystem* GetSystem(std::string systemName);
+	IActorSystem* GetSystem(std::type_index actorType);
 
 	std::vector<std::string> GetAllActorSystemNames();
 };

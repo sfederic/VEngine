@@ -177,7 +177,7 @@ void WorldDock::ActorTypeFilterChanged(const QString& index)
 	actorTreeWidget->clear();
 	actorTreeWidget->blockSignals(true);
 
-	IActorSystem* actorSystem = actorSystemCache.Get(index.toStdString());
+	IActorSystem* actorSystem = actorSystemCache.GetSystem(index.toStdString());
 
 	for (Actor* actor : actorSystem->GetActorsAsBaseClass())
 	{

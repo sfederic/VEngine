@@ -4,26 +4,16 @@
 
 ActorSystemCache actorSystemCache;
 
-void ActorSystemCache::Add(std::type_index type, IActorSystem* actorSystem)
+void ActorSystemCache::AddSystem(std::type_index type, IActorSystem* actorSystem)
 {
-	if (typeToSystemMap == nullptr)
-	{
-		typeToSystemMap = new std::unordered_map<std::optional<std::type_index>, IActorSystem*>();
-	}
-
-	if (nameToSystemMap == nullptr)
-	{
-		nameToSystemMap = new std::map<std::string, IActorSystem*>();
-	}
-
-	typeToSystemMap->insert(std::make_pair(type, actorSystem));
-	nameToSystemMap->insert(std::make_pair(actorSystem->GetName(), actorSystem));
+	typeToSystemMap.emplace(type, actorSystem);
+	nameToSystemMap.emplace(actorSystem->GetName(), actorSystem);
 }
 
-IActorSystem* ActorSystemCache::Get(std::string systemName)
+IActorSystem* ActorSystemCache::GetSystem(std::string systemName)
 {
-	auto asIt = nameToSystemMap->find(systemName);
-	if (asIt == nameToSystemMap->end())
+	auto asIt = nameToSystemMap.find(systemName);
+	if (asIt == nameToSystemMap.end())
 	{
 		return nullptr;
 	}
@@ -31,15 +21,15 @@ IActorSystem* ActorSystemCache::Get(std::string systemName)
 	return asIt->second;
 }
 
-IActorSystem* ActorSystemCache::Get(std::type_index actorType)
+IActorSystem* ActorSystemCache::GetSystem(std::type_index actorType)
 {
-	return typeToSystemMap->find(actorType)->second;
+	return typeToSystemMap.find(actorType)->second;
 }
 
 std::vector<std::string> ActorSystemCache::GetAllActorSystemNames()
 {
 	std::vector<std::string> names;
-	for (auto& systemPair : *nameToSystemMap)
+	for (auto& systemPair : nameToSystemMap)
 	{
 		names.emplace_back(systemPair.first);
 	}

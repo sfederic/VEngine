@@ -120,7 +120,7 @@ void FileSystem::ReadAllSystemsFromBinary()
 			continue;
 		}
 
-		auto actorSystem = actorSystemCache.Get(systemName);
+		auto actorSystem = actorSystemCache.GetSystem(systemName);
 		auto componentSystem = componentSystemCache.Get(systemName);
 
 		if (actorSystem != nullptr)
@@ -195,10 +195,10 @@ void FileSystem::LoadWorld(std::string worldName)
 			continue;
 		}
 
-		if (actorSystemCache.nameToSystemMap->find(VString::wstos(systemName)) !=
-			actorSystemCache.nameToSystemMap->end())
+		if (actorSystemCache.nameToSystemMap.find(VString::wstos(systemName)) !=
+			actorSystemCache.nameToSystemMap.end())
 		{
-			auto asIt = actorSystemCache.nameToSystemMap->find(VString::wstos(systemName));
+			auto asIt = actorSystemCache.nameToSystemMap.find(VString::wstos(systemName));
 			IActorSystem* actorSystem = asIt->second;
 
 			for (int i = 0; i < numObjectsToSpawn; i++)
@@ -255,8 +255,8 @@ void FileSystem::LoadWorld(std::string worldName)
 
 			while ((componentSystemCache.nameToSystemMap->find(VString::wstos(missingProp)) ==
 				componentSystemCache.nameToSystemMap->end()) ||
-				actorSystemCache.nameToSystemMap->find(VString::wstos(missingProp)) ==
-				actorSystemCache.nameToSystemMap->end())
+				actorSystemCache.nameToSystemMap.find(VString::wstos(missingProp)) ==
+				actorSystemCache.nameToSystemMap.end())
 			{
 				lastPos = d.is.tellg();
 				d.is >> missingProp;
