@@ -24,6 +24,16 @@ IActorSystem* ActorSystemCache::GetSystem(std::type_index actorType)
 	return typeToSystemMap.find(actorType)->second;
 }
 
+std::vector<IActorSystem*> ActorSystemCache::GetAllSystems()
+{
+	std::vector<IActorSystem*> systems;
+	for (const auto& [key, value] : nameToSystemMap)
+	{
+		systems.emplace_back(value);
+	}
+	return systems;
+}
+
 std::vector<std::string> ActorSystemCache::GetAllActorSystemNames()
 {
 	std::vector<std::string> names;

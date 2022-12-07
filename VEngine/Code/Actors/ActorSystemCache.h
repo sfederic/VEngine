@@ -7,11 +7,9 @@
 
 class IActorSystem;
 
-struct ActorSystemCache
+class ActorSystemCache
 {
-	std::unordered_map<std::optional<std::type_index>, IActorSystem*> typeToSystemMap;
-	std::map<std::string, IActorSystem*> nameToSystemMap;
-
+public:
 	static ActorSystemCache& Get()
 	{
 		static ActorSystemCache actorSystemCache;
@@ -22,5 +20,10 @@ struct ActorSystemCache
 	IActorSystem* GetSystem(std::string systemName);
 	IActorSystem* GetSystem(std::type_index actorType);
 
+	std::vector<IActorSystem*> GetAllSystems();
 	std::vector<std::string> GetAllActorSystemNames();
+
+private:
+	std::unordered_map<std::optional<std::type_index>, IActorSystem*> typeToSystemMap;
+	std::map<std::string, IActorSystem*> nameToSystemMap;
 };
