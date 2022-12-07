@@ -65,6 +65,7 @@ namespace VMath
 	XMVECTOR CalcMidPoint(XMVECTOR p0, XMVECTOR p1);
 
 	float RandomRange(float min, float max);
+	int RandomRangeInt(int min, int max);
 
 	XMFLOAT3 Float3Subtract(XMFLOAT3& f0, XMFLOAT3& f1);
 	XMFLOAT2 Float2Subtract(XMFLOAT2& f0, XMFLOAT2& f1);

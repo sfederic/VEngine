@@ -360,6 +360,15 @@ namespace VMath
         return result;
     }
 
+    int RandomRangeInt(int min, int max)
+    {
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution dist(min, max);
+        int result = dist(gen);
+        return result;
+    }
+
     XMFLOAT3 Float3Subtract(XMFLOAT3& f0, XMFLOAT3& f1)
     {
         return XMFLOAT3(f0.x - f1.x, f0.y - f1.y, f0.z - f1.z);
