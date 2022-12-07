@@ -24,7 +24,7 @@ public:
 		std::string token = typeName.substr(typeName.find(" ") + 1);
 		name = token;
 
-		actorSystemCache.AddSystem(typeid(T), this);
+		ActorSystemCache::Get().AddSystem(typeid(T), this);
 	}
 
 	T* Add(T newActor = T(), Transform transform = Transform())

@@ -27,7 +27,7 @@ WorldDock::WorldDock() : QDockWidget("World")
 	//System filter combobox
 	actorTypeComboBox = new QComboBox(this);
 	actorTypeComboBox->addItem("All");
-	for (std::string& actorSystemName : actorSystemCache.GetAllActorSystemNames())
+	for (std::string& actorSystemName : ActorSystemCache::Get().GetAllActorSystemNames())
 	{
 		actorTypeComboBox->addItem(QString::fromStdString(actorSystemName));
 	}
@@ -177,7 +177,7 @@ void WorldDock::ActorTypeFilterChanged(const QString& index)
 	actorTreeWidget->clear();
 	actorTreeWidget->blockSignals(true);
 
-	IActorSystem* actorSystem = actorSystemCache.GetSystem(index.toStdString());
+	IActorSystem* actorSystem = ActorSystemCache::Get().GetSystem(index.toStdString());
 
 	for (Actor* actor : actorSystem->GetActorsAsBaseClass())
 	{

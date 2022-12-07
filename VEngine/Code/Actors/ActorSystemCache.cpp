@@ -2,8 +2,6 @@
 #include "ActorSystemCache.h"
 #include "IActorSystem.h"
 
-ActorSystemCache actorSystemCache;
-
 void ActorSystemCache::AddSystem(std::type_index type, IActorSystem* actorSystem)
 {
 	typeToSystemMap.emplace(type, actorSystem);

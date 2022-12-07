@@ -381,7 +381,7 @@ Actor* WorldEditor::SpawnActorFromTemplateFile(std::string templateFilename, Tra
 	std::wstring actorSystemName;
 	d.is >> actorSystemName;
 
-	IActorSystem* actorSystem = actorSystemCache.GetSystem(VString::wstos(actorSystemName));
+	IActorSystem* actorSystem = ActorSystemCache::Get().GetSystem(VString::wstos(actorSystemName));
 
 	Actor* actor = actorSystem->SpawnActor(transform);
 
