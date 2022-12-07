@@ -5,7 +5,7 @@
 
 struct TestSummonCard : BattleCard
 {
-	TestSummonCard() : BattleCard(L"TestSummonCard", L"Summons a test monster", "monster_icon.png")
+	TestSummonCard() : BattleCard(L"TestSummonCard", L"Summons a test monster", "UI/monster_icon.jpg")
 	{
 		cost = 2;
 		BattleCardSystem::Get().AddCard(this);

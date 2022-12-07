@@ -5,7 +5,7 @@
 
 struct TestTrapNodeCard : BattleCard
 {
-	TestTrapNodeCard() : BattleCard(L"TestTrapNodeCard", L"Testing", "test.png")
+	TestTrapNodeCard() : BattleCard(L"TestTrapNodeCard", L"Testing", "UI/trap_icon.jpg")
 	{
 		BattleCardSystem::Get().AddCard(this);
 	}
