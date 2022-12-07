@@ -5,7 +5,7 @@
 using namespace DirectX;
 
 struct Ray;
-class BattleCard;
+struct BattleCard;
 
 struct GridNode
 {

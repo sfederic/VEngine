@@ -24,8 +24,9 @@ public:
 	void CheckNextMoveNode(XMVECTOR previousPos);
 	GridNode* GetCurrentNode();
 
-protected:
 	void ExpendActionPoints(int num);
+
+protected:
 	void PreviewMovementNodesDuringBattle();
 
 	bool CheckIfMovementAndRotationStopped();

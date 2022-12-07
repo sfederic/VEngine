@@ -13,7 +13,7 @@ struct Memory;
 struct GridActor;
 struct Unit;
 class BattleCardHandWidget;
-class BattleCard;
+struct BattleCard;
 
 class Player : public PlayerUnit
 {

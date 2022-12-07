@@ -3,7 +3,7 @@
 #include "../Widget.h"
 
 class GridActor;
-class BattleCard;
+struct BattleCard;
 
 class GridMapPickerSelectionInfoWidget : public Widget
 {

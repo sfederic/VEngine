@@ -13,4 +13,6 @@ struct BattleCard
 	std::wstring name;
 	std::wstring desc;
 	std::string imageFilename;
+
+	int cost = 1;
 };
