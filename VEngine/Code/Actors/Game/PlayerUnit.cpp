@@ -44,6 +44,13 @@ void PlayerUnit::ControllerInput(float deltaTime)
 
 void PlayerUnit::CheckNextMoveNode(XMVECTOR previousPos)
 {
+	if (battleSystem.playerActionPoints <= 0)
+	{
+		Log("No Player action points remaining.");
+		nextPos = previousPos;
+		return;
+	}
+
 	int nextXIndex = (int)std::round(nextPos.m128_f32[0]);
 	int nextYIndex = (int)std::round(nextPos.m128_f32[2]);
 
