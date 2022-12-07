@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "BattleCardSystem.h"
 #include "BattleCard.h"
+#include "VMath.h"
 
 void BattleCardSystem::AddCard(BattleCard* card)
 {
@@ -15,6 +16,7 @@ void BattleCardSystem::AddCard(BattleCard* card)
 BattleCard* BattleCardSystem::DrawCardAtRandom()
 {
 	auto battleCardMapIt = battleCardMap->begin();
-	std::advance(battleCardMapIt, std::rand() % battleCardMap->size());
+	const int rand = VMath::RandomRangeInt(0, battleCardMap->size() - 1);
+	std::advance(battleCardMapIt, rand);
 	return battleCardMapIt->second;
 }
