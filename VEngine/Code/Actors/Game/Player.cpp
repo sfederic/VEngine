@@ -90,7 +90,6 @@ void Player::Tick(float deltaTime)
 	DrawBattleCard();
 
 	PrimaryAction();
-	SummonAllyUnit();
 	SwitchInputBetweenAllyUnitsAndPlayer();
 
 	if (Input::GetKeyUp(Keys::O))
@@ -461,21 +460,18 @@ void Player::ActivateGridMapPicker()
 //Testing code for a single type
 void Player::SummonAllyUnit()
 {
-	if (Input::GetKeyUp(Keys::Up))
-	{
-		Transform transform;
-		XMStoreFloat3(&transform.position, GetPositionV() + mesh->GetForwardVectorV());
-		transform.rotation = mesh->GetRotation();
+	Transform transform;
+	XMStoreFloat3(&transform.position, GetPositionV() + mesh->GetForwardVectorV());
+	transform.rotation = mesh->GetRotation();
 
-		auto attackUnit = AttackUnit::system.Add(AttackUnit(), transform);
-		attackUnit->Start();
+	auto attackUnit = AttackUnit::system.Add(AttackUnit(), transform);
+	attackUnit->Start();
 
-		playerInputController.SetPlayerUnitToControl(attackUnit);
+	playerInputController.SetPlayerUnitToControl(attackUnit);
 
-		activePlayerUnits.push_back(attackUnit);
-		activePlayerUnitIndex = activePlayerUnits.size() - 1;
-		playerInputController.SetPlayerUnitToControl(attackUnit);
-	}
+	activePlayerUnits.push_back(attackUnit);
+	activePlayerUnitIndex = activePlayerUnits.size() - 1;
+	playerInputController.SetPlayerUnitToControl(attackUnit);
 }
 
 void Player::SwitchInputBetweenAllyUnitsAndPlayer()

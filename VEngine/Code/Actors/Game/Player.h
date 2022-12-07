@@ -2,7 +2,6 @@
 
 #include "PlayerUnit.h"
 #include "Gameplay/BattleEnums.h"
-#include "Gameplay/GridNode.h"
 
 struct DialogueComponent;
 struct MemoryComponent;
@@ -92,7 +91,6 @@ private:
 
 	void ActivateGridMapPicker();
 
-	void SummonAllyUnit();
 	void SwitchInputBetweenAllyUnitsAndPlayer();
 
 	void DrawBattleCard();

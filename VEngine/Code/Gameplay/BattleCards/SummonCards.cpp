@@ -14,6 +14,6 @@ struct TestSummonCard : BattleCard
 	virtual void Activate() override
 	{
 		__super::Activate();
-		Player::system.GetFirstActor()->PlaceTrap(this);
+		Player::system.GetFirstActor()->SummonAllyUnit();
 	}
 }testSummonCard;
