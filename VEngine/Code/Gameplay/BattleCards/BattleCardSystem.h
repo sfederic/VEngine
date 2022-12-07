@@ -1,7 +1,6 @@
 #pragma once
 
 #include <map>
-#include <memory>
 
 struct BattleCard;
 
@@ -18,5 +17,5 @@ public:
 	BattleCard* DrawCardAtRandom();
 
 private:
-	std::map<std::wstring, BattleCard*>* battleCardMap = nullptr;
+	std::map<std::wstring, BattleCard*> battleCardMap;
 };
