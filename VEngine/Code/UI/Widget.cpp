@@ -143,7 +143,7 @@ void Widget::Image(const std::string filename, Layout layout)
 	sprite.dstRect = { (long)layout.rect.left, (long)layout.rect.top, (long)layout.rect.right, (long)layout.rect.bottom };
 	sprite.srcRect = { 0, 0, (long)layout.rect.right, (long)layout.rect.bottom };
 
-	spriteSystem.CreateScreenSprite(sprite);
+	SpriteSystem::CreateScreenSprite(sprite);
 }
 
 void Widget::Image(const std::string filename, int x, int y, int w, int h)
@@ -153,7 +153,7 @@ void Widget::Image(const std::string filename, int x, int y, int w, int h)
 	sprite.dstRect = { x, y, x + w, y + h };
 	sprite.srcRect = { 0, 0, w, h };
 
-	spriteSystem.CreateScreenSprite(sprite);
+	SpriteSystem::CreateScreenSprite(sprite);
 }
 
 bool Widget::ImageButton(const std::string filename, Layout layout)
@@ -163,7 +163,7 @@ bool Widget::ImageButton(const std::string filename, Layout layout)
 	sprite.dstRect = { (long)layout.rect.left, (long)layout.rect.top, (long)layout.rect.right, (long)layout.rect.bottom };
 	sprite.srcRect = { 0, 0, (long)layout.rect.right, (long)layout.rect.bottom };
 
-	spriteSystem.CreateScreenSprite(sprite);
+	SpriteSystem::CreateScreenSprite(sprite);
 
 	if (editor->viewportMouseX > layout.rect.left && editor->viewportMouseX < layout.rect.right)
 	{

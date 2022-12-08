@@ -338,6 +338,7 @@
     <ClInclude Include="Code\Render\PixelShader.h" />
     <ClInclude Include="Code\Render\Shader.h" />
     <ClInclude Include="Code\Render\ShaderItem.h" />
+    <ClInclude Include="Code\Render\Sprite.h" />
     <ClInclude Include="Code\Render\VertexShader.h" />
     <ClInclude Include="Code\SHMath\DirectXSH.h" />
     <ClInclude Include="Code\Components\CharacterControllerComponent.h" />

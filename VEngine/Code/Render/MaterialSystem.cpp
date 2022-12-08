@@ -6,10 +6,8 @@
 #include "Render/ShaderItem.h"
 #include "SystemStates.h"
 
-SystemStates systemState = SystemStates::Unloaded;
-
+static SystemStates systemState = SystemStates::Unloaded;
 std::unordered_map<UID, std::unique_ptr<Material>> materials;
-
 std::string MaterialSystem::selectedMaterialInEditor;
 
 void MaterialSystem::Init()

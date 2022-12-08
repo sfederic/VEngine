@@ -113,7 +113,7 @@ void Engine::TickSystems(float deltaTime)
 void Engine::ResetSystems()
 {
 	Input::Reset();
-	spriteSystem.Reset();
+	SpriteSystem::Reset();
 }
 
 void Engine::MainLoop()

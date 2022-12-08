@@ -7,11 +7,13 @@
 #include "Particle/SpriteSheet.h"
 #include "Texture2D.h"
 
-SpriteSystem spriteSystem;
+static SystemStates systemState = SystemStates::Unloaded;
+ID3D11Buffer* spriteVertexBuffer = nullptr;
+ID3D11Buffer* spriteIndexBuffer = nullptr;
+Vertex verts[4] = {};
+std::vector<Sprite> screenSprites;
 
-SpriteSystem::SpriteSystem() : System("SpriteSystem")
-{
-}
+XMFLOAT3 PointToNdc(int x, int y, float z);
 
 void SpriteSystem::Init()
 {
@@ -41,25 +43,21 @@ void SpriteSystem::CreateScreenSprite(Sprite sprite)
 	screenSprites.push_back(sprite);
 }
 
-XMFLOAT3 SpriteSystem::PointToNdc(int x, int y, float z)
-{
-	XMFLOAT3 p = {};
-	p.x = 2.0f * (float)x / Renderer::GetViewportWidth() -1.0f;
-	p.y = 1.0f - 2.0f * (float)y / Renderer::GetViewportHeight();
-	p.z = z;
-	return p;
-}
-
 void SpriteSystem::UpdateAndSetSpriteBuffers(ID3D11DeviceContext* context)
 {
 	//Update vertex buffer
 	D3D11_MAPPED_SUBRESOURCE mappedResource{};
-	HR(context->Map(spriteSystem.spriteVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
-	memcpy(mappedResource.pData, &spriteSystem.verts, sizeof(spriteSystem.verts));
-	context->Unmap(spriteSystem.spriteVertexBuffer, 0);
+	HR(context->Map(spriteVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+	memcpy(mappedResource.pData, &verts, sizeof(verts));
+	context->Unmap(spriteVertexBuffer, 0);
 
-	context->IASetVertexBuffers(0, 1, &spriteSystem.spriteVertexBuffer, &Renderer::stride, &Renderer::offset);
-	context->IASetIndexBuffer(spriteSystem.spriteIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+	context->IASetVertexBuffers(0, 1, &spriteVertexBuffer, &Renderer::stride, &Renderer::offset);
+	context->IASetIndexBuffer(spriteIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+}
+
+std::vector<Sprite>& SpriteSystem::GetScreenSprites()
+{
+	return screenSprites;
 }
 
 void SpriteSystem::BuildSpriteQuadForViewportRendering(const Sprite& sprite)
@@ -154,4 +152,13 @@ void SpriteSystem::BuildSpriteQuadForParticleRendering()
 	verts[1].uv = XMFLOAT2(0.f, 1.f);
 	verts[2].uv = XMFLOAT2(1.f, 1.f);
 	verts[3].uv = XMFLOAT2(1.f, 0.f);
+}
+
+XMFLOAT3 PointToNdc(int x, int y, float z)
+{
+	XMFLOAT3 p = {};
+	p.x = 2.0f * (float)x / Renderer::GetViewportWidth() - 1.0f;
+	p.y = 1.0f - 2.0f * (float)y / Renderer::GetViewportHeight();
+	p.z = z;
+	return p;
 }

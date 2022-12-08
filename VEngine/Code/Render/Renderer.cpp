@@ -207,7 +207,7 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 
 	RenderUtils::defaultSampler = RenderUtils::CreateSampler();
 
-	spriteSystem.Init();
+	SpriteSystem::Init();
 }
 
 void Renderer::Tick()
@@ -1240,8 +1240,8 @@ void RenderSpriteSheets()
 
 		spriteSheet->UpdateSprite();
 
-		spriteSystem.BuildSpriteQuadForSpriteSheetRendering(spriteSheet->sprite);
-		spriteSystem.UpdateAndSetSpriteBuffers(context);
+		SpriteSystem::BuildSpriteQuadForSpriteSheetRendering(spriteSheet->sprite);
+		SpriteSystem::UpdateAndSetSpriteBuffers(context);
 
 		VMath::RotateTowardsCamera(spriteSheet->transform);
 
@@ -1328,7 +1328,7 @@ void Renderer::RenderParticleEmitters()
 	Profile::Start();
 
 	//Only need to build sprite quad once for in-world rendering
-	spriteSystem.BuildSpriteQuadForParticleRendering();
+	SpriteSystem::BuildSpriteQuadForParticleRendering();
 
 	shaderMatrices.view = activeCamera->GetViewMatrix();
 	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
@@ -1352,7 +1352,7 @@ void Renderer::RenderParticleEmitters()
 		//Set texture from emitter for every particle
 		SetShaderResourcePixel(0, emitter->textureData.filename);
 
-		spriteSystem.UpdateAndSetSpriteBuffers(context);
+		SpriteSystem::UpdateAndSetSpriteBuffers(context);
 
 		for (auto& particle : emitter->particles)
 		{
@@ -1380,15 +1380,15 @@ void Renderer::RenderSpritesInScreenSpace()
 {
 	Profile::Start();
 
-	for (const Sprite& sprite : spriteSystem.screenSprites)
+	for (const auto& sprite : SpriteSystem::GetScreenSprites())
 	{
 		SetRastState(RastStates::solid);
 		SetShaders(ShaderItems::UI);
 		SetSampler(0, RenderUtils::GetDefaultSampler());
 		SetShaderResourcePixel(0, sprite.textureFilename);
 
-		spriteSystem.BuildSpriteQuadForViewportRendering(sprite);
-		spriteSystem.UpdateAndSetSpriteBuffers(context);
+		SpriteSystem::BuildSpriteQuadForViewportRendering(sprite);
+		SpriteSystem::UpdateAndSetSpriteBuffers(context);
 
 		shaderMatrices.model = XMMatrixIdentity();
 		shaderMatrices.MakeModelViewProjectionMatrix();

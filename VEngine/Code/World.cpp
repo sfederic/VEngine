@@ -298,7 +298,7 @@ void World::Cleanup()
 	AudioSystem::DeleteLoadedAudioAndChannels();
 	TextureSystem::Cleanup();
 	MaterialSystem::Cleanup();
-	spriteSystem.Reset();
+	SpriteSystem::Reset();
 	uiSystem.Reset();
 
 	//CLEANUP COMPONENT SYSTEMS
