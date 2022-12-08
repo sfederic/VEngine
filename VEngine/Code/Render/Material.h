@@ -39,7 +39,7 @@ private:
 
 public:
 	Texture2D* texture = nullptr;
-	std::shared_ptr<ShaderItem> shader;
+	ShaderItem* shader = nullptr;
 	Sampler* sampler = nullptr;
 	RastState* rastState = nullptr;
 	BlendState* blendState = nullptr;

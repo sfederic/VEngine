@@ -85,7 +85,7 @@ void Engine::TickSystems(float deltaTime)
 	editor->Tick();
 	Core::Tick();
 	commandSystem.Tick();
-	shaderSystem.Tick();
+	ShaderSystem::Tick();
 	AudioSystem::Tick();
 
 	cutsceneSequencer.PlaybackTick(deltaTime);
@@ -154,7 +154,7 @@ void Engine::Render(float deltaTime)
 void Engine::Cleanup()
 {
 	physicsSystem.Cleanup();
-	shaderSystem.ClearShaders();
+	ShaderSystem::ClearShaders();
 	debugMenu.Cleanup();
 	uiSystem.Cleanup();
 }

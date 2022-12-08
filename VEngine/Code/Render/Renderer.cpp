@@ -190,7 +190,7 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	CreateFactory();
 	CreateDevice();
 
-	shaderSystem.Init();
+	ShaderSystem::Init();
 
 	shadowMap = new ShadowMap(device, 2048, 2048);
 
@@ -336,7 +336,7 @@ void CreateInputLayout()
 		{"WEIGHTS", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, weights), D3D11_INPUT_PER_VERTEX_DATA, 0},
 	};
 
-	VertexShader* shader = shaderSystem.FindVertexShader(L"Default_vs.cso");
+	VertexShader* shader = ShaderSystem::FindVertexShader(L"Default_vs.cso");
 	
 	HR(device->CreateInputLayout(inputDesc, _countof(inputDesc), shader->GetByteCodeData(), shader->GetByteCodeSize(), &inputLayout));
 	context->IASetInputLayout(inputLayout);

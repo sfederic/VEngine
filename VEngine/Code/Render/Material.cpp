@@ -45,7 +45,7 @@ void Material::Create()
 	sampler = RenderUtils::GetDefaultSampler();
 	rastState = Renderer::GetRastState(rastStateValue.GetValue());
 	blendState = Renderer::GetBlendState(blendStateValue.GetValue());
-	shader = shaderSystem.FindShaderItem(shaderData.shaderItemName);
+	shader = ShaderSystem::FindShaderItem(shaderData.shaderItemName);
 }
 
 void Material::Destroy()
@@ -119,7 +119,7 @@ static void ReassignBlendState(void* data)
 static void ReassignShader(void* data)
 {
 	auto shaderData = (ShaderData*)data;
-	auto foundShader = shaderSystem.FindShaderItem(shaderData->shaderItemName);
+	auto foundShader = ShaderSystem::FindShaderItem(shaderData->shaderItemName);
 	if (foundShader == nullptr)
 	{
 		Log("%s not found on shader change.", shaderData->shaderItemName.c_str());

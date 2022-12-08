@@ -9,8 +9,15 @@
 #include "PixelShader.h"
 #include "ShaderItem.h"
 #include "Profile.h"
+#include "ShaderItem.h"
 
-ShaderSystem shaderSystem;
+void CompileAllShadersFromFile();
+void HotreloadShaders();
+void RecompileShaderTypesForHotreload(const std::string shaderType, const std::string version);
+
+std::map<std::wstring, std::unique_ptr<VertexShader>> vertexShaders;
+std::map<std::wstring, std::unique_ptr<PixelShader>> pixelShaders;
+std::map<std::string, std::shared_ptr<ShaderItem>> shaderItems;
 
 void ShaderSystem::Init()
 {
@@ -49,15 +56,21 @@ void ShaderSystem::AddShaderItem(ShaderItem* shaderItem)
     shaderItems.emplace(shaderItem->GetName(), shaderItem);
 }
 
-std::shared_ptr<ShaderItem> ShaderSystem::FindShaderItem(std::string shaderItemName)
+ShaderItem* ShaderSystem::FindShaderItem(const std::string shaderItemName)
 {
     assert(shaderItems.find(shaderItemName) != shaderItems.end());
-    return shaderItems[shaderItemName];
+    return shaderItems[shaderItemName].get();
 }
 
-void ShaderSystem::CompileAllShadersFromFile()
+void ShaderSystem::ClearShaders()
 {
-    ClearShaders();
+    vertexShaders.clear();
+    pixelShaders.clear();
+}
+
+void CompileAllShadersFromFile()
+{
+    ShaderSystem::ClearShaders();
 
     for (auto& entry : std::filesystem::directory_iterator("Shaders/Vertex"))
     {
@@ -74,7 +87,7 @@ void ShaderSystem::CompileAllShadersFromFile()
     }
 }
 
-void ShaderSystem::HotreloadShaders()
+void HotreloadShaders()
 {
     if (Input::GetKeyUp(Keys::F4))
     {
@@ -93,7 +106,7 @@ void ShaderSystem::HotreloadShaders()
     }
 }
 
-void ShaderSystem::RecompileShaderTypesForHotreload(const std::string shaderType, const std::string version)
+void RecompileShaderTypesForHotreload(const std::string shaderType, const std::string version)
 {
     for (const auto& entry : std::filesystem::directory_iterator("Code/Render/Shaders/" + shaderType + "/"))
     {
@@ -105,10 +118,4 @@ void ShaderSystem::RecompileShaderTypesForHotreload(const std::string shaderType
         std::string command = "Tools/fxc /Od /Zi /T " + version + " /Fo " + outputFile + " Code/Render/Shaders/" + shaderType + "/" + entry.path().filename().string();
         std::system(command.c_str());
     }
-}
-
-void ShaderSystem::ClearShaders()
-{
-    vertexShaders.clear();
-    pixelShaders.clear();
 }
