@@ -13,6 +13,7 @@ struct Polyboard;
 class UnitSkill;
 class SkillNode;
 struct Memory;
+class PlayerUnit;
 
 //Units are battle ready actors and really only move and fight.
 struct Unit : GridActor
@@ -108,4 +109,5 @@ private:
 	bool IsTargetInRangeOfSkills(GridNode* targetNode);
 	void ActivateSkill();
 	void ClearActiveSkillNodes();
+	PlayerUnit* FindClosestPlayerUnit();
 };

@@ -28,7 +28,6 @@ public:
 	BattleCardHandWidget* battleCardHandWidget = nullptr;
 
 	GridActor* gridActorInteractingWith = nullptr;
-	Unit* unitCurrentlyAttackingPlayer = nullptr;
 
 	std::vector<Actor*> previousHitTransparentActors;
 

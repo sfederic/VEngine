@@ -79,20 +79,18 @@ void Unit::Tick(float deltaTime)
 
 				GetCurrentNode()->Hide();
 
-				auto player = Player::system.GetFirstActor();
+				auto target = FindClosestPlayerUnit();
 
-				//deal with attack wind up
 				attackWindingUp = true;
 
 				//Set player guard setup if skill can hit
 				auto& skill = skills[skillName];
-				if (skill->IsTargetNodeInRange(GetCurrentNode(), player->GetCurrentNode()))
+				if (skill->IsTargetNodeInRange(GetCurrentNode(), target->GetCurrentNode()))
 				{
-					player->unitCurrentlyAttackingPlayer = this;
 				}
 
 				//Still show animations and camera focus even if skill won't connect
-				player->nextCameraFOV = 30.f;
+				Player::system.GetFirstActor()->nextCameraFOV = 30.f;
 				GameUtils::SetActiveCameraTarget(this);
 				Timer::SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
 			}
@@ -136,7 +134,6 @@ void Unit::Tick(float deltaTime)
 					attackWindingUp = true;
 
 					player->nextCameraFOV = 30.f;
-					player->unitCurrentlyAttackingPlayer = this;
 
 					GameUtils::SetActiveCameraTarget(this);
 
@@ -428,8 +425,6 @@ void Unit::WindUpAttack()
 
 		ClearActiveSkillNodes();
 
-		player->unitCurrentlyAttackingPlayer = nullptr;
-
 		GameUtils::SpawnSpriteSheet("Sprites/explosion.png", player->GetPosition(), false, 4, 4);
 
 		EndTurn();
@@ -475,8 +470,6 @@ void Unit::WindUpAttack()
 		attackWindingUp = false;
 
 		ClearActiveSkillNodes();
-
-		player->unitCurrentlyAttackingPlayer = nullptr;
 
 		EndTurn();
 	}
@@ -538,6 +531,16 @@ void Unit::ClearActiveSkillNodes()
 	}
 
 	activeSkillNodes.clear();
+}
+
+PlayerUnit* Unit::FindClosestPlayerUnit()
+{
+	std::multimap<float, PlayerUnit*> distanceMap;
+	for (auto playerUnit : World::GetAllActorsOfTypeInWorld<PlayerUnit>())
+	{
+		distanceMap.emplace(XMVector3Length(playerUnit->GetPositionV() - GetPositionV()).m128_f32[0], playerUnit);
+	}
+	return distanceMap.begin()->second;
 }
 
 void Unit::ShowUnitMovementPath()
