@@ -446,7 +446,7 @@ void Player::ActivateGridMapPicker()
 		Transform transform;
 		transform.position = GetPosition();
 		transform.rotation = GetRotation();
-		auto gridMapPicker = GridMapPicker::system.Add(GridMapPicker(), transform);
+		auto gridMapPicker = GridMapPicker::system.Add(transform);
 
 		gridMapPicker->camera->targetActor = gridMapPicker;
 		GameUtils::SetActiveCamera(gridMapPicker->camera);
@@ -464,7 +464,7 @@ void Player::SummonAllyUnit()
 	XMStoreFloat3(&transform.position, GetPositionV() + mesh->GetForwardVectorV());
 	transform.rotation = mesh->GetRotation();
 
-	auto attackUnit = AttackUnit::system.Add(AttackUnit(), transform);
+	auto attackUnit = AttackUnit::system.Add(transform);
 	attackUnit->Start();
 
 	playerInputController.SetPlayerUnitToControl(attackUnit);

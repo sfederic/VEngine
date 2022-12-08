@@ -1,5 +1,7 @@
 #pragma once
+
 #include <vector>
+#include <memory>
 #include "IActorSystem.h"
 #include "Actor.h"
 #include "ActorSystemCache.h"
@@ -13,10 +15,8 @@
 //Ref: https://www.unrealengine.com/en-US/events/unreal-fest-europe-2019/aggregating-ticks-to-manage-scale-in-sea-of-thieves
 
 template <typename T>
-class ActorSystem : IActorSystem
+class ActorSystem : public IActorSystem
 {
-	std::vector<T*> actors;
-
 public:
 	ActorSystem()
 	{
@@ -27,19 +27,19 @@ public:
 		ActorSystemCache::Get().AddSystem(typeid(T), this);
 	}
 
-	T* Add(T newActor = T(), Transform transform = Transform())
+	T* Add(Transform transform = Transform())
 	{
-		T* actor = new T(std::move(newActor));
-		actors.emplace_back(actor);
+		actors.emplace_back(std::make_unique<T>());
+		auto& actor = actors.back();
 
 		actor->SetActorSystem(this);
 		actor->SetSystemIndex(actors.size() - 1);
 		actor->SetTransform(transform);
 		actor->SimpleSetName(this->name + std::to_string(actor->GetSystemIndex()));
 
-		World::AddActorToWorld(actor);
+		World::AddActorToWorld(actor.get());
 
-		return actor;
+		return actor.get();
 	}
 
 	void Remove(int index)
@@ -56,9 +56,8 @@ public:
 		actors[index]->SetSystemIndex(index);
 		actors[index]->SetName(GetName() + std::to_string(index));
 
-		World::RemoveActorFromWorld(actors.back());
+		World::RemoveActorFromWorld(actors.back().get());
 
-		delete actors.back();
 		actors.pop_back();
 
 		//@Todo: just keep an eye on this. Code like this makes me want to seperate editor from game.
@@ -82,7 +81,7 @@ public:
 
 	virtual void Init() override
 	{
-		for (T* actor : actors)
+		for (auto& actor : actors)
 		{
 			actor->Create();
 		}
@@ -90,13 +89,13 @@ public:
 
 	virtual void CreateAllActorComponents() override
 	{
-		for (T* actor : actors)
+		for (auto& actor : actors)
 		{
 			actor->CreateAllComponents();
 		}
 	}
 
-	std::vector<T*>& GetActors() 
+	std::vector<std::unique_ptr<T>>& GetActors() 
 	{
 		return actors;
 	}
@@ -108,7 +107,7 @@ public:
 			return nullptr;
 		}
 
-		return actors.front();
+		return actors.front().get();
 	}
 
 	virtual uint32_t GetNumActors() override
@@ -121,7 +120,7 @@ public:
 		s.WriteLine(VString::stows(GetName())); //Use actorsystem name to create again from ActorSystemCache on Deserialise
 		s.WriteLine(actors.size()); //Write out num of actors to load the same amount on Deserialise
 
-		for (T* actor : actors)
+		for (auto& actor : actors)
 		{
 			auto props = actor->GetProps();
 			//actor->ResetOwnerUIDToComponents();
@@ -136,7 +135,7 @@ public:
 		size_t numActors = actors.size();
 		s.Write(&numActors);
 
-		for (T* actor : actors)
+		for (auto& actor : actors)
 		{
 			auto props = actor->GetProps();
 			s.Serialise(props);
@@ -145,7 +144,7 @@ public:
 
 	virtual void Deserialise(Deserialiser& d) override
 	{
-		for (T* actor : actors)
+		for (auto& actor : actors)
 		{
 			auto props = actor->GetProps();
 			d.Deserialise(props);
@@ -154,7 +153,7 @@ public:
 
 	virtual void DeserialiseBinary(BinaryDeserialiser& d) override
 	{
-		for (T* actor : actors)
+		for (auto& actor : actors)
 		{
 			auto props = actor->GetProps();
 			d.Deserialise(props);
@@ -163,11 +162,11 @@ public:
 
 	virtual Actor* FindActorByName(std::string actorName) override
 	{
-		for (T* actor : actors)
+		for (auto& actor : actors)
 		{
 			if (actor->GetName() == actorName)
 			{
-				return (Actor*)actor;
+				return (Actor*)actor.get();
 			}
 		}
 
@@ -176,7 +175,7 @@ public:
 
 	virtual Actor* SpawnActor(Transform transform) override
 	{
-		Actor* actor = (Actor*)Add(T(), transform);
+		Actor* actor = (Actor*)Add(transform);
 		editor->AddActorToWorldList(actor);
 		return actor;
 	}
@@ -184,24 +183,20 @@ public:
 	virtual std::vector<Actor*> GetActorsAsBaseClass() override
 	{
 		std::vector<Actor*> outActors;
-
-		for (T* actor : actors)
+		for (auto& actor : actors)
 		{
-			outActors.push_back(actor);
+			outActors.push_back((Actor*)actor.get());
 		}
-
 		return outActors;
 	}
 
 	virtual void Cleanup() override
 	{
-		for (T* actor : actors)
-		{
-			delete actor;
-		}
-
 		actors.clear();
 	}
+
+private:
+	std::vector<std::unique_ptr<T>> actors;
 };
 
 #define ACTOR_SYSTEM(type) inline static ActorSystem<type> system; \

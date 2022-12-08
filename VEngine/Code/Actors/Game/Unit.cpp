@@ -345,16 +345,16 @@ void Unit::StartTurn()
 		//Find entrance closest to unit and move to it
 		for (int i = 0; i < EntranceTrigger::system.GetActors().size(); i++)
 		{
-			auto entrance = EntranceTrigger::system.GetActors()[i];
+			auto& entrance = EntranceTrigger::system.GetActors()[i];
 			float dist = XMVector3Length(entrance->GetPositionV() - this->GetPositionV()).m128_f32[0];
 			entranceDistances.push_back(std::make_pair(dist, i));
 		}
 
 		//Sort by distance
 		std::sort(entranceDistances.begin(), entranceDistances.end());
-		auto entranceTriggerToMoveTo = EntranceTrigger::system.GetActors()[entranceDistances.front().second];
+		auto& entranceTriggerToMoveTo = EntranceTrigger::system.GetActors()[entranceDistances.front().second];
 
-		entranceToEscapeTo = entranceTriggerToMoveTo;
+		entranceToEscapeTo = entranceTriggerToMoveTo.get();
 
 		//EntranceTrigger isn't a grid actor, just move to its world position
 		int xIndex = std::round(entranceTriggerToMoveTo->GetPosition().x);

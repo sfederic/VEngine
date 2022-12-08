@@ -12,7 +12,7 @@ std::vector<SkillNode*> UnitSkill::SpawnSkillNodes(std::vector<GridNode*>& gridN
 		Transform transform{};
 		transform.position = node->worldPosition;
 		transform.position.y -= 0.35f;
-		skillNodes.push_back(SkillNode::system.Add(SkillNode(), transform));
+		skillNodes.push_back(SkillNode::system.Add(transform));
 	}
 
 	return skillNodes;

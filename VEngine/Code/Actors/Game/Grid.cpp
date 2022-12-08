@@ -359,11 +359,11 @@ void Grid::GetNeighbouringActiveAndInactiveNodesForceful(GridNode* centerNode, s
 
 Unit* Grid::GetUnitAtNode(GridNode* node)
 {
-    for (auto unit : Unit::system.GetActors())
+    for (auto& unit : Unit::system.GetActors())
     {
         if (node->Equals(unit->xIndex, unit->yIndex))
         {
-            return unit;
+            return unit.get();
         }
     }
 

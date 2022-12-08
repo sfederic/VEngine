@@ -739,7 +739,7 @@ void Renderer::RenderLightProbeViews()
 
 	CreateLightProbeBuffers();
 
-	for (auto probeMap : DiffuseProbeMap::system.GetActors())
+	for (auto& probeMap : DiffuseProbeMap::system.GetActors())
 	{
 		probeMap->probeData.clear();
 
