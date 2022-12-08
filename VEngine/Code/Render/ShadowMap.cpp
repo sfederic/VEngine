@@ -87,12 +87,12 @@ void ShadowMap::BindDsvAndSetNullRenderTarget(ID3D11DeviceContext* dc)
 
 XMMATRIX ShadowMap::GetLightPerspectiveMatrix()
 {
-	if (DirectionalLightComponent::system.components.empty())
+	if (DirectionalLightComponent::system.GetNumComponents() == 0)
 	{
 		return XMMatrixIdentity();
 	}
 
-	auto light = DirectionalLightComponent::system.components[0];
+	auto light = DirectionalLightComponent::system.GetFirstComponent();
 	XMFLOAT3 center = light->GetPosition();
 
 	float shadowOrthoSize = light->shadowMapOrthoSize;
@@ -110,12 +110,12 @@ XMMATRIX ShadowMap::GetLightPerspectiveMatrix()
 
 XMMATRIX ShadowMap::GetLightViewMatrix()
 {
-	if (DirectionalLightComponent::system.components.empty())
+	if (DirectionalLightComponent::system.GetNumComponents() == 0)
 	{
 		return XMMatrixIdentity();
 	}
 
-	auto light = DirectionalLightComponent::system.components[0];
+	auto light = DirectionalLightComponent::system.GetFirstComponent();
 
 	XMVECTOR lookAt = light->GetPositionV() + light->GetForwardVectorV();
 	XMVECTOR lightPos = light->GetPositionV();
@@ -136,7 +136,7 @@ XMMATRIX ShadowMap::GetLightTextureMatrix()
 
 XMMATRIX ShadowMap::OutputMatrix()
 {
-	if (DirectionalLightComponent::system.components.empty())
+	if (DirectionalLightComponent::system.GetNumComponents() == 0)
 	{
 		return XMMatrixIdentity();
 	}

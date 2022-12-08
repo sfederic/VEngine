@@ -24,7 +24,7 @@ struct IComponentSystem
 	virtual void Deserialise(Deserialiser& s) = 0;
 	virtual void DeserialiseBinary(BinaryDeserialiser& d) = 0;
 	virtual Component* SpawnComponent(Actor* owner) = 0;
-	virtual std::vector<Component*> GetComponents() = 0;
+	virtual std::vector<Component*> GetComponentsAsBaseClass() = 0;
 	virtual uint32_t GetNumComponents() = 0;
 	virtual Component* FindComponentByName(std::string componentName) = 0;
 };

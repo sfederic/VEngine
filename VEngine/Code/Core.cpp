@@ -146,9 +146,9 @@ void Core::StartGame()
 			activeCamera = player->camera;
 		}
 	}
-	else if(!CameraComponent::system.components.empty()) //try to find another camera that isn't the editor's camera
+	else if (CameraComponent::system.GetNumComponents()) //try to find another camera that isn't the editor's camera
 	{
-		activeCamera = CameraComponent::system.components[0];
+		activeCamera = CameraComponent::system.GetFirstComponent();
 	}
 
 	initialStartingWorldFromEditor = World::worldFilename;

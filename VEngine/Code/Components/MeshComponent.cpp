@@ -28,10 +28,10 @@ std::vector<MeshComponent*> MeshComponent::SortMeshComponentsByDistanceToCamera(
 	XMVECTOR cameraPos = activeCamera->GetWorldPositionV();
 
 	std::multimap<float, MeshComponent*> meshDistanceMap;
-	for (auto mesh : system.components)
+	for (auto& mesh : system.GetComponents())
 	{
 		const float distance = XMVector3Length(cameraPos - mesh->GetWorldPositionV()).m128_f32[0];
-		meshDistanceMap.emplace(distance, mesh);
+		meshDistanceMap.emplace(distance, mesh.get());
 	}
 
 	std::vector<MeshComponent*> sortedMeshes;

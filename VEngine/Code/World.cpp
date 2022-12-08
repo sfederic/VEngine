@@ -232,7 +232,7 @@ std::vector<Component*> World::GetAllComponentsInWorld()
 
 	for (IComponentSystem* componentSystem : activeComponentSystems)
 	{
-		auto components = componentSystem->GetComponents();
+		auto components = componentSystem->GetComponentsAsBaseClass();
 		outComponents.insert(outComponents.end(), components.begin(), components.end());
 	}
 

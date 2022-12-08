@@ -75,7 +75,7 @@ AudioChannel* AudioSystem::GetChannel(uint64_t channelID)
 
 void AudioSystem::MuteAllAudio()
 {
-	for (auto audio : AudioComponent::system.components)
+	for (auto& audio : AudioComponent::system.GetComponents())
 	{
 		audio->volume = 0.f;
 	}
@@ -83,7 +83,7 @@ void AudioSystem::MuteAllAudio()
 
 void AudioSystem::StopAllAudio()
 {
-	for (auto audio : AudioComponent::system.components)
+	for (auto& audio : AudioComponent::system.GetComponents())
 	{
 		channelMap[audio->channelID]->sourceVoice->Stop();
 	}
@@ -91,7 +91,7 @@ void AudioSystem::StopAllAudio()
 
 void AudioSystem::StartAllAudio()
 {
-	for (auto audio : AudioComponent::system.components)
+	for (auto& audio : AudioComponent::system.GetComponents())
 	{
 		channelMap[audio->channelID]->sourceVoice->Start();
 	}
@@ -99,7 +99,7 @@ void AudioSystem::StartAllAudio()
 
 void AudioSystem::UnmuteAllAudio()
 {
-	for (auto audio : AudioComponent::system.components)
+	for (auto& audio : AudioComponent::system.GetComponents())
 	{
 		audio->volume = 1.f;
 	}
@@ -107,7 +107,7 @@ void AudioSystem::UnmuteAllAudio()
 
 void AudioSystem::FadeOutAllAudio()
 {
-	for (auto audio : AudioComponent::system.components)
+	for (auto& audio : AudioComponent::system.GetComponents())
 	{
 		audio->SetToFadeOut();
 	}
@@ -115,7 +115,7 @@ void AudioSystem::FadeOutAllAudio()
 
 void AudioSystem::FadeInAllAudio()
 {
-	for (auto audio : AudioComponent::system.components)
+	for (auto& audio : AudioComponent::system.GetComponents())
 	{
 		audio->SetToFadeIn();
 	}

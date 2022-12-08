@@ -9,10 +9,9 @@
 #include "World.h"
 
 template <typename T>
-struct ComponentSystem : IComponentSystem
+class ComponentSystem : public IComponentSystem
 {
-	std::vector<T*> components;
-
+public:
 	ComponentSystem()
 	{
 		std::string typeName = typeid(T).name();
@@ -24,8 +23,8 @@ struct ComponentSystem : IComponentSystem
 
 	T* Add(std::string name, Actor* owner = nullptr, T newComponent = T(), bool callCreate = true)
 	{
-		T* component = new T(std::move(newComponent));
-		components.emplace_back(component);
+		components.emplace_back(std::make_unique<T>(std::move(newComponent)));
+		auto& component = components.back();
 
 		component->index = components.size() - 1;
 		component->componentSystem = this;
@@ -38,10 +37,15 @@ struct ComponentSystem : IComponentSystem
 
 		if (owner)
 		{
-			owner->AddComponent(component);
+			owner->AddComponent(component.get());
 		}
 
-		return component;
+		return component.get();
+	}
+
+	std::vector<std::unique_ptr<T>>& GetComponents()
+	{
+		return components;
 	}
 
 	virtual Component* SpawnComponent(Actor* owner) override
@@ -53,13 +57,12 @@ struct ComponentSystem : IComponentSystem
 	{
 		std::swap(components[index], components.back());
 		components[index]->index = index;
-		delete components.back();
 		components.pop_back();
 	}
 
 	virtual void Init() override
 	{
-		for (T* component : components)
+		for (auto& component : components)
 		{
 			component->Create();
 		}
@@ -69,7 +72,7 @@ struct ComponentSystem : IComponentSystem
 
 	virtual void Start() override
 	{
-		for (T* component : components)
+		for (auto& component : components)
 		{
 			component->Start();
 		}
@@ -86,12 +89,17 @@ struct ComponentSystem : IComponentSystem
 		}
 	}
 
+	T* GetFirstComponent()
+	{
+		return components.front().get();
+	}
+
 	virtual void Serialise(Serialiser& s) override
 	{
 		s.WriteLine(VString::stows(name));
 		s.WriteLine(components.size());
 
-		for (T* component : components)
+		for (auto& component : components)
 		{
 			s.WriteLine(component->ownerUID);
 			s.WriteLine(VString::stows(component->name));
@@ -109,7 +117,7 @@ struct ComponentSystem : IComponentSystem
 		size_t numComponents = components.size();
 		s.Write(&numComponents);
 
-		for (T* component : components)
+		for (auto& component : components)
 		{
 			UID ownerUID = component->ownerUID;
 			s.Write(&ownerUID);
@@ -122,7 +130,7 @@ struct ComponentSystem : IComponentSystem
 
 	virtual void Deserialise(Deserialiser& d) override
 	{
-		for (T* component : components)
+		for (auto& component : components)
 		{
 			auto props = component->GetProps();
 			d.Deserialise(props);
@@ -131,7 +139,7 @@ struct ComponentSystem : IComponentSystem
 
 	virtual void DeserialiseBinary(BinaryDeserialiser& d) override
 	{
-		for (T* component : components)
+		for (auto& component : components)
 		{
 			auto props = component->GetProps();
 			d.Deserialise(props);
@@ -140,25 +148,17 @@ struct ComponentSystem : IComponentSystem
 
 	virtual void Cleanup() override
 	{
-		for (T* component : components)
-		{
-			delete component;
-		}
-
 		components.clear();
-
 		systemState = SystemStates::Unloaded;
 	}
 
-	virtual std::vector<Component*> GetComponents() override
+	virtual std::vector<Component*> GetComponentsAsBaseClass() override
 	{
 		std::vector<Component*> outComponents;
-
-		for (T* component : components)
+		for (auto& component : components)
 		{
-			outComponents.push_back(component);
+			outComponents.push_back(component.get());
 		}
-
 		return outComponents;
 	}
 
@@ -169,16 +169,19 @@ struct ComponentSystem : IComponentSystem
 
 	virtual Component* FindComponentByName(std::string componentName) override
 	{
-		for (T* component : components)
+		for (auto& component : components)
 		{
 			if (component->name == componentName)
 			{
-				return (Component*)component;
+				return (Component*)component.get();
 			}
 		}
 
 		return nullptr;
 	}
+
+private:
+	std::vector<std::unique_ptr<T>> components;
 };
 
 #define COMPONENT_SYSTEM(type) \

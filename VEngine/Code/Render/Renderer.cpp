@@ -482,7 +482,7 @@ void SetNullRTV()
 
 void SetShadowData()
 {
-	if (!DirectionalLightComponent::system.components.empty())
+	if (DirectionalLightComponent::system.GetNumComponents() > 0)
 	{
 		shaderMatrices.lightMVP = shadowMap->OutputMatrix();
 		shaderMatrices.lightViewProj = shadowMap->GetLightViewMatrix() * shadowMap->GetLightPerspectiveMatrix();
@@ -543,14 +543,14 @@ void RenderShadowPass()
 
 	shadowMap->BindDsvAndSetNullRenderTarget(context);
 
-	for (auto mesh : MeshComponent::system.components)
+	for (auto& mesh : MeshComponent::system.GetComponents())
 	{
 		if (!mesh->castsShadow || !mesh->active)
 		{
 			continue;
 		}
 
-		SetRenderPipelineStatesForShadows(mesh);
+		SetRenderPipelineStatesForShadows(mesh.get());
 
 		//Set matrices
 		shaderMatrices.model = mesh->GetWorldMatrix();
@@ -770,7 +770,7 @@ void Renderer::RenderLightProbeViews()
 
 				ShaderItem* lightProbeShader = ShaderItems::Default;
 
-				for (auto mesh : MeshComponent::system.components)
+				for (auto& mesh : MeshComponent::system.GetComponents())
 				{
 					if (!mesh->active) { continue; }
 
@@ -911,11 +911,11 @@ void RenderInstanceMeshComponents()
 	cbMatrices->Map(&shaderMatrices);
 	cbMatrices->SetVS();
 
-	for (InstanceMeshComponent* instanceMesh : InstanceMeshComponent::system.components)
+	for (auto& instanceMesh : InstanceMeshComponent::system.GetComponents())
 	{
 		if (!instanceMesh->active) continue;
 
-		SetRenderPipelineStates(instanceMesh);
+		SetRenderPipelineStates(instanceMesh.get());
 
 		//@Todo: clean this up in InstanceMeshComponent, can't every instance mesh as transparent
 		SetBlendState(BlendStates::Default);
@@ -933,7 +933,7 @@ void RenderInstanceMeshComponents()
 		//Set lights buffer
 		cbLights->SetPS();
 
-		DrawMeshInstanced(instanceMesh);
+		DrawMeshInstanced(instanceMesh.get());
 	}
 
 	Profile::End();
@@ -962,7 +962,7 @@ void RenderBounds()
 		cbMaterial->Map(&materialShaderData);
 		cbMaterial->SetPS();
 
-		for(auto mesh : MeshComponent::system.components)
+		for (auto& mesh : MeshComponent::system.GetComponents())
 		{
 			DirectX::BoundingOrientedBox boundingBox = mesh->boundingBox;
 
@@ -1023,7 +1023,7 @@ void RenderBounds()
 		SetVertexBuffer(debugBox.boxMesh->GetVertexBuffer());
 		SetIndexBuffer(debugBox.boxMesh->GetIndexBuffer());
 
-		for (auto boxTrigger : BoxTriggerComponent::system.components)
+		for (auto& boxTrigger : BoxTriggerComponent::system.GetComponents())
 		{
 			shaderMatrices.model = boxTrigger->GetWorldMatrix();
 
@@ -1106,7 +1106,7 @@ void RenderCameraMeshes()
 	cbMaterial->Map(&materialShaderData);
 	cbMaterial->SetPS();
 
-	for (auto camera : CameraComponent::system.components)
+	for (auto& camera : CameraComponent::system.GetComponents())
 	{
 		shaderMatrices.model = camera->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
@@ -1138,7 +1138,7 @@ void RenderLightMeshes()
 	SetVertexBuffer(debugSphere.sphereMesh->GetVertexBuffer());
 	SetIndexBuffer(debugSphere.sphereMesh->GetIndexBuffer());
 
-	for (auto directionalLight : DirectionalLightComponent::system.components)
+	for (auto& directionalLight : DirectionalLightComponent::system.GetComponents())
 	{
 		shaderMatrices.model = directionalLight->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
@@ -1152,7 +1152,7 @@ void RenderLightMeshes()
 	SetVertexBuffer(debugIcoSphere.mesh->GetVertexBuffer());
 	SetIndexBuffer(debugIcoSphere.mesh->GetIndexBuffer());
 
-	for (auto pointLight : PointLightComponent::system.components)
+	for (auto& pointLight : PointLightComponent::system.GetComponents())
 	{
 		shaderMatrices.model = pointLight->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
@@ -1166,7 +1166,7 @@ void RenderLightMeshes()
 	SetVertexBuffer(debugCone.mesh->GetVertexBuffer());
 	SetIndexBuffer(debugCone.mesh->GetIndexBuffer());
 
-	for (auto spotLight : SpotLightComponent::system.components)
+	for (auto& spotLight : SpotLightComponent::system.GetComponents())
 	{
 		shaderMatrices.model = spotLight->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
@@ -1192,7 +1192,7 @@ void RenderPolyboards()
 	SetRastState(RastStates::noBackCull);
 	SetShaders(ShaderItems::DefaultClip);
 
-	for (auto polyboard : Polyboard::system.components)
+	for (auto& polyboard : Polyboard::system.GetComponents())
 	{
 		polyboard->CalcVertices();
 
@@ -1230,7 +1230,7 @@ void RenderSpriteSheets()
 {
 	Profile::Start();
 
-	for (auto spriteSheet : SpriteSheet::system.components)
+	for (auto& spriteSheet : SpriteSheet::system.GetComponents())
 	{
 		SetRastState(RastStates::noBackCull);
 		SetShaders(ShaderItems::DefaultClip);
@@ -1334,7 +1334,7 @@ void Renderer::RenderParticleEmitters()
 	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
 	shaderMatrices.texMatrix = XMMatrixIdentity();
 
-	for (auto emitter : ParticleEmitter::system.components)
+	for (auto& emitter : ParticleEmitter::system.GetComponents())
 	{
 		if (drawAllAsWireframe)
 		{
@@ -1409,7 +1409,7 @@ void UpdateLights()
 	int shaderLightsIndex = 0;
 
 	//Directional lights
-	for (auto light : DirectionalLightComponent::system.components)
+	for (auto& light : DirectionalLightComponent::system.GetComponents())
 	{
 		if (!light->active) continue;
 
@@ -1422,7 +1422,7 @@ void UpdateLights()
 	}
 
 	//Point lights
-	for (auto light : PointLightComponent::system.components)
+	for (auto& light : PointLightComponent::system.GetComponents())
 	{
 		if (!light->active) continue;
 
@@ -1433,7 +1433,7 @@ void UpdateLights()
 	}
 	
 	//Spot lights
-	for (auto light : SpotLightComponent::system.components)
+	for (auto& light : SpotLightComponent::system.GetComponents())
 	{
 		if (!light->active) continue;
 
