@@ -6,7 +6,6 @@
 #include <dwrite_1.h>
 #include "Layout.h"
 #include "Colours.h"
-#include "Widget.h"
 
 class Widget;
 class MemoryGainedWidget;
@@ -47,26 +46,25 @@ namespace UISystem
 	}
 
 	void Init(void* swapchain);
+
 	void BeginDraw();
-	void AddWidget(Widget* widgetToAdd);
-	void RemoveWidget(Widget* widgetToRemove);
-	void Reset();
+	void EndDraw();
+	void DrawAllWidgets(float deltaTime);
 
 	void TextDraw(const std::wstring text,
-		const Layout& layout, 
+		const Layout& layout,
 		const DWRITE_TEXT_ALIGNMENT alignment = DWRITE_TEXT_ALIGNMENT::DWRITE_TEXT_ALIGNMENT_CENTER,
-		const D2D1_COLOR_F colour = Colours::Black, 
+		const D2D1_COLOR_F colour = Colours::Black,
 		const float opacity = 1.f);
 	void FillRect(const Layout& layout);
 	void DrawRect(const Layout& layout, const float lineWidth = 1.f);
 
-	//Create all global widgets once-off, contained in UISystem for use during the entire game's run.
-	void CreateGlobalWidgets();
+	void AddWidget(Widget* widgetToAdd);
+	void RemoveWidget(Widget* widgetToRemove);
 	void DestroyWidget(Widget* widget);
-
-	//Called on gameplay end
+	void CreateGlobalWidgets();
 	void RemoveAllWidgets();
-	void DrawAllWidgets(float deltaTime);
-	void EndDraw();
+
 	void Cleanup();
+	void Reset();
 };
