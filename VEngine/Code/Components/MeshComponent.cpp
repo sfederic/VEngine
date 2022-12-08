@@ -54,7 +54,7 @@ MeshComponent::MeshComponent(const std::string filename_,
 	ShaderItem* shaderItem)
 {
 	meshComponentData.filename = filename_;
-	material = new Material(textureFilename_, shaderItem);
+	material = MaterialSystem::CreateMaterial(textureFilename_, shaderItem);
 }
 
 void MeshComponent::Tick(float deltaTime)
