@@ -1,41 +1,10 @@
 #pragma once
 
 #include <string>
-#include <d2d1_1.h>
 #include <DirectXMath.h>
-#include "UISystem.h"
+#include "Layout.h"
 
 using namespace DirectX;
-
-struct Layout
-{
-	D2D1_RECT_F rect = {};
-
-	Layout() {}
-	Layout(D2D1_RECT_F rect_) : rect(rect_) {}
-
-	void AddVerticalSpace(float spacing)
-	{
-		rect.top += spacing;
-		rect.bottom += spacing;
-	}
-
-	void AddHorizontalSpace(float spacing)
-	{
-		rect.left += spacing;
-		rect.right += spacing;
-	}
-
-	void PushToLeft(float spacing = 0.f)
-	{
-		rect.right = rect.left + spacing;
-	}
-
-	void PushToTop(float spacing = 0.f)
-	{
-		rect.bottom = rect.top + spacing;
-	}
-};
 
 //Base widget class for in-game UI.
 class Widget
@@ -109,10 +78,3 @@ protected:
 	Layout CenterLayoutOnScreenSpaceCoords(float w, float h);
 	Layout CenterLayoutOnScreenSpaceCoords(float w, float h, float sx, float sy);
 };
-
-template <typename T>
-T* CreateWidget()
-{
-	T* widget = uiSystem.CreateWidget<T>();
-	return widget;
-}

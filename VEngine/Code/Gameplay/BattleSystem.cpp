@@ -47,7 +47,7 @@ void BattleSystem::StartBattle()
 	player = Player::system.GetFirstActor();
 	player->SetupForBattle();
 
-	uiSystem.unitLineupWidget->AddToViewport();
+	UISystem::unitLineupWidget->AddToViewport();
 
 	activeBattleUnits = World::GetAllActorsOfTypeInWorld<Unit>();
 	for (auto unit : activeBattleUnits)
@@ -61,7 +61,7 @@ void BattleSystem::StartBattle()
 		npc->BattleStartDialogue();
 	}
 
-	auto healthWidgets = uiSystem.GetAllWidgetsOfType<HealthWidget>();
+	auto healthWidgets = UISystem::GetAllWidgetsOfType<HealthWidget>();
 	for (auto healthWidget : healthWidgets)
 	{
 		healthWidget->AddToViewport();
@@ -74,7 +74,7 @@ void BattleSystem::EndBattle()
 
 	grid->SetActive(false);
 
-	uiSystem.unitLineupWidget->RemoveFromViewport();
+	UISystem::unitLineupWidget->RemoveFromViewport();
 
 	Log("Battle ended.");
 
@@ -136,7 +136,7 @@ void BattleSystem::RemoveUnit(Unit* unit)
 	if (!unit->deathText.empty() && unit->health <= 0)
 	{
 		//@Todo: currently the death text doesn't hold on the actors position
-		auto deathDialogueWidget = CreateWidget<DialogueWidget>();
+		auto deathDialogueWidget = UISystem::CreateWidget<DialogueWidget>();
 		deathDialogueWidget->pos = unit->GetHomogeneousPositionV();
 		deathDialogueWidget->SetText(unit->deathText);
 		deathDialogueWidget->AddToViewport(5.0f);

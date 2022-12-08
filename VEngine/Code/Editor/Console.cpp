@@ -4,6 +4,7 @@
 #include <d2d1.h>
 #include "Input.h"
 #include "UI/UISystem.h"
+#include "UI/Layout.h"
 #include "DebugMenu.h"
 #include "Render/Renderer.h"
 #include "Asset/AssetSystem.h"
@@ -175,11 +176,11 @@ void Console::Tick()
 		float width = (float)Renderer::GetViewportWidth();
 		float height = (float)Renderer::GetViewportHeight();
 
-		uiSystem.d2dRenderTarget->DrawRectangle({ 0, height - 50.f, width, height }, uiSystem.debugBrushText);
+		auto rectLayout = Layout({ 0, height - 50.f, width, height });
+		UISystem::DrawRect(rectLayout);
 
-		uiSystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
-		uiSystem.d2dRenderTarget->DrawText(consoleString.c_str(), consoleString.size(), uiSystem.textFormat,
-			{ 0, height - 50.f, width, height }, uiSystem.debugBrushText);
+		auto textLayout = Layout({ 0, height - 50.f, width, height });
+		UISystem::TextDraw(consoleString, textLayout, DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
 	}
 }
 

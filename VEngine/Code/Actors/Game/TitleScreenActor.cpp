@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "TitleScreenActor.h"
 #include "UI/TitlescreenWidget.h"
+#include "UI/UISystem.h"
 #include "Components/EmptyComponent.h"
 
 TitleScreenActor::TitleScreenActor()
@@ -10,7 +11,7 @@ TitleScreenActor::TitleScreenActor()
 
 void TitleScreenActor::Start()
 {
-    titlescreenWidget = CreateWidget<TitleScreenWidget>();
+    titlescreenWidget = UISystem::CreateWidget<TitleScreenWidget>();
     titlescreenWidget->AddToViewport();
 }
 

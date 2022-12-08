@@ -137,8 +137,8 @@ namespace GameUtils
 
 		LoadWorld(levelToMoveTo);
 
-		uiSystem.screenFadeWidget->SetToFadeIn();
-		uiSystem.screenFadeWidget->AddToViewport();
+		UISystem::screenFadeWidget->SetToFadeIn();
+		UISystem::screenFadeWidget->AddToViewport();
 
 		int matchingEntranceTriggerCount = 0;
 		//Set player pos and rot at entrancetrigger in loaded world with same name as previous.
@@ -176,7 +176,7 @@ namespace GameUtils
 		auto player = Player::system.GetFirstActor();
 		player->gameOver = true;
 
-		CreateWidget<MemoryTransferWidget>()->AddToViewport();
+		UISystem::CreateWidget<MemoryTransferWidget>()->AddToViewport();
 
 		AudioSystem::StopAllAudio();
 		AudioSystem::PlayAudio("game05.wav", true);

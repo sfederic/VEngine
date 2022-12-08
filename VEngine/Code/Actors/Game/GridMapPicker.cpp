@@ -7,6 +7,7 @@
 #include "Actors/Game/Grid.h"
 #include "Components/CameraComponent.h"
 #include "UI/Game/GridMapPickerSelectionInfoWidget.h"
+#include "UI/UISystem.h"
 #include "Physics/Raycast.h"
 #include "Gameplay/GameUtils.h"
 
@@ -21,7 +22,7 @@ GridMapPicker::GridMapPicker()
 	rootComponent->AddChild(camera);
 
 	//Selection Widget setup
-	gridMapPickerSelectionInfoWidget = CreateWidget<GridMapPickerSelectionInfoWidget>();
+	gridMapPickerSelectionInfoWidget = UISystem::CreateWidget<GridMapPickerSelectionInfoWidget>();
 	gridMapPickerSelectionInfoWidget->AddToViewport();
 }
 

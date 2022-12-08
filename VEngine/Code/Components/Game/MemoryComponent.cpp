@@ -62,8 +62,8 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 	GameInstance::playerMemories.emplace(memory->name, memory);
 	Log("%s memory created.", memory->name.c_str());
 
-	uiSystem.memoryGainedWidget->memoryToDisplay = GameInstance::playerMemories[memory->name];
-	uiSystem.memoryGainedWidget->AddToViewport();
+	UISystem::memoryGainedWidget->memoryToDisplay = GameInstance::playerMemories[memory->name];
+	UISystem::memoryGainedWidget->AddToViewport();
 
 	//Mute all channels because Memory Gained sound fucking with the musical key
 	AudioSystem::FadeOutAllAudio();

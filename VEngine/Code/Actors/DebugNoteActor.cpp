@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "DebugNoteActor.h"
 #include "UI/DebugNoteWidget.h"
+#include "UI/UISystem.h"
 #include "Components/EmptyComponent.h"
 
 DebugNoteActor::DebugNoteActor()
@@ -10,7 +11,7 @@ DebugNoteActor::DebugNoteActor()
 
 void DebugNoteActor::Start()
 {
-    noteWidget = CreateWidget<DebugNoteWidget>();
+    noteWidget = UISystem::CreateWidget<DebugNoteWidget>();
     noteWidget->noteText = noteText;
     noteWidget->AddToViewport();
 }

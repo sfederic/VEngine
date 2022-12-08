@@ -6,6 +6,7 @@
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/BattleSystem.h"
 #include "UI/Game/InteractWidget.h"
+#include "UI/UISystem.h"
 #include "Input.h"
 #include "Actors/Game/Player.h"
 
@@ -22,7 +23,7 @@ void InteractTrigger::Start()
 {
 	trigger->SetTargetAsPlayer();
 	
-	interactWidget = CreateWidget<InteractWidget>();
+	interactWidget = UISystem::CreateWidget<InteractWidget>();
 	interactWidget->interactText = overlapText;
 
 	//Interact triggers are stationary, only one pos set is needed

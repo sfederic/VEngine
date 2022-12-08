@@ -13,6 +13,7 @@
 #include "Gameplay/BattleSystem.h"
 #include "Timer.h"
 #include "Log.h"
+#include "UI/UISystem.h"
 #include "UI/Game/HealthWidget.h"
 #include "UI/Game/MemoryGainedWidget.h"
 #include "UI/Game/ActivateTrapWidget.h"
@@ -41,7 +42,7 @@ void Unit::Start()
 
 	//intentBeam->GenerateVertices();
 
-	healthWidget = CreateWidget<HealthWidget>();
+	healthWidget = UISystem::CreateWidget<HealthWidget>();
 	healthWidget->healthPoints = health;
 	healthWidget->maxHealthPoints = health;
 
@@ -109,7 +110,7 @@ void Unit::Tick(float deltaTime)
 				{
 					//@Todo: this has the problem where if there are two traps adjacent, the unit will enter a loop
 					isInTrapNode = true;
-					auto activateTrapWidget = CreateWidget<ActivateTrapWidget>();
+					auto activateTrapWidget = UISystem::CreateWidget<ActivateTrapWidget>();
 					activateTrapWidget->AddToViewport();
 					activateTrapWidget->SetLinkedUnit(this);
 					activateTrapWidget->SetLinkedTrapNode(currentNode->trapCard);

@@ -335,6 +335,7 @@
     <ClInclude Include="Code\Gameplay\WorldFunctions.h" />
     <ClInclude Include="Code\IFunction.h" />
     <ClInclude Include="Code\Property.h" />
+    <ClInclude Include="Code\UI\Colours.h" />
     <ClInclude Include="Code\Render\PixelShader.h" />
     <ClInclude Include="Code\Render\Shader.h" />
     <ClInclude Include="Code\Render\ShaderItem.h" />
@@ -469,6 +470,7 @@
     <ClInclude Include="Code\UI\Game\MemoryTransferWidget.h" />
     <ClInclude Include="Code\UI\Game\PlayerHealthWidget.h" />
     <ClInclude Include="Code\UI\Game\UnitLineupWidget.h" />
+    <ClInclude Include="Code\UI\Layout.h" />
     <ClInclude Include="Code\VEnum.h" />
     <ClInclude Include="Code\VFunction.h" />
     <ClInclude Include="Code\VMath.h" />

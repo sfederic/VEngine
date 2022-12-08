@@ -2,6 +2,7 @@
 #include "TitleScreenWidget.h"
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/GameInstance.h"
+#include "UI/Colours.h"
 
 void TitleScreenWidget::Draw(float deltaTime)
 {

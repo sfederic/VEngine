@@ -3,6 +3,7 @@
 #include "World.h"
 #include "Components/WidgetComponent.h"
 #include "UI/Widget.h"
+#include "UI/UISystem.h"
 #include "UI/Game/DialogueWidget.h"
 #include "Log.h"
 #include "VString.h"
@@ -15,7 +16,7 @@ void DialogueComponent::Tick(float deltaTime)
 
 void DialogueComponent::Start()
 {
-    dialogueWidget = CreateWidget<DialogueWidget>();
+    dialogueWidget = UISystem::CreateWidget<DialogueWidget>();
     widget = dialogueWidget;
 
     dialogue.LoadFromFile();

@@ -1,5 +1,6 @@
 #include "vpch.h"
 #include "PopupActor.h"
+#include "UI/UISystem.h"
 #include "UI/Game/PopupWidget.h"
 
 PopupActor::PopupActor()
@@ -9,7 +10,7 @@ PopupActor::PopupActor()
 
 void PopupActor::Start()
 {
-    popupWidget = CreateWidget<PopupWidget>();
+    popupWidget = UISystem::CreateWidget<PopupWidget>();
     popupWidget->popupText = popupText;
 
     if (displayOnLevelLoad)

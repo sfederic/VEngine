@@ -2,6 +2,7 @@
 #include "NPC.h"
 #include "Timer.h"
 #include "UI/Game/DialogueWidget.h"
+#include "UI/UISystem.h"
 #include "Components/Game/DialogueComponent.h"
 
 NPC::NPC()
@@ -17,7 +18,7 @@ void NPC::Start()
     {
         if (isQuickDialogueActive) return;
 
-        spawnTextWidget = CreateWidget<DialogueWidget>();
+        spawnTextWidget = UISystem::CreateWidget<DialogueWidget>();
         spawnTextWidget->dialogueText = spawnText;
         spawnTextWidget->AddToViewport(5.0f);
     }

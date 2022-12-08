@@ -1,51 +1,50 @@
 #pragma once
 
-#include <d2d1_1.h>
-#include <dwrite_1.h>
+#include <string>
 #include <vector>
-#include "System.h"
+#include <memory>
+#include <dwrite_1.h>
+#include "Layout.h"
+#include "Colours.h"
+#include "Widget.h"
 
 class Widget;
-struct MemoryGainedWidget;
-struct MemoryRecalledWidget;
-struct UnitLineupWidget;
-struct ScreenFadeWidget;
+class MemoryGainedWidget;
+class MemoryRecalledWidget;
+class ScreenFadeWidget;
+class UnitLineupWidget;
 
-namespace Colours
+namespace UISystem
 {
-	static D2D1_COLOR_F White = { 1.f, 1.f, 1.f, 1.f };
-	static D2D1_COLOR_F Black = { 0.f, 0.f, 0.f, 1.f };
-}
+	extern std::vector<std::unique_ptr<Widget>> widgets;
+	extern std::vector<Widget*> widgetsInViewport;
 
-struct UISystem : public System
-{
-	//Global widgets
-	MemoryGainedWidget* memoryGainedWidget = nullptr;
-	MemoryRecalledWidget* memoryRecalledWidget = nullptr;
-	ScreenFadeWidget* screenFadeWidget = nullptr;
-	UnitLineupWidget* unitLineupWidget = nullptr;
+	extern MemoryGainedWidget* memoryGainedWidget;
+	extern MemoryRecalledWidget* memoryRecalledWidget;
+	extern ScreenFadeWidget* screenFadeWidget;
+	extern UnitLineupWidget* unitLineupWidget;
 
-	//Every widget added in-game
-	//@Todo: these two vectors need to be smart pointers else mem leaks everywhere
-	std::vector<Widget*> widgets;
-	//Every widget currently being displayed on screen
-	std::vector<Widget*> widgetsInViewport;
+	template <typename T>
+	std::vector<T*> GetAllWidgetsOfType()
+	{
+		std::vector<T*> outWidgets;
+		for (auto& widget : widgets)
+		{
+			T* castWidget = dynamic_cast<T*>(widget.get());
+			if (castWidget)
+			{
+				outWidgets.push_back(castWidget);
+			}
+		}
+		return outWidgets;
+	}
 
-	//D2D objects
-	ID2D1Factory* d2dFactory = nullptr;
-	ID2D1RenderTarget* d2dRenderTarget = nullptr;
-
-	//DWrite objects
-	IDWriteFactory1* writeFactory = nullptr;
-	IDWriteTextFormat* textFormat = nullptr;
-
-	//D2D Brushes
-	ID2D1SolidColorBrush* brushText = nullptr;
-	ID2D1SolidColorBrush* debugBrushText = nullptr;
-	ID2D1SolidColorBrush* brushShapes = nullptr;
-	ID2D1SolidColorBrush* brushShapesAlpha = nullptr;
-
-	UISystem() : System("UISystem") {}
+	template <typename T>
+	T* CreateWidget()
+	{
+		widgets.emplace_back(std::make_unique<T>());
+		return (T*)widgets.back().get();
+	}
 
 	void Init(void* swapchain);
 	void BeginDraw();
@@ -53,43 +52,21 @@ struct UISystem : public System
 	void RemoveWidget(Widget* widgetToRemove);
 	void Reset();
 
+	void TextDraw(const std::wstring text,
+		const Layout& layout, 
+		const DWRITE_TEXT_ALIGNMENT alignment = DWRITE_TEXT_ALIGNMENT::DWRITE_TEXT_ALIGNMENT_CENTER,
+		const D2D1_COLOR_F colour = Colours::Black, 
+		const float opacity = 1.f);
+	void FillRect(const Layout& layout);
+	void DrawRect(const Layout& layout, const float lineWidth = 1.f);
+
 	//Create all global widgets once-off, contained in UISystem for use during the entire game's run.
 	void CreateGlobalWidgets();
-
-	template <typename T>
-	T* CreateWidget()
-	{
-		auto newWidget = new T();
-		widgets.push_back(newWidget);
-		return newWidget;
-	}
-
 	void DestroyWidget(Widget* widget);
 
 	//Called on gameplay end
 	void RemoveAllWidgets();
-
 	void DrawAllWidgets(float deltaTime);
-
-	template <typename T>
-	std::vector<T*> GetAllWidgetsOfType()
-	{
-		std::vector<T*> outWidgets;
-
-		for (auto widget : widgets)
-		{
-			T* castWidget = dynamic_cast<T*>(widget);
-			if (castWidget)
-			{
-				outWidgets.push_back(castWidget);
-			}
-		}
-		
-		return outWidgets;
-	}
-
 	void EndDraw();
 	void Cleanup();
 };
-
-extern UISystem uiSystem;

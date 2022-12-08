@@ -18,6 +18,7 @@
 #include "Components/Game/MemoryComponent.h"
 #include "Components/AudioComponent.h"
 #include "Components/Game/DialogueComponent.h"
+#include "UI/UISystem.h"
 #include "UI/Game/HealthWidget.h"
 #include "UI/Game/DialogueWidget.h"
 #include "UI/Game/InteractWidget.h"
@@ -57,15 +58,15 @@ void Player::Start()
 	nextCameraFOV = camera->FOV;
 
 	//Setup widgets
-	interactWidget = CreateWidget<InteractWidget>();
-	memoryMenuWidget = CreateWidget<MemoryMenuWidget>();
+	interactWidget = UISystem::CreateWidget<InteractWidget>();
+	memoryMenuWidget = UISystem::CreateWidget<MemoryMenuWidget>();
 
-	battleSystem.actionBarWidget = CreateWidget<PlayerActionBarWidget>();
+	battleSystem.actionBarWidget = UISystem::CreateWidget<PlayerActionBarWidget>();
 	battleSystem.actionBarWidget->actionPoints = battleSystem.playerActionPoints;
 
-	healthWidget = CreateWidget<PlayerHealthWidget>();
+	healthWidget = UISystem::CreateWidget<PlayerHealthWidget>();
 
-	battleCardHandWidget = CreateWidget<BattleCardHandWidget>();
+	battleCardHandWidget = UISystem::CreateWidget<BattleCardHandWidget>();
 }
 
 void Player::End()
@@ -233,7 +234,7 @@ void Player::ToggleBattleGrid()
 		}
 
 		//toggle all Unit health widgets
-		auto healthWidgets = uiSystem.GetAllWidgetsOfType<HealthWidget>();
+		auto healthWidgets = UISystem::GetAllWidgetsOfType<HealthWidget>();
 		for (auto healthWidget : healthWidgets)
 		{
 			if (isWeaponDrawn)
@@ -262,11 +263,11 @@ void Player::PrimaryAction()
 
 	if (Input::GetKeyUp(Keys::Down))
 	{
-		if (uiSystem.memoryRecalledWidget->IsInViewport() 
-			|| uiSystem.memoryGainedWidget->IsInViewport())
+		if (UISystem::memoryRecalledWidget->IsInViewport() 
+			|| UISystem::memoryGainedWidget->IsInViewport())
 		{
-			uiSystem.memoryGainedWidget->RemoveFromViewport();
-			uiSystem.memoryRecalledWidget->RemoveFromViewport();
+			UISystem::memoryGainedWidget->RemoveFromViewport();
+			UISystem::memoryRecalledWidget->RemoveFromViewport();
 			return;
 		}
 

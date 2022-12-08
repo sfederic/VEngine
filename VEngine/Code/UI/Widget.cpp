@@ -7,17 +7,17 @@
 #include "Render/SpriteSystem.h"
 #include "Timer.h"
 #include "VString.h"
+#include "UISystem.h"
 
 void Widget::Destroy()
 {
 	RemoveFromViewport();
-	uiSystem.DestroyWidget(this);
-	delete this;
+	UISystem::DestroyWidget(this);
 }
 
 void Widget::AddToViewport(float removeTimer)
 {
-	uiSystem.AddWidget(this);
+	UISystem::AddWidget(this);
 
 	if (removeTimer > 0.f)
 	{
@@ -27,25 +27,25 @@ void Widget::AddToViewport(float removeTimer)
 
 void Widget::OnceOffAddToViewport(float removeTimer)
 {
-	uiSystem.AddWidget(this);
+	UISystem::AddWidget(this);
 	assert(removeTimer > 0.f);
 	Timer::SetTimer(removeTimer, std::bind(&Widget::RemoveFromViewportAndDelete, this));
 }
 
 void Widget::RemoveFromViewport()
 {
-	uiSystem.RemoveWidget(this);
+	UISystem::RemoveWidget(this);
 }
 
 void Widget::RemoveFromViewportAndDelete()
 {
 	RemoveFromViewport();
-	uiSystem.DestroyWidget(this);
+	UISystem::DestroyWidget(this);
 }
 
 bool Widget::IsInViewport()
 {
-	for (Widget* widget : uiSystem.widgetsInViewport)
+	for (Widget* widget : UISystem::widgetsInViewport)
 	{
 		if (widget == this)
 		{
@@ -94,13 +94,7 @@ void Widget::Text(const std::wstring text, Layout layout, TextAlign align,
 		break;
 	}
 
-	uiSystem.textFormat->SetTextAlignment(endAlignment);
-
-	uiSystem.brushText->SetColor(color);
-	uiSystem.brushText->SetOpacity(opacity);
-
-	uiSystem.d2dRenderTarget->DrawText(text.c_str(), text.size(),
-		uiSystem.textFormat, layout.rect, uiSystem.brushText);
+	UISystem::TextDraw(text, layout);
 }
 
 void Widget::Text(const std::string text, Layout layout, TextAlign align, D2D1_COLOR_F color, float opacity)
@@ -111,7 +105,7 @@ void Widget::Text(const std::string text, Layout layout, TextAlign align, D2D1_C
 bool Widget::Button(const std::wstring text, Layout layout, float lineWidth,
 	TextAlign textAlign, D2D1_COLOR_F textColor, float textOpacity)
 {
-	uiSystem.d2dRenderTarget->FillRectangle(layout.rect, uiSystem.brushShapes);
+	UISystem::FillRect(layout);
 	Text(text, layout.rect, textAlign, textColor, textOpacity);
 
 	if (editor->viewportMouseX > layout.rect.left && editor->viewportMouseX < layout.rect.right)
@@ -119,7 +113,7 @@ bool Widget::Button(const std::wstring text, Layout layout, float lineWidth,
 		if (editor->viewportMouseY > layout.rect.top && editor->viewportMouseY < layout.rect.bottom)
 		{
 			//Hover animation/image
-			uiSystem.d2dRenderTarget->DrawRectangle(layout.rect, uiSystem.brushText, lineWidth * 2.f);
+			UISystem::DrawRect(layout, lineWidth);
 
 			if (Input::GetMouseLeftUp())
 			{
@@ -170,7 +164,7 @@ bool Widget::ImageButton(const std::string filename, Layout layout)
 		if (editor->viewportMouseY > layout.rect.top && editor->viewportMouseY < layout.rect.bottom)
 		{
 			//Hover animation/image
-			uiSystem.d2dRenderTarget->DrawRectangle(layout.rect, uiSystem.brushText, 2.f);
+			UISystem::DrawRect(layout, 2.f);
 
 			if (Input::GetMouseLeftUp())
 			{
@@ -184,15 +178,12 @@ bool Widget::ImageButton(const std::string filename, Layout layout)
 
 void Widget::Rect(Layout layout)
 {
-	uiSystem.d2dRenderTarget->DrawRectangle(layout.rect, uiSystem.brushShapes);
+	UISystem::DrawRect(layout);
 }
 
 void Widget::FillRect(Layout layout, D2D1_COLOR_F color, float opacity)
 {
-	uiSystem.brushShapesAlpha->SetColor(color);
-	uiSystem.brushShapesAlpha->SetOpacity(opacity);
-
-	uiSystem.d2dRenderTarget->FillRectangle(layout.rect, uiSystem.brushShapesAlpha);
+	UISystem::FillRect(layout);
 }
 
 Layout Widget::AlignLayout(float w, float h, Align align)

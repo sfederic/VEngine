@@ -21,6 +21,7 @@
 #include "Components/MeshComponent.h"
 #include "Components/InstanceMeshComponent.h"
 #include "UI/UISystem.h"
+#include "UI/Layout.h"
 #include "Commands/CommandSystem.h"
 #include "Commands/ICommand.h"
 #include "Physics/Raycast.h"
@@ -481,8 +482,6 @@ void DebugMenu::RenderNotifications(float deltaTime)
 	constexpr float textOffsetX = 20.f;
 	constexpr float notificationLifetime = 3.0f;
 
-	uiSystem.textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
-
 	for (int i = 0; i < debugNotifications.size(); i++)
 	{
 		if (debugNotifications[i].timeOnScreen < notificationLifetime)
@@ -490,8 +489,8 @@ void DebugMenu::RenderNotifications(float deltaTime)
 			debugNotifications[i].timeOnScreen += deltaTime;
 
 			const float notificationOffsetY = 20.f * i;
-			uiSystem.d2dRenderTarget->DrawTextA(debugNotifications[i].text.c_str(), debugNotifications[i].text.size(), uiSystem.textFormat,
-				{ 0.f, notificationOffsetY, 1000.f, 1000.f }, uiSystem.debugBrushText);
+			const auto textLayout = Layout({ 0.f, notificationOffsetY, 1000.f, 1000.f });
+			UISystem::TextDraw(debugNotifications[i].text, textLayout, DWRITE_TEXT_ALIGNMENT_LEADING);
 		}
 		else
 		{

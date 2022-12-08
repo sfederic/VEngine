@@ -299,7 +299,7 @@ void World::Cleanup()
 	TextureSystem::Cleanup();
 	MaterialSystem::Cleanup();
 	SpriteSystem::Reset();
-	uiSystem.Reset();
+	UISystem::Reset();
 
 	//CLEANUP COMPONENT SYSTEMS
 	for (IComponentSystem* componentSystem : activeComponentSystems)

@@ -63,7 +63,7 @@ void Engine::Init(int argc, char* argv[])
 
 	rendererInit.wait();
 	auto debugMenuInit = std::async(std::launch::async, []() { debugMenu.Init(); });
-	auto uiInit = std::async(std::launch::async, []() { uiSystem.Init(Renderer::GetSwapchain()); });
+	auto uiInit = std::async(std::launch::async, []() { UISystem::Init(Renderer::GetSwapchain()); });
 
 	audioInit.wait();
 	physicsInit.wait();
@@ -139,14 +139,14 @@ void Engine::Render(float deltaTime)
 
 	Console::InputTick();
 
-	uiSystem.BeginDraw();
-	uiSystem.DrawAllWidgets(deltaTime);
+	UISystem::BeginDraw();
+	UISystem::DrawAllWidgets(deltaTime);
 
 	Renderer::RenderSpritesInScreenSpace();
 
 	Console::Tick();
 	debugMenu.Tick(deltaTime);
-	uiSystem.EndDraw();
+	UISystem::EndDraw();
 
 	Renderer::Present();
 }
@@ -156,5 +156,5 @@ void Engine::Cleanup()
 	physicsSystem.Cleanup();
 	ShaderSystem::ClearShaders();
 	debugMenu.Cleanup();
-	uiSystem.Cleanup();
+	UISystem::Cleanup();
 }

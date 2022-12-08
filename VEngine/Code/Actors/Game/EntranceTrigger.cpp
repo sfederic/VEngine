@@ -26,7 +26,7 @@ EntranceTrigger::EntranceTrigger()
 
 void EntranceTrigger::Start()
 {
-    interactWidget = CreateWidget<InteractWidget>();
+    interactWidget = UISystem::CreateWidget<InteractWidget>();
 
     if (isEntranceActive)
     {
@@ -92,8 +92,8 @@ void EntranceTrigger::Tick(float deltaTime)
             GameUtils::levelToMoveTo = levelToMoveTo;
             Timer::SetTimer(1.f, &GameUtils::LoadWorldAndMoveToEntranceTrigger);
 
-            uiSystem.screenFadeWidget->SetToFadeOut();
-            uiSystem.screenFadeWidget->AddToViewport();
+            UISystem::screenFadeWidget->SetToFadeOut();
+            UISystem::screenFadeWidget->AddToViewport();
             interactWidget->RemoveFromViewport();
 
             entranceInteractedWith = true;
@@ -164,7 +164,7 @@ void EntranceTrigger::SetCameraZoomFocusAndPopupWidget(std::string popupText)
     GameUtils::SetActiveCameraTargetAndZoomIn(this);
     Timer::SetTimer(removePeriod, &GameUtils::SetCameraBackToPlayer);
 
-    auto entrancePopup = CreateWidget<PopupWidget>();
+    auto entrancePopup = UISystem::CreateWidget<PopupWidget>();
     entrancePopup->popupText = VString::stows(GetName() + popupText);
     entrancePopup->AddToViewport(removePeriod);
 }

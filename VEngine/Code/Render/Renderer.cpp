@@ -1501,7 +1501,7 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 
 	dsv->Release();
 
-	uiSystem.Cleanup();
+	UISystem::Cleanup();
 
 	backBuffer->Release();
 	HR(swapchain->ResizeBuffers(swapchainCount, newWidth, newHeight, DXGI_FORMAT_R8G8B8A8_UNORM, 0));
@@ -1518,7 +1518,7 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 
 	CreatePostProcessRenderTarget();
 
-	uiSystem.Init((void*)swapchain);
+	UISystem::Init((void*)swapchain);
 
 	shaderMatrices.Create();
 }

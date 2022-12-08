@@ -168,7 +168,7 @@ void Core::EndGame()
 
 	gameplayOn = false;
 
-	uiSystem.Reset();
+	UISystem::Reset();
 	SpriteSystem::Reset();
 	physicsSystem.Reset();
 	Timer::Cleanup();
