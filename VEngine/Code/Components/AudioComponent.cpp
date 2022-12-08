@@ -12,13 +12,13 @@ void AudioComponent::Start()
 {
     if (playOnStart && !audioFilename.empty())
     {
-        channelID = audioSystem.PlayAudio(audioFilename, loop);
+        channelID = AudioSystem::PlayAudio(audioFilename, loop);
     }
 }
 
 void AudioComponent::Tick(float deltaTime)
 {
-    auto channel = audioSystem.GetChannel(channelID);
+    auto channel = AudioSystem::GetChannel(channelID);
 
     const float fadeSpeed = 0.4f;
 
@@ -57,11 +57,11 @@ Properties AudioComponent::GetProps()
 
 void AudioComponent::Play()
 {
-    channelID = audioSystem.PlayAudio(audioFilename);
+    channelID = AudioSystem::PlayAudio(audioFilename);
 }
 
 void AudioComponent::Stop()
 {
-    auto channel = audioSystem.GetChannel(channelID);
+    auto channel = AudioSystem::GetChannel(channelID);
     channel->sourceVoice->Stop();
 }

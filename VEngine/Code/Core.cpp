@@ -173,7 +173,7 @@ void Core::EndGame()
 	physicsSystem.Reset();
 	Timer::Cleanup();
 
-	audioSystem.DeleteLoadedAudioAndChannels();
+	AudioSystem::DeleteLoadedAudioAndChannels();
 
 	activeCamera = &editorCamera;
 

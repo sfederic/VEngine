@@ -53,7 +53,7 @@ void Engine::Init(int argc, char* argv[])
 	auto consoleInit = std::async(std::launch::async, []() { Console::Init(); });
 
 	coreInit.wait();
-	auto audioInit = std::async(std::launch::async, []() { audioSystem.Init(); });
+	auto audioInit = std::async(std::launch::async, []() { AudioSystem::Init(); });
 
 	auto physicsInit = std::async(std::launch::async, []() { physicsSystem.Init(); });
 	auto fbxInit = std::async(std::launch::async, []() { FBXLoader::Init(); });
@@ -86,7 +86,7 @@ void Engine::TickSystems(float deltaTime)
 	Core::Tick();
 	commandSystem.Tick();
 	shaderSystem.Tick();
-	audioSystem.Tick();
+	AudioSystem::Tick();
 
 	cutsceneSequencer.PlaybackTick(deltaTime);
 

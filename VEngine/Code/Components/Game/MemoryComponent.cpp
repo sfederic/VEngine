@@ -66,9 +66,9 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 	uiSystem.memoryGainedWidget->AddToViewport();
 
 	//Mute all channels because Memory Gained sound fucking with the musical key
-	audioSystem.FadeOutAllAudio();
+	AudioSystem::FadeOutAllAudio();
 	GameUtils::PlayAudioOneShot("intuition_gained.wav");
-	Timer::SetTimer(5.0f, std::bind(&AudioSystem::FadeInAllAudio, &audioSystem));
+	Timer::SetTimer(5.0f, AudioSystem::FadeInAllAudio);
 
 	return true; //memory created
 }

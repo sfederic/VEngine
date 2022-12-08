@@ -75,7 +75,7 @@ namespace GameUtils
 
 	void PlayAudioOneShot(const std::string audioFilename)
 	{
-		audioSystem.PlayAudio(audioFilename);
+		AudioSystem::PlayAudio(audioFilename);
 	}
 
 	void SaveGameWorldState()
@@ -178,8 +178,8 @@ namespace GameUtils
 
 		CreateWidget<MemoryTransferWidget>()->AddToViewport();
 
-		audioSystem.StopAllAudio();
-		audioSystem.PlayAudio("game05.wav", true);
+		AudioSystem::StopAllAudio();
+		AudioSystem::PlayAudio("game05.wav", true);
 	}
 
 	void DisablePlayer()

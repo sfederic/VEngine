@@ -45,8 +45,8 @@ bool UnlockEntrance(std::string arg)
 
 bool PlaySong(std::string arg)
 {
-	audioSystem.MuteAllAudio();
-	audioSystem.PlayAudio(arg, true);
+	AudioSystem::MuteAllAudio();
+	AudioSystem::PlayAudio(arg, true);
 	return true;
 }
 

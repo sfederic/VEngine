@@ -2,6 +2,8 @@
 #include "AudioSystem.h"
 #include <filesystem>
 #include <cassert>
+#include "AudioBase.h"
+#include "AudioChannel.h"
 #include "Debug.h"
 #include "Components/AudioComponent.h"
 
@@ -12,11 +14,23 @@
 #define fourccXWMA 'AMWX'
 #define fourccDPDS 'sdpd'
 
-AudioSystem audioSystem;
+uint64_t nextChannelID = 0;
 
-AudioSystem::AudioSystem() : System("AudioSystem")
-{
-}
+IXAudio2* audioEngine = nullptr; //Main XAudio2 sound engine
+IXAudio2MasteringVoice* masteringVoice = nullptr; //Main track	
+
+typedef std::map<std::string, std::unique_ptr<AudioBase>> AudioMap;
+AudioMap loadedAudioMap;
+
+typedef std::map<uint64_t, std::unique_ptr<AudioChannel>> ChannelMap;
+ChannelMap channelMap;
+
+HRESULT LoadWAV(const std::string filename, WAVEFORMATEXTENSIBLE& waveFormat, XAUDIO2_BUFFER& buffer);
+HRESULT FindChunk(HANDLE file, DWORD fourcc, DWORD* dwChunkSize, DWORD* dwChunkDataPosition);
+HRESULT ReadChunkData(HANDLE file, void* buffer, DWORD bufferSize, DWORD bufferOffset);
+
+AudioChannel* CreateAudioChannel();
+AudioBase* CreateAudioBase(std::string audioFilename);
 
 void AudioSystem::Init()
 {
@@ -182,7 +196,7 @@ void AudioSystem::UnloadAudio(const std::string filename)
 	loadedAudioMap.erase(audioIt);
 }
 
-HRESULT AudioSystem::FindChunk(HANDLE file, DWORD fourcc, DWORD* dwChunkSize, DWORD* dwChunkDataPosition)
+HRESULT FindChunk(HANDLE file, DWORD fourcc, DWORD* dwChunkSize, DWORD* dwChunkDataPosition)
 {
 	if (SetFilePointer(file, 0, NULL, FILE_BEGIN) == INVALID_SET_FILE_POINTER) {
 		return HRESULT_FROM_WIN32(GetLastError());
@@ -238,7 +252,7 @@ HRESULT AudioSystem::FindChunk(HANDLE file, DWORD fourcc, DWORD* dwChunkSize, DW
 	return S_OK;
 }
 
-HRESULT AudioSystem::ReadChunkData(HANDLE file, void* buffer, DWORD bufferSize, DWORD bufferOffset)
+HRESULT ReadChunkData(HANDLE file, void* buffer, DWORD bufferSize, DWORD bufferOffset)
 {
 	HRESULT hr = S_OK;
 	if (INVALID_SET_FILE_POINTER == SetFilePointer(file, bufferOffset, NULL, FILE_BEGIN)) {
@@ -253,20 +267,20 @@ HRESULT AudioSystem::ReadChunkData(HANDLE file, void* buffer, DWORD bufferSize, 
 	return hr;
 }
 
-AudioChannel* AudioSystem::CreateAudioChannel()
+AudioChannel* CreateAudioChannel()
 {
 	channelMap.insert(std::make_pair(++nextChannelID, std::make_unique<AudioChannel>()));
 	return channelMap[nextChannelID].get();
 }
 
-AudioBase* AudioSystem::CreateAudioBase(std::string audioFilename)
+AudioBase* CreateAudioBase(std::string audioFilename)
 {
 	loadedAudioMap.insert(std::make_pair(audioFilename, std::make_unique<AudioBase>()));
 	return loadedAudioMap[audioFilename].get();
 }
 
-//REF::https://docs.microsoft.com/en-us/windows/win32/xaudio2/how-to--load-audio-data-files-in-xaudio2
-HRESULT AudioSystem::LoadWAV(const std::string filename, WAVEFORMATEXTENSIBLE& waveFormat, XAUDIO2_BUFFER& buffer)
+//Ref::https://docs.microsoft.com/en-us/windows/win32/xaudio2/how-to--load-audio-data-files-in-xaudio2
+HRESULT LoadWAV(const std::string filename, WAVEFORMATEXTENSIBLE& waveFormat, XAUDIO2_BUFFER& buffer)
 {
 	HANDLE file = CreateFileA(filename.c_str(), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
 

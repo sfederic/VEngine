@@ -295,7 +295,7 @@ void World::Cleanup()
 	//Cleanup various systems
 	Timer::Cleanup();
 	physicsSystem.Reset();
-	audioSystem.DeleteLoadedAudioAndChannels();
+	AudioSystem::DeleteLoadedAudioAndChannels();
 	TextureSystem::Cleanup();
 	MaterialSystem::Cleanup();
 	spriteSystem.Reset();
