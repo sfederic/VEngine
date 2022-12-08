@@ -16,7 +16,7 @@ void CharacterControllerComponent::Tick(float deltaTime)
 
 void CharacterControllerComponent::Create()
 {
-	physicsSystem.CreateCharacterController(this);
+	PhysicsSystem::CreateCharacterController(this);
 }
 
 Properties CharacterControllerComponent::GetProps()

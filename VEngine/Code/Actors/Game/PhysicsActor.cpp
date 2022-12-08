@@ -19,7 +19,7 @@ PhysicsActor::PhysicsActor()
 
 void PhysicsActor::Start()
 {
-	physicsSystem.CreateConvexPhysicsMeshFromCollisionMesh(baseMesh, this, "hull_cube.fbx");
+	PhysicsSystem::CreateConvexPhysicsMeshFromCollisionMesh(baseMesh, this, "hull_cube.fbx");
 }
 
 bool PhysicsActor::GoOverAllTris()

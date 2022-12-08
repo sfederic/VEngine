@@ -61,7 +61,7 @@ void MeshComponent::Tick(float deltaTime)
 {
 	if (!isStatic)
 	{
-		physicsSystem.GetTransformFromPhysicsActor(this);
+		PhysicsSystem::GetTransformFromPhysicsActor(this);
 	}
 }
 
@@ -102,7 +102,7 @@ void MeshComponent::Create()
 void MeshComponent::Destroy()
 {
 	//Erase physics actor
-	physicsSystem.ReleasePhysicsActor(this);
+	PhysicsSystem::ReleasePhysicsActor(this);
 
 	material->Destroy();
 	material = nullptr;

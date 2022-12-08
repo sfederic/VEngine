@@ -29,19 +29,15 @@ enum class PhysicsType
 
 //Interface to PhysX systems
 //Ref: https://gameworksdocs.nvidia.com/PhysX/4.1/documentation/physxguide/Index.html
-struct PhysicsSystem
+namespace PhysicsSystem
 {
-	//Maps meshcomponent UIDs to rigid actors
-	std::unordered_map<UID, PxRigidActor*> rigidActorMap;
-
 	void Init();
 	void Start();
 	void Tick(float deltaTime);
 	void Cleanup();
 	void Reset();
-
 	void ReleasePhysicsActor(MeshComponent* mesh);
-
+	std::vector<PxRigidActor*> GetRigidActors();
 	void CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Actor* actor);
 	void CreatePhysicsForDestructibleMesh(DestructibleMeshComponent* mesh, Actor* actor);
 	void CreateCharacterController(CharacterControllerComponent* characterControllerComponent);
@@ -54,12 +50,7 @@ struct PhysicsSystem
 	void ActorToPhysxTransform(const Transform& actorTransform, PxTransform& pxTransform);
 	void PhysxToActorTransform(Transform& actorTransform, const PxTransform& pxTransform);
 	void GetTransformFromPhysicsActor(MeshComponent* mesh);
-
-private:
-	void NormaliseExtents(float& x, float& y, float& z);
 };
-
-extern PhysicsSystem physicsSystem;
 
 namespace Physics
 {

@@ -10,7 +10,10 @@
 #include "World.h"
 #include "Asset/FBXLoader.h"
 
-PhysicsSystem physicsSystem;
+void NormaliseExtents(float& x, float& y, float& z);
+
+//Maps meshcomponent UIDs to rigid actors
+std::unordered_map<UID, PxRigidActor*> rigidActorMap;
 
 PxDefaultAllocator allocator;
 
@@ -78,7 +81,7 @@ void PhysicsSystem::Start()
 			auto dMesh = dynamic_cast<DestructibleMeshComponent*>(mesh);
 			if (dMesh)
 			{
-				physicsSystem.CreatePhysicsForDestructibleMesh(dMesh, actor);
+				PhysicsSystem::CreatePhysicsForDestructibleMesh(dMesh, actor);
 
 				for (auto cell : dMesh->meshCells)
 				{
@@ -91,11 +94,11 @@ void PhysicsSystem::Start()
 				//but it enables roughly changing actors between static and dynamic when editing.
 				if (mesh->isStatic)
 				{
-					physicsSystem.CreatePhysicsActor(mesh, PhysicsType::Static, actor);
+					PhysicsSystem::CreatePhysicsActor(mesh, PhysicsType::Static, actor);
 				}
 				else
 				{
-					physicsSystem.CreatePhysicsActor(mesh, PhysicsType::Dynamic, actor);
+					PhysicsSystem::CreatePhysicsActor(mesh, PhysicsType::Dynamic, actor);
 				}
 			}
 		}
@@ -300,14 +303,6 @@ void PhysicsSystem::GetTransformFromPhysicsActor(MeshComponent* mesh)
 	mesh->UpdateTransform();
 }
 
-//Extents can be 0 or less than because of the planes and walls, Physx wants extents above 0.
-void PhysicsSystem::NormaliseExtents(float& x, float& y, float& z)
-{
-	if (x <= 0.f) x = 0.1f;
-	if (y <= 0.f) y = 0.1f;
-	if (z <= 0.f) z = 0.1f;
-}
-
 bool Physics::Raycast(XMFLOAT3 origin, XMFLOAT3 dir, float range, RaycastHit& hit)
 {
 	PxRaycastBuffer hitBuffer;
@@ -363,4 +358,22 @@ bool Physics::BoxCast(XMFLOAT3 extents, XMFLOAT3 origin, XMFLOAT3 direction, flo
 	}
 
 	return false;
+}
+
+std::vector<PxRigidActor*> PhysicsSystem::GetRigidActors()
+{
+	std::vector<PxRigidActor*> actors;
+	for (const auto& [key, value] : rigidActorMap)
+	{
+		actors.emplace_back(value);
+	}
+	return actors;
+}
+
+//Extents can be 0 or less than because of the planes and walls, Physx wants extents above 0.
+void NormaliseExtents(float& x, float& y, float& z)
+{
+	if (x <= 0.f) x = 0.1f;
+	if (y <= 0.f) y = 0.1f;
+	if (z <= 0.f) z = 0.1f;
 }

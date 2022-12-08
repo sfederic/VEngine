@@ -153,7 +153,7 @@ void Core::StartGame()
 
 	initialStartingWorldFromEditor = World::worldFilename;
 
-	physicsSystem.Start();
+	PhysicsSystem::Start();
 
 	World::StartAllComponents();
 
@@ -170,7 +170,7 @@ void Core::EndGame()
 
 	UISystem::Reset();
 	SpriteSystem::Reset();
-	physicsSystem.Reset();
+	PhysicsSystem::Reset();
 	Timer::Cleanup();
 
 	AudioSystem::DeleteLoadedAudioAndChannels();

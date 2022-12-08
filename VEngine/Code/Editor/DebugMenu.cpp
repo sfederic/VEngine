@@ -380,9 +380,8 @@ void DebugMenu::RenderPhysicsMenu()
 
 	ImGui::Begin("Rigid Bodies");
 
-	for (auto& rigidActorIt : physicsSystem.rigidActorMap)
+	for (auto rigidActor : PhysicsSystem::GetRigidActors())
 	{
-		PxRigidActor* rigidActor = rigidActorIt.second;
 	}
 
 	ImGui::End();

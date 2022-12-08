@@ -55,7 +55,7 @@ void Engine::Init(int argc, char* argv[])
 	coreInit.wait();
 	auto audioInit = std::async(std::launch::async, []() { AudioSystem::Init(); });
 
-	auto physicsInit = std::async(std::launch::async, []() { physicsSystem.Init(); });
+	auto physicsInit = std::async(std::launch::async, []() { PhysicsSystem::Init(); });
 	auto fbxInit = std::async(std::launch::async, []() { FBXLoader::Init(); });
 
 	editor->Init(argc, argv);
@@ -98,7 +98,7 @@ void Engine::TickSystems(float deltaTime)
 	Timer::Tick(deltaTime);
 
 	WorldEditor::Tick();
-	physicsSystem.Tick(deltaTime);
+	PhysicsSystem::Tick(deltaTime);
 	Renderer::Tick();
 
 	playerInputController.Tick(deltaTime);
@@ -153,7 +153,7 @@ void Engine::Render(float deltaTime)
 
 void Engine::Cleanup()
 {
-	physicsSystem.Cleanup();
+	PhysicsSystem::Cleanup();
 	ShaderSystem::ClearShaders();
 	debugMenu.Cleanup();
 	UISystem::Cleanup();
