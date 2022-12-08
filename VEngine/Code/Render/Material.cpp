@@ -41,7 +41,7 @@ Material::Material(std::string textureFilename_, ShaderItem* shaderItem)
 
 void Material::Create()
 {
-	texture = textureSystem.FindTexture2D(textureData.filename);
+	texture = TextureSystem::FindTexture2D(textureData.filename);
 	sampler = RenderUtils::GetDefaultSampler();
 	rastState = Renderer::GetRastState(rastStateValue.GetValue());
 	blendState = Renderer::GetBlendState(blendStateValue.GetValue());
@@ -57,7 +57,7 @@ static void ReassignTexture(void* data)
 {
 	auto textureData = (TextureData*)data;
 
-	auto swapTexture = textureSystem.FindTexture2D(textureData->filename);
+	auto swapTexture = TextureSystem::FindTexture2D(textureData->filename);
 	if (swapTexture == nullptr)
 	{
 		Log("%s wasn't found on texture change.", textureData->filename);

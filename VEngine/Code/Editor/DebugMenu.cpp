@@ -254,12 +254,12 @@ void DebugMenu::RenderWorldStats()
 	//Num of vertices in world
 	uint64_t totalVerticesInWorld = 0;
 
-	for (auto mesh : MeshComponent::system.components)
+	for (auto& mesh : MeshComponent::system.GetComponents())
 	{
 		totalVerticesInWorld += mesh->meshDataProxy.vertices->size();
 	}
 
-	for (auto instanceMesh : InstanceMeshComponent::system.components)
+	for (auto& instanceMesh : InstanceMeshComponent::system.GetComponents())
 	{
 		totalVerticesInWorld += instanceMesh->meshDataProxy.vertices->size();
 	}
@@ -279,11 +279,10 @@ void DebugMenu::RenderWorldStats()
 	uint64_t componentCount = 0;
 	for (auto componentSystem : World::activeComponentSystems)
 	{
-		componentCount += componentSystem->GetComponents().size();
+		componentCount += componentSystem->GetNumComponents();
 	}
 
 	ImGui::Text("Active Components: %d", componentCount);
-
 
 	ImGui::End();
 }
@@ -506,7 +505,7 @@ void DebugMenu::RenderTexturePlacementMenu()
 	if (WorldEditor::texturePlacement)
 	{
 		ImGui::Begin("Texture Placement = ON: (Place selected texture with left click)");
-		ImGui::Text("Selected Texture: %S", textureSystem.selectedTextureInEditor.c_str());
+		ImGui::Text("Selected Texture: %S", TextureSystem::selectedTextureInEditor.c_str());
 		ImGui::End();
 	}
 }

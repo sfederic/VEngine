@@ -305,7 +305,7 @@ void AssetDock::ActorTemplateFileClicked(const std::string actorTemplateFilename
 
 void AssetDock::TextureFileClicked(const std::wstring textureFilename)
 {
-    textureSystem.selectedTextureInEditor = textureFilename;
+    TextureSystem::selectedTextureInEditor = textureFilename;
     Log("[%S] texture selected in editor.", textureFilename.c_str());
 }
 

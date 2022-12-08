@@ -38,7 +38,7 @@ private:
 	UID uid = 0;
 
 public:
-	std::shared_ptr<Texture2D> texture;
+	Texture2D* texture = nullptr;
 	std::shared_ptr<ShaderItem> shader;
 	Sampler* sampler = nullptr;
 	RastState* rastState = nullptr;

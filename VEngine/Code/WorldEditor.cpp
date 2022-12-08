@@ -61,13 +61,13 @@ void HandleActorPicking()
 		if (RaycastFromScreen(screenPickRay))
 		{
 			//Assign selected texture in editor to mesh on click
-			if (!textureSystem.selectedTextureInEditor.empty() && WorldEditor::texturePlacement)
+			if (!TextureSystem::selectedTextureInEditor.empty() && WorldEditor::texturePlacement)
 			{
 				auto mesh = dynamic_cast<MeshComponent*>(screenPickRay.hitComponent);
 				if (mesh)
 				{
 					mesh->material->materialShaderData.useTexture = true;
-					mesh->SetTexture(VString::wstos(textureSystem.selectedTextureInEditor));
+					mesh->SetTexture(VString::wstos(TextureSystem::selectedTextureInEditor));
 					return;
 				}
 			}

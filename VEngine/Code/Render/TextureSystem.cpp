@@ -1,13 +1,17 @@
 #include "vpch.h"
 #include "TextureSystem.h"
-#include "Render/RenderUtils.h"
 #include <filesystem>
+#include "SystemStates.h"
+#include "Render/RenderUtils.h"
+#include "Render/Texture2D.h"
 #include "Log.h"
 #include "Asset/AssetPaths.h"
 
-TextureSystem textureSystem;
+static SystemStates systemState = SystemStates::Unloaded;
+std::map<std::string, std::unique_ptr<Texture2D>> texture2DMap;
+std::wstring TextureSystem::selectedTextureInEditor;
 
-std::shared_ptr<Texture2D> TextureSystem::FindTexture2D(std::string textureFilename)
+Texture2D* TextureSystem::FindTexture2D(std::string textureFilename)
 {
 	//Set default texture if filename doesn't exist
 	if (!std::filesystem::exists(AssetBaseFolders::texture + textureFilename))
@@ -30,10 +34,10 @@ std::shared_ptr<Texture2D> TextureSystem::FindTexture2D(std::string textureFilen
 			RenderUtils::CreateTexture(texture.get());
 		}
 
-		return texture;
+		return texture.get();
 	}
 
-	return textureIt->second;
+	return textureIt->second.get();
 }
 
 void TextureSystem::CreateAllTextures()

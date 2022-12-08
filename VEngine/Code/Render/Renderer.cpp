@@ -1690,7 +1690,7 @@ void SetShaderResourceFromMaterial(uint32_t shaderRegister, Material* material)
 
 void SetShaderResourcePixel(uint32_t shaderRegister, std::string textureName)
 {
-	auto texture = textureSystem.FindTexture2D(textureName);
+	auto texture = TextureSystem::FindTexture2D(textureName);
 	auto textureSRV = texture->GetSRV();
 	context->PSSetShaderResources(shaderRegister, 1, &textureSRV);
 }
