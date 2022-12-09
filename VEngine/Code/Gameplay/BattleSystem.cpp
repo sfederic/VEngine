@@ -73,6 +73,9 @@ void BattleSystem::EndBattle()
 {
 	player->BattleCleanup();
 
+	GameUtils::SetActiveCamera(player->camera);
+	GameUtils::SetActiveCameraTarget(player);
+
 	grid->SetActive(false);
 
 	UISystem::unitLineupWidget->RemoveFromViewport();
