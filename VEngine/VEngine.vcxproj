@@ -142,7 +142,6 @@
     <ClCompile Include="Code\Actors\Game\NPC.cpp" />
     <ClCompile Include="Code\Actors\Game\PhysicsActor.cpp" />
     <ClCompile Include="Code\Actors\Game\PlayerDialogueTrigger.cpp" />
-    <ClCompile Include="Code\Actors\Game\PushableGridActor.cpp" />
     <ClCompile Include="Code\Actors\Game\SavePoint.cpp" />
     <ClCompile Include="Code\Actors\Game\TitleScreenActor.cpp" />
     <ClCompile Include="Code\Actors\Game\Unit.cpp" />
@@ -308,7 +307,6 @@
     <ClInclude Include="Code\Actors\Game\NPC.h" />
     <ClInclude Include="Code\Actors\Game\PhysicsActor.h" />
     <ClInclude Include="Code\Actors\Game\PlayerDialogueTrigger.h" />
-    <ClInclude Include="Code\Actors\Game\PushableGridActor.h" />
     <ClInclude Include="Code\Actors\Game\SavePoint.h" />
     <ClInclude Include="Code\Actors\Game\TitleScreenActor.h" />
     <ClInclude Include="Code\Actors\Game\Unit.h" />

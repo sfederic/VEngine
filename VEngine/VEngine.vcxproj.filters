@@ -458,9 +458,6 @@
     <ClCompile Include="Code\Actors\Game\PlayerDialogueTrigger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\PushableGridActor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\Game\SavePoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1046,9 +1043,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\PlayerDialogueTrigger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\PushableGridActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\SavePoint.h">
