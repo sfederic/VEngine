@@ -33,6 +33,9 @@ protected:
 	void MovementInput(float deltaTime);
 	void RotationInput(float deltaTime);
 
+private:
+	void Attack();
+
 public:
 	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);

@@ -6,6 +6,7 @@
 #include "Components/CameraComponent.h"
 #include "Actors/Game/Grid.h"
 #include "Actors/Game/FenceActor.h"
+#include "Actors/Game/Unit.h"
 #include "Physics/Raycast.h"
 #include "Gameplay/BattleSystem.h"
 #include "Gameplay/GridNode.h"
@@ -34,6 +35,8 @@ void PlayerUnit::Tick(float deltaTime)
 {
 	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, moveSpeed));
 	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotSpeed));
+
+	Attack();
 }
 
 void PlayerUnit::ControllerInput(float deltaTime)
@@ -191,6 +194,23 @@ void PlayerUnit::RotationInput(float deltaTime)
 		{
 			constexpr float angle = XMConvertToRadians(-90.f);
 			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), angle));
+		}
+	}
+}
+
+void PlayerUnit::Attack()
+{
+	if (Input::GetKeyUp(Keys::Down))
+	{
+		const auto facingPosition = GetPositionV() + mesh->GetForwardVectorV();
+
+		const int x = std::lroundf(facingPosition.m128_f32[0]);
+		const int y = std::lroundf(facingPosition.m128_f32[2]);
+
+		auto unit = Grid::system.GetFirstActor()->GetUnitAtNodeIndex(x, y);
+		if (unit)
+		{
+			unit->InflictDamage(attackPoints);
 		}
 	}
 }
