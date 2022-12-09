@@ -551,9 +551,6 @@
     <ClCompile Include="Code\Gameplay\UnitSkills\LineAttackSkill.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\EnemyUnits\LineAttackerUnit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Gameplay\UnitSkills\UnitSkill.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -609,9 +606,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Gameplay\Memories\MergedMemories\MemoryMerger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Actors\Game\EnemyUnits\ShieldUnit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\Game\GridMapPicker.cpp">
@@ -1159,9 +1153,6 @@
     <ClInclude Include="Code\Gameplay\UnitSkills\LineAttackSkill.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\EnemyUnits\LineAttackerUnit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Gameplay\UnitSkills\EntireAreaAttackSkill.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1202,9 +1193,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\Memories\MergedMemories\MemoryMerger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\EnemyUnits\ShieldUnit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\ForwardFace.h">

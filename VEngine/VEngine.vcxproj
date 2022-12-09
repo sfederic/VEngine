@@ -120,7 +120,6 @@
     <ClCompile Include="Code\Gameplay\BattleCards\BattleCardSystem.cpp" />
     <ClCompile Include="Code\Actors\Game\AllyUnits\AttackUnit.cpp" />
     <ClCompile Include="Code\Actors\Game\GridMapPicker.cpp" />
-    <ClCompile Include="Code\Actors\Game\EnemyUnits\LineAttackerUnit.cpp" />
     <ClCompile Include="Code\Gameplay\BattleCards\BattleCard.cpp" />
     <ClCompile Include="Code\Gameplay\BattleCards\SummonCards.cpp" />
     <ClCompile Include="Code\Gameplay\BattleCards\TrapCards.cpp" />
@@ -287,7 +286,6 @@
     <ClCompile Include="Code\Actors\Game\Hoist.cpp" />
     <ClCompile Include="Code\Actors\Game\ExplodingObject.cpp" />
     <ClCompile Include="Code\Gameplay\Memories\MergedMemories\MemoryMerger.cpp" />
-    <ClCompile Include="Code\Actors\Game\EnemyUnits\ShieldUnit.cpp" />
     <ClCompile Include="Code\UI\Game\GridMapPickerSelectionInfoWidget.cpp" />
     <ClCompile Include="Code\Gameplay\PlayerInputController.cpp" />
     <ClCompile Include="Code\Actors\Game\PlayerUnit.cpp" />
@@ -296,7 +294,6 @@
     <ClInclude Include="Code\Actors\Game\AllyUnits\AttackUnit.h" />
     <ClInclude Include="Code\Actors\Game\GridMapPicker.h" />
     <ClInclude Include="Code\Gameplay\BattleCards\BattleCard.h" />
-    <ClInclude Include="Code\Actors\Game\EnemyUnits\LineAttackerUnit.h" />
     <ClInclude Include="Code\Gameplay\ForwardFace.h" />
     <ClInclude Include="Code\Gameplay\Memories\MergedMemories\TestMergedMemory.h" />
     <ClInclude Include="Code\Gameplay\UnitSkills\AreaAttackSkill.h" />
@@ -581,7 +578,6 @@
     <ClInclude Include="Code\Actors\Game\Hoist.h" />
     <ClInclude Include="Code\Actors\Game\ExplodingObject.h" />
     <ClInclude Include="Code\Gameplay\Memories\MergedMemories\MemoryMerger.h" />
-    <ClInclude Include="Code\Actors\Game\EnemyUnits\ShieldUnit.h" />
     <ClInclude Include="Code\UI\Game\GridMapPickerSelectionInfoWidget.h" />
     <ClInclude Include="Code\Gameplay\PlayerInputController.h" />
     <ClInclude Include="Code\Actors\Game\PlayerUnit.h" />
