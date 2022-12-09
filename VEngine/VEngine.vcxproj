@@ -127,7 +127,6 @@
     <ClCompile Include="Code\Gameplay\Memories\MergedMemories\TestMergedMemory.cpp" />
     <ClCompile Include="Code\Gameplay\Memories\SymbolMemories.cpp" />
     <ClCompile Include="Code\Gameplay\Memory.cpp" />
-    <ClCompile Include="Code\Gameplay\UnitSkills\AreaAttackSkill.cpp" />
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp" />
     <ClCompile Include="Code\Actors\CameraActor.cpp" />
     <ClCompile Include="Code\Actors\Game\EntranceTrigger.cpp" />
@@ -156,7 +155,6 @@
     <ClCompile Include="Code\Gameplay\BattleSystem.cpp" />
     <ClCompile Include="Code\Gameplay\ConditionSystem.cpp" />
     <ClCompile Include="Code\Gameplay\GridNode.cpp" />
-    <ClCompile Include="Code\Gameplay\UnitSkills\UnitSkill.cpp" />
     <ClCompile Include="Code\Gameplay\WorldFunctions.cpp" />
     <ClCompile Include="Code\IFunction.cpp" />
     <ClCompile Include="Code\Render\PixelShader.cpp" />
@@ -269,11 +267,6 @@
     <ClCompile Include="Code\Actors\Game\DialogueTrigger.cpp" />
     <ClCompile Include="Code\Gameplay\DialogueStructures.cpp" />
     <ClCompile Include="Code\UI\Game\PlayerActionBarWidget.cpp" />
-    <ClCompile Include="Code\Gameplay\UnitSkills\LineAttackSkill.cpp" />
-    <ClCompile Include="Code\Gameplay\UnitSkills\EntireAreaAttackSkill.cpp" />
-    <ClCompile Include="Code\Gameplay\UnitSkills\HeightAreaAttackSkill.cpp" />
-    <ClCompile Include="Code\Gameplay\UnitSkills\DiagonalAttackSkill.cpp" />
-    <ClCompile Include="Code\Gameplay\UnitSkills\CrossAttackSkill.cpp" />
     <ClCompile Include="Code\UI\Game\PopupWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\PopupActor.cpp" />
     <ClCompile Include="Code\Actors\Game\ConditionTrigger.cpp" />
@@ -291,8 +284,6 @@
     <ClInclude Include="Code\Gameplay\BattleCards\BattleCard.h" />
     <ClInclude Include="Code\Gameplay\ForwardFace.h" />
     <ClInclude Include="Code\Gameplay\Memories\MergedMemories\TestMergedMemory.h" />
-    <ClInclude Include="Code\Gameplay\UnitSkills\AreaAttackSkill.h" />
-    <ClInclude Include="Code\Gameplay\UnitSkills\UnitSkill.h" />
     <ClInclude Include="Code\Actors\CameraActor.h" />
     <ClInclude Include="Code\Actors\Game\EntranceTrigger.h" />
     <ClInclude Include="Code\Actors\Game\FenceActor.h" />
@@ -557,11 +548,6 @@
     <ClInclude Include="Code\Actors\Game\DialogueTrigger.h" />
     <ClInclude Include="Code\Gameplay\DialogueStructures.h" />
     <ClInclude Include="Code\UI\Game\PlayerActionBarWidget.h" />
-    <ClInclude Include="Code\Gameplay\UnitSkills\LineAttackSkill.h" />
-    <ClInclude Include="Code\Gameplay\UnitSkills\EntireAreaAttackSkill.h" />
-    <ClInclude Include="Code\Gameplay\UnitSkills\HeightAreaAttackSkill.h" />
-    <ClInclude Include="Code\Gameplay\UnitSkills\DiagonalAttackSkill.h" />
-    <ClInclude Include="Code\Gameplay\UnitSkills\CrossAttackSkill.h" />
     <ClInclude Include="Code\UI\Game\PopupWidget.h" />
     <ClInclude Include="Code\Actors\Game\PopupActor.h" />
     <ClInclude Include="Code\Actors\Game\ConditionTrigger.h" />

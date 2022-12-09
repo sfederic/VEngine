@@ -4,14 +4,11 @@
 #include <memory>
 #include "VEnum.h"
 #include "Gameplay/BattleEnums.h"
-#include "Gameplay/UnitSkills/UnitSkill.h"
 
 struct GridNode;
 struct MemoryComponent;
 struct EntranceTrigger;
 struct Polyboard;
-class UnitSkill;
-class SkillNode;
 struct Memory;
 class PlayerUnit;
 
@@ -62,10 +59,6 @@ struct Unit : GridActor
 private:
 	bool isUnitTurn = false;
 	bool attackWindingUp = false;
-	int currentAttackNumber = 0;
-
-	std::string skillName;
-	std::vector<SkillNode*> activeSkillNodes;
 
 public:
 	//All the nodes the unit can move to
@@ -79,35 +72,21 @@ public:
 	//This is the actor name a Unit is focusing its 'intent' on. It can be another Unit, or Actor.
 	std::string actorToFocusOn;
 
-	std::map<std::string, std::unique_ptr<UnitSkill>> skills;
-
 	Unit();
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
-
 	virtual void InflictDamage(int damage) override;
-
 	void MoveToNode(GridNode* destinationNode);
 	void MoveToNode(int x, int y);
-
-	//Figure out movement path and target during battle on turn start
 	void StartTurn();
 	void EndTurn();
-
 	bool Attack();
 	void WindUpAttack();
-
 	void ShowUnitMovementPath();
-
 	void SetUnitLookAt(XMVECTOR lookAtPoint);
 
 private:
 	std::vector<GridNode*> GetMovementPathPreviewNodes(GridNode* destinationNode);
-
-	int GetHighestSkillRange();
-	bool IsTargetInRangeOfSkills(GridNode* targetNode);
-	void ActivateSkill();
-	void ClearActiveSkillNodes();
 	PlayerUnit* FindClosestPlayerUnit();
 };

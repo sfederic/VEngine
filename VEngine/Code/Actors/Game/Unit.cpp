@@ -4,7 +4,6 @@
 #include "Gameplay/GridNode.h"
 #include "Gameplay/GameUtils.h"
 #include "Grid.h"
-#include "SkillNode.h"
 #include "Components/MeshComponent.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Components/Game/MemoryComponent.h"
@@ -73,29 +72,7 @@ void Unit::Tick(float deltaTime)
 	{
 		if (XMVector4Equal(nextMovePos, GetPositionV()))
 		{
-			if (!activeSkillNodes.empty())
-			{
-				movementPathNodeIndex = 0;
-				pathNodes.clear();
-
-				GetCurrentNode()->Hide();
-
-				auto target = FindClosestPlayerUnit();
-
-				attackWindingUp = true;
-
-				//Set player guard setup if skill can hit
-				auto& skill = skills[skillName];
-				if (skill->IsTargetNodeInRange(GetCurrentNode(), target->GetCurrentNode()))
-				{
-				}
-
-				//Still show animations and camera focus even if skill won't connect
-				Player::system.GetFirstActor()->nextCameraFOV = 30.f;
-				GameUtils::SetActiveCameraTarget(this);
-				Timer::SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
-			}
-			else if (movementPathNodeIndex < pathNodes.size())
+			if (movementPathNodeIndex < pathNodes.size())
 			{
 				nextMovePos = XMLoadFloat3(&pathNodes[movementPathNodeIndex]->worldPosition);
 
@@ -129,8 +106,6 @@ void Unit::Tick(float deltaTime)
 
 				if (Attack())
 				{
-					ClearActiveSkillNodes();
-
 					//deal with attack wind up
 					attackWindingUp = true;
 
@@ -142,8 +117,6 @@ void Unit::Tick(float deltaTime)
 				}
 				else
 				{
-					ActivateSkill();
-
 					EndTurn();
 
 					//Destroy Unit if its escaping and within its entrancetrigger to escape with
@@ -178,7 +151,6 @@ Properties Unit::GetProps()
 	props.AddProp(actorToFocusOn);
 	props.AddProp(numOfAttacks);
 	props.AddProp(deathText);
-	props.Add("Skill", &skillName);
 	return props;
 }
 
@@ -319,8 +291,6 @@ void Unit::StartTurn()
 {
 	isUnitTurn = true;
 
-	currentAttackNumber = numOfAttacks;
-
 	GetCurrentNode()->Show();
 
 	auto target = FindClosestPlayerUnit();
@@ -409,130 +379,14 @@ void Unit::WindUpAttack()
 {
 	auto target = FindClosestPlayerUnit();
 
-	if (!activeSkillNodes.empty())
-	{
-		if (skills[skillName]->IsTargetNodeInRange(GetCurrentNode(), target->GetCurrentNode()))
-		{
-			GameUtils::CameraShake(1.f);
-			GameUtils::PlayAudioOneShot("sword_hit.wav");
+	Player::system.GetFirstActor()->nextCameraFOV = 60.f;
+	GameUtils::SetActiveCameraTarget(target);
 
-			target->InflictDamage(attackPoints);
-		}
+	attackWindingUp = false;
 
-		Player::system.GetFirstActor()->nextCameraFOV = 60.f;
-		GameUtils::SetActiveCameraTarget(target);
+	GameUtils::SpawnSpriteSheet("Sprites/explosion.png", target->GetPosition(), false, 4, 4);
 
-		attackWindingUp = false;
-
-		ClearActiveSkillNodes();
-
-		GameUtils::SpawnSpriteSheet("Sprites/explosion.png", target->GetPosition(), false, 4, 4);
-
-		EndTurn();
-		return;
-	}
-
-	//Do a raycast towards player. Lets player go behind cover.
-	Ray ray(this);
-	ray.actorsToIgnore.push_back(target); //Ignore player too. Attack hits if nothing is hit
-	if (!Raycast(ray, GetPositionV(), target->GetPositionV()))
-	{
-		GameUtils::CameraShake(1.f);
-		GameUtils::PlayAudioOneShot("sword_hit.wav");
-
-		target->InflictDamage(attackPoints);
-
-		Log("%s attacked %s", this->GetName().c_str(), target->GetName().c_str());
-	}
-	else
-	{
-		//Attack miss
-		Log("[%s] attack missed [%s]. Hit [%s] instead.",
-			this->GetName().c_str(), target->GetName().c_str(), ray.hitActor->GetName().c_str());
-
-		auto hitGridActor = dynamic_cast<GridActor*>(ray.hitActor);
-		if (hitGridActor)
-		{
-			hitGridActor->InflictDamage(attackPoints);
-		}
-	}
-
-	currentAttackNumber--;
-
-	if (currentAttackNumber > 0) //Attack again
-	{
-		Timer::SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
-	}
-	else //End turn
-	{
-		auto player = Player::system.GetFirstActor();
-		player->nextCameraFOV = 60.f;
-		GameUtils::SetActiveCameraTarget(player);
-
-		attackWindingUp = false;
-
-		ClearActiveSkillNodes();
-
-		EndTurn();
-	}
-}
-
-int Unit::GetHighestSkillRange()
-{
-	int highestRange = 0;
-
-	for (auto& skillIt : skills)
-	{
-		auto& skill = skillIt.second;
-		const int skillRange = skill->GetRange();
-		if (skillRange > highestRange)
-		{
-			highestRange = skillRange;
-		}
-	}
-
-	return highestRange;
-}
-
-bool Unit::IsTargetInRangeOfSkills(GridNode* targetNode)
-{
-	for (auto& skillIt : skills)
-	{
-		auto& skill = skillIt.second;
-		if (skill->IsTargetNodeInRange(GetCurrentNode(), targetNode))
-		{
-			return true;
-		}
-	}
-
-	return false;
-}
-
-void Unit::ActivateSkill()
-{
-	//@Todo: come back and see if skills on units are worth keeping. Might be too much work.
-	if (!skillName.empty())
-	{
-		ClearActiveSkillNodes();
-
-		auto skillIt = skills.find(skillName);
-		if (skillIt == skills.end())
-		{
-			Log("Skill [%s] not found in Unit [%s]'s skill map.", skillName.c_str(), GetName().c_str());
-		}
-
-		activeSkillNodes = skills[skillName]->SetNodesForSkillRange(GetCurrentNode(), Player::system.GetFirstActor()->GetCurrentNode());
-	}
-}
-
-void Unit::ClearActiveSkillNodes()
-{
-	for (auto skillNode : activeSkillNodes)
-	{
-		skillNode->Destroy();
-	}
-
-	activeSkillNodes.clear();
+	EndTurn();
 }
 
 PlayerUnit* Unit::FindClosestPlayerUnit()
