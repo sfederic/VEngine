@@ -323,17 +323,17 @@ void Unit::StartTurn()
 
 	GetCurrentNode()->Show();
 
-	auto player = Player::system.GetFirstActor();
+	auto target = FindClosestPlayerUnit();
 
 	if (battleState.Compare(BattleStates::fight))
 	{
 		//Move towards player to attack
-		MoveToNode(player->xIndex, player->yIndex);
+		MoveToNode(target->xIndex, target->yIndex);
 	}
 	else if (battleState.Compare(BattleStates::evade))
 	{
 		//Move away from player to evade
-		MoveToNode(player->xIndex, player->yIndex);
+		MoveToNode(target->xIndex, target->yIndex);
 	}
 	else if (battleState.Compare(BattleStates::escape))
 	{
