@@ -113,7 +113,7 @@ bool Widget::Button(const std::wstring text, Layout layout, float lineWidth,
 		if (editor->viewportMouseY > layout.rect.top && editor->viewportMouseY < layout.rect.bottom)
 		{
 			//Hover animation/image
-			UISystem::DrawRect(layout, lineWidth);
+			UISystem::DrawRect(layout, Colours::Black, 2.0f);
 
 			if (Input::GetMouseLeftUp())
 			{
@@ -164,7 +164,7 @@ bool Widget::ImageButton(const std::string filename, Layout layout)
 		if (editor->viewportMouseY > layout.rect.top && editor->viewportMouseY < layout.rect.bottom)
 		{
 			//Hover animation/image
-			UISystem::DrawRect(layout, 2.f);
+			UISystem::DrawRect(layout, Colours::Black, 2.f);
 
 			if (Input::GetMouseLeftUp())
 			{

@@ -46,25 +46,17 @@ namespace UISystem
 	}
 
 	void Init(void* swapchain);
-
 	void BeginDraw();
 	void EndDraw();
 	void DrawAllWidgets(float deltaTime);
-
-	void TextDraw(const std::wstring text,
-		const Layout& layout,
-		const DWRITE_TEXT_ALIGNMENT alignment = DWRITE_TEXT_ALIGNMENT::DWRITE_TEXT_ALIGNMENT_CENTER,
-		const D2D1_COLOR_F colour = Colours::Black,
-		const float opacity = 1.f);
-	void FillRect(const Layout& layout);
-	void DrawRect(const Layout& layout, const float lineWidth = 1.f);
-
+	void TextDraw(const std::wstring text, const Layout& layout, const DWRITE_TEXT_ALIGNMENT alignment = DWRITE_TEXT_ALIGNMENT::DWRITE_TEXT_ALIGNMENT_CENTER, const D2D1_COLOR_F colour = Colours::Black, const float opacity = 1.f);
+	void FillRect(const Layout& layout, const D2D1_COLOR_F colour = Colours::Black, const float opacity = 1.f);
+	void DrawRect(const Layout& layout, const D2D1_COLOR_F colour = Colours::Black, const float lineWidth = 1.f, const float opacity = 1.f);
 	void AddWidget(Widget* widgetToAdd);
 	void RemoveWidget(Widget* widgetToRemove);
 	void DestroyWidget(Widget* widget);
 	void CreateGlobalWidgets();
 	void RemoveAllWidgets();
-
 	void Cleanup();
 	void Reset();
 };

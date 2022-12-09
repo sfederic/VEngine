@@ -189,12 +189,18 @@ void UISystem::TextDraw(const std::wstring text,
 	d2dRenderTarget->DrawText(text.c_str(), text.size(), textFormat, layout.rect, brushText);
 }
 
-void UISystem::FillRect(const Layout& layout)
+void UISystem::FillRect(const Layout& layout, const D2D1_COLOR_F colour, const float opacity)
 {
+	brushShapes->SetColor(colour);
+	brushShapes->SetOpacity(opacity);
+
 	d2dRenderTarget->FillRectangle(layout.rect, brushShapes);
 }
 
-void UISystem::DrawRect(const Layout& layout, const float lineWidth)
+void UISystem::DrawRect(const Layout& layout, const D2D1_COLOR_F colour, const float lineWidth, const float opacity)
 {
-	d2dRenderTarget->DrawRectangle(layout.rect, brushText, lineWidth);
+	brushShapes->SetColor(colour);
+	brushShapes->SetOpacity(opacity);
+
+	d2dRenderTarget->DrawRectangle(layout.rect, brushShapes, lineWidth);
 }
