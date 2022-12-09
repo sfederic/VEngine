@@ -159,7 +159,12 @@ void Player::BattleCleanup()
 
 	RefreshCombatStats();
 
+	AttackUnit::system.Cleanup();
+
 	healthWidget->RemoveFromViewport();
+
+	GameUtils::SetActiveCamera(camera);
+	GameUtils::SetActiveCameraTarget(this);
 }
 
 void Player::SetupForBattle()
