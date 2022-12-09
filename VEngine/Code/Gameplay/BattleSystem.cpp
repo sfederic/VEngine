@@ -1,12 +1,13 @@
 #include "vpch.h"
 #include "BattleSystem.h"
 #include "World.h"
+#include "Log.h"
 #include "Actors/Game/Unit.h"
 #include "Actors/Game/Player.h"
 #include "Actors/Game/Grid.h"
 #include "Actors/Game/NPC.h"
 #include "Gameplay/GameUtils.h"
-#include "Log.h"
+#include "Gameplay/PlayerInputController.h"
 #include "UI/UISystem.h"
 #include "UI/Game/HealthWidget.h"
 #include "UI/Game/DialogueWidget.h"
@@ -109,6 +110,8 @@ void BattleSystem::MoveToNextTurn()
 
 		GameUtils::SetActiveCameraTarget(player);
 		Grid::system.GetFirstActor()->ResetAllNodes();
+
+		playerInputController.SetPlayerUnitToControl(player);
 
 		return;
 	}
