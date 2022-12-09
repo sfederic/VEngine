@@ -23,4 +23,5 @@ void PlayerInputController::SetPlayerUnitToControl(PlayerUnit* playerUnit)
 {
 	playerUnitToControl = playerUnit;
 	GameUtils::SetActiveCamera(playerUnit->camera);
+	GameUtils::SetActiveCameraTarget(playerUnit);
 }
