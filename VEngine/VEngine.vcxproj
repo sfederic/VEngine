@@ -282,7 +282,6 @@
     <ClCompile Include="Code\Gameplay\Memories\SermonKnowledgeMemory.cpp" />
     <ClCompile Include="Code\Actors\Game\RotatorSwitch.cpp" />
     <ClCompile Include="Code\Actors\Game\LightSwitch.cpp" />
-    <ClCompile Include="Code\Actors\Game\Hoist.cpp" />
     <ClCompile Include="Code\Actors\Game\ExplodingObject.cpp" />
     <ClCompile Include="Code\Gameplay\Memories\MergedMemories\MemoryMerger.cpp" />
     <ClCompile Include="Code\UI\Game\GridMapPickerSelectionInfoWidget.cpp" />
@@ -573,7 +572,6 @@
     <ClInclude Include="Code\Actors\Game\ConditionTrigger.h" />
     <ClInclude Include="Code\Actors\Game\RotatorSwitch.h" />
     <ClInclude Include="Code\Actors\Game\LightSwitch.h" />
-    <ClInclude Include="Code\Actors\Game\Hoist.h" />
     <ClInclude Include="Code\Actors\Game\ExplodingObject.h" />
     <ClInclude Include="Code\Gameplay\Memories\MergedMemories\MemoryMerger.h" />
     <ClInclude Include="Code\UI\Game\GridMapPickerSelectionInfoWidget.h" />
