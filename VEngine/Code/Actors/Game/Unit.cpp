@@ -389,8 +389,8 @@ bool Unit::Attack()
 		closedNodes.clear();
 	}
 
-	auto player = Player::system.GetFirstActor();
-	auto targetNode = player->GetCurrentNode();
+	auto target = FindClosestPlayerUnit();
+	auto targetNode = target->GetCurrentNode();
 
 	for (auto node : attackNodes)
 	{
@@ -411,7 +411,7 @@ void Unit::WindUpAttack()
 
 	if (!activeSkillNodes.empty())
 	{
-		if (skills[skillName]->IsTargetNodeInRange(GetCurrentNode(), Player::system.GetFirstActor()->GetCurrentNode()))
+		if (skills[skillName]->IsTargetNodeInRange(GetCurrentNode(), target->GetCurrentNode()))
 		{
 			GameUtils::CameraShake(1.f);
 			GameUtils::PlayAudioOneShot("sword_hit.wav");
