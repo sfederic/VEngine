@@ -177,10 +177,10 @@ void Console::Tick()
 		float height = (float)Renderer::GetViewportHeight();
 
 		auto rectLayout = Layout({ 0, height - 50.f, width, height });
-		UISystem::DrawRect(rectLayout);
+		UISystem::DrawRect(rectLayout, Colours::Green, 2.f);
 
 		auto textLayout = Layout({ 0, height - 50.f, width, height });
-		UISystem::TextDraw(consoleString, textLayout, DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
+		UISystem::TextDraw(consoleString, textLayout, DWRITE_TEXT_ALIGNMENT_JUSTIFIED, Colours::Green);
 	}
 }
 

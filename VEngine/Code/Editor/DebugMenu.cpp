@@ -475,7 +475,7 @@ void DebugMenu::RenderWorldMenu()
 	ImGui::End();
 }
 
-//Handle notifications (eg. "Shaders recompiled", "ERROR: Not X", etc)
+//Handle viewport notifications (e.g. "Shaders recompiled", "ERROR: Not X", etc.)
 void DebugMenu::RenderNotifications(float deltaTime)
 {
 	constexpr float textOffsetX = 20.f;
@@ -489,7 +489,7 @@ void DebugMenu::RenderNotifications(float deltaTime)
 
 			const float notificationOffsetY = 20.f * i;
 			const auto textLayout = Layout({ 0.f, notificationOffsetY, 1000.f, 1000.f });
-			UISystem::TextDraw(debugNotifications[i].text, textLayout, DWRITE_TEXT_ALIGNMENT_LEADING);
+			UISystem::TextDraw(debugNotifications[i].text, textLayout, DWRITE_TEXT_ALIGNMENT_JUSTIFIED, Colours::Green);
 		}
 		else
 		{
