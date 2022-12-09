@@ -533,9 +533,6 @@
     <ClCompile Include="Code\UI\Game\UnitLineupWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\SkillNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1121,9 +1118,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\UnitLineupWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\SkillNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\UnitSkills\UnitSkill.h">

@@ -129,7 +129,6 @@
     <ClCompile Include="Code\Gameplay\Memory.cpp" />
     <ClCompile Include="Code\Gameplay\UnitSkills\AreaAttackSkill.cpp" />
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp" />
-    <ClCompile Include="Code\Actors\Game\SkillNode.cpp" />
     <ClCompile Include="Code\Actors\CameraActor.cpp" />
     <ClCompile Include="Code\Actors\Game\EntranceTrigger.cpp" />
     <ClCompile Include="Code\Actors\Game\FenceActor.cpp" />
@@ -294,7 +293,6 @@
     <ClInclude Include="Code\Gameplay\Memories\MergedMemories\TestMergedMemory.h" />
     <ClInclude Include="Code\Gameplay\UnitSkills\AreaAttackSkill.h" />
     <ClInclude Include="Code\Gameplay\UnitSkills\UnitSkill.h" />
-    <ClInclude Include="Code\Actors\Game\SkillNode.h" />
     <ClInclude Include="Code\Actors\CameraActor.h" />
     <ClInclude Include="Code\Actors\Game\EntranceTrigger.h" />
     <ClInclude Include="Code\Actors\Game\FenceActor.h" />
