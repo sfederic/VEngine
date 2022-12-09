@@ -452,7 +452,7 @@ void Player::ActivateGridMapPicker()
 void Player::SummonAllyUnit()
 {
 	Transform transform;
-	XMStoreFloat3(&transform.position, GetPositionV() + mesh->GetForwardVectorV());
+	XMStoreFloat3(&transform.position, GetPositionV() + GetForwardVectorV());
 	transform.rotation = mesh->GetRotation();
 
 	auto attackUnit = AttackUnit::system.Add(transform);
