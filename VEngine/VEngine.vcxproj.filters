@@ -587,9 +587,6 @@
     <ClCompile Include="Code\Actors\Game\RotatorSwitch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\LightSwitch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\Game\ExplodingObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1169,9 +1166,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\RotatorSwitch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\LightSwitch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\ExplodingObject.h">
