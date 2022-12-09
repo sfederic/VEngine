@@ -731,6 +731,9 @@ bool Player::CheckAttackPositionAgainstUnitDirection(Unit* unit)
 void Player::PlaceTrap(BattleCard* trapCard)
 {
 	auto currentNode = GetCurrentNode();
-	currentNode->trapCard = trapCard;
-	currentNode->SetColour(GridNode::trapNodeColour);
+	if (currentNode->trapCard == nullptr)
+	{
+		currentNode->trapCard = trapCard;
+		currentNode->SetColour(GridNode::trapNodeColour);
+	}
 }
