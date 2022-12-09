@@ -66,6 +66,14 @@ public:
 		editor->ClearProperties();
 	}
 
+	void RemoveAllActors()
+	{
+		for (int i = 0; i < actors.size(); i++)
+		{
+			Remove(i);
+		}
+	}
+
 	virtual void Tick(float deltaTime) override
 	{
 		//Has to be an index based forloop here instead of a range forloop because 
