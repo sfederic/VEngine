@@ -255,6 +255,11 @@ void FileSystem::LoadWorld(std::string worldName)
 				componentSystemCache.nameToSystemMap->end()) ||
 				ActorSystemCache::Get().GetSystem(VString::wstos(missingProp)) == nullptr)
 			{
+				if (missingProp == L"end")
+				{
+					break;
+				}
+
 				lastPos = d.is.tellg();
 				d.is >> missingProp;
 			}
