@@ -24,6 +24,7 @@ public:
 	GridNode* GetCurrentNode();
 
 	bool CheckAndExpendActionPoints(int num);
+	void InflictDamage(int damage);
 
 protected:
 	void PreviewMovementNodesDuringBattle();

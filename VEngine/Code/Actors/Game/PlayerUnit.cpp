@@ -208,6 +208,10 @@ bool PlayerUnit::CheckAndExpendActionPoints(int num)
 	return true;
 }
 
+void PlayerUnit::InflictDamage(int damage)
+{
+}
+
 GridNode* PlayerUnit::GetCurrentNode()
 {
 	auto grid = Grid::system.GetFirstActor();

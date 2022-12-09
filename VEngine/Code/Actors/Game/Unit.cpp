@@ -407,7 +407,7 @@ bool Unit::Attack()
 
 void Unit::WindUpAttack()
 {
-	auto player = Player::system.GetFirstActor();
+	auto target = FindClosestPlayerUnit();
 
 	if (!activeSkillNodes.empty())
 	{
@@ -416,17 +416,17 @@ void Unit::WindUpAttack()
 			GameUtils::CameraShake(1.f);
 			GameUtils::PlayAudioOneShot("sword_hit.wav");
 
-			player->InflictDamage(attackPoints);
+			target->InflictDamage(attackPoints);
 		}
 
-		player->nextCameraFOV = 60.f;
-		GameUtils::SetActiveCameraTarget(player);
+		Player::system.GetFirstActor()->nextCameraFOV = 60.f;
+		GameUtils::SetActiveCameraTarget(target);
 
 		attackWindingUp = false;
 
 		ClearActiveSkillNodes();
 
-		GameUtils::SpawnSpriteSheet("Sprites/explosion.png", player->GetPosition(), false, 4, 4);
+		GameUtils::SpawnSpriteSheet("Sprites/explosion.png", target->GetPosition(), false, 4, 4);
 
 		EndTurn();
 		return;
@@ -434,21 +434,21 @@ void Unit::WindUpAttack()
 
 	//Do a raycast towards player. Lets player go behind cover.
 	Ray ray(this);
-	ray.actorsToIgnore.push_back(player); //Ignore player too. Attack hits if nothing is hit
-	if (!Raycast(ray, GetPositionV(), player->GetPositionV()))
+	ray.actorsToIgnore.push_back(target); //Ignore player too. Attack hits if nothing is hit
+	if (!Raycast(ray, GetPositionV(), target->GetPositionV()))
 	{
 		GameUtils::CameraShake(1.f);
 		GameUtils::PlayAudioOneShot("sword_hit.wav");
 
-		player->InflictDamage(attackPoints);
+		target->InflictDamage(attackPoints);
 
-		Log("%s attacked %s", this->GetName().c_str(), player->GetName().c_str());
+		Log("%s attacked %s", this->GetName().c_str(), target->GetName().c_str());
 	}
 	else
 	{
 		//Attack miss
 		Log("[%s] attack missed [%s]. Hit [%s] instead.",
-			this->GetName().c_str(), player->GetName().c_str(), ray.hitActor->GetName().c_str());
+			this->GetName().c_str(), target->GetName().c_str(), ray.hitActor->GetName().c_str());
 
 		auto hitGridActor = dynamic_cast<GridActor*>(ray.hitActor);
 		if (hitGridActor)
@@ -465,6 +465,7 @@ void Unit::WindUpAttack()
 	}
 	else //End turn
 	{
+		auto player = Player::system.GetFirstActor();
 		player->nextCameraFOV = 60.f;
 		GameUtils::SetActiveCameraTarget(player);
 

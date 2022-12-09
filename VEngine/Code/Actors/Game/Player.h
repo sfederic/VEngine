@@ -51,8 +51,6 @@ public:
 	//called at every battle turn end
 	void RefreshCombatStats();
 
-	void InflictDamage(int damage);
-
 	//Call on battle end for player variables housekeeping
 	void BattleCleanup();
 	

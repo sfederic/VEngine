@@ -152,16 +152,6 @@ void Player::RefreshCombatStats()
 	battleSystem.actionBarWidget->actionPoints = battleSystem.playerActionPoints;
 }
 
-void Player::InflictDamage(int damage)
-{
-	healthPoints -= damage;
-
-	if (healthPoints <= 0)
-	{
-		Log("Game Over");
-	}
-}
-
 void Player::BattleCleanup()
 {
 	isWeaponDrawn = false;
