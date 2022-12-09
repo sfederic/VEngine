@@ -370,6 +370,17 @@ Unit* Grid::GetUnitAtNode(GridNode* node)
     return nullptr;
 }
 
+Unit* Grid::GetUnitAtNodeIndex(int xIndex, int yIndex)
+{
+    auto node = GetNodeAllowNull(xIndex, yIndex);
+    if (node)
+    {
+        return GetUnitAtNode(node);
+    }
+
+    return nullptr;
+}
+
 void Grid::ResetAllNodes()
 {
     for (auto& row : rows)

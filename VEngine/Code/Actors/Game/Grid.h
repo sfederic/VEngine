@@ -65,6 +65,7 @@ struct Grid : Actor
 
 	//Returns Unit currently at GridNode x and y index (only returns first found Unit)
 	Unit* GetUnitAtNode(GridNode* node);
+	Unit* GetUnitAtNodeIndex(int xIndex, int yIndex);
 
 	void ResetAllNodes();
 	void LerpInNodes(float deltaTime);
