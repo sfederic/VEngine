@@ -70,6 +70,8 @@ void GridMapPicker::RotationInput()
 
 void GridMapPicker::MovementInput()
 {
+	const auto previousPosition = GetPositionV();
+
 	if (Input::GetKeyDown(Keys::W))
 	{
 		AddPositionV(GetForwardVectorV());
@@ -86,6 +88,16 @@ void GridMapPicker::MovementInput()
 	else if (Input::GetKeyDown(Keys::D))
 	{
 		AddPositionV(GetRightVectorV());
+	}
+
+	//Check if next move in grid is valid, else revert position.
+	int nextXGridIndex = std::lroundf(GetPosition().x);
+	int nextYGridIndex = std::lroundf(GetPosition().z);
+
+	auto node = Grid::system.GetFirstActor()->GetNodeAllowNull(nextXGridIndex, nextYGridIndex);
+	if (node == nullptr)
+	{
+		SetPosition(previousPosition);
 	}
 }
 
