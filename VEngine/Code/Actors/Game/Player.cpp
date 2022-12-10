@@ -97,7 +97,8 @@ void Player::Tick(float deltaTime)
 		PushbackObject();
 	}
 
-	ToggleBattleGrid();
+	EnterAstralMode();
+
 	ToggleMemoryMenu();
 
 	LerpPlayerCameraFOV(deltaTime);
@@ -194,11 +195,30 @@ void Player::QuickThought(const std::wstring& text)
 	Timer::SetTimer(5.0f, std::bind(&DialogueWidget::RemoveFromViewport, dialogueComponent->dialogueWidget));
 }
 
-void Player::ToggleBattleGrid()
+void Player::EnterAstralMode()
 {
 	if (Input::GetKeyUp(Keys::Space))
 	{
 		inAstralMode = !inAstralMode;
+
+		if (inAstralMode)
+		{
+			GameUtils::PlayAudioOneShot("sword_hit.wav");
+			healthWidget->AddToViewport();
+
+			mesh->SetShaderFilenames(ShaderItems::Astral);
+			mesh->SetBlendState(BlendStates::Default);
+			mesh->material->materialShaderData.ambient = XMFLOAT4(0.1f, 0.1f, 0.9f, 0.5f);
+		}
+		else
+		{
+			GameUtils::PlayAudioOneShot("sword_sheathe.wav");
+			healthWidget->RemoveFromViewport();
+
+			mesh->SetShaderFilenames(ShaderItems::Default);
+			mesh->SetBlendState(BlendStates::null);
+			mesh->material->materialShaderData.ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
+		}
 
 		//toggle grid
 		auto grid = Grid::system.GetFirstActor();
@@ -218,17 +238,6 @@ void Player::ToggleBattleGrid()
 			{
 				grid->SetActive(true);
 			}
-		}
-
-		if (inAstralMode)
-		{
-			GameUtils::PlayAudioOneShot("sword_hit.wav");
-			healthWidget->AddToViewport();
-		}
-		else
-		{
-			GameUtils::PlayAudioOneShot("sword_sheathe.wav");
-			healthWidget->RemoveFromViewport();
 		}
 
 		//toggle all Unit health widgets

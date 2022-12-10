@@ -68,7 +68,9 @@ public:
 	void PlaceTrap(BattleCard* trapCard);
 
 private:
-	void ToggleBattleGrid();
+	//Toggles battle grid nodes and enters player into a battle ready state.
+	void EnterAstralMode();
+
 	void PrimaryAction();
 	void ToggleMemoryMenu();
 	void LerpPlayerCameraFOV(float deltaTime);
