@@ -200,7 +200,7 @@ public:
 
 	virtual void Cleanup() override
 	{
-		RemoveAllActors();
+		actors.clear();
 	}
 
 private:
