@@ -378,13 +378,13 @@ bool Unit::Attack()
 void Unit::WindUpAttack()
 {
 	auto target = FindClosestPlayerUnit();
+	GameUtils::SetActiveCameraTarget(target);
+	GameUtils::SpawnSpriteSheet("Sprites/explosion.png", target->GetPosition(), false, 4, 4);
+	target->InflictDamage(attackPoints);
 
 	Player::system.GetFirstActor()->nextCameraFOV = 60.f;
-	GameUtils::SetActiveCameraTarget(target);
 
 	attackWindingUp = false;
-
-	GameUtils::SpawnSpriteSheet("Sprites/explosion.png", target->GetPosition(), false, 4, 4);
 
 	EndTurn();
 }

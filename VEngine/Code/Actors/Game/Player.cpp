@@ -160,6 +160,8 @@ void Player::BattleCleanup()
 
 	GameUtils::SetActiveCamera(camera);
 	GameUtils::SetActiveCameraTarget(this);
+
+	DestroyPlayerPhysicalBodyDoubleAndReturnPlayerPosition();
 }
 
 void Player::SetupForBattle()
@@ -202,6 +204,8 @@ void Player::EnterAstralMode()
 			mesh->SetShaderFilenames(ShaderItems::Astral);
 			mesh->SetBlendState(BlendStates::Default);
 			mesh->material->materialShaderData.ambient = XMFLOAT4(0.1f, 0.1f, 0.9f, 0.5f);
+
+			battleSystem.StartBattle();
 		}
 		else
 		{

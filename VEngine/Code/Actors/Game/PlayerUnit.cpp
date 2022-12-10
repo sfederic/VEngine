@@ -262,7 +262,7 @@ void PlayerUnit::InflictDamage(int damage)
 	healthPoints -= damage;
 	if (healthPoints <= 0)
 	{
-		Destroy();
+		GetActorSystem()->RemoveInterfaceActor(this);
 	}
 }
 

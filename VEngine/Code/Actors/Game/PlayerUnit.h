@@ -46,7 +46,7 @@ public:
 	CameraComponent* camera = nullptr;
 
 	int attackPoints = 1;
-	int healthPoints = 3;
+	int healthPoints = 1;
 
 	float moveSpeed = 5.f;
 	float rotSpeed = 3.5f;
