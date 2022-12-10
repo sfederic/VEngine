@@ -26,7 +26,7 @@
 #include "Editor/CutsceneSequencer.h"
 #include "Gameplay/WorldFunctions.h"
 #include "Gameplay/PlayerInputController.h"
-#include "Gameplay/Memories/MergedMemories/MemoryMerger.h"
+#include "Gameplay/FusionSystem.h"
 
 void ClearLog()
 {
@@ -41,7 +41,7 @@ void Engine::Init(int argc, char* argv[])
 
 	ClearLog();
 
-	MemoryMerger::Init();
+	FusionSystem::Init();
 
 	WorldFunctions::SetupWorldStartFunctions();
 
