@@ -201,10 +201,6 @@ void Player::EnterAstralMode()
 			GameUtils::PlayAudioOneShot("sword_hit.wav");
 			healthWidget->AddToViewport();
 
-			mesh->SetShaderFilenames(ShaderItems::Astral);
-			mesh->SetBlendState(BlendStates::Default);
-			mesh->material->materialShaderData.ambient = XMFLOAT4(0.1f, 0.1f, 0.9f, 0.5f);
-
 			battleSystem.StartBattle();
 		}
 		else
@@ -213,10 +209,6 @@ void Player::EnterAstralMode()
 
 			GameUtils::PlayAudioOneShot("sword_sheathe.wav");
 			healthWidget->RemoveFromViewport();
-
-			mesh->SetShaderFilenames(ShaderItems::Default);
-			mesh->SetBlendState(BlendStates::null);
-			mesh->material->materialShaderData.ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
 		}
 
 		//toggle grid
@@ -649,6 +641,10 @@ bool Player::DestructibleCheck(Actor* hitActor)
 
 void Player::SpawnPhysicalRepresentationOfAstralPlayer()
 {
+	mesh->SetShaderFilenames(ShaderItems::Astral);
+	mesh->SetBlendState(BlendStates::Default);
+	mesh->material->materialShaderData.ambient = XMFLOAT4(0.1f, 0.1f, 0.9f, 0.5f);
+
 	playerBodyMesh = MeshComponent::system.Add("PlayerBody", nullptr, MeshComponent("char.fbx", "test.png"));
 	playerBodyMesh->SetPosition(GetPositionV());
 	playerBodyMesh->SetRotation(mesh->GetRotationV());
@@ -664,6 +660,10 @@ void Player::DestroyPlayerPhysicalBodyDoubleAndReturnPlayerPosition()
 
 	playerBodyMesh->Remove();
 	playerBodyMesh = nullptr;
+
+	mesh->SetShaderFilenames(ShaderItems::Default);
+	mesh->SetBlendState(BlendStates::null);
+	mesh->material->materialShaderData.ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
 }
 
 bool Player::AttackGridActorBasedOnNode()
