@@ -545,12 +545,6 @@
     <ClCompile Include="Code\Actors\Game\ConditionTrigger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Gameplay\Memories\AttackUpMemory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Gameplay\Memories\SermonKnowledgeMemory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Gameplay\Memory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -561,15 +555,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\Game\ExplodingObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Gameplay\Memories\SymbolMemories.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Gameplay\Memories\MergedMemories\TestMergedMemory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Gameplay\Memories\MergedMemories\MemoryMerger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\Game\GridMapPicker.cpp">
@@ -606,6 +591,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\Game\FusionUnits\DoubleAttackFusionUnit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Gameplay\FusionSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1120,12 +1108,6 @@
     <ClInclude Include="Code\Actors\Game\ExplodingObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Gameplay\Memories\MergedMemories\TestMergedMemory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Gameplay\Memories\MergedMemories\MemoryMerger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Gameplay\ForwardFace.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1166,6 +1148,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\FusionUnits\DoubleAttackFusionUnit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Gameplay\FusionSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
