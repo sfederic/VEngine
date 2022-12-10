@@ -146,9 +146,9 @@ void MeshComponent::SetTexture(const std::string newTextureName)
 	material->textureData.filename = newTextureName;
 }
 
-void MeshComponent::SetShaderFilenames(ShaderItem& shaderItem)
+void MeshComponent::SetShaderFilenames(ShaderItem* shaderItem)
 {
-	material->shaderData.shaderItemName = shaderItem.GetName();
+	material->shaderData.shaderItemName = shaderItem->GetName();
 }
 
 void MeshComponent::SetAmbientColour(const XMFLOAT4 ambientColour)

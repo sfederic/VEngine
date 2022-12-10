@@ -58,7 +58,7 @@ struct MeshComponent : SpatialComponent
 	void SetRastState(const std::string newRastStateName);
 	void SetBlendState(const std::string newBlendState);
 	void SetTexture(const std::string newTextureName);
-	void SetShaderFilenames(ShaderItem& shaderItem);
+	void SetShaderFilenames(ShaderItem* shaderItem);
 
 	void SetAmbientColour(const XMFLOAT4 ambientColour);
 	XMFLOAT4 GetAmbientColour();
