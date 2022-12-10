@@ -34,7 +34,6 @@
 #include "Gameplay/BattleCards/BattleCardSystem.h"
 #include "Gameplay/GameUtils.h"
 #include "Render/Material.h"
-
 #include "Actors/Game/AllyUnits/AttackUnit.h"
 #include "Gameplay/PlayerInputController.h"
 
@@ -154,7 +153,7 @@ void Player::RefreshCombatStats()
 
 void Player::BattleCleanup()
 {
-	isWeaponDrawn = false;
+	inAstralMode = false;
 	isPlayerTurn = false;
 
 	RefreshCombatStats();
@@ -174,7 +173,7 @@ void Player::BattleCleanup()
 void Player::SetupForBattle()
 {
 	isPlayerTurn = true;
-	isWeaponDrawn = true;
+	inAstralMode = true;
 
 	healthWidget->AddToViewport();
 
@@ -199,13 +198,13 @@ void Player::ToggleBattleGrid()
 {
 	if (Input::GetKeyUp(Keys::Space))
 	{
-		isWeaponDrawn = !isWeaponDrawn;
+		inAstralMode = !inAstralMode;
 
 		//toggle grid
 		auto grid = Grid::system.GetFirstActor();
 		if (grid)
 		{
-			switch (isWeaponDrawn)
+			switch (inAstralMode)
 			{
 			case true:
 				grid->lerpValue = Grid::LerpValue::LerpOut;
@@ -221,7 +220,7 @@ void Player::ToggleBattleGrid()
 			}
 		}
 
-		if (isWeaponDrawn)
+		if (inAstralMode)
 		{
 			GameUtils::PlayAudioOneShot("sword_hit.wav");
 			healthWidget->AddToViewport();
@@ -236,7 +235,7 @@ void Player::ToggleBattleGrid()
 		auto healthWidgets = UISystem::GetAllWidgetsOfType<HealthWidget>();
 		for (auto healthWidget : healthWidgets)
 		{
-			if (isWeaponDrawn)
+			if (inAstralMode)
 			{
 				healthWidget->AddToViewport();
 			}
@@ -305,7 +304,7 @@ void Player::PrimaryAction()
 			//@Todo: was causing weird raycast issues. Come back to this for smaller enemies and whatever else.
 			//if (!AttackGridActorBasedOnNode())
 			{
-				if (isWeaponDrawn)
+				if (inAstralMode)
 				{
 					GameUtils::PlayAudioOneShot("sword_miss.wav");
 				}
@@ -316,7 +315,7 @@ void Player::PrimaryAction()
 
 void Player::ToggleMemoryMenu()
 {
-	if (isWeaponDrawn || battleSystem.isBattleActive) return;
+	if (inAstralMode || battleSystem.isBattleActive) return;
 
 	if (Input::GetKeyUp(Keys::Enter))
 	{
@@ -524,7 +523,7 @@ void Player::DrawTurnBattleCardHand()
 
 bool Player::QuickTalkCheck(Actor* hitActor)
 {
-	if (!isWeaponDrawn&& !inConversation)
+	if (!inAstralMode && !inConversation)
 	{
 		auto npc = dynamic_cast<NPC*>(hitActor);
 		if (npc)
@@ -559,7 +558,7 @@ bool Player::CombatInteractCheck(Actor* actorToCheck)
 
 bool Player::InteractCheck(Actor* hitActor)
 {
-	if (!isWeaponDrawn && !inConversation)
+	if (!inAstralMode && !inConversation)
 	{
 		auto gridActor = dynamic_cast<GridActor*>(hitActor);
 		if (gridActor)
@@ -603,7 +602,7 @@ bool Player::InteractCheck(Actor* hitActor)
 
 bool Player::DestructibleCheck(Actor* hitActor)
 {
-	if (isWeaponDrawn && !inConversation)
+	if (inAstralMode && !inConversation)
 	{
 		auto npc = dynamic_cast<NPC*>(hitActor);
 		if (npc)

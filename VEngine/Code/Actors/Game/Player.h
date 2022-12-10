@@ -37,7 +37,7 @@ public:
 
 	bool inConversation = false;
 	bool inInteraction = false;
-	bool isWeaponDrawn = false;
+	bool inAstralMode = false;
 	bool memoryWidgetToggle = false;
 	bool isPlayerTurn = true;
 	bool gameOver = false;
