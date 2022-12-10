@@ -41,4 +41,5 @@ struct ShaderItems
 	inline static ShaderItem* SolidColour;
 	inline static ShaderItem* UI;
 	inline static ShaderItem* PostProcess;
+	inline static ShaderItem* Astral;
 };
