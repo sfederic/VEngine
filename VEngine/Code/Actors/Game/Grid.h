@@ -1,14 +1,16 @@
 #pragma once
+
 #include "../Actor.h"
 #include "../ActorSystem.h"
 #include "Gameplay/GridNode.h"
 
 struct InstanceMeshComponent;
 class Unit;
+class PlayerUnit;
 
 //Actor that holds all the traversable nodes in the level.
 //Grid needs to always be at (0, 0, 0) in world because of how rows & nodes are created at index.
-struct Grid : Actor
+struct Grid : public Actor
 {
 	ACTOR_SYSTEM(Grid);
 
@@ -66,6 +68,9 @@ struct Grid : Actor
 	//Returns Unit currently at GridNode x and y index (only returns first found Unit)
 	Unit* GetUnitAtNode(GridNode* node);
 	Unit* GetUnitAtNodeIndex(int xIndex, int yIndex);
+
+	//For PlayerUnit fusion battle mechanic.
+	std::vector<PlayerUnit*> GetAllPlayerUnitsAtNode(GridNode* node);
 
 	void ResetAllNodes();
 	void LerpInNodes(float deltaTime);

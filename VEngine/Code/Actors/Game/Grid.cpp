@@ -381,6 +381,19 @@ Unit* Grid::GetUnitAtNodeIndex(int xIndex, int yIndex)
     return nullptr;
 }
 
+std::vector<PlayerUnit*> Grid::GetAllPlayerUnitsAtNode(GridNode* node)
+{
+    std::vector<PlayerUnit*> playerUnits;
+    for (auto playerUnit : World::GetAllActorsOfTypeInWorld<PlayerUnit>())
+    {
+        if (node->Equals(playerUnit->xIndex, playerUnit->yIndex))
+        {
+            playerUnits.push_back(playerUnit);
+        }
+    }
+    return playerUnits;
+}
+
 void Grid::ResetAllNodes()
 {
     for (auto& row : rows)

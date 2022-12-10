@@ -39,6 +39,8 @@ void PlayerUnit::Tick(float deltaTime)
 	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotSpeed));
 
 	Attack();
+
+	FuseWithAllyUnit();
 }
 
 void PlayerUnit::ControllerInput(float deltaTime)
@@ -197,6 +199,14 @@ void PlayerUnit::RotationInput(float deltaTime)
 			constexpr float angle = XMConvertToRadians(-90.f);
 			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), angle));
 		}
+	}
+}
+
+void PlayerUnit::FuseWithAllyUnit()
+{
+	if (Input::GetKeyUp(Keys::Up) && !isMainPlayer)
+	{
+		auto playerUnits = Grid::system.GetFirstActor()->GetAllPlayerUnitsAtNode(GetCurrentNode());
 	}
 }
 
