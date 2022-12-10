@@ -214,6 +214,9 @@ void PlayerUnit::FuseWithAllyUnit()
 			{
 				fusedUnit->SetTransform(playerUnits[0]->GetTransform());
 
+				GameUtils::SetActiveCamera(fusedUnit->camera);
+				GameUtils::SetActiveCameraTarget(fusedUnit);
+
 				playerUnits[0]->GetActorSystem()->RemoveInterfaceActor(playerUnits[0]);
 				playerUnits[1]->GetActorSystem()->RemoveInterfaceActor(playerUnits[1]);
 			}
