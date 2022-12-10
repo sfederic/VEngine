@@ -200,6 +200,7 @@ public:
 
 	virtual void Cleanup() override
 	{
+		//@Todo: this isn't correct. Looks like old code.
 		actors.clear();
 	}
 
