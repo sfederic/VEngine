@@ -32,7 +32,7 @@ void ShaderSystem::Init()
     ShaderItems::SolidColour = new ShaderItem("SolidColour", L"Default_vs.cso", L"SolidColour_ps.cso");
     ShaderItems::UI = new ShaderItem("UI", L"UI_vs.cso", L"TextureClip_ps.cso");
     ShaderItems::PostProcess = new ShaderItem("PostProcess", L"PostProcess_vs.cso", L"PostProcess_ps.cso");
-    ShaderItems::Astral = new ShaderItem("Astral", L"Default_vs.cso", L"DolidClour_ps.cso");
+    ShaderItems::Astral = new ShaderItem("Astral", L"Default_vs.cso", L"SolidColour_ps.cso");
 }
 
 void ShaderSystem::Tick()
