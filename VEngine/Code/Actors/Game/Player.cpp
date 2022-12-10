@@ -46,6 +46,8 @@ Player::Player()
 	rootComponent->AddChild(mesh);
 
 	dialogueComponent = DialogueComponent::system.Add("Dialogue", this);
+
+	isMainPlayer = true;
 }
 
 void Player::Start()
@@ -120,8 +122,6 @@ void Player::Tick(float deltaTime)
 			return;
 		}
 	}
-
-	ActivateGridMapPicker();
 }
 
 Properties Player::GetProps()
@@ -436,24 +436,6 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 		}
 
 		previousHitTransparentActors.clear();
-	}
-}
-
-void Player::ActivateGridMapPicker()
-{
-	if (Input::GetKeyUp(Keys::I))
-	{
-		Transform transform;
-		transform.position = GetPosition();
-		transform.rotation = GetRotation();
-		auto gridMapPicker = GridMapPicker::system.Add(transform);
-
-		gridMapPicker->camera->targetActor = gridMapPicker;
-		GameUtils::SetActiveCamera(gridMapPicker->camera);
-
-		Grid::system.GetFirstActor()->SetActive(true);
-
-		SetTickEnabled(false);
 	}
 }
 

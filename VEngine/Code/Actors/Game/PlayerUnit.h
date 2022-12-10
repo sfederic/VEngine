@@ -26,6 +26,8 @@ public:
 	bool CheckAndExpendActionPoints(int num);
 	void InflictDamage(int damage);
 
+	void ToggleGridMapPicker(bool& gridPickerActive);
+
 protected:
 	void PreviewMovementNodesDuringBattle();
 
@@ -51,4 +53,6 @@ public:
 
 	int xIndex = -1;
 	int yIndex = -1;
+
+	bool isMainPlayer = false;
 };

@@ -15,6 +15,7 @@ public:
 
 private:
 	PlayerUnit* playerUnitToControl = nullptr;
+	bool gridMapPickerActive = false;
 };
 
 extern PlayerInputController playerInputController;

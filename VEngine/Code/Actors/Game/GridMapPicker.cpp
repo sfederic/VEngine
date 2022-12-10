@@ -42,8 +42,6 @@ void GridMapPicker::Tick(float deltaTime)
 	RotationInput();
 
 	MovementInput();
-
-	ReenablePlayer();
 }
 
 Properties GridMapPicker::GetProps()
@@ -143,23 +141,14 @@ void GridMapPicker::DisplayTrapNodeInformation()
 
 void GridMapPicker::ReenablePlayer()
 {
-	if (Input::GetKeyUp(Keys::I))
-	{
-		if (firstTimeActivated)
-		{
-			firstTimeActivated = false;
-			return;
-		}
+	gridMapPickerSelectionInfoWidget->RemoveFromViewport();
+	gridMapPickerSelectionInfoWidget->Destroy();
 
-		gridMapPickerSelectionInfoWidget->RemoveFromViewport();
-		gridMapPickerSelectionInfoWidget->Destroy();
+	auto player = Player::system.GetFirstActor();
+	GameUtils::SetActiveCamera(player->camera);
+	player->SetTickEnabled(true);
 
-		auto player = Player::system.GetFirstActor();
-		GameUtils::SetActiveCamera(player->camera);
-		player->SetTickEnabled(true);
+	Grid::system.GetFirstActor()->SetActive(false);
 
-		Grid::system.GetFirstActor()->SetActive(false);
-
-		Destroy();
-	}
+	Destroy();
 }

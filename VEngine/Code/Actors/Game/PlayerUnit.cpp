@@ -5,11 +5,13 @@
 #include "Components/MeshComponent.h"
 #include "Components/CameraComponent.h"
 #include "Actors/Game/Grid.h"
+#include "Actors/Game/GridMapPicker.h"
 #include "Actors/Game/FenceActor.h"
 #include "Actors/Game/Unit.h"
 #include "Physics/Raycast.h"
 #include "Gameplay/BattleSystem.h"
 #include "Gameplay/GridNode.h"
+#include "Gameplay/GameUtils.h"
 #include "UI/Game/PlayerActionBarWidget.h"
 
 PlayerUnit::PlayerUnit()
@@ -211,6 +213,33 @@ void PlayerUnit::Attack()
 		if (unit)
 		{
 			unit->InflictDamage(attackPoints);
+		}
+	}
+}
+
+void PlayerUnit::ToggleGridMapPicker(bool& gridPickerActive)
+{
+	if (Input::GetKeyUp(Keys::I))
+	{
+		gridPickerActive = !gridPickerActive;
+
+		if (gridPickerActive)
+		{
+			Transform transform;
+			transform.position = GetPosition();
+			transform.rotation = GetRotation();
+			auto gridMapPicker = GridMapPicker::system.Add(transform);
+
+			gridMapPicker->camera->targetActor = gridMapPicker;
+			GameUtils::SetActiveCamera(gridMapPicker->camera);
+
+			Grid::system.GetFirstActor()->SetActive(true);
+
+			SetTickEnabled(false);
+		}
+		else
+		{
+			GridMapPicker::system.GetFirstActor()->ReenablePlayer();
 		}
 	}
 }

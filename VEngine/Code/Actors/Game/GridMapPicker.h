@@ -16,6 +16,8 @@ public:
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 
+	void ReenablePlayer();
+
 private:
 	void RotationInput();
 	void MovementInput();
@@ -25,8 +27,6 @@ private:
 	//If picker hovers over a node with a linked trap, display that info.
 	void DisplayTrapNodeInformation();
 
-	void ReenablePlayer();
-
 public:
 	CameraComponent* camera = nullptr;
 
@@ -34,8 +34,4 @@ private:
 	XMVECTOR nextRotation = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 
 	GridMapPickerSelectionInfoWidget* gridMapPickerSelectionInfoWidget = nullptr;
-
-	//This is a rough bool to get around starting input for this actor in player and
-	//the GetKey call there also hitting the deactivate code in this class.
-	bool firstTimeActivated = true;
 };

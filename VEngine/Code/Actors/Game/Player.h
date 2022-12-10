@@ -87,8 +87,6 @@ private:
 
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
-	void ActivateGridMapPicker();
-
 	void SwitchInputBetweenAllyUnitsAndPlayer();
 
 	void DrawBattleCard();

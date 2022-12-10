@@ -15,6 +15,11 @@ void PlayerInputController::Tick(float deltaTime)
 		if (playerUnitToControl)
 		{
 			playerUnitToControl->ControllerInput(deltaTime);
+
+			if (playerUnitToControl->isMainPlayer)
+			{
+				playerUnitToControl->ToggleGridMapPicker(gridMapPickerActive);
+			}
 		}
 	}
 }
