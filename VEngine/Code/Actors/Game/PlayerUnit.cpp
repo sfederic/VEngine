@@ -12,6 +12,7 @@
 #include "Gameplay/BattleSystem.h"
 #include "Gameplay/GridNode.h"
 #include "Gameplay/GameUtils.h"
+#include "Gameplay/FusionSystem.h"
 #include "UI/Game/PlayerActionBarWidget.h"
 
 PlayerUnit::PlayerUnit()
@@ -207,6 +208,18 @@ void PlayerUnit::FuseWithAllyUnit()
 	if (Input::GetKeyUp(Keys::Up) && !isMainPlayer)
 	{
 		auto playerUnits = Grid::system.GetFirstActor()->GetAllPlayerUnitsAtNode(GetCurrentNode());
+		if (playerUnits.size() > 1)
+		{
+			//Note using the ActorSystem here, which returns the Actor's typename.
+			auto fusedUnit = FusionSystem::Fuse(playerUnits[0]->GetActorSystem()->GetName(), playerUnits[1]->GetActorSystem()->GetName());
+			if (fusedUnit)
+			{
+				fusedUnit->SetTransform(playerUnits[0]->GetTransform());
+
+				playerUnits[0]->GetActorSystem()->RemoveInterfaceActor(playerUnits[0]);
+				playerUnits[1]->GetActorSystem()->RemoveInterfaceActor(playerUnits[1]);
+			}
+		}
 	}
 }
 
