@@ -21,6 +21,10 @@ public:
 	virtual Actor* SpawnActor(Transform transform) = 0;
 	virtual Actor* FindActorByName(std::string actorName) = 0;
 	virtual uint32_t GetNumActors() = 0;
+
+	//Destroys an actor through its linked ActorSystem when its base class does not ACTOR_SYSTEM() defined.
+	virtual void RemoveInterfaceActor(Actor* actor) = 0;
+
 	virtual void CreateAllActorComponents() = 0;
 	virtual void Serialise(Serialiser& s) = 0;
 	virtual void SerialiseBinary(BinarySerialiser& s) = 0;

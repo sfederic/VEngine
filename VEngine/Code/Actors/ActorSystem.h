@@ -66,6 +66,11 @@ public:
 		editor->ClearProperties();
 	}
 
+	virtual void RemoveInterfaceActor(Actor* actor) override
+	{
+		Remove(actor->GetSystemIndex());
+	}
+
 	void RemoveAllActors()
 	{
 		for (int i = 0; i < actors.size(); i++)
