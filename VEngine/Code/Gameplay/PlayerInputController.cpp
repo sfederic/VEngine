@@ -5,6 +5,7 @@
 #include "Components/CameraComponent.h"
 #include "Actors/Game/PlayerUnit.h"
 #include "Gameplay/GameUtils.h"
+#include "Gameplay/BattleSystem.h"
 
 PlayerInputController playerInputController;
 
@@ -14,6 +15,11 @@ void PlayerInputController::Tick(float deltaTime)
 	{
 		if (playerUnitToControl)
 		{
+			if (battleSystem.isBattleActive && !battleSystem.isPlayerTurn)
+			{
+				return;
+			}
+
 			playerUnitToControl->ControllerInput(deltaTime);
 
 			if (playerUnitToControl->isMainPlayer)
