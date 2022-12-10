@@ -73,9 +73,9 @@ public:
 
 	void RemoveAllActors()
 	{
-		for (int i = 0; i < actors.size(); i++)
+		for (int i = actors.size() - 1; i > -1; i--)
 		{
-			Remove(i);
+			Remove(actors[i]->GetSystemIndex());
 		}
 	}
 
