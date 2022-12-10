@@ -93,6 +93,7 @@ private:
 	void SwitchInputBetweenAllyUnitsAndPlayer();
 
 	void DrawBattleCard();
+	void ActivateFirstBattleCardInHand();
 
 	std::vector<PlayerUnit*> activePlayerUnits;
 	int activePlayerUnitIndex = 0;

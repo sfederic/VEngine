@@ -268,6 +268,8 @@ void Player::PrimaryAction()
 		}
 	}
 
+	ActivateFirstBattleCardInHand();
+
 	if (Input::GetKeyUp(Keys::Down))
 	{
 		if (UISystem::memoryRecalledWidget->IsInViewport() 
@@ -517,6 +519,14 @@ void Player::DrawBattleCard()
 			auto card = BattleCardSystem::Get().DrawCardAtRandom();
 			battleCardsInHand.push_back(card);
 		}
+	}
+}
+
+void Player::ActivateFirstBattleCardInHand()
+{
+	if (Input::GetKeyUp(Keys::Up))
+	{
+		battleCardsInHand.front()->Activate();
 	}
 }
 

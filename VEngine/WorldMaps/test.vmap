@@ -41,9 +41,9 @@ MeshActor
  Position
 2 -0.5 2
  Rotation
-0 0 0 1
+0.5 -0.5 -0.5 -0.5
  Scale
-5 1 5
+3.00002 3.00002 1
 Name
 MeshActor0
 UID
@@ -79,7 +79,7 @@ PointLightActor0
 UID
 2829987433
 next
-ShieldUnit
+Unit
 1
  Enabled
 1
@@ -98,7 +98,7 @@ fight
 Destruct
 1
 Health
-5
+1
 Inspect
 1
 Interact
@@ -106,17 +106,15 @@ Interact
 Interact Text
 
 Move Points
-2
+1
 Move Speed
 3
 Name
-ShieldUnit0
+Unit0
 Obstacle
 0
-Skill
-
 UID
-3749591652
+3138431493
 actorToFocusOn
 
 deathText
@@ -130,7 +128,7 @@ numOfAttacks
 next
 MemoryComponent
 2
-3749591652
+3138431493
 Memory
  Enabled
 1
@@ -139,7 +137,7 @@ Add On Interact
 Memory Name
 
 next
-3749591652
+3138431493
 MemoryOnDeath
  Enabled
 1
@@ -157,9 +155,9 @@ Mesh
  Pos
 2 -0.5 2
  Rot
-0 0 0 1
+0.5 -0.5 -0.5 -0.5
  Scale
-5 1 5
+3.00002 3.00002 1
 Casts Shadow
 1
 Grid Obstacle
@@ -193,7 +191,7 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-node.fbx
+plane.fbx
 Static
 1
 Trans. Occlude
@@ -248,7 +246,7 @@ Static
 Trans. Occlude
 0
 next
-3749591652
+3138431493
 Mesh
  Enabled
 1
@@ -321,7 +319,7 @@ InstanceMeshComponent
 2589114661
 NodeMesh
  Enabled
-0
+1
  Pos
 0 0 0
  Rot
@@ -389,7 +387,7 @@ Dialogue
 File
 
 next
-3749591652
+3138431493
 Dialogue
  Enabled
 1
