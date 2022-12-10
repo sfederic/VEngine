@@ -294,7 +294,6 @@ void Player::PrimaryAction()
 			ray.hitActor = ray.hitActors.front();
 			Log("Player interact: %s", ray.hitActor->GetName().c_str());
 
-			if (DestructibleCheck(ray.hitActor)) { return; }
 			if (DialogueCheck(ray.hitActor)) {}
 			else if (QuickTalkCheck(ray.hitActor)) {}
 			else if (InteractCheck(ray.hitActor)) {}
