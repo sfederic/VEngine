@@ -22,6 +22,7 @@ public:
 
 	void CheckNextMoveNode(XMVECTOR previousPos);
 	GridNode* GetCurrentNode();
+	void SetGridIndices();
 
 	bool CheckAndExpendActionPoints(int num);
 	void InflictDamage(int damage);

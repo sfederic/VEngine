@@ -28,8 +28,7 @@ void PlayerUnit::Start()
 	nextPos = GetPositionV();
 	nextRot = GetRotationV();
 
-	xIndex = std::round(GetPosition().x);
-	yIndex = std::round(GetPosition().z);
+	SetGridIndices();
 
 	camera->targetActor = this;
 }
@@ -38,16 +37,16 @@ void PlayerUnit::Tick(float deltaTime)
 {
 	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, moveSpeed));
 	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotSpeed));
-
-	Attack();
-
-	FuseWithAllyUnit();
 }
 
 void PlayerUnit::ControllerInput(float deltaTime)
 {
 	MovementInput(deltaTime);
 	RotationInput(deltaTime);
+
+	Attack();
+
+	FuseWithAllyUnit();
 }
 
 void PlayerUnit::CheckNextMoveNode(XMVECTOR previousPos)
@@ -157,8 +156,7 @@ void PlayerUnit::MovementInput(float deltaTime)
 {
 	if (CheckIfMovementAndRotationStopped())
 	{
-		xIndex = std::round(GetPosition().x);
-		yIndex = std::round(GetPosition().z);
+		SetGridIndices();
 
 		XMVECTOR previousPos = nextPos;
 
@@ -294,4 +292,10 @@ GridNode* PlayerUnit::GetCurrentNode()
 	auto grid = Grid::system.GetFirstActor();
 	auto node = grid->GetNode(xIndex, yIndex);
 	return node;
+}
+
+void PlayerUnit::SetGridIndices()
+{
+	xIndex = std::lroundf(GetPosition().x);
+	yIndex = std::lroundf(GetPosition().z);
 }
