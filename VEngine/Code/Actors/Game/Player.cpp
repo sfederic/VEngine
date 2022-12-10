@@ -159,7 +159,11 @@ void Player::BattleCleanup()
 
 	RefreshCombatStats();
 
-	AttackUnit::system.Cleanup();
+	playerInputController.SetPlayerUnitToControl(this);
+
+	battleCardsInHand.clear();
+
+	AttackUnit::system.RemoveAllActors();
 
 	healthWidget->RemoveFromViewport();
 
