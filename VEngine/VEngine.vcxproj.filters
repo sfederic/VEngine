@@ -605,6 +605,9 @@
     <ClCompile Include="Code\Gameplay\BattleCards\SummonCards.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\Game\FusionUnits\DoubleAttackFusionUnit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -1160,6 +1163,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Layout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\FusionUnits\DoubleAttackFusionUnit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
