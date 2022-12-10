@@ -92,6 +92,10 @@ private:
 	void DrawBattleCard();
 	void ActivateFirstBattleCardInHand();
 
+	void SpawnPhysicalRepresentationOfAstralPlayer();
+	void DestroyPlayerPhysicalBodyDoubleAndReturnPlayerPosition();
+	MeshComponent* playerBodyMesh = nullptr;
+
 	std::vector<PlayerUnit*> activePlayerUnits;
 	int activePlayerUnitIndex = 0;
 	const static int battleCardHandSizeLimit = 5;

@@ -194,6 +194,8 @@ void Player::EnterAstralMode()
 
 		if (inAstralMode)
 		{
+			SpawnPhysicalRepresentationOfAstralPlayer();
+
 			GameUtils::PlayAudioOneShot("sword_hit.wav");
 			healthWidget->AddToViewport();
 
@@ -203,6 +205,8 @@ void Player::EnterAstralMode()
 		}
 		else
 		{
+			DestroyPlayerPhysicalBodyDoubleAndReturnPlayerPosition();
+
 			GameUtils::PlayAudioOneShot("sword_sheathe.wav");
 			healthWidget->RemoveFromViewport();
 
@@ -637,6 +641,25 @@ bool Player::DestructibleCheck(Actor* hitActor)
 	}
 
 	return false;
+}
+
+void Player::SpawnPhysicalRepresentationOfAstralPlayer()
+{
+	playerBodyMesh = MeshComponent::system.Add("PlayerBody", nullptr, MeshComponent("char.fbx", "test.png"));
+	playerBodyMesh->SetPosition(GetPositionV());
+	playerBodyMesh->SetRotation(mesh->GetRotationV());
+}
+
+void Player::DestroyPlayerPhysicalBodyDoubleAndReturnPlayerPosition()
+{
+	SetPosition(playerBodyMesh->GetPositionV());
+	nextPos = GetPositionV();
+
+	SetRotation(playerBodyMesh->GetRotationV());
+	nextRot = GetRotationV();
+
+	playerBodyMesh->Remove();
+	playerBodyMesh = nullptr;
 }
 
 bool Player::AttackGridActorBasedOnNode()
