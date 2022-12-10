@@ -82,7 +82,6 @@ private:
 	bool InteractCheck(Actor* hitActor);
 	bool DestructibleCheck(Actor* hitActor);
 	bool AttackGridActorBasedOnNode();
-	void PushbackObject();
 
 	bool CheckAttackPositionAgainstUnitDirection(Unit* unit);
 

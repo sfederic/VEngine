@@ -88,21 +88,12 @@ void Player::Tick(float deltaTime)
 	}
 
 	DrawBattleCard();
-
 	PrimaryAction();
 	SwitchInputBetweenAllyUnitsAndPlayer();
-
-	if (Input::GetKeyUp(Keys::O))
-	{
-		PushbackObject();
-	}
-
 	EnterAstralMode();
-
 	ToggleMemoryMenu();
 
 	LerpPlayerCameraFOV(deltaTime);
-
 	MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
 	dialogueComponent->SetPosition(GetHomogeneousPositionV());
@@ -683,27 +674,6 @@ bool Player::AttackGridActorBasedOnNode()
 	}
 
 	return false;
-}
-
-void Player::PushbackObject()
-{
-	Ray ray(this);
-	XMVECTOR end = mesh->GetWorldPositionV() + mesh->GetForwardVectorV();
-	if (Raycast(ray, mesh->GetWorldPositionV(), end))
-	{
-		Actor* hitActor = ray.hitActor;
-		auto gridActor = dynamic_cast<GridActor*>(hitActor);
-		if (gridActor == nullptr)
-		{
-			Log("Cannot pushback a non GridActor. Actor [%s].", hitActor->GetName().c_str());
-			return;
-		}
-
-		if (!gridActor->Pushback(mesh->GetForwardVectorV()))
-		{
-			Log("Actor [%s] pushedback but did not hit anything.", gridActor->GetName().c_str());
-		}
-	}
 }
 
 bool Player::CheckAttackPositionAgainstUnitDirection(Unit* unit)
