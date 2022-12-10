@@ -39,7 +39,6 @@ public:
 	bool inInteraction = false;
 	bool inAstralMode = false;
 	bool memoryWidgetToggle = false;
-	bool isPlayerTurn = true;
 	bool gameOver = false;
 
 	Player();

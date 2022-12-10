@@ -102,7 +102,8 @@ void BattleSystem::MoveToNextTurn()
 	{
 		Log("Players turn");
 
-		player->isPlayerTurn = true;
+		battleSystem.isPlayerTurn = true;
+
 		player->RefreshCombatStats();
 		player->DrawTurnBattleCardHand();
 
@@ -116,7 +117,7 @@ void BattleSystem::MoveToNextTurn()
 		return;
 	}
 
-	player->isPlayerTurn = false;
+	battleSystem.isPlayerTurn = false;
 
 	//next enemy turn
 	auto unit = activeBattleUnits[currentUnitTurnIndex];

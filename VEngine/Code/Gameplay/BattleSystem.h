@@ -13,6 +13,7 @@ struct BattleSystem : System
 	std::vector<Unit*> activeBattleUnits;
 
 	bool isBattleActive = false;
+	bool isPlayerTurn = true;
 
 	int playerActionPoints = 10;
 	PlayerActionBarWidget* actionBarWidget = nullptr;

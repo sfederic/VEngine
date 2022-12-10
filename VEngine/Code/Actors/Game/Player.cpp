@@ -112,7 +112,7 @@ void Player::Tick(float deltaTime)
 	if (!inConversation && !inInteraction)
 	{
 		//Skip movement if not player's turn during combat
-		if (battleSystem.isBattleActive && !isPlayerTurn)
+		if (battleSystem.isBattleActive && !battleSystem.isPlayerTurn)
 		{
 			return;
 		}
@@ -146,7 +146,7 @@ void Player::RefreshCombatStats()
 void Player::BattleCleanup()
 {
 	inAstralMode = false;
-	isPlayerTurn = false;
+	battleSystem.isPlayerTurn = false;
 
 	RefreshCombatStats();
 
@@ -166,7 +166,7 @@ void Player::BattleCleanup()
 
 void Player::SetupForBattle()
 {
-	isPlayerTurn = true;
+	battleSystem.isPlayerTurn = true;
 	inAstralMode = true;
 
 	healthWidget->AddToViewport();
@@ -250,7 +250,7 @@ void Player::EnterAstralMode()
 void Player::PrimaryAction()
 {
 	//End turn input
-	if (isPlayerTurn)
+	if (battleSystem.isPlayerTurn)
 	{
 		if (battleSystem.isBattleActive && Input::GetKeyUp(Keys::Enter))
 		{
