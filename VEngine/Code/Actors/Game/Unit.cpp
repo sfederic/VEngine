@@ -345,7 +345,6 @@ bool Unit::Attack()
 	//Get nodes based on attack range
 	std::vector<GridNode*> attackNodes;
 	std::vector<GridNode*> closedNodes;
-	grid->GetNeighbouringNodes(standingNode, attackNodes);
 
 	for (int rangeIndex = 0; rangeIndex < attackRange; rangeIndex++)
 	{
