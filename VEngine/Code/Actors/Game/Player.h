@@ -55,6 +55,12 @@ public:
 	{
 		static_assert(std::is_base_of<PlayerUnit, AllyUnitType>() == true);
 
+		if (activePlayerUnits.size() == 3)
+		{
+			Log("Cannot summon any more ally units. Max is 3.");
+			return;
+		}
+
 		Transform transform;
 		XMStoreFloat3(&transform.position, GetPositionV() + GetForwardVectorV());
 		transform.rotation = mesh->GetRotation();

@@ -52,8 +52,6 @@ void Player::Start()
 {
 	__super::Start();
 
-	activePlayerUnits.push_back(this);
-
 	nextCameraFOV = camera->FOV;
 
 	//Setup widgets
