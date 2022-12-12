@@ -117,6 +117,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Actors\Game\AllyUnits\ShootAttackUnit.cpp" />
     <ClCompile Include="Code\Actors\Game\AllyUnits\SurroundAttackUnit.cpp" />
     <ClCompile Include="Code\Actors\Game\FusionUnits\DoubleAttackFusionUnit.cpp" />
     <ClCompile Include="Code\Gameplay\BattleCards\BattleCardSystem.cpp" />
@@ -276,6 +277,7 @@
     <ClCompile Include="Code\Gameplay\PlayerInputController.cpp" />
     <ClCompile Include="Code\Actors\Game\PlayerUnit.cpp" />
     <ClCompile Include="Code\UI\Game\BattleCardHandWidget.cpp" />
+    <ClInclude Include="Code\Actors\Game\AllyUnits\ShootAttackUnit.h" />
     <ClInclude Include="Code\Actors\Game\AllyUnits\SurroundAttackUnit.h" />
     <ClInclude Include="Code\Actors\Game\FusionUnits\DoubleAttackFusionUnit.h" />
     <ClInclude Include="Code\Gameplay\BattleCards\BattleCardSystem.h" />
