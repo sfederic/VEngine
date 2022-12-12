@@ -37,7 +37,7 @@ struct SurroundAttackUnitSummonCard : BattleCard
 
 struct ShootAttackUnitSummonCard : BattleCard
 {
-	ShootAttackUnitSummonCard() : BattleCard(L"SurroundAttackUnitSummonCard", L"Summon an ShootAttackUnit", "UI/gun.png")
+	ShootAttackUnitSummonCard() : BattleCard(L"ShootAttackUnitSummonCard", L"Summon an ShootAttackUnit", "UI/gun.png")
 	{
 		BattleCardSystem::Get().AddCard(this);
 	}
