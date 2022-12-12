@@ -236,6 +236,13 @@ void PlayerUnit::Attack()
 	}
 }
 
+void PlayerUnit::GetGridIndices(int& x, int& y)
+{
+	auto pos = GetPosition();
+	x = std::lroundf(pos.x);
+	y = std::lroundf(pos.z);
+}
+
 void PlayerUnit::ToggleGridMapPicker(bool& gridPickerActive)
 {
 	if (Input::GetKeyUp(Keys::I))

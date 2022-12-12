@@ -42,6 +42,8 @@ protected:
 private:
 	void Attack();
 
+	void GetGridIndices(int& x, int& y);
+
 public:
 	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
