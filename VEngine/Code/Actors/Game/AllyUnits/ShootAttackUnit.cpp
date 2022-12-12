@@ -14,20 +14,23 @@ void ShootAttackUnit::AttackPattern()
 {
 	auto forward = mesh->GetForwardVector();
 
-	int xOffset = forward.x;
-	int yOffset = forward.z;
+	int xOffset = std::lroundf(forward.x);
+	int yOffset = std::lroundf(forward.z);
 
 	Unit* hitUnit = nullptr;
+
+	int currentAttackX = xIndex;
+	int currentAttackY = yIndex;
 
 	const int shootRange = 5;
 	for (int i = 0; i < shootRange; i++)
 	{
 		auto grid = Grid::system.GetFirstActor();
 
-		int x = xIndex + xOffset;
-		int y = yIndex + yOffset;
+		currentAttackX += xOffset;
+		currentAttackY += yOffset;
 
-		hitUnit = grid->GetUnitAtNodeIndex(x, y);
+		hitUnit = grid->GetUnitAtNodeIndex(currentAttackX, currentAttackY);
 		if (hitUnit)
 		{
 			hitUnit->InflictDamage(attackPoints);
