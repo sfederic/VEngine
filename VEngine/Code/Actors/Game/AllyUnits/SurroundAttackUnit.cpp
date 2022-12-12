@@ -18,7 +18,7 @@ void SurroundAttackUnit::AttackPattern()
 	auto nodes = grid->GetNeighbouringActiveAndInactiveNodesForceful(GetCurrentNode());
 	for (auto node : nodes)
 	{
-		GameUtils::SpawnSpriteSheet("explosion.png", node->worldPosition, false, 4, 4);
+		GameUtils::SpawnSpriteSheet("Sprites/explosion.png", node->worldPosition, false, 4, 4);
 	}
 
 	for (auto unit : grid->GetAllUnitsFromNodes(nodes))
