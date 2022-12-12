@@ -152,7 +152,15 @@ void Player::BattleCleanup()
 
 	battleCardsInHand.clear();
 
-	AttackUnit::system.RemoveAllActors();
+	auto playerUnits = World::GetAllActorsOfTypeInWorld<PlayerUnit>();
+	for (auto playerUnit : playerUnits)
+	{
+		if (!playerUnit->isMainPlayer)
+		{
+			auto as = playerUnit->GetActorSystem();
+			as->RemoveInterfaceActor(playerUnit);
+		}
+	}
 
 	healthWidget->RemoveFromViewport();
 
