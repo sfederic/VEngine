@@ -3,13 +3,30 @@
 #include "BattleCardSystem.h"
 #include "Actors/Game/Player.h"
 
+#include "Actors/Game/AllyUnits/AttackUnit.h"
 #include "Actors/Game/AllyUnits/SurroundAttackUnit.h"
+#include "Actors/Game/AllyUnits/ShootAttackUnit.h"
 
-struct TestSummonCard : BattleCard
+struct AttackUnitSummonCard : BattleCard
 {
-	TestSummonCard() : BattleCard(L"TestSummonCard", L"Summons a test monster", "UI/monster_icon.jpg")
+	AttackUnitSummonCard() : BattleCard(L"AttackUnitSummonCard", L"Summon an AttackUnit", "UI/monster_icon.jpg")
 	{
-		cost = 2;
+		cost = 1;
+		BattleCardSystem::Get().AddCard(this);
+	}
+
+	virtual void Activate() override
+	{
+		__super::Activate();
+		Player::system.GetFirstActor()->SummonAllyUnit<AttackUnit>();
+	}
+}attackUnitSummonCard;
+
+struct SurroundAttackUnitSummonCard : BattleCard
+{
+	SurroundAttackUnitSummonCard() : BattleCard(L"SurroundAttackUnitSummonCard", L"Summon an SurroundAttackUnit", "UI/monster_icon.jpg")
+	{
+		cost = 1;
 		BattleCardSystem::Get().AddCard(this);
 	}
 
@@ -18,4 +35,19 @@ struct TestSummonCard : BattleCard
 		__super::Activate();
 		Player::system.GetFirstActor()->SummonAllyUnit<SurroundAttackUnit>();
 	}
-}testSummonCard;
+}surroundAttackUnitSummonCard;
+
+struct ShootAttackUnitSummonCard : BattleCard
+{
+	ShootAttackUnitSummonCard() : BattleCard(L"SurroundAttackUnitSummonCard", L"Summon an ShootAttackUnit", "UI/monster_icon.jpg")
+	{
+		cost = 1;
+		BattleCardSystem::Get().AddCard(this);
+	}
+
+	virtual void Activate() override
+	{
+		__super::Activate();
+		Player::system.GetFirstActor()->SummonAllyUnit<ShootAttackUnit>();
+	}
+}shootAttackUnitSummonCard;
