@@ -8,6 +8,9 @@ SurroundAttackUnit::SurroundAttackUnit()
 	rootComponent->AddChild(mesh);
 }
 
-void SurroundAttackUnit::AttackPattern()
+std::vector<Unit*> SurroundAttackUnit::AttackPattern()
 {
+	std::vector<Unit*> hitUnits;
+	
+	return hitUnits;
 }

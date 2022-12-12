@@ -1,11 +1,11 @@
 #pragma once
 
 #include "../Actor.h"
-#include "../ActorSystem.h"
 
 struct MeshComponent;
 struct CameraComponent;
 struct GridNode;
+class Unit;
 
 //Base class for all player controllable units.
 //Should never be instantiated, no need for ACTOR_SYSTEM.
@@ -23,7 +23,8 @@ public:
 	void CheckNextMoveNode(XMVECTOR previousPos);
 	GridNode* GetCurrentNode();
 	void SetGridIndices();
-
+	
+	virtual std::vector<Unit*> AttackPattern() = 0;
 	bool CheckAndExpendActionPoints(int num);
 	void InflictDamage(int damage);
 

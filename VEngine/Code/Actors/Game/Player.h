@@ -1,6 +1,7 @@
 #pragma once
 
 #include "PlayerUnit.h"
+#include "Actors/ActorSystem.h"
 #include "Gameplay/BattleEnums.h"
 
 struct DialogueComponent;
@@ -46,6 +47,9 @@ public:
 	virtual void End() override;
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
+
+	//Player doesn't use this function;
+	virtual std::vector<Unit*> AttackPattern() { return std::vector<Unit*>(); }
 
 	//called at every battle turn end
 	void RefreshCombatStats();

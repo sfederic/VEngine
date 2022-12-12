@@ -228,13 +228,8 @@ void PlayerUnit::Attack()
 {
 	if (Input::GetKeyUp(Keys::Down))
 	{
-		const auto facingPosition = GetPositionV() + mesh->GetForwardVectorV();
-
-		const int x = std::lroundf(facingPosition.m128_f32[0]);
-		const int y = std::lroundf(facingPosition.m128_f32[2]);
-
-		auto unit = Grid::system.GetFirstActor()->GetUnitAtNodeIndex(x, y);
-		if (unit)
+		auto hitUnits = AttackPattern();
+		for (auto unit : hitUnits)
 		{
 			unit->InflictDamage(attackPoints);
 		}
