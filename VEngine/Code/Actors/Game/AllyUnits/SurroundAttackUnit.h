@@ -3,6 +3,7 @@
 #include "../PlayerUnit.h"
 #include "Actors/ActorSystem.h"
 
+//Attacks all surrounding nodes in a square pattern.
 class SurroundAttackUnit : public PlayerUnit
 {
 public:
