@@ -5,6 +5,7 @@
 
 void BattleCardSystem::AddCard(BattleCard* card)
 {
+	assert(battleCardMap.find(card->name) == battleCardMap.end());
 	battleCardMap.emplace(card->name, card);
 }
 
