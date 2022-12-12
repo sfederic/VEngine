@@ -486,7 +486,10 @@ void Player::ActivateFirstBattleCardInHand()
 {
 	if (Input::GetKeyUp(Keys::Up))
 	{
-		battleCardsInHand.front()->Activate();
+		if (!battleCardsInHand.empty())
+		{
+			battleCardsInHand.front()->Activate();
+		}
 	}
 }
 
