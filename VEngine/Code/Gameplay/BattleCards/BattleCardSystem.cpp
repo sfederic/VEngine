@@ -12,7 +12,7 @@ void BattleCardSystem::AddCard(BattleCard* card)
 BattleCard* BattleCardSystem::DrawCardAtRandom()
 {
 	auto battleCardMapIt = battleCardMap.begin();
-	const int rand = VMath::RandomRangeInt(0, battleCardMap.size() - 1);
+	int rand = VMath::RandomRangeInt(0, battleCardMap.size() - 1);
 	std::advance(battleCardMapIt, rand);
 	return battleCardMapIt->second;
 }
