@@ -323,8 +323,10 @@ void Grid::GetNeighbouringNodesForceful(GridNode* centerNode, std::vector<GridNo
     }
 }
 
-void Grid::GetNeighbouringActiveAndInactiveNodesForceful(GridNode* centerNode, std::vector<GridNode*>& outNodes)
+std::vector<GridNode*> Grid::GetNeighbouringActiveAndInactiveNodesForceful(GridNode* centerNode)
 {
+    std::vector<GridNode*> outNodes;
+
     int currentX = centerNode->xIndex;
     int currentY = centerNode->yIndex;
 
@@ -355,6 +357,8 @@ void Grid::GetNeighbouringActiveAndInactiveNodesForceful(GridNode* centerNode, s
         GridNode& node = rows[currentX].columns[currentY - 1];
         outNodes.push_back(&node);
     }
+
+    return outNodes;
 }
 
 Unit* Grid::GetUnitAtNode(GridNode* node)
@@ -379,6 +383,20 @@ Unit* Grid::GetUnitAtNodeIndex(int xIndex, int yIndex)
     }
 
     return nullptr;
+}
+
+std::vector<Unit*> Grid::GetAllUnitsFromNodes(std::vector<GridNode*>& nodes)
+{
+    std::vector<Unit*> units;
+    for (auto node : nodes)
+    {
+        auto unit = GetUnitAtNode(node);
+        if (unit)
+        {
+            units.push_back(unit);
+        }
+    }
+    return units;
 }
 
 std::vector<PlayerUnit*> Grid::GetAllPlayerUnitsAtNode(GridNode* node)

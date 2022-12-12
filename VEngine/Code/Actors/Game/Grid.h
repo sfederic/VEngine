@@ -63,11 +63,12 @@ struct Grid : public Actor
 	void GetNeighbouringNodesForceful(GridNode* centerNode, std::vector<GridNode*>& outNodes);
 
 	//Same as GetNeighbouringNodesForceful() except gets all inactive nodes too.
-	void GetNeighbouringActiveAndInactiveNodesForceful(GridNode* centerNode, std::vector<GridNode*>& outNodes);
+	std::vector<GridNode*> GetNeighbouringActiveAndInactiveNodesForceful(GridNode* centerNode);
 
 	//Returns Unit currently at GridNode x and y index (only returns first found Unit)
 	Unit* GetUnitAtNode(GridNode* node);
 	Unit* GetUnitAtNodeIndex(int xIndex, int yIndex);
+	std::vector<Unit*> GetAllUnitsFromNodes(std::vector<GridNode*>& nodes);
 
 	//For PlayerUnit fusion battle mechanic.
 	std::vector<PlayerUnit*> GetAllPlayerUnitsAtNode(GridNode* node);
