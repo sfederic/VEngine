@@ -228,11 +228,7 @@ void PlayerUnit::Attack()
 {
 	if (Input::GetKeyUp(Keys::Down))
 	{
-		auto hitUnits = AttackPattern();
-		for (auto unit : hitUnits)
-		{
-			unit->InflictDamage(attackPoints);
-		}
+		AttackPattern();
 	}
 }
 

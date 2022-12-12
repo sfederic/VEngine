@@ -8,5 +8,5 @@ class DoubleAttackFusionUnit : public PlayerUnit
 public:
 	ACTOR_SYSTEM(DoubleAttackFusionUnit);
 
-	virtual std::vector<Unit*> AttackPattern() override;
+	virtual void AttackPattern() override;
 };

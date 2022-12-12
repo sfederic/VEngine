@@ -10,10 +10,8 @@ AttackUnit::AttackUnit()
     rootComponent->AddChild(mesh);
 }
 
-std::vector<Unit*> AttackUnit::AttackPattern()
+void AttackUnit::AttackPattern()
 {
-	std::vector<Unit*> hitUnits;
-
 	const auto facingPosition = GetPositionV() + mesh->GetForwardVectorV();
 	const int x = std::lroundf(facingPosition.m128_f32[0]);
 	const int y = std::lroundf(facingPosition.m128_f32[2]);
@@ -21,8 +19,6 @@ std::vector<Unit*> AttackUnit::AttackPattern()
 	auto unit = Grid::system.GetFirstActor()->GetUnitAtNodeIndex(x, y);
 	if (unit)
 	{
-		hitUnits.push_back(unit);
+		unit->InflictDamage(attackPoints);
 	}
-
-	return hitUnits;
 }

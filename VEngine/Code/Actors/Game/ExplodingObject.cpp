@@ -11,8 +11,7 @@ void ExplodingObject::Attacked()
 
 	auto grid = Grid::system.GetFirstActor();
 
-	std::vector<GridNode*> explodingNodes;
-	grid->GetNeighbouringActiveAndInactiveNodesForceful(GetCurrentNode(), explodingNodes);
+	auto explodingNodes = grid->GetNeighbouringActiveAndInactiveNodesForceful(GetCurrentNode());
 
 	for (auto node : explodingNodes)
 	{

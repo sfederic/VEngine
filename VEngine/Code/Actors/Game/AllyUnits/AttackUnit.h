@@ -10,5 +10,5 @@ public:
 	ACTOR_SYSTEM(AttackUnit);
 
 	AttackUnit();
-	virtual std::vector<Unit*> AttackPattern() override;
+	virtual void AttackPattern() override;
 };

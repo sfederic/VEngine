@@ -24,7 +24,7 @@ public:
 	GridNode* GetCurrentNode();
 	void SetGridIndices();
 	
-	virtual std::vector<Unit*> AttackPattern() = 0;
+	virtual void AttackPattern() {};
 	bool CheckAndExpendActionPoints(int num);
 	void InflictDamage(int damage);
 
