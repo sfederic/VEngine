@@ -91,6 +91,20 @@ namespace World
 		return outActors;
 	}
 
+	template <typename T>
+	void RemoveAllActorsOfType()
+	{
+		auto actors = GetAllActorsInWorld();
+		for (auto actor : actors)
+		{
+			if (dynamic_cast<T*>(actor))
+			{
+				auto actorSystem = actor->GetActorSystem();
+				actorSystem->RemoveInterfaceActor(actor);
+			}
+		}
+	}
+
 	Actor* GetActorByUID(UID uid);
 	Actor* GetActorByUIDAllowNull(UID uid);
 	Actor* GetActorByName(std::string actorName);
