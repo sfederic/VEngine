@@ -3,6 +3,8 @@
 #include "BattleCardSystem.h"
 #include "Actors/Game/Player.h"
 
+#include "Actors/Game/AllyUnits/SurroundAttackUnit.h"
+
 struct TestSummonCard : BattleCard
 {
 	TestSummonCard() : BattleCard(L"TestSummonCard", L"Summons a test monster", "UI/monster_icon.jpg")
@@ -14,6 +16,6 @@ struct TestSummonCard : BattleCard
 	virtual void Activate() override
 	{
 		__super::Activate();
-		Player::system.GetFirstActor()->SummonAllyUnit();
+		Player::system.GetFirstActor()->SummonAllyUnit<SurroundAttackUnit>();
 	}
 }testSummonCard;

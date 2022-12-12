@@ -13,7 +13,6 @@
 #include "Actors/Game/MemoryCheckGridActor.h"
 #include "Grid.h"
 #include "GridActor.h"
-#include "Components/MeshComponent.h"
 #include "Components/EmptyComponent.h"
 #include "Components/Game/MemoryComponent.h"
 #include "Components/AudioComponent.h"
@@ -35,7 +34,6 @@
 #include "Gameplay/GameUtils.h"
 #include "Render/Material.h"
 #include "Actors/Game/AllyUnits/AttackUnit.h"
-#include "Gameplay/PlayerInputController.h"
 
 Player::Player()
 {
@@ -437,23 +435,6 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 
 		previousHitTransparentActors.clear();
 	}
-}
-
-//Testing code for a single type
-void Player::SummonAllyUnit()
-{
-	Transform transform;
-	XMStoreFloat3(&transform.position, GetPositionV() + GetForwardVectorV());
-	transform.rotation = mesh->GetRotation();
-
-	auto attackUnit = AttackUnit::system.Add(transform);
-	attackUnit->Start();
-
-	playerInputController.SetPlayerUnitToControl(attackUnit);
-
-	activePlayerUnits.push_back(attackUnit);
-	activePlayerUnitIndex = activePlayerUnits.size() - 1;
-	playerInputController.SetPlayerUnitToControl(attackUnit);
 }
 
 void Player::SwitchInputBetweenAllyUnitsAndPlayer()

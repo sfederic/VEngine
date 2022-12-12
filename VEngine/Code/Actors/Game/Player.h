@@ -3,6 +3,8 @@
 #include "PlayerUnit.h"
 #include "Actors/ActorSystem.h"
 #include "Gameplay/BattleEnums.h"
+#include "Gameplay/PlayerInputController.h"
+#include "Components/MeshComponent.h"
 
 struct DialogueComponent;
 struct MemoryComponent;
@@ -48,6 +50,25 @@ public:
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 
+	template <typename AllyUnitType>
+	void SummonAllyUnit()
+	{
+		static_assert(std::is_base_of<PlayerUnit, AllyUnitType>() == true);
+
+		Transform transform;
+		XMStoreFloat3(&transform.position, GetPositionV() + GetForwardVectorV());
+		transform.rotation = mesh->GetRotation();
+
+		auto attackUnit = AllyUnitType::system.Add(transform);
+		attackUnit->Start();
+
+		playerInputController.SetPlayerUnitToControl(attackUnit);
+
+		activePlayerUnits.push_back(attackUnit);
+		activePlayerUnitIndex = activePlayerUnits.size() - 1;
+		playerInputController.SetPlayerUnitToControl(attackUnit);
+	}
+
 	//called at every battle turn end
 	void RefreshCombatStats();
 
@@ -62,8 +83,6 @@ public:
 	void QuickThought(const std::wstring& text);
 
 	void DrawTurnBattleCardHand();
-
-	void SummonAllyUnit();
 
 	void PlaceTrap(BattleCard* trapCard);
 
