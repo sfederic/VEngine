@@ -11,7 +11,6 @@ struct AttackUnitSummonCard : BattleCard
 {
 	AttackUnitSummonCard() : BattleCard(L"AttackUnitSummonCard", L"Summon an AttackUnit", "UI/monster_icon.jpg")
 	{
-		cost = 1;
 		BattleCardSystem::Get().AddCard(this);
 	}
 
@@ -26,7 +25,6 @@ struct SurroundAttackUnitSummonCard : BattleCard
 {
 	SurroundAttackUnitSummonCard() : BattleCard(L"SurroundAttackUnitSummonCard", L"Summon an SurroundAttackUnit", "UI/rock.png")
 	{
-		cost = 1;
 		BattleCardSystem::Get().AddCard(this);
 	}
 
@@ -41,7 +39,6 @@ struct ShootAttackUnitSummonCard : BattleCard
 {
 	ShootAttackUnitSummonCard() : BattleCard(L"SurroundAttackUnitSummonCard", L"Summon an ShootAttackUnit", "UI/gun.png")
 	{
-		cost = 1;
 		BattleCardSystem::Get().AddCard(this);
 	}
 

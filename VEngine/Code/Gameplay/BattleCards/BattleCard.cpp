@@ -13,11 +13,6 @@ void BattleCard::Activate()
 {
 	auto player = Player::system.GetFirstActor();
 
-	if (!player->CheckAndExpendActionPoints(cost))
-	{
-		return;
-	}
-
 	for (int i = 0; i < player->battleCardsInHand.size(); i++)
 	{
 		auto card = player->battleCardsInHand[i];
