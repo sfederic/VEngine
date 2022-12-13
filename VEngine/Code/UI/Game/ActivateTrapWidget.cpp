@@ -11,6 +11,7 @@ void ActivateTrapWidget::Draw(float deltaTime)
 	{
 		linkedUnit->isInTrapNode = false;
 		linkedTrapCard->Activate();
+		return;
 	}
 
 	layout.AddVerticalSpace(30.f);
