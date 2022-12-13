@@ -1,19 +1,21 @@
 #include "vpch.h"
-#include "BattleCard.h"
+#include "TrapCard.h"
 #include "BattleCardSystem.h"
 #include "Actors/Game/Player.h"
+#include "Actors/Game/Unit.h"
+#include "Actors/Game/Grid.h"
+#include "Gameplay/GridNode.h"
 
-struct DamageTrapCard : BattleCard
+struct DamageTrapCard : TrapCard
 {
-	DamageTrapCard() : BattleCard(L"DamageTrapCard", L"Inflicts damage.", "UI/trap_icon.jpg")
+	DamageTrapCard() : TrapCard(L"DamageTrapCard", L"Inflicts damage.", "UI/trap_icon.jpg")
 	{
 		BattleCardSystem::Get().AddCard(this);
 	}
 
-	virtual void Activate() override
+	virtual void ActivateTrap() override
 	{
-		__super::Activate();
-		Player::system.GetFirstActor()->PlaceTrap(this);
+		auto unit = Grid::system.GetFirstActor()->GetUnitAtNode(connectedNode);
+		unit->InflictDamage(1);
 	}
 }damageTrapCard;
-

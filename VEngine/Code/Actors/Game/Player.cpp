@@ -29,7 +29,7 @@
 #include "UI/Game/BattleCardHandWidget.h"
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/BattleSystem.h"
-#include "Gameplay/BattleCards/BattleCard.h"
+#include "Gameplay/BattleCards/TrapCard.h"
 #include "Gameplay/BattleCards/BattleCardSystem.h"
 #include "Gameplay/GameUtils.h"
 #include "Render/Material.h"
@@ -723,12 +723,13 @@ bool Player::CheckAttackPositionAgainstUnitDirection(Unit* unit)
 	return false;
 }
 
-void Player::PlaceTrap(BattleCard* trapCard)
+void Player::PlaceTrap(TrapCard* trapCard)
 {
 	auto currentNode = GetCurrentNode();
 	if (currentNode->trapCard == nullptr)
 	{
 		currentNode->trapCard = trapCard;
+		currentNode->trapCard->connectedNode = currentNode;
 		currentNode->SetColour(GridNode::trapNodeColour);
 	}
 }

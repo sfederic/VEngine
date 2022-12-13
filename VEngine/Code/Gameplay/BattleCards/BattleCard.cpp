@@ -1,6 +1,8 @@
 #include "vpch.h"
 #include "BattleCard.h"
 #include "Actors/Game/Player.h"
+#include "Gameplay/GridNode.h"
+#include "Gameplay/BattleCards/BattleCard.h"
 
 BattleCard::BattleCard(std::wstring name_, std::wstring desc_, std::string imageFilename_)
 {

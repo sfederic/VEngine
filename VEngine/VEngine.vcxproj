@@ -125,6 +125,7 @@
     <ClCompile Include="Code\Actors\Game\GridMapPicker.cpp" />
     <ClCompile Include="Code\Gameplay\BattleCards\BattleCard.cpp" />
     <ClCompile Include="Code\Gameplay\BattleCards\SummonCards.cpp" />
+    <ClCompile Include="Code\Gameplay\BattleCards\TrapCard.cpp" />
     <ClCompile Include="Code\Gameplay\BattleCards\TrapCards.cpp" />
     <ClCompile Include="Code\Gameplay\FusionSystem.cpp" />
     <ClCompile Include="Code\Gameplay\Memory.cpp" />
@@ -284,6 +285,7 @@
     <ClInclude Include="Code\Actors\Game\AllyUnits\AttackUnit.h" />
     <ClInclude Include="Code\Actors\Game\GridMapPicker.h" />
     <ClInclude Include="Code\Gameplay\BattleCards\BattleCard.h" />
+    <ClInclude Include="Code\Gameplay\BattleCards\TrapCard.h" />
     <ClInclude Include="Code\Gameplay\ForwardFace.h" />
     <ClInclude Include="Code\Gameplay\FusionSystem.h" />
     <ClInclude Include="Code\Actors\CameraActor.h" />

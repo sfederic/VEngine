@@ -3,7 +3,7 @@
 #include "../Widget.h"
 
 class GridActor;
-struct BattleCard;
+struct TrapCard;
 
 class GridMapPickerSelectionInfoWidget : public Widget
 {
@@ -17,5 +17,5 @@ private:
 public:
 	GridActor* selectedGridActor = nullptr;
 	
-	BattleCard* selectedTrapCard = nullptr;
+	TrapCard* selectedTrapCard = nullptr;
 };

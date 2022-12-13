@@ -10,6 +10,7 @@
 #include "VMath.h"
 #include "Player.h"
 #include "Gameplay/BattleSystem.h"
+#include "Gameplay/BattleCards/TrapCard.h"
 #include "Timer.h"
 #include "Log.h"
 #include "UI/UISystem.h"
@@ -91,6 +92,8 @@ void Unit::Tick(float deltaTime)
 					activateTrapWidget->AddToViewport();
 					activateTrapWidget->SetLinkedUnit(this);
 					activateTrapWidget->SetLinkedTrapNode(currentNode->trapCard);
+
+					currentNode->trapCard->ActivateTrap();
 				}
 
 				movementPathNodeIndex++;

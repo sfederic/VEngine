@@ -15,6 +15,7 @@ struct Memory;
 struct GridActor;
 struct Unit;
 class BattleCardHandWidget;
+struct TrapCard;
 struct BattleCard;
 
 class Player : public PlayerUnit
@@ -90,7 +91,7 @@ public:
 
 	void DrawTurnBattleCardHand();
 
-	void PlaceTrap(BattleCard* trapCard);
+	void PlaceTrap(TrapCard* trapCard);
 
 private:
 	//Toggles battle grid nodes and enters player into a battle ready state.

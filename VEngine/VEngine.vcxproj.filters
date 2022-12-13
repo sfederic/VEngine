@@ -602,6 +602,9 @@
     <ClCompile Include="Code\Actors\Game\AllyUnits\ShootAttackUnit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Gameplay\BattleCards\TrapCard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -1163,6 +1166,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\AllyUnits\ShootAttackUnit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Gameplay\BattleCards\TrapCard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

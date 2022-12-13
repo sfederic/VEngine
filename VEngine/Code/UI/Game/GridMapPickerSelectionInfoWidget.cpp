@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "GridMapPickerSelectionInfoWidget.h"
 #include "Actors/Game/GridActor.h"
-#include "Gameplay/BattleCards/BattleCard.h"
+#include "Gameplay/BattleCards/TrapCard.h"
 
 void GridMapPickerSelectionInfoWidget::Draw(float deltaTime)
 {
