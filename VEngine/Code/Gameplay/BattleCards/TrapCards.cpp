@@ -3,9 +3,9 @@
 #include "BattleCardSystem.h"
 #include "Actors/Game/Player.h"
 
-struct TestTrapNodeCard : BattleCard
+struct DamageTrapCard : BattleCard
 {
-	TestTrapNodeCard() : BattleCard(L"TestTrapNodeCard", L"Testing", "UI/trap_icon.jpg")
+	DamageTrapCard() : BattleCard(L"DamageTrapCard", L"Inflicts damage.", "UI/trap_icon.jpg")
 	{
 		BattleCardSystem::Get().AddCard(this);
 	}
@@ -15,4 +15,5 @@ struct TestTrapNodeCard : BattleCard
 		__super::Activate();
 		Player::system.GetFirstActor()->PlaceTrap(this);
 	}
-}testTrapNodeCard;
+}damageTrapCard;
+
