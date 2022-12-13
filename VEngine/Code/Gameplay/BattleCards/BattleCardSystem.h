@@ -1,6 +1,7 @@
 #pragma once
 
 #include <map>
+#include <vector>
 
 struct BattleCard;
 
@@ -15,6 +16,7 @@ public:
 
 	void AddCard(BattleCard* card);
 	BattleCard* DrawCardAtRandom();
+	std::vector<BattleCard*> GetAllCards();
 
 private:
 	std::map<std::wstring, BattleCard*> battleCardMap;

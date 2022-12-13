@@ -16,3 +16,14 @@ BattleCard* BattleCardSystem::DrawCardAtRandom()
 	std::advance(battleCardMapIt, rand);
 	return battleCardMapIt->second;
 }
+
+std::vector<BattleCard*> BattleCardSystem::GetAllCards()
+{
+	std::vector<BattleCard*> cards;
+	cards.reserve(battleCardMap.size());
+	for (auto& [key, value] : battleCardMap)
+	{
+		cards.emplace_back(value);
+	}
+	return cards;
+}
