@@ -92,8 +92,6 @@ void Unit::Tick(float deltaTime)
 					activateTrapWidget->AddToViewport();
 					activateTrapWidget->SetLinkedUnit(this);
 					activateTrapWidget->SetLinkedTrapNode(currentNode->trapCard);
-
-					currentNode->trapCard->ActivateTrap();
 				}
 
 				movementPathNodeIndex++;
