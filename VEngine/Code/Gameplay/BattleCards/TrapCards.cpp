@@ -19,3 +19,17 @@ struct DamageTrapCard : TrapCard
 		unit->InflictDamage(1);
 	}
 }damageTrapCard;
+
+struct StunTrapCard : TrapCard
+{
+	StunTrapCard() : TrapCard(L"StunTrapCard ", L"Ends enemy movement that turn.", "UI/stun_icon.png")
+	{
+		BattleCardSystem::Get().AddCard(this);
+	}
+
+	virtual void ActivateTrap() override
+	{
+		auto unit = Grid::system.GetFirstActor()->GetUnitAtNode(connectedNode);
+		unit->SetMovePathIndexToMax();
+	}
+}stunTrapCard;

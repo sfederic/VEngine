@@ -423,6 +423,11 @@ void Unit::SetUnitLookAt(XMVECTOR lookAtPoint)
 	SetRotation(lookAtRot);
 }
 
+void Unit::SetMovePathIndexToMax()
+{
+	movementPathNodeIndex = pathNodes.size();
+}
+
 std::vector<GridNode*> Unit::GetMovementPathPreviewNodes(GridNode* destinationNode)
 {
 	auto grid = Grid::system.GetFirstActor();

@@ -86,6 +86,9 @@ public:
 	void ShowUnitMovementPath();
 	void SetUnitLookAt(XMVECTOR lookAtPoint);
 
+	//This is for ending Unit's movement that turn.
+	void SetMovePathIndexToMax();
+
 private:
 	std::vector<GridNode*> GetMovementPathPreviewNodes(GridNode* destinationNode);
 	PlayerUnit* FindClosestPlayerUnit();
