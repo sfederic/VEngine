@@ -43,6 +43,7 @@ public:
 	bool particleMenuOpen = false;
 	bool cutsceneSequencerOpen = false;
 	bool worldMenuOpen = false;
+	bool cardDrawMenu = false;
 
 	//Whether the Imgui windows have been clicked
 	bool hasMouseFocus = false;
@@ -74,6 +75,7 @@ private:
 	void RenderConsoleCommandsMenu();
 	void RenderGameplayMemoryMenu();
 	void RenderWorldMenu();
+	void RenderCardDrawMenu();
 
 	void RenderTexturePlacementMenu();
 	void RenderMaterialPlacementMenu();

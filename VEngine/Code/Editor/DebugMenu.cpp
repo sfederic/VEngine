@@ -27,6 +27,8 @@
 #include "Physics/Raycast.h"
 #include "World.h"
 #include "Gameplay/GameInstance.h"
+#include "Gameplay/BattleCards/BattleCardSystem.h"
+#include "Gameplay/BattleCards/BattleCard.h"
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/Memory.h"
 #include "SystemCache.h"
@@ -100,6 +102,7 @@ void DebugMenu::Tick(float deltaTime)
 	RenderGameplayMemoryMenu();
 	RenderWorldMenu();
 	RenderMaterialPlacementMenu();
+	RenderCardDrawMenu();
 
 	ImGui::EndFrame();
 
@@ -469,6 +472,25 @@ void DebugMenu::RenderWorldMenu()
 		if (ImGui::Button(worldFilename.c_str()))
 		{
 			GameUtils::LoadWorld(worldFilename);
+		}
+	}
+
+	ImGui::End();
+}
+
+void DebugMenu::RenderCardDrawMenu()
+{
+	if (!cardDrawMenu) return;
+
+	ImGui::Begin("Draw Cards");
+
+	auto cards = BattleCardSystem::Get().GetAllCards();
+	for (auto card : cards)
+	{
+		if (ImGui::Button(VString::wstos(card->name).c_str()))
+		{
+			auto player = Player::system.GetFirstActor();
+			player->AddCardToHand(card);
 		}
 	}
 

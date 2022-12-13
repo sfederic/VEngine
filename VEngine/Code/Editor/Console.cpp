@@ -147,6 +147,10 @@ void Console::Init()
 	executeMap.emplace(L"WORLD",
 		std::make_pair([]() { debugMenu.worldMenuOpen = !debugMenu.worldMenuOpen; },
 			"Menu to open worlds at runtime during gameplay."));
+
+	executeMap.emplace(L"CARD",
+		std::make_pair([]() { debugMenu.cardDrawMenu = !debugMenu.cardDrawMenu; },
+			"Menu to add battle cards to player's hand at runtime."));
 }
 
 void Console::ConsoleInput()
