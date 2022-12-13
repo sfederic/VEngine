@@ -11,6 +11,7 @@ void ActivateTrapWidget::Draw(float deltaTime)
 	{
 		linkedUnit->isInTrapNode = false;
 		linkedTrapCard->Activate();
+		RemoveFromViewportAndDelete();
 		return;
 	}
 
@@ -19,5 +20,7 @@ void ActivateTrapWidget::Draw(float deltaTime)
 	if (Button(L"Ignore Trap", layout))
 	{
 		linkedUnit->isInTrapNode = false;
+		RemoveFromViewportAndDelete();
+		return;
 	}
 }
