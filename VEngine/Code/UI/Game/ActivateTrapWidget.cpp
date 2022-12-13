@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "ActivateTrapWidget.h"
 #include "Actors/Game/Unit.h"
-#include "Gameplay/BattleCards/BattleCard.h"
+#include "Gameplay/BattleCards/TrapCard.h"
 
 void ActivateTrapWidget::Draw(float deltaTime)
 {
