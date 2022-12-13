@@ -488,7 +488,15 @@ void Player::ActivateFirstBattleCardInHand()
 	{
 		if (!battleCardsInHand.empty())
 		{
-			battleCardsInHand.front()->Activate();
+			auto trapCard = dynamic_cast<TrapCard*>(battleCardsInHand.front());
+			if (trapCard)
+			{
+				trapCard->Set();
+			}
+			else
+			{
+				battleCardsInHand.front()->Activate();
+			}
 		}
 	}
 }

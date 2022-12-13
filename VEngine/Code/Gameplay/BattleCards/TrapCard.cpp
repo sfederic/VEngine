@@ -6,4 +6,6 @@ void TrapCard::Set()
 {
 	auto player = Player::system.GetFirstActor();
 	player->PlaceTrap(this);
+
+	__super::Activate();
 }
