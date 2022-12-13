@@ -484,7 +484,12 @@ void DebugMenu::RenderCardDrawMenu()
 
 	ImGui::Begin("Draw Cards");
 
-	auto cards = BattleCardSystem::Get().GetAllCards();
+	static char filter[128]{};
+	//Keep in mind casing is important here for std::string::find()
+	ImGui::InputText("Filter", filter, sizeof(filter));
+
+	auto cards = BattleCardSystem::Get().GetAllCards(VString::stows(filter));
+
 	for (auto card : cards)
 	{
 		if (ImGui::Button(VString::wstos(card->name).c_str()))

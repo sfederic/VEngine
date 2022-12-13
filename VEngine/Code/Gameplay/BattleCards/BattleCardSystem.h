@@ -16,7 +16,7 @@ public:
 
 	void AddCard(BattleCard* card);
 	BattleCard* DrawCardAtRandom();
-	std::vector<BattleCard*> GetAllCards();
+	std::vector<BattleCard*> GetAllCards(std::wstring filter);
 
 private:
 	std::map<std::wstring, BattleCard*> battleCardMap;

@@ -17,13 +17,16 @@ BattleCard* BattleCardSystem::DrawCardAtRandom()
 	return battleCardMapIt->second;
 }
 
-std::vector<BattleCard*> BattleCardSystem::GetAllCards()
+std::vector<BattleCard*> BattleCardSystem::GetAllCards(std::wstring filter)
 {
 	std::vector<BattleCard*> cards;
 	cards.reserve(battleCardMap.size());
 	for (auto& [key, value] : battleCardMap)
 	{
-		cards.emplace_back(value);
+		if (key.find(filter) != std::wstring::npos)
+		{
+			cards.emplace_back(value);
+		}
 	}
 	return cards;
 }
