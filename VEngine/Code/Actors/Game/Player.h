@@ -93,6 +93,9 @@ public:
 
 	void PlaceTrap(TrapCard* trapCard);
 
+	//Currently more of a debug function (Hand limit isn't considered)
+	void AddCardToHand(BattleCard* card);
+
 private:
 	//Toggles battle grid nodes and enters player into a battle ready state.
 	void EnterAstralMode();

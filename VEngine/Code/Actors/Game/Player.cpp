@@ -741,3 +741,8 @@ void Player::PlaceTrap(TrapCard* trapCard)
 		currentNode->SetColour(GridNode::trapNodeColour);
 	}
 }
+
+void Player::AddCardToHand(BattleCard* card)
+{
+	battleCardsInHand.emplace_back(card);
+}
