@@ -12,7 +12,6 @@
 #include <qjsondocument.h>
 #include "World.h"
 #include "Actors/Actor.h"
-#include "Gameplay/ConditionSystem.h"
 #include "VFunctionSystem.h"
 #include "VString.h"
 #include "Asset/AssetPaths.h"
@@ -82,17 +81,6 @@ void DialogueDock::PopulateTreeItem(QTreeWidgetItem* item)
 	}
 
 	dialogueTree->setItemWidget(item, actorColumn, actorComboBox);
-
-	//set combo box from ConditionSystem
-	auto conditionComboBox = new QComboBox(this);
-	conditionComboBox->addItem("");
-	for (auto& conditionPair : conditionSystem.GetConditions())
-	{
-		QString conditionName = QString::fromStdString(conditionPair.first);
-		conditionComboBox->addItem(conditionName);
-	}
-
-	dialogueTree->setItemWidget(item, conditionColumn, conditionComboBox);
 }
 
 void DialogueDock::AddEmptyDialogueLine()

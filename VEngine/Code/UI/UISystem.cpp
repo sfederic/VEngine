@@ -6,10 +6,7 @@
 #include "Core.h"
 #include "UI/Widget.h"
 #include "UI/ScreenFadeWidget.h"
-#include "UI/Game/MemoryGainedWidget.h"
-#include "UI/Game/MemoryRecalledWidget.h"
 #include "UI/ScreenFadeWidget.h"
-#include "UI/Game/UnitLineupWidget.h"
 #include "SystemStates.h"
 
 static SystemStates systemState = SystemStates::Unloaded;
@@ -18,12 +15,6 @@ std::vector<std::unique_ptr<Widget>> UISystem::widgets;
 
 //Every widget currently being displayed on screen
 std::vector<Widget*> UISystem::widgetsInViewport;
-
-//Global widgets
-MemoryGainedWidget* UISystem::memoryGainedWidget;
-MemoryRecalledWidget* UISystem::memoryRecalledWidget;
-ScreenFadeWidget* UISystem::screenFadeWidget;
-UnitLineupWidget* UISystem::unitLineupWidget;
 
 //D2D objects
 ID2D1Factory* d2dFactory;
@@ -115,10 +106,6 @@ void UISystem::Reset()
 
 void UISystem::CreateGlobalWidgets()
 {
-	memoryGainedWidget = CreateWidget<MemoryGainedWidget>();
-	memoryRecalledWidget = CreateWidget<MemoryRecalledWidget>();
-	screenFadeWidget = CreateWidget<ScreenFadeWidget>();
-	unitLineupWidget = CreateWidget<UnitLineupWidget>();
 }
 
 void UISystem::DestroyWidget(Widget* widget)

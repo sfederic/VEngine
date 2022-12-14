@@ -25,8 +25,6 @@
 #include "Physics/PhysicsSystem.h"
 #include "Editor/CutsceneSequencer.h"
 #include "Gameplay/WorldFunctions.h"
-#include "Gameplay/PlayerInputController.h"
-#include "Gameplay/FusionSystem.h"
 
 void ClearLog()
 {
@@ -40,8 +38,6 @@ void Engine::Init(int argc, char* argv[])
 	auto startTime = Profile::QuickStart();
 
 	ClearLog();
-
-	FusionSystem::Init();
 
 	WorldFunctions::SetupWorldStartFunctions();
 
@@ -100,8 +96,6 @@ void Engine::TickSystems(float deltaTime)
 	WorldEditor::Tick();
 	PhysicsSystem::Tick(deltaTime);
 	Renderer::Tick();
-
-	playerInputController.Tick(deltaTime);
 
 	if (Core::gameplayOn && !Core::gameWorldPaused)
 	{

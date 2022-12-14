@@ -2,8 +2,6 @@
 #include "GameUtils.h"
 #include <filesystem>
 #include "Actors/Game/Player.h"
-#include "Actors/Game/Grid.h"
-#include "Actors/Game/EntranceTrigger.h"
 #include "Audio/AudioSystem.h"
 #include "World.h"
 #include "FileSystem.h"
@@ -12,45 +10,18 @@
 #include "Components/CameraComponent.h"
 #include "UI/UISystem.h"
 #include "UI/ScreenFadeWidget.h"
-#include "UI/Game/MemoryTransferWidget.h"
 #include "Input.h"
 #include "Log.h"
 #include "Particle/SpriteSheet.h"
 #include "Asset/AssetFileExtensions.h"
-#include "Gameplay/BattleSystem.h"
 
 namespace GameUtils
 {
 	std::string levelToMoveTo;
 
-	bool CheckIfMemoryExists(const std::string memoryName)
-	{
-		auto memIt = GameInstance::playerMemories.find(memoryName);
-		return memIt != GameInstance::playerMemories.end();
-	}
-
 	void SetActiveCameraTarget(Actor* newTarget)
 	{
 		activeCamera->targetActor = newTarget;
-	}
-
-	void SetActiveCameraTargetAndZoomIn(Actor* newTarget)
-	{
-		activeCamera->targetActor = newTarget;
-		Player::system.GetFirstActor()->nextCameraFOV = 30.f;
-	}
-	
-	void SetActiveCameraTargetAndZoomOut(Actor* newTarget)
-	{
-		activeCamera->targetActor = newTarget;
-		Player::system.GetFirstActor()->nextCameraFOV = 60.f;
-	}
-
-	void SetCameraBackToPlayer()
-	{
-		auto player = Player::system.GetFirstActor();
-		player->nextCameraFOV = 60.f;
-		activeCamera->targetActor = player;
 	}
 
 	void CameraShake(float shake)
@@ -103,8 +74,6 @@ namespace GameUtils
 
 		GameUtils::SaveGameInstanceData();
 
-		battleSystem.Reset();
-
 		FileSystem::LoadWorld(worldName);
 	}
 
@@ -137,49 +106,9 @@ namespace GameUtils
 
 		LoadWorld(levelToMoveTo);
 
-		UISystem::screenFadeWidget->SetToFadeIn();
-		UISystem::screenFadeWidget->AddToViewport();
-
-		int matchingEntranceTriggerCount = 0;
-		//Set player pos and rot at entrancetrigger in loaded world with same name as previous.
-		auto entranceTriggers = World::GetAllActorsOfTypeInWorld<EntranceTrigger>();
-		for (auto entrance : entranceTriggers)
-		{
-			if (entrance->levelToMoveTo == GameInstance::previousMapMovedFrom)
-			{
-				matchingEntranceTriggerCount++;
-
-				auto player = Player::system.GetFirstActor();
-
-				player->SetPosition(entrance->GetPosition());
-				player->nextPos = player->GetPositionV();
-
-				player->SetRotation(entrance->GetRotationV());
-				player->nextRot = player->GetRotationV();
-			}
-		}
-
 		GameInstance::previousMapMovedFrom = levelToMoveTo;
 
-		assert(matchingEntranceTriggerCount < 2 && "Entrances with same name");
-
-		if (matchingEntranceTriggerCount == 0)
-		{
-			Log("EntranceTrigger with matching [%s] field not found.", levelToMoveTo.c_str());
-		}
-
 		Input::blockInput = false;
-	}
-
-	void TriggerGameOver()
-	{
-		auto player = Player::system.GetFirstActor();
-		player->gameOver = true;
-
-		UISystem::CreateWidget<MemoryTransferWidget>()->AddToViewport();
-
-		AudioSystem::StopAllAudio();
-		AudioSystem::PlayAudio("game05.wav", true);
 	}
 
 	void DisablePlayer()

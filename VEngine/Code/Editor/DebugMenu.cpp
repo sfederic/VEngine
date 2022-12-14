@@ -27,10 +27,7 @@
 #include "Physics/Raycast.h"
 #include "World.h"
 #include "Gameplay/GameInstance.h"
-#include "Gameplay/BattleCards/BattleCardSystem.h"
-#include "Gameplay/BattleCards/BattleCard.h"
 #include "Gameplay/GameUtils.h"
-#include "Gameplay/Memory.h"
 #include "SystemCache.h"
 #include "System.h"
 #include "Actors/Game/Player.h"
@@ -99,10 +96,8 @@ void DebugMenu::Tick(float deltaTime)
 	RenderParticleMenu();
 	RenderTexturePlacementMenu();
 	RenderConsoleCommandsMenu();
-	RenderGameplayMemoryMenu();
 	RenderWorldMenu();
 	RenderMaterialPlacementMenu();
-	RenderCardDrawMenu();
 
 	ImGui::EndFrame();
 
@@ -429,37 +424,6 @@ void DebugMenu::RenderConsoleCommandsMenu()
 	}
 }
 
-void DebugMenu::RenderGameplayMemoryMenu()
-{
-	if (!memoriesMenuOpen) return;
-
-	ImGui::Begin("Player Memory menu");
-
-	//Input fields to create Memory for debugging
-	static char debugMemoryName[512]{};
-	static char debugMemoryImageFilename[512]{};
-	ImGui::InputText("Debug Memory Name", debugMemoryName, sizeof(debugMemoryName));
-	ImGui::InputText("Memory Image", debugMemoryImageFilename, sizeof(debugMemoryImageFilename));
-	if (ImGui::Button("Create Memory"))
-	{
-		auto debugMemory = new Memory(debugMemoryName);
-		debugMemory->imageFile = debugMemoryImageFilename;
-		debugMemory->actorAquiredFrom = "Debug Menu";
-		GameInstance::playerMemories.emplace(debugMemoryName, debugMemory);
-	}
-
-	//Show all memories
-	for (auto& memoryPair : GameInstance::playerMemories)
-	{
-		auto memory = memoryPair.second;
-		auto& memoryName = memoryPair.first;
-
-		ImGui::Text("Memory: %s", memoryName.c_str());
-	}
-
-	ImGui::End();
-}
-
 void DebugMenu::RenderWorldMenu()
 {
 	if (!worldMenuOpen) return;
@@ -472,30 +436,6 @@ void DebugMenu::RenderWorldMenu()
 		if (ImGui::Button(worldFilename.c_str()))
 		{
 			GameUtils::LoadWorld(worldFilename);
-		}
-	}
-
-	ImGui::End();
-}
-
-void DebugMenu::RenderCardDrawMenu()
-{
-	if (!cardDrawMenu) return;
-
-	ImGui::Begin("Draw Cards");
-
-	static char filter[128]{};
-	//Keep in mind casing is important here for std::string::find()
-	ImGui::InputText("Filter", filter, sizeof(filter));
-
-	auto cards = BattleCardSystem::Get().GetAllCards(VString::stows(filter));
-
-	for (auto card : cards)
-	{
-		if (ImGui::Button(VString::wstos(card->name).c_str()))
-		{
-			auto player = Player::system.GetFirstActor();
-			player->AddCardToHand(card);
 		}
 	}
 

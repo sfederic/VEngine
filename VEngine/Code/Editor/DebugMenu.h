@@ -17,7 +17,7 @@ struct DebugNotification
 	float timeOnScreen;
 };
 
-struct DebugMenu
+class DebugMenu
 {
 public:
 	std::vector<DebugNotification> debugNotifications;
@@ -31,7 +31,6 @@ public:
 	bool actorInspectMenuOpen = false;
 	bool worldStatsMenuOpen = false;
 	bool gameInstaceMenuOpen = false;
-	bool memoryMenuOpen = false;
 	bool actorSystemMenuOpen = false;
 	bool componentSystemMenuOpen = false;
 	bool memoriesMenuOpen = false;
@@ -43,7 +42,6 @@ public:
 	bool particleMenuOpen = false;
 	bool cutsceneSequencerOpen = false;
 	bool worldMenuOpen = false;
-	bool cardDrawMenu = false;
 
 	//Whether the Imgui windows have been clicked
 	bool hasMouseFocus = false;
@@ -73,9 +71,7 @@ private:
 	void RenderCoreMenu();
 	void RenderParticleMenu();
 	void RenderConsoleCommandsMenu();
-	void RenderGameplayMemoryMenu();
 	void RenderWorldMenu();
-	void RenderCardDrawMenu();
 
 	void RenderTexturePlacementMenu();
 	void RenderMaterialPlacementMenu();

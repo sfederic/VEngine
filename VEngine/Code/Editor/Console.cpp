@@ -84,10 +84,6 @@ void Console::Init()
 		std::make_pair([]() { debugMenu.questMenuOpen = !debugMenu.questMenuOpen; },
 		"Show all in-game quests and their state"));
 
-	executeMap.emplace(L"MEMORY",
-		std::make_pair([]() { debugMenu.memoryMenuOpen = !debugMenu.memoryMenuOpen; },
-		"show memory for engine systems"));
-
 	executeMap.emplace(L"SKEL",
 		std::make_pair([]() { debugMenu.skeletonViewMenuOpen = !debugMenu.skeletonViewMenuOpen; },
 		"Show skeleton heirarchy on actor's meshcomponent"));
@@ -147,10 +143,6 @@ void Console::Init()
 	executeMap.emplace(L"WORLD",
 		std::make_pair([]() { debugMenu.worldMenuOpen = !debugMenu.worldMenuOpen; },
 			"Menu to open worlds at runtime during gameplay."));
-
-	executeMap.emplace(L"CARD",
-		std::make_pair([]() { debugMenu.cardDrawMenu = !debugMenu.cardDrawMenu; },
-			"Menu to add battle cards to player's hand at runtime."));
 }
 
 void Console::ConsoleInput()

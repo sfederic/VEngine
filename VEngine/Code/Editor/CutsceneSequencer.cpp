@@ -5,7 +5,6 @@
 #include <cassert>
 #include "imgui/imgui.h"
 #include <qfiledialog.h>
-#include "Gameplay/ConditionSystem.h"
 #include "Log.h"
 
 CutsceneSequencer cutsceneSequencer;
@@ -24,24 +23,6 @@ void CutsceneSequencer::PlaybackTick(float deltaTime)
 	{
 		currentFrame++; //Keep in mind whatever FPS here
 		playbackTimer += deltaTime;
-
-		//Call conditions from sequencer items
-		for (auto& item : items)
-		{
-			if (currentFrame >= item.frameStart && !item.active)
-			{
-				//@Todo: there needs to be some more logic here to deal with start/end frame times
-				//and how they work into conditions called with time + position arguements.
-				//Best use would be curve editor, might be too complicated for what the game needs.
-				//e.g. camera movement
-				auto foundCondition = conditionSystem.FindConditionAllowNull(item.condition);
-				if (foundCondition)
-				{
-					item.active = true; //testing to make sure shit doesn't play on loop
-					foundCondition(item.conditionArg);
-				}
-			}
-		}
 
 		if (currentFrame >= frameMax)
 		{
@@ -119,34 +100,6 @@ void CutsceneSequencer::UITick(float deltaTime)
 
 	ImGui::Text("FrameStart: %d", currentItem.frameStart);
 	ImGui::Text("Frame End: %d", currentItem.frameEnd);
-
-	//Combo box to set ConditionFunction to Sequencer item
-	//Ref:https://github.com/ocornut/imgui/issues/1658
-	if (ImGui::BeginCombo("Condition Function", currentItem.condition.c_str()))
-	{
-		auto& conditionFunctions = conditionSystem.GetConditions();
-		for (auto& conditionFuncPair : conditionFunctions)
-		{
-			bool selected = false;
-			if (ImGui::Selectable(conditionFuncPair.first.c_str(), selected))
-			{
-				currentItem.condition = conditionFuncPair.first;
-			}
-			if (selected)
-			{
-				ImGui::SetItemDefaultFocus();
-			}
-		}
-		ImGui::EndCombo();
-	}
-
-	//Condition Arg
-	ImGui::InputText("Condition Arg", conditionArgInput, 128);
-	currentItem.conditionArg = conditionArgInput;
-
-	//Main Sequencer function
-	ImSequencer::Sequencer(this, &currentFrame, &expanded, &selectedEntry, &firstFrame,
-		ImSequencer::SEQUENCER_EDIT_STARTEND | ImSequencer::SEQUENCER_ADD | ImSequencer::SEQUENCER_DEL | ImSequencer::SEQUENCER_COPYPASTE | ImSequencer::SEQUENCER_CHANGE_FRAME);
 }
 
 void CutsceneSequencer::SaveCutsceneFile()

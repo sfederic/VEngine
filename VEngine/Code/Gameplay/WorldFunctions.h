@@ -6,5 +6,5 @@
 namespace WorldFunctions
 {
 	void SetupWorldStartFunctions();
-	void CallWorldStartFunction(std::string worldName);
+	void CallWorldStartFunction(const std::string worldName);
 }
