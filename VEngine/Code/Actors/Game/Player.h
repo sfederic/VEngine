@@ -17,10 +17,13 @@ public:
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 
+private:
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
+public:
 	MeshComponent* mesh = nullptr;
 	CameraComponent* camera = nullptr;
 
+private:
 	std::vector<Actor*> previousHitTransparentActors;
 };
