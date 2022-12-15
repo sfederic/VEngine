@@ -11,13 +11,16 @@ Player::Player()
 	mesh = CreateComponent(MeshComponent("cube.fbx", "test.png"), "Mesh");
 	rootComponent = mesh;
 
-	camera = CreateComponent(CameraComponent(XMFLOAT3(0.f, 0.f, -2.75f)), "Camera");
+	camera = CreateComponent(CameraComponent(XMFLOAT3(2.f, 1.5f, -4.f)), "Camera");
 	rootComponent->AddChild(camera);
 }
 
 void Player::Start()
 {
 	__super::Start();
+
+	auto cameraFocusPoint = GetPositionV() + GetForwardVectorV() * 3.f;
+	camera->SetWorldRotation(VMath::LookAtRotation(cameraFocusPoint, camera->GetWorldPositionV()));
 
 	nextPos = GetPositionV();
 	nextRot = GetRotationV();
