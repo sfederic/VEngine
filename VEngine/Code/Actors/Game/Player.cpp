@@ -219,8 +219,7 @@ void Player::RaycastToEnemy(XMVECTOR origin)
 		{
 			enemy->Destroy();
 
-			comboBarWidget->comboPoints++;
-			comboBarWidget->IncreaseScore();
+			comboBarWidget->IncreaseScoreAndCombo();
 		}
 	}
 }
