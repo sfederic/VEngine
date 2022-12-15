@@ -46,6 +46,8 @@ void Player::Tick(float deltaTime)
 	MovementInput();
 	RotationInput();
 
+	Shoot();
+
 	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, movementSpeed));
 	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotationSpeed));
 }
@@ -163,14 +165,17 @@ bool Player::CheckMovementAndRotationHaveStopped()
 }
 
 void Player::Shoot()
-{
-	Ray ray(this);
-	if (Raycast(ray, GetPositionV(), GetForwardVectorV(), 1000.f))
+{	
+	if (Input::GetKeyDown(Keys::Up))
 	{
-		auto enemy = dynamic_cast<Enemy*>(ray.hitActor);
-		if (enemy)
+		Ray ray(this);
+		if (Raycast(ray, GetPositionV(), GetForwardVectorV(), 1000.f))
 		{
-			enemy->Destroy();
+			auto enemy = dynamic_cast<Enemy*>(ray.hitActor);
+			if (enemy)
+			{
+				enemy->Destroy();
+			}
 		}
 	}
 }
