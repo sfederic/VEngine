@@ -274,7 +274,7 @@ void SpawnActor(Transform& transform)
 
 	if (!actorTemplateFilename.empty()) //Spawn actor through template
 	{
-		WorldEditor::SpawnActorFromTemplateFile(actorTemplateFilename, transform);
+		actor = WorldEditor::SpawnActorFromTemplateFile(actorTemplateFilename, transform);
 	}
 	else //Spawn MeshActor (usually)
 	{
@@ -282,6 +282,8 @@ void SpawnActor(Transform& transform)
 		debugMenu.AddNotification(VString::wformat(
 			L"Spawned actor [%S] from MeshActor system", actor->GetName().c_str()));
 	}
+
+	actor->Create();
 
 	pickedActor = actor;
 	editor->SetActorProps(pickedActor);
