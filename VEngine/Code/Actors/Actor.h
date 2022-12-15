@@ -94,6 +94,7 @@ public:
 	virtual void Tick(float deltaTime);
 
 	//An optional function to call after components have been setup, and after Actor's constructor
+	//(Use this when you want to override component fields that have to be defined in constructors)
 	virtual void Create();
 
 	//Do not override this direcly. ACTOR_SYSTEM macro overrides instead.
