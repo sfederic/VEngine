@@ -26,6 +26,8 @@ Material* MaterialSystem::CreateMaterial(std::string textureFilename, ShaderItem
 
 void MaterialSystem::DestroyMaterial(UID materialUID)
 {
+	//@Todo: There's some bad fucking VEnum/std::string orphan problem here.
+	//Might only show up because of Visual Studio's debug c++ container defs.
 	materials.erase(materialUID);
 }
 
