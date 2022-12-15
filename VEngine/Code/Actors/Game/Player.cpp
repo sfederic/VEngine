@@ -104,19 +104,19 @@ void Player::MovementInput()
 
 	if (Input::GetKeyHeld(Keys::W))
 	{
-		nextPos += GetPositionV() + GetForwardVectorV();
+		nextPos = GetPositionV() + GetForwardVectorV();
 	}
 	else if (Input::GetKeyHeld(Keys::S))
 	{
-		nextPos += GetPositionV() - GetForwardVectorV();
+		nextPos = GetPositionV() - GetForwardVectorV();
 	}
 	else if (Input::GetKeyHeld(Keys::A))
 	{
-		nextPos += GetPositionV() - GetRightVectorV();
+		nextPos = GetPositionV() - GetRightVectorV();
 	}
 	else if (Input::GetKeyHeld(Keys::D))
 	{
-		nextPos += GetPositionV() + GetRightVectorV();
+		nextPos = GetPositionV() + GetRightVectorV();
 	}
 }
 
