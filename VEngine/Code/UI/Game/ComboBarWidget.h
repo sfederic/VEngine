@@ -6,4 +6,6 @@ class ComboBarWidget : public Widget
 {
 public:
 	virtual void Draw(float deltaTime) override;
+
+	int comboPoints = 0;
 };

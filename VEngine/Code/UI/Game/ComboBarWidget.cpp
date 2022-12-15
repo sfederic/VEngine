@@ -3,9 +3,16 @@
 
 void ComboBarWidget::Draw(float deltaTime)
 {
-	auto outlineLayout = PercentAlignLayout(0.5f, 0.8f, 0.9f, 0.9f);
-	Rect(outlineLayout);
+	auto layout = PercentAlignLayout(0.5f, 0.8f, 0.9f, 0.9f);
+	layout.PushToLeft();
+	layout.rect.right += 30.f;
 
-	auto barLayout = PercentAlignLayout(0.5f, 0.8f, 0.7f, 0.9f);
-	FillRect(barLayout, { 0.8f, 0.9f, 0.1f, 1.f });
+	for (int i = 0; i < comboPoints; i++)
+	{
+		layout.AddHorizontalSpace(30.f);
+		FillRect(layout, { 0.1f, 0.9f, 0.3f, 1.f });
+
+		//Padding
+		layout.AddHorizontalSpace(5.f);
+	}
 }
