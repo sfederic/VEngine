@@ -11,9 +11,7 @@ Player::Player()
 	mesh = CreateComponent(MeshComponent("cube.fbx", "test.png"), "Mesh");
 	rootComponent = mesh;
 
-	camera = CreateComponent(CameraComponent(), "Camera");
-	camera->SetPosition(1.75f, 1.75f, -2.75f);
-	camera->targetActor = this;
+	camera = CreateComponent(CameraComponent(XMFLOAT3(0.f, 0.f, -2.75f)), "Camera");
 	rootComponent->AddChild(camera);
 }
 
@@ -126,13 +124,19 @@ void Player::RotationInput()
 
 	if (Input::GetKeyDown(Keys::Right))
 	{
-		constexpr float angle = XMConvertToRadians(90.f);
-		nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), angle));
+		nextRot = XMQuaternionMultiply(GetRotationV(), DirectX::XMQuaternionRotationAxis(GetUpVectorV(), XMConvertToRadians(90.f)));
 	}
 	else if (Input::GetKeyDown(Keys::Left))
 	{
-		constexpr float angle = XMConvertToRadians(-90.f);
-		nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), angle));
+		nextRot = XMQuaternionMultiply(GetRotationV(), DirectX::XMQuaternionRotationAxis(GetUpVectorV(), XMConvertToRadians(-90.f)));
+	}
+	else if (Input::GetKeyDown(Keys::Up))
+	{
+		nextRot = XMQuaternionMultiply(GetRotationV(), DirectX::XMQuaternionRotationAxis(GetRightVectorV(), XMConvertToRadians(-90.f)));
+	}
+	else if (Input::GetKeyDown(Keys::Down))
+	{
+		nextRot = XMQuaternionMultiply(GetRotationV(), DirectX::XMQuaternionRotationAxis(GetRightVectorV(), XMConvertToRadians(90.f)));
 	}
 }
 

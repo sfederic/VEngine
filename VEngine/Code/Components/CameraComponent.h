@@ -11,7 +11,6 @@ public:
 	COMPONENT_SYSTEM(CameraComponent)
 
 	XMVECTOR focusPoint = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-
 	Actor* targetActor = nullptr;
 
 	float shakeLevel = 0.f;

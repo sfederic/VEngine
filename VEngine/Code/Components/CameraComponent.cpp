@@ -33,7 +33,7 @@ XMMATRIX CameraComponent::GetViewMatrix()
 		focusPoint = worldPos + GetForwardVectorV();
 	}
 
-	XMMATRIX view = XMMatrixLookAtLH(worldPos, focusPoint, VMath::GlobalUpVector());
+	XMMATRIX view = XMMatrixLookAtLH(worldPos, focusPoint, GetUpVectorV());
 
 	//Camera translation shaking
 	XMVECTOR shakeVector = Shake();
