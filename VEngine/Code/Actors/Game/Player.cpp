@@ -128,6 +128,14 @@ void Player::MovementInput()
 	{
 		nextPos = GetPositionV() + GetRightVectorV();
 	}
+	else if (Input::GetKeyHeld(Keys::E))
+	{
+		nextPos = GetPositionV() + GetUpVectorV();
+	}
+	else if (Input::GetKeyHeld(Keys::Q))
+	{
+		nextPos = GetPositionV() - GetUpVectorV();
+	}
 }
 
 void Player::RotationInput()
