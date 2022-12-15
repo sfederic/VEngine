@@ -42,7 +42,7 @@ void TransformGizmo::Tick()
     XMStoreFloat4x4(&proj, activeCamera->GetProjectionMatrix());
 
     //Toggle and draw grid
-    if (Input::GetKeyHeld(Keys::ShiftLeft))
+    if (Input::GetKeyHeld(Keys::Shift))
     {
         if (Input::GetKeyDown(Keys::G))
         {

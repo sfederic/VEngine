@@ -2,6 +2,7 @@
 
 #include <set>
 
+//All these values are Win32 virtual keys.
 enum class Keys
 {
 	None = 0,
@@ -11,8 +12,7 @@ enum class Keys
 	Tab = 0x09,
 	Tilde = 0xC0,
 	Ctrl = 0x11,
-	ShiftLeft = 0xA0,
-	ShiftRight = 0xA1,
+	Shift = 0x10,
 	Delete = 0x2E,
 	BackSpace = 0x08,
 	//@Todo: there's all sorts of scancode shit win Win32 and keyboards that won't make this work internationally.
