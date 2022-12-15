@@ -20,10 +20,18 @@ public:
 private:
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
+	void MovementInput();
+
 public:
 	MeshComponent* mesh = nullptr;
 	CameraComponent* camera = nullptr;
 
 private:
 	std::vector<Actor*> previousHitTransparentActors;
+
+	XMVECTOR nextPos;
+	XMVECTOR nextRot;
+
+	float movementSpeed = 9.5f;
+	float rotationSpeed = 5.5f;
 };

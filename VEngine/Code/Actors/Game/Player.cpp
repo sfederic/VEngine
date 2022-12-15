@@ -1,5 +1,7 @@
 #include "vpch.h"
 #include "Player.h"
+#include "Input.h"
+#include "VMath.h"
 #include "Components/MeshComponent.h"
 #include "Components/CameraComponent.h"
 #include "Physics/Raycast.h"
@@ -11,6 +13,9 @@ Player::Player()
 void Player::Start()
 {
 	__super::Start();
+
+	nextPos = GetPositionV();
+	nextRot = GetRotationV();
 }
 
 void Player::End()
@@ -23,6 +28,11 @@ void Player::Tick(float deltaTime)
 	__super::Tick(deltaTime);
 
 	MakeOccludingMeshBetweenCameraAndPlayerTransparent();
+
+	MovementInput();
+
+	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, movementSpeed));
+	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotationSpeed));
 }
 
 Properties Player::GetProps()
@@ -77,5 +87,25 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 		}
 
 		previousHitTransparentActors.clear();
+	}
+}
+
+void Player::MovementInput()
+{
+	if (Input::GetKeyHeld(Keys::W))
+	{
+		nextPos += GetPositionV() + GetForwardVectorV();
+	}
+	else if (Input::GetKeyHeld(Keys::S))
+	{
+		nextPos += GetPositionV() - GetForwardVectorV();
+	}
+	else if (Input::GetKeyHeld(Keys::A))
+	{
+		nextPos += GetPositionV() - GetRightVectorV();
+	}
+	else if (Input::GetKeyHeld(Keys::D))
+	{
+		nextPos += GetPositionV() + GetRightVectorV();
 	}
 }
