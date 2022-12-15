@@ -47,6 +47,7 @@ void Player::Tick(float deltaTime)
 	RotationInput();
 
 	Shoot();
+	BladeSwipe();
 
 	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, movementSpeed));
 	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotationSpeed));
@@ -165,7 +166,9 @@ bool Player::CheckMovementAndRotationHaveStopped()
 }
 
 void Player::Shoot()
-{	
+{
+	if (!CheckMovementAndRotationHaveStopped()) return;
+
 	if (Input::GetKeyDown(Keys::Up))
 	{
 		Ray ray(this);
@@ -175,6 +178,35 @@ void Player::Shoot()
 			if (enemy)
 			{
 				enemy->Destroy();
+			}
+		}
+	}
+}
+
+void Player::BladeSwipe()
+{
+	if (!CheckMovementAndRotationHaveStopped()) return;
+
+	if (Input::GetKeyDown(Keys::Down))
+	{
+		//Line up 5 origins alongside player's right axis
+		std::vector<XMVECTOR> rayOrigins;
+		rayOrigins.push_back(GetPositionV() - GetRightVectorV() * 2.f);
+		rayOrigins.push_back(GetPositionV() - GetRightVectorV());
+		rayOrigins.push_back(GetPositionV());
+		rayOrigins.push_back(GetPositionV() + GetRightVectorV());
+		rayOrigins.push_back(GetPositionV() + GetRightVectorV() * 2.f);
+
+		for (auto& rayOrigin : rayOrigins)
+		{
+			Ray ray(this);
+			if (Raycast(ray, rayOrigin, GetForwardVectorV(), 1000.f))
+			{
+				auto enemy = dynamic_cast<Enemy*>(ray.hitActor);
+				if (enemy)
+				{
+					enemy->Destroy();
+				}
 			}
 		}
 	}

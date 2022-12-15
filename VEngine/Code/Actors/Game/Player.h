@@ -26,6 +26,7 @@ private:
 	bool CheckMovementAndRotationHaveStopped();
 
 	void Shoot();
+	void BladeSwipe();
 
 public:
 	MeshComponent* mesh = nullptr;
