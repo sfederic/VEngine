@@ -5,6 +5,7 @@
 #include "Actors/Game/Enemy.h"
 #include "Components/MeshComponent.h"
 #include "Components/CameraComponent.h"
+#include "Gameplay/GameUtils.h"
 #include "Physics/Raycast.h"
 #include "UI/Game/ComboBarWidget.h"
 #include "UI/UISystem.h"
@@ -184,7 +185,17 @@ void Player::Shoot()
 
 	if (Input::GetKeyDown(Keys::Up))
 	{
-		RaycastToEnemy(GetPositionV());
+		Ray ray(this);
+		if (Raycast(ray, GetPositionV(), GetForwardVectorV(), 1000.f))
+		{
+			auto enemy = dynamic_cast<Enemy*>(ray.hitActor);
+			if (enemy)
+			{
+				comboBarWidget->IncreaseScoreAndCombo();
+				GameUtils::SpawnSpriteSheet("Sprites/explosion.png", enemy->GetPosition(), false, 4, 4);
+				enemy->Destroy();
+			}
+		}
 	}
 }
 
@@ -204,22 +215,16 @@ void Player::BladeSwipe()
 
 		for (auto& rayOrigin : rayOrigins)
 		{
-			RaycastToEnemy(rayOrigin);
-		}
-	}
-}
-
-void Player::RaycastToEnemy(XMVECTOR origin)
-{
-	Ray ray(this);
-	if (Raycast(ray, origin, GetForwardVectorV(), 1000.f))
-	{
-		auto enemy = dynamic_cast<Enemy*>(ray.hitActor);
-		if (enemy)
-		{
-			enemy->Destroy();
-
-			comboBarWidget->IncreaseScoreAndCombo();
+			Ray ray(this);
+			if (Raycast(ray, rayOrigin, GetForwardVectorV(), 1000.f))
+			{
+				auto enemy = dynamic_cast<Enemy*>(ray.hitActor);
+				if (enemy)
+				{
+					comboBarWidget->IncreaseScoreAndCombo();
+					enemy->Destroy();
+				}
+			}
 		}
 	}
 }
