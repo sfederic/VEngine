@@ -10,5 +10,5 @@ public:
 	int comboPoints = 0;
 
 private:
-	float comboBarDecreaseTimer = 0.5f;
+	float comboBarDecreaseTimer = 1.5f;
 };
