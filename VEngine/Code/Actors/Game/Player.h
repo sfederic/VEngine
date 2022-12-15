@@ -28,6 +28,7 @@ private:
 
 	void Shoot();
 	void BladeSwipe();
+	void RaycastToEnemy(XMVECTOR origin);
 
 public:
 	MeshComponent* mesh = nullptr;

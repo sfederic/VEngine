@@ -16,6 +16,11 @@ void ComboBarWidget::Draw(float deltaTime)
 	}
 }
 
+void ComboBarWidget::IncreaseScore()
+{
+	score += comboPoints * 100;
+}
+
 void ComboBarWidget::DrawScore()
 {
 	auto scoreLayout = PercentAlignLayout(0.5, 0.7f, 0.8f, 0.9f);

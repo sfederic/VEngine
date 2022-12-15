@@ -184,16 +184,7 @@ void Player::Shoot()
 
 	if (Input::GetKeyDown(Keys::Up))
 	{
-		Ray ray(this);
-		if (Raycast(ray, GetPositionV(), GetForwardVectorV(), 1000.f))
-		{
-			auto enemy = dynamic_cast<Enemy*>(ray.hitActor);
-			if (enemy)
-			{
-				enemy->Destroy();
-				comboBarWidget->comboPoints++;
-			}
-		}
+		RaycastToEnemy(GetPositionV());
 	}
 }
 
@@ -213,16 +204,23 @@ void Player::BladeSwipe()
 
 		for (auto& rayOrigin : rayOrigins)
 		{
-			Ray ray(this);
-			if (Raycast(ray, rayOrigin, GetForwardVectorV(), 1000.f))
-			{
-				auto enemy = dynamic_cast<Enemy*>(ray.hitActor);
-				if (enemy)
-				{
-					enemy->Destroy();
-					comboBarWidget->comboPoints++;
-				}
-			}
+			RaycastToEnemy(rayOrigin);
+		}
+	}
+}
+
+void Player::RaycastToEnemy(XMVECTOR origin)
+{
+	Ray ray(this);
+	if (Raycast(ray, origin, GetForwardVectorV(), 1000.f))
+	{
+		auto enemy = dynamic_cast<Enemy*>(ray.hitActor);
+		if (enemy)
+		{
+			enemy->Destroy();
+
+			comboBarWidget->comboPoints++;
+			comboBarWidget->IncreaseScore();
 		}
 	}
 }

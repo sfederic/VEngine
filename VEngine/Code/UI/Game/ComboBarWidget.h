@@ -6,6 +6,7 @@ class ComboBarWidget : public Widget
 {
 public:
 	virtual void Draw(float deltaTime) override;
+	void IncreaseScore();
 
 private:
 	void DrawScore();
