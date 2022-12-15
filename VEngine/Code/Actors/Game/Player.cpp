@@ -191,6 +191,7 @@ void Player::Shoot()
 			if (enemy)
 			{
 				enemy->Destroy();
+				comboBarWidget->comboPoints++;
 			}
 		}
 	}
@@ -219,6 +220,7 @@ void Player::BladeSwipe()
 				if (enemy)
 				{
 					enemy->Destroy();
+					comboBarWidget->comboPoints++;
 				}
 			}
 		}
