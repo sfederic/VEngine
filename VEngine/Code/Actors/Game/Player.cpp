@@ -8,7 +8,7 @@
 
 Player::Player()
 {
-	mesh = CreateComponent(MeshComponent("character.fbx", "test.png"), "Mesh");
+	mesh = CreateComponent(MeshComponent("cube.fbx", "test.png"), "Mesh");
 	rootComponent = mesh;
 
 	camera = CreateComponent(CameraComponent(), "Camera");
