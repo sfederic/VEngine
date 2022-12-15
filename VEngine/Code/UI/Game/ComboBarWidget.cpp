@@ -11,14 +11,18 @@ void ComboBarWidget::Draw(float deltaTime)
 
 	if (comboBarDecreaseTimer < 0.f)
 	{
-		comboPoints--;
 		comboBarDecreaseTimer = COMBO_BAR_DECREASE_TIMER_MAX;
+
+		if (comboPoints > 0)
+		{
+			comboPoints--;
+		}
 	}
 }
 
 void ComboBarWidget::IncreaseScoreAndCombo()
 {
-	comboPoints++;
+	++comboPoints;
 	score += comboPoints * 100;
 	comboBarDecreaseTimer = COMBO_BAR_DECREASE_TIMER_MAX;
 }

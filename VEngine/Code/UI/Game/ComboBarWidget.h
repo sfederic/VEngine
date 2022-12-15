@@ -17,5 +17,5 @@ private:
 	int score = 0;
 
 	float comboBarDecreaseTimer = COMBO_BAR_DECREASE_TIMER_MAX;
-	inline static const float COMBO_BAR_DECREASE_TIMER_MAX = 1.5f;
+	inline static const float COMBO_BAR_DECREASE_TIMER_MAX = 1.f;
 };
