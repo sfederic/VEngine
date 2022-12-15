@@ -21,6 +21,7 @@ private:
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
 	void MovementInput();
+	void RotationInput();
 
 public:
 	MeshComponent* mesh = nullptr;
@@ -29,8 +30,8 @@ public:
 private:
 	std::vector<Actor*> previousHitTransparentActors;
 
-	XMVECTOR nextPos;
-	XMVECTOR nextRot;
+	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 
 	float movementSpeed = 9.5f;
 	float rotationSpeed = 5.5f;

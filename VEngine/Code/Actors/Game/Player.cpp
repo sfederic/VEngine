@@ -8,6 +8,13 @@
 
 Player::Player()
 {
+	mesh = CreateComponent(MeshComponent("character.fbx", "test.png"), "Mesh");
+	rootComponent = mesh;
+
+	camera = CreateComponent(CameraComponent(), "Camera");
+	camera->SetPosition(1.75f, 1.75f, -2.75f);
+	camera->targetActor = this;
+	rootComponent->AddChild(camera);
 }
 
 void Player::Start()
@@ -107,5 +114,19 @@ void Player::MovementInput()
 	else if (Input::GetKeyHeld(Keys::D))
 	{
 		nextPos += GetPositionV() + GetRightVectorV();
+	}
+}
+
+void Player::RotationInput()
+{
+	if (Input::GetKeyDown(Keys::Right))
+	{
+		constexpr float angle = XMConvertToRadians(90.f);
+		nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), angle));
+	}
+	else if (Input::GetKeyDown(Keys::Left))
+	{
+		constexpr float angle = XMConvertToRadians(-90.f);
+		nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), angle));
 	}
 }
