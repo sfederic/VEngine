@@ -8,4 +8,7 @@ public:
 	virtual void Draw(float deltaTime) override;
 
 	int comboPoints = 0;
+
+private:
+	float comboBarDecreaseTimer = 0.5f;
 };

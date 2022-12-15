@@ -15,4 +15,10 @@ void ComboBarWidget::Draw(float deltaTime)
 		//Padding
 		layout.AddHorizontalSpace(5.f);
 	}
+
+	if (comboBarDecreaseTimer < 0.f)
+	{
+		comboPoints--;
+		comboBarDecreaseTimer = 0.5f;
+	}
 }
