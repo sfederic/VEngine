@@ -119,6 +119,7 @@
   <ItemGroup>
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp" />
     <ClCompile Include="Code\Actors\CameraActor.cpp" />
+    <ClCompile Include="Code\Actors\Game\Enemy.cpp" />
     <ClCompile Include="Code\Camera.cpp" />
     <ClCompile Include="Code\Editor\ActorTreeWidget.cpp" />
     <ClCompile Include="Code\Editor\ImGuizmo\ImSequencer.cpp">
@@ -225,6 +226,7 @@
     <ClCompile Include="Code\EditorCamera.cpp" />
     <ClCompile Include="Code\Actors\Game\Player.cpp" />
     <ClInclude Include="Code\Actors\CameraActor.h" />
+    <ClInclude Include="Code\Actors\Game\Enemy.h" />
     <ClInclude Include="Code\Asset\AssetFileExtensions.h" />
     <ClInclude Include="Code\Asset\AssetPaths.h" />
     <ClInclude Include="Code\Camera.h" />
