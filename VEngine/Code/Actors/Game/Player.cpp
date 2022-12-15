@@ -6,6 +6,8 @@
 #include "Components/MeshComponent.h"
 #include "Components/CameraComponent.h"
 #include "Physics/Raycast.h"
+#include "UI/Game/ComboBarWidget.h"
+#include "UI/UISystem.h"
 
 Player::Player()
 {
@@ -24,6 +26,9 @@ void Player::Create()
 void Player::Start()
 {
 	__super::Start();
+
+	comboBarWidget = UISystem::CreateWidget<ComboBarWidget>();
+	comboBarWidget->AddToViewport();
 
 	auto cameraFocusPoint = GetPositionV() + GetForwardVectorV() * 3.f;
 	camera->SetWorldRotation(VMath::LookAtRotation(cameraFocusPoint, camera->GetWorldPositionV()));

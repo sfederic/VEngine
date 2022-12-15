@@ -5,6 +5,7 @@
 
 struct MeshComponent;
 class CameraComponent;
+class ComboBarWidget;
 
 class Player : public Actor
 {
@@ -33,6 +34,8 @@ public:
 	CameraComponent* camera = nullptr;
 
 private:
+	ComboBarWidget* comboBarWidget = nullptr;
+
 	std::vector<Actor*> previousHitTransparentActors;
 
 	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
