@@ -25,6 +25,8 @@ private:
 	void RotationInput();
 	bool CheckMovementAndRotationHaveStopped();
 
+	void Shoot();
+
 public:
 	MeshComponent* mesh = nullptr;
 	CameraComponent* camera = nullptr;

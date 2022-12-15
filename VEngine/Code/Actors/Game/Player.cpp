@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Input.h"
 #include "VMath.h"
+#include "Actors/Game/Enemy.h"
 #include "Components/MeshComponent.h"
 #include "Components/CameraComponent.h"
 #include "Physics/Raycast.h"
@@ -159,4 +160,17 @@ void Player::RotationInput()
 bool Player::CheckMovementAndRotationHaveStopped()
 {
 	return XMVector4Equal(GetPositionV(), nextPos) && XMQuaternionEqual(GetRotationV(), nextRot);
+}
+
+void Player::Shoot()
+{
+	Ray ray(this);
+	if (Raycast(ray, GetPositionV(), GetForwardVectorV(), 1000.f))
+	{
+		auto enemy = dynamic_cast<Enemy*>(ray.hitActor);
+		if (enemy)
+		{
+			enemy->Destroy();
+		}
+	}
 }
