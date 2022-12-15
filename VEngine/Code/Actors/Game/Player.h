@@ -22,6 +22,7 @@ private:
 
 	void MovementInput();
 	void RotationInput();
+	bool CheckMovementAndRotationHaveStopped();
 
 public:
 	MeshComponent* mesh = nullptr;

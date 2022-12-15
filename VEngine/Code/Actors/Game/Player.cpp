@@ -37,6 +37,7 @@ void Player::Tick(float deltaTime)
 	MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
 	MovementInput();
+	RotationInput();
 
 	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, movementSpeed));
 	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotationSpeed));
@@ -99,6 +100,8 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 
 void Player::MovementInput()
 {
+	if (!CheckMovementAndRotationHaveStopped()) return;
+
 	if (Input::GetKeyHeld(Keys::W))
 	{
 		nextPos += GetPositionV() + GetForwardVectorV();
@@ -119,6 +122,8 @@ void Player::MovementInput()
 
 void Player::RotationInput()
 {
+	if (!CheckMovementAndRotationHaveStopped()) return;
+
 	if (Input::GetKeyDown(Keys::Right))
 	{
 		constexpr float angle = XMConvertToRadians(90.f);
@@ -129,4 +134,9 @@ void Player::RotationInput()
 		constexpr float angle = XMConvertToRadians(-90.f);
 		nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), angle));
 	}
+}
+
+bool Player::CheckMovementAndRotationHaveStopped()
+{
+	return XMVector4Equal(GetPositionV(), nextPos) && XMQuaternionEqual(GetRotationV(), nextRot);
 }
