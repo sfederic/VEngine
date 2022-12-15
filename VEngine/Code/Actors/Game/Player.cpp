@@ -11,8 +11,13 @@ Player::Player()
 	mesh = CreateComponent(MeshComponent("cube.fbx", "test.png"), "Mesh");
 	rootComponent = mesh;
 
-	camera = CreateComponent(CameraComponent(XMFLOAT3(2.f, 1.5f, -4.f)), "Camera");
+	camera = CreateComponent(CameraComponent(), "Camera");
 	rootComponent->AddChild(camera);
+}
+
+void Player::Create()
+{
+	camera->SetPosition(2.f, 1.5f, -4.f);
 }
 
 void Player::Start()

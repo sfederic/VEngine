@@ -12,6 +12,7 @@ public:
 	ACTOR_SYSTEM(Player)
 
 	Player();
+	virtual void Create() override;
 	virtual void Start() override;
 	virtual void End() override;
 	virtual void Tick(float deltaTime) override;
