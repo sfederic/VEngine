@@ -105,7 +105,7 @@ void Widget::Text(const std::string text, Layout layout, TextAlign align, D2D1_C
 bool Widget::Button(const std::wstring text, Layout layout, float lineWidth,
 	TextAlign textAlign, D2D1_COLOR_F textColor, float textOpacity)
 {
-	UISystem::FillRect(layout);
+	UISystem::FillRect(layout, Colours::Grey);
 	Text(text, layout.rect, textAlign, textColor, textOpacity);
 
 	if (editor->viewportMouseX > layout.rect.left && editor->viewportMouseX < layout.rect.right)
@@ -183,7 +183,7 @@ void Widget::Rect(Layout layout)
 
 void Widget::FillRect(Layout layout, D2D1_COLOR_F color, float opacity)
 {
-	UISystem::FillRect(layout);
+	UISystem::FillRect(layout, color);
 }
 
 Layout Widget::AlignLayout(float w, float h, Align align)
