@@ -222,6 +222,7 @@ void Player::BladeSwipe()
 				if (enemy)
 				{
 					comboBarWidget->IncreaseScoreAndCombo();
+					GameUtils::SpawnSpriteSheet("Sprites/blade_slash.png", enemy->GetPosition(), false, 3, 5);
 					enemy->Destroy();
 				}
 			}
