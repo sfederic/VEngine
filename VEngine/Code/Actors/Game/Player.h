@@ -22,8 +22,10 @@ public:
 private:
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
-	void MovementInput();
-	void RotationInput();
+	void AllRangeModeMovementInput();
+	void AutoScrollMovementInput();
+	void AllRangeModeRotationInput();
+	void AutoScrollRotationInput();
 	bool CheckMovementAndRotationHaveStopped();
 
 	void Shoot();
@@ -43,4 +45,6 @@ private:
 
 	float movementSpeed = 9.5f;
 	float rotationSpeed = 5.5f;
+
+	bool allRangeModeActive = false;
 };
