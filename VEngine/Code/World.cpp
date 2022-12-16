@@ -8,6 +8,7 @@
 #include "Log.h"
 #include "Actors/MeshActor.h"
 #include "Actors/Game/Player.h"
+#include "Actors/Game/LevelInstance.h"
 #include "Actors/DirectionalLightActor.h"
 #include "Actors/ActorSystemCache.h"
 #include "Components/ComponentSystemCache.h"
@@ -113,6 +114,8 @@ void World::EndAllActors()
 void World::CreateDefaultMapActors()
 {
 	Player::system.Add();
+
+	LevelInstance::system.Add();
 
 	auto dlight = DirectionalLightActor::system.Add();
 	//Set light pointing down because shadows looks nice.
