@@ -25,8 +25,8 @@
 
 std::string World::worldFilename;
 
-std::unordered_map<UID, Actor*> World::actorUIDMap;
-std::unordered_map<std::string, Actor*> World::actorNameMap;
+std::map<UID, Actor*> World::actorUIDMap;
+std::map<std::string, Actor*> World::actorNameMap;
 
 std::vector<IActorSystem*> World::activeActorSystems;
 std::vector<IComponentSystem*> World::activeComponentSystems;

@@ -12,8 +12,8 @@ namespace World
 {
 	extern std::string worldFilename;
 
-	extern std::unordered_map<UID, Actor*> actorUIDMap;
-	extern std::unordered_map<std::string, Actor*> actorNameMap;
+	extern std::map<UID, Actor*> actorUIDMap;
+	extern std::map<std::string, Actor*> actorNameMap;
 
 	extern std::vector<IActorSystem*> activeActorSystems;
 	extern std::vector<IComponentSystem*> activeComponentSystems;
