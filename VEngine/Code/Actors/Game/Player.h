@@ -27,6 +27,7 @@ private:
 	void AllRangeModeRotationInput();
 	void AutoScrollRotationInput();
 	bool CheckMovementAndRotationHaveStopped();
+	bool CheckPlayerWithinLevelBounds();
 
 	void Shoot();
 	void BladeSwipe();
@@ -46,5 +47,5 @@ private:
 	float movementSpeed = 9.5f;
 	float rotationSpeed = 5.5f;
 
-	bool allRangeModeActive = false;
+	bool allRangeModeActive = true;
 };
