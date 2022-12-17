@@ -30,8 +30,10 @@ namespace World
 	//Call End() on all actors on gameplay end
 	void EndAllActors();
 
-	//Create default starting actors for a map, like Player, Grid.
+	//Create default starting actors for a map.
 	void CreateDefaultMapActors();
+
+	void CreateNodeGrid();
 
 	std::vector<IActorSystem*> GetLayerActorSystems();
 
