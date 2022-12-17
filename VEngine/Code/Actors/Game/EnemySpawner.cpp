@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "EnemySpawner.h"
 #include "Components/BoxTriggerComponent.h"
+#include "Components/MeshComponent.h"
 #include "Actors/Game/Enemy.h"
 #include "Timer.h"
 
@@ -29,7 +30,30 @@ void EnemySpawner::SpawnEnemy()
 	if (numOfEnemiesToSpawn <= 0) return;
 
 	auto enemy = Enemy::system.Add();
+
 	auto pointInBoundingBox = boxTrigger->GetRandomPointInTriggerRounded();
+
+	//Keep vector of previous points to re-check them on Contains() == true below
+	std::vector<XMVECTOR> previousContainedPoints;
+
+	//Retry random point in bounds if it's inside another bounds
+	for (auto& mesh : MeshComponent::system.GetComponents())
+	{
+		if (mesh->boundingBox.Contains(pointInBoundingBox))
+		{
+			previousContainedPoints.push_back(pointInBoundingBox);
+
+			pointInBoundingBox = boxTrigger->GetRandomPointInTriggerRounded();
+			for (auto& previousPoint : previousContainedPoints)
+			{
+				if (XMVector4Equal(pointInBoundingBox, previousPoint))
+				{
+					return; //@Todo: this is a lazy way to avoid enemies being spawned inside other things
+				}
+			}
+		}
+	}
+
 	enemy->SetPosition(pointInBoundingBox);
 
 	numOfEnemiesToSpawn--;

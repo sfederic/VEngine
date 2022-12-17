@@ -77,9 +77,9 @@ XMFLOAT3 BoxTriggerComponent::GetRandomPointInTrigger()
 	return result;
 }
 
-XMFLOAT3 BoxTriggerComponent::GetRandomPointInTriggerRounded()
+XMVECTOR BoxTriggerComponent::GetRandomPointInTriggerRounded()
 {
 	auto point = GetRandomPointInTrigger();
 	VMath::RoundFloat3(point);
-	return point;
+	return XMLoadFloat3(&point);
 }

@@ -21,5 +21,5 @@ struct BoxTriggerComponent : SpatialComponent
 	bool ContainsTarget();
 	void SetTargetAsPlayer();
 	XMFLOAT3 GetRandomPointInTrigger();
-	XMFLOAT3 GetRandomPointInTriggerRounded();
+	XMVECTOR GetRandomPointInTriggerRounded();
 };
