@@ -20,5 +20,5 @@ public:
 private:
 	BoxTriggerComponent* boxTrigger = nullptr;
 	float spawnInterval = 2.0f;
-	int numOfEnemiesToSpawn = 1;
+	int numOfEnemiesToSpawn = 25;
 };
