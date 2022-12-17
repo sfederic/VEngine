@@ -27,6 +27,7 @@ private:
 	void AllRangeModeRotationInput();
 	void AutoScrollRotationInput();
 	bool CheckMovementAndRotationHaveStopped();
+	bool CheckPlayerWithinLevelBounds();
 
 	void Shoot();
 	void BladeSwipe();

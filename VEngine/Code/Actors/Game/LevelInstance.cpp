@@ -9,8 +9,6 @@ LevelInstance::LevelInstance()
 Properties LevelInstance::GetProps()
 {
     auto props = __super::GetProps();
-    props.Add("Level Size X", &levelSizeX);
-    props.Add("Level Size Y", &levelSizeY);
-    props.Add("Level Size Z", &levelSizeZ);
+    props.Add("Level Size", &levelSize);
     return props;
 }

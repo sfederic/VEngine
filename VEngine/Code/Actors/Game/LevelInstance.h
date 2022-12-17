@@ -12,8 +12,8 @@ public:
 	LevelInstance();
 	virtual Properties GetProps() override;
 
+	auto GetLevelSize() { return levelSize; }
+
 private:
-	int levelSizeX = 1;
-	int levelSizeY = 1;
-	int levelSizeZ = 1;
+	XMFLOAT3 levelSize = XMFLOAT3(1.f, 1.f, 1.f);
 };

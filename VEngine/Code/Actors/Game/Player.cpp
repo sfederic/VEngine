@@ -3,6 +3,7 @@
 #include "Input.h"
 #include "VMath.h"
 #include "Actors/Game/Enemy.h"
+#include "Actors/Game/LevelInstance.h"
 #include "Components/MeshComponent.h"
 #include "Components/CameraComponent.h"
 #include "Gameplay/GameUtils.h"
@@ -64,7 +65,10 @@ void Player::Tick(float deltaTime)
 
 		//This needs to be the bottom of the tick before position/rotation sets else checks
 		//for movement/rotation stops won't return true.
-		nextPos += GetForwardVectorV() * deltaTime;
+		if (CheckPlayerWithinLevelBounds())
+		{
+			nextPos += GetForwardVectorV() * deltaTime;
+		}
 	}
 
 	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, movementSpeed));
@@ -161,6 +165,8 @@ void Player::AutoScrollMovementInput()
 {
 	if (!CheckMovementAndRotationHaveStopped()) return;
 
+	auto previousPos = nextPos;
+
 	if (Input::GetKeyHeld(Keys::W))
 	{
 		nextPos = GetPositionV() + GetUpVectorV();
@@ -176,6 +182,11 @@ void Player::AutoScrollMovementInput()
 	else if (Input::GetKeyHeld(Keys::D))
 	{
 		nextPos = GetPositionV() + GetRightVectorV();
+	}
+
+	if (!CheckPlayerWithinLevelBounds())
+	{
+		nextPos = previousPos;
 	}
 }
 
@@ -224,6 +235,28 @@ void Player::AllRangeModeRotationInput()
 bool Player::CheckMovementAndRotationHaveStopped()
 {
 	return XMVector4Equal(GetPositionV(), nextPos) && XMQuaternionEqual(GetRotationV(), nextRot);
+}
+
+bool Player::CheckPlayerWithinLevelBounds()
+{
+	auto levelSize = LevelInstance::system.GetFirstActor()->GetLevelSize();
+	XMFLOAT3 pos;
+	XMStoreFloat3(&pos, nextPos);
+
+	if (pos.x < 0.f || pos.x > levelSize.x)
+	{
+		return false;
+	}
+	else if (pos.y < 0.f || pos.y > levelSize.y)
+	{
+		return false;
+	}
+	else if (pos.z < 0.f || pos.z > levelSize.z)
+	{
+		return false;
+	}
+
+	return true;
 }
 
 void Player::Shoot()
