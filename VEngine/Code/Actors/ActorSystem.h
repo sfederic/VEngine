@@ -35,9 +35,13 @@ public:
 		actor->SetActorSystem(this);
 		actor->SetSystemIndex(actors.size() - 1);
 		actor->SetTransform(transform);
-		actor->SimpleSetName(this->name + std::to_string(actor->GetSystemIndex()));
 
-		World::AddActorToWorld(actor.get());
+		//AddActorToWorld() call is in SetName()
+		if (!actor->SetName(this->name + std::to_string(actor->GetSystemIndex())))
+		{
+			auto uid = (unsigned int)GenerateUID(); //std::to_string goes bananas with UID
+			actor->SimpleSetName(this->name + std::to_string(uid));
+		}
 
 		return actor.get();
 	}
@@ -188,7 +192,6 @@ public:
 	virtual Actor* SpawnActor(Transform transform) override
 	{
 		Actor* actor = (Actor*)Add(transform);
-		editor->AddActorToWorldList(actor);
 		return actor;
 	}
 
