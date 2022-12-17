@@ -26,6 +26,11 @@ Properties EnemySpawner::GetProps()
 
 void EnemySpawner::SpawnEnemy()
 {
-	Enemy::system.Add();
+	if (numOfEnemiesToSpawn <= 0) return;
+
+	auto enemy = Enemy::system.Add();
+	auto pointInBoundingBox = boxTrigger->GetRandomPointInTriggerRounded();
+	enemy->SetPosition(pointInBoundingBox);
+
 	numOfEnemiesToSpawn--;
 }
