@@ -140,26 +140,32 @@ void Player::AllRangeModeMovementInput()
 	if (Input::GetKeyHeld(Keys::W))
 	{
 		nextPos = GetPositionV() + GetForwardVectorV();
+		if (CheckForObstacle()) nextPos = previousPos;
 	}
 	else if (Input::GetKeyHeld(Keys::S))
 	{
 		nextPos = GetPositionV() - GetForwardVectorV();
+		if (CheckForObstacle()) nextPos = previousPos;
 	}
 	else if (Input::GetKeyHeld(Keys::A))
 	{
 		nextPos = GetPositionV() - GetRightVectorV();
+		if (CheckForObstacle()) nextPos = previousPos;
 	}
 	else if (Input::GetKeyHeld(Keys::D))
 	{
 		nextPos = GetPositionV() + GetRightVectorV();
+		if (CheckForObstacle()) nextPos = previousPos;
 	}
 	else if (Input::GetKeyHeld(Keys::E))
 	{
 		nextPos = GetPositionV() + GetUpVectorV();
+		if (CheckForObstacle()) nextPos = previousPos;
 	}
 	else if (Input::GetKeyHeld(Keys::Q))
 	{
 		nextPos = GetPositionV() - GetUpVectorV();
+		if (CheckForObstacle()) nextPos = previousPos;
 	}
 
 	if (!CheckPlayerWithinLevelBounds())
@@ -177,18 +183,22 @@ void Player::AutoScrollMovementInput()
 	if (Input::GetKeyHeld(Keys::W))
 	{
 		nextPos = GetPositionV() + GetUpVectorV();
+		if (CheckForObstacle()) nextPos = previousPos;
 	}
 	else if (Input::GetKeyHeld(Keys::S))
 	{
 		nextPos = GetPositionV() - GetUpVectorV();
+		if (CheckForObstacle()) nextPos = previousPos;
 	}
 	else if (Input::GetKeyHeld(Keys::A))
 	{
 		nextPos = GetPositionV() - GetRightVectorV();
+		if (CheckForObstacle()) nextPos = previousPos;
 	}
 	else if (Input::GetKeyHeld(Keys::D))
 	{
 		nextPos = GetPositionV() + GetRightVectorV();
+		if (CheckForObstacle()) nextPos = previousPos;
 	}
 
 	if (!CheckPlayerWithinLevelBounds())
@@ -264,6 +274,12 @@ bool Player::CheckPlayerWithinLevelBounds()
 	}
 
 	return true;
+}
+
+bool Player::CheckForObstacle()
+{
+	Ray ray(this);
+	return Raycast(ray, GetPositionV(), nextPos);
 }
 
 void Player::Shoot()
