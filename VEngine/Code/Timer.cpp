@@ -12,6 +12,11 @@ void Timer::Tick(float deltaTime)
 		if (timerItem.currentTime > timerItem.endTime)
 		{
 			timerItem.functionToCall();
+
+			if (timerItem.loop)
+			{
+				timerItem.currentTime = 0.0;
+			}
 		}
 	}
 
@@ -31,14 +36,15 @@ void Timer::Cleanup()
 	timerItems.clear();
 }
 
-TimerItem* Timer::SetTimer(float duration, std::function<void()> functionToCall)
+TimerItem* Timer::SetTimer(float duration, std::function<void()> functionToCall, bool loop)
 {
 	TimerItem timerItem = {};
 	timerItem.endTime = duration;
 	timerItem.currentTime = 0.0f;
+	timerItem.loop = loop;
 	timerItem.functionToCall = functionToCall;
 
-	timerItems.push_back(timerItem);
+	timerItems.emplace_back(timerItem);
 
 	return &timerItems.back();
 }
