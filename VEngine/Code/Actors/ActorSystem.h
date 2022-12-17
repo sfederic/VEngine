@@ -53,12 +53,11 @@ public:
 		}
 
 		std::swap(actors[index], actors.back());
-		actors[index]->SetSystemIndex(index);
-		actors[index]->SetName(GetName() + std::to_string(index));
 
 		World::RemoveActorFromWorld(actors.back().get());
-
 		actors.pop_back();
+
+		actors[index]->SetSystemIndex(index);
 
 		//@Todo: just keep an eye on this. Code like this makes me want to seperate editor from game.
 		//It shouldn't be too bad with Release/NoEditor config though, maybe through an #ifdef here later.
