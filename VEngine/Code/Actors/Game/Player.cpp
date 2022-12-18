@@ -331,7 +331,12 @@ void Player::BladeSwipe()
 				{
 					comboBarWidget->IncreaseScoreAndCombo();
 					GameUtils::SpawnSpriteSheet("Sprites/blade_slash.png", enemy->GetPosition(), false, 3, 5);
-					enemy->Destroy();
+					
+					auto mesh = dynamic_cast<MeshComponent*>(ray.hitComponent);
+					if (mesh)
+					{
+						mesh->Remove();
+					}
 				}
 			}
 		}
