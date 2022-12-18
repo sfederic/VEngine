@@ -326,6 +326,10 @@ void Player::BladeSwipe()
 		rayOrigins.push_back(GetPositionV() + GetRightVectorV());
 		rayOrigins.push_back(GetPositionV() + GetRightVectorV() * 2.f);
 
+		//Can't destroy components/actors in an inner Raycast loop. Keep them and destroy later down.
+		std::vector<MeshComponent*> hitMeshComponents;
+		std::vector<Enemy*> hitEnemies;
+
 		for (auto& rayOrigin : rayOrigins)
 		{
 			Ray ray(this);
@@ -334,20 +338,30 @@ void Player::BladeSwipe()
 				auto enemy = dynamic_cast<Enemy*>(ray.hitActor);
 				if (enemy)
 				{
+					hitEnemies.push_back(enemy);
+
 					comboBarWidget->IncreaseScoreAndCombo();
 					GameUtils::SpawnSpriteSheet("Sprites/blade_slash.png", enemy->GetPosition(), false, 3, 5);
 					
 					auto mesh = dynamic_cast<MeshComponent*>(ray.hitComponent);
 					if (mesh)
 					{
-						mesh->Remove();
-					}
-
-					if (enemy->CheckIfAllMeshesAreDestroyed())
-					{
-						enemy->Destroy();
+						hitMeshComponents.push_back(mesh);
 					}
 				}
+			}
+		}
+
+		for (auto hitMesh : hitMeshComponents)
+		{
+			hitMesh->Destroy();
+		}
+
+		for (auto hitEnemy : hitEnemies)
+		{
+			if (hitEnemy->CheckIfAllMeshesAreDestroyed())
+			{
+				hitEnemy->Destroy();
 			}
 		}
 	}
