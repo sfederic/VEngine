@@ -296,7 +296,12 @@ void Player::Shoot()
 			{
 				comboBarWidget->IncreaseScoreAndCombo();
 				GameUtils::SpawnSpriteSheet("Sprites/explosion.png", enemy->GetPosition(), false, 4, 4);
-				enemy->Destroy();
+				
+				auto mesh = dynamic_cast<MeshComponent*>(ray.hitComponent);
+				if (mesh)
+				{
+					mesh->Remove();
+				}
 			}
 		}
 	}
