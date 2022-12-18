@@ -295,11 +295,11 @@ void Player::Shoot()
 			if (enemy)
 			{
 				comboBarWidget->IncreaseScoreAndCombo();
-				GameUtils::SpawnSpriteSheet("Sprites/explosion.png", enemy->GetPosition(), false, 4, 4);
-				
+
 				auto mesh = dynamic_cast<MeshComponent*>(ray.hitComponent);
 				if (mesh)
 				{
+					GameUtils::SpawnSpriteSheet("Sprites/explosion.png", mesh->GetWorldPositionV(), false, 4, 4);
 					mesh->Remove();
 				}
 
@@ -341,7 +341,6 @@ void Player::BladeSwipe()
 					hitEnemies.push_back(enemy);
 
 					comboBarWidget->IncreaseScoreAndCombo();
-					GameUtils::SpawnSpriteSheet("Sprites/blade_slash.png", enemy->GetPosition(), false, 3, 5);
 					
 					auto mesh = dynamic_cast<MeshComponent*>(ray.hitComponent);
 					if (mesh)
@@ -354,7 +353,8 @@ void Player::BladeSwipe()
 
 		for (auto hitMesh : hitMeshComponents)
 		{
-			hitMesh->Destroy();
+			GameUtils::SpawnSpriteSheet("Sprites/blade_slash.png", hitMesh->GetWorldPositionV(), false, 3, 5);
+			hitMesh->Remove();
 		}
 
 		for (auto hitEnemy : hitEnemies)
