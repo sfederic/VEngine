@@ -1,6 +1,8 @@
 #pragma once
+
 #include "Properties.h"
 #include "UID.h"
+#include <set>
 
 struct IComponentSystem;
 
@@ -8,6 +10,7 @@ struct Component
 {
 	IComponentSystem* componentSystem = nullptr;
 	UID uid = GenerateUID();
+	std::set<std::string> tags;
 	std::string name;
 	UID ownerUID = 0;
 	int index = -1;
