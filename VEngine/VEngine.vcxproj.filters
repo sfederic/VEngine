@@ -458,6 +458,9 @@
     <ClCompile Include="Code\Actors\Game\WormEnemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Components\Component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">

@@ -10,7 +10,6 @@ struct Component
 {
 	IComponentSystem* componentSystem = nullptr;
 	UID uid = GenerateUID();
-	std::set<std::string> tags;
 	std::string name;
 	UID ownerUID = 0;
 	int index = -1;
@@ -42,4 +41,9 @@ struct Component
 
 		return props;
 	}
+
+	void AddTag(const std::string& tag);
+
+private:
+	std::set<std::string> tags;
 };
