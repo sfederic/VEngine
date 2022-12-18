@@ -4,15 +4,16 @@
 
 Enemy::Enemy()
 {
-	rootComponent = CreateComponent(MeshComponent("cube.fbx", "test.png"), "Mesh");
-}
-
-void Enemy::Start()
-{
+	mesh = CreateComponent(MeshComponent("cube.fbx", "test.png"), "Mesh");
+	mesh->SetScale(0.8f, 0.8f, 0.8f);
+	rootComponent = mesh;
 }
 
 void Enemy::Tick(float deltaTime)
 {
+	auto rot = GetRotationV();
+	rot = XMQuaternionMultiply(XMQuaternionRotationAxis(GetUpVectorV(), deltaTime), rot);
+	SetRotation(rot);
 }
 
 Properties Enemy::GetProps()
