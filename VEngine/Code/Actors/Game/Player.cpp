@@ -302,6 +302,11 @@ void Player::Shoot()
 				{
 					mesh->Remove();
 				}
+
+				if (enemy->CheckIfAllMeshesAreDestroyed())
+				{
+					enemy->Destroy();
+				}
 			}
 		}
 	}
@@ -336,6 +341,11 @@ void Player::BladeSwipe()
 					if (mesh)
 					{
 						mesh->Remove();
+					}
+
+					if (enemy->CheckIfAllMeshesAreDestroyed())
+					{
+						enemy->Destroy();
 					}
 				}
 			}
