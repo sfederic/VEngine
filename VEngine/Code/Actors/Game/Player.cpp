@@ -328,7 +328,7 @@ void Player::BladeSwipe()
 
 		//Can't destroy components/actors in an inner Raycast loop. Keep them and destroy later down.
 		std::vector<MeshComponent*> hitMeshComponents;
-		std::vector<Enemy*> hitEnemies;
+		std::set<Enemy*> hitEnemies;
 
 		for (auto& rayOrigin : rayOrigins)
 		{
@@ -338,7 +338,7 @@ void Player::BladeSwipe()
 				auto enemy = dynamic_cast<Enemy*>(ray.hitActor);
 				if (enemy)
 				{
-					hitEnemies.push_back(enemy);
+					hitEnemies.emplace(enemy);
 
 					comboBarWidget->IncreaseScoreAndCombo();
 					
