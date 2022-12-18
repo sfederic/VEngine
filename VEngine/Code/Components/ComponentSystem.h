@@ -57,6 +57,13 @@ public:
 	{
 		std::swap(components[index], components.back());
 		components[index]->index = index;
+
+		if (components.back()->ownerUID != 0)
+		{
+			auto owner = World::GetActorByUID(components.back()->ownerUID);
+			owner->RemoveComponent(components.back().get());
+		}
+
 		components.pop_back();
 	}
 

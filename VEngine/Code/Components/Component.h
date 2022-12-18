@@ -11,7 +11,7 @@ struct Component
 	IComponentSystem* componentSystem = nullptr;
 	UID uid = GenerateUID();
 	std::string name;
-	UID ownerUID = 0;
+	UID ownerUID = 0; //Keep as zero to denote component that doesn't have an owner.
 	int index = -1;
 	bool active = true;
 	bool tickEnabled = true;
