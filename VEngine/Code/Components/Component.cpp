@@ -11,3 +11,8 @@ void Component::AddTag(const std::string& tag)
 
 	tags.emplace(tag);
 }
+
+bool Component::HasTag(const std::string& tag)
+{
+	return tags.find(tag) != tags.end();
+}

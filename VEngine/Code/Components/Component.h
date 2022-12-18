@@ -43,6 +43,7 @@ struct Component
 	}
 
 	void AddTag(const std::string& tag);
+	bool HasTag(const std::string& tag);
 
 private:
 	std::set<std::string> tags;
