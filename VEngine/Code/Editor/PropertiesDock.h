@@ -1,4 +1,5 @@
 #pragma once
+
 #include <qdockwidget.h>
 #include <qgridlayout.h>
 #include <vector>
@@ -15,21 +16,8 @@ class QScrollArea;
 //components and see their spatial relationships (like Unreal) would be good. 
 //Previously attempted it and didn't work out well with the mess of code in PropertiesDock.
 
-struct PropertiesDock : public QDockWidget
+class PropertiesDock : public QDockWidget
 {
-private:
-	std::vector<IPropertyWidget*> propertyWidgetsToUpdate;
-
-	QWidget* actorPropsWidget = nullptr;
-	QGridLayout* actorPropsGridLayout = nullptr;
-	QScrollArea* actorPropsScrollArea = nullptr;
-
-	Actor* previousActor = nullptr;
-	Actor* currentDisplayingActor = nullptr;
-
-	static const int propertyNameColumn = 0;
-	static const int propertyDataColumn = 1;
-
 public:
 	PropertiesDock();
 	void DisplayActorProperties(Actor* actor);
@@ -45,4 +33,17 @@ private:
 		actorPropsGridLayout->addWidget(widget, row, propertyDataColumn);
 	    propertyWidgetsToUpdate.push_back((IPropertyWidget*)widget);
 	}
+
+private:
+	std::vector<IPropertyWidget*> propertyWidgetsToUpdate;
+
+	QWidget* actorPropsWidget = nullptr;
+	QGridLayout* actorPropsGridLayout = nullptr;
+	QScrollArea* actorPropsScrollArea = nullptr;
+
+	Actor* previousActor = nullptr;
+	Actor* currentDisplayingActor = nullptr;
+
+	static const int propertyNameColumn = 0;
+	static const int propertyDataColumn = 1;
 };
