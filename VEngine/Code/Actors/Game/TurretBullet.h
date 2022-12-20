@@ -3,6 +3,8 @@
 #include "../Actor.h"
 #include "../ActorSystem.h"
 
+struct BoxTriggerComponent;
+
 class TurretBullet : public Actor
 {
 public:
@@ -15,7 +17,8 @@ public:
 	void SetMovementDirection(XMVECTOR movementDirection_) { movementDirection = movementDirection_; }
 
 private:
-	XMVECTOR movementDirection = XMVectorZero();
+	BoxTriggerComponent* boxTrigger = nullptr;
 
+	XMVECTOR movementDirection = XMVectorZero();
 	float moveSpeed = 5.0f;
 };
