@@ -303,7 +303,7 @@ void Player::Shoot()
 					mesh->Remove();
 				}
 
-				if (enemy->CheckIfAllMeshesAreDestroyed())
+				if (enemy->CheckIfAllTaggedMeshesAreDestroyed())
 				{
 					enemy->Destroy();
 				}
@@ -359,7 +359,7 @@ void Player::BladeSwipe()
 
 		for (auto hitEnemy : hitEnemies)
 		{
-			if (hitEnemy->CheckIfAllMeshesAreDestroyed())
+			if (hitEnemy->CheckIfAllTaggedMeshesAreDestroyed())
 			{
 				hitEnemy->Destroy();
 			}

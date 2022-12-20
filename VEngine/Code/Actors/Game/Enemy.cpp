@@ -14,7 +14,7 @@ Properties Enemy::GetProps()
 	return props;
 }
 
-bool Enemy::CheckIfAllMeshesAreDestroyed()
+bool Enemy::CheckIfAllTaggedMeshesAreDestroyed()
 {
 	for (auto& componentPair : componentMap)
 	{

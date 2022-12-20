@@ -11,5 +11,5 @@ public:
 	Enemy();
 	virtual Properties GetProps() override;
 
-	bool CheckIfAllMeshesAreDestroyed();
+	bool CheckIfAllTaggedMeshesAreDestroyed();
 };
