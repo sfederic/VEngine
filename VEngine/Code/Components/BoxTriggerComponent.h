@@ -22,4 +22,5 @@ struct BoxTriggerComponent : SpatialComponent
 	void SetTargetAsPlayer();
 	XMFLOAT3 GetRandomPointInTrigger();
 	XMVECTOR GetRandomPointInTriggerRounded();
+	bool IntersectsWithAnyBoundingBoxInWorld();
 };

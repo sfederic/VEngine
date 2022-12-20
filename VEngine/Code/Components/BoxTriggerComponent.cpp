@@ -83,3 +83,16 @@ XMVECTOR BoxTriggerComponent::GetRandomPointInTriggerRounded()
 	VMath::RoundFloat3(point);
 	return XMLoadFloat3(&point);
 }
+
+bool BoxTriggerComponent::IntersectsWithAnyBoundingBoxInWorld()
+{
+	for (auto& mesh : MeshComponent::system.GetComponents())
+	{
+		if (boundingBox.Intersects(mesh->boundingBox))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
