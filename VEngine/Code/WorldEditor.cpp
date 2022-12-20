@@ -57,7 +57,7 @@ void HandleActorPicking()
 
 	if (Input::GetMouseLeftUp())
 	{
-		Ray screenPickRay;
+		HitResult screenPickRay;
 		if (RaycastFromScreen(screenPickRay))
 		{
 			//Assign selected texture in editor to mesh on click
@@ -230,7 +230,7 @@ void SpawnActorOnClick()
 	{
 		if (spawnSystem)
 		{
-			Ray ray;
+			HitResult ray;
 			if (RaycastFromScreen(ray)) //Spawn actor at ray hit point
 			{
 				XMVECTOR dist = ray.direction * ray.hitDistance;

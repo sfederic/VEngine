@@ -21,10 +21,10 @@ void TurretBullet::Tick(float deltaTime)
 	pos += movementDirection * moveSpeed * deltaTime;
 	SetPosition(pos);
 
-	Ray ray(this);
+	HitResult hitResult(this);
 	auto turretEnemies = TurretEnemy::system.GetActorsAsBaseClass();
-	ray.AddActorsToIgnore(turretEnemies);
-	if (SimpleBoxCast(GetPosition(), boxTrigger->boundingBox.Extents, ray))
+	hitResult.AddActorsToIgnore(turretEnemies);
+	if (SimpleBoxCast(GetPosition(), boxTrigger->boundingBox.Extents, hitResult))
 	{
 		Destroy();
 	}

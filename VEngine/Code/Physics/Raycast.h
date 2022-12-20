@@ -1,4 +1,5 @@
 #pragma once
+
 #include <vector>
 #include <DirectXMath.h>
 #include "Physics/CollisionLayers.h"
@@ -10,7 +11,7 @@ struct SpatialComponent;
 
 using namespace DirectX;
 
-struct Ray
+struct HitResult
 {
 	XMVECTOR origin = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	XMVECTOR direction = XMVectorSet(0.f, 0.f, 0.f, 0.f);
@@ -40,8 +41,8 @@ struct Ray
 
 	bool bHit = false;
 
-	Ray() {}
-	Ray(Actor* actorToIgnore)
+	HitResult() {}
+	HitResult(Actor* actorToIgnore)
 	{
 		actorsToIgnore.push_back(actorToIgnore);
 	}
@@ -49,10 +50,10 @@ struct Ray
 	void AddActorsToIgnore(std::vector<Actor*>& actors);
 };
 
-bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fromScreen = false);
-bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR end);
-bool RaycastTriangleIntersect(Ray& ray);
-bool RaycastFromScreen(Ray& ray);
+bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float range, bool fromScreen = false);
+bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end);
+bool RaycastTriangleIntersect(HitResult& hitResult);
+bool RaycastFromScreen(HitResult& hitResult);
 
-bool OrientedBoxCast(Ray& ray, XMVECTOR origin, XMVECTOR end, XMFLOAT2 extents, bool drawDebug);
-bool SimpleBoxCast(XMFLOAT3 center, XMFLOAT3 extents, Ray& hit);
+bool OrientedBoxCast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end, XMFLOAT2 extents, bool drawDebug);
+bool SimpleBoxCast(XMFLOAT3 center, XMFLOAT3 extents, HitResult& hitResult);

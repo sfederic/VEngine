@@ -9,9 +9,9 @@
 #include "Components/MeshComponent.h"
 #include "World.h"
 
-bool IsIgnoredActor(Actor* actor, Ray& ray)
+bool IsIgnoredActor(Actor* actor, HitResult& hitResult)
 {
-	for (auto actorToIgnore : ray.actorsToIgnore)
+	for (auto actorToIgnore : hitResult.actorsToIgnore)
 	{
 		if (actor == actorToIgnore)
 		{
@@ -22,10 +22,10 @@ bool IsIgnoredActor(Actor* actor, Ray& ray)
 	return false;
 }
 
-bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fromScreen)
+bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float range, bool fromScreen)
 {
-	ray.origin = origin;
-	ray.direction = direction;
+	hitResult.origin = origin;
+	hitResult.direction = direction;
 
 	//Calculate raycast from camera coords into world
 	if (fromScreen)
@@ -36,16 +36,16 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 		XMMATRIX invModel = XMMatrixInverse(&invDet, XMMatrixIdentity());
 		XMMATRIX toLocal = XMMatrixMultiply(invView, invModel);
 
-		ray.origin = XMVector3TransformCoord(ray.origin, toLocal);
-		ray.direction = XMVector3TransformNormal(ray.direction, toLocal);
-		ray.direction = XMVector3Normalize(ray.direction);
+		hitResult.origin = XMVector3TransformCoord(hitResult.origin, toLocal);
+		hitResult.direction = XMVector3TransformNormal(hitResult.direction, toLocal);
+		hitResult.direction = XMVector3Normalize(hitResult.direction);
 	}
 
 	std::vector<float> distances;
 
 	bool bRayHit = false;
-	ray.hitActors.clear();
-	ray.hitComponents.clear();
+	hitResult.hitActors.clear();
+	hitResult.hitComponents.clear();
 
 	for (Actor* actor : World::GetAllActorsInWorld())
 	{
@@ -54,7 +54,7 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 			continue;
 		}
 
-		if (IsIgnoredActor(actor, ray))
+		if (IsIgnoredActor(actor, hitResult))
 		{
 			continue;
 		}
@@ -64,17 +64,17 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 		{
 			//Collision layer checks
 			if (mesh->layer == CollisionLayers::None ||
-				mesh->layer == ray.ignoreLayer)
+				mesh->layer == hitResult.ignoreLayer)
 			{
 				continue;
 			}
 
 			BoundingOrientedBox boundingBox = VMath::GetBoundingBoxInWorld(mesh);
 
-			if (boundingBox.Intersects(ray.origin, ray.direction, ray.hitDistance))
+			if (boundingBox.Intersects(hitResult.origin, hitResult.direction, hitResult.hitDistance))
 			{
-				distances.push_back(ray.hitDistance);
-				ray.hitComponents.push_back(mesh);
+				distances.push_back(hitResult.hitDistance);
+				hitResult.hitComponents.push_back(mesh);
 				bRayHit = true;
 			}
 		}
@@ -87,7 +87,7 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 		return false;
 	}
 
-	if (RaycastTriangleIntersect(ray))
+	if (RaycastTriangleIntersect(hitResult))
 	{
 		for (int i = 0; i < distances.size(); i++)
 		{
@@ -109,28 +109,28 @@ bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR direction, float range, bool fr
 		return false;
 	}
 
-	if (ray.hitActor)
+	if (hitResult.hitActor)
 	{
-		XMVECTOR hitPos = origin + (direction * ray.hitDistance);
-		XMStoreFloat3(&ray.hitPos, hitPos);
+		XMVECTOR hitPos = origin + (direction * hitResult.hitDistance);
+		XMStoreFloat3(&hitResult.hitPos, hitPos);
 		return true;
 	}
 
 	return false;
 }
 
-bool Raycast(Ray& ray, XMVECTOR origin, XMVECTOR end)
+bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end)
 {
 	XMVECTOR direction = XMVector3Normalize(end - origin);
 	float range = XMVector3Length(end - origin).m128_f32[0] + 0.1f;
-	return Raycast(ray, origin, direction, range, false);
+	return Raycast(hitResult, origin, direction, range, false);
 }
 
-bool RaycastTriangleIntersect(Ray& ray)
+bool RaycastTriangleIntersect(HitResult& hitResult)
 {
-	std::vector<Ray> rays;
+	std::vector<HitResult> hitResults;
 
-	for (auto component : ray.hitComponents)
+	for (auto component : hitResult.hitComponents)
 	{
 		XMMATRIX model = component->GetWorldMatrix();
 
@@ -158,10 +158,10 @@ bool RaycastTriangleIntersect(Ray& ray)
 				XMVECTOR v2 = XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index2).pos);
 				v2 = XMVector3TransformCoord(v2, model);
 
-				Ray tempRay = {};
-				tempRay = ray;
+				HitResult tempHitResult = {};
+				tempHitResult = hitResult;
 
-				if (DirectX::TriangleTests::Intersects(ray.origin, ray.direction, v0, v1, v2, tempRay.hitDistance))
+				if (DirectX::TriangleTests::Intersects(hitResult.origin, hitResult.direction, v0, v1, v2, tempHitResult.hitDistance))
 				{
 					XMVECTOR normal = XMVectorZero();
 					normal += XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index0).normal);
@@ -170,13 +170,13 @@ bool RaycastTriangleIntersect(Ray& ray)
 
 					normal = XMVector3Normalize(normal);
 
-					XMStoreFloat3(&tempRay.normal, normal);
+					XMStoreFloat3(&tempHitResult.normal, normal);
 
-					tempRay.hitComponent = mesh;
+					tempHitResult.hitComponent = mesh;
 
-					tempRay.hitActor = World::GetActorByUID(mesh->ownerUID);
+					tempHitResult.hitActor = World::GetActorByUID(mesh->ownerUID);
 
-					rays.push_back(tempRay);
+					hitResults.emplace_back(tempHitResult);
 				}
 			}
 		}
@@ -184,34 +184,34 @@ bool RaycastTriangleIntersect(Ray& ray)
 
 	//Get all hit actors
 	std::vector<Actor*> hitActors;
-	for (Ray& ray : rays)
+	for (auto& hitResult : hitResults)
 	{
-		hitActors.push_back(ray.hitActor);
+		hitActors.push_back(hitResult.hitActor);
 	}
 
 	//Set nearest hit actor
 	float lowestDistance = std::numeric_limits<float>::max();
 	int rayIndex = -1;
-	for (int i = 0; i < rays.size(); i++)
+	for (int i = 0; i < hitResults.size(); i++)
 	{
-		if (rays[i].hitDistance < lowestDistance)
+		if (hitResults[i].hitDistance < lowestDistance)
 		{
-			lowestDistance = rays[i].hitDistance;
+			lowestDistance = hitResults[i].hitDistance;
 			rayIndex = i;
 		}
 	}
 
 	if (rayIndex > -1)
 	{
-		ray = rays[rayIndex];
-		ray.hitActors = hitActors;
+		hitResult = hitResults[rayIndex];
+		hitResult.hitActors = hitActors;
 		return true;
 	}
 
 	return false;
 }
 
-bool RaycastFromScreen(Ray& ray)
+bool RaycastFromScreen(HitResult& hitResult)
 {
 	const int sx = editor->viewportMouseX;
 	const int sy = editor->viewportMouseY;
@@ -223,15 +223,15 @@ bool RaycastFromScreen(Ray& ray)
 	const float vx = (2.f * sx / Renderer::GetViewportWidth() - 1.0f) / proj.r[0].m128_f32[0];
 	const float vy = (-2.f * sy / Renderer::GetViewportHeight() + 1.0f) / proj.r[1].m128_f32[1];
 
-	ray.origin = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-	ray.direction = XMVectorSet(vx, vy, 1.f, 0.f);
+	hitResult.origin = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	hitResult.direction = XMVectorSet(vx, vy, 1.f, 0.f);
 
 	constexpr float range = std::numeric_limits<float>::max();
 
-	return Raycast(ray, ray.origin, ray.direction, range, true);
+	return Raycast(hitResult, hitResult.origin, hitResult.direction, range, true);
 }
 
-bool OrientedBoxCast(Ray& ray, XMVECTOR origin, XMVECTOR end, XMFLOAT2 extents, bool drawDebug)
+bool OrientedBoxCast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end, XMFLOAT2 extents, bool drawDebug)
 {
 	XMVECTOR orientationV = VMath::LookAtRotation(end, origin);
 
@@ -255,7 +255,7 @@ bool OrientedBoxCast(Ray& ray, XMVECTOR origin, XMVECTOR end, XMFLOAT2 extents, 
 
 	for (auto actor : World::GetAllActorsInWorld())
 	{
-		if (IsIgnoredActor(actor, ray))
+		if (IsIgnoredActor(actor, hitResult))
 		{
 			continue;
 		}
@@ -265,16 +265,16 @@ bool OrientedBoxCast(Ray& ray, XMVECTOR origin, XMVECTOR end, XMFLOAT2 extents, 
 			auto meshBoundsInWorld = VMath::GetBoundingBoxInWorld(mesh);
 			if (boundingOrientedBox.Intersects(meshBoundsInWorld))
 			{
-				ray.hitComponents.push_back(mesh);
-				ray.hitActors.push_back(actor);
+				hitResult.hitComponents.push_back(mesh);
+				hitResult.hitActors.push_back(actor);
 			}
 		}
 	}
 
-	return ray.hitActors.size();
+	return hitResult.hitActors.size();
 }
 
-bool SimpleBoxCast(XMFLOAT3 center, XMFLOAT3 extents, Ray& hit)
+bool SimpleBoxCast(XMFLOAT3 center, XMFLOAT3 extents, HitResult& hit)
 {
 	DirectX::BoundingBox boundingBox(center, extents);
 
@@ -300,7 +300,7 @@ bool SimpleBoxCast(XMFLOAT3 center, XMFLOAT3 extents, Ray& hit)
 	return hit.hitActors.size();
 }
 
-void Ray::AddActorsToIgnore(std::vector<Actor*>& actors)
+void HitResult::AddActorsToIgnore(std::vector<Actor*>& actors)
 {
 	actorsToIgnore.reserve(actorsToIgnore.size() + actors.size());
 

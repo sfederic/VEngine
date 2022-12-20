@@ -99,8 +99,8 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 	const float transparentValue = 0.35f;
 	const float solidValue = 1.f;
 
-	Ray ray(this);
-	if (OrientedBoxCast(ray, camera->GetWorldPositionV(), GetPositionV(), XMFLOAT2(0.5f, 0.5f), true))
+	HitResult hitResult(this);
+	if (OrientedBoxCast(hitResult, camera->GetWorldPositionV(), GetPositionV(), XMFLOAT2(0.5f, 0.5f), true))
 	{
 		std::vector<Actor*> ableActors;
 
@@ -109,7 +109,7 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 			SetActorAlpha(actor, solidValue);
 		}
 
-		for (auto actor : ray.hitActors)
+		for (auto actor : hitResult.hitActors)
 		{
 			if (actor->CanBeTransparentlyOccluded())
 			{
@@ -278,8 +278,8 @@ bool Player::CheckPlayerWithinLevelBounds()
 
 bool Player::CheckForObstacle()
 {
-	Ray ray(this);
-	return Raycast(ray, GetPositionV(), nextPos);
+	HitResult hitResult(this);
+	return Raycast(hitResult, GetPositionV(), nextPos);
 }
 
 void Player::Shoot()
@@ -288,15 +288,15 @@ void Player::Shoot()
 
 	if (Input::GetKeyDown(Keys::Up))
 	{
-		Ray ray(this);
-		if (Raycast(ray, GetPositionV(), GetForwardVectorV(), 1000.f))
+		HitResult hitResult(this);
+		if (Raycast(hitResult, GetPositionV(), GetForwardVectorV(), 1000.f))
 		{
-			auto enemy = dynamic_cast<Enemy*>(ray.hitActor);
+			auto enemy = dynamic_cast<Enemy*>(hitResult.hitActor);
 			if (enemy)
 			{
 				comboBarWidget->IncreaseScoreAndCombo();
 
-				auto mesh = dynamic_cast<MeshComponent*>(ray.hitComponent);
+				auto mesh = dynamic_cast<MeshComponent*>(hitResult.hitComponent);
 				if (mesh)
 				{
 					GameUtils::SpawnSpriteSheet("Sprites/explosion.png", mesh->GetWorldPositionV(), false, 4, 4);
@@ -332,17 +332,17 @@ void Player::BladeSwipe()
 
 		for (auto& rayOrigin : rayOrigins)
 		{
-			Ray ray(this);
-			if (Raycast(ray, rayOrigin, GetForwardVectorV(), 1000.f))
+			HitResult hitResult(this);
+			if (Raycast(hitResult, rayOrigin, GetForwardVectorV(), 1000.f))
 			{
-				auto enemy = dynamic_cast<Enemy*>(ray.hitActor);
+				auto enemy = dynamic_cast<Enemy*>(hitResult.hitActor);
 				if (enemy)
 				{
 					hitEnemies.emplace(enemy);
 
 					comboBarWidget->IncreaseScoreAndCombo();
 					
-					auto mesh = dynamic_cast<MeshComponent*>(ray.hitComponent);
+					auto mesh = dynamic_cast<MeshComponent*>(hitResult.hitComponent);
 					if (mesh)
 					{
 						hitMeshComponents.push_back(mesh);

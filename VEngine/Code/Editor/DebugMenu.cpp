@@ -594,7 +594,7 @@ void DebugMenu::RenderActorInspectMenu()
 {
 	if (actorInspectMenuOpen)
 	{
-		Ray ray;
+		HitResult ray;
 		if (RaycastFromScreen(ray))
 		{
 			Actor* actor = ray.hitActor;
