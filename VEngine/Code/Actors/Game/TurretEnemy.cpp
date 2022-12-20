@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "TurretEnemy.h"
 #include "Components/MeshComponent.h"
+#include "Actors/Game/TurretBullet.h"
 #include "Gameplay/GameplayTags.h"
 
 void TurretEnemy::Create()
@@ -18,6 +19,6 @@ Properties TurretEnemy::GetProps()
 
 void TurretEnemy::Shoot()
 {
-    auto forward = GetForwardVectorV();
-    auto bulletMesh = MeshComponent::system.Add("Bullet", nullptr, MeshComponent("sphere.fbx", "test.png"));
+    auto bullet = TurretBullet::system.Add(GetTransform());
+    bullet->SetMovementDirection(GetForwardVectorV());
 }
