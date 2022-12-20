@@ -1,4 +1,5 @@
 #pragma once
+
 #include <vector>
 #include "IComponentSystem.h"
 #include "SystemStates.h"
@@ -6,6 +7,7 @@
 #include "ComponentSystemCache.h"
 #include "Serialiser.h"
 #include "VString.h"
+#include "Editor/Editor.h"
 #include "World.h"
 
 template <typename T>
@@ -65,6 +67,9 @@ public:
 		}
 
 		components.pop_back();
+
+		//Make sure the Properties Dock is reset else you'll have widgets trying to access invalid pointers to components.
+		editor->ClearProperties();
 	}
 
 	virtual void Init() override
