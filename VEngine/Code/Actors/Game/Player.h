@@ -24,8 +24,10 @@ private:
 
 	void AllRangeModeMovementInput();
 	void AutoScrollMovementInput();
+
 	void AllRangeModeRotationInput();
 	void AutoScrollRotationInput();
+
 	bool CheckMovementAndRotationHaveStopped();
 	bool CheckPlayerWithinLevelBounds();
 	bool CheckForObstacle();
