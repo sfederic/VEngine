@@ -123,6 +123,7 @@
     <ClCompile Include="Code\Actors\Game\Enemy.cpp" />
     <ClCompile Include="Code\Actors\Game\EnemySpawner.cpp" />
     <ClCompile Include="Code\Actors\Game\LevelInstance.cpp" />
+    <ClCompile Include="Code\Actors\Game\TurretBullet.cpp" />
     <ClCompile Include="Code\Actors\Game\WormEnemy.cpp" />
     <ClCompile Include="Code\Camera.cpp" />
     <ClCompile Include="Code\Components\Component.cpp" />
@@ -237,6 +238,7 @@
     <ClInclude Include="Code\Actors\Game\Enemy.h" />
     <ClInclude Include="Code\Actors\Game\EnemySpawner.h" />
     <ClInclude Include="Code\Actors\Game\LevelInstance.h" />
+    <ClInclude Include="Code\Actors\Game\TurretBullet.h" />
     <ClInclude Include="Code\Actors\Game\WormEnemy.h" />
     <ClInclude Include="Code\Asset\AssetFileExtensions.h" />
     <ClInclude Include="Code\Asset\AssetPaths.h" />
