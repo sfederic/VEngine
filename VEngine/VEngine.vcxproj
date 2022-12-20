@@ -231,6 +231,7 @@
     <ClCompile Include="Code\VFunctionSystem.cpp" />
     <ClCompile Include="Code\EditorCamera.cpp" />
     <ClCompile Include="Code\Actors\Game\Player.cpp" />
+    <ClCompile Include="Code\Actors\Game\TurretEnemy.cpp" />
     <ClInclude Include="Code\Actors\CameraActor.h" />
     <ClInclude Include="Code\Actors\Game\SpinningEnemy.h" />
     <ClInclude Include="Code\Actors\Game\Enemy.h" />
@@ -466,6 +467,7 @@
     <ClInclude Include="Code\VFunctionSystem.h" />
     <ClInclude Include="Code\EditorCamera.h" />
     <ClInclude Include="Code\Actors\Game\Player.h" />
+    <ClInclude Include="Code\Actors\Game\TurretEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
