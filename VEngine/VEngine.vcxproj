@@ -119,7 +119,7 @@
   <ItemGroup>
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp" />
     <ClCompile Include="Code\Actors\CameraActor.cpp" />
-    <ClCompile Include="Code\Actors\Game\CoreEnemy.cpp" />
+    <ClCompile Include="Code\Actors\Game\SpinningEnemy.cpp" />
     <ClCompile Include="Code\Actors\Game\Enemy.cpp" />
     <ClCompile Include="Code\Actors\Game\EnemySpawner.cpp" />
     <ClCompile Include="Code\Actors\Game\LevelInstance.cpp" />
@@ -232,7 +232,7 @@
     <ClCompile Include="Code\EditorCamera.cpp" />
     <ClCompile Include="Code\Actors\Game\Player.cpp" />
     <ClInclude Include="Code\Actors\CameraActor.h" />
-    <ClInclude Include="Code\Actors\Game\CoreEnemy.h" />
+    <ClInclude Include="Code\Actors\Game\SpinningEnemy.h" />
     <ClInclude Include="Code\Actors\Game\Enemy.h" />
     <ClInclude Include="Code\Actors\Game\EnemySpawner.h" />
     <ClInclude Include="Code\Actors\Game\LevelInstance.h" />
