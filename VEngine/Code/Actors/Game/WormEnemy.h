@@ -8,6 +8,6 @@ class WormEnemy : public Enemy
 public:
 	ACTOR_SYSTEM(WormEnemy);
 
-	WormEnemy();
-	virtual Properties GetProps() override;
+	void Create() override;
+	Properties GetProps() override;
 };

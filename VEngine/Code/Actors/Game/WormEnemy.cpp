@@ -3,7 +3,7 @@
 #include "Components/MeshComponent.h"
 #include "Gameplay/GameplayTags.h"
 
-WormEnemy::WormEnemy()
+void WormEnemy::Create()
 {
     auto mesh1 = CreateComponent(MeshComponent("cube.fbx", "test.png"), "Mesh1");
     mesh1->SetScale(0.9f, 0.9f, 0.9f);
