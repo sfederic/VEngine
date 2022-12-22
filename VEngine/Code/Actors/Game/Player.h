@@ -22,11 +22,8 @@ public:
 private:
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
-	void AllRangeModeMovementInput();
-	void AutoScrollMovementInput();
-
-	void AllRangeModeRotationInput();
-	void AutoScrollRotationInput();
+	void MovementInput();
+	void RotationInput();
 
 	bool CheckMovementAndRotationHaveStopped();
 	bool CheckPlayerWithinLevelBounds();

@@ -53,23 +53,8 @@ void Player::Tick(float deltaTime)
 	Shoot();
 	BladeSwipe();
 
-	if (allRangeModeActive)
-	{
-		AllRangeModeMovementInput();
-		AllRangeModeRotationInput();
-	}
-	else
-	{
-		AutoScrollMovementInput();
-		AutoScrollRotationInput();
-
-		//This needs to be the bottom of the tick before position/rotation sets else checks
-		//for movement/rotation stops won't return true.
-		if (CheckPlayerWithinLevelBounds())
-		{
-			nextPos += GetForwardVectorV() * deltaTime;
-		}
-	}
+	MovementInput();
+	RotationInput();
 
 	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, movementSpeed));
 	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotationSpeed));
@@ -131,7 +116,7 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 	}
 }
 
-void Player::AllRangeModeMovementInput()
+void Player::MovementInput()
 {
 	if (!CheckMovementAndRotationHaveStopped()) return;
 
@@ -174,54 +159,7 @@ void Player::AllRangeModeMovementInput()
 	}
 }
 
-void Player::AutoScrollMovementInput()
-{
-	if (!CheckMovementAndRotationHaveStopped()) return;
-
-	auto previousPos = nextPos;
-
-	if (Input::GetKeyHeld(Keys::W))
-	{
-		nextPos = GetPositionV() + GetUpVectorV();
-		if (CheckForObstacle()) nextPos = previousPos;
-	}
-	else if (Input::GetKeyHeld(Keys::S))
-	{
-		nextPos = GetPositionV() - GetUpVectorV();
-		if (CheckForObstacle()) nextPos = previousPos;
-	}
-	else if (Input::GetKeyHeld(Keys::A))
-	{
-		nextPos = GetPositionV() - GetRightVectorV();
-		if (CheckForObstacle()) nextPos = previousPos;
-	}
-	else if (Input::GetKeyHeld(Keys::D))
-	{
-		nextPos = GetPositionV() + GetRightVectorV();
-		if (CheckForObstacle()) nextPos = previousPos;
-	}
-
-	if (!CheckPlayerWithinLevelBounds())
-	{
-		nextPos = previousPos;
-	}
-}
-
-void Player::AutoScrollRotationInput()
-{
-	if (!CheckMovementAndRotationHaveStopped()) return;
-
-	if (Input::GetKeyDown(Keys::Left))
-	{
-		nextRot = XMQuaternionMultiply(GetRotationV(), DirectX::XMQuaternionRotationAxis(GetForwardVectorV(), XMConvertToRadians(90.f)));
-	}
-	else if (Input::GetKeyDown(Keys::Right))
-	{
-		nextRot = XMQuaternionMultiply(GetRotationV(), DirectX::XMQuaternionRotationAxis(GetForwardVectorV(), XMConvertToRadians(-90.f)));
-	}
-}
-
-void Player::AllRangeModeRotationInput()
+void Player::RotationInput()
 {
 	if (Input::GetKeyHeld(Keys::Shift) && Input::GetKeyDown(Keys::Left))
 	{
