@@ -51,6 +51,7 @@ void Properties::CopyData(std::string name, Property& propToCopy)
 
 void Properties::CopyProperties(std::vector<Properties>& src, std::vector<Properties>& dst)
 {
+	//If this hits, you're probably working with a mismatch of Actor classes (i.e. an older version)
 	assert(src.size() == dst.size());
 
 	for (int i = 0; i < src.size(); i++)
