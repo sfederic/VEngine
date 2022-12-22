@@ -194,24 +194,7 @@ bool Player::CheckMovementAndRotationHaveStopped()
 
 bool Player::CheckPlayerWithinLevelBounds()
 {
-	auto levelSize = LevelInstance::system.GetFirstActor()->GetLevelSize();
-	XMFLOAT3 pos;
-	XMStoreFloat3(&pos, nextPos);
-
-	if (pos.x < 0.f || pos.x > levelSize.x)
-	{
-		return false;
-	}
-	else if (pos.y < 0.f || pos.y > levelSize.y)
-	{
-		return false;
-	}
-	else if (pos.z < 0.f || pos.z > levelSize.z)
-	{
-		return false;
-	}
-
-	return true;
+	return LevelInstance::system.GetFirstActor()->CheckIfPointInsideLevelSize(nextPos);
 }
 
 bool Player::CheckForObstacle()
