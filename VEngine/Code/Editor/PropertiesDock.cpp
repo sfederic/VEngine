@@ -130,11 +130,8 @@ void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRo
     currentGridRow++;
 
     //Properties
-    for (auto& propPair : props.propMap)
+    for (auto& [name, prop] : props.propMap)
     {
-        const std::string& name = propPair.first;
-        Property& prop = propPair.second;
-
         if (prop.hide)
         {
             continue;
