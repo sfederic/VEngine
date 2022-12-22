@@ -36,7 +36,6 @@ Properties TurretEnemy::GetProps()
 void TurretEnemy::Shoot()
 {
     auto transform = GetTransform();
-    transform.position.y += 0.55f;
     auto bullet = TurretBullet::system.Add(transform);
-    bullet->SetMovementDirection(VMath::GlobalUpVector());
+    bullet->SetMovementDirection(GetForwardVectorV());
 }
