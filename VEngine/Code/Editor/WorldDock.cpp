@@ -239,8 +239,6 @@ void WorldDock::RemoveActorFromList()
 		std::string actorName = actor->GetName();
 		foundItems = actorTreeWidget->findItems(QString::fromStdString(actorName), Qt::MatchExactly);
 		assert(foundItems.size() == 1);
-
-		World::RemoveActorFromWorld(actor);
 	}
 
 	for (auto item : foundItems)
