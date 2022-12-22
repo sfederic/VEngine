@@ -309,7 +309,6 @@ void World::Cleanup()
 	actorUIDMap.clear();
 	actorNameMap.clear();
 
-	//Cleanup various systems
 	Timer::Cleanup();
 	PhysicsSystem::Reset();
 	AudioSystem::DeleteLoadedAudioAndChannels();
@@ -318,14 +317,12 @@ void World::Cleanup()
 	SpriteSystem::Reset();
 	UISystem::Reset();
 
-	//CLEANUP COMPONENT SYSTEMS
-	for (IComponentSystem* componentSystem : activeComponentSystems)
+	for (auto componentSystem : activeComponentSystems)
 	{
 		componentSystem->Cleanup();
 	}
 
-	//CLEANUP ACTOR SYSTEMS
-	for (IActorSystem* actorSystem : activeActorSystems)
+	for (auto actorSystem : activeActorSystems)
 	{
 		actorSystem->Cleanup();
 	}
