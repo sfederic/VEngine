@@ -17,8 +17,12 @@ public:
 	void SetMovementDirection(XMVECTOR movementDirection_) { movementDirection = movementDirection_; }
 
 private:
+	void DestroyIfAliveForTooLong(float deltaTime);
+
 	BoxTriggerComponent* boxTrigger = nullptr;
 
 	XMVECTOR movementDirection = XMVectorZero();
 	float moveSpeed = 5.0f;
+
+	float destroyTimer = 0.f;
 };

@@ -3,6 +3,7 @@
 #include "Components/MeshComponent.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Actors/Game/TurretEnemy.h"
+#include "Actors/Game/LevelInstance.h"
 #include "Physics/Raycast.h"
 
 TurretBullet::TurretBullet()
@@ -25,6 +26,17 @@ void TurretBullet::Tick(float deltaTime)
 	auto turretEnemies = TurretEnemy::system.GetActorsAsBaseClass();
 	hitResult.AddActorsToIgnore(turretEnemies);
 	if (SimpleBoxCast(GetPosition(), boxTrigger->boundingBox.Extents, hitResult))
+	{
+		Destroy();
+	}
+
+	DestroyIfAliveForTooLong(deltaTime);
+}
+
+void TurretBullet::DestroyIfAliveForTooLong(float deltaTime)
+{
+	destroyTimer += deltaTime;
+	if (destroyTimer > 5.0f)
 	{
 		Destroy();
 	}
