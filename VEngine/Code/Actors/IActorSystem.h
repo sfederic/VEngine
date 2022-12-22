@@ -1,12 +1,13 @@
 #pragma once
+
 #include <string>
-#include "Transform.h"
 
 class Actor;
 struct Serialiser;
 struct BinarySerialiser;
 struct Deserialiser;
 struct BinaryDeserialiser;
+struct Transform;
 
 class IActorSystem
 {
@@ -18,7 +19,7 @@ public:
 	virtual void Init() = 0;
 	std::string GetName() { return name; }
 	virtual std::vector<Actor*> GetActorsAsBaseClass() = 0;
-	virtual Actor* SpawnActor(Transform transform) = 0;
+	virtual Actor* SpawnActor(const Transform& transform) = 0;
 	virtual Actor* FindActorByName(std::string actorName) = 0;
 	virtual uint32_t GetNumActors() = 0;
 

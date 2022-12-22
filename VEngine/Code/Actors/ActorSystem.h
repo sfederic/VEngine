@@ -188,9 +188,10 @@ public:
 		return nullptr;
 	}
 
-	virtual Actor* SpawnActor(Transform transform) override
+	virtual Actor* SpawnActor(const Transform& transform) override
 	{
-		Actor* actor = (Actor*)Add(transform);
+		auto actor = static_cast<Actor*>(Add(transform));
+		actor->Create();
 		return actor;
 	}
 

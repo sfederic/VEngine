@@ -296,7 +296,7 @@ void Actor::AddComponent(Component* component)
 
 	component->ownerUID = uid;
 
-	assert(componentMap.find(component->name) == componentMap.end() && "Duplicate Component name");
+	assert(componentMap.find(component->name) == componentMap.end() && "Duplicate Component name (Actor::Create() might be being called twice).");
 	componentMap.emplace(component->name, component);
 }
 

@@ -283,8 +283,6 @@ void SpawnActor(Transform& transform)
 			L"Spawned actor [%S] from MeshActor system", actor->GetName().c_str()));
 	}
 
-	actor->Create();
-
 	pickedActor = actor;
 	editor->SetActorProps(pickedActor);
 }
@@ -390,8 +388,6 @@ Actor* WorldEditor::SpawnActorFromTemplateFile(std::string templateFilename, Tra
 	auto actorProps = actor->GetProps();
 
 	d.Deserialise(actorProps);
-
-	actor->Create();
 
 	actor->SetUID(GenerateUID());
 	actor->ResetOwnerUIDToComponents();
