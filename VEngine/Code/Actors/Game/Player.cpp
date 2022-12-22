@@ -161,27 +161,27 @@ void Player::MovementInput()
 
 void Player::RotationInput()
 {
-	if (Input::GetKeyHeld(Keys::Shift) && Input::GetKeyDown(Keys::Left))
+	if (Input::GetKeyHeld(Keys::Shift) && Input::GetKeyUp(Keys::Left))
 	{
 		nextRot = XMQuaternionMultiply(GetRotationV(), DirectX::XMQuaternionRotationAxis(GetForwardVectorV(), XMConvertToRadians(90.f)));
 	}
-	else if (Input::GetKeyHeld(Keys::Shift) && Input::GetKeyDown(Keys::Right))
+	else if (Input::GetKeyHeld(Keys::Shift) && Input::GetKeyUp(Keys::Right))
 	{
 		nextRot = XMQuaternionMultiply(GetRotationV(), DirectX::XMQuaternionRotationAxis(GetForwardVectorV(), XMConvertToRadians(-90.f)));
 	}
-	else if (Input::GetKeyHeld(Keys::Shift) && Input::GetKeyDown(Keys::Up))
+	else if (Input::GetKeyHeld(Keys::Shift) && Input::GetKeyUp(Keys::Up))
 	{
 		nextRot = XMQuaternionMultiply(GetRotationV(), DirectX::XMQuaternionRotationAxis(GetRightVectorV(), XMConvertToRadians(-90.f)));
 	}
-	else if (Input::GetKeyHeld(Keys::Shift) && Input::GetKeyDown(Keys::Down))
+	else if (Input::GetKeyHeld(Keys::Shift) && Input::GetKeyUp(Keys::Down))
 	{
 		nextRot = XMQuaternionMultiply(GetRotationV(), DirectX::XMQuaternionRotationAxis(GetRightVectorV(), XMConvertToRadians(90.f)));
 	}
-	else if (Input::GetKeyDown(Keys::Right))
+	else if (Input::GetKeyUp(Keys::Right))
 	{
 		nextRot = XMQuaternionMultiply(GetRotationV(), DirectX::XMQuaternionRotationAxis(GetUpVectorV(), XMConvertToRadians(90.f)));
 	}
-	else if (Input::GetKeyDown(Keys::Left))
+	else if (Input::GetKeyUp(Keys::Left))
 	{
 		nextRot = XMQuaternionMultiply(GetRotationV(), DirectX::XMQuaternionRotationAxis(GetUpVectorV(), XMConvertToRadians(-90.f)));
 	}
