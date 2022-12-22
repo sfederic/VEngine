@@ -15,5 +15,5 @@ public:
 	auto GetLevelSize() { return levelSize; }
 
 private:
-	XMFLOAT3 levelSize = XMFLOAT3(1.f, 1.f, 1.f);
+	XMFLOAT3 levelSize = XMFLOAT3(5.f, 3.f, 5.f);
 };
