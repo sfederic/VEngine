@@ -192,10 +192,10 @@ void FileSystem::LoadWorld(std::string worldName)
 		d.is >> numObjectsToSpawn;
 		assert(numObjectsToSpawn != 0);
 
-		if (ActorSystemCache::Get().GetSystem(VString::wstos(systemName)))
-		{
-			auto actorSystem = ActorSystemCache::Get().GetSystem(VString::wstos(systemName));
+		auto actorSystem = ActorSystemCache::Get().GetSystem(VString::wstos(systemName));
 
+		if (actorSystem)
+		{
 			for (int i = 0; i < numObjectsToSpawn; i++)
 			{
 				Actor* actor = actorSystem->SpawnActor(Transform());
