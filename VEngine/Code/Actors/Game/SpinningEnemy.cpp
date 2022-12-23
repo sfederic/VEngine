@@ -6,40 +6,13 @@
 
 void SpinningEnemy::Create()
 {
-	auto mesh = CreateComponent(MeshComponent("cube.fbx", "water.jpg"), "MeshCore");
-	mesh->SetPosition(0.f, 0.f, 0.f);
-	mesh->AddTag(GameplayTags::EnemyMeshPiece);
-	rootComponent->AddChild(mesh);
-
-	mesh = CreateComponent(MeshComponent("cube.fbx", "test.png"), "MeshX+");
-	mesh->SetPosition(1.f, 0.f, 0.f);
-	mesh->AddTag(GameplayTags::EnemyMeshPiece);
-	rootComponent->AddChild(mesh);
-
-	mesh = CreateComponent(MeshComponent("cube.fbx", "test.png"), "MeshX-");
-	mesh->SetPosition(-1.f, 0.f, 0.f);
-	mesh->AddTag(GameplayTags::EnemyMeshPiece);
-	rootComponent->AddChild(mesh);
-
-	mesh = CreateComponent(MeshComponent("cube.fbx", "test.png"), "MeshY+");
-	mesh->SetPosition(0.f, 1.f, 0.f);
-	mesh->AddTag(GameplayTags::EnemyMeshPiece);
-	rootComponent->AddChild(mesh);
-
-	mesh = CreateComponent(MeshComponent("cube.fbx", "test.png"), "MeshY-");
-	mesh->SetPosition(0.f, -1.f, 0.f);
-	mesh->AddTag(GameplayTags::EnemyMeshPiece);
-	rootComponent->AddChild(mesh);
-
-	mesh = CreateComponent(MeshComponent("cube.fbx", "test.png"), "MeshZ+");
-	mesh->SetPosition(0.f, 0.f, 1.f);
-	mesh->AddTag(GameplayTags::EnemyMeshPiece);
-	rootComponent->AddChild(mesh);
-
-	mesh = CreateComponent(MeshComponent("cube.fbx", "test.png"), "MeshZ-");
-	mesh->SetPosition(0.f, 0.f, -1.f);
-	mesh->AddTag(GameplayTags::EnemyMeshPiece);
-	rootComponent->AddChild(mesh);
+	CreateMesh("MeshCore", XMFLOAT3(0.f, 0.f, 0.f));
+	CreateMesh("MeshX+", XMFLOAT3(1.f, 0.f, 0.f));
+	CreateMesh("MeshX-", XMFLOAT3(-1.f, 0.f, 0.f));
+	CreateMesh("MeshY+", XMFLOAT3(0.f, 1.f, 0.f));
+	CreateMesh("MeshY-", XMFLOAT3(0.f, -1.f, 0.f));
+	CreateMesh("MeshZ+", XMFLOAT3(0.f, 0.f, 1.f));
+	CreateMesh("MeshZ-", XMFLOAT3(0.f, 0.f, -1.f));
 }
 
 void SpinningEnemy::Start()
@@ -73,4 +46,13 @@ Properties SpinningEnemy::GetProps()
 	auto props = __super::GetProps();
 	props.title = "SpinningEnemy";
 	return props;
+}
+
+void SpinningEnemy::CreateMesh(const std::string name, XMFLOAT3 position)
+{
+	auto mesh = CreateComponent(MeshComponent("cube.fbx", "test.png"), name);
+	mesh->SetPosition(position);
+	mesh->SetScale(0.75f, 0.75f, 0.75f);
+	mesh->AddTag(GameplayTags::EnemyMeshPiece);
+	rootComponent->AddChild(mesh);
 }
