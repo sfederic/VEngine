@@ -121,7 +121,7 @@ void FileSystem::ReadAllSystemsFromBinary()
 		}
 
 		auto actorSystem = ActorSystemCache::Get().GetSystem(systemName);
-		auto componentSystem = componentSystemCache.Get(systemName);
+		auto componentSystem = ComponentSystemCache::Get().GetSystem(systemName);
 
 		if (actorSystem != nullptr)
 		{
@@ -192,7 +192,10 @@ void FileSystem::LoadWorld(std::string worldName)
 		d.is >> numObjectsToSpawn;
 		assert(numObjectsToSpawn != 0);
 
-		auto actorSystem = ActorSystemCache::Get().GetSystem(VString::wstos(systemName));
+		std::string stdSystemName = VString::wstos(systemName);
+
+		auto actorSystem = ActorSystemCache::Get().GetSystem(stdSystemName);
+		auto componentSystem = ComponentSystemCache::Get().GetSystem(stdSystemName);
 
 		if (actorSystem)
 		{
@@ -211,11 +214,8 @@ void FileSystem::LoadWorld(std::string worldName)
 				World::AddActorToWorld(actor);
 			}
 		}
-		else if (componentSystemCache.nameToSystemMap->find(VString::wstos(systemName)) != componentSystemCache.nameToSystemMap->end())
+		else if (componentSystem)
 		{
-			auto csIt = componentSystemCache.nameToSystemMap->find(VString::wstos(systemName));
-			auto cs = csIt->second;
-
 			//Deserialise the existing components created in Actor constructors
 			for (int i = 0; i < numObjectsToSpawn; i++)
 			{
@@ -248,8 +248,7 @@ void FileSystem::LoadWorld(std::string worldName)
 
 			std::wstring missingProp;
 
-			while ((componentSystemCache.nameToSystemMap->find(VString::wstos(missingProp)) ==
-				componentSystemCache.nameToSystemMap->end()) ||
+			while (ComponentSystemCache::Get().GetSystem(VString::wstos(missingProp)) ||
 				ActorSystemCache::Get().GetSystem(VString::wstos(missingProp)) == nullptr)
 			{
 				if (missingProp == L"end")

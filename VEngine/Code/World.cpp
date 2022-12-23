@@ -33,16 +33,14 @@ std::vector<IComponentSystem*> World::activeComponentSystems;
 
 void World::Init()
 {
-	//Add actorsystems into world
 	for (auto actorSystem : ActorSystemCache::Get().GetAllSystems())
 	{
 		activeActorSystems.push_back(actorSystem);
 	}
 
-	//Add componentsystems into world
-	for (auto& componentSystemIt : *componentSystemCache.typeToSystemMap)
+	for (auto componentSystem : ComponentSystemCache::Get().GetAllSystems())
 	{
-		activeComponentSystems.push_back(componentSystemIt.second);
+		activeComponentSystems.push_back(componentSystem);
 	}
 
 	//Load starting map

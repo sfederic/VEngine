@@ -20,7 +20,7 @@ public:
 		std::string token = typeName.substr(typeName.find(" ") + 1);
 		name = token;
 
-		componentSystemCache.Add(typeid(T), this);
+		ComponentSystemCache::Get().Add(typeid(T), this);
 	}
 
 	T* Add(std::string name, Actor* owner = nullptr, T newComponent = T(), bool callCreate = true)
