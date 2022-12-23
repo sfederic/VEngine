@@ -190,10 +190,7 @@ void FileSystem::LoadWorld(std::string worldName)
 
 		size_t numObjectsToSpawn = 0;
 		d.is >> numObjectsToSpawn;
-		if (numObjectsToSpawn == 0)
-		{
-			continue;
-		}
+		assert(numObjectsToSpawn != 0);
 
 		if (ActorSystemCache::Get().GetSystem(VString::wstos(systemName)))
 		{
