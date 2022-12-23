@@ -54,14 +54,7 @@ void World::Start()
 	MaterialSystem::CreateAllMaterials();
 	TextureSystem::CreateAllTextures();
 
-	//Init actor systems
-	for (IActorSystem* actorSystem : activeActorSystems)
-	{
-		actorSystem->Init();
-	}
-
-	//Init component systems
-	for (IComponentSystem* componentSystem : activeComponentSystems)
+	for (auto componentSystem : activeComponentSystems)
 	{
 		componentSystem->Init();
 	}

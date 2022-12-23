@@ -94,14 +94,6 @@ public:
 		}
 	}
 
-	virtual void Init() override
-	{
-		for (auto& actor : actors)
-		{
-			actor->Create();
-		}
-	}
-
 	virtual void CreateAllActorComponents() override
 	{
 		for (auto& actor : actors)
