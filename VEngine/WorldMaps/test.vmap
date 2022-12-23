@@ -13,76 +13,6 @@ DirectionalLightActor0
 UID
 3837712699
 next
-EnemySpawner
-4
- Enabled
-1
- Position
-2 2 8
- Rotation
--0 -2.0067e-07 -0 1
- Scale
-0.999991 0.999999 0.999991
-Name
-EnemySpawner0
-Spawn Count
-50
-Spawn Interval
-1.5
-UID
-2956170719
-next
- Enabled
-1
- Position
-6 2 1
- Rotation
--0 -2.0067e-07 -0 1
- Scale
-0.999991 0.999999 0.999991
-Name
-EnemySpawner1
-Spawn Count
-50
-Spawn Interval
-1.5
-UID
-892056661
-next
- Enabled
-1
- Position
-4 1 4
- Rotation
--0 -2.0067e-07 -0 1
- Scale
-0.999991 0.999999 0.999991
-Name
-EnemySpawner2
-Spawn Count
-50
-Spawn Interval
-1.5
-UID
-1281640293
-next
- Enabled
-1
- Position
-8 1 8
- Rotation
--0 -2.0067e-07 -0 1
- Scale
-0.999991 0.999999 0.999991
-Name
-EnemySpawner3
-Spawn Count
-50
-Spawn Interval
-1.5
-UID
-3655363956
-next
 LevelInstance
 1
  Enabled
@@ -101,7 +31,7 @@ UID
 3285984848
 next
 MeshActor
-109
+108
  Enabled
 1
  Position
@@ -170,7 +100,7 @@ next
  Enabled
 1
  Position
-6.5 0.5 3
+7 0.5 3
  Rotation
 -0 0 -0 1
  Scale
@@ -183,11 +113,11 @@ next
  Enabled
 1
  Position
-8 0 1.5
+8 0 1
  Rotation
--0 0.707107 -0 0.707107
+0 0.707107 0 0.707107
  Scale
-1 1 1
+0.999998 1 0.999998
 Name
 MeshActor6
 UID
@@ -679,7 +609,7 @@ next
  Position
 3 -0.5 6
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
 Name
@@ -731,7 +661,7 @@ next
  Position
 4 -0.5 0
  Rotation
-0 0 0 1
+0 1 0 1.56958e-07
  Scale
 1 1 1
 Name
@@ -757,7 +687,7 @@ next
  Position
 4 -0.5 2
  Rotation
-0 0 0 1
+0 0.707279 0 0.706934
  Scale
 1 1 1
 Name
@@ -770,7 +700,7 @@ next
  Position
 4 -0.5 3
  Rotation
-0 0 0 1
+0 0.707229 0 0.706985
  Scale
 1 1 1
 Name
@@ -796,7 +726,7 @@ next
  Position
 4 -0.5 5
  Rotation
-0 0 0 1
+-0 0.707107 -0 0.707107
  Scale
 1 1 1
 Name
@@ -809,7 +739,7 @@ next
  Position
 4 -0.5 6
  Rotation
-0 0 0 1
+0 0.707318 0 0.706895
  Scale
 1 1 1
 Name
@@ -822,7 +752,7 @@ next
  Position
 4 -0.5 7
  Rotation
-0 0 0 1
+-0 0.707107 -0 0.707107
  Scale
 1 1 1
 Name
@@ -835,7 +765,7 @@ next
  Position
 4 -0.5 8
  Rotation
-0 0 0 1
+0 0.707279 0 0.706934
  Scale
 1 1 1
 Name
@@ -848,7 +778,7 @@ next
  Position
 4 -0.5 9
  Rotation
-0 0 0 1
+-0 -0.707107 -0 0.707107
  Scale
 1 1 1
 Name
@@ -861,7 +791,7 @@ next
  Position
 5 -0.5 0
  Rotation
-0 0 0 1
+-0 -0.707107 -0 0.707107
  Scale
 1 1 1
 Name
@@ -991,7 +921,7 @@ next
  Position
 6 -0.5 0
  Rotation
-0 0 0 1
+-0 0.707107 -0 0.707107
  Scale
 1 1 1
 Name
@@ -1004,7 +934,7 @@ next
  Position
 6 -0.5 1
  Rotation
-0 0 0 1
+0 0.707279 0 0.706934
  Scale
 1 1 1
 Name
@@ -1017,7 +947,7 @@ next
  Position
 6 -0.5 2
  Rotation
-0 0 0 1
+-0 -0.707107 -0 0.707107
  Scale
 1 1 1
 Name
@@ -1056,7 +986,7 @@ next
  Position
 6 -0.5 5
  Rotation
-0 0 0 1
+-0 0.707107 -0 0.707107
  Scale
 1 1 1
 Name
@@ -1069,7 +999,7 @@ next
  Position
 6 -0.5 6
  Rotation
-0 0 0 1
+0 1 0 -0.000172637
  Scale
 1 1 1
 Name
@@ -1212,7 +1142,7 @@ next
  Position
 7 -0.5 7
  Rotation
-0 0 0 1
+0 0.707229 0 0.706985
  Scale
 1 1 1
 Name
@@ -1225,9 +1155,9 @@ next
  Position
 7 -0.5 8
  Rotation
-0 0 0 1
+0.000211432 0.707107 -0.000211432 0.707107
  Scale
-1 1 1
+1 0.999999 1
 Name
 MeshActor86
 UID
@@ -1238,7 +1168,7 @@ next
  Position
 7 -0.5 9
  Rotation
-0 0 0 1
+-0 0.707107 -0 0.707107
  Scale
 1 1 1
 Name
@@ -1506,19 +1436,6 @@ MeshActor107
 UID
 2734107154
 next
- Enabled
-1
- Position
-4 0 4
- Rotation
-0 0 0 1
- Scale
-50 50 50
-Name
-sky_cylinder108
-UID
-1213386012
-next
 Player
 1
  Enabled
@@ -1536,8 +1453,36 @@ Player0
 UID
 869806797
 next
-EmptyComponent
+TurretEnemy
+2
+ Enabled
 1
+ Position
+0.5 0 3
+ Rotation
+0 0.707107 0 0.707107
+ Scale
+0.499994 0.5 0.499994
+Name
+TurretEnemy0
+UID
+3330529553
+next
+ Enabled
+1
+ Position
+0.5 2 3
+ Rotation
+0 0.707107 0 0.707107
+ Scale
+0.499993 0.5 0.499993
+Name
+TurretEnemy1
+UID
+3956692475
+next
+EmptyComponent
+3
 3285984848
 Root
  Enabled
@@ -1548,6 +1493,28 @@ Root
 0 0 0 1
  Scale
 1 1 1
+next
+3330529553
+Root
+ Enabled
+1
+ Pos
+0.5 0 3
+ Rot
+0 0.707107 0 0.707107
+ Scale
+0.499994 0.5 0.499994
+next
+3956692475
+Root
+ Enabled
+1
+ Pos
+0.5 2 3
+ Rot
+0 0.707107 0 0.707107
+ Scale
+0.499993 0.5 0.499993
 next
 CameraComponent
 1
@@ -1569,7 +1536,7 @@ Near Z
 0.01
 next
 MeshComponent
-110
+111
 2359625125
 Mesh
  Enabled
@@ -1820,7 +1787,7 @@ Mesh
  Enabled
 1
  Pos
-6.5 0.5 3
+7 0.5 3
  Rot
 -0 0 -0 1
  Scale
@@ -1869,11 +1836,11 @@ Mesh
  Enabled
 1
  Pos
-8 0 1.5
+8 0 1
  Rot
--0 0.707107 -0 0.707107
+0 0.707107 0 0.707107
  Scale
-1 1 1
+0.999998 1 0.999998
 Casts Shadow
 1
 Grid Obstacle
@@ -2285,7 +2252,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -2334,7 +2301,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -2383,7 +2350,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -3118,7 +3085,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -3167,7 +3134,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/road2.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -3216,7 +3183,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor3.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -3265,7 +3232,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/grass02.png
 M_Use Texture
 1
 M_UvOffset
@@ -3314,7 +3281,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor3.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -3363,7 +3330,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor2.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -3412,7 +3379,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -3510,7 +3477,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -3608,7 +3575,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-Floors/city_floor1.jpg
+Floors/city_floor3.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -3657,7 +3624,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/road2.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -3706,7 +3673,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor2.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -3733,7 +3700,7 @@ Mesh
  Pos
 3 -0.5 6
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
 Casts Shadow
@@ -3755,7 +3722,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/grass02.png
 M_Use Texture
 1
 M_UvOffset
@@ -3804,7 +3771,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor3.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -3853,7 +3820,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor3.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -3902,7 +3869,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -3929,7 +3896,7 @@ Mesh
  Pos
 4 -0.5 0
  Rot
-0 0 0 1
+0 1 0 1.56958e-07
  Scale
 1 1 1
 Casts Shadow
@@ -3951,7 +3918,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor3.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -4000,7 +3967,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -4027,7 +3994,7 @@ Mesh
  Pos
 4 -0.5 2
  Rot
-0 0 0 1
+0 0.707279 0 0.706934
  Scale
 1 1 1
 Casts Shadow
@@ -4049,7 +4016,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/road4.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -4076,7 +4043,7 @@ Mesh
  Pos
 4 -0.5 3
  Rot
-0 0 0 1
+0 0.707229 0 0.706985
  Scale
 1 1 1
 Casts Shadow
@@ -4098,7 +4065,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/road2.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -4147,7 +4114,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/road6.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -4174,7 +4141,7 @@ Mesh
  Pos
 4 -0.5 5
  Rot
-0 0 0 1
+-0 0.707107 -0 0.707107
  Scale
 1 1 1
 Casts Shadow
@@ -4196,7 +4163,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/road2.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -4223,7 +4190,7 @@ Mesh
  Pos
 4 -0.5 6
  Rot
-0 0 0 1
+0 0.707318 0 0.706895
  Scale
 1 1 1
 Casts Shadow
@@ -4245,7 +4212,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/road2.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -4272,7 +4239,7 @@ Mesh
  Pos
 4 -0.5 7
  Rot
-0 0 0 1
+-0 0.707107 -0 0.707107
  Scale
 1 1 1
 Casts Shadow
@@ -4294,7 +4261,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/road2.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -4321,7 +4288,7 @@ Mesh
  Pos
 4 -0.5 8
  Rot
-0 0 0 1
+0 0.707279 0 0.706934
  Scale
 1 1 1
 Casts Shadow
@@ -4343,7 +4310,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/road2.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -4370,7 +4337,7 @@ Mesh
  Pos
 4 -0.5 9
  Rot
-0 0 0 1
+-0 -0.707107 -0 0.707107
  Scale
 1 1 1
 Casts Shadow
@@ -4392,7 +4359,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/road2.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -4419,7 +4386,7 @@ Mesh
  Pos
 5 -0.5 0
  Rot
-0 0 0 1
+-0 -0.707107 -0 0.707107
  Scale
 1 1 1
 Casts Shadow
@@ -4441,7 +4408,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor3.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -4490,7 +4457,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -4539,7 +4506,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/road2.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -4588,7 +4555,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -4637,7 +4604,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/road3.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -4686,7 +4653,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -4735,7 +4702,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor2.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -4784,7 +4751,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -4882,7 +4849,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -4909,7 +4876,7 @@ Mesh
  Pos
 6 -0.5 0
  Rot
-0 0 0 1
+-0 0.707107 -0 0.707107
  Scale
 1 1 1
 Casts Shadow
@@ -4931,7 +4898,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/road2.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -4958,7 +4925,7 @@ Mesh
  Pos
 6 -0.5 1
  Rot
-0 0 0 1
+0 0.707279 0 0.706934
  Scale
 1 1 1
 Casts Shadow
@@ -4980,7 +4947,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/road2.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -5007,7 +4974,7 @@ Mesh
  Pos
 6 -0.5 2
  Rot
-0 0 0 1
+-0 -0.707107 -0 0.707107
  Scale
 1 1 1
 Casts Shadow
@@ -5029,7 +4996,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/road4.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -5078,7 +5045,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -5127,7 +5094,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/road4.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -5154,7 +5121,7 @@ Mesh
  Pos
 6 -0.5 5
  Rot
-0 0 0 1
+-0 0.707107 -0 0.707107
  Scale
 1 1 1
 Casts Shadow
@@ -5176,7 +5143,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/road2.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -5203,7 +5170,7 @@ Mesh
  Pos
 6 -0.5 6
  Rot
-0 0 0 1
+0 1 0 -0.000172637
  Scale
 1 1 1
 Casts Shadow
@@ -5225,7 +5192,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/road4.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -5274,7 +5241,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -5323,7 +5290,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -5372,7 +5339,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -5421,7 +5388,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -5470,7 +5437,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -5519,7 +5486,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -5568,7 +5535,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -5617,7 +5584,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -5666,7 +5633,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -5715,7 +5682,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/road4.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -5742,7 +5709,7 @@ Mesh
  Pos
 7 -0.5 7
  Rot
-0 0 0 1
+0 0.707229 0 0.706985
  Scale
 1 1 1
 Casts Shadow
@@ -5764,7 +5731,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/road2.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -5791,9 +5758,9 @@ Mesh
  Pos
 7 -0.5 8
  Rot
-0 0 0 1
+0.000211432 0.707107 -0.000211432 0.707107
  Scale
-1 1 1
+1 0.999999 1
 Casts Shadow
 1
 Grid Obstacle
@@ -5813,7 +5780,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/road2.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -5840,7 +5807,7 @@ Mesh
  Pos
 7 -0.5 9
  Rot
-0 0 0 1
+-0 0.707107 -0 0.707107
  Scale
 1 1 1
 Casts Shadow
@@ -5862,7 +5829,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/road2.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -5911,7 +5878,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor2.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -5960,7 +5927,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -6009,7 +5976,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -6107,7 +6074,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -6205,7 +6172,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -6254,7 +6221,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -6303,7 +6270,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -6352,7 +6319,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor2.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -6401,7 +6368,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/grass02.png
 M_Use Texture
 1
 M_UvOffset
@@ -6450,7 +6417,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/grass02.png
 M_Use Texture
 1
 M_UvOffset
@@ -6499,7 +6466,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/grass02.png
 M_Use Texture
 1
 M_UvOffset
@@ -6548,7 +6515,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/grass02.png
 M_Use Texture
 1
 M_UvOffset
@@ -6597,7 +6564,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/grass02.png
 M_Use Texture
 1
 M_UvOffset
@@ -6646,7 +6613,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/grass02.png
 M_Use Texture
 1
 M_UvOffset
@@ -6695,7 +6662,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/grass02.png
 M_Use Texture
 1
 M_UvOffset
@@ -6744,7 +6711,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/grass02.png
 M_Use Texture
 1
 M_UvOffset
@@ -6793,7 +6760,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/grass02.png
 M_Use Texture
 1
 M_UvOffset
@@ -6842,7 +6809,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/grass02.png
 M_Use Texture
 1
 M_UvOffset
@@ -6857,55 +6824,6 @@ M_UvScale
 1 1
 Mesh
 node.fbx
-Static
-1
-Trans. Occlude
-0
-next
-1213386012
-Mesh
- Enabled
-1
- Pos
-4 0 4
- Rot
-0 0 0 1
- Scale
-50 50 50
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-nobackcull
-M_Shader
-Unlit
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Sky/sky.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-sky_cylinder.fbx
 Static
 1
 Trans. Occlude
@@ -6960,67 +6878,103 @@ Static
 Trans. Occlude
 0
 next
-BoxTriggerComponent
-4
-2956170719
-BoxTrigger
+3330529553
+Mesh
  Enabled
 1
  Pos
-2 2 8
- Rot
--0 -2.0067e-07 -0 1
- Scale
-0.999991 0.999999 0.999991
-Extents
-2 2 1
-Offset
 0 0 0
-next
-892056661
-BoxTrigger
- Enabled
-1
- Pos
-6 2 1
  Rot
--0 -2.0067e-07 -0 1
+0 0 0 1
  Scale
-0.999991 0.999999 0.999991
-Extents
-2 2 1
-Offset
-0 0 0
-next
-1281640293
-BoxTrigger
- Enabled
-1
- Pos
-4 1 4
- Rot
--0 -2.0067e-07 -0 1
- Scale
-0.999991 0.999999 0.999991
-Extents
-2 1 2
-Offset
-0 0 0
-next
-3655363956
-BoxTrigger
- Enabled
-1
- Pos
-8 1 8
- Rot
--0 -2.0067e-07 -0 1
- Scale
-0.999991 0.999999 0.999991
-Extents
 1 1 1
-Offset
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+turret.fbx
+Static
+1
+Trans. Occlude
+0
+next
+3956692475
+Mesh
+ Enabled
+1
+ Pos
 0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+turret.fbx
+Static
+1
+Trans. Occlude
+0
 next
 DirectionalLightComponent
 1
