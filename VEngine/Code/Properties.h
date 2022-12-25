@@ -19,7 +19,7 @@ struct Properties
 	}
 
 	template <typename T>
-	Property& Add(std::string name, T* data)
+	Property& Add(const std::string& name, T* data)
 	{
 		Property prop = {};
 
@@ -63,9 +63,9 @@ struct Properties
 
 		assert(propMap.find(name) == propMap.end() && "name key already exists in properties map");
 
-		propMap[name] = prop;
+		propMap.emplace(name, prop);
 
-		return propMap[name];
+		return propMap.find(name)->second;
 	}
 
 	void Merge(Properties propsToMerge)
