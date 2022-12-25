@@ -27,7 +27,7 @@ void CutsceneActor::Tick(float deltaTime)
 Properties CutsceneActor::GetProps()
 {
     auto props = __super::GetProps();
-    props.AddProp(cutsceneFilename);
+    props.Add("Cutscene Filename", &cutsceneFilename);
     return props;
 }
 

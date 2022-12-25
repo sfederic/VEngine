@@ -23,9 +23,9 @@ Properties DiffuseProbeMap::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = "DiffuseProbeMap";
-	props.AddProp(sizeX);
-	props.AddProp(sizeY);
-	props.AddProp(sizeZ);
+	props.Add("Size X", &sizeX);
+	props.Add("Size Y", &sizeY);
+	props.Add("Size Z", &sizeZ);
 	return props;
 }
 

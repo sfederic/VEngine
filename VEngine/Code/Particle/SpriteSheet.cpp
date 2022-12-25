@@ -57,10 +57,10 @@ Properties SpriteSheet::GetProps()
 {
 	Properties props("SpriteSheet");
 	props.Add("Texture", &textureData);
-	props.AddProp(numSheetRows);
-	props.AddProp(numSheetColumns);
-	props.AddProp(animationSpeed);
-	props.AddProp(loopAnimation);
+	props.Add("Sheet Rows", &numSheetRows);
+	props.Add("Sheet Columns", &numSheetColumns);
+	props.Add("Animation Speed", &animationSpeed);
+	props.Add("Loop Animation", &loopAnimation);
 	return props;
 }
 

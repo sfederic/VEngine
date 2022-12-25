@@ -23,8 +23,8 @@ Properties CharacterControllerComponent::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = "CharacterController";
-	props.AddProp(radius);
-	props.AddProp(height);
+	props.Add("Radius", &radius);
+	props.Add("Height", &height);
 	return props;
 }
 
