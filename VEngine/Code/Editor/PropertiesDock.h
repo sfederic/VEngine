@@ -31,7 +31,7 @@ private:
 	{
 	    auto widget = new WidgetType(prop);
 		actorPropsGridLayout->addWidget(widget, row, propertyDataColumn);
-	    propertyWidgetsToUpdate.push_back((IPropertyWidget*)widget);
+	    propertyWidgetsToUpdate.emplace_back(static_cast<IPropertyWidget*>(widget));
 	}
 
 private:

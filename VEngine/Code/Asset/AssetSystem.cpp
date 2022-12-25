@@ -143,7 +143,7 @@ MeshData AssetSystem::ReadAllMeshAssetsFromFile(const char* filename)
 				assert(fread(&frame, sizeof(AnimFrame), 1, file));
 
 				Animation& animation = data.skeleton.animations.find(animationName)->second;
-				animation.frames[jointIndex].push_back(frame);
+				animation.frames[jointIndex].emplace_back(frame);
 			}
 		}
 	}

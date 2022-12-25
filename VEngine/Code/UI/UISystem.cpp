@@ -85,7 +85,7 @@ void UISystem::AddWidget(Widget* widgetToAdd)
 		}
 	}
 
-	widgetsInViewport.push_back(widgetToAdd);
+	widgetsInViewport.emplace_back(widgetToAdd);
 }
 
 void UISystem::RemoveWidget(Widget* widgetToRemove)

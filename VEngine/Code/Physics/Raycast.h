@@ -44,7 +44,7 @@ struct HitResult
 	HitResult() {}
 	HitResult(Actor* actorToIgnore)
 	{
-		actorsToIgnore.push_back(actorToIgnore);
+		actorsToIgnore.emplace_back(actorToIgnore);
 	}
 
 	void AddActorsToIgnore(std::vector<Actor*>& actors);

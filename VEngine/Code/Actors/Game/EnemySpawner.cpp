@@ -42,7 +42,7 @@ void EnemySpawner::SpawnEnemy()
 	{
 		if (mesh->boundingBox.Contains(pointInBoundingBox))
 		{
-			previousContainedPoints.push_back(pointInBoundingBox);
+			previousContainedPoints.emplace_back(pointInBoundingBox);
 
 			pointInBoundingBox = boxTrigger->GetRandomPointInTriggerRounded();
 			for (auto& previousPoint : previousContainedPoints)

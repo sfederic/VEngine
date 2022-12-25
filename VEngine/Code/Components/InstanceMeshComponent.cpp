@@ -26,7 +26,7 @@ void InstanceMeshComponent::Create()
 
 	if (instanceData.empty())
 	{
-		instanceData.push_back(InstanceData());
+		instanceData.emplace_back(InstanceData());
 	}
 
 	//Setup shader buffers

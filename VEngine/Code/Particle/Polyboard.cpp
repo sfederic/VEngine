@@ -27,7 +27,7 @@ void Polyboard::GenerateVertices()
 
 	if (vertices.size() == 0)
 	{
-		vertices.push_back(Vertex());
+		vertices.emplace_back(Vertex());
 	}
 
 	vertexBuffer->data = RenderUtils::CreateDynamicBuffer(sizeof(Vertex) * 256,
@@ -73,18 +73,18 @@ void Polyboard::CalcVertices()
 		vertex1.uv = XMFLOAT2(0.f, i);
 		vertex2.uv = XMFLOAT2(1.f, i);
 
-		vertices.push_back(vertex1);
-		vertices.push_back(vertex2);
+		vertices.emplace_back(vertex1);
+		vertices.emplace_back(vertex2);
 	}
 
 	for (size_t i = 0; i < (vertices.size() / 3) + 1; i++) //Because the vertices aren't triangle based, divide by 3
 	{
-		indices.push_back(0 + (2 * i));
-		indices.push_back(2 + (2 * i));
-		indices.push_back(1 + (2 * i));
+		indices.emplace_back(0 + (2 * i));
+		indices.emplace_back(2 + (2 * i));
+		indices.emplace_back(1 + (2 * i));
 
-		indices.push_back(2 + (2 * i));
-		indices.push_back(3 + (2 * i));
-		indices.push_back(1 + (2 * i));
+		indices.emplace_back(2 + (2 * i));
+		indices.emplace_back(3 + (2 * i));
+		indices.emplace_back(1 + (2 * i));
 	}
 }

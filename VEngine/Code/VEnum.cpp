@@ -24,7 +24,7 @@ std::vector<std::string> VEnum::GetAllNames()
 	std::vector<std::string> names;
 	for (auto& name : data)
 	{
-		names.push_back(name.first);
+		names.emplace_back(name.first);
 	}
 	return names;
 }

@@ -63,7 +63,7 @@ public:
 	virtual void Add(int type);
 
 	virtual void Del(int index) { items.erase(items.begin() + index); }
-	virtual void Duplicate(int index) { items.push_back(items[index]); }
+	virtual void Duplicate(int index) { items.emplace_back(items[index]); }
 
 	virtual void Copy() {}
 	virtual void Paste() {}

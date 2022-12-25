@@ -35,12 +35,12 @@ void World::Init()
 {
 	for (auto actorSystem : ActorSystemCache::Get().GetAllSystems())
 	{
-		activeActorSystems.push_back(actorSystem);
+		activeActorSystems.emplace_back(actorSystem);
 	}
 
 	for (auto componentSystem : ComponentSystemCache::Get().GetAllSystems())
 	{
-		activeComponentSystems.push_back(componentSystem);
+		activeComponentSystems.emplace_back(componentSystem);
 	}
 
 	//Load starting map
@@ -155,7 +155,7 @@ std::vector<IActorSystem*> World::GetLayerActorSystems()
 			continue;
 		}
 
-		actorSystems.push_back(actorSystem);
+		actorSystems.emplace_back(actorSystem);
 	}
 
 	return actorSystems;

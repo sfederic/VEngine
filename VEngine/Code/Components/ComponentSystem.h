@@ -169,7 +169,7 @@ public:
 		std::vector<Component*> outComponents;
 		for (auto& component : components)
 		{
-			outComponents.push_back(component.get());
+			outComponents.emplace_back(component.get());
 		}
 		return outComponents;
 	}

@@ -192,12 +192,12 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 
 					if (boneWeightsMap[index].boneIndex.size() < BoneWeights::MAX_BONE_INDICES)
 					{
-						boneWeightsMap[index].boneIndex.push_back(currentJointIndex);
+						boneWeightsMap[index].boneIndex.emplace_back(currentJointIndex);
 					}
 
 					if (boneWeightsMap[index].weights.size() < BoneWeights::MAX_WEIGHTS)
 					{
-						boneWeightsMap[index].weights.push_back(weight);
+						boneWeightsMap[index].weights.emplace_back(weight);
 					}
 				}
 
@@ -264,7 +264,7 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 												animFrame.pos.y = pos[1];
 												animFrame.pos.z = pos[2];
 
-												meshData->skeleton.animations[animStack->GetName()].frames[currentJointIndex].push_back(animFrame);
+												meshData->skeleton.animations[animStack->GetName()].frames[currentJointIndex].emplace_back(animFrame);
 											}
 										}
 									}
@@ -352,11 +352,11 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 				//if (existingIndices.find(index) == existingIndices.end())
 				//{
 				//	indexToPolyCount.emplace(index, std::make_pair(vertexCount, vert));
-				//	meshData->vertices.push_back(indexToPolyCount[index].second);
+				//	meshData->vertices.emplace_back(indexToPolyCount[index].second);
 				//	vertexCount++;
 				//}
 
-				//meshData->indices.push_back(indexToPolyCount[index].first);
+				//meshData->indices.emplace_back(indexToPolyCount[index].first);
 
 				//existingIndices.emplace(index);
 

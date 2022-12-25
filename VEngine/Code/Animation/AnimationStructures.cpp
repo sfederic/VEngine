@@ -107,7 +107,7 @@ Skeleton::Skeleton()
 
 void Skeleton::AddJoint(Joint joint)
 {
-	joints.push_back(joint);
+	joints.emplace_back(joint);
 	joints.back().index = joints.size() - 1;
 }
 

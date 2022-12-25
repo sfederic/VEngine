@@ -73,8 +73,8 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 
 			if (boundingBox.Intersects(hitResult.origin, hitResult.direction, hitResult.hitDistance))
 			{
-				distances.push_back(hitResult.hitDistance);
-				hitResult.hitComponents.push_back(mesh);
+				distances.emplace_back(hitResult.hitDistance);
+				hitResult.hitComponents.emplace_back(mesh);
 				bRayHit = true;
 			}
 		}
@@ -186,7 +186,7 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 	std::vector<Actor*> hitActors;
 	for (auto& hitResult : hitResults)
 	{
-		hitActors.push_back(hitResult.hitActor);
+		hitActors.emplace_back(hitResult.hitActor);
 	}
 
 	//Set nearest hit actor
@@ -265,8 +265,8 @@ bool OrientedBoxCast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end, XMFLOA
 			auto meshBoundsInWorld = VMath::GetBoundingBoxInWorld(mesh);
 			if (boundingOrientedBox.Intersects(meshBoundsInWorld))
 			{
-				hitResult.hitComponents.push_back(mesh);
-				hitResult.hitActors.push_back(actor);
+				hitResult.hitComponents.emplace_back(mesh);
+				hitResult.hitActors.emplace_back(actor);
 			}
 		}
 	}
@@ -291,8 +291,8 @@ bool SimpleBoxCast(XMFLOAT3 center, XMFLOAT3 extents, HitResult& hit)
 
 			if (boundingBox.Intersects(meshWorldBounds))
 			{
-				hit.hitComponents.push_back(mesh);
-				hit.hitActors.push_back(actor);
+				hit.hitComponents.emplace_back(mesh);
+				hit.hitActors.emplace_back(actor);
 			}
 		}
 	}
@@ -306,6 +306,6 @@ void HitResult::AddActorsToIgnore(std::vector<Actor*>& actors)
 
 	for (auto actor : actors)
 	{
-		actorsToIgnore.push_back(actor);
+		actorsToIgnore.emplace_back(actor);
 	}
 }

@@ -192,7 +192,7 @@ public:
 		std::vector<Actor*> outActors;
 		for (auto& actor : actors)
 		{
-			outActors.push_back((Actor*)actor.get());
+			outActors.emplace_back(static_cast<Actor*>(actor.get()));
 		}
 		return outActors;
 	}

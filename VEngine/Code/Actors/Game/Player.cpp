@@ -98,7 +98,7 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 		{
 			if (actor->CanBeTransparentlyOccluded())
 			{
-				ableActors.push_back(actor);
+				ableActors.emplace_back(actor);
 				SetActorAlpha(actor, transparentValue);
 			}
 		}
@@ -241,11 +241,11 @@ void Player::BladeSwipe()
 	{
 		//Line up 5 origins alongside player's right axis
 		std::vector<XMVECTOR> rayOrigins;
-		rayOrigins.push_back(GetPositionV() - GetRightVectorV() * 2.f);
-		rayOrigins.push_back(GetPositionV() - GetRightVectorV());
-		rayOrigins.push_back(GetPositionV());
-		rayOrigins.push_back(GetPositionV() + GetRightVectorV());
-		rayOrigins.push_back(GetPositionV() + GetRightVectorV() * 2.f);
+		rayOrigins.emplace_back(GetPositionV() - GetRightVectorV() * 2.f);
+		rayOrigins.emplace_back(GetPositionV() - GetRightVectorV());
+		rayOrigins.emplace_back(GetPositionV());
+		rayOrigins.emplace_back(GetPositionV() + GetRightVectorV());
+		rayOrigins.emplace_back(GetPositionV() + GetRightVectorV() * 2.f);
 
 		//Can't destroy components/actors in an inner Raycast loop. Keep them and destroy later down.
 		std::vector<MeshComponent*> hitMeshComponents;
@@ -266,7 +266,7 @@ void Player::BladeSwipe()
 					auto mesh = dynamic_cast<MeshComponent*>(hitResult.hitComponent);
 					if (mesh)
 					{
-						hitMeshComponents.push_back(mesh);
+						hitMeshComponents.emplace_back(mesh);
 					}
 				}
 			}

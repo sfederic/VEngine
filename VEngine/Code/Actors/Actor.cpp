@@ -176,9 +176,9 @@ Properties Actor::GetProps()
 std::vector<Component*> Actor::GetAllComponents()
 {
 	std::vector<Component*> result;
-	for (auto& componentPair : componentMap)
+	for (auto& componentPair : componentMap) 
 	{
-		result.push_back(componentPair.second);
+		result.emplace_back(componentPair.second);
 	}
 	return result;
 }
@@ -186,13 +186,12 @@ std::vector<Component*> Actor::GetAllComponents()
 std::vector<Properties> Actor::GetAllProps()
 {
 	std::vector<Properties> propsVector;
-
-	propsVector.push_back(GetProps());
+	propsVector.emplace_back(GetProps());
 
 	for (auto& componentPair : componentMap)
 	{
 		Properties componentProps = componentPair.second->GetProps();
-		propsVector.push_back(componentProps);
+		propsVector.emplace_back(componentProps);
 	}
 
 	return propsVector;
@@ -280,7 +279,7 @@ void Actor::AddChild(Actor* actor)
 		assert(child != actor && "Actor trying to add child already in list. Recursive set found.");
 	}
 
-	children.push_back(actor);
+	children.emplace_back(actor);
 
 	//Set parent
 	assert(actor->parent != actor);

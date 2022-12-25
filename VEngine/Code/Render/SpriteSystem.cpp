@@ -40,7 +40,7 @@ void SpriteSystem::Reset()
 
 void SpriteSystem::CreateScreenSprite(Sprite sprite)
 {
-	screenSprites.push_back(sprite);
+	screenSprites.emplace_back(sprite);
 }
 
 void SpriteSystem::UpdateAndSetSpriteBuffers(ID3D11DeviceContext* context)

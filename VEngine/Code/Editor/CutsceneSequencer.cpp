@@ -14,7 +14,7 @@ char conditionArgInput[128] = {};
 
 CutsceneSequencer::CutsceneSequencer()
 {
-	items.push_back(CutsceneSequenceItem());
+	items.emplace_back(CutsceneSequenceItem());
 }
 
 void CutsceneSequencer::PlaybackTick(float deltaTime)
@@ -172,7 +172,7 @@ void CutsceneSequencer::LoadCutscene(std::string cutsceneFilename)
 		newItem.frameStart = std::stoi(frameStart);
 		newItem.frameEnd = std::stoi(frameEnd);
 
-		items.push_back(newItem);
+		items.emplace_back(newItem);
 	}
 
 	is.close();
@@ -211,7 +211,7 @@ void CutsceneSequencer::Add(int type)
 	item.frameEnd = 25;
 	item.type = 0;
 	item.name = "New";
-	items.push_back(item);
+	items.emplace_back(item);
 }
 
 void CutsceneSequencer::DoubleClick(int index)

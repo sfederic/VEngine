@@ -11,7 +11,7 @@ ParticleSystem::ParticleSystem()
 
 void ParticleSystem::AddEmitter(ParticleEmitter* emitter)
 {
-	emitters.push_back(emitter);
+	emitters.emplace_back(emitter);
 }
 
 Properties ParticleSystem::GetProps()

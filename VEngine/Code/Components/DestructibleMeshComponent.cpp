@@ -30,7 +30,7 @@ void DestructibleMeshComponent::Create()
 		//parent all the fractured cell meshes to this to be able to move it around before breaking.
 		this->AddChild(mesh);
 
-		meshCells.push_back(mesh);
+		meshCells.emplace_back(mesh);
 
 		mesh->isStatic = false;
 

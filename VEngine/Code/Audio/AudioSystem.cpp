@@ -54,7 +54,7 @@ void AudioSystem::Tick()
 	{
 		if (!it->second->isPlaying)
 		{
-			stoppedChannels.push_back(it);
+			stoppedChannels.emplace_back(it);
 		}
 	}
 

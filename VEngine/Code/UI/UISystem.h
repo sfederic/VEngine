@@ -20,10 +20,10 @@ namespace UISystem
 		std::vector<T*> outWidgets;
 		for (auto& widget : widgets)
 		{
-			T* castWidget = dynamic_cast<T*>(widget.get());
+			auto castWidget = dynamic_cast<T*>(widget.get());
 			if (castWidget)
 			{
-				outWidgets.push_back(castWidget);
+				outWidgets.emplace_back(castWidget);
 			}
 		}
 		return outWidgets;

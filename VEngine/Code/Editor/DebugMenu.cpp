@@ -116,7 +116,7 @@ void DebugMenu::Cleanup()
 
 void DebugMenu::AddNotification(const std::wstring note)
 {
-	debugNotifications.push_back(DebugNotification(note));
+	debugNotifications.emplace_back(DebugNotification(note));
 }
 
 void DebugMenu::RenderActorProps()

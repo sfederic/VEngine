@@ -6,7 +6,7 @@ void SpatialComponent::AddChild(SpatialComponent* component)
 	assert(component != this);
 	assert(component);
 	component->parent = this;
-	children.push_back(component);
+	children.emplace_back(component);
 }
 
 void SpatialComponent::RemoveChild(SpatialComponent* component)

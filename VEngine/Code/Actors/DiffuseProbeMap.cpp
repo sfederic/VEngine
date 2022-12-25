@@ -50,12 +50,12 @@ void DiffuseProbeMap::SetInstanceMeshData()
 				data.world.r[1].m128_f32[1] = 0.15f;
 				data.world.r[2].m128_f32[2] = 0.15f;
 
-				instanceData.push_back(data);
+				instanceData.emplace_back(data);
 
 				ProbeData pd = {};
 				pd.index = probeIndex;
 				XMStoreFloat3(&pd.position,data.world.r[3]);
-				probeData.push_back(pd);
+				probeData.emplace_back(pd);
 
 				probeIndex++;
 			}

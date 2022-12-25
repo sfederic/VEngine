@@ -882,7 +882,7 @@ void Renderer::RenderLightProbeViews()
 			pd.index = probeIndex;
 			memcpy(pd.SH, coefs, sizeof(XMFLOAT4) * 9);
 			XMStoreFloat3(&pd.position, probeMatrix.r[3]);
-			probeMap->probeData.push_back(pd);
+			probeMap->probeData.emplace_back(pd);
 
 			probeIndex++;
 		}
@@ -1774,7 +1774,7 @@ BlendState* Renderer::GetBlendState(std::string blendStateName)
 
 void Renderer::AddDebugDrawOrientedBox(DirectX::BoundingOrientedBox& orientedBox)
 {
-	debugOrientedBoxesOnTimerToRender.push_back(orientedBox);
+	debugOrientedBoxesOnTimerToRender.emplace_back(orientedBox);
 }
 
 void Renderer::ClearBounds()

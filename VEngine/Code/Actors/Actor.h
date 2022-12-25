@@ -152,7 +152,7 @@ public:
 			T* outComponent = dynamic_cast<T*>(componentPair.second);
 			if (outComponent)
 			{
-				outComponents.push_back(outComponent);
+				outComponents.emplace_back(outComponent);
 			}
 		}
 

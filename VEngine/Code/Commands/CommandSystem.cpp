@@ -32,7 +32,7 @@ void CommandSystem::Add(ICommand* command)
 
 	command->Execute();
 
-	commands.push_back(command);
+	commands.emplace_back(command);
 
 	commandIndex = commands.size() - 1;
 }

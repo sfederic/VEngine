@@ -52,7 +52,7 @@ namespace World
 			auto actorType = dynamic_cast<T*>(actor);
 			if (actorType)
 			{
-				outActors.push_back(actorType);
+				outActors.emplace_back(actorType);
 			}
 		}
 
@@ -69,7 +69,7 @@ namespace World
 			auto systemType = dynamic_cast<T*>(componentSystem);
 			if (systemType)
 			{
-				outComponentSystems.push_back(systemType);
+				outComponentSystems.emplace_back(systemType);
 			}
 		}
 
@@ -86,7 +86,7 @@ namespace World
 		{
 			if (dynamic_cast<T*>(actor))
 			{
-				outActors.push_back(actor);
+				outActors.emplace_back(actor);
 			}
 		}
 
