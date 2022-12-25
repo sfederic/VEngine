@@ -68,7 +68,7 @@ struct Properties
 		return propMap.find(name)->second;
 	}
 
-	void Merge(Properties propsToMerge)
+	void Merge(Properties& propsToMerge)
 	{
 		propMap.merge(propsToMerge.propMap);
 	}

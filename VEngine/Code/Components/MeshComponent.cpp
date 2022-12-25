@@ -118,12 +118,16 @@ Properties MeshComponent::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = "MeshComponent";
+
 	props.Add("Mesh", &meshComponentData).change = ReassignMesh;
 	props.Add("Casts Shadow", &castsShadow);
 	props.Add("Static", &isStatic);
 	props.Add("Grid Obstacle", &gridObstacle);
 	props.Add("Trans. Occlude", &transparentOcclude);
-	props.Merge(material->GetProps());
+
+	auto materialProps = material->GetProps();
+	props.Merge(materialProps);
+
 	return props;
 }
 
