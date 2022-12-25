@@ -3,7 +3,7 @@
 #include "ActorSystem.h"
 #include <string>
 
-struct MeshComponent;
+class MeshComponent;
 
 struct MeshActor : Actor
 {

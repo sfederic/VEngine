@@ -10,8 +10,9 @@
 class Material;
 struct Skeleton;
 
-struct MeshComponent : SpatialComponent
+class MeshComponent : public SpatialComponent
 {
+public:
 	COMPONENT_SYSTEM(MeshComponent)
 
 	//@Todo: need to figure out how to call this in World::Cleanup() because meshcomponent::create()

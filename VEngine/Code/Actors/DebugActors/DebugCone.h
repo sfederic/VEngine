@@ -2,7 +2,7 @@
 
 struct DebugCone
 {
-	struct MeshComponent* mesh;
+	class MeshComponent* mesh;
 
 	DebugCone();
 };

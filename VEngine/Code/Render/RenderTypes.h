@@ -8,7 +8,7 @@
 using namespace DirectX;
 
 struct MaterialShaderData;
-struct MeshComponent;
+class MeshComponent;
 struct Animation;
 class Material;
 

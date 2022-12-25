@@ -12,7 +12,7 @@
 using namespace physx;
 using namespace DirectX;
 
-struct MeshComponent;
+class MeshComponent;
 struct DestructibleMeshComponent;
 struct CharacterControllerComponent;
 struct Transform;

@@ -2,7 +2,7 @@
 
 struct DebugSphere
 {
-	struct MeshComponent* sphereMesh;
+	class MeshComponent* sphereMesh;
 
 	DebugSphere();
 };

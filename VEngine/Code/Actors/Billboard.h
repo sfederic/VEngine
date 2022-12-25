@@ -2,7 +2,7 @@
 #include "Actor.h"
 #include "ActorSystem.h"
 
-struct MeshComponent;
+class MeshComponent;
 
 struct Billboard : Actor
 {

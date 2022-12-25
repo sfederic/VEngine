@@ -2,7 +2,7 @@
 
 struct DebugIcoSphere
 {
-	struct MeshComponent* mesh = nullptr;
+	class MeshComponent* mesh = nullptr;
 
 	DebugIcoSphere();
 };
