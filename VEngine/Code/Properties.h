@@ -1,4 +1,5 @@
 #pragma once
+
 #include <map>
 #include <vector>
 #include "Property.h"
@@ -24,28 +25,28 @@ struct Properties
 
 		if (typeid(T) == typeid(std::string)) 
 		{
-			auto str = (std::string*)data;
+			auto str = reinterpret_cast<std::string*>(data);
 			prop.size = str->size();
 		} 
 		else if (typeid(T) == typeid(std::wstring))
 		{
-			auto str = (std::wstring*)data;
-			prop.size = (str->size() * sizeof(wchar_t));
+			auto str = reinterpret_cast<std::wstring*>(data);
+			prop.size = str->size() * sizeof(wchar_t);
 		}
 		else if (typeid(T) == typeid(ShaderData))
 		{
-			auto shaderData = (ShaderData*)data;
-			prop.size = (shaderData->shaderItemName.size() * sizeof(char));
+			auto shaderData = reinterpret_cast<ShaderData*>(data);
+			prop.size = shaderData->shaderItemName.size() * sizeof(char);
 		}
 		else if (typeid(T) == typeid(TextureData))
 		{
-			auto textureData = (TextureData*)data;
-			prop.size = (textureData->filename.size() * sizeof(char));
+			auto textureData = reinterpret_cast<TextureData*>(data);
+			prop.size = textureData->filename.size() * sizeof(char);
 		}
 		else if (typeid(T) == typeid(MeshComponentData))
 		{
-			auto meshComponentData = (MeshComponentData*)data;
-			prop.size = (meshComponentData->filename.size() * sizeof(char));
+			auto meshComponentData = reinterpret_cast<MeshComponentData*>(data);
+			prop.size = meshComponentData->filename.size() * sizeof(char);
 		}
 		else 
 		{
