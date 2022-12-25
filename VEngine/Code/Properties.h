@@ -74,44 +74,31 @@ struct Properties
 	}
 
 	template <typename T>
-	bool CheckType(std::string name)
+	bool CheckType(const std::string& name)
 	{
-		return propMap[name].info.value() == typeid(T);
-	}
-
-	template <typename Base, typename Derived>
-	bool CheckTypeDynamicCast(const std::string name)
-	{
-		auto derived = (Derived*)propMap[name].data;
-		return dynamic_cast<Base*>(derived);
+		return propMap.find(name)->second.info.value() == typeid(T);
 	}
 
 	template <typename T>
-	T* GetData(std::string name)
+	T* GetData(const std::string& name)
 	{
-		return (T*)propMap[name].data;
+		return reinterpret_cast<T*>(propMap.find(name)->second.data);
 	}
 
-	std::type_index GetType(std::string name)
+	std::type_index GetType(const std::string& name)
 	{
-		return propMap[name].info.value();
+		return propMap.find(name)->second.info.value();
 	}
 
-	Property* GetProperty(std::string name)
+	Property* GetProperty(const std::string& name)
 	{
-		return &propMap[name];
+		return &propMap.find(name)->second;
 	}
 
 	//Used to copy data in from other Properties (types have to be matching)
-	void CopyData(std::string name, Property& propToCopy);
+	void CopyData(const std::string& name, Property& propToCopy);
 
 	//Copy matching vectors of properties across (currently only works for exact matching properties collections,
 	//should be able to work with partial matching collections though without the vectors).
 	static void CopyProperties(std::vector<Properties>& src, std::vector<Properties>& dst);
-
-	//template <typename T>
-	//void Add(const std::string& name, T* data)
-	//{
-	//	size_t hash = std::hash<std::string>{}(name);
-	//}
 };

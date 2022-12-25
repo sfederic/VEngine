@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "Properties.h"
 
-void Properties::CopyData(std::string name, Property& propToCopy)
+void Properties::CopyData(const std::string& name, Property& propToCopy)
 {
 	Property& prop = propMap[name];
 
