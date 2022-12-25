@@ -3,7 +3,7 @@
 #include "SpinBox.h"
 #include "IPropertyWidget.h"
 
-class Float4Widget : public QWidget, IPropertyWidget
+class Float4Widget : public QWidget, public IPropertyWidget
 {
 private:
 	SpinBox xSpinbox;

@@ -4,7 +4,7 @@
 
 struct ShaderData;
 
-class ShaderDataWidget : public QLineEdit, IPropertyWidget
+class ShaderDataWidget : public QLineEdit, public IPropertyWidget
 {
 private:
 	ShaderData* value;

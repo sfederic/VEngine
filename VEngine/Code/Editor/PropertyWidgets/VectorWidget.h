@@ -8,7 +8,7 @@ using namespace DirectX;
 
 class QDoubleSpinBox;
 
-class VectorWidget : public QWidget, IPropertyWidget
+class VectorWidget : public QWidget, public IPropertyWidget
 {
 public: 
 	VectorWidget(Property& prop_, QWidget* parent = 0);

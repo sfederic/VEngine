@@ -2,8 +2,9 @@
 
 #include "Property.h"
 
-struct IPropertyWidget
+class IPropertyWidget
 {
+public:
 	Property prop;
 	virtual void ResetValue() = 0;
 };

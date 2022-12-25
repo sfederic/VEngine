@@ -5,7 +5,7 @@
 
 struct DirectX::XMFLOAT3;
 
-class Float3Widget : public QWidget, IPropertyWidget
+class Float3Widget : public QWidget, public IPropertyWidget
 {
 private:
 	SpinBox xSpinbox;

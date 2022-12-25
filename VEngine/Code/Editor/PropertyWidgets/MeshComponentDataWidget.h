@@ -5,7 +5,7 @@
 
 struct MeshComponentData;
 
-class MeshComponentDataWidget : public QPushButton, IPropertyWidget
+class MeshComponentDataWidget : public QPushButton, public IPropertyWidget
 {
 private:
 	MeshComponentData* value = nullptr;

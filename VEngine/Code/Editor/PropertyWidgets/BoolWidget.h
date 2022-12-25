@@ -3,7 +3,7 @@
 #include <qcheckbox.h>
 #include "IPropertyWidget.h"
 
-class BoolWidget : public QCheckBox, IPropertyWidget
+class BoolWidget : public QCheckBox, public IPropertyWidget
 {
 public:
 	BoolWidget(Property& prop, QWidget* parent = 0);
