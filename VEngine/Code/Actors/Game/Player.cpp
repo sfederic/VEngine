@@ -68,6 +68,11 @@ Properties Player::GetProps()
 	return props;
 }
 
+void Player::InflictDamage(float damage)
+{
+	shields -= damage;
+}
+
 //Note: Default blend state needs to already be set for the mesh.
 void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 {

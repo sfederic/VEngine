@@ -17,4 +17,5 @@ public:
 private:
 	Polyboard* beam = nullptr;
 	float rotateSpeed = 33.f;
+	float beamDistance = 10.f;
 };

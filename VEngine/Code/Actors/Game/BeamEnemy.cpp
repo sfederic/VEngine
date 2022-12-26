@@ -1,7 +1,9 @@
 #include "vpch.h"
 #include "BeamEnemy.h"
+#include "Actors/Game/Player.h"
 #include "Components/MeshComponent.h"
 #include "Particle/Polyboard.h"
+#include "Physics/Raycast.h"
 
 void BeamEnemy::Create()
 {
@@ -15,12 +17,23 @@ void BeamEnemy::Create()
 
 void BeamEnemy::Tick(float deltaTime)
 {
+	auto pos = GetPositionV();
+
 	auto mesh = GetComponent<MeshComponent>("Mesh");
 	if (mesh)
 	{
-		XMVECTOR meshWorldPos = mesh->GetWorldPositionV();
-		XMStoreFloat3(&beam->startPoint, meshWorldPos);
-		XMStoreFloat3(&beam->endPoint, meshWorldPos + mesh->GetForwardVectorV() * 10.f);
+		XMStoreFloat3(&beam->startPoint, pos);
+		XMStoreFloat3(&beam->endPoint, pos + GetForwardVectorV() * beamDistance);
+	}
+
+	HitResult result(this);
+	if (Raycast(result, pos, pos + GetForwardVectorV() * beamDistance))
+	{
+		auto player = dynamic_cast<Player*>(result.hitActor);
+		if (player)
+		{
+			player->InflictDamage(1.f);
+		}
 	}
 
 	AddRotation(GetUpVectorV(), rotateSpeed * deltaTime);

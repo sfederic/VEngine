@@ -19,6 +19,8 @@ public:
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 
+	void InflictDamage(float damage);
+
 private:
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
@@ -46,6 +48,8 @@ private:
 
 	float movementSpeed = 9.5f;
 	float rotationSpeed = 5.5f;
+
+	float shields = 100.f;
 
 	bool allRangeModeActive = true;
 };
