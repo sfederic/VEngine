@@ -13,7 +13,7 @@ Polyboard::Polyboard()
 	vertexBuffer = new Buffer();
 	indexBuffer = new Buffer();
 
-	textureData.filename = "beam_blue.png";
+	textureData.filename = "Particle/beam_blue.png";
 }
 
 Properties Polyboard::GetProps()
