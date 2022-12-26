@@ -174,15 +174,12 @@ public:
 	template <typename T>
 	T* GetComponentByNameAndType(std::string componentName)
 	{
-		for (auto& componentPair : componentMap)
+		auto componentIt = componentMap.find(componentName);
+		if (componentIt != componentMap.end())
 		{
-			if (componentPair.second->name == componentName)
-			{
-				return static_cast<T*>(componentPair.second);
-			}
+			return static_cast<T*>(componentIt->second);
 		}
 
-		Log("Component [%s] not found on Actor [%s].", componentName.c_str(), this->name.c_str());
 		return nullptr;
 	}
 
