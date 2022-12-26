@@ -22,6 +22,8 @@ namespace VMath
 	XMMATRIX ZeroMatrix();
 
 	void RoundFloat3(XMFLOAT3& float3);
+
+	//Good for when XMVECTOR floats are all over the place
 	void RoundVector(XMVECTOR& v);
 
 	XMFLOAT3 PitchYawRollFromMatrix(XMMATRIX m);
