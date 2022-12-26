@@ -1,5 +1,6 @@
 #include "vpch.h"
 #include "BeamEnemy.h"
+#include "VMath.h"
 #include "Actors/Game/Player.h"
 #include "Components/MeshComponent.h"
 #include "Particle/Polyboard.h"
@@ -36,7 +37,11 @@ void BeamEnemy::Tick(float deltaTime)
 		}
 	}
 
-	AddRotation(GetUpVectorV(), rotateSpeed * deltaTime);
+	//Here for stationary BeamEnemies
+	if (!VMath::Float3IsZero(rotateDirection))
+	{
+		AddRotation(XMLoadFloat3(&rotateDirection), rotateSpeed * deltaTime);
+	}
 }
 
 Properties BeamEnemy::GetProps()
@@ -44,5 +49,6 @@ Properties BeamEnemy::GetProps()
 	auto props = __super::GetProps();
 	props.title = "BeamEnemy";
 	props.Add("Rotate Speed", &rotateSpeed);
+	props.Add("Rotate Direction", &rotateDirection);
 	return props;
 }

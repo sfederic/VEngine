@@ -16,6 +16,7 @@ public:
 
 private:
 	Polyboard* beam = nullptr;
+	XMFLOAT3 rotateDirection = XMFLOAT3(0.f, 0.f, 0.f);
 	float rotateSpeed = 33.f;
 	float beamDistance = 10.f;
 };
