@@ -1200,6 +1200,7 @@ void RenderPolyboards()
 
 		SetShaderResourcePixel(0, polyboard->textureData.filename);
 
+		//@Todo: these Map()s are currently causing the GPU to hang and crash
 		//Note: mapping to vertex/index buffers without NO_OVERWRITE causes flickering on meshes
 		//VERTEX MAP
 		{
