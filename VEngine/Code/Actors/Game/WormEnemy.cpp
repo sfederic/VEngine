@@ -27,19 +27,19 @@ void WormEnemy::Tick(float deltaTime)
 {
     constexpr float rotateSpeed = 30.f;
 
-    auto mesh1 = GetComponentByNameAndType<MeshComponent>("Mesh1");
+    auto mesh1 = GetComponent<MeshComponent>("Mesh1");
     if (mesh1)
     {
         mesh1->AddRotation(GetUpVectorV(), rotateSpeed * deltaTime);
     }
 
-    auto mesh2 = GetComponentByNameAndType<MeshComponent>("Mesh2");
+    auto mesh2 = GetComponent<MeshComponent>("Mesh2");
     if (mesh2)
     {
         mesh2->AddRotation(GetUpVectorV(), -rotateSpeed * deltaTime);
     }
 
-    auto mesh3 = GetComponentByNameAndType<MeshComponent>("Mesh3");
+    auto mesh3 = GetComponent<MeshComponent>("Mesh3");
     if (mesh3)
     {
         mesh3->AddRotation(GetUpVectorV(), rotateSpeed * deltaTime);

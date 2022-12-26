@@ -172,7 +172,7 @@ public:
 	}
 
 	template <typename T>
-	T* GetComponentByNameAndType(std::string componentName)
+	T* GetComponent(std::string componentName)
 	{
 		auto componentIt = componentMap.find(componentName);
 		if (componentIt != componentMap.end())
