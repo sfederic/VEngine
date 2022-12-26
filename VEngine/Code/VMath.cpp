@@ -38,6 +38,11 @@ namespace VMath
         return XMMATRIX();
     }
 
+    bool Float3IsZero(XMFLOAT3& float3)
+    {
+        return float3.x == 0.f && float3.y == 0.f && float3.z == 0.f;
+    }
+
     void RoundFloat3(XMFLOAT3& float3)
     {
         float3.x = std::round(float3.x);

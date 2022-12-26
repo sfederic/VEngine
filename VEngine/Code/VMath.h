@@ -21,6 +21,7 @@ namespace VMath
 	//Returns matrix with all 0's
 	XMMATRIX ZeroMatrix();
 
+	bool Float3IsZero(XMFLOAT3& float3);
 	void RoundFloat3(XMFLOAT3& float3);
 
 	//Good for when XMVECTOR floats are all over the place
