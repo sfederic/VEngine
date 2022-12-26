@@ -1200,12 +1200,10 @@ void RenderPolyboards()
 
 		SetShaderResourcePixel(0, polyboard->textureData.filename);
 
-		//@Todo: these Map()s are currently causing the GPU to hang and crash
-		//Note: mapping to vertex/index buffers without NO_OVERWRITE causes flickering on meshes
 		//VERTEX MAP
 		{
 			D3D11_MAPPED_SUBRESOURCE mappedResource = {};
-			HR(context->Map(polyboard->vertexBuffer->data, 0, D3D11_MAP_WRITE_NO_OVERWRITE, 0, &mappedResource));
+			HR(context->Map(polyboard->vertexBuffer->data, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
 			memcpy(mappedResource.pData, polyboard->vertices.data(), sizeof(Vertex) * polyboard->vertices.size());
 			context->Unmap(polyboard->vertexBuffer->data, 0);
 		}
@@ -1213,8 +1211,8 @@ void RenderPolyboards()
 		//INDEX MAP
 		{
 			D3D11_MAPPED_SUBRESOURCE mappedResource = {};
-			HR(context->Map(polyboard->indexBuffer->data, 0, D3D11_MAP_WRITE_NO_OVERWRITE, 0, &mappedResource));
-			memcpy(mappedResource.pData, polyboard->indices.data(), sizeof(Vertex) * polyboard->indices.size());
+			HR(context->Map(polyboard->indexBuffer->data, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+			memcpy(mappedResource.pData, polyboard->indices.data(), sizeof(MeshData::indexDataType) * polyboard->indices.size());
 			context->Unmap(polyboard->indexBuffer->data, 0);
 		}
 
