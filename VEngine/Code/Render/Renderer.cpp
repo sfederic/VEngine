@@ -1217,7 +1217,7 @@ void RenderPolyboards()
 			context->Unmap(polyboard->indexBuffer->data, 0);
 		}
 
-		SetIndexBuffer(polyboard->vertexBuffer);
+		SetVertexBuffer(polyboard->vertexBuffer);
 		SetIndexBuffer(polyboard->indexBuffer);
 
 		context->DrawIndexed(polyboard->indices.size(), 0, 0);
