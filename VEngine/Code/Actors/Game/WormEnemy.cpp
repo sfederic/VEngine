@@ -2,6 +2,7 @@
 #include "WormEnemy.h"
 #include "Components/MeshComponent.h"
 #include "Gameplay/GameplayTags.h"
+#include "Particle/Polyboard.h"
 
 void WormEnemy::Create()
 {
@@ -21,6 +22,10 @@ void WormEnemy::Create()
     mesh3->SetPosition(0.f, 2.f, 0.f);
     mesh3->AddTag(GameplayTags::EnemyMeshPiece);
     rootComponent->AddChild(mesh3);
+
+    beam = CreateComponent(Polyboard(), "Beam");
+    rootComponent->AddChild(beam);
+    beam->GenerateVertices();
 }
 
 void WormEnemy::Tick(float deltaTime)
@@ -29,6 +34,9 @@ void WormEnemy::Tick(float deltaTime)
     mesh1->AddRotation(GetUpVectorV(), rotateSpeed * deltaTime);
     mesh2->AddRotation(GetUpVectorV(), -rotateSpeed * deltaTime);
     mesh3->AddRotation(GetUpVectorV(), rotateSpeed * deltaTime);
+
+    beam->startPoint = GetPosition();
+    XMStoreFloat3(&beam->endPoint, mesh1->GetPositionV() + mesh1->GetForwardVectorV() * 10.f);
 }
 
 Properties WormEnemy::GetProps()
