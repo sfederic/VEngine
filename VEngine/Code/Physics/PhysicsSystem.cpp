@@ -144,12 +144,12 @@ void PhysicsSystem::Reset()
 
 void PhysicsSystem::ReleasePhysicsActor(MeshComponent* mesh)
 {
-	auto rigid = rigidActorMap[mesh->uid];
+	auto rigid = rigidActorMap.find(mesh->GetUID())->second;
 	if (rigid)
 	{
 		rigid->release();
 	}
-	rigidActorMap.erase(mesh->uid);
+	rigidActorMap.erase(mesh->GetUID());
 }
 
 void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Actor* actor)
@@ -183,7 +183,7 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Ac
 	rigidActor->attachShape(*box);
 	scene->addActor(*rigidActor);
 
-	rigidActorMap.insert(std::make_pair(mesh->uid, rigidActor));
+	rigidActorMap.emplace(mesh->GetUID(), rigidActor);
 }
 
 void PhysicsSystem::CreatePhysicsForDestructibleMesh(DestructibleMeshComponent* mesh, Actor* actor)
@@ -258,7 +258,7 @@ void PhysicsSystem::CreateConvexPhysicsMesh(MeshComponent* mesh, Actor* actor)
 	PxRigidActorExt::createExclusiveShape(*rigidActor, convexGeom, *destructibleMaterial);
 
 	scene->addActor(*rigidActor);
-	rigidActorMap.insert(std::make_pair(mesh->uid, rigidActor));
+	rigidActorMap.emplace(mesh->GetUID(), rigidActor);
 }
 
 void PhysicsSystem::CreateConvexPhysicsMeshFromCollisionMesh(MeshComponent* mesh,
@@ -266,8 +266,9 @@ void PhysicsSystem::CreateConvexPhysicsMeshFromCollisionMesh(MeshComponent* mesh
 {
 	auto collisionMesh = new MeshComponent();
 	collisionMesh->transform = actor->GetTransform();
+
 	//Set the UID to the actual mesh so that the physics actor is connected to the mesh, not the collision mesh.
-	collisionMesh->uid = mesh->uid;
+	collisionMesh->SetUID(mesh->GetUID());
 
 	FBXLoader::Import(filename, collisionMesh->meshDataProxy);
 
@@ -293,7 +294,7 @@ void PhysicsSystem::PhysxToActorTransform(Transform& actorTransform, const PxTra
 
 void PhysicsSystem::GetTransformFromPhysicsActor(MeshComponent* mesh)
 {
-	auto rigid = rigidActorMap[mesh->uid];
+	auto rigid = rigidActorMap.find(mesh->GetUID())->second;
 
 	PxTransform pxTransform = rigid->getGlobalPose();
 	Transform transform = mesh->transform;

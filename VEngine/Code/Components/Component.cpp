@@ -1,6 +1,12 @@
 #include "vpch.h"
 #include "Component.h"
+#include "IComponentSystem.h"
 #include "Log.h"
+
+std::string Component::GetTypeName()
+{
+	return componentSystem->name;
+}
 
 void Component::AddTag(const std::string& tag)
 {

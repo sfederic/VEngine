@@ -2,7 +2,7 @@
 #include "SystemStates.h"
 #include <string>
 
-struct Component;
+class Component;
 class Actor;
 struct Serialiser;
 struct BinarySerialiser;

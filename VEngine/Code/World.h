@@ -5,7 +5,7 @@
 
 class IActorSystem;
 struct IComponentSystem;
-struct Component;
+class Component;
 class Actor;
 
 namespace World

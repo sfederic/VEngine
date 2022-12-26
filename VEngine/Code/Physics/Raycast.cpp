@@ -174,7 +174,7 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 
 					tempHitResult.hitComponent = mesh;
 
-					tempHitResult.hitActor = World::GetActorByUID(mesh->ownerUID);
+					tempHitResult.hitActor = World::GetActorByUID(mesh->GetOwnerUID());
 
 					hitResults.emplace_back(tempHitResult);
 				}

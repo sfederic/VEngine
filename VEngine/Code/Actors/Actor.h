@@ -9,7 +9,7 @@
 #include "UID.h"
 #include "Log.h"
 
-struct Component;
+class Component;
 struct SpatialComponent;
 class IActorSystem;
 

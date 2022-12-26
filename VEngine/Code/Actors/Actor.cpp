@@ -250,7 +250,7 @@ void Actor::SetActive(bool newActiveValue)
 
 	for (auto& componentPair : componentMap)
 	{
-		componentPair.second->active = newActiveValue;
+		componentPair.second->SetActive(newActiveValue);
 	}
 
 	for (auto child : children)
@@ -293,7 +293,7 @@ void Actor::AddComponent(Component* component)
 		assert(componentPair.second != component);
 	}
 
-	component->ownerUID = uid;
+	component->SetOwnerUID(uid);
 
 	assert(componentMap.find(component->name) == componentMap.end() && "Duplicate Component name (Actor::Create() might be being called twice).");
 	componentMap.emplace(component->name, component);
@@ -358,7 +358,7 @@ void Actor::ResetOwnerUIDToComponents()
 {
 	for (auto& componentPair : componentMap)
 	{
-		componentPair.second->ownerUID = uid;
+		componentPair.second->SetOwnerUID(uid);
 	}
 }
 

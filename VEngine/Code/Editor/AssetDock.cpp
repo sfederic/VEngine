@@ -23,7 +23,6 @@
 #include "Log.h"
 #include "Asset/AssetPaths.h"
 #include "Asset/AssetFileExtensions.h"
-#include "Components/IComponentSystem.h"
 #include "Components/MeshComponent.h"
 
 std::unordered_map<std::string, std::function<void(QIcon&, std::string&)>> fileExtensionToFunctionMap;
@@ -385,7 +384,7 @@ void AssetDock::CreateNewActorTemplateFile()
         for (auto& componentPair : WorldEditor::GetPickedActor()->componentMap)
         {
             //Write each component's linked componentsystem name
-            s.WriteLine(componentPair.second->componentSystem->name.c_str());
+            s.WriteLine(componentPair.second->GetTypeName().c_str());
 
             auto componentProps = componentPair.second->GetProps();
             s.Serialise(componentProps);

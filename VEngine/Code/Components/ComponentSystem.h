@@ -28,8 +28,8 @@ public:
 		components.emplace_back(std::make_unique<T>(std::move(newComponent)));
 		auto& component = components.back();
 
-		component->index = components.size() - 1;
-		component->componentSystem = this;
+		component->SetIndex(components.size() - 1);
+		component->SetComponentSystem(this);
 		component->name = name;
 
 		if (systemState == SystemStates::Loaded && callCreate)
@@ -58,11 +58,11 @@ public:
 	void Remove(int index)
 	{
 		std::swap(components[index], components.back());
-		components[index]->index = index;
+		components[index]->SetIndex(index);
 
-		if (components.back()->ownerUID != 0)
+		if (components.back()->GetOwnerUID() != 0)
 		{
-			auto owner = World::GetActorByUID(components.back()->ownerUID);
+			auto owner = World::GetActorByUID(components.back()->GetOwnerUID());
 			owner->RemoveComponent(components.back().get());
 		}
 
@@ -94,7 +94,7 @@ public:
 	{
 		for (int i = 0; i < components.size(); i++)
 		{
-			if (components[i]->active && components[i]->tickEnabled)
+			if (components[i]->IsActive() && components[i]->IsTickEnabled())
 			{
 				components[i]->Tick(deltaTime);
 			}
@@ -113,7 +113,7 @@ public:
 
 		for (auto& component : components)
 		{
-			s.WriteLine(component->ownerUID);
+			s.WriteLine(component->GetOwnerUID());
 			s.WriteLine(VString::stows(component->name));
 
 			auto props = component->GetProps();
@@ -131,7 +131,7 @@ public:
 
 		for (auto& component : components)
 		{
-			UID ownerUID = component->ownerUID;
+			UID ownerUID = component->GetOwnerUID();
 			s.Write(&ownerUID);
 			s.WriteString(component->name);
 
@@ -198,4 +198,4 @@ private:
 
 #define COMPONENT_SYSTEM(type) \
 inline static ComponentSystem<type> system; \
-virtual void Remove() override { Destroy(); system.Remove(index); } \
+virtual void Remove() override { Destroy(); system.Remove(GetIndex()); } \

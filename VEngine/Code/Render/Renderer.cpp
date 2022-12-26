@@ -545,7 +545,7 @@ void RenderShadowPass()
 
 	for (auto& mesh : MeshComponent::system.GetComponents())
 	{
-		if (!mesh->castsShadow || !mesh->active)
+		if (!mesh->castsShadow || !mesh->IsActive())
 		{
 			continue;
 		}
@@ -689,7 +689,7 @@ void RenderMeshComponents()
 
 	for (auto mesh : MeshComponent::SortMeshComponentsByDistanceToCamera())
 	{
-		if (!mesh->active) { continue; }
+		if (!mesh->IsActive()) { continue; }
 
 		SetRenderPipelineStates(mesh);
 
@@ -772,7 +772,7 @@ void Renderer::RenderLightProbeViews()
 
 				for (auto& mesh : MeshComponent::system.GetComponents())
 				{
-					if (!mesh->active) { continue; }
+					if (!mesh->IsActive()) { continue; }
 
 					Material* material = mesh->material;
 
@@ -913,7 +913,7 @@ void RenderInstanceMeshComponents()
 
 	for (auto& instanceMesh : InstanceMeshComponent::system.GetComponents())
 	{
-		if (!instanceMesh->active) continue;
+		if (!instanceMesh->IsActive()) continue;
 
 		SetRenderPipelineStates(instanceMesh.get());
 
@@ -1411,7 +1411,7 @@ void UpdateLights()
 	//Directional lights
 	for (auto& light : DirectionalLightComponent::system.GetComponents())
 	{
-		if (!light->active) continue;
+		if (!light->IsActive()) continue;
 
 		Light lightData = light->lightData;
 		XMFLOAT3 forwardVector = light->GetForwardVector();
@@ -1424,7 +1424,7 @@ void UpdateLights()
 	//Point lights
 	for (auto& light : PointLightComponent::system.GetComponents())
 	{
-		if (!light->active) continue;
+		if (!light->IsActive()) continue;
 
 		XMStoreFloat4(&light->lightData.position, light->GetWorldPositionV());
 
@@ -1435,7 +1435,7 @@ void UpdateLights()
 	//Spot lights
 	for (auto& light : SpotLightComponent::system.GetComponents())
 	{
-		if (!light->active) continue;
+		if (!light->IsActive()) continue;
 
 		XMStoreFloat4(&light->lightData.position, light->GetWorldPositionV());
 

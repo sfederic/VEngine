@@ -6,25 +6,13 @@
 
 struct IComponentSystem;
 
-struct Component
+class Component
 {
-	IComponentSystem* componentSystem = nullptr;
-	UID uid = GenerateUID();
-	std::string name;
-	UID ownerUID = 0; //Keep as zero to denote component that doesn't have an owner.
-	int index = -1;
-	bool active = true;
-	bool tickEnabled = true;
-
+public:
 	virtual void Tick(float deltaTime) {}
 	virtual void Start() {}
 	virtual void Create() {};
-	
-protected:
-	//Cleanup all the innards of the component.
-	virtual void Destroy() {}
 
-public:
 	//Remove the component from its parent ComponentSystem. Remove() is always defined in 
 	//COMPONENT_SYSTEM macro and doesn't need to be added explicity.
 	virtual void Remove() = 0;
@@ -44,9 +32,42 @@ public:
 		return props;
 	}
 
+	//Returns pruned typeid() name from linked Component System.
+	std::string GetTypeName();
+
 	void AddTag(const std::string& tag);
 	bool HasTag(const std::string& tag);
 
+	bool IsActive() { return active; }
+	void SetActive(bool newActive) { active = newActive; }
+
+	int GetIndex() { return index; }
+	void SetIndex(int newIndex) { index = newIndex; }
+
+	void SetComponentSystem(IComponentSystem* componentSystem_) { componentSystem = componentSystem_; }
+
+	UID GetUID() { return uid; }
+	void SetUID(UID uid_) { uid = uid_; }
+
+	UID GetOwnerUID() { return ownerUID; }
+	void SetOwnerUID(UID ownerUID_) { ownerUID = ownerUID_; }
+
+	bool IsTickEnabled() { return tickEnabled; }
+	void SetTickEnabled(bool newTickState) { tickEnabled = newTickState; }
+
+protected:
+	//Cleanup all the innards of the component.
+	virtual void Destroy() {}
+
+public:
+	std::string name;
+
 private:
 	std::set<std::string> tags;
+	IComponentSystem* componentSystem = nullptr;
+	UID uid = GenerateUID();
+	UID ownerUID = 0; //Keep as zero to denote component that doesn't have an owner.
+	int index = -1;
+	bool active = true;
+	bool tickEnabled = true;
 };
