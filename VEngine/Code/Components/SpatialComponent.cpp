@@ -206,6 +206,14 @@ void SpatialComponent::SetWorldRotation(XMVECTOR newRotation)
 	SetRotation(relativeRotation);
 }
 
+void SpatialComponent::AddRotation(XMVECTOR vector, float angle)
+{
+	auto newRotation = 
+		XMQuaternionMultiply(GetRotationV(),
+			DirectX::XMQuaternionRotationAxis(vector, XMConvertToRadians(angle)));
+	SetRotation(newRotation);
+}
+
 XMFLOAT3 SpatialComponent::GetUpVector()
 {
 	XMFLOAT3 up;
