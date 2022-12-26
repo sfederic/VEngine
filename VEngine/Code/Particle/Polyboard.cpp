@@ -62,7 +62,7 @@ void Polyboard::CalcVertices()
 		XMVECTOR tangent = XMVector3Normalize(nextPos - pos);
 
 		//Use this if you need a wavy effect for polyboards
-		radius = (sinf(i * Core::timeSinceStartup) * 0.15f) + 0.4f;
+		//radius = (sinf(i * Core::timeSinceStartup) * 0.15f) + 0.4f;
 
 		XMVECTOR p1 = pos - (radius * XMVector3Cross(tangent, posToCamera));
 		XMVECTOR p2 = pos + (radius * XMVector3Cross(tangent, posToCamera));
@@ -79,7 +79,8 @@ void Polyboard::CalcVertices()
 		vertices.emplace_back(vertex2);
 	}
 
-	for (size_t i = 0; i < (vertices.size() / 3) + 1; i++) //Because the vertices aren't triangle based, divide by 3
+	//Because the vertices aren't triangle based, divide by 3
+	for (size_t i = 0; i < (vertices.size() / 3) + 1; i++) 
 	{
 		indices.emplace_back(0 + (2 * i));
 		indices.emplace_back(2 + (2 * i));
