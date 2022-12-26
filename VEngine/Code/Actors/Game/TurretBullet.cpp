@@ -2,9 +2,11 @@
 #include "TurretBullet.h"
 #include "Components/MeshComponent.h"
 #include "Components/BoxTriggerComponent.h"
+#include "Actors/Game/Player.h"
 #include "Actors/Game/TurretEnemy.h"
 #include "Actors/Game/LevelInstance.h"
 #include "Physics/Raycast.h"
+#include "Gameplay/GameUtils.h"
 
 TurretBullet::TurretBullet()
 {
@@ -27,6 +29,14 @@ void TurretBullet::Tick(float deltaTime)
 	hitResult.AddActorsToIgnore(turretEnemies);
 	if (SimpleBoxCast(GetPosition(), boxTrigger->boundingBox.Extents, hitResult))
 	{
+		auto player = dynamic_cast<Player*>(hitResult.hitActors.front());
+		if (player)
+		{
+			player->InflictDamage(10.f);
+		}
+
+		GameUtils::SpawnSpriteSheet("Sprites/explosion.png", GetPositionV(), false, 4, 4);
+
 		Destroy();
 	}
 
