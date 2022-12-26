@@ -16,9 +16,5 @@ public:
 	Properties GetProps() override;
 
 private:
-	MeshComponent* mesh1 = nullptr;
-	MeshComponent* mesh2 = nullptr;
-	MeshComponent* mesh3 = nullptr;
-
 	Polyboard* beam = nullptr;
 };
