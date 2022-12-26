@@ -168,6 +168,7 @@
     <ClCompile Include="Code\System.cpp" />
     <ClCompile Include="Code\UID.cpp" />
     <ClCompile Include="Code\UI\Game\ComboBarWidget.cpp" />
+    <ClCompile Include="Code\UI\Game\PlayerShieldWidget.cpp" />
     <ClCompile Include="Code\VEnum.cpp" />
     <ClCompile Include="Code\vpch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -377,6 +378,7 @@
     <ClInclude Include="Code\Physics\CollisionLayers.h" />
     <ClInclude Include="Code\UID.h" />
     <ClInclude Include="Code\UI\Game\ComboBarWidget.h" />
+    <ClInclude Include="Code\UI\Game\PlayerShieldWidget.h" />
     <ClInclude Include="Code\UI\Layout.h" />
     <ClInclude Include="Code\VEnum.h" />
     <ClInclude Include="Code\VFunction.h" />
