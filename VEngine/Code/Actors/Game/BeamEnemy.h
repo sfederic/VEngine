@@ -11,9 +11,10 @@ public:
 	ACTOR_SYSTEM(BeamEnemy);
 
 	void Create() override;
-	void Start() override;
 	void Tick(float deltaTime) override;
+	Properties GetProps() override;
 
 private:
 	Polyboard* beam = nullptr;
+	float rotateSpeed = 33.f;
 };

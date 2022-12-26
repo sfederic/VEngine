@@ -5,16 +5,12 @@
 
 void BeamEnemy::Create()
 {
-	auto mesh = CreateComponent(MeshComponent("cub.fbx", "test.png"), "Mesh");
+	auto mesh = CreateComponent(MeshComponent("turret.fbx", "test.png"), "Mesh");
 	rootComponent->AddChild(mesh);
 
 	beam = CreateComponent(Polyboard(), "Beam");
-	rootComponent->AddChild(beam);
-}
-
-void BeamEnemy::Start()
-{
 	beam->GenerateVertices();
+	rootComponent->AddChild(beam);
 }
 
 void BeamEnemy::Tick(float deltaTime)
@@ -22,8 +18,18 @@ void BeamEnemy::Tick(float deltaTime)
 	auto mesh = GetComponent<MeshComponent>("Mesh");
 	if (mesh)
 	{
-		XMStoreFloat3(&beam->startPoint, mesh->GetWorldPositionV());
+		XMVECTOR meshWorldPos = mesh->GetWorldPositionV();
+		XMStoreFloat3(&beam->startPoint, meshWorldPos);
+		XMStoreFloat3(&beam->endPoint, meshWorldPos + mesh->GetForwardVectorV() * 10.f);
 	}
 
-	AddRotation(GetUpVectorV(), 20.f * deltaTime);
+	AddRotation(GetUpVectorV(), rotateSpeed * deltaTime);
+}
+
+Properties BeamEnemy::GetProps()
+{
+	auto props = __super::GetProps();
+	props.title = "BeamEnemy";
+	props.Add("Rotate Speed", &rotateSpeed);
+	return props;
 }
