@@ -232,18 +232,21 @@ void Player::Shoot()
 			auto enemy = dynamic_cast<Enemy*>(hitResult.hitActor);
 			if (enemy)
 			{
-				comboBarWidget->IncreaseScoreAndCombo();
-
-				auto mesh = dynamic_cast<MeshComponent*>(hitResult.hitComponent);
-				if (mesh)
+				if (enemy->CanBeHit())
 				{
-					GameUtils::SpawnSpriteSheet("Sprites/explosion.png", mesh->GetWorldPositionV(), false, 4, 4);
-					mesh->Remove();
-				}
+					comboBarWidget->IncreaseScoreAndCombo();
 
-				if (enemy->CheckIfAllTaggedMeshesAreDestroyed())
-				{
-					enemy->Destroy();
+					auto mesh = dynamic_cast<MeshComponent*>(hitResult.hitComponent);
+					if (mesh)
+					{
+						GameUtils::SpawnSpriteSheet("Sprites/explosion.png", mesh->GetWorldPositionV(), false, 4, 4);
+						mesh->Remove();
+					}
+
+					if (enemy->CheckIfAllTaggedMeshesAreDestroyed())
+					{
+						enemy->Destroy();
+					}
 				}
 			}
 		}
@@ -276,14 +279,17 @@ void Player::BladeSwipe()
 				auto enemy = dynamic_cast<Enemy*>(hitResult.hitActor);
 				if (enemy)
 				{
-					hitEnemies.emplace(enemy);
-
-					comboBarWidget->IncreaseScoreAndCombo();
-					
-					auto mesh = dynamic_cast<MeshComponent*>(hitResult.hitComponent);
-					if (mesh)
+					if (enemy->CanBeHit())
 					{
-						hitMeshComponents.emplace_back(mesh);
+						hitEnemies.emplace(enemy);
+
+						comboBarWidget->IncreaseScoreAndCombo();
+
+						auto mesh = dynamic_cast<MeshComponent*>(hitResult.hitComponent);
+						if (mesh)
+						{
+							hitMeshComponents.emplace_back(mesh);
+						}
 					}
 				}
 			}
