@@ -6,6 +6,7 @@
 class MeshComponent;
 class CameraComponent;
 class ComboBarWidget;
+class PlayerShieldWidget;
 
 class Player : public Actor
 {
@@ -38,8 +39,11 @@ public:
 	MeshComponent* mesh = nullptr;
 	CameraComponent* camera = nullptr;
 
+	float shields = 100.f;
+
 private:
 	ComboBarWidget* comboBarWidget = nullptr;
+	PlayerShieldWidget* playerShieldWidget = nullptr;
 
 	std::vector<Actor*> previousHitTransparentActors;
 
@@ -48,8 +52,6 @@ private:
 
 	float movementSpeed = 9.5f;
 	float rotationSpeed = 5.5f;
-
-	float shields = 100.f;
 
 	bool allRangeModeActive = true;
 };

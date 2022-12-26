@@ -9,6 +9,7 @@
 #include "Gameplay/GameUtils.h"
 #include "Physics/Raycast.h"
 #include "UI/Game/ComboBarWidget.h"
+#include "UI/Game/PlayerShieldWidget.h"
 #include "UI/UISystem.h"
 
 Player::Player()
@@ -31,6 +32,9 @@ void Player::Start()
 
 	comboBarWidget = UISystem::CreateWidget<ComboBarWidget>();
 	comboBarWidget->AddToViewport();
+
+	playerShieldWidget = UISystem::CreateWidget<PlayerShieldWidget>();
+	playerShieldWidget->AddToViewport();
 
 	auto cameraFocusPoint = GetPositionV() + GetForwardVectorV() * 3.f;
 	camera->SetWorldRotation(VMath::LookAtRotation(cameraFocusPoint, camera->GetWorldPositionV()));
