@@ -35,6 +35,8 @@ private:
 	void Shoot();
 	void BladeSwipe();
 
+	void ShieldLogic(float deltaTime);
+
 public:
 	MeshComponent* mesh = nullptr;
 	CameraComponent* camera = nullptr;
@@ -44,6 +46,11 @@ public:
 private:
 	ComboBarWidget* comboBarWidget = nullptr;
 	PlayerShieldWidget* playerShieldWidget = nullptr;
+
+	MeshComponent* shieldMesh = nullptr;
+
+	//When to turn shield effect off after interval of damage.
+	float shieldCountdownTimer = 0.5f;
 
 	std::vector<Actor*> previousHitTransparentActors;
 

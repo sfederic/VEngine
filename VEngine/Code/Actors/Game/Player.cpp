@@ -19,6 +19,11 @@ Player::Player()
 
 	camera = CreateComponent(CameraComponent(), "Camera");
 	rootComponent->AddChild(camera);
+
+	//@Todo: shield boundingbox is too large
+	shieldMesh = CreateComponent(MeshComponent("ico_sphere.fbx", "shield.png"), "ShieldMesh");
+	rootComponent->AddChild(shieldMesh);
+	shieldMesh->SetActive(false);
 }
 
 void Player::Create()
@@ -57,6 +62,8 @@ void Player::Tick(float deltaTime)
 	Shoot();
 	BladeSwipe();
 
+	ShieldLogic(deltaTime);
+
 	MovementInput();
 	RotationInput();
 
@@ -75,6 +82,7 @@ Properties Player::GetProps()
 void Player::InflictDamage(float damage)
 {
 	shields -= damage;
+	shieldCountdownTimer = 0.5f;
 }
 
 //Note: Default blend state needs to already be set for the mesh.
@@ -294,5 +302,20 @@ void Player::BladeSwipe()
 				hitEnemy->Destroy();
 			}
 		}
+	}
+}
+
+void Player::ShieldLogic(float deltaTime)
+{
+	if (shieldCountdownTimer > 0.f)
+	{
+		shieldCountdownTimer -= deltaTime;
+
+		shieldMesh->SetActive(true);
+		shieldMesh->AddRotation(GetRightVectorV(), 500.f * deltaTime);
+	}
+	else
+	{
+		shieldMesh->SetActive(false);
 	}
 }
