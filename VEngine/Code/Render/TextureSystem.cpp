@@ -25,7 +25,7 @@ Texture2D* TextureSystem::FindTexture2D(std::string textureFilename)
 	//Add texture2d to system
 	if (textureIt == texture2DMap.end())
 	{
-		texture2DMap.insert(std::make_pair(textureFilename, std::make_unique<Texture2D>(textureFilename)));
+		texture2DMap.emplace(textureFilename, std::make_unique<Texture2D>(textureFilename));
 
 		auto& texture = texture2DMap[textureFilename];
 

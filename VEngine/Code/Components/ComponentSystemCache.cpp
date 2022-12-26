@@ -4,8 +4,8 @@
 
 void ComponentSystemCache::Add(std::type_index type, IComponentSystem* componentSystem)
 {
-	typeToSystemMap.insert(std::make_pair(type, componentSystem));
-	nameToSystemMap.insert(std::make_pair(componentSystem->name, componentSystem));
+	typeToSystemMap.emplace(type, componentSystem);
+	nameToSystemMap.emplace(componentSystem->name, componentSystem);
 }
 
 IComponentSystem* ComponentSystemCache::GetSystem(std::string systemName)

@@ -269,14 +269,15 @@ HRESULT ReadChunkData(HANDLE file, void* buffer, DWORD bufferSize, DWORD bufferO
 
 AudioChannel* CreateAudioChannel()
 {
-	channelMap.insert(std::make_pair(++nextChannelID, std::make_unique<AudioChannel>()));
-	return channelMap[nextChannelID].get();
+	++nextChannelID;
+	channelMap.emplace(nextChannelID, std::make_unique<AudioChannel>());
+	return channelMap.find(nextChannelID)->second.get();
 }
 
 AudioBase* CreateAudioBase(std::string audioFilename)
 {
-	loadedAudioMap.insert(std::make_pair(audioFilename, std::make_unique<AudioBase>()));
-	return loadedAudioMap[audioFilename].get();
+	loadedAudioMap.emplace(audioFilename, std::make_unique<AudioBase>());
+	return loadedAudioMap.find(audioFilename)->second.get();
 }
 
 //Ref::https://docs.microsoft.com/en-us/windows/win32/xaudio2/how-to--load-audio-data-files-in-xaudio2

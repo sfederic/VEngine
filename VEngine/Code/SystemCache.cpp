@@ -11,7 +11,7 @@ void SystemCache::Add(System* system)
 		nameToSystemMap = new std::unordered_map<std::string, System*>();
 	}
 
-	nameToSystemMap->insert(std::make_pair(system->name, system));
+	nameToSystemMap->emplace(system->name, system);
 }
 
 System* SystemCache::Get(std::string systemName)
