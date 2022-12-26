@@ -64,9 +64,11 @@ public:
 
 	void SetPosition(const XMVECTOR position);
 	void SetPosition(const XMFLOAT3 position);
-	void AddPositionV(const XMVECTOR offset);
 	void SetScale(const XMVECTOR scale);
 	void SetRotation(const XMVECTOR rotation);
+
+	void AddPositionV(const XMVECTOR offset);
+	void AddRotation(XMVECTOR direction, float angle);
 
 	XMFLOAT3 GetForwardVector();
 	XMVECTOR GetForwardVectorV();

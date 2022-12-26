@@ -110,6 +110,11 @@ void Actor::SetRotation(const XMVECTOR rotation)
 	rootComponent->UpdateTransform();
 }
 
+void Actor::AddRotation(XMVECTOR direction, float angle)
+{
+	rootComponent->AddRotation(direction, angle);
+}
+
 void Actor::SetTransform(const Transform transform)
 {
 	rootComponent->transform = transform;
