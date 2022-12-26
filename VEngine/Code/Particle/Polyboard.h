@@ -31,6 +31,9 @@ struct Polyboard : SpatialComponent
 
 	Polyboard();
 	virtual Properties GetProps() override;
+
+	//Call this on gameplay start (Actor::Start()) to set up the polyboard's GPU buffers.
 	void GenerateVertices();
+
 	void CalcVertices();
 };
