@@ -18,7 +18,9 @@ Polyboard::Polyboard()
 
 Properties Polyboard::GetProps()
 {
-	return Properties("Polyboard");
+	auto props = __super::GetProps();
+	props.title = "Polyboard";
+	return props;
 }
 
 void Polyboard::GenerateVertices()

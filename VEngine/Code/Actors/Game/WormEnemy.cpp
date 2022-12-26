@@ -25,7 +25,7 @@ void WormEnemy::Create()
 
 void WormEnemy::Tick(float deltaTime)
 {
-    const float rotateSpeed = 30.f;
+    constexpr float rotateSpeed = 30.f;
     mesh1->AddRotation(GetUpVectorV(), rotateSpeed * deltaTime);
     mesh2->AddRotation(GetUpVectorV(), -rotateSpeed * deltaTime);
     mesh3->AddRotation(GetUpVectorV(), rotateSpeed * deltaTime);
