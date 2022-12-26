@@ -476,6 +476,9 @@
     <ClCompile Include="Code\UI\Game\PlayerShieldWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\Game\OrientationEnemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -908,6 +911,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\PlayerShieldWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\OrientationEnemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

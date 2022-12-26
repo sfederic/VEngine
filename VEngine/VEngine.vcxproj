@@ -120,6 +120,7 @@
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp" />
     <ClCompile Include="Code\Actors\CameraActor.cpp" />
     <ClCompile Include="Code\Actors\Game\BeamEnemy.cpp" />
+    <ClCompile Include="Code\Actors\Game\OrientationEnemy.cpp" />
     <ClCompile Include="Code\Actors\Game\SpinningEnemy.cpp" />
     <ClCompile Include="Code\Actors\Game\Enemy.cpp" />
     <ClCompile Include="Code\Actors\Game\EnemySpawner.cpp" />
@@ -237,6 +238,7 @@
     <ClCompile Include="Code\Actors\Game\TurretEnemy.cpp" />
     <ClInclude Include="Code\Actors\CameraActor.h" />
     <ClInclude Include="Code\Actors\Game\BeamEnemy.h" />
+    <ClInclude Include="Code\Actors\Game\OrientationEnemy.h" />
     <ClInclude Include="Code\Actors\Game\SpinningEnemy.h" />
     <ClInclude Include="Code\Actors\Game\Enemy.h" />
     <ClInclude Include="Code\Actors\Game\EnemySpawner.h" />
