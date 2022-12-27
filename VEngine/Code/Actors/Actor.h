@@ -97,6 +97,7 @@ public:
 
 	//An optional function to call after components have been setup, and after Actor's constructor
 	//(Use this when you want to override component fields that have to be defined in constructors)
+	//@Todo: Create() isn't being called like it was previously in-engine to override constructor and deserialised data. Fix it.
 	virtual void Create();
 
 	//Do not override this direcly. ACTOR_SYSTEM macro overrides instead.
