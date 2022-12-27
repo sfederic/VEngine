@@ -1363,7 +1363,9 @@ void Renderer::RenderParticleEmitters()
 			//Add rotation to particle (keep in mind that rotate speed needs to match angle's +/- value)
 			particle.angle += particle.rotateSpeed * Core::GetDeltaTime();
 
-			VMath::RotateTowardsCamera(particle.transform, particle.angle);
+			auto particleRotation = 
+				VMath::LookAtRotation(activeCamera->GetWorldPositionV(), XMLoadFloat3(&particle.transform.position));
+			XMStoreFloat4(&particle.transform.rotation, particleRotation);
 
 			shaderMatrices.model = particle.transform.GetAffine();
 			shaderMatrices.MakeModelViewProjectionMatrix();
