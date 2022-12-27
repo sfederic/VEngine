@@ -4,6 +4,7 @@
 #include "VMath.h"
 #include "Actors/Game/Enemy.h"
 #include "Actors/Game/LevelInstance.h"
+#include "Actors/Game/InteractActor.h"
 #include "Components/MeshComponent.h"
 #include "Components/CameraComponent.h"
 #include "Gameplay/GameUtils.h"
@@ -351,10 +352,18 @@ void Player::ShieldLogic(float deltaTime)
 	}
 }
 
-void Player::ContextualAction()
+void Player::Interact()
 {
 	if (Input::GetKeyUp(Keys::Up))
 	{
-		//contextual actor virtual function...
+		HitResult result(this);
+		if (Raycast(result, GetPositionV(), GetPositionV() + GetForwardVectorV() * 2.f))
+		{
+			auto interactActor = dynamic_cast<InteractActor*>(result.hitActor);
+			if (interactActor)
+			{
+				interactActor->Interact();
+			}
+		}
 	}
 }

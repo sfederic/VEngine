@@ -37,7 +37,7 @@ private:
 	void BladeSwipe();
 	void SwordBeamMovement(float deltaTime);
 	void ShieldLogic(float deltaTime);
-	void ContextualAction();
+	void Interact();
 
 public:
 	MeshComponent* mesh = nullptr;
