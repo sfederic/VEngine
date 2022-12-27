@@ -1,0 +1,776 @@
+DirectionalLightActor
+1
+ Enabled
+1
+ Position
+0 5 0
+ Rotation
+0.183012 0.683013 -0.5 -0.499999
+ Scale
+1 0.999998 0.999999
+Name
+DirectionalLightActor0
+UID
+305613625
+next
+LevelInstance
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Level Size
+10 3 10
+Name
+LevelInstance0
+UID
+3470381402
+next
+MeshActor
+8
+ Enabled
+1
+ Position
+4 -0.5 4
+ Rotation
+-0 0 -0 1
+ Scale
+10 1 10
+Name
+MeshActor0
+UID
+4125901729
+next
+ Enabled
+1
+ Position
+0.5 -0.49 8
+ Rotation
+-0 0 -0 1
+ Scale
+1 3 1
+Name
+mound1
+UID
+3225599297
+next
+ Enabled
+1
+ Position
+4.5 -0.49 8
+ Rotation
+-0 0.707107 -0 0.707107
+ Scale
+1 2 1
+Name
+mound2
+UID
+597370172
+next
+ Enabled
+1
+ Position
+6.5 -0.49 8
+ Rotation
+-0 0.00024394 -0 1
+ Scale
+1 2 1
+Name
+mound3
+UID
+3716619835
+next
+ Enabled
+1
+ Position
+6.5 -0.49 3
+ Rotation
+-0 0.000243942 -0 1
+ Scale
+2 4 2
+Name
+mound4
+UID
+766003942
+next
+ Enabled
+1
+ Position
+1.5 -0.49 3
+ Rotation
+0 0.707279 0 0.706934
+ Scale
+1 1 1
+Name
+mound5
+UID
+3227832740
+next
+ Enabled
+1
+ Position
+1.5 -0.49 1
+ Rotation
+0 1 0 -7.1309e-05
+ Scale
+0.999999 1 0.999999
+Name
+mound6
+UID
+1506642654
+next
+ Enabled
+1
+ Position
+5.5 -0.49 0
+ Rotation
+0 0.707279 0 0.706934
+ Scale
+1 1 1
+Name
+mound7
+UID
+3978585331
+next
+Player
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+All Range Mode
+1
+Name
+Player0
+UID
+3322088524
+next
+SkyBox
+1
+ Enabled
+1
+ Position
+4 0 4
+ Rotation
+0 0 0 1
+ Scale
+50 50 50
+Name
+SkyBox0
+UID
+3848448693
+next
+CameraComponent
+1
+3322088524
+Camera
+ Enabled
+1
+ Pos
+2 1.5 -4
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
+next
+DirectionalLightComponent
+1
+305613625
+DirectionalLight
+ Enabled
+1
+ Pos
+0 5 0
+ Rot
+0.183012 0.683013 -0.5 -0.499999
+ Scale
+1 0.999998 0.999999
+Colour
+1 1 1 1
+LightEnabled
+1
+ShadowMap Size
+15
+next
+EmptyComponent
+1
+3470381402
+Root
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+next
+MeshComponent
+11
+4125901729
+Mesh
+ Enabled
+1
+ Pos
+4 -0.5 4
+ Rot
+-0 0 -0 1
+ Scale
+10 1 10
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/ground.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.fbx
+Static
+1
+Trans. Occlude
+0
+next
+3322088524
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.fbx
+Static
+1
+Trans. Occlude
+0
+next
+3322088524
+ShieldMesh
+ Enabled
+0
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+shield.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+ico_sphere.fbx
+Static
+1
+Trans. Occlude
+0
+next
+3225599297
+Mesh
+ Enabled
+1
+ Pos
+0.5 -0.49 8
+ Rot
+-0 0 -0 1
+ Scale
+1 3 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/ground.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+mound.fbx
+Static
+1
+Trans. Occlude
+0
+next
+597370172
+Mesh
+ Enabled
+1
+ Pos
+4.5 -0.49 8
+ Rot
+-0 0.707107 -0 0.707107
+ Scale
+1 2 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/ground.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+mound.fbx
+Static
+1
+Trans. Occlude
+0
+next
+3716619835
+Mesh
+ Enabled
+1
+ Pos
+6.5 -0.49 8
+ Rot
+-0 0.00024394 -0 1
+ Scale
+1 2 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/ground.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+mound.fbx
+Static
+1
+Trans. Occlude
+0
+next
+766003942
+Mesh
+ Enabled
+1
+ Pos
+6.5 -0.49 3
+ Rot
+-0 0.000243942 -0 1
+ Scale
+2 4 2
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/ground.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+mound.fbx
+Static
+1
+Trans. Occlude
+0
+next
+3227832740
+Mesh
+ Enabled
+1
+ Pos
+1.5 -0.49 3
+ Rot
+0 0.707279 0 0.706934
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/ground.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+mound.fbx
+Static
+1
+Trans. Occlude
+0
+next
+1506642654
+Mesh
+ Enabled
+1
+ Pos
+1.5 -0.49 1
+ Rot
+0 1 0 -7.1309e-05
+ Scale
+0.999999 1 0.999999
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/ground.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+mound.fbx
+Static
+1
+Trans. Occlude
+0
+next
+3978585331
+Mesh
+ Enabled
+1
+ Pos
+5.5 -0.49 0
+ Rot
+0 0.707279 0 0.706934
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/ground.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+mound.fbx
+Static
+1
+Trans. Occlude
+0
+next
+3848448693
+SkyBox Mesh
+ Enabled
+1
+ Pos
+4 0 4
+ Rot
+0 0 0 1
+ Scale
+50 50 50
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Unlit
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+sky.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+sky_cylinder.fbx
+Static
+1
+Trans. Occlude
+0
+next
+Polyboard
+1
+3322088524
+SwordBeam
+ Enabled
+0
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+next
+end
