@@ -41,6 +41,26 @@ namespace World
 	void TickAllComponentSystems(float deltaTime);
 	std::vector<Actor*> GetAllActorsInWorld();
 
+	Actor* GetActorByUID(UID uid);
+	Actor* GetActorByUIDAllowNull(UID uid);
+	Actor* GetActorByName(std::string actorName);
+	Actor* GetActorByNameAllowNull(std::string actorName);
+
+	std::vector<Component*> GetAllComponentsInWorld();
+
+	void AddActorToWorld(Actor* actor);
+
+	void RemoveActorFromWorld(Actor* actor);
+	void RemoveActorFromWorld(UID actorUID);
+	void RemoveActorFromWorld(std::string actorName);
+
+	void ClearAllActorsFromWorld();
+
+	bool CheckIfActorExistsInWorld(std::string actorName);
+	bool CheckIfActorExistsInWorld(UID actorUID);
+
+	void Cleanup();
+
 	template <typename T>
 	std::vector<T*> GetAllActorsOfTypeInWorld()
 	{
@@ -57,6 +77,22 @@ namespace World
 		}
 
 		return outActors;
+	}
+
+	template <typename T>
+	std::vector<T*> GetAllComponentsOfType()
+	{
+		std::vector<T*> outComponents;
+		auto components = GetAllComponentsInWorld();
+		for (auto component : components)
+		{
+			auto componentType = dynamic_cast<T*>(component);
+			if (componentType)
+			{
+				outComponents.push_back(componentType);
+			}
+		}
+		return outComponents;
 	}
 
 	template <typename T>
@@ -106,24 +142,4 @@ namespace World
 			}
 		}
 	}
-
-	Actor* GetActorByUID(UID uid);
-	Actor* GetActorByUIDAllowNull(UID uid);
-	Actor* GetActorByName(std::string actorName);
-	Actor* GetActorByNameAllowNull(std::string actorName);
-
-	std::vector<Component*> GetAllComponentsInWorld();
-
-	void AddActorToWorld(Actor* actor);
-
-	void RemoveActorFromWorld(Actor* actor);
-	void RemoveActorFromWorld(UID actorUID);
-	void RemoveActorFromWorld(std::string actorName);
-
-	void ClearAllActorsFromWorld();
-
-	bool CheckIfActorExistsInWorld(std::string actorName);
-	bool CheckIfActorExistsInWorld(UID actorUID);
-
-	void Cleanup();
 };
