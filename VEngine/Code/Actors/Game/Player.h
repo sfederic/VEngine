@@ -7,7 +7,6 @@ class MeshComponent;
 class CameraComponent;
 class ComboBarWidget;
 class PlayerShieldWidget;
-struct Polyboard;
 
 class Player : public Actor
 {
@@ -35,7 +34,7 @@ private:
 
 	void Shoot();
 	void BladeSwipe();
-	void SwordBeamMovement(float deltaTime);
+	void SpawnSwordBeam(XMVECTOR start, XMVECTOR end);
 	void ShieldLogic(float deltaTime);
 	void Interact();
 
@@ -51,9 +50,6 @@ private:
 
 	MeshComponent* shieldMesh = nullptr;
 
-	Polyboard* swordBeam = nullptr;
-	inline static const float SWORD_BEAM_LIFETIME_MAX = 2.0f;
-	float swordBeamLifetime = SWORD_BEAM_LIFETIME_MAX;
 	inline static const float SWORD_BEAM_INPUT_COOLDOWN_MAX = 1.0f;
 	float swordBeamInputCooldown = 0.f;
 

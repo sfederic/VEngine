@@ -7,6 +7,7 @@
 #include "Actors/Game/InteractActor.h"
 #include "Components/MeshComponent.h"
 #include "Components/CameraComponent.h"
+#include "Components/Game/SwordBeam.h"
 #include "Gameplay/GameUtils.h"
 #include "Physics/Raycast.h"
 #include "Particle/Polyboard.h"
@@ -31,11 +32,6 @@ Player::Player()
 void Player::Create()
 {
 	camera->SetPosition(2.f, 1.5f, -4.f);
-
-	swordBeam = Polyboard::system.Add("SwordBeam", this);
-	swordBeam->textureData.filename = "Particle/sword_slash.png";
-	swordBeam->GenerateVertices();
-	swordBeam->SetActive(false);
 }
 
 void Player::Start()
@@ -68,10 +64,14 @@ void Player::Tick(float deltaTime)
 
 	Shoot();
 	BladeSwipe();
-	SwordBeamMovement(deltaTime);
 	ShieldLogic(deltaTime);
 
 	Interact();
+
+	if (swordBeamInputCooldown >= 0.f)
+	{
+		swordBeamInputCooldown -= deltaTime;
+	}
 
 	MovementInput();
 	RotationInput();
@@ -276,13 +276,7 @@ void Player::BladeSwipe()
 		rayOrigins.emplace_back(GetPositionV() + GetRightVectorV());
 		rayOrigins.emplace_back(GetPositionV() + GetRightVectorV() * 2.f);
 
-		//Set sword beam effect and timers
-		XMStoreFloat3(&swordBeam->startPoint, rayOrigins.front());
-		XMStoreFloat3(&swordBeam->endPoint, rayOrigins.back());
-		swordBeam->movementDirection = GetForwardVectorV();
-		swordBeam->SetActive(true);
-		swordBeamLifetime = SWORD_BEAM_LIFETIME_MAX;
-		swordBeamInputCooldown = SWORD_BEAM_INPUT_COOLDOWN_MAX;
+		SpawnSwordBeam(rayOrigins.front(), rayOrigins.back());
 
 		//Can't destroy components/actors in an inner Raycast loop. Keep them and destroy later down.
 		std::vector<MeshComponent*> hitMeshComponents;
@@ -328,15 +322,13 @@ void Player::BladeSwipe()
 	}
 }
 
-void Player::SwordBeamMovement(float deltaTime)
+void Player::SpawnSwordBeam(XMVECTOR start, XMVECTOR end)
 {
-	if (swordBeam->IsActive() && swordBeamLifetime > 0.f)
-	{
-		swordBeam->MoveAlongDirection();
-		swordBeamLifetime -= deltaTime;
-
-		swordBeamInputCooldown -= deltaTime;
-	}
+	auto swordBeam = SwordBeam::system.Add("SwordBeam");
+	XMStoreFloat3(&swordBeam->startPoint, start);
+	XMStoreFloat3(&swordBeam->endPoint, end);
+	swordBeam->movementDirection = GetForwardVectorV();
+	swordBeamInputCooldown = SWORD_BEAM_INPUT_COOLDOWN_MAX;
 }
 
 void Player::ShieldLogic(float deltaTime)
