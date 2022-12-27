@@ -71,6 +71,8 @@ void Player::Tick(float deltaTime)
 	SwordBeamMovement(deltaTime);
 	ShieldLogic(deltaTime);
 
+	Interact();
+
 	MovementInput();
 	RotationInput();
 
