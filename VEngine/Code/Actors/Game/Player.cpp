@@ -350,3 +350,11 @@ void Player::ShieldLogic(float deltaTime)
 		shieldMesh->SetActive(false);
 	}
 }
+
+void Player::ContextualAction()
+{
+	if (Input::GetKeyUp(Keys::Up))
+	{
+		//contextual actor virtual function...
+	}
+}
