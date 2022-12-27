@@ -91,13 +91,3 @@ void Polyboard::CalcVertices()
 		indices.emplace_back(1 + (2 * i));
 	}
 }
-
-void Polyboard::MoveAlongDirection()
-{
-	auto start = XMLoadFloat3(&startPoint);
-	auto end = XMLoadFloat3(&endPoint);
-	start += movementDirection * 20.f * Core::GetDeltaTime();
-	end += movementDirection * 20.f * Core::GetDeltaTime();
-	XMStoreFloat3(&startPoint, start);
-	XMStoreFloat3(&endPoint, end);
-}
