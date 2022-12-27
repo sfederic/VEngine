@@ -263,7 +263,7 @@ void Player::BladeSwipe()
 {
 	if (!CheckMovementAndRotationHaveStopped()) return;
 
-	if (Input::GetKeyDown(Keys::Down))
+	if (Input::GetKeyDown(Keys::Down) && swordBeamInputCooldown <= 0.f)
 	{
 		//Line up 5 origins alongside player's right axis
 		std::vector<XMVECTOR> rayOrigins;
@@ -273,12 +273,13 @@ void Player::BladeSwipe()
 		rayOrigins.emplace_back(GetPositionV() + GetRightVectorV());
 		rayOrigins.emplace_back(GetPositionV() + GetRightVectorV() * 2.f);
 
-		//Display sword beam effect
+		//Set sword beam effect and timers
 		XMStoreFloat3(&swordBeam->startPoint, rayOrigins.front());
 		XMStoreFloat3(&swordBeam->endPoint, rayOrigins.back());
 		swordBeam->movementDirection = GetForwardVectorV();
 		swordBeam->SetActive(true);
 		swordBeamLifetime = SWORD_BEAM_LIFETIME_MAX;
+		swordBeamInputCooldown = SWORD_BEAM_INPUT_COOLDOWN_MAX;
 
 		//Can't destroy components/actors in an inner Raycast loop. Keep them and destroy later down.
 		std::vector<MeshComponent*> hitMeshComponents;
@@ -330,6 +331,8 @@ void Player::SwordBeamMovement(float deltaTime)
 	{
 		swordBeam->MoveAlongDirection();
 		swordBeamLifetime -= deltaTime;
+
+		swordBeamInputCooldown -= deltaTime;
 	}
 }
 

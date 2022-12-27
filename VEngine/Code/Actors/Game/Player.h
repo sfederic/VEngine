@@ -53,6 +53,8 @@ private:
 	Polyboard* swordBeam = nullptr;
 	inline static const float SWORD_BEAM_LIFETIME_MAX = 2.0f;
 	float swordBeamLifetime = SWORD_BEAM_LIFETIME_MAX;
+	inline static const float SWORD_BEAM_INPUT_COOLDOWN_MAX = 1.0f;
+	float swordBeamInputCooldown = 0.f;
 
 	//When to turn shield effect off after interval of damage.
 	float shieldCountdownTimer = 0.5f;
