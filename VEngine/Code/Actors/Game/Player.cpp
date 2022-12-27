@@ -8,6 +8,7 @@
 #include "Components/CameraComponent.h"
 #include "Gameplay/GameUtils.h"
 #include "Physics/Raycast.h"
+#include "Particle/Polyboard.h"
 #include "UI/Game/ComboBarWidget.h"
 #include "UI/Game/PlayerShieldWidget.h"
 #include "UI/UISystem.h"
@@ -29,6 +30,11 @@ Player::Player()
 void Player::Create()
 {
 	camera->SetPosition(2.f, 1.5f, -4.f);
+
+	swordBeam = Polyboard::system.Add("SwordBeam", this);
+	swordBeam->textureData.filename = "Particle/sword_slash.png";
+	swordBeam->GenerateVertices();
+	swordBeam->SetActive(false);
 }
 
 void Player::Start()
@@ -61,7 +67,7 @@ void Player::Tick(float deltaTime)
 
 	Shoot();
 	BladeSwipe();
-
+	SwordBeamMovement(deltaTime);
 	ShieldLogic(deltaTime);
 
 	MovementInput();
@@ -267,6 +273,13 @@ void Player::BladeSwipe()
 		rayOrigins.emplace_back(GetPositionV() + GetRightVectorV());
 		rayOrigins.emplace_back(GetPositionV() + GetRightVectorV() * 2.f);
 
+		//Display sword beam effect
+		XMStoreFloat3(&swordBeam->startPoint, rayOrigins.front());
+		XMStoreFloat3(&swordBeam->endPoint, rayOrigins.back());
+		swordBeam->movementDirection = GetForwardVectorV();
+		swordBeam->SetActive(true);
+		swordBeamLifetime = SWORD_BEAM_LIFETIME_MAX;
+
 		//Can't destroy components/actors in an inner Raycast loop. Keep them and destroy later down.
 		std::vector<MeshComponent*> hitMeshComponents;
 		std::set<Enemy*> hitEnemies;
@@ -308,6 +321,15 @@ void Player::BladeSwipe()
 				hitEnemy->Destroy();
 			}
 		}
+	}
+}
+
+void Player::SwordBeamMovement(float deltaTime)
+{
+	if (swordBeam->IsActive() && swordBeamLifetime > 0.f)
+	{
+		swordBeam->MoveAlongDirection();
+		swordBeamLifetime -= deltaTime;
 	}
 }
 

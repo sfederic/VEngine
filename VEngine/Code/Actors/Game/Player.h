@@ -7,6 +7,7 @@ class MeshComponent;
 class CameraComponent;
 class ComboBarWidget;
 class PlayerShieldWidget;
+struct Polyboard;
 
 class Player : public Actor
 {
@@ -34,7 +35,7 @@ private:
 
 	void Shoot();
 	void BladeSwipe();
-
+	void SwordBeamMovement(float deltaTime);
 	void ShieldLogic(float deltaTime);
 
 public:
@@ -48,6 +49,10 @@ private:
 	PlayerShieldWidget* playerShieldWidget = nullptr;
 
 	MeshComponent* shieldMesh = nullptr;
+
+	Polyboard* swordBeam = nullptr;
+	inline static const float SWORD_BEAM_LIFETIME_MAX = 2.0f;
+	float swordBeamLifetime = SWORD_BEAM_LIFETIME_MAX;
 
 	//When to turn shield effect off after interval of damage.
 	float shieldCountdownTimer = 0.5f;

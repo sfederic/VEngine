@@ -24,6 +24,9 @@ struct Polyboard : SpatialComponent
 	std::vector<Vertex> vertices;
 	std::vector<MeshData::indexDataType> indices;
 
+	//If the Polyboard needs to move.
+	XMVECTOR movementDirection;
+
 	XMFLOAT3 startPoint;
 	XMFLOAT3 endPoint;
 
@@ -36,4 +39,6 @@ struct Polyboard : SpatialComponent
 	void GenerateVertices();
 
 	void CalcVertices();
+
+	void MoveAlongDirection();
 };
