@@ -1335,6 +1335,11 @@ void Renderer::RenderParticleEmitters()
 
 	for (auto& emitter : ParticleEmitter::system.GetComponents())
 	{
+		if (!emitter->IsActive())
+		{
+			continue;
+		}
+
 		if (drawAllAsWireframe)
 		{
 			context->RSSetState(rastStateWireframe);
