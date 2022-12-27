@@ -1192,7 +1192,7 @@ void RenderPolyboards()
 	SetRastState(RastStates::noBackCull);
 	SetShaders(ShaderItems::DefaultClip);
 
-	for (auto& polyboard : Polyboard::system.GetComponents())
+	for (auto polyboard : World::GetAllComponentsOfType<Polyboard>())
 	{
 		polyboard->CalcVertices();
 
