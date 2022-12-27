@@ -239,6 +239,7 @@
     <ClCompile Include="Code\Actors\Game\TurretEnemy.cpp" />
     <ClCompile Include="Code\Actors\SkyBox.cpp" />
     <ClCompile Include="Code\Actors\Game\InteractActor.cpp" />
+    <ClCompile Include="Code\Actors\Game\RepairObject.cpp" />
     <ClInclude Include="Code\Actors\Game\BacksideEnemy.h" />
     <ClInclude Include="Code\Actors\CameraActor.h" />
     <ClInclude Include="Code\Actors\Game\BeamEnemy.h" />
@@ -482,6 +483,7 @@
     <ClInclude Include="Code\Actors\Game\TurretEnemy.h" />
     <ClInclude Include="Code\Actors\SkyBox.h" />
     <ClInclude Include="Code\Actors\Game\InteractActor.h" />
+    <ClInclude Include="Code\Actors\Game\RepairObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
