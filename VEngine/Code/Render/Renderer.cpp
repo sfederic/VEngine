@@ -754,6 +754,7 @@ void Renderer::RenderLightProbeViews()
 				context->RSSetViewports(1, &viewport);
 				const float clearColour[4] = { 0.f, 0.f, 0.f, 0.f };
 				context->ClearRenderTargetView(lightProbeRTVs[i], clearColour);
+				context->IASetInputLayout(inputLayout);
 				context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 				context->OMSetRenderTargets(1, &lightProbeRTVs[i], nullptr);
 
@@ -819,6 +820,10 @@ void Renderer::RenderLightProbeViews()
 			//Remember that there are 9 coefficients with 3rd order SH per channel
 			float SH_R[9] = {}, SH_G[9] = {}, SH_B[9] = {};
 			HR(DirectX::SHProjectCubeMap(context, 3, lightProbeTexture, SH_R, SH_G, SH_B));
+
+			UID imageFileID = GenerateUID();
+			std::wstring imageFile = L"Screenshots/" + std::to_wstring(imageFileID) + L".jpg";
+			HR(SaveWICTextureToFile(context, lightProbeTexture, GUID_ContainerFormatJpeg, imageFile.c_str()));
 
 			XMFLOAT4 coefs[9] = {};
 
