@@ -306,6 +306,8 @@ void Actor::AddComponent(Component* component)
 
 void Actor::RemoveComponent(Component* componentToRemove)
 {
+	componentMap.erase(componentToRemove->name);
+
 	//Re-parent SpatialComponent's children to its own parent 
 	auto spatialComponent = dynamic_cast<SpatialComponent*>(componentToRemove);
 	if (spatialComponent)
@@ -318,8 +320,6 @@ void Actor::RemoveComponent(Component* componentToRemove)
 			}
 		}
 	}
-
-	componentMap.erase(componentToRemove->name);
 }
 
 void Actor::SetEmptyRootComponent()

@@ -59,7 +59,7 @@ struct Joint
 	XMMATRIX currentPose = XMMatrixIdentity();
 	XMMATRIX inverseBindPose = XMMatrixIdentity();
 
-	char name[32];
+	char name[32]{};
 
 	int parentIndex = -1; //-1 is the root joint's index or if the bone doesn't have a parent
 	int index = 0;

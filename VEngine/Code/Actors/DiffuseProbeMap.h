@@ -6,8 +6,8 @@ struct InstanceMeshComponent;
 
 struct ProbeData
 {
-	XMFLOAT4 SH[9];
-	XMFLOAT3 position;
+	XMFLOAT4 SH[9]{};
+	XMFLOAT3 position = XMFLOAT3(0.f, 0.f, 0.f);
 	int index = 0;
 };
 

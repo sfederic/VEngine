@@ -9,7 +9,7 @@ struct ParticleEmitter : SpatialComponent
 
 	std::vector<Particle> particles;
 
-	XMFLOAT3 direction;
+	XMFLOAT3 direction = XMFLOAT3(0.f, 0.f, 0.f);
 
 	TextureData textureData;
 
