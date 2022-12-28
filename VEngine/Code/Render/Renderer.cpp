@@ -1703,12 +1703,9 @@ void SetShaderResourcePixel(uint32_t shaderRegister, std::string textureName)
 
 void RenderPostProcess()
 {
-	uint32_t numPostProcessInstances = PostProcessInstance::system.GetNumActors();
-	if (numPostProcessInstances == 0) return;
-
-	assert(numPostProcessInstances == 1);
-	auto postProcessIntance = PostProcessInstance::system.GetFirstActor();
-	if (!postProcessIntance->IsActive()) return;
+	auto postProcessInstance = PostProcessInstance::system.GetFirstActor();
+	if (postProcessInstance == nullptr) return;
+	if (!postProcessInstance->IsActive()) return;
 
 	SetNullRTV();
 
@@ -1724,7 +1721,7 @@ void RenderPostProcess()
 	SetShaders(ShaderItems::PostProcess);
 
 	//Set constant buffer data
-	cbPostProcess->Map(&postProcessIntance->postProcessData);
+	cbPostProcess->Map(&postProcessInstance->postProcessData);
 	cbPostProcess->SetPS();
 
 	context->PSSetShaderResources(0, 1, &postSRV);
