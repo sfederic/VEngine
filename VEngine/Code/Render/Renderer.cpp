@@ -754,6 +754,7 @@ void Renderer::RenderLightProbeViews()
 				context->RSSetViewports(1, &viewport);
 				const float clearColour[4] = { 0.f, 0.f, 0.f, 0.f };
 				context->ClearRenderTargetView(lightProbeRTVs[i], clearColour);
+				context->IASetInputLayout(inputLayout);
 				context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 				context->OMSetRenderTargets(1, &lightProbeRTVs[i], nullptr);
 
