@@ -94,6 +94,14 @@ public:
 		}
 	}
 
+	void Init() override
+	{
+		for (auto& actor : actors)
+		{
+			actor->Create();
+		}
+	}
+
 	virtual void CreateAllActorComponents() override
 	{
 		for (auto& actor : actors)
@@ -183,7 +191,6 @@ public:
 	virtual Actor* SpawnActor(const Transform& transform) override
 	{
 		auto actor = static_cast<Actor*>(Add(transform));
-		actor->Create();
 		return actor;
 	}
 
