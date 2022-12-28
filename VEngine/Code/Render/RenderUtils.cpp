@@ -16,7 +16,7 @@ namespace RenderUtils
 	ID3D11DeviceContext* context;
 	Sampler* defaultSampler;
 
-	ID3D11Buffer* CreateDefaultBuffer(uint32_t byteWidth, uint32_t bindFlags, const void* initData)
+	ID3D11Buffer* CreateDefaultBuffer(uint64_t byteWidth, uint32_t bindFlags, const void* initData)
 	{
 		ID3D11Buffer* buffer;
 
@@ -33,7 +33,7 @@ namespace RenderUtils
 		return buffer;
 	}
 
-	ID3D11Buffer* CreateDynamicBuffer(uint32_t byteWidth, uint32_t bindFlags, const void* initData)
+	ID3D11Buffer* CreateDynamicBuffer(uint64_t byteWidth, uint32_t bindFlags, const void* initData)
 	{
 		ID3D11Buffer* buffer;
 

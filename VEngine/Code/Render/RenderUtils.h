@@ -16,8 +16,8 @@ namespace RenderUtils
 	extern ID3D11DeviceContext* context;
 	extern Sampler* defaultSampler;
 
-	ID3D11Buffer* CreateDefaultBuffer(uint32_t byteWidth, uint32_t bindFlags, const void* initData);
-	ID3D11Buffer* CreateDynamicBuffer(uint32_t byteWidth, uint32_t bindFlags, const void* initData);
+	ID3D11Buffer* CreateDefaultBuffer(uint64_t byteWidth, uint32_t bindFlags, const void* initData);
+	ID3D11Buffer* CreateDynamicBuffer(uint64_t byteWidth, uint32_t bindFlags, const void* initData);
 	ID3D11Buffer* CreateVertexBuffer(MeshDataProxy& meshData);
 	ID3D11Buffer* CreateIndexBuffer(MeshDataProxy& meshData);
 	ID3D11ShaderResourceView* CreateSRVForMeshInstance(ID3D11Buffer* structuredBuffer, uint32_t numBufferElements);
