@@ -153,6 +153,21 @@ Player0
 UID
 3322088524
 next
+RepairObject
+1
+ Enabled
+1
+ Position
+0 0 3
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Name
+RepairObject0
+UID
+2346841088
+next
 SkyBox
 1
  Enabled
@@ -220,7 +235,7 @@ Root
 1 1 1
 next
 MeshComponent
-11
+12
 4125901729
 Mesh
  Enabled
@@ -265,104 +280,6 @@ M_UvScale
 1 1
 Mesh
 node.fbx
-Static
-1
-Trans. Occlude
-0
-next
-3322088524
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.fbx
-Static
-1
-Trans. Occlude
-0
-next
-3322088524
-ShieldMesh
- Enabled
-0
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-shield.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-ico_sphere.fbx
 Static
 1
 Trans. Occlude
@@ -711,6 +628,104 @@ Static
 Trans. Occlude
 0
 next
+3322088524
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.fbx
+Static
+1
+Trans. Occlude
+0
+next
+3322088524
+ShieldMesh
+ Enabled
+0
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+shield.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+ico_sphere.fbx
+Static
+1
+Trans. Occlude
+0
+next
 3848448693
 SkyBox Mesh
  Enabled
@@ -759,6 +774,84 @@ Static
 1
 Trans. Occlude
 0
+next
+2346841088
+Mesh
+ Enabled
+1
+ Pos
+0 0 3
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.fbx
+Static
+1
+Trans. Occlude
+0
+next
+ParticleEmitter
+1
+2346841088
+Smoke
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Direction
+2.35418e-43 0 1.4013e-45
+Lifetime
+1 1
+Move Speed
+1 1
+Rotate
+0 0
+Rotate Speed
+0 0
+Spawn Radius
+0 1
+Spawn Rate
+0.3 0.3
+Texture
+Particle/smoke.png
 next
 Polyboard
 1
