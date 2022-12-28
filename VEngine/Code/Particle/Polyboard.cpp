@@ -80,7 +80,7 @@ void Polyboard::CalcVertices()
 	}
 
 	//Because the vertices aren't triangle based, divide by 3
-	for (size_t i = 0; i < (vertices.size() / 3) + 1; i++) 
+	for (int i = 0; i < (vertices.size() / 3) + 1; i++) 
 	{
 		indices.emplace_back(0 + (2 * i));
 		indices.emplace_back(2 + (2 * i));
