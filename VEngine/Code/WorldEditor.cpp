@@ -140,6 +140,7 @@ void DuplicateActor()
 				auto newProps = newDuplicateActor->GetAllProps();
 				Properties::CopyProperties(oldProps, newProps);
 
+				newDuplicateActor->Create();
 				newDuplicateActor->CreateAllComponents();
 
 				newDuplicateActor->SimpleSetName(newActorOriginalName);
@@ -284,6 +285,7 @@ void SpawnActor(Transform& transform)
 	}
 
 	actor->Create();
+	actor->CreateAllComponents();
 
 	pickedActor = actor;
 	editor->SetActorProps(pickedActor);
