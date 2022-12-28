@@ -821,10 +821,6 @@ void Renderer::RenderLightProbeViews()
 			float SH_R[9] = {}, SH_G[9] = {}, SH_B[9] = {};
 			HR(DirectX::SHProjectCubeMap(context, 3, lightProbeTexture, SH_R, SH_G, SH_B));
 
-			UID imageFileID = GenerateUID();
-			std::wstring imageFile = L"Screenshots/" + std::to_wstring(imageFileID) + L".jpg";
-			HR(SaveWICTextureToFile(context, lightProbeTexture, GUID_ContainerFormatJpeg, imageFile.c_str()));
-
 			XMFLOAT4 coefs[9] = {};
 
 			for (int co_index = 0; co_index < 9; co_index++)
