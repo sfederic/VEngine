@@ -276,12 +276,14 @@ void SpawnActor(Transform& transform)
 	{
 		actor = WorldEditor::SpawnActorFromTemplateFile(actorTemplateFilename, transform);
 	}
-	else //Spawn MeshActor (usually)
+	else //Spawn Actor from System
 	{
 		actor = spawnSystem->SpawnActor(transform);
 		debugMenu.AddNotification(VString::wformat(
-			L"Spawned actor [%S] from MeshActor system", actor->GetName().c_str()));
+			L"Spawned actor [%S] from [%S] system", actor->GetName().c_str(), spawnSystem->GetName().c_str()));
 	}
+
+	actor->Create();
 
 	pickedActor = actor;
 	editor->SetActorProps(pickedActor);
