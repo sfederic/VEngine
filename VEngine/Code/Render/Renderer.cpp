@@ -752,7 +752,7 @@ void Renderer::RenderLightProbeViews()
 			for (int i = 0; i < 6; i++)
 			{
 				context->RSSetViewports(1, &viewport);
-				const float clearColour[4] = { 0.f, 0.f, 0.f, 0.f };
+				constexpr float clearColour[4] = { 0.f, 0.f, 0.f, 0.f };
 				context->ClearRenderTargetView(lightProbeRTVs[i], clearColour);
 				context->IASetInputLayout(inputLayout);
 				context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -866,14 +866,14 @@ void Renderer::RenderLightProbeViews()
 
 			XMVECTOR irradiance =
 				XMLoadFloat4(&coefs[0]) * A0 * Y[0] +
-				XMLoadFloat4(&coefs[0]) * A1 * Y[1] * n.y +
-				XMLoadFloat4(&coefs[0]) * A1 * Y[2] * n.z +
-				XMLoadFloat4(&coefs[0]) * A1 * Y[3] * n.x +
-				XMLoadFloat4(&coefs[0]) * A2 * Y[4] * (n.y * n.x) +
-				XMLoadFloat4(&coefs[0]) * A2 * Y[5] * (n.y * n.z) +
-				XMLoadFloat4(&coefs[0]) * A2 * Y[6] * (3.0 * n.z * n.z - 1.0) +
-				XMLoadFloat4(&coefs[0]) * A2 * Y[7] * (n.z * n.x) +
-				XMLoadFloat4(&coefs[0]) * A2 * Y[8] * (n.x * n.x - n.y * n.y);
+				XMLoadFloat4(&coefs[1]) * A1 * Y[1] * n.y +
+				XMLoadFloat4(&coefs[2]) * A1 * Y[2] * n.z +
+				XMLoadFloat4(&coefs[3]) * A1 * Y[3] * n.x +
+				XMLoadFloat4(&coefs[4]) * A2 * Y[4] * (n.y * n.x) +
+				XMLoadFloat4(&coefs[5]) * A2 * Y[5] * (n.y * n.z) +
+				XMLoadFloat4(&coefs[6]) * A2 * Y[6] * (3.0 * n.z * n.z - 1.0) +
+				XMLoadFloat4(&coefs[7]) * A2 * Y[7] * (n.z * n.x) +
+				XMLoadFloat4(&coefs[8]) * A2 * Y[8] * (n.x * n.x - n.y * n.y);
 
 			irradiance = DirectX::XMVectorMax(irradiance, XMVectorZero());
 			irradiance.m128_f32[3] = 1.0f; //Make sure alpha is set
