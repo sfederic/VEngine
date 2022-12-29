@@ -745,9 +745,9 @@ void Renderer::RenderLightProbeViews()
 
 		int probeIndex = 0;
 
-		for (auto& probeData : probeMap->instanceMeshComponent->instanceData)
+		for (auto& instanceData : probeMap->instanceMeshComponent->instanceData)
 		{
-			XMMATRIX& probeMatrix = probeData.world;
+			XMMATRIX& probeMatrix = instanceData.world;
 
 			for (int i = 0; i < 6; i++)
 			{
@@ -877,7 +877,7 @@ void Renderer::RenderLightProbeViews()
 
 			irradiance = DirectX::XMVectorMax(irradiance, XMVectorZero());
 			irradiance.m128_f32[3] = 1.0f; //Make sure alpha is set
-			XMStoreFloat4(&probeData.colour, irradiance);
+			XMStoreFloat4(&instanceData.colour, irradiance);
 
 			ProbeData pd = {};
 			pd.index = probeIndex;
