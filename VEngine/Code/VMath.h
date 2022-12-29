@@ -23,6 +23,7 @@ namespace VMath
 
 	bool Float3IsZero(XMFLOAT3& float3);
 	void RoundFloat3(XMFLOAT3& float3);
+	void SaturateFloat4(XMFLOAT4& float4);
 
 	//Good for when XMVECTOR floats are all over the place
 	void RoundVector(XMVECTOR& v);

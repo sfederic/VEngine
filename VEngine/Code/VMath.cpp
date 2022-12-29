@@ -50,6 +50,14 @@ namespace VMath
         float3.z = std::round(float3.z);
     }
 
+    void SaturateFloat4(XMFLOAT4& float4)
+    {
+        float4.x = std::clamp(float4.x, 0.f, 1.0f);
+        float4.y = std::clamp(float4.y, 0.f, 1.0f);
+        float4.z = std::clamp(float4.z, 0.f, 1.0f);
+        float4.w = std::clamp(float4.w, 0.f, 1.0f);
+    }
+
     void RoundVector(XMVECTOR& v)
     {
         v.m128_f32[0] = std::roundf(v.m128_f32[0]);
