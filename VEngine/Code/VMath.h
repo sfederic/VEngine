@@ -75,4 +75,5 @@ namespace VMath
 	XMFLOAT2 Float2Subtract(XMFLOAT2& f0, XMFLOAT2& f1);
 
 	XMVECTOR TriangleUVToXYZ(XMFLOAT2 uv, Vertex tri[3]);
+	bool IsUVInTriangleUVs(XMFLOAT2 pt, XMFLOAT2 v1, XMFLOAT2 v2, XMFLOAT2 v3);
 }
