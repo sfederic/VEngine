@@ -73,4 +73,6 @@ namespace VMath
 
 	XMFLOAT3 Float3Subtract(XMFLOAT3& f0, XMFLOAT3& f1);
 	XMFLOAT2 Float2Subtract(XMFLOAT2& f0, XMFLOAT2& f1);
+
+	XMVECTOR TriangleUVToXYZ(XMFLOAT2 uv, Vertex tri[3]);
 }
