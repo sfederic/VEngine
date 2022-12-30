@@ -391,4 +391,39 @@ namespace VMath
     {
         return XMFLOAT2(f0.x - f1.x, f0.y - f1.y);
     }
+
+    //Based on https://stackoverflow.com/questions/72209091/how-to-given-uv-on-a-triangle-find-xyz
+    XMVECTOR TriangleUVToXYZ(XMFLOAT2 uv, Vertex tri[3])
+    {
+        XMVECTOR tri12 = XMLoadFloat2(&tri[1].uv) - XMLoadFloat2(&tri[0].uv);
+        XMVECTOR tri13 = XMLoadFloat2(&tri[2].uv) - XMLoadFloat2(&tri[0].uv);
+        XMVECTOR p1 = XMLoadFloat2(&uv) - XMLoadFloat2(&tri[0].uv);
+
+        XMVECTOR a23 = XMVector2Cross(tri12, tri13);
+
+        XMVECTOR a12 = XMVector2Cross(p1, tri12) / -a23;
+        XMVECTOR a13 = XMVector2Cross(p1, tri13) / a23;
+
+        return XMLoadFloat3(&tri[0].pos)
+            + a12 * (XMLoadFloat3(&tri[1].pos) - XMLoadFloat3(&tri[0].pos))
+            + a13 * (XMLoadFloat3(&tri[2].pos) - XMLoadFloat3(&tri[0].pos));
+    }
+
+    //Based on https://stackoverflow.com/questions/2049582/how-to-determine-if-a-point-is-in-a-2d-triangle
+    bool IsUVInTriangleUVs(XMFLOAT2 pt, XMFLOAT2 v1, XMFLOAT2 v2, XMFLOAT2 v3)
+    {
+        auto sign = [](const XMFLOAT2& p1, const XMFLOAT2& p2, const XMFLOAT2& p3)
+        {
+            return (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
+        };
+
+        float d1 = sign(pt, v1, v2);
+        float d2 = sign(pt, v2, v3);
+        float d3 = sign(pt, v3, v1);
+
+        bool hasNeg = (d1 < 0) || (d2 < 0) || (d3 < 0);
+        bool hasPos = (d1 > 0) || (d2 > 0) || (d3 > 0);
+
+        return !(hasNeg && hasPos);
+    }
 }
