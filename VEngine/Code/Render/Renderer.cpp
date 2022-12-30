@@ -48,6 +48,9 @@
 #include "Texture2D.h"
 #include "ConstantBuffer.h"
 
+#include "Physics/Raycast.h"
+
+void LightMapCast();
 void CreateFactory();
 void CreateDevice();
 void CreateSwapchain(HWND window);
@@ -212,6 +215,11 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 
 void Renderer::Tick()
 {
+	if (Input::GetKeyUp(Keys::F3))
+	{
+		LightMapCast();
+	}
+
 	//BOUNDING BOXES HOTKEY
 	if (Input::GetKeyHeld(Keys::Ctrl))
 	{
@@ -1784,4 +1792,68 @@ void Renderer::AddDebugDrawOrientedBox(DirectX::BoundingOrientedBox& orientedBox
 void Renderer::ClearBounds()
 {
 	debugOrientedBoxesOnTimerToRender.clear();
+}
+
+struct Texel
+{
+	XMFLOAT4 colour = XMFLOAT4(0.f, 0.f, 0.f, 1.f);
+	XMFLOAT3 pos = XMFLOAT3(0.f, 0.f, 0.f);
+	bool invalid = false; //Texel sits on bound of triangles
+};
+
+void LightMapCast()
+{
+	Texel texels[8][8];
+	int invalidCount = 0;
+
+	for (int w = 0; w < 8; w++)
+	{
+		for (int h = 0; h < 8; h++)
+		{
+			const float lightMapU = (float)(w + 0.5f) / 8.f;
+			const float lightMapV = (float)(h + 0.5f) / 8.f;
+
+			XMFLOAT2 lightMapUV = { lightMapU, lightMapV };
+
+			auto mesh = MeshComponent::system.GetFirstComponent();
+			XMMATRIX model = mesh->GetWorldMatrix();
+
+			for (int i = 0; i < mesh->meshDataProxy.vertices->size() / 3; i++)
+			{
+				MeshData::indexDataType index0 = mesh->meshDataProxy.indices->at(static_cast<std::vector<MeshData::indexDataType, std::allocator<MeshData::indexDataType>>::size_type>(i) * 3);
+				MeshData::indexDataType index1 = mesh->meshDataProxy.indices->at(static_cast<std::vector<MeshData::indexDataType, std::allocator<MeshData::indexDataType>>::size_type>(i) * 3 + 1);
+				MeshData::indexDataType index2 = mesh->meshDataProxy.indices->at(static_cast<std::vector<MeshData::indexDataType, std::allocator<MeshData::indexDataType>>::size_type>(i) * 3 + 2);
+
+				bool uvInTriangle = VMath::IsUVInTriangleUVs(lightMapUV,
+					mesh->meshDataProxy.vertices->at(index0).uv,
+					mesh->meshDataProxy.vertices->at(index1).uv,
+					mesh->meshDataProxy.vertices->at(index2).uv);
+
+				//if (uvInTriangle)
+				{
+					Vertex tri[3] = {
+						mesh->meshDataProxy.vertices->at(index0),
+						mesh->meshDataProxy.vertices->at(index1),
+						mesh->meshDataProxy.vertices->at(index2)
+					};
+					XMVECTOR uvLocalPos = VMath::TriangleUVToXYZ(lightMapUV, tri);
+					XMVECTOR uvToWorldPos = XMVector3TransformCoord(uvLocalPos, model);
+					XMStoreFloat3(&texels[w][h].pos, uvToWorldPos);
+
+					auto dLight = DirectionalLightComponent::system.GetFirstComponent();
+					XMVECTOR direction = -dLight->GetForwardVectorV();
+					HitResult hitResult;
+					if (!Raycast(hitResult, uvToWorldPos, direction, 100.f))
+					{
+						XMStoreFloat4(&texels[w][h].colour, XMVectorSet(1.f, 1.f, 1.f, 1.f));
+					}
+				}
+				/*else
+				{
+					texels[w][h].invalid = true;
+					invalidCount++;
+				}*/
+			}
+		}
+	}
 }
