@@ -170,6 +170,9 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 
 					normal = XMVector3Normalize(normal);
 
+					//@Todo: proper UV results based on ray
+					tempHitResult.uv = mesh->meshDataProxy.vertices->at(index0).uv;
+
 					XMStoreFloat3(&tempHitResult.normal, normal);
 
 					tempHitResult.hitComponent = mesh;
