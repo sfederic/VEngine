@@ -47,7 +47,8 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 	hitResult.hitActors.clear();
 	hitResult.hitComponents.clear();
 
-	for (Actor* actor : World::GetAllActorsInWorld())
+	auto actorsInWorld = World::GetAllActorsInWorld();
+	for (auto actor : actorsInWorld)
 	{
 		if (!actor->IsActive())
 		{
