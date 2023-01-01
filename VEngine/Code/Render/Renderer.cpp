@@ -1903,8 +1903,15 @@ void LightMapCast()
 					XMVECTOR direction = -dLight->GetForwardVectorV();
 					HitResult hitResult;
 
-					//Give small offset to raycast origin so mesh isn't always hitting itself.
-					XMVECTOR raycastOrigin = uvWorldPos + (direction * 0.1f);
+					XMVECTOR normal = XMVectorZero();
+					normal += XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index0).normal);
+					normal += XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index1).normal);
+					normal += XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index2).normal);
+
+					normal = XMVector3Normalize(normal);
+
+					//Give small offset to raycast origin by its normal so mesh isn't always hitting itself.
+					XMVECTOR raycastOrigin = uvWorldPos + (normal * 0.05f);
 					if (Raycast(hitResult, raycastOrigin, direction, 5.f))
 					{
 						Log("Lightmap texel %d %d hit actor: %s", w, h, hitResult.hitActor->GetName().c_str());
