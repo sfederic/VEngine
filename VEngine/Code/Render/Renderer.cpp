@@ -539,7 +539,7 @@ void RenderDebugLines()
 
 	D3D11_MAPPED_SUBRESOURCE mappedResource{};
 	HR(context->Map(debugLinesBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
-	memcpy(mappedResource.pData, debugLines.data(), sizeof(Vertex) * debugLines.size());
+	memcpy(mappedResource.pData, debugLines.data(), debugLinesBufferSize);
 	context->Unmap(debugLinesBuffer, 0);
 
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
@@ -550,8 +550,6 @@ void RenderDebugLines()
 	cbMatrices->Map(&shaderMatrices);
 	cbMatrices->SetVS();
 
-	auto currentByteSize = debugLines.size() * sizeof(Vertex);
-	assert(currentByteSize <= debugLinesBufferSize);
 	context->Draw(debugLines.size(), 0);
 }
 
