@@ -1871,6 +1871,8 @@ void LightMapCast()
 				MeshData::indexDataType index1 = mesh->meshDataProxy.indices->at(static_cast<std::vector<MeshData::indexDataType, std::allocator<MeshData::indexDataType>>::size_type>(i) * 3 + 1);
 				MeshData::indexDataType index2 = mesh->meshDataProxy.indices->at(static_cast<std::vector<MeshData::indexDataType, std::allocator<MeshData::indexDataType>>::size_type>(i) * 3 + 2);
 
+				//@Todo: need to get these UVs from the UVAtlas instead of the mesh uvs else the mesh uvs
+				//have the potential to overlap on the lightmap which needs all unique UVs.
 				bool uvInTriangle = VMath::IsUVInTriangleUVs(lightMapUV,
 					mesh->meshDataProxy.vertices->at(index0).uv,
 					mesh->meshDataProxy.vertices->at(index1).uv,
