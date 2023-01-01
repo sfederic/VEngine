@@ -1933,7 +1933,7 @@ void LightMapCast()
 					}
 					else
 					{
-						XMStoreFloat4(&texels[w][h].colour, XMVectorSet(0.5f, 0.5f, 0.5f, 1.f));
+						XMStoreFloat4(&texels[w][h].colour, XMVectorSet(1.f, 1.f, 1.f, 1.f));
 
 						Line debugLine;
 						XMStoreFloat3(&debugLine.p1, raycastOrigin);
@@ -1949,11 +1949,11 @@ void LightMapCast()
 
 	unsigned char image[mapHeight][mapWidth][3]{};
 
-	for (int i = 0; i < mapWidth; i++) {
-		for (int j = 0; j < mapHeight; j++) {
-			image[i][j][0] = (unsigned char)(texels[i][j].colour.x * 255); //R
-			image[i][j][1] = (unsigned char)(texels[i][j].colour.y * 255); //G         
-			image[i][j][2] = (unsigned char)(texels[i][j].colour.z * 255); //B
+	for (int i = 0; i < mapHeight; i++) {
+		for (int j = 0; j < mapWidth; j++) {
+			image[i][j][2] = (unsigned char)(texels[j][i].colour.x * 255); //R
+			image[i][j][1] = (unsigned char)(texels[j][i].colour.y * 255); //G         
+			image[i][j][0] = (unsigned char)(texels[j][i].colour.z * 255); //B
 		}
 	}
 
