@@ -549,6 +549,7 @@ void RenderDebugLines()
 	cbMatrices->Map(&shaderMatrices);
 	cbMatrices->SetVS();
 
+	assert(debugLines.size() * sizeof(Vertex) <= debugLinesBufferSize);
 	context->Draw(debugLines.size(), 0);
 }
 
@@ -1849,8 +1850,8 @@ void LightMapCast()
 {
 	auto start = Profile::QuickStart();
 
-	const int mapWidth = 8;
-	const int mapHeight = 8;
+	const int mapWidth = 16;
+	const int mapHeight = 16;
 	Texel texels[mapWidth][mapHeight];
 
 	for (int w = 0; w < mapWidth; w++)
