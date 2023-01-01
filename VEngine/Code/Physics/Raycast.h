@@ -54,6 +54,7 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end);
 bool RaycastTriangleIntersect(HitResult& hitResult);
 bool RaycastFromScreen(HitResult& hitResult);
+void DrawDebugLine(XMVECTOR start, XMVECTOR end);
 
 bool OrientedBoxCast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end, XMFLOAT2 extents, bool drawDebug);
 bool SimpleBoxCast(XMFLOAT3 center, XMFLOAT3 extents, HitResult& hitResult);

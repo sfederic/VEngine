@@ -234,6 +234,15 @@ bool RaycastFromScreen(HitResult& hitResult)
 	return Raycast(hitResult, hitResult.origin, hitResult.direction, range, true);
 }
 
+void DrawDebugLine(XMVECTOR start, XMVECTOR end)
+{
+	Line line;
+	XMStoreFloat3(&line.p1, start);
+	XMStoreFloat3(&line.p2, end);
+
+	Renderer::AddDebugLine(line);
+}
+
 bool OrientedBoxCast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end, XMFLOAT2 extents, bool drawDebug)
 {
 	XMVECTOR orientationV = VMath::LookAtRotation(end, origin);
