@@ -46,8 +46,8 @@ struct BlendStates
 
 struct Line
 {
-	XMFLOAT3 p1;
-	XMFLOAT3 p2;
+	XMFLOAT3 p1 = XMFLOAT3(0.f, 0.f, 0.f);
+	XMFLOAT3 p2 = XMFLOAT3(0.f, 0.f, 0.f);
 };
 
 //The actual data for each loaded mesh. Each loaded mesh file will have one of these per its filename.
