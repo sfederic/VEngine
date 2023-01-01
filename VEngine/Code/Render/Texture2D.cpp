@@ -4,5 +4,11 @@
 Texture2D::~Texture2D()
 {
 	data->Release();
+	data = nullptr;
+
 	srv->Release();
+	srv = nullptr;
+
+	width = 0;
+	height = 0;
 }
