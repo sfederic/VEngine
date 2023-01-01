@@ -536,6 +536,11 @@ void RenderDebugLines()
 	cbMaterial->SetPS();
 	SetShaders(ShaderItems::SolidColour);
 
+	D3D11_MAPPED_SUBRESOURCE mappedResource{};
+	HR(context->Map(debugLinesBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+	memcpy(mappedResource.pData, debugLines.data(), sizeof(Vertex) * debugLines.size());
+	context->Unmap(debugLinesBuffer, 0);
+
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
 	context->IASetVertexBuffers(0, 1, &debugLinesBuffer, &Renderer::stride, &Renderer::offset);
 
