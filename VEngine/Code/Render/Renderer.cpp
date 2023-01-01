@@ -187,7 +187,7 @@ Texture2D lightMap = Texture2D("test.bmp");
 std::vector<DirectX::BoundingOrientedBox> debugOrientedBoxesOnTimerToRender;
 std::vector<Vertex> debugLines;
 ID3D11Buffer* debugLinesBuffer;
-static const uint64_t debugLinesBufferSize = 2048 * sizeof(Vertex);
+static const uint64_t debugLinesBufferSize = 32 * 32 * sizeof(Vertex);
 
 void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 {
@@ -544,7 +544,7 @@ void RenderDebugLines()
 
 	D3D11_MAPPED_SUBRESOURCE mappedResource{};
 	HR(context->Map(debugLinesBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
-	memcpy(mappedResource.pData, debugLines.data(), debugLines.size() * sizeof(Vertex));
+	memcpy(mappedResource.pData, debugLines.data(), debugLinesBufferSize);
 	context->Unmap(debugLinesBuffer, 0);
 
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
@@ -1016,8 +1016,8 @@ void RenderBounds()
 		{
 			DirectX::BoundingOrientedBox boundingBox = mesh->boundingBox;
 
-			XMFLOAT3 extents = XMFLOAT3(boundingBox.Extents.x * 2.f, boundingBox.Extents.y * 2.f,
-				boundingBox.Extents.z * 2.f);
+			XMFLOAT3 extents = XMFLOAT3(boundingBox.Extents.x, boundingBox.Extents.y,
+				boundingBox.Extents.z);
 
 			XMVECTOR center = mesh->GetWorldPositionV() + XMLoadFloat3(&boundingBox.Center);
 			XMVECTOR scale = mesh->GetScaleV() * XMLoadFloat3(&extents);
@@ -1849,7 +1849,7 @@ void Renderer::AddDebugLine(Line& line)
 
 struct Texel
 {
-	XMFLOAT4 colour = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
+	XMFLOAT4 colour = XMFLOAT4(0.f, 0.f, 0.f, 1.f);
 	XMFLOAT3 pos = XMFLOAT3(0.f, 0.f, 0.f);
 };
 
@@ -1860,7 +1860,6 @@ void LightMapCast()
 	const int mapWidth = 32;
 	const int mapHeight = 32;
 	Texel texels[mapWidth][mapHeight];
-
 	debugLines.clear();
 
 	for (int w = 0; w < mapWidth; w++)
@@ -1934,7 +1933,7 @@ void LightMapCast()
 					}
 					else
 					{
-						XMStoreFloat4(&texels[w][h].colour, XMVectorSet(0.2f, 0.2f, 0.2f, 1.f));
+						XMStoreFloat4(&texels[w][h].colour, XMVectorSet(0.5f, 0.5f, 0.5f, 1.f));
 
 						Line debugLine;
 						XMStoreFloat3(&debugLine.p1, raycastOrigin);
@@ -1950,11 +1949,11 @@ void LightMapCast()
 
 	unsigned char image[mapHeight][mapWidth][3]{};
 
-	for (int i = 0; i < mapHeight; i++) {
-		for (int j = 0; j < mapWidth; j++) {
-			image[i][j][2] = (unsigned char)(texels[i][j].colour.x * 255); //R
+	for (int i = 0; i < mapWidth; i++) {
+		for (int j = 0; j < mapHeight; j++) {
+			image[i][j][0] = (unsigned char)(texels[i][j].colour.x * 255); //R
 			image[i][j][1] = (unsigned char)(texels[i][j].colour.y * 255); //G         
-			image[i][j][0] = (unsigned char)(texels[i][j].colour.z * 255); //B
+			image[i][j][2] = (unsigned char)(texels[i][j].colour.z * 255); //B
 		}
 	}
 

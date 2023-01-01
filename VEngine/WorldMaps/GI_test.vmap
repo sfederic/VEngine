@@ -5,9 +5,9 @@ DirectionalLightActor
  Position
 3 0 -2
  Rotation
--0.149369 -0.478637 -0.165057 0.849324
+0.353553 -0.353553 0.146446 0.853554
  Scale
-1 1 1
+0.999997 0.999995 0.999995
 Name
 DirectionalLightActor0
 UID
@@ -24,9 +24,9 @@ MeshActor
  Scale
 1 1 1
 Name
-cube0
+barrel0
 UID
-1071179600
+2254787533
 next
 DirectionalLightComponent
 1
@@ -37,9 +37,9 @@ DirectionalLight
  Pos
 3 0 -2
  Rot
--0.149369 -0.478637 -0.165057 0.849324
+0.353553 -0.353553 0.146446 0.853554
  Scale
-1 1 1
+0.999997 0.999995 0.999995
 Colour
 1 1 1 1
 LightEnabled
@@ -49,7 +49,7 @@ ShadowMap Size
 next
 MeshComponent
 1
-1071179600
+2254787533
 Mesh
  Enabled
 1

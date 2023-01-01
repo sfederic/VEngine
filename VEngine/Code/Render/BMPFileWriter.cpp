@@ -20,6 +20,7 @@ void BMPFileWriter::GenerateBitmapImage(unsigned char* image, int height, int wi
 
     FILE* imageFile;
     fopen_s(&imageFile, imageFileName, "wb");
+    assert(imageFile);
 
     unsigned char* fileHeader = CreateBitmapFileHeader(height, stride);
     fwrite(fileHeader, 1, FILE_HEADER_SIZE, imageFile);
