@@ -117,6 +117,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Render\BMPFileWriter.cpp" />
     <ClCompile Include="Code\Actors\Game\BacksideEnemy.cpp" />
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp" />
     <ClCompile Include="Code\Actors\CameraActor.cpp" />
@@ -241,6 +242,7 @@
     <ClCompile Include="Code\Actors\Game\InteractActor.cpp" />
     <ClCompile Include="Code\Actors\Game\RepairObject.cpp" />
     <ClCompile Include="Code\Components\Game\SwordBeam.cpp" />
+    <ClInclude Include="Code\Render\BMPFileWriter.h" />
     <ClInclude Include="Code\Actors\Game\BacksideEnemy.h" />
     <ClInclude Include="Code\Actors\CameraActor.h" />
     <ClInclude Include="Code\Actors\Game\BeamEnemy.h" />
