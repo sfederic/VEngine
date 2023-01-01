@@ -48,6 +48,7 @@
 #include "Render/SpriteSystem.h"
 #include "Render/VertexShader.h"
 #include "Render/PixelShader.h"
+#include "Render/BMPFileWriter.h"
 
 void LightMapCast();
 void CreateFactory();
@@ -183,7 +184,7 @@ ShaderLights shaderLights;
 std::vector<DirectX::BoundingOrientedBox> debugOrientedBoxesOnTimerToRender;
 std::vector<Vertex> debugLines;
 ID3D11Buffer* debugLinesBuffer;
-static const uint64_t debugLinesBufferSize = 1024 * sizeof(Vertex);
+static const uint64_t debugLinesBufferSize = 2048 * sizeof(Vertex);
 
 void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 {
@@ -549,7 +550,8 @@ void RenderDebugLines()
 	cbMatrices->Map(&shaderMatrices);
 	cbMatrices->SetVS();
 
-	assert(debugLines.size() * sizeof(Vertex) <= debugLinesBufferSize);
+	auto currentByteSize = debugLines.size() * sizeof(Vertex);
+	assert(currentByteSize <= debugLinesBufferSize);
 	context->Draw(debugLines.size(), 0);
 }
 
@@ -1843,15 +1845,14 @@ struct Texel
 {
 	XMFLOAT4 colour = XMFLOAT4(0.f, 0.f, 0.f, 1.f);
 	XMFLOAT3 pos = XMFLOAT3(0.f, 0.f, 0.f);
-	bool invalid = false; //Texel sits on bound of triangles
 };
 
 void LightMapCast()
 {
 	auto start = Profile::QuickStart();
 
-	const int mapWidth = 16;
-	const int mapHeight = 16;
+	const int mapWidth = 30;
+	const int mapHeight = 30;
 	Texel texels[mapWidth][mapHeight];
 
 	for (int w = 0; w < mapWidth; w++)
@@ -1935,6 +1936,18 @@ void LightMapCast()
 			}
 		}
 	}
+
+	unsigned char image[mapHeight][mapWidth][3]{};
+
+	for (int i = 0; i < mapWidth; i++) {
+		for (int j = 0; j < mapHeight; j++) {
+			image[i][j][2] = (unsigned char)(texels[i][j].colour.x * 255); //R
+			image[i][j][1] = (unsigned char)(texels[i][j].colour.y * 255); //G         
+			image[i][j][0] = (unsigned char)(texels[i][j].colour.z * 255); //B
+		}
+	}
+
+	BMPFileWriter::GenerateBitmapImage((unsigned char*)image, mapHeight, mapWidth, "test.bmp");
 
 	double end = Profile::QuickEnd(start);
 	Log("Lightmap gen took %f", end);
