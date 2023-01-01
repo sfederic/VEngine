@@ -1923,21 +1923,22 @@ void LightMapCast()
 					XMVECTOR raycastOrigin = uvWorldPos + (normal * 0.05f);
 					if (Raycast(hitResult, raycastOrigin, direction, 5.f))
 					{
-						Log("Lightmap texel %d %d hit actor: %s", w, h, hitResult.hitActor->GetName().c_str());
 						Line debugLine;
 						XMStoreFloat3(&debugLine.p1, raycastOrigin);
 						debugLine.p2 = hitResult.hitPos;
 						Renderer::AddDebugLine(debugLine);
+
 						break;
 					}
 					else
 					{
-						Log("Lightmap texel %d %d hit nothing", w, h);
 						XMStoreFloat4(&texels[w][h].colour, XMVectorSet(0.5f, 0.5f, 0.5f, 1.f));
+
 						Line debugLine;
 						XMStoreFloat3(&debugLine.p1, raycastOrigin);
 						XMStoreFloat3(&debugLine.p2, raycastOrigin + direction * 5.f);
 						Renderer::AddDebugLine(debugLine);
+
 						break;
 					}
 				}
@@ -1956,6 +1957,8 @@ void LightMapCast()
 	}
 
 	BMPFileWriter::GenerateBitmapImage((unsigned char*)image, mapHeight, mapWidth, "Textures/test.bmp");
+
+	RenderUtils::CreateTexture(lightMap);
 
 	double end = Profile::QuickEnd(start);
 	Log("Lightmap gen took %f", end);
