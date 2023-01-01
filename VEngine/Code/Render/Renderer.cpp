@@ -1842,14 +1842,18 @@ struct Texel
 
 void LightMapCast()
 {
-	Texel texels[2][2];
+	auto start = Profile::QuickStart();
 
-	for (int w = 0; w < 2; w++)
+	const int mapWidth = 2;
+	const int mapHeight = 2;
+	Texel texels[mapWidth][mapHeight];
+
+	for (int w = 0; w < mapWidth; w++)
 	{
-		for (int h = 0; h < 2; h++)
+		for (int h = 0; h < mapHeight; h++)
 		{
-			const float lightMapU = (float)(w + 0.5f) / 2.f;
-			const float lightMapV = (float)(h + 0.5f) / 2.f;
+			const float lightMapU = (float)(w + 0.5f) / (float)mapWidth;
+			const float lightMapV = (float)(h + 0.5f) / (float)mapHeight;
 
 			XMFLOAT2 lightMapUV = { lightMapU, lightMapV };
 
@@ -1874,28 +1878,51 @@ void LightMapCast()
 						mesh->meshDataProxy.vertices->at(index1),
 						mesh->meshDataProxy.vertices->at(index2)
 					};
-					XMVECTOR uvLocalPos = VMath::TriangleUVToXYZ(lightMapUV, tri);
-					XMVECTOR uvToWorldPos = XMVector3TransformCoord(uvLocalPos, model);
-					XMStoreFloat3(&texels[w][h].pos, uvToWorldPos);
+
+					XMVECTOR v0 = XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index0).pos);
+					v0 = XMVector3TransformCoord(v0, model);
+					XMVECTOR v1 = XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index1).pos);
+					v1 = XMVector3TransformCoord(v1, model);
+					XMVECTOR v2 = XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index2).pos);
+					v2 = XMVector3TransformCoord(v2, model);
+
+					XMStoreFloat3(&tri[0].pos, v0);
+					XMStoreFloat3(&tri[1].pos, v1);
+					XMStoreFloat3(&tri[2].pos, v2);
+
+					XMVECTOR uvWorldPos = VMath::TriangleUVToXYZ(lightMapUV, tri);
+					XMStoreFloat3(&texels[w][h].pos, uvWorldPos);
 
 					auto dLight = DirectionalLightComponent::system.GetFirstComponent();
 					XMVECTOR direction = -dLight->GetForwardVectorV();
 					HitResult hitResult;
 
 					//Give small offset to raycast origin so mesh isn't always hitting itself.
-					XMVECTOR raycastOrigin = uvToWorldPos + direction * 5;
-					if (Raycast(hitResult, uvToWorldPos, direction, 1000.f))
+					XMVECTOR raycastOrigin = uvWorldPos + (direction * 0.1f);
+					if (Raycast(hitResult, raycastOrigin, direction, 5.f))
 					{
 						Log("Lightmap texel %d %d hit actor: %s", w, h, hitResult.hitActor->GetName().c_str());
+						Line debugLine;
+						XMStoreFloat3(&debugLine.p1, raycastOrigin);
+						debugLine.p2 = hitResult.hitPos;
+						Renderer::AddDebugLine(debugLine);
+						break;
 					}
 					else
 					{
 						Log("Lightmap texel %d %d hit nothing", w, h);
 						XMStoreFloat4(&texels[w][h].colour, XMVectorSet(1.f, 1.f, 1.f, 1.f));
+						Line debugLine;
+						XMStoreFloat3(&debugLine.p1, raycastOrigin);
+						XMStoreFloat3(&debugLine.p2, raycastOrigin + direction * 5.f);
+						Renderer::AddDebugLine(debugLine);
 						break;
 					}
 				}
 			}
 		}
 	}
+
+	double end = Profile::QuickEnd(start);
+	Log("Lightmap gen took %f", end);
 }
