@@ -183,7 +183,7 @@ ShaderLights shaderLights;
 std::vector<DirectX::BoundingOrientedBox> debugOrientedBoxesOnTimerToRender;
 std::vector<Vertex> debugLines;
 ID3D11Buffer* debugLinesBuffer;
-static const uint64_t debugLinesBufferSize = 1024;
+static const uint64_t debugLinesBufferSize = 1024 * sizeof(Vertex);
 
 void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 {
@@ -1849,8 +1849,8 @@ void LightMapCast()
 {
 	auto start = Profile::QuickStart();
 
-	const int mapWidth = 2;
-	const int mapHeight = 2;
+	const int mapWidth = 8;
+	const int mapHeight = 8;
 	Texel texels[mapWidth][mapHeight];
 
 	for (int w = 0; w < mapWidth; w++)
