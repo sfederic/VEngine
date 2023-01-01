@@ -75,7 +75,7 @@ void MapBuffer(ID3D11Resource* resource, const void* src, size_t size);
 void DrawMesh(MeshComponent* mesh);
 void DrawMeshInstanced(InstanceMeshComponent* mesh);
 
-void DrawDebugLines();
+void RenderDebugLines();
 
 //Inner render functions to set shader resources
 void SetNullRTV();
@@ -526,7 +526,9 @@ void DrawMeshInstanced(InstanceMeshComponent* mesh)
 	context->DrawIndexedInstanced(mesh->meshDataProxy.indices->size(), mesh->GetInstanceCount(), 0, 0, 0);
 }
 
-void DrawDebugLines()
+//@Todo: can change the input assembly to only take in Line structs to the shader stage. Right now it's taking
+//in entire verticies and might be too heavy when visualsing entire lightmap raycast networks.
+void RenderDebugLines()
 {
 	MaterialShaderData materialShaderData{};
 	materialShaderData.ambient = XMFLOAT4(1.0f, 0.0f, 0.f, 1.0f);
@@ -684,7 +686,7 @@ void Renderer::Render()
 	RenderBounds();
 	RenderLightMeshes();
 	RenderCameraMeshes();
-	DrawDebugLines();
+	RenderDebugLines();
 	RenderPostProcess();
 
 	Profile::End();
