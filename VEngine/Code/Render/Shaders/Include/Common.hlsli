@@ -39,6 +39,7 @@ Texture2D reflectionMap : register(t2);
 StructuredBuffer<InstanceData> instanceData : register(t3);
 TextureCube environmentMap : register(t4);
 Texture2D normalMap : register(t5);
+Texture2D lightMap : register(t6);
 
 SamplerState s : register(s0);
 SamplerComparisonState shadowSampler : register(s1);

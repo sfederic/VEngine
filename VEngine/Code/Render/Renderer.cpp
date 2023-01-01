@@ -173,12 +173,15 @@ const int reflectionTextureResgiter = 2;
 const int instanceSRVRegister = 3;
 const int environmentMapTextureRegister = 4;
 const int normalMapTexureRegister = 5;
+const int lightMapTextureRegister = 6;
 
 const int lightProbeTextureWidth = 64;
 const int lightProbeTextureHeight = 64;
 
 ShaderMatrices shaderMatrices;
 ShaderLights shaderLights;
+
+Texture2D lightMap = Texture2D("test.bmp");
 
 //Debug object containers
 std::vector<DirectX::BoundingOrientedBox> debugOrientedBoxesOnTimerToRender;
@@ -220,6 +223,8 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	debugLines.emplace_back(Vertex()); //dummy data so DirecX doesn't crash
 	debugLinesBuffer = RenderUtils::CreateDynamicBuffer(debugLinesBufferSize, D3D11_BIND_VERTEX_BUFFER, debugLines.data());
 	debugLines.clear();
+
+	RenderUtils::CreateTexture(lightMap);
 }
 
 void Renderer::Tick()
@@ -1649,6 +1654,9 @@ void SetRenderPipelineStates(MeshComponent* mesh)
 	context->PSSetSamplers(0, 1, &material->sampler->data);
 	SetShaderResourceFromMaterial(0, material);
 
+	ID3D11ShaderResourceView* lightMapSRV = lightMap.GetSRV();
+	context->PSSetShaderResources(lightMapTextureRegister, 1, &lightMapSRV);
+
 	SetVertexBuffer(pso.vertexBuffer);
 	SetIndexBuffer(pso.indexBuffer);
 
@@ -1925,7 +1933,7 @@ void LightMapCast()
 					else
 					{
 						Log("Lightmap texel %d %d hit nothing", w, h);
-						XMStoreFloat4(&texels[w][h].colour, XMVectorSet(1.f, 1.f, 1.f, 1.f));
+						XMStoreFloat4(&texels[w][h].colour, XMVectorSet(0.5f, 0.5f, 0.5f, 1.f));
 						Line debugLine;
 						XMStoreFloat3(&debugLine.p1, raycastOrigin);
 						XMStoreFloat3(&debugLine.p2, raycastOrigin + direction * 5.f);
@@ -1947,7 +1955,7 @@ void LightMapCast()
 		}
 	}
 
-	BMPFileWriter::GenerateBitmapImage((unsigned char*)image, mapHeight, mapWidth, "test.bmp");
+	BMPFileWriter::GenerateBitmapImage((unsigned char*)image, mapHeight, mapWidth, "Textures/test.bmp");
 
 	double end = Profile::QuickEnd(start);
 	Log("Lightmap gen took %f", end);
