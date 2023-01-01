@@ -1822,6 +1822,15 @@ void Renderer::ClearBounds()
 	debugOrientedBoxesOnTimerToRender.clear();
 }
 
+void Renderer::AddDebugLine(Line& line)
+{
+	Vertex v1{}, v2{};
+	v1.pos = line.p1;
+	v2.pos = line.p2;
+	debugLines.emplace_back(v1);
+	debugLines.emplace_back(v2);
+}
+
 struct Texel
 {
 	XMFLOAT4 colour = XMFLOAT4(0.f, 0.f, 0.f, 1.f);

@@ -5,6 +5,7 @@
 
 struct RastState;
 struct BlendState;
+struct Line;
 
 namespace Renderer
 {
@@ -48,4 +49,5 @@ namespace Renderer
 
 	void AddDebugDrawOrientedBox(DirectX::BoundingOrientedBox& orientedBox);
 	void ClearBounds();
+	void AddDebugLine(Line& line);
 };
