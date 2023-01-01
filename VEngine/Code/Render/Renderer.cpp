@@ -1803,15 +1803,14 @@ struct Texel
 
 void LightMapCast()
 {
-	Texel texels[8][8];
-	int invalidCount = 0;
+	Texel texels[2][2];
 
-	for (int w = 0; w < 8; w++)
+	for (int w = 0; w < 2; w++)
 	{
-		for (int h = 0; h < 8; h++)
+		for (int h = 0; h < 2; h++)
 		{
-			const float lightMapU = (float)(w + 0.5f) / 8.f;
-			const float lightMapV = (float)(h + 0.5f) / 8.f;
+			const float lightMapU = (float)(w + 0.5f) / 2.f;
+			const float lightMapV = (float)(h + 0.5f) / 2.f;
 
 			XMFLOAT2 lightMapUV = { lightMapU, lightMapV };
 
@@ -1829,7 +1828,7 @@ void LightMapCast()
 					mesh->meshDataProxy.vertices->at(index1).uv,
 					mesh->meshDataProxy.vertices->at(index2).uv);
 
-				//if (uvInTriangle)
+				if (uvInTriangle)
 				{
 					Vertex tri[3] = {
 						mesh->meshDataProxy.vertices->at(index0),
@@ -1843,16 +1842,20 @@ void LightMapCast()
 					auto dLight = DirectionalLightComponent::system.GetFirstComponent();
 					XMVECTOR direction = -dLight->GetForwardVectorV();
 					HitResult hitResult;
-					if (!Raycast(hitResult, uvToWorldPos, direction, 100.f))
+
+					//Give small offset to raycast origin so mesh isn't always hitting itself.
+					XMVECTOR raycastOrigin = uvToWorldPos + direction * 5;
+					if (Raycast(hitResult, uvToWorldPos, direction, 1000.f))
 					{
+						Log("Lightmap texel %d %d hit actor: %s", w, h, hitResult.hitActor->GetName().c_str());
+					}
+					else
+					{
+						Log("Lightmap texel %d %d hit nothing", w, h);
 						XMStoreFloat4(&texels[w][h].colour, XMVectorSet(1.f, 1.f, 1.f, 1.f));
+						break;
 					}
 				}
-				/*else
-				{
-					texels[w][h].invalid = true;
-					invalidCount++;
-				}*/
 			}
 		}
 	}
