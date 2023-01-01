@@ -1,18 +1,3 @@
-DirectionalLightActor
-1
- Enabled
-1
- Position
-0 5 0
- Rotation
-0.707107 0 0 0.707107
- Scale
-1 1 1
-Name
-DirectionalLightActor0
-UID
-3438950106
-next
 LevelInstance
 1
  Enabled
@@ -35,15 +20,15 @@ MeshActor
  Enabled
 1
  Position
-4 1 4
+4 0 -1
  Rotation
 -0 0 -0 1
  Scale
-1 5 1
+1 1 1
 Name
-cylinder0
+sphere1
 UID
-2000697205
+1974433463
 next
 Player
 1
@@ -61,6 +46,21 @@ Name
 Player0
 UID
 299838947
+next
+PointLightActor
+1
+ Enabled
+1
+ Position
+2 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+PointLightActor0
+UID
+3183039298
 next
 SkyBox
 1
@@ -96,25 +96,6 @@ Far Z
 Near Z
 0.01
 next
-DirectionalLightComponent
-1
-3438950106
-DirectionalLight
- Enabled
-1
- Pos
-0 5 0
- Rot
-0.707107 0 0 0.707107
- Scale
-1 1 1
-Colour
-1 1 1 1
-LightEnabled
-1
-ShadowMap Size
-15
-next
 EmptyComponent
 1
 349485061
@@ -130,16 +111,16 @@ Root
 next
 MeshComponent
 4
-2000697205
+1974433463
 Mesh
  Enabled
 1
  Pos
-4 1 4
+4 0 -1
  Rot
 -0 0 -0 1
  Scale
-1 5 1
+1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -159,9 +140,9 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-metal.jpg
+test.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -173,7 +154,7 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-cylinder.fbx
+sphere.fbx
 Static
 1
 Trans. Occlude
@@ -210,7 +191,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -278,7 +259,7 @@ Trans. Occlude
 0
 next
 1382789473
-SkyBox Mesh
+SkyBox
  Enabled
 1
  Pos
@@ -306,7 +287,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-Sky/space.jpg
+normal_map.png
 M_Use Texture
 1
 M_UvOffset
@@ -325,5 +306,24 @@ Static
 1
 Trans. Occlude
 0
+next
+PointLightComponent
+1
+3183039298
+PointLight
+ Enabled
+1
+ Pos
+2 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
 next
 end

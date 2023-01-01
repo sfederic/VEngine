@@ -1,0 +1,101 @@
+DirectionalLightActor
+1
+ Enabled
+1
+ Position
+3 0 -2
+ Rotation
+-0 -0.382458 -0 0.923973
+ Scale
+1 1 1
+Name
+DirectionalLightActor0
+UID
+2386392439
+next
+MeshActor
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Name
+cube0
+UID
+3023816460
+next
+DirectionalLightComponent
+1
+2386392439
+DirectionalLight
+ Enabled
+1
+ Pos
+3 0 -2
+ Rot
+-0 -0.382458 -0 0.923973
+ Scale
+1 1 1
+Colour
+1 1 1 1
+LightEnabled
+1
+ShadowMap Size
+15
+next
+MeshComponent
+1
+3023816460
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.fbx
+Static
+1
+Trans. Occlude
+0
+next
+end

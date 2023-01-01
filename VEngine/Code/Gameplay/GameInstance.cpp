@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "GameInstance.h"
 
-std::string GameInstance::startingMap = "space_elevator.vmap";
+std::string GameInstance::startingMap = "GI_test.vmap";
 
 Properties GameInstance::GetInstanceSaveData()
 {
