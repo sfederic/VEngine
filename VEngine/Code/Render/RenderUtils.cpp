@@ -118,19 +118,19 @@ namespace RenderUtils
 		return defaultSampler;
 	}
 
-	void CreateTexture(Texture2D* texture)
+	void CreateTexture(Texture2D& texture)
 	{
 		std::wstring path;
 
-		if (texture->GetFilename().empty())
+		if (texture.GetFilename().empty())
 		{
 			//Set default texture if filename empty
-			texture->SetFilename("test.png");
-			path = VString::stows(AssetBaseFolders::texture + texture->GetFilename());
+			texture.SetFilename("test.png");
+			path = VString::stows(AssetBaseFolders::texture + texture.GetFilename());
 		}
 		else
 		{
-			path = VString::stows(AssetBaseFolders::texture + texture->GetFilename());
+			path = VString::stows(AssetBaseFolders::texture + texture.GetFilename());
 		}
 
 		assert(std::filesystem::exists(path) && "Texture file doesn't exist");
@@ -141,8 +141,8 @@ namespace RenderUtils
 		assert(resource);
 		assert(srv);
 
-		texture->SetTextureData(resource);
-		texture->SetSRV(srv);
+		texture.SetTextureData(resource);
+		texture.SetSRV(srv);
 
 		//CreateWICTextureFromFile() doesn't like ID3D11Texture2D, so casting down here
 		//to get the texture Desc.
@@ -152,7 +152,7 @@ namespace RenderUtils
 		D3D11_TEXTURE2D_DESC texDesc = {};
 		textureResource->GetDesc(&texDesc);
 
-		texture->SetWidth(texDesc.Width);
-		texture->SetHeight(texDesc.Height);
+		texture.SetWidth(texDesc.Width);
+		texture.SetHeight(texDesc.Height);
 	}
 }

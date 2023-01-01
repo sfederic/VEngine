@@ -31,7 +31,7 @@ Texture2D* TextureSystem::FindTexture2D(std::string textureFilename)
 
 		if (systemState == SystemStates::Loaded)
 		{
-			RenderUtils::CreateTexture(texture.get());
+			RenderUtils::CreateTexture(*texture.get());
 		}
 
 		return texture.get();
@@ -44,7 +44,7 @@ void TextureSystem::CreateAllTextures()
 {
 	for (auto& textureIt : texture2DMap)
 	{
-		RenderUtils::CreateTexture(textureIt.second.get());
+		RenderUtils::CreateTexture(*textureIt.second.get());
 	}
 
 	systemState = SystemStates::Loaded;
