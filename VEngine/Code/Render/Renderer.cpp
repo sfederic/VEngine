@@ -47,7 +47,6 @@
 #include "Gameplay/GameInstance.h"
 #include "Texture2D.h"
 #include "ConstantBuffer.h"
-
 #include "Physics/Raycast.h"
 
 void LightMapCast();
@@ -75,6 +74,8 @@ void UpdateLights();
 void MapBuffer(ID3D11Resource* resource, const void* src, size_t size);
 void DrawMesh(MeshComponent* mesh);
 void DrawMeshInstanced(InstanceMeshComponent* mesh);
+
+void DrawDebugLines();
 
 //Inner render functions to set shader resources
 void SetNullRTV();
@@ -178,8 +179,11 @@ const int lightProbeTextureHeight = 64;
 ShaderMatrices shaderMatrices;
 ShaderLights shaderLights;
 
-//Debug object maps
+//Debug object containers
 std::vector<DirectX::BoundingOrientedBox> debugOrientedBoxesOnTimerToRender;
+std::vector<Vertex> debugLines;
+ID3D11Buffer* debugLinesBuffer;
+static const uint64_t debugLinesBufferSize = 1024;
 
 void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 {
@@ -211,6 +215,10 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	RenderUtils::defaultSampler = RenderUtils::CreateSampler();
 
 	SpriteSystem::Init();
+
+	debugLines.emplace_back(Vertex()); //dummy data so DirecX doesn't crash
+	debugLinesBuffer = RenderUtils::CreateDynamicBuffer(debugLinesBufferSize, D3D11_BIND_VERTEX_BUFFER, debugLines.data());
+	debugLines.clear();
 }
 
 void Renderer::Tick()
@@ -518,6 +526,25 @@ void DrawMeshInstanced(InstanceMeshComponent* mesh)
 	context->DrawIndexedInstanced(mesh->meshDataProxy.indices->size(), mesh->GetInstanceCount(), 0, 0, 0);
 }
 
+void DrawDebugLines()
+{
+	MaterialShaderData materialShaderData{};
+	materialShaderData.ambient = XMFLOAT4(1.0f, 0.0f, 0.f, 1.0f);
+	cbMaterial->Map(&materialShaderData);
+	cbMaterial->SetPS();
+	SetShaders(ShaderItems::SolidColour);
+
+	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
+	context->IASetVertexBuffers(0, 1, &debugLinesBuffer, &Renderer::stride, &Renderer::offset);
+
+	shaderMatrices.model = XMMatrixIdentity();
+	shaderMatrices.MakeModelViewProjectionMatrix();
+	cbMatrices->Map(&shaderMatrices);
+	cbMatrices->SetVS();
+
+	context->Draw(debugLines.size(), 0);
+}
+
 void CheckSupportedFeatures()
 {
 	//Threading check
@@ -657,6 +684,7 @@ void Renderer::Render()
 	RenderBounds();
 	RenderLightMeshes();
 	RenderCameraMeshes();
+	DrawDebugLines();
 	RenderPostProcess();
 
 	Profile::End();
