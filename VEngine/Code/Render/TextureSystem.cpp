@@ -40,6 +40,11 @@ Texture2D* TextureSystem::FindTexture2D(std::string textureFilename)
 	return textureIt->second.get();
 }
 
+void TextureSystem::RemoveTexture(std::string textureName)
+{
+	texture2DMap.erase(textureName);
+}
+
 void TextureSystem::CreateAllTextures()
 {
 	for (auto& textureIt : texture2DMap)

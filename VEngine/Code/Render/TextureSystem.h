@@ -11,4 +11,5 @@ namespace TextureSystem
 	void CreateAllTextures();
 	void Cleanup();
 	Texture2D* FindTexture2D(std::string textureFilename);
+	void RemoveTexture(std::string textureName);
 };
