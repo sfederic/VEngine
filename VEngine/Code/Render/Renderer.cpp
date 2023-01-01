@@ -1913,15 +1913,12 @@ void LightMapCast()
 					XMVECTOR direction = -dLight->GetForwardVectorV();
 					HitResult hitResult;
 
-					XMVECTOR normal = XMVectorZero();
-					normal += XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index0).normal);
-					normal += XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index1).normal);
-					normal += XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index2).normal);
-
-					normal = XMVector3Normalize(normal);
+					XMVECTOR triV1 = XMVector3Normalize(v0) - XMVector3Normalize(v1);
+					XMVECTOR triV2 = XMVector3Normalize(v0) - XMVector3Normalize(v2);
+					XMVECTOR normal = XMVector3Normalize(XMVector3Cross(triV1, triV2));
 
 					//Give small offset to raycast origin by its normal so mesh isn't always hitting itself.
-					XMVECTOR raycastOrigin = uvWorldPos + (normal * 0.05f);
+					XMVECTOR raycastOrigin = uvWorldPos + (normal * 0.075f);
 					if (Raycast(hitResult, raycastOrigin, direction, 5.f))
 					{
 						Line debugLine;
