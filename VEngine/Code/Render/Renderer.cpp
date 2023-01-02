@@ -1974,16 +1974,13 @@ void LightMapCast()
 
 	auto image = new unsigned char[mapHeight][mapWidth][3]{};
 
-	for (int meshIndex = 0; meshIndex < meshes.size(); meshIndex++)
+	for (int i = 0; i < mapHeight; i++) 
 	{
-		for (int i = 0; i < mapHeight; i++) 
+		for (int j = 0; j < mapWidth; j++) 
 		{
-			for (int j = 0; j < mapWidth; j++) 
-			{
-				image[i][j][2] = (unsigned char)(texels[j][i].colour.x * 255); //R
-				image[i][j][1] = (unsigned char)(texels[j][i].colour.y * 255); //G         
-				image[i][j][0] = (unsigned char)(texels[j][i].colour.z * 255); //B
-			}
+			image[i][j][2] = (unsigned char)(texels[j][i].colour.x * 255); //R
+			image[i][j][1] = (unsigned char)(texels[j][i].colour.y * 255); //G         
+			image[i][j][0] = (unsigned char)(texels[j][i].colour.z * 255); //B
 		}
 	}
 
