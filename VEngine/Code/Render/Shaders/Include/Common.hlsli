@@ -124,6 +124,12 @@ cbuffer cbMeshData : register(b5)
     float cbMeshDataPad;
 }
 
+cbuffer ShaderMeshLightMapData
+{
+    int2 atlasOffset;
+    int2 textureSize;
+};
+
 //Stole all this from https://interplayoflight.wordpress.com/2021/12/31/occlusion-and-directionality-in-image-based-lighting-implementation-details/ for simple diffuse testing.
 //Was the only online example working with DXMath's SH lib.
 float3 GetSHIrradiance(float3 n, float4 SH[9])

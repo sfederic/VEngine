@@ -192,6 +192,13 @@ struct ShaderPostProcessData
 	float linearWhitePointValue = 3.3f;
 };
 
+//This struct assumes all the textures in the lightmap are packed by rects, not by uv charting.
+struct ShaderMeshLightMapData
+{
+	XMINT2 atlasOffset = XMINT2(-1, -1); //The x and y pixel offset into the texture 
+	XMINT2 textureSize = XMINT2(-1, -1); //Size of the texture at the atlas offset
+};
+
 struct InstanceData
 {
 	XMMATRIX world = XMMatrixIdentity();
