@@ -147,6 +147,7 @@ ConstantBuffer<MaterialShaderData>* cbMaterial;
 ConstantBuffer<ShaderLights>* cbLights;
 ConstantBuffer<ShaderTimeData>* cbTime;
 ConstantBuffer<ShaderMeshData>* cbMeshData;
+ConstantBuffer<ShaderMeshLightMapData>* cbMeshLightMapData;
 ConstantBuffer<ShaderSkinningData>* cbSkinningData;
 ConstantBuffer<ShaderPostProcessData>* cbPostProcess;
 
@@ -452,6 +453,7 @@ void CreateConstantBuffers()
 	const int cbLightsRegister = 3;
 	const int cbTimeRegister = 4;
 	const int cbMeshDataRegister = 5;
+	const int cbMeshLightMapRegister = 6;
 
 	//Shader matrix constant buffer
 	shaderMatrices.Create();
@@ -478,6 +480,11 @@ void CreateConstantBuffers()
 	ShaderMeshData meshData = {};
 	cbMeshData = new ConstantBuffer<ShaderMeshData>(&meshData, cbMeshDataRegister);
 	assert(cbMeshData);
+
+	//Mesh light map buffer
+	ShaderMeshLightMapData meshLightMapData{};
+	cbMeshLightMapData = new ConstantBuffer<ShaderMeshLightMapData>(&meshLightMapData, cbMeshLightMapRegister);
+	assert(cbMeshLightMapData);
 
 	//Skinning data
 	ShaderSkinningData skinningData = {};

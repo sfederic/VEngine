@@ -124,7 +124,7 @@ cbuffer cbMeshData : register(b5)
     float cbMeshDataPad;
 }
 
-cbuffer ShaderMeshLightMapData
+cbuffer ShaderMeshLightMapData : register(b6)
 {
     int2 atlasOffset;
     int2 textureSize;
