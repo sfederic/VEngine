@@ -482,7 +482,7 @@ void CreateConstantBuffers()
 	assert(cbMeshData);
 
 	//Mesh light map buffer
-	ShaderMeshLightMapData meshLightMapData{};
+	ShaderMeshLightMapData meshLightMapData;
 	cbMeshLightMapData = new ConstantBuffer<ShaderMeshLightMapData>(&meshLightMapData, cbMeshLightMapRegister);
 	assert(cbMeshLightMapData);
 
@@ -739,6 +739,12 @@ void SetShaderMeshData(MeshComponent* mesh)
 
 	cbMeshData->Map(&meshData);
 	cbMeshData->SetVSAndPS();
+
+	//Light map data
+	ShaderMeshLightMapData meshLightMapData;
+	meshLightMapData = mesh->lightMapData;
+	cbMeshLightMapData->Map(&meshLightMapData);
+	cbMeshLightMapData->SetPS();
 }
 
 void RenderMeshComponents()
