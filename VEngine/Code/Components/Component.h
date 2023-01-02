@@ -28,6 +28,7 @@ public:
 		//props.Add("Name", &name).hide = true;
 		//props.Add("OwnerUID", &ownerUID).hide = true;
 		props.Add(" Enabled", &active);
+		props.Add("UID", &uid).hide = true;
 
 		return props;
 	}
