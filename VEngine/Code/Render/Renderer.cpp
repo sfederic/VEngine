@@ -225,6 +225,8 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	debugLines.emplace_back(Vertex()); //dummy data so DirecX doesn't crash
 	debugLinesBuffer = RenderUtils::CreateDynamicBuffer(debugLinesBufferSize, D3D11_BIND_VERTEX_BUFFER, debugLines.data());
 	debugLines.clear();
+
+	RenderUtils::CreateTexture(lightMap);
 }
 
 void Renderer::Tick()
@@ -1869,6 +1871,9 @@ void LightMapCast()
 	for (int meshIndex = 0; meshIndex < meshes.size(); meshIndex++)
 	{
 		auto& mesh = meshes.at(meshIndex);
+		
+		mesh->lightMapData.atlasOffset = XMINT2(meshIndex * mapWidthOffset, 0);
+		mesh->lightMapData.textureSize = XMINT2(32, 32);
 
 		for (int w = 0; w < mapWidthOffset; w++)
 		{
