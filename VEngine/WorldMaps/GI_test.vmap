@@ -18,11 +18,11 @@ MeshActor
  Enabled
 1
  Position
--6 0 -6
+-3 0 -4
  Rotation
-0.500333 -0.500086 0.49984 -0.499741
+-0.499718 0.499619 0.500455 -0.500208
  Scale
-2 2 2
+0.999995 0.999996 0.999999
 Name
 cube0
 UID
@@ -31,11 +31,11 @@ next
  Enabled
 1
  Position
-0 0 0
+1 0 0
  Rotation
-0.49979 0.50038 -0.499793 0.500037
+0.000119895 0.707402 -0.706812 -0.000120316
  Scale
-2 2 1.99999
+0.999991 0.999993 0.999994
 Name
 MeshActor1
 UID
@@ -69,15 +69,21 @@ Mesh
  Enabled
 1
  Pos
--6 0 -6
+-3 0 -4
  Rot
-0.500333 -0.500086 0.49984 -0.499741
+-0.499718 0.499619 0.500455 -0.500208
  Scale
-2 2 2
+0.999995 0.999996 0.999999
 Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 32
+LMAtlusIndex
+0
+LMTextureSize
+32 32
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -120,15 +126,21 @@ Mesh
  Enabled
 1
  Pos
-0 0 0
+1 0 0
  Rot
-0.49979 0.50038 -0.499793 0.500037
+0.000119895 0.707402 -0.706812 -0.000120316
  Scale
-2 2 1.99999
+0.999991 0.999993 0.999994
 Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+32 32
+LMAtlusIndex
+1
+LMTextureSize
+32 32
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State

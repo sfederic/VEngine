@@ -12,7 +12,12 @@ struct TransformOut
         o.tangent = mul((float3x3)model, i.tangent);
 		
 		float4 newUv = mul(texMatrix, float4(i.uv, 0.f, 1.0f));
-		o.uv = float2(newUv.x, 1.0 - newUv.y);
+        o.uv = float2(newUv.x, 1.0 - newUv.y);
+		
+		//Light map uv offset calc
+        o.uv = o.uv * float2(textureSize) / float2(atlasSize);
+        o.uv.x += (atlasIndex % 2) * float(textureSize.x) / float(atlasSize.x);
+        o.uv.y += (atlasIndex / 2) * float(textureSize.y) / float(atlasSize.y);
 		
 		o.shadowPos = mul(lightMVP, o.posWS);
 		o.instanceID = i.instanceID;

@@ -743,8 +743,10 @@ void SetShaderMeshData(MeshComponent* mesh)
 	//Light map data
 	ShaderMeshLightMapData meshLightMapData;
 	meshLightMapData = mesh->lightMapData;
+	meshLightMapData.atlasSize.x = lightMap.GetWidth();
+	meshLightMapData.atlasSize.y = lightMap.GetHeight();
 	cbMeshLightMapData->Map(&meshLightMapData);
-	cbMeshLightMapData->SetPS();
+	cbMeshLightMapData->SetVS();
 }
 
 void RenderMeshComponents()
@@ -1885,8 +1887,10 @@ void LightMapCast()
 	{
 		auto& mesh = meshes.at(meshIndex);
 		
-		mesh->lightMapData.atlasOffset = XMINT2(meshIndex * mapWidthOffset, 0);
+		mesh->lightMapData.atlasOffset = XMINT2(meshIndex * mapWidthOffset, 32);
 		mesh->lightMapData.textureSize = XMINT2(32, 32);
+		mesh->lightMapData.atlasIndex = meshIndex;
+		mesh->lightMapData.atlasSize = XMINT2(mapWidth, mapHeight);
 
 		for (int w = 0; w < mapWidthOffset; w++)
 		{
