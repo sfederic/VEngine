@@ -68,4 +68,7 @@ public:
 	Buffer* GetIndexBuffer() const;
 
 	Material* GetMaterial() { return material; }
+
+	std::vector<XMFLOAT3> GetAllVertexPositions();
+	std::vector<MeshData::indexDataType> GetAllIndices();
 };

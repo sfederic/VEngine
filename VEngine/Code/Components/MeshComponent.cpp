@@ -174,3 +174,23 @@ Buffer* MeshComponent::GetIndexBuffer() const
 {
 	return pso.indexBuffer;
 }
+
+std::vector<XMFLOAT3> MeshComponent::GetAllVertexPositions()
+{
+	std::vector<XMFLOAT3> positions;
+	for (auto& vertex : *meshDataProxy.vertices)
+	{
+		positions.emplace_back(vertex.pos);
+	}
+	return positions;
+}
+
+std::vector<MeshData::indexDataType> MeshComponent::GetAllIndices()
+{
+	std::vector<MeshData::indexDataType> indices;
+	for (auto index : *meshDataProxy.indices)
+	{
+		indices.push_back(index);
+	}
+	return indices;
+}
