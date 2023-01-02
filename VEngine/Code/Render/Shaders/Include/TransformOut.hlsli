@@ -12,7 +12,7 @@ struct TransformOut
         o.tangent = mul((float3x3)model, i.tangent);
 		
 		float4 newUv = mul(texMatrix, float4(i.uv, 0.f, 1.0f));
-		o.uv = float2(newUv.x, newUv.y);
+		o.uv = float2(newUv.x, 1.0 - newUv.y);
 		
 		o.shadowPos = mul(lightMVP, o.posWS);
 		o.instanceID = i.instanceID;
