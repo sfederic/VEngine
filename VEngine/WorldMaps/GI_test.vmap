@@ -14,7 +14,20 @@ UID
 2386392439
 next
 MeshActor
+2
+ Enabled
 1
+ Position
+-6 0 -6
+ Rotation
+0.500333 -0.500086 0.49984 -0.499741
+ Scale
+2 2 2
+Name
+cube0
+UID
+1020769687
+next
  Enabled
 1
  Position
@@ -24,9 +37,9 @@ MeshActor
  Scale
 2 2 1.99999
 Name
-cube0
+MeshActor1
 UID
-1020769687
+3255237125
 next
 DirectionalLightComponent
 1
@@ -46,10 +59,63 @@ LightEnabled
 1
 ShadowMap Size
 15
+UID
+3478770082
 next
 MeshComponent
-1
+2
 1020769687
+Mesh
+ Enabled
+1
+ Pos
+-6 0 -6
+ Rot
+0.500333 -0.500086 0.49984 -0.499741
+ Scale
+2 2 2
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.fbx
+Static
+1
+Trans. Occlude
+0
+UID
+438597761
+next
+3255237125
 Mesh
  Enabled
 1
@@ -97,5 +163,7 @@ Static
 1
 Trans. Occlude
 0
+UID
+1591624150
 next
 end
