@@ -1990,6 +1990,9 @@ void LightMapCast()
 	std::string lightMapFilename = "Textures/lightmap.bmp";
 	BMPFileWriter::GenerateBitmapImage((unsigned char*)image, mapHeight, mapWidth, lightMapFilename.c_str());
 
+	TextureSystem::RemoveTexture(lightMap.GetFilename());
+	RenderUtils::CreateTexture(lightMap);
+
 	double end = Profile::QuickEnd(start);
 	Log("Lightmap gen took %f", end);
 }
