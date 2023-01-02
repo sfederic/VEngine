@@ -7,6 +7,7 @@
 #include <SHMath/DirectXSH.h>
 #include <WinCodec.h> //For GUID_ContainerFormatJpeg
 #include <filesystem>
+#include <array>
 #include "Debug.h"
 #include "Core.h"
 #include "Log.h"
@@ -180,6 +181,9 @@ const int lightProbeTextureHeight = 64;
 
 ShaderMatrices shaderMatrices;
 ShaderLights shaderLights;
+
+//Test level lightmap
+Texture2D lightMap = Texture2D("lightmap.bmp");
 
 //Debug object containers
 std::vector<DirectX::BoundingOrientedBox> debugOrientedBoxesOnTimerToRender;
@@ -1641,7 +1645,7 @@ void SetRenderPipelineStates(MeshComponent* mesh)
 		context->RSSetState(material->rastState->data);
 	}
 
-	const FLOAT blendState[4] = { 0.f };
+	constexpr FLOAT blendState[4] = { 0.f };
 	context->OMSetBlendState(material->blendState->data, blendState, 0xFFFFFFFF);
 
 	context->VSSetShader(material->GetVertexShader(), nullptr, 0);
@@ -1650,7 +1654,7 @@ void SetRenderPipelineStates(MeshComponent* mesh)
 	context->PSSetSamplers(0, 1, &material->sampler->data);
 	SetShaderResourceFromMaterial(0, material);
 
-	ID3D11ShaderResourceView* lightMapSRV = material->lightMap->GetSRV();
+	ID3D11ShaderResourceView* lightMapSRV = lightMap.GetSRV();
 	context->PSSetShaderResources(lightMapTextureRegister, 1, &lightMapSRV);
 
 	SetVertexBuffer(pso.vertexBuffer);
@@ -1853,19 +1857,24 @@ void LightMapCast()
 {
 	auto start = Profile::QuickStart();
 
-	const int mapWidth = 32;
+	const int mapWidth = 64;
 	const int mapHeight = 32;
 	debugLines.clear();
 
-	for (auto& mesh : MeshComponent::system.GetComponents())
-	{
-		Texel texels[mapWidth][mapHeight];
+	auto texels = new Texel[mapWidth][mapHeight];
 
-		for (int w = 0; w < mapWidth; w++)
+	const int mapWidthOffset = 32;
+
+	auto& meshes = MeshComponent::system.GetComponents();
+	for (int meshIndex = 0; meshIndex < meshes.size(); meshIndex++)
+	{
+		auto& mesh = meshes.at(meshIndex);
+
+		for (int w = 0; w < mapWidthOffset; w++)
 		{
 			for (int h = 0; h < mapHeight; h++)
 			{
-				const float lightMapU = (float)(w + 0.5f) / (float)mapWidth;
+				const float lightMapU = (float)(w + 0.5f) / (float)mapWidthOffset;
 				const float lightMapV = (float)(h + 0.5f) / (float)mapHeight;
 
 				XMFLOAT2 lightMapUV = { lightMapU, lightMapV };
@@ -1878,8 +1887,6 @@ void LightMapCast()
 					MeshData::indexDataType index1 = mesh->meshDataProxy.indices->at(static_cast<std::vector<MeshData::indexDataType, std::allocator<MeshData::indexDataType>>::size_type>(i) * 3 + 1);
 					MeshData::indexDataType index2 = mesh->meshDataProxy.indices->at(static_cast<std::vector<MeshData::indexDataType, std::allocator<MeshData::indexDataType>>::size_type>(i) * 3 + 2);
 
-					//@Todo: need to get these UVs from the UVAtlas instead of the mesh uvs else the mesh uvs
-					//have the potential to overlap on the lightmap which needs all unique UVs.
 					bool uvInTriangle = VMath::IsUVInTriangleUVs(lightMapUV,
 						mesh->meshDataProxy.vertices->at(index0).uv,
 						mesh->meshDataProxy.vertices->at(index1).uv,
@@ -1919,21 +1926,21 @@ void LightMapCast()
 						XMVECTOR raycastOrigin = uvWorldPos + (normal * 0.075f);
 						if (Raycast(hitResult, raycastOrigin, direction, 5.f))
 						{
-							Line debugLine;
-							XMStoreFloat3(&debugLine.p1, raycastOrigin);
-							debugLine.p2 = hitResult.hitPos;
-							Renderer::AddDebugLine(debugLine);
+							//Line debugLine;
+							//XMStoreFloat3(&debugLine.p1, raycastOrigin);
+							//debugLine.p2 = hitResult.hitPos;
+							//Renderer::AddDebugLine(debugLine);
 
 							break;
 						}
 						else
 						{
-							XMStoreFloat4(&texels[w][h].colour, XMVectorSet(1.f, 1.f, 1.f, 1.f));
+							XMStoreFloat4(&texels[w + (meshIndex * mapWidthOffset)][h + (meshIndex * mapWidthOffset)].colour, XMVectorSet(1.f, 1.f, 1.f, 1.f));
 
-							Line debugLine;
-							XMStoreFloat3(&debugLine.p1, raycastOrigin);
-							XMStoreFloat3(&debugLine.p2, raycastOrigin + direction * 5.f);
-							Renderer::AddDebugLine(debugLine);
+							//Line debugLine;
+							//XMStoreFloat3(&debugLine.p1, raycastOrigin);
+							//XMStoreFloat3(&debugLine.p2, raycastOrigin + direction * 5.f);
+							//Renderer::AddDebugLine(debugLine);
 
 							break;
 						}
@@ -1941,20 +1948,25 @@ void LightMapCast()
 				}
 			}
 		}
+	}
 
-		unsigned char image[mapHeight][mapWidth][3]{};
+	auto image = new unsigned char[mapHeight][mapWidth][3]{};
 
-		for (int i = 0; i < mapHeight; i++) {
-			for (int j = 0; j < mapWidth; j++) {
+	for (int meshIndex = 0; meshIndex < meshes.size(); meshIndex++)
+	{
+		for (int i = 0; i < mapHeight; i++) 
+		{
+			for (int j = 0; j < mapWidth; j++) 
+			{
 				image[i][j][2] = (unsigned char)(texels[j][i].colour.x * 255); //R
 				image[i][j][1] = (unsigned char)(texels[j][i].colour.y * 255); //G         
 				image[i][j][0] = (unsigned char)(texels[j][i].colour.z * 255); //B
 			}
 		}
-
-		std::string lightMapFilename = "Textures/" + std::to_string(mesh->GetUID()) + ".bmp";
-		BMPFileWriter::GenerateBitmapImage((unsigned char*)image, mapHeight, mapWidth, lightMapFilename.c_str());
 	}
+
+	std::string lightMapFilename = "Textures/lightmap.bmp";
+	BMPFileWriter::GenerateBitmapImage((unsigned char*)image, mapHeight, mapWidth, lightMapFilename.c_str());
 
 	double end = Profile::QuickEnd(start);
 	Log("Lightmap gen took %f", end);

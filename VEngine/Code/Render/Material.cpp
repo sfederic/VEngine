@@ -154,11 +154,6 @@ Properties Material::GetProps()
 	return props;
 }
 
-void Material::CreateLightMap(std::string filename)
-{
-	lightMap = TextureSystem::FindTexture2D(filename);
-}
-
 ID3D11VertexShader* Material::GetVertexShader()
 {
 	return shader->GetVertexShader();
