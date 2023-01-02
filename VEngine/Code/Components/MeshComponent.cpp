@@ -126,6 +126,9 @@ Properties MeshComponent::GetProps()
 	props.Add("Grid Obstacle", &gridObstacle);
 	props.Add("Trans. Occlude", &transparentOcclude);
 
+	props.Add("LMAtlasOffset", &lightMapData.atlasOffset);
+	props.Add("LMTextureSize", &lightMapData.textureSize);
+
 	auto materialProps = material->GetProps();
 	props.Merge(materialProps);
 

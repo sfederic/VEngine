@@ -26,6 +26,7 @@ public:
 	Material* material = nullptr;
 	MeshDataProxy meshDataProxy;
 	PipelineStateObject pso;
+	ShaderMeshLightMapData lightMapData;
 
 	//@Todo: think about splitting this up and currentAnimationTime into an AnimatedMeshComponent or something.
 	Skeleton* GetSkeleton() { return meshDataProxy.skeleton; }
