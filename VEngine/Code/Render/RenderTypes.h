@@ -199,7 +199,7 @@ struct ShaderMeshLightMapData
 	XMINT2 textureSize = XMINT2(0, 0); //Size of the texture at the atlas offset
 	XMINT2 atlasSize = XMINT2(0, 0); //@Todo: this is wasteful. Can it be done another way?
 	int atlasIndex = 0;
-	int padding;
+	int padding = 0;
 };
 
 struct InstanceData
