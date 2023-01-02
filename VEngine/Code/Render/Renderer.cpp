@@ -181,8 +181,6 @@ const int lightProbeTextureHeight = 64;
 ShaderMatrices shaderMatrices;
 ShaderLights shaderLights;
 
-Texture2D lightMap = Texture2D("test.bmp");
-
 //Debug object containers
 std::vector<DirectX::BoundingOrientedBox> debugOrientedBoxesOnTimerToRender;
 std::vector<Vertex> debugLines;
@@ -223,8 +221,6 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	debugLines.emplace_back(Vertex()); //dummy data so DirecX doesn't crash
 	debugLinesBuffer = RenderUtils::CreateDynamicBuffer(debugLinesBufferSize, D3D11_BIND_VERTEX_BUFFER, debugLines.data());
 	debugLines.clear();
-
-	RenderUtils::CreateTexture(lightMap);
 }
 
 void Renderer::Tick()
@@ -1654,7 +1650,7 @@ void SetRenderPipelineStates(MeshComponent* mesh)
 	context->PSSetSamplers(0, 1, &material->sampler->data);
 	SetShaderResourceFromMaterial(0, material);
 
-	ID3D11ShaderResourceView* lightMapSRV = lightMap.GetSRV();
+	ID3D11ShaderResourceView* lightMapSRV = material->lightMap->GetSRV();
 	context->PSSetShaderResources(lightMapTextureRegister, 1, &lightMapSRV);
 
 	SetVertexBuffer(pso.vertexBuffer);
@@ -1859,105 +1855,106 @@ void LightMapCast()
 
 	const int mapWidth = 32;
 	const int mapHeight = 32;
-	Texel texels[mapWidth][mapHeight];
 	debugLines.clear();
 
-	for (int w = 0; w < mapWidth; w++)
+	for (auto& mesh : MeshComponent::system.GetComponents())
 	{
-		for (int h = 0; h < mapHeight; h++)
+		Texel texels[mapWidth][mapHeight];
+
+		for (int w = 0; w < mapWidth; w++)
 		{
-			const float lightMapU = (float)(w + 0.5f) / (float)mapWidth;
-			const float lightMapV = (float)(h + 0.5f) / (float)mapHeight;
-
-			XMFLOAT2 lightMapUV = { lightMapU, lightMapV };
-
-			auto mesh = MeshComponent::system.GetFirstComponent();
-			XMMATRIX model = mesh->GetWorldMatrix();
-
-			for (int i = 0; i < mesh->meshDataProxy.vertices->size() / 3; i++)
+			for (int h = 0; h < mapHeight; h++)
 			{
-				MeshData::indexDataType index0 = mesh->meshDataProxy.indices->at(static_cast<std::vector<MeshData::indexDataType, std::allocator<MeshData::indexDataType>>::size_type>(i) * 3);
-				MeshData::indexDataType index1 = mesh->meshDataProxy.indices->at(static_cast<std::vector<MeshData::indexDataType, std::allocator<MeshData::indexDataType>>::size_type>(i) * 3 + 1);
-				MeshData::indexDataType index2 = mesh->meshDataProxy.indices->at(static_cast<std::vector<MeshData::indexDataType, std::allocator<MeshData::indexDataType>>::size_type>(i) * 3 + 2);
+				const float lightMapU = (float)(w + 0.5f) / (float)mapWidth;
+				const float lightMapV = (float)(h + 0.5f) / (float)mapHeight;
 
-				//@Todo: need to get these UVs from the UVAtlas instead of the mesh uvs else the mesh uvs
-				//have the potential to overlap on the lightmap which needs all unique UVs.
-				bool uvInTriangle = VMath::IsUVInTriangleUVs(lightMapUV,
-					mesh->meshDataProxy.vertices->at(index0).uv,
-					mesh->meshDataProxy.vertices->at(index1).uv,
-					mesh->meshDataProxy.vertices->at(index2).uv);
+				XMFLOAT2 lightMapUV = { lightMapU, lightMapV };
 
-				if (uvInTriangle)
+				XMMATRIX model = mesh->GetWorldMatrix();
+
+				for (int i = 0; i < mesh->meshDataProxy.vertices->size() / 3; i++)
 				{
-					Vertex tri[3] = {
-						mesh->meshDataProxy.vertices->at(index0),
-						mesh->meshDataProxy.vertices->at(index1),
-						mesh->meshDataProxy.vertices->at(index2)
-					};
+					MeshData::indexDataType index0 = mesh->meshDataProxy.indices->at(static_cast<std::vector<MeshData::indexDataType, std::allocator<MeshData::indexDataType>>::size_type>(i) * 3);
+					MeshData::indexDataType index1 = mesh->meshDataProxy.indices->at(static_cast<std::vector<MeshData::indexDataType, std::allocator<MeshData::indexDataType>>::size_type>(i) * 3 + 1);
+					MeshData::indexDataType index2 = mesh->meshDataProxy.indices->at(static_cast<std::vector<MeshData::indexDataType, std::allocator<MeshData::indexDataType>>::size_type>(i) * 3 + 2);
 
-					XMVECTOR v0 = XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index0).pos);
-					v0 = XMVector3TransformCoord(v0, model);
-					XMVECTOR v1 = XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index1).pos);
-					v1 = XMVector3TransformCoord(v1, model);
-					XMVECTOR v2 = XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index2).pos);
-					v2 = XMVector3TransformCoord(v2, model);
+					//@Todo: need to get these UVs from the UVAtlas instead of the mesh uvs else the mesh uvs
+					//have the potential to overlap on the lightmap which needs all unique UVs.
+					bool uvInTriangle = VMath::IsUVInTriangleUVs(lightMapUV,
+						mesh->meshDataProxy.vertices->at(index0).uv,
+						mesh->meshDataProxy.vertices->at(index1).uv,
+						mesh->meshDataProxy.vertices->at(index2).uv);
 
-					XMStoreFloat3(&tri[0].pos, v0);
-					XMStoreFloat3(&tri[1].pos, v1);
-					XMStoreFloat3(&tri[2].pos, v2);
-
-					XMVECTOR uvWorldPos = VMath::TriangleUVToXYZ(lightMapUV, tri);
-					XMStoreFloat3(&texels[w][h].pos, uvWorldPos);
-
-					auto dLight = DirectionalLightComponent::system.GetFirstComponent();
-					XMVECTOR direction = -dLight->GetForwardVectorV();
-					HitResult hitResult;
-
-					XMVECTOR triV1 = XMVector3Normalize(v0) - XMVector3Normalize(v1);
-					XMVECTOR triV2 = XMVector3Normalize(v0) - XMVector3Normalize(v2);
-					XMVECTOR normal = XMVector3Normalize(XMVector3Cross(triV1, triV2));
-
-					//Give small offset to raycast origin by its normal so mesh isn't always hitting itself.
-					XMVECTOR raycastOrigin = uvWorldPos + (normal * 0.075f);
-					if (Raycast(hitResult, raycastOrigin, direction, 5.f))
+					if (uvInTriangle)
 					{
-						Line debugLine;
-						XMStoreFloat3(&debugLine.p1, raycastOrigin);
-						debugLine.p2 = hitResult.hitPos;
-						Renderer::AddDebugLine(debugLine);
+						Vertex tri[3] = {
+							mesh->meshDataProxy.vertices->at(index0),
+							mesh->meshDataProxy.vertices->at(index1),
+							mesh->meshDataProxy.vertices->at(index2)
+						};
 
-						break;
-					}
-					else
-					{
-						XMStoreFloat4(&texels[w][h].colour, XMVectorSet(1.f, 1.f, 1.f, 1.f));
+						XMVECTOR v0 = XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index0).pos);
+						v0 = XMVector3TransformCoord(v0, model);
+						XMVECTOR v1 = XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index1).pos);
+						v1 = XMVector3TransformCoord(v1, model);
+						XMVECTOR v2 = XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index2).pos);
+						v2 = XMVector3TransformCoord(v2, model);
 
-						Line debugLine;
-						XMStoreFloat3(&debugLine.p1, raycastOrigin);
-						XMStoreFloat3(&debugLine.p2, raycastOrigin + direction * 5.f);
-						Renderer::AddDebugLine(debugLine);
+						XMStoreFloat3(&tri[0].pos, v0);
+						XMStoreFloat3(&tri[1].pos, v1);
+						XMStoreFloat3(&tri[2].pos, v2);
 
-						break;
+						XMVECTOR uvWorldPos = VMath::TriangleUVToXYZ(lightMapUV, tri);
+						XMStoreFloat3(&texels[w][h].pos, uvWorldPos);
+
+						auto dLight = DirectionalLightComponent::system.GetFirstComponent();
+						XMVECTOR direction = -dLight->GetForwardVectorV();
+						HitResult hitResult;
+
+						XMVECTOR triV1 = XMVector3Normalize(v0) - XMVector3Normalize(v1);
+						XMVECTOR triV2 = XMVector3Normalize(v0) - XMVector3Normalize(v2);
+						XMVECTOR normal = XMVector3Normalize(XMVector3Cross(triV1, triV2));
+
+						//Give small offset to raycast origin by its normal so mesh isn't always hitting itself.
+						XMVECTOR raycastOrigin = uvWorldPos + (normal * 0.075f);
+						if (Raycast(hitResult, raycastOrigin, direction, 5.f))
+						{
+							Line debugLine;
+							XMStoreFloat3(&debugLine.p1, raycastOrigin);
+							debugLine.p2 = hitResult.hitPos;
+							Renderer::AddDebugLine(debugLine);
+
+							break;
+						}
+						else
+						{
+							XMStoreFloat4(&texels[w][h].colour, XMVectorSet(1.f, 1.f, 1.f, 1.f));
+
+							Line debugLine;
+							XMStoreFloat3(&debugLine.p1, raycastOrigin);
+							XMStoreFloat3(&debugLine.p2, raycastOrigin + direction * 5.f);
+							Renderer::AddDebugLine(debugLine);
+
+							break;
+						}
 					}
 				}
 			}
 		}
-	}
 
-	unsigned char image[mapHeight][mapWidth][3]{};
+		unsigned char image[mapHeight][mapWidth][3]{};
 
-	for (int i = 0; i < mapHeight; i++) {
-		for (int j = 0; j < mapWidth; j++) {
-			image[i][j][2] = (unsigned char)(texels[j][i].colour.x * 255); //R
-			image[i][j][1] = (unsigned char)(texels[j][i].colour.y * 255); //G         
-			image[i][j][0] = (unsigned char)(texels[j][i].colour.z * 255); //B
+		for (int i = 0; i < mapHeight; i++) {
+			for (int j = 0; j < mapWidth; j++) {
+				image[i][j][2] = (unsigned char)(texels[j][i].colour.x * 255); //R
+				image[i][j][1] = (unsigned char)(texels[j][i].colour.y * 255); //G         
+				image[i][j][0] = (unsigned char)(texels[j][i].colour.z * 255); //B
+			}
 		}
+
+		std::string lightMapFilename = "Textures/" + std::to_string(mesh->GetUID()) + ".bmp";
+		BMPFileWriter::GenerateBitmapImage((unsigned char*)image, mapHeight, mapWidth, lightMapFilename.c_str());
 	}
-
-	BMPFileWriter::GenerateBitmapImage((unsigned char*)image, mapHeight, mapWidth, "Textures/test.bmp");
-
-	TextureSystem::RemoveTexture(lightMap.GetFilename());
-	RenderUtils::CreateTexture(lightMap);
 
 	double end = Profile::QuickEnd(start);
 	Log("Lightmap gen took %f", end);

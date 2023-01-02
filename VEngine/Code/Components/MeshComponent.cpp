@@ -72,6 +72,8 @@ void MeshComponent::Create()
 
 	//Material's create needs to be called here to deal with serialisation
 	material->Create();
+	std::string lightMapFilename = std::to_string(GetUID()) + ".bmp";
+	material->CreateLightMap(lightMapFilename);
 
 	//Import mesh (bounds extents set up in here too)
 	FBXLoader::Import(meshComponentData.filename.c_str(), meshDataProxy);

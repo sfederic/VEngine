@@ -39,6 +39,7 @@ private:
 
 public:
 	Texture2D* texture = nullptr;
+	Texture2D* lightMap = nullptr;
 	ShaderItem* shader = nullptr;
 	Sampler* sampler = nullptr;
 	RastState* rastState = nullptr;
@@ -62,6 +63,8 @@ public:
 	virtual void Destroy();
 
 	virtual Properties GetProps();
+
+	void CreateLightMap(std::string filename);
 
 	ID3D11VertexShader* GetVertexShader();
 	ID3D11PixelShader* GetPixelShader();
