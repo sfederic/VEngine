@@ -144,6 +144,11 @@ Serialiser::Serialiser(const std::string filename_, const OpenMode mode_) :
 		ss << name << "\n" << value->x << " " << value->y << "\n";
 	};
 
+	typeToWriteFuncMap[typeid(XMINT2)] = [&](Property& prop, std::wstring& name) {
+		auto value = prop.GetData<XMINT2>();
+		ss << name << "\n" << value->x << " " << value->y << "\n";
+	};
+
 	typeToWriteFuncMap[typeid(XMFLOAT3)] = [&](Property& prop, std::wstring& name) {
 		auto value = prop.GetData<XMFLOAT3>();
 		ss << name << "\n" << value->x << " " << value->y << " " << value->z << "\n"; 
@@ -245,6 +250,12 @@ Deserialiser::Deserialiser(const std::string filename, const OpenMode mode)
 		auto float2 = prop.GetData<XMFLOAT2>();
 		is >> float2->x;
 		is >> float2->y;
+	};
+
+	typeToReadFuncMap[typeid(XMINT2)] = [&](Property& prop) {
+		auto int2 = prop.GetData<XMINT2>();
+		is >> int2->x;
+		is >> int2->y;
 	};
 
 	typeToReadFuncMap[typeid(XMFLOAT3)] = [&](Property& prop) {
