@@ -132,9 +132,6 @@ void DuplicateActor()
 				//Make a new UID for the actor
 				const UID newActorOriginalUID = newDuplicateActor->GetUID();
 
-				//Remove actor over UID and name conflicts, then back into world again later
-				World::RemoveActorFromWorld(newActorOriginalName);
-
 				//Copy values across
 				auto oldProps = pickedActor->GetAllProps();
 				auto newProps = newDuplicateActor->GetAllProps();
