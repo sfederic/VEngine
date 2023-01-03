@@ -382,6 +382,11 @@ namespace VMath
         return result;
     }
 
+    float InverseLerp(float x, float y, float value)
+    {
+        return (value - x) / (y - x);
+    }
+
     XMFLOAT3 Float3Subtract(XMFLOAT3& f0, XMFLOAT3& f1)
     {
         return XMFLOAT3(f0.x - f1.x, f0.y - f1.y, f0.z - f1.z);

@@ -70,6 +70,7 @@ namespace VMath
 
 	float RandomRange(float min, float max);
 	int RandomRangeInt(int min, int max);
+	float InverseLerp(float x, float y, float value);
 
 	XMFLOAT3 Float3Subtract(XMFLOAT3& f0, XMFLOAT3& f1);
 	XMFLOAT2 Float2Subtract(XMFLOAT2& f0, XMFLOAT2& f1);
