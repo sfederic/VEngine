@@ -1943,6 +1943,7 @@ void LightMapCast()
 						XMVECTOR uvWorldPos = VMath::TriangleUVToXYZ(lightMapUV, tri);
 						XMStoreFloat3(&texels[w][h].pos, uvWorldPos);
 
+						//@Todo: consolidate direction and point light code here
 						for (auto& directionalLight : DirectionalLightComponent::system.GetComponents())
 						{
 							XMVECTOR direction = -directionalLight->GetForwardVectorV();
