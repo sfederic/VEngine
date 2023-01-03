@@ -194,6 +194,9 @@ struct ShaderPostProcessData
 
 struct ShaderMeshLightMapData
 {
+	//Make sure none of the values are more than the atlus' size
+	void AssertValues();
+
 	XMINT2 atlasOffset = XMINT2(0, 0); //The x and y pixel offset into the texture 
 	XMINT2 textureSize = XMINT2(0, 0); //Size of the texture at the atlas offset
 	XMINT2 atlasSize = XMINT2(0, 0);

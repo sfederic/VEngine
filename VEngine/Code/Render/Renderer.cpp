@@ -745,6 +745,8 @@ void SetShaderMeshData(MeshComponent* mesh)
 	meshLightMapData = mesh->lightMapData;
 	meshLightMapData.atlasSize.x = lightMap.GetWidth();
 	meshLightMapData.atlasSize.y = lightMap.GetHeight();
+	meshLightMapData.AssertValues();
+
 	cbMeshLightMapData->Map(&meshLightMapData);
 	cbMeshLightMapData->SetVS();
 }
@@ -1874,7 +1876,7 @@ void LightMapCast()
 {
 	auto start = Profile::QuickStart();
 
-	const int mapWidth = 64;
+	const int mapWidth = 128;
 	const int mapHeight = 32;
 	debugLines.clear();
 
@@ -1890,12 +1892,7 @@ void LightMapCast()
 		mesh->lightMapData.atlasOffset = XMINT2(meshIndex * mapWidthOffset, 0);
 		mesh->lightMapData.textureSize = XMINT2(32, 32);
 		mesh->lightMapData.atlasSize = XMINT2(mapWidth, mapHeight);
-
-		assert(mesh->lightMapData.atlasOffset.x <= mesh->lightMapData.atlasSize.x);
-		assert(mesh->lightMapData.atlasOffset.y <= mesh->lightMapData.atlasSize.y);
-
-		assert(mesh->lightMapData.textureSize.x <= mesh->lightMapData.atlasSize.x);
-		assert(mesh->lightMapData.textureSize.y <= mesh->lightMapData.atlasSize.y);
+		mesh->lightMapData.AssertValues();
 
 		for (int w = 0; w < mapWidthOffset; w++)
 		{
