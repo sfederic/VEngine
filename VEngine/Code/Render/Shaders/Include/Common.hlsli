@@ -17,6 +17,7 @@ struct VS_IN
     float3 normal : NORMAL;
     float3 tangent : TANGENT;
     float2 uv : TEXCOORD;
+    float2 lightMapUV : LM_TEXCOORD;
     uint4 boneIndices : BONEINDICES;
     float3 weights : WEIGHTS;
     uint instanceID : SV_InstanceID;
@@ -29,6 +30,7 @@ struct VS_OUT
     float3 normal : NORMAL;
 	float3 tangent : TANGENT0;
     float2 uv : TEXCOORD0;
+    float2 lightMapUV : LM_TEXCOORD;
     float4 shadowPos : TEXCOORD1;
     uint instanceID : SV_InstanceID;
 };

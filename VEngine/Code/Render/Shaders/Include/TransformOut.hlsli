@@ -24,8 +24,7 @@ struct TransformOut
         float xmax = InverseLerp(0, atlasSize.x, atlasSegmentOffset.x + atlasSegmentSize.x);
         float ymax = InverseLerp(0, atlasSize.y, atlasSegmentOffset.y + atlasSegmentSize.y);
 		
-        o.uv.x = lerp(xmin, xmax, o.uv.x);
-        o.uv.y = lerp(ymin, ymax, o.uv.y);
+        o.lightMapUV = float2(lerp(xmin, xmax, o.uv.x), lerp(ymin, ymax, o.uv.y));
 		
 		o.shadowPos = mul(lightMVP, o.posWS);
 		o.instanceID = i.instanceID;
