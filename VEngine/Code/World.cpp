@@ -257,9 +257,6 @@ void World::AddActorToWorld(Actor* actor)
 	std::string actorName = actor->GetName();
 	UID actorUID = actor->GetUID();
 
-	assert(actorUIDMap.find(actorUID) == actorUIDMap.end());
-	assert(actorNameMap.find(actorName) == actorNameMap.end());
-
 	actorUIDMap.emplace(actorUID, actor);
 	actorNameMap.emplace(actorName, actor);
 }
