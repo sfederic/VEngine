@@ -15,9 +15,15 @@ struct TransformOut
         o.uv = float2(newUv.x, 1.0 - newUv.y);
 		
 		//Light map uv offset calc
-        o.uv = o.uv * float2(textureSize) / float2(atlasSize);
-        o.uv.x += (atlasIndex % 2) * float(textureSize.x) / float(atlasSize.x);
-        o.uv.y += (atlasIndex / 2) * float(textureSize.y) / float(atlasSize.y);
+		//Ref: https://gamedev.stackexchange.com/questions/110448/how-to-convert-uv-position-to-texture-atlas-pos-and-reapply-to-uv-in-unity
+		//Mins unused. Keeping around just in case.
+        //float xmin = InverseLerp(0, atlasSize.x, atlasSegmentOffset.x);
+        //float ymin = InverseLerp(0, atlasSize.y, atlasSegmentOffset.y);
+        float xmax = InverseLerp(0, atlasSize.x, atlasSegmentOffset.x + atlasSegmentSize.x);
+        float ymax = InverseLerp(0, atlasSize.y, atlasSegmentOffset.y + atlasSegmentSize.y);
+		
+        o.uv.x *= xmax;
+        o.uv.y *= ymax;
 		
 		o.shadowPos = mul(lightMVP, o.posWS);
 		o.instanceID = i.instanceID;
