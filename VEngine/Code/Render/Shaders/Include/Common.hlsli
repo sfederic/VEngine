@@ -372,4 +372,9 @@ float3 CalcBumpNormalFromTangentBitangent(float3 normal, float3 tangent, float2 
     return bumpNormal;
 }
 
+float InverseLerp(float x, float y, float value)
+{
+    return (value - x) / (y - x);
+}
+
 #endif 
