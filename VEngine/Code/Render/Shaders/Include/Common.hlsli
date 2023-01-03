@@ -126,10 +126,9 @@ cbuffer cbMeshData : register(b5)
 
 cbuffer ShaderMeshLightMapData : register(b6)
 {
-    int2 atlasOffset;
-    int2 textureSize;
+    int2 atlasSegmentOffset;
+    int2 atlasSegmentSize;
     int2 atlasSize;
-    int atlasIndex;
 };
 
 //Stole all this from https://interplayoflight.wordpress.com/2021/12/31/occlusion-and-directionality-in-image-based-lighting-implementation-details/ for simple diffuse testing.

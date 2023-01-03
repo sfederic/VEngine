@@ -1889,7 +1889,6 @@ void LightMapCast()
 		
 		mesh->lightMapData.atlasOffset = XMINT2(meshIndex * mapWidthOffset, 32);
 		mesh->lightMapData.textureSize = XMINT2(32, 32);
-		mesh->lightMapData.atlasIndex = meshIndex;
 		mesh->lightMapData.atlasSize = XMINT2(mapWidth, mapHeight);
 
 		for (int w = 0; w < mapWidthOffset; w++)

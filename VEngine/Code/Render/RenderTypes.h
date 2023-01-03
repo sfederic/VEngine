@@ -192,14 +192,12 @@ struct ShaderPostProcessData
 	float linearWhitePointValue = 3.3f;
 };
 
-//This struct assumes all the textures in the lightmap are packed by rects, not by uv charting.
 struct ShaderMeshLightMapData
 {
 	XMINT2 atlasOffset = XMINT2(0, 0); //The x and y pixel offset into the texture 
 	XMINT2 textureSize = XMINT2(0, 0); //Size of the texture at the atlas offset
-	XMINT2 atlasSize = XMINT2(0, 0); //@Todo: this is wasteful. Can it be done another way?
-	int atlasIndex = 0;
-	int padding = 0;
+	XMINT2 atlasSize = XMINT2(0, 0);
+	XMINT2 padding{};
 };
 
 struct InstanceData
