@@ -1877,7 +1877,7 @@ void LightMapCast()
 {
 	auto start = Profile::QuickStart();
 
-	const int mapWidth = 128;
+	const int mapWidth = 512;
 	const int mapHeight = 32;
 	debugLines.clear();
 
@@ -2008,6 +2008,9 @@ void LightMapCast()
 		}
 	}
 
+	//@Todo: the fucking .bmp file format being upside down (i.e. 0,0 being bottom left)
+	//is fucking up the lightmap uvs because the for loop sets them from topleft to bottomright.
+	//Either reverse the texture offset or use different file format.
 	auto image = new unsigned char[mapHeight][mapWidth][3]{};
 
 	for (int i = 0; i < mapHeight; i++) 
