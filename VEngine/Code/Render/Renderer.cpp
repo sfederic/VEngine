@@ -1936,17 +1936,18 @@ void LightMapCast()
 						XMStoreFloat3(&tri[1].pos, v1);
 						XMStoreFloat3(&tri[2].pos, v2);
 
+						XMVECTOR triV1 = XMVector3Normalize(v0) - XMVector3Normalize(v1);
+						XMVECTOR triV2 = XMVector3Normalize(v0) - XMVector3Normalize(v2);
+						XMVECTOR normal = XMVector3Normalize(XMVector3Cross(triV1, triV2));
+
 						XMVECTOR uvWorldPos = VMath::TriangleUVToXYZ(lightMapUV, tri);
 						XMStoreFloat3(&texels[w][h].pos, uvWorldPos);
 
 						for (auto& directionalLight : DirectionalLightComponent::system.GetComponents())
 						{
 							XMVECTOR direction = -directionalLight->GetForwardVectorV();
-							HitResult hitResult;
 
-							XMVECTOR triV1 = XMVector3Normalize(v0) - XMVector3Normalize(v1);
-							XMVECTOR triV2 = XMVector3Normalize(v0) - XMVector3Normalize(v2);
-							XMVECTOR normal = XMVector3Normalize(XMVector3Cross(triV1, triV2));
+							HitResult hitResult;
 
 							//Give small offset to raycast origin by its normal so mesh isn't always hitting itself.
 							XMVECTOR raycastOrigin = uvWorldPos + (normal * 0.05f);
@@ -1966,6 +1967,35 @@ void LightMapCast()
 								Line debugLine;
 								XMStoreFloat3(&debugLine.p1, raycastOrigin);
 								XMStoreFloat3(&debugLine.p2, raycastOrigin + direction * 5.f);
+								Renderer::AddDebugLine(debugLine);
+
+								break;
+							}
+						}
+
+						for (auto& pointLight : PointLightComponent::system.GetComponents())
+						{
+							XMVECTOR pointLightPositon = pointLight->GetWorldPositionV();
+							HitResult hitResult;
+
+							//Give small offset to raycast origin by its normal so mesh isn't always hitting itself.
+							XMVECTOR raycastOrigin = uvWorldPos + (normal * 0.05f);
+							if (Raycast(hitResult, raycastOrigin, pointLightPositon))
+							{
+								Line debugLine;
+								XMStoreFloat3(&debugLine.p1, raycastOrigin);
+								debugLine.p2 = hitResult.hitPos;
+								Renderer::AddDebugLine(debugLine);
+
+								break;
+							}
+							else
+							{
+								XMStoreFloat4(&texels[w + (meshIndex * mapWidthOffset)][h].colour, XMVectorSet(1.f, 1.f, 1.f, 1.f));
+
+								Line debugLine;
+								XMStoreFloat3(&debugLine.p1, raycastOrigin);
+								XMStoreFloat3(&debugLine.p2, pointLightPositon);
 								Renderer::AddDebugLine(debugLine);
 
 								break;
