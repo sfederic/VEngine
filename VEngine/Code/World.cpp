@@ -272,14 +272,14 @@ void World::RemoveActorFromWorld(Actor* actor)
 
 void World::RemoveActorFromWorld(UID actorUID)
 {
-	Actor* actor = actorUIDMap[actorUID];
+	Actor* actor = actorUIDMap.find(actorUID)->second;
 	actorNameMap.erase(actor->GetName());
 	actorUIDMap.erase(actorUID);
 }
 
 void World::RemoveActorFromWorld(std::string actorName)
 {
-	Actor* actor = actorNameMap[actorName];
+	Actor* actor = actorNameMap.find(actorName)->second;
 	actorUIDMap.erase(actor->GetUID());
 	actorNameMap.erase(actorName);
 }
