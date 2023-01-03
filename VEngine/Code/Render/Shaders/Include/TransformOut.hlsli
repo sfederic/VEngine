@@ -14,16 +14,15 @@ struct TransformOut
 		float4 newUv = mul(texMatrix, float4(i.uv, 0.f, 1.0f));
         o.uv = float2(newUv.x, 1.0 - newUv.y);
 		
-		//Light map uv offset calc
-		//Ref: https://gamedev.stackexchange.com/questions/110448/how-to-convert-uv-position-to-texture-atlas-pos-and-reapply-to-uv-in-unity
-		//Mins unused. Keeping around just in case.
-        //float xmin = InverseLerp(0, atlasSize.x, atlasSegmentOffset.x);
-        //float ymin = InverseLerp(0, atlasSize.y, atlasSegmentOffset.y);
+		//Light map uv offset calc (this took forever to figure out with the lerp() and inverse_lerp()).
+		//Ref:https://gamedev.stackexchange.com/questions/110448/how-to-convert-uv-position-to-texture-atlas-pos-and-reapply-to-uv-in-unity
+        float xmin = InverseLerp(0, atlasSize.x, atlasSegmentOffset.x);
+        float ymin = InverseLerp(0, atlasSize.y, atlasSegmentOffset.y);
         float xmax = InverseLerp(0, atlasSize.x, atlasSegmentOffset.x + atlasSegmentSize.x);
         float ymax = InverseLerp(0, atlasSize.y, atlasSegmentOffset.y + atlasSegmentSize.y);
 		
-        o.uv.x *= xmax;
-        o.uv.y *= ymax;
+        o.uv.x = lerp(xmin, xmax, o.uv.x);
+        o.uv.y = lerp(ymin, ymax, o.uv.y);
 		
 		o.shadowPos = mul(lightMVP, o.posWS);
 		o.instanceID = i.instanceID;
