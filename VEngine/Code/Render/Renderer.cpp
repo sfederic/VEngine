@@ -1891,6 +1891,12 @@ void LightMapCast()
 		mesh->lightMapData.textureSize = XMINT2(32, 32);
 		mesh->lightMapData.atlasSize = XMINT2(mapWidth, mapHeight);
 
+		assert(mesh->lightMapData.atlasOffset.x <= mesh->lightMapData.atlasSize.x);
+		assert(mesh->lightMapData.atlasOffset.y <= mesh->lightMapData.atlasSize.y);
+
+		assert(mesh->lightMapData.textureSize.x <= mesh->lightMapData.atlasSize.x);
+		assert(mesh->lightMapData.textureSize.y <= mesh->lightMapData.atlasSize.y);
+
 		for (int w = 0; w < mapWidthOffset; w++)
 		{
 			for (int h = 0; h < mapHeight; h++)
