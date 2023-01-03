@@ -1866,7 +1866,7 @@ void Renderer::AddDebugLine(Line& line)
 
 struct Texel
 {
-	XMFLOAT4 colour = XMFLOAT4(0.f, 0.f, 0.f, 1.f);
+	XMFLOAT4 colour = XMFLOAT4(0.3f, 0.3f, 0.3f, 1.f);
 	XMFLOAT3 pos = XMFLOAT3(0.f, 0.f, 0.f);
 };
 
@@ -1887,7 +1887,7 @@ void LightMapCast()
 	{
 		auto& mesh = meshes.at(meshIndex);
 		
-		mesh->lightMapData.atlasOffset = XMINT2(meshIndex * mapWidthOffset, 32);
+		mesh->lightMapData.atlasOffset = XMINT2(meshIndex * mapWidthOffset, 0);
 		mesh->lightMapData.textureSize = XMINT2(32, 32);
 		mesh->lightMapData.atlasSize = XMINT2(mapWidth, mapHeight);
 
@@ -1956,12 +1956,12 @@ void LightMapCast()
 						}
 						else
 						{
-							XMStoreFloat4(&texels[w + (meshIndex * mapWidthOffset)][h + (meshIndex * mapWidthOffset)].colour, XMVectorSet(1.f, 1.f, 1.f, 1.f));
+							XMStoreFloat4(&texels[w + (meshIndex * mapWidthOffset)][h].colour, XMVectorSet(1.f, 1.f, 1.f, 1.f));
 
-							//Line debugLine;
-							//XMStoreFloat3(&debugLine.p1, raycastOrigin);
-							//XMStoreFloat3(&debugLine.p2, raycastOrigin + direction * 5.f);
-							//Renderer::AddDebugLine(debugLine);
+							/*Line debugLine;
+							XMStoreFloat3(&debugLine.p1, raycastOrigin);
+							XMStoreFloat3(&debugLine.p2, raycastOrigin + direction * 5.f);
+							Renderer::AddDebugLine(debugLine);*/
 
 							break;
 						}
