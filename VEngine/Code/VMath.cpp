@@ -464,4 +464,26 @@ namespace VMath
 
         return ((r <= 1.f) && (t <= 1.f) && (r + t <= 1.f));
     }
+
+    void TriangleXYZToUV(Vertex& v0, Vertex& v1, Vertex& v2, XMVECTOR hitPoint, float& u, float& v)
+    {
+        XMVECTOR p0 = XMLoadFloat3(&v0.pos);
+        XMVECTOR p1 = XMLoadFloat3(&v1.pos);
+        XMVECTOR p2 = XMLoadFloat3(&v2.pos);
+
+        float b1, b2;
+        GetBarycentricCoords(p0, p1, p2, hitPoint, b1, b2);
+
+        float u_v0 = v0.uv.x;
+        float u_v1 = v1.uv.x;
+        float u_v2 = v2.uv.x;
+
+        float v_v0 = v0.uv.y;
+        float v_v1 = v1.uv.y;
+        float v_v2 = v2.uv.y;
+
+        const float b0 = 1.f - b1 - b2;
+        u = b0 * u_v0 + b1 * u_v1 + b2 * u_v2;
+        v = b0 * v_v0 + b1 * v_v1 + b2 * v_v2;
+    }
 }
