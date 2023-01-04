@@ -169,9 +169,9 @@ void DiffuseProbeMap::SetProbeVisualColourFromIrradiance(ProbeData& pb, Instance
 	constexpr float SQRT_15 = 3.8729833462f;
 	constexpr float SQRT_3 = 1.7320508076f;
 
-	const float AO = 0.75f;
+	constexpr float AO = 0.75f;
 
-	float Y[9] =
+	constexpr float Y[9] =
 	{
 		1.0f / (2.0f * SQRT_PI),
 		-SQRT_3 / (2.0f * SQRT_PI),
