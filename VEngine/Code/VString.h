@@ -23,4 +23,7 @@ namespace VString
 	//Like above function, but used to include the findCast in the returned string.
 	//Usually used for filepath code.
 	std::string GetSubStringWithFoundOffset(std::string mainString, std::string findCase);
+
+	//Good for trimming off file extensions and folders from strings.
+	std::string GetSubStringBeforeFoundOffset(std::string mainString, std::string findCase);
 }

@@ -62,4 +62,14 @@ namespace VString
 
         return mainString;
     }
+
+    std::string GetSubStringBeforeFoundOffset(std::string mainString, std::string findCase)
+    {
+        if (mainString.find(findCase) != std::string::npos)
+        {
+            return mainString.substr(0, mainString.find(findCase));
+        }
+
+        return mainString;
+    }
 }
