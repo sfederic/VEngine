@@ -798,6 +798,8 @@ void Renderer::RenderLightProbeViews()
 		return;
 	}
 
+	Log("Diffuse light probe map bake started...");
+
 	const int previousWiewportWidth = viewport.Width;
 	const int previousWiewportHeight = viewport.Height;
 	ResizeSwapchain(lightProbeTextureWidth, lightProbeTextureHeight);
