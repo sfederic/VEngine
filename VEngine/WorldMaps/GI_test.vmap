@@ -1,66 +1,45 @@
-DirectionalLightActor
-1
- Enabled
-1
- Position
-5 0 -4
- Rotation
-0.353553 -0.353553 0.146446 0.853554
- Scale
-0.999997 0.999995 0.999996
-Name
-DirectionalLightActor0
-UID
-2386392439
-next
 MeshActor
 1
  Enabled
 1
  Position
-1 0 0
+0 0 0
  Rotation
-0 0 0 1
+0 0.707107 0 0.707107
  Scale
-0.999993 0.999992 0.999995
+0.999986 1 0.999986
 Name
 MeshActor1
 UID
-4205375170
+593226622
 next
-DirectionalLightComponent
+PointLightActor
 1
-2386392439
-DirectionalLight
  Enabled
 1
- Pos
-5 0 -4
- Rot
-0.353553 -0.353553 0.146446 0.853554
+ Position
+4 3 -1
+ Rotation
+-0 0 -0 1
  Scale
-0.999997 0.999995 0.999996
-Colour
-1 1 1 1
-LightEnabled
-1
-ShadowMap Size
-15
+1 1 1
+Name
+PointLightActor0
 UID
-3478770082
+166953536
 next
 MeshComponent
 1
-4205375170
+593226622
 Mesh
  Enabled
 1
  Pos
-1 0 0
+0 0 0
  Rot
-0 0 0 1
+0 0.707107 0 0.707107
  Scale
-0.999993 0.999992 0.999995
+0.999986 1 0.999986
 Casts Shadow
 1
 Grid Obstacle
@@ -68,7 +47,7 @@ Grid Obstacle
 LMAtlasOffset
 0 0
 LMTextureSize
-32 32
+256 256
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -104,6 +83,27 @@ Static
 Trans. Occlude
 0
 UID
-438597761
+3563143392
+next
+PointLightComponent
+1
+166953536
+PointLight
+ Enabled
+1
+ Pos
+4 3 -1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
+UID
+3345371107
 next
 end
