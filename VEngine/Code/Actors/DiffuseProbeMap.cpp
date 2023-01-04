@@ -1,5 +1,6 @@
 #include "vpch.h"
 #include "DiffuseProbeMap.h"
+#include <filesystem>
 #include "Components/InstanceMeshComponent.h"
 #include "Debug.h"
 
@@ -17,6 +18,7 @@ void DiffuseProbeMap::Create()
 {
 	instanceMeshComponent->SetInstanceCount(GetProbeCount());
 	SetInstanceMeshData();
+	ReadProbeDataFromFile();
 }
 
 Properties DiffuseProbeMap::GetProps()
@@ -43,7 +45,7 @@ void DiffuseProbeMap::SetInstanceMeshData()
 		{
 			for (int z = pos.z; z < (sizeZ + pos.z); z++)
 			{
-				InstanceData data = {};
+				InstanceData data;
 				data.world = XMMatrixTranslation((float)x, (float)y, (float)z);
 				
 				data.world.r[0].m128_f32[0] = 0.15f;
@@ -52,7 +54,7 @@ void DiffuseProbeMap::SetInstanceMeshData()
 
 				instanceData.emplace_back(data);
 
-				ProbeData pd = {};
+				ProbeData pd;
 				pd.index = probeIndex;
 				XMStoreFloat3(&pd.position,data.world.r[3]);
 				probeData.emplace_back(pd);
@@ -89,4 +91,41 @@ ProbeData DiffuseProbeMap::FindClosestProbe(XMVECTOR pos)
 	}
 
 	throw new std::exception("No probe found");
+}
+
+void DiffuseProbeMap::WriteProbeDataToFile()
+{
+	const std::string filename = "probemap.probedata";
+	FILE* file = nullptr;
+	fopen_s(&file, filename.c_str(), "wb");
+	assert(file);
+
+	//Write probe data count to read back.
+	int probeDataCount = probeData.size();
+	fwrite(&probeDataCount, sizeof(int), 1, file);
+
+	fwrite(probeData.data(), sizeof(ProbeData), probeDataCount, file);
+
+	fclose(file);
+
+	Log("[%s] binary probe data file created.", filename.c_str());
+}
+
+void DiffuseProbeMap::ReadProbeDataFromFile()
+{
+	const std::string filename = "probemap.probedata";
+	if (std::filesystem::exists(filename))
+	{
+		FILE* file = nullptr;
+		fopen_s(&file, filename.c_str(), "rb");
+		assert(file);
+
+		int probeDataCount = 0;
+		fread(&probeDataCount, sizeof(int), 1, file);
+		assert(probeDataCount > 0);
+
+		fread(probeData.data(), sizeof(ProbeData), probeDataCount, file);
+
+		fclose(file);
+	}
 }

@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Actor.h"
 #include "ActorSystem.h"
 
@@ -49,8 +50,12 @@ struct DiffuseProbeMap : Actor
 	DiffuseProbeMap();
 	virtual void Create() override;
 	virtual Properties GetProps() override;
+
 	void SetInstanceMeshData();
 	void SetProbeColour(XMFLOAT3 colour, uint32_t instanceMeshIndex);
 	uint32_t GetProbeCount();
 	ProbeData FindClosestProbe(XMVECTOR pos);
+
+	void WriteProbeDataToFile();
+	void ReadProbeDataFromFile();
 };
