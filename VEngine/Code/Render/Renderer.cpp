@@ -819,6 +819,9 @@ void Renderer::RenderLightProbeViews()
 
 	int probeIndex = 0;
 
+	//Disable instance meshes so the cubemap renders don't include them.
+	diffuseProbeMap->instanceMeshComponent->SetActive(false);
+
 	for (auto& instanceData : diffuseProbeMap->instanceMeshComponent->instanceData)
 	{
 		XMMATRIX& probeMatrix = instanceData.world;
@@ -918,6 +921,8 @@ void Renderer::RenderLightProbeViews()
 	RenderSetup();
 
 	diffuseProbeMap->WriteProbeDataToFile();
+
+	diffuseProbeMap->instanceMeshComponent->SetActive(true);
 
 	double endTime = Profile::QuickEnd(startTime);
 	Log("Light probe bake took [%f]sec.", endTime);
