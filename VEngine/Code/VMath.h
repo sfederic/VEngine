@@ -12,15 +12,23 @@ using namespace DirectX;
 
 namespace VMath
 {
-	void MatrixAddScale(float s, XMMATRIX& m);
-
 	XMVECTOR GlobalRightVector();
 	XMVECTOR GlobalUpVector();
 	XMVECTOR GlobalForwardVector();
 
+	//Direction vector from quaternion rotation functions (won't take parent transforms into account)
+	//For now they're working off of matrices, but below you can extract from the quat directly if needed.
+	//Ref:https://www.gamedev.net/forums/topic/56471-extracting-direction-vectors-from-quaternion/
+	XMVECTOR ForwardFromQuat(XMVECTOR rot);
+	XMVECTOR RightFromQuat(XMVECTOR rot);
+	XMVECTOR UpFromQuat(XMVECTOR rot);
+
 	//Returns matrix with all 0's
 	XMMATRIX ZeroMatrix();
+	void MatrixAddScale(float s, XMMATRIX& m);
 
+	XMFLOAT2 Float2Subtract(XMFLOAT2& f0, XMFLOAT2& f1);
+	XMFLOAT3 Float3Subtract(XMFLOAT3& f0, XMFLOAT3& f1);
 	bool Float3IsZero(XMFLOAT3& float3);
 	void RoundFloat3(XMFLOAT3& float3);
 	void SaturateFloat4(XMFLOAT4& float4);
@@ -33,13 +41,6 @@ namespace VMath
 
 	//Builds a matrix to extract a quaternion rotation to return.
 	XMVECTOR LookAtRotation(XMVECTOR lookAtPoint, XMVECTOR currentPosition);
-
-	//Direction vector from quaternion rotation functions (won't take parent transforms into account)
-	//For now they're working off of matrices, but below you can extract from the quat directly if needed.
-	//Ref:https://www.gamedev.net/forums/topic/56471-extracting-direction-vectors-from-quaternion/
-	XMVECTOR ForwardFromQuat(XMVECTOR rot);
-	XMVECTOR RightFromQuat(XMVECTOR rot);
-	XMVECTOR UpFromQuat(XMVECTOR rot);
 
 	//Rotates on the Y-axis
 	void RotateTowardsCamera(Transform& transform, float zAngle = 0.f);
@@ -72,9 +73,7 @@ namespace VMath
 	int RandomRangeInt(int min, int max);
 	float InverseLerp(float x, float y, float value);
 
-	XMFLOAT3 Float3Subtract(XMFLOAT3& f0, XMFLOAT3& f1);
-	XMFLOAT2 Float2Subtract(XMFLOAT2& f0, XMFLOAT2& f1);
-
+	//Lightmap and raycast math helper functions
 	XMVECTOR TriangleUVToXYZ(XMFLOAT2 uv, Vertex tri[3]);
 	bool IsUVInTriangleUVs(XMFLOAT2 pt, XMFLOAT2 v1, XMFLOAT2 v2, XMFLOAT2 v3);
 }
