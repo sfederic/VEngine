@@ -184,6 +184,7 @@ ShaderMatrices shaderMatrices;
 ShaderLights shaderLights;
 
 //Test level lightmap
+//@Todo: delete all lightmap stuff or keep it.
 Texture2D lightMap = Texture2D("lightmap.bmp");
 
 //Debug object containers
