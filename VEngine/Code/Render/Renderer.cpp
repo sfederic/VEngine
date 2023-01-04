@@ -1877,12 +1877,12 @@ void LightMapCast()
 	auto start = Profile::QuickStart();
 
 	const int mapWidth = 256;
-	const int mapHeight = 256;
+	const int mapHeight = 128;
 	debugLines.clear();
 
 	auto texels = new Texel[mapWidth][mapHeight];
 
-	const int mapWidthOffset = 256;
+	const int mapWidthOffset = 128;
 
 	auto& meshes = MeshComponent::system.GetComponents();
 	for (int meshIndex = 0; meshIndex < meshes.size(); meshIndex++)
@@ -1890,7 +1890,7 @@ void LightMapCast()
 		auto& mesh = meshes.at(meshIndex);
 		
 		mesh->lightMapData.atlasOffset = XMINT2(meshIndex * mapWidthOffset, 0);
-		mesh->lightMapData.textureSize = XMINT2(256, 256);
+		mesh->lightMapData.textureSize = XMINT2(128, 128);
 		mesh->lightMapData.atlasSize = XMINT2(mapWidth, mapHeight);
 		mesh->lightMapData.AssertValues();
 

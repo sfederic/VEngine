@@ -1,5 +1,5 @@
 MeshActor
-1
+2
  Enabled
 1
  Position
@@ -13,12 +13,25 @@ MeshActor1
 UID
 593226622
 next
+ Enabled
+1
+ Position
+2.2 0 -1.8
+ Rotation
+0 0.707107 0 0.707107
+ Scale
+0.999963 1 0.999963
+Name
+MeshActor2
+UID
+3740577502
+next
 PointLightActor
 1
  Enabled
 1
  Position
-4 3 -1
+4.1 2.8 -5.3
  Rotation
 -0 0 -0 1
  Scale
@@ -29,7 +42,7 @@ UID
 166953536
 next
 MeshComponent
-1
+2
 593226622
 Mesh
  Enabled
@@ -47,9 +60,9 @@ Grid Obstacle
 LMAtlasOffset
 0 0
 LMTextureSize
-256 256
+128 128
 M_Ambient
-0.5 0.5 0.5 1
+0 0 1 1
 M_Blend State
 null
 M_Metallic
@@ -65,7 +78,62 @@ M_Specular
 M_Texture
 numbers.jpg
 M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.fbx
+Static
 1
+Trans. Occlude
+0
+UID
+3563143392
+next
+3740577502
+Mesh
+ Enabled
+1
+ Pos
+2.2 0 -1.8
+ Rot
+0 0.707107 0 0.707107
+ Scale
+0.999963 1 0.999963
+Casts Shadow
+1
+Grid Obstacle
+0
+LMAtlasOffset
+128 0
+LMTextureSize
+128 128
+M_Ambient
+1 0 0 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+numbers.jpg
+M_Use Texture
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -92,7 +160,7 @@ PointLight
  Enabled
 1
  Pos
-4 3 -1
+4.1 2.8 -5.3
  Rot
 -0 0 -0 1
  Scale
