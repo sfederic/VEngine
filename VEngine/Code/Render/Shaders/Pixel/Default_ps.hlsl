@@ -34,11 +34,11 @@ float4 main(VS_OUT i) : SV_Target
         shadowColour /= 4.f;
     }
     
-    //float4 shIrradiance = float4(GetSHIrradiance(i.normal, SH), 1.0f);
+    float4 shIrradiance = float4(GetSHIrradiance(i.normal, SH), 1.0f);
     
-    float4 lightMapColour = lightMap.Sample(s, i.lightMapUV);
+    //float4 lightMapColour = lightMap.Sample(s, i.lightMapUV);
     
     float4 finalColour = (globalAmbient + endResult.diffuse + endResult.specular) * texColour;
     finalColour.a = material.ambient.a;
-    return finalColour;
+    return finalColour + shIrradiance;
 }
