@@ -433,7 +433,7 @@ namespace VMath
     }
 
     //Ref:https://stackoverflow.com/questions/17164376/inferring-u-v-for-a-point-in-a-triangle-from-vertex-u-vs
-    bool GetBarycentricCoords(XMVECTOR p0, XMVECTOR p1, XMVECTOR p2, XMVECTOR hitPoint, float& b1, float& b2)
+    void GetBarycentricCoords(XMVECTOR p0, XMVECTOR p1, XMVECTOR p2, XMVECTOR hitPoint, float& b1, float& b2)
     {
         const XMVECTOR u = p1 - p0;
         const XMVECTOR v = p2 - p0;
@@ -442,18 +442,8 @@ namespace VMath
         const XMVECTOR vCrossW = XMVector3Cross(v, w);
         const XMVECTOR vCrossU = XMVector3Cross(v, u);
 
-        if (XMVector3Dot(vCrossW, vCrossU).m128_f32[0] < 0.f)
-        {
-            return false;
-        }
-
         const XMVECTOR uCrossW = XMVector3Cross(u, w);
         const XMVECTOR uCrossV = XMVector3Cross(u, v);
-
-        if (XMVector3Dot(uCrossW, uCrossV).m128_f32[0] < 0.f)
-        {
-            return false;
-        }
 
         const float denom = XMVector3Length(uCrossV).m128_f32[0];
         const float r = XMVector3Length(vCrossW).m128_f32[0] / denom;
@@ -461,8 +451,6 @@ namespace VMath
 
         b1 = r;
         b2 = t;
-
-        return ((r <= 1.f) && (t <= 1.f) && (r + t <= 1.f));
     }
 
     void TriangleXYZToUV(Vertex& v0, Vertex& v1, Vertex& v2, XMVECTOR hitPoint, float& u, float& v)
