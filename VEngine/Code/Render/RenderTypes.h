@@ -18,7 +18,6 @@ struct Vertex
 	XMFLOAT3 normal;
 	XMFLOAT3 tangent;
 	XMFLOAT2 uv;
-	XMFLOAT2 lightMapUV;
 	uint32_t boneIndices[4];
 	float weights[3];
 };

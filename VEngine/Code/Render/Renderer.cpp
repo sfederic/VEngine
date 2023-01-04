@@ -357,7 +357,6 @@ void CreateInputLayout()
 		{"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, normal), D3D11_INPUT_PER_VERTEX_DATA, 0},
 		{"TANGENT", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, tangent), D3D11_INPUT_PER_VERTEX_DATA, 0},
 		{"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, offsetof(Vertex, uv), D3D11_INPUT_PER_VERTEX_DATA, 0},
-		{"LM_TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, offsetof(Vertex, lightMapUV), D3D11_INPUT_PER_VERTEX_DATA, 0},
 		{"BONEINDICES", 0, DXGI_FORMAT_R32G32B32A32_UINT, 0, offsetof(Vertex, boneIndices), D3D11_INPUT_PER_VERTEX_DATA, 0},
 		{"WEIGHTS", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, weights), D3D11_INPUT_PER_VERTEX_DATA, 0},
 	};
@@ -1877,13 +1876,13 @@ void LightMapCast()
 {
 	auto start = Profile::QuickStart();
 
-	const int mapWidth = 512;
-	const int mapHeight = 32;
+	const int mapWidth = 256;
+	const int mapHeight = 256;
 	debugLines.clear();
 
 	auto texels = new Texel[mapWidth][mapHeight];
 
-	const int mapWidthOffset = 32;
+	const int mapWidthOffset = 256;
 
 	auto& meshes = MeshComponent::system.GetComponents();
 	for (int meshIndex = 0; meshIndex < meshes.size(); meshIndex++)
@@ -1891,7 +1890,7 @@ void LightMapCast()
 		auto& mesh = meshes.at(meshIndex);
 		
 		mesh->lightMapData.atlasOffset = XMINT2(meshIndex * mapWidthOffset, 0);
-		mesh->lightMapData.textureSize = XMINT2(32, 32);
+		mesh->lightMapData.textureSize = XMINT2(256, 256);
 		mesh->lightMapData.atlasSize = XMINT2(mapWidth, mapHeight);
 		mesh->lightMapData.AssertValues();
 
@@ -1954,10 +1953,10 @@ void LightMapCast()
 							XMVECTOR raycastOrigin = uvWorldPos + (normal * 0.05f);
 							if (Raycast(hitResult, raycastOrigin, direction, 5.f))
 							{
-								Line debugLine;
+								/*Line debugLine;
 								XMStoreFloat3(&debugLine.p1, raycastOrigin);
 								debugLine.p2 = hitResult.hitPos;
-								Renderer::AddDebugLine(debugLine);
+								Renderer::AddDebugLine(debugLine);*/
 
 								break;
 							}
@@ -1965,10 +1964,10 @@ void LightMapCast()
 							{
 								XMStoreFloat4(&texels[w + (meshIndex * mapWidthOffset)][h].colour, XMVectorSet(1.f, 1.f, 1.f, 1.f));
 
-								Line debugLine;
+								/*Line debugLine;
 								XMStoreFloat3(&debugLine.p1, raycastOrigin);
 								XMStoreFloat3(&debugLine.p2, raycastOrigin + direction * 5.f);
-								Renderer::AddDebugLine(debugLine);
+								Renderer::AddDebugLine(debugLine);*/
 
 								break;
 							}
@@ -1983,10 +1982,10 @@ void LightMapCast()
 							XMVECTOR raycastOrigin = uvWorldPos + (normal * 0.05f);
 							if (Raycast(hitResult, raycastOrigin, pointLightPositon))
 							{
-								Line debugLine;
-								XMStoreFloat3(&debugLine.p1, raycastOrigin);
-								debugLine.p2 = hitResult.hitPos;
-								Renderer::AddDebugLine(debugLine);
+								//Line debugLine;
+								//XMStoreFloat3(&debugLine.p1, raycastOrigin);
+								//debugLine.p2 = hitResult.hitPos;
+								//Renderer::AddDebugLine(debugLine);
 
 								break;
 							}
@@ -1994,10 +1993,10 @@ void LightMapCast()
 							{
 								XMStoreFloat4(&texels[w + (meshIndex * mapWidthOffset)][h].colour, XMVectorSet(1.f, 1.f, 1.f, 1.f));
 
-								Line debugLine;
-								XMStoreFloat3(&debugLine.p1, raycastOrigin);
-								XMStoreFloat3(&debugLine.p2, pointLightPositon);
-								Renderer::AddDebugLine(debugLine);
+								//Line debugLine;
+								//XMStoreFloat3(&debugLine.p1, raycastOrigin);
+								//XMStoreFloat3(&debugLine.p2, pointLightPositon);
+								//Renderer::AddDebugLine(debugLine);
 
 								break;
 							}
