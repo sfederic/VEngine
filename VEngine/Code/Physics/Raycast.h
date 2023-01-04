@@ -24,6 +24,8 @@ struct HitResult
 	//List of actors to ignore when cast
 	std::vector<Actor*> actorsToIgnore;
 
+	std::vector<SpatialComponent*> componentsToIgnore;
+
 	std::vector<Actor*> hitActors;
 	Actor* hitActor = nullptr;
 

@@ -22,6 +22,19 @@ bool IsIgnoredActor(Actor* actor, HitResult& hitResult)
 	return false;
 }
 
+bool IsIgnoredSpatialComponent(SpatialComponent* component, HitResult& hitResult)
+{
+	for (auto componentToIgnore : hitResult.componentsToIgnore)
+	{
+		if (component == componentToIgnore)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float range, bool fromScreen)
 {
 	hitResult.origin = origin;
@@ -66,6 +79,11 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 			//Collision layer checks
 			if (mesh->layer == CollisionLayers::None ||
 				mesh->layer == hitResult.ignoreLayer)
+			{
+				continue;
+			}
+
+			if (IsIgnoredSpatialComponent(mesh, hitResult))
 			{
 				continue;
 			}
