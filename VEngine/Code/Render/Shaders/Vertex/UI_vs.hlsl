@@ -6,6 +6,7 @@ VS_OUT main(VS_IN i)
     o.pos = float4(i.pos.xyz, 1.0f);
     o.posWS = mul(model, float4(i.pos.xyz, 1.0f));
     o.uv = i.uv;
+    o.lightMapUV = o.uv;
     o.normal = mul((float3x3) model, i.normal);
     o.instanceID = i.instanceID;
     o.shadowPos = float4(1.f, 1.f, 1.f, 1.f);
