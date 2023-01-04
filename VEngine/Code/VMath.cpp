@@ -397,7 +397,7 @@ namespace VMath
         return XMFLOAT2(f0.x - f1.x, f0.y - f1.y);
     }
 
-    //https://stackoverflow.com/questions/72209091/how-to-given-uv-on-a-triangle-find-xyz
+    //Ref:https://stackoverflow.com/questions/72209091/how-to-given-uv-on-a-triangle-find-xyz
     XMVECTOR TriangleUVToXYZ(XMFLOAT2 uv, Vertex tri[3])
     {
         XMVECTOR tri12 = XMLoadFloat2(&tri[1].uv) - XMLoadFloat2(&tri[0].uv);
@@ -414,7 +414,7 @@ namespace VMath
             + a13 * (XMLoadFloat3(&tri[2].pos) - XMLoadFloat3(&tri[0].pos));
     }
 
-    //https://stackoverflow.com/questions/2049582/how-to-determine-if-a-point-is-in-a-2d-triangle
+    //Ref:https://stackoverflow.com/questions/2049582/how-to-determine-if-a-point-is-in-a-2d-triangle
     bool IsUVInTriangleUVs(XMFLOAT2 pt, XMFLOAT2 v1, XMFLOAT2 v2, XMFLOAT2 v3)
     {
         auto sign = [](const XMFLOAT2& p1, const XMFLOAT2& p2, const XMFLOAT2& p3)
@@ -430,5 +430,38 @@ namespace VMath
         bool hasPos = (d1 > 0) || (d2 > 0) || (d3 > 0);
 
         return !(hasNeg && hasPos);
+    }
+
+    //Ref:https://stackoverflow.com/questions/17164376/inferring-u-v-for-a-point-in-a-triangle-from-vertex-u-vs
+    bool GetBarycentricCoords(XMVECTOR p0, XMVECTOR p1, XMVECTOR p2, XMVECTOR hitPoint, float& b1, float& b2)
+    {
+        const XMVECTOR u = p1 - p0;
+        const XMVECTOR v = p2 - p0;
+        const XMVECTOR w = hitPoint - p0;
+
+        const XMVECTOR vCrossW = XMVector3Cross(v, w);
+        const XMVECTOR vCrossU = XMVector3Cross(v, u);
+
+        if (XMVector3Dot(vCrossW, vCrossU).m128_f32[0] < 0.f)
+        {
+            return false;
+        }
+
+        const XMVECTOR uCrossW = XMVector3Cross(u, w);
+        const XMVECTOR uCrossV = XMVector3Cross(u, v);
+
+        if (XMVector3Dot(uCrossW, uCrossV).m128_f32[0] < 0.f)
+        {
+            return false;
+        }
+
+        const float denom = XMVector3Length(uCrossV).m128_f32[0];
+        const float r = XMVector3Length(vCrossW).m128_f32[0] / denom;
+        const float t = XMVector3Length(uCrossW).m128_f32[0] / denom;
+
+        b1 = r;
+        b2 = t;
+
+        return ((r <= 1.f) && (t <= 1.f) && (r + t <= 1.f));
     }
 }
