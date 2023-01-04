@@ -11,6 +11,7 @@ VS_OUT main(VS_IN i)
 	o.pos = mul(modelViewProj, float4(i.pos.xyz, 1.0f));
 	o.posWS = mul(model, float4(i.pos.xyz, 1.0f));
 	o.uv = i.uv;
+    o.lightMapUV = o.uv;
 	o.normal = mul((float3x3)world, i.normal);
 	o.shadowPos = float4(1.0f, 1.0f, 1.0f, 1.0f);
 	o.instanceID = i.instanceID;
