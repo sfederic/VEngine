@@ -164,20 +164,25 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 
 				if (DirectX::TriangleTests::Intersects(hitResult.origin, hitResult.direction, v0, v1, v2, tempHitResult.hitDistance))
 				{
+					//Get normal for triangle
 					XMVECTOR normal = XMVectorZero();
 					normal += XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index0).normal);
 					normal += XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index1).normal);
 					normal += XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index2).normal);
 
 					normal = XMVector3Normalize(normal);
-
-					//@Todo: proper UV results based on ray
-					tempHitResult.uv = mesh->meshDataProxy.vertices->at(index0).uv;
-
 					XMStoreFloat3(&tempHitResult.normal, normal);
 
-					tempHitResult.hitComponent = mesh;
+					//Get hit UV
+					XMVECTOR hitPosition = hitResult.origin + (hitResult.direction * tempHitResult.hitDistance);
+					float hitU, hitV;
+					VMath::TriangleXYZToUV(mesh->meshDataProxy.vertices->at(index0),
+						mesh->meshDataProxy.vertices->at(index1),
+						mesh->meshDataProxy.vertices->at(index2), hitPosition, hitU, hitV);
+					tempHitResult.uv = XMFLOAT2(hitU, hitV);
 
+					//Set hit component and actor
+					tempHitResult.hitComponent = mesh;
 					tempHitResult.hitActor = World::GetActorByUID(mesh->GetOwnerUID());
 
 					hitResults.emplace_back(tempHitResult);
