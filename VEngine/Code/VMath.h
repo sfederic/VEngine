@@ -76,6 +76,6 @@ namespace VMath
 	//Lightmap and raycast math helper functions
 	XMVECTOR TriangleUVToXYZ(XMFLOAT2 uv, Vertex tri[3]);
 	bool IsUVInTriangleUVs(XMFLOAT2 pt, XMFLOAT2 v1, XMFLOAT2 v2, XMFLOAT2 v3);
-	bool GetBarycentricCoords(XMVECTOR p0, XMVECTOR p1, XMVECTOR p2, XMVECTOR hitPoint, float& b1, float& b2);
+	void GetBarycentricCoords(XMVECTOR p0, XMVECTOR p1, XMVECTOR p2, XMVECTOR hitPoint, float& b1, float& b2);
 	void TriangleXYZToUV(Vertex& v0, Vertex& v1, Vertex& v2, XMVECTOR hitPoint, float& u, float& v);
 }
