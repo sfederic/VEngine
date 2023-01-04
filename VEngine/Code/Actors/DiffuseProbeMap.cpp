@@ -2,6 +2,7 @@
 #include "DiffuseProbeMap.h"
 #include <filesystem>
 #include "Debug.h"
+#include "World.h"
 #include "Components/InstanceMeshComponent.h"
 #include "Render/Material.h"
 
@@ -97,7 +98,7 @@ ProbeData DiffuseProbeMap::FindClosestProbe(XMVECTOR pos)
 
 void DiffuseProbeMap::WriteProbeDataToFile()
 {
-	const std::string filename = "probemap.probedata";
+	std::string filename = GetWorldNameAsFilename();
 	FILE* file = nullptr;
 	fopen_s(&file, filename.c_str(), "wb");
 	assert(file);
@@ -115,7 +116,7 @@ void DiffuseProbeMap::WriteProbeDataToFile()
 
 void DiffuseProbeMap::ReadProbeDataFromFile()
 {
-	const std::string filename = "probemap.probedata";
+	std::string filename = GetWorldNameAsFilename();
 	if (std::filesystem::exists(filename))
 	{
 		FILE* file = nullptr;
@@ -168,7 +169,7 @@ void DiffuseProbeMap::SetProbeVisualColourFromIrradiance(ProbeData& pb, Instance
 	constexpr float SQRT_15 = 3.8729833462f;
 	constexpr float SQRT_3 = 1.7320508076f;
 
-	const float AO = 1.0f;
+	const float AO = 0.75f;
 
 	float Y[9] =
 	{
@@ -212,4 +213,11 @@ void DiffuseProbeMap::SetProbeVisualColourFromIrradiance(ProbeData& pb, Instance
 	irradiance = DirectX::XMVectorMax(irradiance, XMVectorZero());
 	irradiance.m128_f32[3] = 1.0f; //Make sure alpha is set
 	XMStoreFloat4(&data.colour, irradiance);
+}
+
+std::string DiffuseProbeMap::GetWorldNameAsFilename()
+{
+	std::string worldName = VString::GetSubStringBeforeFoundOffset(World::worldFilename, "."); //trimp .vmap
+	std::string filename = "LightProbeData/" + worldName + ".probedata";
+	return filename;
 }

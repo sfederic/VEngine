@@ -35,6 +35,9 @@ struct ProbeData
 //Ref:https://interplayoflight.wordpress.com/2021/12/28/notes-on-occlusion-and-directionality-in-image-based-lighting/
 //Ref:https://www.activision.com/cdn/research/Volumetric_Global_Illumination_at_Treyarch.pdf
 
+//Even with all the above references, this implementation is actually based on a few slides (slide 49-52) from 
+//Bluepoint's talk on global illumination in Demon's Souls, where they describe what they used for Shadow of the Collosus briefly.
+//Ref:https://gdcvault.com/play/1027011/Advanced-Graphics-Summit-Lifting-the
 class DiffuseProbeMap : public Actor
 {
 public:
@@ -52,13 +55,14 @@ public:
 	virtual void Create() override;
 	virtual Properties GetProps() override;
 
-	void SetInstanceMeshData();
 	void SetProbeColour(XMFLOAT3 colour, uint32_t instanceMeshIndex);
 	uint32_t GetProbeCount();
 	ProbeData FindClosestProbe(XMVECTOR pos);
-
 	void WriteProbeDataToFile();
-	void ReadProbeDataFromFile();
-
 	void SetProbeVisualColourFromIrradiance(ProbeData& pb, InstanceData& data);
+
+private:
+	void ReadProbeDataFromFile();
+	void SetInstanceMeshData();
+	std::string GetWorldNameAsFilename();
 };
