@@ -35,8 +35,9 @@ struct ProbeData
 //Ref:https://interplayoflight.wordpress.com/2021/12/28/notes-on-occlusion-and-directionality-in-image-based-lighting/
 //Ref:https://www.activision.com/cdn/research/Volumetric_Global_Illumination_at_Treyarch.pdf
 
-struct DiffuseProbeMap : Actor
+class DiffuseProbeMap : public Actor
 {
+public:
 	ACTOR_SYSTEM(DiffuseProbeMap);
 
 	std::vector<ProbeData> probeData;
@@ -58,4 +59,6 @@ struct DiffuseProbeMap : Actor
 
 	void WriteProbeDataToFile();
 	void ReadProbeDataFromFile();
+
+	void SetProbeVisualColourFromIrradiance(ProbeData& pb, InstanceData& data);
 };

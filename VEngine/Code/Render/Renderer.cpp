@@ -790,8 +790,15 @@ void Renderer::RenderLightProbeViews()
 {
 	auto startTime = Profile::QuickStart();
 
-	int previousWiewportWidth = viewport.Width;
-	int previousWiewportHeight = viewport.Height;
+	auto diffuseProbeMap = DiffuseProbeMap::system.GetFirstActor();
+	if (diffuseProbeMap == nullptr)
+	{
+		Log("No diffuse probe map in level to render probes from.");
+		return;
+	}
+
+	const int previousWiewportWidth = viewport.Width;
+	const int previousWiewportHeight = viewport.Height;
 	ResizeSwapchain(lightProbeTextureWidth, lightProbeTextureHeight);
 
 	//Directions match with D3D11_TEXTURECUBE_FACE
@@ -807,154 +814,101 @@ void Renderer::RenderLightProbeViews()
 
 	CreateLightProbeBuffers();
 
-	for (auto& probeMap : DiffuseProbeMap::system.GetActors())
+	diffuseProbeMap->probeData.clear();
+
+	int probeIndex = 0;
+
+	for (auto& instanceData : diffuseProbeMap->instanceMeshComponent->instanceData)
 	{
-		probeMap->probeData.clear();
+		XMMATRIX& probeMatrix = instanceData.world;
 
-		int probeIndex = 0;
-
-		for (auto& instanceData : probeMap->instanceMeshComponent->instanceData)
+		for (int i = 0; i < 6; i++)
 		{
-			XMMATRIX& probeMatrix = instanceData.world;
+			context->RSSetViewports(1, &viewport);
+			constexpr float clearColour[4] = { 0.f, 0.f, 0.f, 0.f };
+			context->ClearRenderTargetView(lightProbeRTVs[i], clearColour);
+			context->IASetInputLayout(inputLayout);
+			context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+			context->OMSetRenderTargets(1, &lightProbeRTVs[i], nullptr);
 
-			for (int i = 0; i < 6; i++)
+			context->RSSetState(rastStateMap[RastStates::solid]->data);
+
+			UpdateLights();
+
+			//Set lights buffer
+			cbLights->SetPS();
+
+			//Set shadow resources (not now for lightprobes)
+			//context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
+			//context->PSSetSamplers(1, 1, &shadowMap->sampler);
+
+			ShaderItem* lightProbeShader = ShaderItems::Default;
+
+			for (auto& mesh : MeshComponent::system.GetComponents())
 			{
-				context->RSSetViewports(1, &viewport);
-				constexpr float clearColour[4] = { 0.f, 0.f, 0.f, 0.f };
-				context->ClearRenderTargetView(lightProbeRTVs[i], clearColour);
-				context->IASetInputLayout(inputLayout);
-				context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-				context->OMSetRenderTargets(1, &lightProbeRTVs[i], nullptr);
+				if (!mesh->IsActive()) { continue; }
 
-				context->RSSetState(rastStateMap[RastStates::solid]->data);
+				Material* material = mesh->material;
 
-				UpdateLights();
+				const FLOAT blendState[4] = { 0.f };
+				context->OMSetBlendState(nullptr, blendState, 0xFFFFFFFF);
 
-				//Set lights buffer
-				cbLights->SetPS();
+				context->VSSetShader(lightProbeShader->GetVertexShader(), nullptr, 0);
+				context->PSSetShader(lightProbeShader->GetPixelShader(), nullptr, 0);
 
-				//Set shadow resources (not now for lightprobes)
-				//context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
-				//context->PSSetSamplers(1, 1, &shadowMap->sampler);
+				context->PSSetSamplers(0, 1, &material->sampler->data);
 
-				ShaderItem* lightProbeShader = ShaderItems::Default;
+				SetShaderResourceFromMaterial(0, material);
 
-				for (auto& mesh : MeshComponent::system.GetComponents())
-				{
-					if (!mesh->IsActive()) { continue; }
+				context->IASetVertexBuffers(0, 1, &mesh->pso.vertexBuffer->data, &stride, &offset);
+				context->IASetIndexBuffer(mesh->pso.indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
 
-					Material* material = mesh->material;
+				cbMaterial->Map(&material->materialShaderData);
+				cbMaterial->SetPS();
 
-					const FLOAT blendState[4] = { 0.f };
-					context->OMSetBlendState(nullptr, blendState, 0xFFFFFFFF);
+				//Set matrices
+				shaderMatrices.view = XMMatrixLookAtLH(probeMatrix.r[3],
+					probeMatrix.r[3] + faces[i], VMath::GlobalUpVector());
+				shaderMatrices.model = mesh->GetWorldMatrix();
+				shaderMatrices.MakeModelViewProjectionMatrix();
+				shaderMatrices.MakeTextureMatrix(mesh->material);
 
-					context->VSSetShader(lightProbeShader->GetVertexShader(), nullptr, 0);
-					context->PSSetShader(lightProbeShader->GetPixelShader(), nullptr, 0);
+				cbMatrices->Map(&shaderMatrices);
+				cbMatrices->SetVS();
 
-					context->PSSetSamplers(0, 1, &material->sampler->data);
+				//Set mesh data to shader
+				ShaderMeshData meshData = {};
+				meshData.position = mesh->GetPosition();
+				cbMeshData->Map(&meshData);
+				cbMeshData->SetVSAndPS();
 
-					SetShaderResourceFromMaterial(0, material);
-
-					context->IASetVertexBuffers(0, 1, &mesh->pso.vertexBuffer->data, &stride, &offset);
-					context->IASetIndexBuffer(mesh->pso.indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
-
-					cbMaterial->Map(&material->materialShaderData);
-					cbMaterial->SetPS();
-
-					//Set matrices
-					shaderMatrices.view = XMMatrixLookAtLH(probeMatrix.r[3],
-						probeMatrix.r[3] + faces[i], VMath::GlobalUpVector());
-					shaderMatrices.model = mesh->GetWorldMatrix();
-					shaderMatrices.MakeModelViewProjectionMatrix();
-					shaderMatrices.MakeTextureMatrix(mesh->material);
-
-					cbMatrices->Map(&shaderMatrices);
-					cbMatrices->SetVS();
-
-					//Set mesh data to shader
-					ShaderMeshData meshData = {};
-					meshData.position = mesh->GetPosition();
-					cbMeshData->Map(&meshData);
-					cbMeshData->SetVSAndPS();
-
-					//Draw
-					context->DrawIndexed(mesh->meshDataProxy.indices->size(), 0, 0);
-				}
-
-				//Remove lightprobe RTV
-				SetNullRTV();
+				//Draw
+				context->DrawIndexed(mesh->meshDataProxy.indices->size(), 0, 0);
 			}
 
-			//Remember that there are 9 coefficients with 3rd order SH per channel
-			float SH_R[9] = {}, SH_G[9] = {}, SH_B[9] = {};
-			HR(DirectX::SHProjectCubeMap(context, 3, lightProbeTexture, SH_R, SH_G, SH_B));
-
-			XMFLOAT4 coefs[9] = {};
-
-			for (int co_index = 0; co_index < 9; co_index++)
-			{
-				coefs[co_index] = XMFLOAT4(SH_R[co_index], SH_G[co_index], SH_B[co_index], 1.0f);
-			}
-
-			//@Todo: this is all just copied from the Common.hlsli to figure out probe colour.
-			//You could probably do all this in the InstanceShader and just return the 'nearest probe' as itself.
-			const float PI = 3.14159265f;
-
-			float SQRT_PI = 1.7724538509f;
-			float SQRT_5 = 2.2360679775f;
-			float SQRT_15 = 3.8729833462f;
-			float SQRT_3 = 1.7320508076f;
-
-			float AO = 1.0f;
-
-			float Y[9] =
-			{
-				1.0f / (2.0f * SQRT_PI),
-				-SQRT_3 / (2.0f * SQRT_PI),
-				SQRT_3 / (2.0f * SQRT_PI),
-				-SQRT_3 / (2.0f * SQRT_PI),
-				SQRT_15 / (2.0f * SQRT_PI),
-				-SQRT_15 / (2.0f * SQRT_PI),
-				SQRT_5 / (4.0f * SQRT_PI),
-				-SQRT_15 / (2.0f * SQRT_PI),
-				SQRT_15 / (4.0f * SQRT_PI)
-			};
-
-			float t = acos(sqrt(1 - AO));
-
-			float a = sin(t);
-			float b = cos(t);
-
-			float A0 = sqrt(4 * PI) * (sqrt(PI) / 2) * a * a;
-			float A1 = sqrt(4 * PI / 3) * (sqrt(3 * PI) / 3) * (1 - b * b * b);
-			float A2 = sqrt(4 * PI / 5) * (sqrt(5 * PI) / 16) * a * a * (2 + 6 * b * b);
-
-			XMFLOAT3 n = XMFLOAT3(0.f, 0.f, 0.f); //Essentially put in a random normal
-			XMStoreFloat3(&n, XMVector3Normalize(probeMatrix.r[3]));
-
-			XMVECTOR irradiance =
-				XMLoadFloat4(&coefs[0]) * A0 * Y[0] +
-				XMLoadFloat4(&coefs[1]) * A1 * Y[1] * n.y +
-				XMLoadFloat4(&coefs[2]) * A1 * Y[2] * n.z +
-				XMLoadFloat4(&coefs[3]) * A1 * Y[3] * n.x +
-				XMLoadFloat4(&coefs[4]) * A2 * Y[4] * (n.y * n.x) +
-				XMLoadFloat4(&coefs[5]) * A2 * Y[5] * (n.y * n.z) +
-				XMLoadFloat4(&coefs[6]) * A2 * Y[6] * (3.0 * n.z * n.z - 1.0) +
-				XMLoadFloat4(&coefs[7]) * A2 * Y[7] * (n.z * n.x) +
-				XMLoadFloat4(&coefs[8]) * A2 * Y[8] * (n.x * n.x - n.y * n.y);
-
-			irradiance = DirectX::XMVectorMax(irradiance, XMVectorZero());
-			irradiance.m128_f32[3] = 1.0f; //Make sure alpha is set
-			XMStoreFloat4(&instanceData.colour, irradiance);
-
-			ProbeData pd = {};
-			pd.index = probeIndex;
-			memcpy(pd.SH, coefs, sizeof(XMFLOAT4) * 9);
-			XMStoreFloat3(&pd.position, probeMatrix.r[3]);
-			probeMap->probeData.emplace_back(pd);
-
-			probeIndex++;
+			//Remove lightprobe RTV
+			SetNullRTV();
 		}
+
+		//Remember that there are 9 coefficients with 3rd order SH per channel
+		float SH_R[9] = {}, SH_G[9] = {}, SH_B[9] = {};
+		HR(DirectX::SHProjectCubeMap(context, 3, lightProbeTexture, SH_R, SH_G, SH_B));
+
+		XMFLOAT4 coefs[9] = {};
+		for (int co_index = 0; co_index < 9; co_index++)
+		{
+			coefs[co_index] = XMFLOAT4(SH_R[co_index], SH_G[co_index], SH_B[co_index], 1.0f);
+		}
+
+		ProbeData pd;
+		pd.index = probeIndex;
+		memcpy(pd.SH, coefs, sizeof(XMFLOAT4) * 9);
+		XMStoreFloat3(&pd.position, probeMatrix.r[3]);
+		diffuseProbeMap->probeData.emplace_back(pd);
+
+		probeIndex++;
+
+		diffuseProbeMap->SetProbeVisualColourFromIrradiance(pd, instanceData);
 	}
 
 	ResizeSwapchain(previousWiewportWidth, previousWiewportHeight);
@@ -962,8 +916,10 @@ void Renderer::RenderLightProbeViews()
 	//Set main RTV and DSV back on
 	RenderSetup();
 
+	diffuseProbeMap->WriteProbeDataToFile();
+
 	double endTime = Profile::QuickEnd(startTime);
-	Log("Light probe bake took [%f] ms", endTime);
+	Log("Light probe bake took [%f]sec.", endTime);
 }
 
 void RenderInstanceMeshComponents()
