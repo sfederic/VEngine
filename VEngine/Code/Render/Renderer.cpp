@@ -225,6 +225,7 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	SpriteSystem::Init();
 
 	debugLines.emplace_back(Vertex()); //dummy data so DirecX doesn't crash
+	//@Todo: this craahses the program a lot (most dynamic buffers do) and not sure why.
 	debugLinesBuffer = RenderUtils::CreateDynamicBuffer(debugLinesBufferSize, D3D11_BIND_VERTEX_BUFFER, debugLines.data());
 	debugLines.clear();
 
