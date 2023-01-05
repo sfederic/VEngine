@@ -329,7 +329,7 @@ void Actor::SetEmptyRootComponent()
 
 void Actor::RemoveComponent(std::string componentName)
 {
-	Component* component = componentMap[componentName];
+	Component* component = componentMap.find(componentName)->second;
 	RemoveComponent(component);
 }
 
