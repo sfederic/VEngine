@@ -81,7 +81,6 @@ void Engine::TickSystems(float deltaTime)
 	editor->Tick();
 	Core::Tick();
 	commandSystem.Tick();
-	ShaderSystem::Tick();
 	AudioSystem::Tick();
 
 	cutsceneSequencer.PlaybackTick(deltaTime);

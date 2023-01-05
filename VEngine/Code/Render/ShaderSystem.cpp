@@ -1,8 +1,6 @@
 #include "vpch.h"
 #include "ShaderSystem.h"
 #include <filesystem>
-#include <fstream>
-#include <iostream>
 #include "Input.h"
 #include "Log.h"
 #include "VertexShader.h"
@@ -12,8 +10,6 @@
 #include "ShaderItem.h"
 
 void CompileAllShadersFromFile();
-void HotreloadShaders();
-void RecompileShaderTypesForHotreload(const std::string shaderType, const std::string version);
 
 std::map<std::wstring, std::unique_ptr<VertexShader>> vertexShaders;
 std::map<std::wstring, std::unique_ptr<PixelShader>> pixelShaders;
@@ -32,11 +28,6 @@ void ShaderSystem::Init()
     ShaderItems::SolidColour = new ShaderItem("SolidColour", L"Default_vs.cso", L"SolidColour_ps.cso");
     ShaderItems::UI = new ShaderItem("UI", L"UI_vs.cso", L"TextureClip_ps.cso");
     ShaderItems::PostProcess = new ShaderItem("PostProcess", L"PostProcess_vs.cso", L"PostProcess_ps.cso");
-}
-
-void ShaderSystem::Tick()
-{
-    HotreloadShaders();
 }
 
 VertexShader* ShaderSystem::FindVertexShader(const std::wstring filename)
@@ -84,38 +75,5 @@ void CompileAllShadersFromFile()
         auto pixelShader = std::make_unique<PixelShader>();
         pixelShader->Create(entry.path().c_str());
         pixelShaders.emplace(entry.path().filename(), std::move(pixelShader));
-    }
-}
-
-void HotreloadShaders()
-{
-    if (Input::GetKeyUp(Keys::F4))
-    {
-        auto startTime = Profile::QuickStart();
-
-        RecompileShaderTypesForHotreload("Vertex", "vs_5_0");
-        RecompileShaderTypesForHotreload("Pixel", "ps_5_0");
-
-        CompileAllShadersFromFile();
-
-        Log("%d vertex shaders recompiled.", vertexShaders.size());
-        Log("%d pixel shaders recompiled.", vertexShaders.size());
-
-        double endTime = Profile::QuickEnd(startTime);
-        Log("Shader hotreload took %f seconds.", endTime);
-    }
-}
-
-void RecompileShaderTypesForHotreload(const std::string shaderType, const std::string version)
-{
-    for (const auto& entry : std::filesystem::directory_iterator("Code/Render/Shaders/" + shaderType + "/"))
-    {
-        auto filename = entry.path().filename();
-        std::string outputFilepath = "Shaders/" + shaderType + "/";
-
-        std::string outputFile = outputFilepath + filename.replace_extension(".cso").string();
-
-        std::string command = "Tools/fxc /Od /Zi /T " + version + " /Fo " + outputFile + " Code/Render/Shaders/" + shaderType + "/" + entry.path().filename().string();
-        std::system(command.c_str());
     }
 }

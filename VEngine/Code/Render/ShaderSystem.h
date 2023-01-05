@@ -9,10 +9,12 @@ class ShaderItem;
 namespace ShaderSystem
 {
 	void Init();
-	void Tick();
+
+	void AddShaderItem(ShaderItem* shaderItem);
+
 	VertexShader* FindVertexShader(const std::wstring filename);
 	PixelShader* FindPixelShader(const std::wstring filename);
-	void AddShaderItem(ShaderItem* shaderItem);
 	ShaderItem* FindShaderItem(const std::string shaderItemName);
+
 	void ClearShaders();
 };
