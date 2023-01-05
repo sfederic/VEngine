@@ -21,10 +21,6 @@ struct ProbeData
 //		and add its colour to its pixel output.
 //4. Reload the world 
 
-//@Todo: The diffuse GI here is mainly just for visual testing, just to get an idea on how it would look with low-poly.
-//To make it work properly, the light probe data needs to be serialised out. It honestly looks pretty shit against
-//low-poly environments, a better approach might be light mapping.
-
 //There are a fuckload of references to do with GI, SH, Lightmapping and whatever else. Here are the best ones.
 //Ref:https://therealmjp.github.io/posts/sg-series-part-1-a-brief-and-incomplete-history-of-baked-lighting-representations/
 //Ref:https://therealmjp.github.io/posts/radiosity-dx11-style/
