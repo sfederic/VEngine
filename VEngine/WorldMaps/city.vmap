@@ -18,19 +18,19 @@ DiffuseProbeMap
  Enabled
 1
  Position
-0 1 -1
+0 0 0
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
 Name
 DiffuseProbeMap0
 Size X
-3
+10
 Size Y
-3
+4
 Size Z
-3
+10
 UID
 3392591470
 next
@@ -1522,6 +1522,8 @@ Far Z
 1000
 Near Z
 0.01
+UID
+2580830984
 next
 DirectionalLightComponent
 1
@@ -1541,6 +1543,8 @@ LightEnabled
 1
 ShadowMap Size
 15
+UID
+3366435341
 next
 EmptyComponent
 2
@@ -1554,6 +1558,8 @@ Root
 -0 0.707107 -0 0.707107
  Scale
 1 1 1
+UID
+18435343
 next
 3285984848
 Root
@@ -1565,6 +1571,8 @@ Root
 0 0 0 1
  Scale
 1 1 1
+UID
+1199831576
 next
 InstanceMeshComponent
 1
@@ -1573,15 +1581,19 @@ InstanceMesh
  Enabled
 1
  Pos
-0 1 -1
+0 0 0
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
 Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -1599,7 +1611,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1616,6 +1628,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+4085527700
 next
 MeshComponent
 112
@@ -1633,6 +1647,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -1667,6 +1685,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3766854272
 next
 2583712253
 Mesh
@@ -1682,6 +1702,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -1716,6 +1740,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3014812425
 next
 2011331193
 Mesh
@@ -1731,6 +1757,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -1765,6 +1795,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+2507132679
 next
 2632628047
 Mesh
@@ -1780,6 +1812,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -1814,6 +1850,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+2462312925
 next
 3507695414
 Mesh
@@ -1829,6 +1867,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -1863,6 +1905,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1062304430
 next
 2699310136
 Mesh
@@ -1878,6 +1922,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -1912,6 +1960,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+215955943
 next
 2296403832
 Mesh
@@ -1927,6 +1977,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -1961,6 +2015,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+2429789808
 next
 1131060975
 Mesh
@@ -1976,6 +2032,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -2010,6 +2070,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3884421031
 next
 3567087177
 Mesh
@@ -2025,6 +2087,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -2059,6 +2125,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+2764749879
 next
 2796875856
 Mesh
@@ -2074,6 +2142,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -2108,6 +2180,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3928099360
 next
 2868139928
 Mesh
@@ -2123,6 +2197,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -2157,6 +2235,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1219762095
 next
 510346450
 Mesh
@@ -2172,6 +2252,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -2206,6 +2290,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1593075728
 next
 2627474733
 Mesh
@@ -2221,6 +2307,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -2255,6 +2345,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+2856107046
 next
 655843244
 Mesh
@@ -2270,6 +2362,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -2304,6 +2400,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1416209145
 next
 4151056104
 Mesh
@@ -2319,6 +2417,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -2353,6 +2455,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3983035611
 next
 37538163
 Mesh
@@ -2368,6 +2472,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -2402,6 +2510,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+861982034
 next
 2224855847
 Mesh
@@ -2417,6 +2527,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -2451,6 +2565,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+2543370279
 next
 3890610566
 Mesh
@@ -2466,6 +2582,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -2500,6 +2620,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1296450797
 next
 3924309610
 Mesh
@@ -2515,6 +2637,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -2549,6 +2675,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+932029922
 next
 1738464455
 Mesh
@@ -2564,6 +2692,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -2598,6 +2730,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+4178242419
 next
 2386606045
 Mesh
@@ -2613,6 +2747,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -2647,6 +2785,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3980253312
 next
 3497355073
 Mesh
@@ -2662,6 +2802,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -2696,6 +2840,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+990020739
 next
 3760474670
 Mesh
@@ -2711,6 +2857,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -2745,6 +2895,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1950019841
 next
 3744665989
 Mesh
@@ -2760,6 +2912,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -2794,6 +2950,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3935336084
 next
 2320479320
 Mesh
@@ -2809,6 +2967,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -2843,6 +3005,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+343213418
 next
 26471977
 Mesh
@@ -2858,6 +3022,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -2892,6 +3060,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+2312109444
 next
 2419766645
 Mesh
@@ -2907,6 +3077,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -2941,6 +3115,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+4136332656
 next
 1670294462
 Mesh
@@ -2956,6 +3132,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -2990,6 +3170,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3148523204
 next
 1140933121
 Mesh
@@ -3005,6 +3187,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -3039,6 +3225,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1484473209
 next
 2375939770
 Mesh
@@ -3054,6 +3242,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -3088,6 +3280,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+2184522712
 next
 641712685
 Mesh
@@ -3103,6 +3297,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -3137,6 +3335,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1525982113
 next
 598672611
 Mesh
@@ -3152,6 +3352,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -3186,6 +3390,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+408713926
 next
 1888573792
 Mesh
@@ -3201,6 +3407,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -3235,6 +3445,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+4206769667
 next
 2792811646
 Mesh
@@ -3250,6 +3462,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -3284,6 +3500,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+909218645
 next
 3556492835
 Mesh
@@ -3299,6 +3517,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -3333,6 +3555,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+2292828278
 next
 1453904229
 Mesh
@@ -3348,6 +3572,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -3382,6 +3610,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+2394647240
 next
 2176521923
 Mesh
@@ -3397,6 +3627,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -3431,6 +3665,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+2854348708
 next
 3217165563
 Mesh
@@ -3446,6 +3682,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -3480,6 +3720,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+546466002
 next
 1481395301
 Mesh
@@ -3495,6 +3737,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -3529,6 +3775,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+498435576
 next
 1942678418
 Mesh
@@ -3544,6 +3792,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -3578,6 +3830,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3627496070
 next
 68105375
 Mesh
@@ -3593,6 +3847,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -3627,6 +3885,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3159312744
 next
 388977908
 Mesh
@@ -3642,6 +3902,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -3676,6 +3940,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+2766428356
 next
 1282269745
 Mesh
@@ -3691,6 +3957,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -3725,6 +3995,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+177252452
 next
 1726466354
 Mesh
@@ -3740,6 +4012,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -3774,6 +4050,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1046543941
 next
 3692243422
 Mesh
@@ -3789,6 +4067,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -3823,6 +4105,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3032237178
 next
 2704797787
 Mesh
@@ -3838,6 +4122,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -3872,6 +4160,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+2947072104
 next
 2597669493
 Mesh
@@ -3887,6 +4177,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -3921,6 +4215,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1193098595
 next
 2517369068
 Mesh
@@ -3936,6 +4232,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -3970,6 +4270,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1025558621
 next
 2598610218
 Mesh
@@ -3985,6 +4287,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -4019,6 +4325,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+4056216666
 next
 4173588162
 Mesh
@@ -4034,6 +4342,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -4068,6 +4380,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3456681440
 next
 3723627568
 Mesh
@@ -4083,6 +4397,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -4117,6 +4435,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3243517020
 next
 1373285446
 Mesh
@@ -4132,6 +4452,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -4166,6 +4490,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+953833890
 next
 3722205023
 Mesh
@@ -4181,6 +4507,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -4215,6 +4545,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3612138487
 next
 4109850197
 Mesh
@@ -4230,6 +4562,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -4264,6 +4600,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+386484491
 next
 125187005
 Mesh
@@ -4279,6 +4617,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -4313,6 +4655,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3070319259
 next
 33736086
 Mesh
@@ -4328,6 +4672,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -4362,6 +4710,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+25220632
 next
 3042477030
 Mesh
@@ -4377,6 +4727,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -4411,6 +4765,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3734695822
 next
 2438081109
 Mesh
@@ -4426,6 +4782,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -4460,6 +4820,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1433931917
 next
 3902105164
 Mesh
@@ -4475,6 +4837,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -4509,6 +4875,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1387221756
 next
 3277779603
 Mesh
@@ -4524,6 +4892,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -4558,6 +4930,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3505149685
 next
 1357086286
 Mesh
@@ -4573,6 +4947,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -4607,6 +4985,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+4132478470
 next
 19040370
 Mesh
@@ -4622,6 +5002,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -4656,6 +5040,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+635036960
 next
 1333566858
 Mesh
@@ -4671,6 +5057,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -4705,6 +5095,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+144228768
 next
 2703758466
 Mesh
@@ -4720,6 +5112,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -4754,6 +5150,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3017068569
 next
 1881534896
 Mesh
@@ -4769,6 +5167,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -4803,6 +5205,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1834058362
 next
 1375407846
 Mesh
@@ -4818,6 +5222,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -4852,6 +5260,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3325871174
 next
 2692746674
 Mesh
@@ -4867,6 +5277,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -4901,6 +5315,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+879827200
 next
 579792420
 Mesh
@@ -4916,6 +5332,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -4950,6 +5370,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+736043808
 next
 1042260178
 Mesh
@@ -4965,6 +5387,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -4999,6 +5425,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+2682710240
 next
 4014210649
 Mesh
@@ -5014,6 +5442,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -5048,6 +5480,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1551950888
 next
 1936289659
 Mesh
@@ -5063,6 +5497,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -5097,6 +5535,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+688190406
 next
 362912548
 Mesh
@@ -5112,6 +5552,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -5146,6 +5590,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1466559799
 next
 4071675941
 Mesh
@@ -5161,6 +5607,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -5195,6 +5645,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+2241100847
 next
 2413265585
 Mesh
@@ -5210,6 +5662,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -5244,6 +5700,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1786962989
 next
 1573907232
 Mesh
@@ -5259,6 +5717,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -5293,6 +5755,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+4252214648
 next
 3890799937
 Mesh
@@ -5308,6 +5772,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -5342,6 +5810,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+875435688
 next
 1523039496
 Mesh
@@ -5357,6 +5827,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -5391,6 +5865,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1482455321
 next
 97777244
 Mesh
@@ -5406,6 +5882,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -5440,6 +5920,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3287911655
 next
 640309869
 Mesh
@@ -5455,6 +5937,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -5489,6 +5975,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+4252350686
 next
 4158339278
 Mesh
@@ -5504,6 +5992,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -5538,6 +6030,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1204814946
 next
 3006011475
 Mesh
@@ -5553,6 +6047,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -5587,6 +6085,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+974689249
 next
 1086562493
 Mesh
@@ -5602,6 +6102,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -5636,6 +6140,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+735043600
 next
 3584152305
 Mesh
@@ -5651,6 +6157,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -5685,6 +6195,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1541900694
 next
 3957223326
 Mesh
@@ -5700,6 +6212,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -5734,6 +6250,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3698469193
 next
 844478094
 Mesh
@@ -5749,6 +6267,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -5783,6 +6305,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+2332143939
 next
 484919754
 Mesh
@@ -5798,6 +6322,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -5832,6 +6360,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+2614967980
 next
 3743305962
 Mesh
@@ -5847,6 +6377,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -5881,6 +6415,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1587881759
 next
 2152589563
 Mesh
@@ -5896,6 +6432,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -5930,6 +6470,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3851125229
 next
 1953263900
 Mesh
@@ -5945,6 +6487,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -5979,6 +6525,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+2817317656
 next
 293382201
 Mesh
@@ -5994,6 +6542,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -6028,6 +6580,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1307538082
 next
 3229696528
 Mesh
@@ -6043,6 +6597,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -6077,6 +6635,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+2755206560
 next
 3936428859
 Mesh
@@ -6092,6 +6652,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -6126,6 +6690,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1736652747
 next
 4253308842
 Mesh
@@ -6141,6 +6707,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -6175,6 +6745,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3706960685
 next
 1593807577
 Mesh
@@ -6190,6 +6762,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -6224,6 +6800,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1653844098
 next
 1077048569
 Mesh
@@ -6239,6 +6817,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -6273,6 +6855,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1132633259
 next
 3046102695
 Mesh
@@ -6288,6 +6872,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -6322,6 +6910,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+592749698
 next
 4102573433
 Mesh
@@ -6337,6 +6927,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -6371,6 +6965,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+2298230729
 next
 2357402861
 Mesh
@@ -6386,6 +6982,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -6420,6 +7020,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1788481743
 next
 3685694538
 Mesh
@@ -6435,6 +7037,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -6469,6 +7075,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3936827677
 next
 1528397834
 Mesh
@@ -6484,6 +7092,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -6518,6 +7130,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3898967200
 next
 4221441481
 Mesh
@@ -6533,6 +7147,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -6567,6 +7185,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+603946863
 next
 2808542317
 Mesh
@@ -6582,6 +7202,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -6616,6 +7240,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3480818352
 next
 4090565721
 Mesh
@@ -6631,6 +7257,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -6665,6 +7295,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3588379985
 next
 3667613283
 Mesh
@@ -6680,6 +7312,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -6714,6 +7350,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+2234881293
 next
 2798382384
 Mesh
@@ -6729,6 +7367,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -6763,6 +7405,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+4235483538
 next
 1984234867
 Mesh
@@ -6778,6 +7422,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -6812,6 +7460,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+53668956
 next
 556343064
 Mesh
@@ -6827,6 +7477,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -6861,6 +7515,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1398557068
 next
 2734107154
 Mesh
@@ -6876,6 +7532,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -6910,6 +7570,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+993460065
 next
 869806797
 Mesh
@@ -6925,6 +7587,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -6959,6 +7625,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1374746445
 next
 869806797
 ShieldMesh
@@ -6974,6 +7642,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -7008,6 +7680,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1955229772
 next
 1937048256
 SkyBox
@@ -7023,6 +7697,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -7057,6 +7735,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3290546129
 next
 1714172181
 Mesh
@@ -7072,6 +7752,10 @@ Casts Shadow
 1
 Grid Obstacle
 0
+LMAtlasOffset
+0 0
+LMTextureSize
+0 0
 M_Ambient
 0.5 0.5 0.5 1
 M_Blend State
@@ -7106,5 +7790,7 @@ Static
 1
 Trans. Occlude
 0
+UID
+3017669305
 next
 end
