@@ -653,7 +653,7 @@ void RenderPostProcessSetup()
 {
 	context->RSSetViewports(1, &viewport);
 
-	const float clearColour[4] = { 0.f, 0.f, 0.f, 1.f };
+	constexpr float clearColour[4] = { 0.f, 0.f, 0.f, 1.f };
 	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
 
 	context->ClearRenderTargetView(postRTV, clearColour);
