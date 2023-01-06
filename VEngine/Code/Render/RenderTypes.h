@@ -182,14 +182,14 @@ struct ShaderSkinningData
 
 struct ShaderPostProcessData
 {
-	float exposure = 1.1f;
-	float shoulderStrength = 0.22f;
-	float linearStrength = 2.0f;
-	float linearAngle = 0.01f;
-	float toeStrenth = 0.2f;
-	float toeNumerator = 0.011f;
+	float exposure = 0.67f;
+	float linearAngle = 0.001f;
+	float linearStrength = 2.2f;
+	float shoulderStrength = 0.19f;
 	float toeDenominator = 0.33f;
-	float linearWhitePointValue = 3.3f;
+	float toeNumerator = 0.012f;
+	float toeStrenth = 2.0f;
+	float linearWhitePointValue = 2.0f;
 };
 
 struct InstanceData

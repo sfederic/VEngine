@@ -7,12 +7,12 @@ struct VS_OUTPUT
 cbuffer ShaderPostProcessData : register(b0)
 {
     float exposure;
-    float shoulderStrength;
-    float linearStrength;
     float linearAngle;
-    float toeStrenth;
-    float toeNumerator;
+    float linearStrength;
+    float shoulderStrength;
     float toeDenominator;
+    float toeNumerator;
+    float toeStrenth;
     float linearWhitePointValue;
 };
 
