@@ -38,7 +38,7 @@ float4 main(VS_OUT i) : SV_Target
     
     //float4 lightMapColour = lightMap.Sample(s, i.lightMapUV);
     
-    float4 finalColour = (globalAmbient + endResult.diffuse + endResult.specular) * texColour;
+    float4 finalColour = ((globalAmbient + endResult.diffuse + endResult.specular) + shadowColour) * texColour;
     finalColour.a = material.ambient.a;
-    return finalColour + (shIrradiance * 2);
+    return finalColour + (shIrradiance * 2.0);
 }
