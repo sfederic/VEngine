@@ -118,7 +118,7 @@ cbuffer cbTime : register(b4)
 
 cbuffer cbMeshData : register(b5)
 {
-    float4 SH[9]; //Spherical Harmonics
+    float4 SH[9]; //Spherical Harmonics for probe linked to mesh
 	float3 meshPosition;
     float cbMeshDataPad;
 }
