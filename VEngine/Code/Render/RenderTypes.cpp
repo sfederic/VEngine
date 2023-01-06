@@ -45,12 +45,3 @@ void ShaderMatrices::MakeModelViewProjectionMatrix()
 {
 	mvp = model * view * proj;
 }
-
-void ShaderMeshLightMapData::AssertValues()
-{
-	assert(atlasOffset.x <= atlasSize.x);
-	assert(atlasOffset.y <= atlasSize.y);
-
-	assert(textureSize.x <= atlasSize.x);
-	assert(textureSize.y <= atlasSize.y);
-}
