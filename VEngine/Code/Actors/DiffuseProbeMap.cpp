@@ -85,7 +85,16 @@ ProbeData DiffuseProbeMap::FindClosestProbe(XMVECTOR pos)
 
 	for (auto& probe : probeData)
 	{
-		distanceMap[XMVector3Length(XMLoadFloat3(&probe.position) - pos).m128_f32[0]] = probe;
+		float distance = XMVector3Length(XMLoadFloat3(&probe.position) - pos).m128_f32[0];
+		distanceMap[distance] = probe;
+
+		//@Todo: this distance check is to get around the performance problems of too many probes.
+		//Helps performance for now, a better system would be to get world position of the mesh and 
+		//round the values into a 3D array of probes as an index.
+		if (distance < 1.f)
+		{
+			return distanceMap.begin()->second;
+		}
 	}
 
 	if (!distanceMap.empty())
