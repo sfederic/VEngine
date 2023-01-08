@@ -2,11 +2,13 @@
 #include "Player.h"
 #include "Input.h"
 #include "VMath.h"
+#include "Timer.h"
 #include "Actors/Game/Enemy.h"
 #include "Actors/Game/LevelInstance.h"
 #include "Actors/Game/InteractActor.h"
 #include "Components/MeshComponent.h"
 #include "Components/CameraComponent.h"
+#include "Components/Lights/PointLightComponent.h"
 #include "Components/Game/SwordBeam.h"
 #include "Gameplay/GameUtils.h"
 #include "Physics/Raycast.h"
@@ -249,6 +251,11 @@ void Player::Shoot()
 					if (mesh)
 					{
 						GameUtils::SpawnSpriteSheet("Sprites/explosion.png", mesh->GetWorldPositionV(), false, 4, 4);
+
+						auto pointLight = PointLightComponent::system.Add("PlayerShootEffectPointLight");
+						pointLight->SetPosition(hitResult.hitPos);
+						Timer::SetTimer(0.5f, std::bind(&Component::Remove, pointLight));
+
 						mesh->Remove();
 					}
 
