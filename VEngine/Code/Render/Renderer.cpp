@@ -49,7 +49,6 @@
 #include "Render/SpriteSystem.h"
 #include "Render/VertexShader.h"
 #include "Render/PixelShader.h"
-#include "Render/BMPFileWriter.h"
 
 void CreateFactory();
 void CreateDevice();
