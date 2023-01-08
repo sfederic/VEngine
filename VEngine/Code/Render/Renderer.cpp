@@ -728,15 +728,15 @@ void RenderMeshComponents()
 {
 	Profile::Start();
 
+	//Shader Resources
+	SetShadowResources();
+	SetLightResources();
+
 	for (auto mesh : MeshComponent::SortMeshComponentsByDistanceToCamera())
 	{
 		if (!mesh->IsActive()) { continue; }
 
 		SetRenderPipelineStates(mesh);
-
-		//Shader Resources
-		SetLightResources();
-		SetShadowResources();
 
 		//Constant buffer data
 		SetMatricesFromMesh(mesh);
