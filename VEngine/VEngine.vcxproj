@@ -117,6 +117,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Actors\Game\BasicEnemy.cpp" />
     <ClCompile Include="Code\Actors\Game\BacksideEnemy.cpp" />
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp" />
     <ClCompile Include="Code\Actors\CameraActor.cpp" />
@@ -242,6 +243,7 @@
     <ClCompile Include="Code\Actors\Game\RepairObject.cpp" />
     <ClCompile Include="Code\Components\Game\SwordBeam.cpp" />
     <ClCompile Include="Code\Actors\LightVolume.cpp" />
+    <ClInclude Include="Code\Actors\Game\BasicEnemy.h" />
     <ClInclude Include="Code\Actors\Game\BacksideEnemy.h" />
     <ClInclude Include="Code\Actors\CameraActor.h" />
     <ClInclude Include="Code\Actors\Game\BeamEnemy.h" />
