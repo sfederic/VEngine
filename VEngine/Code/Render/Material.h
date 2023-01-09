@@ -20,7 +20,7 @@ class ShaderItem;
 //The data passed into a shader's constant buffer. Has to be seperate because of byte packing.
 struct MaterialShaderData
 {
-	XMFLOAT4 ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.f);
+	XMFLOAT4 ambient = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
 	XMFLOAT4 emissive = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
 	XMFLOAT4 diffuse = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
 	XMFLOAT4 specular = XMFLOAT4(1.f, 1.f, 1.f, 1.f);

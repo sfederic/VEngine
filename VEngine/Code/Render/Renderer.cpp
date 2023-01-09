@@ -1353,12 +1353,16 @@ void Renderer::RenderParticleEmitters()
 			context->RSSetState(rastStateMap["nobackcull"]->data);
 		}
 
-		//@Todo: blend state for particles. Probably need a new shader
-		//SetBlendState(BlendStates::Default);
+		SetBlendState(BlendStates::Default);
 
 		SetShaders(ShaderItems::DefaultClip);
 
 		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
+
+		MaterialShaderData materialShaderData;
+		materialShaderData.ambient = emitter->colour;
+		cbMaterial->Map(&materialShaderData);
+		cbMaterial->SetPS();
 
 		//Set texture from emitter for every particle
 		SetShaderResourcePixel(0, emitter->textureData.filename);

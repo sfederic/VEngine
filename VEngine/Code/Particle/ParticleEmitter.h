@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Components/SpatialComponent.h"
 #include "Components/ComponentSystem.h"
 #include "Particle.h"
@@ -12,6 +13,8 @@ struct ParticleEmitter : SpatialComponent
 	XMFLOAT3 direction = XMFLOAT3(0.f, 0.f, 0.f);
 
 	TextureData textureData;
+
+	XMFLOAT4 colour = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
 
 	//The Float2's here are acting as a range [x = min, y = max]
 	XMFLOAT2 moveSpeed = XMFLOAT2(1.f, 1.f);

@@ -84,5 +84,6 @@ Properties ParticleEmitter::GetProps()
 	props.Add("Direction", &direction);
 	props.Add("Rotate", &rotation);
 	props.Add("Rotate Speed", &rotateSpeed);
+	props.Add("Colour", &colour);
 	return props;
 }

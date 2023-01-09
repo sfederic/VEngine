@@ -1,5 +1,5 @@
 BasicEnemy
-1
+2
  Enabled
 1
  Position
@@ -13,26 +13,18 @@ BasicEnemy0
 UID
 861086487
 next
-DiffuseProbeMap
-1
  Enabled
 1
  Position
-0 0 0
+5 2 3
  Rotation
 -0 0 -0 1
  Scale
 1 1 1
 Name
-DiffuseProbeMap0
-Size X
-10
-Size Y
-4
-Size Z
-10
+BasicEnemy1
 UID
-1719497366
+1046939937
 next
 DirectionalLightActor
 1
@@ -1459,6 +1451,21 @@ MeshActor106
 UID
 556343064
 next
+ParticleSystem
+1
+ Enabled
+1
+ Position
+1 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+ParticleSystem0
+UID
+2442439814
+next
 Player
 1
  Enabled
@@ -1468,28 +1475,13 @@ Player
  Rotation
 0 0 0 1
  Scale
-1 1 1
+0.5 0.5 0.5
 All Range Mode
 1
 Name
 Player0
 UID
 2893191651
-next
-PointLightActor
-1
- Enabled
-1
- Position
-2 1 3
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Name
-PointLightActor0
-UID
-2519985352
 next
 SkyBox
 1
@@ -1549,8 +1541,21 @@ UID
 3366435341
 next
 EmptyComponent
-2
+3
 861086487
+Root
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+UID
+2489411926
+next
+1046939937
 Root
  Enabled
 1
@@ -1576,14 +1581,14 @@ Root
 UID
 1199831576
 next
-InstanceMeshComponent
-1
-1719497366
-InstanceMesh
+MeshComponent
+112
+861086487
+Mesh
  Enabled
 1
  Pos
-0 0 0
+3 2 3
  Rot
 -0 0 -0 1
  Scale
@@ -1601,7 +1606,7 @@ M_Metallic
 M_Rast State
 solid
 M_Shader
-Instance
+Default
 M_Smoothness
 0
 M_Specular
@@ -1609,7 +1614,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1621,22 +1626,20 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-cube.fbx
+ico_sphere.fbx
 Static
 1
 Trans. Occlude
 0
 UID
-387897163
+3765805092
 next
-MeshComponent
-111
-861086487
+1046939937
 Mesh
  Enabled
 1
  Pos
-3 2 3
+5 2 3
  Rot
 -0 0 -0 1
  Scale
@@ -7148,7 +7151,7 @@ Mesh
  Rot
 0 0 0 1
  Scale
-1 1 1
+0.5 0.5 0.5
 Casts Shadow
 1
 Grid Obstacle
@@ -7292,25 +7295,37 @@ Trans. Occlude
 UID
 3290546129
 next
-PointLightComponent
+ParticleEmitter
 1
-2519985352
-PointLight
+2442439814
+Emitter
  Enabled
 1
  Pos
-2 1 3
+1 0 0
  Rot
 -0 0 -0 1
  Scale
 1 1 1
 Colour
-1 0 0 1
-Intensity
-50
-LightEnabled
-1
+1 1 1 0.5
+Direction
+0 0 0
+Lifetime
+1 1
+Move Speed
+1 1
+Rotate
+0 0
+Rotate Speed
+0 0
+Spawn Radius
+0 1
+Spawn Rate
+0.3 0.3
+Texture
+crate.jpg
 UID
-3208070256
+99466103
 next
 end
