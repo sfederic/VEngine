@@ -1353,6 +1353,9 @@ void Renderer::RenderParticleEmitters()
 			context->RSSetState(rastStateMap["nobackcull"]->data);
 		}
 
+		//@Todo: blend state for particles. Probably need a new shader
+		//SetBlendState(BlendStates::Default);
+
 		SetShaders(ShaderItems::DefaultClip);
 
 		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
