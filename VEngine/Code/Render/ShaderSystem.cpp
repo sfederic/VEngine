@@ -53,6 +53,11 @@ ShaderItem* ShaderSystem::FindShaderItem(const std::string shaderItemName)
     return shaderItems[shaderItemName].get();
 }
 
+bool ShaderSystem::DoesShaderItemExist(std::string shaderItemName)
+{
+    return shaderItems.find(shaderItemName) != shaderItems.end();
+}
+
 void ShaderSystem::ClearShaders()
 {
     vertexShaders.clear();

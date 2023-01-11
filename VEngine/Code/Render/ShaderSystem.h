@@ -20,5 +20,7 @@ namespace ShaderSystem
 	PixelShader* FindPixelShader(const std::wstring filename);
 	ShaderItem* FindShaderItem(const std::string shaderItemName);
 
+	bool DoesShaderItemExist(std::string shaderItemName);
+
 	void ClearShaders();
 };

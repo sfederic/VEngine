@@ -1,9 +1,11 @@
 #include "vpch.h"
 #include "ShaderDataWidget.h"
 #include <qfiledialog.h>
-#include "Render/RenderTypes.h"
 #include "VString.h"
+#include "Log.h"
 #include "Asset/AssetPaths.h"
+#include "Render/RenderTypes.h"
+#include "Render/ShaderSystem.h"
 
 ShaderDataWidget::ShaderDataWidget(Property& prop_)
 {
@@ -16,9 +18,17 @@ ShaderDataWidget::ShaderDataWidget(Property& prop_)
 
 void ShaderDataWidget::SetValue()
 {
-	value->shaderItemName.assign(text().toStdString());
-	prop.change(value);
-	ResetValue();
+	std::string shaderItemName = text().toStdString();
+	if (ShaderSystem::DoesShaderItemExist(shaderItemName))
+	{
+		value->shaderItemName.assign(text().toStdString());
+		prop.change(value);
+		ResetValue();
+	}
+	else
+	{
+		Log("Shader Item [%s] not found on changing from ShaderDataWidget.", shaderItemName.c_str());
+	}
 }
 
 void ShaderDataWidget::ResetValue()
