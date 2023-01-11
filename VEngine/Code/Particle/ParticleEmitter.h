@@ -3,6 +3,9 @@
 #include "Components/SpatialComponent.h"
 #include "Components/ComponentSystem.h"
 #include "Particle.h"
+#include "Render/ShaderItem.h"
+
+class Material;
 
 struct ParticleEmitter : SpatialComponent
 {
@@ -10,11 +13,9 @@ struct ParticleEmitter : SpatialComponent
 
 	std::vector<Particle> particles;
 
+	Material* material = nullptr;
+
 	XMFLOAT3 direction = XMFLOAT3(0.f, 0.f, 0.f);
-
-	TextureData textureData;
-
-	XMFLOAT4 colour = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
 
 	//The Float2's here are acting as a range [x = min, y = max]
 	XMFLOAT2 moveSpeed = XMFLOAT2(1.f, 1.f);
@@ -32,7 +33,7 @@ private:
 	float emitterLifetimeTimer = 0.f;
 
 public:
-	ParticleEmitter();
+	ParticleEmitter(std::string textureFilename = "test.png", ShaderItem* shaderItem = ShaderItems::DefaultClip);
 	void CreateParticle(Particle particle);
 	virtual void Tick(float deltaTime) override;
 	virtual void Create() override;

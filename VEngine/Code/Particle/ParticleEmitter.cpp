@@ -1,9 +1,12 @@
 #include "vpch.h"
 #include "ParticleEmitter.h"
 #include "VMath.h"
+#include "Render/Material.h"
+#include "Render/MaterialSystem.h"
 
-ParticleEmitter::ParticleEmitter()
+ParticleEmitter::ParticleEmitter(std::string textureFilename, ShaderItem* shaderItem)
 {
+	material = MaterialSystem::CreateMaterial(textureFilename, shaderItem);
 }
 
 void ParticleEmitter::CreateParticle(Particle particle)
@@ -70,6 +73,7 @@ void ParticleEmitter::Tick(float deltaTime)
 
 void ParticleEmitter::Create()
 {
+	material->Create();
 }
 
 Properties ParticleEmitter::GetProps()
@@ -80,10 +84,12 @@ Properties ParticleEmitter::GetProps()
 	props.Add("Spawn Rate", &spawnRate);
 	props.Add("Spawn Radius", &spawnRadius);
 	props.Add("Lifetime", &lifetime);
-	props.Add("Texture", &textureData);
 	props.Add("Direction", &direction);
 	props.Add("Rotate", &rotation);
 	props.Add("Rotate Speed", &rotateSpeed);
-	props.Add("Colour", &colour);
+
+	auto materialProps = material->GetProps();
+	props.Merge(materialProps);
+
 	return props;
 }

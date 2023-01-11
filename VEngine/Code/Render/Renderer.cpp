@@ -1355,17 +1355,17 @@ void Renderer::RenderParticleEmitters()
 
 		SetBlendState(BlendStates::Default);
 
-		SetShaders(ShaderItems::DefaultClip);
+		SetShaders(emitter->material->shader);
 
 		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
 
 		MaterialShaderData materialShaderData;
-		materialShaderData.ambient = emitter->colour;
+		materialShaderData = emitter->material->materialShaderData;
 		cbMaterial->Map(&materialShaderData);
 		cbMaterial->SetPS();
 
 		//Set texture from emitter for every particle
-		SetShaderResourcePixel(0, emitter->textureData.filename);
+		SetShaderResourcePixel(0, emitter->material->textureData.filename);
 
 		SpriteSystem::UpdateAndSetSpriteBuffers(context);
 

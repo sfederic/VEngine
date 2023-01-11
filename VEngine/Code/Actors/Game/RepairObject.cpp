@@ -7,8 +7,7 @@ RepairObject::RepairObject()
 {
 	rootComponent = CreateComponent(MeshComponent("cube.fbx", "test.png"), "Mesh");
 
-	auto emitter = CreateComponent(ParticleEmitter(), "Smoke");
-	emitter->textureData.filename = "Particle/smoke.png";
+	auto emitter = CreateComponent(ParticleEmitter("Particle/smoke.png"), "Smoke");
 	rootComponent->AddChild(emitter);
 }
 
