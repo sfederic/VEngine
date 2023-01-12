@@ -1,0 +1,329 @@
+DirectionalLightActor
+1
+ Enabled
+1
+ Position
+0 5 0
+ Rotation
+0.707107 0 0 0.707107
+ Scale
+1 1 1
+Name
+DirectionalLightActor0
+UID
+1064617059
+next
+LevelInstance
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Level Size
+5 3 5
+Name
+LevelInstance0
+UID
+368965789
+next
+MeshActor
+4
+ Enabled
+1
+ Position
+2 -0.5 2
+ Rotation
+-0 0 -0.173648 0.984808
+ Scale
+10 0.999996 10
+Name
+cylinder0
+UID
+3256173008
+next
+ Enabled
+1
+ Position
+-0.833388 3.11657 2.00266
+ Rotation
+-0.000178232 -0.00186379 -0.0871945 0.99619
+ Scale
+1 1 0.999993
+Name
+cylinder1
+UID
+2299758598
+next
+ Enabled
+1
+ Position
+-2 3 -1
+ Rotation
+-0.675771 0 -0 0.737112
+ Scale
+1 1 1
+Name
+cylinder2
+UID
+342929619
+next
+ Enabled
+1
+ Position
+1 3 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+Name
+sphere3
+UID
+1743721312
+next
+DirectionalLightComponent
+1
+1064617059
+DirectionalLight
+ Enabled
+1
+ Pos
+0 5 0
+ Rot
+0.707107 0 0 0.707107
+ Scale
+1 1 1
+Colour
+1 1 1 1
+LightEnabled
+1
+ShadowMap Size
+15
+UID
+715972107
+next
+EmptyComponent
+1
+368965789
+Root
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+UID
+1243784107
+next
+MeshComponent
+4
+3256173008
+Mesh
+ Enabled
+1
+ Pos
+2 -0.5 2
+ Rot
+-0 0 -0.173648 0.984808
+ Scale
+10 0.999996 10
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.fbx
+Static
+1
+Trans. Occlude
+0
+UID
+901642485
+next
+2299758598
+Mesh
+ Enabled
+1
+ Pos
+-0.833388 3.11657 2.00266
+ Rot
+-0.000178232 -0.00186379 -0.0871945 0.99619
+ Scale
+1 1 0.999993
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.fbx
+Static
+0
+Trans. Occlude
+0
+UID
+1533126961
+next
+342929619
+Mesh
+ Enabled
+1
+ Pos
+-2 3 -1
+ Rot
+-0.675771 0 -0 0.737112
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cylinder.fbx
+Static
+0
+Trans. Occlude
+0
+UID
+4237933491
+next
+1743721312
+Mesh
+ Enabled
+1
+ Pos
+1 3 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+sphere.fbx
+Static
+0
+Trans. Occlude
+0
+UID
+2748483301
+next
+end
