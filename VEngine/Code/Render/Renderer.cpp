@@ -1612,7 +1612,7 @@ void SetRenderPipelineStates(MeshComponent* mesh)
 	SetVertexBuffer(pso.vertexBuffer);
 
 	cbMaterial->Map(&material->materialShaderData);
-	cbMaterial->SetVSAndPS();
+	cbMaterial->SetPS();
 }
 
 void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
