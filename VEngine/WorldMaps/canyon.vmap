@@ -31,7 +31,7 @@ UID
 3470381402
 next
 MeshActor
-8
+9
  Enabled
 1
  Position
@@ -136,20 +136,33 @@ mound7
 UID
 3978585331
 next
-ParticleSystem
-1
  Enabled
 1
  Position
-3 0 2
+3 1 0
  Rotation
 -0 0 -0 1
  Scale
 1 1 1
 Name
+animated_cylinder8
+UID
+1715062371
+next
+ParticleSystem
+1
+ Enabled
+1
+ Position
+2 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+Name
 ParticleSystem0
 UID
-2985804626
+3282781597
 next
 Player
 1
@@ -216,6 +229,8 @@ Far Z
 1000
 Near Z
 0.01
+UID
+3899412763
 next
 DirectionalLightComponent
 1
@@ -235,6 +250,8 @@ LightEnabled
 1
 ShadowMap Size
 15
+UID
+2797547603
 next
 EmptyComponent
 1
@@ -248,9 +265,11 @@ Root
 0 0 0 1
  Scale
 1 1 1
+UID
+994206967
 next
 MeshComponent
-12
+13
 4125901729
 Mesh
  Enabled
@@ -299,6 +318,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1570061634
 next
 3225599297
 Mesh
@@ -348,6 +369,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1993320586
 next
 597370172
 Mesh
@@ -397,6 +420,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+2361629182
 next
 3716619835
 Mesh
@@ -446,6 +471,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+985332065
 next
 766003942
 Mesh
@@ -495,6 +522,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1203252578
 next
 3227832740
 Mesh
@@ -544,6 +573,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+257177734
 next
 1506642654
 Mesh
@@ -593,6 +624,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1931695912
 next
 3978585331
 Mesh
@@ -642,6 +675,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3935847978
 next
 3322088524
 Mesh
@@ -691,6 +726,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+1114591020
 next
 3322088524
 ShieldMesh
@@ -740,6 +777,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+743879633
 next
 2346841088
 Mesh
@@ -789,6 +828,8 @@ Static
 1
 Trans. Occlude
 0
+UID
+3357603854
 next
 3848448693
 SkyBox
@@ -838,9 +879,117 @@ Static
 1
 Trans. Occlude
 0
+UID
+1109606949
+next
+1715062371
+Mesh
+ Enabled
+1
+ Pos
+3 1 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+animated_cylinder.fbx
+Static
+1
+Trans. Occlude
+0
+UID
+2257653551
 next
 ParticleEmitter
 2
+3282781597
+Emitter
+ Enabled
+1
+ Pos
+2 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+Direction
+0 0 0
+Lifetime
+1 1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+numbers.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+5
+M_UvRotationSpeed
+40
+M_UvScale
+1 1
+Move Speed
+1 1
+Rotate
+0 0
+Rotate Speed
+0 0
+Spawn Radius
+0 1
+Spawn Rate
+0.3 0.3
+UID
+3858039116
+next
 2346841088
 Smoke
  Enabled
@@ -852,35 +1001,36 @@ Smoke
  Scale
 1 1 1
 Direction
-2.35418e-43 0 1.4013e-45
+0 0 0
 Lifetime
 1 1
-Move Speed
-1 1
-Rotate
-0 0
-Rotate Speed
-0 0
-Spawn Radius
-0 1
-Spawn Rate
-0.3 0.3
-Texture
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+DefaultClip
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
 Particle/smoke.png
-next
-2985804626
-Emitter
- Enabled
+M_Use Texture
 1
- Pos
-3 0 2
- Rot
--0 0 -0 1
- Scale
-1 1 1
-Direction
-0 1 0
-Lifetime
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
 1 1
 Move Speed
 1 1
@@ -892,7 +1042,7 @@ Spawn Radius
 0 1
 Spawn Rate
 0.3 0.3
-Texture
-Particle/fire.png
+UID
+3146826314
 next
 end

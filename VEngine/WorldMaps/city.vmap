@@ -1,30 +1,43 @@
 BasicEnemy
-2
- Enabled
-1
- Position
-3 2 3
- Rotation
--0 0 -0 1
- Scale
-1 1 1
-Name
-BasicEnemy0
-UID
-861086487
-next
+3
  Enabled
 1
  Position
 5 2 3
  Rotation
--0 0 -0 1
+0 0.202018 0 -0.979382
  Scale
-1 1 1
+0.5 0.5 0.5
 Name
 BasicEnemy1
 UID
 1046939937
+next
+ Enabled
+1
+ Position
+4 2 3
+ Rotation
+0 0.202018 0 -0.979382
+ Scale
+0.500001 0.5 0.500001
+Name
+BasicEnemy549328840
+UID
+3564572580
+next
+ Enabled
+1
+ Position
+3 2 5
+ Rotation
+0 0.202018 0 -0.979382
+ Scale
+0.500001 0.5 0.500001
+Name
+BasicEnemy2
+UID
+132214276
 next
 DirectionalLightActor
 1
@@ -59,7 +72,7 @@ UID
 3285984848
 next
 MeshActor
-107
+106
  Enabled
 1
  Position
@@ -76,28 +89,28 @@ next
  Enabled
 1
  Position
-0 1 3
+4 0 1
  Rotation
 -0 0 -0 1
  Scale
-1 3 1
+0.5 0.5 0.5
 Name
-cube1
+building1107
 UID
-2583712253
+3008639833
 next
  Enabled
 1
  Position
-0 1 5
+9 -0.5 8
  Rotation
-0 0.707107 0 -0.707107
+0 0 0 1
  Scale
-0.999995 3 0.999995
+1 1 1
 Name
-MeshActor2
+MeshActor106
 UID
-2011331193
+556343064
 next
  Enabled
 1
@@ -128,15 +141,15 @@ next
  Enabled
 1
  Position
-7 0.5 3
+9 -0.5 7
  Rotation
--0 0 -0 1
+0 0 0 1
  Scale
-1 2 1
+1 1 1
 Name
-MeshActor5
+MeshActor105
 UID
-2699310136
+1984234867
 next
  Enabled
 1
@@ -145,7 +158,7 @@ next
  Rotation
 0 0.707107 0 0.707107
  Scale
-0.999998 1 0.999998
+0.5 0.5 0.5
 Name
 MeshActor6
 UID
@@ -1428,43 +1441,15 @@ next
  Enabled
 1
  Position
-9 -0.5 7
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Name
-MeshActor105
-UID
-1984234867
-next
- Enabled
-1
- Position
-9 -0.5 8
- Rotation
-0 0 0 1
- Scale
-1 1 1
-Name
-MeshActor106
-UID
-556343064
-next
-ParticleSystem
-1
- Enabled
-1
- Position
-1 0 0
+0.5 0.5 5
  Rotation
 -0 0 -0 1
  Scale
-1 1 1
+0.5 1 0.5
 Name
-ParticleSystem0
+MeshActor2155738333
 UID
-2442439814
+1003844130
 next
 Player
 1
@@ -1473,15 +1458,15 @@ Player
  Position
 0 0 0
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
-0.5 0.5 0.5
+1 1 1
 All Range Mode
 1
 Name
 Player0
 UID
-2893191651
+3733112118
 next
 SkyBox
 1
@@ -1500,14 +1485,14 @@ UID
 next
 CameraComponent
 1
-2893191651
+3733112118
 Camera
  Enabled
 1
  Pos
 2 1.5 -4
  Rot
-0 0 0 1
+0.100444 -0.137986 0.0140676 0.985227
  Scale
 1 1 1
 FOV
@@ -1517,7 +1502,7 @@ Far Z
 Near Z
 0.01
 UID
-2140446517
+4137812963
 next
 DirectionalLightComponent
 1
@@ -1541,8 +1526,8 @@ UID
 3366435341
 next
 EmptyComponent
-3
-861086487
+4
+1046939937
 Root
  Enabled
 1
@@ -1555,7 +1540,20 @@ Root
 UID
 2489411926
 next
-1046939937
+3564572580
+Root
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+UID
+2489411926
+next
+132214276
 Root
  Enabled
 1
@@ -1583,16 +1581,16 @@ UID
 next
 MeshComponent
 112
-861086487
+1046939937
 Mesh
  Enabled
 1
  Pos
-3 2 3
+5 2 3
  Rot
--0 0 -0 1
+0 0.202018 0 -0.979382
  Scale
-1 1 1
+0.5 0.5 0.5
 Casts Shadow
 1
 Grid Obstacle
@@ -1634,16 +1632,67 @@ Trans. Occlude
 UID
 3765805092
 next
-1046939937
+3564572580
 Mesh
  Enabled
 1
  Pos
-5 2 3
+4 2 3
  Rot
--0 0 -0 1
+0 0.202018 0 -0.979382
  Scale
-1 1 1
+0.500001 0.5 0.500001
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+0.5 0.5 0.5 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+ico_sphere.fbx
+Static
+1
+Trans. Occlude
+0
+UID
+3765805092
+next
+132214276
+Mesh
+ Enabled
+1
+ Pos
+3 2 5
+ Rot
+0 0.202018 0 -0.979382
+ Scale
+0.500001 0.5 0.500001
 Casts Shadow
 1
 Grid Obstacle
@@ -1736,22 +1785,22 @@ Trans. Occlude
 UID
 993460065
 next
-2583712253
+3008639833
 Mesh
  Enabled
 1
  Pos
-0 1 3
+4 0 1
  Rot
 -0 0 -0 1
  Scale
-1 3 1
+0.5 0.5 0.5
 Casts Shadow
 1
 Grid Obstacle
 0
 M_Ambient
-0.5 0.5 0.5 1
+1 1 1 1
 M_Blend State
 null
 M_Metallic
@@ -1777,26 +1826,26 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-3 1
+1 1
 Mesh
-cube.fbx
+building1.fbx
 Static
 1
 Trans. Occlude
 0
 UID
-3014812425
+838226180
 next
-2011331193
+556343064
 Mesh
  Enabled
 1
  Pos
-0 1 5
+9 -0.5 8
  Rot
-0 0.707107 0 -0.707107
+0 0 0 1
  Scale
-0.999995 3 0.999995
+1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -1816,7 +1865,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-building.jpg
+Floors/grass02.png
 M_Use Texture
 1
 M_UvOffset
@@ -1828,15 +1877,15 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-3 1
+1 1
 Mesh
-cube.fbx
+node.fbx
 Static
 1
 Trans. Occlude
 0
 UID
-2507132679
+1398557068
 next
 2632628047
 Mesh
@@ -1940,16 +1989,16 @@ Trans. Occlude
 UID
 1062304430
 next
-2699310136
+1984234867
 Mesh
  Enabled
 1
  Pos
-7 0.5 3
+9 -0.5 7
  Rot
--0 0 -0 1
+0 0 0 1
  Scale
-1 2 1
+1 1 1
 Casts Shadow
 1
 Grid Obstacle
@@ -1969,7 +2018,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-building.jpg
+Floors/grass02.png
 M_Use Texture
 1
 M_UvOffset
@@ -1981,15 +2030,15 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-3 1
+1 1
 Mesh
-cube.fbx
+node.fbx
 Static
 1
 Trans. Occlude
 0
 UID
-215955943
+53668956
 next
 2296403832
 Mesh
@@ -2000,7 +2049,7 @@ Mesh
  Rot
 0 0.707107 0 0.707107
  Scale
-0.999998 1 0.999998
+0.5 0.5 0.5
 Casts Shadow
 1
 Grid Obstacle
@@ -7040,22 +7089,22 @@ Trans. Occlude
 UID
 4235483538
 next
-1984234867
+1003844130
 Mesh
  Enabled
 1
  Pos
-9 -0.5 7
+0.5 0.5 5
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
-1 1 1
+0.5 1 0.5
 Casts Shadow
 1
 Grid Obstacle
 0
 M_Ambient
-0.5 0.5 0.5 1
+1 1 1 1
 M_Blend State
 null
 M_Metallic
@@ -7069,7 +7118,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-Floors/grass02.png
+building.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -7083,166 +7132,13 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-node.fbx
+building1.fbx
 Static
 1
 Trans. Occlude
 0
 UID
-53668956
-next
-556343064
-Mesh
- Enabled
-1
- Pos
-9 -0.5 8
- Rot
-0 0 0 1
- Scale
-1 1 1
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Floors/grass02.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.fbx
-Static
-1
-Trans. Occlude
-0
-UID
-1398557068
-next
-2893191651
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-0.5 0.5 0.5
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.fbx
-Static
-1
-Trans. Occlude
-0
-UID
-397798262
-next
-2893191651
-ShieldMesh
- Enabled
-0
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
-Casts Shadow
-1
-Grid Obstacle
-0
-M_Ambient
-0.5 0.5 0.5 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-shield.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-ico_sphere.fbx
-Static
-1
-Trans. Occlude
-0
-UID
-3817303847
+838226180
 next
 1937048256
 SkyBox
@@ -7259,7 +7155,7 @@ Casts Shadow
 Grid Obstacle
 0
 M_Ambient
-0.5 0.5 0.5 1
+1 1 1 1
 M_Blend State
 null
 M_Metallic
@@ -7295,37 +7191,106 @@ Trans. Occlude
 UID
 3290546129
 next
-ParticleEmitter
-1
-2442439814
-Emitter
+3733112118
+Mesh
  Enabled
 1
  Pos
-1 0 0
+0 0 0
  Rot
 -0 0 -0 1
  Scale
 1 1 1
-Colour
-1 1 1 0.5
-Direction
-0 0 0
-Lifetime
-1 1
-Move Speed
-1 1
-Rotate
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
 0 0
-Rotate Speed
+M_UvOffsetSpeed
 0 0
-Spawn Radius
-0 1
-Spawn Rate
-0.3 0.3
-Texture
-crate.jpg
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.fbx
+Static
+1
+Trans. Occlude
+0
 UID
-99466103
+3479233531
+next
+3733112118
+ShieldMesh
+ Enabled
+0
+ Pos
+0 0 0
+ Rot
+0.776195 0 0 -0.630493
+ Scale
+1 1 1
+Casts Shadow
+1
+Grid Obstacle
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+shield.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+ico_sphere.fbx
+Static
+1
+Trans. Occlude
+0
+UID
+1999871689
 next
 end
