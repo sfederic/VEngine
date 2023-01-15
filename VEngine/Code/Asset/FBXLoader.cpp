@@ -364,7 +364,7 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 				meshData->indices.emplace_back(polyIndexCounter);
 				polyIndexCounter++;
 
-				verts[j] = &vert;
+				verts[j] = &meshData->vertices.back();
 			}
 
 			//tangent/bitangent testing
