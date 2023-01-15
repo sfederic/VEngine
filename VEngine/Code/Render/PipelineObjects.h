@@ -52,11 +52,9 @@ struct BlendState
 struct MeshBuffers
 {
 	Buffer vertexBuffer;
-	Buffer indexBuffer;
 };
 
 struct PipelineStateObject
 {
 	Buffer* vertexBuffer = nullptr;
-	Buffer* indexBuffer = nullptr;
 };

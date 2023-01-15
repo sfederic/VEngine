@@ -157,16 +157,16 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 		if(mesh)
 		{
 			//This is for dealing with DestructibleMesh's meshproxy nulls
-			if (mesh->meshDataProxy.vertices == nullptr || mesh->meshDataProxy.indices == nullptr)
+			if (mesh->meshDataProxy.vertices == nullptr)
 			{
 				continue;
 			}
 
 			for (int i = 0; i < mesh->meshDataProxy.vertices->size() / 3; i++)
 			{
-				MeshData::indexDataType index0 = mesh->meshDataProxy.indices->at(static_cast<std::vector<MeshData::indexDataType, std::allocator<MeshData::indexDataType>>::size_type>(i) * 3);
-				MeshData::indexDataType index1 = mesh->meshDataProxy.indices->at(static_cast<std::vector<MeshData::indexDataType, std::allocator<MeshData::indexDataType>>::size_type>(i) * 3 + 1);
-				MeshData::indexDataType index2 = mesh->meshDataProxy.indices->at(static_cast<std::vector<MeshData::indexDataType, std::allocator<MeshData::indexDataType>>::size_type>(i) * 3 + 2);
+				const int index0 = i * 3;
+				const int index1 = i * 3 + 1;
+				const int index2 = i * 3 + 2;
 
 				XMVECTOR v0 = XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index0).pos);
 				v0 = XMVector3TransformCoord(v0, model);

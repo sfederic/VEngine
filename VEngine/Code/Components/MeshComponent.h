@@ -67,7 +67,6 @@ public:
 	XMFLOAT4 GetAmbientColour();
 
 	Buffer* GetVertexBuffer() const;
-	Buffer* GetIndexBuffer() const;
 
 	Material* GetMaterial() { return material; }
 

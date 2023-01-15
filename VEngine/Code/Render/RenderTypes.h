@@ -56,7 +56,6 @@ struct MeshData
 	typedef uint32_t indexDataType;
 
 	std::vector<Vertex> vertices;
-	std::vector<indexDataType> indices;
 
 	//Base extents and offset will be the same for each mesh, fine to cache here.
 	BoundingBox boudingBox;
@@ -93,7 +92,6 @@ struct MeshComponentData
 struct MeshDataProxy
 {
 	std::vector<Vertex>* vertices = nullptr;
-	std::vector<MeshData::indexDataType>* indices = nullptr;
 
 	BoundingBox* boundingBox = nullptr;
 
@@ -102,11 +100,6 @@ struct MeshDataProxy
 	uint64_t GetVerticesByteWidth()
 	{
 		return (sizeof(Vertex) * vertices->size());
-	}
-
-	uint64_t GetIndicesByteWidth()
-	{
-		return (sizeof(MeshData::indexDataType) * indices->size());
 	}
 };
 

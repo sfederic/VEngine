@@ -87,15 +87,12 @@ void MeshComponent::Create()
 		auto& meshBuffers = existingMeshBuffers[meshComponentData.filename];
 
 		meshBuffers->vertexBuffer.data = RenderUtils::CreateVertexBuffer(meshDataProxy);
-		meshBuffers->indexBuffer.data = RenderUtils::CreateIndexBuffer(meshDataProxy);
 
 		pso.vertexBuffer = &meshBuffers->vertexBuffer;
-		pso.indexBuffer = &meshBuffers->indexBuffer;
 	}
 	else
 	{
 		pso.vertexBuffer = &psoIt->second->vertexBuffer;
-		pso.indexBuffer = &psoIt->second->indexBuffer;
 	}
 }
 
@@ -170,11 +167,6 @@ Buffer* MeshComponent::GetVertexBuffer() const
 	return pso.vertexBuffer;
 }
 
-Buffer* MeshComponent::GetIndexBuffer() const
-{
-	return pso.indexBuffer;
-}
-
 std::vector<XMFLOAT3> MeshComponent::GetAllVertexPositions()
 {
 	std::vector<XMFLOAT3> positions;
@@ -183,14 +175,4 @@ std::vector<XMFLOAT3> MeshComponent::GetAllVertexPositions()
 		positions.emplace_back(vertex.pos);
 	}
 	return positions;
-}
-
-std::vector<MeshData::indexDataType> MeshComponent::GetAllIndices()
-{
-	std::vector<MeshData::indexDataType> indices;
-	for (auto index : *meshDataProxy.indices)
-	{
-		indices.push_back(index);
-	}
-	return indices;
 }

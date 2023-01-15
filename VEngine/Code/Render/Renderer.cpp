@@ -515,12 +515,12 @@ void SetLightResources()
 
 void DrawMesh(MeshComponent* mesh)
 {
-	context->DrawIndexed(mesh->meshDataProxy.indices->size(), 0, 0);
+	context->Draw(mesh->meshDataProxy.vertices->size(), 0);
 }
 
 void DrawMeshInstanced(InstanceMeshComponent* mesh)
 {
-	context->DrawIndexedInstanced(mesh->meshDataProxy.indices->size(), mesh->GetInstanceCount(), 0, 0, 0);
+	context->DrawInstanced(mesh->meshDataProxy.vertices->size(), mesh->GetInstanceCount(), 0, 0);
 }
 
 //@Todo: can change the input assembly to only take in Line structs to the shader stage. Right now it's taking
@@ -605,7 +605,7 @@ void RenderShadowPass()
 		SetShaderResourceFromMaterial(0, mesh->material);
 
 		//Draw
-		context->DrawIndexed(mesh->meshDataProxy.indices->size(), 0, 0);
+		context->Draw(mesh->meshDataProxy.vertices->size(), 0);
 	}
 
 	SetNullRTV();
@@ -838,7 +838,6 @@ void Renderer::RenderLightProbeViews()
 				SetShaderResourceFromMaterial(0, material);
 
 				context->IASetVertexBuffers(0, 1, &mesh->pso.vertexBuffer->data, &stride, &offset);
-				context->IASetIndexBuffer(mesh->pso.indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
 
 				cbMaterial->Map(&material->materialShaderData);
 				cbMaterial->SetPS();
@@ -860,7 +859,7 @@ void Renderer::RenderLightProbeViews()
 				cbMeshData->SetVSAndPS();
 
 				//Draw
-				context->DrawIndexed(mesh->meshDataProxy.indices->size(), 0, 0);
+				context->Draw(mesh->meshDataProxy.vertices->size(), 0);
 			}
 
 			//Remove lightprobe RTV
@@ -959,7 +958,6 @@ void RenderBounds()
 		//instead of being static, but then Direct2D swapchain/rendertarget errors would happen.
 		//Feels like it might be the GPU doing some funny memory thing.
 		SetVertexBuffer(debugBox.boxMesh->GetVertexBuffer());
-		SetIndexBuffer(debugBox.boxMesh->GetIndexBuffer());
 
 		//Set debug wireframe material colour
 		materialShaderData.ambient = XMFLOAT4(0.75f, 0.75f, 0.75f, 1.0f);
@@ -1025,7 +1023,6 @@ void RenderBounds()
 		SetShaders(ShaderItems::SolidColour);
 
 		SetVertexBuffer(debugBox.boxMesh->GetVertexBuffer());
-		SetIndexBuffer(debugBox.boxMesh->GetIndexBuffer());
 
 		for (auto& boxTrigger : BoxTriggerComponent::system.GetComponents())
 		{
@@ -1140,7 +1137,6 @@ void RenderLightMeshes()
 
 	//DIRECTIONAL LIGHTS
 	SetVertexBuffer(debugSphere.sphereMesh->GetVertexBuffer());
-	SetIndexBuffer(debugSphere.sphereMesh->GetIndexBuffer());
 
 	for (auto& directionalLight : DirectionalLightComponent::system.GetComponents())
 	{
@@ -1154,7 +1150,6 @@ void RenderLightMeshes()
 
 	//POINT LIGHTS
 	SetVertexBuffer(debugIcoSphere.mesh->GetVertexBuffer());
-	SetIndexBuffer(debugIcoSphere.mesh->GetIndexBuffer());
 
 	for (auto& pointLight : PointLightComponent::system.GetComponents())
 	{
@@ -1168,7 +1163,6 @@ void RenderLightMeshes()
 
 	//SPOT LIGHTS
 	SetVertexBuffer(debugCone.mesh->GetVertexBuffer());
-	SetIndexBuffer(debugCone.mesh->GetIndexBuffer());
 
 	for (auto& spotLight : SpotLightComponent::system.GetComponents())
 	{
@@ -1616,7 +1610,6 @@ void SetRenderPipelineStates(MeshComponent* mesh)
 	SetShaderResourceFromMaterial(0, material);
 
 	SetVertexBuffer(pso.vertexBuffer);
-	SetIndexBuffer(pso.indexBuffer);
 
 	cbMaterial->Map(&material->materialShaderData);
 	cbMaterial->SetVSAndPS();
@@ -1635,7 +1628,6 @@ void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 	context->PSSetShader(shader->GetPixelShader(), nullptr, 0);
 
 	context->IASetVertexBuffers(0, 1, &pso.vertexBuffer->data, &Renderer::stride, &Renderer::offset);
-	context->IASetIndexBuffer(pso.indexBuffer->data, DXGI_FORMAT_R32_UINT, 0);
 }
 
 void SetShaders(ShaderItem* shaderItem)

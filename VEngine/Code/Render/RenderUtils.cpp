@@ -63,12 +63,6 @@ namespace RenderUtils
 			D3D11_BIND_VERTEX_BUFFER, meshData.vertices->data());
 	}
 
-	ID3D11Buffer* CreateIndexBuffer(MeshDataProxy& meshData)
-	{
-		return CreateDefaultBuffer(meshData.GetIndicesByteWidth(),
-			D3D11_BIND_INDEX_BUFFER, meshData.indices->data());
-	}
-
 	ID3D11ShaderResourceView* CreateSRVForMeshInstance(ID3D11Buffer* structuredBuffer, uint32_t numBufferElements)
 	{
 		D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};

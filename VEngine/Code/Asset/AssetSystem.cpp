@@ -31,7 +31,6 @@ void AssetSystem::WriteAllMeshDataToMeshAssetFiles()
 
 		MeshAssetHeader header = {};
 		header.sourceMeshFormat = SourceMeshFormat::FBX;
-		header.indexCount = meshData.indices.size();
 		header.vertexCount = meshData.vertices.size();
 		header.boneCount = meshData.skeleton.joints.size();
 
@@ -44,7 +43,6 @@ void AssetSystem::WriteAllMeshDataToMeshAssetFiles()
 
 		assert(fwrite(&header, sizeof(MeshAssetHeader), 1, file));
 		assert(fwrite(meshData.vertices.data(), sizeof(Vertex), meshData.vertices.size(), file));
-		assert(fwrite(meshData.indices.data(), sizeof(MeshData::indexDataType), meshData.indices.size(), file));
 		assert(fwrite(&meshData.boudingBox, sizeof(DirectX::BoundingBox), 1, file));
 
 		const auto& joints = meshData.skeleton.joints;
@@ -106,10 +104,8 @@ MeshData AssetSystem::ReadAllMeshAssetsFromFile(const char* filename)
 	assert(fread(&header, sizeof(MeshAssetHeader), 1, file));
 
 	data.vertices.resize(header.vertexCount);
-	data.indices.resize(header.indexCount);
 
 	assert(fread(data.vertices.data(), sizeof(Vertex), header.vertexCount, file));
-	assert(fread(data.indices.data(), sizeof(MeshData::indexDataType), header.indexCount, file));
 	assert(fread(&data.boudingBox, sizeof(DirectX::BoundingBox), 1, file));
 
 	data.skeleton.joints.resize(header.boneCount);

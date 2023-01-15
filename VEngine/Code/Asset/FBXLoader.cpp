@@ -49,7 +49,6 @@ bool FBXLoader::Import(std::string filename, MeshDataProxy& meshData)
 		MeshData* existingMeshData = &existingMeshIt->second;
 
 		meshData.vertices = &existingMeshData->vertices;
-		meshData.indices = &existingMeshData->indices;
 		meshData.skeleton = &existingMeshData->skeleton;
 		meshData.boundingBox = &existingMeshData->boudingBox;
 		return true;
@@ -105,7 +104,6 @@ bool FBXLoader::Import(std::string filename, MeshDataProxy& meshData)
 
 	//Set proxy data for new mesh daata
 	meshData.vertices = &newMeshData->vertices;
-	meshData.indices = &newMeshData->indices;
 	meshData.skeleton = &newMeshData->skeleton;
 	meshData.boundingBox = &newMeshData->boudingBox;
 
@@ -299,7 +297,6 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 		int triangleCount = mesh->GetPolygonCount();
 
 		meshData->vertices.reserve(triangleCount);
-		meshData->indices.reserve(triangleCount);
 
 		//@Todo: Part of index buffer create code
 		//std::unordered_map<int, std::pair<int, Vertex>> indexToPolyCount;
@@ -361,7 +358,6 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 				//existingIndices.emplace(index);
 
 				meshData->vertices.emplace_back(vert);
-				meshData->indices.emplace_back(polyIndexCounter);
 				polyIndexCounter++;
 
 				//@Todo: this is incorrect. Need to calc every single triangle, forget about vertices.
@@ -393,8 +389,6 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 			verts[1]->tangent = tangent1;
 			verts[2]->tangent = tangent1;
 		}
-
-		assert(meshData->indices.size() % 3 == 0 && "Num of indices won't be matching vertices");
 	}
 }
 
