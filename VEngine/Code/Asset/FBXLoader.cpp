@@ -364,6 +364,7 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 				meshData->indices.emplace_back(polyIndexCounter);
 				polyIndexCounter++;
 
+				//@Todo: this is incorrect. Need to calc every single triangle, forget about vertices.
 				verts[j] = &meshData->vertices.back();
 			}
 
