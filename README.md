@@ -11,7 +11,7 @@ As many hobby engines are more focused on graphical and technical implementation
 
 ## Build Notes
 * Visual Studio 2022 17.4
-* Blender 2.93.7 (For FBX SDK)
+* Blender 3.4 (For FBX SDK)
 
 ## Packages
 
