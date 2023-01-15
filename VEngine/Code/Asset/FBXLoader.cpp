@@ -3,6 +3,7 @@
 #define FBXSDK_SHARED //Needs to be defined for static linking
 #include <fbxsdk.h>
 #include <cassert>
+#include <unordered_set>
 #include <filesystem>
 #include "VMath.h"
 #include "AssetPaths.h"
@@ -301,10 +302,9 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 		meshData->vertices.reserve(triangleCount);
 		meshData->indices.reserve(triangleCount);
 
-		//@Todo: Part of index buffer create code
-		//std::unordered_map<int, std::pair<int, Vertex>> indexToPolyCount;
-		//std::unordered_set<int> existingIndices;
-		//int vertexCount = 0;
+		std::unordered_map<int, std::pair<int, Vertex>> indexToPolyCount;
+		std::unordered_set<int> existingIndices;
+		int vertexCount = 0;
 
 		//Main import loop
 		for (int i = 0; i < triangleCount; i++)
@@ -347,21 +347,17 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 					}
 				}
 
-				//@Todo: fix up index buffer creation code here.
-				//Raycasting doesn't work and the textures are stretched out, but the positions look correct.
-				//if (existingIndices.find(index) == existingIndices.end())
-				//{
-				//	indexToPolyCount.emplace(index, std::make_pair(vertexCount, vert));
-				//	meshData->vertices.emplace_back(indexToPolyCount[index].second);
-				//	vertexCount++;
-				//}
+				if (existingIndices.find(index) == existingIndices.end())
+				{
+					indexToPolyCount.emplace(index, std::make_pair(vertexCount, vert));
+					meshData->vertices.emplace_back(indexToPolyCount[index].second);
+					vertexCount++;
+				}
 
-				//meshData->indices.emplace_back(indexToPolyCount[index].first);
+				meshData->indices.emplace_back(indexToPolyCount[index].first);
 
-				//existingIndices.emplace(index);
+				existingIndices.emplace(index);
 
-				meshData->vertices.emplace_back(vert);
-				meshData->indices.emplace_back(polyIndexCounter);
 				polyIndexCounter++;
 
 				//@Todo: this is incorrect. Need to calc every single triangle, forget about vertices.
