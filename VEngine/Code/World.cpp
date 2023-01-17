@@ -52,14 +52,14 @@ void World::Start()
 	MaterialSystem::CreateAllMaterials();
 	TextureSystem::CreateAllTextures();
 
-	for (auto actorSystem : activeActorSystems)
-	{
-		actorSystem->Init();
-	}
-
 	for (auto componentSystem : activeComponentSystems)
 	{
 		componentSystem->Init();
+	}
+
+	for (auto actorSystem : activeActorSystems)
+	{
+		actorSystem->Init();
 	}
 
 	if (Core::gameplayOn)
