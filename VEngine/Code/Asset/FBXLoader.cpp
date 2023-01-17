@@ -129,19 +129,6 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 	FbxMesh* mesh = node->GetMesh();
 	if (mesh)
 	{
-		//Create animations for skeleton
-		int numAnimStacks = scene->GetSrcObjectCount<FbxAnimStack>();
-		for (int animStackIndex = 0; animStackIndex < numAnimStacks; animStackIndex++)
-		{
-			animStack = scene->GetSrcObject<FbxAnimStack>(animStackIndex);
-			if (animStack)
-			{
-				std::string animName = animStack->GetName();
-				meshData->skeleton.CreateAnimation(animName);
-				meshData->skeleton.currentAnimation = animName;
-			}
-		}
-
 		//WEIGHT AND BONE INDICES CODE
 		const int deformerCount = mesh->GetDeformerCount(FbxDeformer::eSkin);
 		for (int deformerIndex = 0; deformerIndex < deformerCount; deformerIndex++)
@@ -154,7 +141,7 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 			{
 				FbxCluster* cluster = skin->GetCluster(clusterIndex);
 
-				//I think the Link is the joint
+				//'Link' is the joint
 				std::string currentJointName = cluster->GetLink()->GetName();
 				int currentJointIndex = meshData->skeleton.FindJointIndexByName(currentJointName);
 				
@@ -184,7 +171,7 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 				for (int i = 0; i < vertexIndexCount; i++)
 				{
 					double weight = cluster->GetControlPointWeights()[i];
-					weight = std::clamp(weight, 0.0, 1.0);
+					weight = std::clamp(weight, 0.0, 1.0); 
 
 					int index = cluster->GetControlPointIndices()[i];
 
@@ -203,69 +190,61 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 				FbxInt nodeFlags = node->GetAllObjectFlags();
 				if (nodeFlags & FbxPropertyFlags::eAnimated)
 				{
-					int numAnimStacks = scene->GetSrcObjectCount<FbxAnimStack>();
-					for (int animStackIndex = 0; animStackIndex < numAnimStacks; animStackIndex++)
+					animStack = scene->GetSrcObject<FbxAnimStack>();
+					if (animStack)
 					{
-						animStack = scene->GetSrcObject<FbxAnimStack>(animStackIndex);
-						if (animStack)
+						//Create animation in animation structures
+						const std::string animName = animStack->GetName();
+						meshData->skeleton.CreateAnimation(animName);
+						meshData->skeleton.currentAnimation = animName;
+
+						FbxAnimLayer* animLayer = animStack->GetMember<FbxAnimLayer>();
+
+						//Link is the joint
+						FbxNode* link = cluster->GetLink();
+						std::string linkName = link->GetName();
+
+						//@Todo: Feels like just getting one curve isn't the right thing here,
+						//as it might be null if the skeleton only has translations.
+						//I'm thinking if there are no rotation curves in the fbx, this won't work.
+						FbxAnimCurveNode* curveNode = link->LclRotation.GetCurveNode(animLayer);
+						if (curveNode)
 						{
-							std::string animName = animStack->GetName();
-							meshData->skeleton.CreateAnimation(animName);
-							meshData->skeleton.currentAnimation = animName;
-							int numAnimLayers = animStack->GetMemberCount<FbxAnimLayer>();
-							for (int animLayerIndex = 0; animLayerIndex < numAnimLayers; animLayerIndex++)
+							int numCurveNodes = curveNode->GetCurveCount(0);
+							for (int curveIndex = 0; curveIndex < numCurveNodes; curveIndex++)
 							{
-								FbxAnimLayer* animLayer = animStack->GetMember<FbxAnimLayer>(animLayerIndex);
-								if (animLayer)
+								FbxAnimCurve* animCurve = curveNode->GetCurve(curveIndex);
+								int keyCount = animCurve->KeyGetCount();
+
+								for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
 								{
-									//Link is the joint
-									FbxNode* link = cluster->GetLink();
-									std::string linkName = link->GetName();
+									//Keys are the keyframes into the animation
+									const double keyTime = animCurve->KeyGet(keyIndex).GetTime().GetSecondDouble();
+									FbxTime time = {};
+									time.SetSecondDouble(keyTime);
 
-									//@Todo: Feels like just getting one curve isn't the right thing here,
-									//as it might be null if the skeleton only has translations.
-									//I'm thinking if there are no rotation curves in the fbx, this won't work.
-									FbxAnimCurveNode* curveNode = link->LclRotation.GetCurveNode(animLayer);
-									if (curveNode)
-									{
-										int numCurveNodes = curveNode->GetCurveCount(0);
-										for (int curveIndex = 0; curveIndex < numCurveNodes; curveIndex++)
-										{
-											FbxAnimCurve* animCurve = curveNode->GetCurve(curveIndex);
-											int keyCount = animCurve->KeyGetCount();
+									const FbxAMatrix globalTransform = animEvaluator->GetNodeGlobalTransform(link, time);
+									const FbxQuaternion rot = globalTransform.GetQ();
+									const FbxVector4 scale = globalTransform.GetS();
+									const FbxVector4 pos = globalTransform.GetT();
 
-											for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
-											{
-												//Keys are the keyframes into the animation
-												double keyTime = animCurve->KeyGet(keyIndex).GetTime().GetSecondDouble();
-												FbxTime time = {};
-												time.SetSecondDouble(keyTime);
+									AnimFrame animFrame = {};
+									animFrame.time = keyTime;
 
-												FbxAMatrix globalTransform = animEvaluator->GetNodeGlobalTransform(link, time);
-												FbxQuaternion rot = globalTransform.GetQ();
-												FbxVector4 scale = globalTransform.GetS();
-												FbxVector4 pos = globalTransform.GetT();
+									animFrame.rot.x = rot[0];
+									animFrame.rot.y = rot[1];
+									animFrame.rot.z = rot[2];
+									animFrame.rot.w = rot[3];
 
-												AnimFrame animFrame = {};
-												animFrame.time = keyTime;
+									animFrame.scale.x = 1.f;
+									animFrame.scale.y = 1.f;
+									animFrame.scale.z = 1.f;
 
-												animFrame.rot.x = rot[0];
-												animFrame.rot.y = rot[1];
-												animFrame.rot.z = rot[2];
-												animFrame.rot.w = rot[3];
+									animFrame.pos.x = pos[0];
+									animFrame.pos.y = pos[1];
+									animFrame.pos.z = pos[2];
 
-												animFrame.scale.x = 1.f;
-												animFrame.scale.y = 1.f;
-												animFrame.scale.z = 1.f;
-
-												animFrame.pos.x = pos[0];
-												animFrame.pos.y = pos[1];
-												animFrame.pos.z = pos[2];
-
-												meshData->skeleton.animations[animStack->GetName()].frames[currentJointIndex].emplace_back(animFrame);
-											}
-										}
-									}
+									meshData->skeleton.animations[animStack->GetName()].frames[currentJointIndex].emplace_back(animFrame);
 								}
 							}
 						}
