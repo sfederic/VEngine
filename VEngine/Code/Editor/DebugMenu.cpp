@@ -340,9 +340,12 @@ void DebugMenu::RenderSkeletonViewMenu()
 		{
 			ImGui::Text("Mesh: %s", mesh->meshComponentData.filename.c_str());
 			ImGui::Text("Current Animation: %s", mesh->currentAnimation.c_str());
-			ImGui::Text("Time: %f/%f",
-				mesh->currentAnimationTime,
-				mesh->GetSkeleton()->GetCurrentAnimation(mesh->currentAnimation).GetFinalTime());
+			if (!mesh->currentAnimation.empty())
+			{
+				ImGui::Text("Time: %f/%f",
+					mesh->currentAnimationTime,
+					mesh->GetSkeleton()->GetCurrentAnimation(mesh->currentAnimation).GetFinalTime());
+			}
 
 			//Debug select animation clip to play via buttons
 			for (auto& animation : mesh->GetSkeleton()->animations)
