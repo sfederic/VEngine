@@ -132,5 +132,5 @@ void Skeleton::CreateAnimation(std::string animationName)
 
 Animation& Skeleton::GetCurrentAnimation(std::string currentAnimation_)
 {
-	return animations[currentAnimation_];
+	return animations.find(currentAnimation_)->second;
 }
