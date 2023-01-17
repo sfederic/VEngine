@@ -174,7 +174,7 @@ void FBXLoader::ImportAsAnimation(const std::string filename, MeshDataProxy& mes
 					if (animStack)
 					{
 						//Create animation in animation structures
-						const std::string animName = animStack->GetName();
+						std::string animName = animStack->GetName();
 						meshData.skeleton->CreateAnimation(animName);
 						meshData.skeleton->currentAnimation = animName;
 
@@ -322,7 +322,10 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 					if (animStack)
 					{
 						//Create animation in animation structures
-						const std::string animName = animStack->GetName();
+						std::string animName = animStack->GetName();
+
+						//@Todo: the naming here from blender isn't right. If only one animation is exported,
+						//it names it "Scene".
 						meshData->skeleton.CreateAnimation(animName);
 						meshData->skeleton.currentAnimation = animName;
 
