@@ -5,6 +5,7 @@
 #include <cassert>
 #include <filesystem>
 #include "VMath.h"
+#include "VString.h"
 #include "AssetPaths.h"
 #include "Animation/AnimationStructures.h"
 
@@ -174,9 +175,11 @@ void FBXLoader::ImportAsAnimation(const std::string filename, MeshDataProxy& mes
 					if (animStack)
 					{
 						//Create animation in animation structures
-						std::string animName = animStack->GetName();
-						meshData.skeleton->CreateAnimation(animName);
-						meshData.skeleton->currentAnimation = animName;
+						//Stole naming structure from Unity, animation file will have format: <mesh_name>@<animation_name>.fbx
+						std::string animationName = VString::GetSubStringAtFoundOffset(filename, "@");
+						animationName = VString::GetSubStringBeforeFoundOffset(animationName, ".");
+						meshData.skeleton->CreateAnimation(animationName);
+						meshData.skeleton->currentAnimation = animationName;
 
 						FbxAnimLayer* animLayer = animStack->GetMember<FbxAnimLayer>();
 						std::string animLayerName = animLayer->GetName();
@@ -226,7 +229,7 @@ void FBXLoader::ImportAsAnimation(const std::string filename, MeshDataProxy& mes
 									animFrame.pos.y = pos[1];
 									animFrame.pos.z = pos[2];
 
-									Animation& animation = meshData.skeleton->animations.find(animName)->second;
+									Animation& animation = meshData.skeleton->animations.find(animationName)->second;
 									animation.frames[currentJointIndex].emplace_back(animFrame);
 								}
 							}
