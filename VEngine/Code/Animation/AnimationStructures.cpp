@@ -108,6 +108,7 @@ Skeleton::Skeleton()
 void Skeleton::AddJoint(Joint joint)
 {
 	joints.emplace_back(joint);
+	//@Todo: assert on joint not having the same name as existing joint. Encapsulation will need to be fixed.
 	joints.back().index = joints.size() - 1;
 }
 
