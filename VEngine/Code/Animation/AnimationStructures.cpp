@@ -125,13 +125,9 @@ int Skeleton::FindJointIndexByName(std::string name)
 	throw new std::exception("Joint index not found");
 }
 
-void Skeleton::CreateAnimation(std::string& animationName)
+void Skeleton::CreateAnimation(const std::string animationName)
 {
-	if (animations.find(animationName) == animations.end())
-	{
-		animationName = animationName + std::to_string(animations.size());
-	}
-
+	assert(animations.find(animationName) == animations.end());
 	animations.emplace(animationName, Animation());
 }
 
