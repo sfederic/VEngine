@@ -13,7 +13,6 @@ using namespace fbxsdk;
 FbxManager* manager;
 FbxIOSettings* ioSetting;
 FbxImporter* importer;
-FbxAnimEvaluator* animEvaluator;
 
 std::map<std::string, MeshData> FBXLoader::existingMeshDataMap;
 
@@ -73,8 +72,6 @@ bool FBXLoader::Import(std::string filename, MeshDataProxy& meshData)
 	//This never seemed to do anything, left it here for future reference
 	//scene->GetGlobalSettings().SetAxisSystem(FbxAxisSystem::DirectX);
 
-	animEvaluator = scene->GetAnimationEvaluator();
-
 	FbxNode* rootNode = scene->GetRootNode();
 	int childNodeCount = rootNode->GetChildCount();
 
@@ -94,9 +91,7 @@ bool FBXLoader::Import(std::string filename, MeshDataProxy& meshData)
 	}
 
 	scene->Destroy();
-
-	animEvaluator = nullptr;
-
+	
 	MeshData* newMeshData = &existingMeshDataMap.find(filename)->second;
 	assert(newMeshData->vertices.size() > 0);
 	BoundingBox::CreateFromPoints(newMeshData->boudingBox, newMeshData->vertices.size(),
@@ -108,6 +103,139 @@ bool FBXLoader::Import(std::string filename, MeshDataProxy& meshData)
 	meshData.boundingBox = &newMeshData->boudingBox;
 
 	return true;
+}
+
+void FBXLoader::ImportAsAnimation(const std::string filename, MeshDataProxy& meshData)
+{
+	const std::string filepath = AssetBaseFolders::mesh + filename;
+
+	if (!importer->Initialize(filepath.c_str(), -1, manager->GetIOSettings()))
+	{
+		throw new std::exception("FBX importer fucked up. filename probably wrong");
+	}
+
+	FbxScene* scene = FbxScene::Create(manager, "scene0");
+	importer->Import(scene);
+
+	FbxAnimEvaluator* animEvaluator = scene->GetAnimationEvaluator();
+
+	FbxNode* rootNode = scene->GetRootNode();
+
+	const int childNodeCount = rootNode->GetChildCount();
+
+	for (int i = 0; i < childNodeCount; i++)
+	{
+		FbxNode* childNode = rootNode->GetChild(i);
+
+		FbxMesh* mesh = childNode->GetMesh();
+		if (mesh == nullptr) continue;
+
+		const int deformerCount = mesh->GetDeformerCount(FbxDeformer::eSkin);
+		for (int deformerIndex = 0; deformerIndex < deformerCount; deformerIndex++)
+		{
+			FbxSkin* skin = reinterpret_cast<FbxSkin*>(mesh->GetDeformer(deformerIndex, FbxDeformer::eSkin));
+			if (!skin) continue;
+
+			const int clusterCount = skin->GetClusterCount();
+			for (int clusterIndex = 0; clusterIndex < clusterCount; clusterIndex++)
+			{
+				FbxCluster* cluster = skin->GetCluster(clusterIndex);
+
+				//'Link' is the joint
+				std::string currentJointName = cluster->GetLink()->GetName();
+				int currentJointIndex = meshData.skeleton->FindJointIndexByName(currentJointName);
+
+				FbxAMatrix clusterMatrix, linkMatrix;
+				cluster->GetTransformMatrix(clusterMatrix);
+				cluster->GetTransformLinkMatrix(linkMatrix);
+
+				{
+					//Set inverse bind pose for joint
+					FbxAMatrix bindposeInverseMatrix = linkMatrix.Inverse() * clusterMatrix;
+
+					FbxQuaternion Q = bindposeInverseMatrix.GetQ();
+					FbxVector4 T = bindposeInverseMatrix.GetT();
+
+					XMVECTOR pos = XMVectorSet(T[0], T[1], T[2], 1.0f);
+					XMVECTOR scale = XMVectorSet(1.f, 1.f, 1.f, 0.f);
+					XMVECTOR rot = XMVectorSet(Q[0], Q[1], Q[2], Q[3]);
+
+					XMMATRIX pose = XMMatrixAffineTransformation(scale,
+						XMVectorSet(0.f, 0.f, 0.f, 1.f), rot, pos);
+
+					meshData.skeleton->joints[currentJointIndex].inverseBindPose = pose;
+					meshData.skeleton->joints[currentJointIndex].currentPose = pose;
+				}
+
+				FbxInt nodeFlags = rootNode->GetAllObjectFlags();
+				if (nodeFlags & FbxPropertyFlags::eAnimated)
+				{
+					FbxAnimStack* animStack = scene->GetSrcObject<FbxAnimStack>();
+					if (animStack)
+					{
+						//Create animation in animation structures
+						const std::string animName = animStack->GetName();
+						meshData.skeleton->CreateAnimation(animName);
+						meshData.skeleton->currentAnimation = animName;
+
+						FbxAnimLayer* animLayer = animStack->GetMember<FbxAnimLayer>();
+						std::string animLayerName = animLayer->GetName();
+
+						//Link is the joint
+						FbxNode* link = cluster->GetLink();
+						std::string linkName = link->GetName();
+
+						//@Todo: Feels like just getting one curve isn't the right thing here,
+						//as it might be null if the skeleton only has translations.
+						//I'm thinking if there are no rotation curves in the fbx, this won't work.
+						FbxAnimCurveNode* curveNode = link->LclRotation.GetCurveNode(animLayer);
+						if (curveNode)
+						{
+							const int numCurveNodes = curveNode->GetCurveCount(0);
+							for (int curveIndex = 0; curveIndex < numCurveNodes; curveIndex++)
+							{
+								FbxAnimCurve* animCurve = curveNode->GetCurve(curveIndex);
+								std::string animCurveName = animCurve->GetName();
+
+								const int keyCount = animCurve->KeyGetCount();
+								for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
+								{
+									//Keys are the keyframes into the animation
+									const double keyTime = animCurve->KeyGet(keyIndex).GetTime().GetSecondDouble();
+									FbxTime time = {};
+									time.SetSecondDouble(keyTime);
+
+									const FbxAMatrix globalTransform = animEvaluator->GetNodeGlobalTransform(link, time);
+									const FbxQuaternion rot = globalTransform.GetQ();
+									const FbxVector4 scale = globalTransform.GetS();
+									const FbxVector4 pos = globalTransform.GetT();
+
+									AnimFrame animFrame = {};
+									animFrame.time = keyTime;
+
+									animFrame.rot.x = rot[0];
+									animFrame.rot.y = rot[1];
+									animFrame.rot.z = rot[2];
+									animFrame.rot.w = rot[3];
+
+									animFrame.scale.x = 1.f;
+									animFrame.scale.y = 1.f;
+									animFrame.scale.z = 1.f;
+
+									animFrame.pos.x = pos[0];
+									animFrame.pos.y = pos[1];
+									animFrame.pos.z = pos[2];
+
+									Animation& animation = meshData.skeleton->animations.find(animName)->second;
+									animation.frames[currentJointIndex].emplace_back(animFrame);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
@@ -215,6 +343,8 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 							{
 								FbxAnimCurve* animCurve = curveNode->GetCurve(curveIndex);
 								int keyCount = animCurve->KeyGetCount();
+
+								FbxAnimEvaluator* animEvaluator = link->GetAnimationEvaluator();
 
 								for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
 								{
