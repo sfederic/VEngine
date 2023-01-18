@@ -49,6 +49,7 @@ bool FBXLoader::ImportAsMesh(std::string filename, MeshDataProxy& meshData)
 		MeshData* existingMeshData = &existingMeshIt->second;
 
 		meshData.vertices = &existingMeshData->vertices;
+		meshData.skeleton = &existingMeshData->skeleton;
 		meshData.boundingBox = &existingMeshData->boudingBox;
 		return true;
 	}
@@ -99,6 +100,7 @@ bool FBXLoader::ImportAsMesh(std::string filename, MeshDataProxy& meshData)
 
 	//Set proxy data for new mesh daata
 	meshData.vertices = &newMeshData->vertices;
+	meshData.skeleton = &newMeshData->skeleton;
 	meshData.boundingBox = &newMeshData->boudingBox;
 
 	return true;

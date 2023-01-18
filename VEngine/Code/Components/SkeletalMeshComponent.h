@@ -14,7 +14,7 @@ public:
 	Properties GetProps() override;
 	void Create() override;
 
-	Skeleton& GetSkeleton() { return *skeleton; }
+	Skeleton& GetSkeleton() { return *meshDataProxy.skeleton; }
 
 	std::string GetCurrentAnimationName() { return currentAnimation; }
 	void SetCurrentAnimationName(std::string currentAnimation_) { currentAnimation = currentAnimation; }
@@ -25,8 +25,8 @@ public:
 	void IncrementAnimationTime(float increment) { currentAnimationTime += increment; }
 
 private:
-	Skeleton* skeleton = nullptr; //@Todo: skeleton needs 'existingMeshData' equivalent in FBXLoader
 	std::string currentAnimation;
 	std::string nextAnimation;
+
 	float currentAnimationTime = 0.f;
 };
