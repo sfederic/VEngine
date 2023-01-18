@@ -74,7 +74,7 @@ void MeshComponent::Create()
 	material->Create();
 
 	//Import mesh (bounds extents set up in here too)
-	FBXLoader::Import(meshComponentData.filename.c_str(), meshDataProxy);
+	FBXLoader::ImportAsMesh(meshComponentData.filename.c_str(), meshDataProxy);
 
 	//Setup bounds
 	BoundingOrientedBox::CreateFromBoundingBox(boundingBox, *meshDataProxy.boundingBox);

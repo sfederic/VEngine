@@ -34,6 +34,7 @@
 #include "Actors/DebugActors/DebugCone.h"
 #include "Components/CameraComponent.h"
 #include "Components/MeshComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Components/InstanceMeshComponent.h"
 #include "Components/Lights/DirectionalLightComponent.h"
@@ -69,7 +70,7 @@ void RenderLightMeshes();
 void RenderPolyboards();
 void RenderSpriteSheets();
 void RenderPostProcess();
-void AnimateSkeletalMesh(MeshComponent* mesh);
+void AnimateSkeletalMesh(SkeletalMeshComponent* skeletalMesh);
 void UpdateLights();
 void MapBuffer(ID3D11Resource* resource, const void* src, size_t size);
 void DrawMesh(MeshComponent* mesh);
@@ -741,12 +742,6 @@ void RenderMeshComponents()
 		SetMatricesFromMesh(mesh);
 		SetShaderMeshData(mesh);
 
-		//@Todo: find a better spot to put this.
-		if (!mesh->GetSkeleton()->animations.empty())
-		{
-			AnimateSkeletalMesh(mesh);
-		}
-
 		DrawMesh(mesh);
 	}	
 
@@ -1254,67 +1249,71 @@ void RenderSpriteSheets()
 	Profile::End();
 }
 
-void AnimateSkeletalMesh(MeshComponent* mesh)
+void AnimateSkeletalMeshes()
 {
 	Profile::Start();
 
-	Skeleton* skeleton = mesh->meshDataProxy.skeleton;
-
-	if (mesh->currentAnimation.empty())
+	for (auto& skeletalMesh : SkeletalMeshComponent::system.GetComponents())
 	{
-		return;
-	}
+		Skeleton* skeleton = skeletalMesh->skeleton;
 
-	if (skeleton && !skeleton->joints.empty())
-	{
-		int skinningDataIndex = 0;
-		ShaderSkinningData skinningData = {};
-
-		//Set shader for skeletal animation
-		ShaderItem* shaderItem = ShaderItems::Animation;
-		context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
-		context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
-
-		Animation& anim = skeleton->GetCurrentAnimation(mesh->currentAnimation);
-		if (!anim.frames.empty())
+		if (skeletalMesh->currentAnimation.empty())
 		{
-			mesh->currentAnimationTime += Core::GetDeltaTime();
+			return;
+		}
 
-			//Move through and animate all joints on skeleton
-			for (Joint& joint : skeleton->joints)
+		if (skeleton && !skeleton->joints.empty())
+		{
+			int skinningDataIndex = 0;
+			ShaderSkinningData skinningData = {};
+
+			//Set shader for skeletal animation
+			ShaderItem* shaderItem = ShaderItems::Animation;
+			context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
+			context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
+
+			Animation& anim = skeleton->GetCurrentAnimation(skeletalMesh->currentAnimation);
+			if (!anim.frames.empty())
 			{
-				if (mesh->currentAnimationTime >= anim.GetEndTime(joint.index))
-				{
-					mesh->currentAnimationTime = 0.f;
-				}
+				skeletalMesh->currentAnimationTime += Core::GetDeltaTime();
 
-				//Blend testing
-				if (!mesh->nextAnimation.empty())
+				//Move through and animate all joints on skeleton
+				for (Joint& joint : skeleton->joints)
 				{
-					auto nextAnimIt = skeleton->animations.find(mesh->nextAnimation);
-					if (nextAnimIt != skeleton->animations.end())
+					if (skeletalMesh->currentAnimationTime >= anim.GetEndTime(joint.index))
 					{
-						anim.Interpolate(mesh->currentAnimationTime, joint, skeleton, &nextAnimIt->second, 0.5f);
+						skeletalMesh->currentAnimationTime = 0.f;
 					}
-				}
-				else
-				{
-					anim.Interpolate(mesh->currentAnimationTime, joint, skeleton, nullptr, 0.f);
-				}
+
+					//Blend testing
+					if (!skeletalMesh->nextAnimation.empty())
+					{
+						auto nextAnimIt = skeleton->animations.find(skeletalMesh->nextAnimation);
+						if (nextAnimIt != skeleton->animations.end())
+						{
+							anim.Interpolate(skeletalMesh->currentAnimationTime, joint, skeleton, &nextAnimIt->second, 0.5f);
+						}
+					}
+					else
+					{
+						anim.Interpolate(skeletalMesh->currentAnimationTime, joint, skeleton, nullptr, 0.f);
+					}
 
 
-				skinningData.skinningMatrices[skinningDataIndex] = joint.currentPose;
-				skinningDataIndex++;
-				assert(skinningDataIndex < ShaderSkinningData::MAX_SKINNING_DATA);
+					skinningData.skinningMatrices[skinningDataIndex] = joint.currentPose;
+					skinningDataIndex++;
+					assert(skinningDataIndex < ShaderSkinningData::MAX_SKINNING_DATA);
+				}
+			}
+
+			//Update skinning constant buffers
+			if (skinningDataIndex > 0)
+			{
+				cbSkinningData->Map(&skinningData);
+				cbSkinningData->SetVS();
 			}
 		}
 
-		//Update skinning constant buffers
-		if (skinningDataIndex > 0)
-		{
-			cbSkinningData->Map(&skinningData);
-			cbSkinningData->SetVS();
-		}
 	}
 
 	Profile::End();

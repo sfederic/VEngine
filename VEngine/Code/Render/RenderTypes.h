@@ -95,8 +95,6 @@ struct MeshDataProxy
 
 	BoundingBox* boundingBox = nullptr;
 
-	Skeleton* skeleton = nullptr;
-
 	uint64_t GetVerticesByteWidth()
 	{
 		return (sizeof(Vertex) * vertices->size());

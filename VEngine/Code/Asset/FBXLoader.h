@@ -11,6 +11,8 @@
 //Great GameDev.net reference on using FBX SDK and animation.
 //Ref: https://www.gamedev.net/tutorials/_/technical/graphics-programming-and-theory/how-to-work-with-fbx-sdk-r3582/
 
+struct Skeleton;
+
 namespace FBXLoader
 {
 	extern std::map<std::string, MeshData> existingMeshDataMap;
@@ -18,9 +20,9 @@ namespace FBXLoader
 	void Init();
 
 	//For importing generic fbx assets
-	bool Import(std::string filename, MeshDataProxy& meshData);
+	bool ImportAsMesh(std::string filename, MeshDataProxy& meshData);
 
-	void ImportAsAnimation(const std::string filename, MeshDataProxy& meshData);
+	void ImportAsAnimation(const std::string filename, Skeleton& skeleton);
 
 	//For importing cell fractured meshes
 	bool ImportFracturedMesh(std::string filename, std::vector<MeshData>& meshDatas);

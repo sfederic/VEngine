@@ -272,7 +272,7 @@ void PhysicsSystem::CreateConvexPhysicsMeshFromCollisionMesh(MeshComponent* mesh
 	//Set the UID to the actual mesh so that the physics actor is connected to the mesh, not the collision mesh.
 	collisionMesh->SetUID(mesh->GetUID());
 
-	FBXLoader::Import(filename, collisionMesh->meshDataProxy);
+	FBXLoader::ImportAsMesh(filename, collisionMesh->meshDataProxy);
 
 	CreateConvexPhysicsMesh(collisionMesh, actor);
 

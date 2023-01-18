@@ -31,7 +31,7 @@ void FBXLoader::Init()
 	importer = FbxImporter::Create(manager, "");
 }
 
-bool FBXLoader::Import(std::string filename, MeshDataProxy& meshData)
+bool FBXLoader::ImportAsMesh(std::string filename, MeshDataProxy& meshData)
 {
 	std::string filepath = AssetBaseFolders::mesh + filename;
 	
@@ -49,7 +49,6 @@ bool FBXLoader::Import(std::string filename, MeshDataProxy& meshData)
 		MeshData* existingMeshData = &existingMeshIt->second;
 
 		meshData.vertices = &existingMeshData->vertices;
-		meshData.skeleton = &existingMeshData->skeleton;
 		meshData.boundingBox = &existingMeshData->boudingBox;
 		return true;
 	}
@@ -100,13 +99,12 @@ bool FBXLoader::Import(std::string filename, MeshDataProxy& meshData)
 
 	//Set proxy data for new mesh daata
 	meshData.vertices = &newMeshData->vertices;
-	meshData.skeleton = &newMeshData->skeleton;
 	meshData.boundingBox = &newMeshData->boudingBox;
 
 	return true;
 }
 
-void FBXLoader::ImportAsAnimation(const std::string filename, MeshDataProxy& meshData)
+void FBXLoader::ImportAsAnimation(const std::string filename, Skeleton& skeleton)
 {
 	const std::string filepath = AssetBaseFolders::mesh + filename;
 
@@ -144,7 +142,7 @@ void FBXLoader::ImportAsAnimation(const std::string filename, MeshDataProxy& mes
 
 				//'Link' is the joint
 				std::string currentJointName = cluster->GetLink()->GetName();
-				int currentJointIndex = meshData.skeleton->FindJointIndexByName(currentJointName);
+				int currentJointIndex = skeleton.FindJointIndexByName(currentJointName);
 
 				FbxAMatrix clusterMatrix, linkMatrix;
 				cluster->GetTransformMatrix(clusterMatrix);
@@ -164,8 +162,8 @@ void FBXLoader::ImportAsAnimation(const std::string filename, MeshDataProxy& mes
 					XMMATRIX pose = XMMatrixAffineTransformation(scale,
 						XMVectorSet(0.f, 0.f, 0.f, 1.f), rot, pos);
 
-					meshData.skeleton->joints[currentJointIndex].inverseBindPose = pose;
-					meshData.skeleton->joints[currentJointIndex].currentPose = pose;
+					skeleton.joints[currentJointIndex].inverseBindPose = pose;
+					skeleton.joints[currentJointIndex].currentPose = pose;
 				}
 
 				FbxInt nodeFlags = rootNode->GetAllObjectFlags();
@@ -178,8 +176,8 @@ void FBXLoader::ImportAsAnimation(const std::string filename, MeshDataProxy& mes
 						//Stole naming structure from Unity, animation file will have format: <mesh_name>@<animation_name>.fbx
 						std::string animationName = VString::GetSubStringAtFoundOffset(filename, "@");
 						animationName = VString::GetSubStringBeforeFoundOffset(animationName, ".");
-						meshData.skeleton->CreateAnimation(animationName);
-						meshData.skeleton->currentAnimation = animationName;
+						skeleton.CreateAnimation(animationName);
+						skeleton.currentAnimation = animationName;
 
 						FbxAnimLayer* animLayer = animStack->GetMember<FbxAnimLayer>();
 						std::string animLayerName = animLayer->GetName();
@@ -229,7 +227,7 @@ void FBXLoader::ImportAsAnimation(const std::string filename, MeshDataProxy& mes
 									animFrame.pos.y = pos[1];
 									animFrame.pos.z = pos[2];
 
-									Animation& animation = meshData.skeleton->animations.find(animationName)->second;
+									Animation& animation = skeleton.animations.find(animationName)->second;
 									animation.frames[currentJointIndex].emplace_back(animFrame);
 								}
 							}

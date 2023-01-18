@@ -20,6 +20,7 @@
 #include "Components/Component.h"
 #include "Components/MeshComponent.h"
 #include "Components/InstanceMeshComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "UI/UISystem.h"
 #include "UI/Layout.h"
 #include "Commands/CommandSystem.h"
@@ -335,7 +336,7 @@ void DebugMenu::RenderSkeletonViewMenu()
 	auto picked = WorldEditor::GetPickedActor();
 	if (picked)
 	{
-		auto meshes = picked->GetComponentsOfType<MeshComponent>();
+		auto meshes = picked->GetComponentsOfType<SkeletalMeshComponent>();
 		for (auto mesh : meshes)
 		{
 			ImGui::Text("Mesh: %s", mesh->meshComponentData.filename.c_str());
@@ -344,11 +345,11 @@ void DebugMenu::RenderSkeletonViewMenu()
 			{
 				ImGui::Text("Time: %f/%f",
 					mesh->currentAnimationTime,
-					mesh->GetSkeleton()->GetCurrentAnimation(mesh->currentAnimation).GetFinalTime());
+					mesh->skeleton->GetCurrentAnimation(mesh->currentAnimation).GetFinalTime());
 			}
 
 			//Debug select animation clip to play via buttons
-			for (auto& animation : mesh->GetSkeleton()->animations)
+			for (auto& animation : mesh->skeleton->animations)
 			{
 				std::string animationName = animation.first;
 				if (!animationName.empty())
@@ -361,7 +362,7 @@ void DebugMenu::RenderSkeletonViewMenu()
 				}
 			}
 
-			for (auto& joint : mesh->meshDataProxy.skeleton->joints)
+			for (auto& joint : mesh->skeleton->joints)
 			{
 				ImGui::Text("Joint: %s ", joint.name);
 				ImGui::SameLine();

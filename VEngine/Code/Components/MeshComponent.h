@@ -27,14 +27,6 @@ public:
 	MeshDataProxy meshDataProxy;
 	PipelineStateObject pso;
 
-	//@Todo: think about splitting this up and currentAnimationTime into an AnimatedMeshComponent or something.
-	//This is still seperate because the .vmesh files aren't set up yet. You'll need a split between vmesh and a
-	//skeleton mesh.
-	Skeleton* GetSkeleton() { return meshDataProxy.skeleton; }
-	std::string currentAnimation;
-	std::string nextAnimation;
-	float currentAnimationTime = 0.f;
-
 	bool castsShadow = true;
 
 	//whether the mesh is moved by physics system
