@@ -5,6 +5,7 @@
 #include "Debug.h"
 #include "Gameplay/GameUtils.h"
 #include "Camera.h"
+#include "Editor/DebugMenu.h"
 #include "Components/CameraComponent.h"
 #include "Actors/Game/Player.h"
 #include "World.h"
@@ -156,6 +157,7 @@ void Core::StartGame()
 	World::WakeAndStartAllActors();
 
 	editor->SetPlayButtonText("Stop");
+	debugMenu.AddNotification(L"Gameplay started");
 }
 
 void Core::EndGame()
@@ -177,6 +179,7 @@ void Core::EndGame()
 	WorldEditor::DeselectPickedActor();
 
 	editor->SetPlayButtonText("Play");
+	debugMenu.AddNotification(L"Gameplay stopped");
 }
 
 void Core::SetGameplayState()
