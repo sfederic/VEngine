@@ -12,6 +12,7 @@ public:
 		MeshComponent(meshFilename, textureFilename) {}
 
 	Properties GetProps() override;
+	void Create() override;
 
 	Skeleton* GetSkeleton() { return skeleton; }
 

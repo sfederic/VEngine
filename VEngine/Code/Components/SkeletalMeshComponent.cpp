@@ -7,3 +7,8 @@ Properties SkeletalMeshComponent::GetProps()
     props.title = "SkeletonMeshComponent";
     return props;
 }
+
+void SkeletalMeshComponent::Create()
+{
+    MeshComponent::Create();
+}
