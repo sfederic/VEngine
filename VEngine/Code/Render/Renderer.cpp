@@ -63,6 +63,7 @@ void CreateLightProbeBuffers();
 void CheckSupportedFeatures();
 void RenderShadowPass();
 void RenderMeshComponents();
+void AnimateAndRenderSkeletalMeshes();
 void RenderInstanceMeshComponents();
 void RenderBounds();
 void RenderCameraMeshes();
@@ -70,7 +71,6 @@ void RenderLightMeshes();
 void RenderPolyboards();
 void RenderSpriteSheets();
 void RenderPostProcess();
-void AnimateSkeletalMesh(SkeletalMeshComponent* skeletalMesh);
 void UpdateLights();
 void MapBuffer(ID3D11Resource* resource, const void* src, size_t size);
 void DrawMesh(MeshComponent* mesh);
@@ -683,6 +683,7 @@ void Renderer::Render()
 	UpdateLights();
 
 	RenderMeshComponents();
+	AnimateAndRenderSkeletalMeshes();
 	RenderInstanceMeshComponents();
 	RenderPolyboards();
 	RenderSpriteSheets();
@@ -1249,12 +1250,25 @@ void RenderSpriteSheets()
 	Profile::End();
 }
 
-void AnimateSkeletalMeshes()
+void AnimateAndRenderSkeletalMeshes()
 {
 	Profile::Start();
 
-	for (auto& skeletalMesh : SkeletalMeshComponent::system.GetComponents())
+	SetShadowResources();
+	SetLightResources();
+
+	for (auto& skeletalMesh : SkeletalMeshComponent::system.GetComponents()) //@Todo: figure out transparency sort
 	{
+		//Render
+		if (!skeletalMesh->IsActive()) { continue; }
+
+		//@Todo: shader set()s here are redundant with animation shaders below.
+		SetRenderPipelineStates(skeletalMesh.get());
+
+		SetMatricesFromMesh(skeletalMesh.get());
+		SetShaderMeshData(skeletalMesh.get());
+
+		//Animate
 		Skeleton* skeleton = skeletalMesh->GetSkeleton();
 
 		if (skeletalMesh->GetCurrentAnimationName().empty())
@@ -1314,7 +1328,13 @@ void AnimateSkeletalMeshes()
 			}
 		}
 
+		DrawMesh(skeletalMesh.get());
 	}
+
+	//Set to null to remove warnings
+	ID3D11ShaderResourceView* nullSRV = nullptr;
+	context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSRV);
+	context->PSSetShaderResources(reflectionTextureResgiter, 1, &nullSRV);
 
 	Profile::End();
 }
