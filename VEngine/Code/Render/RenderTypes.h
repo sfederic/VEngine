@@ -60,6 +60,8 @@ struct MeshData
 	//Base extents and offset will be the same for each mesh, fine to cache here.
 	BoundingBox boudingBox;
 
+	//@Todo: Don't like skeleton being here, as it can then mean it's accessible from MeshComponents too.
+	//Removing it means cleaning up FBXLoader functions a lot.
 	Skeleton skeleton;
 };
 
