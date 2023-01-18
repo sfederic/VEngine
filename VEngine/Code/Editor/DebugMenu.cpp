@@ -345,11 +345,11 @@ void DebugMenu::RenderSkeletonViewMenu()
 			{
 				ImGui::Text("Time: %f/%f",
 					mesh->GetCurrentAnimationTime(),
-					mesh->GetSkeleton()->GetCurrentAnimation().GetFinalTime());
+					mesh->GetSkeleton().GetCurrentAnimation().GetFinalTime());
 			}
 
 			//Debug select animation clip to play via buttons
-			for (auto& animation : mesh->GetSkeleton()->animations)
+			for (auto& animation : mesh->GetSkeleton().animations)
 			{
 				std::string animationName = animation.first;
 				if (!animationName.empty())
@@ -362,7 +362,7 @@ void DebugMenu::RenderSkeletonViewMenu()
 				}
 			}
 
-			for (auto& joint : mesh->GetSkeleton()->joints)
+			for (auto& joint : mesh->GetSkeleton().joints)
 			{
 				ImGui::Text("Joint: %s ", joint.name);
 				ImGui::SameLine();

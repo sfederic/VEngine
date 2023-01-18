@@ -11,8 +11,8 @@ AnimCube::AnimCube()
 
 void AnimCube::Create()
 {
-	FBXLoader::ImportAsAnimation("anim_cube@turn.fbx", *skeletalMesh->GetSkeleton());
-	FBXLoader::ImportAsAnimation("anim_cube@spin.fbx", *skeletalMesh->GetSkeleton());
+	FBXLoader::ImportAsAnimation("anim_cube@turn.fbx", skeletalMesh->GetSkeleton());
+	FBXLoader::ImportAsAnimation("anim_cube@spin.fbx", skeletalMesh->GetSkeleton());
 }
 
 Properties AnimCube::GetProps()
