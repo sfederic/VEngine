@@ -6,6 +6,7 @@
 #include "Core.h"
 #include "Timer.h"
 #include "Log.h"
+#include "Asset/FBXLoader.h"
 #include "Actors/MeshActor.h"
 #include "Actors/Game/Player.h"
 #include "Actors/Game/LevelInstance.h"
@@ -309,6 +310,12 @@ void World::Cleanup()
 	MaterialSystem::Cleanup();
 	SpriteSystem::Reset();
 	UISystem::Reset();
+
+	//@Todo: want these functions here but debug mesh data (light point light mesh) which is static loses
+	//its buffer and mesh data on load.
+	//MeshComponent::ResetMeshBuffers();
+	//FBXLoader::ClearExistingMeshData();
+	//FBXLoader::ClearExistingSkeletonData();
 
 	for (auto componentSystem : activeComponentSystems)
 	{

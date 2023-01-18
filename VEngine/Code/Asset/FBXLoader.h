@@ -28,4 +28,7 @@ namespace FBXLoader
 	bool ImportFracturedMesh(std::string filename, std::vector<MeshData>& meshDatas);
 
 	MeshData* FindMesh(std::string meshName);
+
+	void ClearExistingMeshData();
+	void ClearExistingSkeletonData();
 };

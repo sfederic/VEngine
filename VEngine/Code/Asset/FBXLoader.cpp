@@ -497,6 +497,16 @@ MeshData* FBXLoader::FindMesh(std::string meshName)
 	return &meshIt->second;
 }
 
+void FBXLoader::ClearExistingMeshData()
+{
+	existingMeshDataMap.clear();
+}
+
+void FBXLoader::ClearExistingSkeletonData()
+{
+	existingSkeletonNames.clear();
+}
+
 void ReadNormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT3& outNormal)
 {
 	if (inMesh->GetElementNormalCount() < 1) { throw std::exception("Invalid Normal Number"); }
