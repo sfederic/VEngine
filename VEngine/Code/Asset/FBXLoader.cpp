@@ -16,6 +16,7 @@ FbxIOSettings* ioSetting;
 FbxImporter* importer;
 
 std::map<std::string, MeshData> FBXLoader::existingMeshDataMap;
+std::set<std::string> existingSkeletonNames;
 
 void ProcessAllChildNodes(FbxNode* node, MeshData* meshData);
 void ProcessSkeletonNodes(FbxNode* node, Skeleton* skeleton, int parentIndex);
@@ -108,6 +109,13 @@ bool FBXLoader::ImportAsMesh(std::string filename, MeshDataProxy& meshData)
 
 void FBXLoader::ImportAsAnimation(const std::string filename, Skeleton& skeleton)
 {
+	if (existingSkeletonNames.find(filename) != existingSkeletonNames.end())
+	{
+		return;
+	}
+
+	existingSkeletonNames.emplace(filename);
+
 	const std::string filepath = AssetBaseFolders::mesh + filename;
 
 	if (!importer->Initialize(filepath.c_str(), -1, manager->GetIOSettings()))
