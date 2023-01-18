@@ -1271,60 +1271,58 @@ void AnimateAndRenderSkeletalMeshes()
 		//Animate
 		Skeleton& skeleton = skeletalMesh->GetSkeleton();
 
-		if (skeletalMesh->GetCurrentAnimationName().empty())
+		if (!skeletalMesh->GetCurrentAnimationName().empty())
 		{
-			return;
-		}
-
-		if (!skeleton.joints.empty())
-		{
-			int skinningDataIndex = 0;
-			ShaderSkinningData skinningData = {};
-
-			//Set shader for skeletal animation
-			ShaderItem* shaderItem = ShaderItems::Animation;
-			context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
-			context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
-
-			Animation& anim = skeleton.GetCurrentAnimation();
-			if (!anim.frames.empty())
+			if (!skeleton.joints.empty())
 			{
-				skeletalMesh->IncrementAnimationTime(Core::GetDeltaTime());
+				int skinningDataIndex = 0;
+				ShaderSkinningData skinningData = {};
 
-				//Move through and animate all joints on skeleton
-				for (Joint& joint : skeleton.joints)
+				//Set shader for skeletal animation
+				ShaderItem* shaderItem = ShaderItems::Animation;
+				context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
+				context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
+
+				Animation& anim = skeleton.GetCurrentAnimation();
+				if (!anim.frames.empty())
 				{
-					if (skeletalMesh->GetCurrentAnimationTime() >= anim.GetEndTime(joint.index))
-					{
-						skeletalMesh->ResetAnimationTime();
-					}
+					skeletalMesh->IncrementAnimationTime(Core::GetDeltaTime());
 
-					//Blend testing
-					if (!skeletalMesh->GetNextAnimationName().empty())
+					//Move through and animate all joints on skeleton
+					for (Joint& joint : skeleton.joints)
 					{
-						auto nextAnimIt = skeleton.animations.find(skeletalMesh->GetNextAnimationName());
-						if (nextAnimIt != skeleton.animations.end())
+						if (skeletalMesh->GetCurrentAnimationTime() >= anim.GetEndTime(joint.index))
 						{
-							anim.Interpolate(skeletalMesh->GetCurrentAnimationTime(), joint, &skeleton, &nextAnimIt->second, 0.5f);
+							skeletalMesh->ResetAnimationTime();
 						}
-					}
-					else
-					{
-						anim.Interpolate(skeletalMesh->GetCurrentAnimationTime(), joint, &skeleton, nullptr, 0.f);
-					}
+
+						//Blend testing
+						if (!skeletalMesh->GetNextAnimationName().empty())
+						{
+							auto nextAnimIt = skeleton.animations.find(skeletalMesh->GetNextAnimationName());
+							if (nextAnimIt != skeleton.animations.end())
+							{
+								anim.Interpolate(skeletalMesh->GetCurrentAnimationTime(), joint, &skeleton, &nextAnimIt->second, 0.5f);
+							}
+						}
+						else
+						{
+							anim.Interpolate(skeletalMesh->GetCurrentAnimationTime(), joint, &skeleton, nullptr, 0.f);
+						}
 
 
-					skinningData.skinningMatrices[skinningDataIndex] = joint.currentPose;
-					skinningDataIndex++;
-					assert(skinningDataIndex < ShaderSkinningData::MAX_SKINNING_DATA);
+						skinningData.skinningMatrices[skinningDataIndex] = joint.currentPose;
+						skinningDataIndex++;
+						assert(skinningDataIndex < ShaderSkinningData::MAX_SKINNING_DATA);
+					}
 				}
-			}
 
-			//Update skinning constant buffers
-			if (skinningDataIndex > 0)
-			{
-				cbSkinningData->Map(&skinningData);
-				cbSkinningData->SetVS();
+				//Update skinning constant buffers
+				if (skinningDataIndex > 0)
+				{
+					cbSkinningData->Map(&skinningData);
+					cbSkinningData->SetVS();
+				}
 			}
 		}
 
