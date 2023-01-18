@@ -3,7 +3,7 @@
 #include "Actor.h"
 #include "ActorSystem.h"
 
-class MeshComponent;
+class SkeletalMeshComponent;
 
 class AnimCube : public Actor
 {
@@ -15,5 +15,5 @@ public:
 	Properties GetProps() override;
 
 private:
-	MeshComponent* mesh = nullptr;
+	SkeletalMeshComponent* skeletalMesh = nullptr;
 };
