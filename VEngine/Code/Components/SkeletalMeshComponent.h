@@ -21,6 +21,10 @@ public:
 	void IncrementAnimationTime(float increment) { currentAnimationTime += increment; }
 
 	Animation& GetCurrentAnimation();
+	std::vector<Animation*> GetAllAnimations();
+
+	std::vector<Joint>& GetAllJoints();
+	bool HasJoints();
 
 	std::string currentAnimation;
 	std::string nextAnimation;

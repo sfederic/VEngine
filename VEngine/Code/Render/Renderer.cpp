@@ -1250,6 +1250,7 @@ void RenderSpriteSheets()
 	Profile::End();
 }
 
+//@Todo: think about splitting render and animate up
 void AnimateAndRenderSkeletalMeshes()
 {
 	Profile::Start();
@@ -1268,12 +1269,9 @@ void AnimateAndRenderSkeletalMeshes()
 		SetMatricesFromMesh(skeletalMesh.get());
 		SetShaderMeshData(skeletalMesh.get());
 
-		//Animate
-		Skeleton& skeleton = skeletalMesh->GetSkeleton();
-
 		if (!skeletalMesh->currentAnimation.empty())
 		{
-			if (!skeleton.joints.empty())
+			if (skeletalMesh->HasJoints())
 			{
 				int skinningDataIndex = 0;
 				ShaderSkinningData skinningData = {};
@@ -1289,7 +1287,8 @@ void AnimateAndRenderSkeletalMeshes()
 					skeletalMesh->IncrementAnimationTime(Core::GetDeltaTime());
 
 					//Move through and animate all joints on skeleton
-					for (Joint& joint : skeleton.joints)
+					auto& joints = skeletalMesh->GetAllJoints();
+					for (auto& joint : joints)
 					{
 						if (skeletalMesh->GetCurrentAnimationTime() >= anim.GetEndTime(joint.index))
 						{
@@ -1297,17 +1296,17 @@ void AnimateAndRenderSkeletalMeshes()
 						}
 
 						//Blend testing
-						if (!skeletalMesh->nextAnimation.empty())
+						//if (!skeletalMesh->nextAnimation.empty())
+						//{
+						//	auto nextAnimIt = skeleton.animations.find(skeletalMesh->nextAnimation);
+						//	if (nextAnimIt != skeleton.animations.end())
+						//	{
+						//		anim.Interpolate(skeletalMesh->GetCurrentAnimationTime(), joint, &skeleton, &nextAnimIt->second, 0.5f);
+						//	}
+						//}
+						//else
 						{
-							auto nextAnimIt = skeleton.animations.find(skeletalMesh->nextAnimation);
-							if (nextAnimIt != skeleton.animations.end())
-							{
-								anim.Interpolate(skeletalMesh->GetCurrentAnimationTime(), joint, &skeleton, &nextAnimIt->second, 0.5f);
-							}
-						}
-						else
-						{
-							anim.Interpolate(skeletalMesh->GetCurrentAnimationTime(), joint, &skeleton, nullptr, 0.f);
+							anim.Interpolate(skeletalMesh->GetCurrentAnimationTime(), joint, &skeletalMesh->GetSkeleton(), nullptr, 0.f);
 						}
 
 						skinningData.skinningMatrices[skinningDataIndex] = joint.currentPose;
