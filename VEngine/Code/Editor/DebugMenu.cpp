@@ -340,29 +340,29 @@ void DebugMenu::RenderSkeletonViewMenu()
 		for (auto mesh : meshes)
 		{
 			ImGui::Text("Mesh: %s", mesh->meshComponentData.filename.c_str());
-			ImGui::Text("Current Animation: %s", mesh->currentAnimation.c_str());
-			if (!mesh->currentAnimation.empty())
+			ImGui::Text("Current Animation: %s", mesh->GetCurrentAnimationName().c_str());
+			if (!mesh->GetCurrentAnimationName().empty())
 			{
 				ImGui::Text("Time: %f/%f",
-					mesh->currentAnimationTime,
-					mesh->skeleton->GetCurrentAnimation(mesh->currentAnimation).GetFinalTime());
+					mesh->GetCurrentAnimationTime(),
+					mesh->GetSkeleton()->GetCurrentAnimation().GetFinalTime());
 			}
 
 			//Debug select animation clip to play via buttons
-			for (auto& animation : mesh->skeleton->animations)
+			for (auto& animation : mesh->GetSkeleton()->animations)
 			{
 				std::string animationName = animation.first;
 				if (!animationName.empty())
 				{
 					if (ImGui::Button(animationName.c_str()))
 					{
-						mesh->currentAnimation = animationName.c_str();
-						mesh->currentAnimationTime = 0.f;
+						mesh->SetCurrentAnimationName(animationName);
+						mesh->ResetAnimationTime();
 					}
 				}
 			}
 
-			for (auto& joint : mesh->skeleton->joints)
+			for (auto& joint : mesh->GetSkeleton()->joints)
 			{
 				ImGui::Text("Joint: %s ", joint.name);
 				ImGui::SameLine();

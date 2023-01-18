@@ -1255,9 +1255,9 @@ void AnimateSkeletalMeshes()
 
 	for (auto& skeletalMesh : SkeletalMeshComponent::system.GetComponents())
 	{
-		Skeleton* skeleton = skeletalMesh->skeleton;
+		Skeleton* skeleton = skeletalMesh->GetSkeleton();
 
-		if (skeletalMesh->currentAnimation.empty())
+		if (skeletalMesh->GetCurrentAnimationName().empty())
 		{
 			return;
 		}
@@ -1272,31 +1272,31 @@ void AnimateSkeletalMeshes()
 			context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
 			context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 
-			Animation& anim = skeleton->GetCurrentAnimation(skeletalMesh->currentAnimation);
+			Animation& anim = skeleton->GetCurrentAnimation();
 			if (!anim.frames.empty())
 			{
-				skeletalMesh->currentAnimationTime += Core::GetDeltaTime();
+				skeletalMesh->IncrementAnimationTime(Core::GetDeltaTime());
 
 				//Move through and animate all joints on skeleton
 				for (Joint& joint : skeleton->joints)
 				{
-					if (skeletalMesh->currentAnimationTime >= anim.GetEndTime(joint.index))
+					if (skeletalMesh->GetCurrentAnimationTime() >= anim.GetEndTime(joint.index))
 					{
-						skeletalMesh->currentAnimationTime = 0.f;
+						skeletalMesh->ResetAnimationTime();
 					}
 
 					//Blend testing
-					if (!skeletalMesh->nextAnimation.empty())
+					if (!skeletalMesh->GetNextAnimationName().empty())
 					{
-						auto nextAnimIt = skeleton->animations.find(skeletalMesh->nextAnimation);
+						auto nextAnimIt = skeleton->animations.find(skeletalMesh->GetNextAnimationName());
 						if (nextAnimIt != skeleton->animations.end())
 						{
-							anim.Interpolate(skeletalMesh->currentAnimationTime, joint, skeleton, &nextAnimIt->second, 0.5f);
+							anim.Interpolate(skeletalMesh->GetCurrentAnimationTime(), joint, skeleton, &nextAnimIt->second, 0.5f);
 						}
 					}
 					else
 					{
-						anim.Interpolate(skeletalMesh->currentAnimationTime, joint, skeleton, nullptr, 0.f);
+						anim.Interpolate(skeletalMesh->GetCurrentAnimationTime(), joint, skeleton, nullptr, 0.f);
 					}
 
 

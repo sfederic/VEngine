@@ -77,5 +77,5 @@ struct Skeleton
 	void AddJoint(Joint joint);
 	int FindJointIndexByName(std::string name);
 	void CreateAnimation(const std::string animationName);
-	Animation& GetCurrentAnimation(std::string currentAnimation_);
+	Animation& GetCurrentAnimation();
 };
