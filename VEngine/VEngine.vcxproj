@@ -244,6 +244,7 @@
     <ClCompile Include="Code\Actors\Game\RepairObject.cpp" />
     <ClCompile Include="Code\Components\Game\SwordBeam.cpp" />
     <ClCompile Include="Code\Actors\LightVolume.cpp" />
+    <ClCompile Include="Code\Components\SkeletalMeshComponent.cpp" />
     <ClInclude Include="Code\Actors\AnimCube.h" />
     <ClInclude Include="Code\Actors\Game\BasicEnemy.h" />
     <ClInclude Include="Code\Actors\Game\BacksideEnemy.h" />
@@ -492,6 +493,7 @@
     <ClInclude Include="Code\Actors\Game\RepairObject.h" />
     <ClInclude Include="Code\Components\Game\SwordBeam.h" />
     <ClInclude Include="Code\Actors\LightVolume.h" />
+    <ClInclude Include="Code\Components\SkeletalMeshComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
