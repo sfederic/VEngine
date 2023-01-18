@@ -29,8 +29,12 @@ struct Animation
 {
 	bool isPlaying = true;
 
+	std::string name;
+
 	//Maps joint index to AnimFrames
 	std::map<int, std::vector<AnimFrame>> frames;
+
+	Animation(std::string name_) : name(name_) {}
 
 	float GetStartTime(int jointIndex)
 	{
@@ -70,12 +74,11 @@ struct Skeleton
 	std::vector<Joint> joints;
 
 	std::map<std::string, Animation> animations;
-	std::string currentAnimation;
 
 	Skeleton();
 
 	void AddJoint(Joint joint);
 	int FindJointIndexByName(std::string name);
 	void CreateAnimation(const std::string animationName);
-	Animation& GetCurrentAnimation();
+	Animation& GetAnimation(const std::string animationName);
 };

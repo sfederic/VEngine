@@ -336,33 +336,33 @@ void DebugMenu::RenderSkeletonViewMenu()
 	auto picked = WorldEditor::GetPickedActor();
 	if (picked)
 	{
-		auto meshes = picked->GetComponentsOfType<SkeletalMeshComponent>();
-		for (auto mesh : meshes)
+		auto skeletalMeshes = picked->GetComponentsOfType<SkeletalMeshComponent>();
+		for (auto skeletalMesh : skeletalMeshes)
 		{
-			ImGui::Text("Mesh: %s", mesh->meshComponentData.filename.c_str());
-			ImGui::Text("Current Animation: %s", mesh->GetCurrentAnimationName().c_str());
-			if (!mesh->GetCurrentAnimationName().empty())
+			ImGui::Text("SkeletalMesh: %s", skeletalMesh->meshComponentData.filename.c_str());
+			ImGui::Text("Current Animation: %s", skeletalMesh->currentAnimation.c_str());
+			if (!skeletalMesh->currentAnimation.empty())
 			{
 				ImGui::Text("Time: %f/%f",
-					mesh->GetCurrentAnimationTime(),
-					mesh->GetSkeleton().GetCurrentAnimation().GetFinalTime());
+					skeletalMesh->GetCurrentAnimationTime(),
+					skeletalMesh->GetCurrentAnimation().GetFinalTime());
 			}
 
 			//Debug select animation clip to play via buttons
-			for (auto& animation : mesh->GetSkeleton().animations)
+			for (auto& animation : skeletalMesh->GetSkeleton().animations)
 			{
 				std::string animationName = animation.first;
 				if (!animationName.empty())
 				{
 					if (ImGui::Button(animationName.c_str()))
 					{
-						mesh->SetCurrentAnimationName(animationName);
-						mesh->ResetAnimationTime();
+						skeletalMesh->currentAnimation = animationName;
+						skeletalMesh->ResetAnimationTime();
 					}
 				}
 			}
 
-			for (auto& joint : mesh->GetSkeleton().joints)
+			for (auto& joint : skeletalMesh->GetSkeleton().joints)
 			{
 				ImGui::Text("Joint: %s ", joint.name);
 				ImGui::SameLine();

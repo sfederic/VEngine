@@ -12,3 +12,10 @@ void SkeletalMeshComponent::Create()
 {
     MeshComponent::Create();
 }
+
+Animation& SkeletalMeshComponent::GetCurrentAnimation()
+{
+    auto& skeleton = GetSkeleton();
+    auto& animation = skeleton.GetAnimation(currentAnimation);
+    return animation;
+}

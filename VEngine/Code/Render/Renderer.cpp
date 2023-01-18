@@ -1271,7 +1271,7 @@ void AnimateAndRenderSkeletalMeshes()
 		//Animate
 		Skeleton& skeleton = skeletalMesh->GetSkeleton();
 
-		if (!skeletalMesh->GetCurrentAnimationName().empty())
+		if (!skeletalMesh->currentAnimation.empty())
 		{
 			if (!skeleton.joints.empty())
 			{
@@ -1283,7 +1283,7 @@ void AnimateAndRenderSkeletalMeshes()
 				context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
 				context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 
-				Animation& anim = skeleton.GetCurrentAnimation();
+				Animation& anim = skeletalMesh->GetCurrentAnimation();
 				if (!anim.frames.empty())
 				{
 					skeletalMesh->IncrementAnimationTime(Core::GetDeltaTime());
@@ -1297,9 +1297,9 @@ void AnimateAndRenderSkeletalMeshes()
 						}
 
 						//Blend testing
-						if (!skeletalMesh->GetNextAnimationName().empty())
+						if (!skeletalMesh->nextAnimation.empty())
 						{
-							auto nextAnimIt = skeleton.animations.find(skeletalMesh->GetNextAnimationName());
+							auto nextAnimIt = skeleton.animations.find(skeletalMesh->nextAnimation);
 							if (nextAnimIt != skeleton.animations.end())
 							{
 								anim.Interpolate(skeletalMesh->GetCurrentAnimationTime(), joint, &skeleton, &nextAnimIt->second, 0.5f);
@@ -1309,7 +1309,6 @@ void AnimateAndRenderSkeletalMeshes()
 						{
 							anim.Interpolate(skeletalMesh->GetCurrentAnimationTime(), joint, &skeleton, nullptr, 0.f);
 						}
-
 
 						skinningData.skinningMatrices[skinningDataIndex] = joint.currentPose;
 						skinningDataIndex++;

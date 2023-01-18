@@ -179,7 +179,6 @@ void FBXLoader::ImportAsAnimation(const std::string filename, Skeleton& skeleton
 						std::string animationName = VString::GetSubStringAtFoundOffset(filename, "@");
 						animationName = VString::GetSubStringBeforeFoundOffset(animationName, ".");
 						skeleton.CreateAnimation(animationName);
-						skeleton.currentAnimation = animationName;
 
 						FbxAnimLayer* animLayer = animStack->GetMember<FbxAnimLayer>();
 						std::string animLayerName = animLayer->GetName();

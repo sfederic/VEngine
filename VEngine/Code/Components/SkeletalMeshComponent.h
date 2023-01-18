@@ -16,17 +16,15 @@ public:
 
 	Skeleton& GetSkeleton() { return *meshDataProxy.skeleton; }
 
-	std::string GetCurrentAnimationName() { return currentAnimation; }
-	void SetCurrentAnimationName(std::string currentAnimation_) { currentAnimation = currentAnimation_; }
-	std::string GetNextAnimationName() { return nextAnimation; }
-
 	float GetCurrentAnimationTime() { return currentAnimationTime; }
 	void ResetAnimationTime() { currentAnimationTime = 0.f; }
 	void IncrementAnimationTime(float increment) { currentAnimationTime += increment; }
 
-private:
+	Animation& GetCurrentAnimation();
+
 	std::string currentAnimation;
 	std::string nextAnimation;
 
+private:
 	float currentAnimationTime = 0.f;
 };

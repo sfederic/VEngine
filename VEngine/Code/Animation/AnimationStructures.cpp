@@ -128,10 +128,10 @@ int Skeleton::FindJointIndexByName(std::string name)
 void Skeleton::CreateAnimation(const std::string animationName)
 {
 	assert(animations.find(animationName) == animations.end());
-	animations.emplace(animationName, Animation());
+	animations.emplace(animationName, Animation(animationName));
 }
 
-Animation& Skeleton::GetCurrentAnimation()
+Animation& Skeleton::GetAnimation(const std::string animationName)
 {
-	return animations.find(currentAnimation)->second;
+	return animations.find(animationName)->second;
 }
