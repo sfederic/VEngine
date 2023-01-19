@@ -63,6 +63,7 @@ void CreateLightProbeBuffers();
 void CheckSupportedFeatures();
 void RenderShadowPass();
 void RenderMeshComponents();
+void RenderMeshForShadowPass(MeshComponent* mesh);
 void AnimateAndRenderSkeletalMeshes();
 void RenderInstanceMeshComponents();
 void RenderBounds();
@@ -569,6 +570,32 @@ void CheckSupportedFeatures()
 	sampleDesc.Count = sampleCount;
 }
 
+void RenderMeshForShadowPass(MeshComponent* mesh)
+{
+	if (!mesh->castsShadow || !mesh->IsActive())
+	{
+		return;
+	}
+
+	SetRenderPipelineStatesForShadows(mesh);
+
+	//Set matrices
+	shaderMatrices.model = mesh->GetWorldMatrix();
+	shaderMatrices.MakeModelViewProjectionMatrix();
+	shaderMatrices.MakeTextureMatrix(mesh->material);
+
+	cbMatrices->Map(&shaderMatrices);
+	cbMatrices->SetVS();
+
+	//Set textures
+	Material* mat = mesh->material;
+	context->PSSetSamplers(0, 1, &mat->sampler->data);
+	SetShaderResourceFromMaterial(0, mesh->material);
+
+	//Draw
+	context->Draw(mesh->meshDataProxy.vertices->size(), 0);
+}
+
 void RenderShadowPass()
 {
 	Profile::Start();
@@ -585,28 +612,12 @@ void RenderShadowPass()
 
 	for (auto& mesh : MeshComponent::system.GetComponents())
 	{
-		if (!mesh->castsShadow || !mesh->IsActive())
-		{
-			continue;
-		}
-
-		SetRenderPipelineStatesForShadows(mesh.get());
-
-		//Set matrices
-		shaderMatrices.model = mesh->GetWorldMatrix();
-		shaderMatrices.MakeModelViewProjectionMatrix();
-		shaderMatrices.MakeTextureMatrix(mesh->material);
-
-		cbMatrices->Map(&shaderMatrices);
-		cbMatrices->SetVS();
-
-		//Set textures
-		Material* mat = mesh->material;
-		context->PSSetSamplers(0, 1, &mat->sampler->data);
-		SetShaderResourceFromMaterial(0, mesh->material);
-
-		//Draw
-		context->Draw(mesh->meshDataProxy.vertices->size(), 0);
+		RenderMeshForShadowPass(mesh.get());
+	}	
+	
+	for (auto& instanceMesh : InstanceMeshComponent::system.GetComponents())
+	{
+		RenderMeshForShadowPass(instanceMesh.get());
 	}
 
 	SetNullRTV();
