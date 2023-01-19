@@ -37,6 +37,7 @@ struct ShaderItems
 	inline static ShaderItem* Unlit;
 	inline static ShaderItem* Animation;
 	inline static ShaderItem* Shadow;
+	inline static ShaderItem* ShadowAnimation;
 	inline static ShaderItem* Instance;
 	inline static ShaderItem* SolidColour;
 	inline static ShaderItem* UI;
