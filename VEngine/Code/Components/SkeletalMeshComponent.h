@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MeshComponent.h"
+#include "Render/RenderTypes.h"
 
 class SkeletalMeshComponent : public MeshComponent
 {
@@ -27,6 +28,8 @@ public:
 	bool HasJoints();
 
 	std::string currentAnimation;
+
+	ShaderSkinningData shaderSkinningData;
 
 private:
 	float currentAnimationTime = 0.f;

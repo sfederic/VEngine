@@ -1,4 +1,5 @@
 #pragma once
+
 #include <DirectXCollision.h>
 #include "Animation/AnimationStructures.h"
 

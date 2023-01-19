@@ -648,6 +648,11 @@ void RenderShadowPass()
 		cbMatrices->Map(&shaderMatrices);
 		cbMatrices->SetVS();
 
+		//Set skinning data
+		ShaderSkinningData skinningData = skeletalMesh->shaderSkinningData;
+		cbSkinningData->Map(&skinningData);
+		cbSkinningData->SetVS();
+
 		//Set textures
 		Material* mat = mesh->material;
 		context->PSSetSamplers(0, 1, &mat->sampler->data);
@@ -1322,8 +1327,7 @@ void AnimateAndRenderSkeletalMeshes()
 			if (skeletalMesh->HasJoints())
 			{
 				int skinningDataIndex = 0;
-				ShaderSkinningData skinningData;
-				skinningData.skinningMatrices[0] = XMMatrixIdentity();
+				ShaderSkinningData& skinningData = skeletalMesh->shaderSkinningData;
 
 				//Set shader for skeletal animation
 				ShaderItem* shaderItem = ShaderItems::Animation;
