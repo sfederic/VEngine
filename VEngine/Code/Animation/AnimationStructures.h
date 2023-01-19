@@ -50,7 +50,7 @@ struct Animation
 
 	float GetFinalTime();
 
-	void Interpolate(float t, Joint& joint, Skeleton* skeleton, Animation* animToBlendTo, float blendPercent);
+	void Interpolate(float t, Joint& joint, Skeleton* skeleton);
 };
 
 struct Joint
@@ -74,8 +74,6 @@ struct Skeleton
 	std::vector<Joint> joints;
 
 	std::map<std::string, Animation> animations;
-
-	Skeleton();
 
 	void AddJoint(Joint joint);
 	int FindJointIndexByName(std::string name);

@@ -19,7 +19,7 @@ float Animation::GetFinalTime()
 	return highestTime;
 }
 
-void Animation::Interpolate(float t, Joint& joint, Skeleton* skeleton, Animation* animToBlendTo, float blendPercent)
+void Animation::Interpolate(float t, Joint& joint, Skeleton* skeleton)
 {
 	if (!isPlaying)
 	{
@@ -29,7 +29,10 @@ void Animation::Interpolate(float t, Joint& joint, Skeleton* skeleton, Animation
 	//get anim frames connected to joint
 	std::vector<AnimFrame>& jointFrames = frames[joint.index];
 
-	if (jointFrames.empty()) return;
+	if (jointFrames.empty())
+	{
+		return;
+	}
 
 	for (size_t i = 0; i < (jointFrames.size() - 1); i++)
 	{
@@ -53,36 +56,6 @@ void Animation::Interpolate(float t, Joint& joint, Skeleton* skeleton, Animation
 
 			joint.currentPose = XMMatrixAffineTransformation(lerpedScale, zero, lerpedRot, lerpedPos);
 
-			if (animToBlendTo != nullptr)
-			{
-				auto interpolateFrameIt = animToBlendTo->frames.find(joint.index);
-				if (interpolateFrameIt != animToBlendTo->frames.end())
-				{
-					std::vector<AnimFrame>& interpolateFrames = interpolateFrameIt->second;
-
-					AnimFrame& interpFrame = interpolateFrames.back();
-
-					if (interpolateFrames.size() > i)
-					{
-						interpFrame = interpolateFrames[i];
-					}
-
-					if (interpFrame.time < t)
-					{
-						XMVECTOR nextAnimPos = XMLoadFloat3(&interpFrame.pos);
-						XMVECTOR nextAnimScale = XMLoadFloat3(&interpFrame.scale);
-						XMVECTOR nextAnimRot = XMLoadFloat4(&interpFrame.rot);
-
-						XMVECTOR lerpedPos = XMVectorLerp(currentPos, nextAnimPos, blendPercent);
-						XMVECTOR lerpedScale = XMVectorLerp(currentScale, nextAnimScale, blendPercent);
-						XMVECTOR lerpedRot = XMQuaternionSlerp(currentRot, nextAnimRot, blendPercent);
-						XMVECTOR zero = XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f);
-
-						joint.currentPose = XMMatrixAffineTransformation(lerpedScale, zero, lerpedRot, lerpedPos);
-					}
-				}
-			}
-
 			XMMATRIX endPose = joint.currentPose;
 			int parentIndex = joint.parentIndex;
 
@@ -99,10 +72,6 @@ void Animation::Interpolate(float t, Joint& joint, Skeleton* skeleton, Animation
 			return;
 		}
 	}
-}
-
-Skeleton::Skeleton()
-{
 }
 
 void Skeleton::AddJoint(Joint joint)

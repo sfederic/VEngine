@@ -1295,19 +1295,7 @@ void AnimateAndRenderSkeletalMeshes()
 							skeletalMesh->ResetAnimationTime();
 						}
 
-						//Blend testing
-						//if (!skeletalMesh->nextAnimation.empty())
-						//{
-						//	auto nextAnimIt = skeleton.animations.find(skeletalMesh->nextAnimation);
-						//	if (nextAnimIt != skeleton.animations.end())
-						//	{
-						//		anim.Interpolate(skeletalMesh->GetCurrentAnimationTime(), joint, &skeleton, &nextAnimIt->second, 0.5f);
-						//	}
-						//}
-						//else
-						{
-							anim.Interpolate(skeletalMesh->GetCurrentAnimationTime(), joint, &skeletalMesh->GetSkeleton(), nullptr, 0.f);
-						}
+						anim.Interpolate(skeletalMesh->GetCurrentAnimationTime(), joint, &skeletalMesh->GetSkeleton());
 
 						skinningData.skinningMatrices[skinningDataIndex] = joint.currentPose;
 						skinningDataIndex++;

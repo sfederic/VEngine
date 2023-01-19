@@ -27,7 +27,6 @@ public:
 	bool HasJoints();
 
 	std::string currentAnimation;
-	std::string nextAnimation;
 
 private:
 	float currentAnimationTime = 0.f;
