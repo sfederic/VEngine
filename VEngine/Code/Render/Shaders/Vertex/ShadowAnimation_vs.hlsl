@@ -20,9 +20,11 @@ VS_OUT main(VS_IN i)
         normalL += weights[index] * mul((float3x3) boneTransforms[i.boneIndices[index]], i.normal);
     }
 
-    o.pos = mul(mvp, float4(posL, 1.0f));
-    o.pos = mul(lightViewProj, float4(posL, 1.0f));
-    o.posWS = mul(model, float4(i.pos.xyz, 1.0f));
+    //@Todo: shadow doesn't exist if animation isn't playing, because there are no bone matrices sent in.
+    //Could probably fix this with a bool in a constant buffer to make 'posL' all 1s so the mul() doesn't fall over.
+    o.pos = mul(model, float4(posL, 1.0f));
+    o.pos = mul(lightViewProj, o.pos);
+    o.posWS = mul(model, float4(posL, 1.0f));
     float4 newUv = mul(texMatrix, float4(i.uv, 0.f, 1.0f));
     o.uv = float2(newUv.x, newUv.y);
     o.normal = mul((float3x3) model, i.normal);
