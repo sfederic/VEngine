@@ -620,10 +620,7 @@ void RenderShadowPass()
 		RenderMeshForShadowPass(instanceMesh.get());
 	}
 
-	//@Todo: shadows for animated meshes look bad, I think it's got to do with the ConstantBuffer
-	//with the bone matrices being updated in the render and not here, meaning there would be a slight offset
-	//in the 'shadow' rendered. Also the shadow is being rendered in a 'stationary' position, as if the mesh
-	//is an immovable silhouette, i.e. it's not taking the mesh's world matrix into account.
+	//@Todo: shadows for animated meshes look bad, I'm not sure what it is.
 	for (auto& skeletalMesh : SkeletalMeshComponent::system.GetComponents())
 	{
 		SkeletalMeshComponent* mesh = skeletalMesh.get();
