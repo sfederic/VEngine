@@ -172,7 +172,7 @@ struct ShaderMeshData
 struct ShaderSkinningData
 {
 	inline static const int MAX_SKINNING_DATA = 96;
-	XMMATRIX skinningMatrices[MAX_SKINNING_DATA];
+	XMMATRIX skinningMatrices[MAX_SKINNING_DATA]{};
 };
 
 struct ShaderPostProcessData

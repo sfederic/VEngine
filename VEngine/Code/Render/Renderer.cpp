@@ -620,6 +620,46 @@ void RenderShadowPass()
 		RenderMeshForShadowPass(instanceMesh.get());
 	}
 
+	//@Todo: shadows for animated meshes look bad, I think it's got to do with the ConstantBuffer
+	//with the bone matrices being updated in the render and not here, meaning there would be a slight offset
+	//in the 'shadow' rendered. Also the shadow is being rendered in a 'stationary' position, as if the mesh
+	//is an immovable silhouette, i.e. it's not taking the mesh's world matrix into account.
+	for (auto& skeletalMesh : SkeletalMeshComponent::system.GetComponents())
+	{
+		SkeletalMeshComponent* mesh = skeletalMesh.get();
+
+		if(!mesh->castsShadow || !mesh->IsActive())
+		{
+			return;
+		}
+
+		context->RSSetState(rastStateMap["shadow"]->data);
+
+		PipelineStateObject& pso = mesh->pso;
+		context->IASetVertexBuffers(0, 1, &pso.vertexBuffer->data, &Renderer::stride, &Renderer::offset);
+
+		ShaderItem* shader = ShaderItems::ShadowAnimation;
+
+		context->VSSetShader(shader->GetVertexShader(), nullptr, 0);
+		context->PSSetShader(shader->GetPixelShader(), nullptr, 0);
+
+		//Set matrices
+		shaderMatrices.model = mesh->GetWorldMatrix();
+		shaderMatrices.MakeModelViewProjectionMatrix();
+		shaderMatrices.MakeTextureMatrix(mesh->material);
+
+		cbMatrices->Map(&shaderMatrices);
+		cbMatrices->SetVS();
+
+		//Set textures
+		Material* mat = mesh->material;
+		context->PSSetSamplers(0, 1, &mat->sampler->data);
+		SetShaderResourceFromMaterial(0, mesh->material);
+
+		//Draw
+		context->Draw(mesh->meshDataProxy.vertices->size(), 0);
+	}
+
 	SetNullRTV();
 
 	Profile::End();
@@ -1285,7 +1325,8 @@ void AnimateAndRenderSkeletalMeshes()
 			if (skeletalMesh->HasJoints())
 			{
 				int skinningDataIndex = 0;
-				ShaderSkinningData skinningData = {};
+				ShaderSkinningData skinningData;
+				skinningData.skinningMatrices[0] = XMMatrixIdentity();
 
 				//Set shader for skeletal animation
 				ShaderItem* shaderItem = ShaderItems::Animation;
@@ -1315,11 +1356,8 @@ void AnimateAndRenderSkeletalMeshes()
 				}
 
 				//Update skinning constant buffers
-				if (skinningDataIndex > 0)
-				{
-					cbSkinningData->Map(&skinningData);
-					cbSkinningData->SetVS();
-				}
+				cbSkinningData->Map(&skinningData);
+				cbSkinningData->SetVS();
 			}
 		}
 
