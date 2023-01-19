@@ -76,6 +76,7 @@ cbuffer cbMaterials : register(b1)
 cbuffer cbSkiningData : register(b2)
 {
 	float4x4 boneTransforms[96];
+    bool isAnimated;
 };
 
 struct Light

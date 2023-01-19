@@ -4,7 +4,9 @@ VS_OUT main(VS_IN i)
 {
     VS_OUT o;
 
-		//VERTEX BLENDING FOR SKINNED ANIMATION
+    //@Todo: consolidate this code with TransformOut.hlsli
+    
+	//VERTEX BLENDING FOR SKINNED ANIMATION
     float weights[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
     weights[0] = i.weights.x;
     weights[1] = i.weights.y;
@@ -12,12 +14,19 @@ VS_OUT main(VS_IN i)
     weights[3] = 1.0f - weights[0] - weights[1] - weights[2];
 
     float3 posL = float3(0.0f, 0.0f, 0.0f);
-    float3 normalL = float3(0.0f, 0.0f, 0.0f);
-    for (int index = 0; index < 4; ++index)
+    //float3 normalL = float3(0.0f, 0.0f, 0.0f);
+    if(isAnimated)
     {
-			//no nonuniform scaling
-        posL += weights[index] * mul(boneTransforms[i.boneIndices[index]], float4(i.pos.xyz, 1.0f)).xyz;
-        normalL += weights[index] * mul((float3x3) boneTransforms[i.boneIndices[index]], i.normal);
+        for (int index = 0; index < 4; ++index)
+        {
+		    //no nonuniform scaling
+            posL += weights[index] * mul(boneTransforms[i.boneIndices[index]], float4(i.pos.xyz, 1.0f)).xyz;
+            //normalL += weights[index] * mul((float3x3) boneTransforms[i.boneIndices[index]], i.normal);
+        }
+    }
+    else
+    {
+        posL = i.pos.xyz;
     }
 
     //@Todo: shadow doesn't exist if animation isn't playing, because there are no bone matrices sent in.

@@ -1333,6 +1333,8 @@ void AnimateAndRenderSkeletalMeshes()
 				Animation& anim = skeletalMesh->GetCurrentAnimation();
 				if (!anim.frames.empty())
 				{
+					skinningData.isAnimated = true;
+
 					skeletalMesh->IncrementAnimationTime(Core::GetDeltaTime());
 
 					//Move through and animate all joints on skeleton
