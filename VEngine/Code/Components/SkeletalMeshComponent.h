@@ -19,7 +19,7 @@ public:
 
 	float GetCurrentAnimationTime() { return currentAnimationTime; }
 	void ResetAnimationTime() { currentAnimationTime = 0.f; }
-	void IncrementAnimationTime(float increment) { currentAnimationTime += increment; }
+	void IncrementAnimationTime(float increment) { currentAnimationTime += increment * animationSpeed; }
 
 	Animation& GetCurrentAnimation();
 	std::vector<Animation*> GetAllAnimations();
