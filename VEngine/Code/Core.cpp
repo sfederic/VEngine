@@ -7,6 +7,7 @@
 #include "Camera.h"
 #include "Editor/DebugMenu.h"
 #include "Components/CameraComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "Actors/Game/Player.h"
 #include "World.h"
 #include "UI/UISystem.h"
@@ -172,6 +173,8 @@ void Core::EndGame()
 	Timer::Cleanup();
 
 	AudioSystem::DeleteLoadedAudioAndChannels();
+
+	SkeletalMeshComponent::PauseAllAnimations();
 
 	activeCamera = &editorCamera;
 

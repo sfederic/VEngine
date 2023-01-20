@@ -47,6 +47,19 @@ void SkeletalMeshComponent::PlayAnimation(std::string animationName, float speed
     animationSpeed = speed;
 }
 
+void SkeletalMeshComponent::PauseAnimation()
+{
+	animationSpeed = 0.f;
+}
+
+void SkeletalMeshComponent::PauseAllAnimations()
+{
+	for (auto& skeletalMesh : system.GetComponents())
+	{
+		skeletalMesh->PauseAnimation();
+	}
+}
+
 void SkeletalMeshComponent::InterpolateCurrentAnimation()
 {
 	int skinningDataIndex = 0;

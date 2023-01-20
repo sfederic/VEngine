@@ -28,6 +28,8 @@ public:
 	bool HasJoints();
 
 	void PlayAnimation(std::string animationName, float speed = 1.f);
+	void PauseAnimation();
+	static void PauseAllAnimations();
 
 	void InterpolateCurrentAnimation();
 
