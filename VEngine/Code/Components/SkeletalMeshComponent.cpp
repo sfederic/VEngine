@@ -1,5 +1,6 @@
 #include "vpch.h"
 #include "SkeletalMeshComponent.h"
+#include "Core.h"
 
 Properties SkeletalMeshComponent::GetProps()
 {
@@ -44,4 +45,37 @@ void SkeletalMeshComponent::PlayAnimation(std::string animationName, float speed
 {
     currentAnimation = animationName;
     animationSpeed = speed;
+}
+
+void SkeletalMeshComponent::InterpolateCurrentAnimation()
+{
+	int skinningDataIndex = 0;
+	Animation& anim = GetCurrentAnimation();
+
+	if (!anim.frames.empty())
+	{
+		shaderSkinningData.isAnimated = true;
+
+		IncrementAnimationTime(Core::GetDeltaTime());
+
+		//Move through and animate all joints on skeleton
+		auto& joints = GetAllJoints();
+		for (auto& joint : joints)
+		{
+			if (GetCurrentAnimationTime() >= anim.GetEndTime(joint.index))
+			{
+				ResetAnimationTime();
+			}
+
+			anim.Interpolate(GetCurrentAnimationTime(), joint, &GetSkeleton());
+
+			shaderSkinningData.skinningMatrices[skinningDataIndex] = joint.currentPose;
+			skinningDataIndex++;
+			assert(skinningDataIndex < ShaderSkinningData::MAX_SKINNING_DATA);
+		}
+	}
+	else
+	{
+		shaderSkinningData.isAnimated = false;
+	}
 }

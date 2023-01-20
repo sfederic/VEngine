@@ -29,6 +29,8 @@ public:
 
 	void PlayAnimation(std::string animationName, float speed = 1.f);
 
+	void InterpolateCurrentAnimation();
+
 	std::string currentAnimation;
 
 	ShaderSkinningData shaderSkinningData;

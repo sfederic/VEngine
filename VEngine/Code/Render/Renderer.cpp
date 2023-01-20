@@ -1317,8 +1317,28 @@ void AnimateAndRenderSkeletalMeshes()
 		//Render
 		if (!skeletalMesh->IsActive()) { continue; }
 
-		//@Todo: shader set()s here are redundant with animation shaders below.
-		SetRenderPipelineStates(skeletalMesh.get());
+		Material* material = skeletalMesh->material;
+		PipelineStateObject& pso = skeletalMesh->pso;
+
+		if (Renderer::drawAllAsWireframe)
+		{
+			context->RSSetState(rastStateWireframe);
+		}
+		else if (material->rastState)
+		{
+			context->RSSetState(material->rastState->data);
+		}
+
+		constexpr FLOAT blendState[4] = { 0.f };
+		context->OMSetBlendState(material->blendState->data, blendState, 0xFFFFFFFF);
+
+		context->PSSetSamplers(0, 1, &material->sampler->data);
+		SetShaderResourceFromMaterial(0, material);
+
+		SetVertexBuffer(pso.vertexBuffer);
+
+		cbMaterial->Map(&material->materialShaderData);
+		cbMaterial->SetPS();
 
 		SetMatricesFromMesh(skeletalMesh.get());
 		SetShaderMeshData(skeletalMesh.get());
@@ -1335,29 +1355,7 @@ void AnimateAndRenderSkeletalMeshes()
 				context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
 				context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 
-				Animation& anim = skeletalMesh->GetCurrentAnimation();
-				if (!anim.frames.empty())
-				{
-					skinningData.isAnimated = true;
-
-					skeletalMesh->IncrementAnimationTime(Core::GetDeltaTime());
-
-					//Move through and animate all joints on skeleton
-					auto& joints = skeletalMesh->GetAllJoints();
-					for (auto& joint : joints)
-					{
-						if (skeletalMesh->GetCurrentAnimationTime() >= anim.GetEndTime(joint.index))
-						{
-							skeletalMesh->ResetAnimationTime();
-						}
-
-						anim.Interpolate(skeletalMesh->GetCurrentAnimationTime(), joint, &skeletalMesh->GetSkeleton());
-
-						skinningData.skinningMatrices[skinningDataIndex] = joint.currentPose;
-						skinningDataIndex++;
-						assert(skinningDataIndex < ShaderSkinningData::MAX_SKINNING_DATA);
-					}
-				}
+				skeletalMesh->InterpolateCurrentAnimation();
 
 				//Update skinning constant buffers
 				cbSkinningData->Map(&skinningData);
