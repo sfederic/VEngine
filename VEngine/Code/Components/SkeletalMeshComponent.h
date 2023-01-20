@@ -33,7 +33,7 @@ public:
 	Skeleton& GetSkeleton() { return *meshDataProxy.skeleton; }
 
 	float GetCurrentAnimationTime() { return currentAnimationTime; }
-	void ResetAnimationTime() { currentAnimationTime = 0.f; }
+	void ResetAnimationTime();
 	void IncrementAnimationTime(float increment) { currentAnimationTime += increment * currentAnimationSpeed; }
 	void SetAnimationSpeed(float animationSpeed) { currentAnimationSpeed = animationSpeed; }
 
@@ -48,7 +48,7 @@ public:
 	std::vector<Joint>& GetAllJoints();
 	bool HasJoints();
 
-	void PlayAnimation(std::string animationName, float speed = 1.f);
+	void PlayAnimation(std::string animationName, float speed = 1.f, bool loop = true);
 	void StopAnimation();
 	void SetPauseAnimationState();
 
@@ -73,4 +73,6 @@ private:
 	float currentAnimationSpeed = 1.f;
 
 	float blendFactor = 0.f;
+
+	bool isAnimationLooping = true;
 };

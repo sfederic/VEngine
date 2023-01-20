@@ -15,6 +15,14 @@ void SkeletalMeshComponent::Create()
     MeshComponent::Create();
 }
 
+void SkeletalMeshComponent::ResetAnimationTime()
+{
+	if (isAnimationLooping)
+	{
+		currentAnimationTime = 0.f;
+	}
+}
+
 Animation& SkeletalMeshComponent::GetCurrentAnimation()
 {
     auto& skeleton = GetSkeleton();
@@ -56,8 +64,9 @@ bool SkeletalMeshComponent::HasJoints()
     return GetSkeleton().joints.size();
 }
 
-void SkeletalMeshComponent::PlayAnimation(std::string animationName, float speed)
+void SkeletalMeshComponent::PlayAnimation(std::string animationName, float speed, bool loop)
 {
+	isAnimationLooping = loop;
 	animationState = AnimationState::Play;
     currentAnimationName = animationName;
     currentAnimationSpeed = speed;
