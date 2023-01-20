@@ -1355,7 +1355,14 @@ void AnimateAndRenderSkeletalMeshes()
 				context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
 				context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 
-				skeletalMesh->InterpolateCurrentAnimation();
+				if (!skeletalMesh->GetNextAnimationName().empty())
+				{
+					skeletalMesh->CrossFadeNextAnimation();
+				}
+				else
+				{
+					skeletalMesh->InterpolateCurrentAnimation();
+				}
 
 				//Update skinning constant buffers
 				cbSkinningData->Map(&skinningData);

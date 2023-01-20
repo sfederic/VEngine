@@ -21,7 +21,8 @@ void AnimCube::Tick(float deltaTime)
 {
 	if (Input::GetKeyUp(Keys::Space))
 	{
-		skeletalMesh->PlayAnimation("turn", 5.5f);
+		//skeletalMesh->PlayAnimation("turn", 5.5f);
+		skeletalMesh->SetCrossFade("turn");
 	}
 }
 
