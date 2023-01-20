@@ -130,16 +130,16 @@ void SkeletalMeshComponent::InterpolateCurrentAnimation()
 
 void SkeletalMeshComponent::CrossFadeNextAnimation()
 {
-	Animation& animA = GetCurrentAnimation();
-	Animation& animB = GetNextAnimation();
+	Animation& currentAnim = GetCurrentAnimation();
+	Animation& nextAnim = GetNextAnimation();
 
 	//If crossfade is set to same animation, skip entire fade
-	if (animA.name == animB.name)
+	if (currentAnim.name == nextAnim.name)
 	{
 		blendFactor = 0.f;
 		currentAnimationName = nextAnimationName;
 		nextAnimationName.clear();
-		Log("Cross fade for %s animation skipped for being the same Animation", animA.name.c_str());
+		Log("Cross fade for %s animation skipped for being the same Animation", currentAnim.name.c_str());
 		return;
 	}
 
@@ -147,58 +147,76 @@ void SkeletalMeshComponent::CrossFadeNextAnimation()
 
 	const float currentAnimTime = GetCurrentAnimationTime();
 
+	constexpr float blendSpeed = 2.2f;
+	blendFactor += Core::GetDeltaTime() * blendSpeed;
+	if (blendFactor > 1.f)
+	{
+		blendFactor = 0.f;
+		currentAnimationName = nextAnimationName;
+		nextAnimationName.clear();
+		ResetAnimationTime();
+		return;
+	}
+
 	auto& joints = GetAllJoints();
 	for (auto& joint : joints)
 	{
-		std::vector<AnimFrame>& jointFramesAnimA = animA.frames[joint.index];
-		std::vector<AnimFrame>& jointFramesAnimB = animB.frames[joint.index];
+		std::vector<AnimFrame>& jointFramesCurrentAnim = currentAnim.frames[joint.index];
+		std::vector<AnimFrame>& jointFramesNextAnim = nextAnim.frames[joint.index];
 
-		for (size_t i = 0; i < (jointFramesAnimA.size() - 1); i++)
+		int jointEndFrameIndex = 0;
+		//Find joint frame index end closest to current animation time
+		for (size_t i = 0; i < (jointFramesCurrentAnim.size() - 1); i++)
 		{
-			constexpr float blendSpeed = 0.077f;
-			blendFactor += Core::GetDeltaTime() * blendSpeed;
-			if (blendFactor > 1.f)
+			if (jointFramesCurrentAnim[i].time <= currentAnimTime && jointFramesCurrentAnim[i + 1].time >= currentAnimTime)
 			{
-				blendFactor = 0.f;
-				currentAnimationName = nextAnimationName;
-				nextAnimationName.clear();
-				ResetAnimationTime();
-				return;
-			}
-
-			const float lerpPercent = std::clamp(blendFactor, 0.f, 1.f);
-
-			if (currentAnimTime >= jointFramesAnimA[i].time)
-			{
-				XMVECTOR currentPos = XMLoadFloat3(&jointFramesAnimA[i].pos);
-				XMVECTOR currentScale = XMLoadFloat3(&jointFramesAnimA[i].scale);
-				XMVECTOR currentRot = XMLoadFloat4(&jointFramesAnimA[i].rot);
-
-				XMVECTOR nextPos = XMLoadFloat3(&jointFramesAnimA[0].pos);
-				XMVECTOR nextScale = XMLoadFloat3(&jointFramesAnimA[0].scale);
-				XMVECTOR nextRot = XMLoadFloat4(&jointFramesAnimA[0].rot);
-
-				XMVECTOR lerpedPos = XMVectorLerp(currentPos, nextPos, lerpPercent);
-				XMVECTOR lerpedScale = XMVectorLerp(currentScale, nextScale, lerpPercent);
-				XMVECTOR lerpedRot = XMQuaternionSlerp(currentRot, nextRot, lerpPercent);
-				XMVECTOR zero = XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f);
-
-				joint.currentPose = XMMatrixAffineTransformation(lerpedScale, zero, lerpedRot, lerpedPos);
-
-				XMMATRIX endPose = joint.currentPose;
-				int parentIndex = joint.parentIndex;
-
-				while (parentIndex > -1)
-				{
-					Joint& parentJoint = GetSkeleton().joints[parentIndex];
-					endPose *= parentJoint.currentPose;
-
-					parentIndex = parentJoint.parentIndex;
-				}
-
-				joint.currentPose = joint.inverseBindPose * endPose;
+				jointEndFrameIndex = i;
+				break;
 			}
 		}
+
+		const float jointEndFramesLerpPercent = (currentAnimTime - jointFramesCurrentAnim[jointEndFrameIndex].time)
+			/ (jointFramesCurrentAnim[jointEndFrameIndex + 1].time - jointFramesCurrentAnim[jointEndFrameIndex].time);
+
+		const float lerpPercent = std::clamp(blendFactor, 0.f, 1.f);
+
+		//Because the initial animation keyframes can be distant in regards to time, get the interpolated
+		//values and use that to cross fade into the next animation instead.
+		XMVECTOR currentPos0 = XMLoadFloat3(&jointFramesCurrentAnim[jointEndFrameIndex].pos);
+		XMVECTOR currentScale0 = XMLoadFloat3(&jointFramesCurrentAnim[jointEndFrameIndex].scale);
+		XMVECTOR currentRot0 = XMLoadFloat4(&jointFramesCurrentAnim[jointEndFrameIndex].rot);
+
+		XMVECTOR currentPos1 = XMLoadFloat3(&jointFramesCurrentAnim[jointEndFrameIndex + 1].pos);
+		XMVECTOR currentScale1 = XMLoadFloat3(&jointFramesCurrentAnim[jointEndFrameIndex + 1].scale);
+		XMVECTOR currentRot1 = XMLoadFloat4(&jointFramesCurrentAnim[jointEndFrameIndex + 1].rot);
+
+		XMVECTOR currentPos = XMVectorLerp(currentPos0, currentPos1, jointEndFramesLerpPercent);
+		XMVECTOR currentScale = XMVectorLerp(currentScale0, currentScale1, jointEndFramesLerpPercent);
+		XMVECTOR currentRot = XMQuaternionSlerp(currentRot0, currentRot1, jointEndFramesLerpPercent);
+
+		XMVECTOR nextPos = XMLoadFloat3(&jointFramesNextAnim[0].pos);
+		XMVECTOR nextScale = XMLoadFloat3(&jointFramesNextAnim[0].scale);
+		XMVECTOR nextRot = XMLoadFloat4(&jointFramesNextAnim[0].rot);
+
+		XMVECTOR lerpedPos = XMVectorLerp(currentPos, nextPos, lerpPercent);
+		XMVECTOR lerpedScale = XMVectorLerp(currentScale, nextScale, lerpPercent);
+		XMVECTOR lerpedRot = XMQuaternionSlerp(currentRot, nextRot, lerpPercent);
+		XMVECTOR zero = XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f);
+
+		joint.currentPose = XMMatrixAffineTransformation(lerpedScale, zero, lerpedRot, lerpedPos);
+
+		XMMATRIX endPose = joint.currentPose;
+		int parentIndex = joint.parentIndex;
+
+		while (parentIndex > -1)
+		{
+			Joint& parentJoint = GetSkeleton().joints[parentIndex];
+			endPose *= parentJoint.currentPose;
+
+			parentIndex = parentJoint.parentIndex;
+		}
+
+		joint.currentPose = joint.inverseBindPose * endPose;
 
 		shaderSkinningData.skinningMatrices[skinningDataIndex] = joint.currentPose;
 		skinningDataIndex++;
