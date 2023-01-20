@@ -340,13 +340,18 @@ void DebugMenu::RenderSkeletonViewMenu()
 		for (auto skeletalMesh : skeletalMeshes)
 		{
 			ImGui::Text("SkeletalMesh: %s", skeletalMesh->meshComponentData.filename.c_str());
-			ImGui::Text("Current Animation: %s", skeletalMesh->currentAnimation.c_str());
-			if (!skeletalMesh->currentAnimation.empty())
+			ImGui::Text("Current Animation: %s", skeletalMesh->GetCurrentAnimatonName().c_str());
+
+			if (!skeletalMesh->GetCurrentAnimatonName().empty())
 			{
 				ImGui::Text("Time: %f/%f",
 					skeletalMesh->GetCurrentAnimationTime(),
 					skeletalMesh->GetCurrentAnimation().GetFinalTime());
 			}
+
+			static float animationSpeed = 1.f;
+			ImGui::InputFloat("Animation Speed", &animationSpeed);
+			skeletalMesh->SetAnimationSpeed(animationSpeed);
 
 			//Debug select animation clip to play via buttons
 			for (auto& animation : skeletalMesh->GetSkeleton().animations)
@@ -356,7 +361,7 @@ void DebugMenu::RenderSkeletonViewMenu()
 				{
 					if (ImGui::Button(animationName.c_str()))
 					{
-						skeletalMesh->currentAnimation = animationName;
+						skeletalMesh->PlayAnimation(animationName, animationSpeed);
 						skeletalMesh->ResetAnimationTime();
 					}
 				}
