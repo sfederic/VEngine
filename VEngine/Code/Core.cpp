@@ -157,6 +157,8 @@ void Core::StartGame()
 
 	World::WakeAndStartAllActors();
 
+	SkeletalMeshComponent::StartAllAnimations();
+
 	editor->SetPlayButtonText("Stop");
 	debugMenu.AddNotification(L"Gameplay started");
 }
@@ -174,7 +176,7 @@ void Core::EndGame()
 
 	AudioSystem::DeleteLoadedAudioAndChannels();
 
-	SkeletalMeshComponent::PauseAllAnimations();
+	SkeletalMeshComponent::StopAllAnimations();
 
 	activeCamera = &editorCamera;
 

@@ -43,20 +43,34 @@ bool SkeletalMeshComponent::HasJoints()
 
 void SkeletalMeshComponent::PlayAnimation(std::string animationName, float speed)
 {
+	animationState = AnimationState::Play;
     currentAnimation = animationName;
     animationSpeed = speed;
 }
 
-void SkeletalMeshComponent::PauseAnimation()
+void SkeletalMeshComponent::StopAnimation()
 {
-	animationSpeed = 0.f;
+	currentAnimation.clear();
 }
 
-void SkeletalMeshComponent::PauseAllAnimations()
+void SkeletalMeshComponent::SetPauseAnimationState()
+{
+	animationState = AnimationState::Pause;
+}
+
+void SkeletalMeshComponent::StopAllAnimations()
 {
 	for (auto& skeletalMesh : system.GetComponents())
 	{
-		skeletalMesh->PauseAnimation();
+		skeletalMesh->SetPauseAnimationState();
+	}
+}
+
+void SkeletalMeshComponent::StartAllAnimations()
+{
+	for (auto& skeletalMesh : system.GetComponents())
+	{
+		skeletalMesh->animationState = AnimationState::Play;
 	}
 }
 
@@ -68,6 +82,12 @@ void SkeletalMeshComponent::InterpolateCurrentAnimation()
 	if (!anim.frames.empty())
 	{
 		shaderSkinningData.isAnimated = true;
+
+		switch (animationState)
+		{
+		case AnimationState::Play: break;
+		case AnimationState::Pause: return;
+		}
 
 		IncrementAnimationTime(Core::GetDeltaTime());
 
