@@ -31,9 +31,11 @@ public:
 
 	float GetCurrentAnimationTime() { return currentAnimationTime; }
 	void ResetAnimationTime() { currentAnimationTime = 0.f; }
-	void IncrementAnimationTime(float increment) { currentAnimationTime += increment * animationSpeed; }
+	void IncrementAnimationTime(float increment) { currentAnimationTime += increment * currentAnimationSpeed; }
+	void SetAnimationSpeed(float animationSpeed) { currentAnimationSpeed = animationSpeed; }
 
 	Animation& GetCurrentAnimation();
+	std::string GetCurrentAnimatonName() { return currentAnimationName; }
 	std::vector<Animation*> GetAllAnimations();
 
 	std::vector<Joint>& GetAllJoints();
@@ -45,13 +47,13 @@ public:
 
 	void InterpolateCurrentAnimation();
 
-	std::string currentAnimation;
-
 	ShaderSkinningData shaderSkinningData;
 
 private:
 	AnimationState animationState = AnimationState::Play;
 
+	std::string currentAnimationName;
+
 	float currentAnimationTime = 0.f;
-	float animationSpeed = 1.f;
+	float currentAnimationSpeed = 1.f;
 };

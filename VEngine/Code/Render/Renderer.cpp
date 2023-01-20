@@ -1343,7 +1343,7 @@ void AnimateAndRenderSkeletalMeshes()
 		SetMatricesFromMesh(skeletalMesh.get());
 		SetShaderMeshData(skeletalMesh.get());
 
-		if (!skeletalMesh->currentAnimation.empty())
+		if (!skeletalMesh->GetCurrentAnimatonName().empty())
 		{
 			if (skeletalMesh->HasJoints())
 			{

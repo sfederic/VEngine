@@ -17,7 +17,7 @@ void SkeletalMeshComponent::Create()
 Animation& SkeletalMeshComponent::GetCurrentAnimation()
 {
     auto& skeleton = GetSkeleton();
-    auto& animation = skeleton.GetAnimation(currentAnimation);
+    auto& animation = skeleton.GetAnimation(currentAnimationName);
     return animation;
 }
 
@@ -44,13 +44,13 @@ bool SkeletalMeshComponent::HasJoints()
 void SkeletalMeshComponent::PlayAnimation(std::string animationName, float speed)
 {
 	animationState = AnimationState::Play;
-    currentAnimation = animationName;
-    animationSpeed = speed;
+    currentAnimationName = animationName;
+    currentAnimationSpeed = speed;
 }
 
 void SkeletalMeshComponent::StopAnimation()
 {
-	currentAnimation.clear();
+	currentAnimationName.clear();
 }
 
 void SkeletalMeshComponent::SetPauseAnimationState()
