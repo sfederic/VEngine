@@ -39,3 +39,9 @@ bool SkeletalMeshComponent::HasJoints()
 {
     return GetSkeleton().joints.size();
 }
+
+void SkeletalMeshComponent::PlayAnimation(std::string animationName, float speed)
+{
+    currentAnimation = animationName;
+    animationSpeed = speed;
+}

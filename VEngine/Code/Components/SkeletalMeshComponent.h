@@ -27,10 +27,13 @@ public:
 	std::vector<Joint>& GetAllJoints();
 	bool HasJoints();
 
+	void PlayAnimation(std::string animationName, float speed = 1.f);
+
 	std::string currentAnimation;
 
 	ShaderSkinningData shaderSkinningData;
 
 private:
 	float currentAnimationTime = 0.f;
+	float animationSpeed = 1.f;
 };

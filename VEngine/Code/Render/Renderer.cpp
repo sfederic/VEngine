@@ -649,6 +649,7 @@ void RenderShadowPass()
 		cbMatrices->SetVS();
 
 		//Set skinning data
+		//The constant buffer set here is working off of the data inputted on animating skeletons
 		ShaderSkinningData skinningData = skeletalMesh->shaderSkinningData;
 		cbSkinningData->Map(&skinningData);
 		cbSkinningData->SetVS();
