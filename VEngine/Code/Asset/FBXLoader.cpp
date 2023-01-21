@@ -139,6 +139,17 @@ void FBXLoader::ImportAsAnimation(const std::string filename, Skeleton& skeleton
 		FbxMesh* mesh = childNode->GetMesh();
 		if (mesh == nullptr) continue;
 
+		std::string animationName;
+		FbxAnimStack* animStack = scene->GetSrcObject<FbxAnimStack>();
+		if (animStack)
+		{
+			//Create animation in animation structures
+			//Stole naming convention from Unity. Animation file will have format: <mesh_name>@<animation_name>.fbx
+			animationName = VString::GetSubStringAtFoundOffset(filename, "@");
+			animationName = VString::GetSubStringBeforeFoundOffset(animationName, ".");
+			skeleton.CreateAnimation(animationName);
+		}
+
 		const int deformerCount = mesh->GetDeformerCount(FbxDeformer::eSkin);
 		for (int deformerIndex = 0; deformerIndex < deformerCount; deformerIndex++)
 		{
@@ -179,15 +190,8 @@ void FBXLoader::ImportAsAnimation(const std::string filename, Skeleton& skeleton
 				FbxInt nodeFlags = rootNode->GetAllObjectFlags();
 				if (nodeFlags & FbxPropertyFlags::eAnimated)
 				{
-					FbxAnimStack* animStack = scene->GetSrcObject<FbxAnimStack>();
 					if (animStack)
 					{
-						//Create animation in animation structures
-						//Stole naming structure from Unity, animation file will have format: <mesh_name>@<animation_name>.fbx
-						std::string animationName = VString::GetSubStringAtFoundOffset(filename, "@");
-						animationName = VString::GetSubStringBeforeFoundOffset(animationName, ".");
-						skeleton.CreateAnimation(animationName);
-
 						FbxAnimLayer* animLayer = animStack->GetMember<FbxAnimLayer>();
 						std::string animLayerName = animLayer->GetName();
 
