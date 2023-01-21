@@ -360,8 +360,6 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 			const int triangleSize = mesh->GetPolygonSize(i);
 			assert((triangleSize % 3) == 0 && "FBX model isn't triangulated");
 
-			Vertex* verts[3]{};
-
 			for (int j = 0; j < triangleSize; j++)
 			{
 				int index = mesh->GetPolygonVertex(i, j);
@@ -397,10 +395,16 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 
 				meshData->vertices.emplace_back(vert);
 				polyIndexCounter++;
-
-				//@Todo: this is incorrect. Need to calc every single triangle, forget about vertices.
-				verts[j] = &meshData->vertices.back();
 			}
+		}
+
+		for (int i = 0; i < meshData->vertices.size() / 3; i++)
+		{
+			const int index0 = i * 3;
+			const int index1 = i * 3 + 1;
+			const int index2 = i * 3 + 2;
+
+			Vertex* verts[3] = { &meshData->vertices[index0], &meshData->vertices[index1], &meshData->vertices[index2] };
 
 			//tangent/bitangent testing
 			//Ref:https://learnopengl.com/Advanced-Lighting/Normal-Mapping
