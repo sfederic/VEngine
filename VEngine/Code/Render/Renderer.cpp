@@ -1038,7 +1038,7 @@ void RenderBounds()
 		//@Todo: there's a weird error here where if you create enough lights in the map (about 40),
 		//the debug mesh actors will crash here. Tried putting the Debug Actors as global pointers
 		//instead of being static, but then Direct2D swapchain/rendertarget errors would happen.
-		//Feels like it might be the GPU doing some funny memory thing.
+		//Feels like it might be the GPU doing some funny memory thing with max lights.
 		SetVertexBuffer(debugBox.boxMesh->GetVertexBuffer());
 
 		//Set debug wireframe material colour
