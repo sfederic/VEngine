@@ -11,12 +11,6 @@
 
 const int ANIM_NAME_SIZE = 64;
 
-AssetSystem assetSystem;
-
-AssetSystem::AssetSystem() : System("AssetSystem")
-{
-}
-
 void AssetSystem::WriteAllMeshDataToMeshAssetFiles()
 {
 	FILE* file = nullptr;

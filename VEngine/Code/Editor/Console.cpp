@@ -113,15 +113,15 @@ void Console::Init()
 		"Load current world from existing binary file"));
 
 	executeMap.emplace(L"BUILD MESHES",
-		std::make_pair([]() { assetSystem.WriteAllMeshDataToMeshAssetFiles(); },
+		std::make_pair([]() { AssetSystem::WriteAllMeshDataToMeshAssetFiles(); },
 		"Build meshes as their engine specific file format."));
 
 	executeMap.emplace(L"READ MESHES",
-		std::make_pair([]() { assetSystem.ReadAllMeshAssetsFromFile("Meshes/animated_cube.vmesh"); },
+		std::make_pair([]() { AssetSystem::ReadAllMeshAssetsFromFile("Meshes/animated_cube.vmesh"); },
 			"test case for cube.vmesh"));
 
 	executeMap.emplace(L"BUILD MAPS",
-		std::make_pair([]() { assetSystem.BuildAllGameplayMapFiles(); },
+		std::make_pair([]() { AssetSystem::BuildAllGameplayMapFiles(); },
 		"Write all game save maps."));
 
 	executeMap.emplace(L"DEFAULT",
