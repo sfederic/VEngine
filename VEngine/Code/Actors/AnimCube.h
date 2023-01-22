@@ -12,7 +12,7 @@ public:
 
 	AnimCube();
 	void Create() override;
-	void Tick(float deltaTime) override;
+	void Start() override;
 	Properties GetProps() override;
 
 private:
