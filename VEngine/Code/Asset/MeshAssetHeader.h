@@ -11,7 +11,10 @@ struct MeshAssetHeader
 {
 	uint64_t vertexCount = 0;
 	uint64_t indexCount = 0;
-	//uint64_t boneCount = 0;
+	uint64_t boneCount = 0;
+
+	SourceMeshFormat sourceMeshFormat = SourceMeshFormat::FBX;
+};
 
 	SourceMeshFormat sourceMeshFormat = SourceMeshFormat::FBX;
 };
