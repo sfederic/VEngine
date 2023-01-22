@@ -34,7 +34,7 @@ void FBXLoader::Init()
 
 bool FBXLoader::ImportAsMesh(std::string filename, MeshDataProxy& meshData)
 {
-	std::string filepath = AssetBaseFolders::mesh + filename;
+	std::string filepath = AssetBaseFolders::fbxFiles + filename;
 	
 	if (filename.empty() || !std::filesystem::exists(filepath))
 	{

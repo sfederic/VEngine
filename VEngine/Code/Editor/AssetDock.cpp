@@ -149,7 +149,7 @@ void AssetDock::AssetItemClicked()
         assetPath = VString::GetSubStringAtFoundOffset(assetPath, AssetBaseFolders::worldMap);
         FileSystem::LoadWorld(assetPath);
     }   
-    else if (std::wcscmp(extension, L".fbx") == 0) //FBX files
+    else if (std::wcscmp(extension, L".vmesh") == 0) //Vmesh files
     {
         assetPath = VString::GetSubStringAtFoundOffset(assetPath, AssetBaseFolders::mesh);
         MeshFileClicked(assetPath);

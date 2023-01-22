@@ -5,6 +5,6 @@
 namespace AssetSystem
 {
 	void WriteAllMeshDataToMeshAssetFiles();
-	MeshData ReadAllMeshAssetsFromFile(const char* filename);
+	MeshDataProxy ReadVMeshAssetFromFile(const std::string filename);
 	void BuildAllGameplayMapFiles();
 };

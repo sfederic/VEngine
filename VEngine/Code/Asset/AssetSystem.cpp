@@ -11,6 +11,8 @@
 
 const int ANIM_NAME_SIZE = 64;
 
+std::map<std::string, MeshData> existingMeshData;
+
 void AssetSystem::WriteAllMeshDataToMeshAssetFiles()
 {
 	FILE* file = nullptr;
@@ -19,16 +21,24 @@ void AssetSystem::WriteAllMeshDataToMeshAssetFiles()
 
 	auto startTime = Profile::QuickStart();
 
-	for (auto& meshIt : FBXLoader::existingMeshDataMap)
-	{
-		MeshData& meshData = meshIt.second;
+	std::vector<MeshDataProxy> meshDataProxies;
 
+	//Import all FBX files
+	for (const auto& entry : std::filesystem::directory_iterator("FBXFiles/"))
+	{
+		const std::string fbxFilename = entry.path().filename().string();
+		meshDataProxies.emplace_back();
+		FBXLoader::ImportAsMesh(fbxFilename, meshDataProxies.back());
+	}
+
+	for (const auto& [name, meshData] : FBXLoader::existingMeshDataMap)
+	{
 		MeshAssetHeader header = {};
 		header.sourceMeshFormat = SourceMeshFormat::FBX;
 		header.vertexCount = meshData.vertices.size();
-		header.boneCount = meshData.skeleton.joints.size();
+		//header.boneCount = meshData.skeleton.joints.size();
 
-		const std::string& filename = meshIt.first;
+		const std::string& filename = name;
 		const std::string meshName = filename.substr(0, filename.find("."));
 		const std::string meshFilePath = AssetBaseFolders::mesh + meshName + ".vmesh";
 
@@ -39,40 +49,40 @@ void AssetSystem::WriteAllMeshDataToMeshAssetFiles()
 		assert(fwrite(meshData.vertices.data(), sizeof(Vertex), meshData.vertices.size(), file));
 		assert(fwrite(&meshData.boudingBox, sizeof(DirectX::BoundingBox), 1, file));
 
-		const auto& joints = meshData.skeleton.joints;
-		assert(fwrite(joints.data(), sizeof(Joint), joints.size(), file));
+		//const auto& joints = meshData.skeleton.joints;
+		//assert(fwrite(joints.data(), sizeof(Joint), joints.size(), file));
 
-		//Num animations
-		const size_t numAnimations = meshData.skeleton.animations.size();
-		assert(fwrite(&numAnimations, sizeof(size_t), 1, file));
+		////Num animations
+		//const size_t numAnimations = meshData.skeleton.animations.size();
+		//assert(fwrite(&numAnimations, sizeof(size_t), 1, file));
 
-		for (const auto& animationPair : meshData.skeleton.animations)
-		{
-			//Animation name
-			const std::string& animationName = animationPair.first;
-			char animationNameBuff[64]{};
-			strcpy_s(animationNameBuff, ANIM_NAME_SIZE, animationName.c_str());
-			assert(fwrite(animationNameBuff, sizeof(char), ANIM_NAME_SIZE, file));
+		//for (const auto& animationPair : meshData.skeleton.animations)
+		//{
+		//	//Animation name
+		//	const std::string& animationName = animationPair.first;
+		//	char animationNameBuff[64]{};
+		//	strcpy_s(animationNameBuff, ANIM_NAME_SIZE, animationName.c_str());
+		//	assert(fwrite(animationNameBuff, sizeof(char), ANIM_NAME_SIZE, file));
 
-			//Num frames
-			const size_t numAnimFrames = animationPair.second.frames.size();
-			assert(fwrite(&numAnimFrames, sizeof(numAnimFrames), 1, file));
+		//	//Num frames
+		//	const size_t numAnimFrames = animationPair.second.frames.size();
+		//	assert(fwrite(&numAnimFrames, sizeof(numAnimFrames), 1, file));
 
-			for (const auto& framePair : animationPair.second.frames)
-			{
-				const size_t numFrames = framePair.second.size();
-				assert(fwrite(&numFrames, sizeof(numFrames), 1, file));
+		//	for (const auto& framePair : animationPair.second.frames)
+		//	{
+		//		const size_t numFrames = framePair.second.size();
+		//		assert(fwrite(&numFrames, sizeof(numFrames), 1, file));
 
-				for (const auto& frame : framePair.second)
-				{
-					//Anim Frames
-					const int jointIndex = framePair.first;
-					assert(fwrite(&jointIndex, sizeof(int), 1, file));
+		//		for (const auto& frame : framePair.second)
+		//		{
+		//			//Anim Frames
+		//			const int jointIndex = framePair.first;
+		//			assert(fwrite(&jointIndex, sizeof(int), 1, file));
 
-					assert(fwrite(&frame, sizeof(AnimFrame), 1, file));
-				}
-			}
-		}
+		//			assert(fwrite(&frame, sizeof(AnimFrame), 1, file));
+		//		}
+		//	}
+		//}
 
 		fclose(file);
 
@@ -84,11 +94,11 @@ void AssetSystem::WriteAllMeshDataToMeshAssetFiles()
 	Log("Mesh asset build complete.\n\tNum meshes built: %d\n\tTime taken: %f", numberOfMeshFilesBuilt, elapsedTime);
 }
 
-//@Todo: This is just testing code. Get rid of it or replace.
-MeshData AssetSystem::ReadAllMeshAssetsFromFile(const char* filename)
+MeshDataProxy AssetSystem::ReadVMeshAssetFromFile(const std::string filename)
 {
+	std::string filepath = AssetBaseFolders::mesh + filename;
+
 	FILE* file = nullptr;
-	std::string filepath = "Meshes/" + std::string(filename);
 	fopen_s(&file, filepath.c_str(), "rb");
 	assert(file);
 
@@ -102,43 +112,53 @@ MeshData AssetSystem::ReadAllMeshAssetsFromFile(const char* filename)
 	assert(fread(data.vertices.data(), sizeof(Vertex), header.vertexCount, file));
 	assert(fread(&data.boudingBox, sizeof(DirectX::BoundingBox), 1, file));
 
-	data.skeleton.joints.resize(header.boneCount);
-	assert(fread(data.skeleton.joints.data(), sizeof(Joint), header.boneCount, file));
+	//data.skeleton.joints.resize(header.boneCount);
+	//assert(fread(data.skeleton.joints.data(), sizeof(Joint), header.boneCount, file));
 
 	//Num animations
-	size_t numAnimations = 0;
-	fread(&numAnimations, sizeof(size_t), 1, file);
+	//size_t numAnimations = 0;
+	//fread(&numAnimations, sizeof(size_t), 1, file);
 
-	for(size_t animIndex = 0; animIndex < numAnimations; animIndex++)
-	{
-		char animationNameBuff[ANIM_NAME_SIZE]{};
-		assert(fread(animationNameBuff, sizeof(char), ANIM_NAME_SIZE, file));
-		std::string animationName(animationNameBuff);
-		data.skeleton.CreateAnimation(animationName);
+	//for(size_t animIndex = 0; animIndex < numAnimations; animIndex++)
+	//{
+	//	char animationNameBuff[ANIM_NAME_SIZE]{};
+	//	assert(fread(animationNameBuff, sizeof(char), ANIM_NAME_SIZE, file));
+	//	std::string animationName(animationNameBuff);
+	//	data.skeleton.CreateAnimation(animationName);
 
-		size_t numAnimFrames = 0;
-		assert(fread(&numAnimFrames, sizeof(numAnimFrames), 1, file));
+	//	size_t numAnimFrames = 0;
+	//	assert(fread(&numAnimFrames, sizeof(numAnimFrames), 1, file));
 
-		for (size_t animFrameIndex = 0; animFrameIndex < numAnimFrames; animFrameIndex++)
-		{
-			size_t numFrames = 0;
-			assert(fread(&numFrames, sizeof(numFrames), 1, file));
+	//	for (size_t animFrameIndex = 0; animFrameIndex < numAnimFrames; animFrameIndex++)
+	//	{
+	//		size_t numFrames = 0;
+	//		assert(fread(&numFrames, sizeof(numFrames), 1, file));
 
-			for (size_t frameIndex = 0; frameIndex < numFrames; frameIndex++)
-			{
-				int jointIndex = -2; //Parent index is -1, so -2 will mean the read errored
-				assert(fread(&jointIndex, sizeof(int), 1, file));
+	//		for (size_t frameIndex = 0; frameIndex < numFrames; frameIndex++)
+	//		{
+	//			int jointIndex = -2; //Parent index is -1, so -2 will mean the read errored
+	//			assert(fread(&jointIndex, sizeof(int), 1, file));
 
-				AnimFrame frame{};
-				assert(fread(&frame, sizeof(AnimFrame), 1, file));
+	//			AnimFrame frame{};
+	//			assert(fread(&frame, sizeof(AnimFrame), 1, file));
 
-				Animation& animation = data.skeleton.animations.find(animationName)->second;
-				animation.frames[jointIndex].emplace_back(frame);
-			}
-		}
-	}
+	//			Animation& animation = data.skeleton.animations.find(animationName)->second;
+	//			animation.frames[jointIndex].emplace_back(frame);
+	//		}
+	//	}
+	//}
 
-	return data;
+	fclose(file);
+	
+	existingMeshData.emplace(filename, data);
+	auto& foundMeshData = existingMeshData.find(filename)->second;
+
+	MeshDataProxy meshDataProxy;
+	meshDataProxy.vertices = &foundMeshData.vertices;
+	meshDataProxy.boundingBox = &foundMeshData.boudingBox;
+	meshDataProxy.skeleton = &foundMeshData.skeleton;
+
+	return meshDataProxy;
 }
 
 void AssetSystem::BuildAllGameplayMapFiles()
