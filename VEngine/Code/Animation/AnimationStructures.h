@@ -20,10 +20,10 @@ struct BoneWeights
 
 struct AnimFrame
 {
-	XMFLOAT4 rot; //Quaternion
-	XMFLOAT3 pos;
-	XMFLOAT3 scale;
-	double time;
+	XMFLOAT4 rot = XMFLOAT4(0.f, 0.f, 0.f, 1.f); //Quaternion
+	XMFLOAT3 pos = XMFLOAT3(0.f, 0.f, 0.f);
+	XMFLOAT3 scale = XMFLOAT3(1.f, 1.f, 1.f);
+	double time = 0.0;
 };
 
 struct Animation
@@ -39,7 +39,7 @@ struct Animation
 
 	Animation(const char* name_)
 	{
-		SetName(name);
+		SetName(name_);
 	}
 
 	void SetName(const char* name_)
