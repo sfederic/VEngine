@@ -83,7 +83,7 @@ void AssetSystem::BuildAllAnimationFilesFromFBXImport()
 	for (const auto& [filename, animation] : animationMap)
 	{
 		const std::string meshName = filename.substr(0, filename.find("."));
-		const std::string meshFilePath = AssetBaseFolders::mesh + meshName + ".vanim";
+		const std::string meshFilePath = AssetBaseFolders::anim + meshName + ".vanim";
 
 		fopen_s(&file, meshFilePath.c_str(), "wb");
 		assert(file);
