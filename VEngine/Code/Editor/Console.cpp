@@ -88,6 +88,10 @@ void Console::Init()
 		std::make_pair([]() { debugMenu.skeletonViewMenuOpen = !debugMenu.skeletonViewMenuOpen; },
 		"Show skeleton heirarchy on actor's meshcomponent"));
 
+	executeMap.emplace(L"ANIM",
+		std::make_pair([]() { debugMenu.skeletalAnimationMenuOpen = !debugMenu.skeletalAnimationMenuOpen; },
+			"Show selected skeleton's animations"));
+
 	executeMap.emplace(L"RESET",
 		std::make_pair([]() { FileSystem::ReloadCurrentWorld(); },
 		"Reload current world"));

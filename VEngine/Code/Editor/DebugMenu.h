@@ -36,6 +36,7 @@ public:
 	bool memoriesMenuOpen = false;
 	bool consoleCommandsMenuOpen = false;
 	bool skeletonViewMenuOpen = false;
+	bool skeletalAnimationMenuOpen = false;
 	bool physicsMenuOpen = false;
 	bool coreMenuOpen = false;
 	bool questMenuOpen = false;
@@ -67,6 +68,7 @@ private:
 	void RenderActorSystemMenu();
 	void RenderComponentSystemMenu();
 	void RenderSkeletonViewMenu();
+	void RenderSkeletalAnimationMenu();
 	void RenderPhysicsMenu();
 	void RenderCoreMenu();
 	void RenderParticleMenu();

@@ -93,6 +93,7 @@ void DebugMenu::Tick(float deltaTime)
 	RenderActorSystemMenu();
 	RenderComponentSystemMenu();
 	RenderSkeletonViewMenu();
+	RenderSkeletalAnimationMenu();
 	RenderCoreMenu();
 	RenderParticleMenu();
 	RenderTexturePlacementMenu();
@@ -333,6 +334,34 @@ void DebugMenu::RenderSkeletonViewMenu()
 
 	ImGui::Begin("Skeleton View");
 
+	auto pickedActor = WorldEditor::GetPickedActor();
+	if (pickedActor)
+	{
+		auto skeletalMeshes = pickedActor->GetComponentsOfType<SkeletalMeshComponent>();
+		for (auto skeletalMesh : skeletalMeshes)
+		{
+			ImGui::Text("Skeleton: %s", skeletalMesh->meshComponentData.filename.c_str());
+
+			for (auto& joint : skeletalMesh->GetSkeleton().joints)
+			{
+				ImGui::Text("Joint: %s ", joint.name);
+				ImGui::SameLine();
+				ImGui::Text("Index: %d", joint.index);
+				ImGui::SameLine();
+				ImGui::Text("Parent Index: %d", joint.parentIndex);
+			}
+		}
+	}
+
+	ImGui::End();
+}
+
+void DebugMenu::RenderSkeletalAnimationMenu()
+{
+	if (!skeletalAnimationMenuOpen) return;
+
+	ImGui::Begin("Animation Menu");
+
 	auto picked = WorldEditor::GetPickedActor();
 	if (picked)
 	{
@@ -365,15 +394,6 @@ void DebugMenu::RenderSkeletonViewMenu()
 						skeletalMesh->ResetAnimationTime();
 					}
 				}
-			}
-
-			for (auto& joint : skeletalMesh->GetSkeleton().joints)
-			{
-				ImGui::Text("Joint: %s ", joint.name);
-				ImGui::SameLine();
-				ImGui::Text("Index: %d", joint.index);
-				ImGui::SameLine();
-				ImGui::Text("Parent Index: %d", joint.parentIndex);
 			}
 		}
 	}
