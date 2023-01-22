@@ -128,12 +128,13 @@ MeshDataProxy AssetSystem::ReadVMeshAssetFromFile(const std::string filename)
 	assert(fread(&header, sizeof(MeshAssetHeader), 1, file));
 
 	data.vertices.resize(header.vertexCount);
-
 	assert(fread(data.vertices.data(), sizeof(Vertex), header.vertexCount, file));
+
 	assert(fread(&data.boudingBox, sizeof(DirectX::BoundingBox), 1, file));
 
 	data.skeleton.joints.resize(header.boneCount);
-	assert(fread(data.skeleton.joints.data(), sizeof(Joint), header.boneCount, file));
+	//Has to potential to read empty data, don't call assert()
+	fread(data.skeleton.joints.data(), sizeof(Joint), header.boneCount, file);
 
 	fclose(file);
 	
