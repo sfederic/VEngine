@@ -15,8 +15,6 @@ FbxManager* manager;
 FbxIOSettings* ioSetting;
 FbxImporter* importer;
 
-std::set<std::string> existingSkeletonNames;
-
 void ProcessAllChildNodes(FbxNode* node, MeshData& meshData);
 void ProcessSkeletonNodes(FbxNode* node, Skeleton& skeleton, int parentIndex);
 
@@ -73,16 +71,9 @@ void FBXLoader::ImportAsMesh(std::string filename, MeshData& meshData)
 		&meshData.vertices.at(0).pos, sizeof(Vertex));
 }
 
-void FBXLoader::ImportAsAnimation(const std::string filename, Skeleton& skeleton)
+Animation FBXLoader::ImportAsAnimation(const std::string filename)
 {
-	if (existingSkeletonNames.find(filename) != existingSkeletonNames.end())
-	{
-		return;
-	}
-
-	existingSkeletonNames.emplace(filename);
-
-	const std::string filepath = AssetBaseFolders::mesh + filename;
+	const std::string filepath = AssetBaseFolders::animationFBXFiles + filename;
 
 	if (!importer->Initialize(filepath.c_str(), -1, manager->GetIOSettings()))
 	{
@@ -98,6 +89,16 @@ void FBXLoader::ImportAsAnimation(const std::string filename, Skeleton& skeleton
 
 	const int childNodeCount = rootNode->GetChildCount();
 
+	Skeleton skeleton;
+	std::string animationName;
+
+	//Go through all skeleton nodes
+	for (int i = 0; i < childNodeCount; i++)
+	{
+		constexpr int rootBoneParentIndex = -1;
+		ProcessSkeletonNodes(rootNode->GetChild(i), skeleton, rootBoneParentIndex);
+	}
+
 	for (int i = 0; i < childNodeCount; i++)
 	{
 		FbxNode* childNode = rootNode->GetChild(i);
@@ -105,7 +106,6 @@ void FBXLoader::ImportAsAnimation(const std::string filename, Skeleton& skeleton
 		FbxMesh* mesh = childNode->GetMesh();
 		if (mesh == nullptr) continue;
 
-		std::string animationName;
 		FbxAnimStack* animStack = scene->GetSrcObject<FbxAnimStack>();
 		if (animStack)
 		{
@@ -216,6 +216,8 @@ void FBXLoader::ImportAsAnimation(const std::string filename, Skeleton& skeleton
 			}
 		}
 	}
+
+	return skeleton.GetAnimation(animationName);
 }
 
 void ProcessAllChildNodes(FbxNode* node, MeshData& meshData)
@@ -451,11 +453,6 @@ void FBXLoader::ImportFracturedMesh(std::string filename, std::vector<MeshData>&
 	}
 
 	scene->Destroy();
-}
-
-void FBXLoader::ClearExistingSkeletonData()
-{
-	existingSkeletonNames.clear();
 }
 
 //Took this function and ReadUVs() from a tutorial but forgot where from.
