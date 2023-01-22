@@ -8,7 +8,7 @@
 Billboard::Billboard()
 {
     mesh = MeshComponent::system.Add("Mesh", this,
-        MeshComponent("plane.fbx", "ramza_back.png", ShaderItems::Unlit));
+        MeshComponent("plane.vmesh", "ramza_back.png", ShaderItems::Unlit));
 
     mesh->SetRastState(RastStates::noBackCull);
     rootComponent = mesh;

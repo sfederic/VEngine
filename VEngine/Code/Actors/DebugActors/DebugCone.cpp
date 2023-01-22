@@ -4,7 +4,7 @@
 
 DebugCone::DebugCone()
 {
-	mesh = new MeshComponent("small_cone.fbx", "test.png");
+	mesh = new MeshComponent("small_cone.vmesh", "test.png");
 	mesh->layer = CollisionLayers::Editor;
 	mesh->Create();
 }

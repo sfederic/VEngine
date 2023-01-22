@@ -15,11 +15,10 @@ FbxManager* manager;
 FbxIOSettings* ioSetting;
 FbxImporter* importer;
 
-std::map<std::string, MeshData> FBXLoader::existingMeshDataMap;
 std::set<std::string> existingSkeletonNames;
 
-void ProcessAllChildNodes(FbxNode* node, MeshData* meshData);
-void ProcessSkeletonNodes(FbxNode* node, Skeleton* skeleton, int parentIndex);
+void ProcessAllChildNodes(FbxNode* node, MeshData& meshData);
+void ProcessSkeletonNodes(FbxNode* node, Skeleton& skeleton, int parentIndex);
 
 void ReadNormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT3& outNormal);
 void ReadUVs(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT2& outUVs);
@@ -32,36 +31,13 @@ void FBXLoader::Init()
 	importer = FbxImporter::Create(manager, "");
 }
 
-bool FBXLoader::ImportAsMesh(std::string filename, MeshDataProxy& meshData)
+void FBXLoader::ImportAsMesh(std::string filename, MeshData& meshData)
 {
 	std::string filepath = AssetBaseFolders::fbxFiles + filename;
 	
-	if (filename.empty() || !std::filesystem::exists(filepath))
-	{
-		//set default model
-		filename = "cube.fbx";
-		filepath = "Meshes/cube.fbx";
-	}
-
-	//Find if mesh data already exists, push it to meshcomponent data
-	auto existingMeshIt = existingMeshDataMap.find(filename);
-	if (existingMeshIt != existingMeshDataMap.end())
-	{
-		MeshData* existingMeshData = &existingMeshIt->second;
-
-		meshData.vertices = &existingMeshData->vertices;
-		meshData.skeleton = &existingMeshData->skeleton;
-		meshData.boundingBox = &existingMeshData->boudingBox;
-		return true;
-	}
-	else
-	{
-		existingMeshDataMap[filename] = MeshData();
-	}
-
 	if (!importer->Initialize(filepath.c_str(), -1, manager->GetIOSettings()))
 	{
-		throw new std::exception("FBX importer fucked up. filename probably wrong");
+		throw new std::exception("FBX importer messed up. filename probably wrong");
 	}
 
 	FbxScene* scene = FbxScene::Create(manager, "scene0");
@@ -77,34 +53,24 @@ bool FBXLoader::ImportAsMesh(std::string filename, MeshDataProxy& meshData)
 	FbxNode* rootNode = scene->GetRootNode();
 	int childNodeCount = rootNode->GetChildCount();
 
-	MeshData* foundMeshData = &existingMeshDataMap[filename];
-	
 	//Go through all skeleton nodes
-	Skeleton* skeleton = &foundMeshData->skeleton;
 	for (int i = 0; i < childNodeCount; i++)
 	{
-		ProcessSkeletonNodes(rootNode->GetChild(i), skeleton, -1);
+		constexpr int rootBoneParentIndex = -1;
+		ProcessSkeletonNodes(rootNode->GetChild(i), meshData.skeleton, rootBoneParentIndex);
 	}
 
 	//Go through all nodes
 	for (int i = 0; i < childNodeCount; i++)
 	{
-		ProcessAllChildNodes(rootNode->GetChild(i), foundMeshData);
+		ProcessAllChildNodes(rootNode->GetChild(i), meshData);
 	}
 
 	scene->Destroy();
 	
-	MeshData* newMeshData = &existingMeshDataMap.find(filename)->second;
-	assert(newMeshData->vertices.size() > 0);
-	BoundingBox::CreateFromPoints(newMeshData->boudingBox, newMeshData->vertices.size(),
-		&newMeshData->vertices.at(0).pos, sizeof(Vertex));
-
-	//Set proxy data for new mesh daata
-	meshData.vertices = &newMeshData->vertices;
-	meshData.skeleton = &newMeshData->skeleton;
-	meshData.boundingBox = &newMeshData->boudingBox;
-
-	return true;
+	assert(meshData.vertices.size() > 0 && "Nothing probably selected on fbx export in DCC.");
+	BoundingBox::CreateFromPoints(meshData.boudingBox, meshData.vertices.size(),
+		&meshData.vertices.at(0).pos, sizeof(Vertex));
 }
 
 void FBXLoader::ImportAsAnimation(const std::string filename, Skeleton& skeleton)
@@ -252,7 +218,7 @@ void FBXLoader::ImportAsAnimation(const std::string filename, Skeleton& skeleton
 	}
 }
 
-void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
+void ProcessAllChildNodes(FbxNode* node, MeshData& meshData)
 {
 	//Recursion for dealing with nodes in the heirarchy.
 	int childNodeCount = node->GetChildCount();
@@ -285,7 +251,7 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 
 				//'Link' is the joint
 				std::string currentJointName = cluster->GetLink()->GetName();
-				int currentJointIndex = meshData->skeleton.FindJointIndexByName(currentJointName);
+				int currentJointIndex = meshData.skeleton.FindJointIndexByName(currentJointName);
 				
 				FbxAMatrix clusterMatrix, linkMatrix;
 				cluster->GetTransformMatrix(clusterMatrix);
@@ -305,8 +271,8 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 					XMMATRIX pose = XMMatrixAffineTransformation(scale,
 						XMVectorSet(0.f, 0.f, 0.f, 1.f), rot, pos);
 				
-					meshData->skeleton.joints[currentJointIndex].inverseBindPose = pose;
-					meshData->skeleton.joints[currentJointIndex].currentPose = pose;
+					meshData.skeleton.joints[currentJointIndex].inverseBindPose = pose;
+					meshData.skeleton.joints[currentJointIndex].currentPose = pose;
 				}
 
 				const int vertexIndexCount = cluster->GetControlPointIndicesCount();
@@ -352,7 +318,7 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 		int polyIndexCounter = 0; //Used to index into normals and UVs on a per vertex basis
 		int triangleCount = mesh->GetPolygonCount();
 
-		meshData->vertices.reserve(triangleCount);
+		meshData.vertices.reserve(triangleCount);
 
 		//Main import loop
 		for (int i = 0; i < triangleCount; i++)
@@ -393,18 +359,20 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 					}
 				}
 
-				meshData->vertices.emplace_back(vert);
+				meshData.vertices.emplace_back(vert);
 				polyIndexCounter++;
 			}
 		}
 
-		for (int i = 0; i < meshData->vertices.size() / 3; i++)
+		for (int i = 0; i < meshData.vertices.size() / 3; i++)
 		{
 			const int index0 = i * 3;
 			const int index1 = i * 3 + 1;
 			const int index2 = i * 3 + 2;
 
-			Vertex* verts[3] = { &meshData->vertices[index0], &meshData->vertices[index1], &meshData->vertices[index2] };
+			Vertex* verts[3] = { 
+				&meshData.vertices[index0], &meshData.vertices[index1], &meshData.vertices[index2] 
+			};
 
 			//tangent/bitangent testing
 			//Ref:https://learnopengl.com/Advanced-Lighting/Normal-Mapping
@@ -434,7 +402,7 @@ void ProcessAllChildNodes(FbxNode* node, MeshData* meshData)
 	}
 }
 
-void ProcessSkeletonNodes(FbxNode* node, Skeleton* skeleton, int parentIndex)
+void ProcessSkeletonNodes(FbxNode* node, Skeleton& skeleton, int parentIndex)
 {
 	const int childCount = node->GetChildCount();
 	for (int i = 0; i < childCount; i++)
@@ -446,25 +414,18 @@ void ProcessSkeletonNodes(FbxNode* node, Skeleton* skeleton, int parentIndex)
 			Joint joint = {};
 			joint.SetName(child->GetName());
 			joint.parentIndex = parentIndex;
-			skeleton->AddJoint(joint);
+			skeleton.AddJoint(joint);
 
-			Joint& addedJoint = skeleton->joints.back();
+			Joint& addedJoint = skeleton.joints.back();
 
 			ProcessSkeletonNodes(child, skeleton, addedJoint.index);
 		}
 	}
 }
 
-bool FBXLoader::ImportFracturedMesh(std::string filename, std::vector<MeshData>& meshDatas)
+void FBXLoader::ImportFracturedMesh(std::string filename, std::vector<MeshData>& meshDatas)
 {
 	std::string filepath = AssetBaseFolders::mesh + filename;
-
-	if (filename.empty() || !std::filesystem::exists(filepath))
-	{
-		//set default model
-		filename = "cube.fbx";
-		filepath = "Meshes/cube.fbx";
-	}
 
 	if (!importer->Initialize(filepath.c_str(), -1, manager->GetIOSettings()))
 	{
@@ -486,28 +447,10 @@ bool FBXLoader::ImportFracturedMesh(std::string filename, std::vector<MeshData>&
 	//Go through all cells nodes
 	for (int i = 0; i < childNodeCount; i++)
 	{
-		ProcessAllChildNodes(rootNode->GetChild(i), &meshDatas[i]);
+		ProcessAllChildNodes(rootNode->GetChild(i), meshDatas[i]);
 	}
 
 	scene->Destroy();
-
-	return true;
-}
-
-MeshData* FBXLoader::FindMesh(std::string meshName)
-{
-	auto meshIt = existingMeshDataMap.find(meshName);
-	if (meshIt == existingMeshDataMap.end())
-	{
-		return nullptr;
-	}
-
-	return &meshIt->second;
-}
-
-void FBXLoader::ClearExistingMeshData()
-{
-	existingMeshDataMap.clear();
 }
 
 void FBXLoader::ClearExistingSkeletonData()
@@ -515,6 +458,7 @@ void FBXLoader::ClearExistingSkeletonData()
 	existingSkeletonNames.clear();
 }
 
+//Took this function and ReadUVs() from a tutorial but forgot where from.
 void ReadNormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT3& outNormal)
 {
 	if (inMesh->GetElementNormalCount() < 1) { throw std::exception("Invalid Normal Number"); }

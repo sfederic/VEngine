@@ -8,7 +8,7 @@
 #include "Components/DestructibleMeshComponent.h"
 #include <PxRigidActor.h>
 #include "World.h"
-#include "Asset/FBXLoader.h"
+#include "Asset/AssetSystem.h"
 
 void NormaliseExtents(float& x, float& y, float& z);
 
@@ -272,7 +272,7 @@ void PhysicsSystem::CreateConvexPhysicsMeshFromCollisionMesh(MeshComponent* mesh
 	//Set the UID to the actual mesh so that the physics actor is connected to the mesh, not the collision mesh.
 	collisionMesh->SetUID(mesh->GetUID());
 
-	FBXLoader::ImportAsMesh(filename, collisionMesh->meshDataProxy);
+	collisionMesh->meshDataProxy = AssetSystem::ReadVMeshAssetFromFile(filename);
 
 	CreateConvexPhysicsMesh(collisionMesh, actor);
 

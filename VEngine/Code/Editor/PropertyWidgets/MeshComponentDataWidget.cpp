@@ -19,7 +19,7 @@ void MeshComponentDataWidget::SetValue()
 	QString filepath = QFileDialog::getOpenFileName(this,
 		tr("Set Mesh"),
 		QString::fromStdString(AssetBaseFolders::mesh),
-		tr("Meshes (*.fbx *.vmesh)"));
+		tr("Meshes (*.vmesh)"));
 
 	QFileInfo info(filepath);
 	QString filename = info.fileName();

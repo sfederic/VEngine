@@ -15,17 +15,15 @@ struct Skeleton;
 
 namespace FBXLoader
 {
-	extern std::map<std::string, MeshData> existingMeshDataMap;
-
 	void Init();
 
 	//For importing generic fbx assets
-	bool ImportAsMesh(std::string filename, MeshDataProxy& meshData);
+	void ImportAsMesh(std::string filename, MeshData& meshData);
 
 	void ImportAsAnimation(const std::string filename, Skeleton& skeleton);
 
 	//For importing cell fractured meshes
-	bool ImportFracturedMesh(std::string filename, std::vector<MeshData>& meshDatas);
+	void ImportFracturedMesh(std::string filename, std::vector<MeshData>& meshDatas);
 
 	MeshData* FindMesh(std::string meshName);
 

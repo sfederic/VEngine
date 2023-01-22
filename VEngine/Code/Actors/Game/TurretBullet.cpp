@@ -10,7 +10,7 @@
 
 TurretBullet::TurretBullet()
 {
-	auto mesh = CreateComponent(MeshComponent("small_ico_sphere.fbx", "test.png"), "Mesh");
+	auto mesh = CreateComponent(MeshComponent("small_ico_sphere.vmesh", "test.png"), "Mesh");
 	rootComponent = mesh;
 
 	boxTrigger = CreateComponent(BoxTriggerComponent(), "BoxTrigger");

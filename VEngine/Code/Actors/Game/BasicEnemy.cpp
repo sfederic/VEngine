@@ -4,7 +4,7 @@
 
 BasicEnemy::BasicEnemy()
 {
-	rootComponent = CreateComponent(MeshComponent("ico_sphere.fbx", "test.png"), "Mesh");
+	rootComponent = CreateComponent(MeshComponent("ico_sphere.vmesh", "test.png"), "Mesh");
 }
 
 void BasicEnemy::Tick(float deltaTime)

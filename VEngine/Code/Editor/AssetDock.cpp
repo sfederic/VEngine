@@ -208,7 +208,7 @@ void AssetDock::AssetFolderClicked()
         {
             extToFuncIt->second(icon, filePath);
         }
-        else if (fileExtension == ".fbx")
+        else if (fileExtension == ".vmesh")
         {
             std::string meshIconPath = "Icons/MeshIcons/" + fileInfo.fileName().toStdString() + ".jpg";
             if (std::filesystem::exists(meshIconPath))

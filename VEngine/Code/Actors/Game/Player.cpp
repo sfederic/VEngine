@@ -19,14 +19,14 @@
 
 Player::Player()
 {
-	mesh = CreateComponent(MeshComponent("cube.fbx", "test.png"), "Mesh");
+	mesh = CreateComponent(MeshComponent("cube.vmesh", "test.png"), "Mesh");
 	rootComponent = mesh;
 
 	camera = CreateComponent(CameraComponent(), "Camera");
 	rootComponent->AddChild(camera);
 
 	//@Todo: shield boundingbox is too large
-	shieldMesh = CreateComponent(MeshComponent("ico_sphere.fbx", "shield.png"), "ShieldMesh");
+	shieldMesh = CreateComponent(MeshComponent("ico_sphere.vmesh", "shield.png"), "ShieldMesh");
 	rootComponent->AddChild(shieldMesh);
 	shieldMesh->SetActive(false);
 }

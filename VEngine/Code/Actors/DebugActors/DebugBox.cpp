@@ -4,7 +4,7 @@
 
 DebugBox::DebugBox()
 {
-	boxMesh = new MeshComponent("cube.fbx", "test.png");
+	boxMesh = new MeshComponent("cube.vmesh", "test.png");
 	boxMesh->layer = CollisionLayers::Editor;
 	boxMesh->Create();
 }

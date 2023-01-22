@@ -21,24 +21,23 @@ void AssetSystem::WriteAllMeshDataToMeshAssetFiles()
 
 	auto startTime = Profile::QuickStart();
 
-	std::vector<MeshDataProxy> meshDataProxies;
+	std::unordered_map<std::string, MeshData> meshDataMap;
 
 	//Import all FBX files
 	for (const auto& entry : std::filesystem::directory_iterator("FBXFiles/"))
 	{
 		const std::string fbxFilename = entry.path().filename().string();
-		meshDataProxies.emplace_back();
-		FBXLoader::ImportAsMesh(fbxFilename, meshDataProxies.back());
+		meshDataMap.emplace(fbxFilename, MeshData());
+		FBXLoader::ImportAsMesh(fbxFilename, meshDataMap.find(fbxFilename)->second);
 	}
 
-	for (const auto& [name, meshData] : FBXLoader::existingMeshDataMap)
+	for (const auto& [filename, meshData] : meshDataMap)
 	{
 		MeshAssetHeader header = {};
 		header.sourceMeshFormat = SourceMeshFormat::FBX;
 		header.vertexCount = meshData.vertices.size();
 		//header.boneCount = meshData.skeleton.joints.size();
 
-		const std::string& filename = name;
 		const std::string meshName = filename.substr(0, filename.find("."));
 		const std::string meshFilePath = AssetBaseFolders::mesh + meshName + ".vmesh";
 

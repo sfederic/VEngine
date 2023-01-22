@@ -50,7 +50,7 @@ Properties SpinningEnemy::GetProps()
 
 void SpinningEnemy::CreateMesh(const std::string name, XMFLOAT3 position)
 {
-	auto mesh = CreateComponent(MeshComponent("cube.fbx", "test.png"), name);
+	auto mesh = CreateComponent(MeshComponent("cube.vmesh", "test.png"), name);
 	mesh->SetPosition(position);
 	mesh->SetScale(0.75f, 0.75f, 0.75f);
 	mesh->AddTag(GameplayTags::EnemyMeshPiece);

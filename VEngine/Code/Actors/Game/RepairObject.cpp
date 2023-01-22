@@ -5,7 +5,7 @@
 
 RepairObject::RepairObject()
 {
-	rootComponent = CreateComponent(MeshComponent("cube.fbx", "test.png"), "Mesh");
+	rootComponent = CreateComponent(MeshComponent("cube.vmesh", "test.png"), "Mesh");
 
 	auto emitter = CreateComponent(ParticleEmitter("Particle/smoke.png"), "Smoke");
 	rootComponent->AddChild(emitter);

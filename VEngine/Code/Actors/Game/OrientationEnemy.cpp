@@ -6,7 +6,7 @@
 
 void OrientationEnemy::Create()
 {
-	auto mesh = CreateComponent(MeshComponent("cube.fbx", "up_arrow.png"), "Mesh");
+	auto mesh = CreateComponent(MeshComponent("cube.vmesh", "up_arrow.png"), "Mesh");
 	rootComponent->AddChild(mesh);
 }
 

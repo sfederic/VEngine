@@ -8,7 +8,7 @@
 
 void BeamEnemy::Create()
 {
-	auto mesh = CreateComponent(MeshComponent("turret.fbx", "test.png"), "Mesh");
+	auto mesh = CreateComponent(MeshComponent("turret.vmesh", "test.png"), "Mesh");
 	rootComponent->AddChild(mesh);
 
 	beam = CreateComponent(Polyboard(), "Beam");

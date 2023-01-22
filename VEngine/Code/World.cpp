@@ -121,7 +121,7 @@ void World::CreateDefaultMapActors()
 	dlight->SetPosition(XMVectorSet(0.f, 5.f, 0.f, 1.f));
 
 	//Set a ground plane to work off
-	MeshActor::spawnMeshFilename = "node.fbx";
+	MeshActor::spawnMeshFilename = "node.vmesh";
 	auto mesh = MeshActor::system.Add();
 	mesh->SetPosition(XMFLOAT3(2.f, -0.5f, 2.f));
 	mesh->SetScale(XMVectorSet(5.f, 1.f, 5.f, 1.0f));
@@ -132,7 +132,7 @@ void World::CreateDefaultMapActors()
 
 void World::CreateNodeGrid()
 {
-	MeshActor::spawnMeshFilename = "node.fbx";
+	MeshActor::spawnMeshFilename = "node.vmesh";
 
 	auto levelSize = LevelInstance::system.GetFirstActor()->GetLevelSize();
 
