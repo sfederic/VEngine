@@ -113,7 +113,7 @@ void Console::Init()
 		"Load current world from existing binary file"));
 
 	executeMap.emplace(L"BUILD MESHES",
-		std::make_pair([]() { AssetSystem::WriteAllMeshDataToMeshAssetFiles(); },
+		std::make_pair([]() { AssetSystem::BuildAllVMeshDataFromFBXImport(); },
 		"Build meshes as their engine specific file format."));
 
 	executeMap.emplace(L"BUILD MAPS",

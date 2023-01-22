@@ -15,7 +15,7 @@ std::map<std::string, MeshData> existingMeshData;
 
 //@Todo: do something when importing all, remove the existing meshdata to match the meshes currently in world.
 //That or make an offline process or a process when a file is added on a filewatcher's notice.
-void AssetSystem::WriteAllMeshDataToMeshAssetFiles()
+void AssetSystem::BuildAllVMeshDataFromFBXImport()
 {
 	FILE* file = nullptr;
 

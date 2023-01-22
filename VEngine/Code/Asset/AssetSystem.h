@@ -4,7 +4,7 @@
 
 namespace AssetSystem
 {
-	void WriteAllMeshDataToMeshAssetFiles();
+	void BuildAllVMeshDataFromFBXImport();
 	MeshDataProxy ReadVMeshAssetFromFile(const std::string filename);
 	void BuildAllGameplayMapFiles();
 };
