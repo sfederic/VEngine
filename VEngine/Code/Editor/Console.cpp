@@ -112,9 +112,13 @@ void Console::Init()
 		std::make_pair([]() { FileSystem::ReadAllSystemsFromBinary(); },
 		"Load current world from existing binary file"));
 
-	executeMap.emplace(L"BUILD MESHES",
+	executeMap.emplace(L"BUILD MESH",
 		std::make_pair([]() { AssetSystem::BuildAllVMeshDataFromFBXImport(); },
 		"Build meshes as their engine specific file format."));
+
+	executeMap.emplace(L"BUILD ANIM",
+		std::make_pair([]() { AssetSystem::BuildAllVSkeletalMeshesFromFBXImport(); },
+			"Build meshes as their engine specific file format."));
 
 	executeMap.emplace(L"BUILD MAPS",
 		std::make_pair([]() { AssetSystem::BuildAllGameplayMapFiles(); },
