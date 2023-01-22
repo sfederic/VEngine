@@ -10,7 +10,7 @@ AnimCube::AnimCube()
 
 void AnimCube::Create()
 {
-	skeletalMesh->LoadAnimation("spin_cubes@spin.fbx");
+	skeletalMesh->LoadAnimation("spin_cubes@spin.vanim");
 }
 
 void AnimCube::Start()

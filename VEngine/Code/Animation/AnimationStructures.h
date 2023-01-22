@@ -44,7 +44,7 @@ struct Animation
 
 	void SetName(const char* name_)
 	{
-		strcpy_s(name, sizeof(name), name_);
+		strcpy_s(name, sizeof(char) * ANIM_NAME_MAX, name_);
 	}
 
 	float GetStartTime(int jointIndex)

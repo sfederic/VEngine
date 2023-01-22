@@ -100,7 +100,7 @@ void AssetSystem::BuildAllAnimationFilesFromFBXImport()
 
 			const size_t animFrameCount = animFrame.size();
 			assert(fwrite(&animFrameCount, sizeof(size_t), 1, file));
-			assert(fwrite(animFrame.data(), sizeof(AnimFrame) * animFrameCount, 1, file));
+			assert(fwrite(animFrame.data(), sizeof(AnimFrame), animFrameCount, file));
 		}
 
 		fclose(file);
@@ -110,7 +110,7 @@ void AssetSystem::BuildAllAnimationFilesFromFBXImport()
 
 	double elapsedTime = Profile::QuickEnd(startTime);
 
-	Log("Animation asset build complete.\n\Num animations built: %d\n\tTime taken: %f",
+	Log("Animation asset build complete.\nNum animations built: %d\n\tTime taken: %f",
 		numberOfAnimationFilesBuilt, elapsedTime);
 }
 
@@ -160,7 +160,7 @@ Animation AssetSystem::ReadVAnimAssetFromFile(const std::string filename)
 
 	assert(fread(&header, sizeof(AnimationAssetHeader), 1, file));
 
-	Animation anim(header.name);
+	Animation anim = Animation(header.name);
 
 	for (uint64_t i = 0; i < header.frameCount; i++)
 	{
@@ -172,7 +172,7 @@ Animation AssetSystem::ReadVAnimAssetFromFile(const std::string filename)
 		assert(fread(&animFrameCount, sizeof(size_t), 1, file));
 
 		std::vector<AnimFrame> animFrames;
-		animFrames.reserve(animFrameCount);
+		animFrames.resize(animFrameCount);
 		assert(fread(animFrames.data(), sizeof(AnimFrame) * animFrameCount, 1, file));
 
 		anim.frames.emplace(jointIndex, animFrames);
