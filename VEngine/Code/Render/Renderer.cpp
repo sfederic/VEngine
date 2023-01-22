@@ -76,6 +76,7 @@ void UpdateLights();
 void MapBuffer(ID3D11Resource* resource, const void* src, size_t size);
 void DrawMesh(MeshComponent* mesh);
 void DrawMeshInstanced(InstanceMeshComponent* mesh);
+void DrawBoundingBox(MeshComponent* mesh, DebugBox& debugBox);
 
 void RenderDebugLines();
 
@@ -101,6 +102,8 @@ void SetShaderResourcePixel(uint32_t shaderRegister, std::string textureName);
 void SetShaderResourceFromMaterial(uint32_t shaderRegister, Material* material);
 
 void CreatePostProcessRenderTarget();
+
+std::vector<MeshComponent*> GetAllMeshes();
 
 float Renderer::frameTime;
 bool Renderer::drawBoundingBoxes = false;
@@ -523,6 +526,35 @@ void DrawMesh(MeshComponent* mesh)
 void DrawMeshInstanced(InstanceMeshComponent* mesh)
 {
 	context->DrawInstanced(mesh->meshDataProxy.vertices->size(), mesh->GetInstanceCount(), 0, 0);
+}
+
+void DrawBoundingBox(MeshComponent* mesh, DebugBox& debugBox)
+{
+	DirectX::BoundingOrientedBox boundingBox = mesh->boundingBox;
+
+	XMFLOAT3 extents = XMFLOAT3(boundingBox.Extents.x, boundingBox.Extents.y,
+		boundingBox.Extents.z);
+
+	XMVECTOR center = mesh->GetWorldPositionV() + XMLoadFloat3(&boundingBox.Center);
+	XMVECTOR scale = mesh->GetScaleV() * XMLoadFloat3(&extents);
+
+	XMMATRIX boundsMatrix = XMMatrixAffineTransformation(scale,
+		XMVectorSet(0.f, 0.f, 0.f, 1.f),
+		mesh->GetRotationV(),
+		center);
+
+	shaderMatrices.model = boundsMatrix;
+
+	//Set bouding box scale just slightly more than the component to avoid mesh overlap
+	shaderMatrices.model.r[0].m128_f32[0] += 0.01f;
+	shaderMatrices.model.r[1].m128_f32[1] += 0.01f;
+	shaderMatrices.model.r[2].m128_f32[2] += 0.01f;
+
+	shaderMatrices.MakeModelViewProjectionMatrix();
+	cbMatrices->Map(&shaderMatrices);
+	cbMatrices->SetVS();
+
+	DrawMesh(debugBox.boxMesh);
 }
 
 //@Todo: can change the input assembly to only take in Line structs to the shader stage. Right now it's taking
@@ -1006,7 +1038,7 @@ void RenderBounds()
 		//@Todo: there's a weird error here where if you create enough lights in the map (about 40),
 		//the debug mesh actors will crash here. Tried putting the Debug Actors as global pointers
 		//instead of being static, but then Direct2D swapchain/rendertarget errors would happen.
-		//Feels like it might be the GPU doing some funny memory thing.
+		//Feels like it might be the GPU doing some funny memory thing with max lights.
 		SetVertexBuffer(debugBox.boxMesh->GetVertexBuffer());
 
 		//Set debug wireframe material colour
@@ -1016,32 +1048,15 @@ void RenderBounds()
 
 		for (auto& mesh : MeshComponent::system.GetComponents())
 		{
-			DirectX::BoundingOrientedBox boundingBox = mesh->boundingBox;
-
-			XMFLOAT3 extents = XMFLOAT3(boundingBox.Extents.x, boundingBox.Extents.y,
-				boundingBox.Extents.z);
-
-			XMVECTOR center = mesh->GetWorldPositionV() + XMLoadFloat3(&boundingBox.Center);
-			XMVECTOR scale = mesh->GetScaleV() * XMLoadFloat3(&extents);
-
-			XMMATRIX boundsMatrix = XMMatrixAffineTransformation(scale,
-				XMVectorSet(0.f, 0.f, 0.f, 1.f),
-				mesh->GetRotationV(),
-				center);
-
-			shaderMatrices.model = boundsMatrix;
-
-			//Set bouding box scale just slightly more than the component to avoid mesh overlap
-			shaderMatrices.model.r[0].m128_f32[0] += 0.01f;
-			shaderMatrices.model.r[1].m128_f32[1] += 0.01f;
-			shaderMatrices.model.r[2].m128_f32[2] += 0.01f;
-
-			shaderMatrices.MakeModelViewProjectionMatrix();
-			cbMatrices->Map(&shaderMatrices);
-			cbMatrices->SetVS();
-
-			DrawMesh(debugBox.boxMesh);
+			DrawBoundingBox(mesh.get(), debugBox);
+		}		
+		
+		for (auto& skeletalMesh : SkeletalMeshComponent::system.GetComponents())
+		{
+			DrawBoundingBox(skeletalMesh.get(), debugBox);
 		}
+
+		//@Todo: drawing bounds for instance meshes is hard, but have a think about it.
 
 		for (auto& box : debugOrientedBoxesOnTimerToRender)
 		{
