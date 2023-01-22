@@ -34,6 +34,7 @@ namespace Icons
     QPixmap* icon;
     QPixmap* lib;
     QPixmap* mesh;
+    QPixmap* fbx;
     QPixmap* world;
     QPixmap* code;
     QPixmap* material;
@@ -52,6 +53,7 @@ AssetDock::AssetDock() : QDockWidget("Assets")
     Icons::icon = new QPixmap("Icons/icon_icon.png");
     Icons::lib = new QPixmap("Icons/lib_icon.png");
     Icons::mesh = new QPixmap("Icons/mesh_icon.png");
+    Icons::fbx = new QPixmap("Icons/FBX_icon.png");
     Icons::world = new QPixmap("Icons/world_icon.png");
     Icons::code = new QPixmap("Icons/code_icon.png");
     Icons::material = new QPixmap("Icons/material_icon.png");
@@ -115,6 +117,7 @@ AssetDock::AssetDock() : QDockWidget("Assets")
         icon = QPixmap(VString::GetSubStringWithFoundOffset(filePath, AssetBaseFolders::texture).c_str());
     });
     fileExtensionToFunctionMap.emplace(".vmesh", [&](QIcon& icon, std::string& filePath) { icon = *Icons::mesh; });
+    fileExtensionToFunctionMap.emplace(".fbx", [&](QIcon& icon, std::string& filePath) { icon = *Icons::fbx; });
     fileExtensionToFunctionMap.emplace(".ttf", [&](QIcon& icon, std::string& filePath) { icon = *Icons::font; });
     fileExtensionToFunctionMap.emplace(".lib", [&](QIcon& icon, std::string& filePath) { icon = *Icons::lib; });
     fileExtensionToFunctionMap.emplace(".dll", [&](QIcon& icon, std::string& filePath) { icon = *Icons::lib; });
