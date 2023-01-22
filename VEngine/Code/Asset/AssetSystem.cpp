@@ -97,7 +97,10 @@ void AssetSystem::BuildAllAnimationFilesFromFBXImport()
 		{
 			//Anim Frames
 			assert(fwrite(&jointIndex, sizeof(int), 1, file));
-			assert(fwrite(&animFrame, sizeof(AnimFrame), 1, file));
+
+			const size_t animFrameCount = animFrame.size();
+			assert(fwrite(&animFrameCount, sizeof(size_t), 1, file));
+			assert(fwrite(animFrame.data(), sizeof(AnimFrame) * animFrameCount, 1, file));
 		}
 
 		fclose(file);
@@ -143,6 +146,41 @@ MeshDataProxy AssetSystem::ReadVMeshAssetFromFile(const std::string filename)
 	meshDataProxy.skeleton = &foundMeshData.skeleton;
 
 	return meshDataProxy;
+}
+
+Animation AssetSystem::ReadVAnimAssetFromFile(const std::string filename)
+{
+	const std::string filepath = AssetBaseFolders::anim + filename;
+
+	FILE* file = nullptr;
+	fopen_s(&file, filepath.c_str(), "rb");
+	assert(file);
+
+	AnimationAssetHeader header;
+
+	assert(fread(&header, sizeof(AnimationAssetHeader), 1, file));
+
+	Animation anim(header.name);
+
+	for (uint64_t i = 0; i < header.frameCount; i++)
+	{
+		int jointIndex = -2; //-2 is an invalid bone index
+		assert(fread(&jointIndex, sizeof(int), 1, file));
+		assert(jointIndex != -2);
+
+		size_t animFrameCount = 0;
+		assert(fread(&animFrameCount, sizeof(size_t), 1, file));
+
+		std::vector<AnimFrame> animFrames;
+		animFrames.reserve(animFrameCount);
+		assert(fread(animFrames.data(), sizeof(AnimFrame) * animFrameCount, 1, file));
+
+		anim.frames.emplace(jointIndex, animFrames);
+	}
+
+	fclose(file);
+
+	return anim;
 }
 
 void AssetSystem::BuildAllGameplayMapFiles()

@@ -18,6 +18,7 @@ struct MeshAssetHeader
 	SourceMeshFormat sourceMeshFormat = SourceMeshFormat::FBX;
 };
 
+//@Todo: does this need to live somewhere else?
 //Binary header structure for skeletal animation asset files
 struct AnimationAssetHeader
 {

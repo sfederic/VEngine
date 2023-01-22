@@ -129,7 +129,7 @@ Animation FBXLoader::ImportAsAnimation(const std::string filename)
 
 				//'Link' is the joint
 				std::string currentJointName = cluster->GetLink()->GetName();
-				int currentJointIndex = skeleton.FindJointIndexByName(currentJointName);
+				const int currentJointIndex = skeleton.FindJointIndexByName(currentJointName);
 
 				FbxAMatrix clusterMatrix, linkMatrix;
 				cluster->GetTransformMatrix(clusterMatrix);
