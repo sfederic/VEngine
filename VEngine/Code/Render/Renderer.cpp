@@ -1317,29 +1317,9 @@ void AnimateAndRenderSkeletalMeshes()
 		//Render
 		if (!skeletalMesh->IsActive()) { continue; }
 
-		Material* material = skeletalMesh->material;
-		PipelineStateObject& pso = skeletalMesh->pso;
+		SetRenderPipelineStates(skeletalMesh.get());
 
-		if (Renderer::drawAllAsWireframe)
-		{
-			context->RSSetState(rastStateWireframe);
-		}
-		else if (material->rastState)
-		{
-			context->RSSetState(material->rastState->data);
-		}
-
-		constexpr FLOAT blendState[4] = { 0.f };
-		context->OMSetBlendState(material->blendState->data, blendState, 0xFFFFFFFF);
-
-		context->PSSetSamplers(0, 1, &material->sampler->data);
-		SetShaderResourceFromMaterial(0, material);
-
-		SetVertexBuffer(pso.vertexBuffer);
-
-		cbMaterial->Map(&material->materialShaderData);
-		cbMaterial->SetPS();
-
+		//Constant buffer data
 		SetMatricesFromMesh(skeletalMesh.get());
 		SetShaderMeshData(skeletalMesh.get());
 
@@ -1347,13 +1327,13 @@ void AnimateAndRenderSkeletalMeshes()
 		{
 			if (skeletalMesh->HasJoints())
 			{
-				int skinningDataIndex = 0;
-				ShaderSkinningData& skinningData = skeletalMesh->shaderSkinningData;
-
 				//Set shader for skeletal animation
 				ShaderItem* shaderItem = ShaderItems::Animation;
 				context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
 				context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
+
+				int skinningDataIndex = 0;
+				ShaderSkinningData& skinningData = skeletalMesh->shaderSkinningData;
 
 				if (!skeletalMesh->GetNextAnimationName().empty())
 				{
