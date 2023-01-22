@@ -117,7 +117,7 @@ void Console::Init()
 		"Build meshes as their engine specific file format."));
 
 	executeMap.emplace(L"BUILD ANIM",
-		std::make_pair([]() { AssetSystem::BuildAllVSkeletalMeshesFromFBXImport(); },
+		std::make_pair([]() { AssetSystem::BuildAllAnimationFilesFromFBXImport(); },
 			"Build meshes as their engine specific file format."));
 
 	executeMap.emplace(L"BUILD MAPS",

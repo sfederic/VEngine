@@ -156,7 +156,7 @@ void SkeletalMeshComponent::CrossFadeNextAnimation()
 		blendFactor = 0.f;
 		currentAnimationName = nextAnimationName;
 		nextAnimationName.clear();
-		Log("Cross fade for %s animation skipped for being the same Animation", currentAnim.name.c_str());
+		Log("Cross fade for %s animation skipped for being the same Animation", currentAnim.name);
 		return;
 	}
 

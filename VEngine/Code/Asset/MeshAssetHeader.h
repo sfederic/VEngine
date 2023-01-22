@@ -1,5 +1,7 @@
 #pragma once
+
 #include <cstdint>
+#include "Animation/AnimationStructures.h"
 
 enum class SourceMeshFormat : uint8_t
 {
@@ -16,5 +18,9 @@ struct MeshAssetHeader
 	SourceMeshFormat sourceMeshFormat = SourceMeshFormat::FBX;
 };
 
-	SourceMeshFormat sourceMeshFormat = SourceMeshFormat::FBX;
+//Binary header structure for skeletal animation asset files
+struct AnimationAssetHeader
+{
+	char name[Animation::ANIM_NAME_MAX]{};
+	uint64_t frameCount = 0;
 };

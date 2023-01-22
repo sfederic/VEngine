@@ -97,7 +97,7 @@ int Skeleton::FindJointIndexByName(std::string name)
 void Skeleton::CreateAnimation(const std::string animationName)
 {
 	assert(animations.find(animationName) == animations.end());
-	animations.emplace(animationName, Animation(animationName));
+	animations.emplace(animationName, Animation(animationName.c_str()));
 }
 
 Animation& Skeleton::GetAnimation(const std::string animationName)

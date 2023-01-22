@@ -9,8 +9,6 @@
 #include "FileSystem.h"
 #include "Asset/AssetPaths.h"
 
-const int ANIM_NAME_SIZE = 64;
-
 std::map<std::string, MeshData> existingMeshData;
 
 //@Todo: do something when importing all, remove the existing meshdata to match the meshes currently in world.
@@ -64,83 +62,53 @@ void AssetSystem::BuildAllVMeshDataFromFBXImport()
 		numberOfMeshFilesBuilt, elapsedTime);
 }
 
-void AssetSystem::BuildAllVSkeletalMeshesFromFBXImport()
+void AssetSystem::BuildAllAnimationFilesFromFBXImport()
 {
 	FILE* file = nullptr;
 
-	uint64_t numberOfSkeletalMeshFilesBuilt = 0;
+	uint64_t numberOfAnimationFilesBuilt = 0;
 
 	auto startTime = Profile::QuickStart();
 
-	std::unordered_map<std::string, Skeleton> skeletonMap;
+	std::unordered_map<std::string, Animation> animationMap;
 
 	//Import all animated FBX files
 	for (const auto& entry : std::filesystem::directory_iterator("AnimationFBXFiles/"))
 	{
 		const std::string fbxFilename = entry.path().filename().string();
-		skeletonMap.emplace(fbxFilename, Skeleton());
-		FBXLoader::ImportAsAnimation(fbxFilename);
+		Animation anim = FBXLoader::ImportAsAnimation(fbxFilename);
+		animationMap.emplace(fbxFilename, anim);
 	}
 
-	for (const auto& [filename, skeleton] : skeletonMap)
+	for (const auto& [filename, animation] : animationMap)
 	{
-		SkeletalAnimationAssetHeader header;
-		header.sourceMeshFormat = SourceMeshFormat::FBX;
-		header.boneCount = skeleton.joints.size();
-
 		const std::string meshName = filename.substr(0, filename.find("."));
-		const std::string meshFilePath = AssetBaseFolders::mesh + meshName + ".vskeletalmesh";
+		const std::string meshFilePath = AssetBaseFolders::mesh + meshName + ".vanim";
 
 		fopen_s(&file, meshFilePath.c_str(), "wb");
 		assert(file);
 
-		assert(fwrite(&header, sizeof(SkeletalAnimationAssetHeader), 1, file));
+		AnimationAssetHeader header;
+		strcpy_s(header.name, sizeof(char) * Animation::ANIM_NAME_MAX, animation.name);
+		header.frameCount = animation.frames.size();
+		assert(fwrite(&header, sizeof(AnimationAssetHeader), 1, file));
 
-		//Num of Joints
-		const auto& joints = skeleton.joints;
-		assert(fwrite(joints.data(), sizeof(Joint), joints.size(), file));
-
-		//Num animations
-		const size_t numAnimations = skeleton.animations.size();
-		assert(fwrite(&numAnimations, sizeof(size_t), 1, file));
-
-		for (const auto& animationPair : skeleton.animations)
+		for (auto& [jointIndex, animFrame] : animation.frames)
 		{
-			//Animation name
-			const std::string& animationName = animationPair.first;
-			char animationNameBuff[64]{};
-			strcpy_s(animationNameBuff, ANIM_NAME_SIZE, animationName.c_str());
-			assert(fwrite(animationNameBuff, sizeof(char), ANIM_NAME_SIZE, file));
-
-			//Num frames
-			const size_t numAnimFrames = animationPair.second.frames.size();
-			assert(fwrite(&numAnimFrames, sizeof(numAnimFrames), 1, file));
-
-			for (const auto& framePair : animationPair.second.frames)
-			{
-				const size_t numFrames = framePair.second.size();
-				assert(fwrite(&numFrames, sizeof(numFrames), 1, file));
-
-				for (const auto& frame : framePair.second)
-				{
-					//Anim Frames
-					const int jointIndex = framePair.first;
-					assert(fwrite(&jointIndex, sizeof(int), 1, file));
-
-					assert(fwrite(&frame, sizeof(AnimFrame), 1, file));
-				}
-			}
+			//Anim Frames
+			assert(fwrite(&jointIndex, sizeof(int), 1, file));
+			assert(fwrite(&animFrame, sizeof(AnimFrame), 1, file));
 		}
 
 		fclose(file);
 
-		numberOfSkeletalMeshFilesBuilt++;
+		numberOfAnimationFilesBuilt++;
 	}
 
 	double elapsedTime = Profile::QuickEnd(startTime);
 
-	Log("Skeletal Mesh asset build complete.\n\tNum skeletal meshes built: %d\n\tTime taken: %f",
-		numberOfSkeletalMeshFilesBuilt, elapsedTime);
+	Log("Animation asset build complete.\n\Num animations built: %d\n\tTime taken: %f",
+		numberOfAnimationFilesBuilt, elapsedTime);
 }
 
 MeshDataProxy AssetSystem::ReadVMeshAssetFromFile(const std::string filename)
@@ -163,39 +131,6 @@ MeshDataProxy AssetSystem::ReadVMeshAssetFromFile(const std::string filename)
 
 	data.skeleton.joints.resize(header.boneCount);
 	assert(fread(data.skeleton.joints.data(), sizeof(Joint), header.boneCount, file));
-
-	//Num animations
-	//size_t numAnimations = 0;
-	//fread(&numAnimations, sizeof(size_t), 1, file);
-
-	//for(size_t animIndex = 0; animIndex < numAnimations; animIndex++)
-	//{
-	//	char animationNameBuff[ANIM_NAME_SIZE]{};
-	//	assert(fread(animationNameBuff, sizeof(char), ANIM_NAME_SIZE, file));
-	//	std::string animationName(animationNameBuff);
-	//	data.skeleton.CreateAnimation(animationName);
-
-	//	size_t numAnimFrames = 0;
-	//	assert(fread(&numAnimFrames, sizeof(numAnimFrames), 1, file));
-
-	//	for (size_t animFrameIndex = 0; animFrameIndex < numAnimFrames; animFrameIndex++)
-	//	{
-	//		size_t numFrames = 0;
-	//		assert(fread(&numFrames, sizeof(numFrames), 1, file));
-
-	//		for (size_t frameIndex = 0; frameIndex < numFrames; frameIndex++)
-	//		{
-	//			int jointIndex = -2; //Parent index is -1, so -2 will mean the read errored
-	//			assert(fread(&jointIndex, sizeof(int), 1, file));
-
-	//			AnimFrame frame{};
-	//			assert(fread(&frame, sizeof(AnimFrame), 1, file));
-
-	//			Animation& animation = data.skeleton.animations.find(animationName)->second;
-	//			animation.frames[jointIndex].emplace_back(frame);
-	//		}
-	//	}
-	//}
 
 	fclose(file);
 	

@@ -30,12 +30,22 @@ struct Animation
 {
 	bool isPlaying = true;
 
-	std::string name;
+	static inline const int ANIM_NAME_MAX = 128;
+
+	char name[ANIM_NAME_MAX]{};
 
 	//Maps joint index to AnimFrames
 	std::map<int, std::vector<AnimFrame>> frames;
 
-	Animation(std::string name_) : name(name_) {}
+	Animation(const char* name_)
+	{
+		SetName(name);
+	}
+
+	void SetName(const char* name_)
+	{
+		strcpy_s(name, sizeof(name), name_);
+	}
 
 	float GetStartTime(int jointIndex)
 	{
