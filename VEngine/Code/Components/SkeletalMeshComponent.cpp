@@ -2,6 +2,7 @@
 #include "SkeletalMeshComponent.h"
 #include <algorithm>
 #include "Core.h"
+#include "Asset/FBXLoader.h"
 
 Properties SkeletalMeshComponent::GetProps()
 {
@@ -13,6 +14,13 @@ Properties SkeletalMeshComponent::GetProps()
 void SkeletalMeshComponent::Create()
 {
     MeshComponent::Create();
+}
+
+void SkeletalMeshComponent::LoadAnimation(std::string animationFilename)
+{
+	Skeleton& skel = GetSkeleton();
+	Animation anim = FBXLoader::ImportAsAnimation(animationFilename);
+	skel.animations.emplace(anim.name, anim);
 }
 
 void SkeletalMeshComponent::ResetAnimationTime()

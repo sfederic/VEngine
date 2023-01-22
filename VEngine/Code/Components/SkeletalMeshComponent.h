@@ -30,6 +30,8 @@ public:
 	Properties GetProps() override;
 	void Create() override;
 
+	void LoadAnimation(std::string animationFilename);
+
 	Skeleton& GetSkeleton() { return *meshDataProxy.skeleton; }
 
 	float GetCurrentAnimationTime() { return currentAnimationTime; }
