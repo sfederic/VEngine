@@ -1,19 +1,20 @@
 #include "vpch.h"
 #include "MeshComponent.h"
+#include "VMath.h"
+#include "Camera.h"
+#include "Actors/Game/Player.h"
 #include "Asset/FBXLoader.h"
+#include "Asset/AssetSystem.h"
+#include "Gameplay/GameUtils.h"
 #include "Render/RenderUtils.h"
 #include "Render/ShaderSystem.h"
 #include "Render/Material.h"
 #include "Render/MaterialSystem.h"
 #include "Render/Renderer.h"
 #include "Render/TextureSystem.h"
-#include "Physics/PhysicsSystem.h"
-#include "VMath.h"
-#include "Camera.h"
-#include "Gameplay/GameUtils.h"
-#include "Actors/Game/Player.h"
 #include "Render/VertexShader.h"
 #include "Render/PixelShader.h"
+#include "Physics/PhysicsSystem.h"
 
 //Vertex and index buffers linked to a mesh filename to copy over to new PSOs
 std::unordered_map<std::string, std::unique_ptr<MeshBuffers>> existingMeshBuffers;
@@ -73,8 +74,7 @@ void MeshComponent::Create()
 	//Material's create needs to be called here to deal with serialisation
 	material->Create();
 
-	//Import mesh (bounds extents set up in here too)
-	FBXLoader::ImportAsMesh(meshComponentData.filename.c_str(), meshDataProxy);
+	meshDataProxy = AssetSystem::ReadVMeshAssetFromFile(meshComponentData.filename);
 
 	//Setup bounds
 	BoundingOrientedBox::CreateFromBoundingBox(boundingBox, *meshDataProxy.boundingBox);
