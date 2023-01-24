@@ -506,6 +506,9 @@
     <ClCompile Include="Code\Components\SkeletalMeshComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Particle\MeshParticleEmitter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -970,6 +973,12 @@
     <ClInclude Include="Code\Components\SkeletalMeshComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Particle\MeshParticleEmitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Particle\ParticleData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -992,5 +1001,6 @@
     <FxCompile Include="Code\Render\Shaders\Pixel\Shadows_ps.hlsl" />
     <FxCompile Include="Code\Render\Shaders\Vertex\Default_vs.hlsl" />
     <FxCompile Include="Code\Render\Shaders\Vertex\UI_vs.hlsl" />
+    <FxCompile Include="Code\Render\Shaders\Vertex\ShadowAnimation_vs.hlsl" />
   </ItemGroup>
 </Project>

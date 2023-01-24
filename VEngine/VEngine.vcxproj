@@ -245,6 +245,7 @@
     <ClCompile Include="Code\Components\Game\SwordBeam.cpp" />
     <ClCompile Include="Code\Actors\LightVolume.cpp" />
     <ClCompile Include="Code\Components\SkeletalMeshComponent.cpp" />
+    <ClCompile Include="Code\Particle\MeshParticleEmitter.cpp" />
     <ClInclude Include="Code\Actors\AnimCube.h" />
     <ClInclude Include="Code\Actors\Game\BasicEnemy.h" />
     <ClInclude Include="Code\Actors\Game\BacksideEnemy.h" />
@@ -265,6 +266,7 @@
     <ClInclude Include="Code\Gameplay\Mission.h" />
     <ClInclude Include="Code\Gameplay\WorldFunctions.h" />
     <ClInclude Include="Code\IFunction.h" />
+    <ClInclude Include="Code\Particle\ParticleData.h" />
     <ClInclude Include="Code\Property.h" />
     <ClInclude Include="Code\UI\Colours.h" />
     <ClInclude Include="Code\Render\PixelShader.h" />
@@ -494,6 +496,7 @@
     <ClInclude Include="Code\Components\Game\SwordBeam.h" />
     <ClInclude Include="Code\Actors\LightVolume.h" />
     <ClInclude Include="Code\Components\SkeletalMeshComponent.h" />
+    <ClInclude Include="Code\Particle\MeshParticleEmitter.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
