@@ -5,7 +5,6 @@
 #include "Render/ShaderItem.h"
 #include "ParticleData.h"
 
-class Material;
 class InstanceMeshComponent;
 
 class MeshParticleEmitter : public Actor
@@ -18,12 +17,9 @@ public:
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
-	Material& GetMaterial() { return *material; }
-
 private:
 	ParticleData particleData;
 
-	Material* material = nullptr;
 	InstanceMeshComponent* instanceMesh = nullptr;
 
 	float spawnTimer = 0.f;

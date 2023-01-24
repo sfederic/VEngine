@@ -2,12 +2,9 @@
 #include "MeshParticleEmitter.h"
 #include "VMath.h"
 #include "Components/InstanceMeshComponent.h"
-#include "Render/MaterialSystem.h"
 
 MeshParticleEmitter::MeshParticleEmitter(std::string textureFilename, ShaderItem* shaderItem)
 {
-	material = MaterialSystem::CreateMaterial(textureFilename, shaderItem);
-
 	instanceMesh = CreateComponent(InstanceMeshComponent(5, "cube.vmesh", "test.png", shaderItem), "Mesh");
 	rootComponent = instanceMesh;
 }
