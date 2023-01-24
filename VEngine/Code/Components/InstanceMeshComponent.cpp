@@ -11,7 +11,7 @@ InstanceMeshComponent::InstanceMeshComponent(uint32_t meshInstanceRenderCount_,
 {
 	meshInstanceRenderCount = meshInstanceRenderCount_;
 
-	instanceData.reserve(meshInstanceRenderCount);
+	instanceData.resize(meshInstanceRenderCount);
 }
 
 InstanceMeshComponent::~InstanceMeshComponent()
