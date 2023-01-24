@@ -50,6 +50,8 @@ void World::Init()
 
 void World::Start()
 {
+	//@Todo: creating all materials here isn't working. All meshes are creating materials twice on world loads,
+	//once here then again in MeshComponent::Create()
 	MaterialSystem::CreateAllMaterials();
 	TextureSystem::CreateAllTextures();
 
