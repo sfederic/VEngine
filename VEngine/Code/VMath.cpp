@@ -392,6 +392,15 @@ namespace VMath
         return result;
     }
 
+    XMFLOAT3 RandomRangeFloat3(XMFLOAT3 v0, XMFLOAT3 v1)
+    {
+        XMFLOAT3 f3{};
+        f3.x = VMath::RandomRange(v0.x, v1.x);
+        f3.y = VMath::RandomRange(v0.y, v1.y);
+        f3.z = VMath::RandomRange(v0.z, v1.z);
+        return f3;
+    }
+
     float InverseLerp(float x, float y, float value)
     {
         return (value - x) / (y - x);

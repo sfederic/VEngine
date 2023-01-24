@@ -73,6 +73,7 @@ namespace VMath
 
 	float RandomRange(float min, float max);
 	int RandomRangeInt(int min, int max);
+	XMFLOAT3 RandomRangeFloat3(XMFLOAT3 v0, XMFLOAT3 v1);
 	float InverseLerp(float x, float y, float value);
 
 	//Lightmap and raycast math helper functions
