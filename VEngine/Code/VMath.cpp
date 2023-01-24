@@ -17,6 +17,16 @@ namespace VMath
         m.r[2].m128_f32[2] = s;
     }
 
+    void MatrixAddPosition(XMVECTOR pos, XMMATRIX& m)
+    {
+        m.r[3] += pos;
+    }
+
+    void MatrixAddRotation(XMVECTOR rot, XMMATRIX& m)
+    {
+        m *= XMMatrixRotationQuaternion(rot);
+    }
+
     //GLOBAL VECTOR DIRECTIONS (X+ = Right, Y+ = Up, Z+ = forward)
     XMVECTOR GlobalRightVector()
     {

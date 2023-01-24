@@ -26,6 +26,8 @@ namespace VMath
 	//Returns matrix with all 0's
 	XMMATRIX ZeroMatrix();
 	void MatrixAddScale(float s, XMMATRIX& m);
+	void MatrixAddPosition(XMFLOAT3 pos, XMMATRIX& m);
+	void MatrixAddRotation(XMFLOAT4 rot, XMMATRIX& m);
 
 	XMFLOAT2 Float2Subtract(XMFLOAT2& f0, XMFLOAT2& f1);
 	XMFLOAT3 Float3Subtract(XMFLOAT3& f0, XMFLOAT3& f1);
