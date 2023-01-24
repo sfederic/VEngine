@@ -17,7 +17,7 @@ void ParticleEmitter::CreateParticle(Particle particle)
 void ParticleEmitter::Tick(float deltaTime)
 {
 	spawnTimer += deltaTime;
-	float spawnRateRange = VMath::RandomRange(spawnRate.x, spawnRate.y);
+	const float spawnRateRange = VMath::RandomRange(particleData.spawnRate.x, particleData.spawnRate.y);
 	if (spawnTimer > spawnRateRange)
 	{
 		Particle particle = {};
@@ -27,19 +27,19 @@ void ParticleEmitter::Tick(float deltaTime)
 		XMStoreFloat3(&particle.transform.position, worldMatrix.r[3]);
 
 		//Set position from radius
-		particle.transform.position.x += VMath::RandomRange(spawnRadius.x, spawnRadius.y);
-		particle.transform.position.y += VMath::RandomRange(spawnRadius.x, spawnRadius.y);
-		particle.transform.position.z += VMath::RandomRange(spawnRadius.x, spawnRadius.y);
+		particle.transform.position.x += VMath::RandomRange(particleData.spawnRadius.x, particleData.spawnRadius.y);
+		particle.transform.position.y += VMath::RandomRange(particleData.spawnRadius.x, particleData.spawnRadius.y);
+		particle.transform.position.z += VMath::RandomRange(particleData.spawnRadius.x, particleData.spawnRadius.y);
 
 		//Get random range between move speeds
-		float moveSpeedRange = VMath::RandomRange(moveSpeed.x, moveSpeed.y);
+		float moveSpeedRange = VMath::RandomRange(particleData.moveSpeed.x, particleData.moveSpeed.y);
 		particle.moveSpeed = moveSpeedRange;
 
 		//Set particle rotation values
-		float rotateRange = VMath::RandomRange(rotation.x, rotation.y);
+		float rotateRange = VMath::RandomRange(particleData.rotation.x, particleData.rotation.y);
 		particle.angle = rotateRange;
 
-		float rotateSpeedRange = VMath::RandomRange(rotateSpeed.x, rotateSpeed.y);
+		float rotateSpeedRange = VMath::RandomRange(particleData.rotateSpeed.x, particleData.rotateSpeed.y);
 		particle.rotateSpeed = rotateSpeedRange;
 
 		CreateParticle(particle);
@@ -53,7 +53,7 @@ void ParticleEmitter::Tick(float deltaTime)
 		particle.lifetime += deltaTime;
 
 		//Get random range between lifetimes
-		float lifetimeRange = VMath::RandomRange(lifetime.x, lifetime.y);
+		float lifetimeRange = VMath::RandomRange(particleData.lifetime.x, particleData.lifetime.y);
 
 		if (particle.lifetime > lifetimeRange)
 		{
@@ -61,7 +61,7 @@ void ParticleEmitter::Tick(float deltaTime)
 			particles.pop_back();
 		}
 
-		particle.AddVelocity(direction, deltaTime);
+		particle.AddVelocity(particleData.direction, deltaTime);
 	}
 
 	emitterLifetimeTimer += deltaTime;
@@ -80,13 +80,14 @@ Properties ParticleEmitter::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = "ParticleEmitter";
-	props.Add("Move Speed", &moveSpeed);
-	props.Add("Spawn Rate", &spawnRate);
-	props.Add("Spawn Radius", &spawnRadius);
-	props.Add("Lifetime", &lifetime);
-	props.Add("Direction", &direction);
-	props.Add("Rotate", &rotation);
-	props.Add("Rotate Speed", &rotateSpeed);
+
+	props.Add("Move Speed", &particleData.moveSpeed);
+	props.Add("Spawn Rate", &particleData.spawnRate);
+	props.Add("Spawn Radius", &particleData.spawnRadius);
+	props.Add("Lifetime", &particleData.lifetime);
+	props.Add("Direction", &particleData.direction);
+	props.Add("Rotate", &particleData.rotation);
+	props.Add("Rotate Speed", &particleData.rotateSpeed);
 
 	auto materialProps = material->GetProps();
 	props.Merge(materialProps);
