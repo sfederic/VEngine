@@ -1,10 +1,30 @@
 #pragma once
 
-#include "Components/SpatialComponent.h"
-#include "Components/ComponentSystem.h"
+#include "Actors/Actor.h"
+#include "Actors/ActorSystem.h"
+#include "Render/ShaderItem.h"
+#include "ParticleData.h"
 
-class MeshParticleEmitter : public SpatialComponent
+class Material;
+class InstanceMeshComponent;
+
+class MeshParticleEmitter : public Actor
 {
 public: 
-	COMPONENT_SYSTEM(MeshParticleEmitter);
+	ACTOR_SYSTEM(MeshParticleEmitter);
+
+	MeshParticleEmitter(std::string textureFilename = "test.png", ShaderItem* shaderItem = ShaderItems::Instance);
+
+	void Tick(float deltaTime) override;
+	Properties GetProps() override;
+
+	Material& GetMaterial() { return *material; }
+
+private:
+	ParticleData particleData;
+
+	Material* material = nullptr;
+	InstanceMeshComponent* instanceMesh = nullptr;
+
+	float spawnTimer = 0.f;
 };

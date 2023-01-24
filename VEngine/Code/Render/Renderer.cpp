@@ -984,7 +984,7 @@ void Renderer::RenderLightProbeViews()
 
 void RenderInstanceMeshComponents()
 {
-	//@Todo: shadows for instancemeshes (might not even need it since Grid nodes are the only things rendererd that way)
+	//@Todo: shadows for instancemeshes
 	//@Todo: animated instance meshes
 
 	Profile::Start();
