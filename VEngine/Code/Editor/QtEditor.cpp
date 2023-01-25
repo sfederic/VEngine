@@ -133,6 +133,9 @@ void QtEditor::SetEditorFont()
 
 void QtEditor::EnableDarkMode()
 {
+    //rgb(77, 77, 77) for nice off grey color
+    //rgb(80, 170, 200) - RE Engine UI blue
+    
     //Stole all the scrollbar stuff from https://stackoverflow.com/questions/54595957/how-to-set-a-stylesheet-for-the-qscrollbar-in-a-qscrollarea
     app->setStyleSheet(
         "QMainWindow { background-color: rgb(255, 0, 0); border: none; } "
@@ -144,9 +147,14 @@ void QtEditor::EnableDarkMode()
 
         "QDockWidget { background-color: rgb(37, 37, 37); border: 5px solid black; } "
 
-        "QLineEdit { background-color: rgb(40, 40, 40); } "
-        "QSpinBox { background-color: rgb(40, 40, 40); } "
-        "QDoubleSpinBox { background-color: rgb(40, 40, 40); } "
+        "QLineEdit { background-color: rgb(40, 40, 40); border: 2px solid; border-radius: 4px; border-color: rgb(77, 77, 77); height: 25px; } "
+        "QLineEdit::hover { border-color: rgb(80, 170, 200); } "
+
+        "QSpinBox { background-color: rgb(40, 40, 40); border: 2px solid; border-radius: 4px; border-color: rgb(77, 77, 77); height: 25px; } "
+        "QSpinBox::hover { border-color: rgb(80, 170, 200); } "
+
+        "QDoubleSpinBox { background-color: rgb(40, 40, 40); border: 2px solid; border-radius: 4px; border-color: rgb(77, 77, 77); height: 25px; } "
+        "QDoubleSpinBox::hover { border-color: rgb(80, 170, 200); } "
 
         "QPushButton { min-height:30px; min-width:50px; background-color: rgb(53, 53, 53); border-radius: 5px; } "
         "QPushButton:hover { background-color: rgb(80, 80, 80); } "
