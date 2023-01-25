@@ -76,6 +76,11 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 		//Iterate over actor's mesh components
 		for (auto mesh : actor->GetComponentsOfType<MeshComponent>())
 		{
+			if (!mesh->IsActive())
+			{
+				continue;
+			}
+
 			//Collision layer checks
 			if (mesh->layer == CollisionLayers::None ||
 				mesh->layer == hitResult.ignoreLayer)
