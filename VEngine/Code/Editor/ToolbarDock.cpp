@@ -63,8 +63,12 @@ ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 	hLayout->addWidget(rotationSnapSpinBox);
 
 	//World/Local transform
-	worldLocalTransformSetting = new QLabel("|WORLD|", this);
-	worldLocalTransformSetting->setFixedWidth(75);
+	worldLocalTransformSetting = new QComboBox(this);
+	worldLocalTransformSetting->setFixedWidth(100);
+	worldLocalTransformSetting->addItem("World");
+	worldLocalTransformSetting->addItem("Local");
+	connect(worldLocalTransformSetting, static_cast<void(QComboBox::*)(const QString&)>(&QComboBox::currentIndexChanged),
+		this, &ToolbarDock::LocalWorldTransformValueChanged);
 	hLayout->addWidget(worldLocalTransformSetting);
 
 	//Camera movespeed
@@ -150,4 +154,10 @@ void ToolbarDock::PickModeChanged(const QString& item)
 	{
 		WorldEditor::SetPickMode(WorldEditor::PickMode::Component);
 	}
+}
+
+void ToolbarDock::LocalWorldTransformValueChanged(const QString& item)
+{
+	std::string transformMode = item.toStdString();
+	transformGizmo.SetLocalWorldTransformMode(transformMode);
 }

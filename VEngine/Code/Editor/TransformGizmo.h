@@ -41,6 +41,7 @@ struct TransformGizmo
 	void SetTranslateSnapValue(float value);
 	void SetScaleSnapValue(float value);
 	void SetRotationSnapValue(float value);
+	void SetLocalWorldTransformMode(const std::string transformMode);
 };
 
 extern TransformGizmo transformGizmo;

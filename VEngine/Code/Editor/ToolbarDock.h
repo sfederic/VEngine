@@ -20,7 +20,7 @@ struct ToolbarDock : public QDockWidget
 
 	QComboBox* worldEditorPickMode = nullptr;
 
-	QLabel* worldLocalTransformSetting = nullptr;
+	QComboBox* worldLocalTransformSetting = nullptr;
 
 	//values for pick mode combobox
 	QString pickerStringActor = "Actor";
@@ -37,4 +37,5 @@ private:
 	void SetScaleSnapValue();
 	void SetRotationSnapValue();
 	void PickModeChanged(const QString& item);
+	void LocalWorldTransformValueChanged(const QString& item);
 };

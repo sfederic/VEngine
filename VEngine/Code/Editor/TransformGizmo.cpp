@@ -90,12 +90,12 @@ void TransformGizmo::Tick()
         if (currentTransformMode == ImGuizmo::MODE::LOCAL)
         {
             currentTransformMode = ImGuizmo::MODE::WORLD;
-            editor->SetCurrentTransformMode("|WORLD|");
+            editor->SetCurrentTransformMode("World");
         }
         else if (currentTransformMode == ImGuizmo::MODE::WORLD)
         {
             currentTransformMode = ImGuizmo::MODE::LOCAL;
-            editor->SetCurrentTransformMode("|LOCAL|");
+            editor->SetCurrentTransformMode("Local");
         }
     }
 
@@ -244,4 +244,16 @@ void TransformGizmo::SetRotationSnapValue(float value)
     rotationSnapValues[0] = value;
     rotationSnapValues[1] = value;
     rotationSnapValues[2] = value;
+}
+
+void TransformGizmo::SetLocalWorldTransformMode(const std::string transformMode)
+{
+    if (transformMode == "World")
+    {
+        currentTransformMode = ImGuizmo::MODE::WORLD;
+    }
+    else if (transformMode == "Local")
+    {
+        currentTransformMode = ImGuizmo::MODE::LOCAL;
+    }
 }

@@ -3,6 +3,7 @@
 #include <QtWidgets/QApplication>
 #include <QWidget>
 #include <QFont>
+#include <QComboBox>
 #include <qlabel.h>
 #include <qgridlayout.h>
 #include <qscrollarea.h>
@@ -207,5 +208,6 @@ void QtEditor::SetEditorTitle(const std::string title)
 
 void QtEditor::SetCurrentTransformMode(const std::string transformMode)
 {
-    mainWindow->toolbarDock->worldLocalTransformSetting->setText(QString::fromStdString(transformMode));
+    const int index = mainWindow->toolbarDock->worldLocalTransformSetting->findText(QString::fromStdString(transformMode));
+    mainWindow->toolbarDock->worldLocalTransformSetting->setCurrentIndex(index);
 }
