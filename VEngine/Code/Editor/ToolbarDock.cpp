@@ -111,18 +111,29 @@ void ToolbarDock::SetTransformDisplay(std::string currentTransformSettingName)
 	
 }
 
+void ToolbarDock::SetPlayButtonIcon()
+{
+	QString playIconFilename;
+
+	if (Core::gameplayOn)
+	{
+		playIconFilename = "Icons/pause_icon.png";
+	}
+	else
+	{
+		playIconFilename = "Icons/start_play_icon.png";
+	}
+
+	QPixmap icon(playIconFilename);
+	playButton->setIcon(icon);
+	playButton->setIconSize(QSize(30, 30));
+}
+
 void ToolbarDock::StartPlay()
 {
 	Core::SetGameplayState();
 
-	if (Core::gameplayOn)
-	{
-		playButton->setText("Stop");
-	}
-	else
-	{
-		playButton->setText("Play");
-	}
+	SetPlayButtonIcon();
 }
 
 void ToolbarDock::ResetWorldState()

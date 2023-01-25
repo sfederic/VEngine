@@ -159,7 +159,7 @@ void Core::StartGame()
 
 	SkeletalMeshComponent::StartAllAnimations();
 
-	editor->SetPlayButtonText("Stop");
+	editor->SetPlayButtonIcon();
 	debugMenu.AddNotification(L"Gameplay started");
 }
 
@@ -183,7 +183,7 @@ void Core::EndGame()
 	//Clear the properties dock or you'll end up with pointer problems
 	WorldEditor::DeselectPickedActor();
 
-	editor->SetPlayButtonText("Play");
+	editor->SetPlayButtonIcon();
 	debugMenu.AddNotification(L"Gameplay stopped");
 }
 
