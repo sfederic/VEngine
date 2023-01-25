@@ -138,8 +138,6 @@ void QtEditor::EnableDarkMode()
     
     //Stole all the scrollbar stuff from https://stackoverflow.com/questions/54595957/how-to-set-a-stylesheet-for-the-qscrollbar-in-a-qscrollarea
     app->setStyleSheet(
-        "QMainWindow { background-color: rgb(255, 0, 0); border: none; } "
-
         "QWidget { background-color: rgb(45, 45, 45); border-color: rgb(11, 11, 11); border-width: 0.0px; border-style: none; } "
 
         "QComboBox { border: 2px solid; border-radius: 4px; border-color: rgb(77, 77, 77); height: 30px; } "
