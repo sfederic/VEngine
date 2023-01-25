@@ -139,6 +139,9 @@ void QtEditor::EnableDarkMode()
 
         "QWidget { background-color: rgb(45, 45, 45); border-color: rgb(11, 11, 11); border-width: 0.0px; border-style: none; } "
 
+        "QComboBox { border: 2px solid; border-radius: 4px; border-color: rgb(77, 77, 77); height: 30px; } "
+        "QComboBox::hover { border-color: rgb(80, 170, 200); } "
+
         "QDockWidget { background-color: rgb(37, 37, 37); border: 5px solid black; } "
 
         "QLineEdit { background-color: rgb(40, 40, 40); } "
