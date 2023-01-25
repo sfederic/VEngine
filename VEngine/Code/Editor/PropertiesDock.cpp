@@ -138,7 +138,7 @@ void PropertiesDock::IterateOverProperties(Properties& props, int& currentGridRo
         }
 
         //Set property name onto label
-        actorPropsGridLayout->addWidget(new QLabel(name.c_str()), currentGridRow, propertyNameColumn);
+        actorPropsGridLayout->addWidget(new QLabel(name.c_str()), currentGridRow, propertyNameColumn, Qt::AlignRight);
 
         //Call create widget function based on property type
         auto& createWidgetFunc = typeToFunctionMap[prop.info.value()];
