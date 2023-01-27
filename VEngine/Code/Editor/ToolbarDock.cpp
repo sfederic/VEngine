@@ -18,18 +18,20 @@ ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 	hLayout->setSpacing(10);
 	hLayout->setAlignment(Qt::AlignHCenter);
 
+	//@Todo: there's something stupid on the buttons here where if you don't set the button text
+	//or you set an icon on the button, the entire application won't get maximized on startup...
 	//gameplay buttons
-	playButton = new QPushButton(this);
+	playButton = new QPushButton("Play", this);
 	playButton->setToolTip("Ctrl+P");
 	connect(playButton, &QPushButton::clicked, this, &ToolbarDock::StartPlay);
 	hLayout->addWidget(playButton);
 
-	resetWorldButton = new QPushButton(this);
+	resetWorldButton = new QPushButton("Reset", this);
 	resetWorldButton->setToolTip("Ctrl+R");
 	connect(resetWorldButton, &QPushButton::clicked, this, &ToolbarDock::ResetWorldState);
 	hLayout->addWidget(resetWorldButton);
 
-	saveWorldButton = new QPushButton(this);
+	saveWorldButton = new QPushButton("Save", this);
 	saveWorldButton->setToolTip("Ctrl+S");
 	connect(saveWorldButton, &QPushButton::clicked, this, &ToolbarDock::SaveWorld);
 	hLayout->addWidget(saveWorldButton);
