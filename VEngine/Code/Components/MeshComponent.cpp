@@ -119,7 +119,6 @@ Properties MeshComponent::GetProps()
 	props.Add("Mesh", &meshComponentData).change = ReassignMesh;
 	props.Add("Casts Shadow", &castsShadow);
 	props.Add("Static", &isStatic);
-	props.Add("Grid Obstacle", &gridObstacle);
 	props.Add("Trans. Occlude", &transparentOcclude);
 
 	auto materialProps = material->GetProps();

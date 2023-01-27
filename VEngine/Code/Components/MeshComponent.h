@@ -34,9 +34,6 @@ public:
 
 	bool skipPhysicsCreation = false;
 
-	//whether nodes that spawn on this mesh are set as inactive
-	bool gridObstacle = false;
-
 	//Whether to make transparent when in between player and camera
 	bool transparentOcclude = false;
 
