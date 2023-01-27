@@ -17,28 +17,11 @@ void ParticleEmitter::Tick(float deltaTime)
 	{
 		Particle particle = {};
 
-		//Need to get the world position instead of relative
+		//Get the world position instead of relative
 		XMMATRIX worldMatrix = this->GetWorldMatrix();
 		XMStoreFloat3(&particle.transform.position, worldMatrix.r[3]);
 
-		//Set position from radius
-		particle.transform.position.x += VMath::RandomRange(particleData.spawnRadius.x, particleData.spawnRadius.y);
-		particle.transform.position.y += VMath::RandomRange(particleData.spawnRadius.x, particleData.spawnRadius.y);
-		particle.transform.position.z += VMath::RandomRange(particleData.spawnRadius.x, particleData.spawnRadius.y);
-
-		//Get random range between move speeds
-		float moveSpeedRange = VMath::RandomRange(particleData.moveSpeed.x, particleData.moveSpeed.y);
-		particle.moveSpeed = moveSpeedRange;
-
-		//Set particle rotation values
-		float rotateRange = VMath::RandomRange(particleData.rotation.x, particleData.rotation.y);
-		particle.angle = rotateRange;
-
-		float rotateSpeedRange = VMath::RandomRange(particleData.rotateSpeed.x, particleData.rotateSpeed.y);
-		particle.rotateSpeed = rotateSpeedRange;
-
-		const XMFLOAT3 directionRange = VMath::RandomRangeFloat3(particleData.minDirection, particleData.minDirection);
-		particle.direction = directionRange;
+		particle.SetParticleRangeData(particleData);
 
 		particles.emplace_back(particle);
 

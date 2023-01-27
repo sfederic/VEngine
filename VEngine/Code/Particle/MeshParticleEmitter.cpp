@@ -7,7 +7,7 @@ constexpr int maxMeshes = 5;
 
 MeshParticleEmitter::MeshParticleEmitter(std::string textureFilename, ShaderItem* shaderItem)
 {
-	instanceMesh = CreateComponent(InstanceMeshComponent(maxMeshes, "cube.vmesh", "test.png", shaderItem), "Mesh");
+	instanceMesh = CreateComponent(InstanceMeshComponent(maxMeshes, "bevel_rock.vmesh", "test.png", shaderItem), "Mesh");
 	rootComponent = instanceMesh;
 }
 
@@ -23,24 +23,7 @@ void MeshParticleEmitter::Tick(float deltaTime)
 		const XMMATRIX worldMatrix = this->GetWorldMatrix();
 		XMStoreFloat3(&particle.transform.position, worldMatrix.r[3]);
 
-		//Set position from radius
-		particle.transform.position.x += VMath::RandomRange(particleData.spawnRadius.x, particleData.spawnRadius.y);
-		particle.transform.position.y += VMath::RandomRange(particleData.spawnRadius.x, particleData.spawnRadius.y);
-		particle.transform.position.z += VMath::RandomRange(particleData.spawnRadius.x, particleData.spawnRadius.y);
-
-		//Get random range between move speeds
-		const float moveSpeedRange = VMath::RandomRange(particleData.moveSpeed.x, particleData.moveSpeed.y);
-		particle.moveSpeed = moveSpeedRange;
-
-		//Set particle rotation values
-		const float rotateRange = VMath::RandomRange(particleData.rotation.x, particleData.rotation.y);
-		particle.angle = rotateRange;
-
-		const float rotateSpeedRange = VMath::RandomRange(particleData.rotateSpeed.x, particleData.rotateSpeed.y);
-		particle.rotateSpeed = rotateSpeedRange;
-
-		const XMFLOAT3 directionRange = VMath::RandomRangeFloat3(particleData.minDirection, particleData.maxDirection);
-		particle.direction = directionRange;
+		particle.SetParticleRangeData(particleData);
 
 		particles.emplace_back(particle);
 
@@ -60,10 +43,12 @@ void MeshParticleEmitter::Tick(float deltaTime)
 
 		if (particle.lifetime > lifetimeRange)
 		{
+			const int particlesSize = particles.size() - 1;
+			std::swap(instanceMesh->instanceData[i], instanceMesh->instanceData[particlesSize]);
+			instanceMesh->instanceData[particlesSize].world = VMath::ZeroMatrix();
+
 			std::swap(particle, particles.back());
 			particles.pop_back();
-
-			instanceMesh->instanceData[i].world = VMath::ZeroMatrix();
 		}
 		else
 		{

@@ -139,6 +139,7 @@
     </ClCompile>
     <ClCompile Include="Code\Gameplay\WorldFunctions.cpp" />
     <ClCompile Include="Code\IFunction.cpp" />
+    <ClCompile Include="Code\Particle\Particle.cpp" />
     <ClCompile Include="Code\Render\PixelShader.cpp" />
     <ClCompile Include="Code\Render\Shader.cpp" />
     <ClCompile Include="Code\Render\ShaderItem.cpp" />

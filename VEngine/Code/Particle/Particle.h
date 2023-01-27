@@ -2,6 +2,8 @@
 
 #include "Transform.h"
 
+struct ParticleData;
+
 struct Particle
 {
 	Transform transform;
@@ -17,4 +19,6 @@ struct Particle
 		transform.position.y += (direction.y * moveSpeed) * deltaTime;
 		transform.position.z += (direction.z * moveSpeed) * deltaTime;
 	}
+
+	void SetParticleRangeData(ParticleData& particleData);
 };
