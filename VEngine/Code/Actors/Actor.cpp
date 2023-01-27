@@ -31,7 +31,7 @@ XMMATRIX Actor::GetTransformMatrix()
 
 	if (parent)
 	{
-		rotationOffset = parent->rootComponent->GetPositionV();
+		rotationOffset = parent->rootComponent->GetLocalPositionV();
 	}
 
 	return rootComponent->transform.GetAffineRotationOrigin(rotationOffset);
@@ -112,7 +112,7 @@ void Actor::SetRotation(const XMVECTOR rotation)
 
 void Actor::AddRotation(XMVECTOR direction, float angle)
 {
-	rootComponent->AddRotation(direction, angle);
+	rootComponent->AddLocalRotation(direction, angle);
 }
 
 void Actor::SetTransform(const Transform transform)

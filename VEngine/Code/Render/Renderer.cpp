@@ -536,11 +536,11 @@ void DrawBoundingBox(MeshComponent* mesh, DebugBox& debugBox)
 		boundingBox.Extents.z);
 
 	XMVECTOR center = mesh->GetWorldPositionV() + XMLoadFloat3(&boundingBox.Center);
-	XMVECTOR scale = mesh->GetScaleV() * XMLoadFloat3(&extents);
+	XMVECTOR scale = mesh->GetLocalScaleV() * XMLoadFloat3(&extents);
 
 	XMMATRIX boundsMatrix = XMMatrixAffineTransformation(scale,
 		XMVectorSet(0.f, 0.f, 0.f, 1.f),
-		mesh->GetRotationV(),
+		mesh->GetLocalRotationV(),
 		center);
 
 	shaderMatrices.model = boundsMatrix;
@@ -795,7 +795,7 @@ void SetMatricesFromMesh(MeshComponent* mesh)
 void SetShaderMeshData(MeshComponent* mesh)
 {
 	ShaderMeshData meshData = {};
-	meshData.position = mesh->GetPosition();
+	meshData.position = mesh->GetLocalPosition();
 
 	//@Todo: light probe data should have its own constant buffer, for now in testing, it's part of ShaderMeshData
 	//Set light probe resources
@@ -935,8 +935,8 @@ void Renderer::RenderLightProbeViews()
 				cbMatrices->SetVS();
 
 				//Set mesh data to shader
-				ShaderMeshData meshData = {};
-				meshData.position = mesh->GetPosition();
+				ShaderMeshData meshData;
+				XMStoreFloat3(&meshData.position, mesh->GetWorldPositionV());
 				cbMeshData->Map(&meshData);
 				cbMeshData->SetVSAndPS();
 

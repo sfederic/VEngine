@@ -27,28 +27,28 @@ struct SpatialComponent : Component
 	XMMATRIX GetWorldMatrix();
 	void UpdateTransform(XMMATRIX parentWorld = XMMatrixIdentity());
 
-	XMFLOAT3 GetPosition();
-	XMVECTOR GetPositionV();
+	XMFLOAT3 GetLocalPosition();
+	XMVECTOR GetLocalPositionV();
 	XMVECTOR GetWorldPositionV();
-	void SetPosition(float x, float y, float z);
-	void SetPosition(XMFLOAT3 newPosition);
-	void SetPosition(XMVECTOR newPosition);
+	void SetLocalPosition(float x, float y, float z);
+	void SetLocalPosition(XMFLOAT3 newPosition);
+	void SetLocalPosition(XMVECTOR newPosition);
 	void SetWorldPosition(XMVECTOR position);
 
-	XMFLOAT3 GetScale();
-	XMVECTOR GetScaleV();
-	void SetScale(float x, float y, float z);
-	void SetScale(XMFLOAT3 newScale);
+	XMFLOAT3 GetLocalScale();
+	XMVECTOR GetLocalScaleV();
+	void SetLocalScale(float x, float y, float z);
+	void SetLocalScale(XMFLOAT3 newScale);
 	void SetScale(XMVECTOR newScale);
 	void SetWorldScale(XMVECTOR scale);
 
-	XMFLOAT4 GetRotation();
-	XMVECTOR GetRotationV();
-	void SetRotation(float x, float y, float z, float w);
-	void SetRotation(XMFLOAT4 newRotation);
-	void SetRotation(XMVECTOR newRotation);
+	XMFLOAT4 GetLocalRotation();
+	XMVECTOR GetLocalRotationV();
+	void SetLocalRotation(float x, float y, float z, float w);
+	void SetLocalRotation(XMFLOAT4 newRotation);
+	void SetLocalRotation(XMVECTOR newRotation);
 	void SetWorldRotation(XMVECTOR newRotation);
-	void AddRotation(XMVECTOR vector, float angle);
+	void AddLocalRotation(XMVECTOR vector, float angle);
 
 	XMFLOAT3 GetForwardVector();
 	XMVECTOR GetForwardVectorV();

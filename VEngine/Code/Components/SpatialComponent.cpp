@@ -59,7 +59,7 @@ Properties SpatialComponent::GetProps()
 	return props;
 }
 
-XMFLOAT3 SpatialComponent::GetPosition()
+XMFLOAT3 SpatialComponent::GetLocalPosition()
 {
 	return transform.position;
 }
@@ -69,23 +69,23 @@ XMVECTOR SpatialComponent::GetWorldPositionV()
 	return GetWorldMatrix().r[3];
 }
 
-XMVECTOR SpatialComponent::GetPositionV()
+XMVECTOR SpatialComponent::GetLocalPositionV()
 {
 	XMVECTOR position = XMLoadFloat3(&transform.position);
 	return position;
 }
 
-void SpatialComponent::SetPosition(float x, float y, float z)
+void SpatialComponent::SetLocalPosition(float x, float y, float z)
 {
 	transform.position = XMFLOAT3(x, y, z);
 }
 
-void SpatialComponent::SetPosition(XMFLOAT3 newPosition)
+void SpatialComponent::SetLocalPosition(XMFLOAT3 newPosition)
 {
 	transform.position = newPosition;
 }
 
-void SpatialComponent::SetPosition(XMVECTOR newPosition)
+void SpatialComponent::SetLocalPosition(XMVECTOR newPosition)
 {
 	XMStoreFloat3(&transform.position, newPosition);
 }
@@ -96,30 +96,30 @@ void SpatialComponent::SetWorldPosition(XMVECTOR position)
 
 	if (parent)
 	{
-		XMVECTOR parentPosition = parent->GetPositionV();
+		XMVECTOR parentPosition = parent->GetLocalPositionV();
 		relativePosition = XMVectorSubtract(relativePosition, parentPosition);
 	}
 
-	SetPosition(relativePosition);
+	SetLocalPosition(relativePosition);
 }
 
-XMFLOAT3 SpatialComponent::GetScale()
+XMFLOAT3 SpatialComponent::GetLocalScale()
 {
 	return transform.scale;
 }
 
-XMVECTOR SpatialComponent::GetScaleV()
+XMVECTOR SpatialComponent::GetLocalScaleV()
 {
 	XMVECTOR scale = XMLoadFloat3(&transform.scale);
 	return scale;
 }
 
-void SpatialComponent::SetScale(float x, float y, float z)
+void SpatialComponent::SetLocalScale(float x, float y, float z)
 {
 	transform.scale = XMFLOAT3(x, y, z);
 }
 
-void SpatialComponent::SetScale(XMFLOAT3 newScale)
+void SpatialComponent::SetLocalScale(XMFLOAT3 newScale)
 {
 	transform.scale = newScale;
 }
@@ -135,35 +135,35 @@ void SpatialComponent::SetWorldScale(XMVECTOR scale)
 
 	if (parent)
 	{
-		XMVECTOR parentScale = parent->GetScaleV();
+		XMVECTOR parentScale = parent->GetLocalScaleV();
 		relativeScale = XMVectorMultiply(relativeScale, parentScale);
 	}
 
 	SetScale(relativeScale);
 }
 
-XMVECTOR SpatialComponent::GetRotationV()
+XMVECTOR SpatialComponent::GetLocalRotationV()
 {
 	XMVECTOR rotation = XMLoadFloat4(&transform.rotation);
 	return rotation;
 }
 
-void SpatialComponent::SetRotation(float x, float y, float z, float w)
+void SpatialComponent::SetLocalRotation(float x, float y, float z, float w)
 {
 	transform.rotation = XMFLOAT4(x, y, z, w);
 }
 
-XMFLOAT4 SpatialComponent::GetRotation()
+XMFLOAT4 SpatialComponent::GetLocalRotation()
 {
 	return transform.rotation;
 }
 
-void SpatialComponent::SetRotation(XMFLOAT4 newRotation)
+void SpatialComponent::SetLocalRotation(XMFLOAT4 newRotation)
 {
 	transform.rotation = newRotation;
 }
 
-void SpatialComponent::SetRotation(XMVECTOR newRotation)
+void SpatialComponent::SetLocalRotation(XMVECTOR newRotation)
 {
 	XMStoreFloat4(&transform.rotation, newRotation);
 }
@@ -199,19 +199,19 @@ void SpatialComponent::SetWorldRotation(XMVECTOR newRotation)
 	if (parent)
 	{
 		//Looks like relative rotations are inversed with quaternions. ParentQuat(-1) * newRot;
-		XMVECTOR parentRot = XMQuaternionInverse(parent->GetRotationV());
+		XMVECTOR parentRot = XMQuaternionInverse(parent->GetLocalRotationV());
 		relativeRotation = XMQuaternionMultiply(parentRot, newRotation);
 	}
 
-	SetRotation(relativeRotation);
+	SetLocalRotation(relativeRotation);
 }
 
-void SpatialComponent::AddRotation(XMVECTOR vector, float angle)
+void SpatialComponent::AddLocalRotation(XMVECTOR vector, float angle)
 {
 	auto newRotation = 
-		XMQuaternionMultiply(GetRotationV(),
+		XMQuaternionMultiply(GetLocalRotationV(),
 			DirectX::XMQuaternionRotationAxis(vector, XMConvertToRadians(angle)));
-	SetRotation(newRotation);
+	SetLocalRotation(newRotation);
 }
 
 XMFLOAT3 SpatialComponent::GetUpVector()

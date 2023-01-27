@@ -176,7 +176,7 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Ac
 	assert(rigidActor);
 	rigidActor->userData = actor;
 
-	XMVECTOR extentsVector = XMLoadFloat3(&mesh->boundingBox.Extents) * mesh->GetScaleV();
+	XMVECTOR extentsVector = XMLoadFloat3(&mesh->boundingBox.Extents) * mesh->GetLocalScaleV();
 	XMFLOAT3 extents;
 	XMStoreFloat3(&extents, extentsVector);
 	NormaliseExtents(extents.x, extents.y, extents.z);
@@ -209,7 +209,7 @@ void PhysicsSystem::CreateCharacterController(CharacterControllerComponent* char
 	desc.upDirection = PxVec3(0.f, 1.f, 0.f);
 	desc.material = material;
 
-	auto pos = characterControllerComponent->GetPosition();
+	auto pos = characterControllerComponent->GetLocalPosition();
 	desc.position.x = pos.x;
 	desc.position.y = pos.y;
 	desc.position.z = pos.z;

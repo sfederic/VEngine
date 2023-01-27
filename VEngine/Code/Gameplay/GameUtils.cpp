@@ -33,7 +33,7 @@ namespace GameUtils
 	{
 		auto spriteSheet = SpriteSheet::system.Add("SpriteSheet", nullptr, SpriteSheet(), false);
 
-		spriteSheet->SetPosition(position);
+		spriteSheet->SetLocalPosition(position);
 		spriteSheet->textureData.filename = textureFilename;
 		spriteSheet->loopAnimation = loop;
 		spriteSheet->numSheetRows = numRows;

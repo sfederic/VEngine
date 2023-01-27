@@ -33,7 +33,7 @@ Player::Player()
 
 void Player::Create()
 {
-	camera->SetPosition(4.f, 3.0f, -8.f);
+	camera->SetLocalPosition(4.f, 3.0f, -8.f);
 }
 
 void Player::Start()
@@ -253,7 +253,7 @@ void Player::Shoot()
 						GameUtils::SpawnSpriteSheet("Sprites/explosion.png", mesh->GetWorldPositionV(), false, 4, 4);
 
 						auto pointLight = PointLightComponent::system.Add("PlayerShootEffectPointLight");
-						pointLight->SetPosition(hitResult.hitPos);
+						pointLight->SetLocalPosition(hitResult.hitPos);
 						Timer::SetTimer(0.5f, std::bind(&Component::Remove, pointLight));
 
 						mesh->Remove();
@@ -345,7 +345,7 @@ void Player::ShieldLogic(float deltaTime)
 		shieldCountdownTimer -= deltaTime;
 
 		shieldMesh->SetActive(true);
-		shieldMesh->AddRotation(GetRightVectorV(), 500.f * deltaTime);
+		shieldMesh->AddLocalRotation(GetRightVectorV(), 500.f * deltaTime);
 	}
 	else
 	{

@@ -12,7 +12,7 @@ CameraComponent::CameraComponent()
 
 CameraComponent::CameraComponent(XMFLOAT3 startPos)
 {
-	SetPosition(startPos);
+	SetLocalPosition(startPos);
 	UpdateTransform();
 }
 
@@ -52,8 +52,8 @@ void CameraComponent::Pitch(float angle)
 {
 	//The RightFromQuat is important here as GetRightVector() grabs the global directional vector, 
 	//meaning the wall crawling mechanic would mess up FPS controls.
-	const XMMATRIX r = XMMatrixRotationAxis(VMath::RightFromQuat(GetRotationV()), angle);
-	XMVECTOR q = XMQuaternionMultiply(GetRotationV(), XMQuaternionRotationMatrix(r));
+	const XMMATRIX r = XMMatrixRotationAxis(VMath::RightFromQuat(GetLocalRotationV()), angle);
+	XMVECTOR q = XMQuaternionMultiply(GetLocalRotationV(), XMQuaternionRotationMatrix(r));
 
 	float roll = 0.f, pitch = 0.f, yaw = 0.f;
 	VMath::PitchYawRollFromQuaternion(roll, pitch, yaw, q);
@@ -63,22 +63,22 @@ void CameraComponent::Pitch(float angle)
 		return; 
 	}
 
-	SetRotation(q);
+	SetLocalRotation(q);
 }
 
 void CameraComponent::RotateY(float angle)
 {
 	const XMMATRIX r = XMMatrixRotationY(angle);
-	const XMVECTOR q = XMQuaternionMultiply(GetRotationV(), XMQuaternionRotationMatrix(r));
-	SetRotation(q);
+	const XMVECTOR q = XMQuaternionMultiply(GetLocalRotationV(), XMQuaternionRotationMatrix(r));
+	SetLocalRotation(q);
 }
 
 void CameraComponent::Move(float d, XMVECTOR axis)
 {
 	const XMVECTOR s = XMVectorReplicate(d);
-	XMVECTOR position = GetPositionV();
+	XMVECTOR position = GetLocalPositionV();
 	position = XMVectorMultiplyAdd(s, axis, position);
-	SetPosition(position);
+	SetLocalPosition(position);
 }
 
 void CameraComponent::ZoomTo(Actor* actor)
@@ -89,7 +89,7 @@ void CameraComponent::ZoomTo(Actor* actor)
 	XMVECTOR actorPos = actor->GetPositionV();
 	XMVECTOR zoomPos = actorPos - (forward * 5.f);
 
-	SetPosition(zoomPos);
+	SetLocalPosition(zoomPos);
 }
 
 //Only works with translation for now.

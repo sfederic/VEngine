@@ -93,7 +93,7 @@ XMMATRIX ShadowMap::GetLightPerspectiveMatrix()
 	}
 
 	auto light = DirectionalLightComponent::system.GetFirstComponent();
-	XMFLOAT3 center = light->GetPosition();
+	XMFLOAT3 center = light->GetLocalPosition();
 
 	float shadowOrthoSize = light->shadowMapOrthoSize;
 
@@ -117,8 +117,8 @@ XMMATRIX ShadowMap::GetLightViewMatrix()
 
 	auto light = DirectionalLightComponent::system.GetFirstComponent();
 
-	XMVECTOR lookAt = light->GetPositionV() + light->GetForwardVectorV();
-	XMVECTOR lightPos = light->GetPositionV();
+	XMVECTOR lookAt = light->GetLocalPositionV() + light->GetForwardVectorV();
+	XMVECTOR lightPos = light->GetLocalPositionV();
 
 	return XMMatrixLookAtLH(lightPos, lookAt, VMath::GlobalUpVector());
 }

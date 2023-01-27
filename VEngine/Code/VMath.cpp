@@ -304,13 +304,13 @@ namespace VMath
         offset.m128_f32[3] = 1.0f;
 
         //Scale
-        XMVECTOR spatialComponentScale = sc->GetScaleV();
+        XMVECTOR spatialComponentScale = sc->GetLocalScaleV();
         XMVECTOR extents = XMLoadFloat3(&sc->boundingBox.Extents);
         XMVECTOR scale = extents * spatialComponentScale;
         scale.m128_f32[3] = 1.0f;
 
         //Rotation
-        XMVECTOR orientation = sc->GetRotationV();
+        XMVECTOR orientation = sc->GetLocalRotationV();
 
         BoundingOrientedBox orientedBox{};
         XMStoreFloat3(&orientedBox.Center, offset);

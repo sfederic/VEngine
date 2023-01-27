@@ -77,7 +77,7 @@ void EditorCamera::Tick(float deltaTime)
 XMMATRIX EditorCamera::GetViewMatrix()
 {
 	XMVECTOR forward = GetForwardVectorV();
-	XMVECTOR position = GetPositionV();
+	XMVECTOR position = GetLocalPositionV();
 
 	XMMATRIX view = XMMatrixIdentity();
 
@@ -110,7 +110,7 @@ void EditorCamera::MouseMove(int x, int y)
 
 		arcBallMovementOn = true;
 
-		auto pos = GetPositionV();
+		auto pos = GetLocalPositionV();
 
 		Actor* pickedActor = WorldEditor::GetPickedActor();
 		if (pickedActor == nullptr) return;
@@ -127,7 +127,7 @@ void EditorCamera::MouseMove(int x, int y)
 		yRot = XMMatrixRotationY(dx);
 		pos = XMVector3Transform(pos - pivot, yRot) + pivot;
 
-		SetPosition(pos);
+		SetLocalPosition(pos);
 	}
 	else if (Input::GetMouseRightDown())
 	{
