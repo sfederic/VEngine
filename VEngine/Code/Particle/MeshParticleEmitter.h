@@ -4,6 +4,7 @@
 #include "Actors/ActorSystem.h"
 #include "Render/ShaderItem.h"
 #include "ParticleData.h"
+#include "Particle.h"
 
 class InstanceMeshComponent;
 
@@ -19,7 +20,7 @@ public:
 
 private:
 	ParticleData particleData;
-
+	std::vector<Particle> particles;
 	InstanceMeshComponent* instanceMesh = nullptr;
 
 	float spawnTimer = 0.f;

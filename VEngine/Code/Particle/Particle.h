@@ -10,7 +10,6 @@ struct Particle
 	float angle = 0.f;
 	float rotateSpeed = 0.f;
 	float moveSpeed = 0.f;
-	int particleIndex = 0;
 
 	void AddVelocity(float deltaTime)
 	{

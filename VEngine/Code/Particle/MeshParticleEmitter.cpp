@@ -23,8 +23,6 @@ void MeshParticleEmitter::Tick(float deltaTime)
 		const XMMATRIX worldMatrix = this->GetWorldMatrix();
 		XMStoreFloat3(&particle.transform.position, worldMatrix.r[3]);
 
-		instanceMesh->instanceData[particles.size()].world = worldMatrix;
-
 		//Set position from radius
 		particle.transform.position.x += VMath::RandomRange(particleData.spawnRadius.x, particleData.spawnRadius.y);
 		particle.transform.position.y += VMath::RandomRange(particleData.spawnRadius.x, particleData.spawnRadius.y);
@@ -45,7 +43,8 @@ void MeshParticleEmitter::Tick(float deltaTime)
 		particle.direction = directionRange;
 
 		particles.emplace_back(particle);
-		currentMeshIndex++;
+
+		instanceMesh->instanceData[particles.size() - 1].world = worldMatrix;
 
 		spawnTimer = 0.f;
 	}
@@ -57,21 +56,23 @@ void MeshParticleEmitter::Tick(float deltaTime)
 		particle.lifetime += deltaTime;
 
 		//Get random range between lifetimes
-		float lifetimeRange = VMath::RandomRange(particleData.lifetime.x, particleData.lifetime.y);
+		const float lifetimeRange = VMath::RandomRange(particleData.lifetime.x, particleData.lifetime.y);
 
 		if (particle.lifetime > lifetimeRange)
 		{
 			std::swap(particle, particles.back());
 			particles.pop_back();
-			currentMeshIndex--;
 
-			instanceMesh->instanceData[i].world = XMMatrixIdentity();
+			instanceMesh->instanceData[i].world = VMath::ZeroMatrix();
 		}
 		else
 		{
-			instanceMesh->instanceData[currentMeshIndex].world.r[3] += XMLoadFloat3(&particle.direction) * deltaTime * particle.moveSpeed;
+			instanceMesh->instanceData[i].world.r[0].m128_f32[0] = 1.f;
+			instanceMesh->instanceData[i].world.r[1].m128_f32[1] = 1.f;
+			instanceMesh->instanceData[i].world.r[2].m128_f32[2] = 1.f;
 
 			particle.AddVelocity(deltaTime);
+			instanceMesh->instanceData[i].world.r[3] += XMLoadFloat3(&particle.direction) * (deltaTime * particle.moveSpeed);
 		}
 	}
 }
