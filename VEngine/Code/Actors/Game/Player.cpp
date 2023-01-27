@@ -33,7 +33,7 @@ Player::Player()
 
 void Player::Create()
 {
-	camera->SetPosition(2.f, 1.5f, -4.f);
+	camera->SetPosition(4.f, 3.0f, -8.f);
 }
 
 void Player::Start()
