@@ -50,15 +50,22 @@ void MeshParticleEmitter::Tick(float deltaTime)
 			std::swap(particle, particles.back());
 			particles.pop_back();
 		}
-		else
-		{
-			instanceMesh->instanceData[i].world.r[0].m128_f32[0] = 1.f;
-			instanceMesh->instanceData[i].world.r[1].m128_f32[1] = 1.f;
-			instanceMesh->instanceData[i].world.r[2].m128_f32[2] = 1.f;
 
-			particle.AddVelocity(deltaTime);
-			instanceMesh->instanceData[i].world.r[3] += XMLoadFloat3(&particle.direction) * (deltaTime * particle.moveSpeed);
-		}
+		//Reset scale back to 1 so mesh is visible again after ZeroMatrix() calls
+		instanceMesh->instanceData[i].world.r[0].m128_f32[0] = 1.f;
+		instanceMesh->instanceData[i].world.r[1].m128_f32[1] = 1.f;
+		instanceMesh->instanceData[i].world.r[2].m128_f32[2] = 1.f;
+
+		XMVECTOR scale = XMLoadFloat3(&particle.transform.scale);
+		XMVECTOR origin = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+		XMVECTOR translation = instanceMesh->instanceData[i].world.r[3] + XMLoadFloat3(&particle.direction) * (deltaTime * particle.moveSpeed);
+		XMMATRIX T = XMMatrixAffineTransformation2D(scale, origin, particle.angle, translation);
+		instanceMesh->instanceData[i].world = T;
+
+		particle.angle += particle.rotateSpeed * deltaTime;
+
+		particle.AddVelocity(deltaTime);
+		instanceMesh->instanceData[i].world.r[3] += XMLoadFloat3(&particle.direction) * (deltaTime * particle.moveSpeed);
 	}
 }
 
