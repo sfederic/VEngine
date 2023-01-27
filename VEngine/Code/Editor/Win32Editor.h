@@ -15,7 +15,7 @@ struct Win32Editor : IEditor
 	virtual void RefreshAssetList() override;
 	virtual void ClearProperties() override;
 	virtual void SelectActorInWorldList() override;
-	virtual void SetPlayButtonText(std::string text) override;
+	virtual void SetPlayButtonIcon() override;
 	void SetupWindow();
 	void HandleMessages();
 };

@@ -19,17 +19,26 @@ ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 	hLayout->setAlignment(Qt::AlignHCenter);
 
 	//gameplay buttons
-	playButton = new QPushButton("Play");
+	playButton = new QPushButton(this);
+	QPixmap playButtonIcon("Icons/start_play_icon.png");
+	playButton->setIcon(playButtonIcon);
+	playButton->setIconSize(QSize(30, 30));
 	playButton->setToolTip("Ctrl+P");
 	connect(playButton, &QPushButton::clicked, this, &ToolbarDock::StartPlay);
 	hLayout->addWidget(playButton);
 
-	resetWorldButton = new QPushButton("Reset");
+	resetWorldButton = new QPushButton(this);
+	QPixmap resetWorldIcon("Icons/reset_icon.png");
+	resetWorldButton->setIcon(resetWorldIcon);
+	resetWorldButton->setIconSize(QSize(30, 30));
 	resetWorldButton->setToolTip("Ctrl+R");
 	connect(resetWorldButton, &QPushButton::clicked, this, &ToolbarDock::ResetWorldState);
 	hLayout->addWidget(resetWorldButton);
 
-	saveWorldButton = new QPushButton("Save");
+	saveWorldButton = new QPushButton(this);
+	QPixmap saveWorldIcon("Icons/save_icon.png");
+	saveWorldButton->setIcon(saveWorldIcon);
+	saveWorldButton->setIconSize(QSize(30, 30));
 	saveWorldButton->setToolTip("Ctrl+S");
 	connect(saveWorldButton, &QPushButton::clicked, this, &ToolbarDock::SaveWorld);
 	hLayout->addWidget(saveWorldButton);
@@ -102,18 +111,29 @@ void ToolbarDock::SetTransformDisplay(std::string currentTransformSettingName)
 	
 }
 
+void ToolbarDock::SetPlayButtonIcon()
+{
+	QString playIconFilename;
+
+	if (Core::gameplayOn)
+	{
+		playIconFilename = "Icons/pause_icon.png";
+	}
+	else
+	{
+		playIconFilename = "Icons/start_play_icon.png";
+	}
+
+	QPixmap icon(playIconFilename);
+	playButton->setIcon(icon);
+	playButton->setIconSize(QSize(30, 30));
+}
+
 void ToolbarDock::StartPlay()
 {
 	Core::SetGameplayState();
 
-	if (Core::gameplayOn)
-	{
-		playButton->setText("Stop");
-	}
-	else
-	{
-		playButton->setText("Play");
-	}
+	SetPlayButtonIcon();
 }
 
 void ToolbarDock::ResetWorldState()

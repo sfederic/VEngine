@@ -195,9 +195,9 @@ void QtEditor::SelectActorInWorldList()
     mainWindow->worldDock->SelectActorInList();
 }
 
-void QtEditor::SetPlayButtonText(std::string text)
+void QtEditor::SetPlayButtonIcon()
 {
-    mainWindow->toolbarDock->playButton->setText(QString::fromStdString(text));
+    mainWindow->toolbarDock->SetPlayButtonIcon();
 }
 
 void QtEditor::SetEditorTitle(const std::string title)

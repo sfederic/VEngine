@@ -28,6 +28,7 @@ struct ToolbarDock : public QDockWidget
 
 	ToolbarDock();
 	void SetTransformDisplay(std::string currentTransformSettingName);
+	void SetPlayButtonIcon();
 
 private:
 	void StartPlay();
