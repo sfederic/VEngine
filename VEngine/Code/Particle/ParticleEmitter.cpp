@@ -9,11 +9,6 @@ ParticleEmitter::ParticleEmitter(std::string textureFilename, ShaderItem* shader
 	material = MaterialSystem::CreateMaterial(textureFilename, shaderItem);
 }
 
-void ParticleEmitter::CreateParticle(Particle particle)
-{
-	particles.emplace_back(particle);
-}
-
 void ParticleEmitter::Tick(float deltaTime)
 {
 	spawnTimer += deltaTime;
@@ -42,7 +37,7 @@ void ParticleEmitter::Tick(float deltaTime)
 		float rotateSpeedRange = VMath::RandomRange(particleData.rotateSpeed.x, particleData.rotateSpeed.y);
 		particle.rotateSpeed = rotateSpeedRange;
 
-		CreateParticle(particle);
+		particles.emplace_back(particle);
 
 		spawnTimer = 0.f;
 	}
