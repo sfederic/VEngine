@@ -37,6 +37,9 @@ void ParticleEmitter::Tick(float deltaTime)
 		float rotateSpeedRange = VMath::RandomRange(particleData.rotateSpeed.x, particleData.rotateSpeed.y);
 		particle.rotateSpeed = rotateSpeedRange;
 
+		const XMFLOAT3 directionRange = VMath::RandomRangeFloat3(particleData.minDirection, particleData.minDirection);
+		particle.direction = directionRange;
+
 		particles.emplace_back(particle);
 
 		spawnTimer = 0.f;
@@ -55,8 +58,7 @@ void ParticleEmitter::Tick(float deltaTime)
 			particles.pop_back();
 		}
 
-		XMFLOAT3 directionRange = VMath::RandomRangeFloat3(particleData.minDirection, particleData.minDirection);
-		particle.AddVelocity(directionRange, deltaTime);
+		particle.AddVelocity(deltaTime);
 	}
 
 	emitterLifetimeTimer += deltaTime;
