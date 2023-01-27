@@ -55,7 +55,8 @@ void ParticleEmitter::Tick(float deltaTime)
 			particles.pop_back();
 		}
 
-		particle.AddVelocity(particleData.direction, deltaTime);
+		XMFLOAT3 directionRange = VMath::RandomRangeFloat3(particleData.minDirection, particleData.minDirection);
+		particle.AddVelocity(directionRange, deltaTime);
 	}
 
 	emitterLifetimeTimer += deltaTime;
@@ -79,7 +80,8 @@ Properties ParticleEmitter::GetProps()
 	props.Add("Spawn Rate", &particleData.spawnRate);
 	props.Add("Spawn Radius", &particleData.spawnRadius);
 	props.Add("Lifetime", &particleData.lifetime);
-	props.Add("Direction", &particleData.direction);
+	props.Add("Min Direction", &particleData.minDirection);
+	props.Add("Max Direction", &particleData.maxDirection);
 	props.Add("Rotate", &particleData.rotation);
 	props.Add("Rotate Speed", &particleData.rotateSpeed);
 
