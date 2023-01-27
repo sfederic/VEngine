@@ -47,9 +47,8 @@ void ParticleEmitter::Tick(float deltaTime)
 		spawnTimer = 0.f;
 	}
 
-	for (int i = 0; i < particles.size(); i++)
+	for (auto& particle : particles)
 	{
-		Particle& particle = particles[i];
 		particle.lifetime += deltaTime;
 
 		//Get random range between lifetimes
