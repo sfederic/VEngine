@@ -65,6 +65,10 @@ void MeshParticleEmitter::Tick(float deltaTime)
 Properties MeshParticleEmitter::GetProps()
 {
 	auto props = __super::GetProps();
+
+	auto particleDataProps = particleData.GetProps();
+	props.Merge(particleDataProps);
+
 	props.title = "MeshParticleEmitter";
 	return props;
 }

@@ -14,7 +14,7 @@ public:
 	COMPONENT_SYSTEM(ParticleEmitter)
 
 	ParticleEmitter(std::string textureFilename = "test.png", ShaderItem* shaderItem = ShaderItems::DefaultClip);
-	void CreateParticle(Particle particle);
+
 	virtual void Tick(float deltaTime) override;
 	virtual void Create() override;
 	virtual Properties GetProps() override;

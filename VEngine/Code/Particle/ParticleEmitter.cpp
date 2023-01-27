@@ -59,19 +59,14 @@ void ParticleEmitter::Create()
 Properties ParticleEmitter::GetProps()
 {
 	auto props = __super::GetProps();
-	props.title = "ParticleEmitter";
 
-	props.Add("Move Speed", &particleData.moveSpeed);
-	props.Add("Spawn Rate", &particleData.spawnRate);
-	props.Add("Spawn Radius", &particleData.spawnRadius);
-	props.Add("Lifetime", &particleData.lifetime);
-	props.Add("Min Direction", &particleData.minDirection);
-	props.Add("Max Direction", &particleData.maxDirection);
-	props.Add("Rotate", &particleData.rotation);
-	props.Add("Rotate Speed", &particleData.rotateSpeed);
+	auto particleDataProps = particleData.GetProps();
+	props.Merge(particleDataProps);
 
 	auto materialProps = material->GetProps();
 	props.Merge(materialProps);
+
+	props.title = "ParticleEmitter";
 
 	return props;
 }

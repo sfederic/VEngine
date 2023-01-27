@@ -1,6 +1,7 @@
 #pragma once
 
 #include <DirectXMath.h>
+#include "Properties.h"
 
 using namespace DirectX;
 
@@ -16,4 +17,18 @@ struct ParticleData
 	XMFLOAT2 spawnRadius = XMFLOAT2(0.f, 1.f);
 	XMFLOAT2 rotation = XMFLOAT2(0.f, 0.f);
 	XMFLOAT2 rotateSpeed = XMFLOAT2(0.f, 0.f);
+
+	Properties GetProps()
+	{
+		Properties props("ParticleData");
+		props.Add("P_MinDirection", &minDirection);
+		props.Add("P_MaxDirection", &maxDirection);
+		props.Add("P_MoveSpeed", &moveSpeed);
+		props.Add("P_Lifetime", &lifetime);
+		props.Add("P_SpawnRate", &spawnRate);
+		props.Add("P_SpawnRadius", &spawnRadius);
+		props.Add("P_Rotation", &rotation);
+		props.Add("P_RotateSpeed", &rotateSpeed);
+		return props;
+	}
 };
