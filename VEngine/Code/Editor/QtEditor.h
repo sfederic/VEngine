@@ -29,7 +29,7 @@ struct QtEditor : IEditor, QObject
 	virtual void RefreshAssetList() override;
 	virtual void ClearProperties() override;
 	virtual void SelectActorInWorldList() override;
-	virtual void SetPlayButtonIcon() override;
+	virtual void SetPlayButtonText() override;
 	virtual void SetEditorTitle(const std::string title) override;
 	virtual void SetCurrentTransformMode(const std::string transformMode) override;
 	void SetEditorFont();

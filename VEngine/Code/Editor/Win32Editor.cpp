@@ -118,6 +118,6 @@ void Win32Editor::SelectActorInWorldList()
 {
 }
 
-void Win32Editor::SetPlayButtonIcon()
+void Win32Editor::SetPlayButtonText()
 {
 }
