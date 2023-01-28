@@ -174,6 +174,7 @@ Properties Actor::GetProps()
 	props.Add("UID", &uid).hide = true;
 	props.Add("Name", &name).hide = true;
 	props.Add(" Enabled", &active);
+	props.Add(" Visible", &visible);
 
 	return props;
 }

@@ -37,7 +37,7 @@ private:
 	int actorSystemIndex = -1;
 
 	bool active = true;
-
+	bool visible = true;
 	bool tickEnabled = true;
 
 public:
@@ -116,7 +116,10 @@ public:
 	//Set Actor and all components as active/inactive. Active state sets actor components as equivalent.
 	void SetActive(bool newActive);
 
-	inline bool IsActive() { return active; }
+	bool IsActive() { return active; }
+
+	void SetVisibility(bool visibility) { visible = visibility; }
+	bool IsVisible() { return visible; }
 
 	void SetTickEnabled(const bool enabled);
 	inline bool IsTickEnabled() { return tickEnabled; }
