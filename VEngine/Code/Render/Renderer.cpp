@@ -1422,8 +1422,6 @@ void Renderer::RenderParticleEmitters()
 		for (auto& particle : emitter->particles)
 		{
 			//Add rotation to particle (keep in mind that rotate speed needs to match angle's +/- value)
-			particle.angle += particle.rotateSpeed * Core::GetDeltaTime();
-
 			auto particleRotation = 
 				VMath::LookAtRotation(activeCamera->GetWorldPositionV(), XMLoadFloat3(&particle.transform.position));
 			XMStoreFloat4(&particle.transform.rotation, particleRotation);

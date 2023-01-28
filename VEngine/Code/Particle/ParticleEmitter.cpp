@@ -41,6 +41,7 @@ void ParticleEmitter::Tick(float deltaTime)
 			particles.pop_back();
 		}
 
+		particle.angle += particle.rotateSpeed * deltaTime;
 		particle.AddVelocity(deltaTime);
 	}
 
