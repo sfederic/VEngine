@@ -46,46 +46,20 @@ void AssetSystem::BuildAllVMeshDataFromFBXImport()
 void AssetSystem::BuildAllAnimationFilesFromFBXImport()
 {
 	FILE* file = nullptr;
-
 	uint64_t numberOfAnimationFilesBuilt = 0;
+	std::unordered_set<std::string> fbxAnimFilenames;
 
 	auto startTime = Profile::QuickStart();
 
-	std::unordered_map<std::string, Animation> animationMap;
-
-	//Import all animated FBX files
 	for (const auto& entry : std::filesystem::directory_iterator("AnimationFBXFiles/"))
 	{
 		const std::string fbxFilename = entry.path().filename().string();
-		Animation anim = FBXLoader::ImportAsAnimation(fbxFilename);
-		animationMap.emplace(fbxFilename, anim);
+		fbxAnimFilenames.emplace(fbxFilename);
 	}
 
-	for (const auto& [filename, animation] : animationMap)
+	for (const auto& filename : fbxAnimFilenames)
 	{
-		const std::string meshName = filename.substr(0, filename.find("."));
-		const std::string meshFilePath = AssetBaseFolders::anim + meshName + ".vanim";
-
-		fopen_s(&file, meshFilePath.c_str(), "wb");
-		assert(file);
-
-		AnimationAssetHeader header;
-		strcpy_s(header.name, sizeof(char) * Animation::ANIM_NAME_MAX, animation.name);
-		header.frameCount = animation.frames.size();
-		assert(fwrite(&header, sizeof(AnimationAssetHeader), 1, file));
-
-		for (auto& [jointIndex, animFrame] : animation.frames)
-		{
-			//Anim Frames
-			assert(fwrite(&jointIndex, sizeof(int), 1, file));
-
-			const size_t animFrameCount = animFrame.size();
-			assert(fwrite(&animFrameCount, sizeof(size_t), 1, file));
-			assert(fwrite(animFrame.data(), sizeof(AnimFrame), animFrameCount, file));
-		}
-
-		fclose(file);
-
+		AssetSystem::BuildSingleVAnimFromFBX(filename);
 		numberOfAnimationFilesBuilt++;
 	}
 
@@ -118,6 +92,34 @@ void AssetSystem::BuildSingleVMeshFromFBX(const std::string fbxFilename)
 
 	auto& joints = meshData.skeleton.joints;
 	fwrite(joints.data(), sizeof(Joint), joints.size(), file);
+
+	fclose(file);
+}
+
+void AssetSystem::BuildSingleVAnimFromFBX(const std::string filename)
+{
+	Animation animation = FBXLoader::ImportAsAnimation(filename);
+
+	const std::string meshName = filename.substr(0, filename.find("."));
+	const std::string meshFilePath = AssetBaseFolders::anim + meshName + ".vanim";
+
+	FILE* file = nullptr;
+	fopen_s(&file, meshFilePath.c_str(), "wb");
+	assert(file);
+
+	AnimationAssetHeader header;
+	strcpy_s(header.name, sizeof(char) * Animation::ANIM_NAME_MAX, animation.name);
+	header.frameCount = animation.frames.size();
+	assert(fwrite(&header, sizeof(AnimationAssetHeader), 1, file));
+
+	for (auto& [jointIndex, animFrame] : animation.frames)
+	{
+		assert(fwrite(&jointIndex, sizeof(int), 1, file));
+
+		const size_t animFrameCount = animFrame.size();
+		assert(fwrite(&animFrameCount, sizeof(size_t), 1, file));
+		assert(fwrite(animFrame.data(), sizeof(AnimFrame), animFrameCount, file));
+	}
 
 	fclose(file);
 }
