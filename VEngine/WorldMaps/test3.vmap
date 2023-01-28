@@ -10,12 +10,28 @@ MeshParticleEmitter
 1 1 1
 Name
 MeshParticleEmitter0
+P_Lifetime
+1 1
+P_MaxDirection
+1 1 1
+P_MinDirection
+-1 -1 -1
+P_MoveSpeed
+1 1
+P_RotateSpeed
+0 0
+P_Rotation
+0 0
+P_SpawnRadius
+0 1
+P_SpawnRate
+0.3 0.3
 UID
-2494073217
+3007592560
 next
 InstanceMeshComponent
 1
-2494073217
+3007592560
 Mesh
  Enabled
 1
@@ -27,8 +43,6 @@ Mesh
 1 1 1
 Casts Shadow
 1
-Grid Obstacle
-0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -58,12 +72,12 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-cube.vmesh
+bevel_rock.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-3690441520
+1014852357
 next
 end
