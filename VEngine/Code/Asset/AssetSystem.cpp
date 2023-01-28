@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "AssetSystem.h"
 #include <cstdio>
+#include <unordered_set>
 #include <filesystem>
 #include "FBXLoader.h"
 #include "MeshAssetHeader.h"
@@ -21,38 +22,18 @@ void AssetSystem::BuildAllVMeshDataFromFBXImport()
 
 	auto startTime = Profile::QuickStart();
 
-	std::unordered_map<std::string, MeshData> meshDataMap;
+	std::unordered_set<std::string> fbxFilenames;
 
 	//Import all FBX files
 	for (const auto& entry : std::filesystem::directory_iterator("FBXFiles/"))
 	{
 		const std::string fbxFilename = entry.path().filename().string();
-		meshDataMap.emplace(fbxFilename, MeshData());
-		FBXLoader::ImportAsMesh(fbxFilename, meshDataMap.find(fbxFilename)->second);
+		fbxFilenames.emplace(fbxFilename);
 	}
 
-	for (auto& [filename, meshData] : meshDataMap)
+	for (auto& filename : fbxFilenames)
 	{
-		MeshAssetHeader header;
-		header.sourceMeshFormat = SourceMeshFormat::FBX;
-		header.vertexCount = meshData.vertices.size();
-		header.boneCount = meshData.skeleton.GetNumJoints();
-
-		const std::string meshName = filename.substr(0, filename.find("."));
-		const std::string meshFilePath = AssetBaseFolders::mesh + meshName + ".vmesh";
-
-		fopen_s(&file, meshFilePath.c_str(), "wb");
-		assert(file);
-
-		assert(fwrite(&header, sizeof(MeshAssetHeader), 1, file));
-		assert(fwrite(meshData.vertices.data(), sizeof(Vertex), meshData.vertices.size(), file));
-		assert(fwrite(&meshData.boudingBox, sizeof(DirectX::BoundingBox), 1, file));
-
-		auto& joints = meshData.skeleton.joints;
-		fwrite(joints.data(), sizeof(Joint), joints.size(), file);
-
-		fclose(file);
-
+		AssetSystem::BuildSingleVMeshFromFBX(filename);
 		numberOfMeshFilesBuilt++;
 	}
 
