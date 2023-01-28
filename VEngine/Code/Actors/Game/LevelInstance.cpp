@@ -5,6 +5,7 @@
 LevelInstance::LevelInstance()
 {
     boxTrigger = CreateComponent(BoxTriggerComponent(), "BoxTrigger");
+    boxTrigger->SetVisibility(false);
     rootComponent = boxTrigger;
 }
 
