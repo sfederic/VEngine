@@ -1,36 +1,21 @@
 #include "vpch.h"
 #include "LevelInstance.h"
+#include "Components/BoxTriggerComponent.h"
 
 LevelInstance::LevelInstance()
 {
-    SetEmptyRootComponent();
+    boxTrigger = CreateComponent(BoxTriggerComponent(), "BoxTrigger");
+    rootComponent = boxTrigger;
 }
 
 Properties LevelInstance::GetProps()
 {
     auto props = __super::GetProps();
-    props.Add("Level Size", &levelSize);
+	props.title = "LevelInstance";
     return props;
 }
 
-bool LevelInstance::CheckIfPointInsideLevelSize(XMVECTOR point)
+bool LevelInstance::CheckIfPointInsideLevelBounds(XMVECTOR point)
 {
-	XMFLOAT3 pos;
-	XMStoreFloat3(&pos, point);
-
-	//The '0.1f's here are just a small offset to work with to handle floating point accuracy.
-	if (pos.x < -0.1f || pos.x > levelSize.x + 0.1f)
-	{
-		return false;
-	}
-	else if (pos.y < -0.1f || pos.y > levelSize.y + 0.1f)
-	{
-		return false;
-	}
-	else if (pos.z < -0.1f || pos.z > levelSize.z + 0.1f)
-	{
-		return false;
-	}
-
-    return true;
+    return boxTrigger->Contains(point);
 }

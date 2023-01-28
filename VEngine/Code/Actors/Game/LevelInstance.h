@@ -3,6 +3,8 @@
 #include "../Actor.h"
 #include "../ActorSystem.h"
 
+struct BoxTriggerComponent;
+
 //Holds generic level data.
 class LevelInstance : public Actor
 {
@@ -12,9 +14,8 @@ public:
 	LevelInstance();
 	virtual Properties GetProps() override;
 
-	auto GetLevelSize() { return levelSize; }
-	bool CheckIfPointInsideLevelSize(XMVECTOR point);
+	bool CheckIfPointInsideLevelBounds(XMVECTOR point);
 
 private:
-	XMFLOAT3 levelSize = XMFLOAT3(5.f, 3.f, 5.f);
+	BoxTriggerComponent* boxTrigger = nullptr;
 };

@@ -222,7 +222,7 @@ bool Player::CheckMovementAndRotationHaveStopped()
 
 bool Player::CheckPlayerWithinLevelBounds()
 {
-	return LevelInstance::system.GetFirstActor()->CheckIfPointInsideLevelSize(nextPos);
+	return LevelInstance::system.GetFirstActor()->CheckIfPointInsideLevelBounds(nextPos);
 }
 
 bool Player::CheckForObstacle()

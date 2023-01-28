@@ -137,25 +137,6 @@ void World::CreateDefaultMapActors()
 	editor->UpdateWorldList();
 }
 
-void World::CreateNodeGrid()
-{
-	MeshActor::spawnMeshFilename = "node.vmesh";
-
-	auto levelSize = LevelInstance::system.GetFirstActor()->GetLevelSize();
-
-	for (int x = 0; x < levelSize.x; x++)
-	{
-		for (int z = 0; z < levelSize.z; z++)
-		{
-			MeshActor::system.Add()->SetPosition(XMFLOAT3((float)x, -0.5f, (float)z));
-		}
-	}
-
-	editor->UpdateWorldList();
-
-	MeshActor::spawnMeshFilename.clear();
-}
-
 std::vector<IActorSystem*> World::GetLayerActorSystems()
 {
 	std::vector<IActorSystem*> actorSystems;

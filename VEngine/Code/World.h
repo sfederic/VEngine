@@ -33,8 +33,6 @@ namespace World
 	//Create default starting actors for a map.
 	void CreateDefaultMapActors();
 
-	void CreateNodeGrid();
-
 	std::vector<IActorSystem*> GetLayerActorSystems();
 
 	void TickAllActorSystems(float deltaTime);

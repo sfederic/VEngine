@@ -128,10 +128,6 @@ void Console::Init()
 		std::make_pair([]() { World::CreateDefaultMapActors(); },
 		"Load in default actors for most worlds (Player, Grid, DirectionalLight, etc.)"));
 
-	executeMap.emplace(L"NODEGRID",
-		std::make_pair([]() { World::CreateNodeGrid(); },
-			"Create a grid of nodes to act as a floor base."));
-
 	executeMap.emplace(L"CUTSCENE",
 		std::make_pair([]() { debugMenu.cutsceneSequencerOpen = !debugMenu.cutsceneSequencerOpen; },
 		"Open Cutscene Sequencer."));
