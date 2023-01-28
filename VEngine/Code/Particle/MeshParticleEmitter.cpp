@@ -59,13 +59,19 @@ void MeshParticleEmitter::Tick(float deltaTime)
 		XMVECTOR scale = XMLoadFloat3(&particle.transform.scale);
 		XMVECTOR origin = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 		XMVECTOR translation = instanceMesh->instanceData[i].world.r[3] + XMLoadFloat3(&particle.direction) * (deltaTime * particle.moveSpeed);
-		XMMATRIX T = XMMatrixAffineTransformation2D(scale, origin, particle.angle, translation);
+
+		//@Todo: doesn't look great rotating on all 3 axis at once, but would need a property somewhere to denote
+		//which axis only to increment.
+		particle.yaw += particle.rotateSpeed * deltaTime;
+		particle.roll += particle.rotateSpeed * deltaTime;
+		particle.pitch += particle.rotateSpeed * deltaTime;
+		XMVECTOR rotation = XMQuaternionRotationRollPitchYaw(particle.pitch, particle.yaw, particle.roll);
+		XMMATRIX T = XMMatrixAffineTransformation(scale, origin, rotation, translation);
 		instanceMesh->instanceData[i].world = T;
 
 		particle.angle += particle.rotateSpeed * deltaTime;
 
 		particle.AddVelocity(deltaTime);
-		instanceMesh->instanceData[i].world.r[3] += XMLoadFloat3(&particle.direction) * (deltaTime * particle.moveSpeed);
 	}
 }
 

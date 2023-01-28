@@ -10,6 +10,9 @@ struct Particle
 	XMFLOAT3 direction = XMFLOAT3(0.f, 0.f, 0.f);
 	float lifetime = 0.f;
 	float angle = 0.f;
+	float yaw = 0.f;
+	float pitch = 0.f;
+	float roll = 0.f;
 	float rotateSpeed = 0.f;
 	float moveSpeed = 0.f;
 
