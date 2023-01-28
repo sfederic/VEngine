@@ -575,11 +575,17 @@ void DebugMenu::RenderProfileMenu()
 	{
 		ImGui::Begin("Profiler Time Frames");
 
-		for (auto& timeFrame : Profile::timeFrames)
+		//Sort TimeFrames in order of average time
+		std::map<float, std::string> averageTimes;
+		for (auto& [functionName, timeFrame] : Profile::timeFrames)
 		{
-			ImGui::Text(timeFrame.first.c_str());
-			double time = timeFrame.second.GetAverageTime();
-			ImGui::Text(std::to_string(time).c_str());
+			averageTimes.emplace(timeFrame.GetAverageTime(), functionName);
+		}
+
+		for (auto averageTimesIt = averageTimes.rbegin(); averageTimesIt != averageTimes.rend(); averageTimesIt++)
+		{
+			ImGui::Text(averageTimesIt->second.c_str());
+			ImGui::Text(std::to_string(averageTimesIt->first).c_str());
 		}
 
 		ImGui::End();
