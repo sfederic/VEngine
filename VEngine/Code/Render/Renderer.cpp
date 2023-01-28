@@ -396,7 +396,7 @@ void CreateRasterizerStates()
 	{
 		rastDesc.CullMode = D3D11_CULL_BACK;
 		rastDesc.FillMode = D3D11_FILL_SOLID;
-		rastDesc.DepthBias = 100000;
+		rastDesc.DepthBias = 17500;
 		rastDesc.DepthBiasClamp = 0.0f;
 		rastDesc.SlopeScaledDepthBias = 1.0f;
 		HR(device->CreateRasterizerState(&rastDesc, &rastStateShadow));
