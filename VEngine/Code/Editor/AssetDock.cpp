@@ -3,6 +3,7 @@
 #include <qmenu.h>
 #include <qfiledialog.h>
 #include <filesystem>
+#include <qpushbutton.h>
 #include <qdockwidget.h>
 #include <qfilesystemmodel.h>
 #include <qtreeview.h>
@@ -12,6 +13,7 @@
 #include <qlineedit.h>
 #include <QUrl>
 #include "FileSystem.h"
+#include "Asset/AssetSystem.h"
 #include "Actors/MeshActor.h"
 #include "WorldEditor.h"
 #include "PropertiesDock.h"
@@ -88,17 +90,24 @@ AssetDock::AssetDock() : QDockWidget("Assets")
     connect(assetIcons, &QListWidget::doubleClicked, this, &AssetDock::OpenAssetItemInDefaultProgram);
 
     QHBoxLayout* assetHBox = new QHBoxLayout();
-    assetHBox->addWidget(assetTreeView, Qt::AlignLeft);
-    assetHBox->addWidget(assetIcons, Qt::AlignRight);
-
+    assetHBox->addWidget(assetTreeView);
+    assetHBox->addWidget(assetIcons);
 
     //Setup search bar
     assetFilterLineEdit = new QLineEdit();
     assetFilterLineEdit->setPlaceholderText("Search Assets...");
     connect(assetFilterLineEdit, &QLineEdit::textChanged, this, &AssetDock::FilterAssets);
 
+    //Setup Import button
+    importButton = new QPushButton("Import", this);
+    connect(importButton, &QPushButton::clicked, this, &AssetDock::ImportAsset);
+
+    auto assetToolbarHBox = new QHBoxLayout();
+    assetToolbarHBox->addWidget(assetFilterLineEdit);
+    assetToolbarHBox->addWidget(importButton);
+
     auto vLayout = new QVBoxLayout();
-    vLayout->addWidget(assetFilterLineEdit);
+    vLayout->addLayout(assetToolbarHBox);
     vLayout->addLayout(assetHBox);
 
     QWidget* assetWidget = new QWidget();
@@ -446,4 +455,19 @@ void AssetDock::SerialiseMaterialPropsToFile(Material* material)
     s.Serialise(materialProps);
 
     Log("Material [%s] created.", materialFileName.toStdString().c_str());
+}
+
+void AssetDock::ImportAsset()
+{
+    QFileDialog dialog;
+    dialog.setFileMode(QFileDialog::AnyFile);
+
+    QString filePath = dialog.getOpenFileName(nullptr, "Import Asset", QString::fromStdString(AssetBaseFolders::fbxFiles));
+    if (!filePath.isEmpty())
+    {
+        std::string filename = QFileInfo(filePath).fileName().toStdString();
+        AssetSystem::BuildSingleVMeshFromFBX(filename);
+
+        Log("VMesh built from [%s].", filename.c_str());
+    }
 }

@@ -6,6 +6,7 @@
 struct QFileSystemModel;
 struct QTreeView;
 struct QListWidget;
+class QPushButton;
 struct QLineEdit;
 class Material;
 
@@ -16,6 +17,7 @@ private:
     QTreeView* assetTreeView;
     QListWidget* assetIcons;
     QLineEdit* assetFilterLineEdit;
+    QPushButton* importButton = nullptr;
 
 public:
     AssetDock();
@@ -43,4 +45,6 @@ private:
     void CreateNewMaterialFile();
     void CopyMaterialToMaterialFileFromSelectedActor();
     void SerialiseMaterialPropsToFile(Material* material);
+
+    void ImportAsset();
 };

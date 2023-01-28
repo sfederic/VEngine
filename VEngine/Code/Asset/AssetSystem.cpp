@@ -114,6 +114,33 @@ void AssetSystem::BuildAllAnimationFilesFromFBXImport()
 		numberOfAnimationFilesBuilt, elapsedTime);
 }
 
+void AssetSystem::BuildSingleVMeshFromFBX(const std::string fbxFilename)
+{
+	MeshData meshData;
+	FBXLoader::ImportAsMesh(fbxFilename, meshData);
+
+	MeshAssetHeader header;
+	header.sourceMeshFormat = SourceMeshFormat::FBX;
+	header.vertexCount = meshData.vertices.size();
+	header.boneCount = meshData.skeleton.GetNumJoints();
+
+	const std::string meshName = fbxFilename.substr(0, fbxFilename.find("."));
+	const std::string meshFilePath = AssetBaseFolders::mesh + meshName + ".vmesh";
+
+	FILE* file = nullptr;
+	fopen_s(&file, meshFilePath.c_str(), "wb");
+	assert(file);
+
+	assert(fwrite(&header, sizeof(MeshAssetHeader), 1, file));
+	assert(fwrite(meshData.vertices.data(), sizeof(Vertex), meshData.vertices.size(), file));
+	assert(fwrite(&meshData.boudingBox, sizeof(DirectX::BoundingBox), 1, file));
+
+	auto& joints = meshData.skeleton.joints;
+	fwrite(joints.data(), sizeof(Joint), joints.size(), file);
+
+	fclose(file);
+}
+
 MeshDataProxy AssetSystem::ReadVMeshAssetFromFile(const std::string filename)
 {
 	std::string filepath = AssetBaseFolders::mesh + filename;
