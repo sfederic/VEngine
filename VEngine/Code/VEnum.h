@@ -11,10 +11,7 @@ private:
 	std::string value;
 
 public:
-	~VEnum() {}
-
 	std::string GetValue() { return value; }
-
 	void SetValue(const std::string newValue);
 	void Add(const std::string name);
 	std::vector<std::string> GetAllNames();
