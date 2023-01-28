@@ -604,7 +604,7 @@ void CheckSupportedFeatures()
 
 void RenderMeshForShadowPass(MeshComponent* mesh)
 {
-	if (!mesh->castsShadow || !mesh->IsActive())
+	if (!mesh->castsShadow || !mesh->IsVisible())
 	{
 		return;
 	}
@@ -657,7 +657,7 @@ void RenderShadowPass()
 	{
 		SkeletalMeshComponent* mesh = skeletalMesh.get();
 
-		if(!mesh->castsShadow || !mesh->IsActive())
+		if(!mesh->castsShadow || !mesh->IsVisible())
 		{
 			return;
 		}
@@ -821,7 +821,7 @@ void RenderMeshComponents()
 
 	for (auto mesh : MeshComponent::SortMeshComponentsByDistanceToCamera())
 	{
-		if (!mesh->IsActive()) { continue; }
+		if (!mesh->IsVisible()) { continue; }
 
 		SetRenderPipelineStates(mesh);
 
@@ -905,7 +905,7 @@ void Renderer::RenderLightProbeViews()
 
 			for (auto& mesh : MeshComponent::system.GetComponents())
 			{
-				if (!mesh->IsActive()) { continue; }
+				if (!mesh->IsVisible()) { continue; }
 
 				Material* material = mesh->material;
 
@@ -998,7 +998,7 @@ void RenderInstanceMeshComponents()
 
 	for (auto& instanceMesh : InstanceMeshComponent::system.GetComponents())
 	{
-		if (!instanceMesh->IsActive()) continue;
+		if (!instanceMesh->IsVisible()) continue;
 
 		SetRenderPipelineStates(instanceMesh.get());
 
@@ -1335,7 +1335,7 @@ void AnimateAndRenderSkeletalMeshes()
 	for (auto& skeletalMesh : SkeletalMeshComponent::system.GetComponents()) //@Todo: figure out transparency sort
 	{
 		//Render
-		if (!skeletalMesh->IsActive()) { continue; }
+		if (!skeletalMesh->IsVisible()) { continue; }
 
 		SetRenderPipelineStates(skeletalMesh.get());
 
@@ -1394,7 +1394,7 @@ void Renderer::RenderParticleEmitters()
 
 	for (auto& emitter : ParticleEmitter::system.GetComponents())
 	{
-		if (!emitter->IsActive())
+		if (!emitter->IsVisible())
 		{
 			continue;
 		}
