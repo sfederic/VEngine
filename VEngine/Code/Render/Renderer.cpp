@@ -1334,7 +1334,6 @@ void AnimateAndRenderSkeletalMeshes()
 
 	for (auto& skeletalMesh : SkeletalMeshComponent::system.GetComponents()) //@Todo: figure out transparency sort
 	{
-		//Render
 		if (!skeletalMesh->IsVisible()) { continue; }
 
 		SetRenderPipelineStates(skeletalMesh.get());
@@ -1352,9 +1351,6 @@ void AnimateAndRenderSkeletalMeshes()
 				context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
 				context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 
-				int skinningDataIndex = 0;
-				ShaderSkinningData& skinningData = skeletalMesh->shaderSkinningData;
-
 				if (!skeletalMesh->GetNextAnimationName().empty())
 				{
 					skeletalMesh->CrossFadeNextAnimation();
@@ -1365,6 +1361,7 @@ void AnimateAndRenderSkeletalMeshes()
 				}
 
 				//Update skinning constant buffers
+				ShaderSkinningData& skinningData = skeletalMesh->shaderSkinningData;
 				cbSkinningData->Map(&skinningData);
 				cbSkinningData->SetVS();
 			}
