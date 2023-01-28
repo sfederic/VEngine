@@ -56,6 +56,9 @@ public:
 	bool IsTickEnabled() { return tickEnabled; }
 	void SetTickEnabled(bool newTickState) { tickEnabled = newTickState; }
 
+	bool IsVisible() { return visible; }
+	void SetVisibility(bool isVisible) { visible = isVisible; }
+
 protected:
 	//Cleanup all the innards of the component.
 	virtual void Destroy() {}
@@ -70,5 +73,6 @@ private:
 	UID ownerUID = 0; //Keep as zero to denote component that doesn't have an owner.
 	int index = -1;
 	bool active = true;
+	bool visible = true;
 	bool tickEnabled = true;
 };
