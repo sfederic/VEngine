@@ -1091,6 +1091,11 @@ void RenderBounds()
 
 		for (auto& boxTrigger : BoxTriggerComponent::system.GetComponents())
 		{
+			if (!boxTrigger->IsVisible()) 
+			{
+				continue;
+			}
+
 			shaderMatrices.model = boxTrigger->GetWorldMatrix();
 
 			//Set to * 2.f because of extents
