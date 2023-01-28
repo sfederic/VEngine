@@ -112,7 +112,9 @@ void World::EndAllActors()
 
 void World::CreateDefaultMapActors()
 {
-	Player::system.Add();
+	auto player = Player::system.Add();
+	player->CreateAllComponents();
+	player->Create();
 
 	LevelInstance::system.Add();
 

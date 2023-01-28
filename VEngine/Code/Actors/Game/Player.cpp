@@ -26,14 +26,14 @@ Player::Player()
 	rootComponent->AddChild(camera);
 
 	//@Todo: shield boundingbox is too large
-	shieldMesh = CreateComponent(MeshComponent("ico_sphere.vmesh", "shield.png"), "ShieldMesh");
-	rootComponent->AddChild(shieldMesh);
-	shieldMesh->SetActive(false);
+	//shieldMesh = CreateComponent(MeshComponent("ico_sphere.vmesh", "shield.png"), "ShieldMesh");
+	//rootComponent->AddChild(shieldMesh);
+	//shieldMesh->SetActive(false);
 }
 
 void Player::Create()
 {
-	camera->SetLocalPosition(4.f, 3.0f, -8.f);
+	camera->SetLocalPosition(4.f, 3.f, -8.f);
 }
 
 void Player::Start()
@@ -66,7 +66,7 @@ void Player::Tick(float deltaTime)
 
 	Shoot();
 	BladeSwipe();
-	ShieldLogic(deltaTime);
+	//ShieldLogic(deltaTime);
 
 	Interact();
 
