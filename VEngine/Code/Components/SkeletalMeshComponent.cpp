@@ -150,13 +150,16 @@ void SkeletalMeshComponent::CrossFadeNextAnimation()
 	Animation& currentAnim = GetCurrentAnimation();
 	Animation& nextAnim = GetNextAnimation();
 
+	std::string name1 = currentAnim.name;
+	std::string name2 = nextAnim.name;
+
 	//If crossfade is set to same animation, skip entire fade
-	if (currentAnim.name == nextAnim.name)
+	if (name1 == name2)
 	{
 		blendFactor = 0.f;
 		currentAnimationName = nextAnimationName;
 		nextAnimationName.clear();
-		Log("Cross fade for %s animation skipped for being the same Animation", currentAnim.name);
+		Log("Cross fade for %s animation skipped for being the same Animation", name1);
 		return;
 	}
 
