@@ -17,7 +17,7 @@ private:
     QTreeView* assetTreeView;
     QListWidget* assetIcons;
     QLineEdit* assetFilterLineEdit;
-    QPushButton* importButton = nullptr;
+    QPushButton* importMeshButton = nullptr;
 
 public:
     AssetDock();

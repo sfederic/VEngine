@@ -99,12 +99,12 @@ AssetDock::AssetDock() : QDockWidget("Assets")
     connect(assetFilterLineEdit, &QLineEdit::textChanged, this, &AssetDock::FilterAssets);
 
     //Setup Import button
-    importButton = new QPushButton("Import", this);
-    connect(importButton, &QPushButton::clicked, this, &AssetDock::ImportAsset);
+    importMeshButton = new QPushButton("Import Mesh", this);
+    connect(importMeshButton, &QPushButton::clicked, this, &AssetDock::ImportAsset);
 
     auto assetToolbarHBox = new QHBoxLayout();
     assetToolbarHBox->addWidget(assetFilterLineEdit);
-    assetToolbarHBox->addWidget(importButton);
+    assetToolbarHBox->addWidget(importMeshButton);
 
     auto vLayout = new QVBoxLayout();
     vLayout->addLayout(assetToolbarHBox);
@@ -462,7 +462,7 @@ void AssetDock::ImportAsset()
     QFileDialog dialog;
     dialog.setFileMode(QFileDialog::AnyFile);
 
-    QString filePath = dialog.getOpenFileName(nullptr, "Import Asset", QString::fromStdString(AssetBaseFolders::fbxFiles));
+    QString filePath = dialog.getOpenFileName(nullptr, "Import Mesh", QString::fromStdString(AssetBaseFolders::fbxFiles));
     if (!filePath.isEmpty())
     {
         std::string filename = QFileInfo(filePath).fileName().toStdString();
