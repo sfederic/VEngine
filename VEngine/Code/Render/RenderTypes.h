@@ -15,7 +15,7 @@ class Material;
 
 struct Vertex
 {
-	XMFLOAT3 pos;
+	XMFLOAT3 pos = XMFLOAT3(0.f, 0.f, 0.f);
 	XMFLOAT3 normal;
 	XMFLOAT3 tangent;
 	XMFLOAT2 uv;

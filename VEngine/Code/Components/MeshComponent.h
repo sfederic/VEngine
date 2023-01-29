@@ -46,6 +46,8 @@ public:
 	virtual void Destroy() override;
 	virtual Properties GetProps();
 
+	void SplitMeshCreate();
+
 	//Material set functions
 	void SetRastState(const std::string newRastStateName);
 	void SetBlendState(const std::string newBlendState);

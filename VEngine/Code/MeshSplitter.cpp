@@ -3,11 +3,12 @@
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
 #include "Components/MeshComponent.h"
-#include "Render/RenderTypes.h"
 
 using namespace DirectX;
 
-void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh)
+void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
+	std::vector<Vertex>& mesh0Verts,
+	std::vector<Vertex>& mesh1Verts)
 {
 	//Testing plane values
 	XMVECTOR planeCenter = DirectX::XMVectorSet(0.f, 0.f, 0.f, 1.f);
@@ -129,5 +130,6 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh)
 		}
 	}
 
-	return;
+	mesh0Verts = newMesh0;
+	mesh1Verts = newMesh1;
 }

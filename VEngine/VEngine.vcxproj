@@ -248,6 +248,7 @@
     <ClCompile Include="Code\Components\SkeletalMeshComponent.cpp" />
     <ClCompile Include="Code\Particle\MeshParticleEmitter.cpp" />
     <ClCompile Include="Code\MeshSplitter.cpp" />
+    <ClCompile Include="Code\Actors\MeshSplitActor.cpp" />
     <ClInclude Include="Code\Actors\AnimCube.h" />
     <ClInclude Include="Code\Actors\Game\BasicEnemy.h" />
     <ClInclude Include="Code\Actors\Game\BacksideEnemy.h" />
@@ -500,6 +501,7 @@
     <ClInclude Include="Code\Components\SkeletalMeshComponent.h" />
     <ClInclude Include="Code\Particle\MeshParticleEmitter.h" />
     <ClInclude Include="Code\MeshSplitter.h" />
+    <ClInclude Include="Code\Actors\MeshSplitActor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

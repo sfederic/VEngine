@@ -127,6 +127,19 @@ Properties MeshComponent::GetProps()
 	return props;
 }
 
+void MeshComponent::SplitMeshCreate()
+{
+	//Set 'this' so mesh widgets can access this component.
+	meshComponentData.meshComponent = this;
+
+	//Material's create needs to be called here to deal with serialisation
+	material->Create();
+
+	auto buffer = new Buffer();
+	buffer->data = RenderUtils::CreateVertexBuffer(meshDataProxy);
+	pso.vertexBuffer = buffer;
+}
+
 void MeshComponent::SetRastState(const std::string newRastStateName)
 {
 	//If calling before Material::Create() is called, rastStateName is the one.
