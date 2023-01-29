@@ -14,7 +14,10 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh)
 	XMVECTOR planeNormal = DirectX::XMVectorSet(1.f, 0.f, 0.f, 1.f);
 	XMVECTOR plane = DirectX::XMPlaneFromPointNormal(planeCenter, planeNormal);
 
+	//Need this because certain previous vertices will be invalid after triangle intersects.
 	std::vector<Vertex> newVerts;
+	
+	std::vector<Triangle> newTris;
 
 	for (int i = 0; i < mesh.meshDataProxy.vertices->size() / 3; i++)
 	{
@@ -32,78 +35,99 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh)
 
 		PlaneIntersectionType intersectType = DirectX::TriangleTests::Intersects(p0, p1, p2, plane);
 
-		std::vector<XMVECTOR> newPoints;
-
 		if (intersectType == PlaneIntersectionType::INTERSECTING)
 		{
 			XMVECTOR line0 = DirectX::XMPlaneIntersectLine(plane, p0, p1);
 			XMVECTOR line1 = DirectX::XMPlaneIntersectLine(plane, p0, p2);
 			XMVECTOR line2 = DirectX::XMPlaneIntersectLine(plane, p1, p2);
 
+			std::vector<XMVECTOR> newPoints;
+
 			if (!DirectX::XMVectorIsNaN(line0).m128_f32[0]) newPoints.push_back(line0);
 			if (!DirectX::XMVectorIsNaN(line1).m128_f32[0]) newPoints.push_back(line1);
 			if (!DirectX::XMVectorIsNaN(line2).m128_f32[0]) newPoints.push_back(line2);
 
-			//sect1 with tri0 and tri2 are where vertices that's aren't 'hit', the NaN result.
-			//Seperate that side out when creating new triangles.
+			//line0 with tri0 and tri2 are where vertices that's aren't 'hit', the NaN result.
+			//Seperate that side out when creating new triangles. Every triangle split will generate 3 new tris.
 
-			Vertex newTri0[3]{};
-			Vertex newTri1[3]{};
-			Vertex newTri2[3]{};
+			Triangle newTri0{};
+			Triangle newTri1{};
+			Triangle newTri2{};
 
-			XMStoreFloat3(&newTri0[0].pos, p0);
-			XMStoreFloat3(&newTri0[1].pos, newPoints[0]);
-			XMStoreFloat3(&newTri0[2].pos, newPoints[1]);
+			XMStoreFloat3(&newTri0.v0.pos, p0);
+			XMStoreFloat3(&newTri0.v1.pos, newPoints[0]);
+			XMStoreFloat3(&newTri0.v2.pos, newPoints[1]);
 
-			XMStoreFloat3(&newTri1[0].pos, p0);
-			XMStoreFloat3(&newTri1[1].pos, newPoints[0]);
-			XMStoreFloat3(&newTri1[2].pos, p2);
+			XMStoreFloat3(&newTri1.v0.pos, p0);
+			XMStoreFloat3(&newTri1.v1.pos, newPoints[0]);
+			XMStoreFloat3(&newTri1.v2.pos, p2);
 
-			XMStoreFloat3(&newTri2[0].pos, p2);
-			XMStoreFloat3(&newTri2[1].pos, newPoints[0]);
-			XMStoreFloat3(&newTri2[2].pos, newPoints[1]);
+			XMStoreFloat3(&newTri2.v0.pos, p2);
+			XMStoreFloat3(&newTri2.v1.pos, newPoints[0]);
+			XMStoreFloat3(&newTri2.v2.pos, newPoints[1]);
 
-			newVerts.emplace_back(newTri0);
-			newVerts.emplace_back(newTri1);
-			newVerts.emplace_back(newTri2);
-		}
-	}
+			//Push back new triangles
+			newVerts.emplace_back(newTri0.v0);
+			newVerts.emplace_back(newTri0.v1);
+			newVerts.emplace_back(newTri0.v2);
 
-	std::vector<Vertex> verticesLeftOfPlane;
-	std::vector<Vertex> verticesRightOfPlane;
+			newVerts.emplace_back(newTri1.v0);
+			newVerts.emplace_back(newTri1.v1);
+			newVerts.emplace_back(newTri1.v2);
 
-	//sort tris by which side of the plane they're on
-	/*for (auto& vertex : newVerts)
-	{
-		float dot1 = XMVector3Dot(planeNormal, tri.v0 - planeCenter).m128_f32[0];
-		float dot2 = XMVector3Dot(planeNormal, tri.v1 - planeCenter).m128_f32[0];
-		float dot3 = XMVector3Dot(planeNormal, tri.v2 - planeCenter).m128_f32[0];
+			newVerts.emplace_back(newTri2.v0);
+			newVerts.emplace_back(newTri2.v1);
+			newVerts.emplace_back(newTri2.v2);
 
-		float dotAccum = dot1 + dot2 + dot3;
-		if (dotAccum >= 0.f)
-		{
-			trisLeftOfPlane.emplace_back(tri);
+			//new triangles
+			newTris.emplace_back(newTri0);
+			newTris.emplace_back(newTri1);
+			newTris.emplace_back(newTri2);
 		}
 		else
 		{
-			trisRightOfPlane.emplace_back(tri);
+			//Push back old triangles
+			newVerts.emplace_back(v0);
+			newVerts.emplace_back(v1);
+			newVerts.emplace_back(v2);
+
+			Triangle oldTri{};
+			oldTri.v0 = v0;
+			oldTri.v1 = v1;
+			oldTri.v2 = v2;
+			newTris.emplace_back(oldTri);
 		}
 	}
 
-	for (auto& tri : tris)
+	std::vector<Vertex> newMesh0;
+	std::vector<Vertex> newMesh1;
+
+	//split tris by which side of the plane they're on
+	for (auto& tri : newTris)
 	{
-		float dot1 = XMVector3Dot(planeNormal, tri.v0 - planeCenter).m128_f32[0];
-		float dot2 = XMVector3Dot(planeNormal, tri.v1 - planeCenter).m128_f32[0];
-		float dot3 = XMVector3Dot(planeNormal, tri.v2 - planeCenter).m128_f32[0];
+		XMVECTOR v0 = XMLoadFloat3(&tri.v0.pos);
+		XMVECTOR v1 = XMLoadFloat3(&tri.v1.pos);
+		XMVECTOR v2 = XMLoadFloat3(&tri.v2.pos);
+
+		float dot1 = XMVector3Dot(planeNormal, v0 - planeCenter).m128_f32[0];
+		float dot2 = XMVector3Dot(planeNormal, v1 - planeCenter).m128_f32[0];
+		float dot3 = XMVector3Dot(planeNormal, v2 - planeCenter).m128_f32[0];
 
 		float dotAccum = dot1 + dot2 + dot3;
-		if (dotAccum >= 0.f)
+		//The 0 here worries me. Is there a way to give the vertices a small offset or something?
+		if (dotAccum >= 0.f) 
 		{
-			trisLeftOfPlane.emplace_back(tri);
+			newMesh0.emplace_back(tri.v0);
+			newMesh0.emplace_back(tri.v1);
+			newMesh0.emplace_back(tri.v2);
 		}
 		else
 		{
-			trisRightOfPlane.emplace_back(tri);
+			newMesh1.emplace_back(tri.v0);
+			newMesh1.emplace_back(tri.v1);
+			newMesh1.emplace_back(tri.v2);
 		}
-	}*/
+	}
+
+	return;
 }
