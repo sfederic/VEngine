@@ -512,6 +512,9 @@
     <ClCompile Include="Code\Particle\Particle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\MeshSplitter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -980,6 +983,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Particle\ParticleData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\MeshSplitter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
