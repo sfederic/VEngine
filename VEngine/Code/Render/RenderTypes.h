@@ -23,6 +23,11 @@ struct Vertex
 	float weights[3];
 };
 
+struct Triangle
+{
+	Vertex v0, v1, v2;
+};
+
 struct VRect
 {
 	int left = 0;
