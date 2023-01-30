@@ -6,7 +6,7 @@
 
 MeshSplitActor::MeshSplitActor()
 {
-	mesh = CreateComponent(MeshComponent("plane.vmesh", "test.png"), "Mesh");
+	mesh = CreateComponent(MeshComponent("flat_plane.vmesh", "test.png"), "Mesh");
 	rootComponent = mesh;
 }
 

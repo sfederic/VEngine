@@ -6,6 +6,32 @@
 
 using namespace DirectX;
 
+struct Poly
+{
+	std::vector<Vertex> vertices;
+
+	void AddVert(XMVECTOR pos)
+	{
+		Vertex v;
+		XMStoreFloat3(&v.pos, pos);
+		vertices.emplace_back(v);
+	}
+};
+
+bool CheckIntersectLine(XMVECTOR plane, XMVECTOR p0, XMVECTOR p1)
+{
+	XMVECTOR ba = XMVector3Normalize(p1 - p0);
+	float nDotA = DirectX::XMVector3Dot(plane, p0).m128_f32[0];
+	float nDotBA = DirectX::XMVector3Dot(plane, ba).m128_f32[0];
+
+	if (nDotBA == 0.f)
+	{
+		return false;
+	}
+
+	return true;
+}
+
 void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 	std::vector<Vertex>& mesh0Verts,
 	std::vector<Vertex>& mesh1Verts)
@@ -18,13 +44,14 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 	//Need this because certain previous vertices will be invalid after triangle intersects.
 	std::vector<Vertex> newVerts;
 	
-	std::vector<Triangle> newTris;
+	std::vector<Poly> leftPolys;
+	std::vector<Poly> rightPolys;
 
 	for (int i = 0; i < mesh.meshDataProxy.vertices->size() / 3; i++)
 	{
-		int index0 = i * 3;
-		int index1 = i * 3 + 1;
-		int index2 = i * 3 + 2;
+		const int index0 = i * 3;
+		const int index1 = i * 3 + 1;
+		const int index2 = i * 3 + 2;
 
 		Vertex v0 = mesh.meshDataProxy.vertices->at(index0);
 		Vertex v1 = mesh.meshDataProxy.vertices->at(index1);
@@ -39,97 +66,123 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 		if (intersectType == PlaneIntersectionType::INTERSECTING)
 		{
 			XMVECTOR line0 = DirectX::XMPlaneIntersectLine(plane, p0, p1);
-			XMVECTOR line1 = DirectX::XMPlaneIntersectLine(plane, p0, p2);
-			XMVECTOR line2 = DirectX::XMPlaneIntersectLine(plane, p1, p2);
+			XMVECTOR line1 = DirectX::XMPlaneIntersectLine(plane, p1, p2);
+			XMVECTOR line2 = DirectX::XMPlaneIntersectLine(plane, p2, p0);
 
 			std::vector<XMVECTOR> newPoints;
 
-			if (!DirectX::XMVectorIsNaN(line0).m128_f32[0]) newPoints.push_back(line0);
-			if (!DirectX::XMVectorIsNaN(line1).m128_f32[0]) newPoints.push_back(line1);
-			if (!DirectX::XMVectorIsNaN(line2).m128_f32[0]) newPoints.push_back(line2);
+			if (!DirectX::XMVectorIsNaN(line0).m128_f32[0] && CheckIntersectLine(plane, p0, p1))
+			{
+				newPoints.push_back(line0);
+			}
+			if (!DirectX::XMVectorIsNaN(line1).m128_f32[0] && CheckIntersectLine(plane, p1, p2))
+			{
+				newPoints.push_back(line1);
+			}
+			if (!DirectX::XMVectorIsNaN(line2).m128_f32[0] && CheckIntersectLine(plane, p2, p0))
+			{
+				newPoints.push_back(line2);
+			}
 
-			//line0 with tri0 and tri2 are where vertices that's aren't 'hit', the NaN result.
-			//Seperate that side out when creating new triangles. Every triangle split will generate 3 new tris.
+			//Make sure only two edges of the triangle are split
+			assert(newPoints.size() == 2);
 
-			Triangle newTri0{};
-			Triangle newTri1{};
-			Triangle newTri2{};
+			Poly leftPoly;
+			Poly rightPoly;
 
-			XMStoreFloat3(&newTri0.v0.pos, p0);
-			XMStoreFloat3(&newTri0.v1.pos, newPoints[0]);
-			XMStoreFloat3(&newTri0.v2.pos, newPoints[1]);
+			float p0Dot = XMVector3Dot(planeNormal, p0 - planeCenter).m128_f32[0];
+			float p1Dot = XMVector3Dot(planeNormal, p1 - planeCenter).m128_f32[0];
+			float p2Dot = XMVector3Dot(planeNormal, p2 - planeCenter).m128_f32[0];
 
-			XMStoreFloat3(&newTri1.v0.pos, p0);
-			XMStoreFloat3(&newTri1.v1.pos, newPoints[0]);
-			XMStoreFloat3(&newTri1.v2.pos, p2);
+			std::vector<std::pair<float, XMVECTOR>> dotAndPosition;
 
-			XMStoreFloat3(&newTri2.v0.pos, p2);
-			XMStoreFloat3(&newTri2.v1.pos, newPoints[0]);
-			XMStoreFloat3(&newTri2.v2.pos, newPoints[1]);
+			dotAndPosition.emplace_back(std::make_pair(p0Dot, p0));
+			dotAndPosition.emplace_back(std::make_pair(p1Dot, p1));
+			dotAndPosition.emplace_back(std::make_pair(p2Dot, p2));
 
-			//Push back new triangles
-			newVerts.emplace_back(newTri0.v0);
-			newVerts.emplace_back(newTri0.v1);
-			newVerts.emplace_back(newTri0.v2);
+			for (auto& pair : dotAndPosition)
+			{
+				float dot = pair.first;
+				XMVECTOR pos = pair.second;
 
-			newVerts.emplace_back(newTri1.v0);
-			newVerts.emplace_back(newTri1.v1);
-			newVerts.emplace_back(newTri1.v2);
+				if (dot < 0.f)
+				{
+					leftPoly.AddVert(pos);
+				}
+				else if (dot > 0.f)
+				{
+					rightPoly.AddVert(pos);
+				}
+				else
+				{
+					throw;
+				}
+			}
 
-			newVerts.emplace_back(newTri2.v0);
-			newVerts.emplace_back(newTri2.v1);
-			newVerts.emplace_back(newTri2.v2);
+			leftPoly.AddVert(newPoints[0]);
+			leftPoly.AddVert(newPoints[1]);
 
-			//new triangles
-			newTris.emplace_back(newTri0);
-			newTris.emplace_back(newTri1);
-			newTris.emplace_back(newTri2);
-		}
-		else
-		{
-			//Push back old triangles
-			newVerts.emplace_back(v0);
-			newVerts.emplace_back(v1);
-			newVerts.emplace_back(v2);
+			rightPoly.AddVert(newPoints[0]);
+			rightPoly.AddVert(newPoints[1]);
 
-			Triangle oldTri{};
-			oldTri.v0 = v0;
-			oldTri.v1 = v1;
-			oldTri.v2 = v2;
-			newTris.emplace_back(oldTri);
+			rightPolys.emplace_back(rightPoly);
+			leftPolys.emplace_back(leftPoly);
 		}
 	}
 
-	std::vector<Vertex> newMesh0;
-	std::vector<Vertex> newMesh1;
-
-	//split tris by which side of the plane they're on
-	for (auto& tri : newTris)
+	std::vector<Vertex> leftMesh;
+	
+	for (auto& poly : leftPolys)
 	{
-		XMVECTOR v0 = XMLoadFloat3(&tri.v0.pos);
-		XMVECTOR v1 = XMLoadFloat3(&tri.v1.pos);
-		XMVECTOR v2 = XMLoadFloat3(&tri.v2.pos);
+		assert(poly.vertices.size() > 2);
+		assert(poly.vertices.size() < 5);
 
-		float dot1 = XMVector3Dot(planeNormal, v0 - planeCenter).m128_f32[0];
-		float dot2 = XMVector3Dot(planeNormal, v1 - planeCenter).m128_f32[0];
-		float dot3 = XMVector3Dot(planeNormal, v2 - planeCenter).m128_f32[0];
-
-		float dotAccum = dot1 + dot2 + dot3;
-		//The 0 here worries me. Is there a way to give the vertices a small offset or something?
-		if (dotAccum >= 0.f) 
+		//Triangulate poly
+		if (poly.vertices.size() == 4) //if an actual polygon (trapezoid (Zoids...))
 		{
-			newMesh0.emplace_back(tri.v0);
-			newMesh0.emplace_back(tri.v1);
-			newMesh0.emplace_back(tri.v2);
+			leftMesh.emplace_back(poly.vertices[1]);
+			leftMesh.emplace_back(poly.vertices[2]);
+			leftMesh.emplace_back(poly.vertices[3]);
+
+			leftMesh.emplace_back(poly.vertices[2]);
+			leftMesh.emplace_back(poly.vertices[1]);
+			leftMesh.emplace_back(poly.vertices[0]);
 		}
-		else
+		else if (poly.vertices.size() == 3)
 		{
-			newMesh1.emplace_back(tri.v0);
-			newMesh1.emplace_back(tri.v1);
-			newMesh1.emplace_back(tri.v2);
+			leftMesh.emplace_back(poly.vertices[0]);
+			leftMesh.emplace_back(poly.vertices[1]);
+			leftMesh.emplace_back(poly.vertices[2]);
 		}
 	}
 
-	mesh0Verts = newMesh0;
-	mesh1Verts = newMesh1;
+	mesh1Verts = leftMesh;
+
+	std::vector<Vertex> rightMesh;
+	
+	for (auto& poly : rightPolys)
+	{
+		assert(poly.vertices.size() > 2);
+		assert(poly.vertices.size() < 5);
+
+		//Triangulate poly
+		if (poly.vertices.size() == 4) //if an actual polygon (trapezoid (Zoids...))
+		{
+			rightMesh.emplace_back(poly.vertices[1]);
+			rightMesh.emplace_back(poly.vertices[3]);
+			rightMesh.emplace_back(poly.vertices[2]);
+
+			rightMesh.emplace_back(poly.vertices[2]);
+			rightMesh.emplace_back(poly.vertices[0]);
+			rightMesh.emplace_back(poly.vertices[1]);
+		}
+		else if (poly.vertices.size() == 3)
+		{
+			rightMesh.emplace_back(poly.vertices[0]);
+			rightMesh.emplace_back(poly.vertices[2]);
+			rightMesh.emplace_back(poly.vertices[1]);
+		}
+	}
+
+	mesh0Verts = rightMesh;
 }
