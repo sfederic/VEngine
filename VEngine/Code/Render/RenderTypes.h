@@ -16,11 +16,11 @@ class Material;
 struct Vertex
 {
 	XMFLOAT3 pos = XMFLOAT3(0.f, 0.f, 0.f);
-	XMFLOAT3 normal;
-	XMFLOAT3 tangent;
-	XMFLOAT2 uv;
-	uint32_t boneIndices[4];
-	float weights[3];
+	XMFLOAT3 normal = XMFLOAT3(0.f, 0.f, 0.f);
+	XMFLOAT3 tangent = XMFLOAT3(0.f, 0.f, 0.f);
+	XMFLOAT2 uv = XMFLOAT2(0.f, 0.f);
+	uint32_t boneIndices[4]{};
+	float weights[3]{};
 };
 
 struct Triangle
