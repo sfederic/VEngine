@@ -18,6 +18,33 @@ struct Poly
 	}
 };
 
+void TriangulatePolygons(std::vector<Poly>& polys, std::vector<Vertex>& meshVerts)
+{
+	for (auto& poly : polys)
+	{
+		assert(poly.vertices.size() > 2);
+		assert(poly.vertices.size() < 5);
+
+		//Triangulate poly
+		if (poly.vertices.size() == 4) //if an actual polygon (trapezoid (Zoids...))
+		{
+			meshVerts.emplace_back(poly.vertices[1]);
+			meshVerts.emplace_back(poly.vertices[2]);
+			meshVerts.emplace_back(poly.vertices[3]);
+
+			meshVerts.emplace_back(poly.vertices[2]);
+			meshVerts.emplace_back(poly.vertices[1]);
+			meshVerts.emplace_back(poly.vertices[0]);
+		}
+		else if (poly.vertices.size() == 3)
+		{
+			meshVerts.emplace_back(poly.vertices[0]);
+			meshVerts.emplace_back(poly.vertices[1]);
+			meshVerts.emplace_back(poly.vertices[2]);
+		}
+	}
+}
+
 bool CheckIntersectLine(XMVECTOR plane, XMVECTOR p0, XMVECTOR p1)
 {
 	XMVECTOR ba = XMVector3Normalize(p1 - p0);
@@ -105,7 +132,7 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 				float dot = pair.first;
 				XMVECTOR pos = pair.second;
 
-				if (dot < 0.f)
+				if (dot < 0.f) //@Todo: need to fix this and discard tris on the edge or something
 				{
 					leftPoly.AddVert(pos);
 				}
@@ -131,58 +158,10 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 	}
 
 	std::vector<Vertex> leftMesh;
-	
-	for (auto& poly : leftPolys)
-	{
-		assert(poly.vertices.size() > 2);
-		assert(poly.vertices.size() < 5);
-
-		//Triangulate poly
-		if (poly.vertices.size() == 4) //if an actual polygon (trapezoid (Zoids...))
-		{
-			leftMesh.emplace_back(poly.vertices[1]);
-			leftMesh.emplace_back(poly.vertices[2]);
-			leftMesh.emplace_back(poly.vertices[3]);
-
-			leftMesh.emplace_back(poly.vertices[2]);
-			leftMesh.emplace_back(poly.vertices[1]);
-			leftMesh.emplace_back(poly.vertices[0]);
-		}
-		else if (poly.vertices.size() == 3)
-		{
-			leftMesh.emplace_back(poly.vertices[0]);
-			leftMesh.emplace_back(poly.vertices[1]);
-			leftMesh.emplace_back(poly.vertices[2]);
-		}
-	}
-
+	TriangulatePolygons(leftPolys, leftMesh);
 	mesh1Verts = leftMesh;
 
 	std::vector<Vertex> rightMesh;
-	
-	for (auto& poly : rightPolys)
-	{
-		assert(poly.vertices.size() > 2);
-		assert(poly.vertices.size() < 5);
-
-		//Triangulate poly
-		if (poly.vertices.size() == 4) //if an actual polygon (trapezoid (Zoids...))
-		{
-			rightMesh.emplace_back(poly.vertices[1]);
-			rightMesh.emplace_back(poly.vertices[3]);
-			rightMesh.emplace_back(poly.vertices[2]);
-
-			rightMesh.emplace_back(poly.vertices[2]);
-			rightMesh.emplace_back(poly.vertices[0]);
-			rightMesh.emplace_back(poly.vertices[1]);
-		}
-		else if (poly.vertices.size() == 3)
-		{
-			rightMesh.emplace_back(poly.vertices[0]);
-			rightMesh.emplace_back(poly.vertices[2]);
-			rightMesh.emplace_back(poly.vertices[1]);
-		}
-	}
-
+	TriangulatePolygons(rightPolys, rightMesh);
 	mesh0Verts = rightMesh;
 }
