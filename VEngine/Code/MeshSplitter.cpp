@@ -6,6 +6,10 @@
 
 using namespace DirectX;
 
+//Ref:https://itecnote.com/tecnote/c-algorithm-or-software-for-slicing-a-mesh/
+//Ref:https://gdcvault.com/play/1026882/How-to-Dissect-an-Exploding
+//Ref:http://simonschreibt.de/gat/metal-gear-rising-slicing/
+
 struct Poly
 {
 	std::vector<Vertex> vertices;
@@ -133,10 +137,7 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 			}
 			if (!DirectX::XMVectorIsNaN(line2).m128_f32[0] && CheckIntersectLine(plane, p2, p0))
 			{
-				if (newPoints.size() < 2)
-				{
-					newPoints.push_back(line2);
-				}
+				newPoints.push_back(line2);
 			}
 
 			//Make sure only two edges of the triangle are split
@@ -170,7 +171,7 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 				}
 				else
 				{
-					goto end;
+					throw;
 				}
 			}
 
@@ -206,9 +207,6 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 				mesh1Verts.emplace_back(v2);
 			}
 		}
-
-	end:
-		continue;
 	}
 
 	std::vector<Vertex> leftMesh;
