@@ -66,6 +66,7 @@ void Player::Tick(float deltaTime)
 
 	Shoot();
 	BladeSwipe();
+	DashBladeAttack();
 	//ShieldLogic(deltaTime);
 
 	Interact();
@@ -326,6 +327,27 @@ void Player::BladeSwipe()
 				hitEnemy->Destroy();
 			}
 		}
+	}
+}
+
+void Player::DashBladeAttack()
+{
+	if (Input::GetKeyUp(Keys::Space) && !inDashBladeAttack)
+	{
+		HitResult result(this);
+		XMVECTOR end = GetPositionV() + (GetForwardVectorV() * 100.f);
+		if (Raycast(result, GetPositionV(), end))
+		{
+			nextPos = result.hitActor->GetPositionV() - GetForwardVectorV();
+			inDashBladeAttack = true;
+			movementSpeed = movementSpeed * 2.f;
+		}
+	}
+
+	if (XMVector4Equal(GetPositionV(), nextPos) && inDashBladeAttack)
+	{
+		inDashBladeAttack = false;
+		movementSpeed = movementSpeed / 2.f;
 	}
 }
 

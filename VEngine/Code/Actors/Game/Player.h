@@ -34,6 +34,7 @@ private:
 
 	void Shoot();
 	void BladeSwipe();
+	void DashBladeAttack();
 	void SpawnSwordBeam(XMVECTOR start, XMVECTOR end);
 	void ShieldLogic(float deltaTime);
 	void Interact();
@@ -65,4 +66,5 @@ private:
 	float rotationSpeed = 5.5f;
 
 	bool allRangeModeActive = true;
+	bool inDashBladeAttack = false;
 };

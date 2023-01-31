@@ -186,7 +186,7 @@ All Range Mode
 Name
 Player0
 UID
-3950114808
+4264839494
 next
 BoxTriggerComponent
 1
@@ -201,7 +201,7 @@ BoxTrigger
  Scale
 1 1 1
  Visible
-0
+1
 Extents
 5 3 5
 Offset
@@ -211,14 +211,14 @@ UID
 next
 CameraComponent
 1
-3950114808
+4264839494
 Camera
  Enabled
 1
  Pos
 2 1.5 -4
  Rot
-0.100444 -0.137986 0.0140676 0.985227
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -230,7 +230,7 @@ Far Z
 Near Z
 0.01
 UID
-1036437739
+1705625906
 next
 DirectionalLightComponent
 1
@@ -716,7 +716,7 @@ Trans. Occlude
 UID
 3728965508
 next
-3950114808
+4264839494
 Mesh
  Enabled
 1
@@ -765,6 +765,6 @@ Static
 Trans. Occlude
 0
 UID
-3267856627
+174054795
 next
 end
