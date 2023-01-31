@@ -6,7 +6,7 @@
 
 MeshSplitActor::MeshSplitActor()
 {
-	mesh = CreateComponent(MeshComponent("grid.vmesh", "test.png"), "Mesh");
+	mesh = CreateComponent(MeshComponent("cube.vmesh", "test.png"), "Mesh");
 	rootComponent = mesh;
 }
 
@@ -20,12 +20,14 @@ void MeshSplitActor::Tick(float deltaTime)
 
 		{
 			auto mesh0 = MeshComponent::system.Add("SplitMesh0", this, MeshComponent(), false);
+			mesh0->SetRastState(RastStates::noBackCull);
 			mesh0->meshDataProxy.vertices = &mesh0Verts;
 			mesh0->SplitMeshCreate();
 		}
 
 		{		
 			auto mesh1 = MeshComponent::system.Add("SplitMesh1", this, MeshComponent(), false);
+			mesh1->SetRastState(RastStates::noBackCull);
 			mesh1->meshDataProxy.vertices = &mesh1Verts;
 			mesh1->SplitMeshCreate();
 		}

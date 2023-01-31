@@ -25,18 +25,45 @@ void TriangulatePolygons(std::vector<Poly>& polys, std::vector<Vertex>& meshVert
 		assert(poly.vertices.size() > 2);
 		assert(poly.vertices.size() < 5);
 
-		//Triangulate poly
-		if (poly.vertices.size() == 4) //if an actual polygon (trapezoid (Zoids...))
+		//Triangulate polygons
+		if (poly.vertices.size() == 4) //if an actual polygon (trapeZOIDS)
 		{
-			meshVerts.emplace_back(poly.vertices[1]);
-			meshVerts.emplace_back(poly.vertices[2]);
-			meshVerts.emplace_back(poly.vertices[3]);
+			//Find closest new point
+			XMVECTOR p0 = XMLoadFloat3(&poly.vertices[0].pos);
+			XMVECTOR p1 = XMLoadFloat3(&poly.vertices[1].pos);
 
-			meshVerts.emplace_back(poly.vertices[2]);
-			meshVerts.emplace_back(poly.vertices[1]);
-			meshVerts.emplace_back(poly.vertices[0]);
+			XMVECTOR n0 = XMLoadFloat3(&poly.vertices[2].pos);
+			XMVECTOR n1 = XMLoadFloat3(&poly.vertices[3].pos);
+
+			float p0n0Dist = XMVector3Length(n0 - p0).m128_f32[0];
+			float p0n1Dist = XMVector3Length(n1 - p0).m128_f32[0];
+
+			assert(p0n0Dist != p0n1Dist);
+
+			if (p0n0Dist > p0n1Dist)
+			{
+				//@todo: going to have to check triangle winding using vertex's normal
+				//or cheat and turn rast state to back and front.
+				meshVerts.emplace_back(poly.vertices[0]);
+				meshVerts.emplace_back(poly.vertices[3]);
+				meshVerts.emplace_back(poly.vertices[2]);
+
+				meshVerts.emplace_back(poly.vertices[2]);
+				meshVerts.emplace_back(poly.vertices[1]);
+				meshVerts.emplace_back(poly.vertices[0]);
+			}
+			else
+			{
+				meshVerts.emplace_back(poly.vertices[0]);
+				meshVerts.emplace_back(poly.vertices[2]);
+				meshVerts.emplace_back(poly.vertices[3]);
+
+				meshVerts.emplace_back(poly.vertices[3]);
+				meshVerts.emplace_back(poly.vertices[1]);
+				meshVerts.emplace_back(poly.vertices[0]);
+			}
 		}
-		else if (poly.vertices.size() == 3)
+		else if (poly.vertices.size() == 3) //If a triangle
 		{
 			meshVerts.emplace_back(poly.vertices[0]);
 			meshVerts.emplace_back(poly.vertices[1]);
@@ -155,13 +182,36 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 			rightPolys.emplace_back(rightPoly);
 			leftPolys.emplace_back(leftPoly);
 		}
+		else
+		{
+			//Throw original mesh vertices in if triangle doesn't intersect
+
+			float p0Dot = XMVector3Dot(planeNormal, p0 - planeCenter).m128_f32[0];
+			float p1Dot = XMVector3Dot(planeNormal, p1 - planeCenter).m128_f32[0];
+			float p2Dot = XMVector3Dot(planeNormal, p2 - planeCenter).m128_f32[0];
+
+			float dotAccum = p0Dot + p1Dot + p2Dot;
+			assert(dotAccum != 0.f);
+			if (dotAccum < 0.f)
+			{
+				mesh0Verts.emplace_back(v0);
+				mesh0Verts.emplace_back(v1);
+				mesh0Verts.emplace_back(v2);
+			}
+			else
+			{
+				mesh1Verts.emplace_back(v0);
+				mesh1Verts.emplace_back(v1);
+				mesh1Verts.emplace_back(v2);
+			}
+		}
 	}
 
 	std::vector<Vertex> leftMesh;
 	TriangulatePolygons(leftPolys, leftMesh);
-	mesh1Verts = leftMesh;
+	mesh0Verts.insert(mesh0Verts.begin(), leftMesh.begin(), leftMesh.end());
 
 	std::vector<Vertex> rightMesh;
 	TriangulatePolygons(rightPolys, rightMesh);
-	mesh0Verts = rightMesh;
+	mesh1Verts.insert(mesh1Verts.begin(), rightMesh.begin(), rightMesh.end());
 }
