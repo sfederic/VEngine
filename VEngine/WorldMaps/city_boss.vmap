@@ -5,9 +5,11 @@ DirectionalLightActor
  Position
 0 5 0
  Rotation
-0.707107 0 0 0.707107
+0.45452 0.183012 0.541674 0.683014
  Scale
-1 1 1
+0.999999 1 1
+ Visible
+1
 Name
 DirectionalLightActor0
 UID
@@ -18,20 +20,20 @@ LevelInstance
  Enabled
 1
  Position
-0 0 0
+2 2 2
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
-Level Size
-5 3 5
+ Visible
+1
 Name
 LevelInstance0
 UID
 2661155135
 next
 MeshActor
-1
+9
  Enabled
 1
  Position
@@ -40,10 +42,132 @@ MeshActor
 0 0 0 1
  Scale
 5 1 5
+ Visible
+1
 Name
 node0
 UID
 29764256
+next
+ Enabled
+1
+ Position
+3 2 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 5 1
+ Visible
+1
+Name
+cube1
+UID
+4161160293
+next
+ Enabled
+1
+ Position
+-1 2 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 5 1
+ Visible
+1
+Name
+MeshActor2
+UID
+3238404301
+next
+ Enabled
+1
+ Position
+-2 2 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 5 1
+ Visible
+1
+Name
+MeshActor3
+UID
+460170300
+next
+ Enabled
+1
+ Position
+2 2 5
+ Rotation
+-0 0 -0 1
+ Scale
+1 5 1
+ Visible
+1
+Name
+MeshActor4
+UID
+1348948809
+next
+ Enabled
+1
+ Position
+1 2 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 5 1
+ Visible
+1
+Name
+MeshActor5
+UID
+1977828760
+next
+ Enabled
+1
+ Position
+5 2 -1
+ Rotation
+-0 0 -0 1
+ Scale
+1 5 1
+ Visible
+1
+Name
+MeshActor6
+UID
+3445403444
+next
+ Enabled
+1
+ Position
+-1 2 -2
+ Rotation
+-0 0 -0 1
+ Scale
+1 5 1
+ Visible
+1
+Name
+MeshActor7
+UID
+3889210704
+next
+ Enabled
+1
+ Position
+4 2 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 5 1
+ Visible
+1
+Name
+MeshActor8
+UID
+1476189911
 next
 Player
 1
@@ -55,12 +179,35 @@ Player
 0 0 0 1
  Scale
 1 1 1
+ Visible
+1
 All Range Mode
 1
 Name
 Player0
 UID
 3950114808
+next
+BoxTriggerComponent
+1
+2661155135
+BoxTrigger
+ Enabled
+1
+ Pos
+2 2 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+0
+Extents
+5 3 5
+Offset
+0 0 0
+UID
+825914350
 next
 CameraComponent
 1
@@ -71,9 +218,11 @@ Camera
  Pos
 2 1.5 -4
  Rot
--0.123227 -0.172139 -0.0217094 0.977094
+0.100444 -0.137986 0.0140676 0.985227
  Scale
 1 1 1
+ Visible
+1
 FOV
 60
 Far Z
@@ -92,9 +241,11 @@ DirectionalLight
  Pos
 0 5 0
  Rot
-0.707107 0 0 0.707107
+0.45452 0.183012 0.541674 0.683014
  Scale
-1 1 1
+0.999999 1 1
+ Visible
+1
 Colour
 1 1 1 1
 LightEnabled
@@ -104,23 +255,8 @@ ShadowMap Size
 UID
 55067418
 next
-EmptyComponent
-1
-2661155135
-Root
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
-UID
-2535194312
-next
 MeshComponent
-2
+10
 29764256
 Mesh
  Enabled
@@ -131,6 +267,8 @@ Mesh
 0 0 0 1
  Scale
 5 1 5
+ Visible
+1
 Casts Shadow
 1
 M_Ambient
@@ -170,6 +308,414 @@ Trans. Occlude
 UID
 1309871013
 next
+4161160293
+Mesh
+ Enabled
+1
+ Pos
+3 2 0
+ Rot
+-0 0 -0 1
+ Scale
+1 5 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 5
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+1
+UID
+3728965508
+next
+3238404301
+Mesh
+ Enabled
+1
+ Pos
+-1 2 4
+ Rot
+-0 0 -0 1
+ Scale
+1 5 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 5
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3728965508
+next
+460170300
+Mesh
+ Enabled
+1
+ Pos
+-2 2 2
+ Rot
+-0 0 -0 1
+ Scale
+1 5 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 5
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3728965508
+next
+1348948809
+Mesh
+ Enabled
+1
+ Pos
+2 2 5
+ Rot
+-0 0 -0 1
+ Scale
+1 5 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 5
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3728965508
+next
+1977828760
+Mesh
+ Enabled
+1
+ Pos
+1 2 3
+ Rot
+-0 0 -0 1
+ Scale
+1 5 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 5
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3728965508
+next
+3445403444
+Mesh
+ Enabled
+1
+ Pos
+5 2 -1
+ Rot
+-0 0 -0 1
+ Scale
+1 5 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 5
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+1
+UID
+3728965508
+next
+3889210704
+Mesh
+ Enabled
+1
+ Pos
+-1 2 -2
+ Rot
+-0 0 -0 1
+ Scale
+1 5 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 5
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+1
+UID
+3728965508
+next
+1476189911
+Mesh
+ Enabled
+1
+ Pos
+4 2 2
+ Rot
+-0 0 -0 1
+ Scale
+1 5 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 5
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3728965508
+next
 3950114808
 Mesh
  Enabled
@@ -180,6 +726,8 @@ Mesh
 0 0 0 1
  Scale
 1 1 1
+ Visible
+1
 Casts Shadow
 1
 M_Ambient

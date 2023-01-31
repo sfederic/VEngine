@@ -6,7 +6,7 @@
 
 MeshSplitActor::MeshSplitActor()
 {
-	mesh = CreateComponent(MeshComponent("cube.vmesh", "test.png"), "Mesh");
+	mesh = CreateComponent(MeshComponent("ico_sphere.vmesh", "test.png"), "Mesh");
 	rootComponent = mesh;
 }
 

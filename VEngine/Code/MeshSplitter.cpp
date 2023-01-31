@@ -38,8 +38,6 @@ void TriangulatePolygons(std::vector<Poly>& polys, std::vector<Vertex>& meshVert
 			float p0n0Dist = XMVector3Length(n0 - p0).m128_f32[0];
 			float p0n1Dist = XMVector3Length(n1 - p0).m128_f32[0];
 
-			assert(p0n0Dist != p0n1Dist);
-
 			if (p0n0Dist > p0n1Dist)
 			{
 				//@todo: going to have to check triangle winding using vertex's normal
@@ -52,7 +50,7 @@ void TriangulatePolygons(std::vector<Poly>& polys, std::vector<Vertex>& meshVert
 				meshVerts.emplace_back(poly.vertices[1]);
 				meshVerts.emplace_back(poly.vertices[0]);
 			}
-			else
+			else if (p0n0Dist < p0n1Dist)
 			{
 				meshVerts.emplace_back(poly.vertices[0]);
 				meshVerts.emplace_back(poly.vertices[2]);
@@ -135,7 +133,10 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 			}
 			if (!DirectX::XMVectorIsNaN(line2).m128_f32[0] && CheckIntersectLine(plane, p2, p0))
 			{
-				newPoints.push_back(line2);
+				if (newPoints.size() < 2)
+				{
+					newPoints.push_back(line2);
+				}
 			}
 
 			//Make sure only two edges of the triangle are split
@@ -169,7 +170,7 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 				}
 				else
 				{
-					throw;
+					goto end;
 				}
 			}
 
@@ -205,6 +206,9 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 				mesh1Verts.emplace_back(v2);
 			}
 		}
+
+	end:
+		continue;
 	}
 
 	std::vector<Vertex> leftMesh;
