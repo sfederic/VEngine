@@ -50,6 +50,8 @@ struct HitResult
 	}
 
 	void AddActorsToIgnore(std::vector<Actor*>& actors);
+
+	XMVECTOR GetHitPosV() { return XMLoadFloat3(&hitPos); }
 };
 
 bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float range, bool fromScreen = false);
