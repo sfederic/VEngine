@@ -62,5 +62,8 @@ void RamielBoss::FireChargeBeamAtPlayer()
     if (Raycast(hit, GetPositionV(), playerPos))
     {
         GameUtils::SpawnSpriteSheet("Sprites/blue_explosion.png", hit.GetHitPosV(), false, 5, 5);
+
+        //@Todo: check for destructible objects (buildings, houses). Make an appropriate actor.
+        hit.hitActor->Destroy();
     }
 }
