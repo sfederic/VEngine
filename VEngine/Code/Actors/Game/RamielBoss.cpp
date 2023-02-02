@@ -4,6 +4,8 @@
 #include "Components/MeshComponent.h"
 #include "Physics/Raycast.h"
 #include "Gameplay/GameUtils.h"
+#include "UI/Game/BossHealthBar.h"
+#include "UI/UISystem.h"
 
 RamielBoss::RamielBoss()
 {
@@ -19,8 +21,17 @@ void RamielBoss::Create()
     mesh->SetAmbientColour(ambientColour);
 }
 
+void RamielBoss::Start()
+{
+    bossHealthBar = UISystem::CreateWidget<BossHealthBar>();
+    bossHealthBar->AddToViewport();
+    bossHealthBar->SetBossName(L"Rammyel");
+}
+
 void RamielBoss::Tick(float deltaTime)
 {
+    bossHealthBar->SetBossHealth(health);
+
     chargeAttackTimer += deltaTime;
     constexpr float chargeAttackMaxTime = 5.f;
 
