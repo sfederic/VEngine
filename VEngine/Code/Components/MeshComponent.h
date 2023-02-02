@@ -57,6 +57,8 @@ public:
 	void SetAmbientColour(const XMFLOAT4 ambientColour);
 	XMFLOAT4 GetAmbientColour();
 
+	void SetUseTexture(bool useTexture);
+
 	Buffer* GetVertexBuffer() const;
 
 	Material* GetMaterial() { return material; }

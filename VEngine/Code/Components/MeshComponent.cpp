@@ -174,6 +174,11 @@ XMFLOAT4 MeshComponent::GetAmbientColour()
 	return material->materialShaderData.ambient;
 }
 
+void MeshComponent::SetUseTexture(bool useTexture)
+{
+	material->materialShaderData.useTexture = useTexture;
+}
+
 Buffer* MeshComponent::GetVertexBuffer() const 
 {
 	return pso.vertexBuffer;
