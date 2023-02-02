@@ -29,11 +29,11 @@ namespace GameUtils
 		activeCamera->shakeLevel = shake;
 	}
 
-	SpriteSheet* SpawnSpriteSheet(std::string textureFilename, XMVECTOR position, bool loop, int numRows, int numColumns)
+	SpriteSheet* SpawnSpriteSheet(std::string textureFilename, XMVECTOR spawnPosition, bool loop, int numRows, int numColumns)
 	{
 		auto spriteSheet = SpriteSheet::system.Add("SpriteSheet", nullptr, SpriteSheet(), false);
 
-		spriteSheet->SetLocalPosition(position);
+		spriteSheet->SetLocalPosition(spawnPosition);
 		spriteSheet->textureData.filename = textureFilename;
 		spriteSheet->loopAnimation = loop;
 		spriteSheet->numSheetRows = numRows;

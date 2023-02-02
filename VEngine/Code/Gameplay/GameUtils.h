@@ -23,7 +23,7 @@ namespace GameUtils
 
 	void CameraShake(float shake);
 
-	SpriteSheet* SpawnSpriteSheet(std::string textureFilename, XMVECTOR position, bool loop, int numRows, int numColumns);
+	SpriteSheet* SpawnSpriteSheet(std::string textureFilename, XMVECTOR spawnPosition, bool loop, int numRows, int numColumns);
 
 	void PlayAudioOneShot(const std::string audioFilename);
 
