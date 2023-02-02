@@ -13,6 +13,8 @@ RamielBoss::RamielBoss()
 
 void RamielBoss::Create()
 {
+    health = 100;
+
     mesh->SetUseTexture(false);
     mesh->SetAmbientColour(ambientColour);
 }
