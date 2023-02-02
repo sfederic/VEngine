@@ -12,14 +12,7 @@ class CameraComponent;
 //Utility functions for in-game stuff
 namespace GameUtils
 {
-	bool CheckIfMemoryExists(const std::string memoryName);
-
 	void SetActiveCameraTarget(Actor* newTarget);
-	void SetActiveCameraTargetAndZoomIn(Actor* newTarget);
-	void SetActiveCameraTargetAndZoomOut(Actor* newTarget);
-
-	//Mainly for timer based calls.
-	void SetCameraBackToPlayer();
 
 	void CameraShake(float shake);
 
@@ -40,8 +33,6 @@ namespace GameUtils
 
 	//Move to matching entrance trigger with same name as exited one in loaded world.
 	void LoadWorldAndMoveToEntranceTrigger();
-
-	void TriggerGameOver();
 
 	void DisablePlayer();
 
