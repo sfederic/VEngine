@@ -5,7 +5,7 @@
 #include <QCloseEvent>
 #include <qdockwidget.h>
 #include <QtWidgets/QMainWindow>
-#include "Core.h"
+#include "Core/Core.h"
 #include "RenderViewWidget.h"
 #include "PropertiesDock.h"
 #include "AssetDock.h"

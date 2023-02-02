@@ -2,8 +2,8 @@
 #include "Billboard.h"
 #include "Components/MeshComponent.h"
 #include "Render/Material.h"
-#include "Camera.h"
-#include "VMath.h"
+#include "Core/Camera.h"
+#include "Core/VMath.h"
 
 Billboard::Billboard()
 {

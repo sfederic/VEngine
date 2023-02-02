@@ -1,8 +1,8 @@
 #include "vpch.h"
 #include "CameraComponent.h"
 #include <algorithm>
-#include "VMath.h"
-#include "Core.h"
+#include "Core/VMath.h"
+#include "Core/Core.h"
 #include "Render/Renderer.h"
 #include "Editor/Editor.h"
 

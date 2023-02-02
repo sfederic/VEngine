@@ -1,12 +1,12 @@
 #include "vpch.h"
 #include "Widget.h"
 #include <WICTextureLoader.h>
-#include "Input.h"
+#include "Core/Input.h"
 #include "Render/Renderer.h"
 #include "Editor/Editor.h"
 #include "Render/SpriteSystem.h"
-#include "Timer.h"
-#include "VString.h"
+#include "Core/Timer.h"
+#include "Core/VString.h"
 #include "UISystem.h"
 
 void Widget::Destroy()

@@ -2,13 +2,13 @@
 
 #include <vector>
 #include "IComponentSystem.h"
-#include "SystemStates.h"
+#include "Core/SystemStates.h"
 #include "Actors/Actor.h"
 #include "ComponentSystemCache.h"
-#include "Serialiser.h"
-#include "VString.h"
+#include "Core/Serialiser.h"
+#include "Core/VString.h"
 #include "Editor/Editor.h"
-#include "World.h"
+#include "Core/World.h"
 
 template <typename T>
 class ComponentSystem : public IComponentSystem

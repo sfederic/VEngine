@@ -2,15 +2,15 @@
 #include "Console.h"
 #include <dwrite.h>
 #include <d2d1.h>
-#include "Input.h"
+#include "Core/Input.h"
 #include "UI/UISystem.h"
 #include "UI/Layout.h"
 #include "DebugMenu.h"
 #include "Render/Renderer.h"
 #include "Asset/AssetSystem.h"
-#include "FileSystem.h"
-#include "World.h"
-#include "WorldEditor.h"
+#include "Core/FileSystem.h"
+#include "Core/World.h"
+#include "Core/WorldEditor.h"
 
 std::map<std::wstring, std::pair<std::function<void()>, std::string>> Console::executeMap;
 

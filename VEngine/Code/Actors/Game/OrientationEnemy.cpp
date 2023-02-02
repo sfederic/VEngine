@@ -1,6 +1,6 @@
 #include "vpch.h"
 #include "OrientationEnemy.h"
-#include "VMath.h"
+#include "Core/VMath.h"
 #include "Components/MeshComponent.h"
 #include "Actors/Game/Player.h"
 

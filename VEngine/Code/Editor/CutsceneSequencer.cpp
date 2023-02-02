@@ -5,7 +5,7 @@
 #include <cassert>
 #include "imgui/imgui.h"
 #include <qfiledialog.h>
-#include "Log.h"
+#include "Core/Log.h"
 
 CutsceneSequencer cutsceneSequencer;
 

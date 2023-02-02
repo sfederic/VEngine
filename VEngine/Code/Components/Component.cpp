@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "Component.h"
 #include "IComponentSystem.h"
-#include "Log.h"
+#include "Core/Log.h"
 
 std::string Component::GetTypeName()
 {

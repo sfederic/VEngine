@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "Properties.h"
+#include "Core/Properties.h"
 
 //Instance holding data over the entirety of the game.
 //GameInstane is also used as a global save file of sorts, seperate from .vmaps.

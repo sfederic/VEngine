@@ -2,7 +2,7 @@
 #include <vector>
 #include <DirectXCollision.h>
 #include "Component.h"
-#include "Transform.h"
+#include "Core/Transform.h"
 #include "Physics/CollisionLayers.h"
 
 using namespace DirectX;

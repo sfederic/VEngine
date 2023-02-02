@@ -3,7 +3,7 @@
 #include "Renderer.h"
 #include "RenderUtils.h"
 #include "TextureSystem.h"
-#include "Debug.h"
+#include "Core/Debug.h"
 #include "Particle/SpriteSheet.h"
 #include "Texture2D.h"
 

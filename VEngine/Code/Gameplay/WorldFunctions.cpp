@@ -1,6 +1,6 @@
 #include "vpch.h"
 #include "WorldFunctions.h"
-#include "Log.h"
+#include "Core/Log.h"
 
 std::map<std::string, std::function<void()>> worldStartFunctionMap;
 

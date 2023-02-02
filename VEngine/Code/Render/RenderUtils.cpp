@@ -3,11 +3,11 @@
 #include "RenderTypes.h"
 #include "Texture2D.h"
 #include "PipelineObjects.h"
-#include "Debug.h"
+#include "Core/Debug.h"
 #include <WICTextureLoader.h>
 #include "TextureSystem.h"
 #include <filesystem>
-#include "VString.h"
+#include "Core/VString.h"
 #include "Asset/AssetPaths.h"
 
 namespace RenderUtils

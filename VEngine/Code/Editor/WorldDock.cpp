@@ -9,13 +9,13 @@
 #include "Actors/IActorSystem.h"
 #include "Actors/Actor.h"
 #include "Actors/ActorSystemCache.h"
-#include "World.h"
-#include "Camera.h"
+#include "Core/World.h"
+#include "Core/Camera.h"
 #include "Components/CameraComponent.h"
-#include "WorldEditor.h"
-#include "Log.h"
+#include "Core/WorldEditor.h"
+#include "Core/Log.h"
 #include "Editor.h"
-#include "Input.h"
+#include "Core/Input.h"
 
 WorldDock::WorldDock() : QDockWidget("World")
 {

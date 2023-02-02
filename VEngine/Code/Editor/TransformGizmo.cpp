@@ -1,14 +1,14 @@
 #include "vpch.h"
 #include "TransformGizmo.h"
 #include "Render/Renderer.h"
-#include "Camera.h"
-#include "Input.h"
-#include "WorldEditor.h"
+#include "Core/Camera.h"
+#include "Core/Input.h"
+#include "Core/WorldEditor.h"
 #include "Actors/Actor.h"
 #include "Editor.h"
 #include "Commands/CommandSystem.h"
 #include "Commands/Command.h"
-#include "Core.h"
+#include "Core/Core.h"
 #include "Console.h"
 
 TransformGizmo transformGizmo;

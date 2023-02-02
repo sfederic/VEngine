@@ -4,10 +4,10 @@
 #include <string>
 #include <map>
 #include <set>
-#include "Transform.h"
-#include "Properties.h"
-#include "UID.h"
-#include "Log.h"
+#include "Core/Transform.h"
+#include "Core/Properties.h"
+#include "Core/UID.h"
+#include "Core/Log.h"
 
 class Component;
 struct SpatialComponent;

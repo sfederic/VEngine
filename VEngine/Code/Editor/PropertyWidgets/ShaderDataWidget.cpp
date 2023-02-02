@@ -1,8 +1,8 @@
 #include "vpch.h"
 #include "ShaderDataWidget.h"
 #include <qfiledialog.h>
-#include "VString.h"
-#include "Log.h"
+#include "Core/VString.h"
+#include "Core/Log.h"
 #include "Asset/AssetPaths.h"
 #include "Render/RenderTypes.h"
 #include "Render/ShaderSystem.h"

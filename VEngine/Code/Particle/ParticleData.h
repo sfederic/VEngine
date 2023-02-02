@@ -1,7 +1,7 @@
 #pragma once
 
 #include <DirectXMath.h>
-#include "Properties.h"
+#include "Core/Properties.h"
 
 using namespace DirectX;
 

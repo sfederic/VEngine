@@ -1,8 +1,8 @@
 #include "vpch.h"
 #include "RenderTypes.h"
 #include "Material.h"
-#include "Camera.h"
-#include "Core.h"
+#include "Core/Camera.h"
+#include "Core/Core.h"
 
 void ShaderMatrices::Create()
 {

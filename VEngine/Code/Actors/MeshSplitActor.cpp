@@ -1,8 +1,8 @@
 #include "vpch.h"
 #include "MeshSplitActor.h"
 #include "Components/MeshComponent.h"
-#include "Input.h"
-#include "MeshSplitter.h"
+#include "Core/Input.h"
+#include "Core/MeshSplitter.h"
 
 MeshSplitActor::MeshSplitActor()
 {

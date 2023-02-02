@@ -2,7 +2,7 @@
 #include "SpinningEnemy.h"
 #include "Gameplay/GameplayTags.h"
 #include "Components/MeshComponent.h"
-#include "VMath.h"
+#include "Core/VMath.h"
 
 void SpinningEnemy::Create()
 {

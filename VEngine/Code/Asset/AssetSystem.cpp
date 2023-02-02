@@ -5,9 +5,9 @@
 #include <filesystem>
 #include "FBXLoader.h"
 #include "MeshAssetHeader.h"
-#include "Profile.h"
-#include "Log.h"
-#include "FileSystem.h"
+#include "Core/Profile.h"
+#include "Core/Log.h"
+#include "Core/FileSystem.h"
 #include "Asset/AssetPaths.h"
 
 std::map<std::string, MeshData> existingMeshData;

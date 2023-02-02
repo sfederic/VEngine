@@ -7,7 +7,7 @@
 #include "Components/MeshComponent.h"
 #include "Components/DestructibleMeshComponent.h"
 #include <PxRigidActor.h>
-#include "World.h"
+#include "Core/World.h"
 #include "Asset/AssetSystem.h"
 
 void NormaliseExtents(float& x, float& y, float& z);

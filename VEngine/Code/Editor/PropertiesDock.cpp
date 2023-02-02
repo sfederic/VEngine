@@ -27,7 +27,7 @@
 #include "PropertyWidgets/ShaderDataWidget.h"
 #include "PropertyWidgets/MeshComponentDataWidget.h"
 #include "PropertyWidgets/VEnumWidget.h"
-#include "VEnum.h"
+#include "Core/VEnum.h"
 #include "Render/Material.h"
 #include "Render/RenderTypes.h"
 

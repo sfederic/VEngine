@@ -1,6 +1,6 @@
 #include "vpch.h"
 #include "BeamEnemy.h"
-#include "VMath.h"
+#include "Core/VMath.h"
 #include "Actors/Game/Player.h"
 #include "Components/MeshComponent.h"
 #include "Particle/Polyboard.h"

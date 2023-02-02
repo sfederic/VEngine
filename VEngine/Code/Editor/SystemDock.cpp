@@ -2,12 +2,12 @@
 #include "SystemDock.h"
 #include <qlistwidget.h>
 #include <qboxlayout.h>
-#include "World.h"
+#include "Core/World.h"
 #include "Actors/IActorSystem.h"
 #include "Actors/Actor.h"
 #include "Actors/ActorSystemCache.h"
 #include "Components/Component.h"
-#include "WorldEditor.h"
+#include "Core/WorldEditor.h"
 #include <qlabel.h>
 #include <qlineedit.h>
 

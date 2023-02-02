@@ -1,10 +1,10 @@
 #include "vpch.h"
 #include "TextureSystem.h"
 #include <filesystem>
-#include "SystemStates.h"
+#include "Core/SystemStates.h"
 #include "Render/RenderUtils.h"
 #include "Render/Texture2D.h"
-#include "Log.h"
+#include "Core/Log.h"
 #include "Asset/AssetPaths.h"
 
 static SystemStates systemState = SystemStates::Unloaded;

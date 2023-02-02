@@ -4,8 +4,8 @@
 #include <fbxsdk.h>
 #include <cassert>
 #include <filesystem>
-#include "VMath.h"
-#include "VString.h"
+#include "Core/VMath.h"
+#include "Core/VString.h"
 #include "AssetPaths.h"
 #include "Animation/AnimationStructures.h"
 

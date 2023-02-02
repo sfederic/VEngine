@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "SkeletalMeshComponent.h"
 #include <algorithm>
-#include "Core.h"
+#include "Core/Core.h"
 #include "Asset/AssetSystem.h"
 
 Properties SkeletalMeshComponent::GetProps()

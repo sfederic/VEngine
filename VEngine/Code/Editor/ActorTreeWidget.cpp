@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "ActorTreeWidget.h"
 #include <qevent.h>
-#include "World.h"
+#include "Core/World.h"
 #include "Actors/Actor.h"
 
 ActorTreeWidget::ActorTreeWidget(QWidget* parent) : QTreeWidget(parent)

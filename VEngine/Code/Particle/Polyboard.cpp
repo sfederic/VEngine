@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "Polyboard.h"
-#include "Camera.h"
-#include "Core.h"
+#include "Core/Camera.h"
+#include "Core/Core.h"
 #include "Render/RenderUtils.h"
 #include "Render/PipelineObjects.h"
 

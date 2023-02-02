@@ -1,5 +1,6 @@
 #pragma once
-#include "SystemStates.h"
+
+#include "Core/SystemStates.h"
 #include <string>
 
 class Component;

@@ -2,12 +2,12 @@
 #include "UISystem.h"
 #include <cassert>
 #include <dxgi1_6.h>
-#include "Debug.h"
-#include "Core.h"
+#include "Core/Debug.h"
+#include "Core/Core.h"
 #include "UI/Widget.h"
 #include "UI/ScreenFadeWidget.h"
 #include "UI/ScreenFadeWidget.h"
-#include "SystemStates.h"
+#include "Core/SystemStates.h"
 
 static SystemStates systemState = SystemStates::Unloaded;
 

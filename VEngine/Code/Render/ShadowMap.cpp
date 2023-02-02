@@ -1,8 +1,8 @@
 #include "vpch.h"
 #include "ShadowMap.h"
-#include "Debug.h"
+#include "Core/Debug.h"
 #include <cassert>
-#include "VMath.h"
+#include "Core/VMath.h"
 #include "Components/Lights/DirectionalLightComponent.h"
 
 ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)

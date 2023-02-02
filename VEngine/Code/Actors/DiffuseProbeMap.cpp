@@ -1,8 +1,8 @@
 #include "vpch.h"
 #include "DiffuseProbeMap.h"
 #include <filesystem>
-#include "Debug.h"
-#include "World.h"
+#include "Core/Debug.h"
+#include "Core/World.h"
 #include "Components/InstanceMeshComponent.h"
 #include "Render/Material.h"
 

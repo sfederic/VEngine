@@ -4,8 +4,8 @@
 #include "Components/SpatialComponent.h"
 #include "Components/MeshComponent.h"
 #include "Components/EmptyComponent.h"
-#include "World.h"
-#include "Camera.h"
+#include "Core/World.h"
+#include "Core/Camera.h"
 
 XMMATRIX Actor::GetWorldMatrix()
 {

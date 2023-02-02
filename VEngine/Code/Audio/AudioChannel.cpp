@@ -1,6 +1,6 @@
 #include "vpch.h"
 #include "AudioChannel.h"
-#include "Debug.h"
+#include "Core/Debug.h"
 
 AudioChannel::AudioChannel()
 {

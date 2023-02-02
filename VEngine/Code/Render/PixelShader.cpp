@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "PixelShader.h"
 #include "RenderUtils.h"
-#include "Debug.h"
+#include "Core/Debug.h"
 
 void PixelShader::Create(const std::wstring filename)
 {

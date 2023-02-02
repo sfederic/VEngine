@@ -3,7 +3,7 @@
 #include "Components/MeshComponent.h"
 #include "Actors/Game/TurretBullet.h"
 #include "Gameplay/GameplayTags.h"
-#include "VMath.h"
+#include "Core/VMath.h"
 
 void TurretEnemy::Create()
 {

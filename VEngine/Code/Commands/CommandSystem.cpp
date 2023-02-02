@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "CommandSystem.h"
 #include "ICommand.h"
-#include "Input.h"
+#include "Core/Input.h"
 
 CommandSystem commandSystem;
 

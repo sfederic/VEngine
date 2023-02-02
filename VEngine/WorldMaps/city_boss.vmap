@@ -201,7 +201,7 @@ BoxTrigger
  Scale
 1 1 1
  Visible
-1
+0
 Extents
 5 3 5
 Offset
@@ -218,7 +218,7 @@ Camera
  Pos
 2 1.5 -4
  Rot
-0 0 0 1
+0.100444 -0.137986 0.0140676 0.985227
  Scale
 1 1 1
  Visible

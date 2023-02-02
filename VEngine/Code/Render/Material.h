@@ -3,9 +3,9 @@
 #include <string>
 #include <memory>
 #include <DirectXMath.h>
-#include "Properties.h"
-#include "UID.h"
-#include "VEnum.h"
+#include "Core/Properties.h"
+#include "Core/UID.h"
+#include "Core/VEnum.h"
 
 using namespace DirectX;
 

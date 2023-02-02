@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Property.h"
+#include "Core/Property.h"
 
 class IPropertyWidget
 {

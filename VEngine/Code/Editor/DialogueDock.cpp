@@ -10,10 +10,10 @@
 #include <qcombobox.h>
 #include <qjsonobject.h>
 #include <qjsondocument.h>
-#include "World.h"
+#include "Core/World.h"
 #include "Actors/Actor.h"
-#include "VFunctionSystem.h"
-#include "VString.h"
+#include "Core/VFunctionSystem.h"
+#include "Core/VString.h"
 #include "Asset/AssetPaths.h"
 
 //columns for QTreeWidget

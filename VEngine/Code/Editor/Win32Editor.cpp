@@ -1,8 +1,8 @@
 #include "vpch.h"
 #include "Win32Editor.h"
 #include "imgui_forward_declare.h"
-#include "Core.h"
-#include "Debug.h"
+#include "Core/Core.h"
+#include "Core/Debug.h"
 
 MSG msg;
 HWND window;

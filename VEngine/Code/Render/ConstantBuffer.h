@@ -1,6 +1,7 @@
 #pragma once
+
 #include "RenderUtils.h"
-#include "Debug.h"
+#include "Core/Debug.h"
 
 struct ID3D11Buffer;
 

@@ -1,7 +1,8 @@
 #pragma once
+
 #include "IPropertyWidget.h"
 #include <qpushbutton.h>
-#include "Properties.h"
+#include "Core/Properties.h"
 
 struct TextureData;
 

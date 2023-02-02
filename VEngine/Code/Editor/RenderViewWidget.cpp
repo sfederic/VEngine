@@ -2,7 +2,7 @@
 #include "RenderViewWidget.h"
 #include <qevent.h>
 #include "imgui_forward_declare.h"
-#include "Core.h"
+#include "Core/Core.h"
 
 bool RenderViewWidget::nativeEvent(const QByteArray& eventType, void* message, long* result)
 {

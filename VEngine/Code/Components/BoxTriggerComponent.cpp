@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "BoxTriggerComponent.h"
 #include "Components/MeshComponent.h"
-#include "VMath.h"
+#include "Core/VMath.h"
 #include "Actors/Game/Player.h"
 
 BoxTriggerComponent::BoxTriggerComponent()

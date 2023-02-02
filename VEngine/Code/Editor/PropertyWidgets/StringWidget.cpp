@@ -1,6 +1,6 @@
 #include "vpch.h"
 #include "StringWidget.h"
-#include "Properties.h"
+#include "Core/Properties.h"
 #include <QDir>
 #include <filesystem>
 #include <QDirIterator>

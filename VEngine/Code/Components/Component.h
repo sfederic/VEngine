@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Properties.h"
-#include "UID.h"
+#include "Core/Properties.h"
+#include "Core/UID.h"
 #include <set>
 
 struct IComponentSystem;

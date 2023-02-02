@@ -5,12 +5,12 @@
 #include <qcombobox.h>
 #include <qlabel.h>
 #include "PropertyWidgets/SpinBox.h"
-#include "Core.h"
+#include "Core/Core.h"
 #include "TransformGizmo.h"
-#include "FileSystem.h"
-#include "Camera.h"
+#include "Core/FileSystem.h"
+#include "Core/Camera.h"
 #include "Components/CameraComponent.h"
-#include "WorldEditor.h"
+#include "Core/WorldEditor.h"
 
 ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 {

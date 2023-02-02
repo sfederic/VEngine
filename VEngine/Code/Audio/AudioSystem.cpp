@@ -4,7 +4,7 @@
 #include <cassert>
 #include "AudioBase.h"
 #include "AudioChannel.h"
-#include "Debug.h"
+#include "Core/Debug.h"
 #include "Components/AudioComponent.h"
 
 #define fourccRIFF 'FFIR'

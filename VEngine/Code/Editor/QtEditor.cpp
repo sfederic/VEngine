@@ -9,7 +9,7 @@
 #include <qscrollarea.h>
 #include <qpushbutton.h>
 #include "EditorMainWindow.h"
-#include "Input.h"
+#include "Core/Input.h"
 #include "RenderViewWidget.h"
 #include "LogDock.h"
 #include "PropertiesDock.h"
@@ -18,8 +18,8 @@
 #include "SystemDock.h"
 #include "ToolbarDock.h"
 #include "Render/Material.h"
-#include "Serialiser.h"
-#include "Core.h"
+#include "Core/Serialiser.h"
+#include "Core/Core.h"
 #include "Render/MaterialSystem.h"
 
 void QtEditor::Init(int argc, char* argv[])

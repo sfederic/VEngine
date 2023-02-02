@@ -1,6 +1,6 @@
 #include "vpch.h"
 #include "ParticleEmitter.h"
-#include "VMath.h"
+#include "Core/VMath.h"
 #include "Render/Material.h"
 #include "Render/MaterialSystem.h"
 

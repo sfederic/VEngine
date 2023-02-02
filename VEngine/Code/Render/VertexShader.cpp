@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "VertexShader.h"
 #include "RenderUtils.h"
-#include "Debug.h"
+#include "Core/Debug.h"
 
 void VertexShader::Create(const std::wstring filename)
 {

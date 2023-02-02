@@ -1,6 +1,6 @@
 #include "vpch.h"
 #include "ComboBarWidget.h"
-#include "VString.h"
+#include "Core/VString.h"
 
 void ComboBarWidget::Draw(float deltaTime)
 {
