@@ -33,7 +33,7 @@ UID
 2661155135
 next
 MeshActor
-8
+17
  Enabled
 1
  Position
@@ -52,7 +52,7 @@ next
  Enabled
 1
  Position
-3 2 0
+6 2 -2
  Rotation
 -0 0 -0 1
  Scale
@@ -67,7 +67,7 @@ next
  Enabled
 1
  Position
--1 2 4
+-1 2 -2
  Rotation
 -0 0 -0 1
  Scale
@@ -75,9 +75,9 @@ next
  Visible
 1
 Name
-MeshActor2
+MeshActor7
 UID
-3238404301
+3889210704
 next
  Enabled
 1
@@ -97,7 +97,7 @@ next
  Enabled
 1
  Position
-2 2 5
+2 2 6
  Rotation
 -0 0 -0 1
  Scale
@@ -112,7 +112,7 @@ next
  Enabled
 1
  Position
-4 2 2
+6 2 6
  Rotation
 -0 0 -0 1
  Scale
@@ -127,39 +127,174 @@ next
  Enabled
 1
  Position
-5 2 -1
+5 2 2
  Rotation
 -0 0 -0 1
  Scale
-1 5 1
+1 1 1
  Visible
 1
 Name
-MeshActor6
+broken_building6
 UID
-3445403444
+1049154225
 next
  Enabled
 1
  Position
--1 2 -2
+5 3 4
  Rotation
--0 0 -0 1
+-0 -0.706934 -0 0.707279
  Scale
-1 5 1
+1 1 1
  Visible
 1
 Name
-MeshActor7
+MeshActor257670065
 UID
-3889210704
+963047367
+next
+ Enabled
+1
+ Position
+0 3 4
+ Rotation
+-0 -0.706934 -0 0.707279
+ Scale
+1 1 1
+ Visible
+1
+Name
+MeshActor397277289
+UID
+3855992116
+next
+ Enabled
+1
+ Position
+1 1 4
+ Rotation
+-0 0.000244133 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+MeshActor9
+UID
+947655199
+next
+ Enabled
+1
+ Position
+3 2 -1
+ Rotation
+-0 0.707107 -0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Name
+MeshActor10
+UID
+2394925985
+next
+ Enabled
+1
+ Position
+3 5 1
+ Rotation
+-0 0.707107 -0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Name
+MeshActor11
+UID
+1587992605
+next
+ Enabled
+1
+ Position
+5 0 1
+ Rotation
+-0.707107 0 -0 0.707107
+ Scale
+1 0.999999 0.999999
+ Visible
+1
+Name
+MeshActor12
+UID
+4169022575
+next
+ Enabled
+1
+ Position
+3 0 4
+ Rotation
+0.5 0.5 0.5 -0.5
+ Scale
+1 0.999994 0.999994
+ Visible
+1
+Name
+MeshActor13
+UID
+973206802
+next
+ Enabled
+1
+ Position
+3 0 4
+ Rotation
+0.5 0.5 0.5 -0.5
+ Scale
+1 0.999994 0.999994
+ Visible
+1
+Name
+MeshActor14
+UID
+756949920
+next
+ Enabled
+1
+ Position
+5 1 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+broken_building_ruble15
+UID
+1361288765
+next
+ Enabled
+1
+ Position
+3 4 1
+ Rotation
+0 1 0 -0.000244163
+ Scale
+1 1 1
+ Visible
+1
+Name
+MeshActor16
+UID
+981742667
 next
 Player
 1
  Enabled
 1
  Position
-0 0 0
+-2.79333 0 -1
  Rotation
 0 0 0 1
  Scale
@@ -275,7 +410,7 @@ UID
 3932160980
 next
 MeshComponent
-10
+19
 29764256
 Mesh
  Enabled
@@ -332,262 +467,7 @@ Mesh
  Enabled
 1
  Pos
-3 2 0
- Rot
--0 0 -0 1
- Scale
-1 5 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-default
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-building.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 5
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-1
-UID
-3728965508
-next
-3238404301
-Mesh
- Enabled
-1
- Pos
--1 2 4
- Rot
--0 0 -0 1
- Scale
-1 5 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-building.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 5
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3728965508
-next
-460170300
-Mesh
- Enabled
-1
- Pos
--2 2 2
- Rot
--0 0 -0 1
- Scale
-1 5 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-building.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 5
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3728965508
-next
-1348948809
-Mesh
- Enabled
-1
- Pos
-2 2 5
- Rot
--0 0 -0 1
- Scale
-1 5 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-building.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 5
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3728965508
-next
-1476189911
-Mesh
- Enabled
-1
- Pos
-4 2 2
- Rot
--0 0 -0 1
- Scale
-1 5 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-building.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 5
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3728965508
-next
-3445403444
-Mesh
- Enabled
-1
- Pos
-5 2 -1
+6 2 -2
  Rot
 -0 0 -0 1
  Scale
@@ -648,7 +528,7 @@ Mesh
 Casts Shadow
 1
 M_Ambient
-1 1 1 1
+1 1 1 0.35
 M_Blend State
 default
 M_Metallic
@@ -684,12 +564,624 @@ Trans. Occlude
 UID
 3728965508
 next
+460170300
+Mesh
+ Enabled
+1
+ Pos
+-2 2 2
+ Rot
+-0 0 -0 1
+ Scale
+1 5 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 5
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3728965508
+next
+1348948809
+Mesh
+ Enabled
+1
+ Pos
+2 2 6
+ Rot
+-0 0 -0 1
+ Scale
+1 5 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 5
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3728965508
+next
+1476189911
+Mesh
+ Enabled
+1
+ Pos
+6 2 6
+ Rot
+-0 0 -0 1
+ Scale
+1 5 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 5
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3728965508
+next
+1049154225
+Mesh
+ Enabled
+1
+ Pos
+5 2 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+destroyed_building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+broken_building.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2731457899
+next
+963047367
+Mesh
+ Enabled
+1
+ Pos
+5 3 4
+ Rot
+-0 -0.706934 -0 0.707279
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+destroyed_building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+broken_building.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2731457899
+next
+3855992116
+Mesh
+ Enabled
+1
+ Pos
+0 3 4
+ Rot
+-0 -0.706934 -0 0.707279
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+destroyed_building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+broken_building.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2731457899
+next
+947655199
+Mesh
+ Enabled
+1
+ Pos
+1 1 4
+ Rot
+-0 0.000244133 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+destroyed_building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+broken_building.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2731457899
+next
+2394925985
+Mesh
+ Enabled
+1
+ Pos
+3 2 -1
+ Rot
+-0 0.707107 -0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+destroyed_building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+broken_building.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2731457899
+next
+1587992605
+Mesh
+ Enabled
+1
+ Pos
+3 5 1
+ Rot
+-0 0.707107 -0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+destroyed_building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+broken_building.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2731457899
+next
+4169022575
+Mesh
+ Enabled
+1
+ Pos
+5 0 1
+ Rot
+-0.707107 0 -0 0.707107
+ Scale
+1 0.999999 0.999999
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+destroyed_building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+broken_building.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2731457899
+next
+973206802
+Mesh
+ Enabled
+1
+ Pos
+3 0 4
+ Rot
+0.5 0.5 0.5 -0.5
+ Scale
+1 0.999994 0.999994
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+destroyed_building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+broken_building.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2731457899
+next
+756949920
+Mesh
+ Enabled
+1
+ Pos
+3 0 4
+ Rot
+0.5 0.5 0.5 -0.5
+ Scale
+1 0.999994 0.999994
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+destroyed_building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+broken_building.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2731457899
+next
 4264839494
 Mesh
  Enabled
 1
  Pos
-0 0 0
+-2.79333 0 -1
  Rot
 0 0 0 1
  Scale
@@ -785,5 +1277,107 @@ Trans. Occlude
 0
 UID
 987893123
+next
+1361288765
+Mesh
+ Enabled
+1
+ Pos
+5 1 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+destroyed_building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+broken_building_ruble.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2783041263
+next
+981742667
+Mesh
+ Enabled
+1
+ Pos
+3 4 1
+ Rot
+0 1 0 -0.000244163
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+destroyed_building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+broken_building_ruble.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2783041263
 next
 end
