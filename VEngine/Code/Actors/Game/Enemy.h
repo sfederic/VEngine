@@ -14,4 +14,9 @@ public:
 
 	virtual bool CanBeHit() { return true; }
 	bool CheckIfAllTaggedMeshesAreDestroyed();
+
+	bool HasHealthDepleted() { return health <= 0; }
+
+private:
+	int health = 1;
 };

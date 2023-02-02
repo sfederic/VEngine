@@ -246,6 +246,8 @@ void Player::Shoot()
 			{
 				if (enemy->CanBeHit())
 				{
+
+
 					comboBarWidget->IncreaseScoreAndCombo();
 
 					auto mesh = dynamic_cast<MeshComponent*>(hitResult.hitComponent);
@@ -257,12 +259,18 @@ void Player::Shoot()
 						pointLight->SetLocalPosition(hitResult.hitPos);
 						Timer::SetTimer(0.5f, std::bind(&Component::Remove, pointLight));
 
-						mesh->Remove();
+						if (enemy->HasHealthDepleted())
+						{
+							mesh->Remove();
+						}
 					}
 
-					if (enemy->CheckIfAllTaggedMeshesAreDestroyed())
+					if (enemy->HasHealthDepleted())
 					{
-						enemy->Destroy();
+						if (enemy->CheckIfAllTaggedMeshesAreDestroyed())
+						{
+							enemy->Destroy();
+						}
 					}
 				}
 			}
