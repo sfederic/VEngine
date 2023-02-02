@@ -6,11 +6,16 @@
 #include "Gameplay/GameUtils.h"
 #include "UI/Game/BossHealthBar.h"
 #include "UI/UISystem.h"
+#include "Particle/Polyboard.h"
 
 RamielBoss::RamielBoss()
 {
     mesh = CreateComponent(MeshComponent("ramielboss.vmesh", ""), "Mesh");
     rootComponent = mesh;
+
+    attackBeam = CreateComponent(Polyboard(), "AttackBeam");
+    attackBeam->GenerateVertices();
+    rootComponent->AddChild(attackBeam);
 }
 
 void RamielBoss::Create()
@@ -30,6 +35,16 @@ void RamielBoss::Start()
 
 void RamielBoss::Tick(float deltaTime)
 {
+    XMVECTOR pos = GetPositionV();
+    XMStoreFloat3(&attackBeam->startPoint, pos);
+    HitResult hit(this);
+    auto player = Player::system.GetFirstActor();
+    XMVECTOR playerPos = player->GetPositionV();
+    if (Raycast(hit, GetPositionV(), playerPos))
+    {
+        XMStoreFloat3(&attackBeam->endPoint, hit.GetHitPosV());
+    }
+
     bossHealthBar->SetBossHealth(health);
 
     chargeAttackTimer += deltaTime;
