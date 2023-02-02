@@ -246,7 +246,7 @@ void Player::Shoot()
 			{
 				if (enemy->CanBeHit())
 				{
-
+					enemy->InflictDamage(damage);
 
 					comboBarWidget->IncreaseScoreAndCombo();
 
@@ -308,6 +308,8 @@ void Player::BladeSwipe()
 				{
 					if (enemy->CanBeHit())
 					{
+						enemy->InflictDamage(damage);
+
 						hitEnemies.emplace(enemy);
 
 						comboBarWidget->IncreaseScoreAndCombo();
@@ -325,14 +327,19 @@ void Player::BladeSwipe()
 		for (auto hitMesh : hitMeshComponents)
 		{
 			GameUtils::SpawnSpriteSheet("Sprites/blade_slash.png", hitMesh->GetWorldPositionV(), false, 3, 5);
+
+			//@Todo: handle enemy health here somehow
 			hitMesh->Remove();
 		}
 
 		for (auto hitEnemy : hitEnemies)
 		{
-			if (hitEnemy->CheckIfAllTaggedMeshesAreDestroyed())
+			if (hitEnemy->HasHealthDepleted())
 			{
-				hitEnemy->Destroy();
+				if (hitEnemy->CheckIfAllTaggedMeshesAreDestroyed())
+				{
+					hitEnemy->Destroy();
+				}
 			}
 		}
 	}

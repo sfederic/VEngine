@@ -16,7 +16,8 @@ public:
 	bool CheckIfAllTaggedMeshesAreDestroyed();
 
 	bool HasHealthDepleted() { return health <= 0; }
+	void InflictDamage(int damage) { health -= damage; }
 
-private:
+protected:
 	int health = 1;
 };

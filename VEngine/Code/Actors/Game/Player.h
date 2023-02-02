@@ -67,4 +67,6 @@ private:
 
 	bool allRangeModeActive = true;
 	bool inDashBladeAttack = false;
+
+	int damage = 1;
 };
