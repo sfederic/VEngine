@@ -117,6 +117,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\UI\Game\BossHealthBar.cpp" />
     <ClCompile Include="Code\Actors\AnimCube.cpp" />
     <ClCompile Include="Code\Actors\Game\BasicEnemy.cpp" />
     <ClCompile Include="Code\Actors\Game\BacksideEnemy.cpp" />
@@ -250,6 +251,7 @@
     <ClCompile Include="Code\Core\MeshSplitter.cpp" />
     <ClCompile Include="Code\Actors\MeshSplitActor.cpp" />
     <ClCompile Include="Code\Actors\Game\RamielBoss.cpp" />
+    <ClInclude Include="Code\UI\Game\BossHealthBar.h" />
     <ClInclude Include="Code\Actors\AnimCube.h" />
     <ClInclude Include="Code\Actors\Game\BasicEnemy.h" />
     <ClInclude Include="Code\Actors\Game\BacksideEnemy.h" />
