@@ -249,6 +249,7 @@
     <ClCompile Include="Code\Particle\MeshParticleEmitter.cpp" />
     <ClCompile Include="Code\MeshSplitter.cpp" />
     <ClCompile Include="Code\Actors\MeshSplitActor.cpp" />
+    <ClCompile Include="Code\Actors\Game\RamielBoss.cpp" />
     <ClInclude Include="Code\Actors\AnimCube.h" />
     <ClInclude Include="Code\Actors\Game\BasicEnemy.h" />
     <ClInclude Include="Code\Actors\Game\BacksideEnemy.h" />
@@ -502,6 +503,7 @@
     <ClInclude Include="Code\Particle\MeshParticleEmitter.h" />
     <ClInclude Include="Code\MeshSplitter.h" />
     <ClInclude Include="Code\Actors\MeshSplitActor.h" />
+    <ClInclude Include="Code\Actors\Game\RamielBoss.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
