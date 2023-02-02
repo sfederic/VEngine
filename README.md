@@ -1,9 +1,7 @@
 # VEngine
 
 ## Overview
-A beginner to intermediate game engine built with the intent of creating an RPG in the style of games such as Vagrant Story and Final Fantasy Tactics.
-
-The purpose of this being open source is to detail the lower level programming concepts that get overlooked and build a reference for onlookers, from programming to design concepts, when working on an engine from the ground up alongside a game, through a beginner's perspective.
+A beginner to intermediate game engine, the purpose of it being open source is to detail the lower level programming concepts that get overlooked and build a reference for onlookers, from programming to design concepts, when working on an engine from the ground up alongside a game, through a beginner's perspective.
 
 As many hobby engines are more focused on graphical and technical implementations, this engine's graphical and technical scopes are more simplified in order to cater for a more average game development use case. 
 
