@@ -245,6 +245,8 @@ void Player::Shoot()
 		HitResult hitResult(this);
 		if (Raycast(hitResult, GetPositionV(), GetForwardVectorV(), 1000.f))
 		{
+			GameUtils::SpawnSpriteSheet("Sprites/explosion.png", hitResult.GetHitPosV(), false, 4, 4);
+
 			auto enemy = dynamic_cast<Enemy*>(hitResult.hitActor);
 			if (enemy)
 			{
@@ -257,12 +259,6 @@ void Player::Shoot()
 					auto mesh = dynamic_cast<MeshComponent*>(hitResult.hitComponent);
 					if (mesh)
 					{
-						GameUtils::SpawnSpriteSheet("Sprites/explosion.png", hitResult.GetHitPosV(), false, 4, 4);
-
-						auto pointLight = PointLightComponent::system.Add("PlayerShootEffectPointLight");
-						pointLight->SetLocalPosition(hitResult.hitPos);
-						Timer::SetTimer(0.5f, std::bind(&Component::Remove, pointLight));
-
 						if (enemy->HasHealthDepleted())
 						{
 							mesh->Remove();
