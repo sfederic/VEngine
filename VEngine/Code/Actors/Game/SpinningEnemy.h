@@ -2,7 +2,7 @@
 
 #include "Enemy.h"
 
-//A spinning everlasting gobstopper enemy.
+//An everlasting gobstopper enemy that rotates randomly in increments.
 class SpinningEnemy : public Enemy
 {
 public:

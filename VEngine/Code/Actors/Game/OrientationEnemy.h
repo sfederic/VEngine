@@ -2,7 +2,7 @@
 
 #include "Enemy.h"
 
-//Enemy that the player needs to orient itself with propely to destroy on bladeswipe.
+//Enemy that the player needs to orient itself with propely to destroy with blade.
 class OrientationEnemy : public Enemy
 {
 public:

@@ -252,6 +252,7 @@
     <ClCompile Include="Code\Core\MeshSplitter.cpp" />
     <ClCompile Include="Code\Actors\MeshSplitActor.cpp" />
     <ClCompile Include="Code\Actors\Game\RamielBoss.cpp" />
+    <ClCompile Include="Code\Actors\Game\SpinningOrientationEnemy.cpp" />
     <ClInclude Include="Code\Actors\Game\BuildingRubble.h" />
     <ClInclude Include="Code\Gameplay\AttackTypes.h" />
     <ClInclude Include="Code\UI\Game\BossHealthBar.h" />
@@ -509,6 +510,7 @@
     <ClInclude Include="Code\Core\MeshSplitter.h" />
     <ClInclude Include="Code\Actors\MeshSplitActor.h" />
     <ClInclude Include="Code\Actors\Game\RamielBoss.h" />
+    <ClInclude Include="Code\Actors\Game\SpinningOrientationEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
