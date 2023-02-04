@@ -20,4 +20,6 @@ public:
 
 protected:
 	int health = 1;
+	bool canBeShot = true;
+	bool canBeBladeSwiped = true;
 };
