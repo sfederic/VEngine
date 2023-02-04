@@ -55,14 +55,14 @@ void World::Start()
 	MaterialSystem::CreateAllMaterials();
 	TextureSystem::CreateAllTextures();
 
-	for (auto componentSystem : activeComponentSystems)
-	{
-		componentSystem->Init();
-	}
-
 	for (auto actorSystem : activeActorSystems)
 	{
 		actorSystem->Init();
+	}
+
+	for (auto componentSystem : activeComponentSystems)
+	{
+		componentSystem->Init();
 	}
 
 	if (Core::gameplayOn)
@@ -113,8 +113,8 @@ void World::EndAllActors()
 void World::CreateDefaultMapActors()
 {
 	auto player = Player::system.Add();
-	player->CreateAllComponents();
 	player->Create();
+	player->CreateAllComponents();
 
 	LevelInstance::system.Add();
 
@@ -129,8 +129,8 @@ void World::CreateDefaultMapActors()
 	auto mesh = MeshActor::system.Add();
 	mesh->SetPosition(XMFLOAT3(2.f, -0.5f, 2.f));
 	mesh->SetScale(XMVectorSet(5.f, 1.f, 5.f, 1.0f));
-	mesh->CreateAllComponents();
 	mesh->Create();
+	mesh->CreateAllComponents();
 
 	MeshActor::spawnMeshFilename.clear();
 

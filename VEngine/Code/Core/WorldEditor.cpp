@@ -281,8 +281,8 @@ void SpawnActor(Transform& transform)
 			L"Spawned actor [%S] from [%S] system", actor->GetName().c_str(), spawnSystem->GetName().c_str()));
 	}
 
-	actor->CreateAllComponents();
 	actor->Create();
+	actor->CreateAllComponents();
 
 	pickedActor = actor;
 	editor->SetActorProps(pickedActor);
