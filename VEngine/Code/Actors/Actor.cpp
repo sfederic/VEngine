@@ -242,6 +242,11 @@ bool Actor::SetName(const std::string newName)
 	return false;
 }
 
+std::string Actor::GetTypeName()
+{
+	return actorSystem->GetName();
+}
+
 void Actor::CreateAllComponents()
 {
 	for (auto& componentPair : componentMap)
