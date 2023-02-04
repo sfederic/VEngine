@@ -253,6 +253,7 @@
     <ClCompile Include="Code\Actors\MeshSplitActor.cpp" />
     <ClCompile Include="Code\Actors\Game\RamielBoss.cpp" />
     <ClInclude Include="Code\Actors\Game\BuildingRubble.h" />
+    <ClInclude Include="Code\Gameplay\AttackTypes.h" />
     <ClInclude Include="Code\UI\Game\BossHealthBar.h" />
     <ClInclude Include="Code\Actors\AnimCube.h" />
     <ClInclude Include="Code\Actors\Game\BasicEnemy.h" />
