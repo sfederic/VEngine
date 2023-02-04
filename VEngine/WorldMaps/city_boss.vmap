@@ -1,3 +1,20 @@
+BuildingRubble
+1
+ Enabled
+1
+ Position
+-2 1 -1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+BuildingRubble0
+UID
+141271994
+next
 DirectionalLightActor
 1
  Enabled
@@ -33,7 +50,7 @@ UID
 2661155135
 next
 MeshActor
-17
+16
  Enabled
 1
  Position
@@ -67,17 +84,17 @@ next
  Enabled
 1
  Position
--1 2 -2
+3 4 1
  Rotation
--0 0 -0 1
+0 1 0 -0.000244163
  Scale
-1 5 1
+1 1 1
  Visible
 1
 Name
-MeshActor7
+MeshActor16
 UID
-3889210704
+981742667
 next
  Enabled
 1
@@ -274,29 +291,31 @@ broken_building_ruble15
 UID
 1361288765
 next
+OrientationEnemy
+1
  Enabled
 1
  Position
-3 4 1
+1 1 1
  Rotation
-0 1 0 -0.000244163
+-0 0 -0 1
  Scale
 1 1 1
  Visible
 1
 Name
-MeshActor16
+OrientationEnemy0
 UID
-981742667
+1037427784
 next
 Player
 1
  Enabled
 1
  Position
--2.79333 0 -1
+1 0 -2
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -308,12 +327,12 @@ Player0
 UID
 4264839494
 next
-RamielBoss
+SpinningOrientationEnemy
 1
  Enabled
 1
  Position
-1 2 2
+-1 1 1
  Rotation
 -0 0 -0 1
  Scale
@@ -321,9 +340,9 @@ RamielBoss
  Visible
 1
 Name
-RamielBoss0
+SpinningOrientationEnemy0
 UID
-2957491593
+1992871522
 next
 BoxTriggerComponent
 1
@@ -353,9 +372,9 @@ Camera
  Enabled
 1
  Pos
-2 1.5 -4
+1 0.5 -2
  Rot
-0.100444 -0.137986 0.0140676 0.985227
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -367,7 +386,7 @@ Far Z
 Near Z
 0.01
 UID
-1705625906
+2960127510
 next
 DirectionalLightComponent
 1
@@ -393,24 +412,90 @@ UID
 55067418
 next
 EmptyComponent
-1
-2957491593
+2
+1037427784
 Root
  Enabled
 1
  Pos
-0 0 0
+1 1 1
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
 1
 UID
-3932160980
+3598801514
+next
+1992871522
+Root
+ Enabled
+1
+ Pos
+-1 1 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+1524974835
 next
 MeshComponent
-19
+20
+141271994
+Mesh
+ Enabled
+1
+ Pos
+-2 1 -1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+destroyed_building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+broken_building.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+120679283
+next
 29764256
 Mesh
  Enabled
@@ -513,24 +598,24 @@ Trans. Occlude
 UID
 3728965508
 next
-3889210704
+981742667
 Mesh
  Enabled
 1
  Pos
--1 2 -2
+3 4 1
  Rot
--0 0 -0 1
+0 1 0 -0.000244163
  Scale
-1 5 1
+1 1 1
  Visible
 1
 Casts Shadow
 1
 M_Ambient
-1 1 1 0.35
+1 1 1 1
 M_Blend State
-default
+null
 M_Metallic
 0
 M_Rast State
@@ -542,7 +627,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-building.jpg
+destroyed_building.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -554,15 +639,15 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-1 5
+1 1
 Mesh
-cube.vmesh
+broken_building_ruble.vmesh
 Static
 1
 Trans. Occlude
-1
+0
 UID
-3728965508
+2783041263
 next
 460170300
 Mesh
@@ -583,13 +668,13 @@ M_Ambient
 M_Blend State
 null
 M_Metallic
-0
+1
 M_Rast State
 solid
 M_Shader
 Default
 M_Smoothness
-0
+1
 M_Specular
 1 1 1 1
 M_Texture
@@ -1176,108 +1261,6 @@ Trans. Occlude
 UID
 2731457899
 next
-4264839494
-Mesh
- Enabled
-1
- Pos
--2.79333 0 -1
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-174054795
-next
-2957491593
-Mesh
- Enabled
-1
- Pos
-1 2 2
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-0.1 0.1 0.9 1
-M_Blend State
-null
-M_Metallic
-0.9
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0.9
-M_Specular
-1 1 1 1
-M_Texture
-
-M_Use Texture
-0
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-ramielboss.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-987893123
-next
 1361288765
 Mesh
  Enabled
@@ -1329,14 +1312,14 @@ Trans. Occlude
 UID
 2783041263
 next
-981742667
+4264839494
 Mesh
  Enabled
 1
  Pos
-3 4 1
+1 0 -2
  Rot
-0 1 0 -0.000244163
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -1358,7 +1341,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-destroyed_building.jpg
+test.png
 M_Use Texture
 1
 M_UvOffset
@@ -1372,12 +1355,114 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-broken_building_ruble.vmesh
+jehuty.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-2783041263
+1465242666
+next
+1037427784
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+orientation_enemy.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3987682035
+next
+1992871522
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+orientation_enemy.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1997627611
 next
 end
