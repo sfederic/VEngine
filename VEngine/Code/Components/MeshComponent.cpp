@@ -140,6 +140,11 @@ void MeshComponent::SplitMeshCreate()
 	pso.vertexBuffer = buffer;
 }
 
+void MeshComponent::SetMeshFilename(std::string_view meshFilename)
+{
+	meshComponentData.filename = meshFilename;
+}
+
 void MeshComponent::SetRastState(const std::string newRastStateName)
 {
 	//If calling before Material::Create() is called, rastStateName is the one.

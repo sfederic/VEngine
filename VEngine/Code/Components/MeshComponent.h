@@ -48,6 +48,8 @@ public:
 
 	void SplitMeshCreate();
 
+	void SetMeshFilename(std::string_view meshFilename);
+
 	//Material set functions
 	void SetRastState(const std::string newRastStateName);
 	void SetBlendState(const std::string newBlendState);
