@@ -9,5 +9,5 @@ public:
 	ACTOR_SYSTEM(BacksideEnemy);
 
 	void Create() override;
-	bool CanBeHit() override;
+	bool CanBeHit(AttackTypes attackType) override;
 };

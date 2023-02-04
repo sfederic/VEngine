@@ -10,7 +10,7 @@ void BacksideEnemy::Create()
 	rootComponent->AddChild(mesh);
 }
 
-bool BacksideEnemy::CanBeHit()
+bool BacksideEnemy::CanBeHit(AttackTypes attackType)
 {
 	auto player = Player::system.GetFirstActor();
 	auto playerForward = player->GetForwardVectorV();

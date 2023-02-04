@@ -12,7 +12,7 @@ void OrientationEnemy::Create()
 
 bool OrientationEnemy::CanBeHit(AttackTypes attackType)
 {
-	if (attackType != AttackTypes::Melee) return;
+	if (attackType != AttackTypes::Melee) return false;
 
 	auto player = Player::system.GetFirstActor();
 	auto playerUp = player->GetUpVectorV();
