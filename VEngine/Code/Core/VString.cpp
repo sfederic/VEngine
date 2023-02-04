@@ -72,4 +72,9 @@ namespace VString
 
         return mainString;
     }
+
+    std::string ReplaceFileExtesnion(std::string mainString, std::string newExtension)
+    {
+        return VString::GetSubStringBeforeFoundOffset(mainString, ".") + newExtension;
+    }
 }

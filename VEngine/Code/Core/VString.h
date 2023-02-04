@@ -26,4 +26,6 @@ namespace VString
 
 	//Good for trimming off file extensions and folders from strings.
 	std::string GetSubStringBeforeFoundOffset(std::string mainString, std::string findCase);
+
+	std::string ReplaceFileExtesnion(std::string mainString, std::string newExtension);
 }
