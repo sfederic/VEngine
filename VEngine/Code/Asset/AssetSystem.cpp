@@ -8,6 +8,7 @@
 #include "Core/Profile.h"
 #include "Core/Log.h"
 #include "Core/FileSystem.h"
+#include "Core/VString.h"
 #include "Asset/AssetPaths.h"
 
 std::map<std::string, MeshData> existingMeshData;
@@ -127,6 +128,13 @@ void AssetSystem::BuildSingleVAnimFromFBX(const std::string filename)
 MeshDataProxy AssetSystem::ReadVMeshAssetFromFile(const std::string filename)
 {
 	std::string filepath = AssetBaseFolders::mesh + filename;
+
+	//Create VMesh if it doesn't exist yet.
+	if (!std::filesystem::exists(filepath))
+	{
+		std::string fbxFile = VString::ReplaceFileExtesnion(filename, ".fbx");
+		BuildSingleVMeshFromFBX(fbxFile);
+	}
 
 	FILE* file = nullptr;
 	fopen_s(&file, filepath.c_str(), "rb");
