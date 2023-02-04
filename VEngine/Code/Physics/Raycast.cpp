@@ -150,6 +150,7 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end)
 	return Raycast(hitResult, origin, direction, range, false);
 }
 
+//@Todo: there's a performance problem with this function. It just takes too long with large meshes if they're hit.
 bool RaycastTriangleIntersect(HitResult& hitResult)
 {
 	std::vector<HitResult> hitResults;
