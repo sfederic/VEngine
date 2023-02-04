@@ -11,6 +11,7 @@
 #include "Components/Lights/PointLightComponent.h"
 #include "Components/Game/SwordBeam.h"
 #include "Gameplay/GameUtils.h"
+#include "Gameplay/GameplayTags.h"
 #include "Physics/Raycast.h"
 #include "Particle/Polyboard.h"
 #include "UI/Game/ComboBarWidget.h"
@@ -330,8 +331,10 @@ void Player::BladeSwipe()
 		{
 			GameUtils::SpawnSpriteSheet("Sprites/blade_slash.png", hitMesh->GetWorldPositionV(), false, 3, 5);
 
-			//@Todo: handle enemy health here somehow
-			hitMesh->Remove();
+			if (hitMesh->HasTag(GameplayTags::EnemyMeshPiece))
+			{
+				hitMesh->Remove();
+			}
 		}
 
 		for (auto hitEnemy : hitEnemies)
