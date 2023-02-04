@@ -256,7 +256,7 @@ void Player::Shoot()
 					auto mesh = dynamic_cast<MeshComponent*>(hitResult.hitComponent);
 					if (mesh)
 					{
-						GameUtils::SpawnSpriteSheet("Sprites/explosion.png", mesh->GetWorldPositionV(), false, 4, 4);
+						GameUtils::SpawnSpriteSheet("Sprites/explosion.png", hitResult.GetHitPosV(), false, 4, 4);
 
 						auto pointLight = PointLightComponent::system.Add("PlayerShootEffectPointLight");
 						pointLight->SetLocalPosition(hitResult.hitPos);
@@ -298,7 +298,7 @@ void Player::BladeSwipe()
 		SpawnSwordBeam(rayOrigins.front(), rayOrigins.back());
 
 		//Can't destroy components/actors in an inner Raycast loop. Keep them and destroy later down.
-		std::vector<MeshComponent*> hitMeshComponents;
+		std::vector<std::pair<MeshComponent*, XMVECTOR>> hitMeshComponentsAndHitResultPositions;
 		std::set<Enemy*> hitEnemies;
 
 		for (auto& rayOrigin : rayOrigins)
@@ -320,20 +320,20 @@ void Player::BladeSwipe()
 						auto mesh = dynamic_cast<MeshComponent*>(hitResult.hitComponent);
 						if (mesh)
 						{
-							hitMeshComponents.emplace_back(mesh);
+							hitMeshComponentsAndHitResultPositions.emplace_back(std::make_pair(mesh, hitResult.GetHitPosV()));
 						}
 					}
 				}
 			}
 		}
 
-		for (auto hitMesh : hitMeshComponents)
+		for (auto& [mesh, hitpos] : hitMeshComponentsAndHitResultPositions)
 		{
-			GameUtils::SpawnSpriteSheet("Sprites/blade_slash.png", hitMesh->GetWorldPositionV(), false, 3, 5);
+			GameUtils::SpawnSpriteSheet("Sprites/blade_slash.png", hitpos, false, 3, 5);
 
-			if (hitMesh->HasTag(GameplayTags::EnemyMeshPiece))
+			if (mesh->HasTag(GameplayTags::EnemyMeshPiece))
 			{
-				hitMesh->Remove();
+				mesh->Remove();
 			}
 		}
 

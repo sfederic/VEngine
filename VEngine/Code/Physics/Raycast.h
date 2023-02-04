@@ -51,6 +51,7 @@ struct HitResult
 
 	void AddActorsToIgnore(std::vector<Actor*>& actors);
 
+	//Result is in world space.
 	XMVECTOR GetHitPosV() { return XMLoadFloat3(&hitPos); }
 };
 
