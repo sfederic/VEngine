@@ -2,6 +2,7 @@
 
 #include "../Actor.h"
 #include "../ActorSystem.h"
+#include "Gameplay/AttackTypes.h"
 
 //Base class for all enemies in the game.
 class Enemy : public Actor
@@ -12,7 +13,7 @@ public:
 	Enemy();
 	virtual Properties GetProps() override;
 
-	virtual bool CanBeHit() { return true; }
+	virtual bool CanBeHit(AttackTypes attackType) { return true; }
 	bool CheckIfAllTaggedMeshesAreDestroyed();
 
 	bool HasHealthDepleted() { return health <= 0; }
@@ -20,6 +21,4 @@ public:
 
 protected:
 	int health = 1;
-	bool canBeShot = true;
-	bool canBeBladeSwiped = true;
 };

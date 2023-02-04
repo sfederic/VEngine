@@ -12,6 +12,7 @@
 #include "Components/Game/SwordBeam.h"
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/GameplayTags.h"
+#include "Gameplay/AttackTypes.h"
 #include "Physics/Raycast.h"
 #include "Particle/Polyboard.h"
 #include "UI/Game/ComboBarWidget.h"
@@ -247,7 +248,7 @@ void Player::Shoot()
 			auto enemy = dynamic_cast<Enemy*>(hitResult.hitActor);
 			if (enemy)
 			{
-				if (enemy->CanBeHit())
+				if (enemy->CanBeHit(AttackTypes::Shoot))
 				{
 					enemy->InflictDamage(damage);
 
@@ -309,7 +310,7 @@ void Player::BladeSwipe()
 				auto enemy = dynamic_cast<Enemy*>(hitResult.hitActor);
 				if (enemy)
 				{
-					if (enemy->CanBeHit())
+					if (enemy->CanBeHit(AttackTypes::Melee))
 					{
 						enemy->InflictDamage(damage);
 
