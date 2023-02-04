@@ -6,7 +6,7 @@ class BossHealthBar : public Widget
 {
 public:
 	virtual void Draw(float deltaTime) override;
-	void SetBossName(const std::wstring bossName_) { bossName = bossName_; }
+	void SetBossName(std::wstring_view bossName_) { bossName = bossName_; }
 	void SetBossHealth(int bossHealth_) { bossHealth = bossHealth_; }
 
 private:
