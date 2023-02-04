@@ -19,7 +19,7 @@
 
 Player::Player()
 {
-	mesh = CreateComponent(MeshComponent("cube.vmesh", "test.png"), "Mesh");
+	mesh = CreateComponent(MeshComponent(), "Mesh");
 	rootComponent = mesh;
 
 	camera = CreateComponent(CameraComponent(), "Camera");
@@ -33,6 +33,7 @@ Player::Player()
 
 void Player::Create()
 {
+	mesh->SetMeshFilename("metabee.vmesh");
 	camera->SetLocalPosition(2.f, 1.5f, -4.f);
 }
 
