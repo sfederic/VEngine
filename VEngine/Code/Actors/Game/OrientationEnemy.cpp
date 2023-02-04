@@ -10,6 +10,11 @@ void OrientationEnemy::Create()
 	rootComponent->AddChild(mesh);
 }
 
+void OrientationEnemy::Tick(float deltaTime)
+{
+	AddRotation(GetUpVectorV(), 15.f * deltaTime);
+}
+
 bool OrientationEnemy::CanBeHit(AttackTypes attackType)
 {
 	if (attackType != AttackTypes::Melee) return false;
