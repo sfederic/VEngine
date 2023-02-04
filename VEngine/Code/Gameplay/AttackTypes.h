@@ -3,5 +3,5 @@
 enum class AttackTypes
 {
 	Shoot,
-	Melee
+	Melee //Melee is the player's blade swipe attack
 };
