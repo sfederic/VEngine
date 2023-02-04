@@ -33,8 +33,9 @@ Player::Player()
 
 void Player::Create()
 {
-	mesh->SetMeshFilename("metabee.vmesh");
-	camera->SetLocalPosition(2.f, 1.5f, -4.f);
+	mesh->SetMeshFilename("jehuty.vmesh");
+
+	camera->SetLocalPosition(1.f, 0.5f, -2.f);
 }
 
 void Player::Start()
