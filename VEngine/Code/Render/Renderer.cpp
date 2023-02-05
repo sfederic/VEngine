@@ -290,7 +290,7 @@ void CreateDevice()
 void CreateSwapchain(HWND window)
 {
 	DXGI_SWAP_CHAIN_DESC sd = {};
-	sd.BufferDesc = { (UINT)viewport.Width, (UINT)viewport.Height, {60, 1}, DXGI_FORMAT_R16G16B16A16_FLOAT };
+	sd.BufferDesc = { (UINT)viewport.Width, (UINT)viewport.Height, {60, 1}, DXGI_FORMAT_R8G8B8A8_UNORM };
 	sd.Windowed = TRUE;
 	sd.SampleDesc = sampleDesc;
 	sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
