@@ -532,8 +532,10 @@ void DrawBoundingBox(MeshComponent* mesh, DebugBox& debugBox)
 {
 	DirectX::BoundingOrientedBox boundingBox = mesh->boundingBox;
 
-	XMFLOAT3 extents = XMFLOAT3(boundingBox.Extents.x, boundingBox.Extents.y,
-		boundingBox.Extents.z);
+	//Make extents double for rendering
+	XMFLOAT3 extents = XMFLOAT3(boundingBox.Extents.x + boundingBox.Extents.x,
+		boundingBox.Extents.y + boundingBox.Extents.y,
+		boundingBox.Extents.z + boundingBox.Extents.z);
 
 	XMVECTOR center = mesh->GetWorldPositionV() + XMLoadFloat3(&boundingBox.Center);
 	XMVECTOR scale = mesh->GetLocalScaleV() * XMLoadFloat3(&extents);
