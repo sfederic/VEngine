@@ -138,6 +138,8 @@ void MeshComponent::SplitMeshCreate()
 	auto buffer = new Buffer();
 	buffer->data = RenderUtils::CreateVertexBuffer(meshDataProxy);
 	pso.vertexBuffer = buffer;
+
+	PhysicsSystem::CreatePhysicsActor(this, PhysicsType::Dynamic, GetOwner());
 }
 
 void MeshComponent::SetMeshFilename(std::string_view meshFilename)
