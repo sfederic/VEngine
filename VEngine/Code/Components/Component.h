@@ -5,6 +5,7 @@
 #include <set>
 
 struct IComponentSystem;
+class Actor;
 
 class Component
 {
@@ -53,6 +54,8 @@ public:
 
 	UID GetOwnerUID() { return ownerUID; }
 	void SetOwnerUID(UID ownerUID_) { ownerUID = ownerUID_; }
+
+	Actor* GetOwner();
 
 	bool IsTickEnabled() { return tickEnabled; }
 	void SetTickEnabled(bool newTickState) { tickEnabled = newTickState; }

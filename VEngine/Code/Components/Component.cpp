@@ -2,6 +2,7 @@
 #include "Component.h"
 #include "IComponentSystem.h"
 #include "Core/Log.h"
+#include "Core/World.h"
 
 std::string Component::GetTypeName()
 {
@@ -21,4 +22,10 @@ void Component::AddTag(const std::string& tag)
 bool Component::HasTag(const std::string& tag)
 {
 	return tags.find(tag) != tags.end();
+}
+
+Actor* Component::GetOwner()
+{
+	Actor* owner = World::GetActorByUID(ownerUID);
+	return owner;
 }
