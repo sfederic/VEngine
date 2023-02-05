@@ -21,6 +21,7 @@ void MeshSplitActor::Tick(float deltaTime)
 	{
 		MeshSplitter::SplitMeshViaPlane(*mesh, mesh0Verts, mesh1Verts);
 
+		Transform originalMeshTransform = mesh->transform;
 		mesh->Remove();
 
 		{
@@ -28,6 +29,7 @@ void MeshSplitActor::Tick(float deltaTime)
 			mesh0->SetRastState(RastStates::noBackCull);
 			mesh0->meshDataProxy.vertices = &mesh0Verts;
 			mesh0->isStatic = false;
+			mesh0->transform = originalMeshTransform;
 			mesh0->SplitMeshCreate();
 		}
 
@@ -36,6 +38,7 @@ void MeshSplitActor::Tick(float deltaTime)
 			mesh1->SetRastState(RastStates::noBackCull);
 			mesh1->meshDataProxy.vertices = &mesh1Verts;
 			mesh1->isStatic = false;
+			mesh1->transform = originalMeshTransform;
 			mesh1->SplitMeshCreate();
 		}
 	}
