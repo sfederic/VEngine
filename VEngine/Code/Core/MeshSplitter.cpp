@@ -92,13 +92,31 @@ void TriangulatePolygons(std::vector<Poly>& polys, std::vector<Vertex>& meshVert
 	}
 }
 
-bool CheckIntersectLine(XMVECTOR plane, XMVECTOR p0, XMVECTOR p1)
+bool CheckIntersectLine(XMVECTOR planeNormal, XMVECTOR planeCenter, XMVECTOR p0, XMVECTOR p1)
 {
-	XMVECTOR ba = XMVector3Normalize(p1 - p0);
-	float nDotA = DirectX::XMVector3Dot(plane, p0).m128_f32[0];
-	float nDotBA = DirectX::XMVector3Dot(plane, ba).m128_f32[0];
+	XMVECTOR u = p1 - p0;
+	XMVECTOR w = p0 - planeCenter;
 
-	if (nDotBA == 0.f)
+	float D = DirectX::XMVector3Dot(planeNormal, u).m128_f32[0];
+	float N = -DirectX::XMVector3Dot(planeNormal, w).m128_f32[0];
+
+	constexpr float e = std::numeric_limits<float>::epsilon();
+	float ab = std::abs(D);
+	if (ab < e)
+	{
+		// segment is parallel to plane
+		if (N == 0) // segment lies in plane
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	float sI = N / D;
+	if (sI < 0 || sI > 1)
 	{
 		return false;
 	}
@@ -111,8 +129,8 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 	std::vector<Vertex>& mesh1Verts)
 {
 	//Testing plane values
-	XMVECTOR planeCenter = DirectX::XMVectorSet(0.f, 0.f, 0.f, 1.f);
-	XMVECTOR planeNormal = DirectX::XMVectorSet(1.f, 0.f, 0.f, 1.f);
+	XMVECTOR planeCenter = DirectX::XMVectorSet(0.f, 0.33f, 0.f, 1.f);
+	XMVECTOR planeNormal = DirectX::XMVectorSet(0.f, 1.f, 0.f, 1.f);
 	XMVECTOR plane = DirectX::XMPlaneFromPointNormal(planeCenter, planeNormal);
 
 	//Need this because certain previous vertices will be invalid after triangle intersects.
@@ -145,17 +163,17 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 
 			std::vector<Vertex> newVerts;
 
-			if (!DirectX::XMVectorIsNaN(line0).m128_f32[0] && CheckIntersectLine(plane, p0, p1))
+			if (!DirectX::XMVectorIsNaN(line0).m128_f32[0] && CheckIntersectLine(planeNormal, planeCenter, p0, p1))
 			{
 				Vertex v = InterpolateVerts(v0, v1, line0);
 				newVerts.push_back(v);
 			}
-			if (!DirectX::XMVectorIsNaN(line1).m128_f32[0] && CheckIntersectLine(plane, p1, p2))
+			if (!DirectX::XMVectorIsNaN(line1).m128_f32[0] && CheckIntersectLine(planeNormal, planeCenter, p1, p2))
 			{
 				Vertex v = InterpolateVerts(v1, v2, line1);
 				newVerts.push_back(v);
 			}
-			if (!DirectX::XMVectorIsNaN(line2).m128_f32[0] && CheckIntersectLine(plane, p2, p0))
+			if (!DirectX::XMVectorIsNaN(line2).m128_f32[0] && CheckIntersectLine(planeNormal, planeCenter, p2, p0))
 			{
 				Vertex v = InterpolateVerts(v2, v0, line2);
 				newVerts.push_back(v);
