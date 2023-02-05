@@ -17,7 +17,7 @@ Vertex InterpolateVerts(const Vertex& v0, const Vertex& v1, XMVECTOR pos)
 
 	float posTov0PosLength = XMVector3Length(pos - v0Pos).m128_f32[0];
 	float v0Tov1Length = XMVector3Length(v0Pos - v1Pos).m128_f32[0];
-	float uvInterpValue = 1.f / (posTov0PosLength + v0Tov1Length);
+	float uvInterpValue = posTov0PosLength / v0Tov1Length;
 
 	//Ignore skeletal data
 	Vertex o;
