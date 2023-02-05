@@ -7,12 +7,13 @@
 MeshSplitActor::MeshSplitActor()
 {
 	mesh = CreateComponent(MeshComponent(), "Mesh");
+	//Make sure the mesh is always the root here, else the sliced meshcomponents will have wrong transforms
 	rootComponent = mesh;
 }
 
 void MeshSplitActor::Create()
 {
-	mesh->SetMeshFilename("cube.vmesh");
+	mesh->SetMeshFilename("broken_building.vmesh");
 }
 
 void MeshSplitActor::Tick(float deltaTime)
