@@ -139,6 +139,12 @@ void MeshComponent::SplitMeshCreate()
 	buffer->data = RenderUtils::CreateVertexBuffer(meshDataProxy);
 	pso.vertexBuffer = buffer;
 
+	//Make sure bounds setup is before physics actor creation
+	BoundingBox bb;
+	BoundingBox::CreateFromPoints(bb, meshDataProxy.vertices->size(),
+		&meshDataProxy.vertices->at(0).pos, sizeof(Vertex));
+	BoundingOrientedBox::CreateFromBoundingBox(boundingBox, bb);
+
 	PhysicsSystem::CreatePhysicsActor(this, PhysicsType::Dynamic, GetOwner());
 }
 
