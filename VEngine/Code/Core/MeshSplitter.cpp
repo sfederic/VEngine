@@ -207,7 +207,7 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 {
 	//Testing plane values
 	XMVECTOR planeCenter = DirectX::XMVectorSet(0.11f, 0.11f, 0.f, 1.f);
-	XMVECTOR planeNormal = DirectX::XMVectorSet(1.f, 0.f, 0.f, 0.f);
+	XMVECTOR planeNormal = XMVector3Normalize(DirectX::XMVectorSet(1.f, 1.f, 0.2f, 0.f));
 	XMVECTOR plane = DirectX::XMPlaneFromPointNormal(planeCenter, planeNormal);
 
 	std::vector<Vertex> allNewVerts;
