@@ -239,6 +239,9 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 
 			std::vector<Vertex> newVerts;
 
+			//@Todo: some meshes aren't working when they're split right on the 
+			//nose and multiple vertices are kissing the same edges.
+
 			if (!DirectX::XMVectorIsNaN(line0).m128_f32[0] && CheckIntersectLine(planeNormal, planeCenter, p0, p1))
 			{
 				Vertex v = InterpolateVerts(v0, v1, line0);
