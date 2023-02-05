@@ -124,6 +124,83 @@ bool CheckIntersectLine(XMVECTOR planeNormal, XMVECTOR planeCenter, XMVECTOR p0,
 	return true;
 }
 
+void TriangulateNewVerts(std::vector<Vertex>& remainingNewVerts)
+{
+	//Use this vector to delete from (remember to not remove the initial vert at [0]
+	std::vector<Vertex> verts = remainingNewVerts;
+
+	//Start all triangle fans from this initial vertex
+	Vertex initialVert = verts.front();
+
+	std::vector<Vertex> newTriangleFan;
+	newTriangleFan.push_back(initialVert);
+
+	//Roll back triangle positions when this hits 2
+	int indexCounter = 0;
+
+	float shortestDistance = std::numeric_limits<float>::max();
+	int shortestDistIndex = 0;
+
+	XMVECTOR p0 = XMLoadFloat3(&initialVert.pos);
+
+	for (int i = 0; i < verts.size(); i++)
+	{
+		for (int j = 0; j < verts.size(); j++)
+		{
+			XMVECTOR p1 = XMLoadFloat3(&verts[j].pos);
+
+			float dist = XMVector3Length(p1 - p0).m128_f32[0];
+			if (dist == 0)
+			{
+				continue;
+			}
+			if (dist < shortestDistance)
+			{
+				shortestDistance = dist;
+				shortestDistIndex = j;
+			}
+		}
+
+		assert(shortestDistIndex != 0);
+		newTriangleFan.push_back(verts[shortestDistIndex]);
+
+		indexCounter++;
+		if (indexCounter == 2)
+		{
+			newTriangleFan.push_back(initialVert);
+			newTriangleFan.push_back(verts[shortestDistIndex]);
+
+			verts.erase(verts.begin() + shortestDistIndex);
+
+			indexCounter = 0;
+		}
+		else
+		{
+			verts.erase(verts.begin() + shortestDistIndex);
+		}
+	}
+
+	remainingNewVerts = newTriangleFan;
+}
+
+void RemoveDuplicateNewVerts(std::vector<Vertex>& newVerts)
+{
+	for (int i = 0; i < newVerts.size(); i++)
+	{
+		XMVECTOR p0 = XMLoadFloat3(&newVerts[i].pos);
+
+		for (int j = 0; j < newVerts.size(); j++)
+		{
+			XMVECTOR p1 = XMLoadFloat3(&newVerts[j].pos);
+
+			if (XMVector4Equal(p0, p1))
+			{
+				newVerts.erase(newVerts.begin() + i);
+			}
+		}
+	}
+}
+
 void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 	std::vector<Vertex>& mesh0Verts,
 	std::vector<Vertex>& mesh1Verts)
@@ -133,8 +210,7 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 	XMVECTOR planeNormal = DirectX::XMVectorSet(0.f, 1.f, 0.f, 1.f);
 	XMVECTOR plane = DirectX::XMPlaneFromPointNormal(planeCenter, planeNormal);
 
-	//Need this because certain previous vertices will be invalid after triangle intersects.
-	std::vector<Vertex> newVerts;
+	std::vector<Vertex> allNewVerts;
 	
 	std::vector<Poly> leftPolys;
 	std::vector<Poly> rightPolys;
@@ -167,16 +243,19 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 			{
 				Vertex v = InterpolateVerts(v0, v1, line0);
 				newVerts.push_back(v);
+				allNewVerts.push_back(v);
 			}
 			if (!DirectX::XMVectorIsNaN(line1).m128_f32[0] && CheckIntersectLine(planeNormal, planeCenter, p1, p2))
 			{
 				Vertex v = InterpolateVerts(v1, v2, line1);
 				newVerts.push_back(v);
+				allNewVerts.push_back(v);
 			}
 			if (!DirectX::XMVectorIsNaN(line2).m128_f32[0] && CheckIntersectLine(planeNormal, planeCenter, p2, p0))
 			{
 				Vertex v = InterpolateVerts(v2, v0, line2);
 				newVerts.push_back(v);
+				allNewVerts.push_back(v);
 			}
 
 			//Make sure only two edges of the triangle are split
@@ -241,9 +320,14 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 		}
 	}
 
+	RemoveDuplicateNewVerts(allNewVerts);
+	TriangulateNewVerts(allNewVerts);
+
 	std::vector<Vertex> leftMesh;
 	TriangulatePolygons(leftPolys, leftMesh);
 	mesh0Verts.insert(mesh0Verts.begin(), leftMesh.begin(), leftMesh.end());
+	mesh0Verts.insert(mesh0Verts.end(), allNewVerts.begin(), allNewVerts.end());
+
 	for (auto& v : mesh0Verts)
 	{
 		v.pos.x -= 0.2f;
@@ -252,6 +336,7 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 	std::vector<Vertex> rightMesh;
 	TriangulatePolygons(rightPolys, rightMesh);
 	mesh1Verts.insert(mesh1Verts.begin(), rightMesh.begin(), rightMesh.end());
+	mesh1Verts.insert(mesh1Verts.end(), allNewVerts.begin(), allNewVerts.end());
 	for (auto& v : mesh1Verts)
 	{
 		v.pos.x += 0.2f;
