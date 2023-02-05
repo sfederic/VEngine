@@ -206,14 +206,16 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 	std::vector<Vertex>& mesh1Verts)
 {
 	//Testing plane values
-	XMVECTOR planeCenter = DirectX::XMVectorSet(0.f, 0.33f, 0.f, 1.f);
-	XMVECTOR planeNormal = DirectX::XMVectorSet(0.f, 1.f, 0.f, 1.f);
+	XMVECTOR planeCenter = DirectX::XMVectorSet(0.11f, 0.11f, 0.f, 1.f);
+	XMVECTOR planeNormal = DirectX::XMVectorSet(1.f, 0.f, 0.f, 0.f);
 	XMVECTOR plane = DirectX::XMPlaneFromPointNormal(planeCenter, planeNormal);
 
 	std::vector<Vertex> allNewVerts;
 	
 	std::vector<Poly> leftPolys;
 	std::vector<Poly> rightPolys;
+
+	const XMMATRIX meshWorldMatrix = mesh.GetWorldMatrix();
 
 	for (int i = 0; i < mesh.meshDataProxy.vertices->size() / 3; i++)
 	{
@@ -228,6 +230,16 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 		XMVECTOR p0 = XMLoadFloat3(&v0.pos);
 		XMVECTOR p1 = XMLoadFloat3(&v1.pos);
 		XMVECTOR p2 = XMLoadFloat3(&v2.pos);
+
+		//Transform positions into world space from Mesh's matrix
+		p0 = XMVector3TransformCoord(p0, meshWorldMatrix);
+		p1 = XMVector3TransformCoord(p1, meshWorldMatrix);
+		p2 = XMVector3TransformCoord(p2, meshWorldMatrix);
+
+		//Store transformed positions back into vertices
+		XMStoreFloat3(&v0.pos, p0);
+		XMStoreFloat3(&v1.pos, p1);
+		XMStoreFloat3(&v2.pos, p2);
 
 		PlaneIntersectionType intersectType = DirectX::TriangleTests::Intersects(p0, p1, p2, plane);
 
@@ -323,25 +335,33 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 		}
 	}
 
-	RemoveDuplicateNewVerts(allNewVerts);
-	TriangulateNewVerts(allNewVerts);
+	//RemoveDuplicateNewVerts(allNewVerts);
+	//TriangulateNewVerts(allNewVerts);
+
+	//Because the new triangle slices need to be in world space, re-transform the vertices
+	//back to their original local space.
+	XMVECTOR invDet = XMMatrixDeterminant(XMMatrixIdentity());
+	XMMATRIX inverseMeshMatrix = XMMatrixInverse(&invDet, mesh.GetWorldMatrix());
 
 	std::vector<Vertex> leftMesh;
 	TriangulatePolygons(leftPolys, leftMesh);
 	mesh0Verts.insert(mesh0Verts.begin(), leftMesh.begin(), leftMesh.end());
-	mesh0Verts.insert(mesh0Verts.end(), allNewVerts.begin(), allNewVerts.end());
-
+	//mesh0Verts.insert(mesh0Verts.end(), allNewVerts.begin(), allNewVerts.end());
 	for (auto& v : mesh0Verts)
 	{
-		v.pos.x -= 0.2f;
+		XMVECTOR p = XMLoadFloat3(&v.pos);
+		p = XMVector3TransformCoord(p, inverseMeshMatrix);
+		XMStoreFloat3(&v.pos, p);
 	}
 
 	std::vector<Vertex> rightMesh;
 	TriangulatePolygons(rightPolys, rightMesh);
 	mesh1Verts.insert(mesh1Verts.begin(), rightMesh.begin(), rightMesh.end());
-	mesh1Verts.insert(mesh1Verts.end(), allNewVerts.begin(), allNewVerts.end());
+	//mesh1Verts.insert(mesh1Verts.end(), allNewVerts.begin(), allNewVerts.end());
 	for (auto& v : mesh1Verts)
 	{
-		v.pos.x += 0.2f;
+		XMVECTOR p = XMLoadFloat3(&v.pos);
+		p = XMVector3TransformCoord(p, inverseMeshMatrix);
+		XMStoreFloat3(&v.pos, p);
 	}
 }
