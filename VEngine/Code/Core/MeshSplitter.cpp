@@ -10,14 +10,32 @@ using namespace DirectX;
 //Ref:https://gdcvault.com/play/1026882/How-to-Dissect-an-Exploding
 //Ref:http://simonschreibt.de/gat/metal-gear-rising-slicing/
 
+Vertex InterpolateVerts(const Vertex& v0, const Vertex& v1, XMVECTOR pos)
+{
+	XMVECTOR v0Pos = XMLoadFloat3(&v0.pos);
+	XMVECTOR v1Pos = XMLoadFloat3(&v1.pos);
+
+	float posTov0PosLength = XMVector3Length(pos - v0Pos).m128_f32[0];
+	float v0Tov1Length = XMVector3Length(v0Pos - v1Pos).m128_f32[0];
+	float uvInterpValue = 1.f / (posTov0PosLength + v0Tov1Length);
+
+	//Ignore skeletal data
+	Vertex o;
+	XMStoreFloat3(&o.pos, pos);
+	o.normal = v0.normal; //Normal and tangents will be the same as it's all the same triangle
+	o.tangent = v0.tangent;
+	XMVECTOR uvInterp = XMVectorLerp(XMLoadFloat2(&v0.uv), XMLoadFloat2(&v1.uv), uvInterpValue);
+	XMStoreFloat2(&o.uv, uvInterp);
+
+	return o;
+}
+
 struct Poly
 {
 	std::vector<Vertex> vertices;
 
-	void AddVert(XMVECTOR pos)
+	void AddVert(Vertex& v)
 	{
-		Vertex v;
-		XMStoreFloat3(&v.pos, pos);
 		vertices.emplace_back(v);
 	}
 };
@@ -125,23 +143,26 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 			XMVECTOR line1 = DirectX::XMPlaneIntersectLine(plane, p1, p2);
 			XMVECTOR line2 = DirectX::XMPlaneIntersectLine(plane, p2, p0);
 
-			std::vector<XMVECTOR> newPoints;
+			std::vector<Vertex> newVerts;
 
 			if (!DirectX::XMVectorIsNaN(line0).m128_f32[0] && CheckIntersectLine(plane, p0, p1))
 			{
-				newPoints.push_back(line0);
+				Vertex v = InterpolateVerts(v0, v1, line0);
+				newVerts.push_back(v);
 			}
 			if (!DirectX::XMVectorIsNaN(line1).m128_f32[0] && CheckIntersectLine(plane, p1, p2))
 			{
-				newPoints.push_back(line1);
+				Vertex v = InterpolateVerts(v1, v2, line1);
+				newVerts.push_back(v);
 			}
 			if (!DirectX::XMVectorIsNaN(line2).m128_f32[0] && CheckIntersectLine(plane, p2, p0))
 			{
-				newPoints.push_back(line2);
+				Vertex v = InterpolateVerts(v2, v0, line2);
+				newVerts.push_back(v);
 			}
 
 			//Make sure only two edges of the triangle are split
-			assert(newPoints.size() == 2);
+			assert(newVerts.size() == 2);
 
 			Poly leftPoly;
 			Poly rightPoly;
@@ -150,36 +171,29 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 			float p1Dot = XMVector3Dot(planeNormal, p1 - planeCenter).m128_f32[0];
 			float p2Dot = XMVector3Dot(planeNormal, p2 - planeCenter).m128_f32[0];
 
-			std::vector<std::pair<float, XMVECTOR>> dotAndPosition;
+			std::vector<std::pair<float, Vertex>> dotAndVertex;
 
-			dotAndPosition.emplace_back(std::make_pair(p0Dot, p0));
-			dotAndPosition.emplace_back(std::make_pair(p1Dot, p1));
-			dotAndPosition.emplace_back(std::make_pair(p2Dot, p2));
+			dotAndVertex.push_back(std::make_pair(p0Dot, v0));
+			dotAndVertex.push_back(std::make_pair(p1Dot, v1));
+			dotAndVertex.push_back(std::make_pair(p2Dot, v2));
 
-			for (auto& pair : dotAndPosition)
+			for (auto& [dot, vertex] : dotAndVertex)
 			{
-				float dot = pair.first;
-				XMVECTOR pos = pair.second;
-
-				if (dot < 0.f) //@Todo: need to fix this and discard tris on the edge or something
+				if (dot < 0.f)
 				{
-					leftPoly.AddVert(pos);
+					leftPoly.AddVert(vertex);
 				}
-				else if (dot > 0.f)
+				else if (dot >= 0.f)
 				{
-					rightPoly.AddVert(pos);
-				}
-				else
-				{
-					throw;
+					rightPoly.AddVert(vertex);
 				}
 			}
 
-			leftPoly.AddVert(newPoints[0]);
-			leftPoly.AddVert(newPoints[1]);
+			leftPoly.AddVert(newVerts[0]);
+			leftPoly.AddVert(newVerts[1]);
 
-			rightPoly.AddVert(newPoints[0]);
-			rightPoly.AddVert(newPoints[1]);
+			rightPoly.AddVert(newVerts[0]);
+			rightPoly.AddVert(newVerts[1]);
 
 			rightPolys.emplace_back(rightPoly);
 			leftPolys.emplace_back(leftPoly);
@@ -212,8 +226,16 @@ void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
 	std::vector<Vertex> leftMesh;
 	TriangulatePolygons(leftPolys, leftMesh);
 	mesh0Verts.insert(mesh0Verts.begin(), leftMesh.begin(), leftMesh.end());
+	for (auto& v : mesh0Verts)
+	{
+		v.pos.x -= 0.2f;
+	}
 
 	std::vector<Vertex> rightMesh;
 	TriangulatePolygons(rightPolys, rightMesh);
 	mesh1Verts.insert(mesh1Verts.begin(), rightMesh.begin(), rightMesh.end());
+	for (auto& v : mesh1Verts)
+	{
+		v.pos.x += 0.2f;
+	}
 }
