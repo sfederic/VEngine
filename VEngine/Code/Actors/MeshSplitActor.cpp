@@ -6,14 +6,14 @@
 
 MeshSplitActor::MeshSplitActor()
 {
-	mesh = CreateComponent(MeshComponent(), "Mesh");
+	mesh = CreateComponent(MeshComponent("broken_building.vmesh", "test.png"), "Mesh");
 	//Make sure the mesh is always the root here, else the sliced meshcomponents will have wrong transforms
 	rootComponent = mesh;
 }
 
 void MeshSplitActor::Create()
 {
-	mesh->SetMeshFilename("broken_building.vmesh");
+	//mesh->SetMeshFilename("broken_building.vmesh");
 }
 
 void MeshSplitActor::Tick(float deltaTime)
@@ -26,6 +26,7 @@ void MeshSplitActor::Tick(float deltaTime)
 		mesh->Remove();
 
 		{
+			//@Todo: this will fail if the plane doesn't cut this mesh. d3d11 will explore on CreateBuffer
 			auto mesh0 = MeshComponent::system.Add("SplitMesh0", this, MeshComponent(), false);
 			mesh0->SetRastState(RastStates::noBackCull);
 			mesh0->meshDataProxy.vertices = &mesh0Verts;
