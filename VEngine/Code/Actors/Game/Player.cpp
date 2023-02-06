@@ -6,6 +6,7 @@
 #include "Actors/Game/Enemy.h"
 #include "Actors/Game/LevelInstance.h"
 #include "Actors/Game/InteractActor.h"
+#include "Actors/MeshSplitActor.h"
 #include "Components/MeshComponent.h"
 #include "Components/CameraComponent.h"
 #include "Components/Lights/PointLightComponent.h"
@@ -282,6 +283,17 @@ void Player::BladeSwipe()
 		if (Raycast(hit, GetPositionV(), GetPositionV() + GetForwardVectorV()))
 		{
 			GameUtils::SpawnSpriteSheet("Sprites/blade_slash.png", hit.GetHitPosV(), false, 4, 4);
+
+			//Handle mesh slicing on attack
+			auto meshSplitActor = dynamic_cast<MeshSplitActor*>(hit.hitActor);
+			if (meshSplitActor)
+			{
+				//Give plane center a small offset as it's messing up right now
+				XMVECTOR slicePlaneCenter = GetPositionV() + GetForwardVectorV() + XMVectorSet(0.1f, 0.1f, 0.1f, 1.f);
+				XMVECTOR slicePlaneNormal = GetUpVectorV();
+				meshSplitActor->SliceMesh(slicePlaneCenter, slicePlaneNormal);
+				return;
+			}
 
 			auto enemy = dynamic_cast<Enemy*>(hit.hitActor);
 			if (enemy)
