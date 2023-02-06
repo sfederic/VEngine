@@ -15,8 +15,4 @@ public:
 	void Create() override { MeshComponent::Create(); }
 
 	void SliceMesh(XMVECTOR planeCenter, XMVECTOR planeNormal);
-
-private:
-	std::vector<Vertex> mesh0Verts;
-	std::vector<Vertex> mesh1Verts;
 };
