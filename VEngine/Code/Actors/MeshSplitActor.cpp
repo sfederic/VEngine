@@ -6,7 +6,7 @@
 
 MeshSplitActor::MeshSplitActor()
 {
-	sliceableMesh = CreateComponent(SliceableMeshComponent("broken_building.vmesh", "test.png"), "Mesh");
+	sliceableMesh = CreateComponent(SliceableMeshComponent("cube.vmesh", "test.png"), "Mesh");
 	//Make sure the mesh is always the root here, else the sliced meshcomponents will have wrong transforms
 	rootComponent = sliceableMesh;
 }

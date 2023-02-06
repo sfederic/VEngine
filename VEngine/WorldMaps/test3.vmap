@@ -1,9 +1,26 @@
+LevelInstance
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+LevelInstance0
+UID
+3015249252
+next
 MeshActor
 1
  Enabled
 1
  Position
-0 -1 0
+0 -3 0
  Rotation
 -0 0 -0 1
  Scale
@@ -22,7 +39,7 @@ MeshSplitActor
  Position
 0 0 0
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -30,7 +47,26 @@ MeshSplitActor
 Name
 MeshSplitActor0
 UID
-2499024223
+3417050700
+next
+Player
+1
+ Enabled
+1
+ Position
+0 0 -2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+All Range Mode
+1
+Name
+Player0
+UID
+2768023237
 next
 PointLightActor
 1
@@ -49,6 +85,50 @@ PointLightActor0
 UID
 684184413
 next
+BoxTriggerComponent
+1
+3015249252
+BoxTrigger
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+10 10 10
+Offset
+0 0 0
+UID
+2070927133
+next
+CameraComponent
+1
+2768023237
+Camera
+ Enabled
+1
+ Pos
+1 0.5 -2
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
+UID
+3244538232
+next
 MeshComponent
 2
 2975167817
@@ -56,7 +136,7 @@ Mesh
  Enabled
 1
  Pos
-0 -1 0
+0 -3 0
  Rot
 -0 0 -0 1
  Scale
@@ -102,14 +182,14 @@ Trans. Occlude
 UID
 2645945431
 next
-2499024223
+2768023237
 Mesh
  Enabled
 1
  Pos
-0 0 0
+0 0 -2
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -145,13 +225,13 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-ico_sphere.vmesh
+jehuty.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-1397232828
+1540650143
 next
 PointLightComponent
 1
@@ -175,5 +255,58 @@ LightEnabled
 1
 UID
 3903708707
+next
+SliceableMeshComponent
+1
+3417050700
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3385855586
 next
 end
