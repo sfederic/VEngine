@@ -280,7 +280,7 @@ void Player::BladeSwipe()
 	if (Input::GetKeyDown(Keys::Down))
 	{
 		HitResult hit(this);
-		if (Raycast(hit, GetPositionV(), GetPositionV() + GetForwardVectorV()))
+		if (Raycast(hit, GetPositionV(), GetPositionV() + GetForwardVectorV() * 2))
 		{
 			GameUtils::SpawnSpriteSheet("Sprites/blade_slash.png", hit.GetHitPosV(), false, 4, 4);
 
