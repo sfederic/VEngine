@@ -368,3 +368,18 @@ void MeshSlicer::SliceMeshViaPlane(XMVECTOR planeCenter,
 		XMStoreFloat3(&v.pos, p);
 	}
 }
+
+void MeshSlicer::CreateSlicedMesh(const std::vector<Vertex>& meshVerts, const Transform& originalMeshTrasnform)
+{
+	auto mesh = MeshComponent::system.Add("SlicedMesh", nullptr, MeshComponent(), false);
+	mesh->SetRastState(RastStates::noBackCull);
+
+	//Call 'new' here, can't just give the vertices a pointer to nothing
+	//@Todo: need to eventually cleanup these sliced meshes somehow. probably just put them on a timer
+	mesh->meshDataProxy.vertices = new std::vector<Vertex>();
+	*mesh->meshDataProxy.vertices = meshVerts;
+
+	mesh->isStatic = false;
+	mesh->transform = originalMeshTrasnform;
+	mesh->SplitMeshCreate();
+}
