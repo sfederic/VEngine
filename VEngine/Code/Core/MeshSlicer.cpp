@@ -10,6 +10,9 @@ using namespace DirectX;
 //Ref:https://gdcvault.com/play/1026882/How-to-Dissect-an-Exploding
 //Ref:http://simonschreibt.de/gat/metal-gear-rising-slicing/
 
+//@Todo: mesh slice will fail if it gets cut down the middle straight along triangle edges
+//as it will return multiple new verticesalong that edge.
+
 Vertex InterpolateVerts(const Vertex& v0, const Vertex& v1, XMVECTOR pos)
 {
 	XMVECTOR v0Pos = XMLoadFloat3(&v0.pos);
