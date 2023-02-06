@@ -34,6 +34,7 @@
 #include "Actors/DebugActors/DebugCone.h"
 #include "Components/CameraComponent.h"
 #include "Components/MeshComponent.h"
+#include "Components/SliceableMeshComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Components/InstanceMeshComponent.h"
@@ -833,6 +834,19 @@ void RenderMeshComponents()
 
 		DrawMesh(mesh);
 	}	
+
+	for (auto& mesh : SliceableMeshComponent::system.GetComponents())
+	{
+		if (!mesh->IsVisible()) { continue; }
+
+		SetRenderPipelineStates(mesh.get());
+
+		//Constant buffer data
+		SetMatricesFromMesh(mesh.get());
+		SetShaderMeshData(mesh.get());
+
+		DrawMesh(mesh.get());
+	}
 
 	//Set to null to remove warnings
 	ID3D11ShaderResourceView* nullSRV = nullptr;
