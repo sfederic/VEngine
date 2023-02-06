@@ -14,7 +14,6 @@
 #include "Gameplay/GameplayTags.h"
 #include "Gameplay/AttackTypes.h"
 #include "Physics/Raycast.h"
-#include "Particle/Polyboard.h"
 #include "UI/Game/ComboBarWidget.h"
 #include "UI/Game/PlayerShieldWidget.h"
 #include "UI/UISystem.h"
@@ -74,11 +73,6 @@ void Player::Tick(float deltaTime)
 	//ShieldLogic(deltaTime);
 
 	Interact();
-
-	if (swordBeamInputCooldown >= 0.f)
-	{
-		swordBeamInputCooldown -= deltaTime;
-	}
 
 	MovementInput();
 	RotationInput();
@@ -282,65 +276,38 @@ void Player::BladeSwipe()
 {
 	if (!CheckMovementAndRotationHaveStopped()) return;
 
-	if (Input::GetKeyDown(Keys::Down) && swordBeamInputCooldown <= 0.f)
+	if (Input::GetKeyDown(Keys::Down))
 	{
-		//Line up 5 origins alongside player's right axis
-		std::vector<XMVECTOR> rayOrigins;
-		rayOrigins.emplace_back(GetPositionV() - GetRightVectorV() * 2.f);
-		rayOrigins.emplace_back(GetPositionV() - GetRightVectorV());
-		rayOrigins.emplace_back(GetPositionV());
-		rayOrigins.emplace_back(GetPositionV() + GetRightVectorV());
-		rayOrigins.emplace_back(GetPositionV() + GetRightVectorV() * 2.f);
-
-		SpawnSwordBeam(rayOrigins.front(), rayOrigins.back());
-
-		//Can't destroy components/actors in an inner Raycast loop. Keep them and destroy later down.
-		std::vector<std::pair<MeshComponent*, XMVECTOR>> hitMeshComponentsAndHitResultPositions;
-		std::set<Enemy*> hitEnemies;
-
-		for (auto& rayOrigin : rayOrigins)
+		HitResult hit(this);
+		if (Raycast(hit, GetPositionV(), GetPositionV() + GetForwardVectorV()))
 		{
-			HitResult hitResult(this);
-			if (Raycast(hitResult, rayOrigin, GetForwardVectorV(), 1000.f))
+			GameUtils::SpawnSpriteSheet("Sprites/blade_slash.png", hit.GetHitPosV(), false, 4, 4);
+
+			auto enemy = dynamic_cast<Enemy*>(hit.hitActor);
+			if (enemy)
 			{
-				auto enemy = dynamic_cast<Enemy*>(hitResult.hitActor);
-				if (enemy)
+				if (enemy->CanBeHit(AttackTypes::Melee))
 				{
-					if (enemy->CanBeHit(AttackTypes::Melee))
+					enemy->InflictDamage(damage);
+
+					comboBarWidget->IncreaseScoreAndCombo();
+
+					auto mesh = dynamic_cast<MeshComponent*>(hit.hitComponent);
+					if (mesh)
 					{
-						enemy->InflictDamage(damage);
-
-						hitEnemies.emplace(enemy);
-
-						comboBarWidget->IncreaseScoreAndCombo();
-
-						auto mesh = dynamic_cast<MeshComponent*>(hitResult.hitComponent);
-						if (mesh)
+						if (enemy->HasHealthDepleted())
 						{
-							hitMeshComponentsAndHitResultPositions.emplace_back(std::make_pair(mesh, hitResult.GetHitPosV()));
+							mesh->Remove();
 						}
 					}
-				}
-			}
-		}
 
-		for (auto& [mesh, hitpos] : hitMeshComponentsAndHitResultPositions)
-		{
-			GameUtils::SpawnSpriteSheet("Sprites/blade_slash.png", hitpos, false, 3, 5);
-
-			if (mesh->HasTag(GameplayTags::EnemyMeshPiece))
-			{
-				mesh->Remove();
-			}
-		}
-
-		for (auto hitEnemy : hitEnemies)
-		{
-			if (hitEnemy->HasHealthDepleted())
-			{
-				if (hitEnemy->CheckIfAllTaggedMeshesAreDestroyed())
-				{
-					hitEnemy->Destroy();
+					if (enemy->HasHealthDepleted())
+					{
+						if (enemy->CheckIfAllTaggedMeshesAreDestroyed())
+						{
+							enemy->Destroy();
+						}
+					}
 				}
 			}
 		}
@@ -366,15 +333,6 @@ void Player::DashBladeAttack()
 		inDashBladeAttack = false;
 		movementSpeed = movementSpeed / 2.f;
 	}
-}
-
-void Player::SpawnSwordBeam(XMVECTOR start, XMVECTOR end)
-{
-	auto swordBeam = SwordBeam::system.Add("SwordBeam");
-	XMStoreFloat3(&swordBeam->startPoint, start);
-	XMStoreFloat3(&swordBeam->endPoint, end);
-	swordBeam->movementDirection = GetForwardVectorV();
-	swordBeamInputCooldown = SWORD_BEAM_INPUT_COOLDOWN_MAX;
 }
 
 void Player::ShieldLogic(float deltaTime)

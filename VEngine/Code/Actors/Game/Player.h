@@ -35,7 +35,6 @@ private:
 	void Shoot();
 	void BladeSwipe();
 	void DashBladeAttack();
-	void SpawnSwordBeam(XMVECTOR start, XMVECTOR end);
 	void ShieldLogic(float deltaTime);
 	void Interact();
 
@@ -50,9 +49,6 @@ private:
 	PlayerShieldWidget* playerShieldWidget = nullptr;
 
 	MeshComponent* shieldMesh = nullptr;
-
-	inline static const float SWORD_BEAM_INPUT_COOLDOWN_MAX = 1.0f;
-	float swordBeamInputCooldown = 0.f;
 
 	//When to turn shield effect off after interval of damage.
 	float shieldCountdownTimer = 0.5f;
