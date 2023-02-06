@@ -4,7 +4,6 @@
 #include "Render/RenderTypes.h"
 
 class MeshComponent;
-struct Transform;
 
 namespace MeshSlicer
 {
@@ -13,6 +12,4 @@ namespace MeshSlicer
 		MeshComponent& mesh,
 		std::vector<Vertex>& mesh0Verts,
 		std::vector<Vertex>& mesh1Verts);
-
-	void CreateSlicedMesh(const std::vector<Vertex>& meshVerts, const Transform& originalMeshTrasnform);
 };

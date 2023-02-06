@@ -533,7 +533,7 @@
     <ClCompile Include="Code\Components\SliceableMeshComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Core\SplitMesh.cpp">
+    <ClCompile Include="Code\Actors\SplitMesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1030,7 +1030,7 @@
     <ClInclude Include="Code\Components\SliceableMeshComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Core\SplitMesh.h">
+    <ClInclude Include="Code\Actors\SplitMesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
