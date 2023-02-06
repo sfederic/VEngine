@@ -106,6 +106,11 @@ public:
 		return components.front().get();
 	}
 
+	T* GetLastComponent()
+	{
+		return components.back().get();
+	}
+
 	virtual void Serialise(Serialiser& s) override
 	{
 		s.WriteLine(VString::stows(name));
