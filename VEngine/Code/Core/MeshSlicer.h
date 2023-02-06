@@ -5,9 +5,11 @@
 
 class MeshComponent;
 
-namespace MeshSplitter
+namespace MeshSlicer
 {
-	void SplitMeshViaPlane(MeshComponent& mesh,
+	void SliceMeshViaPlane(XMVECTOR planeCenter,
+		XMVECTOR planeNormal,
+		MeshComponent& mesh,
 		std::vector<Vertex>& mesh0Verts,
 		std::vector<Vertex>& mesh1Verts);
 };

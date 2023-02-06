@@ -1,5 +1,5 @@
 #include "vpch.h"
-#include "MeshSplitter.h"
+#include "MeshSlicer.h"
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
 #include "Components/MeshComponent.h"
@@ -201,13 +201,13 @@ void RemoveDuplicateNewVerts(std::vector<Vertex>& newVerts)
 	}
 }
 
-void MeshSplitter::SplitMeshViaPlane(MeshComponent& mesh,
+void MeshSlicer::SliceMeshViaPlane(XMVECTOR planeCenter,
+	XMVECTOR planeNormal,
+	MeshComponent& mesh,
 	std::vector<Vertex>& mesh0Verts,
 	std::vector<Vertex>& mesh1Verts)
 {
-	//Testing plane values
-	XMVECTOR planeCenter = DirectX::XMVectorSet(0.11f, 0.11f, 0.f, 1.f);
-	XMVECTOR planeNormal = XMVector3Normalize(DirectX::XMVectorSet(1.f, 1.f, 0.2f, 0.f));
+	planeNormal = XMVector3Normalize(planeNormal);
 	XMVECTOR plane = DirectX::XMPlaneFromPointNormal(planeCenter, planeNormal);
 
 	std::vector<Vertex> allNewVerts;

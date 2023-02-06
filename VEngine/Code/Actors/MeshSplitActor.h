@@ -12,8 +12,9 @@ public:
 
 	MeshSplitActor();
 	void Create() override;
-	void Tick(float deltaTime) override;
 	Properties GetProps() { return __super::GetProps(); }
+
+	void SliceMesh(XMVECTOR planeCenter, XMVECTOR planeNormal);
 
 private:
 	MeshComponent* mesh = nullptr;

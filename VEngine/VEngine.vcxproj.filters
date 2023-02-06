@@ -512,7 +512,7 @@
     <ClCompile Include="Code\Particle\Particle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Core\MeshSplitter.cpp">
+    <ClCompile Include="Code\Core\MeshSlicer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\MeshSplitActor.cpp">
@@ -1000,7 +1000,7 @@
     <ClInclude Include="Code\Particle\ParticleData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Core\MeshSplitter.h">
+    <ClInclude Include="Code\Core\MeshSlicer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\MeshSplitActor.h">

@@ -2,7 +2,7 @@
 #include "MeshSplitActor.h"
 #include "Components/MeshComponent.h"
 #include "Core/Input.h"
-#include "Core/MeshSplitter.h"
+#include "Core/MeshSlicer.h"
 
 MeshSplitActor::MeshSplitActor()
 {
@@ -16,11 +16,11 @@ void MeshSplitActor::Create()
 	//mesh->SetMeshFilename("broken_building.vmesh");
 }
 
-void MeshSplitActor::Tick(float deltaTime)
+void MeshSplitActor::SliceMesh(XMVECTOR planeCenter, XMVECTOR planeNormal)
 {
 	if (Input::GetKeyUp(Keys::Enter))
 	{
-		MeshSplitter::SplitMeshViaPlane(*mesh, mesh0Verts, mesh1Verts);
+		MeshSlicer::SliceMeshViaPlane(planeCenter, planeNormal, *mesh, mesh0Verts, mesh1Verts);
 
 		Transform originalMeshTransform = mesh->transform;
 		mesh->Remove();
