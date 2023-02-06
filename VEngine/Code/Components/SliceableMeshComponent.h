@@ -12,6 +12,8 @@ public:
 	SliceableMeshComponent(std::string meshFilename, std::string textureFilename) :
 		MeshComponent(meshFilename, textureFilename) {}
 
+	void Create() override { MeshComponent::Create(); }
+
 	void SliceMesh(XMVECTOR planeCenter, XMVECTOR planeNormal);
 
 private:
