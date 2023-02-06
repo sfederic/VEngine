@@ -23,7 +23,7 @@ public:
 		ComponentSystemCache::Get().Add(typeid(T), this);
 	}
 
-	T* Add(std::string name, Actor* owner = nullptr, T newComponent = T(), bool callCreate = true)
+	T* Add(std::string name, Actor* owner = nullptr, T newComponent = T(), bool callCreate = false)
 	{
 		components.emplace_back(std::make_unique<T>(std::move(newComponent)));
 		auto& component = components.back();
