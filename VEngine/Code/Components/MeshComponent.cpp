@@ -129,10 +129,8 @@ Properties MeshComponent::GetProps()
 
 void MeshComponent::SplitMeshCreate()
 {
-	//Set 'this' so mesh widgets can access this component.
 	meshComponentData.meshComponent = this;
 
-	//Material's create needs to be called here to deal with serialisation
 	material->Create();
 
 	auto buffer = new Buffer();
@@ -145,7 +143,9 @@ void MeshComponent::SplitMeshCreate()
 		&meshDataProxy.vertices->at(0).pos, sizeof(Vertex));
 	BoundingOrientedBox::CreateFromBoundingBox(boundingBox, bb);
 
-	PhysicsSystem::CreatePhysicsActor(this, PhysicsType::Dynamic, GetOwner());
+	//@Todo: owner being set as null on CreatePhysicsActor() won't explode the program,
+	//but it will cause problems if you want to use raycasts via PhysX.
+	PhysicsSystem::CreatePhysicsActor(this, PhysicsType::Dynamic, nullptr);
 }
 
 void MeshComponent::SetMeshFilename(std::string_view meshFilename)
