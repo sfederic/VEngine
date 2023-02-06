@@ -277,7 +277,7 @@ void Player::BladeSwipe()
 {
 	if (!CheckMovementAndRotationHaveStopped()) return;
 
-	if (Input::GetKeyDown(Keys::Down))
+	if (Input::GetKeyUp(Keys::Down))
 	{
 		HitResult hit(this);
 		if (Raycast(hit, GetPositionV(), GetPositionV() + GetForwardVectorV() * 2))
