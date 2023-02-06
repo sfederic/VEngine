@@ -118,6 +118,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Code\Actors\Game\BuildingRubble.cpp" />
+    <ClCompile Include="Code\Core\SplitMesh.cpp" />
     <ClCompile Include="Code\UI\Game\BossHealthBar.cpp" />
     <ClCompile Include="Code\Actors\AnimCube.cpp" />
     <ClCompile Include="Code\Actors\Game\BasicEnemy.cpp" />
@@ -255,6 +256,7 @@
     <ClCompile Include="Code\Actors\Game\SpinningOrientationEnemy.cpp" />
     <ClCompile Include="Code\Components\SliceableMeshComponent.cpp" />
     <ClInclude Include="Code\Actors\Game\BuildingRubble.h" />
+    <ClInclude Include="Code\Core\SplitMesh.h" />
     <ClInclude Include="Code\Gameplay\AttackTypes.h" />
     <ClInclude Include="Code\UI\Game\BossHealthBar.h" />
     <ClInclude Include="Code\Actors\AnimCube.h" />
