@@ -8,6 +8,7 @@
 #include "Actors/Game/InteractActor.h"
 #include "Actors/MeshSplitActor.h"
 #include "Components/MeshComponent.h"
+#include "Components/SliceableMeshComponent.h"
 #include "Components/CameraComponent.h"
 #include "Components/Lights/PointLightComponent.h"
 #include "Components/Game/SwordBeam.h"
@@ -284,17 +285,6 @@ void Player::BladeSwipe()
 		{
 			GameUtils::SpawnSpriteSheet("Sprites/blade_slash.png", hit.GetHitPosV(), false, 4, 4);
 
-			//Handle mesh slicing on attack
-			auto meshSplitActor = dynamic_cast<MeshSplitActor*>(hit.hitActor);
-			if (meshSplitActor)
-			{
-				//Give plane center a small offset as it's messing up right now
-				XMVECTOR slicePlaneCenter = GetPositionV() + GetForwardVectorV() + XMVectorSet(0.1f, 0.1f, 0.1f, 1.f);
-				XMVECTOR slicePlaneNormal = GetUpVectorV();
-				meshSplitActor->SliceMesh(slicePlaneCenter, slicePlaneNormal);
-				return;
-			}
-
 			auto enemy = dynamic_cast<Enemy*>(hit.hitActor);
 			if (enemy)
 			{
@@ -305,7 +295,17 @@ void Player::BladeSwipe()
 					comboBarWidget->IncreaseScoreAndCombo();
 
 					auto mesh = dynamic_cast<MeshComponent*>(hit.hitComponent);
-					if (mesh)
+
+					//Handle mesh slicing on attack
+					auto sliceMeshComponent = dynamic_cast<SliceableMeshComponent*>(hit.hitComponent);
+					if (sliceMeshComponent)
+					{
+						//Give plane center a small offset as it's messing up right now
+						XMVECTOR slicePlaneCenter = GetPositionV() + GetForwardVectorV() + XMVectorSet(0.1f, 0.1f, 0.1f, 1.f);
+						XMVECTOR slicePlaneNormal = GetUpVectorV();
+						sliceMeshComponent->SliceMesh(slicePlaneCenter, slicePlaneNormal);
+					}
+					else if (mesh)
 					{
 						if (enemy->HasHealthDepleted())
 						{
