@@ -536,6 +536,9 @@
     <ClCompile Include="Code\Actors\SplitMesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\Game\HiddenCoreEnemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1031,6 +1034,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\SplitMesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\HiddenCoreEnemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
