@@ -10,7 +10,8 @@
 #include "Core/World.h"
 #include "Asset/AssetSystem.h"
 
-std::vector<MeshComponent*> physicsMeshes;
+//Store the original mesh UID against the new meshcomponent so that it can use its world matrix in render
+std::unordered_map<UID, std::unique_ptr<MeshComponent>> physicsMeshes;
 
 void NormaliseExtents(float& x, float& y, float& z);
 
@@ -284,7 +285,6 @@ void PhysicsSystem::CreateConvexPhysicsMeshFromCollisionMesh(MeshComponent* mesh
 	Actor* actor, const std::string filename)
 {
 	auto collisionMesh = new MeshComponent();
-	physicsMeshes.push_back(collisionMesh);
 
 	collisionMesh->transform = actor->GetTransform();
 
@@ -292,8 +292,11 @@ void PhysicsSystem::CreateConvexPhysicsMeshFromCollisionMesh(MeshComponent* mesh
 	collisionMesh->SetUID(mesh->GetUID());
 
 	collisionMesh->meshDataProxy = AssetSystem::ReadVMeshAssetFromFile(filename);
+	collisionMesh->CreateVertexBuffer();
 
 	CreateConvexPhysicsMesh(collisionMesh, actor);
+
+	physicsMeshes.emplace(collisionMesh->GetUID(), collisionMesh);
 }
 
 void PhysicsSystem::ActorToPhysxTransform(const Transform& actorTransform, PxTransform& pxTransform)
@@ -323,7 +326,7 @@ void PhysicsSystem::GetTransformFromPhysicsActor(MeshComponent* mesh)
 	mesh->UpdateTransform();
 }
 
-std::vector<MeshComponent*> PhysicsSystem::GetAllPhysicsMeshes()
+std::unordered_map<UID, std::unique_ptr<MeshComponent>>& PhysicsSystem::GetAllPhysicsMeshes()
 {
 	return physicsMeshes;
 }

@@ -6,6 +6,7 @@
 #include <foundation/PxTransform.h>
 #include <characterkinematic/PxController.h>
 #include <PxRigidActor.h>
+#include <memory>
 #include <DirectXMath.h>
 #include "Core/UID.h"
 
@@ -51,7 +52,7 @@ namespace PhysicsSystem
 	void PhysxToActorTransform(Transform& actorTransform, const PxTransform& pxTransform);
 	void GetTransformFromPhysicsActor(MeshComponent* mesh);
 
-	std::vector<MeshComponent*> GetAllPhysicsMeshes();
+	std::unordered_map<UID, std::unique_ptr<MeshComponent>>& GetAllPhysicsMeshes();
 };
 
 namespace Physics
