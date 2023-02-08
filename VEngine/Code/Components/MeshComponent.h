@@ -62,6 +62,7 @@ public:
 	void SetUseTexture(bool useTexture);
 
 	Buffer* GetVertexBuffer() const;
+	void CreateVertexBuffer();
 
 	Material* GetMaterial() { return material; }
 

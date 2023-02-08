@@ -16,7 +16,7 @@
 #include "Render/PixelShader.h"
 #include "Physics/PhysicsSystem.h"
 
-//Vertex and index buffers linked to a mesh filename to copy over to new PSOs
+//Vertex buffers linked to a mesh filename to copy over to new PSOs
 std::unordered_map<std::string, std::unique_ptr<MeshBuffers>> existingMeshBuffers;
 
 void MeshComponent::ResetMeshBuffers()
@@ -76,24 +76,9 @@ void MeshComponent::Create()
 
 	meshDataProxy = AssetSystem::ReadVMeshAssetFromFile(meshComponentData.filename);
 
-	//Setup bounds
 	BoundingOrientedBox::CreateFromBoundingBox(boundingBox, *meshDataProxy.boundingBox);
 
-	//Setup pipeline objects
-	auto psoIt = existingMeshBuffers.find(meshComponentData.filename);
-	if (psoIt == existingMeshBuffers.end())
-	{
-		existingMeshBuffers[meshComponentData.filename] = std::make_unique<MeshBuffers>();
-		auto& meshBuffers = existingMeshBuffers[meshComponentData.filename];
-
-		meshBuffers->vertexBuffer.data = RenderUtils::CreateVertexBuffer(meshDataProxy);
-
-		pso.vertexBuffer = &meshBuffers->vertexBuffer;
-	}
-	else
-	{
-		pso.vertexBuffer = &psoIt->second->vertexBuffer;
-	}
+	CreateVertexBuffer();
 }
 
 void MeshComponent::Destroy()
@@ -195,6 +180,24 @@ void MeshComponent::SetUseTexture(bool useTexture)
 Buffer* MeshComponent::GetVertexBuffer() const 
 {
 	return pso.vertexBuffer;
+}
+
+void MeshComponent::CreateVertexBuffer()
+{
+	auto psoIt = existingMeshBuffers.find(meshComponentData.filename);
+	if (psoIt == existingMeshBuffers.end())
+	{
+		existingMeshBuffers[meshComponentData.filename] = std::make_unique<MeshBuffers>();
+		auto& meshBuffers = existingMeshBuffers[meshComponentData.filename];
+
+		meshBuffers->vertexBuffer.data = RenderUtils::CreateVertexBuffer(meshDataProxy);
+
+		pso.vertexBuffer = &meshBuffers->vertexBuffer;
+	}
+	else
+	{
+		pso.vertexBuffer = &psoIt->second->vertexBuffer;
+	}
 }
 
 std::vector<XMFLOAT3> MeshComponent::GetAllVertexPositions()
