@@ -66,4 +66,11 @@ public:
 	Material* GetMaterial() { return material; }
 
 	std::vector<XMFLOAT3> GetAllVertexPositions();
+
+	void SetCollisionMeshFilename(std::string_view filename) { collisionMeshFilename = filename; }
+	std::string GetCollisionMeshFilename() { return collisionMeshFilename; }
+	bool UsesCollisonMesh() { return !collisionMeshFilename.empty(); }
+
+private:
+	std::string collisionMeshFilename;
 };

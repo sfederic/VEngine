@@ -10,6 +10,8 @@
 #include "Core/World.h"
 #include "Asset/AssetSystem.h"
 
+std::vector<MeshComponent*> physicsMeshes;
+
 void NormaliseExtents(float& x, float& y, float& z);
 
 //Maps meshcomponent UIDs to rigid actors
@@ -88,17 +90,22 @@ void PhysicsSystem::Start()
 					dMesh->RemoveChild(cell);
 				}
 			}
-			else if(!mesh->skipPhysicsCreation)
+			else if (!mesh->skipPhysicsCreation)
 			{
 				//@Todo: I don't like doing this and reseting physicssystem on gameplay end. Feels expensive,
 				//but it enables roughly changing actors between static and dynamic when editing.
-				if (mesh->isStatic)
+
+				PhysicsType physicsType;
+				mesh->isStatic ? physicsType = PhysicsType::Static : physicsType = PhysicsType::Dynamic;
+
+				if (mesh->UsesCollisonMesh())
 				{
-					PhysicsSystem::CreatePhysicsActor(mesh, PhysicsType::Static, actor);
+					const std::string collisionMeshFilename = mesh->GetCollisionMeshFilename();
+					PhysicsSystem::CreateConvexPhysicsMeshFromCollisionMesh(mesh, actor, collisionMeshFilename);
 				}
 				else
 				{
-					PhysicsSystem::CreatePhysicsActor(mesh, PhysicsType::Dynamic, actor);
+					PhysicsSystem::CreatePhysicsActor(mesh, physicsType, actor);
 				}
 			}
 		}
@@ -277,6 +284,8 @@ void PhysicsSystem::CreateConvexPhysicsMeshFromCollisionMesh(MeshComponent* mesh
 	Actor* actor, const std::string filename)
 {
 	auto collisionMesh = new MeshComponent();
+	physicsMeshes.push_back(collisionMesh);
+
 	collisionMesh->transform = actor->GetTransform();
 
 	//Set the UID to the actual mesh so that the physics actor is connected to the mesh, not the collision mesh.
@@ -285,8 +294,6 @@ void PhysicsSystem::CreateConvexPhysicsMeshFromCollisionMesh(MeshComponent* mesh
 	collisionMesh->meshDataProxy = AssetSystem::ReadVMeshAssetFromFile(filename);
 
 	CreateConvexPhysicsMesh(collisionMesh, actor);
-
-	delete collisionMesh;
 }
 
 void PhysicsSystem::ActorToPhysxTransform(const Transform& actorTransform, PxTransform& pxTransform)
@@ -314,6 +321,11 @@ void PhysicsSystem::GetTransformFromPhysicsActor(MeshComponent* mesh)
 
 	mesh->transform = transform;
 	mesh->UpdateTransform();
+}
+
+std::vector<MeshComponent*> PhysicsSystem::GetAllPhysicsMeshes()
+{
+	return physicsMeshes;
 }
 
 bool Physics::Raycast(XMFLOAT3 origin, XMFLOAT3 dir, float range, RaycastHit& hit)

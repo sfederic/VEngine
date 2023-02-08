@@ -50,6 +50,8 @@ namespace PhysicsSystem
 	void ActorToPhysxTransform(const Transform& actorTransform, PxTransform& pxTransform);
 	void PhysxToActorTransform(Transform& actorTransform, const PxTransform& pxTransform);
 	void GetTransformFromPhysicsActor(MeshComponent* mesh);
+
+	std::vector<MeshComponent*> GetAllPhysicsMeshes();
 };
 
 namespace Physics
