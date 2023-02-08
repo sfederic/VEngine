@@ -229,7 +229,12 @@ void PhysicsSystem::CreateCharacterController(CharacterControllerComponent* char
 void PhysicsSystem::CreateConvexPhysicsMesh(MeshComponent* mesh, Actor* actor)
 {
 	PxConvexMeshDesc convexDesc;
+
+	//Physx convex mesh can only be 256 vertices per the documentation
+	assert(mesh->meshDataProxy.vertices->size() < 256);
+
 	convexDesc.points.count = mesh->meshDataProxy.vertices->size();
+	
 	convexDesc.points.stride = sizeof(PxVec3);
 	convexDesc.points.data = mesh->meshDataProxy.vertices->data();
 	convexDesc.flags = PxConvexFlag::eCOMPUTE_CONVEX;
