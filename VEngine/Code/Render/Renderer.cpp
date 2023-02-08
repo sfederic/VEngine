@@ -1140,6 +1140,15 @@ void RenderBounds()
 
 void RenderPhysicsMeshes()
 {
+	static bool showPhysicsMeshes;
+
+	if (Input::GetKeyUp(Keys::F3))
+	{
+		showPhysicsMeshes = !showPhysicsMeshes;
+	}
+
+	if (!showPhysicsMeshes) return;
+
 	auto& physicsMeshes = PhysicsSystem::GetAllPhysicsMeshes();
 	for (const auto& [uid, mesh] : physicsMeshes)
 	{
