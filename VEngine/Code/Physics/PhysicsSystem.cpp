@@ -230,6 +230,11 @@ void PhysicsSystem::CreateConvexPhysicsMesh(MeshComponent* mesh, Actor* actor)
 {
 	PxConvexMeshDesc convexDesc;
 
+	//@Todo: PhysX says, "The number of vertices and faces of a convex mesh in PhysX is limited to 255",
+	//which is fine for smaller meshes but of course larger meshes are going to stop here.
+	//Figure out some way to make an AABB 'box' where the max points for each coordinate direction (X, Y, Z)
+	//fit snug around the mesh or something or do some research into other methods.
+
 	//Physx convex mesh can only be 256 vertices per the documentation
 	assert(mesh->meshDataProxy.vertices->size() < 256);
 
