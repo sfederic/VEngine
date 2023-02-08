@@ -111,6 +111,19 @@ public:
 		return components.back().get();
 	}
 
+	T* GetComponentByUID(UID uid)
+	{
+		for (auto& component : components)
+		{
+			if (component->GetUID() == uid)
+			{
+				return component.get();
+			}
+		}
+
+		return nullptr;
+	}
+
 	virtual void Serialise(Serialiser& s) override
 	{
 		s.WriteLine(VString::stows(name));
