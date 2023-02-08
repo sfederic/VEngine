@@ -48,6 +48,7 @@
 #include "Particle/SpriteSheet.h"
 #include "Particle/Polyboard.h"
 #include "Physics/Raycast.h"
+#include "Physics/PhysicsSystem.h"
 #include "Render/SpriteSystem.h"
 #include "Render/VertexShader.h"
 #include "Render/PixelShader.h"
@@ -68,6 +69,7 @@ void RenderMeshForShadowPass(MeshComponent* mesh);
 void AnimateAndRenderSkeletalMeshes();
 void RenderInstanceMeshComponents();
 void RenderBounds();
+void RenderPhysicsMeshes();
 void RenderCameraMeshes();
 void RenderLightMeshes();
 void RenderPolyboards();
@@ -776,6 +778,7 @@ void Renderer::Render()
 	RenderInstanceMeshComponents();
 	RenderPolyboards();
 	RenderSpriteSheets();
+	RenderPhysicsMeshes();
 	RenderBounds();
 	RenderLightMeshes();
 	RenderCameraMeshes();
@@ -1132,6 +1135,36 @@ void RenderBounds()
 
 			DrawMesh(debugBox.boxMesh);
 		}
+	}
+}
+
+void RenderPhysicsMeshes()
+{
+	auto& physicsMeshes = PhysicsSystem::GetAllPhysicsMeshes();
+	for (const auto& [uid, mesh] : physicsMeshes)
+	{
+		context->RSSetState(rastStateMap[RastStates::solid]->data);
+
+		auto shaderItem = ShaderSystem::FindShaderItem("SolidColour");
+		context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
+		context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
+
+		SetVertexBuffer(mesh->GetVertexBuffer());
+
+		//@Todo: feels like this GetComponentByUID() call could get stupidly expensive
+		auto originalMesh = MeshComponent::system.GetComponentByUID(mesh->GetUID());
+		assert(originalMesh);
+		shaderMatrices.model = originalMesh->GetWorldMatrix();
+		shaderMatrices.MakeModelViewProjectionMatrix();
+		cbMatrices->Map(&shaderMatrices);
+		cbMatrices->SetVS();
+
+		MaterialShaderData materialShaderData;
+		materialShaderData.ambient = XMFLOAT4(0.1f, 0.9f, 0.1f, 1.f);
+		cbMaterial->Map(&materialShaderData);
+		cbMaterial->SetPS();
+
+		DrawMesh(mesh.get());
 	}
 }
 

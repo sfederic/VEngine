@@ -5,7 +5,7 @@
 PhysicsActorTest::PhysicsActorTest()
 {
 	mesh = CreateComponent(MeshComponent("sphere_high.vmesh", "test.png"), "Mesh");
-	mesh->SetCollisionMeshFilename("ico_sphere.vmesh");
+	mesh->SetCollisionMeshFilename("cone.vmesh");
 	rootComponent = mesh;
 }
 
