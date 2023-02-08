@@ -256,6 +256,7 @@
     <ClCompile Include="Code\Actors\Game\SpinningOrientationEnemy.cpp" />
     <ClCompile Include="Code\Components\SliceableMeshComponent.cpp" />
     <ClCompile Include="Code\Actors\Game\HiddenCoreEnemy.cpp" />
+    <ClCompile Include="Code\Actors\PhysicsActorTest.cpp" />
     <ClInclude Include="Code\Actors\Game\BuildingRubble.h" />
     <ClInclude Include="Code\Actors\SplitMesh.h" />
     <ClInclude Include="Code\Gameplay\AttackTypes.h" />
@@ -517,6 +518,7 @@
     <ClInclude Include="Code\Actors\Game\SpinningOrientationEnemy.h" />
     <ClInclude Include="Code\Components\SliceableMeshComponent.h" />
     <ClInclude Include="Code\Actors\Game\HiddenCoreEnemy.h" />
+    <ClInclude Include="Code\Actors\PhysicsActorTest.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
