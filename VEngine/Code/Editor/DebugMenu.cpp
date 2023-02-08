@@ -576,7 +576,7 @@ void DebugMenu::RenderProfileMenu()
 		ImGui::Begin("Profiler Time Frames");
 
 		//Sort TimeFrames in order of average time
-		std::map<float, std::string> averageTimes;
+		std::map<double, std::string> averageTimes;
 		for (auto& [functionName, timeFrame] : Profile::timeFrames)
 		{
 			averageTimes.emplace(timeFrame.GetAverageTime(), functionName);
