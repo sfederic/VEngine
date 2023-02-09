@@ -58,8 +58,8 @@ private:
 	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 
-	float movementSpeed = 9.5f;
-	float rotationSpeed = 5.5f;
+	float movementSpeed = 0.f;
+	float rotationSpeed = 0.f;
 
 	bool allRangeModeActive = true;
 	bool inDashBladeAttack = false;

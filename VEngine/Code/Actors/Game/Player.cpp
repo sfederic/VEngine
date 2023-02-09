@@ -36,6 +36,9 @@ Player::Player()
 
 void Player::Create()
 {
+	movementSpeed = 10.f;
+	rotationSpeed = 10.f;
+
 	mesh->SetMeshFilename("jehuty.vmesh");
 
 	camera->SetLocalPosition(1.f, 0.5f, -2.f);
