@@ -1,9 +1,12 @@
 #include "vpch.h"
 #include "PostProcessVolume.h"
+#include "Core/Camera.h"
+#include "Components/BoxTriggerComponent.h"
 
 PostProcessVolume::PostProcessVolume()
 {
-    SetEmptyRootComponent();
+    boxTrigger = CreateComponent(BoxTriggerComponent(), "BoxTrigger");
+    rootComponent = boxTrigger;
 }
 
 Properties PostProcessVolume::GetProps()
@@ -19,4 +22,19 @@ Properties PostProcessVolume::GetProps()
     props.Add("Toe Denominator", &postProcessData.toeDenominator);
     props.Add("White Value", &postProcessData.linearWhitePointValue);
     return props;
+}
+
+bool PostProcessVolume::IsActiveCameraInsideVolume()
+{
+    CameraComponent* camera = activeCamera;
+    if (camera)
+    {
+        XMVECTOR cameraWorldPos = camera->GetWorldPositionV();
+        if (boxTrigger->Contains(cameraWorldPos))
+        {
+            return true;
+        }
+    }
+
+    return false;
 }
