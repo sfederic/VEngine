@@ -29,6 +29,7 @@ void ShaderSystem::Init()
     ShaderItems::SolidColour = new ShaderItem("SolidColour", L"Default_vs.cso", L"SolidColour_ps.cso");
     ShaderItems::UI = new ShaderItem("UI", L"UI_vs.cso", L"TextureClip_ps.cso");
     ShaderItems::PostProcess = new ShaderItem("PostProcess", L"PostProcess_vs.cso", L"PostProcess_ps.cso");
+    ShaderItems::Water = new ShaderItem("Water", L"Water_vs.cso", L"Default_ps.cso");
 }
 
 VertexShader* ShaderSystem::FindVertexShader(const std::wstring filename)
