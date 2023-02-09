@@ -762,7 +762,8 @@ void Renderer::Render()
 	RenderShadowPass();
 
 	if (PostProcessVolume::system.GetNumActors() > 0
-		&& PostProcessVolume::system.GetFirstActor()->IsActive())
+		&& PostProcessVolume::system.GetFirstActor()->IsActive() 
+		&& PostProcessVolume::system.GetFirstActor()->IsActiveCameraInsideVolume())
 	{
 		RenderPostProcessSetup();
 	}
@@ -1823,6 +1824,7 @@ void RenderPostProcess()
 	auto postProcessVolume = PostProcessVolume::system.GetFirstActor();
 	if (postProcessVolume == nullptr) return;
 	if (!postProcessVolume->IsActive()) return;
+	if (!postProcessVolume->IsActiveCameraInsideVolume()) return;
 
 	SetNullRTV();
 
