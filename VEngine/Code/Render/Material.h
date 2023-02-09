@@ -57,6 +57,7 @@ public:
 
 public:
 	Material(std::string textureFilename_, ShaderItem* shaderItem);
+	~Material() {}
 
 	virtual void Create();
 	virtual void Destroy();
