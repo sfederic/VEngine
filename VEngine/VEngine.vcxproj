@@ -237,7 +237,7 @@
     <ClCompile Include="Code\Editor\CutsceneSequencer.cpp" />
     <ClCompile Include="Code\Actors\CutsceneActor.cpp" />
     <ClCompile Include="Code\Actors\DiffuseProbeMap.cpp" />
-    <ClCompile Include="Code\Actors\PostProcessInstance.cpp" />
+    <ClCompile Include="Code\Actors\PostProcessVolume.cpp" />
     <ClCompile Include="Code\Render\Texture2D.cpp" />
     <ClCompile Include="Code\Core\VFunctionSystem.cpp" />
     <ClCompile Include="Code\Core\EditorCamera.cpp" />
@@ -498,7 +498,7 @@
     <ClInclude Include="Code\Editor\CutsceneSequencer.h" />
     <ClInclude Include="Code\Actors\CutsceneActor.h" />
     <ClInclude Include="Code\Actors\DiffuseProbeMap.h" />
-    <ClInclude Include="Code\Actors\PostProcessInstance.h" />
+    <ClInclude Include="Code\Actors\PostProcessVolume.h" />
     <ClInclude Include="Code\Render\Texture2D.h" />
     <ClInclude Include="Code\Render\ConstantBuffer.h" />
     <ClInclude Include="Code\Core\VFunctionSystem.h" />

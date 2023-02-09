@@ -26,7 +26,7 @@
 #include "ShadowMap.h"
 #include "Actors/Actor.h"
 #include "Actors/DiffuseProbeMap.h"
-#include "Actors/PostProcessInstance.h"
+#include "Actors/PostProcessVolume.h"
 #include "Actors/DebugActors/DebugBox.h"
 #include "Actors/DebugActors/DebugSphere.h"
 #include "Actors/DebugActors/DebugIcoSphere.h"
@@ -761,8 +761,8 @@ void Renderer::Render()
 	SetShadowData();
 	RenderShadowPass();
 
-	if (PostProcessInstance::system.GetNumActors() > 0 
-		&& PostProcessInstance::system.GetFirstActor()->IsActive())
+	if (PostProcessVolume::system.GetNumActors() > 0
+		&& PostProcessVolume::system.GetFirstActor()->IsActive())
 	{
 		RenderPostProcessSetup();
 	}
@@ -1820,9 +1820,9 @@ void SetShaderResourcePixel(uint32_t shaderRegister, std::string textureName)
 
 void RenderPostProcess()
 {
-	auto postProcessInstance = PostProcessInstance::system.GetFirstActor();
-	if (postProcessInstance == nullptr) return;
-	if (!postProcessInstance->IsActive()) return;
+	auto postProcessVolume = PostProcessVolume::system.GetFirstActor();
+	if (postProcessVolume == nullptr) return;
+	if (!postProcessVolume->IsActive()) return;
 
 	SetNullRTV();
 
@@ -1838,7 +1838,8 @@ void RenderPostProcess()
 	SetShaders(ShaderItems::PostProcess);
 
 	//Set constant buffer data
-	cbPostProcess->Map(&postProcessInstance->postProcessData);
+	ShaderPostProcessData postProcessData = postProcessVolume->GetPostProcessData();
+	cbPostProcess->Map(&postProcessData);
 	cbPostProcess->SetPS();
 
 	context->PSSetShaderResources(0, 1, &postSRV);

@@ -1,17 +1,15 @@
 #include "vpch.h"
-#include "PostProcessInstance.h"
-#include "Components/EmptyComponent.h"
-#include "Render/RenderTypes.h"
+#include "PostProcessVolume.h"
 
-PostProcessInstance::PostProcessInstance()
+PostProcessVolume::PostProcessVolume()
 {
-    rootComponent = EmptyComponent::system.Add("Root", this);
+    SetEmptyRootComponent();
 }
 
-Properties PostProcessInstance::GetProps()
+Properties PostProcessVolume::GetProps()
 {
-    auto props = __super::GetProps();
-    props.title = "PostProcessInstance";
+    Properties props = __super::GetProps();
+    props.title = GetTypeName();
     props.Add("Exposure", &postProcessData.exposure);
     props.Add("Shoulder Str.", &postProcessData.shoulderStrength);
     props.Add("Linear Str.", &postProcessData.linearStrength);
