@@ -37,9 +37,12 @@ struct SpatialComponent : Component
 
 	XMFLOAT3 GetLocalScale();
 	XMVECTOR GetLocalScaleV();
+	void SetLocalScale(float uniformScale);
 	void SetLocalScale(float x, float y, float z);
 	void SetLocalScale(XMFLOAT3 newScale);
-	void SetScale(XMVECTOR newScale);
+	void SetLocalScale(XMVECTOR newScale);
+
+	void SetWorldScale(float uniformScale);
 	void SetWorldScale(XMVECTOR scale);
 
 	XMFLOAT4 GetLocalRotation();

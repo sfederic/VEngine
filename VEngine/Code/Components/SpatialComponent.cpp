@@ -114,6 +114,11 @@ XMVECTOR SpatialComponent::GetLocalScaleV()
 	return scale;
 }
 
+void SpatialComponent::SetLocalScale(float uniformScale)
+{
+	transform.scale = XMFLOAT3(uniformScale, uniformScale, uniformScale);
+}
+
 void SpatialComponent::SetLocalScale(float x, float y, float z)
 {
 	transform.scale = XMFLOAT3(x, y, z);
@@ -124,9 +129,14 @@ void SpatialComponent::SetLocalScale(XMFLOAT3 newScale)
 	transform.scale = newScale;
 }
 
-void SpatialComponent::SetScale(XMVECTOR newScale)
+void SpatialComponent::SetLocalScale(XMVECTOR newScale)
 {
 	XMStoreFloat3(&transform.scale, newScale);
+}
+
+void SpatialComponent::SetWorldScale(float uniformScale)
+{
+	SetWorldScale(XMVectorSet(uniformScale, uniformScale, uniformScale, 0.f));
 }
 
 void SpatialComponent::SetWorldScale(XMVECTOR scale)
@@ -139,7 +149,7 @@ void SpatialComponent::SetWorldScale(XMVECTOR scale)
 		relativeScale = XMVectorMultiply(relativeScale, parentScale);
 	}
 
-	SetScale(relativeScale);
+	SetLocalScale(relativeScale);
 }
 
 XMVECTOR SpatialComponent::GetLocalRotationV()
