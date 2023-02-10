@@ -26,6 +26,10 @@ private:
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
 	void MovementInput();
+
+	//Doubles player's movement speed on a double tap input (only for foward movement. Think of it like a sprint.)
+	void DoubleTapDashMovementInput(float deltaTime);
+
 	void RotationInput();
 
 	bool CheckMovementAndRotationHaveStopped();
@@ -51,6 +55,9 @@ private:
 
 	//When to turn shield effect off after interval of damage.
 	float shieldCountdownTimer = 0.5f;
+
+	float doubleTapMovementTimer = 0.f;
+	bool doubleTapMovementEnabled = false;
 
 	std::vector<Actor*> previousHitTransparentActors;
 
