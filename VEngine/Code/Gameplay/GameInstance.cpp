@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "GameInstance.h"
 
-std::string GameInstance::startingMap = "test3.vmap";
+std::string GameInstance::startingMap = "underwater.vmap";
 
 Properties GameInstance::GetInstanceSaveData()
 {

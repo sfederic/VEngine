@@ -15,6 +15,23 @@ DirectionalLightActor0
 UID
 3516320768
 next
+HoleEnemy
+1
+ Enabled
+1
+ Position
+3 4 -1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+HoleEnemy0
+UID
+1203630653
+next
 LevelInstance
 1
  Enabled
@@ -33,7 +50,7 @@ UID
 2805017424
 next
 MeshActor
-2
+4
  Enabled
 1
  Position
@@ -45,7 +62,7 @@ MeshActor
  Visible
 1
 Name
-node0
+ocean_bed
 UID
 2981217774
 next
@@ -60,16 +77,46 @@ next
  Visible
 1
 Name
-MeshActor1
+water_surface
 UID
 4229560576
+next
+ Enabled
+1
+ Position
+-2 0 6
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+building12
+UID
+2457848454
+next
+ Enabled
+1
+ Position
+5 0 -1
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+broken_building3
+UID
+1896322534
 next
 Player
 1
  Enabled
 1
  Position
-0 0 0
+0 2 -1
  Rotation
 0 0 0 1
  Scale
@@ -83,8 +130,41 @@ Player0
 UID
 2235022525
 next
-BoxTriggerComponent
+PostProcessVolume
 1
+ Enabled
+1
+ Position
+2 1 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Exposure
+0.67
+Linear Angle
+0.001
+Linear Str.
+2.2
+Name
+PostProcessVolume0
+Shoulder Str.
+0.19
+Toe Denominator
+0.33
+Toe Numerator
+0.012
+Toe Str.
+2
+UID
+249249761
+White Value
+2
+next
+BoxTriggerComponent
+2
 2805017424
 BoxTrigger
  Enabled
@@ -104,6 +184,25 @@ Offset
 UID
 3436704468
 next
+249249761
+BoxTrigger
+ Enabled
+1
+ Pos
+2 1 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+5 2.5 5
+Offset
+0 0 0
+UID
+3885960510
+next
 CameraComponent
 1
 2235022525
@@ -113,7 +212,7 @@ Camera
  Pos
 1 0.5 -2
  Rot
-0 0 0 1
+0.0486156 -0.09842 0.00481389 0.993945
  Scale
 1 1 1
  Visible
@@ -150,8 +249,25 @@ ShadowMap Size
 UID
 4253900969
 next
+EmptyComponent
+1
+1203630653
+Root
+ Enabled
+1
+ Pos
+3 4 -1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+2652705572
+next
 MeshComponent
-3
+7
 2981217774
 Mesh
  Enabled
@@ -203,12 +319,165 @@ Trans. Occlude
 UID
 1298432785
 next
+4229560576
+Mesh
+ Enabled
+0
+ Pos
+2 3.5 2
+ Rot
+-0 0 -0 1
+ Scale
+5 1 5
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 0.3
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Water
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+water.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+grid.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1298432785
+next
+2457848454
+Mesh
+ Enabled
+1
+ Pos
+-2 0 6
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+building1.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2145780456
+next
+1896322534
+Mesh
+ Enabled
+1
+ Pos
+5 0 -1
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+broken_building.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1874019708
+next
 2235022525
 Mesh
  Enabled
 1
  Pos
-0 0 0
+0 2 -1
  Rot
 0 0 0 1
  Scale
@@ -254,24 +523,24 @@ Trans. Occlude
 UID
 3567695225
 next
-4229560576
-Mesh
+1203630653
+HullMesh
  Enabled
 1
  Pos
-2 3.5 2
+0 0 0
  Rot
--0 0 -0 1
+0 0 0 1
  Scale
-5 1 5
+1 1 1
  Visible
 1
 Casts Shadow
 1
 M_Ambient
-1 1 1 0.3
+1 1 1 1
 M_Blend State
-default
+null
 M_Metallic
 0
 M_Rast State
@@ -283,7 +552,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-water.jpg
+test.png
 M_Use Texture
 1
 M_UvOffset
@@ -297,12 +566,63 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-node.vmesh
+hole_enemy.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-1298432785
+291963865
+next
+1203630653
+CoreMesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+0.25 0.25 0.25
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+0.9 0.2 0.1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+sphere.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+436370658
 next
 end
