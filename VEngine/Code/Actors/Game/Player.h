@@ -34,7 +34,6 @@ private:
 
 	void Shoot();
 	void BladeSwipe();
-	void DashBladeAttack();
 	void ShieldLogic(float deltaTime);
 	void Interact();
 

@@ -329,27 +329,6 @@ void Player::BladeSwipe()
 	}
 }
 
-void Player::DashBladeAttack()
-{
-	if (Input::GetKeyUp(Keys::Space) && !inDashBladeAttack)
-	{
-		HitResult result(this);
-		XMVECTOR end = GetPositionV() + (GetForwardVectorV() * 100.f);
-		if (Raycast(result, GetPositionV(), end))
-		{
-			nextPos = result.hitActor->GetPositionV() - GetForwardVectorV();
-			inDashBladeAttack = true;
-			movementSpeed = movementSpeed * 2.f;
-		}
-	}
-
-	if (XMVector4Equal(GetPositionV(), nextPos) && inDashBladeAttack)
-	{
-		inDashBladeAttack = false;
-		movementSpeed = movementSpeed / 2.f;
-	}
-}
-
 void Player::ShieldLogic(float deltaTime)
 {
 	if (shieldCountdownTimer > 0.f)
