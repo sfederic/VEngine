@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "HoleEnemy.h"
 #include "Components/MeshComponent.h"
+#include "Gameplay/GameplayTags.h"
 
 HoleEnemy::HoleEnemy()
 {
@@ -13,5 +14,6 @@ void HoleEnemy::Create()
 	rootComponent = core;
 
 	hull = CreateComponent(MeshComponent("hole_enemy.vmesh", "test.png"), "HullMesh");
+	hull->AddTag(GameplayTags::InvincibleMeshPiece);
 	rootComponent->AddChild(hull);
 }
