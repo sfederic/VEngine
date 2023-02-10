@@ -312,12 +312,23 @@ void Player::BladeSwipe()
 {
 	if (!CheckMovementAndRotationHaveStopped()) return;
 
+	auto slicePlaneNormal = [&]() -> XMVECTOR { return this->GetUpVectorV(); };
+	//Give plane center a small offset as it's messing up right now
+	auto slicePlaneCenter = [&]() -> XMVECTOR { return GetPositionV() + GetForwardVectorV() + XMVectorSet(0.1f, 0.1f, 0.1f, 1.f); };
+
 	if (Input::GetKeyUp(Keys::Down))
 	{
 		HitResult hit(this);
 		if (Raycast(hit, GetPositionV(), GetPositionV() + GetForwardVectorV() * 2))
 		{
 			GameUtils::SpawnSpriteSheet("Sprites/blade_slash.png", hit.GetHitPosV(), false, 4, 4);
+
+			auto meshSplitActor = dynamic_cast<MeshSplitActor*>(hit.hitActor);
+			if (meshSplitActor)
+			{
+				meshSplitActor->SliceMesh(slicePlaneCenter(), slicePlaneNormal());
+				return;
+			}
 
 			auto enemy = dynamic_cast<Enemy*>(hit.hitActor);
 			if (enemy)
@@ -332,10 +343,7 @@ void Player::BladeSwipe()
 					auto sliceMeshComponent = dynamic_cast<SliceableMeshComponent*>(hit.hitComponent);
 					if (sliceMeshComponent)
 					{
-						//Give plane center a small offset as it's messing up right now
-						XMVECTOR slicePlaneCenter = GetPositionV() + GetForwardVectorV() + XMVectorSet(0.1f, 0.1f, 0.1f, 1.f);
-						XMVECTOR slicePlaneNormal = GetUpVectorV();
-						sliceMeshComponent->SliceMesh(slicePlaneCenter, slicePlaneNormal);
+						sliceMeshComponent->SliceMesh(slicePlaneCenter(), slicePlaneNormal());
 					}
 					else if (mesh)
 					{
