@@ -130,7 +130,14 @@ void MeshComponent::SplitMeshCreate()
 
 	//@Todo: owner being set as null on CreatePhysicsActor() won't explode the program,
 	//but it will cause problems if you want to use raycasts via PhysX.
-	PhysicsSystem::CreateConvexPhysicsMesh(this, GetOwner());
+	if (meshDataProxy.vertices->size() > 255)
+	{
+		PhysicsSystem::CreatePhysicsActor(this, PhysicsType::Dynamic, GetOwner());
+	}
+	else
+	{
+		PhysicsSystem::CreateConvexPhysicsMesh(this, GetOwner());
+	}
 }
 
 void MeshComponent::SetMeshFilename(std::string_view meshFilename)
