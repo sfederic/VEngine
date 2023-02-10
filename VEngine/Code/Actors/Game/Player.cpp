@@ -281,15 +281,16 @@ void Player::Shoot()
 			{
 				if (enemy->CanBeHit(AttackTypes::Shoot))
 				{
-					enemy->InflictDamage(damage);
-
 					comboBarWidget->IncreaseScoreAndCombo();
 
 					auto mesh = dynamic_cast<MeshComponent*>(hitResult.hitComponent);
 					if (mesh)
 					{
-						if (enemy->HasHealthDepleted())
+						if (!mesh->HasTag(GameplayTags::InvincibleMeshPiece))
 						{
+							//Only inflict damage if mesh can be hit be player attacks
+							enemy->InflictDamage(damage);
+
 							mesh->Remove();
 						}
 					}
@@ -323,8 +324,6 @@ void Player::BladeSwipe()
 			{
 				if (enemy->CanBeHit(AttackTypes::Melee))
 				{
-					enemy->InflictDamage(damage);
-
 					comboBarWidget->IncreaseScoreAndCombo();
 
 					auto mesh = dynamic_cast<MeshComponent*>(hit.hitComponent);
@@ -340,8 +339,10 @@ void Player::BladeSwipe()
 					}
 					else if (mesh)
 					{
-						if (enemy->HasHealthDepleted())
+						if (!mesh->HasTag(GameplayTags::InvincibleMeshPiece))
 						{
+							enemy->InflictDamage(damage);
+
 							mesh->Remove();
 						}
 					}
