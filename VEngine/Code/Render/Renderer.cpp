@@ -1369,7 +1369,8 @@ void RenderSpriteSheets()
 		SpriteSystem::BuildSpriteQuadForSpriteSheetRendering(spriteSheet->sprite);
 		SpriteSystem::UpdateAndSetSpriteBuffers(context);
 
-		VMath::RotateTowardsCamera(spriteSheet->transform);
+		XMVECTOR lookAtRotation = VMath::LookAtRotation(activeCamera->GetWorldPositionV(), spriteSheet->GetWorldPositionV());
+		spriteSheet->SetWorldRotation(lookAtRotation);
 
 		shaderMatrices.model = spriteSheet->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
