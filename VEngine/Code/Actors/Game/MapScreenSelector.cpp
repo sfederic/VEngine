@@ -78,12 +78,21 @@ void MapScreenSelector::ZoomInput(float deltaTime)
 {
 	const float zoomSpeed = 7.5f * deltaTime;
 
+	//Use the distance to the root component as a clamp for zooming camera in and out.
+	const float cameraDistToRoot = XMVector3Length(camera->GetWorldPositionV() - GetPositionV()).m128_f32[0];
+
 	if (Input::GetKeyHeld(Keys::Up))
 	{
-		camera->AddLocalPositionV(camera->GetForwardVectorV() * zoomSpeed);
+		if (cameraDistToRoot > 1.f)
+		{
+			camera->AddLocalPositionV(camera->GetForwardVectorV() * zoomSpeed);
+		}
 	}
 	else if (Input::GetKeyHeld(Keys::Down))
 	{
-		camera->AddLocalPositionV(camera->GetForwardVectorV() * -zoomSpeed);
+		if (cameraDistToRoot < 10.f)
+		{
+			camera->AddLocalPositionV(camera->GetForwardVectorV() * -zoomSpeed);
+		}
 	}
 }
