@@ -76,10 +76,6 @@ void Console::Init()
 		std::make_pair([]() { debugMenu.particleMenuOpen = !debugMenu.particleMenuOpen; },
 		"Particle"));
 
-	executeMap.emplace(L"QUEST",
-		std::make_pair([]() { debugMenu.questMenuOpen = !debugMenu.questMenuOpen; },
-		"Show all in-game quests and their state"));
-
 	executeMap.emplace(L"SKEL",
 		std::make_pair([]() { debugMenu.skeletonViewMenuOpen = !debugMenu.skeletonViewMenuOpen; },
 		"Show skeleton heirarchy on actor's meshcomponent"));

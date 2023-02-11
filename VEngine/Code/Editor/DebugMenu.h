@@ -38,7 +38,6 @@ public:
 	bool skeletalAnimationMenuOpen = false;
 	bool physicsMenuOpen = false;
 	bool coreMenuOpen = false;
-	bool questMenuOpen = false;
 	bool particleMenuOpen = false;
 	bool cutsceneSequencerOpen = false;
 	bool worldMenuOpen = false;
