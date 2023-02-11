@@ -18,7 +18,8 @@ public:
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
-	void SetTitleAndDescriptionForSelectionInfoWidget(std::wstring_view title, std::wstring_view description);
+	void SetSelectionInfoWidgetFields(std::wstring_view title, 
+		std::wstring_view description, std::string_view levelFilename);
 	void RemoveMapSelectionInfoWidgetFromViewport();
 
 private:

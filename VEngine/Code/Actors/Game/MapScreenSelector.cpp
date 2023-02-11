@@ -41,10 +41,12 @@ Properties MapScreenSelector::GetProps()
 	return props;
 }
 
-void MapScreenSelector::SetTitleAndDescriptionForSelectionInfoWidget(std::wstring_view title, std::wstring_view description)
+void MapScreenSelector::SetSelectionInfoWidgetFields(std::wstring_view title, 
+	std::wstring_view description, std::string_view levelFilename)
 {
 	mapSelectionInfoWidget->title = title;
 	mapSelectionInfoWidget->description = description;
+	mapSelectionInfoWidget->levelToLoad = levelFilename;
 
 	mapSelectionInfoWidget->AddToViewport();
 }

@@ -16,7 +16,7 @@ void MapSelectionActor::Tick(float deltaTime)
 
     if (boxTrigger->Contains(mapScreenSelector->GetPositionV()))
     {
-        mapScreenSelector->SetTitleAndDescriptionForSelectionInfoWidget(title, description);
+        mapScreenSelector->SetSelectionInfoWidgetFields(title, description, levelToLoad);
     }
     else
     {
