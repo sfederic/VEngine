@@ -20,6 +20,7 @@ public:
 private:
 	void MovementInput(float deltaTime);
 	void RotationInput(float deltaTime);
+	void ZoomInput(float deltaTime);
 
 	CameraComponent* camera = nullptr;
 };

@@ -27,6 +27,7 @@ void MapScreenSelector::Tick(float deltaTime)
 {
 	MovementInput(deltaTime);
 	RotationInput(deltaTime);
+	ZoomInput(deltaTime);
 }
 
 Properties MapScreenSelector::GetProps()
@@ -70,5 +71,19 @@ void MapScreenSelector::RotationInput(float deltaTime)
 	else if (Input::GetKeyHeld(Keys::Left))
 	{
 		AddRotation(GetUpVectorV(), -angle);
+	}
+}
+
+void MapScreenSelector::ZoomInput(float deltaTime)
+{
+	const float zoomSpeed = 7.5f * deltaTime;
+
+	if (Input::GetKeyHeld(Keys::Up))
+	{
+		camera->AddLocalPositionV(camera->GetForwardVectorV() * zoomSpeed);
+	}
+	else if (Input::GetKeyHeld(Keys::Down))
+	{
+		camera->AddLocalPositionV(camera->GetForwardVectorV() * -zoomSpeed);
 	}
 }
