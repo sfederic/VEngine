@@ -258,6 +258,7 @@
     <ClCompile Include="Code\Actors\Game\HiddenCoreEnemy.cpp" />
     <ClCompile Include="Code\Actors\PhysicsActorTest.cpp" />
     <ClCompile Include="Code\Actors\Game\HoleEnemy.cpp" />
+    <ClCompile Include="Code\Actors\Game\MapScreenSelector.cpp" />
     <ClInclude Include="Code\Actors\Game\BuildingRubble.h" />
     <ClInclude Include="Code\Actors\SplitMesh.h" />
     <ClInclude Include="Code\Gameplay\AttackTypes.h" />
@@ -521,6 +522,7 @@
     <ClInclude Include="Code\Actors\Game\HiddenCoreEnemy.h" />
     <ClInclude Include="Code\Actors\PhysicsActorTest.h" />
     <ClInclude Include="Code\Actors\Game\HoleEnemy.h" />
+    <ClInclude Include="Code\Actors\Game\MapScreenSelector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
