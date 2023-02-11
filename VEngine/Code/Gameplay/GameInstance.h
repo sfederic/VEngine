@@ -7,9 +7,6 @@
 //GameInstane is also used as a global save file of sorts, seperate from .vmaps.
 struct GameInstance
 {
-	//this is to set in the editor to know whether to use map files from WorldMaps/ vs GameSaves/
-	inline static bool useGameSaves = false;
-
 	static std::string startingMap;
 	inline static std::string previousMapMovedFrom = startingMap;
 
