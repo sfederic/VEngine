@@ -53,7 +53,10 @@ public:
 	//Material set functions
 	void SetRastState(const std::string newRastStateName);
 	void SetBlendState(const std::string newBlendState);
+
 	void SetTexture(const std::string newTextureName);
+	std::string GetTextureFilename();
+
 	void SetShaderFilenames(ShaderItem* shaderItem);
 
 	void SetAmbientColour(const XMFLOAT4 ambientColour);

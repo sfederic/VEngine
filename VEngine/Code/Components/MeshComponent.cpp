@@ -164,6 +164,11 @@ void MeshComponent::SetTexture(const std::string newTextureName)
 	material->textureData.filename = newTextureName;
 }
 
+std::string MeshComponent::GetTextureFilename()
+{
+	return material->textureData.filename;
+}
+
 void MeshComponent::SetShaderFilenames(ShaderItem* shaderItem)
 {
 	material->shaderData.shaderItemName = shaderItem->GetName();
