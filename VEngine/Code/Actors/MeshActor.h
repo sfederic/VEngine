@@ -1,19 +1,22 @@
 #pragma once
+
 #include "Actor.h"
 #include "ActorSystem.h"
 #include <string>
 
 class MeshComponent;
 
-struct MeshActor : Actor
+class MeshActor : public Actor
 {
+public:
 	ACTOR_SYSTEM(MeshActor)
 
-	MeshComponent* mesh = nullptr;
+	MeshActor();
+	void Create() override;
+	Properties GetProps() override;
 
 	inline static std::string spawnMeshFilename;
 
-	MeshActor();
-	virtual void Create() override;
-	virtual Properties GetProps() override;
+private:
+	MeshComponent* mesh = nullptr;
 };
