@@ -54,6 +54,7 @@ void Player::Start()
 	playerShieldWidget = UISystem::CreateWidget<PlayerShieldWidget>();
 	playerShieldWidget->AddToViewport();
 
+	camera->SetAsActiveCamera();
 	auto cameraFocusPoint = GetPositionV() + GetForwardVectorV() * 3.f;
 	camera->SetWorldRotation(VMath::LookAtRotation(cameraFocusPoint, camera->GetWorldPositionV()));
 
