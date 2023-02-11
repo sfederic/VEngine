@@ -5,17 +5,16 @@
 
 MeshActor::MeshActor()
 {
-	//Don't call Create() on these spawns as the actor spawn code in WorldEditor already calls it.
 	if (!spawnMeshFilename.empty())
 	{
-		mesh = MeshComponent::system.Add("Mesh", this, MeshComponent(spawnMeshFilename.c_str(), "test.png"), false);
-		rootComponent = mesh;
+		mesh = CreateComponent(MeshComponent(spawnMeshFilename, "test.png"), "Mesh");
 	}
 	else
 	{
-		mesh = MeshComponent::system.Add("Mesh", this, MeshComponent("cube.vmesh", "test.png"), false);
-		rootComponent = mesh;
+		mesh = CreateComponent(MeshComponent("cube.vmesh", "test.png"), "Mesh");
 	}
+
+	rootComponent = mesh;
 }
 
 void MeshActor::Create()

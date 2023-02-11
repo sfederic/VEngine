@@ -28,9 +28,26 @@ MeshActor
  Visible
 1
 Name
-flat_plane0
+building10
 UID
 2975167817
+next
+MeshSplitActor
+1
+ Enabled
+1
+ Position
+0 -1 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+MeshSplitActor0
+UID
+2753872177
 next
 Player
 1
@@ -143,7 +160,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+building1.png
 M_Use Texture
 1
 M_UvOffset
@@ -238,5 +255,58 @@ LightEnabled
 1
 UID
 3903708707
+next
+SliceableMeshComponent
+1
+2753872177
+Mesh
+ Enabled
+1
+ Pos
+0 -1 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+building.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+building1.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+966799007
 next
 end
