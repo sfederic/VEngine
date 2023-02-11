@@ -13,8 +13,6 @@ struct GameInstance
 	//Used when continuing from game save files
 	inline static std::string mapToLoadOnContinue;
 
-	inline static bool bossDefeated = false;
-
 	//Global save data
 	static Properties GetGlobalProps();
 

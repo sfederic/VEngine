@@ -12,7 +12,7 @@ MapSelectionActor::MapSelectionActor()
 
 void MapSelectionActor::Start()
 {
-    auto value = GameInstance::GetGlobalProp<bool>("BossDefeated");
+    auto value = GameInstance::GetGlobalProp<bool>("RamielDefeated");
     if (!value)
     {
         SetActive(false);
