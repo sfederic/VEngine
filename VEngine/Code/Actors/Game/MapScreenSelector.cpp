@@ -85,6 +85,9 @@ void MapScreenSelector::ZoomInput(float deltaTime)
 	{
 		if (cameraDistToRoot > 1.f)
 		{
+			//@Todo: using the camera's forward vector doesn't work here after the original position
+			//because the rotation isn't updated locally, meaning forward vector returns locally.
+			//Global vector and using the vector between the root and camera doesn't work either.
 			camera->AddLocalPositionV(camera->GetForwardVectorV() * zoomSpeed);
 		}
 	}
