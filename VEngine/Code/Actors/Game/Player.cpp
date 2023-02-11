@@ -300,6 +300,7 @@ void Player::Shoot()
 					{
 						if (enemy->CheckIfAllTaggedMeshesAreDestroyed())
 						{
+							enemy->OnDestroyed();
 							enemy->Destroy();
 						}
 					}
@@ -360,6 +361,7 @@ void Player::BladeSwipe()
 					{
 						if (enemy->CheckIfAllTaggedMeshesAreDestroyed())
 						{
+							enemy->OnDestroyed();
 							enemy->Destroy();
 						}
 					}

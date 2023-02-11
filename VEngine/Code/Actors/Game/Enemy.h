@@ -18,6 +18,7 @@ public:
 
 	bool HasHealthDepleted() { return health <= 0; }
 	void InflictDamage(int damage) { health -= damage; }
+	virtual void OnDestroyed() {}
 
 protected:
 	int health = 1;
