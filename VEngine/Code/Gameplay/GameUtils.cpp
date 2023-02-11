@@ -66,23 +66,22 @@ namespace GameUtils
 	void LoadWorld(std::string worldName)
 	{
 		std::string path = "WorldMaps/" + worldName;
-		GameUtils::SaveGameInstanceData();
 		FileSystem::LoadWorld(worldName);
 	}
 
 	void SaveGameInstanceData()
 	{
-			Properties instanceProps = GameInstance::GetInstanceSaveData();
-			Serialiser s(gameInstanceSaveFile, OpenMode::Out);
-			s.Serialise(instanceProps);
-		}
+		Properties instanceProps = GameInstance::GetInstanceSaveData();
+		Serialiser s(gameInstanceSaveFile, OpenMode::Out);
+		s.Serialise(instanceProps);
+	}
 
 	void LoadGameInstanceData()
 	{
-			Properties instanceProps = GameInstance::GetInstanceSaveData();
-			Deserialiser d(gameInstanceSaveFile, OpenMode::In);
-			d.Deserialise(instanceProps);
-		}
+		Properties instanceProps = GameInstance::GetInstanceSaveData();
+		Deserialiser d(gameInstanceSaveFile, OpenMode::In);
+		d.Deserialise(instanceProps);
+	}
 
 	void LoadWorldAndMoveToEntranceTrigger()
 	{

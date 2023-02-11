@@ -7,5 +7,6 @@ Properties GameInstance::GetInstanceSaveData()
 {
 	Properties props("GameInstance");
 	props.Add("Continue Map", &mapToLoadOnContinue);
+	props.Add("BossDefeated", &bossDefeated);
 	return props;
 }

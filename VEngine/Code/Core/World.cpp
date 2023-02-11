@@ -22,6 +22,7 @@
 #include "Render/SpriteSystem.h"
 #include "UI/UISystem.h"
 #include "Gameplay/GameInstance.h"
+#include "Gameplay/GameUtils.h"
 #include "Physics/PhysicsSystem.h"
 
 std::string World::worldFilename;
@@ -69,6 +70,8 @@ void World::Start()
 	{
 		StartAllComponents();
 		WakeAndStartAllActors();
+
+		GameUtils::LoadGameInstanceData();
 	}
 }
 

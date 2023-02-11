@@ -142,6 +142,8 @@ void Core::StartGame()
 
 	SkeletalMeshComponent::StartAllAnimations();
 
+	GameUtils::LoadGameInstanceData();
+
 	editor->SetPlayButtonText();
 	debugMenu.AddNotification(L"Gameplay started");
 }

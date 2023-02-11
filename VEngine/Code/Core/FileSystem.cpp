@@ -16,6 +16,7 @@
 #include "VString.h"
 #include "Input.h"
 #include "Gameplay/GameInstance.h"
+#include "Gameplay/GameUtils.h"
 #include "Gameplay/WorldFunctions.h"
 #include "Profile.h"
 
@@ -164,6 +165,8 @@ void FileSystem::LoadWorld(std::string worldName)
 	std::string path = "WorldMaps/" + worldName;
 
 	assert(std::filesystem::exists(path) && "Map file doesn't exist");
+
+	GameUtils::SaveGameInstanceData();
 
 	World::Cleanup();
 
