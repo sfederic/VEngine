@@ -2,11 +2,21 @@
 #include "MapSelectionActor.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Actors/Game/MapScreenSelector.h"
+#include "Gameplay/GameInstance.h"
 
 MapSelectionActor::MapSelectionActor()
 {
     boxTrigger = CreateComponent<BoxTriggerComponent>("BoxTrigger");
     rootComponent = boxTrigger;
+}
+
+void MapSelectionActor::Start()
+{
+    auto value = GameInstance::GetGlobalProp<bool>("BossDefeated");
+    if (!value)
+    {
+        SetActive(false);
+    }
 }
 
 void MapSelectionActor::Tick(float deltaTime)

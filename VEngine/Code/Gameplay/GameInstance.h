@@ -19,7 +19,7 @@ struct GameInstance
 	static Properties GetGlobalProps();
 
 	template <typename T>
-	static T& GetGlobalProp(std::string_view name)
+	static T& GetGlobalProp(const std::string name)
 	{
 		Properties globalProps = GetGlobalProps();
 		T* data = globalProps.GetData<T>(name);

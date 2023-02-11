@@ -13,6 +13,7 @@ public:
 	ACTOR_SYSTEM(MapSelectionActor);
 
 	MapSelectionActor();
+	void Start() override;
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
@@ -24,4 +25,6 @@ private:
 	std::wstring description;
 
 	std::string levelToLoad;
+
+	std::string gloabalPropToCheckOnActivate;
 };
