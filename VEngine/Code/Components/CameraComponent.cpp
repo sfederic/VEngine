@@ -5,6 +5,7 @@
 #include "Core/Core.h"
 #include "Render/Renderer.h"
 #include "Editor/Editor.h"
+#include "Core/Camera.h"
 
 CameraComponent::CameraComponent()
 {
@@ -112,6 +113,11 @@ XMVECTOR CameraComponent::Shake()
 	const float zOffset = maxShake * shakeLevel * range;
 
 	return XMVectorSet(xOffset, yOffset, zOffset, 0.f); //Make sure the w here is 0
+}
+
+void CameraComponent::SetAsActiveCamera()
+{
+	activeCamera = this;
 }
 
 void CameraComponent::FPSCameraRotation()

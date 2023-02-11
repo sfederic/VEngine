@@ -17,11 +17,6 @@ public:
 	float FOV = 60.f;
 	float cameraMoveSpeed = 7.5f;
 
-private:
-	float nearZ = 0.01f;
-	float farZ = 1000.f;
-
-public:
 	CameraComponent();
 	CameraComponent(XMFLOAT3 startPos);
 	virtual void Tick(float deltaTime) override;
@@ -29,12 +24,19 @@ public:
 
 	virtual XMMATRIX GetViewMatrix();
 	XMMATRIX GetProjectionMatrix();
+
 	void Pitch(float angle);
 	void RotateY(float angle);
+
 	void Move(float d, XMVECTOR axis);
 	void ZoomTo(Actor* actor);
 	XMVECTOR Shake();
 
+	void SetAsActiveCamera();
+
 private:
 	void FPSCameraRotation();
+
+	float nearZ = 0.01f;
+	float farZ = 1000.f;
 };

@@ -133,28 +133,11 @@ void Core::EndTimer()
 void Core::StartGame()
 {
 	gameplayOn = true;
-
-	Player* player = Player::system.GetFirstActor();
-
-	if (player)
-	{
-		//Try set player camera as active
-		if (player->camera)
-		{
-			activeCamera = player->camera;
-		}
-	}
-	else if (CameraComponent::system.GetNumComponents()) //try to find another camera that isn't the editor's camera
-	{
-		activeCamera = CameraComponent::system.GetFirstComponent();
-	}
-
 	initialStartingWorldFromEditor = World::worldFilename;
 
 	PhysicsSystem::Start();
 
 	World::StartAllComponents();
-
 	World::WakeAndStartAllActors();
 
 	SkeletalMeshComponent::StartAllAnimations();
