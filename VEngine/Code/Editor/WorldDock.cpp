@@ -87,7 +87,8 @@ void WorldDock::PopulateWorldActorList()
 	//but there's no way to refresh them before Deserialising data.
 	World::ClearAllActorsFromWorld();
 
-	for (Actor* actor : World::GetAllActorsInWorld())
+	auto allActorsInWorld = World::GetAllActorsInWorld();
+	for (auto actor : allActorsInWorld)
 	{
 		auto item = new QTreeWidgetItem(actorTreeWidget);
 		item->setText(0, QString::fromStdString(actor->GetName()));
