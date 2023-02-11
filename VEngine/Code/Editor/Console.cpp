@@ -76,10 +76,6 @@ void Console::Init()
 		std::make_pair([]() { debugMenu.particleMenuOpen = !debugMenu.particleMenuOpen; },
 		"Particle"));
 
-	executeMap.emplace(L"MEM", 
-		std::make_pair([]() { debugMenu.memoriesMenuOpen = !debugMenu.memoriesMenuOpen; },
-		"Show all Memory info player has"));
-
 	executeMap.emplace(L"QUEST",
 		std::make_pair([]() { debugMenu.questMenuOpen = !debugMenu.questMenuOpen; },
 		"Show all in-game quests and their state"));

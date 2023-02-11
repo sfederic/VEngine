@@ -33,7 +33,6 @@ public:
 	bool gameInstaceMenuOpen = false;
 	bool actorSystemMenuOpen = false;
 	bool componentSystemMenuOpen = false;
-	bool memoriesMenuOpen = false;
 	bool consoleCommandsMenuOpen = false;
 	bool skeletonViewMenuOpen = false;
 	bool skeletalAnimationMenuOpen = false;
