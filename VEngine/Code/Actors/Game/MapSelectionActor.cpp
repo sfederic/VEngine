@@ -23,5 +23,7 @@ Properties MapSelectionActor::GetProps()
 {
     auto props = __super::GetProps();
     props.title = GetTypeName();
+    props.Add("Title", &title);
+    props.Add("Desc.", &description);
     return props;
 }

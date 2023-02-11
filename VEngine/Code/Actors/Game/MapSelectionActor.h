@@ -18,5 +18,9 @@ public:
 
 private:
 	BoxTriggerComponent* boxTrigger = nullptr;
+
+	//Strings to display on information widget when this actor is selected in-game. 
+	std::wstring title;
+	std::wstring description;
 };
 
