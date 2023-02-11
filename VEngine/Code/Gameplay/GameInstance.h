@@ -23,4 +23,12 @@ struct GameInstance
 		T* data = globalProps.GetData<T>(name);
 		return data;
 	}
+
+	template <typename T>
+	static void SetGlobalProp(const std::string name, T value)
+	{
+		Properties globalProps = GetGlobalProps();
+		T* data = globalProps.GetData<T>(name);
+		*data = value;
+	}
 };
