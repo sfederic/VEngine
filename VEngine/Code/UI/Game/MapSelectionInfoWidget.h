@@ -9,4 +9,6 @@ public:
 	
 	std::wstring title;
 	std::wstring description;
+
+	std::string levelToLoad;
 };

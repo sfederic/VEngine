@@ -30,5 +30,6 @@ Properties MapSelectionActor::GetProps()
     props.title = GetTypeName();
     props.Add("Title", &title);
     props.Add("Desc.", &description);
+    props.Add("Level", &levelToLoad);
     return props;
 }
