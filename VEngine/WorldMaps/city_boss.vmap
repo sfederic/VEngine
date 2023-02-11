@@ -291,23 +291,6 @@ broken_building_ruble15
 UID
 1361288765
 next
-OrientationEnemy
-1
- Enabled
-1
- Position
-1 1 1
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-OrientationEnemy0
-UID
-1037427784
-next
 Player
 1
  Enabled
@@ -327,12 +310,12 @@ Player0
 UID
 4264839494
 next
-SpinningOrientationEnemy
+RamielBoss
 1
  Enabled
 1
  Position
--1 1 1
+1 1 1
  Rotation
 -0 0 -0 1
  Scale
@@ -340,9 +323,9 @@ SpinningOrientationEnemy
  Visible
 1
 Name
-SpinningOrientationEnemy0
+RamielBoss0
 UID
-1992871522
+411090833
 next
 BoxTriggerComponent
 1
@@ -412,39 +395,24 @@ UID
 55067418
 next
 EmptyComponent
-2
-1037427784
+1
+411090833
 Root
  Enabled
 1
  Pos
-1 1 1
+0 0 0
  Rot
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
 1
 UID
-3598801514
-next
-1992871522
-Root
- Enabled
-1
- Pos
--1 1 1
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-UID
-1524974835
+3208573213
 next
 MeshComponent
-20
+19
 141271994
 Mesh
  Enabled
@@ -1363,14 +1331,14 @@ Trans. Occlude
 UID
 1465242666
 next
-1037427784
+411090833
 Mesh
  Enabled
 1
  Pos
-0 0 0
+1 1 1
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -1378,7 +1346,7 @@ Mesh
 Casts Shadow
 1
 M_Ambient
-1 1 1 1
+0.1 0.1 0.9 1
 M_Blend State
 null
 M_Metallic
@@ -1392,9 +1360,9 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1406,63 +1374,12 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-orientation_enemy.vmesh
+ramielboss.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-4193304667
-next
-1992871522
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-orientation_enemy.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1697831723
+12532854
 next
 end
