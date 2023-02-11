@@ -16,6 +16,8 @@ public:
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
+	void OnDestroyed() override;
+
 private:
 	void FireChargeBeamAtPlayer();
 

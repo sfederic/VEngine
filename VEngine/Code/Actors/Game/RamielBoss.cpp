@@ -4,6 +4,7 @@
 #include "Components/MeshComponent.h"
 #include "Physics/Raycast.h"
 #include "Gameplay/GameUtils.h"
+#include "Gameplay/GameInstance.h"
 #include "UI/Game/BossHealthBar.h"
 #include "UI/UISystem.h"
 
@@ -52,6 +53,11 @@ Properties RamielBoss::GetProps()
     auto props = __super::GetProps();
     props.title = "RamielBoss";
     return props;
+}
+
+void RamielBoss::OnDestroyed()
+{
+    GameInstance::SetGlobalProp("RamielDefeated", true);
 }
 
 void RamielBoss::FireChargeBeamAtPlayer()
