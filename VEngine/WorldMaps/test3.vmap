@@ -15,6 +15,23 @@ LevelInstance0
 UID
 3015249252
 next
+MapScreenSelector
+1
+ Enabled
+1
+ Position
+-4 -3 -4
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+MapScreenSelector0
+UID
+3054071050
+next
 MeshActor
 1
  Enabled
@@ -31,25 +48,6 @@ Name
 plane
 UID
 2975167817
-next
-Player
-1
- Enabled
-1
- Position
--3 -2 -2
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-All Range Mode
-1
-Name
-Player0
-UID
-4281562780
 next
 PointLightActor
 1
@@ -91,14 +89,14 @@ UID
 next
 CameraComponent
 1
-4281562780
+3054071050
 Camera
  Enabled
 1
  Pos
-1 0.5 -2
+3 3 -3
  Rot
-0 0 0 1
+0.279848 -0.364705 0.115917 0.880476
  Scale
 1 1 1
  Visible
@@ -110,10 +108,27 @@ Far Z
 Near Z
 0.01
 UID
-853954456
+3723513085
+next
+EmptyComponent
+1
+3054071050
+Root
+ Enabled
+1
+ Pos
+-4 -3 -4
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+1995112570
 next
 MeshComponent
-2
+1
 2975167817
 Mesh
  Enabled
@@ -164,57 +179,6 @@ Trans. Occlude
 0
 UID
 2645945431
-next
-4281562780
-Mesh
- Enabled
-1
- Pos
--3 -2 -2
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-jehuty.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3050283662
 next
 PointLightComponent
 1

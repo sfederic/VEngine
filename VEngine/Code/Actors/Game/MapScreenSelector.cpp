@@ -3,6 +3,8 @@
 #include "Components/CameraComponent.h"
 #include "Core/Input.h"
 #include "Core/VMath.h"
+#include "UI/UISystem.h"
+#include "UI/Game/MapSelectionInfoWidget.h"
 
 MapScreenSelector::MapScreenSelector()
 {
@@ -21,6 +23,8 @@ void MapScreenSelector::Create()
 void MapScreenSelector::Start()
 {
 	camera->SetAsActiveCamera();
+
+	mapSelectionInfoWidget = UISystem::CreateWidget<MapSelectionInfoWidget>();
 }
 
 void MapScreenSelector::Tick(float deltaTime)

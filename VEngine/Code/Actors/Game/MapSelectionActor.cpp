@@ -11,6 +11,7 @@ MapSelectionActor::MapSelectionActor()
 void MapSelectionActor::Tick(float deltaTime)
 {
     auto mapScreenSelector = MapScreenSelector::system.GetFirstActor();
+    if (mapScreenSelector == nullptr) return;
 
     if (boxTrigger->Contains(mapScreenSelector->GetPositionV()))
     {

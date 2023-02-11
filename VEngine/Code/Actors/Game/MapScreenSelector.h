@@ -4,6 +4,7 @@
 #include "../ActorSystem.h"
 
 class CameraComponent;
+class MapSelectionInfoWidget;
 
 //Player instance that moves around map screen and highlights levels to select.
 class MapScreenSelector : public Actor
@@ -23,4 +24,6 @@ private:
 	void ZoomInput(float deltaTime);
 
 	CameraComponent* camera = nullptr;
+
+	MapSelectionInfoWidget* mapSelectionInfoWidget = nullptr;
 };
