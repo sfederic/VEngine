@@ -7,7 +7,7 @@
 
 EnemySpawner::EnemySpawner()
 {
-	boxTrigger = CreateComponent(BoxTriggerComponent(), "BoxTrigger");
+	boxTrigger = CreateComponent<BoxTriggerComponent>("BoxTrigger");
 	boxTrigger->renderWireframeColour = XMFLOAT4(0.75f, 0.75f, 0.9f, 1.f);
 	rootComponent = boxTrigger;
 }

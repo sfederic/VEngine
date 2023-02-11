@@ -7,11 +7,11 @@ void HiddenCoreEnemy::Create()
 {
 	health = 2;
 
-	hull = CreateComponent(SliceableMeshComponent(), "Hull");
+	hull = CreateComponent("Hull", SliceableMeshComponent());
 	hull->SetMeshFilename("cube.vmesh");
 	rootComponent->AddChild(hull);
 
-	core = CreateComponent(MeshComponent(), "Core");
+	core = CreateComponent("Core", MeshComponent());
 	core->SetMeshFilename("sphere.vmesh");
 	core->SetLocalScale(0.33f, 0.33f, 0.33f);
 	core->skipPhysicsCreation = true;

@@ -6,7 +6,7 @@
 
 void BacksideEnemy::Create()
 {
-	auto mesh = CreateComponent(MeshComponent("turret.vmesh", "test.png"), "Mesh");
+	auto mesh = CreateComponent("Mesh", MeshComponent("turret.vmesh", "test.png"));
 	rootComponent->AddChild(mesh);
 }
 

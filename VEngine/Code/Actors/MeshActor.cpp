@@ -7,11 +7,11 @@ MeshActor::MeshActor()
 {
 	if (!spawnMeshFilename.empty())
 	{
-		mesh = CreateComponent(MeshComponent(spawnMeshFilename, "test.png"), "Mesh");
+		mesh = CreateComponent("Mesh", MeshComponent(spawnMeshFilename, "test.png"));
 	}
 	else
 	{
-		mesh = CreateComponent(MeshComponent("cube.vmesh", "test.png"), "Mesh");
+		mesh = CreateComponent("Mesh", MeshComponent("cube.vmesh", "test.png"));
 	}
 
 	rootComponent = mesh;

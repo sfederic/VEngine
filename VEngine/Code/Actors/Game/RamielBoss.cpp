@@ -9,7 +9,7 @@
 
 RamielBoss::RamielBoss()
 {
-    mesh = CreateComponent(MeshComponent("ramielboss.vmesh", ""), "Mesh");
+    mesh = CreateComponent("Mesh", MeshComponent("ramielboss.vmesh", ""));
     rootComponent = mesh;
 }
 

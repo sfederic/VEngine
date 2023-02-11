@@ -10,10 +10,10 @@
 
 TurretBullet::TurretBullet()
 {
-	auto mesh = CreateComponent(MeshComponent("small_ico_sphere.vmesh", "test.png"), "Mesh");
+	auto mesh = CreateComponent("Mesh", MeshComponent("small_ico_sphere.vmesh", "test.png"));
 	rootComponent = mesh;
 
-	boxTrigger = CreateComponent(BoxTriggerComponent(), "BoxTrigger");
+	boxTrigger = CreateComponent<BoxTriggerComponent>("BoxTrigger");
 	boxTrigger->boundingBox.Extents = XMFLOAT3(0.2f, 0.2f, 0.2f);
 	rootComponent->AddChild(boxTrigger);
 }

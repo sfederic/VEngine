@@ -22,10 +22,10 @@
 
 Player::Player()
 {
-	mesh = CreateComponent(MeshComponent(), "Mesh");
+	mesh = CreateComponent<MeshComponent>("Mesh");
 	rootComponent = mesh;
 
-	camera = CreateComponent(CameraComponent(), "Camera");
+	camera = CreateComponent<CameraComponent>("Camera");
 	rootComponent->AddChild(camera);
 
 	//@Todo: shield boundingbox is too large

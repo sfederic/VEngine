@@ -144,7 +144,7 @@ public:
 	//@Todo: there's something weird on renaming components in code via changing CreateComponent() args after
 	//that actor's initial serialisation. It's like it doesn't know how to rename it for some actors.
 	template <typename T>
-	T* CreateComponent(T component, const std::string componentName)
+	T* CreateComponent(const std::string componentName, T component = T())
 	{
 		return T::system.Add(componentName, this, std::move(component));
 	}

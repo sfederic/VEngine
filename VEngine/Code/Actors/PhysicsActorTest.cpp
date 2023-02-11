@@ -4,7 +4,7 @@
 
 PhysicsActorTest::PhysicsActorTest()
 {
-	mesh = CreateComponent(MeshComponent("sphere_high.vmesh", "test.png"), "Mesh");
+	mesh = CreateComponent("Mesh", MeshComponent("sphere_high.vmesh", "test.png"));
 	mesh->SetCollisionMeshFilename("cone.vmesh");
 	rootComponent = mesh;
 }

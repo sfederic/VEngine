@@ -5,7 +5,7 @@
 
 BuildingRubble::BuildingRubble()
 {
-    mesh = CreateComponent(MeshComponent("broken_building.vmesh", "destroyed_building.jpg"), "Mesh");
+    mesh = CreateComponent("Mesh", MeshComponent("broken_building.vmesh", "destroyed_building.jpg"));
     rootComponent = mesh;
 }
 

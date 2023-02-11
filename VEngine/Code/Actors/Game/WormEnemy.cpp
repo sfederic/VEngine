@@ -5,18 +5,18 @@
 
 void WormEnemy::Create()
 {
-    auto mesh1 = CreateComponent(MeshComponent("cube.vmesh", "test.png"), "Mesh1");
+    auto mesh1 = CreateComponent("Mesh1", MeshComponent("cube.vmesh", "test.png"));
     mesh1->SetLocalScale(0.9f, 0.9f, 0.9f);
     mesh1->AddTag(GameplayTags::EnemyMeshPiece);
     rootComponent->AddChild(mesh1);
 
-    auto mesh2 = CreateComponent(MeshComponent("cube.vmesh", "test.png"), "Mesh2");
+    auto mesh2 = CreateComponent("Mesh2", MeshComponent("cube.vmesh", "test.png"));
     mesh2->SetLocalScale(0.9f, 0.9f, 0.9f);
     mesh2->SetLocalPosition(0.f, 1.f, 0.f);
     mesh2->AddTag(GameplayTags::EnemyMeshPiece);
     rootComponent->AddChild(mesh2);
 
-    auto mesh3 = CreateComponent(MeshComponent("cube.vmesh", "test.png"), "Mesh3");
+    auto mesh3 = CreateComponent("Mesh3", MeshComponent("cube.vmesh", "test.png"));
     mesh3->SetLocalScale(0.9f, 0.9f, 0.9f);
     mesh3->SetLocalPosition(0.f, 2.f, 0.f);
     mesh3->AddTag(GameplayTags::EnemyMeshPiece);

@@ -330,7 +330,7 @@ void Actor::RemoveComponent(Component* componentToRemove)
 
 void Actor::SetEmptyRootComponent()
 {
-	rootComponent = CreateComponent(EmptyComponent(), "Root");
+	rootComponent = CreateComponent<EmptyComponent>("Root");
 }
 
 void Actor::RemoveComponent(std::string componentName)

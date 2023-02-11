@@ -8,10 +8,10 @@
 
 void BeamEnemy::Create()
 {
-	auto mesh = CreateComponent(MeshComponent("turret.vmesh", "test.png"), "Mesh");
+	auto mesh = CreateComponent("Mesh", MeshComponent("turret.vmesh", "test.png"));
 	rootComponent->AddChild(mesh);
 
-	beam = CreateComponent(Polyboard(), "Beam");
+	beam = CreateComponent<Polyboard>("Beam");
 	beam->GenerateVertices();
 	rootComponent->AddChild(beam);
 }

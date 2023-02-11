@@ -6,7 +6,7 @@
 
 LightVolume::LightVolume()
 {
-    boxTrigger = CreateComponent(BoxTriggerComponent(), "BoxTrigger");
+    boxTrigger = CreateComponent<BoxTriggerComponent>("BoxTrigger");
     boxTrigger->renderWireframeColour = XMFLOAT4(1.f, 1.f, 0.f, 1.f);
     rootComponent = boxTrigger;
 }

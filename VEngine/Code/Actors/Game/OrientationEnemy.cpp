@@ -6,7 +6,7 @@
 
 void OrientationEnemy::Create()
 {
-	auto mesh = CreateComponent(MeshComponent("orientation_enemy.vmesh", "test.png"), "Mesh");
+	auto mesh = CreateComponent("Mesh", MeshComponent("orientation_enemy.vmesh", "test.png"));
 	rootComponent->AddChild(mesh);
 }
 

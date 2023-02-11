@@ -4,7 +4,7 @@
 
 AnimCube::AnimCube()
 {
-	skeletalMesh = CreateComponent(SkeletalMeshComponent("spin_cubes.vmesh", "test.png"), "Skeleton");
+	skeletalMesh = CreateComponent("Skeleton", SkeletalMeshComponent("spin_cubes.vmesh", "test.png"));
 	rootComponent = skeletalMesh;
 }
 

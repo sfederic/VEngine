@@ -5,7 +5,7 @@
 
 SplitMesh::SplitMesh()
 {
-	mesh = CreateComponent(MeshComponent(), "SlicedMesh");
+	mesh = CreateComponent<MeshComponent>("SlicedMesh");
 	rootComponent = mesh;
 }
 

@@ -4,6 +4,6 @@
 
 CameraActor::CameraActor()
 {
-	camera = CreateComponent(CameraComponent(), "Camera");
+	camera = CreateComponent<CameraComponent>("Camera");
 	rootComponent = camera;
 }
