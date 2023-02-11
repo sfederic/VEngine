@@ -3,7 +3,7 @@
 
 std::string GameInstance::startingMap = "test3.vmap";
 
-Properties GameInstance::GetInstanceSaveData()
+Properties GameInstance::GetGlobalProps()
 {
 	Properties props("GameInstance");
 	props.Add("Continue Map", &mapToLoadOnContinue);

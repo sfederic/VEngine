@@ -15,5 +15,14 @@ struct GameInstance
 
 	inline static bool bossDefeated = false;
 
-	static Properties GetInstanceSaveData();
+	//Global save data
+	static Properties GetGlobalProps();
+
+	template <typename T>
+	static T& GetGlobalProp(std::string_view name)
+	{
+		Properties globalProps = GetGlobalProps();
+		T* data = globalProps.GetData<T>(name);
+		return *data;
+	}
 };

@@ -71,14 +71,14 @@ namespace GameUtils
 
 	void SaveGameInstanceData()
 	{
-		Properties instanceProps = GameInstance::GetInstanceSaveData();
+		Properties instanceProps = GameInstance::GetGlobalProps();
 		Serialiser s(gameInstanceSaveFile, OpenMode::Out);
 		s.Serialise(instanceProps);
 	}
 
 	void LoadGameInstanceData()
 	{
-		Properties instanceProps = GameInstance::GetInstanceSaveData();
+		Properties instanceProps = GameInstance::GetGlobalProps();
 		Deserialiser d(gameInstanceSaveFile, OpenMode::In);
 		d.Deserialise(instanceProps);
 	}
