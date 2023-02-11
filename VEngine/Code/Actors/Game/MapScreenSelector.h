@@ -18,6 +18,8 @@ public:
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
+	void SetTitleAndDescriptionForSelectionInfoWidget(std::wstring_view title, std::wstring_view description);
+
 private:
 	void MovementInput(float deltaTime);
 	void RotationInput(float deltaTime);

@@ -41,6 +41,12 @@ Properties MapScreenSelector::GetProps()
 	return props;
 }
 
+void MapScreenSelector::SetTitleAndDescriptionForSelectionInfoWidget(std::wstring_view title, std::wstring_view description)
+{
+	mapSelectionInfoWidget->title = title;
+	mapSelectionInfoWidget->description = description;
+}
+
 void MapScreenSelector::MovementInput(float deltaTime)
 {
 	const float moveSpeed = 7.5f * deltaTime;
