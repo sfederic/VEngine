@@ -19,6 +19,7 @@ public:
 	Properties GetProps() override;
 
 	void SetTitleAndDescriptionForSelectionInfoWidget(std::wstring_view title, std::wstring_view description);
+	void RemoveMapSelectionInfoWidgetFromViewport();
 
 private:
 	void MovementInput(float deltaTime);

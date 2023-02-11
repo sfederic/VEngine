@@ -6,6 +6,7 @@
 MapSelectionActor::MapSelectionActor()
 {
     boxTrigger = CreateComponent<BoxTriggerComponent>("BoxTrigger");
+    rootComponent = boxTrigger;
 }
 
 void MapSelectionActor::Tick(float deltaTime)
@@ -15,7 +16,11 @@ void MapSelectionActor::Tick(float deltaTime)
 
     if (boxTrigger->Contains(mapScreenSelector->GetPositionV()))
     {
-
+        mapScreenSelector->SetTitleAndDescriptionForSelectionInfoWidget(title, description);
+    }
+    else
+    {
+        mapScreenSelector->RemoveMapSelectionInfoWidgetFromViewport();
     }
 }
 

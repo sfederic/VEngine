@@ -45,6 +45,13 @@ void MapScreenSelector::SetTitleAndDescriptionForSelectionInfoWidget(std::wstrin
 {
 	mapSelectionInfoWidget->title = title;
 	mapSelectionInfoWidget->description = description;
+
+	mapSelectionInfoWidget->AddToViewport();
+}
+
+void MapScreenSelector::RemoveMapSelectionInfoWidgetFromViewport()
+{
+	mapSelectionInfoWidget->RemoveFromViewport();
 }
 
 void MapScreenSelector::MovementInput(float deltaTime)
