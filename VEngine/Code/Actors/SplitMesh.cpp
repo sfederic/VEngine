@@ -19,7 +19,7 @@ void SplitMesh::Tick(float deltaTime)
 	}
 }
 
-void SplitMesh::CreateSplitMesh(std::vector<Vertex>& meshVerts, const Transform& originalMeshTransform)
+void SplitMesh::CreateSplitMesh(std::vector<Vertex>& meshVerts, MeshComponent* originalMesh)
 {
 	mesh->SetRastState(RastStates::noBackCull);
 
@@ -28,7 +28,9 @@ void SplitMesh::CreateSplitMesh(std::vector<Vertex>& meshVerts, const Transform&
 	*mesh->meshDataProxy.vertices = meshVerts;
 
 	mesh->isStatic = false;
-	mesh->transform = originalMeshTransform;
+	mesh->transform = originalMesh->transform;
+
+	mesh->SetTexture(originalMesh->GetTextureFilename());
 
 	mesh->SplitMeshCreate();
 }

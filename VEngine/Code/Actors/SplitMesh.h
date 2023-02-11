@@ -4,7 +4,6 @@
 #include "Actors/ActorSystem.h"
 
 class MeshComponent;
-struct Transform;
 
 //A part of a sliced mesh
 class SplitMesh : public Actor
@@ -14,7 +13,7 @@ public:
 
 	SplitMesh();
 	void Tick(float deltaTime) override;
-	void CreateSplitMesh(std::vector<Vertex>& meshVerts, const Transform& originalMeshTransform);
+	void CreateSplitMesh(std::vector<Vertex>& meshVerts, MeshComponent* originalMesh);
 	Properties GetProps() override;
 
 private:

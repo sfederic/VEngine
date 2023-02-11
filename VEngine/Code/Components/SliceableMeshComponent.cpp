@@ -14,10 +14,10 @@ void SliceableMeshComponent::SliceMesh(XMVECTOR planeCenter, XMVECTOR planeNorma
 
 	//@Todo: this will fail if the plane doesn't cut this mesh. d3d11 will explore on CreateBuffer
 	auto splitMesh0 = SplitMesh::system.Add(originalMeshTransform);
-	splitMesh0->CreateSplitMesh(mesh0Verts, originalMeshTransform);
+	splitMesh0->CreateSplitMesh(mesh0Verts, this);
 
 	auto splitMesh1 = SplitMesh::system.Add(originalMeshTransform);
-	splitMesh1->CreateSplitMesh(mesh1Verts, originalMeshTransform);
+	splitMesh1->CreateSplitMesh(mesh1Verts, this);
 
 	Remove();
 }
