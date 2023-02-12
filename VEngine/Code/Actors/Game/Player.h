@@ -5,7 +5,6 @@
 
 class MeshComponent;
 class CameraComponent;
-class ComboBarWidget;
 class PlayerShieldWidget;
 
 class Player : public Actor
@@ -44,7 +43,6 @@ public:
 	float shields = 100.f;
 
 private:
-	ComboBarWidget* comboBarWidget = nullptr;
 	PlayerShieldWidget* playerShieldWidget = nullptr;
 
 	MeshComponent* shieldMesh = nullptr;

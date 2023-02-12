@@ -175,7 +175,6 @@
     <ClCompile Include="Code\Render\RenderTypes.cpp" />
     <ClCompile Include="Code\Core\System.cpp" />
     <ClCompile Include="Code\Core\UID.cpp" />
-    <ClCompile Include="Code\UI\Game\ComboBarWidget.cpp" />
     <ClCompile Include="Code\UI\Game\PlayerShieldWidget.cpp" />
     <ClCompile Include="Code\Core\VEnum.cpp" />
     <ClCompile Include="Code\vpch.cpp">
@@ -412,7 +411,6 @@
     <ClInclude Include="Code\Particle\Particle.h" />
     <ClInclude Include="Code\Physics\CollisionLayers.h" />
     <ClInclude Include="Code\Core\UID.h" />
-    <ClInclude Include="Code\UI\Game\ComboBarWidget.h" />
     <ClInclude Include="Code\UI\Game\PlayerShieldWidget.h" />
     <ClInclude Include="Code\UI\Layout.h" />
     <ClInclude Include="Code\Core\VEnum.h" />

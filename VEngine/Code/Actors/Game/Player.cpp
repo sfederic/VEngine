@@ -16,7 +16,6 @@
 #include "Gameplay/GameplayTags.h"
 #include "Gameplay/AttackTypes.h"
 #include "Physics/Raycast.h"
-#include "UI/Game/ComboBarWidget.h"
 #include "UI/Game/PlayerShieldWidget.h"
 #include "UI/UISystem.h"
 
@@ -47,9 +46,6 @@ void Player::Create()
 void Player::Start()
 {
 	__super::Start();
-
-	comboBarWidget = UISystem::CreateWidget<ComboBarWidget>();
-	comboBarWidget->AddToViewport();
 
 	playerShieldWidget = UISystem::CreateWidget<PlayerShieldWidget>();
 	playerShieldWidget->AddToViewport();
@@ -253,8 +249,6 @@ void Player::Shoot()
 			{
 				if (enemy->CanBeHit(AttackTypes::Shoot))
 				{
-					comboBarWidget->IncreaseScoreAndCombo();
-
 					auto mesh = dynamic_cast<MeshComponent*>(hitResult.hitComponent);
 					if (mesh)
 					{
@@ -291,7 +285,7 @@ void Player::BladeSwipe()
 		HitResult hit(this);
 		if (Raycast(hit, GetPositionV(), GetPositionV() + GetForwardVectorV() * 2))
 		{
-			GameUtils::SpawnSpriteSheet("Sprites/blade_slash.png", hit.GetHitPosV(), false, 4, 4);
+			GameUtils::SpawnSpriteSheet("Sprites/v_slice.png", hit.GetHitPosV(), false, 4, 5);
 
 			auto meshSplitActor = dynamic_cast<MeshSplitActor*>(hit.hitActor);
 			if (meshSplitActor)
@@ -305,8 +299,6 @@ void Player::BladeSwipe()
 			{
 				if (enemy->CanBeHit(AttackTypes::Melee))
 				{
-					comboBarWidget->IncreaseScoreAndCombo();
-
 					auto mesh = dynamic_cast<MeshComponent*>(hit.hitComponent);
 
 					//Handle mesh slicing on attack
