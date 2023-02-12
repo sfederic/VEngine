@@ -551,6 +551,9 @@
     <ClCompile Include="Code\UI\Game\MapSelectionInfoWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\Game\PowerCableEnemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1061,6 +1064,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\MapSelectionInfoWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\PowerCableEnemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
