@@ -235,8 +235,6 @@ bool Player::CheckForObstacle()
 
 void Player::Shoot()
 {
-	if (!CheckMovementAndRotationHaveStopped()) return;
-
 	if (Input::GetKeyDown(Keys::Up))
 	{
 		HitResult hitResult(this);
@@ -274,8 +272,6 @@ void Player::Shoot()
 
 void Player::BladeSwipe()
 {
-	if (!CheckMovementAndRotationHaveStopped()) return;
-
 	auto slicePlaneNormal = [&]() -> XMVECTOR { return this->GetUpVectorV(); };
 	//Give plane center a small offset as it's messing up right now
 	auto slicePlaneCenter = [&]() -> XMVECTOR { return GetPositionV() + GetForwardVectorV() + XMVectorSet(0.1f, 0.1f, 0.1f, 1.f); };
