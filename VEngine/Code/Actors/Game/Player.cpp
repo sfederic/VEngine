@@ -17,6 +17,7 @@
 #include "Gameplay/AttackTypes.h"
 #include "Physics/Raycast.h"
 #include "UI/Game/PlayerShieldWidget.h"
+#include "UI/Game/PlayerReticleWidget.h"
 #include "UI/UISystem.h"
 
 Player::Player()
@@ -49,6 +50,8 @@ void Player::Start()
 
 	playerShieldWidget = UISystem::CreateWidget<PlayerShieldWidget>();
 	playerShieldWidget->AddToViewport();
+
+	UISystem::CreateWidget<PlayerReticleWidget>()->AddToViewport();
 
 	camera->SetAsActiveCamera();
 	auto cameraFocusPoint = GetPositionV() + GetForwardVectorV() * 3.f;
