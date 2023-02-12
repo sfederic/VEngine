@@ -189,6 +189,11 @@ void MeshComponent::SetUseTexture(bool useTexture)
 	material->materialShaderData.useTexture = useTexture;
 }
 
+void MeshComponent::SetUVRotationSpeed(float speed)
+{
+	material->uvRotationSpeed = speed;
+}
+
 Buffer* MeshComponent::GetVertexBuffer() const 
 {
 	return pso.vertexBuffer;
