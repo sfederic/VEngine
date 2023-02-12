@@ -283,7 +283,8 @@ void Player::BladeSwipe()
 	if (Input::GetKeyUp(Keys::Down))
 	{
 		HitResult hit(this);
-		if (Raycast(hit, GetPositionV(), GetPositionV() + GetForwardVectorV() * 2))
+		XMVECTOR origin = GetPositionV() + GetForwardVectorV();
+		if (SimpleBoxCast(origin, XMFLOAT3(0.5f, 0.5f, 0.5f), hit, true))
 		{
 			GameUtils::SpawnSpriteSheet("Sprites/v_slice.png", hit.GetHitPosV(), false, 4, 5);
 
