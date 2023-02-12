@@ -20,3 +20,8 @@ bool LevelInstance::CheckIfPointInsideLevelBounds(XMVECTOR point)
 {
     return boxTrigger->Contains(point);
 }
+
+void LevelInstance::SetExtents(float x, float y, float z)
+{
+    boxTrigger->boundingBox.Extents = XMFLOAT3(x, y, z);
+}

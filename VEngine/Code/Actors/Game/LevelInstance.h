@@ -15,6 +15,7 @@ public:
 	virtual Properties GetProps() override;
 
 	bool CheckIfPointInsideLevelBounds(XMVECTOR point);
+	void SetExtents(float x, float y, float z);
 
 private:
 	BoxTriggerComponent* boxTrigger = nullptr;
