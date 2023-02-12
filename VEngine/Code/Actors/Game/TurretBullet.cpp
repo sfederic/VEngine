@@ -27,7 +27,7 @@ void TurretBullet::Tick(float deltaTime)
 	HitResult hitResult(this);
 	auto turretEnemies = TurretEnemy::system.GetActorsAsBaseClass();
 	hitResult.AddActorsToIgnore(turretEnemies);
-	if (SimpleBoxCast(GetPosition(), boxTrigger->boundingBox.Extents, hitResult))
+	if (SimpleBoxCast(GetPositionV(), boxTrigger->boundingBox.Extents, hitResult, false))
 	{
 		auto player = dynamic_cast<Player*>(hitResult.hitActors.front());
 		if (player)
