@@ -317,9 +317,11 @@ bool OrientedBoxCast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end, XMFLOA
 }
 
 //Note: doesn't set HitResult::hitActor.
-bool SimpleBoxCast(XMFLOAT3 center, XMFLOAT3 extents, HitResult& hit)
+bool SimpleBoxCast(XMVECTOR center, XMFLOAT3 extents, HitResult& hit)
 {
-	DirectX::BoundingBox boundingBox(center, extents);
+	XMFLOAT3 centerFloat3;
+	XMStoreFloat3(&centerFloat3, center);
+	DirectX::BoundingBox boundingBox(centerFloat3, extents);
 
 	for (auto actor : World::GetAllActorsInWorld())
 	{
