@@ -6,8 +6,19 @@
 PowerCableEnemy::PowerCableEnemy()
 {
 	mesh = CreateComponent<MeshComponent>("Mesh");
-	mesh->SetMeshFilename("cube.vmesh");
 	rootComponent->AddChild(mesh);
+
+	shieldMesh = CreateComponent<MeshComponent>("ShieldMesh");
+	rootComponent->AddChild(shieldMesh);
+}
+
+void PowerCableEnemy::Create()
+{
+	mesh->SetMeshFilename("cube.vmesh");
+
+	shieldMesh->SetMeshFilename("sphere.vmesh");
+	shieldMesh->SetTexture("shield.png");
+	shieldMesh->SetUVOffsetSpeed(XMFLOAT2(0.25f, 0.f));
 }
 
 void PowerCableEnemy::Start()
