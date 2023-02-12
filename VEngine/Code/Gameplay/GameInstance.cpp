@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "GameInstance.h"
 
-std::string GameInstance::startingMap = "underwater.vmap";
+std::string GameInstance::startingMap = "babel.vmap";
 
 //Global properties
 static bool ramielDefeated = false;
