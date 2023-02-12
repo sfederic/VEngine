@@ -120,6 +120,7 @@ void World::CreateDefaultMapActors()
 	player->CreateAllComponents();
 
 	auto levelInstance = LevelInstance::system.Add();
+	levelInstance->SetPosition(XMFLOAT3(2.f, 4.f, 2.f));
 	levelInstance->SetExtents(5.f, 5.f, 5.f);
 
 	auto dlight = DirectionalLightActor::system.Add();
