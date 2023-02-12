@@ -267,13 +267,10 @@ void Player::Shoot()
 						}
 					}
 
-					if (enemy->HasHealthDepleted())
+					if (enemy->CheckIfAllTaggedMeshesAreDestroyed() || enemy->HasHealthDepleted())
 					{
-						if (enemy->CheckIfAllTaggedMeshesAreDestroyed())
-						{
-							enemy->OnDestroyed();
-							enemy->Destroy();
-						}
+						enemy->OnDestroyed();
+						enemy->Destroy();
 					}
 				}
 			}
@@ -328,13 +325,10 @@ void Player::BladeSwipe()
 						}
 					}
 
-					if (enemy->HasHealthDepleted())
+					if (enemy->CheckIfAllTaggedMeshesAreDestroyed() || enemy->HasHealthDepleted())
 					{
-						if (enemy->CheckIfAllTaggedMeshesAreDestroyed())
-						{
-							enemy->OnDestroyed();
-							enemy->Destroy();
-						}
+						enemy->OnDestroyed();
+						enemy->Destroy();
 					}
 				}
 			}
