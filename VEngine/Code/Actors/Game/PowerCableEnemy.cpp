@@ -44,4 +44,7 @@ bool PowerCableEnemy::CanBeHit(AttackTypes attackType)
 void PowerCableEnemy::OnSlicedLinkedActor()
 {
 	shieldsUp = false;
+
+	rootComponent->RemoveChild(shieldMesh);
+	shieldMesh->Remove();
 }
