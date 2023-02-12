@@ -194,6 +194,11 @@ void MeshComponent::SetUVRotationSpeed(float speed)
 	material->uvRotationSpeed = speed;
 }
 
+void MeshComponent::SetUVOffsetSpeed(XMFLOAT2 speed)
+{
+	material->uvOffsetSpeed = speed;
+}
+
 Buffer* MeshComponent::GetVertexBuffer() const 
 {
 	return pso.vertexBuffer;

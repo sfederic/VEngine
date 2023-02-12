@@ -65,6 +65,7 @@ public:
 	void SetUseTexture(bool useTexture);
 
 	void SetUVRotationSpeed(float speed);
+	void SetUVOffsetSpeed(XMFLOAT2 speed);
 
 	Buffer* GetVertexBuffer() const;
 	void CreateVertexBuffer();
