@@ -2,6 +2,7 @@
 #include "SplitMesh.h"
 #include "Components/MeshComponent.h"
 #include "Core/Timer.h"
+#include "Render/Material.h"
 
 SplitMesh::SplitMesh()
 {
@@ -31,6 +32,8 @@ void SplitMesh::CreateSplitMesh(std::vector<Vertex>& meshVerts, MeshComponent* o
 	mesh->transform = originalMesh->transform;
 
 	mesh->SetTexture(originalMesh->GetTextureFilename());
+
+	mesh->material->materialShaderData = originalMesh->material->materialShaderData;
 
 	mesh->SplitMeshCreate();
 }
