@@ -1,3 +1,20 @@
+Billboard
+1
+ Enabled
+1
+ Position
+-1 1 4
+ Rotation
+0 0.992508 0 0.122183
+ Scale
+0.999998 0.999998 1
+ Visible
+1
+Name
+Billboard0
+UID
+579694572
+next
 DirectionalLightActor
 1
  Enabled
@@ -111,12 +128,29 @@ broken_building3
 UID
 1896322534
 next
+ParticleSystem
+1
+ Enabled
+1
+ Position
+1 4 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+ParticleSystem0
+UID
+2811941114
+next
 Player
 1
  Enabled
 1
  Position
-0 2 -1
+-1.66893e-06 4 -2
  Rotation
 0 0 0 1
  Scale
@@ -267,7 +301,58 @@ UID
 2652705572
 next
 MeshComponent
-7
+8
+579694572
+Mesh
+ Enabled
+1
+ Pos
+-1 1 4
+ Rot
+0 0.992508 0 0.122183
+ Scale
+0.999998 0.999998 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Unlit
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+tree.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+290979543
+next
 2981217774
 Mesh
  Enabled
@@ -477,7 +562,7 @@ Mesh
  Enabled
 1
  Pos
-0 2 -1
+-1.66893e-06 4 -2
  Rot
 0 0 0 1
  Scale
@@ -572,7 +657,7 @@ Static
 Trans. Occlude
 0
 UID
-291963865
+598493741
 next
 1203630653
 CoreMesh
@@ -623,6 +708,67 @@ Static
 Trans. Occlude
 0
 UID
-436370658
+1838787375
+next
+ParticleEmitter
+1
+2811941114
+Emitter
+ Enabled
+1
+ Pos
+1 4 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+DefaultClip
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+water_splash.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+5
+M_UvRotationSpeed
+5
+M_UvScale
+1 1
+P_Lifetime
+0.3 0.5
+P_MaxDirection
+-0.1 1 0
+P_MinDirection
+0.1 1 0
+P_MoveSpeed
+2 2.5
+P_RotateSpeed
+0.5 0.5
+P_Rotation
+4 4
+P_SpawnRadius
+0 1
+P_SpawnRate
+0.1 0.2
+UID
+3840232430
 next
 end
