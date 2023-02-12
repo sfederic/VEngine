@@ -33,6 +33,11 @@ void FBXLoader::ImportAsMesh(std::string filename, MeshData& meshData)
 {
 	std::string filepath = AssetBaseFolders::fbxFiles + filename;
 	
+	if (!std::filesystem::exists(filepath))
+	{
+		filepath = AssetBaseFolders::fbxFiles + "cube.fbx";
+	}
+
 	if (!importer->Initialize(filepath.c_str(), -1, manager->GetIOSettings()))
 	{
 		throw new std::exception("FBX importer messed up. filename probably wrong");
