@@ -4,5 +4,5 @@
 class IMeshSliceReaction
 {
 public:
-	virtual void Activate() = 0;
+	virtual void OnSlicedLinkedActor() = 0;
 };

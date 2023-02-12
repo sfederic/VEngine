@@ -30,7 +30,7 @@ void MeshSliceActor::SliceMesh(XMVECTOR planeCenter, XMVECTOR planeNormal)
 		auto meshSliceReaction = dynamic_cast<IMeshSliceReaction*>(actor);
 		if (meshSliceReaction)
 		{
-			meshSliceReaction->Activate();
+			meshSliceReaction->OnSlicedLinkedActor();
 		}
 	}
 }

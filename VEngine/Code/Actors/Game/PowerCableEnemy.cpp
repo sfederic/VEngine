@@ -41,7 +41,7 @@ bool PowerCableEnemy::CanBeHit(AttackTypes attackType)
 	return !shieldsUp;
 }
 
-void PowerCableEnemy::Activate()
+void PowerCableEnemy::OnSlicedLinkedActor()
 {
 	shieldsUp = false;
 }

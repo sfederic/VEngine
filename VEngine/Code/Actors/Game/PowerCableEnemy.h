@@ -19,7 +19,7 @@ public:
 
 	bool CanBeHit(AttackTypes attackType) override;
 
-	void Activate() override;
+	void OnSlicedLinkedActor() override;
 
 private:
 	MeshComponent* mesh = nullptr;
