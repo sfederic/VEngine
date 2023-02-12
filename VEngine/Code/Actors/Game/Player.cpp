@@ -224,6 +224,8 @@ void Player::DoubleTapDashMovementInput(float deltaTime)
 
 void Player::RotationInput()
 {
+	if (!CheckMovementAndRotationHaveStopped()) return;
+
 	if (Input::GetKeyHeld(Keys::Shift) && Input::GetKeyUp(Keys::Left))
 	{
 		nextRot = XMQuaternionMultiply(GetRotationV(), DirectX::XMQuaternionRotationAxis(GetForwardVectorV(), XMConvertToRadians(90.f)));
