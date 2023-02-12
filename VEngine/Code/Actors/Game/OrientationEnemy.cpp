@@ -4,9 +4,9 @@
 #include "Components/MeshComponent.h"
 #include "Actors/Game/Player.h"
 
-void OrientationEnemy::Create()
+OrientationEnemy::OrientationEnemy()
 {
-	auto mesh = CreateComponent("Mesh", MeshComponent("orientation_enemy.vmesh", "test.png"));
+	auto mesh = CreateComponent("Mesh", MeshComponent("orientation_enemy.vmesh", "orientation_enemy.jpg"));
 	rootComponent->AddChild(mesh);
 }
 

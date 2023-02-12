@@ -8,7 +8,7 @@ class OrientationEnemy : public Enemy
 public:
 	ACTOR_SYSTEM(OrientationEnemy);
 
-	void Create() override;
+	OrientationEnemy();
 	void Tick(float deltaTime) override;
 	bool CanBeHit(AttackTypes attackType) override;
 };
