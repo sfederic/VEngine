@@ -261,6 +261,7 @@
     <ClCompile Include="Code\Actors\Game\MapSelectionActor.cpp" />
     <ClCompile Include="Code\UI\Game\MapSelectionInfoWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\PowerCableEnemy.cpp" />
+    <ClCompile Include="Code\UI\Game\PlayerReticleWidget.cpp" />
     <ClInclude Include="Code\Actors\Game\BuildingRubble.h" />
     <ClInclude Include="Code\Actors\SplitMesh.h" />
     <ClInclude Include="Code\Gameplay\AttackTypes.h" />
@@ -528,6 +529,7 @@
     <ClInclude Include="Code\Actors\Game\MapSelectionActor.h" />
     <ClInclude Include="Code\UI\Game\MapSelectionInfoWidget.h" />
     <ClInclude Include="Code\Actors\Game\PowerCableEnemy.h" />
+    <ClInclude Include="Code\UI\Game\PlayerReticleWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
