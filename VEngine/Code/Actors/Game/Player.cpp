@@ -286,42 +286,46 @@ void Player::BladeSwipe()
 		XMVECTOR origin = GetPositionV() + GetForwardVectorV();
 		if (SimpleBoxCast(origin, XMFLOAT3(0.5f, 0.5f, 0.5f), hit, true))
 		{
-			GameUtils::SpawnSpriteSheet("Sprites/v_slice.png", hit.GetHitPosV(), false, 4, 5);
+			GameUtils::SpawnSpriteSheet("Sprites/v_slice.png", origin, false, 4, 5);
 
-			auto meshSplitActor = dynamic_cast<MeshSplitActor*>(hit.hitActor);
-			if (meshSplitActor)
+			for (auto hitComponent : hit.hitComponents)
 			{
-				meshSplitActor->SliceMesh(slicePlaneCenter(), slicePlaneNormal());
-				return;
+				auto mesh = dynamic_cast<MeshComponent*>(hit.hitComponent);
+
+				//Handle mesh slicing on attack
+				auto sliceMeshComponent = dynamic_cast<SliceableMeshComponent*>(hit.hitComponent);
+				if (sliceMeshComponent)
+				{
+					sliceMeshComponent->SliceMesh(slicePlaneCenter(), slicePlaneNormal());
+				}
+				else if (mesh)
+				{
+					if (!mesh->HasTag(GameplayTags::InvincibleMeshPiece))
+					{
+						mesh->Remove();
+					}
+				}
 			}
 
-			auto enemy = dynamic_cast<Enemy*>(hit.hitActor);
-			if (enemy)
+			for (auto hitActor : hit.hitActors)
 			{
-				if (enemy->CanBeHit(AttackTypes::Melee))
+				auto meshSplitActor = dynamic_cast<MeshSplitActor*>(hitActor);
+				if (meshSplitActor)
 				{
-					auto mesh = dynamic_cast<MeshComponent*>(hit.hitComponent);
+					meshSplitActor->SliceMesh(slicePlaneCenter(), slicePlaneNormal());
+					continue;
+				}
 
-					//Handle mesh slicing on attack
-					auto sliceMeshComponent = dynamic_cast<SliceableMeshComponent*>(hit.hitComponent);
-					if (sliceMeshComponent)
+				auto enemy = dynamic_cast<Enemy*>(hitActor);
+				if (enemy)
+				{
+					if (enemy->CanBeHit(AttackTypes::Melee))
 					{
-						sliceMeshComponent->SliceMesh(slicePlaneCenter(), slicePlaneNormal());
-					}
-					else if (mesh)
-					{
-						if (!mesh->HasTag(GameplayTags::InvincibleMeshPiece))
+						if (enemy->CheckIfAllTaggedMeshesAreDestroyed() || enemy->HasHealthDepleted())
 						{
-							enemy->InflictDamage(damage);
-
-							mesh->Remove();
+							enemy->OnDestroyed();
+							enemy->Destroy();
 						}
-					}
-
-					if (enemy->CheckIfAllTaggedMeshesAreDestroyed() || enemy->HasHealthDepleted())
-					{
-						enemy->OnDestroyed();
-						enemy->Destroy();
 					}
 				}
 			}
