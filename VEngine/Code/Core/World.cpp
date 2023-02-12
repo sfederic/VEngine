@@ -119,7 +119,8 @@ void World::CreateDefaultMapActors()
 	player->Create();
 	player->CreateAllComponents();
 
-	LevelInstance::system.Add();
+	auto levelInstance = LevelInstance::system.Add();
+	levelInstance->SetExtents(5.f, 5.f, 5.f);
 
 	auto dlight = DirectionalLightActor::system.Add();
 	//Set light pointing down because shadows looks nice.
