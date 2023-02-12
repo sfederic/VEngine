@@ -6,6 +6,7 @@
 PowerCableEnemy::PowerCableEnemy()
 {
 	mesh = CreateComponent<MeshComponent>("Mesh");
+	mesh->SetMeshFilename("cube.vmesh");
 	rootComponent->AddChild(mesh);
 }
 
@@ -22,4 +23,14 @@ Properties PowerCableEnemy::GetProps()
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
 	return props;
+}
+
+bool PowerCableEnemy::CanBeHit(AttackTypes attackType)
+{
+	return !shieldsUp;
+}
+
+void PowerCableEnemy::Activate()
+{
+	shieldsUp = false;
 }
