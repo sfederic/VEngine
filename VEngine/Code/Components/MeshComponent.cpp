@@ -189,6 +189,11 @@ void MeshComponent::SetUseTexture(bool useTexture)
 	material->materialShaderData.useTexture = useTexture;
 }
 
+bool MeshComponent::IsUsingTexture()
+{
+	return material->materialShaderData.useTexture;
+}
+
 void MeshComponent::SetUVRotationSpeed(float speed)
 {
 	material->uvRotationSpeed = speed;

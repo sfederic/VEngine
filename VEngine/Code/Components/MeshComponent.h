@@ -63,6 +63,7 @@ public:
 	XMFLOAT4 GetAmbientColour();
 
 	void SetUseTexture(bool useTexture);
+	bool IsUsingTexture();
 
 	void SetUVRotationSpeed(float speed);
 	void SetUVOffsetSpeed(XMFLOAT2 speed);
