@@ -79,7 +79,6 @@ void Player::Tick(float deltaTime)
 
 	Interact();
 
-	DoubleTapDashMovementInput(deltaTime);
 	MovementInput();
 	RotationInput();
 
@@ -189,36 +188,6 @@ void Player::MovementInput()
 	if (!CheckPlayerWithinLevelBounds())
 	{
 		nextPos = previousPos;
-	}
-}
-
-void Player::DoubleTapDashMovementInput(float deltaTime)
-{
-	if (doubleTapMovementEnabled)
-	{
-		doubleTapMovementTimer += deltaTime;
-
-		if (doubleTapMovementTimer > 0.25f)
-		{
-			doubleTapMovementTimer = 0.f;
-			doubleTapMovementEnabled = false;
-			movementSpeed = 10.f;
-			return;
-		}
-
-		if (Input::GetKeyHeld(Keys::W))
-		{
-			movementSpeed = 20.f;
-			doubleTapMovementTimer = 0.f;
-		}
-		else
-		{
-			movementSpeed = 10.f;
-		}
-	}
-	else if (Input::GetKeyUp(Keys::W))
-	{
-		doubleTapMovementEnabled = true;
 	}
 }
 
