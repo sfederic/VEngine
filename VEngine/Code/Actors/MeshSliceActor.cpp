@@ -3,6 +3,7 @@
 #include "Components/SliceableMeshComponent.h"
 #include "Core/Input.h"
 #include "Core/MeshSlicer.h"
+#include "Gameplay/IMeshSliceReaction.h"
 
 MeshSliceActor::MeshSliceActor()
 {
@@ -11,7 +12,25 @@ MeshSliceActor::MeshSliceActor()
 	rootComponent = sliceableMesh;
 }
 
+Properties MeshSliceActor::GetProps()
+{
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	props.Add("Linked Actor", &linkedActor);
+	return props;
+}
+
 void MeshSliceActor::SliceMesh(XMVECTOR planeCenter, XMVECTOR planeNormal)
 {
 	sliceableMesh->SliceMesh(planeCenter, planeNormal);
+
+	auto actor = World::GetActorByNameAllowNull(linkedActor);
+	if (actor)
+	{
+		auto meshSliceReaction = dynamic_cast<IMeshSliceReaction*>(actor);
+		if (meshSliceReaction)
+		{
+			meshSliceReaction->Activate();
+		}
+	}
 }
