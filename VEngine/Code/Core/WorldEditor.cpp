@@ -403,7 +403,7 @@ Actor* WorldEditor::SpawnActorFromTemplateFile(std::string templateFilename, Tra
 	//Set the transform, props will have the original transform data.
 	actor->SetTransform(transform);
 
-	std::string newActorName = spawnSystem->GetName() + std::to_string(spawnSystem->GetNumActors() - 1);
+	std::string newActorName = actorSystem->GetName() + std::to_string(actorSystem->GetNumActors() - 1);
 	actor->SimpleSetName(newActorName);
 
 	debugMenu.AddNotification(VString::wformat(
