@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "PowerCableEnemy.h"
 #include "Components/MeshComponent.h"
-#include "Actors/MeshSplitActor.h"
+#include "Actors/MeshSliceActor.h"
 
 PowerCableEnemy::PowerCableEnemy()
 {

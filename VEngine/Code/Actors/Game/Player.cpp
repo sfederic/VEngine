@@ -6,7 +6,7 @@
 #include "Actors/Game/Enemy.h"
 #include "Actors/Game/LevelInstance.h"
 #include "Actors/Game/InteractActor.h"
-#include "Actors/MeshSplitActor.h"
+#include "Actors/MeshSliceActor.h"
 #include "Components/MeshComponent.h"
 #include "Components/SliceableMeshComponent.h"
 #include "Components/CameraComponent.h"
@@ -309,7 +309,7 @@ void Player::BladeSwipe()
 
 			for (auto hitActor : hit.hitActors)
 			{
-				auto meshSplitActor = dynamic_cast<MeshSplitActor*>(hitActor);
+				auto meshSplitActor = dynamic_cast<MeshSliceActor*>(hitActor);
 				if (meshSplitActor)
 				{
 					meshSplitActor->SliceMesh(slicePlaneCenter(), slicePlaneNormal());

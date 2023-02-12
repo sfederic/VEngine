@@ -5,12 +5,12 @@
 
 class SliceableMeshComponent;
 
-class MeshSplitActor : public Actor
+class MeshSliceActor : public Actor
 {
 public:
-	ACTOR_SYSTEM(MeshSplitActor);
+	ACTOR_SYSTEM(MeshSliceActor);
 
-	MeshSplitActor();
+	MeshSliceActor();
 	Properties GetProps() { return __super::GetProps(); }
 
 	void SliceMesh(XMVECTOR planeCenter, XMVECTOR planeNormal);
