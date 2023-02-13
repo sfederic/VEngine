@@ -372,10 +372,10 @@ void Player::SetReticleWidgetPosition()
 	HitResult hit(this);
 	if (Raycast(hit, GetPositionV(), GetForwardVectorV(), 100.f))
 	{
-		reticleWidget->worldPosition = hit.GetHitPosV();
+		reticleWidget->worldPosition = hit.hitActor->GetHomogeneousPositionV();
 	}
 	else
 	{
-		reticleWidget->worldPosition = GetPositionV() + (GetForwardVectorV() * 3.f);
+		reticleWidget->worldPosition = GetHomogeneousPositionV();
 	}
 }
