@@ -38,6 +38,6 @@ void WidgetComponent::SetPosition(XMVECTOR newPosition)
 {
     if (widget)
     {
-        widget->pos = newPosition;
+        widget->worldPosition = newPosition;
     }
 }

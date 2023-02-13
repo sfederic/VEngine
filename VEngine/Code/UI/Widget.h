@@ -31,8 +31,8 @@ public:
 		BottomRight,
 	};
 
-	//pos is the widget's position in world space to be mapped to screen space.
-	XMVECTOR pos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	//The widget's position in world space to be mapped to screen space.
+	XMVECTOR worldPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 
 	bool render = true;
 

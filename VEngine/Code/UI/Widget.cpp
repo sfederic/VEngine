@@ -63,8 +63,8 @@ void Widget::GetScreenSpaceCoords(int& sx, int& sy)
 	//and multiply it out by the viewport.
 	//REF:http://www.windows-tech.info/5/a80747e145dd9062.php
 
-	const float f1 = pos.m128_f32[0] / pos.m128_f32[3];
-	const float f2 = pos.m128_f32[1] / pos.m128_f32[3];
+	const float f1 = worldPosition.m128_f32[0] / worldPosition.m128_f32[3];
+	const float f2 = worldPosition.m128_f32[1] / worldPosition.m128_f32[3];
 
 	sx = ((f1 * 0.5f) + 0.5) * Renderer::GetViewportWidth();
 	sy = ((f2 * -0.5f) + 0.5) * Renderer::GetViewportHeight();
