@@ -59,8 +59,8 @@ bool Widget::IsInViewport()
 void Widget::GetScreenSpaceCoords(int& sx, int& sy)
 {
 	//What you need to do here it take the actor's position after it's been multiplied 
-	//by the MVP matrix on the CPU side of things, divide it by the W component 
-	//and multiply it out by the viewport.
+	//by the MVP matrix on the CPU side of things (Actor::GetHomogonesouPositionV(),
+	//divide it by the W component and multiply it out by the viewport.
 	//REF:http://www.windows-tech.info/5/a80747e145dd9062.php
 
 	const float f1 = worldPosition.m128_f32[0] / worldPosition.m128_f32[3];
@@ -130,7 +130,7 @@ bool Widget::Button(const std::string text, Layout layout, float lineWidth, Text
 	return Button(VString::stows(text), layout, lineWidth, textAlign, textColor, textOpacity);
 }
 
-void Widget::Image(const std::string filename, Layout layout)
+void Widget::Image(std::string_view filename, Layout layout)
 {
 	Sprite sprite = {};
 	sprite.textureFilename = filename;
@@ -140,7 +140,7 @@ void Widget::Image(const std::string filename, Layout layout)
 	SpriteSystem::CreateScreenSprite(sprite);
 }
 
-void Widget::Image(const std::string filename, int x, int y, int w, int h)
+void Widget::Image(std::string_view filename, int x, int y, int w, int h)
 {
 	Sprite sprite = {};
 	sprite.textureFilename = filename;
@@ -150,7 +150,7 @@ void Widget::Image(const std::string filename, int x, int y, int w, int h)
 	SpriteSystem::CreateScreenSprite(sprite);
 }
 
-bool Widget::ImageButton(const std::string filename, Layout layout)
+bool Widget::ImageButton(std::string_view filename, Layout layout)
 {
 	Sprite sprite = {};
 	sprite.textureFilename = filename;
