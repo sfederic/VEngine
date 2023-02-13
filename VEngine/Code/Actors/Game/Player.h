@@ -37,7 +37,7 @@ private:
 	void ShieldLogic(float deltaTime);
 	void Interact();
 
-	void SetReticleWidgetPosition();
+	void SetReticleWidgetPosition(float deltaTime);
 
 public:
 	MeshComponent* mesh = nullptr;
@@ -57,6 +57,9 @@ private:
 
 	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+
+	XMVECTOR reticleWidgetNextPos = XMVectorZero();
+	float reticleWidgetLerpValue = 0.f;
 
 	float movementSpeed = 10.f;
 	float rotationSpeed = 10.f;

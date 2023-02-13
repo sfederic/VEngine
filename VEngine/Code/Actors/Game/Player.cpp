@@ -1,5 +1,6 @@
 #include "vpch.h"
 #include "Player.h"
+#include <algorithm>
 #include "Core/Input.h"
 #include "Core/VMath.h"
 #include "Core/Timer.h"
@@ -71,7 +72,7 @@ void Player::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
-	SetReticleWidgetPosition();
+	SetReticleWidgetPosition(deltaTime);
 
 	MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
@@ -367,15 +368,22 @@ void Player::Interact()
 }
 
 //Map reticle to hit actor on raycast (think like Ocarina of Time Z-Target icon) or place just in front of player.
-void Player::SetReticleWidgetPosition()
+void Player::SetReticleWidgetPosition(float deltaTime)
 {
 	HitResult hit(this);
 	if (Raycast(hit, GetPositionV(), GetForwardVectorV(), 100.f))
 	{
-		reticleWidget->worldPosition = hit.hitActor->GetHomogeneousPositionV();
+		reticleWidgetNextPos = hit.hitActor->GetHomogeneousPositionV();
+		reticleWidgetLerpValue += deltaTime * 2;
 	}
 	else
 	{
-		reticleWidget->worldPosition = GetHomogeneousPositionV();
+		reticleWidgetNextPos = GetHomogeneousPositionV();
+		reticleWidgetLerpValue -= deltaTime * 2;
 	}
+
+	reticleWidgetLerpValue = std::clamp(reticleWidgetLerpValue, 0.f, 1.f);
+
+	reticleWidget->worldPosition =
+		XMVectorLerp(reticleWidget->worldPosition, reticleWidgetNextPos, reticleWidgetLerpValue);
 }
