@@ -51,7 +51,8 @@ void Player::Start()
 	playerShieldWidget = UISystem::CreateWidget<PlayerShieldWidget>();
 	playerShieldWidget->AddToViewport();
 
-	UISystem::CreateWidget<PlayerReticleWidget>()->AddToViewport();
+	reticleWidget = UISystem::CreateWidget<PlayerReticleWidget>();
+	reticleWidget->AddToViewport();
 
 	camera->SetAsActiveCamera();
 	auto cameraFocusPoint = GetPositionV() + GetForwardVectorV() * 3.f;
@@ -69,6 +70,8 @@ void Player::End()
 void Player::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
+
+	SetReticleWidgetPosition();
 
 	MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
@@ -360,5 +363,19 @@ void Player::Interact()
 				interactActor->Interact();
 			}
 		}
+	}
+}
+
+//Map reticle to hit actor on raycast (think like Ocarina of Time Z-Target icon) or place just in front of player.
+void Player::SetReticleWidgetPosition()
+{
+	HitResult hit(this);
+	if (Raycast(hit, GetPositionV(), GetForwardVectorV(), 100.f))
+	{
+		reticleWidget->worldPosition = hit.GetHitPosV();
+	}
+	else
+	{
+		reticleWidget->worldPosition = GetPositionV() + (GetForwardVectorV() * 3.f);
 	}
 }

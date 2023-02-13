@@ -6,6 +6,7 @@
 class MeshComponent;
 class CameraComponent;
 class PlayerShieldWidget;
+class PlayerReticleWidget;
 
 class Player : public Actor
 {
@@ -36,6 +37,8 @@ private:
 	void ShieldLogic(float deltaTime);
 	void Interact();
 
+	void SetReticleWidgetPosition();
+
 public:
 	MeshComponent* mesh = nullptr;
 	CameraComponent* camera = nullptr;
@@ -44,7 +47,7 @@ public:
 
 private:
 	PlayerShieldWidget* playerShieldWidget = nullptr;
-
+	PlayerReticleWidget* reticleWidget = nullptr;
 	MeshComponent* shieldMesh = nullptr;
 
 	//When to turn shield effect off after interval of damage.
