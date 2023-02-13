@@ -196,7 +196,8 @@ void Player::MovementInput()
 
 void Player::RotationInput()
 {
-	if (!CheckMovementAndRotationHaveStopped()) return;
+	//Only check if rotation has stopped, as opposed to movement.
+	if (!XMQuaternionEqual(GetRotationV(), nextRot)) return;
 
 	if (Input::GetKeyHeld(Keys::Shift) && Input::GetKeyUp(Keys::Left))
 	{
