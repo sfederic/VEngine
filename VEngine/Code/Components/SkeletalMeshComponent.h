@@ -64,10 +64,13 @@ public:
 
 	void SetCrossFade(std::string animationNameToBlendTo);
 
+	JointSocket& CreateJointSocket(const std::string jointSocketName, const std::string jointToAttachToName);
+
 	ShaderSkinningData shaderSkinningData;
 
 private:
-	std::map<JointIndex, JointSocket> boneSockets;
+	//For now only having one Socket linked to a single Joint.
+	std::map<JointIndex, JointSocket> jointSockets;
 
 	AnimationState animationState = AnimationState::Play;
 

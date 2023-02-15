@@ -255,3 +255,12 @@ void SkeletalMeshComponent::SetCrossFade(std::string animationNameToBlendTo)
 {
 	nextAnimationName = animationNameToBlendTo;
 }
+
+JointSocket& SkeletalMeshComponent::CreateJointSocket(const std::string jointSocketName, 
+	const std::string jointToAttachToName)
+{
+	Skeleton& skeleton = GetSkeleton();
+	JointIndex jointIndex = skeleton.FindJointIndexByName(jointToAttachToName);
+	jointSockets.emplace(jointIndex, JointSocket(jointIndex, jointSocketName));
+	return jointSockets.find(jointIndex)->second;
+}
