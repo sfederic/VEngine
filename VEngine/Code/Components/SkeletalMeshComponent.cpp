@@ -23,6 +23,12 @@ void SkeletalMeshComponent::LoadAnimation(std::string animationFilename)
 	skel.animations.emplace(anim.name, anim);
 }
 
+Skeleton& SkeletalMeshComponent::GetSkeleton()
+{
+	assert(meshDataProxy.skeleton);
+	return *meshDataProxy.skeleton;
+}
+
 void SkeletalMeshComponent::ResetAnimationTime()
 {
 	if (isAnimationLooping)

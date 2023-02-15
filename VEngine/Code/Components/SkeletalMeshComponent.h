@@ -33,7 +33,7 @@ public:
 
 	void LoadAnimation(std::string animationFilename);
 
-	Skeleton& GetSkeleton() { return *meshDataProxy.skeleton; }
+	Skeleton& GetSkeleton();
 
 	float GetCurrentAnimationTime() { return currentAnimationTime; }
 	void ResetAnimationTime();
