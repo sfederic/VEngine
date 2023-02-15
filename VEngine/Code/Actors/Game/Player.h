@@ -7,6 +7,7 @@ class MeshComponent;
 class CameraComponent;
 class PlayerShieldWidget;
 class PlayerReticleWidget;
+class PlayerGear;
 
 class Player : public Actor
 {
@@ -39,6 +40,8 @@ private:
 
 	void SetReticleWidgetPosition(float deltaTime);
 
+	void SetGear0(const std::string gearName);
+
 public:
 	MeshComponent* mesh = nullptr;
 	CameraComponent* camera = nullptr;
@@ -49,6 +52,9 @@ private:
 	PlayerShieldWidget* playerShieldWidget = nullptr;
 	PlayerReticleWidget* reticleWidget = nullptr;
 	MeshComponent* shieldMesh = nullptr;
+
+	PlayerGear* gearSlot0 = nullptr;
+	PlayerGear* gearSlot1 = nullptr;
 
 	//When to turn shield effect off after interval of damage.
 	float shieldCountdownTimer = 0.5f;

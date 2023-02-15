@@ -14,6 +14,7 @@
 #include "Components/Lights/PointLightComponent.h"
 #include "Components/Game/SwordBeam.h"
 #include "Gameplay/GameUtils.h"
+#include "Gameplay/Gears/GearSystem.h"
 #include "Gameplay/GameplayTags.h"
 #include "Gameplay/AttackTypes.h"
 #include "Physics/Raycast.h"
@@ -389,4 +390,9 @@ void Player::SetReticleWidgetPosition(float deltaTime)
 
 	reticleWidget->worldPosition =
 		XMVectorLerp(reticleWidget->worldPosition, reticleWidgetNextPos, reticleWidgetLerpValue);
+}
+
+void Player::SetGear0(const std::string gearName)
+{
+	gearSlot0 = GearSystem::Get().GetGear(gearName);
 }

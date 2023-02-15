@@ -4,5 +4,5 @@
 
 PlayerGear::PlayerGear(std::string name)
 {
-	GearSystem::CreateGear(name, this);
+	GearSystem::Get().CreateGear(name, this);
 }
