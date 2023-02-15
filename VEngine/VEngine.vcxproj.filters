@@ -557,6 +557,9 @@
     <ClCompile Include="Code\UI\Game\PlayerReticleWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Components\SocketMeshComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1078,7 +1081,7 @@
     <ClInclude Include="Code\UI\Game\PlayerReticleWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Animation\JointSocket.h">
+    <ClInclude Include="Code\Components\SocketMeshComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Animation\AnimationValues.h">

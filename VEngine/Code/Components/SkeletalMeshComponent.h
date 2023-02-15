@@ -2,7 +2,6 @@
 
 #include "MeshComponent.h"
 #include "Render/RenderTypes.h"
-#include "Animation/JointSocket.h"
 
 //Great reference on implementation of animation systems.
 //Ref:https://blog.demofox.org/2012/09/21/anatomy-of-a-skeletal-animation-system-part-1/
@@ -63,15 +62,10 @@ public:
 
 	void SetCrossFade(std::string animationNameToBlendTo);
 
-	JointSocket& CreateJointSocket(const std::string jointSocketName, const std::string jointToAttachToName);
-	JointSocket& GetJointSocket(const std::string jointSocketName);
-
 	ShaderSkinningData shaderSkinningData;
 
 private:
 	std::vector<std::string> animationsToLoadOnCreate;
-
-	std::map<std::string, JointSocket> jointSockets;
 
 	AnimationState animationState = AnimationState::Play;
 
