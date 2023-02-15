@@ -274,6 +274,6 @@ JointSocket& SkeletalMeshComponent::CreateJointSocket(const std::string jointSoc
 {
 	Skeleton& skeleton = GetSkeleton();
 	JointIndex jointIndex = skeleton.FindJointIndexByName(jointToAttachToName);
-	jointSockets.emplace(jointIndex, JointSocket(jointIndex, jointSocketName));
-	return jointSockets.find(jointIndex)->second;
+	jointSockets.emplace(jointSocketName, JointSocket(jointIndex, jointSocketName));
+	return jointSockets.find(jointSocketName)->second;
 }

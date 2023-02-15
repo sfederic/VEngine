@@ -70,8 +70,7 @@ public:
 private:
 	std::vector<std::string> animationsToLoadOnCreate;
 
-	//For now only having one Socket linked to a single Joint.
-	std::map<JointIndex, JointSocket> jointSockets;
+	std::map<std::string, JointSocket> jointSockets;
 
 	AnimationState animationState = AnimationState::Play;
 
