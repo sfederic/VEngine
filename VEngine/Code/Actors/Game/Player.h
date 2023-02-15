@@ -40,7 +40,8 @@ private:
 
 	void SetReticleWidgetPosition(float deltaTime);
 
-	void SetGear0(const std::string gearName);
+	void SetGearSlot0(const std::string gearName);
+	void SetGearSlot1(const std::string gearName);
 
 public:
 	MeshComponent* mesh = nullptr;

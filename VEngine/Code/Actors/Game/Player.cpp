@@ -392,7 +392,12 @@ void Player::SetReticleWidgetPosition(float deltaTime)
 		XMVectorLerp(reticleWidget->worldPosition, reticleWidgetNextPos, reticleWidgetLerpValue);
 }
 
-void Player::SetGear0(const std::string gearName)
+void Player::SetGearSlot0(const std::string gearName)
 {
 	gearSlot0 = GearSystem::Get().GetGear(gearName);
+}
+
+void Player::SetGearSlot1(const std::string gearName)
+{
+	gearSlot1 = GearSystem::Get().GetGear(gearName);
 }
