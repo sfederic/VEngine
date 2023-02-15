@@ -34,6 +34,7 @@
 #include "Actors/DebugActors/DebugCone.h"
 #include "Components/CameraComponent.h"
 #include "Components/MeshComponent.h"
+#include "Components/SocketMeshComponent.h"
 #include "Components/SliceableMeshComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/BoxTriggerComponent.h"
@@ -1428,6 +1429,22 @@ void AnimateAndRenderSkeletalMeshes()
 		}
 
 		DrawMesh(skeletalMesh.get());
+	}
+
+	//@Todo: move this somewhere else
+	//Map skinning data to socketmeshcomponents
+	for (auto& socketMesh : SocketMeshComponent::system.GetComponents())
+	{
+		if (!socketMesh->IsVisible()) { continue; }
+
+		SetRenderPipelineStates(socketMesh.get());
+
+		socketMesh->SetTransformFromLinkedSkeletonJoint();
+
+		SetMatricesFromMesh(socketMesh.get());
+		SetShaderMeshData(socketMesh.get());
+
+		DrawMesh(socketMesh.get());
 	}
 
 	//Set to null to remove warnings
