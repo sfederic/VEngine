@@ -5,6 +5,8 @@
 
 class SkeletalMeshComponent;
 
+//@Todo: need to figrue out how to handle deleting SocketMeshes that are linked to SkeletalMeshes.
+
 //Mesh that attaches to a Skeleton Joint. Updates its own transform using the Joint its attached to.
 class SocketMeshComponent : public MeshComponent
 {
