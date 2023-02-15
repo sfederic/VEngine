@@ -68,6 +68,7 @@ void RenderShadowPass();
 void RenderMeshComponents();
 void RenderMeshForShadowPass(MeshComponent* mesh);
 void AnimateAndRenderSkeletalMeshes();
+void RenderSocketMeshComponents();
 void RenderInstanceMeshComponents();
 void RenderBounds();
 void RenderPhysicsMeshes();
@@ -777,6 +778,7 @@ void Renderer::Render()
 
 	RenderMeshComponents();
 	AnimateAndRenderSkeletalMeshes();
+	RenderSocketMeshComponents();
 	RenderInstanceMeshComponents();
 	RenderPolyboards();
 	RenderSpriteSheets();
@@ -1431,7 +1433,18 @@ void AnimateAndRenderSkeletalMeshes()
 		DrawMesh(skeletalMesh.get());
 	}
 
-	//@Todo: move this somewhere else
+	//Set to null to remove warnings
+	ID3D11ShaderResourceView* nullSRV = nullptr;
+	context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSRV);
+	context->PSSetShaderResources(reflectionTextureResgiter, 1, &nullSRV);
+
+	Profile::End();
+}
+
+//Make sure this is called after SkeletalMesh animations else the skinning data won't be set 
+//and the SocketMeshes will have nothing correct to index into.
+void RenderSocketMeshComponents()
+{
 	//Map skinning data to socketmeshcomponents
 	for (auto& socketMesh : SocketMeshComponent::system.GetComponents())
 	{
@@ -1451,8 +1464,6 @@ void AnimateAndRenderSkeletalMeshes()
 	ID3D11ShaderResourceView* nullSRV = nullptr;
 	context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSRV);
 	context->PSSetShaderResources(reflectionTextureResgiter, 1, &nullSRV);
-
-	Profile::End();
 }
 
 void Renderer::RenderParticleEmitters()
