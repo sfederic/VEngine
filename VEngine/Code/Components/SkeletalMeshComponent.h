@@ -33,10 +33,7 @@ public:
 
 	Skeleton& GetSkeleton();
 
-	//Call this in the Actor's Create(). This Component will iterate through the list of names on its own
-	//Create() and load the animations by filename.
-	void SetAnimationToLoad(const std::string animationFilename);
-
+	void LoadAnimation(std::string animationFilename);
 	float GetCurrentAnimationTime() { return currentAnimationTime; }
 	void ResetAnimationTime();
 	void IncrementAnimationTime(float increment) { currentAnimationTime += increment * currentAnimationSpeed; }
@@ -71,8 +68,6 @@ public:
 	ShaderSkinningData shaderSkinningData;
 
 private:
-	void LoadAnimation(std::string animationFilename);
-
 	std::vector<std::string> animationsToLoadOnCreate;
 
 	//For now only having one Socket linked to a single Joint.

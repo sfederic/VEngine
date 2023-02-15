@@ -11,7 +11,7 @@ public:
 	ACTOR_SYSTEM(AnimCube);
 
 	AnimCube();
-	void Create() override;
+	void PostCreate() override;
 	void Start() override;
 	Properties GetProps() override;
 

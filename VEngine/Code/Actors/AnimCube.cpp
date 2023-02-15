@@ -8,9 +8,9 @@ AnimCube::AnimCube()
 	rootComponent = skeletalMesh;
 }
 
-void AnimCube::Create()
+void AnimCube::PostCreate()
 {
-	skeletalMesh->SetAnimationToLoad("spin_cubes@spin.vanim");
+	skeletalMesh->LoadAnimation("spin_cubes@spin.vanim");
 	skeletalMesh->CreateJointSocket("gun", "Bone");
 }
 

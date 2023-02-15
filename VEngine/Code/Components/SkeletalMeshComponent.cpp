@@ -36,11 +36,6 @@ Skeleton& SkeletalMeshComponent::GetSkeleton()
 	return *meshDataProxy.skeleton;
 }
 
-void SkeletalMeshComponent::SetAnimationToLoad(const std::string animationFilename)
-{
-	animationsToLoadOnCreate.emplace_back(animationFilename);
-}
-
 void SkeletalMeshComponent::ResetAnimationTime()
 {
 	if (isAnimationLooping)
