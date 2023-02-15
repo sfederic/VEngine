@@ -99,6 +99,9 @@ public:
 	//(Use this when you want to override component fields that have to be defined in constructors)
 	virtual void Create();
 
+	//Create function called after all components are created.
+	virtual void PostCreate() {}
+
 	//Do not override this direcly. ACTOR_SYSTEM macro overrides instead.
 	virtual void Destroy();
 
