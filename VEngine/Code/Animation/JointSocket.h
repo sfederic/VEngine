@@ -2,7 +2,7 @@
 
 #include "AnimationValues.h"
 
-//Sockets currently on support being attached to a single bone.
+//Sockets currently on support being attached to a single joint.
 class JointSocket
 {
 public:

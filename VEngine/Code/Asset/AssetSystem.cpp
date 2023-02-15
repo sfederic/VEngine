@@ -183,7 +183,7 @@ Animation AssetSystem::ReadVAnimAssetFromFile(const std::string filename)
 
 	for (uint64_t i = 0; i < header.frameCount; i++)
 	{
-		int jointIndex = -2; //-2 is an invalid bone index
+		int jointIndex = INVALID_JOINT_INDEX;
 		assert(fread(&jointIndex, sizeof(int), 1, file));
 		assert(jointIndex != -2);
 
