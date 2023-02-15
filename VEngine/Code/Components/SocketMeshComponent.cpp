@@ -13,11 +13,6 @@ void SocketMeshComponent::Create()
 	MeshComponent::Create();
 }
 
-void SocketMeshComponent::LinkToSkeletalMeshComponent(SkeletalMeshComponent* skeletalMesh)
-{
-	linkedSkeletalMesh = skeletalMesh;
-}
-
 void SocketMeshComponent::SetTransformFromLinkedSkeletonJoint()
 {
 	XMMATRIX jointMatrix = linkedSkeletalMesh->shaderSkinningData.skinningMatrices[jointIndex];

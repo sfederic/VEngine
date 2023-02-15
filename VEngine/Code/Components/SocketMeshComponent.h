@@ -7,6 +7,7 @@ class SkeletalMeshComponent;
 
 //@Todo: need to figrue out how to handle deleting SocketMeshes that are linked to SkeletalMeshes.
 //If they're on the same actor, it's fine. But if they're seperate from each other, socket won't delete.
+//Also if the skeletalmesh is deleted beofre the Socketmesh, the transform code will explode.
 
 //Mesh that attaches to a Skeleton Joint. Updates its own transform using the Joint its attached to.
 class SocketMeshComponent : public MeshComponent
@@ -19,7 +20,7 @@ public:
 
 	void Create() override;
 
-	void LinkToSkeletalMeshComponent(SkeletalMeshComponent* skeletalMesh);
+	void LinkToSkeletalMeshComponent(SkeletalMeshComponent* skeletalMesh) { linkedSkeletalMesh = skeletalMesh; }
 	void SetTransformFromLinkedSkeletonJoint();
 
 private:
