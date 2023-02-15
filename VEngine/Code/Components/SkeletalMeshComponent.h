@@ -49,11 +49,11 @@ public:
 
 	std::vector<Joint>& GetAllJoints();
 	bool HasJoints();
+	int GetJointIndexByName(const std::string boneName);
 
 	void PlayAnimation(std::string animationName, float speed = 1.f, bool loop = true);
 	void StopAnimation();
 	void SetPauseAnimationState();
-
 	void InterpolateCurrentAnimation();
 
 	//This cross fade implementation takes the current animation time point of the animation to fade from and

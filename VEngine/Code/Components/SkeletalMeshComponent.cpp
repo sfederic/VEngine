@@ -72,6 +72,13 @@ bool SkeletalMeshComponent::HasJoints()
     return GetSkeleton().joints.size();
 }
 
+int SkeletalMeshComponent::GetJointIndexByName(const std::string boneName)
+{
+	auto& skel = GetSkeleton();
+	int jointIndex = skel.FindJointIndexByName(boneName);
+	return jointIndex;
+}
+
 void SkeletalMeshComponent::PlayAnimation(std::string animationName, float speed, bool loop)
 {
 	isAnimationLooping = loop;
