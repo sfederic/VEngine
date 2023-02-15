@@ -120,6 +120,7 @@
     <ClCompile Include="Code\Actors\Game\BuildingRubble.cpp" />
     <ClCompile Include="Code\Actors\SplitMesh.cpp" />
     <ClCompile Include="Code\Components\SocketMeshComponent.cpp" />
+    <ClCompile Include="Code\Gameplay\Gears\PlayerGear.cpp" />
     <ClCompile Include="Code\UI\Game\BossHealthBar.cpp" />
     <ClCompile Include="Code\Actors\AnimCube.cpp" />
     <ClCompile Include="Code\Actors\Game\BasicEnemy.cpp" />
@@ -264,6 +265,7 @@
     <ClCompile Include="Code\Actors\Game\PowerCableEnemy.cpp" />
     <ClCompile Include="Code\UI\Game\PlayerReticleWidget.cpp" />
     <ClCompile Include="Code\Gameplay\Gears\ShieldGear.cpp" />
+    <ClCompile Include="Code\Gameplay\Gears\GearSystem.cpp" />
     <ClInclude Include="Code\Actors\Game\BuildingRubble.h" />
     <ClInclude Include="Code\Actors\SplitMesh.h" />
     <ClInclude Include="Code\Animation\AnimationValues.h" />
@@ -536,6 +538,7 @@
     <ClInclude Include="Code\Actors\Game\PowerCableEnemy.h" />
     <ClInclude Include="Code\UI\Game\PlayerReticleWidget.h" />
     <ClInclude Include="Code\Gameplay\Gears\ShieldGear.h" />
+    <ClInclude Include="Code\Gameplay\Gears\GearSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

@@ -6,9 +6,6 @@
 class PlayerGear
 {
 public:
-	PlayerGear(std::string_view name_) : name(name_) {}
+	PlayerGear(std::string name);
 	virtual void Use() = 0;
-
-private:
-	std::string name;
 };

@@ -5,5 +5,6 @@
 class ShieldGear : public PlayerGear
 {
 public:
+	ShieldGear() : PlayerGear("ShieldGear") {}
 	void Use() override;
 };
