@@ -3,7 +3,6 @@
 #include <string>
 #include "AnimationValues.h"
 
-//Sockets currently on support being attached to a single joint.
 class JointSocket
 {
 public:
