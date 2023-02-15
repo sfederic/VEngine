@@ -560,6 +560,9 @@
     <ClCompile Include="Code\Components\SocketMeshComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Gameplay\Gears\ShieldGear.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1087,7 +1090,10 @@
     <ClInclude Include="Code\Animation\AnimationValues.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Gameplay\PlayerGear.h">
+    <ClInclude Include="Code\Gameplay\Gears\PlayerGear.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Gameplay\Gears\ShieldGear.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
