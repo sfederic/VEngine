@@ -4,6 +4,7 @@
 #include "ActorSystem.h"
 
 class SkeletalMeshComponent;
+class SocketMeshComponent;
 
 class AnimCube : public Actor
 {
@@ -17,4 +18,5 @@ public:
 
 private:
 	SkeletalMeshComponent* skeletalMesh = nullptr;
+	SocketMeshComponent* socketMesh = nullptr;
 };

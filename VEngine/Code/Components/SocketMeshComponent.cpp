@@ -3,8 +3,8 @@
 #include "Components/SkeletalMeshComponent.h"
 
 SocketMeshComponent::SocketMeshComponent(int jointIndex_, std::string meshFilename, std::string textureFilename)
+	: MeshComponent(meshFilename, textureFilename)
 {
-	MeshComponent(meshFilename, textureFilename);
 	jointIndex = jointIndex_;
 }
 
@@ -21,6 +21,6 @@ void SocketMeshComponent::LinkToSkeletalMeshComponent(SkeletalMeshComponent* ske
 void SocketMeshComponent::SetTransformFromLinkedSkeletonJoint()
 {
 	XMMATRIX jointMatrix = linkedSkeletalMesh->shaderSkinningData.skinningMatrices[jointIndex];
-	transform.Decompose(jointMatrix);
+	transform.Decompose(jointMatrix * linkedSkeletalMesh->GetWorldMatrix());
 	UpdateTransform();
 }
