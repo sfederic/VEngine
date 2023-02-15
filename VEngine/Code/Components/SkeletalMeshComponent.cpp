@@ -14,6 +14,11 @@ Properties SkeletalMeshComponent::GetProps()
 void SkeletalMeshComponent::Create()
 {
     MeshComponent::Create();
+
+	for (auto& animationFilename : animationsToLoadOnCreate) 
+	{
+		LoadAnimation(animationFilename);
+	}
 }
 
 void SkeletalMeshComponent::LoadAnimation(std::string animationFilename)
@@ -27,6 +32,11 @@ Skeleton& SkeletalMeshComponent::GetSkeleton()
 {
 	assert(meshDataProxy.skeleton);
 	return *meshDataProxy.skeleton;
+}
+
+void SkeletalMeshComponent::SetAnimationToLoad(const std::string animationFilename)
+{
+	animationsToLoadOnCreate.emplace_back(animationFilename);
 }
 
 void SkeletalMeshComponent::ResetAnimationTime()
