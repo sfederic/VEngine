@@ -1,5 +1,6 @@
 #include "vpch.h"
 #include "SocketMeshComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 
 SocketMeshComponent::SocketMeshComponent(int jointIndex_, std::string meshFilename, std::string textureFilename)
 {
@@ -10,4 +11,16 @@ SocketMeshComponent::SocketMeshComponent(int jointIndex_, std::string meshFilena
 void SocketMeshComponent::Create()
 {
 	MeshComponent::Create();
+}
+
+void SocketMeshComponent::LinkToSkeletalMeshComponent(SkeletalMeshComponent* skeletalMesh)
+{
+	linkedSkeletalMesh = skeletalMesh;
+}
+
+void SocketMeshComponent::SetTransformFromLinkedSkeletonJoint()
+{
+	XMMATRIX jointMatrix = linkedSkeletalMesh->shaderSkinningData.skinningMatrices[jointIndex];
+	transform.Decompose(jointMatrix);
+	UpdateTransform();
 }
