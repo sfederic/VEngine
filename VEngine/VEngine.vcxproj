@@ -269,6 +269,7 @@
     <ClInclude Include="Code\Components\SocketMeshComponent.h" />
     <ClInclude Include="Code\Gameplay\AttackTypes.h" />
     <ClInclude Include="Code\Gameplay\IMeshSliceReaction.h" />
+    <ClInclude Include="Code\Gameplay\PlayerGear.h" />
     <ClInclude Include="Code\UI\Game\BossHealthBar.h" />
     <ClInclude Include="Code\Actors\AnimCube.h" />
     <ClInclude Include="Code\Actors\Game\BasicEnemy.h" />
