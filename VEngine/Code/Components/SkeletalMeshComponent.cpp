@@ -277,3 +277,9 @@ JointSocket& SkeletalMeshComponent::CreateJointSocket(const std::string jointSoc
 	jointSockets.emplace(jointSocketName, JointSocket(jointIndex, jointSocketName));
 	return jointSockets.find(jointSocketName)->second;
 }
+
+JointSocket& SkeletalMeshComponent::GetJointSocket(const std::string jointSocketName)
+{
+	JointSocket& jointSocket = jointSockets.find(jointSocketName)->second;
+	return jointSocket;
+}

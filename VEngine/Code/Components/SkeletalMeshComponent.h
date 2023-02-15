@@ -64,6 +64,7 @@ public:
 	void SetCrossFade(std::string animationNameToBlendTo);
 
 	JointSocket& CreateJointSocket(const std::string jointSocketName, const std::string jointToAttachToName);
+	JointSocket& GetJointSocket(const std::string jointSocketName);
 
 	ShaderSkinningData shaderSkinningData;
 
