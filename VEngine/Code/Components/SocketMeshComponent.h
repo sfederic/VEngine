@@ -6,6 +6,7 @@
 class SkeletalMeshComponent;
 
 //@Todo: need to figrue out how to handle deleting SocketMeshes that are linked to SkeletalMeshes.
+//If they're on the same actor, it's fine. But if they're seperate from each other, socket won't delete.
 
 //Mesh that attaches to a Skeleton Joint. Updates its own transform using the Joint its attached to.
 class SocketMeshComponent : public MeshComponent
