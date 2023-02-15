@@ -8,6 +8,7 @@
 #include "Core/VString.h"
 #include "AssetPaths.h"
 #include "Animation/AnimationStructures.h"
+#include "Animation/AnimationValues.h"
 
 using namespace fbxsdk;
 
@@ -59,8 +60,7 @@ void FBXLoader::ImportAsMesh(std::string filename, MeshData& meshData)
 	//Go through all skeleton nodes
 	for (int i = 0; i < childNodeCount; i++)
 	{
-		constexpr int rootBoneParentIndex = -1;
-		ProcessSkeletonNodes(rootNode->GetChild(i), meshData.skeleton, rootBoneParentIndex);
+		ProcessSkeletonNodes(rootNode->GetChild(i), meshData.skeleton, ROOT_JOINT_INDEX);
 	}
 
 	//Go through all nodes

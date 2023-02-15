@@ -3,6 +3,7 @@
 #include <vector>
 #include <map>
 #include <DirectXMath.h>
+#include "AnimationValues.h"
 
 using namespace DirectX;
 
@@ -76,8 +77,8 @@ struct Joint
 
 	char name[32]{};
 
-	int parentIndex = -1; //-1 is the root joint's index or if the bone doesn't have a parent
-	int index = 0;
+	JointIndex parentIndex = ROOT_JOINT_INDEX;
+	JointIndex index = INVALID_JOINT_INDEX;
 };
 
 struct Skeleton
@@ -87,7 +88,7 @@ struct Skeleton
 	std::map<std::string, Animation> animations;
 
 	void AddJoint(Joint joint);
-	int FindJointIndexByName(std::string name);
+	JointIndex FindJointIndexByName(const std::string name);
 	size_t GetNumJoints() { return joints.size(); }
 	void CreateAnimation(const std::string animationName);
 	Animation& GetAnimation(const std::string animationName);

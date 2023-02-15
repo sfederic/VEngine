@@ -81,7 +81,7 @@ void Skeleton::AddJoint(Joint joint)
 	joints.back().index = joints.size() - 1;
 }
 
-int Skeleton::FindJointIndexByName(std::string name)
+JointIndex Skeleton::FindJointIndexByName(const std::string name)
 {
 	for (int i = 0; i < joints.size(); i++)
 	{
