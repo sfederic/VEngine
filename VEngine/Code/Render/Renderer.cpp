@@ -87,6 +87,7 @@ void RenderDebugLines();
 
 //Inner render functions to set shader resources
 void SetNullRTV();
+void SetGeneralShaderResourcesToNull();
 void SetShadowData();
 void SetLightResources();
 void SetShadowResources();
@@ -503,6 +504,14 @@ void SetNullRTV()
 	context->OMSetRenderTargets(1, &nullRTV, nullptr);
 }
 
+void SetGeneralShaderResourcesToNull()
+{
+	//Set to null to remove warnings
+	ID3D11ShaderResourceView* nullSRV = nullptr;
+	context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSRV);
+	context->PSSetShaderResources(reflectionTextureResgiter, 1, &nullSRV);
+}
+
 void SetShadowData()
 {
 	if (DirectionalLightComponent::system.GetNumComponents() > 0)
@@ -855,10 +864,7 @@ void RenderMeshComponents()
 		DrawMesh(mesh.get());
 	}
 
-	//Set to null to remove warnings
-	ID3D11ShaderResourceView* nullSRV = nullptr;
-	context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSRV);
-	context->PSSetShaderResources(reflectionTextureResgiter, 1, &nullSRV);
+	SetGeneralShaderResourcesToNull();
 
 	Profile::End();
 }
@@ -1433,10 +1439,7 @@ void AnimateAndRenderSkeletalMeshes()
 		DrawMesh(skeletalMesh.get());
 	}
 
-	//Set to null to remove warnings
-	ID3D11ShaderResourceView* nullSRV = nullptr;
-	context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSRV);
-	context->PSSetShaderResources(reflectionTextureResgiter, 1, &nullSRV);
+	SetGeneralShaderResourcesToNull();
 
 	Profile::End();
 }
@@ -1460,10 +1463,7 @@ void RenderSocketMeshComponents()
 		DrawMesh(socketMesh.get());
 	}
 
-	//Set to null to remove warnings
-	ID3D11ShaderResourceView* nullSRV = nullptr;
-	context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSRV);
-	context->PSSetShaderResources(reflectionTextureResgiter, 1, &nullSRV);
+	SetGeneralShaderResourcesToNull();
 }
 
 void Renderer::RenderParticleEmitters()
