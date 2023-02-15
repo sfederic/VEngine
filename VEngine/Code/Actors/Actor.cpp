@@ -203,30 +203,6 @@ std::vector<Properties> Actor::GetAllProps()
 	return propsVector;
 }
 
-void Actor::Awake()
-{
-}
-
-void Actor::Start()
-{
-}
-
-void Actor::LateStart()
-{
-}
-
-void Actor::Tick(float deltaTime)
-{
-}
-
-void Actor::Create()
-{
-}
-
-void Actor::Destroy()
-{
-}
-
 bool Actor::SetName(const std::string newName)
 {
 	//Check for duplicate names in world

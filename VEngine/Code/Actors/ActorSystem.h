@@ -102,6 +102,14 @@ public:
 		}
 	}
 
+	void PostInit() override
+	{
+		for (auto& actor : actors)
+		{
+			actor->PostCreate();
+		}
+	}
+
 	virtual void CreateAllActorComponents() override
 	{
 		for (auto& actor : actors)

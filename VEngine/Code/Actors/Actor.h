@@ -81,29 +81,29 @@ public:
 	std::vector<Properties> GetAllProps();
 
 	//called before all Start()'s
-	virtual void Awake();
+	virtual void Awake() {}
 
 	//called on gameplay start
-	virtual void Start();
+	virtual void Start() {}
 
 	//Called on gameplay end (level load, editor stop and start)
 	virtual void End() {}
 
 	//Called after Start()
-	virtual void LateStart();
+	virtual void LateStart() {}
 
 	//Called once per frame to update actor and its components
-	virtual void Tick(float deltaTime);
+	virtual void Tick(float deltaTime) {}
 
 	//An optional function to call after components have been setup (Not Create()'ed, after the Actor's constructor has been called.
 	//(Use this when you want to override component fields that have to be defined in constructors)
-	virtual void Create();
+	virtual void Create() {}
 
 	//Create function called after all components are created.
 	virtual void PostCreate() {}
 
 	//Do not override this direcly. ACTOR_SYSTEM macro overrides instead.
-	virtual void Destroy();
+	virtual void Destroy() {}
 
 	//Iterates over every actor from the actor's system to avoid a rename collision. bool denotes if collision occured.
 	bool SetName(const std::string newName);

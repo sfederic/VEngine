@@ -66,6 +66,11 @@ void World::Start()
 		componentSystem->Init();
 	}
 
+	for (auto actorSystem : activeActorSystems)
+	{
+		actorSystem->PostInit();
+	}
+
 	if (Core::gameplayOn)
 	{
 		StartAllComponents();

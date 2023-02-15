@@ -11,6 +11,7 @@ AnimCube::AnimCube()
 void AnimCube::Create()
 {
 	skeletalMesh->SetAnimationToLoad("spin_cubes@spin.vanim");
+	skeletalMesh->CreateJointSocket("gun", "Bone");
 }
 
 void AnimCube::Start()
