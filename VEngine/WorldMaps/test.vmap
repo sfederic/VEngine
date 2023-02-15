@@ -1,3 +1,20 @@
+AnimCube
+1
+ Enabled
+1
+ Position
+2 0 4
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+AnimCube0
+UID
+616551027
+next
 DirectionalLightActor
 1
  Enabled
@@ -13,7 +30,7 @@ DirectionalLightActor
 Name
 DirectionalLightActor0
 UID
-905512463
+3259573575
 next
 LevelInstance
 1
@@ -22,7 +39,7 @@ LevelInstance
  Position
 2 4 2
  Rotation
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -30,7 +47,7 @@ LevelInstance
 Name
 LevelInstance0
 UID
-3917565231
+2985414719
 next
 MeshActor
 1
@@ -47,24 +64,7 @@ MeshActor
 Name
 node0
 UID
-150567306
-next
-MeshSplitActor
-1
- Enabled
-1
- Position
-1 0 2
- Rotation
--0 0 -0.707107 0.707107
- Scale
-0.199999 0.999998 0.2
- Visible
-1
-Name
-MeshSplitActor0
-UID
-78501428
+3764541769
 next
 Player
 1
@@ -83,35 +83,18 @@ All Range Mode
 Name
 Player0
 UID
-774306663
-next
-PowerCableEnemy
-1
- Enabled
-1
- Position
--1 0 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-PowerCableEnemy0
-UID
-3231014083
+849781184
 next
 BoxTriggerComponent
 1
-3917565231
+2985414719
 BoxTrigger
  Enabled
 1
  Pos
 2 4 2
  Rot
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -121,11 +104,11 @@ Extents
 Offset
 0 0 0
 UID
-3238156749
+3077683405
 next
 CameraComponent
 1
-774306663
+849781184
 Camera
  Enabled
 1
@@ -144,11 +127,11 @@ Far Z
 Near Z
 0.01
 UID
-3262968045
+2436463153
 next
 DirectionalLightComponent
 1
-905512463
+3259573575
 DirectionalLight
  Enabled
 1
@@ -167,28 +150,11 @@ LightEnabled
 ShadowMap Size
 15
 UID
-2410689757
-next
-EmptyComponent
-1
-3231014083
-Root
- Enabled
-1
- Pos
--1 0 4
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-UID
-2122274006
+3810798746
 next
 MeshComponent
-3
-150567306
+2
+3764541769
 Mesh
  Enabled
 1
@@ -237,9 +203,9 @@ Static
 Trans. Occlude
 0
 UID
-3376090125
+2093300383
 next
-774306663
+849781184
 Mesh
  Enabled
 1
@@ -288,14 +254,16 @@ Static
 Trans. Occlude
 0
 UID
-281429005
+3126310025
 next
-3231014083
-Mesh
+SkeletalMeshComponent
+1
+616551027
+Skeleton
  Enabled
 1
  Pos
-0 0 0
+2 0 4
  Rot
 0 0 0 1
  Scale
@@ -333,65 +301,12 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-cube.vmesh
+spin_cubes.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-661772266
-next
-SliceableMeshComponent
-1
-78501428
-Mesh
- Enabled
-1
- Pos
-1 0 2
- Rot
--0 0 -0.707107 0.707107
- Scale
-0.199999 0.999998 0.2
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cylinder.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2810498524
+503829066
 next
 end
