@@ -19,6 +19,8 @@ void SkeletalMeshComponent::Create()
 	{
 		LoadAnimation(animationFilename);
 	}
+
+	animationsToLoadOnCreate.clear();
 }
 
 void SkeletalMeshComponent::LoadAnimation(std::string animationFilename)
