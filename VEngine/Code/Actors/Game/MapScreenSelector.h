@@ -19,9 +19,9 @@ public:
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
-	void SetSelectionInfoWidgetFields(std::wstring_view title, 
+	void SetLeveInfoWidgets(std::wstring_view title,
 		std::wstring_view description, std::string_view levelFilename);
-	void RemoveMapSelectionInfoWidgetFromViewport();
+	void RemoveLeveInfoWidgets();
 
 private:
 	void MovementInput(float deltaTime);

@@ -43,19 +43,21 @@ Properties MapScreenSelector::GetProps()
 	return props;
 }
 
-void MapScreenSelector::SetSelectionInfoWidgetFields(std::wstring_view title, 
+void MapScreenSelector::SetLeveInfoWidgets(std::wstring_view title, 
 	std::wstring_view description, std::string_view levelFilename)
 {
 	mapSelectionInfoWidget->title = title;
 	mapSelectionInfoWidget->description = description;
 	mapSelectionInfoWidget->levelToLoad = levelFilename;
-
 	mapSelectionInfoWidget->AddToViewport();
+
+	gearSelectionWidget->AddToViewport();
 }
 
-void MapScreenSelector::RemoveMapSelectionInfoWidgetFromViewport()
+void MapScreenSelector::RemoveLeveInfoWidgets()
 {
 	mapSelectionInfoWidget->RemoveFromViewport();
+	gearSelectionWidget->RemoveFromViewport();
 }
 
 void MapScreenSelector::MovementInput(float deltaTime)

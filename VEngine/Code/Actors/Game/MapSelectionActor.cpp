@@ -27,11 +27,11 @@ void MapSelectionActor::Tick(float deltaTime)
 
     if (boxTrigger->Contains(mapScreenSelector->GetPositionV()))
     {
-        mapScreenSelector->SetSelectionInfoWidgetFields(title, description, levelToLoad);
+        mapScreenSelector->SetLeveInfoWidgets(title, description, levelToLoad);
     }
     else
     {
-        mapScreenSelector->RemoveMapSelectionInfoWidgetFromViewport();
+        mapScreenSelector->RemoveLeveInfoWidgets();
     }
 }
 
