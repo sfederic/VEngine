@@ -578,6 +578,9 @@
     <ClCompile Include="Code\Gameplay\Gears\CanonGear.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\UI\Game\EquippedGearsWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1121,6 +1124,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\Gears\CanonGear.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\UI\Game\EquippedGearsWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

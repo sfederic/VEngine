@@ -269,6 +269,7 @@
     <ClCompile Include="Code\Gameplay\Gears\GearSystem.cpp" />
     <ClCompile Include="Code\UI\Game\GearSelectionWidget.cpp" />
     <ClCompile Include="Code\Gameplay\Gears\SwordGear.cpp" />
+    <ClCompile Include="Code\UI\Game\EquippedGearsWidget.cpp" />
     <ClInclude Include="Code\Gameplay\Gears\CanonGear.h" />
     <ClInclude Include="Code\Actors\Game\BuildingRubble.h" />
     <ClInclude Include="Code\Actors\SplitMesh.h" />
@@ -545,6 +546,7 @@
     <ClInclude Include="Code\Gameplay\Gears\GearSystem.h" />
     <ClInclude Include="Code\UI\Game\GearSelectionWidget.h" />
     <ClInclude Include="Code\Gameplay\Gears\SwordGear.h" />
+    <ClInclude Include="Code\UI\Game\EquippedGearsWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
