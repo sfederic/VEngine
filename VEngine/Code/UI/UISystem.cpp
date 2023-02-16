@@ -123,8 +123,11 @@ void UISystem::RemoveAllWidgets()
 
 void UISystem::DrawAllWidgets(float deltaTime)
 {
-	for (auto widget : widgetsInViewport)
+	//Keep this as an index for loop because LoadWorld()s can be called in Widget::Draw functions,
+	//where a ranged for loop here instead would crash the program.
+	for (int i = 0; i < widgetsInViewport.size(); i++)
 	{
+		auto widget = widgetsInViewport[i];
 		if (widget->render)
 		{
 			widget->Draw(deltaTime);
