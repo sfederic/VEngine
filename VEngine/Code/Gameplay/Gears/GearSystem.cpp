@@ -25,13 +25,19 @@ std::vector<Gear*> GearSystem::GetAllGears()
 Gear* GearSystem::GetPrimaryGear()
 {
 	auto primaryGearName = GameInstance::GetGlobalProp<std::string>("PrimaryGear");
-	auto gear = GetGear(*primaryGearName);
-	return gear;
+	if (primaryGearName->empty())
+	{
+		return GetGear("CanonGear");
+	}
+	return GetGear(*primaryGearName);
 }
 
 Gear* GearSystem::GetSecondaryGear()
 {
 	auto secondaryGearName = GameInstance::GetGlobalProp<std::string>("SecondaryGear");
-	auto gear = GetGear(*secondaryGearName);
-	return gear;
+	if (secondaryGearName->empty())
+	{
+		return GetGear("SwordGear");
+	}
+	return GetGear(*secondaryGearName);
 }
