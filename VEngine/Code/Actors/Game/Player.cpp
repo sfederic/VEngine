@@ -23,6 +23,7 @@
 #include "Physics/Raycast.h"
 #include "UI/Game/PlayerShieldWidget.h"
 #include "UI/Game/PlayerReticleWidget.h"
+#include "UI/Game/EquippedGearsWidget.h"
 #include "UI/UISystem.h"
 
 Player::Player()
@@ -58,6 +59,9 @@ void Player::Start()
 
 	reticleWidget = UISystem::CreateWidget<PlayerReticleWidget>();
 	reticleWidget->AddToViewport();
+
+	equippedGearsWidget = UISystem::CreateWidget<EquippedGearsWidget>();
+	equippedGearsWidget->AddToViewport();
 
 	camera->SetAsActiveCamera();
 	auto cameraFocusPoint = GetPositionV() + GetForwardVectorV() * 3.f;

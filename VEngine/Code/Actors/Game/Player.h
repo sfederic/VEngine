@@ -7,6 +7,7 @@ class MeshComponent;
 class CameraComponent;
 class PlayerShieldWidget;
 class PlayerReticleWidget;
+class EquippedGearsWidget;
 class Gear;
 
 class Player : public Actor
@@ -51,7 +52,9 @@ public:
 
 private:
 	PlayerShieldWidget* playerShieldWidget = nullptr;
-	PlayerReticleWidget* reticleWidget = nullptr;
+	PlayerReticleWidget* reticleWidget = nullptr; 
+	EquippedGearsWidget* equippedGearsWidget = nullptr;
+
 	MeshComponent* shieldMesh = nullptr;
 
 	Gear* primaryGear = nullptr;
