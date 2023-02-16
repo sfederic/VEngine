@@ -7,4 +7,10 @@ class GearSelectionWidget : public Widget
 {
 public:
 	void Draw(float deltaTime) override;
+
+private:
+	void GearSelect(Layout& layout, std::string& gearSelect);
+
+	std::string selectedGear0;
+	std::string selectedGear1;
 };
