@@ -76,22 +76,26 @@ struct Properties
 	template <typename T>
 	bool CheckType(const std::string& name)
 	{
+		assert(propMap.find(name) != propMap.end());
 		return propMap.find(name)->second.info.value() == typeid(T);
 	}
 
 	template <typename T>
 	T* GetData(const std::string& name)
 	{
+		assert(propMap.find(name) != propMap.end());
 		return reinterpret_cast<T*>(propMap.find(name)->second.data);
 	}
 
 	std::type_index GetType(const std::string& name)
 	{
+		assert(propMap.find(name) != propMap.end());
 		return propMap.find(name)->second.info.value();
 	}
 
 	Property* GetProperty(const std::string& name)
 	{
+		assert(propMap.find(name) != propMap.end());
 		return &propMap.find(name)->second;
 	}
 
