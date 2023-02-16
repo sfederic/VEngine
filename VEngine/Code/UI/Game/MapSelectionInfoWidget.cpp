@@ -11,8 +11,8 @@ void MapSelectionInfoWidget::Draw(float deltaTime)
 	layout.AddVerticalSpace(30.f);
 
 	Text(description, layout);
-	layout.AddVerticalSpace(100.f);
 
+	layout.PushToTop(30.f);
 	if (Button("Enter", layout))
 	{
 		GameUtils::LoadWorld(levelToLoad);

@@ -10,6 +10,7 @@ void GearSelectionWidget::Draw(float deltaTime)
 	auto gears = GearSystem::Get().GetAllGears();
 	for (auto gear : gears)
 	{
+		layout.PushToTop(30.f);
 		Button(gear->GetName(), layout);
 		layout.AddVerticalSpace(30.f);
 	}
