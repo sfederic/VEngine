@@ -13,5 +13,5 @@ void EquippedGearsWidget::Draw(float deltaTime)
 	FillRect(layout);
 	Text(primaryGear->GetName(), layout);
 	layout.AddVerticalSpace(30.f);
-	Text(primaryGear->GetName(), layout);
+	Text(secondaryGear->GetName(), layout);
 }
