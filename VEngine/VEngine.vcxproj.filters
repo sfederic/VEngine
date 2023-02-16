@@ -566,10 +566,13 @@
     <ClCompile Include="Code\Gameplay\Gears\GearSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Gameplay\Gears\PlayerGear.cpp">
+    <ClCompile Include="Code\Gameplay\Gears\Gear.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\UI\Game\GearSelectionWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Gameplay\Gears\SwordGear.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1099,7 +1102,7 @@
     <ClInclude Include="Code\Animation\AnimationValues.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Gameplay\Gears\PlayerGear.h">
+    <ClInclude Include="Code\Gameplay\Gears\Gear.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\Gears\ShieldGear.h">
@@ -1109,6 +1112,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\GearSelectionWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Gameplay\Gears\SwordGear.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
