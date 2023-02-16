@@ -569,6 +569,9 @@
     <ClCompile Include="Code\Gameplay\Gears\PlayerGear.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\UI\Game\GearSelectionWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1103,6 +1106,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\Gears\GearSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\UI\Game\GearSelectionWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
