@@ -15,6 +15,7 @@
 #include "Components/Game/SwordBeam.h"
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/Gears/GearSystem.h"
+#include "Gameplay/Gears/Gear.h"
 #include "Gameplay/GameplayTags.h"
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/Gears/GearSystem.h"
@@ -81,8 +82,8 @@ void Player::Tick(float deltaTime)
 
 	MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
-	Shoot();
-	BladeSwipe();
+	PrimaryGearAction();
+	SecondaryGearAction();
 	//ShieldLogic(deltaTime);
 
 	Interact();
@@ -246,99 +247,19 @@ bool Player::CheckForObstacle()
 	return Raycast(hitResult, GetPositionV(), nextPos);
 }
 
-void Player::Shoot()
+void Player::PrimaryGearAction()
 {
 	if (Input::GetKeyDown(Keys::Up))
 	{
-		HitResult hitResult(this);
-		if (Raycast(hitResult, GetPositionV(), GetForwardVectorV(), 1000.f))
-		{
-			GameUtils::SpawnSpriteSheet("Sprites/explosion.png", hitResult.GetHitPosV(), false, 4, 4);
-
-			auto enemy = dynamic_cast<Enemy*>(hitResult.hitActor);
-			if (enemy)
-			{
-				if (enemy->CanBeHit(AttackTypes::Shoot))
-				{
-					auto mesh = dynamic_cast<MeshComponent*>(hitResult.hitComponent);
-					if (mesh)
-					{
-						if (!mesh->HasTag(GameplayTags::InvincibleMeshPiece))
-						{
-							//Only inflict damage if mesh can be hit be player attacks
-							enemy->InflictDamage(damage);
-
-							mesh->Remove();
-						}
-					}
-
-					if (enemy->CheckIfAllTaggedMeshesAreDestroyed() || enemy->HasHealthDepleted())
-					{
-						enemy->OnDestroyed();
-						enemy->Destroy();
-					}
-				}
-			}
-		}
+		primaryGear->Use();
 	}
 }
 
-void Player::BladeSwipe()
+void Player::SecondaryGearAction()
 {
-	auto slicePlaneNormal = [&]() -> XMVECTOR { return this->GetUpVectorV(); };
-	//Give plane center a small offset as it's messing up right now
-	auto slicePlaneCenter = [&]() -> XMVECTOR { return GetPositionV() + GetForwardVectorV() + XMVectorSet(0.1f, 0.1f, 0.1f, 1.f); };
-
-	if (Input::GetKeyUp(Keys::Down))
+	if (Input::GetKeyDown(Keys::Down))
 	{
-		HitResult hit(this);
-		XMVECTOR origin = GetPositionV() + GetForwardVectorV();
-		if (SimpleBoxCast(origin, XMFLOAT3(0.5f, 0.5f, 0.5f), hit, true))
-		{
-			GameUtils::SpawnSpriteSheet("Sprites/v_slice.png", origin, false, 4, 5);
-
-			for (auto hitComponent : hit.hitComponents)
-			{
-				auto mesh = dynamic_cast<MeshComponent*>(hit.hitComponent);
-
-				//Handle mesh slicing on attack
-				auto sliceMeshComponent = dynamic_cast<SliceableMeshComponent*>(hit.hitComponent);
-				if (sliceMeshComponent)
-				{
-					sliceMeshComponent->SliceMesh(slicePlaneCenter(), slicePlaneNormal());
-				}
-				else if (mesh)
-				{
-					if (!mesh->HasTag(GameplayTags::InvincibleMeshPiece))
-					{
-						mesh->Remove();
-					}
-				}
-			}
-
-			for (auto hitActor : hit.hitActors)
-			{
-				auto meshSplitActor = dynamic_cast<MeshSliceActor*>(hitActor);
-				if (meshSplitActor)
-				{
-					meshSplitActor->SliceMesh(slicePlaneCenter(), slicePlaneNormal());
-					continue;
-				}
-
-				auto enemy = dynamic_cast<Enemy*>(hitActor);
-				if (enemy)
-				{
-					if (enemy->CanBeHit(AttackTypes::Melee))
-					{
-						if (enemy->CheckIfAllTaggedMeshesAreDestroyed() || enemy->HasHealthDepleted())
-						{
-							enemy->OnDestroyed();
-							enemy->Destroy();
-						}
-					}
-				}
-			}
-		}
+		secondaryGear->Use();
 	}
 }
 

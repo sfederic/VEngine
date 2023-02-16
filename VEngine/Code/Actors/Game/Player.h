@@ -22,6 +22,7 @@ public:
 	virtual Properties GetProps() override;
 
 	void InflictDamage(float damage);
+	auto GetDamage() { return damage; }
 
 private:
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
@@ -33,8 +34,8 @@ private:
 	bool CheckPlayerWithinLevelBounds();
 	bool CheckForObstacle();
 
-	void Shoot();
-	void BladeSwipe();
+	void PrimaryGearAction();
+	void SecondaryGearAction();
 	void ShieldLogic(float deltaTime);
 	void Interact();
 
@@ -53,8 +54,8 @@ private:
 	PlayerReticleWidget* reticleWidget = nullptr;
 	MeshComponent* shieldMesh = nullptr;
 
-	Gear* gearSlot0 = nullptr;
-	Gear* gearSlot1 = nullptr;
+	Gear* primaryGear = nullptr;
+	Gear* secondaryGear = nullptr;
 
 	//When to turn shield effect off after interval of damage.
 	float shieldCountdownTimer = 0.5f;
