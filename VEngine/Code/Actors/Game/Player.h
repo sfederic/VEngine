@@ -42,9 +42,6 @@ private:
 
 	void SetEquippedGears();
 
-	void SetGearSlot0(const std::string gearName);
-	void SetGearSlot1(const std::string gearName);
-
 public:
 	MeshComponent* mesh = nullptr;
 	CameraComponent* camera = nullptr;

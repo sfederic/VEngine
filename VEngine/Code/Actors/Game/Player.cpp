@@ -406,13 +406,3 @@ void Player::SetEquippedGears()
 	auto gear1 = GearSystem::Get().GetGear(*gear1Name);
 	gearSlot1 = gear1;
 }
-
-void Player::SetGearSlot0(const std::string gearName)
-{
-	gearSlot0 = GearSystem::Get().GetGear(gearName);
-}
-
-void Player::SetGearSlot1(const std::string gearName)
-{
-	gearSlot1 = GearSystem::Get().GetGear(gearName);
-}
