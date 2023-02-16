@@ -4,7 +4,7 @@
 
 void MapSelectionInfoWidget::Draw(float deltaTime)
 {
-	auto layout = PercentAlignLayout(0.5f, 0.3f, 0.8f, 0.7f);
+	auto layout = PercentAlignLayout(0.5f, 0.1f, 0.9f, 0.5f);
 	FillRect(layout);
 
 	Text(title, layout);
