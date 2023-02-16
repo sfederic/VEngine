@@ -16,6 +16,8 @@
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/Gears/GearSystem.h"
 #include "Gameplay/GameplayTags.h"
+#include "Gameplay/GameInstance.h"
+#include "Gameplay/Gears/GearSystem.h"
 #include "Gameplay/AttackTypes.h"
 #include "Physics/Raycast.h"
 #include "UI/Game/PlayerShieldWidget.h"
@@ -62,6 +64,8 @@ void Player::Start()
 
 	nextPos = GetPositionV();
 	nextRot = GetRotationV();
+
+	SetEquippedGears();
 }
 
 void Player::End()
@@ -390,6 +394,17 @@ void Player::SetReticleWidgetPosition(float deltaTime)
 
 	reticleWidget->worldPosition =
 		XMVectorLerp(reticleWidget->worldPosition, reticleWidgetNextPos, reticleWidgetLerpValue);
+}
+
+void Player::SetEquippedGears()
+{
+	auto gear0Name = GameInstance::GetGlobalProp<std::string>("EquippedGear0");
+	auto gear0 = GearSystem::Get().GetGear(*gear0Name);
+	gearSlot0 = gear0;
+
+	auto gear1Name = GameInstance::GetGlobalProp<std::string>("EquippedGear1");
+	auto gear1 = GearSystem::Get().GetGear(*gear1Name);
+	gearSlot1 = gear1;
 }
 
 void Player::SetGearSlot0(const std::string gearName)
