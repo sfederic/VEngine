@@ -12,11 +12,12 @@ MapSelectionActor::MapSelectionActor()
 
 void MapSelectionActor::Start()
 {
-    auto value = GameInstance::GetGlobalProp<bool>("RamielDefeated");
+    //Example code: how to activate this actor using global prop.
+    /*auto value = GameInstance::GetGlobalProp<bool>("RamielDefeated");
     if (!value)
     {
         SetActive(false);
-    }
+    }*/
 }
 
 void MapSelectionActor::Tick(float deltaTime)
