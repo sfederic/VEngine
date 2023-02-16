@@ -117,6 +117,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Gameplay\Gears\CanonGear.cpp" />
     <ClCompile Include="Code\Actors\Game\BuildingRubble.cpp" />
     <ClCompile Include="Code\Actors\SplitMesh.cpp" />
     <ClCompile Include="Code\Components\SocketMeshComponent.cpp" />
@@ -268,6 +269,7 @@
     <ClCompile Include="Code\Gameplay\Gears\GearSystem.cpp" />
     <ClCompile Include="Code\UI\Game\GearSelectionWidget.cpp" />
     <ClCompile Include="Code\Gameplay\Gears\SwordGear.cpp" />
+    <ClInclude Include="Code\Gameplay\Gears\CanonGear.h" />
     <ClInclude Include="Code\Actors\Game\BuildingRubble.h" />
     <ClInclude Include="Code\Actors\SplitMesh.h" />
     <ClInclude Include="Code\Animation\AnimationValues.h" />

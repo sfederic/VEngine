@@ -2,9 +2,9 @@
 
 #include "Gear.h"
 
-class SwordGear : public Gear
+class CanonGear : public Gear
 {
 public:
-	SwordGear() : Gear("SwordGear") {}
+	CanonGear() : Gear("CanonGear") {}
 	void Use() override;
 };
