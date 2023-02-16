@@ -10,7 +10,4 @@ public:
 
 private:
 	void GearSelect(Layout& layout, std::string& gearSelect);
-
-	std::string selectedGear0;
-	std::string selectedGear1;
 };
