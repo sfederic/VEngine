@@ -6,8 +6,8 @@ std::string GameInstance::startingMap = "map_screen.vmap";
 //Global properties
 static bool ramielDefeated = false;
 
-std::string equippedGear0;
-std::string equippedGear1;
+std::string primaryGear;
+std::string secondaryGear;
 
 Properties GameInstance::GetGlobalProps()
 {
@@ -16,8 +16,8 @@ Properties GameInstance::GetGlobalProps()
 
 	props.Add("RamielDefeated", &ramielDefeated);
 
-	props.Add("EquippedGear0", &equippedGear0);
-	props.Add("EquippedGear1", &equippedGear1);
+	props.Add("PrimaryGear", &primaryGear);
+	props.Add("SecondaryGear", &secondaryGear);
 
 	return props;
 }
