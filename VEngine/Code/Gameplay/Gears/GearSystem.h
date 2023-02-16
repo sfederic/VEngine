@@ -3,7 +3,7 @@
 #include <map>
 #include <string>
 
-class PlayerGear;
+class Gear;
 
 class GearSystem
 {
@@ -14,10 +14,10 @@ public:
 		return instance;
 	}
 
-	void CreateGear(std::string gearName, PlayerGear* gear);
-	PlayerGear* GetGear(const std::string gearName);
-	std::vector<PlayerGear*> GetAllGears();
+	void CreateGear(std::string gearName, Gear* gear);
+	Gear* GetGear(const std::string gearName);
+	std::vector<Gear*> GetAllGears();
 
 private:
-	std::map<std::string, PlayerGear*> gearMap;
+	std::map<std::string, Gear*> gearMap;
 };

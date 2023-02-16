@@ -7,7 +7,7 @@ class MeshComponent;
 class CameraComponent;
 class PlayerShieldWidget;
 class PlayerReticleWidget;
-class PlayerGear;
+class Gear;
 
 class Player : public Actor
 {
@@ -54,8 +54,8 @@ private:
 	PlayerReticleWidget* reticleWidget = nullptr;
 	MeshComponent* shieldMesh = nullptr;
 
-	PlayerGear* gearSlot0 = nullptr;
-	PlayerGear* gearSlot1 = nullptr;
+	Gear* gearSlot0 = nullptr;
+	Gear* gearSlot1 = nullptr;
 
 	//When to turn shield effect off after interval of damage.
 	float shieldCountdownTimer = 0.5f;

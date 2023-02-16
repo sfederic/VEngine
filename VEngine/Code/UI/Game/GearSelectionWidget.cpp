@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "GearSelectionWidget.h"
 #include "Gameplay/Gears/GearSystem.h"
-#include "Gameplay/Gears/PlayerGear.h"
+#include "Gameplay/Gears/Gear.h"
 
 void GearSelectionWidget::Draw(float deltaTime)
 {

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "PlayerGear.h"
+#include "Gear.h"
 
-class ShieldGear : public PlayerGear
+class ShieldGear : public Gear
 {
 public:
-	ShieldGear() : PlayerGear("ShieldGear") {}
+	ShieldGear() : Gear("ShieldGear") {}
 	void Use() override;
 };

@@ -3,10 +3,10 @@
 #include <string>
 
 //Base class for player in-game gear.
-class PlayerGear
+class Gear
 {
 public:
-	PlayerGear(std::string name_);
+	Gear(std::string_view name_);
 	virtual void Use() = 0;
 	std::string GetName() { return name; }
 
