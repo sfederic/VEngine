@@ -26,6 +26,7 @@ struct Layout
 		rect.right = rect.left + spacing;
 	}
 
+	//PushToTop is good for spacing out lists so that the widget item is compact, not reaching the entire layout.
 	void PushToTop(float spacing = 0.f)
 	{
 		rect.bottom = rect.top + spacing;
