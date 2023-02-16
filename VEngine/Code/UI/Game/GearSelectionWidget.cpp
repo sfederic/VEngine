@@ -11,13 +11,13 @@ void GearSelectionWidget::Draw(float deltaTime)
 	Text("Select Gears", layout);
 	layout.AddVerticalSpace(30.f);
 
-		layout = PercentAlignLayout(0.5f, 0.5f, 0.7f, 0.9f);
-		auto primaryGear = GameInstance::GetGlobalProp<std::string>("PrimaryGear");
-		GearSelect(layout, *primaryGear);
+	layout = PercentAlignLayout(0.5f, 0.5f, 0.7f, 0.9f);
+	auto primaryGear = GameInstance::GetGlobalProp<std::string>("PrimaryGear");
+	GearSelect(layout, *primaryGear);
 
-		layout = PercentAlignLayout(0.7f, 0.5f, 0.9f, 0.9f);
-		auto secondaryGear = GameInstance::GetGlobalProp<std::string>("SecondaryGear");
-		GearSelect(layout, *secondaryGear);
+	layout = PercentAlignLayout(0.7f, 0.5f, 0.9f, 0.9f);
+	auto secondaryGear = GameInstance::GetGlobalProp<std::string>("SecondaryGear");
+	GearSelect(layout, *secondaryGear);
 }
 
 void GearSelectionWidget::GearSelect(Layout& layout, std::string& gearSelect)

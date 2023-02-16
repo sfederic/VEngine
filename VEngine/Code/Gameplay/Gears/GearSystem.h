@@ -17,6 +17,8 @@ public:
 	void CreateGear(std::string gearName, Gear* gear);
 	Gear* GetGear(const std::string gearName);
 	std::vector<Gear*> GetAllGears();
+	Gear* GetPrimaryGear();
+	Gear* GetSecondaryGear();
 
 private:
 	std::map<std::string, Gear*> gearMap;

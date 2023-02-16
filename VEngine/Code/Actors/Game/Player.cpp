@@ -319,9 +319,6 @@ void Player::SetReticleWidgetPosition(float deltaTime)
 
 void Player::SetEquippedGears()
 {
-	auto primaryGearName = GameInstance::GetGlobalProp<std::string>("PrimaryGear");
-	primaryGear = GearSystem::Get().GetGear(*primaryGearName);
-
-	auto secondaryGearName = GameInstance::GetGlobalProp<std::string>("SecondaryGear");
-	secondaryGear = GearSystem::Get().GetGear(*secondaryGearName);
+	primaryGear = GearSystem::Get().GetPrimaryGear();
+	secondaryGear = GearSystem::Get().GetSecondaryGear();
 }
