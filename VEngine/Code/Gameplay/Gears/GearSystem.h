@@ -16,6 +16,7 @@ public:
 
 	void CreateGear(std::string gearName, PlayerGear* gear);
 	PlayerGear* GetGear(const std::string gearName);
+	std::vector<PlayerGear*> GetAllGears();
 
 private:
 	std::map<std::string, PlayerGear*> gearMap;
