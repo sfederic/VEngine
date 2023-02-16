@@ -35,7 +35,7 @@ next
 MapSelectionActor
 1
  Enabled
-0
+1
  Position
 -2 -2 -1
  Rotation
@@ -210,7 +210,7 @@ Far Z
 Near Z
 0.01
 UID
-363239897
+1524280027
 next
 EmptyComponent
 1
