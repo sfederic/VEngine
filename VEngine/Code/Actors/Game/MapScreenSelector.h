@@ -5,6 +5,7 @@
 
 class CameraComponent;
 class MapSelectionInfoWidget;
+class GearSelectionWidget;
 
 //Player instance that moves around map screen and highlights levels to select.
 class MapScreenSelector : public Actor
@@ -30,4 +31,5 @@ private:
 	CameraComponent* camera = nullptr;
 
 	MapSelectionInfoWidget* mapSelectionInfoWidget = nullptr;
+	GearSelectionWidget* gearSelectionWidget = nullptr;
 };
