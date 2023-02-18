@@ -43,6 +43,16 @@ namespace VMath
         return XMVectorSet(0.f, 0.f, 1.f, 0.f);
     }
 
+    XMVECTOR RandomUnitDirectionVector()
+    {
+        XMFLOAT3 v0 = XMFLOAT3(1.f, 1.f, 1.f);
+        XMFLOAT3 v1 = XMFLOAT3(-1.f, -1.f, -1.f);
+        XMFLOAT3 rand = VMath::RandomRangeFloat3(v0, v1);
+        XMVECTOR randV = XMLoadFloat3(&rand);
+        randV = XMVector3Normalize(randV);
+        return randV;
+    }
+
     XMMATRIX ZeroMatrix()
     {
         return XMMATRIX();

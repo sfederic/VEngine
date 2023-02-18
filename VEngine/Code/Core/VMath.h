@@ -16,6 +16,8 @@ namespace VMath
 	XMVECTOR GlobalUpVector();
 	XMVECTOR GlobalForwardVector();
 
+	XMVECTOR RandomUnitDirectionVector();
+
 	//Direction vector from quaternion rotation functions (won't take parent transforms into account)
 	//For now they're working off of matrices, but below you can extract from the quat directly if needed.
 	//Ref:https://www.gamedev.net/forums/topic/56471-extracting-direction-vectors-from-quaternion/
