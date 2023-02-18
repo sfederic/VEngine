@@ -8,6 +8,8 @@
 #include "GameInstance.h"
 #include "Core/Camera.h"
 #include "Components/CameraComponent.h"
+#include "Components/MeshComponent.h"
+#include "Components/BoxTriggerComponent.h"
 #include "UI/UISystem.h"
 #include "UI/ScreenFadeWidget.h"
 #include "Core/Input.h"
@@ -106,5 +108,34 @@ namespace GameUtils
 	void SetActiveCamera(CameraComponent* camera)
 	{
 		activeCamera = camera;
+	}
+
+	XMVECTOR RandomPointInTriggerNotContainedByMeshBounds(BoxTriggerComponent* boxTrigger)
+	{
+		//Keep vector of previous points to re-check them on Contains() == true below
+		std::vector<XMVECTOR> previousContainedPoints;
+
+		XMVECTOR point = boxTrigger->GetRandomPointInTriggerRounded();
+
+		//Retry random point in bounds if it's inside another bounds
+		for (auto& mesh : MeshComponent::system.GetComponents())
+		{
+			if (mesh->boundingBox.Contains(point))
+			{
+				previousContainedPoints.emplace_back(point);
+
+				point = boxTrigger->GetRandomPointInTriggerRounded();
+				for (auto& previousPoint : previousContainedPoints)
+				{
+					if (XMVector4Equal(point, previousPoint))
+					{
+						throw; //@Todo: think of something better here. e.g. if EVERY previous point is inside
+						//mesh bounds, throw.
+					}
+				}
+			}
+		}
+
+		return point;
 	}
 }

@@ -7,6 +7,7 @@ using namespace DirectX;
 
 class Actor;
 struct SpriteSheet;
+struct BoxTriggerComponent;
 class CameraComponent;
 
 //Utility functions for in-game stuff
@@ -37,4 +38,6 @@ namespace GameUtils
 	void DisablePlayer();
 
 	void SetActiveCamera(CameraComponent* camera);
+
+	XMVECTOR RandomPointInTriggerNotContainedByMeshBounds(BoxTriggerComponent* boxTrigger);
 };
