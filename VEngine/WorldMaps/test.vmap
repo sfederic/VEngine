@@ -1,20 +1,3 @@
-AnimCube
-1
- Enabled
-1
- Position
-2 0 4
- Rotation
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Name
-AnimCube0
-UID
-616551027
-next
 DirectionalLightActor
 1
  Enabled
@@ -65,6 +48,23 @@ Name
 node0
 UID
 3764541769
+next
+PillarBoss
+1
+ Enabled
+1
+ Position
+1 1 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+PillarBoss0
+UID
+86398580
 next
 Player
 1
@@ -152,8 +152,25 @@ ShadowMap Size
 UID
 3810798746
 next
+EmptyComponent
+1
+86398580
+Root
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+189577448
+next
 MeshComponent
-2
+4
 3764541769
 Mesh
  Enabled
@@ -256,14 +273,63 @@ Trans. Occlude
 UID
 3126310025
 next
-SkeletalMeshComponent
-1
-616551027
-Skeleton
+86398580
+BaseMesh
  Enabled
 1
  Pos
-2 0 4
+1 1 3
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cylinder.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+4042824436
+next
+86398580
+LaserMesh
+ Enabled
+1
+ Pos
+0 0 0
  Rot
 0 0 0 1
  Scale
@@ -301,12 +367,12 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-spin_cubes.vmesh
+cube.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-503829066
+123969419
 next
 end
