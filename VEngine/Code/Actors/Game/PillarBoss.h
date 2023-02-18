@@ -7,10 +7,10 @@ class MeshComponent;
 
 struct LaserData
 {
-	XMVECTOR position = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-	XMVECTOR shootDirection = XMVectorZero();
 	Polyboard* beam = nullptr;
 	MeshComponent* mesh = nullptr;
+
+	void SetBeamPointsFromMesh();
 };
 
 //Pillar Enemy that spins around and shoots lasers.
@@ -28,5 +28,5 @@ private:
 	void CalcLaserPositions();
 
 	MeshComponent* baseMesh = nullptr;
-	std::vector<LaserData> laserPositions;
+	std::vector<LaserData> laserDatas;
 };
