@@ -23,4 +23,5 @@ struct BoxTriggerComponent : SpatialComponent
 	XMFLOAT3 GetRandomPointInTrigger();
 	XMVECTOR GetRandomPointInTriggerRounded();
 	bool IntersectsWithAnyBoundingBoxInWorld();
+	void SetExtents(float x, float y, float z);
 };

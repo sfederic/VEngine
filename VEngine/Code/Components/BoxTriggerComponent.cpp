@@ -96,3 +96,7 @@ bool BoxTriggerComponent::IntersectsWithAnyBoundingBoxInWorld()
 
 	return false;
 }
+
+void BoxTriggerComponent::SetExtents(float x, float y, float z)
+{
+}
