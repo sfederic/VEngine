@@ -55,6 +55,7 @@ struct HitResult
 
 	//Result is in world space.
 	XMVECTOR GetHitPosV() { return XMLoadFloat3(&hitPos); }
+	XMVECTOR GetNormalV() { return XMLoadFloat3(&normal); }
 };
 
 bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float range, bool fromScreen = false);
