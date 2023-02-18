@@ -1,6 +1,8 @@
 #pragma once
+
 #include "Components/SpatialComponent.h"
 #include "Components/ComponentSystem.h"
+#include "Physics/Raycast.h"
 #include "Render/RenderTypes.h"
 
 struct Buffer;
@@ -39,4 +41,6 @@ struct Polyboard : SpatialComponent
 
 	void SetStartPoint(XMVECTOR start);
 	void SetEndPoint(XMVECTOR end);
+
+	HitResult RaycastFromStartToEndPoints();
 };
