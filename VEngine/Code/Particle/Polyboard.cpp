@@ -91,3 +91,13 @@ void Polyboard::CalcVertices()
 		indices.emplace_back(1 + (2 * i));
 	}
 }
+
+void Polyboard::SetStartPoint(XMVECTOR start)
+{
+	XMStoreFloat3(&startPoint, start);
+}
+
+void Polyboard::SetEndPoint(XMVECTOR end)
+{
+	XMStoreFloat3(&endPoint, end);
+}

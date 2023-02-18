@@ -36,4 +36,7 @@ struct Polyboard : SpatialComponent
 	void GenerateVertices();
 
 	void CalcVertices();
+
+	void SetStartPoint(XMVECTOR start);
+	void SetEndPoint(XMVECTOR end);
 };
