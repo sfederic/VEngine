@@ -27,6 +27,8 @@ struct HitResult
 	std::vector<SpatialComponent*> componentsToIgnore;
 
 	std::vector<Actor*> hitActors;
+
+	//The closest hit actor.
 	Actor* hitActor = nullptr;
 
 	std::vector<SpatialComponent*> hitComponents;

@@ -115,8 +115,10 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 	{
 		for (int i = 0; i < distances.size(); i++)
 		{
-			//Skip hit if more than range or less than 0
-			if (distances[i] > range || distances[i] < 0.f)
+			//Skip hit if more than range
+			//Note: you can have negative ranges at some points, like when starting a cast from inside
+			//a mesh and hitting the backface of a triangle.
+			if (distances[i] > range)
 			{
 				continue;
 			}
