@@ -1,5 +1,6 @@
 #include "vpch.h"
 #include "MeshComponent.h"
+#include <algorithm>
 #include "Core/VMath.h"
 #include "Core/Camera.h"
 #include "Actors/Game/Player.h"
@@ -24,25 +25,35 @@ void MeshComponent::ResetMeshBuffers()
 	existingMeshBuffers.clear();
 }
 
-//@Todo: the std::map operations here (namely when inserting) are a performance problem on larger maps.
-std::vector<MeshComponent*> MeshComponent::SortMeshComponentsByDistanceToCamera()
+std::vector<MeshComponent*> MeshComponent::SortMeshComponentsByDistance()
 {
-	XMVECTOR cameraPos = activeCamera->GetWorldPositionV();
+	struct MeshPack
+	{
+		MeshComponent* mesh = nullptr;
+		float distance = 0.f;
+	};
+	std::vector<MeshPack> meshPacks;
 
-	std::multimap<float, MeshComponent*> meshDistanceMap;
+	const XMVECTOR cameraPos = activeCamera->GetWorldPositionV();
+
 	for (auto& mesh : system.GetComponents())
 	{
-		const float distance = XMVector3Length(cameraPos - mesh->GetWorldPositionV()).m128_f32[0];
-		meshDistanceMap.emplace(distance, mesh.get());
+		float distance = XMVector3Length(cameraPos - mesh->GetWorldPositionV()).m128_f32[0];
+		MeshPack pack = { mesh.get(), distance } ;
+		meshPacks.emplace_back(pack);
 	}
+
+	auto DistCompare = [](const MeshPack& leftPack, const MeshPack& rightPack)
+	{
+		return leftPack.distance < rightPack.distance;
+	};
+	std::sort(meshPacks.begin(), meshPacks.end(), DistCompare);
 
 	std::vector<MeshComponent*> sortedMeshes;
-	for (auto& meshPair : meshDistanceMap)
+	for (auto& pack : meshPacks)
 	{
-		sortedMeshes.emplace_back(meshPair.second);
+		sortedMeshes.emplace_back(pack.mesh);
 	}
-	std::reverse(sortedMeshes.begin(), sortedMeshes.end());
-
 	return sortedMeshes;
 }
 

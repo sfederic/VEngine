@@ -838,7 +838,8 @@ void RenderMeshComponents()
 	SetShadowResources();
 	SetLightResources();
 
-	for (auto mesh : MeshComponent::SortMeshComponentsByDistanceToCamera())
+	auto meshes = MeshComponent::SortMeshComponentsByDistance();
+	for (auto mesh : meshes)
 	{
 		if (!mesh->IsVisible()) { continue; }
 

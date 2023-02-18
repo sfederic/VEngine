@@ -19,7 +19,7 @@ public:
 	//is called once on world load.
 	static void ResetMeshBuffers();
 
-	static std::vector<MeshComponent*> SortMeshComponentsByDistanceToCamera();
+	static std::vector<MeshComponent*> SortMeshComponentsByDistance();
 
 	MeshComponentData meshComponentData;
 
