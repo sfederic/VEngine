@@ -2,7 +2,7 @@
 #include <qcombobox.h>
 #include "IPropertyWidget.h"
 
-struct VEnum;
+class VEnum;
 class QWheelEvent;
 
 struct VEnumWidget : public QComboBox, IPropertyWidget

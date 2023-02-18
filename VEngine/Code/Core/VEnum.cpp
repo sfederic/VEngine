@@ -11,7 +11,7 @@ void VEnum::SetValue(const std::string newValue)
 
 void VEnum::Add(const std::string name)
 {
-	data[name] = dataIndex;
+	data.emplace(name, dataIndex);
 	if (dataIndex == 0) //First Add(), set default value
 	{
 		SetValue(name);
@@ -24,7 +24,7 @@ std::vector<std::string> VEnum::GetAllNames()
 	std::vector<std::string> names;
 	for (auto& name : data)
 	{
-		names.emplace_back(name.first);
+		names.push_back(name.first);
 	}
 	return names;
 }
@@ -32,5 +32,5 @@ std::vector<std::string> VEnum::GetAllNames()
 bool VEnum::Compare(const std::string valueToCompare)
 {
 	assert(data.find(valueToCompare) != data.end());
-	return data[value] == data[valueToCompare];
+	return data.find(valueToCompare) == data.find(valueToCompare);
 }
