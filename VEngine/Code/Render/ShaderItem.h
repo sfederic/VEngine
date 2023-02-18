@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <Core/UID.h>
 
 class VertexShader;
 class PixelShader;
@@ -23,7 +24,12 @@ public:
 	std::wstring GetVertexShaderFilename() { return vertexShaderFilename; }
 	std::wstring GetPixelShaderFilename() { return pixelShaderFilename; }
 
+	UID GetUID() { return uid; }
+
 private:
+	//UID here is used for sorting meshes on render.
+	UID uid = GenerateUID();
+
 	std::string shaderItemName;
 
 	std::wstring vertexShaderFilename;
