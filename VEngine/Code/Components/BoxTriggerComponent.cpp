@@ -99,4 +99,5 @@ bool BoxTriggerComponent::IntersectsWithAnyBoundingBoxInWorld()
 
 void BoxTriggerComponent::SetExtents(float x, float y, float z)
 {
+	boundingBox.Extents = XMFLOAT3(x, y, z);
 }
