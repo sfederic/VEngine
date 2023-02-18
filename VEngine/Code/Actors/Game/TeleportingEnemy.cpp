@@ -29,5 +29,6 @@ void TeleportingEnemy::Create()
 void TeleportingEnemy::Teleport()
 {
 	XMVECTOR teleportPoint = GameUtils::RandomPointInTriggerNotContainedByMeshBounds(boxTrigger);
+	GameUtils::SpawnSpriteSheet("Sprites/blue_explosion.png", GetPositionV(), false, 5, 5);
 	SetPosition(teleportPoint);
 }
