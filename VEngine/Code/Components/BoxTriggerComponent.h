@@ -14,9 +14,7 @@ struct BoxTriggerComponent : SpatialComponent
 	XMFLOAT4 renderWireframeColour = XMFLOAT4(0.1f, 0.75f, 0.1f, 1.0f);
 
 	BoxTriggerComponent();
-	void Tick(float deltaTime);
 	virtual Properties GetProps() override;
-	virtual void Create() override;
 	bool Contains(XMVECTOR point);
 	bool ContainsTarget();
 	void SetTargetAsPlayer();

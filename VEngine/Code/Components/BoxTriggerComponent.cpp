@@ -13,11 +13,6 @@ BoxTriggerComponent::BoxTriggerComponent()
 	boundingBox.Extents = XMFLOAT3(0.45f, 0.45f, 0.45f);
 }
 
-void BoxTriggerComponent::Tick(float deltaTime)
-{
-
-}
-
 Properties BoxTriggerComponent::GetProps()
 {
 	auto props = __super::GetProps();
@@ -25,11 +20,6 @@ Properties BoxTriggerComponent::GetProps()
 	props.Add("Extents", &boundingBox.Extents);
 	props.Add("Offset", &boundingBox.Center);
 	return props;
-}
-
-void BoxTriggerComponent::Create()
-{
-
 }
 
 bool BoxTriggerComponent::Contains(XMVECTOR point)
