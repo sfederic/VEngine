@@ -20,6 +20,8 @@ public:
 	void InflictDamage(int damage) { health -= damage; }
 	virtual void OnDestroyed() {}
 
+	void InflictDamageToActor(Actor* actor);
+
 protected:
 	int health = 1;
 };

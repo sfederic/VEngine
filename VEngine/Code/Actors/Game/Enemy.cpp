@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "Enemy.h"
 #include "Gameplay/GameplayTags.h"
+#include "Player.h"
 
 Enemy::Enemy()
 {
@@ -25,4 +26,13 @@ bool Enemy::CheckIfAllTaggedMeshesAreDestroyed()
 	}
 
 	return true;
+}
+
+void Enemy::InflictDamageToActor(Actor* actor)
+{
+	auto player = dynamic_cast<Player*>(actor);
+	if (player)
+	{
+		player->InflictDamage(1.f);
+	}
 }
