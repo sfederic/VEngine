@@ -102,9 +102,7 @@ void Polyboard::SetEndPoint(XMVECTOR end)
 	XMStoreFloat3(&endPoint, end);
 }
 
-HitResult Polyboard::RaycastFromStartToEndPoints()
+bool Polyboard::RaycastFromStartToEndPoints(HitResult& hit)
 {
-	HitResult hit;
-	Raycast(hit, XMLoadFloat3(&startPoint), XMLoadFloat3(&endPoint));
-	return hit;
+	return Raycast(hit, XMLoadFloat3(&startPoint), XMLoadFloat3(&endPoint));
 }

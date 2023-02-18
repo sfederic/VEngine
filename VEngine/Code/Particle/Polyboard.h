@@ -42,5 +42,5 @@ struct Polyboard : SpatialComponent
 	void SetStartPoint(XMVECTOR start);
 	void SetEndPoint(XMVECTOR end);
 
-	HitResult RaycastFromStartToEndPoints();
+	bool RaycastFromStartToEndPoints(HitResult& hit);
 };

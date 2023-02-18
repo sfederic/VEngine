@@ -31,6 +31,12 @@ void PillarBoss::Tick(float deltaTime)
 	{
 		laserData.beam->CalcVertices();
 		laserData.SetBeamPointsFromMesh();
+
+		HitResult hit(this);
+		if (laserData.beam->RaycastFromStartToEndPoints(hit))
+		{
+			InflictDamageToActor(hit.hitActor);
+		}
 	}
 }
 
