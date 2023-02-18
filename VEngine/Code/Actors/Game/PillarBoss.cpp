@@ -35,7 +35,7 @@ void PillarBoss::Tick(float deltaTime)
 }
 
 //Shoot a ray from the center of the base mesh to hit a backfacing triangle to denote a point to shoot a laser
-//from, then take the normal of that hit triangle and shoot the actual laser out along that normal's direction.
+//from, then spawn a few beam related components using the raycast hit values.
 void PillarBoss::CalcLaserPositions()
 {
 	const auto dir = VMath::RandomUnitDirectionVector();
@@ -51,7 +51,7 @@ void PillarBoss::CalcLaserPositions()
 			true);
 		rootComponent->AddChild(laserMesh);
 		laserMesh->SetLocalScale(0.5f);
-		laserMesh->SetWorldRotation(XMQuaternionRotationAxis(dir, 0.f));
+		laserMesh->SetWorldRotation(XMQuaternionRotationAxis(hit.GetNormalV(), 0.f));
 		laserMesh->SetWorldPosition(hit.GetHitPosV());
 
 		auto beam = Polyboard::system.Add("Beam", this, Polyboard(), true);
