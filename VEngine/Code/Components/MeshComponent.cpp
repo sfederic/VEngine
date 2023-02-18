@@ -24,6 +24,7 @@ void MeshComponent::ResetMeshBuffers()
 	existingMeshBuffers.clear();
 }
 
+//@Todo: the std::map operations here (namely when inserting) are a performance problem on larger maps.
 std::vector<MeshComponent*> MeshComponent::SortMeshComponentsByDistanceToCamera()
 {
 	XMVECTOR cameraPos = activeCamera->GetWorldPositionV();
