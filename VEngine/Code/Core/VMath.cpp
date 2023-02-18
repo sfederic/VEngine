@@ -45,9 +45,9 @@ namespace VMath
 
     XMVECTOR RandomUnitDirectionVector()
     {
-        XMFLOAT3 v0 = XMFLOAT3(1.f, 1.f, 1.f);
-        XMFLOAT3 v1 = XMFLOAT3(-1.f, -1.f, -1.f);
-        XMFLOAT3 rand = VMath::RandomRangeFloat3(v0, v1);
+        XMFLOAT3 minFloat3 = XMFLOAT3(-1.f, -1.f, -1.f);
+        XMFLOAT3 maxFloat3 = XMFLOAT3(1.f, 1.f, 1.f);
+        XMFLOAT3 rand = VMath::RandomRangeFloat3(minFloat3, maxFloat3);
         XMVECTOR randV = XMLoadFloat3(&rand);
         randV = XMVector3Normalize(randV);
         return randV;
@@ -402,12 +402,12 @@ namespace VMath
         return result;
     }
 
-    XMFLOAT3 RandomRangeFloat3(XMFLOAT3 v0, XMFLOAT3 v1)
+    XMFLOAT3 RandomRangeFloat3(XMFLOAT3 minFloat3, XMFLOAT3 maxFloat3)
     {
         XMFLOAT3 f3{};
-        f3.x = VMath::RandomRange(v0.x, v1.x);
-        f3.y = VMath::RandomRange(v0.y, v1.y);
-        f3.z = VMath::RandomRange(v0.z, v1.z);
+        f3.x = VMath::RandomRange(minFloat3.x, maxFloat3.x);
+        f3.y = VMath::RandomRange(minFloat3.y, maxFloat3.y);
+        f3.z = VMath::RandomRange(minFloat3.z, maxFloat3.z);
         return f3;
     }
 
