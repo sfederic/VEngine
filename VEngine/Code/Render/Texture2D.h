@@ -1,19 +1,13 @@
 #pragma once
+
 #include <string>
+#include <Core/UID.h>
 
 struct ID3D11Resource;
 struct ID3D11ShaderResourceView;
 
 class Texture2D
 {
-	std::string filename;
-
-	ID3D11Resource* data = nullptr;
-	ID3D11ShaderResourceView* srv = nullptr;
-
-	uint32_t width = 0;
-	uint32_t height = 0;
-
 public:
 	Texture2D() {}
 	Texture2D(std::string filename_) : filename(filename_) {}
@@ -32,4 +26,17 @@ public:
 	void SetHeight(uint32_t height_) { height = height_; }
 	uint32_t GetWidth() { return width; }
 	uint32_t GetHeight() { return height; }
+
+	UID GetUID() { return uid; }
+
+private:
+	UID uid = GenerateUID();
+
+	std::string filename;
+
+	ID3D11Resource* data = nullptr;
+	ID3D11ShaderResourceView* srv = nullptr;
+
+	uint32_t width = 0;
+	uint32_t height = 0;
 };
