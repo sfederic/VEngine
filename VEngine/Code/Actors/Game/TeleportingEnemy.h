@@ -12,6 +12,8 @@ public:
 	ACTOR_SYSTEM(TeleportingEnemy);
 
 	TeleportingEnemy();
+	void Start() override;
+	void Create() override;
 
 private:
 	void Teleport();
