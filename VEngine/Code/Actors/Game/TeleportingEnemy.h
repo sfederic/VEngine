@@ -12,7 +12,7 @@ public:
 	ACTOR_SYSTEM(TeleportingEnemy);
 
 	TeleportingEnemy();
-	void Start() override;
+	void Tick(float deltaTime) override;
 	void Create() override;
 
 private:
@@ -20,4 +20,6 @@ private:
 
 	BoxTriggerComponent* boxTrigger = nullptr;
 	MeshComponent* mesh = nullptr;
+
+	float teleportTimer = 0.f;
 };

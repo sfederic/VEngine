@@ -14,9 +14,14 @@ TeleportingEnemy::TeleportingEnemy()
 	rootComponent->AddChild(boxTrigger);
 }
 
-void TeleportingEnemy::Start()
+void TeleportingEnemy::Tick(float deltaTime)
 {
-	Timer::SetTimer(4.f, std::bind(&TeleportingEnemy::Teleport, this), true);
+	teleportTimer += deltaTime;
+	if (teleportTimer > 2.f)
+	{
+		Teleport();
+		teleportTimer = 0.f;
+	}
 }
 
 void TeleportingEnemy::Create()
@@ -29,6 +34,10 @@ void TeleportingEnemy::Create()
 void TeleportingEnemy::Teleport()
 {
 	XMVECTOR teleportPoint = GameUtils::RandomPointInTriggerNotContainedByMeshBounds(boxTrigger);
-	GameUtils::SpawnSpriteSheet("Sprites/blue_explosion.png", GetPositionV(), false, 5, 5);
-	SetPosition(teleportPoint);
+	auto TeleportSpriteSpawn = [](XMVECTOR pos) {
+		GameUtils::SpawnSpriteSheet("Sprites/blue_explosion.png", pos, false, 5, 5); 
+	};
+	TeleportSpriteSpawn(GetPositionV());
+	TeleportSpriteSpawn(teleportPoint);
+	mesh->SetWorldPosition(teleportPoint);
 }
