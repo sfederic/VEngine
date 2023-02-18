@@ -20,12 +20,12 @@ void PillarBoss::Create()
 
 void PillarBoss::Start()
 {
-	CalcLaserPositions();
+	CalcLaserData(5);
 }
 
 void PillarBoss::Tick(float deltaTime)
 {
-	AddRotation(GetUpVectorV(), 15.f * deltaTime);
+	AddRotation(GetUpVectorV(), 45.f * deltaTime);
 	
 	for (auto& laserData : laserDatas)
 	{
@@ -36,31 +36,39 @@ void PillarBoss::Tick(float deltaTime)
 
 //Shoot a ray from the center of the base mesh to hit a backfacing triangle to denote a point to shoot a laser
 //from, then spawn a few beam related components using the raycast hit values.
-void PillarBoss::CalcLaserPositions()
+void PillarBoss::CalcLaserData(uint32_t numLasersToSpawn)
 {
-	const auto dir = VMath::RandomUnitDirectionVector();
-	XMVECTOR pos = GetPositionV();
-	HitResult hit; //Don't ignore this actor
+	const auto pos = GetPositionV();
 
-	if (Raycast(hit, pos, dir, beamRange))
+	for (uint32_t i = 0; i < numLasersToSpawn; i++)
 	{
+		const auto dir = VMath::RandomUnitDirectionVector();
+		HitResult hit; //Don't ignore this actor
 
-		auto laserMesh = MeshComponent::system.Add("LaserMesh",
-			this,
-			MeshComponent("cube.vmesh", "test.png"),
-			true);
-		rootComponent->AddChild(laserMesh);
-		laserMesh->SetLocalScale(0.5f);
-		laserMesh->SetWorldRotation(XMQuaternionRotationAxis(hit.GetNormalV(), 0.f));
-		laserMesh->SetWorldPosition(hit.GetHitPosV());
+		if (Raycast(hit, pos, dir, beamRange))
+		{
+			auto laserMesh = MeshComponent::system.Add("LaserMesh" + std::to_string(MeshComponent::system.GetNumComponents()),
+				this, MeshComponent("cube.vmesh", "test.png"), true);
 
-		auto beam = Polyboard::system.Add("Beam", this, Polyboard(), true);
-		beam->GenerateVertices();
+			laserMesh->SetWorldScale(0.5f);
 
-		LaserData data;
-		data.mesh = laserMesh;
-		data.beam = beam;
-		laserDatas.push_back(data);
+			rootComponent->AddChild(laserMesh);
+
+			//Here you can choose either between the hit.normal or the ray direction.
+			//Ray direction looks chaotic. Maybe try gameplay scenarios (like boss phases) that switch between the two.
+			XMVECTOR rot = XMQuaternionRotationAxis(dir, XM_PI);
+			laserMesh->SetWorldRotation(rot);
+			laserMesh->SetWorldPosition(hit.GetHitPosV());
+
+			auto beam = Polyboard::system.Add("Beam" + std::to_string(Polyboard::system.GetNumComponents()), 
+				this, Polyboard(), true);
+			beam->GenerateVertices();
+
+			LaserData data;
+			data.mesh = laserMesh;
+			data.beam = beam;
+			laserDatas.push_back(data);
+		}
 	}
 }
 

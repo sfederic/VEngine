@@ -25,7 +25,7 @@ public:
 	void Tick(float deltaTime) override;
 
 private:
-	void CalcLaserPositions();
+	void CalcLaserData(uint32_t numLasersToSpawn);
 
 	MeshComponent* baseMesh = nullptr;
 	std::vector<LaserData> laserDatas;
