@@ -10,14 +10,15 @@ LelielBoss::LelielBoss()
 	rootComponent = mesh;
 }
 
-void LelielBoss::Start()
-{
-	nextPosToMoveTo = GetPositionV();
-}
-
 void LelielBoss::Create()
 {
 	mesh->SetMeshFilename("sphere.vmesh");
+	mesh->SetVisibility(false);
+}
+
+void LelielBoss::Start()
+{
+	nextPosToMoveTo = GetPositionV();
 }
 
 void LelielBoss::Tick(float deltaTime)

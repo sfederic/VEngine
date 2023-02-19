@@ -12,12 +12,12 @@ public:
 	ACTOR_SYSTEM(LelielBoss);
 
 	LelielBoss();
-	void Start() override;
 	void Create() override;
+	void Start() override;
 	void Tick(float deltaTime) override;
 
 private:
 	MeshComponent* mesh = nullptr;
 	XMVECTOR nextPosToMoveTo= XMVectorSet(0.f, 0.f, 0.f, 1.f);
-	float moveSpeed = 5.f;
+	float moveSpeed = 1.f;
 };
