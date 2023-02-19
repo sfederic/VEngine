@@ -907,7 +907,7 @@ void Renderer::RenderLightProbeViews()
 	//Disable instance meshes so the cubemap renders don't include them.
 	diffuseProbeMap->instanceMeshComponent->SetActive(false);
 
-	for (auto& instanceData : diffuseProbeMap->instanceMeshComponent->instanceData)
+	for (auto& instanceData : diffuseProbeMap->instanceMeshComponent->GetInstanceData())
 	{
 		XMMATRIX& probeMatrix = instanceData.world;
 
@@ -1041,7 +1041,7 @@ void RenderInstanceMeshComponents()
 		cbMatrices->SetVS();
 
 		//Update instance data and set SRV
-		MapBuffer(instanceMesh->structuredBuffer, instanceMesh->instanceData.data(), sizeof(InstanceData) * instanceMesh->instanceData.size());
+		MapBuffer(instanceMesh->structuredBuffer, instanceMesh->GetInstanceData().data(), sizeof(InstanceData) * instanceMesh->GetInstanceData().size());
 		context->VSSetShaderResources(instanceSRVRegister, 1, &instanceMesh->srv);
 		context->PSSetShaderResources(instanceSRVRegister, 1, &instanceMesh->srv);
 

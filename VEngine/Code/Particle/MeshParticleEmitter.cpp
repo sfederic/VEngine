@@ -27,7 +27,7 @@ void MeshParticleEmitter::Tick(float deltaTime)
 
 		particles.emplace_back(particle);
 
-		instanceMesh->instanceData[particles.size() - 1].world = worldMatrix;
+		instanceMesh->GetInstanceData()[particles.size() - 1].world = worldMatrix;
 
 		spawnTimer = 0.f;
 	}
@@ -44,21 +44,21 @@ void MeshParticleEmitter::Tick(float deltaTime)
 		if (particle.lifetime > lifetimeRange)
 		{
 			const int particlesSize = particles.size() - 1;
-			std::swap(instanceMesh->instanceData[i], instanceMesh->instanceData[particlesSize]);
-			instanceMesh->instanceData[particlesSize].world = VMath::ZeroMatrix();
+			std::swap(instanceMesh->GetInstanceData()[i], instanceMesh->GetInstanceData()[particlesSize]);
+			instanceMesh->GetInstanceData()[particlesSize].world = VMath::ZeroMatrix();
 
 			std::swap(particle, particles.back());
 			particles.pop_back();
 		}
 
 		//Reset scale back to 1 so mesh is visible again after ZeroMatrix() calls
-		instanceMesh->instanceData[i].world.r[0].m128_f32[0] = 1.f;
-		instanceMesh->instanceData[i].world.r[1].m128_f32[1] = 1.f;
-		instanceMesh->instanceData[i].world.r[2].m128_f32[2] = 1.f;
+		instanceMesh->GetInstanceData()[i].world.r[0].m128_f32[0] = 1.f;
+		instanceMesh->GetInstanceData()[i].world.r[1].m128_f32[1] = 1.f;
+		instanceMesh->GetInstanceData()[i].world.r[2].m128_f32[2] = 1.f;
 
 		XMVECTOR scale = XMLoadFloat3(&particle.transform.scale);
 		XMVECTOR origin = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-		XMVECTOR translation = instanceMesh->instanceData[i].world.r[3] + XMLoadFloat3(&particle.direction) * (deltaTime * particle.moveSpeed);
+		XMVECTOR translation = instanceMesh->GetInstanceData()[i].world.r[3] + XMLoadFloat3(&particle.direction) * (deltaTime * particle.moveSpeed);
 
 		//@Todo: doesn't look great rotating on all 3 axis at once, but would need a property somewhere to denote
 		//which axis only to increment.
@@ -67,7 +67,7 @@ void MeshParticleEmitter::Tick(float deltaTime)
 		particle.pitch += particle.rotateSpeed * deltaTime;
 		XMVECTOR rotation = XMQuaternionRotationRollPitchYaw(particle.pitch, particle.yaw, particle.roll);
 		XMMATRIX T = XMMatrixAffineTransformation(scale, origin, rotation, translation);
-		instanceMesh->instanceData[i].world = T;
+		instanceMesh->GetInstanceData()[i].world = T;
 
 		particle.angle += particle.rotateSpeed * deltaTime;
 

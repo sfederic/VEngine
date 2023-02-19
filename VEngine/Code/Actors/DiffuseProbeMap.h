@@ -3,7 +3,7 @@
 #include "Actor.h"
 #include "ActorSystem.h"
 
-struct InstanceMeshComponent;
+class InstanceMeshComponent;
 
 struct ProbeData
 {
