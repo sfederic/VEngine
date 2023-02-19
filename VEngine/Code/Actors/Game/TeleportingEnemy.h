@@ -3,7 +3,7 @@
 #include "Enemy.h"
 
 class MeshComponent;
-struct BoxTriggerComponent;
+class BoxTriggerComponent;
 
 //Enemy that teleports around the map.
 class TeleportingEnemy : public Enemy

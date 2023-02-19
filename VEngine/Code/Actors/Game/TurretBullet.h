@@ -3,7 +3,7 @@
 #include "../Actor.h"
 #include "../ActorSystem.h"
 
-struct BoxTriggerComponent;
+class BoxTriggerComponent;
 
 class TurretBullet : public Actor
 {

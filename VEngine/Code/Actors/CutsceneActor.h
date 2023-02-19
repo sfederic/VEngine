@@ -1,8 +1,9 @@
 #pragma once
+
 #include "Actor.h"
 #include "ActorSystem.h"
 
-struct BoxTriggerComponent;
+class BoxTriggerComponent;
 
 //Holds a reference to a cutscene file and activates it based on a trigger or calling code.
 struct CutsceneActor : Actor

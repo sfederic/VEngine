@@ -7,7 +7,7 @@ using namespace DirectX;
 
 class Actor;
 struct SpriteSheet;
-struct BoxTriggerComponent;
+class BoxTriggerComponent;
 class CameraComponent;
 
 //Utility functions for in-game stuff

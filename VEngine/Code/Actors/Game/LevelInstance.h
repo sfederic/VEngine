@@ -3,7 +3,7 @@
 #include "../Actor.h"
 #include "../ActorSystem.h"
 
-struct BoxTriggerComponent;
+class BoxTriggerComponent;
 
 //Holds generic level data.
 class LevelInstance : public Actor

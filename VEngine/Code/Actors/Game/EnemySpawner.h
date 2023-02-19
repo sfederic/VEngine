@@ -3,7 +3,7 @@
 #include "../Actor.h"
 #include "../ActorSystem.h"
 
-struct BoxTriggerComponent;
+class BoxTriggerComponent;
 
 //BoxTrigger to spawn enemies within it based on an interval.
 class EnemySpawner : public Actor
