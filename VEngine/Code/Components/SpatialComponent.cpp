@@ -103,9 +103,14 @@ void SpatialComponent::SetWorldPosition(XMVECTOR position)
 	SetLocalPosition(relativePosition);
 }
 
-void SpatialComponent::AddLocalPositionV(XMVECTOR offset)
+void SpatialComponent::AddLocalPosition(XMVECTOR offset)
 {
 	SetLocalPosition(GetLocalPositionV() + offset);
+}
+
+void SpatialComponent::AddWorldPosition(XMVECTOR offset)
+{
+	SetWorldPosition(GetWorldPositionV() + offset);
 }
 
 XMFLOAT3 SpatialComponent::GetLocalScale()

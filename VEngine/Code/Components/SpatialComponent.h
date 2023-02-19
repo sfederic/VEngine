@@ -34,7 +34,8 @@ struct SpatialComponent : Component
 	void SetLocalPosition(XMFLOAT3 newPosition);
 	void SetLocalPosition(XMVECTOR newPosition);
 	void SetWorldPosition(XMVECTOR position);
-	void AddLocalPositionV(XMVECTOR offset);
+	void AddLocalPosition(XMVECTOR offset);
+	void AddWorldPosition(XMVECTOR offset);
 
 	XMFLOAT3 GetLocalScale();
 	XMVECTOR GetLocalScaleV();
