@@ -5,12 +5,14 @@
 
 class AudioComponent;
 
-struct AudioActor : Actor
+class AudioActor : public Actor
 {
-	ACTOR_SYSTEM(AudioActor)
-
-	AudioComponent* audioComponent = nullptr;
+public:
+	ACTOR_SYSTEM(AudioActor);
 
 	AudioActor();
 	virtual Properties GetProps() override;
+
+private:
+	AudioComponent* audioComponent = nullptr;
 };
