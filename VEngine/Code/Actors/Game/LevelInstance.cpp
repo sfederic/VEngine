@@ -25,3 +25,8 @@ void LevelInstance::SetExtents(float x, float y, float z)
 {
     boxTrigger->boundingBox.Extents = XMFLOAT3(x, y, z);
 }
+
+XMVECTOR LevelInstance::GetRandomRoundedPointInsideLevelBounds()
+{
+    return boxTrigger->GetRandomPointInTriggerRounded();
+}

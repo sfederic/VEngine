@@ -16,6 +16,7 @@ public:
 
 	bool CheckIfPointInsideLevelBounds(XMVECTOR point);
 	void SetExtents(float x, float y, float z);
+	XMVECTOR GetRandomRoundedPointInsideLevelBounds();
 
 private:
 	BoxTriggerComponent* boxTrigger = nullptr;
