@@ -13,15 +13,16 @@ public:
 
 	WallBoss();
 	void Create() override;
-	void Start() override;
 	void Tick(float deltaTime) override;
 
 private:
 	void SpawnWallProjectile();
 	void MoveWallProjectile(float deltaTime);
+	void RemoveAllWallProjectileParts();
 
 	MeshComponent* baseMesh = nullptr;
-	float wallSpawnTimer = 0.f;
-
 	std::vector<MeshComponent*> wallProjectileParts;
+	float wallSpawnTimer = wallTimersMax;
+	float wallProjectileDestroyTimer = 0.f;
+	static inline const float wallTimersMax = 4.f;
 };

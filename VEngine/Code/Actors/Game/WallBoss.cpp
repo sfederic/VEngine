@@ -15,21 +15,26 @@ void WallBoss::Create()
 	baseMesh->SetTexture("demons_gate.png");
 }
 
-void WallBoss::Start()
-{
-	SpawnWallProjectile();
-}
-
 void WallBoss::Tick(float deltaTime)
 {
 	MoveWallProjectile(deltaTime);
 
-	/*wallSpawnTimer += deltaTime;
-	if (wallSpawnTimer > 1.0f)
+	//Make sure the spawn and destroy timers are at the tail end of one another.
+	//i.e. spawnTimer = 0 when destroyTimer = 5
+
+	wallProjectileDestroyTimer += deltaTime;
+	if (wallProjectileDestroyTimer > wallTimersMax)
+	{
+		wallProjectileDestroyTimer = 0.f;
+		RemoveAllWallProjectileParts();
+	}
+
+	wallSpawnTimer += deltaTime;
+	if (wallSpawnTimer > wallTimersMax)
 	{
 		wallSpawnTimer = 0.f;
 		SpawnWallProjectile();
-	}*/
+	}
 }
 
 //Spawn a wall that will move over time in the forward direction of this actor, with holes
@@ -70,7 +75,18 @@ void WallBoss::MoveWallProjectile(float deltaTime)
 {
 	for (auto part : wallProjectileParts)
 	{
-		const auto offset = -part->GetForwardVectorV() * deltaTime;
+		constexpr float moveSpeed = 5.f;
+		const auto offset = -part->GetForwardVectorV() * moveSpeed * deltaTime;
 		part->AddWorldPosition(offset);
 	}
+}
+
+void WallBoss::RemoveAllWallProjectileParts()
+{
+	for (auto part : wallProjectileParts)
+	{
+		part->Remove();
+	}
+
+	wallProjectileParts.clear();
 }
