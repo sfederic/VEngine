@@ -1,10 +1,11 @@
 #pragma once
+
 #include "SpatialComponent.h"
 #include "ComponentSystem.h"
-#include <string>
 
-struct AudioComponent : SpatialComponent
+class AudioComponent : public SpatialComponent
 {
+public:
 	COMPONENT_SYSTEM(AudioComponent);
 
 	enum class FadeValue
@@ -14,7 +15,27 @@ struct AudioComponent : SpatialComponent
 		Out
 	};
 
+	AudioComponent();
+	void Tick(float deltaTime) override;
+	void Start() override;
+	void Create() override;
+	Properties GetProps() override;
+
+	void SetToFadeIn() { fade = FadeValue::In; }
+	void SetToFadeOut() { fade = FadeValue::Out; }
+
+	void Play();
+	void Stop();
+
+	void SetVolume(float volume_) { volume = volume_; }
+	auto GetVolume() { return volume; }
+
+	auto GetChannelID() { return channelID; }
+
+private:
 	std::string audioFilename;
+
+	FadeValue fade = FadeValue::None;
 
 	uint64_t channelID = 0;
 
@@ -23,18 +44,4 @@ struct AudioComponent : SpatialComponent
 
 	bool playOnStart = true;
 	bool loop = true;
-
-	FadeValue fade = FadeValue::None;
-
-	AudioComponent();
-	virtual void Tick(float deltaTime) override;
-	virtual void Start() override;
-	virtual void Create() override;
-	virtual Properties GetProps() override;
-
-	void SetToFadeIn() { fade = FadeValue::In; }
-	void SetToFadeOut() { fade = FadeValue::Out; }
-
-	void Play();
-	void Stop();
 };

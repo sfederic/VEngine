@@ -91,7 +91,7 @@ void AudioSystem::MuteAllAudio()
 {
 	for (auto& audio : AudioComponent::system.GetComponents())
 	{
-		audio->volume = 0.f;
+		audio->SetVolume(0.f);
 	}
 }
 
@@ -99,7 +99,7 @@ void AudioSystem::StopAllAudio()
 {
 	for (auto& audio : AudioComponent::system.GetComponents())
 	{
-		channelMap[audio->channelID]->sourceVoice->Stop();
+		channelMap.find(audio->GetChannelID())->second->sourceVoice->Stop();
 	}
 }
 
@@ -107,7 +107,7 @@ void AudioSystem::StartAllAudio()
 {
 	for (auto& audio : AudioComponent::system.GetComponents())
 	{
-		channelMap[audio->channelID]->sourceVoice->Start();
+		channelMap.find(audio->GetChannelID())->second->sourceVoice->Start();
 	}
 }
 
@@ -115,7 +115,7 @@ void AudioSystem::UnmuteAllAudio()
 {
 	for (auto& audio : AudioComponent::system.GetComponents())
 	{
-		audio->volume = 1.f;
+		audio->SetVolume(1.f);
 	}
 }
 

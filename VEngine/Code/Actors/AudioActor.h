@@ -1,8 +1,9 @@
 #pragma once
+
 #include "Actor.h"
 #include "ActorSystem.h"
 
-struct AudioComponent;
+class AudioComponent;
 
 struct AudioActor : Actor
 {
