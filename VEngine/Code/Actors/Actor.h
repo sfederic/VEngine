@@ -70,6 +70,7 @@ public:
 	void AddPositionV(const XMVECTOR offset);
 	void AddRotation(XMVECTOR direction, float angle);
 
+	//All vector functions return in world space, not local.
 	XMFLOAT3 GetForwardVector();
 	XMVECTOR GetForwardVectorV();
 	XMFLOAT3 GetRightVector();
