@@ -43,14 +43,15 @@ void WallBoss::SpawnWallProjectile()
 {
 	const auto wallProjectileSpawnPointCenter = GetPositionV() + GetForwardVectorV();
 
-	constexpr int wallProjectileWidth = 4;
-	constexpr int wallProjectileHeight = 2;
+	//Keep an eye on these values. They're being used as negative values to make the setpositions easier.
+	constexpr int wallProjectileWidth = 5;
+	constexpr int wallProjectileHeight = 3;
 
 	for (int h = -wallProjectileHeight; h < wallProjectileHeight / 2; h++)
 	{
 		//Skip creating a mesh on a random value in the row
 		//(make sure the random value isn't on the bounds/edge of the projectile).
-		const int widthValueToSkipMesh = VMath::RandomRange(0, wallProjectileWidth);
+		const int widthValueToSkipMesh = VMath::RandomRange(-wallProjectileWidth, wallProjectileWidth);
 
 		for (int w = -wallProjectileHeight; w < wallProjectileWidth / 2; w++)
 		{
