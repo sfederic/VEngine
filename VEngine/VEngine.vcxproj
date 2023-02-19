@@ -272,6 +272,7 @@
     <ClCompile Include="Code\UI\Game\EquippedGearsWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\TeleportingEnemy.cpp" />
     <ClCompile Include="Code\Actors\Game\PillarBoss.cpp" />
+    <ClCompile Include="Code\Actors\Game\WallBoss.cpp" />
     <ClInclude Include="Code\Gameplay\Gears\CanonGear.h" />
     <ClInclude Include="Code\Actors\Game\BuildingRubble.h" />
     <ClInclude Include="Code\Actors\SplitMesh.h" />
@@ -551,6 +552,7 @@
     <ClInclude Include="Code\UI\Game\EquippedGearsWidget.h" />
     <ClInclude Include="Code\Actors\Game\TeleportingEnemy.h" />
     <ClInclude Include="Code\Actors\Game\PillarBoss.h" />
+    <ClInclude Include="Code\Actors\Game\WallBoss.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
