@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "DiffuseProbeMap.h"
 #include <filesystem>
+#include <algorithm>
 #include "Core/Debug.h"
 #include "Core/World.h"
 #include "Components/InstanceMeshComponent.h"
@@ -81,28 +82,30 @@ uint32_t DiffuseProbeMap::GetProbeCount()
 
 ProbeData DiffuseProbeMap::FindClosestProbe(XMVECTOR pos)
 {
-	std::map<float, ProbeData> distanceMap;
+	struct ProbeDist
+	{
+		ProbeData data;
+		float distance = 0.f;
+	};
+
+	std::vector<ProbeDist> probeDistances;
 
 	for (auto& probe : probeData)
 	{
-		float distance = XMVector3Length(XMLoadFloat3(&probe.position) - pos).m128_f32[0];
-		distanceMap[distance] = probe;
-
-		//@Todo: this distance check is to get around the performance problems of too many probes.
-		//Helps performance for now, a better system would be to get world position of the mesh and 
-		//round the values into a 3D array of probes as an index.
-		if (distance < 1.f)
-		{
-			return distanceMap.begin()->second;
-		}
+		const float distance = XMVector3Length(XMLoadFloat3(&probe.position) - pos).m128_f32[0];
+		ProbeDist probeDist;
+		probeDist.distance = distance;
+		probeDist.data = probe;
+		probeDistances.emplace_back(probeDist);
 	}
 
-	if (!distanceMap.empty())
-	{
-		return distanceMap.begin()->second;
-	}
+	auto ProbeDistCompare = [](const ProbeDist& l, const ProbeDist& r) -> bool {
+		return l.distance < r.distance;
+	};
 
-	throw new std::exception("No probe found");
+	std::sort(probeDistances.begin(), probeDistances.end(), ProbeDistCompare);
+
+	return probeDistances.front().data;
 }
 
 void DiffuseProbeMap::WriteProbeDataToFile()

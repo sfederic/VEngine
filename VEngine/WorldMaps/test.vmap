@@ -1,3 +1,26 @@
+DiffuseProbeMap
+1
+ Enabled
+1
+ Position
+-2 0 -2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DiffuseProbeMap0
+Size X
+5
+Size Y
+5
+Size Z
+5
+UID
+1378071769
+next
 DirectionalLightActor
 1
  Enabled
@@ -68,23 +91,6 @@ Player0
 UID
 849781184
 next
-WallBoss
-1
- Enabled
-1
- Position
-2 2 6
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-WallBoss0
-UID
-437889859
-next
 BoxTriggerComponent
 1
 2985414719
@@ -152,25 +158,61 @@ ShadowMap Size
 UID
 3810798746
 next
-EmptyComponent
+InstanceMeshComponent
 1
-437889859
-Root
+1378071769
+InstanceMesh
  Enabled
 1
  Pos
-0 0 0
+-2 0 -2
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
 1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Instance
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
 UID
-3941458337
+2107090444
 next
 MeshComponent
-3
+2
 3764541769
 Mesh
  Enabled
@@ -272,56 +314,5 @@ Trans. Occlude
 0
 UID
 3126310025
-next
-437889859
-BaseMesh
- Enabled
-1
- Pos
-2 2 6
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-demons_gate.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-plane.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-729083781
 next
 end
