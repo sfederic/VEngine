@@ -26,10 +26,6 @@ namespace VMath
 	XMVECTOR RightFromQuat(XMVECTOR rot);
 	XMVECTOR UpFromQuat(XMVECTOR rot);
 
-	//Ref:https://gamedev.stackexchange.com/questions/149006/direction-vector-to-quaternion
-	//(I used to think XMQuaternionRotationAxis() with 0 as the angle would work but maybe my maths is shonky)
-	XMVECTOR DirectionToQuat(XMVECTOR dir);
-
 	//Returns matrix with all 0's
 	XMMATRIX ZeroMatrix();
 	void MatrixAddScale(float s, XMMATRIX& m);
