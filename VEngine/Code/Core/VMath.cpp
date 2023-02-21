@@ -2,6 +2,7 @@
 #include "VMath.h"
 #include <cmath>
 #include <algorithm>
+#include <array>
 #include <random>
 #include "Actors/Actor.h"
 #include "Camera.h"
@@ -51,6 +52,22 @@ namespace VMath
         XMVECTOR randV = XMLoadFloat3(&rand);
         randV = XMVector3Normalize(randV);
         return randV;
+    }
+
+    XMVECTOR RandomCardinalDirectionVector()
+    {
+        std::array<XMVECTOR, 6> directions = {
+            VMath::GlobalRightVector(),
+            -VMath::GlobalRightVector(),
+            VMath::GlobalUpVector(),
+            -VMath::GlobalUpVector(),
+            VMath::GlobalForwardVector(),
+            -VMath::GlobalForwardVector(),
+        };
+
+        int randomDirectionIndex = VMath::RandomRangeInt(0, directions.size() - 1);
+        XMVECTOR selectedDirection = directions[randomDirectionIndex];
+        return selectedDirection;
     }
 
     XMMATRIX ZeroMatrix()

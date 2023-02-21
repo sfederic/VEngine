@@ -17,6 +17,7 @@ namespace VMath
 	XMVECTOR GlobalForwardVector();
 
 	XMVECTOR RandomUnitDirectionVector();
+	XMVECTOR RandomCardinalDirectionVector();
 
 	//Direction vector from quaternion rotation functions (won't take parent transforms into account)
 	//For now they're working off of matrices, but below you can extract from the quat directly if needed.
