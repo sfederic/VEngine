@@ -28,5 +28,7 @@ private:
 	float areaAttackMeshLifetimeTimer = 0.f;
 
 	float warpTimer = 0.f;
+
+	//@Todo: find a way to transition to secondphase
 	bool isInSecondPhase = true;
 };

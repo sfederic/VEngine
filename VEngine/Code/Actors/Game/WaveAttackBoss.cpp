@@ -69,25 +69,16 @@ void WaveAttackBoss::ShootAreaAttack()
 //take the grid based points of the plane and fire raycasts from them, seeing if any hit the player.
 void WaveAttackBoss::RaycastCheckOnAreaAttackDimensions()
 {
-	//@Todo: this isn't working for the current setup of having 2 phases for the boss.
-	constexpr int waveAttackWidth = 3;
-	constexpr int waveAttackHeight = 3;
+	const auto center = GetPositionV();
 
-	const auto waveAttackCenter = GetPosition();
-
-	const auto waveAttackMinX = (int)(waveAttackCenter.x - waveAttackWidth);
-	const auto waveAttackMinY = (int)(waveAttackCenter.y - waveAttackHeight);
-
-	const auto waveAttackMaxX = (int)(waveAttackCenter.x + waveAttackWidth);
-	const auto waveAttackMaxY = (int)(waveAttackCenter.x + waveAttackHeight);
-
-	for (int w = waveAttackMinX; w < waveAttackMaxX; w++)
+	for (int w = -5; w < 5; w++)
 	{
-		for (int h = waveAttackMinY; h < waveAttackMaxY; h++)
+		for (int h = -5; h < 5; h++)
 		{
 			HitResult hit(this);
-			const auto origin = XMVectorSet((float)w, (float)h, 0.f, 1.f);
-			if (Raycast(hit, origin, -GetForwardVectorV(), 50.f))
+			auto origin = center + (GetRightVectorV() * w);
+			origin += GetUpVectorV() * h;
+			if (Raycast(hit, origin, GetForwardVectorV(), 50.f))
 			{
 				InflictDamageToActor(hit.hitActor);
 			}
