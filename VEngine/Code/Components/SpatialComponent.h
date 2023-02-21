@@ -7,10 +7,6 @@
 
 using namespace DirectX;
 
-//@Todo: there's a bit of opaque workings of World vs Local space with the transforms here.
-//Basically every SetX() function is local and every SetWorldX() is global, meaning local is the default.
-//Take a look at renaming things and making it make more sense.
-
 struct SpatialComponent : Component
 {
 	Transform transform;
