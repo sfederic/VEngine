@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "WaveAttackBoss.h"
 #include "Components/MeshComponent.h"
+#include "Physics/Raycast.h"
 
 WaveAttackBoss::WaveAttackBoss()
 {
@@ -20,6 +21,7 @@ void WaveAttackBoss::Tick(float deltaTime)
 	{
 		shootTimer = 0.f;
 		ShootAreaAttack();
+		RaycastCheckOnAreaAttackDimensions();
 	}
 
 	if (areaAttackMesh)
@@ -43,4 +45,32 @@ void WaveAttackBoss::ShootAreaAttack()
 	areaAttackMesh->SetRastState(RastStates::noBackCull);
 	areaAttackMesh->SetWorldPosition(GetPositionV());
 	areaAttackMesh->SetWorldScale(5.f);
+}
+
+//Think of the moving areaAttackMesh more as an animation. For the actual attack hit detection,
+//take the grid based points of the plane and fire raycasts from them, seeing if any hit the player.
+void WaveAttackBoss::RaycastCheckOnAreaAttackDimensions()
+{
+	constexpr int waveAttackWidth = 3;
+	constexpr int waveAttackHeight = 3;
+
+	const auto waveAttackCenter = GetPosition();
+
+	const auto waveAttackMinX = (int)(waveAttackCenter.x - waveAttackWidth);
+	const auto waveAttackMinY = (int)(waveAttackCenter.y - waveAttackHeight);
+
+	const auto waveAttackMaxX = (int)(waveAttackCenter.x + waveAttackWidth);
+	const auto waveAttackMaxY = (int)(waveAttackCenter.x + waveAttackHeight);
+
+	for (int w = waveAttackMinX; w < waveAttackMaxX; w++)
+	{
+		for (int h = waveAttackMinY; h < waveAttackMaxY; h++)
+		{
+			HitResult hit(this);
+			if (Raycast(hit, GetPositionV(), -GetForwardVectorV(), 50.f))
+			{
+				InflictDamageToActor(hit.hitActor);
+			}
+		}
+	}
 }

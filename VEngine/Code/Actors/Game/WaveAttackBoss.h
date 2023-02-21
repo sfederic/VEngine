@@ -16,6 +16,7 @@ public:
 
 private:
 	void ShootAreaAttack();
+	void RaycastCheckOnAreaAttackDimensions();
 
 	MeshComponent* baseMesh = nullptr;
 	MeshComponent* areaAttackMesh = nullptr;
