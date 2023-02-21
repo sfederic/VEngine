@@ -184,6 +184,13 @@ namespace VMath
         return u;
     }
 
+    XMVECTOR DirectionToQuat(XMVECTOR dir)
+    {
+        float angle = atan2(dir.m128_f32[0], dir.m128_f32[2]);
+        auto q = XMVectorSet(0.f, 1.f * sinf(angle / 2.f), 0.f, cosf(angle / 2.f));
+        return q;
+    }
+
     void RotateTowardsCamera(Transform& transform, float zAngle)
     {
         const float posX = transform.position.x;
