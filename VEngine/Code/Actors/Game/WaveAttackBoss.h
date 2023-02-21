@@ -17,10 +17,15 @@ public:
 private:
 	void ShootAreaAttack();
 	void RaycastCheckOnAreaAttackDimensions();
+	void SecondPhaseWarpAroundLevel();
 
 	MeshComponent* baseMesh = nullptr;
 	MeshComponent* areaAttackMesh = nullptr;
 
+	XMVECTOR nextAreaAttackDirection = XMVectorZero();
+
 	float shootTimer = 0.f;
 	float areaAttackMeshLifetimeTimer = 0.f;
+
+	bool isInSecondPhase = true;
 };

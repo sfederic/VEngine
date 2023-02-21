@@ -1,7 +1,9 @@
 #include "vpch.h"
 #include "WaveAttackBoss.h"
+#include "Actors/Game/LevelInstance.h"
 #include "Components/MeshComponent.h"
 #include "Physics/Raycast.h"
+#include "Core/VMath.h"
 
 WaveAttackBoss::WaveAttackBoss()
 {
@@ -12,14 +14,17 @@ WaveAttackBoss::WaveAttackBoss()
 void WaveAttackBoss::Create()
 {
 	baseMesh->SetMeshFilename("plane.vmesh");
+	baseMesh->SetRastState(RastStates::noBackCull);
 }
 
 void WaveAttackBoss::Tick(float deltaTime)
 {
 	shootTimer += deltaTime;
-	if (shootTimer > 5.f)
+	if (shootTimer > 4.f)
 	{
 		shootTimer = 0.f;
+		SecondPhaseWarpAroundLevel();
+
 		ShootAreaAttack();
 		RaycastCheckOnAreaAttackDimensions();
 	}
@@ -27,7 +32,7 @@ void WaveAttackBoss::Tick(float deltaTime)
 	if (areaAttackMesh)
 	{
 		constexpr float areaAttackMoveSpeed = 5.f;
-		areaAttackMesh->AddWorldPosition(-GetForwardVectorV() * areaAttackMoveSpeed * deltaTime);
+		areaAttackMesh->AddWorldPosition(nextAreaAttackDirection * areaAttackMoveSpeed * deltaTime);
 
 		areaAttackMeshLifetimeTimer += deltaTime;
 		if (areaAttackMeshLifetimeTimer > 3.f)
@@ -47,6 +52,10 @@ void WaveAttackBoss::ShootAreaAttack()
 	areaAttackMesh->SetWorldScale(5.f);
 	areaAttackMesh->SetBlendState(BlendStates::Default);
 	areaAttackMesh->SetAmbientColour(XMFLOAT4(1.f, 1.f, 1.f, 0.3f));
+
+	const auto rot = VMath::DirectionToQuat(nextAreaAttackDirection);
+	areaAttackMesh->SetWorldRotation(rot);
+
 }
 
 //Think of the moving areaAttackMesh more as an animation. For the actual attack hit detection,
@@ -69,11 +78,29 @@ void WaveAttackBoss::RaycastCheckOnAreaAttackDimensions()
 		for (int h = waveAttackMinY; h < waveAttackMaxY; h++)
 		{
 			HitResult hit(this);
-			XMVECTOR origin = XMVectorSet((float)w, (float)h, 0.f, 1.f);
+			const auto origin = XMVectorSet((float)w, (float)h, 0.f, 1.f);
 			if (Raycast(hit, origin, -GetForwardVectorV(), 50.f))
 			{
 				InflictDamageToActor(hit.hitActor);
 			}
 		}
+	}
+}
+
+//Having the boss attack in one direction initially is a good test of player skills.
+//For second phase, have the boss move to the faces of the level bounds and attack in the direction of
+//its positon to the center of the map, that way the player will have to orient from all directions to dodge.
+void WaveAttackBoss::SecondPhaseWarpAroundLevel()
+{
+	if (isInSecondPhase)
+	{
+		auto levelInstance = LevelInstance::system.GetFirstActor();
+		auto randomCardinalDirection = VMath::RandomCardinalDirectionVector();
+		auto boundsFacePos = levelInstance->GetPositonOfFaceFromBounds(randomCardinalDirection);
+		SetPosition(boundsFacePos);
+
+		nextAreaAttackDirection = -randomCardinalDirection;
+		auto rot = VMath::DirectionToQuat(nextAreaAttackDirection);
+		SetRotation(rot);
 	}
 }
