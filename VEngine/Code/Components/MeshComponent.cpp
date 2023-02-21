@@ -45,7 +45,7 @@ std::vector<MeshComponent*> MeshComponent::SortMeshComponentsByDistance()
 
 	auto DistCompare = [](const MeshPack& leftPack, const MeshPack& rightPack)
 	{
-		return leftPack.distance < rightPack.distance;
+		return leftPack.distance > rightPack.distance;
 	};
 	std::sort(meshPacks.begin(), meshPacks.end(), DistCompare);
 
