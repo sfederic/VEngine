@@ -37,7 +37,7 @@ void WaveAttackBoss::Tick(float deltaTime)
 
 	if (areaAttackMesh)
 	{
-		constexpr float areaAttackMoveSpeed = 5.f;
+		constexpr float areaAttackMoveSpeed = 15.f;
 		areaAttackMesh->AddWorldPosition(nextAreaAttackDirection * areaAttackMoveSpeed * deltaTime);
 
 		areaAttackMeshLifetimeTimer += deltaTime;
@@ -60,7 +60,8 @@ void WaveAttackBoss::ShootAreaAttack()
 	areaAttackMesh->SetAmbientColour(XMFLOAT4(1.f, 1.f, 1.f, 0.3f));
 	areaAttackMesh->layer = CollisionLayers::None;
 
-	const auto rot = DirectX::XMQuaternionRotationAxis(nextAreaAttackDirection, XM_PI);
+	auto levelInstance = LevelInstance::system.GetFirstActor();
+	const auto rot = VMath::LookAtRotation(GetPositionV() + nextAreaAttackDirection, areaAttackMesh->GetWorldPositionV());
 	areaAttackMesh->SetWorldRotation(rot);
 }
 
@@ -106,7 +107,7 @@ void WaveAttackBoss::SecondPhaseWarpAroundLevel()
 		SetPosition(boundsFacePos);
 
 		nextAreaAttackDirection = -randomCardinalDirection;
-		const auto rot = DirectX::XMQuaternionRotationAxis(nextAreaAttackDirection, XM_PI);
+		const auto rot = VMath::LookAtRotation(GetPositionV() - randomCardinalDirection, GetPositionV());
 		SetRotation(rot);
 	}
 }
