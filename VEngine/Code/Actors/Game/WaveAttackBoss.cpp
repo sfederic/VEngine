@@ -69,6 +69,7 @@ void WaveAttackBoss::ShootAreaAttack()
 //take the grid based points of the plane and fire raycasts from them, seeing if any hit the player.
 void WaveAttackBoss::RaycastCheckOnAreaAttackDimensions()
 {
+	//@Todo: this isn't working for the current setup of having 2 phases for the boss.
 	constexpr int waveAttackWidth = 3;
 	constexpr int waveAttackHeight = 3;
 
