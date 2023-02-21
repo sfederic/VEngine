@@ -45,6 +45,8 @@ void WaveAttackBoss::ShootAreaAttack()
 	areaAttackMesh->SetRastState(RastStates::noBackCull);
 	areaAttackMesh->SetWorldPosition(GetPositionV());
 	areaAttackMesh->SetWorldScale(5.f);
+	areaAttackMesh->SetBlendState(BlendStates::Default);
+	areaAttackMesh->SetAmbientColour(XMFLOAT4(1.f, 1.f, 1.f, 0.3f));
 }
 
 //Think of the moving areaAttackMesh more as an animation. For the actual attack hit detection,
@@ -67,7 +69,8 @@ void WaveAttackBoss::RaycastCheckOnAreaAttackDimensions()
 		for (int h = waveAttackMinY; h < waveAttackMaxY; h++)
 		{
 			HitResult hit(this);
-			if (Raycast(hit, GetPositionV(), -GetForwardVectorV(), 50.f))
+			XMVECTOR origin = XMVectorSet((float)w, (float)h, 0.f, 1.f);
+			if (Raycast(hit, origin, -GetForwardVectorV(), 50.f))
 			{
 				InflictDamageToActor(hit.hitActor);
 			}
