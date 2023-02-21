@@ -30,3 +30,11 @@ XMVECTOR LevelInstance::GetRandomRoundedPointInsideLevelBounds()
 {
     return boxTrigger->GetRandomPointInTriggerRounded();
 }
+
+XMVECTOR LevelInstance::GetPositonOfFaceFromBounds(XMVECTOR boundsFaceDirection)
+{
+    auto triggerCenter = boxTrigger->GetWorldPositionV();
+    auto extents = XMLoadFloat3(&boxTrigger->boundingBox.Extents);
+    auto result = triggerCenter + (boundsFaceDirection * extents);
+    return result;
+}

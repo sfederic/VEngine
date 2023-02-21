@@ -18,6 +18,9 @@ public:
 	void SetExtents(float x, float y, float z);
 	XMVECTOR GetRandomRoundedPointInsideLevelBounds();
 
+	//Only works with boundsFaceDirection being defined as a cardinal direction (i.e. 0,1,0)
+	XMVECTOR GetPositonOfFaceFromBounds(XMVECTOR boundsFaceDirection);
+
 private:
 	BoxTriggerComponent* boxTrigger = nullptr;
 };
