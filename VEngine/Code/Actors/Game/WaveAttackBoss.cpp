@@ -52,12 +52,13 @@ void WaveAttackBoss::Tick(float deltaTime)
 
 void WaveAttackBoss::ShootAreaAttack()
 {
-	areaAttackMesh = MeshComponent::system.Add("AreaAttack", this, MeshComponent("plane.vmesh", "test.png"), true);
+	areaAttackMesh = MeshComponent::system.Add("AreaAttack", nullptr, MeshComponent("plane.vmesh", "test.png"), true);
 	areaAttackMesh->SetRastState(RastStates::noBackCull);
 	areaAttackMesh->SetWorldPosition(GetPositionV());
 	areaAttackMesh->SetWorldScale(5.f);
 	areaAttackMesh->SetBlendState(BlendStates::Default);
 	areaAttackMesh->SetAmbientColour(XMFLOAT4(1.f, 1.f, 1.f, 0.3f));
+	areaAttackMesh->layer = CollisionLayers::None;
 
 	const auto rot = DirectX::XMQuaternionRotationAxis(nextAreaAttackDirection, XM_PI);
 	areaAttackMesh->SetWorldRotation(rot);
