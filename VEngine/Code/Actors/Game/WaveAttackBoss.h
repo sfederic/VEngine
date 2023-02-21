@@ -22,10 +22,11 @@ private:
 	MeshComponent* baseMesh = nullptr;
 	MeshComponent* areaAttackMesh = nullptr;
 
-	XMVECTOR nextAreaAttackDirection = XMVectorZero();
+	XMVECTOR nextAreaAttackDirection = -GetForwardVectorV();
 
 	float shootTimer = 0.f;
 	float areaAttackMeshLifetimeTimer = 0.f;
 
+	float warpTimer = 0.f;
 	bool isInSecondPhase = true;
 };

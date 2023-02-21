@@ -23,10 +23,16 @@ void WaveAttackBoss::Tick(float deltaTime)
 	if (shootTimer > 4.f)
 	{
 		shootTimer = 0.f;
-		SecondPhaseWarpAroundLevel();
-
 		ShootAreaAttack();
 		RaycastCheckOnAreaAttackDimensions();
+	}
+
+	warpTimer += deltaTime;
+	if (warpTimer > 7.f)
+	{
+		warpTimer = 0.f;
+		shootTimer = 0.f; //Make sure there's a nice pause between warping and shooting.
+		SecondPhaseWarpAroundLevel();
 	}
 
 	if (areaAttackMesh)
@@ -53,9 +59,8 @@ void WaveAttackBoss::ShootAreaAttack()
 	areaAttackMesh->SetBlendState(BlendStates::Default);
 	areaAttackMesh->SetAmbientColour(XMFLOAT4(1.f, 1.f, 1.f, 0.3f));
 
-	const auto rot = VMath::DirectionToQuat(nextAreaAttackDirection);
+	const auto rot = DirectX::XMQuaternionRotationAxis(nextAreaAttackDirection, XM_PI);
 	areaAttackMesh->SetWorldRotation(rot);
-
 }
 
 //Think of the moving areaAttackMesh more as an animation. For the actual attack hit detection,
@@ -94,13 +99,13 @@ void WaveAttackBoss::SecondPhaseWarpAroundLevel()
 {
 	if (isInSecondPhase)
 	{
-		auto levelInstance = LevelInstance::system.GetFirstActor();
-		auto randomCardinalDirection = VMath::RandomCardinalDirectionVector();
-		auto boundsFacePos = levelInstance->GetPositonOfFaceFromBounds(randomCardinalDirection);
+		const auto levelInstance = LevelInstance::system.GetFirstActor();
+		const auto randomCardinalDirection = VMath::RandomCardinalDirectionVector();
+		const auto boundsFacePos = levelInstance->GetPositonOfFaceFromBounds(randomCardinalDirection);
 		SetPosition(boundsFacePos);
 
 		nextAreaAttackDirection = -randomCardinalDirection;
-		auto rot = VMath::DirectionToQuat(nextAreaAttackDirection);
+		const auto rot = DirectX::XMQuaternionRotationAxis(nextAreaAttackDirection, XM_PI);
 		SetRotation(rot);
 	}
 }
