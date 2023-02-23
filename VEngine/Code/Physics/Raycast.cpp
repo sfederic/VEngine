@@ -162,7 +162,7 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 		XMMATRIX model = component->GetWorldMatrix();
 
 		auto mesh = dynamic_cast<MeshComponent*>(component);
-		if(mesh)
+		if (mesh)
 		{
 			//This is for dealing with DestructibleMesh's meshproxy nulls
 			if (mesh->meshDataProxy.vertices == nullptr)
@@ -185,11 +185,11 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 				XMVECTOR v2 = XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index2).pos);
 				v2 = XMVector3TransformCoord(v2, model);
 
-				HitResult tempHitResult = {};
-				tempHitResult = hitResult;
-
-				if (DirectX::TriangleTests::Intersects(hitResult.origin, hitResult.direction, v0, v1, v2, tempHitResult.hitDistance))
+				float hitDistance = 0.f;
+				if (DirectX::TriangleTests::Intersects(hitResult.origin, hitResult.direction, v0, v1, v2, hitDistance))
 				{
+					HitResult tempHitResult = hitResult;
+
 					//Get normal for triangle
 					XMVECTOR normal = XMVectorZero();
 					normal += XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index0).normal);
