@@ -117,6 +117,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Gameplay\Gears\BeamRifleGear.cpp" />
     <ClCompile Include="Code\Gameplay\Gears\CanonGear.cpp" />
     <ClCompile Include="Code\Actors\Game\BuildingRubble.cpp" />
     <ClCompile Include="Code\Actors\SplitMesh.cpp" />
@@ -276,6 +277,7 @@
     <ClCompile Include="Code\Actors\Game\LelielBoss.cpp" />
     <ClCompile Include="Code\Actors\Game\WaveAttackBoss.cpp" />
     <ClCompile Include="Code\Actors\Game\CrashLandEnemy.cpp" />
+    <ClInclude Include="Code\Gameplay\Gears\BeamRifleGear.h" />
     <ClInclude Include="Code\Gameplay\Gears\CanonGear.h" />
     <ClInclude Include="Code\Actors\Game\BuildingRubble.h" />
     <ClInclude Include="Code\Actors\SplitMesh.h" />
