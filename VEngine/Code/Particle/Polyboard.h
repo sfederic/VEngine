@@ -32,10 +32,8 @@ struct Polyboard : SpatialComponent
 	float radius = 0.8f;
 
 	Polyboard();
+	void Create() override;
 	virtual Properties GetProps() override;
-
-	//Call this on gameplay start (Actor::Start()) to set up the polyboard's GPU buffers.
-	void GenerateVertices();
 
 	void CalcVertices();
 
@@ -43,4 +41,7 @@ struct Polyboard : SpatialComponent
 	void SetEndPoint(XMVECTOR end);
 
 	bool RaycastFromStartToEndPoints(HitResult& hit);
+
+private:
+	void GenerateVertices();
 };

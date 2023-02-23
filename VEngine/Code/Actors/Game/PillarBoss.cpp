@@ -68,7 +68,6 @@ void PillarBoss::CalcLaserData(uint32_t numLasersToSpawn)
 
 			auto beam = Polyboard::system.Add("Beam" + std::to_string(Polyboard::system.GetNumComponents()), 
 				this, Polyboard(), true);
-			beam->GenerateVertices();
 
 			LaserData data;
 			data.mesh = laserMesh;

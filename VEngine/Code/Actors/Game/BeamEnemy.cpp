@@ -12,7 +12,6 @@ void BeamEnemy::Create()
 	rootComponent->AddChild(mesh);
 
 	beam = CreateComponent<Polyboard>("Beam");
-	beam->GenerateVertices();
 	rootComponent->AddChild(beam);
 }
 

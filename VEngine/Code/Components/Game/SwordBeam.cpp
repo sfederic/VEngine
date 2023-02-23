@@ -8,7 +8,7 @@ SwordBeam::SwordBeam()
 
 void SwordBeam::Create()
 {
-	GenerateVertices();
+	__super::Create();
 }
 
 void SwordBeam::Tick(float deltaTime)

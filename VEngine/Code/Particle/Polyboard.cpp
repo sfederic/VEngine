@@ -16,6 +16,11 @@ Polyboard::Polyboard()
 	textureData.filename = "Particle/beam_blue.png";
 }
 
+void Polyboard::Create()
+{
+	GenerateVertices();
+}
+
 Properties Polyboard::GetProps()
 {
 	auto props = __super::GetProps();
