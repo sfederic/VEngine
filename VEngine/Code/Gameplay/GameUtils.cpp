@@ -15,6 +15,7 @@
 #include "Core/Input.h"
 #include "Core/Log.h"
 #include "Particle/SpriteSheet.h"
+#include "Particle/Polyboard.h"
 #include "Asset/AssetFileExtensions.h"
 
 namespace GameUtils
@@ -44,6 +45,13 @@ namespace GameUtils
 		spriteSheet->Create();
 
 		return spriteSheet;
+	}
+
+	Polyboard* SpawnPolyboard(const std::string_view textureFilename, const XMVECTOR startPosition, const XMVECTOR endPosition)
+	{
+		std::string name = "Polyboard" + std::to_string(Polyboard::system.GetNumComponents());
+		auto polyboard = Polyboard::system.Add(name, nullptr, Polyboard(), true);
+		return polyboard;
 	}
 
 	void PlayAudioOneShot(const std::string audioFilename)
