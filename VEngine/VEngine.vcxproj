@@ -275,6 +275,7 @@
     <ClCompile Include="Code\Actors\Game\WallBoss.cpp" />
     <ClCompile Include="Code\Actors\Game\LelielBoss.cpp" />
     <ClCompile Include="Code\Actors\Game\WaveAttackBoss.cpp" />
+    <ClCompile Include="Code\Actors\Game\CrashLandEnemy.cpp" />
     <ClInclude Include="Code\Gameplay\Gears\CanonGear.h" />
     <ClInclude Include="Code\Actors\Game\BuildingRubble.h" />
     <ClInclude Include="Code\Actors\SplitMesh.h" />
@@ -557,6 +558,7 @@
     <ClInclude Include="Code\Actors\Game\WallBoss.h" />
     <ClInclude Include="Code\Actors\Game\LelielBoss.h" />
     <ClInclude Include="Code\Actors\Game\WaveAttackBoss.h" />
+    <ClInclude Include="Code\Actors\Game\CrashLandEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
