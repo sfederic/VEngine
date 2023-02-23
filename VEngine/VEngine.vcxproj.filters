@@ -602,6 +602,9 @@
     <ClCompile Include="Code\Gameplay\Gears\BeamRifleGear.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\Game\AntiAirEnemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1169,6 +1172,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\Gears\BeamRifleGear.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\AntiAirEnemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
