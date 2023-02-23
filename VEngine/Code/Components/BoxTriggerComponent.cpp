@@ -95,5 +95,5 @@ void BoxTriggerComponent::SetExtents(float x, float y, float z)
 
 bool BoxTriggerComponent::QuickInPlaceBoxCast(HitResult& hitResult, bool drawDebug)
 {
-	return SimpleBoxCast(XMLoadFloat3(&boundingBox.Center), boundingBox.Extents, hitResult, drawDebug);
+	return SimpleBoxCast(GetWorldPositionV(), boundingBox.Extents, hitResult, drawDebug);
 }
