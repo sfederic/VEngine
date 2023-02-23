@@ -152,7 +152,6 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end)
 	return Raycast(hitResult, origin, direction, range, false);
 }
 
-//@Todo: there's a performance problem with this function. It just takes too long with large meshes if they're hit.
 bool RaycastTriangleIntersect(HitResult& hitResult)
 {
 	std::vector<HitResult> hitResults;
@@ -170,19 +169,21 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 				continue;
 			}
 
-			for (int i = 0; i < mesh->meshDataProxy.vertices->size() / 3; i++)
+			const auto& vertices = mesh->meshDataProxy.GetVertices();
+			const int vertexTriangleSize = vertices.size() / 3;
+			for (int i = 0; i < vertexTriangleSize; i++)
 			{
 				const int index0 = i * 3;
 				const int index1 = i * 3 + 1;
 				const int index2 = i * 3 + 2;
 
-				XMVECTOR v0 = XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index0).pos);
+				XMVECTOR v0 = XMLoadFloat3(&vertices[index0].pos);
 				v0 = XMVector3TransformCoord(v0, model);
 
-				XMVECTOR v1 = XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index1).pos);
+				XMVECTOR v1 = XMLoadFloat3(&vertices[index1].pos);
 				v1 = XMVector3TransformCoord(v1, model);
 
-				XMVECTOR v2 = XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index2).pos);
+				XMVECTOR v2 = XMLoadFloat3(&vertices[index2].pos);
 				v2 = XMVector3TransformCoord(v2, model);
 
 				float hitDistance = 0.f;
