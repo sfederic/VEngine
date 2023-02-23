@@ -109,6 +109,8 @@ struct MeshDataProxy
 	{
 		return (sizeof(Vertex) * vertices->size());
 	}
+
+	std::vector<Vertex>& GetVertices() { return *vertices; }
 };
 
 struct ShaderMatrices
