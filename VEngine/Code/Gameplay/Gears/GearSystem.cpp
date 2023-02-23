@@ -27,7 +27,7 @@ Gear* GearSystem::GetPrimaryGear()
 	auto primaryGearName = GameInstance::GetGlobalProp<std::string>("PrimaryGear");
 	if (primaryGearName->empty())
 	{
-		return GetGear("CanonGear");
+		return GetGear("BeamRifle");
 	}
 	return GetGear(*primaryGearName);
 }
