@@ -8,6 +8,8 @@
 #include "Gameplay/GameplayTags.h"
 #include "Components/MeshComponent.h"
 
+BeamRifleGear instance;
+
 void BeamRifleGear::Use()
 {
 	const auto player = Player::system.GetFirstActor();
