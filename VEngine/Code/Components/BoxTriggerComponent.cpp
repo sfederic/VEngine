@@ -3,6 +3,7 @@
 #include "Components/MeshComponent.h"
 #include "Core/VMath.h"
 #include "Actors/Game/Player.h"
+#include "Physics/Raycast.h"
 
 BoxTriggerComponent::BoxTriggerComponent()
 {
@@ -90,4 +91,9 @@ bool BoxTriggerComponent::IntersectsWithAnyBoundingBoxInWorld()
 void BoxTriggerComponent::SetExtents(float x, float y, float z)
 {
 	boundingBox.Extents = XMFLOAT3(x, y, z);
+}
+
+bool BoxTriggerComponent::QuickInPlaceBoxCast(HitResult& hitResult, bool drawDebug)
+{
+	return SimpleBoxCast(XMLoadFloat3(&boundingBox.Center), boundingBox.Extents, hitResult, drawDebug);
 }

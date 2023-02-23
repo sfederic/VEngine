@@ -4,6 +4,7 @@
 #include "ComponentSystem.h"
 
 class Actor;
+struct HitResult;
 
 class BoxTriggerComponent : public SpatialComponent
 {
@@ -23,6 +24,8 @@ public:
 	XMVECTOR GetRandomPointInTriggerRounded();
 	bool IntersectsWithAnyBoundingBoxInWorld();
 	void SetExtents(float x, float y, float z);
+
+	bool QuickInPlaceBoxCast(HitResult& hitResult, bool drawDebug);
 
 private:
 	Actor* targetActor = nullptr;
