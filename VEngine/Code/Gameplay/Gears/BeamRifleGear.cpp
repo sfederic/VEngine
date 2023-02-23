@@ -19,7 +19,7 @@ void BeamRifleGear::Use()
 	if (Raycast(hitResult, player->GetPositionV(), player->GetForwardVectorV(), 1000.f))
 	{
 		const XMVECTOR beamEnd = player->GetPositionV() + (player->GetForwardVectorV() * 50.f);
-		GameUtils::SpawnPolyboard("Particle/beam_blue.png", player->GetPositionV(), beamEnd);
+		GameUtils::SpawnPolyboard("Particle/beam_blue.png", player->GetPositionV(), beamEnd, 1.f);
 
 		auto enemy = dynamic_cast<Enemy*>(hitResult.hitActor);
 		if (enemy)

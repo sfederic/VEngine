@@ -19,7 +19,8 @@ namespace GameUtils
 	void CameraShake(float shake);
 
 	SpriteSheet* SpawnSpriteSheet(std::string textureFilename, XMVECTOR spawnPosition, bool loop, int numRows, int numColumns);
-	Polyboard* SpawnPolyboard(const std::string_view textureFilename, const XMVECTOR startPosition, const XMVECTOR endPosition);
+	Polyboard* SpawnPolyboard(const std::string_view textureFilename,
+		const XMVECTOR startPosition, const XMVECTOR endPosition, float destroyTimer = 0.f);
 
 	void PlayAudioOneShot(const std::string audioFilename);
 

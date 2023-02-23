@@ -21,6 +21,18 @@ void Polyboard::Create()
 	GenerateVertices();
 }
 
+void Polyboard::Tick(float deltaTime)
+{
+	if (setToDestroy)
+	{
+		destroyTimer += deltaTime;
+		if (destroyTimer > destroyTimerMax)
+		{
+			Remove();
+		}
+	}
+}
+
 Properties Polyboard::GetProps()
 {
 	auto props = __super::GetProps();
@@ -110,4 +122,10 @@ void Polyboard::SetEndPoint(XMVECTOR end)
 bool Polyboard::RaycastFromStartToEndPoints(HitResult& hit)
 {
 	return Raycast(hit, XMLoadFloat3(&startPoint), XMLoadFloat3(&endPoint));
+}
+
+void Polyboard::SetDestroyTimer(float timerMax)
+{
+	setToDestroy = true;
+	destroyTimerMax = timerMax;
 }

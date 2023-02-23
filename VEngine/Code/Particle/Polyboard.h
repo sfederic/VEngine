@@ -33,6 +33,7 @@ struct Polyboard : SpatialComponent
 
 	Polyboard();
 	void Create() override;
+	void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 
 	void CalcVertices();
@@ -42,6 +43,12 @@ struct Polyboard : SpatialComponent
 
 	bool RaycastFromStartToEndPoints(HitResult& hit);
 
+	void SetDestroyTimer(float timerMax);
+
 private:
 	void GenerateVertices();
+
+	float destroyTimer = 0.f;
+	float destroyTimerMax = 0.f;
+	bool setToDestroy = false;
 };

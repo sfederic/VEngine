@@ -47,12 +47,20 @@ namespace GameUtils
 		return spriteSheet;
 	}
 
-	Polyboard* SpawnPolyboard(const std::string_view textureFilename, const XMVECTOR startPosition, const XMVECTOR endPosition)
+	Polyboard* SpawnPolyboard(const std::string_view textureFilename,
+		const XMVECTOR startPosition, const XMVECTOR endPosition, float destroyTimer)
 	{
 		std::string name = "Polyboard" + std::to_string(Polyboard::system.GetNumComponents());
 		auto polyboard = Polyboard::system.Add(name, nullptr, Polyboard(), true);
+
 		polyboard->SetStartPoint(startPosition);
 		polyboard->SetEndPoint(endPosition);
+
+		if (destroyTimer > 0.f)
+		{
+			polyboard->SetDestroyTimer(destroyTimer);
+		}
+
 		return polyboard;
 	}
 
