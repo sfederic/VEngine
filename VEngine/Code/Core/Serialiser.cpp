@@ -11,33 +11,31 @@ using namespace DirectX;
 
 void BinarySerialiser::Serialise(Properties& props)
 {
-	for (auto& propPair : props.propMap)
+	for (const auto& [name, prop] : props.propMap)
 	{
-		auto& prop = propPair.second;
-
-		if (props.CheckType<std::string>(propPair.first))
+		if (props.CheckType<std::string>(name))
 		{
-			auto str = (std::string*)prop.data;
+			auto str = props.GetData<std::string>(name);
 			WriteString(*str);
 		}
-		else if (props.CheckType<std::wstring>(propPair.first))
+		else if (props.CheckType<std::wstring>(name))
 		{
-			auto wstr = (std::wstring*)prop.data;
+			auto wstr = props.GetData<std::wstring>(name);
 			WriteWString(*wstr);
 		}
-		else if (props.CheckType<MeshComponentData>(propPair.first))
+		else if (props.CheckType<MeshComponentData>(name))
 		{
-			auto meshComponentData = (MeshComponentData*)prop.data;
+			auto meshComponentData = props.GetData<MeshComponentData>(name);
 			WriteString(meshComponentData->filename);
 		}
-		else if (props.CheckType<ShaderData>(propPair.first))
+		else if (props.CheckType<ShaderData>(name))
 		{
-			auto shaderData = (ShaderData*)prop.data;
+			auto shaderData = props.GetData<ShaderData>(name);
 			WriteString(shaderData->shaderItemName);
 		}
-		else if (props.CheckType<TextureData>(propPair.first))
+		else if (props.CheckType<TextureData>(name))
 		{
-			auto textureData = (TextureData*)prop.data;
+			auto textureData = props.GetData<TextureData>(name);
 			WriteString(textureData->filename);
 		}
 		else
@@ -49,14 +47,9 @@ void BinarySerialiser::Serialise(Properties& props)
 
 void BinarySerialiser::WriteString(const std::string str)
 {
-	const size_t lastFilePos = os.tellp();
-
 	const size_t stringSize = str.length();
 	os.write((const char*)&stringSize, sizeof(size_t));
 	os.write(str.data(), stringSize);
-
-	const size_t currentFilePos = os.tellp();
-	assert((currentFilePos - lastFilePos) == stringSize);
 }
 
 void BinarySerialiser::WriteWString(const std::wstring wstr)
@@ -105,8 +98,6 @@ void BinaryDeserialiser::Deserialise(Properties& props)
 
 void BinaryDeserialiser::ReadString(std::string* str)
 {
-	const size_t lastFilePos = is.tellg();
-
 	size_t stringSize = 0;
 	is.read((char*)&stringSize, sizeof(stringSize));
 
@@ -116,9 +107,6 @@ void BinaryDeserialiser::ReadString(std::string* str)
 
 	const std::string newStr(buff.data(), stringSize);
 	*str = newStr;
-
-	const size_t currentFilePos = is.tellg();
-	assert((currentFilePos - lastFilePos) == stringSize);
 }
 
 void BinaryDeserialiser::ReadWString(std::wstring* wstr)
