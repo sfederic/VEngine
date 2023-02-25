@@ -49,7 +49,7 @@ void BinarySerialiser::WriteString(const std::string str)
 {
 	const size_t stringSize = str.length();
 	fwrite(&stringSize, sizeof(size_t), 1, file);
-	fwrite(str.data(), stringSize, 1, file);
+	fwrite(str.c_str(), stringSize, 1, file);
 }
 
 void BinarySerialiser::WriteWString(const std::wstring wstr)
