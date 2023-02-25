@@ -69,7 +69,7 @@ void FileSystem::WriteAllSystemsToBinary()
 
 	std::string file = "WorldMaps/Binary/" + str;
 
-	BinarySerialiser s(file);
+	BinarySerialiser s(file.c_str());
 
 	for (IActorSystem* actorSystem : World::activeActorSystems)
 	{
@@ -103,7 +103,7 @@ void FileSystem::ReadAllSystemsFromBinary()
 
 	BinaryDeserialiser d(path);
 
-	while (!d.is.eof())
+	while (!feof(d.file))
 	{
 		std::string systemName;
 		d.ReadString(&systemName);

@@ -40,7 +40,7 @@ void BinarySerialiser::Serialise(Properties& props)
 		}
 		else
 		{
-			os.write(reinterpret_cast<const char*>(prop.data), prop.size);
+			fwrite(prop.data, prop.size, 1, file);
 		}
 	}
 }
@@ -48,8 +48,8 @@ void BinarySerialiser::Serialise(Properties& props)
 void BinarySerialiser::WriteString(const std::string str)
 {
 	const size_t stringSize = str.length();
-	os.write((const char*)&stringSize, sizeof(size_t));
-	os.write(str.data(), stringSize);
+	fwrite(&stringSize, sizeof(size_t), 1, file);
+	fwrite(str.data(), stringSize, 1, file);
 }
 
 void BinarySerialiser::WriteWString(const std::wstring wstr)
@@ -91,7 +91,7 @@ void BinaryDeserialiser::Deserialise(Properties& props)
 		}
 		else
 		{
-			is.read(reinterpret_cast<char*>(prop.data), prop.size);
+			fread(prop.data, prop.size, 1, file);
 		}
 	}
 }
@@ -99,10 +99,10 @@ void BinaryDeserialiser::Deserialise(Properties& props)
 void BinaryDeserialiser::ReadString(std::string* str)
 {
 	size_t stringSize = 0;
-	is.read((char*)&stringSize, sizeof(stringSize));
+	fread(&stringSize, sizeof(size_t), 1, file);
 
 	std::vector<char> buff(stringSize);
-	is.read(buff.data(), stringSize);
+	fread(buff.data(), stringSize, 1, file);
 	assert(buff.size() == stringSize);
 
 	const std::string newStr(buff.data(), stringSize);
