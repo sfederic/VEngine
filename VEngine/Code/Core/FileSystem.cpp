@@ -108,7 +108,7 @@ void FileSystem::ReadAllSystemsFromBinary()
 		std::string systemName;
 		d.ReadString(&systemName);
 
-		int numObjectsToSpawn = 0;
+		size_t numObjectsToSpawn = 0;
 		d.Read(&numObjectsToSpawn);
 
 		if (numObjectsToSpawn == 0)
@@ -124,9 +124,15 @@ void FileSystem::ReadAllSystemsFromBinary()
 			for (int i = 0; i < numObjectsToSpawn; i++)
 			{
 				Actor* actor = actorSystem->SpawnActor(Transform());
-			}
+				World::RemoveActorFromWorld(actor);
 
-			actorSystem->DeserialiseBinary(d);
+				auto props = actor->GetProps();
+				d.Deserialise(props);
+
+				actor->ResetOwnerUIDToComponents();
+
+				World::AddActorToWorld(actor);
+			}
 		}
 		else if (componentSystem != nullptr)
 		{
