@@ -57,7 +57,7 @@ public:
 
 public:
 	Material(std::string textureFilename_, ShaderItem* shaderItem);
-	~Material() {}
+	~Material() {} //@Todo: there's still a fucking terrible VEnum std::string debug error hert
 
 	virtual void Create();
 	virtual void Destroy();
