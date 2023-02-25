@@ -34,6 +34,8 @@ std::pair<UID, std::string> GetComponentOwnerUIDAndNameOnDeserialise(Deserialise
 
 void FileSystem::SerialiseAllSystems()
 {
+	const auto start = Profile::QuickStart();
+
 	auto lastOf = World::worldFilename.find_last_of("/\\");
 	std::string str = World::worldFilename.substr(lastOf + 1);
 
@@ -60,10 +62,15 @@ void FileSystem::SerialiseAllSystems()
 	s.WriteLine(L"end");
 
 	debugMenu.AddNotification(VString::wformat(L"%S world saved", World::worldFilename.c_str()));
+
+	const auto end = Profile::QuickEnd(start);
+	Log("Text save for [%s] took [%f].", str.c_str(), end);
 }
 
 void FileSystem::WriteAllSystemsToBinary()
 {
+	const auto start = Profile::QuickStart();
+
 	auto lastOf = World::worldFilename.find_last_of("/\\");
 	std::string str = World::worldFilename.substr(lastOf + 1);
 
@@ -88,11 +95,16 @@ void FileSystem::WriteAllSystemsToBinary()
 	}
 
 	debugMenu.AddNotification(VString::wformat(L"%S world saved to binary", World::worldFilename.c_str()));
+
+	const auto end = Profile::QuickEnd(start);
+	Log("Binary save for [%s] took [%f].", str.c_str(), end);
 }
 
 //@Todo: binary serialisation isn't working too well. Might be some weird alignment errors taken from property sizes.
 void FileSystem::ReadAllSystemsFromBinary()
 {
+	const auto start = Profile::QuickStart();
+
 	std::string worldName = World::worldFilename;
 
 	std::string path = "WorldMaps/Binary/" + worldName;
@@ -158,11 +170,14 @@ void FileSystem::ReadAllSystemsFromBinary()
 	ResetWorldState();
 
 	debugMenu.AddNotification(VString::wformat(L"%S world loaded from binary", World::worldFilename.c_str()));
+
+	const auto end = Profile::QuickEnd(start);
+	Log("Binary load for [%s] took [%f].", worldName.c_str(), end);
 }
 
 void FileSystem::LoadWorld(std::string worldName)
 {
-	auto startTime = Profile::QuickStart();
+	const auto startTime = Profile::QuickStart();
 
 	editor->SetEditorTitle(worldName);
 
