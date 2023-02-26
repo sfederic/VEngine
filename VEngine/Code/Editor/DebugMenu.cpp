@@ -464,7 +464,7 @@ void DebugMenu::RenderWorldMenu()
 		const std::string worldFilename = worldEntry.path().filename().string();
 		if (ImGui::Button(worldFilename.c_str()))
 		{
-			GameUtils::LoadWorld(worldFilename);
+			GameUtils::LoadWorldDeferred(worldFilename);
 		}
 	}
 

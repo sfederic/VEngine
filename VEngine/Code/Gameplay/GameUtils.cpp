@@ -84,10 +84,10 @@ namespace GameUtils
 		FileSystem::SerialiseAllSystems();
 	}
 
-	void LoadWorld(std::string worldName)
+	void LoadWorldDeferred(std::string worldName)
 	{
 		std::string path = "WorldMaps/" + worldName;
-		FileSystem::LoadWorld(worldName);
+		FileSystem::SetDeferredWorldLoad(worldName);
 	}
 
 	void SaveGameInstanceData()
@@ -111,7 +111,7 @@ namespace GameUtils
 			return;
 		}
 
-		LoadWorld(levelToMoveTo);
+		LoadWorldDeferred(levelToMoveTo);
 
 		GameInstance::previousMapMovedFrom = levelToMoveTo;
 

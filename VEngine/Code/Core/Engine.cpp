@@ -8,13 +8,14 @@
 #include "Timer.h"
 #include "World.h"
 #include "WorldEditor.h"
+#include "FileSystem.h"
+#include "Asset/FBXLoader.h"
 #include "Render/Renderer.h"
 #include "Render/VertexShader.h"
 #include "Render/PixelShader.h"
 #include "Render/ShaderSystem.h"
 #include "Render/MaterialSystem.h"
 #include "Render/SpriteSystem.h"
-#include "Asset/FBXLoader.h"
 #include "UI/UISystem.h"
 #include "Editor/DebugMenu.h"
 #include "Components/CameraComponent.h"
@@ -120,6 +121,8 @@ void Engine::MainLoop()
 		Render(deltaTime);
 
 		ResetSystems();
+
+		FileSystem::DeferredWorldLoad();
 
 		Core::EndTimer();
 	}

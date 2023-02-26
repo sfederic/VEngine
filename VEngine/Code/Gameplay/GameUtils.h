@@ -25,7 +25,9 @@ namespace GameUtils
 	void PlayAudioOneShot(const std::string audioFilename);
 
 	void SaveGameWorldState();
-	void LoadWorld(std::string worldName);
+
+	//Loads world at the end of the current frame. Call FileSystem::LoadWorld() if immediate loading is needed.
+	void LoadWorldDeferred(std::string worldName);
 
 	inline static const std::string gameInstanceSaveFile = "game_instance.sav";
 

@@ -16,4 +16,9 @@ namespace FileSystem
 	void CreateGameplayWorldSave(std::string worldName);
 
 	void ResetWorldState();
+
+	void SetDeferredWorldLoad(const std::string_view filename);
+
+	//called at end of the frame to avoid world loads happening inside Tick/Draw functions.
+	void DeferredWorldLoad();
 };

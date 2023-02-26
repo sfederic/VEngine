@@ -20,6 +20,8 @@
 #include "Gameplay/WorldFunctions.h"
 #include "Profile.h"
 
+static std::string defferedWorldLoadFilename;
+
 std::pair<UID, std::string> GetComponentOwnerUIDAndNameOnDeserialise(Deserialiser& d)
 {
 	UID ownerUID = 0;
@@ -326,4 +328,18 @@ void FileSystem::ResetWorldState()
 
 	editor->UpdateWorldList();
 	editor->ClearProperties();
+}
+
+void FileSystem::SetDeferredWorldLoad(const std::string_view filename)
+{
+	defferedWorldLoadFilename = filename;
+}
+
+void FileSystem::DeferredWorldLoad()
+{
+	if (!defferedWorldLoadFilename.empty())
+	{
+		LoadWorld(defferedWorldLoadFilename);
+		defferedWorldLoadFilename.clear();
+	}
 }

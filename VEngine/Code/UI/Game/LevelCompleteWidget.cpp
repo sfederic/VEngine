@@ -10,6 +10,6 @@ void LevelCompleteWidget::Draw(float deltaTime)
 	auto buttonLayout = PercentAlignLayout(0.45f, 0.5f, 0.55f, 0.6f);
 	if (Button(L"Done", buttonLayout))
 	{
-		GameUtils::LoadWorld("map_screen.vmap");
+		GameUtils::LoadWorldDeferred("map_screen.vmap");
 	}
 }

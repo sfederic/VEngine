@@ -15,6 +15,6 @@ void MapSelectionInfoWidget::Draw(float deltaTime)
 	layout.PushToTop(30.f);
 	if (Button("Enter", layout))
 	{
-		GameUtils::LoadWorld(levelToLoad);
+		GameUtils::LoadWorldDeferred(levelToLoad);
 	}
 }
