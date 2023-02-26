@@ -43,4 +43,6 @@ namespace GameUtils
 	void SetActiveCamera(CameraComponent* camera);
 
 	XMVECTOR RandomPointInTriggerNotContainedByMeshBounds(BoxTriggerComponent* boxTrigger);
+
+	void TriggerLevelComplete();
 };

@@ -42,7 +42,6 @@ void BeamRifleGear::Use()
 				if (enemy->CheckIfAllTaggedMeshesAreDestroyed() || enemy->HasHealthDepleted())
 				{
 					enemy->OnDestroyed();
-					enemy->Destroy();
 				}
 			}
 		}

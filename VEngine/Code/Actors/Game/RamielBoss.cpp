@@ -57,6 +57,8 @@ Properties RamielBoss::GetProps()
 
 void RamielBoss::OnDestroyed()
 {
+    __super::OnDestroyed();
+
     GameInstance::SetGlobalProp("RamielDefeated", true);
 }
 

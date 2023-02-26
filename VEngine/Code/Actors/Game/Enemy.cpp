@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "Enemy.h"
 #include "Gameplay/GameplayTags.h"
+#include "Gameplay/GameUtils.h"
 #include "Player.h"
 
 Enemy::Enemy()
@@ -26,6 +27,17 @@ bool Enemy::CheckIfAllTaggedMeshesAreDestroyed()
 	}
 
 	return true;
+}
+
+void Enemy::OnDestroyed()
+{
+	Destroy();
+
+	auto enemies = World::GetAllActorsOfTypeInWorld<Enemy>();
+	if (enemies.empty())
+	{
+		GameUtils::TriggerLevelComplete();
+	}
 }
 
 void Enemy::InflictDamageToActor(Actor* actor)

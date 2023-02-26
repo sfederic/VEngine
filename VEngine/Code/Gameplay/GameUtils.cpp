@@ -156,4 +156,8 @@ namespace GameUtils
 
 		return point;
 	}
+
+	void TriggerLevelComplete()
+	{
+	}
 }
