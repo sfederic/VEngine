@@ -314,7 +314,11 @@ void FileSystem::ResetWorldState()
 	//Set player camera on world change as active if in-gameplay
 	if (Core::gameplayOn)
 	{
-		activeCamera = Player::system.GetFirstActor()->camera;
+		auto player = Player::system.GetFirstActor();
+		if (player)
+		{
+			activeCamera = player->camera;
+		}
 	}
 
 	//Make sure always after camera gets set
