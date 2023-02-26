@@ -12,6 +12,7 @@
 #include "Components/BoxTriggerComponent.h"
 #include "UI/UISystem.h"
 #include "UI/ScreenFadeWidget.h"
+#include "UI/Game/LevelCompleteWidget.h"
 #include "Core/Input.h"
 #include "Core/Log.h"
 #include "Particle/SpriteSheet.h"
@@ -159,5 +160,7 @@ namespace GameUtils
 
 	void TriggerLevelComplete()
 	{
+		auto levelCompleteWidget = UISystem::CreateWidget<LevelCompleteWidget>();
+		levelCompleteWidget->AddToViewport();
 	}
 }
