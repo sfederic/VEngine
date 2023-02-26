@@ -1,3 +1,20 @@
+AntiAirEnemy
+1
+ Enabled
+1
+ Position
+0 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+AntiAirEnemy0
+UID
+2434548576
+next
 DirectionalLightActor
 1
  Enabled
@@ -15,23 +32,6 @@ DirectionalLightActor0
 UID
 3259573575
 next
-LelielBoss
-1
- Enabled
-1
- Position
-3 2 1
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-LelielBoss0
-UID
-96371897
-next
 LevelInstance
 1
  Enabled
@@ -47,10 +47,10 @@ LevelInstance
 Name
 LevelInstance0
 UID
-2985414719
+2970795623
 next
 MeshActor
-4
+1
  Enabled
 1
  Position
@@ -64,63 +64,18 @@ MeshActor
 Name
 node0
 UID
-3764541769
-next
- Enabled
-1
- Position
-5 0 4
- Rotation
--0 0 -0 1
- Scale
-1 2 1
- Visible
-1
-Name
-building11
-UID
-1950016568
-next
- Enabled
-1
- Position
-5 0 -2
- Rotation
--0 0 -0 1
- Scale
-1 2 1
- Visible
-1
-Name
-MeshActor2
-UID
-3415821192
-next
- Enabled
-1
- Position
-6 0 1
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-MeshActor3
-UID
-3946944863
+2017203270
 next
 Player
 1
  Enabled
 1
  Position
-1 2 -2
+0 0 0
  Rotation
--0 8.9407e-08 -0 1
+0 0 0 1
  Scale
-0.999993 1 0.999993
+1 1 1
  Visible
 1
 All Range Mode
@@ -128,11 +83,11 @@ All Range Mode
 Name
 Player0
 UID
-849781184
+4177356718
 next
 BoxTriggerComponent
 1
-2985414719
+2970795623
 BoxTrigger
  Enabled
 1
@@ -143,24 +98,24 @@ BoxTrigger
  Scale
 1 1 1
  Visible
-1
+0
 Extents
 5 5 5
 Offset
 0 0 0
 UID
-3077683405
+2455471168
 next
 CameraComponent
 1
-849781184
+4177356718
 Camera
  Enabled
 1
  Pos
 1 0.5 -2
  Rot
-0.0486157 -0.0984196 0.00481386 0.993945
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -172,7 +127,7 @@ Far Z
 Near Z
 0.01
 UID
-2436463153
+1953546835
 next
 DirectionalLightComponent
 1
@@ -199,7 +154,7 @@ UID
 next
 EmptyComponent
 1
-96371897
+2434548576
 Root
  Enabled
 1
@@ -212,62 +167,11 @@ Root
  Visible
 1
 UID
-3746826226
+544791752
 next
 MeshComponent
-6
-96371897
-Mesh
- Enabled
-1
- Pos
-3 2 1
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-0
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-sphere.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-4061826835
-next
-3764541769
+3
+2017203270
 Mesh
  Enabled
 1
@@ -316,171 +220,18 @@ Static
 Trans. Occlude
 0
 UID
-2093300383
+1866570689
 next
-1950016568
+4177356718
 Mesh
  Enabled
 1
  Pos
-5 0 4
+0 0 0
  Rot
--0 0 -0 1
- Scale
-1 2 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-building1.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2342400018
-next
-3415821192
-Mesh
- Enabled
-1
- Pos
-5 0 -2
- Rot
--0 0 -0 1
- Scale
-1 2 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-building1.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2342400018
-next
-3946944863
-Mesh
- Enabled
-1
- Pos
-6 0 1
- Rot
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-building1.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2342400018
-next
-849781184
-Mesh
- Enabled
-1
- Pos
-1 2 -2
- Rot
--0 8.9407e-08 -0 1
- Scale
-0.999993 1 0.999993
  Visible
 1
 Casts Shadow
@@ -520,6 +271,74 @@ Static
 Trans. Occlude
 0
 UID
-3126310025
+2920052694
+next
+2434548576
+Mesh
+ Enabled
+1
+ Pos
+0 0 3
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+anti_air_enemy.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1785413764
+next
+Polyboard
+1
+2434548576
+AimBeam
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+1421907068
 next
 end
