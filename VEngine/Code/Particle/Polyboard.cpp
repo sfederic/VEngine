@@ -107,12 +107,12 @@ void Polyboard::CalcVertices()
 	}
 }
 
-void Polyboard::SetStartPoint(XMVECTOR start)
+void Polyboard::SetStartPoint(const XMVECTOR start)
 {
 	XMStoreFloat3(&startPoint, start);
 }
 
-void Polyboard::SetEndPoint(XMVECTOR end)
+void Polyboard::SetEndPoint(const XMVECTOR end)
 {
 	XMStoreFloat3(&endPoint, end);
 }

@@ -26,8 +26,8 @@ public:
 
 	void CalcVertices();
 
-	void SetStartPoint(XMVECTOR start);
-	void SetEndPoint(XMVECTOR end);
+	void SetStartPoint(const XMVECTOR start);
+	void SetEndPoint(const XMVECTOR end);
 	bool RaycastFromStartToEndPoints(HitResult& hit);
 	void SetDestroyTimer(float timerMax);
 
