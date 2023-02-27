@@ -36,6 +36,11 @@ void AntiAirEnemy::Tick(float deltaTime)
 		aimBeam->SetStartPoint(GetPositionV());
 		aimBeam->SetEndPoint(hit.GetHitPosV());
 	}
+	else
+	{
+		aimBeam->SetStartPoint(GetPositionV());
+		aimBeam->SetEndPoint(Player::system.GetFirstActor()->GetPositionV());
+	}
 }
 
 void AntiAirEnemy::Shoot()
