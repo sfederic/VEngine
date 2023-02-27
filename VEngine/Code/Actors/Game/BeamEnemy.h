@@ -2,7 +2,7 @@
 
 #include "Enemy.h"
 
-struct Polyboard;
+class Polyboard;
 
 //Enemy that emits a beam, moving like the fireball poles from Mario Bros.
 class BeamEnemy : public Enemy

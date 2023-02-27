@@ -18,7 +18,7 @@ void AntiAirEnemy::Create()
 {
 	mesh->SetMeshFilename("anti_air_enemy.vmesh");
 
-	aimBeam->textureData.filename = "Particle/beam_red.png";
+	aimBeam->SetTextureFilename("Particle/beam_red.png");
 }
 
 void AntiAirEnemy::Tick(float deltaTime)

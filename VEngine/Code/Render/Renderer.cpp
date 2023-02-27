@@ -1335,28 +1335,28 @@ void RenderPolyboards()
 
 		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
 
-		SetShaderResourcePixel(0, polyboard->textureData.filename);
+		SetShaderResourcePixel(0, polyboard->GetTextureFilename());
 
 		//VERTEX MAP
 		{
 			D3D11_MAPPED_SUBRESOURCE mappedResource = {};
-			HR(context->Map(polyboard->vertexBuffer->data, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
-			memcpy(mappedResource.pData, polyboard->vertices.data(), sizeof(Vertex) * polyboard->vertices.size());
-			context->Unmap(polyboard->vertexBuffer->data, 0);
+			HR(context->Map(polyboard->GetVertexBuffer().data, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+			memcpy(mappedResource.pData, polyboard->GetVertices().data(), sizeof(Vertex) * polyboard->GetVertices().size());
+			context->Unmap(polyboard->GetVertexBuffer().data, 0);
 		}
 
 		//INDEX MAP
 		{
 			D3D11_MAPPED_SUBRESOURCE mappedResource = {};
-			HR(context->Map(polyboard->indexBuffer->data, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
-			memcpy(mappedResource.pData, polyboard->indices.data(), sizeof(MeshData::indexDataType) * polyboard->indices.size());
-			context->Unmap(polyboard->indexBuffer->data, 0);
+			HR(context->Map(polyboard->GetIndexBuffer().data, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+			memcpy(mappedResource.pData, polyboard->GetIndices().data(), sizeof(MeshData::indexDataType) * polyboard->GetIndices().size());
+			context->Unmap(polyboard->GetIndexBuffer().data, 0);
 		}
 
-		SetVertexBuffer(polyboard->vertexBuffer);
-		SetIndexBuffer(polyboard->indexBuffer);
+		SetVertexBuffer(&polyboard->GetVertexBuffer());
+		SetIndexBuffer(&polyboard->GetIndexBuffer());
 
-		context->DrawIndexed(polyboard->indices.size(), 0, 0);
+		context->DrawIndexed(polyboard->GetIndices().size(), 0, 0);
 	}
 
 	Profile::End();

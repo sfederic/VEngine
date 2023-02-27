@@ -9,7 +9,7 @@ class Actor;
 struct SpriteSheet;
 class BoxTriggerComponent;
 class CameraComponent;
-struct Polyboard;
+class Polyboard;
 
 //Utility functions for in-game stuff
 namespace GameUtils

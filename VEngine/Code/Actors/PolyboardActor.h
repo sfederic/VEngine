@@ -3,7 +3,7 @@
 #include "Actor.h"
 #include "ActorSystem.h"
 
-struct Polyboard;
+class Polyboard;
 
 struct PolyboardActor : Actor
 {

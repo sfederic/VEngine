@@ -2,7 +2,7 @@
 
 #include "Enemy.h"
 
-struct Polyboard;
+class Polyboard;
 class MeshComponent;
 
 struct LaserData

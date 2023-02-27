@@ -3,7 +3,7 @@
 #include "Enemy.h"
 
 class MeshComponent;
-struct Polyboard;
+class Polyboard;
 
 //Enemy with multiple meshes joined up.
 class WormEnemy : public Enemy

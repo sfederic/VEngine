@@ -3,7 +3,7 @@
 #include "Enemy.h"
 
 class MeshComponent;
-struct Polyboard;
+class Polyboard;
 
 class AntiAirEnemy : public Enemy
 {

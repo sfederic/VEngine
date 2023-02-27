@@ -22,8 +22,8 @@ void BeamEnemy::Tick(float deltaTime)
 	auto mesh = GetComponent<MeshComponent>("Mesh");
 	if (mesh)
 	{
-		XMStoreFloat3(&beam->startPoint, pos);
-		XMStoreFloat3(&beam->endPoint, pos + GetForwardVectorV() * beamDistance);
+		beam->SetStartPoint(pos);
+		beam->SetEndPoint(pos + GetForwardVectorV() * beamDistance);
 	}
 
 	HitResult result(this);
