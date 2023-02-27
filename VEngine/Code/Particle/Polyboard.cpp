@@ -61,28 +61,26 @@ void Polyboard::CalcVertices()
 	vertices.clear();
 	indices.clear();
 
-	XMVECTOR start = XMLoadFloat3(&startPoint);
-	XMVECTOR end = XMLoadFloat3(&endPoint);
-	XMVECTOR startToEndDir = XMVector3Normalize(end - start);
+	const XMVECTOR start = XMLoadFloat3(&startPoint);
+	const XMVECTOR end = XMLoadFloat3(&endPoint);
+	const XMVECTOR startToEndDir = XMVector3Normalize(end - start);
 
 	float length = XMVector3Length(end - start).m128_f32[0];
 	length = std::ceilf(length) + 1.f;
 
-	XMVECTOR cameraPos = activeCamera->GetWorldPositionV();
+	const auto camForward = activeCamera->GetForwardVectorV();
 
 	for (int i = 0; i < length; i++)
 	{
-		XMVECTOR pos = start + (startToEndDir * i);
-		XMVECTOR nextPos = pos + startToEndDir;
-
-		XMVECTOR posToCamera = XMVector3Normalize(pos - cameraPos);
-		XMVECTOR tangent = XMVector3Normalize(nextPos - pos);
+		const XMVECTOR pos = start + (startToEndDir * i);
+		const XMVECTOR nextPos = pos + startToEndDir;
+		const XMVECTOR tangent = XMVector3Normalize(nextPos - pos);
 
 		//Use this if you need a wavy effect for polyboards
 		//radius = (sinf(i * Core::timeSinceStartup) * 0.15f) + 0.4f;
 
-		XMVECTOR p1 = pos - (radius * XMVector3Cross(tangent, posToCamera));
-		XMVECTOR p2 = pos + (radius * XMVector3Cross(tangent, posToCamera));
+		const XMVECTOR p1 = pos - (radius * XMVector3Cross(tangent, camForward));
+		const XMVECTOR p2 = pos + (radius * XMVector3Cross(tangent, camForward));
 
 		Vertex vertex1 = {}, vertex2 = {};
 
