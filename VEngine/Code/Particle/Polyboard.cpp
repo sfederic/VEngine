@@ -63,20 +63,20 @@ void Polyboard::CalcVertices()
 
 	const XMVECTOR start = XMLoadFloat3(&startPoint);
 	const XMVECTOR end = XMLoadFloat3(&endPoint);
-	const XMVECTOR startToEndDir = XMVector3Normalize(end - start);
+	const XMVECTOR tangent = XMVector3Normalize(end - start);
 
 	//@Todo: it's hard to get a nice increment here to add vertices to. For now it looks rough
 	//because the polyboard vertices are generated based on distance to the end point.
-	float length = XMVector3Length(end - start).m128_f32[0];
-	length = std::ceilf(length) + 1.f;
+	float dist = XMVector3Length(end - start).m128_f32[0];
+	dist = (int)std::ceil(dist);
 
 	const auto camForward = activeCamera->GetForwardVectorV();
 
-	for (int i = 0; i < length; i++)
+	const float incr = dist / 10.f;
+
+	for (float i = 0; i < dist; i += incr)
 	{
-		const XMVECTOR pos = start + (startToEndDir * i);
-		const XMVECTOR nextPos = pos + startToEndDir;
-		const XMVECTOR tangent = XMVector3Normalize(nextPos - pos);
+		const XMVECTOR pos = start + (tangent * i);
 
 		//Use this if you need a wavy effect for polyboards
 		//radius = (sinf(i * Core::timeSinceStartup) * 0.15f) + 0.4f;
@@ -86,8 +86,8 @@ void Polyboard::CalcVertices()
 
 		Vertex vertex1 = {}, vertex2 = {};
 
-		XMStoreFloat3(&vertex1.pos, p1);
-		XMStoreFloat3(&vertex2.pos, p2);
+		DirectX::XMStoreFloat3(&vertex1.pos, p1);
+		DirectX::XMStoreFloat3(&vertex2.pos, p2);
 
 		vertex1.uv = XMFLOAT2(0.f, i);
 		vertex2.uv = XMFLOAT2(1.f, i);
@@ -95,6 +95,20 @@ void Polyboard::CalcVertices()
 		vertices.emplace_back(vertex1);
 		vertices.emplace_back(vertex2);
 	}
+
+	const XMVECTOR p1 = end - (radius * XMVector3Cross(tangent, camForward));
+	const XMVECTOR p2 = end + (radius * XMVector3Cross(tangent, camForward));
+
+	Vertex vertex1 = {}, vertex2 = {};
+
+	DirectX::XMStoreFloat3(&vertex1.pos, p1);
+	DirectX::XMStoreFloat3(&vertex2.pos, p2);
+
+	vertex1.uv = XMFLOAT2(0.f, 0);
+	vertex2.uv = XMFLOAT2(1.f, 0);
+
+	vertices.emplace_back(vertex1);
+	vertices.emplace_back(vertex2);
 
 	//Because the vertices aren't triangle based, divide by 3
 	for (int i = 0; i < (vertices.size() / 3) + 1; i++) 
@@ -111,12 +125,12 @@ void Polyboard::CalcVertices()
 
 void Polyboard::SetStartPoint(const XMVECTOR start)
 {
-	XMStoreFloat3(&startPoint, start);
+	DirectX::XMStoreFloat3(&startPoint, start);
 }
 
 void Polyboard::SetEndPoint(const XMVECTOR end)
 {
-	XMStoreFloat3(&endPoint, end);
+	DirectX::XMStoreFloat3(&endPoint, end);
 }
 
 bool Polyboard::RaycastFromStartToEndPoints(HitResult& hit)
