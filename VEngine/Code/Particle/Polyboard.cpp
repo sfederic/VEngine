@@ -65,6 +65,8 @@ void Polyboard::CalcVertices()
 	const XMVECTOR end = XMLoadFloat3(&endPoint);
 	const XMVECTOR startToEndDir = XMVector3Normalize(end - start);
 
+	//@Todo: it's hard to get a nice increment here to add vertices to. For now it looks rough
+	//because the polyboard vertices are generated based on distance to the end point.
 	float length = XMVector3Length(end - start).m128_f32[0];
 	length = std::ceilf(length) + 1.f;
 
