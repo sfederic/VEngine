@@ -35,5 +35,5 @@ void CharacterControllerComponent::Move(XMFLOAT3 displacement, float deltaTime)
 	controller->move(disp, 0.001f, deltaTime, filters);
 
 	auto& controllerPos = controller->getPosition();
-	SetLocalPosition(controllerPos.x, controllerPos.y, controllerPos.z);
+	SetWorldPosition(XMVectorSet(controllerPos.x, controllerPos.y, controllerPos.z, 1.f));
 }
