@@ -68,11 +68,14 @@ private:
 	XMVECTOR reticleWidgetNextPos = XMVectorZero();
 	float reticleWidgetLerpValue = 0.f;
 
-	float movementSpeed = 10.f;
+	float movementSpeed = 0.f;
 	float rotationSpeed = 10.f;
+
+	int damage = 1;
 
 	bool allRangeModeActive = true;
 	bool inDashBladeAttack = false;
 
-	int damage = 1;
+	bool isMoving = false;
+	XMVECTOR movementDirection = XMVectorZero();
 };

@@ -159,29 +159,105 @@ void Player::MovementInput(float deltaTime)
 {
 	if (!CheckMovementAndRotationHaveStopped()) return;
 
+	movementSpeed = std::clamp(movementSpeed, 0.f, 40.f);
+
+	const XMVECTOR offset = movementDirection * movementSpeed * deltaTime;
+	AddPositionV(offset);
+
+	if (isMoving)
+	{
+		movementSpeed += 70.f * deltaTime;
+	}
+	else
+	{
+		movementSpeed -= 60.f * deltaTime;
+	}
+
 	if (Input::GetKeyHeld(Keys::W))
 	{
-		AddPositionV(camera->GetForwardVectorV() * movementSpeed * deltaTime);
+		movementDirection = GetForwardVectorV();
+		isMoving = true;
 	}
-	if (Input::GetKeyHeld(Keys::S))
+	else if (Input::GetKeyHeld(Keys::S))
 	{
-		AddPositionV(camera->GetForwardVectorV() * -movementSpeed * deltaTime);
+		movementDirection = -GetForwardVectorV();
+		isMoving = true;
 	}
-	if (Input::GetKeyHeld(Keys::A))
+	else if (Input::GetKeyHeld(Keys::A))
 	{
-		AddPositionV(camera->GetRightVectorV() * -movementSpeed * deltaTime);
+		movementDirection = -GetRightVectorV();
+		isMoving = true;
 	}
-	if (Input::GetKeyHeld(Keys::D))
+	else if (Input::GetKeyHeld(Keys::D))
 	{
-		AddPositionV(camera->GetRightVectorV() * movementSpeed * deltaTime);
+		movementDirection = GetRightVectorV();
+		isMoving = true;
 	}
-	if (Input::GetKeyHeld(Keys::E))
+	else if (Input::GetKeyHeld(Keys::Q))
 	{
-		AddPositionV(camera->GetUpVectorV() * movementSpeed * deltaTime);
+		movementDirection = -GetUpVectorV();
+		isMoving = true;
 	}
-	if (Input::GetKeyHeld(Keys::Q))
+	else if (Input::GetKeyHeld(Keys::E))
 	{
-		AddPositionV(camera->GetUpVectorV() * -movementSpeed * deltaTime);
+		movementDirection = GetUpVectorV();
+		isMoving = true;
+	}
+
+	if (Input::GetKeyHeld(Keys::W) && Input::GetKeyHeld(Keys::D))
+	{
+		movementDirection = XMVector3Normalize(GetForwardVectorV() + GetRightVectorV());
+		isMoving = true;
+	}
+	else if (Input::GetKeyHeld(Keys::W) && Input::GetKeyHeld(Keys::A))
+	{
+		movementDirection = XMVector3Normalize(GetForwardVectorV() + -GetRightVectorV());
+		isMoving = true;
+	}
+	else if (Input::GetKeyHeld(Keys::W) && Input::GetKeyHeld(Keys::Q))
+	{
+		movementDirection = XMVector3Normalize(GetForwardVectorV() + -GetUpVectorV());
+		isMoving = true;
+	}
+	else if (Input::GetKeyHeld(Keys::W) && Input::GetKeyHeld(Keys::E))
+	{
+		movementDirection = XMVector3Normalize(GetForwardVectorV() + GetUpVectorV());
+		isMoving = true;
+	}
+	else if (Input::GetKeyHeld(Keys::S) && Input::GetKeyHeld(Keys::A))
+	{
+		movementDirection = XMVector3Normalize(-GetForwardVectorV() + -GetRightVectorV());
+		isMoving = true;
+	}
+	else if (Input::GetKeyHeld(Keys::S) && Input::GetKeyHeld(Keys::D))
+	{
+		movementDirection = XMVector3Normalize(-GetForwardVectorV() + GetRightVectorV());
+		isMoving = true;
+	}
+
+	if (Input::GetKeyUp(Keys::W))
+	{
+		isMoving = false;
+	}
+	if (Input::GetKeyUp(Keys::A))
+	{
+		isMoving = false;
+	}
+	if (Input::GetKeyUp(Keys::S))
+	{
+		isMoving = false;
+	}
+	if (Input::GetKeyUp(Keys::D))
+	{
+		isMoving = false;
+	}	
+	if (Input::GetKeyUp(Keys::Q))
+	{
+		isMoving = false;
+	}
+	if (Input::GetKeyUp(Keys::E))
+	{
+		isMoving = false;
 	}
 
 	if (!CheckPlayerWithinLevelBounds())
