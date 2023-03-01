@@ -608,7 +608,7 @@
     <ClCompile Include="Code\UI\Game\LevelCompleteWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\DebugActors\DebugCylinder.cpp">
+    <ClCompile Include="Code\Actors\DebugActors\DebugCapsule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1186,7 +1186,7 @@
     <ClInclude Include="Code\UI\Game\LevelCompleteWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\DebugActors\DebugCylinder.h">
+    <ClInclude Include="Code\Actors\DebugActors\DebugCapsule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

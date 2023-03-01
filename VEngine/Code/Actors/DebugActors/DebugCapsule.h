@@ -1,8 +1,8 @@
 #pragma once
 
-struct DebugCylinder
+struct DebugCapsule
 {
 	class MeshComponent* mesh = nullptr;
 
-	DebugCylinder();
+	DebugCapsule();
 };

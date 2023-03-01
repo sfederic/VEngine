@@ -1,10 +1,10 @@
 #include "vpch.h"
-#include "DebugCylinder.h"
+#include "DebugCapsule.h"
 #include "Components/MeshComponent.h"
 
-DebugCylinder::DebugCylinder()
+DebugCapsule::DebugCapsule()
 {
-	mesh = new MeshComponent("cylinder.vmesh", "test.png");
+	mesh = new MeshComponent("capsule.vmesh", "test.png");
 	mesh->layer = CollisionLayers::Editor;
 	mesh->SetRastState(RastStates::wireframe);
 	mesh->Create();
