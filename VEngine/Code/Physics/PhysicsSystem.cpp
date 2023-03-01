@@ -207,8 +207,8 @@ void PhysicsSystem::CreatePhysicsForDestructibleMesh(DestructibleMeshComponent* 
 void PhysicsSystem::CreateCharacterController(CharacterControllerComponent* characterControllerComponent)
 {
 	PxCapsuleControllerDesc desc = {};
-	desc.height = characterControllerComponent->height;
-	desc.radius = characterControllerComponent->radius;
+	desc.height = characterControllerComponent->GetHeight();
+	desc.radius = characterControllerComponent->GetRadius();
 	desc.stepOffset = 0.3f;
 	desc.volumeGrowth = 1.9f;
 	desc.slopeLimit = cosf(XMConvertToRadians(15.f));
@@ -225,7 +225,7 @@ void PhysicsSystem::CreateCharacterController(CharacterControllerComponent* char
 	PxController* controller = controllerManager->createController(desc);
 	assert(controller);
 
-	characterControllerComponent->controller = controller;
+	characterControllerComponent->SetController(controller);
 }
 
 //PhysX says cooking is fairly intensive with larger meshes
