@@ -67,9 +67,6 @@ void Player::Start()
 	auto cameraFocusPoint = GetPositionV() + GetForwardVectorV() * 3.f;
 	camera->SetWorldRotation(VMath::LookAtRotation(cameraFocusPoint, camera->GetWorldPositionV()));
 
-	nextPos = GetPositionV();
-	nextRot = GetRotationV();
-
 	SetEquippedGears();
 }
 
@@ -92,11 +89,8 @@ void Player::Tick(float deltaTime)
 
 	Interact();
 
-	MovementInput();
+	MovementInput(deltaTime);
 	RotationInput();
-
-	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, movementSpeed));
-	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotationSpeed));
 }
 
 Properties Player::GetProps()
@@ -161,94 +155,75 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 	}
 }
 
-void Player::MovementInput()
+void Player::MovementInput(float deltaTime)
 {
 	if (!CheckMovementAndRotationHaveStopped()) return;
 
-	auto previousPos = nextPos;
-
 	if (Input::GetKeyHeld(Keys::W))
 	{
-		nextPos = GetPositionV() + GetForwardVectorV();
-		if (CheckForObstacle()) nextPos = previousPos;
+		AddPositionV(GetForwardVectorV() * movementSpeed * deltaTime);
 	}
 	else if (Input::GetKeyHeld(Keys::S))
 	{
-		nextPos = GetPositionV() - GetForwardVectorV();
-		if (CheckForObstacle()) nextPos = previousPos;
+		AddPositionV(GetForwardVectorV() * -movementSpeed * deltaTime);
 	}
 	else if (Input::GetKeyHeld(Keys::A))
 	{
-		nextPos = GetPositionV() - GetRightVectorV();
-		if (CheckForObstacle()) nextPos = previousPos;
+		AddPositionV(GetRightVectorV() * -movementSpeed * deltaTime);
 	}
 	else if (Input::GetKeyHeld(Keys::D))
 	{
-		nextPos = GetPositionV() + GetRightVectorV();
-		if (CheckForObstacle()) nextPos = previousPos;
+		AddPositionV(GetRightVectorV() * movementSpeed * deltaTime);
 	}
 	else if (Input::GetKeyHeld(Keys::E))
 	{
-		nextPos = GetPositionV() + GetUpVectorV();
-		if (CheckForObstacle()) nextPos = previousPos;
+		AddPositionV(GetUpVectorV() * movementSpeed * deltaTime);
 	}
 	else if (Input::GetKeyHeld(Keys::Q))
 	{
-		nextPos = GetPositionV() - GetUpVectorV();
-		if (CheckForObstacle()) nextPos = previousPos;
+		AddPositionV(GetUpVectorV() * -movementSpeed * deltaTime);
 	}
 
 	if (!CheckPlayerWithinLevelBounds())
 	{
-		nextPos = previousPos;
 	}
 }
 
 void Player::RotationInput()
 {
-	//Only check if rotation has stopped, as opposed to movement.
-	if (!XMQuaternionEqual(GetRotationV(), nextRot)) return;
-
 	if (Input::GetKeyHeld(Keys::Shift) && Input::GetKeyUp(Keys::Left))
 	{
-		nextRot = XMQuaternionMultiply(GetRotationV(), DirectX::XMQuaternionRotationAxis(GetForwardVectorV(), XMConvertToRadians(90.f)));
 	}
 	else if (Input::GetKeyHeld(Keys::Shift) && Input::GetKeyUp(Keys::Right))
 	{
-		nextRot = XMQuaternionMultiply(GetRotationV(), DirectX::XMQuaternionRotationAxis(GetForwardVectorV(), XMConvertToRadians(-90.f)));
 	}
 	else if (Input::GetKeyHeld(Keys::Shift) && Input::GetKeyUp(Keys::Up))
 	{
-		nextRot = XMQuaternionMultiply(GetRotationV(), DirectX::XMQuaternionRotationAxis(GetRightVectorV(), XMConvertToRadians(-90.f)));
 	}
 	else if (Input::GetKeyHeld(Keys::Shift) && Input::GetKeyUp(Keys::Down))
 	{
-		nextRot = XMQuaternionMultiply(GetRotationV(), DirectX::XMQuaternionRotationAxis(GetRightVectorV(), XMConvertToRadians(90.f)));
 	}
 	else if (Input::GetKeyUp(Keys::Right))
 	{
-		nextRot = XMQuaternionMultiply(GetRotationV(), DirectX::XMQuaternionRotationAxis(GetUpVectorV(), XMConvertToRadians(90.f)));
 	}
 	else if (Input::GetKeyUp(Keys::Left))
 	{
-		nextRot = XMQuaternionMultiply(GetRotationV(), DirectX::XMQuaternionRotationAxis(GetUpVectorV(), XMConvertToRadians(-90.f)));
 	}
 }
 
 bool Player::CheckMovementAndRotationHaveStopped()
 {
-	return XMVector4Equal(GetPositionV(), nextPos) && XMQuaternionEqual(GetRotationV(), nextRot);
+	return true;
 }
 
 bool Player::CheckPlayerWithinLevelBounds()
 {
-	return LevelInstance::system.GetFirstActor()->CheckIfPointInsideLevelBounds(nextPos);
+	return true;
 }
 
 bool Player::CheckForObstacle()
 {
-	HitResult hitResult(this);
-	return Raycast(hitResult, GetPositionV(), nextPos);
+	return true;
 }
 
 void Player::PrimaryGearAction()

@@ -28,7 +28,7 @@ public:
 private:
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
-	void MovementInput();
+	void MovementInput(float deltaTime);
 	void RotationInput();
 
 	bool CheckMovementAndRotationHaveStopped();
@@ -64,9 +64,6 @@ private:
 	float shieldCountdownTimer = 0.5f;
 
 	std::vector<Actor*> previousHitTransparentActors;
-
-	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 
 	XMVECTOR reticleWidgetNextPos = XMVectorZero();
 	float reticleWidgetLerpValue = 0.f;
