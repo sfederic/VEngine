@@ -279,6 +279,7 @@
     <ClCompile Include="Code\Actors\Game\WaveAttackBoss.cpp" />
     <ClCompile Include="Code\Actors\Game\CrashLandEnemy.cpp" />
     <ClCompile Include="Code\UI\Game\LevelCompleteWidget.cpp" />
+    <ClCompile Include="Code\Actors\DebugActors\DebugCylinder.cpp" />
     <ClInclude Include="Code\Actors\Game\AntiAirEnemy.h" />
     <ClInclude Include="Code\Gameplay\Gears\BeamRifleGear.h" />
     <ClInclude Include="Code\Gameplay\Gears\CanonGear.h" />
@@ -565,6 +566,7 @@
     <ClInclude Include="Code\Actors\Game\WaveAttackBoss.h" />
     <ClInclude Include="Code\Actors\Game\CrashLandEnemy.h" />
     <ClInclude Include="Code\UI\Game\LevelCompleteWidget.h" />
+    <ClInclude Include="Code\Actors\DebugActors\DebugCylinder.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
