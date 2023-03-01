@@ -43,7 +43,14 @@ void QtEditor::Tick()
 
     app->processEvents();
 
-    SetMousePos();
+    if (Core::gameplayOn)
+    {
+        SetMousePosFPSGameplay();
+    }
+    else
+    {
+        SetMousePos();
+    }
 
     //update property dock values if game is running
     if (Core::gameplayOn)

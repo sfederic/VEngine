@@ -19,6 +19,7 @@ CameraComponent::CameraComponent(XMFLOAT3 startPos)
 
 void CameraComponent::Tick(float deltaTime)
 {
+	FPSCameraRotation();
 }
 
 XMMATRIX CameraComponent::GetViewMatrix()
