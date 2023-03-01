@@ -28,11 +28,11 @@
 
 Player::Player()
 {
-	mesh = CreateComponent<MeshComponent>("Mesh");
-	rootComponent = mesh;
-
 	camera = CreateComponent<CameraComponent>("Camera");
-	rootComponent->AddChild(camera);
+	rootComponent = camera;
+
+	mesh = CreateComponent<MeshComponent>("Mesh");
+	rootComponent->AddChild(mesh);
 
 	//@Todo: shield boundingbox is too large
 	//shieldMesh = CreateComponent(MeshComponent("ico_sphere.vmesh", "shield.png"), "ShieldMesh");
@@ -47,7 +47,7 @@ void Player::Create()
 
 	mesh->SetMeshFilename("jehuty.vmesh");
 
-	camera->SetLocalPosition(1.f, 0.5f, -2.f);
+	mesh->SetLocalPosition(-1.f, -0.5f, 2.f);
 }
 
 void Player::Start()
@@ -161,27 +161,27 @@ void Player::MovementInput(float deltaTime)
 
 	if (Input::GetKeyHeld(Keys::W))
 	{
-		AddPositionV(GetForwardVectorV() * movementSpeed * deltaTime);
+		AddPositionV(camera->GetForwardVectorV() * movementSpeed * deltaTime);
 	}
-	else if (Input::GetKeyHeld(Keys::S))
+	if (Input::GetKeyHeld(Keys::S))
 	{
-		AddPositionV(GetForwardVectorV() * -movementSpeed * deltaTime);
+		AddPositionV(camera->GetForwardVectorV() * -movementSpeed * deltaTime);
 	}
-	else if (Input::GetKeyHeld(Keys::A))
+	if (Input::GetKeyHeld(Keys::A))
 	{
-		AddPositionV(GetRightVectorV() * -movementSpeed * deltaTime);
+		AddPositionV(camera->GetRightVectorV() * -movementSpeed * deltaTime);
 	}
-	else if (Input::GetKeyHeld(Keys::D))
+	if (Input::GetKeyHeld(Keys::D))
 	{
-		AddPositionV(GetRightVectorV() * movementSpeed * deltaTime);
+		AddPositionV(camera->GetRightVectorV() * movementSpeed * deltaTime);
 	}
-	else if (Input::GetKeyHeld(Keys::E))
+	if (Input::GetKeyHeld(Keys::E))
 	{
-		AddPositionV(GetUpVectorV() * movementSpeed * deltaTime);
+		AddPositionV(camera->GetUpVectorV() * movementSpeed * deltaTime);
 	}
-	else if (Input::GetKeyHeld(Keys::Q))
+	if (Input::GetKeyHeld(Keys::Q))
 	{
-		AddPositionV(GetUpVectorV() * -movementSpeed * deltaTime);
+		AddPositionV(camera->GetUpVectorV() * -movementSpeed * deltaTime);
 	}
 
 	if (!CheckPlayerWithinLevelBounds())
