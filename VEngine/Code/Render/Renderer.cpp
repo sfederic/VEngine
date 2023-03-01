@@ -32,6 +32,7 @@
 #include "Actors/DebugActors/DebugIcoSphere.h"
 #include "Actors/DebugActors/DebugCamera.h"
 #include "Actors/DebugActors/DebugCone.h"
+#include "Actors/DebugActors/DebugCapsule.h"
 #include "Components/CameraComponent.h"
 #include "Components/MeshComponent.h"
 #include "Components/SocketMeshComponent.h"
@@ -43,6 +44,7 @@
 #include "Components/Lights/PointLightComponent.h"
 #include "Components/Lights/SpotLightComponent.h"
 #include "Components/WidgetComponent.h"
+#include "Components/CharacterControllerComponent.h"
 #include "Editor/DebugMenu.h"
 #include "Gameplay/GameInstance.h"
 #include "Particle/ParticleEmitter.h"
@@ -72,6 +74,7 @@ void RenderSocketMeshComponents();
 void RenderInstanceMeshComponents();
 void RenderBounds();
 void RenderPhysicsMeshes();
+void RenderCharacterControllers();
 void RenderCameraMeshes();
 void RenderLightMeshes();
 void RenderPolyboards();
@@ -795,6 +798,7 @@ void Renderer::Render()
 	RenderBounds();
 	RenderLightMeshes();
 	RenderCameraMeshes();
+	RenderCharacterControllers();
 	//RenderDebugLines();
 	RenderPostProcess();
 
@@ -1227,6 +1231,33 @@ void CreateLightProbeBuffers()
 		if (lightProbeRTVs[i]) lightProbeRTVs[i]->Release();
 		rtvDesc.Texture2DArray.FirstArraySlice = i;
 		HR(device->CreateRenderTargetView(lightProbeTexture, &rtvDesc, &lightProbeRTVs[i]));
+	}
+}
+
+void RenderCharacterControllers()
+{
+	static DebugCapsule debugCapsule;
+
+	if (Core::gameplayOn) return;
+
+	MaterialShaderData materialShaderData = {};
+
+	SetRastState(RastStates::wireframe);
+	SetShaders(ShaderItems::SolidColour);
+	SetVertexBuffer(debugCapsule.mesh->GetVertexBuffer());
+
+	materialShaderData.ambient = XMFLOAT4(1.0f, 0.8f, 0.7f, 1.0f); //Pink
+	cbMaterial->Map(&materialShaderData);
+	cbMaterial->SetPS();
+
+	for (auto& characterController : CharacterControllerComponent::system.GetComponents())
+	{
+		shaderMatrices.model = characterController->GetWorldMatrix();
+		shaderMatrices.MakeModelViewProjectionMatrix();
+		cbMatrices->Map(&shaderMatrices);
+		cbMatrices->SetVS();
+
+		DrawMesh(debugCapsule.mesh);
 	}
 }
 
