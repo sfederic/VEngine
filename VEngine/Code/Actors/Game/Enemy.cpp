@@ -7,6 +7,8 @@
 Enemy::Enemy()
 {
 	SetEmptyRootComponent();
+
+	tags.emplace(GameplayTags::TargetableActor);
 }
 
 Properties Enemy::GetProps()
