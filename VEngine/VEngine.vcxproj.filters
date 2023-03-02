@@ -611,6 +611,9 @@
     <ClCompile Include="Code\Actors\DebugActors\DebugCapsule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Components\MouseRotateComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1187,6 +1190,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\DebugActors\DebugCapsule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Components\MouseRotateComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
