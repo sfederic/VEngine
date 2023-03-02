@@ -359,3 +359,8 @@ bool Actor::CanBeTransparentlyOccluded()
 
 	return false;
 }
+
+bool Actor::HasTag(const std::string& tag)
+{
+	return tags.find(tag) != tags.end();
+}

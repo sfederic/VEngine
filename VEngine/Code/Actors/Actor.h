@@ -211,4 +211,6 @@ public:
 	//This function is needed because player to camera transparency can mess with previously hit actors
 	//for example if they're Destroy()ed in battle or by whatever else.
 	bool CanBeTransparentlyOccluded();
+
+	bool HasTag(const std::string& tag);
 };
