@@ -55,16 +55,6 @@ Material MaterialSystem::LoadMaterialFromFile(const std::string filename)
 	return material;
 }
 
-void MaterialSystem::CreateAllMaterials()
-{
-	for (auto& materialIt : materials)
-	{
-		materialIt.second->Create();
-	}
-
-	systemState = SystemStates::Loaded;
-}
-
 void MaterialSystem::Cleanup()
 {
 	materials.clear();

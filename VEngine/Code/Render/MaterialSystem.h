@@ -15,6 +15,5 @@ namespace MaterialSystem
 	void DestroyMaterial(UID materialUID);
 	Material* FindMaterial(UID uid);
 	Material LoadMaterialFromFile(const std::string filename);
-	void CreateAllMaterials();
 	void Cleanup();
 };
