@@ -145,8 +145,6 @@ public:
 
 	Component* FindComponentAllowNull(const std::string componentName);
 
-	//@Todo: there's something weird on renaming components in code via changing CreateComponent() args after
-	//that actor's initial serialisation. It's like it doesn't know how to rename it for some actors.
 	template <typename T>
 	T* CreateComponent(std::string componentName, T component = T())
 	{

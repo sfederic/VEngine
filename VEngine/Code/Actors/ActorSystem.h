@@ -62,8 +62,7 @@ public:
 		World::RemoveActorFromWorld(actors.back().get());
 		actors.pop_back();
 
-		//@Todo: just keep an eye on this. Code like this makes me want to seperate editor from game.
-		//It shouldn't be too bad with Release/NoEditor config though, maybe through an #ifdef here later.
+		//@Todo: Release/NoEditor #ifdef here later.
 		editor->UpdateWorldList();
 		editor->ClearProperties();
 	}
