@@ -5,6 +5,8 @@
 
 class MeshComponent;
 class CameraComponent;
+class CharacterControllerComponent;
+class MouseRotateComponent;
 class PlayerShieldWidget;
 class PlayerReticleWidget;
 class EquippedGearsWidget;
@@ -31,7 +33,6 @@ private:
 	void MovementInput(float deltaTime);
 	void RotationInput();
 
-	bool CheckMovementAndRotationHaveStopped();
 	bool CheckPlayerWithinLevelBounds();
 	bool CheckForObstacle();
 
@@ -56,6 +57,9 @@ private:
 	EquippedGearsWidget* equippedGearsWidget = nullptr;
 
 	MeshComponent* shieldMesh = nullptr;
+
+	CharacterControllerComponent* characterController = nullptr;
+	MouseRotateComponent* mouseRotateComponent = nullptr;
 
 	Gear* primaryGear = nullptr;
 	Gear* secondaryGear = nullptr;

@@ -11,7 +11,9 @@
 #include "Components/MeshComponent.h"
 #include "Components/SliceableMeshComponent.h"
 #include "Components/CameraComponent.h"
+#include "Components/MouseRotateComponent.h"
 #include "Components/Lights/PointLightComponent.h"
+#include "Components/CharacterControllerComponent.h"
 #include "Components/Game/SwordBeam.h"
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/Gears/GearSystem.h"
@@ -28,11 +30,17 @@
 
 Player::Player()
 {
-	camera = CreateComponent<CameraComponent>("Camera");
-	rootComponent = camera;
+	characterController = CreateComponent<CharacterControllerComponent>("CharacterController");
+	rootComponent = characterController;
+
+	mouseRotateComponent = CreateComponent<MouseRotateComponent>("MouseRotate");
+	rootComponent->AddChild(mouseRotateComponent);
 
 	mesh = CreateComponent<MeshComponent>("Mesh");
-	rootComponent->AddChild(mesh);
+	mouseRotateComponent->AddChild(mesh);
+
+	camera = CreateComponent<CameraComponent>("Camera");
+	mouseRotateComponent->AddChild(camera);
 
 	//@Todo: shield boundingbox is too large
 	//shieldMesh = CreateComponent(MeshComponent("ico_sphere.vmesh", "shield.png"), "ShieldMesh");
@@ -42,12 +50,11 @@ Player::Player()
 
 void Player::Create()
 {
-	movementSpeed = 10.f;
-	rotationSpeed = 10.f;
-
 	mesh->SetMeshFilename("jehuty.vmesh");
 
-	mesh->SetLocalPosition(-1.f, -0.5f, 2.f);
+	camera->SetLocalPosition(1.f, 0.5f, -2.f);
+	const XMVECTOR lookAtPoint = mesh->GetWorldPositionV() + (mesh->GetForwardVectorV() * 5.f);
+	camera->SetWorldRotation(VMath::LookAtRotation(lookAtPoint, camera->GetWorldPositionV()));
 }
 
 void Player::Start()
@@ -157,12 +164,12 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 
 void Player::MovementInput(float deltaTime)
 {
-	if (!CheckMovementAndRotationHaveStopped()) return;
-
 	movementSpeed = std::clamp(movementSpeed, 0.f, 40.f);
 
 	const XMVECTOR offset = movementDirection * movementSpeed * deltaTime;
-	AddPositionV(offset);
+	XMFLOAT3 offsetFloat3;
+	XMStoreFloat3(&offsetFloat3, offset);
+	characterController->Move(offsetFloat3, deltaTime);
 
 	if (isMoving)
 	{
@@ -175,63 +182,63 @@ void Player::MovementInput(float deltaTime)
 
 	if (Input::GetKeyHeld(Keys::W))
 	{
-		movementDirection = GetForwardVectorV();
+		movementDirection = mouseRotateComponent->GetForwardVectorV();
 		isMoving = true;
 	}
 	else if (Input::GetKeyHeld(Keys::S))
 	{
-		movementDirection = -GetForwardVectorV();
+		movementDirection = -mouseRotateComponent->GetForwardVectorV();
 		isMoving = true;
 	}
 	else if (Input::GetKeyHeld(Keys::A))
 	{
-		movementDirection = -GetRightVectorV();
+		movementDirection = -mouseRotateComponent->GetRightVectorV();
 		isMoving = true;
 	}
 	else if (Input::GetKeyHeld(Keys::D))
 	{
-		movementDirection = GetRightVectorV();
+		movementDirection = mouseRotateComponent->GetRightVectorV();
 		isMoving = true;
 	}
 	else if (Input::GetKeyHeld(Keys::Q))
 	{
-		movementDirection = -GetUpVectorV();
+		movementDirection = -mouseRotateComponent->GetUpVectorV();
 		isMoving = true;
 	}
 	else if (Input::GetKeyHeld(Keys::E))
 	{
-		movementDirection = GetUpVectorV();
+		movementDirection = mouseRotateComponent->GetUpVectorV();
 		isMoving = true;
 	}
 
 	if (Input::GetKeyHeld(Keys::W) && Input::GetKeyHeld(Keys::D))
 	{
-		movementDirection = XMVector3Normalize(GetForwardVectorV() + GetRightVectorV());
+		movementDirection = XMVector3Normalize(mouseRotateComponent->GetForwardVectorV() + mouseRotateComponent->GetRightVectorV());
 		isMoving = true;
 	}
 	else if (Input::GetKeyHeld(Keys::W) && Input::GetKeyHeld(Keys::A))
 	{
-		movementDirection = XMVector3Normalize(GetForwardVectorV() + -GetRightVectorV());
+		movementDirection = XMVector3Normalize(mouseRotateComponent->GetForwardVectorV() + -mouseRotateComponent->GetRightVectorV());
 		isMoving = true;
 	}
 	else if (Input::GetKeyHeld(Keys::W) && Input::GetKeyHeld(Keys::Q))
 	{
-		movementDirection = XMVector3Normalize(GetForwardVectorV() + -GetUpVectorV());
+		movementDirection = XMVector3Normalize(mouseRotateComponent->GetForwardVectorV() + -mouseRotateComponent->GetUpVectorV());
 		isMoving = true;
 	}
 	else if (Input::GetKeyHeld(Keys::W) && Input::GetKeyHeld(Keys::E))
 	{
-		movementDirection = XMVector3Normalize(GetForwardVectorV() + GetUpVectorV());
+		movementDirection = XMVector3Normalize(mouseRotateComponent->GetForwardVectorV() + mouseRotateComponent->GetUpVectorV());
 		isMoving = true;
 	}
 	else if (Input::GetKeyHeld(Keys::S) && Input::GetKeyHeld(Keys::A))
 	{
-		movementDirection = XMVector3Normalize(-GetForwardVectorV() + -GetRightVectorV());
+		movementDirection = XMVector3Normalize(-mouseRotateComponent->GetForwardVectorV() + -mouseRotateComponent->GetRightVectorV());
 		isMoving = true;
 	}
 	else if (Input::GetKeyHeld(Keys::S) && Input::GetKeyHeld(Keys::D))
 	{
-		movementDirection = XMVector3Normalize(-GetForwardVectorV() + GetRightVectorV());
+		movementDirection = XMVector3Normalize(-mouseRotateComponent->GetForwardVectorV() + mouseRotateComponent->GetRightVectorV());
 		isMoving = true;
 	}
 
@@ -250,7 +257,7 @@ void Player::MovementInput(float deltaTime)
 	if (Input::GetKeyUp(Keys::D))
 	{
 		isMoving = false;
-	}	
+	}
 	if (Input::GetKeyUp(Keys::Q))
 	{
 		isMoving = false;
@@ -258,6 +265,11 @@ void Player::MovementInput(float deltaTime)
 	if (Input::GetKeyUp(Keys::E))
 	{
 		isMoving = false;
+	}
+
+	if (CheckForObstacle())
+	{
+		movementDirection = XMVectorZero();
 	}
 
 	if (!CheckPlayerWithinLevelBounds())
@@ -287,11 +299,6 @@ void Player::RotationInput()
 	}
 }
 
-bool Player::CheckMovementAndRotationHaveStopped()
-{
-	return true;
-}
-
 bool Player::CheckPlayerWithinLevelBounds()
 {
 	return true;
@@ -299,7 +306,7 @@ bool Player::CheckPlayerWithinLevelBounds()
 
 bool Player::CheckForObstacle()
 {
-	return true;
+	return false;
 }
 
 void Player::PrimaryGearAction()
