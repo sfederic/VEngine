@@ -97,7 +97,6 @@ void Player::Tick(float deltaTime)
 	Interact();
 
 	MovementInput(deltaTime);
-	RotationInput();
 }
 
 Properties Player::GetProps()
@@ -266,47 +265,6 @@ void Player::MovementInput(float deltaTime)
 	{
 		isMoving = false;
 	}
-
-	if (CheckForObstacle())
-	{
-		movementDirection = XMVectorZero();
-	}
-
-	if (!CheckPlayerWithinLevelBounds())
-	{
-	}
-}
-
-void Player::RotationInput()
-{
-	if (Input::GetKeyHeld(Keys::Shift) && Input::GetKeyUp(Keys::Left))
-	{
-	}
-	else if (Input::GetKeyHeld(Keys::Shift) && Input::GetKeyUp(Keys::Right))
-	{
-	}
-	else if (Input::GetKeyHeld(Keys::Shift) && Input::GetKeyUp(Keys::Up))
-	{
-	}
-	else if (Input::GetKeyHeld(Keys::Shift) && Input::GetKeyUp(Keys::Down))
-	{
-	}
-	else if (Input::GetKeyUp(Keys::Right))
-	{
-	}
-	else if (Input::GetKeyUp(Keys::Left))
-	{
-	}
-}
-
-bool Player::CheckPlayerWithinLevelBounds()
-{
-	return true;
-}
-
-bool Player::CheckForObstacle()
-{
-	return false;
 }
 
 void Player::PrimaryGearAction()

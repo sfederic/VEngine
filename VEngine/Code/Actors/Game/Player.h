@@ -31,10 +31,6 @@ private:
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
 	void MovementInput(float deltaTime);
-	void RotationInput();
-
-	bool CheckPlayerWithinLevelBounds();
-	bool CheckForObstacle();
 
 	void PrimaryGearAction();
 	void SecondaryGearAction();
