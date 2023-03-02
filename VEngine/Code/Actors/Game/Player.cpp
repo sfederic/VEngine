@@ -358,19 +358,20 @@ void Player::Interact()
 
 //@Todo: it's a bit hard to line up shots, even with the reticle. An idea might be to take from 
 //Kirby on the Switch https://www.youtube.com/watch?v=RFbxi0faiec and do positional hit detection.
+
 //Map reticle to hit actor on raycast (think like Ocarina of Time Z-Target icon) or place just in front of player.
 void Player::SetReticleWidgetPosition(float deltaTime)
 {
 	HitResult hit(this);
-	if (Raycast(hit, GetPositionV(), GetForwardVectorV(), 100.f))
+	if (Raycast(hit, camera->GetWorldPositionV(), camera->GetForwardVectorV(), 100.f))
 	{
 		reticleWidgetNextPos = hit.hitActor->GetHomogeneousPositionV();
-		reticleWidgetLerpValue += deltaTime * 2;
+		reticleWidgetLerpValue += deltaTime * 2.f;
 	}
 	else
 	{
 		reticleWidgetNextPos = GetHomogeneousPositionV();
-		reticleWidgetLerpValue -= deltaTime * 2;
+		reticleWidgetLerpValue -= deltaTime * 2.f;
 	}
 
 	reticleWidgetLerpValue = std::clamp(reticleWidgetLerpValue, 0.f, 1.f);
