@@ -100,14 +100,12 @@ void PropertiesDock::DisplayActorProperties(Actor* actor)
     IterateOverProperties(actorProps, gridRow);
 
     //Iterate over actor's component properties
-    for (auto& componentPair : actor->componentMap)
+    for (auto component : actor->GetAllComponents())
     {
-        Component* component = componentPair.second;
-
         actorPropsGridLayout->addWidget(
             new QLabel(component->name.c_str(), actorPropsWidget), gridRow, 0, 1, 1);
 
-        auto componentProps = componentPair.second->GetProps();
+        auto componentProps = component->GetProps();
         IterateOverProperties(componentProps, gridRow);
     }
 

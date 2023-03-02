@@ -393,12 +393,12 @@ void AssetDock::CreateNewActorTemplateFile()
         s.Serialise(pickedActorProps);
         s.WriteLine(L"next");
 
-        for (auto& componentPair : WorldEditor::GetPickedActor()->componentMap)
+        for (auto component : WorldEditor::GetPickedActor()->GetAllComponents())
         {
             //Write each component's linked componentsystem name
-            s.WriteLine(componentPair.second->GetTypeName().c_str());
+            s.WriteLine(component->GetTypeName().c_str());
 
-            auto componentProps = componentPair.second->GetProps();
+            auto componentProps = component->GetProps();
             s.Serialise(componentProps);
 
             s.WriteLine(L"next");

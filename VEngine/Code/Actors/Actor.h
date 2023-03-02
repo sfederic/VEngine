@@ -18,32 +18,6 @@ using namespace DirectX;
 class Actor
 {
 public:
-	Actor* parent = nullptr;
-	std::vector<Actor*> children;
-
-	std::set<std::string> tags;
-
-	std::map<std::string, Component*> componentMap;
-
-	SpatialComponent* rootComponent = nullptr;
-
-private:
-	IActorSystem* actorSystem = nullptr;
-
-	std::string name;
-
-	UID uid = GenerateUID();
-
-	int actorSystemIndex = -1;
-
-	bool active = true;
-	bool visible = true;
-	bool tickEnabled = true;
-
-public:
-	//GAME SPECIFIC VARS
-
-public:
 	Actor() {}
 
 	XMMATRIX GetWorldMatrix();
@@ -143,6 +117,8 @@ public:
 
 	void SetEmptyRootComponent();
 
+	SpatialComponent& GetRootComponent() { return *rootComponent; }
+
 	Component* FindComponentAllowNull(const std::string componentName);
 
 	template <typename T>
@@ -213,4 +189,18 @@ public:
 	bool CanBeTransparentlyOccluded();
 
 	bool HasTag(const std::string& tag);
+
+protected:
+	Actor* parent = nullptr;
+	std::vector<Actor*> children;
+	std::set<std::string> tags;
+	std::map<std::string, Component*> componentMap;
+	SpatialComponent* rootComponent = nullptr;
+	IActorSystem* actorSystem = nullptr;
+	std::string name;
+	UID uid = GenerateUID();
+	int actorSystemIndex = -1;
+	bool active = true;
+	bool visible = true;
+	bool tickEnabled = true;
 };

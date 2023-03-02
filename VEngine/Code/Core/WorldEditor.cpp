@@ -393,11 +393,12 @@ Actor* WorldEditor::SpawnActorFromTemplateFile(std::string templateFilename, Tra
 	actor->SetUID(GenerateUID());
 	actor->ResetOwnerUIDToComponents();
 
-	for (auto& componentPair : actor->componentMap)
+	auto actorComponents = actor->GetAllComponents();
+	for (auto component : actorComponents)
 	{
-		auto componentProps = componentPair.second->GetProps();
+		auto componentProps = component->GetProps();
 		d.Deserialise(componentProps);
-		componentPair.second->Create();
+		component->Create();
 	}
 
 	//Set the transform, props will have the original transform data.
