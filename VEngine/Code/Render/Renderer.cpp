@@ -84,7 +84,7 @@ void UpdateLights();
 void MapBuffer(ID3D11Resource* resource, const void* src, size_t size);
 void DrawMesh(MeshComponent* mesh);
 void DrawMeshInstanced(InstanceMeshComponent* mesh);
-void DrawBoundingBox(MeshComponent* mesh, DebugBox& debugBox);
+void DrawBoundingBox(MeshComponent* mesh, MeshComponent* boundsMesh);
 
 void RenderDebugLines();
 
@@ -111,8 +111,6 @@ void SetShaderResourcePixel(uint32_t shaderRegister, std::string textureName);
 void SetShaderResourceFromMaterial(uint32_t shaderRegister, Material* material);
 
 void CreatePostProcessRenderTarget();
-
-std::vector<MeshComponent*> GetAllMeshes();
 
 float Renderer::frameTime;
 bool Renderer::drawBoundingBoxes = false;
@@ -545,19 +543,19 @@ void DrawMeshInstanced(InstanceMeshComponent* mesh)
 	context->DrawInstanced(mesh->meshDataProxy.vertices->size(), mesh->GetInstanceCount(), 0, 0);
 }
 
-void DrawBoundingBox(MeshComponent* mesh, DebugBox& debugBox)
+void DrawBoundingBox(MeshComponent* mesh, MeshComponent* boundsMesh)
 {
-	DirectX::BoundingOrientedBox boundingBox = mesh->boundingBox;
+	const DirectX::BoundingOrientedBox boundingBox = mesh->boundingBox;
 
 	//Make extents double for rendering
-	XMFLOAT3 extents = XMFLOAT3(boundingBox.Extents.x + boundingBox.Extents.x,
+	const XMFLOAT3 extents = XMFLOAT3(boundingBox.Extents.x + boundingBox.Extents.x,
 		boundingBox.Extents.y + boundingBox.Extents.y,
 		boundingBox.Extents.z + boundingBox.Extents.z);
 
-	XMVECTOR center = mesh->GetWorldPositionV() + XMLoadFloat3(&boundingBox.Center);
-	XMVECTOR scale = mesh->GetLocalScaleV() * XMLoadFloat3(&extents);
+	const XMVECTOR center = mesh->GetWorldPositionV() + XMLoadFloat3(&boundingBox.Center);
+	const XMVECTOR scale = mesh->GetLocalScaleV() * XMLoadFloat3(&extents);
 
-	XMMATRIX boundsMatrix = XMMatrixAffineTransformation(scale,
+	const XMMATRIX boundsMatrix = XMMatrixAffineTransformation(scale,
 		XMVectorSet(0.f, 0.f, 0.f, 1.f),
 		mesh->GetLocalRotationV(),
 		center);
@@ -573,7 +571,7 @@ void DrawBoundingBox(MeshComponent* mesh, DebugBox& debugBox)
 	cbMatrices->Map(&shaderMatrices);
 	cbMatrices->SetVS();
 
-	DrawMesh(debugBox.boxMesh);
+	DrawMesh(boundsMesh);
 }
 
 //@Todo: can change the input assembly to only take in Line structs to the shader stage. Right now it's taking
@@ -1060,9 +1058,8 @@ void RenderInstanceMeshComponents()
 
 void RenderBounds()
 {
-	static DebugBox debugBox;
-
-	MaterialShaderData materialShaderData = {};
+	auto debugBox = MeshComponent::GetDebugMesh("DebugBox");
+	MaterialShaderData materialShaderData;
 
 	if (Renderer::drawBoundingBoxes)
 	{
@@ -1073,7 +1070,7 @@ void RenderBounds()
 		//the debug mesh actors will crash here. Tried putting the Debug Actors as global pointers
 		//instead of being static, but then Direct2D swapchain/rendertarget errors would happen.
 		//Feels like it might be the GPU doing some funny memory thing with max lights.
-		SetVertexBuffer(debugBox.boxMesh->GetVertexBuffer());
+		SetVertexBuffer(debugBox->GetVertexBuffer());
 
 		//Set debug wireframe material colour
 		materialShaderData.ambient = XMFLOAT4(0.75f, 0.75f, 0.75f, 1.0f);
@@ -1111,7 +1108,7 @@ void RenderBounds()
 			cbMatrices->Map(&shaderMatrices);
 			cbMatrices->SetVS();
 
-			DrawMesh(debugBox.boxMesh);
+			DrawMesh(debugBox);
 		}
 	}
 
@@ -1121,7 +1118,7 @@ void RenderBounds()
 		SetRastState(RastStates::wireframe);
 		SetShaders(ShaderItems::SolidColour);
 
-		SetVertexBuffer(debugBox.boxMesh->GetVertexBuffer());
+		SetVertexBuffer(debugBox->GetVertexBuffer());
 
 		for (auto& boxTrigger : BoxTriggerComponent::system.GetComponents())
 		{
@@ -1148,7 +1145,7 @@ void RenderBounds()
 			cbMaterial->Map(&materialShaderData);
 			cbMaterial->SetPS();
 
-			DrawMesh(debugBox.boxMesh);
+			DrawMesh(debugBox);
 		}
 	}
 }
@@ -1236,15 +1233,14 @@ void CreateLightProbeBuffers()
 
 void RenderCharacterControllers()
 {
-	static DebugCapsule debugCapsule;
-
 	if (Core::gameplayOn) return;
 
-	MaterialShaderData materialShaderData = {};
+	auto debugCapsule = MeshComponent::GetDebugMesh("DebugCapsule");
+	MaterialShaderData materialShaderData;
 
 	SetRastState(RastStates::wireframe);
 	SetShaders(ShaderItems::SolidColour);
-	SetVertexBuffer(debugCapsule.mesh->GetVertexBuffer());
+	SetVertexBuffer(debugCapsule->GetVertexBuffer());
 
 	materialShaderData.ambient = XMFLOAT4(1.0f, 0.8f, 0.7f, 1.0f); //Pink
 	cbMaterial->Map(&materialShaderData);
@@ -1257,21 +1253,20 @@ void RenderCharacterControllers()
 		cbMatrices->Map(&shaderMatrices);
 		cbMatrices->SetVS();
 
-		DrawMesh(debugCapsule.mesh);
+		DrawMesh(debugCapsule);
 	}
 }
 
 void RenderCameraMeshes()
 {
-	static DebugCamera debugCamera;
-
 	if (Core::gameplayOn) return;
 
-	MaterialShaderData materialShaderData = {};
+	auto debugCamera = MeshComponent::GetDebugMesh("DebugCamera");
+	MaterialShaderData materialShaderData;
 
 	SetRastState(RastStates::wireframe);
 	SetShaders(ShaderItems::SolidColour);
-	SetVertexBuffer(debugCamera.mesh->GetVertexBuffer());
+	SetVertexBuffer(debugCamera->GetVertexBuffer());
 
 	materialShaderData.ambient = XMFLOAT4(1.0f, 0.0f, 0.f, 1.0f); //Make cameras red
 	cbMaterial->Map(&materialShaderData);
@@ -1284,17 +1279,17 @@ void RenderCameraMeshes()
 		cbMatrices->Map(&shaderMatrices);
 		cbMatrices->SetVS();
 
-		DrawMesh(debugCamera.mesh);
+		DrawMesh(debugCamera);
 	}
 }
 
 void RenderLightMeshes()
 {
-	static DebugSphere debugSphere;
-	static DebugIcoSphere debugIcoSphere;
-	static DebugCone debugCone;
-
 	if (Core::gameplayOn) return;
+
+	auto debugSphere = MeshComponent::GetDebugMesh("DebugSphere");
+	auto debugIcoSphere = MeshComponent::GetDebugMesh("DebugIcoSphere");
+	auto debugCone = MeshComponent::GetDebugMesh("DebugCone");
 
 	SetRastState(RastStates::wireframe);
 	SetShaders(ShaderItems::SolidColour);
@@ -1306,7 +1301,7 @@ void RenderLightMeshes()
 	cbMaterial->SetPS();
 
 	//DIRECTIONAL LIGHTS
-	SetVertexBuffer(debugSphere.sphereMesh->GetVertexBuffer());
+	SetVertexBuffer(debugSphere->GetVertexBuffer());
 
 	for (auto& directionalLight : DirectionalLightComponent::system.GetComponents())
 	{
@@ -1315,11 +1310,11 @@ void RenderLightMeshes()
 		cbMatrices->Map(&shaderMatrices);
 		cbMatrices->SetVS();
 
-		DrawMesh(debugSphere.sphereMesh);
+		DrawMesh(debugSphere);
 	}
 
 	//POINT LIGHTS
-	SetVertexBuffer(debugIcoSphere.mesh->GetVertexBuffer());
+	SetVertexBuffer(debugIcoSphere->GetVertexBuffer());
 
 	for (auto& pointLight : PointLightComponent::system.GetComponents())
 	{
@@ -1328,11 +1323,11 @@ void RenderLightMeshes()
 		cbMatrices->Map(&shaderMatrices);
 		cbMatrices->SetVS();
 
-		DrawMesh(debugIcoSphere.mesh);
+		DrawMesh(debugIcoSphere);
 	}
 
 	//SPOT LIGHTS
-	SetVertexBuffer(debugCone.mesh->GetVertexBuffer());
+	SetVertexBuffer(debugCone->GetVertexBuffer());
 
 	for (auto& spotLight : SpotLightComponent::system.GetComponents())
 	{
@@ -1341,7 +1336,7 @@ void RenderLightMeshes()
 		cbMatrices->Map(&shaderMatrices);
 		cbMatrices->SetVS();
 
-		DrawMesh(debugCone.mesh);
+		DrawMesh(debugCone);
 	}
 }
 

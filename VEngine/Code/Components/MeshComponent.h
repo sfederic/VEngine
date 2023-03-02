@@ -15,9 +15,12 @@ class MeshComponent : public SpatialComponent
 public:
 	COMPONENT_SYSTEM(MeshComponent)
 
-	//@Todo: need to figure out how to call this in World::Cleanup() because meshcomponent::create()
-	//is called once on world load.
 	static void ResetMeshBuffers();
+
+	//Debug meshes are used by the renderer to display things like bounds, camera, lights, etc.
+	static void CreateDebugMeshes();
+	static void DestroyDebugMeshes();
+	static MeshComponent* GetDebugMesh(std::string name);
 
 	static std::vector<MeshComponent*> SortMeshComponentsByDistance();
 

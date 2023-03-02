@@ -20,9 +20,42 @@
 //Vertex buffers linked to a mesh filename to copy over to new PSOs
 std::unordered_map<std::string, std::unique_ptr<MeshBuffers>> existingMeshBuffers;
 
+std::map<std::string, MeshComponent*> debugMeshes;
+
 void MeshComponent::ResetMeshBuffers()
 {
 	existingMeshBuffers.clear();
+}
+
+void MeshComponent::CreateDebugMeshes()
+{
+	debugMeshes.emplace("DebugBox", new MeshComponent("cube.vmesh", "test.png"));
+	debugMeshes.emplace("DebugCamera", new MeshComponent("camera.vmesh", "test.png"));
+	debugMeshes.emplace("DebugCapsule", new MeshComponent("capsule.vmesh", "test.png"));
+	debugMeshes.emplace("DebugCone", new MeshComponent("small_cone.vmesh", "test.png"));
+	debugMeshes.emplace("DebugIcoSphere", new MeshComponent("small_ico_sphere.vmesh", "test.png"));
+	debugMeshes.emplace("DebugSphere", new MeshComponent("ico_sphere.vmesh", "test.png"));
+
+	for (auto& [name, mesh] : debugMeshes)
+	{
+		mesh->Create();
+	}
+}
+
+void MeshComponent::DestroyDebugMeshes()
+{
+	for (auto& [name, mesh] : debugMeshes)
+	{
+		mesh->Destroy();
+		delete mesh;
+	}
+
+	debugMeshes.clear();
+}
+
+MeshComponent* MeshComponent::GetDebugMesh(std::string name)
+{
+	return debugMeshes.find(name)->second;
 }
 
 std::vector<MeshComponent*> MeshComponent::SortMeshComponentsByDistance()

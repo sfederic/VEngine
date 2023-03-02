@@ -55,6 +55,7 @@ void World::Start()
 	//once here then again in MeshComponent::Create()
 	MaterialSystem::CreateAllMaterials();
 	TextureSystem::CreateAllTextures();
+	MeshComponent::CreateDebugMeshes();
 
 	for (auto actorSystem : activeActorSystems)
 	{
@@ -301,6 +302,8 @@ void World::Cleanup()
 	actorUIDMap.clear();
 	actorNameMap.clear();
 
+	MeshComponent::DestroyDebugMeshes();
+
 	Timer::Cleanup();
 	PhysicsSystem::Reset();
 	AudioSystem::DeleteLoadedAudioAndChannels();
@@ -309,11 +312,7 @@ void World::Cleanup()
 	SpriteSystem::Reset();
 	UISystem::Reset();
 
-	//@Todo: want these functions here but debug mesh data (light point light mesh) which is static loses
-	//its buffer and mesh data on load.
-	//MeshComponent::ResetMeshBuffers();
-	//FBXLoader::ClearExistingMeshData();
-	//FBXLoader::ClearExistingSkeletonData();
+	MeshComponent::ResetMeshBuffers();
 
 	for (auto componentSystem : activeComponentSystems)
 	{
