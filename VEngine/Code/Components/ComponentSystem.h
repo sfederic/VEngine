@@ -124,6 +124,19 @@ public:
 		return nullptr;
 	}
 
+	T* GetComponentByName(std::string name)
+	{
+		for (auto& component : components)
+		{
+			if (component->name == name)
+			{
+				return component.get();
+			}
+		}
+
+		return nullptr;
+	}
+
 	virtual void Serialise(Serialiser& s) override
 	{
 		s.WriteLine(VString::stows(name));
