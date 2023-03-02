@@ -362,8 +362,11 @@ void Player::SetReticleWidgetPosition(float deltaTime)
 	HitResult hit(this);
 	if (Raycast(hit, camera->GetWorldPositionV(), camera->GetForwardVectorV(), 100.f))
 	{
-		reticleWidgetNextPos = hit.hitActor->GetHomogeneousPositionV();
-		reticleWidgetLerpValue += deltaTime * 2.f;
+		if (hit.hitActor->HasTag(GameplayTags::TargetableActor))
+		{
+			reticleWidgetNextPos = hit.hitActor->GetHomogeneousPositionV();
+			reticleWidgetLerpValue += deltaTime * 2.f;
+		}
 	}
 	else
 	{
