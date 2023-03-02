@@ -8,6 +8,8 @@ class IActorSystem;
 struct SpatialComponent;
 struct Transform;
 
+//@Todo: actor delete undo
+
 namespace WorldEditor
 {
 	enum class PickMode
