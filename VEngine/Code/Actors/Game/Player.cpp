@@ -311,7 +311,7 @@ bool Player::CheckForObstacle()
 
 void Player::PrimaryGearAction()
 {
-	if (Input::GetKeyDown(Keys::Up))
+	if (Input::GetMouseLeftUp())
 	{
 		primaryGear->Use();
 	}
@@ -319,7 +319,7 @@ void Player::PrimaryGearAction()
 
 void Player::SecondaryGearAction()
 {
-	if (Input::GetKeyDown(Keys::Down))
+	if (Input::GetMouseRightUp())
 	{
 		secondaryGear->Use();
 	}
