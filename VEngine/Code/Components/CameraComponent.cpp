@@ -7,19 +7,10 @@
 #include "Editor/Editor.h"
 #include "Core/Camera.h"
 
-CameraComponent::CameraComponent()
-{
-}
-
 CameraComponent::CameraComponent(XMFLOAT3 startPos)
 {
 	SetLocalPosition(startPos);
 	UpdateTransform();
-}
-
-void CameraComponent::Tick(float deltaTime)
-{
-	FPSCameraRotation();
 }
 
 XMMATRIX CameraComponent::GetViewMatrix()
@@ -48,31 +39,6 @@ XMMATRIX CameraComponent::GetProjectionMatrix()
 {
 	const float FOVRadian = XMConvertToRadians(FOV);
 	return XMMatrixPerspectiveFovLH(FOVRadian, Renderer::GetAspectRatio(), nearZ, farZ);
-}
-
-void CameraComponent::Pitch(float angle)
-{
-	//The RightFromQuat is important here as GetRightVector() grabs the global directional vector, 
-	//meaning the wall crawling mechanic would mess up FPS controls.
-	const XMMATRIX r = XMMatrixRotationAxis(VMath::RightFromQuat(GetLocalRotationV()), angle);
-	XMVECTOR q = XMQuaternionMultiply(GetLocalRotationV(), XMQuaternionRotationMatrix(r));
-
-	float roll = 0.f, pitch = 0.f, yaw = 0.f;
-	VMath::PitchYawRollFromQuaternion(roll, pitch, yaw, q);
-	pitch = XMConvertToDegrees(pitch);
-	if (pitch > 80.f || pitch < -80.f) 
-	{
-		return; 
-	}
-
-	SetLocalRotation(q);
-}
-
-void CameraComponent::RotateY(float angle)
-{
-	const XMMATRIX r = XMMatrixRotationY(angle);
-	const XMVECTOR q = XMQuaternionMultiply(GetLocalRotationV(), XMQuaternionRotationMatrix(r));
-	SetLocalRotation(q);
 }
 
 void CameraComponent::Move(float d, XMVECTOR axis)
@@ -119,18 +85,6 @@ XMVECTOR CameraComponent::Shake()
 void CameraComponent::SetAsActiveCamera()
 {
 	activeCamera = this;
-}
-
-void CameraComponent::FPSCameraRotation()
-{
-	const int x = editor->centerOffsetX;
-	const int y = editor->centerOffsetY;
-
-	const float dx = -XMConvertToRadians(0.25f * (float)x);
-	const float dy = -XMConvertToRadians(0.25f * (float)y);
-
-	Pitch(dy);
-	RotateY(dx);
 }
 
 Properties CameraComponent::GetProps()

@@ -1,5 +1,7 @@
 #include "vpch.h"
 #include "SpatialComponent.h"
+#include "Core/VMath.h"
+#include "Editor/Editor.h"
 
 void SpatialComponent::AddChild(SpatialComponent* component)
 {
@@ -244,4 +246,41 @@ XMFLOAT3 SpatialComponent::GetUpVector()
 XMVECTOR SpatialComponent::GetUpVectorV()
 {
 	return XMVector3Normalize(GetWorldMatrix().r[1]);
+}
+
+void SpatialComponent::Pitch(float angle)
+{
+	//The RightFromQuat is important here as GetRightVector() grabs the global directional vector, 
+	//meaning the wall crawling mechanic would mess up FPS controls.
+	const XMMATRIX r = XMMatrixRotationAxis(VMath::RightFromQuat(GetLocalRotationV()), angle);
+	XMVECTOR q = XMQuaternionMultiply(GetLocalRotationV(), XMQuaternionRotationMatrix(r));
+
+	float roll = 0.f, pitch = 0.f, yaw = 0.f;
+	VMath::PitchYawRollFromQuaternion(roll, pitch, yaw, q);
+	pitch = XMConvertToDegrees(pitch);
+	if (pitch > 80.f || pitch < -80.f)
+	{
+		return;
+	}
+
+	SetLocalRotation(q);
+}
+
+void SpatialComponent::RotateY(float angle)
+{
+	const XMMATRIX r = XMMatrixRotationY(angle);
+	const XMVECTOR q = XMQuaternionMultiply(GetLocalRotationV(), XMQuaternionRotationMatrix(r));
+	SetLocalRotation(q);
+}
+
+void SpatialComponent::FPSCameraRotation()
+{
+	const int x = editor->centerOffsetX;
+	const int y = editor->centerOffsetY;
+
+	const float dx = -XMConvertToRadians(0.25f * (float)x);
+	const float dy = -XMConvertToRadians(0.25f * (float)y);
+
+	Pitch(dy);
+	RotateY(dx);
 }

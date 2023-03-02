@@ -57,4 +57,9 @@ struct SpatialComponent : Component
 	XMVECTOR GetRightVectorV();
 	XMFLOAT3 GetUpVector();
 	XMVECTOR GetUpVectorV();
+
+protected:
+	void Pitch(float angle);
+	void RotateY(float angle);
+	void FPSCameraRotation();
 };
