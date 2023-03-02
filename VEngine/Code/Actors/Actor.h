@@ -189,6 +189,7 @@ public:
 	bool CanBeTransparentlyOccluded();
 
 	bool HasTag(const std::string& tag);
+	void AddTag(const std::string& tag) { tags.insert(tag); }
 
 protected:
 	Actor* parent = nullptr;
