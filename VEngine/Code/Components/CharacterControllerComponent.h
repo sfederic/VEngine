@@ -25,6 +25,6 @@ public:
 private:
 	physx::PxController* controller = nullptr;
 
-	float height = 2.0f;
-	float radius = 1.0f;
+	float height = 1.0f;
+	float radius = 0.5f;
 };
