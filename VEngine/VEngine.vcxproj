@@ -281,6 +281,7 @@
     <ClCompile Include="Code\UI\Game\LevelCompleteWidget.cpp" />
     <ClCompile Include="Code\Actors\DebugActors\DebugCapsule.cpp" />
     <ClCompile Include="Code\Components\MouseRotateComponent.cpp" />
+    <ClCompile Include="Code\Actors\Game\TargetableMesh.cpp" />
     <ClInclude Include="Code\Actors\Game\AntiAirEnemy.h" />
     <ClInclude Include="Code\Gameplay\Gears\BeamRifleGear.h" />
     <ClInclude Include="Code\Gameplay\Gears\CanonGear.h" />
@@ -569,6 +570,7 @@
     <ClInclude Include="Code\UI\Game\LevelCompleteWidget.h" />
     <ClInclude Include="Code\Actors\DebugActors\DebugCapsule.h" />
     <ClInclude Include="Code\Components\MouseRotateComponent.h" />
+    <ClInclude Include="Code\Actors\Game\TargetableMesh.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
