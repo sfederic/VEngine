@@ -16,6 +16,8 @@ CrashLandEnemy::CrashLandEnemy()
 
 void CrashLandEnemy::Create()
 {
+	__super::Create();
+
 	mesh->SetMeshFilename("ico_sphere.vmesh");
 }
 

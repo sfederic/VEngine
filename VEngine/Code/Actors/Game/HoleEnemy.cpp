@@ -9,6 +9,8 @@ HoleEnemy::HoleEnemy()
 
 void HoleEnemy::Create()
 {
+	__super::Create();
+
 	hull = CreateComponent("HullMesh", MeshComponent("hole_enemy.vmesh", "test.png"));
 	hull->SetRastState(RastStates::noBackCull);
 	hull->AddTag(GameplayTags::InvincibleMeshPiece);

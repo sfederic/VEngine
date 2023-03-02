@@ -8,7 +8,7 @@ class SpinningOrientationEnemy : public OrientationEnemy
 public:
 	ACTOR_SYSTEM(SpinningOrientationEnemy);
 
-	void Create() override { OrientationEnemy::Create(); }
+	void Create() override { __super::Create(); }
 	void Start() override;
 	void Tick(float deltaTime) override;
 	bool CanBeHit(AttackTypes attackType) override { return OrientationEnemy::CanBeHit(attackType); }

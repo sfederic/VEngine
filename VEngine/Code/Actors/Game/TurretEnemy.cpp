@@ -7,6 +7,8 @@
 
 void TurretEnemy::Create()
 {
+    __super::Create();
+
     auto mesh = CreateComponent("Mesh", MeshComponent("turret.vmesh", "test.png"));
     rootComponent->AddChild(mesh);
 }

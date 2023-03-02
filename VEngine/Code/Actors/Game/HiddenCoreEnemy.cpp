@@ -5,6 +5,8 @@
 
 void HiddenCoreEnemy::Create()
 {
+	__super::Create();
+
 	health = 2;
 
 	hull = CreateComponent("Hull", SliceableMeshComponent());

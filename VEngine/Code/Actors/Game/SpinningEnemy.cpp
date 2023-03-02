@@ -6,6 +6,8 @@
 
 void SpinningEnemy::Create()
 {
+	__super::Create();
+
 	CreateMesh("MeshCore", XMFLOAT3(0.f, 0.f, 0.f));
 	CreateMesh("MeshX+", XMFLOAT3(1.f, 0.f, 0.f));
 	CreateMesh("MeshX-", XMFLOAT3(-1.f, 0.f, 0.f));

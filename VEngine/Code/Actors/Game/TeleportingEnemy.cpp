@@ -26,8 +26,8 @@ void TeleportingEnemy::Tick(float deltaTime)
 
 void TeleportingEnemy::Create()
 {
+	__super::Create();
 	mesh->SetMeshFilename("cube.vmesh");
-
 	boxTrigger->SetExtents(2.f, 2.f, 2.f);
 }
 

@@ -11,7 +11,8 @@ public:
 	ACTOR_SYSTEM(Enemy);
 
 	Enemy();
-	virtual Properties GetProps() override;
+	void Create() override;
+	Properties GetProps() override;
 
 	virtual bool CanBeHit(AttackTypes attackType) { return true; }
 	bool CheckIfAllTaggedMeshesAreDestroyed();

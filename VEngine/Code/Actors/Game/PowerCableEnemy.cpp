@@ -14,6 +14,8 @@ PowerCableEnemy::PowerCableEnemy()
 
 void PowerCableEnemy::Create()
 {
+	__super::Create();
+
 	mesh->SetMeshFilename("cube.vmesh");
 
 	shieldMesh->SetMeshFilename("sphere.vmesh");

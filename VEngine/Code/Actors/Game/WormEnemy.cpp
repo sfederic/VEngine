@@ -5,6 +5,8 @@
 
 void WormEnemy::Create()
 {
+    __super::Create();
+
     auto mesh1 = CreateComponent("Mesh1", MeshComponent("cube.vmesh", "test.png"));
     mesh1->SetLocalScale(0.9f, 0.9f, 0.9f);
     mesh1->AddTag(GameplayTags::EnemyMeshPiece);

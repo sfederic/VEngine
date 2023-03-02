@@ -16,8 +16,8 @@ AntiAirEnemy::AntiAirEnemy()
 
 void AntiAirEnemy::Create()
 {
+	__super::Create();
 	mesh->SetMeshFilename("anti_air_enemy.vmesh");
-
 	aimBeam->SetTextureFilename("Particle/beam_red.png");
 }
 

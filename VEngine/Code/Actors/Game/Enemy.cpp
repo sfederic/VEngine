@@ -7,7 +7,10 @@
 Enemy::Enemy()
 {
 	SetEmptyRootComponent();
+}
 
+void Enemy::Create()
+{
 	tags.emplace(GameplayTags::TargetableActor);
 }
 
