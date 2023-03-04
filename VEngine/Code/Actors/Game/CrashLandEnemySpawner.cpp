@@ -2,6 +2,7 @@
 #include "CrashLandEnemySpawner.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Actors/Game/CrashLandEnemy.h"
+#include "Core/VMath.h"
 
 CrashLandEnemySpawner::CrashLandEnemySpawner()
 {
@@ -35,9 +36,10 @@ void CrashLandEnemySpawner::SpawnCrashLandEnemy()
 		return;
 	}
 
-	auto crashLandEnemy = CrashLandEnemy::system.Add();
-	auto spawnPoint = boxTrigger->GetRandomPointInTrigger();
-	crashLandEnemy->SetPosition(spawnPoint);
+	Transform transform;
+	transform.position = boxTrigger->GetRandomPointInTrigger();
+	auto crashLandEnemy = CrashLandEnemy::system.Add(transform);
+	crashLandEnemy->SetCrashLandDirection(-VMath::GlobalUpVector());
 
 	numOfEnemiesToSpawn--;
 }
