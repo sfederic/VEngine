@@ -13,9 +13,13 @@ EnemySpawner::EnemySpawner()
 	rootComponent = boxTrigger;
 }
 
-void EnemySpawner::Start()
+void EnemySpawner::Tick(float deltaTime)
 {
-	Timer::SetTimer(spawnInterval, std::bind(&EnemySpawner::SpawnEnemy, this), true);
+	spawnTimer += deltaTime;
+	if (spawnTimer > spawnInterval)
+	{
+		SpawnEnemy();
+	}
 }
 
 Properties EnemySpawner::GetProps()

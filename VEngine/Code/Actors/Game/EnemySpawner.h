@@ -12,13 +12,16 @@ public:
 	ACTOR_SYSTEM(EnemySpawner);
 
 	EnemySpawner();
-	virtual void Start() override;
+	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 
 	void SpawnEnemy();
 
 private:
 	BoxTriggerComponent* boxTrigger = nullptr;
+
+	float spawnTimer = 0.f;
 	float spawnInterval = 3.0f;
+
 	int numOfEnemiesToSpawn = 25;
 };
