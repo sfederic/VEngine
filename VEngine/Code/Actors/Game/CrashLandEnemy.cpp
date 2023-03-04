@@ -35,7 +35,7 @@ void CrashLandEnemy::Tick(float deltaTime)
 	HitResult hitResult(this);
 	if (!boxTrigger->QuickInPlaceBoxCast(hitResult, false))
 	{
-		constexpr float moveSpeed = 5.f;
+		constexpr float moveSpeed = 15.f;
 		const XMVECTOR moveOffset = crashLandDirection * moveSpeed * deltaTime;
 		AddPositionV(moveOffset);
 	}
