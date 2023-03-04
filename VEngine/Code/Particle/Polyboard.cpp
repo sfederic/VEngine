@@ -68,7 +68,7 @@ void Polyboard::CalcVertices()
 	//@Todo: it's hard to get a nice increment here to add vertices to. For now it looks rough
 	//because the polyboard vertices are generated based on distance to the end point.
 	float dist = XMVector3Length(end - start).m128_f32[0];
-	dist = (int)std::ceil(dist);
+	dist = std::ceil(dist);
 
 	const auto camForward = activeCamera->GetForwardVectorV();
 
