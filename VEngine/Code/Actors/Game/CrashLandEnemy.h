@@ -4,6 +4,7 @@
 
 class MeshComponent;
 class BoxTriggerComponent;
+class ParticleEmitter;
 
 //@Todo: I'd love a visual effect like a growth/vines coming out of the enemy into the structure/floor
 //its landed on once it has landed.
@@ -24,7 +25,8 @@ public:
 
 private:
 	MeshComponent* mesh = nullptr;
-	BoxTriggerComponent* boxTrigger = nullptr;
+	BoxTriggerComponent* boxTrigger = nullptr; 
+	ParticleEmitter* smokeTrailEmitter = nullptr;
 
 	XMVECTOR crashLandDirection = XMVectorZero();
 };
