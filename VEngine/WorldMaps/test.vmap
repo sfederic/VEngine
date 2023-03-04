@@ -1,3 +1,24 @@
+CrashLandEnemySpawner
+1
+ Enabled
+1
+ Position
+0 17 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+CrashLandEnemySpawner0
+Spawn Count
+10
+Spawn Interval
+3
+UID
+400750971
+next
 DirectionalLightActor
 1
  Enabled
@@ -128,40 +149,8 @@ Player0
 UID
 615536406
 next
-TargetableMesh
-2
- Enabled
-1
- Position
-1 11 -16
- Rotation
-0 0 0 1
- Scale
-5 1 5
- Visible
-1
-Name
-TargetableMesh0
-UID
-1707235924
-next
- Enabled
-1
- Position
-8 11 -13
- Rotation
-0 0 0 1
- Scale
-5 5 1
- Visible
-1
-Name
-TargetableMesh1
-UID
-970746917
-next
 BoxTriggerComponent
-1
+2
 2970795623
 BoxTrigger
  Enabled
@@ -180,6 +169,25 @@ Offset
 0 0 0
 UID
 2455471168
+next
+400750971
+BoxTrigger
+ Enabled
+1
+ Pos
+0 17 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+10 1 10
+Offset
+0 0 0
+UID
+2890356117
 next
 CameraComponent
 1
@@ -249,7 +257,7 @@ UID
 3810798746
 next
 MeshComponent
-8
+6
 1461117255
 Mesh
  Enabled
@@ -555,108 +563,6 @@ Trans. Occlude
 0
 UID
 3887836342
-next
-1707235924
-Mesh
- Enabled
-1
- Pos
-1 11 -16
- Rot
-0 0 0 1
- Scale
-5 1 5
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1990056254
-next
-970746917
-Mesh
- Enabled
-1
- Pos
-8 11 -13
- Rot
-0 0 0 1
- Scale
-5 5 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3082346389
 next
 MouseRotateComponent
 1
