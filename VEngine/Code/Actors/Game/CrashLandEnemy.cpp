@@ -5,6 +5,7 @@
 #include "Components/BoxTriggerComponent.h"
 #include "Physics/Raycast.h"
 #include "Particle/ParticleEmitter.h"
+#include "Gameplay/GameUtils.h"
 
 CrashLandEnemy::CrashLandEnemy()
 {
@@ -43,5 +44,9 @@ void CrashLandEnemy::Tick(float deltaTime)
 	{
 		smokeTrailEmitter->SetVisibility(false);
 		smokeTrailEmitter->SetActive(false);
+	
+		GameUtils::CameraShake(0.5f);
+
+		SetTickEnabled(false);
 	}
 }

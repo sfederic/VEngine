@@ -101,7 +101,7 @@ public:
 	void SetVisibility(bool visibility) { visible = visibility; }
 	bool IsVisible() { return visible; }
 
-	void SetTickEnabled(const bool enabled);
+	void SetTickEnabled(bool enabled);
 	inline bool IsTickEnabled() { return tickEnabled; }
 
 	//Set Actor and components active field as opposite of what it currently is.

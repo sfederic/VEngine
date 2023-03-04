@@ -246,7 +246,7 @@ void Actor::SetActive(bool newActiveValue)
 	}
 }
 
-void Actor::SetTickEnabled(const bool enabled)
+void Actor::SetTickEnabled(bool enabled)
 {
 	tickEnabled = enabled;
 }
