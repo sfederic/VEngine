@@ -113,6 +113,11 @@ void Player::InflictDamage(float damage)
 	shieldCountdownTimer = 0.5f;
 }
 
+XMVECTOR Player::GetAimDirection()
+{
+	return camera->GetForwardVectorV();
+}
+
 //Note: Default blend state needs to already be set for the mesh.
 void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 {

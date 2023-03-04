@@ -26,6 +26,7 @@ public:
 
 	void InflictDamage(float damage);
 	auto GetDamage() { return damage; }
+	XMVECTOR GetAimDirection();
 
 private:
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();

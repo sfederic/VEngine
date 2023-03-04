@@ -16,7 +16,7 @@ void CanonGear::Use()
 	const auto damage = player->GetDamage();
 
 	HitResult hitResult(player);
-	if (Raycast(hitResult, player->GetPositionV(), player->GetForwardVectorV(), 1000.f))
+	if (Raycast(hitResult, player->GetPositionV(), player->GetAimDirection(), 1000.f))
 	{
 		GameUtils::SpawnSpriteSheet("Sprites/explosion.png", hitResult.GetHitPosV(), false, 4, 4);
 

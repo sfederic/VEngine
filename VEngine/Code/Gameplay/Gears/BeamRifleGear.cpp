@@ -16,7 +16,7 @@ void BeamRifleGear::Use()
 	const auto damage = player->GetDamage();
 
 	HitResult hitResult(player);
-	if (Raycast(hitResult, player->GetPositionV(), player->GetForwardVectorV(), 1000.f))
+	if (Raycast(hitResult, player->GetPositionV(), player->GetAimDirection(), 1000.f))
 	{
 		const XMVECTOR beamEnd = player->GetPositionV() + (player->GetForwardVectorV() * 50.f);
 		//@Todo: need a better scale down effect here on the beam.
