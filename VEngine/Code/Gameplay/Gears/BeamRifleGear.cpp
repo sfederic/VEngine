@@ -14,11 +14,12 @@ void BeamRifleGear::Use()
 {
 	const auto player = Player::system.GetFirstActor();
 	const auto damage = player->GetDamage();
+	const auto aimDirection = player->GetAimDirection();
 
 	HitResult hitResult(player);
-	if (Raycast(hitResult, player->GetPositionV(), player->GetAimDirection(), 1000.f))
+	if (Raycast(hitResult, player->GetPositionV(), aimDirection, 1000.f))
 	{
-		const XMVECTOR beamEnd = player->GetPositionV() + (player->GetForwardVectorV() * 50.f);
+		const XMVECTOR beamEnd = player->GetPositionV() + (aimDirection * 50.f);
 		//@Todo: need a better scale down effect here on the beam.
 		GameUtils::SpawnPolyboard("Particle/beam_blue.png", player->GetPositionV(), beamEnd, 0.3f);
 
