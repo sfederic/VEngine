@@ -16,6 +16,7 @@ void CrashLandEnemySpawner::Tick(float deltaTime)
 	spawnTimer += deltaTime;
 	if (spawnTimer > spawnInterval)
 	{
+		spawnTimer = 0.f;
 		SpawnCrashLandEnemy();
 	}
 }
@@ -39,6 +40,9 @@ void CrashLandEnemySpawner::SpawnCrashLandEnemy()
 	Transform transform;
 	transform.position = boxTrigger->GetRandomPointInTrigger();
 	auto crashLandEnemy = CrashLandEnemy::system.Add(transform);
+
+	crashLandEnemy->Create();
+	crashLandEnemy->CreateAllComponents();
 	crashLandEnemy->SetCrashLandDirection(-VMath::GlobalUpVector());
 
 	numOfEnemiesToSpawn--;
