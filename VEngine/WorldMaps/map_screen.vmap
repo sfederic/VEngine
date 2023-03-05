@@ -15,29 +15,31 @@ LevelInstance0
 UID
 3015249252
 next
-MapScreenSelector
+MapScreenPlayer
 1
  Enabled
 1
  Position
--2 -3 -4
+1 3 -7
  Rotation
 0 0 0 1
  Scale
 1 1 1
  Visible
 1
+All Range Mode
+1
 Name
-MapScreenSelector0
+MapScreenPlayer0
 UID
-254326304
+189886413
 next
 MapSelectionActor
 1
  Enabled
 1
  Position
--2 -2 -1
+-2 -1 -1
  Rotation
 -0 0 -0 1
  Scale
@@ -175,7 +177,7 @@ BoxTrigger
  Enabled
 0
  Pos
--2 -2 -1
+-2 -1 -1
  Rot
 -0 0 -0 1
  Scale
@@ -183,7 +185,7 @@ BoxTrigger
  Visible
 1
 Extents
-1 1 1
+2 2 2
 Offset
 0 0 0
 UID
@@ -191,14 +193,14 @@ UID
 next
 CameraComponent
 1
-254326304
+189886413
 Camera
  Enabled
 1
  Pos
-0 3 -3
+1 0.5 -2
  Rot
-0.382683 0 0 0.92388
+0.0352005 -0.0708449 0.00250162 0.996863
  Scale
 1 1 1
  Visible
@@ -210,27 +212,82 @@ Far Z
 Near Z
 0.01
 UID
-1524280027
+876998372
 next
-EmptyComponent
+CharacterControllerComponent
 1
-254326304
-Root
+189886413
+CharacterController
  Enabled
 1
  Pos
--2 -3 -4
+1 3 -7
  Rot
 0 0 0 1
  Scale
 1 1 1
  Visible
 1
+Height
+1
+Radius
+0.5
 UID
-203244874
+3159833250
 next
 MeshComponent
-5
+6
+189886413
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+jehuty.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2643026363
+next
 2975167817
 Mesh
  Enabled
@@ -485,6 +542,23 @@ Trans. Occlude
 0
 UID
 2677924351
+next
+MouseRotateComponent
+1
+189886413
+MouseRotate
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+1861569168
 next
 PointLightComponent
 1
