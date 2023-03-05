@@ -16,6 +16,10 @@ std::vector<std::unique_ptr<Widget>> UISystem::widgets;
 //Every widget currently being displayed on screen
 std::vector<Widget*> UISystem::widgetsInViewport;
 
+//Whether the mouse control can be used during gameplay (for when widgets are active and the player 
+//has a mouse-based control scheme on the camera or itself).
+static bool widgetControlActive = false;
+
 //D2D objects
 ID2D1Factory* d2dFactory;
 ID2D1RenderTarget* d2dRenderTarget;
@@ -193,4 +197,14 @@ void UISystem::DrawRect(const Layout& layout, const D2D1_COLOR_F colour, const f
 	brushShapes->SetOpacity(opacity);
 
 	d2dRenderTarget->DrawRectangle(layout.rect, brushShapes, lineWidth);
+}
+
+void UISystem::SetWidgetControlActive(bool active)
+{
+	widgetControlActive = active;
+}
+
+bool UISystem::GetWidgetControlActive()
+{
+	return widgetControlActive;
 }

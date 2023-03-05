@@ -50,4 +50,7 @@ namespace UISystem
 	void RemoveAllWidgets();
 	void Cleanup();
 	void Reset();
+
+	void SetWidgetControlActive(bool active);
+	bool GetWidgetControlActive();
 };

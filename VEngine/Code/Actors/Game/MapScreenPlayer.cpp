@@ -20,6 +20,8 @@ void MapScreenPlayer::Tick(float deltaTime)
 
 void MapScreenPlayer::SetLevelInfoWidgets(std::wstring_view title, std::wstring_view desc, std::string_view levelFilename)
 {
+	SetMouseInputForCameraRotation(false);
+
 	mapSelectionInfoWidget->title = title;
 	mapSelectionInfoWidget->description = desc;
 	mapSelectionInfoWidget->levelToLoad = levelFilename;
@@ -32,4 +34,6 @@ void MapScreenPlayer::RemoveLevelInfoWidgets()
 {
 	mapSelectionInfoWidget->RemoveFromViewport();
 	gearSelectionWidget->RemoveFromViewport();
+
+	SetMouseInputForCameraRotation(true);
 }

@@ -31,7 +31,7 @@ public:
 protected:
 	void MovementInput(float deltaTime);
 	void SetCameraAsActive();
-	void SetMouseInputForCamera(bool useInput);
+	void SetMouseInputForCameraRotation(bool useInput);
 
 private:
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();

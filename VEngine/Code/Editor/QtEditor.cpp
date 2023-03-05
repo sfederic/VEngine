@@ -21,6 +21,7 @@
 #include "Core/Serialiser.h"
 #include "Core/Core.h"
 #include "Render/MaterialSystem.h"
+#include "UI/UISystem.h"
 
 void QtEditor::Init(int argc, char* argv[])
 {
@@ -43,7 +44,7 @@ void QtEditor::Tick()
 
     app->processEvents();
 
-    if (Core::gameplayOn)
+    if (Core::gameplayOn && !UISystem::GetWidgetControlActive())
     {
         SetMousePosFPSGameplay();
     }
