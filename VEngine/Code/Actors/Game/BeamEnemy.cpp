@@ -6,10 +6,8 @@
 #include "Particle/Polyboard.h"
 #include "Physics/Raycast.h"
 
-void BeamEnemy::Create()
+BeamEnemy::BeamEnemy()
 {
-	__super::Create();
-
 	auto mesh = CreateComponent("Mesh", MeshComponent("turret.vmesh", "test.png"));
 	rootComponent->AddChild(mesh);
 
@@ -17,8 +15,10 @@ void BeamEnemy::Create()
 	rootComponent->AddChild(beam);
 }
 
-void BeamEnemy::Start()
+void BeamEnemy::Create()
 {
+	__super::Create();
+
 	rotateDirection = VMath::RandomUnitDirectionVector();
 }
 
