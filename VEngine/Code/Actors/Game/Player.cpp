@@ -92,6 +92,8 @@ void Player::Tick(float deltaTime)
 	SecondaryGearAction();
 	//ShieldLogic(deltaTime);
 
+	LockOnTarget();
+
 	Interact();
 
 	MovementInput(deltaTime);
@@ -182,65 +184,75 @@ void Player::MovementInput(float deltaTime)
 		movementSpeed -= 60.f * deltaTime;
 	}
 
+	SpatialComponent* moveComponent = nullptr;
+	if (lockOnActor != nullptr)
+	{
+		moveComponent = camera;
+	}
+	else
+	{
+		moveComponent = mouseRotateComponent;
+	}
+
 	if (Input::GetKeyHeld(Keys::W))
 	{
-		movementDirection = mouseRotateComponent->GetForwardVectorV();
+		movementDirection = moveComponent->GetForwardVectorV();
 		isMoving = true;
 	}
 	else if (Input::GetKeyHeld(Keys::S))
 	{
-		movementDirection = -mouseRotateComponent->GetForwardVectorV();
+		movementDirection = -moveComponent->GetForwardVectorV();
 		isMoving = true;
 	}
 	else if (Input::GetKeyHeld(Keys::A))
 	{
-		movementDirection = -mouseRotateComponent->GetRightVectorV();
+		movementDirection = -moveComponent->GetRightVectorV();
 		isMoving = true;
 	}
 	else if (Input::GetKeyHeld(Keys::D))
 	{
-		movementDirection = mouseRotateComponent->GetRightVectorV();
+		movementDirection = moveComponent->GetRightVectorV();
 		isMoving = true;
 	}
 	else if (Input::GetKeyHeld(Keys::Q))
 	{
-		movementDirection = -mouseRotateComponent->GetUpVectorV();
+		movementDirection = -moveComponent->GetUpVectorV();
 		isMoving = true;
 	}
 	else if (Input::GetKeyHeld(Keys::E))
 	{
-		movementDirection = mouseRotateComponent->GetUpVectorV();
+		movementDirection = moveComponent->GetUpVectorV();
 		isMoving = true;
 	}
 
 	if (Input::GetKeyHeld(Keys::W) && Input::GetKeyHeld(Keys::D))
 	{
-		movementDirection = XMVector3Normalize(mouseRotateComponent->GetForwardVectorV() + mouseRotateComponent->GetRightVectorV());
+		movementDirection = XMVector3Normalize(moveComponent->GetForwardVectorV() + moveComponent->GetRightVectorV());
 		isMoving = true;
 	}
 	else if (Input::GetKeyHeld(Keys::W) && Input::GetKeyHeld(Keys::A))
 	{
-		movementDirection = XMVector3Normalize(mouseRotateComponent->GetForwardVectorV() + -mouseRotateComponent->GetRightVectorV());
+		movementDirection = XMVector3Normalize(moveComponent->GetForwardVectorV() + -moveComponent->GetRightVectorV());
 		isMoving = true;
 	}
 	else if (Input::GetKeyHeld(Keys::W) && Input::GetKeyHeld(Keys::Q))
 	{
-		movementDirection = XMVector3Normalize(mouseRotateComponent->GetForwardVectorV() + -mouseRotateComponent->GetUpVectorV());
+		movementDirection = XMVector3Normalize(moveComponent->GetForwardVectorV() + -moveComponent->GetUpVectorV());
 		isMoving = true;
 	}
 	else if (Input::GetKeyHeld(Keys::W) && Input::GetKeyHeld(Keys::E))
 	{
-		movementDirection = XMVector3Normalize(mouseRotateComponent->GetForwardVectorV() + mouseRotateComponent->GetUpVectorV());
+		movementDirection = XMVector3Normalize(moveComponent->GetForwardVectorV() + moveComponent->GetUpVectorV());
 		isMoving = true;
 	}
 	else if (Input::GetKeyHeld(Keys::S) && Input::GetKeyHeld(Keys::A))
 	{
-		movementDirection = XMVector3Normalize(-mouseRotateComponent->GetForwardVectorV() + -mouseRotateComponent->GetRightVectorV());
+		movementDirection = XMVector3Normalize(-moveComponent->GetForwardVectorV() + -moveComponent->GetRightVectorV());
 		isMoving = true;
 	}
 	else if (Input::GetKeyHeld(Keys::S) && Input::GetKeyHeld(Keys::D))
 	{
-		movementDirection = XMVector3Normalize(-mouseRotateComponent->GetForwardVectorV() + mouseRotateComponent->GetRightVectorV());
+		movementDirection = XMVector3Normalize(-moveComponent->GetForwardVectorV() + moveComponent->GetRightVectorV());
 		isMoving = true;
 	}
 
@@ -321,4 +333,17 @@ void Player::SetEquippedGears()
 {
 	primaryGear = GearSystem::Get().GetPrimaryGear();
 	secondaryGear = GearSystem::Get().GetSecondaryGear();
+}
+
+void Player::LockOnTarget()
+{
+	if (Input::GetKeyUp(Keys::Space))
+	{
+		HitResult hit(this);
+		if (Raycast(hit, GetPositionV(), GetForwardVectorV(), 50.f))
+		{
+			lockOnActor = hit.hitActor;
+			camera->targetActor = lockOnActor;
+		}
+	}
 }

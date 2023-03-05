@@ -40,6 +40,8 @@ private:
 
 	void SetEquippedGears();
 
+	void LockOnTarget();
+
 public:
 	MeshComponent* mesh = nullptr;
 	CameraComponent* camera = nullptr;
@@ -77,4 +79,6 @@ private:
 
 	bool isMoving = false;
 	XMVECTOR movementDirection = XMVectorZero();
+
+	Actor* lockOnActor = nullptr;
 };
