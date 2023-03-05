@@ -70,9 +70,7 @@ void Player::Start()
 	equippedGearsWidget = UISystem::CreateWidget<EquippedGearsWidget>();
 	equippedGearsWidget->AddToViewport();
 
-	camera->SetAsActiveCamera();
-	auto cameraFocusPoint = GetPositionV() + GetForwardVectorV() * 3.f;
-	camera->SetWorldRotation(VMath::LookAtRotation(cameraFocusPoint, camera->GetWorldPositionV()));
+	SetCameraAsActive();
 
 	SetEquippedGears();
 }
@@ -280,6 +278,13 @@ void Player::MovementInput(float deltaTime)
 	{
 		isMoving = false;
 	}
+}
+
+void Player::SetCameraAsActive()
+{
+	camera->SetAsActiveCamera();
+	auto cameraFocusPoint = GetPositionV() + GetForwardVectorV() * 3.f;
+	camera->SetWorldRotation(VMath::LookAtRotation(cameraFocusPoint, camera->GetWorldPositionV()));
 }
 
 void Player::PrimaryGearAction()

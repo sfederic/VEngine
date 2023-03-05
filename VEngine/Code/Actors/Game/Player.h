@@ -28,10 +28,12 @@ public:
 	auto GetDamage() { return damage; }
 	XMVECTOR GetAimDirection();
 
+protected:
+	void MovementInput(float deltaTime);
+	void SetCameraAsActive();
+
 private:
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
-
-	void MovementInput(float deltaTime);
 
 	void PrimaryGearAction();
 	void SecondaryGearAction();
