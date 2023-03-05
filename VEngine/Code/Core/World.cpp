@@ -136,7 +136,7 @@ void World::CreateDefaultMapActors()
 	MeshActor::spawnMeshFilename = "node.vmesh";
 	auto mesh = MeshActor::system.Add();
 	mesh->SetPosition(XMFLOAT3(2.f, -0.5f, 2.f));
-	mesh->SetScale(XMVectorSet(5.f, 1.f, 5.f, 1.0f));
+	mesh->SetScale(XMVectorSet(15.f, 1.f, 15.f, 1.0f));
 	mesh->Create();
 	mesh->CreateAllComponents();
 
