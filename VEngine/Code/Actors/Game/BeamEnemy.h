@@ -11,12 +11,14 @@ public:
 	ACTOR_SYSTEM(BeamEnemy);
 
 	void Create() override;
+	void Start() override;
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
 private:
 	Polyboard* beam = nullptr;
-	XMFLOAT3 rotateDirection = XMFLOAT3(0.f, 0.f, 0.f);
+
+	XMVECTOR rotateDirection = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	float rotateSpeed = 33.f;
 	float beamDistance = 10.f;
 };

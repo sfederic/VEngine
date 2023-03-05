@@ -17,6 +17,11 @@ void BeamEnemy::Create()
 	rootComponent->AddChild(beam);
 }
 
+void BeamEnemy::Start()
+{
+	rotateDirection = VMath::RandomUnitDirectionVector();
+}
+
 void BeamEnemy::Tick(float deltaTime)
 {
 	auto pos = GetPositionV();
@@ -38,18 +43,12 @@ void BeamEnemy::Tick(float deltaTime)
 		}
 	}
 
-	//Here for stationary BeamEnemies
-	if (!VMath::Float3IsZero(rotateDirection))
-	{
-		AddRotation(XMLoadFloat3(&rotateDirection), rotateSpeed * deltaTime);
-	}
+	AddRotation(rotateDirection, rotateSpeed * deltaTime);
 }
 
 Properties BeamEnemy::GetProps()
 {
 	auto props = __super::GetProps();
-	props.title = "BeamEnemy";
-	props.Add("Rotate Speed", &rotateSpeed);
-	props.Add("Rotate Direction", &rotateDirection);
+	props.title = GetTypeName();
 	return props;
 }
