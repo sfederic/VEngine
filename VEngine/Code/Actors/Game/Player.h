@@ -38,8 +38,6 @@ private:
 	void ShieldLogic(float deltaTime);
 	void Interact();
 
-	void SetReticleWidgetPosition(float deltaTime);
-
 	void SetEquippedGears();
 
 public:

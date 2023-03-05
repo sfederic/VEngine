@@ -86,8 +86,6 @@ void Player::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
-	SetReticleWidgetPosition(deltaTime);
-
 	MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
 	PrimaryGearAction();
@@ -317,30 +315,6 @@ void Player::Interact()
 			}
 		}
 	}
-}
-
-//Map reticle to hit actor on raycast (think like Ocarina of Time Z-Target icon) or place just in front of player.
-void Player::SetReticleWidgetPosition(float deltaTime)
-{
-	HitResult hit(this);
-	if (Raycast(hit, camera->GetWorldPositionV(), camera->GetForwardVectorV(), 100.f))
-	{
-		if (hit.hitActor->HasTag(GameplayTags::TargetableActor))
-		{
-			reticleWidgetNextPos = hit.hitActor->GetHomogeneousPositionV();
-			reticleWidgetLerpValue += deltaTime * 2.f;
-		}
-	}
-	else
-	{
-		reticleWidgetNextPos = GetHomogeneousPositionV();
-		reticleWidgetLerpValue -= deltaTime * 2.f;
-	}
-
-	reticleWidgetLerpValue = std::clamp(reticleWidgetLerpValue, 0.f, 1.f);
-
-	reticleWidget->worldPosition =
-		XMVectorLerp(reticleWidget->worldPosition, reticleWidgetNextPos, reticleWidgetLerpValue);
 }
 
 void Player::SetEquippedGears()
