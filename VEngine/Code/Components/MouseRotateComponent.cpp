@@ -3,5 +3,8 @@
 
 void MouseRotateComponent::Tick(float deltaTime)
 {
-	FPSCameraRotation();
+	if (useMouseInput)
+	{
+		FPSCameraRotation();
+	}
 }

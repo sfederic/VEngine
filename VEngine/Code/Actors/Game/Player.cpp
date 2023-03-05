@@ -287,6 +287,11 @@ void Player::SetCameraAsActive()
 	camera->SetWorldRotation(VMath::LookAtRotation(cameraFocusPoint, camera->GetWorldPositionV()));
 }
 
+void Player::SetMouseInputForCamera(bool useInput)
+{
+	mouseRotateComponent->useMouseInput = useInput;
+}
+
 void Player::PrimaryGearAction()
 {
 	if (Input::GetMouseLeftUp())

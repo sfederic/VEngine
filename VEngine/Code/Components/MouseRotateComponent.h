@@ -12,4 +12,6 @@ public:
 
 	MouseRotateComponent() {}
 	void Tick(float deltaTime) override;
+
+	bool useMouseInput = true;
 };
