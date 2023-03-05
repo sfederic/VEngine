@@ -539,9 +539,6 @@
     <ClCompile Include="Code\Actors\Game\HoleEnemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\MapScreenSelector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\Game\MapSelectionActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1115,9 +1112,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\HoleEnemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\MapScreenSelector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\MapSelectionActor.h">

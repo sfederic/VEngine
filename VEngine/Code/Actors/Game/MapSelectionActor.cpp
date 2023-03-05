@@ -1,7 +1,6 @@
 #include "vpch.h"
 #include "MapSelectionActor.h"
 #include "Components/BoxTriggerComponent.h"
-#include "Actors/Game/MapScreenSelector.h"
 #include "Gameplay/GameInstance.h"
 
 MapSelectionActor::MapSelectionActor()
@@ -22,17 +21,6 @@ void MapSelectionActor::Start()
 
 void MapSelectionActor::Tick(float deltaTime)
 {
-    auto mapScreenSelector = MapScreenSelector::system.GetFirstActor();
-    if (mapScreenSelector == nullptr) return;
-
-    if (boxTrigger->Contains(mapScreenSelector->GetPositionV()))
-    {
-        mapScreenSelector->SetLeveInfoWidgets(title, description, levelToLoad);
-    }
-    else
-    {
-        mapScreenSelector->RemoveLeveInfoWidgets();
-    }
 }
 
 Properties MapSelectionActor::GetProps()

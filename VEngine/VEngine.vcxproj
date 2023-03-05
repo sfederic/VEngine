@@ -261,7 +261,6 @@
     <ClCompile Include="Code\Actors\Game\HiddenCoreEnemy.cpp" />
     <ClCompile Include="Code\Actors\PhysicsActorTest.cpp" />
     <ClCompile Include="Code\Actors\Game\HoleEnemy.cpp" />
-    <ClCompile Include="Code\Actors\Game\MapScreenSelector.cpp" />
     <ClCompile Include="Code\Actors\Game\MapSelectionActor.cpp" />
     <ClCompile Include="Code\UI\Game\MapSelectionInfoWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\PowerCableEnemy.cpp" />
@@ -550,7 +549,6 @@
     <ClInclude Include="Code\Actors\Game\HiddenCoreEnemy.h" />
     <ClInclude Include="Code\Actors\PhysicsActorTest.h" />
     <ClInclude Include="Code\Actors\Game\HoleEnemy.h" />
-    <ClInclude Include="Code\Actors\Game\MapScreenSelector.h" />
     <ClInclude Include="Code\Actors\Game\MapSelectionActor.h" />
     <ClInclude Include="Code\UI\Game\MapSelectionInfoWidget.h" />
     <ClInclude Include="Code\Actors\Game\PowerCableEnemy.h" />
