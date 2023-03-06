@@ -17,6 +17,11 @@ public:
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
+	auto GetLevelToLoad() { return levelToLoad; }
+
+	//Where the player will spawn back into relative to this actor on when coming back to the map screen.
+	XMVECTOR GetPlayerReturnSpawnPoint();
+
 private:
 	BoxTriggerComponent* boxTrigger = nullptr;
 

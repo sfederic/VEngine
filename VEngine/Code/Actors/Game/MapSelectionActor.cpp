@@ -44,3 +44,10 @@ Properties MapSelectionActor::GetProps()
     props.Add("Level", &levelToLoad);
     return props;
 }
+
+XMVECTOR MapSelectionActor::GetPlayerReturnSpawnPoint()
+{
+    auto pos = GetPosition();
+    pos.y += boxTrigger->GetExtents().y;
+    return XMLoadFloat3(&pos);
+}
