@@ -161,6 +161,7 @@ namespace GameUtils
 	void TriggerLevelComplete()
 	{
 		auto levelCompleteWidget = UISystem::CreateWidget<LevelCompleteWidget>();
+		UISystem::SetWidgetControlActive(true);
 		levelCompleteWidget->AddToViewport();
 	}
 }

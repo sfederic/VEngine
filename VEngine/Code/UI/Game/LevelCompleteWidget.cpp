@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "LevelCompleteWidget.h"
 #include "Gameplay/GameUtils.h"
+#include "UI/UISystem.h"
 
 void LevelCompleteWidget::Draw(float deltaTime)
 {
@@ -11,5 +12,6 @@ void LevelCompleteWidget::Draw(float deltaTime)
 	if (Button(L"Done", buttonLayout))
 	{
 		GameUtils::LoadWorldDeferred("map_screen.vmap");
+		UISystem::SetWidgetControlActive(false);
 	}
 }
