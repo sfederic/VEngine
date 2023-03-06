@@ -183,6 +183,8 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	editor->SetEditorTitle(worldName);
 
+	GameInstance::previousMapMovedFrom = World::worldFilename;
+
 	World::worldFilename = worldName;
 
 	std::string path = "WorldMaps/" + worldName;
