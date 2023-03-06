@@ -132,7 +132,7 @@ public:
 		return actors.front().get();
 	}
 
-	T* GetOnlyFirstActor()
+	T* GetOnlyActor()
 	{
 		assert(actors.size() == 1);
 		return actors.front().get();

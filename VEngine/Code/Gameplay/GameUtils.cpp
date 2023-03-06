@@ -168,7 +168,7 @@ namespace GameUtils
 
 	void SavePlayerMapScreenPos()
 	{
-		auto pos = MapScreenPlayer::system.GetOnlyFirstActor()->GetPosition();
+		auto pos = MapScreenPlayer::system.GetOnlyActor()->GetPosition();
 		GameInstance::SetGlobalProp("PlayerMapScreenPos", pos);
 
 		SaveGameInstanceData();
@@ -179,6 +179,6 @@ namespace GameUtils
 		LoadGameInstanceData();
 
 		auto pos = GameInstance::GetGlobalProp<XMFLOAT3>("PlayerMapScreenPos");
-		MapScreenPlayer::system.GetOnlyFirstActor()->SetPosition(*pos);
+		MapScreenPlayer::system.GetOnlyActor()->SetPosition(*pos);
 	}
 }
