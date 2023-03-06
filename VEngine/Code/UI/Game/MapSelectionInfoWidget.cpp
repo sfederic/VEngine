@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "MapSelectionInfoWidget.h"
 #include "Gameplay/GameUtils.h"
+#include "UI/UISystem.h"
 
 void MapSelectionInfoWidget::Draw(float deltaTime)
 {
@@ -16,5 +17,6 @@ void MapSelectionInfoWidget::Draw(float deltaTime)
 	if (Button("Enter", layout))
 	{
 		GameUtils::LoadWorldDeferred(levelToLoad);
+		UISystem::SetWidgetControlActive(false);
 	}
 }
