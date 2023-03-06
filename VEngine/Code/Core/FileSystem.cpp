@@ -296,9 +296,9 @@ void FileSystem::LoadWorld(std::string worldName)
 		systemName.clear();
 	}
 
-	ResetWorldState();
-
 	WorldFunctions::CallWorldStartFunction(World::worldFilename);
+
+	ResetWorldState();
 
 	debugMenu.AddNotification(VString::wformat(L"%S world loaded", World::worldFilename.c_str()));
 
