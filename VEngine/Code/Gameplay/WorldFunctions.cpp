@@ -8,7 +8,7 @@ std::map<std::string, std::function<void()>> worldStartFunctionMap;
 void WorldFunctions::SetupWorldStartFunctions()
 {
 	worldStartFunctionMap.emplace("map_screen.vmap", []() {
-		GameUtils::LoadPlayerMapScreenPos();
+		GameUtils::LoadMapScreen();
 	});
 }
 

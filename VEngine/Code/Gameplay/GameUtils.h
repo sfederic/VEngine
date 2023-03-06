@@ -48,6 +48,5 @@ namespace GameUtils
 
 	void TriggerLevelComplete();
 
-	void SavePlayerMapScreenPos();
-	void LoadPlayerMapScreenPos();
+	void LoadMapScreen();
 };

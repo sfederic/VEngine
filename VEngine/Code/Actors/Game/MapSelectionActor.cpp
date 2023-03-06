@@ -48,6 +48,6 @@ Properties MapSelectionActor::GetProps()
 XMVECTOR MapSelectionActor::GetPlayerReturnSpawnPoint()
 {
     auto pos = GetPosition();
-    pos.y += boxTrigger->GetExtents().y;
+    pos.y += boxTrigger->GetExtents().y + 2.f;
     return XMLoadFloat3(&pos);
 }

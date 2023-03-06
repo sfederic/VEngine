@@ -3,6 +3,7 @@
 #include <filesystem>
 #include "Actors/Game/Player.h"
 #include "Actors/Game/MapScreenPlayer.h"
+#include "Actors/Game/MapSelectionActor.h"
 #include "Audio/AudioSystem.h"
 #include "Core/World.h"
 #include "Core/FileSystem.h"
@@ -114,8 +115,6 @@ namespace GameUtils
 
 		LoadWorldDeferred(levelToMoveTo);
 
-		GameInstance::previousMapMovedFrom = levelToMoveTo;
-
 		Input::blockInput = false;
 	}
 
@@ -166,19 +165,15 @@ namespace GameUtils
 		levelCompleteWidget->AddToViewport();
 	}
 
-	void SavePlayerMapScreenPos()
+	void LoadMapScreen()
 	{
-		auto pos = MapScreenPlayer::system.GetOnlyActor()->GetPosition();
-		GameInstance::SetGlobalProp("PlayerMapScreenPos", pos);
-
-		SaveGameInstanceData();
-	}
-
-	void LoadPlayerMapScreenPos()
-	{
-		LoadGameInstanceData();
-
-		auto pos = GameInstance::GetGlobalProp<XMFLOAT3>("PlayerMapScreenPos");
-		MapScreenPlayer::system.GetOnlyActor()->SetPosition(*pos);
+		for (auto& mapActor : MapSelectionActor::system.GetActors())
+		{
+			if (mapActor->GetLevelToLoad() == GameInstance::previousMapMovedFrom)
+			{
+				const auto pos = mapActor->GetPlayerReturnSpawnPoint();
+				MapScreenPlayer::system.GetOnlyActor()->SetPosition(pos);
+			}
+		}
 	}
 }

@@ -18,6 +18,5 @@ void MapSelectionInfoWidget::Draw(float deltaTime)
 	{
 		GameUtils::LoadWorldDeferred(levelToLoad);
 		UISystem::SetWidgetControlActive(false);
-		GameUtils::SavePlayerMapScreenPos();
 	}
 }
