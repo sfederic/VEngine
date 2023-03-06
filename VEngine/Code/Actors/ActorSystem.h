@@ -132,6 +132,12 @@ public:
 		return actors.front().get();
 	}
 
+	T* GetOnlyFirstActor()
+	{
+		assert(actors.size() == 1);
+		return actors.front().get();
+	}
+
 	virtual uint32_t GetNumActors() override
 	{
 		return actors.size();
