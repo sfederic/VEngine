@@ -3,7 +3,7 @@ BuildingRubble
  Enabled
 1
  Position
--2 2 -1
+-2 -0.00907402 -1
  Rotation
 -0 0 -0 1
  Scale
@@ -296,7 +296,7 @@ Player
  Enabled
 1
  Position
-1 0 -2
+4 2 -3
  Rotation
 -0 0 -0 1
  Scale
@@ -308,7 +308,7 @@ All Range Mode
 Name
 Player0
 UID
-4264839494
+3165637348
 next
 RamielBoss
 1
@@ -350,14 +350,14 @@ UID
 next
 CameraComponent
 1
-4264839494
+3165637348
 Camera
  Enabled
 1
  Pos
 1 0.5 -2
  Rot
-0 0 0 1
+0.0352005 -0.0708449 0.00250162 0.996863
  Scale
 1 1 1
  Visible
@@ -369,7 +369,28 @@ Far Z
 Near Z
 0.01
 UID
-2960127510
+959191954
+next
+CharacterControllerComponent
+1
+3165637348
+CharacterController
+ Enabled
+1
+ Pos
+4 2 -3
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Height
+1
+Radius
+0.5
+UID
+1190036785
 next
 DirectionalLightComponent
 1
@@ -418,7 +439,7 @@ Mesh
  Enabled
 1
  Pos
--2 2 -1
+-2 -0.00907402 -1
  Rot
 -0 0 -0 1
  Scale
@@ -1280,14 +1301,65 @@ Trans. Occlude
 UID
 2783041263
 next
-4264839494
+411090833
 Mesh
  Enabled
 1
  Pos
-1 0 -2
+1 1 1
  Rot
 -0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+0.896418 0.1 0.9 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+ramielboss.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+12532854
+next
+3165637348
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -1329,57 +1401,23 @@ Static
 Trans. Occlude
 0
 UID
-1465242666
+1965554421
 next
-411090833
-Mesh
+MouseRotateComponent
+1
+3165637348
+MouseRotate
  Enabled
 1
  Pos
-1 1 1
+0 0 0
  Rot
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
 1
-Casts Shadow
-1
-M_Ambient
-0.1 0.1 0.9 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-
-M_Use Texture
-0
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-ramielboss.vmesh
-Static
-1
-Trans. Occlude
-0
 UID
-12532854
+2418519587
 next
 end
