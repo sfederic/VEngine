@@ -113,7 +113,7 @@ void Player::InflictDamage(float damage)
 
 XMVECTOR Player::GetAimDirection()
 {
-	return camera->GetForwardVectorV();
+	return mouseRotateComponent->GetForwardVectorV();
 }
 
 //Note: Default blend state needs to already be set for the mesh.
