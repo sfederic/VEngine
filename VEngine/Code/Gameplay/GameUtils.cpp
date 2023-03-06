@@ -2,6 +2,7 @@
 #include "GameUtils.h"
 #include <filesystem>
 #include "Actors/Game/Player.h"
+#include "Actors/Game/MapScreenPlayer.h"
 #include "Audio/AudioSystem.h"
 #include "Core/World.h"
 #include "Core/FileSystem.h"
@@ -163,5 +164,10 @@ namespace GameUtils
 		auto levelCompleteWidget = UISystem::CreateWidget<LevelCompleteWidget>();
 		UISystem::SetWidgetControlActive(true);
 		levelCompleteWidget->AddToViewport();
+	}
+
+	void SavePlayerMapScreenPos()
+	{
+		GameInstance::SetGlobalProp("PlayerMapScreenPos", MapScreenPlayer::system.GetFirstActor()->GetPosition());
 	}
 }

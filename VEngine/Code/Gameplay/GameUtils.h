@@ -47,4 +47,6 @@ namespace GameUtils
 	XMVECTOR RandomPointInTriggerNotContainedByMeshBounds(BoxTriggerComponent* boxTrigger);
 
 	void TriggerLevelComplete();
+
+	void SavePlayerMapScreenPos();
 };
