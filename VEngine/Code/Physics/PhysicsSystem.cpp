@@ -217,10 +217,10 @@ void PhysicsSystem::CreateCharacterController(CharacterControllerComponent* char
 	desc.upDirection = PxVec3(0.f, 1.f, 0.f);
 	desc.material = material;
 
-	auto pos = characterControllerComponent->GetLocalPosition();
-	desc.position.x = pos.x;
-	desc.position.y = pos.y;
-	desc.position.z = pos.z;
+	auto pos = characterControllerComponent->GetWorldPositionV();
+	desc.position.x = pos.m128_f32[0];
+	desc.position.y = pos.m128_f32[1];
+	desc.position.z = pos.m128_f32[2];
 
 	PxController* controller = controllerManager->createController(desc);
 	assert(controller);
