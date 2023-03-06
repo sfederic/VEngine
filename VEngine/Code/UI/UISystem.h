@@ -51,6 +51,8 @@ namespace UISystem
 	void Cleanup();
 	void Reset();
 
+	//Whether the mouse control can be used during gameplay (for when widgets are active and the player 
+	//has a mouse-based control scheme on the camera or itself).
 	void SetWidgetControlActive(bool active);
 	bool GetWidgetControlActive();
 };
