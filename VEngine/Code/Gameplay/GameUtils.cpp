@@ -170,4 +170,10 @@ namespace GameUtils
 	{
 		GameInstance::SetGlobalProp("PlayerMapScreenPos", MapScreenPlayer::system.GetFirstActor()->GetPosition());
 	}
+
+	void LoadPlayerMapScreenPos()
+	{
+		auto pos = GameInstance::GetGlobalProp<XMFLOAT3>("PlayerMapScreenPos");
+		MapScreenPlayer::system.GetFirstActor()->SetPosition(*pos);
+	}
 }

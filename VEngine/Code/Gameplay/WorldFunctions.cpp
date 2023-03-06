@@ -1,11 +1,15 @@
 #include "vpch.h"
 #include "WorldFunctions.h"
 #include "Core/Log.h"
+#include "GameUtils.h"
 
 std::map<std::string, std::function<void()>> worldStartFunctionMap;
 
 void WorldFunctions::SetupWorldStartFunctions()
 {
+	worldStartFunctionMap.emplace("map_screen.vmap", []() {
+		GameUtils::LoadPlayerMapScreenPos();
+	});
 }
 
 void WorldFunctions::CallWorldStartFunction(const std::string worldName)
