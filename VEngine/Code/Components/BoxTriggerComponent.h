@@ -23,7 +23,9 @@ public:
 	XMFLOAT3 GetRandomPointInTrigger();
 	XMVECTOR GetRandomPointInTriggerRounded();
 	bool IntersectsWithAnyBoundingBoxInWorld();
+
 	void SetExtents(float x, float y, float z);
+	XMFLOAT3 GetExtents();
 
 	bool QuickInPlaceBoxCast(HitResult& hitResult, bool drawDebug);
 

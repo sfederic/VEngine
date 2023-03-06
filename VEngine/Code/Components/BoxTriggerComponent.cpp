@@ -93,6 +93,11 @@ void BoxTriggerComponent::SetExtents(float x, float y, float z)
 	boundingBox.Extents = XMFLOAT3(x, y, z);
 }
 
+XMFLOAT3 BoxTriggerComponent::GetExtents()
+{
+	return boundingBox.Extents;
+}
+
 bool BoxTriggerComponent::QuickInPlaceBoxCast(HitResult& hitResult, bool drawDebug)
 {
 	return SimpleBoxCast(GetWorldPositionV(), boundingBox.Extents, hitResult, drawDebug);
