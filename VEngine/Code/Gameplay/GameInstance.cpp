@@ -6,10 +6,10 @@ std::string GameInstance::startingMap = "map_screen.vmap";
 //Global properties
 static bool ramielDefeated = false;
 
-std::string primaryGear;
-std::string secondaryGear;
+static std::string primaryGear;
+static std::string secondaryGear;
 
-XMFLOAT3 playerMapScreenPos;
+static XMFLOAT3 playerMapScreenPos;
 
 Properties GameInstance::GetGlobalProps()
 {
