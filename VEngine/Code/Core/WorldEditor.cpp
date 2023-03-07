@@ -228,34 +228,24 @@ void SpawnActorOnClick()
 	{
 		if (spawnSystem)
 		{
-			HitResult ray;
-			if (RaycastFromScreen(ray)) //Spawn actor at ray hit point
+			HitResult hit;
+			if (RaycastFromScreen(hit))
 			{
-				XMVECTOR dist = ray.direction * ray.hitDistance;
-				XMVECTOR rayEnd = ray.origin + dist;
-
 				Transform transform;
-
-				//Round the position up for spawning on the grid in increments
-				rayEnd = XMVectorRound(rayEnd);
-				XMStoreFloat3(&transform.position, rayEnd);
-
+				XMStoreFloat3(&transform.position, hit.GetHitPosV());
 				SpawnActor(transform);
 			}
 			else //Spawn actor a bit in front of the camera based on the click
 			{
 				XMVECTOR spawnPos = XMLoadFloat3(&activeCamera->transform.position);
-				XMFLOAT3 forward = activeCamera->GetForwardVector();
-				XMVECTOR forwardVec = XMLoadFloat3(&forward);
+				const XMFLOAT3 forward = activeCamera->GetForwardVector();
+				const XMVECTOR forwardVec = XMLoadFloat3(&forward);
 				spawnPos += forwardVec * 10.0f;
 
-				XMVECTOR dist = ray.direction * 10.f;
-				XMVECTOR rayEnd = ray.origin + dist;
+				const XMVECTOR dist = hit.direction * 10.f;
+				const XMVECTOR rayEnd = hit.origin + dist;
 
 				Transform transform;
-
-				//Round the position up for spawning on the grid in increments
-				rayEnd = XMVectorRound(rayEnd);
 				XMStoreFloat3(&transform.position, rayEnd);
 
 				SpawnActor(transform);
