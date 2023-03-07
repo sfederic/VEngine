@@ -18,15 +18,15 @@ void SwordGear::Use()
 
 	auto slicePlaneNormal = [&]() -> XMVECTOR { return player->GetUpVectorV(); };
 	//Give plane center a small offset as it's messing up right now
-	auto slicePlaneCenter = [&]() -> XMVECTOR { return player->GetPositionV() + player->GetForwardVectorV() + XMVectorSet(0.1f, 0.1f, 0.1f, 1.f); };
+	auto slicePlaneCenter = [&]() -> XMVECTOR { return player->GetPositionV() + player->GetAimDirection() + XMVectorSet(0.1f, 0.1f, 0.1f, 1.f); };
 
 	HitResult hit(player);
-	XMVECTOR origin = player->GetPositionV() + player->GetForwardVectorV();
+	const XMVECTOR origin = player->GetPositionV() + player->GetAimDirection();
 
-	if (SimpleBoxCast(origin, XMFLOAT3(0.5f, 0.5f, 0.5f), hit, true))
+	GameUtils::SpawnSpriteSheet("Sprites/v_slice.png", origin, false, 4, 5);
+
+	if (SimpleBoxCast(origin, XMFLOAT3(1.f, 1.f, 1.f), hit, true))
 	{
-		GameUtils::SpawnSpriteSheet("Sprites/v_slice.png", origin, false, 4, 5);
-
 		for (auto hitComponent : hit.hitComponents)
 		{
 			auto mesh = dynamic_cast<MeshComponent*>(hit.hitComponent);
