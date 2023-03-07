@@ -95,9 +95,10 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 
 			BoundingOrientedBox boundingBox = VMath::GetBoundingBoxInWorld(mesh);
 
-			if (boundingBox.Intersects(hitResult.origin, hitResult.direction, hitResult.hitDistance))
+			float hitDistance = 0.f;
+			if (boundingBox.Intersects(hitResult.origin, hitResult.direction, hitDistance))
 			{
-				distances.emplace_back(hitResult.hitDistance);
+				distances.emplace_back(hitDistance);
 				hitResult.hitComponents.emplace_back(mesh);
 				bRayHit = true;
 			}
@@ -137,8 +138,16 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 
 	if (hitResult.hitActor)
 	{
-		XMVECTOR hitPos = origin + (direction * hitResult.hitDistance);
+		if (fromScreen)
+		{
+			origin = activeCamera->GetWorldPositionV();
+		}
+
+		const XMVECTOR hitPos = origin + (direction * nearestDistance);
 		XMStoreFloat3(&hitResult.hitPos, hitPos);
+
+		hitResult.hitDistance = nearestDistance;
+
 		return true;
 	}
 
@@ -190,6 +199,7 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 				if (DirectX::TriangleTests::Intersects(hitResult.origin, hitResult.direction, v0, v1, v2, hitDistance))
 				{
 					HitResult tempHitResult = hitResult;
+					tempHitResult.hitDistance = hitDistance;
 
 					//Get normal for triangle
 					XMVECTOR normal = XMVectorZero();
