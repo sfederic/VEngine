@@ -7,6 +7,7 @@
 #include "backends/imgui_impl_win32.h"
 #include "backends/imgui_impl_dx11.h"
 #include "DebugMenu.h"
+#include "Core/Input.h"
 #include "Editor.h"
 #include "Render/Renderer.h"
 #include "Render/PipelineObjects.h"
@@ -100,6 +101,7 @@ void DebugMenu::Tick(float deltaTime)
 	RenderConsoleCommandsMenu();
 	RenderWorldMenu();
 	RenderMaterialPlacementMenu();
+	RenderActorSystemSpawnMenu();
 
 	ImGui::EndFrame();
 
@@ -469,6 +471,35 @@ void DebugMenu::RenderWorldMenu()
 	}
 
 	ImGui::End();
+}
+
+void DebugMenu::RenderActorSystemSpawnMenu()
+{
+	if (Input::GetKeyHeld(Keys::Ctrl))
+	{
+		if (Input::GetKeyUp(Keys::T))
+		{
+			actorSystemSpawnMenuOpen = !actorSystemSpawnMenuOpen;
+		}
+	}
+
+	if (actorSystemSpawnMenuOpen)
+	{
+		ImGui::Begin("Actor System Spawn Menu");
+		ImGui::SetWindowSize(ImVec2(250.f, 100.f));
+		static char systemName[512];
+		if (ImGui::InputText("System", systemName, sizeof(systemName)))
+		{
+			std::string str = systemName;
+			auto system = ActorSystemCache::Get().GetSystem(str);
+			if (system)
+			{
+				WorldEditor::SetSpawnSystem(system);
+				Log("Actor Spawn System set as %s", str.c_str());
+			}
+		}
+		ImGui::End();
+	}
 }
 
 //Handle viewport notifications (e.g. "Shaders recompiled", "ERROR: Not X", etc.)
