@@ -3,9 +3,9 @@
 #include "Actor.h"
 #include "ActorSystem.h"
 
-struct CameraComponent;
+class CameraComponent;
 
-struct CameraActor : public Actor
+class CameraActor : public Actor
 {
 public:
 	ACTOR_SYSTEM(CameraActor);

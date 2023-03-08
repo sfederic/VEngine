@@ -11,7 +11,7 @@ public:
 	ACTOR_SYSTEM(AudioActor);
 
 	AudioActor();
-	virtual Properties GetProps() override;
+	Properties GetProps() override;
 
 private:
 	AudioComponent* audioComponent = nullptr;

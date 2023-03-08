@@ -1,6 +1,6 @@
 #include "vpch.h"
 #include "CameraActor.h"
-#include "Core/Camera.h"
+#include "Components/CameraComponent.h"
 
 CameraActor::CameraActor()
 {

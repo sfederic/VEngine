@@ -1,3 +1,20 @@
+Billboard
+1
+ Enabled
+1
+ Position
+-4.49824 2.40261 10.0369
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+Billboard0
+UID
+2134772202
+next
 DirectionalLightActor
 1
  Enabled
@@ -151,13 +168,11 @@ Colour
 1 1 1 1
 LightEnabled
 1
-ShadowMap Size
-15
 UID
 1698855770
 next
 MeshComponent
-2
+3
 373019899
 Mesh
  Enabled
@@ -259,6 +274,57 @@ Trans. Occlude
 0
 UID
 152785008
+next
+2134772202
+Mesh
+ Enabled
+1
+ Pos
+-4.49824 2.40261 10.0369
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Unlit
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+ramza_back.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2733699004
 next
 MouseRotateComponent
 1
