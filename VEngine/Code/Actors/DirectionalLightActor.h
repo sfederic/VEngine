@@ -1,15 +1,18 @@
 #pragma once
+
 #include "Actor.h"
 #include "ActorSystem.h"
 
-struct DirectionalLightComponent;
+class DirectionalLightComponent;
 
-struct DirectionalLightActor : Actor
+class DirectionalLightActor : public Actor
 {
+public:
 	ACTOR_SYSTEM(DirectionalLightActor)
 
-	DirectionalLightComponent* directionalLight;
-
 	DirectionalLightActor();
-	virtual Properties GetProps() override;
+	Properties GetProps() override;
+
+private:
+	DirectionalLightComponent* directionalLight = nullptr;
 };

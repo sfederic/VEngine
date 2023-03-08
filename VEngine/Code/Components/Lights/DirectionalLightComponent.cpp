@@ -8,6 +8,11 @@ DirectionalLightComponent::DirectionalLightComponent()
     lightData.lightType = (int)LightType::Directional;
 }
 
+void DirectionalLightComponent::Create()
+{
+    shadowMapOrthoSize = 30.f;
+}
+
 Properties DirectionalLightComponent::GetProps()
 {
     auto props = __super::GetProps();

@@ -1595,7 +1595,7 @@ void UpdateLights()
 	{
 		if (!light->IsActive()) continue;
 
-		Light lightData = light->lightData;
+		Light lightData = light->GetLightData();
 		XMFLOAT3 forwardVector = light->GetForwardVector();
 		lightData.direction = XMFLOAT4(forwardVector.x, forwardVector.y, forwardVector.z, 0.f);
 

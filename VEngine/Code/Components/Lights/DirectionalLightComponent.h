@@ -1,16 +1,22 @@
 #pragma once
+
 #include "Components/SpatialComponent.h"
 #include "Components/ComponentSystem.h"
 #include "Render/RenderTypes.h"
 
-struct DirectionalLightComponent : SpatialComponent
+class DirectionalLightComponent : public SpatialComponent
 {
+public:
 	COMPONENT_SYSTEM(DirectionalLightComponent)
 
-	Light lightData;
-
-	float shadowMapOrthoSize = 15.f;
-
 	DirectionalLightComponent();
+	void Create() override;
 	virtual Properties GetProps() override;
+
+	auto GetLightData() { return lightData; }
+	auto GetShadowMapOrthoSize() { return shadowMapOrthoSize; }
+
+private:
+	Light lightData;
+	float shadowMapOrthoSize = 30.f;
 };
