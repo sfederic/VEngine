@@ -134,7 +134,6 @@
     <ClCompile Include="Code\Actors\Game\OrientationEnemy.cpp" />
     <ClCompile Include="Code\Actors\Game\SpinningEnemy.cpp" />
     <ClCompile Include="Code\Actors\Game\Enemy.cpp" />
-    <ClCompile Include="Code\Actors\Game\LevelInstance.cpp" />
     <ClCompile Include="Code\Actors\Game\TurretBullet.cpp" />
     <ClCompile Include="Code\Actors\Game\WormEnemy.cpp" />
     <ClCompile Include="Code\Core\Camera.cpp" />
@@ -300,7 +299,6 @@
     <ClInclude Include="Code\Actors\Game\OrientationEnemy.h" />
     <ClInclude Include="Code\Actors\Game\SpinningEnemy.h" />
     <ClInclude Include="Code\Actors\Game\Enemy.h" />
-    <ClInclude Include="Code\Actors\Game\LevelInstance.h" />
     <ClInclude Include="Code\Actors\Game\TurretBullet.h" />
     <ClInclude Include="Code\Actors\Game\WormEnemy.h" />
     <ClInclude Include="Code\Asset\AssetFileExtensions.h" />
