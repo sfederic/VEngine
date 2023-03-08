@@ -1,16 +1,20 @@
 #pragma once
+
 #include "Actor.h"
 #include "ActorSystem.h"
 
 class MeshComponent;
 
-struct Billboard : Actor
+class Billboard : public Actor
 {
-	ACTOR_SYSTEM(Billboard)
-
-	MeshComponent* mesh = nullptr;
+public:
+	ACTOR_SYSTEM(Billboard);
 
 	Billboard();
-	virtual void Tick(float deltaTime) override;
-	virtual Properties GetProps() override;
+	void Create() override;
+	void Tick(float deltaTime) override;
+	Properties GetProps() override;
+
+private:
+	MeshComponent* mesh = nullptr;
 };

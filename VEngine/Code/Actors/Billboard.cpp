@@ -1,26 +1,29 @@
 #include "vpch.h"
 #include "Billboard.h"
 #include "Components/MeshComponent.h"
-#include "Render/Material.h"
-#include "Core/Camera.h"
 #include "Core/VMath.h"
 
 Billboard::Billboard()
 {
-    mesh = MeshComponent::system.Add("Mesh", this,
-        MeshComponent("plane.vmesh", "ramza_back.png", ShaderItems::Unlit));
-
-    mesh->SetRastState(RastStates::noBackCull);
+    mesh = CreateComponent<MeshComponent>("Mesh");
     rootComponent = mesh;
+}
+
+void Billboard::Create()
+{
+    mesh->SetMeshFilename("plane.vmesh");
+    mesh->SetRastState(RastStates::noBackCull);
+    mesh->SetShaderFilenames(ShaderItems::Unlit);
 }
 
 void Billboard::Tick(float deltaTime)
 {
-    auto rootTransform = rootComponent->GetTransform();
-    VMath::RotateTowardsCamera(rootTransform);
+    auto transform = GetTransform();
+    VMath::RotateTowardsCamera(transform);
+    SetTransform(transform);
 }
 
 Properties Billboard::GetProps()
 {
-    return Actor::GetProps();
+    return __super::GetProps();
 }
