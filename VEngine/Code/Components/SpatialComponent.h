@@ -78,10 +78,6 @@ public:
 	auto GetCollisionLayer() { return layer; }
 	void SetCollisionLayer(CollisionLayers layer_) { layer = layer_; }
 
-	//@Todo: this is being used for commandsystem calls currently. Change it and use a map with actor UID instead
-	//when creating commands.
-	Transform* PointerToTransform() { return &transform; }
-
 protected:
 	void Pitch(float angle);
 	void RotateY(float angle);
