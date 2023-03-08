@@ -120,10 +120,6 @@ void Console::Init()
 		std::make_pair([]() { World::CreateDefaultMapActors(); },
 		"Load in default actors for most worlds (Player, Grid, DirectionalLight, etc.)"));
 
-	executeMap.emplace(L"CUTSCENE",
-		std::make_pair([]() { debugMenu.cutsceneSequencerOpen = !debugMenu.cutsceneSequencerOpen; },
-		"Open Cutscene Sequencer."));
-
 	executeMap.emplace(L"TEXTURE",
 		std::make_pair([]() { WorldEditor::texturePlacement = !WorldEditor::texturePlacement; },
 		"Enable texture placement mode in editor"));

@@ -3,7 +3,6 @@
 #include <Windows.h>
 #include "imgui.h"
 #include "ImGuizmo.h"
-#include "CutsceneSequencer.h"
 #include "backends/imgui_impl_win32.h"
 #include "backends/imgui_impl_dx11.h"
 #include "DebugMenu.h"
@@ -78,11 +77,6 @@ void DebugMenu::Tick(float deltaTime)
 
 	//ImGuizmo has to be called here, it's part of ImGui
 	transformGizmo.Tick();
-
-	if (cutsceneSequencerOpen)
-	{
-		cutsceneSequencer.UITick(deltaTime);
-	}
 
 	RenderFPSMenu(deltaTime);
 	RenderGPUMenu();

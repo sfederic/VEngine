@@ -237,8 +237,6 @@
     <ClCompile Include="Code\UI\DebugNoteWidget.cpp" />
     <ClCompile Include="Code\Particle\SpriteSheet.cpp" />
     <ClCompile Include="Code\Actors\SpriteSheetActor.cpp" />
-    <ClCompile Include="Code\Editor\CutsceneSequencer.cpp" />
-    <ClCompile Include="Code\Actors\CutsceneActor.cpp" />
     <ClCompile Include="Code\Actors\DiffuseProbeMap.cpp" />
     <ClCompile Include="Code\Actors\PostProcessVolume.cpp" />
     <ClCompile Include="Code\Render\Texture2D.cpp" />
@@ -542,8 +540,6 @@
     <ClInclude Include="Code\Actors\DebugNoteActor.h" />
     <ClInclude Include="Code\Particle\SpriteSheet.h" />
     <ClInclude Include="Code\Actors\SpriteSheetActor.h" />
-    <ClInclude Include="Code\Editor\CutsceneSequencer.h" />
-    <ClInclude Include="Code\Actors\CutsceneActor.h" />
     <ClInclude Include="Code\Actors\DiffuseProbeMap.h" />
     <ClInclude Include="Code\Actors\PostProcessVolume.h" />
     <ClInclude Include="Code\Render\Texture2D.h" />

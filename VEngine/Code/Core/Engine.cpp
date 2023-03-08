@@ -25,7 +25,6 @@
 #include "Commands/CommandSystem.h"
 #include "Audio/AudioSystem.h"
 #include "Physics/PhysicsSystem.h"
-#include "Editor/CutsceneSequencer.h"
 #include "Gameplay/WorldFunctions.h"
 
 void ClearLog()
@@ -84,8 +83,6 @@ void Engine::TickSystems(float deltaTime)
 	Core::Tick();
 	CommandSystem::Tick();
 	AudioSystem::Tick();
-
-	cutsceneSequencer.PlaybackTick(deltaTime);
 
 	if (!Core::gameplayOn) //Tick editor camera
 	{

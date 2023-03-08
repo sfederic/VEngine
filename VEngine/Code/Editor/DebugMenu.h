@@ -39,7 +39,6 @@ public:
 	bool physicsMenuOpen = false;
 	bool coreMenuOpen = false;
 	bool particleMenuOpen = false;
-	bool cutsceneSequencerOpen = false;
 	bool worldMenuOpen = false;
 
 	//Whether the Imgui windows have been clicked
