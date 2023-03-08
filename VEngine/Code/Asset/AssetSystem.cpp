@@ -10,6 +10,8 @@
 #include "Core/FileSystem.h"
 #include "Core/VString.h"
 #include "Asset/AssetPaths.h"
+#include "Render/MeshData.h"
+#include "Render/Vertex.h"
 
 std::map<std::string, MeshData> existingMeshData;
 

@@ -14,6 +14,8 @@
 #include "VertexShader.h"
 #include "PixelShader.h"
 #include "ShaderItem.h"
+#include "RastStates.h"
+#include "BlendStates.h"
 
 VEnum rastStates;
 VEnum blendStates;

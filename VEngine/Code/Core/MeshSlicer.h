@@ -1,14 +1,14 @@
 #pragma once
 
 #include <vector>
-#include "Render/RenderTypes.h"
+#include "Render/Vertex.h"
 
 class MeshComponent;
 
 namespace MeshSlicer
 {
-	void SliceMeshViaPlane(XMVECTOR planeCenter,
-		XMVECTOR planeNormal,
+	void SliceMeshViaPlane(DirectX::XMVECTOR planeCenter,
+		DirectX::XMVECTOR planeNormal,
 		MeshComponent& mesh,
 		std::vector<Vertex>& mesh0Verts,
 		std::vector<Vertex>& mesh1Verts);

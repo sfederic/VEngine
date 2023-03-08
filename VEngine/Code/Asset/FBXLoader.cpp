@@ -11,6 +11,9 @@
 #include "Animation/Animation.h"
 #include "Animation/AnimFrame.h"
 #include "Animation/Joint.h"
+#include "Animation/Skeleton.h"
+#include "Render/Vertex.h"
+#include "Render/MeshData.h"
 
 using namespace fbxsdk;
 

@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "DebugCapsule.h"
 #include "Components/MeshComponent.h"
+#include "Render/RastStates.h"
 
 DebugCapsule::DebugCapsule()
 {

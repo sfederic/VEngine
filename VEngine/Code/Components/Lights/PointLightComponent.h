@@ -2,7 +2,7 @@
 
 #include "Components/SpatialComponent.h"
 #include "Components/ComponentSystem.h"
-#include "Render/RenderTypes.h"
+#include "Render/Light.h"
 
 class PointLightComponent : public SpatialComponent
 {

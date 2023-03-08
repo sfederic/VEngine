@@ -1,8 +1,8 @@
 #include "vpch.h"
 #include "MeshComponentDataWidget.h"
 #include <qfiledialog.h>
-#include "Render/RenderTypes.h"
 #include "Core/VString.h"
+#include "Render/RenderPropertyStructs.h"
 #include "Asset/AssetPaths.h"
 
 MeshComponentDataWidget::MeshComponentDataWidget(Property& prop_)

@@ -1,5 +1,7 @@
 #pragma once
+
 #include "MeshComponent.h"
+#include "Render/MeshData.h"
 
 //Destructible mesh workflow:
 // 1. Blender -> Edit -> Preferences : turn on cell fracture

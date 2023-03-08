@@ -2,14 +2,14 @@
 
 #include <string>
 #include "Core/Transform.h"
-#include "RenderTypes.h"
+#include "VRect.h"
 
 struct Sprite
 {
 	Transform transform;
 
-	VRect srcRect = {};
-	VRect dstRect = {};
+	VRect srcRect;
+	VRect dstRect;
 
 	std::string textureFilename;
 

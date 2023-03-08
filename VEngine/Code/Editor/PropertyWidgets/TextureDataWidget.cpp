@@ -1,9 +1,9 @@
 #include "vpch.h"
 #include "TextureDataWidget.h"
 #include <qfiledialog.h>
-#include "Render/RenderTypes.h"
 #include "Core/VString.h"
 #include "Asset/AssetPaths.h"
+#include "Render/RenderPropertyStructs.h"
 
 TextureDataWidget::TextureDataWidget(Property& prop_)
 {

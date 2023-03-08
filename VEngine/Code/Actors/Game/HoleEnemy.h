@@ -10,7 +10,7 @@ class HoleEnemy : public Enemy
 public:
 	ACTOR_SYSTEM(HoleEnemy);
 
-	HoleEnemy();
+	HoleEnemy() {}
 	void Create() override;
 
 private:

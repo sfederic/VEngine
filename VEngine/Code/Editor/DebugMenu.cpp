@@ -39,6 +39,7 @@
 #include "Render/Texture2D.h"
 #include "Render/MaterialSystem.h"
 #include "Render/Material.h"
+#include "Animation/Skeleton.h"
 #include "Core/Log.h"
 
 DebugMenu debugMenu;

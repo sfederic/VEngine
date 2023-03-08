@@ -218,9 +218,6 @@
     <ClCompile Include="Code\Render\MaterialSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Render\RenderTypes.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Editor\PropertyWidgets\Float2Widget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -617,6 +614,9 @@
     <ClCompile Include="Code\Animation\Animation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Render\ShaderData\ShaderMatrices.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -635,7 +635,6 @@
     </ClInclude>
     <ClInclude Include="Code\Render\PipelineObjects.h" />
     <ClInclude Include="Code\Render\Renderer.h" />
-    <ClInclude Include="Code\Render\RenderTypes.h" />
     <ClInclude Include="Code\Render\ShaderSystem.h" />
     <ClInclude Include="Code\Physics\Raycast.h" />
     <ClInclude Include="Code\Editor\AssetDock.h" />
@@ -1202,6 +1201,57 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Animation\Animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Render\Vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Render\Triangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Render\VRect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Render\RastStates.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Render\BlendStates.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Render\Line.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Render\MeshData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Render\RenderPropertyStructs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Render\MeshDataProxy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Render\ShaderData\ShaderMatrices.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Render\Light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Render\ShaderData\ShaderLights.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Render\ShaderData\ShaderTimeData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Render\ShaderData\ShaderMeshData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Render\ShaderData\ShaderSkinningData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Render\ShaderData\ShaderPostProcessData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Render\ShaderData\InstanceData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

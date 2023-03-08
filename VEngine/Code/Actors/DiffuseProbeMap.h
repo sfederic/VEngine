@@ -4,6 +4,7 @@
 #include "ActorSystem.h"
 
 class InstanceMeshComponent;
+struct InstanceData;
 
 struct ProbeData
 {

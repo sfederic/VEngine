@@ -7,7 +7,7 @@
 #include "Actors/Actor.h"
 #include "Camera.h"
 #include "Components/CameraComponent.h"
-#include "Render/RenderTypes.h"
+#include "Render/Vertex.h"
 
 namespace VMath
 {

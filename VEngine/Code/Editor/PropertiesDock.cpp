@@ -29,7 +29,7 @@
 #include "PropertyWidgets/VEnumWidget.h"
 #include "Core/VEnum.h"
 #include "Render/Material.h"
-#include "Render/RenderTypes.h"
+#include "Render/RenderPropertyStructs.h"
 
 std::unordered_map<std::type_index, std::function<void(Property&, int)>> typeToFunctionMap;
 

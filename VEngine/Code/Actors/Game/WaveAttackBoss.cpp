@@ -4,6 +4,8 @@
 #include "Actors/Game/LevelInstance.h"
 #include "Physics/Raycast.h"
 #include "Core/VMath.h"
+#include "Render/RastStates.h"
+#include "Render/BlendStates.h"
 
 WaveAttackBoss::WaveAttackBoss()
 {

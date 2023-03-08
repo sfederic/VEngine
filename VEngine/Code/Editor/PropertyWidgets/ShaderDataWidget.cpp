@@ -4,7 +4,7 @@
 #include "Core/VString.h"
 #include "Core/Log.h"
 #include "Asset/AssetPaths.h"
-#include "Render/RenderTypes.h"
+#include "Render/RenderPropertyStructs.h"
 #include "Render/ShaderSystem.h"
 
 ShaderDataWidget::ShaderDataWidget(Property& prop_)

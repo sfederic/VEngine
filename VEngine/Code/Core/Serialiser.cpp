@@ -3,7 +3,7 @@
 #include "Properties.h"
 #include "Actors/Actor.h"
 #include "World.h"
-#include "Render/RenderTypes.h"
+#include "Render/RenderPropertyStructs.h"
 #include "VString.h"
 #include "VEnum.h"
 

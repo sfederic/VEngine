@@ -2,10 +2,7 @@
 #include "HoleEnemy.h"
 #include "Components/MeshComponent.h"
 #include "Gameplay/GameplayTags.h"
-
-HoleEnemy::HoleEnemy()
-{
-}
+#include "Render/RastStates.h"
 
 void HoleEnemy::Create()
 {

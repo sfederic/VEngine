@@ -51,6 +51,6 @@ void DestructibleMeshComponent::Create()
 Properties DestructibleMeshComponent::GetProps()
 {
     auto props = __super::GetProps();
-    props.title = "DestructibleMeshComponent";
+	props.title = GetTypeName();
     return props;
 }

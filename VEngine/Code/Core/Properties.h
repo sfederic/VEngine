@@ -3,7 +3,7 @@
 #include <map>
 #include <vector>
 #include "Property.h"
-#include "Render/RenderTypes.h"
+#include "Render/RenderPropertyStructs.h"
 
 struct Properties
 {

@@ -2,8 +2,8 @@
 
 #include "Components/SpatialComponent.h"
 #include "Components/ComponentSystem.h"
+#include "Render/MeshData.h"
 #include "Physics/Raycast.h"
-#include "Render/RenderTypes.h"
 
 struct Buffer;
 struct MeshDataProxy;

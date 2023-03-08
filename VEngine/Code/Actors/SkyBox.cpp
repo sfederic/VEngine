@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "SkyBox.h"
 #include "Components/MeshComponent.h"
+#include "Render/RastStates.h"
 
 SkyBox::SkyBox()
 {

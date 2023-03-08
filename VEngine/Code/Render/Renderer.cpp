@@ -1,7 +1,6 @@
 #include "vpch.h"
 #include "Renderer.h"
 #include <dxgi1_6.h>
-#include "RenderTypes.h"
 #include "PipelineObjects.h"
 #include <ScreenGrab.h>
 #include <SHMath/DirectXSH.h>
@@ -55,6 +54,17 @@
 #include "Render/SpriteSystem.h"
 #include "Render/VertexShader.h"
 #include "Render/PixelShader.h"
+#include "Vertex.h"
+#include "RastStates.h"
+#include "BlendStates.h"
+#include "Render/ShaderData/ShaderMatrices.h"
+#include "Render/ShaderData/ShaderMeshData.h"
+#include "Render/ShaderData/ShaderPostProcessData.h"
+#include "Render/ShaderData/ShaderSkinningData.h"
+#include "Render/ShaderData/ShaderLights.h"
+#include "Render/ShaderData/ShaderTimeData.h"
+#include "Render/ShaderData/InstanceData.h"
+#include "Line.h"
 
 void CreateFactory();
 void CreateDevice();

@@ -2,6 +2,7 @@
 #include "InstanceMeshComponent.h"
 #include "Render/RenderUtils.h"
 #include "Render/Material.h"
+#include "Render/ShaderData/InstanceData.h"
 
 InstanceMeshComponent::InstanceMeshComponent(uint32_t meshInstanceRenderCount_,
 	const std::string filename,

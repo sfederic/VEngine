@@ -2,6 +2,7 @@
 
 #include "Actors/Actor.h"
 #include "Actors/ActorSystem.h"
+#include "Render/Vertex.h"
 
 class MeshComponent;
 

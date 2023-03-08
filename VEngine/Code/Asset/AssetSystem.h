@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Render/RenderTypes.h"
+#include "Render/MeshDataProxy.h"
+#include "Animation/Animation.h"
 
 namespace AssetSystem
 {

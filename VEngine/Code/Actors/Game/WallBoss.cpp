@@ -2,6 +2,7 @@
 #include "WallBoss.h"
 #include "Components/MeshComponent.h"
 #include "Core/VMath.h"
+#include "Render/RastStates.h"
 
 WallBoss::WallBoss()
 {

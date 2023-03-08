@@ -3,6 +3,7 @@
 #include <limits>
 #include "Core/Camera.h"
 #include "Render/Renderer.h"
+#include "Render/Line.h"
 #include "Editor/Editor.h"
 #include "Core/VMath.h"
 #include "Actors/Actor.h"

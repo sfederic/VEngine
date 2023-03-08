@@ -7,6 +7,7 @@
 #include "Core/Log.h"
 #include "Components/InstanceMeshComponent.h"
 #include "Render/Material.h"
+#include "Render/ShaderData/InstanceData.h"
 
 DiffuseProbeMap::DiffuseProbeMap()
 {

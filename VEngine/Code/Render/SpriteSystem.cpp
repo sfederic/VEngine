@@ -6,6 +6,8 @@
 #include "Core/Debug.h"
 #include "Particle/SpriteSheet.h"
 #include "Texture2D.h"
+#include "Render/Vertex.h"
+#include "Render/MeshData.h"
 
 static SystemStates systemState = SystemStates::Unloaded;
 ID3D11Buffer* spriteVertexBuffer = nullptr;

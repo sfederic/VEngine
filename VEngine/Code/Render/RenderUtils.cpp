@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "RenderUtils.h"
-#include "RenderTypes.h"
 #include "Texture2D.h"
 #include "PipelineObjects.h"
 #include "Core/Debug.h"
@@ -9,6 +8,7 @@
 #include <filesystem>
 #include "Core/VString.h"
 #include "Asset/AssetPaths.h"
+#include "MeshDataProxy.h"
 
 namespace RenderUtils
 {
@@ -136,7 +136,7 @@ namespace RenderUtils
 
 		ID3D11Resource* resource = nullptr;
 		ID3D11ShaderResourceView* srv = nullptr;
-		HR(CreateWICTextureFromFile(device, path.c_str(), &resource, &srv));
+		HR(DirectX::CreateWICTextureFromFile(device, path.c_str(), &resource, &srv));
 		assert(resource);
 		assert(srv);
 

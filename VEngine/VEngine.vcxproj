@@ -177,7 +177,6 @@
     <ClCompile Include="Code\Gameplay\GameInstance.cpp" />
     <ClCompile Include="Code\Core\Properties.cpp" />
     <ClCompile Include="Code\Render\PipelineObjects.cpp" />
-    <ClCompile Include="Code\Render\RenderTypes.cpp" />
     <ClCompile Include="Code\Core\System.cpp" />
     <ClCompile Include="Code\Core\UID.cpp" />
     <ClCompile Include="Code\UI\Game\PlayerShieldWidget.cpp" />
@@ -282,11 +281,28 @@
     <ClCompile Include="Code\Actors\Game\CrashLandEnemySpawner.cpp" />
     <ClCompile Include="Code\Actors\Game\MapScreenPlayer.cpp" />
     <ClCompile Include="Code\Actors\Game\LevelInstance.cpp" />
+    <ClCompile Include="Code\Render\ShaderData\ShaderMatrices.cpp" />
     <ClInclude Include="Code\Actors\Game\AntiAirEnemy.h" />
     <ClInclude Include="Code\Animation\AnimFrame.h" />
+    <ClInclude Include="Code\Render\BlendStates.h" />
     <ClInclude Include="Code\Animation\BoneWeights.h" />
     <ClInclude Include="Code\Animation\Animation.h" />
     <ClInclude Include="Code\Animation\Joint.h" />
+    <ClInclude Include="Code\Render\Light.h" />
+    <ClInclude Include="Code\Render\Line.h" />
+    <ClInclude Include="Code\Render\RenderPropertyStructs.h" />
+    <ClInclude Include="Code\Render\MeshData.h" />
+    <ClInclude Include="Code\Render\MeshDataProxy.h" />
+    <ClInclude Include="Code\Render\RastStates.h" />
+    <ClInclude Include="Code\Render\ShaderData\InstanceData.h" />
+    <ClInclude Include="Code\Render\ShaderData\ShaderLights.h" />
+    <ClInclude Include="Code\Render\ShaderData\ShaderMeshData.h" />
+    <ClInclude Include="Code\Render\ShaderData\ShaderPostProcessData.h" />
+    <ClInclude Include="Code\Render\ShaderData\ShaderSkinningData.h" />
+    <ClInclude Include="Code\Render\ShaderData\ShaderTimeData.h" />
+    <ClInclude Include="Code\Render\Triangle.h" />
+    <ClInclude Include="Code\Render\Vertex.h" />
+    <ClInclude Include="Code\Render\VRect.h" />
     <ClInclude Include="Code\Gameplay\Gears\BeamRifleGear.h" />
     <ClInclude Include="Code\Gameplay\Gears\CanonGear.h" />
     <ClInclude Include="Code\Actors\Game\BuildingRubble.h" />
@@ -457,7 +473,6 @@
     <ClInclude Include="Code\Core\Properties.h" />
     <ClCompile Include="Code\Render\Renderer.cpp" />
     <ClInclude Include="Code\Render\Renderer.h" />
-    <ClInclude Include="Code\Render\RenderTypes.h" />
     <ClInclude Include="Code\Render\ShaderSystem.h" />
     <ClCompile Include="Code\Core\Serialiser.cpp" />
     <ClInclude Include="Code\Core\Serialiser.h" />
@@ -572,6 +587,7 @@
     <ClInclude Include="Code\Actors\Game\CrashLandEnemySpawner.h" />
     <ClInclude Include="Code\Actors\Game\MapScreenPlayer.h" />
     <ClInclude Include="Code\Actors\Game\LevelInstance.h" />
+    <ClInclude Include="Code\Render\ShaderData\ShaderMatrices.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

@@ -3,6 +3,7 @@
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
 #include "Components/MeshComponent.h"
+#include "Render/Vertex.h"
 
 using namespace DirectX;
 
@@ -204,8 +205,8 @@ void RemoveDuplicateNewVerts(std::vector<Vertex>& newVerts)
 	}
 }
 
-void MeshSlicer::SliceMeshViaPlane(XMVECTOR planeCenter,
-	XMVECTOR planeNormal,
+void MeshSlicer::SliceMeshViaPlane(DirectX::XMVECTOR planeCenter,
+	DirectX::XMVECTOR planeNormal,
 	MeshComponent& mesh,
 	std::vector<Vertex>& mesh0Verts,
 	std::vector<Vertex>& mesh1Verts)

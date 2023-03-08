@@ -1,6 +1,6 @@
 #include "vpch.h"
-#include "RenderTypes.h"
-#include "Material.h"
+#include "ShaderMatrices.h"
+#include "Render/Material.h"
 #include "Core/Camera.h"
 #include "Core/Core.h"
 

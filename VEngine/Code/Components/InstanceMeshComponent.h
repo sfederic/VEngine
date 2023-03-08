@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Components/MeshComponent.h"
+#include "Render/ShaderData/InstanceData.h"
 
 struct ID3D11Buffer;
 struct ID3D11ShaderResourceView;

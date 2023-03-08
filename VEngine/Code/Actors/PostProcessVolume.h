@@ -2,7 +2,7 @@
 
 #include "Actor.h"
 #include "ActorSystem.h"
-#include "Render/RenderTypes.h"
+#include "Render/ShaderData/ShaderPostProcessData.h"
 
 class BoxTriggerComponent;
 
@@ -14,8 +14,7 @@ public:
 	PostProcessVolume();
 	Properties GetProps() override;
 
-	ShaderPostProcessData GetPostProcessData() { return postProcessData; }
-
+	auto GetPostProcessData() { return postProcessData; }
 	bool IsActiveCameraInsideVolume();
 
 private:

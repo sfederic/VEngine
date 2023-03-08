@@ -9,7 +9,7 @@ static bool ramielDefeated = false;
 static std::string primaryGear;
 static std::string secondaryGear;
 
-static XMFLOAT3 playerMapScreenPos;
+static DirectX::XMFLOAT3 playerMapScreenPos;
 
 Properties GameInstance::GetGlobalProps()
 {
