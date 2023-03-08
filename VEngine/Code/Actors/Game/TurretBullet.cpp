@@ -13,7 +13,7 @@ TurretBullet::TurretBullet()
 	rootComponent = mesh;
 
 	boxTrigger = CreateComponent<BoxTriggerComponent>("BoxTrigger");
-	boxTrigger->boundingBox.Extents = XMFLOAT3(0.2f, 0.2f, 0.2f);
+	boxTrigger->SetBoundsExtents(XMFLOAT3(0.2f, 0.2f, 0.2f));
 	rootComponent->AddChild(boxTrigger);
 }
 

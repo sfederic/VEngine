@@ -1,5 +1,6 @@
 #include "vpch.h"
 #include "LelielBoss.h"
+#include "Actors/Game/LevelInstance.h"
 #include "Components/MeshComponent.h"
 #include "Core/VMath.h"
 

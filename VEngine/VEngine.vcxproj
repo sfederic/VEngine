@@ -280,6 +280,7 @@
     <ClCompile Include="Code\Actors\Game\TargetableMesh.cpp" />
     <ClCompile Include="Code\Actors\Game\CrashLandEnemySpawner.cpp" />
     <ClCompile Include="Code\Actors\Game\MapScreenPlayer.cpp" />
+    <ClCompile Include="Code\Actors\Game\LevelInstance.cpp" />
     <ClInclude Include="Code\Actors\Game\AntiAirEnemy.h" />
     <ClInclude Include="Code\Gameplay\Gears\BeamRifleGear.h" />
     <ClInclude Include="Code\Gameplay\Gears\CanonGear.h" />
@@ -567,6 +568,7 @@
     <ClInclude Include="Code\Actors\Game\TargetableMesh.h" />
     <ClInclude Include="Code\Actors\Game\CrashLandEnemySpawner.h" />
     <ClInclude Include="Code\Actors\Game\MapScreenPlayer.h" />
+    <ClInclude Include="Code\Actors\Game\LevelInstance.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

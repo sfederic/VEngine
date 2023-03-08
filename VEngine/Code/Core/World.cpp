@@ -10,6 +10,7 @@
 #include "Actors/MeshActor.h"
 #include "Actors/Game/Player.h"
 #include "Actors/DirectionalLightActor.h"
+#include "Actors/Game/LevelInstance.h"
 #include "Actors/ActorSystemCache.h"
 #include "Components/ComponentSystemCache.h"
 #include "Components/IComponentSystem.h"

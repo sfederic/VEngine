@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "WaveAttackBoss.h"
 #include "Components/MeshComponent.h"
+#include "Actors/Game/LevelInstance.h"
 #include "Physics/Raycast.h"
 #include "Core/VMath.h"
 
@@ -57,7 +58,7 @@ void WaveAttackBoss::ShootAreaAttack()
 	areaAttackMesh->SetWorldScale(5.f);
 	areaAttackMesh->SetBlendState(BlendStates::Default);
 	areaAttackMesh->SetAmbientColour(XMFLOAT4(1.f, 1.f, 1.f, 0.3f));
-	areaAttackMesh->layer = CollisionLayers::None;
+	areaAttackMesh->SetCollisionLayer(CollisionLayers::None);
 
 	auto levelInstance = LevelInstance::system.GetFirstActor();
 	const auto rot = VMath::LookAtRotation(GetPositionV() + nextAreaAttackDirection, areaAttackMesh->GetWorldPositionV());

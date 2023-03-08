@@ -38,7 +38,7 @@ void CrashLandEnemySpawner::SpawnCrashLandEnemy()
 	}
 
 	Transform transform;
-	transform.position = boxTrigger->GetRandomPointInTrigger();
+	XMStoreFloat3(&transform.position, boxTrigger->GetRandomPointInTrigger());
 	auto crashLandEnemy = CrashLandEnemy::system.Add(transform);
 
 	crashLandEnemy->Create();
