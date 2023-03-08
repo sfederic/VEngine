@@ -7,16 +7,17 @@
 class DirectionalLightComponent : public SpatialComponent
 {
 public:
-	COMPONENT_SYSTEM(DirectionalLightComponent)
+	COMPONENT_SYSTEM(DirectionalLightComponent);
 
-	DirectionalLightComponent();
+	DirectionalLightComponent() {}
 	void Create() override;
-	virtual Properties GetProps() override;
+	void Tick(float deltaTime) override;
+	Properties GetProps() override;
 
 	auto GetLightData() { return lightData; }
 	auto GetShadowMapOrthoSize() { return shadowMapOrthoSize; }
 
 private:
 	Light lightData;
-	float shadowMapOrthoSize = 30.f;
+	float shadowMapOrthoSize = 0.f;
 };

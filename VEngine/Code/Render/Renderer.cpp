@@ -80,7 +80,6 @@ void RenderLightMeshes();
 void RenderPolyboards();
 void RenderSpriteSheets();
 void RenderPostProcess();
-void UpdateLights();
 void MapBuffer(ID3D11Resource* resource, const void* src, size_t size);
 void DrawMesh(MeshComponent* mesh);
 void DrawMeshInstanced(InstanceMeshComponent* mesh);
@@ -109,6 +108,7 @@ void SetIndexBuffer(Buffer* indexBuffer);
 void SetSampler(uint32_t shaderRegister, Sampler* sampler);
 void SetShaderResourcePixel(uint32_t shaderRegister, std::string textureName);
 void SetShaderResourceFromMaterial(uint32_t shaderRegister, Material* material);
+void SetLightsConstantBufferData();
 
 void CreatePostProcessRenderTarget();
 
@@ -784,7 +784,7 @@ void Renderer::Render()
 		RenderSetup();
 	}
 
-	UpdateLights();
+	SetLightsConstantBufferData();
 
 	RenderMeshComponents();
 	AnimateAndRenderSkeletalMeshes();
@@ -924,7 +924,7 @@ void Renderer::RenderLightProbeViews()
 
 			context->RSSetState(rastStateMap[RastStates::solid]->data);
 
-			UpdateLights();
+			SetLightsConstantBufferData();
 
 			//Set lights buffer
 			cbLights->SetPS();
@@ -1583,54 +1583,39 @@ void Renderer::RenderSpritesInScreenSpace()
 	Profile::End();
 }
 
-//Loops over every light component and moves their data into the lights constant buffer
-void UpdateLights()
+void SetLightsConstantBufferData()
 {
 	Profile::Start();
 
 	int shaderLightsIndex = 0;
 
-	//Directional lights
 	for (auto& light : DirectionalLightComponent::system.GetComponents())
 	{
 		if (!light->IsActive()) continue;
 
-		Light lightData = light->GetLightData();
-		XMFLOAT3 forwardVector = light->GetForwardVector();
-		lightData.direction = XMFLOAT4(forwardVector.x, forwardVector.y, forwardVector.z, 0.f);
-
-		shaderLights.lights[shaderLightsIndex] = lightData;
+		shaderLights.lights[shaderLightsIndex] = light->GetLightData();
 		shaderLightsIndex++;
 	}
 
-	//Point lights
 	for (auto& light : PointLightComponent::system.GetComponents())
 	{
 		if (!light->IsActive()) continue;
 
-		XMStoreFloat4(&light->lightData.position, light->GetWorldPositionV());
-
-		shaderLights.lights[shaderLightsIndex] = light->lightData;
+		shaderLights.lights[shaderLightsIndex] = light->GetLightData();
 		shaderLightsIndex++;
 	}
 	
-	//Spot lights
 	for (auto& light : SpotLightComponent::system.GetComponents())
 	{
 		if (!light->IsActive()) continue;
 
-		XMStoreFloat4(&light->lightData.position, light->GetWorldPositionV());
-
-		XMFLOAT3 forwardVector = light->GetForwardVector();
-		light->lightData.direction = XMFLOAT4(forwardVector.x, forwardVector.y, forwardVector.z, 0.f);
-
-		shaderLights.lights[shaderLightsIndex] = light->lightData;
+		shaderLights.lights[shaderLightsIndex] = light->GetLightData();
 		shaderLightsIndex++;
 	}
 
 	shaderLights.numLights = shaderLightsIndex;
 
-	XMStoreFloat4(&shaderLights.eyePosition, activeCamera->transform.world.r[3]);
+	XMStoreFloat4(&shaderLights.eyePosition, activeCamera->GetWorldPositionV());
 
 	cbLights->Map(&shaderLights);
 	cbLights->SetVSAndPS();
