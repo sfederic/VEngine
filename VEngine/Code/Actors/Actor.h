@@ -7,7 +7,6 @@
 #include "Core/Transform.h"
 #include "Core/Properties.h"
 #include "Core/UID.h"
-#include "Core/Log.h"
 
 class Component;
 struct SpatialComponent;

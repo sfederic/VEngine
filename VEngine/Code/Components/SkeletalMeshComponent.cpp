@@ -2,6 +2,7 @@
 #include "SkeletalMeshComponent.h"
 #include <algorithm>
 #include "Core/Core.h"
+#include "Core/Log.h"
 #include "Asset/AssetSystem.h"
 
 Properties SkeletalMeshComponent::GetProps()

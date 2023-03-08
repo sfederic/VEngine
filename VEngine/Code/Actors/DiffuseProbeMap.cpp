@@ -4,6 +4,7 @@
 #include <algorithm>
 #include "Core/Debug.h"
 #include "Core/World.h"
+#include "Core/Log.h"
 #include "Components/InstanceMeshComponent.h"
 #include "Render/Material.h"
 

@@ -10,6 +10,7 @@
 #include "Editor/Editor.h"
 #include "Commands/CommandSystem.h"
 #include "Core.h"
+#include "Log.h"
 #include "Camera.h"
 #include "Components/CameraComponent.h"
 #include "Actors/Game/Player.h"

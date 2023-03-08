@@ -7,6 +7,7 @@
 #include "Camera.h"
 #include "Timer.h"
 #include "World.h"
+#include "Log.h"
 #include "WorldEditor.h"
 #include "FileSystem.h"
 #include "Asset/FBXLoader.h"

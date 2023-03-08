@@ -9,6 +9,7 @@
 #include "Commands/CommandSystem.h"
 #include "Commands/Command.h"
 #include "Core/Core.h"
+#include "Core/Log.h"
 #include "Console.h"
 
 TransformGizmo transformGizmo;

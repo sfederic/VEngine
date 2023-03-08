@@ -5,6 +5,7 @@
 #include "Components/MeshComponent.h"
 #include "Components/EmptyComponent.h"
 #include "Core/World.h"
+#include "Core/Log.h"
 #include "Core/Camera.h"
 
 XMMATRIX Actor::GetWorldMatrix()
