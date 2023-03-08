@@ -2,11 +2,10 @@
 #include "DebugNoteActor.h"
 #include "UI/DebugNoteWidget.h"
 #include "UI/UISystem.h"
-#include "Components/EmptyComponent.h"
 
 DebugNoteActor::DebugNoteActor()
 {
-    rootComponent = EmptyComponent::system.Add("Root", this);
+    SetEmptyRootComponent();
 }
 
 void DebugNoteActor::Start()

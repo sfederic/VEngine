@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 #include <vector>
 #include "ImGuizmo/ImSequencer.h"
@@ -16,25 +17,8 @@ struct CutsceneSequenceItem
 };
 
 //Editor using ImGuizmo for timelining cutscene events
-struct CutsceneSequencer : ImSequencer::SequenceInterface
+class CutsceneSequencer : public ImSequencer::SequenceInterface
 {
-private:
-	bool focused = false;
-	int frameMax = 250;
-
-	int selectedEntry = -1;
-	int firstFrame = 0;
-	bool expanded = true;
-	int currentFrame = 0;
-
-	int currentItemIndex = 0;
-
-	float playbackTimer = 0.f;
-	bool playingBack = false;
-	bool playbackLooping = false;
-
-	std::vector<CutsceneSequenceItem> items;
-
 public:
 	CutsceneSequencer();
 
@@ -73,6 +57,23 @@ public:
 
 	virtual void CustomDraw(int index, ImDrawList* draw_list, const ImRect& rc, const ImRect& legendRect, const ImRect& clippingRect, const ImRect& legendClippingRect) {}
 	virtual void CustomDrawCompact(int index, ImDrawList* draw_list, const ImRect& rc, const ImRect& clippingRect) {}
+
+private:
+	bool focused = false;
+	int frameMax = 250;
+
+	int selectedEntry = -1;
+	int firstFrame = 0;
+	bool expanded = true;
+	int currentFrame = 0;
+
+	int currentItemIndex = 0;
+
+	float playbackTimer = 0.f;
+	bool playingBack = false;
+	bool playbackLooping = false;
+
+	std::vector<CutsceneSequenceItem> items;
 };
 
 extern CutsceneSequencer cutsceneSequencer;
