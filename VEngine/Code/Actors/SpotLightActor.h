@@ -1,13 +1,18 @@
 #pragma once
+
 #include "Actor.h"
 #include "ActorSystem.h"
 
-struct SpotLightActor : Actor
-{
-	ACTOR_SYSTEM(SpotLightActor)
+class SpotLightComponent;
 
-	struct SpotLightComponent* spotLight;
+class SpotLightActor : public Actor
+{
+public:
+	ACTOR_SYSTEM(SpotLightActor);
 
 	SpotLightActor();
-	virtual Properties GetProps() override;
+	Properties GetProps() override;
+
+private:
+	SpotLightComponent* spotLight = nullptr;
 };

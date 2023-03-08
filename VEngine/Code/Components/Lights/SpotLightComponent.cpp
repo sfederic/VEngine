@@ -1,19 +1,15 @@
 #include "vpch.h"
 #include "SpotLightComponent.h"
 
-SpotLightComponent::SpotLightComponent()
+void SpotLightComponent::Create()
 {
     layer = CollisionLayers::Editor;
-
     lightData.lightType = (int)LightType::Spot;
 }
 
 void SpotLightComponent::Tick(float deltaTime)
 {
-}
 
-void SpotLightComponent::Create()
-{
 }
 
 Properties SpotLightComponent::GetProps()

@@ -1,16 +1,21 @@
 #pragma once
+
 #include "Components/SpatialComponent.h"
 #include "Components/ComponentSystem.h"
 #include "Render/RenderTypes.h"
 
-struct SpotLightComponent : SpatialComponent
+class SpotLightComponent : public SpatialComponent
 {
-	COMPONENT_SYSTEM(SpotLightComponent)
+public:
+	COMPONENT_SYSTEM(SpotLightComponent);
 
+	SpotLightComponent() {}
+	void Create() override;
+	void Tick(float deltaTime) override;
+	Properties GetProps() override;
+
+	auto GetLightData() { return lightData; }
+
+private:
 	Light lightData;
-
-	SpotLightComponent();
-	virtual void Tick(float deltaTime) override;
-	virtual void Create() override;
-	virtual Properties GetProps() override;
 };
