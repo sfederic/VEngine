@@ -60,7 +60,6 @@ private:
 	void RenderActorInspectMenu();
 	void RenderActorProps();
 	void IterateOverProperties(Properties& props);
-	void RenderCommandsMenu();
 	void RenderWorldStats();
 	void RenderGameInstanceData();
 	void RenderActorSystemMenu();

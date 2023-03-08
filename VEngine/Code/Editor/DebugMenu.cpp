@@ -88,7 +88,6 @@ void DebugMenu::Tick(float deltaTime)
 	RenderProfileMenu();
 	RenderSnappingMenu();
 	RenderActorProps();
-	RenderCommandsMenu();
 	RenderActorInspectMenu();
 	RenderWorldStats();
 	RenderGameInstanceData();
@@ -212,38 +211,6 @@ void DebugMenu::IterateOverProperties(Properties& props)
 			ImGui::InputFloat4("Rotation", *rotation);
 		}
 	}
-}
-
-void DebugMenu::RenderCommandsMenu()
-{
-	if (!commandsMenuOpen) return;
-
-	ImGui::Begin("Commands");
-
-	if (ImGui::BeginListBox("First"))
-	{
-		unsigned int cmdCount = 0;
-
-		for (ICommand* command : commandSystem.commands)
-		{
-			std::string name = command->name + std::to_string(cmdCount);
-
-			if (ImGui::Selectable(name.c_str()))
-			{
-				commandSystem.WindToCommand(cmdCount);
-			}
-
-			cmdCount++;
-		}
-		ImGui::EndListBox();
-	}
-
-	if (ImGui::Button("Clear Commands"))
-	{
-		commandSystem.Reset();
-	}
-
-	ImGui::End();
 }
 
 void DebugMenu::RenderWorldStats()
