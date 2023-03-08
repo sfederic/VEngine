@@ -63,6 +63,7 @@ public:
 	auto GetBoundingBox() { return boundingBox; }
 	XMVECTOR GetBoundsExtents() { return XMLoadFloat3(&boundingBox.Extents); }
 	XMVECTOR GetBoundsCenter() { return XMLoadFloat3(&boundingBox.Center); }
+	void SetBoundsExtents(XMFLOAT3 extents) { boundingBox.Extents = extents; }
 
 	auto GetTransform() { return transform; }
 	void SetTransform(const Transform& transform_) { transform = transform_; }
