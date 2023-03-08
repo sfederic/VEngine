@@ -488,9 +488,6 @@
     <ClCompile Include="Code\Components\Game\SwordBeam.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\LightVolume.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\Game\BasicEnemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1061,9 +1058,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Components\Game\SwordBeam.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\LightVolume.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\BasicEnemy.h">

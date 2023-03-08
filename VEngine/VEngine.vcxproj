@@ -250,7 +250,6 @@
     <ClCompile Include="Code\Actors\Game\InteractActor.cpp" />
     <ClCompile Include="Code\Actors\Game\RepairObject.cpp" />
     <ClCompile Include="Code\Components\Game\SwordBeam.cpp" />
-    <ClCompile Include="Code\Actors\LightVolume.cpp" />
     <ClCompile Include="Code\Components\SkeletalMeshComponent.cpp" />
     <ClCompile Include="Code\Particle\MeshParticleEmitter.cpp" />
     <ClCompile Include="Code\Core\MeshSlicer.cpp" />
@@ -539,7 +538,6 @@
     <ClInclude Include="Code\Actors\Game\InteractActor.h" />
     <ClInclude Include="Code\Actors\Game\RepairObject.h" />
     <ClInclude Include="Code\Components\Game\SwordBeam.h" />
-    <ClInclude Include="Code\Actors\LightVolume.h" />
     <ClInclude Include="Code\Components\SkeletalMeshComponent.h" />
     <ClInclude Include="Code\Particle\MeshParticleEmitter.h" />
     <ClInclude Include="Code\Core\MeshSlicer.h" />
