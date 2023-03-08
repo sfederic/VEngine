@@ -1,15 +1,18 @@
 #pragma once
+
 #include "Actor.h"
 #include "ActorSystem.h"
 
-struct SpriteSheet;
+class SpriteSheet;
 
-struct SpriteSheetActor : Actor
+class SpriteSheetActor : public Actor
 {
+public:
 	ACTOR_SYSTEM(SpriteSheetActor);
 
-	SpriteSheet* spriteSheet = nullptr;
-
 	SpriteSheetActor();
-	virtual Properties GetProps() override;
+	Properties GetProps() override;
+
+private:
+	SpriteSheet* spriteSheet = nullptr;
 };

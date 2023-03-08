@@ -4,10 +4,13 @@
 
 PolyboardActor::PolyboardActor()
 {
-    polyboard = Polyboard::system.Add("PolyBoard", this);
+    polyboard = CreateComponent<Polyboard>("PolyBoard");
+    rootComponent = polyboard;
 }
 
 Properties PolyboardActor::GetProps()
 {
-    return __super::GetProps();
+    auto props = __super::GetProps();
+    props.title = GetTypeName();
+    return props;
 }

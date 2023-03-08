@@ -2,7 +2,6 @@
 
 #include "Actor.h"
 #include "ActorSystem.h"
-#include <string>
 
 class MeshComponent;
 

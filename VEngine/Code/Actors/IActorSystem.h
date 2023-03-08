@@ -11,9 +11,6 @@ struct Transform;
 
 class IActorSystem
 {
-protected:
-	std::string name;
-
 public:
 	virtual void Tick(float deltaTime) = 0;
 	virtual void Init() = 0;
@@ -33,4 +30,7 @@ public:
 	virtual void Deserialise(Deserialiser& s) = 0;
 	virtual void DeserialiseBinary(BinaryDeserialiser& s) = 0;
 	virtual void Cleanup() = 0;
+
+protected:
+	std::string name;
 };

@@ -5,12 +5,14 @@
 
 class Polyboard;
 
-struct PolyboardActor : Actor
+class PolyboardActor : public Actor
 {
+public:
 	ACTOR_SYSTEM(PolyboardActor);
 
-	Polyboard* polyboard = nullptr;
-
 	PolyboardActor();
-	virtual Properties GetProps() override;
+	Properties GetProps() override;
+
+private:
+	Polyboard* polyboard = nullptr;
 };

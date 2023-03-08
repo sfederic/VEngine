@@ -4,13 +4,13 @@
 
 SpotLightActor::SpotLightActor()
 {
-    spotLight = SpotLightComponent::system.Add("SpotLight", this);
+    spotLight = CreateComponent<SpotLightComponent>("SpotLight");
     rootComponent = spotLight;
 }
 
 Properties SpotLightActor::GetProps()
 {
-    Properties props = Actor::GetProps();
-    props.title = "SpotLightActor";
+    auto props = __super::GetProps();
+    props.title = GetTypeName();
     return props;
 }
