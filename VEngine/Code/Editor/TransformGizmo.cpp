@@ -185,7 +185,7 @@ void TransformGizmo::Tick()
         Actor* actor = WorldEditor::GetPickedActor();
         if (actor)
         {
-            commandSystem.Add(new Command<Transform>(&actor->GetRootComponent().transform));
+            CommandSystem::Add<Transform>(&actor->GetRootComponent().transform);
         }
     }
 
