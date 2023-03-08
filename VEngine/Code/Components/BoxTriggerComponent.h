@@ -20,8 +20,7 @@ public:
 	bool Contains(XMVECTOR point);
 	bool ContainsTarget();
 	void SetTargetAsPlayer();
-	XMFLOAT3 GetRandomPointInTrigger();
-	XMVECTOR GetRandomPointInTriggerRounded();
+	XMVECTOR GetRandomPointInTrigger();
 	bool IntersectsWithAnyBoundingBoxInWorld();
 
 	void SetExtents(float x, float y, float z);

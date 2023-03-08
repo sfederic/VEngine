@@ -545,7 +545,7 @@ void DrawMeshInstanced(InstanceMeshComponent* mesh)
 
 void DrawBoundingBox(MeshComponent* mesh, MeshComponent* boundsMesh)
 {
-	const DirectX::BoundingOrientedBox boundingBox = mesh->boundingBox;
+	const DirectX::BoundingOrientedBox boundingBox = mesh->GetBoundingBox();
 
 	//Make extents double for rendering
 	const XMFLOAT3 extents = XMFLOAT3(boundingBox.Extents.x + boundingBox.Extents.x,
@@ -1130,11 +1130,11 @@ void RenderBounds()
 			shaderMatrices.model = boxTrigger->GetWorldMatrix();
 
 			//Set to * 2.f because of extents
-			shaderMatrices.model.r[0].m128_f32[0] *= boxTrigger->boundingBox.Extents.x * 2.f;
-			shaderMatrices.model.r[1].m128_f32[1] *= boxTrigger->boundingBox.Extents.y * 2.f;
-			shaderMatrices.model.r[2].m128_f32[2] *= boxTrigger->boundingBox.Extents.z * 2.f;
+			shaderMatrices.model.r[0].m128_f32[0] *= boxTrigger->GetBoundingBox().Extents.x * 2.f;
+			shaderMatrices.model.r[1].m128_f32[1] *= boxTrigger->GetBoundingBox().Extents.y * 2.f;
+			shaderMatrices.model.r[2].m128_f32[2] *= boxTrigger->GetBoundingBox().Extents.z * 2.f;
 
-			shaderMatrices.model.r[3] += XMLoadFloat3(&boxTrigger->boundingBox.Center);
+			shaderMatrices.model.r[3] += boxTrigger->GetBoundsCenter();
 
 			shaderMatrices.MakeModelViewProjectionMatrix();
 			cbMatrices->Map(&shaderMatrices);

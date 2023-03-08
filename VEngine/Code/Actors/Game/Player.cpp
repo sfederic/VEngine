@@ -5,7 +5,6 @@
 #include "Core/VMath.h"
 #include "Core/Timer.h"
 #include "Actors/Game/Enemy.h"
-#include "Actors/Game/LevelInstance.h"
 #include "Actors/Game/InteractActor.h"
 #include "Actors/MeshSliceActor.h"
 #include "Components/MeshComponent.h"

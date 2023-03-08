@@ -4,7 +4,6 @@
 #include "Components/BoxTriggerComponent.h"
 #include "Actors/Game/Player.h"
 #include "Actors/Game/TurretEnemy.h"
-#include "Actors/Game/LevelInstance.h"
 #include "Physics/Raycast.h"
 #include "Gameplay/GameUtils.h"
 
@@ -27,7 +26,7 @@ void TurretBullet::Tick(float deltaTime)
 	HitResult hitResult(this);
 	auto turretEnemies = TurretEnemy::system.GetActorsAsBaseClass();
 	hitResult.AddActorsToIgnore(turretEnemies);
-	if (SimpleBoxCast(GetPositionV(), boxTrigger->boundingBox.Extents, hitResult, false))
+	if (SimpleBoxCast(GetPositionV(), boxTrigger->GetBoundingBox().Extents, hitResult, false))
 	{
 		auto player = dynamic_cast<Player*>(hitResult.hitActors.front());
 		if (player)

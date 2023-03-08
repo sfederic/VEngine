@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "WaveAttackBoss.h"
-#include "Actors/Game/LevelInstance.h"
 #include "Components/MeshComponent.h"
 #include "Physics/Raycast.h"
 #include "Core/VMath.h"
@@ -91,7 +90,9 @@ void WaveAttackBoss::RaycastCheckOnAreaAttackDimensions()
 //its positon to the center of the map, that way the player will have to orient from all directions to dodge.
 void WaveAttackBoss::SecondPhaseWarpAroundLevel()
 {
-	if (isInSecondPhase)
+	//@Todo: come back here and redo levelinstance code. Player was changed to use CharacterController,
+	//see if it can work with BoundingBox around level.
+	/*if (isInSecondPhase)
 	{
 		const auto levelInstance = LevelInstance::system.GetFirstActor();
 		const auto randomCardinalDirection = VMath::RandomCardinalDirectionVector();
@@ -101,5 +102,5 @@ void WaveAttackBoss::SecondPhaseWarpAroundLevel()
 		nextAreaAttackDirection = -randomCardinalDirection;
 		const auto rot = VMath::LookAtRotation(GetPositionV() - randomCardinalDirection, GetPositionV());
 		SetRotation(rot);
-	}
+	}*/
 }

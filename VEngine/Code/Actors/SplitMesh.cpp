@@ -29,7 +29,9 @@ void SplitMesh::CreateSplitMesh(std::vector<Vertex>& meshVerts, MeshComponent* o
 	*mesh->meshDataProxy.vertices = meshVerts;
 
 	mesh->isStatic = false;
-	mesh->transform = originalMesh->transform;
+
+	auto originalMeshTransform = originalMesh->GetTransform();
+	mesh->SetTransform(originalMeshTransform);
 
 	mesh->SetTexture(originalMesh->GetTextureFilename());
 

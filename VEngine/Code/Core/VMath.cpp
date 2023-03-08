@@ -326,14 +326,12 @@ namespace VMath
     {
         //Position
         XMVECTOR worldPos = sc->GetWorldPositionV();
-        XMVECTOR boundingBoxCenter = XMLoadFloat3(&sc->boundingBox.Center);
-        XMVECTOR offset = worldPos + boundingBoxCenter;
+        XMVECTOR offset = worldPos + sc->GetBoundsCenter();
         offset.m128_f32[3] = 1.0f;
 
         //Scale
         XMVECTOR spatialComponentScale = sc->GetLocalScaleV();
-        XMVECTOR extents = XMLoadFloat3(&sc->boundingBox.Extents);
-        XMVECTOR scale = extents * spatialComponentScale;
+        XMVECTOR scale = sc->GetBoundsExtents() * spatialComponentScale;
         scale.m128_f32[3] = 1.0f;
 
         //Rotation

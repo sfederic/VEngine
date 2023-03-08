@@ -5,7 +5,7 @@
 DebugCapsule::DebugCapsule()
 {
 	mesh = new MeshComponent("capsule.vmesh", "test.png");
-	mesh->layer = CollisionLayers::Editor;
+	mesh->SetCollisionLayer(CollisionLayers::Editor);
 	mesh->SetRastState(RastStates::wireframe);
 	mesh->Create();
 }

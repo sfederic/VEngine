@@ -16,7 +16,8 @@ Billboard::Billboard()
 
 void Billboard::Tick(float deltaTime)
 {
-    VMath::RotateTowardsCamera(rootComponent->transform);
+    auto rootTransform = rootComponent->GetTransform();
+    VMath::RotateTowardsCamera(rootTransform);
 }
 
 Properties Billboard::GetProps()

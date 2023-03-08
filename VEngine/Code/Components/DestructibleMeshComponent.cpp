@@ -37,7 +37,8 @@ void DestructibleMeshComponent::Create()
 		mesh->meshDataProxy.vertices = &meshData.vertices;
 
 		//Setup bounds
-		BoundingOrientedBox::CreateFromPoints(mesh->boundingBox, mesh->meshDataProxy.vertices->size(),
+		auto meshBoundingBox = mesh->GetBoundingBox();
+		BoundingOrientedBox::CreateFromPoints(meshBoundingBox, mesh->meshDataProxy.vertices->size(),
 			&mesh->meshDataProxy.vertices->at(0).pos, sizeof(Vertex));
 
 		mesh->pso.vertexBuffer = new Buffer();

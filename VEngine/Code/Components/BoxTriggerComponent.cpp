@@ -46,7 +46,7 @@ void BoxTriggerComponent::SetTargetAsPlayer()
 	targetActor = (Actor*)Player::system.GetFirstActor();
 }
 
-XMFLOAT3 BoxTriggerComponent::GetRandomPointInTrigger()
+XMVECTOR BoxTriggerComponent::GetRandomPointInTrigger()
 {
 	XMFLOAT3 pos;
 	XMStoreFloat3(&pos, GetWorldPositionV());
@@ -65,21 +65,14 @@ XMFLOAT3 BoxTriggerComponent::GetRandomPointInTrigger()
 	result.y = VMath::RandomRange(lowY, highY);
 	result.z = VMath::RandomRange(lowZ, highZ);
 
-	return result;
-}
-
-XMVECTOR BoxTriggerComponent::GetRandomPointInTriggerRounded()
-{
-	auto point = GetRandomPointInTrigger();
-	VMath::RoundFloat3(point);
-	return XMLoadFloat3(&point);
+	return XMLoadFloat3(&pos);
 }
 
 bool BoxTriggerComponent::IntersectsWithAnyBoundingBoxInWorld()
 {
 	for (auto& mesh : MeshComponent::system.GetComponents())
 	{
-		if (boundingBox.Intersects(mesh->boundingBox))
+		if (boundingBox.Intersects(mesh->GetBoundingBox()))
 		{
 			return true;
 		}

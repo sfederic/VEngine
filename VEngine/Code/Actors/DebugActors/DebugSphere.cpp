@@ -5,6 +5,6 @@
 DebugSphere::DebugSphere()
 {
 	sphereMesh = new MeshComponent("ico_sphere.vmesh", "test.png");
-	sphereMesh->layer = CollisionLayers::Editor;
+	sphereMesh->SetCollisionLayer(CollisionLayers::Editor);
 	sphereMesh->Create();
 }

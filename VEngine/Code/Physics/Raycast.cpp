@@ -82,8 +82,8 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 			}
 
 			//Collision layer checks
-			if (mesh->layer == CollisionLayers::None ||
-				mesh->layer == hitResult.ignoreLayer)
+			if (mesh->GetCollisionLayer() == CollisionLayers::None ||
+				mesh->GetCollisionLayer() == hitResult.ignoreLayer)
 			{
 				continue;
 			}

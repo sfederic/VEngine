@@ -165,7 +165,7 @@ void PhysicsSystem::ReleasePhysicsActor(MeshComponent* mesh)
 void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Actor* actor)
 {
 	PxTransform pxTransform = {};
-	Transform transform = mesh->transform;
+	const Transform transform = mesh->GetTransform();
 	ActorToPhysxTransform(transform, pxTransform);
 
 	PxRigidActor* rigidActor = nullptr;
@@ -184,7 +184,7 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Ac
 	assert(rigidActor);
 	rigidActor->userData = actor;
 
-	XMVECTOR extentsVector = XMLoadFloat3(&mesh->boundingBox.Extents) * mesh->GetLocalScaleV();
+	XMVECTOR extentsVector = mesh->GetBoundsExtents() * mesh->GetLocalScaleV();
 	XMFLOAT3 extents;
 	XMStoreFloat3(&extents, extentsVector);
 	NormaliseExtents(extents.x, extents.y, extents.z);
@@ -263,7 +263,7 @@ void PhysicsSystem::CreateConvexPhysicsMesh(MeshComponent* mesh, Actor* actor)
 	PxConvexMesh* convexMesh = physics->createConvexMesh(input);
 
 	PxTransform pxTransform = {};
-	Transform transform = mesh->transform;
+	const Transform transform = mesh->GetTransform();
 	ActorToPhysxTransform(transform, pxTransform);
 
 	PxRigidActor* rigidActor = nullptr;
@@ -286,7 +286,8 @@ void PhysicsSystem::CreateConvexPhysicsMeshFromCollisionMesh(MeshComponent* mesh
 {
 	auto collisionMesh = new MeshComponent();
 
-	collisionMesh->transform = actor->GetTransform();
+	auto actorTransform = actor->GetTransform();
+	collisionMesh->SetTransform(actorTransform);
 
 	//Set the UID to the actual mesh so that the physics actor is connected to the mesh, not the collision mesh.
 	collisionMesh->SetUID(mesh->GetUID());
@@ -319,10 +320,10 @@ void PhysicsSystem::GetTransformFromPhysicsActor(MeshComponent* mesh)
 	auto rigid = rigidActorMap.find(mesh->GetUID())->second;
 
 	PxTransform pxTransform = rigid->getGlobalPose();
-	Transform transform = mesh->transform;
+	Transform transform = mesh->GetTransform();
 	PhysxToActorTransform(transform, pxTransform);
 
-	mesh->transform = transform;
+	mesh->SetTransform(transform);
 	mesh->UpdateTransform();
 }
 

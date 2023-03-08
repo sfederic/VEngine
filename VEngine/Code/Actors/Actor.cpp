@@ -22,7 +22,9 @@ void Actor::UpdateTransform(const XMMATRIX parentWorld)
 		child->UpdateTransform(world);
 	}
 
-	rootComponent->transform.world = world;
+	auto rootTransform = rootComponent->GetTransform();
+	rootTransform.world = world;
+	rootComponent->SetTransform(rootTransform);
 }
 
 XMMATRIX Actor::GetTransformMatrix()
@@ -34,12 +36,12 @@ XMMATRIX Actor::GetTransformMatrix()
 		rotationOffset = parent->rootComponent->GetLocalPositionV();
 	}
 
-	return rootComponent->transform.GetAffineRotationOrigin(rotationOffset);
+	return rootComponent->GetTransform().GetAffineRotationOrigin(rotationOffset);
 }
 
 XMFLOAT3 Actor::GetPosition()
 {
-	return XMFLOAT3(rootComponent->transform.position);
+	return rootComponent->GetWorldPosition();
 }
 
 XMVECTOR Actor::GetPositionV()
@@ -61,7 +63,7 @@ XMVECTOR Actor::GetHomogeneousPositionV()
 
 XMFLOAT3 Actor::GetScale()
 {
-	return XMFLOAT3(rootComponent->transform.scale);
+	return rootComponent->GetWorldScale();
 }
 
 XMVECTOR Actor::GetScaleV()
@@ -72,7 +74,7 @@ XMVECTOR Actor::GetScaleV()
 
 XMFLOAT4 Actor::GetRotation()
 {
-	return XMFLOAT4(rootComponent->transform.rotation);
+	return rootComponent->GetWorldRotation();
 }
 
 XMVECTOR Actor::GetRotationV()
@@ -83,14 +85,12 @@ XMVECTOR Actor::GetRotationV()
 
 void Actor::SetPosition(const XMVECTOR position)
 {
-	XMStoreFloat3(&rootComponent->transform.position, position);
-	rootComponent->UpdateTransform();
+	rootComponent->SetWorldPosition(position);
 }
 
 void Actor::SetPosition(const XMFLOAT3 position)
 {
-	rootComponent->transform.position = position;
-	rootComponent->UpdateTransform();
+	rootComponent->SetWorldPosition(position);
 }
 
 void Actor::AddPositionV(const XMVECTOR offset)
@@ -100,14 +100,12 @@ void Actor::AddPositionV(const XMVECTOR offset)
 
 void Actor::SetScale(const XMVECTOR scale)
 {
-	XMStoreFloat3(&rootComponent->transform.scale, scale);
-	rootComponent->UpdateTransform();
+	rootComponent->SetWorldScale(scale);
 }
 
 void Actor::SetRotation(const XMVECTOR rotation)
 {
-	XMStoreFloat4(&rootComponent->transform.rotation, rotation);
-	rootComponent->UpdateTransform();
+	rootComponent->SetWorldRotation(rotation);
 }
 
 void Actor::AddRotation(XMVECTOR direction, float angle)
@@ -117,49 +115,48 @@ void Actor::AddRotation(XMVECTOR direction, float angle)
 
 void Actor::SetTransform(const Transform transform)
 {
-	rootComponent->transform = transform;
-	rootComponent->UpdateTransform();
+	rootComponent->SetTransform(transform);
 }
 
 Transform Actor::GetTransform()
 {
-	return rootComponent->transform;
+	return rootComponent->GetTransform();
 }
 
 XMFLOAT3 Actor::GetForwardVector()
 {
 	XMFLOAT3 forward;
-	XMStoreFloat3(&forward, XMVector3Normalize(rootComponent->transform.world.r[2]));
+	XMStoreFloat3(&forward, XMVector3Normalize(rootComponent->GetTransform().world.r[2]));
 	return forward;
 }
 
 XMVECTOR Actor::GetForwardVectorV()
 {
-	return XMVector3Normalize(rootComponent->transform.world.r[2]);
+	return XMVector3Normalize(rootComponent->GetTransform().world.r[2]);
 }
 
 XMFLOAT3 Actor::GetRightVector()
 {
 	XMFLOAT3 right;
-	XMStoreFloat3(&right, XMVector3Normalize(rootComponent->transform.world.r[0]));
+	XMStoreFloat3(&right, XMVector3Normalize(rootComponent->GetTransform().world.r[0]));
 	return right;
 }
 
 XMVECTOR Actor::GetRightVectorV()
 {
-	return XMVector3Normalize(rootComponent->transform.world.r[0]);
+	return XMVector3Normalize(rootComponent->GetTransform().world.r[0]);
 }
 
 XMFLOAT3 Actor::GetUpVector()
 {
 	XMFLOAT3 up;
-	XMStoreFloat3(&up, XMVector3Normalize(rootComponent->transform.world.r[1]));
+	XMStoreFloat3(&up, XMVector3Normalize(rootComponent->GetTransform().world.r[1]));
 	return up;
 }
 
 XMVECTOR Actor::GetUpVectorV()
 {
-	return XMVector3Normalize(rootComponent->transform.world.r[1]);
+	return XMVector3Normalize(rootComponent->GetTransform().world.r[1]);
 }
 
 Properties Actor::GetProps()
@@ -294,11 +291,11 @@ void Actor::RemoveComponent(Component* componentToRemove)
 	auto spatialComponent = dynamic_cast<SpatialComponent*>(componentToRemove);
 	if (spatialComponent)
 	{
-		if (spatialComponent->parent)
+		if (spatialComponent->GetParent())
 		{
-			for (auto child : spatialComponent->children)
+			for (auto child : spatialComponent->GetChildren())
 			{
-				child->parent = spatialComponent->parent;
+				child->SetParent(spatialComponent->GetParent());
 			}
 		}
 	}

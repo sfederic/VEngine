@@ -66,6 +66,13 @@ XMFLOAT3 SpatialComponent::GetLocalPosition()
 	return transform.position;
 }
 
+XMFLOAT3 SpatialComponent::GetWorldPosition()
+{
+	XMFLOAT3 pos;
+	XMStoreFloat3(&pos, GetWorldPositionV());
+	return pos;
+}
+
 XMVECTOR SpatialComponent::GetWorldPositionV()
 {
 	return GetWorldMatrix().r[3];
@@ -90,6 +97,11 @@ void SpatialComponent::SetLocalPosition(XMFLOAT3 newPosition)
 void SpatialComponent::SetLocalPosition(XMVECTOR newPosition)
 {
 	XMStoreFloat3(&transform.position, newPosition);
+}
+
+void SpatialComponent::SetWorldPosition(XMFLOAT3 position)
+{
+	SetWorldPosition(XMLoadFloat3(&position));
 }
 
 void SpatialComponent::SetWorldPosition(XMVECTOR position)
@@ -122,8 +134,27 @@ XMFLOAT3 SpatialComponent::GetLocalScale()
 
 XMVECTOR SpatialComponent::GetLocalScaleV()
 {
-	XMVECTOR scale = XMLoadFloat3(&transform.scale);
+	return XMLoadFloat3(&transform.scale);
+}
+
+XMFLOAT3 SpatialComponent::GetWorldScale()
+{
+	XMFLOAT3 scale;
+	XMStoreFloat3(&scale, GetWorldScaleV());
 	return scale;
+}
+
+XMVECTOR SpatialComponent::GetWorldScaleV()
+{
+	XMVECTOR relativeScale = GetLocalScaleV();
+
+	if (parent)
+	{
+		XMVECTOR parentScale = parent->GetWorldScaleV();
+		relativeScale = XMVectorMultiply(relativeScale, parentScale);
+	}
+
+	return relativeScale;
 }
 
 void SpatialComponent::SetLocalScale(float uniformScale)
@@ -166,8 +197,28 @@ void SpatialComponent::SetWorldScale(XMVECTOR scale)
 
 XMVECTOR SpatialComponent::GetLocalRotationV()
 {
-	XMVECTOR rotation = XMLoadFloat4(&transform.rotation);
-	return rotation;
+	return XMLoadFloat4(&transform.rotation);
+}
+
+XMFLOAT4 SpatialComponent::GetWorldRotation()
+{
+	XMFLOAT4 rot;
+	XMStoreFloat4(&rot, GetWorldRotationV());
+	return rot;
+}
+
+XMVECTOR SpatialComponent::GetWorldRotationV()
+{
+	XMVECTOR relativeRotation = GetLocalRotationV();
+
+	if (parent)
+	{
+		//Relative rotations are inversed with quaternions, i.e. ParentQuat(-1) * localRotation;
+		XMVECTOR parentRot = XMQuaternionInverse(parent->GetWorldRotationV());
+		relativeRotation = XMQuaternionMultiply(parentRot, relativeRotation);
+	}
+
+	return relativeRotation;
 }
 
 void SpatialComponent::SetLocalRotation(float x, float y, float z, float w)
@@ -220,7 +271,7 @@ void SpatialComponent::SetWorldRotation(XMVECTOR newRotation)
 
 	if (parent)
 	{
-		//Looks like relative rotations are inversed with quaternions. ParentQuat(-1) * newRot;
+		//Relative rotations are inversed with quaternions, i.e. ParentQuat(-1) * localRotation;
 		XMVECTOR parentRot = XMQuaternionInverse(parent->GetLocalRotationV());
 		relativeRotation = XMQuaternionMultiply(parentRot, newRotation);
 	}
