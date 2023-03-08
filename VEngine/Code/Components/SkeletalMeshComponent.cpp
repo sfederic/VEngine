@@ -28,7 +28,7 @@ void SkeletalMeshComponent::LoadAnimation(std::string animationFilename)
 {
 	Skeleton& skel = GetSkeleton();
 	Animation anim = AssetSystem::ReadVAnimAssetFromFile(animationFilename);
-	skel.animations.emplace(anim.name, anim);
+	skel.GetAnimations().emplace(anim.GetName(), anim);
 }
 
 Skeleton& SkeletalMeshComponent::GetSkeleton()
@@ -69,7 +69,7 @@ Animation& SkeletalMeshComponent::GetAnimation(std::string animationName)
 std::vector<Animation*> SkeletalMeshComponent::GetAllAnimations()
 {
     std::vector<Animation*> animations;
-    for (auto& [name, animation] : GetSkeleton().animations)
+    for (auto& [name, animation] : GetSkeleton().GetAnimations())
     {
         animations.push_back(&animation);
     }
@@ -78,12 +78,12 @@ std::vector<Animation*> SkeletalMeshComponent::GetAllAnimations()
 
 std::vector<Joint>& SkeletalMeshComponent::GetAllJoints()
 {
-    return GetSkeleton().joints;
+    return GetSkeleton().GetJoints();
 }
 
 bool SkeletalMeshComponent::HasJoints()
 {
-    return GetSkeleton().joints.size();
+    return GetSkeleton().GetNumJoints();
 }
 
 int SkeletalMeshComponent::GetJointIndexByName(const std::string boneName)
@@ -132,7 +132,7 @@ void SkeletalMeshComponent::InterpolateCurrentAnimation()
 	int skinningDataIndex = 0;
 	Animation& anim = GetCurrentAnimation();
 
-	if (!anim.frames.empty())
+	if (!anim.HasFrames())
 	{
 		shaderSkinningData.isAnimated = true;
 
@@ -171,8 +171,8 @@ void SkeletalMeshComponent::CrossFadeNextAnimation()
 	Animation& currentAnim = GetCurrentAnimation();
 	Animation& nextAnim = GetNextAnimation();
 
-	std::string name1 = currentAnim.name;
-	std::string name2 = nextAnim.name;
+	const std::string name1 = currentAnim.GetName();
+	const std::string name2 = nextAnim.GetName();
 
 	//If crossfade is set to same animation, skip entire fade
 	if (name1 == name2)
@@ -202,8 +202,8 @@ void SkeletalMeshComponent::CrossFadeNextAnimation()
 	auto& joints = GetAllJoints();
 	for (auto& joint : joints)
 	{
-		std::vector<AnimFrame>& jointFramesCurrentAnim = currentAnim.frames[joint.index];
-		std::vector<AnimFrame>& jointFramesNextAnim = nextAnim.frames[joint.index];
+		const auto& jointFramesCurrentAnim = currentAnim.GetFrame(joint.index);
+		const auto& jointFramesNextAnim = nextAnim.GetFrame(joint.index);
 
 		int jointEndFrameIndex = 0;
 		//Find joint frame index end closest to current animation time
@@ -251,7 +251,7 @@ void SkeletalMeshComponent::CrossFadeNextAnimation()
 
 		while (parentIndex > -1)
 		{
-			Joint& parentJoint = GetSkeleton().joints[parentIndex];
+			Joint& parentJoint = GetSkeleton().GetJoints()[parentIndex];
 			endPose *= parentJoint.currentPose;
 
 			parentIndex = parentJoint.parentIndex;

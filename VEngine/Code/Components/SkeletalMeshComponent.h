@@ -2,6 +2,7 @@
 
 #include "MeshComponent.h"
 #include "Render/RenderTypes.h"
+#include "Animation/Joint.h"
 
 //Great reference on implementation of animation systems.
 //Ref:https://blog.demofox.org/2012/09/21/anatomy-of-a-skeletal-animation-system-part-1/

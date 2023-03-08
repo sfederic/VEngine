@@ -91,7 +91,7 @@ void AssetSystem::BuildSingleVMeshFromFBX(const std::string fbxFilename)
 	assert(fwrite(meshData.vertices.data(), sizeof(Vertex), meshData.vertices.size(), file));
 	assert(fwrite(&meshData.boudingBox, sizeof(DirectX::BoundingBox), 1, file));
 
-	auto& joints = meshData.skeleton.joints;
+	auto& joints = meshData.skeleton.GetJoints();
 	fwrite(joints.data(), sizeof(Joint), joints.size(), file);
 
 	fclose(file);
@@ -109,11 +109,11 @@ void AssetSystem::BuildSingleVAnimFromFBX(const std::string filename)
 	assert(file);
 
 	AnimationAssetHeader header;
-	strcpy_s(header.name, sizeof(char) * Animation::ANIM_NAME_MAX, animation.name);
-	header.frameCount = animation.frames.size();
+	strcpy_s(header.name, sizeof(char) * Animation::ANIM_NAME_MAX, animation.GetName().c_str());
+	header.frameCount = animation.GetFrames().size();
 	assert(fwrite(&header, sizeof(AnimationAssetHeader), 1, file));
 
-	for (auto& [jointIndex, animFrame] : animation.frames)
+	for (auto& [jointIndex, animFrame] : animation.GetFrames())
 	{
 		assert(fwrite(&jointIndex, sizeof(int), 1, file));
 
@@ -150,9 +150,9 @@ MeshDataProxy AssetSystem::ReadVMeshAssetFromFile(const std::string filename)
 
 	assert(fread(&data.boudingBox, sizeof(DirectX::BoundingBox), 1, file));
 
-	data.skeleton.joints.resize(header.boneCount);
+	data.skeleton.GetJoints().resize(header.boneCount);
 	//Has to potential to read empty data, don't call assert()
-	fread(data.skeleton.joints.data(), sizeof(Joint), header.boneCount, file);
+	fread(data.skeleton.GetJoints().data(), sizeof(Joint), header.boneCount, file);
 
 	fclose(file);
 	
@@ -183,7 +183,7 @@ Animation AssetSystem::ReadVAnimAssetFromFile(const std::string filename)
 
 	for (uint64_t i = 0; i < header.frameCount; i++)
 	{
-		int jointIndex = INVALID_JOINT_INDEX;
+		int jointIndex = Joint::INVALID_JOINT_INDEX;
 		assert(fread(&jointIndex, sizeof(int), 1, file));
 		assert(jointIndex != -2);
 
@@ -194,7 +194,7 @@ Animation AssetSystem::ReadVAnimAssetFromFile(const std::string filename)
 		animFrames.resize(animFrameCount);
 		assert(fread(animFrames.data(), sizeof(AnimFrame) * animFrameCount, 1, file));
 
-		anim.frames.emplace(jointIndex, animFrames);
+		anim.AddFrame(jointIndex, animFrames);
 	}
 
 	fclose(file);

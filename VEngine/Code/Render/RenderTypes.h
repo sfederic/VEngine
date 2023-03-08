@@ -1,7 +1,7 @@
 #pragma once
 
 #include <DirectXCollision.h>
-#include "Animation/AnimationStructures.h"
+#include "Animation/Skeleton.h"
 
 //@Todo: I think this file needs to be split up more. Make a RenderTypes folder and 
 //figure out what can be seperated to minimise the number on #includes per file

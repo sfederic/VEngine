@@ -7,8 +7,10 @@
 #include "Core/VMath.h"
 #include "Core/VString.h"
 #include "AssetPaths.h"
-#include "Animation/AnimationStructures.h"
-#include "Animation/AnimationValues.h"
+#include "Animation/BoneWeights.h"
+#include "Animation/Animation.h"
+#include "Animation/AnimFrame.h"
+#include "Animation/Joint.h"
 
 using namespace fbxsdk;
 
@@ -60,7 +62,7 @@ void FBXLoader::ImportAsMesh(std::string filename, MeshData& meshData)
 	//Go through all skeleton nodes
 	for (int i = 0; i < childNodeCount; i++)
 	{
-		ProcessSkeletonNodes(rootNode->GetChild(i), meshData.skeleton, ROOT_JOINT_INDEX);
+		ProcessSkeletonNodes(rootNode->GetChild(i), meshData.skeleton, Joint::ROOT_JOINT_INDEX);
 	}
 
 	//Go through all nodes
@@ -154,8 +156,8 @@ Animation FBXLoader::ImportAsAnimation(const std::string filename)
 					XMMATRIX pose = XMMatrixAffineTransformation(scale,
 						XMVectorSet(0.f, 0.f, 0.f, 1.f), rot, pos);
 
-					skeleton.joints[currentJointIndex].inverseBindPose = pose;
-					skeleton.joints[currentJointIndex].currentPose = pose;
+					skeleton.GetJoints()[currentJointIndex].inverseBindPose = pose;
+					skeleton.GetJoints()[currentJointIndex].currentPose = pose;
 				}
 
 				FbxInt nodeFlags = rootNode->GetAllObjectFlags();
@@ -211,8 +213,8 @@ Animation FBXLoader::ImportAsAnimation(const std::string filename)
 									animFrame.pos.y = pos[1];
 									animFrame.pos.z = pos[2];
 
-									Animation& animation = skeleton.animations.find(animationName)->second;
-									animation.frames[currentJointIndex].emplace_back(animFrame);
+									Animation& animation = skeleton.GetAnimation(animationName);
+									animation.GetFrame(currentJointIndex).emplace_back(animFrame);
 								}
 							}
 						}
@@ -278,8 +280,8 @@ void ProcessAllChildNodes(FbxNode* node, MeshData& meshData)
 					XMMATRIX pose = XMMatrixAffineTransformation(scale,
 						XMVectorSet(0.f, 0.f, 0.f, 1.f), rot, pos);
 				
-					meshData.skeleton.joints[currentJointIndex].inverseBindPose = pose;
-					meshData.skeleton.joints[currentJointIndex].currentPose = pose;
+					meshData.skeleton.GetJoint(currentJointIndex).inverseBindPose = pose;
+					meshData.skeleton.GetJoint(currentJointIndex).currentPose = pose;
 				}
 
 				const int vertexIndexCount = cluster->GetControlPointIndicesCount();
@@ -418,12 +420,12 @@ void ProcessSkeletonNodes(FbxNode* node, Skeleton& skeleton, int parentIndex)
 
 		if (child->GetNodeAttribute()->GetAttributeType() == FbxNodeAttribute::EType::eSkeleton)
 		{
-			Joint joint = {};
+			Joint joint;
 			joint.SetName(child->GetName());
 			joint.parentIndex = parentIndex;
 			skeleton.AddJoint(joint);
 
-			Joint& addedJoint = skeleton.joints.back();
+			Joint& addedJoint = skeleton.GetJoints().back();
 
 			ProcessSkeletonNodes(child, skeleton, addedJoint.index);
 		}

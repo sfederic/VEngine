@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Components/MeshComponent.h"
-#include "Animation/AnimationValues.h"
+#include "Animation/Joint.h"
 
 class SkeletalMeshComponent;
 
@@ -26,5 +26,5 @@ public:
 private:
 	SkeletalMeshComponent* linkedSkeletalMesh = nullptr;
 
-	JointIndex jointIndex = INVALID_JOINT_INDEX;
+	Joint::JointIndex jointIndex = Joint::INVALID_JOINT_INDEX;
 };

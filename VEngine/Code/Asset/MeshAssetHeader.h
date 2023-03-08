@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstdint>
-#include "Animation/AnimationStructures.h"
+#include "Animation/Animation.h"
 
 enum class SourceMeshFormat : uint8_t
 {

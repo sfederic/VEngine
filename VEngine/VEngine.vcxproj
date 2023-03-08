@@ -118,6 +118,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Code\Actors\Game\AntiAirEnemy.cpp" />
+    <ClCompile Include="Code\Animation\Animation.cpp" />
+    <ClCompile Include="Code\Animation\Joint.cpp" />
     <ClCompile Include="Code\Gameplay\Gears\BeamRifleGear.cpp" />
     <ClCompile Include="Code\Gameplay\Gears\CanonGear.cpp" />
     <ClCompile Include="Code\Actors\Game\BuildingRubble.cpp" />
@@ -281,11 +283,14 @@
     <ClCompile Include="Code\Actors\Game\MapScreenPlayer.cpp" />
     <ClCompile Include="Code\Actors\Game\LevelInstance.cpp" />
     <ClInclude Include="Code\Actors\Game\AntiAirEnemy.h" />
+    <ClInclude Include="Code\Animation\AnimFrame.h" />
+    <ClInclude Include="Code\Animation\BoneWeights.h" />
+    <ClInclude Include="Code\Animation\Animation.h" />
+    <ClInclude Include="Code\Animation\Joint.h" />
     <ClInclude Include="Code\Gameplay\Gears\BeamRifleGear.h" />
     <ClInclude Include="Code\Gameplay\Gears\CanonGear.h" />
     <ClInclude Include="Code\Actors\Game\BuildingRubble.h" />
     <ClInclude Include="Code\Actors\SplitMesh.h" />
-    <ClInclude Include="Code\Animation\AnimationValues.h" />
     <ClInclude Include="Code\Components\SocketMeshComponent.h" />
     <ClInclude Include="Code\Gameplay\AttackTypes.h" />
     <ClInclude Include="Code\Gameplay\IMeshSliceReaction.h" />
@@ -326,12 +331,12 @@
     <ClInclude Include="Code\Audio\AudioBase.h" />
     <ClInclude Include="Code\Audio\AudioChannel.h" />
     <ClInclude Include="Code\Components\BoxTriggerComponent.h" />
-    <ClInclude Include="Code\Animation\AnimationStructures.h" />
+    <ClInclude Include="Code\Animation\Skeleton.h" />
     <ClInclude Include="Code\Actors\Actor.h" />
     <ClInclude Include="Code\Actors\ActorSystem.h" />
     <ClInclude Include="Code\Actors\ActorSystemCache.h" />
     <ClInclude Include="Code\Actors\IActorSystem.h" />
-    <ClCompile Include="Code\Animation\AnimationStructures.cpp" />
+    <ClCompile Include="Code\Animation\Skeleton.cpp" />
     <ClCompile Include="Code\Actors\Actor.cpp" />
     <ClCompile Include="Code\Audio\AudioSystem.cpp" />
     <ClInclude Include="Code\Audio\AudioSystem.h" />

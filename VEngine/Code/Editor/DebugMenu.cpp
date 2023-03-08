@@ -312,7 +312,7 @@ void DebugMenu::RenderSkeletonViewMenu()
 		{
 			ImGui::Text("Skeleton: %s", skeletalMesh->meshComponentData.filename.c_str());
 
-			for (auto& joint : skeletalMesh->GetSkeleton().joints)
+			for (auto& joint : skeletalMesh->GetSkeleton().GetJoints())
 			{
 				ImGui::Text("Joint: %s ", joint.name);
 				ImGui::SameLine();
@@ -353,7 +353,7 @@ void DebugMenu::RenderSkeletalAnimationMenu()
 			skeletalMesh->SetAnimationSpeed(animationSpeed);
 
 			//Debug select animation clip to play via buttons
-			for (auto& animation : skeletalMesh->GetSkeleton().animations)
+			for (auto& animation : skeletalMesh->GetSkeleton().GetAnimations())
 			{
 				std::string animationName = animation.first;
 				if (!animationName.empty())
