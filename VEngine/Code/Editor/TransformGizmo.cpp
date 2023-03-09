@@ -185,7 +185,25 @@ void TransformGizmo::Tick()
         Actor* actor = WorldEditor::GetPickedActor();
         if (actor)
         {
-            CommandSystem::Add<Transform>(&actor->GetRootComponent().transform);
+            auto props = actor->GetProps();
+
+            switch (currentTransformOperation)
+            {
+            case ImGuizmo::OPERATION::TRANSLATE:
+                auto prop = props.GetProperty(" Position");
+                CommandSystem::Add(new Command<XMFLOAT3>(*prop));
+                break;
+
+            case ImGuizmo::OPERATION::SCALE:
+                auto prop = props.GetProperty(" Scale");
+                CommandSystem::Add(new Command<XMFLOAT3>(*prop));
+                break;
+
+            case ImGuizmo::OPERATION::ROTATE:
+                auto prop = props.GetProperty(" Rotation");
+                CommandSystem::Add(new Command<XMFLOAT4>(*prop));
+                break;
+            }
         }
     }
 
