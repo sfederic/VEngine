@@ -1,20 +1,9 @@
 #include "vpch.h"
 #include "CommandSystem.h"
 #include "ICommand.h"
+#include "Command.h"
 #include "Core/Input.h"
 #include "Editor/Editor.h"
-
-std::vector<ICommand*> commands;
-uint32_t commandIndex = 0;
-
-void Undo();
-void Redo();
-
-void CommandSystem::Add(ICommand* value)
-{
-	commands.push_back(value);
-	commandIndex = commands.size() - 1;
-}
 
 void CommandSystem::Tick()
 {
@@ -31,13 +20,12 @@ void CommandSystem::Tick()
 	}
 }
 
-void Undo()
+void CommandSystem::Undo()
 {
 	if (commandIndex > 0)
 	{
 		commandIndex--;
 		commands[commandIndex]->Execute();
-		delete commands.back();
 		commands.pop_back();
 	}
 	else
@@ -48,7 +36,7 @@ void Undo()
 	editor->ResetPropertyWidgetValues();
 }
 
-void Redo()
+void CommandSystem::Redo()
 {
 	if (commandIndex < commands.size() - 1)
 	{
@@ -65,10 +53,6 @@ void Redo()
 
 void CommandSystem::Reset()
 {
-	for (auto command : commands)
-	{
-		delete command;
-	}
 	commands.clear();
 	commandIndex = 0;
 }

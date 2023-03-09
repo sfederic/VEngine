@@ -81,7 +81,7 @@ void Engine::TickSystems(float deltaTime)
 {
 	editor->Tick();
 	Core::Tick();
-	CommandSystem::Tick();
+	CommandSystem::Get().Tick();
 	AudioSystem::Tick();
 
 	if (!Core::gameplayOn) //Tick editor camera

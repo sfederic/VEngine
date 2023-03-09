@@ -1,15 +1,34 @@
 #pragma once
 
-struct ICommand;
+#include <vector>
+#include <memory>
+#include "Commands/ICommand.h"
+#include "Commands/Command.h"
+#include "Core/Property.h"
 
-//@Todo: CommandSystem isn't very good. Should be more generic and work with all sorts of properties.
-
-//Currently used for undo/redo commands in the editor, but is generic enough with ICommand
-//that it could be used during gameplay and for other systems.
-namespace CommandSystem
+class CommandSystem
 {
-	void Add(ICommand* value);
+public:
+	static auto& Get()
+	{
+		static CommandSystem commandSystem;
+		return commandSystem;
+	}
 
+	template <typename T>
+	void AddCommand(Property& prop)
+	{
+		commands.push_back(std::make_unique<Command<T>>(prop));
+		commandIndex = commands.size() - 1;
+	}
+	
 	void Tick();
 	void Reset();
+
+private:
+	void Undo();
+	void Redo();
+
+	std::vector<std::unique_ptr<ICommand>> commands;
+	uint32_t commandIndex = 0;
 };

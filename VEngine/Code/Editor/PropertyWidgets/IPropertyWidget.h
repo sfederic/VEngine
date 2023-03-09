@@ -13,6 +13,6 @@ public:
 	template <typename T>
 	void SetValue(Property& prop)
 	{
-		CommandSystem::Add(new Command<T>(prop));
+		CommandSystem::Get().AddCommand<T>(prop);
 	}
 };
