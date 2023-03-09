@@ -9,7 +9,7 @@ public:
 	BoolWidget(Property& prop, QWidget* parent = 0);
 
 private:
-	void SetValue(int value);
+	void SetValueBool(int state);
 	virtual void ResetValue() override;
 
 	bool* value;

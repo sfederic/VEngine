@@ -15,14 +15,15 @@ BoolWidget::BoolWidget(Property& prop_, QWidget* parent) : QCheckBox(parent)
 		setCheckState(Qt::CheckState::Unchecked);
 	}
 
-	connect(this, &QCheckBox::stateChanged, this, &BoolWidget::SetValue);
+	connect(this, &QCheckBox::stateChanged, this, &BoolWidget::SetValueBool);
 }
 
-void BoolWidget::SetValue(int value_)
+void BoolWidget::SetValueBool(int state)
 {
 	if (value)
 	{
-		*value = value_;
+		*value = state;
+		SetValue<bool>(prop);
 	}
 }
 
