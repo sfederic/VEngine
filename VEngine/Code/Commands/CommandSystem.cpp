@@ -38,6 +38,10 @@ void Undo()
 		CommandSystem::commandIndex--;
 		CommandSystem::commands[CommandSystem::commandIndex]->Execute();
 	}
+	else
+	{
+		CommandSystem::commands[0]->Execute();
+	}
 
 	editor->ResetPropertyWidgetValues();
 }
@@ -48,6 +52,10 @@ void Redo()
 	{
 		CommandSystem::commandIndex++;
 		CommandSystem::commands[CommandSystem::commandIndex]->Execute();
+	}
+	else
+	{
+		CommandSystem::commands[CommandSystem::commands.size() - 1]->Execute();
 	}
 
 	editor->ResetPropertyWidgetValues();
