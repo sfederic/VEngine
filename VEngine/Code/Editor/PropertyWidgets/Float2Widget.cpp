@@ -25,6 +25,8 @@ Float2Widget::Float2Widget(Property& prop_, QWidget* parent) : QWidget(parent)
 
 void Float2Widget::SetValue()
 {
+	IPropertyWidget::SetValue<XMFLOAT2>(prop);
+
 	XMFLOAT2 newFloat3 = {};
 	newFloat3.x = xSpinbox.value();
 	newFloat3.y = ySpinbox.value();

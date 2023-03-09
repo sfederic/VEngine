@@ -31,6 +31,8 @@ Float4Widget::Float4Widget(Property& prop_, QWidget* parent) : QWidget(parent)
 
 void Float4Widget::SetValue()
 {
+	IPropertyWidget::SetValue<XMFLOAT4>(prop);
+
 	XMFLOAT4 newFloat4 = {};
 	newFloat4.x = xSpinbox.value();
 	newFloat4.y = ySpinbox.value();

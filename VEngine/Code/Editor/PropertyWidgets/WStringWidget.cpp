@@ -13,6 +13,8 @@ WStringWidget::WStringWidget(Property& value_)
 
 void WStringWidget::SetValue()
 {
+	IPropertyWidget::SetValue<std::wstring>(prop);
+
 	QString txt = text();
 	value->assign(txt.toStdWString());
 

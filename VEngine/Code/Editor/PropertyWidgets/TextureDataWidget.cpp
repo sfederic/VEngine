@@ -28,6 +28,8 @@ void TextureDataWidget::SetValue()
 
 	if (!filename.isEmpty())
 	{
+		IPropertyWidget::SetValue<TextureData>(prop);
+
 		value->filename.assign(
 			VString::GetSubStringAtFoundOffset(filepath.toStdString(), AssetBaseFolders::texture));
 

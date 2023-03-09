@@ -28,6 +28,8 @@ Float3Widget::Float3Widget(Property& prop_, QWidget* parent) : QWidget(parent)
 
 void Float3Widget::SetValue()
 {
+	IPropertyWidget::SetValue<XMFLOAT3>(prop);
+
 	XMFLOAT3 newFloat3 = {};
 	newFloat3.x = xSpinbox.value();
 	newFloat3.y = ySpinbox.value();

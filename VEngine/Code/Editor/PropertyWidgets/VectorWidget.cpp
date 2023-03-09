@@ -29,6 +29,8 @@ VectorWidget::VectorWidget(Property& prop_, QWidget* parent)
 
 void VectorWidget::SetValue()
 {
+	IPropertyWidget::SetValue<XMVECTOR>(prop);
+
 	XMVECTOR newVector = XMVectorSet(static_cast<float>(xSpinbox->value()),
 		static_cast<float>(ySpinbox->value()),
 		static_cast<float>(zSpinbox->value()),

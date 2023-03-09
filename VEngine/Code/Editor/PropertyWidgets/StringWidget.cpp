@@ -21,6 +21,8 @@ StringWidget::StringWidget(Property& value_)
 
 void StringWidget::SetValue()
 {
+	IPropertyWidget::SetValue<std::string>(prop);
+
 	QString txt = text();
 	value->assign(txt.toStdString().c_str());
 

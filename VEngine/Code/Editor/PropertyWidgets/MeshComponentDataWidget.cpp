@@ -26,6 +26,8 @@ void MeshComponentDataWidget::SetValue()
 
 	if (!filename.isEmpty())
 	{
+		IPropertyWidget::SetValue<MeshComponentData>(prop);
+
 		value->filename.assign(
 			VString::GetSubStringAtFoundOffset(filename.toStdString(), AssetBaseFolders::mesh));
 

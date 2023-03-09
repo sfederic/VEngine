@@ -21,6 +21,8 @@ void ShaderDataWidget::SetValue()
 	std::string shaderItemName = text().toStdString();
 	if (ShaderSystem::DoesShaderItemExist(shaderItemName))
 	{
+		IPropertyWidget::SetValue<ShaderData>(prop);
+
 		value->shaderItemName.assign(text().toStdString());
 		prop.change(value);
 		ResetValue();

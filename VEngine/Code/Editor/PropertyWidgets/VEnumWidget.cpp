@@ -20,6 +20,8 @@ VEnumWidget::VEnumWidget(Property& value_)
 
 void VEnumWidget::SetValue()
 {
+	IPropertyWidget::SetValue<VEnum>(prop);
+
 	std::string text = currentText().toStdString();
 	value->SetValue(text);
 	if (prop.change)
