@@ -2,9 +2,7 @@
 
 #include <vector>
 #include <memory>
-#include "Commands/ICommand.h"
 #include "Commands/Command.h"
-#include "Core/Property.h"
 
 class CommandSystem
 {
