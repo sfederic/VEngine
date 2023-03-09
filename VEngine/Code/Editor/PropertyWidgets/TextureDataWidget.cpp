@@ -39,6 +39,8 @@ void TextureDataWidget::SetValue()
 		}
 
 		ResetValue();
+
+		IPropertyWidget::SetValue<TextureData>(prop);
 	}
 }
 

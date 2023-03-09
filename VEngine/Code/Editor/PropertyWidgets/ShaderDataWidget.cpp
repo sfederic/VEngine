@@ -24,6 +24,8 @@ void ShaderDataWidget::SetValue()
 		value->shaderItemName.assign(text().toStdString());
 		prop.change(value);
 		ResetValue();
+
+		IPropertyWidget::SetValue<ShaderData>(prop);
 	}
 	else
 	{

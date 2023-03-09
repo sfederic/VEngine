@@ -28,6 +28,8 @@ void VEnumWidget::SetValue()
 	}
 
 	clearFocus();
+
+	IPropertyWidget::SetValue<VEnum>(prop);
 }
 
 void VEnumWidget::ResetValue()

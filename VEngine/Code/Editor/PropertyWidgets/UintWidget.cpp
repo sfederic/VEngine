@@ -18,6 +18,8 @@ UintWidget::UintWidget(Property& prop_, bool readOnly, QWidget* parent) : UintSp
 void UintWidget::SetValue()
 {
 	*value_ = value();
+
+	IPropertyWidget::SetValue<uint32_t>(prop);
 }
 
 void UintWidget::ResetValue()

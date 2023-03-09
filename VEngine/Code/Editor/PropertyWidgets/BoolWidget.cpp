@@ -24,6 +24,7 @@ void BoolWidget::SetValueBool(int state)
 	{
 		*value = state;
 		SetValue<bool>(prop);
+		IPropertyWidget::SetValue<bool>(prop);
 	}
 }
 

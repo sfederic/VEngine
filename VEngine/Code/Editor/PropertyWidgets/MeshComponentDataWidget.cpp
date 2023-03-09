@@ -33,6 +33,8 @@ void MeshComponentDataWidget::SetValue()
 
 		prop.change(value);
 		ResetValue();
+
+		IPropertyWidget::SetValue<MeshComponentData>(prop);
 	}
 }
 

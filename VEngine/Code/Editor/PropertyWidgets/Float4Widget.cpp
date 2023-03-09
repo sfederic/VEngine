@@ -37,6 +37,8 @@ void Float4Widget::SetValue()
 	newFloat4.z = zSpinbox.value();
 	newFloat4.w = wSpinbox.value();
 	*value = newFloat4;
+
+	IPropertyWidget::SetValue<XMFLOAT4>(prop);
 }
 
 void Float4Widget::ResetValue()

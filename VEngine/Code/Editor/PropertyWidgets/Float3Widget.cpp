@@ -33,6 +33,8 @@ void Float3Widget::SetValue()
 	newFloat3.y = ySpinbox.value();
 	newFloat3.z = zSpinbox.value();
 	*_value = newFloat3;
+
+	IPropertyWidget::SetValue<XMFLOAT3>(prop);
 }
 
 void Float3Widget::ResetValue()

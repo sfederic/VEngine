@@ -34,6 +34,8 @@ void VectorWidget::SetValue()
 		static_cast<float>(zSpinbox->value()),
 		static_cast<float>(wSpinbox->value()));
 	*_vector = newVector;
+
+	IPropertyWidget::SetValue<XMVECTOR>(prop);
 }
 
 void VectorWidget::ResetValue()

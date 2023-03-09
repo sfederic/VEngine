@@ -30,6 +30,8 @@ void StringWidget::SetValue()
 	}
 
 	clearFocus();
+
+	IPropertyWidget::SetValue<std::string>(prop);
 }
 
 void StringWidget::ResetValue()

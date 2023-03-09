@@ -29,6 +29,8 @@ void Float2Widget::SetValue()
 	newFloat3.x = xSpinbox.value();
 	newFloat3.y = ySpinbox.value();
 	*value = newFloat3;
+
+	IPropertyWidget::SetValue<XMFLOAT2>(prop);
 }
 
 void Float2Widget::ResetValue()

@@ -22,6 +22,8 @@ void WStringWidget::SetValue()
 	}
 
 	clearFocus();
+
+	IPropertyWidget::SetValue<std::wstring>(prop);
 }
 
 void WStringWidget::ResetValue()

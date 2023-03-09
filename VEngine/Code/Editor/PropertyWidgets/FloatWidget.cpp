@@ -14,6 +14,8 @@ FloatWidget::FloatWidget(Property& prop_, QWidget* parent) : SpinBox(parent)
 void FloatWidget::SetValue()
 {
 	*_value = (float)value();
+
+	IPropertyWidget::SetValue<float>(prop);
 }
 
 void FloatWidget::ResetValue()

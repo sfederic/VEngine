@@ -18,6 +18,8 @@ IntWidget::IntWidget(Property& prop_, bool readOnly, QWidget* parent) : IntSpinB
 void IntWidget::SetValue()
 {
 	*_value = value();
+
+	IPropertyWidget::SetValue<int>(prop);
 }
 
 void IntWidget::ResetValue()
