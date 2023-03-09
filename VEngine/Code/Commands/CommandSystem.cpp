@@ -33,11 +33,10 @@ void CommandSystem::Tick()
 
 void Undo()
 {
-	CommandSystem::commands[CommandSystem::commandIndex]->Execute();
-
 	if (CommandSystem::commandIndex > 0)
 	{
 		CommandSystem::commandIndex--;
+		CommandSystem::commands[CommandSystem::commandIndex]->Execute();
 	}
 
 	editor->ResetPropertyWidgetValues();
