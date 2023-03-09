@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Core/UID.h"
 #include <string>
 #include <optional>
 #include <functional>
@@ -8,6 +9,8 @@
 struct Property
 {
 	void* data = nullptr;
+
+	UID ownerUID = 0;
 
 	uint64_t size = 0;
 

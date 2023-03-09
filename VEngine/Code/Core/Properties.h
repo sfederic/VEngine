@@ -11,6 +11,8 @@ struct Properties
 	std::map<std::string, Property> propMap;
 	std::string title;
 
+	UID ownerUID = 0;
+
 	Properties() {}
 
 	Properties(const char* title_)
@@ -56,6 +58,7 @@ struct Properties
 		prop.info = typeid(T);
 		prop.name = name;
 		prop.data = data;
+		prop.ownerUID = ownerUID;
 
 		//If you ever need the offset for a property, you can do it where you pass in the Actor/Object
 		//as a 'this' pointer through a template param. eg. <typename P> P* = this. Might help for serialisation?

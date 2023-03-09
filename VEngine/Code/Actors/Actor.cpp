@@ -164,6 +164,7 @@ Properties Actor::GetProps()
 {
 	Properties props("Actor");
 
+	props.ownerUID = GetUID();
 	//Got the whitespace here because std::map orders by key, don't have time to make an ordered_map,
 	//meaning the whitespace will keep the transform values at the top of the props dock.
 	props.Add(" Position", &rootComponent->transform.position);
