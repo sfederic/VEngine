@@ -4,8 +4,8 @@
 #include "Core/Input.h"
 #include "Editor/Editor.h"
 
-std::vector<ICommand*> CommandSystem::commands;
-uint32_t CommandSystem::commandIndex = 0;
+std::vector<ICommand*> commands;
+uint32_t commandIndex = 0;
 
 void Undo();
 void Redo();
@@ -33,14 +33,16 @@ void CommandSystem::Tick()
 
 void Undo()
 {
-	if (CommandSystem::commandIndex > 0)
+	if (commandIndex > 0)
 	{
-		CommandSystem::commandIndex--;
-		CommandSystem::commands[CommandSystem::commandIndex]->Execute();
+		commandIndex--;
+		commands[commandIndex]->Execute();
+		delete commands.back();
+		commands.pop_back();
 	}
 	else
 	{
-		CommandSystem::commands[0]->Execute();
+		commands[0]->Execute();
 	}
 
 	editor->ResetPropertyWidgetValues();
@@ -48,14 +50,14 @@ void Undo()
 
 void Redo()
 {
-	if (CommandSystem::commandIndex < CommandSystem::commands.size() - 1)
+	if (commandIndex < commands.size() - 1)
 	{
-		CommandSystem::commandIndex++;
-		CommandSystem::commands[CommandSystem::commandIndex]->Execute();
+		commandIndex++;
+		commands[commandIndex]->Execute();
 	}
 	else
 	{
-		CommandSystem::commands[CommandSystem::commands.size() - 1]->Execute();
+		commands[commands.size() - 1]->Execute();
 	}
 
 	editor->ResetPropertyWidgetValues();
@@ -63,6 +65,10 @@ void Redo()
 
 void CommandSystem::Reset()
 {
+	for (auto command : commands)
+	{
+		delete command;
+	}
 	commands.clear();
 	commandIndex = 0;
 }
