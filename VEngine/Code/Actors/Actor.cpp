@@ -325,6 +325,20 @@ Component* Actor::FindComponentAllowNull(const std::string componentName)
 	return it->second;
 }
 
+Component* Actor::GetComponentByUID(UID componentUID)
+{
+	for (auto& [name, component] : componentMap)
+	{
+		if (component->GetUID() == componentUID)
+		{
+			return component;
+		}
+	}
+
+	Log("Component [%d] not found on Actor [%s].", componentUID, this->name.c_str());
+	return nullptr;
+}
+
 Component* Actor::GetComponentByName(const std::string componentName)
 {
 	for (auto& componentPair : componentMap)

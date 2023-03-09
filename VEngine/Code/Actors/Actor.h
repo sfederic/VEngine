@@ -169,6 +169,7 @@ public:
 		return nullptr;
 	}
 
+	Component* GetComponentByUID(UID componentUID);
 	Component* GetComponentByName(const std::string componentName);
 
 	void ResetOwnerUIDToComponents();
