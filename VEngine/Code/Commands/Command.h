@@ -1,39 +1,29 @@
 #pragma once
+
 #include "ICommand.h"
+#include "Core/Property.h"
+#include "Core/UID.h"
+#include "Core/World.h"
+#include "Actors/Actor.h"
 
 template <typename T>
 struct Command : ICommand
 {
-	T oldValue;
-	T newValue;
-	T* value = nullptr;
+	//Property prop;
+	T value;
+	Property prop;
 
-	//use this constructor to push new values into the command
-	Command(T newValue_, T* value_)
+	Command(Property& prop_)
 	{
-		value = value_;
-		newValue = newValue_;
-
-		name = typeid(T).name();
-	}
-
-	//Use this one when you just need the pointer value pushed in
-	Command(T* value_)
-	{
-		value = value_;
-		newValue = *value_;
-
-		name = typeid(T).name();
+		prop = prop_;
+		value = *prop.GetData<T>();
 	}
 
 	void Execute() override
 	{
-		oldValue = *value;
-		*value = newValue;
-	}
-
-	void Undo() override
-	{
-		*value = oldValue;
+		auto actor = World::GetActorByUID(prop.ownerUID);
+		auto props = actor->GetProps();
+		auto data = props.GetData<T>(prop.name);
+		*data = value;
 	}
 };

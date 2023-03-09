@@ -2,7 +2,6 @@
 
 #include <memory>
 #include <vector>
-#include "Command.h"
 
 struct ICommand;
 
@@ -15,12 +14,7 @@ namespace CommandSystem
 	extern std::vector<ICommand*> commands;
 	extern uint32_t commandIndex;
 
-	template <typename T>
-	void Add(T* value)
-	{
-		commands.push_back(new Command<T>(value));
-		commandIndex = commands.size() - 1;
-	}
+	void Add(ICommand* value);
 
 	void Tick();
 	void Reset();

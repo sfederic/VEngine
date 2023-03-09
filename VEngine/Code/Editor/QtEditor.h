@@ -14,7 +14,7 @@ struct QtEditor : IEditor, QObject
 	struct QApplication* app;
 	struct EditorMainWindow* mainWindow;
 
-	QString editorTitle = "VEngine | AtmosCrawler | ";
+	QString editorTitle = "VEngine | Foxbot | ";
 
 	void Init(int argc, char* argv[]) override;
 	void Tick() override;
@@ -28,6 +28,7 @@ struct QtEditor : IEditor, QObject
 	virtual void RemoveActorFromWorldList() override;
 	virtual void RefreshAssetList() override;
 	virtual void ClearProperties() override;
+	void ResetPropertyWidgetValues();
 	virtual void SelectActorInWorldList() override;
 	virtual void SetPlayButtonText() override;
 	virtual void SetEditorTitle(const std::string title) override;

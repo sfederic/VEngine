@@ -34,4 +34,5 @@ struct IEditor
 	virtual void SetPlayButtonText() = 0;
 	virtual void SetCurrentTransformMode(const std::string trasnformMode) {}
 	virtual void SetEditorTitle(const std::string title) {}
+	virtual void ResetPropertyWidgetValues() {}
 };

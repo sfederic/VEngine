@@ -2,12 +2,19 @@
 #include "CommandSystem.h"
 #include "ICommand.h"
 #include "Core/Input.h"
+#include "Editor/Editor.h"
 
 std::vector<ICommand*> CommandSystem::commands;
 uint32_t CommandSystem::commandIndex = 0;
 
 void Undo();
 void Redo();
+
+void CommandSystem::Add(ICommand* value)
+{
+	commands.push_back(value);
+	commandIndex = commands.size() - 1;
+}
 
 void CommandSystem::Tick()
 {
@@ -26,12 +33,14 @@ void CommandSystem::Tick()
 
 void Undo()
 {
-	CommandSystem::commands[CommandSystem::commandIndex]->Undo();
+	CommandSystem::commands[CommandSystem::commandIndex]->Execute();
 
 	if (CommandSystem::commandIndex > 0)
 	{
 		CommandSystem::commandIndex--;
 	}
+
+	editor->ResetPropertyWidgetValues();
 }
 
 void Redo()
@@ -41,6 +50,8 @@ void Redo()
 		CommandSystem::commandIndex++;
 		CommandSystem::commands[CommandSystem::commandIndex]->Execute();
 	}
+
+	editor->ResetPropertyWidgetValues();
 }
 
 void CommandSystem::Reset()
