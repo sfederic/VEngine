@@ -76,6 +76,17 @@ struct Properties
 		propMap.merge(propsToMerge.propMap);
 	}
 
+	//For properties that aren't from an actor or component, but fetched from within those GetProps() (e.g. Material)
+	void SetAllPropertyOwnerUIDs(UID ownerUID_)
+	{
+		ownerUID = ownerUID_;
+
+		for (auto& [name, prop] : propMap)
+		{
+			prop.ownerUID = ownerUID;
+		}
+	}
+
 	template <typename T>
 	bool CheckType(const std::string& name)
 	{
@@ -88,6 +99,17 @@ struct Properties
 	{
 		assert(propMap.find(name) != propMap.end());
 		return reinterpret_cast<T*>(propMap.find(name)->second.data);
+	}
+
+	template <typename T>
+	T* GetDataAllowNull(const std::string& name)
+	{
+		auto dataIt = propMap.find(name);
+		if (dataIt != propMap.end())
+		{
+			return reinterpret_cast<T*>(dataIt->second.data);
+		}
+		return nullptr;
 	}
 
 	std::type_index GetType(const std::string& name)

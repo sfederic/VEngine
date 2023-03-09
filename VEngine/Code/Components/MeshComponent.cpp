@@ -152,6 +152,7 @@ Properties MeshComponent::GetProps()
 	props.Add("Trans. Occlude", &transparentOcclude);
 
 	auto materialProps = material->GetProps();
+	materialProps.SetAllPropertyOwnerUIDs(props.ownerUID);
 	props.Merge(materialProps);
 
 	return props;

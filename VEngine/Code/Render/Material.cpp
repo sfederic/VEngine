@@ -138,6 +138,7 @@ static void ReassignShader(void* data)
 Properties Material::GetProps()
 {
 	Properties props("Material");
+
 	//Prop names using 'M_' notation here becauase they merge with MeshComponent props
 	props.Add("M_Texture", &textureData).change = ReassignTexture;
 	props.Add("M_Use Texture", &materialShaderData.useTexture);

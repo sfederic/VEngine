@@ -22,6 +22,8 @@ public:
 	{
 		Properties props;
 
+		props.ownerUID = GetOwnerUID();
+
 		//Because the serialise file format changed for components, had to put the Name and OwnerUID
 		//separate from the other props so that components can find their owners on spawn (when defined in c++).
 		//Leaving this here just for rough clarity to what it used to be.

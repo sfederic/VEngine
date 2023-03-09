@@ -22,8 +22,14 @@ struct Command : ICommand
 	void Execute() override
 	{
 		auto actor = World::GetActorByUID(prop.ownerUID);
-		auto props = actor->GetProps();
-		auto data = props.GetData<T>(prop.name);
-		*data = value;
+		auto allProps = actor->GetAllProps();
+		for (auto& props : allProps)
+		{
+			auto data = props.GetDataAllowNull<T>(prop.name);
+			if (data)
+			{
+				*data = value;
+			}
+		}
 	}
 };
