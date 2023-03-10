@@ -1,10 +1,6 @@
 #pragma once
 
-#include <string>
-#include <memory>
-#include <DirectXMath.h>
 #include "Core/Properties.h"
-#include "Core/UID.h"
 #include "Core/VEnum.h"
 #include "Render/ShaderData/MaterialShaderData.h"
 
