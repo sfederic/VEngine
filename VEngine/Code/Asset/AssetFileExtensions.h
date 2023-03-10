@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 
 //File extensions for engine specific formats

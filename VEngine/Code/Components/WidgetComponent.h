@@ -5,8 +5,9 @@
 
 class Widget;
 
-struct WidgetComponent : Component
+class WidgetComponent : public Component
 {
+public:
 	COMPONENT_SYSTEM(WidgetComponent)
 
 	WidgetComponent() {}
@@ -19,5 +20,6 @@ struct WidgetComponent : Component
 	void AddToViewport();
 	void RemoveFromViewport();
 
+private:
 	Widget* widget = nullptr;
 };
