@@ -1,6 +1,6 @@
 #pragma once
 
-#include <string>
+#include <cstdint>
 
 struct MeshDataProxy;
 class Texture2D;
