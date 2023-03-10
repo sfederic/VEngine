@@ -17,8 +17,6 @@ public:
 		buffer = RenderUtils::CreateDynamicBuffer(sizeof(T), D3D11_BIND_CONSTANT_BUFFER, initData);
 	}
 
-	ID3D11Buffer* GetBuffer() { return buffer; }
-
 	void Map(T* shaderData)
 	{
 		D3D11_MAPPED_SUBRESOURCE mapped = {};
