@@ -290,12 +290,6 @@
     <ClCompile Include="Code\Actors\AudioActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Core\System.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Core\SystemCache.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Asset\AssetSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -838,12 +832,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\AudioActor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Core\System.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Core\SystemCache.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Asset\MeshAssetHeader.h">

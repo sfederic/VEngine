@@ -177,7 +177,6 @@
     <ClCompile Include="Code\Gameplay\GameInstance.cpp" />
     <ClCompile Include="Code\Core\Properties.cpp" />
     <ClCompile Include="Code\Render\PipelineObjects.cpp" />
-    <ClCompile Include="Code\Core\System.cpp" />
     <ClCompile Include="Code\Core\UID.cpp" />
     <ClCompile Include="Code\UI\Game\PlayerShieldWidget.cpp" />
     <ClCompile Include="Code\Core\VEnum.cpp" />
@@ -217,7 +216,6 @@
     <ClCompile Include="Code\Components\WidgetComponent.cpp" />
     <ClCompile Include="Code\Render\SpriteSystem.cpp" />
     <ClCompile Include="Code\Actors\Billboard.cpp" />
-    <ClCompile Include="Code\Core\SystemCache.cpp" />
     <ClCompile Include="Code\Particle\ParticleEmitter.cpp" />
     <ClCompile Include="Code\Particle\ParticleSystem.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\UintWidget.cpp" />
@@ -519,8 +517,6 @@
     <ClInclude Include="Code\Components\WidgetComponent.h" />
     <ClInclude Include="Code\Render\SpriteSystem.h" />
     <ClInclude Include="Code\Actors\Billboard.h" />
-    <ClInclude Include="Code\Core\System.h" />
-    <ClInclude Include="Code\Core\SystemCache.h" />
     <ClInclude Include="Code\Particle\ParticleEmitter.h" />
     <ClInclude Include="Code\Particle\ParticleSystem.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\UintWidget.h" />
