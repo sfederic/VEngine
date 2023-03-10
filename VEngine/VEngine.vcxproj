@@ -291,6 +291,7 @@
     <ClInclude Include="Code\Render\MeshDataProxy.h" />
     <ClInclude Include="Code\Render\RastStates.h" />
     <ClInclude Include="Code\Render\ShaderData\InstanceData.h" />
+    <ClInclude Include="Code\Render\ShaderData\MaterialShaderData.h" />
     <ClInclude Include="Code\Render\ShaderData\ShaderLights.h" />
     <ClInclude Include="Code\Render\ShaderData\ShaderMeshData.h" />
     <ClInclude Include="Code\Render\ShaderData\ShaderPostProcessData.h" />
