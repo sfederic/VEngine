@@ -1,19 +1,18 @@
 #pragma once
-#include <DirectXMath.h>
 
-using namespace DirectX;
+#include <DirectXMath.h>
 
 struct Transform
 {
-	XMMATRIX world;
-	XMMATRIX local;
+	DirectX::XMMATRIX world;
+	DirectX::XMMATRIX local;
 
-	XMFLOAT4 rotation; //Quaternion
-	XMFLOAT3 position;
-	XMFLOAT3 scale;
+	DirectX::XMFLOAT4 rotation; //Quaternion
+	DirectX::XMFLOAT3 position;
+	DirectX::XMFLOAT3 scale;
 
 	Transform();
-	XMMATRIX GetAffine();
-	XMMATRIX GetAffineRotationOrigin(XMVECTOR rotOrigin);
-	void Decompose(XMMATRIX m);
+	DirectX::XMMATRIX GetAffine();
+	DirectX::XMMATRIX GetAffineRotationOrigin(DirectX::XMVECTOR rotOrigin);
+	void Decompose(DirectX::XMMATRIX m);
 };

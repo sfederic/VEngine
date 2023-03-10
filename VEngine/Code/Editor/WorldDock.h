@@ -10,17 +10,8 @@ class QComboBox;
 class Actor;
 
 //Holds a list of all the actors (and their parent child relationships) currently in world
-struct WorldDock : public QDockWidget
+class WorldDock : public QDockWidget
 {
-private:
-	ActorTreeWidget* actorTreeWidget = nullptr;
-	QLineEdit* actorSearchBar = nullptr;
-
-	QComboBox* actorTypeComboBox = nullptr;
-
-	QAbstractItemView::SelectionMode actorListSelectionMode =
-		QAbstractItemView::SelectionMode::SingleSelection;
-
 public:
 	WorldDock();
 	void Tick();
@@ -41,4 +32,13 @@ private:
 	void ActorListContextMenu(const QPoint& pos);
 
 	void ActorTypeFilterChanged(const QString& index);
+
+private:
+	ActorTreeWidget* actorTreeWidget = nullptr;
+	QLineEdit* actorSearchBar = nullptr;
+
+	QComboBox* actorTypeComboBox = nullptr;
+
+	QAbstractItemView::SelectionMode actorListSelectionMode =
+		QAbstractItemView::SelectionMode::SingleSelection;
 };

@@ -1,10 +1,11 @@
 #pragma once
+
 #include <vector>
 #include <string>
 #include "UID.h"
 
 class IActorSystem;
-struct IComponentSystem;
+class IComponentSystem;
 class Component;
 class Actor;
 

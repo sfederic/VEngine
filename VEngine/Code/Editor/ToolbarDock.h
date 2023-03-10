@@ -6,31 +6,13 @@ class QComboBox;
 class QLabel;
 struct SpinBox;
 
-struct ToolbarDock : public QDockWidget
+class ToolbarDock : public QDockWidget
 {
-	QPushButton* playButton;
-	QPushButton* resetWorldButton;
-	QPushButton* saveWorldButton;
-
-	SpinBox* translationSnapSpinBox;
-	SpinBox* scaleSnapSpinBox;
-	SpinBox* rotationSnapSpinBox;
-
-	SpinBox* cameraMoveSpeedSpinBox;
-
-	QComboBox* worldEditorPickMode = nullptr;
-
-	QComboBox* worldLocalTransformSetting = nullptr;
-
-	//values for pick mode combobox
-	QString pickerStringActor = "Actor";
-	QString pickerStringComponent = "Component";
-
+public:
 	ToolbarDock();
 	void SetTransformDisplay(std::string currentTransformSettingName);
 	void SetPlayButtonText();
 
-private:
 	void StartPlay();
 	void ResetWorldState();
 	void SaveWorld();
@@ -39,4 +21,21 @@ private:
 	void SetRotationSnapValue();
 	void PickModeChanged(const QString& item);
 	void LocalWorldTransformValueChanged(const QString& item);
+
+	QPushButton* playButton = nullptr;
+	QPushButton* resetWorldButton = nullptr;;
+	QPushButton* saveWorldButton = nullptr;;
+
+	SpinBox* translationSnapSpinBox = nullptr;;
+	SpinBox* scaleSnapSpinBox = nullptr;;
+	SpinBox* rotationSnapSpinBox = nullptr;;
+
+	SpinBox* cameraMoveSpeedSpinBox = nullptr;;
+
+	QComboBox* worldEditorPickMode = nullptr;
+	QComboBox* worldLocalTransformSetting = nullptr;
+
+	//values for pick mode combobox
+	QString pickerStringActor = "Actor";
+	QString pickerStringComponent = "Component";
 };

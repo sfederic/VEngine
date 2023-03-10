@@ -5,7 +5,7 @@
 #include <optional>
 #include <string>
 
-struct IComponentSystem;
+class IComponentSystem;
 
 class ComponentSystemCache
 {

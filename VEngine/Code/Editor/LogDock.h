@@ -1,17 +1,20 @@
 #pragma once
+
 #include <string>
 #include <qdockwidget.h>
 
 class QTextEdit;
 class QPushButton;
 
-struct LogDock : public QDockWidget
+class LogDock : public QDockWidget
 {
-	QTextEdit* logMessageBox = nullptr;
-	QPushButton* clearButton = nullptr;
-
+public:
 	LogDock();
 	void Print(const std::wstring message);
 	void Print(const std::string message);
 	void ClearLog();
+
+private:
+	QTextEdit* logMessageBox = nullptr;
+	QPushButton* clearButton = nullptr;
 };

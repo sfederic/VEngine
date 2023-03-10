@@ -1,4 +1,5 @@
 #pragma once
+
 #include "IEditor.h"
 #include <qobject.h>
 
@@ -9,12 +10,11 @@
 //swapchain to not resize or something and the ImGui/ImGuizmo & D2D widgets will be smaller with maxizing
 //the window again after minimizing.
 
-struct QtEditor : IEditor, QObject
+class QtEditor : public IEditor, public QObject
 {
-	struct QApplication* app;
-	struct EditorMainWindow* mainWindow;
-
-	QString editorTitle = "VEngine | Foxbot | ";
+public:
+	struct QApplication* app = nullptr;
+	struct EditorMainWindow* mainWindow = nullptr;
 
 	void Init(int argc, char* argv[]) override;
 	void Tick() override;
@@ -33,6 +33,10 @@ struct QtEditor : IEditor, QObject
 	virtual void SetPlayButtonText() override;
 	virtual void SetEditorTitle(const std::string title) override;
 	virtual void SetCurrentTransformMode(const std::string transformMode) override;
+
+private:
 	void SetEditorFont();
 	void EnableDarkMode();
+
+	QString editorTitle = "VEngine | Foxbot | ";
 };

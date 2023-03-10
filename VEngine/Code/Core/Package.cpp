@@ -34,6 +34,7 @@ Resource ReadFile(const std::string& filename)
 {
 	FILE* file = nullptr;
 	fopen_s(&file, filename.c_str(), "rb");
+	assert(file);
 	fseek(file, 0, SEEK_END);
 	uint64_t size = ftell(file);
 	rewind(file);

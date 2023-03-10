@@ -12,8 +12,9 @@
 //Keep in mind that ImGuizmo draws its gizmos inside an ImGui window, and not directly onto the viewport.
 //Also, Imguizmo's grid renders over the top of actors in the world, but trying to fix it just brings
 //up all sorts of mouse input logic that isn't worth having.
-struct TransformGizmo
+class TransformGizmo
 {
+public:
 	ImGuizmo::OPERATION currentTransformOperation = ImGuizmo::TRANSLATE;
 	ImGuizmo::MODE currentTransformMode = ImGuizmo::WORLD;
 

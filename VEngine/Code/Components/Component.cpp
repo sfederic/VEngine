@@ -6,7 +6,7 @@
 
 std::string Component::GetTypeName()
 {
-	return componentSystem->name;
+	return componentSystem->GetName();
 }
 
 void Component::AddTag(const std::string& tag)

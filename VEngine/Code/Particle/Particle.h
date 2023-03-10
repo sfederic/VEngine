@@ -7,7 +7,7 @@ struct ParticleData;
 struct Particle
 {
 	Transform transform;
-	XMFLOAT3 direction = XMFLOAT3(0.f, 0.f, 0.f);
+	DirectX::XMFLOAT3 direction = DirectX::XMFLOAT3(0.f, 0.f, 0.f);
 	float lifetime = 0.f;
 	float angle = 0.f;
 	float yaw = 0.f;

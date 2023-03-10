@@ -6,7 +6,7 @@
 using namespace DirectX;
 
 class Actor;
-struct SpriteSheet;
+class SpriteSheet;
 class BoxTriggerComponent;
 class CameraComponent;
 class Polyboard;

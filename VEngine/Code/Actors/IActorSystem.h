@@ -3,10 +3,10 @@
 #include <string>
 
 class Actor;
-struct Serialiser;
-struct BinarySerialiser;
-struct Deserialiser;
-struct BinaryDeserialiser;
+class Serialiser;
+class BinarySerialiser;
+class Deserialiser;
+class BinaryDeserialiser;
 struct Transform;
 
 class IActorSystem

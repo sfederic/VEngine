@@ -281,7 +281,7 @@ void DebugMenu::RenderComponentSystemMenu()
 
 	for (auto componentSystem : World::activeComponentSystems)
 	{
-		ImGui::Text("Name: %s |", componentSystem->name.c_str());
+		ImGui::Text("Name: %s |", componentSystem->GetName().c_str());
 		ImGui::SameLine();
 		ImGui::Text("Actor Count: %d", componentSystem->GetNumComponents());
 	}

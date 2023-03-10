@@ -1,6 +1,8 @@
 #include "vpch.h"
 #include "Transform.h"
 
+using namespace DirectX;
+
 Transform::Transform()
 {
 	scale = XMFLOAT3(1.f, 1.f, 1.f);

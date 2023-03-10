@@ -4,7 +4,7 @@
 #include "Core/UID.h"
 #include <set>
 
-struct IComponentSystem;
+class IComponentSystem;
 class Actor;
 
 class Component

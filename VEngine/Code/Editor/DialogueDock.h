@@ -1,4 +1,5 @@
 #pragma once
+
 #include <qdockwidget.h>
 
 class QTreeWidget;
@@ -15,10 +16,9 @@ class QTreeWidgetItem;
 //Dock for consversation information.
 //The dialogue files are set up linearly, the branching is based on 'goto' lines in the 
 //dialogue file where there is either a 'next' value or the value of the matching line number to jump to.
-struct DialogueDock : public QDockWidget
+class DialogueDock : public QDockWidget
 {
-	QTreeWidget* dialogueTree;
-
+public:
 	DialogueDock();
 
 private:
@@ -28,6 +28,5 @@ private:
 	void SaveDialogueToFile();
 	void LoadDialogueFile();
 
-	//Set Condition arg widgets from VFunction definition of Condition
-	void SetConditionArgWidgets(const QString& conditionName);
+	QTreeWidget* dialogueTree = nullptr;
 };

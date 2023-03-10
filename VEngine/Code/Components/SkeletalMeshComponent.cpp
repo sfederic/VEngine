@@ -207,7 +207,7 @@ void SkeletalMeshComponent::CrossFadeNextAnimation()
 		const auto& jointFramesCurrentAnim = currentAnim.GetFrame(joint.index);
 		const auto& jointFramesNextAnim = nextAnim.GetFrame(joint.index);
 
-		int jointEndFrameIndex = 0;
+		size_t jointEndFrameIndex = 0;
 		//Find joint frame index end closest to current animation time
 		for (size_t i = 0; i < (jointFramesCurrentAnim.size() - 1); i++)
 		{

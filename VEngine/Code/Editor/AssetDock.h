@@ -3,22 +3,15 @@
 #include <qdockwidget.h>
 #include <string>
 
-struct QFileSystemModel;
-struct QTreeView;
-struct QListWidget;
+class QFileSystemModel;
+class QTreeView;
+class QListWidget;
 class QPushButton;
-struct QLineEdit;
+class QLineEdit;
 class Material;
 
-struct AssetDock : public QDockWidget
+class AssetDock : public QDockWidget
 {
-private:
-    QFileSystemModel* fileSystemModel;
-    QTreeView* assetTreeView;
-    QListWidget* assetIcons;
-    QLineEdit* assetFilterLineEdit;
-    QPushButton* importMeshButton = nullptr;
-
 public:
     AssetDock();
     void AssetItemClicked();
@@ -47,4 +40,10 @@ private:
     void SerialiseMaterialPropsToFile(Material* material);
 
     void ImportAsset();
+
+    QFileSystemModel* fileSystemModel;
+    QTreeView* assetTreeView;
+    QListWidget* assetIcons;
+    QLineEdit* assetFilterLineEdit;
+    QPushButton* importMeshButton = nullptr;
 };

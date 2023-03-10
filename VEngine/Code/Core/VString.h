@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 
 //string conversion functions taken from:

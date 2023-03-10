@@ -1,4 +1,5 @@
 #pragma once
+
 #include <qdockwidget.h>
 
 class QListWidget;
@@ -7,15 +8,17 @@ class QLabel;
 class QLineEdit;
 
 //Displays information for all Actor and Component systems
-struct SystemDock : public QDockWidget
+class SystemDock : public QDockWidget
 {
-	QListWidget* actorSystemList;
-	QLabel* selectedActorSystemLabel;
-	QLineEdit* actorSystemSearchBar;
-
+public:
 	SystemDock();
 	void PopulateSystemLists();
 	void AddActorSystemsToWidget();
 	void ClickOnActorSystemItem(QListWidgetItem* item);
 	void SearchActorSystems();
+
+private:
+	QListWidget* actorSystemList = nullptr;
+	QLabel* selectedActorSystemLabel = nullptr;
+	QLineEdit* actorSystemSearchBar = nullptr;
 };

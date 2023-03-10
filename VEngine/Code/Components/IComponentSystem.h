@@ -5,17 +5,14 @@
 
 class Component;
 class Actor;
-struct Serialiser;
-struct BinarySerialiser;
-struct Deserialiser;
-struct BinaryDeserialiser;
+class Serialiser;
+class BinarySerialiser;
+class Deserialiser;
+class BinaryDeserialiser;
 
-struct IComponentSystem
+class IComponentSystem
 {
-	SystemStates systemState = SystemStates::Unloaded;
-
-	std::string name;
-
+public:
 	virtual void Init() = 0;
 	virtual void Tick(float deltaTime) = 0;
 	virtual void Start() = 0;
@@ -28,4 +25,10 @@ struct IComponentSystem
 	virtual std::vector<Component*> GetComponentsAsBaseClass() = 0;
 	virtual uint32_t GetNumComponents() = 0;
 	virtual Component* FindComponentByName(std::string componentName) = 0;
+
+	auto GetName() { return name; }
+
+protected:
+	SystemStates systemState = SystemStates::Unloaded;
+	std::string name;
 };

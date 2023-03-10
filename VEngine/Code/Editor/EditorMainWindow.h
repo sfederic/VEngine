@@ -1,16 +1,18 @@
 #pragma once
+
 #include <QtWidgets/QMainWindow>
 
-struct EditorMainWindow : public QMainWindow
+class EditorMainWindow : public QMainWindow
 {
-	struct RenderViewWidget* renderView;
-	struct PropertiesDock* propertiesDock;
-	struct AssetDock* assetDock;
-	struct WorldDock* worldDock;
-	struct SystemDock* systemDock;
-	struct ToolbarDock* toolbarDock;
-	struct LogDock* logDock;
-	struct DialogueDock* dialogueDock;
+public:
+	class RenderViewWidget* renderView = nullptr;
+	class PropertiesDock* propertiesDock = nullptr;
+	class AssetDock* assetDock = nullptr;
+	class WorldDock* worldDock = nullptr;
+	class SystemDock* systemDock = nullptr;
+	class ToolbarDock* toolbarDock = nullptr;
+	class LogDock* logDock = nullptr;
+	class DialogueDock* dialogueDock = nullptr;
 
 	bool fullScreenOn = false;
 

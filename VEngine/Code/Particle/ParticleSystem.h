@@ -6,15 +6,17 @@
 #include "ParticleEmitter.h"
 #include "Render/ShaderItem.h"
 
-struct ParticleSystem : Actor
+class ParticleSystem : public Actor
 {
+public:
 	ACTOR_SYSTEM(ParticleSystem)
 
-	std::vector<ParticleEmitter*> emitters;
-	
 	ParticleSystem();
 	void AddEmitter(ParticleEmitter* emitter);
-	virtual Properties GetProps() override;
+	Properties GetProps() override;
+
+private:
+	std::vector<ParticleEmitter*> emitters;
 };
 
 template <typename ParticleType>

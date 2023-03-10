@@ -34,7 +34,6 @@ private:
 	    propertyWidgetsToUpdate.emplace_back(static_cast<IPropertyWidget*>(widget));
 	}
 
-private:
 	std::vector<IPropertyWidget*> propertyWidgetsToUpdate;
 
 	QWidget* actorPropsWidget = nullptr;
