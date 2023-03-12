@@ -7,14 +7,9 @@ struct Properties;
 
 struct DebugNotification
 {
-	DebugNotification(const std::wstring note)
-	{
-		text = note;
-		timeOnScreen = 0.f;
-	}
-
+	DebugNotification(std::wstring_view note) : text(note) {}
 	std::wstring text;
-	float timeOnScreen;
+	float timeOnScreen = 0.f;
 };
 
 class DebugMenu
