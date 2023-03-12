@@ -28,10 +28,6 @@ void Console::Init()
 		std::make_pair([]() { debugMenu.consoleCommandsMenuOpen = !debugMenu.consoleCommandsMenuOpen; },
 		"List all console commands"));
 
-	executeMap.emplace(L"SNAP",
-		std::make_pair([]() { debugMenu.snapMenuOpen = !debugMenu.snapMenuOpen; },
-		"Show snapping menu"));
-
 	executeMap.emplace(L"PROFILE",
 		std::make_pair([]() { debugMenu.profileMenuOpen = !debugMenu.profileMenuOpen; },
 		"Show profile stats"));
@@ -39,14 +35,6 @@ void Console::Init()
 	executeMap.emplace(L"FPS",
 		std::make_pair([]() { debugMenu.fpsMenuOpen = !debugMenu.fpsMenuOpen; },
 		"Show FPS and GPU timing info"));
-
-	executeMap.emplace(L"PROPS",
-		std::make_pair([]() { debugMenu.propsMenuOpen = !debugMenu.propsMenuOpen; },
-		"Show actor props"));
-
-	executeMap.emplace(L"COMMANDS",
-		std::make_pair([]() { debugMenu.commandsMenuOpen = !debugMenu.commandsMenuOpen; },
-		"Shows current undo / redo commands in buffer"));
 
 	executeMap.emplace(L"GPU",
 		std::make_pair([]() { debugMenu.gpuMenuOpen = !debugMenu.gpuMenuOpen; },

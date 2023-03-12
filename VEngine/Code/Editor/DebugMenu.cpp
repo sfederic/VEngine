@@ -1,8 +1,6 @@
 #include "vpch.h"
 #include <filesystem>
 #include <Windows.h>
-#include "imgui.h"
-#include "ImGuizmo.h"
 #include "backends/imgui_impl_win32.h"
 #include "backends/imgui_impl_dx11.h"
 #include "DebugMenu.h"
@@ -77,8 +75,6 @@ void DebugMenu::Tick(float deltaTime)
 	RenderFPSMenu(deltaTime);
 	RenderGPUMenu();
 	RenderProfileMenu();
-	RenderSnappingMenu();
-	RenderActorProps();
 	RenderActorInspectMenu();
 	RenderWorldStats();
 	RenderGameInstanceData();
@@ -112,30 +108,6 @@ void DebugMenu::Cleanup()
 void DebugMenu::AddNotification(const std::wstring note)
 {
 	debugNotifications.emplace_back(DebugNotification(note));
-}
-
-void DebugMenu::RenderActorProps()
-{
-	if (!propsMenuOpen)
-	{
-		return;
-	}
-
-	if (WorldEditor::GetPickedActor() == nullptr)
-	{
-		return;
-	}
-
-
-	ImGui::Begin("Actor Properties");
-
-	//Iterate over actor props
-	for (auto& props : WorldEditor::GetPickedActor()->GetAllProps())
-	{
-		IterateOverProperties(props);
-	}
-
-	ImGui::End();
 }
 
 void DebugMenu::IterateOverProperties(Properties& props)
@@ -576,37 +548,6 @@ void DebugMenu::RenderProfileMenu()
 		{
 			ImGui::Text(averageTimesIt->second.c_str());
 			ImGui::Text(std::to_string(averageTimesIt->first).c_str());
-		}
-
-		ImGui::End();
-	}
-}
-
-void DebugMenu::RenderSnappingMenu()
-{
-	if (snapMenuOpen)
-	{
-		ImGui::Begin("Snapping");
-
-		ImGui::InputFloat("Translation", &transformGizmo.translateSnapValues[0]);
-		transformGizmo.translateSnapValues[1] = transformGizmo.translateSnapValues[0];
-		transformGizmo.translateSnapValues[2] = transformGizmo.translateSnapValues[0];
-
-		ImGui::InputFloat("Rotation", &transformGizmo.rotationSnapValues[0]);
-		transformGizmo.rotationSnapValues[1] = transformGizmo.rotationSnapValues[0];
-		transformGizmo.rotationSnapValues[2] = transformGizmo.rotationSnapValues[0];
-
-		ImGui::InputFloat("Scale", &transformGizmo.scaleSnapValues[0]);
-		transformGizmo.scaleSnapValues[1] = transformGizmo.scaleSnapValues[0];
-		transformGizmo.scaleSnapValues[2] = transformGizmo.scaleSnapValues[0];
-
-		if (transformGizmo.currentTransformMode == ImGuizmo::MODE::LOCAL)
-		{
-			ImGui::Text("LOCAL");
-		}
-		else if (transformGizmo.currentTransformMode == ImGuizmo::MODE::WORLD)
-		{
-			ImGui::Text("WORLD");
 		}
 
 		ImGui::End();

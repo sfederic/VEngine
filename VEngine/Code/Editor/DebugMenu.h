@@ -23,10 +23,7 @@ public:
 	std::vector<DebugNotification> debugNotifications;
 
 	bool fpsMenuOpen = false;
-	bool snapMenuOpen = false;
 	bool profileMenuOpen = false;
-	bool propsMenuOpen = false;
-	bool commandsMenuOpen = false;
 	bool gpuMenuOpen = false;
 	bool actorInspectMenuOpen = false;
 	bool worldStatsMenuOpen = false;
@@ -55,9 +52,7 @@ private:
 	void RenderFPSMenu(float deltaTime);
 	void RenderGPUMenu();
 	void RenderProfileMenu();
-	void RenderSnappingMenu();
 	void RenderActorInspectMenu();
-	void RenderActorProps();
 	void IterateOverProperties(Properties& props);
 	void RenderWorldStats();
 	void RenderGameInstanceData();
