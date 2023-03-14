@@ -93,6 +93,8 @@ void Player::Tick(float deltaTime)
 
 	Interact();
 
+	LandToAirFormChange();
+
 	MovementInput(deltaTime);
 }
 
@@ -354,6 +356,21 @@ void Player::LockOnTarget()
 		{
 			lockOnActor = hit.hitActor;
 			camera->targetActor = lockOnActor;
+		}
+	}
+}
+
+void Player::LandToAirFormChange()
+{
+	if (Input::GetKeyUp(Keys::Shift))
+	{
+		if (characterController->GetGravityState())
+		{
+			characterController->SetGravityState(false);
+		}
+		else
+		{
+			characterController->SetGravityState(true);
 		}
 	}
 }

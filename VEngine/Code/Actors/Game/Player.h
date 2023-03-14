@@ -46,6 +46,8 @@ private:
 
 	void LockOnTarget();
 
+	void LandToAirFormChange();
+
 public:
 	MeshComponent* mesh = nullptr;
 	CameraComponent* camera = nullptr;
