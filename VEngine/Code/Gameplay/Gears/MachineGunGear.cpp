@@ -14,5 +14,6 @@ void MachineGunGear::Use()
 	if (Raycast(hit, player->GetPositionV(), player->GetAimDirection(), 100.f))
 	{
 		GameUtils::SpawnSpriteSheet("Sprites/gunshot.png", hit.GetHitPosV(), false, 4, 5);
+		GameUtils::CameraShake(0.1f);
 	}
 }
