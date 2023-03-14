@@ -605,6 +605,9 @@
     <ClCompile Include="Code\Render\ShaderData\ShaderMatrices.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Gameplay\Gears\MachineGunGear.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1231,6 +1234,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\ShaderData\MaterialShaderData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Gameplay\Gears\MachineGunGear.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
