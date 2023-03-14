@@ -296,17 +296,49 @@ void Player::SetMouseInputForCameraRotation(bool useInput)
 
 void Player::PrimaryGearAction()
 {
-	if (Input::GetMouseLeftUp())
+	auto inputType = primaryGear->GetInputType();
+	switch (inputType)
 	{
-		primaryGear->Use();
+		case GearInputType::Press:
+		{
+			if (Input::GetMouseLeftUp())
+			{
+				primaryGear->Use();
+			}
+			break;
+		}
+		case GearInputType::Hold:
+		{
+			if (Input::GetMouseLeftDown())
+			{
+				primaryGear->Use();
+			}
+			break;
+		}
 	}
 }
 
 void Player::SecondaryGearAction()
 {
-	if (Input::GetMouseRightUp())
+	auto inputType = secondaryGear->GetInputType();
+	switch (inputType)
 	{
-		secondaryGear->Use();
+		case GearInputType::Press:
+		{
+			if (Input::GetMouseRightUp())
+			{
+				secondaryGear->Use();
+			}
+			break;
+		}
+		case GearInputType::Hold:
+		{
+			if (Input::GetMouseRightDown())
+			{
+				secondaryGear->Use();
+			}
+			break;
+		}
 	}
 }
 
