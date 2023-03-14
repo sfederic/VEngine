@@ -22,9 +22,14 @@ public:
 	auto GetHeight() { return height; }
 	auto GetRadius() { return radius; }
 
+	bool GetGravityState() { return useGravity; }
+	void SetGravityState(bool state) { useGravity = state; }
+
 private:
 	physx::PxController* controller = nullptr;
 
 	float height = 1.0f;
 	float radius = 0.5f;
+
+	bool useGravity = false;
 };
