@@ -167,7 +167,7 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 
 void Player::MovementInput(float deltaTime)
 {
-	movementSpeed = std::clamp(movementSpeed, 0.f, 40.f);
+	movementSpeed = std::clamp(movementSpeed, 0.f, 30.f);
 
 	const XMVECTOR offset = movementDirection * movementSpeed * deltaTime;
 	XMFLOAT3 offsetFloat3;
@@ -176,11 +176,11 @@ void Player::MovementInput(float deltaTime)
 
 	if (isMoving)
 	{
-		movementSpeed += 70.f * deltaTime;
+		movementSpeed += 65.f * deltaTime;
 	}
 	else
 	{
-		movementSpeed -= 60.f * deltaTime;
+		movementSpeed -= 85.f * deltaTime;
 	}
 
 	SpatialComponent* moveComponent = nullptr;
