@@ -191,6 +191,9 @@ public:
 	bool HasTag(const std::string& tag);
 	void AddTag(const std::string& tag) { tags.insert(tag); }
 
+	void SetMeshesToDynamicPhysicsState();
+	void SetMeshesToStaticPhysicsState();
+
 protected:
 	Actor* parent = nullptr;
 	std::vector<Actor*> children;

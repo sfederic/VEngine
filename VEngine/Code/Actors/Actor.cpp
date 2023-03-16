@@ -7,6 +7,7 @@
 #include "Core/World.h"
 #include "Core/Log.h"
 #include "Core/Camera.h"
+#include "Physics/PhysicsSystem.h"
 
 XMMATRIX Actor::GetWorldMatrix()
 {
@@ -376,4 +377,24 @@ bool Actor::CanBeTransparentlyOccluded()
 bool Actor::HasTag(const std::string& tag)
 {
 	return tags.find(tag) != tags.end();
+}
+
+void Actor::SetMeshesToDynamicPhysicsState()
+{
+	for (auto mesh : GetComponentsOfType<MeshComponent>())
+	{
+		PhysicsSystem::ReleasePhysicsActor(mesh);
+		mesh->isStatic = false;
+		PhysicsSystem::CreatePhysicsActor(mesh, PhysicsType::Dynamic, this);
+	}
+}
+
+void Actor::SetMeshesToStaticPhysicsState()
+{
+	for (auto mesh : GetComponentsOfType<MeshComponent>())
+	{
+		PhysicsSystem::ReleasePhysicsActor(mesh);
+		mesh->isStatic = true;
+		PhysicsSystem::CreatePhysicsActor(mesh, PhysicsType::Static, this);
+	}
 }
