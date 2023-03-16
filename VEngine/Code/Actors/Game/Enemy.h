@@ -1,11 +1,10 @@
 #pragma once
 
-#include "../Actor.h"
-#include "../ActorSystem.h"
+#include "DestructibleObject.h"
 #include "Gameplay/AttackTypes.h"
 
 //Base class for all enemies in the game.
-class Enemy : public Actor
+class Enemy : public DestructibleObject
 {
 public: 
 	ACTOR_SYSTEM(Enemy);
