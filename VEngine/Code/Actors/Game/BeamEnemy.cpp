@@ -5,12 +5,11 @@
 #include "Components/MeshComponent.h"
 #include "Particle/Polyboard.h"
 #include "Physics/Raycast.h"
-#include "Physics/PhysicsSystem.h"
 
 BeamEnemy::BeamEnemy()
 {
 	mesh = CreateComponent("Mesh", MeshComponent("turret.vmesh", "test.png"));
-	rootComponent->AddChild(mesh);
+	rootComponent = mesh;
 
 	beam = CreateComponent<Polyboard>("Beam");
 	rootComponent->AddChild(beam);
@@ -29,7 +28,6 @@ void BeamEnemy::Tick(float deltaTime)
 
 	if (isInDestroyedState)
 	{
-		return;
 	}
 
 	auto mesh = GetComponent<MeshComponent>("Mesh");
