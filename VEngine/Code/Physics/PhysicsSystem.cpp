@@ -92,9 +92,6 @@ void PhysicsSystem::Start()
 			}
 			else if (!mesh->skipPhysicsCreation)
 			{
-				//@Todo: I don't like doing this and reseting physicssystem on gameplay end. Feels expensive,
-				//but it enables roughly changing actors between static and dynamic when editing.
-
 				PhysicsType physicsType;
 				mesh->isStatic ? physicsType = PhysicsType::Static : physicsType = PhysicsType::Dynamic;
 
