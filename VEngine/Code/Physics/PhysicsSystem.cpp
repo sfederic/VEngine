@@ -74,7 +74,6 @@ void PhysicsSystem::Init()
 //Setup physics actors on gameplay start
 void PhysicsSystem::Start()
 {
-	//@Todo: it feels like physics will break if the mesh isn't the root of the actor
 	auto actors = World::GetAllActorsInWorld();
 	for (auto actor : actors)
 	{
@@ -158,14 +157,18 @@ void PhysicsSystem::ReleasePhysicsActor(MeshComponent* mesh)
 		return;
 	}
 
-	rigidActorIt->second->release();
+	auto rigidActor = rigidActorIt->second;
+
+	scene->removeActor(*rigidActor);
+	rigidActor->release();
 	rigidActorMap.erase(mesh->GetUID());
 }
 
 void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Actor* actor)
 {
-	PxTransform pxTransform = {};
-	const Transform transform = mesh->GetTransform();
+	PxTransform pxTransform;
+	Transform transform;
+	transform.Decompose(mesh->GetWorldMatrix());
 	ActorToPhysxTransform(transform, pxTransform);
 
 	PxRigidActor* rigidActor = nullptr;
