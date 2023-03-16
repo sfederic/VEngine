@@ -2,6 +2,7 @@
 #include "MachineGunGear.h"
 #include "Physics/Raycast.h"
 #include "Actors/Game/Player.h"
+#include "Actors/Game/Enemy.h"
 #include "Gameplay/GameUtils.h"
 #include "Particle/SpriteSheet.h"
 #include "Core/VMath.h"
@@ -19,5 +20,11 @@ void MachineGunGear::Use()
 		bulletSprite->sprite.angle = VMath::RandomRange(0.f, 360.f);
 
 		GameUtils::CameraShake(0.1f);
+
+		auto enemy = dynamic_cast<Enemy*>(hit.hitActor);
+		if (enemy)
+		{
+			enemy->OnDestroyed();
+		}
 	}
 }

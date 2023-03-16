@@ -36,8 +36,6 @@ bool Enemy::CheckIfAllTaggedMeshesAreDestroyed()
 
 void Enemy::OnDestroyed()
 {
-	Destroy();
-
 	auto enemies = World::GetAllActorsOfTypeInWorld<Enemy>();
 	if (enemies.empty())
 	{

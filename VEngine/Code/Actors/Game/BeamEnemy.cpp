@@ -5,10 +5,11 @@
 #include "Components/MeshComponent.h"
 #include "Particle/Polyboard.h"
 #include "Physics/Raycast.h"
+#include "Physics/PhysicsSystem.h"
 
 BeamEnemy::BeamEnemy()
 {
-	auto mesh = CreateComponent("Mesh", MeshComponent("turret.vmesh", "test.png"));
+	mesh = CreateComponent("Mesh", MeshComponent("turret.vmesh", "test.png"));
 	rootComponent->AddChild(mesh);
 
 	beam = CreateComponent<Polyboard>("Beam");
@@ -25,6 +26,11 @@ void BeamEnemy::Create()
 void BeamEnemy::Tick(float deltaTime)
 {
 	auto pos = GetPositionV();
+
+	if (isInDestroyedState)
+	{
+		return;
+	}
 
 	auto mesh = GetComponent<MeshComponent>("Mesh");
 	if (mesh)
@@ -51,4 +57,16 @@ Properties BeamEnemy::GetProps()
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
 	return props;
+}
+
+void BeamEnemy::OnDestroyed()
+{
+	if (isInDestroyedState) return;
+
+	__super::OnDestroyed();
+
+	isInDestroyedState = true;
+	falldownDirectionWhenDestroyed = -VMath::GlobalUpVector();
+
+	SetMeshesToDynamicPhysicsState();
 }
