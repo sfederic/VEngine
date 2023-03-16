@@ -158,6 +158,7 @@ void PhysicsSystem::ReleasePhysicsActor(MeshComponent* mesh)
 
 	scene->removeActor(*rigidActor);
 	rigidActor->release();
+	const auto meshUID = mesh->GetUID();
 	rigidActorMap.erase(mesh->GetUID());
 }
 
@@ -193,7 +194,9 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Ac
 	rigidActor->attachShape(*box);
 	scene->addActor(*rigidActor);
 
-	rigidActorMap.emplace(mesh->GetUID(), rigidActor);
+	const auto meshUID = mesh->GetUID();
+	assert(rigidActorMap.find(meshUID) == rigidActorMap.end());
+	rigidActorMap.emplace(meshUID, rigidActor);
 }
 
 void PhysicsSystem::CreatePhysicsForDestructibleMesh(DestructibleMeshComponent* mesh, Actor* actor)
@@ -278,6 +281,8 @@ void PhysicsSystem::CreateConvexPhysicsMesh(MeshComponent* mesh, Actor* actor)
 	PxRigidActorExt::createExclusiveShape(*rigidActor, convexGeom, *destructibleMaterial);
 
 	scene->addActor(*rigidActor);
+
+	assert(rigidActorMap.find(mesh->GetUID()) == rigidActorMap.end());
 	rigidActorMap.emplace(mesh->GetUID(), rigidActor);
 }
 
@@ -297,6 +302,7 @@ void PhysicsSystem::CreateConvexPhysicsMeshFromCollisionMesh(MeshComponent* mesh
 
 	CreateConvexPhysicsMesh(collisionMesh, actor);
 
+	assert(physicsMeshes.find(mesh->GetUID()) == physicsMeshes.end());
 	physicsMeshes.emplace(collisionMesh->GetUID(), collisionMesh);
 }
 
@@ -317,10 +323,11 @@ void PhysicsSystem::PhysxToActorTransform(Transform& actorTransform, const PxTra
 
 void PhysicsSystem::GetTransformFromPhysicsActor(MeshComponent* mesh)
 {
-	auto rigid = rigidActorMap.find(mesh->GetUID())->second;
+	const auto uid = mesh->GetUID();
+	auto rigid = rigidActorMap.find(uid)->second;
 
 	PxTransform pxTransform = rigid->getGlobalPose();
-	Transform transform = mesh->GetTransform();
+	Transform transform;
 	PhysxToActorTransform(transform, pxTransform);
 
 	mesh->SetTransform(transform);
