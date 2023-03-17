@@ -17,7 +17,7 @@ public:
 	bool CheckIfAllTaggedMeshesAreDestroyed();
 
 	bool HasHealthDepleted() { return health <= 0; }
-	void InflictDamage(int damage) { health -= damage; }
+	void InflictDamage(int damage);
 	virtual void OnDestroyed();
 
 	void InflictDamageToActor(Actor* actor);

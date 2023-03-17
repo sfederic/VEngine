@@ -34,6 +34,15 @@ bool Enemy::CheckIfAllTaggedMeshesAreDestroyed()
 	return true;
 }
 
+void Enemy::InflictDamage(int damage)
+{
+	health -= damage;
+	if (HasHealthDepleted())
+	{
+		OnDestroyed();
+	}
+}
+
 void Enemy::OnDestroyed()
 {
 	auto enemies = World::GetAllActorsOfTypeInWorld<Enemy>();
