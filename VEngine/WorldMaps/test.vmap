@@ -1,19 +1,34 @@
-Billboard
-1
+BeamEnemy
+2
  Enabled
 1
  Position
--4.49824 2.40261 10.0369
+-0.45584 0.356008 8.05728
  Rotation
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
 1
 Name
-Billboard0
+BeamEnemy0
 UID
-2134772202
+493542161
+next
+ Enabled
+1
+ Position
+-6.2028 0.705696 11.7683
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+BeamEnemy1
+UID
+1951854332
 next
 DirectionalLightActor
 1
@@ -32,48 +47,8 @@ DirectionalLightActor0
 UID
 3958008844
 next
-LevelInstance
-1
- Enabled
-1
- Position
-2 4 2
- Rotation
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Name
-LevelInstance0
-UID
-3254240850
-next
-MapSelectionActor
-1
- Enabled
-1
- Position
--11.6992 7.09971 9.27919
- Rotation
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Desc.
-
-Level
-
-Name
-MapSelectionActor0
-Title
-
-UID
-1512247115
-next
 MeshActor
-1
+2
  Enabled
 1
  Position
@@ -88,6 +63,21 @@ Name
 node0
 UID
 373019899
+next
+ Enabled
+1
+ Position
+4.09567 0.885077 5.78359
+ Rotation
+-0 0 -0 1
+ Scale
+4.5 4.5 4.5
+ Visible
+1
+Name
+cube1
+UID
+2288679262
 next
 Player
 1
@@ -107,46 +97,6 @@ Name
 Player0
 UID
 2649690755
-next
-BoxTriggerComponent
-2
-3254240850
-BoxTrigger
- Enabled
-1
- Pos
-2 4 2
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-0
-Extents
-5 5 5
-Offset
-0 0 0
-UID
-1606882932
-next
-1512247115
-BoxTrigger
- Enabled
-1
- Pos
--11.6992 7.09971 9.27919
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Extents
-0.45 0.45 0.45
-Offset
-0 0 0
-UID
-3269307622
 next
 CameraComponent
 1
@@ -185,6 +135,8 @@ CharacterController
 1 1 1
  Visible
 1
+Gravity
+0
 Height
 1
 Radius
@@ -213,16 +165,48 @@ LightEnabled
 UID
 1698855770
 next
+EmptyComponent
+2
+493542161
+Root
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+2649044663
+next
+1951854332
+Root
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+2813957587
+next
 MeshComponent
-3
-2134772202
+5
+493542161
 Mesh
  Enabled
 1
  Pos
--4.49824 2.40261 10.0369
+-0.45584 0.356008 8.05728
  Rot
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -236,15 +220,15 @@ null
 M_Metallic
 0
 M_Rast State
-nobackcull
+solid
 M_Shader
-Unlit
+Default
 M_Smoothness
 0
 M_Specular
 1 1 1 1
 M_Texture
-ramza_back.png
+test.png
 M_Use Texture
 1
 M_UvOffset
@@ -258,13 +242,64 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-plane.vmesh
+turret.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-2733699004
+1873000077
+next
+1951854332
+Mesh
+ Enabled
+1
+ Pos
+-6.2028 0.705696 11.7683
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+turret.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3031764687
 next
 373019899
 Mesh
@@ -368,6 +403,57 @@ Trans. Occlude
 UID
 152785008
 next
+2288679262
+Mesh
+ Enabled
+1
+ Pos
+4.09567 0.885077 5.78359
+ Rot
+-0 0 -0 1
+ Scale
+4.5 4.5 4.5
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3001048882
+next
 MouseRotateComponent
 1
 2649690755
@@ -384,5 +470,37 @@ MouseRotate
 1
 UID
 1448483674
+next
+Polyboard
+2
+493542161
+Beam
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+196187119
+next
+1951854332
+Beam
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+2790771978
 next
 end

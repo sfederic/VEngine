@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "GameInstance.h"
 
-std::string GameInstance::startingMap = "laser_enemies.vmap";
+std::string GameInstance::startingMap = "city_boss.vmap";
 
 //Global properties
 static bool ramielDefeated = false;
