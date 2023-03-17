@@ -23,4 +23,6 @@ private:
 	XMVECTOR rotateDirection = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	float rotateSpeed = 33.f;
 	float beamDistance = 10.f;
+
+	float destroyTimer = 0.f;
 };

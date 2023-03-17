@@ -26,10 +26,6 @@ void BeamEnemy::Tick(float deltaTime)
 {
 	auto pos = GetPositionV();
 
-	if (isInDestroyedState)
-	{
-	}
-
 	auto mesh = GetComponent<MeshComponent>("Mesh");
 	if (mesh)
 	{
@@ -48,6 +44,15 @@ void BeamEnemy::Tick(float deltaTime)
 	}
 
 	AddRotation(rotateDirection, rotateSpeed * deltaTime);
+
+	if (isInDestroyedState)
+	{
+		destroyTimer += deltaTime;
+		if (destroyTimer > 2.f)
+		{
+			Destroy();
+		}
+	}
 }
 
 Properties BeamEnemy::GetProps()
