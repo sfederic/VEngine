@@ -24,7 +24,7 @@ void MachineGunGear::Use()
 		auto enemy = dynamic_cast<Enemy*>(hit.hitActor);
 		if (enemy)
 		{
-			enemy->OnDestroyed();
+			enemy->InflictDamage(1);
 		}
 	}
 }
