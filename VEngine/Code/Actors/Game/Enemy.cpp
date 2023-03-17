@@ -50,6 +50,8 @@ void Enemy::OnDestroyed()
 	{
 		GameUtils::TriggerLevelComplete();
 	}
+
+	Destroy();
 }
 
 void Enemy::InflictDamageToActor(Actor* actor)
