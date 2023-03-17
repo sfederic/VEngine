@@ -114,6 +114,11 @@ void Player::InflictDamage(float damage)
 
 XMVECTOR Player::GetAimDirection()
 {
+	HitResult hit(this);
+	if (Raycast(hit, camera->GetWorldPositionV(), camera->GetForwardVectorV(), 100.f))
+	{
+		return XMVector3Normalize(hit.GetHitPosV() - GetPositionV());
+	}
 	return mouseRotateComponent->GetForwardVectorV();
 }
 
