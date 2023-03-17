@@ -114,11 +114,22 @@ void Player::InflictDamage(float damage)
 
 XMVECTOR Player::GetAimDirection()
 {
+	const XMVECTOR cameraPos = camera->GetWorldPositionV();
+
 	HitResult hit(this);
-	if (Raycast(hit, camera->GetWorldPositionV(), camera->GetForwardVectorV(), 100.f))
+	if (Raycast(hit, cameraPos, camera->GetForwardVectorV(), 100.f))
 	{
+		const float hitDist = XMVector3Length(hit.GetHitPosV() - cameraPos).m128_f32[0];
+		const float playerDist = XMVector3Length(GetPositionV() - cameraPos).m128_f32[0];
+
+		if (hitDist < playerDist) //If hit object from camera to aim point is behind the player
+		{
+			return mouseRotateComponent->GetForwardVectorV();
+		}
+
 		return XMVector3Normalize(hit.GetHitPosV() - GetPositionV());
 	}
+
 	return mouseRotateComponent->GetForwardVectorV();
 }
 
