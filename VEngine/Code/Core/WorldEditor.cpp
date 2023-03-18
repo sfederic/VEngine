@@ -66,7 +66,7 @@ void HandleActorPicking()
 				auto mesh = dynamic_cast<MeshComponent*>(screenPickRay.hitComponent);
 				if (mesh)
 				{
-					mesh->material->materialShaderData.useTexture = true;
+					mesh->GetMaterial().materialShaderData.useTexture = true;
 					mesh->SetTexture(VString::wstos(TextureSystem::selectedTextureInEditor));
 					return;
 				}
@@ -80,7 +80,7 @@ void HandleActorPicking()
 				{
 					Material loadedMaterial = MaterialSystem::LoadMaterialFromFile(MaterialSystem::selectedMaterialInEditor);
 					loadedMaterial.Create();
-					*mesh->material = loadedMaterial;
+					mesh->GetMaterial() = loadedMaterial;
 					return;
 				}
 			}

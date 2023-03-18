@@ -117,7 +117,7 @@ void SetVertexBuffer(Buffer* vertexBuffer);
 void SetIndexBuffer(Buffer* indexBuffer);
 void SetSampler(uint32_t shaderRegister, Sampler* sampler);
 void SetShaderResourcePixel(uint32_t shaderRegister, std::string textureName);
-void SetShaderResourceFromMaterial(uint32_t shaderRegister, Material* material);
+void SetShaderResourceFromMaterial(uint32_t shaderRegister, Material& material);
 void SetLightsConstantBufferData();
 
 void CreatePostProcessRenderTarget();
@@ -636,20 +636,21 @@ void RenderMeshForShadowPass(MeshComponent* mesh)
 		return;
 	}
 
+	Material& mat = mesh->GetMaterial();
+
 	SetRenderPipelineStatesForShadows(mesh);
 
 	//Set matrices
 	shaderMatrices.model = mesh->GetWorldMatrix();
 	shaderMatrices.MakeModelViewProjectionMatrix();
-	shaderMatrices.MakeTextureMatrix(mesh->material);
+	shaderMatrices.MakeTextureMatrix(mat);
 
 	cbMatrices->Map(&shaderMatrices);
 	cbMatrices->SetVS();
 
 	//Set textures
-	Material* mat = mesh->material;
-	context->PSSetSamplers(0, 1, &mat->sampler->data);
-	SetShaderResourceFromMaterial(0, mesh->material);
+	context->PSSetSamplers(0, 1, &mat.sampler->data);
+	SetShaderResourceFromMaterial(0, mat);
 
 	//Draw
 	context->Draw(mesh->meshDataProxy.vertices->size(), 0);
@@ -702,7 +703,7 @@ void RenderShadowPass()
 		//Set matrices
 		shaderMatrices.model = mesh->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
-		shaderMatrices.MakeTextureMatrix(mesh->material);
+		shaderMatrices.MakeTextureMatrix(mesh->GetMaterial());
 
 		cbMatrices->Map(&shaderMatrices);
 		cbMatrices->SetVS();
@@ -714,9 +715,9 @@ void RenderShadowPass()
 		cbSkinningData->SetVS();
 
 		//Set textures
-		Material* mat = mesh->material;
-		context->PSSetSamplers(0, 1, &mat->sampler->data);
-		SetShaderResourceFromMaterial(0, mesh->material);
+		Material& mat = mesh->GetMaterial();
+		context->PSSetSamplers(0, 1, &mat.sampler->data);
+		SetShaderResourceFromMaterial(0, mat);
 
 		//Draw
 		context->Draw(mesh->meshDataProxy.vertices->size(), 0);
@@ -817,7 +818,7 @@ void SetMatricesFromMesh(MeshComponent* mesh)
 {
 	shaderMatrices.model = mesh->GetWorldMatrix();
 	shaderMatrices.MakeModelViewProjectionMatrix();
-	shaderMatrices.MakeTextureMatrix(mesh->material);
+	shaderMatrices.MakeTextureMatrix(mesh->GetMaterial());
 
 	cbMatrices->Map(&shaderMatrices);
 	cbMatrices->SetVS();
@@ -949,7 +950,7 @@ void Renderer::RenderLightProbeViews()
 			{
 				if (!mesh->IsVisible()) { continue; }
 
-				Material* material = mesh->material;
+				Material& material = mesh->GetMaterial();
 
 				const FLOAT blendState[4] = { 0.f };
 				context->OMSetBlendState(nullptr, blendState, 0xFFFFFFFF);
@@ -957,13 +958,13 @@ void Renderer::RenderLightProbeViews()
 				context->VSSetShader(lightProbeShader->GetVertexShader(), nullptr, 0);
 				context->PSSetShader(lightProbeShader->GetPixelShader(), nullptr, 0);
 
-				context->PSSetSamplers(0, 1, &material->sampler->data);
+				context->PSSetSamplers(0, 1, &material.sampler->data);
 
 				SetShaderResourceFromMaterial(0, material);
 
 				context->IASetVertexBuffers(0, 1, &mesh->pso.vertexBuffer->data, &stride, &offset);
 
-				cbMaterial->Map(&material->materialShaderData);
+				cbMaterial->Map(&material.materialShaderData);
 				cbMaterial->SetPS();
 
 				//Set matrices
@@ -971,7 +972,7 @@ void Renderer::RenderLightProbeViews()
 					probeMatrix.r[3] + faces[i], VMath::GlobalUpVector());
 				shaderMatrices.model = mesh->GetWorldMatrix();
 				shaderMatrices.MakeModelViewProjectionMatrix();
-				shaderMatrices.MakeTextureMatrix(mesh->material);
+				shaderMatrices.MakeTextureMatrix(mesh->GetMaterial());
 
 				cbMatrices->Map(&shaderMatrices);
 				cbMatrices->SetVS();
@@ -1048,7 +1049,7 @@ void RenderInstanceMeshComponents()
 		SetBlendState(BlendStates::Default);
 
 		//Update texture matrix
-		shaderMatrices.MakeTextureMatrix(instanceMesh->material);
+		shaderMatrices.MakeTextureMatrix(instanceMesh->GetMaterial());
 		cbMatrices->Map(&shaderMatrices);
 		cbMatrices->SetVS();
 
@@ -1755,36 +1756,36 @@ void Renderer::PlayerPhotoCapture(std::wstring outputFilename)
 
 void SetRenderPipelineStates(MeshComponent* mesh)
 {
-	Material* material = mesh->material;
+	Material& material = mesh->GetMaterial();
 	PipelineStateObject& pso = mesh->pso;
 
 	if (Renderer::drawAllAsWireframe)
 	{
 		context->RSSetState(rastStateWireframe);
 	}
-	else if (material->rastState)
+	else if (material.rastState)
 	{
-		context->RSSetState(material->rastState->data);
+		context->RSSetState(material.rastState->data);
 	}
 
 	constexpr FLOAT blendState[4] = { 0.f };
-	context->OMSetBlendState(material->blendState->data, blendState, 0xFFFFFFFF);
+	context->OMSetBlendState(material.blendState->data, blendState, 0xFFFFFFFF);
 
-	context->VSSetShader(material->GetVertexShader(), nullptr, 0);
-	context->PSSetShader(material->GetPixelShader(), nullptr, 0);
+	context->VSSetShader(material.GetVertexShader(), nullptr, 0);
+	context->PSSetShader(material.GetPixelShader(), nullptr, 0);
 
-	context->PSSetSamplers(0, 1, &material->sampler->data);
+	context->PSSetSamplers(0, 1, &material.sampler->data);
 	SetShaderResourceFromMaterial(0, material);
 
 	SetVertexBuffer(pso.vertexBuffer);
 
-	cbMaterial->Map(&material->materialShaderData);
+	cbMaterial->Map(&material.materialShaderData);
 	cbMaterial->SetPS();
 }
 
 void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 {
-	Material* material = mesh->material;
+	Material& material = mesh->GetMaterial();
 	PipelineStateObject& pso = mesh->pso;
 
 	context->RSSetState(rastStateMap["shadow"]->data);
@@ -1853,14 +1854,14 @@ void SetSampler(uint32_t shaderRegister, Sampler* sampler)
 	context->PSSetSamplers(shaderRegister, 1, &sampler->data);
 }
 
-void SetShaderResourceFromMaterial(uint32_t shaderRegister, Material* material)
+void SetShaderResourceFromMaterial(uint32_t shaderRegister, Material& material)
 {
 	//Testing code for normal map SRV set
 	/*auto normalMapTexture = textureSystem.FindTexture2D("wall_normal_map.png");
 	auto normalMapSRV = normalMapTexture->GetSRV();
 	context->PSSetShaderResources(normalMapTexureRegister, 1, &normalMapSRV);*/
 
-	auto textureSRV = material->texture->GetSRV();
+	auto textureSRV = material.texture->GetSRV();
 	context->PSSetShaderResources(shaderRegister, 1, &textureSRV);
 }
 

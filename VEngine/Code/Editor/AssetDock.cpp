@@ -419,7 +419,7 @@ void AssetDock::CreateNewMaterialFile()
 {
     //Create empty material
     auto material = Material("test.png", ShaderItems::Default);
-    SerialiseMaterialPropsToFile(&material);
+    SerialiseMaterialPropsToFile(material);
 }
 
 void AssetDock::CopyMaterialToMaterialFileFromSelectedActor()
@@ -438,11 +438,10 @@ void AssetDock::CopyMaterialToMaterialFileFromSelectedActor()
         return;
     }
 
-    Material* material = mesh->GetMaterial();
-    SerialiseMaterialPropsToFile(material);
+    SerialiseMaterialPropsToFile(mesh->GetMaterial());
 }
 
-void AssetDock::SerialiseMaterialPropsToFile(Material* material)
+void AssetDock::SerialiseMaterialPropsToFile(Material& material)
 {
     QString materialFileName = QFileDialog::getSaveFileName(nullptr, "Create Material File",
         QString::fromStdString(AssetBaseFolders::material),
@@ -451,7 +450,7 @@ void AssetDock::SerialiseMaterialPropsToFile(Material* material)
     if (materialFileName.isEmpty()) return;
 
     Serialiser s(materialFileName.toStdString(), OpenMode::Out);
-    Properties materialProps = material->GetProps();
+    Properties materialProps = material.GetProps();
     s.Serialise(materialProps);
 
     Log("Material [%s] created.", materialFileName.toStdString().c_str());

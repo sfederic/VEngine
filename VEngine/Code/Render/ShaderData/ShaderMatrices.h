@@ -15,6 +15,6 @@ struct ShaderMatrices
 	DirectX::XMMATRIX lightViewProj; //This is for in Shadows.hlsl to push vertex pos into space
 
 	void Create();
-	void MakeTextureMatrix(Material* material);
+	void MakeTextureMatrix(Material& material);
 	void MakeModelViewProjectionMatrix();
 };

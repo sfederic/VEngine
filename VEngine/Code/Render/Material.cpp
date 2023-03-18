@@ -72,7 +72,7 @@ static void ReassignTexture(void* data)
 	auto meshes = WorldEditor::GetPickedActor()->GetComponentsOfType<MeshComponent>();
 	for (auto mesh : meshes)
 	{
-		mesh->material->texture = swapTexture;
+		mesh->GetMaterial().texture = swapTexture;
 	}
 }
 
@@ -92,7 +92,7 @@ static void ReassignRastState(void* data)
 		auto meshes = WorldEditor::GetPickedActor()->GetComponentsOfType<MeshComponent>();
 		for (auto mesh : meshes)
 		{
-			mesh->material->rastState = foundRastState;
+			mesh->GetMaterial().rastState = foundRastState;
 		}
 	}
 }
@@ -113,7 +113,7 @@ static void ReassignBlendState(void* data)
 		auto meshes = WorldEditor::GetPickedActor()->GetComponentsOfType<MeshComponent>();
 		for (auto mesh : meshes)
 		{
-			mesh->material->blendState = foundBlendState;
+			mesh->GetMaterial().blendState = foundBlendState;
 		}
 	}
 }
@@ -131,7 +131,7 @@ static void ReassignShader(void* data)
 	auto meshes = WorldEditor::GetPickedActor()->GetComponentsOfType<MeshComponent>();
 	for (auto mesh : meshes)
 	{
-		mesh->material->shader = foundShader;
+		mesh->GetMaterial().shader = foundShader;
 	}
 }
 

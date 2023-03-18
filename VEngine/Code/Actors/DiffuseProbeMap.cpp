@@ -21,7 +21,7 @@ DiffuseProbeMap::DiffuseProbeMap()
 
 void DiffuseProbeMap::Create()
 {
-	instanceMeshComponent->GetMaterial()->materialShaderData.useTexture = 0;
+	instanceMeshComponent->GetMaterial().materialShaderData.useTexture = 0;
 	instanceMeshComponent->SetInstanceCount(GetProbeCount());
 
 	ReadProbeDataFromFile();

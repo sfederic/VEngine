@@ -37,7 +37,7 @@ void SplitMesh::CreateSplitMesh(std::vector<Vertex>& meshVerts, MeshComponent* o
 
 	mesh->SetTexture(originalMesh->GetTextureFilename());
 
-	mesh->material->materialShaderData = originalMesh->material->materialShaderData;
+	mesh->GetMaterial().materialShaderData = originalMesh->GetMaterial().materialShaderData;
 
 	mesh->SplitMeshCreate();
 }

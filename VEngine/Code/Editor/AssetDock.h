@@ -37,7 +37,7 @@ private:
 
     void CreateNewMaterialFile();
     void CopyMaterialToMaterialFileFromSelectedActor();
-    void SerialiseMaterialPropsToFile(Material* material);
+    void SerialiseMaterialPropsToFile(Material& material);
 
     void ImportAsset();
 

@@ -1,6 +1,5 @@
 #pragma once
 
-#include <string>
 #include "SpatialComponent.h"
 #include "ComponentSystem.h"
 #include "Render/PipelineObjects.h"
@@ -26,7 +25,6 @@ public:
 
 	MeshComponentData meshComponentData;
 
-	Material* material = nullptr;
 	MeshDataProxy meshDataProxy;
 	PipelineStateObject pso;
 
@@ -74,7 +72,7 @@ public:
 	Buffer* GetVertexBuffer() const;
 	void CreateVertexBuffer();
 
-	Material* GetMaterial() { return material; }
+	Material& GetMaterial() { return *material; }
 
 	std::vector<XMFLOAT3> GetAllVertexPositions();
 
@@ -84,4 +82,6 @@ public:
 
 private:
 	std::string collisionMeshFilename;
+
+	Material* material = nullptr;
 };
