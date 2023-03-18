@@ -5,8 +5,6 @@
 #include "AnimFrame.h"
 #include "Joint.h"
 
-class Skeleton;
-
 class Animation
 {
 public:
@@ -42,7 +40,7 @@ public:
 
 	float GetFinalTime();
 
-	void Interpolate(float t, Joint& joint, Skeleton* skeleton);
+	void Interpolate(float t, Joint& joint, std::vector<Joint>& joints);
 
 	static inline const int ANIM_NAME_MAX = 128;
 

@@ -22,7 +22,7 @@ float Animation::GetFinalTime()
 	return highestTime;
 }
 
-void Animation::Interpolate(float t, Joint& joint, Skeleton* skeleton)
+void Animation::Interpolate(float t, Joint& joint, std::vector<Joint>& joints)
 {
 	if (!isPlaying)
 	{
@@ -64,7 +64,7 @@ void Animation::Interpolate(float t, Joint& joint, Skeleton* skeleton)
 
 			while (parentIndex > -1)
 			{
-				Joint& parentJoint = skeleton->GetJoints()[parentIndex];
+				Joint& parentJoint = joints[parentIndex];
 				endPose *= parentJoint.currentPose;
 
 				parentIndex = parentJoint.parentIndex;

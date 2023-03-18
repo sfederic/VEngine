@@ -155,7 +155,7 @@ void SkeletalMeshComponent::InterpolateCurrentAnimation()
 				ResetAnimationTime();
 			}
 
-			anim.Interpolate(GetCurrentAnimationTime(), joint, &GetSkeleton());
+			anim.Interpolate(GetCurrentAnimationTime(), joint, GetAllJoints());
 
 			shaderSkinningData.skinningMatrices[skinningDataIndex] = joint.currentPose;
 			skinningDataIndex++;
