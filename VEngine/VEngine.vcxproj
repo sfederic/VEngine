@@ -282,6 +282,7 @@
     <ClCompile Include="Code\Actors\Game\DestructibleObject.cpp" />
     <ClInclude Include="Code\Actors\Game\AntiAirEnemy.h" />
     <ClInclude Include="Code\Animation\AnimFrame.h" />
+    <ClInclude Include="Code\Asset\AnimationAssetHeader.h" />
     <ClInclude Include="Code\Render\BlendStates.h" />
     <ClInclude Include="Code\Animation\BoneWeights.h" />
     <ClInclude Include="Code\Animation\Animation.h" />

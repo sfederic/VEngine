@@ -5,6 +5,7 @@
 #include <filesystem>
 #include "FBXLoader.h"
 #include "MeshAssetHeader.h"
+#include "AnimationAssetHeader.h"
 #include "Core/Profile.h"
 #include "Core/Log.h"
 #include "Core/FileSystem.h"

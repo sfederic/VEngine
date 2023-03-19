@@ -1245,6 +1245,9 @@
     <ClInclude Include="Code\Actors\Game\DestructibleObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Asset\AnimationAssetHeader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
