@@ -8,7 +8,7 @@
 class Skeleton
 {
 public:
-	void AddJoint(Joint joint);
+	void AddJoint(Joint& joint);
 	Joint::JointIndex FindJointIndexByName(const std::string name);
 	auto GetNumJoints() { return joints.size(); }
 	void CreateAnimation(const std::string animationName);

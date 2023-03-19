@@ -1,10 +1,14 @@
 #include "vpch.h"
 #include "Skeleton.h"
 
-void Skeleton::AddJoint(Joint joint)
+void Skeleton::AddJoint(Joint& joint)
 {
+	for (auto& existingjoint : joints)
+	{
+		assert(strcmp(existingjoint.name, joint.name) != 0);
+	}
+
 	joints.emplace_back(joint);
-	//@Todo: assert on joint not having the same name as existing joint. Encapsulation will need to be fixed.
 	joints.back().index = joints.size() - 1;
 }
 
