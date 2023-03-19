@@ -92,7 +92,7 @@ void AssetSystem::BuildSingleVMeshFromFBX(const std::string fbxFilename)
 
 	assert(fwrite(&header, sizeof(MeshAssetHeader), 1, file));
 	assert(fwrite(meshData.vertices.data(), sizeof(Vertex), meshData.vertices.size(), file));
-	assert(fwrite(&meshData.boudingBox, sizeof(DirectX::BoundingBox), 1, file));
+	assert(fwrite(&meshData.boundingBox, sizeof(DirectX::BoundingBox), 1, file));
 
 	auto& joints = meshData.skeleton.GetJoints();
 	fwrite(joints.data(), sizeof(Joint), joints.size(), file);
@@ -151,7 +151,7 @@ MeshDataProxy AssetSystem::ReadVMeshAssetFromFile(const std::string filename)
 	data.vertices.resize(header.vertexCount);
 	assert(fread(data.vertices.data(), sizeof(Vertex), header.vertexCount, file));
 
-	assert(fread(&data.boudingBox, sizeof(DirectX::BoundingBox), 1, file));
+	assert(fread(&data.boundingBox, sizeof(DirectX::BoundingBox), 1, file));
 
 	data.skeleton.GetJoints().resize(header.boneCount);
 	//Has to potential to read empty data, don't call assert()
@@ -164,7 +164,7 @@ MeshDataProxy AssetSystem::ReadVMeshAssetFromFile(const std::string filename)
 
 	MeshDataProxy meshDataProxy;
 	meshDataProxy.vertices = &foundMeshData.vertices;
-	meshDataProxy.boundingBox = &foundMeshData.boudingBox;
+	meshDataProxy.boundingBox = &foundMeshData.boundingBox;
 	meshDataProxy.skeleton = &foundMeshData.skeleton;
 
 	return meshDataProxy;

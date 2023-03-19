@@ -1,35 +1,3 @@
-BeamEnemy
-2
- Enabled
-1
- Position
--0.45584 0.356008 8.05728
- Rotation
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Name
-BeamEnemy0
-UID
-493542161
-next
- Enabled
-1
- Position
--6.2028 0.705696 11.7683
- Rotation
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Name
-BeamEnemy1
-UID
-1951854332
-next
 DirectionalLightActor
 1
  Enabled
@@ -48,7 +16,7 @@ UID
 3958008844
 next
 MeshActor
-2
+1
  Enabled
 1
  Position
@@ -63,21 +31,6 @@ Name
 node0
 UID
 373019899
-next
- Enabled
-1
- Position
-4.09567 0.885077 5.78359
- Rotation
--0 0 -0 1
- Scale
-4.5 4.5 4.5
- Visible
-1
-Name
-cube1
-UID
-2288679262
 next
 Player
 1
@@ -165,46 +118,14 @@ LightEnabled
 UID
 1698855770
 next
-EmptyComponent
-2
-493542161
-Root
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-UID
-2649044663
-next
-1951854332
-Root
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-UID
-2813957587
-next
 MeshComponent
-5
-493542161
+2
+2649690755
 Mesh
  Enabled
 1
  Pos
--0.45584 0.356008 8.05728
+0 0 0
  Rot
 0 0 0 1
  Scale
@@ -242,64 +163,13 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-turret.vmesh
+jehuty.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-1873000077
-next
-1951854332
-Mesh
- Enabled
-1
- Pos
--6.2028 0.705696 11.7683
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-turret.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3031764687
+152785008
 next
 373019899
 Mesh
@@ -352,108 +222,6 @@ Trans. Occlude
 UID
 2404652903
 next
-2649690755
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-jehuty.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-152785008
-next
-2288679262
-Mesh
- Enabled
-1
- Pos
-4.09567 0.885077 5.78359
- Rot
--0 0 -0 1
- Scale
-4.5 4.5 4.5
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3001048882
-next
 MouseRotateComponent
 1
 2649690755
@@ -470,37 +238,5 @@ MouseRotate
 1
 UID
 1448483674
-next
-Polyboard
-2
-493542161
-Beam
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-UID
-196187119
-next
-1951854332
-Beam
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-UID
-2790771978
 next
 end

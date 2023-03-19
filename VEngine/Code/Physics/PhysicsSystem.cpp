@@ -247,7 +247,7 @@ void PhysicsSystem::CreateConvexPhysicsMesh(MeshComponent* mesh, Actor* actor)
 	//Figure out some way to make an AABB 'box' where the max points for each coordinate direction (X, Y, Z)
 	//fit snug around the mesh or something or do some research into other methods.
 
-	//Physx convex mesh can only be 256 vertices per the documentation
+	//PhysX convex mesh can only be 256 vertices per the documentation
 	assert(mesh->meshDataProxy.vertices->size() < 256);
 
 	convexDesc.points.count = mesh->meshDataProxy.vertices->size();
@@ -353,7 +353,7 @@ bool Physics::Raycast(XMFLOAT3 origin, XMFLOAT3 dir, float range, RaycastHit& hi
 		hit.hitActor = (Actor*)block.actor->userData;
 		hit.distance = block.distance;
 		hit.normal = XMFLOAT3(block.normal.x, block.normal.y, block.normal.z);
-		hit.posiiton = XMFLOAT3(block.position.x, block.position.y, block.position.z);
+		hit.position = XMFLOAT3(block.position.x, block.position.y, block.position.z);
 		hit.uv = XMFLOAT2(block.u, block.v);
 
 		return true;
@@ -388,7 +388,7 @@ bool Physics::BoxCast(XMFLOAT3 extents, XMFLOAT3 origin, XMFLOAT3 direction, flo
 		hit.hitActor = (Actor*)block.actor->userData;
 		hit.distance = block.distance;
 		hit.normal = XMFLOAT3(block.normal.x, block.normal.y, block.normal.z);
-		hit.posiiton = XMFLOAT3(block.position.x, block.position.y, block.position.z);
+		hit.position = XMFLOAT3(block.position.x, block.position.y, block.position.z);
 		hit.uv = XMFLOAT2(0.f, 0.f); //No uv coords for sweeps
 
 		return true;

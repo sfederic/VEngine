@@ -12,7 +12,7 @@ void SliceableMeshComponent::SliceMesh(XMVECTOR planeCenter, XMVECTOR planeNorma
 
 	const Transform originalMeshTransform = transform;
 
-	//@Todo: this will fail if the plane doesn't cut this mesh. d3d11 will explore on CreateBuffer
+	//@Todo: this will fail if the plane doesn't cut this mesh. d3d11 will explode on CreateBuffer
 	auto splitMesh0 = SplitMesh::system.Add(originalMeshTransform);
 	splitMesh0->CreateSplitMesh(mesh0Verts, this);
 

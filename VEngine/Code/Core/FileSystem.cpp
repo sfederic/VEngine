@@ -103,7 +103,6 @@ void FileSystem::WriteAllSystemsToBinary()
 	Log("Binary save for [%s] took [%f].", str.c_str(), end);
 }
 
-//@Todo: binary serialisation isn't working too well. Might be some weird alignment errors taken from property sizes.
 void FileSystem::ReadAllSystemsFromBinary()
 {
 	const auto start = Profile::QuickStart();

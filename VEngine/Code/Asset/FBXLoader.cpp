@@ -77,7 +77,7 @@ void FBXLoader::ImportAsMesh(std::string filename, MeshData& meshData)
 	scene->Destroy();
 	
 	assert(meshData.vertices.size() > 0 && "Nothing probably selected on fbx export in DCC.");
-	BoundingBox::CreateFromPoints(meshData.boudingBox, meshData.vertices.size(),
+	BoundingBox::CreateFromPoints(meshData.boundingBox, meshData.vertices.size(),
 		&meshData.vertices.at(0).pos, sizeof(Vertex));
 }
 

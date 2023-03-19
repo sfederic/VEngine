@@ -25,8 +25,8 @@ enum class PhysicsType
 	Dynamic
 };
 
-//@Todo: if non static meshcomponents are inside a skybox for example, they'll explode out because that
-//skybox hasn't disabled its boundingbox and/or physicscomponent. make a flag that turns it off.
+//@Todo: if non static MeshComponents are inside a skybox for example, they'll explode out because that
+//skybox hasn't disabled its BoundingBox and/or PhysicsComponent. make a flag that turns it off.
 
 //Interface to PhysX systems
 //Ref: https://gameworksdocs.nvidia.com/PhysX/4.1/documentation/physxguide/Index.html
@@ -62,7 +62,7 @@ namespace Physics
 		Actor* hitActor = nullptr;
 
 		XMFLOAT3 normal;
-		XMFLOAT3 posiiton;
+		XMFLOAT3 position;
 		XMFLOAT2 uv;
 
 		float distance = 0.f;

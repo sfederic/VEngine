@@ -12,7 +12,7 @@ using namespace DirectX;
 //Ref:http://simonschreibt.de/gat/metal-gear-rising-slicing/
 
 //@Todo: mesh slice will fail if it gets cut down the middle straight along triangle edges
-//as it will return multiple new verticesalong that edge.
+//as it will return multiple new vertices along that edge.
 
 Vertex InterpolateVerts(const Vertex& v0, const Vertex& v1, XMVECTOR pos)
 {

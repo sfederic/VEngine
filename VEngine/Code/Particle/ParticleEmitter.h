@@ -25,7 +25,7 @@ public:
 
 	ParticleData particleData;
 
-	//Seperate from individual particle lifetime, Emitter destroys itself when it reaches a max.
+	//Separate from individual particle lifetime, Emitter destroys itself when it reaches a max.
 	float emitterLifetime = 0.f;
 
 private:

@@ -34,7 +34,7 @@ namespace RenderUtils
 	}
 
 	//@Todo: there's something up with how D3D11 creates dynamic buffers, where the create will fail sometimes.
-	//Hard to find anythng on the issue. This stackoverflow issue thinks its this from the official docs:
+	//Hard to find anything on the issue. This stackoverflow issue thinks its this from the official docs:
 	//"Create a buffer with D3D11_USAGE_DYNAMIC, and fill it with ID3D11DeviceContext::Map, ID3D11DeviceContext::Unmap (using the Discard and NoOverwrite flags appropriately)."
 	//https://stackoverflow.com/questions/25589346/dynamic-vertex-buffer-creation-failure
 	//Dynamic buffers also sometimes blow up when map()/unmap()ping the buffer.
