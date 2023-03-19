@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "RamielBoss.h"
 #include "Actors/Game/Player.h"
+#include "Actors/Game/DestructibleObject.h"
 #include "Components/MeshComponent.h"
 #include "Physics/Raycast.h"
 #include "Gameplay/GameUtils.h"
@@ -71,7 +72,10 @@ void RamielBoss::FireChargeBeamAtPlayer()
     {
         GameUtils::SpawnSpriteSheet("Sprites/blue_explosion.png", hit.GetHitPosV(), false, 5, 5);
 
-        //@Todo: check for destructible objects (buildings, houses). Make an appropriate actor.
-        hit.hitActor->Destroy();
+        auto destructibleObject = dynamic_cast<DestructibleObject*>(hit.hitActor);
+        if (destructibleObject)
+        {
+            destructibleObject->Destroy();
+        }
     }
 }
