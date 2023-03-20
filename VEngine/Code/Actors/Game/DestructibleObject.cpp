@@ -12,4 +12,5 @@ void DestructibleObject::Start()
 void DestructibleObject::Tick(float deltaTime)
 {
 	healthWidget->SetHealth(health);
+	healthWidget->worldPosition = GetHomogeneousPositionV();
 }

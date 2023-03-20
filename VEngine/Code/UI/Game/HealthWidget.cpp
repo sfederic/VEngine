@@ -3,6 +3,6 @@
 
 void HealthWidget::Draw(float deltaTime)
 {
-	auto layout = CenterLayoutOnScreenSpaceCoords(10 * healthToDisplay, 10);
+	auto layout = CenterLayoutOnScreenSpaceCoords(100 * healthToDisplay, 10);
 	FillRect(layout);
 }

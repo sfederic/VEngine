@@ -12,6 +12,7 @@ public:
 
 	BeamEnemy();
 	void Create() override;
+	void Start() override { __super::Start(); }
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 

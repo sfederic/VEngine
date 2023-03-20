@@ -10,6 +10,8 @@ public:
 	ACTOR_SYSTEM(Enemy);
 
 	Enemy();
+	void Start() override { __super::Start(); }
+	void Tick(float deltaTime) override { __super::Tick(deltaTime); }
 	void Create() override;
 	Properties GetProps() override;
 

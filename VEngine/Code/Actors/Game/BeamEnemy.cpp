@@ -24,6 +24,8 @@ void BeamEnemy::Create()
 
 void BeamEnemy::Tick(float deltaTime)
 {
+	__super::Tick(deltaTime);
+
 	auto pos = GetPositionV();
 
 	auto mesh = GetComponent<MeshComponent>("Mesh");

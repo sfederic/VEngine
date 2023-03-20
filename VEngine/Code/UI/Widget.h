@@ -31,7 +31,7 @@ public:
 		BottomRight,
 	};
 
-	//The widget's position in world space to be mapped to screen space.
+	//The widget's position in world space to be mapped to screen space (Use Actor::GetHomogeneousPositionV() to set this)
 	XMVECTOR worldPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 
 	bool render = true;
