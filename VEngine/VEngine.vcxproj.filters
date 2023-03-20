@@ -611,6 +611,9 @@
     <ClCompile Include="Code\Actors\Game\DestructibleObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\UI\Game\HealthWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1246,6 +1249,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Asset\AnimationAssetHeader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\UI\Game\HealthWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
