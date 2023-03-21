@@ -826,7 +826,7 @@ void SetMatricesFromMesh(MeshComponent* mesh)
 void SetShaderMeshData(MeshComponent* mesh)
 {
 	ShaderMeshData meshData = {};
-	meshData.position = mesh->GetLocalPosition();
+	meshData.position = mesh->GetWorldPosition();
 
 	//@Todo: light probe data should have its own constant buffer, for now in testing, it's part of ShaderMeshData
 	//Set light probe resources
