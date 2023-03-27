@@ -8,11 +8,18 @@
 #include "Colours.h"
 
 class Widget;
+class UnitLineupWidget;
+class ScreenFadeWidget;
+class MemoryGainedWidget;
 
 namespace UISystem
 {
 	extern std::vector<std::unique_ptr<Widget>> widgets;
 	extern std::vector<Widget*> widgetsInViewport;
+
+	extern UnitLineupWidget* unitLineupWidget;
+	extern ScreenFadeWidget* screenFadeWidget;
+	extern MemoryGainedWidget* memoryGainedWidget;
 
 	template <typename T>
 	std::vector<T*> GetAllWidgetsOfType()

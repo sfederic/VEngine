@@ -20,6 +20,6 @@ public:
 	void AddToViewport();
 	void RemoveFromViewport();
 
-private:
+protected:
 	Widget* widget = nullptr;
 };

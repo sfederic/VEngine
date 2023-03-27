@@ -41,7 +41,7 @@ void FBXLoader::ImportAsMesh(std::string filename, MeshData& meshData)
 	
 	if (!std::filesystem::exists(filepath))
 	{
-		filepath = AssetBaseFolders::fbxFiles + "cube.fbx";
+		filepath = AssetBaseFolders::fbxFiles + "cube.vmesh";
 	}
 
 	if (!importer->Initialize(filepath.c_str(), -1, manager->GetIOSettings()))

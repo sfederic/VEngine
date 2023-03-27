@@ -2,8 +2,6 @@
 #include "GameUtils.h"
 #include <filesystem>
 #include "Actors/Game/Player.h"
-#include "Actors/Game/MapScreenPlayer.h"
-#include "Actors/Game/MapSelectionActor.h"
 #include "Audio/AudioSystem.h"
 #include "Core/World.h"
 #include "Core/FileSystem.h"
@@ -14,7 +12,6 @@
 #include "Components/BoxTriggerComponent.h"
 #include "UI/UISystem.h"
 #include "UI/ScreenFadeWidget.h"
-#include "UI/Game/LevelCompleteWidget.h"
 #include "Core/Input.h"
 #include "Core/Log.h"
 #include "Particle/SpriteSheet.h"
@@ -25,9 +22,34 @@ namespace GameUtils
 {
 	std::string levelToMoveTo;
 
+	bool CheckIfMemoryExists(const std::string memoryName)
+	{
+		auto memIt = GameInstance::playerMemories.find(memoryName);
+		return memIt != GameInstance::playerMemories.end();
+	}
+
 	void SetActiveCameraTarget(Actor* newTarget)
 	{
 		activeCamera->targetActor = newTarget;
+	}
+
+	void SetActiveCameraTargetAndZoomIn(Actor* newTarget)
+	{
+		activeCamera->targetActor = newTarget;
+		Player::system.GetFirstActor()->nextCameraFOV = 30.f;
+	}
+
+	void SetActiveCameraTargetAndZoomOut(Actor* newTarget)
+	{
+		activeCamera->targetActor = newTarget;
+		Player::system.GetFirstActor()->nextCameraFOV = 60.f;
+	}
+
+	void SetCameraBackToPlayer()
+	{
+		auto player = Player::system.GetFirstActor();
+		player->nextCameraFOV = 60.f;
+		activeCamera->targetActor = player;
 	}
 
 	void CameraShake(float shake)
@@ -127,24 +149,5 @@ namespace GameUtils
 	void SetActiveCamera(CameraComponent* camera)
 	{
 		activeCamera = camera;
-	}
-
-	void TriggerLevelComplete()
-	{
-		auto levelCompleteWidget = UISystem::CreateWidget<LevelCompleteWidget>();
-		UISystem::SetWidgetControlActive(true);
-		levelCompleteWidget->AddToViewport();
-	}
-
-	void LoadMapScreen()
-	{
-		for (auto& mapActor : MapSelectionActor::system.GetActors())
-		{
-			if (mapActor->GetLevelToLoad() == GameInstance::previousMapMovedFrom)
-			{
-				const auto pos = mapActor->GetPlayerReturnSpawnPoint();
-				MapScreenPlayer::system.GetOnlyActor()->SetPosition(pos);
-			}
-		}
 	}
 }

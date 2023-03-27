@@ -38,6 +38,8 @@ public:
 	//Whether to make transparent when in between player and camera
 	bool transparentOcclude = false;
 
+	bool gridObstacle = false;
+
 	MeshComponent();
 	MeshComponent(const std::string filename_,
 		const std::string textureFilename_,

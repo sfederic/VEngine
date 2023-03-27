@@ -3,6 +3,8 @@
 #include <string>
 #include "Core/Properties.h"
 
+class Memory;
+
 //Instance holding data over the entirety of the game.
 //GameInstane is also used as a global save file of sorts, seperate from .vmaps.
 struct GameInstance
@@ -12,6 +14,12 @@ struct GameInstance
 
 	//Used when continuing from game save files
 	inline static std::string mapToLoadOnContinue;
+
+	inline static std::map<std::string, Memory*> playerMemories;
+
+	inline static int maxPlayerActionPoints = 8;
+
+	inline static bool useGameSaves = false;
 
 	//Global save data
 	static Properties GetGlobalProps();

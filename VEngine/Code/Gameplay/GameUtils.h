@@ -14,6 +14,12 @@ class Polyboard;
 //Utility functions for in-game stuff
 namespace GameUtils
 {
+	bool CheckIfMemoryExists(const std::string memoryName);
+	void SetActiveCameraTarget(Actor* newTarget);
+	void SetActiveCameraTargetAndZoomIn(Actor* newTarget);
+	void SetActiveCameraTargetAndZoomOut(Actor* newTarget);
+	void SetCameraBackToPlayer();
+
 	void SetActiveCameraTarget(Actor* newTarget);
 
 	void CameraShake(float shake);
@@ -43,8 +49,4 @@ namespace GameUtils
 	void DisablePlayer();
 
 	void SetActiveCamera(CameraComponent* camera);
-
-	void TriggerLevelComplete();
-
-	void LoadMapScreen();
 };

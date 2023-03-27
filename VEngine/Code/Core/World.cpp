@@ -10,7 +10,6 @@
 #include "Actors/MeshActor.h"
 #include "Actors/Game/Player.h"
 #include "Actors/DirectionalLightActor.h"
-#include "Actors/Game/LevelInstance.h"
 #include "Actors/ActorSystemCache.h"
 #include "Components/ComponentSystemCache.h"
 #include "Components/IComponentSystem.h"
@@ -121,10 +120,6 @@ void World::CreateDefaultMapActors()
 	auto player = Player::system.Add();
 	player->Create();
 	player->CreateAllComponents();
-
-	auto levelInstance = LevelInstance::system.Add();
-	levelInstance->SetPosition(XMFLOAT3(2.f, 4.f, 2.f));
-	levelInstance->SetExtents(5.f, 5.f, 5.f);
 
 	auto dlight = DirectionalLightActor::system.Add();
 	//Set light pointing down because shadows looks nice.

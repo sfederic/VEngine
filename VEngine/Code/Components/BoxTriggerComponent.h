@@ -28,6 +28,5 @@ public:
 
 	bool QuickInPlaceBoxCast(HitResult& hitResult, bool drawDebug);
 
-private:
 	Actor* targetActor = nullptr;
 };
