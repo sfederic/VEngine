@@ -44,11 +44,11 @@ void QtEditor::Tick()
 
     app->processEvents();
 
-    if (Core::gameplayOn && !UISystem::GetWidgetControlActive())
-    {
-        SetMousePosFPSGameplay();
-    }
-    else
+    //if (Core::gameplayOn && !UISystem::GetWidgetControlActive())
+    //{
+    //    SetMousePosFPSGameplay();
+    //}
+    //else
     {
         SetMousePos();
     }
