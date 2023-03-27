@@ -54,6 +54,7 @@ void Player::Start()
 	__super::Start();
 
 	nextCameraFOV = camera->FOV;
+	camera->SetAsActiveCamera();
 
 	//Setup widgets
 	interactWidget = UISystem::CreateWidget<InteractWidget>();
