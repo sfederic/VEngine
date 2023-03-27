@@ -119,11 +119,8 @@
   <ItemGroup>
     <ClCompile Include="Code\Animation\Animation.cpp" />
     <ClCompile Include="Code\Animation\Joint.cpp" />
-    <ClCompile Include="Code\Gameplay\Gears\BeamRifleGear.cpp" />
-    <ClCompile Include="Code\Gameplay\Gears\CanonGear.cpp" />
     <ClCompile Include="Code\Actors\SplitMesh.cpp" />
     <ClCompile Include="Code\Components\SocketMeshComponent.cpp" />
-    <ClCompile Include="Code\Gameplay\Gears\Gear.cpp" />
     <ClCompile Include="Code\Actors\AnimCube.cpp" />
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp" />
     <ClCompile Include="Code\Actors\CameraActor.cpp" />
@@ -235,13 +232,9 @@
     <ClCompile Include="Code\Core\MeshSlicer.cpp" />
     <ClCompile Include="Code\Actors\MeshSliceActor.cpp" />
     <ClCompile Include="Code\Components\SliceableMeshComponent.cpp" />
-    <ClCompile Include="Code\Gameplay\Gears\ShieldGear.cpp" />
-    <ClCompile Include="Code\Gameplay\Gears\GearSystem.cpp" />
-    <ClCompile Include="Code\Gameplay\Gears\SwordGear.cpp" />
     <ClCompile Include="Code\Actors\DebugActors\DebugCapsule.cpp" />
     <ClCompile Include="Code\Components\MouseRotateComponent.cpp" />
     <ClCompile Include="Code\Render\ShaderData\ShaderMatrices.cpp" />
-    <ClCompile Include="Code\Gameplay\Gears\MachineGunGear.cpp" />
     <ClInclude Include="Code\Animation\AnimFrame.h" />
     <ClInclude Include="Code\Asset\AnimationAssetHeader.h" />
     <ClInclude Include="Code\Render\BlendStates.h" />
@@ -264,13 +257,9 @@
     <ClInclude Include="Code\Render\Triangle.h" />
     <ClInclude Include="Code\Render\Vertex.h" />
     <ClInclude Include="Code\Render\VRect.h" />
-    <ClInclude Include="Code\Gameplay\Gears\BeamRifleGear.h" />
-    <ClInclude Include="Code\Gameplay\Gears\CanonGear.h" />
     <ClInclude Include="Code\Actors\SplitMesh.h" />
     <ClInclude Include="Code\Components\SocketMeshComponent.h" />
-    <ClInclude Include="Code\Gameplay\AttackTypes.h" />
     <ClInclude Include="Code\Gameplay\IMeshSliceReaction.h" />
-    <ClInclude Include="Code\Gameplay\Gears\Gear.h" />
     <ClInclude Include="Code\Actors\AnimCube.h" />
     <ClInclude Include="Code\Actors\CameraActor.h" />
     <ClInclude Include="Code\Asset\AssetFileExtensions.h" />
@@ -503,13 +492,9 @@
     <ClInclude Include="Code\Core\MeshSlicer.h" />
     <ClInclude Include="Code\Actors\MeshSliceActor.h" />
     <ClInclude Include="Code\Components\SliceableMeshComponent.h" />
-    <ClInclude Include="Code\Gameplay\Gears\ShieldGear.h" />
-    <ClInclude Include="Code\Gameplay\Gears\GearSystem.h" />
-    <ClInclude Include="Code\Gameplay\Gears\SwordGear.h" />
     <ClInclude Include="Code\Actors\DebugActors\DebugCapsule.h" />
     <ClInclude Include="Code\Components\MouseRotateComponent.h" />
     <ClInclude Include="Code\Render\ShaderData\ShaderMatrices.h" />
-    <ClInclude Include="Code\Gameplay\Gears\MachineGunGear.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
