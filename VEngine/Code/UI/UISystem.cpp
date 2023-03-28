@@ -113,6 +113,9 @@ void UISystem::Reset()
 
 void UISystem::CreateGlobalWidgets()
 {
+	unitLineupWidget = CreateWidget<UnitLineupWidget>();
+	screenFadeWidget = CreateWidget<ScreenFadeWidget>();
+	memoryGainedWidget = CreateWidget<MemoryGainedWidget>();
 }
 
 void UISystem::DestroyWidget(Widget* widget)
