@@ -122,6 +122,8 @@ void World::CreateDefaultMapActors()
 	player->CreateAllComponents();
 
 	auto dlight = DirectionalLightActor::system.Add();
+	dlight->Create();
+	dlight->CreateAllComponents();
 	//Set light pointing down because shadows looks nice.
 	dlight->SetRotation(
 		VMath::LookAtRotation(dlight->GetPositionV() - VMath::GlobalUpVector(), dlight->GetPositionV()));
@@ -130,10 +132,10 @@ void World::CreateDefaultMapActors()
 	//Set a ground plane to work off
 	MeshActor::spawnMeshFilename = "node.vmesh";
 	auto mesh = MeshActor::system.Add();
-	mesh->SetPosition(XMFLOAT3(2.f, -0.5f, 2.f));
-	mesh->SetScale(XMVectorSet(15.f, 1.f, 15.f, 1.0f));
 	mesh->Create();
 	mesh->CreateAllComponents();
+	mesh->SetPosition(XMFLOAT3(2.f, -0.5f, 2.f));
+	mesh->SetScale(XMVectorSet(15.f, 1.f, 15.f, 1.0f));
 
 	MeshActor::spawnMeshFilename.clear();
 
