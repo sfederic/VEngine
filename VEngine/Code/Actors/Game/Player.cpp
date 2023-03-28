@@ -639,11 +639,12 @@ bool Player::DestructibleCheck(Actor* hitActor)
 
 void Player::SpawnPhysicalRepresentationOfAstralPlayer()
 {
-	//mesh->SetShaderFilenames(ShaderItems::Astral);
+	mesh->SetShaderFilenames(ShaderItems::Default);
 	mesh->SetBlendState(BlendStates::Default);
 	mesh->GetMaterial().materialShaderData.ambient = XMFLOAT4(0.1f, 0.1f, 0.9f, 0.5f);
 
 	playerBodyMesh = MeshComponent::system.Add("PlayerBody", nullptr, MeshComponent("char.vmesh", "test.png"));
+	playerBodyMesh->Create();
 	playerBodyMesh->SetWorldPosition(GetPositionV());
 	playerBodyMesh->SetWorldRotation(mesh->GetWorldRotationV());
 }
