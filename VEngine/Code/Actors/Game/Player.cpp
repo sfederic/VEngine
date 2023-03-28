@@ -87,6 +87,9 @@ void Player::Tick(float deltaTime)
 		//GameUtils::TriggerGameOver();
 	}
 
+
+	ControllerInput(deltaTime);
+
 	DrawBattleCard();
 	PrimaryAction();
 	SwitchInputBetweenAllyUnitsAndPlayer();
