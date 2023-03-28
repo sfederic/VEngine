@@ -139,11 +139,7 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 
 	if (hitResult.hitActor)
 	{
-		if (fromScreen)
-		{
-			origin = activeCamera->GetWorldPositionV();
-		}
-
+		//@Todo: raycasting from screen isn't returning the correct hitpos here
 		const XMVECTOR hitPos = origin + (direction * nearestDistance);
 		XMStoreFloat3(&hitResult.hitPos, hitPos);
 
