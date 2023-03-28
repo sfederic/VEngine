@@ -9,6 +9,7 @@
 #include "Asset/FBXLoader.h"
 #include "Actors/MeshActor.h"
 #include "Actors/Game/Player.h"
+#include "Actors/Game/Grid.h"
 #include "Actors/DirectionalLightActor.h"
 #include "Actors/ActorSystemCache.h"
 #include "Components/ComponentSystemCache.h"
@@ -129,13 +130,17 @@ void World::CreateDefaultMapActors()
 		VMath::LookAtRotation(dlight->GetPositionV() - VMath::GlobalUpVector(), dlight->GetPositionV()));
 	dlight->SetPosition(XMVectorSet(0.f, 5.f, 0.f, 1.f));
 
+	auto grid = Grid::system.Add();
+	grid->sizeX = 5;
+	grid->sizeY = 5;
+
 	//Set a ground plane to work off
 	MeshActor::spawnMeshFilename = "node.vmesh";
 	auto mesh = MeshActor::system.Add();
 	mesh->Create();
 	mesh->CreateAllComponents();
 	mesh->SetPosition(XMFLOAT3(2.f, -0.5f, 2.f));
-	mesh->SetScale(XMVectorSet(15.f, 1.f, 15.f, 1.0f));
+	mesh->SetScale(XMVectorSet(5.f, 1.f, 5.f, 1.0f));
 
 	MeshActor::spawnMeshFilename.clear();
 
