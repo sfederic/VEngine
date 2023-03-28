@@ -133,6 +133,8 @@ void World::CreateDefaultMapActors()
 	auto grid = Grid::system.Add();
 	grid->sizeX = 5;
 	grid->sizeY = 5;
+	grid->Create();
+	grid->CreateAllComponents();
 
 	//Set a ground plane to work off
 	MeshActor::spawnMeshFilename = "node.vmesh";
