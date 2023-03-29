@@ -34,6 +34,7 @@
 #include "Actors/DebugActors/DebugCapsule.h"
 #include "Components/CameraComponent.h"
 #include "Components/MeshComponent.h"
+#include "Components/DestructibleMeshComponent.h"
 #include "Components/SocketMeshComponent.h"
 #include "Components/SliceableMeshComponent.h"
 #include "Components/SkeletalMeshComponent.h"
@@ -78,6 +79,7 @@ void CreateLightProbeBuffers();
 void CheckSupportedFeatures();
 void RenderShadowPass();
 void RenderMeshComponents();
+void RenderDestructibleMeshes();
 void RenderMeshForShadowPass(MeshComponent* mesh);
 void AnimateAndRenderSkeletalMeshes();
 void RenderSocketMeshComponents();
@@ -797,6 +799,7 @@ void Renderer::Render()
 	SetLightsConstantBufferData();
 
 	RenderMeshComponents();
+	RenderDestructibleMeshes();
 	AnimateAndRenderSkeletalMeshes();
 	RenderSocketMeshComponents();
 	RenderInstanceMeshComponents();
@@ -875,6 +878,30 @@ void RenderMeshComponents()
 		SetShaderMeshData(mesh.get());
 
 		DrawMesh(mesh.get());
+	}
+
+	SetGeneralShaderResourcesToNull();
+
+	Profile::End();
+}
+
+void RenderDestructibleMeshes()
+{
+	Profile::Start();
+
+	SetShadowResources();
+	SetLightResources();
+
+	for (auto& mesh : DestructibleMeshComponent::system.GetComponents())
+	{
+		for (auto meshCell : mesh->meshCells)
+		{
+			if (!meshCell->IsVisible()) { continue; }
+			SetRenderPipelineStates(meshCell);
+			SetMatricesFromMesh(meshCell);
+			SetShaderMeshData(meshCell);
+			DrawMesh(meshCell);
+		}
 	}
 
 	SetGeneralShaderResourcesToNull();
