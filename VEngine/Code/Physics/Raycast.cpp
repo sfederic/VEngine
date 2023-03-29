@@ -117,8 +117,7 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 	{
 		for (int i = 0; i < distances.size(); i++)
 		{
-			//Skip hit if more than range
-			//Note: you can have negative ranges at some points, like when starting a cast from inside
+			//You can have negative ranges at some points, like when starting a cast from inside
 			//a mesh and hitting the backface of a triangle.
 			if (distances[i] > range)
 			{
@@ -139,8 +138,7 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 
 	if (hitResult.hitActor)
 	{
-		//@Todo: raycasting from screen isn't returning the correct hitpos here
-		const XMVECTOR hitPos = origin + (direction * nearestDistance);
+		const XMVECTOR hitPos = hitResult.origin + (hitResult.direction * nearestDistance);
 		XMStoreFloat3(&hitResult.hitPos, hitPos);
 
 		hitResult.hitDistance = nearestDistance;
