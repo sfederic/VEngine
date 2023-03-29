@@ -437,7 +437,7 @@ void ProcessSkeletonNodes(FbxNode* node, Skeleton& skeleton, int parentIndex)
 
 void FBXLoader::ImportFracturedMesh(std::string filename, std::vector<MeshData>& meshDatas)
 {
-	std::string filepath = AssetBaseFolders::mesh + filename;
+	std::string filepath = AssetBaseFolders::fbxFiles + filename;
 
 	if (!importer->Initialize(filepath.c_str(), -1, manager->GetIOSettings()))
 	{
