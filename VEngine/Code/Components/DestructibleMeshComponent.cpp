@@ -30,11 +30,11 @@ void DestructibleMeshComponent::Create()
 		//parent all the fractured cell meshes to this to be able to move it around before breaking.
 		this->AddChild(mesh);
 
-		meshCells.emplace_back(mesh);
-
 		mesh->isStatic = false;
 
+		mesh->meshDataProxy.boundingBox = &meshData.boundingBox;
 		mesh->meshDataProxy.vertices = &meshData.vertices;
+		mesh->meshDataProxy.skeleton = &meshData.skeleton;
 
 		//Setup bounds
 		auto meshBoundingBox = mesh->GetBoundingBox();
@@ -43,6 +43,14 @@ void DestructibleMeshComponent::Create()
 
 		mesh->pso.vertexBuffer = new Buffer();
 		mesh->pso.vertexBuffer->data = RenderUtils::CreateVertexBuffer(mesh->meshDataProxy);
+
+		mesh->meshComponentData.filename = "destructible_cube.vmesh";
+
+		meshComponentData.meshComponent = this;
+
+		mesh->GetMaterial().Create();
+
+		meshCells.push_back(mesh);
 
 		meshIndex++;
 	}
