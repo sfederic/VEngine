@@ -39,7 +39,7 @@ UID
 2885767142
 next
 MeshActor
-2
+8
  Enabled
 1
  Position
@@ -58,17 +58,107 @@ next
  Enabled
 1
  Position
-0 1 2
+-0.5 0.5 2
  Rotation
--0 0.707107 -0 0.707107
+0 0.707107 0 0.707107
  Scale
-2.5 1 1
+2.49998 1 0.999995
  Visible
 1
 Name
 plane1
 UID
 1037143792
+next
+ Enabled
+1
+ Position
+4.5 0.5 2
+ Rotation
+-0 -0.707107 -0 0.707107
+ Scale
+2.49995 1 0.999987
+ Visible
+1
+Name
+MeshActor2
+UID
+461910690
+next
+ Enabled
+1
+ Position
+2 0.5 4.5
+ Rotation
+0 1 0 -0.00017313
+ Scale
+2.49999 1 0.999998
+ Visible
+1
+Name
+MeshActor3
+UID
+3307628867
+next
+ Enabled
+1
+ Position
+2 0.5 -0.5
+ Rotation
+-0 0.000345669 -0 1
+ Scale
+2.5 1 1
+ Visible
+1
+Name
+MeshActor4
+UID
+2812821237
+next
+ Enabled
+1
+ Position
+0 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+small_table5
+UID
+3632944712
+next
+ Enabled
+1
+ Position
+4 0 2
+ Rotation
+-0 0.707107 -0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Name
+table6
+UID
+76339102
+next
+ Enabled
+1
+ Position
+4 -0.5 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+tabletop7
+UID
+2128451841
 next
 Player
 1
@@ -215,7 +305,7 @@ UID
 2519030609
 next
 MeshComponent
-3
+9
 1903817994
 Mesh
  Enabled
@@ -245,7 +335,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wood128x128.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -257,7 +347,7 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-1 1
+2 1
 Mesh
 node.vmesh
 Static
@@ -272,9 +362,162 @@ Mesh
  Enabled
 1
  Pos
-0 1 2
+-0.5 0.5 2
  Rot
--0 0.707107 -0 0.707107
+0 0.707107 0 0.707107
+ Scale
+2.49998 1 0.999995
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Walls/wall06.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1451604458
+next
+461910690
+Mesh
+ Enabled
+1
+ Pos
+4.5 0.5 2
+ Rot
+-0 -0.707107 -0 0.707107
+ Scale
+2.49995 1 0.999987
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Walls/wall06.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1451604458
+next
+3307628867
+Mesh
+ Enabled
+1
+ Pos
+2 0.5 4.5
+ Rot
+0 1 0 -0.00017313
+ Scale
+2.49999 1 0.999998
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Walls/wall06.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1451604458
+next
+2812821237
+Mesh
+ Enabled
+1
+ Pos
+2 0.5 -0.5
+ Rot
+-0 0.000345669 -0 1
  Scale
 2.5 1 1
  Visible
@@ -296,7 +539,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Walls/wall06.png
 M_Use Texture
 1
 M_UvOffset
@@ -368,5 +611,158 @@ Trans. Occlude
 0
 UID
 3776499265
+next
+3632944712
+Mesh
+ Enabled
+1
+ Pos
+0 0 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wood_furniture.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+small_table.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3293383175
+next
+76339102
+Mesh
+ Enabled
+1
+ Pos
+4 0 2
+ Rot
+-0 0.707107 -0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wood_furniture.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+table.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+4198931981
+next
+2128451841
+Mesh
+ Enabled
+1
+ Pos
+4 -0.5 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wood_furniture.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+tabletop.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2256775919
 next
 end
