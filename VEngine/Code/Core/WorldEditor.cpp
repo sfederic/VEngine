@@ -2,6 +2,7 @@
 #include "WorldEditor.h"
 #include "Physics/Raycast.h"
 #include "Input.h"
+#include "Core/VMath.h"
 #include "Editor/Editor.h"
 #include "Actors/Actor.h"
 #include "Actors/IActorSystem.h"
@@ -233,6 +234,7 @@ void SpawnActorOnClick()
 			{
 				Transform transform;
 				XMStoreFloat3(&transform.position, hit.GetHitPosV());
+				VMath::RoundFloat3(transform.position);
 				SpawnActor(transform);
 			}
 			else //Spawn actor a bit in front of the camera based on the click
@@ -247,6 +249,7 @@ void SpawnActorOnClick()
 
 				Transform transform;
 				XMStoreFloat3(&transform.position, rayEnd);
+				VMath::RoundFloat3(transform.position);
 
 				SpawnActor(transform);
 			}
