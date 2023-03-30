@@ -94,8 +94,6 @@ XMMATRIX EditorCamera::GetViewMatrix()
 
 void EditorCamera::MouseMove(int x, int y)
 {
-	static XMINT2 lastMousePos;
-
 	const float dx = XMConvertToRadians(0.25f * (float)(x - lastMousePos.x));
 	const float dy = XMConvertToRadians(0.25f * (float)(y - lastMousePos.y));
 

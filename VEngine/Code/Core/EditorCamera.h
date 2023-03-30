@@ -12,5 +12,6 @@ public:
 private:
 	void MouseMove(int x, int y);
 
+	XMINT2 lastMousePos;
 	bool arcBallMovementOn = false;
 };
