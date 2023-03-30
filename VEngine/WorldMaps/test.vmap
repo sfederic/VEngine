@@ -1,9 +1,26 @@
+DestructibleActor
+1
+ Enabled
+1
+ Position
+2.13675 2.5 2.35973
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DestructibleActor0
+UID
+3370700702
+next
 Grid
 1
  Enabled
 1
  Position
--3.16613 -0.956089 0.281666
+0 0 0
  Rotation
 -0 0 -0 1
  Scale
@@ -38,75 +55,58 @@ node0
 UID
 3570992123
 next
-Player
+DestructibleMeshComponent
 1
- Enabled
-1
- Position
-0 0 0
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-Player0
-UID
-2166066645
-next
-CameraComponent
-1
-2166066645
-Camera
+3370700702
+Destructible
  Enabled
 1
  Pos
-1.75 1.75 -2.75
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-FOV
-60
-Far Z
-1000
-Near Z
-0.01
-UID
-1368131106
-next
-DialogueComponent
-1
-2166066645
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-763085269
-next
-EmptyComponent
-1
-2166066645
-Root
- Enabled
-1
- Pos
-0 0 0
+2.13675 2.5 2.35973
  Rot
 -0 0 -0 1
  Scale
 1 1 1
  Visible
 1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+destructible_cube.fbx
+Static
+1
+Trans. Occlude
+0
 UID
-4291724098
+1033923260
 next
 InstanceMeshComponent
 1
@@ -115,7 +115,7 @@ NodeMesh
  Enabled
 1
  Pos
--3.16613 -0.956089 0.281666
+0 0 0
  Rot
 -0 0 -0 1
  Scale
@@ -162,58 +162,7 @@ UID
 2000342231
 next
 MeshComponent
-2
-2166066645
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-char.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2142248436
-next
+10
 3570992123
 Mesh
  Enabled
@@ -264,5 +213,464 @@ Trans. Occlude
 0
 UID
 3817483795
+next
+0
+TempDestructibleMesh0
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+destructible_cube.vmesh
+Static
+0
+Trans. Occlude
+0
+UID
+3393656095
+next
+0
+TempDestructibleMesh1
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+destructible_cube.vmesh
+Static
+0
+Trans. Occlude
+0
+UID
+3174660093
+next
+0
+TempDestructibleMesh2
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+destructible_cube.vmesh
+Static
+0
+Trans. Occlude
+0
+UID
+4020503610
+next
+0
+TempDestructibleMesh3
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+destructible_cube.vmesh
+Static
+0
+Trans. Occlude
+0
+UID
+1950009332
+next
+0
+TempDestructibleMesh4
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+destructible_cube.vmesh
+Static
+0
+Trans. Occlude
+0
+UID
+819583296
+next
+0
+TempDestructibleMesh5
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+destructible_cube.vmesh
+Static
+0
+Trans. Occlude
+0
+UID
+1884057623
+next
+0
+TempDestructibleMesh6
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+destructible_cube.vmesh
+Static
+0
+Trans. Occlude
+0
+UID
+1985769249
+next
+0
+TempDestructibleMesh7
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+destructible_cube.vmesh
+Static
+0
+Trans. Occlude
+0
+UID
+3251283436
+next
+0
+TempDestructibleMesh8
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+destructible_cube.vmesh
+Static
+0
+Trans. Occlude
+0
+UID
+1559053943
 next
 end
