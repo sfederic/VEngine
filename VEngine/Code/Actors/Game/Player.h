@@ -47,10 +47,11 @@ public:
 	bool gameOver = false;
 
 	Player();
-	virtual void Start() override;
-	virtual void End() override;
-	virtual void Tick(float deltaTime) override;
-	virtual Properties GetProps() override;
+	void Create() override;
+	void Start() override;
+	void End() override;
+	void Tick(float deltaTime) override;
+	Properties GetProps() override;
 
 	template <typename AllyUnitType>
 	void SummonAllyUnit()

@@ -49,6 +49,12 @@ Player::Player()
 	isMainPlayer = true;
 }
 
+void Player::Create()
+{
+	moveSpeed = 6.5f;
+	rotateSpeed = 6.0f;
+}
+
 void Player::Start()
 {
 	__super::Start();

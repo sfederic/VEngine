@@ -54,8 +54,8 @@ public:
 	int attackPoints = 1;
 	int healthPoints = 1;
 
-	float moveSpeed = 5.f;
-	float rotSpeed = 3.5f;
+	float moveSpeed = 0.f;
+	float rotateSpeed = 0.f;
 
 	int xIndex = -1;
 	int yIndex = -1;

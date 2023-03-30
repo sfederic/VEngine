@@ -37,7 +37,7 @@ void PlayerUnit::Start()
 void PlayerUnit::Tick(float deltaTime)
 {
 	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, moveSpeed));
-	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotSpeed));
+	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotateSpeed));
 }
 
 void PlayerUnit::ControllerInput(float deltaTime)
