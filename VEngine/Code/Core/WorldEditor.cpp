@@ -61,27 +61,29 @@ void HandleActorPicking()
 
 	if (Input::GetMouseLeftUp())
 	{
-		HitResult screenPickRay;
-		if (RaycastFromScreen(screenPickRay))
+		HitResult hit;
+		if (RaycastFromScreen(hit))
 		{
-			auto actor = screenPickRay.hitActor;
-			auto mesh = actor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
-			if (mesh)
+			if (WorldEditor::vertexPaintActive)
 			{
-				for (auto& vertIndex : screenPickRay.hitVertIndexes)
+				auto meshes = hit.hitActor->GetComponentsOfType<MeshComponent>();
+				for (auto mesh : meshes)
 				{
-					Vertex& v = mesh->meshDataProxy.vertices->at(vertIndex);
-					v.colour = WorldEditor::vertexPaintColour;
+					for (auto& vertIndex : hit.hitVertIndexes)
+					{
+						Vertex& v = mesh->meshDataProxy.vertices->at(vertIndex);
+						v.colour = WorldEditor::vertexPaintColour;
+					}
+
+					mesh->CreateNewVertexBuffer();
 				}
-				
-				mesh->CreateNewVertexBuffer();
+				return;
 			}
-			return;
 
 			//Assign selected texture in editor to mesh on click
 			if (!TextureSystem::selectedTextureInEditor.empty() && WorldEditor::texturePlacement)
 			{
-				auto mesh = dynamic_cast<MeshComponent*>(screenPickRay.hitComponent);
+				auto mesh = dynamic_cast<MeshComponent*>(hit.hitComponent);
 				if (mesh)
 				{
 					mesh->GetMaterial().materialShaderData.useTexture = true;
@@ -93,7 +95,7 @@ void HandleActorPicking()
 			//Assign selected material in editor to mesh on click
 			if (!MaterialSystem::selectedMaterialInEditor.empty() && WorldEditor::materialPlacement)
 			{
-				auto mesh = dynamic_cast<MeshComponent*>(screenPickRay.hitComponent);
+				auto mesh = dynamic_cast<MeshComponent*>(hit.hitComponent);
 				if (mesh)
 				{
 					Material loadedMaterial = MaterialSystem::LoadMaterialFromFile(MaterialSystem::selectedMaterialInEditor);
@@ -109,19 +111,19 @@ void HandleActorPicking()
 				{
 					if (Input::GetKeyHeld(Keys::Ctrl) || pickedActors.empty())
 					{
-						pickedActors.insert(screenPickRay.hitActor);
+						pickedActors.insert(hit.hitActor);
 					}
 					else
 					{
 						pickedActors.clear();
 					}
 
-					WorldEditor::SetPickedActor(screenPickRay.hitActor);
+					WorldEditor::SetPickedActor(hit.hitActor);
 					break;
 				}
 				case WorldEditor::PickMode::Component:
 				{
-					WorldEditor::SetPickedComponent(screenPickRay.hitComponent);
+					WorldEditor::SetPickedComponent(hit.hitComponent);
 					break;
 				}
 			}
