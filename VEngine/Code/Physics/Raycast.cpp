@@ -196,6 +196,11 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 					HitResult tempHitResult = hitResult;
 					tempHitResult.hitDistance = hitDistance;
 
+					//Get index of hit vertices for the hit triangle
+					tempHitResult.hitVertexIndexes[0] = index0;
+					tempHitResult.hitVertexIndexes[1] = index1;
+					tempHitResult.hitVertexIndexes[2] = index2;
+
 					//Get normal for triangle
 					XMVECTOR normal = XMVectorZero();
 					normal += XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index0).normal);

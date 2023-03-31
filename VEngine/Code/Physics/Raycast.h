@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <array>
 #include <DirectXMath.h>
 #include "Physics/CollisionLayers.h"
 
@@ -56,6 +57,8 @@ struct HitResult
 	//Result is in world space.
 	XMVECTOR GetHitPosV() { return XMLoadFloat3(&hitPos); }
 	XMVECTOR GetNormalV() { return XMLoadFloat3(&normal); }
+
+	std::array<int, 3> hitVertexIndexes;
 };
 
 bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float range, bool fromScreen = false);
