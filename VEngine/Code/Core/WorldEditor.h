@@ -21,7 +21,7 @@ namespace WorldEditor
 
 	extern bool texturePlacement;
 	extern bool materialPlacement;
-
+	extern bool vertexPaintActive;
 	extern DirectX::XMFLOAT4 vertexPaintColour;
 	
 	void Tick();

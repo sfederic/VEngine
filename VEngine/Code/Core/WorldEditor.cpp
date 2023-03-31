@@ -27,6 +27,7 @@ WorldEditor::PickMode pickMode = WorldEditor::PickMode::Actor;
 
 bool WorldEditor::texturePlacement = false;
 bool WorldEditor::materialPlacement = false;
+bool WorldEditor::vertexPaintActive = false;
 
 DirectX::XMFLOAT4 WorldEditor::vertexPaintColour;
 

@@ -125,8 +125,10 @@ void Console::Init()
 			"Menu to open worlds at runtime during gameplay."));
 
 	executeMap.emplace(L"PAINT",
-		std::make_pair([]() { debugMenu.vertexPaintMenuOpen = !debugMenu.vertexPaintMenuOpen; },
-			"Colour picker for vertex painting."));
+		std::make_pair([]() { 
+			debugMenu.vertexPaintMenuOpen = !debugMenu.vertexPaintMenuOpen;
+			WorldEditor::vertexPaintActive = !WorldEditor::vertexPaintActive;
+		}, "Activate vertex paint mode."));
 }
 
 void Console::ConsoleInput()
