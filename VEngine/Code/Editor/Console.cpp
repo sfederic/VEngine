@@ -123,6 +123,10 @@ void Console::Init()
 	executeMap.emplace(L"WORLD",
 		std::make_pair([]() { debugMenu.worldMenuOpen = !debugMenu.worldMenuOpen; },
 			"Menu to open worlds at runtime during gameplay."));
+
+	executeMap.emplace(L"PAINT",
+		std::make_pair([]() { debugMenu.vertexPaintMenuOpen = !debugMenu.vertexPaintMenuOpen; },
+			"Colour picker for vertex painting."));
 }
 
 void Console::ConsoleInput()

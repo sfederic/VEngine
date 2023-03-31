@@ -45,7 +45,7 @@ void DebugMenu::Init()
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 
 	io.Fonts->AddFontFromFileTTF("Fonts/OpenSans.ttf", 20);
-
+	
 	//Imgui has an .ini file to save previous ui positions and values.
 	//Setting this to null removes this initial setup.
 	io.IniFilename = nullptr;
@@ -89,6 +89,7 @@ void DebugMenu::Tick(float deltaTime)
 	RenderWorldMenu();
 	RenderMaterialPlacementMenu();
 	RenderActorSystemSpawnMenu();
+	RenderVertexPaintMenu();
 
 	ImGui::EndFrame();
 
@@ -399,6 +400,24 @@ void DebugMenu::RenderWorldMenu()
 		{
 			GameUtils::LoadWorldDeferred(worldFilename);
 		}
+	}
+
+	ImGui::End();
+}
+
+void DebugMenu::RenderVertexPaintMenu()
+{
+	if (!vertexPaintMenuOpen) return;
+
+	ImGui::Begin("Vertex Paint Menu");
+
+	static float colour[4];
+	if (ImGui::ColorPicker4("Vertex Colour", colour))
+	{
+		WorldEditor::vertexPaintColour.x = colour[0];
+		WorldEditor::vertexPaintColour.y = colour[1];
+		WorldEditor::vertexPaintColour.z = colour[2];
+		WorldEditor::vertexPaintColour.w = colour[3];
 	}
 
 	ImGui::End();
