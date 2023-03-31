@@ -37,6 +37,7 @@ void SaveWorld();
 void DeleteActor();
 void SpawnActorOnClick();
 void SpawnActor(Transform& transform);
+void VertexPainting();
 
 void WorldEditor::Tick()
 {
@@ -44,6 +45,7 @@ void WorldEditor::Tick()
 	{
 		SpawnActorOnClick();
 		HandleActorPicking();
+		VertexPainting();
 	}
 
 	DuplicateActor();
@@ -54,7 +56,7 @@ void WorldEditor::Tick()
 
 void HandleActorPicking()
 {
-	if (transformGizmo.CheckMouseOver() || Core::gameplayOn) 
+	if (transformGizmo.CheckMouseOver() || Core::gameplayOn || WorldEditor::vertexPaintActive) 
 	{
 		return;
 	}
@@ -64,22 +66,6 @@ void HandleActorPicking()
 		HitResult hit;
 		if (RaycastFromScreen(hit))
 		{
-			if (WorldEditor::vertexPaintActive)
-			{
-				auto meshes = hit.hitActor->GetComponentsOfType<MeshComponent>();
-				for (auto mesh : meshes)
-				{
-					for (auto& vertIndex : hit.hitVertIndexes)
-					{
-						Vertex& v = mesh->meshDataProxy.vertices->at(vertIndex);
-						v.colour = WorldEditor::vertexPaintColour;
-					}
-
-					mesh->CreateNewVertexBuffer();
-				}
-				return;
-			}
-
 			//Assign selected texture in editor to mesh on click
 			if (!TextureSystem::selectedTextureInEditor.empty() && WorldEditor::texturePlacement)
 			{
@@ -298,6 +284,31 @@ void SpawnActor(Transform& transform)
 
 	pickedActor = actor;
 	editor->SetActorProps(pickedActor);
+}
+
+void VertexPainting()
+{
+	if (WorldEditor::vertexPaintActive)
+	{
+		if (Input::GetMouseLeftDown())
+		{
+			HitResult hit;
+			if (RaycastFromScreen(hit))
+			{
+				auto meshes = hit.hitActor->GetComponentsOfType<MeshComponent>();
+				for (auto mesh : meshes)
+				{
+					for (auto& vertIndex : hit.hitVertIndexes)
+					{
+						Vertex& v = mesh->meshDataProxy.vertices->at(vertIndex);
+						v.colour = WorldEditor::vertexPaintColour;
+					}
+
+					mesh->CreateNewVertexBuffer();
+				}
+			}
+		}
+	}
 }
 
 void WorldEditor::DeselectPickedActor()
