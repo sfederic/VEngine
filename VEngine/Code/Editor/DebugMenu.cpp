@@ -34,6 +34,7 @@
 #include "Render/Material.h"
 #include "Animation/Skeleton.h"
 #include "Core/Log.h"
+#include "Asset/AssetSystem.h"
 
 DebugMenu debugMenu;
 
@@ -418,6 +419,15 @@ void DebugMenu::RenderVertexPaintMenu()
 		WorldEditor::vertexPaintColour.y = colour[1];
 		WorldEditor::vertexPaintColour.z = colour[2];
 		WorldEditor::vertexPaintColour.w = colour[3];
+	}
+
+	if (ImGui::Button("Save Vertex Colours"))
+	{
+		AssetSystem::WriteOutAllVertexColourData();
+	}	
+	if (ImGui::Button("Load Vertex Colours"))
+	{
+		AssetSystem::LoadVertexColourDataFromFile();
 	}
 
 	ImGui::End();
