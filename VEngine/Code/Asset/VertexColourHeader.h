@@ -1,11 +1,8 @@
 #pragma once
 
-#include <vector>
-#include <DirectXMath.h>
-#include "Core/UID.h"
+#include <cstdint>
 
 struct VertexColourHeader
 {
-	UID meshComponentUID = 0;
-	std::vector<DirectX::XMFLOAT4> colours;
+	uint64_t meshComponentCount = 0;
 };

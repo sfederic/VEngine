@@ -1293,6 +1293,9 @@
     <ClInclude Include="Code\Components\Game\MemoryComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Asset\VertexColourData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Code\Asset\VertexColourHeader.h">
       <Filter>Header Files</Filter>
     </ClInclude>

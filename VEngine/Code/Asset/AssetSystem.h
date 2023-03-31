@@ -15,4 +15,7 @@ namespace AssetSystem
 	Animation ReadVAnimAssetFromFile(const std::string filename);
 
 	void BuildAllGameplayMapFiles();
+
+	void WriteOutAllVertexColourData();
+	void LoadVertexColourDataFromFile();
 };

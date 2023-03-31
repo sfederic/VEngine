@@ -10,11 +10,16 @@
 #include "Core/Log.h"
 #include "Core/FileSystem.h"
 #include "Core/VString.h"
+#include "Components/MeshComponent.h"
 #include "Asset/AssetPaths.h"
+#include "Asset/VertexColourData.h"
+#include "Asset/VertexColourHeader.h"
 #include "Render/MeshData.h"
 #include "Render/Vertex.h"
 
 std::map<std::string, MeshData> existingMeshData;
+
+static const std::string vertexColourDataFileExtension = ".vertexcolourdata";
 
 //@Todo: do something when importing all, remove the existing meshdata to match the meshes currently in world.
 //That or make an offline process or a process when a file is added on a filewatcher's notice.
@@ -212,4 +217,80 @@ void AssetSystem::BuildAllGameplayMapFiles()
 		std::string file = dirEntry.path().filename().string();
 		FileSystem::CreateGameplayWorldSave(file);
 	}
+}
+
+void AssetSystem::WriteOutAllVertexColourData()
+{
+	FILE* file = nullptr;
+	const std::string vertexColourFileFilename = VString::ReplaceFileExtesnion(World::worldFilename, vertexColourDataFileExtension);
+	fopen_s(&file, vertexColourFileFilename.c_str(), "wb");
+	assert(file);
+
+	VertexColourHeader header;
+	header.meshComponentCount = MeshComponent::system.GetNumComponents();
+	fwrite(&header, sizeof(header), 1, file);
+
+	for (auto& mesh : MeshComponent::system.GetComponents())
+	{
+		VertexColourData data;
+
+		data.meshComponentUID = mesh->GetUID();
+		fwrite(&data.meshComponentUID, sizeof(data.meshComponentUID), 1, file);
+
+		data.numVertices = mesh->meshDataProxy.GetVertices().size();
+		for (auto& vertex : mesh->meshDataProxy.GetVertices())
+		{
+			data.colours.push_back(vertex.colour);
+		}
+
+		fwrite(&data.numVertices, sizeof(data.numVertices), 1, file);
+		fwrite(data.colours.data(), sizeof(DirectX::XMFLOAT4) * data.colours.size(), 1, file);
+	}
+
+	fclose(file);
+}
+
+void AssetSystem::LoadVertexColourDataFromFile()
+{
+	FILE* file = nullptr;
+	const std::string vertexColourFileFilename = VString::ReplaceFileExtesnion(World::worldFilename, vertexColourDataFileExtension);
+
+	if (!std::filesystem::exists(vertexColourFileFilename))
+	{
+		Log("No vertex colour file data for world %s.", World::worldFilename.c_str());
+		return;
+	}
+
+	fopen_s(&file, vertexColourFileFilename.c_str(), "rb");
+	assert(file);
+
+	VertexColourHeader header;
+	fread(&header, sizeof(header), 1, file);
+
+	for (int meshIndex = 0; meshIndex < header.meshComponentCount; meshIndex++)
+	{
+		VertexColourData vertexColourData;
+
+		fread(&vertexColourData.meshComponentUID, sizeof(vertexColourData.meshComponentUID), 1, file);
+
+		fread(&vertexColourData.numVertices, sizeof(vertexColourData.numVertices), 1, file);
+		
+		vertexColourData.colours.resize(vertexColourData.numVertices);
+		fread(vertexColourData.colours.data(), sizeof(DirectX::XMFLOAT4) * vertexColourData.numVertices, 1, file);
+
+		auto mesh = MeshComponent::system.GetComponentByUID(vertexColourData.meshComponentUID);
+		assert(mesh);
+
+		const size_t vertexCount = mesh->meshDataProxy.GetVertices().size();
+		auto& verts = mesh->meshDataProxy.GetVertices();
+		assert(vertexColourData.colours.size() == vertexCount);
+		for (int vertexIndex = 0; vertexIndex < vertexCount; vertexIndex++)
+		{
+			verts[vertexIndex].colour = vertexColourData.colours[vertexIndex];
+		}
+
+		mesh->CreateNewVertexBuffer();
+	}
+
+	fclose(file);
 }

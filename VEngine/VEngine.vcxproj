@@ -315,6 +315,7 @@
     <ClInclude Include="Code\Actors\Game\Unit.h" />
     <ClInclude Include="Code\Animation\AnimFrame.h" />
     <ClInclude Include="Code\Asset\AnimationAssetHeader.h" />
+    <ClInclude Include="Code\Asset\VertexColourData.h" />
     <ClInclude Include="Code\Asset\VertexColourHeader.h" />
     <ClInclude Include="Code\Components\Game\ConditionComponent.h" />
     <ClInclude Include="Code\Components\Game\DialogueComponent.h" />
