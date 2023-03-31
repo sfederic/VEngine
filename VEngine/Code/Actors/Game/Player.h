@@ -42,7 +42,7 @@ public:
 
 	bool inConversation = false;
 	bool inInteraction = false;
-	bool inAstralMode = false;
+	bool inBattleMode = false;
 	bool memoryWidgetToggle = false;
 	bool gameOver = false;
 
@@ -122,10 +122,6 @@ private:
 
 	void DrawBattleCard();
 	void ActivateFirstBattleCardInHand();
-
-	void SpawnPhysicalRepresentationOfAstralPlayer();
-	void DestroyPlayerPhysicalBodyDoubleAndReturnPlayerPosition();
-	MeshComponent* playerBodyMesh = nullptr;
 
 	std::vector<PlayerUnit*> activePlayerUnits;
 	int activePlayerUnitIndex = 0;

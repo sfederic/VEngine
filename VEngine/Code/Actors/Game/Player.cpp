@@ -152,7 +152,7 @@ void Player::RefreshCombatStats()
 
 void Player::BattleCleanup()
 {
-	inAstralMode = false;
+	inBattleMode = false;
 	battleSystem.isPlayerTurn = false;
 
 	RefreshCombatStats();
@@ -175,14 +175,12 @@ void Player::BattleCleanup()
 
 	GameUtils::SetActiveCamera(camera);
 	GameUtils::SetActiveCameraTarget(this);
-
-	DestroyPlayerPhysicalBodyDoubleAndReturnPlayerPosition();
 }
 
 void Player::SetupForBattle()
 {
 	battleSystem.isPlayerTurn = true;
-	inAstralMode = true;
+	inBattleMode = true;
 
 	healthWidget->AddToViewport();
 
@@ -207,21 +205,16 @@ void Player::EnterAstralMode()
 {
 	if (Input::GetKeyUp(Keys::Space))
 	{
-		inAstralMode = !inAstralMode;
+		inBattleMode = !inBattleMode;
 
-		if (inAstralMode)
+		if (inBattleMode)
 		{
-			SpawnPhysicalRepresentationOfAstralPlayer();
-
 			GameUtils::PlayAudioOneShot("sword_hit.wav");
 			healthWidget->AddToViewport();
-
 			battleSystem.StartBattle();
 		}
 		else
 		{
-			DestroyPlayerPhysicalBodyDoubleAndReturnPlayerPosition();
-
 			GameUtils::PlayAudioOneShot("sword_sheathe.wav");
 			healthWidget->RemoveFromViewport();
 		}
@@ -230,7 +223,7 @@ void Player::EnterAstralMode()
 		auto grid = Grid::system.GetFirstActor();
 		if (grid)
 		{
-			switch (inAstralMode)
+			switch (inBattleMode)
 			{
 			case true:
 				grid->lerpValue = Grid::LerpValue::LerpOut;
@@ -250,7 +243,7 @@ void Player::EnterAstralMode()
 		auto healthWidgets = UISystem::GetAllWidgetsOfType<HealthWidget>();
 		for (auto healthWidget : healthWidgets)
 		{
-			if (inAstralMode)
+			if (inBattleMode)
 			{
 				healthWidget->AddToViewport();
 			}
@@ -318,7 +311,7 @@ void Player::PrimaryAction()
 			//@Todo: was causing weird raycast issues. Come back to this for smaller enemies and whatever else.
 			//if (!AttackGridActorBasedOnNode())
 			{
-				if (inAstralMode)
+				if (inBattleMode)
 				{
 					GameUtils::PlayAudioOneShot("sword_miss.wav");
 				}
@@ -329,7 +322,7 @@ void Player::PrimaryAction()
 
 void Player::ToggleMemoryMenu()
 {
-	if (inAstralMode || battleSystem.isBattleActive) return;
+	if (inBattleMode || battleSystem.isBattleActive) return;
 
 	if (Input::GetKeyUp(Keys::Enter))
 	{
@@ -521,7 +514,7 @@ void Player::DrawTurnBattleCardHand()
 
 bool Player::QuickTalkCheck(Actor* hitActor)
 {
-	if (!inAstralMode && !inConversation)
+	if (!inBattleMode && !inConversation)
 	{
 		auto npc = dynamic_cast<NPC*>(hitActor);
 		if (npc)
@@ -556,7 +549,7 @@ bool Player::CombatInteractCheck(Actor* actorToCheck)
 
 bool Player::InteractCheck(Actor* hitActor)
 {
-	if (!inAstralMode && !inConversation)
+	if (!inBattleMode && !inConversation)
 	{
 		auto gridActor = dynamic_cast<GridActor*>(hitActor);
 		if (gridActor)
@@ -600,7 +593,7 @@ bool Player::InteractCheck(Actor* hitActor)
 
 bool Player::DestructibleCheck(Actor* hitActor)
 {
-	if (inAstralMode && !inConversation)
+	if (inBattleMode && !inConversation)
 	{
 		auto npc = dynamic_cast<NPC*>(hitActor);
 		if (npc)
@@ -644,34 +637,6 @@ bool Player::DestructibleCheck(Actor* hitActor)
 	}
 
 	return false;
-}
-
-void Player::SpawnPhysicalRepresentationOfAstralPlayer()
-{
-	mesh->SetShaderFilenames(ShaderItems::Default);
-	mesh->SetBlendState(BlendStates::Default);
-	mesh->GetMaterial().materialShaderData.ambient = XMFLOAT4(0.1f, 0.1f, 0.9f, 0.5f);
-
-	playerBodyMesh = MeshComponent::system.Add("PlayerBody", nullptr, MeshComponent("char.vmesh", "test.png"));
-	playerBodyMesh->Create();
-	playerBodyMesh->SetWorldPosition(GetPositionV());
-	playerBodyMesh->SetWorldRotation(mesh->GetWorldRotationV());
-}
-
-void Player::DestroyPlayerPhysicalBodyDoubleAndReturnPlayerPosition()
-{
-	SetPosition(playerBodyMesh->GetWorldPositionV());
-	nextPos = GetPositionV();
-
-	SetRotation(playerBodyMesh->GetWorldRotationV());
-	nextRot = GetRotationV();
-
-	playerBodyMesh->Remove();
-	playerBodyMesh = nullptr;
-
-	mesh->SetShaderFilenames(ShaderItems::Default);
-	mesh->SetBlendState(BlendStates::null);
-	mesh->GetMaterial().materialShaderData.ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
 }
 
 bool Player::AttackGridActorBasedOnNode()
