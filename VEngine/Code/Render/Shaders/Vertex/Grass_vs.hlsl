@@ -6,6 +6,7 @@ VS_OUT main(VS_IN i)
 
 	float4 newUv = mul(texMatrix, float4(i.uv, 0.f, 1.0f));
 	o.uv = float2(newUv.x, newUv.y);
+    o.colour = i.colour;
 	o.normal = mul((float3x3)model, i.normal);
 	o.posWS = mul(model, float4(i.pos.xyz, 1.0f));
 	o.shadowPos = mul(lightMVP, o.posWS);

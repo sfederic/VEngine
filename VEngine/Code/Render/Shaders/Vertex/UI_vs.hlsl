@@ -10,5 +10,6 @@ VS_OUT main(VS_IN i)
     o.instanceID = i.instanceID;
     o.shadowPos = float4(1.f, 1.f, 1.f, 1.f);
     o.tangent = i.tangent;
+    o.colour = i.colour;
     return o;
 }

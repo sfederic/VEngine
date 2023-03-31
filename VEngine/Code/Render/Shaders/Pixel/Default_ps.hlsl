@@ -41,5 +41,5 @@ float4 main(VS_OUT i) : SV_Target
     float4 finalColour = ((globalAmbient + endResult.diffuse + endResult.specular) + shadowColour) * texColour;
     finalColour += shIrradiance;
     finalColour.a = material.ambient.a;
-    return finalColour;
+    return i.colour;
 }

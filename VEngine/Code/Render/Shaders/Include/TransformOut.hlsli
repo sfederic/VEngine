@@ -6,6 +6,7 @@ struct TransformOut
 	{
 		VS_OUT o;
 
+        o.colour = i.colour;
 		o.pos = mul(mvp, float4(i.pos.xyz, 1.0f));
 		o.posWS = mul(model, float4(i.pos.xyz, 1.0f));
 		o.normal = mul((float3x3)model, i.normal);
@@ -40,6 +41,7 @@ struct TransformOut
 			normalL += weights[index] * mul((float3x3)boneTransforms[i.boneIndices[index]], i.normal);
 		}
 
+        o.colour = i.colour;
 		o.pos = mul(mvp, float4(posL, 1.0f));
 		o.posWS = mul(model, float4(posL, 1.0f));
 		float4 newUv = mul(texMatrix, float4(i.uv, 0.f, 1.0f));

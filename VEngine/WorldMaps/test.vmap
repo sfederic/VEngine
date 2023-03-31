@@ -1,228 +1,48 @@
-DestructibleActor
-1
- Enabled
-1
- Position
-2.13675 2.5 2.35973
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-DestructibleActor0
-UID
-3370700702
-next
-Grid
-1
- Enabled
-1
- Position
-0 0 0
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-Grid0
-Size X
-5
-Size Y
-5
-StartBattleOnLoad
-0
-UID
-224944424
-next
 MeshActor
 1
  Enabled
 1
  Position
-2 -0.5 2
+0 0 0
  Rotation
 -0 0 -0 1
  Scale
-5 1 5
+1 1 1
  Visible
 1
 Name
-node0
+cube0
 UID
-3570992123
+3594989239
 next
-DestructibleMeshComponent
+PointLightActor
 1
-3370700702
-Destructible
  Enabled
 1
- Pos
-2.13675 2.5 2.35973
- Rot
+ Position
+-4 0 0
+ Rotation
 -0 0 -0 1
  Scale
 1 1 1
  Visible
 1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-destructible_cube.fbx
-Static
-1
-Trans. Occlude
-0
+Name
+PointLightActor0
 UID
-1033923260
-next
-InstanceMeshComponent
-1
-224944424
-NodeMesh
- Enabled
-1
- Pos
-0 0 0
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Instance
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2000342231
+3814373846
 next
 MeshComponent
-10
-3570992123
+1
+3594989239
 Mesh
  Enabled
 1
  Pos
-2 -0.5 2
+0 0 0
  Rot
 -0 0 -0 1
  Scale
-5 1 5
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3817483795
-next
-0
-TempDestructibleMesh0
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
 1 1 1
  Visible
 1
@@ -257,420 +77,35 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-destructible_cube.vmesh
+cube.vmesh
 Static
-0
+1
 Trans. Occlude
 0
 UID
-3393656095
+1831189486
 next
-0
-TempDestructibleMesh1
+PointLightComponent
+1
+3814373846
+PointLight
  Enabled
 1
  Pos
-0 0 0
+-4 0 0
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
 1
-Casts Shadow
-1
-M_Ambient
+Colour
 1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
+Intensity
+25
+LightEnabled
 1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-destructible_cube.vmesh
-Static
-0
-Trans. Occlude
-0
 UID
-3174660093
-next
-0
-TempDestructibleMesh2
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-destructible_cube.vmesh
-Static
-0
-Trans. Occlude
-0
-UID
-4020503610
-next
-0
-TempDestructibleMesh3
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-destructible_cube.vmesh
-Static
-0
-Trans. Occlude
-0
-UID
-1950009332
-next
-0
-TempDestructibleMesh4
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-destructible_cube.vmesh
-Static
-0
-Trans. Occlude
-0
-UID
-819583296
-next
-0
-TempDestructibleMesh5
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-destructible_cube.vmesh
-Static
-0
-Trans. Occlude
-0
-UID
-1884057623
-next
-0
-TempDestructibleMesh6
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-destructible_cube.vmesh
-Static
-0
-Trans. Occlude
-0
-UID
-1985769249
-next
-0
-TempDestructibleMesh7
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-destructible_cube.vmesh
-Static
-0
-Trans. Occlude
-0
-UID
-3251283436
-next
-0
-TempDestructibleMesh8
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-destructible_cube.vmesh
-Static
-0
-Trans. Occlude
-0
-UID
-1559053943
+928634957
 next
 end

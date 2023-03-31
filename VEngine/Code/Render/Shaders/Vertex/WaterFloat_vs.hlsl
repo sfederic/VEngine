@@ -12,6 +12,7 @@ VS_OUT main(VS_IN i)
 	o.shadowPos = mul(lightMVP, o.posWS);
 	o.instanceID = i.instanceID;
     o.tangent = i.tangent;
+    o.colour = i.colour;
 	
 	//mainly bob up on y-axis, give x and z small offset for effect to look 'natural'
 	i.pos.y += sin(timeSinceStartup) * 0.1f;

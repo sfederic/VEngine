@@ -12,6 +12,7 @@ VS_OUT main(VS_IN i)
 	o.normal = mul((float3x3)model, i.normal);
 	o.instanceID = i.instanceID;
     o.tangent = i.tangent;
+    o.colour = i.colour;
 
     o.shadowPos = mul(lightMVP, float4(i.pos.xyz, 1.0f));
 

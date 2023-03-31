@@ -13,6 +13,7 @@ struct InstanceData
 
 struct VS_IN
 {
+    float4 colour : COLOUR;
     float3 pos : POSITION;
     float3 normal : NORMAL;
     float3 tangent : TANGENT;
@@ -24,6 +25,7 @@ struct VS_IN
 
 struct VS_OUT
 {
+    float4 colour : COLOUR;
     float4 pos : SV_POSITION;
     float4 posWS : POSITION;
     float3 normal : NORMAL;

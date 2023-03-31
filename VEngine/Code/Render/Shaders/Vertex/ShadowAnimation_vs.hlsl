@@ -40,6 +40,7 @@ VS_OUT main(VS_IN i)
     o.shadowPos = mul(lightMVP, o.pos);
     o.instanceID = i.instanceID;
     o.tangent = i.tangent;
+    o.colour = i.colour;
 
     return o;
 }
