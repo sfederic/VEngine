@@ -22,7 +22,7 @@ struct BattleCard;
 class Player : public PlayerUnit
 {
 public:
-	ACTOR_SYSTEM(Player)
+	ACTOR_SYSTEM(Player);
 
 	DialogueComponent* dialogueComponent = nullptr;
 	DialogueComponent* currentlyActiveDialogueComponent = nullptr;

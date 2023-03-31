@@ -72,6 +72,8 @@ void Player::Start()
 	healthWidget = UISystem::CreateWidget<PlayerHealthWidget>();
 
 	battleCardHandWidget = UISystem::CreateWidget<BattleCardHandWidget>();
+
+	playerInputController.SetPlayerUnitToControl(this);
 }
 
 void Player::End()
@@ -92,9 +94,6 @@ void Player::Tick(float deltaTime)
 	{
 		//GameUtils::TriggerGameOver();
 	}
-
-
-	ControllerInput(deltaTime);
 
 	DrawBattleCard();
 	PrimaryAction();
