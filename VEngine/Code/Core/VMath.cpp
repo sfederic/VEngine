@@ -518,4 +518,23 @@ namespace VMath
         u = b0 * u_v0 + b1 * u_v1 + b2 * u_v2;
         v = b0 * v_v0 + b1 * v_v1 + b2 * v_v2;
     }
+
+    //Make sure to put the vertex positions into world space
+    int GetIndexOfClosestVertexFromTriangleIntersect(std::map<int, XMVECTOR>& vertexPositions, XMVECTOR hitPoint)
+    {
+        int vertexIndex = -1;
+        float lowestDistance = std::numeric_limits<float>::max();
+        for (const auto& [index, position] : vertexPositions)
+        {
+            const float distance = XMVector3Length(position - hitPoint).m128_f32[0];
+            if (distance < lowestDistance)
+            {
+                lowestDistance = distance;
+                vertexIndex = index;
+            }
+        }
+
+        assert(vertexIndex != -1);
+        return vertexIndex;
+    }
 }
