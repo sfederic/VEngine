@@ -36,11 +36,6 @@ BlendState::~BlendState()
 	}
 }
 
-Buffer::~Buffer()
-{
-	data->Release();
-}
-
 ShaderResourceView::~ShaderResourceView()
 {
 	data->Release();

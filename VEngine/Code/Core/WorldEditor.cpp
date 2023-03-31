@@ -28,6 +28,8 @@ WorldEditor::PickMode pickMode = WorldEditor::PickMode::Actor;
 bool WorldEditor::texturePlacement = false;
 bool WorldEditor::materialPlacement = false;
 
+DirectX::XMFLOAT4 WorldEditor::vertexPaintColour;
+
 void HandleActorPicking();
 void DuplicateActor();
 void SaveWorld();
@@ -61,6 +63,20 @@ void HandleActorPicking()
 		HitResult screenPickRay;
 		if (RaycastFromScreen(screenPickRay))
 		{
+			auto actor = screenPickRay.hitActor;
+			auto mesh = actor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
+			if (mesh)
+			{
+				for (auto& vertIndex : screenPickRay.hitVertIndexes)
+				{
+					Vertex& v = mesh->meshDataProxy.vertices->at(vertIndex);
+					v.colour = WorldEditor::vertexPaintColour;
+				}
+				
+				mesh->CreateNewVertexBuffer();
+			}
+			return;
+
 			//Assign selected texture in editor to mesh on click
 			if (!TextureSystem::selectedTextureInEditor.empty() && WorldEditor::texturePlacement)
 			{

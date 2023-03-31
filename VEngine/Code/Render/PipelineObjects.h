@@ -11,8 +11,6 @@ struct ID3D11RasterizerState;
 struct Buffer
 {
 	ID3D11Buffer* data = nullptr;
-
-	~Buffer();
 };
 
 struct ShaderResourceView
@@ -56,5 +54,5 @@ struct MeshBuffers
 
 struct PipelineStateObject
 {
-	Buffer* vertexBuffer = nullptr;
+	Buffer vertexBuffer;
 };

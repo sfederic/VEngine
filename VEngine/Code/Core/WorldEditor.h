@@ -2,6 +2,7 @@
 
 #include <set>
 #include <string>
+#include <DirectXMath.h>
 
 class Actor;
 class IActorSystem;
@@ -20,6 +21,8 @@ namespace WorldEditor
 
 	extern bool texturePlacement;
 	extern bool materialPlacement;
+
+	extern DirectX::XMFLOAT4 vertexPaintColour;
 	
 	void Tick();
 

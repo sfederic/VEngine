@@ -17,15 +17,7 @@
 #include "Render/PixelShader.h"
 #include "Physics/PhysicsSystem.h"
 
-//Vertex buffers linked to a mesh filename to copy over to new PSOs
-std::unordered_map<std::string, std::unique_ptr<MeshBuffers>> existingMeshBuffers;
-
 std::map<std::string, MeshComponent*> debugMeshes;
-
-void MeshComponent::ResetMeshBuffers()
-{
-	existingMeshBuffers.clear();
-}
 
 void MeshComponent::CreateDebugMeshes()
 {
@@ -164,9 +156,7 @@ void MeshComponent::SplitMeshCreate()
 
 	material->Create();
 
-	auto buffer = new Buffer();
-	buffer->data = RenderUtils::CreateVertexBuffer(meshDataProxy);
-	pso.vertexBuffer = buffer;
+	pso.vertexBuffer.data = RenderUtils::CreateVertexBuffer(meshDataProxy);
 
 	//Make sure bounds setup is before physics actor creation
 	BoundingBox bb;
@@ -250,27 +240,20 @@ void MeshComponent::SetUVOffsetSpeed(XMFLOAT2 speed)
 	material->uvOffsetSpeed = speed;
 }
 
-Buffer* MeshComponent::GetVertexBuffer() const 
+Buffer& MeshComponent::GetVertexBuffer()
 {
 	return pso.vertexBuffer;
 }
 
 void MeshComponent::CreateVertexBuffer()
 {
-	auto psoIt = existingMeshBuffers.find(meshComponentData.filename);
-	if (psoIt == existingMeshBuffers.end())
-	{
-		existingMeshBuffers[meshComponentData.filename] = std::make_unique<MeshBuffers>();
-		auto& meshBuffers = existingMeshBuffers[meshComponentData.filename];
+	pso.vertexBuffer.data = RenderUtils::CreateVertexBuffer(meshDataProxy);
+}
 
-		meshBuffers->vertexBuffer.data = RenderUtils::CreateVertexBuffer(meshDataProxy);
-
-		pso.vertexBuffer = &meshBuffers->vertexBuffer;
-	}
-	else
-	{
-		pso.vertexBuffer = &psoIt->second->vertexBuffer;
-	}
+void MeshComponent::CreateNewVertexBuffer()
+{
+	pso.vertexBuffer.data->Release();
+	pso.vertexBuffer.data = RenderUtils::CreateVertexBuffer(meshDataProxy);
 }
 
 std::vector<XMFLOAT3> MeshComponent::GetAllVertexPositions()

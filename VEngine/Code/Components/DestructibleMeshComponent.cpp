@@ -41,8 +41,7 @@ void DestructibleMeshComponent::Create()
 		BoundingOrientedBox::CreateFromPoints(meshBoundingBox, mesh->meshDataProxy.vertices->size(),
 			&mesh->meshDataProxy.vertices->at(0).pos, sizeof(Vertex));
 
-		mesh->pso.vertexBuffer = new Buffer();
-		mesh->pso.vertexBuffer->data = RenderUtils::CreateVertexBuffer(mesh->meshDataProxy);
+		mesh->pso.vertexBuffer.data = RenderUtils::CreateVertexBuffer(mesh->meshDataProxy);
 
 		mesh->meshComponentData.filename = "destructible_cube.vmesh";
 

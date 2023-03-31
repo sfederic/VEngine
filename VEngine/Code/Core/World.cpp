@@ -313,8 +313,6 @@ void World::Cleanup()
 	SpriteSystem::Reset();
 	UISystem::Reset();
 
-	MeshComponent::ResetMeshBuffers();
-
 	for (auto componentSystem : activeComponentSystems)
 	{
 		componentSystem->Cleanup();

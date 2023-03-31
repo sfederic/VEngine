@@ -14,8 +14,6 @@ class MeshComponent : public SpatialComponent
 public:
 	COMPONENT_SYSTEM(MeshComponent)
 
-	static void ResetMeshBuffers();
-
 	//Debug meshes are used by the renderer to display things like bounds, camera, lights, etc.
 	static void CreateDebugMeshes();
 	static void DestroyDebugMeshes();
@@ -71,8 +69,9 @@ public:
 	void SetUVRotationSpeed(float speed);
 	void SetUVOffsetSpeed(XMFLOAT2 speed);
 
-	Buffer* GetVertexBuffer() const;
+	Buffer& GetVertexBuffer();
 	void CreateVertexBuffer();
+	void CreateNewVertexBuffer();
 
 	Material& GetMaterial() { return *material; }
 

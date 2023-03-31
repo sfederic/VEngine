@@ -115,7 +115,7 @@ void SetBlendState(std::string blendStateName);
 void SetConstantBufferVertexPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer);
 void SetConstantBufferVertex(uint32_t shaderRegister, ID3D11Buffer* constantBuffer);
 void SetConstantBufferPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer);
-void SetVertexBuffer(Buffer* vertexBuffer);
+void SetVertexBuffer(Buffer& vertexBuffer);
 void SetIndexBuffer(Buffer* indexBuffer);
 void SetSampler(uint32_t shaderRegister, Sampler* sampler);
 void SetShaderResourcePixel(uint32_t shaderRegister, std::string textureName);
@@ -695,7 +695,7 @@ void RenderShadowPass()
 		context->RSSetState(rastStateMap["shadow"]->data);
 
 		PipelineStateObject& pso = mesh->pso;
-		context->IASetVertexBuffers(0, 1, &pso.vertexBuffer->data, &Renderer::stride, &Renderer::offset);
+		context->IASetVertexBuffers(0, 1, &pso.vertexBuffer.data, &Renderer::stride, &Renderer::offset);
 
 		ShaderItem* shader = ShaderItems::ShadowAnimation;
 
@@ -989,7 +989,7 @@ void Renderer::RenderLightProbeViews()
 
 				SetShaderResourceFromMaterial(0, material);
 
-				context->IASetVertexBuffers(0, 1, &mesh->pso.vertexBuffer->data, &stride, &offset);
+				context->IASetVertexBuffers(0, 1, &mesh->pso.vertexBuffer.data, &stride, &offset);
 
 				cbMaterial->Map(&material.materialShaderData);
 				cbMaterial->SetPS();
@@ -1413,7 +1413,7 @@ void RenderPolyboards()
 			context->Unmap(polyboard->GetIndexBuffer().data, 0);
 		}
 
-		SetVertexBuffer(&polyboard->GetVertexBuffer());
+		SetVertexBuffer(polyboard->GetVertexBuffer());
 		SetIndexBuffer(&polyboard->GetIndexBuffer());
 
 		context->DrawIndexed(polyboard->GetIndices().size(), 0, 0);
@@ -1818,7 +1818,7 @@ void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 	context->VSSetShader(shader->GetVertexShader(), nullptr, 0);
 	context->PSSetShader(shader->GetPixelShader(), nullptr, 0);
 
-	context->IASetVertexBuffers(0, 1, &pso.vertexBuffer->data, &Renderer::stride, &Renderer::offset);
+	context->IASetVertexBuffers(0, 1, &pso.vertexBuffer.data, &Renderer::stride, &Renderer::offset);
 }
 
 void SetShaders(ShaderItem* shaderItem)
@@ -1862,9 +1862,9 @@ void SetConstantBufferPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffe
 	context->PSSetConstantBuffers(shaderRegister, 1, &constantBuffer);
 }
 
-void SetVertexBuffer(Buffer* vertexBuffer)
+void SetVertexBuffer(Buffer& vertexBuffer)
 {
-	context->IASetVertexBuffers(0, 1, &vertexBuffer->data, &Renderer::stride, &Renderer::offset);
+	context->IASetVertexBuffers(0, 1, &vertexBuffer.data, &Renderer::stride, &Renderer::offset);
 }
 
 void SetIndexBuffer(Buffer* indexBuffer)
