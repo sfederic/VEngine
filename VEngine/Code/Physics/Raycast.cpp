@@ -196,10 +196,14 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 					HitResult tempHitResult = hitResult;
 					tempHitResult.hitDistance = hitDistance;
 
-					//Get index of hit vertices for the hit triangle
-					tempHitResult.hitVertexIndexes[0] = index0;
-					tempHitResult.hitVertexIndexes[1] = index1;
-					tempHitResult.hitVertexIndexes[2] = index2;
+					const XMVECTOR hitPosition = hitResult.origin + (hitResult.direction * tempHitResult.hitDistance);
+
+					std::map<int, XMVECTOR> indexToVertMap;
+					indexToVertMap.emplace(index0, v0);
+					indexToVertMap.emplace(index1, v1);
+					indexToVertMap.emplace(index2, v2);
+
+					tempHitResult.hitVertIndexes.push_back(VMath::GetIndexOfClosestVertexFromTriangleIntersect(indexToVertMap, hitPosition));
 
 					//Get normal for triangle
 					XMVECTOR normal = XMVectorZero();
@@ -211,7 +215,6 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 					XMStoreFloat3(&tempHitResult.normal, normal);
 
 					//Get hit UV
-					XMVECTOR hitPosition = hitResult.origin + (hitResult.direction * tempHitResult.hitDistance);
 					float hitU, hitV;
 					VMath::TriangleXYZToUV(mesh->meshDataProxy.vertices->at(index0),
 						mesh->meshDataProxy.vertices->at(index1),

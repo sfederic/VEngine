@@ -58,7 +58,7 @@ struct HitResult
 	XMVECTOR GetHitPosV() { return XMLoadFloat3(&hitPos); }
 	XMVECTOR GetNormalV() { return XMLoadFloat3(&normal); }
 
-	std::array<int, 3> hitVertexIndexes;
+	std::vector<int> hitVertIndexes;
 };
 
 bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float range, bool fromScreen = false);
