@@ -35,7 +35,6 @@ public:
 		actor->SetActorSystem(this);
 		actor->SetSystemIndex(actors.size() - 1);
 		actor->SetTransform(transform);
-		actor->SetUID(GenerateUID());
 
 		//AddActorToWorld() call is in SetName()
 		if (!actor->SetName(this->name + std::to_string(actor->GetSystemIndex())))
