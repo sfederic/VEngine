@@ -51,6 +51,8 @@ void World::Init()
 
 void World::Start()
 {
+	ResetUIDCache();
+
 	TextureSystem::CreateAllTextures();
 	MeshComponent::CreateDebugMeshes();
 

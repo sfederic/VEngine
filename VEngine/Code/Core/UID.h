@@ -4,3 +4,4 @@
 typedef unsigned int UID;
 
 UID GenerateUID();
+void ResetUIDCache();
