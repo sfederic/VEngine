@@ -248,6 +248,8 @@ void AssetSystem::WriteOutAllVertexColourData()
 	}
 
 	fclose(file);
+
+	Log("Vertex colour data written to file [%s].", vertexColourFileFilename.c_str());
 }
 
 void AssetSystem::LoadVertexColourDataFromFile()
@@ -293,4 +295,6 @@ void AssetSystem::LoadVertexColourDataFromFile()
 	}
 
 	fclose(file);
+
+	Log("Vertex colour data loaded from file [%s].", vertexColourFileFilename.c_str());
 }
