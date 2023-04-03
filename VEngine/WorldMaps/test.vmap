@@ -1,5 +1,5 @@
 MeshActor
-1
+2
  Enabled
 1
  Position
@@ -14,6 +14,21 @@ Name
 tabletop0
 UID
 3266336762
+next
+ Enabled
+1
+ Position
+1 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+MeshActor1
+UID
+3740458872
 next
 PointLightActor
 1
@@ -33,7 +48,7 @@ UID
 3814373846
 next
 MeshComponent
-1
+2
 3266336762
 Mesh
  Enabled
@@ -84,6 +99,57 @@ Trans. Occlude
 0
 UID
 1034134416
+next
+3740458872
+Mesh
+ Enabled
+1
+ Pos
+1 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wood_furniture.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+tabletop.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+741075863
 next
 PointLightComponent
 1
