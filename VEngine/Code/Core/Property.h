@@ -25,7 +25,7 @@ struct Property
 	//Sets widgets to be inactive/readonly
 	bool readOnly = false;
 
-	//hide property in UI
+	//hide property in UI and skips over copying properties across to new props
 	bool hide = false;
 
 	std::function<void(void*)> change;

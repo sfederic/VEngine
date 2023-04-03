@@ -58,6 +58,11 @@ void Properties::CopyProperties(std::vector<Properties>& src, std::vector<Proper
 	{
 		for (auto& prop : src[i].propMap)
 		{
+			if (prop.second.hide)
+			{
+				continue;
+			}
+
 			const std::string& propname = prop.first;
 			dst[i].CopyData(propname, prop.second);
 		}
