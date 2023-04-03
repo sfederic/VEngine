@@ -230,9 +230,14 @@ void AssetSystem::WriteOutAllVertexColourData()
 	header.meshComponentCount = MeshComponent::system.GetNumComponents();
 	fwrite(&header, sizeof(header), 1, file);
 
+	std::set<UID> uniqueMeshUIDs;
+
 	for (auto& mesh : MeshComponent::system.GetComponents())
 	{
 		VertexColourData data;
+
+		assert(uniqueMeshUIDs.find(mesh->GetUID()) == uniqueMeshUIDs.end());
+		uniqueMeshUIDs.emplace(mesh->GetUID());
 
 		data.meshComponentUID = mesh->GetUID();
 		fwrite(&data.meshComponentUID, sizeof(data.meshComponentUID), 1, file);
@@ -269,11 +274,15 @@ void AssetSystem::LoadVertexColourDataFromFile()
 	VertexColourHeader header;
 	fread(&header, sizeof(header), 1, file);
 
-	for (int meshIndex = 0; meshIndex < header.meshComponentCount; meshIndex++)
+	std::set<UID> uniqueMeshUIDs;
+
+	for (int meshCount = 0; meshCount < header.meshComponentCount; meshCount++)
 	{
 		VertexColourData vertexColourData;
 
 		fread(&vertexColourData.meshComponentUID, sizeof(vertexColourData.meshComponentUID), 1, file);
+		assert(uniqueMeshUIDs.find(vertexColourData.meshComponentUID) == uniqueMeshUIDs.end());
+		uniqueMeshUIDs.emplace(vertexColourData.meshComponentUID);
 
 		fread(&vertexColourData.numVertices, sizeof(vertexColourData.numVertices), 1, file);
 		
