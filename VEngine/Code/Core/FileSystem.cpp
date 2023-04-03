@@ -20,6 +20,7 @@
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/WorldFunctions.h"
 #include "Profile.h"
+#include "Asset/AssetSystem.h"
 
 static std::string defferedWorldLoadFilename;
 
@@ -63,6 +64,8 @@ void FileSystem::SerialiseAllSystems()
 	}
 
 	s.WriteLine(L"end");
+
+	AssetSystem::WriteOutAllVertexColourData();
 
 	debugMenu.AddNotification(VString::wformat(L"%S world saved", World::worldFilename.c_str()));
 
@@ -301,6 +304,8 @@ void FileSystem::LoadWorld(std::string worldName)
 	WorldFunctions::CallWorldStartFunction(World::worldFilename);
 
 	ResetWorldState();
+
+	AssetSystem::LoadVertexColourDataFromFile();
 
 	debugMenu.AddNotification(VString::wformat(L"%S world loaded", World::worldFilename.c_str()));
 
