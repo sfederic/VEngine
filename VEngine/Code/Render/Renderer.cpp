@@ -92,6 +92,7 @@ void RenderLightMeshes();
 void RenderPolyboards();
 void RenderSpriteSheets();
 void RenderPostProcess();
+void RenderWireframeForVertexPainting();
 void MapBuffer(ID3D11Resource* resource, const void* src, size_t size);
 void DrawMesh(MeshComponent* mesh);
 void DrawMeshInstanced(InstanceMeshComponent* mesh);
@@ -800,6 +801,7 @@ void Renderer::Render()
 	SetLightsConstantBufferData();
 
 	RenderMeshComponents();
+	RenderWireframeForVertexPainting();
 	RenderDestructibleMeshes();
 	AnimateAndRenderSkeletalMeshes();
 	RenderSocketMeshComponents();
@@ -1937,6 +1939,35 @@ void RenderPostProcess()
 	context->Draw(6, 0);
 
 	context->PSSetShaderResources(0, 1, &nullSRV);
+}
+
+void RenderWireframeForVertexPainting()
+{
+	if (WorldEditor::vertexPaintActive)
+	{
+		for (auto& mesh : MeshComponent::system.GetComponents())
+		{
+			context->RSSetState(rastStateWireframe);
+
+			MaterialShaderData materialShaderData;
+			materialShaderData.ambient = XMFLOAT4(1.f, 0.f, 1.f, 1.f);
+			cbMaterial->Map(&materialShaderData);
+			cbMaterial->SetPS();
+
+			const auto shaderItem = ShaderSystem::FindShaderItem("SolidColour");
+			context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
+			context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
+
+			SetVertexBuffer(mesh->pso.vertexBuffer);
+
+			SetMatricesFromMesh(mesh.get());
+			SetShaderMeshData(mesh.get());
+
+			DrawMesh(mesh.get());
+		}
+
+		SetGeneralShaderResourcesToNull();
+	}
 }
 
 void CreatePostProcessRenderTarget()
