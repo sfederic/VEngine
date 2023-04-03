@@ -210,7 +210,7 @@ void Player::EnterAstralMode()
 		{
 			GameUtils::PlayAudioOneShot("sword_hit.wav");
 			healthWidget->AddToViewport();
-			battleSystem.StartBattle();
+			//battleSystem.StartBattle();
 		}
 		else
 		{
