@@ -248,12 +248,12 @@ void PhysicsSystem::CreateConvexPhysicsMesh(MeshComponent* mesh, Actor* actor)
 	//fit snug around the mesh or something or do some research into other methods.
 
 	//PhysX convex mesh can only be 256 vertices per the documentation
-	assert(mesh->meshDataProxy.vertices->size() < 256);
+	assert(mesh->meshDataProxy.vertices.size() < 256);
 
-	convexDesc.points.count = mesh->meshDataProxy.vertices->size();
+	convexDesc.points.count = mesh->meshDataProxy.vertices.size();
 	
 	convexDesc.points.stride = sizeof(PxVec3);
-	convexDesc.points.data = mesh->meshDataProxy.vertices->data();
+	convexDesc.points.data = mesh->meshDataProxy.vertices.data();
 	convexDesc.flags = PxConvexFlag::eCOMPUTE_CONVEX;
 
 	PxDefaultMemoryOutputStream buf;

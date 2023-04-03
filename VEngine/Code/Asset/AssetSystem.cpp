@@ -168,7 +168,7 @@ MeshDataProxy AssetSystem::ReadVMeshAssetFromFile(const std::string filename)
 	auto& foundMeshData = existingMeshData.find(filename)->second;
 
 	MeshDataProxy meshDataProxy;
-	meshDataProxy.vertices = &foundMeshData.vertices;
+	meshDataProxy.vertices = foundMeshData.vertices;
 	meshDataProxy.boundingBox = &foundMeshData.boundingBox;
 	meshDataProxy.skeleton = &foundMeshData.skeleton;
 
@@ -293,11 +293,10 @@ void AssetSystem::LoadVertexColourDataFromFile()
 		assert(mesh);
 
 		const size_t vertexCount = mesh->meshDataProxy.GetVertices().size();
-		auto& verts = mesh->meshDataProxy.GetVertices();
 		assert(vertexColourData.colours.size() == vertexCount);
 		for (int vertexIndex = 0; vertexIndex < vertexCount; vertexIndex++)
 		{
-			verts[vertexIndex].colour = vertexColourData.colours[vertexIndex];
+			mesh->meshDataProxy.vertices.at(vertexIndex).colour = vertexColourData.colours[vertexIndex];
 		}
 
 		mesh->CreateNewVertexBuffer();

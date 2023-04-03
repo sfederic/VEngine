@@ -548,12 +548,12 @@ void SetLightResources()
 
 void DrawMesh(MeshComponent* mesh)
 {
-	context->Draw(mesh->meshDataProxy.vertices->size(), 0);
+	context->Draw(mesh->meshDataProxy.vertices.size(), 0);
 }
 
 void DrawMeshInstanced(InstanceMeshComponent* mesh)
 {
-	context->DrawInstanced(mesh->meshDataProxy.vertices->size(), mesh->GetInstanceCount(), 0, 0);
+	context->DrawInstanced(mesh->meshDataProxy.vertices.size(), mesh->GetInstanceCount(), 0, 0);
 }
 
 void DrawBoundingBox(MeshComponent* mesh, MeshComponent* boundsMesh)
@@ -656,7 +656,7 @@ void RenderMeshForShadowPass(MeshComponent* mesh)
 	SetShaderResourceFromMaterial(0, mat);
 
 	//Draw
-	context->Draw(mesh->meshDataProxy.vertices->size(), 0);
+	context->Draw(mesh->meshDataProxy.vertices.size(), 0);
 }
 
 void RenderShadowPass()
@@ -722,7 +722,7 @@ void RenderShadowPass()
 		SetShaderResourceFromMaterial(0, mat);
 
 		//Draw
-		context->Draw(mesh->meshDataProxy.vertices->size(), 0);
+		context->Draw(mesh->meshDataProxy.vertices.size(), 0);
 	}
 
 	SetNullRTV();
@@ -1011,7 +1011,7 @@ void Renderer::RenderLightProbeViews()
 				cbMeshData->SetVSAndPS();
 
 				//Draw
-				context->Draw(mesh->meshDataProxy.vertices->size(), 0);
+				context->Draw(mesh->meshDataProxy.vertices.size(), 0);
 			}
 
 			//Remove lightprobe RTV

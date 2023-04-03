@@ -160,13 +160,13 @@ void MeshComponent::SplitMeshCreate()
 
 	//Make sure bounds setup is before physics actor creation
 	BoundingBox bb;
-	BoundingBox::CreateFromPoints(bb, meshDataProxy.vertices->size(),
-		&meshDataProxy.vertices->at(0).pos, sizeof(Vertex));
+	BoundingBox::CreateFromPoints(bb, meshDataProxy.vertices.size(),
+		&meshDataProxy.vertices.at(0).pos, sizeof(Vertex));
 	BoundingOrientedBox::CreateFromBoundingBox(boundingBox, bb);
 
 	//@Todo: owner being set as null on CreatePhysicsActor() won't explode the program,
 	//but it will cause problems if you want to use raycasts via PhysX.
-	if (meshDataProxy.vertices->size() > 255)
+	if (meshDataProxy.vertices.size() > 255)
 	{
 		PhysicsSystem::CreatePhysicsActor(this, PhysicsType::Dynamic, GetOwner());
 	}
@@ -259,7 +259,7 @@ void MeshComponent::CreateNewVertexBuffer()
 std::vector<XMFLOAT3> MeshComponent::GetAllVertexPositions()
 {
 	std::vector<XMFLOAT3> positions;
-	for (auto& vertex : *meshDataProxy.vertices)
+	for (auto& vertex : meshDataProxy.vertices)
 	{
 		positions.emplace_back(vertex.pos);
 	}

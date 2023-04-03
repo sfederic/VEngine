@@ -10,7 +10,8 @@ class Skeleton;
 //to the mesh data on a per-filename basis.
 struct MeshDataProxy
 {
-	std::vector<Vertex>* vertices = nullptr;
+	//Still copied from MeshData, but needs to be unique for vertex painting.
+	std::vector<Vertex> vertices;
 
 	DirectX::BoundingBox* boundingBox = nullptr;
 
@@ -18,8 +19,8 @@ struct MeshDataProxy
 
 	auto GetVerticesByteWidth()
 	{
-		return (sizeof(Vertex) * vertices->size());
+		return (sizeof(Vertex) * vertices.size());
 	}
 
-	std::vector<Vertex>& GetVertices() { return *vertices; }
+	std::vector<Vertex>& GetVertices() { return vertices; }
 };

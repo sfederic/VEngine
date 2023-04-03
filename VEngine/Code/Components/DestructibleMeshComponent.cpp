@@ -33,13 +33,13 @@ void DestructibleMeshComponent::Create()
 		mesh->isStatic = false;
 
 		mesh->meshDataProxy.boundingBox = &meshData.boundingBox;
-		mesh->meshDataProxy.vertices = &meshData.vertices;
+		mesh->meshDataProxy.vertices = meshData.vertices;
 		mesh->meshDataProxy.skeleton = &meshData.skeleton;
 
 		//Setup bounds
 		auto meshBoundingBox = mesh->GetBoundingBox();
-		BoundingOrientedBox::CreateFromPoints(meshBoundingBox, mesh->meshDataProxy.vertices->size(),
-			&mesh->meshDataProxy.vertices->at(0).pos, sizeof(Vertex));
+		BoundingOrientedBox::CreateFromPoints(meshBoundingBox, mesh->meshDataProxy.vertices.size(),
+			&mesh->meshDataProxy.vertices.at(0).pos, sizeof(Vertex));
 
 		mesh->pso.vertexBuffer.data = RenderUtils::CreateVertexBuffer(mesh->meshDataProxy);
 

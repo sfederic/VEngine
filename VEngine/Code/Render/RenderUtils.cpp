@@ -60,7 +60,7 @@ namespace RenderUtils
 	ID3D11Buffer* CreateVertexBuffer(MeshDataProxy& meshData)
 	{
 		return CreateDefaultBuffer(meshData.GetVerticesByteWidth(),
-			D3D11_BIND_VERTEX_BUFFER, meshData.vertices->data());
+			D3D11_BIND_VERTEX_BUFFER, meshData.vertices.data());
 	}
 
 	ID3D11ShaderResourceView* CreateSRVForMeshInstance(ID3D11Buffer* structuredBuffer, uint32_t numBufferElements)

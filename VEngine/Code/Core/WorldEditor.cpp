@@ -298,11 +298,9 @@ void VertexPainting()
 				auto meshes = hit.hitActor->GetComponentsOfType<MeshComponent>();
 				for (auto mesh : meshes)
 				{
-					//@Todo: is this even correct? Wouldn't the vertices belong to the mesh data thus making
-					//any future meshes made from it inherit the same vertex colours?
 					for (auto& vertIndex : hit.hitVertIndexes)
 					{
-						Vertex& v = mesh->meshDataProxy.vertices->at(vertIndex);
+						Vertex& v = mesh->meshDataProxy.vertices.at(vertIndex);
 						v.colour = WorldEditor::vertexPaintColour;
 					}
 

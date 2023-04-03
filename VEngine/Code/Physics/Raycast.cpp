@@ -167,12 +167,6 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 		auto mesh = dynamic_cast<MeshComponent*>(component);
 		if (mesh)
 		{
-			//This is for dealing with DestructibleMesh's meshproxy nulls
-			if (mesh->meshDataProxy.vertices == nullptr)
-			{
-				continue;
-			}
-
 			const auto& vertices = mesh->meshDataProxy.GetVertices();
 			const int vertexTriangleSize = vertices.size() / 3;
 			for (int i = 0; i < vertexTriangleSize; i++)
@@ -207,18 +201,18 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 
 					//Get normal for triangle
 					XMVECTOR normal = XMVectorZero();
-					normal += XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index0).normal);
-					normal += XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index1).normal);
-					normal += XMLoadFloat3(&mesh->meshDataProxy.vertices->at(index2).normal);
+					normal += XMLoadFloat3(&mesh->meshDataProxy.vertices.at(index0).normal);
+					normal += XMLoadFloat3(&mesh->meshDataProxy.vertices.at(index1).normal);
+					normal += XMLoadFloat3(&mesh->meshDataProxy.vertices.at(index2).normal);
 
 					normal = XMVector3Normalize(normal);
 					XMStoreFloat3(&tempHitResult.normal, normal);
 
 					//Get hit UV
 					float hitU, hitV;
-					VMath::TriangleXYZToUV(mesh->meshDataProxy.vertices->at(index0),
-						mesh->meshDataProxy.vertices->at(index1),
-						mesh->meshDataProxy.vertices->at(index2), hitPosition, hitU, hitV);
+					VMath::TriangleXYZToUV(mesh->meshDataProxy.vertices.at(index0),
+						mesh->meshDataProxy.vertices.at(index1),
+						mesh->meshDataProxy.vertices.at(index2), hitPosition, hitU, hitV);
 					tempHitResult.uv = XMFLOAT2(hitU, hitV);
 
 					//Set hit component and actor

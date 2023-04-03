@@ -221,15 +221,15 @@ void MeshSlicer::SliceMeshViaPlane(DirectX::XMVECTOR planeCenter,
 
 	const XMMATRIX meshWorldMatrix = mesh.GetWorldMatrix();
 
-	for (int i = 0; i < mesh.meshDataProxy.vertices->size() / 3; i++)
+	for (int i = 0; i < mesh.meshDataProxy.vertices.size() / 3; i++)
 	{
 		const int index0 = i * 3;
 		const int index1 = i * 3 + 1;
 		const int index2 = i * 3 + 2;
 
-		Vertex v0 = mesh.meshDataProxy.vertices->at(index0);
-		Vertex v1 = mesh.meshDataProxy.vertices->at(index1);
-		Vertex v2 = mesh.meshDataProxy.vertices->at(index2);
+		Vertex v0 = mesh.meshDataProxy.vertices.at(index0);
+		Vertex v1 = mesh.meshDataProxy.vertices.at(index1);
+		Vertex v2 = mesh.meshDataProxy.vertices.at(index2);
 
 		XMVECTOR p0 = XMLoadFloat3(&v0.pos);
 		XMVECTOR p1 = XMLoadFloat3(&v1.pos);

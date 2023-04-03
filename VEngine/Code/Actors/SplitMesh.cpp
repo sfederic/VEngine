@@ -17,7 +17,6 @@ void SplitMesh::Tick(float deltaTime)
 	destroyTimer += deltaTime;
 	if (destroyTimer > 3.f)
 	{
-		delete mesh->meshDataProxy.vertices;
 		Destroy();
 	}
 }
@@ -27,8 +26,7 @@ void SplitMesh::CreateSplitMesh(std::vector<Vertex>& meshVerts, MeshComponent* o
 	mesh->SetRastState(RastStates::noBackCull);
 
 	//Call 'new' here, can't just give the vertices a pointer to nothing
-	mesh->meshDataProxy.vertices = new std::vector<Vertex>();
-	*mesh->meshDataProxy.vertices = meshVerts;
+	mesh->meshDataProxy.vertices = meshVerts;
 
 	mesh->isStatic = false;
 
