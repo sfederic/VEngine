@@ -17,4 +17,5 @@ struct AssetBaseFolders
 	inline static const std::string cutscene = "Cutscenes/";
 	inline static const std::string dialogue = "Dialogue/";
 	inline static const std::string material = "Materials/";
+	inline static const std::string vertexColourData = "VertexColourData/";
 };

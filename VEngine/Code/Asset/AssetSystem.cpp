@@ -13,6 +13,7 @@
 #include "Components/MeshComponent.h"
 #include "Asset/AssetPaths.h"
 #include "Asset/VertexColourData.h"
+#include "Asset/AssetPaths.h"
 #include "Asset/VertexColourHeader.h"
 #include "Render/MeshData.h"
 #include "Render/Vertex.h"
@@ -221,8 +222,9 @@ void AssetSystem::BuildAllGameplayMapFiles()
 
 void AssetSystem::WriteOutAllVertexColourData()
 {
+	const std::string vertexColourFileFilename = AssetBaseFolders::vertexColourData +
+		VString::ReplaceFileExtesnion(World::worldFilename, vertexColourDataFileExtension);
 	FILE* file = nullptr;
-	const std::string vertexColourFileFilename = VString::ReplaceFileExtesnion(World::worldFilename, vertexColourDataFileExtension);
 	fopen_s(&file, vertexColourFileFilename.c_str(), "wb");
 	assert(file);
 
@@ -259,9 +261,9 @@ void AssetSystem::WriteOutAllVertexColourData()
 
 void AssetSystem::LoadVertexColourDataFromFile()
 {
+	const std::string vertexColourFileFilename = AssetBaseFolders::vertexColourData + 
+		VString::ReplaceFileExtesnion(World::worldFilename, vertexColourDataFileExtension);
 	FILE* file = nullptr;
-	const std::string vertexColourFileFilename = VString::ReplaceFileExtesnion(World::worldFilename, vertexColourDataFileExtension);
-
 	if (!std::filesystem::exists(vertexColourFileFilename))
 	{
 		Log("No vertex colour file data for world %s.", World::worldFilename.c_str());
