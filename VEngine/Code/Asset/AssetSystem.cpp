@@ -278,7 +278,7 @@ void AssetSystem::LoadVertexColourDataFromFile()
 		fread(&vertexColourData.numVertices, sizeof(vertexColourData.numVertices), 1, file);
 		
 		vertexColourData.colours.resize(vertexColourData.numVertices);
-		fread(vertexColourData.colours.data(), sizeof(DirectX::XMFLOAT4) * vertexColourData.numVertices, 1, file);
+		fread(vertexColourData.colours.data(), sizeof(DirectX::XMFLOAT4) * vertexColourData.colours.size(), 1, file);
 
 		auto mesh = MeshComponent::system.GetComponentByUID(vertexColourData.meshComponentUID);
 		assert(mesh);
