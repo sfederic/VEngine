@@ -31,6 +31,7 @@ public:
 		component->SetIndex(components.size() - 1);
 		component->SetComponentSystem(this);
 		component->name = name;
+		component->SetUID(GenerateUID());
 
 		if (systemState == SystemStates::Loaded && callCreate)
 		{

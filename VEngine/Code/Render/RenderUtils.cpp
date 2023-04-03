@@ -142,6 +142,7 @@ namespace RenderUtils
 
 		texture.SetTextureData(resource);
 		texture.SetSRV(srv);
+		texture.SetUID(GenerateUID());
 
 		//CreateWICTextureFromFile() doesn't like ID3D11Texture2D, so casting down here
 		//to get the texture Desc.

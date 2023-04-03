@@ -75,7 +75,7 @@ public:
 private:
 	std::set<std::string> tags;
 	IComponentSystem* componentSystem = nullptr;
-	UID uid = GenerateUID();
+	UID uid = 0;
 	UID ownerUID = 0; //Keep as zero to denote component that doesn't have an owner.
 	int index = -1;
 	bool active = true;

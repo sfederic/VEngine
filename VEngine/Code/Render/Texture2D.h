@@ -28,9 +28,10 @@ public:
 	uint32_t GetHeight() { return height; }
 
 	UID GetUID() { return uid; }
+	void SetUID(UID uid_) { uid = uid_; }
 
 private:
-	UID uid = GenerateUID();
+	UID uid = 0;
 
 	std::string filename;
 

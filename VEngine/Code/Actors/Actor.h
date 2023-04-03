@@ -202,7 +202,7 @@ protected:
 	SpatialComponent* rootComponent = nullptr;
 	IActorSystem* actorSystem = nullptr;
 	std::string name;
-	UID uid = GenerateUID();
+	UID uid = 0;
 	int actorSystemIndex = -1;
 	bool active = true;
 	bool visible = true;
