@@ -495,6 +495,6 @@ void Grid::DisarmAllTrapNodes()
 {
     for (auto node : GetAllNodes())
     {
-        node->trapCard = nullptr;
+        node->trap = nullptr;
     }
 }

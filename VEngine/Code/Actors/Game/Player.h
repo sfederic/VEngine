@@ -15,8 +15,7 @@ struct PlayerHealthWidget;
 struct Memory;
 struct GridActor;
 struct Unit;
-class BattleCardHandWidget;
-struct TrapCard;
+struct Trap;
 struct BattleCard;
 
 class Player : public PlayerUnit
@@ -30,14 +29,11 @@ public:
 	InteractWidget* interactWidget = nullptr;
 	MemoryMenuWidget* memoryMenuWidget = nullptr;
 	PlayerHealthWidget* healthWidget = nullptr;
-	BattleCardHandWidget* battleCardHandWidget = nullptr;
 
 	GridActor* gridActorInteractingWith = nullptr;
 
 	std::vector<Actor*> previousHitTransparentActors;
 
-	std::vector<BattleCard*> battleCardsInHand;
-	
 	float nextCameraFOV = 0.f;
 
 	bool inConversation = false;
@@ -91,12 +87,7 @@ public:
 	//Show a timer dialogue above player when player character is thinking to themself.
 	void QuickThought(const std::wstring& text);
 
-	void DrawTurnBattleCardHand();
-
-	void PlaceTrap(TrapCard* trapCard);
-
-	//Currently more of a debug function (Hand limit isn't considered)
-	void AddCardToHand(BattleCard* card);
+	void PlaceTrap(Trap* trap);
 
 private:
 	//Toggles battle grid nodes and enters player into a battle ready state.
@@ -119,9 +110,6 @@ private:
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
 	void SwitchInputBetweenAllyUnitsAndPlayer();
-
-	void DrawBattleCard();
-	void ActivateFirstBattleCardInHand();
 
 	std::vector<PlayerUnit*> activePlayerUnits;
 	int activePlayerUnitIndex = 0;

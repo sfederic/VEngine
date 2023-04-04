@@ -10,7 +10,7 @@
 #include "Core/VMath.h"
 #include "Player.h"
 #include "Gameplay/BattleSystem.h"
-#include "Gameplay/BattleCards/TrapCard.h"
+#include "Gameplay/Trap.h"
 #include "Core/Timer.h"
 #include "Core/Log.h"
 #include "UI/UISystem.h"
@@ -84,14 +84,14 @@ void Unit::Tick(float deltaTime)
 
 				//Trap node logic
 				auto currentNode = GetCurrentNode();
-				if (currentNode->trapCard)
+				if (currentNode->trap)
 				{
 					//@Todo: this has the problem where if there are two traps adjacent, the unit will enter a loop
 					isInTrapNode = true;
 					auto activateTrapWidget = UISystem::CreateWidget<ActivateTrapWidget>();
 					activateTrapWidget->AddToViewport();
 					activateTrapWidget->SetLinkedUnit(this);
-					activateTrapWidget->SetLinkedTrapNode(currentNode->trapCard);
+					activateTrapWidget->SetLinkedTrapNode(currentNode->trap);
 				}
 
 				movementPathNodeIndex++;

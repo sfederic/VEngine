@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "ActivateTrapWidget.h"
 #include "Actors/Game/Unit.h"
-#include "Gameplay/BattleCards/TrapCard.h"
+#include "Gameplay/Trap.h"
 
 void ActivateTrapWidget::Draw(float deltaTime)
 {
@@ -10,7 +10,7 @@ void ActivateTrapWidget::Draw(float deltaTime)
 	if (Button(L"Activate Trap", layout))
 	{
 		linkedUnit->isInTrapNode = false;
-		linkedTrapCard->Activate();
+		linkedTrap->Activate();
 		RemoveFromViewportAndDelete();
 		return;
 	}

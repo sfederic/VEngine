@@ -105,7 +105,6 @@ void BattleSystem::MoveToNextTurn()
 		battleSystem.isPlayerTurn = true;
 
 		player->RefreshCombatStats();
-		player->DrawTurnBattleCardHand();
 
 		currentUnitTurnIndex = 0;
 

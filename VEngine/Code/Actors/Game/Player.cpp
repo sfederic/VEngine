@@ -26,11 +26,9 @@
 #include "UI/Game/MemoryGainedWidget.h"
 #include "UI/Game/MemoryRecalledWidget.h"
 #include "UI/Game/PlayerHealthWidget.h"
-#include "UI/Game/BattleCardHandWidget.h"
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/BattleSystem.h"
-#include "Gameplay/BattleCards/TrapCard.h"
-#include "Gameplay/BattleCards/BattleCardSystem.h"
+#include "Gameplay/Trap.h"
 #include "Gameplay/GameUtils.h"
 #include "Render/Material.h"
 #include "Render/BlendStates.h"
@@ -71,8 +69,6 @@ void Player::Start()
 
 	healthWidget = UISystem::CreateWidget<PlayerHealthWidget>();
 
-	battleCardHandWidget = UISystem::CreateWidget<BattleCardHandWidget>();
-
 	playerInputController.SetPlayerUnitToControl(this);
 }
 
@@ -95,7 +91,6 @@ void Player::Tick(float deltaTime)
 		//GameUtils::TriggerGameOver();
 	}
 
-	DrawBattleCard();
 	PrimaryAction();
 	SwitchInputBetweenAllyUnitsAndPlayer();
 	EnterAstralMode();
@@ -158,8 +153,6 @@ void Player::BattleCleanup()
 
 	playerInputController.SetPlayerUnitToControl(this);
 
-	battleCardsInHand.clear();
-
 	auto playerUnits = World::GetAllActorsOfTypeInWorld<PlayerUnit>();
 	for (auto playerUnit : playerUnits)
 	{
@@ -182,9 +175,6 @@ void Player::SetupForBattle()
 	inBattleMode = true;
 
 	healthWidget->AddToViewport();
-
-	DrawTurnBattleCardHand();
-	battleCardHandWidget->AddToViewport();
 }
 
 XMVECTOR Player::GetMeshForward()
@@ -265,8 +255,6 @@ void Player::PrimaryAction()
 			return;
 		}
 	}
-
-	ActivateFirstBattleCardInHand();
 
 	if (Input::GetKeyUp(Keys::Down))
 	{
@@ -471,46 +459,6 @@ void Player::SwitchInputBetweenAllyUnitsAndPlayer()
 	}
 }
 
-void Player::DrawBattleCard()
-{
-	if (battleSystem.isBattleActive)
-	{
-		if (Input::GetKeyDown(Keys::Num1))
-		{
-			auto card = BattleCardSystem::Get().DrawCardAtRandom();
-			battleCardsInHand.push_back(card);
-		}
-	}
-}
-
-void Player::ActivateFirstBattleCardInHand()
-{
-	if (Input::GetKeyUp(Keys::Up))
-	{
-		if (!battleCardsInHand.empty())
-		{
-			auto trapCard = dynamic_cast<TrapCard*>(battleCardsInHand.front());
-			if (trapCard)
-			{
-				trapCard->Set();
-			}
-			else
-			{
-				battleCardsInHand.front()->Activate();
-			}
-		}
-	}
-}
-
-void Player::DrawTurnBattleCardHand()
-{
-	for (int i = battleCardsInHand.size(); i < battleCardHandSizeLimit; i++)
-	{
-		auto card = BattleCardSystem::Get().DrawCardAtRandom();
-		battleCardsInHand.push_back(card);
-	}
-}
-
 bool Player::QuickTalkCheck(Actor* hitActor)
 {
 	if (!inBattleMode && !inConversation)
@@ -705,18 +653,13 @@ bool Player::CheckAttackPositionAgainstUnitDirection(Unit* unit)
 	return false;
 }
 
-void Player::PlaceTrap(TrapCard* trapCard)
+void Player::PlaceTrap(Trap* trap)
 {
 	auto currentNode = GetCurrentNode();
-	if (currentNode->trapCard == nullptr)
+	if (currentNode->trap == nullptr)
 	{
-		currentNode->trapCard = trapCard;
-		currentNode->trapCard->connectedNode = currentNode;
+		currentNode->trap = trap;
+		currentNode->trap->connectedNode = currentNode;
 		currentNode->SetColour(GridNode::trapNodeColour);
 	}
-}
-
-void Player::AddCardToHand(BattleCard* card)
-{
-	battleCardsInHand.emplace_back(card);
 }

@@ -129,13 +129,13 @@ void GridMapPicker::DisplayTrapNodeInformation()
 	auto grid = Grid::system.GetFirstActor();
 	auto node = grid->GetNode(gridIndexX, gridIndexY);
 
-	if (node->trapCard)
+	if (node->trap)
 	{
-		gridMapPickerSelectionInfoWidget->selectedTrapCard = node->trapCard;
+		gridMapPickerSelectionInfoWidget->selectedTrap = node->trap;
 	}
 	else
 	{
-		gridMapPickerSelectionInfoWidget->selectedTrapCard = nullptr;
+		gridMapPickerSelectionInfoWidget->selectedTrap = nullptr;
 	}
 }
 

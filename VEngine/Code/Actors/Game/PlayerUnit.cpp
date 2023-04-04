@@ -138,7 +138,7 @@ void PlayerUnit::PreviewMovementNodesDuringBattle()
 
 	for (auto node : movementNodes)
 	{
-		if (node->trapCard == nullptr)
+		if (node->trap == nullptr)
 		{
 			node->SetColour(GridNode::previewColour);
 		}

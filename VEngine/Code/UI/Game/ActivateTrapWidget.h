@@ -3,16 +3,16 @@
 #include "../Widget.h"
 
 class Unit;
-struct TrapCard;
+struct Trap;
 
 class ActivateTrapWidget : public Widget
 {
 public:
 	virtual void Draw(float deltaTime) override;
 	void SetLinkedUnit(Unit* unit) { linkedUnit = unit; }
-	void SetLinkedTrapNode(TrapCard* trapCard) { linkedTrapCard = trapCard; }
+	void SetLinkedTrapNode(Trap* trap) { linkedTrap = trap; }
 
 private:
 	Unit* linkedUnit = nullptr;
-	TrapCard* linkedTrapCard = nullptr;
+	Trap* linkedTrap = nullptr;
 };

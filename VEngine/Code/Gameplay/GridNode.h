@@ -5,7 +5,7 @@
 using namespace DirectX;
 
 struct HitResult;
-struct TrapCard;
+struct Trap;
 
 struct GridNode
 {
@@ -64,7 +64,7 @@ struct GridNode
 	XMVECTOR GetWorldPosV() { return XMLoadFloat3(&worldPosition); }
 
 	//Linked Trap BattleCard attached to this GridNode
-	TrapCard* trapCard = nullptr;
+	Trap* trap = nullptr;
 
 	//COLOURS
 	inline static XMFLOAT4 normalColour = XMFLOAT4(0.07f, 0.27f, 0.89f, 0.4f);

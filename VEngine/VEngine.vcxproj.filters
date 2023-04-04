@@ -482,16 +482,10 @@
     <ClCompile Include="Code\Gameplay\DialogueStructures.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Gameplay\BattleCards\BattleCard.cpp">
+    <ClCompile Include="Code\Gameplay\Trap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Gameplay\BattleCards\BattleCardSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Gameplay\BattleCards\TrapCard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Gameplay\BattleCards\TrapCards.cpp">
+    <ClCompile Include="Code\Gameplay\Traps.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\Game\AllyUnits\AttackUnit.cpp">
@@ -579,9 +573,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\UI\Game\ActivateTrapWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\UI\Game\BattleCardHandWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\UI\Game\DialogueWidget.cpp">
@@ -1140,13 +1131,7 @@
     <ClInclude Include="Code\Gameplay\ForwardFace.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Gameplay\BattleCards\BattleCard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Gameplay\BattleCards\BattleCardSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Gameplay\BattleCards\TrapCard.h">
+    <ClInclude Include="Code\Gameplay\Trap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\AllyUnits\SurroundAttackUnit.h">
@@ -1234,9 +1219,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\ActivateTrapWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\Game\BattleCardHandWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\DialogueWidget.h">

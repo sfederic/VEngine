@@ -159,10 +159,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Code\Gameplay\BattleCards\BattleCard.cpp" />
-    <ClCompile Include="Code\Gameplay\BattleCards\BattleCardSystem.cpp" />
-    <ClCompile Include="Code\Gameplay\BattleCards\TrapCard.cpp" />
-    <ClCompile Include="Code\Gameplay\BattleCards\TrapCards.cpp" />
+    <ClCompile Include="Code\Gameplay\Trap.cpp" />
+    <ClCompile Include="Code\Gameplay\Traps.cpp" />
     <ClCompile Include="Code\Gameplay\BattleSystem.cpp" />
     <ClCompile Include="Code\Gameplay\ConditionSystem.cpp" />
     <ClCompile Include="Code\Gameplay\DialogueStructures.cpp" />
@@ -204,7 +202,6 @@
     <ClCompile Include="Code\Core\UID.cpp" />
     <ClCompile Include="Code\Core\VEnum.cpp" />
     <ClCompile Include="Code\UI\Game\ActivateTrapWidget.cpp" />
-    <ClCompile Include="Code\UI\Game\BattleCardHandWidget.cpp" />
     <ClCompile Include="Code\UI\Game\DialogueWidget.cpp" />
     <ClCompile Include="Code\UI\Game\GridMapPickerSelectionInfoWidget.cpp" />
     <ClCompile Include="Code\UI\Game\HealthWidget.cpp" />
@@ -318,9 +315,7 @@
     <ClInclude Include="Code\Components\Game\ConditionComponent.h" />
     <ClInclude Include="Code\Components\Game\DialogueComponent.h" />
     <ClInclude Include="Code\Components\Game\MemoryComponent.h" />
-    <ClInclude Include="Code\Gameplay\BattleCards\BattleCard.h" />
-    <ClInclude Include="Code\Gameplay\BattleCards\BattleCardSystem.h" />
-    <ClInclude Include="Code\Gameplay\BattleCards\TrapCard.h" />
+    <ClInclude Include="Code\Gameplay\Trap.h" />
     <ClInclude Include="Code\Gameplay\BattleEnums.h" />
     <ClInclude Include="Code\Gameplay\BattleSystem.h" />
     <ClInclude Include="Code\Gameplay\ConditionSystem.h" />
@@ -490,7 +485,6 @@
     <ClInclude Include="Code\Physics\CollisionLayers.h" />
     <ClInclude Include="Code\Core\UID.h" />
     <ClInclude Include="Code\UI\Game\ActivateTrapWidget.h" />
-    <ClInclude Include="Code\UI\Game\BattleCardHandWidget.h" />
     <ClInclude Include="Code\UI\Game\DialogueWidget.h" />
     <ClInclude Include="Code\UI\Game\GridMapPickerSelectionInfoWidget.h" />
     <ClInclude Include="Code\UI\Game\HealthWidget.h" />

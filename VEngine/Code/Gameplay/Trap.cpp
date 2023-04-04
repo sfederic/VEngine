@@ -1,11 +1,9 @@
 #include "vpch.h"
-#include "TrapCard.h"
+#include "Trap.h"
 #include "Actors/Game/Player.h"
 
-void TrapCard::Set()
+void Trap::Set()
 {
 	auto player = Player::system.GetFirstActor();
 	player->PlaceTrap(this);
-
-	__super::Activate();
 }
