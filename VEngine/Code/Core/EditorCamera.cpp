@@ -77,7 +77,7 @@ void EditorCamera::Tick(float deltaTime)
 XMMATRIX EditorCamera::GetViewMatrix()
 {
 	XMVECTOR forward = GetForwardVectorV();
-	XMVECTOR position = GetLocalPositionV();
+	XMVECTOR position = GetWorldPositionV();
 
 	XMMATRIX view = XMMatrixIdentity();
 
