@@ -197,9 +197,9 @@ float D_GGX(float NdotH, float m)
 	return m2 / (f * f);
 }
 
-float4 CalcDiffuse(Light light, float3 L, float3 N, float LdotH, float NdotL, float NdotV)
+float4 CalcDiffuse(float4 lightColour, float NdotL)
 {
-    return (light.colour * NdotL) / PI;
+    return (lightColour * NdotL) / PI;
 }
 
 float4 CalcSpecularPBR(Light light, float NdotV, float NdotL, float NdotH, float LdotH, float HdotV)
@@ -228,7 +228,7 @@ float CalcFalloff(float intensity, float distance)
     return intensity / max(pow(distance, 2.f), 0.001f);
 }
 
-LightingResult CalcDirectionalLight(Light light, float3 normal, float3 V, float3 L,
+LightingResult CalcDirectionalLight(Light light, float3 normal,
 	float distance, float NdotV, float NdotL, float NdotH, float LdotH, float HdotV)
 {
     LightingResult result;
@@ -238,13 +238,13 @@ LightingResult CalcDirectionalLight(Light light, float3 normal, float3 V, float3
 	return result;
 }
 
-LightingResult CalcPointLight(Light light, float3 V, float4 P, float3 N, float3 L,
-	float distance, float NdotV, float NdotL, float NdotH, float LdotH, float HdotV)
+LightingResult CalcPointLight(Light light, float distance, float NdotV,
+	float NdotL, float NdotH, float LdotH, float HdotV)
 {
 	float falloff = CalcFalloff(light.intensity, distance);
 
     LightingResult result;
-    result.diffuse = CalcDiffuse(light, L, N, LdotH, NdotL, NdotV) * falloff;
+    result.diffuse = CalcDiffuse(light.colour, NdotL) * falloff;
     result.specular = CalcSpecularPBR(light, NdotV, NdotL, NdotH, LdotH, HdotV) * falloff;
 	return result;
 }
@@ -265,7 +265,7 @@ LightingResult CalcSpotLight(Light light, float3 V, float4 P, float3 N, float3 L
 	float falloff = CalcFalloff(light.intensity, distance);
 	float spotIntensity = CalcSpotCone(light, L);
 
-    result.diffuse = CalcDiffuse(light, L, N, LdotH, NdotL, NdotV) * falloff * spotIntensity;
+    result.diffuse = CalcDiffuse(light.colour, NdotL) * falloff * spotIntensity;
     result.specular = CalcSpecularPBR(light, NdotV, NdotL, NdotH, LdotH, HdotV) * falloff * spotIntensity;
 
 	return result;
@@ -307,7 +307,7 @@ LightingResult CalcForwardLighting(float3 V, float4 position, float3 normal)
 		switch (lights[i].lightType)
 		{
 		case POINT_LIGHT:
-			result = CalcPointLight(lights[i], V, position, normal, L, distance, NdotV, NdotL, NdotH, LdotH, HdotV);
+			result = CalcPointLight(lights[i], distance, NdotV, NdotL, NdotH, LdotH, HdotV);
 			break;
 
 		case SPOT_LIGHT:
@@ -315,7 +315,7 @@ LightingResult CalcForwardLighting(float3 V, float4 position, float3 normal)
 			break;
 
 		case DIRECTIONAL_LIGHT:
-            result = CalcDirectionalLight(lights[i], normal, V, L, distance, NdotV, NdotL, NdotH, LdotH, HdotV);
+            result = CalcDirectionalLight(lights[i], normal, distance, NdotV, NdotL, NdotH, LdotH, HdotV);
 			break;
 		}
 
