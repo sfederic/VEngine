@@ -3,6 +3,7 @@
 #include "Components/SpatialComponent.h"
 #include "Components/ComponentSystem.h"
 #include "Render/Light.h"
+#include <winnt.h>
 
 class PointLightComponent : public SpatialComponent
 {
@@ -11,10 +12,9 @@ public:
 
 	PointLightComponent() {}
 	void Create() override;
-	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
-	auto GetLightData() { return lightData; }
+	Light GetLightData();
 
 private:
 	Light lightData;

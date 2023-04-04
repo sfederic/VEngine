@@ -7,11 +7,6 @@ void SpotLightComponent::Create()
     lightData.lightType = (int)LightType::Spot;
 }
 
-void SpotLightComponent::Tick(float deltaTime)
-{
-
-}
-
 Properties SpotLightComponent::GetProps()
 {
     auto props = __super::GetProps();

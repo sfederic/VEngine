@@ -11,7 +11,6 @@ public:
 
 	SpotLightComponent() {}
 	void Create() override;
-	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
 	auto GetLightData() { return lightData; }

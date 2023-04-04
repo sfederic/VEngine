@@ -7,11 +7,6 @@ void PointLightComponent::Create()
 	lightData.lightType = (int)LightType::Point;
 }
 
-void PointLightComponent::Tick(float deltaTime)
-{
-	XMStoreFloat4(&lightData.position, GetWorldPositionV());
-}
-
 Properties PointLightComponent::GetProps()
 {
 	auto props = __super::GetProps();
@@ -20,4 +15,10 @@ Properties PointLightComponent::GetProps()
 	props.Add("Intensity", &lightData.intensity);
 	props.Add("LightEnabled", &lightData.enabled);
 	return props;
+}
+
+Light PointLightComponent::GetLightData()
+{
+	XMStoreFloat4(&lightData.position, GetWorldPositionV());
+	return lightData;
 }

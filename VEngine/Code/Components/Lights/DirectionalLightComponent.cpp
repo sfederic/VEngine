@@ -8,12 +8,6 @@ void DirectionalLightComponent::Create()
     lightData.lightType = (int)LightType::Directional;
 }
 
-void DirectionalLightComponent::Tick(float deltaTime)
-{
-    XMStoreFloat4(&lightData.position, GetWorldPositionV());
-    XMStoreFloat4(&lightData.direction, GetForwardVectorV());
-}
-
 Properties DirectionalLightComponent::GetProps()
 {
     auto props = __super::GetProps();
@@ -21,4 +15,11 @@ Properties DirectionalLightComponent::GetProps()
     props.Add("Colour", &lightData.colour);
     props.Add("LightEnabled", &lightData.enabled);
     return props;
+}
+
+Light DirectionalLightComponent::GetLightData()
+{
+    XMStoreFloat4(&lightData.position, GetWorldPositionV());
+    XMStoreFloat4(&lightData.direction, GetForwardVectorV());
+    return lightData;
 }

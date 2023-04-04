@@ -11,10 +11,9 @@ public:
 
 	DirectionalLightComponent() {}
 	void Create() override;
-	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
-	auto GetLightData() { return lightData; }
+	Light GetLightData();
 	auto GetShadowMapOrthoSize() { return shadowMapOrthoSize; }
 
 private:
