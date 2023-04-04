@@ -92,7 +92,6 @@ void Player::Tick(float deltaTime)
 	}
 
 	PrimaryAction();
-	SwitchInputBetweenAllyUnitsAndPlayer();
 	EnterAstralMode();
 	ToggleMemoryMenu();
 
@@ -429,33 +428,6 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 		}
 
 		previousHitTransparentActors.clear();
-	}
-}
-
-void Player::SwitchInputBetweenAllyUnitsAndPlayer()
-{
-	if (Input::GetKeyUp(Keys::X))
-	{
-		if (activePlayerUnitIndex < activePlayerUnits.size() - 1)
-		{
-			activePlayerUnitIndex++;
-
-			PlayerUnit* nextUnitToControl = activePlayerUnits[activePlayerUnitIndex];
-
-			//make switching between ally units and player less jarring by using previous unit rotation
-			XMVECTOR previousPlayerUnitMeshRotation = nextUnitToControl->mesh->GetWorldRotationV();
-			nextUnitToControl->SetRotation(GetRotationV());
-			nextUnitToControl->nextRot = GetRotationV();
-			nextUnitToControl->mesh->SetWorldRotation(previousPlayerUnitMeshRotation);
-
-			playerInputController.SetPlayerUnitToControl(nextUnitToControl);
-		}
-		else
-		{
-			activePlayerUnitIndex = 0;
-
-			playerInputController.SetPlayerUnitToControl(this);
-		}
 	}
 }
 

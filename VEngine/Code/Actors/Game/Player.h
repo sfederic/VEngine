@@ -16,7 +16,6 @@ struct Memory;
 struct GridActor;
 struct Unit;
 struct Trap;
-struct BattleCard;
 
 class Player : public PlayerUnit
 {
@@ -48,31 +47,6 @@ public:
 	void End() override;
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
-
-	template <typename AllyUnitType>
-	void SummonAllyUnit()
-	{
-		static_assert(std::is_base_of<PlayerUnit, AllyUnitType>() == true);
-
-		if (activePlayerUnits.size() == 3)
-		{
-			Log("Cannot summon any more ally units. Max is 3.");
-			return;
-		}
-
-		Transform transform;
-		XMStoreFloat3(&transform.position, GetPositionV() + GetForwardVectorV());
-		transform.rotation = mesh->GetWorldRotation();
-
-		auto attackUnit = AllyUnitType::system.Add(transform);
-		attackUnit->Start();
-
-		playerInputController.SetPlayerUnitToControl(attackUnit);
-
-		activePlayerUnits.push_back(attackUnit);
-		activePlayerUnitIndex = activePlayerUnits.size() - 1;
-		playerInputController.SetPlayerUnitToControl(attackUnit);
-	}
 
 	//called at every battle turn end
 	void RefreshCombatStats();
@@ -108,10 +82,4 @@ private:
 	bool CheckAttackPositionAgainstUnitDirection(Unit* unit);
 
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
-
-	void SwitchInputBetweenAllyUnitsAndPlayer();
-
-	std::vector<PlayerUnit*> activePlayerUnits;
-	int activePlayerUnitIndex = 0;
-	const static int battleCardHandSizeLimit = 5;
 };
