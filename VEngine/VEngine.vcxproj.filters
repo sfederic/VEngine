@@ -488,9 +488,6 @@
     <ClCompile Include="Code\Gameplay\BattleCards\BattleCardSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Gameplay\BattleCards\SummonCards.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Gameplay\BattleCards\TrapCard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

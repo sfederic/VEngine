@@ -161,7 +161,6 @@
     </ClCompile>
     <ClCompile Include="Code\Gameplay\BattleCards\BattleCard.cpp" />
     <ClCompile Include="Code\Gameplay\BattleCards\BattleCardSystem.cpp" />
-    <ClCompile Include="Code\Gameplay\BattleCards\SummonCards.cpp" />
     <ClCompile Include="Code\Gameplay\BattleCards\TrapCard.cpp" />
     <ClCompile Include="Code\Gameplay\BattleCards\TrapCards.cpp" />
     <ClCompile Include="Code\Gameplay\BattleSystem.cpp" />
