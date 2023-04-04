@@ -13,7 +13,6 @@
 #include "Gameplay/BattleSystem.h"
 #include "Gameplay/GridNode.h"
 #include "Gameplay/GameUtils.h"
-#include "Gameplay/FusionSystem.h"
 #include "UI/Game/PlayerActionBarWidget.h"
 
 PlayerUnit::PlayerUnit()
@@ -46,8 +45,6 @@ void PlayerUnit::ControllerInput(float deltaTime)
 	RotationInput(deltaTime);
 
 	Attack();
-
-	FuseWithAllyUnit();
 }
 
 void PlayerUnit::CheckNextMoveNode(XMVECTOR previousPos)
@@ -198,29 +195,6 @@ void PlayerUnit::RotationInput(float deltaTime)
 		{
 			constexpr float angle = XMConvertToRadians(-90.f);
 			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), angle));
-		}
-	}
-}
-
-void PlayerUnit::FuseWithAllyUnit()
-{
-	if (Input::GetKeyUp(Keys::Up) && !isMainPlayer)
-	{
-		auto playerUnits = Grid::system.GetFirstActor()->GetAllPlayerUnitsAtNode(GetCurrentNode());
-		if (playerUnits.size() > 1)
-		{
-			//Note using the ActorSystem here, which returns the Actor's typename.
-			auto fusedUnit = FusionSystem::Fuse(playerUnits[0]->GetActorSystem()->GetName(), playerUnits[1]->GetActorSystem()->GetName());
-			if (fusedUnit)
-			{
-				fusedUnit->SetTransform(playerUnits[0]->GetTransform());
-
-				GameUtils::SetActiveCamera(fusedUnit->camera);
-				GameUtils::SetActiveCameraTarget(fusedUnit);
-
-				playerUnits[0]->GetActorSystem()->RemoveInterfaceActor(playerUnits[0]);
-				playerUnits[1]->GetActorSystem()->RemoveInterfaceActor(playerUnits[1]);
-			}
 		}
 	}
 }

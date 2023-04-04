@@ -167,7 +167,6 @@
     <ClCompile Include="Code\Gameplay\BattleSystem.cpp" />
     <ClCompile Include="Code\Gameplay\ConditionSystem.cpp" />
     <ClCompile Include="Code\Gameplay\DialogueStructures.cpp" />
-    <ClCompile Include="Code\Gameplay\FusionSystem.cpp" />
     <ClCompile Include="Code\Gameplay\GridNode.cpp" />
     <ClCompile Include="Code\Gameplay\Memory.cpp" />
     <ClCompile Include="Code\Gameplay\PlayerInputController.cpp" />
@@ -328,7 +327,6 @@
     <ClInclude Include="Code\Gameplay\ConditionSystem.h" />
     <ClInclude Include="Code\Gameplay\DialogueStructures.h" />
     <ClInclude Include="Code\Gameplay\ForwardFace.h" />
-    <ClInclude Include="Code\Gameplay\FusionSystem.h" />
     <ClInclude Include="Code\Gameplay\GridNode.h" />
     <ClInclude Include="Code\Gameplay\Memory.h" />
     <ClInclude Include="Code\Gameplay\PlayerInputController.h" />

@@ -482,9 +482,6 @@
     <ClCompile Include="Code\Gameplay\DialogueStructures.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Gameplay\FusionSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Gameplay\BattleCards\BattleCard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1144,9 +1141,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\ForwardFace.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Gameplay\FusionSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\BattleCards\BattleCard.h">

@@ -37,8 +37,6 @@ protected:
 	void MovementInput(float deltaTime);
 	void RotationInput(float deltaTime);
 
-	void FuseWithAllyUnit();
-
 private:
 	void Attack();
 
