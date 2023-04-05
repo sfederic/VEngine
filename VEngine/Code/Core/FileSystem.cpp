@@ -65,7 +65,7 @@ void FileSystem::SerialiseAllSystems()
 
 	s.WriteLine(L"end");
 
-	AssetSystem::WriteOutAllVertexColourData();
+	//AssetSystem::WriteOutAllVertexColourData();
 
 	debugMenu.AddNotification(VString::wformat(L"%S world saved", World::worldFilename.c_str()));
 
@@ -305,7 +305,7 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	ResetWorldState();
 
-	AssetSystem::LoadVertexColourDataFromFile();
+	//AssetSystem::LoadVertexColourDataFromFile();
 
 	debugMenu.AddNotification(VString::wformat(L"%S world loaded", World::worldFilename.c_str()));
 
