@@ -2,7 +2,9 @@
 #include "Console.h"
 #include <dwrite.h>
 #include <d2d1.h>
+#include "Components/Component.h"
 #include "Core/Input.h"
+#include "Core/Log.h"
 #include "UI/UISystem.h"
 #include "UI/Layout.h"
 #include "DebugMenu.h"
@@ -129,6 +131,18 @@ void Console::Init()
 			debugMenu.vertexPaintMenuOpen = !debugMenu.vertexPaintMenuOpen;
 			WorldEditor::vertexPaintActive = !WorldEditor::vertexPaintActive;
 		}, "Activate vertex paint mode."));
+
+	executeMap.emplace(L"RESET UID",
+		std::make_pair([]() { 
+				ResetUIDCache();
+				auto components = World::GetAllComponentsInWorld();
+				for (auto component : components)
+				{
+					component->SetUID(GenerateUID());
+				}
+				Log("Reset UIDs of %d components.", components.size());
+			},
+			"Resets all component UIDs in world."));
 }
 
 void Console::ConsoleInput()
