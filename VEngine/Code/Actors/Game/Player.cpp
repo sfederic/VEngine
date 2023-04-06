@@ -291,6 +291,7 @@ void Player::PrimaryAction()
 			if (DialogueCheck(hit.hitActor)) {}
 			else if (QuickTalkCheck(hit.hitActor)) {}
 			else if (InteractCheck(hit.hitActor)) {}
+			else if (DestructibleCheck(hit.hitActor)) {}
 		}
 		else
 		{
