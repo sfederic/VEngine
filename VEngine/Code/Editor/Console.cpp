@@ -3,6 +3,7 @@
 #include <dwrite.h>
 #include <d2d1.h>
 #include "Components/Component.h"
+#include "Components/MeshComponent.h"
 #include "Core/Input.h"
 #include "Core/Log.h"
 #include "UI/UISystem.h"
@@ -19,6 +20,8 @@ std::map<std::wstring, std::pair<std::function<void()>, std::string>> Console::e
 bool Console::bConsoleActive;
 
 std::wstring consoleString;
+
+void SetAllMaterialsToNotUseTexture();
 
 void Console::Init()
 {
@@ -143,6 +146,22 @@ void Console::Init()
 				Log("Reset UIDs of %d components.", components.size());
 			},
 			"Resets all component UIDs in world."));
+
+	executeMap.emplace(L"NO TEXTURE",
+		std::make_pair([]() {
+				for (auto& mesh : MeshComponent::system.GetComponents())
+				{
+					mesh->SetUseTexture(false);
+				}
+			}, "Sets all materials in world to NOT use texture via material shader data."));
+
+	executeMap.emplace(L"USE TEXTURE",
+		std::make_pair([]() {
+			for (auto& mesh : MeshComponent::system.GetComponents())
+			{
+				mesh->SetUseTexture(true);
+			}
+			}, "Sets all materials in world to USE texture via material shader data."));
 }
 
 void Console::ConsoleInput()
