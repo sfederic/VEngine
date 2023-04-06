@@ -1,20 +1,3 @@
-DirectionalLightActor
-1
- Enabled
-1
- Position
-0 5 0
- Rotation
-0.707107 0 0 0.707107
- Scale
-1 1 1
- Visible
-1
-Name
-DirectionalLightActor0
-UID
-641275777
-next
 Grid
 1
  Enabled
@@ -207,6 +190,38 @@ Player0
 UID
 1821458077
 next
+PointLightActor
+2
+ Enabled
+1
+ Position
+0 3 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+PointLightActor0
+UID
+766074585
+next
+ Enabled
+1
+ Position
+3 3 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+PointLightActor1
+UID
+3163125789
+next
 CameraComponent
 1
 1821458077
@@ -228,7 +243,7 @@ Far Z
 Near Z
 0.01
 UID
-1209879628
+4191034866
 next
 DialogueComponent
 1
@@ -241,28 +256,7 @@ Dialogue
 File
 
 UID
-2320164329
-next
-DirectionalLightComponent
-1
-641275777
-DirectionalLight
- Enabled
-1
- Pos
-0 5 0
- Rot
-0.707107 0 0 0.707107
- Scale
-1 1 1
- Visible
-1
-Colour
-1 1 1 1
-LightEnabled
-1
-UID
-1797903084
+224211347
 next
 EmptyComponent
 1
@@ -279,7 +273,7 @@ Root
  Visible
 1
 UID
-2029735208
+142500684
 next
 InstanceMeshComponent
 1
@@ -332,7 +326,7 @@ Static
 Trans. Occlude
 0
 UID
-1374111455
+1231179636
 next
 MeshComponent
 11
@@ -365,7 +359,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wood64x64.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -385,7 +379,7 @@ Static
 Trans. Occlude
 0
 UID
-441785937
+1933260691
 next
 243756308
 Mesh
@@ -416,7 +410,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+stone.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -436,7 +430,7 @@ Static
 Trans. Occlude
 0
 UID
-716077247
+3321134610
 next
 400740303
 Mesh
@@ -467,7 +461,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+stone.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -487,7 +481,7 @@ Static
 Trans. Occlude
 0
 UID
-716077247
+699319177
 next
 404852091
 Mesh
@@ -518,7 +512,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wood64x64.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -538,7 +532,7 @@ Static
 Trans. Occlude
 0
 UID
-3707946116
+3069586691
 next
 3046583709
 Mesh
@@ -569,7 +563,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wood64x64.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -589,7 +583,7 @@ Static
 Trans. Occlude
 0
 UID
-3707946116
+1225982177
 next
 331873689
 Mesh
@@ -620,7 +614,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wood_furniture.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -640,7 +634,7 @@ Static
 Trans. Occlude
 0
 UID
-263427331
+635424566
 next
 3009135505
 Mesh
@@ -671,7 +665,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wood_furniture.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -691,7 +685,7 @@ Static
 Trans. Occlude
 0
 UID
-263427331
+1434852331
 next
 2824304245
 Mesh
@@ -722,7 +716,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wood_furniture.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -742,7 +736,7 @@ Static
 Trans. Occlude
 0
 UID
-263427331
+1553010711
 next
 678748507
 Mesh
@@ -759,7 +753,7 @@ Mesh
 Casts Shadow
 1
 M_Ambient
-1 1 1 1
+0 0 1 1
 M_Blend State
 null
 M_Metallic
@@ -773,9 +767,9 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wall.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -793,7 +787,7 @@ Static
 Trans. Occlude
 0
 UID
-3002252157
+521607249
 next
 3897605879
 Mesh
@@ -824,7 +818,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wall.png
 M_Use Texture
 1
 M_UvOffset
@@ -844,7 +838,7 @@ Static
 Trans. Occlude
 0
 UID
-3002252157
+983403955
 next
 1821458077
 Mesh
@@ -895,6 +889,50 @@ Static
 Trans. Occlude
 0
 UID
-3194870068
+3352101490
+next
+PointLightComponent
+2
+766074585
+PointLight
+ Enabled
+1
+ Pos
+0 3 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
+UID
+2813405513
+next
+3163125789
+PointLight
+ Enabled
+1
+ Pos
+3 3 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
+UID
+1223808105
 next
 end

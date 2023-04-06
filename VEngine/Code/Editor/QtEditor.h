@@ -31,5 +31,5 @@ private:
 	void SetEditorFont();
 	void EnableDarkMode();
 
-	QString editorTitle = "VEngine | Foxbot | ";
+	QString editorTitle = "VEngine | Vagrant Tactics | ";
 };
