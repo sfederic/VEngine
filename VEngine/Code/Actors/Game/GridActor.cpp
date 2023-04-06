@@ -12,11 +12,11 @@
 
 GridActor::GridActor()
 {
-	mesh = MeshComponent::system.Add("Mesh", this);
+	mesh = CreateComponent("Mesh", MeshComponent("cube.vmesh", "test.png"));
 	rootComponent = mesh;
 
-	memoryComponent = MemoryComponent::system.Add("Memory", this);
-	dialogueComponent = DialogueComponent::system.Add("Dialogue", this);
+	memoryComponent = CreateComponent<MemoryComponent>("Memory");
+	dialogueComponent = CreateComponent<DialogueComponent>("Dialogue");
 }
 
 void GridActor::Start()
