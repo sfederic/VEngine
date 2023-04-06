@@ -1651,6 +1651,7 @@ void SetLightsConstantBufferData()
 	}
 
 	shaderLights.numLights = shaderLightsIndex;
+	assert(shaderLights.numLights < ShaderLights::MAX_LIGHTS);
 
 	XMStoreFloat4(&shaderLights.eyePosition, activeCamera->GetWorldPositionV());
 
