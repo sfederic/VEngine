@@ -386,6 +386,12 @@ void ProcessAllChildNodes(FbxNode* node, MeshData& meshData)
 				&meshData.vertices[index0], &meshData.vertices[index1], &meshData.vertices[index2] 
 			};
 
+			//Assert all normals are equal
+			const XMVECTOR n0 = XMLoadFloat3(&verts[index0]->normal);
+			const XMVECTOR n1 = XMLoadFloat3(&verts[index1]->normal);
+			const XMVECTOR n2 = XMLoadFloat3(&verts[index2]->normal);
+			assert(XMVector4Equal(n0, n1) && XMVector4Equal(n1, n2));
+
 			//tangent/bitangent testing
 			//Ref:https://learnopengl.com/Advanced-Lighting/Normal-Mapping
 			const XMFLOAT3 edge1 = VMath::Float3Subtract(verts[1]->pos, verts[0]->pos);
