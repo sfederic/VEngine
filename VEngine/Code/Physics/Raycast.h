@@ -19,7 +19,7 @@ struct HitResult
 	
 	//Position the ray has hit in world
 	XMFLOAT3 hitPos = XMFLOAT3(0.f, 0.f, 0.f);
-	XMFLOAT3 normal = XMFLOAT3(0.f, 0.f, 0.f);
+	XMFLOAT3 hitNormal = XMFLOAT3(0.f, 0.f, 0.f);
 	XMFLOAT2 uv = XMFLOAT2(0.f, 0.f);
 
 	//List of actors to ignore when cast
@@ -56,7 +56,7 @@ struct HitResult
 
 	//Result is in world space.
 	XMVECTOR GetHitPosV() { return XMLoadFloat3(&hitPos); }
-	XMVECTOR GetNormalV() { return XMLoadFloat3(&normal); }
+	XMVECTOR GetNormalV() { return XMLoadFloat3(&hitNormal); }
 
 	std::vector<int> hitVertIndexes;
 };

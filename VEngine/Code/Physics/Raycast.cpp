@@ -94,7 +94,7 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 				continue;
 			}
 
-			BoundingOrientedBox boundingBox = VMath::GetBoundingBoxInWorld(mesh);
+			const BoundingOrientedBox boundingBox = VMath::GetBoundingBoxInWorld(mesh);
 
 			float hitDistance = 0.f;
 			if (boundingBox.Intersects(hitResult.origin, hitResult.direction, hitDistance))
@@ -162,7 +162,7 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 
 	for (auto component : hitResult.hitComponents)
 	{
-		XMMATRIX model = component->GetWorldMatrix();
+		const XMMATRIX meshWorldMatrix = component->GetWorldMatrix();
 
 		auto mesh = dynamic_cast<MeshComponent*>(component);
 		if (mesh)
@@ -176,13 +176,13 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 				const int index2 = i * 3 + 2;
 
 				XMVECTOR v0 = XMLoadFloat3(&vertices[index0].pos);
-				v0 = XMVector3TransformCoord(v0, model);
+				v0 = XMVector3TransformCoord(v0, meshWorldMatrix);
 
 				XMVECTOR v1 = XMLoadFloat3(&vertices[index1].pos);
-				v1 = XMVector3TransformCoord(v1, model);
+				v1 = XMVector3TransformCoord(v1, meshWorldMatrix);
 
 				XMVECTOR v2 = XMLoadFloat3(&vertices[index2].pos);
-				v2 = XMVector3TransformCoord(v2, model);
+				v2 = XMVector3TransformCoord(v2, meshWorldMatrix);
 
 				float hitDistance = 0.f;
 				if (DirectX::TriangleTests::Intersects(hitResult.origin, hitResult.direction, v0, v1, v2, hitDistance))
@@ -190,23 +190,32 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 					HitResult tempHitResult = hitResult;
 					tempHitResult.hitDistance = hitDistance;
 
+					//Get normal for triangle
+					XMVECTOR normal = XMLoadFloat3(&mesh->meshDataProxy.vertices.at(index0).normal);
+					normal = XMVector3TransformNormal(normal, meshWorldMatrix);
+					normal = XMVector3Normalize(normal);
+					XMStoreFloat3(&tempHitResult.hitNormal, normal);
+
+					//Check if back facing triangle
+					const float angleBetweenRaycastDirectionAndTriangleNormal =
+						XMConvertToDegrees(XMVector3AngleBetweenNormals(
+							normal, 
+							hitResult.direction).m128_f32[0]);
+					if (angleBetweenRaycastDirectionAndTriangleNormal < 90)
+					{
+						//has hit the back face of a triangle, so skip
+						continue;
+					}
+
+					//hit position
 					const XMVECTOR hitPosition = hitResult.origin + (hitResult.direction * tempHitResult.hitDistance);
 
+					//Hit vertex indices
 					std::map<int, XMVECTOR> indexToVertMap;
 					indexToVertMap.emplace(index0, v0);
 					indexToVertMap.emplace(index1, v1);
 					indexToVertMap.emplace(index2, v2);
-
 					tempHitResult.hitVertIndexes.push_back(VMath::GetIndexOfClosestVertexFromTriangleIntersect(indexToVertMap, hitPosition));
-
-					//Get normal for triangle
-					XMVECTOR normal = XMVectorZero();
-					normal += XMLoadFloat3(&mesh->meshDataProxy.vertices.at(index0).normal);
-					normal += XMLoadFloat3(&mesh->meshDataProxy.vertices.at(index1).normal);
-					normal += XMLoadFloat3(&mesh->meshDataProxy.vertices.at(index2).normal);
-
-					normal = XMVector3Normalize(normal);
-					XMStoreFloat3(&tempHitResult.normal, normal);
 
 					//Get hit UV
 					float hitU, hitV;
