@@ -168,8 +168,8 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 		if (mesh)
 		{
 			const auto& vertices = mesh->meshDataProxy.GetVertices();
-			const int vertexTriangleSize = vertices.size() / 3;
-			for (int i = 0; i < vertexTriangleSize; i++)
+			const int vertexTriangleCount = vertices.size() / 3;
+			for (int i = 0; i < vertexTriangleCount; i++)
 			{
 				const int index0 = i * 3;
 				const int index1 = i * 3 + 1;
