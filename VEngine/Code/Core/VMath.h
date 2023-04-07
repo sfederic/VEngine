@@ -86,4 +86,6 @@ namespace VMath
 	void GetBarycentricCoords(XMVECTOR p0, XMVECTOR p1, XMVECTOR p2, XMVECTOR hitPoint, float& b1, float& b2);
 	void TriangleXYZToUV(Vertex& v0, Vertex& v1, Vertex& v2, XMVECTOR hitPoint, float& u, float& v);
 	int GetIndexOfClosestVertexFromTriangleIntersect(std::map<int, XMVECTOR>& vertexPositions, XMVECTOR hitPoint);
+
+	void HomogenousWorldPosToScreenSpaceCoords(XMVECTOR worldPos, int& screenX, int& screenY);
 }

@@ -8,6 +8,7 @@
 #include "Camera.h"
 #include "Components/CameraComponent.h"
 #include "Render/Vertex.h"
+#include "Render/Renderer.h"
 
 namespace VMath
 {
@@ -536,5 +537,19 @@ namespace VMath
 
         assert(vertexIndex != -1);
         return vertexIndex;
+    }
+
+    void HomogenousWorldPosToScreenSpaceCoords(XMVECTOR worldPos, int& screenX, int& screenY)
+    {
+        //What you need to do here it take the actor's position after it's been multiplied 
+        //by the MVP matrix on the CPU side of things (Actor::GetHomogonesouPositionV(),
+        //divide it by the W component and multiply it out by the viewport.
+        //REF:http://www.windows-tech.info/5/a80747e145dd9062.php
+
+        const float f1 = worldPos.m128_f32[0] / worldPos.m128_f32[3];
+        const float f2 = worldPos.m128_f32[1] / worldPos.m128_f32[3];
+
+        screenX = ((f1 * 0.5f) + 0.5) * Renderer::GetViewportWidth();
+        screenY = ((f2 * -0.5f) + 0.5) * Renderer::GetViewportHeight();
     }
 }
