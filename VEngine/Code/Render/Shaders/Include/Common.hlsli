@@ -31,6 +31,7 @@ struct VS_OUT
     float3 normal : NORMAL;
 	float3 tangent : TANGENT0;
     float2 uv : TEXCOORD0;
+	float2 lightMapUV : LM_TEXCOORD;
     float4 shadowPos : TEXCOORD1;
     uint instanceID : SV_InstanceID;
 };
@@ -41,6 +42,7 @@ Texture2D reflectionMap : register(t2);
 StructuredBuffer<InstanceData> instanceData : register(t3);
 TextureCube environmentMap : register(t4);
 Texture2D normalMap : register(t5);
+Texture2D lightMap : register(t6);
 
 SamplerState s : register(s0);
 SamplerComparisonState shadowSampler : register(s1);
@@ -125,6 +127,13 @@ cbuffer cbMeshData : register(b5)
 	float3 meshPosition;
     float cbMeshDataPad;
 }
+
+cbuffer ShaderMeshLightMapData : register(b6)
+{
+    int2 atlasSegmentOffset;
+    int2 atlasSegmentSize;
+    int2 atlasSize;
+};
 
 //Stole all this from https://interplayoflight.wordpress.com/2021/12/31/occlusion-and-directionality-in-image-based-lighting-implementation-details/ for simple diffuse testing.
 //Was the only online example working with DXMath's SH lib.
