@@ -620,6 +620,9 @@
     <ClCompile Include="Code\Components\Game\MemoryComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BMPFileWriter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1270,6 +1273,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Asset\VertexColourHeader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BMPFileWriter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
