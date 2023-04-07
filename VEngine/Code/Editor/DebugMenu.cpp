@@ -5,6 +5,7 @@
 #include "backends/imgui_impl_dx11.h"
 #include "DebugMenu.h"
 #include "Core/Input.h"
+#include "Core/VMath.h"
 #include "Editor.h"
 #include "Render/Renderer.h"
 #include "Render/PipelineObjects.h"
@@ -455,6 +456,11 @@ void DebugMenu::RenderUVMenu()
 
 	if (WorldEditor::GetPickedActor())
 	{
+		const auto worldPosition = WorldEditor::GetPickedActor()->GetHomogeneousPositionV();
+		int sx = 0, sy = 0;
+		VMath::HomogenousWorldPosToScreenSpaceCoords(worldPosition, sx, sy);
+		ImGui::SetWindowPos(ImVec2(sx, sy));
+
 		for (const auto mesh : WorldEditor::GetPickedActor()->GetComponentsOfType<MeshComponent>())
 		{
 			auto& materialShaderData = mesh->GetMaterial().materialShaderData;
