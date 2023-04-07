@@ -9,6 +9,10 @@
 #include "Core/Core.h"
 #include "Actors/Actor.h"
 #include "Components/MeshComponent.h"
+#include "Components/BoxTriggerComponent.h"
+#include "Components/Lights/PointLightComponent.h"
+#include "Components/Lights/SpotLightComponent.h"
+#include "Components/Lights/DirectionalLightComponent.h"
 #include "Core/World.h"
 
 bool IsIgnoredActor(Actor* actor, HitResult& hitResult)
@@ -62,7 +66,6 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 	hitResult.hitActors.clear();
 	hitResult.hitComponents.clear();
 
-	//@Todo: need to come back here and add editor collision test for Triggers and Lights
 	const auto checkSpatialComponentCollision = [&](SpatialComponent* spatialComponent)
 	{
 		if (!spatialComponent->IsActive())
@@ -108,6 +111,23 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 		for (auto mesh : actor->GetComponentsOfType<MeshComponent>())
 		{
 			checkSpatialComponentCollision(mesh);
+		}
+	}
+
+	//Only add editor mesh components in when gameplay off
+	if (!Core::gameplayOn)
+	{
+		for (auto& pointLight : PointLightComponent::system.GetComponents()) {
+			checkSpatialComponentCollision(pointLight.get());
+		}
+		for (auto& spotLight : SpotLightComponent::system.GetComponents()) {
+			checkSpatialComponentCollision(spotLight.get());
+		}
+		for (auto& directionalLight : DirectionalLightComponent::system.GetComponents()) {
+			checkSpatialComponentCollision(directionalLight.get());
+		}
+		for (auto& boxTrigger : BoxTriggerComponent::system.GetComponents()) {
+			checkSpatialComponentCollision(boxTrigger.get());
 		}
 	}
 
@@ -165,76 +185,121 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 {
 	std::vector<HitResult> hitResults;
 
+	const auto checkMeshVerticesCollision = [&](MeshComponent& mesh)
+	{
+		const XMMATRIX meshWorldMatrix = mesh.GetWorldMatrix();
+
+		const auto& vertices = mesh.meshDataProxy.GetVertices();
+		const int vertexTriangleCount = vertices.size() / 3;
+		for (int i = 0; i < vertexTriangleCount; i++)
+		{
+			const int index0 = i * 3;
+			const int index1 = i * 3 + 1;
+			const int index2 = i * 3 + 2;
+
+			XMVECTOR v0 = XMLoadFloat3(&vertices[index0].pos);
+			v0 = XMVector3TransformCoord(v0, meshWorldMatrix);
+
+			XMVECTOR v1 = XMLoadFloat3(&vertices[index1].pos);
+			v1 = XMVector3TransformCoord(v1, meshWorldMatrix);
+
+			XMVECTOR v2 = XMLoadFloat3(&vertices[index2].pos);
+			v2 = XMVector3TransformCoord(v2, meshWorldMatrix);
+
+			float hitDistance = 0.f;
+			if (DirectX::TriangleTests::Intersects(hitResult.origin, hitResult.direction, v0, v1, v2, hitDistance))
+			{
+				HitResult tempHitResult = hitResult;
+				tempHitResult.hitDistance = hitDistance;
+
+				//Get normal for triangle
+				XMVECTOR normal = XMLoadFloat3(&mesh.meshDataProxy.vertices.at(index0).normal);
+				normal = XMVector3TransformNormal(normal, meshWorldMatrix);
+				normal = XMVector3Normalize(normal);
+				XMStoreFloat3(&tempHitResult.hitNormal, normal);
+
+				//Check if back facing triangle
+				const float angleBetweenRaycastDirectionAndTriangleNormal =
+					XMConvertToDegrees(XMVector3AngleBetweenNormals(
+						normal,
+						hitResult.direction).m128_f32[0]);
+				if (angleBetweenRaycastDirectionAndTriangleNormal < 90)
+				{
+					//has hit the back face of a triangle, so skip
+					continue;
+				}
+
+				//hit position
+				const XMVECTOR hitPosition = hitResult.origin + (hitResult.direction * tempHitResult.hitDistance);
+
+				//Hit vertex indices
+				std::map<int, XMVECTOR> indexToVertMap;
+				indexToVertMap.emplace(index0, v0);
+				indexToVertMap.emplace(index1, v1);
+				indexToVertMap.emplace(index2, v2);
+				tempHitResult.hitVertIndexes.push_back(VMath::GetIndexOfClosestVertexFromTriangleIntersect(indexToVertMap, hitPosition));
+
+				//Get hit UV
+				float hitU, hitV;
+				VMath::TriangleXYZToUV(mesh.meshDataProxy.vertices.at(index0),
+					mesh.meshDataProxy.vertices.at(index1),
+					mesh.meshDataProxy.vertices.at(index2), hitPosition, hitU, hitV);
+				tempHitResult.uv = XMFLOAT2(hitU, hitV);
+
+				//Set hit component and actor
+				tempHitResult.hitComponent = &mesh;
+				tempHitResult.hitActor = World::GetActorByUID(mesh.GetOwnerUID());
+
+				hitResults.emplace_back(tempHitResult);
+			}
+		}
+	};
+
+	const auto setDebugMesh = [&](SpatialComponent* component, std::string_view debugMeshName)
+	{
+		auto debugMesh = MeshComponent::GetDebugMesh("DebugIcoSphere");
+		debugMesh->transform = component->transform;
+		debugMesh->SetOwnerUID(component->GetOwnerUID());
+		checkMeshVerticesCollision(*debugMesh);
+	};
+
 	for (auto component : hitResult.hitComponents)
 	{
-		const XMMATRIX meshWorldMatrix = component->GetWorldMatrix();
-
 		auto mesh = dynamic_cast<MeshComponent*>(component);
 		if (mesh)
 		{
-			const auto& vertices = mesh->meshDataProxy.GetVertices();
-			const int vertexTriangleCount = vertices.size() / 3;
-			for (int i = 0; i < vertexTriangleCount; i++)
+			checkMeshVerticesCollision(*mesh);
+			continue;
+		}
+
+		if (!Core::gameplayOn)
+		{
+			auto pointLight = dynamic_cast<PointLightComponent*>(component);
+			if (pointLight)
 			{
-				const int index0 = i * 3;
-				const int index1 = i * 3 + 1;
-				const int index2 = i * 3 + 2;
+				setDebugMesh(pointLight, "DebugIcoSphere");
+				continue;
+			}
 
-				XMVECTOR v0 = XMLoadFloat3(&vertices[index0].pos);
-				v0 = XMVector3TransformCoord(v0, meshWorldMatrix);
+			auto spotLight = dynamic_cast<SpotLightComponent*>(component);
+			if (spotLight)
+			{
+				setDebugMesh(spotLight, "DebugCone");
+				continue;
+			}
 
-				XMVECTOR v1 = XMLoadFloat3(&vertices[index1].pos);
-				v1 = XMVector3TransformCoord(v1, meshWorldMatrix);
+			auto directionalLight = dynamic_cast<DirectionalLightComponent*>(component);
+			if (directionalLight)
+			{
+				setDebugMesh(directionalLight, "DebugSphere");
+				continue;
+			}
 
-				XMVECTOR v2 = XMLoadFloat3(&vertices[index2].pos);
-				v2 = XMVector3TransformCoord(v2, meshWorldMatrix);
-
-				float hitDistance = 0.f;
-				if (DirectX::TriangleTests::Intersects(hitResult.origin, hitResult.direction, v0, v1, v2, hitDistance))
-				{
-					HitResult tempHitResult = hitResult;
-					tempHitResult.hitDistance = hitDistance;
-
-					//Get normal for triangle
-					XMVECTOR normal = XMLoadFloat3(&mesh->meshDataProxy.vertices.at(index0).normal);
-					normal = XMVector3TransformNormal(normal, meshWorldMatrix);
-					normal = XMVector3Normalize(normal);
-					XMStoreFloat3(&tempHitResult.hitNormal, normal);
-
-					//Check if back facing triangle
-					const float angleBetweenRaycastDirectionAndTriangleNormal =
-						XMConvertToDegrees(XMVector3AngleBetweenNormals(
-							normal, 
-							hitResult.direction).m128_f32[0]);
-					if (angleBetweenRaycastDirectionAndTriangleNormal < 90)
-					{
-						//has hit the back face of a triangle, so skip
-						continue;
-					}
-
-					//hit position
-					const XMVECTOR hitPosition = hitResult.origin + (hitResult.direction * tempHitResult.hitDistance);
-
-					//Hit vertex indices
-					std::map<int, XMVECTOR> indexToVertMap;
-					indexToVertMap.emplace(index0, v0);
-					indexToVertMap.emplace(index1, v1);
-					indexToVertMap.emplace(index2, v2);
-					tempHitResult.hitVertIndexes.push_back(VMath::GetIndexOfClosestVertexFromTriangleIntersect(indexToVertMap, hitPosition));
-
-					//Get hit UV
-					float hitU, hitV;
-					VMath::TriangleXYZToUV(mesh->meshDataProxy.vertices.at(index0),
-						mesh->meshDataProxy.vertices.at(index1),
-						mesh->meshDataProxy.vertices.at(index2), hitPosition, hitU, hitV);
-					tempHitResult.uv = XMFLOAT2(hitU, hitV);
-
-					//Set hit component and actor
-					tempHitResult.hitComponent = mesh;
-					tempHitResult.hitActor = World::GetActorByUID(mesh->GetOwnerUID());
-
-					hitResults.emplace_back(tempHitResult);
-				}
+			auto boxTrigger = dynamic_cast<BoxTriggerComponent*>(component);
+			if (boxTrigger)
+			{
+				setDebugMesh(boxTrigger, "DebugBox");
+				continue;
 			}
 		}
 	}
