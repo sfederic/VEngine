@@ -7,6 +7,7 @@
 #include "Render/SpriteSystem.h"
 #include "Core/Timer.h"
 #include "Core/VString.h"
+#include "Core/VMath.h"
 #include "UISystem.h"
 
 void Widget::Destroy()
@@ -58,16 +59,7 @@ bool Widget::IsInViewport()
 
 void Widget::GetScreenSpaceCoords(int& sx, int& sy)
 {
-	//What you need to do here it take the actor's position after it's been multiplied 
-	//by the MVP matrix on the CPU side of things (Actor::GetHomogonesouPositionV(),
-	//divide it by the W component and multiply it out by the viewport.
-	//REF:http://www.windows-tech.info/5/a80747e145dd9062.php
-
-	const float f1 = worldPosition.m128_f32[0] / worldPosition.m128_f32[3];
-	const float f2 = worldPosition.m128_f32[1] / worldPosition.m128_f32[3];
-
-	sx = ((f1 * 0.5f) + 0.5) * Renderer::GetViewportWidth();
-	sy = ((f2 * -0.5f) + 0.5) * Renderer::GetViewportHeight();
+	VMath::HomogenousWorldPosToScreenSpaceCoords(worldPosition, sx, sy);
 }
 
 void Widget::Text(const std::wstring text, Layout layout, TextAlign align,
