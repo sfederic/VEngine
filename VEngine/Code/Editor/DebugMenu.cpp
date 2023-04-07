@@ -239,9 +239,9 @@ void DebugMenu::RenderActorSystemMenu()
 
 	for (auto actorSystem : World::activeActorSystems)
 	{
-		ImGui::Text("Name: %s |", actorSystem->GetName().c_str());
+		ImGui::Text("%s | ", actorSystem->GetName().c_str());
 		ImGui::SameLine();
-		ImGui::Text("Actor Count: %d", actorSystem->GetNumActors());
+		ImGui::Text("Count: %d", actorSystem->GetNumActors());
 	}
 
 	ImGui::End();
@@ -255,9 +255,9 @@ void DebugMenu::RenderComponentSystemMenu()
 
 	for (auto componentSystem : World::activeComponentSystems)
 	{
-		ImGui::Text("Name: %s |", componentSystem->GetName().c_str());
+		ImGui::Text("%s | ", componentSystem->GetName().c_str());
 		ImGui::SameLine();
-		ImGui::Text("Actor Count: %d", componentSystem->GetNumComponents());
+		ImGui::Text("Count: %d", componentSystem->GetNumComponents());
 	}
 
 	ImGui::End();
