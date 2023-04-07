@@ -466,6 +466,8 @@ void DebugMenu::RenderUVMenu()
 			auto& materialShaderData = mesh->GetMaterial().materialShaderData;
 
 			static float uvScale[2];
+			uvScale[0] = materialShaderData.uvScale.x;
+			uvScale[1] = materialShaderData.uvScale.y;
 			if (ImGui::InputFloat2("UV Scale", uvScale))
 			{
 				materialShaderData.uvScale.x = uvScale[0];
@@ -473,6 +475,8 @@ void DebugMenu::RenderUVMenu()
 			}
 
 			static float uvOffset[2];
+			uvOffset[0] = materialShaderData.uvOffset.x;
+			uvOffset[1] = materialShaderData.uvOffset.y;
 			if (ImGui::InputFloat2("UV Offset", uvOffset))
 			{
 				materialShaderData.uvOffset.x = uvOffset[0];
@@ -480,6 +484,7 @@ void DebugMenu::RenderUVMenu()
 			}
 
 			static float uvRotation;
+			uvRotation = materialShaderData.uvRotation;
 			if (ImGui::InputFloat("UV Rotation", &uvRotation))
 			{
 				materialShaderData.uvRotation = uvRotation;
