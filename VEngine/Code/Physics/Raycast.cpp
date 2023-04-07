@@ -6,6 +6,7 @@
 #include "Render/Line.h"
 #include "Editor/Editor.h"
 #include "Core/VMath.h"
+#include "Core/Core.h"
 #include "Actors/Actor.h"
 #include "Components/MeshComponent.h"
 #include "Core/World.h"
@@ -61,6 +62,36 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 	hitResult.hitActors.clear();
 	hitResult.hitComponents.clear();
 
+	//@Todo: need to come back here and add editor collision test for Triggers and Lights
+	const auto checkSpatialComponentCollision = [&](SpatialComponent* spatialComponent)
+	{
+		if (!spatialComponent->IsActive())
+		{
+			return;
+		}
+
+		if (spatialComponent->GetCollisionLayer() == CollisionLayers::None ||
+			spatialComponent->GetCollisionLayer() == hitResult.ignoreLayer)
+		{
+			return;
+		}
+
+		if (IsIgnoredSpatialComponent(spatialComponent, hitResult))
+		{
+			return;
+		}
+
+		const BoundingOrientedBox boundingBox = VMath::GetBoundingBoxInWorld(spatialComponent);
+
+		float hitDistance = 0.f;
+		if (boundingBox.Intersects(hitResult.origin, hitResult.direction, hitDistance))
+		{
+			distances.emplace_back(hitDistance);
+			hitResult.hitComponents.emplace_back(spatialComponent);
+			bRayHit = true;
+		}
+	};
+
 	auto actorsInWorld = World::GetAllActorsInWorld();
 	for (auto actor : actorsInWorld)
 	{
@@ -74,35 +105,9 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 			continue;
 		}
 
-		//Iterate over actor's mesh components
 		for (auto mesh : actor->GetComponentsOfType<MeshComponent>())
 		{
-			if (!mesh->IsActive())
-			{
-				continue;
-			}
-
-			//Collision layer checks
-			if (mesh->GetCollisionLayer() == CollisionLayers::None ||
-				mesh->GetCollisionLayer() == hitResult.ignoreLayer)
-			{
-				continue;
-			}
-
-			if (IsIgnoredSpatialComponent(mesh, hitResult))
-			{
-				continue;
-			}
-
-			const BoundingOrientedBox boundingBox = VMath::GetBoundingBoxInWorld(mesh);
-
-			float hitDistance = 0.f;
-			if (boundingBox.Intersects(hitResult.origin, hitResult.direction, hitDistance))
-			{
-				distances.emplace_back(hitDistance);
-				hitResult.hitComponents.emplace_back(mesh);
-				bRayHit = true;
-			}
+			checkSpatialComponentCollision(mesh);
 		}
 	}
 
