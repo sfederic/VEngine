@@ -91,6 +91,7 @@ void DebugMenu::Tick(float deltaTime)
 	RenderMaterialPlacementMenu();
 	RenderActorSystemSpawnMenu();
 	RenderVertexPaintMenu();
+	RenderUVMenu();
 
 	ImGui::EndFrame();
 
@@ -440,6 +441,43 @@ void DebugMenu::RenderVertexPaintMenu()
 			}
 
 			mesh->CreateNewVertexBuffer();
+		}
+	}
+
+	ImGui::End();
+}
+
+void DebugMenu::RenderUVMenu()
+{
+	if (!uvMenuOpen) return;
+
+	ImGui::Begin("UV Menu");
+
+	if (WorldEditor::GetPickedActor())
+	{
+		for (const auto mesh : WorldEditor::GetPickedActor()->GetComponentsOfType<MeshComponent>())
+		{
+			auto& materialShaderData = mesh->GetMaterial().materialShaderData;
+
+			static float uvScale[2];
+			if (ImGui::InputFloat2("UV Scale", uvScale))
+			{
+				materialShaderData.uvScale.x = uvScale[0];
+				materialShaderData.uvScale.y = uvScale[1];
+			}
+
+			static float uvOffset[2];
+			if (ImGui::InputFloat2("UV Offset", uvOffset))
+			{
+				materialShaderData.uvOffset.x = uvOffset[0];
+				materialShaderData.uvOffset.y = uvOffset[1];
+			}
+
+			static float uvRotation;
+			if (ImGui::InputFloat("UV Rotation", &uvRotation))
+			{
+				materialShaderData.uvRotation = uvRotation;
+			}
 		}
 	}
 

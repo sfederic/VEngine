@@ -21,8 +21,6 @@ bool Console::bConsoleActive;
 
 std::wstring consoleString;
 
-void SetAllMaterialsToNotUseTexture();
-
 void Console::Init()
 {
 	//NOTE: command strings need to be uppercase with WndProc
@@ -120,6 +118,10 @@ void Console::Init()
 	executeMap.emplace(L"MATERIAL",
 		std::make_pair([]() { WorldEditor::materialPlacement = !WorldEditor::materialPlacement; },
 		"Enable material placement mode in editor"));
+
+	executeMap.emplace(L"UV",
+		std::make_pair([]() { debugMenu.uvMenuOpen = !debugMenu.uvMenuOpen; },
+			"Menu to set UV values for selected actor's materials."));
 
 	executeMap.emplace(L"MS",
 		std::make_pair([]() { Renderer::MeshIconImageCapture(); },

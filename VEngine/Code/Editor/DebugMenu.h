@@ -33,6 +33,7 @@ public:
 	bool particleMenuOpen = false;
 	bool worldMenuOpen = false;
 	bool vertexPaintMenuOpen = false;
+	bool uvMenuOpen = false;
 
 	//Whether the Imgui windows have been clicked
 	bool hasMouseFocus = false;
@@ -62,6 +63,7 @@ private:
 	void RenderConsoleCommandsMenu();
 	void RenderWorldMenu();
 	void RenderVertexPaintMenu();
+	void RenderUVMenu();
 
 	//Ctrl+T menu meant to mimic Visual Studio's class find functionality
 	void RenderActorSystemSpawnMenu();
