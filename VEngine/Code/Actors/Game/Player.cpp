@@ -101,6 +101,7 @@ void Player::Tick(float deltaTime)
 	MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
 	dialogueComponent->SetPosition(GetHomogeneousPositionV());
+	playerStatusWidget->worldPosition = GetHomogeneousPositionV();
 
 	if (battleSystem.isBattleActive)
 	{
@@ -548,7 +549,7 @@ bool Player::DestructibleCheck(Actor* hitActor)
 
 			if (CheckAttackPositionAgainstUnitDirection(unit))
 			{
-				CheckAndExpendActionPoints(1);
+				ExpendActionPoint();
 				GameUtils::CameraShake(1.f);
 				GameUtils::SpawnSpriteSheet("Sprites/v_slice.png", unit->GetPositionV(), false, 4, 4);
 				GameUtils::PlayAudioOneShot("sword_hit.wav");
@@ -684,17 +685,6 @@ void Player::SetNormalCameraFOV()
 void Player::SetZoomedInCameraFOV()
 {
 	nextCameraFOV = 30.f;
-}
-
-void Player::ExpendActionPoint()
-{
-	--battleSystem.playerActionPoints;
-	if (battleSystem.playerActionPoints <= 0)
-	{
-		//Enter fatigue state
-		isFatigued = true;
-		playerStatusWidget->AddToViewport();
-	}
 }
 
 void Player::SetGuard()

@@ -14,6 +14,7 @@
 #include "Gameplay/GridNode.h"
 #include "Gameplay/GameUtils.h"
 #include "UI/Game/PlayerActionBarWidget.h"
+#include "UI/Game/PlayerStatusWidget.h"
 
 PlayerUnit::PlayerUnit()
 {
@@ -103,7 +104,7 @@ void PlayerUnit::CheckNextMoveNode(XMVECTOR previousPos)
 	if (battleSystem.isBattleActive)
 	{
 		PreviewMovementNodesDuringBattle();
-		CheckAndExpendActionPoints(1);
+		ExpendActionPoint();
 	}
 }
 
@@ -241,17 +242,17 @@ void PlayerUnit::ToggleGridMapPicker(bool& gridPickerActive)
 	}
 }
 
-bool PlayerUnit::CheckAndExpendActionPoints(int num)
+void PlayerUnit::ExpendActionPoint()
 {
-	if (num > battleSystem.playerActionPoints)
-	{
-		return false;
-	}
-
-	battleSystem.playerActionPoints -= num;
+	battleSystem.playerActionPoints--;
 	battleSystem.actionBarWidget->actionPoints = battleSystem.playerActionPoints;
 
-	return true;
+	if (battleSystem.playerActionPoints <= 0)
+	{
+		//Enter fatigue state
+		isFatigued = true;
+		playerStatusWidget->AddToViewport();
+	}
 }
 
 void PlayerUnit::InflictDamage(int damage)

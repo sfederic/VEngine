@@ -7,6 +7,7 @@ struct CameraComponent;
 struct GridNode;
 class Unit;
 class GuardWidget;
+class PlayerStatusWidget;
 
 //Base class for all player controllable units.
 //Should never be instantiated, no need for ACTOR_SYSTEM.
@@ -26,12 +27,14 @@ public:
 	void SetGridIndices();
 	
 	virtual void AttackPattern() {};
-	bool CheckAndExpendActionPoints(int num);
+	void ExpendActionPoint();
 	void InflictDamage(int damage);
 
 	void ToggleGridMapPicker(bool& gridPickerActive);
 
 protected:
+	bool isFatigued = false;
+
 	void PreviewMovementNodesDuringBattle();
 
 	bool CheckIfMovementAndRotationStopped();
@@ -51,6 +54,7 @@ public:
 	CameraComponent* camera = nullptr;
 
 	GuardWidget* guardWidget = nullptr;
+	PlayerStatusWidget* playerStatusWidget = nullptr;
 
 	int attackPoints = 1;
 	int healthPoints = 3;
