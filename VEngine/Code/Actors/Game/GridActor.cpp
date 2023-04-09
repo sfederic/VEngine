@@ -1,5 +1,6 @@
 #include "vpch.h"
 #include "GridActor.h"
+#include "Actors/Game/Unit.h"
 #include "Components/MeshComponent.h"
 #include "Components/WidgetComponent.h"
 #include "Components/Game/MemoryComponent.h"
@@ -9,6 +10,7 @@
 #include "Core/VMath.h"
 #include "Physics/Raycast.h"
 #include "Gameplay/GameUtils.h"
+#include "Gameplay/BattleSystem.h"
 
 GridActor::GridActor()
 {
@@ -91,7 +93,19 @@ void GridActor::InflictDamage(int damage)
 
 	if (health <= 0)
 	{
-		GetCurrentNode()->Show();
+		//Hide node if attacked Unit is the last enemy
+		if (dynamic_cast<Unit*>(this))
+		{
+			if (!battleSystem.isBattleActive)
+			{ 
+				GetCurrentNode()->Hide();
+			}
+		}
+		else
+		{
+			GetCurrentNode()->Show();
+		}
+
 		HitResult hit(this);
 		GetCurrentNode()->RecalcNodeHeight(hit);
 		Destroy();

@@ -53,7 +53,7 @@ struct GridNode
 	void DisplayShow();
 
 	//Use a raycast recalculate node's world position height.
-	//Has the Ray here because sometimes you might need to add the owning actor to the ignore list for the array.
+	//Has the HitResult here because sometimes you might need to add the owning actor to the ignore list for the array.
 	void RecalcNodeHeight(HitResult& hit);
 
 	void SetColour(XMFLOAT4 newColour);
