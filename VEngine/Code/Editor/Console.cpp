@@ -87,6 +87,10 @@ void Console::Init()
 		std::make_pair([]() { Renderer::RenderLightProbeViews(); },
 		"Work through light probes in map and get their RBG values from a cubemap rendering"));
 
+	//executeMap.emplace(L"LIGHT",
+	//	std::make_pair([]() { Renderer::LightMapCast(); },
+	//		""));
+
 	executeMap.emplace(L"BIN",
 		std::make_pair([]() { FileSystem::WriteAllSystemsToBinary(); },
 		"Save current world to binary format"));

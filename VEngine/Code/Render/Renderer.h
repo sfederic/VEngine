@@ -50,4 +50,6 @@ namespace Renderer
 	void AddDebugDrawOrientedBox(DirectX::BoundingOrientedBox& orientedBox);
 	void ClearBounds();
 	void AddDebugLine(Line& line);
+
+	//void LightMapCast();
 };
