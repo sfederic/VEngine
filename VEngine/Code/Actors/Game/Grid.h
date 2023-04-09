@@ -70,9 +70,6 @@ struct Grid : public Actor
 	Unit* GetUnitAtNodeIndex(int xIndex, int yIndex);
 	std::vector<Unit*> GetAllUnitsFromNodes(std::vector<GridNode*>& nodes);
 
-	//For PlayerUnit fusion battle mechanic.
-	std::vector<PlayerUnit*> GetAllPlayerUnitsAtNode(GridNode* node);
-
 	void ResetAllNodes();
 	void LerpInNodes(float deltaTime);
 	void LerpOutNodes(float deltaTime);
