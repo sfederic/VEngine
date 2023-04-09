@@ -25,6 +25,7 @@
 #include "UI/Game/PlayerActionBarWidget.h"
 #include "UI/Game/MemoryGainedWidget.h"
 #include "UI/Game/MemoryRecalledWidget.h"
+#include "UI/Game/GuardWidget.h"
 #include "UI/Game/PlayerHealthWidget.h"
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/BattleSystem.h"
@@ -62,11 +63,11 @@ void Player::Start()
 	//Setup widgets
 	interactWidget = UISystem::CreateWidget<InteractWidget>();
 	memoryMenuWidget = UISystem::CreateWidget<MemoryMenuWidget>();
+	healthWidget = UISystem::CreateWidget<PlayerHealthWidget>();
+	guardWidget = UISystem::CreateWidget<GuardWidget>();
 
 	battleSystem.actionBarWidget = UISystem::CreateWidget<PlayerActionBarWidget>();
 	battleSystem.actionBarWidget->actionPoints = battleSystem.playerActionPoints;
-
-	healthWidget = UISystem::CreateWidget<PlayerHealthWidget>();
 
 	playerInputController.SetPlayerUnitToControl(this);
 }

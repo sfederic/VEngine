@@ -6,6 +6,7 @@ struct MeshComponent;
 struct CameraComponent;
 struct GridNode;
 class Unit;
+class GuardWidget;
 
 //Base class for all player controllable units.
 //Should never be instantiated, no need for ACTOR_SYSTEM.
@@ -49,6 +50,8 @@ public:
 	MeshComponent* mesh = nullptr;
 	CameraComponent* camera = nullptr;
 
+	GuardWidget* guardWidget = nullptr;
+
 	int attackPoints = 1;
 	int healthPoints = 3;
 
@@ -59,4 +62,7 @@ public:
 	int yIndex = -1;
 
 	bool isMainPlayer = false;
+
+	bool ableToGuard = false;
+	bool guarding = false;
 };
