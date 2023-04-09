@@ -133,13 +133,8 @@ Properties Player::GetProps()
 
 void Player::RefreshCombatStats()
 {
-	battleSystem.playerActionPoints += 5;
-
-	if (battleSystem.playerActionPoints >= GameInstance::maxPlayerActionPoints)
-	{
-		battleSystem.playerActionPoints = GameInstance::maxPlayerActionPoints;
-	}
-
+	ResetGuard();
+	battleSystem.playerActionPoints = GameInstance::maxPlayerActionPoints;
 	battleSystem.actionBarWidget->actionPoints = battleSystem.playerActionPoints;
 }
 
