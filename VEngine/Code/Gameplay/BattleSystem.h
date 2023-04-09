@@ -15,7 +15,7 @@ struct BattleSystem
 	bool isBattleActive = false;
 	bool isPlayerTurn = true;
 
-	int playerActionPoints = 10;
+	int playerActionPoints;
 	PlayerActionBarWidget* actionBarWidget = nullptr;
 
 private:

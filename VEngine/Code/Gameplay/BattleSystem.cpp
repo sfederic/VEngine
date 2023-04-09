@@ -8,6 +8,7 @@
 #include "Actors/Game/NPC.h"
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/PlayerInputController.h"
+#include "Gameplay/GameInstance.h"
 #include "UI/UISystem.h"
 #include "UI/Game/HealthWidget.h"
 #include "UI/Game/DialogueWidget.h"
@@ -18,6 +19,7 @@ BattleSystem battleSystem;
 
 BattleSystem::BattleSystem()
 {
+	playerActionPoints = GameInstance::maxPlayerActionPoints;
 }
 
 void BattleSystem::Reset()
