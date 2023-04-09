@@ -280,6 +280,7 @@
     <ClCompile Include="Code\Actors\DebugActors\DebugCapsule.cpp" />
     <ClCompile Include="Code\Components\MouseRotateComponent.cpp" />
     <ClCompile Include="Code\Render\ShaderData\ShaderMatrices.cpp" />
+    <ClCompile Include="Code\UI\Game\GuardWidget.cpp" />
     <ClInclude Include="Code\Core\BMPFileWriter.h" />
     <ClInclude Include="Code\Actors\Game\ConditionTrigger.h" />
     <ClInclude Include="Code\Actors\Game\DialogueTrigger.h" />
@@ -589,6 +590,7 @@
     <ClInclude Include="Code\Actors\DebugActors\DebugCapsule.h" />
     <ClInclude Include="Code\Components\MouseRotateComponent.h" />
     <ClInclude Include="Code\Render\ShaderData\ShaderMatrices.h" />
+    <ClInclude Include="Code\UI\Game\GuardWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
