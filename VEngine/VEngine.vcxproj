@@ -117,7 +117,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BMPFileWriter.cpp" />
+    <ClCompile Include="Code\Core\BMPFileWriter.cpp" />
     <ClCompile Include="Code\Actors\Game\AllyUnits\AttackUnit.cpp" />
     <ClCompile Include="Code\Actors\Game\AllyUnits\ShootAttackUnit.cpp" />
     <ClCompile Include="Code\Actors\Game\AllyUnits\SurroundAttackUnit.cpp" />
@@ -284,7 +284,7 @@
     <ClCompile Include="Code\Actors\DebugActors\DebugCapsule.cpp" />
     <ClCompile Include="Code\Components\MouseRotateComponent.cpp" />
     <ClCompile Include="Code\Render\ShaderData\ShaderMatrices.cpp" />
-    <ClInclude Include="BMPFileWriter.h" />
+    <ClInclude Include="Code\Core\BMPFileWriter.h" />
     <ClInclude Include="Code\Actors\Game\AllyUnits\AttackUnit.h" />
     <ClInclude Include="Code\Actors\Game\AllyUnits\ShootAttackUnit.h" />
     <ClInclude Include="Code\Actors\Game\AllyUnits\SurroundAttackUnit.h" />
