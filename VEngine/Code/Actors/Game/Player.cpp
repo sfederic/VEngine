@@ -32,7 +32,6 @@
 #include "Gameplay/GameUtils.h"
 #include "Render/Material.h"
 #include "Render/BlendStates.h"
-#include "Actors/Game/AllyUnits/AttackUnit.h"
 
 Player::Player()
 {

@@ -118,15 +118,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\BMPFileWriter.cpp" />
-    <ClCompile Include="Code\Actors\Game\AllyUnits\AttackUnit.cpp" />
-    <ClCompile Include="Code\Actors\Game\AllyUnits\ShootAttackUnit.cpp" />
-    <ClCompile Include="Code\Actors\Game\AllyUnits\SurroundAttackUnit.cpp" />
     <ClCompile Include="Code\Actors\Game\ConditionTrigger.cpp" />
     <ClCompile Include="Code\Actors\Game\DialogueTrigger.cpp" />
     <ClCompile Include="Code\Actors\Game\EntranceTrigger.cpp" />
     <ClCompile Include="Code\Actors\Game\ExplodingObject.cpp" />
     <ClCompile Include="Code\Actors\Game\FenceActor.cpp" />
-    <ClCompile Include="Code\Actors\Game\FusionUnits\DoubleAttackFusionUnit.cpp" />
     <ClCompile Include="Code\Actors\Game\Grid.cpp" />
     <ClCompile Include="Code\Actors\Game\GridActor.cpp" />
     <ClCompile Include="Code\Actors\Game\GridMapPicker.cpp" />
@@ -285,15 +281,11 @@
     <ClCompile Include="Code\Components\MouseRotateComponent.cpp" />
     <ClCompile Include="Code\Render\ShaderData\ShaderMatrices.cpp" />
     <ClInclude Include="Code\Core\BMPFileWriter.h" />
-    <ClInclude Include="Code\Actors\Game\AllyUnits\AttackUnit.h" />
-    <ClInclude Include="Code\Actors\Game\AllyUnits\ShootAttackUnit.h" />
-    <ClInclude Include="Code\Actors\Game\AllyUnits\SurroundAttackUnit.h" />
     <ClInclude Include="Code\Actors\Game\ConditionTrigger.h" />
     <ClInclude Include="Code\Actors\Game\DialogueTrigger.h" />
     <ClInclude Include="Code\Actors\Game\EntranceTrigger.h" />
     <ClInclude Include="Code\Actors\Game\ExplodingObject.h" />
     <ClInclude Include="Code\Actors\Game\FenceActor.h" />
-    <ClInclude Include="Code\Actors\Game\FusionUnits\DoubleAttackFusionUnit.h" />
     <ClInclude Include="Code\Actors\Game\Grid.h" />
     <ClInclude Include="Code\Actors\Game\GridActor.h" />
     <ClInclude Include="Code\Actors\Game\GridMapPicker.h" />
