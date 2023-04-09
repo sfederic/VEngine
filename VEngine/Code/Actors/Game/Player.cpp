@@ -658,6 +658,7 @@ void Player::ResetGuard()
 {
 	guarding = false;
 	guardWidget->ResetGuard();
+	guardWidget->RemoveFromViewport();
 	ableToGuard = true;
 }
 
