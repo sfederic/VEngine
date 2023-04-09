@@ -151,6 +151,18 @@ void DuplicateActor()
 
 				newDuplicateActor->ResetOwnerUIDToComponents();
 
+				//@Todo: move to Paing debug menu
+				auto newDuplicateActorMeshes = newDuplicateActor->GetComponentsOfType<MeshComponent>();
+				for (auto mesh : newDuplicateActorMeshes)
+				{
+					 auto matchingMesh = pickedActor->GetComponent<MeshComponent>(mesh->name);
+					 if (matchingMesh)
+					 {
+						 mesh->meshDataProxy.vertices = matchingMesh->meshDataProxy.vertices;
+					 }
+					 mesh->CreateNewVertexBuffer();
+				}
+
 				World::AddActorToWorld(newDuplicateActor);
 
 				editor->SetActorProps(newDuplicateActor);
