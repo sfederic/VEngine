@@ -228,7 +228,7 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 
 	ShaderSystem::Init();
 
-	shadowMap = new ShadowMap(device, 2048, 2048);
+	shadowMap = new ShadowMap(device, 1024, 1024);
 
 	CheckSupportedFeatures();
 
