@@ -388,7 +388,8 @@ void Unit::WindUpAttack()
 {
 	auto target = FindClosestPlayerUnit();
 	GameUtils::SetActiveCameraTarget(target);
-	GameUtils::SpawnSpriteSheet("Sprites/explosion.png", target->GetPositionV(), false, 4, 4);
+	GameUtils::SpawnSpriteSheet("Sprites/blade_slash.png", target->GetPositionV(), false, 3, 5);
+	GameUtils::PlayAudioOneShot("armor_light.wav");
 	target->InflictDamage(attackPoints);
 
 	auto player = Player::system.GetOnlyActor();

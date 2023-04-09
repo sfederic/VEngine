@@ -536,7 +536,7 @@ bool Player::DestructibleCheck(Actor* hitActor)
 			{
 				CheckAndExpendActionPoints(1);
 				GameUtils::CameraShake(1.f);
-				GameUtils::SpawnSpriteSheet("Sprites/blood_hit.png", unit->GetPositionV(), false, 4, 4);
+				GameUtils::SpawnSpriteSheet("Sprites/v_slice.png", unit->GetPositionV(), false, 4, 4);
 				GameUtils::PlayAudioOneShot("sword_hit.wav");
 
 				unit->InflictDamage(attackPoints);
@@ -553,7 +553,7 @@ bool Player::DestructibleCheck(Actor* hitActor)
 		if (gridActor)
 		{
 			GameUtils::CameraShake(1.f);
-			GameUtils::SpawnSpriteSheet("Sprites/blood_hit.png", gridActor->GetPositionV(), false, 4, 4);
+			GameUtils::SpawnSpriteSheet("Sprites/v_slice.png", gridActor->GetPositionV(), false, 4, 4);
 			GameUtils::PlayAudioOneShot("sword_hit.wav");
 
 			gridActor->InflictDamage(attackPoints);
