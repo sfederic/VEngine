@@ -12,6 +12,7 @@ struct MemoryComponent;
 struct InteractWidget;
 struct MemoryMenuWidget;
 struct PlayerHealthWidget;
+class PlayerStatusWidget;
 struct Memory;
 struct GridActor;
 struct Unit;
@@ -28,6 +29,7 @@ public:
 	InteractWidget* interactWidget = nullptr;
 	MemoryMenuWidget* memoryMenuWidget = nullptr;
 	PlayerHealthWidget* healthWidget = nullptr;
+	PlayerStatusWidget* playerStatusWidget = nullptr;
 
 	GridActor* gridActorInteractingWith = nullptr;
 

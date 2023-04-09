@@ -27,6 +27,7 @@
 #include "UI/Game/MemoryRecalledWidget.h"
 #include "UI/Game/GuardWidget.h"
 #include "UI/Game/PlayerHealthWidget.h"
+#include "UI/Game/PlayerStatusWidget.h"
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/BattleSystem.h"
 #include "Gameplay/Trap.h"
@@ -65,6 +66,7 @@ void Player::Start()
 	memoryMenuWidget = UISystem::CreateWidget<MemoryMenuWidget>();
 	healthWidget = UISystem::CreateWidget<PlayerHealthWidget>();
 	guardWidget = UISystem::CreateWidget<GuardWidget>();
+	playerStatusWidget = UISystem::CreateWidget<PlayerStatusWidget>();
 
 	battleSystem.actionBarWidget = UISystem::CreateWidget<PlayerActionBarWidget>();
 	battleSystem.actionBarWidget->actionPoints = battleSystem.playerActionPoints;
@@ -135,9 +137,15 @@ void Player::RefreshCombatStats()
 {
 	ResetGuard();
 
-	if (isFatigued) {
+	if (isFatigued) 
+	{
 		battleSystem.playerActionPoints = GameInstance::maxPlayerActionPoints / 2;
-	} else {
+
+		isFatigued = false;
+		playerStatusWidget->RemoveFromViewport();
+	} 
+	else 
+	{
 		battleSystem.playerActionPoints = GameInstance::maxPlayerActionPoints;
 	}
 
@@ -685,6 +693,7 @@ void Player::ExpendActionPoint()
 	{
 		//Enter fatigue state
 		isFatigued = true;
+		playerStatusWidget->AddToViewport();
 	}
 }
 
