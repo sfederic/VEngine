@@ -109,7 +109,8 @@ void Unit::Tick(float deltaTime)
 				{
 					//deal with attack wind up
 					attackWindingUp = true;
-
+	
+					player->SetGuard();
 					player->nextCameraFOV = 30.f;
 
 					GameUtils::SetActiveCameraTarget(this);
@@ -392,6 +393,7 @@ void Unit::WindUpAttack()
 
 	auto player = Player::system.GetOnlyActor();
 	player->nextCameraFOV = 60.f;
+	player->ResetGuard();
 
 	attackWindingUp = false;
 
