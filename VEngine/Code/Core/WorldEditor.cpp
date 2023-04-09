@@ -133,6 +133,7 @@ void DuplicateActor()
 				Actor* newDuplicateActor = pickedActor->GetActorSystem()->SpawnActor(transform);
 
 				//@Todo: because name and uid are hidden and not used in CopyProperties, these lines can be removed
+				
 				//The props copying below will overwrite the new actor's name, so keep it here then copy it back.
 				const std::string newActorOriginalName = newDuplicateActor->GetName();
 

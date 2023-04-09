@@ -3,22 +3,7 @@ MeshActor
  Enabled
 1
  Position
-0 0 0
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-tabletop0
-UID
-3266336762
-next
- Enabled
-1
- Position
-1 0 0
+2 1 -1
  Rotation
 -0 0 -0 1
  Scale
@@ -30,12 +15,27 @@ MeshActor1
 UID
 3740458872
 next
+ Enabled
+1
+ Position
+4 1 -1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+MeshActor4080447696
+UID
+1546064173
+next
 PointLightActor
 1
  Enabled
 1
  Position
--4 0 0
+0 2 -1
  Rotation
 -0 0 -0 1
  Scale
@@ -49,63 +49,12 @@ UID
 next
 MeshComponent
 2
-3266336762
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-wood_furniture.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-tabletop.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1034134416
-next
 3740458872
 Mesh
  Enabled
 1
  Pos
-1 0 0
+2 1 -1
  Rot
 -0 0 -0 1
  Scale
@@ -143,13 +92,64 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-tabletop.vmesh
+cube.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
 741075863
+next
+1546064173
+Mesh
+ Enabled
+1
+ Pos
+4 1 -1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wood_furniture.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+581607244
 next
 PointLightComponent
 1
@@ -158,7 +158,7 @@ PointLight
  Enabled
 1
  Pos
--4 0 0
+0 2 -1
  Rot
 -0 0 -0 1
  Scale

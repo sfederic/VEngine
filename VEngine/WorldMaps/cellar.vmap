@@ -1,20 +1,3 @@
-DirectionalLightActor
-1
- Enabled
-1
- Position
-0 5 0
- Rotation
-0.560986 -0.0922958 0.430459 0.701057
- Scale
-1 0.999998 0.999999
- Visible
-1
-Name
-DirectionalLightActor0
-UID
-1183375840
-next
 Grid
 1
  Enabled
@@ -39,7 +22,7 @@ UID
 1455604839
 next
 MeshActor
-15
+12
  Enabled
 1
  Position
@@ -60,7 +43,7 @@ next
  Position
 0 0 5
  Rotation
--0 0 -0.707107 0.707107
+0.5 0.5 0.5 -0.5
  Scale
 0.999999 0.999999 1
  Visible
@@ -90,9 +73,9 @@ next
  Position
 0 0 3
  Rotation
--0 0 -0.707107 0.707107
+0.707107 0.707107 1.54543e-08 -1.54543e-08
  Scale
-0.999995 0.999995 1
+0.999989 0.999989 0.999994
  Visible
 1
 Name
@@ -105,9 +88,9 @@ next
  Position
 0 1 3.5
  Rotation
--0 0 -0.707107 0.707107
+0.5 0.5 0.5 -0.5
  Scale
-0.999991 0.999991 1
+0.999989 0.999989 1
  Visible
 1
 Name
@@ -120,9 +103,9 @@ next
  Position
 0 1 4.5
  Rotation
--0 0 -0.707107 0.707107
+0.707107 0.707107 1.54543e-08 -1.54543e-08
  Scale
-0.999988 0.999988 1
+0.999987 0.999987 0.999999
  Visible
 1
 Name
@@ -193,47 +176,17 @@ next
  Enabled
 1
  Position
-1 0.5 5.5
+4 0.25 1
  Rotation
-0.5 0.5 0.5 -0.5
+-0 0.0436187 -0 0.999048
  Scale
-1.99999 0.999995 2.5
+0.999992 0.5 0.999992
  Visible
 1
 Name
-node11
+MeshActor14
 UID
-285214764
-next
- Enabled
-1
- Position
-1 0.5 3.5
- Rotation
-0.5 0.5 0.5 -0.5
- Scale
-1.99999 0.999995 2.5
- Visible
-1
-Name
-MeshActor11
-UID
-3655282307
-next
- Enabled
-1
- Position
-0.5 0.5 2.5
- Rotation
--0.707107 0.000122136 0.000122147 0.707107
- Scale
-1.25 1 2.5
- Visible
-1
-Name
-MeshActor12
-UID
-2464408507
+1284108167
 next
  Enabled
 1
@@ -249,21 +202,6 @@ Name
 cube13
 UID
 241360638
-next
- Enabled
-1
- Position
-4 0.25 1
- Rotation
--0 0.0436191 -0 0.999048
- Scale
-0.999994 0.5 0.999994
- Visible
-1
-Name
-MeshActor14
-UID
-1284108167
 next
 Player
 1
@@ -281,6 +219,23 @@ Name
 Player0
 UID
 2042203538
+next
+PointLightActor
+1
+ Enabled
+1
+ Position
+3 2 5
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+PointLightActor0
+UID
+912812191
 next
 CameraComponent
 1
@@ -317,27 +272,6 @@ File
 
 UID
 3415428886
-next
-DirectionalLightComponent
-1
-1183375840
-DirectionalLight
- Enabled
-1
- Pos
-0 5 0
- Rot
-0.560986 -0.0922958 0.430459 0.701057
- Scale
-1 0.999998 0.999999
- Visible
-1
-Colour
-1 1 1 1
-LightEnabled
-1
-UID
-2083129296
 next
 EmptyComponent
 1
@@ -410,7 +344,7 @@ UID
 2455172601
 next
 MeshComponent
-16
+13
 1096013699
 Mesh
  Enabled
@@ -440,7 +374,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Walls/wall02.png
 M_Use Texture
 1
 M_UvOffset
@@ -469,7 +403,7 @@ Mesh
  Pos
 0 0 5
  Rot
--0 0 -0.707107 0.707107
+0.5 0.5 0.5 -0.5
  Scale
 0.999999 0.999999 1
  Visible
@@ -491,7 +425,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+barrel_texture.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -542,7 +476,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+barrel_texture.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -571,9 +505,9 @@ Mesh
  Pos
 0 0 3
  Rot
--0 0 -0.707107 0.707107
+0.707107 0.707107 1.54543e-08 -1.54543e-08
  Scale
-0.999995 0.999995 1
+0.999989 0.999989 0.999994
  Visible
 1
 Casts Shadow
@@ -593,7 +527,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+barrel_texture.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -622,9 +556,9 @@ Mesh
  Pos
 0 1 3.5
  Rot
--0 0 -0.707107 0.707107
+0.5 0.5 0.5 -0.5
  Scale
-0.999991 0.999991 1
+0.999989 0.999989 1
  Visible
 1
 Casts Shadow
@@ -644,7 +578,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+barrel_texture.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -673,9 +607,9 @@ Mesh
  Pos
 0 1 4.5
  Rot
--0 0 -0.707107 0.707107
+0.707107 0.707107 1.54543e-08 -1.54543e-08
  Scale
-0.999988 0.999988 1
+0.999987 0.999987 0.999999
  Visible
 1
 Casts Shadow
@@ -695,7 +629,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+barrel_texture.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -746,7 +680,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Walls/wall03.png
 M_Use Texture
 1
 M_UvOffset
@@ -754,11 +688,11 @@ M_UvOffset
 M_UvOffsetSpeed
 0 0
 M_UvRotation
-0
+90
 M_UvRotationSpeed
 0
 M_UvScale
-1 1
+1 2
 Mesh
 node.vmesh
 Static
@@ -797,7 +731,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Walls/wall03.png
 M_Use Texture
 1
 M_UvOffset
@@ -805,11 +739,11 @@ M_UvOffset
 M_UvOffsetSpeed
 0 0
 M_UvRotation
-0
+90
 M_UvRotationSpeed
 0
 M_UvScale
-1 1
+1 2
 Mesh
 node.vmesh
 Static
@@ -848,7 +782,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Walls/wall03.png
 M_Use Texture
 1
 M_UvOffset
@@ -856,7 +790,7 @@ M_UvOffset
 M_UvOffsetSpeed
 0 0
 M_UvRotation
-0
+90
 M_UvRotationSpeed
 0
 M_UvScale
@@ -899,7 +833,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Walls/wall03.png
 M_Use Texture
 1
 M_UvOffset
@@ -907,7 +841,7 @@ M_UvOffset
 M_UvOffsetSpeed
 0 0
 M_UvRotation
-0
+90
 M_UvRotationSpeed
 0
 M_UvScale
@@ -921,16 +855,16 @@ Trans. Occlude
 UID
 1538594157
 next
-285214764
+1284108167
 Mesh
  Enabled
 1
  Pos
-1 0.5 5.5
+4 0.25 1
  Rot
-0.5 0.5 0.5 -0.5
+-0 0.0436187 -0 0.999048
  Scale
-1.99999 0.999995 2.5
+0.999992 0.5 0.999992
  Visible
 1
 Casts Shadow
@@ -942,7 +876,7 @@ null
 M_Metallic
 0
 M_Rast State
-nobackcull
+solid
 M_Shader
 Default
 M_Smoothness
@@ -950,7 +884,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-fence01.png
+crate.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -964,115 +898,13 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-node.vmesh
+cube.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-198734249
-next
-3655282307
-Mesh
- Enabled
-1
- Pos
-1 0.5 3.5
- Rot
-0.5 0.5 0.5 -0.5
- Scale
-1.99999 0.999995 2.5
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-nobackcull
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-fence01.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2148258132
-next
-2464408507
-Mesh
- Enabled
-1
- Pos
-0.5 0.5 2.5
- Rot
--0.707107 0.000122136 0.000122147 0.707107
- Scale
-1.25 1 2.5
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-nobackcull
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-fence01.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2859827397
+1092132386
 next
 241360638
 Mesh
@@ -1125,57 +957,6 @@ Trans. Occlude
 UID
 2021054693
 next
-1284108167
-Mesh
- Enabled
-1
- Pos
-4 0.25 1
- Rot
--0 0.0436191 -0 0.999048
- Scale
-0.999994 0.5 0.999994
- Visible
-1
-Casts Shadow
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-crate.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1092132386
-next
 2042203538
 Mesh
  Enabled
@@ -1226,5 +1007,28 @@ Trans. Occlude
 0
 UID
 3416340359
+next
+PointLightComponent
+1
+912812191
+PointLight
+ Enabled
+1
+ Pos
+3 2 5
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
+UID
+2162677996
 next
 end
