@@ -10,7 +10,7 @@ public:
 	void SetValue(const std::string newValue);
 	void Add(const std::string name);
 	std::vector<std::string> GetAllNames();
-	bool Compare(const std::string valueToCompare);
+	bool Contains(const std::string value);
 
 private:
 	int dataIndex = 0;

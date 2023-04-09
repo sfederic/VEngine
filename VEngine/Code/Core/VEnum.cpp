@@ -29,8 +29,7 @@ std::vector<std::string> VEnum::GetAllNames()
 	return names;
 }
 
-bool VEnum::Compare(const std::string valueToCompare)
+bool VEnum::Contains(const std::string value)
 {
-	assert(data.find(valueToCompare) != data.end());
-	return data.find(valueToCompare) == data.find(valueToCompare);
+	return data.find(value) == data.end();
 }
