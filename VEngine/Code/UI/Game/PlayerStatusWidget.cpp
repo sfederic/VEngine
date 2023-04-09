@@ -3,6 +3,8 @@
 
 void PlayerStatusWidget::Draw(float deltaTime)
 {
-	auto layout = CenterLayoutOnScreenSpaceCoords(100, 100);
+	int sx, sy;
+	GetScreenSpaceCoords(sx, sy);
+	auto layout = CenterLayoutOnScreenSpaceCoords(75, 75, sx, sy - 150);
 	Image("UI/fatigue.png", layout);
 }
