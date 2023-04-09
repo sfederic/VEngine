@@ -662,6 +662,16 @@ void Player::ResetGuard()
 	ableToGuard = true;
 }
 
+void Player::SetNormalCameraFOV()
+{
+	nextCameraFOV = 60.f;
+}
+
+void Player::SetZoomedInCameraFOV()
+{
+	nextCameraFOV = 30.f;
+}
+
 void Player::SetGuard()
 {
 	guardWidget->AddToViewport();

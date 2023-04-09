@@ -111,7 +111,7 @@ void Unit::Tick(float deltaTime)
 					attackWindingUp = true;
 	
 					player->SetGuard();
-					player->nextCameraFOV = 30.f;
+					player->SetZoomedInCameraFOV();
 
 					GameUtils::SetActiveCameraTarget(this);
 
@@ -392,7 +392,7 @@ void Unit::WindUpAttack()
 	target->InflictDamage(attackPoints);
 
 	auto player = Player::system.GetOnlyActor();
-	player->nextCameraFOV = 60.f;
+	player->SetNormalCameraFOV();
 	player->ResetGuard();
 
 	attackWindingUp = false;

@@ -33,8 +33,6 @@ public:
 
 	std::vector<Actor*> previousHitTransparentActors;
 
-	float nextCameraFOV = 0.f;
-
 	bool inConversation = false;
 	bool inInteraction = false;
 	bool inBattleMode = false;
@@ -66,7 +64,12 @@ public:
 	void SetGuard();
 	void ResetGuard();
 
+	void SetNormalCameraFOV();
+	void SetZoomedInCameraFOV();
+
 private:
+	float nextCameraFOV = 0.f;
+
 	//Toggles battle grid nodes and enters player into a battle ready state.
 	void EnterAstralMode();
 
