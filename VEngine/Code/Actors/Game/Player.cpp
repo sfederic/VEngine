@@ -134,7 +134,13 @@ Properties Player::GetProps()
 void Player::RefreshCombatStats()
 {
 	ResetGuard();
-	battleSystem.playerActionPoints = GameInstance::maxPlayerActionPoints;
+
+	if (isFatigued) {
+		battleSystem.playerActionPoints = GameInstance::maxPlayerActionPoints / 2;
+	} else {
+		battleSystem.playerActionPoints = GameInstance::maxPlayerActionPoints;
+	}
+
 	battleSystem.actionBarWidget->actionPoints = battleSystem.playerActionPoints;
 }
 
@@ -648,7 +654,7 @@ void Player::Guard()
 	if (battleSystem.playerActionPoints > 0 && !guarding)
 	{
 		guarding = true;
-		--battleSystem.playerActionPoints;
+		ExpendActionPoint();
 		guardWidget->SetGuardSuccess();
 		GameUtils::PlayAudioOneShot("equip.wav");
 	}
@@ -670,6 +676,16 @@ void Player::SetNormalCameraFOV()
 void Player::SetZoomedInCameraFOV()
 {
 	nextCameraFOV = 30.f;
+}
+
+void Player::ExpendActionPoint()
+{
+	--battleSystem.playerActionPoints;
+	if (battleSystem.playerActionPoints <= 0)
+	{
+		//Enter fatigue state
+		isFatigued = true;
+	}
 }
 
 void Player::SetGuard()

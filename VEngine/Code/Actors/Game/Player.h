@@ -67,6 +67,8 @@ public:
 	void SetNormalCameraFOV();
 	void SetZoomedInCameraFOV();
 
+	void ExpendActionPoint();
+
 private:
 	float nextCameraFOV = 0.f;
 
@@ -90,4 +92,6 @@ private:
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
 	void Guard();
+
+	bool isFatigued = false;
 };
