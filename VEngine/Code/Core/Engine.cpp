@@ -26,7 +26,6 @@
 #include "Audio/AudioSystem.h"
 #include "Physics/PhysicsSystem.h"
 #include "Gameplay/WorldFunctions.h"
-#include "Gameplay/PlayerInputController.h"
 
 void ClearLog()
 {
@@ -98,9 +97,6 @@ void Engine::TickSystems(float deltaTime)
 
 	if (Core::gameplayOn && !Core::gameWorldPaused)
 	{
-		//@Todo: player controller tick is bad being here. It has the potential to crash.
-		playerInputController.Tick(deltaTime);
-
 		World::TickAllActorSystems(deltaTime);
 		World::TickAllComponentSystems(deltaTime);
 	}

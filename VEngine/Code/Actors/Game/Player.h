@@ -1,9 +1,8 @@
 #pragma once
 
-#include "PlayerUnit.h"
+#include "Actors/Actor.h"
 #include "Actors/ActorSystem.h"
 #include "Gameplay/BattleEnums.h"
-#include "Gameplay/PlayerInputController.h"
 #include "Components/MeshComponent.h"
 #include "Core/Log.h"
 
@@ -16,8 +15,14 @@ struct Memory;
 struct GridActor;
 struct Unit;
 struct Trap;
+struct MeshComponent;
+struct CameraComponent;
+struct GridNode;
+class Unit;
+class GuardWidget;
+class PlayerStatusWidget;
 
-class Player : public PlayerUnit
+class Player : public Actor
 {
 public:
 	ACTOR_SYSTEM(Player);
@@ -38,6 +43,29 @@ public:
 	bool inBattleMode = false;
 	bool memoryWidgetToggle = false;
 	bool gameOver = false;
+
+	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+
+	MeshComponent* mesh = nullptr;
+	CameraComponent* camera = nullptr;
+
+	GuardWidget* guardWidget = nullptr;
+	PlayerStatusWidget* playerStatusWidget = nullptr;
+
+	int attackPoints = 1;
+	int healthPoints = 3;
+
+	float moveSpeed = 0.f;
+	float rotateSpeed = 0.f;
+
+	int xIndex = -1;
+	int yIndex = -1;
+
+	bool ableToGuard = false;
+	bool guarding = false;
+
+	bool isFatigued = false;
 
 	Player();
 	void Create() override;
@@ -67,11 +95,26 @@ public:
 	void SetNormalCameraFOV();
 	void SetZoomedInCameraFOV();
 
+	void CheckNextMoveNode(XMVECTOR previousPos);
+	GridNode* GetCurrentNode();
+	void SetGridIndices();
+	void GetGridIndices(int& x, int& y);
+
+	virtual void AttackPattern() {};
+	void ExpendActionPoint();
+	void InflictDamage(int damage);
+
+	void ToggleGridMapPicker(bool& gridPickerActive);
+
 private:
 	float nextCameraFOV = 0.f;
 
 	//Toggles battle grid nodes and enters player into a battle ready state.
 	void EnterAstralMode();
+
+	bool CheckIfMovementAndRotationStopped();
+	void MovementInput(float deltaTime);
+	void RotationInput(float deltaTime);
 
 	void PrimaryAction();
 	void ToggleMemoryMenu();

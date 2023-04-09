@@ -295,7 +295,7 @@ void Unit::StartTurn()
 
 	GetCurrentNode()->Show();
 
-	auto target = FindClosestPlayerUnit();
+	auto target = Player::system.GetOnlyActor();
 
 	if (battleState.Compare(BattleStates::fight))
 	{
@@ -368,7 +368,7 @@ bool Unit::Attack()
 		}
 	}
 
-	auto target = FindClosestPlayerUnit();
+	auto target = Player::system.GetOnlyActor();
 	auto targetNode = target->GetCurrentNode();
 
 	for (auto node : attackNodes)
@@ -386,7 +386,7 @@ bool Unit::Attack()
 
 void Unit::WindUpAttack()
 {
-	auto target = FindClosestPlayerUnit();
+	auto target = Player::system.GetOnlyActor();
 	GameUtils::SetActiveCameraTarget(target);
 	GameUtils::SpawnSpriteSheet("Sprites/blade_slash.png", target->GetPositionV(), false, 3, 5);
 	GameUtils::PlayAudioOneShot("armor_light.wav");
@@ -399,16 +399,6 @@ void Unit::WindUpAttack()
 	attackWindingUp = false;
 
 	EndTurn();
-}
-
-PlayerUnit* Unit::FindClosestPlayerUnit()
-{
-	std::multimap<float, PlayerUnit*> distanceMap;
-	for (auto playerUnit : World::GetAllActorsOfTypeInWorld<PlayerUnit>())
-	{
-		distanceMap.emplace(XMVector3Length(playerUnit->GetPositionV() - GetPositionV()).m128_f32[0], playerUnit);
-	}
-	return distanceMap.begin()->second;
 }
 
 void Unit::ShowUnitMovementPath()

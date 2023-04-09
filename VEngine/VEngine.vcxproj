@@ -133,7 +133,6 @@
     <ClCompile Include="Code\Actors\Game\NPC.cpp" />
     <ClCompile Include="Code\Actors\Game\Player.cpp" />
     <ClCompile Include="Code\Actors\Game\PlayerDialogueTrigger.cpp" />
-    <ClCompile Include="Code\Actors\Game\PlayerUnit.cpp" />
     <ClCompile Include="Code\Actors\Game\PopupActor.cpp" />
     <ClCompile Include="Code\Actors\Game\RotatorSwitch.cpp" />
     <ClCompile Include="Code\Actors\Game\SavePoint.cpp" />
@@ -163,7 +162,6 @@
     <ClCompile Include="Code\Gameplay\DialogueStructures.cpp" />
     <ClCompile Include="Code\Gameplay\GridNode.cpp" />
     <ClCompile Include="Code\Gameplay\Memory.cpp" />
-    <ClCompile Include="Code\Gameplay\PlayerInputController.cpp" />
     <ClCompile Include="Code\Gameplay\WorldFunctions.cpp" />
     <ClCompile Include="Code\Core\IFunction.cpp" />
     <ClCompile Include="Code\Particle\Particle.cpp" />
@@ -298,7 +296,6 @@
     <ClInclude Include="Code\Actors\Game\NPC.h" />
     <ClInclude Include="Code\Actors\Game\Player.h" />
     <ClInclude Include="Code\Actors\Game\PlayerDialogueTrigger.h" />
-    <ClInclude Include="Code\Actors\Game\PlayerUnit.h" />
     <ClInclude Include="Code\Actors\Game\PopupActor.h" />
     <ClInclude Include="Code\Actors\Game\RotatorSwitch.h" />
     <ClInclude Include="Code\Actors\Game\SavePoint.h" />
@@ -319,7 +316,6 @@
     <ClInclude Include="Code\Gameplay\ForwardFace.h" />
     <ClInclude Include="Code\Gameplay\GridNode.h" />
     <ClInclude Include="Code\Gameplay\Memory.h" />
-    <ClInclude Include="Code\Gameplay\PlayerInputController.h" />
     <ClInclude Include="Code\Render\BlendStates.h" />
     <ClInclude Include="Code\Animation\BoneWeights.h" />
     <ClInclude Include="Code\Animation\Animation.h" />

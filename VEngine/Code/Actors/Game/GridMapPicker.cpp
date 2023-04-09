@@ -148,8 +148,6 @@ void GridMapPicker::ReenablePlayer()
 	GameUtils::SetActiveCamera(player->camera);
 	player->SetTickEnabled(true);
 
-	playerInputController.SetPlayerUnitToControl(player);
-
 	Grid::system.GetFirstActor()->SetActive(false);
 
 	Destroy();

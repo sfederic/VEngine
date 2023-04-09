@@ -7,7 +7,6 @@
 #include "Actors/Game/Grid.h"
 #include "Actors/Game/NPC.h"
 #include "Gameplay/GameUtils.h"
-#include "Gameplay/PlayerInputController.h"
 #include "Gameplay/GameInstance.h"
 #include "UI/UISystem.h"
 #include "UI/Game/HealthWidget.h"
@@ -112,8 +111,6 @@ void BattleSystem::MoveToNextTurn()
 
 		GameUtils::SetActiveCameraTarget(player);
 		Grid::system.GetFirstActor()->ResetAllNodes();
-
-		playerInputController.SetPlayerUnitToControl(player);
 
 		return;
 	}

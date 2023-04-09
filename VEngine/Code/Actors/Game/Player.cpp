@@ -37,6 +37,11 @@
 
 Player::Player()
 {
+	SetEmptyRootComponent();
+
+	camera = CreateComponent("Camera", CameraComponent(XMFLOAT3(1.75f, 1.75f, -2.75f)));
+	rootComponent->AddChild(camera);
+
 	nextPos = XMVectorZero();
 	nextRot = XMVectorZero();
 
@@ -44,8 +49,6 @@ Player::Player()
 	rootComponent->AddChild(mesh);
 
 	dialogueComponent = DialogueComponent::system.Add("Dialogue", this);
-
-	isMainPlayer = true;
 }
 
 void Player::Create()
@@ -58,6 +61,12 @@ void Player::Start()
 {
 	__super::Start();
 
+	nextPos = GetPositionV();
+	nextRot = GetRotationV();
+
+	SetGridIndices();
+
+	camera->targetActor = this;
 	nextCameraFOV = camera->FOV;
 	camera->SetAsActiveCamera();
 
@@ -70,8 +79,6 @@ void Player::Start()
 
 	battleSystem.actionBarWidget = UISystem::CreateWidget<PlayerActionBarWidget>();
 	battleSystem.actionBarWidget->actionPoints = battleSystem.playerActionPoints;
-
-	playerInputController.SetPlayerUnitToControl(this);
 }
 
 void Player::End()
@@ -92,6 +99,9 @@ void Player::Tick(float deltaTime)
 	{
 		//GameUtils::TriggerGameOver();
 	}
+
+	MovementInput(deltaTime);
+	RotationInput(deltaTime);
 
 	PrimaryAction();
 	EnterAstralMode();
@@ -125,6 +135,9 @@ void Player::Tick(float deltaTime)
 			return;
 		}
 	}
+
+	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, moveSpeed));
+	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotateSpeed));
 }
 
 Properties Player::GetProps()
@@ -159,18 +172,6 @@ void Player::BattleCleanup()
 	battleSystem.isPlayerTurn = false;
 
 	RefreshCombatStats();
-
-	playerInputController.SetPlayerUnitToControl(this);
-
-	auto playerUnits = World::GetAllActorsOfTypeInWorld<PlayerUnit>();
-	for (auto playerUnit : playerUnits)
-	{
-		if (!playerUnit->isMainPlayer)
-		{
-			auto as = playerUnit->GetActorSystem();
-			as->RemoveInterfaceActor(playerUnit);
-		}
-	}
 
 	healthWidget->RemoveFromViewport();
 
@@ -691,4 +692,192 @@ void Player::SetGuard()
 {
 	guardWidget->AddToViewport();
 	ableToGuard = true;
+}
+
+void Player::CheckNextMoveNode(XMVECTOR previousPos)
+{
+	if (battleSystem.playerActionPoints <= 0)
+	{
+		Log("No Player action points remaining.");
+		nextPos = previousPos;
+		return;
+	}
+
+	int nextXIndex = (int)std::round(nextPos.m128_f32[0]);
+	int nextYIndex = (int)std::round(nextPos.m128_f32[2]);
+
+	//Keep the call here so playerunit can face walls and holes on input.
+	mesh->SetWorldRotation(VMath::LookAtRotation(nextPos, previousPos));
+
+	auto grid = Grid::system.GetFirstActor();
+
+	if (nextXIndex >= grid->sizeX || nextYIndex >= grid->sizeY
+		|| nextXIndex < 0 || nextYIndex < 0)
+	{
+		nextPos = previousPos;
+		return;
+	}
+
+	auto nextNodeToMoveTo = grid->GetNode(nextXIndex, nextYIndex);
+	if (!nextNodeToMoveTo->active)
+	{
+		nextPos = previousPos;
+		return;
+	}
+
+	//Check next node height in relation to player
+	auto node = grid->GetNode(nextXIndex, nextYIndex);
+	if (node->worldPosition.y > (GetPosition().y + Grid::maxHeightMove))
+	{
+		Log("Node [x:%d, y:%d] too high to move to.", nextXIndex, nextYIndex);
+		nextPos = previousPos;
+		return;
+	}
+
+	//FENCE RAYCAST CHECK
+	HitResult fenceHit(this);
+	if (Raycast(fenceHit, GetPositionV(), nextPos))
+	{
+		if (dynamic_cast<FenceActor*>(fenceHit.hitActor))
+		{
+			nextPos = previousPos;
+			return;
+		}
+	}
+
+	nextPos = XMLoadFloat3(&node->worldPosition);
+
+	if (battleSystem.isBattleActive)
+	{
+		ExpendActionPoint();
+	}
+}
+
+bool Player::CheckIfMovementAndRotationStopped()
+{
+	return XMVector4Equal(GetPositionV(), nextPos) && XMQuaternionEqual(GetRotationV(), nextRot);
+}
+
+void Player::MovementInput(float deltaTime)
+{
+	if (CheckIfMovementAndRotationStopped())
+	{
+		SetGridIndices();
+
+		XMVECTOR previousPos = nextPos;
+
+		if (Input::GetKeyHeld(Keys::W))
+		{
+			nextPos = GetPositionV() + GetForwardVectorV();
+			CheckNextMoveNode(previousPos);
+		}
+
+		if (Input::GetKeyHeld(Keys::S))
+		{
+			nextPos = GetPositionV() + -GetForwardVectorV();
+			CheckNextMoveNode(previousPos);
+		}
+		if (Input::GetKeyHeld(Keys::A))
+		{
+			nextPos = GetPositionV() + -GetRightVectorV();
+			CheckNextMoveNode(previousPos);
+		}
+		if (Input::GetKeyHeld(Keys::D))
+		{
+			nextPos = GetPositionV() + GetRightVectorV();
+			CheckNextMoveNode(previousPos);
+		}
+	}
+}
+
+void Player::RotationInput(float deltaTime)
+{
+	if (CheckIfMovementAndRotationStopped())
+	{
+		if (Input::GetKeyHeld(Keys::Right))
+		{
+			constexpr float angle = XMConvertToRadians(90.f);
+			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), angle));
+		}
+		if (Input::GetKeyHeld(Keys::Left))
+		{
+			constexpr float angle = XMConvertToRadians(-90.f);
+			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), angle));
+		}
+	}
+}
+
+void Player::GetGridIndices(int& x, int& y)
+{
+	auto pos = GetPosition();
+	x = std::lroundf(pos.x);
+	y = std::lroundf(pos.z);
+}
+
+void Player::ToggleGridMapPicker(bool& gridPickerActive)
+{
+	if (Input::GetKeyUp(Keys::I))
+	{
+		gridPickerActive = !gridPickerActive;
+
+		if (gridPickerActive)
+		{
+			Transform transform;
+			transform.position = GetPosition();
+			transform.rotation = GetRotation();
+			auto gridMapPicker = GridMapPicker::system.Add(transform);
+
+			gridMapPicker->camera->targetActor = gridMapPicker;
+			GameUtils::SetActiveCamera(gridMapPicker->camera);
+
+			Grid::system.GetFirstActor()->SetActive(true);
+
+			SetTickEnabled(false);
+		}
+		else
+		{
+			GridMapPicker::system.GetFirstActor()->ReenablePlayer();
+		}
+	}
+}
+
+void Player::ExpendActionPoint()
+{
+	battleSystem.playerActionPoints--;
+	battleSystem.actionBarWidget->actionPoints = battleSystem.playerActionPoints;
+
+	if (battleSystem.playerActionPoints <= 0)
+	{
+		//Enter fatigue state
+		isFatigued = true;
+		playerStatusWidget->AddToViewport();
+	}
+}
+
+void Player::InflictDamage(int damage)
+{
+	if (guarding)
+	{
+		guarding = false;
+		return;
+	}
+
+	healthPoints -= damage;
+	if (healthPoints <= 0)
+	{
+		//@Todo: trigger game over
+	}
+}
+
+GridNode* Player::GetCurrentNode()
+{
+	auto grid = Grid::system.GetFirstActor();
+	auto node = grid->GetNode(xIndex, yIndex);
+	return node;
+}
+
+void Player::SetGridIndices()
+{
+	xIndex = std::lroundf(GetPosition().x);
+	yIndex = std::lroundf(GetPosition().z);
 }

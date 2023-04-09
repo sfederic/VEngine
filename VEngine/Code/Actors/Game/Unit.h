@@ -10,7 +10,7 @@ struct MemoryComponent;
 struct EntranceTrigger;
 struct Polyboard;
 struct Memory;
-class PlayerUnit;
+class Player;
 
 //Units are battle ready actors and really only move and fight.
 struct Unit : GridActor
@@ -91,5 +91,4 @@ public:
 
 private:
 	std::vector<GridNode*> GetMovementPathPreviewNodes(GridNode* destinationNode);
-	PlayerUnit* FindClosestPlayerUnit();
 };

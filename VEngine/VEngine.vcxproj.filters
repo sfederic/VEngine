@@ -533,9 +533,6 @@
     <ClCompile Include="Code\Actors\Game\PlayerDialogueTrigger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\PlayerUnit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\Game\PopupActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -555,9 +552,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Gameplay\Memory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Gameplay\PlayerInputController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\UI\Game\ActivateTrapWidget.cpp">
@@ -1176,9 +1170,6 @@
     <ClInclude Include="Code\Actors\Game\PlayerDialogueTrigger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\PlayerUnit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Actors\Game\PopupActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1198,9 +1189,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\Memory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Gameplay\PlayerInputController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\ActivateTrapWidget.h">
