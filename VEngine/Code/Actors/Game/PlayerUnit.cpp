@@ -256,6 +256,12 @@ bool PlayerUnit::CheckAndExpendActionPoints(int num)
 
 void PlayerUnit::InflictDamage(int damage)
 {
+	if (guarding)
+	{
+		guarding = false;
+		return;
+	}
+
 	healthPoints -= damage;
 	if (healthPoints <= 0)
 	{

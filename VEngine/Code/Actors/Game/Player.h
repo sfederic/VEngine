@@ -63,6 +63,9 @@ public:
 
 	void PlaceTrap(Trap* trap);
 
+	void SetGuard();
+	void ResetGuard();
+
 private:
 	//Toggles battle grid nodes and enters player into a battle ready state.
 	void EnterAstralMode();
@@ -82,4 +85,6 @@ private:
 	bool CheckAttackPositionAgainstUnitDirection(Unit* unit);
 
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
+
+	void Guard();
 };

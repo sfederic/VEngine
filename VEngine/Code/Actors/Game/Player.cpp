@@ -257,6 +257,17 @@ void Player::PrimaryAction()
 
 	if (Input::GetKeyUp(Keys::Down))
 	{
+		//Guard
+		if (battleSystem.isBattleActive && !battleSystem.isPlayerTurn)
+		{
+			if (ableToGuard)
+			{
+				Guard();
+			}
+
+			return;
+		}
+
 		/*if (UISystem::memoryRecalledWidget->IsInViewport() 
 			|| UISystem::memoryGainedWidget->IsInViewport())
 		{
@@ -635,4 +646,28 @@ void Player::PlaceTrap(Trap* trap)
 		currentNode->trap->connectedNode = currentNode;
 		currentNode->SetColour(GridNode::trapNodeColour);
 	}
+}
+
+void Player::Guard()
+{
+	if (battleSystem.playerActionPoints > 0 && !guarding)
+	{
+		guarding = true;
+		--battleSystem.playerActionPoints;
+		guardWidget->SetGuardSuccess();
+		GameUtils::PlayAudioOneShot("equip.wav");
+	}
+}
+
+void Player::ResetGuard()
+{
+	guarding = false;
+	guardWidget->ResetGuard();
+	ableToGuard = true;
+}
+
+void Player::SetGuard()
+{
+	guardWidget->AddToViewport();
+	ableToGuard = true;
 }
