@@ -259,7 +259,7 @@ void PlayerUnit::InflictDamage(int damage)
 	healthPoints -= damage;
 	if (healthPoints <= 0)
 	{
-		GetActorSystem()->RemoveInterfaceActor(this);
+		//@Todo: trigger game over
 	}
 }
 
