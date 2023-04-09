@@ -347,16 +347,24 @@ bool Unit::Attack()
 	std::vector<GridNode*> attackNodes;
 	std::vector<GridNode*> closedNodes;
 
-	for (int rangeIndex = 0; rangeIndex < attackRange; rangeIndex++)
+	assert(attackRange > 0);
+	if (attackRange == 1)
 	{
-		for (int nodeIndex = 0; nodeIndex < attackNodes.size(); nodeIndex++)
+		grid->GetNeighbouringNodes(standingNode, attackNodes);
+	}
+	else
+	{
+		for (int rangeIndex = 0; rangeIndex < attackRange; rangeIndex++)
 		{
-			grid->GetNeighbouringNodes(attackNodes[nodeIndex], closedNodes);
+			for (int nodeIndex = 0; nodeIndex < attackNodes.size(); nodeIndex++)
+			{
+				grid->GetNeighbouringNodes(attackNodes[nodeIndex], closedNodes);
+			}
+
+			attackNodes.insert(attackNodes.end(), closedNodes.begin(), closedNodes.end());
+
+			closedNodes.clear();
 		}
-
-		attackNodes.insert(attackNodes.end(), closedNodes.begin(), closedNodes.end());
-
-		closedNodes.clear();
 	}
 
 	auto target = FindClosestPlayerUnit();
@@ -382,7 +390,8 @@ void Unit::WindUpAttack()
 	GameUtils::SpawnSpriteSheet("Sprites/explosion.png", target->GetPositionV(), false, 4, 4);
 	target->InflictDamage(attackPoints);
 
-	Player::system.GetFirstActor()->nextCameraFOV = 60.f;
+	auto player = Player::system.GetOnlyActor();
+	player->nextCameraFOV = 60.f;
 
 	attackWindingUp = false;
 
