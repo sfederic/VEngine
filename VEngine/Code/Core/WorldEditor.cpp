@@ -132,14 +132,6 @@ void DuplicateActor()
 				Transform transform = pickedActor->GetTransform();
 				Actor* newDuplicateActor = pickedActor->GetActorSystem()->SpawnActor(transform);
 
-				//@Todo: because name and uid are hidden and not used in CopyProperties, these lines can be removed
-				
-				//The props copying below will overwrite the new actor's name, so keep it here then copy it back.
-				const std::string newActorOriginalName = newDuplicateActor->GetName();
-
-				//Make a new UID for the actor
-				const UID newActorOriginalUID = newDuplicateActor->GetUID();
-
 				//Copy values across
 				auto oldProps = pickedActor->GetAllProps();
 				auto newProps = newDuplicateActor->GetAllProps();
@@ -148,12 +140,7 @@ void DuplicateActor()
 				newDuplicateActor->Create();
 				newDuplicateActor->CreateAllComponents();
 
-				newDuplicateActor->SimpleSetName(newActorOriginalName);
-				newDuplicateActor->SetUID(newActorOriginalUID);
-
-				newDuplicateActor->ResetOwnerUIDToComponents();
-
-				//@Todo: move to Paing debug menu
+				//@Todo: move to Paint debug menu
 				auto newDuplicateActorMeshes = newDuplicateActor->GetComponentsOfType<MeshComponent>();
 				for (auto mesh : newDuplicateActorMeshes)
 				{
@@ -171,7 +158,7 @@ void DuplicateActor()
 				editor->UpdateWorldList();
 
 				debugMenu.AddNotification(VString::wformat(
-					L"Duplicated new actor [%S]",newActorOriginalName.c_str()));
+					L"Duplicated new actor [%S]", newDuplicateActor->GetName().c_str()));
 
 				//Set new actor as picked in-editor
 				pickedActor = newDuplicateActor;
