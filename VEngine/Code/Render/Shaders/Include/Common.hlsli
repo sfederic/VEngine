@@ -31,7 +31,7 @@ struct VS_OUT
     float3 normal : NORMAL;
 	float3 tangent : TANGENT0;
     float2 uv : TEXCOORD0;
-	float2 lightMapUV : LM_TEXCOORD;
+	//float2 lightMapUV : LM_TEXCOORD;
     float4 shadowPos : TEXCOORD1;
     uint instanceID : SV_InstanceID;
 };
@@ -42,7 +42,7 @@ Texture2D reflectionMap : register(t2);
 StructuredBuffer<InstanceData> instanceData : register(t3);
 TextureCube environmentMap : register(t4);
 Texture2D normalMap : register(t5);
-Texture2D lightMap : register(t6);
+//Texture2D lightMap : register(t6);
 
 SamplerState s : register(s0);
 SamplerComparisonState shadowSampler : register(s1);
