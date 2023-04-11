@@ -44,11 +44,6 @@ namespace VString
         return std::string(output);
     }
 
-    void Replace(std::string& str, std::string_view tokenToFind, std::string_view replacementToken)
-    {
-        std::replace(str.begin(), str.end(), tokenToFind, replacementToken);
-    }
-
     std::string GetSubStringAtFoundOffset(std::string mainString, std::string findCase)
     {
         if (mainString.find(findCase) != std::string::npos)
