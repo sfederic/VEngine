@@ -464,9 +464,8 @@ void AssetDock::ImportAsset()
     QString filePath = dialog.getOpenFileName(nullptr, "Import Mesh", QString::fromStdString(AssetBaseFolders::fbxFiles));
     if (!filePath.isEmpty())
     {
-        std::string filename = QFileInfo(filePath).fileName().toStdString();
-        AssetSystem::BuildSingleVMeshFromFBX(filename);
-
+        const std::string filename = QFileInfo(filePath).fileName().toStdString();
+        AssetSystem::BuildSingleVMeshFromFBX(filePath.toStdString(), filename);
         Log("VMesh built from [%s].", filename.c_str());
     }
 }

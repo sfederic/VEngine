@@ -32,18 +32,26 @@ void AssetSystem::BuildAllVMeshDataFromFBXImport()
 
 	auto startTime = Profile::QuickStart();
 
-	std::unordered_set<std::string> fbxFilenames;
+	struct FBXFileInfo
+	{
+		std::string filepath;
+		std::string filename;
+	};
+
+	std::vector<FBXFileInfo> fbxFileInfos;
 
 	//Import all FBX files
 	for (const auto& entry : std::filesystem::directory_iterator("FBXFiles/"))
 	{
-		const std::string fbxFilename = entry.path().filename().string();
-		fbxFilenames.emplace(fbxFilename);
+		FBXFileInfo fbxFileInfo;
+		fbxFileInfo.filepath = entry.path().filename().string();
+		fbxFileInfo.filename = entry.path().string();
+		fbxFileInfos.emplace_back(fbxFileInfo);
 	}
 
-	for (auto& filename : fbxFilenames)
+	for (const auto& fileInfo : fbxFileInfos)
 	{
-		AssetSystem::BuildSingleVMeshFromFBX(filename);
+		AssetSystem::BuildSingleVMeshFromFBX(fileInfo.filepath, fileInfo.filename);
 		numberOfMeshFilesBuilt++;
 	}
 
@@ -79,21 +87,25 @@ void AssetSystem::BuildAllAnimationFilesFromFBXImport()
 		numberOfAnimationFilesBuilt, elapsedTime);
 }
 
-void AssetSystem::BuildSingleVMeshFromFBX(const std::string fbxFilename)
+void AssetSystem::BuildSingleVMeshFromFBX(const std::string fbxFilePath, const std::string fbxFilename)
 {
+	const std::string baseFBXPath = VString::GetSubStringAtFoundOffset(fbxFilePath, AssetBaseFolders::fbxFiles);
+	const std::string vMeshPath = VString::ReplaceFileExtesnion(baseFBXPath, ".vmesh");
+	const std::filesystem::path filepath = AssetBaseFolders::mesh + vMeshPath;
+	const auto meshFilePath = std::filesystem::absolute(filepath);
+
 	MeshData meshData;
-	FBXLoader::ImportAsMesh(fbxFilename, meshData);
+	FBXLoader::ImportAsMesh(fbxFilePath, meshData);
 
 	MeshAssetHeader header;
 	header.sourceMeshFormat = SourceMeshFormat::FBX;
 	header.vertexCount = meshData.vertices.size();
 	header.boneCount = meshData.skeleton.GetNumJoints();
 
-	const std::string meshName = fbxFilename.substr(0, fbxFilename.find("."));
-	const std::string meshFilePath = AssetBaseFolders::mesh + meshName + ".vmesh";
-
+	//Note: Make sure there's a matching folder for meshes from where the fbx file came from. 
+	//@Todo: std::filesystem::create_directory could be used here for the above Note if needed.
 	FILE* file = nullptr;
-	fopen_s(&file, meshFilePath.c_str(), "wb");
+	fopen_s(&file, meshFilePath.string().c_str(), "wb");
 	assert(file);
 
 	assert(fwrite(&header, sizeof(MeshAssetHeader), 1, file));
@@ -141,8 +153,10 @@ MeshDataProxy AssetSystem::ReadVMeshAssetFromFile(const std::string filename)
 	//Create VMesh if it doesn't exist yet.
 	if (!std::filesystem::exists(filepath))
 	{
-		std::string fbxFile = VString::ReplaceFileExtesnion(filename, ".fbx");
-		BuildSingleVMeshFromFBX(fbxFile);
+		const std::string fbxFile = VString::ReplaceFileExtesnion(filename, ".fbx");
+		const std::string fbxFilePath = std::filesystem::current_path().string() +
+			"\\" + AssetBaseFolders::fbxFiles + fbxFile;
+		BuildSingleVMeshFromFBX(fbxFile, fbxFilePath);
 	}
 
 	FILE* file = nullptr;
