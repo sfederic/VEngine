@@ -122,11 +122,14 @@ void AssetSystem::BuildSingleVAnimFromFBX(const std::string filename)
 {
 	Animation animation = FBXLoader::ImportAsAnimation(filename);
 
-	const std::string meshName = filename.substr(0, filename.find("."));
-	const std::string meshFilePath = AssetBaseFolders::anim + meshName + ".vanim";
+	const std::string baseFBXAnimPath = VString::GetSubStringAtFoundOffset(fbxAnimFilePath, AssetBaseFolders::animationFBXFiles);
+	const std::string vAnimPath = VString::ReplaceFileExtesnion(baseFBXAnimPath, ".vanim");
+	const std::filesystem::path filepath = AssetBaseFolders::anim + vAnimPath;
+	const auto animFilePath = std::filesystem::absolute(filepath);
 
+	//Note: Make sure there's a matching folder for animations from where the fbx file came from. 
 	FILE* file = nullptr;
-	fopen_s(&file, meshFilePath.c_str(), "wb");
+	fopen_s(&file, animFilePath.string().c_str(), "wb");
 	assert(file);
 
 	AnimationAssetHeader header;
