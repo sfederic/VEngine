@@ -18,6 +18,12 @@
 #include "Render/MeshData.h"
 #include "Render/Vertex.h"
 
+struct FBXFileInfo
+{
+	std::string filepath;
+	std::string filename;
+};
+
 std::map<std::string, MeshData> existingMeshData;
 
 static const std::string vertexColourDataFileExtension = ".vertexcolourdata";
@@ -26,26 +32,25 @@ static const std::string vertexColourDataFileExtension = ".vertexcolourdata";
 //That or make an offline process or a process when a file is added on a filewatcher's notice.
 void AssetSystem::BuildAllVMeshDataFromFBXImport()
 {
-	FILE* file = nullptr;
-
 	uint64_t numberOfMeshFilesBuilt = 0;
 
 	auto startTime = Profile::QuickStart();
 
-	struct FBXFileInfo
-	{
-		std::string filepath;
-		std::string filename;
-	};
-
 	std::vector<FBXFileInfo> fbxFileInfos;
 
 	//Import all FBX files
-	for (const auto& entry : std::filesystem::directory_iterator("FBXFiles/"))
+	for (const auto& entry : std::filesystem::recursive_directory_iterator("FBXFiles/"))
 	{
+		if (entry.is_directory())
+		{
+			continue;
+		}
+
 		FBXFileInfo fbxFileInfo;
-		fbxFileInfo.filepath = entry.path().filename().string();
-		fbxFileInfo.filename = entry.path().string();
+		fbxFileInfo.filename = entry.path().filename().string();
+		std::string path = std::filesystem::absolute(entry.path()).string();
+		std::replace(path.begin(), path.end(), '\\', '/');
+		fbxFileInfo.filepath = path;
 		fbxFileInfos.emplace_back(fbxFileInfo);
 	}
 
@@ -63,21 +68,30 @@ void AssetSystem::BuildAllVMeshDataFromFBXImport()
 
 void AssetSystem::BuildAllAnimationFilesFromFBXImport()
 {
-	FILE* file = nullptr;
 	uint64_t numberOfAnimationFilesBuilt = 0;
-	std::unordered_set<std::string> fbxAnimFilenames;
 
 	auto startTime = Profile::QuickStart();
 
-	for (const auto& entry : std::filesystem::directory_iterator("AnimationFBXFiles/"))
+	std::vector<FBXFileInfo> fileInfos;
+
+	for (const auto& entry : std::filesystem::recursive_directory_iterator("AnimationFBXFiles/"))
 	{
-		const std::string fbxFilename = entry.path().filename().string();
-		fbxAnimFilenames.emplace(fbxFilename);
+		if (entry.is_directory())
+		{
+			continue;
+		}
+
+		FBXFileInfo fileInfo;
+		fileInfo.filename = entry.path().filename().string();
+		std::string path = std::filesystem::absolute(entry.path()).string();
+		std::replace(path.begin(), path.end(), '\\', '/');
+		fileInfo.filepath = path;
+		fileInfos.emplace_back(fileInfo);
 	}
 
-	for (const auto& filename : fbxAnimFilenames)
+	for (const auto& fileInfo : fileInfos)
 	{
-		AssetSystem::BuildSingleVAnimFromFBX(filename);
+		AssetSystem::BuildSingleVAnimFromFBX(fileInfo.filepath, fileInfo.filename);
 		numberOfAnimationFilesBuilt++;
 	}
 
@@ -118,9 +132,9 @@ void AssetSystem::BuildSingleVMeshFromFBX(const std::string fbxFilePath, const s
 	fclose(file);
 }
 
-void AssetSystem::BuildSingleVAnimFromFBX(const std::string filename)
+void AssetSystem::BuildSingleVAnimFromFBX(const std::string fbxAnimFilePath, const std::string fbxAnimFilename)
 {
-	Animation animation = FBXLoader::ImportAsAnimation(filename);
+	Animation animation = FBXLoader::ImportAsAnimation(fbxAnimFilePath, fbxAnimFilename);
 
 	const std::string baseFBXAnimPath = VString::GetSubStringAtFoundOffset(fbxAnimFilePath, AssetBaseFolders::animationFBXFiles);
 	const std::string vAnimPath = VString::ReplaceFileExtesnion(baseFBXAnimPath, ".vanim");

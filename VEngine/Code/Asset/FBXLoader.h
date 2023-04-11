@@ -19,10 +19,10 @@ namespace FBXLoader
 	void Init();
 
 	//For importing generic fbx assets
-	void ImportAsMesh(std::string filename, MeshData& meshData);
+	void ImportAsMesh(std::string filepath, MeshData& meshData);
 
-	Animation ImportAsAnimation(const std::string filename);
+	Animation ImportAsAnimation(const std::string filepath, const std::string filename);
 
 	//For importing cell fractured meshes
-	void ImportFracturedMesh(std::string filename, std::vector<MeshData>& meshDatas);
+	void ImportFracturedMesh(std::string filepath, std::vector<MeshData>& meshDatas);
 };

@@ -35,11 +35,11 @@ void FBXLoader::Init()
 	importer = FbxImporter::Create(manager, "");
 }
 
-void FBXLoader::ImportAsMesh(std::string filename, MeshData& meshData)
+void FBXLoader::ImportAsMesh(std::string filepath, MeshData& meshData)
 {
-	assert(std::filesystem::exists(filename));
+	assert(std::filesystem::exists(filepath));
 
-	if (!importer->Initialize(filename.c_str(), -1, manager->GetIOSettings()))
+	if (!importer->Initialize(filepath.c_str(), -1, manager->GetIOSettings()))
 	{
 		throw new std::exception("FBX importer messed up. filename probably wrong");
 	}
@@ -76,9 +76,9 @@ void FBXLoader::ImportAsMesh(std::string filename, MeshData& meshData)
 		&meshData.vertices.at(0).pos, sizeof(Vertex));
 }
 
-Animation FBXLoader::ImportAsAnimation(const std::string filename)
+Animation FBXLoader::ImportAsAnimation(const std::string filepath, const std::string filename)
 {
-	const std::string filepath = AssetBaseFolders::animationFBXFiles + filename;
+	assert(std::filesystem::exists(filepath));
 
 	if (!importer->Initialize(filepath.c_str(), -1, manager->GetIOSettings()))
 	{
@@ -214,7 +214,8 @@ Animation FBXLoader::ImportAsAnimation(const std::string filename)
 									Animation& animation = skeleton.GetAnimation(animationName);
 									if (animation.HasFrames())
 									{
-									animation.GetFrame(currentJointIndex).emplace_back(animFrame);
+										animation.GetFrame(currentJointIndex).emplace_back(animFrame);
+									}
 								}
 							}
 						}
