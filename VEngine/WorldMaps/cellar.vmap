@@ -21,6 +21,39 @@ StartBattleOnLoad
 UID
 1455604839
 next
+GridActor
+1
+ Enabled
+1
+ Position
+0 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Name
+GridActor0
+Obstacle
+1
+UID
+2077404326
+next
 MeshActor
 12
  Enabled
@@ -208,9 +241,9 @@ Player
  Enabled
 1
  Position
-0 0 0
+-0 0 -0
  Rotation
-0 -3.27826e-07 0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -218,7 +251,7 @@ Player
 Name
 Player0
 UID
-2042203538
+3182479010
 next
 PointLightActor
 1
@@ -235,11 +268,60 @@ PointLightActor
 Name
 PointLightActor0
 UID
-912812191
+1725092271
+next
+Unit
+1
+ Enabled
+1
+ Position
+2 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Attack Points
+1
+Attack Range
+1
+Battle State
+fight
+Death Text
+
+Destruct
+1
+DisableGridInteract
+0
+Focus Actor
+
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Move Points
+3
+Move Speed
+3
+Name
+Unit0
+Num Attacks
+1
+Obstacle
+0
+UID
+751783791
 next
 CameraComponent
 1
-2042203538
+3182479010
 Camera
  Enabled
 1
@@ -258,11 +340,11 @@ Far Z
 Near Z
 0.01
 UID
-1785979275
+3797372591
 next
 DialogueComponent
-1
-2042203538
+3
+2077404326
 Dialogue
  Enabled
 1
@@ -271,24 +353,46 @@ Dialogue
 File
 
 UID
-3415428886
+576667110
+next
+3182479010
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+4053097899
+next
+751783791
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+3076181799
 next
 EmptyComponent
 1
-2042203538
+3182479010
 Root
  Enabled
 1
  Pos
-0 0 0
+-0 0 -0
  Rot
-0 -3.27826e-07 0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
 1
 UID
-3502355136
+1209831414
 next
 InstanceMeshComponent
 1
@@ -343,8 +447,100 @@ Trans. Occlude
 UID
 2455172601
 next
+MemoryComponent
+3
+2077404326
+Memory
+ Enabled
+1
+ Visible
+1
+Add On Interact
+0
+Memory Name
+
+UID
+191268259
+next
+751783791
+Memory
+ Enabled
+1
+ Visible
+1
+Add On Interact
+0
+Memory Name
+
+UID
+1061806464
+next
+751783791
+MemoryOnDeath
+ Enabled
+1
+ Visible
+1
+Add On Interact
+0
+Memory Name
+
+UID
+1964627112
+next
 MeshComponent
-13
+15
+2077404326
+Mesh
+ Enabled
+1
+ Pos
+0 0 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3779007451
+next
 1096013699
 Mesh
  Enabled
@@ -376,7 +572,7 @@ M_Specular
 M_Texture
 Walls/wall02.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -427,7 +623,7 @@ M_Specular
 M_Texture
 barrel_texture.jpg
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -478,7 +674,7 @@ M_Specular
 M_Texture
 barrel_texture.jpg
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -529,7 +725,7 @@ M_Specular
 M_Texture
 barrel_texture.jpg
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -580,7 +776,7 @@ M_Specular
 M_Texture
 barrel_texture.jpg
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -631,7 +827,7 @@ M_Specular
 M_Texture
 barrel_texture.jpg
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -682,7 +878,7 @@ M_Specular
 M_Texture
 Walls/wall03.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -733,7 +929,7 @@ M_Specular
 M_Texture
 Walls/wall03.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -784,7 +980,7 @@ M_Specular
 M_Texture
 Walls/wall03.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -835,7 +1031,7 @@ M_Specular
 M_Texture
 Walls/wall03.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -886,7 +1082,7 @@ M_Specular
 M_Texture
 crate.jpg
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -937,7 +1133,7 @@ M_Specular
 M_Texture
 crate.jpg
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -957,14 +1153,14 @@ Trans. Occlude
 UID
 2021054693
 next
-2042203538
+3182479010
 Mesh
  Enabled
 1
  Pos
 0 0 0
  Rot
-0 -4.17233e-07 0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -988,7 +1184,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1006,11 +1202,62 @@ Static
 Trans. Occlude
 0
 UID
-3416340359
+2800726880
+next
+751783791
+Mesh
+ Enabled
+1
+ Pos
+2 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1518325020
 next
 PointLightComponent
 1
-912812191
+1725092271
 PointLight
  Enabled
 1
@@ -1025,10 +1272,10 @@ PointLight
 Colour
 1 1 1 1
 Intensity
-25
+5
 LightEnabled
 1
 UID
-2162677996
+2490799678
 next
 end
