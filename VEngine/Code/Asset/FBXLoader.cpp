@@ -212,6 +212,8 @@ Animation FBXLoader::ImportAsAnimation(const std::string filename)
 									animFrame.pos.z = pos[2];
 
 									Animation& animation = skeleton.GetAnimation(animationName);
+									if (animation.HasFrames())
+									{
 									animation.GetFrame(currentJointIndex).emplace_back(animFrame);
 								}
 							}
