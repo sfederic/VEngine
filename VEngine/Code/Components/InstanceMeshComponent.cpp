@@ -30,11 +30,19 @@ void InstanceMeshComponent::Create()
 		instanceData.emplace_back(InstanceData());
 	}
 
+	uint32_t meshCount = meshInstanceRenderCount;
+
+	//Set a default of 1 if 0 so that the SRV buffers don't blow up when creating them.
+	if (meshCount == 0)
+	{
+		meshCount = 1;
+	}
+
 	//Setup shader buffers
-	structuredBuffer = RenderUtils::CreateStructuredBuffer(sizeof(InstanceData) * meshInstanceRenderCount,
+	structuredBuffer = RenderUtils::CreateStructuredBuffer(sizeof(InstanceData) * meshCount,
 		sizeof(InstanceData), instanceData.data());
 
-	srv = RenderUtils::CreateSRVForMeshInstance(structuredBuffer, meshInstanceRenderCount);
+	srv = RenderUtils::CreateSRVForMeshInstance(structuredBuffer, meshCount);
 }
 
 void InstanceMeshComponent::SetInstanceCount(uint32_t count)

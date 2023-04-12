@@ -13,7 +13,7 @@
 Grid::Grid()
 {
     nodeMesh = InstanceMeshComponent::system.Add("NodeMesh",
-        this, InstanceMeshComponent(1, "node.vmesh", "test.png", ShaderItems::Instance));
+        this, InstanceMeshComponent(0, "node.vmesh", "test.png", ShaderItems::Instance));
 
     rootComponent = nodeMesh;
 }
