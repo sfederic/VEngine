@@ -41,6 +41,8 @@ private:
 
     void ImportAsset();
 
+    void SetDirectoriesToFilter();
+
     QFileSystemModel* fileSystemModel;
     QTreeView* assetTreeView;
     QListWidget* assetIcons;

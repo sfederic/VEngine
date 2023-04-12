@@ -65,8 +65,7 @@ AssetDock::AssetDock() : QDockWidget("Assets")
     fileSystemModel = new QFileSystemModel();
     fileSystemModel->setRootPath(QDir::currentPath());
 
-    //Only show folders. Don't show parent folders (../ and ./)
-    fileSystemModel->setFilter(QDir::Dirs | QDir::NoDotAndDotDot);
+    SetDirectoriesToFilter();
 
     assetTreeView = new QTreeView();
     assetTreeView->setModel(fileSystemModel);
@@ -468,4 +467,26 @@ void AssetDock::ImportAsset()
         AssetSystem::BuildSingleVMeshFromFBX(filePath.toStdString(), filename);
         Log("VMesh built from [%s].", filename.c_str());
     }
+}
+
+void AssetDock::SetDirectoriesToFilter()
+{
+    //Only show folders. Don't show parent folders (../ and ./)
+    fileSystemModel->setFilter(QDir::Dirs | QDir::NoDotAndDotDot);
+
+    fileSystemModel->setNameFilterDisables(false);
+
+    //Keep in mind these are the directories to actually show, not exclude
+    QStringList directoriesToFilter;
+    directoriesToFilter.append("ActorTemplates");
+    directoriesToFilter.append("AnimationFBXFiles");
+    directoriesToFilter.append("Animations");
+    directoriesToFilter.append("Audio");
+    directoriesToFilter.append("Dialogue");
+    directoriesToFilter.append("FBXFiles");
+    directoriesToFilter.append("Materials");
+    directoriesToFilter.append("Meshes");
+    directoriesToFilter.append("Textures");
+    directoriesToFilter.append("WorldMaps");
+    fileSystemModel->setNameFilters(directoriesToFilter);
 }
