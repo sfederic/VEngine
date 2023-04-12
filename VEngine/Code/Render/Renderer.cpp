@@ -718,11 +718,13 @@ void RenderShadowPass()
 	{
 		RenderMeshForShadowPass(mesh.get());
 	}	
-	
-	for (auto& instanceMesh : InstanceMeshComponent::system.GetComponents())
-	{
-		RenderInstanceMeshForShadowPass(*instanceMesh.get());
-	}
+
+	//@Todo: For VagrantTactics, don't need shadows on InstanceMeshes as only the Grid is using them and 
+	//the levels are small enough.
+	//for (auto& instanceMesh : InstanceMeshComponent::system.GetComponents())
+	//{
+	//	RenderInstanceMeshForShadowPass(*instanceMesh.get());
+	//}
 
 	for (auto& skeletalMesh : SkeletalMeshComponent::system.GetComponents())
 	{
