@@ -17,3 +17,9 @@ Properties SpotLightComponent::GetProps()
     props.Add("LightEnabled", &lightData.enabled);
     return props;
 }
+
+Light SpotLightComponent::GetLightData()
+{
+    XMStoreFloat4(&lightData.position, GetWorldPositionV());
+    return lightData;
+}

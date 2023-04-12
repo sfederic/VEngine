@@ -13,7 +13,7 @@ public:
 	void Create() override;
 	Properties GetProps() override;
 
-	auto GetLightData() { return lightData; }
+	Light GetLightData();
 
 private:
 	Light lightData;
