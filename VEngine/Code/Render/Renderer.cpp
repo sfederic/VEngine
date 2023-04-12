@@ -81,6 +81,7 @@ void RenderShadowPass();
 void RenderMeshComponents();
 void RenderDestructibleMeshes();
 void RenderMeshForShadowPass(MeshComponent* mesh);
+void RenderInstanceMeshForShadowPass(InstanceMeshComponent& instanceMesh);
 void AnimateAndRenderSkeletalMeshes();
 void RenderSocketMeshComponents();
 void RenderInstanceMeshComponents();
@@ -669,6 +670,36 @@ void RenderMeshForShadowPass(MeshComponent* mesh)
 	context->Draw(mesh->meshDataProxy.vertices.size(), 0);
 }
 
+void RenderInstanceMeshForShadowPass(InstanceMeshComponent& instanceMesh)
+{
+	if (!instanceMesh.castsShadow) {
+		return;
+	}
+
+	Material& mat = instanceMesh.GetMaterial();
+	SetRenderPipelineStatesForShadows(&instanceMesh);
+
+	const auto vertexCount = instanceMesh.meshDataProxy.vertices.size();
+
+	for (const auto& instanceData : instanceMesh.GetInstanceData())
+	{
+		//Set matrices
+		shaderMatrices.model = instanceData.world;
+		shaderMatrices.MakeModelViewProjectionMatrix();
+		shaderMatrices.MakeTextureMatrix(mat);
+
+		cbMatrices->Map(&shaderMatrices);
+		cbMatrices->SetVS();
+
+		//Set textures
+		context->PSSetSamplers(0, 1, &mat.sampler->data);
+		SetShaderResourceFromMaterial(0, mat);
+
+		//Draw
+		context->Draw(vertexCount, 0);
+	}
+}
+
 void RenderShadowPass()
 {
 	Profile::Start();
@@ -690,7 +721,7 @@ void RenderShadowPass()
 	
 	for (auto& instanceMesh : InstanceMeshComponent::system.GetComponents())
 	{
-		RenderMeshForShadowPass(instanceMesh.get());
+		RenderInstanceMeshForShadowPass(*instanceMesh.get());
 	}
 
 	for (auto& skeletalMesh : SkeletalMeshComponent::system.GetComponents())
