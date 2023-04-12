@@ -17,8 +17,8 @@
 #include "RastStates.h"
 #include "BlendStates.h"
 
-VEnum rastStates;
-VEnum blendStates;
+static VEnum rastStates;
+static VEnum blendStates;
 
 void Material::SetupBlendAndRastStateValues()
 {
