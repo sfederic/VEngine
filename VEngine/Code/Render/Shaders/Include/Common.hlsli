@@ -266,7 +266,7 @@ float CalcSpotCone(Light light, float3 L)
 	return smoothstep(minCos, maxCos, cosAngle);
 }
 
-LightingResult CalcSpotLight(Light light, float3 V, float4 P, float3 N, float3 L,
+LightingResult CalcSpotLight(Light light, float3 L,
 	float distance, float NdotV, float NdotL, float NdotH, float LdotH, float HdotV)
 {
 	LightingResult result;
@@ -320,7 +320,7 @@ LightingResult CalcForwardLighting(float3 V, float4 position, float3 normal)
 			break;
 
 		case SPOT_LIGHT:
-            result = CalcSpotLight(lights[i], V, position, normal, L, distance, NdotV, NdotL, NdotH, LdotH, HdotV);
+            result = CalcSpotLight(lights[i], L, distance, NdotV, NdotL, NdotH, LdotH, HdotV);
 			break;
 
 		case DIRECTIONAL_LIGHT:
