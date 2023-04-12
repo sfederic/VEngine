@@ -1,24 +1,7 @@
-DirectionalLightActor
-1
- Enabled
-1
- Position
-0 5 0
- Rotation
-0.707107 0 0 0.707107
- Scale
-1 1 1
- Visible
-1
-Name
-DirectionalLightActor0
-UID
-395551153
-next
 Grid
 1
  Enabled
-1
+0
  Position
 0 0 0
  Rotation
@@ -30,24 +13,24 @@ Grid
 Name
 Grid0
 Size X
-5
+9
 Size Y
-5
+9
 StartBattleOnLoad
 0
 UID
 2103209020
 next
 MeshActor
-2
+9
  Enabled
 1
  Position
-2 -0.5 2
+4 -0.5 4
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
-5 1 5
+9 1 9
  Visible
 1
 Name
@@ -58,26 +41,131 @@ next
  Enabled
 1
  Position
-2 0 2
+4 0 8
  Rotation
 -0 0 -0 1
  Scale
-1 1 1
+0.5 1 1
  Visible
 1
 Name
-Church/barrel1
+pillar_ornate2
 UID
-3392327256
+4287058593
+next
+ Enabled
+1
+ Position
+0 2 6
+ Rotation
+-0.707107 0 -0 0.707107
+ Scale
+1 0.999994 0.999994
+ Visible
+1
+Name
+pillar12
+UID
+793117399
+next
+ Enabled
+1
+ Position
+0 2 2
+ Rotation
+-0.707107 0 -0 0.707107
+ Scale
+1 0.99999 0.99999
+ Visible
+1
+Name
+pillar13
+UID
+4164310218
+next
+ Enabled
+1
+ Position
+8 2 2
+ Rotation
+-0.707107 0 -0 0.707107
+ Scale
+1 0.999984 0.999984
+ Visible
+1
+Name
+pillar14
+UID
+4275524294
+next
+ Enabled
+1
+ Position
+8 2 5
+ Rotation
+-0.707107 0 -0 0.707107
+ Scale
+1 0.999982 0.999982
+ Visible
+1
+Name
+pillar15
+UID
+3955266673
+next
+ Enabled
+1
+ Position
+-0.5 2 4
+ Rotation
+0.5 0.5 0.5 -0.5
+ Scale
+9 1 5
+ Visible
+1
+Name
+MeshActor6
+UID
+3928281324
+next
+ Enabled
+1
+ Position
+8.5 2 4
+ Rotation
+-0.5 0.5 0.5 0.5
+ Scale
+9 0.999998 4.99999
+ Visible
+1
+Name
+MeshActor7
+UID
+47899462
+next
+ Enabled
+1
+ Position
+4 2 8.5
+ Rotation
+-0.707107 6.88394e-08 1.53133e-07 0.707107
+ Scale
+9 0.999991 4.99993
+ Visible
+1
+Name
+MeshActor8
+UID
+1471994544
 next
 Player
 1
  Enabled
 1
  Position
-0 0 0
+5 0 1
  Rotation
-0 0 0 1
+0 1.49012e-07 0 -0.999999
  Scale
 1 1 1
  Visible
@@ -86,6 +174,38 @@ Name
 Player0
 UID
 1647454417
+next
+PointLightActor
+2
+ Enabled
+1
+ Position
+2 2 6
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+PointLightActor0
+UID
+1611119851
+next
+ Enabled
+1
+ Position
+4 2 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+PointLightActor1
+UID
+262954726
 next
 CameraComponent
 1
@@ -123,27 +243,6 @@ File
 UID
 2967410941
 next
-DirectionalLightComponent
-1
-395551153
-DirectionalLight
- Enabled
-1
- Pos
-0 5 0
- Rot
-0.707107 0 0 0.707107
- Scale
-1 1 1
- Visible
-1
-Colour
-1 1 1 1
-LightEnabled
-1
-UID
-959947852
-next
 EmptyComponent
 1
 1647454417
@@ -151,9 +250,9 @@ Root
  Enabled
 1
  Pos
-0 0 0
+5 0 1
  Rot
-0 0 0 1
+0 1.49012e-07 0 -0.999999
  Scale
 1 1 1
  Visible
@@ -166,7 +265,7 @@ InstanceMeshComponent
 2103209020
 NodeMesh
  Enabled
-1
+0
  Pos
 0 0 0
  Rot
@@ -215,17 +314,17 @@ UID
 3813850013
 next
 MeshComponent
-3
+10
 3841650662
 Mesh
  Enabled
 1
  Pos
-2 -0.5 2
+4 -0.5 4
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
-5 1 5
+9 1 9
  Visible
 1
 Casts Shadow
@@ -245,9 +344,9 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Walls/wall06.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -267,6 +366,414 @@ Trans. Occlude
 UID
 3967634413
 next
+4287058593
+Mesh
+ Enabled
+1
+ Pos
+4 0 8
+ Rot
+-0 0 -0 1
+ Scale
+0.5 1 1
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Walls/unnamed.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+pillar_ornate.vmesh
+Static
+1
+Trans. Occlude
+1
+UID
+3219140234
+next
+793117399
+Mesh
+ Enabled
+1
+ Pos
+0 2 6
+ Rot
+-0.707107 0 -0 0.707107
+ Scale
+1 0.999994 0.999994
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+stone.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+pillar1.vmesh
+Static
+1
+Trans. Occlude
+1
+UID
+2382354807
+next
+4164310218
+Mesh
+ Enabled
+1
+ Pos
+0 2 2
+ Rot
+-0.707107 0 -0 0.707107
+ Scale
+1 0.99999 0.99999
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+stone.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+pillar1.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3216711592
+next
+4275524294
+Mesh
+ Enabled
+1
+ Pos
+8 2 2
+ Rot
+-0.707107 0 -0 0.707107
+ Scale
+1 0.999984 0.999984
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+stone.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+pillar1.vmesh
+Static
+1
+Trans. Occlude
+1
+UID
+3537492580
+next
+3955266673
+Mesh
+ Enabled
+1
+ Pos
+8 2 5
+ Rot
+-0.707107 0 -0 0.707107
+ Scale
+1 0.999982 0.999982
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+stone.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+pillar1.vmesh
+Static
+1
+Trans. Occlude
+1
+UID
+2640487064
+next
+3928281324
+Mesh
+ Enabled
+1
+ Pos
+-0.5 2 4
+ Rot
+0.5 0.5 0.5 -0.5
+ Scale
+9 1 5
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wall.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+2 2
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3781977943
+next
+47899462
+Mesh
+ Enabled
+1
+ Pos
+8.5 2 4
+ Rot
+-0.5 0.5 0.5 0.5
+ Scale
+9 0.999998 4.99999
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wall.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+2 2
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+198290691
+next
+1471994544
+Mesh
+ Enabled
+1
+ Pos
+4 2 8.5
+ Rot
+-0.707107 6.88394e-08 1.53133e-07 0.707107
+ Scale
+9 0.999991 4.99993
+ Visible
+1
+Casts Shadow
+1
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wall.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+3 2
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1752416160
+next
 1647454417
 Mesh
  Enabled
@@ -274,7 +781,7 @@ Mesh
  Pos
 0 0 0
  Rot
-0 0 0 1
+0 8.94069e-08 0 -1
  Scale
 1 1 1
  Visible
@@ -318,55 +825,48 @@ Trans. Occlude
 UID
 2929477331
 next
-3392327256
-Mesh
+PointLightComponent
+2
+1611119851
+PointLight
  Enabled
 1
  Pos
-2 0 2
+2 2 6
  Rot
 -0 0 -0 1
  Scale
 1 1 1
  Visible
 1
-Casts Shadow
+Colour
+0.9 0.4 0 1
+Intensity
+20
+LightEnabled
 1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-Church/barrel.vmesh
-Static
-1
-Trans. Occlude
-0
 UID
-620261804
+3165961693
+next
+262954726
+PointLight
+ Enabled
+1
+ Pos
+4 2 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Colour
+0.9 0.4 0 1
+Intensity
+20
+LightEnabled
+1
+UID
+2697287444
 next
 end
