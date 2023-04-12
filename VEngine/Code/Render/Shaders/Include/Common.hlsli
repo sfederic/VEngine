@@ -94,7 +94,7 @@ struct Light
 	bool enabled;
 };
 
-static const int MAX_LIGHTS = 8;
+static const int MAX_LIGHTS = 32;
 static const int DIRECTIONAL_LIGHT = 0;
 static const int POINT_LIGHT = 1;
 static const int SPOT_LIGHT = 2;
