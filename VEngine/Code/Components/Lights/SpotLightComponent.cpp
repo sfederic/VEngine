@@ -21,5 +21,6 @@ Properties SpotLightComponent::GetProps()
 Light SpotLightComponent::GetLightData()
 {
     XMStoreFloat4(&lightData.position, GetWorldPositionV());
+    XMStoreFloat4(&lightData.direction, GetForwardVectorV());
     return lightData;
 }
