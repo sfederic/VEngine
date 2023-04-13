@@ -1,3 +1,28 @@
+EntranceTrigger
+1
+ Enabled
+1
+ Position
+4 0 7
+ Rotation
+-0 0 -0 1
+ Scale
+2.5 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Text
+Open
+UID
+3299669729
+next
 Grid
 1
  Enabled
@@ -163,9 +188,9 @@ Player
  Enabled
 1
  Position
-5 0 1
+0 0 0
  Rotation
-0 1.49012e-07 0 -0.999999
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -195,7 +220,7 @@ next
  Enabled
 1
  Position
-4 2 0
+6 2 0
  Rotation
 -0 0 -0 1
  Scale
@@ -206,6 +231,27 @@ Name
 PointLightActor1
 UID
 262954726
+next
+BoxTriggerComponent
+1
+3299669729
+Trigger
+ Enabled
+1
+ Pos
+4 0 7
+ Rot
+-0 0 -0 1
+ Scale
+2.5 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+341446241
 next
 CameraComponent
 1
@@ -230,6 +276,21 @@ Near Z
 UID
 3825084304
 next
+ConditionComponent
+1
+3299669729
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+715993242
+next
 DialogueComponent
 1
 1647454417
@@ -250,9 +311,9 @@ Root
  Enabled
 1
  Pos
-5 0 1
+0 0 0
  Rot
-0 1.49012e-07 0 -0.999999
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -781,7 +842,7 @@ Mesh
  Pos
 0 0 0
  Rot
-0 8.94069e-08 0 -1
+0 -0.707107 0 0.707108
  Scale
 1 1 1
  Visible
@@ -853,7 +914,7 @@ PointLight
  Enabled
 1
  Pos
-4 2 0
+6 2 0
  Rot
 -0 0 -0 1
  Scale
