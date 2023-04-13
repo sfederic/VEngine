@@ -142,6 +142,7 @@ Properties MeshComponent::GetProps()
 	props.Add("Casts Shadow", &castsShadow);
 	props.Add("Static", &isStatic);
 	props.Add("Trans. Occlude", &transparentOcclude);
+	props.Add("Grid Obst.", &gridObstacle);
 
 	auto materialProps = material->GetProps();
 	materialProps.SetAllPropertyOwnerUIDs(props.ownerUID);

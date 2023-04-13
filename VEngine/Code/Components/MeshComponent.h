@@ -36,6 +36,7 @@ public:
 	//Whether to make transparent when in between player and camera
 	bool transparentOcclude = false;
 
+	//For VagrantTactics. Tells the Grid that any nodes that are placed on this mesh are to become inactive.
 	bool gridObstacle = false;
 
 	MeshComponent();
