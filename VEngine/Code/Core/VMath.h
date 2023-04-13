@@ -37,6 +37,7 @@ namespace VMath
 	XMFLOAT3 Float3Subtract(XMFLOAT3& f0, XMFLOAT3& f1);
 	bool Float3IsZero(XMFLOAT3& float3);
 	void RoundFloat3(XMFLOAT3& float3);
+	void CeilFloat3(XMFLOAT3& float3);
 	void SaturateFloat4(XMFLOAT4& float4);
 
 	//Good for when XMVECTOR floats are all over the place

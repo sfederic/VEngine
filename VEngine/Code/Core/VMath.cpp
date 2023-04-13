@@ -88,6 +88,13 @@ namespace VMath
         float3.z = std::round(float3.z);
     }
 
+    void CeilFloat3(XMFLOAT3& float3)
+    {
+        float3.x = std::ceil(float3.x);
+        float3.y = std::ceil(float3.y);
+        float3.z = std::ceil(float3.z);
+    }
+
     void SaturateFloat4(XMFLOAT4& float4)
     {
         float4.x = std::clamp(float4.x, 0.f, 1.0f);
