@@ -240,7 +240,7 @@ void SpawnActorOnClick()
 			{
 				Transform transform;
 				XMStoreFloat3(&transform.position, hit.GetHitPosV());
-				VMath::RoundFloat3(transform.position);
+				VMath::CeilFloat3(transform.position);
 				SpawnActor(transform);
 			}
 			else //Spawn actor a bit in front of the camera based on the click
