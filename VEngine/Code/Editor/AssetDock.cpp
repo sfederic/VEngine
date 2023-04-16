@@ -296,6 +296,7 @@ void AssetDock::MeshFileClicked(const std::string meshFilename)
     WorldEditor::SetActorTemplateFilename("");
 
     MeshActor::spawnMeshFilename = meshFilename;
+    Log("Mesh [%s] selected in editor.", meshFilename.c_str());
 }
 
 void AssetDock::ActorTemplateFileClicked(const std::string actorTemplateFilename)
