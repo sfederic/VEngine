@@ -27,7 +27,8 @@ WorldEditor::PickMode pickMode = WorldEditor::PickMode::Actor;
 
 bool WorldEditor::texturePlacement = false;
 bool WorldEditor::materialPlacement = false;
-bool WorldEditor::vertexPaintActive = false;
+bool WorldEditor::vertexPaintActive = false; 
+bool WorldEditor::actorReplaceModeActive = false;
 
 DirectX::XMFLOAT4 WorldEditor::vertexPaintColour;
 
@@ -111,6 +112,26 @@ void HandleActorPicking()
 				{
 					WorldEditor::SetPickedComponent(hit.hitComponent);
 					break;
+				}
+			}
+
+			//Handle actor replacement 
+			if (WorldEditor::actorReplaceModeActive)
+			{
+				auto pickedActor = WorldEditor::GetPickedActor();
+				if (pickedActor)
+				{
+					auto pickedActorTransform = pickedActor->GetTransform();
+					pickedActor->Destroy();
+
+					auto replacementActor = spawnSystem->SpawnActor(pickedActorTransform);
+					replacementActor->Create();
+					replacementActor->CreateAllComponents();
+
+					editor->UpdateWorldList();
+
+					WorldEditor::ClearPickedActors();
+					WorldEditor::SetPickedActor(replacementActor);
 				}
 			}
 		}

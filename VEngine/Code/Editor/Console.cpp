@@ -133,7 +133,15 @@ void Console::Init()
 
 	executeMap.emplace(L"WORLD",
 		std::make_pair([]() { debugMenu.worldMenuOpen = !debugMenu.worldMenuOpen; },
-			"Menu to open worlds at runtime during gameplay."));
+			"Menu to open worlds at runtime during gameplay."));	
+	
+	executeMap.emplace(L"REPLACE",
+		std::make_pair([]() { 
+			WorldEditor::actorReplaceModeActive = !WorldEditor::actorReplaceModeActive;
+			WorldEditor::actorReplaceModeActive ? Log("Actor replace mode active.") :
+				Log("Actor replace mode inactive.");
+			},
+			"Replace clicked actor in world with the currently selected actor system."));
 
 	executeMap.emplace(L"PAINT",
 		std::make_pair([]() { 
