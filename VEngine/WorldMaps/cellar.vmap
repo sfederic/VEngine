@@ -410,6 +410,8 @@ NodeMesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -504,6 +506,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -555,6 +559,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -572,7 +578,7 @@ M_Specular
 M_Texture
 Walls/wall02.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -606,6 +612,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -623,7 +631,7 @@ M_Specular
 M_Texture
 barrel_texture.jpg
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -657,6 +665,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -674,7 +684,7 @@ M_Specular
 M_Texture
 barrel_texture.jpg
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -708,6 +718,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -725,7 +737,7 @@ M_Specular
 M_Texture
 barrel_texture.jpg
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -759,6 +771,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -776,7 +790,7 @@ M_Specular
 M_Texture
 barrel_texture.jpg
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -810,6 +824,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -827,7 +843,7 @@ M_Specular
 M_Texture
 barrel_texture.jpg
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -861,6 +877,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -878,7 +896,7 @@ M_Specular
 M_Texture
 Walls/wall03.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -912,6 +930,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -929,7 +949,7 @@ M_Specular
 M_Texture
 Walls/wall03.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -963,6 +983,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -980,7 +1002,7 @@ M_Specular
 M_Texture
 Walls/wall03.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1014,6 +1036,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -1031,7 +1055,7 @@ M_Specular
 M_Texture
 Walls/wall03.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1065,6 +1089,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -1082,7 +1108,7 @@ M_Specular
 M_Texture
 crate.jpg
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1116,6 +1142,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -1133,7 +1161,7 @@ M_Specular
 M_Texture
 crate.jpg
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1167,6 +1195,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -1184,7 +1214,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1218,6 +1248,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -1235,7 +1267,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1272,7 +1304,7 @@ PointLight
 Colour
 1 1 1 1
 Intensity
-5
+25
 LightEnabled
 1
 UID
