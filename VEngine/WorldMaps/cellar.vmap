@@ -1,3 +1,26 @@
+DiffuseProbeMap
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DiffuseProbeMap0
+Size X
+5
+Size Y
+3
+Size Z
+7
+UID
+163570520
+next
 Grid
 1
  Enabled
@@ -395,7 +418,60 @@ UID
 1209831414
 next
 InstanceMeshComponent
+2
+163570520
+InstanceMesh
+ Enabled
 1
+ Pos
+0 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Instance
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1579970218
+next
 1455604839
 NodeMesh
  Enabled
@@ -1302,7 +1378,7 @@ PointLight
  Visible
 1
 Colour
-1 1 1 1
+0 1 1 1
 Intensity
 25
 LightEnabled
