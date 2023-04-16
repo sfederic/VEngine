@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "GameInstance.h"
 
-std::string GameInstance::startingMap = "block_break.vmap";
+std::string GameInstance::startingMap = "xenogears_room.vmap";
 
 //Global properties
 

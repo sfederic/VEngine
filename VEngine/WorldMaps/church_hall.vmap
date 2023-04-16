@@ -188,7 +188,7 @@ Player
  Enabled
 1
  Position
-0 0 0
+4 0 2
  Rotation
 0 0 0 1
  Scale
@@ -199,38 +199,6 @@ Name
 Player0
 UID
 1647454417
-next
-PointLightActor
-2
- Enabled
-1
- Position
-2 2 6
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-PointLightActor0
-UID
-1611119851
-next
- Enabled
-1
- Position
-6 2 0
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-PointLightActor1
-UID
-262954726
 next
 BoxTriggerComponent
 1
@@ -311,7 +279,7 @@ Root
  Enabled
 1
  Pos
-0 0 0
+4 0 2
  Rot
 0 0 0 1
  Scale
@@ -337,6 +305,8 @@ NodeMesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -390,6 +360,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -441,6 +413,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -492,6 +466,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -543,6 +519,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -594,6 +572,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -645,6 +625,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -696,6 +678,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -747,6 +731,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -798,6 +784,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -842,13 +830,15 @@ Mesh
  Pos
 0 0 0
  Rot
-0 -0.707107 0 0.707108
+-0 0 0 1
  Scale
 1 1 1
  Visible
 1
 Casts Shadow
 1
+Grid Obst.
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -885,49 +875,5 @@ Trans. Occlude
 0
 UID
 2929477331
-next
-PointLightComponent
-2
-1611119851
-PointLight
- Enabled
-1
- Pos
-2 2 6
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Colour
-0.9 0.4 0 1
-Intensity
-20
-LightEnabled
-1
-UID
-3165961693
-next
-262954726
-PointLight
- Enabled
-1
- Pos
-6 2 0
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Colour
-0.9 0.4 0 1
-Intensity
-20
-LightEnabled
-1
-UID
-2697287444
 next
 end
