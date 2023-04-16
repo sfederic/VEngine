@@ -90,7 +90,6 @@ void DebugMenu::Tick(float deltaTime)
 	RenderConsoleCommandsMenu();
 	RenderWorldMenu();
 	RenderMaterialPlacementMenu();
-	RenderActorSystemSpawnMenu();
 	RenderVertexPaintMenu();
 	RenderUVMenu();
 
@@ -493,35 +492,6 @@ void DebugMenu::RenderUVMenu()
 	}
 
 	ImGui::End();
-}
-
-void DebugMenu::RenderActorSystemSpawnMenu()
-{
-	if (Input::GetKeyHeld(Keys::Ctrl))
-	{
-		if (Input::GetKeyUp(Keys::T))
-		{
-			actorSystemSpawnMenuOpen = !actorSystemSpawnMenuOpen;
-		}
-	}
-
-	if (actorSystemSpawnMenuOpen)
-	{
-		ImGui::Begin("Actor System Spawn Menu");
-		ImGui::SetWindowSize(ImVec2(250.f, 100.f));
-		static char systemName[512];
-		if (ImGui::InputText("System", systemName, sizeof(systemName)))
-		{
-			std::string str = systemName;
-			auto system = ActorSystemCache::Get().GetSystem(str);
-			if (system)
-			{
-				WorldEditor::SetSpawnSystem(system);
-				Log("Actor Spawn System set as %s", str.c_str());
-			}
-		}
-		ImGui::End();
-	}
 }
 
 //Handle viewport notifications (e.g. "Shaders recompiled", "ERROR: Not X", etc.)

@@ -65,13 +65,8 @@ private:
 	void RenderVertexPaintMenu();
 	void RenderUVMenu();
 
-	//Ctrl+T menu meant to mimic Visual Studio's class find functionality
-	void RenderActorSystemSpawnMenu();
-
 	void RenderTexturePlacementMenu();
 	void RenderMaterialPlacementMenu();
-
-	bool actorSystemSpawnMenuOpen = false;
 };
 
 extern DebugMenu debugMenu;
