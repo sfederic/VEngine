@@ -696,7 +696,7 @@ void Player::SetGuard()
 
 void Player::CheckNextMoveNode(XMVECTOR previousPos)
 {
-	if (battleSystem.playerActionPoints <= 0)
+	if (battleSystem.isBattleActive && battleSystem.playerActionPoints <= 0)
 	{
 		Log("No Player action points remaining.");
 		nextPos = previousPos;
