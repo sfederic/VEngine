@@ -3,11 +3,17 @@
 
 Texture2D::~Texture2D()
 {
-	data->Release();
-	data = nullptr;
+	if (data)
+	{ 
+		data->Release(); 
+		data = nullptr;
+	}
 
-	srv->Release();
-	srv = nullptr;
+	if (srv)
+	{
+		srv->Release();
+		srv = nullptr;
+	}
 
 	width = 0;
 	height = 0;
