@@ -989,8 +989,6 @@ void Renderer::RenderLightProbeViews()
 
 	CreateLightProbeBuffers();
 
-	diffuseProbeMap->lightProbeData.clear();
-
 	int probeIndex = 0;
 
 	for (auto& probeData : diffuseProbeMap->lightProbeData)
@@ -1074,14 +1072,16 @@ void Renderer::RenderLightProbeViews()
 			coefs[co_index] = XMFLOAT4(SH_R[co_index], SH_G[co_index], SH_B[co_index], 1.0f);
 		}
 
-		LightProbeInstanceData pd;
-		pd.index = probeIndex;
-		memcpy(pd.SH, coefs, sizeof(XMFLOAT4) * 9);
-		XMStoreFloat3(&pd.position, probeMatrix.r[3]);
-		diffuseProbeMap->lightProbeData.emplace_back(pd);
+		probeData.index = probeIndex;
+		memcpy(probeData.SH, coefs, sizeof(XMFLOAT4) * 9);
+		XMStoreFloat3(&probeData.position, probeMatrix.r[3]);
 
 		probeIndex++;
 	}
+
+	//Remap probe data to structured buffer
+	MapBuffer(diffuseProbeMap->GetStructuredBuffer(), diffuseProbeMap->lightProbeData.data(),
+		sizeof(LightProbeInstanceData)* diffuseProbeMap->lightProbeData.size());
 
 	ResizeSwapchain(previousWiewportWidth, previousWiewportHeight);
 
