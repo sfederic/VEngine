@@ -175,8 +175,6 @@ ConstantBuffer<ShaderSkinningData>* cbSkinningData;
 //ConstantBuffer<ShaderMeshLightMapData>* cbMeshLightMapData;
 ConstantBuffer<ShaderPostProcessData>* cbPostProcess;
 
-//Texture2D lightMap = Texture2D("lightmap.bmp");
-
 //Viewport
 D3D11_VIEWPORT viewport;
 
@@ -471,7 +469,6 @@ void CreateConstantBuffers()
 	const int cbLightsRegister = 3;
 	const int cbTimeRegister = 4;
 	const int cbMeshDataRegister = 5;
-	const int cbMeshLightMapRegister = 6;
 
 	//Shader matrix constant buffer
 	shaderMatrices.Create();
@@ -503,11 +500,6 @@ void CreateConstantBuffers()
 	ShaderSkinningData skinningData = {};
 	cbSkinningData = new ConstantBuffer<ShaderSkinningData>(&skinningData, cbSkinningRegister);
 	assert(cbSkinningData);
-
-	//Mesh light map buffer
-	//ShaderMeshLightMapData meshLightMapData;
-	//cbMeshLightMapData = new ConstantBuffer<ShaderMeshLightMapData>(&meshLightMapData, cbMeshLightMapRegister);
-	//assert(cbMeshLightMapData);
 
 	//Post process data
 	ShaderPostProcessData postProcessData = {};
@@ -1857,9 +1849,6 @@ void SetRenderPipelineStates(MeshComponent* mesh)
 
 	cbMaterial->Map(&material.materialShaderData);
 	cbMaterial->SetPS();
-
-	/*ID3D11ShaderResourceView* lightMapSRV = lightMap.GetSRV();
-	context->PSSetShaderResources(lightMapTextureRegister, 1, &lightMapSRV);*/
 }
 
 void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
@@ -2089,171 +2078,3 @@ void Renderer::AddDebugLine(Line& line)
 	debugLines.emplace_back(v1);
 	debugLines.emplace_back(v2);
 }
-
-struct Texel
-{
-	XMFLOAT4 colour = XMFLOAT4(0.3f, 0.3f, 0.3f, 1.f);
-	XMFLOAT3 pos = XMFLOAT3(0.f, 0.f, 0.f);
-};
-
-//void Renderer::LightMapCast()
-//{
-//	auto start = Profile::QuickStart();
-//
-//	const int mapWidth = 256;
-//	const int mapHeight = 128;
-//	debugLines.clear();
-//
-//	auto texels = new Texel[mapWidth][mapHeight];
-//
-//	const int mapWidthOffset = 128;
-//
-//	auto& meshes = MeshComponent::system.GetComponents();
-//	for (int meshIndex = 0; meshIndex < meshes.size(); meshIndex++)
-//	{
-//		auto& mesh = meshes.at(meshIndex);
-//
-//		mesh->lightMapData.atlasOffset = XMINT2(meshIndex * mapWidthOffset, 0);
-//		mesh->lightMapData.textureSize = XMINT2(128, 128);
-//		mesh->lightMapData.atlasSize = XMINT2(mapWidth, mapHeight);
-//		mesh->lightMapData.AssertValues();
-//
-//		for (int w = 0; w < mapWidthOffset; w++)
-//		{
-//			for (int h = 0; h < mapHeight; h++)
-//			{
-//				const float lightMapU = (float)(w + 0.5f) / (float)mapWidthOffset;
-//				const float lightMapV = (float)(h + 0.5f) / (float)mapHeight;
-//
-//				XMFLOAT2 lightMapUV = { lightMapU, lightMapV };
-//
-//				XMMATRIX model = mesh->GetWorldMatrix();
-//
-//				for (int i = 0; i < mesh->meshDataProxy.vertices.size() / 3; i++)
-//				{
-//					const int index0 = i * 3;
-//					const int index1 = i * 3 + 1;
-//					const int index2 = i * 3 + 2;
-//
-//					bool uvInTriangle = VMath::IsUVInTriangleUVs(lightMapUV,
-//						mesh->meshDataProxy.vertices.at(index0).uv,
-//						mesh->meshDataProxy.vertices.at(index1).uv,
-//						mesh->meshDataProxy.vertices.at(index2).uv);
-//
-//					if (uvInTriangle)
-//					{
-//						Vertex tri[3] = {
-//							mesh->meshDataProxy.vertices.at(index0),
-//							mesh->meshDataProxy.vertices.at(index1),
-//							mesh->meshDataProxy.vertices.at(index2)
-//						};
-//
-//						XMVECTOR v0 = XMLoadFloat3(&mesh->meshDataProxy.vertices.at(index0).pos);
-//						v0 = XMVector3TransformCoord(v0, model);
-//						XMVECTOR v1 = XMLoadFloat3(&mesh->meshDataProxy.vertices.at(index1).pos);
-//						v1 = XMVector3TransformCoord(v1, model);
-//						XMVECTOR v2 = XMLoadFloat3(&mesh->meshDataProxy.vertices.at(index2).pos);
-//						v2 = XMVector3TransformCoord(v2, model);
-//
-//						XMStoreFloat3(&tri[0].pos, v0);
-//						XMStoreFloat3(&tri[1].pos, v1);
-//						XMStoreFloat3(&tri[2].pos, v2);
-//
-//						XMVECTOR triV1 = XMVector3Normalize(v0) - XMVector3Normalize(v1);
-//						XMVECTOR triV2 = XMVector3Normalize(v0) - XMVector3Normalize(v2);
-//						XMVECTOR normal = XMVector3Normalize(XMVector3Cross(triV1, triV2));
-//
-//						XMVECTOR uvWorldPos = VMath::TriangleUVToXYZ(lightMapUV, tri);
-//						XMStoreFloat3(&texels[w][h].pos, uvWorldPos);
-//
-//						//@Todo: consolidate direction and point light code here
-//						for (auto& directionalLight : DirectionalLightComponent::system.GetComponents())
-//						{
-//							XMVECTOR direction = -directionalLight->GetForwardVectorV();
-//
-//							HitResult hitResult;
-//
-//							//Give small offset to raycast origin by its normal so mesh isn't always hitting itself.
-//							XMVECTOR raycastOrigin = uvWorldPos + (normal * 0.05f);
-//							if (Raycast(hitResult, uvWorldPos, direction, 5.f))
-//							{
-//								/*Line debugLine;
-//								XMStoreFloat3(&debugLine.p1, raycastOrigin);
-//								debugLine.p2 = hitResult.hitPos;
-//								Renderer::AddDebugLine(debugLine);*/
-//
-//								break;
-//							}
-//							else
-//							{
-//								XMStoreFloat4(&texels[w + (meshIndex * mapWidthOffset)][h].colour, XMVectorSet(1.f, 1.f, 1.f, 1.f));
-//
-//								/*Line debugLine;
-//								XMStoreFloat3(&debugLine.p1, raycastOrigin);
-//								XMStoreFloat3(&debugLine.p2, raycastOrigin + direction * 5.f);
-//								Renderer::AddDebugLine(debugLine);*/
-//
-//								break;
-//							}
-//						}
-//
-//						for (auto& pointLight : PointLightComponent::system.GetComponents())
-//						{
-//							XMVECTOR pointLightPositon = pointLight->GetWorldPositionV();
-//							HitResult hitResult;
-//
-//							//Give small offset to raycast origin by its normal so mesh isn't always hitting itself.
-//							XMVECTOR raycastOrigin = uvWorldPos + (normal * 0.05f);
-//							if (Raycast(hitResult, uvWorldPos, pointLightPositon))
-//							{
-//								//Line debugLine;
-//								//XMStoreFloat3(&debugLine.p1, raycastOrigin);
-//								//debugLine.p2 = hitResult.hitPos;
-//								//Renderer::AddDebugLine(debugLine);
-//
-//								XMStoreFloat4(&texels[w + (meshIndex * mapWidthOffset)][h].colour, XMVectorSet(0.f, 0.f, 0.f, 1.f));
-//
-//								break;
-//							}
-//							else
-//							{
-//								XMStoreFloat4(&texels[w + (meshIndex * mapWidthOffset)][h].colour, XMVectorSet(1.f, 1.f, 1.f, 1.f));
-//
-//								//Line debugLine;
-//								//XMStoreFloat3(&debugLine.p1, raycastOrigin);
-//								//XMStoreFloat3(&debugLine.p2, pointLightPositon);
-//								//Renderer::AddDebugLine(debugLine);
-//
-//								break;
-//							}
-//						}
-//					}
-//				}
-//			}
-//		}
-//	}
-//
-//	//@Todo: the fucking .bmp file format being upside down (i.e. 0,0 being bottom left)
-//	//is fucking up the lightmap uvs because the for loop sets them from topleft to bottomright.
-//	//Either reverse the texture offset or use different file format.
-//	auto image = new unsigned char[mapHeight][mapWidth][3]{};
-//
-//	for (int i = 0; i < mapHeight; i++)
-//	{
-//		for (int j = 0; j < mapWidth; j++)
-//		{
-//			image[i][j][2] = (unsigned char)(texels[j][i].colour.x * 255); //R
-//			image[i][j][1] = (unsigned char)(texels[j][i].colour.y * 255); //G         
-//			image[i][j][0] = (unsigned char)(texels[j][i].colour.z * 255); //B
-//		}
-//	}
-//
-//	std::string lightMapFilename = "Textures/lightmap.bmp";
-//	BMPFileWriter::GenerateBitmapImage((unsigned char*)image, mapHeight, mapWidth, lightMapFilename.c_str());
-//
-//	TextureSystem::RemoveTexture(lightMap.GetFilename());
-//	RenderUtils::CreateTexture(lightMap);
-//
-//	double end = Profile::QuickEnd(start);
-//	Log("Lightmap gen took %f", end);
-//}

@@ -5,6 +5,14 @@ static const float SMAP_SIZE = 2048.0f;
 static const float SMAP_DX = 1.0f / SMAP_SIZE;
 static const float PI = 3.14159265f;
 
+struct LightProbeInstanceData
+{
+    float4 SH[9];
+    float4x4 modelMatrix;
+    float3 position;
+    int index;
+};
+
 struct InstanceData
 {
     float4x4 modelMatrix;
@@ -31,7 +39,6 @@ struct VS_OUT
     float3 normal : NORMAL;
 	float3 tangent : TANGENT0;
     float2 uv : TEXCOORD0;
-	//float2 lightMapUV : LM_TEXCOORD;
     float4 shadowPos : TEXCOORD1;
     uint instanceID : SV_InstanceID;
 };
@@ -42,7 +49,6 @@ Texture2D reflectionMap : register(t2);
 StructuredBuffer<InstanceData> instanceData : register(t3);
 TextureCube environmentMap : register(t4);
 Texture2D normalMap : register(t5);
-//Texture2D lightMap : register(t6);
 
 SamplerState s : register(s0);
 SamplerComparisonState shadowSampler : register(s1);

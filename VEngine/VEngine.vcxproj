@@ -332,7 +332,6 @@
     <ClInclude Include="Code\Render\ShaderData\MaterialShaderData.h" />
     <ClInclude Include="Code\Render\ShaderData\ShaderLights.h" />
     <ClInclude Include="Code\Render\ShaderData\ShaderMeshData.h" />
-    <ClInclude Include="Code\Render\ShaderData\ShaderMeshLightMapData.h" />
     <ClInclude Include="Code\Render\ShaderData\ShaderPostProcessData.h" />
     <ClInclude Include="Code\Render\ShaderData\ShaderSkinningData.h" />
     <ClInclude Include="Code\Render\ShaderData\ShaderTimeData.h" />
