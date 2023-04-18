@@ -281,6 +281,7 @@
     <ClCompile Include="Code\Render\ShaderData\ShaderMatrices.cpp" />
     <ClCompile Include="Code\UI\Game\GuardWidget.cpp" />
     <ClCompile Include="Code\UI\Game\PlayerStatusWidget.cpp" />
+    <ClCompile Include="Code\Actors\DebugActors\DebugLightProbe.cpp" />
     <ClInclude Include="Code\Actors\Game\BreakableCube.h" />
     <ClInclude Include="Code\Core\BMPFileWriter.h" />
     <ClInclude Include="Code\Actors\Game\ConditionTrigger.h" />
@@ -590,6 +591,7 @@
     <ClInclude Include="Code\Render\ShaderData\ShaderMatrices.h" />
     <ClInclude Include="Code\UI\Game\GuardWidget.h" />
     <ClInclude Include="Code\UI\Game\PlayerStatusWidget.h" />
+    <ClInclude Include="Code\Actors\DebugActors\DebugLightProbe.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
@@ -607,7 +609,7 @@
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)\Shaders\Pixel\%(Filename).cso</ObjectFileOutput>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Code\Render\Shaders\Pixel\LightProbe.hlsl">
+    <FxCompile Include="Code\Render\Shaders\Pixel\LightProbe_ps.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>

@@ -614,6 +614,9 @@
     <ClCompile Include="Code\Actors\Game\BreakableCube.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\DebugActors\DebugLightProbe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1260,6 +1263,9 @@
     <ClInclude Include="Code\Actors\Game\BreakableCube.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Actors\DebugActors\DebugLightProbe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -1283,6 +1289,6 @@
     <FxCompile Include="Code\Render\Shaders\Vertex\Default_vs.hlsl" />
     <FxCompile Include="Code\Render\Shaders\Vertex\UI_vs.hlsl" />
     <FxCompile Include="Code\Render\Shaders\Vertex\ShadowAnimation_vs.hlsl" />
-    <FxCompile Include="Code\Render\Shaders\Pixel\LightProbe.hlsl" />
+    <FxCompile Include="Code\Render\Shaders\Pixel\LightProbe_ps.hlsl" />
   </ItemGroup>
 </Project>
