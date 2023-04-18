@@ -36,8 +36,6 @@ public:
 
 	std::vector<LightProbeInstanceData> lightProbeData;
 
-	InstanceMeshComponent* instanceMeshComponent = nullptr;
-
 	int sizeX = 1;
 	int sizeY = 1;
 	int sizeZ = 1;

@@ -11,19 +11,11 @@
 
 DiffuseProbeMap::DiffuseProbeMap()
 {
-	//Set mesh count as 1
-	instanceMeshComponent = InstanceMeshComponent::system.Add(
-		"InstanceMesh",
-		this,
-		InstanceMeshComponent(1, "cube.vmesh", "test.png", ShaderItems::Instance));
-	rootComponent = instanceMeshComponent;
+	SetEmptyRootComponent();
 }
 
 void DiffuseProbeMap::Create()
 {
-	instanceMeshComponent->GetMaterial().materialShaderData.useTexture = 0;
-	instanceMeshComponent->SetInstanceCount(GetProbeCount());
-
 	ReadProbeDataFromFile();
 }
 
