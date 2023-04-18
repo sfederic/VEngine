@@ -22,6 +22,7 @@ void DiffuseProbeMap::Create()
 	const auto probeCount = GetProbeCount();
 
 	lightProbesDebugInstanceMesh = new DebugLightProbe(probeCount);
+
 	structuredBuffer = RenderUtils::CreateStructuredBuffer(sizeof(LightProbeInstanceData) * probeCount,
 		sizeof(LightProbeInstanceData), lightProbeData.data());
 	srv = RenderUtils::CreateSRVForMeshInstance(structuredBuffer, probeCount);
@@ -52,9 +53,9 @@ void DiffuseProbeMap::SetLightProbeData()
 				LightProbeInstanceData pd;
 				pd.modelMatrix = XMMatrixTranslation((float)x, (float)y, (float)z);
 				
-				pd.modelMatrix.r[0].m128_f32[0] = 0.05f;
+				/*pd.modelMatrix.r[0].m128_f32[0] = 0.05f;
 				pd.modelMatrix.r[1].m128_f32[1] = 0.05f;
-				pd.modelMatrix.r[2].m128_f32[2] = 0.05f;
+				pd.modelMatrix.r[2].m128_f32[2] = 0.05f;*/
 
 				XMStoreFloat3(&pd.position, pd.modelMatrix.r[3]);
 

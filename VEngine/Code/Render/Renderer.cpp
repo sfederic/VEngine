@@ -2032,6 +2032,12 @@ void RenderLightProbes()
 	if (probeMap == nullptr) return;
 	if (!probeMap->IsActive()) return;
 
+	shaderMatrices.model = XMMatrixIdentity();
+	shaderMatrices.MakeModelViewProjectionMatrix();
+
+	cbMatrices->Map(&shaderMatrices);
+	cbMatrices->SetVS();
+
 	auto instanceMesh = probeMap->lightProbesDebugInstanceMesh->instanceMesh;
 	SetRenderPipelineStates(instanceMesh);
 
@@ -2040,11 +2046,18 @@ void RenderLightProbes()
 	//Careful with the buffers here, they're not part of the instance mesh, instead they're in the diffuse probe map
 	MapBuffer(probeMap->GetStructuredBuffer(), probeMap->lightProbeData.data(), sizeof(LightProbeInstanceData) * probeMap->lightProbeData.size());
 
-	ID3D11ShaderResourceView* srv = probeMap->GetSRV();
-	context->VSSetShaderResources(instanceSRVRegister, 1, &srv);
-	context->PSSetShaderResources(instanceSRVRegister, 1, &srv);
+	//Update texture matrix
+	shaderMatrices.MakeTextureMatrix(instanceMesh->GetMaterial());
+	cbMatrices->Map(&shaderMatrices);
+	cbMatrices->SetVS();
 
-	DrawMeshInstanced(instanceMesh);
+	ID3D11ShaderResourceView* srv = probeMap->GetSRV();
+	context->VSSetShaderResources(lightProbeInstanceDataRegister, 1, &srv);
+	context->PSSetShaderResources(lightProbeInstanceDataRegister, 1, &srv);
+
+	cbLights->SetPS();
+
+	context->DrawInstanced(instanceMesh->meshDataProxy.vertices.size(), probeMap->GetProbeCount(), 0, 0);
 }
 
 void CreatePostProcessRenderTarget()
