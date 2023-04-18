@@ -1039,8 +1039,10 @@ void Renderer::RenderLightProbeViews()
 				cbMaterial->SetPS();
 
 				//Set matrices
-				shaderMatrices.view = XMMatrixLookAtLH(probeMatrix.r[3],
-					probeMatrix.r[3] + faces[i], VMath::GlobalUpVector());
+				//Note: Had to use VMath::LookAtRotation here because DirectX::XMMatrixLookAtLH() wasn't returning
+				//the correct view matrix for the Y+ and Y- directions. Not sure why.
+				const XMVECTOR lookAtRot = VMath::LookAtRotation(probeMatrix.r[3] + faces[i], probeMatrix.r[3]);
+				shaderMatrices.view = XMMatrixRotationQuaternion(lookAtRot);
 				shaderMatrices.model = mesh->GetWorldMatrix();
 				shaderMatrices.MakeModelViewProjectionMatrix();
 				shaderMatrices.MakeTextureMatrix(mesh->GetMaterial());
