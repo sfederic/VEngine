@@ -45,6 +45,7 @@ struct ShaderItems
 	inline static ShaderItem* Shadow;
 	inline static ShaderItem* ShadowAnimation;
 	inline static ShaderItem* Instance;
+	inline static ShaderItem* LightProbe;
 	inline static ShaderItem* SolidColour;
 	inline static ShaderItem* UI;
 	inline static ShaderItem* PostProcess;
