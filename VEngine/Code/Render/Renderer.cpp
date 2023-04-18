@@ -882,7 +882,7 @@ void SetShaderMeshData(MeshComponent* mesh)
 	{
 		context->PSSetShaderResources(environmentMapTextureRegister, 1, &lightProbeSRV);
 
-		ProbeData probeData = DiffuseProbeMap::system.GetFirstActor()->FindClosestProbe(mesh->GetWorldPositionV());
+		LightProbeInstanceData probeData = DiffuseProbeMap::system.GetFirstActor()->FindClosestProbe(mesh->GetWorldPositionV());
 		memcpy(meshData.SH, probeData.SH, sizeof(XMFLOAT4) * 9);
 	}
 
@@ -994,7 +994,7 @@ void Renderer::RenderLightProbeViews()
 
 	CreateLightProbeBuffers();
 
-	diffuseProbeMap->probeData.clear();
+	diffuseProbeMap->lightProbeData.clear();
 
 	int probeIndex = 0;
 
@@ -1082,15 +1082,13 @@ void Renderer::RenderLightProbeViews()
 			coefs[co_index] = XMFLOAT4(SH_R[co_index], SH_G[co_index], SH_B[co_index], 1.0f);
 		}
 
-		ProbeData pd;
+		LightProbeInstanceData pd;
 		pd.index = probeIndex;
 		memcpy(pd.SH, coefs, sizeof(XMFLOAT4) * 9);
 		XMStoreFloat3(&pd.position, probeMatrix.r[3]);
-		diffuseProbeMap->probeData.emplace_back(pd);
+		diffuseProbeMap->lightProbeData.emplace_back(pd);
 
 		probeIndex++;
-
-		diffuseProbeMap->SetProbeVisualColourFromIrradiance(pd, instanceData);
 	}
 
 	ResizeSwapchain(previousWiewportWidth, previousWiewportHeight);

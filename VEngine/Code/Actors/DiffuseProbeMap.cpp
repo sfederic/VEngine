@@ -37,13 +37,11 @@ Properties DiffuseProbeMap::GetProps()
 	return props;
 }
 
-void DiffuseProbeMap::SetInstanceMeshData()
+void DiffuseProbeMap::SetLightProbeData()
 {
-	std::vector<InstanceData> instanceData;
-
 	int probeIndex = 0;
 
-	XMFLOAT3 pos = GetPosition();
+	const XMFLOAT3 pos = GetPosition();
 
 	for (int x = pos.x; x < (sizeX + pos.x); x++)
 	{
@@ -51,30 +49,23 @@ void DiffuseProbeMap::SetInstanceMeshData()
 		{
 			for (int z = pos.z; z < (sizeZ + pos.z); z++)
 			{
-				InstanceData data;
-				data.world = XMMatrixTranslation((float)x, (float)y, (float)z);
+				LightProbeInstanceData pd;
+				pd.modelMatrix = XMMatrixTranslation((float)x, (float)y, (float)z);
 				
-				data.world.r[0].m128_f32[0] = 0.05f;
-				data.world.r[1].m128_f32[1] = 0.05f;
-				data.world.r[2].m128_f32[2] = 0.05f;
+				pd.modelMatrix.r[0].m128_f32[0] = 0.05f;
+				pd.modelMatrix.r[1].m128_f32[1] = 0.05f;
+				pd.modelMatrix.r[2].m128_f32[2] = 0.05f;
 
-				instanceData.emplace_back(data);
+				XMStoreFloat3(&pd.position, pd.modelMatrix.r[3]);
 
-				ProbeData pd;
 				pd.index = probeIndex;
-				XMStoreFloat3(&pd.position,data.world.r[3]);
-				probeData.emplace_back(pd);
+
+				lightProbeData.emplace_back(pd);
 
 				probeIndex++;
 			}
 		}
 	}
-
-	instanceMeshComponent->SetInstanceData(instanceData);
-}
-
-void DiffuseProbeMap::SetProbeColour(XMFLOAT3 colour, uint32_t instanceMeshIndex)
-{
 }
 
 uint32_t DiffuseProbeMap::GetProbeCount()
@@ -82,17 +73,17 @@ uint32_t DiffuseProbeMap::GetProbeCount()
 	return sizeX * sizeY * sizeZ;
 }
 
-ProbeData DiffuseProbeMap::FindClosestProbe(XMVECTOR pos)
+LightProbeInstanceData DiffuseProbeMap::FindClosestProbe(XMVECTOR pos)
 {
 	struct ProbeDist
 	{
-		ProbeData data;
+		LightProbeInstanceData data;
 		float distance = 0.f;
 	};
 
 	std::vector<ProbeDist> probeDistances;
 
-	for (auto& probe : probeData)
+	for (auto& probe : lightProbeData)
 	{
 		const float distance = XMVector3Length(XMLoadFloat3(&probe.position) - pos).m128_f32[0];
 		ProbeDist probeDist;
@@ -118,10 +109,10 @@ void DiffuseProbeMap::WriteProbeDataToFile()
 	assert(file);
 
 	//Write probe data count to read back.
-	int probeDataCount = probeData.size();
+	int probeDataCount = lightProbeData.size();
 	fwrite(&probeDataCount, sizeof(int), 1, file);
 
-	fwrite(probeData.data(), sizeof(ProbeData), probeDataCount, file);
+	fwrite(lightProbeData.data(), sizeof(LightProbeInstanceData), probeDataCount, file);
 
 	fclose(file);
 
@@ -141,92 +132,32 @@ void DiffuseProbeMap::ReadProbeDataFromFile()
 		fread(&probeDataCount, sizeof(int), 1, file);
 		assert(probeDataCount > 0);
 
-		probeData.reserve(probeDataCount);
+		lightProbeData.reserve(probeDataCount);
 
-		std::vector<InstanceData> instanceData;
+		std::vector<LightProbeInstanceData> instanceData;
 		instanceData.reserve(probeDataCount);
 
 		for (int i = 0; i < probeDataCount; i++)
 		{
-			ProbeData pb;
-			fread(&pb, sizeof(ProbeData), 1, file);
+			LightProbeInstanceData pd;
+			fread(&pd, sizeof(LightProbeInstanceData), 1, file);
 
-			probeData.emplace_back(pb);
+			lightProbeData.emplace_back(pd);
 
-			InstanceData data;
-			data.world = XMMatrixTranslation(pb.position.x, pb.position.y, pb.position.z);
-			data.world.r[0].m128_f32[0] = 0.15f;
-			data.world.r[1].m128_f32[1] = 0.15f;
-			data.world.r[2].m128_f32[2] = 0.15f;
+			pd.modelMatrix = XMMatrixTranslation(pd.position.x, pd.position.y, pd.position.z);
+			pd.modelMatrix.r[0].m128_f32[0] = 0.15f;
+			pd.modelMatrix.r[1].m128_f32[1] = 0.15f;
+			pd.modelMatrix.r[2].m128_f32[2] = 0.15f;
 
-			SetProbeVisualColourFromIrradiance(pb, data);
-
-			instanceData.emplace_back(data);
+			instanceData.emplace_back(pd);
 		}
 
 		fclose(file);
-
-		instanceMeshComponent->SetInstanceData(instanceData);
 	}
 	else
 	{
-		SetInstanceMeshData();
+		SetLightProbeData();
 	}
-}
-
-void DiffuseProbeMap::SetProbeVisualColourFromIrradiance(ProbeData& pb, InstanceData& data)
-{
-	constexpr float PI = 3.14159265f;
-
-	constexpr float SQRT_PI = 1.7724538509f;
-	constexpr float SQRT_5 = 2.2360679775f;
-	constexpr float SQRT_15 = 3.8729833462f;
-	constexpr float SQRT_3 = 1.7320508076f;
-
-	constexpr float AO = 0.75f;
-
-	constexpr float Y[9] =
-	{
-		1.0f / (2.0f * SQRT_PI),
-		-SQRT_3 / (2.0f * SQRT_PI),
-		SQRT_3 / (2.0f * SQRT_PI),
-		-SQRT_3 / (2.0f * SQRT_PI),
-		SQRT_15 / (2.0f * SQRT_PI),
-		-SQRT_15 / (2.0f * SQRT_PI),
-		SQRT_5 / (4.0f * SQRT_PI),
-		-SQRT_15 / (2.0f * SQRT_PI),
-		SQRT_15 / (4.0f * SQRT_PI)
-	};
-
-	float t = acos(sqrt(1 - AO));
-
-	float a = sin(t);
-	float b = cos(t);
-
-	float A0 = sqrt(4 * PI) * (sqrt(PI) / 2) * a * a;
-	float A1 = sqrt(4 * PI / 3) * (sqrt(3 * PI) / 3) * (1 - b * b * b);
-	float A2 = sqrt(4 * PI / 5) * (sqrt(5 * PI) / 16) * a * a * (2 + 6 * b * b);
-
-	XMFLOAT3 n = XMFLOAT3(0.f, 1.f, 0.f); //Essentially put in a random normal
-	XMStoreFloat3(&n, XMVector3Normalize(data.world.r[3]));
-
-	XMFLOAT4 coefs[9]{};
-	memcpy(&coefs[0], &pb.SH[0], sizeof(XMFLOAT4) * 9);
-
-	XMVECTOR irradiance =
-		XMLoadFloat4(&coefs[0]) * A0 * Y[0] +
-		XMLoadFloat4(&coefs[1]) * A1 * Y[1] * n.y +
-		XMLoadFloat4(&coefs[2]) * A1 * Y[2] * n.z +
-		XMLoadFloat4(&coefs[3]) * A1 * Y[3] * n.x +
-		XMLoadFloat4(&coefs[4]) * A2 * Y[4] * (n.y * n.x) +
-		XMLoadFloat4(&coefs[5]) * A2 * Y[5] * (n.y * n.z) +
-		XMLoadFloat4(&coefs[6]) * A2 * Y[6] * (3.0 * n.z * n.z - 1.0) +
-		XMLoadFloat4(&coefs[7]) * A2 * Y[7] * (n.z * n.x) +
-		XMLoadFloat4(&coefs[8]) * A2 * Y[8] * (n.x * n.x - n.y * n.y);
-
-	irradiance = DirectX::XMVectorMax(irradiance, XMVectorZero());
-	irradiance.m128_f32[3] = 1.0f; //Make sure alpha is set
-	XMStoreFloat4(&data.colour, irradiance);
 }
 
 std::string DiffuseProbeMap::GetWorldNameAsFilename()

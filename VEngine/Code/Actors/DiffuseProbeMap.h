@@ -2,16 +2,10 @@
 
 #include "Actor.h"
 #include "ActorSystem.h"
+#include "Render/ShaderData/InstanceData.h"
 
 class InstanceMeshComponent;
 struct InstanceData;
-
-struct ProbeData
-{
-	XMFLOAT4 SH[9]{};
-	XMFLOAT3 position = XMFLOAT3(0.f, 0.f, 0.f);
-	int index = 0;
-};
 
 //DiffuseProbeMap workflow:
 //1. Place a DiffuseProbeMap in the world
@@ -33,14 +27,14 @@ struct ProbeData
 //Ref:https://www.activision.com/cdn/research/Volumetric_Global_Illumination_at_Treyarch.pdf
 
 //Even with all the above references, this implementation is actually based on a few slides (slide 49-52) from 
-//Bluepoint's talk on global illumination in Demon's Souls, where they describe what they used for Shadow of the Collosus briefly.
+//Bluepoint's talk on global illumination in Demon's Souls, where they describe what they used for Shadow of the Colossus briefly.
 //Ref:https://gdcvault.com/play/1027011/Advanced-Graphics-Summit-Lifting-the
 class DiffuseProbeMap : public Actor
 {
 public:
 	ACTOR_SYSTEM(DiffuseProbeMap);
 
-	std::vector<ProbeData> probeData;
+	std::vector<LightProbeInstanceData> lightProbeData;
 
 	InstanceMeshComponent* instanceMeshComponent = nullptr;
 
@@ -49,17 +43,15 @@ public:
 	int sizeZ = 1;
 
 	DiffuseProbeMap();
-	virtual void Create() override;
-	virtual Properties GetProps() override;
+	void Create() override;
+	Properties GetProps() override;
 
-	void SetProbeColour(XMFLOAT3 colour, uint32_t instanceMeshIndex);
 	uint32_t GetProbeCount();
-	ProbeData FindClosestProbe(XMVECTOR pos);
+	LightProbeInstanceData FindClosestProbe(XMVECTOR pos);
 	void WriteProbeDataToFile();
-	void SetProbeVisualColourFromIrradiance(ProbeData& pb, InstanceData& data);
 
 private:
 	void ReadProbeDataFromFile();
-	void SetInstanceMeshData();
+	void SetLightProbeData();
 	std::string GetWorldNameAsFilename();
 };
