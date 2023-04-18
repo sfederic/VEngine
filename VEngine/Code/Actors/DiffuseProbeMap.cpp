@@ -7,6 +7,7 @@
 #include "Core/Log.h"
 #include "Components/InstanceMeshComponent.h"
 #include "Render/Material.h"
+#include "Render/RenderUtils.h"
 #include "Render/ShaderData/InstanceData.h"
 
 DiffuseProbeMap::DiffuseProbeMap()
@@ -17,6 +18,13 @@ DiffuseProbeMap::DiffuseProbeMap()
 void DiffuseProbeMap::Create()
 {
 	ReadProbeDataFromFile();
+
+	const auto probeCount = GetProbeCount();
+
+	lightProbesDebugInstanceMesh = new DebugLightProbe(probeCount);
+	structuredBuffer = RenderUtils::CreateStructuredBuffer(sizeof(LightProbeInstanceData) * probeCount,
+		sizeof(LightProbeInstanceData), lightProbeData.data());
+	srv = RenderUtils::CreateSRVForMeshInstance(structuredBuffer, probeCount);
 }
 
 Properties DiffuseProbeMap::GetProps()
@@ -154,7 +162,7 @@ void DiffuseProbeMap::ReadProbeDataFromFile()
 
 std::string DiffuseProbeMap::GetWorldNameAsFilename()
 {
-	std::string worldName = VString::GetSubStringBeforeFoundOffset(World::worldFilename, "."); //trimp .vmap
+	std::string worldName = VString::GetSubStringBeforeFoundOffset(World::worldFilename, "."); //trim .vmap
 	std::string filename = "LightProbeData/" + worldName + ".probedata";
 	return filename;
 }

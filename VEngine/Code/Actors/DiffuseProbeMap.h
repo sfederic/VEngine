@@ -3,9 +3,12 @@
 #include "Actor.h"
 #include "ActorSystem.h"
 #include "Render/ShaderData/InstanceData.h"
+#include "Actors/DebugActors/DebugLightProbe.h"
 
 class InstanceMeshComponent;
 struct InstanceData;
+struct ID3D11Buffer;
+struct ID3D11ShaderResourceView;
 
 //DiffuseProbeMap workflow:
 //1. Place a DiffuseProbeMap in the world
@@ -34,6 +37,8 @@ class DiffuseProbeMap : public Actor
 public:
 	ACTOR_SYSTEM(DiffuseProbeMap);
 
+	DebugLightProbe* lightProbesDebugInstanceMesh = nullptr;
+
 	std::vector<LightProbeInstanceData> lightProbeData;
 
 	int sizeX = 1;
@@ -48,7 +53,13 @@ public:
 	LightProbeInstanceData FindClosestProbe(XMVECTOR pos);
 	void WriteProbeDataToFile();
 
+	ID3D11Buffer* GetStructuredBuffer() { return structuredBuffer; }
+	ID3D11ShaderResourceView* GetSRV() { return srv; }
+
 private:
+	ID3D11Buffer* structuredBuffer = nullptr;
+	ID3D11ShaderResourceView* srv = nullptr;
+
 	void ReadProbeDataFromFile();
 	void SetLightProbeData();
 	std::string GetWorldNameAsFilename();
