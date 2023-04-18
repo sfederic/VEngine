@@ -842,6 +842,7 @@ void Renderer::Render()
 	AnimateAndRenderSkeletalMeshes();
 	RenderSocketMeshComponents();
 	RenderInstanceMeshComponents();
+	RenderLightProbes();
 	RenderPolyboards();
 	RenderSpriteSheets();
 	RenderPhysicsMeshes();
@@ -2027,7 +2028,23 @@ void RenderWireframeForVertexPaintingAndPickedActor()
 
 void RenderLightProbes()
 {
+	auto probeMap = DiffuseProbeMap::system.GetFirstActor();
+	if (probeMap == nullptr) return;
+	if (!probeMap->IsActive()) return;
 
+	auto instanceMesh = probeMap->lightProbesDebugInstanceMesh->instanceMesh;
+	SetRenderPipelineStates(instanceMesh);
+
+	SetBlendState(BlendStates::null);
+
+	//Careful with the buffers here, they're not part of the instance mesh, instead they're in the diffuse probe map
+	MapBuffer(probeMap->GetStructuredBuffer(), probeMap->lightProbeData.data(), sizeof(LightProbeInstanceData) * probeMap->lightProbeData.size());
+
+	ID3D11ShaderResourceView* srv = probeMap->GetSRV();
+	context->VSSetShaderResources(instanceSRVRegister, 1, &srv);
+	context->PSSetShaderResources(instanceSRVRegister, 1, &srv);
+
+	DrawMeshInstanced(instanceMesh);
 }
 
 void CreatePostProcessRenderTarget()
