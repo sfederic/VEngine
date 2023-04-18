@@ -94,6 +94,8 @@ void RenderPolyboards();
 void RenderSpriteSheets();
 void RenderPostProcess();
 void RenderWireframeForVertexPaintingAndPickedActor();
+void RenderLightProbes();
+
 void MapBuffer(ID3D11Resource* resource, const void* src, size_t size);
 void DrawMesh(MeshComponent* mesh);
 void DrawMeshInstanced(InstanceMeshComponent* mesh);
@@ -199,7 +201,7 @@ const int reflectionTextureResgiter = 2;
 const int instanceSRVRegister = 3;
 const int environmentMapTextureRegister = 4;
 const int normalMapTexureRegister = 5;
-//const int lightMapTextureRegister = 6;
+const int lightProbeInstanceDataRegister = 6;
 
 const int lightProbeTextureWidth = 64;
 const int lightProbeTextureHeight = 64;
@@ -2021,6 +2023,11 @@ void RenderWireframeForVertexPaintingAndPickedActor()
 
 		SetGeneralShaderResourcesToNull();
 	}
+}
+
+void RenderLightProbes()
+{
+
 }
 
 void CreatePostProcessRenderTarget()
