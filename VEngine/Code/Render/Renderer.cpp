@@ -879,6 +879,12 @@ void SetShaderMeshData(MeshComponent* mesh)
 
 		LightProbeInstanceData probeData = DiffuseProbeMap::system.GetFirstActor()->FindClosestProbe(mesh->GetWorldPositionV());
 		memcpy(meshData.SH, probeData.SH, sizeof(XMFLOAT4) * 9);
+
+		meshData.isDiffuseProbeMapActive = DiffuseProbeMap::system.GetOnlyActor()->IsActive();
+	}
+	else
+	{
+		meshData.isDiffuseProbeMapActive = false;
 	}
 
 	cbMeshData->Map(&meshData);

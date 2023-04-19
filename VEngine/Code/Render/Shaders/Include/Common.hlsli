@@ -132,7 +132,7 @@ cbuffer cbMeshData : register(b5)
 {
     float4 SH[9]; //Spherical Harmonics for probe linked to mesh
 	float3 meshPosition;
-    float cbMeshDataPad;
+    bool isDiffuseProbeMapActive;
 }
 
 cbuffer ShaderMeshLightMapData : register(b6)
