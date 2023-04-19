@@ -2039,6 +2039,7 @@ void RenderLightProbes()
 	auto probeMap = DiffuseProbeMap::system.GetFirstActor();
 	if (probeMap == nullptr) return;
 	if (!probeMap->IsActive()) return;
+	if (!probeMap->IsVisible()) return;
 
 	shaderMatrices.model = XMMatrixIdentity();
 	shaderMatrices.MakeModelViewProjectionMatrix();
