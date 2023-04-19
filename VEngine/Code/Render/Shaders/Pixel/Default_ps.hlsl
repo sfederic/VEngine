@@ -38,10 +38,10 @@ float4 main(VS_OUT i) : SV_Target
     
     float4 finalColour = ((globalAmbient + endResult.diffuse + endResult.specular) + shadowColour) * texColour;
     
-    if(isDiffuseProbeMapActive)
+    if (isDiffuseProbeMapActive)
     {
         float4 shIrradiance = float4(GetSHIrradiance(i.normal, SH), 1.0f);
-        finalColour *= shIrradiance;
+        finalColour *= shIrradiance * PI;
     }
     
     finalColour.a = material.ambient.a;
