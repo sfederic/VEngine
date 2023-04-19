@@ -1,19 +1,25 @@
-DirectionalLightActor
+DiffuseProbeMap
 1
  Enabled
 1
  Position
-0 5 0
+-0 -0 -0
  Rotation
-0.270758 -0.653122 0.270664 0.653347
+0 0 0 1
  Scale
-1 0.999995 0.999996
+1 1 1
  Visible
 1
 Name
-DirectionalLightActor0
+DiffuseProbeMap0
+Size X
+3
+Size Y
+5
+Size Z
+5
 UID
-1219995910
+3512023912
 next
 Grid
 1
@@ -268,7 +274,7 @@ UID
 2130618174
 next
 PointLightActor
-1
+2
  Enabled
 1
  Position
@@ -283,6 +289,21 @@ Name
 PointLightActor0
 UID
 1152875273
+next
+ Enabled
+1
+ Position
+0 1 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+PointLightActor1
+UID
+1481735726
 next
 CameraComponent
 1
@@ -320,29 +341,23 @@ File
 UID
 938403783
 next
-DirectionalLightComponent
-1
-1219995910
-DirectionalLight
+EmptyComponent
+2
+3512023912
+Root
  Enabled
 1
  Pos
-0 5 0
+-0 -0 -0
  Rot
-0.270758 -0.653122 0.270664 0.653347
+0 0 0 1
  Scale
-1 0.999995 0.999996
+1 1 1
  Visible
 1
-Colour
-1 1 1 1
-LightEnabled
-1
 UID
-3154321242
+1541382741
 next
-EmptyComponent
-1
 2130618174
 Root
  Enabled
@@ -448,7 +463,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -501,7 +516,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -554,7 +569,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -607,7 +622,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -660,7 +675,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -713,7 +728,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -766,7 +781,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -819,7 +834,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -872,7 +887,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -925,7 +940,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -978,7 +993,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1031,7 +1046,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1084,7 +1099,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1137,7 +1152,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1190,7 +1205,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1211,7 +1226,7 @@ UID
 2108166279
 next
 PointLightComponent
-1
+2
 1152875273
 PointLight
  Enabled
@@ -1225,12 +1240,33 @@ PointLight
  Visible
 1
 Colour
-1 1 1 1
+0 1 10 1
 Intensity
-5
+20
 LightEnabled
 1
 UID
 494739967
+next
+1481735726
+PointLight
+ Enabled
+1
+ Pos
+0 1 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Colour
+1 0 0 1
+Intensity
+20
+LightEnabled
+1
+UID
+2789510885
 next
 end
