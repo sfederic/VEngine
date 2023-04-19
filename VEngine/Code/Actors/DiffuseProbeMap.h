@@ -14,7 +14,7 @@ struct ID3D11ShaderResourceView;
 //1. Place a DiffuseProbeMap in the world
 //2. Set up the X, Y, Z extents to cover the world
 //3. Use the 'BAKE' cmdline command 
-//		Renderer will renderout cubemaps for every probe in the world and setup all spherical harmonic data.
+//		Renderer will render out cubemaps for every probe in the world and setup all spherical harmonic data.
 //		SH data at this point is just a single ambient colour per probe. Meshes will take its closest light probe
 //		and add its colour to its pixel output.
 //4. Reload the world 
