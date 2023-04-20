@@ -41,7 +41,7 @@ float4 main(VS_OUT i) : SV_Target
     if (isDiffuseProbeMapActive)
     {
         float4 shIrradiance = float4(GetSHIrradiance(i.normal, SH), 1.0f);
-        finalColour *= shIrradiance * PI;
+        finalColour *= shIrradiance * PI * 2;
     }
     
     finalColour.a = material.ambient.a;
