@@ -59,7 +59,7 @@ public:
 	void SetTexture(const std::string newTextureName);
 	std::string GetTextureFilename();
 
-	void SetShaderFilenames(ShaderItem* shaderItem);
+	void SetShaderItem(ShaderItem* shaderItem);
 
 	void SetAmbientColour(const XMFLOAT4 ambientColour);
 	XMFLOAT4 GetAmbientColour();

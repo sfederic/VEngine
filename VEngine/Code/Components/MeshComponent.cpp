@@ -206,7 +206,7 @@ std::string MeshComponent::GetTextureFilename()
 	return material->textureData.filename;
 }
 
-void MeshComponent::SetShaderFilenames(ShaderItem* shaderItem)
+void MeshComponent::SetShaderItem(ShaderItem* shaderItem)
 {
 	material->shaderData.shaderItemName = shaderItem->GetName();
 }

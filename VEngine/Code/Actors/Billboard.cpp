@@ -14,7 +14,7 @@ void Billboard::Create()
 {
     mesh->SetMeshFilename("plane.vmesh");
     mesh->SetRastState(RastStates::noBackCull);
-    mesh->SetShaderFilenames(ShaderItems::Unlit);
+    mesh->SetShaderItem(ShaderItems::Unlit);
 }
 
 void Billboard::Tick(float deltaTime)
