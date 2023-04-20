@@ -818,7 +818,7 @@ void Renderer::Render()
 	timeData.timeSinceStartup = Core::timeSinceStartup;
 
 	cbTime->Map(&timeData);
-	cbTime->SetVS();
+	cbTime->SetVSAndPS();
 
 	SetShadowData();
 	RenderShadowPass();
