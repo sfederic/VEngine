@@ -2,6 +2,6 @@
 
 VS_OUT main(VS_IN i)
 {
-	TransformOut o;
-	return o.TransformAnimation(i);
+	VS_OUT o = TransformOutAnimation(i);
+    return o;
 }

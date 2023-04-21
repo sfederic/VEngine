@@ -2,8 +2,8 @@
 
 VS_OUT main(VS_IN i)
 {
-	TransformOut o;
-	return o.Transform(i);
+    VS_OUT o = TransformOut(i);
+	return o;
 }
 
 
