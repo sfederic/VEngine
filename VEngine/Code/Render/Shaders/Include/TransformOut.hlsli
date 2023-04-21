@@ -10,13 +10,32 @@ VS_OUT TransformOut(VS_IN i)
 	o.normal = mul((float3x3)model, i.normal);
     o.tangent = mul((float3x3)model, i.tangent);
 		
-	float4 newUv = mul(texMatrix, float4(i.uv, 0.f, 1.0f));
+	const float4 newUv = mul(texMatrix, float4(i.uv, 0.f, 1.0f));
     o.uv = float2(newUv.x, 1.0 - newUv.y);
 		
 	o.shadowPos = mul(lightMVP, o.posWS);
 	o.instanceID = i.instanceID;
 
 	return o;
+}
+
+VS_OUT TransformOutInstance(VS_IN i, float4x4 modelMatrixFromInstanceData)
+{
+    VS_OUT o;
+    
+    const float4x4 viewProj = mul(proj, view);
+    const float4x4 modelViewProj = mul(viewProj, modelMatrixFromInstanceData);
+
+    o.pos = mul(modelViewProj, float4(i.pos.xyz, 1.0f));
+    o.posWS = mul(model, float4(i.pos.xyz, 1.0f));
+    o.uv = i.uv;
+    o.normal = mul((float3x3) modelMatrixFromInstanceData, i.normal);
+    o.shadowPos = float4(1.0f, 1.0f, 1.0f, 1.0f);
+    o.instanceID = i.instanceID;
+    o.tangent = i.tangent;
+    o.colour = i.colour;
+    
+    return o;
 }
 
 VS_OUT TransformOutAnimation(VS_IN i)
