@@ -2,48 +2,24 @@
 
 float4 main(VS_OUT i) : SV_Target
 {
-    float4 texColour = float4(0.f, 0.f, 0.f, 0.f);
+    const float4 texColour = GetTextureColour(i.uv);
     
-    if (material.useTexture)
-    {
-        texColour = t.Sample(s, i.uv);
-        clip(texColour.a - 0.10f);
-    }
-    else
-    {
-        texColour = material.ambient;
-    }
+    const float3 normal = normalize(i.normal);
+    const float4 position = i.posWS;
 
-    float3 normal = normalize(i.normal);
-    float4 position = i.posWS;
+    const float3 V = normalize(eyePosition - position).xyz;
 
-    //Put bump normal into CalcForwardLighting() if result is needed
-    //float3 bumpNormal = CalcBumpNormalFromTangentBitangent(normal, i.tangent, i.uv);
+    const LightingResult lightResult = CalcForwardLighting(V, position, normal);
+
+    const float4 shadowFactor = GetShadowFactor(i.shadowPos);
     
-    float3 V = normalize(eyePosition - position).xyz;
-
-    LightingResult endResult = CalcForwardLighting(V, position, normal);
-
-    endResult.diffuse *= material.ambient;
-    endResult.specular *= material.ambient;
-
-    float4 shadowColour = float4(0.f, 0.f, 0.f, 0.f);
-    if (shadowsEnabled)
-    {
-        shadowColour = CalcShadowFactor(i.shadowPos);
-        shadowColour /= 4.f;
-    }
-    
-    //float4 lightMapColour = lightMap.Sample(s, i.lightMapUV);
-    
-    float4 finalColour = ((globalAmbient + endResult.diffuse + endResult.specular) + shadowColour) * texColour;
+    float4 finalColour = CalcFinalColour(i.colour, lightResult, shadowFactor, texColour);
     
     if (isDiffuseProbeMapActive)
     {
-        float4 shIrradiance = float4(GetSHIrradiance(i.normal, SH), 1.0f);
+        const float4 shIrradiance = float4(CalcSHIrradiance(normal, SH), 1.0f);
         finalColour *= shIrradiance * PI * 2;
     }
     
-    finalColour.a = material.ambient.a;
-    return i.colour * finalColour;
+    return finalColour;
 }

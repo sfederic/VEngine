@@ -144,7 +144,7 @@ cbuffer ShaderMeshLightMapData : register(b6)
 
 //Stole all this from https://interplayoflight.wordpress.com/2021/12/31/occlusion-and-directionality-in-image-based-lighting-implementation-details/ for simple diffuse testing.
 //Was the only online example working with DXMath's SH lib.
-float3 GetSHIrradiance(float3 n, float4 SH[9])
+float3 CalcSHIrradiance(float3 n, float4 SH[9])
 {
     float SQRT_PI = 1.7724538509f;
     float SQRT_5 = 2.2360679775f;
@@ -342,6 +342,9 @@ LightingResult CalcForwardLighting(float3 V, float4 position, float3 normal)
 	endResult.diffuse = saturate(endResult.diffuse);
 	endResult.specular = saturate(endResult.specular);
 
+    endResult.diffuse *= material.ambient;
+    endResult.specular *= material.ambient;
+    
 	return endResult;
 }
 
@@ -385,6 +388,41 @@ float3 CalcBumpNormalFromTangentBitangent(float3 normal, float3 tangent, float2 
 float InverseLerp(float x, float y, float value)
 {
     return (value - x) / (y - x);
+}
+
+float4 GetTextureColour(float2 uv)
+{
+    float4 texColour = float4(0.f, 0.f, 0.f, 0.f);
+    
+    if (material.useTexture)
+    {
+        texColour = t.Sample(s, uv);
+        clip(texColour.a - 0.10f);
+    }
+    else
+    {
+        texColour = material.ambient;
+    }
+    
+    return texColour;
+}
+
+float4 GetShadowFactor(float4 shadowPos)
+{
+    float4 shadowColour = float4(0.f, 0.f, 0.f, 0.f);
+    if (shadowsEnabled)
+    {
+        shadowColour = CalcShadowFactor(shadowPos);
+    }
+    return shadowColour;
+}
+
+float4 CalcFinalColour(float4 vertexColour, LightingResult lightResult, float4 shadowFactor, float4 texColour)
+{
+    float4 finalColour = ((globalAmbient + lightResult.diffuse + lightResult.specular) + shadowFactor) * texColour;
+    finalColour.a = material.ambient.a;
+    finalColour *= vertexColour;
+    return finalColour;
 }
 
 #endif 
