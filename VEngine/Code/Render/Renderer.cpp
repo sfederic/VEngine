@@ -859,6 +859,11 @@ void SetMatricesFromMesh(MeshComponent* mesh)
 	shaderMatrices.MakeModelViewProjectionMatrix();
 	shaderMatrices.MakeTextureMatrix(mesh->GetMaterial());
 
+	XMMATRIX A = mesh->GetWorldMatrix();
+	A.r[3] = XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f);
+	XMVECTOR det = XMMatrixDeterminant(A);
+	shaderMatrices.invTranModel = XMMatrixTranspose(XMMatrixInverse(&det, A));
+
 	cbMatrices->Map(&shaderMatrices);
 	cbMatrices->SetVS();
 }
