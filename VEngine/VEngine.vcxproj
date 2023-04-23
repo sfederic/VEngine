@@ -282,6 +282,7 @@
     <ClCompile Include="Code\UI\Game\GuardWidget.cpp" />
     <ClCompile Include="Code\UI\Game\PlayerStatusWidget.cpp" />
     <ClCompile Include="Code\Actors\DebugActors\DebugLightProbe.cpp" />
+    <ClCompile Include="Code\Render\RenderTarget.cpp" />
     <ClInclude Include="Code\Actors\Game\BreakableCube.h" />
     <ClInclude Include="Code\Core\BMPFileWriter.h" />
     <ClInclude Include="Code\Actors\Game\ConditionTrigger.h" />
@@ -592,6 +593,7 @@
     <ClInclude Include="Code\UI\Game\GuardWidget.h" />
     <ClInclude Include="Code\UI\Game\PlayerStatusWidget.h" />
     <ClInclude Include="Code\Actors\DebugActors\DebugLightProbe.h" />
+    <ClInclude Include="Code\Render\RenderTarget.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
