@@ -55,6 +55,7 @@
 #include "Render/SpriteSystem.h"
 #include "Render/VertexShader.h"
 #include "Render/PixelShader.h"
+#include "Render/RenderTarget.h"
 #include "Vertex.h"
 #include "RastStates.h"
 #include "BlendStates.h"
@@ -126,8 +127,6 @@ void SetShaderResourcePixel(uint32_t shaderRegister, std::string textureName);
 void SetShaderResourceFromMaterial(uint32_t shaderRegister, Material& material);
 void SetLightsConstantBufferData();
 
-void CreatePostProcessRenderTarget();
-
 float Renderer::frameTime;
 bool Renderer::drawBoundingBoxes = false;
 bool Renderer::drawTriggers = true;
@@ -189,9 +188,7 @@ ID3D11ShaderResourceView* lightProbeSRV = nullptr;
 ID3D11Texture2D* lightProbeTexture = nullptr;
 
 //Post process
-ID3D11Texture2D* postBuffer = nullptr;
-ID3D11RenderTargetView* postRTV = nullptr;
-ID3D11ShaderResourceView* postSRV = nullptr;
+RenderTarget postProcessRenderTarget(DXGI_FORMAT_R16G16B16A16_FLOAT);
 
 //Quality = 0 and Count = 1 are the 'default'
 DXGI_SAMPLE_DESC sampleDesc;
@@ -240,14 +237,14 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	CreateBlendStates();
 	CreateConstantBuffers();
 
-	CreatePostProcessRenderTarget();
+	postProcessRenderTarget.Create(viewport.Width, viewport.Height);
 
 	RenderUtils::defaultSampler = RenderUtils::CreateSampler();
 
 	SpriteSystem::Init();
 
-	//debugLines.emplace_back(Vertex()); //dummy data so DirecX doesn't crash
-	////@Todo: this craahses the program a lot (most dynamic buffers do) and not sure why.
+	//debugLines.emplace_back(Vertex()); //dummy data so DirectX doesn't crash
+	////@Todo: this crashes the program a lot (most dynamic buffers do) and not sure why.
 	//debugLinesBuffer = RenderUtils::CreateDynamicBuffer(debugLinesBufferSize, D3D11_BIND_VERTEX_BUFFER, debugLines.data());
 	//debugLines.clear();
 }
@@ -790,10 +787,10 @@ void RenderPostProcessSetup()
 	constexpr float clearColour[4] = { 0.f, 0.f, 0.f, 1.f };
 	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
 
-	context->ClearRenderTargetView(postRTV, clearColour);
+	context->ClearRenderTargetView(&postProcessRenderTarget.GetRTV(), clearColour);
 	context->ClearDepthStencilView(dsv, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 
-	context->OMSetRenderTargets(1, &postRTV, dsv);
+	context->OMSetRenderTargets(1, postProcessRenderTarget.GetRTVAddress(), dsv);
 
 	context->IASetInputLayout(inputLayout);
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -1769,7 +1766,8 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 
 	CreateRTVAndDSV();
 
-	CreatePostProcessRenderTarget();
+	postProcessRenderTarget.Recycle();
+	postProcessRenderTarget.Create(viewport.Width, viewport.Height);
 
 	UISystem::Init((void*)swapchain);
 
@@ -1971,7 +1969,7 @@ void RenderPostProcess()
 	cbPostProcess->Map(&postProcessData);
 	cbPostProcess->SetPS();
 
-	context->PSSetShaderResources(0, 1, &postSRV);
+	context->PSSetShaderResources(0, 1, postProcessRenderTarget.GetSRVAddress());
 	SetSampler(0, RenderUtils::GetDefaultSampler());
 
 	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
@@ -2067,28 +2065,6 @@ void RenderLightProbes()
 	cbLights->SetPS();
 
 	context->DrawInstanced(instanceMesh->meshDataProxy.vertices.size(), probeMap->GetProbeCount(), 0, 0);
-}
-
-void CreatePostProcessRenderTarget()
-{
-	if (postBuffer) postBuffer->Release();
-	if (postRTV) postRTV->Release();
-	if (postSRV) postSRV->Release();
-
-	D3D11_TEXTURE2D_DESC desc = {};
-	desc.Format = DXGI_FORMAT_R16G16B16A16_FLOAT;
-	desc.ArraySize = 1;
-	desc.MipLevels = 1;
-	desc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
-	desc.SampleDesc.Count = 1;
-	desc.Width = viewport.Width;
-	desc.Height = viewport.Height;
-
-	HR(device->CreateTexture2D(&desc, nullptr, &postBuffer));
-	assert(postBuffer);
-
-	HR(device->CreateRenderTargetView(postBuffer, nullptr, &postRTV));
-	HR(device->CreateShaderResourceView(postBuffer, nullptr, &postSRV));
 }
 
 RastState* Renderer::GetRastState(std::string rastStateName)
