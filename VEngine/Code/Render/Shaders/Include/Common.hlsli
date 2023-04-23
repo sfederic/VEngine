@@ -61,6 +61,7 @@ cbuffer cbMatrices : register(b0)
 	float4x4 proj;
 	float4x4 mvp;
 	float4x4 texMatrix;
+    float4x4 invTranModel;
 	float4x4 lightMVP;
 	float4x4 lightViewProj;
 };

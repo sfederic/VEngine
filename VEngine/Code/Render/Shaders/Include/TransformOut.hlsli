@@ -7,8 +7,8 @@ VS_OUT TransformOut(VS_IN i)
     o.colour = i.colour;
 	o.pos = mul(mvp, float4(i.pos.xyz, 1.0f));
 	o.posWS = mul(model, float4(i.pos.xyz, 1.0f));
-	o.normal = mul((float3x3)model, i.normal);
-    o.tangent = mul((float3x3)model, i.tangent);
+	o.normal = mul((float3x3)invTranModel, i.normal);
+    o.tangent = mul((float3x3)invTranModel, i.tangent);
 		
 	const float4 newUv = mul(texMatrix, float4(i.uv, 0.f, 1.0f));
     o.uv = float2(newUv.x, 1.0 - newUv.y);
