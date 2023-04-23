@@ -43,7 +43,7 @@ struct VS_OUT
     uint instanceID : SV_InstanceID;
 };
 
-Texture2D t : register(t0);
+Texture2D defaultTexture : register(t0);
 Texture2D shadowMap : register(t1);
 Texture2D reflectionMap : register(t2);
 StructuredBuffer<InstanceData> instanceData : register(t3);
@@ -51,7 +51,7 @@ TextureCube environmentMap : register(t4);
 Texture2D normalMap : register(t5);
 StructuredBuffer<LightProbeInstanceData> lightProbeInstanceData : register(t6);
 
-SamplerState s : register(s0);
+SamplerState defaultSampler : register(s0);
 SamplerComparisonState shadowSampler : register(s1);
 
 cbuffer cbMatrices : register(b0)
@@ -378,7 +378,7 @@ float3 CalcBumpNormalFromTangentBitangent(float3 normal, float3 tangent, float2 
     float3x3 TBN = float3x3(tangent, bitangent, normal);
     TBN = transpose(TBN);
     
-    float3 bumpNormal = normalMap.Sample(s, uv).rgb;
+    float3 bumpNormal = normalMap.Sample(defaultSampler, uv).rgb;
     bumpNormal = bumpNormal * 2.0 - 1.0;
     bumpNormal = normalize(mul(TBN, bumpNormal));
 	
@@ -396,7 +396,7 @@ float4 GetTextureColour(float2 uv)
     
     if (material.useTexture)
     {
-        texColour = t.Sample(s, uv);
+        texColour = defaultTexture.Sample(defaultSampler, uv);
         clip(texColour.a - 0.10f);
     }
     else

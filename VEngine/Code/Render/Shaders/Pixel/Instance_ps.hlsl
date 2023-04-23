@@ -6,7 +6,7 @@ float4 main(VS_OUT i) : SV_Target
     
     if (material.useTexture)
     {
-        finalColour *= t.Sample(s, i.uv);
+        finalColour *= defaultTexture.Sample(defaultSampler, i.uv);
     }
     
     return finalColour;
