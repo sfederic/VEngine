@@ -55,7 +55,8 @@ void SpriteSheet::Tick(float deltaTime)
 
 Properties SpriteSheet::GetProps()
 {
-	Properties props("SpriteSheet");
+	auto props = __super::GetProps();
+	props.title = "SpriteSheet";
 	props.Add("Texture", &textureData);
 	props.Add("Sheet Rows", &numSheetRows);
 	props.Add("Sheet Columns", &numSheetColumns);
