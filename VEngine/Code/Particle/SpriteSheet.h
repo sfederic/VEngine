@@ -15,6 +15,13 @@ public:
 	virtual void Create() override;
 	virtual Properties GetProps() override;
 
+	void SetupSpriteData(std::string_view textureFilename, int numRows, int numColumns)
+	{
+		textureData.filename = textureFilename;
+		numSheetRows = numRows;
+		numSheetColumns = numColumns;
+	}
+
 	void UpdateSprite();
 
 	Sprite sprite;
