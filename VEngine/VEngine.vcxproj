@@ -117,6 +117,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Actors\Game\MemoryActors\ChurchFire.cpp" />
     <ClCompile Include="Code\Actors\Game\BreakableCube.cpp" />
     <ClCompile Include="Code\Core\BMPFileWriter.cpp" />
     <ClCompile Include="Code\Actors\Game\ConditionTrigger.cpp" />
@@ -156,6 +157,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Code\Gameplay\Memories\ChurchFireMemory.cpp" />
     <ClCompile Include="Code\Gameplay\Trap.cpp" />
     <ClCompile Include="Code\Gameplay\Traps.cpp" />
     <ClCompile Include="Code\Gameplay\BattleSystem.cpp" />
@@ -283,6 +285,7 @@
     <ClCompile Include="Code\UI\Game\PlayerStatusWidget.cpp" />
     <ClCompile Include="Code\Actors\DebugActors\DebugLightProbe.cpp" />
     <ClCompile Include="Code\Render\RenderTarget.cpp" />
+    <ClInclude Include="Code\Actors\Game\MemoryActors\ChurchFire.h" />
     <ClInclude Include="Code\Actors\Game\BreakableCube.h" />
     <ClInclude Include="Code\Core\BMPFileWriter.h" />
     <ClInclude Include="Code\Actors\Game\ConditionTrigger.h" />
@@ -312,6 +315,7 @@
     <ClInclude Include="Code\Components\Game\ConditionComponent.h" />
     <ClInclude Include="Code\Components\Game\DialogueComponent.h" />
     <ClInclude Include="Code\Components\Game\MemoryComponent.h" />
+    <ClInclude Include="Code\Gameplay\Memories\ChurchFireMemory.h" />
     <ClInclude Include="Code\Gameplay\Trap.h" />
     <ClInclude Include="Code\Gameplay\BattleEnums.h" />
     <ClInclude Include="Code\Gameplay\BattleSystem.h" />
