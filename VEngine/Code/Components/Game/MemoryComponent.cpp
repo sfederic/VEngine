@@ -35,14 +35,14 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 		return false;
 	}
 
-	auto memoryIt = GameInstance::playerMemories.find(VString::wstos(memoryName));
+	auto memoryIt = GameInstance::playerMemories.find(memoryName);
 	if (memoryIt != GameInstance::playerMemories.end())
 	{
 		Log("%s Memory already known.", memoryName.c_str());
 		return false;
 	}
 
-	auto memory = Memory::FindMemory(VString::wstos(memoryName));
+	auto memory = Memory::FindMemory(memoryName);
 
 	memory->actorAquiredFrom = actorAquiredFromName;
 	memory->worldAquiredFrom = World::worldFilename;

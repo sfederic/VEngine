@@ -11,7 +11,8 @@ ChurchFire::ChurchFire()
 
 void ChurchFire::Create()
 {
-	SetMemoryName(L"Church Fire");
+	SetMemoryName("Church Fire");
+	AddOnInteract(true);
 
 	flameSpriteSheet->SetLocalPosition(0.f, 0.75f, 0.f);
 	flameSpriteSheet->SetLocalScale(0.5f, 0.5f, 0.5f);

@@ -15,7 +15,7 @@ Properties MemoryActor::GetProps()
     return props;
 }
 
-void MemoryActor::SetMemoryName(std::wstring_view memoryName)
+void MemoryActor::SetMemoryName(std::string_view memoryName)
 {
     memoryComponent->memoryName = memoryName;
 }

@@ -8,7 +8,7 @@ struct MemoryComponent : Component
 {
 	COMPONENT_SYSTEM(MemoryComponent);
 
-	std::wstring memoryName;
+	std::string memoryName;
 
 	bool addOnInteract = false;
 

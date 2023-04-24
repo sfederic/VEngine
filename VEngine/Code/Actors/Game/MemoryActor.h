@@ -13,7 +13,7 @@ public:
 	void Interact() override {}
 
 protected:
-	void SetMemoryName(std::wstring_view memoryName);
+	void SetMemoryName(std::string_view memoryName);
 	void AddOnInteract(bool add);
 
 private:
