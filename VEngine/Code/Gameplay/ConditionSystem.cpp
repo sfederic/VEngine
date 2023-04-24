@@ -75,6 +75,8 @@ bool StartBattle(std::string arg)
 
 bool GainMemory(std::string arg)
 {
+	//@Todo: whole function needs to be reworked to get memory from Memory using arg
+
 	size_t firstOf = arg.find("|");
 	size_t lastOf = arg.find_last_of("|");
 
