@@ -1,3 +1,26 @@
+DiffuseProbeMap
+1
+ Enabled
+0
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DiffuseProbeMap0
+Size X
+5
+Size Y
+5
+Size Z
+5
+UID
+334588375
+next
 EntranceTrigger
 1
  Enabled
@@ -47,7 +70,7 @@ UID
 2103209020
 next
 MeshActor
-9
+11
  Enabled
 1
  Position
@@ -183,6 +206,36 @@ MeshActor8
 UID
 1471994544
 next
+ Enabled
+1
+ Position
+4 2 -0.5
+ Rotation
+1.84042e-07 0.707107 0.707107 -9.9748e-08
+ Scale
+8.99998 0.999987 4.9999
+ Visible
+1
+Name
+MeshActor9
+UID
+3186529788
+next
+ Enabled
+1
+ Position
+4 4.5 4
+ Rotation
+1 0 0 7.94663e-09
+ Scale
+9 0.999999 8.99998
+ Visible
+1
+Name
+MeshActor10
+UID
+2047055992
+next
 Player
 1
  Enabled
@@ -199,6 +252,23 @@ Name
 Player0
 UID
 1647454417
+next
+PointLightActor
+1
+ Enabled
+1
+ Position
+4 1 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+PointLightActor0
+UID
+2191381210
 next
 BoxTriggerComponent
 1
@@ -273,7 +343,22 @@ UID
 2967410941
 next
 EmptyComponent
+2
+334588375
+Root
+ Enabled
 1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+2817668957
+next
 1647454417
 Root
  Enabled
@@ -345,7 +430,7 @@ UID
 3813850013
 next
 MeshComponent
-10
+12
 3841650662
 Mesh
  Enabled
@@ -823,6 +908,112 @@ Trans. Occlude
 UID
 1752416160
 next
+3186529788
+Mesh
+ Enabled
+1
+ Pos
+4 2 -0.5
+ Rot
+1.84042e-07 0.707107 0.707107 -9.9748e-08
+ Scale
+8.99998 0.999987 4.9999
+ Visible
+1
+Casts Shadow
+1
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wall.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+3 2
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+117176342
+next
+2047055992
+Mesh
+ Enabled
+1
+ Pos
+4 4.5 4
+ Rot
+1 0 0 7.94663e-09
+ Scale
+9 0.999999 8.99998
+ Visible
+1
+Casts Shadow
+1
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Walls/wall06.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+252959961
+next
 1647454417
 Mesh
  Enabled
@@ -875,5 +1066,28 @@ Trans. Occlude
 0
 UID
 2929477331
+next
+PointLightComponent
+1
+2191381210
+PointLight
+ Enabled
+1
+ Pos
+4 1 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
+UID
+1246965977
 next
 end

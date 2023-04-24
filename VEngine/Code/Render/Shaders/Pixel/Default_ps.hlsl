@@ -18,7 +18,7 @@ float4 main(VS_OUT i) : SV_Target
     if (isDiffuseProbeMapActive)
     {
         const float4 shIrradiance = float4(CalcSHIrradiance(normal, SH), 1.0f);
-        finalColour *= shIrradiance * PI * 2;
+        finalColour *= shIrradiance * PI * 4;
     }
     
     return finalColour;

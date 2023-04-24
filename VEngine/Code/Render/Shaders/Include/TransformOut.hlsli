@@ -29,7 +29,7 @@ VS_OUT TransformOutInstance(VS_IN i, float4x4 modelMatrixFromInstanceData)
     o.pos = mul(modelViewProj, float4(i.pos.xyz, 1.0f));
     o.posWS = mul(model, float4(i.pos.xyz, 1.0f));
     o.uv = i.uv;
-    o.normal = mul((float3x3) modelMatrixFromInstanceData, i.normal);
+    o.normal = mul((float3x3)modelMatrixFromInstanceData, i.normal);
     o.shadowPos = float4(1.0f, 1.0f, 1.0f, 1.0f);
     o.instanceID = i.instanceID;
     o.tangent = i.tangent;

@@ -1,11 +1,11 @@
 DiffuseProbeMap
 1
  Enabled
-1
+0
  Position
--0 -0 -0
+0 0 0
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -13,13 +13,13 @@ DiffuseProbeMap
 Name
 DiffuseProbeMap0
 Size X
-3
-Size Y
 5
+Size Y
+2
 Size Z
 5
 UID
-3512023912
+2947181467
 next
 Grid
 1
@@ -45,7 +45,7 @@ UID
 201678567
 next
 MeshActor
-14
+15
  Enabled
 1
  Position
@@ -256,6 +256,21 @@ MeshActor13
 UID
 3542750051
 next
+ Enabled
+1
+ Position
+2 1.5 2
+ Rotation
+0 0 1 7.94663e-09
+ Scale
+4.99999 0.999998 5
+ Visible
+1
+Name
+MeshActor14
+UID
+2490089078
+next
 Player
 1
  Enabled
@@ -273,37 +288,37 @@ Player0
 UID
 2130618174
 next
-PointLightActor
+SpotLightActor
 2
  Enabled
 1
  Position
-4 1 2
+2 1 2
  Rotation
--0 0 -0 1
+0.163186 0.336664 0.059363 0.925475
  Scale
-1 1 1
+1 0.999999 0.999999
  Visible
 1
 Name
-PointLightActor0
+SpotLightActor0
 UID
-1152875273
+3237219679
 next
  Enabled
 1
  Position
-0 1 2
+2 1 1
  Rotation
--0 0 -0 1
+0.0374843 0.873424 -0.169554 -0.454946
  Scale
-1 1 1
+0.999999 0.999999 0.999998
  Visible
 1
 Name
-PointLightActor1
+SpotLightActor1
 UID
-1481735726
+3206407999
 next
 CameraComponent
 1
@@ -343,20 +358,20 @@ UID
 next
 EmptyComponent
 2
-3512023912
+2947181467
 Root
  Enabled
 1
  Pos
--0 -0 -0
+0 0 0
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
 1
 UID
-1541382741
+2972862937
 next
 2130618174
 Root
@@ -429,7 +444,7 @@ UID
 2641014842
 next
 MeshComponent
-15
+16
 553639516
 Mesh
  Enabled
@@ -461,7 +476,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wood128x128.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -514,7 +529,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+barrel_texture.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -567,7 +582,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+barrel_texture.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -620,7 +635,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wood_furniture.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -673,7 +688,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wood_furniture.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -726,7 +741,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+crate.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -779,7 +794,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+barrel_texture.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -832,7 +847,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+book.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -885,7 +900,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+crate.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -938,7 +953,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+lisa.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -991,7 +1006,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wall.png
 M_Use Texture
 1
 M_UvOffset
@@ -1044,7 +1059,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wall.png
 M_Use Texture
 1
 M_UvOffset
@@ -1097,7 +1112,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wall.png
 M_Use Texture
 1
 M_UvOffset
@@ -1150,7 +1165,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wall.png
 M_Use Texture
 1
 M_UvOffset
@@ -1171,6 +1186,59 @@ Trans. Occlude
 0
 UID
 1877118452
+next
+2490089078
+Mesh
+ Enabled
+1
+ Pos
+2 1.5 2
+ Rot
+0 0 1 7.94663e-09
+ Scale
+4.99999 0.999998 5
+ Visible
+1
+Casts Shadow
+1
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wood128x128.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+908833960
 next
 2130618174
 Mesh
@@ -1225,48 +1293,52 @@ Trans. Occlude
 UID
 2108166279
 next
-PointLightComponent
+SpotLightComponent
 2
-1152875273
-PointLight
+3237219679
+SpotLight
  Enabled
 1
  Pos
-4 1 2
+2 1 2
  Rot
--0 0 -0 1
+0.163186 0.336664 0.059363 0.925475
  Scale
-1 1 1
+1 0.999999 0.999999
  Visible
 1
 Colour
-0 1 10 1
+0 0 1 1
 Intensity
-20
+25
 LightEnabled
 1
+Spot Angle
+70
 UID
-494739967
+1779670209
 next
-1481735726
-PointLight
+3206407999
+SpotLight
  Enabled
 1
  Pos
-0 1 2
+2 1 1
  Rot
--0 0 -0 1
+0.0374843 0.873424 -0.169554 -0.454946
  Scale
-1 1 1
+0.999999 0.999999 0.999998
  Visible
 1
 Colour
 1 0 0 1
 Intensity
-20
+25
 LightEnabled
 1
+Spot Angle
+70
 UID
-2789510885
+1642690845
 next
 end
