@@ -524,6 +524,10 @@ bool Player::InteractCheck(Actor* hitActor)
 						interactWidget->interactText = gridActor->interactKnownText;
 					}
 				}
+				else
+				{
+					Log("Memory [%s] not set to add on interact.", memory->memoryName.c_str());
+				}
 
 				return true;
 			}
