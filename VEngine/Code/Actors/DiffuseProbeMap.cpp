@@ -142,13 +142,7 @@ void DiffuseProbeMap::ReadProbeDataFromFile()
 		{
 			LightProbeInstanceData pd;
 			fread(&pd, sizeof(LightProbeInstanceData), 1, file);
-
 			lightProbeData.emplace_back(pd);
-
-			pd.modelMatrix = XMMatrixTranslation(pd.position.x, pd.position.y, pd.position.z);
-			pd.modelMatrix.r[0].m128_f32[0] = 0.15f;
-			pd.modelMatrix.r[1].m128_f32[1] = 0.15f;
-			pd.modelMatrix.r[2].m128_f32[2] = 0.15f;
 
 			instanceData.emplace_back(pd);
 		}
