@@ -1490,6 +1490,11 @@ void RenderSpriteSheets()
 
 	for (auto& spriteSheet : SpriteSheet::system.GetComponents())
 	{
+		if (!spriteSheet->IsActive() || !spriteSheet->IsVisible())
+		{
+			continue;
+		}
+
 		SetRastState(RastStates::noBackCull);
 		SetShaders(ShaderItems::DefaultClip);
 
