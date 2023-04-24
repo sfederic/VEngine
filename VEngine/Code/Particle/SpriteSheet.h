@@ -15,11 +15,12 @@ public:
 	virtual void Create() override;
 	virtual Properties GetProps() override;
 
-	void SetupSpriteData(std::string_view textureFilename, int numRows, int numColumns)
+	void SetupSpriteData(std::string_view textureFilename, int numRows, int numColumns, bool loop)
 	{
 		textureData.filename = textureFilename;
 		numSheetRows = numRows;
 		numSheetColumns = numColumns;
+		loopAnimation = loop;
 	}
 
 	void UpdateSprite();
