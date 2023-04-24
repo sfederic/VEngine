@@ -19,3 +19,8 @@ void MemoryActor::SetMemoryName(std::wstring_view memoryName)
 {
     memoryComponent->memoryName = memoryName;
 }
+
+void MemoryActor::AddOnInteract(bool add)
+{
+    memoryComponent->addOnInteract = add;
+}

@@ -14,6 +14,7 @@ public:
 
 protected:
 	void SetMemoryName(std::wstring_view memoryName);
+	void AddOnInteract(bool add);
 
 private:
 	std::string memoryName;
