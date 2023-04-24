@@ -995,13 +995,23 @@ void Renderer::RenderLightProbeViews()
 		XMVectorSet(0.f, 0.f, -1.f, 0.f), //-Z
 	};
 
+	XMVECTOR resultantUpVectors[6] =
+	{
+		XMVectorSet(0.f, 1.f, 0.f, 0.f),
+		XMVectorSet(0.f, 1.f, 0.f, 0.f),
+		XMVectorSet(1.f, 0.f, 0.f, 0.f),
+		XMVectorSet(1.f, 0.f, 0.f, 0.f),
+		XMVectorSet(0.f, 1.f, 0.f, 0.f),
+		XMVectorSet(0.f, 1.f, 0.f, 0.f),
+	};
+
 	CreateLightProbeBuffers();
 
 	int probeIndex = 0;
 
 	for (auto& probeData : diffuseProbeMap->lightProbeData)
 	{
-		const XMMATRIX& probeMatrix = probeData.modelMatrix;
+		const XMMATRIX probeMatrix = probeData.modelMatrix;
 
 		for (int i = 0; i < 6; i++)
 		{
@@ -1047,10 +1057,10 @@ void Renderer::RenderLightProbeViews()
 				cbMaterial->SetPS();
 
 				//Set matrices
-				//Note: Had to use VMath::LookAtRotation here because DirectX::XMMatrixLookAtLH() wasn't returning
-				//the correct view matrix for the Y+ and Y- directions. Not sure why.
-				const XMVECTOR lookAtRot = VMath::LookAtRotation(probeMatrix.r[3] + faces[i], probeMatrix.r[3]);
-				shaderMatrices.view = XMMatrixRotationQuaternion(lookAtRot);
+				const auto probePos = XMLoadFloat3(&probeData.position);
+				shaderMatrices.view = XMMatrixLookAtLH(probePos,
+					probePos + faces[i],
+					resultantUpVectors[i]);
 				shaderMatrices.model = mesh->GetWorldMatrix();
 				shaderMatrices.MakeModelViewProjectionMatrix();
 				shaderMatrices.MakeTextureMatrix(mesh->GetMaterial());
