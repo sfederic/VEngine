@@ -66,7 +66,7 @@ void GridActor::Tick(float deltaTime)
 
 Properties GridActor::GetProps()
 {
-	auto props = Actor::GetProps();
+	auto props = __super::GetProps();
 	props.title = "GridActor";
 	props.Add("Destruct", &isDestructible);
 	props.Add("Health", &health);
