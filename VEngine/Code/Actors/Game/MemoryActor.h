@@ -12,6 +12,9 @@ public:
 
 	void Interact() override {}
 
+protected:
+	void SetMemoryName(std::wstring_view memoryName);
+
 private:
 	std::string memoryName;
 };
