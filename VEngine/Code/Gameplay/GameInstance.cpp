@@ -15,6 +15,8 @@ bool GameInstance::useGameSaves = false;
 
 bool GameInstance::isPlayerInMemory = false;
 
+Transform GameInstance::previousPlayerTransformBeforeEnteringMemory;
+
 //Global properties
 
 Properties GameInstance::GetGlobalProps()

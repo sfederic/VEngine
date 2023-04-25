@@ -2,6 +2,7 @@
 
 #include <string>
 #include "Core/Properties.h"
+#include "Core/Transform.h"
 
 struct Memory;
 
@@ -22,6 +23,7 @@ namespace GameInstance
 	extern bool useGameSaves;
 
 	extern bool isPlayerInMemory;
+	extern Transform previousPlayerTransformBeforeEnteringMemory;
 
 	//Global save data
 	Properties GetGlobalProps();

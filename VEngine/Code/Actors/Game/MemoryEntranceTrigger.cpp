@@ -4,6 +4,7 @@
 #include "Core/Input.h"
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/GameUtils.h"
+#include "Actors/Game/Player.h"
 
 MemoryEntranceTrigger::MemoryEntranceTrigger()
 {
@@ -22,6 +23,10 @@ void MemoryEntranceTrigger::Tick(float deltaTime)
 	{
 		if (Input::GetKeyUp(Keys::Down))
 		{
+			GameInstance::previousPlayerTransformBeforeEnteringMemory = 
+				Player::system.GetOnlyActor()->GetTransform();
+			GameInstance::isPlayerInMemory = true;
+
 			GameUtils::LoadWorldDeferred(memoryLevelToMoveTo);
 		}
 	}
