@@ -626,6 +626,9 @@
     <ClCompile Include="Code\Gameplay\MemorySystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\Game\MemoryEntranceTrigger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1285,6 +1288,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\MemoryNames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\MemoryEntranceTrigger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

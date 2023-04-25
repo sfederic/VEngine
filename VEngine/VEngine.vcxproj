@@ -117,6 +117,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Actors\Game\MemoryEntranceTrigger.cpp" />
     <ClCompile Include="Code\Actors\Game\MemoryGainActors\ChurchFire.cpp" />
     <ClCompile Include="Code\Actors\Game\BreakableCube.cpp" />
     <ClCompile Include="Code\Core\BMPFileWriter.cpp" />
@@ -285,6 +286,7 @@
     <ClCompile Include="Code\Actors\DebugActors\DebugLightProbe.cpp" />
     <ClCompile Include="Code\Render\RenderTarget.cpp" />
     <ClCompile Include="Code\Gameplay\MemorySystem.cpp" />
+    <ClInclude Include="Code\Actors\Game\MemoryEntranceTrigger.h" />
     <ClInclude Include="Code\Actors\Game\MemoryGainActors\ChurchFire.h" />
     <ClInclude Include="Code\Actors\Game\BreakableCube.h" />
     <ClInclude Include="Code\Core\BMPFileWriter.h" />
