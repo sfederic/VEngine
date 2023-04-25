@@ -1,9 +1,9 @@
 #include "vpch.h"
-#include "MemoryCheckGridActor.h"
+#include "MemoryCheckActor.h"
 #include "Gameplay/GameUtils.h"
 #include "Core/Log.h"
 
-Properties MemoryCheckGridActor::GetProps()
+Properties MemoryCheckActor::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = "MemoryCheckGridActor";
@@ -11,7 +11,7 @@ Properties MemoryCheckGridActor::GetProps()
 	return props;
 }
 
-bool MemoryCheckGridActor::CheckMemory()
+bool MemoryCheckActor::CheckMemory()
 {
 	if (GameUtils::CheckIfMemoryExists(memoryToCheck))
 	{

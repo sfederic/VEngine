@@ -10,7 +10,7 @@
 #include "Actors/Game/NPC.h"
 #include "Actors/Game/FenceActor.h"
 #include "Actors/Game/GridMapPicker.h"
-#include "Actors/Game/MemoryCheckGridActor.h"
+#include "Actors/Game/MemoryCheckActor.h"
 #include "Grid.h"
 #include "GridActor.h"
 #include "Components/EmptyComponent.h"
@@ -493,7 +493,7 @@ bool Player::InteractCheck(Actor* hitActor)
 		auto gridActor = dynamic_cast<GridActor*>(hitActor);
 		if (gridActor)
 		{
-			auto memoryCheckGridActor = dynamic_cast<MemoryCheckGridActor*>(hitActor);
+			auto memoryCheckGridActor = dynamic_cast<MemoryCheckActor*>(hitActor);
 			if (memoryCheckGridActor)
 			{
 				memoryCheckGridActor->CheckMemory();

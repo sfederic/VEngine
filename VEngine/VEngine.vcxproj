@@ -117,7 +117,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Code\Actors\Game\MemoryActors\ChurchFire.cpp" />
+    <ClCompile Include="Code\Actors\Game\MemoryCheckActors\ChurchFireBasin.cpp" />
+    <ClCompile Include="Code\Actors\Game\MemoryGainActors\ChurchFire.cpp" />
     <ClCompile Include="Code\Actors\Game\BreakableCube.cpp" />
     <ClCompile Include="Code\Core\BMPFileWriter.cpp" />
     <ClCompile Include="Code\Actors\Game\ConditionTrigger.cpp" />
@@ -130,7 +131,7 @@
     <ClCompile Include="Code\Actors\Game\GridMapPicker.cpp" />
     <ClCompile Include="Code\Actors\Game\InteractTrigger.cpp" />
     <ClCompile Include="Code\Actors\Game\MemoryActor.cpp" />
-    <ClCompile Include="Code\Actors\Game\MemoryCheckGridActor.cpp" />
+    <ClCompile Include="Code\Actors\Game\MemoryCheckActor.cpp" />
     <ClCompile Include="Code\Actors\Game\MovingGridActor.cpp" />
     <ClCompile Include="Code\Actors\Game\NPC.cpp" />
     <ClCompile Include="Code\Actors\Game\Player.cpp" />
@@ -286,7 +287,8 @@
     <ClCompile Include="Code\Actors\DebugActors\DebugLightProbe.cpp" />
     <ClCompile Include="Code\Render\RenderTarget.cpp" />
     <ClCompile Include="Code\Gameplay\MemorySystem.cpp" />
-    <ClInclude Include="Code\Actors\Game\MemoryActors\ChurchFire.h" />
+    <ClInclude Include="Code\Actors\Game\MemoryCheckActors\ChurchFireBasin.h" />
+    <ClInclude Include="Code\Actors\Game\MemoryGainActors\ChurchFire.h" />
     <ClInclude Include="Code\Actors\Game\BreakableCube.h" />
     <ClInclude Include="Code\Core\BMPFileWriter.h" />
     <ClInclude Include="Code\Actors\Game\ConditionTrigger.h" />
@@ -299,7 +301,7 @@
     <ClInclude Include="Code\Actors\Game\GridMapPicker.h" />
     <ClInclude Include="Code\Actors\Game\InteractTrigger.h" />
     <ClInclude Include="Code\Actors\Game\MemoryActor.h" />
-    <ClInclude Include="Code\Actors\Game\MemoryCheckGridActor.h" />
+    <ClInclude Include="Code\Actors\Game\MemoryCheckActor.h" />
     <ClInclude Include="Code\Actors\Game\MovingGridActor.h" />
     <ClInclude Include="Code\Actors\Game\NPC.h" />
     <ClInclude Include="Code\Actors\Game\Player.h" />
@@ -317,6 +319,7 @@
     <ClInclude Include="Code\Components\Game\DialogueComponent.h" />
     <ClInclude Include="Code\Components\Game\MemoryComponent.h" />
     <ClInclude Include="Code\Gameplay\Memories\ChurchFireMemory.h" />
+    <ClInclude Include="Code\Gameplay\Memories\MemoryNames.h" />
     <ClInclude Include="Code\Gameplay\Trap.h" />
     <ClInclude Include="Code\Gameplay\BattleEnums.h" />
     <ClInclude Include="Code\Gameplay\BattleSystem.h" />

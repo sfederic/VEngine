@@ -3,16 +3,16 @@
 #include "GridActor.h"
 
 //Checks for a memory and activates an effect in-game based on an interaction.
-class MemoryCheckGridActor : public GridActor
+class MemoryCheckActor : public GridActor
 {
 public:
-	ACTOR_SYSTEM(MemoryCheckGridActor);
+	ACTOR_SYSTEM(MemoryCheckActor);
 
-	MemoryCheckGridActor() {}
+	MemoryCheckActor() {}
 	virtual Properties GetProps() override;
 	bool CheckMemory();
 	virtual void ExecuteOnMemoryCheckSuccess() {}
 
-private:
+protected:
 	std::string memoryToCheck;
 };
