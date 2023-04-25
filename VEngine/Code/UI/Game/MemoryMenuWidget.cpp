@@ -92,10 +92,10 @@ void MemoryMenuWidget::Draw(float deltaTime)
 			Text(VString::wformat(L"Desc: %S", selectedMemory->description.c_str()), layout, TextAlign::Leading);
 			layout.AddVerticalSpace(90.f);
 
-			Text(VString::wformat(L"Actor GET: %S", selectedMemory->actorAquiredFrom.c_str()), layout, TextAlign::Leading);
+			Text(VString::wformat(L"Actor GET: %S", selectedMemory->actorAcquiredFrom.c_str()), layout, TextAlign::Leading);
 			layout.AddVerticalSpace(30.f);
 
-			Text(VString::wformat(L"World GET: %S", selectedMemory->worldAquiredFrom.c_str()), layout, TextAlign::Leading);
+			Text(VString::wformat(L"World GET: %S", selectedMemory->worldAcquiredFrom.c_str()), layout, TextAlign::Leading);
 			layout.AddVerticalSpace(30.f);
 
 			layout = PercentAlignLayout(0.5f, 0.5f, 0.9f, 0.9f);

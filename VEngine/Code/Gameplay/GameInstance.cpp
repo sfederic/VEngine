@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "GameInstance.h"
 
-std::string GameInstance::startingMap = "test.vmap";
+std::string GameInstance::startingMap = "church_fire_room.vmap";
 
 //Global properties
 

@@ -87,8 +87,8 @@ bool GainMemory(std::string arg)
 	auto memory = new Memory(memoryName);
 	memory->description = memoryDesc;
 
-	memory->actorAquiredFrom = "Aquired from dialogue.";
-	memory->worldAquiredFrom = World::worldFilename;
+	memory->actorAcquiredFrom = "Acquired from dialogue.";
+	memory->worldAcquiredFrom = World::worldFilename;
 
 	memory->imageFile = memoryImage;
 

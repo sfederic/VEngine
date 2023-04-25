@@ -27,11 +27,11 @@ Properties MemoryComponent::GetProps()
 	return props;
 }
 
-bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
+bool MemoryComponent::CreateMemory(std::string actorAcquiredFromName)
 {
 	if (memoryName.empty())
 	{
-		Log("%s Memory name not set.", actorAquiredFromName.c_str());
+		Log("%s Memory name not set.", actorAcquiredFromName.c_str());
 		return false;
 	}
 
@@ -42,10 +42,10 @@ bool MemoryComponent::CreateMemory(std::string actorAquiredFromName)
 		return false;
 	}
 
-	auto memory = Memory::FindMemory(memoryName);
+	auto memory = MemorySystem::Get().FindMemory(memoryName);
 
-	memory->actorAquiredFrom = actorAquiredFromName;
-	memory->worldAquiredFrom = World::worldFilename;
+	memory->actorAcquiredFrom = actorAcquiredFromName;
+	memory->worldAcquiredFrom = World::worldFilename;
 
 	if (!memory->CheckCondition())
 	{

@@ -14,5 +14,5 @@ struct MemoryComponent : Component
 
 	MemoryComponent();
 	virtual Properties GetProps() override;
-	bool CreateMemory(std::string actorAquiredFromName);
+	bool CreateMemory(std::string actorAcquiredFromName);
 };
