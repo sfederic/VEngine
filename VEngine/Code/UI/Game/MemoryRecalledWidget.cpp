@@ -19,4 +19,3 @@ void MemoryRecalledWidget::Draw(float deltaTime)
 		Text(VString::stows(recalledMemory->description), layout);
 	}
 }
-#include "vpch.h"
