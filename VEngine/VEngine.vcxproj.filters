@@ -1296,7 +1296,7 @@
     <ClInclude Include="Code\Actors\Game\MemoryCheckActors\ChurchFireBasin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Gameplay\Memories\MemoryNames.h">
+    <ClInclude Include="Code\Gameplay\MemoryNames.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

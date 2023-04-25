@@ -319,7 +319,7 @@
     <ClInclude Include="Code\Components\Game\DialogueComponent.h" />
     <ClInclude Include="Code\Components\Game\MemoryComponent.h" />
     <ClInclude Include="Code\Gameplay\Memories\ChurchFireMemory.h" />
-    <ClInclude Include="Code\Gameplay\Memories\MemoryNames.h" />
+    <ClInclude Include="Code\Gameplay\MemoryNames.h" />
     <ClInclude Include="Code\Gameplay\Trap.h" />
     <ClInclude Include="Code\Gameplay\BattleEnums.h" />
     <ClInclude Include="Code\Gameplay\BattleSystem.h" />

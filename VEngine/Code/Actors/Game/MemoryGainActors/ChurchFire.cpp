@@ -2,7 +2,7 @@
 #include "ChurchFire.h"
 #include "Gameplay/GameUtils.h"
 #include "Particle/SpriteSheet.h"
-
+#include "Gameplay/MemoryNames.h"
 
 ChurchFire::ChurchFire()
 {
@@ -12,7 +12,7 @@ ChurchFire::ChurchFire()
 
 void ChurchFire::Create()
 {
-	SetMemoryName("Church Fire");
+	SetMemoryName(MemoryNames::ChurchFire);
 	AddOnInteract(true);
 
 	flameSpriteSheet->SetLocalPosition(0.f, 0.75f, 0.f);
