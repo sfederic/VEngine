@@ -518,9 +518,6 @@
     <ClCompile Include="Code\Actors\Game\MemoryActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\MemoryCheckActor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\Game\MovingGridActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -627,9 +624,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Gameplay\MemorySystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Actors\Game\MemoryCheckActors\ChurchFireBasin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1176,9 +1170,6 @@
     <ClInclude Include="Code\Actors\Game\MemoryActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\MemoryCheckActor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Actors\Game\MovingGridActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1291,9 +1282,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\MemorySystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\MemoryCheckActors\ChurchFireBasin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\MemoryNames.h">

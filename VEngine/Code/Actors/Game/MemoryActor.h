@@ -11,6 +11,7 @@ public:
 	Properties GetProps() override;
 
 	void Interact() override {}
+	virtual bool CheckMemory();
 
 protected:
 	void SetMemoryName(std::string_view memoryName);
