@@ -36,13 +36,11 @@ void MemoryMenuWidget::Draw(float deltaTime)
 
 		std::vector<Memory*> memories;
 
-		for (auto& memoryPair : GameInstance::playerMemories)
+		for (auto& [name, memory] : GameInstance::playerMemories)
 		{
-			Memory* memory = memoryPair.second;
 			memories.push_back(memory);
-
 			textLayout.AddVerticalSpace(30.f);
-			Text(VString::stows(memory->name), textLayout);
+			Text(name, textLayout);
 		}
 
 		//Show selected memory highlight
