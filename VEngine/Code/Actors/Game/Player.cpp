@@ -279,13 +279,10 @@ void Player::PrimaryAction()
 			return;
 		}
 
-		/*if (UISystem::memoryRecalledWidget->IsInViewport() 
-			|| UISystem::memoryGainedWidget->IsInViewport())
+		if (UISystem::memoryGainedWidget->IsInViewport())
 		{
 			UISystem::memoryGainedWidget->RemoveFromViewport();
-			UISystem::memoryRecalledWidget->RemoveFromViewport();
-			return;
-		}*/
+		}
 
 		if (inInteraction)
 		{
