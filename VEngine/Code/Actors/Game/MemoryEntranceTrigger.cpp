@@ -1,11 +1,30 @@
 #include "vpch.h"
 #include "MemoryEntranceTrigger.h"
 #include "Components/BoxTriggerComponent.h"
+#include "Core/Input.h"
+#include "Gameplay/GameInstance.h"
+#include "Gameplay/GameUtils.h"
 
 MemoryEntranceTrigger::MemoryEntranceTrigger()
 {
 	boxTrigger = CreateComponent<BoxTriggerComponent>("BoxTrigger");
 	rootComponent = boxTrigger;
+}
+
+void MemoryEntranceTrigger::Start()
+{
+	boxTrigger->SetTargetAsPlayer();
+}
+
+void MemoryEntranceTrigger::Tick(float deltaTime)
+{
+	if (boxTrigger->ContainsTarget())
+	{
+		if (Input::GetKeyUp(Keys::Down))
+		{
+			GameUtils::LoadWorldDeferred(memoryLevelToMoveTo);
+		}
+	}
 }
 
 Properties MemoryEntranceTrigger::GetProps()

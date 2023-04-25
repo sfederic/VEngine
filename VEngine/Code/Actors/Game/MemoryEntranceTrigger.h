@@ -12,6 +12,8 @@ public:
 	ACTOR_SYSTEM(MemoryEntranceTrigger);
 
 	MemoryEntranceTrigger();
+	void Start() override;
+	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
 private:
