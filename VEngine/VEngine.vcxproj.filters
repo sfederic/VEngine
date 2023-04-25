@@ -626,6 +626,9 @@
     <ClCompile Include="Code\Gameplay\Memories\ChurchFireMemory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Gameplay\MemorySystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1282,6 +1285,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\Memories\ChurchFireMemory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Gameplay\MemorySystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

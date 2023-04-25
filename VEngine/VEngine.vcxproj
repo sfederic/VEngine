@@ -285,6 +285,7 @@
     <ClCompile Include="Code\UI\Game\PlayerStatusWidget.cpp" />
     <ClCompile Include="Code\Actors\DebugActors\DebugLightProbe.cpp" />
     <ClCompile Include="Code\Render\RenderTarget.cpp" />
+    <ClCompile Include="Code\Gameplay\MemorySystem.cpp" />
     <ClInclude Include="Code\Actors\Game\MemoryActors\ChurchFire.h" />
     <ClInclude Include="Code\Actors\Game\BreakableCube.h" />
     <ClInclude Include="Code\Core\BMPFileWriter.h" />
@@ -598,6 +599,7 @@
     <ClInclude Include="Code\UI\Game\PlayerStatusWidget.h" />
     <ClInclude Include="Code\Actors\DebugActors\DebugLightProbe.h" />
     <ClInclude Include="Code\Render\RenderTarget.h" />
+    <ClInclude Include="Code\Gameplay\MemorySystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
