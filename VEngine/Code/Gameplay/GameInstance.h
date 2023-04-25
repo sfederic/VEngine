@@ -23,6 +23,7 @@ namespace GameInstance
 	extern bool useGameSaves;
 
 	extern bool isPlayerInMemory;
+	extern bool playerBackedOutOfMemoryLevel;
 	extern Transform previousPlayerTransformBeforeEnteringMemory;
 
 	//Global save data

@@ -61,6 +61,12 @@ void Player::Start()
 {
 	__super::Start();
 
+	if (GameInstance::playerBackedOutOfMemoryLevel)
+	{
+		GameInstance::playerBackedOutOfMemoryLevel = false;
+		SetTransform(GameInstance::previousPlayerTransformBeforeEnteringMemory);
+	}
+
 	nextPos = GetPositionV();
 	nextRot = GetRotationV();
 
@@ -106,6 +112,8 @@ void Player::Tick(float deltaTime)
 	PrimaryAction();
 	EnterAstralMode();
 	ToggleMemoryMenu();
+
+	BackOutOfMemoryWorld();
 
 	LerpPlayerCameraFOV(deltaTime);
 	MakeOccludingMeshBetweenCameraAndPlayerTransparent();
@@ -669,6 +677,16 @@ void Player::Guard()
 		ExpendActionPoint();
 		guardWidget->SetGuardSuccess();
 		GameUtils::PlayAudioOneShot("equip.wav");
+	}
+}
+
+void Player::BackOutOfMemoryWorld()
+{
+	if (Input::GetKeyUp(Keys::BackSpace) && GameInstance::isPlayerInMemory)
+	{
+		GameInstance::isPlayerInMemory = false;
+		GameInstance::playerBackedOutOfMemoryLevel = true;
+		GameUtils::LoadWorldDeferred(GameInstance::previousMapMovedFrom);
 	}
 }
 

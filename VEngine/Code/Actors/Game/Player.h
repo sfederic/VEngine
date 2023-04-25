@@ -133,4 +133,6 @@ private:
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
 	void Guard();
+
+	void BackOutOfMemoryWorld();
 };
