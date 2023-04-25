@@ -2,28 +2,16 @@
 
 #include <map>
 #include "ConditionSystem.h"
+#include "Gameplay/MemorySystem.h"
 
 class IActorSystem;
 
 //Base for all player memories in-game.
 struct Memory
 {
-	inline static std::map<std::string, Memory*>* memories = nullptr;
-
-	static Memory* FindMemory(std::string memoryName) 
-	{
-		auto memoryIt = memories->find(memoryName);
-		assert(memoryIt != memories->end());
-		return memoryIt->second;
-	}
-
 	Memory(std::string name_) : name(name_)
 	{
-		if (memories == nullptr)
-		{
-			memories = new std::map<std::string, Memory*>();
-		}
-		memories->emplace(name, this);
+		MemorySystem::Get().CreateMemory(name, this);
 	}
 
 	Memory(std::string name_,
@@ -37,11 +25,7 @@ struct Memory
 			conditionArg(conditionArg_),
 			imageFile(imageFile_)
 	{
-		if (memories == nullptr)
-		{
-			memories = new std::map<std::string, Memory*>();
-		}
-		memories->emplace(name, this);
+		MemorySystem::Get().CreateMemory(name, this);
 	}
 
 	virtual ~Memory() {} //Needs to be here for dynamic_cast's, to recognise as polymorphic.
@@ -62,8 +46,8 @@ struct Memory
 	std::string imageFile;
 
 	//Debug menu information
-	std::string actorAquiredFrom;
-	std::string worldAquiredFrom;
+	std::string actorAcquiredFrom;
+	std::string worldAcquiredFrom;
 
 	//Function to call in order to add Memory to Player.
 	ConditionFunction conditionFunc = nullptr;
