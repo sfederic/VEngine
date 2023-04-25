@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "GameInstance.h"
 
-std::string GameInstance::startingMap = "church_fire_room.vmap";
+std::string GameInstance::startingMap = "church_library.vmap";
 std::string GameInstance::previousMapMovedFrom = startingMap;
 
 //Used when continuing from game save files
@@ -12,6 +12,8 @@ std::map<std::string, Memory*> GameInstance::playerMemories;
 int GameInstance::maxPlayerActionPoints = 8;
 
 bool GameInstance::useGameSaves = false;
+
+bool GameInstance::isPlayerInMemory = false;
 
 //Global properties
 

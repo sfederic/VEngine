@@ -21,6 +21,8 @@ namespace GameInstance
 
 	extern bool useGameSaves;
 
+	extern bool isPlayerInMemory;
+
 	//Global save data
 	Properties GetGlobalProps();
 
