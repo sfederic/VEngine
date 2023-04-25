@@ -293,7 +293,7 @@ void Player::PrimaryAction()
 
 			interactWidget->RemoveFromViewport();
 			inInteraction = false;
-			nextCameraFOV = 60.f;
+			SetDefaultCameraFOV();
 			return;
 		}
 
@@ -360,7 +360,7 @@ bool Player::DialogueCheck(Actor* hitActor)
 		{
 			//End dialogue
 			inConversation = false;
-			nextCameraFOV = 60.f;
+			SetDefaultCameraFOV();
 			GameUtils::SetActiveCameraTarget(this);
 			currentlyActiveDialogueComponent = nullptr;
 			return true;
@@ -394,7 +394,7 @@ bool Player::DialogueCheck(Actor* hitActor)
 			//start dialogue
 			currentlyActiveDialogueComponent->ShowTextAtActor();
 
-			nextCameraFOV = 30.f;
+			SetZoomedInCameraFOV();
 
 			return true;
 		}
@@ -511,7 +511,7 @@ bool Player::InteractCheck(Actor* hitActor)
 				interactWidget->AddToViewport();
 				inInteraction = true;
 
-				nextCameraFOV = 30.f;
+				SetZoomedInCameraFOV();
 
 				auto memory = gridActor->memoryComponent;
 				if (memory->addOnInteract)
@@ -679,7 +679,7 @@ void Player::ResetGuard()
 	ableToGuard = true;
 }
 
-void Player::SetNormalCameraFOV()
+void Player::SetDefaultCameraFOV()
 {
 	nextCameraFOV = 60.f;
 }

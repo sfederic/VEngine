@@ -92,7 +92,7 @@ public:
 	void SetGuard();
 	void ResetGuard();
 
-	void SetNormalCameraFOV();
+	void SetDefaultCameraFOV();
 	void SetZoomedInCameraFOV();
 
 	void CheckNextMoveNode(XMVECTOR previousPos);

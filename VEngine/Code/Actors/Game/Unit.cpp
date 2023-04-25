@@ -393,7 +393,7 @@ void Unit::WindUpAttack()
 	target->InflictDamage(attackPoints);
 
 	auto player = Player::system.GetOnlyActor();
-	player->SetNormalCameraFOV();
+	player->SetDefaultCameraFOV();
 	player->ResetGuard();
 
 	attackWindingUp = false;

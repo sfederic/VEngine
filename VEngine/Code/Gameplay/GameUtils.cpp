@@ -42,13 +42,13 @@ namespace GameUtils
 	void SetActiveCameraTargetAndZoomOut(Actor* newTarget)
 	{
 		activeCamera->targetActor = newTarget;
-		Player::system.GetFirstActor()->SetNormalCameraFOV();
+		Player::system.GetFirstActor()->SetDefaultCameraFOV();
 	}
 
 	void SetCameraBackToPlayer()
 	{
 		auto player = Player::system.GetFirstActor();
-		player->SetNormalCameraFOV();
+		player->SetDefaultCameraFOV();
 		activeCamera->targetActor = player;
 	}
 
