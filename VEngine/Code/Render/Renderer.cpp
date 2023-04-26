@@ -1134,6 +1134,10 @@ void RenderInstanceMeshComponents()
 	{
 		if (!instanceMesh->IsVisible()) continue;
 
+		//@Todo: instance meshes won't render behind transparent objects unless RenderInstanceMeshes() is called
+		//before RenderMeshComponents(). However doing so will render instance meshes seemingly without a 
+		//blend state, even though one appears to be set. HOWEVER, certain instance meshes WILL render as if
+		//with a transparent blend state because you can see them blended though various instance meshes.
 		SetRenderPipelineStates(instanceMesh.get());
 
 		//Update texture matrix
