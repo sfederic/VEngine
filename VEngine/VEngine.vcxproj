@@ -286,6 +286,7 @@
     <ClCompile Include="Code\Actors\DebugActors\DebugLightProbe.cpp" />
     <ClCompile Include="Code\Render\RenderTarget.cpp" />
     <ClCompile Include="Code\Gameplay\MemorySystem.cpp" />
+    <ClCompile Include="Code\Actors\Game\MoveableActor.cpp" />
     <ClInclude Include="Code\Actors\Game\MemoryEntranceTrigger.h" />
     <ClInclude Include="Code\Actors\Game\MemoryGainActors\ChurchFire.h" />
     <ClInclude Include="Code\Actors\Game\BreakableCube.h" />
@@ -601,6 +602,7 @@
     <ClInclude Include="Code\Actors\DebugActors\DebugLightProbe.h" />
     <ClInclude Include="Code\Render\RenderTarget.h" />
     <ClInclude Include="Code\Gameplay\MemorySystem.h" />
+    <ClInclude Include="Code\Actors\Game\MoveableActor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
