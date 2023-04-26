@@ -23,6 +23,9 @@ GridActor::GridActor()
 
 void GridActor::Start()
 {
+	nextPos = GetPositionV();
+	nextRot = GetRotationV();
+
 	SetGridPosition();
 
 	if (!IsActive())
@@ -37,6 +40,9 @@ void GridActor::Start()
 
 void GridActor::Tick(float deltaTime)
 {
+	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, 10.f));
+	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, 10.f));
+
 	dialogueComponent->SetPosition(GetHomogeneousPositionV());
 
 	if (isInPushback)
@@ -186,4 +192,9 @@ ForwardFace GridActor::GetCurrentForwardFace()
 	else if (rightIndex < 0) return ForwardFace::negativeX;
 
 	throw new std::exception("something went wrong with forward vector");
+}
+
+bool GridActor::HaveMovementAndRotationStopped()
+{
+	return XMVector4Equal(GetPositionV(), nextPos) && XMQuaternionEqual(GetRotationV(), nextRot);
 }

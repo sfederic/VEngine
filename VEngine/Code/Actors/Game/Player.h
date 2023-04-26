@@ -111,7 +111,7 @@ private:
 	float nextCameraFOV = 0.f;
 
 	bool isInputLinkedToMoveableActor = false;
-	MoveableActor* linkedMoveableActor = nullptr;
+	GridActor* linkedMoveableGridActor = nullptr;
 
 	//Toggles battle grid nodes and enters player into a battle ready state.
 	void EnterAstralMode();

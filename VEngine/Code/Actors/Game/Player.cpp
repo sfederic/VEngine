@@ -11,7 +11,6 @@
 #include "Actors/Game/FenceActor.h"
 #include "Actors/Game/GridMapPicker.h"
 #include "Actors/Game/MemoryActor.h"
-#include "Actors/Game/MoveableActor.h"
 #include "Grid.h"
 #include "GridActor.h"
 #include "Components/EmptyComponent.h"
@@ -700,12 +699,12 @@ void Player::RotateObject()
 		HitResult hit(this);
 		if (Raycast(hit, GetPositionV(), GetForwardVectorV(), 100.f))
 		{
-			auto moveableActor = dynamic_cast<MoveableActor*>(hit.hitActor);
+			auto moveableActor = dynamic_cast<GridActor*>(hit.hitActor);
 			if (moveableActor)
 			{ 
 				HitResult hit(moveableActor);
 				moveableActor->GetCurrentNode()->RecalcNodeHeight(hit);
-				linkedMoveableActor = moveableActor;
+				linkedMoveableGridActor = moveableActor;
 				camera->targetActor = moveableActor;
 				isInputLinkedToMoveableActor = true;
 			}
@@ -715,69 +714,69 @@ void Player::RotateObject()
 	{
 		if (Input::GetKeyUp(Keys::BackSpace))
 		{
-			HitResult hit(linkedMoveableActor);
-			linkedMoveableActor->GetCurrentNode()->RecalcNodeHeight(hit);
-			linkedMoveableActor = nullptr;
+			HitResult hit(linkedMoveableGridActor);
+			linkedMoveableGridActor->GetCurrentNode()->RecalcNodeHeight(hit);
+			linkedMoveableGridActor = nullptr;
 			camera->targetActor = this;
 			isInputLinkedToMoveableActor = false;
 			return;
 		}
 
-		if (!linkedMoveableActor->HaveMovementAndRotationStopped())
+		if (!linkedMoveableGridActor->HaveMovementAndRotationStopped())
 		{
 			return;
 		}
 
 		if (Input::GetKeyUp(Keys::W))
 		{
-			linkedMoveableActor->nextPos += GetForwardVectorV();
-			linkedMoveableActor->CheckNextNodeMoveIsValid();
+			linkedMoveableGridActor->nextPos += GetForwardVectorV();
+			linkedMoveableGridActor->CheckNextNodeMoveIsValid();
 		}
 		else if (Input::GetKeyUp(Keys::S))
 		{
-			linkedMoveableActor->nextPos -= GetForwardVectorV();
-			linkedMoveableActor->CheckNextNodeMoveIsValid();
+			linkedMoveableGridActor->nextPos -= GetForwardVectorV();
+			linkedMoveableGridActor->CheckNextNodeMoveIsValid();
 		}
 		else if (Input::GetKeyUp(Keys::A))
 		{
-			linkedMoveableActor->nextPos -= GetRightVectorV();
-			linkedMoveableActor->CheckNextNodeMoveIsValid();
+			linkedMoveableGridActor->nextPos -= GetRightVectorV();
+			linkedMoveableGridActor->CheckNextNodeMoveIsValid();
 		}
 		else if (Input::GetKeyUp(Keys::D))
 		{
-			linkedMoveableActor->nextPos += GetRightVectorV();
-			linkedMoveableActor->CheckNextNodeMoveIsValid();
+			linkedMoveableGridActor->nextPos += GetRightVectorV();
+			linkedMoveableGridActor->CheckNextNodeMoveIsValid();
 		}
 		else if (Input::GetKeyUp(Keys::E))
 		{
-			linkedMoveableActor->nextPos += GetUpVectorV();
-			linkedMoveableActor->CheckNextNodeMoveIsValid();
+			linkedMoveableGridActor->nextPos += GetUpVectorV();
+			linkedMoveableGridActor->CheckNextNodeMoveIsValid();
 		}
 		else if (Input::GetKeyUp(Keys::Q))
 		{
-			linkedMoveableActor->nextPos -= GetUpVectorV();
-			linkedMoveableActor->CheckNextNodeMoveIsValid();
+			linkedMoveableGridActor->nextPos -= GetUpVectorV();
+			linkedMoveableGridActor->CheckNextNodeMoveIsValid();
 		}
 
 		if (Input::GetKeyUp(Keys::Right))
 		{
-			linkedMoveableActor->nextRot = VMath::AddRotationAngle(linkedMoveableActor->GetRotationV(),
-				linkedMoveableActor->GetUpVectorV(), 90.f);
+			linkedMoveableGridActor->nextRot = VMath::AddRotationAngle(linkedMoveableGridActor->GetRotationV(),
+				linkedMoveableGridActor->GetUpVectorV(), 90.f);
 		}
 		else if (Input::GetKeyUp(Keys::Left))
 		{
-			linkedMoveableActor->nextRot = VMath::AddRotationAngle(linkedMoveableActor->GetRotationV(),
-				linkedMoveableActor->GetUpVectorV(), -90.f);
+			linkedMoveableGridActor->nextRot = VMath::AddRotationAngle(linkedMoveableGridActor->GetRotationV(),
+				linkedMoveableGridActor->GetUpVectorV(), -90.f);
 		}
 		else if (Input::GetKeyUp(Keys::Down))
 		{
-			linkedMoveableActor->nextRot = VMath::AddRotationAngle(linkedMoveableActor->GetRotationV(),
-				linkedMoveableActor->GetRightVectorV(), -90.f);
+			linkedMoveableGridActor->nextRot = VMath::AddRotationAngle(linkedMoveableGridActor->GetRotationV(),
+				linkedMoveableGridActor->GetRightVectorV(), -90.f);
 		}
 		else if (Input::GetKeyUp(Keys::Up))
 		{
-			linkedMoveableActor->nextRot = VMath::AddRotationAngle(linkedMoveableActor->GetRotationV(),
-				linkedMoveableActor->GetRightVectorV(), 90.f);
+			linkedMoveableGridActor->nextRot = VMath::AddRotationAngle(linkedMoveableGridActor->GetRotationV(),
+				linkedMoveableGridActor->GetRightVectorV(), 90.f);
 		}
 	}
 }
