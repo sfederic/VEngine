@@ -135,4 +135,6 @@ private:
 	void Guard();
 
 	void BackOutOfMemoryWorld();
+
+	void RotateObject();
 };

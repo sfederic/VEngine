@@ -106,6 +106,8 @@ void Player::Tick(float deltaTime)
 		//GameUtils::TriggerGameOver();
 	}
 
+	RotateObject();
+
 	MovementInput(deltaTime);
 	RotationInput(deltaTime);
 
@@ -687,6 +689,18 @@ void Player::BackOutOfMemoryWorld()
 		GameInstance::isPlayerInMemory = false;
 		GameInstance::playerBackedOutOfMemoryLevel = true;
 		GameUtils::LoadWorldDeferred(GameInstance::previousMapMovedFrom);
+	}
+}
+
+void Player::RotateObject()
+{
+	if (Input::GetKeyUp(Keys::Up))
+	{
+		HitResult hit(this);
+		if (Raycast(hit, GetPositionV(), GetForwardVectorV(), 100.f))
+		{
+			hit.hitActor->AddRotation(hit.hitActor->GetUpVectorV(), 90.f);
+		}
 	}
 }
 
