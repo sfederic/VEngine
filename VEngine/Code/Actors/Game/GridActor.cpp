@@ -130,6 +130,31 @@ GridNode* GridActor::GetCurrentNode()
 	return node;
 }
 
+void GridActor::CheckNextNodeMoveIsValid()
+{
+	const int nextXIndex = (int)std::round(nextPos.m128_f32[0]);
+	const int nextYIndex = (int)std::round(nextPos.m128_f32[2]);
+
+	auto grid = Grid::system.GetFirstActor();
+
+	if (nextXIndex >= grid->sizeX || nextYIndex >= grid->sizeY
+		|| nextXIndex < 0 || nextYIndex < 0)
+	{
+		nextPos = GetPositionV();
+		return;
+	}
+
+	auto nextNodeToMoveTo = grid->GetNode(nextXIndex, nextYIndex);
+	if (!nextNodeToMoveTo->active)
+	{
+		nextPos = GetPositionV();
+		return;
+	}
+
+	auto node = grid->GetNode(nextXIndex, nextYIndex);
+	nextPos = XMLoadFloat3(&node->worldPosition);
+}
+
 bool GridActor::Pushback(XMVECTOR direction)
 {
 	HitResult hit(this);

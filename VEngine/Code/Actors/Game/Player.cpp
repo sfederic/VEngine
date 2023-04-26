@@ -751,6 +751,8 @@ void Player::RotateObject()
 			linkedMoveableActor->nextPos -= GetUpVectorV();
 		}
 
+		linkedMoveableActor->CheckNextNodeMoveIsValid();
+
 		if (Input::GetKeyUp(Keys::Right))
 		{
 			linkedMoveableActor->nextRot = VMath::AddRotationAngle(linkedMoveableActor->GetRotationV(),

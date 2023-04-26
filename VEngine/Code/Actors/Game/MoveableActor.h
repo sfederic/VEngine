@@ -14,7 +14,4 @@ public:
 	bool HaveMovementAndRotationStopped();
 
 	bool isCurrentlyBeingMovedByPlayer = false;
-
-	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 };

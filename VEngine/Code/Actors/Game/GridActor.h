@@ -47,6 +47,9 @@ struct GridActor : Actor
 	std::wstring interactText;
 	std::wstring interactKnownText;
 
+	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+
 	GridActor();
 
 	virtual void Interact() {}
@@ -66,7 +69,7 @@ struct GridActor : Actor
 	//returns the node the gridactor is currently on.
 	GridNode* GetCurrentNode();
 
-	void SetAnimation(std::string animationName);
+	void CheckNextNodeMoveIsValid();
 
 	//Called when the actor is 'pushedback'ed by player or other actor, exploding the actor
 	//back into contact with something.
