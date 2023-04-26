@@ -115,8 +115,10 @@ void SetShaderMeshData(MeshComponent* mesh);
 void SetRenderPipelineStates(MeshComponent* mesh);
 void SetRenderPipelineStatesForShadows(MeshComponent* mesh);
 void SetShaders(ShaderItem* shaderItem);
-void SetRastState(std::string rastStateName);
-void SetBlendState(std::string blendStateName);
+void SetRastStateByName(std::string rastStateName);
+void SetRastState(RastState& rastState);
+void SetBlendStateByName(std::string blendStateName);
+void SetBlendState(BlendState& blendState);
 void SetConstantBufferVertexPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer);
 void SetConstantBufferVertex(uint32_t shaderRegister, ID3D11Buffer* constantBuffer);
 void SetConstantBufferPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer);
@@ -1134,8 +1136,7 @@ void RenderInstanceMeshComponents()
 
 		SetRenderPipelineStates(instanceMesh.get());
 
-		//@Todo: clean this up in InstanceMeshComponent, can't have every instance mesh as transparent
-		SetBlendState(BlendStates::Default);
+		SetBlendState(instanceMesh->GetBlendState());
 
 		//Update texture matrix
 		shaderMatrices.MakeTextureMatrix(instanceMesh->GetMaterial());
@@ -1163,7 +1164,7 @@ void RenderBounds()
 
 	if (Renderer::drawBoundingBoxes)
 	{
-		SetRastState(RastStates::wireframe);
+		SetRastStateByName(RastStates::wireframe);
 		SetShaders(ShaderItems::SolidColour);
 
 		SetVertexBuffer(debugBox->GetVertexBuffer());
@@ -1211,7 +1212,7 @@ void RenderBounds()
 	//DRAW TRIGGER BOUNDS
 	if(Renderer::drawTriggers)
 	{
-		SetRastState(RastStates::wireframe);
+		SetRastStateByName(RastStates::wireframe);
 		SetShaders(ShaderItems::SolidColour);
 
 		SetVertexBuffer(debugBox->GetVertexBuffer());
@@ -1334,7 +1335,7 @@ void RenderCharacterControllers()
 	auto debugCapsule = MeshComponent::GetDebugMesh("DebugCapsule");
 	MaterialShaderData materialShaderData;
 
-	SetRastState(RastStates::wireframe);
+	SetRastStateByName(RastStates::wireframe);
 	SetShaders(ShaderItems::SolidColour);
 	SetVertexBuffer(debugCapsule->GetVertexBuffer());
 
@@ -1360,7 +1361,7 @@ void RenderCameraMeshes()
 	auto debugCamera = MeshComponent::GetDebugMesh("DebugCamera");
 	MaterialShaderData materialShaderData;
 
-	SetRastState(RastStates::wireframe);
+	SetRastStateByName(RastStates::wireframe);
 	SetShaders(ShaderItems::SolidColour);
 	SetVertexBuffer(debugCamera->GetVertexBuffer());
 
@@ -1387,7 +1388,7 @@ void RenderLightMeshes()
 	auto debugIcoSphere = MeshComponent::GetDebugMesh("DebugIcoSphere");
 	auto debugCone = MeshComponent::GetDebugMesh("DebugCone");
 
-	SetRastState(RastStates::wireframe);
+	SetRastStateByName(RastStates::wireframe);
 	SetShaders(ShaderItems::SolidColour);
 
 	//Set debug sphere wireframe material colour
@@ -1447,8 +1448,8 @@ void RenderPolyboards()
 	cbMatrices->Map(&shaderMatrices);
 	cbMatrices->SetVS();
 
-	SetBlendState(BlendStates::Default);
-	SetRastState(RastStates::noBackCull);
+	SetBlendStateByName(BlendStates::Default);
+	SetRastStateByName(RastStates::noBackCull);
 	SetShaders(ShaderItems::DefaultClip);
 
 	for (auto polyboard : World::GetAllComponentsOfType<Polyboard>())
@@ -1495,7 +1496,7 @@ void RenderSpriteSheets()
 			continue;
 		}
 
-		SetRastState(RastStates::noBackCull);
+		SetRastStateByName(RastStates::noBackCull);
 		SetShaders(ShaderItems::DefaultClip);
 
 		SetSampler(0, RenderUtils::GetDefaultSampler());
@@ -1622,7 +1623,7 @@ void Renderer::RenderParticleEmitters()
 			context->RSSetState(rastStateMap["nobackcull"]->data);
 		}
 
-		SetBlendState(BlendStates::Default);
+		SetBlendStateByName(BlendStates::Default);
 
 		SetShaders(emitter->GetMaterial().shader);
 
@@ -1666,7 +1667,7 @@ void Renderer::RenderSpritesInScreenSpace()
 
 	for (const auto& sprite : SpriteSystem::GetScreenSprites())
 	{
-		SetRastState(RastStates::solid);
+		SetRastStateByName(RastStates::solid);
 		SetShaders(ShaderItems::UI);
 		SetSampler(0, RenderUtils::GetDefaultSampler());
 		SetShaderResourcePixel(0, sprite.textureFilename);
@@ -1896,7 +1897,7 @@ void SetShaders(ShaderItem* shaderItem)
 	context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 }
 
-void SetRastState(std::string rastStateName)
+void SetRastStateByName(std::string rastStateName)
 {
 	if (Renderer::drawAllAsWireframe)
 	{
@@ -1904,15 +1905,26 @@ void SetRastState(std::string rastStateName)
 		return;
 	}
 
-	auto& rastState = rastStateMap[rastStateName];
+	auto& rastState = rastStateMap.find(rastStateName)->second;
 	context->RSSetState(rastState->data);
 }
 
-void SetBlendState(std::string blendStateName)
+void SetRastState(RastState& rastState)
 {
-	auto& blendState = blendStateMap[blendStateName];
+	context->RSSetState(rastState.data);
+}
+
+void SetBlendStateByName(std::string blendStateName)
+{
+	auto& blendState = blendStateMap.find(blendStateName)->second;
 	const float factor[4] = {};
 	context->OMSetBlendState(blendState->data, factor, 0xFFFFFFFF);
+}
+
+void SetBlendState(BlendState& blendState)
+{
+	const float factor[4] = {};
+	context->OMSetBlendState(blendState.data, factor, 0xFFFFFFFF);
 }
 
 void SetConstantBufferVertexPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer)
@@ -2068,7 +2080,7 @@ void RenderLightProbes()
 	auto instanceMesh = probeMap->lightProbesDebugInstanceMesh->instanceMesh;
 	SetRenderPipelineStates(instanceMesh);
 
-	SetBlendState(BlendStates::null);
+	SetBlendStateByName(BlendStates::null);
 
 	//Careful with the buffers here, they're not part of the instance mesh, instead they're in the diffuse probe map
 	MapBuffer(probeMap->GetStructuredBuffer(), probeMap->lightProbeData.data(), sizeof(LightProbeInstanceData) * probeMap->lightProbeData.size());
