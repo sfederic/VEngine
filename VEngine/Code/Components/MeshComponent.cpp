@@ -192,6 +192,7 @@ void MeshComponent::SetRastState(const std::string newRastStateName)
 
 void MeshComponent::SetBlendState(const std::string newBlendState)
 {
+	material->blendStateValue.SetValue(newBlendState);
 	material->blendState = Renderer::GetBlendState(newBlendState);
 }
 
