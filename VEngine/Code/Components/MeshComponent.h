@@ -82,6 +82,9 @@ public:
 	std::string GetCollisionMeshFilename() { return collisionMeshFilename; }
 	bool UsesCollisonMesh() { return !collisionMeshFilename.empty(); }
 
+	BlendState& GetBlendState();
+	RastState& GetRastState();
+
 private:
 	std::string collisionMeshFilename;
 

@@ -267,3 +267,13 @@ std::vector<XMFLOAT3> MeshComponent::GetAllVertexPositions()
 	}
 	return positions;
 }
+
+BlendState& MeshComponent::GetBlendState()
+{
+	return *material->blendState;
+}
+
+RastState& MeshComponent::GetRastState()
+{
+	return *material->rastState;
+}
