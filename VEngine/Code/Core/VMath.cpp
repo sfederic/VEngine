@@ -171,6 +171,11 @@ namespace VMath
         return Q;
     }
 
+    XMVECTOR AddRotationAngle(XMVECTOR rotationQuat, XMVECTOR axis, float angleDegrees)
+    {
+        return XMQuaternionMultiply(rotationQuat, XMQuaternionRotationAxis(axis, XMConvertToRadians(angleDegrees)));
+    }
+
     XMVECTOR ForwardFromQuat(XMVECTOR rot)
     {
         auto m = XMMatrixRotationQuaternion(rot);
