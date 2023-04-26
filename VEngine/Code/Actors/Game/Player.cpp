@@ -729,29 +729,33 @@ void Player::RotateObject()
 		if (Input::GetKeyUp(Keys::W))
 		{
 			linkedMoveableActor->nextPos += GetForwardVectorV();
+			linkedMoveableActor->CheckNextNodeMoveIsValid();
 		}
 		else if (Input::GetKeyUp(Keys::S))
 		{
 			linkedMoveableActor->nextPos -= GetForwardVectorV();
+			linkedMoveableActor->CheckNextNodeMoveIsValid();
 		}
 		else if (Input::GetKeyUp(Keys::A))
 		{
 			linkedMoveableActor->nextPos -= GetRightVectorV();
+			linkedMoveableActor->CheckNextNodeMoveIsValid();
 		}
 		else if (Input::GetKeyUp(Keys::D))
 		{
 			linkedMoveableActor->nextPos += GetRightVectorV();
+			linkedMoveableActor->CheckNextNodeMoveIsValid();
 		}
 		else if (Input::GetKeyUp(Keys::E))
 		{
 			linkedMoveableActor->nextPos += GetUpVectorV();
+			linkedMoveableActor->CheckNextNodeMoveIsValid();
 		}
 		else if (Input::GetKeyUp(Keys::Q))
 		{
 			linkedMoveableActor->nextPos -= GetUpVectorV();
+			linkedMoveableActor->CheckNextNodeMoveIsValid();
 		}
-
-		linkedMoveableActor->CheckNextNodeMoveIsValid();
 
 		if (Input::GetKeyUp(Keys::Right))
 		{
