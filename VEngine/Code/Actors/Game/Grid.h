@@ -44,11 +44,11 @@ struct Grid : public Actor
 	LerpValue lerpValue = LerpValue::LerpOut;
 
 	Grid();
-	virtual void Awake() override;
-	virtual void Start() override;
-	virtual void LateStart() override;
-	virtual void Tick(float deltaTime) override;
-	virtual Properties GetProps() override;
+	void Awake() override;
+	void Create() override;
+	void LateStart() override;
+	void Tick(float deltaTime) override;
+	Properties GetProps() override;
 	GridNode* GetNode(int x, int y);
 	GridNode* GetNodeAllowNull(int x, int y);
 
