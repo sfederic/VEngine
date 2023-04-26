@@ -1136,8 +1136,6 @@ void RenderInstanceMeshComponents()
 
 		SetRenderPipelineStates(instanceMesh.get());
 
-		SetBlendState(instanceMesh->GetBlendState());
-
 		//Update texture matrix
 		shaderMatrices.MakeTextureMatrix(instanceMesh->GetMaterial());
 		cbMatrices->Map(&shaderMatrices);
