@@ -3,6 +3,7 @@
 #include "Components/InstanceMeshComponent.h"
 #include "Render/RenderUtils.h"
 #include "Render/Material.h"
+#include "Render/BlendStates.h"
 #include "Physics/Raycast.h"
 #include "Core/VMath.h"
 #include "GridActor.h"
@@ -14,7 +15,6 @@ Grid::Grid()
 {
     nodeMesh = InstanceMeshComponent::system.Add("NodeMesh",
         this, InstanceMeshComponent(0, "node.vmesh", "test.png", ShaderItems::Instance));
-
     rootComponent = nodeMesh;
 }
 
@@ -129,9 +129,9 @@ void Grid::Awake()
     }
 }
 
-void Grid::Start()
+void Grid::Create()
 {
-
+    nodeMesh->SetBlendState(BlendStates::Default);
 }
 
 void Grid::LateStart()
