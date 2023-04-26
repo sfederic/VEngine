@@ -703,7 +703,8 @@ void Player::RotateObject()
 			auto moveableActor = dynamic_cast<MoveableActor*>(hit.hitActor);
 			if (moveableActor)
 			{ 
-				moveableActor->GetCurrentNode()->Show();
+				HitResult hit(moveableActor);
+				moveableActor->GetCurrentNode()->RecalcNodeHeight(hit);
 				linkedMoveableActor = moveableActor;
 				camera->targetActor = moveableActor;
 				isInputLinkedToMoveableActor = true;
@@ -714,7 +715,8 @@ void Player::RotateObject()
 	{
 		if (Input::GetKeyUp(Keys::BackSpace))
 		{
-			linkedMoveableActor->GetCurrentNode()->Hide();
+			HitResult hit(linkedMoveableActor);
+			linkedMoveableActor->GetCurrentNode()->RecalcNodeHeight(hit);
 			linkedMoveableActor = nullptr;
 			camera->targetActor = this;
 			isInputLinkedToMoveableActor = false;
