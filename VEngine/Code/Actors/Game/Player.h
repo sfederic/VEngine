@@ -21,6 +21,7 @@ struct GridNode;
 class Unit;
 class GuardWidget;
 class PlayerStatusWidget;
+class MoveableActor;
 
 class Player : public Actor
 {
@@ -108,6 +109,9 @@ public:
 
 private:
 	float nextCameraFOV = 0.f;
+
+	bool isInputLinkedToMoveableActor = false;
+	MoveableActor* linkedMoveableActor = nullptr;
 
 	//Toggles battle grid nodes and enters player into a battle ready state.
 	void EnterAstralMode();

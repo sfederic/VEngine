@@ -11,6 +11,7 @@
 #include "Actors/Game/FenceActor.h"
 #include "Actors/Game/GridMapPicker.h"
 #include "Actors/Game/MemoryActor.h"
+#include "Actors/Game/MoveableActor.h"
 #include "Grid.h"
 #include "GridActor.h"
 #include "Components/EmptyComponent.h"
@@ -694,12 +695,81 @@ void Player::BackOutOfMemoryWorld()
 
 void Player::RotateObject()
 {
-	if (Input::GetKeyUp(Keys::Up))
+	if (!isInputLinkedToMoveableActor && Input::GetKeyUp(Keys::Up))
 	{
 		HitResult hit(this);
 		if (Raycast(hit, GetPositionV(), GetForwardVectorV(), 100.f))
 		{
-			hit.hitActor->AddRotation(hit.hitActor->GetUpVectorV(), 90.f);
+			auto moveableActor = dynamic_cast<MoveableActor*>(hit.hitActor);
+			if (moveableActor)
+			{ 
+				moveableActor->GetCurrentNode()->Show();
+				linkedMoveableActor = moveableActor;
+				camera->targetActor = moveableActor;
+				isInputLinkedToMoveableActor = true;
+			}
+		}
+	}
+	else if (isInputLinkedToMoveableActor)
+	{
+		if (Input::GetKeyUp(Keys::BackSpace))
+		{
+			linkedMoveableActor->GetCurrentNode()->Hide();
+			linkedMoveableActor = nullptr;
+			camera->targetActor = this;
+			isInputLinkedToMoveableActor = false;
+			return;
+		}
+
+		if (!linkedMoveableActor->HaveMovementAndRotationStopped())
+		{
+			return;
+		}
+
+		if (Input::GetKeyUp(Keys::W))
+		{
+			linkedMoveableActor->nextPos += GetForwardVectorV();
+		}
+		else if (Input::GetKeyUp(Keys::S))
+		{
+			linkedMoveableActor->nextPos -= GetForwardVectorV();
+		}
+		else if (Input::GetKeyUp(Keys::A))
+		{
+			linkedMoveableActor->nextPos -= GetRightVectorV();
+		}
+		else if (Input::GetKeyUp(Keys::D))
+		{
+			linkedMoveableActor->nextPos += GetRightVectorV();
+		}
+		else if (Input::GetKeyUp(Keys::E))
+		{
+			linkedMoveableActor->nextPos += GetUpVectorV();
+		}
+		else if (Input::GetKeyUp(Keys::Q))
+		{
+			linkedMoveableActor->nextPos -= GetUpVectorV();
+		}
+
+		if (Input::GetKeyUp(Keys::Right))
+		{
+			linkedMoveableActor->nextRot = VMath::AddRotationAngle(linkedMoveableActor->GetRotationV(),
+				linkedMoveableActor->GetUpVectorV(), 90.f);
+		}
+		else if (Input::GetKeyUp(Keys::Left))
+		{
+			linkedMoveableActor->nextRot = VMath::AddRotationAngle(linkedMoveableActor->GetRotationV(),
+				linkedMoveableActor->GetUpVectorV(), -90.f);
+		}
+		else if (Input::GetKeyUp(Keys::Down))
+		{
+			linkedMoveableActor->nextRot = VMath::AddRotationAngle(linkedMoveableActor->GetRotationV(),
+				linkedMoveableActor->GetRightVectorV(), -90.f);
+		}
+		else if (Input::GetKeyUp(Keys::Up))
+		{
+			linkedMoveableActor->nextRot = VMath::AddRotationAngle(linkedMoveableActor->GetRotationV(),
+				linkedMoveableActor->GetRightVectorV(), 90.f);
 		}
 	}
 }
@@ -794,7 +864,7 @@ bool Player::CheckIfMovementAndRotationStopped()
 
 void Player::MovementInput(float deltaTime)
 {
-	if (CheckIfMovementAndRotationStopped())
+	if (!isInputLinkedToMoveableActor && CheckIfMovementAndRotationStopped())
 	{
 		SetGridIndices();
 
@@ -826,7 +896,7 @@ void Player::MovementInput(float deltaTime)
 
 void Player::RotationInput(float deltaTime)
 {
-	if (CheckIfMovementAndRotationStopped())
+	if (!isInputLinkedToMoveableActor && CheckIfMovementAndRotationStopped())
 	{
 		if (Input::GetKeyHeld(Keys::Right))
 		{
