@@ -49,7 +49,7 @@ namespace VMath
 	//Builds a matrix to extract a quaternion rotation to return.
 	XMVECTOR LookAtRotation(XMVECTOR lookAtPoint, XMVECTOR currentPosition);
 
-	XMVECTOR AddRotationAngle(XMVECTOR rotationQuat, float angleDegrees);
+	XMVECTOR AddRotationAngle(XMVECTOR rotationQuat, XMVECTOR axis, float angleDegrees);
 
 	//Rotates on the Y-axis
 	void RotateTowardsCamera(Transform& transform, float zAngle = 0.f);

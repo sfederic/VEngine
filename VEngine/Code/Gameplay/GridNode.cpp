@@ -8,25 +8,13 @@
 void GridNode::Hide()
 {
 	active = false;
-
-	auto grid = Grid::system.GetFirstActor();
-	auto& meshInstanceData = grid->nodeMesh->GetInstanceData()[instancedMeshIndex];
-
-	meshInstanceData.world.r[0].m128_f32[0] = 0.f;
-	meshInstanceData.world.r[1].m128_f32[1] = 0.f;
-	meshInstanceData.world.r[2].m128_f32[2] = 0.f;
+	DisplayHide();
 }
 
 void GridNode::Show()
 {	
 	active = true;
-
-	auto grid = Grid::system.GetFirstActor();
-	auto& meshInstanceData = grid->nodeMesh->GetInstanceData()[instancedMeshIndex];
-
-	meshInstanceData.world.r[0].m128_f32[0] = 0.9f;
-	meshInstanceData.world.r[1].m128_f32[1] = 0.9f;
-	meshInstanceData.world.r[2].m128_f32[2] = 0.9f;
+	DisplayShow();
 }
 
 void GridNode::DisplayHide()
