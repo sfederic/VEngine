@@ -40,8 +40,8 @@ void GridActor::Start()
 
 void GridActor::Tick(float deltaTime)
 {
-	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, 10.f));
-	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, 10.f));
+	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, 12.5f));
+	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, 12.5f));
 
 	dialogueComponent->SetPosition(GetHomogeneousPositionV());
 
