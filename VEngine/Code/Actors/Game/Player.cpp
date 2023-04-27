@@ -10,21 +10,16 @@
 #include "Actors/Game/NPC.h"
 #include "Actors/Game/FenceActor.h"
 #include "Actors/Game/GridMapPicker.h"
-#include "Actors/Game/MemoryActor.h"
 #include "Grid.h"
 #include "GridActor.h"
 #include "Components/EmptyComponent.h"
-#include "Components/Game/MemoryComponent.h"
 #include "Components/AudioComponent.h"
 #include "Components/Game/DialogueComponent.h"
 #include "UI/UISystem.h"
 #include "UI/Game/HealthWidget.h"
 #include "UI/Game/DialogueWidget.h"
 #include "UI/Game/InteractWidget.h"
-#include "UI/Game/MemoryMenuWidget.h"
 #include "UI/Game/PlayerActionBarWidget.h"
-#include "UI/Game/MemoryGainedWidget.h"
-#include "UI/Game/MemoryRecalledWidget.h"
 #include "UI/Game/GuardWidget.h"
 #include "UI/Game/PlayerHealthWidget.h"
 #include "UI/Game/PlayerStatusWidget.h"
@@ -78,7 +73,6 @@ void Player::Start()
 
 	//Setup widgets
 	interactWidget = UISystem::CreateWidget<InteractWidget>();
-	memoryMenuWidget = UISystem::CreateWidget<MemoryMenuWidget>();
 	healthWidget = UISystem::CreateWidget<PlayerHealthWidget>();
 	guardWidget = UISystem::CreateWidget<GuardWidget>();
 	playerStatusWidget = UISystem::CreateWidget<PlayerStatusWidget>();
@@ -289,11 +283,6 @@ void Player::PrimaryAction()
 			return;
 		}
 
-		if (UISystem::memoryGainedWidget->IsInViewport())
-		{
-			UISystem::memoryGainedWidget->RemoveFromViewport();
-		}
-
 		if (inInteraction)
 		{
 			//End interact with GridActor
@@ -348,7 +337,6 @@ void Player::ToggleMemoryMenu()
 		{
 			//Toggling off memory widget is handled in its own class because it pauses the game world.
 			Core::gameWorldPaused = true;
-			memoryMenuWidget->AddToViewport();
 			GameUtils::PlayAudioOneShot("confirm.wav");
 		}
 	}
@@ -503,13 +491,6 @@ bool Player::InteractCheck(Actor* hitActor)
 		auto gridActor = dynamic_cast<GridActor*>(hitActor);
 		if (gridActor)
 		{
-			auto memoryActor = dynamic_cast<MemoryActor*>(hitActor);
-			if (memoryActor)
-			{
-				//@Todo: need to come back here and to more logic
-				memoryActor->CheckMemory();
-			}
-
 			if (gridActor->isInteractable)
 			{
 				gridActor->Interact();
@@ -523,19 +504,6 @@ bool Player::InteractCheck(Actor* hitActor)
 				inInteraction = true;
 
 				SetZoomedInCameraFOV();
-
-				auto memory = gridActor->memoryComponent;
-				if (memory->addOnInteract)
-				{
-					if (!memory->CreateMemory(gridActor->GetName()))
-					{
-						interactWidget->interactText = gridActor->interactKnownText;
-					}
-				}
-				else
-				{
-					Log("Memory [%s] not set to add on interact.", memory->memoryName.c_str());
-				}
 
 				return true;
 			}

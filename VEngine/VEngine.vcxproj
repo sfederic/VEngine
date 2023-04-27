@@ -117,8 +117,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Code\Actors\Game\MemoryEntranceTrigger.cpp" />
-    <ClCompile Include="Code\Actors\Game\MemoryGainActors\ChurchFire.cpp" />
     <ClCompile Include="Code\Actors\Game\BreakableCube.cpp" />
     <ClCompile Include="Code\Core\BMPFileWriter.cpp" />
     <ClCompile Include="Code\Actors\Game\ConditionTrigger.cpp" />
@@ -130,7 +128,6 @@
     <ClCompile Include="Code\Actors\Game\GridActor.cpp" />
     <ClCompile Include="Code\Actors\Game\GridMapPicker.cpp" />
     <ClCompile Include="Code\Actors\Game\InteractTrigger.cpp" />
-    <ClCompile Include="Code\Actors\Game\MemoryActor.cpp" />
     <ClCompile Include="Code\Actors\Game\MovingGridActor.cpp" />
     <ClCompile Include="Code\Actors\Game\NPC.cpp" />
     <ClCompile Include="Code\Actors\Game\Player.cpp" />
@@ -145,7 +142,6 @@
     <ClCompile Include="Code\Actors\SplitMesh.cpp" />
     <ClCompile Include="Code\Components\Game\ConditionComponent.cpp" />
     <ClCompile Include="Code\Components\Game\DialogueComponent.cpp" />
-    <ClCompile Include="Code\Components\Game\MemoryComponent.cpp" />
     <ClCompile Include="Code\Components\SocketMeshComponent.cpp" />
     <ClCompile Include="Code\Actors\AnimCube.cpp" />
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp" />
@@ -157,14 +153,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Code\Gameplay\Memories\ChurchFireMemory.cpp" />
     <ClCompile Include="Code\Gameplay\Trap.cpp" />
     <ClCompile Include="Code\Gameplay\Traps.cpp" />
     <ClCompile Include="Code\Gameplay\BattleSystem.cpp" />
     <ClCompile Include="Code\Gameplay\ConditionSystem.cpp" />
     <ClCompile Include="Code\Gameplay\DialogueStructures.cpp" />
     <ClCompile Include="Code\Gameplay\GridNode.cpp" />
-    <ClCompile Include="Code\Gameplay\Memory.cpp" />
     <ClCompile Include="Code\Gameplay\WorldFunctions.cpp" />
     <ClCompile Include="Code\Core\IFunction.cpp" />
     <ClCompile Include="Code\Particle\Particle.cpp" />
@@ -204,10 +198,6 @@
     <ClCompile Include="Code\UI\Game\GridMapPickerSelectionInfoWidget.cpp" />
     <ClCompile Include="Code\UI\Game\HealthWidget.cpp" />
     <ClCompile Include="Code\UI\Game\InteractWidget.cpp" />
-    <ClCompile Include="Code\UI\Game\MemoryGainedWidget.cpp" />
-    <ClCompile Include="Code\UI\Game\MemoryMenuWidget.cpp" />
-    <ClCompile Include="Code\UI\Game\MemoryRecalledWidget.cpp" />
-    <ClCompile Include="Code\UI\Game\MemoryTransferWidget.cpp" />
     <ClCompile Include="Code\UI\Game\PlayerActionBarWidget.cpp" />
     <ClCompile Include="Code\UI\Game\PlayerHealthWidget.cpp" />
     <ClCompile Include="Code\UI\Game\PopupWidget.cpp" />
@@ -285,9 +275,6 @@
     <ClCompile Include="Code\UI\Game\PlayerStatusWidget.cpp" />
     <ClCompile Include="Code\Actors\DebugActors\DebugLightProbe.cpp" />
     <ClCompile Include="Code\Render\RenderTarget.cpp" />
-    <ClCompile Include="Code\Gameplay\MemorySystem.cpp" />
-    <ClInclude Include="Code\Actors\Game\MemoryEntranceTrigger.h" />
-    <ClInclude Include="Code\Actors\Game\MemoryGainActors\ChurchFire.h" />
     <ClInclude Include="Code\Actors\Game\BreakableCube.h" />
     <ClInclude Include="Code\Core\BMPFileWriter.h" />
     <ClInclude Include="Code\Actors\Game\ConditionTrigger.h" />
@@ -299,7 +286,6 @@
     <ClInclude Include="Code\Actors\Game\GridActor.h" />
     <ClInclude Include="Code\Actors\Game\GridMapPicker.h" />
     <ClInclude Include="Code\Actors\Game\InteractTrigger.h" />
-    <ClInclude Include="Code\Actors\Game\MemoryActor.h" />
     <ClInclude Include="Code\Actors\Game\MovingGridActor.h" />
     <ClInclude Include="Code\Actors\Game\NPC.h" />
     <ClInclude Include="Code\Actors\Game\Player.h" />
@@ -315,9 +301,6 @@
     <ClInclude Include="Code\Asset\VertexColourHeader.h" />
     <ClInclude Include="Code\Components\Game\ConditionComponent.h" />
     <ClInclude Include="Code\Components\Game\DialogueComponent.h" />
-    <ClInclude Include="Code\Components\Game\MemoryComponent.h" />
-    <ClInclude Include="Code\Gameplay\Memories\ChurchFireMemory.h" />
-    <ClInclude Include="Code\Gameplay\MemoryNames.h" />
     <ClInclude Include="Code\Gameplay\Trap.h" />
     <ClInclude Include="Code\Gameplay\BattleEnums.h" />
     <ClInclude Include="Code\Gameplay\BattleSystem.h" />
@@ -325,7 +308,6 @@
     <ClInclude Include="Code\Gameplay\DialogueStructures.h" />
     <ClInclude Include="Code\Gameplay\ForwardFace.h" />
     <ClInclude Include="Code\Gameplay\GridNode.h" />
-    <ClInclude Include="Code\Gameplay\Memory.h" />
     <ClInclude Include="Code\Render\BlendStates.h" />
     <ClInclude Include="Code\Animation\BoneWeights.h" />
     <ClInclude Include="Code\Animation\Animation.h" />
@@ -491,10 +473,6 @@
     <ClInclude Include="Code\UI\Game\GridMapPickerSelectionInfoWidget.h" />
     <ClInclude Include="Code\UI\Game\HealthWidget.h" />
     <ClInclude Include="Code\UI\Game\InteractWidget.h" />
-    <ClInclude Include="Code\UI\Game\MemoryGainedWidget.h" />
-    <ClInclude Include="Code\UI\Game\MemoryMenuWidget.h" />
-    <ClInclude Include="Code\UI\Game\MemoryRecalledWidget.h" />
-    <ClInclude Include="Code\UI\Game\MemoryTransferWidget.h" />
     <ClInclude Include="Code\UI\Game\PlayerActionBarWidget.h" />
     <ClInclude Include="Code\UI\Game\PlayerHealthWidget.h" />
     <ClInclude Include="Code\UI\Game\PopupWidget.h" />
@@ -600,7 +578,6 @@
     <ClInclude Include="Code\UI\Game\PlayerStatusWidget.h" />
     <ClInclude Include="Code\Actors\DebugActors\DebugLightProbe.h" />
     <ClInclude Include="Code\Render\RenderTarget.h" />
-    <ClInclude Include="Code\Gameplay\MemorySystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
@@ -623,14 +600,6 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)\Shaders\Pixel\%(Filename).cso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Code\Render\Shaders\Pixel\MemoryObject_ps.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)\Shaders\Pixel\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)\Shaders\Pixel\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
     <FxCompile Include="Code\Render\Shaders\Pixel\Shadows_ps.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>

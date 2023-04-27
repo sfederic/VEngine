@@ -3,7 +3,6 @@
 #include "Actors/Game/Unit.h"
 #include "Components/MeshComponent.h"
 #include "Components/WidgetComponent.h"
-#include "Components/Game/MemoryComponent.h"
 #include "Components/Game/DialogueComponent.h"
 #include "UI/Game/HealthWidget.h"
 #include "Grid.h"
@@ -17,7 +16,6 @@ GridActor::GridActor()
 	mesh = CreateComponent("Mesh", MeshComponent("cube.vmesh", "test.png"));
 	rootComponent = mesh;
 
-	memoryComponent = CreateComponent<MemoryComponent>("Memory");
 	dialogueComponent = CreateComponent<DialogueComponent>("Dialogue");
 }
 

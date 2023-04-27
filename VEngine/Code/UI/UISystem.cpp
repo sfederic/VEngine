@@ -7,14 +7,12 @@
 #include "UI/Widget.h"
 #include "UI/ScreenFadeWidget.h"
 #include "UI/Game/UnitLineupWidget.h"
-#include "UI/Game/MemoryGainedWidget.h"
 #include "Core/SystemStates.h"
 
 static SystemStates systemState = SystemStates::Unloaded;
 
 UnitLineupWidget* UISystem::unitLineupWidget;
 ScreenFadeWidget* UISystem::screenFadeWidget;
-MemoryGainedWidget* UISystem::memoryGainedWidget;
 
 std::vector<std::unique_ptr<Widget>> UISystem::widgets;
 
@@ -115,7 +113,6 @@ void UISystem::CreateGlobalWidgets()
 {
 	unitLineupWidget = CreateWidget<UnitLineupWidget>();
 	screenFadeWidget = CreateWidget<ScreenFadeWidget>();
-	memoryGainedWidget = CreateWidget<MemoryGainedWidget>();
 }
 
 void UISystem::DestroyWidget(Widget* widget)

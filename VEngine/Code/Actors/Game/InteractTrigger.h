@@ -1,10 +1,9 @@
 #pragma once
+
 #include "../Actor.h"
 #include "../ActorSystem.h"
-#include <string>
 
 struct BoxTriggerComponent;
-struct MemoryComponent;
 struct Widget;
 struct InteractWidget;
 
@@ -14,8 +13,6 @@ struct InteractTrigger : Actor
 	ACTOR_SYSTEM(InteractTrigger)
 
 	BoxTriggerComponent* trigger = nullptr;
-
-	MemoryComponent* memoryComponent = nullptr;
 
 	//Widget shown on interact
 	InteractWidget* interactWidget = nullptr;

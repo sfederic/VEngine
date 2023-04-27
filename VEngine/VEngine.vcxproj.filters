@@ -515,9 +515,6 @@
     <ClCompile Include="Code\Actors\Game\InteractTrigger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\MemoryActor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\Game\MovingGridActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -548,9 +545,6 @@
     <ClCompile Include="Code\Gameplay\GridNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Gameplay\Memory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\UI\Game\ActivateTrapWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -564,18 +558,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\UI\Game\InteractWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\UI\Game\MemoryGainedWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\UI\Game\MemoryMenuWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\UI\Game\MemoryRecalledWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\UI\Game\MemoryTransferWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\UI\Game\PlayerActionBarWidget.cpp">
@@ -596,9 +578,6 @@
     <ClCompile Include="Code\Components\Game\DialogueComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Components\Game\MemoryComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Core\BMPFileWriter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -615,18 +594,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Render\RenderTarget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Actors\Game\MemoryGainActors\ChurchFire.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Gameplay\Memories\ChurchFireMemory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Gameplay\MemorySystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Actors\Game\MemoryEntranceTrigger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1170,9 +1137,6 @@
     <ClInclude Include="Code\Actors\Game\InteractTrigger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\MemoryActor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Actors\Game\MovingGridActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1203,9 +1167,6 @@
     <ClInclude Include="Code\Gameplay\GridNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Gameplay\Memory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\UI\Game\ActivateTrapWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1219,18 +1180,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\InteractWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\Game\MemoryGainedWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\Game\MemoryMenuWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\Game\MemoryRecalledWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\Game\MemoryTransferWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\PlayerActionBarWidget.h">
@@ -1249,9 +1198,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Components\Game\DialogueComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Components\Game\MemoryComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Asset\VertexColourData.h">
@@ -1276,21 +1222,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\RenderTarget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\MemoryGainActors\ChurchFire.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Gameplay\Memories\ChurchFireMemory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Gameplay\MemorySystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Gameplay\MemoryNames.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\MemoryEntranceTrigger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1318,6 +1249,5 @@
     <FxCompile Include="Code\Render\Shaders\Vertex\ShadowAnimation_vs.hlsl" />
     <FxCompile Include="Code\Render\Shaders\Pixel\LightProbe_ps.hlsl" />
     <FxCompile Include="Code\Render\Shaders\Vertex\LightProbe_vs.hlsl" />
-    <FxCompile Include="Code\Render\Shaders\Pixel\MemoryObject_ps.hlsl" />
   </ItemGroup>
 </Project>

@@ -5,11 +5,9 @@
 #include "GameUtils.h"
 #include "Memory.h"
 #include "UI/UISystem.h"
-#include "UI/Game/MemoryRecalledWidget.h"
 #include "Gameplay/BattleSystem.h"
 #include "Core/World.h"
 #include "Core/Log.h"
-#include "UI/Game/MemoryGainedWidget.h"
 #include "Audio/AudioSystem.h"
 #include "Actors/Game/EntranceTrigger.h"
 #include "Actors/Game/Player.h"
@@ -50,56 +48,9 @@ bool PlaySong(std::string arg)
 	return true;
 }
 
-bool MemoryCheck(std::string arg)
-{
-	auto memoryIt = GameInstance::playerMemories.find(arg);
-	if (memoryIt != GameInstance::playerMemories.end())
-	{
-		//UISystem::memoryRecalledWidget->recalledMemory = memoryIt->second;
-		//UISystem::memoryRecalledWidget->AddToViewport();
-
-		GameUtils::PlayAudioOneShot("intuition_check_success.wav");
-
-		return true;
-	}
-
-	Log("MemoryCheck [%s] not found.", arg.c_str());
-	return false;
-}
-
 bool StartBattle(std::string arg)
 {
 	battleSystem.StartBattle();
-	return true;
-}
-
-bool GainMemory(std::string arg)
-{
-	//@Todo: whole function needs to be reworked to get memory from Memory using arg
-
-	size_t firstOf = arg.find("|");
-	size_t lastOf = arg.find_last_of("|");
-
-	std::string memoryName = arg.substr(0, firstOf);
-	std::string memoryDesc = arg.substr(memoryName.size() + 1, lastOf - memoryName.size() - 1);
-	std::string memoryImage = arg.substr(lastOf + 1);
-
-	auto memory = new Memory(memoryName);
-	memory->description = memoryDesc;
-
-	memory->actorAcquiredFrom = "Acquired from dialogue.";
-	memory->worldAcquiredFrom = World::worldFilename;
-
-	memory->imageFile = memoryImage;
-
-	GameInstance::playerMemories.emplace(memory->name, memory);
-	Log("%s Memory created.", memory->name.c_str());
-
-	//UISystem::memoryGainedWidget->memoryToDisplay = GameInstance::playerMemories[memory->name];
-	//UISystem::memoryGainedWidget->AddToViewport();
-
-	GameUtils::PlayAudioOneShot("purchase.wav");
-
 	return true;
 }
 
@@ -107,9 +58,7 @@ bool GainMemory(std::string arg)
 
 ConditionSystem::ConditionSystem()
 {
-	ADD_CONDITION(MemoryCheck);
 	ADD_CONDITION(StartBattle);
-	ADD_CONDITION(GainMemory);
 	ADD_CONDITION(PlaySong);
 	ADD_CONDITION(UnlockEntrance);
 }

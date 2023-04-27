@@ -10,7 +10,6 @@
 class Widget;
 class UnitLineupWidget;
 class ScreenFadeWidget;
-class MemoryGainedWidget;
 
 namespace UISystem
 {
@@ -19,7 +18,6 @@ namespace UISystem
 
 	extern UnitLineupWidget* unitLineupWidget;
 	extern ScreenFadeWidget* screenFadeWidget;
-	extern MemoryGainedWidget* memoryGainedWidget;
 
 	template <typename T>
 	std::vector<T*> GetAllWidgetsOfType()

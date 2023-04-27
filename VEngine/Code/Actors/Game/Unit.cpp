@@ -6,7 +6,6 @@
 #include "Grid.h"
 #include "Components/MeshComponent.h"
 #include "Components/BoxTriggerComponent.h"
-#include "Components/Game/MemoryComponent.h"
 #include "Core/VMath.h"
 #include "Player.h"
 #include "Gameplay/BattleSystem.h"
@@ -15,7 +14,6 @@
 #include "Core/Log.h"
 #include "UI/UISystem.h"
 #include "UI/Game/HealthWidget.h"
-#include "UI/Game/MemoryGainedWidget.h"
 #include "UI/Game/ActivateTrapWidget.h"
 #include "Gameplay/GameInstance.h"
 #include "Actors/Game/EntranceTrigger.h"
@@ -29,9 +27,6 @@ Unit::Unit()
 	battleState.Add(BattleStates::evade);
 	battleState.Add(BattleStates::escape);
 	battleState.Add(BattleStates::wander);
-
-	memoryOnDeath = MemoryComponent::system.Add("MemoryOnDeath", this);
-	memoryOnDeath->name = "MemoryOnDeath"; //Seperate the name, GridActor and Unit have two memory components.
 
 	//intentBeam = Polyboard::system.Add(this);
 }
@@ -165,8 +160,6 @@ void Unit::InflictDamage(int damage)
 
 	if (health <= damage && isDestructible)
 	{
-		memoryOnDeath->CreateMemory(this->GetName());
-
 		healthWidget->Destroy();
 
 		battleSystem.RemoveUnit(this);

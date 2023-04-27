@@ -1,7 +1,6 @@
 #include "vpch.h"
 #include "InteractTrigger.h"
 #include "Components/BoxTriggerComponent.h"
-#include "Components/Game/MemoryComponent.h"
 #include "Core/Camera.h"
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/BattleSystem.h"
@@ -15,8 +14,6 @@ InteractTrigger::InteractTrigger()
 	trigger = BoxTriggerComponent::system.Add("Trigger", this);
 	trigger->renderWireframeColour = XMFLOAT4(0.9f, 0.9f, 0.1f, 1.f);
 	rootComponent = trigger;
-
-	memoryComponent = MemoryComponent::system.Add("MemoryComponent", this);
 }
 
 void InteractTrigger::Start()
@@ -53,18 +50,6 @@ void InteractTrigger::Tick(float deltaTime)
 				Player::system.GetFirstActor()->inInteraction = true;
 
 				interactWidget->interactText = interactText;
-
-				if (memoryComponent->addOnInteract)
-				{
-					if (!memoryComponent->CreateMemory(targetActorName))
-					{
-						//Bit of a shit check on whether to use interact or known text
-						if (!interactKnown.empty())
-						{
-							interactWidget->interactText = interactKnown;
-						}
-					}
-				}
 
 				Actor* targetActor = World::GetActorByNameAllowNull(targetActorName);
 				if (targetActor)
