@@ -141,4 +141,5 @@ private:
 	void BackOutOfMemoryWorld();
 
 	void RotateObject();
+	void PushbackGridActor();
 };

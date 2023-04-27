@@ -101,6 +101,7 @@ void Player::Tick(float deltaTime)
 	}
 
 	RotateObject();
+	PushbackGridActor();
 
 	MovementInput(deltaTime);
 	RotationInput(deltaTime);
@@ -745,6 +746,22 @@ void Player::RotateObject()
 		{
 			linkedMoveableGridActor->nextRot = VMath::AddRotationAngle(linkedMoveableGridActor->GetRotationV(),
 				VMath::GlobalRightVector(), 90.f);
+		}
+	}
+}
+
+void Player::PushbackGridActor()
+{
+	if (Input::GetKeyUp(Keys::X))
+	{
+		HitResult hit(this);
+		if (Raycast(hit, GetPositionV(), GetForwardVectorV(), 10.f))
+		{
+			auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
+			if (gridActor)
+			{
+				gridActor->Pushback(GetForwardVectorV());
+			}
 		}
 	}
 }
