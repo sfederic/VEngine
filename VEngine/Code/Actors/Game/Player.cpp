@@ -761,22 +761,22 @@ void Player::RotateObject()
 		if (Input::GetKeyUp(Keys::Right))
 		{
 			linkedMoveableGridActor->nextRot = VMath::AddRotationAngle(linkedMoveableGridActor->GetRotationV(),
-				linkedMoveableGridActor->GetUpVectorV(), 90.f);
+				VMath::GlobalUpVector(), 90.f);
 		}
 		else if (Input::GetKeyUp(Keys::Left))
 		{
 			linkedMoveableGridActor->nextRot = VMath::AddRotationAngle(linkedMoveableGridActor->GetRotationV(),
-				linkedMoveableGridActor->GetUpVectorV(), -90.f);
+				VMath::GlobalUpVector(), -90.f);
 		}
 		else if (Input::GetKeyUp(Keys::Down))
 		{
 			linkedMoveableGridActor->nextRot = VMath::AddRotationAngle(linkedMoveableGridActor->GetRotationV(),
-				linkedMoveableGridActor->GetRightVectorV(), -90.f);
+				VMath::GlobalRightVector(), -90.f);
 		}
 		else if (Input::GetKeyUp(Keys::Up))
 		{
 			linkedMoveableGridActor->nextRot = VMath::AddRotationAngle(linkedMoveableGridActor->GetRotationV(),
-				linkedMoveableGridActor->GetRightVectorV(), 90.f);
+				VMath::GlobalRightVector(), 90.f);
 		}
 	}
 }
