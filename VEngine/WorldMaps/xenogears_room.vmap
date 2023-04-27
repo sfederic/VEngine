@@ -45,7 +45,7 @@ UID
 201678567
 next
 MeshActor
-15
+14
  Enabled
 1
  Position
@@ -256,21 +256,6 @@ MeshActor13
 UID
 3542750051
 next
- Enabled
-1
- Position
-2 1.5 2
- Rotation
-0 0 1 7.94663e-09
- Scale
-4.99999 0.999998 5
- Visible
-1
-Name
-MeshActor14
-UID
-2490089078
-next
 Player
 1
  Enabled
@@ -444,7 +429,7 @@ UID
 2641014842
 next
 MeshComponent
-16
+15
 553639516
 Mesh
  Enabled
@@ -1186,59 +1171,6 @@ Trans. Occlude
 0
 UID
 1877118452
-next
-2490089078
-Mesh
- Enabled
-1
- Pos
-2 1.5 2
- Rot
-0 0 1 7.94663e-09
- Scale
-4.99999 0.999998 5
- Visible
-1
-Casts Shadow
-1
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-wood128x128.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-908833960
 next
 2130618174
 Mesh
