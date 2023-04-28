@@ -83,7 +83,7 @@ void Player::Tick(float deltaTime)
 		//GameUtils::TriggerGameOver();
 	}
 
-	RotateObject();
+	LinkToGridActor();
 	PushbackGridActor();
 
 	MovementInput(deltaTime);
@@ -447,7 +447,7 @@ bool Player::CheckAttackPositionAgainstUnitDirection(Unit* unit)
 	return false;
 }
 
-void Player::RotateObject()
+void Player::LinkToGridActor()
 {
 	if (!isInputLinkedToMoveableActor && Input::GetKeyUp(Keys::Up))
 	{

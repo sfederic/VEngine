@@ -103,7 +103,7 @@ private:
 
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
-	void RotateObject();
+	void LinkToGridActor();
 	void PushbackGridActor();
 
 	void ToggleGrid();
