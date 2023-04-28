@@ -35,8 +35,8 @@ public:
 	VEnum rastStateValue;
 	VEnum blendStateValue;
 
+	Material() {}
 	Material(std::string textureFilename_, ShaderItem* shaderItem);
-	~Material() {} //@Todo: there's still a fucking terrible VEnum std::string debug error here
 
 	virtual void Create();
 	virtual void Destroy();
