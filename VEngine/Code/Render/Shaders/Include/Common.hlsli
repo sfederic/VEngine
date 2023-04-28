@@ -1,8 +1,6 @@
 #ifndef COMMON
 #define COMMON
 
-static const float SMAP_SIZE = 2048.0f;
-static const float SMAP_DX = 1.0f / SMAP_SIZE;
 static const float PI = 3.14159265f;
 
 struct LightProbeInstanceData
@@ -354,6 +352,9 @@ float CalcShadowFactor(float4 shadowPos)
 	shadowPos.xyz /= shadowPos.w;
 	float depth = shadowPos.z;
 
+    const float SMAP_SIZE = 2048.0f;
+    const float SMAP_DX = 1.0f / SMAP_SIZE;
+    
 	const float dx = SMAP_DX;
 	float percentLit = 0.0f;
 
