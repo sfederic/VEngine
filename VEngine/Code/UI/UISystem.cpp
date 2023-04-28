@@ -6,12 +6,10 @@
 #include "Core/Core.h"
 #include "UI/Widget.h"
 #include "UI/ScreenFadeWidget.h"
-#include "UI/Game/UnitLineupWidget.h"
 #include "Core/SystemStates.h"
 
 static SystemStates systemState = SystemStates::Unloaded;
 
-UnitLineupWidget* UISystem::unitLineupWidget;
 ScreenFadeWidget* UISystem::screenFadeWidget;
 
 std::vector<std::unique_ptr<Widget>> UISystem::widgets;
@@ -40,7 +38,7 @@ void UISystem::Init(void* swapchain)
 	//Direct2D Init
 	IDXGISurface* surface;
 
-	//If D3D12 is being used, you'll get a "Not Implemented" error on GetBuffer() as the CmdAllocator is pased into the 
+	//If D3D12 is being used, you'll get a "Not Implemented" error on GetBuffer() as the CmdAllocator is passed into the 
 	//swapchain creation on d3d12 instead of the device in d3d11. The workaround is to use D3D11on12 but it uses
 	//fucking 500 MB while running. I guess at that point, you'd be doing your own UI calls through D3D12 anyway.
 	IDXGISwapChain3* swapchain3 = (IDXGISwapChain3*)swapchain;
@@ -111,7 +109,6 @@ void UISystem::Reset()
 
 void UISystem::CreateGlobalWidgets()
 {
-	unitLineupWidget = CreateWidget<UnitLineupWidget>();
 	screenFadeWidget = CreateWidget<ScreenFadeWidget>();
 }
 

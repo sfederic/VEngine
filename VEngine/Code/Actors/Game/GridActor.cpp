@@ -9,7 +9,6 @@
 #include "Core/VMath.h"
 #include "Physics/Raycast.h"
 #include "Gameplay/GameUtils.h"
-#include "Gameplay/BattleSystem.h"
 
 GridActor::GridActor()
 {
@@ -107,10 +106,7 @@ void GridActor::InflictDamage(int damage)
 		//Hide node if attacked Unit is the last enemy
 		if (dynamic_cast<Unit*>(this))
 		{
-			if (!battleSystem.isBattleActive)
-			{ 
-				GetCurrentNode()->Hide();
-			}
+			GetCurrentNode()->Hide();
 		}
 		else
 		{

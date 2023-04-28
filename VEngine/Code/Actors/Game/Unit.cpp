@@ -8,13 +8,10 @@
 #include "Components/BoxTriggerComponent.h"
 #include "Core/VMath.h"
 #include "Player.h"
-#include "Gameplay/BattleSystem.h"
-#include "Gameplay/Trap.h"
 #include "Core/Timer.h"
 #include "Core/Log.h"
 #include "UI/UISystem.h"
 #include "UI/Game/HealthWidget.h"
-#include "UI/Game/ActivateTrapWidget.h"
 #include "Gameplay/GameInstance.h"
 #include "Actors/Game/EntranceTrigger.h"
 #include "Physics/Raycast.h"
@@ -25,10 +22,7 @@ Unit::Unit()
 
 	battleState.Add(BattleStates::fight);
 	battleState.Add(BattleStates::evade);
-	battleState.Add(BattleStates::escape);
 	battleState.Add(BattleStates::wander);
-
-	//intentBeam = Polyboard::system.Add(this);
 }
 
 void Unit::Start()
@@ -54,82 +48,35 @@ void Unit::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
-	//@Todo: figure out how to do intent beams better for units.
-	//intentBeam->startPoint = GetPosition();
-	//Actor* intentActor = world.GetActorByNameAllowNull(actorToFocusOn);
-	//if (intentActor)
-	//{
-	//	intentBeam->endPoint = intentActor->GetPosition();
-	//}
-
 	healthWidget->worldPosition = GetHomogeneousPositionV();
 
-	if (isUnitTurn && !attackWindingUp && !isInTrapNode)
+	if (XMVector4Equal(nextMovePos, GetPositionV()))
 	{
-		if (XMVector4Equal(nextMovePos, GetPositionV()))
+		if (movementPathNodeIndex < pathNodes.size())
 		{
-			if (movementPathNodeIndex < pathNodes.size())
+			nextMovePos = XMLoadFloat3(&pathNodes[movementPathNodeIndex]->worldPosition);
+
+			SetUnitLookAt(nextMovePos);
+
+			xIndex = pathNodes[movementPathNodeIndex]->xIndex;
+			yIndex = pathNodes[movementPathNodeIndex]->yIndex;
+
+			movementPathNodeIndex++;
+		}
+		else if (movementPathNodeIndex >= pathNodes.size())
+		{
+			movementPathNodeIndex = 0;
+			pathNodes.clear();
+
+			GetCurrentNode()->Hide();
+
+			auto player = Player::system.GetFirstActor();
+
+			if (Attack())
 			{
-				nextMovePos = XMLoadFloat3(&pathNodes[movementPathNodeIndex]->worldPosition);
-
-				SetUnitLookAt(nextMovePos);
-
-				xIndex = pathNodes[movementPathNodeIndex]->xIndex;
-				yIndex = pathNodes[movementPathNodeIndex]->yIndex;
-
-				//Trap node logic
-				auto currentNode = GetCurrentNode();
-				if (currentNode->trap)
-				{
-					//@Todo: this has the problem where if there are two traps adjacent, the unit will enter a loop
-					isInTrapNode = true;
-					auto activateTrapWidget = UISystem::CreateWidget<ActivateTrapWidget>();
-					activateTrapWidget->AddToViewport();
-					activateTrapWidget->SetLinkedUnit(this);
-					activateTrapWidget->SetLinkedTrapNode(currentNode->trap);
-				}
-
-				movementPathNodeIndex++;
-			}
-			else if (movementPathNodeIndex >= pathNodes.size())
-			{
-				movementPathNodeIndex = 0;
-				pathNodes.clear();
-
-				GetCurrentNode()->Hide();
-
-				auto player = Player::system.GetFirstActor();
-
-				if (Attack())
-				{
-					//deal with attack wind up
-					attackWindingUp = true;
-	
-					player->SetGuard();
-					player->SetZoomedInCameraFOV();
-
-					GameUtils::SetActiveCameraTarget(this);
-
-					Timer::SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
-				}
-				else
-				{
-					EndTurn();
-
-					//Destroy Unit if its escaping and within its entrancetrigger to escape with
-					if (battleState.Compare(BattleStates::escape) && entranceToEscapeTo)
-					{
-						if (entranceToEscapeTo->trigger->Contains(GetPositionV()))
-						{
-							battleSystem.RemoveUnit(this);
-							GetCurrentNode()->Show();
-							Log("Unit [%s] escaped through [%s].",
-								this->GetName().c_str(), entranceToEscapeTo->GetName().c_str());
-							Destroy();
-							return;
-						}
-					}
-				}
+				player->SetZoomedInCameraFOV();
+				GameUtils::SetActiveCameraTarget(this);
+				Timer::SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
 			}
 		}
 	}
@@ -153,16 +100,9 @@ Properties Unit::GetProps()
 
 void Unit::InflictDamage(int damage)
 {
-	if (!battleSystem.isBattleActive)
-	{
-		battleSystem.StartBattle();
-	}
-
 	if (health <= damage && isDestructible)
 	{
 		healthWidget->Destroy();
-
-		battleSystem.RemoveUnit(this);
 	}
 
 	__super::InflictDamage(damage);
@@ -284,8 +224,6 @@ void Unit::MoveToNode(int x, int y)
 
 void Unit::StartTurn()
 {
-	isUnitTurn = true;
-
 	GetCurrentNode()->Show();
 
 	auto target = Player::system.GetOnlyActor();
@@ -300,36 +238,6 @@ void Unit::StartTurn()
 		//Move away from player to evade
 		MoveToNode(target->xIndex, target->yIndex);
 	}
-	else if (battleState.Compare(BattleStates::escape))
-	{
-		//int is the index into EntranceTrigger actor system vector
-		std::vector<std::pair<float, int>> entranceDistances;
-
-		//Find entrance closest to unit and move to it
-		for (int i = 0; i < EntranceTrigger::system.GetActors().size(); i++)
-		{
-			auto& entrance = EntranceTrigger::system.GetActors()[i];
-			float dist = XMVector3Length(entrance->GetPositionV() - this->GetPositionV()).m128_f32[0];
-			entranceDistances.push_back(std::make_pair(dist, i));
-		}
-
-		//Sort by distance
-		std::sort(entranceDistances.begin(), entranceDistances.end());
-		auto& entranceTriggerToMoveTo = EntranceTrigger::system.GetActors()[entranceDistances.front().second];
-
-		entranceToEscapeTo = entranceTriggerToMoveTo.get();
-
-		//EntranceTrigger isn't a grid actor, just move to its world position
-		int xIndex = std::round(entranceTriggerToMoveTo->GetPosition().x);
-		int yIndex = std::round(entranceTriggerToMoveTo->GetPosition().y);
-		MoveToNode(xIndex, yIndex);
-	}
-}
-
-void Unit::EndTurn()
-{
-	isUnitTurn = false;
-	battleSystem.MoveToNextTurn();
 }
 
 bool Unit::Attack()
@@ -383,15 +291,9 @@ void Unit::WindUpAttack()
 	GameUtils::SetActiveCameraTarget(target);
 	GameUtils::SpawnSpriteSheet("Sprites/blade_slash.png", target->GetPositionV(), false, 3, 5);
 	GameUtils::PlayAudioOneShot("armor_light.wav");
-	target->InflictDamage(attackPoints);
 
 	auto player = Player::system.GetOnlyActor();
 	player->SetDefaultCameraFOV();
-	player->ResetGuard();
-
-	attackWindingUp = false;
-
-	EndTurn();
 }
 
 void Unit::ShowUnitMovementPath()

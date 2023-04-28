@@ -4,7 +4,6 @@
 #include "GameInstance.h"
 #include "GameUtils.h"
 #include "UI/UISystem.h"
-#include "Gameplay/BattleSystem.h"
 #include "Core/World.h"
 #include "Core/Log.h"
 #include "Audio/AudioSystem.h"
@@ -15,21 +14,6 @@
 ConditionSystem conditionSystem;
 
 //CONDITION FUNCTIONS
-
-bool AttackUp(std::string arg)
-{
-	auto player = Player::system.GetFirstActor();
-	try
-	{
-		player->attackPoints += std::stoi(arg);
-	}
-	catch (std::exception ex)
-	{
-		throw;
-	}
-
-	return true;
-}
 
 bool UnlockEntrance(std::string arg)
 {
@@ -47,17 +31,10 @@ bool PlaySong(std::string arg)
 	return true;
 }
 
-bool StartBattle(std::string arg)
-{
-	battleSystem.StartBattle();
-	return true;
-}
-
 //END CONDITION FUNCTIONS
 
 ConditionSystem::ConditionSystem()
 {
-	ADD_CONDITION(StartBattle);
 	ADD_CONDITION(PlaySong);
 	ADD_CONDITION(UnlockEntrance);
 }

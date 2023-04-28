@@ -7,7 +7,6 @@
 #include "Core/Log.h"
 
 struct DialogueComponent;
-struct MemoryComponent;
 struct InteractWidget;
 struct MemoryMenuWidget;
 struct PlayerHealthWidget;
@@ -39,8 +38,6 @@ public:
 
 	bool inConversation = false;
 	bool inInteraction = false;
-	bool inBattleMode = false;
-	bool memoryWidgetToggle = false;
 	bool gameOver = false;
 
 	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
@@ -52,7 +49,6 @@ public:
 	GuardWidget* guardWidget = nullptr;
 	PlayerStatusWidget* playerStatusWidget = nullptr;
 
-	int attackPoints = 1;
 	int healthPoints = 3;
 
 	float moveSpeed = 0.f;
@@ -61,11 +57,6 @@ public:
 	int xIndex = -1;
 	int yIndex = -1;
 
-	bool ableToGuard = false;
-	bool guarding = false;
-
-	bool isFatigued = false;
-
 	Player();
 	void Create() override;
 	void Start() override;
@@ -73,23 +64,10 @@ public:
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
-	//called at every battle turn end
-	void RefreshCombatStats();
-
-	//Call on battle end for player variables housekeeping
-	void BattleCleanup();
-	
-	void SetupForBattle();
-
 	XMVECTOR GetMeshForward();
 
 	//Show a timer dialogue above player when player character is thinking to themself.
 	void QuickThought(const std::wstring& text);
-
-	void PlaceTrap(Trap* trap);
-
-	void SetGuard();
-	void ResetGuard();
 
 	void SetDefaultCameraFOV();
 	void SetZoomedInCameraFOV();
@@ -99,20 +77,11 @@ public:
 	void SetGridIndices();
 	void GetGridIndices(int& x, int& y);
 
-	virtual void AttackPattern() {};
-	void ExpendActionPoint();
-	void InflictDamage(int damage);
-
-	void ToggleGridMapPicker(bool& gridPickerActive);
-
 private:
 	float nextCameraFOV = 0.f;
 
 	bool isInputLinkedToMoveableActor = false;
 	GridActor* linkedMoveableGridActor = nullptr;
-
-	//Toggles battle grid nodes and enters player into a battle ready state.
-	void EnterAstralMode();
 
 	bool CheckIfMovementAndRotationStopped();
 	void MovementInput(float deltaTime);
@@ -134,10 +103,8 @@ private:
 
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
-	void Guard();
-
-	void BackOutOfMemoryWorld();
-
 	void RotateObject();
 	void PushbackGridActor();
+
+	void ToggleGrid();
 };

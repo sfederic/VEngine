@@ -6,7 +6,6 @@
 #include "Components/Game/ConditionComponent.h"
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/GameInstance.h"
-#include "Gameplay/BattleSystem.h"
 #include "Core/Input.h"
 #include "Core/FileSystem.h"
 #include "UI/Game/InteractWidget.h"
@@ -50,7 +49,7 @@ void EntranceTrigger::Tick(float deltaTime)
 {
     XMVECTOR targetPos = trigger->targetActor->GetPositionV();
 
-    if (trigger->ContainsTarget() && isEntranceActive && !battleSystem.isBattleActive && !entranceInteractedWith)
+    if (trigger->ContainsTarget() && isEntranceActive && !entranceInteractedWith)
     {
         interactWidget->AddToViewport();
 

@@ -122,13 +122,10 @@
     <ClCompile Include="Code\Actors\Game\ConditionTrigger.cpp" />
     <ClCompile Include="Code\Actors\Game\DialogueTrigger.cpp" />
     <ClCompile Include="Code\Actors\Game\EntranceTrigger.cpp" />
-    <ClCompile Include="Code\Actors\Game\ExplodingObject.cpp" />
     <ClCompile Include="Code\Actors\Game\FenceActor.cpp" />
     <ClCompile Include="Code\Actors\Game\Grid.cpp" />
     <ClCompile Include="Code\Actors\Game\GridActor.cpp" />
-    <ClCompile Include="Code\Actors\Game\GridMapPicker.cpp" />
     <ClCompile Include="Code\Actors\Game\InteractTrigger.cpp" />
-    <ClCompile Include="Code\Actors\Game\MovingGridActor.cpp" />
     <ClCompile Include="Code\Actors\Game\NPC.cpp" />
     <ClCompile Include="Code\Actors\Game\Player.cpp" />
     <ClCompile Include="Code\Actors\Game\PlayerDialogueTrigger.cpp" />
@@ -153,9 +150,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Code\Gameplay\Trap.cpp" />
-    <ClCompile Include="Code\Gameplay\Traps.cpp" />
-    <ClCompile Include="Code\Gameplay\BattleSystem.cpp" />
     <ClCompile Include="Code\Gameplay\ConditionSystem.cpp" />
     <ClCompile Include="Code\Gameplay\DialogueStructures.cpp" />
     <ClCompile Include="Code\Gameplay\GridNode.cpp" />
@@ -193,15 +187,11 @@
     <ClCompile Include="Code\Render\PipelineObjects.cpp" />
     <ClCompile Include="Code\Core\UID.cpp" />
     <ClCompile Include="Code\Core\VEnum.cpp" />
-    <ClCompile Include="Code\UI\Game\ActivateTrapWidget.cpp" />
     <ClCompile Include="Code\UI\Game\DialogueWidget.cpp" />
-    <ClCompile Include="Code\UI\Game\GridMapPickerSelectionInfoWidget.cpp" />
     <ClCompile Include="Code\UI\Game\HealthWidget.cpp" />
     <ClCompile Include="Code\UI\Game\InteractWidget.cpp" />
-    <ClCompile Include="Code\UI\Game\PlayerActionBarWidget.cpp" />
     <ClCompile Include="Code\UI\Game\PlayerHealthWidget.cpp" />
     <ClCompile Include="Code\UI\Game\PopupWidget.cpp" />
-    <ClCompile Include="Code\UI\Game\UnitLineupWidget.cpp" />
     <ClCompile Include="Code\vpch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
@@ -271,8 +261,6 @@
     <ClCompile Include="Code\Actors\DebugActors\DebugCapsule.cpp" />
     <ClCompile Include="Code\Components\MouseRotateComponent.cpp" />
     <ClCompile Include="Code\Render\ShaderData\ShaderMatrices.cpp" />
-    <ClCompile Include="Code\UI\Game\GuardWidget.cpp" />
-    <ClCompile Include="Code\UI\Game\PlayerStatusWidget.cpp" />
     <ClCompile Include="Code\Actors\DebugActors\DebugLightProbe.cpp" />
     <ClCompile Include="Code\Render\RenderTarget.cpp" />
     <ClInclude Include="Code\Actors\Game\BreakableCube.h" />
@@ -280,13 +268,10 @@
     <ClInclude Include="Code\Actors\Game\ConditionTrigger.h" />
     <ClInclude Include="Code\Actors\Game\DialogueTrigger.h" />
     <ClInclude Include="Code\Actors\Game\EntranceTrigger.h" />
-    <ClInclude Include="Code\Actors\Game\ExplodingObject.h" />
     <ClInclude Include="Code\Actors\Game\FenceActor.h" />
     <ClInclude Include="Code\Actors\Game\Grid.h" />
     <ClInclude Include="Code\Actors\Game\GridActor.h" />
-    <ClInclude Include="Code\Actors\Game\GridMapPicker.h" />
     <ClInclude Include="Code\Actors\Game\InteractTrigger.h" />
-    <ClInclude Include="Code\Actors\Game\MovingGridActor.h" />
     <ClInclude Include="Code\Actors\Game\NPC.h" />
     <ClInclude Include="Code\Actors\Game\Player.h" />
     <ClInclude Include="Code\Actors\Game\PlayerDialogueTrigger.h" />
@@ -301,9 +286,7 @@
     <ClInclude Include="Code\Asset\VertexColourHeader.h" />
     <ClInclude Include="Code\Components\Game\ConditionComponent.h" />
     <ClInclude Include="Code\Components\Game\DialogueComponent.h" />
-    <ClInclude Include="Code\Gameplay\Trap.h" />
     <ClInclude Include="Code\Gameplay\BattleEnums.h" />
-    <ClInclude Include="Code\Gameplay\BattleSystem.h" />
     <ClInclude Include="Code\Gameplay\ConditionSystem.h" />
     <ClInclude Include="Code\Gameplay\DialogueStructures.h" />
     <ClInclude Include="Code\Gameplay\ForwardFace.h" />
@@ -468,15 +451,11 @@
     <ClInclude Include="Code\Particle\Particle.h" />
     <ClInclude Include="Code\Physics\CollisionLayers.h" />
     <ClInclude Include="Code\Core\UID.h" />
-    <ClInclude Include="Code\UI\Game\ActivateTrapWidget.h" />
     <ClInclude Include="Code\UI\Game\DialogueWidget.h" />
-    <ClInclude Include="Code\UI\Game\GridMapPickerSelectionInfoWidget.h" />
     <ClInclude Include="Code\UI\Game\HealthWidget.h" />
     <ClInclude Include="Code\UI\Game\InteractWidget.h" />
-    <ClInclude Include="Code\UI\Game\PlayerActionBarWidget.h" />
     <ClInclude Include="Code\UI\Game\PlayerHealthWidget.h" />
     <ClInclude Include="Code\UI\Game\PopupWidget.h" />
-    <ClInclude Include="Code\UI\Game\UnitLineupWidget.h" />
     <ClInclude Include="Code\UI\Layout.h" />
     <ClInclude Include="Code\Core\VEnum.h" />
     <ClInclude Include="Code\Core\VFunction.h" />
@@ -574,8 +553,6 @@
     <ClInclude Include="Code\Actors\DebugActors\DebugCapsule.h" />
     <ClInclude Include="Code\Components\MouseRotateComponent.h" />
     <ClInclude Include="Code\Render\ShaderData\ShaderMatrices.h" />
-    <ClInclude Include="Code\UI\Game\GuardWidget.h" />
-    <ClInclude Include="Code\UI\Game\PlayerStatusWidget.h" />
     <ClInclude Include="Code\Actors\DebugActors\DebugLightProbe.h" />
     <ClInclude Include="Code\Render\RenderTarget.h" />
   </ItemGroup>

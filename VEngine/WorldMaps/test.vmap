@@ -38,6 +38,70 @@ StartBattleOnLoad
 UID
 3200550050
 next
+GridActor
+2
+ Enabled
+1
+ Position
+0 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Name
+GridActor0
+Obstacle
+1
+UID
+1043275269
+next
+ Enabled
+1
+ Position
+0 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Name
+GridActor1
+Obstacle
+1
+UID
+1521624963
+next
 MeshActor
 1
  Enabled
@@ -96,7 +160,18 @@ UID
 890223782
 next
 DialogueComponent
+3
+1043275269
+Dialogue
+ Enabled
 1
+ Visible
+1
+File
+
+UID
+3790323356
+next
 2493786944
 Dialogue
  Enabled
@@ -107,6 +182,17 @@ File
 
 UID
 205257500
+next
+1521624963
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2426196023
 next
 DirectionalLightComponent
 1
@@ -202,15 +288,15 @@ UID
 959525705
 next
 MeshComponent
-2
-2493786944
+4
+1043275269
 Mesh
  Enabled
 1
  Pos
-0 0 0
+0 0 1
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -248,13 +334,13 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-char.vmesh
+cube.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-231718310
+3885984402
 next
 1378475580
 Mesh
@@ -308,5 +394,111 @@ Trans. Occlude
 0
 UID
 1929307299
+next
+2493786944
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+231718310
+next
+1521624963
+Mesh
+ Enabled
+1
+ Pos
+0 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2320465601
 next
 end

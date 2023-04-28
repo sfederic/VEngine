@@ -33,8 +33,6 @@ struct Grid : public Actor
 	int sizeX = 1;
 	int sizeY = 1;
 
-	bool startBattleOnLoad = false;
-
 	enum class LerpValue
 	{
 		LerpIn,

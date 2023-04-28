@@ -21,15 +21,9 @@ struct Unit : GridActor
 		inline static std::string fight = "fight"; //Move towards player/destination
 		inline static std::string evade = "evade"; //Move away from destination
 		inline static std::string wander = "wander"; //Move around randomly
-		inline static std::string escape = "escape"; //Esacpe to nearest EntranceTrigger
 	};
 
 	VEnum battleState;
-
-	//Meant to show a unit's current focus in battle and in world
-	Polyboard* intentBeam = nullptr;
-
-	EntranceTrigger* entranceToEscapeTo = nullptr;
 
 	//Text to display on unit's death during battle
 	std::wstring deathText;
@@ -45,18 +39,9 @@ struct Unit : GridActor
 
 	int attackRange = 1; //Attack range should always be >= 1
 
-	bool isInBattle = false;
-
-	bool isInTrapNode = false;
-
 	//All directions the Unit can be successfully attacked from.
 	AttackDirection attackDirections = AttackDirection::All;
 
-private:
-	bool isUnitTurn = false;
-	bool attackWindingUp = false;
-
-public:
 	//All the nodes the unit can move to
 	std::vector<GridNode*> movementPathNodes;
 
@@ -76,7 +61,6 @@ public:
 	void MoveToNode(GridNode* destinationNode);
 	void MoveToNode(int x, int y);
 	void StartTurn();
-	void EndTurn();
 	bool Attack();
 	void WindUpAttack();
 	void ShowUnitMovementPath();

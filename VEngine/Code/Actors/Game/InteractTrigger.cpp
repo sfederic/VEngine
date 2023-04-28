@@ -3,7 +3,6 @@
 #include "Components/BoxTriggerComponent.h"
 #include "Core/Camera.h"
 #include "Gameplay/GameUtils.h"
-#include "Gameplay/BattleSystem.h"
 #include "UI/Game/InteractWidget.h"
 #include "UI/UISystem.h"
 #include "Core/Input.h"
@@ -36,7 +35,7 @@ void InteractTrigger::Tick(float deltaTime)
 	{
 		interactWidget->AddToViewport();
 
-		if (Input::GetKeyUp(Keys::Down) && !battleSystem.isBattleActive)
+		if (Input::GetKeyUp(Keys::Down))
 		{
 			if (!isBeingInteractedWith)
 			{

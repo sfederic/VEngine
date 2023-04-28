@@ -8,7 +8,6 @@
 #include "Colours.h"
 
 class Widget;
-class UnitLineupWidget;
 class ScreenFadeWidget;
 
 namespace UISystem
@@ -16,7 +15,6 @@ namespace UISystem
 	extern std::vector<std::unique_ptr<Widget>> widgets;
 	extern std::vector<Widget*> widgetsInViewport;
 
-	extern UnitLineupWidget* unitLineupWidget;
 	extern ScreenFadeWidget* screenFadeWidget;
 
 	template <typename T>

@@ -9,7 +9,6 @@
 #include "Physics/Raycast.h"
 #include "Actors/Game/NPC.h"
 #include "Actors/Game/FenceActor.h"
-#include "Actors/Game/GridMapPicker.h"
 #include "Grid.h"
 #include "GridActor.h"
 #include "Components/EmptyComponent.h"
@@ -19,13 +18,8 @@
 #include "UI/Game/HealthWidget.h"
 #include "UI/Game/DialogueWidget.h"
 #include "UI/Game/InteractWidget.h"
-#include "UI/Game/PlayerActionBarWidget.h"
-#include "UI/Game/GuardWidget.h"
 #include "UI/Game/PlayerHealthWidget.h"
-#include "UI/Game/PlayerStatusWidget.h"
 #include "Gameplay/GameInstance.h"
-#include "Gameplay/BattleSystem.h"
-#include "Gameplay/Trap.h"
 #include "Gameplay/GameUtils.h"
 #include "Render/Material.h"
 #include "Render/BlendStates.h"
@@ -56,12 +50,6 @@ void Player::Start()
 {
 	__super::Start();
 
-	if (GameInstance::playerBackedOutOfMemoryLevel)
-	{
-		GameInstance::playerBackedOutOfMemoryLevel = false;
-		SetTransform(GameInstance::previousPlayerTransformBeforeEnteringMemory);
-	}
-
 	nextPos = GetPositionV();
 	nextRot = GetRotationV();
 
@@ -74,11 +62,6 @@ void Player::Start()
 	//Setup widgets
 	interactWidget = UISystem::CreateWidget<InteractWidget>();
 	healthWidget = UISystem::CreateWidget<PlayerHealthWidget>();
-	guardWidget = UISystem::CreateWidget<GuardWidget>();
-	playerStatusWidget = UISystem::CreateWidget<PlayerStatusWidget>();
-
-	battleSystem.actionBarWidget = UISystem::CreateWidget<PlayerActionBarWidget>();
-	battleSystem.actionBarWidget->actionPoints = battleSystem.playerActionPoints;
 }
 
 void Player::End()
@@ -107,39 +90,11 @@ void Player::Tick(float deltaTime)
 	RotationInput(deltaTime);
 
 	PrimaryAction();
-	EnterAstralMode();
-	ToggleMemoryMenu();
-
-	BackOutOfMemoryWorld();
 
 	LerpPlayerCameraFOV(deltaTime);
 	MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
 	dialogueComponent->SetPosition(GetHomogeneousPositionV());
-	playerStatusWidget->worldPosition = GetHomogeneousPositionV();
-
-	if (battleSystem.isBattleActive)
-	{
-		battleSystem.actionBarWidget->AddToViewport();
-	}
-	else
-	{
-		battleSystem.actionBarWidget->RemoveFromViewport();
-	}
-
-	if (!inConversation && !inInteraction)
-	{
-		//Skip movement if not player's turn during combat
-		if (battleSystem.isBattleActive && !battleSystem.isPlayerTurn)
-		{
-			return;
-		}
-
-		if (battleSystem.isBattleActive && battleSystem.playerActionPoints < 0)
-		{
-			return;
-		}
-	}
 
 	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, moveSpeed));
 	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotateSpeed));
@@ -150,46 +105,6 @@ Properties Player::GetProps()
     auto props = Actor::GetProps();
 	props.title = "Player";
 	return props;
-}
-
-void Player::RefreshCombatStats()
-{
-	ResetGuard();
-
-	if (isFatigued) 
-	{
-		battleSystem.playerActionPoints = GameInstance::maxPlayerActionPoints / 2;
-
-		isFatigued = false;
-		playerStatusWidget->RemoveFromViewport();
-	} 
-	else 
-	{
-		battleSystem.playerActionPoints = GameInstance::maxPlayerActionPoints;
-	}
-
-	battleSystem.actionBarWidget->actionPoints = battleSystem.playerActionPoints;
-}
-
-void Player::BattleCleanup()
-{
-	inBattleMode = false;
-	battleSystem.isPlayerTurn = false;
-
-	RefreshCombatStats();
-
-	healthWidget->RemoveFromViewport();
-
-	GameUtils::SetActiveCamera(camera);
-	GameUtils::SetActiveCameraTarget(this);
-}
-
-void Player::SetupForBattle()
-{
-	battleSystem.isPlayerTurn = true;
-	inBattleMode = true;
-
-	healthWidget->AddToViewport();
 }
 
 XMVECTOR Player::GetMeshForward()
@@ -205,85 +120,19 @@ void Player::QuickThought(const std::wstring& text)
 	Timer::SetTimer(5.0f, std::bind(&DialogueWidget::RemoveFromViewport, dialogueComponent->dialogueWidget));
 }
 
-void Player::EnterAstralMode()
+void Player::ToggleGrid()
 {
 	if (Input::GetKeyUp(Keys::Space))
 	{
-		inBattleMode = !inBattleMode;
-
-		if (inBattleMode)
-		{
-			GameUtils::PlayAudioOneShot("sword_hit.wav");
-			healthWidget->AddToViewport();
-			//battleSystem.StartBattle();
-		}
-		else
-		{
-			GameUtils::PlayAudioOneShot("sword_sheathe.wav");
-			healthWidget->RemoveFromViewport();
-		}
-
-		//toggle grid
-		auto grid = Grid::system.GetFirstActor();
-		if (grid)
-		{
-			switch (inBattleMode)
-			{
-			case true:
-				grid->lerpValue = Grid::LerpValue::LerpOut;
-				break;
-			case false:
-				grid->lerpValue = Grid::LerpValue::LerpIn;
-				break;
-			}
-
-			if (grid->lerpValue == Grid::LerpValue::LerpOut)
-			{
-				grid->SetActive(true);
-			}
-		}
-
-		//toggle all Unit health widgets
-		auto healthWidgets = UISystem::GetAllWidgetsOfType<HealthWidget>();
-		for (auto healthWidget : healthWidgets)
-		{
-			if (inBattleMode)
-			{
-				healthWidget->AddToViewport();
-			}
-			else
-			{
-				healthWidget->RemoveFromViewport();
-			}
-		}
+		GameUtils::PlayAudioOneShot("sword_sheathe.wav");
+		Grid::system.GetOnlyActor()->ToggleActive();
 	}
 }
 
 void Player::PrimaryAction()
 {
-	//End turn input
-	if (battleSystem.isPlayerTurn)
-	{
-		if (battleSystem.isBattleActive && Input::GetKeyUp(Keys::Enter))
-		{
-			battleSystem.MoveToNextTurn();
-			return;
-		}
-	}
-
 	if (Input::GetKeyUp(Keys::Down))
 	{
-		//Guard
-		if (battleSystem.isBattleActive && !battleSystem.isPlayerTurn)
-		{
-			if (ableToGuard)
-			{
-				Guard();
-			}
-
-			return;
-		}
-
 		if (inInteraction)
 		{
 			//End interact with GridActor
@@ -311,34 +160,6 @@ void Player::PrimaryAction()
 			else if (QuickTalkCheck(hit.hitActor)) {}
 			else if (InteractCheck(hit.hitActor)) {}
 			else if (DestructibleCheck(hit.hitActor)) {}
-		}
-		else
-		{
-			//@Todo: was causing weird raycast issues. Come back to this for smaller enemies and whatever else.
-			//if (!AttackGridActorBasedOnNode())
-			{
-				if (inBattleMode)
-				{
-					GameUtils::PlayAudioOneShot("sword_miss.wav");
-				}
-			}
-		}
-	}
-}
-
-void Player::ToggleMemoryMenu()
-{
-	if (inBattleMode || battleSystem.isBattleActive) return;
-
-	if (Input::GetKeyUp(Keys::Enter))
-	{
-		memoryWidgetToggle = !memoryWidgetToggle;
-
-		if (memoryWidgetToggle)
-		{
-			//Toggling off memory widget is handled in its own class because it pauses the game world.
-			Core::gameWorldPaused = true;
-			GameUtils::PlayAudioOneShot("confirm.wav");
 		}
 	}
 }
@@ -452,7 +273,7 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 
 bool Player::QuickTalkCheck(Actor* hitActor)
 {
-	if (!inBattleMode && !inConversation)
+	if (!inConversation)
 	{
 		auto npc = dynamic_cast<NPC*>(hitActor);
 		if (npc)
@@ -487,7 +308,7 @@ bool Player::CombatInteractCheck(Actor* actorToCheck)
 
 bool Player::InteractCheck(Actor* hitActor)
 {
-	if (!inBattleMode && !inConversation)
+	if (!inConversation)
 	{
 		auto gridActor = dynamic_cast<GridActor*>(hitActor);
 		if (gridActor)
@@ -516,7 +337,7 @@ bool Player::InteractCheck(Actor* hitActor)
 
 bool Player::DestructibleCheck(Actor* hitActor)
 {
-	if (inBattleMode && !inConversation)
+	if (!inConversation)
 	{
 		auto npc = dynamic_cast<NPC*>(hitActor);
 		if (npc)
@@ -527,16 +348,13 @@ bool Player::DestructibleCheck(Actor* hitActor)
 		auto unit = dynamic_cast<Unit*>(hitActor);
 		if (unit)
 		{
-			battleSystem.StartBattle();
-
 			if (CheckAttackPositionAgainstUnitDirection(unit))
 			{
-				ExpendActionPoint();
 				GameUtils::CameraShake(1.f);
 				GameUtils::SpawnSpriteSheet("Sprites/v_slice.png", unit->GetPositionV(), false, 4, 4);
 				GameUtils::PlayAudioOneShot("sword_hit.wav");
 
-				unit->InflictDamage(attackPoints);
+				unit->InflictDamage(1);
 			}
 			else
 			{
@@ -553,7 +371,7 @@ bool Player::DestructibleCheck(Actor* hitActor)
 			GameUtils::SpawnSpriteSheet("Sprites/v_slice.png", gridActor->GetPositionV(), false, 4, 4);
 			GameUtils::PlayAudioOneShot("sword_hit.wav");
 
-			gridActor->InflictDamage(attackPoints);
+			gridActor->InflictDamage(1);
 
 			return true;
 		}
@@ -573,7 +391,7 @@ bool Player::AttackGridActorBasedOnNode()
 	{
 		if (gridActor->GetCurrentNode()->Equals(attackNode))
 		{
-			gridActor->InflictDamage(attackPoints);
+			gridActor->InflictDamage(1);
 			return true;
 		}
 	}
@@ -627,38 +445,6 @@ bool Player::CheckAttackPositionAgainstUnitDirection(Unit* unit)
 	}
 
 	return false;
-}
-
-void Player::PlaceTrap(Trap* trap)
-{
-	auto currentNode = GetCurrentNode();
-	if (currentNode->trap == nullptr)
-	{
-		currentNode->trap = trap;
-		currentNode->trap->connectedNode = currentNode;
-		currentNode->SetColour(GridNode::trapNodeColour);
-	}
-}
-
-void Player::Guard()
-{
-	if (battleSystem.playerActionPoints > 0 && !guarding)
-	{
-		guarding = true;
-		ExpendActionPoint();
-		guardWidget->SetGuardSuccess();
-		GameUtils::PlayAudioOneShot("equip.wav");
-	}
-}
-
-void Player::BackOutOfMemoryWorld()
-{
-	if (Input::GetKeyUp(Keys::BackSpace) && GameInstance::isPlayerInMemory)
-	{
-		GameInstance::isPlayerInMemory = false;
-		GameInstance::playerBackedOutOfMemoryLevel = true;
-		GameUtils::LoadWorldDeferred(GameInstance::previousMapMovedFrom);
-	}
 }
 
 void Player::RotateObject()
@@ -766,14 +552,6 @@ void Player::PushbackGridActor()
 	}
 }
 
-void Player::ResetGuard()
-{
-	guarding = false;
-	guardWidget->ResetGuard();
-	guardWidget->RemoveFromViewport();
-	ableToGuard = true;
-}
-
 void Player::SetDefaultCameraFOV()
 {
 	nextCameraFOV = 60.f;
@@ -784,21 +562,8 @@ void Player::SetZoomedInCameraFOV()
 	nextCameraFOV = 30.f;
 }
 
-void Player::SetGuard()
-{
-	guardWidget->AddToViewport();
-	ableToGuard = true;
-}
-
 void Player::CheckNextMoveNode(XMVECTOR previousPos)
 {
-	if (battleSystem.isBattleActive && battleSystem.playerActionPoints <= 0)
-	{
-		Log("No Player action points remaining.");
-		nextPos = previousPos;
-		return;
-	}
-
 	int nextXIndex = (int)std::round(nextPos.m128_f32[0]);
 	int nextYIndex = (int)std::round(nextPos.m128_f32[2]);
 
@@ -842,11 +607,6 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 	}
 
 	nextPos = XMLoadFloat3(&node->worldPosition);
-
-	if (battleSystem.isBattleActive)
-	{
-		ExpendActionPoint();
-	}
 }
 
 bool Player::CheckIfMovementAndRotationStopped()
@@ -908,61 +668,6 @@ void Player::GetGridIndices(int& x, int& y)
 	auto pos = GetPosition();
 	x = std::lroundf(pos.x);
 	y = std::lroundf(pos.z);
-}
-
-void Player::ToggleGridMapPicker(bool& gridPickerActive)
-{
-	if (Input::GetKeyUp(Keys::I))
-	{
-		gridPickerActive = !gridPickerActive;
-
-		if (gridPickerActive)
-		{
-			Transform transform;
-			transform.position = GetPosition();
-			transform.rotation = GetRotation();
-			auto gridMapPicker = GridMapPicker::system.Add(transform);
-
-			gridMapPicker->camera->targetActor = gridMapPicker;
-			GameUtils::SetActiveCamera(gridMapPicker->camera);
-
-			Grid::system.GetFirstActor()->SetActive(true);
-
-			SetTickEnabled(false);
-		}
-		else
-		{
-			GridMapPicker::system.GetFirstActor()->ReenablePlayer();
-		}
-	}
-}
-
-void Player::ExpendActionPoint()
-{
-	battleSystem.playerActionPoints--;
-	battleSystem.actionBarWidget->actionPoints = battleSystem.playerActionPoints;
-
-	if (battleSystem.playerActionPoints <= 0)
-	{
-		//Enter fatigue state
-		isFatigued = true;
-		playerStatusWidget->AddToViewport();
-	}
-}
-
-void Player::InflictDamage(int damage)
-{
-	if (guarding)
-	{
-		guarding = false;
-		return;
-	}
-
-	healthPoints -= damage;
-	if (healthPoints <= 0)
-	{
-		//@Todo: trigger game over
-	}
 }
 
 GridNode* Player::GetCurrentNode()
