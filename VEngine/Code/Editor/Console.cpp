@@ -135,7 +135,7 @@ void Console::Init()
 		std::make_pair([]() { debugMenu.worldMenuOpen = !debugMenu.worldMenuOpen; },
 			"Menu to open worlds at runtime during gameplay."));	
 	
-	executeMap.emplace(L"REPLACE",
+	executeMap.emplace(L"REP",
 		std::make_pair([]() { 
 			WorldEditor::actorReplaceModeActive = !WorldEditor::actorReplaceModeActive;
 			WorldEditor::actorReplaceModeActive ? Log("Actor replace mode active.") :
