@@ -379,6 +379,9 @@ bool Actor::HasTag(const std::string& tag)
 	return tags.find(tag) != tags.end();
 }
 
+//@Todo: something wrong where scaled down meshes are reverting to their 1x1x1 scale when calling this func.
+//I'm guessing it has to do with how the engine is storing the original Actor transform and then applying
+//it back to the actor before re-creating the physics actor state.
 void Actor::SetMeshesToDynamicPhysicsState()
 {
 	for (auto mesh : GetComponentsOfType<MeshComponent>())
