@@ -119,6 +119,14 @@ void Console::Init()
 		std::make_pair([]() { WorldEditor::texturePlacement = !WorldEditor::texturePlacement; },
 		"Enable texture placement mode in editor"));
 
+	executeMap.emplace(L"MESH",
+		std::make_pair([]() { 
+			WorldEditor::meshPlacement = !WorldEditor::meshPlacement; 
+			WorldEditor::meshPlacement ? Log("Mesh replace mode active.") :
+				Log("Mesh replace mode inactive.");
+			},
+		"Toggle mesh component placement mode in editor."));
+
 	executeMap.emplace(L"MATERIAL",
 		std::make_pair([]() { WorldEditor::materialPlacement = !WorldEditor::materialPlacement; },
 		"Enable material placement mode in editor"));

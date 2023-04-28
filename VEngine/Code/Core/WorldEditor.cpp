@@ -26,6 +26,7 @@ std::string actorTemplateFilename;
 WorldEditor::PickMode pickMode = WorldEditor::PickMode::Actor;
 
 bool WorldEditor::texturePlacement = false;
+bool WorldEditor::meshPlacement = false;
 bool WorldEditor::materialPlacement = false;
 bool WorldEditor::vertexPaintActive = false; 
 bool WorldEditor::actorReplaceModeActive = false;
@@ -67,6 +68,8 @@ void HandleActorPicking()
 		HitResult hit;
 		if (RaycastFromScreen(hit))
 		{
+			//@Todo: move all these 'placement' blocks into functions
+
 			//Assign selected texture in editor to mesh on click
 			if (!TextureSystem::selectedTextureInEditor.empty() && WorldEditor::texturePlacement)
 			{
@@ -75,6 +78,20 @@ void HandleActorPicking()
 				{
 					mesh->GetMaterial().materialShaderData.useTexture = true;
 					mesh->SetTexture(VString::wstos(TextureSystem::selectedTextureInEditor));
+					return;
+				}
+			}
+
+			if (!MeshActor::spawnMeshFilename.empty() && WorldEditor::meshPlacement)
+			{
+				auto mesh = dynamic_cast<MeshComponent*>(hit.hitComponent);
+				if (mesh)
+				{
+					mesh->meshComponentData.filename = MeshActor::spawnMeshFilename;
+					//@Todo: Even through this code block won't be hit during game runtime, it's still a leak
+					//to only recreate the GPU buffers without releasing them. Either make a MeshComponent::Cleanup()
+					//or figure something else out.
+					mesh->Create();
 					return;
 				}
 			}

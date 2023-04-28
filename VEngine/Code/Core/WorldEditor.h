@@ -20,6 +20,7 @@ namespace WorldEditor
 	};
 
 	extern bool texturePlacement;
+	extern bool meshPlacement;
 	extern bool materialPlacement;
 	extern bool vertexPaintActive;
 	extern bool actorReplaceModeActive;
