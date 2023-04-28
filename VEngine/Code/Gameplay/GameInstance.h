@@ -4,8 +4,6 @@
 #include "Core/Properties.h"
 #include "Core/Transform.h"
 
-struct Memory;
-
 //Instance holding data over the entirety of the game.
 //GameInstance is also used as a global save file of sorts, separate from .vmaps.
 namespace GameInstance
@@ -15,8 +13,6 @@ namespace GameInstance
 
 	//Used when continuing from game save files
 	extern std::string mapToLoadOnContinue;
-
-	extern std::map<std::string, Memory*> playerMemories;
 
 	extern int maxPlayerActionPoints;
 

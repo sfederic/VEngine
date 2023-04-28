@@ -14,9 +14,6 @@ struct PlayerDialogueTrigger : Actor
 	//Text to show on overlap
 	std::wstring playerThoughtText;
 
-	//Memory that can optionally activate player dialogue
-	std::string memoryToActivate;
-
 	//@Todo: wil need to come back here and fiddle with this bool in props for game saves.
 	bool alreadyActivated = false;
 

@@ -21,14 +21,6 @@ void PlayerDialogueTrigger::Tick(float deltaTime)
 {
     if (trigger->ContainsTarget() && !alreadyActivated)
     {
-        if (!memoryToActivate.empty())
-        {
-            if (!GameUtils::CheckIfMemoryExists(memoryToActivate))
-            {
-                return;
-            }
-        }
-
         auto player = Player::system.GetFirstActor();
         player->QuickThought(playerThoughtText);
 
@@ -42,6 +34,5 @@ Properties PlayerDialogueTrigger::GetProps()
 {
     auto props = __super::GetProps();
     props.Add("PlayerThoughtText", &playerThoughtText);
-    props.Add("MemoryToActivate", &memoryToActivate);
     return props;
 }

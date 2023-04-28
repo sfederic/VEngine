@@ -22,12 +22,6 @@ namespace GameUtils
 {
 	std::string levelToMoveTo;
 
-	bool CheckIfMemoryExists(const std::string memoryName)
-	{
-		auto memIt = GameInstance::playerMemories.find(memoryName);
-		return memIt != GameInstance::playerMemories.end();
-	}
-
 	void SetActiveCameraTarget(Actor* newTarget)
 	{
 		activeCamera->targetActor = newTarget;

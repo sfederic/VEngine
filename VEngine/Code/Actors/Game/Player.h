@@ -11,7 +11,6 @@ struct MemoryComponent;
 struct InteractWidget;
 struct MemoryMenuWidget;
 struct PlayerHealthWidget;
-struct Memory;
 struct GridActor;
 struct Unit;
 struct Trap;
@@ -32,7 +31,6 @@ public:
 	DialogueComponent* currentlyActiveDialogueComponent = nullptr;
 
 	InteractWidget* interactWidget = nullptr;
-	MemoryMenuWidget* memoryMenuWidget = nullptr;
 	PlayerHealthWidget* healthWidget = nullptr;
 
 	GridActor* gridActorInteractingWith = nullptr;
