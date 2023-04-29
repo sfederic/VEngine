@@ -88,7 +88,6 @@ private:
 	void RotationInput(float deltaTime);
 
 	void PrimaryAction();
-	void ToggleMemoryMenu();
 	void LerpPlayerCameraFOV(float deltaTime);
 
 	//PrimaryAction actor check functions
@@ -104,6 +103,8 @@ private:
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
 	void LinkToGridActor();
+	void MoveLinkedGridActor();
+	void RotateLinkedGridActor();
 	void PushbackGridActor();
 
 	void ToggleGrid();

@@ -83,8 +83,10 @@ void Player::Tick(float deltaTime)
 		//GameUtils::TriggerGameOver();
 	}
 
-	LinkToGridActor();
+	MoveLinkedGridActor();
+	RotateLinkedGridActor();
 	PushbackGridActor();
+	LinkToGridActor();
 
 	MovementInput(deltaTime);
 	RotationInput(deltaTime);
@@ -476,63 +478,74 @@ void Player::LinkToGridActor()
 			isInputLinkedToMoveableActor = false;
 			return;
 		}
+	}
+}
 
-		if (!linkedMoveableGridActor->HaveMovementAndRotationStopped())
-		{
-			return;
-		}
+void Player::MoveLinkedGridActor()
+{
+	if (linkedMoveableGridActor == nullptr || !linkedMoveableGridActor->HaveMovementAndRotationStopped())
+	{
+		return;
+	}
 
-		if (Input::GetKeyUp(Keys::W))
-		{
-			linkedMoveableGridActor->nextPos += GetForwardVectorV();
-			linkedMoveableGridActor->CheckNextNodeMoveIsValid();
-		}
-		else if (Input::GetKeyUp(Keys::S))
-		{
-			linkedMoveableGridActor->nextPos -= GetForwardVectorV();
-			linkedMoveableGridActor->CheckNextNodeMoveIsValid();
-		}
-		else if (Input::GetKeyUp(Keys::A))
-		{
-			linkedMoveableGridActor->nextPos -= GetRightVectorV();
-			linkedMoveableGridActor->CheckNextNodeMoveIsValid();
-		}
-		else if (Input::GetKeyUp(Keys::D))
-		{
-			linkedMoveableGridActor->nextPos += GetRightVectorV();
-			linkedMoveableGridActor->CheckNextNodeMoveIsValid();
-		}
-		else if (Input::GetKeyUp(Keys::E))
-		{
-			linkedMoveableGridActor->nextPos += GetUpVectorV();
-			linkedMoveableGridActor->CheckNextNodeMoveIsValid();
-		}
-		else if (Input::GetKeyUp(Keys::Q))
-		{
-			linkedMoveableGridActor->nextPos -= GetUpVectorV();
-			linkedMoveableGridActor->CheckNextNodeMoveIsValid();
-		}
+	if (Input::GetKeyUp(Keys::W))
+	{
+		linkedMoveableGridActor->nextPos += GetForwardVectorV();
+		linkedMoveableGridActor->CheckNextNodeMoveIsValid();
+	}
+	else if (Input::GetKeyUp(Keys::S))
+	{
+		linkedMoveableGridActor->nextPos -= GetForwardVectorV();
+		linkedMoveableGridActor->CheckNextNodeMoveIsValid();
+	}
+	else if (Input::GetKeyUp(Keys::A))
+	{
+		linkedMoveableGridActor->nextPos -= GetRightVectorV();
+		linkedMoveableGridActor->CheckNextNodeMoveIsValid();
+	}
+	else if (Input::GetKeyUp(Keys::D))
+	{
+		linkedMoveableGridActor->nextPos += GetRightVectorV();
+		linkedMoveableGridActor->CheckNextNodeMoveIsValid();
+	}
+	else if (Input::GetKeyUp(Keys::E))
+	{
+		linkedMoveableGridActor->nextPos += GetUpVectorV();
+		linkedMoveableGridActor->CheckNextNodeMoveIsValid();
+	}
+	else if (Input::GetKeyUp(Keys::Q))
+	{
+		linkedMoveableGridActor->nextPos -= GetUpVectorV();
+		linkedMoveableGridActor->CheckNextNodeMoveIsValid();
+	}
+}
 
-		if (Input::GetKeyUp(Keys::Right))
-		{
-			linkedMoveableGridActor->nextRot = VMath::AddRotationAngle(linkedMoveableGridActor->GetRotationV(),
-				VMath::GlobalUpVector(), 90.f);
-		}
-		else if (Input::GetKeyUp(Keys::Left))
-		{
-			linkedMoveableGridActor->nextRot = VMath::AddRotationAngle(linkedMoveableGridActor->GetRotationV(),
-				VMath::GlobalUpVector(), -90.f);
-		}
-		else if (Input::GetKeyUp(Keys::Down))
-		{
-			linkedMoveableGridActor->nextRot = VMath::AddRotationAngle(linkedMoveableGridActor->GetRotationV(),
-				VMath::GlobalRightVector(), -90.f);
-		}
-		else if (Input::GetKeyUp(Keys::Up))
-		{
-			linkedMoveableGridActor->nextRot = VMath::AddRotationAngle(linkedMoveableGridActor->GetRotationV(),
-				VMath::GlobalRightVector(), 90.f);
-		}
+void Player::RotateLinkedGridActor()
+{
+	if (linkedMoveableGridActor == nullptr || !linkedMoveableGridActor->HaveMovementAndRotationStopped())
+	{
+		return;
+	}
+
+	if (Input::GetKeyUp(Keys::Right))
+	{
+		linkedMoveableGridActor->nextRot = VMath::AddRotationAngle(linkedMoveableGridActor->GetRotationV(),
+			VMath::GlobalUpVector(), 90.f);
+	}
+	else if (Input::GetKeyUp(Keys::Left))
+	{
+		linkedMoveableGridActor->nextRot = VMath::AddRotationAngle(linkedMoveableGridActor->GetRotationV(),
+			VMath::GlobalUpVector(), -90.f);
+	}
+	else if (Input::GetKeyUp(Keys::Down))
+	{
+		linkedMoveableGridActor->nextRot = VMath::AddRotationAngle(linkedMoveableGridActor->GetRotationV(),
+			VMath::GlobalRightVector(), -90.f);
+	}
+	else if (Input::GetKeyUp(Keys::Up))
+	{
+		linkedMoveableGridActor->nextRot = VMath::AddRotationAngle(linkedMoveableGridActor->GetRotationV(),
+			VMath::GlobalRightVector(), 90.f);
 	}
 }
 
