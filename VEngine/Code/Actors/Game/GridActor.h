@@ -38,6 +38,10 @@ struct GridActor : Actor
 	//Used for when the grid actor is off the main grid, ignores GetNode() calls
 	bool disableGridInteract = false;
 
+	//Bools to denote whether GridActor can be moved by player's Link ability
+	bool canBeRotatedInLink = true;
+	bool canBeMovedInLink = true;
+
 	bool isInPushback = false;
 	XMVECTOR nextPushbackPosition = DirectX::XMVectorZero();
 	GridActor* hitActorOnPushback = nullptr;

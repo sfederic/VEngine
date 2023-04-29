@@ -86,6 +86,8 @@ Properties GridActor::GetProps()
 	props.Add("InteractKnownText", &interactKnownText);
 	props.Add("DisableGridInteract", &disableGridInteract);
 	props.Add("Obstacle", &isGridObstacle);
+	props.Add("Link Rotation", &canBeRotatedInLink);
+	props.Add("Link Movement", &canBeMovedInLink);
 	return props;
 }
 

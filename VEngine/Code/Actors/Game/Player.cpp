@@ -488,6 +488,11 @@ void Player::MoveLinkedGridActor()
 		return;
 	}
 
+	if (!linkedMoveableGridActor->canBeMovedInLink)
+	{
+		return;
+	}
+
 	if (Input::GetKeyUp(Keys::W))
 	{
 		linkedMoveableGridActor->nextPos += GetForwardVectorV();
@@ -523,6 +528,11 @@ void Player::MoveLinkedGridActor()
 void Player::RotateLinkedGridActor()
 {
 	if (linkedMoveableGridActor == nullptr || !linkedMoveableGridActor->HaveMovementAndRotationStopped())
+	{
+		return;
+	}
+
+	if (!linkedMoveableGridActor->canBeRotatedInLink)
 	{
 		return;
 	}
