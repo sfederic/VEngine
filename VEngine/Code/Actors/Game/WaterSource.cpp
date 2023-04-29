@@ -19,6 +19,13 @@ void WaterSource::Create()
 	mesh->SetRastState(RastStates::noBackCull);
 }
 
+Properties WaterSource::GetProps()
+{
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	return props;
+}
+
 bool WaterSource::Contains(XMVECTOR point)
 {
 	return boxTrigger->Contains(point);

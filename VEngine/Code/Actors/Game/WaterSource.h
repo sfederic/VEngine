@@ -13,6 +13,7 @@ public:
 
 	WaterSource();
 	void Create() override;
+	Properties GetProps() override;
 
 	bool Contains(XMVECTOR point);
 

@@ -23,7 +23,7 @@ void Bucket::Tick(float deltaTime)
 Properties Bucket::GetProps()
 {
 	auto props = __super::GetProps();
-	props.title = "Bucket";
+	props.title = GetTypeName();
 	props.Add("IsFilled", &isFilled);
 	return props;
 }
