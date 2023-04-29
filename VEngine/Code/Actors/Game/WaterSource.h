@@ -14,6 +14,8 @@ public:
 	WaterSource();
 	void Create() override;
 
+	bool Contains(XMVECTOR point);
+
 private:
 	BoxTriggerComponent* boxTrigger = nullptr;
 	MeshComponent* mesh = nullptr;

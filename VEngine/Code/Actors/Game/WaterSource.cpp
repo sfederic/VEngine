@@ -18,3 +18,8 @@ void WaterSource::Create()
 	mesh->SetMeshFilename("plane.vmesh");
 	mesh->SetRastState(RastStates::noBackCull);
 }
+
+bool WaterSource::Contains(XMVECTOR point)
+{
+	return boxTrigger->Contains(point);
+}
