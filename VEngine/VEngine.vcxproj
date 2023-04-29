@@ -118,6 +118,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Code\Actors\Game\BreakableCube.cpp" />
+    <ClCompile Include="Code\Actors\Game\SpotLightTower.cpp" />
     <ClCompile Include="Code\Core\BMPFileWriter.cpp" />
     <ClCompile Include="Code\Actors\Game\ConditionTrigger.cpp" />
     <ClCompile Include="Code\Actors\Game\DialogueTrigger.cpp" />
@@ -264,6 +265,7 @@
     <ClCompile Include="Code\Actors\DebugActors\DebugLightProbe.cpp" />
     <ClCompile Include="Code\Render\RenderTarget.cpp" />
     <ClInclude Include="Code\Actors\Game\BreakableCube.h" />
+    <ClInclude Include="Code\Actors\Game\SpotLightTower.h" />
     <ClInclude Include="Code\Core\BMPFileWriter.h" />
     <ClInclude Include="Code\Actors\Game\ConditionTrigger.h" />
     <ClInclude Include="Code\Actors\Game\DialogueTrigger.h" />

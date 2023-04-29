@@ -37,7 +37,7 @@ UID
 1512537488
 next
 GridActor
-4
+3
  Enabled
 1
  Position
@@ -76,7 +76,7 @@ next
  Enabled
 1
  Position
-4 0 0
+4 0 2
  Rotation
 -0 0 -0 1
  Scale
@@ -98,15 +98,15 @@ Interact Text
 InteractKnownText
 
 Link Movement
-0
+1
 Link Rotation
-0
+1
 Name
-GridActor1
+GridActor3
 Obstacle
 1
 UID
-3993262846
+1995944591
 next
  Enabled
 1
@@ -142,41 +142,6 @@ Obstacle
 1
 UID
 128032496
-next
- Enabled
-1
- Position
-4 0 3
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Inspect
-1
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Name
-GridActor3
-Obstacle
-1
-UID
-1995944591
 next
 MeshActor
 3
@@ -242,6 +207,43 @@ Player0
 UID
 1806933118
 next
+SpotLightTower
+1
+ Enabled
+1
+ Position
+2 -0 2
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Name
+SpotLightTower0
+Obstacle
+1
+UID
+1516018367
+next
 CameraComponent
 1
 1806933118
@@ -278,7 +280,7 @@ File
 UID
 2614358571
 next
-3993262846
+1516018367
 Dialogue
  Enabled
 1
@@ -287,7 +289,7 @@ Dialogue
 File
 
 UID
-1769872166
+2003740876
 next
 128032496
 Dialogue
@@ -470,14 +472,14 @@ Trans. Occlude
 UID
 936878357
 next
-3993262846
+1516018367
 Mesh
  Enabled
 1
  Pos
-4 0 0
+2 -0 2
  Rot
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -515,13 +517,13 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-barrel.vmesh
+cube.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-749832071
+1391713363
 next
 128032496
 Mesh
@@ -581,7 +583,7 @@ Mesh
  Enabled
 1
  Pos
-4 0 3
+4 0 2
  Rot
 -0 0 -0 1
  Scale
@@ -840,5 +842,30 @@ Trans. Occlude
 0
 UID
 508419118
+next
+SpotLightComponent
+1
+1516018367
+SpotLight
+ Enabled
+1
+ Pos
+0 1 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
+Spot Angle
+70
+UID
+194013893
 next
 end
