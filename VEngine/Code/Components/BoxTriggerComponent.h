@@ -17,7 +17,7 @@ public:
 	BoxTriggerComponent();
 	Properties GetProps() override;
 
-	bool Intersects(const BoundingOrientedBox& boundsToCheckAgainst);
+	bool Intersects(const BoundingOrientedBox& boundsInWorldSpaceToCheckAgainst);
 	bool IntersectsWithAnyBoundingBoxInWorld();
 
 	bool Contains(XMVECTOR point);

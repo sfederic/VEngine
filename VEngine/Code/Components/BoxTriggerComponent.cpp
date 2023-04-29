@@ -23,9 +23,10 @@ Properties BoxTriggerComponent::GetProps()
 	return props;
 }
 
-bool BoxTriggerComponent::Intersects(const BoundingOrientedBox& boundsToCheckAgainst)
+bool BoxTriggerComponent::Intersects(const BoundingOrientedBox& boundsInWorldSpaceToCheckAgainst)
 {
-	return boundingBox.Intersects(boundsToCheckAgainst);
+	auto bbInWorld = VMath::GetBoundingBoxInWorld(this);
+	return bbInWorld.Intersects(boundsInWorldSpaceToCheckAgainst);
 }
 
 bool BoxTriggerComponent::Contains(XMVECTOR point)
