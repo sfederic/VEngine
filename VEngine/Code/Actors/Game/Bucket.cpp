@@ -3,14 +3,22 @@
 #include "Components/MeshComponent.h"
 #include "WaterSource.h"
 #include "Core/VMath.h"
+#include "Physics/Raycast.h"
 
 void Bucket::Create()
 {
 	mesh->SetMeshFilename("hollow_barrel.vmesh");
 }
 
+void Bucket::Start()
+{
+	__super::Start();
+}
+
 void Bucket::Tick(float deltaTime)
 {
+	__super::Tick(deltaTime);
+
 	CheckIfInWaterSource();
 	EmptyWater();
 }
@@ -27,12 +35,14 @@ void Bucket::CheckIfInWaterSource()
 {
 	if (!isFilled)
 	{
-		if (XMVector4Equal(GetUpVectorV(), VMath::GlobalUpVector()))
+		if (VMath::VecEqual(GetUpVectorV(), VMath::GlobalUpVector()))
 		{
 			for (auto& waterSource : WaterSource::system.GetActors())
 			{
-				waterSource->Contains(GetPositionV());
-				isFilled = true;
+				if (waterSource->Contains(GetPositionV()))
+				{
+					isFilled = true;
+				}
 			}
 		}
 	}
@@ -42,9 +52,20 @@ void Bucket::EmptyWater()
 {
 	if (isFilled)
 	{
-		if (XMVector4Equal(GetUpVectorV(), -VMath::GlobalUpVector()))
+		if (VMath::VecEqual(GetUpVectorV(), -VMath::GlobalUpVector()))
 		{
 			isFilled = false;
+			
+			HitResult hit(this);
+			if (Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 100.f))
+			{
+				Transform t;
+				t.position = hit.hitPos;
+				t.position.y += 0.05f;
+				auto puddle = MeshComponent::system.Add("", nullptr, MeshComponent("node.vmesh", "water.jpg"));
+				puddle->Create();
+				puddle->SetTransform(t);
+			}
 		}
 	}
 }
