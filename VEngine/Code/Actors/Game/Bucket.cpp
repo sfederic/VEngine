@@ -19,3 +19,11 @@ void Bucket::Tick(float deltaTime)
 		}
 	}
 }
+
+Properties Bucket::GetProps()
+{
+	auto props = __super::GetProps();
+	props.title = "Bucket";
+	props.Add("IsFilled", &isFilled);
+	return props;
+}
