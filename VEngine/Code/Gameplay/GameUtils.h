@@ -14,7 +14,6 @@ class Polyboard;
 //Utility functions for in-game stuff
 namespace GameUtils
 {
-	bool CheckIfMemoryExists(const std::string memoryName);
 	void SetActiveCameraTarget(Actor* newTarget);
 	void SetActiveCameraTargetAndZoomIn(Actor* newTarget);
 	void SetActiveCameraTargetAndZoomOut(Actor* newTarget);
