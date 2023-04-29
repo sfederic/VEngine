@@ -80,8 +80,8 @@ public:
 private:
 	float nextCameraFOV = 0.f;
 
-	bool isInputLinkedToMoveableActor = false;
-	GridActor* linkedMoveableGridActor = nullptr;
+	bool isInputLinkedToGridActor = false;
+	GridActor* linkedGridActor = nullptr;
 
 	bool CheckIfMovementAndRotationStopped();
 	void MovementInput(float deltaTime);
