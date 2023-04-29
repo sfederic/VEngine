@@ -12,6 +12,11 @@ GearSet::GearSet()
 	rootComponent->AddChild(boxTrigger);
 }
 
+void GearSet::Create()
+{
+	mesh->SetMeshFilename("gear.vmesh");
+}
+
 Properties GearSet::GetProps()
 {
 	auto props = __super::GetProps();
@@ -19,7 +24,7 @@ Properties GearSet::GetProps()
 	return props;
 }
 
-bool GearSet::Contains(XMVECTOR point)
+bool GearSet::Intersects(const BoundingOrientedBox& intersectCheck)
 {
-	return boxTrigger->Contains(point);
+	return boxTrigger->Intersects(intersectCheck);
 }

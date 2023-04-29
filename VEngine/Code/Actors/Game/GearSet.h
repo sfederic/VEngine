@@ -12,9 +12,10 @@ public:
 	ACTOR_SYSTEM(GearSet);
 
 	GearSet();
+	void Create() override;
 	Properties GetProps() override;
 
-	bool Contains(XMVECTOR point);
+	bool Intersects(const BoundingOrientedBox& intersectCheck);
 
 private:
 	BoxTriggerComponent* boxTrigger = nullptr;
