@@ -207,11 +207,14 @@ void DuplicateActor()
 
 void SaveWorld()
 {
-	if (Input::GetKeyHeld(Keys::Ctrl))
+	if (!Core::gameplayOn)
 	{
-		if (Input::GetKeyDown(Keys::S))
+		if (Input::GetKeyHeld(Keys::Ctrl))
 		{
-			FileSystem::SerialiseAllSystems();
+			if (Input::GetKeyDown(Keys::S))
+			{
+				FileSystem::SerialiseAllSystems();
+			}
 		}
 	}
 }
