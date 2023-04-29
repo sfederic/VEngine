@@ -15,7 +15,7 @@ public:
 	void Create() override;
 	Properties GetProps() override;
 
-	bool Intersects(const BoundingOrientedBox& intersectCheck);
+	bool Intersects(const BoundingOrientedBox& intersectCheck) const;
 
 private:
 	BoxTriggerComponent* boxTrigger = nullptr;

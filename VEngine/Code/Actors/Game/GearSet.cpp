@@ -24,7 +24,7 @@ Properties GearSet::GetProps()
 	return props;
 }
 
-bool GearSet::Intersects(const BoundingOrientedBox& intersectCheck)
+bool GearSet::Intersects(const BoundingOrientedBox& intersectCheck) const
 {
 	return boxTrigger->Intersects(intersectCheck);
 }
