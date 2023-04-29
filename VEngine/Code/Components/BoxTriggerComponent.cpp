@@ -17,10 +17,15 @@ BoxTriggerComponent::BoxTriggerComponent()
 Properties BoxTriggerComponent::GetProps()
 {
 	auto props = __super::GetProps();
-	props.title = "BoxTriggerComponent";
+	props.title = GetTypeName();
 	props.Add("Extents", &boundingBox.Extents);
 	props.Add("Offset", &boundingBox.Center);
 	return props;
+}
+
+bool BoxTriggerComponent::Intersects(const BoundingOrientedBox& boundsToCheckAgainst)
+{
+	return boundingBox.Intersects(boundsToCheckAgainst);
 }
 
 bool BoxTriggerComponent::Contains(XMVECTOR point)

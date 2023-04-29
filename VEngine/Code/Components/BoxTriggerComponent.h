@@ -17,11 +17,13 @@ public:
 	BoxTriggerComponent();
 	Properties GetProps() override;
 
+	bool Intersects(const BoundingOrientedBox& boundsToCheckAgainst);
+	bool IntersectsWithAnyBoundingBoxInWorld();
+
 	bool Contains(XMVECTOR point);
 	bool ContainsTarget();
 	void SetTargetAsPlayer();
 	XMVECTOR GetRandomPointInTrigger();
-	bool IntersectsWithAnyBoundingBoxInWorld();
 
 	void SetExtents(float x, float y, float z);
 	XMFLOAT3 GetExtents();
