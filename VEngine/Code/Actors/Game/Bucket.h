@@ -12,5 +12,8 @@ public:
 	Properties GetProps() override;
 
 private:
+	void CheckIfInWaterSource();
+	void EmptyWater();
+
 	bool isFilled = false;
 };

@@ -2,6 +2,7 @@
 #include "Bucket.h"
 #include "Components/MeshComponent.h"
 #include "WaterSource.h"
+#include "Core/VMath.h"
 
 void Bucket::Create()
 {
@@ -10,14 +11,8 @@ void Bucket::Create()
 
 void Bucket::Tick(float deltaTime)
 {
-	if (!isFilled)
-	{
-		for (auto& waterSource : WaterSource::system.GetActors())
-		{
-			waterSource->Contains(GetPositionV());
-			isFilled = true;
-		}
-	}
+	CheckIfInWaterSource();
+	EmptyWater();
 }
 
 Properties Bucket::GetProps()
@@ -26,4 +21,30 @@ Properties Bucket::GetProps()
 	props.title = GetTypeName();
 	props.Add("IsFilled", &isFilled);
 	return props;
+}
+
+void Bucket::CheckIfInWaterSource()
+{
+	if (!isFilled)
+	{
+		if (XMVector4Equal(GetUpVectorV(), VMath::GlobalUpVector()))
+		{
+			for (auto& waterSource : WaterSource::system.GetActors())
+			{
+				waterSource->Contains(GetPositionV());
+				isFilled = true;
+			}
+		}
+	}
+}
+
+void Bucket::EmptyWater()
+{
+	if (isFilled)
+	{
+		if (XMVector4Equal(GetUpVectorV(), -VMath::GlobalUpVector()))
+		{
+			isFilled = false;
+		}
+	}
 }
