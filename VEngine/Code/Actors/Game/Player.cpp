@@ -504,7 +504,10 @@ void Player::MoveLinkedGridActor()
 		if (checkLinkMovement(linkedGridActor->canBeMovedInLink))
 		{
 			linkedGridActor->nextPos += GetForwardVectorV();
-			linkedGridActor->CheckNextNodeMoveIsValid();
+			if (linkedGridActor->CheckNextNodeMoveIsValid())
+			{
+				linkedGridActor->OnLinkMove();
+			}
 		}
 	}
 	else if (Input::GetKeyUp(Keys::S))
@@ -512,7 +515,10 @@ void Player::MoveLinkedGridActor()
 		if (checkLinkMovement(linkedGridActor->canBeMovedInLink))
 		{
 			linkedGridActor->nextPos -= GetForwardVectorV();
-			linkedGridActor->CheckNextNodeMoveIsValid();
+			if (linkedGridActor->CheckNextNodeMoveIsValid())
+			{
+				linkedGridActor->OnLinkMove();
+			}
 		}
 	}
 	else if (Input::GetKeyUp(Keys::A))
@@ -520,7 +526,10 @@ void Player::MoveLinkedGridActor()
 		if (checkLinkMovement(linkedGridActor->canBeMovedInLink))
 		{
 			linkedGridActor->nextPos -= GetRightVectorV();
-			linkedGridActor->CheckNextNodeMoveIsValid();
+			if (linkedGridActor->CheckNextNodeMoveIsValid())
+			{
+				linkedGridActor->OnLinkMove();
+			}
 		}
 	}
 	else if (Input::GetKeyUp(Keys::D))
@@ -528,23 +537,10 @@ void Player::MoveLinkedGridActor()
 		if (checkLinkMovement(linkedGridActor->canBeMovedInLink))
 		{
 			linkedGridActor->nextPos += GetRightVectorV();
-			linkedGridActor->CheckNextNodeMoveIsValid();
-		}
-	}
-	else if (Input::GetKeyUp(Keys::E))
-	{
-		if (checkLinkMovement(linkedGridActor->canBeMovedInLink))
-		{
-			linkedGridActor->nextPos += GetUpVectorV();
-			linkedGridActor->CheckNextNodeMoveIsValid();
-		}
-	}
-	else if (Input::GetKeyUp(Keys::Q))
-	{
-		if (checkLinkMovement(linkedGridActor->canBeMovedInLink))
-		{
-			linkedGridActor->nextPos -= GetUpVectorV();
-			linkedGridActor->CheckNextNodeMoveIsValid();
+			if (linkedGridActor->CheckNextNodeMoveIsValid())
+			{
+				linkedGridActor->OnLinkMove();
+			}
 		}
 	}
 }
@@ -572,6 +568,7 @@ void Player::RotateLinkedGridActor()
 		{
 			linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
 				VMath::GlobalUpVector(), 90.f);
+			linkedGridActor->OnLinkRotate();
 		}
 	}
 	else if (Input::GetKeyUp(Keys::Left))
@@ -580,6 +577,7 @@ void Player::RotateLinkedGridActor()
 		{
 			linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
 				VMath::GlobalUpVector(), -90.f);
+			linkedGridActor->OnLinkRotate();
 		}
 	}
 	else if (Input::GetKeyUp(Keys::Down))
@@ -588,6 +586,7 @@ void Player::RotateLinkedGridActor()
 		{
 			linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
 				VMath::GlobalRightVector(), -90.f);
+			linkedGridActor->OnLinkRotate();
 		}
 	}
 	else if (Input::GetKeyUp(Keys::Up))
@@ -596,6 +595,7 @@ void Player::RotateLinkedGridActor()
 		{
 			linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
 				VMath::GlobalRightVector(), 90.f);
+			linkedGridActor->OnLinkRotate();
 		}
 	}
 }

@@ -54,6 +54,9 @@ struct GridActor : Actor
 
 	GridActor();
 
+	virtual void OnLinkRotate() {}
+	virtual void OnLinkMove() {}
+
 	virtual void Interact() {}
 
 	//Called when this GridActor is attacked.
@@ -71,7 +74,7 @@ struct GridActor : Actor
 	//returns the node the gridactor is currently on.
 	GridNode* GetCurrentNode();
 
-	void CheckNextNodeMoveIsValid();
+	bool CheckNextNodeMoveIsValid();
 
 	//Called when the actor is 'pushedback'ed by player or other actor, exploding the actor
 	//back into contact with something.
