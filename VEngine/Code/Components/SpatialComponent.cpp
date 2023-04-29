@@ -310,6 +310,11 @@ XMVECTOR SpatialComponent::GetUpVectorV()
 	return XMVector3Normalize(GetWorldMatrix().r[1]);
 }
 
+BoundingOrientedBox SpatialComponent::GetBoundsInWorldSpace()
+{
+	return VMath::GetBoundingBoxInWorld(this);
+}
+
 void SpatialComponent::Pitch(float angle)
 {
 	//The RightFromQuat is important here as GetRightVector() grabs the global directional vector, 

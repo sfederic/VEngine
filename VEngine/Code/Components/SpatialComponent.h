@@ -61,6 +61,7 @@ public:
 	XMVECTOR GetUpVectorV();
 
 	auto GetBoundingBox() { return boundingBox; }
+	BoundingOrientedBox GetBoundsInWorldSpace();
 	XMVECTOR GetBoundsExtents() { return XMLoadFloat3(&boundingBox.Extents); }
 	XMVECTOR GetBoundsCenter() { return XMLoadFloat3(&boundingBox.Center); }
 	void SetBoundsExtents(XMFLOAT3 extents) { boundingBox.Extents = extents; }
