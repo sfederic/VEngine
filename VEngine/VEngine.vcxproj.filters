@@ -551,9 +551,6 @@
     <ClCompile Include="Code\Core\BMPFileWriter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\BreakableCube.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\DebugActors\DebugLightProbe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -561,6 +558,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\Game\SpotLightTower.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Actors\Game\Bucket.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1149,9 +1149,6 @@
     <ClInclude Include="Code\Core\BMPFileWriter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\BreakableCube.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Actors\DebugActors\DebugLightProbe.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1159,6 +1156,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\SpotLightTower.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\Bucket.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
