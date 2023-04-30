@@ -97,7 +97,7 @@ public:
 
 	bool IsActive() { return active; }
 
-	void SetVisibility(bool visibility) { visible = visibility; }
+	void SetVisibility(bool visibility);
 	bool IsVisible() { return visible; }
 
 	void SetTickEnabled(bool enabled);
@@ -105,6 +105,7 @@ public:
 
 	//Set Actor and components active field as opposite of what it currently is.
 	void ToggleActive();
+	void ToggleVisibility();
 
 	void AddChild(Actor* actor);
 

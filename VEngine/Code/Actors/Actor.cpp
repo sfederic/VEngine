@@ -246,6 +246,21 @@ void Actor::SetActive(bool newActiveValue)
 	}
 }
 
+void Actor::SetVisibility(bool visibility)
+{
+	visible = visibility;
+
+	for (auto& [name, component] : componentMap)
+	{
+		component->SetVisibility(visible);
+	}
+
+	for (auto child : children)
+	{
+		child->SetVisibility(visible);
+	}
+}
+
 void Actor::SetTickEnabled(bool enabled)
 {
 	tickEnabled = enabled;
@@ -255,6 +270,12 @@ void Actor::ToggleActive()
 {
 	active = !active;
 	SetActive(active);
+}
+
+void Actor::ToggleVisibility()
+{
+	visible = !visible;
+	SetVisibility(visible);
 }
 
 void Actor::AddChild(Actor* actor)
