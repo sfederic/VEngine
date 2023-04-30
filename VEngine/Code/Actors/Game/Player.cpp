@@ -498,7 +498,8 @@ void Player::LinkToGridActor()
 	{
 		if (Input::GetKeyUp(Keys::BackSpace))
 		{
-			HitResult hit(linkedGridActor);
+			linkedGridActor->SetGridPosition();
+			HitResult hit;
 			linkedGridActor->GetCurrentNode()->RecalcNodeHeight(hit);
 			linkedGridActor = nullptr;
 			camera->targetActor = this;
