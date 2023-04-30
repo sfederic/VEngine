@@ -75,10 +75,6 @@ void Console::Init()
 		std::make_pair([]() { debugMenu.skeletalAnimationMenuOpen = !debugMenu.skeletalAnimationMenuOpen; },
 			"Show selected skeleton's animations"));
 
-	executeMap.emplace(L"RESET",
-		std::make_pair([]() { FileSystem::ReloadCurrentWorld(); },
-		"Reload current world"));
-
 	executeMap.emplace(L"CORE",
 		std::make_pair([]() { debugMenu.coreMenuOpen = !debugMenu.coreMenuOpen; },
 		"Show core engine variables"));
@@ -86,10 +82,6 @@ void Console::Init()
 	executeMap.emplace(L"BAKE",
 		std::make_pair([]() { Renderer::RenderLightProbeViews(); },
 		"Work through light probes in map and get their RBG values from a cubemap rendering"));
-
-	//executeMap.emplace(L"LIGHT",
-	//	std::make_pair([]() { Renderer::LightMapCast(); },
-	//		""));
 
 	executeMap.emplace(L"BIN",
 		std::make_pair([]() { FileSystem::WriteAllSystemsToBinary(); },
