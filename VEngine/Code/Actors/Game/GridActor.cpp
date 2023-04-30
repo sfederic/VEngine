@@ -203,3 +203,8 @@ bool GridActor::HaveMovementAndRotationStopped()
 {
 	return XMVector4Equal(GetPositionV(), nextPos) && XMQuaternionEqual(GetRotationV(), nextRot);
 }
+
+void GridActor::AddNextRotation(XMVECTOR axis, float angle)
+{
+	nextRot = VMath::AddRotationAngle(nextRot, axis, angle);
+}

@@ -84,4 +84,6 @@ struct GridActor : Actor
 	ForwardFace GetCurrentForwardFace();
 
 	bool HaveMovementAndRotationStopped();
+
+	void AddNextRotation(XMVECTOR axis, float angle);
 };
