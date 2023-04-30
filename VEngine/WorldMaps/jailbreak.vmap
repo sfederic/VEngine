@@ -37,7 +37,7 @@ UID
 1512537488
 next
 GridActor
-3
+2
  Enabled
 1
  Position
@@ -108,41 +108,6 @@ Obstacle
 UID
 1995944591
 next
- Enabled
-1
- Position
-0 0 2
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Inspect
-1
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Name
-GridActor2
-Obstacle
-1
-UID
-128032496
-next
 MeshActor
 3
  Enabled
@@ -207,43 +172,6 @@ Player0
 UID
 1806933118
 next
-SpotLightTower
-1
- Enabled
-1
- Position
-2 -0 2
- Rotation
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Inspect
-1
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Name
-SpotLightTower0
-Obstacle
-1
-UID
-1516018367
-next
 CameraComponent
 1
 1806933118
@@ -268,7 +196,7 @@ UID
 2281662712
 next
 DialogueComponent
-5
+3
 2732206837
 Dialogue
  Enabled
@@ -279,28 +207,6 @@ File
 
 UID
 2614358571
-next
-1516018367
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-2003740876
-next
-128032496
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-856941279
 next
 1995944591
 Dialogue
@@ -418,7 +324,7 @@ UID
 2682562237
 next
 MeshComponent
-8
+6
 2732206837
 Mesh
  Enabled
@@ -472,112 +378,6 @@ Trans. Occlude
 UID
 936878357
 next
-1516018367
-Mesh
- Enabled
-1
- Pos
-2 -0 2
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1391713363
-next
-128032496
-Mesh
- Enabled
-1
- Pos
-0 0 2
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2976525733
-next
 1995944591
 Mesh
  Enabled
@@ -630,6 +430,59 @@ Trans. Occlude
 0
 UID
 506619936
+next
+1806933118
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+508419118
 next
 4024946789
 Mesh
@@ -789,83 +642,5 @@ Trans. Occlude
 0
 UID
 3561769452
-next
-1806933118
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-char.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-508419118
-next
-SpotLightComponent
-1
-1516018367
-SpotLight
- Enabled
-1
- Pos
-0 1 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Colour
-1 1 1 1
-Intensity
-25
-LightEnabled
-1
-Spot Angle
-70
-UID
-194013893
 next
 end
