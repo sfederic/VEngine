@@ -1,12 +1,11 @@
 #pragma once
 
-#include "../Actor.h"
-#include "../ActorSystem.h"
+#include "GridActor.h"
 
 class BoxTriggerComponent;
 class MeshComponent;
 
-class GearSet : public Actor
+class GearSet : public GridActor
 {
 public:
 	ACTOR_SYSTEM(GearSet);
@@ -19,5 +18,4 @@ public:
 
 private:
 	BoxTriggerComponent* boxTrigger = nullptr;
-	MeshComponent* mesh = nullptr;
 };

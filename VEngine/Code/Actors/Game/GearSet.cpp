@@ -5,9 +5,6 @@
 
 GearSet::GearSet()
 {
-	mesh = CreateComponent<MeshComponent>("Mesh");
-	rootComponent = mesh;
-
 	boxTrigger = CreateComponent<BoxTriggerComponent>("BoxTrigger");
 	rootComponent->AddChild(boxTrigger);
 }
@@ -15,6 +12,8 @@ GearSet::GearSet()
 void GearSet::Create()
 {
 	mesh->SetMeshFilename("gear.vmesh");
+
+	canBeMovedInLink = false;
 }
 
 Properties GearSet::GetProps()
