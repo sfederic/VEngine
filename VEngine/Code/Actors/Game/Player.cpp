@@ -83,6 +83,8 @@ void Player::Tick(float deltaTime)
 		//GameUtils::TriggerGameOver();
 	}
 
+	HighlightLinkableGridActor();
+
 	MoveLinkedGridActor();
 	RotateLinkedGridActor();
 	PushbackGridActor();
@@ -128,6 +130,31 @@ void Player::ToggleGrid()
 	{
 		GameUtils::PlayAudioOneShot("sword_sheathe.wav");
 		Grid::system.GetOnlyActor()->ToggleActive();
+	}
+}
+
+void Player::HighlightLinkableGridActor()
+{
+	HitResult hit(this);
+	if (Raycast(hit, GetPositionV(), GetMeshForward(), 100.f))
+	{
+		auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
+		if (gridActor)
+		{
+			highlightedGridActor = gridActor;
+			for (auto mesh : highlightedGridActor->GetComponentsOfType<MeshComponent>())
+			{
+				mesh->SetAmbientColour(XMFLOAT4(0.9f, 0.3f, 0.1f, 1.f));
+			}
+		}
+	}
+	else if (highlightedGridActor != nullptr)
+	{
+		for (auto mesh : highlightedGridActor->GetComponentsOfType<MeshComponent>())
+		{
+			mesh->SetAmbientColour(XMFLOAT4(1.f, 1.f, 1.f, 1.f));
+		}
+		highlightedGridActor = nullptr;
 	}
 }
 

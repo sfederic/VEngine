@@ -12,7 +12,6 @@ struct MemoryMenuWidget;
 struct PlayerHealthWidget;
 struct GridActor;
 struct Unit;
-struct Trap;
 struct MeshComponent;
 struct CameraComponent;
 struct GridNode;
@@ -108,4 +107,7 @@ private:
 	void PushbackGridActor();
 
 	void ToggleGrid();
+
+	void HighlightLinkableGridActor();
+	GridActor* highlightedGridActor = nullptr;
 };
