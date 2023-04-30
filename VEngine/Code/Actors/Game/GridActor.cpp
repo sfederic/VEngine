@@ -208,3 +208,8 @@ void GridActor::AddNextRotation(XMVECTOR axis, float angle)
 {
 	nextRot = VMath::AddRotationAngle(nextRot, axis, angle);
 }
+
+void GridActor::AddNextPosition(XMVECTOR offset)
+{
+	nextPos += offset;
+}

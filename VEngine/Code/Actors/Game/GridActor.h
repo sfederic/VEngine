@@ -86,4 +86,5 @@ struct GridActor : Actor
 	bool HaveMovementAndRotationStopped();
 
 	void AddNextRotation(XMVECTOR axis, float angle);
+	void AddNextPosition(XMVECTOR offset);
 };
