@@ -21,4 +21,5 @@ private:
 	BoxTriggerComponent* boxTrigger = nullptr;
 
 	std::string gearSetDoorName;
+	int numDoorIncrementsDone = 0;
 };

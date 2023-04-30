@@ -36,7 +36,11 @@ void GearSet::IncrementDoor()
 	auto door = dynamic_cast<GearSetDoor*>(World::GetActorByNameAllowNull(gearSetDoorName));
 	if (door)
 	{
-		door->AddNextPosition(XMVectorSet(0.f, 1.f, 0.f, 1.f));
+		if (numDoorIncrementsDone < door->maxNumIncrements)
+		{
+			numDoorIncrementsDone++;
+			door->AddNextPosition(XMVectorSet(0.f, 0.1f, 0.f, 1.f));
+		}
 	}
 	else
 	{
