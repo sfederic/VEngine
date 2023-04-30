@@ -3,7 +3,6 @@
 #include "Components/MeshComponent.h"
 #include "GearSet.h"
 
-
 void Gear::Create()
 {
 	mesh->SetMeshFilename("gear.vmesh");
@@ -15,7 +14,7 @@ void Gear::OnLinkRotate()
 	{
 		if (gearSet->Intersects(mesh->GetBoundsInWorldSpace()))
 		{
-			gearSet->AddRotation(gearSet->GetRightVectorV(), 90.f);
+			gearSet->AddNextRotation(gearSet->GetUpVectorV(), 90.f);
 		}
 	}
 }
