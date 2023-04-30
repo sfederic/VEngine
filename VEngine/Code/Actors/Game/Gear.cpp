@@ -15,6 +15,7 @@ void Gear::OnLinkRotate()
 		if (gearSet->Intersects(mesh->GetBoundsInWorldSpace()))
 		{
 			gearSet->AddNextRotation(gearSet->GetUpVectorV(), 90.f);
+			gearSet->IncrementDoor();
 		}
 	}
 }

@@ -15,7 +15,10 @@ public:
 	Properties GetProps() override;
 
 	bool Intersects(const BoundingOrientedBox& intersectCheck) const;
+	void IncrementDoor();
 
 private:
 	BoxTriggerComponent* boxTrigger = nullptr;
+
+	std::string gearSetDoorName;
 };
