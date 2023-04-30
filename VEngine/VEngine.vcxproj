@@ -267,6 +267,7 @@
     <ClCompile Include="Code\Actors\Game\WaterSource.cpp" />
     <ClCompile Include="Code\Actors\Game\Gear.cpp" />
     <ClCompile Include="Code\Actors\Game\GearSet.cpp" />
+    <ClCompile Include="Code\Actors\Game\GearSetDoor.cpp" />
     <ClInclude Include="Code\Actors\Game\Bucket.h" />
     <ClInclude Include="Code\Actors\Game\SpotLightTower.h" />
     <ClInclude Include="Code\Core\BMPFileWriter.h" />
@@ -563,6 +564,7 @@
     <ClInclude Include="Code\Actors\Game\WaterSource.h" />
     <ClInclude Include="Code\Actors\Game\Gear.h" />
     <ClInclude Include="Code\Actors\Game\GearSet.h" />
+    <ClInclude Include="Code\Actors\Game\GearSetDoor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
