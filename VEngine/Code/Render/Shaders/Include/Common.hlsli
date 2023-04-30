@@ -422,7 +422,7 @@ float4 GetShadowFactor(float4 shadowPos)
 float4 CalcFinalColour(float4 vertexColour, LightingResult lightResult, float4 shadowFactor, float4 texColour)
 {
     float4 finalColour = ((globalAmbient + lightResult.diffuse + lightResult.specular) + shadowFactor) * texColour;
-    finalColour.a = material.ambient.a;
+    finalColour *= material.ambient;
     finalColour *= vertexColour;
     return finalColour;
 }
