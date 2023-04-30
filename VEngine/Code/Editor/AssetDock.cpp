@@ -215,22 +215,21 @@ void AssetDock::AssetFolderClicked()
         auto fileExtension = std::filesystem::path(filePath).extension();
         
         auto extToFuncIt = fileExtensionToFunctionMap.find(fileExtension.string());
-        if (extToFuncIt != fileExtensionToFunctionMap.end())
-        {
-            extToFuncIt->second(icon, filePath);
-        }
-        else if (fileExtension == ".vmesh")
+        if (fileExtension == ".vmesh")
         {
             std::string meshIconPath = "Icons/MeshIcons/" + fileInfo.fileName().toStdString() + ".jpg";
             if (std::filesystem::exists(meshIconPath))
             {
-                auto pix = QPixmap(meshIconPath.c_str());
-                icon = pix.scaled(QSize(720, 512));
+                icon = QPixmap(meshIconPath.c_str()).scaled(QSize(320, 240));
             }
             else
             {
                 icon = *Icons::mesh;
             }
+        }
+        else if (extToFuncIt != fileExtensionToFunctionMap.end())
+        {
+            extToFuncIt->second(icon, filePath);
         }
         else
         {
