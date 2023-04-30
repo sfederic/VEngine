@@ -23,6 +23,7 @@ void Valve::OnLinkRotate()
 	if (waterSource)
 	{
 		waterSource->ToggleActive();
+		waterSource->ToggleVisibility();
 	}
 	else
 	{
