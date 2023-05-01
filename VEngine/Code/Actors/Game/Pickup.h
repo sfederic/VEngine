@@ -6,4 +6,6 @@ class Pickup : public GridActor
 {
 public:
 	ACTOR_SYSTEM(Pickup);
+
+	void Create() override;
 };
