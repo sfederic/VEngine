@@ -8,17 +8,14 @@
 
 struct DialogueComponent;
 struct InteractWidget;
-struct MemoryMenuWidget;
 struct PlayerHealthWidget;
+class PickupWidget;
 struct GridActor;
 struct Unit;
 struct MeshComponent;
 struct CameraComponent;
 struct GridNode;
 class Unit;
-class GuardWidget;
-class PlayerStatusWidget;
-class MoveableActor;
 
 class Player : public Actor
 {
@@ -30,6 +27,7 @@ public:
 
 	InteractWidget* interactWidget = nullptr;
 	PlayerHealthWidget* healthWidget = nullptr;
+	PickupWidget* pickupWidget = nullptr;
 
 	GridActor* gridActorInteractingWith = nullptr;
 
@@ -44,9 +42,6 @@ public:
 
 	MeshComponent* mesh = nullptr;
 	CameraComponent* camera = nullptr;
-
-	GuardWidget* guardWidget = nullptr;
-	PlayerStatusWidget* playerStatusWidget = nullptr;
 
 	int healthPoints = 3;
 
@@ -110,4 +105,6 @@ private:
 
 	void HighlightLinkableGridActor();
 	GridActor* highlightedGridActor = nullptr;
+
+	void OverlapPickupGridActor();
 };

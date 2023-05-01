@@ -9,6 +9,7 @@
 #include "Physics/Raycast.h"
 #include "Actors/Game/NPC.h"
 #include "Actors/Game/FenceActor.h"
+#include "Actors/Game/Pickup.h"
 #include "Grid.h"
 #include "GridActor.h"
 #include "Components/EmptyComponent.h"
@@ -19,6 +20,7 @@
 #include "UI/Game/DialogueWidget.h"
 #include "UI/Game/InteractWidget.h"
 #include "UI/Game/PlayerHealthWidget.h"
+#include "UI/Game/PickupWidget.h"
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/GameUtils.h"
 #include "Render/Material.h"
@@ -62,6 +64,7 @@ void Player::Start()
 	//Setup widgets
 	interactWidget = UISystem::CreateWidget<InteractWidget>();
 	healthWidget = UISystem::CreateWidget<PlayerHealthWidget>();
+	pickupWidget = UISystem::CreateWidget<PickupWidget>();
 }
 
 void Player::End()
@@ -83,6 +86,7 @@ void Player::Tick(float deltaTime)
 		//GameUtils::TriggerGameOver();
 	}
 
+	OverlapPickupGridActor();
 	HighlightLinkableGridActor();
 
 	MoveLinkedGridActor();
@@ -155,6 +159,30 @@ void Player::HighlightLinkableGridActor()
 			mesh->SetAmbientColour(XMFLOAT4(1.f, 1.f, 1.f, 1.f));
 		}
 		highlightedGridActor = nullptr;
+	}
+}
+
+void Player::OverlapPickupGridActor()
+{
+	if (Input::GetKeyUp(Keys::E))
+	{
+		const auto center = GetPositionV() + GetMeshForward();
+		HitResult hit(this);
+		if (SimpleBoxCast(center, XMFLOAT3(0.45f, 0.45f, 0.45f), hit, true))
+		{
+			for (auto hitActor : hit.hitActors)
+			{
+				auto pickup = dynamic_cast<Pickup*>(hitActor);
+				if (pickup)
+				{
+					pickupWidget->AddToViewport();
+				}
+			}
+		}
+		else
+		{
+			pickupWidget->RemoveFromViewport();
+		}
 	}
 }
 
