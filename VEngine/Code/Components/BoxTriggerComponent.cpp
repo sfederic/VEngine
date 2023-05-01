@@ -99,5 +99,5 @@ XMFLOAT3 BoxTriggerComponent::GetExtents()
 
 bool BoxTriggerComponent::QuickInPlaceBoxCast(HitResult& hitResult, bool drawDebug)
 {
-	return SimpleBoxCast(GetWorldPositionV(), boundingBox.Extents, hitResult, drawDebug);
+	return SimpleBoxCast(GetWorldPositionV(), boundingBox.Extents, hitResult, drawDebug, true);
 }

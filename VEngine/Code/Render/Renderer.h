@@ -47,7 +47,6 @@ namespace Renderer
 	RastState* GetRastState(std::string rastStateName);
 	BlendState* GetBlendState(std::string blendStateName);
 
-	void AddDebugDrawOrientedBox(DirectX::BoundingOrientedBox& orientedBox);
-	void ClearBounds();
+	void AddDebugDrawOrientedBox(DirectX::BoundingOrientedBox& orientedBox, bool clear);
 	void AddDebugLine(Line& line);
 };

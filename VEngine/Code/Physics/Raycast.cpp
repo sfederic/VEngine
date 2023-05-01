@@ -362,7 +362,7 @@ void DrawDebugLine(XMVECTOR start, XMVECTOR end)
 	Renderer::AddDebugLine(line);
 }
 
-bool OrientedBoxCast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end, XMFLOAT2 extents, bool drawDebug)
+bool OrientedBoxCast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end, XMFLOAT2 extents, bool drawDebug, bool clearDebugDrawWithTimer)
 {
 	XMVECTOR orientationV = VMath::LookAtRotation(end, origin);
 
@@ -380,8 +380,7 @@ bool OrientedBoxCast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end, XMFLOA
 
 	if (drawDebug)
 	{
-		Renderer::ClearBounds();
-		Renderer::AddDebugDrawOrientedBox(boundingOrientedBox);
+		Renderer::AddDebugDrawOrientedBox(boundingOrientedBox, clearDebugDrawWithTimer);
 	}
 
 	for (auto actor : World::GetAllActorsInWorld())
@@ -406,7 +405,7 @@ bool OrientedBoxCast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end, XMFLOA
 }
 
 //Note: doesn't set HitResult::hitActor.
-bool SimpleBoxCast(XMVECTOR center, XMFLOAT3 extents, HitResult& hit, bool drawDebug)
+bool SimpleBoxCast(XMVECTOR center, XMFLOAT3 extents, HitResult& hit, bool drawDebug, bool clearDebugDrawWithTimer)
 {
 	XMFLOAT3 centerFloat3;
 	XMStoreFloat3(&centerFloat3, center);
@@ -416,8 +415,7 @@ bool SimpleBoxCast(XMVECTOR center, XMFLOAT3 extents, HitResult& hit, bool drawD
 	{
 		DirectX::BoundingOrientedBox orientedBox;
 		DirectX::BoundingOrientedBox::CreateFromBoundingBox(orientedBox, boundingBox);
-		Renderer::ClearBounds();
-		Renderer::AddDebugDrawOrientedBox(orientedBox);
+		Renderer::AddDebugDrawOrientedBox(orientedBox, clearDebugDrawWithTimer);
 	}
 
 	for (auto actor : World::GetAllActorsInWorld())

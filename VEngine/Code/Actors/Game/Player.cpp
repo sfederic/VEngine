@@ -168,7 +168,7 @@ void Player::OverlapPickupGridActor()
 	{
 		const auto center = GetPositionV() + GetMeshForward();
 		HitResult hit(this);
-		if (SimpleBoxCast(center, XMFLOAT3(0.45f, 0.45f, 0.45f), hit, true))
+		if (SimpleBoxCast(center, XMFLOAT3(0.45f, 0.45f, 0.45f), hit, true, true))
 		{
 			for (auto hitActor : hit.hitActors)
 			{
@@ -207,7 +207,7 @@ void Player::PrimaryAction()
 		auto meshForward = mesh->GetForwardVectorV();
 		auto center = GetPositionV();
 		auto boxCastOrigin = center + meshForward;
-		if (SimpleBoxCast(boxCastOrigin, XMFLOAT3(0.25f, 0.25f, 0.25f), hit, false))
+		if (SimpleBoxCast(boxCastOrigin, XMFLOAT3(0.25f, 0.25f, 0.25f), hit, false, true))
 		{
 			//@Todo: won't work later on for multiple hit actors
 			hit.hitActor = hit.hitActors.front();
@@ -297,7 +297,7 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 	const float solidValue = 1.f;
 
 	HitResult hit(this);
-	if (OrientedBoxCast(hit, camera->GetWorldPositionV(), GetPositionV(), XMFLOAT2(0.5f, 0.5f), true))
+	if (OrientedBoxCast(hit, camera->GetWorldPositionV(), GetPositionV(), XMFLOAT2(0.5f, 0.5f), true, false))
 	{
 		std::vector<Actor*> ableActors;
 

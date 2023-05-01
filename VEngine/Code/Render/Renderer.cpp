@@ -128,6 +128,7 @@ void SetSampler(uint32_t shaderRegister, Sampler* sampler);
 void SetShaderResourcePixel(uint32_t shaderRegister, std::string textureName);
 void SetShaderResourceFromMaterial(uint32_t shaderRegister, Material& material);
 void SetLightsConstantBufferData();
+void ClearBounds();
 
 float Renderer::frameTime;
 bool Renderer::drawBoundingBoxes = false;
@@ -208,8 +209,15 @@ const int lightProbeTextureHeight = 64;
 ShaderMatrices shaderMatrices;
 ShaderLights shaderLights;
 
+struct DebugBoxData
+{
+	DirectX::BoundingOrientedBox bb;
+	float timer = 0.f;
+	bool clearWithTimer = false;
+};
+
 //Debug object containers
-std::vector<DirectX::BoundingOrientedBox> debugOrientedBoxesOnTimerToRender;
+std::vector<DebugBoxData> debugOrientedBoxesOnTimerToRender;
 std::vector<Vertex> debugLines;
 ID3D11Buffer* debugLinesBuffer;
 static const uint64_t debugLinesBufferSize = 32 * 32 * sizeof(Vertex);
@@ -852,6 +860,8 @@ void Renderer::Render()
 	//RenderDebugLines();
 	RenderPostProcess();
 
+	ClearBounds();
+
 	Profile::End();
 }
 
@@ -1188,8 +1198,10 @@ void RenderBounds()
 
 		//@Todo: drawing bounds for instance meshes is hard, but have a think about it.
 
-		for (auto& box : debugOrientedBoxesOnTimerToRender)
+		for (auto& boxData : debugOrientedBoxesOnTimerToRender)
 		{
+			const auto& box = boxData.bb;
+
 			XMFLOAT3 extents = XMFLOAT3(box.Extents.x * 2.f, box.Extents.y * 2.f, box.Extents.z * 2.f);
 
 			XMVECTOR center = XMLoadFloat3(&box.Center);
@@ -2111,14 +2123,33 @@ BlendState* Renderer::GetBlendState(std::string blendStateName)
 	return blendStateMap[blendStateName].get();
 }
 
-void Renderer::AddDebugDrawOrientedBox(DirectX::BoundingOrientedBox& orientedBox)
+void Renderer::AddDebugDrawOrientedBox(DirectX::BoundingOrientedBox& orientedBox, bool clear)
 {
-	debugOrientedBoxesOnTimerToRender.emplace_back(orientedBox);
+	DebugBoxData data;
+	data.bb = orientedBox;
+	data.clearWithTimer = clear;
+	data.timer = 3.f;
+	debugOrientedBoxesOnTimerToRender.push_back(data);
 }
 
-void Renderer::ClearBounds()
+void ClearBounds()
 {
-	debugOrientedBoxesOnTimerToRender.clear();
+	for (int i = 0; i < debugOrientedBoxesOnTimerToRender.size(); i++)
+	{
+		auto& boxData = debugOrientedBoxesOnTimerToRender[i];
+		if (!boxData.clearWithTimer)
+		{
+			debugOrientedBoxesOnTimerToRender.erase(debugOrientedBoxesOnTimerToRender.begin() + i);
+		}
+		else
+		{
+			boxData.timer -= Core::GetDeltaTime();
+			if (boxData.timer < 0.f)
+			{
+				debugOrientedBoxesOnTimerToRender.erase(debugOrientedBoxesOnTimerToRender.begin() + i);
+			}
+		}
+	}
 }
 
 void Renderer::AddDebugLine(Line& line)
