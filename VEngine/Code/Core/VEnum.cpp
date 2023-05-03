@@ -2,14 +2,14 @@
 #include "VEnum.h"
 #include <cassert>
 
-void VEnum::SetValue(const std::string newValue)
+void VEnum::SetValue(const std::string& newValue)
 {
 	auto dataIt = data.find(newValue);
 	assert(dataIt != data.end());
 	value = newValue;
 }
 
-void VEnum::Add(const std::string name)
+void VEnum::Add(const std::string& name)
 {
 	data.emplace(name, dataIndex);
 	if (dataIndex == 0) //First Add(), set default value

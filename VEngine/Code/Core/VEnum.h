@@ -7,8 +7,8 @@ class VEnum
 {
 public:
 	std::string GetValue() { return value; }
-	void SetValue(const std::string newValue);
-	void Add(const std::string name);
+	void SetValue(const std::string& newValue);
+	void Add(const std::string& name);
 	std::vector<std::string> GetAllNames();
 	bool Contains(std::string value);
 	bool Compare(std::string valueToCompare);
