@@ -39,12 +39,11 @@ struct Grid : public Actor
 		LerpOut
 	};
 
-	LerpValue lerpValue = LerpValue::LerpOut;
+	LerpValue lerpValue = LerpValue::LerpIn;
 
 	Grid();
 	void Awake() override;
 	void Create() override;
-	void LateStart() override;
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 	GridNode* GetNode(int x, int y);
@@ -73,5 +72,4 @@ struct Grid : public Actor
 	void LerpOutNodes(float deltaTime);
 	void DisplayHideAllNodes();
 	void DisplayShowAllNodes();
-	void DisarmAllTrapNodes();
 };

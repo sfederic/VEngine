@@ -133,14 +133,9 @@ void Grid::Create()
     nodeMesh->SetBlendState(BlendStates::Default);
 }
 
-void Grid::LateStart()
-{
-    SetActive(false);
-}
-
 void Grid::Tick(float deltaTime)
 {
-    switch(lerpValue)
+    switch (lerpValue)
     {
     case LerpValue::LerpIn:
         LerpInNodes(deltaTime);
