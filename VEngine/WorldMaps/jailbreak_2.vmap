@@ -155,6 +155,43 @@ plane2
 UID
 4122034125
 next
+Pickup
+1
+ Enabled
+1
+ Position
+1 -0 2
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Name
+Pickup0
+Obstacle
+1
+UID
+928753589
+next
 Player
 1
  Enabled
@@ -196,7 +233,7 @@ UID
 4109097366
 next
 DialogueComponent
-3
+4
 3644580522
 Dialogue
  Enabled
@@ -207,6 +244,17 @@ File
 
 UID
 2040906830
+next
+413981778
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+3605821776
 next
 3957761693
 Dialogue
@@ -219,7 +267,7 @@ File
 UID
 1506222586
 next
-413981778
+928753589
 Dialogue
  Enabled
 1
@@ -228,7 +276,7 @@ Dialogue
 File
 
 UID
-3605821776
+2184818836
 next
 DirectionalLightComponent
 1
@@ -324,7 +372,7 @@ UID
 3938727138
 next
 MeshComponent
-6
+7
 3644580522
 Mesh
  Enabled
@@ -377,6 +425,59 @@ Trans. Occlude
 0
 UID
 1776599535
+next
+413981778
+Mesh
+ Enabled
+1
+ Pos
+4 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1157275815
 next
 84571281
 Mesh
@@ -537,59 +638,6 @@ Trans. Occlude
 UID
 1191259429
 next
-413981778
-Mesh
- Enabled
-1
- Pos
-4 0 0
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1157275815
-next
 3957761693
 Mesh
  Enabled
@@ -642,5 +690,58 @@ Trans. Occlude
 0
 UID
 3768523613
+next
+928753589
+Mesh
+ Enabled
+1
+ Pos
+1 -0 2
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2082915575
 next
 end
