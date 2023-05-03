@@ -37,8 +37,9 @@ Material::Material(std::string textureFilename_, ShaderItem* shaderItem)
 
 	shaderData.shaderItemName = shaderItem->GetName();
 
-	rastStateValue.Copy(rastStates);
-	blendStateValue.Copy(blendStates);
+	//Assigning via copy here vs adding values is twice as fast in debug, but about the same in release.
+	rastStateValue = rastStates;
+	blendStateValue = blendStates;
 }
 
 void Material::Create()
