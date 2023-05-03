@@ -94,6 +94,8 @@ void Player::Tick(float deltaTime)
 	PushbackGridActor();
 	LinkToGridActor();
 
+	ToggleGrid();
+
 	MovementInput(deltaTime);
 	RotationInput(deltaTime);
 
@@ -133,7 +135,15 @@ void Player::ToggleGrid()
 	if (Input::GetKeyUp(Keys::Space))
 	{
 		GameUtils::PlayAudioOneShot("sword_sheathe.wav");
-		Grid::system.GetOnlyActor()->ToggleActive();
+		auto grid = Grid::system.GetOnlyActor();
+		if (grid->lerpValue == Grid::LerpValue::LerpIn)
+		{
+			grid->lerpValue = Grid::LerpValue::LerpOut;
+		}
+		else
+		{
+			grid->lerpValue = Grid::LerpValue::LerpIn;
+		}
 	}
 }
 
