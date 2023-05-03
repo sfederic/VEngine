@@ -38,6 +38,11 @@ void BinarySerialiser::Serialise(Properties& props)
 			auto textureData = props.GetData<TextureData>(name);
 			WriteString(textureData->filename);
 		}
+		else if (props.CheckType<VEnum>(name))
+		{
+			auto vEnum = props.GetData<VEnum>(name);
+			WriteString(vEnum->GetValue());
+		}
 		else
 		{
 			fwrite(prop.data, prop.size, 1, file);
@@ -60,34 +65,39 @@ void BinarySerialiser::WriteWString(const std::wstring wstr)
 
 void BinaryDeserialiser::Deserialise(Properties& props)
 {
-	for (auto& propPair : props.propMap)
+	for (auto& [name, prop] : props.propMap)
 	{
-		auto& prop = propPair.second;
-
-		if (props.CheckType<std::string>(propPair.first))
+		if (props.CheckType<std::string>(name))
 		{
-			auto str = props.GetData<std::string>(propPair.first);
+			auto str = props.GetData<std::string>(name);
 			ReadString(str);
 		}
-		else if (props.CheckType<std::wstring>(propPair.first))
+		else if (props.CheckType<std::wstring>(name))
 		{
-			auto str = props.GetData<std::wstring>(propPair.first);
+			auto str = props.GetData<std::wstring>(name);
 			ReadWString(str);
 		}
-		else if (props.CheckType<MeshComponentData>(propPair.first))
+		else if (props.CheckType<MeshComponentData>(name))
 		{
-			auto meshComponentData = props.GetData<MeshComponentData>(propPair.first);
+			auto meshComponentData = props.GetData<MeshComponentData>(name);
 			ReadString(&meshComponentData->filename);
 		}
-		else if (props.CheckType<ShaderData>(propPair.first))
+		else if (props.CheckType<ShaderData>(name))
 		{
-			auto shaderData = props.GetData<ShaderData>(propPair.first);
+			auto shaderData = props.GetData<ShaderData>(name);
 			ReadString(&shaderData->shaderItemName);
 		}
-		else if (props.CheckType<TextureData>(propPair.first))
+		else if (props.CheckType<TextureData>(name))
 		{
-			auto textureData = props.GetData<TextureData>(propPair.first);
+			auto textureData = props.GetData<TextureData>(name);
 			ReadString(&textureData->filename);
+		}
+		else if (props.CheckType<VEnum>(name))
+		{
+			auto vEnum = props.GetData<VEnum>(name);
+			std::string readStr;
+			ReadString(&readStr);
+			vEnum->SetValue(readStr);
 		}
 		else
 		{
