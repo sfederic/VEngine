@@ -31,7 +31,7 @@ void Console::Init()
 		std::make_pair([]() { debugMenu.consoleCommandsMenuOpen = !debugMenu.consoleCommandsMenuOpen; },
 		"List all console commands"));
 
-	executeMap.emplace(L"PROFILE",
+	executeMap.emplace(L"PROF",
 		std::make_pair([]() { debugMenu.profileMenuOpen = !debugMenu.profileMenuOpen; },
 		"Show profile stats"));
 
