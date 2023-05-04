@@ -99,7 +99,6 @@ private:
 	void LinkToGridActor();
 	void MoveLinkedGridActor();
 	void RotateLinkedGridActor();
-	void PushbackGridActor();
 
 	void ToggleGrid();
 

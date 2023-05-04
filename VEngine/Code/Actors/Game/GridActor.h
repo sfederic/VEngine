@@ -42,10 +42,6 @@ struct GridActor : Actor
 	bool canBeRotatedInLink = true;
 	bool canBeMovedInLink = true;
 
-	bool isInPushback = false;
-	XMVECTOR nextPushbackPosition = DirectX::XMVectorZero();
-	GridActor* hitActorOnPushback = nullptr;
-
 	std::wstring interactText;
 	std::wstring interactKnownText;
 
@@ -75,10 +71,6 @@ struct GridActor : Actor
 	GridNode* GetCurrentNode();
 
 	bool CheckNextNodeMoveIsValid();
-
-	//Called when the actor is 'pushedback'ed by player or other actor, exploding the actor
-	//back into contact with something.
-	bool Pushback(XMVECTOR direction);
 
 	//Get forward face in grid terms based on forward vector and current grid position.
 	ForwardFace GetCurrentForwardFace();

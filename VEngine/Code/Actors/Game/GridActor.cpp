@@ -37,41 +37,10 @@ void GridActor::Start()
 
 void GridActor::Tick(float deltaTime)
 {
-	if (!isInPushback)
-	{
-		SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, 12.5f));
-		SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, 12.5f));
-	}
-	else
-	{
-		SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPushbackPosition, deltaTime, 25.f));
-	}
+	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, 12.5f));
+	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, 12.5f));
 
 	dialogueComponent->SetPosition(GetHomogeneousPositionV());
-
-	if (isInPushback)
-	{
-		XMVECTOR position = GetPositionV();
-		if (!VMath::VecEqual(position, nextPushbackPosition, 0.25f))
-		{
-			SetPosition(XMVectorLerp(GetPositionV(), nextPushbackPosition, deltaTime * 6.5));
-
-			XMVECTOR rot = GetRotationV();
-			SetRotation(XMQuaternionMultiply(rot, XMQuaternionRotationAxis(-GetForwardVectorV(), 5.f * deltaTime)));
-		}
-		else
-		{
-			if (hitActorOnPushback)
-			{
-				hitActorOnPushback->InflictDamage(1);
-			}
-
-			isInPushback = false;
-			GameUtils::SpawnSpriteSheet("Sprites/explosion.png", GetPositionV(), false, 4, 4);
-			GameUtils::PlayAudioOneShot("Audio/armor_light.wav");
-			Destroy();
-		}
-	}
 }
 
 Properties GridActor::GetProps()
@@ -164,24 +133,6 @@ bool GridActor::CheckNextNodeMoveIsValid()
 	nextPos = XMLoadFloat3(&node->worldPosition);
 
 	return true;
-}
-
-bool GridActor::Pushback(XMVECTOR direction)
-{
-	HitResult hit(this);
-	if (Raycast(hit, GetPositionV(), direction, 50.f))
-	{
-		nextPushbackPosition = XMLoadFloat3(&hit.hitPos);
-		isInPushback = true;
-		hitActorOnPushback = dynamic_cast<GridActor*>(hit.hitActor);
-
-		HitResult nodeRecalcHit(this);
-		GetCurrentNode()->RecalcNodeHeight(nodeRecalcHit);
-
-		return true;
-	}
-
-	return false;
 }
 
 ForwardFace GridActor::GetCurrentForwardFace()
