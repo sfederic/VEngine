@@ -121,6 +121,11 @@ XMVECTOR Player::GetMeshForward()
 	return mesh->GetForwardVectorV();
 }
 
+XMVECTOR Player::GetMeshRight()
+{
+	return mesh->GetRightVectorV();
+}
+
 void Player::QuickThought(const std::wstring& text)
 {
 	dialogueComponent->dialogueWidget->dialogueText = text;
@@ -518,7 +523,7 @@ void Player::LinkToGridActor()
 	if (!isInputLinkedToGridActor && Input::GetKeyUp(Keys::Up))
 	{
 		HitResult hit(this);
-		if (Raycast(hit, GetPositionV(), GetForwardVectorV(), 100.f))
+		if (Raycast(hit, GetPositionV(), GetMeshForward(), 100.f))
 		{
 			auto moveableActor = dynamic_cast<GridActor*>(hit.hitActor);
 			if (moveableActor)
@@ -645,7 +650,7 @@ void Player::RotateLinkedGridActor()
 		if (checkLinkRotation(linkedGridActor->canBeRotatedInLink))
 		{
 			linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
-				VMath::GlobalUpVector(), 90.f);
+				VMath::GlobalUpVector(), -90.f);
 			checkLinkedActorNextRotation();
 		}
 	}
@@ -654,7 +659,7 @@ void Player::RotateLinkedGridActor()
 		if (checkLinkRotation(linkedGridActor->canBeRotatedInLink))
 		{
 			linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
-				VMath::GlobalUpVector(), -90.f);
+				VMath::GlobalUpVector(), 90.f);
 			checkLinkedActorNextRotation();
 		}
 	}
@@ -663,7 +668,7 @@ void Player::RotateLinkedGridActor()
 		if (checkLinkRotation(linkedGridActor->canBeRotatedInLink))
 		{
 			linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
-				VMath::GlobalRightVector(), -90.f);
+				GetMeshRight(), -90.f);
 			checkLinkedActorNextRotation();
 		}
 	}
@@ -672,7 +677,7 @@ void Player::RotateLinkedGridActor()
 		if (checkLinkRotation(linkedGridActor->canBeRotatedInLink))
 		{
 			linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
-				VMath::GlobalRightVector(), 90.f);
+				GetMeshRight(), 90.f);
 			checkLinkedActorNextRotation();
 		}
 	}

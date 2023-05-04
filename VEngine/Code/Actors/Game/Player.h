@@ -59,6 +59,7 @@ public:
 	Properties GetProps() override;
 
 	XMVECTOR GetMeshForward();
+	XMVECTOR GetMeshRight();
 
 	//Show a timer dialogue above player when player character is thinking to themself.
 	void QuickThought(const std::wstring& text);
