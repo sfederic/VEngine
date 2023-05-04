@@ -42,6 +42,8 @@ struct GridActor : Actor
 	bool canBeRotatedInLink = true;
 	bool canBeMovedInLink = true;
 
+	bool inFall = false;
+
 	std::wstring interactText;
 	std::wstring interactKnownText;
 

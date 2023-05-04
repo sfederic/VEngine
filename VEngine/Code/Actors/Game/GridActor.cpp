@@ -43,11 +43,15 @@ void GridActor::Tick(float deltaTime)
 	HitResult hit(this);
 	if (!Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 0.5f))
 	{
+		inFall = true;
 		constexpr float fallSpeed = 3.5f;
 		nextPos -= VMath::GlobalUpVector() * fallSpeed * deltaTime;
 	}
-	else
+	else if (inFall)
 	{
+		inFall = false;
+		HitResult nodeHit;
+		GetCurrentNode()->RecalcNodeHeight(nodeHit);
 		nextPos.m128_f32[1] = std::round(nextPos.m128_f32[1]);
 	}
 
