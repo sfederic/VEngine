@@ -18,6 +18,18 @@ GridActor::GridActor()
 	dialogueComponent = CreateComponent<DialogueComponent>("Dialogue");
 }
 
+bool GridActor::CheckNextRotationBoundsIntersect()
+{
+	BoundingOrientedBox nextRotBounds = mesh->GetBoundingBox();
+	VMath::UpdateBoundingBox(nextRotBounds, this);
+	XMStoreFloat4(&nextRotBounds.Orientation, nextRot);
+	nextRotBounds.Extents.x -= 0.1f;
+	nextRotBounds.Extents.y -= 0.1f;
+	nextRotBounds.Extents.z -= 0.1f;
+	HitResult hit(this);
+	return OrientedBoxCast(hit, nextRotBounds, true, true);
+}
+
 void GridActor::Start()
 {
 	nextPos = GetPositionV();

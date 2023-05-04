@@ -627,13 +627,26 @@ void Player::RotateLinkedGridActor()
 		return true;
 	};
 
+	const auto checkLinkedActorNextRotation = [&]()
+	{
+		if (!linkedGridActor->CheckNextRotationBoundsIntersect())
+		{
+			linkedGridActor->OnLinkRotate();
+		}
+		else
+		{
+			linkedGridActor->nextRot = linkedGridActor->GetRotationV();
+			GameUtils::CameraShake(0.25f);
+		}
+	};
+
 	if (Input::GetKeyUp(Keys::Right))
 	{
 		if (checkLinkRotation(linkedGridActor->canBeRotatedInLink))
 		{
 			linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
 				VMath::GlobalUpVector(), 90.f);
-			linkedGridActor->OnLinkRotate();
+			checkLinkedActorNextRotation();
 		}
 	}
 	else if (Input::GetKeyUp(Keys::Left))
@@ -642,7 +655,7 @@ void Player::RotateLinkedGridActor()
 		{
 			linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
 				VMath::GlobalUpVector(), -90.f);
-			linkedGridActor->OnLinkRotate();
+			checkLinkedActorNextRotation();
 		}
 	}
 	else if (Input::GetKeyUp(Keys::Down))
@@ -651,7 +664,7 @@ void Player::RotateLinkedGridActor()
 		{
 			linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
 				VMath::GlobalRightVector(), -90.f);
-			linkedGridActor->OnLinkRotate();
+			checkLinkedActorNextRotation();
 		}
 	}
 	else if (Input::GetKeyUp(Keys::Up))
@@ -660,7 +673,7 @@ void Player::RotateLinkedGridActor()
 		{
 			linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
 				VMath::GlobalRightVector(), 90.f);
-			linkedGridActor->OnLinkRotate();
+			checkLinkedActorNextRotation();
 		}
 	}
 }
