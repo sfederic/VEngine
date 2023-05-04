@@ -362,6 +362,35 @@ void DrawDebugLine(XMVECTOR start, XMVECTOR end)
 	Renderer::AddDebugLine(line);
 }
 
+//@Todo: can consolidate the two orientedboxcast functions here
+bool OrientedBoxCast(HitResult& hit, BoundingOrientedBox& bb, bool drawDebug, bool clearDebugDrawWithTimer)
+{
+	if (drawDebug)
+	{
+		Renderer::AddDebugDrawOrientedBox(bb, clearDebugDrawWithTimer);
+	}
+
+	for (auto actor : World::GetAllActorsInWorld())
+	{
+		if (IsIgnoredActor(actor, hit))
+		{
+			continue;
+		}
+
+		for (auto mesh : actor->GetComponentsOfType<MeshComponent>())
+		{
+			auto meshBoundsInWorld = VMath::GetBoundingBoxInWorld(mesh);
+			if (bb.Intersects(meshBoundsInWorld))
+			{
+				hit.hitComponents.emplace_back(mesh);
+				hit.hitActors.emplace_back(actor);
+			}
+		}
+	}
+
+	return hit.hitActors.size();
+}
+
 bool OrientedBoxCast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end, XMFLOAT2 extents, bool drawDebug, bool clearDebugDrawWithTimer)
 {
 	XMVECTOR orientationV = VMath::LookAtRotation(end, origin);
