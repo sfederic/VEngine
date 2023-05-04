@@ -37,7 +37,7 @@ UID
 1023253590
 next
 GridActor
-2
+1
  Enabled
 1
  Position
@@ -72,41 +72,6 @@ Obstacle
 1
 UID
 3644580522
-next
- Enabled
-1
- Position
-4 0 0
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Inspect
-1
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Name
-GridActor1
-Obstacle
-1
-UID
-413981778
 next
 MeshActor
 3
@@ -156,13 +121,13 @@ UID
 4122034125
 next
 Pickup
-1
+2
  Enabled
 1
  Position
-1 0 2
+3 0 1
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -182,15 +147,50 @@ Interact Text
 InteractKnownText
 
 Link Movement
-0
+1
 Link Rotation
-0
+1
 Name
-Pickup0
+Pickup1
 Obstacle
 1
 UID
-928753589
+3077514947
+next
+ Enabled
+1
+ Position
+3 2 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Name
+Pickup4270014958
+Obstacle
+1
+UID
+280404924
 next
 Player
 1
@@ -245,7 +245,7 @@ File
 UID
 2040906830
 next
-413981778
+3077514947
 Dialogue
  Enabled
 1
@@ -254,9 +254,9 @@ Dialogue
 File
 
 UID
-3605821776
+4235927877
 next
-928753589
+280404924
 Dialogue
  Enabled
 1
@@ -265,7 +265,7 @@ Dialogue
 File
 
 UID
-2184818836
+4054300565
 next
 3957761693
 Dialogue
@@ -426,59 +426,6 @@ Trans. Occlude
 UID
 1776599535
 next
-413981778
-Mesh
- Enabled
-1
- Pos
-4 0 0
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Obst.
-0
-M_Ambient
-0.9 0.3 0.1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1157275815
-next
 84571281
 Mesh
  Enabled
@@ -638,14 +585,14 @@ Trans. Occlude
 UID
 1191259429
 next
-928753589
+3077514947
 Mesh
  Enabled
 1
  Pos
-1 0 2
+3 0 1
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -689,7 +636,60 @@ Static
 Trans. Occlude
 0
 UID
-2082915575
+90785131
+next
+280404924
+Mesh
+ Enabled
+1
+ Pos
+3 2 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3809574767
 next
 3957761693
 Mesh

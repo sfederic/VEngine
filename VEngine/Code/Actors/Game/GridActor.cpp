@@ -40,6 +40,17 @@ void GridActor::Tick(float deltaTime)
 	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, 12.5f));
 	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, 12.5f));
 
+	HitResult hit(this);
+	if (!Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 0.5f))
+	{
+		constexpr float fallSpeed = 3.5f;
+		nextPos -= VMath::GlobalUpVector() * fallSpeed * deltaTime;
+	}
+	else
+	{
+		nextPos.m128_f32[1] = std::round(nextPos.m128_f32[1]);
+	}
+
 	dialogueComponent->SetPosition(GetHomogeneousPositionV());
 }
 
