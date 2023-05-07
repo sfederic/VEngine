@@ -668,13 +668,7 @@ void Player::RotateLinkedGridActor()
 		}
 	};
 
-	float angleIncrement = 90.f;
-
-	//Reverse the angle if player linked via downcast.
-	if (isInputLinkedToDowncastGridActor) 
-	{
-		angleIncrement = -angleIncrement;
-	}
+	constexpr float angleIncrement = 90.f;
 
 	if (Input::GetKeyUp(Keys::Right))
 	{
@@ -810,7 +804,7 @@ void Player::MovementInput(float deltaTime)
 
 void Player::RotationInput(float deltaTime)
 {
-	if (!isInputLinkedToGridActor && CheckIfMovementAndRotationStopped())
+	if (!isInputLinkedToGridActor && !isInputLinkedToDowncastGridActor && CheckIfMovementAndRotationStopped())
 	{
 		if (Input::GetKeyHeld(Keys::Right))
 		{
