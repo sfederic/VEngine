@@ -29,8 +29,6 @@ void Unit::Start()
 {
 	__super::Start();
 
-	//intentBeam->GenerateVertices();
-
 	healthWidget = UISystem::CreateWidget<HealthWidget>();
 	healthWidget->healthPoints = health;
 	healthWidget->maxHealthPoints = health;
@@ -48,7 +46,6 @@ void Unit::Tick(float deltaTime)
 
 	healthWidget->worldPosition = GetHomogeneousPositionV();
 
-	const auto currentPos = GetPositionV();
 	if (VMath::VecEqual(nextPos, GetPositionV()))
 	{
 		if (movementPathNodeIndex < pathNodes.size())
@@ -79,8 +76,6 @@ void Unit::Tick(float deltaTime)
 			}
 		}
 	}
-
-	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextMovePos, deltaTime, moveSpeed));
 }
 
 Properties Unit::GetProps()
@@ -191,10 +186,10 @@ void Unit::MoveToNode(GridNode* destinationNode)
 	//This needs to be here if you need Units moving exactly to a point, but most times
 	// the unit is going to be moving to a surrounding node if there is a target, eg. the unit
 	// isn't going to move onto the node of the player, instead to a neighbouring node
-	//if (nextNode != nullptr)
-	//{
-	//	pathNodes.push_back(nextNode);
-	//}
+	if (nextNode != nullptr)
+	{
+		pathNodes.push_back(nextNode);
+	}
 
 	if (nextNode)
 	{

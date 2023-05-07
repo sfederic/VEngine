@@ -10,6 +10,8 @@ struct NPC : Unit
 
 	bool isQuickDialogueActive = false;
 
+	bool entranceReachableForEscape = false;
+
 	//Quick dialogue to show when NPC spawns. If empty, nothing shows.
 	std::wstring spawnText;
 	DialogueWidget* spawnTextWidget = nullptr;
@@ -25,4 +27,6 @@ struct NPC : Unit
 	//A once off dialogue popup used like interact popup is.
 	void QuickTalkTo();
 	void EndQuickTalkTo();
+
+	void TryToEscapeToExit();
 };
