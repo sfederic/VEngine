@@ -271,6 +271,7 @@
     <ClCompile Include="Code\Actors\Game\Valve.cpp" />
     <ClCompile Include="Code\Actors\Game\Pickup.cpp" />
     <ClCompile Include="Code\UI\Game\PickupWidget.cpp" />
+    <ClCompile Include="Code\Actors\Game\OrientationLock.cpp" />
     <ClInclude Include="Code\Actors\Game\Bucket.h" />
     <ClInclude Include="Code\Actors\Game\SpotLightTower.h" />
     <ClInclude Include="Code\Core\BMPFileWriter.h" />
@@ -571,6 +572,7 @@
     <ClInclude Include="Code\Actors\Game\Valve.h" />
     <ClInclude Include="Code\Actors\Game\Pickup.h" />
     <ClInclude Include="Code\UI\Game\PickupWidget.h" />
+    <ClInclude Include="Code\Actors\Game\OrientationLock.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
