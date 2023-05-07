@@ -140,7 +140,7 @@ bool GridActor::CheckNextNodeMoveIsValid()
 	const int nextXIndex = (int)std::round(nextPos.m128_f32[0]);
 	const int nextYIndex = (int)std::round(nextPos.m128_f32[2]);
 
-	auto grid = Grid::system.GetFirstActor();
+	auto grid = Grid::system.GetOnlyActor();
 
 	if (nextXIndex >= grid->sizeX || nextYIndex >= grid->sizeY
 		|| nextXIndex < 0 || nextYIndex < 0)
@@ -156,8 +156,15 @@ bool GridActor::CheckNextNodeMoveIsValid()
 		return false;
 	}
 
-	auto node = grid->GetNode(nextXIndex, nextYIndex);
-	nextPos = XMLoadFloat3(&node->worldPosition);
+	auto nextNode = grid->GetNode(nextXIndex, nextYIndex);
+	nextPos = XMLoadFloat3(&nextNode->worldPosition);
+
+	//When a GridActor moves, need to recalculate the Grid node height of the last position it was at.
+	const int lastGridIndexX = (int)std::round(GetPosition().x);
+	const int lastGridIndexY = (int)std::round(GetPosition().z);
+	GridNode* lastNode = grid->GetNode(lastGridIndexX, lastGridIndexY);
+	HitResult lastPosHit(this);
+	lastNode->RecalcNodeHeight(lastPosHit);
 
 	return true;
 }
