@@ -15,6 +15,7 @@ NPC::NPC()
 void NPC::Create()
 {
     moveSpeed = 3.f;
+    rotateSpeed = 18.f;
 
     canBeMovedInLink = false;
     canBeRotatedInLink = false;
