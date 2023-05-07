@@ -76,6 +76,7 @@ private:
 	float nextCameraFOV = 0.f;
 
 	bool isInputLinkedToGridActor = false;
+	bool isInputLinkedToDowncastGridActor = false;
 	GridActor* linkedGridActor = nullptr;
 
 	bool CheckIfMovementAndRotationStopped();

@@ -520,7 +520,7 @@ bool Player::CheckAttackPositionAgainstUnitDirection(Unit* unit)
 
 void Player::LinkToGridActor()
 {
-	if (!isInputLinkedToGridActor && Input::GetKeyUp(Keys::Up))
+	if (!isInputLinkedToGridActor && Input::GetKeyUp(Keys::Up)) //Raycast forward
 	{
 		HitResult hit(this);
 		if (Raycast(hit, GetPositionV(), GetMeshForward(), 100.f))
@@ -528,15 +528,31 @@ void Player::LinkToGridActor()
 			auto moveableActor = dynamic_cast<GridActor*>(hit.hitActor);
 			if (moveableActor)
 			{ 
-				HitResult hit(moveableActor);
-				moveableActor->GetCurrentNode()->RecalcNodeHeight(hit);
+				HitResult nodeHit(this);
+				moveableActor->GetCurrentNode()->RecalcNodeHeight(nodeHit);
 				linkedGridActor = moveableActor;
 				camera->targetActor = moveableActor;
 				isInputLinkedToGridActor = true;
 			}
 		}
 	}
-	else if (isInputLinkedToGridActor)
+	else if (!isInputLinkedToDowncastGridActor && Input::GetKeyUp(Keys::Down)) //Downwards cast
+	{
+		HitResult hit(this);
+		if (Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 3.f))
+		{
+			auto moveableActor = dynamic_cast<GridActor*>(hit.hitActor);
+			if (moveableActor)
+			{
+				HitResult nodeHit(this);
+				moveableActor->GetCurrentNode()->RecalcNodeHeight(nodeHit);
+				linkedGridActor = moveableActor;
+				camera->targetActor = moveableActor;
+				isInputLinkedToDowncastGridActor = true;
+			}
+		}
+	}
+	else if (isInputLinkedToGridActor || isInputLinkedToDowncastGridActor) //Cancel
 	{
 		if (Input::GetKeyUp(Keys::BackSpace))
 		{
@@ -546,6 +562,7 @@ void Player::LinkToGridActor()
 			linkedGridActor = nullptr;
 			camera->targetActor = this;
 			isInputLinkedToGridActor = false;
+			isInputLinkedToDowncastGridActor = false;
 			return;
 		}
 	}
@@ -554,6 +571,12 @@ void Player::LinkToGridActor()
 void Player::MoveLinkedGridActor()
 {
 	if (linkedGridActor == nullptr || !linkedGridActor->HaveMovementAndRotationStopped())
+	{
+		return;
+	}
+
+	//Don't move GridActor if downcast link. 
+	if (isInputLinkedToDowncastGridActor)
 	{
 		return;
 	}
@@ -645,12 +668,20 @@ void Player::RotateLinkedGridActor()
 		}
 	};
 
+	float angleIncrement = 90.f;
+
+	//Reverse the angle if player linked via downcast.
+	if (isInputLinkedToDowncastGridActor) 
+	{
+		angleIncrement = -angleIncrement;
+	}
+
 	if (Input::GetKeyUp(Keys::Right))
 	{
 		if (checkLinkRotation(linkedGridActor->canBeRotatedInLink))
 		{
 			linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
-				VMath::GlobalUpVector(), -90.f);
+				VMath::GlobalUpVector(), -angleIncrement);
 			checkLinkedActorNextRotation();
 		}
 	}
@@ -659,7 +690,7 @@ void Player::RotateLinkedGridActor()
 		if (checkLinkRotation(linkedGridActor->canBeRotatedInLink))
 		{
 			linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
-				VMath::GlobalUpVector(), 90.f);
+				VMath::GlobalUpVector(), angleIncrement);
 			checkLinkedActorNextRotation();
 		}
 	}
@@ -668,7 +699,7 @@ void Player::RotateLinkedGridActor()
 		if (checkLinkRotation(linkedGridActor->canBeRotatedInLink))
 		{
 			linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
-				GetMeshRight(), -90.f);
+				GetMeshRight(), -angleIncrement);
 			checkLinkedActorNextRotation();
 		}
 	}
@@ -677,7 +708,7 @@ void Player::RotateLinkedGridActor()
 		if (checkLinkRotation(linkedGridActor->canBeRotatedInLink))
 		{
 			linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
-				GetMeshRight(), 90.f);
+				GetMeshRight(), angleIncrement);
 			checkLinkedActorNextRotation();
 		}
 	}
@@ -747,7 +778,7 @@ bool Player::CheckIfMovementAndRotationStopped()
 
 void Player::MovementInput(float deltaTime)
 {
-	if (!isInputLinkedToGridActor && CheckIfMovementAndRotationStopped())
+	if (!isInputLinkedToGridActor && !isInputLinkedToDowncastGridActor && CheckIfMovementAndRotationStopped())
 	{
 		SetGridIndices();
 
