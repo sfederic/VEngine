@@ -4,4 +4,5 @@
 void LockedDoor::Activate()
 {
 	SetActive(false);
+	SetVisibility(false);
 }
