@@ -5,6 +5,8 @@
 
 void OrientationLock::Tick(float deltaTime)
 {
+    __super::Tick(deltaTime);
+
     if (!orientationActivated && IsOrientationCorrect())
     {
         orientationActivated = true;
