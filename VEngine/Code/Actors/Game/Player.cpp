@@ -159,6 +159,11 @@ void Player::HighlightLinkableGridActor()
 		auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
 		if (gridActor)
 		{
+			if (!gridActor->canBeMovedInLink && gridActor->canBeRotatedInLink)
+			{
+				return;
+			}
+
 			highlightedGridActor = gridActor;
 			for (auto mesh : highlightedGridActor->GetComponentsOfType<MeshComponent>())
 			{
