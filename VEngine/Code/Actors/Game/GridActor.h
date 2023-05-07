@@ -18,6 +18,8 @@ struct GridActor : Actor
 	HealthWidget* healthWidget = nullptr;
 	DialogueComponent* dialogueComponent = nullptr;
 
+	float moveSpeed = 12.f;
+
 	//Actor's positions on the level grid
 	int xIndex = -1;
 	int yIndex = -1;

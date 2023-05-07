@@ -12,6 +12,14 @@ NPC::NPC()
     isDestructible = true;
 }
 
+void NPC::Create()
+{
+    moveSpeed = 3.f;
+
+    canBeMovedInLink = false;
+    canBeRotatedInLink = false;
+}
+
 void NPC::Start()
 {
     __super::Start();
