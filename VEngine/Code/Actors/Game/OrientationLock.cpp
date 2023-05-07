@@ -14,7 +14,11 @@ void OrientationLock::Tick(float deltaTime)
         auto actor = World::GetActorByNameAllowNull(gridActorToActivateOnCorrectOrientation);
         if (actor)
         {
-            //.. dynamic cast to a 'trigger' actor
+            auto gridActor = dynamic_cast<GridActor*>(actor);
+            if (gridActor)
+            {
+                gridActor->Activate();
+            }
         }
         else
         {
