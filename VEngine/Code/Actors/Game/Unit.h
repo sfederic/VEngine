@@ -48,8 +48,6 @@ struct Unit : GridActor
 	//The end path the unit takes after a call to MoveToNode()
 	std::vector<GridNode*> pathNodes;
 
-	XMVECTOR nextMovePos;
-
 	//This is the actor name a Unit is focusing its 'intent' on. It can be another Unit, or Actor.
 	std::string actorToFocusOn;
 

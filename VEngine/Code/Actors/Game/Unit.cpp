@@ -35,8 +35,6 @@ void Unit::Start()
 	healthWidget->healthPoints = health;
 	healthWidget->maxHealthPoints = health;
 
-	nextMovePos = GetPositionV();
-
 	if (IsActive())
 	{
 		auto node = GetCurrentNode();
@@ -50,13 +48,14 @@ void Unit::Tick(float deltaTime)
 
 	healthWidget->worldPosition = GetHomogeneousPositionV();
 
-	if (XMVector4Equal(nextMovePos, GetPositionV()))
+	const auto currentPos = GetPositionV();
+	if (VMath::VecEqual(nextPos, GetPositionV()))
 	{
 		if (movementPathNodeIndex < pathNodes.size())
 		{
-			nextMovePos = XMLoadFloat3(&pathNodes[movementPathNodeIndex]->worldPosition);
+			nextPos = XMLoadFloat3(&pathNodes[movementPathNodeIndex]->worldPosition);
 
-			SetUnitLookAt(nextMovePos);
+			SetUnitLookAt(nextPos);
 
 			xIndex = pathNodes[movementPathNodeIndex]->xIndex;
 			yIndex = pathNodes[movementPathNodeIndex]->yIndex;
