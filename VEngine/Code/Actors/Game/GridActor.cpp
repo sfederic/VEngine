@@ -51,7 +51,7 @@ void GridActor::Start()
 void GridActor::Tick(float deltaTime)
 {
 	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, moveSpeed));
-	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, 12.5f));
+	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotateSpeed));
 
 	HitResult hit(this);
 	if (!Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 0.5f))

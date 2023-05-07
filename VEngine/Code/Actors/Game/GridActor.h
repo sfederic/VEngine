@@ -19,6 +19,7 @@ struct GridActor : Actor
 	DialogueComponent* dialogueComponent = nullptr;
 
 	float moveSpeed = 12.f;
+	float rotateSpeed = 12.f;
 
 	//Actor's positions on the level grid
 	int xIndex = -1;
