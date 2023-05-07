@@ -58,6 +58,7 @@ struct GridActor : Actor
 	virtual void OnLinkMove() {}
 
 	virtual void Interact() {}
+	virtual void Activate() {}
 
 	//Called when this GridActor is attacked.
 	virtual void Attacked() {}
