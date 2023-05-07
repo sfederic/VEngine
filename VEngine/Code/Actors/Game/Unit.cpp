@@ -309,7 +309,7 @@ void Unit::ShowUnitMovementPath()
 void Unit::SetUnitLookAt(XMVECTOR lookAtPoint)
 {
 	auto lookAtRot = VMath::LookAtRotation(lookAtPoint, GetPositionV());
-	SetRotation(lookAtRot);
+	nextRot = lookAtRot;
 }
 
 void Unit::SetMovePathIndexToMax()
