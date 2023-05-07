@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "GridActor.h"
 #include "Actors/Game/Unit.h"
+#include "Actors/Game/Player.h"
 #include "Components/MeshComponent.h"
 #include "Components/WidgetComponent.h"
 #include "Components/Game/DialogueComponent.h"
@@ -163,7 +164,9 @@ bool GridActor::CheckNextNodeMoveIsValid()
 	const int lastGridIndexX = (int)std::round(GetPosition().x);
 	const int lastGridIndexY = (int)std::round(GetPosition().z);
 	GridNode* lastNode = grid->GetNode(lastGridIndexX, lastGridIndexY);
-	HitResult lastPosHit(this);
+	HitResult lastPosHit;
+	lastPosHit.actorsToIgnore.push_back(this);
+	lastPosHit.actorsToIgnore.push_back(Player::system.GetOnlyActor());
 	lastNode->RecalcNodeHeight(lastPosHit);
 
 	return true;
