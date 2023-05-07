@@ -646,7 +646,7 @@ void CheckSupportedFeatures()
 
 void RenderMeshForShadowPass(MeshComponent* mesh)
 {
-	if (!mesh->castsShadow)
+	if (!mesh->castsShadow || !mesh->IsVisible())
 	{
 		return;
 	}
