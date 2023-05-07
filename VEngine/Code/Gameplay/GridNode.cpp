@@ -40,6 +40,7 @@ void GridNode::DisplayShow()
 void GridNode::RecalcNodeHeight(HitResult& hitResult)
 {
 	XMVECTOR origin = XMVectorSet((float)xIndex, 20.f, (float)yIndex, 1.f);
+	hitResult.actorsToIgnore.push_back(Grid::system.GetOnlyActor());
 	if (Raycast(hitResult, origin, -VMath::GlobalUpVector(), 40.f))
 	{
 		auto grid = Grid::system.GetFirstActor();
