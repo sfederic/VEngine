@@ -21,5 +21,4 @@ private:
 	XMFLOAT3 right = XMFLOAT3(0.f, 0.f, 0.f);
 
 	std::string gridActorToActivateOnCorrectOrientation;
-	bool orientationActivated = false;
 };

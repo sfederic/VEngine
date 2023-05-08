@@ -7,10 +7,8 @@ void OrientationLock::Tick(float deltaTime)
 {
     __super::Tick(deltaTime);
 
-    if (!orientationActivated && IsOrientationCorrect())
+    if (IsOrientationCorrect())
     {
-        orientationActivated = true;
-
         auto actor = World::GetActorByNameAllowNull(gridActorToActivateOnCorrectOrientation);
         if (actor)
         {
@@ -19,10 +17,6 @@ void OrientationLock::Tick(float deltaTime)
             {
                 gridActor->Activate();
             }
-        }
-        else
-        {
-            Log("[%s] not found.", gridActorToActivateOnCorrectOrientation.c_str());
         }
     }
 }
