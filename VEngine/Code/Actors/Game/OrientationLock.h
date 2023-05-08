@@ -14,7 +14,12 @@ public:
 	bool IsOrientationCorrect();
 
 private:
-	XMFLOAT3 direction = XMFLOAT3(0.f, 0.f, 0.f);
+	//These orientations need to match for the connected actor to activate.
+	//If a direction is zeroed out, then it won't count towards that orientation need.
+	XMFLOAT3 forward = XMFLOAT3(0.f, 0.f, 0.f);
+	XMFLOAT3 up = XMFLOAT3(0.f, 0.f, 0.f);
+	XMFLOAT3 right = XMFLOAT3(0.f, 0.f, 0.f);
+
 	std::string gridActorToActivateOnCorrectOrientation;
 	bool orientationActivated = false;
 };
