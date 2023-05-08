@@ -21,6 +21,11 @@ GridActor::GridActor()
 
 bool GridActor::CheckNextRotationBoundsIntersect()
 {
+	if (ignoreRotationValidCheck)
+	{
+		return false;
+	}
+
 	BoundingOrientedBox nextRotBounds = mesh->GetBoundingBox();
 	VMath::UpdateBoundingBox(nextRotBounds, this);
 	XMStoreFloat4(&nextRotBounds.Orientation, nextRot);
@@ -85,6 +90,7 @@ Properties GridActor::GetProps()
 	props.Add("Obstacle", &isGridObstacle);
 	props.Add("Link Rotation", &canBeRotatedInLink);
 	props.Add("Link Movement", &canBeMovedInLink);
+	props.Add("Ignore Rotate Check", &ignoreRotationValidCheck);
 	return props;
 }
 
