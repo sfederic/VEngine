@@ -91,6 +91,8 @@ Properties GridActor::GetProps()
 	props.Add("Link Rotation", &canBeRotatedInLink);
 	props.Add("Link Movement", &canBeMovedInLink);
 	props.Add("Ignore Rotate Check", &ignoreRotationValidCheck);
+	props.Add("Rotate Yaw", &canBeRotatedYawYAxis);
+	props.Add("Rotate Pitch", &canBeRotatedPitchXAxis);
 	return props;
 }
 

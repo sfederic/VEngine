@@ -45,6 +45,10 @@ struct GridActor : Actor
 	bool canBeRotatedInLink = true;
 	bool canBeMovedInLink = true;
 
+	bool canBeRotatedYawYAxis = true;
+	bool canBeRotatedPitchXAxis = true;
+	bool canBeRotated = true;
+
 	bool ignoreRotationValidCheck = false;
 
 	bool inFall = false;

@@ -679,36 +679,48 @@ void Player::RotateLinkedGridActor()
 	{
 		if (checkLinkRotation(linkedGridActor->canBeRotatedInLink))
 		{
-			linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
-				VMath::GlobalUpVector(), -angleIncrement);
-			checkLinkedActorNextRotation();
+			if (linkedGridActor->canBeRotatedYawYAxis)
+			{
+				linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
+					VMath::GlobalUpVector(), -angleIncrement);
+				checkLinkedActorNextRotation();
+			}
 		}
 	}
 	else if (Input::GetKeyUp(Keys::Left))
 	{
 		if (checkLinkRotation(linkedGridActor->canBeRotatedInLink))
 		{
-			linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
-				VMath::GlobalUpVector(), angleIncrement);
-			checkLinkedActorNextRotation();
+			if (linkedGridActor->canBeRotatedYawYAxis)
+			{
+				linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
+					VMath::GlobalUpVector(), angleIncrement);
+				checkLinkedActorNextRotation();
+			}
 		}
 	}
 	else if (Input::GetKeyUp(Keys::Down))
 	{
 		if (checkLinkRotation(linkedGridActor->canBeRotatedInLink))
 		{
-			linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
-				GetMeshRight(), -angleIncrement);
-			checkLinkedActorNextRotation();
+			if (linkedGridActor->canBeRotatedPitchXAxis)
+			{
+				linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
+					GetMeshRight(), -angleIncrement);
+				checkLinkedActorNextRotation();
+			}
 		}
 	}
 	else if (Input::GetKeyUp(Keys::Up))
 	{
 		if (checkLinkRotation(linkedGridActor->canBeRotatedInLink))
 		{
-			linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
-				GetMeshRight(), angleIncrement);
-			checkLinkedActorNextRotation();
+			if (linkedGridActor->canBeRotatedPitchXAxis)
+			{
+				linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
+					GetMeshRight(), angleIncrement);
+				checkLinkedActorNextRotation();
+			}
 		}
 	}
 }
