@@ -13,7 +13,7 @@ DirectionalLightActor
 Name
 DirectionalLightActor0
 UID
-2676586241
+3176283088
 next
 Grid
 1
@@ -34,51 +34,16 @@ Size X
 Size Y
 5
 UID
-1023253590
+1468150933
 next
 GridActor
-2
+1
  Enabled
 1
  Position
-2 0.5 3.65
+0 0 2
  Rotation
 -0 0.707107 -0 0.707107
- Scale
-0.5 1 1
- Visible
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Inspect
-1
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Name
-GridActor0
-Obstacle
-1
-UID
-3644580522
-next
- Enabled
-1
- Position
-2 0 2
- Rotation
--0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -89,6 +54,8 @@ DisableGridInteract
 0
 Health
 1
+Ignore Rotate Check
+0
 Inspect
 1
 Interact
@@ -101,15 +68,23 @@ Link Movement
 1
 Link Rotation
 1
+Move Axis Neg.
+1 0
+Move Axis Pos.
+1 0
 Name
-GridActor1
+GridActor0
 Obstacle
 1
+Rotate Pitch
+1
+Rotate Yaw
+1
 UID
-939870683
+1166812563
 next
 MeshActor
-3
+1
  Enabled
 1
  Position
@@ -121,48 +96,18 @@ MeshActor
  Visible
 1
 Name
-node0
+minecart0
 UID
-84571281
-next
- Enabled
-1
- Position
-0.9 0.85 2.5
- Rotation
--0 0 -0 1
- Scale
-2.75 2.75 0.1
- Visible
-1
-Name
-cube1
-UID
-2416095846
-next
- Enabled
-1
- Position
--0.5 0.5 3.5
- Rotation
-0 0.707229 0 0.706985
- Scale
-1 1 1
- Visible
-1
-Name
-plane2
-UID
-4122034125
+1668933940
 next
 Player
 1
  Enabled
 1
  Position
-2 0 0
+0 0 0
  Rotation
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -170,11 +115,11 @@ Player
 Name
 Player0
 UID
-3957761693
+3138937
 next
 CameraComponent
 1
-3957761693
+3138937
 Camera
  Enabled
 1
@@ -193,11 +138,11 @@ Far Z
 Near Z
 0.01
 UID
-4109097366
+354235442
 next
 DialogueComponent
-3
-3644580522
+2
+1166812563
 Dialogue
  Enabled
 1
@@ -206,9 +151,9 @@ Dialogue
 File
 
 UID
-2040906830
+1112456998
 next
-3957761693
+3138937
 Dialogue
  Enabled
 1
@@ -217,22 +162,11 @@ Dialogue
 File
 
 UID
-1506222586
-next
-939870683
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-923050384
+1535015005
 next
 DirectionalLightComponent
 1
-2676586241
+3176283088
 DirectionalLight
  Enabled
 1
@@ -249,28 +183,28 @@ Colour
 LightEnabled
 1
 UID
-4263415347
+615341898
 next
 EmptyComponent
 1
-3957761693
+3138937
 Root
  Enabled
 1
  Pos
-2 0 0
+0 0 0
  Rot
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
 1
 UID
-2023848699
+313161053
 next
 InstanceMeshComponent
 1
-1023253590
+1468150933
 NodeMesh
  Enabled
 1
@@ -321,71 +255,18 @@ Static
 Trans. Occlude
 0
 UID
-3938727138
+217487553
 next
 MeshComponent
-6
-3644580522
+3
+1166812563
 Mesh
  Enabled
 1
  Pos
-2 0.5 3.65
+0 0 2
  Rot
 -0 0.707107 -0 0.707107
- Scale
-0.5 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-nobackcull
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-fence01.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-plane.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1776599535
-next
-3957761693
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 1 0 -2.98023e-08
  Scale
 1 1 1
  Visible
@@ -423,15 +304,15 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-char.vmesh
+minecart.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-3768523613
+2206227927
 next
-84571281
+1668933940
 Mesh
  Enabled
 1
@@ -482,69 +363,16 @@ Static
 Trans. Occlude
 0
 UID
-2212718956
+3645328770
 next
-2416095846
+3138937
 Mesh
  Enabled
 1
  Pos
-0.9 0.85 2.5
+0 0 0
  Rot
--0 0 -0 1
- Scale
-2.75 2.75 0.1
- Visible
-1
-Casts Shadow
-1
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1887050065
-next
-4122034125
-Mesh
- Enabled
-1
- Pos
--0.5 0.5 3.5
- Rot
-0 0.707229 0 0.706985
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -582,65 +410,12 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-plane.vmesh
+char.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-1191259429
-next
-939870683
-Mesh
- Enabled
-1
- Pos
-2 0 2
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2934000643
+1482173283
 next
 end
