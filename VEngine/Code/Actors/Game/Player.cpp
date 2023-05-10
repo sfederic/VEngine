@@ -601,10 +601,13 @@ void Player::MoveLinkedGridActor()
 	{
 		if (checkLinkMovement(linkedGridActor->canBeMovedInLink))
 		{
-			linkedGridActor->nextPos += GetForwardVectorV();
-			if (linkedGridActor->CheckNextNodeMoveIsValid())
+			if (linkedGridActor->IsNextMoveAxisValid(GetForwardVectorV()))
 			{
-				linkedGridActor->OnLinkMove();
+				linkedGridActor->nextPos += GetForwardVectorV();
+				if (linkedGridActor->CheckNextNodeMoveIsValid())
+				{
+					linkedGridActor->OnLinkMove();
+				}
 			}
 		}
 	}
@@ -612,10 +615,13 @@ void Player::MoveLinkedGridActor()
 	{
 		if (checkLinkMovement(linkedGridActor->canBeMovedInLink))
 		{
-			linkedGridActor->nextPos -= GetForwardVectorV();
-			if (linkedGridActor->CheckNextNodeMoveIsValid())
+			if (linkedGridActor->IsNextMoveAxisValid(GetForwardVectorV()))
 			{
-				linkedGridActor->OnLinkMove();
+				linkedGridActor->nextPos -= GetForwardVectorV();
+				if (linkedGridActor->CheckNextNodeMoveIsValid())
+				{
+					linkedGridActor->OnLinkMove();
+				}
 			}
 		}
 	}
@@ -623,10 +629,13 @@ void Player::MoveLinkedGridActor()
 	{
 		if (checkLinkMovement(linkedGridActor->canBeMovedInLink))
 		{
-			linkedGridActor->nextPos -= GetRightVectorV();
-			if (linkedGridActor->CheckNextNodeMoveIsValid())
+			if (linkedGridActor->IsNextMoveAxisValid(GetForwardVectorV()))
 			{
-				linkedGridActor->OnLinkMove();
+				linkedGridActor->nextPos -= GetRightVectorV();
+				if (linkedGridActor->CheckNextNodeMoveIsValid())
+				{
+					linkedGridActor->OnLinkMove();
+				}
 			}
 		}
 	}
@@ -634,10 +643,13 @@ void Player::MoveLinkedGridActor()
 	{
 		if (checkLinkMovement(linkedGridActor->canBeMovedInLink))
 		{
-			linkedGridActor->nextPos += GetRightVectorV();
-			if (linkedGridActor->CheckNextNodeMoveIsValid())
+			if (linkedGridActor->IsNextMoveAxisValid(GetForwardVectorV()))
 			{
-				linkedGridActor->OnLinkMove();
+				linkedGridActor->nextPos += GetRightVectorV();
+				if (linkedGridActor->CheckNextNodeMoveIsValid())
+				{
+					linkedGridActor->OnLinkMove();
+				}
 			}
 		}
 	}

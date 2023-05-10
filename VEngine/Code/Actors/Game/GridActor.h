@@ -53,6 +53,11 @@ struct GridActor : Actor
 
 	bool inFall = false;
 
+	//These two are all the axis valid axis a GridActor can move on.
+	//1 or -1 denotes a valid direction (based on the axis type), 0 denotes it can't move in that cardinal direction.
+	XMFLOAT2 validPositiveMovementAxis = XMFLOAT2(1.f, 1.f);
+	XMFLOAT2 validNegativeMovementAxis = XMFLOAT2(1.f, 1.f);
+
 	std::wstring interactText;
 	std::wstring interactKnownText;
 
@@ -93,4 +98,6 @@ struct GridActor : Actor
 
 	void AddNextRotation(XMVECTOR axis, float angle);
 	void AddNextPosition(XMVECTOR offset);
+
+	bool IsNextMoveAxisValid(XMVECTOR direction);
 };

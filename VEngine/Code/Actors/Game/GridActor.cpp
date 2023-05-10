@@ -93,6 +93,8 @@ Properties GridActor::GetProps()
 	props.Add("Ignore Rotate Check", &ignoreRotationValidCheck);
 	props.Add("Rotate Yaw", &canBeRotatedYawYAxis);
 	props.Add("Rotate Pitch", &canBeRotatedPitchXAxis);
+	props.Add("Move Axis Pos.", &validPositiveMovementAxis);
+	props.Add("Move Axis Neg.", &validNegativeMovementAxis);
 	return props;
 }
 
@@ -208,4 +210,18 @@ void GridActor::AddNextRotation(XMVECTOR axis, float angle)
 void GridActor::AddNextPosition(XMVECTOR offset)
 {
 	nextPos += offset;
+}
+
+bool GridActor::IsNextMoveAxisValid(XMVECTOR direction)
+{
+	const float xAxis = direction.m128_f32[0];
+	const float yAxis = direction.m128_f32[2];
+
+	if (xAxis == 1 && validPositiveMovementAxis.x == 0) return false;
+	if (xAxis == -1 && validNegativeMovementAxis.x == 0) return false;
+
+	if (yAxis == 1 && validPositiveMovementAxis.y == 0) return false;
+	if (yAxis == -1 && validNegativeMovementAxis.y == 0) return false;
+
+	return true;
 }
