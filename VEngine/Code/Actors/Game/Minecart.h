@@ -8,4 +8,7 @@ public:
 	ACTOR_SYSTEM(Minecart);
 
 	void Create() override;
+	Properties GetProps() override;
+
+	void OnLinkMove() override;
 };
