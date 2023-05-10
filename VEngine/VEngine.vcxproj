@@ -273,6 +273,7 @@
     <ClCompile Include="Code\UI\Game\PickupWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\OrientationLock.cpp" />
     <ClCompile Include="Code\Actors\Game\LockedDoor.cpp" />
+    <ClCompile Include="Code\Actors\Game\Minecart.cpp" />
     <ClInclude Include="Code\Actors\Game\Bucket.h" />
     <ClInclude Include="Code\Actors\Game\SpotLightTower.h" />
     <ClInclude Include="Code\Core\BMPFileWriter.h" />
@@ -575,6 +576,7 @@
     <ClInclude Include="Code\UI\Game\PickupWidget.h" />
     <ClInclude Include="Code\Actors\Game\OrientationLock.h" />
     <ClInclude Include="Code\Actors\Game\LockedDoor.h" />
+    <ClInclude Include="Code\Actors\Game\Minecart.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
