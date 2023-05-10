@@ -609,13 +609,17 @@ void Player::MoveLinkedGridActor()
 					linkedGridActor->OnLinkMove();
 				}
 			}
+			else
+			{
+				GameUtils::CameraShake(0.25f);
+			}
 		}
 	}
 	else if (Input::GetKeyUp(Keys::S))
 	{
 		if (checkLinkMovement(linkedGridActor->canBeMovedInLink))
 		{
-			if (linkedGridActor->IsNextMoveAxisValid(GetForwardVectorV()))
+			if (linkedGridActor->IsNextMoveAxisValid(-GetForwardVectorV()))
 			{
 				linkedGridActor->nextPos -= GetForwardVectorV();
 				if (linkedGridActor->CheckNextNodeMoveIsValid())
@@ -623,13 +627,17 @@ void Player::MoveLinkedGridActor()
 					linkedGridActor->OnLinkMove();
 				}
 			}
+			else
+			{
+				GameUtils::CameraShake(0.25f);
+			}
 		}
 	}
 	else if (Input::GetKeyUp(Keys::A))
 	{
 		if (checkLinkMovement(linkedGridActor->canBeMovedInLink))
 		{
-			if (linkedGridActor->IsNextMoveAxisValid(GetForwardVectorV()))
+			if (linkedGridActor->IsNextMoveAxisValid(-GetRightVectorV()))
 			{
 				linkedGridActor->nextPos -= GetRightVectorV();
 				if (linkedGridActor->CheckNextNodeMoveIsValid())
@@ -637,19 +645,27 @@ void Player::MoveLinkedGridActor()
 					linkedGridActor->OnLinkMove();
 				}
 			}
+			else
+			{
+				GameUtils::CameraShake(0.25f);
+			}
 		}
 	}
 	else if (Input::GetKeyUp(Keys::D))
 	{
 		if (checkLinkMovement(linkedGridActor->canBeMovedInLink))
 		{
-			if (linkedGridActor->IsNextMoveAxisValid(GetForwardVectorV()))
+			if (linkedGridActor->IsNextMoveAxisValid(GetRightVectorV()))
 			{
 				linkedGridActor->nextPos += GetRightVectorV();
 				if (linkedGridActor->CheckNextNodeMoveIsValid())
 				{
 					linkedGridActor->OnLinkMove();
 				}
+			}
+			else
+			{
+				GameUtils::CameraShake(0.25f);
 			}
 		}
 	}
