@@ -73,6 +73,7 @@ struct GridActor : Actor
 
 	virtual void Interact() {}
 	virtual void Activate() {}
+	virtual void Deactivate() {}
 
 	//Called when this GridActor is attacked.
 	virtual void Attacked() {}

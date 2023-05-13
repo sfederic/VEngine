@@ -14,7 +14,9 @@ public:
 	void Create() override;
 	void Start() override;
 	Properties GetProps() override;
+
 	void Activate() override;
+	void Deactivate() override;
 
 	bool Contains(XMVECTOR point);
 

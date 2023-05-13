@@ -8,6 +8,7 @@ class OrientationLock : public GridActor
 public:
 	ACTOR_SYSTEM(OrientationLock);
 
+	void Start() override;
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
@@ -19,6 +20,8 @@ private:
 	XMFLOAT3 forward = XMFLOAT3(0.f, 0.f, 0.f);
 	XMFLOAT3 up = XMFLOAT3(0.f, 0.f, 0.f);
 	XMFLOAT3 right = XMFLOAT3(0.f, 0.f, 0.f);
+
+	GridActor* linkedGridActor = nullptr;
 
 	std::string gridActorToActivateOnCorrectOrientation;
 };

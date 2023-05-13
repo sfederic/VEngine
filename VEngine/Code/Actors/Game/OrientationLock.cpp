@@ -3,21 +3,38 @@
 #include "Core/VMath.h"
 #include "Core/Log.h"
 
+void OrientationLock::Start()
+{
+    __super::Start();
+
+    auto actor = World::GetActorByNameAllowNull(gridActorToActivateOnCorrectOrientation);
+    if (actor)
+    {
+        linkedGridActor = dynamic_cast<GridActor*>(actor);
+        if (!linkedGridActor)
+        {
+            Log("Linked actor [%s] for [%s] isn't derived from GridActor.",
+                gridActorToActivateOnCorrectOrientation.c_str(), GetName().c_str());
+        }
+    }
+    else
+    {
+        Log("Linked actor [%s] for [%s] not found.",
+            gridActorToActivateOnCorrectOrientation.c_str(), GetName().c_str());
+    }
+}
+
 void OrientationLock::Tick(float deltaTime)
 {
     __super::Tick(deltaTime);
 
     if (IsOrientationCorrect())
     {
-        auto actor = World::GetActorByNameAllowNull(gridActorToActivateOnCorrectOrientation);
-        if (actor)
-        {
-            auto gridActor = dynamic_cast<GridActor*>(actor);
-            if (gridActor)
-            {
-                gridActor->Activate();
-            }
-        }
+        linkedGridActor->Activate();
+    }
+    else
+    {
+        linkedGridActor->Deactivate();
     }
 }
 
