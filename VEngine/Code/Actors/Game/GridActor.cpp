@@ -7,6 +7,7 @@
 #include "Components/Game/DialogueComponent.h"
 #include "UI/Game/HealthWidget.h"
 #include "Grid.h"
+#include "WaterVolume.h"
 #include "Core/VMath.h"
 #include "Physics/Raycast.h"
 #include "Gameplay/GameUtils.h"
@@ -57,6 +58,12 @@ void GridActor::Tick(float deltaTime)
 {
 	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, moveSpeed));
 	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotateSpeed));
+
+	CheckIfSubmerged();
+	if (isSubmerged)
+	{
+		return;
+	}
 
 	HitResult hit(this);
 	if (!Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 0.5f))
@@ -224,4 +231,26 @@ bool GridActor::IsNextMoveAxisValid(XMVECTOR direction)
 	if (yAxis == -1 && validNegativeMovementAxis.y == 0) return false;
 
 	return true;
+}
+
+void GridActor::CheckIfSubmerged()
+{
+	if (!isSubmerged)
+	{
+		bool waterVolumeMultipleCheck = false;
+
+		for (auto& waterVolume : WaterVolume::system.GetActors())
+		{
+			auto pos = GetPositionV();
+			if (waterVolume->Contains(pos))
+			{
+				assert(!waterVolumeMultipleCheck && "GridActor is within more than one water volume.");
+				nextPos = waterVolume->GetPositionV(); //This should give a nice little water 'bob' visual.
+				isSubmerged = true;
+				moveSpeed /= 2.f; //Slow down movement speed when in water
+				waterVolumeMultipleCheck = true;
+				return;
+			}
+		}
+	}
 }

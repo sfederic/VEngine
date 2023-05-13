@@ -14,7 +14,7 @@ WaterVolume::WaterVolume()
 
 void WaterVolume::Create()
 {
-	waterSurface->gridObstacle = true;
+	waterSurface->ignoreGridRaycasts = true;
 	waterSurface->SetMeshFilename("node.vmesh");
 	waterSurface->SetTexture("water.jpg");
 
@@ -27,4 +27,9 @@ Properties WaterVolume::GetProps()
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
 	return props;
+}
+
+bool WaterVolume::Contains(XMVECTOR point)
+{
+	return waterVolumeTrigger->Contains(point);
 }

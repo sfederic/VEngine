@@ -53,6 +53,7 @@ struct GridActor : Actor
 
 	bool isLinked = false;
 	bool inFall = false;
+	bool isSubmerged = false;
 
 	//These two are all the axis valid axis a GridActor can move on.
 	//1 or -1 denotes a valid direction (based on the axis type), 0 denotes it can't move in that cardinal direction.
@@ -102,4 +103,6 @@ struct GridActor : Actor
 	void AddNextPosition(XMVECTOR offset);
 
 	bool IsNextMoveAxisValid(XMVECTOR direction);
+
+	void CheckIfSubmerged();
 };

@@ -16,6 +16,8 @@ public:
 	void Create() override;
 	Properties GetProps() override;
 
+	bool Contains(XMVECTOR point);
+
 private:
 	MeshComponent* waterSurface = nullptr;
 	BoxTriggerComponent* waterVolumeTrigger = nullptr;
