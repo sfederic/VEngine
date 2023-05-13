@@ -305,16 +305,6 @@ void World::Cleanup()
 	actorUIDMap.clear();
 	actorNameMap.clear();
 
-	MeshComponent::DestroyDebugMeshes();
-
-	Timer::Cleanup();
-	PhysicsSystem::Reset();
-	AudioSystem::DeleteLoadedAudioAndChannels();
-	TextureSystem::Cleanup();
-	MaterialSystem::Cleanup();
-	SpriteSystem::Reset();
-	UISystem::Reset();
-
 	for (auto componentSystem : activeComponentSystems)
 	{
 		componentSystem->Cleanup();
@@ -324,4 +314,14 @@ void World::Cleanup()
 	{
 		actorSystem->Cleanup();
 	}
+
+	MeshComponent::DestroyDebugMeshes();
+
+	Timer::Cleanup();
+	PhysicsSystem::Reset();
+	AudioSystem::DeleteLoadedAudioAndChannels();
+	TextureSystem::Cleanup();
+	MaterialSystem::Cleanup();
+	SpriteSystem::Reset();
+	UISystem::Reset();
 }
