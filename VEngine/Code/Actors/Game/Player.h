@@ -72,6 +72,8 @@ public:
 
 	void SetInteractWidgetText(std::wstring_view interactText);
 
+	void ResetLinkedGridActor();
+
 private:
 	float nextCameraFOV = 0.f;
 

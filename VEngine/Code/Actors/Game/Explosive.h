@@ -7,6 +7,12 @@ class Explosive : public GridActor
 public:
 	ACTOR_SYSTEM(Explosive);
 
+	void Tick(float deltaTime) override;
 	void Create() override;
 	void Interact() override;
+
+	bool setToIgnite = false;
+
+private:
+	float igniteTimer = 0.f;
 };

@@ -51,6 +51,7 @@ struct GridActor : Actor
 
 	bool ignoreRotationValidCheck = false;
 
+	bool isLinked = false;
 	bool inFall = false;
 
 	//These two are all the axis valid axis a GridActor can move on.

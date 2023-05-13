@@ -159,6 +159,10 @@ void Player::HighlightLinkableGridActor()
 		auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
 		if (gridActor)
 		{
+			if (gridActor->isLinked)
+			{
+				return;
+			}
 			if (!gridActor->canBeMovedInLink && gridActor->canBeRotatedInLink)
 			{
 				return;
@@ -421,7 +425,7 @@ bool Player::InteractCheck(Actor* hitActor)
 void Player::InteractInfoToWidgetCheck()
 {
 	HitResult hit(this);
-	if (Raycast(hit, GetPositionV(), GetMeshForward(), 1.5f))
+	if (Raycast(hit, GetPositionV(), GetMeshForward(), 1.f))
 	{
 		auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
 		if (gridActor)
@@ -562,6 +566,7 @@ void Player::LinkToGridActor()
 				HitResult nodeHit(this);
 				moveableActor->GetCurrentNode()->RecalcNodeHeight(nodeHit);
 				linkedGridActor = moveableActor;
+				linkedGridActor->isLinked = true;
 				camera->targetActor = moveableActor;
 				isInputLinkedToGridActor = true;
 			}
@@ -590,6 +595,7 @@ void Player::LinkToGridActor()
 			linkedGridActor->SetGridPosition();
 			HitResult hit(this);
 			linkedGridActor->GetCurrentNode()->RecalcNodeHeight(hit);
+			linkedGridActor->isLinked = false;
 			linkedGridActor = nullptr;
 			camera->targetActor = this;
 			isInputLinkedToGridActor = false;
@@ -900,6 +906,11 @@ void Player::GetGridIndices(int& x, int& y)
 void Player::SetInteractWidgetText(std::wstring_view interactText)
 {
 	interactWidget->interactText = interactText;
+}
+
+void Player::ResetLinkedGridActor()
+{
+	linkedGridActor = nullptr;
 }
 
 GridNode* Player::GetCurrentNode()
