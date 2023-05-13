@@ -84,6 +84,8 @@ void Player::Tick(float deltaTime)
 		//GameUtils::TriggerGameOver();
 	}
 
+	InteractInfoToWidgetCheck();
+
 	OverlapPickupGridActor();
 	HighlightLinkableGridActor();
 
@@ -393,9 +395,14 @@ bool Player::InteractCheck(Actor* hitActor)
 			{
 				gridActor->Interact();
 				gridActorInteractingWith = gridActor;
+
+				//@Todo: this is here if GridActor destroys itself on Interact(), but will probably cause visual 'error's
+				highlightedGridActor = nullptr;
+
+				return true;
 			}
 
-			if (gridActor->isInspectable)
+			/*if (gridActor->isInspectable)
 			{
 				interactWidget->interactText = gridActor->interactText;
 				interactWidget->AddToViewport();
@@ -404,11 +411,30 @@ bool Player::InteractCheck(Actor* hitActor)
 				SetZoomedInCameraFOV();
 
 				return true;
-			}
+			}*/
 		}
 	}
 
 	return false;
+}
+
+void Player::InteractInfoToWidgetCheck()
+{
+	HitResult hit(this);
+	if (Raycast(hit, GetPositionV(), GetMeshForward(), 1.5f))
+	{
+		auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
+		if (gridActor)
+		{
+			interactWidget->worldPosition = GetHomogeneousPositionV();
+			interactWidget->interactText = gridActor->interactText;
+			interactWidget->AddToViewport();
+		}
+	}
+	else
+	{
+		interactWidget->RemoveFromViewport();
+	}
 }
 
 bool Player::DestructibleCheck(Actor* hitActor)
@@ -869,6 +895,11 @@ void Player::GetGridIndices(int& x, int& y)
 	auto pos = GetPosition();
 	x = std::lroundf(pos.x);
 	y = std::lroundf(pos.z);
+}
+
+void Player::SetInteractWidgetText(std::wstring_view interactText)
+{
+	interactWidget->interactText = interactText;
 }
 
 GridNode* Player::GetCurrentNode()

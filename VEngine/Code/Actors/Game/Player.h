@@ -70,6 +70,8 @@ public:
 	void SetGridIndices();
 	void GetGridIndices(int& x, int& y);
 
+	void SetInteractWidgetText(std::wstring_view interactText);
+
 private:
 	float nextCameraFOV = 0.f;
 
@@ -88,7 +90,10 @@ private:
 	bool DialogueCheck(Actor* hitActor);
 	bool QuickTalkCheck(Actor* hitActor);
 	bool CombatInteractCheck(Actor* actorToCheck);
+
 	bool InteractCheck(Actor* hitActor);
+	void InteractInfoToWidgetCheck();
+
 	bool DestructibleCheck(Actor* hitActor);
 	bool AttackGridActorBasedOnNode();
 
