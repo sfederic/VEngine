@@ -2,10 +2,13 @@
 #include "Weight.h"
 #include "Physics/Raycast.h"
 #include "Core/VMath.h"
+#include "Crushable.h"
 
 void Weight::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
+
+	CrushBreakableGridActorUnderneath();
 }
 
 void Weight::CrushBreakableGridActorUnderneath()
@@ -13,6 +16,10 @@ void Weight::CrushBreakableGridActorUnderneath()
 	HitResult hit(this);
 	if (Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 1.f))
 	{
-		//... breakable and whatever else actor checks
+		auto crushable = dynamic_cast<Crushable*>(hit.hitActor);
+		if (crushable)
+		{
+			crushable->Crushed();
+		}
 	}
 }
