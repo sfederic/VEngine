@@ -38,6 +38,7 @@ public:
 
 	//For VagrantTactics. Tells the Grid that any nodes that are placed on this mesh are to become inactive.
 	bool gridObstacle = false;
+	bool ignoreGridRaycasts = false;
 
 	MeshComponent();
 	MeshComponent(const std::string filename_,

@@ -60,6 +60,15 @@ void Grid::Awake()
         hit.actorsToIgnore.push_back(gridActor);
     }
 
+    auto meshesToIgnore = World::GetAllComponentsOfType<MeshComponent>();
+    for (auto mesh : meshesToIgnore)
+    {
+        if (mesh->ignoreGridRaycasts)
+        {
+            hit.componentsToIgnore.push_back(mesh);
+        }
+    }
+
     rows.clear();
 
     for (int x = 0; x < sizeX; x++)
