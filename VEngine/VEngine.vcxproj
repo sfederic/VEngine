@@ -275,6 +275,7 @@
     <ClCompile Include="Code\Actors\Game\Minecart.cpp" />
     <ClCompile Include="Code\Actors\Game\MinecartTrack.cpp" />
     <ClCompile Include="Code\Actors\Game\Explosive.cpp" />
+    <ClCompile Include="Code\Actors\Game\Explodable.cpp" />
     <ClInclude Include="Code\Actors\Game\Bucket.h" />
     <ClInclude Include="Code\Actors\Game\SpotLightTower.h" />
     <ClInclude Include="Code\Core\BMPFileWriter.h" />
@@ -579,6 +580,7 @@
     <ClInclude Include="Code\Actors\Game\Minecart.h" />
     <ClInclude Include="Code\Actors\Game\MinecartTrack.h" />
     <ClInclude Include="Code\Actors\Game\Explosive.h" />
+    <ClInclude Include="Code\Actors\Game\Explodable.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
