@@ -1,9 +1,11 @@
 #pragma once
+
 #include "../Widget.h"
 
-struct InteractWidget : Widget
+//Displays prompt to interact with a GridActor.
+class InteractWidget : public Widget
 {
+public:
 	std::wstring interactText;
-
-	virtual void Draw(float deltaTime) override;
+	void Draw(float deltaTime) override;
 };

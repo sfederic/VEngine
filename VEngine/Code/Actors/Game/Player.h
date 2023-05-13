@@ -9,7 +9,6 @@
 struct DialogueComponent;
 struct InteractWidget;
 struct PlayerHealthWidget;
-class PickupWidget;
 struct GridActor;
 struct Unit;
 struct MeshComponent;
@@ -27,7 +26,6 @@ public:
 
 	InteractWidget* interactWidget = nullptr;
 	PlayerHealthWidget* healthWidget = nullptr;
-	PickupWidget* pickupWidget = nullptr;
 
 	GridActor* gridActorInteractingWith = nullptr;
 

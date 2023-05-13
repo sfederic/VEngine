@@ -20,7 +20,6 @@
 #include "UI/Game/DialogueWidget.h"
 #include "UI/Game/InteractWidget.h"
 #include "UI/Game/PlayerHealthWidget.h"
-#include "UI/Game/PickupWidget.h"
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/GameUtils.h"
 #include "Render/Material.h"
@@ -64,7 +63,6 @@ void Player::Start()
 	//Setup widgets
 	interactWidget = UISystem::CreateWidget<InteractWidget>();
 	healthWidget = UISystem::CreateWidget<PlayerHealthWidget>();
-	pickupWidget = UISystem::CreateWidget<PickupWidget>();
 }
 
 void Player::End()
@@ -194,13 +192,15 @@ void Player::OverlapPickupGridActor()
 				auto pickup = dynamic_cast<Pickup*>(hitActor);
 				if (pickup)
 				{
-					pickupWidget->AddToViewport();
+					interactWidget->interactText = L"Pick up";
+					interactWidget->AddToViewport();
 				}
 			}
 		}
 		else
 		{
-			pickupWidget->RemoveFromViewport();
+			interactWidget->interactText.clear();
+			interactWidget->RemoveFromViewport();
 		}
 	}
 }
