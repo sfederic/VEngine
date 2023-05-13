@@ -533,9 +533,6 @@
     <ClCompile Include="Code\UI\Game\HealthWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\UI\Game\InteractWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\UI\Game\PlayerHealthWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -581,7 +578,7 @@
     <ClCompile Include="Code\Actors\Game\Pickup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\UI\Game\PickupWidget.cpp">
+    <ClCompile Include="Code\UI\Game\InteractWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\Game\OrientationLock.cpp">
@@ -594,6 +591,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\Game\MinecartTrack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Actors\Game\Explosive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1158,9 +1158,6 @@
     <ClInclude Include="Code\UI\Game\HealthWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\UI\Game\InteractWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\UI\Game\PlayerHealthWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1212,7 +1209,7 @@
     <ClInclude Include="Code\Actors\Game\Pickup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\UI\Game\PickupWidget.h">
+    <ClInclude Include="Code\UI\Game\InteractWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\OrientationLock.h">
@@ -1225,6 +1222,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\MinecartTrack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\Explosive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
