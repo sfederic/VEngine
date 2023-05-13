@@ -277,6 +277,7 @@
     <ClCompile Include="Code\Actors\Game\Explosive.cpp" />
     <ClCompile Include="Code\Actors\Game\Explodable.cpp" />
     <ClCompile Include="Code\Actors\Game\Weight.cpp" />
+    <ClCompile Include="Code\Actors\Game\Crushable.cpp" />
     <ClInclude Include="Code\Actors\Game\Bucket.h" />
     <ClInclude Include="Code\Actors\Game\SpotLightTower.h" />
     <ClInclude Include="Code\Core\BMPFileWriter.h" />
@@ -583,6 +584,7 @@
     <ClInclude Include="Code\Actors\Game\Explosive.h" />
     <ClInclude Include="Code\Actors\Game\Explodable.h" />
     <ClInclude Include="Code\Actors\Game\Weight.h" />
+    <ClInclude Include="Code\Actors\Game\Crushable.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
