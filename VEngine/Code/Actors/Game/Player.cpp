@@ -430,9 +430,12 @@ void Player::InteractInfoToWidgetCheck()
 		auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
 		if (gridActor)
 		{
-			interactWidget->worldPosition = GetHomogeneousPositionV();
-			interactWidget->interactText = gridActor->interactText;
-			interactWidget->AddToViewport();
+			if (!gridActor->interactText.empty())
+			{
+				interactWidget->worldPosition = GetHomogeneousPositionV();
+				interactWidget->interactText = gridActor->interactText;
+				interactWidget->AddToViewport();
+			}
 		}
 	}
 	else
