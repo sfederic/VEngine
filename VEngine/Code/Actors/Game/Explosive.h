@@ -11,6 +11,8 @@ public:
 	void Create() override;
 	void Interact() override;
 
+	void HitNearbyExplodables();
+
 	bool setToIgnite = false;
 
 private:
