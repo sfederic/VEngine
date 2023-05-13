@@ -14,6 +14,8 @@ public:
 
 	WaterVolume();
 	void Create() override;
+	void Start() override;
+	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
 	bool Contains(XMVECTOR point);
@@ -21,4 +23,6 @@ public:
 private:
 	MeshComponent* waterSurface = nullptr;
 	BoxTriggerComponent* waterVolumeTrigger = nullptr;
+
+	float yPointToRaiseTo = 0.f;
 };
