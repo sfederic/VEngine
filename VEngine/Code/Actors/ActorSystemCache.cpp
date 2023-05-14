@@ -4,7 +4,10 @@
 
 void ActorSystemCache::AddSystem(std::type_index type, IActorSystem* actorSystem)
 {
+	assert(typeToSystemMap.find(type) == typeToSystemMap.end());
 	typeToSystemMap.emplace(type, actorSystem);
+
+	assert(nameToSystemMap.find(actorSystem->GetName()) == nameToSystemMap.end());
 	nameToSystemMap.emplace(actorSystem->GetName(), actorSystem);
 }
 
