@@ -65,19 +65,22 @@ void GridActor::Tick(float deltaTime)
 		return;
 	}
 
-	HitResult hit(this);
-	if (!Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 0.5f))
+	if (canFall)
 	{
-		inFall = true;
-		constexpr float fallSpeed = 3.5f;
-		nextPos -= VMath::GlobalUpVector() * fallSpeed * deltaTime;
-	}
-	else if (inFall)
-	{
-		inFall = false;
-		HitResult nodeHit;
-		GetCurrentNode()->RecalcNodeHeight(nodeHit);
-		nextPos.m128_f32[1] = std::round(nextPos.m128_f32[1]);
+		HitResult hit(this);
+		if (!Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 0.5f))
+		{
+			inFall = true;
+			constexpr float fallSpeed = 3.5f;
+			nextPos -= VMath::GlobalUpVector() * fallSpeed * deltaTime;
+		}
+		else if (inFall)
+		{
+			inFall = false;
+			HitResult nodeHit;
+			GetCurrentNode()->RecalcNodeHeight(nodeHit);
+			nextPos.m128_f32[1] = std::round(nextPos.m128_f32[1]);
+		}
 	}
 
 	dialogueComponent->SetPosition(GetHomogeneousPositionV());
@@ -102,6 +105,7 @@ Properties GridActor::GetProps()
 	props.Add("Rotate Pitch", &canBeRotatedPitchXAxis);
 	props.Add("Move Axis Pos.", &validPositiveMovementAxis);
 	props.Add("Move Axis Neg.", &validNegativeMovementAxis);
+	props.Add("Can Fall", &canFall);
 	return props;
 }
 

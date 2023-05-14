@@ -53,6 +53,7 @@ struct GridActor : Actor
 
 	bool isLinked = false;
 	bool inFall = false;
+	bool canFall = true;
 	bool isSubmerged = false;
 
 	//These two are all the axis valid axis a GridActor can move on.
