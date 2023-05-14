@@ -2,6 +2,7 @@
 #include "Rotator.h"
 #include "Core/Log.h"
 #include "Components/MeshComponent.h"
+#include "Grid.h"
 
 void Rotator::Create()
 {
@@ -21,6 +22,20 @@ void Rotator::Start()
 	}
 }
 
+void Rotator::Tick(float deltaTime)
+{
+	__super::Tick(deltaTime);
+
+	if (waitOnActorToRotateRotationComplete)
+	{
+		if (actorToRotate->HaveMovementAndRotationStopped())
+		{
+			waitOnActorToRotateRotationComplete = false;
+			Grid::system.GetOnlyActor()->Awake();
+		}
+	}
+}
+
 Properties Rotator::GetProps()
 {
 	auto props = __super::GetProps();
@@ -31,5 +46,6 @@ Properties Rotator::GetProps()
 
 void Rotator::OnLinkRotate()
 {
+	waitOnActorToRotateRotationComplete = true;
 	actorToRotate->nextRot = nextRot;
 }
