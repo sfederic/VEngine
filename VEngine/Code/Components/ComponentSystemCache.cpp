@@ -4,7 +4,10 @@
 
 void ComponentSystemCache::Add(std::type_index type, IComponentSystem* componentSystem)
 {
+	assert(typeToSystemMap.find(type) == typeToSystemMap.end());
 	typeToSystemMap.emplace(type, componentSystem);
+
+	assert(nameToSystemMap.find(componentSystem->GetName()) == nameToSystemMap.end());
 	nameToSystemMap.emplace(componentSystem->GetName(), componentSystem);
 }
 
