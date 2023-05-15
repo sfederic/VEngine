@@ -175,9 +175,7 @@ void World::TickAllActorSystems(float deltaTime)
 
 	for (IActorSystem* actorSystem : activeActorSystems)
 	{
-		Profile::Start(actorSystem->GetName());
 		actorSystem->Tick(deltaTime);
-		Profile::End(actorSystem->GetName());
 	}
 
 	Profile::End();
@@ -189,9 +187,7 @@ void World::TickAllComponentSystems(float deltaTime)
 
 	for (IComponentSystem* componentSystem : activeComponentSystems)
 	{
-		Profile::Start(componentSystem->GetName());
 		componentSystem->Tick(deltaTime);
-		Profile::End(componentSystem->GetName());
 	}
 
 	Profile::End();
