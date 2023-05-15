@@ -5,6 +5,8 @@
 
 void Gear::Create()
 {
+	ignoreRotationValidCheck = true;
+
 	mesh->SetMeshFilename("gear.vmesh");
 }
 
