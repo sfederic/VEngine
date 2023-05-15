@@ -4,5 +4,9 @@
 
 void GearSetDoor::Create()
 {
+	canFall = false;
+	canBeMovedInLink = false;
+	canBeRotatedInLink = false;
+
 	mesh->SetMeshFilename("plane.vmesh");
 }
