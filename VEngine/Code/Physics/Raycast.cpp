@@ -4,6 +4,7 @@
 #include "Core/Camera.h"
 #include "Render/Renderer.h"
 #include "Render/Line.h"
+#include "Render/RastStates.h"
 #include "Editor/Editor.h"
 #include "Core/VMath.h"
 #include "Core/Core.h"
@@ -187,6 +188,9 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 
 	const auto checkMeshVerticesCollision = [&](MeshComponent& mesh)
 	{
+		//Ignore the check for backface if the rasterizer state doesn't cull them
+		const bool ignoreBackFaceHit = mesh.GetRastState().name == RastStates::noBackCull;
+
 		const XMMATRIX meshWorldMatrix = mesh.GetWorldMatrix();
 
 		const auto& vertices = mesh.meshDataProxy.GetVertices();
@@ -219,14 +223,17 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 				XMStoreFloat3(&tempHitResult.hitNormal, normal);
 
 				//Check if back facing triangle
-				const float angleBetweenRaycastDirectionAndTriangleNormal =
-					XMConvertToDegrees(XMVector3AngleBetweenNormals(
-						normal,
-						hitResult.direction).m128_f32[0]);
-				if (angleBetweenRaycastDirectionAndTriangleNormal < 90)
+				if (!ignoreBackFaceHit)
 				{
-					//has hit the back face of a triangle, so skip
-					continue;
+					const float angleBetweenRaycastDirectionAndTriangleNormal =
+						XMConvertToDegrees(XMVector3AngleBetweenNormals(
+							normal,
+							hitResult.direction).m128_f32[0]);
+					if (angleBetweenRaycastDirectionAndTriangleNormal < 90.f)
+					{
+						//has hit the back face of a triangle, so skip
+						continue;
+					}
 				}
 
 				//hit position
