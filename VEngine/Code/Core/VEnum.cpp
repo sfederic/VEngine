@@ -22,9 +22,9 @@ void VEnum::Add(const std::string& name)
 std::vector<std::string> VEnum::GetAllNames()
 {
 	std::vector<std::string> names;
-	for (auto& [name, index] : data)
+	for (auto& dataPair : data)
 	{
-		names.emplace_back(name);
+		names.push_back(dataPair.first);
 	}
 	return names;
 }
