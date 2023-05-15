@@ -29,6 +29,8 @@ namespace Profile
 	void End(std::string funcName);
 	void Reset();
 
+	double GetTotalFrameTime();
+
 	//Quick timing functions that need to be called once off without need for constant profiling.
 	__int64 QuickStart();
 	double QuickEnd(__int64 startTime);

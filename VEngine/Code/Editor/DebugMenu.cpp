@@ -544,6 +544,7 @@ void DebugMenu::RenderFPSMenu(float deltaTime)
 		ImGui::Begin("FPS");
 
 		ImGui::Text("FPS: %d", Core::finalFrameCount);
+		ImGui::Text("Total Frame Time %f | (60 FPS) %f", Profile::GetTotalFrameTime(), 60.0 / 1000.0);
 		ImGui::Text("GPU Render Time: %f", Renderer::frameTime);
 		ImGui::Text("Delta Time (ms): %f", deltaTime);
 		ImGui::Text("Time Since Startup: %f", Core::timeSinceStartup);

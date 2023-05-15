@@ -52,6 +52,16 @@ void Profile::Reset()
 	timeFrames.clear();
 }
 
+double Profile::GetTotalFrameTime()
+{
+	double totalTime = 0.0;
+	for (auto& [funcName, timeFrame] : timeFrames)
+	{
+		totalTime += timeFrame.GetAverageTime();
+	}
+	return totalTime;
+}
+
 __int64 Profile::QuickStart()
 {
 	__int64 startTime = 0;
