@@ -27,11 +27,15 @@ Gear
 1 0.999993 0.999994
  Visible
 1
+Can Fall
+1
 Destruct
 1
 DisableGridInteract
 0
 Health
+1
+Ignore Rotate Check
 1
 Inspect
 1
@@ -45,9 +49,17 @@ Link Movement
 1
 Link Rotation
 1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
 Name
 Gear0
 Obstacle
+1
+Rotate Pitch
+1
+Rotate Yaw
 1
 UID
 1306228581
@@ -64,6 +76,8 @@ GearSet
 1 0.999992 0.999992
  Visible
 1
+Can Fall
+1
 Destruct
 1
 DisableGridInteract
@@ -72,6 +86,8 @@ Door Name
 GearSetDoor0
 Health
 1
+Ignore Rotate Check
+0
 Inspect
 1
 Interact
@@ -84,9 +100,17 @@ Link Movement
 0
 Link Rotation
 0
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
 Name
 GearSet0
 Obstacle
+1
+Rotate Pitch
+1
+Rotate Yaw
 1
 UID
 962276024
@@ -103,12 +127,16 @@ GearSetDoor
 1 1 1
  Visible
 1
+Can Fall
+0
 Destruct
 1
 DisableGridInteract
 0
 Health
 1
+Ignore Rotate Check
+0
 Inspect
 1
 Interact
@@ -121,9 +149,17 @@ Link Movement
 0
 Link Rotation
 0
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
 Name
 GearSetDoor0
 Obstacle
+1
+Rotate Pitch
+1
+Rotate Yaw
 1
 UID
 2401614527
