@@ -74,31 +74,37 @@ double Profile::QuickEnd(__int64 startTime)
 
 void Profile::Start(std::source_location location)
 {
+	Start(location.function_name());
+}
+
+void Profile::Start(std::string funcName)
+{
 	__int64 startTime = 0;
 	QueryPerformanceCounter((LARGE_INTEGER*)&startTime);
 
-	auto functionName = location.function_name();
-
-	auto timeFramesIt = timeFrames.find(functionName);
+	auto timeFramesIt = timeFrames.find(funcName);
 	if (timeFramesIt == timeFrames.end())
 	{
 		TimeFrame timeFrame = TimeFrame(startTime);
-		timeFrames[functionName] = timeFrame;
+		timeFrames[funcName] = timeFrame;
 	}
 	else
 	{
-		timeFrames[functionName].startTime = startTime;
+		timeFrames[funcName].startTime = startTime;
 	}
 }
 
 void Profile::End(std::source_location location)
 {
+	End(location.function_name());
+}
+
+void Profile::End(std::string funcName)
+{
 	__int64 endTime = 0;
 	QueryPerformanceCounter((LARGE_INTEGER*)&endTime);
 
-	auto functionName = location.function_name();
-
-	auto timeFramesIt = timeFrames.find(functionName);
+	auto timeFramesIt = timeFrames.find(funcName);
 	assert(timeFramesIt != timeFrames.end() && "Check for matching PROFILE_START in function.");
 
 	TimeFrame& currentTimeFrame = timeFramesIt->second;

@@ -24,7 +24,9 @@ namespace Profile
 	extern std::unordered_map<std::string, TimeFrame> timeFrames;
 
 	void Start(std::source_location location = std::source_location::current());
+	void Start(std::string funcName);
 	void End(std::source_location location = std::source_location::current());
+	void End(std::string funcName);
 	void Reset();
 
 	//Quick timing functions that need to be called once off without need for constant profiling.
