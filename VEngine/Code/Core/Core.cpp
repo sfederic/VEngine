@@ -71,8 +71,7 @@ void Core::SetTimerFrequency()
 void Core::Init()
 {
 	//For the WIC texture functions from DirectXToolkit and XAudio2 threading
-	//Note: Need COINIT_APARTMENTTHREADED here else Qt's native file dialog defaults to its own implementation.
-	HR(CoInitializeEx(NULL, COINIT_APARTMENTTHREADED));
+	HR(CoInitializeEx(NULL, COINIT_MULTITHREADED));
 	SetTimerFrequency();
 }
 
