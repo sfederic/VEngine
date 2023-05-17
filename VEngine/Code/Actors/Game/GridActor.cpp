@@ -68,10 +68,10 @@ void GridActor::Tick(float deltaTime)
 	if (canFall)
 	{
 		HitResult hit(this);
-		if (!Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 0.5f))
+		if (!Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 0.75f))
 		{
 			inFall = true;
-			constexpr float fallSpeed = 3.5f;
+			constexpr float fallSpeed = 2.f;
 			nextPos -= VMath::GlobalUpVector() * fallSpeed * deltaTime;
 		}
 		else if (inFall)
@@ -179,6 +179,14 @@ bool GridActor::CheckNextNodeMoveIsValid()
 	}
 
 	auto nextNode = grid->GetNode(nextXIndex, nextYIndex);
+
+	//Check next node height
+	if (nextNode->worldPosition.y > (GetPosition().y + Grid::maxHeightMove))
+	{
+		nextPos = GetPositionV();
+		return false;
+	}
+
 	nextPos = XMLoadFloat3(&nextNode->worldPosition);
 
 	//When a GridActor moves, need to recalculate the Grid node height of the last position it was at.
