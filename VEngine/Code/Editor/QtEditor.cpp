@@ -107,6 +107,10 @@ void QtEditor::SetActorProps(Actor* actor)
 void QtEditor::UpdateWorldList()
 {
     mainWindow->worldDock->PopulateWorldActorList();
+}
+
+void QtEditor::UpdateSystemsList()
+{
     mainWindow->systemDock->PopulateSystemLists();
 }
 

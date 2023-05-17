@@ -26,6 +26,7 @@ struct IEditor
 	virtual void Log(const std::string logMessage) = 0;
 	virtual void SetActorProps(Actor* actor) = 0;
 	virtual void UpdateWorldList() = 0;
+	virtual void UpdateSystemsList() = 0;
 	virtual void AddActorToWorldList(Actor* actor) = 0;
 	virtual void RemoveActorFromWorldList() = 0;
 	virtual void RefreshAssetList() = 0;

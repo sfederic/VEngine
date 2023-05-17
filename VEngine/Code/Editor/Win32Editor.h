@@ -12,6 +12,7 @@ public:
 	virtual void Log(const std::string logMessage) override;
 	virtual void SetActorProps(Actor* actor) override;
 	virtual void UpdateWorldList() override;
+	virtual void UpdateSystemsList() override {}
 	virtual void AddActorToWorldList(Actor* actor) override;
 	virtual void RemoveActorFromWorldList() override;
 	virtual void RefreshAssetList() override;

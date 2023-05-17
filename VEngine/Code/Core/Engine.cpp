@@ -68,7 +68,9 @@ void Engine::Init(int argc, char* argv[])
 	uiInit.wait();
 
 	World::Init();
+
 	editor->UpdateWorldList();
+	editor->UpdateSystemsList();
 
 	debugMenuInit.wait();
 	consoleInit.wait();
