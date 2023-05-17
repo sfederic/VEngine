@@ -153,6 +153,16 @@ void Player::ToggleGrid()
 
 void Player::HighlightLinkableGridActor()
 {
+	if (!CheckIfMovementAndRotationStopped())
+	{
+		return;
+	}
+	if (isInputLinkedToGridActor || isInputLinkedToDowncastGridActor)
+	{
+		highlightedGridActor = nullptr;
+		return;
+	}
+
 	HitResult hit(this);
 	if (Raycast(hit, GetPositionV(), GetMeshForward(), 100.f))
 	{
