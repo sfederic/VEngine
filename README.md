@@ -5,7 +5,7 @@ A beginner to intermediate game engine, the purpose of it being open source is t
 
 As many hobby engines are more focused on graphical and technical implementations, this engine's graphical and technical scopes are simplified in order to cater to more beginner oriented use cases. 
 
-![image](https://user-images.githubusercontent.com/45758254/164871735-21b7a40f-fc77-441d-8868-10376bb659dc.png)
+![image](https://github.com/sfederic/Engine/assets/45758254/ae28fc21-0288-45ae-bd82-1c61020f7221)
 
 ## Build Notes
 * Visual Studio 2022 17.4
