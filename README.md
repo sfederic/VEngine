@@ -1,14 +1,9 @@
 # VEngine
 
-## Overview
-A beginner to intermediate game engine, the purpose of it being open source is to detail overlooked programming concepts and build a reference for onlookers, from programming to design concepts.
-
-As many hobby engines are more focused on graphical and technical implementations, this engine's graphical and technical scopes are simplified in order to cater to more beginner oriented use cases. 
-
 ![image](https://user-images.githubusercontent.com/45758254/164871735-21b7a40f-fc77-441d-8868-10376bb659dc.png)
 
 ## Build Notes
-* Visual Studio 2022 17.4
+* Visual Studio 2022 17.5
 * Blender 3.4 (For FBX SDK)
 
 ## Packages
