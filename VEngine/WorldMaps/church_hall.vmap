@@ -21,6 +21,23 @@ Size Z
 UID
 334588375
 next
+DirectionalLightActor
+1
+ Enabled
+1
+ Position
+1 2 -3
+ Rotation
+0.379929 0.596368 -0.379928 0.596367
+ Scale
+0.999996 0.999997 0.999997
+ Visible
+1
+Name
+DirectionalLightActor0
+UID
+2766288922
+next
 EntranceTrigger
 1
  Enabled
@@ -64,8 +81,6 @@ Size X
 9
 Size Y
 9
-StartBattleOnLoad
-0
 UID
 2103209020
 next
@@ -253,23 +268,6 @@ Player0
 UID
 1647454417
 next
-PointLightActor
-1
- Enabled
-1
- Position
-4 1 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-PointLightActor0
-UID
-2191381210
-next
 BoxTriggerComponent
 1
 3299669729
@@ -342,6 +340,27 @@ File
 UID
 2967410941
 next
+DirectionalLightComponent
+1
+2766288922
+DirectionalLight
+ Enabled
+1
+ Pos
+1 2 -3
+ Rot
+0.379929 0.596368 -0.379928 0.596367
+ Scale
+0.999996 0.999997 0.999997
+ Visible
+1
+Colour
+1 1 1 1
+LightEnabled
+1
+UID
+1846030859
+next
 EmptyComponent
 2
 334588375
@@ -395,7 +414,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -464,7 +483,7 @@ M_Specular
 M_Texture
 Walls/wall06.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -517,7 +536,7 @@ M_Specular
 M_Texture
 Walls/unnamed.jpg
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -570,7 +589,7 @@ M_Specular
 M_Texture
 stone.jpg
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -623,7 +642,7 @@ M_Specular
 M_Texture
 stone.jpg
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -676,7 +695,7 @@ M_Specular
 M_Texture
 stone.jpg
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -729,7 +748,7 @@ M_Specular
 M_Texture
 stone.jpg
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -782,7 +801,7 @@ M_Specular
 M_Texture
 wall.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -835,7 +854,7 @@ M_Specular
 M_Texture
 wall.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -888,7 +907,7 @@ M_Specular
 M_Texture
 wall.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -941,7 +960,7 @@ M_Specular
 M_Texture
 wall.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -994,7 +1013,7 @@ M_Specular
 M_Texture
 Walls/wall06.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1066,28 +1085,5 @@ Trans. Occlude
 0
 UID
 2929477331
-next
-PointLightComponent
-1
-2191381210
-PointLight
- Enabled
-1
- Pos
-4 1 4
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Colour
-1 1 1 1
-Intensity
-25
-LightEnabled
-1
-UID
-1246965977
 next
 end

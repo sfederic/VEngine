@@ -37,7 +37,7 @@ UID
 692420275
 next
 GridActor
-4
+1
  Enabled
 1
  Position
@@ -47,6 +47,8 @@ GridActor
  Scale
 1 1 1
  Visible
+1
+Can Fall
 1
 Destruct
 1
@@ -82,141 +84,6 @@ Rotate Yaw
 1
 UID
 3993986177
-next
- Enabled
-1
- Position
-3 0 2
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-1
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Name
-GridActor1
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Yaw
-1
-UID
-2762816070
-next
- Enabled
-1
- Position
-0 0 2
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-1
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Name
-GridActor2
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Yaw
-1
-UID
-1763818658
-next
- Enabled
-1
- Position
-3 0 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-1
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Name
-GridActor3
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Yaw
-1
-UID
-1871752411
 next
 MeshActor
 1
@@ -276,7 +143,7 @@ UID
 498285566
 next
 DialogueComponent
-5
+2
 3993986177
 Dialogue
  Enabled
@@ -287,39 +154,6 @@ File
 
 UID
 422478730
-next
-2762816070
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-2710256082
-next
-1763818658
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-934610137
-next
-1871752411
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-2087455518
 next
 707967490
 Dialogue
@@ -426,7 +260,7 @@ UID
 1689623277
 next
 MeshComponent
-6
+3
 3993986177
 Mesh
  Enabled
@@ -480,14 +314,14 @@ Trans. Occlude
 UID
 3448523391
 next
-2762816070
+707967490
 Mesh
  Enabled
 1
  Pos
-3 0 2
+0 0 0
  Rot
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -525,119 +359,13 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-cube.vmesh
+char.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-736456611
-next
-1763818658
-Mesh
- Enabled
-1
- Pos
-0 0 2
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3427769665
-next
-1871752411
-Mesh
- Enabled
-1
- Pos
-3 0 4
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-167898158
+706192360
 next
 779951209
 Mesh
@@ -691,58 +419,5 @@ Trans. Occlude
 0
 UID
 158298293
-next
-707967490
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-char.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-706192360
 next
 end
