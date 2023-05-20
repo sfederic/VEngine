@@ -49,6 +49,42 @@ Rotate Yaw
 UID
 1786098845
 next
+DebugNoteActor
+2
+ Enabled
+1
+ Position
+4 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DebugNoteActor0
+Note Text
+Fire Sources can also be doused.
+UID
+2981016121
+next
+ Enabled
+1
+ Position
+2 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DebugNoteActor1
+Note Text
+Hot nodes can be doused to step over.
+UID
+4029943343
+next
 DirectionalLightActor
 1
  Enabled
@@ -71,7 +107,7 @@ FireSource
  Enabled
 1
  Position
-4 0.6 2
+4 0 2
  Rotation
 -0 0 -0 1
  Scale
@@ -209,7 +245,7 @@ Player
  Position
 2 0 0
  Rotation
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -391,7 +427,7 @@ UID
 40005310
 next
 EmptyComponent
-1
+3
 3590558020
 Root
  Enabled
@@ -399,13 +435,43 @@ Root
  Pos
 2 0 0
  Rot
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
 1
 UID
 663637849
+next
+2981016121
+Root
+ Enabled
+1
+ Pos
+4 0 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+3323339630
+next
+4029943343
+Root
+ Enabled
+1
+ Pos
+2 0 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+4240535022
 next
 InstanceMeshComponent
 1
@@ -522,7 +588,7 @@ Mesh
  Enabled
 1
  Pos
-4 0.6 2
+4 0 2
  Rot
 -0 0 -0 1
  Scale
@@ -683,7 +749,7 @@ Mesh
  Pos
 0 0 0
  Rot
-0 0 0 1
+0 1 0 0
  Scale
 1 1 1
  Visible
@@ -764,7 +830,7 @@ water.jpg
 M_Use Texture
 1
 M_UvOffset
-0 0
+0 2.46653
 M_UvOffsetSpeed
 0 0.25
 M_UvRotation
@@ -791,7 +857,7 @@ FireSprite
  Pos
 0 0 0
  Rot
-0.00249002 0.99738 0.0585392 -0.0424245
+0.00676981 0.966546 0.255118 -0.0256482
  Scale
 1 1 1
  Visible
@@ -807,6 +873,6 @@ Sheet Rows
 Texture
 Sprites/fire_sheet.png
 UID
-4281292360
+3043677461
 next
 end
