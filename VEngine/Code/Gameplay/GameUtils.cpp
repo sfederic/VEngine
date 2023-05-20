@@ -88,6 +88,7 @@ namespace GameUtils
 	{
 		auto emitter = ParticleEmitter::system.Add("SpawnedEmitter", nullptr, ParticleEmitter(textureFilename), true);
 		emitter->SetWorldPosition(spawnPosition);
+		emitter->emitterLifetime = lifeTime;
 		return emitter;
 	}
 
