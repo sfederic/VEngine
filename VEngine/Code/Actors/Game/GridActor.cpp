@@ -157,6 +157,13 @@ GridNode* GridActor::GetCurrentNode()
 	return node;
 }
 
+void GridActor::RecalcCurrentNodePosition()
+{
+	auto node = GetCurrentNode();
+	HitResult hit(this);
+	node->RecalcNodeHeight(hit);
+}
+
 bool GridActor::CheckNextNodeMoveIsValid()
 {
 	const int nextXIndex = (int)std::round(nextPos.m128_f32[0]);
