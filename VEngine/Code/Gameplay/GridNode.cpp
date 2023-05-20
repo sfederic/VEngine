@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "GridNode.h"
 #include "Actors/Game/Grid.h"
+#include "Actors/Game/Player.h"
 #include "Actors/Game/WaterVolume.h"
 #include "Components/InstanceMeshComponent.h"
 #include "Physics/Raycast.h"
@@ -44,6 +45,8 @@ void GridNode::RecalcNodeHeight(HitResult& hitResult)
 	hitResult.actorsToIgnore.push_back(Grid::system.GetOnlyActor());
 	auto waterVolumes = WaterVolume::system.GetActorsAsBaseClass();
 	hitResult.AddActorsToIgnore(waterVolumes);
+	hitResult.actorsToIgnore.push_back(Player::system.GetOnlyActor());
+
 	if (Raycast(hitResult, origin, -VMath::GlobalUpVector(), 40.f))
 	{
 		auto grid = Grid::system.GetFirstActor();
