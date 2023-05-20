@@ -1,15 +1,15 @@
 #include "vpch.h"
-#include "Valve.h"
+#include "WaterValve.h"
 #include "Core/Log.h"
 #include "Components/MeshComponent.h"
 #include "WaterSource.h"
 
-void Valve::Create()
+void WaterValve::Create()
 {
 	mesh->SetMeshFilename("valve.vmesh");
 }
 
-Properties Valve::GetProps()
+Properties WaterValve::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
@@ -17,7 +17,7 @@ Properties Valve::GetProps()
 	return props;
 }
 
-void Valve::OnLinkRotate()
+void WaterValve::OnLinkRotate()
 {
 	auto waterSource = dynamic_cast<WaterSource*>(World::GetActorByNameAllowNull(waterSourceName));
 	if (waterSource)

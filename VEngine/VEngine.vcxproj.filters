@@ -572,7 +572,7 @@
     <ClCompile Include="Code\Actors\Game\GearSetDoor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\Valve.cpp">
+    <ClCompile Include="Code\Actors\Game\WaterValve.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\Game\Pickup.cpp">
@@ -1218,7 +1218,7 @@
     <ClInclude Include="Code\Actors\Game\GearSetDoor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\Valve.h">
+    <ClInclude Include="Code\Actors\Game\WaterValve.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\Pickup.h">

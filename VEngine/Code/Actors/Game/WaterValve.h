@@ -2,10 +2,10 @@
 
 #include "GridActor.h"
 
-class Valve : public GridActor
+class WaterValve : public GridActor
 {
 public:
-	ACTOR_SYSTEM(Valve);
+	ACTOR_SYSTEM(WaterValve);
 
 	void Create() override;
 	Properties GetProps() override;
