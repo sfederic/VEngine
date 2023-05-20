@@ -66,6 +66,55 @@ DirectionalLightActor0
 UID
 1283779829
 next
+FireSource
+1
+ Enabled
+1
+ Position
+4 0.6 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Name
+FireSource0
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Yaw
+1
+UID
+4268393905
+next
 Grid
 1
  Enabled
@@ -264,7 +313,7 @@ UID
 759801568
 next
 DialogueComponent
-4
+5
 1786098845
 Dialogue
  Enabled
@@ -275,6 +324,17 @@ File
 
 UID
 2494850154
+next
+4268393905
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+4099059196
 next
 1190236399
 Dialogue
@@ -403,7 +463,7 @@ UID
 1295244079
 next
 MeshComponent
-5
+6
 1786098845
 Mesh
  Enabled
@@ -456,6 +516,59 @@ Trans. Occlude
 0
 UID
 1052506275
+next
+4268393905
+Mesh
+ Enabled
+1
+ Pos
+4 0.6 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+30708462
 next
 1190236399
 Mesh
@@ -668,5 +781,32 @@ Trans. Occlude
 0
 UID
 1095920969
+next
+SpriteSheet
+1
+4268393905
+FireSprite
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0.00249002 0.99738 0.0585392 -0.0424245
+ Scale
+1 1 1
+ Visible
+1
+Animation Speed
+40
+Loop Animation
+1
+Sheet Columns
+4
+Sheet Rows
+4
+Texture
+Sprites/fire_sheet.png
+UID
+4281292360
 next
 end
