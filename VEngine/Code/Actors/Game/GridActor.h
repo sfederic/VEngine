@@ -79,6 +79,8 @@ struct GridActor : Actor
 	//For when a fluid or something hits a gridactor (e.g. to extinguish flames)
 	virtual void Douse() {}
 
+	virtual void Burn() {}
+
 	virtual void Activate() {}
 	virtual void Deactivate() {}
 
