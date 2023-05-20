@@ -68,7 +68,7 @@ void Bucket::EmptyWater()
 				Transform t;
 				t.position = hit.hitPos;
 				t.position.y += 0.05f;
-				auto puddle = MeshComponent::system.Add("", nullptr, MeshComponent("node.vmesh", "water.jpg"));
+				auto puddle = MeshComponent::system.Add("", nullptr, MeshComponent("node.vmesh", "puddle.png"));
 				puddle->Create();
 				puddle->SetTransform(t);
 			}
