@@ -15,6 +15,7 @@
 #include "Core/Input.h"
 #include "Core/Log.h"
 #include "Particle/SpriteSheet.h"
+#include "Particle/ParticleEmitter.h"
 #include "Particle/Polyboard.h"
 #include "Asset/AssetFileExtensions.h"
 
@@ -81,6 +82,13 @@ namespace GameUtils
 		}
 
 		return polyboard;
+	}
+
+	ParticleEmitter* SpawnParticleEmitter(std::string textureFilename, XMVECTOR spawnPosition, float lifeTime)
+	{
+		auto emitter = ParticleEmitter::system.Add("SpawnedEmitter", nullptr, ParticleEmitter(textureFilename), true);
+		emitter->SetWorldPosition(spawnPosition);
+		return emitter;
 	}
 
 	void PlayAudioOneShot(const std::string audioFilename)
