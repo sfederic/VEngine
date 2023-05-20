@@ -59,6 +59,12 @@ void Bucket::EmptyWater()
 			HitResult hit(this);
 			if (Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 100.f))
 			{
+				auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
+				if (gridActor)
+				{
+					gridActor->Douse();
+				}
+
 				Transform t;
 				t.position = hit.hitPos;
 				t.position.y += 0.05f;
