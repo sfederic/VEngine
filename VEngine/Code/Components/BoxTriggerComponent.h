@@ -17,6 +17,7 @@ public:
 	BoxTriggerComponent();
 	Properties GetProps() override;
 
+	//Remember to set arg as bounds in world space
 	bool Intersects(const BoundingOrientedBox& boundsInWorldSpaceToCheckAgainst);
 	bool IntersectsWithAnyBoundingBoxInWorld();
 
