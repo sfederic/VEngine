@@ -284,6 +284,7 @@
     <ClCompile Include="Code\Actors\Game\SteamValve.cpp" />
     <ClCompile Include="Code\Actors\Game\HotCoals.cpp" />
     <ClCompile Include="Code\Actors\Game\FireSource.cpp" />
+    <ClCompile Include="Code\Actors\Game\Nut.cpp" />
     <ClInclude Include="Code\Actors\Game\Burnable.h" />
     <ClInclude Include="Code\Actors\Game\Bucket.h" />
     <ClInclude Include="Code\Actors\Game\SpotLightTower.h" />
@@ -597,6 +598,7 @@
     <ClInclude Include="Code\Actors\Game\SteamValve.h" />
     <ClInclude Include="Code\Actors\Game\HotCoals.h" />
     <ClInclude Include="Code\Actors\Game\FireSource.h" />
+    <ClInclude Include="Code\Actors\Game\Nut.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
