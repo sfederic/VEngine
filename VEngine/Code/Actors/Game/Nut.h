@@ -8,5 +8,10 @@ class Nut : public GridActor
 public:
 	ACTOR_SYSTEM(Nut);
 
-	void Create();
+	void Create() override;
+
+	void OnLinkRotate() override;
+
+private: 
+	void CheckIfConnectedToBolt();
 };
