@@ -11,12 +11,17 @@ void Nut::Create()
 	mesh->SetMeshFilename("nut.vmesh");
 }
 
-void Nut::OnLinkRotate()
+void Nut::OnLinkRotateLeft()
 {
-	CheckIfConnectedToBolt();
+	CheckIfConnectedToBolt(-GetUpVectorV());
 }
 
-void Nut::CheckIfConnectedToBolt()
+void Nut::OnLinkRotateRight()
+{
+	CheckIfConnectedToBolt(GetUpVectorV());
+}
+
+void Nut::CheckIfConnectedToBolt(const XMVECTOR moveDirection)
 {
 	HitResult hit(this);
 	if (SimpleBoxCast(GetPositionV(), XMFLOAT3(0.5f, 0.5f, 0.5f), hit, false, false))
@@ -26,7 +31,8 @@ void Nut::CheckIfConnectedToBolt()
 			auto bolt = dynamic_cast<Bolt*>(actor);
 			if (bolt)
 			{
-				nextPos -= GetUpVectorV() * 0.2f;
+				constexpr float moveIncrement = 0.2f;
+				nextPos += moveDirection * moveIncrement;
 			}
 		}
 	}
