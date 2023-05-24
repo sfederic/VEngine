@@ -117,6 +117,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Actors\Game\Bolt.cpp" />
     <ClCompile Include="Code\Actors\Game\Burnable.cpp" />
     <ClCompile Include="Code\Actors\Game\Bucket.cpp" />
     <ClCompile Include="Code\Actors\Game\SpotLightTower.cpp" />
@@ -285,6 +286,7 @@
     <ClCompile Include="Code\Actors\Game\HotCoals.cpp" />
     <ClCompile Include="Code\Actors\Game\FireSource.cpp" />
     <ClCompile Include="Code\Actors\Game\Nut.cpp" />
+    <ClInclude Include="Code\Actors\Game\Bolt.h" />
     <ClInclude Include="Code\Actors\Game\Burnable.h" />
     <ClInclude Include="Code\Actors\Game\Bucket.h" />
     <ClInclude Include="Code\Actors\Game\SpotLightTower.h" />
