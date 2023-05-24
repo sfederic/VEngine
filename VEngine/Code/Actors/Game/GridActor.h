@@ -72,6 +72,9 @@ struct GridActor : Actor
 	bool CheckNextRotationBoundsIntersect();
 
 	virtual void OnLinkRotate() {}
+	virtual void OnLinkRotateRight() {}
+	virtual void OnLinkRotateLeft() {}
+
 	virtual void OnLinkMove() {}
 
 	virtual void Interact() {}
