@@ -26,6 +26,11 @@ Properties GearSet::GetProps()
 	return props;
 }
 
+void GearSet::OnLinkRotate()
+{
+	IncrementDoor();
+}
+
 bool GearSet::Intersects(const BoundingOrientedBox& intersectCheck) const
 {
 	return boxTrigger->Intersects(intersectCheck);

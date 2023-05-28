@@ -14,6 +14,8 @@ public:
 	void Create() override;
 	Properties GetProps() override;
 
+	void OnLinkRotate() override;
+
 	bool Intersects(const BoundingOrientedBox& intersectCheck) const;
 	void IncrementDoor();
 
