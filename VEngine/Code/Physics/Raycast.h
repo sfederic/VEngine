@@ -52,6 +52,18 @@ struct HitResult
 		actorsToIgnore.emplace_back(actorToIgnore);
 	}
 
+	template <typename T>
+	T* GetHitActorAs()
+	{
+		auto actor = dynamic_cast<T*>(hitActor);
+		if (actor)
+		{
+			return actor;
+		}
+
+		return nullptr;
+	}
+
 	void AddActorsToIgnore(std::vector<Actor*>& actors);
 
 	//Result is in world space.
