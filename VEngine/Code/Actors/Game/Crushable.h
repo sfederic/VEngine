@@ -9,4 +9,5 @@ public:
 	ACTOR_SYSTEM(Crushable);
 
 	void Crushed();
+	void Attacked() override;
 };

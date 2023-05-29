@@ -5,3 +5,8 @@ void Crushable::Crushed()
 {
 	Destroy();
 }
+
+void Crushable::Attacked()
+{
+	Destroy();
+}
