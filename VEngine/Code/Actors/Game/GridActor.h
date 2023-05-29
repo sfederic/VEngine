@@ -47,7 +47,6 @@ struct GridActor : Actor
 
 	bool canBeRotatedYawYAxis = true;
 	bool canBeRotatedPitchXAxis = true;
-	bool canBeRotated = true;
 
 	bool ignoreRotationValidCheck = false;
 
