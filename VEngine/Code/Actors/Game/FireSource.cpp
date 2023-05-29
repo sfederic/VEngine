@@ -27,13 +27,13 @@ void FireSource::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
-	for (auto& burnable : Burnable::system.GetActors())
+	for (auto& gridActor : GridActor::system.GetActors())
 	{
-		for (auto mesh : burnable->GetComponentsOfType<MeshComponent>())
+		for (auto mesh : gridActor->GetComponentsOfType<MeshComponent>())
 		{
 			if (fireTrigger->Intersects(mesh->GetBoundsInWorldSpace()))
 			{
-				burnable->Burn();
+				gridActor->Burn();
 			}
 		}
 	}
