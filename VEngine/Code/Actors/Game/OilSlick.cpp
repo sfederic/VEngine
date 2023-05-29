@@ -2,6 +2,7 @@
 #include "OilSlick.h"
 #include "Components/MeshComponent.h"
 #include "Gameplay/GameUtils.h"
+#include "FireSource.h"
 
 void OilSlick::Create()
 {
@@ -23,7 +24,14 @@ void OilSlick::Burn()
 {
     if (!onFire)
     {
-        GameUtils::SpawnSpriteSheet("Sprites/fire_sheet.png", GetPositionV(), true, 4, 4);
+        Transform t;
+        t.Decompose(GetWorldMatrix());
+
+        auto fireSource = FireSource::system.Add(t);
+        fireSource->Create();
+        fireSource->CreateAllComponents();
+        fireSource->Start();
+
         onFire = true;
     }
 }
