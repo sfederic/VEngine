@@ -3,6 +3,7 @@
 #include "Components/MeshComponent.h"
 #include "Core/VMath.h"
 #include "Physics/Raycast.h"
+#include "OilSlick.h"
 
 void OilBarrel::Create()
 {
@@ -45,12 +46,17 @@ void OilBarrel::SpillOil()
 			Transform t;
 			t.position = hit.hitPos;
 			t.position.y += 0.05f;
-			auto oilSlick = MeshComponent::system.Add("OilSlick", nullptr, MeshComponent("node.vmesh", "oil_slick.png"));
+
+			auto oilSlick = OilSlick::system.Add(t);
+			oilSlick->UpdateTransform(XMMatrixIdentity());
 			oilSlick->Create();
-			oilSlick->SetTransform(t);
+			oilSlick->CreateAllComponents();
 
 			const float randYAxisAngle = VMath::RandomRange(0.f, 360.f);
-			oilSlick->AddLocalRotation(VMath::GlobalUpVector(), randYAxisAngle);
+			oilSlick->mesh->AddLocalRotation(VMath::GlobalUpVector(), randYAxisAngle);
+
+			//Remember to call start else nextPos and nextRot setup will get skipped.
+			oilSlick->Start();
 
 			spillOilPerNode = false;
 		}
