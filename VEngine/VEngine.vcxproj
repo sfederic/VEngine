@@ -120,6 +120,7 @@
     <ClCompile Include="Code\Actors\Game\Bolt.cpp" />
     <ClCompile Include="Code\Actors\Game\Burnable.cpp" />
     <ClCompile Include="Code\Actors\Game\Bucket.cpp" />
+    <ClCompile Include="Code\Actors\Game\OilBarrel.cpp" />
     <ClCompile Include="Code\Actors\Game\SpotLightTower.cpp" />
     <ClCompile Include="Code\Core\BMPFileWriter.cpp" />
     <ClCompile Include="Code\Actors\Game\ConditionTrigger.cpp" />
@@ -289,6 +290,7 @@
     <ClInclude Include="Code\Actors\Game\Bolt.h" />
     <ClInclude Include="Code\Actors\Game\Burnable.h" />
     <ClInclude Include="Code\Actors\Game\Bucket.h" />
+    <ClInclude Include="Code\Actors\Game\OilBarrel.h" />
     <ClInclude Include="Code\Actors\Game\SpotLightTower.h" />
     <ClInclude Include="Code\Core\BMPFileWriter.h" />
     <ClInclude Include="Code\Actors\Game\ConditionTrigger.h" />
