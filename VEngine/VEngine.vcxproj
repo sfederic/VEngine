@@ -287,6 +287,7 @@
     <ClCompile Include="Code\Actors\Game\HotCoals.cpp" />
     <ClCompile Include="Code\Actors\Game\FireSource.cpp" />
     <ClCompile Include="Code\Actors\Game\Nut.cpp" />
+    <ClCompile Include="Code\Actors\Game\OilSlick.cpp" />
     <ClInclude Include="Code\Actors\Game\Bolt.h" />
     <ClInclude Include="Code\Actors\Game\Burnable.h" />
     <ClInclude Include="Code\Actors\Game\Bucket.h" />
@@ -603,6 +604,7 @@
     <ClInclude Include="Code\Actors\Game\HotCoals.h" />
     <ClInclude Include="Code\Actors\Game\FireSource.h" />
     <ClInclude Include="Code\Actors\Game\Nut.h" />
+    <ClInclude Include="Code\Actors\Game\OilSlick.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
