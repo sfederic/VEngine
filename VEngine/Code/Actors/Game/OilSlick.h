@@ -9,4 +9,9 @@ public:
 
 	void Create() override;
 	Properties GetProps() override;
+
+	void Burn() override;
+
+private:
+	bool onFire = false;
 };
