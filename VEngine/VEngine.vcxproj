@@ -289,6 +289,7 @@
     <ClCompile Include="Code\Actors\Game\FireSource.cpp" />
     <ClCompile Include="Code\Actors\Game\Nut.cpp" />
     <ClCompile Include="Code\Actors\Game\OilSlick.cpp" />
+    <ClCompile Include="Code\Actors\Game\PointLightGridActor.cpp" />
     <ClInclude Include="Code\Actors\Game\Canon.h" />
     <ClInclude Include="Code\Actors\Game\Bolt.h" />
     <ClInclude Include="Code\Actors\Game\Burnable.h" />
@@ -607,6 +608,7 @@
     <ClInclude Include="Code\Actors\Game\FireSource.h" />
     <ClInclude Include="Code\Actors\Game\Nut.h" />
     <ClInclude Include="Code\Actors\Game\OilSlick.h" />
+    <ClInclude Include="Code\Actors\Game\PointLightGridActor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
