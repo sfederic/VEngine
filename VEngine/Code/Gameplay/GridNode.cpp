@@ -39,6 +39,7 @@ void GridNode::DisplayShow()
 	meshInstanceData.world.r[2].m128_f32[2] = 0.9f;
 }
 
+//@Todo: there are a lot of options to ignore actors here, and future problems.
 void GridNode::RecalcNodeHeight(HitResult& hitResult)
 {
 	XMVECTOR origin = XMVectorSet((float)xIndex, 20.f, (float)yIndex, 1.f);
@@ -49,6 +50,15 @@ void GridNode::RecalcNodeHeight(HitResult& hitResult)
 
 	if (Raycast(hitResult, origin, -VMath::GlobalUpVector(), 40.f))
 	{
+		for (auto mesh : hitResult.hitActor->GetComponentsOfType<MeshComponent>())
+		{
+			if (mesh->ignoreGridRaycasts)
+			{
+				Hide();
+				return;
+			}
+		}
+
 		auto grid = Grid::system.GetFirstActor();
 		auto& meshInstanceData = grid->nodeMesh->GetInstanceData()[instancedMeshIndex];
 
