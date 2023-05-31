@@ -7,6 +7,7 @@
 void Canon::Create()
 {
 	canBeRotatedPitchXAxis = false;
+	ignoreRotationValidCheck = true;
 
 	mesh->SetMeshFilename("turret.vmesh");
 }
