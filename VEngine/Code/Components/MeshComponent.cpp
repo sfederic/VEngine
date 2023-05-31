@@ -143,6 +143,7 @@ Properties MeshComponent::GetProps()
 	props.Add("Static", &isStatic);
 	props.Add("Trans. Occlude", &transparentOcclude);
 	props.Add("Grid Obst.", &gridObstacle);
+	props.Add("Grid Ignore", &ignoreGridRaycasts);
 
 	auto materialProps = material->GetProps();
 	materialProps.SetAllPropertyOwnerUIDs(props.ownerUID);
