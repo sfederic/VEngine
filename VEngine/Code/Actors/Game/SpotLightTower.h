@@ -11,7 +11,11 @@ public:
 
 	SpotLightTower();
 	void Create() override;
+	void Tick(float deltaTime) override;
 
 private:
+	void IlluminateGridActors();
+
 	SpotLightComponent* spotLight = nullptr;
+	float lightRange = 5.f;
 };
