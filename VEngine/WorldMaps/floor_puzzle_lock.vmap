@@ -48,12 +48,16 @@ GridActor
 1 0.1 1
  Visible
 1
+Can Fall
+1
 Destruct
 1
 DisableGridInteract
 0
 Health
 1
+Ignore Rotate Check
+0
 Inspect
 1
 Interact
@@ -66,9 +70,17 @@ Link Movement
 1
 Link Rotation
 1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
 Name
 GridActor0
 Obstacle
+1
+Rotate Pitch
+1
+Rotate Yaw
 1
 UID
 2516056260
@@ -83,12 +95,16 @@ next
 1 0.1 1
  Visible
 1
+Can Fall
+1
 Destruct
 1
 DisableGridInteract
 0
 Health
 1
+Ignore Rotate Check
+0
 Inspect
 1
 Interact
@@ -101,9 +117,17 @@ Link Movement
 1
 Link Rotation
 1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
 Name
 GridActor1
 Obstacle
+1
+Rotate Pitch
+1
+Rotate Yaw
 1
 UID
 1683905782
@@ -118,12 +142,16 @@ next
 1 0.1 1
  Visible
 1
+Can Fall
+1
 Destruct
 1
 DisableGridInteract
 0
 Health
 1
+Ignore Rotate Check
+0
 Inspect
 1
 Interact
@@ -136,9 +164,17 @@ Link Movement
 1
 Link Rotation
 1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
 Name
 GridActor2
 Obstacle
+1
+Rotate Pitch
+1
+Rotate Yaw
 1
 UID
 3869685642
@@ -153,12 +189,16 @@ next
 1 0.1 1
  Visible
 1
+Can Fall
+1
 Destruct
 1
 DisableGridInteract
 0
 Health
 1
+Ignore Rotate Check
+0
 Inspect
 1
 Interact
@@ -171,12 +211,69 @@ Link Movement
 1
 Link Rotation
 1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
 Name
 GridActor3
 Obstacle
 1
+Rotate Pitch
+1
+Rotate Yaw
+1
 UID
 3055973735
+next
+LockedDoor
+1
+ Enabled
+1
+ Position
+0 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Name
+LockedDoor0
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Yaw
+1
+UID
+1967738918
 next
 MeshActor
 1
@@ -194,6 +291,33 @@ Name
 node0
 UID
 110400369
+next
+MultiOrientationLock
+1
+ Enabled
+1
+ Position
+3 1 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+GridActor Activate
+LockedDoor0
+Lock Actor 0
+GridActor0
+Lock Actor 1
+GridActor1
+Lock Actor 2
+GridActor2
+Lock Actor 3
+GridActor3
+Name
+MultiOrientationLock0
+UID
+2430417967
 next
 Player
 1
@@ -236,7 +360,7 @@ UID
 3869454339
 next
 DialogueComponent
-5
+6
 2516056260
 Dialogue
  Enabled
@@ -281,6 +405,17 @@ File
 UID
 2014603356
 next
+1967738918
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+666400115
+next
 4268813581
 Dialogue
  Enabled
@@ -314,7 +449,22 @@ UID
 1916057243
 next
 EmptyComponent
+2
+2430417967
+Root
+ Enabled
 1
+ Pos
+3 1 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+4044101916
+next
 4268813581
 Root
  Enabled
@@ -346,6 +496,8 @@ NodeMesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -386,7 +538,7 @@ UID
 1317043650
 next
 MeshComponent
-6
+7
 2516056260
 Mesh
  Enabled
@@ -401,6 +553,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -454,6 +608,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -507,6 +663,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -560,6 +718,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -599,6 +759,61 @@ Trans. Occlude
 UID
 2482166130
 next
+1967738918
+Mesh
+ Enabled
+1
+ Pos
+0 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1687784836
+next
 110400369
 Mesh
  Enabled
@@ -613,6 +828,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -666,6 +883,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
