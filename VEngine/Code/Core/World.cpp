@@ -118,6 +118,14 @@ void World::EndAllActors()
 	}
 }
 
+void World::DestroyAllDeferredActors()
+{
+	for (auto actorSystem : activeActorSystems)
+	{
+		actorSystem->DestroyDeferredActors();
+	}
+}
+
 void World::CreateDefaultMapActors()
 {
 	auto player = Player::system.Add();

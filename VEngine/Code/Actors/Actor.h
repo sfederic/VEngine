@@ -79,6 +79,9 @@ public:
 	//Do not override this direcly. ACTOR_SYSTEM macro overrides instead.
 	virtual void Destroy() {}
 
+	//Flags actor to be destroyed at end of frame.
+	void DeferDestroy();
+
 	//Iterates over every actor from the actor's system to avoid a rename collision. bool denotes if collision occured.
 	bool SetName(const std::string newName);
 
@@ -208,4 +211,5 @@ protected:
 	bool active = true;
 	bool visible = true;
 	bool tickEnabled = true;
+	bool deferredForDestroy = false;
 };

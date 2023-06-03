@@ -122,6 +122,7 @@ void Engine::MainLoop()
 
 		ResetSystems();
 
+		World::DestroyAllDeferredActors();
 		FileSystem::DeferredWorldLoad();
 
 		Core::EndTimer();

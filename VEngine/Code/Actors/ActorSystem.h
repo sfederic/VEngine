@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <memory>
+#include <unordered_set>
 #include "IActorSystem.h"
 #include "Actor.h"
 #include "ActorSystemCache.h"
@@ -222,8 +223,24 @@ public:
 		actors.clear();
 	}
 
+	virtual void DeferActorForDestroy(int index) override
+	{
+		actorIndexToDeferDestroy.insert(index);
+	}
+
+	virtual void DestroyDeferredActors() override
+	{
+		for (int index : actorIndexToDeferDestroy)
+		{
+			Remove(index);
+		}
+
+		actorIndexToDeferDestroy.clear();
+	}
+
 private:
 	std::vector<std::unique_ptr<T>> actors;
+	std::unordered_set<int> actorIndexToDeferDestroy;
 };
 
 #define ACTOR_SYSTEM(type) inline static ActorSystem<type> system; \

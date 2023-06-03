@@ -31,6 +31,8 @@ namespace World
 	//Call End() on all actors on gameplay end
 	void EndAllActors();
 
+	void DestroyAllDeferredActors();
+
 	//Create default starting actors for a map.
 	void CreateDefaultMapActors();
 

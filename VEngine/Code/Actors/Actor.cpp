@@ -203,6 +203,11 @@ std::vector<Properties> Actor::GetAllProps()
 	return propsVector;
 }
 
+void Actor::DeferDestroy()
+{
+	actorSystem->DeferActorForDestroy(actorSystemIndex);
+}
+
 bool Actor::SetName(const std::string newName)
 {
 	//Check for duplicate names in world
