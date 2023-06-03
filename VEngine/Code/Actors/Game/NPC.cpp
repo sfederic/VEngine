@@ -37,8 +37,6 @@ void NPC::Start()
 
 void NPC::Tick(float deltaTime)
 {
-    TryToEscapeToExit();
-
     if (spawnTextWidget)
     {
         spawnTextWidget->worldPosition = GetHomogeneousPositionV();
@@ -53,6 +51,8 @@ void NPC::Tick(float deltaTime)
             quickTalkTimer = 0.f;
         }
     }
+
+    TryToEscapeToExit();
 
     __super::Tick(deltaTime);
 }
@@ -85,17 +85,23 @@ void NPC::EndQuickTalkTo()
 
 void NPC::TryToEscapeToExit()
 {
+    auto entrance = EntranceTrigger::system.GetFirstActor();
+    const int xIndex = (int)std::round(entrance->GetPosition().x);
+    const int yIndex = (int)std::round(entrance->GetPosition().z);
+    auto grid = Grid::system.GetOnlyActor();
+    auto entranceNode = grid->GetNode(xIndex, yIndex);
+
     if (entranceReachableForEscape)
     {
+        //Destroy NPC when it reaches the entrance.
+        if (GetCurrentNode()->Equals(entranceNode))
+        {
+            DeferDestroy();
+        }
+
         return;
     }
 
-    auto entrance = EntranceTrigger::system.GetFirstActor();
-    int xIndex = (int)std::round(entrance->GetPosition().x);
-    int yIndex = (int)std::round(entrance->GetPosition().z);
-    auto grid = Grid::system.GetOnlyActor();
-    auto entranceNode = grid->GetNode(xIndex, yIndex);
-    
     MoveToNode(entranceNode);
 
     for (auto pathNode : pathNodes)
