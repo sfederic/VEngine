@@ -28,13 +28,16 @@ void OrientationLock::Tick(float deltaTime)
 {
     __super::Tick(deltaTime);
 
-    if (IsOrientationCorrect())
+    if (linkedGridActor)
     {
-        linkedGridActor->Activate();
-    }
-    else
-    {
-        linkedGridActor->Deactivate();
+        if (IsOrientationCorrect())
+        {
+            linkedGridActor->Activate();
+        }
+        else
+        {
+            linkedGridActor->Deactivate();
+        }
     }
 }
 
