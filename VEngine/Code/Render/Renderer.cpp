@@ -2057,11 +2057,22 @@ void RenderWireframeForVertexPaintingAndPickedActor()
 		DrawMesh(mesh);
 	};
 
-	if (WorldEditor::GetPickedActor() && !Core::gameplayOn)
+	if (!Core::gameplayOn)
 	{
-		for (auto mesh : WorldEditor::GetPickedActor()->GetComponentsOfType<MeshComponent>())
+		if (WorldEditor::GetPickedActor())
 		{
-			wireframeRender(mesh);
+			for (auto mesh : WorldEditor::GetPickedActor()->GetComponentsOfType<MeshComponent>())
+			{
+				wireframeRender(mesh);
+			}
+		}
+
+		for (auto actor : WorldEditor::GetPickedActors())
+		{
+			for (auto mesh : actor->GetComponentsOfType<MeshComponent>())
+			{
+				wireframeRender(mesh);
+			}
 		}
 
 		SetGeneralShaderResourcesToNull();
