@@ -2,8 +2,10 @@
 #include "Bucket.h"
 #include "Components/MeshComponent.h"
 #include "WaterSource.h"
+#include "FireSource.h"
 #include "Core/VMath.h"
 #include "Physics/Raycast.h"
+#include "Gameplay/GameUtils.h"
 
 void Bucket::Create()
 {
@@ -65,6 +67,13 @@ void Bucket::EmptyWater()
 				if (gridActor)
 				{
 					gridActor->Douse();
+
+					//Show a vapour effect if hit actor is a fire source
+					auto fireSource = dynamic_cast<FireSource*>(hit.hitActor);
+					if (fireSource)
+					{
+						GameUtils::SpawnParticleEmitter("Particle/smoke.png", fireSource->GetPositionV(), 1.5f);
+					}
 				}
 
 				Transform t;
