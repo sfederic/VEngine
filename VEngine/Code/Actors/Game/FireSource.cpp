@@ -7,15 +7,17 @@
 
 FireSource::FireSource()
 {
-	//Doesn't need to be a node, just needs some sort of mesh for Douse()s to hit
-	mesh->SetMeshFilename("node.vmesh");
-
 	fireTrigger = CreateComponent<BoxTriggerComponent>("FireTrigger");
 	rootComponent->AddChild(fireTrigger);
 }
 
 void FireSource::Create()
 {
+	//Doesn't need to be a node, just needs some sort of mesh for Douse()s to hit
+	mesh->SetMeshFilename("node.vmesh");
+	mesh->ignoreGridRaycasts = true;
+	mesh->SetVisibility(false);
+
 	fireTrigger->SetExtents(1.f, 1.f, 1.f);
 
 	fireSprite = CreateComponent<SpriteSheet>("FireSprite");
