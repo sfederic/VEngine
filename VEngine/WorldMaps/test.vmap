@@ -15,6 +15,31 @@ DirectionalLightActor0
 UID
 593823014
 next
+EntranceTrigger
+1
+ Enabled
+1
+ Position
+4 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Text
+Open
+UID
+1437971424
+next
 Grid
 1
  Enabled
@@ -36,102 +61,6 @@ Size Y
 UID
 692420275
 next
-GridActor
-2
- Enabled
-1
- Position
-2 0 2
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-1
-Inspect
-1
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Name
-GridActor0
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Yaw
-1
-UID
-2586623862
-next
- Enabled
-1
- Position
-2 0 2
- Rotation
-0 0 1 -7.94663e-09
- Scale
-0.999997 0.999997 1
- Visible
-1
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-1
-Inspect
-1
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Name
-GridActor1
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Yaw
-1
-UID
-1683138717
-next
 MeshActor
 1
  Enabled
@@ -149,6 +78,73 @@ node0
 UID
 779951209
 next
+NPC
+1
+ Enabled
+1
+ Position
+1 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Attack Points
+1
+Attack Range
+1
+Battle State
+fight
+Can Fall
+1
+Death Text
+
+Destruct
+1
+DisableGridInteract
+0
+Focus Actor
+
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+0
+Link Rotation
+0
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Points
+5
+Move Speed
+3
+Name
+NPC0
+Num Attacks
+1
+Obstacle
+0
+Rotate Pitch
+1
+Rotate Yaw
+1
+Spawn Text
+
+UID
+3711515343
+next
 Player
 1
  Enabled
@@ -165,6 +161,27 @@ Name
 Player0
 UID
 707967490
+next
+BoxTriggerComponent
+1
+1437971424
+Trigger
+ Enabled
+1
+ Pos
+4 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+1645481287
 next
 CameraComponent
 1
@@ -189,20 +206,24 @@ Near Z
 UID
 498285566
 next
-DialogueComponent
-3
-2586623862
-Dialogue
+ConditionComponent
+1
+1437971424
+Condition
  Enabled
 1
  Visible
 1
-File
+Condition
+
+Condition Arg
 
 UID
-787297174
+2478337109
 next
-1683138717
+DialogueComponent
+2
+3711515343
 Dialogue
  Enabled
 1
@@ -211,7 +232,7 @@ Dialogue
 File
 
 UID
-2991175408
+3268323942
 next
 707967490
 Dialogue
@@ -320,117 +341,7 @@ UID
 1689623277
 next
 MeshComponent
-4
-2586623862
-Mesh
- Enabled
-1
- Pos
-2 0 2
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-halfcube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2689312525
-next
-1683138717
-Mesh
- Enabled
-1
- Pos
-2 0 2
- Rot
-0 0 1 -7.94663e-09
- Scale
-0.999997 0.999997 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-halfcube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1645756577
-next
+3
 779951209
 Mesh
  Enabled
@@ -485,6 +396,61 @@ Trans. Occlude
 0
 UID
 158298293
+next
+3711515343
+Mesh
+ Enabled
+1
+ Pos
+1 0 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+224011016
 next
 707967490
 Mesh
