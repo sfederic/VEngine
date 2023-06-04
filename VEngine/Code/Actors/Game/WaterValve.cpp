@@ -6,7 +6,7 @@
 
 void WaterValve::Create()
 {
-	mesh->SetMeshFilename("valve.vmesh");
+	mesh->SetMeshFilename("gear.vmesh");
 }
 
 Properties WaterValve::GetProps()
