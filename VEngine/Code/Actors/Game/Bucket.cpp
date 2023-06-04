@@ -7,11 +7,22 @@
 #include "Physics/Raycast.h"
 #include "Gameplay/GameUtils.h"
 
+Bucket::Bucket()
+{
+	waterMesh = CreateComponent<MeshComponent>("WaterMesh");
+	rootComponent->AddChild(waterMesh);
+}
+
 void Bucket::Create()
 {
 	ignoreRotationValidCheck = true;
 
 	mesh->SetMeshFilename("hollow_barrel.vmesh");
+
+	waterMesh->SetMeshFilename("node.vmesh");
+	waterMesh->SetTexture("water.jpg");
+	waterMesh->SetLocalScale(0.75f, 0.75f, 0.75f);
+	waterMesh->SetLocalPosition(0.f, 0.35f, 0.f);
 }
 
 void Bucket::Start()
@@ -22,6 +33,8 @@ void Bucket::Start()
 void Bucket::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
+
+	waterMesh->SetVisibility(isFilled);
 
 	CheckIfInWaterSource();
 	EmptyWater();
