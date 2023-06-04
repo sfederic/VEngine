@@ -37,7 +37,7 @@ UID
 3200550050
 next
 MeshActor
-3
+1
  Enabled
 1
  Position
@@ -53,42 +53,12 @@ cube0
 UID
 1378475580
 next
- Enabled
-1
- Position
-2 -0.4 3
- Rotation
--0 0 -0 1
- Scale
-0.25 0.25 0.25
- Visible
-1
-Name
-cube1
-UID
-3628806141
-next
- Enabled
-1
- Position
-2 0.4 3
- Rotation
--0 0 -0 1
- Scale
-0.25 0.25 0.25
- Visible
-1
-Name
-cube2
-UID
-2364598880
-next
 Player
 1
  Enabled
 1
  Position
-2 0 1
+1 0 2
  Rotation
 0 0 0 1
  Scale
@@ -100,17 +70,19 @@ Player0
 UID
 2493786944
 next
-Valve
+WaterSource
 1
  Enabled
 1
  Position
-2 0 3
+2 0 4
  Rotation
--2.08616e-07 0.707107 -0.707106 -2.98023e-08
+0 0 0 1
  Scale
-1 0.999999 0.999999
+1 1 1
  Visible
+1
+Can Fall
 1
 Destruct
 1
@@ -118,6 +90,57 @@ DisableGridInteract
 0
 Health
 1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+0
+Link Rotation
+0
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Name
+WaterSource0
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Yaw
+1
+UID
+806580041
+next
+WaterValve
+1
+ Enabled
+1
+ Position
+1 0 3
+ Rotation
+2.38419e-07 -0.000243731 -1 -5.82077e-11
+ Scale
+1 0.999999 0.999999
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
 Inspect
 1
 Interact
@@ -130,31 +153,22 @@ Link Movement
 0
 Link Rotation
 1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
 Name
-Valve0
+WaterValve0
 Obstacle
 1
+Rotate Pitch
+0
+Rotate Yaw
+1
 UID
-1911638255
+4225892452
 Water Source
 WaterSource0
-next
-WaterSource
-1
- Enabled
-1
- Position
-2 -0 4
- Rotation
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Name
-WaterSource0
-UID
-806580041
 next
 BoxTriggerComponent
 1
@@ -201,7 +215,7 @@ UID
 890223782
 next
 DialogueComponent
-2
+3
 2493786944
 Dialogue
  Enabled
@@ -213,7 +227,7 @@ File
 UID
 205257500
 next
-1911638255
+806580041
 Dialogue
  Enabled
 1
@@ -222,7 +236,18 @@ Dialogue
 File
 
 UID
-3469450778
+164039153
+next
+4225892452
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+499088794
 next
 DirectionalLightComponent
 1
@@ -252,7 +277,7 @@ Root
  Enabled
 1
  Pos
-2 0 1
+1 0 2
  Rot
 0 0 0 1
  Scale
@@ -278,6 +303,8 @@ NodeMesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -318,7 +345,7 @@ UID
 959525705
 next
 MeshComponent
-6
+4
 1378475580
 Mesh
  Enabled
@@ -333,6 +360,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -372,112 +401,6 @@ Trans. Occlude
 UID
 1929307299
 next
-3628806141
-Mesh
- Enabled
-1
- Pos
-2 -0.4 3
- Rot
--0 0 -0 1
- Scale
-0.25 0.25 0.25
- Visible
-1
-Casts Shadow
-1
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1630760686
-next
-2364598880
-Mesh
- Enabled
-1
- Pos
-2 0.4 3
- Rot
--0 0 -0 1
- Scale
-0.25 0.25 0.25
- Visible
-1
-Casts Shadow
-1
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-368207370
-next
 2493786944
 Mesh
  Enabled
@@ -485,13 +408,15 @@ Mesh
  Pos
 0 0 0
  Rot
-0 0 0 1
+-0 0 0 1
  Scale
 1 1 1
  Visible
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -531,20 +456,77 @@ Trans. Occlude
 UID
 231718310
 next
-1911638255
+806580041
 Mesh
  Enabled
 1
  Pos
-2 0 3
+2 0 4
  Rot
--2.08616e-07 0.707107 -0.707106 -2.98023e-08
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+water.jpg
+M_Use Texture
+1
+M_UvOffset
+0 2.31627
+M_UvOffsetSpeed
+0 0.25
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1783046394
+next
+4225892452
+Mesh
+ Enabled
+1
+ Pos
+1 0 3
+ Rot
+2.38419e-07 -0.000243731 -1 -5.82077e-11
  Scale
 1 0.999999 0.999999
  Visible
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -576,65 +558,12 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-valve.vmesh
+gear.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-4213838893
-next
-806580041
-Mesh
- Enabled
-1
- Pos
-2 -0 4
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-nobackcull
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-water.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0.25
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-plane.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1783046394
+2555163732
 next
 end
