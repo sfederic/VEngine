@@ -28,7 +28,7 @@ struct Grid : public Actor
 
 	std::vector<GridRow> rows;
 
-	inline static float maxHeightMove = 1.f;
+	inline static float maxHeightMove = 1.1f;
 
 	int sizeX = 1;
 	int sizeY = 1;
