@@ -7,6 +7,8 @@
 
 void Bucket::Create()
 {
+	ignoreRotationValidCheck = true;
+
 	mesh->SetMeshFilename("hollow_barrel.vmesh");
 }
 
