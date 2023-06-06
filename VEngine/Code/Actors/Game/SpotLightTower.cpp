@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "SpotLightTower.h"
 #include "Components/Lights/SpotLightComponent.h"
+#include "Components/MeshComponent.h"
 #include "IlluminatedGridActor.h"
 #include "Physics/Raycast.h"
 
@@ -12,6 +13,8 @@ SpotLightTower::SpotLightTower()
 
 void SpotLightTower::Create()
 {
+	mesh->SetShaderItem(ShaderItems::Unlit);
+
 	spotLight->SetLocalPosition(0.f, 1.f, 0.f);
 }
 
