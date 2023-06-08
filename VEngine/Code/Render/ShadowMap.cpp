@@ -5,7 +5,6 @@
 #include "Core/VMath.h"
 #include "Components/Lights/DirectionalLightComponent.h"
 #include "Components/Lights/SpotLightComponent.h"
-#include "Render/Renderer.h"
 
 ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
 {
@@ -107,8 +106,9 @@ XMMATRIX ShadowMap::GetDirectionalLightOrthoMatrix(DirectionalLightComponent* di
 
 XMMATRIX ShadowMap::GetSpotLightPerspectiveMatrix(SpotLightComponent* spotLight)
 {
-	const float angleRadians = XMConvertToRadians(spotLight->GetLightData().spotAngle);
-	return XMMatrixPerspectiveFovLH(angleRadians, Renderer::GetAspectRatio(), 0.01f, 100.f);
+	const float angle = XMConvertToRadians(spotLight->GetLightData().spotAngle);
+	//@Todo: is the using the shadowmaps width height here right for the aspect ratio?
+	return XMMatrixPerspectiveFovLH(angle, width / height, 0.01f, 1000.f); 
 }
 
 XMMATRIX ShadowMap::GetLightViewMatrix(SpatialComponent* light)
