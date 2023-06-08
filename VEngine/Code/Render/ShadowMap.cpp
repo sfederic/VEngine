@@ -49,15 +49,15 @@ ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
 	HR(device->CreateShaderResourceView(depthMap, &srvDesc, &depthMapSRV));
 
 	D3D11_SAMPLER_DESC sd = {};
-	sd.Filter = D3D11_FILTER_COMPARISON_MIN_MAG_LINEAR_MIP_POINT;
+	sd.Filter = D3D11_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR;
 	sd.AddressU = D3D11_TEXTURE_ADDRESS_BORDER;
 	sd.AddressV = D3D11_TEXTURE_ADDRESS_BORDER;
 	sd.AddressW = D3D11_TEXTURE_ADDRESS_BORDER;
-	sd.BorderColor[0] = 0.f;
-	sd.BorderColor[1] = 0.f;
-	sd.BorderColor[2] = 0.f;
-	sd.BorderColor[3] = 0.f;
-	sd.ComparisonFunc = D3D11_COMPARISON_LESS_EQUAL;
+	sd.BorderColor[0] = 1.f;
+	sd.BorderColor[1] = 1.f;
+	sd.BorderColor[2] = 1.f;
+	sd.BorderColor[3] = 1.f;
+	sd.ComparisonFunc = D3D11_COMPARISON_LESS;
 	
 	HR(device->CreateSamplerState(&sd, &sampler));
 
@@ -107,7 +107,8 @@ XMMATRIX ShadowMap::GetDirectionalLightOrthoMatrix(DirectionalLightComponent* di
 
 XMMATRIX ShadowMap::GetSpotLightPerspectiveMatrix(SpotLightComponent* spotLight)
 {
-	return XMMatrixPerspectiveFovLH(spotLight->GetLightData().spotAngle, Renderer::GetAspectRatio(), 0.01f, 100.f);
+	const float angleRadians = XMConvertToRadians(spotLight->GetLightData().spotAngle);
+	return XMMatrixPerspectiveFovLH(angleRadians, Renderer::GetAspectRatio(), 0.01f, 100.f);
 }
 
 XMMATRIX ShadowMap::GetLightViewMatrix(SpatialComponent* light)
