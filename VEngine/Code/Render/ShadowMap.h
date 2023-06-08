@@ -1,4 +1,5 @@
 #pragma once
+
 #include <DirectXMath.h>
 
 using namespace DirectX;
@@ -8,6 +9,9 @@ struct ID3D11DepthStencilView;
 struct ID3D11SamplerState;
 struct ID3D11DeviceContext;
 struct ID3D11Device;
+class DirectionalLightComponent;
+class SpotLightComponent;
+class SpatialComponent;
 
 //Basic tutorial for shadow mapping
 //REF: https://takinginitiative.wordpress.com/2011/05/15/directx10-tutorial-10-shadow-mapping/
@@ -16,6 +20,8 @@ struct ID3D11Device;
 //Cool presentation on Silhouette maps. Old (2004), but nice to look at for ideas
 //REF: https://jankautz.com/courses/ShadowCourse/04-SilhouetteMap.pdf
 
+//@Todo: there's only support for one shadowmap per scene right now. It's not too hard to get multiple shadow maps
+//up and running, but I just don't have the debugging means right now. Will need to switch to D3D12.
 struct ShadowMap
 {
 private:
@@ -31,8 +37,11 @@ public:
 	~ShadowMap();
 	void BindDsvAndSetNullRenderTarget(ID3D11DeviceContext* dc);
 
-	XMMATRIX GetLightPerspectiveMatrix();
-	XMMATRIX GetLightViewMatrix();
+	XMMATRIX GetDirectionalLightOrthoMatrix(DirectionalLightComponent* directionalLight);
+	XMMATRIX GetSpotLightPerspectiveMatrix(SpotLightComponent* spotLight);
+	XMMATRIX GetLightViewMatrix(SpatialComponent* light);
 	XMMATRIX GetLightTextureMatrix();
-	XMMATRIX OutputMatrix();
+
+	XMMATRIX SpotLightViewProjectionTextureMatrix(SpotLightComponent* spotLight);
+	XMMATRIX DirectionalLightViewProjectionTextureMatrix(DirectionalLightComponent* directionalLight);
 };

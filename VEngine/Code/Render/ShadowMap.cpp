@@ -4,6 +4,8 @@
 #include <cassert>
 #include "Core/VMath.h"
 #include "Components/Lights/DirectionalLightComponent.h"
+#include "Components/Lights/SpotLightComponent.h"
+#include "Render/Renderer.h"
 
 ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
 {
@@ -85,13 +87,8 @@ void ShadowMap::BindDsvAndSetNullRenderTarget(ID3D11DeviceContext* dc)
 	dc->ClearDepthStencilView(depthMapDSV, D3D11_CLEAR_DEPTH, 1.0f, 0);
 }
 
-XMMATRIX ShadowMap::GetLightPerspectiveMatrix()
+XMMATRIX ShadowMap::GetDirectionalLightOrthoMatrix(DirectionalLightComponent* directionalLight)
 {
-	if (DirectionalLightComponent::system.GetNumComponents() == 0)
-	{
-		return XMMatrixIdentity();
-	}
-
 	auto light = DirectionalLightComponent::system.GetFirstComponent();
 	XMFLOAT3 center = light->GetLocalPosition();
 
@@ -108,18 +105,15 @@ XMMATRIX ShadowMap::GetLightPerspectiveMatrix()
 	return P;
 }
 
-XMMATRIX ShadowMap::GetLightViewMatrix()
+XMMATRIX ShadowMap::GetSpotLightPerspectiveMatrix(SpotLightComponent* spotLight)
 {
-	if (DirectionalLightComponent::system.GetNumComponents() == 0)
-	{
-		return XMMatrixIdentity();
-	}
+	return XMMatrixPerspectiveFovLH(spotLight->GetLightData().spotAngle, Renderer::GetAspectRatio(), 0.01f, 100.f);
+}
 
-	auto light = DirectionalLightComponent::system.GetFirstComponent();
-
-	XMVECTOR lookAt = light->GetLocalPositionV() + light->GetForwardVectorV();
-	XMVECTOR lightPos = light->GetLocalPositionV();
-
+XMMATRIX ShadowMap::GetLightViewMatrix(SpatialComponent* light)
+{
+	const XMVECTOR lookAt = light->GetLocalPositionV() + light->GetForwardVectorV();
+	const XMVECTOR lightPos = light->GetLocalPositionV();
 	return XMMatrixLookAtLH(lightPos, lookAt, VMath::GlobalUpVector());
 }
 
@@ -134,17 +128,23 @@ XMMATRIX ShadowMap::GetLightTextureMatrix()
 	return T;
 }
 
-XMMATRIX ShadowMap::OutputMatrix()
+XMMATRIX ShadowMap::DirectionalLightViewProjectionTextureMatrix(DirectionalLightComponent* directionalLight)
 {
-	if (DirectionalLightComponent::system.GetNumComponents() == 0)
-	{
-		return XMMatrixIdentity();
-	}
-
-	auto V = GetLightViewMatrix();
-	auto P = GetLightPerspectiveMatrix();
+	auto V = GetLightViewMatrix(directionalLight);
+	auto P = GetDirectionalLightOrthoMatrix(directionalLight);
 	auto T = GetLightTextureMatrix();
 	
 	XMMATRIX S = V * P * T;
 	return S;
 }
+
+XMMATRIX ShadowMap::SpotLightViewProjectionTextureMatrix(SpotLightComponent* spotLight)
+{
+	auto V = GetLightViewMatrix(spotLight);
+	auto P = GetSpotLightPerspectiveMatrix(spotLight);
+	auto T = GetLightTextureMatrix();
+
+	XMMATRIX S = V * P * T;
+	return S;
+}
+
