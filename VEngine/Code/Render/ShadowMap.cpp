@@ -89,7 +89,7 @@ void ShadowMap::BindDsvAndSetNullRenderTarget(ID3D11DeviceContext* dc)
 XMMATRIX ShadowMap::GetDirectionalLightOrthoMatrix(DirectionalLightComponent* directionalLight)
 {
 	auto light = DirectionalLightComponent::system.GetFirstComponent();
-	XMFLOAT3 center = light->GetLocalPosition();
+	XMFLOAT3 center = light->GetWorldPosition();
 
 	float shadowOrthoSize = light->GetShadowMapOrthoSize();
 
@@ -113,8 +113,8 @@ XMMATRIX ShadowMap::GetSpotLightPerspectiveMatrix(SpotLightComponent* spotLight)
 
 XMMATRIX ShadowMap::GetLightViewMatrix(SpatialComponent* light)
 {
-	const XMVECTOR lookAt = light->GetLocalPositionV() + light->GetForwardVectorV();
-	const XMVECTOR lightPos = light->GetLocalPositionV();
+	const XMVECTOR lookAt = light->GetWorldPositionV() + light->GetForwardVectorV();
+	const XMVECTOR lightPos = light->GetWorldPositionV();
 	return XMMatrixLookAtLH(lightPos, lookAt, VMath::GlobalUpVector());
 }
 
