@@ -314,7 +314,12 @@ void Actor::AddComponent(Component* component)
 
 void Actor::DeleteComponent(std::string componentName)
 {
-	Component* component = componentMap.find(componentName)->second;
+	auto componentIt = componentMap.find(componentName);
+	if (componentIt == componentMap.end())
+	{
+		return;
+	}
+	Component* component = componentIt->second;
 	RemoveComponent(component);
 	component->Remove();
 }
