@@ -8,6 +8,10 @@ class ProjectionCrystal : public GridActor
 public:
 	ACTOR_SYSTEM(ProjectionCrystal);
 
+	void Interact() override;
 	void OnLinkActivate() override;
 	void OnLinkDeactivate() override;
+
+private:
+	bool isActive = false;
 };

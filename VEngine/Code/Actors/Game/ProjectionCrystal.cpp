@@ -1,6 +1,22 @@
 #include "vpch.h"
 #include "ProjectionCrystal.h"
 #include "Components/MeshComponent.h"
+#include "Grid.h"
+
+void ProjectionCrystal::Interact()
+{
+	isActive = !isActive;
+	if (isActive)
+	{
+		OnLinkActivate();
+		Grid::system.GetOnlyActor()->Awake();
+	}
+	else
+	{
+		OnLinkDeactivate();
+		Grid::system.GetOnlyActor()->Awake();
+	}
+}
 
 void ProjectionCrystal::OnLinkActivate()
 {
