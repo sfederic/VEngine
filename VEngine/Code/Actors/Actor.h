@@ -113,9 +113,8 @@ public:
 	void AddChild(Actor* actor);
 
 	void AddComponent(Component* component);
-
+	void DeleteComponent(std::string componentName);
 	void RemoveComponent(std::string componentName);
-
 	void RemoveComponent(Component* componentToRemove);
 
 	void SetEmptyRootComponent();
