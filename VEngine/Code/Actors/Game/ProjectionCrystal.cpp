@@ -21,13 +21,16 @@ void ProjectionCrystal::Interact()
 
 void ProjectionCrystal::OnLinkActivate()
 {
-	auto testMesh = CreateComponent<MeshComponent>("TestMesh");
-	testMesh->SetAmbientColour(XMFLOAT4(0.f, 0.f, 1.f, 0.4f));
-	testMesh->SetBlendState(BlendStates::Default);
-	testMesh->SetMeshFilename("cube.vmesh");
-	testMesh->SetLocalPosition(0.f, 0.f, 2.f);
-	testMesh->Create();
-	rootComponent->AddChild(testMesh);
+	if (!CheckComponentExists("TestMesh"))
+	{
+		auto testMesh = CreateComponent<MeshComponent>("TestMesh");
+		testMesh->SetAmbientColour(XMFLOAT4(0.f, 0.f, 1.f, 0.4f));
+		testMesh->SetBlendState(BlendStates::Default);
+		testMesh->SetMeshFilename("cube.vmesh");
+		testMesh->SetLocalPosition(0.f, 0.f, 2.f);
+		testMesh->Create();
+		rootComponent->AddChild(testMesh);
+	}
 }
 
 void ProjectionCrystal::OnLinkDeactivate()
