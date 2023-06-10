@@ -2,6 +2,7 @@
 #include "ProjectionCrystal.h"
 #include "Components/MeshComponent.h"
 #include "Grid.h"
+#include "Render/BlendStates.h"
 
 void ProjectionCrystal::Interact()
 {
@@ -21,9 +22,11 @@ void ProjectionCrystal::Interact()
 void ProjectionCrystal::OnLinkActivate()
 {
 	auto testMesh = CreateComponent<MeshComponent>("TestMesh");
+	testMesh->SetAmbientColour(XMFLOAT4(0.f, 0.f, 1.f, 0.4f));
+	testMesh->SetBlendState(BlendStates::Default);
 	testMesh->SetMeshFilename("cube.vmesh");
-	testMesh->Create();
 	testMesh->SetLocalPosition(0.f, 0.f, 2.f);
+	testMesh->Create();
 	rootComponent->AddChild(testMesh);
 }
 
