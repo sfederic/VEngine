@@ -342,6 +342,11 @@ void Actor::RemoveComponent(Component* componentToRemove)
 	}
 }
 
+bool Actor::CheckComponentExists(std::string componentName)
+{
+	return componentMap.find(componentName) != componentMap.end();
+}
+
 void Actor::SetEmptyRootComponent()
 {
 	rootComponent = CreateComponent<EmptyComponent>("Root");

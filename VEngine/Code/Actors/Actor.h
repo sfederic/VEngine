@@ -116,6 +116,7 @@ public:
 	void DeleteComponent(std::string componentName);
 	void RemoveComponent(std::string componentName);
 	void RemoveComponent(Component* componentToRemove);
+	bool CheckComponentExists(std::string componentName);
 
 	void SetEmptyRootComponent();
 
