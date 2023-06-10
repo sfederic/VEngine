@@ -302,6 +302,7 @@ void SpawnActorOnClick()
 			}
 
 			editor->UpdateWorldList();
+			pickedActors.clear();
 		}
 	}
 }
