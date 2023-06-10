@@ -576,14 +576,14 @@ void Player::LinkToGridActor()
 			auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
 			if (gridActor)
 			{ 
-				gridActor->OnLinkActivate();
-
 				HitResult nodeHit(this);
 				gridActor->GetCurrentNode()->RecalcNodeHeight(nodeHit);
 				linkedGridActor = gridActor;
 				linkedGridActor->isLinked = true;
 				camera->targetActor = gridActor;
 				isInputLinkedToGridActor = true;
+
+				gridActor->OnLinkActivate();
 			}
 		}
 	}
@@ -595,13 +595,13 @@ void Player::LinkToGridActor()
 			auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
 			if (gridActor)
 			{
-				gridActor->OnLinkDeactivate();
-
 				HitResult nodeHit(this);
 				gridActor->GetCurrentNode()->RecalcNodeHeight(nodeHit);
 				linkedGridActor = gridActor;
 				camera->targetActor = gridActor;
 				isInputLinkedToDowncastGridActor = true;
+
+				gridActor->OnLinkActivate();
 			}
 		}
 	}
@@ -613,6 +613,7 @@ void Player::LinkToGridActor()
 			HitResult hit(this);
 			linkedGridActor->GetCurrentNode()->RecalcNodeHeight(hit);
 			linkedGridActor->isLinked = false;
+			linkedGridActor->OnLinkDeactivate();
 			linkedGridActor = nullptr;
 			camera->targetActor = this;
 			isInputLinkedToGridActor = false;
