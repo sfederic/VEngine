@@ -573,14 +573,16 @@ void Player::LinkToGridActor()
 		HitResult hit(this);
 		if (Raycast(hit, GetPositionV(), GetMeshForward(), 100.f))
 		{
-			auto moveableActor = dynamic_cast<GridActor*>(hit.hitActor);
-			if (moveableActor)
+			auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
+			if (gridActor)
 			{ 
+				gridActor->OnLinkActivate();
+
 				HitResult nodeHit(this);
-				moveableActor->GetCurrentNode()->RecalcNodeHeight(nodeHit);
-				linkedGridActor = moveableActor;
+				gridActor->GetCurrentNode()->RecalcNodeHeight(nodeHit);
+				linkedGridActor = gridActor;
 				linkedGridActor->isLinked = true;
-				camera->targetActor = moveableActor;
+				camera->targetActor = gridActor;
 				isInputLinkedToGridActor = true;
 			}
 		}
@@ -590,13 +592,15 @@ void Player::LinkToGridActor()
 		HitResult hit(this);
 		if (Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 3.f))
 		{
-			auto moveableActor = dynamic_cast<GridActor*>(hit.hitActor);
-			if (moveableActor)
+			auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
+			if (gridActor)
 			{
+				gridActor->OnLinkDeactivate();
+
 				HitResult nodeHit(this);
-				moveableActor->GetCurrentNode()->RecalcNodeHeight(nodeHit);
-				linkedGridActor = moveableActor;
-				camera->targetActor = moveableActor;
+				gridActor->GetCurrentNode()->RecalcNodeHeight(nodeHit);
+				linkedGridActor = gridActor;
+				camera->targetActor = gridActor;
 				isInputLinkedToDowncastGridActor = true;
 			}
 		}
