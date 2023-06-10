@@ -223,6 +223,11 @@ XMFLOAT4 MeshComponent::GetAmbientColour()
 	return material->materialShaderData.ambient;
 }
 
+void MeshComponent::SetAlpha(float alpha)
+{
+	material->materialShaderData.ambient.w = alpha;
+}
+
 void MeshComponent::SetUseTexture(bool useTexture)
 {
 	material->materialShaderData.useTexture = useTexture;

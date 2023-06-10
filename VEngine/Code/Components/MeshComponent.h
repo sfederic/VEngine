@@ -64,6 +64,7 @@ public:
 
 	void SetAmbientColour(const XMFLOAT4 ambientColour);
 	XMFLOAT4 GetAmbientColour();
+	void SetAlpha(float alpha);
 
 	void SetUseTexture(bool useTexture);
 	bool IsUsingTexture();
