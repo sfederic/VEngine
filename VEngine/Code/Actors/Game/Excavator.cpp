@@ -3,17 +3,27 @@
 #include "Components/MeshComponent.h"
 #include "Physics/Raycast.h"
 #include "Mineable.h"
+#include "Grid.h"
 
 void Excavator::Create()
 {
 	canBeMovedInLink = false;
+	canBeRotatedPitchXAxis = false;
+	ignoreRotationValidCheck = true;
 
 	mesh->SetMeshFilename("excavator.vmesh");
 }
 
 void Excavator::Interact()
 {
-	Dig();
+	if (holdingObject)
+	{
+		ReleaseObject();
+	}
+	else
+	{
+		Dig();
+	}
 }
 
 void Excavator::Dig()
@@ -27,6 +37,21 @@ void Excavator::Dig()
 		if(mineable)
 		{
 			mineable->Mine();
+			holdingObject = true;
 		}
 	}
+}
+
+void Excavator::ReleaseObject()
+{
+	Transform transform = GetTransform();
+	XMStoreFloat3(&transform.position, GetPositionV() + GetForwardVectorV());
+	auto mineable = Mineable::system.Add(transform);
+	mineable->Create();
+	mineable->CreateAllComponents();
+	mineable->Start();
+
+	Grid::system.GetOnlyActor()->Awake();
+
+	holdingObject = false;
 }

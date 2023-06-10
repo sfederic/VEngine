@@ -12,4 +12,7 @@ public:
 
 private:
 	void Dig();
+	void ReleaseObject();
+
+	bool holdingObject = false;
 };
