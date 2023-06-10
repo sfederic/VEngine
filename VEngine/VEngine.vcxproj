@@ -292,6 +292,7 @@
     <ClCompile Include="Code\Actors\Game\PointLightGridActor.cpp" />
     <ClCompile Include="Code\Actors\Game\IlluminatedGridActor.cpp" />
     <ClCompile Include="Code\Actors\Game\MultiOrientationLock .cpp" />
+    <ClCompile Include="Code\Actors\Game\ProjectionCrystal.cpp" />
     <ClInclude Include="Code\Actors\Game\Canon.h" />
     <ClInclude Include="Code\Actors\Game\Bolt.h" />
     <ClInclude Include="Code\Actors\Game\Burnable.h" />
@@ -613,6 +614,7 @@
     <ClInclude Include="Code\Actors\Game\PointLightGridActor.h" />
     <ClInclude Include="Code\Actors\Game\IlluminatedGridActor.h" />
     <ClInclude Include="Code\Actors\Game\MultiOrientationLock .h" />
+    <ClInclude Include="Code\Actors\Game\ProjectionCrystal.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
