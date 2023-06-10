@@ -295,6 +295,7 @@
     <ClCompile Include="Code\Actors\Game\ProjectionCrystal.cpp" />
     <ClCompile Include="Code\Actors\Game\Excavator.cpp" />
     <ClCompile Include="Code\Actors\Game\Mineable.cpp" />
+    <ClCompile Include="Code\Actors\Game\CrystalRefineryMachine.cpp" />
     <ClInclude Include="Code\Actors\Game\Canon.h" />
     <ClInclude Include="Code\Actors\Game\Bolt.h" />
     <ClInclude Include="Code\Actors\Game\Burnable.h" />
@@ -619,6 +620,7 @@
     <ClInclude Include="Code\Actors\Game\ProjectionCrystal.h" />
     <ClInclude Include="Code\Actors\Game\Excavator.h" />
     <ClInclude Include="Code\Actors\Game\Mineable.h" />
+    <ClInclude Include="Code\Actors\Game\CrystalRefineryMachine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
