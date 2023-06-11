@@ -38,10 +38,11 @@ Properties OilBarrel::GetProps()
 
 void OilBarrel::SpillOil()
 {
-	if (VMath::VecEqual(GetUpVectorV(), -VMath::GlobalUpVector()))
+	if (!VMath::VecEqual(GetUpVectorV(), VMath::GlobalUpVector()))
 	{
 		HitResult hit(this);
-		if (Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 100.f))
+		const XMVECTOR raycastOrigin = GetPositionV() + GetUpVectorV();
+		if (Raycast(hit, raycastOrigin, -VMath::GlobalUpVector(), 100.f))
 		{
 			Transform t;
 			t.position = hit.hitPos;
