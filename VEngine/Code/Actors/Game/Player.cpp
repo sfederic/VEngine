@@ -166,6 +166,8 @@ void Player::HighlightLinkableGridActor()
 	HitResult hit(this);
 	if (Raycast(hit, GetPositionV(), GetMeshForward(), 100.f))
 	{
+		ResetHighlightedActor();
+
 		auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
 		if (gridActor)
 		{
@@ -184,14 +186,14 @@ void Player::HighlightLinkableGridActor()
 				mesh->SetAmbientColour(XMFLOAT4(0.9f, 0.3f, 0.1f, 1.f));
 			}
 		}
-	}
-	else if (highlightedGridActor != nullptr)
-	{
-		for (auto mesh : highlightedGridActor->GetComponentsOfType<MeshComponent>())
+		else
 		{
-			mesh->SetAmbientColour(XMFLOAT4(1.f, 1.f, 1.f, 1.f));
+			ResetHighlightedActor();
 		}
-		highlightedGridActor = nullptr;
+	}
+	else
+	{
+		ResetHighlightedActor();
 	}
 }
 
@@ -576,6 +578,8 @@ void Player::LinkToGridActor()
 			auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
 			if (gridActor)
 			{ 
+				ResetHighlightedActor();
+
 				HitResult nodeHit(this);
 				gridActor->GetCurrentNode()->RecalcNodeHeight(nodeHit);
 				linkedGridActor = gridActor;
@@ -595,6 +599,8 @@ void Player::LinkToGridActor()
 			auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
 			if (gridActor)
 			{
+				ResetHighlightedActor();
+
 				HitResult nodeHit(this);
 				gridActor->GetCurrentNode()->RecalcNodeHeight(nodeHit);
 				linkedGridActor = gridActor;
@@ -609,6 +615,8 @@ void Player::LinkToGridActor()
 	{
 		if (Input::GetKeyUp(Keys::BackSpace))
 		{
+			ResetHighlightedActor();
+
 			linkedGridActor->SetGridPosition();
 			HitResult hit(this);
 			linkedGridActor->GetCurrentNode()->RecalcNodeHeight(hit);
@@ -964,3 +972,18 @@ void Player::SetGridIndices()
 	xIndex = std::lroundf(GetPosition().x);
 	yIndex = std::lroundf(GetPosition().z);
 }
+
+void Player::ResetHighlightedActor()
+{
+	if (highlightedGridActor == nullptr)
+	{
+		return;
+	}
+
+	for (auto mesh : highlightedGridActor->GetComponentsOfType<MeshComponent>())
+	{
+		mesh->SetAmbientColour(XMFLOAT4(1.f, 1.f, 1.f, 1.f));
+	}
+
+	highlightedGridActor = nullptr;
+};

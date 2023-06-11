@@ -113,4 +113,6 @@ private:
 	GridActor* highlightedGridActor = nullptr;
 
 	void OverlapPickupGridActor();
+
+	void ResetHighlightedActor();
 };
