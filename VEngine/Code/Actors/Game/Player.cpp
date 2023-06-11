@@ -633,7 +633,7 @@ void Player::LinkToGridActor()
 
 void Player::MoveLinkedGridActor()
 {
-	if (linkedGridActor == nullptr || !linkedGridActor->HaveMovementAndRotationStopped())
+	if (linkedGridActor == nullptr || !linkedGridActor->CheckMovementAndRotationStopped())
 	{
 		return;
 	}
@@ -731,7 +731,7 @@ void Player::MoveLinkedGridActor()
 
 void Player::RotateLinkedGridActor()
 {
-	if (linkedGridActor == nullptr || !linkedGridActor->HaveMovementAndRotationStopped())
+	if (linkedGridActor == nullptr || !linkedGridActor->CheckMovementAndRotationStopped())
 	{
 		return;
 	}

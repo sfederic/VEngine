@@ -28,7 +28,7 @@ void Rotator::Tick(float deltaTime)
 
 	if (waitOnActorToRotateRotationComplete)
 	{
-		if (actorToRotate->HaveMovementAndRotationStopped())
+		if (actorToRotate->CheckMovementAndRotationStopped())
 		{
 			waitOnActorToRotateRotationComplete = false;
 			Grid::system.GetOnlyActor()->Awake();

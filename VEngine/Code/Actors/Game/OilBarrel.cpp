@@ -16,7 +16,7 @@ void OilBarrel::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
-	if (HaveMovementAndRotationStopped())
+	if (CheckMovementAndRotationStopped())
 	{
 		if (spillOilPerNode)
 		{

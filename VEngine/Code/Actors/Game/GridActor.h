@@ -110,7 +110,7 @@ struct GridActor : Actor
 	//Get forward face in grid terms based on forward vector and current grid position.
 	ForwardFace GetCurrentForwardFace();
 
-	bool HaveMovementAndRotationStopped();
+	bool CheckMovementAndRotationStopped();
 
 	void AddNextRotation(XMVECTOR axis, float angle);
 	void AddNextPosition(XMVECTOR offset);

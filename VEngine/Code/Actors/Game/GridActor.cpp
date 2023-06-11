@@ -223,7 +223,7 @@ ForwardFace GridActor::GetCurrentForwardFace()
 	throw new std::exception("something went wrong with forward vector");
 }
 
-bool GridActor::HaveMovementAndRotationStopped()
+bool GridActor::CheckMovementAndRotationStopped()
 {
 	return XMVector4Equal(GetPositionV(), nextPos) && XMQuaternionEqual(GetRotationV(), nextRot);
 }
