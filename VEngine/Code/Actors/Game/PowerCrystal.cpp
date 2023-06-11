@@ -22,12 +22,14 @@ void PowerCrystal::Create()
 
 void PowerCrystal::Tick(float deltaTime)
 {
+	__super::Tick(deltaTime);
+
 	PowerUpSurroundingGridActors();
 }
 
 void PowerCrystal::PowerUpSurroundingGridActors()
 {
-	for (auto& actor : GridActor::system.GetActors())
+	for (auto& actor : World::GetAllActorsOfTypeInWorld<GridActor>())
 	{
 		if (effectTrigger->Contains(actor->GetPositionV()))
 		{
