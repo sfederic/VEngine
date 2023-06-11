@@ -9,6 +9,9 @@ FireSource::FireSource()
 {
 	fireTrigger = CreateComponent<BoxTriggerComponent>("FireTrigger");
 	rootComponent->AddChild(fireTrigger);
+
+	fireSprite = CreateComponent<SpriteSheet>("FireSprite");
+	rootComponent->AddChild(fireSprite);
 }
 
 void FireSource::Create()
@@ -20,9 +23,7 @@ void FireSource::Create()
 
 	fireTrigger->SetExtents(1.f, 1.f, 1.f);
 
-	fireSprite = CreateComponent<SpriteSheet>("FireSprite");
 	fireSprite->SetupSpriteData("Sprites/fire_sheet.png", 4, 4, true);
-	rootComponent->AddChild(fireSprite);
 }
 
 void FireSource::Tick(float deltaTime)
