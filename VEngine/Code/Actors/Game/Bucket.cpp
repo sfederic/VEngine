@@ -36,8 +36,11 @@ void Bucket::Tick(float deltaTime)
 
 	waterMesh->SetVisibility(isFilled);
 
-	CheckIfInWaterSource();
-	EmptyWater();
+	if (CheckMovementAndRotationStopped())
+	{
+		CheckIfInWaterSource();
+		EmptyWater();
+	}
 }
 
 Properties Bucket::GetProps()
@@ -69,12 +72,13 @@ void Bucket::EmptyWater()
 {
 	if (isFilled)
 	{
-		if (VMath::VecEqual(GetUpVectorV(), -VMath::GlobalUpVector()))
+		if (!VMath::VecEqual(GetUpVectorV(), VMath::GlobalUpVector()))
 		{
 			isFilled = false;
 			
 			HitResult hit(this);
-			if (Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 100.f))
+			const XMVECTOR raycastOrigin = GetPositionV() + GetUpVectorV();
+			if (Raycast(hit, raycastOrigin, -VMath::GlobalUpVector(), 10.f))
 			{
 				auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
 				if (gridActor)
