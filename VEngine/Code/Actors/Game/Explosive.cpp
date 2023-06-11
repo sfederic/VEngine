@@ -6,40 +6,21 @@
 #include "Explodable.h"
 #include "Physics/Raycast.h"
 
-void Explosive::Tick(float deltaTime)
+void Explosive::Burn()
 {
-	__super::Tick(deltaTime);
+	auto ambientColour = mesh->GetAmbientColour();
+	ambientColour.y = 0.f;
+	ambientColour.z = 0.f;
+	mesh->SetAmbientColour(ambientColour);
 
-	if (setToIgnite)
-	{
-		auto ambientColour = mesh->GetAmbientColour();
-		ambientColour.x = igniteTimer;
-		ambientColour.y = 0.f;
-		ambientColour.z = 0.f;
-		mesh->SetAmbientColour(ambientColour);
+	GameUtils::SpawnSpriteSheet("Sprites/explosion.png", GetPositionV(), false, 4, 4);
+	GameUtils::CameraShake(0.3f);
 
-		igniteTimer += deltaTime;
-		if (igniteTimer > 3.f)
-		{
-			GameUtils::SpawnSpriteSheet("Sprites/explosion.png", GetPositionV(), false, 4, 4);
+	HitNearbyExplodables();
 
-			HitNearbyExplodables();
-
-			//To make sure not hitting null after destroy if player is still linked to Explosive on Destroy
-			Player::system.GetOnlyActor()->ResetLinkedGridActor(); 
-			Destroy();
-		}
-	}
-}
-
-void Explosive::Create()
-{
-	interactText = L"Ignite";
-}
-
-void Explosive::Interact()
-{
-	setToIgnite = true;
+	//To make sure not hitting null after destroy if player is still linked to Explosive on Destroy
+	Player::system.GetOnlyActor()->ResetLinkedGridActorIfThis(this);
+	Destroy();
 }
 
 void Explosive::HitNearbyExplodables()
