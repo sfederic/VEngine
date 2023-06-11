@@ -3,6 +3,7 @@
 #include "Gameplay/GameUtils.h"
 #include "Components/MeshComponent.h"
 #include "Player.h"
+#include "Grid.h"
 #include "Explodable.h"
 #include "Physics/Raycast.h"
 
@@ -25,9 +26,9 @@ void Explosive::Burn()
 
 void Explosive::HitNearbyExplodables()
 {
-	HitResult hit(this);
-	SimpleBoxCast(GetPositionV(), XMFLOAT3(1.f, 1.f, 1.f), hit, true, true);
-	for (auto actor : hit.hitActors)
+	HitResult explosionHit(this);
+	SimpleBoxCast(GetPositionV(), XMFLOAT3(1.f, 1.f, 1.f), explosionHit, true, true);
+	for (auto actor : explosionHit.hitActors)
 	{
 		auto explodable = dynamic_cast<Explodable*>(actor);
 		if (explodable)
@@ -35,4 +36,9 @@ void Explosive::HitNearbyExplodables()
 			explodable->HitByExplosive();
 		}
 	}
+
+	Grid::system.GetOnlyActor()->Awake();
+
+	HitResult nodeRecalcHit(this);
+	GetCurrentNode()->RecalcNodeHeight(nodeRecalcHit);
 }
