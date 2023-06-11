@@ -300,6 +300,7 @@
     <ClCompile Include="Code\Actors\Game\OreSmashMachine.cpp" />
     <ClCompile Include="Code\Actors\Game\Ore.cpp" />
     <ClCompile Include="Code\Actors\Game\PowerCrystal.cpp" />
+    <ClCompile Include="Code\Actors\Game\PowerCrystalGear.cpp" />
     <ClInclude Include="Code\Actors\Game\LinkedObjects.h" />
     <ClInclude Include="Code\Actors\Game\Canon.h" />
     <ClInclude Include="Code\Actors\Game\Bolt.h" />
@@ -629,6 +630,7 @@
     <ClInclude Include="Code\Actors\Game\OreSmashMachine.h" />
     <ClInclude Include="Code\Actors\Game\Ore.h" />
     <ClInclude Include="Code\Actors\Game\PowerCrystal.h" />
+    <ClInclude Include="Code\Actors\Game\PowerCrystalGear.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
