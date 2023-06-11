@@ -3,6 +3,7 @@
 #include "Render/SpriteSystem.h"
 #include "Render/TextureSystem.h"
 #include "Render/Texture2D.h"
+#include "Core/VMath.h"
 
 SpriteSheet::SpriteSheet()
 {
@@ -63,6 +64,18 @@ Properties SpriteSheet::GetProps()
 	props.Add("Animation Speed", &animationSpeed);
 	props.Add("Loop Animation", &loopAnimation);
 	return props;
+}
+
+void SpriteSheet::SetupSpriteData(std::string_view textureFilename, int numRows, int numColumns, bool loop)
+{
+	textureData.filename = textureFilename;
+	numSheetRows = numRows;
+	numSheetColumns = numColumns;
+	loopAnimation = loop;
+
+	//Set random current sheet column and row so sprites in world aren't animated the same.
+	currentSheetRow = VMath::RandomRangeInt(0, numRows);
+	currentSheetColumn = VMath::RandomRangeInt(0, numColumns);
 }
 
 void SpriteSheet::UpdateSprite()
