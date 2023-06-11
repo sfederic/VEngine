@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "ProjectionCrystal.h"
 #include "Components/MeshComponent.h"
+#include "Components/Lights/SpotLightComponent.h"
 #include "Grid.h"
 #include "Render/BlendStates.h"
 
@@ -30,10 +31,17 @@ void ProjectionCrystal::OnLinkActivate()
 		testMesh->SetLocalPosition(0.f, 0.f, 2.f);
 		testMesh->Create();
 		rootComponent->AddChild(testMesh);
+
+		auto spotLight = CreateComponent<SpotLightComponent>("SpotLight");
+		spotLight->SetColour(XMFLOAT4(0.f, 0.f, 1.f, 1.f));
+		spotLight->SetIntensity(50.f);
+		rootComponent->AddChild(spotLight);
+		spotLight->SetWorldRotation(GetRotationV());
 	}
 }
 
 void ProjectionCrystal::OnLinkDeactivate()
 {
 	DeleteComponent("TestMesh");
+	DeleteComponent("SpotLight");
 }

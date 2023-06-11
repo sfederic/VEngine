@@ -14,6 +14,8 @@ public:
 	Properties GetProps() override;
 
 	Light GetLightData();
+	void SetColour(XMFLOAT4 colour) { lightData.colour = colour; }
+	void SetIntensity(float intensity) { lightData.intensity = intensity; }
 
 private:
 	Light lightData;
