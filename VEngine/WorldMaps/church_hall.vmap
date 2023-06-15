@@ -85,7 +85,7 @@ UID
 2103209020
 next
 MeshActor
-11
+10
  Enabled
 1
  Position
@@ -235,21 +235,6 @@ Name
 MeshActor9
 UID
 3186529788
-next
- Enabled
-1
- Position
-4 4.5 4
- Rotation
-1 0 0 7.94663e-09
- Scale
-9 0.999999 8.99998
- Visible
-1
-Name
-MeshActor10
-UID
-2047055992
 next
 Player
 1
@@ -409,6 +394,8 @@ NodeMesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -449,7 +436,7 @@ UID
 3813850013
 next
 MeshComponent
-12
+11
 3841650662
 Mesh
  Enabled
@@ -464,6 +451,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -517,6 +506,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -570,6 +561,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -623,6 +616,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -676,6 +671,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -729,6 +726,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -782,6 +781,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -835,6 +836,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -888,6 +891,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -941,6 +946,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -980,59 +987,6 @@ Trans. Occlude
 UID
 117176342
 next
-2047055992
-Mesh
- Enabled
-1
- Pos
-4 4.5 4
- Rot
-1 0 0 7.94663e-09
- Scale
-9 0.999999 8.99998
- Visible
-1
-Casts Shadow
-1
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Walls/wall06.png
-M_Use Texture
-0
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-252959961
-next
 1647454417
 Mesh
  Enabled
@@ -1047,6 +1001,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
