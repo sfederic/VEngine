@@ -674,6 +674,9 @@
     <ClCompile Include="Code\Actors\Game\PowerCrystalGear.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\Game\SpecificSwitch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1381,6 +1384,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\PowerCrystalGear.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\SpecificSwitch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
