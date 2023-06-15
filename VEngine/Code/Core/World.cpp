@@ -241,13 +241,13 @@ Actor* World::GetActorByName(std::string actorName)
 
 Actor* World::GetActorByNameAllowNull(std::string actorName)
 {
-	Actor* foundActor = nullptr;
-	foundActor = actorNameMap[actorName];
-	if (foundActor == nullptr)
+	auto foundActorIt = actorNameMap.find(actorName);
+	if (foundActorIt == actorNameMap.end())
 	{
 		Log("%s actor not found.", actorName.c_str());
+		return nullptr;
 	}
-	return foundActor;
+	return foundActorIt->second;
 }
 
 std::vector<Component*> World::GetAllComponentsInWorld()
