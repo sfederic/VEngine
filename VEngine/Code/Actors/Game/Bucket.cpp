@@ -84,13 +84,6 @@ void Bucket::EmptyWater()
 				if (gridActor)
 				{
 					gridActor->Douse();
-
-					//Show a vapour effect if hit actor is a fire source
-					auto fireSource = dynamic_cast<FireSource*>(hit.hitActor);
-					if (fireSource)
-					{
-						GameUtils::SpawnParticleEmitter("Particle/smoke.png", fireSource->GetPositionV(), 1.5f);
-					}
 				}
 
 				Transform t;

@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "FireSource.h"
 #include "Particle/SpriteSheet.h"
+#include "Gameplay/GameUtils.h"
 #include "Components/MeshComponent.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Burnable.h"
@@ -45,4 +46,6 @@ void FireSource::Tick(float deltaTime)
 void FireSource::Douse()
 {
 	fireSprite->SetActive(false);
+
+	GameUtils::SpawnParticleEmitter("Particle/smoke.png", GetPositionV(), 1.5f);
 }
