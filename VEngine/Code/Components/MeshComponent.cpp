@@ -152,6 +152,14 @@ Properties MeshComponent::GetProps()
 	return props;
 }
 
+void MeshComponent::ReCreate()
+{
+	material->Create();
+	meshDataProxy = AssetSystem::ReadVMeshAssetFromFile(meshComponentData.filename);
+	BoundingOrientedBox::CreateFromBoundingBox(boundingBox, *meshDataProxy.boundingBox);
+	CreateNewVertexBuffer();
+}
+
 void MeshComponent::SplitMeshCreate()
 {
 	meshComponentData.meshComponent = this;

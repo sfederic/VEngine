@@ -49,6 +49,8 @@ public:
 	virtual void Destroy() override;
 	virtual Properties GetProps();
 
+	void ReCreate();
+
 	void SplitMeshCreate();
 
 	void SetMeshFilename(std::string_view meshFilename);
