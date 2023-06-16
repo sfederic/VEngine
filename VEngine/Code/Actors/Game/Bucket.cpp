@@ -76,18 +76,25 @@ void Bucket::EmptyWater()
 		{
 			isFilled = false;
 			
-			HitResult hit(this);
-			const XMVECTOR raycastOrigin = GetPositionV() + GetUpVectorV();
-			if (Raycast(hit, raycastOrigin, -VMath::GlobalUpVector(), 10.f))
+			HitResult boxHit(this);
+			const XMVECTOR origin = GetPositionV() + GetUpVectorV();
+			if (SimpleBoxCast(origin, XMFLOAT3(0.5f, 0.5f, 0.5f), boxHit, false, false))
 			{
-				auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
-				if (gridActor)
+				for (auto actor : boxHit.hitActors)
 				{
-					gridActor->Douse();
+					auto gridActor = dynamic_cast<GridActor*>(actor);
+					if (gridActor)
+					{
+						gridActor->Douse();
+					}
 				}
+			}
 
+			HitResult rayHit(this);
+			if (Raycast(rayHit, origin, -VMath::GlobalUpVector(), 10.f))
+			{
 				Transform t;
-				t.position = hit.hitPos;
+				t.position = rayHit.hitPos;
 				t.position.y += 0.05f;
 				auto puddle = MeshComponent::system.Add("", nullptr, MeshComponent("node.vmesh", "puddle.png"));
 				puddle->Create();
