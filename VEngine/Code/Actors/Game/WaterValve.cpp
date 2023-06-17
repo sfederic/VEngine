@@ -19,6 +19,8 @@ Properties WaterValve::GetProps()
 
 void WaterValve::OnLinkRotate()
 {
+	__super::OnLinkRotate();
+
 	auto waterSource = dynamic_cast<WaterSource*>(World::GetActorByNameAllowNull(waterSourceName));
 	if (waterSource)
 	{

@@ -37,6 +37,18 @@ bool GridActor::CheckNextRotationBoundsIntersect()
 	return OrientedBoxCast(hit, nextRotBounds, true, true);
 }
 
+void GridActor::OnRotationEnd()
+{
+	if (isRotating)
+	{
+		if (CheckMovementAndRotationStopped())
+		{
+			Grid::system.GetOnlyActor()->Awake();
+			isRotating = false;
+		}
+	}
+}
+
 void GridActor::Start()
 {
 	nextPos = GetPositionV();
@@ -56,6 +68,8 @@ void GridActor::Start()
 
 void GridActor::Tick(float deltaTime)
 {
+	OnRotationEnd();
+
 	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, moveSpeed));
 	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotateSpeed));
 

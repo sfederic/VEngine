@@ -46,6 +46,8 @@ Properties Rotator::GetProps()
 
 void Rotator::OnLinkRotate()
 {
+	__super::OnLinkRotate();
+
 	waitOnActorToRotateRotationComplete = true;
 	actorToRotate->nextRot = nextRot;
 }

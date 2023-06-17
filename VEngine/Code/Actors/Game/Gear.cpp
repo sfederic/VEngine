@@ -12,6 +12,8 @@ void Gear::Create()
 
 void Gear::OnLinkRotate()
 {
+	__super::OnLinkRotate();
+
 	for (auto& gearSet : GearSet::system.GetActors())
 	{
 		if (gearSet->Intersects(mesh->GetBoundsInWorldSpace()))

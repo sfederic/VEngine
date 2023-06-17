@@ -28,6 +28,8 @@ Properties GearSet::GetProps()
 
 void GearSet::OnLinkRotate()
 {
+	__super::OnLinkRotate();
+
 	IncrementDoor();
 }
 

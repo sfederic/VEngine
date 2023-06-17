@@ -10,6 +10,8 @@ void SteamValve::Create()
 
 void SteamValve::OnLinkRotate()
 {
+	__super::OnLinkRotate();
+
 	//@Todo: logic is thin here. Come back to it when you want to use it for something like a SteamSource actor
 	GameUtils::SpawnParticleEmitter("Particle/smoke.png", GetPositionV());
 	isValveOn = !isValveOn;
