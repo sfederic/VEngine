@@ -213,7 +213,7 @@ public:
 		std::vector<Actor*> outActors;
 		for (auto& actor : actors)
 		{
-			outActors.emplace_back(static_cast<Actor*>(actor.get()));
+			outActors.push_back(actor.get());
 		}
 		return outActors;
 	}
