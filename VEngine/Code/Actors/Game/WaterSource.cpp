@@ -19,8 +19,6 @@ void WaterSource::Create()
 	mesh->SetRastState(RastStates::noBackCull);
 	mesh->SetTexture("water.jpg");
 	mesh->SetUVOffsetSpeed(XMFLOAT2(0.f, 0.25f));
-
-	boxTrigger->SetLocalPosition(0.f, 0.f, -1.f);
 }
 
 void WaterSource::Start()
