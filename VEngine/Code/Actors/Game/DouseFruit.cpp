@@ -4,12 +4,9 @@
 
 void DouseFruit::Create()
 {
-	canBeMovedInLink = false;
-	canBeRotatedInLink = false;
-
 	mesh->SetMeshFilename("small_ico_sphere.vmesh");
 	mesh->SetTexture("watermelon.jpg");
-	mesh->SetLocalScale(0.25f);
+	mesh->SetLocalScale(0.33f);
 }
 
 void DouseFruit::Douse()
