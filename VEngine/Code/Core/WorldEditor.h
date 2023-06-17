@@ -27,6 +27,7 @@ namespace WorldEditor
 	extern DirectX::XMFLOAT4 vertexPaintColour;
 	
 	void Tick();
+	void Reset();
 
 	void DeselectPickedActor();
 	void DeselectAll();

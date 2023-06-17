@@ -56,6 +56,16 @@ void WorldEditor::Tick()
 	SaveWorld();
 }
 
+void WorldEditor::Reset()
+{
+	DeselectAll();
+
+	pickedActors.clear();
+	pickedComponent = nullptr;
+	spawnSystem = nullptr;
+	actorTemplateFilename.clear();
+}
+
 void HandleActorPicking()
 {
 	if (transformGizmo.CheckMouseOver() || Core::gameplayOn || WorldEditor::vertexPaintActive) 
