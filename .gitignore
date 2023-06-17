@@ -8,7 +8,8 @@ VEngine/Code/FbxSdk/
 VEngine/Code/Physx/
 VEngine/Shaders/Vertex/
 VEngine/Shaders/Pixel/
- 
+[Bb]uild
+
 # User-specific files
 *.dll
 *.lib
