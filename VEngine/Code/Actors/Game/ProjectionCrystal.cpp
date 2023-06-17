@@ -22,6 +22,8 @@ void ProjectionCrystal::Interact()
 
 void ProjectionCrystal::OnLinkActivate()
 {
+	__super::OnLinkActivate();
+
 	if (!CheckComponentExists("TestMesh"))
 	{
 		auto testMesh = CreateComponent<MeshComponent>("TestMesh");

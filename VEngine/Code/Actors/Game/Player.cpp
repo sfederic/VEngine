@@ -583,7 +583,6 @@ void Player::LinkToGridActor()
 				HitResult nodeHit(this);
 				gridActor->GetCurrentNode()->RecalcNodeHeight(nodeHit);
 				linkedGridActor = gridActor;
-				linkedGridActor->isLinked = true;
 				camera->targetActor = gridActor;
 				isInputLinkedToGridActor = true;
 
