@@ -183,12 +183,12 @@ MeshDataProxy AssetSystem::ReadVMeshAssetFromFile(const std::string filename)
 	MeshAssetHeader header;
 	MeshData data;
 
-	assert(fread(&header, sizeof(MeshAssetHeader), 1, file));
+	fread(&header, sizeof(MeshAssetHeader), 1, file);
 
 	data.vertices.resize(header.vertexCount);
-	assert(fread(data.vertices.data(), sizeof(Vertex), header.vertexCount, file));
+	fread(data.vertices.data(), sizeof(Vertex), header.vertexCount, file);
 
-	assert(fread(&data.boundingBox, sizeof(DirectX::BoundingBox), 1, file));
+	fread(&data.boundingBox, sizeof(DirectX::BoundingBox), 1, file);
 
 	data.skeleton.GetJoints().resize(header.boneCount);
 	//Has to potential to read empty data, don't call assert()
@@ -217,22 +217,22 @@ Animation AssetSystem::ReadVAnimAssetFromFile(const std::string filename)
 
 	AnimationAssetHeader header;
 
-	assert(fread(&header, sizeof(AnimationAssetHeader), 1, file));
+	fread(&header, sizeof(AnimationAssetHeader), 1, file);
 
 	Animation anim = Animation(header.name);
 
 	for (uint64_t i = 0; i < header.frameCount; i++)
 	{
 		int jointIndex = Joint::INVALID_JOINT_INDEX;
-		assert(fread(&jointIndex, sizeof(int), 1, file));
+		fread(&jointIndex, sizeof(int), 1, file);
 		assert(jointIndex != -2);
 
 		size_t animFrameCount = 0;
-		assert(fread(&animFrameCount, sizeof(size_t), 1, file));
+		fread(&animFrameCount, sizeof(size_t), 1, file);
 
 		std::vector<AnimFrame> animFrames;
 		animFrames.resize(animFrameCount);
-		assert(fread(animFrames.data(), sizeof(AnimFrame) * animFrameCount, 1, file));
+		fread(animFrames.data(), sizeof(AnimFrame) * animFrameCount, 1, file);
 
 		anim.AddFrame(jointIndex, animFrames);
 	}
