@@ -1,5 +1,5 @@
 #include "vpch.h"
-#include "MultiOrientationLock .h"
+#include "MultiOrientationLock.h"
 #include "OrientationLock.h"
 #include "GridActor.h"
 

@@ -292,7 +292,7 @@
     <ClCompile Include="Code\Actors\Game\OilSlick.cpp" />
     <ClCompile Include="Code\Actors\Game\PointLightGridActor.cpp" />
     <ClCompile Include="Code\Actors\Game\IlluminatedGridActor.cpp" />
-    <ClCompile Include="Code\Actors\Game\MultiOrientationLock .cpp" />
+    <ClCompile Include="Code\Actors\Game\MultiOrientationLock.cpp" />
     <ClCompile Include="Code\Actors\Game\ProjectionCrystal.cpp" />
     <ClCompile Include="Code\Actors\Game\Excavator.cpp" />
     <ClCompile Include="Code\Actors\Game\Mineable.cpp" />
@@ -625,7 +625,7 @@
     <ClInclude Include="Code\Actors\Game\OilSlick.h" />
     <ClInclude Include="Code\Actors\Game\PointLightGridActor.h" />
     <ClInclude Include="Code\Actors\Game\IlluminatedGridActor.h" />
-    <ClInclude Include="Code\Actors\Game\MultiOrientationLock .h" />
+    <ClInclude Include="Code\Actors\Game\MultiOrientationLock.h" />
     <ClInclude Include="Code\Actors\Game\ProjectionCrystal.h" />
     <ClInclude Include="Code\Actors\Game\Excavator.h" />
     <ClInclude Include="Code\Actors\Game\Mineable.h" />
