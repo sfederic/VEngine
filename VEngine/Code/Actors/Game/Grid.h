@@ -51,6 +51,8 @@ struct Grid : public Actor
 
 	std::vector<GridNode*> GetAllNodes();
 
+	void RecalcAllNodes(HitResult& hit);
+
 	//Limit the node gotten between 0 and the size of the grid.
 	GridNode* GetNodeLimit(int x, int y);
 

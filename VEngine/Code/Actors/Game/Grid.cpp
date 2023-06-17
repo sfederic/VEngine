@@ -20,6 +20,71 @@ Grid::Grid()
 //Grid::Awake() can also be used to reset all node world positions during gameplay
 void Grid::Awake()
 {
+    HitResult hit(this);
+    RecalcAllNodes(hit);
+}
+
+void Grid::Create()
+{
+    nodeMesh->SetBlendState(BlendStates::Default);
+}
+
+void Grid::Tick(float deltaTime)
+{
+    switch (lerpValue)
+    {
+    case LerpValue::LerpIn:
+        LerpInNodes(deltaTime);
+        break;
+
+    case LerpValue::LerpOut:
+        LerpOutNodes(deltaTime);
+        break;
+    }
+}
+
+Properties Grid::GetProps()
+{
+    auto props = __super::GetProps();
+    props.title = "BattleNode";
+    props.Add("Size X", &sizeX);
+    props.Add("Size Y", &sizeY);
+    return props;
+}
+
+GridNode* Grid::GetNode(int x, int y)
+{
+    assert(x < rows.size());
+    assert(y < rows[x].columns.size());
+    return &rows[x].columns[y];
+}
+
+GridNode* Grid::GetNodeAllowNull(int x, int y)
+{
+    if (x < 0) return nullptr;
+    if (y < 0) return nullptr;
+    if (x >= sizeX) return nullptr;
+    if (y >= sizeY) return nullptr;
+    return &rows[x].columns[y];
+}
+
+std::vector<GridNode*> Grid::GetAllNodes()
+{
+    std::vector<GridNode*> outNodes;
+
+    for (int x = 0; x < sizeX; x++)
+    {
+        for (int y = 0; y < sizeX; y++)
+        {
+            outNodes.push_back(GetNode(x, y));
+        }
+    }
+
+    return outNodes;
+}
+
+void Grid::RecalcAllNodes(HitResult& hit)
+{
     nodeMesh->ReleaseBuffers();
 
     //Set the mesh count as 1 and empty the data just to put dummy data into the buffers
@@ -35,14 +100,12 @@ void Grid::Awake()
 
     nodeMesh->srv = RenderUtils::CreateSRVForMeshInstance(nodeMesh->structuredBuffer, meshInstanceCount);
 
-
-    XMMATRIX rootWorldMatrix = rootComponent->GetWorldMatrix();
+    const XMMATRIX rootWorldMatrix = rootComponent->GetWorldMatrix();
     XMVECTOR rayOrigin = XMVectorZero();
 
     nodeMesh->GetInstanceData().clear();
 
     //Ignore player and units
-    HitResult hit(this);
     hit.ignoreLayer = CollisionLayers::Editor;
     hit.actorsToIgnore.push_back((Actor*)Player::system.GetFirstActor());
     auto gridActors = World::GetAllActorsOfTypeAsActor<GridActor>();
@@ -135,65 +198,6 @@ void Grid::Awake()
             rows[x].Add(node);
         }
     }
-}
-
-void Grid::Create()
-{
-    nodeMesh->SetBlendState(BlendStates::Default);
-}
-
-void Grid::Tick(float deltaTime)
-{
-    switch (lerpValue)
-    {
-    case LerpValue::LerpIn:
-        LerpInNodes(deltaTime);
-        break;
-
-    case LerpValue::LerpOut:
-        LerpOutNodes(deltaTime);
-        break;
-    }
-}
-
-Properties Grid::GetProps()
-{
-    auto props = __super::GetProps();
-    props.title = "BattleNode";
-    props.Add("Size X", &sizeX);
-    props.Add("Size Y", &sizeY);
-    return props;
-}
-
-GridNode* Grid::GetNode(int x, int y)
-{
-    assert(x < rows.size());
-    assert(y < rows[x].columns.size());
-    return &rows[x].columns[y];
-}
-
-GridNode* Grid::GetNodeAllowNull(int x, int y)
-{
-    if (x < 0) return nullptr;
-    if (y < 0) return nullptr;
-    if (x >= sizeX) return nullptr;
-    if (y >= sizeY) return nullptr;
-    return &rows[x].columns[y];
-}
-
-std::vector<GridNode*> Grid::GetAllNodes()
-{
-    std::vector<GridNode*> outNodes;
-
-    for (int x = 0; x < sizeX; x++)
-    {
-        for (int y = 0; y < sizeX; y++)
-        {
-            outNodes.push_back(GetNode(x, y));
-        }
-    }
-
-    return outNodes;
 }
 
 GridNode* Grid::GetNodeLimit(int x, int y)
