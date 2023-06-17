@@ -13,8 +13,9 @@ public:
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
+	void Douse() override;
+
 private:
-	void CheckIfInWaterSource();
 	void EmptyWater();
 
 	MeshComponent* waterMesh = nullptr;

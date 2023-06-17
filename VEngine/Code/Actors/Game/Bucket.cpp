@@ -1,8 +1,6 @@
 #include "vpch.h"
 #include "Bucket.h"
 #include "Components/MeshComponent.h"
-#include "WaterSource.h"
-#include "FireSource.h"
 #include "Core/VMath.h"
 #include "Physics/Raycast.h"
 #include "Gameplay/GameUtils.h"
@@ -38,7 +36,6 @@ void Bucket::Tick(float deltaTime)
 
 	if (CheckMovementAndRotationStopped())
 	{
-		CheckIfInWaterSource();
 		EmptyWater();
 	}
 }
@@ -51,21 +48,9 @@ Properties Bucket::GetProps()
 	return props;
 }
 
-void Bucket::CheckIfInWaterSource()
+void Bucket::Douse()
 {
-	if (!isFilled)
-	{
-		if (VMath::VecEqual(GetUpVectorV(), VMath::GlobalUpVector()))
-		{
-			for (auto& waterSource : WaterSource::system.GetActors())
-			{
-				if (waterSource->Contains(GetPositionV()))
-				{
-					isFilled = true;
-				}
-			}
-		}
-	}
+	isFilled = true;
 }
 
 void Bucket::EmptyWater()
