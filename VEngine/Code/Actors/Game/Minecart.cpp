@@ -19,6 +19,8 @@ Properties Minecart::GetProps()
 
 void Minecart::OnLinkMove()
 {
+	__super::OnLinkMove();
+
 	HitResult hit(this);
 	if (Raycast(hit, nextPos, -GetUpVectorV(), 5.f))
 	{

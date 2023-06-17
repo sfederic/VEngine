@@ -49,6 +49,18 @@ void GridActor::OnRotationEnd()
 	}
 }
 
+void GridActor::OnMoveEnd()
+{
+	if (isMoving)
+	{
+		if (CheckMovementAndRotationStopped())
+		{
+			Grid::system.GetOnlyActor()->Awake();
+			isMoving = false;
+		}
+	}
+}
+
 void GridActor::Start()
 {
 	nextPos = GetPositionV();
@@ -68,6 +80,10 @@ void GridActor::Start()
 
 void GridActor::Tick(float deltaTime)
 {
+	//@Todo: problems with these functions. Aside from them being potentially expensive, grid actors that
+	//are spread across multiple nodes in size will move to their own node if oriented correctly.
+	//Maybe there needs to be a system where grid actors have reference to all of their nodes, not just singular.
+	OnMoveEnd();
 	OnRotationEnd();
 
 	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, moveSpeed));

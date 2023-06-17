@@ -55,6 +55,7 @@ struct GridActor : Actor
 	bool canFall = true;
 	bool isSubmerged = false;
 	bool isRotating = false;
+	bool isMoving = true;
 
 	//These two are all the axis valid axis a GridActor can move on.
 	//1 or -1 denotes a valid direction (based on the axis type), 0 denotes it can't move in that cardinal direction.
@@ -77,9 +78,11 @@ struct GridActor : Actor
 	virtual void OnLinkRotate() { isRotating = true; }
 	virtual void OnLinkRotateRight() {}
 	virtual void OnLinkRotateLeft() {}
-	virtual void OnRotationEnd();
 
-	virtual void OnLinkMove() {}
+	virtual void OnRotationEnd();
+	virtual void OnMoveEnd();
+
+	virtual void OnLinkMove() { isMoving = true; }
 
 	virtual void Interact() {}
 
