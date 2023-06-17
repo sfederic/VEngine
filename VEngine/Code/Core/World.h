@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include "UID.h"
+#include "Actors/ActorSystemCache.h"
 
 class IActorSystem;
 class IComponentSystem;
@@ -65,18 +66,13 @@ namespace World
 	template <typename T>
 	std::vector<T*> GetAllActorsOfTypeInWorld()
 	{
+		auto actorSystem = ActorSystemCache::Get().GetSystem(typeid(T));
+		auto actors = actorSystem->GetActorsAsBaseClass();
 		std::vector<T*> outActors;
-
-		auto actors = GetAllActorsInWorld();
 		for (auto actor : actors)
 		{
-			auto actorType = dynamic_cast<T*>(actor);
-			if (actorType)
-			{
-				outActors.emplace_back(actorType);
-			}
+			outActors.push_back(dynamic_cast<T*>(actor));
 		}
-
 		return outActors;
 	}
 
