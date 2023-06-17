@@ -171,11 +171,11 @@ void Player::HighlightLinkableGridActor()
 		auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
 		if (gridActor)
 		{
-			if (gridActor->isLinked)
+			if (gridActor->IsLinked())
 			{
 				return;
 			}
-			if (!gridActor->canBeMovedInLink && gridActor->canBeRotatedInLink)
+			if (!gridActor->CanBeMovedInLink() && gridActor->CanBeRotatedInLink())
 			{
 				return;
 			}
@@ -655,7 +655,7 @@ void Player::MoveLinkedGridActor()
 
 	if (Input::GetKeyUp(Keys::W))
 	{
-		if (checkLinkMovement(linkedGridActor->canBeMovedInLink))
+		if (checkLinkMovement(linkedGridActor->CanBeMovedInLink()))
 		{
 			if (linkedGridActor->IsNextMoveAxisValid(GetForwardVectorV()))
 			{
@@ -673,7 +673,7 @@ void Player::MoveLinkedGridActor()
 	}
 	else if (Input::GetKeyUp(Keys::S))
 	{
-		if (checkLinkMovement(linkedGridActor->canBeMovedInLink))
+		if (checkLinkMovement(linkedGridActor->CanBeMovedInLink()))
 		{
 			if (linkedGridActor->IsNextMoveAxisValid(-GetForwardVectorV()))
 			{
@@ -691,7 +691,7 @@ void Player::MoveLinkedGridActor()
 	}
 	else if (Input::GetKeyUp(Keys::A))
 	{
-		if (checkLinkMovement(linkedGridActor->canBeMovedInLink))
+		if (checkLinkMovement(linkedGridActor->CanBeMovedInLink()))
 		{
 			if (linkedGridActor->IsNextMoveAxisValid(-GetRightVectorV()))
 			{
@@ -709,7 +709,7 @@ void Player::MoveLinkedGridActor()
 	}
 	else if (Input::GetKeyUp(Keys::D))
 	{
-		if (checkLinkMovement(linkedGridActor->canBeMovedInLink))
+		if (checkLinkMovement(linkedGridActor->CanBeMovedInLink()))
 		{
 			if (linkedGridActor->IsNextMoveAxisValid(GetRightVectorV()))
 			{
@@ -748,9 +748,9 @@ void Player::RotateLinkedGridActor()
 
 	if (Input::GetKeyUp(Keys::Right))
 	{
-		if (checkLinkRotation(linkedGridActor->canBeRotatedInLink))
+		if (checkLinkRotation(linkedGridActor->CanBeRotatedInLink()))
 		{
-			if (linkedGridActor->canBeRotatedYawYAxis)
+			if (linkedGridActor->CanBeRotatedYawYAxis())
 			{
 				linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
 					VMath::GlobalUpVector(), -angleIncrement);
@@ -769,9 +769,9 @@ void Player::RotateLinkedGridActor()
 	}
 	else if (Input::GetKeyUp(Keys::Left))
 	{
-		if (checkLinkRotation(linkedGridActor->canBeRotatedInLink))
+		if (checkLinkRotation(linkedGridActor->CanBeRotatedInLink()))
 		{
-			if (linkedGridActor->canBeRotatedYawYAxis)
+			if (linkedGridActor->CanBeRotatedYawYAxis())
 			{
 				linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
 					VMath::GlobalUpVector(), angleIncrement);
@@ -790,9 +790,9 @@ void Player::RotateLinkedGridActor()
 	}
 	else if (Input::GetKeyUp(Keys::Down))
 	{
-		if (checkLinkRotation(linkedGridActor->canBeRotatedInLink))
+		if (checkLinkRotation(linkedGridActor->CanBeRotatedInLink()))
 		{
-			if (linkedGridActor->canBeRotatedPitchXAxis)
+			if (linkedGridActor->CanBeRotatedPitchXAxis())
 			{
 				linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
 					GetMeshRight(), -angleIncrement);
@@ -810,9 +810,9 @@ void Player::RotateLinkedGridActor()
 	}
 	else if (Input::GetKeyUp(Keys::Up))
 	{
-		if (checkLinkRotation(linkedGridActor->canBeRotatedInLink))
+		if (checkLinkRotation(linkedGridActor->CanBeRotatedInLink()))
 		{
-			if (linkedGridActor->canBeRotatedPitchXAxis)
+			if (linkedGridActor->CanBeRotatedPitchXAxis())
 			{
 				linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
 					GetMeshRight(), angleIncrement);

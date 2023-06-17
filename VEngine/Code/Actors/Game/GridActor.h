@@ -10,14 +10,16 @@ struct GridNode;
 struct DialogueComponent;
 
 //Base struct for every interactive actor that is placed in the level
-struct GridActor : Actor
+class GridActor : public Actor
 {
+public:
 	ACTOR_SYSTEM(GridActor);
 
 	MeshComponent* mesh = nullptr;
 	HealthWidget* healthWidget = nullptr;
 	DialogueComponent* dialogueComponent = nullptr;
 
+protected:
 	float moveSpeed = 12.f;
 	float rotateSpeed = 12.f;
 
@@ -28,12 +30,6 @@ struct GridActor : Actor
 	int health = 1;
 
 	bool isDestructible = true;
-
-	//whether the grid node the gridactor is on is inactive.
-	bool isGridObstacle = true;
-
-	//Physical interaction, moves/activates actor
-	bool isInteractable = true;
 
 	//Inspection interaction, shows dialogue
 	bool isInspectable = true;
@@ -62,8 +58,15 @@ struct GridActor : Actor
 	XMFLOAT2 validPositiveMovementAxis = XMFLOAT2(1.f, 1.f);
 	XMFLOAT2 validNegativeMovementAxis = XMFLOAT2(1.f, 1.f);
 
+public:
 	std::wstring interactText;
 	std::wstring interactKnownText;
+
+	//Physical interaction, moves/activates actor
+	bool isInteractable = true;
+
+	//whether the grid node the gridactor is on is inactive.
+	bool isGridObstacle = true;
 
 	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
@@ -125,6 +128,12 @@ struct GridActor : Actor
 	void AddNextPosition(XMVECTOR offset);
 
 	bool IsNextMoveAxisValid(XMVECTOR direction);
+
+	bool IsLinked() { return isLinked; }
+	bool CanBeMovedInLink() { return canBeMovedInLink; }
+	bool CanBeRotatedInLink() { return canBeRotatedInLink; }
+	bool CanBeRotatedYawYAxis() { return canBeRotatedYawYAxis; }
+	bool CanBeRotatedPitchXAxis() { return canBeRotatedPitchXAxis; }
 
 	void CheckIfSubmerged();
 };

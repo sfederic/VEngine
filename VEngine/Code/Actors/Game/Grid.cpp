@@ -379,7 +379,8 @@ Unit* Grid::GetUnitAtNode(GridNode* node)
 {
     for (auto& unit : Unit::system.GetActors())
     {
-        if (node->Equals(unit->xIndex, unit->yIndex))
+        auto unitCurrentNode = unit->GetCurrentNode();
+        if (node->Equals(unitCurrentNode))
         {
             return unit.get();
         }
