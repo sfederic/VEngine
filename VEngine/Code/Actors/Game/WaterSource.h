@@ -13,6 +13,7 @@ public:
 	WaterSource();
 	void Create() override;
 	void Start() override;
+	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
 	void Activate() override;
@@ -21,5 +22,7 @@ public:
 	bool Contains(XMVECTOR point);
 
 private:
+	void DouseGridActorsInTrigger();
+
 	BoxTriggerComponent* boxTrigger = nullptr;
 };

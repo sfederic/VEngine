@@ -19,6 +19,7 @@ void WaterSource::Create()
 	mesh->SetRastState(RastStates::noBackCull);
 	mesh->SetTexture("water.jpg");
 	mesh->SetUVOffsetSpeed(XMFLOAT2(0.f, 0.25f));
+	mesh->SetCollisionLayer(CollisionLayers::Editor);
 }
 
 void WaterSource::Start()
@@ -26,6 +27,13 @@ void WaterSource::Start()
 	__super::Start();
 
 	SetVisibility(visible);
+}
+
+void WaterSource::Tick(float deltaTime)
+{
+	__super::Tick(deltaTime);
+
+	DouseGridActorsInTrigger();
 }
 
 Properties WaterSource::GetProps()
@@ -48,4 +56,18 @@ void WaterSource::Deactivate()
 bool WaterSource::Contains(XMVECTOR point)
 {
 	return boxTrigger->Contains(point);
+}
+
+void WaterSource::DouseGridActorsInTrigger()
+{
+	for (auto gridActor : World::GetAllActorsOfTypeInWorld<GridActor>())
+	{
+		if (boxTrigger->Contains(gridActor->GetPositionV()))
+		{
+			if (gridActor->CheckMovementAndRotationStopped())
+			{
+				gridActor->Douse();
+			}
+		}
+	}
 }
