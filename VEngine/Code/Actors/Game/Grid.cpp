@@ -152,6 +152,11 @@ void Grid::RecalcAllNodes(HitResult& hit)
 
             instanceData.colour = GridNode::normalColour;
 
+            hit.hitActor = nullptr;
+            hit.hitActors.clear();
+            hit.hitComponent = nullptr;
+            hit.hitComponents.clear();
+
             //raycast against the world to set node position
             if (Raycast(hit, rayOrigin, -VMath::GlobalUpVector(), 20.0f))
             {
