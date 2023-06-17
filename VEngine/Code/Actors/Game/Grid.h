@@ -7,6 +7,7 @@
 struct InstanceMeshComponent;
 class Unit;
 class PlayerUnit;
+class GridActor;
 
 //Actor that holds all the traversable nodes in the level.
 //Grid needs to always be at (0, 0, 0) in world because of how rows & nodes are created at index.
@@ -52,6 +53,11 @@ struct Grid : public Actor
 	std::vector<GridNode*> GetAllNodes();
 
 	void RecalcAllNodes(HitResult& hit);
+
+	//This function exists to make the grid rules clearer. The intent is when you link to a grid actor,
+	//you want its own nodes to be recalced so that grid actors bigger than 1x1 aren't moving to their 
+	//own nodes on movement.
+	void RecalcNodesToIgnoreLinkedGridActor(GridActor* gridActorToIgnore);
 
 	//Limit the node gotten between 0 and the size of the grid.
 	GridNode* GetNodeLimit(int x, int y);

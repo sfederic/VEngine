@@ -37,13 +37,28 @@ bool GridActor::CheckNextRotationBoundsIntersect()
 	return OrientedBoxCast(hit, nextRotBounds, true, true);
 }
 
+void GridActor::OnLinkActivate()
+{
+	isLinked = true;
+
+	//Reset grid nodes with this actor being ignored.
+	Grid::system.GetOnlyActor()->RecalcNodesToIgnoreLinkedGridActor(this);
+}
+
+void GridActor::OnLinkDeactivate()
+{
+	isLinked = false;
+
+	//Reset grid nodes. Include this actor again.
+	Grid::system.GetOnlyActor()->Awake();
+}
+
 void GridActor::OnRotationEnd()
 {
 	if (isRotating)
 	{
 		if (CheckMovementAndRotationStopped())
 		{
-			Grid::system.GetOnlyActor()->Awake();
 			isRotating = false;
 		}
 	}
@@ -55,7 +70,6 @@ void GridActor::OnMoveEnd()
 	{
 		if (CheckMovementAndRotationStopped())
 		{
-			Grid::system.GetOnlyActor()->Awake();
 			isMoving = false;
 		}
 	}
@@ -80,9 +94,6 @@ void GridActor::Start()
 
 void GridActor::Tick(float deltaTime)
 {
-	//@Todo: problems with these functions. Aside from them being potentially expensive, grid actors that
-	//are spread across multiple nodes in size will move to their own node if oriented correctly.
-	//Maybe there needs to be a system where grid actors have reference to all of their nodes, not just singular.
 	OnMoveEnd();
 	OnRotationEnd();
 

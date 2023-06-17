@@ -205,6 +205,17 @@ void Grid::RecalcAllNodes(HitResult& hit)
     }
 }
 
+void Grid::RecalcNodesToIgnoreLinkedGridActor(GridActor* gridActorToIgnore)
+{
+    HitResult hit(this);
+    hit.actorsToIgnore.push_back(gridActorToIgnore);
+    for (auto mesh : gridActorToIgnore->GetComponentsOfType<MeshComponent>())
+    {
+        hit.componentsToIgnore.push_back(mesh);
+    }
+    RecalcAllNodes(hit);
+}
+
 GridNode* Grid::GetNodeLimit(int x, int y)
 {
     if (x < 0) x = 0;

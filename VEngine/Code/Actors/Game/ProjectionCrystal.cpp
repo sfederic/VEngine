@@ -44,6 +44,8 @@ void ProjectionCrystal::OnLinkActivate()
 
 void ProjectionCrystal::OnLinkDeactivate()
 {
+	__super::OnLinkDeactivate();
+
 	DeleteComponent("TestMesh");
 	DeleteComponent("SpotLight");
 }
