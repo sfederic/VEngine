@@ -13,7 +13,6 @@
 #include "UI/ScreenFadeWidget.h"
 #include "UI/UISystem.h"
 #include "Core/Timer.h"
-#include "Core/Camera.h"
 
 EntranceTrigger::EntranceTrigger()
 {
@@ -146,8 +145,6 @@ void EntranceTrigger::UnlockEntrance()
     isEntranceActive = true;
     isEntranceLocked = false;
     interactWidget->interactText = openText;
-
-    SetCameraZoomFocusAndPopupWidget(" entrance unlocked.");
 }
 
 void EntranceTrigger::LockEntrance()
@@ -155,18 +152,4 @@ void EntranceTrigger::LockEntrance()
     isEntranceActive = false;
     isEntranceLocked = true;
     interactWidget->interactText = lockedText;
-
-    SetCameraZoomFocusAndPopupWidget(" entrance locked.");
-}
-
-void EntranceTrigger::SetCameraZoomFocusAndPopupWidget(std::string popupText)
-{
-    const float removePeriod = 2.f;
-
-    GameUtils::SetActiveCameraTargetAndZoomIn(this);
-    Timer::SetTimer(removePeriod, &GameUtils::SetCameraBackToPlayer);
-
-    auto entrancePopup = UISystem::CreateWidget<PopupWidget>();
-    entrancePopup->popupText = VString::stows(GetName() + popupText);
-    entrancePopup->AddToViewport(removePeriod);
 }

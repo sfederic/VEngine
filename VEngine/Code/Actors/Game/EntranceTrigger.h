@@ -43,7 +43,4 @@ struct EntranceTrigger : Actor
 
 	void UnlockEntrance();
 	void LockEntrance();
-
-private:
-	void SetCameraZoomFocusAndPopupWidget(std::string popupText);
 };
