@@ -1,0 +1,1119 @@
+DebugNoteActor
+1
+ Enabled
+1
+ Position
+-0 -0 -0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DebugNoteActor0
+Note Text
+Intent here is to match the sword rotations with the paintings.
+UID
+2028731464
+next
+DirectionalLightActor
+1
+ Enabled
+1
+ Position
+0 5 0
+ Rotation
+0.707107 0 0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Name
+DirectionalLightActor0
+UID
+3227738273
+next
+EntranceTrigger
+1
+ Enabled
+1
+ Position
+2 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+0
+Level Name
+
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Text
+Open
+UID
+2550393796
+Unlock Audio
+door.wav
+next
+Grid
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+Grid0
+Size X
+5
+Size Y
+5
+UID
+2699739853
+next
+MeshActor
+7
+ Enabled
+1
+ Position
+2 -0.5 2
+ Rotation
+0 0 0 1
+ Scale
+5 1 5
+ Visible
+1
+Name
+floor
+UID
+2178099073
+next
+ Enabled
+1
+ Position
+3 0 4
+ Rotation
+0 1 0 1.56958e-07
+ Scale
+1 1 1
+ Visible
+1
+Name
+statue1
+UID
+4237170658
+next
+ Enabled
+1
+ Position
+1 0 4
+ Rotation
+0 1 0 1.56958e-07
+ Scale
+1 1 1
+ Visible
+1
+Name
+statue0
+UID
+401470789
+next
+ Enabled
+1
+ Position
+-0.5 1 2
+ Rotation
+-0 0 -0.707107 0.707107
+ Scale
+2.99998 0.999994 5
+ Visible
+1
+Name
+wall1
+UID
+3757982076
+next
+ Enabled
+1
+ Position
+4.5 1 2
+ Rotation
+0.707107 -0.707107 -5.76013e-08 -2.66926e-08
+ Scale
+2.99995 0.999988 4.99999
+ Visible
+1
+Name
+wall0
+UID
+974641054
+next
+ Enabled
+1
+ Position
+4.5 1 2
+ Rotation
+-0 0.707107 -0 0.707107
+ Scale
+2 2 1
+ Visible
+1
+Name
+sword_picture1
+UID
+1146077622
+next
+ Enabled
+1
+ Position
+-0.5 1 2
+ Rotation
+0 0.707107 0 -0.707107
+ Scale
+2 2 1
+ Visible
+1
+Name
+sword_picture0
+UID
+1151799154
+next
+MultiOrientationLock
+1
+ Enabled
+1
+ Position
+2 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Actor Activate
+EntranceTrigger0
+Lock Actor 0
+Sword0
+Lock Actor 1
+Sword1
+Lock Actor 2
+
+Lock Actor 3
+
+Name
+MultiOrientationLock0
+UID
+4178313292
+next
+OrientationLock
+2
+ Enabled
+1
+ Position
+3 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+Dir Forward
+0 0 0
+Dir Right
+0 0 0
+Dir Up
+0 0 1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+0
+Link Rotation
+1
+Linked GridActor
+
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Name
+Sword1
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Yaw
+1
+UID
+409432671
+next
+ Enabled
+1
+ Position
+1 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+Dir Forward
+0 0 0
+Dir Right
+0 0 0
+Dir Up
+0 -1 0
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+0
+Link Rotation
+1
+Linked GridActor
+
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Name
+Sword0
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Yaw
+1
+UID
+3821641987
+next
+Player
+1
+ Enabled
+1
+ Position
+2 0 1
+ Rotation
+0 1.49012e-07 0 -1
+ Scale
+1 1 1
+ Visible
+1
+Name
+Player0
+UID
+3817475245
+next
+BoxTriggerComponent
+1
+2550393796
+Trigger
+ Enabled
+1
+ Pos
+2 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+1096692612
+next
+CameraComponent
+1
+3817475245
+Camera
+ Enabled
+1
+ Pos
+1.75 1.75 -2.75
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
+UID
+2533692700
+next
+ConditionComponent
+1
+2550393796
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+2717208894
+next
+DialogueComponent
+3
+409432671
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2853361186
+next
+3821641987
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+3679690994
+next
+3817475245
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1029481882
+next
+DirectionalLightComponent
+1
+3227738273
+DirectionalLight
+ Enabled
+1
+ Pos
+0 5 0
+ Rot
+0.707107 0 0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Colour
+1 1 1 1
+LightEnabled
+1
+UID
+814014588
+next
+EmptyComponent
+3
+2028731464
+Root
+ Enabled
+1
+ Pos
+-0 -0 -0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+4130548357
+next
+4178313292
+Root
+ Enabled
+1
+ Pos
+2 0 3
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+4240988592
+next
+3817475245
+Root
+ Enabled
+1
+ Pos
+2 0 1
+ Rot
+0 1.49012e-07 0 -1
+ Scale
+1 1 1
+ Visible
+1
+UID
+1498646771
+next
+InstanceMeshComponent
+1
+2699739853
+NodeMesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Instance
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2365725188
+next
+MeshComponent
+10
+2178099073
+Mesh
+ Enabled
+1
+ Pos
+2 -0.5 2
+ Rot
+0 0 0 1
+ Scale
+5 1 5
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3477041443
+next
+4237170658
+Mesh
+ Enabled
+1
+ Pos
+3 0 4
+ Rot
+0 1 0 1.56958e-07
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2913623617
+next
+401470789
+Mesh
+ Enabled
+1
+ Pos
+1 0 4
+ Rot
+0 1 0 1.56958e-07
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+439247546
+next
+3757982076
+Mesh
+ Enabled
+1
+ Pos
+-0.5 1 2
+ Rot
+-0 0 -0.707107 0.707107
+ Scale
+2.99998 0.999994 5
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1519243478
+next
+974641054
+Mesh
+ Enabled
+1
+ Pos
+4.5 1 2
+ Rot
+0.707107 -0.707107 -5.76013e-08 -2.66926e-08
+ Scale
+2.99995 0.999988 4.99999
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+4256307304
+next
+1146077622
+Mesh
+ Enabled
+1
+ Pos
+4.5 1 2
+ Rot
+-0 0.707107 -0 0.707107
+ Scale
+2 2 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+knight_stabbed_painting.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+2 2
+Mesh
+pictureframe_square.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2125029690
+next
+1151799154
+Mesh
+ Enabled
+1
+ Pos
+-0.5 1 2
+ Rot
+0 0.707107 0 -0.707107
+ Scale
+2 2 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+knight_sword_hold_painting.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+2 2
+Mesh
+pictureframe_square.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2739940887
+next
+409432671
+Mesh
+ Enabled
+1
+ Pos
+3 0 3
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+sword.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2792569261
+next
+3821641987
+Mesh
+ Enabled
+1
+ Pos
+1 0 3
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+sword.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1870221416
+next
+3817475245
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 -2.98024e-08 0 -1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2755487854
+next
+end
