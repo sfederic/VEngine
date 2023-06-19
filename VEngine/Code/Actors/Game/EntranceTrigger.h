@@ -23,6 +23,8 @@ struct EntranceTrigger : Actor
 	//text to show when entrance is locked
 	std::wstring lockedText = L"Locked";
 
+	std::string unlockAudio;
+
 	bool isEntranceActive = true;
 	bool isEntranceLocked = false;
 

@@ -116,6 +116,7 @@ Properties EntranceTrigger::GetProps()
     props.Add("Entrance Active", &isEntranceActive);
     props.Add("Open Text", &openText);
     props.Add("Locked Text", &lockedText);
+    props.Add("Unlock Audio", &unlockAudio);
     return props;
 }
 
@@ -140,6 +141,8 @@ bool EntranceTrigger::CheckIfWorldExists(std::string& worldName)
 
 void EntranceTrigger::UnlockEntrance()
 {
+    GameUtils::PlayAudioOneShot(unlockAudio);
+
     isEntranceActive = true;
     isEntranceLocked = false;
     interactWidget->interactText = openText;
