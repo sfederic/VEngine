@@ -175,7 +175,7 @@ void Player::HighlightLinkableGridActor()
 			{
 				return;
 			}
-			if (!gridActor->CanBeMovedInLink() && gridActor->CanBeRotatedInLink())
+			if (!gridActor->CanBeMovedInLink() && !gridActor->CanBeRotatedInLink())
 			{
 				return;
 			}
