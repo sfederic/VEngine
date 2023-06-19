@@ -24,7 +24,7 @@ workspace(g_wkslight.workspace.name)
 			"_HAS_STD_BYTE=0",
 		})
 		--buildoptions({ "/utf-8", "/Zc:char8_t-" })
-	filter({ "system:not linux", "action:gmake*", "kind:*App or StaticLib" })
+	filter({ "action:gmake*", "system:not linux", "kind:*App or StaticLib" })
 		buildoptions({ "-static" })
 	filter("configurations:Debug")
 		defines({ "_DEBUG" })
