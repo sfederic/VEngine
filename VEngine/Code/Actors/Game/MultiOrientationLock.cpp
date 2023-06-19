@@ -16,8 +16,7 @@ void MultiOrientationLock::Start()
 	lockActors.push_back(dynamic_cast<OrientationLock*>(World::GetActorByNameAllowNull(lockActorName2)));
 	lockActors.push_back(dynamic_cast<OrientationLock*>(World::GetActorByNameAllowNull(lockActorName3)));
 
-	actorToActivateOnAllLocksBeingCorrect = 
-		dynamic_cast<GridActor*>(World::GetActorByNameAllowNull(actorToActivate));
+	actorToActivateOnAllLocksBeingCorrect = World::GetActorByNameAllowNull(actorToActivate);
 }
 
 void MultiOrientationLock::Tick(float deltaTime)
