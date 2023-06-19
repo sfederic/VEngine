@@ -198,6 +198,10 @@ public:
 	void SetMeshesToDynamicPhysicsState();
 	void SetMeshesToStaticPhysicsState();
 
+	//GAME SPECIFIC FUNCTIONS
+	virtual void Activate() {}
+	virtual void Deactivate() {}
+
 protected:
 	Actor* parent = nullptr;
 	std::vector<Actor*> children;

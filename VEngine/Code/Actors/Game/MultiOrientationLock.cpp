@@ -2,6 +2,7 @@
 #include "MultiOrientationLock.h"
 #include "OrientationLock.h"
 #include "GridActor.h"
+#include "Gameplay/GameUtils.h"
 
 MultiOrientationLock::MultiOrientationLock()
 {
@@ -15,8 +16,8 @@ void MultiOrientationLock::Start()
 	lockActors.push_back(dynamic_cast<OrientationLock*>(World::GetActorByNameAllowNull(lockActorName2)));
 	lockActors.push_back(dynamic_cast<OrientationLock*>(World::GetActorByNameAllowNull(lockActorName3)));
 
-	gridActorToActivateOnAllLocksBeingCorrect = 
-		dynamic_cast<GridActor*>(World::GetActorByNameAllowNull(gridActorToActivate));
+	actorToActivateOnAllLocksBeingCorrect = 
+		dynamic_cast<GridActor*>(World::GetActorByNameAllowNull(actorToActivate));
 }
 
 void MultiOrientationLock::Tick(float deltaTime)
@@ -32,7 +33,7 @@ Properties MultiOrientationLock::GetProps()
 	props.Add("Lock Actor 1", &lockActorName1);
 	props.Add("Lock Actor 2", &lockActorName2);
 	props.Add("Lock Actor 3", &lockActorName3);
-	props.Add("GridActor Activate", &gridActorToActivate);
+	props.Add("Actor Activate", &actorToActivate);
 	return props;
 }
 
@@ -56,6 +57,15 @@ void MultiOrientationLock::CheckIfAllActorOrientationsAreCorrect()
 
 	if (numOfCorrectlyOrientedLockActorsToCheck == 0)
 	{
-		gridActorToActivateOnAllLocksBeingCorrect->Activate();
+		if (actorToActivateOnAllLocksBeingCorrect)
+		{
+			actorToActivateOnAllLocksBeingCorrect->Activate();
+		}
+
+		if (!onceOffAudioCueOnActivate)
+		{
+			onceOffAudioCueOnActivate = true;
+			GameUtils::PlayAudioOneShot("intuition_gained.wav");
+		}
 	}
 }

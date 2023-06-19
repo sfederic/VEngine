@@ -34,6 +34,9 @@ struct EntranceTrigger : Actor
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;
 
+	void Activate() override { UnlockEntrance(); }
+	void Deactivate() override { LockEntrance(); }
+
 	bool CheckIfWorldExists(std::string& worldName);
 
 	void UnlockEntrance();

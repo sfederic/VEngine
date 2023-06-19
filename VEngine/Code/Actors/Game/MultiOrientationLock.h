@@ -28,6 +28,8 @@ private:
 
 	std::vector<OrientationLock*> lockActors;
 
-	std::string gridActorToActivate;
-	GridActor* gridActorToActivateOnAllLocksBeingCorrect = nullptr;
+	std::string actorToActivate;
+	Actor* actorToActivateOnAllLocksBeingCorrect = nullptr;
+
+	bool onceOffAudioCueOnActivate = false;
 };

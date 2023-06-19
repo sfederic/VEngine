@@ -98,9 +98,6 @@ public:
 	//When in range of a crystal providing electrical power
 	virtual void PowerUp() {}
 
-	virtual void Activate() {}
-	virtual void Deactivate() {}
-
 	//Called when this GridActor is attacked.
 	virtual void Attacked() {}
 
