@@ -14,5 +14,5 @@ g_wkslight.workspace = {
 	},
 }
 g_wkslight.extras = {
-	qt_root = "D:\\dev2\\qt-5.15.2",
+	qt_qpa_platform_plugin_path = "D:\\dev2\\qt-5.15.2\\plugins\\platforms",
 }

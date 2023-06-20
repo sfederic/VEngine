@@ -64,7 +64,7 @@ project("VEngine")
 	filter("action:vs*")
 		debugenvs({
 			"$(LocalDebuggerEnvironment)",
-			"QT_QPA_PLATFORM_PLUGIN_PATH=" .. g_wkslight.extras.qt_root .. "\\plugins\\platforms",
+			"QT_QPA_PLATFORM_PLUGIN_PATH=" .. g_wkslight.extras.qt_qpa_platform_plugin_path,
 		})
 		vspropertysheets({
 			"D:\\dev2\\DirectXTK.props",
