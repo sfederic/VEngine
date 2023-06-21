@@ -34,8 +34,8 @@ workspace(g_wkslight.workspace.name)
 		defines({ "NDEBUG" })
 		symbols("Off")
 		optimize("Speed")
-group(g_wkslight.workspace.thirdparty.name)
-	for k, v in pairs(g_wkslight.workspace.thirdparty.projects) do
+group(g_wkslight.workspace.libraries.name)
+	for k, v in pairs(g_wkslight.workspace.libraries.projects) do
 		include(v.location)
 	end
 group("")

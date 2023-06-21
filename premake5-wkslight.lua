@@ -1,15 +1,22 @@
 g_wkslight = require("premake5-modules.premake-wkslight.wkslight")
 g_wkslight.workspace = {
 	name = "VEngine-wks",
-	startproject = "",
+	startproject = "VEngine",
 	platforms = { "x64" },
 	cppdialect = "C++20",
-	thirdparty = {
-		name = "thirdparty",
+	libraries = {
+		name = "libraries",
 		projects = {
+			ExampleStaticLib = {
+				location = "libraries/ExampleStaticLib",
+				includedirs = {
+					"%{wks.location}/../libraries/ExampleStaticLib/include",
+				},
+			},
 		},
 	},
 	projects = {
+		"Editor",
 		"VEngine",
 	},
 }
