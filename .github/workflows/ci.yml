@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ "main", "master" ]
+    
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: "recursive"
+        
+      - name: Clone dev2
+        run: |
+          git -C D:\ clone https://github.com/ignite720/dev2.git
+
+      - name: Setup premake5
+        uses: abel0b/setup-premake@v2.2
+        with:
+          version: "5.0.0-beta2"
+
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+        with:
+          vs-version: "latest"
+        
+      - name: Build app for release
+        run: |
+          premake5 vs2022
+          msbuild build\VEngine-wks.sln -nologo -m -p:Configuration=Release /p:Platform=x64 /p:Projects="build\VEngine\VEngine.vcxproj"
+          
+      - name: Create artifact
+        run: |
+          mkdir -p temp/artifact
+          cp bin/x64/Release/*.exe temp/artifact/
+          #cp -R VEngine/Assets temp/artifact/
+          cp -R VEngine/Shaders temp/artifact/
+          cp D:/dev2/fbxsdk202032/lib/vs2017/x64/release/*.dll temp/artifact/
+          cp D:/dev2/PhysX.4.1.229882250/bin/Release/*.dll temp/artifact/
+          cp D:/dev2/qt-5.15.2/bin/*.dll temp/artifact/
+          cp -R D:/dev2/qt-5.15.2/plugins temp/artifact/
+        
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Release-Artifact
+          path: temp
