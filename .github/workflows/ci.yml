@@ -31,18 +31,14 @@ jobs:
       - name: Build app for release
         run: |
           premake5 vs2022
-          msbuild build\VEngine-wks.sln -nologo -m -p:Configuration=Release /p:Platform=x64 /p:Projects="build\VEngine\VEngine.vcxproj"
+          msbuild build\VEngine-wks.sln -nologo -m -p:Configuration=Release -p:Platform=x64 -p:Projects="build\VEngine\VEngine.vcxproj"
           
       - name: Create artifact
         run: |
           mkdir -p temp/artifact
           cp bin/x64/Release/*.exe temp/artifact/
-          #cp -R VEngine/Assets temp/artifact/
-          cp -R VEngine/Shaders temp/artifact/
-          cp D:/dev2/fbxsdk202032/lib/vs2017/x64/release/*.dll temp/artifact/
-          cp D:/dev2/PhysX.4.1.229882250/bin/Release/*.dll temp/artifact/
-          cp D:/dev2/qt-5.15.2/bin/*.dll temp/artifact/
-          cp -R D:/dev2/qt-5.15.2/plugins temp/artifact/
+          #cp -r VEngine/Assets temp/artifact/
+          cp -r VEngine/Shaders temp/artifact/
         
       - name: Upload artifact
         uses: actions/upload-artifact@v3
