@@ -42,7 +42,9 @@ DirectXTK (directxtk_desktop_win10) ver. 2021.8.2.1 - https://github.com/microso
 * Qt VS Tools ver. 2.10.0 - https://marketplace.visualstudio.com/items?itemName=TheQtCompany.QtVisualStudioTools2022
 * HLSL Tools for Visual Studio - https://marketplace.visualstudio.com/items?itemName=TimGJones.HLSLToolsforVisualStudio
 
-  As the engine is more of a learning project for onlookers and myself, the techincal outset of the engine was to keep it simple and mostly in C++ with, minimal use of outisde programming languages; that means usage of the C++ standard library and attempted usage of modern C++ concepts. This also extends to the rendering component of the engine, which are also simple.
+## Overview
+
+As the engine is more of a learning project for onlookers and myself, the techincal outset of the engine was to keep it simple and mostly in C++ with, minimal use of outisde programming languages; that means usage of the C++ standard library and attempted usage of modern C++ concepts. This also extends to the rendering component of the engine, which are also simple.
 
 Below is a quick outline of various concepts the engine uses. (Note that the code here is for illustration purposes.)
 
