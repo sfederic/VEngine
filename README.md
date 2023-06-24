@@ -7,7 +7,6 @@
 _Helpful Fork [https://github.com/sfederic/Engine/pull/3] to build using premake if you'd like to build for cross platform._
 _Thanks to https://github.com/ignite720_
 
-_Personal build notes_
 * Visual Studio 2022 17.5
 * Blender 3.4 (For FBX SDK)
 
