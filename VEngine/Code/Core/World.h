@@ -132,9 +132,10 @@ namespace World
 		std::vector<T*> outActors;
 		for (auto actor : World::GetAllActorsInWorld())
 		{
-			if (dynamic_cast<T*>(actor))
+			auto actorType = dynamic_cast<T*>(actor);
+			if (actorType)
 			{
-				outActors.push_back(actor);
+				outActors.push_back(actorType);
 			}
 		}
 		return outActors;
