@@ -127,6 +127,20 @@ namespace World
 	}
 
 	template <typename T>
+	std::vector<T*> GetAllActorsAsBaseType()
+	{
+		std::vector<T*> outActors;
+		for (auto actor : World::GetAllActorsInWorld())
+		{
+			if (dynamic_cast<T*>(actor))
+			{
+				outActors.push_back(actor);
+			}
+		}
+		return outActors;
+	}
+
+	template <typename T>
 	void RemoveAllActorsOfType()
 	{
 		auto actors = GetAllActorsInWorld();
