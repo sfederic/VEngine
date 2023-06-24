@@ -4,15 +4,7 @@
 
 ## Build Notes
 
-Premake5 is required. Download the linked release and add it as a PATH environment variable.
-https://github.com/premake/premake-core/releases/download/v5.0.0-beta2/premake-5.0.0-beta2-windows.zip
-
-Put this into D:\dev2
-git -C D:\ clone https://github.com/ignite720/dev2.git
-
-Then run `premake5-generate.bat`, all projects will be generated in the `build` directory.
-`premake5-clean.bat` removes all generated content in the bin and build directories.
-
+_Helpful Fork [https://github.com/sfederic/Engine/pull/3] to build using premake if you'd like to build for cross platform._
 _Thanks to https://github.com/ignite720_
 
 _Personal build notes_
