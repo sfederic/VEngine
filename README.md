@@ -13,7 +13,7 @@ git -C D:\ clone https://github.com/ignite720/dev2.git
 Then run `premake5-generate.bat`, all projects will be generated in the `build` directory.
 `premake5-clean.bat` removes all generated content in the bin and build directories.
 
-Thanks to :- [@ignite720]
+_Thanks to https://github.com/ignite720_
 
 _Personal build notes_
 * Visual Studio 2022 17.5
