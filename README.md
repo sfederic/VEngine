@@ -195,3 +195,9 @@ VEngine uses DirectX11 for 3D/2D rendering and DirectWrite + Direct2D for in-gam
 ### In-Game UI
 
 TODO - rest of the Readme
+
+### Global Illumination
+
+The engine uses a very simple GI technique using light probes spread around a level uniformly. Leveraging the DirectXSH spherical harmonics library, each probe takes a cubemap snapshot of its surroundings an encodes it using spherical harmonics. Actors then just find their closest probe and apply its colours.
+
+Though there are heaps of references on Global Illumination, Lightmapping and the sort, the references for this system are mostly taken from Bluepoint's Shadow of the Colossus [https://gdcvault.com/play/1027011/Advanced-Graphics-Summit-Lifting-the] and Sonic Unleashed [https://www.gdcvault.com/play/1428/Global-Illumination-in-SONIC].
