@@ -15,6 +15,7 @@ Then run `premake5-generate.bat`, all projects will be generated in the `build` 
 
 _Thanks to #ignite720_
 
+_Personal build notes_
 * Visual Studio 2022 17.5
 * Blender 3.4 (For FBX SDK)
 
@@ -45,7 +46,7 @@ DirectXTK (directxtk_desktop_win10) ver. 2021.8.2.1 - https://github.com/microso
 
 Below is a quick outline of various concepts the engine uses. (Note that the code here is for illustration purposes.)
 
-### Game Object Model
+## Game Object Model
 
 The engine uses an Actor/Component model similar to Unity and Unreal. The inspiration came from Rare's presentation on Actor Ticks in UE4 in Sea of Thieves. 
 
@@ -95,7 +96,7 @@ struct World
 }
 ```
 
-### Actor and Component Properties 
+## Actor and Component Properties 
 
 To deal with serialising out fields, Actors and Components define their properties to be fetched at run-time.
 
@@ -139,7 +140,7 @@ struct Properties
 
 ```
 
-### Serialisation
+## Serialisation
 
 Using the above `Properties`, serialisation infers property types by checking for a matching `typeid()`.
 
@@ -156,7 +157,7 @@ void Serialiser::Serialise(Properties& properties)
 }
 ```
 
-### World Save File
+## World Save File
 
 Files with the `.vmap` extension describe the layout of a level in-game.
 There are binary and text-based formats. Below is an example of the text format to show how properties map to values.
