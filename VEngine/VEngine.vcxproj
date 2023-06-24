@@ -304,6 +304,7 @@
     <ClCompile Include="Code\Actors\Game\SpecificSwitch.cpp" />
     <ClCompile Include="Code\Actors\Game\WellWinch.cpp" />
     <ClCompile Include="Code\Actors\Game\DouseFruit.cpp" />
+    <ClCompile Include="Code\Actors\Game\Drill.cpp" />
     <ClInclude Include="Code\Actors\Game\LinkedObjects.h" />
     <ClInclude Include="Code\Actors\Game\Canon.h" />
     <ClInclude Include="Code\Actors\Game\Bolt.h" />
@@ -637,6 +638,7 @@
     <ClInclude Include="Code\Actors\Game\SpecificSwitch.h" />
     <ClInclude Include="Code\Actors\Game\WellWinch.h" />
     <ClInclude Include="Code\Actors\Game\DouseFruit.h" />
+    <ClInclude Include="Code\Actors\Game\Drill.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

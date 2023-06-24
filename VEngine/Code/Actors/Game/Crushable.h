@@ -2,7 +2,7 @@
 
 #include "GridActor.h"
 
-//Something a weight can destroy when on top of it
+//Something a weight can destroy when on top of it or drilled.
 class Crushable : public GridActor
 {
 public:
