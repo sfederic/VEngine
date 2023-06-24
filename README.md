@@ -4,18 +4,6 @@
 
 ## Build Notes
 
-Premake5 is required. Download the linked release and add it as a PATH environment variable.
-https://github.com/premake/premake-core/releases/download/v5.0.0-beta2/premake-5.0.0-beta2-windows.zip
-
-Put this into D:\dev2
-git -C D:\ clone https://github.com/ignite720/dev2.git
-
-Then run `premake5-generate.bat`, all projects will be generated in the `build` directory.
-`premake5-clean.bat` removes all generated content in the bin and build directories.
-
-_Thanks to https://github.com/ignite720_
-
-_Personal build notes_
 * Visual Studio 2022 17.5
 * Blender 3.4 (For FBX SDK)
 
