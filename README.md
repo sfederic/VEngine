@@ -196,6 +196,10 @@ VEngine uses DirectX11 for 3D/2D rendering and DirectWrite + Direct2D for in-gam
 
 TODO - rest of the Readme
 
+### Physically Based Shading
+
+While not a huge component of the engine, the implementations were taken from EA's Frostbite engine [https://www.ea.com/frostbite/news/moving-frostbite-to-pb] as well as Tri-Ace's research into Physically Based Rendering [https://research.tri-ace.com/].
+
 ### Global Illumination
 
 The engine uses a very simple GI technique using light probes spread around a level uniformly. Leveraging the DirectXSH spherical harmonics library (good reference for DirectX 11 [https://interplayoflight.wordpress.com/2021/12/31/occlusion-and-directionality-in-image-based-lighting-implementation-details/]), each probe takes a cubemap snapshot of its surroundings an encodes it using spherical harmonics. Actors then just find their closest probe and apply its colours.
