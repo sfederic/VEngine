@@ -36,6 +36,55 @@ Size Y
 UID
 692420275
 next
+GridActor
+1
+ Enabled
+1
+ Position
+3 0 2
+ Rotation
+0 0 0 1
+ Scale
+3 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Name
+GridActor0
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Yaw
+1
+UID
+3195641663
+next
 MeshActor
 1
  Enabled
@@ -70,55 +119,6 @@ Player0
 UID
 707967490
 next
-ProjectionCrystal
-1
- Enabled
-1
- Position
-3 -0 2
- Rotation
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-1
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Name
-ProjectionCrystal0
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Yaw
-1
-UID
-977501053
-next
 CameraComponent
 1
 707967490
@@ -144,6 +144,17 @@ UID
 next
 DialogueComponent
 2
+3195641663
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2916577025
+next
 707967490
 Dialogue
  Enabled
@@ -154,17 +165,6 @@ File
 
 UID
 2587144994
-next
-977501053
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-3178973606
 next
 DirectionalLightComponent
 1
@@ -263,16 +263,16 @@ UID
 next
 MeshComponent
 3
-707967490
+3195641663
 Mesh
  Enabled
 1
  Pos
-0 0 0
+3 0 2
  Rot
 0 0 0 1
  Scale
-1 1 1
+3 1 1
  Visible
 1
 Casts Shadow
@@ -310,13 +310,13 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-char.vmesh
+cube.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-706192360
+4008219773
 next
 779951209
 Mesh
@@ -373,12 +373,12 @@ Trans. Occlude
 UID
 158298293
 next
-977501053
+707967490
 Mesh
  Enabled
 1
  Pos
-3 -0 2
+0 0 0
  Rot
 0 0 0 1
  Scale
@@ -420,12 +420,12 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-cube.vmesh
+char.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-2948175765
+706192360
 next
 end
