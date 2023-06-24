@@ -50,7 +50,9 @@ Below is a quick outline of various concepts the engine uses. (Note that the cod
 
 ## Game Object Model
 
-The engine uses an Actor/Component model similar to Unity and Unreal. The inspiration came from Rare's presentation on Actor Ticks in UE4 in Sea of Thieves. 
+### Actors
+
+The engine uses an Actor/Component model similar to Unity and Unreal. The inspiration came from Rare's presentation on Actor Ticks in UE4 in Sea of Thieves [https://www.youtube.com/watch?v=CBP5bpwkO54].
 
 An inherited actor will be defined with a system via a macro.
 
@@ -63,6 +65,8 @@ struct Enemy : Actor
     void Tick(float deltaTime) override;
 };
 ```
+
+### Actor Systems
 
 Both Actors and Components have Systems. A system essentially looks like:
 
@@ -81,6 +85,10 @@ struct ActorSystem : IActorSystem
     }
 }
 ```
+
+Initially, an Entity Component System was intended to be built but became too 'optimised' for certain situations. The tradeoff was to use the common Actor/Component model as a base an batch Actor ticks and creation instead.
+
+### Worlds
 
 A 'World' is the current view of the scene on-screen. Each World will have a list of the currently active Actor and Component systems.
 
@@ -149,9 +157,9 @@ Using the above `Properties`, serialisation infers property types by checking fo
 ```cpp
 void Serialiser::Serialise(Properties& properties)
 {
-    for(Property& property : properties)
+    for (Property& property : properties)
     {
-        if(property.type == typeid(int))
+        if (property.type == typeid(int))
         {
             SerialiseInt<int>(property.value);    
         }
@@ -187,4 +195,3 @@ VEngine uses DirectX11 for 3D/2D rendering and DirectWrite + Direct2D for in-gam
 ### In-Game UI
 
 TODO - rest of the Readme
-
