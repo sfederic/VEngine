@@ -29,7 +29,7 @@ void PowerCrystal::Tick(float deltaTime)
 
 void PowerCrystal::PowerUpSurroundingGridActors()
 {
-	for (auto& actor : World::GetAllActorsOfTypeInWorld<GridActor>())
+	for (auto& actor : World::GetAllActorsAsBaseType<GridActor>())
 	{
 		if (effectTrigger->Contains(actor->GetPositionV()))
 		{
