@@ -188,13 +188,25 @@ VEngine uses DirectX11 for 3D/2D rendering and DirectWrite + Direct2D for in-gam
 
 ### 3D Renderer
 
-- Forward Renderer
-- Light Probes
-- Shadow Mapping
+TODO
 
 ### In-Game UI
 
-TODO - rest of the Readme
+For in-game UI, an immediate approach is used as well as being all in code.
+An example in-game widget would be declared like so:
+
+```cpp
+struct EnemyText : Widget
+{
+    std::string text;
+
+    void Draw() override
+    {
+        Layout layout = AlignLayoutByScreenPercent(0.1, 0.9, 0.1, 0.2);
+        DrawText(text, layout);
+    }
+}
+```
 
 ### Physically Based Shading
 
