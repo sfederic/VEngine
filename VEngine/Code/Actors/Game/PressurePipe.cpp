@@ -14,4 +14,5 @@ void PressurePipe::Create()
 	flowMesh->SetTexture("water.jpg");
 	flowMesh->SetLocalScale(0.5f);
 	flowMesh->SetLocalPosition(XMVectorSet(0.f, 1.f, 0.f, 1.f));
+	flowMesh->SetUVOffsetSpeed(XMFLOAT2(0.f, -0.4f));
 }
