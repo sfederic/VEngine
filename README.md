@@ -4,7 +4,9 @@
 
 ## Build Notes
 
-_Helpful Fork [https://github.com/sfederic/Engine/pull/3] to build using premake if you'd like to build for cross platform._
+_Note that this repository isn't for general use, it's more of an open source snapshot of an intermediate engine being developed alongside a game._
+
+_Helpful Fork [https://github.com/sfederic/Engine/pull/3] to build using premake._
 _Thanks to https://github.com/ignite720_
 
 * Visual Studio 2022 17.5
