@@ -306,6 +306,7 @@
     <ClCompile Include="Code\Actors\Game\DouseFruit.cpp" />
     <ClCompile Include="Code\Actors\Game\Drill.cpp" />
     <ClCompile Include="Code\Actors\Game\PressurePipe.cpp" />
+    <ClCompile Include="Code\Actors\Game\GridActorBasket.cpp" />
     <ClInclude Include="Code\Actors\Game\LinkedObjects.h" />
     <ClInclude Include="Code\Actors\Game\Canon.h" />
     <ClInclude Include="Code\Actors\Game\Bolt.h" />
@@ -641,6 +642,7 @@
     <ClInclude Include="Code\Actors\Game\DouseFruit.h" />
     <ClInclude Include="Code\Actors\Game\Drill.h" />
     <ClInclude Include="Code\Actors\Game\PressurePipe.h" />
+    <ClInclude Include="Code\Actors\Game\GridActorBasket.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

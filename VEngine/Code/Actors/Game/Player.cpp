@@ -953,6 +953,11 @@ void Player::SetInteractWidgetText(std::wstring_view interactText)
 	interactWidget->interactText = interactText;
 }
 
+void Player::SetLinkedGridActor(GridActor& gridActor)
+{
+	linkedGridActor = &gridActor;
+}
+
 void Player::ResetLinkedGridActorIfThis(GridActor* gridActor)
 {
 	if (gridActor == linkedGridActor)
