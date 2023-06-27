@@ -10,6 +10,7 @@ public:
 
 	void Create() override;
 	void Douse() override;
+	void OnLinkDeactivate() override;
 
 private:
 	bool hasBeenDoused = false;
