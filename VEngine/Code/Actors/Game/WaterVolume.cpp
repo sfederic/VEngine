@@ -22,6 +22,7 @@ void WaterVolume::Create()
 
 	//Set just below the mesh representing the surface
 	waterVolumeTrigger->SetLocalPosition(0.f, -0.5f, 0.f);
+	waterVolumeTrigger->SetExtents(0.5f, 0.5f, 0.5f);
 }
 
 void WaterVolume::Tick(float deltaTime)
