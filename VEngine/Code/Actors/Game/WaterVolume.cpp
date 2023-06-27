@@ -1,5 +1,6 @@
 #include "vpch.h"
 #include "WaterVolume.h"
+#include "GridActor.h"
 #include "Components/MeshComponent.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Core/VMath.h"
@@ -29,6 +30,8 @@ void WaterVolume::Tick(float deltaTime)
 	auto targetPos = GetPositionV();
 	targetPos.m128_f32[1] = yPointToRaiseTo;
 	SetPosition(VMath::VectorConstantLerp(GetPositionV(), targetPos, deltaTime, 1.0f));
+
+	DouseGridActorsInWaterVolume();
 }
 
 Properties WaterVolume::GetProps()
@@ -42,4 +45,15 @@ Properties WaterVolume::GetProps()
 bool WaterVolume::Contains(XMVECTOR point)
 {
 	return waterVolumeTrigger->Contains(point);
+}
+
+void WaterVolume::DouseGridActorsInWaterVolume()
+{
+	for (auto gridActor : World::GetAllActorsAsBaseType<GridActor>())
+	{
+		if (Contains(gridActor->GetPositionV()))
+		{
+			gridActor->Douse();
+		}
+	}
 }

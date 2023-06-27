@@ -20,6 +20,8 @@ public:
 	bool Contains(XMVECTOR point);
 
 private:
+	void DouseGridActorsInWaterVolume();
+
 	MeshComponent* waterSurface = nullptr;
 	BoxTriggerComponent* waterVolumeTrigger = nullptr;
 
