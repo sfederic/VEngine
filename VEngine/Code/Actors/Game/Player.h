@@ -73,6 +73,7 @@ public:
 	void SetInteractWidgetText(std::wstring_view interactText);
 
 	void SetLinkedGridActor(GridActor& gridActor);
+	void ResetLinkedGridActor();
 	void ResetLinkedGridActorIfThis(GridActor* gridActor);
 
 private:

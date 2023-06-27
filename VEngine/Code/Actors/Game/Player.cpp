@@ -578,15 +578,7 @@ void Player::LinkToGridActor()
 			auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
 			if (gridActor)
 			{ 
-				ResetHighlightedActor();
-
-				HitResult nodeHit(this);
-				gridActor->GetCurrentNode()->RecalcNodeHeight(nodeHit);
-				linkedGridActor = gridActor;
-				camera->targetActor = gridActor;
-				isInputLinkedToGridActor = true;
-
-				gridActor->OnLinkActivate();
+				SetLinkedGridActor(*gridActor);
 			}
 		}
 	}
@@ -598,15 +590,7 @@ void Player::LinkToGridActor()
 			auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
 			if (gridActor)
 			{
-				ResetHighlightedActor();
-
-				HitResult nodeHit(this);
-				gridActor->GetCurrentNode()->RecalcNodeHeight(nodeHit);
-				linkedGridActor = gridActor;
-				camera->targetActor = gridActor;
-				isInputLinkedToDowncastGridActor = true;
-
-				gridActor->OnLinkActivate();
+				SetLinkedGridActor(*gridActor);
 			}
 		}
 	}
@@ -614,16 +598,7 @@ void Player::LinkToGridActor()
 	{
 		if (Input::GetKeyUp(Keys::BackSpace))
 		{
-			ResetHighlightedActor();
-
-			linkedGridActor->SetGridPosition();
-			HitResult hit(this);
-			linkedGridActor->GetCurrentNode()->RecalcNodeHeight(hit);
-			linkedGridActor->OnLinkDeactivate();
-			linkedGridActor = nullptr;
-			camera->targetActor = this;
-			isInputLinkedToGridActor = false;
-			isInputLinkedToDowncastGridActor = false;
+			ResetLinkedGridActor();
 			return;
 		}
 	}
@@ -955,7 +930,32 @@ void Player::SetInteractWidgetText(std::wstring_view interactText)
 
 void Player::SetLinkedGridActor(GridActor& gridActor)
 {
+	ResetHighlightedActor();
+
+	HitResult nodeHit(this);
+	gridActor.GetCurrentNode()->RecalcNodeHeight(nodeHit);
+
 	linkedGridActor = &gridActor;
+	camera->targetActor = &gridActor;
+	isInputLinkedToGridActor = true;
+
+	gridActor.OnLinkActivate();
+}
+
+void Player::ResetLinkedGridActor()
+{
+	ResetHighlightedActor();
+
+	linkedGridActor->SetGridPosition();
+	HitResult hit(this);
+	linkedGridActor->GetCurrentNode()->RecalcNodeHeight(hit);
+	linkedGridActor->OnLinkDeactivate();
+	linkedGridActor = nullptr;
+
+	camera->targetActor = this;
+
+	isInputLinkedToGridActor = false;
+	isInputLinkedToDowncastGridActor = false;
 }
 
 void Player::ResetLinkedGridActorIfThis(GridActor* gridActor)
