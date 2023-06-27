@@ -483,8 +483,9 @@ Actor* WorldEditor::SpawnActorFromTemplateFile(std::string templateFilename, Tra
 	std::string newActorName = actorSystem->GetName() + std::to_string(actorSystem->GetNumActors() - 1);
 	actor->SimpleSetName(newActorName);
 
-	debugMenu.AddNotification(VString::wformat(
-		L"Spawned actor [%s] from template", actor->GetName().c_str()));	
+	const std::string spawnMessage =
+		VString::format("Spawned actor [%s] from template", actor->GetName().c_str());
+	debugMenu.AddNotification(VString::stows(spawnMessage));
 
 	return actor;
 }
