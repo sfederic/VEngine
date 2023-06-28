@@ -12,7 +12,14 @@ public:
 
 	PressurePipe();
 	void Create() override;
+	void Start() override;
+	Properties GetProps() override;
+
+	void Activate() override;
+	void Deactivate() override;
 
 private:
 	MeshComponent* flowMesh = nullptr;
+
+	bool isActive = false;
 };
