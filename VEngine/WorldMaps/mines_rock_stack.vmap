@@ -68,9 +68,9 @@ GridActor
  Enabled
 1
  Position
-1 -0 5
+1 0 5
  Rotation
-0 0 0 1
+-0 -0.707107 -0 0.707107
  Scale
 1 1 1
  Visible
@@ -117,7 +117,7 @@ next
  Position
 0 1 5
  Rotation
--0 0 -0 1
+-0.706985 0 -0 0.707229
  Scale
 1 1 1
  Visible
@@ -211,9 +211,9 @@ next
  Position
 0 1 6
  Rotation
--0 0 -0 1
+0.5 0.5 0.5 0.5
  Scale
-1 1 1
+0.999996 0.999996 1
  Visible
 1
 Can Fall
@@ -258,7 +258,7 @@ next
  Position
 0 0 6
  Rotation
--0 0 -0 1
+-0 -0.707107 -0 0.707107
  Scale
 1 1 1
  Visible
@@ -352,7 +352,7 @@ next
  Position
 0 0 4
  Rotation
--0 0 -0 1
+-0 0 -0.706934 0.707279
  Scale
 1 1 1
  Visible
@@ -407,7 +407,7 @@ MeshActor
  Visible
 1
 Name
-cube0
+rock20
 UID
 4261992511
 next
@@ -422,7 +422,7 @@ next
  Visible
 1
 Name
-cube1
+rock21
 UID
 2085334205
 next
@@ -437,7 +437,7 @@ next
  Visible
 1
 Name
-cube2
+rock22
 UID
 2748716401
 next
@@ -452,7 +452,7 @@ next
  Visible
 1
 Name
-cube3
+rock23
 UID
 1347363334
 next
@@ -724,9 +724,9 @@ Mesh
  Enabled
 1
  Pos
-1 -0 5
+1 0 5
  Rot
-0 0 0 1
+-0 -0.707107 -0 0.707107
  Scale
 1 1 1
  Visible
@@ -766,7 +766,7 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-boulder.vmesh
+rock2.vmesh
 Static
 1
 Trans. Occlude
@@ -781,7 +781,7 @@ Mesh
  Pos
 0 1 5
  Rot
--0 0 -0 1
+-0.706985 0 -0 0.707229
  Scale
 1 1 1
  Visible
@@ -821,7 +821,7 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-boulder.vmesh
+rock2.vmesh
 Static
 1
 Trans. Occlude
@@ -876,7 +876,7 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-boulder.vmesh
+rock2.vmesh
 Static
 1
 Trans. Occlude
@@ -891,9 +891,9 @@ Mesh
  Pos
 0 1 6
  Rot
--0 0 -0 1
+0.5 0.5 0.5 0.5
  Scale
-1 1 1
+0.999996 0.999996 1
  Visible
 1
 Casts Shadow
@@ -931,7 +931,7 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-boulder.vmesh
+rock2.vmesh
 Static
 1
 Trans. Occlude
@@ -946,7 +946,7 @@ Mesh
  Pos
 0 0 6
  Rot
--0 0 -0 1
+-0 -0.707107 -0 0.707107
  Scale
 1 1 1
  Visible
@@ -986,7 +986,7 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-boulder.vmesh
+rock2.vmesh
 Static
 1
 Trans. Occlude
@@ -1041,7 +1041,7 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-boulder.vmesh
+rock2.vmesh
 Static
 1
 Trans. Occlude
@@ -1056,7 +1056,7 @@ Mesh
  Pos
 0 0 4
  Rot
--0 0 -0 1
+-0 0 -0.706934 0.707279
  Scale
 1 1 1
  Visible
@@ -1096,7 +1096,7 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-boulder.vmesh
+rock2.vmesh
 Static
 1
 Trans. Occlude
