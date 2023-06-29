@@ -308,6 +308,7 @@
     <ClCompile Include="Code\Actors\Game\PressurePipe.cpp" />
     <ClCompile Include="Code\Actors\Game\GridActorBasket.cpp" />
     <ClCompile Include="Code\Actors\Game\OrientationTrigger.cpp" />
+    <ClCompile Include="Code\Actors\Game\MineCrane.cpp" />
     <ClInclude Include="Code\Actors\Game\LinkedObjects.h" />
     <ClInclude Include="Code\Actors\Game\Canon.h" />
     <ClInclude Include="Code\Actors\Game\Bolt.h" />
@@ -645,6 +646,7 @@
     <ClInclude Include="Code\Actors\Game\PressurePipe.h" />
     <ClInclude Include="Code\Actors\Game\GridActorBasket.h" />
     <ClInclude Include="Code\Actors\Game\OrientationTrigger.h" />
+    <ClInclude Include="Code\Actors\Game\MineCrane.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
