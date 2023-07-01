@@ -581,24 +581,21 @@ void DrawMeshInstanced(InstanceMeshComponent* mesh)
 
 void DrawBoundingBox(MeshComponent* mesh, MeshComponent* boundsMesh)
 {
-	const DirectX::BoundingOrientedBox boundingBox = mesh->GetBoundingBox();
+	const DirectX::BoundingOrientedBox boundingBox = mesh->GetBoundsInWorldSpace();
 
-	//Make extents double for rendering
-	const XMFLOAT3 extents = XMFLOAT3(boundingBox.Extents.x + boundingBox.Extents.x,
-		boundingBox.Extents.y + boundingBox.Extents.y,
-		boundingBox.Extents.z + boundingBox.Extents.z);
-
-	const XMVECTOR center = mesh->GetWorldPositionV() + XMLoadFloat3(&boundingBox.Center);
-	const XMVECTOR scale = mesh->GetLocalScaleV() * XMLoadFloat3(&extents);
+	const XMVECTOR center = XMLoadFloat3(&boundingBox.Center);
+	XMVECTOR scale = XMLoadFloat3(&boundingBox.Extents);
+	scale *= 2.f;
+	const XMVECTOR orientation = XMLoadFloat4(&boundingBox.Orientation);
 
 	const XMMATRIX boundsMatrix = XMMatrixAffineTransformation(scale,
 		XMVectorSet(0.f, 0.f, 0.f, 1.f),
-		mesh->GetLocalRotationV(),
+		orientation,
 		center);
 
 	shaderMatrices.model = boundsMatrix;
 
-	//Set bouding box scale just slightly more than the component to avoid mesh overlap
+	//Set bounding box scale just slightly more than the component to avoid mesh overlap
 	shaderMatrices.model.r[0].m128_f32[0] += 0.01f;
 	shaderMatrices.model.r[1].m128_f32[1] += 0.01f;
 	shaderMatrices.model.r[2].m128_f32[2] += 0.01f;
@@ -1180,6 +1177,7 @@ void RenderInstanceMeshComponents()
 	Profile::End();
 }
 
+//Remember that when rendering bounds, the Extents needs to be doubled.
 void RenderBounds()
 {
 	auto debugBox = MeshComponent::GetDebugMesh("DebugBox");
@@ -1213,10 +1211,9 @@ void RenderBounds()
 		{
 			const auto& box = boxData.bb;
 
-			XMFLOAT3 extents = XMFLOAT3(box.Extents.x * 2.f, box.Extents.y * 2.f, box.Extents.z * 2.f);
-
 			XMVECTOR center = XMLoadFloat3(&box.Center);
-			XMVECTOR scale = XMLoadFloat3(&extents);
+			XMVECTOR scale = XMLoadFloat3(&box.Extents);
+			scale *= 2.f;
 			XMVECTOR rotation = XMLoadFloat4(&box.Orientation);
 
 			XMMATRIX boundsMatrix = XMMatrixAffineTransformation(scale,
@@ -1252,9 +1249,10 @@ void RenderBounds()
 			shaderMatrices.model = boxTrigger->GetWorldMatrix();
 
 			//Set to * 2.f because of extents
-			shaderMatrices.model.r[0].m128_f32[0] *= boxTrigger->GetBoundingBox().Extents.x * 2.f;
-			shaderMatrices.model.r[1].m128_f32[1] *= boxTrigger->GetBoundingBox().Extents.y * 2.f;
-			shaderMatrices.model.r[2].m128_f32[2] *= boxTrigger->GetBoundingBox().Extents.z * 2.f;
+			const auto bounds = boxTrigger->GetBoundsInWorldSpace();
+			shaderMatrices.model.r[0].m128_f32[0] *= bounds.Extents.x * 2.f;
+			shaderMatrices.model.r[1].m128_f32[1] *= bounds.Extents.y * 2.f;
+			shaderMatrices.model.r[2].m128_f32[2] *= bounds.Extents.z * 2.f;
 
 			shaderMatrices.model.r[3] += boxTrigger->GetBoundsCenter();
 

@@ -113,8 +113,6 @@ void MeshComponent::Create()
 
 	meshDataProxy = AssetSystem::ReadVMeshAssetFromFile(meshComponentData.filename);
 
-	BoundingOrientedBox::CreateFromBoundingBox(boundingBox, *meshDataProxy.boundingBox);
-
 	CreateVertexBuffer();
 }
 
@@ -156,7 +154,6 @@ void MeshComponent::ReCreate()
 {
 	material->Create();
 	meshDataProxy = AssetSystem::ReadVMeshAssetFromFile(meshComponentData.filename);
-	BoundingOrientedBox::CreateFromBoundingBox(boundingBox, *meshDataProxy.boundingBox);
 	CreateNewVertexBuffer();
 }
 
@@ -172,7 +169,6 @@ void MeshComponent::SplitMeshCreate()
 	BoundingBox bb;
 	BoundingBox::CreateFromPoints(bb, meshDataProxy.vertices.size(),
 		&meshDataProxy.vertices.at(0).pos, sizeof(Vertex));
-	BoundingOrientedBox::CreateFromBoundingBox(boundingBox, bb);
 
 	//@Todo: owner being set as null on CreatePhysicsActor() won't explode the program,
 	//but it will cause problems if you want to use raycasts via PhysX.

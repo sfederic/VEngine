@@ -78,7 +78,8 @@ bool BoxTriggerComponent::IntersectsWithAnyBoundingBoxInWorld()
 {
 	for (auto& mesh : MeshComponent::system.GetComponents())
 	{
-		if (boundingBox.Intersects(mesh->GetBoundingBox()))
+		//@Todo: bounds needs to be in world space
+		if (boundingBox.Intersects(mesh->GetBoundsInWorldSpace()))
 		{
 			return true;
 		}
