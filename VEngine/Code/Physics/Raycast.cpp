@@ -164,7 +164,7 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 
 	if (hitResult.hitActor)
 	{
-		const XMVECTOR hitPos = hitResult.origin + (hitResult.direction * nearestDistance);
+		const XMVECTOR hitPos = hitResult.origin + (hitResult.direction * hitResult.hitDistance);
 		XMStoreFloat3(&hitResult.hitPos, hitPos);
 
 		hitResult.hitDistance = nearestDistance;
