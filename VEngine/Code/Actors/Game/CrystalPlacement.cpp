@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "CrystalPlacement.h"
 #include "Components/MeshComponent.h"
+#include "Gameplay/GameInstance.h"
 
 Properties CrystalPlacement::GetProps()
 {
@@ -14,11 +15,15 @@ void CrystalPlacement::Interact()
 {
 	if (hasCrystalBeenPlaced) return;
 
-	hasCrystalBeenPlaced = true;
+	const bool* crystal0 = GameInstance::GetGlobalProp<bool>("Crystal0");
+	if (*crystal0)
+	{
+		hasCrystalBeenPlaced = true;
 
-	crystalMesh = CreateComponent<MeshComponent>("CrystalMesh");
-	crystalMesh->SetMeshFilename("crystal.vmesh");
-	crystalMesh->Create();
-	crystalMesh->SetLocalPosition(0.f, 1.f, 0.f);
-	rootComponent->AddChild(crystalMesh);
+		crystalMesh = CreateComponent<MeshComponent>("CrystalMesh");
+		crystalMesh->SetMeshFilename("crystal.vmesh");
+		crystalMesh->Create();
+		crystalMesh->SetLocalPosition(0.f, 1.f, 0.f);
+		rootComponent->AddChild(crystalMesh);
+	}
 }
