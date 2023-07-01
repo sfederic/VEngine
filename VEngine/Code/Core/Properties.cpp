@@ -1,5 +1,6 @@
 #include "vpch.h"
 #include "Properties.h"
+#include "Core/VEnum.h"
 
 void Properties::CopyData(const std::string& name, Property& propToCopy)
 {
@@ -20,6 +21,13 @@ void Properties::CopyData(const std::string& name, Property& propToCopy)
 		auto src = (std::wstring*)propToCopy.data;
 
 		*dst = src->c_str();
+	}
+	else if (prop.info == typeid(VEnum))
+	{
+		auto dst = (VEnum*)prop.data;
+		auto src = (VEnum*)propToCopy.data;
+
+		*dst = *src;
 	}
 	else if (prop.info == typeid(ShaderData))
 	{
