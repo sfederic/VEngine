@@ -19,7 +19,9 @@ void MeshComponentDataWidget::SetValue()
 	QString filepath = QFileDialog::getOpenFileName(this,
 		tr("Set Mesh"),
 		QString::fromStdString(AssetBaseFolders::mesh),
-		tr("Meshes (*.vmesh)"));
+		tr("Meshes (*.vmesh)"),
+		nullptr, 
+		QFileDialog::Option::DontUseNativeDialog); //@Todo: native dialog crashes on Win11 all the time randomly.
 
 	QFileInfo info(filepath);
 	QString filename = info.fileName();
