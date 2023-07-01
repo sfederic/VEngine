@@ -14,8 +14,10 @@
 
 GridActor::GridActor()
 {
+	SetEmptyRootComponent();
+
 	mesh = CreateComponent("Mesh", MeshComponent("cube.vmesh", "test.png"));
-	rootComponent = mesh;
+	rootComponent->AddChild(mesh);
 
 	dialogueComponent = CreateComponent<DialogueComponent>("Dialogue");
 }
