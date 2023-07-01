@@ -460,7 +460,13 @@ void AssetDock::ImportAsset()
     QFileDialog dialog;
     dialog.setFileMode(QFileDialog::AnyFile);
 
-    QString filePath = dialog.getOpenFileName(nullptr, "Import Mesh", QString::fromStdString(AssetBaseFolders::fbxFiles));
+    QString filePath = dialog.getOpenFileName(
+        nullptr,
+        "Import Mesh",
+        QString::fromStdString(AssetBaseFolders::fbxFiles),
+        nullptr,
+        nullptr,
+        QFileDialog::Option::DontUseNativeDialog);
     if (!filePath.isEmpty())
     {
         const std::string filename = QFileInfo(filePath).fileName().toStdString();
