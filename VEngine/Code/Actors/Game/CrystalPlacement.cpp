@@ -15,9 +15,10 @@ void CrystalPlacement::Interact()
 {
 	if (hasCrystalBeenPlaced) return;
 
-	const bool* crystal0 = GameInstance::GetGlobalProp<bool>("Crystal0");
-	if (*crystal0)
+	int* heldCrystalCount = GameInstance::GetGlobalProp<int>("HeldCrystalCount");
+	if (*heldCrystalCount > 0)
 	{
+		*(heldCrystalCount) -= 1;
 		hasCrystalBeenPlaced = true;
 
 		crystalMesh = CreateComponent<MeshComponent>("CrystalMesh");

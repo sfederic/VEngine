@@ -10,11 +10,11 @@ std::string GameInstance::mapToLoadOnContinue;
 bool GameInstance::useGameSaves = false;
 
 //Global properties
-static bool crystal0 = true;
+static int heldCrystalCount = 0;
 
 Properties GameInstance::GetGlobalProps()
 {
 	Properties props("GameInstance");
-	props.Add("Crystal0", &crystal0);
+	props.Add("HeldCrystalCount", &heldCrystalCount);
 	return props;
 }
