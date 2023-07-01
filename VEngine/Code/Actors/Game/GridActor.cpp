@@ -29,14 +29,13 @@ bool GridActor::CheckNextRotationBoundsIntersect()
 		return false;
 	}
 
-	BoundingOrientedBox nextRotBounds = mesh->GetBoundingBox();
-	VMath::UpdateBoundingBox(nextRotBounds, this);
+	BoundingOrientedBox nextRotBounds = mesh->GetBoundsInWorldSpace();
 	XMStoreFloat4(&nextRotBounds.Orientation, nextRot);
 	nextRotBounds.Extents.x -= 0.1f;
 	nextRotBounds.Extents.y -= 0.1f;
 	nextRotBounds.Extents.z -= 0.1f;
 	HitResult hit(this);
-	return OrientedBoxCast(hit, nextRotBounds, true, true);
+	return OrientedBoxCast(hit, nextRotBounds, false, false);
 }
 
 void GridActor::OnLinkActivate()
