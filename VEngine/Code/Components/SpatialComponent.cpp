@@ -221,8 +221,10 @@ XMVECTOR SpatialComponent::GetWorldRotationV()
 
 	if (parent)
 	{
-		//Relative rotations are inversed with quaternions, i.e. ParentQuat(-1) * localRotation;
-		XMVECTOR parentRot = XMQuaternionInverse(parent->GetWorldRotationV());
+		//Note: originally was under the impression here that relative rotations are inversed with quaternions
+		//i.e. ParentQuat(-1) * localRotation; but it looks like that isn't so. Leaving this comment here just
+		//in case rotations decide to blow up one day.
+		XMVECTOR parentRot = parent->GetWorldRotationV();
 		relativeRotation = XMQuaternionMultiply(parentRot, relativeRotation);
 	}
 
