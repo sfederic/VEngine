@@ -14,10 +14,8 @@
 
 GridActor::GridActor()
 {
-	SetEmptyRootComponent();
-
 	mesh = CreateComponent("Mesh", MeshComponent("cube.vmesh", "test.png"));
-	rootComponent->AddChild(mesh);
+	rootComponent = mesh;
 
 	dialogueComponent = CreateComponent<DialogueComponent>("Dialogue");
 }
@@ -35,7 +33,7 @@ bool GridActor::CheckNextRotationBoundsIntersect()
 	nextRotBounds.Extents.y -= 0.1f;
 	nextRotBounds.Extents.z -= 0.1f;
 	HitResult hit(this);
-	return OrientedBoxCast(hit, nextRotBounds, false, false);
+	return OrientedBoxCast(hit, nextRotBounds, true, true);
 }
 
 void GridActor::OnLinkActivate()
