@@ -41,11 +41,11 @@ GridActor
  Enabled
 1
  Position
-3 0 2
+2 0 3
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
-3 1 1
+2 1 1
  Visible
 1
 Can Fall
@@ -57,7 +57,7 @@ DisableGridInteract
 Health
 1
 Ignore Rotate Check
-0
+1
 Inspect
 1
 Interact
@@ -83,7 +83,7 @@ Rotate Pitch
 Rotate Yaw
 1
 UID
-3195641663
+927042110
 next
 MeshActor
 1
@@ -144,7 +144,7 @@ UID
 next
 DialogueComponent
 2
-3195641663
+927042110
 Dialogue
  Enabled
 1
@@ -153,7 +153,7 @@ Dialogue
 File
 
 UID
-2916577025
+844806284
 next
 707967490
 Dialogue
@@ -188,7 +188,22 @@ UID
 3973759724
 next
 EmptyComponent
+2
+927042110
+Root
+ Enabled
 1
+ Pos
+2 0 3
+ Rot
+-0 0 -0 1
+ Scale
+2 1 1
+ Visible
+1
+UID
+3025142773
+next
 707967490
 Root
  Enabled
@@ -263,16 +278,16 @@ UID
 next
 MeshComponent
 3
-3195641663
+927042110
 Mesh
  Enabled
 1
  Pos
-3 0 2
+0 0 0
  Rot
 0 0 0 1
  Scale
-3 1 1
+1 1 1
  Visible
 1
 Casts Shadow
@@ -316,7 +331,7 @@ Static
 Trans. Occlude
 0
 UID
-4008219773
+2257915695
 next
 779951209
 Mesh

@@ -36,12 +36,12 @@ Size Y
 UID
 1156217665
 next
-GridActor
+GridActorOffsetMesh
 1
  Enabled
 1
  Position
-2 1 3
+2 1 4
  Rotation
 -0 0 -0 1
  Scale
@@ -75,7 +75,7 @@ Move Axis Neg.
 Move Axis Pos.
 1 1
 Name
-GridActor1
+GridActorOffsetMesh0
 Obstacle
 1
 Rotate Pitch
@@ -83,7 +83,7 @@ Rotate Pitch
 Rotate Yaw
 1
 UID
-2385400458
+4292496482
 next
 MeshActor
 19
@@ -414,17 +414,6 @@ UID
 next
 DialogueComponent
 2
-2385400458
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-324537897
-next
 3893847023
 Dialogue
  Enabled
@@ -435,6 +424,17 @@ File
 
 UID
 3147863306
+next
+4292496482
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2176082409
 next
 DirectionalLightComponent
 1
@@ -459,21 +459,6 @@ UID
 next
 EmptyComponent
 2
-2385400458
-Root
- Enabled
-1
- Pos
-2 1 3
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-UID
-92664771
-next
 3893847023
 Root
  Enabled
@@ -488,6 +473,21 @@ Root
 1
 UID
 3676332495
+next
+4292496482
+Root
+ Enabled
+1
+ Pos
+2 1 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+82669422
 next
 InstanceMeshComponent
 1
@@ -548,7 +548,7 @@ UID
 next
 MeshComponent
 21
-2385400458
+3893847023
 Mesh
  Enabled
 1
@@ -557,7 +557,7 @@ Mesh
  Rot
 0 0 0 1
  Scale
-3 1 1
+1 1 1
  Visible
 1
 Casts Shadow
@@ -583,7 +583,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -595,13 +595,13 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-cube.vmesh
+char.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-2699364348
+3839367250
 next
 231175086
 Mesh
@@ -1648,16 +1648,16 @@ Trans. Occlude
 UID
 3421894468
 next
-3893847023
+4292496482
 Mesh
  Enabled
 1
  Pos
-0 0 0
+1 0 0
  Rot
 0 0 0 1
  Scale
-1 1 1
+3 1 1
  Visible
 1
 Casts Shadow
@@ -1683,7 +1683,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1695,12 +1695,12 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-char.vmesh
+cube.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-3839367250
+22989728
 next
 end

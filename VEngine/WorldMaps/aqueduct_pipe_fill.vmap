@@ -662,7 +662,7 @@ UID
 2429859961
 next
 EmptyComponent
-2
+4
 3940987291
 Root
  Enabled
@@ -678,6 +678,21 @@ Root
 UID
 653064892
 next
+204724184
+Root
+ Enabled
+1
+ Pos
+1 0 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+1213905665
+next
 2586478620
 Root
  Enabled
@@ -692,6 +707,21 @@ Root
 1
 UID
 2717602497
+next
+633495123
+Root
+ Enabled
+1
+ Pos
+3 -2 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+2962764204
 next
 InstanceMeshComponent
 1
@@ -2187,7 +2217,7 @@ Mesh
  Enabled
 1
  Pos
-3 -2 0
+0 0 0
  Rot
 0 0 0 1
  Scale
