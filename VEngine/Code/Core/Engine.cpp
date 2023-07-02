@@ -42,8 +42,6 @@ void Engine::Init(int argc, char* argv[])
 
 	WorldFunctions::SetupWorldStartFunctions();
 
-	MaterialSystem::Init();
-
 	activeCamera = &editorCamera;
 
 	auto coreInit = std::async(std::launch::async, []() { Core::Init(); });
@@ -59,6 +57,8 @@ void Engine::Init(int argc, char* argv[])
 	auto rendererInit = std::async(std::launch::async, []() { Renderer::Init(editor->windowHwnd, editor->viewportWidth, editor->viewportHeight); });
 
 	rendererInit.wait();
+	MaterialSystem::Init();
+
 	auto debugMenuInit = std::async(std::launch::async, []() { debugMenu.Init(); });
 	auto uiInit = std::async(std::launch::async, []() { UISystem::Init(Renderer::GetSwapchain()); });
 

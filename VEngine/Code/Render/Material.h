@@ -25,7 +25,7 @@ public:
 	BlendState* blendState = nullptr;
 
 	TextureData textureData;
-	ShaderData shaderData;
+	VEnum shaderItemValue;
 
 	DirectX::XMFLOAT2 uvOffsetSpeed = DirectX::XMFLOAT2(0.f, 0.f);
 	float uvRotationSpeed = 0.f;
@@ -35,7 +35,6 @@ public:
 	VEnum rastStateValue;
 	VEnum blendStateValue;
 
-	Material() {}
 	Material(std::string textureFilename_, ShaderItem* shaderItem);
 
 	virtual void Create();

@@ -35,11 +35,6 @@ struct Properties
 			auto str = reinterpret_cast<std::wstring*>(data);
 			prop.size = str->size() * sizeof(wchar_t);
 		}
-		else if (typeid(T) == typeid(ShaderData))
-		{
-			auto shaderData = reinterpret_cast<ShaderData*>(data);
-			prop.size = shaderData->shaderItemName.size() * sizeof(char);
-		}
 		else if (typeid(T) == typeid(TextureData))
 		{
 			auto textureData = reinterpret_cast<TextureData*>(data);

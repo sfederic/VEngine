@@ -19,6 +19,7 @@
 
 static VEnum rastStates;
 static VEnum blendStates;
+static VEnum shaderItemNames;
 
 void Material::SetupBlendAndRastStateValues()
 {
@@ -29,17 +30,30 @@ void Material::SetupBlendAndRastStateValues()
 
 	blendStates.Add(BlendStates::null);
 	blendStates.Add(BlendStates::Default);
+
+	shaderItemNames.Add(ShaderItems::Animation->GetName());
+	shaderItemNames.Add(ShaderItems::Default->GetName());
+	shaderItemNames.Add(ShaderItems::DefaultClip->GetName());
+	shaderItemNames.Add(ShaderItems::Instance->GetName());
+	shaderItemNames.Add(ShaderItems::LightProbe->GetName());
+	shaderItemNames.Add(ShaderItems::PostProcess->GetName());
+	shaderItemNames.Add(ShaderItems::Shadow->GetName());
+	shaderItemNames.Add(ShaderItems::ShadowAnimation->GetName());
+	shaderItemNames.Add(ShaderItems::SolidColour->GetName());
+	shaderItemNames.Add(ShaderItems::UI->GetName());
+	shaderItemNames.Add(ShaderItems::Unlit->GetName());
+	shaderItemNames.Add(ShaderItems::Water->GetName());
 }
 
 Material::Material(std::string textureFilename_, ShaderItem* shaderItem)
 {
 	textureData.filename = textureFilename_;
 
-	shaderData.shaderItemName = shaderItem->GetName();
-
-	//Assigning via copy here vs adding values is twice as fast in debug, but about the same in release.
 	rastStateValue = rastStates;
 	blendStateValue = blendStates;
+
+	shaderItemValue = shaderItemNames;
+	shaderItemValue.SetValue(shaderItem->GetName());
 }
 
 void Material::Create()
@@ -48,7 +62,7 @@ void Material::Create()
 	sampler = RenderUtils::GetDefaultSampler();
 	rastState = Renderer::GetRastState(rastStateValue.GetValue());
 	blendState = Renderer::GetBlendState(blendStateValue.GetValue());
-	shader = ShaderSystem::FindShaderItem(shaderData.shaderItemName);
+	shader = ShaderSystem::FindShaderItem(shaderItemValue.GetValue());
 }
 
 void Material::Destroy()
@@ -121,11 +135,11 @@ static void ReassignBlendState(void* data)
 
 static void ReassignShader(void* data)
 {
-	auto shaderData = (ShaderData*)data;
-	auto foundShader = ShaderSystem::FindShaderItem(shaderData->shaderItemName);
+	auto shaderData = (VEnum*)data;
+	auto foundShader = ShaderSystem::FindShaderItem(shaderData->GetValue());
 	if (foundShader == nullptr)
 	{
-		Log("%s not found on shader change.", shaderData->shaderItemName.c_str());
+		Log("[%s] shader item not found on shader change.", shaderData->GetValue().c_str());
 		return;
 	}
 
@@ -143,7 +157,7 @@ Properties Material::GetProps()
 	//Prop names using 'M_' notation here becauase they merge with MeshComponent props
 	props.Add("M_Texture", &textureData).change = ReassignTexture;
 	props.Add("M_Use Texture", &materialShaderData.useTexture);
-	props.Add("M_Shader", &shaderData).change = ReassignShader;
+	props.Add("M_Shader", &shaderItemValue).change = ReassignShader;
 	props.Add("M_Rast State", &rastStateValue).change = ReassignRastState;
 	props.Add("M_Blend State", &blendStateValue).change = ReassignBlendState;
 	props.Add("M_UvOffset", &materialShaderData.uvOffset);

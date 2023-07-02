@@ -14,8 +14,3 @@ struct TextureData
 {
 	std::string filename;
 };
-
-struct ShaderData
-{
-	std::string shaderItemName;
-};

@@ -237,7 +237,6 @@
     <ClCompile Include="Code\Particle\ParticleSystem.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\UintWidget.cpp" />
     <ClCompile Include="Code\UI\TitleScreenWidget.cpp" />
-    <ClCompile Include="Code\Editor\PropertyWidgets\ShaderDataWidget.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\MeshComponentDataWidget.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\WStringWidget.cpp" />
     <ClCompile Include="Code\Core\Log.cpp" />
@@ -575,7 +574,6 @@
     <ClInclude Include="Code\Particle\ParticleSystem.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\UintWidget.h" />
     <ClInclude Include="Code\UI\TitleScreenWidget.h" />
-    <ClInclude Include="Code\Editor\PropertyWidgets\ShaderDataWidget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\MeshComponentDataWidget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\WStringWidget.h" />
     <ClInclude Include="Code\Core\Log.h" />

@@ -29,13 +29,6 @@ void Properties::CopyData(const std::string& name, Property& propToCopy)
 
 		*dst = *src;
 	}
-	else if (prop.info == typeid(ShaderData))
-	{
-		auto dst = (ShaderData*)prop.data;
-		auto src = (ShaderData*)propToCopy.data;
-
-		dst->shaderItemName = src->shaderItemName.c_str();
-	}
 	else if (prop.info == typeid(TextureData))
 	{
 		auto dst = (TextureData*)prop.data;

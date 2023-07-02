@@ -308,9 +308,6 @@
     <ClCompile Include="Code\UI\TitleScreenWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Editor\PropertyWidgets\ShaderDataWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Editor\PropertyWidgets\MeshComponentDataWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -952,9 +949,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\TitleScreenWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Editor\PropertyWidgets\ShaderDataWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\PropertyWidgets\MeshComponentDataWidget.h">

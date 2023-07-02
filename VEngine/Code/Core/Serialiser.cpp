@@ -28,11 +28,6 @@ void BinarySerialiser::Serialise(Properties& props)
 			auto meshComponentData = props.GetData<MeshComponentData>(name);
 			WriteString(meshComponentData->filename);
 		}
-		else if (props.CheckType<ShaderData>(name))
-		{
-			auto shaderData = props.GetData<ShaderData>(name);
-			WriteString(shaderData->shaderItemName);
-		}
 		else if (props.CheckType<TextureData>(name))
 		{
 			auto textureData = props.GetData<TextureData>(name);
@@ -81,11 +76,6 @@ void BinaryDeserialiser::Deserialise(Properties& props)
 		{
 			auto meshComponentData = props.GetData<MeshComponentData>(name);
 			ReadString(&meshComponentData->filename);
-		}
-		else if (props.CheckType<ShaderData>(name))
-		{
-			auto shaderData = props.GetData<ShaderData>(name);
-			ReadString(&shaderData->shaderItemName);
 		}
 		else if (props.CheckType<TextureData>(name))
 		{
@@ -174,11 +164,6 @@ Serialiser::Serialiser(const std::string filename_, const OpenMode mode_) :
 	typeToWriteFuncMap[typeid(TextureData)] = [&](Property& prop, std::wstring& name) {
 		auto textureData = prop.GetData<TextureData>();
 		ss << name << "\n" << textureData->filename.c_str() << "\n";
-	};
-
-	typeToWriteFuncMap[typeid(ShaderData)] = [&](Property& prop, std::wstring& name) {
-		auto shaderData = prop.GetData<ShaderData>();
-		ss << name << "\n" << shaderData->shaderItemName.c_str() << "\n";
 	};
 
 	typeToWriteFuncMap[typeid(MeshComponentData)] = [&](Property& prop, std::wstring& name) {
@@ -299,14 +284,6 @@ Deserialiser::Deserialiser(const std::string filename, const OpenMode mode)
 		is.getline(propString, 512);
 		auto textureData = prop.GetData<TextureData>();
 		textureData->filename.assign(VString::wstos(propString));
-	};
-
-	typeToReadFuncMap[typeid(ShaderData)] = [&](Property& prop) {
-		auto shaderData = prop.GetData<ShaderData>();
-
-		wchar_t shaderItemName[512]{};
-		is >> shaderItemName;
-		shaderData->shaderItemName.assign(VString::wstos(shaderItemName));
 	};
 
 	typeToReadFuncMap[typeid(MeshComponentData)] = [&](Property& prop) {
