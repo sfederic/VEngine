@@ -314,7 +314,10 @@ XMVECTOR SpatialComponent::GetUpVectorV()
 
 BoundingOrientedBox SpatialComponent::GetBoundsInWorldSpace()
 {
-	return VMath::GetBoundingBoxInWorld(this);
+	const XMMATRIX worldMatrix = GetWorldMatrix();
+	BoundingOrientedBox outBounds;
+	boundingBox.Transform(outBounds, worldMatrix);
+	return outBounds;
 }
 
 void SpatialComponent::Pitch(float angle)

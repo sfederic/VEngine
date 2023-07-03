@@ -335,29 +335,6 @@ namespace VMath
         XMStoreFloat4(&boundingBox.Orientation, orientation);
     }
 
-    BoundingOrientedBox GetBoundingBoxInWorld(SpatialComponent* sc)
-    {
-        //Position
-        XMVECTOR worldPos = sc->GetWorldPositionV();
-        XMVECTOR offset = worldPos + sc->GetBoundsCenter();
-        offset.m128_f32[3] = 1.0f;
-
-        //Scale
-        XMVECTOR spatialComponentScale = sc->GetWorldScaleV();
-        XMVECTOR scale = sc->GetBoundsExtents() * spatialComponentScale;
-        scale.m128_f32[3] = 1.0f;
-
-        //Rotation
-        XMVECTOR orientation = sc->GetWorldRotationV();
-
-        BoundingOrientedBox orientedBox{};
-        XMStoreFloat3(&orientedBox.Center, offset);
-        XMStoreFloat3(&orientedBox.Extents, scale);
-        XMStoreFloat4(&orientedBox.Orientation, orientation);
-
-        return orientedBox;
-    }
-
     BoundingOrientedBox CreateBoundingBox(Vertex* vertices, size_t verticesCount)
     {
         assert(verticesCount > 0);
@@ -386,7 +363,7 @@ namespace VMath
             if (z < minZ) minZ = z;
         }
 
-        //Remember that extents are halfed
+        //Remember that extents are halved
         return BoundingOrientedBox(XMFLOAT3(0.f, 0.f, 0.f),
             XMFLOAT3((maxX - minX) / 2.f, (maxY - minY) / 2.f, (maxZ - minZ) / 2.f),
             XMFLOAT4(0.f, 0.f, 0.f, 1.f));
@@ -554,7 +531,7 @@ namespace VMath
     void HomogenousWorldPosToScreenSpaceCoords(XMVECTOR worldPos, int& screenX, int& screenY)
     {
         //What you need to do here it take the actor's position after it's been multiplied 
-        //by the MVP matrix on the CPU side of things (Actor::GetHomogonesouPositionV(),
+        //by the MVP matrix on the CPU side of things (Actor::GetHomogenousPositionV(),
         //divide it by the W component and multiply it out by the viewport.
         //REF:http://www.windows-tech.info/5/a80747e145dd9062.php
 

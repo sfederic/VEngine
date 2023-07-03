@@ -85,7 +85,7 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 			return;
 		}
 
-		const BoundingOrientedBox boundingBox = VMath::GetBoundingBoxInWorld(spatialComponent);
+		const BoundingOrientedBox boundingBox = spatialComponent->GetBoundsInWorldSpace();
 
 		float hitDistance = 0.f;
 		if (boundingBox.Intersects(hitResult.origin, hitResult.direction, hitDistance))
@@ -386,7 +386,7 @@ bool OrientedBoxCast(HitResult& hit, BoundingOrientedBox& boundsInWorldSpace, bo
 
 		for (auto mesh : actor->GetComponentsOfType<MeshComponent>())
 		{
-			auto meshBoundsInWorld = VMath::GetBoundingBoxInWorld(mesh);
+			const auto meshBoundsInWorld = mesh->GetBoundsInWorldSpace();
 			if (boundsInWorldSpace.Intersects(meshBoundsInWorld))
 			{
 				hit.hitComponents.emplace_back(mesh);
@@ -428,7 +428,7 @@ bool OrientedBoxCast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end, XMFLOA
 
 		for (auto mesh : actor->GetComponentsOfType<MeshComponent>())
 		{
-			auto meshBoundsInWorld = VMath::GetBoundingBoxInWorld(mesh);
+			const auto meshBoundsInWorld = mesh->GetBoundsInWorldSpace();
 			if (boundingOrientedBox.Intersects(meshBoundsInWorld))
 			{
 				hitResult.hitComponents.emplace_back(mesh);
@@ -463,7 +463,7 @@ bool SimpleBoxCast(XMVECTOR center, XMFLOAT3 extents, HitResult& hit, bool drawD
 
 		for (auto mesh : actor->GetComponentsOfType<MeshComponent>())
 		{
-			BoundingOrientedBox meshWorldBounds = VMath::GetBoundingBoxInWorld(mesh);
+			const BoundingOrientedBox meshWorldBounds = mesh->GetBoundsInWorldSpace();
 
 			if (boundingBox.Intersects(meshWorldBounds))
 			{

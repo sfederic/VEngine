@@ -66,9 +66,6 @@ namespace VMath
 	XMMATRIX GetBoundingBoxMatrix(BoundingOrientedBox& boundingBox, Actor* actor);
 	void UpdateBoundingBox(BoundingOrientedBox& boundingBox, Actor* actor);
 
-	//Returns a SpatialComponent's BoundingOrientedBox in world coordinates.
-	BoundingOrientedBox GetBoundingBoxInWorld(SpatialComponent* sc);
-
 	//Note: don't apply translation offset in Blender when exporting and using this,
 	//else the bounds calc will be off center.
 	BoundingOrientedBox CreateBoundingBox(Vertex* vertices, size_t verticesCount);

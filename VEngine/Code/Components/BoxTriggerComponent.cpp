@@ -25,13 +25,13 @@ Properties BoxTriggerComponent::GetProps()
 
 bool BoxTriggerComponent::Intersects(const BoundingOrientedBox& boundsInWorldSpaceToCheckAgainst)
 {
-	auto bbInWorld = VMath::GetBoundingBoxInWorld(this);
+	const BoundingOrientedBox bbInWorld = GetBoundsInWorldSpace();
 	return bbInWorld.Intersects(boundsInWorldSpaceToCheckAgainst);
 }
 
 bool BoxTriggerComponent::Contains(XMVECTOR point)
 {
-	BoundingOrientedBox bb = VMath::GetBoundingBoxInWorld(this);
+	const BoundingOrientedBox bb = GetBoundsInWorldSpace();
 	return bb.Contains(point);
 }
 
