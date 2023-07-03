@@ -9,6 +9,4 @@ public:
 	ACTOR_SYSTEM(GridActorOffsetMesh);
 
 	GridActorOffsetMesh();
-
-	bool CheckNextRotationBoundsIntersect() override;
 };
