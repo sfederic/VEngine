@@ -32,6 +32,7 @@ bool WorldEditor::materialPlacement = false;
 bool WorldEditor::vertexPaintActive = false; 
 bool WorldEditor::actorReplaceModeActive = false;
 bool WorldEditor::parentSetActive = false;
+bool WorldEditor::moveActorViaKeyboardInput = false;
 
 DirectX::XMFLOAT4 WorldEditor::vertexPaintColour;
 
@@ -43,6 +44,7 @@ void SpawnActorOnClick();
 void SpawnActor(Transform& transform);
 void VertexPainting();
 void SetParentOnClick(Actor& hitActor);
+void MoveActorViaKeyboardInput();
 
 void WorldEditor::Tick()
 {
@@ -55,6 +57,8 @@ void WorldEditor::Tick()
 
 	DuplicateActor();
 	DeleteActor();
+
+	MoveActorViaKeyboardInput();
 
 	SaveWorld();
 }
@@ -382,6 +386,33 @@ void SetParentOnClick(Actor& hitActor)
 	{
 		hitActor.AddChild(pickedActor);
 		Log("[%s] added as child to [%s].", pickedActor->GetName().c_str(), hitActor.GetName().c_str());
+	}
+}
+
+void MoveActorViaKeyboardInput()
+{
+	if (pickedActor == nullptr || !WorldEditor::moveActorViaKeyboardInput) {
+		return;
+	}
+
+	if (Input::GetKeyDown(Keys::W)) {
+		pickedActor->AddPositionV(VMath::GlobalForwardVector());
+	} else if (Input::GetKeyDown(Keys::S)) {
+		pickedActor->AddPositionV(-VMath::GlobalForwardVector());
+	} else if (Input::GetKeyDown(Keys::A)) {
+		pickedActor->AddPositionV(-VMath::GlobalRightVector());
+	} else if (Input::GetKeyDown(Keys::D)) {
+		pickedActor->AddPositionV(VMath::GlobalRightVector());
+	}
+
+	if (Input::GetKeyDown(Keys::Down)) {
+		pickedActor->AddRotation(VMath::GlobalRightVector(), -90.f);
+	} else if (Input::GetKeyDown(Keys::Up)) {
+		pickedActor->AddRotation(VMath::GlobalRightVector(), 90.f);
+	} else if (Input::GetKeyDown(Keys::Left)) {
+		pickedActor->AddRotation(VMath::GlobalUpVector(), -90.f);
+	} else if (Input::GetKeyDown(Keys::Right)) {
+		pickedActor->AddRotation(VMath::GlobalUpVector(), 90.f);
 	}
 }
 
