@@ -6,3 +6,10 @@ void Bolt::Create()
 {
 	mesh->SetMeshFilename("bolt.vmesh");
 }
+
+Properties Bolt::GetProps()
+{
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	return props;
+}

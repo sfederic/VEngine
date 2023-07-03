@@ -9,4 +9,5 @@ public:
 	ACTOR_SYSTEM(Bolt);
 
 	void Create() override;
+	Properties GetProps() override;
 };
