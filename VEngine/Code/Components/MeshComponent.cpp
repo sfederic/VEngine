@@ -113,7 +113,7 @@ void MeshComponent::Create()
 
 	meshDataProxy = AssetSystem::ReadVMeshAssetFromFile(meshComponentData.filename);
 
-	boundingBox = *meshDataProxy.boundingBox;
+	BoundingOrientedBox::CreateFromBoundingBox(boundingBox, *meshDataProxy.boundingBox);
 
 	CreateVertexBuffer();
 }

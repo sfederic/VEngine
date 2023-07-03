@@ -61,6 +61,7 @@ public:
 	XMVECTOR GetUpVectorV();
 
 	BoundingOrientedBox GetBoundsInWorldSpace();
+	BoundingOrientedBox GetBounds() { return boundingBox; }
 	XMVECTOR GetBoundsExtents() { return XMLoadFloat3(&boundingBox.Extents); }
 	XMVECTOR GetBoundsCenter() { return XMLoadFloat3(&boundingBox.Center); }
 	void SetBoundsExtents(XMFLOAT3 extents) { boundingBox.Extents = extents; }
@@ -83,7 +84,7 @@ protected:
 	void RotateY(float angle);
 	void FPSCameraRotation();
 
-	BoundingBox boundingBox;
+	BoundingOrientedBox boundingBox;
 	SpatialComponent* parent = nullptr;
 	std::vector<SpatialComponent*> children;
 
