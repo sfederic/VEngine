@@ -119,6 +119,13 @@ void Console::Init()
 			},
 		"Toggle mesh component placement mode in editor."));
 
+	executeMap.emplace(L"PARENT",
+		std::make_pair([]() {
+			WorldEditor::parentSetActive = !WorldEditor::parentSetActive;
+			Log("Parent set mode active.");
+			},
+		"Enable setting parent to currently selected actor in editor."));
+
 	executeMap.emplace(L"MATERIAL",
 		std::make_pair([]() { WorldEditor::materialPlacement = !WorldEditor::materialPlacement; },
 		"Enable material placement mode in editor"));
