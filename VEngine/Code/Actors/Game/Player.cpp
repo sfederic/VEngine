@@ -575,6 +575,17 @@ void Player::LinkToGridActor()
 		HitResult hit(this);
 		if (Raycast(hit, GetPositionV(), GetMeshForward(), 100.f))
 		{
+			//This raycast is to make sure the player is not standing on the same actor it's linking to
+			//to avoid potentially rotating the linked actor and the player being stuck in mid-air.
+			HitResult sameActorHit(this);
+			Raycast(sameActorHit, GetPositionV(), -VMath::GlobalUpVector(), 5.f);
+			if (sameActorHit.hitActor == hit.hitActor)
+			{
+				GameUtils::CameraShake(0.3f);
+				Log("Cannot link to [%s], player is standing on it.", hit.hitActor->GetName().c_str());
+				return;
+			}
+
 			auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
 			if (gridActor)
 			{ 
