@@ -12,6 +12,7 @@
 #include "Actors/MeshActor.h"
 #include "Editor/DebugMenu.h"
 #include "Core.h"
+#include "Core/Log.h"
 #include "Asset/AssetPaths.h"
 #include "Render/TextureSystem.h"
 #include "Render/Material.h"
@@ -145,20 +146,27 @@ void HandleActorPicking()
 			//Handle actor replacement 
 			if (WorldEditor::actorReplaceModeActive)
 			{
-				auto pickedActor = WorldEditor::GetPickedActor();
-				if (pickedActor)
+				if (spawnSystem != nullptr)
 				{
-					auto pickedActorTransform = pickedActor->GetTransform();
-					pickedActor->Destroy();
+					auto pickedActor = WorldEditor::GetPickedActor();
+					if (pickedActor)
+					{
+						auto pickedActorTransform = pickedActor->GetTransform();
+						pickedActor->Destroy();
 
-					auto replacementActor = spawnSystem->SpawnActor(pickedActorTransform);
-					replacementActor->Create();
-					replacementActor->CreateAllComponents();
+						auto replacementActor = spawnSystem->SpawnActor(pickedActorTransform);
+						replacementActor->Create();
+						replacementActor->CreateAllComponents();
 
-					editor->UpdateWorldList();
+						editor->UpdateWorldList();
 
-					WorldEditor::ClearPickedActors();
-					WorldEditor::SetPickedActor(replacementActor);
+						WorldEditor::ClearPickedActors();
+						WorldEditor::SetPickedActor(replacementActor);
+					}
+				}
+				else
+				{
+					Log("Spawn System not set for actor replacement.");
 				}
 			}
 		}
