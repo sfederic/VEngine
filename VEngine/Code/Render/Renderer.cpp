@@ -585,7 +585,7 @@ void DrawBoundingBox(MeshComponent* mesh, MeshComponent* boundsMesh)
 
 	const XMVECTOR center = XMLoadFloat3(&boundingBox.Center);
 	XMVECTOR scale = XMLoadFloat3(&boundingBox.Extents);
-	scale *= 2.f;
+	scale *= 2.f; //Double extents for rendering
 	const XMVECTOR orientation = XMLoadFloat4(&boundingBox.Orientation);
 
 	const XMMATRIX boundsMatrix = XMMatrixAffineTransformation(scale,

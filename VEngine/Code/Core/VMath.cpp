@@ -345,7 +345,6 @@ namespace VMath
         //Scale
         XMVECTOR spatialComponentScale = sc->GetWorldScaleV();
         XMVECTOR scale = sc->GetBoundsExtents() * spatialComponentScale;
-        scale *= 0.5f; //Remember that the scale needs to be halved for bounds extents.
         scale.m128_f32[3] = 1.0f;
 
         //Rotation
