@@ -6,4 +6,6 @@ class ClockHand : public GridActorOffsetMesh
 {
 public:
 	ACTOR_SYSTEM(ClockHand);
+
+	Properties GetProps() override;
 };
