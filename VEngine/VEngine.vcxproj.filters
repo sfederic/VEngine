@@ -704,6 +704,9 @@
     <ClCompile Include="Code\Actors\Game\ClockHand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\Game\IncrementalRotator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1441,6 +1444,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\ClockHand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\IncrementalRotator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

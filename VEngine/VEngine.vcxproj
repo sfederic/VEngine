@@ -311,6 +311,7 @@
     <ClCompile Include="Code\Actors\Game\MineCrane.cpp" />
     <ClCompile Include="Code\Actors\Game\CrystalPlacement.cpp" />
     <ClCompile Include="Code\Actors\Game\GridActorOffsetMesh.cpp" />
+    <ClCompile Include="Code\Actors\Game\IncrementalRotator.cpp" />
     <ClInclude Include="Code\Actors\Game\ClockHand.h" />
     <ClInclude Include="Code\Actors\Game\LinkedObjects.h" />
     <ClInclude Include="Code\Actors\Game\Canon.h" />
@@ -651,6 +652,7 @@
     <ClInclude Include="Code\Actors\Game\MineCrane.h" />
     <ClInclude Include="Code\Actors\Game\CrystalPlacement.h" />
     <ClInclude Include="Code\Actors\Game\GridActorOffsetMesh.h" />
+    <ClInclude Include="Code\Actors\Game\IncrementalRotator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
