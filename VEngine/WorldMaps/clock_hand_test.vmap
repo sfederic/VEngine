@@ -1,5 +1,5 @@
 ClockHand
-1
+2
  Enabled
 1
  Position
@@ -47,6 +47,53 @@ Rotate Yaw
 UID
 1178347555
 next
+ Enabled
+1
+ Position
+2 1 3
+ Rotation
+-1.77636e-14 -1.78814e-07 -5.96046e-08 1
+ Scale
+1.5 0.25 0.25
+ Visible
+1
+Can Fall
+0
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+0
+Link Rotation
+0
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Name
+ClockHand1
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Yaw
+1
+UID
+3964517947
+next
 DirectionalLightActor
 1
  Enabled
@@ -86,15 +133,15 @@ UID
 2188463365
 next
 IncrementalRotator
-1
+2
  Enabled
 1
  Position
-2 0 2
+1 0 2
  Rotation
--0.707106 1.54541e-08 0.707108 -2.34477e-06
+-0.707106 1.54533e-08 0.707108 -2.34477e-06
  Scale
-0.999996 0.999996 0.999996
+0.999995 0.999995 0.999995
  Visible
 1
 Actor To Rotate
@@ -139,6 +186,59 @@ Rotation Increment
 30
 UID
 1113242511
+next
+ Enabled
+1
+ Position
+3 0 2
+ Rotation
+-0.707106 1.54533e-08 0.707108 -2.34477e-06
+ Scale
+0.999995 0.999995 0.999995
+ Visible
+1
+Actor To Rotate
+ClockHand1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+0
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Name
+IncrementalRotator1
+Obstacle
+1
+Rotate Direction
+0 0 1
+Rotate Pitch
+1
+Rotate Yaw
+1
+Rotation Increment
+30
+UID
+1431844719
 next
 MeshActor
 1
@@ -198,7 +298,7 @@ UID
 2090668941
 next
 DialogueComponent
-3
+5
 1178347555
 Dialogue
  Enabled
@@ -210,6 +310,17 @@ File
 UID
 916374766
 next
+3964517947
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2474873467
+next
 1113242511
 Dialogue
  Enabled
@@ -220,6 +331,17 @@ File
 
 UID
 2616594692
+next
+1431844719
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+512485955
 next
 2530988018
 Dialogue
@@ -254,7 +376,7 @@ UID
 363064421
 next
 EmptyComponent
-2
+3
 1178347555
 Root
  Enabled
@@ -269,6 +391,21 @@ Root
 1
 UID
 4115887514
+next
+3964517947
+Root
+ Enabled
+1
+ Pos
+2 1 3
+ Rot
+-1.77636e-14 -1.78814e-07 -5.96046e-08 1
+ Scale
+1.5 0.25 0.25
+ Visible
+1
+UID
+1708373036
 next
 2530988018
 Root
@@ -343,7 +480,7 @@ UID
 196043028
 next
 MeshComponent
-4
+6
 1178347555
 Mesh
  Enabled
@@ -399,16 +536,71 @@ Trans. Occlude
 UID
 686420
 next
+3964517947
+Mesh
+ Enabled
+1
+ Pos
+1 0 0
+ Rot
+0 0 0 1
+ Scale
+1.5 0.25 0.25
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+845925868
+next
 1113242511
 Mesh
  Enabled
 1
  Pos
-2 0 2
+1 0 2
  Rot
--0.707106 1.54541e-08 0.707108 -2.34477e-06
+-0.707106 1.54533e-08 0.707108 -2.34477e-06
  Scale
-0.999996 0.999996 0.999996
+0.999995 0.999995 0.999995
  Visible
 1
 Casts Shadow
@@ -453,6 +645,61 @@ Trans. Occlude
 0
 UID
 1575808064
+next
+1431844719
+Mesh
+ Enabled
+1
+ Pos
+3 0 2
+ Rot
+-0.707106 1.54533e-08 0.707108 -2.34477e-06
+ Scale
+0.999995 0.999995 0.999995
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+gear.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2588297596
 next
 3032093986
 Mesh
