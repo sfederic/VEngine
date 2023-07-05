@@ -22,6 +22,8 @@
 #include "Gameplay/WorldFunctions.h"
 #include "Profile.h"
 #include "Asset/AssetSystem.h"
+#include "UI/UISystem.h"
+#include "UI/ScreenFadeWidget.h"
 
 static std::string defferedWorldLoadFilename;
 static std::string previousWorldMovedFromFilename;
@@ -386,6 +388,10 @@ void MovePlayerToEntranceTriggerFromPreviousWorldFilename()
 			player->SetPosition(entranceTrigger->GetPositionV());
 			player->SetRotation(entranceTrigger->GetRotationV());
 			player->SetNextPosAndRotToCurrent();
+
+			UISystem::screenFadeWidget->AddToViewport();
+			UISystem::screenFadeWidget->SetToFadeIn();
+
 			return;
 		}
 	}
