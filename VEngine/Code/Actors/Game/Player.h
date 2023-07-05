@@ -76,6 +76,8 @@ public:
 	void ResetLinkedGridActor();
 	void ResetLinkedGridActorIfThis(GridActor* gridActor);
 
+	void SetNextPosAndRotToCurrent();
+
 private:
 	float nextCameraFOV = 0.f;
 

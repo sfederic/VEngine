@@ -977,6 +977,12 @@ void Player::ResetLinkedGridActorIfThis(GridActor* gridActor)
 	}
 }
 
+void Player::SetNextPosAndRotToCurrent()
+{
+	nextPos = GetPositionV();
+	nextRot = GetRotationV();
+}
+
 GridNode* Player::GetCurrentNode()
 {
 	auto grid = Grid::system.GetFirstActor();

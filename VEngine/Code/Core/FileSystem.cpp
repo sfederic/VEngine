@@ -14,6 +14,7 @@
 #include "Camera.h"
 #include "Components/CameraComponent.h"
 #include "Actors/Game/Player.h"
+#include "Actors/Game/EntranceTrigger.h"
 #include "VString.h"
 #include "Input.h"
 #include "Gameplay/GameInstance.h"
@@ -23,6 +24,9 @@
 #include "Asset/AssetSystem.h"
 
 static std::string defferedWorldLoadFilename;
+static std::string previousWorldMovedFromFilename;
+
+void MovePlayerToEntranceTriggerFromPreviousWorldFilename();
 
 std::pair<UID, std::string> GetComponentOwnerUIDAndNameOnDeserialise(Deserialiser& d)
 {
@@ -360,7 +364,29 @@ void FileSystem::DeferredWorldLoad()
 {
 	if (!defferedWorldLoadFilename.empty())
 	{
+		previousWorldMovedFromFilename = World::worldFilename;
+
 		LoadWorld(defferedWorldLoadFilename);
+
+		MovePlayerToEntranceTriggerFromPreviousWorldFilename();
+
 		defferedWorldLoadFilename.clear();
+		previousWorldMovedFromFilename.clear();
+	}
+}
+
+void MovePlayerToEntranceTriggerFromPreviousWorldFilename()
+{
+	auto player = Player::system.GetOnlyActor();
+
+	for (auto& entranceTrigger : EntranceTrigger::system.GetActors())
+	{
+		if (entranceTrigger->levelToMoveTo == previousWorldMovedFromFilename)
+		{
+			player->SetPosition(entranceTrigger->GetPositionV());
+			player->SetRotation(entranceTrigger->GetRotationV());
+			player->SetNextPosAndRotToCurrent();
+			return;
+		}
 	}
 }
