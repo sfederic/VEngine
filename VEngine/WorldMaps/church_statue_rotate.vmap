@@ -15,6 +15,35 @@ DirectionalLightActor0
 UID
 2237007228
 next
+EntranceTrigger
+1
+ Enabled
+1
+ Position
+3 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+church_hall.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Audio
+purchase.wav
+Open Text
+Open
+UID
+3191526592
+Unlock Audio
+
+next
 Grid
 1
  Enabled
@@ -270,9 +299,9 @@ Player
  Enabled
 1
  Position
-3 0 0
+4 0 2
  Rotation
--0 0 -0 1
+0 -0.707107 -0 0.707107
  Scale
 1 1 1
  Visible
@@ -336,7 +365,7 @@ UID
 526833199
 next
 BoxTriggerComponent
-3
+4
 2167858800
 Trigger
  Enabled
@@ -394,6 +423,25 @@ Offset
 UID
 1984230210
 next
+3191526592
+Trigger
+ Enabled
+1
+ Pos
+3 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+699154689
+next
 CameraComponent
 1
 1176826959
@@ -416,6 +464,21 @@ Near Z
 0.01
 UID
 1978904652
+next
+ConditionComponent
+1
+3191526592
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+559609773
 next
 DialogueComponent
 4
@@ -491,9 +554,9 @@ Root
  Enabled
 1
  Pos
-3 0 0
+4 0 2
  Rot
--0 0 -0 1
+0 -0.707107 -0 0.707107
  Scale
 1 1 1
  Visible

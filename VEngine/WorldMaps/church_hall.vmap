@@ -39,7 +39,7 @@ UID
 2766288922
 next
 EntranceTrigger
-1
+3
  Enabled
 1
  Position
@@ -47,21 +47,79 @@ EntranceTrigger
  Rotation
 -0 0 -0 1
  Scale
-2.5 1 1
+1 1 1
  Visible
 1
 Entrance Active
 1
 Level Name
-
+church_clock_tower.vmap
 Locked Text
 Locked
 Name
 EntranceTrigger0
+Open Audio
+door.wav
+Open Text
+Enter Upstairs
+UID
+3299669729
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+0 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+church_statue_weapons.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger1
+Open Audio
+door.wav
 Open Text
 Open
 UID
-3299669729
+3958486708
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+8 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+church_statue_rotate.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger2
+Open Audio
+door.wav
+Open Text
+Open
+UID
+488595680
+Unlock Audio
+
 next
 Grid
 1
@@ -119,11 +177,11 @@ next
  Enabled
 1
  Position
-0 2 6
+1 2 6
  Rotation
--0.707107 0 -0 0.707107
+0.707107 0 0 -0.707107
  Scale
-1 0.999994 0.999994
+1 0.999993 0.999993
  Visible
 1
 Name
@@ -134,11 +192,11 @@ next
  Enabled
 1
  Position
-0 2 2
+1 2 2
  Rotation
--0.707107 0 -0 0.707107
+0.707107 0 0 -0.707107
  Scale
-1 0.99999 0.99999
+1 0.999989 0.999989
  Visible
 1
 Name
@@ -149,11 +207,11 @@ next
  Enabled
 1
  Position
-8 2 2
+7 2 2
  Rotation
--0.707107 0 -0 0.707107
+0.707107 0 0 -0.707107
  Scale
-1 0.999984 0.999984
+1 0.999983 0.999983
  Visible
 1
 Name
@@ -164,11 +222,11 @@ next
  Enabled
 1
  Position
-8 2 5
+7 2 5
  Rotation
--0.707107 0 -0 0.707107
+0.707107 0 0 -0.707107
  Scale
-1 0.999982 0.999982
+1 0.999981 0.999981
  Visible
 1
 Name
@@ -254,7 +312,7 @@ UID
 1647454417
 next
 BoxTriggerComponent
-1
+3
 3299669729
 Trigger
  Enabled
@@ -264,7 +322,7 @@ Trigger
  Rot
 -0 0 -0 1
  Scale
-2.5 1 1
+1 1 1
  Visible
 1
 Extents
@@ -273,6 +331,44 @@ Offset
 0 0 0
 UID
 341446241
+next
+3958486708
+Trigger
+ Enabled
+1
+ Pos
+0 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+389732088
+next
+488595680
+Trigger
+ Enabled
+1
+ Pos
+8 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+3730308297
 next
 CameraComponent
 1
@@ -298,7 +394,7 @@ UID
 3825084304
 next
 ConditionComponent
-1
+3
 3299669729
 Condition
  Enabled
@@ -311,6 +407,32 @@ Condition Arg
 
 UID
 715993242
+next
+3958486708
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+2745407239
+next
+488595680
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+3102704587
 next
 DialogueComponent
 1
@@ -472,7 +594,7 @@ M_Specular
 M_Texture
 Walls/wall06.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -527,7 +649,7 @@ M_Specular
 M_Texture
 Walls/unnamed.jpg
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -552,11 +674,11 @@ Mesh
  Enabled
 1
  Pos
-0 2 6
+1 2 6
  Rot
--0.707107 0 -0 0.707107
+0.707107 0 0 -0.707107
  Scale
-1 0.999994 0.999994
+1 0.999993 0.999993
  Visible
 1
 Casts Shadow
@@ -582,7 +704,7 @@ M_Specular
 M_Texture
 stone.jpg
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -607,11 +729,11 @@ Mesh
  Enabled
 1
  Pos
-0 2 2
+1 2 2
  Rot
--0.707107 0 -0 0.707107
+0.707107 0 0 -0.707107
  Scale
-1 0.99999 0.99999
+1 0.999989 0.999989
  Visible
 1
 Casts Shadow
@@ -637,7 +759,7 @@ M_Specular
 M_Texture
 stone.jpg
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -662,11 +784,11 @@ Mesh
  Enabled
 1
  Pos
-8 2 2
+7 2 2
  Rot
--0.707107 0 -0 0.707107
+0.707107 0 0 -0.707107
  Scale
-1 0.999984 0.999984
+1 0.999983 0.999983
  Visible
 1
 Casts Shadow
@@ -692,7 +814,7 @@ M_Specular
 M_Texture
 stone.jpg
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -717,11 +839,11 @@ Mesh
  Enabled
 1
  Pos
-8 2 5
+7 2 5
  Rot
--0.707107 0 -0 0.707107
+0.707107 0 0 -0.707107
  Scale
-1 0.999982 0.999982
+1 0.999981 0.999981
  Visible
 1
 Casts Shadow
@@ -747,7 +869,7 @@ M_Specular
 M_Texture
 stone.jpg
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -802,7 +924,7 @@ M_Specular
 M_Texture
 wall.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -857,7 +979,7 @@ M_Specular
 M_Texture
 wall.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -912,7 +1034,7 @@ M_Specular
 M_Texture
 wall.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -967,7 +1089,7 @@ M_Specular
 M_Texture
 wall.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1022,7 +1144,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed

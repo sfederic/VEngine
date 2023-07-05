@@ -35,7 +35,7 @@ UID
 3227738273
 next
 EntranceTrigger
-1
+2
  Enabled
 1
  Position
@@ -54,12 +54,41 @@ Locked Text
 Locked
 Name
 EntranceTrigger0
+Open Audio
+door.wav
 Open Text
 Open
 UID
 2550393796
 Unlock Audio
 door.wav
+next
+ Enabled
+1
+ Position
+2 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+church_hall.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger1
+Open Audio
+door.wav
+Open Text
+Open
+UID
+280888480
+Unlock Audio
+
 next
 Grid
 1
@@ -346,7 +375,7 @@ UID
 3817475245
 next
 BoxTriggerComponent
-1
+2
 2550393796
 Trigger
  Enabled
@@ -365,6 +394,25 @@ Offset
 0 0 0
 UID
 1096692612
+next
+280888480
+Trigger
+ Enabled
+1
+ Pos
+2 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+3679155548
 next
 CameraComponent
 1
@@ -390,7 +438,7 @@ UID
 2533692700
 next
 ConditionComponent
-1
+2
 2550393796
 Condition
  Enabled
@@ -403,6 +451,19 @@ Condition Arg
 
 UID
 2717208894
+next
+280888480
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+809116919
 next
 DialogueComponent
 3
