@@ -11,10 +11,18 @@ void ScreenFadeWidget::Draw(float deltaTime)
 	{
 	case FadeValue::FadeOut:
 		fadeValue += deltaTime;
+		if (fadeValue < 0.f)
+		{
+			RemoveFromViewport();
+		}
 		break;
 
 	case FadeValue::FadeIn:
 		fadeValue -= deltaTime;
+		if (fadeValue > 1.f)
+		{
+			RemoveFromViewport();
+		}
 		break;
 	}
 }
