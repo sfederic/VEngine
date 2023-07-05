@@ -38,3 +38,10 @@ bool VEnum::Compare(std::string valueToCompare)
 {
 	return valueToCompare == value;
 }
+
+void VEnum::Reset()
+{
+	dataIndex = 0;
+	data.clear();
+	value.clear();
+}

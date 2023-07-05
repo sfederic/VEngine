@@ -12,6 +12,7 @@ public:
 	std::vector<std::string> GetAllNames();
 	bool Contains(std::string value);
 	bool Compare(std::string valueToCompare);
+	void Reset();
 
 private:
 	int dataIndex = 0;
