@@ -8,6 +8,7 @@
 #include "Timer.h"
 #include "World.h"
 #include "Log.h"
+#include "Core/PropertyTypes.h"
 #include "WorldEditor.h"
 #include "FileSystem.h"
 #include "Asset/FBXLoader.h"
@@ -39,6 +40,8 @@ void Engine::Init(int argc, char* argv[])
 	auto startTime = Profile::QuickStart();
 
 	ClearLog();
+
+	PropertyTypes::SetupPropertyTypesVEnum();
 
 	WorldFunctions::SetupWorldStartFunctions();
 
