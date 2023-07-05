@@ -5,7 +5,7 @@ void ScreenFadeWidget::Draw(float deltaTime)
 {
 	auto layout = PercentAlignLayout(0.f, 0.f, 1.f, 1.f);
 
-	FillRect(layout, { 0.f, 0.f, 0.f, 1.f }, fadeValue);
+	FillRect(layout, { 0.f, 0.f, 0.f, fadeValue }, fadeValue);
 
 	switch (fade)
 	{
