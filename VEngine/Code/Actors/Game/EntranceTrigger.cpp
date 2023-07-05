@@ -85,7 +85,7 @@ void EntranceTrigger::Tick(float deltaTime)
                 FileSystem::SerialiseAllSystems();
             }
 
-            GameUtils::PlayAudioOneShot("door.wav");
+            GameUtils::PlayAudioOneShot(openAudio);
 
             GameUtils::levelToMoveTo = levelToMoveTo;
             Timer::SetTimer(1.f, &GameUtils::LoadWorldAndMoveToEntranceTrigger);
@@ -115,7 +115,8 @@ Properties EntranceTrigger::GetProps()
     props.Add("Entrance Active", &isEntranceActive);
     props.Add("Open Text", &openText);
     props.Add("Locked Text", &lockedText);
-    props.Add("Unlock Audio", &unlockAudio);
+    props.Add("Unlock Audio", &unlockAudio).autoCompletePath = "/Audio/";
+    props.Add("Open Audio", &openAudio).autoCompletePath = "/Audio/";
     return props;
 }
 

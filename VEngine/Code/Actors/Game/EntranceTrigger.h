@@ -24,6 +24,7 @@ struct EntranceTrigger : Actor
 	std::wstring lockedText = L"Locked";
 
 	std::string unlockAudio;
+	std::string openAudio = "door.wav";
 
 	bool isEntranceActive = true;
 	bool isEntranceLocked = false;
