@@ -20,16 +20,16 @@ Properties IncrementalRotator::GetProps()
 
 void IncrementalRotator::OnLinkRotateLeft()
 {
-    XMVECTOR newNextRot = XMQuaternionMultiply(actorToRotate->nextRot,
+    XMVECTOR newNextRot = XMQuaternionMultiply(actorToRotate->GetNextRot(),
         DirectX::XMQuaternionRotationAxis(XMLoadFloat3(&rotateDirection),
             XMConvertToRadians(rotationIncrement)));
-    actorToRotate->nextRot = newNextRot;
+    actorToRotate->SetNextRot(newNextRot);
 }
 
 void IncrementalRotator::OnLinkRotateRight()
 {
-    XMVECTOR newNextRot = XMQuaternionMultiply(actorToRotate->nextRot,
+    XMVECTOR newNextRot = XMQuaternionMultiply(actorToRotate->GetNextRot(),
         DirectX::XMQuaternionRotationAxis(XMLoadFloat3(&rotateDirection),
             XMConvertToRadians(-rotationIncrement)));
-    actorToRotate->nextRot = newNextRot;
+    actorToRotate->SetNextRot(newNextRot);
 }

@@ -58,6 +58,9 @@ protected:
 	XMFLOAT2 validPositiveMovementAxis = XMFLOAT2(1.f, 1.f);
 	XMFLOAT2 validNegativeMovementAxis = XMFLOAT2(1.f, 1.f);
 
+	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+
 public:
 	std::wstring interactText;
 	std::wstring interactKnownText;
@@ -67,9 +70,6 @@ public:
 
 	//whether the grid node the gridactor is on is inactive.
 	bool isGridObstacle = true;
-
-	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 
 	GridActor();
 
@@ -120,6 +120,11 @@ public:
 	ForwardFace GetCurrentForwardFace();
 
 	bool CheckMovementAndRotationStopped();
+
+	XMVECTOR GetNextRot() { return nextRot; }
+	XMVECTOR GetNextPos() { return nextPos; }
+	void SetNextRot(XMVECTOR rot) { nextRot = rot; }
+	void SetNextPos(XMVECTOR pos) { nextPos = pos; }
 
 	void AddNextRotation(XMVECTOR axis, float angle);
 	void AddNextPosition(XMVECTOR offset);

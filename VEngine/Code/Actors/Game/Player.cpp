@@ -645,7 +645,7 @@ void Player::MoveLinkedGridActor()
 		{
 			if (linkedGridActor->IsNextMoveAxisValid(GetForwardVectorV()))
 			{
-				linkedGridActor->nextPos += GetForwardVectorV();
+				linkedGridActor->AddNextPosition(GetForwardVectorV());
 				if (linkedGridActor->CheckNextNodeMoveIsValid())
 				{
 					linkedGridActor->OnLinkMove();
@@ -663,7 +663,7 @@ void Player::MoveLinkedGridActor()
 		{
 			if (linkedGridActor->IsNextMoveAxisValid(-GetForwardVectorV()))
 			{
-				linkedGridActor->nextPos -= GetForwardVectorV();
+				linkedGridActor->AddNextPosition(-GetForwardVectorV());
 				if (linkedGridActor->CheckNextNodeMoveIsValid())
 				{
 					linkedGridActor->OnLinkMove();
@@ -681,7 +681,7 @@ void Player::MoveLinkedGridActor()
 		{
 			if (linkedGridActor->IsNextMoveAxisValid(-GetRightVectorV()))
 			{
-				linkedGridActor->nextPos -= GetRightVectorV();
+				linkedGridActor->AddNextPosition(-GetRightVectorV());
 				if (linkedGridActor->CheckNextNodeMoveIsValid())
 				{
 					linkedGridActor->OnLinkMove();
@@ -699,7 +699,7 @@ void Player::MoveLinkedGridActor()
 		{
 			if (linkedGridActor->IsNextMoveAxisValid(GetRightVectorV()))
 			{
-				linkedGridActor->nextPos += GetRightVectorV();
+				linkedGridActor->AddNextPosition(GetRightVectorV());
 				if (linkedGridActor->CheckNextNodeMoveIsValid())
 				{
 					linkedGridActor->OnLinkMove();
@@ -738,8 +738,8 @@ void Player::RotateLinkedGridActor()
 		{
 			if (linkedGridActor->CanBeRotatedYawYAxis())
 			{
-				linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
-					VMath::GlobalUpVector(), -angleIncrement);
+				linkedGridActor->SetNextRot(VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
+					VMath::GlobalUpVector(), -angleIncrement));
 				if (!linkedGridActor->CheckNextRotationBoundsIntersect())
 				{
 					linkedGridActor->OnLinkRotate();
@@ -747,7 +747,7 @@ void Player::RotateLinkedGridActor()
 				}
 				else
 				{
-					linkedGridActor->nextRot = linkedGridActor->GetRotationV();
+					linkedGridActor->SetNextRot(linkedGridActor->GetRotationV());
 					GameUtils::CameraShake(0.25f);
 				}
 			}
@@ -759,8 +759,8 @@ void Player::RotateLinkedGridActor()
 		{
 			if (linkedGridActor->CanBeRotatedYawYAxis())
 			{
-				linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
-					VMath::GlobalUpVector(), angleIncrement);
+				linkedGridActor->SetNextRot(VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
+					VMath::GlobalUpVector(), angleIncrement));
 				if (!linkedGridActor->CheckNextRotationBoundsIntersect())
 				{
 					linkedGridActor->OnLinkRotate();
@@ -768,7 +768,7 @@ void Player::RotateLinkedGridActor()
 				}
 				else
 				{
-					linkedGridActor->nextRot = linkedGridActor->GetRotationV();
+					linkedGridActor->SetNextRot(linkedGridActor->GetRotationV());
 					GameUtils::CameraShake(0.25f);
 				}
 			}
@@ -780,15 +780,15 @@ void Player::RotateLinkedGridActor()
 		{
 			if (linkedGridActor->CanBeRotatedPitchXAxis())
 			{
-				linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
-					GetMeshRight(), -angleIncrement);
+				linkedGridActor->SetNextRot(VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
+					GetMeshRight(), -angleIncrement));
 				if (!linkedGridActor->CheckNextRotationBoundsIntersect())
 				{
 					linkedGridActor->OnLinkRotate();
 				}
 				else
 				{
-					linkedGridActor->nextRot = linkedGridActor->GetRotationV();
+					linkedGridActor->SetNextRot(linkedGridActor->GetRotationV());
 					GameUtils::CameraShake(0.25f);
 				}
 			}
@@ -800,15 +800,15 @@ void Player::RotateLinkedGridActor()
 		{
 			if (linkedGridActor->CanBeRotatedPitchXAxis())
 			{
-				linkedGridActor->nextRot = VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
-					GetMeshRight(), angleIncrement);
+				linkedGridActor->SetNextRot(VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
+					GetMeshRight(), angleIncrement));
 				if (!linkedGridActor->CheckNextRotationBoundsIntersect())
 				{
 					linkedGridActor->OnLinkRotate();
 				}
 				else
 				{
-					linkedGridActor->nextRot = linkedGridActor->GetRotationV();
+					linkedGridActor->SetNextRot(linkedGridActor->GetRotationV());
 					GameUtils::CameraShake(0.25f);
 				}
 			}

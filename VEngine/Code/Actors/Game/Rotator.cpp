@@ -49,5 +49,5 @@ void Rotator::OnLinkRotate()
 	__super::OnLinkRotate();
 
 	waitOnActorToRotateRotationComplete = true;
-	actorToRotate->nextRot = nextRot;
+	actorToRotate->SetNextRot(nextRot);
 }
