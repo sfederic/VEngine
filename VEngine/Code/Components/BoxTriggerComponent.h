@@ -31,5 +31,9 @@ public:
 
 	bool QuickInPlaceBoxCast(HitResult& hitResult, bool drawDebug);
 
+	Actor* GetTargetActor() { return targetActor; }
+	Actor* SetTargetActor(Actor* actor) { targetActor = actor; }
+
+private:
 	Actor* targetActor = nullptr;
 };
