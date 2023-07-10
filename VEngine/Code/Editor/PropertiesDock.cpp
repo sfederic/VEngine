@@ -47,7 +47,16 @@ PropertiesDock::PropertiesDock() : QDockWidget("Properties")
 
     actorPropsScrollArea->setWidget(actorPropsWidget);
 
-    setWidget(actorPropsScrollArea);
+    //Setup filter bar
+    propertyFilterLineEdit = new QLineEdit(this);
+    propertyFilterLineEdit->setPlaceholderText("Filter props...");
+    connect(propertyFilterLineEdit, &QLineEdit::textChanged, this, &PropertiesDock::FilterProperties);
+
+    auto vBoxLayout = new QVBoxLayout(this);
+    vBoxLayout->addWidget(propertyFilterLineEdit);
+    vBoxLayout->addWidget(actorPropsScrollArea);
+
+    setLayout(vBoxLayout);
 
     //Setup map
     typeToFunctionMap[typeid(bool)] = [&](Property& prop, int row) { CreateWidget<bool, BoolWidget> (prop, row); };
@@ -114,6 +123,8 @@ void PropertiesDock::DisplayActorProperties(Actor* actor)
 
     setWidget(actorPropsScrollArea);
 
+    FilterProperties();
+
     previousActor = actor;
 }
 
@@ -156,6 +167,30 @@ void PropertiesDock::Clear()
 
         delete actorPropsWidget;
         actorPropsWidget = nullptr;
+    }
+}
+
+void PropertiesDock::FilterProperties()
+{
+    const QString propertyFilterText = propertyFilterLineEdit->text().toLower();
+
+    for (int i = 0; i < actorPropsGridLayout->rowCount(); i++)
+    {
+        auto propertyLabel = static_cast<QLabel*>(actorPropsGridLayout->itemAtPosition(
+            i, propertyNameColumn)->widget());
+        auto propertyDataWidget = static_cast<QWidget*>(actorPropsGridLayout->itemAtPosition(
+            i, propertyDataColumn)->widget());
+
+        if (!propertyLabel->text().toLower().contains(propertyFilterText))
+        {
+            propertyDataWidget->hide();
+            propertyLabel->hide();
+        }
+        else
+        {
+            propertyDataWidget->show();
+            propertyLabel->show();
+        }
     }
 }
 

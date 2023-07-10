@@ -11,6 +11,7 @@ struct Property;
 class QWidget;
 class QGridLayout;
 class QScrollArea;
+class QLineEdit;
 
 //@Todo: figure out if doing a ComponentTreeWidget to be able to sort through an Actor's
 //components and see their spatial relationships (like Unreal) would be good. 
@@ -26,6 +27,8 @@ public:
 	void Clear();
 
 private:
+	void FilterProperties();
+
 	template <typename PropType, typename WidgetType>
 	void CreateWidget(Property& prop, int row) 
 	{
@@ -39,6 +42,7 @@ private:
 	QWidget* actorPropsWidget = nullptr;
 	QGridLayout* actorPropsGridLayout = nullptr;
 	QScrollArea* actorPropsScrollArea = nullptr;
+	QLineEdit* propertyFilterLineEdit = nullptr;
 
 	Actor* previousActor = nullptr;
 	Actor* currentDisplayingActor = nullptr;
