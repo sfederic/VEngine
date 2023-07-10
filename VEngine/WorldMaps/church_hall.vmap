@@ -1,56 +1,3 @@
-ActivateOnGlobalProp
-1
- Enabled
-1
- Position
-4 0 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-1
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Name
-ActivateOnGlobalProp0
-Obstacle
-1
-Property Name
-ChurchCrystal0Active
-Property Type
-Bool
-Rotate Pitch
-1
-Rotate Yaw
-1
-UID
-3265006300
-next
 DiffuseProbeMap
 1
  Enabled
@@ -96,7 +43,7 @@ EntranceTrigger
  Enabled
 1
  Position
-4 0 7
+0 0 16
  Rotation
 -0 0 -0 1
  Scale
@@ -150,7 +97,7 @@ next
  Enabled
 1
  Position
-8 0 4
+10 0 11
  Rotation
 -0 0 -0 1
  Scale
@@ -189,9 +136,9 @@ Grid
 Name
 Grid0
 Size X
-9
+11
 Size Y
-9
+17
 UID
 2103209020
 next
@@ -200,152 +147,152 @@ MeshActor
  Enabled
 1
  Position
-4 -0.5 4
+5 -0.5 8
  Rotation
 -0 0 -0 1
  Scale
-9 1 9
+11 1 17
  Visible
 1
 Name
-node0
+church_pillar0
 UID
 3841650662
 next
  Enabled
 1
  Position
-4 0 8
+5 0 13
  Rotation
 -0 0 -0 1
  Scale
-0.5 1 1
+7 1 7
  Visible
 1
 Name
-pillar_ornate2
+church_pillar1
 UID
-4287058593
+2894709297
 next
  Enabled
 1
  Position
-1 2 6
+9 0 7
  Rotation
-0.707107 0 0 -0.707107
+-0 0 -0 1
  Scale
-1 0.999993 0.999993
+0.5 1 0.5
  Visible
 1
 Name
-pillar12
+church_pillar2
 UID
-793117399
+775745634
 next
  Enabled
 1
  Position
-1 2 2
+1 0 7
  Rotation
-0.707107 0 0 -0.707107
+-0 0 -0 1
  Scale
-1 0.999989 0.999989
+0.5 1 0.5
  Visible
 1
 Name
-pillar13
+church_pillar3
 UID
-4164310218
+3568733252
 next
  Enabled
 1
  Position
-7 2 2
+1 0 1
  Rotation
-0.707107 0 0 -0.707107
+-0 0 -0 1
  Scale
-1 0.999983 0.999983
+0.5 1 0.5
  Visible
 1
 Name
-pillar14
+church_pillar4
 UID
-4275524294
+3383989616
 next
  Enabled
 1
  Position
-7 2 5
+9 0 1
  Rotation
-0.707107 0 0 -0.707107
+-0 0 -0 1
  Scale
-1 0.999981 0.999981
+0.5 1 0.5
  Visible
 1
 Name
-pillar15
+church_pillar5
 UID
-3955266673
+3639792667
 next
  Enabled
 1
  Position
--0.5 2 4
+8 1 15
  Rotation
-0.5 0.5 0.5 -0.5
+-0 0 -0 1
  Scale
-9 1 5
+0.5 1 0.5
  Visible
 1
 Name
-MeshActor6
+church_pillar6
 UID
-3928281324
+3373440638
 next
  Enabled
 1
  Position
-8.5 2 4
+2 1 15
  Rotation
--0.5 0.5 0.5 0.5
+-0 0 -0 1
  Scale
-9 0.999998 4.99999
+0.5 1 0.5
  Visible
 1
 Name
-MeshActor7
+church_pillar7
 UID
-47899462
+4208411069
 next
  Enabled
 1
  Position
-4 2 8.5
+5 -0.25 8.5
  Rotation
--0.707107 6.88394e-08 1.53133e-07 0.707107
+-0 0 -0 1
  Scale
-9 0.999991 4.99993
+3 0.5 2
  Visible
 1
 Name
-MeshActor8
+church_pillar8
 UID
-1471994544
+2740829697
 next
  Enabled
 1
  Position
-4 2 -0.5
+5 1 14
  Rotation
-1.84042e-07 0.707107 0.707107 -9.9748e-08
+-0 0 -0 1
  Scale
-8.99998 0.999987 4.9999
+1 1 1
  Visible
 1
 Name
-MeshActor9
+crystal11
 UID
-3186529788
+3163490036
 next
 Player
 1
@@ -371,7 +318,7 @@ Trigger
  Enabled
 1
  Pos
-4 0 7
+0 0 16
  Rot
 -0 0 -0 1
  Scale
@@ -409,7 +356,7 @@ Trigger
  Enabled
 1
  Pos
-8 0 4
+10 0 11
  Rot
 -0 0 -0 1
  Scale
@@ -488,7 +435,7 @@ UID
 3102704587
 next
 DialogueComponent
-2
+1
 1647454417
 Dialogue
  Enabled
@@ -499,17 +446,6 @@ File
 
 UID
 2967410941
-next
-3265006300
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-2229632116
 next
 DirectionalLightComponent
 1
@@ -622,17 +558,17 @@ UID
 3813850013
 next
 MeshComponent
-12
+11
 3841650662
 Mesh
  Enabled
 1
  Pos
-4 -0.5 4
+5 -0.5 8
  Rot
 -0 0 -0 1
  Scale
-9 1 9
+11 1 17
  Visible
 1
 Casts Shadow
@@ -658,7 +594,7 @@ M_Specular
 M_Texture
 Walls/wall06.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -678,126 +614,16 @@ Trans. Occlude
 UID
 3967634413
 next
-4287058593
+2894709297
 Mesh
  Enabled
 1
  Pos
-4 0 8
+5 0 13
  Rot
 -0 0 -0 1
  Scale
-0.5 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-default
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Walls/unnamed.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-pillar_ornate.vmesh
-Static
-1
-Trans. Occlude
-1
-UID
-3219140234
-next
-793117399
-Mesh
- Enabled
-1
- Pos
-1 2 6
- Rot
-0.707107 0 0 -0.707107
- Scale
-1 0.999993 0.999993
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-default
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-stone.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-pillar1.vmesh
-Static
-1
-Trans. Occlude
-1
-UID
-2382354807
-next
-4164310218
-Mesh
- Enabled
-1
- Pos
-1 2 2
- Rot
-0.707107 0 0 -0.707107
- Scale
-1 0.999989 0.999989
+7 1 7
  Visible
 1
 Casts Shadow
@@ -821,9 +647,9 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-stone.jpg
+test.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -835,24 +661,24 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-pillar1.vmesh
+cube.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-3216711592
+2354119558
 next
-4275524294
+775745634
 Mesh
  Enabled
 1
  Pos
-7 2 2
+9 0 7
  Rot
-0.707107 0 0 -0.707107
+-0 0 -0 1
  Scale
-1 0.999983 0.999983
+0.5 1 0.5
  Visible
 1
 Casts Shadow
@@ -864,7 +690,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-default
+null
 M_Metallic
 0
 M_Rast State
@@ -876,9 +702,9 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-stone.jpg
+test.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -890,24 +716,24 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-pillar1.vmesh
+church_pillar.vmesh
 Static
 1
 Trans. Occlude
-1
+0
 UID
-3537492580
+125913364
 next
-3955266673
+3568733252
 Mesh
  Enabled
 1
  Pos
-7 2 5
+1 0 7
  Rot
-0.707107 0 0 -0.707107
+-0 0 -0 1
  Scale
-1 0.999981 0.999981
+0.5 1 0.5
  Visible
 1
 Casts Shadow
@@ -919,7 +745,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-default
+null
 M_Metallic
 0
 M_Rast State
@@ -931,9 +757,9 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-stone.jpg
+test.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -945,24 +771,24 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-pillar1.vmesh
+church_pillar.vmesh
 Static
 1
 Trans. Occlude
-1
+0
 UID
-2640487064
+171896278
 next
-3928281324
+3383989616
 Mesh
  Enabled
 1
  Pos
--0.5 2 4
+1 0 1
  Rot
-0.5 0.5 0.5 -0.5
+-0 0 -0 1
  Scale
-9 1 5
+0.5 1 0.5
  Visible
 1
 Casts Shadow
@@ -986,9 +812,9 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-wall.png
+test.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -998,26 +824,26 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-2 2
+1 1
 Mesh
-node.vmesh
+church_pillar.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-3781977943
+439143959
 next
-47899462
+3639792667
 Mesh
  Enabled
 1
  Pos
-8.5 2 4
+9 0 1
  Rot
--0.5 0.5 0.5 0.5
+-0 0 -0 1
  Scale
-9 0.999998 4.99999
+0.5 1 0.5
  Visible
 1
 Casts Shadow
@@ -1041,9 +867,9 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-wall.png
+test.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1053,26 +879,26 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-2 2
+1 1
 Mesh
-node.vmesh
+church_pillar.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-198290691
+3384175577
 next
-1471994544
+3373440638
 Mesh
  Enabled
 1
  Pos
-4 2 8.5
+8 1 15
  Rot
--0.707107 6.88394e-08 1.53133e-07 0.707107
+-0 0 -0 1
  Scale
-9 0.999991 4.99993
+0.5 1 0.5
  Visible
 1
 Casts Shadow
@@ -1096,9 +922,9 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-wall.png
+test.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1108,26 +934,26 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-3 2
+1 1
 Mesh
-node.vmesh
+church_pillar.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-1752416160
+3453868523
 next
-3186529788
+4208411069
 Mesh
  Enabled
 1
  Pos
-4 2 -0.5
+2 1 15
  Rot
-1.84042e-07 0.707107 0.707107 -9.9748e-08
+-0 0 -0 1
  Scale
-8.99998 0.999987 4.9999
+0.5 1 0.5
  Visible
 1
 Casts Shadow
@@ -1151,9 +977,9 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-wall.png
+test.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1163,15 +989,70 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-3 2
+1 1
 Mesh
-node.vmesh
+church_pillar.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-117176342
+449405129
+next
+2740829697
+Mesh
+ Enabled
+1
+ Pos
+5 -0.25 8.5
+ Rot
+-0 0 -0 1
+ Scale
+3 0.5 2
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2278388699
 next
 1647454417
 Mesh
@@ -1208,7 +1089,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1228,12 +1109,12 @@ Trans. Occlude
 UID
 2929477331
 next
-3265006300
+3163490036
 Mesh
  Enabled
 1
  Pos
-4 0 4
+5 1 14
  Rot
 -0 0 -0 1
  Scale
@@ -1263,7 +1144,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1281,6 +1162,6 @@ Static
 Trans. Occlude
 0
 UID
-3653311226
+3527838842
 next
 end
