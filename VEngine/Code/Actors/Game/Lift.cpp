@@ -8,6 +8,11 @@ Lift::Lift()
 	rootComponent->AddChild(liftTrigger);
 }
 
+void Lift::Create()
+{
+	canFall = false;
+}
+
 void Lift::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);

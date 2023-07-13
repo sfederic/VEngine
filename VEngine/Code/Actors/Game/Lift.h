@@ -11,6 +11,7 @@ public:
 	ACTOR_SYSTEM(Lift);
 
 	Lift();
+	void Create() override;
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
