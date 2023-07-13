@@ -94,6 +94,25 @@ Rotate Yaw
 UID
 3964517947
 next
+DebugNoteActor
+1
+ Enabled
+1
+ Position
+5 -0 -0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DebugNoteActor0
+Note Text
+Clock tower puzzle to match hands to a certain time denoted outside of this room?
+UID
+2986973695
+next
 DirectionalLightActor
 1
  Enabled
@@ -441,7 +460,7 @@ UID
 363064421
 next
 EmptyComponent
-3
+4
 1178347555
 Root
  Enabled
@@ -486,6 +505,21 @@ Root
 1
 UID
 2215245507
+next
+2986973695
+Root
+ Enabled
+1
+ Pos
+5 -0 -0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+3091583053
 next
 InstanceMeshComponent
 1
