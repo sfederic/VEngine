@@ -13,6 +13,11 @@ void Lift::Create()
 {
 	canFall = false;
 
+	//Extents and offset are important here. If you stack up two 1x1x1 grid actors, then the lift will have
+	//to move them both. Ideally, don't make levels where this is even possible, keep the lift singular.
+	liftTrigger->SetExtents(0.45f, 1.f, 0.45f);
+	liftTrigger->SetLocalPosition(0.f, 1.f, 0.f);
+
 	mesh->SetMeshFilename("node.vmesh");
 }
 
