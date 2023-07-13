@@ -172,6 +172,8 @@ void PropertiesDock::Clear()
 
 void PropertiesDock::FilterProperties()
 {
+    if (actorPropsGridLayout == nullptr) { return; }
+
     const QString propertyFilterText = propertyFilterLineEdit->text().toLower();
 
     for (int i = 0; i < actorPropsGridLayout->rowCount(); i++)
