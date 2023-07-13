@@ -11,8 +11,18 @@ void LiftCrank::Create()
 
 void LiftCrank::Start()
 {
+	__super::Start();
+
 	linkedLift = dynamic_cast<Lift*>(World::GetActorByNameAllowNull(linkedLiftName));
 	assert(linkedLift);
+}
+
+Properties LiftCrank::GetProps()
+{
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	props.Add("Lift", &linkedLiftName);
+	return props;
 }
 
 void LiftCrank::OnLinkRotateLeft()

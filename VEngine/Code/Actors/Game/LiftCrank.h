@@ -12,6 +12,7 @@ public:
 
 	void Create() override;
 	void Start() override;
+	Properties GetProps() override;
 
 	void OnLinkRotateLeft() override;
 	void OnLinkRotateRight() override;
