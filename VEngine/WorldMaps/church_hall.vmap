@@ -53,7 +53,7 @@ EntranceTrigger
 Entrance Active
 1
 Level Name
-church_clock_tower.vmap
+church_clock_tower_stairwell.vmap
 Locked Text
 Locked
 Name
@@ -155,7 +155,7 @@ MeshActor
  Visible
 1
 Name
-church_pillar0
+cube0
 UID
 3841650662
 next
@@ -170,7 +170,7 @@ next
  Visible
 1
 Name
-church_pillar1
+cube1
 UID
 2894709297
 next
@@ -185,7 +185,7 @@ next
  Visible
 1
 Name
-church_pillar2
+cube2
 UID
 775745634
 next
@@ -200,7 +200,7 @@ next
  Visible
 1
 Name
-church_pillar3
+cube3
 UID
 3568733252
 next
@@ -215,7 +215,7 @@ next
  Visible
 1
 Name
-church_pillar4
+cube4
 UID
 3383989616
 next
@@ -230,7 +230,7 @@ next
  Visible
 1
 Name
-church_pillar5
+cube5
 UID
 3639792667
 next
@@ -245,7 +245,7 @@ next
  Visible
 1
 Name
-church_pillar6
+cube6
 UID
 3373440638
 next
@@ -260,7 +260,7 @@ next
  Visible
 1
 Name
-church_pillar7
+cube7
 UID
 4208411069
 next
@@ -275,7 +275,7 @@ next
  Visible
 1
 Name
-church_pillar8
+cube8
 UID
 2740829697
 next
@@ -290,7 +290,7 @@ next
  Visible
 1
 Name
-crystal11
+cube9
 UID
 3163490036
 next
@@ -1054,61 +1054,6 @@ Trans. Occlude
 UID
 2278388699
 next
-1647454417
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
--0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-0
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-char.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2929477331
-next
 3163490036
 Mesh
  Enabled
@@ -1163,5 +1108,60 @@ Trans. Occlude
 0
 UID
 3527838842
+next
+1647454417
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+-0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2929477331
 next
 end
