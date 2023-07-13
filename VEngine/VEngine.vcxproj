@@ -314,6 +314,7 @@
     <ClCompile Include="Code\Actors\Game\CrystalPlacement.cpp" />
     <ClCompile Include="Code\Actors\Game\GridActorOffsetMesh.cpp" />
     <ClCompile Include="Code\Actors\Game\IncrementalRotator.cpp" />
+    <ClCompile Include="Code\Actors\Game\Lift.cpp" />
     <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.h" />
     <ClInclude Include="Code\Actors\Game\ClockHand.h" />
     <ClInclude Include="Code\Actors\Game\LinkedObjects.h" />
@@ -657,6 +658,7 @@
     <ClInclude Include="Code\Actors\Game\CrystalPlacement.h" />
     <ClInclude Include="Code\Actors\Game\GridActorOffsetMesh.h" />
     <ClInclude Include="Code\Actors\Game\IncrementalRotator.h" />
+    <ClInclude Include="Code\Actors\Game\Lift.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

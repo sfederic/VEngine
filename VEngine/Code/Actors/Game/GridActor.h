@@ -137,5 +137,7 @@ public:
 	bool CanBeRotatedYawYAxis() { return canBeRotatedYawYAxis; }
 	bool CanBeRotatedPitchXAxis() { return canBeRotatedPitchXAxis; }
 
+	void SetCanFall(bool fall) { canFall = fall; }
+
 	void CheckIfSubmerged();
 };
