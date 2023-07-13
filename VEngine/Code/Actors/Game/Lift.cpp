@@ -42,6 +42,10 @@ std::vector<GridActor*> Lift::GetGridActorsContainedInLiftTrigger()
 	std::vector<GridActor*> gridActors;
 	for (auto gridActor : World::GetAllActorsAsBaseType<GridActor>())
 	{
+		if (gridActor == this) //Ignore self
+		{
+			continue;
+		}
 		if (liftTrigger->Contains(gridActor->GetPositionV()))
 		{
 			gridActors.push_back(gridActor);
