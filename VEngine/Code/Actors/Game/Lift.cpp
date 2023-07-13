@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "Lift.h"
 #include "Components/BoxTriggerComponent.h"
+#include "Components/MeshComponent.h"
 
 Lift::Lift()
 {
@@ -11,6 +12,8 @@ Lift::Lift()
 void Lift::Create()
 {
 	canFall = false;
+
+	mesh->SetMeshFilename("node.vmesh");
 }
 
 void Lift::Tick(float deltaTime)
