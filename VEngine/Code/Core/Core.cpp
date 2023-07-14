@@ -159,6 +159,7 @@ void Core::EndGame()
 	Timer::Cleanup();
 
 	AudioSystem::DeleteLoadedAudioAndChannels();
+	AudioSystem::StopPersistentTracks();
 
 	SkeletalMeshComponent::StopAllAnimations();
 

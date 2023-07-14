@@ -12,6 +12,7 @@ namespace AudioSystem
 	void Tick();
 	void Cleanup();
 	void DeleteLoadedAudioAndChannels();
+	void StopPersistentTracks();
 	AudioChannel* GetChannel(uint64_t channelID);
 	void MuteAllAudio();
 	void StopAllAudio();

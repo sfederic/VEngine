@@ -93,6 +93,11 @@ void AudioSystem::DeleteLoadedAudioAndChannels()
 	loadedAudioMap.clear();
 }
 
+void AudioSystem::StopPersistentTracks()
+{
+	persistentChannel->sourceVoice->Stop();
+}
+
 AudioChannel* AudioSystem::GetChannel(uint64_t channelID)
 {
 	return channelMap.find(channelID)->second.get();
