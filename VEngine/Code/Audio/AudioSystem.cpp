@@ -20,6 +20,12 @@ uint64_t nextChannelID = 0;
 IXAudio2* audioEngine = nullptr; //Main XAudio2 sound engine
 IXAudio2MasteringVoice* masteringVoice = nullptr; //Main track	
 
+//@Todo: this is ok for one track, needs some work if multiple are needed.
+//These variables are for the singular track that can play between worlds loading.
+std::string persistentAudioFilename;
+std::unique_ptr<AudioBase> persistentAudio;
+std::unique_ptr<AudioChannel> persistentChannel;
+
 typedef std::map<std::string, std::unique_ptr<AudioBase>> AudioMap;
 AudioMap loadedAudioMap;
 
@@ -68,6 +74,10 @@ void AudioSystem::Tick()
 void AudioSystem::Cleanup()
 {
 	DeleteLoadedAudioAndChannels();
+
+	persistentAudio.reset();
+	persistentChannel.reset();
+	persistentAudioFilename.clear();
 
 	masteringVoice->DestroyVoice();
 	audioEngine->Release();
@@ -195,6 +205,40 @@ void AudioSystem::UnloadAudio(const std::string filename)
 	assert(audioIt != loadedAudioMap.end());
 
 	loadedAudioMap.erase(audioIt);
+}
+
+void AudioSystem::PlayPersistentAudio(std::string filename)
+{
+	if (persistentAudioFilename == filename)
+	{
+		Log("Persistent track [%s] already playing.", filename.c_str());
+		return;
+	}
+
+	persistentAudioFilename = filename;
+
+	std::string path = "Audio/" + filename;
+	if (!std::filesystem::exists(path))
+	{
+		Log("Audio file [%s] not found.", path.c_str());
+		return;
+	}
+
+	persistentAudio.reset();
+	persistentAudio = std::make_unique<AudioBase>();;
+
+	HR(LoadWAV(path, persistentAudio->waveFormat, persistentAudio->buffer));
+
+	persistentChannel.reset();
+	persistentChannel = std::make_unique<AudioChannel>();
+
+	IXAudio2SourceVoice* sourceVoice = nullptr;
+	HR(audioEngine->CreateSourceVoice(&sourceVoice, (WAVEFORMATEX*)&persistentAudio->waveFormat, 0, 2.0f, persistentChannel.get()));
+	
+	persistentChannel->sourceVoice = sourceVoice;
+
+	HR(sourceVoice->SubmitSourceBuffer(&persistentAudio->buffer));
+	HR(sourceVoice->Start(0));
 }
 
 HRESULT FindChunk(HANDLE file, DWORD fourcc, DWORD* dwChunkSize, DWORD* dwChunkDataPosition)

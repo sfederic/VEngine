@@ -23,4 +23,5 @@ namespace AudioSystem
 	uint64_t PlayAudio(const std::string filename, bool loopAudio = false);
 	void LoadAudio(const std::string filename);
 	void UnloadAudio(const std::string filename);
+	void PlayPersistentAudio(std::string filename);
 };
