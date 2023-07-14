@@ -722,6 +722,9 @@
     <ClCompile Include="Code\Components\PersistentAudioComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\PersistentAudioActor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1477,6 +1480,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Components\PersistentAudioComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\PersistentAudioActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
