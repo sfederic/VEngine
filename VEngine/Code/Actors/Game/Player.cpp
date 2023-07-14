@@ -43,8 +43,8 @@ Player::Player()
 
 void Player::Create()
 {
-	moveSpeed = 6.5f;
-	rotateSpeed = 6.0f;
+	moveSpeed = 5.35f;
+	rotateSpeed = 4.75f;
 }
 
 void Player::Start()
