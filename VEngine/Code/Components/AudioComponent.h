@@ -32,7 +32,7 @@ public:
 
 	auto GetChannelID() { return channelID; }
 
-private:
+protected:
 	std::string audioFilename;
 
 	FadeValue fade = FadeValue::None;

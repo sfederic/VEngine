@@ -316,6 +316,7 @@
     <ClCompile Include="Code\Actors\Game\IncrementalRotator.cpp" />
     <ClCompile Include="Code\Actors\Game\Lift.cpp" />
     <ClCompile Include="Code\Actors\Game\LiftCrank.cpp" />
+    <ClCompile Include="Code\Components\PersistentAudioComponent.cpp" />
     <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.h" />
     <ClInclude Include="Code\Actors\Game\ClockHand.h" />
     <ClInclude Include="Code\Actors\Game\LinkedObjects.h" />
@@ -661,6 +662,7 @@
     <ClInclude Include="Code\Actors\Game\IncrementalRotator.h" />
     <ClInclude Include="Code\Actors\Game\Lift.h" />
     <ClInclude Include="Code\Actors\Game\LiftCrank.h" />
+    <ClInclude Include="Code\Components\PersistentAudioComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
