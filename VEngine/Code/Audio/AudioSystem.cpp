@@ -112,6 +112,8 @@ void AudioSystem::StopAllAudio()
 	{
 		channelMap.find(audio->GetChannelID())->second->sourceVoice->Stop();
 	}
+
+	persistentChannel->sourceVoice->Stop();
 }
 
 void AudioSystem::StartAllAudio()
@@ -120,6 +122,8 @@ void AudioSystem::StartAllAudio()
 	{
 		channelMap.find(audio->GetChannelID())->second->sourceVoice->Start();
 	}
+
+	persistentChannel->sourceVoice->Start();
 }
 
 void AudioSystem::UnmuteAllAudio()
