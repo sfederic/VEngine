@@ -95,7 +95,10 @@ void AudioSystem::DeleteLoadedAudioAndChannels()
 
 void AudioSystem::StopPersistentTracks()
 {
-	persistentChannel->sourceVoice->Stop();
+	if (persistentChannel != nullptr)
+	{
+		persistentChannel->sourceVoice->Stop();
+	}
 }
 
 AudioChannel* AudioSystem::GetChannel(uint64_t channelID)
