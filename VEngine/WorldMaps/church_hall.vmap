@@ -294,6 +294,23 @@ cube9
 UID
 3163490036
 next
+PersistentAudioActor
+1
+ Enabled
+1
+ Position
+3 -0 1
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+PersistentAudioActor0
+UID
+664072225
+next
 Player
 1
  Enabled
@@ -1163,5 +1180,32 @@ Trans. Occlude
 0
 UID
 2929477331
+next
+PersistentAudioComponent
+1
+664072225
+PeristentAudio
+ Enabled
+1
+ Pos
+3 -0 1
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Audio Filename
+xeno.wav
+Loop
+1
+Pitch
+1
+Play On Start
+1
+UID
+1457064147
+Volume
+1
 next
 end

@@ -294,6 +294,23 @@ Rotate Yaw
 UID
 2790972008
 next
+PersistentAudioActor
+1
+ Enabled
+1
+ Position
+1 0 1
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+PersistentAudioActor0
+UID
+2779066592
+next
 Player
 1
  Enabled
@@ -366,6 +383,25 @@ UID
 next
 BoxTriggerComponent
 4
+3191526592
+Trigger
+ Enabled
+1
+ Pos
+3 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+699154689
+next
 2167858800
 Trigger
  Enabled
@@ -422,25 +458,6 @@ Offset
 0 0 0
 UID
 1984230210
-next
-3191526592
-Trigger
- Enabled
-1
- Pos
-3 0 0
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Extents
-0.45 0.45 0.45
-Offset
-0 0 0
-UID
-699154689
 next
 CameraComponent
 1
@@ -1227,5 +1244,32 @@ Trans. Occlude
 0
 UID
 1173707583
+next
+PersistentAudioComponent
+1
+2779066592
+PeristentAudio
+ Enabled
+1
+ Pos
+1 0 1
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Audio Filename
+game07.wav
+Loop
+1
+Pitch
+1
+Play On Start
+1
+UID
+3348407849
+Volume
+1
 next
 end

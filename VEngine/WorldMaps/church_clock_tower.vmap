@@ -145,7 +145,7 @@ EntranceTrigger
 Entrance Active
 1
 Level Name
-church_hall.vmap
+church_clock_tower_stairwell.vmap
 Locked Text
 Locked
 Name
@@ -491,21 +491,6 @@ Root
 UID
 1708373036
 next
-2530988018
-Root
- Enabled
-1
- Pos
-0 0 0
- Rot
--0 -0.000172577 -0 1
- Scale
-1 1 1
- Visible
-1
-UID
-2215245507
-next
 2986973695
 Root
  Enabled
@@ -520,6 +505,21 @@ Root
 1
 UID
 3091583053
+next
+2530988018
+Root
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+-0 -0.000172577 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+2215245507
 next
 InstanceMeshComponent
 1
