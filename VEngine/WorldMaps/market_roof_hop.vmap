@@ -16,7 +16,7 @@ UID
 4192811558
 next
 EntranceTrigger
-1
+2
  Enabled
 1
  Position
@@ -30,7 +30,7 @@ EntranceTrigger
 Entrance Active
 1
 Level Name
-church_hall.vmap
+market_house_1.vmap
 Locked Text
 Locked
 Name
@@ -38,9 +38,40 @@ EntranceTrigger0
 Open Audio
 door.wav
 Open Text
-Open
+House
+Tag
+0
 UID
 449400505
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+12 3 2
+ Rotation
+0 0.707107 0 0.707107
+ Scale
+0.999987 1 0.999987
+ Visible
+1
+Entrance Active
+1
+Level Name
+market_house_1.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger1
+Open Audio
+step.wav
+Open Text
+Move into house
+Tag
+1
+UID
+577617448
 Unlock Audio
 
 next
@@ -70,7 +101,7 @@ GridActor
  Enabled
 1
  Position
-12 3 4
+7 0 3
  Rotation
 0 0 0 1
  Scale
@@ -117,7 +148,7 @@ next
  Enabled
 1
  Position
-11 3 4
+8 0 4
  Rotation
 0 0 0 1
  Scale
@@ -164,7 +195,7 @@ next
  Enabled
 1
  Position
-12 4 4
+12 3 4
  Rotation
 0 0 0 1
  Scale
@@ -409,7 +440,7 @@ MeshActor
  Visible
 1
 Name
-node0
+stairs0
 UID
 2189207719
 next
@@ -424,7 +455,7 @@ next
  Visible
 1
 Name
-cube1
+stairs1
 UID
 1851401760
 next
@@ -439,7 +470,7 @@ next
  Visible
 1
 Name
-cube2
+stairs2
 UID
 3868451291
 next
@@ -454,7 +485,7 @@ next
  Visible
 1
 Name
-cube3
+stairs3
 UID
 688469115
 next
@@ -469,7 +500,7 @@ next
  Visible
 1
 Name
-cube4
+stairs4
 UID
 459440227
 next
@@ -484,7 +515,7 @@ next
  Visible
 1
 Name
-market_store_tent5
+stairs5
 UID
 2474770862
 next
@@ -499,7 +530,7 @@ next
  Visible
 1
 Name
-MeshActor6
+stairs6
 UID
 172557515
 next
@@ -508,9 +539,9 @@ Player
  Enabled
 1
  Position
-6 0 0
+12 3 2
  Rotation
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -521,7 +552,7 @@ UID
 2163157409
 next
 BoxTriggerComponent
-1
+2
 449400505
 Trigger
  Enabled
@@ -540,6 +571,25 @@ Offset
 0 0 0
 UID
 3577944287
+next
+577617448
+Trigger
+ Enabled
+1
+ Pos
+12 3 2
+ Rot
+0 0.707107 0 0.707107
+ Scale
+0.999987 1 0.999987
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+3179589294
 next
 CameraComponent
 1
@@ -565,7 +615,7 @@ UID
 71528977
 next
 ConditionComponent
-1
+2
 449400505
 Condition
  Enabled
@@ -578,6 +628,19 @@ Condition Arg
 
 UID
 60527763
+next
+577617448
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+337410104
 next
 DialogueComponent
 8
@@ -697,9 +760,9 @@ Root
  Enabled
 1
  Pos
-6 0 0
+12 3 2
  Rot
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -771,7 +834,7 @@ Mesh
  Enabled
 1
  Pos
-12 3 4
+7 0 3
  Rot
 0 0 0 1
  Scale
@@ -826,7 +889,7 @@ Mesh
  Enabled
 1
  Pos
-11 3 4
+8 0 4
  Rot
 0 0 0 1
  Scale
@@ -881,7 +944,7 @@ Mesh
  Enabled
 1
  Pos
-12 4 4
+12 3 4
  Rot
 0 0 0 1
  Scale
@@ -1543,7 +1606,7 @@ Mesh
  Pos
 0 0 0
  Rot
-0 0 0 1
+0 0.707107 0 0.707107
  Scale
 1 1 1
  Visible
