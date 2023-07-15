@@ -108,9 +108,27 @@ void DebugMenu::Cleanup()
 	ImGui::DestroyContext();
 }
 
+void DebugMenu::ClearAllStaticNotifications()
+{
+	for (int i = 0; i < debugNotifications.size(); i++)
+	{
+		if (debugNotifications[i].staticNotification)
+		{
+			debugNotifications.erase(debugNotifications.begin() + i);
+		}
+	}
+}
+
 void DebugMenu::AddNotification(const std::wstring note)
 {
 	debugNotifications.emplace_back(DebugNotification(note));
+}
+
+void DebugMenu::AddStaticNotification(std::wstring note)
+{
+	DebugNotification dn(note);
+	dn.staticNotification = true;
+	debugNotifications.emplace_back(dn);
 }
 
 void DebugMenu::IterateOverProperties(Properties& props)
@@ -504,7 +522,10 @@ void DebugMenu::RenderNotifications(float deltaTime)
 	{
 		if (debugNotifications[i].timeOnScreen < notificationLifetime)
 		{
-			debugNotifications[i].timeOnScreen += deltaTime;
+			if (!debugNotifications[i].staticNotification)
+			{
+				debugNotifications[i].timeOnScreen += deltaTime;
+			}
 
 			const float notificationOffsetY = 20.f * i;
 			const auto textLayout = Layout({ 0.f, notificationOffsetY, 1000.f, 1000.f });

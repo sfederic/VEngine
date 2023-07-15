@@ -10,6 +10,7 @@ struct DebugNotification
 	DebugNotification(std::wstring_view note) : text(note) {}
 	std::wstring text;
 	float timeOnScreen = 0.f;
+	bool staticNotification = false; //Means the message won't get removed on timer.
 };
 
 class DebugMenu
@@ -41,7 +42,9 @@ public:
 	void Init();
 	void Tick(float deltaTime);
 	void Cleanup();
+	void ClearAllStaticNotifications();
 	void AddNotification(const std::wstring note);
+	void AddStaticNotification(std::wstring note);
 
 private:
 	void RenderNotifications(float deltaTime);
