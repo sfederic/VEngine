@@ -1,7 +1,9 @@
 #include "vpch.h"
 #include "EntranceTrigger.h"
 #include <filesystem>
+#include "Player.h"
 #include "Core/Log.h"
+#include "Core/VMath.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Components/Game/ConditionComponent.h"
 #include "Gameplay/GameUtils.h"
@@ -46,59 +48,64 @@ void EntranceTrigger::Start()
 
 void EntranceTrigger::Tick(float deltaTime)
 {
-    XMVECTOR targetPos = trigger->GetTargetActor()->GetPositionV();
+    const XMVECTOR targetPos = trigger->GetTargetActor()->GetPositionV();
+    const auto player = Player::system.GetOnlyActor();
 
-    if (trigger->ContainsTarget() && isEntranceActive && !entranceInteractedWith)
+    //Make sure player is facing orientation of trigger to enter
+    if (VMath::VecEqual(GetForwardVectorV(), player->GetMeshForward()))
     {
-        interactWidget->AddToViewport();
-
-        if (Input::GetKeyUp(Keys::Down))
+        if (trigger->ContainsTarget() && isEntranceActive && !entranceInteractedWith)
         {
-            if (levelToMoveTo.empty())
-            {
-                Log("EntranceTrigger %s levelToMoveTo empty.", this->GetName().c_str());
-                return;
-            }
+            interactWidget->AddToViewport();
 
-            //Condition check
-            if (!conditionComponent->condition.empty() && isEntranceLocked)
+            if (Input::GetKeyUp(Keys::Down))
             {
-                if (!conditionComponent->CheckCondition())
+                if (levelToMoveTo.empty())
                 {
-                    Log("condition failed on [%s] EntranceTrigger", this->GetName().c_str());
+                    Log("EntranceTrigger %s levelToMoveTo empty.", this->GetName().c_str());
                     return;
                 }
 
-                isEntranceLocked = false;
-                interactWidget->interactText = openText;
+                //Condition check
+                if (!conditionComponent->condition.empty() && isEntranceLocked)
+                {
+                    if (!conditionComponent->CheckCondition())
+                    {
+                        Log("condition failed on [%s] EntranceTrigger", this->GetName().c_str());
+                        return;
+                    }
+
+                    isEntranceLocked = false;
+                    interactWidget->interactText = openText;
+                    return;
+                }
+
+                //Load new world
+                if (!CheckIfWorldExists(levelToMoveTo))
+                {
+                    return;
+                }
+
+                if (GameInstance::useGameSaves)
+                {
+                    FileSystem::SerialiseAllSystems();
+                }
+
+                GameUtils::PlayAudioOneShot(openAudio);
+
+                GameUtils::levelToMoveTo = levelToMoveTo;
+                Timer::SetTimer(1.f, &GameUtils::LoadWorldAndMoveToEntranceTrigger);
+
+                UISystem::screenFadeWidget->SetToFadeOut();
+                UISystem::screenFadeWidget->AddToViewport();
+                interactWidget->RemoveFromViewport();
+
+                entranceInteractedWith = true;
+
+                Input::blockInput = true;
+
                 return;
             }
-
-            //Load new world
-            if (!CheckIfWorldExists(levelToMoveTo))
-            {
-                return;
-            }
-
-            if (GameInstance::useGameSaves)
-            {
-                FileSystem::SerialiseAllSystems();
-            }
-
-            GameUtils::PlayAudioOneShot(openAudio);
-
-            GameUtils::levelToMoveTo = levelToMoveTo;
-            Timer::SetTimer(1.f, &GameUtils::LoadWorldAndMoveToEntranceTrigger);
-
-            UISystem::screenFadeWidget->SetToFadeOut();
-            UISystem::screenFadeWidget->AddToViewport();
-            interactWidget->RemoveFromViewport();
-
-            entranceInteractedWith = true;
-
-            Input::blockInput = true;
-
-            return;
         }
     }
     else
