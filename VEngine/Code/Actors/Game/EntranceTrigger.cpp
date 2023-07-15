@@ -49,63 +49,59 @@ void EntranceTrigger::Start()
 void EntranceTrigger::Tick(float deltaTime)
 {
     const XMVECTOR targetPos = trigger->GetTargetActor()->GetPositionV();
-    const auto player = Player::system.GetOnlyActor();
 
-    //Make sure player is facing orientation of trigger to enter
-    if (VMath::VecEqual(GetForwardVectorV(), player->GetMeshForward()))
+    if (trigger->ContainsTarget() && isEntranceActive && !entranceInteractedWith)
     {
-        if (trigger->ContainsTarget() && isEntranceActive && !entranceInteractedWith)
+        interactWidget->AddToViewport();
+
+        if (Input::GetKeyUp(Keys::Down))
         {
-            interactWidget->AddToViewport();
-
-            if (Input::GetKeyUp(Keys::Down))
+            if (levelToMoveTo.empty())
             {
-                if (levelToMoveTo.empty())
-                {
-                    Log("EntranceTrigger %s levelToMoveTo empty.", this->GetName().c_str());
-                    return;
-                }
-
-                //Condition check
-                if (!conditionComponent->condition.empty() && isEntranceLocked)
-                {
-                    if (!conditionComponent->CheckCondition())
-                    {
-                        Log("condition failed on [%s] EntranceTrigger", this->GetName().c_str());
-                        return;
-                    }
-
-                    isEntranceLocked = false;
-                    interactWidget->interactText = openText;
-                    return;
-                }
-
-                //Load new world
-                if (!CheckIfWorldExists(levelToMoveTo))
-                {
-                    return;
-                }
-
-                if (GameInstance::useGameSaves)
-                {
-                    FileSystem::SerialiseAllSystems();
-                }
-
-                GameUtils::PlayAudioOneShot(openAudio);
-
-                GameUtils::levelToMoveTo = levelToMoveTo;
-                Timer::SetTimer(1.f, &GameUtils::LoadWorldAndMoveToEntranceTrigger);
-
-                UISystem::screenFadeWidget->SetToFadeOut();
-                UISystem::screenFadeWidget->AddToViewport();
-                interactWidget->RemoveFromViewport();
-
-                entranceInteractedWith = true;
-
-                Input::blockInput = true;
-
+                Log("EntranceTrigger %s levelToMoveTo empty.", this->GetName().c_str());
                 return;
             }
+
+            //Condition check
+            if (!conditionComponent->condition.empty() && isEntranceLocked)
+            {
+                if (!conditionComponent->CheckCondition())
+                {
+                    Log("condition failed on [%s] EntranceTrigger", this->GetName().c_str());
+                    return;
+                }
+
+                isEntranceLocked = false;
+                interactWidget->interactText = openText;
+                return;
+            }
+
+            //Load new world
+            if (!CheckIfWorldExists(levelToMoveTo))
+            {
+                return;
+            }
+
+            if (GameInstance::useGameSaves)
+            {
+                FileSystem::SerialiseAllSystems();
+            }
+
+            GameUtils::PlayAudioOneShot(openAudio);
+
+            GameUtils::levelToMoveTo = levelToMoveTo;
+            GameUtils::entranceTriggerTag = entranceTag;
+            Timer::SetTimer(1.f, &GameUtils::LoadWorldAndMoveToEntranceTrigger);
+
+            UISystem::screenFadeWidget->SetToFadeOut();
+            UISystem::screenFadeWidget->AddToViewport();
+            interactWidget->RemoveFromViewport();
+
+            entranceInteractedWith = true;
+
+            Input::blockInput = true;
+
+            return;
         }
     }
     else
