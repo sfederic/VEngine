@@ -22,6 +22,7 @@
 namespace GameUtils
 {
 	std::string levelToMoveTo;
+	std::string entranceTriggerTag;
 
 	void SetActiveCameraTarget(Actor* newTarget)
 	{

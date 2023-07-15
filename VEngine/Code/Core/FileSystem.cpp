@@ -368,6 +368,7 @@ void FileSystem::DeferredWorldLoad()
 	if (!defferedWorldLoadFilename.empty())
 	{
 		previousWorldMovedFromFilename = World::worldFilename;
+		entranceTriggerTag = GameUtils::entranceTriggerTag;
 
 		LoadWorld(defferedWorldLoadFilename);
 
@@ -375,6 +376,8 @@ void FileSystem::DeferredWorldLoad()
 
 		defferedWorldLoadFilename.clear();
 		previousWorldMovedFromFilename.clear();
+		entranceTriggerTag.clear();
+		GameUtils::entranceTriggerTag.clear();
 	}
 }
 

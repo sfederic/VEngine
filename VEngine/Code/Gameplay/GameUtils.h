@@ -45,6 +45,7 @@ namespace GameUtils
 
 	//Used with timers to be able to call LoadWorldAndMoveToEntranceTrigger() through Timer.
 	extern std::string levelToMoveTo;
+	extern std::string entranceTriggerTag;
 
 	//Move to matching entrance trigger with same name as exited one in loaded world.
 	void LoadWorldAndMoveToEntranceTrigger();
