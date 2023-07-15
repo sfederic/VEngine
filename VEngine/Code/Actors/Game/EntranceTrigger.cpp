@@ -124,6 +124,7 @@ Properties EntranceTrigger::GetProps()
     props.Add("Locked Text", &lockedText);
     props.Add("Unlock Audio", &unlockAudio).autoCompletePath = "/Audio/";
     props.Add("Open Audio", &openAudio).autoCompletePath = "/Audio/";
+    props.Add("Tag", &entranceTag);
     return props;
 }
 

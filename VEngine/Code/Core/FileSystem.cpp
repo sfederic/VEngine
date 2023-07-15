@@ -27,6 +27,7 @@
 
 static std::string defferedWorldLoadFilename;
 static std::string previousWorldMovedFromFilename;
+static std::string entranceTriggerTag;
 
 void MovePlayerToEntranceTriggerFromPreviousWorldFilename();
 
@@ -381,19 +382,44 @@ void MovePlayerToEntranceTriggerFromPreviousWorldFilename()
 {
 	auto player = Player::system.GetOnlyActor();
 
+	std::vector<EntranceTrigger*> possibleEntrancesToMoveTo;
+
 	for (auto& entranceTrigger : EntranceTrigger::system.GetActors())
 	{
 		if (entranceTrigger->levelToMoveTo == previousWorldMovedFromFilename)
 		{
-			player->SetPosition(entranceTrigger->GetPositionV());
-			//Want the opposite rotation on exit for player to face in vs the orientation to enter the entrance
-			player->SetRotation(XMQuaternionInverse(entranceTrigger->GetRotationV()));
-			player->SetNextPosAndRotToCurrent();
+			possibleEntrancesToMoveTo.push_back(entranceTrigger.get());
+		}
+	}
 
+	const auto MoveToEntrance = [&](EntranceTrigger* entranceTrigger)
+	{
+		player->SetPosition(entranceTrigger->GetPositionV());
+		//Want the opposite rotation on exit for player to face in vs the orientation to enter the entrance
+		player->SetRotation(XMQuaternionInverse(entranceTrigger->GetRotationV()));
+		player->SetNextPosAndRotToCurrent();
+	};
+
+	//Deal with only one potential entrance
+	if (possibleEntrancesToMoveTo.size() == 1)
+	{
+		MoveToEntrance(possibleEntrancesToMoveTo.front());
+		UISystem::screenFadeWidget->AddToViewport();
+		UISystem::screenFadeWidget->SetToFadeIn();
+		return;
+	}
+
+	//Deal with multiple entrances. Differentiate by tag.
+	for (auto entranceTrigger : possibleEntrancesToMoveTo)
+	{
+		if (entranceTrigger->entranceTag == entranceTriggerTag)
+		{
+			MoveToEntrance(entranceTrigger);
 			UISystem::screenFadeWidget->AddToViewport();
 			UISystem::screenFadeWidget->SetToFadeIn();
-
 			return;
 		}
 	}
+
+	Log("No matching EntranceTrigger found on world load.");
 }

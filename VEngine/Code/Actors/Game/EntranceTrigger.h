@@ -26,6 +26,9 @@ struct EntranceTrigger : Actor
 	std::string unlockAudio;
 	std::string openAudio = "door.wav";
 
+	//Use if there are multiple entrances with matching level filenames to differentiate.
+	std::string entranceTag;
+
 	bool isEntranceActive = true;
 	bool isEntranceLocked = false;
 
