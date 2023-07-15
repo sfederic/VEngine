@@ -31,6 +31,15 @@ void Console::Init()
 		std::make_pair([]() { debugMenu.consoleCommandsMenuOpen = !debugMenu.consoleCommandsMenuOpen; },
 		"List all console commands"));
 
+	executeMap.emplace(L"ENT",
+		std::make_pair([]() {
+				WorldEditor::entranceTriggerWorldLoadMode = !WorldEditor::entranceTriggerWorldLoadMode;
+				WorldEditor::entranceTriggerWorldLoadMode ?
+					debugMenu.AddStaticNotification(L"EntranceTrigger Load Mode Enabled") :
+					debugMenu.ClearAllStaticNotifications();
+			},
+			"Enable/Disable loading maps based on clicking an EntranceTrigger in-world."));
+
 	executeMap.emplace(L"PROF",
 		std::make_pair([]() { debugMenu.profileMenuOpen = !debugMenu.profileMenuOpen; },
 		"Show profile stats"));

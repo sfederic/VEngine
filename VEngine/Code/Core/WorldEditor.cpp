@@ -10,6 +10,7 @@
 #include "FileSystem.h"
 #include "Camera.h"
 #include "Actors/MeshActor.h"
+#include "Actors/Game/EntranceTrigger.h"
 #include "Editor/DebugMenu.h"
 #include "Core.h"
 #include "Core/Log.h"
@@ -18,6 +19,7 @@
 #include "Render/Material.h"
 #include "Render/MaterialSystem.h"
 #include "Components/MeshComponent.h"
+#include "Gameplay/GameUtils.h"
 
 std::set<Actor*> pickedActors;
 Actor* pickedActor;
@@ -34,6 +36,9 @@ bool WorldEditor::actorReplaceModeActive = false;
 bool WorldEditor::parentSetActive = false;
 bool WorldEditor::moveActorViaKeyboardInput = false;
 
+//Load world based on EntranceTrigger's props on actor click in-world.
+bool WorldEditor::entranceTriggerWorldLoadMode = false;
+
 DirectX::XMFLOAT4 WorldEditor::vertexPaintColour;
 
 void HandleActorPicking();
@@ -45,6 +50,7 @@ void SpawnActor(Transform& transform);
 void VertexPainting();
 void SetParentOnClick(Actor& hitActor);
 void MoveActorViaKeyboardInput();
+void LoadWorldOnEntranceTriggerClick(Actor* pickedActor);
 
 void WorldEditor::Tick()
 {
@@ -177,6 +183,9 @@ void HandleActorPicking()
 					Log("Spawn System not set for actor replacement.");
 				}
 			}
+
+			//Make sure this call is last. Has the potential to load new map.
+			LoadWorldOnEntranceTriggerClick(hit.hitActor);
 		}
 	}
 }
@@ -413,6 +422,18 @@ void MoveActorViaKeyboardInput()
 		pickedActor->AddRotation(VMath::GlobalUpVector(), -90.f);
 	} else if (Input::GetKeyDown(Keys::Right)) {
 		pickedActor->AddRotation(VMath::GlobalUpVector(), 90.f);
+	}
+}
+
+void LoadWorldOnEntranceTriggerClick(Actor* pickedActor)
+{
+	if (WorldEditor::entranceTriggerWorldLoadMode)
+	{
+		auto entranceTrigger = dynamic_cast<EntranceTrigger*>(pickedActor);
+		if (entranceTrigger)
+		{
+			FileSystem::LoadWorld(entranceTrigger->levelToMoveTo);
+		}
 	}
 }
 
