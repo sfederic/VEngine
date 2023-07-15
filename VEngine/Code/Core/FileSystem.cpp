@@ -386,7 +386,8 @@ void MovePlayerToEntranceTriggerFromPreviousWorldFilename()
 		if (entranceTrigger->levelToMoveTo == previousWorldMovedFromFilename)
 		{
 			player->SetPosition(entranceTrigger->GetPositionV());
-			player->SetRotation(entranceTrigger->GetRotationV());
+			//Want the opposite rotation on exit for player to face in vs the orientation to enter the entrance
+			player->SetRotation(XMQuaternionInverse(entranceTrigger->GetRotationV()));
 			player->SetNextPosAndRotToCurrent();
 
 			UISystem::screenFadeWidget->AddToViewport();
