@@ -72,7 +72,7 @@ next
  Position
 0 0 4
  Rotation
--0 0 -0 1
+-0 -0.707107 -0 0.707107
  Scale
 1 1 1
  Visible
@@ -99,9 +99,9 @@ next
  Position
 10 0 11
  Rotation
--0 0 -0 1
+0.00012207 0.707107 -0.00012207 0.707107
  Scale
-1 1 1
+1 0.999999 0.999999
  Visible
 1
 Entrance Active
@@ -316,9 +316,9 @@ Player
  Enabled
 1
  Position
-4 0 2
+5 0 2
  Rotation
-0 0 0 1
+0 1.49012e-07 0 -1
  Scale
 1 1 1
  Visible
@@ -356,7 +356,7 @@ Trigger
  Pos
 0 0 4
  Rot
--0 0 -0 1
+-0 -0.707107 -0 0.707107
  Scale
 1 1 1
  Visible
@@ -375,9 +375,9 @@ Trigger
  Pos
 10 0 11
  Rot
--0 0 -0 1
+0.00012207 0.707107 -0.00012207 0.707107
  Scale
-1 1 1
+1 0.999999 0.999999
  Visible
 1
 Extents
@@ -507,9 +507,9 @@ Root
  Enabled
 1
  Pos
-4 0 2
+5 0 2
  Rot
-0 0 0 1
+0 1.49012e-07 0 -1
  Scale
 1 1 1
  Visible
@@ -611,7 +611,7 @@ M_Specular
 M_Texture
 Walls/wall06.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -666,7 +666,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -719,9 +719,9 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wall.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -774,9 +774,9 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wall.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -829,9 +829,9 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wall.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -884,9 +884,9 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wall.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -939,9 +939,9 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wall.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -994,9 +994,9 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wall.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1051,7 +1051,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1106,7 +1106,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1133,7 +1133,7 @@ Mesh
  Pos
 0 0 0
  Rot
--0 0 0 1
+0 5.06639e-07 0 -1
  Scale
 1 1 1
  Visible
@@ -1161,7 +1161,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
