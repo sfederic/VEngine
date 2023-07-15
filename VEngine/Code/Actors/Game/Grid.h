@@ -30,6 +30,7 @@ struct Grid : public Actor
 	std::vector<GridRow> rows;
 
 	inline static float maxHeightMove = 1.1f;
+	inline static float maxPlayerDropHeight = 1.9f;
 
 	int sizeX = 1;
 	int sizeY = 1;

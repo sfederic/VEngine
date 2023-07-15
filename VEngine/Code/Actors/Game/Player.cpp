@@ -843,18 +843,28 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 		return;
 	}
 
-	auto nextNodeToMoveTo = grid->GetNode(nextXIndex, nextYIndex);
-	if (!nextNodeToMoveTo->active)
+	auto nextNode = grid->GetNode(nextXIndex, nextYIndex);
+
+	//Check if active
+	if (!nextNode->active)
 	{
 		nextPos = previousPos;
 		return;
 	}
 
 	//Check next node height in relation to player
-	auto node = grid->GetNode(nextXIndex, nextYIndex);
-	if (node->worldPosition.y > (GetPosition().y + Grid::maxHeightMove))
+	if (nextNode->worldPosition.y > (GetPosition().y + Grid::maxHeightMove))
 	{
 		Log("Node [x:%d, y:%d] too high to move to.", nextXIndex, nextYIndex);
+		nextPos = previousPos;
+		return;
+	}
+
+	//Check if drop is too high for player
+	const float nextNodeAndPlayerPosHeightDifference = GetPosition().y - nextNode->worldPosition.y;
+	if (nextNodeAndPlayerPosHeightDifference > Grid::maxPlayerDropHeight)
+	{
+		Log("Node [x:%d, y:%d] too low to drop down to.", nextXIndex, nextYIndex);
 		nextPos = previousPos;
 		return;
 	}
@@ -870,7 +880,7 @@ void Player::CheckNextMoveNode(XMVECTOR previousPos)
 		}
 	}
 
-	nextPos = XMLoadFloat3(&node->worldPosition);
+	nextPos = XMLoadFloat3(&nextNode->worldPosition);
 }
 
 bool Player::CheckIfMovementAndRotationStopped()
