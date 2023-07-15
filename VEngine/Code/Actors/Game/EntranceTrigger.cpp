@@ -131,7 +131,7 @@ bool EntranceTrigger::CheckIfWorldExists(std::string& worldName)
         if (!std::filesystem::exists("GameSaves/" + worldName))
         {
             Log("GameSaves/[%s] not found for [%s]", worldName.c_str(), this->GetName().c_str());
-            return false;
+            return true; //if no game save, just load normal map
         }
     }
     else if (!std::filesystem::exists("WorldMaps/" + worldName))

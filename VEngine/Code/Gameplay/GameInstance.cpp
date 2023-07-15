@@ -7,7 +7,7 @@ std::string GameInstance::previousMapMovedFrom = startingMap;
 //Used when continuing from game save files
 std::string GameInstance::mapToLoadOnContinue;
 
-bool GameInstance::useGameSaves = false;
+bool GameInstance::useGameSaves = true;
 
 //Global properties
 static int heldCrystalCount = 0;
