@@ -31,15 +31,6 @@ void Console::Init()
 		std::make_pair([]() { debugMenu.consoleCommandsMenuOpen = !debugMenu.consoleCommandsMenuOpen; },
 		"List all console commands"));
 
-	executeMap.emplace(L"ENT",
-		std::make_pair([]() {
-				WorldEditor::entranceTriggerWorldLoadMode = !WorldEditor::entranceTriggerWorldLoadMode;
-				WorldEditor::entranceTriggerWorldLoadMode ?
-					debugMenu.AddStaticNotification(L"EntranceTrigger Load Mode Enabled") :
-					debugMenu.ClearAllStaticNotifications();
-			},
-			"Enable/Disable loading maps based on clicking an EntranceTrigger in-world."));
-
 	executeMap.emplace(L"PROF",
 		std::make_pair([]() { debugMenu.profileMenuOpen = !debugMenu.profileMenuOpen; },
 		"Show profile stats"));
@@ -120,18 +111,28 @@ void Console::Init()
 		std::make_pair([]() { WorldEditor::texturePlacement = !WorldEditor::texturePlacement; },
 		"Enable texture placement mode in editor"));
 
+	executeMap.emplace(L"ENT",
+		std::make_pair([]() {
+			WorldEditor::entranceTriggerWorldLoadMode = !WorldEditor::entranceTriggerWorldLoadMode;
+			WorldEditor::entranceTriggerWorldLoadMode ?
+				debugMenu.AddStaticNotification(L"EntranceTrigger Load Mode Active") :
+				debugMenu.ClearAllStaticNotifications();
+		},
+		"Enable/Disable loading maps based on clicking an EntranceTrigger in-world."));
+
 	executeMap.emplace(L"MESH",
 		std::make_pair([]() { 
 			WorldEditor::meshPlacement = !WorldEditor::meshPlacement; 
-			WorldEditor::meshPlacement ? Log("Mesh replace mode active.") :
-				Log("Mesh replace mode inactive.");
+			WorldEditor::meshPlacement ? debugMenu.AddStaticNotification(L"MeshReplace Mode Active") :
+				debugMenu.ClearAllStaticNotifications();
 			},
 		"Toggle mesh component placement mode in editor."));
 
 	executeMap.emplace(L"PARENT",
 		std::make_pair([]() {
 			WorldEditor::parentSetActive = !WorldEditor::parentSetActive;
-			Log("Parent set mode active.");
+			WorldEditor::parentSetActive ? debugMenu.AddStaticNotification(L"ParentSet Mode Active") :
+				debugMenu.ClearAllStaticNotifications();
 			},
 		"Enable setting parent to currently selected actor in editor."));
 
@@ -162,8 +163,8 @@ void Console::Init()
 	executeMap.emplace(L"MOV",
 		std::make_pair([]() {
 			WorldEditor::moveActorViaKeyboardInput = !WorldEditor::moveActorViaKeyboardInput;
-			WorldEditor::actorReplaceModeActive ? Log("Actor keyboard move mode active.") :
-				Log("Actor keyboard move mode active inactive.");
+			WorldEditor::actorReplaceModeActive ? debugMenu.AddStaticNotification(L"ActorKeyboardMove Mode Active") :
+				debugMenu.ClearAllStaticNotifications();;
 			},
 			"Set World Editor to move selected actor via keyboard input."));
 
