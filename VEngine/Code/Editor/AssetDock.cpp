@@ -238,6 +238,7 @@ void AssetDock::AssetFolderClicked()
         }
 
         QListWidgetItem* item = new QListWidgetItem(icon, fileInfo.fileName());
+        item->setToolTip(fileInfo.fileName());
         item->setSizeHint(QSize(150, 100));
         assetIcons->addItem(item);
     }
