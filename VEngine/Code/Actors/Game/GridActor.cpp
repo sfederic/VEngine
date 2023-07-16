@@ -145,6 +145,8 @@ Properties GridActor::GetProps()
 	props.Add("Rotate Pitch", &canBeRotatedPitchXAxis);
 	props.Add("Move Axis Pos.", &validPositiveMovementAxis);
 	props.Add("Move Axis Neg.", &validNegativeMovementAxis);
+	props.Add("Move Speed", &moveSpeed);
+	props.Add("Rotate Speed", &rotateSpeed);
 	props.Add("Can Fall", &canFall);
 	return props;
 }
