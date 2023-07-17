@@ -82,11 +82,6 @@ void EntranceTrigger::Tick(float deltaTime)
                 return;
             }
 
-            if (GameInstance::useGameSaves)
-            {
-                FileSystem::SerialiseAllSystems();
-            }
-
             GameUtils::PlayAudioOneShot(openAudio);
 
             GameUtils::levelToMoveTo = levelToMoveTo;
@@ -100,9 +95,6 @@ void EntranceTrigger::Tick(float deltaTime)
             entranceInteractedWith = true;
 
             Input::blockInput = true;
-
-            return;
-        }
     }
     else
     {

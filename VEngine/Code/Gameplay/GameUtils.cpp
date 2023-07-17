@@ -139,6 +139,11 @@ namespace GameUtils
 			return;
 		}
 
+		if (GameInstance::useGameSaves)
+		{
+			FileSystem::SerialiseAllSystems();
+		}
+
 		LoadWorldDeferred(levelToMoveTo);
 
 		Input::blockInput = false;
