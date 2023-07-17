@@ -397,9 +397,9 @@ void MovePlayerToEntranceTriggerFromPreviousWorldFilename()
 
 	const auto MoveToEntrance = [&](EntranceTrigger* entranceTrigger)
 	{
-		player->SetPosition(entranceTrigger->GetPositionV());
+		player->SetPosition(entranceTrigger->GetPositionV() + entranceTrigger->GetForwardVectorV());
 		//Want the opposite rotation on exit for player to face in vs the orientation to enter the entrance
-		player->SetRotation(XMQuaternionInverse(entranceTrigger->GetRotationV()));
+		player->SetRotation(entranceTrigger->GetRotationV());
 		player->SetNextPosAndRotToCurrent();
 	};
 
