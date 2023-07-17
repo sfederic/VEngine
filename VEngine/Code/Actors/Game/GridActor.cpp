@@ -315,3 +315,15 @@ void GridActor::CheckIfSubmerged()
 		}
 	}
 }
+
+void GridActor::DisableAllInteractivity()
+{
+	isDestructible = false;
+	isInspectable = false;
+	disableGridInteract = true;
+	canBeRotatedInLink = false;
+	canBeMovedInLink = false;
+	canBeRotatedYawYAxis = false;
+	canBeRotatedPitchXAxis = false;
+	ignoreRotationValidCheck = true;
+}

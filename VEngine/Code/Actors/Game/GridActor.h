@@ -140,4 +140,6 @@ public:
 	void SetCanFall(bool fall) { canFall = fall; }
 
 	void CheckIfSubmerged();
+
+	void DisableAllInteractivity();
 };
