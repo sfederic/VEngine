@@ -48,6 +48,12 @@ void OilBarrel::SpillOil()
 			t.position = hit.hitPos;
 			t.position.y += 0.05f;
 
+			//Don't spawn oil slicks on top of each other
+			if (hit.GetHitActorAs<OilSlick>() != nullptr)
+			{
+				return;
+			}
+
 			auto oilSlick = OilSlick::system.Add(t);
 			oilSlick->UpdateTransform(XMMatrixIdentity());
 			oilSlick->Create();
