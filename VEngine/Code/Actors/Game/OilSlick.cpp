@@ -6,8 +6,7 @@
 
 void OilSlick::Create()
 {
-    canBeRotatedInLink = false;
-    canBeRotatedInLink = false;
+    DisableAllInteractivity();
 
     mesh->SetMeshFilename("node.vmesh");
     mesh->SetTexture("oil_slick.png");
