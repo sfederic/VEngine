@@ -52,10 +52,6 @@ void EntranceTrigger::Tick(float deltaTime)
 
     if (trigger->ContainsTarget() && isEntranceActive && !entranceInteractedWith)
     {
-        interactWidget->AddToViewport();
-
-        if (Input::GetKeyUp(Keys::Down))
-        {
             if (levelToMoveTo.empty())
             {
                 Log("EntranceTrigger %s levelToMoveTo empty.", this->GetName().c_str());
