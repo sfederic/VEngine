@@ -51,7 +51,7 @@ Explodable
  Enabled
 1
  Position
-8 -0 2
+8 0 2
  Rotation
 0 0 0 1
  Scale
@@ -448,9 +448,9 @@ Player
  Enabled
 1
  Position
-3 0 0
+4 0 0
  Rotation
--0 0 -0 1
+0 1 0 -5.96046e-08
  Scale
 1 1 1
  Visible
@@ -645,9 +645,9 @@ Root
  Enabled
 1
  Pos
-3 0 0
+4 0 0
  Rot
--0 0 -0 1
+0 1 0 -5.96046e-08
  Scale
 1 1 1
  Visible
@@ -719,7 +719,7 @@ Mesh
  Enabled
 1
  Pos
-8 -0 2
+8 0 2
  Rot
 0 0 0 1
  Scale
@@ -1256,7 +1256,7 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-barrel.vmesh
+oil_barrel.vmesh
 Static
 1
 Trans. Occlude
@@ -1271,7 +1271,7 @@ Mesh
  Pos
 0 0 0
  Rot
-0 0 0 1
+0 5.96046e-08 0 1
  Scale
 1 1 1
  Visible
@@ -1328,7 +1328,7 @@ FireSprite
  Pos
 0 0 0
  Rot
--0.0402149 0.913971 0.392791 0.0935746
+-0.287476 0.68927 0.350664 0.565066
  Scale
 1 1 1
  Visible
