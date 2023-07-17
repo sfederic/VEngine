@@ -15,8 +15,39 @@ DirectionalLightActor0
 UID
 1798475379
 next
-Explodable
+EntranceTrigger
 1
+ Enabled
+1
+ Position
+4 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+mines_oil_barrel_trail.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+2998797383
+Unlock Audio
+
+next
+Explodable
+4
  Enabled
 1
  Position
@@ -53,16 +84,173 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 Explodable0
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
 1775663632
+next
+ Enabled
+1
+ Position
+4 1 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+0
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+0
+Link Rotation
+0
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+Explodable1
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+3278586678
+next
+ Enabled
+1
+ Position
+3 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+0
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+0
+Link Rotation
+0
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+Explodable2
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+1308281731
+next
+ Enabled
+1
+ Position
+4 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+0
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+0
+Link Rotation
+0
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+Explodable3
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+2116045881
 next
 Explosive
 1
@@ -102,12 +290,16 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 Explosive0
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
@@ -139,7 +331,7 @@ GridActor
  Enabled
 1
  Position
-4 0 2
+2 0 2
  Rotation
 -0 0 -0 1
  Scale
@@ -172,12 +364,16 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 GridActor0
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
@@ -277,6 +473,27 @@ Player0
 UID
 880017544
 next
+BoxTriggerComponent
+1
+2998797383
+Trigger
+ Enabled
+1
+ Pos
+4 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+2062957534
+next
 CameraComponent
 1
 880017544
@@ -300,8 +517,23 @@ Near Z
 UID
 3392675740
 next
+ConditionComponent
+1
+2998797383
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+605235523
+next
 DialogueComponent
-4
+7
 1775663632
 Dialogue
  Enabled
@@ -312,6 +544,39 @@ File
 
 UID
 2836751394
+next
+3278586678
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+3349057532
+next
+1308281731
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+3844268216
+next
+2116045881
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+907874908
 next
 2362044779
 Dialogue
@@ -400,6 +665,8 @@ NodeMesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -440,7 +707,7 @@ UID
 456326071
 next
 MeshComponent
-9
+12
 1775663632
 Mesh
  Enabled
@@ -455,6 +722,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -474,7 +743,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -494,12 +763,12 @@ Trans. Occlude
 UID
 1841459226
 next
-2362044779
+3278586678
 Mesh
  Enabled
 1
  Pos
-0 2 4
+4 1 4
  Rot
 -0 0 -0 1
  Scale
@@ -508,6 +777,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -527,7 +798,172 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+bevel_rock2.vmesh
+Static
 1
+Trans. Occlude
+0
+UID
+380867268
+next
+1308281731
+Mesh
+ Enabled
+1
+ Pos
+3 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+bevel_rock2.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3835678771
+next
+2116045881
+Mesh
+ Enabled
+1
+ Pos
+4 0 3
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+bevel_rock2.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3526583095
+next
+2362044779
+Mesh
+ Enabled
+1
+ Pos
+0 2 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -552,7 +988,7 @@ Mesh
  Enabled
 1
  Pos
-4 0 2
+2 0 2
  Rot
 -0 0 -0 1
  Scale
@@ -561,6 +997,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -580,7 +1018,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -614,6 +1052,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -633,7 +1073,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -667,6 +1107,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -686,7 +1128,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -720,6 +1162,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -739,7 +1183,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -773,6 +1217,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -792,7 +1238,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -826,6 +1272,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -845,7 +1293,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -879,6 +1327,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -898,7 +1348,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
