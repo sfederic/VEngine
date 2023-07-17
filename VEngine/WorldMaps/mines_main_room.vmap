@@ -85,7 +85,7 @@ EntranceTrigger
 Entrance Active
 1
 Level Name
-mine_tnt_ledge_drop.vmap
+mines_tnt_ledge_drop.vmap
 Locked Text
 Locked
 Name
@@ -202,9 +202,9 @@ Player
  Enabled
 1
  Position
-4 0 1
+0 0 4
  Rotation
--0 0 -0 1
+0 -0.707107 0 0.707107
  Scale
 1 1 1
  Visible
@@ -389,9 +389,9 @@ Root
  Enabled
 1
  Pos
-4 0 1
+0 0 4
  Rot
--0 0 -0 1
+0 -0.707107 0 0.707107
  Scale
 1 1 1
  Visible
@@ -575,7 +575,7 @@ Mesh
  Pos
 0 0 0
  Rot
-0 0 0 1
+0 -5.96046e-08 0 -1
  Scale
 1 1 1
  Visible
