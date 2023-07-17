@@ -28,7 +28,7 @@ public:
 	auto GetLevelToMoveTo() { return levelToMoveTo; }
 	auto GetEntranceTag() { return entranceTag; }
 
-private:
+protected:
 	BoxTriggerComponent* trigger = nullptr;
 	ConditionComponent* conditionComponent = nullptr;
 

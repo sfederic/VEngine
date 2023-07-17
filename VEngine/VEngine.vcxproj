@@ -318,6 +318,7 @@
     <ClCompile Include="Code\Actors\Game\LiftCrank.cpp" />
     <ClCompile Include="Code\Components\PersistentAudioComponent.cpp" />
     <ClCompile Include="Code\Actors\PersistentAudioActor.cpp" />
+    <ClCompile Include="Code\Actors\Game\EntranceInteractTrigger.cpp" />
     <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.h" />
     <ClInclude Include="Code\Actors\Game\ClockHand.h" />
     <ClInclude Include="Code\Actors\Game\LinkedObjects.h" />
@@ -665,6 +666,7 @@
     <ClInclude Include="Code\Actors\Game\LiftCrank.h" />
     <ClInclude Include="Code\Components\PersistentAudioComponent.h" />
     <ClInclude Include="Code\Actors\PersistentAudioActor.h" />
+    <ClInclude Include="Code\Actors\Game\EntranceInteractTrigger.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
