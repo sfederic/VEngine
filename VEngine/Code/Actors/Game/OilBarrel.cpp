@@ -9,7 +9,7 @@ void OilBarrel::Create()
 {
 	ignoreRotationValidCheck = true;
 
-	mesh->SetMeshFilename("barrel.vmesh");
+	mesh->SetMeshFilename("oil_barrel.vmesh");
 }
 
 void OilBarrel::Tick(float deltaTime)
