@@ -7,6 +7,13 @@
 #include "Explodable.h"
 #include "Physics/Raycast.h"
 
+Properties Explosive::GetProps()
+{
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	return props;
+}
+
 void Explosive::Burn()
 {
 	auto ambientColour = mesh->GetAmbientColour();
