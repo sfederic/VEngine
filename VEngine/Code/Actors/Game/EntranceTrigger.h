@@ -1,15 +1,34 @@
 #pragma once
+
 #include "../Actor.h"
 #include "../ActorSystem.h"
 
-struct BoxTriggerComponent;
+class BoxTriggerComponent;
 struct ConditionComponent;
 struct InteractWidget;
 
-struct EntranceTrigger : Actor
+class EntranceTrigger : public Actor
 {
+public:
 	ACTOR_SYSTEM(EntranceTrigger)
 
+	EntranceTrigger();
+	virtual void Start() override;
+	virtual void Tick(float deltaTime) override;
+	virtual Properties GetProps() override;
+
+	void Activate() override { UnlockEntrance(); }
+	void Deactivate() override { LockEntrance(); }
+
+	bool CheckIfWorldExists(std::string& worldName);
+
+	void UnlockEntrance();
+	void LockEntrance();
+
+	auto GetLevelToMoveTo() { return levelToMoveTo; }
+	auto GetEntranceTag() { return entranceTag; }
+
+private:
 	BoxTriggerComponent* trigger = nullptr;
 	ConditionComponent* conditionComponent = nullptr;
 
@@ -34,17 +53,4 @@ struct EntranceTrigger : Actor
 
 	//Whether the player has used the entrance to move between worlds.
 	bool entranceInteractedWith = false;
-
-	EntranceTrigger();
-	virtual void Start() override;
-	virtual void Tick(float deltaTime) override;
-	virtual Properties GetProps() override;
-
-	void Activate() override { UnlockEntrance(); }
-	void Deactivate() override { LockEntrance(); }
-
-	bool CheckIfWorldExists(std::string& worldName);
-
-	void UnlockEntrance();
-	void LockEntrance();
 };

@@ -389,7 +389,7 @@ void MovePlayerToEntranceTriggerFromPreviousWorldFilename()
 
 	for (auto& entranceTrigger : EntranceTrigger::system.GetActors())
 	{
-		if (entranceTrigger->levelToMoveTo == previousWorldMovedFromFilename)
+		if (entranceTrigger->GetLevelToMoveTo() == previousWorldMovedFromFilename)
 		{
 			possibleEntrancesToMoveTo.push_back(entranceTrigger.get());
 		}
@@ -415,7 +415,7 @@ void MovePlayerToEntranceTriggerFromPreviousWorldFilename()
 	//Deal with multiple entrances. Differentiate by tag.
 	for (auto entranceTrigger : possibleEntrancesToMoveTo)
 	{
-		if (entranceTrigger->entranceTag == entranceTriggerTag)
+		if (entranceTrigger->GetEntranceTag() == entranceTriggerTag)
 		{
 			MoveToEntrance(entranceTrigger);
 			UISystem::screenFadeWidget->AddToViewport();

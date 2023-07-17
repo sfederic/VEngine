@@ -432,7 +432,7 @@ void LoadWorldOnEntranceTriggerClick(Actor* pickedActor)
 		auto entranceTrigger = dynamic_cast<EntranceTrigger*>(pickedActor);
 		if (entranceTrigger)
 		{
-			FileSystem::LoadWorld(entranceTrigger->levelToMoveTo);
+			FileSystem::LoadWorld(entranceTrigger->GetLevelToMoveTo());
 		}
 	}
 }
