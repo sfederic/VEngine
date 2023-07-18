@@ -130,7 +130,7 @@ void MeshComponent::Destroy()
 static void ReassignMesh(void* data)
 {
 	auto meshData = (MeshComponentData*)data;
-	meshData->meshComponent->Create();
+	meshData->meshComponent->ReCreate();
 }
 
 Properties MeshComponent::GetProps()
