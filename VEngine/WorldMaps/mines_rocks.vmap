@@ -15,6 +15,66 @@ DirectionalLightActor0
 UID
 2804688616
 next
+EntranceTrigger
+2
+ Enabled
+1
+ Position
+4 6 17
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+3726830678
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+2 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+
+Locked Text
+Locked
+Name
+EntranceTrigger1
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+4013995611
+Unlock Audio
+
+next
 Grid
 1
  Enabled
@@ -591,6 +651,46 @@ Player0
 UID
 1102344030
 next
+BoxTriggerComponent
+2
+3726830678
+Trigger
+ Enabled
+1
+ Pos
+4 6 17
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+1781259077
+next
+4013995611
+Trigger
+ Enabled
+1
+ Pos
+2 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+2995227757
+next
 CameraComponent
 1
 1102344030
@@ -613,6 +713,34 @@ Near Z
 0.01
 UID
 2728263625
+next
+ConditionComponent
+2
+3726830678
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+1044648056
+next
+4013995611
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+2691979857
 next
 DialogueComponent
 10
@@ -671,17 +799,6 @@ File
 UID
 1031972393
 next
-1102344030
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-900464511
-next
 4158024847
 Dialogue
  Enabled
@@ -725,6 +842,17 @@ File
 
 UID
 188638194
+next
+1102344030
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+900464511
 next
 DirectionalLightComponent
 1
@@ -1098,6 +1226,226 @@ Trans. Occlude
 UID
 214496646
 next
+4158024847
+Mesh
+ Enabled
+1
+ Pos
+1 3 12
+ Rot
+0 1 0 -0.000244163
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/stone_wall_indoor.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+rock2.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2354089535
+next
+3472035028
+Mesh
+ Enabled
+1
+ Pos
+4 3 14
+ Rot
+0.707229 0 0 0.706985
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/stone_wall_indoor.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+rock2.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+4087610877
+next
+2610772027
+Mesh
+ Enabled
+1
+ Pos
+2 3 14
+ Rot
+0 0 1 0.000299015
+ Scale
+0.999995 0.999995 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/stone_wall_indoor.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+rock2.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3047884327
+next
+2164988490
+Mesh
+ Enabled
+1
+ Pos
+0 3 11
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/stone_wall_indoor.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+rock2.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2595399829
+next
 3067499963
 Mesh
  Enabled
@@ -1318,61 +1666,6 @@ Trans. Occlude
 UID
 1563032933
 next
-2164988490
-Mesh
- Enabled
-1
- Pos
-0 3 11
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Floors/stone_wall_indoor.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-rock2.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2595399829
-next
 3244830995
 Mesh
  Enabled
@@ -1482,170 +1775,5 @@ Trans. Occlude
 0
 UID
 398776625
-next
-4158024847
-Mesh
- Enabled
-1
- Pos
-1 3 12
- Rot
-0 1 0 -0.000244163
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Floors/stone_wall_indoor.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-rock2.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2354089535
-next
-3472035028
-Mesh
- Enabled
-1
- Pos
-4 3 14
- Rot
-0.707229 0 0 0.706985
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Floors/stone_wall_indoor.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-rock2.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-4087610877
-next
-2610772027
-Mesh
- Enabled
-1
- Pos
-2 3 14
- Rot
-0 0 1 0.000299015
- Scale
-0.999995 0.999995 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Floors/stone_wall_indoor.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-rock2.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3047884327
 next
 end
