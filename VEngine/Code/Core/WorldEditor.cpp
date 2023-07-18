@@ -1,5 +1,6 @@
 #include "vpch.h"
 #include "WorldEditor.h"
+#include <QFileDialog>
 #include "Physics/Raycast.h"
 #include "Input.h"
 #include "Core/VMath.h"
@@ -51,6 +52,7 @@ void VertexPainting();
 void SetParentOnClick(Actor& hitActor);
 void MoveActorViaKeyboardInput();
 void LoadWorldOnEntranceTriggerClick(Actor* pickedActor);
+void QuickMeshChangeMenu();
 
 void WorldEditor::Tick()
 {
@@ -65,6 +67,8 @@ void WorldEditor::Tick()
 	DeleteActor();
 
 	MoveActorViaKeyboardInput();
+
+	QuickMeshChangeMenu();
 
 	SaveWorld();
 }
@@ -434,6 +438,38 @@ void LoadWorldOnEntranceTriggerClick(Actor* pickedActor)
 		{
 			FileSystem::LoadWorld(entranceTrigger->GetLevelToMoveTo());
 		}
+	}
+}
+
+void QuickMeshChangeMenu()
+{
+	if (Input::GetKeyHeld(Keys::Ctrl) && Input::GetKeyDown(Keys::M))
+	{
+		auto pickedActor = WorldEditor::GetPickedActor();
+		if (pickedActor != nullptr)
+		{
+			QFileDialog dialog;
+			dialog.setFileMode(QFileDialog::AnyFile);
+
+			const QString filePath = dialog.getOpenFileName(nullptr, "Set Mesh",
+				QString::fromStdString(AssetBaseFolders::mesh), nullptr, nullptr,
+				QFileDialog::Option::DontUseNativeDialog);
+			if (!filePath.isEmpty())
+			{
+				const std::string meshFilename =
+					VString::GetSubStringAtFoundOffset(filePath.toStdString(), AssetBaseFolders::mesh);
+
+				for (auto mesh : pickedActor->GetComponentsOfType<MeshComponent>())
+				{
+					mesh->SetMeshFilename(meshFilename);
+					mesh->ReCreate();
+					Log("[%s] mesh [%u] changed mesh filename to [%s].",
+						pickedActor->GetName().c_str(), mesh->GetUID(), meshFilename.c_str());
+				}
+			}
+		}
+
+		Input::ResetHeldKeys();
 	}
 }
 
