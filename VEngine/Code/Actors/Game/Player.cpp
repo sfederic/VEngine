@@ -570,7 +570,14 @@ bool Player::CheckAttackPositionAgainstUnitDirection(Unit* unit)
 
 void Player::LinkToGridActor()
 {
-	if (!isInputLinkedToGridActor && Input::GetKeyUp(Keys::Up)) //Raycast forward
+	if (isInputLinkedToGridActor || isInputLinkedToDowncastGridActor) //Cancel
+	{
+		if (Input::GetKeyUp(Keys::BackSpace))
+		{
+			ResetLinkedGridActor();
+		}
+	}
+	else if (!isInputLinkedToGridActor && Input::GetKeyUp(Keys::Up)) //Raycast forward
 	{
 		HitResult hit(this);
 		if (Raycast(hit, GetPositionV(), GetMeshForward(), 100.f))
@@ -603,14 +610,6 @@ void Player::LinkToGridActor()
 			{
 				SetLinkedGridActor(*gridActor);
 			}
-		}
-	}
-	else if (isInputLinkedToGridActor || isInputLinkedToDowncastGridActor) //Cancel
-	{
-		if (Input::GetKeyUp(Keys::BackSpace))
-		{
-			ResetLinkedGridActor();
-			return;
 		}
 	}
 }
