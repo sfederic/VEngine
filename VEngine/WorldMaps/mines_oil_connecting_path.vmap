@@ -174,7 +174,7 @@ UID
 2125739077
 next
 OilBarrel
-3
+4
  Enabled
 1
  Position
@@ -231,7 +231,7 @@ next
  Position
 0 0 7
  Rotation
-0.5 0.5 -0.5 0.5
+-1.54543e-08 0.707107 1.54543e-08 0.707107
  Scale
 0.999991 1 0.999991
  Visible
@@ -327,6 +327,57 @@ Rotate Yaw
 1
 UID
 2656961848
+next
+ Enabled
+1
+ Position
+3 0 7
+ Rotation
+-0.500122 0.499878 0.500122 0.499878
+ Scale
+0.999991 1 0.999992
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+OilBarrel3
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+3802566939
 next
 Player
 1
@@ -437,7 +488,7 @@ UID
 338546806
 next
 DialogueComponent
-4
+5
 1106902703
 Dialogue
  Enabled
@@ -449,7 +500,7 @@ File
 UID
 1604541716
 next
-292468325
+2747037242
 Dialogue
  Enabled
 1
@@ -458,7 +509,7 @@ Dialogue
 File
 
 UID
-2566950334
+836956066
 next
 2656961848
 Dialogue
@@ -471,7 +522,7 @@ File
 UID
 529409628
 next
-2747037242
+292468325
 Dialogue
  Enabled
 1
@@ -480,7 +531,18 @@ Dialogue
 File
 
 UID
-836956066
+2566950334
+next
+3802566939
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2163840326
 next
 DirectionalLightComponent
 1
@@ -578,7 +640,7 @@ UID
 3928401301
 next
 MeshComponent
-9
+10
 4041414666
 Mesh
  Enabled
@@ -909,16 +971,16 @@ Trans. Occlude
 UID
 3772663378
 next
-292468325
+2747037242
 Mesh
  Enabled
 1
  Pos
-0 0 0
+0 0 7
  Rot
-0 0 0 1
+-1.54543e-08 0.707107 1.54543e-08 0.707107
  Scale
-1 1 1
+0.999991 1 0.999991
  Visible
 1
 Casts Shadow
@@ -956,13 +1018,13 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-char.vmesh
+oil_barrel.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-4041521331
+1441230025
 next
 2656961848
 Mesh
@@ -1019,16 +1081,71 @@ Trans. Occlude
 UID
 129706764
 next
-2747037242
+292468325
 Mesh
  Enabled
 1
  Pos
-0 0 7
+0 0 0
  Rot
-0.5 0.5 -0.5 0.5
+0 0 0 1
  Scale
-0.999991 1 0.999991
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+4041521331
+next
+3802566939
+Mesh
+ Enabled
+1
+ Pos
+3 0 7
+ Rot
+-0.500122 0.499878 0.500122 0.499878
+ Scale
+0.999991 1 0.999992
  Visible
 1
 Casts Shadow
@@ -1072,6 +1189,6 @@ Static
 Trans. Occlude
 0
 UID
-1441230025
+1716886680
 next
 end
