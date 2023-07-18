@@ -53,6 +53,7 @@ void SetParentOnClick(Actor& hitActor);
 void MoveActorViaKeyboardInput();
 void LoadWorldOnEntranceTriggerClick(Actor* pickedActor);
 void QuickMeshChangeMenu();
+void QuickTextureChangeMenu();
 
 void WorldEditor::Tick()
 {
@@ -69,6 +70,7 @@ void WorldEditor::Tick()
 	MoveActorViaKeyboardInput();
 
 	QuickMeshChangeMenu();
+	QuickTextureChangeMenu();
 
 	SaveWorld();
 }
@@ -465,6 +467,36 @@ void QuickMeshChangeMenu()
 					mesh->ReCreate();
 					Log("[%s] mesh [%u] changed mesh filename to [%s].",
 						pickedActor->GetName().c_str(), mesh->GetUID(), meshFilename.c_str());
+				}
+			}
+		}
+
+		Input::ResetHeldKeys();
+	}
+}
+
+void QuickTextureChangeMenu()
+{
+	if (Input::GetKeyHeld(Keys::Ctrl) && Input::GetKeyDown(Keys::T))
+	{
+		auto pickedActor = WorldEditor::GetPickedActor();
+		if (pickedActor != nullptr)
+		{
+			QFileDialog dialog;
+			dialog.setFileMode(QFileDialog::AnyFile);
+
+			const QString filePath = dialog.getOpenFileName(nullptr, "Set Texture",
+				QString::fromStdString(AssetBaseFolders::texture), nullptr, nullptr);
+			if (!filePath.isEmpty())
+			{
+				const std::string textureFilename =
+					VString::GetSubStringAtFoundOffset(filePath.toStdString(), AssetBaseFolders::texture);
+
+				for (auto mesh : pickedActor->GetComponentsOfType<MeshComponent>())
+				{
+					mesh->SetTexture(textureFilename);
+					Log("[%s] mesh [%u] changed mesh texture to [%s].",
+						pickedActor->GetName().c_str(), mesh->GetUID(), textureFilename.c_str());
 				}
 			}
 		}
