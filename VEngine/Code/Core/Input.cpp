@@ -31,6 +31,11 @@ namespace Input
 		mouseMiddleUp = false;
 	}
 
+	void ResetHeldKeys()
+	{
+		currentHeldKeys.clear();
+	}
+
 	void SetKeyDown(Keys key)
 	{
 		currentDownKeys.insert(key);
