@@ -21,7 +21,7 @@ static VEnum rastStates;
 static VEnum blendStates;
 static VEnum shaderItemNames;
 
-void Material::SetupBlendAndRastStateValues()
+void Material::SetupBlendShaderItemsAndRastStateValues()
 {
 	rastStates.Add(RastStates::solid);
 	rastStates.Add(RastStates::noBackCull);
@@ -43,6 +43,7 @@ void Material::SetupBlendAndRastStateValues()
 	shaderItemNames.Add(ShaderItems::UI->GetName());
 	shaderItemNames.Add(ShaderItems::Unlit->GetName());
 	shaderItemNames.Add(ShaderItems::Water->GetName());
+	shaderItemNames.Add(ShaderItems::Floating->GetName());
 }
 
 Material::Material(std::string textureFilename_, ShaderItem* shaderItem)

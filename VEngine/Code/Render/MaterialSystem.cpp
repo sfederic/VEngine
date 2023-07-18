@@ -12,7 +12,7 @@ std::string MaterialSystem::selectedMaterialInEditor;
 
 void MaterialSystem::Init()
 {
-	Material::SetupBlendAndRastStateValues();
+	Material::SetupBlendShaderItemsAndRastStateValues();
 }
 
 Material* MaterialSystem::CreateMaterial(std::string textureFilename, ShaderItem* shaderItem)

@@ -18,6 +18,8 @@ private:
 	UID uid = 0;
 
 public:
+	static void SetupBlendShaderItemsAndRastStateValues();
+
 	Texture2D* texture = nullptr;
 	ShaderItem* shader = nullptr;
 	Sampler* sampler = nullptr;
@@ -47,6 +49,4 @@ public:
 
 	UID GetUID() { return uid; }
 	void SetUID(UID uid_) { uid = uid_; }
-
-	static void SetupBlendAndRastStateValues();
 };
