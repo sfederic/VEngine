@@ -1,14 +1,13 @@
 #include "vpch.h"
 #include "Rotator.h"
 #include "Core/Log.h"
-#include "Components/MeshComponent.h"
 #include "Grid.h"
 
 void Rotator::Create()
 {
 	canBeMovedInLink = false;
 
-	mesh->SetMeshFilename("ico_sphere.vmesh");
+	SetMeshFilename("ico_sphere.vmesh");
 }
 
 void Rotator::Start()

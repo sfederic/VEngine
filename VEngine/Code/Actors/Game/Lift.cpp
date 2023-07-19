@@ -1,7 +1,6 @@
 #include "vpch.h"
 #include "Lift.h"
 #include "Components/BoxTriggerComponent.h"
-#include "Components/MeshComponent.h"
 
 Lift::Lift()
 {
@@ -18,7 +17,7 @@ void Lift::Create()
 	liftTrigger->SetExtents(0.45f, 1.f, 0.45f);
 	liftTrigger->SetLocalPosition(0.f, 1.f, 0.f);
 
-	mesh->SetMeshFilename("node.vmesh");
+	SetMeshFilename("node.vmesh");
 }
 
 void Lift::Tick(float deltaTime)

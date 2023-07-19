@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "MineCrane.h"
-#include "Components/MeshComponent.h"
 #include "Components/BoxTriggerComponent.h"
 
 MineCrane::MineCrane()
@@ -14,7 +13,7 @@ void MineCrane::Create()
 	ignoreRotationValidCheck = true;
 	canBeRotatedPitchXAxis = false;
 
-	mesh->SetMeshFilename("crane.vmesh");
+	SetMeshFilename("crane.vmesh");
 
 	hookTrigger->SetLocalPosition(0.f, 0.f, 2.f);
 }

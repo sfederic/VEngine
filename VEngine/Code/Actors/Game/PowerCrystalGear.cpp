@@ -1,10 +1,9 @@
 #include "vpch.h"
 #include "PowerCrystalGear.h"
-#include "Components/MeshComponent.h"
 
 void PowerCrystalGear::Create()
 {
-	mesh->SetMeshFilename("gear.vmesh");
+	SetMeshFilename("gear.vmesh");
 }
 
 void PowerCrystalGear::PowerUp()

@@ -270,6 +270,11 @@ bool GridActor::CheckMovementAndRotationStopped()
 	return XMVector4Equal(GetPositionV(), nextPos) && XMQuaternionEqual(GetRotationV(), nextRot);
 }
 
+void GridActor::SetMeshFilename(std::string_view filename)
+{
+	mesh->SetMeshFilename(filename);
+}
+
 void GridActor::AddNextRotation(XMVECTOR axis, float angle)
 {
 	nextRot = VMath::AddRotationAngle(nextRot, axis, angle);

@@ -1,13 +1,13 @@
 #include "vpch.h"
 #include "Gear.h"
-#include "Components/MeshComponent.h"
 #include "GearSet.h"
+#include "Components/MeshComponent.h"
 
 void Gear::Create()
 {
 	ignoreRotationValidCheck = true;
 
-	mesh->SetMeshFilename("gear.vmesh");
+	SetMeshFilename("gear.vmesh");
 }
 
 void Gear::OnLinkRotate()

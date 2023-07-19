@@ -1,15 +1,15 @@
 #include "vpch.h"
 #include "OilBarrel.h"
-#include "Components/MeshComponent.h"
 #include "Core/VMath.h"
 #include "Physics/Raycast.h"
 #include "OilSlick.h"
+#include "Components/MeshComponent.h"
 
 void OilBarrel::Create()
 {
 	ignoreRotationValidCheck = true;
 
-	mesh->SetMeshFilename("oil_barrel.vmesh");
+	SetMeshFilename("oil_barrel.vmesh");
 }
 
 void OilBarrel::Tick(float deltaTime)

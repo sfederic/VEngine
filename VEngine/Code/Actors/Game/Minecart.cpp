@@ -1,13 +1,12 @@
 #include "vpch.h"
 #include "Minecart.h"
-#include "Components/MeshComponent.h"
 #include "Physics/Raycast.h"
 #include "MinecartTrack.h"
 #include "Core/VMath.h"
 
 void Minecart::Create()
 {
-	mesh->SetMeshFilename("minecart.vmesh");
+	SetMeshFilename("minecart.vmesh");
 }
 
 Properties Minecart::GetProps()

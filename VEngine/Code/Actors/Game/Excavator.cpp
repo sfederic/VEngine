@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "Excavator.h"
-#include "Components/MeshComponent.h"
 #include "Physics/Raycast.h"
 #include "Mineable.h"
 #include "Grid.h"
@@ -11,7 +10,7 @@ void Excavator::Create()
 	canBeRotatedPitchXAxis = false;
 	ignoreRotationValidCheck = true;
 
-	mesh->SetMeshFilename("excavator.vmesh");
+	SetMeshFilename("excavator.vmesh");
 }
 
 void Excavator::Interact()

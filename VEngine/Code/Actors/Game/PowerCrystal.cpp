@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "PowerCrystal.h"
-#include "Components/MeshComponent.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Components/Lights/PointLightComponent.h"
 
@@ -15,7 +14,7 @@ PowerCrystal::PowerCrystal()
 
 void PowerCrystal::Create()
 {
-	mesh->SetMeshFilename("crystal_light.vmesh");
+	SetMeshFilename("crystal_light.vmesh");
 
 	effectTrigger->SetExtents(2.f, 2.f, 2.f);
 }

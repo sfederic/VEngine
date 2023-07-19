@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "Nut.h"
-#include "Components/MeshComponent.h"
 #include "Physics/Raycast.h"
 #include "Bolt.h"
 
@@ -8,7 +7,7 @@ void Nut::Create()
 {
 	ignoreRotationValidCheck = true;
 
-	mesh->SetMeshFilename("nut.vmesh");
+	SetMeshFilename("nut.vmesh");
 }
 
 void Nut::OnLinkRotateLeft()

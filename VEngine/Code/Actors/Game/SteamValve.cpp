@@ -1,11 +1,10 @@
 #include "vpch.h"
 #include "SteamValve.h"
-#include "Components/MeshComponent.h"
 #include "Gameplay/GameUtils.h"
 
 void SteamValve::Create()
 {
-	mesh->SetMeshFilename("valve.vmesh");
+	SetMeshFilename("valve.vmesh");
 }
 
 void SteamValve::OnLinkRotate()

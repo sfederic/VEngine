@@ -1,13 +1,12 @@
 #include "vpch.h"
 #include "Drill.h"
 #include "Crushable.h"
-#include "Components/MeshComponent.h"
 #include "Physics/Raycast.h"
 #include "Gameplay/GridNode.h"
 
 void Drill::Create()
 {
-	mesh->SetMeshFilename("drill.vmesh");
+	SetMeshFilename("drill.vmesh");
 }
 
 void Drill::OnLinkMove()

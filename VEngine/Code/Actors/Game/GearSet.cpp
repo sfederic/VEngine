@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "GearSet.h"
-#include "Components/MeshComponent.h"
 #include "Components/BoxTriggerComponent.h"
 #include "GearSetDoor.h"
 #include "Core/Log.h"
@@ -13,7 +12,7 @@ GearSet::GearSet()
 
 void GearSet::Create()
 {
-	mesh->SetMeshFilename("gear.vmesh");
+	SetMeshFilename("gear.vmesh");
 
 	canBeMovedInLink = false;
 }

@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "Canon.h"
-#include "Components/MeshComponent.h"
 #include "Physics/Raycast.h"
 #include "Gameplay/GameUtils.h"
 
@@ -9,7 +8,7 @@ void Canon::Create()
 	canBeRotatedPitchXAxis = false;
 	ignoreRotationValidCheck = true;
 
-	mesh->SetMeshFilename("turret.vmesh");
+	SetMeshFilename("turret.vmesh");
 }
 
 void Canon::Interact()

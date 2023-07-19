@@ -1,12 +1,11 @@
 #include "vpch.h"
 #include "LiftCrank.h"
 #include "Lift.h"
-#include "Components/MeshComponent.h"
 #include "Core/VMath.h"
 
 void LiftCrank::Create()
 {
-	mesh->SetMeshFilename("gear.vmesh");
+	SetMeshFilename("gear.vmesh");
 }
 
 void LiftCrank::Start()

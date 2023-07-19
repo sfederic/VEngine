@@ -1,12 +1,11 @@
 #include "vpch.h"
 #include "WaterValve.h"
 #include "Core/Log.h"
-#include "Components/MeshComponent.h"
 #include "WaterSource.h"
 
 void WaterValve::Create()
 {
-	mesh->SetMeshFilename("gear.vmesh");
+	SetMeshFilename("gear.vmesh");
 }
 
 Properties WaterValve::GetProps()

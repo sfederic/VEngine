@@ -126,6 +126,8 @@ public:
 	void SetNextRot(XMVECTOR rot) { nextRot = rot; }
 	void SetNextPos(XMVECTOR pos) { nextPos = pos; }
 
+	void SetMeshFilename(std::string_view filename);
+
 	void AddNextRotation(XMVECTOR axis, float angle);
 	void AddNextPosition(XMVECTOR offset);
 

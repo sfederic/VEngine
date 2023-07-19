@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "GearSetDoor.h"
-#include "Components/MeshComponent.h"
 
 void GearSetDoor::Create()
 {
@@ -8,5 +7,5 @@ void GearSetDoor::Create()
 	canBeMovedInLink = false;
 	canBeRotatedInLink = false;
 
-	mesh->SetMeshFilename("plane.vmesh");
+	SetMeshFilename("plane.vmesh");
 }
