@@ -7,6 +7,7 @@
 #include "Timer.h"
 #include "Log.h"
 #include "Asset/FBXLoader.h"
+#include "Asset/AssetSystem.h"
 #include "Actors/MeshActor.h"
 #include "Actors/Game/Player.h"
 #include "Actors/Game/Grid.h"
@@ -332,4 +333,5 @@ void World::Cleanup()
 	MaterialSystem::Cleanup();
 	SpriteSystem::Reset();
 	UISystem::Reset();
+	AssetSystem::ResetMeshData();
 }

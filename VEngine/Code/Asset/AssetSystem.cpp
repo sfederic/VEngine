@@ -28,6 +28,11 @@ std::map<std::string, MeshData> existingMeshData;
 
 static const std::string vertexColourDataFileExtension = ".vertexcolourdata";
 
+void AssetSystem::ResetMeshData()
+{
+	existingMeshData.clear();
+}
+
 //@Todo: do something when importing all, remove the existing meshdata to match the meshes currently in world.
 //That or make an offline process or a process when a file is added on a filewatcher's notice.
 void AssetSystem::BuildAllVMeshDataFromFBXImport()

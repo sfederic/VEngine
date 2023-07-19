@@ -5,6 +5,8 @@
 
 namespace AssetSystem
 {
+	void ResetMeshData();
+
 	void BuildAllVMeshDataFromFBXImport();
 	void BuildAllAnimationFilesFromFBXImport();
 
