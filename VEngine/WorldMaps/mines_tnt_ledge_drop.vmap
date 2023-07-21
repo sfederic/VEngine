@@ -16,7 +16,7 @@ UID
 1798475379
 next
 EntranceTrigger
-1
+2
  Enabled
 1
  Position
@@ -30,7 +30,7 @@ EntranceTrigger
 Entrance Active
 1
 Level Name
-mines_oil_barrel_trail.vmap
+mines_oil_connecting_path.vmap
 Locked Text
 Locked
 Name
@@ -46,264 +46,34 @@ UID
 Unlock Audio
 
 next
-Explodable
-4
  Enabled
 1
  Position
-4 0 4
+4 0 0
  Rotation
 -0 0 -0 1
  Scale
 1 1 1
  Visible
 1
-Can Fall
-0
-Destruct
+Entrance Active
 1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-1
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-0
-Link Rotation
-0
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
+Level Name
+mines_main_room.vmap
+Locked Text
+Locked
 Name
-Explodable0
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
+EntranceTrigger1
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
 UID
-1775663632
-next
- Enabled
-1
- Position
-4 1 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Can Fall
-0
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-1
-Interact
-1
-Interact Text
+1006719078
+Unlock Audio
 
-InteractKnownText
-
-Link Movement
-0
-Link Rotation
-0
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-Explodable1
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-3278586678
-next
- Enabled
-1
- Position
-3 0 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Can Fall
-0
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-1
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-0
-Link Rotation
-0
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-Explodable2
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-1308281731
-next
- Enabled
-1
- Position
-4 0 3
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Can Fall
-0
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-1
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-0
-Link Rotation
-0
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-Explodable3
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-2116045881
-next
-Explosive
-1
- Enabled
-1
- Position
-0 2 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-1
-Interact
-1
-Interact Text
-Ignite
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-Explosive0
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-2362044779
 next
 Grid
 1
@@ -331,7 +101,7 @@ GridActor
  Enabled
 1
  Position
-2 0 2
+0 0 1
  Rotation
 -0 0 -0 1
  Scale
@@ -392,7 +162,7 @@ MeshActor
  Visible
 1
 Name
-node0
+cube0
 UID
 505675185
 next
@@ -407,7 +177,7 @@ next
  Visible
 1
 Name
-stairs_wooden1
+cube1
 UID
 501383475
 next
@@ -422,7 +192,7 @@ next
  Visible
 1
 Name
-stairs2
+cube2
 UID
 2975009965
 next
@@ -461,9 +231,9 @@ Player
  Enabled
 1
  Position
-4 0 0
+4 0 4
  Rotation
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -474,7 +244,7 @@ UID
 880017544
 next
 BoxTriggerComponent
-1
+2
 2998797383
 Trigger
  Enabled
@@ -493,6 +263,25 @@ Offset
 0 0 0
 UID
 2062957534
+next
+1006719078
+Trigger
+ Enabled
+1
+ Pos
+4 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+2043861952
 next
 CameraComponent
 1
@@ -518,7 +307,7 @@ UID
 3392675740
 next
 ConditionComponent
-1
+2
 2998797383
 Condition
  Enabled
@@ -532,9 +321,22 @@ Condition Arg
 UID
 605235523
 next
+1006719078
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+2118317118
+next
 DialogueComponent
-7
-1775663632
+2
+880017544
 Dialogue
  Enabled
 1
@@ -543,51 +345,7 @@ Dialogue
 File
 
 UID
-2836751394
-next
-3278586678
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-3349057532
-next
-1308281731
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-3844268216
-next
-2116045881
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-907874908
-next
-2362044779
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-4257547593
+743016092
 next
 1152534921
 Dialogue
@@ -599,17 +357,6 @@ File
 
 UID
 4083275446
-next
-880017544
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-743016092
 next
 DirectionalLightComponent
 1
@@ -639,9 +386,9 @@ Root
  Enabled
 1
  Pos
-4 0 0
+4 0 4
  Rot
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -707,15 +454,15 @@ UID
 456326071
 next
 MeshComponent
-12
-1775663632
+7
+880017544
 Mesh
  Enabled
 1
  Pos
-4 0 4
+0 0 0
  Rot
--0 0 -0 1
+-0 0 0 1
  Scale
 1 1 1
  Visible
@@ -755,24 +502,24 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-bevel_rock2.vmesh
+char.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-1841459226
+1991319547
 next
-3278586678
+222809042
 Mesh
  Enabled
 1
  Pos
-4 1 4
+0 1.5 3.5
  Rot
 -0 0 -0 1
  Scale
-1 1 1
+2 1 2
  Visible
 1
 Casts Shadow
@@ -810,20 +557,20 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-bevel_rock2.vmesh
+node.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-380867268
+563415885
 next
-1308281731
+254119537
 Mesh
  Enabled
 1
  Pos
-3 0 4
+0 0 0
  Rot
 -0 0 -0 1
  Scale
@@ -865,22 +612,22 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-bevel_rock2.vmesh
+cube.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-3835678771
+2945467763
 next
-2116045881
+2975009965
 Mesh
  Enabled
 1
  Pos
-4 0 3
+0 1 2
  Rot
--0 0 -0 1
+-0 2.0067e-07 -0 1
  Scale
 1 1 1
  Visible
@@ -920,22 +667,22 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-bevel_rock2.vmesh
+stairs_wooden.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-3526583095
+3993655921
 next
-2362044779
+501383475
 Mesh
  Enabled
 1
  Pos
-0 2 4
+1 0 0
  Rot
--0 0 -0 1
+-0 -0.707107 -0 0.707107
  Scale
 1 1 1
  Visible
@@ -975,20 +722,20 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-barrel.vmesh
+stairs_wooden.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-607051200
+2725412060
 next
 1152534921
 Mesh
  Enabled
 1
  Pos
-2 0 2
+0 0 1
  Rot
 -0 0 -0 1
  Scale
@@ -1092,280 +839,5 @@ Trans. Occlude
 0
 UID
 2724176843
-next
-501383475
-Mesh
- Enabled
-1
- Pos
-1 0 0
- Rot
--0 -0.707107 -0 0.707107
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-0
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-stairs_wooden.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2725412060
-next
-2975009965
-Mesh
- Enabled
-1
- Pos
-0 1 2
- Rot
--0 2.0067e-07 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-0
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-stairs_wooden.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3993655921
-next
-254119537
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-0
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2945467763
-next
-222809042
-Mesh
- Enabled
-1
- Pos
-0 1.5 3.5
- Rot
--0 0 -0 1
- Scale
-2 1 2
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-0
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-563415885
-next
-880017544
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-0
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-char.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1991319547
 next
 end

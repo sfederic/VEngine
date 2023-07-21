@@ -1,56 +1,3 @@
-CrystalPickup
-1
- Enabled
-1
- Position
-2 0 2
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-1
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-CrystalPickup0
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-1751872931
-next
 EntranceTrigger
 2
  Enabled
@@ -145,7 +92,7 @@ MeshActor
  Visible
 1
 Name
-floor1
+cube0
 UID
 1575578496
 next
@@ -160,7 +107,7 @@ next
  Visible
 1
 Name
-crystal_wall1
+cube1
 UID
 3226332494
 next
@@ -175,7 +122,7 @@ next
  Visible
 1
 Name
-crystal_wall2
+cube2
 UID
 2536870041
 next
@@ -190,7 +137,7 @@ next
  Visible
 1
 Name
-crystal_wall3
+cube3
 UID
 4017346367
 next
@@ -205,7 +152,7 @@ next
  Visible
 1
 Name
-MeshActor4
+cube4
 UID
 4117174568
 next
@@ -220,7 +167,7 @@ next
  Visible
 1
 Name
-MeshActor5
+cube5
 UID
 1631053692
 next
@@ -229,9 +176,9 @@ Player
  Enabled
 1
  Position
-1 0 0
+2 0 4
  Rotation
--0 0 -0 1
+0 0.707107 0 -0.707107
  Scale
 1 1 1
  Visible
@@ -350,18 +297,7 @@ UID
 3675665944
 next
 DialogueComponent
-2
-1751872931
-Dialogue
- Enabled
 1
- Visible
-1
-File
-
-UID
-3948083023
-next
 3956941
 Dialogue
  Enabled
@@ -380,9 +316,9 @@ Root
  Enabled
 1
  Pos
-1 0 0
+2 0 4
  Rot
--0 0 -0 1
+0 0.707107 0 -0.707107
  Scale
 1 1 1
  Visible
@@ -448,15 +384,15 @@ UID
 2840205939
 next
 MeshComponent
-8
-1751872931
+7
+3956941
 Mesh
  Enabled
 1
  Pos
-2 0 2
+0 0 0
  Rot
--0 0 -0 1
+0 -0.707107 0 -0.707107
  Scale
 1 1 1
  Visible
@@ -496,13 +432,13 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-crystal.vmesh
+char.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-1259700410
+214271012
 next
 1575578496
 Mesh
@@ -833,61 +769,6 @@ Trans. Occlude
 0
 UID
 2011622079
-next
-3956941
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-char.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-214271012
 next
 PointLightComponent
 1

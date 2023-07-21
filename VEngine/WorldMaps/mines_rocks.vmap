@@ -30,7 +30,7 @@ EntranceTrigger
 Entrance Active
 1
 Level Name
-
+mines_rotation_rock_stack.vmap
 Locked Text
 Locked
 Name
@@ -59,9 +59,9 @@ next
 Entrance Active
 1
 Level Name
-
+mines_rock_stack.vmap
 Locked Text
-Locked
+
 Name
 EntranceTrigger1
 Open Audio
@@ -92,7 +92,7 @@ Grid0
 Size X
 5
 Size Y
-17
+20
 UID
 3351852683
 next
@@ -101,7 +101,7 @@ GridActor
  Enabled
 1
  Position
-1 0 8
+2 0 9
  Rotation
 0 0 0 1
  Scale
@@ -152,7 +152,7 @@ next
  Enabled
 1
  Position
-0 0 6
+2 1 9
  Rotation
 0.707229 0 0 0.706985
  Scale
@@ -203,9 +203,9 @@ next
  Enabled
 1
  Position
-3 0 6
+3 0 9
  Rotation
--0.707107 0 -0 0.707107
+0.5 0.5 0.5 -0.5
  Scale
 1 0.999999 0.999999
  Visible
@@ -356,7 +356,7 @@ next
  Enabled
 1
  Position
-1 3 12
+4 4 14
  Rotation
 0 1 0 -0.000244163
  Scale
@@ -458,7 +458,7 @@ next
  Enabled
 1
  Position
-2 3 14
+3 3 14
  Rotation
 0 0 1 0.000299015
  Scale
@@ -570,7 +570,7 @@ MeshActor
  Visible
 1
 Name
-node0
+cube0
 UID
 3067499963
 next
@@ -585,7 +585,7 @@ next
  Visible
 1
 Name
-MeshActor1
+cube1
 UID
 3750453930
 next
@@ -600,7 +600,7 @@ next
  Visible
 1
 Name
-MeshActor2
+cube2
 UID
 543254348
 next
@@ -630,7 +630,7 @@ next
  Visible
 1
 Name
-cube5
+cube4
 UID
 3244830995
 next
@@ -639,9 +639,9 @@ Player
  Enabled
 1
  Position
-2 0 1
+4 6 17
  Rotation
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -882,9 +882,9 @@ Root
  Enabled
 1
  Pos
-2 0 1
+4 6 17
  Rot
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -956,7 +956,7 @@ Mesh
  Enabled
 1
  Pos
-1 0 8
+2 0 9
  Rot
 0 0 0 1
  Scale
@@ -1011,7 +1011,7 @@ Mesh
  Enabled
 1
  Pos
-0 0 6
+2 1 9
  Rot
 0.707229 0 0 0.706985
  Scale
@@ -1066,9 +1066,9 @@ Mesh
  Enabled
 1
  Pos
-3 0 6
+3 0 9
  Rot
--0.707107 0 -0 0.707107
+0.5 0.5 0.5 -0.5
  Scale
 1 0.999999 0.999999
  Visible
@@ -1231,7 +1231,7 @@ Mesh
  Enabled
 1
  Pos
-1 3 12
+4 4 14
  Rot
 0 1 0 -0.000244163
  Scale
@@ -1341,7 +1341,7 @@ Mesh
  Enabled
 1
  Pos
-2 3 14
+3 3 14
  Rot
 0 0 1 0.000299015
  Scale

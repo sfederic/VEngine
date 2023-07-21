@@ -34,6 +34,66 @@ DirectionalLightActor0
 UID
 1020646698
 next
+EntranceTrigger
+2
+ Enabled
+1
+ Position
+4 1 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+mines_rocks.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+3522257636
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+5 2 13
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+mines_crushable_rocks.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger1
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+588921914
+Unlock Audio
+
+next
 Grid
 1
  Enabled
@@ -62,7 +122,7 @@ GridActor
  Position
 2 0 7
  Rotation
-0.499953 -0.499608 -0.500051 0.500388
+0.500051 -0.500388 0.499953 -0.499608
  Scale
 0.999979 0.999979 0.999946
  Visible
@@ -113,7 +173,7 @@ next
  Position
 5 1 7
  Rotation
-1 -1.7951e-06 0.000170716 -0.0004158
+0.500292 -0.499951 -0.499706 0.500051
  Scale
 0.999989 1.00002 1
  Visible
@@ -162,11 +222,11 @@ next
  Enabled
 1
  Position
-5 0 4
+5 0 5
  Rotation
-0.500128 0.500278 0.499877 0.499717
+0.500128 0.500276 0.499877 0.499717
  Scale
-0.999954 0.999991 0.999928
+0.999951 0.999988 0.999924
  Visible
 1
 Can Fall
@@ -223,7 +283,7 @@ MeshActor
  Visible
 1
 Name
-node0
+cube0
 UID
 2660736969
 next
@@ -238,7 +298,7 @@ next
  Visible
 1
 Name
-node1
+cube1
 UID
 3609497912
 next
@@ -253,7 +313,7 @@ next
  Visible
 1
 Name
-node2
+cube2
 UID
 3723306443
 next
@@ -268,7 +328,7 @@ next
  Visible
 1
 Name
-node3
+cube3
 UID
 1864045415
 next
@@ -283,7 +343,7 @@ next
  Visible
 1
 Name
-node4
+cube4
 UID
 1302542097
 next
@@ -298,7 +358,7 @@ next
  Visible
 1
 Name
-node5
+cube5
 UID
 3165928858
 next
@@ -313,7 +373,7 @@ next
  Visible
 1
 Name
-node6
+cube6
 UID
 456881996
 next
@@ -322,7 +382,7 @@ Player
  Enabled
 1
  Position
-2 0 3
+5 2 13
  Rotation
 0 0.000172496 0 1
  Scale
@@ -333,6 +393,46 @@ Name
 Player0
 UID
 3694903621
+next
+BoxTriggerComponent
+2
+3522257636
+Trigger
+ Enabled
+1
+ Pos
+4 1 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+1522563053
+next
+588921914
+Trigger
+ Enabled
+1
+ Pos
+5 2 13
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+2714068493
 next
 CameraComponent
 1
@@ -356,6 +456,34 @@ Near Z
 0.01
 UID
 3103204386
+next
+ConditionComponent
+2
+3522257636
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+1764892838
+next
+588921914
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+2769519868
 next
 DialogueComponent
 4
@@ -446,7 +574,7 @@ Root
  Enabled
 1
  Pos
-2 0 3
+5 2 13
  Rot
 0 0.000172496 0 1
  Scale
@@ -522,7 +650,7 @@ Mesh
  Pos
 2 0 7
  Rot
-0.499953 -0.499608 -0.500051 0.500388
+0.500051 -0.500388 0.499953 -0.499608
  Scale
 0.999979 0.999979 0.999946
  Visible
@@ -534,7 +662,7 @@ Grid Ignore
 Grid Obst.
 0
 M_Ambient
-0.9 0.3 0.1 1
+1 1 1 1
 M_Blend State
 null
 M_Metallic
@@ -577,7 +705,7 @@ Mesh
  Pos
 5 1 7
  Rot
-1 -1.7951e-06 0.000170716 -0.0004158
+0.500292 -0.499951 -0.499706 0.500051
  Scale
 0.999989 1.00002 1
  Visible
@@ -630,11 +758,11 @@ Mesh
  Enabled
 1
  Pos
-5 0 4
+5 0 5
  Rot
-0.500128 0.500278 0.499877 0.499717
+0.500128 0.500276 0.499877 0.499717
  Scale
-0.999954 0.999991 0.999928
+0.999951 0.999988 0.999924
  Visible
 1
 Casts Shadow
@@ -1072,7 +1200,7 @@ Mesh
  Pos
 0 0 0
  Rot
-0 -1.60071e-10 0 1
+0 -0.707106 0 0.707107
  Scale
 1 1 1
  Visible

@@ -1,3 +1,22 @@
+DebugNoteActor
+1
+ Enabled
+1
+ Position
+-0 2 6
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DebugNoteActor0
+Note Text
+bring player focus here s they climb up and see exit
+UID
+1619342645
+next
 DirectionalLightActor
 1
  Enabled
@@ -16,7 +35,7 @@ UID
 1460844235
 next
 EntranceTrigger
-1
+2
  Enabled
 1
  Position
@@ -30,15 +49,48 @@ EntranceTrigger
 Entrance Active
 1
 Level Name
-
+mines_rocks.vmap
 Locked Text
 Locked
 Name
 EntranceTrigger0
+Open Audio
+door.wav
 Open Text
 Open
+Tag
+
 UID
 2895808069
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+1 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+mines_oil_barrel_trail.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger1
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+2855795103
 Unlock Audio
 
 next
@@ -68,7 +120,7 @@ GridActor
  Enabled
 1
  Position
-1 0 5
+4 0 4
  Rotation
 -0 -0.707107 -0 0.707107
  Scale
@@ -101,12 +153,16 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 GridActor0
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
@@ -148,12 +204,16 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 GridActor1
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
@@ -195,12 +255,16 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 GridActor2
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
@@ -242,12 +306,16 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 GridActor3
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
@@ -289,12 +357,16 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 GridActor4
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
@@ -303,7 +375,7 @@ next
  Enabled
 1
  Position
-1 0 6
+4 0 3
  Rotation
 -0 0 -0 1
  Scale
@@ -336,12 +408,16 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 GridActor5
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
@@ -350,7 +426,7 @@ next
  Enabled
 1
  Position
-0 0 4
+4 1 4
  Rotation
 -0 0 -0.706934 0.707279
  Scale
@@ -383,12 +459,16 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 GridActor6
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
@@ -407,7 +487,7 @@ MeshActor
  Visible
 1
 Name
-rock20
+cube0
 UID
 4261992511
 next
@@ -422,7 +502,7 @@ next
  Visible
 1
 Name
-rock21
+cube1
 UID
 2085334205
 next
@@ -437,7 +517,7 @@ next
  Visible
 1
 Name
-rock22
+cube2
 UID
 2748716401
 next
@@ -452,7 +532,7 @@ next
  Visible
 1
 Name
-rock23
+cube3
 UID
 1347363334
 next
@@ -461,9 +541,9 @@ Player
  Enabled
 1
  Position
-0 0 0
+6 2.55 3
  Rotation
-0 0 0 1
+0 0.707107 0 0.707106
  Scale
 1 1 1
  Visible
@@ -474,7 +554,7 @@ UID
 448937440
 next
 BoxTriggerComponent
-1
+2
 2895808069
 Trigger
  Enabled
@@ -493,6 +573,25 @@ Offset
 0 0 0
 UID
 42954532
+next
+2855795103
+Trigger
+ Enabled
+1
+ Pos
+1 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+3404433000
 next
 CameraComponent
 1
@@ -518,7 +617,7 @@ UID
 4282543119
 next
 ConditionComponent
-1
+2
 2895808069
 Condition
  Enabled
@@ -531,6 +630,19 @@ Condition Arg
 
 UID
 4256580006
+next
+2855795103
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+3543530911
 next
 DialogueComponent
 8
@@ -644,13 +756,28 @@ UID
 3913090167
 next
 EmptyComponent
-1
+2
 448937440
 Root
  Enabled
 1
  Pos
-0 0 0
+6 2.55 3
+ Rot
+0 0.707107 0 0.707106
+ Scale
+1 1 1
+ Visible
+1
+UID
+4068066731
+next
+1619342645
+Root
+ Enabled
+1
+ Pos
+-0 2 6
  Rot
 0 0 0 1
  Scale
@@ -658,7 +785,7 @@ Root
  Visible
 1
 UID
-4068066731
+858353329
 next
 InstanceMeshComponent
 1
@@ -724,7 +851,7 @@ Mesh
  Enabled
 1
  Pos
-1 0 5
+4 0 4
  Rot
 -0 -0.707107 -0 0.707107
  Scale
@@ -999,7 +1126,7 @@ Mesh
  Enabled
 1
  Pos
-1 0 6
+4 0 3
  Rot
 -0 0 -0 1
  Scale
@@ -1054,7 +1181,7 @@ Mesh
  Enabled
 1
  Pos
-0 0 4
+4 1 4
  Rot
 -0 0 -0.706934 0.707279
  Scale
@@ -1331,7 +1458,7 @@ Mesh
  Pos
 0 0 0
  Rot
-0 0 0 1
+0 -4.17233e-07 0 1
  Scale
 1 1 1
  Visible

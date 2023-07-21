@@ -71,7 +71,7 @@ UID
 1071073583
 next
 EntranceTrigger
-3
+4
  Enabled
 1
  Position
@@ -159,6 +159,35 @@ UID
 Unlock Audio
 
 next
+ Enabled
+1
+ Position
+-0 3 9
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+mines_crystal_tunnel.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger3
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+1409767613
+Unlock Audio
+
+next
 Grid
 1
  Enabled
@@ -181,7 +210,7 @@ UID
 2610304059
 next
 MeshActor
-1
+2
  Enabled
 1
  Position
@@ -196,6 +225,21 @@ Name
 node0
 UID
 3004593315
+next
+ Enabled
+1
+ Position
+1 1 9
+ Rotation
+-0 0 -0 1
+ Scale
+3 3 3
+ Visible
+1
+Name
+cube1
+UID
+4267671312
 next
 Player
 1
@@ -215,7 +259,7 @@ UID
 1296732458
 next
 BoxTriggerComponent
-3
+4
 3455457880
 Trigger
  Enabled
@@ -273,6 +317,25 @@ Offset
 UID
 159658010
 next
+1409767613
+Trigger
+ Enabled
+1
+ Pos
+-0 3 9
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+1892379644
+next
 CameraComponent
 1
 1296732458
@@ -297,7 +360,7 @@ UID
 4175290188
 next
 ConditionComponent
-3
+4
 3455457880
 Condition
  Enabled
@@ -336,6 +399,19 @@ Condition Arg
 
 UID
 2838482392
+next
+1409767613
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+1153214548
 next
 DialogueComponent
 2
@@ -457,7 +533,7 @@ UID
 3299562460
 next
 MeshComponent
-3
+4
 3835743231
 Mesh
  Enabled
@@ -622,5 +698,60 @@ Trans. Occlude
 0
 UID
 437470717
+next
+4267671312
+Mesh
+ Enabled
+1
+ Pos
+1 1 9
+ Rot
+-0 0 -0 1
+ Scale
+3 3 3
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+4239133497
 next
 end

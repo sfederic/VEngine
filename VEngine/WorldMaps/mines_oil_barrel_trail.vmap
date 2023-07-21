@@ -16,7 +16,7 @@ UID
 3040266162
 next
 EntranceTrigger
-1
+2
  Enabled
 1
  Position
@@ -46,8 +46,37 @@ UID
 Unlock Audio
 
 next
+ Enabled
+1
+ Position
+10 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+mines_rock_stack.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger1
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+2422798829
+Unlock Audio
+
+next
 Explodable
-3
+1
  Enabled
 1
  Position
@@ -99,163 +128,8 @@ Rotate Yaw
 UID
 631552549
 next
- Enabled
-1
- Position
-8 0 1
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-1
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-Explodable1
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-673008928
-next
- Enabled
-1
- Position
-8 0 0
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-1
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-Explodable2
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-3286872189
-next
-Explosive
-1
- Enabled
-1
- Position
-7 0 0
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-1
-Interact
-1
-Interact Text
-Ignite
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-Explosive0
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-2357970069
-next
 FireSource
-1
+8
  Enabled
 1
  Position
@@ -307,6 +181,363 @@ Rotate Yaw
 UID
 670558025
 next
+ Enabled
+1
+ Position
+2 -0.44 3
+ Rotation
+-0 0.489984 -0 0.871732
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+FireSource1
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+3365139771
+next
+ Enabled
+1
+ Position
+3 -0.45 3
+ Rotation
+0 0.992042 0 -0.125904
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+FireSource2
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+666824366
+next
+ Enabled
+1
+ Position
+4 -0.45 3
+ Rotation
+-0 -0.678191 -0 0.734886
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+FireSource3
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+1774874937
+next
+ Enabled
+1
+ Position
+5 -0.45 3
+ Rotation
+0 0.933561 0 0.358419
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+FireSource4
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+467991561
+next
+ Enabled
+1
+ Position
+5 -0.45 2
+ Rotation
+-0 -0.542372 -0 0.840139
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+FireSource5
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+3776356977
+next
+ Enabled
+1
+ Position
+5 -0.45 1
+ Rotation
+0 0.999964 0 0.0084669
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+FireSource6
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+3372710283
+next
+ Enabled
+1
+ Position
+6 -0.45 1
+ Rotation
+-0 -0.101405 -0 0.994845
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+FireSource7
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+128409375
+next
 Grid
 1
  Enabled
@@ -341,7 +572,7 @@ MeshActor
  Visible
 1
 Name
-node0
+cube0
 UID
 1691965725
 next
@@ -356,7 +587,7 @@ next
  Visible
 1
 Name
-MeshActor1
+cube1
 UID
 3423758591
 next
@@ -371,7 +602,7 @@ next
  Visible
 1
 Name
-MeshActor2
+cube2
 UID
 4115742298
 next
@@ -386,7 +617,7 @@ next
  Visible
 1
 Name
-MeshActor3
+cube3
 UID
 4020497473
 next
@@ -395,9 +626,9 @@ OilBarrel
  Enabled
 1
  Position
-7 0 3
+6 0 0
  Rotation
--0 0 -0 1
+0.707107 0 -4.21469e-08 0.707107
  Scale
 1 1 1
  Visible
@@ -443,14 +674,373 @@ Rotate Yaw
 UID
 1695474413
 next
+OilSlick
+7
+ Enabled
+1
+ Position
+2 -0.44 3
+ Rotation
+0 0.489984 0 0.871732
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+0
+DisableGridInteract
+1
+Health
+1
+Ignore Rotate Check
+1
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+0
+Link Rotation
+0
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+OilSlick0
+Obstacle
+1
+Rotate Pitch
+0
+Rotate Speed
+12
+Rotate Yaw
+0
+UID
+3456985568
+next
+ Enabled
+1
+ Position
+3 -0.45 3
+ Rotation
+0 0.992042 0 -0.125904
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+0
+DisableGridInteract
+1
+Health
+1
+Ignore Rotate Check
+1
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+0
+Link Rotation
+0
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+OilSlick1
+Obstacle
+1
+Rotate Pitch
+0
+Rotate Speed
+12
+Rotate Yaw
+0
+UID
+105946578
+next
+ Enabled
+1
+ Position
+4 -0.45 3
+ Rotation
+0 0.678191 0 -0.734886
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+0
+DisableGridInteract
+1
+Health
+1
+Ignore Rotate Check
+1
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+0
+Link Rotation
+0
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+OilSlick2
+Obstacle
+1
+Rotate Pitch
+0
+Rotate Speed
+12
+Rotate Yaw
+0
+UID
+870686367
+next
+ Enabled
+1
+ Position
+5 -0.45 3
+ Rotation
+0 0.933561 0 0.358419
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+0
+DisableGridInteract
+1
+Health
+1
+Ignore Rotate Check
+1
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+0
+Link Rotation
+0
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+OilSlick3
+Obstacle
+1
+Rotate Pitch
+0
+Rotate Speed
+12
+Rotate Yaw
+0
+UID
+855863630
+next
+ Enabled
+1
+ Position
+5 -0.45 2
+ Rotation
+0 0.542372 0 -0.840139
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+0
+DisableGridInteract
+1
+Health
+1
+Ignore Rotate Check
+1
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+0
+Link Rotation
+0
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+OilSlick4
+Obstacle
+1
+Rotate Pitch
+0
+Rotate Speed
+12
+Rotate Yaw
+0
+UID
+2114941770
+next
+ Enabled
+1
+ Position
+5 -0.45 1
+ Rotation
+0 0.999964 0 0.0084669
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+0
+DisableGridInteract
+1
+Health
+1
+Ignore Rotate Check
+1
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+0
+Link Rotation
+0
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+OilSlick5
+Obstacle
+1
+Rotate Pitch
+0
+Rotate Speed
+12
+Rotate Yaw
+0
+UID
+180392886
+next
+ Enabled
+1
+ Position
+6 -0.45 1
+ Rotation
+0 0.101405 0 -0.994845
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+0
+DisableGridInteract
+1
+Health
+1
+Ignore Rotate Check
+1
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+0
+Link Rotation
+0
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+OilSlick6
+Obstacle
+1
+Rotate Pitch
+0
+Rotate Speed
+12
+Rotate Yaw
+0
+UID
+3832629078
+next
 Player
 1
  Enabled
 1
  Position
-4 0 0
+10 0 1
  Rotation
-0 1 0 -5.96046e-08
+0 -0.707106 0 0.707106
  Scale
 1 1 1
  Visible
@@ -461,7 +1051,7 @@ UID
 1761442899
 next
 BoxTriggerComponent
-2
+10
 4190051002
 Trigger
  Enabled
@@ -481,6 +1071,25 @@ Offset
 UID
 1678256582
 next
+2422798829
+Trigger
+ Enabled
+1
+ Pos
+10 0 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+704038842
+next
 670558025
 FireTrigger
  Enabled
@@ -499,6 +1108,139 @@ Offset
 0 0 0
 UID
 426345095
+next
+3365139771
+FireTrigger
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+1 1 1
+Offset
+0 0 0
+UID
+3601119319
+next
+666824366
+FireTrigger
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+1 1 1
+Offset
+0 0 0
+UID
+1467512809
+next
+1774874937
+FireTrigger
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+1 1 1
+Offset
+0 0 0
+UID
+1928945898
+next
+467991561
+FireTrigger
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+1 1 1
+Offset
+0 0 0
+UID
+664541955
+next
+3776356977
+FireTrigger
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+1 1 1
+Offset
+0 0 0
+UID
+3672767649
+next
+3372710283
+FireTrigger
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+1 1 1
+Offset
+0 0 0
+UID
+1695938772
+next
+128409375
+FireTrigger
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+1 1 1
+Offset
+0 0 0
+UID
+4002045904
 next
 CameraComponent
 1
@@ -524,7 +1266,7 @@ UID
 3997685982
 next
 ConditionComponent
-1
+2
 4190051002
 Condition
  Enabled
@@ -538,8 +1280,21 @@ Condition Arg
 UID
 2478344667
 next
+2422798829
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+1680375238
+next
 DialogueComponent
-7
+18
 631552549
 Dialogue
  Enabled
@@ -551,7 +1306,7 @@ File
 UID
 1764212310
 next
-673008928
+128409375
 Dialogue
  Enabled
 1
@@ -560,9 +1315,9 @@ Dialogue
 File
 
 UID
-858534863
+169958046
 next
-3286872189
+3832629078
 Dialogue
  Enabled
 1
@@ -571,9 +1326,9 @@ Dialogue
 File
 
 UID
-4204190750
+20426284
 next
-2357970069
+3372710283
 Dialogue
  Enabled
 1
@@ -582,7 +1337,7 @@ Dialogue
 File
 
 UID
-2903267090
+1844026713
 next
 670558025
 Dialogue
@@ -617,6 +1372,127 @@ File
 UID
 2231719757
 next
+3456985568
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+312988207
+next
+3365139771
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+859988034
+next
+105946578
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+3532927544
+next
+666824366
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2252206764
+next
+870686367
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2479182728
+next
+1774874937
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1932900128
+next
+855863630
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1703677935
+next
+467991561
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+3987272828
+next
+2114941770
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+617368538
+next
+3776356977
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+50491225
+next
+180392886
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1050919926
+next
 DirectionalLightComponent
 1
 3040266162
@@ -645,9 +1521,9 @@ Root
  Enabled
 1
  Pos
-4 0 0
+10 0 1
  Rot
-0 1 0 -5.96046e-08
+0 -0.707106 0 0.707106
  Scale
 1 1 1
  Visible
@@ -713,7 +1589,7 @@ UID
 1486428625
 next
 MeshComponent
-11
+22
 631552549
 Mesh
  Enabled
@@ -769,22 +1645,22 @@ Trans. Occlude
 UID
 4079495752
 next
-673008928
+128409375
 Mesh
  Enabled
 1
  Pos
-8 0 1
+6 -0.45 1
  Rot
--0 0 -0 1
+-0 -0.101405 -0 0.994845
  Scale
 1 1 1
  Visible
-1
+0
 Casts Shadow
 1
 Grid Ignore
-0
+1
 Grid Obst.
 0
 M_Ambient
@@ -816,22 +1692,22 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-cube.vmesh
+node.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-801247278
+1639363018
 next
-3286872189
+3832629078
 Mesh
  Enabled
 1
  Pos
-8 0 0
+6 -0.45 1
  Rot
--0 0 -0 1
+0 0.101405 0 -0.994845
  Scale
 1 1 1
  Visible
@@ -840,6 +1716,61 @@ Casts Shadow
 1
 Grid Ignore
 0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+oil_slick.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2119586071
+next
+3372710283
+Mesh
+ Enabled
+1
+ Pos
+5 -0.45 1
+ Rot
+0 0.999964 0 0.0084669
+ Scale
+1 1 1
+ Visible
+0
+Casts Shadow
+1
+Grid Ignore
+1
 Grid Obst.
 0
 M_Ambient
@@ -871,68 +1802,13 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-cube.vmesh
+node.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-3296979504
-next
-2357970069
-Mesh
- Enabled
-1
- Pos
-7 0 0
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-hot_coals.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-barrel.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2883850352
+4432096
 next
 670558025
 Mesh
@@ -1214,9 +2090,9 @@ Mesh
  Enabled
 1
  Pos
-7 0 3
+6 0 0
  Rot
--0 0 -0 1
+0.707107 0 -4.21469e-08 0.707107
  Scale
 1 1 1
  Visible
@@ -1271,7 +2147,7 @@ Mesh
  Pos
 0 0 0
  Rot
-0 5.96046e-08 0 1
+0 1 0 -7.15256e-07
  Scale
 1 1 1
  Visible
@@ -1319,8 +2195,613 @@ Trans. Occlude
 UID
 2652304137
 next
-SpriteSheet
+3456985568
+Mesh
+ Enabled
 1
+ Pos
+2 -0.44 3
+ Rot
+0 0.489984 0 0.871732
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+oil_slick.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+4247099327
+next
+3365139771
+Mesh
+ Enabled
+1
+ Pos
+2 -0.44 3
+ Rot
+-0 0.489984 -0 0.871732
+ Scale
+1 1 1
+ Visible
+0
+Casts Shadow
+1
+Grid Ignore
+1
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1675772339
+next
+105946578
+Mesh
+ Enabled
+1
+ Pos
+3 -0.45 3
+ Rot
+0 0.992042 0 -0.125904
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+oil_slick.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2211381886
+next
+666824366
+Mesh
+ Enabled
+1
+ Pos
+3 -0.45 3
+ Rot
+0 0.992042 0 -0.125904
+ Scale
+1 1 1
+ Visible
+0
+Casts Shadow
+1
+Grid Ignore
+1
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3162700820
+next
+870686367
+Mesh
+ Enabled
+1
+ Pos
+4 -0.45 3
+ Rot
+0 0.678191 0 -0.734886
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+oil_slick.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2018979196
+next
+1774874937
+Mesh
+ Enabled
+1
+ Pos
+4 -0.45 3
+ Rot
+-0 -0.678191 -0 0.734886
+ Scale
+1 1 1
+ Visible
+0
+Casts Shadow
+1
+Grid Ignore
+1
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3364339939
+next
+855863630
+Mesh
+ Enabled
+1
+ Pos
+5 -0.45 3
+ Rot
+0 0.933561 0 0.358419
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+oil_slick.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2205880086
+next
+467991561
+Mesh
+ Enabled
+1
+ Pos
+5 -0.45 3
+ Rot
+0 0.933561 0 0.358419
+ Scale
+1 1 1
+ Visible
+0
+Casts Shadow
+1
+Grid Ignore
+1
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1056097964
+next
+2114941770
+Mesh
+ Enabled
+1
+ Pos
+5 -0.45 2
+ Rot
+0 0.542372 0 -0.840139
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+oil_slick.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+4199521759
+next
+3776356977
+Mesh
+ Enabled
+1
+ Pos
+5 -0.45 2
+ Rot
+-0 -0.542372 -0 0.840139
+ Scale
+1 1 1
+ Visible
+0
+Casts Shadow
+1
+Grid Ignore
+1
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1038308817
+next
+180392886
+Mesh
+ Enabled
+1
+ Pos
+5 -0.45 1
+ Rot
+0 0.999964 0 0.0084669
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+oil_slick.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1228616605
+next
+SpriteSheet
+8
 670558025
 FireSprite
  Enabled
@@ -1328,7 +2809,7 @@ FireSprite
  Pos
 0 0 0
  Rot
--0.287476 0.68927 0.350664 0.565066
+-0.0516551 0.712637 0.0527659 0.697636
  Scale
 1 1 1
  Visible
@@ -1345,5 +2826,180 @@ Texture
 Sprites/fire_sheet.png
 UID
 801660093
+next
+3365139771
+FireSprite
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+-0.0259475 0.279695 0.0968753 0.954836
+ Scale
+1 1 1
+ Visible
+1
+Animation Speed
+40
+Loop Animation
+1
+Sheet Columns
+4
+Sheet Rows
+4
+Texture
+Sprites/fire_sheet.png
+UID
+2081757682
+next
+666824366
+FireSprite
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0.0883707 -0.777783 0.066671 0.618708
+ Scale
+1 1 1
+ Visible
+1
+Animation Speed
+40
+Loop Animation
+1
+Sheet Columns
+4
+Sheet Rows
+4
+Texture
+Sprites/fire_sheet.png
+UID
+1410584021
+next
+1774874937
+FireSprite
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+-0.122621 0.9921 0.00667496 0.0256197
+ Scale
+1 1 1
+ Visible
+1
+Animation Speed
+40
+Loop Animation
+1
+Sheet Columns
+4
+Sheet Rows
+4
+Texture
+Sprites/fire_sheet.png
+UID
+2884656995
+next
+467991561
+FireSprite
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0.0580594 -0.388167 0.12496 0.91123
+ Scale
+1 1 1
+ Visible
+1
+Animation Speed
+40
+Loop Animation
+1
+Sheet Columns
+4
+Sheet Rows
+4
+Texture
+Sprites/fire_sheet.png
+UID
+3071383242
+next
+3776356977
+FireSprite
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+-0.135412 0.957148 0.0223956 0.255009
+ Scale
+1 1 1
+ Visible
+1
+Animation Speed
+40
+Loop Animation
+1
+Sheet Columns
+4
+Sheet Rows
+4
+Texture
+Sprites/fire_sheet.png
+UID
+1383797727
+next
+3372710283
+FireSprite
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0.0831847 -0.768728 0.105889 0.62524
+ Scale
+1 1 1
+ Visible
+1
+Animation Speed
+40
+Loop Animation
+1
+Sheet Columns
+4
+Sheet Rows
+4
+Texture
+Sprites/fire_sheet.png
+UID
+1641337044
+next
+128409375
+FireSprite
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+-0.129206 0.680995 0.0804632 0.716294
+ Scale
+1 1 1
+ Visible
+1
+Animation Speed
+40
+Loop Animation
+1
+Sheet Columns
+4
+Sheet Rows
+4
+Texture
+Sprites/fire_sheet.png
+UID
+1840780233
 next
 end

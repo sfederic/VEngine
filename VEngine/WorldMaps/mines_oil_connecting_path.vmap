@@ -109,7 +109,7 @@ MeshActor
  Visible
 1
 Name
-node0
+cube0
 UID
 4041414666
 next
@@ -124,7 +124,7 @@ next
  Visible
 1
 Name
-MeshActor1
+cube1
 UID
 3718289176
 next
@@ -139,7 +139,7 @@ next
  Visible
 1
 Name
-MeshActor3
+cube2
 UID
 2660133355
 next
@@ -154,7 +154,7 @@ next
  Visible
 1
 Name
-MeshActor3573247511
+cube3
 UID
 598669368
 next
@@ -169,7 +169,7 @@ next
  Visible
 1
 Name
-MeshActor4
+cube4
 UID
 2125739077
 next
@@ -229,9 +229,9 @@ next
  Enabled
 1
  Position
-0 0 7
+1 0 6
  Rotation
--1.54543e-08 0.707107 1.54543e-08 0.707107
+-0.5 0.5 -0.5 0.5
  Scale
 0.999991 1 0.999991
  Visible
@@ -328,14 +328,118 @@ Rotate Yaw
 UID
 2656961848
 next
+OilSlick
+2
+ Enabled
+1
+ Position
+2 -0.45 7
+ Rotation
+0 0.595515 0 0.803344
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+0
+DisableGridInteract
+1
+Health
+1
+Ignore Rotate Check
+1
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+0
+Link Rotation
+0
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+OilSlick0
+Obstacle
+1
+Rotate Pitch
+0
+Rotate Speed
+12
+Rotate Yaw
+0
+UID
+3334970744
+next
+ Enabled
+1
+ Position
+1 -0.45 5
+ Rotation
+0 0.441869 0 0.89708
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+0
+DisableGridInteract
+1
+Health
+1
+Ignore Rotate Check
+1
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+0
+Link Rotation
+0
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+OilSlick1
+Obstacle
+1
+Rotate Pitch
+0
+Rotate Speed
+12
+Rotate Yaw
+0
+UID
+1495435447
+next
 Player
 1
  Enabled
 1
  Position
-2 0 15
+2 0 16
  Rotation
-0 1 0 2.60274e-07
+0 0 0 1
  Scale
 0.999993 1 0.999993
  Visible
@@ -437,8 +541,8 @@ UID
 338546806
 next
 DialogueComponent
-4
-292468325
+6
+3802566939
 Dialogue
  Enabled
 1
@@ -447,7 +551,7 @@ Dialogue
 File
 
 UID
-2566950334
+2163840326
 next
 2747037242
 Dialogue
@@ -471,7 +575,7 @@ File
 UID
 529409628
 next
-3802566939
+292468325
 Dialogue
  Enabled
 1
@@ -480,7 +584,29 @@ Dialogue
 File
 
 UID
-2163840326
+2566950334
+next
+3334970744
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+3130276343
+next
+1495435447
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2994712231
 next
 DirectionalLightComponent
 1
@@ -510,9 +636,9 @@ Root
  Enabled
 1
  Pos
-2 0 15
+2 0 16
  Rot
-0 1 0 2.60274e-07
+0 0 0 1
  Scale
 0.999993 1 0.999993
  Visible
@@ -578,7 +704,7 @@ UID
 3928401301
 next
 MeshComponent
-9
+11
 4041414666
 Mesh
  Enabled
@@ -854,16 +980,16 @@ Trans. Occlude
 UID
 3055212777
 next
-292468325
+3802566939
 Mesh
  Enabled
 1
  Pos
-0 0 0
+3 0 7
  Rot
-0 0 0 1
+-0.500122 0.499878 0.500122 0.499878
  Scale
-1 1 1
+0.999991 1 0.999992
  Visible
 1
 Casts Shadow
@@ -901,22 +1027,22 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-char.vmesh
+oil_barrel.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-4041521331
+1716886680
 next
 2747037242
 Mesh
  Enabled
 1
  Pos
-0 0 7
+1 0 6
  Rot
--1.54543e-08 0.707107 1.54543e-08 0.707107
+-0.5 0.5 -0.5 0.5
  Scale
 0.999991 1 0.999991
  Visible
@@ -1019,16 +1145,16 @@ Trans. Occlude
 UID
 129706764
 next
-3802566939
+292468325
 Mesh
  Enabled
 1
  Pos
-3 0 7
+0 0 0
  Rot
--0.500122 0.499878 0.500122 0.499878
+-0 0 0 1
  Scale
-0.999991 1 0.999992
+1 1 1
  Visible
 1
 Casts Shadow
@@ -1066,12 +1192,122 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-oil_barrel.vmesh
+char.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-1716886680
+4041521331
+next
+3334970744
+Mesh
+ Enabled
+1
+ Pos
+2 -0.45 7
+ Rot
+0 0.595515 0 0.803344
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+oil_slick.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2051074525
+next
+1495435447
+Mesh
+ Enabled
+1
+ Pos
+1 -0.45 5
+ Rot
+0 0.441869 0 0.89708
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+oil_slick.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3183608235
 next
 end
