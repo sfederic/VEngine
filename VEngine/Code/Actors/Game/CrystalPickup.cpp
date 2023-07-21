@@ -13,5 +13,8 @@ void CrystalPickup::Interact()
 	int* crystalCount = GameInstance::GetGlobalProp<int>("HeldCrystalCount");
 	*crystalCount = *crystalCount + 1;
 	Log("Held Crystal Count at [%d].", *crystalCount);
+
+	RecalcCurrentNodePosition();
+
 	Destroy();
 }
