@@ -30,7 +30,7 @@ EntranceTrigger
 Entrance Active
 1
 Level Name
-mines_tnt_ledge_drop.vmap
+mines_main_room.vmap
 Locked Text
 Locked
 Name
@@ -575,17 +575,6 @@ File
 UID
 529409628
 next
-292468325
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-2566950334
-next
 3334970744
 Dialogue
  Enabled
@@ -607,6 +596,17 @@ File
 
 UID
 2994712231
+next
+292468325
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2566950334
 next
 DirectionalLightComponent
 1
@@ -1145,61 +1145,6 @@ Trans. Occlude
 UID
 129706764
 next
-292468325
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
--0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-char.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-4041521331
-next
 3334970744
 Mesh
  Enabled
@@ -1309,5 +1254,60 @@ Trans. Occlude
 0
 UID
 3183608235
+next
+292468325
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+-0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+4041521331
 next
 end

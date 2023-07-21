@@ -104,7 +104,7 @@ EntranceTrigger
 Entrance Active
 1
 Level Name
-mines_tnt_ledge_drop.vmap
+mines_rock_stack.vmap
 Locked Text
 Locked
 Name
@@ -133,7 +133,7 @@ next
 Entrance Active
 1
 Level Name
-
+mines_oil_connecting_path.vmap
 Locked Text
 Locked
 Name
@@ -152,7 +152,7 @@ next
  Enabled
 1
  Position
-6 0 0
+8 0 0
  Rotation
 -0 0 -0 1
  Scale
@@ -364,6 +364,110 @@ cube1
 UID
 4267671312
 next
+OilBarrel
+2
+ Enabled
+1
+ Position
+10 0 6
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+OilBarrel0
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+2687239501
+next
+ Enabled
+1
+ Position
+10 0 7
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+OilBarrel1
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+4121924899
+next
 Player
 1
  Enabled
@@ -426,7 +530,7 @@ Trigger
  Enabled
 1
  Pos
-6 0 0
+8 0 0
  Rot
 -0 0 -0 1
  Scale
@@ -537,7 +641,7 @@ UID
 1153214548
 next
 DialogueComponent
-4
+6
 3835743231
 Dialogue
  Enabled
@@ -548,6 +652,17 @@ File
 
 UID
 3841834572
+next
+1301140605
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1268013803
 next
 3280345335
 Dialogue
@@ -560,6 +675,28 @@ File
 UID
 247707030
 next
+2687239501
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2846909097
+next
+4121924899
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2014795115
+next
 1296732458
 Dialogue
  Enabled
@@ -570,17 +707,6 @@ File
 
 UID
 3220513364
-next
-1301140605
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-1268013803
 next
 DirectionalLightComponent
 1
@@ -693,7 +819,7 @@ UID
 3299562460
 next
 MeshComponent
-6
+8
 3835743231
 Mesh
  Enabled
@@ -748,116 +874,6 @@ Trans. Occlude
 0
 UID
 1260295711
-next
-3004593315
-Mesh
- Enabled
-1
- Pos
-5 -0.5 5
- Rot
--0 0 -0 1
- Scale
-11 1 11
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2684690207
-next
-1296732458
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0.707107 0 0.707107
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-char.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-437470717
 next
 1301140605
 Mesh
@@ -969,6 +985,61 @@ Trans. Occlude
 UID
 3191004890
 next
+3004593315
+Mesh
+ Enabled
+1
+ Pos
+5 -0.5 5
+ Rot
+-0 0 -0 1
+ Scale
+11 1 11
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2684690207
+next
 4267671312
 Mesh
  Enabled
@@ -1023,5 +1094,170 @@ Trans. Occlude
 0
 UID
 4239133497
+next
+2687239501
+Mesh
+ Enabled
+1
+ Pos
+10 0 6
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+oil_barrel.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3161828215
+next
+4121924899
+Mesh
+ Enabled
+1
+ Pos
+10 0 7
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+oil_barrel.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+470670174
+next
+1296732458
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0.707107 0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+437470717
 next
 end
