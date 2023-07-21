@@ -1,3 +1,158 @@
+Crushable
+3
+ Enabled
+1
+ Position
+2 0 6
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+Crushable0
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+1004683711
+next
+ Enabled
+1
+ Position
+3 0 6
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+Crushable1
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+3025387417
+next
+ Enabled
+1
+ Position
+1 0 6
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+Crushable2
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+1048658828
+next
 DirectionalLightActor
 1
  Enabled
@@ -109,7 +264,7 @@ MeshActor
  Visible
 1
 Name
-cube0
+rock20
 UID
 607909136
 next
@@ -124,7 +279,7 @@ next
  Visible
 1
 Name
-cube1
+rock21
 UID
 83027465
 next
@@ -139,7 +294,7 @@ next
  Visible
 1
 Name
-cube2
+rock22
 UID
 1966518442
 next
@@ -148,9 +303,9 @@ Player
  Enabled
 1
  Position
-2 0 0
+1 0 3
  Rotation
-0 -0.707107 -0 0.707107
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -165,7 +320,7 @@ Weight
  Enabled
 1
  Position
-1 0 6
+3 0 2
  Rotation
 -0 0 -0 1
  Scale
@@ -305,7 +460,7 @@ UID
 1450763228
 next
 DialogueComponent
-2
+5
 2409731601
 Dialogue
  Enabled
@@ -327,6 +482,39 @@ File
 
 UID
 1283926951
+next
+1004683711
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+3560065695
+next
+3025387417
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2110955447
+next
+1048658828
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+3481685299
 next
 DirectionalLightComponent
 1
@@ -356,9 +544,9 @@ Root
  Enabled
 1
  Pos
-2 0 0
+1 0 3
  Rot
-0 -0.707107 -0 0.707107
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -424,7 +612,7 @@ UID
 994962358
 next
 MeshComponent
-5
+8
 607909136
 Mesh
  Enabled
@@ -597,7 +785,7 @@ Mesh
  Pos
 0 0 0
  Rot
-0 0.707107 0 -0.707107
+0 1 0 0
  Scale
 1 1 1
  Visible
@@ -650,7 +838,7 @@ Mesh
  Enabled
 1
  Pos
-1 0 6
+3 0 2
  Rot
 -0 0 -0 1
  Scale
@@ -699,5 +887,170 @@ Trans. Occlude
 0
 UID
 3978309366
+next
+1004683711
+Mesh
+ Enabled
+1
+ Pos
+2 0 6
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2239012416
+next
+3025387417
+Mesh
+ Enabled
+1
+ Pos
+3 0 6
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1511058663
+next
+1048658828
+Mesh
+ Enabled
+1
+ Pos
+1 0 6
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3034387318
 next
 end

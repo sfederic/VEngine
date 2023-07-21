@@ -53,6 +53,25 @@ Rotate Yaw
 UID
 3835743231
 next
+DebugNoteActor
+1
+ Enabled
+1
+ Position
+-0 -0 8
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DebugNoteActor0
+Note Text
+Denote the entrance with the mechanic of that path. Think how Banjo Kazooie does its level doors.
+UID
+1231508071
+next
 DirectionalLightActor
 1
  Enabled
@@ -209,6 +228,110 @@ Size Y
 UID
 2610304059
 next
+GridActor
+2
+ Enabled
+1
+ Position
+0 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+GridActor2
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+1301140605
+next
+ Enabled
+1
+ Position
+0 1 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+GridActor3
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+3280345335
+next
 MeshActor
 2
  Enabled
@@ -246,11 +369,11 @@ Player
  Enabled
 1
  Position
-0 0 4
+4 0 3
  Rotation
-0 -0.707107 0 0.707107
+0 0.707107 0 -0.707107
  Scale
-1 1 1
+0.999996 1 0.999996
  Visible
 1
 Name
@@ -414,7 +537,7 @@ UID
 1153214548
 next
 DialogueComponent
-2
+4
 3835743231
 Dialogue
  Enabled
@@ -426,6 +549,17 @@ File
 UID
 3841834572
 next
+3280345335
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+247707030
+next
 1296732458
 Dialogue
  Enabled
@@ -436,6 +570,17 @@ File
 
 UID
 3220513364
+next
+1301140605
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1268013803
 next
 DirectionalLightComponent
 1
@@ -459,17 +604,32 @@ UID
 2736532629
 next
 EmptyComponent
+2
+1231508071
+Root
+ Enabled
 1
+ Pos
+-0 -0 8
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+3035292662
+next
 1296732458
 Root
  Enabled
 1
  Pos
-0 0 4
+4 0 3
  Rot
-0 -0.707107 0 0.707107
+0 0.707107 0 -0.707107
  Scale
-1 1 1
+0.999996 1 0.999996
  Visible
 1
 UID
@@ -533,7 +693,7 @@ UID
 3299562460
 next
 MeshComponent
-4
+6
 3835743231
 Mesh
  Enabled
@@ -651,7 +811,7 @@ Mesh
  Pos
 0 0 0
  Rot
-0 -5.96046e-08 0 -1
+0 0.707107 0 0.707107
  Scale
 1 1 1
  Visible
@@ -698,6 +858,116 @@ Trans. Occlude
 0
 UID
 437470717
+next
+1301140605
+Mesh
+ Enabled
+1
+ Pos
+0 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/ground.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+rock2.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3893392623
+next
+3280345335
+Mesh
+ Enabled
+1
+ Pos
+0 1 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/ground.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+rock2.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3191004890
 next
 4267671312
 Mesh

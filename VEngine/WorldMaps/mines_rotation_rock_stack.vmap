@@ -122,9 +122,9 @@ GridActor
  Position
 2 0 7
  Rotation
-0.500051 -0.500388 0.499953 -0.499608
+0.500047 0.499611 0.500392 -0.499949
  Scale
-0.999979 0.999979 0.999946
+0.999984 0.999987 0.999953
  Visible
 1
 Can Fall
@@ -173,9 +173,9 @@ next
  Position
 5 1 7
  Rotation
-0.500292 -0.499951 -0.499706 0.500051
+0.000140838 0.000202068 0.707108 0.707106
  Scale
-0.999989 1.00002 1
+0.999988 1.00001 0.999995
  Visible
 1
 Can Fall
@@ -283,7 +283,7 @@ MeshActor
  Visible
 1
 Name
-cube0
+rock20
 UID
 2660736969
 next
@@ -298,7 +298,7 @@ next
  Visible
 1
 Name
-cube1
+rock21
 UID
 3609497912
 next
@@ -313,7 +313,7 @@ next
  Visible
 1
 Name
-cube2
+rock22
 UID
 3723306443
 next
@@ -328,7 +328,7 @@ next
  Visible
 1
 Name
-cube3
+rock23
 UID
 1864045415
 next
@@ -343,7 +343,7 @@ next
  Visible
 1
 Name
-cube4
+rock24
 UID
 1302542097
 next
@@ -358,7 +358,7 @@ next
  Visible
 1
 Name
-cube5
+rock25
 UID
 3165928858
 next
@@ -373,7 +373,7 @@ next
  Visible
 1
 Name
-cube6
+rock26
 UID
 456881996
 next
@@ -650,9 +650,9 @@ Mesh
  Pos
 2 0 7
  Rot
-0.500051 -0.500388 0.499953 -0.499608
+0.500047 0.499611 0.500392 -0.499949
  Scale
-0.999979 0.999979 0.999946
+0.999984 0.999987 0.999953
  Visible
 1
 Casts Shadow
@@ -705,9 +705,9 @@ Mesh
  Pos
 5 1 7
  Rot
-0.500292 -0.499951 -0.499706 0.500051
+0.000140838 0.000202068 0.707108 0.707106
  Scale
-0.999989 1.00002 1
+0.999988 1.00001 0.999995
  Visible
 1
 Casts Shadow

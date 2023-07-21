@@ -120,11 +120,11 @@ GridActor
  Enabled
 1
  Position
-4 0 4
+1 0 6
  Rotation
--0 -0.707107 -0 0.707107
+0 0.707107 0 -0.707107
  Scale
-1 1 1
+0.999995 1 0.999995
  Visible
 1
 Can Fall
@@ -375,7 +375,7 @@ next
  Enabled
 1
  Position
-4 0 3
+0 0 4
  Rotation
 -0 0 -0 1
  Scale
@@ -426,11 +426,11 @@ next
  Enabled
 1
  Position
-4 1 4
+1 0 5
  Rotation
--0 0 -0.706934 0.707279
+-0 0 -0.706934 0.70728
  Scale
-1 1 1
+0.999999 0.999999 1
  Visible
 1
 Can Fall
@@ -487,7 +487,7 @@ MeshActor
  Visible
 1
 Name
-cube0
+rock20
 UID
 4261992511
 next
@@ -502,7 +502,7 @@ next
  Visible
 1
 Name
-cube1
+rock21
 UID
 2085334205
 next
@@ -517,7 +517,7 @@ next
  Visible
 1
 Name
-cube2
+rock22
 UID
 2748716401
 next
@@ -532,7 +532,7 @@ next
  Visible
 1
 Name
-cube3
+rock23
 UID
 1347363334
 next
@@ -757,21 +757,6 @@ UID
 next
 EmptyComponent
 2
-448937440
-Root
- Enabled
-1
- Pos
-6 2.55 3
- Rot
-0 0.707107 0 0.707106
- Scale
-1 1 1
- Visible
-1
-UID
-4068066731
-next
 1619342645
 Root
  Enabled
@@ -786,6 +771,21 @@ Root
 1
 UID
 858353329
+next
+448937440
+Root
+ Enabled
+1
+ Pos
+6 2.55 3
+ Rot
+0 0.707107 0 0.707106
+ Scale
+1 1 1
+ Visible
+1
+UID
+4068066731
 next
 InstanceMeshComponent
 1
@@ -851,11 +851,11 @@ Mesh
  Enabled
 1
  Pos
-4 0 4
+1 0 6
  Rot
--0 -0.707107 -0 0.707107
+0 0.707107 0 -0.707107
  Scale
-1 1 1
+0.999995 1 0.999995
  Visible
 1
 Casts Shadow
@@ -1126,7 +1126,7 @@ Mesh
  Enabled
 1
  Pos
-4 0 3
+0 0 4
  Rot
 -0 0 -0 1
  Scale
@@ -1181,11 +1181,11 @@ Mesh
  Enabled
 1
  Pos
-4 1 4
+1 0 5
  Rot
--0 0 -0.706934 0.707279
+-0 0 -0.706934 0.70728
  Scale
-1 1 1
+0.999999 0.999999 1
  Visible
 1
 Casts Shadow
