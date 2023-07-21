@@ -52,6 +52,12 @@ void FileSystem::SerialiseAllSystems()
 
 	std::string file = "WorldMaps/" + str;
 
+	//@Todo: this is not going to work if you're entering levels with no gamesave
+	if (GameInstance::useGameSaves)
+	{
+		file = "GameSaves/" + str;
+	}
+
 	Serialiser s(file, OpenMode::Out);
 
 	for (IActorSystem* actorSystem : World::activeActorSystems)
@@ -198,6 +204,11 @@ void FileSystem::LoadWorld(std::string worldName)
 	World::worldFilename = worldName;
 
 	std::string path = "WorldMaps/" + worldName;
+
+	if (GameInstance::useGameSaves)
+	{
+		path = "GameSaves/" + worldName;
+	}
 
 	assert(std::filesystem::exists(path) && "Map file doesn't exist");
 
