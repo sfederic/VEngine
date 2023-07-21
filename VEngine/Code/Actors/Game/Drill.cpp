@@ -1,31 +1,34 @@
 #include "vpch.h"
 #include "Drill.h"
-#include "Crushable.h"
 #include "Physics/Raycast.h"
-#include "Gameplay/GridNode.h"
 
 void Drill::Create()
 {
 	SetMeshFilename("drill.vmesh");
 }
 
-void Drill::OnLinkMove()
+void Drill::OnLinkRotate()
 {
-	__super::OnLinkMove();
+	__super::OnLinkRotate();
 
-	HitResult hit(this);
-	if (Raycast(hit, GetPositionV(), GetForwardVectorV(), 1.25f))
+	rotateDrillIncrement++;
+
+	constexpr int maxDrillIncrement = 5;
+	if (rotateDrillIncrement > maxDrillIncrement)
 	{
-		auto crushable = hit.GetHitActorAs<Crushable>();
-		if (crushable)
-		{
-			//Reset hit actor's node else Drill will move up.
-			auto node = crushable->GetCurrentNode();
-			HitResult nodeHit(crushable);
-			nodeHit.actorsToIgnore.push_back(this);
-			node->RecalcNodeHeight(nodeHit);
+		DrillThroughBelowGridActor();
+	}
+}
 
-			crushable->Crushed();
+void Drill::DrillThroughBelowGridActor()
+{
+	HitResult hit(this);
+	if (Raycast(hit, GetPositionV(), GetForwardVectorV(), 1.5f))
+	{
+		auto actor = hit.GetHitActorAs<GridActor>();
+		if (actor)
+		{
+			actor->DeferDestroy();
 		}
 	}
 }
