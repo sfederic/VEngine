@@ -39,7 +39,7 @@ UID
 2766288922
 next
 EntranceTrigger
-3
+4
  Enabled
 1
  Position
@@ -62,6 +62,8 @@ Open Audio
 door.wav
 Open Text
 Enter Upstairs
+Tag
+
 UID
 3299669729
 Unlock Audio
@@ -89,6 +91,8 @@ Open Audio
 door.wav
 Open Text
 Open
+Tag
+
 UID
 3958486708
 Unlock Audio
@@ -116,8 +120,39 @@ Open Audio
 door.wav
 Open Text
 Open
+Tag
+
 UID
 488595680
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+6 0 0
+ Rotation
+0 0.707107 0 -0.707107
+ Scale
+0.999997 1 0.999997
+ Visible
+1
+Entrance Active
+1
+Level Name
+church_entrance.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger3
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+731618344
 Unlock Audio
 
 next
@@ -155,7 +190,7 @@ MeshActor
  Visible
 1
 Name
-cube0
+pictureframe_square0
 UID
 3841650662
 next
@@ -170,7 +205,7 @@ next
  Visible
 1
 Name
-cube1
+pictureframe_square1
 UID
 2894709297
 next
@@ -185,7 +220,7 @@ next
  Visible
 1
 Name
-cube2
+pictureframe_square2
 UID
 775745634
 next
@@ -200,7 +235,7 @@ next
  Visible
 1
 Name
-cube3
+pictureframe_square3
 UID
 3568733252
 next
@@ -215,7 +250,7 @@ next
  Visible
 1
 Name
-cube4
+pictureframe_square4
 UID
 3383989616
 next
@@ -230,7 +265,7 @@ next
  Visible
 1
 Name
-cube5
+pictureframe_square5
 UID
 3639792667
 next
@@ -245,7 +280,7 @@ next
  Visible
 1
 Name
-cube6
+pictureframe_square6
 UID
 3373440638
 next
@@ -260,7 +295,7 @@ next
  Visible
 1
 Name
-cube7
+pictureframe_square7
 UID
 4208411069
 next
@@ -275,7 +310,7 @@ next
  Visible
 1
 Name
-cube8
+pictureframe_square8
 UID
 2740829697
 next
@@ -290,7 +325,7 @@ next
  Visible
 1
 Name
-cube9
+pictureframe_square9
 UID
 3163490036
 next
@@ -329,7 +364,7 @@ UID
 1647454417
 next
 BoxTriggerComponent
-3
+4
 3299669729
 Trigger
  Enabled
@@ -387,6 +422,25 @@ Offset
 UID
 3730308297
 next
+731618344
+Trigger
+ Enabled
+1
+ Pos
+6 0 0
+ Rot
+0 0.707107 0 -0.707107
+ Scale
+0.999997 1 0.999997
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+3271019788
+next
 CameraComponent
 1
 1647454417
@@ -411,7 +465,7 @@ UID
 3825084304
 next
 ConditionComponent
-3
+4
 3299669729
 Condition
  Enabled
@@ -450,6 +504,19 @@ Condition Arg
 
 UID
 3102704587
+next
+731618344
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+128577333
 next
 DialogueComponent
 1

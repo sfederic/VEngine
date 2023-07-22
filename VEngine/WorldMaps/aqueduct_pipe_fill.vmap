@@ -34,6 +34,66 @@ DirectionalLightActor0
 UID
 2937248609
 next
+EntranceTrigger
+2
+ Enabled
+1
+ Position
+-0 -0 1
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+aqueduct_room.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+1031186721
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+6 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+aqueduct_to_market.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger1
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+1836484186
+Unlock Audio
+
+next
 Grid
 1
  Enabled
@@ -68,7 +128,7 @@ MeshActor
  Visible
 1
 Name
-stairs0
+statue_orientation0
 UID
 594705524
 next
@@ -83,7 +143,7 @@ next
  Visible
 1
 Name
-stairs1
+statue_orientation1
 UID
 2720999276
 next
@@ -98,7 +158,7 @@ next
  Visible
 1
 Name
-stairs2
+statue_orientation2
 UID
 1800709248
 next
@@ -113,7 +173,7 @@ next
  Visible
 1
 Name
-stairs6
+statue_orientation3
 UID
 894616707
 next
@@ -128,7 +188,7 @@ next
  Visible
 1
 Name
-stairs4
+statue_orientation4
 UID
 448780816
 next
@@ -143,7 +203,7 @@ next
  Visible
 1
 Name
-stairs5
+statue_orientation5
 UID
 1382513792
 next
@@ -158,7 +218,7 @@ next
  Visible
 1
 Name
-MeshActor6
+statue_orientation6
 UID
 178473669
 next
@@ -173,7 +233,7 @@ next
  Visible
 1
 Name
-MeshActor7
+statue_orientation7
 UID
 2271204300
 next
@@ -188,7 +248,7 @@ next
  Visible
 1
 Name
-MeshActor8
+statue_orientation8
 UID
 1494343717
 next
@@ -203,7 +263,7 @@ next
  Visible
 1
 Name
-MeshActor9
+statue_orientation9
 UID
 4023316141
 next
@@ -218,7 +278,7 @@ next
  Visible
 1
 Name
-MeshActor10
+statue_orientation10
 UID
 2620080190
 next
@@ -233,7 +293,7 @@ next
  Visible
 1
 Name
-MeshActor11
+statue_orientation11
 UID
 3923701169
 next
@@ -248,7 +308,7 @@ next
  Visible
 1
 Name
-MeshActor12
+statue_orientation12
 UID
 1330566165
 next
@@ -263,7 +323,7 @@ next
  Visible
 1
 Name
-MeshActor13
+statue_orientation13
 UID
 958380910
 next
@@ -278,7 +338,7 @@ next
  Visible
 1
 Name
-pipe14
+statue_orientation14
 UID
 3180757060
 next
@@ -293,7 +353,7 @@ next
  Visible
 1
 Name
-pipe20
+statue_orientation15
 UID
 2225751571
 next
@@ -308,7 +368,7 @@ next
  Visible
 1
 Name
-pipe16
+statue_orientation16
 UID
 836189848
 next
@@ -323,7 +383,7 @@ next
  Visible
 1
 Name
-pipe17
+statue_orientation17
 UID
 1903238813
 next
@@ -338,7 +398,7 @@ next
  Visible
 1
 Name
-pipe18
+statue_orientation18
 UID
 3847038320
 next
@@ -353,7 +413,7 @@ next
  Visible
 1
 Name
-pipe19
+statue_orientation19
 UID
 4062446338
 next
@@ -368,7 +428,7 @@ next
  Visible
 1
 Name
-MeshActor20
+statue_orientation20
 UID
 242599929
 next
@@ -383,7 +443,7 @@ next
  Visible
 1
 Name
-MeshActor21
+statue_orientation21
 UID
 2805191042
 next
@@ -398,7 +458,7 @@ next
  Visible
 1
 Name
-MeshActor22
+statue_orientation22
 UID
 964141602
 next
@@ -413,7 +473,7 @@ next
  Visible
 1
 Name
-flat_plane23
+statue_orientation23
 UID
 4231426507
 next
@@ -422,7 +482,7 @@ OrientationLock
  Enabled
 1
  Position
-1 0 2
+2 -2 2
  Rotation
 -0 0 -0 1
  Scale
@@ -463,12 +523,16 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 OrientationLock0
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
@@ -498,7 +562,7 @@ Player
  Enabled
 1
  Position
-0 0 0
+1 0 2
  Rotation
 0 0 0 1
  Scale
@@ -517,7 +581,7 @@ PressurePipe
  Position
 3 -2 0
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -550,19 +614,61 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 PressurePipe0
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
 633495123
 next
 BoxTriggerComponent
+3
+1031186721
+Trigger
+ Enabled
 1
+ Pos
+-0 -0 1
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+449217973
+next
+1836484186
+Trigger
+ Enabled
+1
+ Pos
+6 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+3509812970
+next
 1895875641
 BoxTrigger
  Enabled
@@ -604,6 +710,34 @@ Near Z
 0.01
 UID
 2581010144
+next
+ConditionComponent
+2
+1031186721
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+3642650252
+next
+1836484186
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+3614910466
 next
 DialogueComponent
 3
@@ -662,7 +796,7 @@ UID
 2429859961
 next
 EmptyComponent
-4
+2
 3940987291
 Root
  Enabled
@@ -678,27 +812,12 @@ Root
 UID
 653064892
 next
-204724184
-Root
- Enabled
-1
- Pos
-1 0 2
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-UID
-1213905665
-next
 2586478620
 Root
  Enabled
 1
  Pos
-0 0 0
+1 0 2
  Rot
 0 0 0 1
  Scale
@@ -707,21 +826,6 @@ Root
 1
 UID
 2717602497
-next
-633495123
-Root
- Enabled
-1
- Pos
-3 -2 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-UID
-2962764204
 next
 InstanceMeshComponent
 1
@@ -2084,7 +2188,7 @@ water.jpg
 M_Use Texture
 1
 M_UvOffset
-0 0
+0.666458 0
 M_UvOffsetSpeed
 0.2 0
 M_UvRotation
@@ -2107,7 +2211,7 @@ Mesh
  Enabled
 1
  Pos
-1 0 2
+2 -2 2
  Rot
 -0 0 -0 1
  Scale
@@ -2164,7 +2268,7 @@ Mesh
  Pos
 0 0 0
  Rot
-0 0 0 1
+-0 0 0 1
  Scale
 1 1 1
  Visible
@@ -2217,9 +2321,9 @@ Mesh
  Enabled
 1
  Pos
-0 0 0
+3 -2 0
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible

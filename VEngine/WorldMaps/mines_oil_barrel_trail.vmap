@@ -59,7 +59,7 @@ next
 Entrance Active
 1
 Level Name
-mines_rock_stack.vmap
+
 Locked Text
 Locked
 Name
@@ -1270,7 +1270,7 @@ FireSprite
  Pos
 0 0 0
  Rot
--0.0888032 0.897073 0.210668 0.378145
+-0.0484492 0.89624 0.101182 0.429148
  Scale
 1 1 1
  Visible

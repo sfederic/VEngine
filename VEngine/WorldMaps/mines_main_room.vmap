@@ -90,7 +90,7 @@ UID
 1071073583
 next
 EntranceTrigger
-4
+5
  Enabled
 1
  Position
@@ -204,6 +204,35 @@ Tag
 
 UID
 1409767613
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+6 0 10
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+aqueduct_room.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger4
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+3422509208
 Unlock Audio
 
 next
@@ -486,7 +515,7 @@ UID
 1296732458
 next
 BoxTriggerComponent
-4
+5
 3455457880
 Trigger
  Enabled
@@ -563,6 +592,25 @@ Offset
 UID
 1892379644
 next
+3422509208
+Trigger
+ Enabled
+1
+ Pos
+6 0 10
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+1899655749
+next
 CameraComponent
 1
 1296732458
@@ -587,7 +635,7 @@ UID
 4175290188
 next
 ConditionComponent
-4
+5
 3455457880
 Condition
  Enabled
@@ -639,6 +687,19 @@ Condition Arg
 
 UID
 1153214548
+next
+3422509208
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+3764163408
 next
 DialogueComponent
 6

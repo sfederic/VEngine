@@ -16,7 +16,7 @@ UID
 4192811558
 next
 EntranceTrigger
-2
+4
  Enabled
 1
  Position
@@ -72,6 +72,64 @@ Tag
 1
 UID
 577617448
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+aqueduct_to_market.vmap
+Locked Text
+wdedswwwwwwwweesdqqsaewdeesd
+Name
+EntranceTrigger2
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+1199167278
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+7 0 12
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+market_courtyard.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger3
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+1904505582
 Unlock Audio
 
 next
@@ -468,7 +526,7 @@ MeshActor
  Visible
 1
 Name
-stairs0
+statue_orientation0
 UID
 2189207719
 next
@@ -483,7 +541,7 @@ next
  Visible
 1
 Name
-stairs1
+statue_orientation1
 UID
 1851401760
 next
@@ -498,7 +556,7 @@ next
  Visible
 1
 Name
-stairs2
+statue_orientation2
 UID
 3868451291
 next
@@ -513,7 +571,7 @@ next
  Visible
 1
 Name
-stairs3
+statue_orientation3
 UID
 688469115
 next
@@ -528,7 +586,7 @@ next
  Visible
 1
 Name
-stairs4
+statue_orientation4
 UID
 459440227
 next
@@ -543,7 +601,7 @@ next
  Visible
 1
 Name
-stairs5
+statue_orientation5
 UID
 2474770862
 next
@@ -558,7 +616,7 @@ next
  Visible
 1
 Name
-stairs6
+statue_orientation6
 UID
 172557515
 next
@@ -580,7 +638,7 @@ UID
 2163157409
 next
 BoxTriggerComponent
-2
+4
 449400505
 Trigger
  Enabled
@@ -619,6 +677,44 @@ Offset
 UID
 3179589294
 next
+1199167278
+Trigger
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+522131834
+next
+1904505582
+Trigger
+ Enabled
+1
+ Pos
+7 0 12
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+536355732
+next
 CameraComponent
 1
 2163157409
@@ -643,7 +739,7 @@ UID
 71528977
 next
 ConditionComponent
-2
+4
 449400505
 Condition
  Enabled
@@ -669,6 +765,32 @@ Condition Arg
 
 UID
 337410104
+next
+1199167278
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+1828376665
+next
+1904505582
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+4241362749
 next
 DialogueComponent
 8
