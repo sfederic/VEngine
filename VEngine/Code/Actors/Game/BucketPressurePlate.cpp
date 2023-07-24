@@ -13,6 +13,8 @@ void BucketPressurePlate::Create()
 {
 	SetMeshFilename("node.vmesh");
 
+	pressureTrigger->SetLocalPosition(0.f, 0.5f, 0.f);
+
 	DisableAllInteractivity();
 }
 
@@ -27,6 +29,7 @@ Properties BucketPressurePlate::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
+	props.Add("Plate Active", &pressurePlateActive);
 	return props;
 }
 
