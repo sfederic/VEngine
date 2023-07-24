@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "SawBlade.h"
 #include "Components/BoxTriggerComponent.h"
+#include "Components/MeshComponent.h"
 
 SawBlade::SawBlade()
 {
@@ -10,7 +11,16 @@ SawBlade::SawBlade()
 
 void SawBlade::Create()
 {
+	sliceTrigger->SetExtents(1.5f, 1.5f, 1.5f);
+
 	SetMeshFilename("saw_blade.vmesh");
+}
+
+void SawBlade::Tick(float deltaTime)
+{
+	__super::Tick(deltaTime);
+
+	SliceSurroundingGridActors();
 }
 
 void SawBlade::PowerUp()
@@ -26,6 +36,11 @@ void SawBlade::PowerDown()
 
 void SawBlade::SliceSurroundingGridActors()
 {
+	if (!isCutting)
+	{
+		return;
+	}
+
 	for (GridActor* actor : World::GetAllActorsAsBaseType<GridActor>())
 	{
 		if (actor == this)

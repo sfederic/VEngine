@@ -12,6 +12,8 @@ public:
 
 	SawBlade();
 	void Create() override;
+	void Tick(float deltaTime) override;
+
 	void PowerUp() override;
 	void PowerDown() override;
 
