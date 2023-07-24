@@ -18,6 +18,15 @@ void BucketPressurePlate::Create()
 	DisableAllInteractivity();
 }
 
+void BucketPressurePlate::Start()
+{
+	__super::Start();
+
+	originalRestingPos = GetPositionV();
+	emptyBucketPressurePos = GetPositionV() - (GetUpVectorV() * 0.2f);
+	filledBucketPressurePos = GetPositionV() - (GetUpVectorV() * 0.5f);
+}
+
 void BucketPressurePlate::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
@@ -37,15 +46,22 @@ void BucketPressurePlate::CheckBucketInPressureTrigger()
 {
 	for (auto& bucket : Bucket::system.GetActors())
 	{
-		if (bucket->IsFilled())
+		if (pressureTrigger->Contains(bucket->GetPositionV()))
 		{
-			if (pressureTrigger->Contains(bucket->GetPositionV()))
+			if (bucket->IsFilled())
 			{
+				SetNextPos(filledBucketPressurePos);
 				pressurePlateActive = true;
-				return;
 			}
+			else
+			{
+				SetNextPos(emptyBucketPressurePos);
+			}
+
+			return;
 		}
 	}
 
+	SetNextPos(originalRestingPos);
 	pressurePlateActive = false;
 }
