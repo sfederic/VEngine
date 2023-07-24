@@ -15,6 +15,8 @@ public:
 
 	void Douse() override;
 
+	bool IsFilled() { return isFilled; }
+
 private:
 	void EmptyWater();
 
