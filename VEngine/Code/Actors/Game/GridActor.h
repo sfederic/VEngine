@@ -101,6 +101,9 @@ public:
 	//When grid actor leaves influence of crystal
 	virtual void PowerDown() {}
 
+	//A physical action where the grid actor is cut
+	virtual void Slice() {}
+
 	//Called when this GridActor is attacked.
 	virtual void Attacked() {}
 
