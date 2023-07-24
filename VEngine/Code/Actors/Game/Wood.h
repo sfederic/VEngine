@@ -10,4 +10,8 @@ public:
 	
 	void Create() override;
 	void Slice() override;
+	void Interact() override;
+
+private:
+	bool hasBeenCut = false;
 };

@@ -12,3 +12,12 @@ void Wood::Slice()
 	mesh->SetMeshFilename("cut_wood.vmesh");
 	mesh->ReCreate();
 }
+
+void Wood::Interact()
+{
+	if (hasBeenCut)
+	{
+		//@Todo: set to an "inventory"
+		Destroy();
+	}
+}
