@@ -9,4 +9,5 @@ public:
 	ACTOR_SYSTEM(Wood);
 	
 	void Create() override;
+	void Slice() override;
 };
