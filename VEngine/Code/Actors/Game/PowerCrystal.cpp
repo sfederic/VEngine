@@ -28,11 +28,20 @@ void PowerCrystal::Tick(float deltaTime)
 
 void PowerCrystal::PowerUpSurroundingGridActors()
 {
-	for (auto& actor : World::GetAllActorsAsBaseType<GridActor>())
+	for (GridActor* actor : World::GetAllActorsAsBaseType<GridActor>())
 	{
+		if (actor == this)
+		{
+			continue;
+		}
+
 		if (effectTrigger->Contains(actor->GetPositionV()))
 		{
 			actor->PowerUp();
+		}
+		else
+		{
+			actor->PowerDown();
 		}
 	}
 }

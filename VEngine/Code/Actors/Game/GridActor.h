@@ -98,6 +98,9 @@ public:
 	//When in range of a crystal providing electrical power
 	virtual void PowerUp() {}
 
+	//When grid actor leaves influence of crystal
+	virtual void PowerDown() {}
+
 	//Called when this GridActor is attacked.
 	virtual void Attacked() {}
 
