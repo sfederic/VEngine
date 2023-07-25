@@ -16,7 +16,7 @@ UID
 601060687
 next
 EntranceTrigger
-2
+5
  Enabled
 1
  Position
@@ -49,7 +49,7 @@ next
  Enabled
 1
  Position
-4 0 0
+5 0 0
  Rotation
 -0 0 -0 1
  Scale
@@ -75,6 +75,93 @@ UID
 Unlock Audio
 
 next
+ Enabled
+1
+ Position
+0 0 5
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+town_west.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger2
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+2597993383
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+0 0 5
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+town_west.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger3
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+2499019297
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+10 0 5
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+town_east.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger4
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+1906376489
+Unlock Audio
+
+next
 Grid
 1
  Enabled
@@ -97,7 +184,7 @@ UID
 781651653
 next
 MeshActor
-10
+12
  Enabled
 1
  Position
@@ -109,7 +196,7 @@ MeshActor
  Visible
 1
 Name
-statue_orientation0
+pillar_ornate0
 UID
 2381190161
 next
@@ -124,7 +211,7 @@ next
  Visible
 1
 Name
-statue_orientation1
+pillar_ornate1
 UID
 1219300372
 next
@@ -139,7 +226,7 @@ next
  Visible
 1
 Name
-statue_orientation2
+pillar_ornate2
 UID
 3974206542
 next
@@ -154,7 +241,7 @@ next
  Visible
 1
 Name
-statue_orientation3
+pillar_ornate3
 UID
 2661849372
 next
@@ -169,7 +256,7 @@ next
  Visible
 1
 Name
-statue_orientation4
+pillar_ornate4
 UID
 1112150003
 next
@@ -184,7 +271,7 @@ next
  Visible
 1
 Name
-statue_orientation5
+pillar_ornate5
 UID
 733086608
 next
@@ -199,7 +286,7 @@ next
  Visible
 1
 Name
-statue_orientation6
+pillar_ornate6
 UID
 1759698158
 next
@@ -214,7 +301,7 @@ next
  Visible
 1
 Name
-statue_orientation7
+pillar_ornate7
 UID
 1421346057
 next
@@ -229,7 +316,7 @@ next
  Visible
 1
 Name
-statue_orientation8
+pillar_ornate8
 UID
 3542409908
 next
@@ -244,18 +331,48 @@ next
  Visible
 1
 Name
-statue_orientation9
+pillar_ornate9
 UID
 1272938051
+next
+ Enabled
+1
+ Position
+-1 0 5
+ Rotation
+-0 -0.707107 -0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Name
+pillar_ornate10
+UID
+871968760
+next
+ Enabled
+1
+ Position
+11 0 5
+ Rotation
+-0 -0.707107 -0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Name
+pillar_ornate11
+UID
+3599477141
 next
 Player
 1
  Enabled
 1
  Position
-0 0 0
+9 0 4
  Rotation
-0 0 0 1
+0 0.707107 0 0.707107
  Scale
 1 1 1
  Visible
@@ -266,7 +383,7 @@ UID
 4178270799
 next
 BoxTriggerComponent
-2
+5
 3886239264
 Trigger
  Enabled
@@ -291,7 +408,7 @@ Trigger
  Enabled
 1
  Pos
-4 0 0
+5 0 0
  Rot
 -0 0 -0 1
  Scale
@@ -304,6 +421,63 @@ Offset
 0 0 0
 UID
 2156548435
+next
+2597993383
+Trigger
+ Enabled
+1
+ Pos
+0 0 5
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+2202173896
+next
+2499019297
+Trigger
+ Enabled
+1
+ Pos
+0 0 5
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+3721605030
+next
+1906376489
+Trigger
+ Enabled
+1
+ Pos
+10 0 5
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+2581041031
 next
 CameraComponent
 1
@@ -329,7 +503,7 @@ UID
 380250331
 next
 ConditionComponent
-2
+5
 3886239264
 Condition
  Enabled
@@ -355,6 +529,45 @@ Condition Arg
 
 UID
 464420017
+next
+2597993383
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+3848848919
+next
+2499019297
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+2219299029
+next
+1906376489
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+4208692958
 next
 DialogueComponent
 1
@@ -397,9 +610,9 @@ Root
  Enabled
 1
  Pos
-0 0 0
+9 0 4
  Rot
-0 0 0 1
+0 0.707107 0 0.707107
  Scale
 1 1 1
  Visible
@@ -465,7 +678,7 @@ UID
 529460436
 next
 MeshComponent
-11
+13
 2381190161
 Mesh
  Enabled
@@ -1016,6 +1229,116 @@ Trans. Occlude
 UID
 222058022
 next
+871968760
+Mesh
+ Enabled
+1
+ Pos
+-1 0 5
+ Rot
+-0 -0.707107 -0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+pillar_ornate.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1433020180
+next
+3599477141
+Mesh
+ Enabled
+1
+ Pos
+11 0 5
+ Rot
+-0 -0.707107 -0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+pillar_ornate.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2056737437
+next
 4178270799
 Mesh
  Enabled
@@ -1023,7 +1346,7 @@ Mesh
  Pos
 0 0 0
  Rot
-0 0 0 1
+-0 -0.707107 0 0.707107
  Scale
 1 1 1
  Visible
