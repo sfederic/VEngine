@@ -273,7 +273,7 @@ void Renderer::Tick()
 	//RENDER TRIGGERS HOTKEY
 	if (Input::GetKeyHeld(Keys::Ctrl))
 	{
-		if (Input::GetKeyDown(Keys::T))
+		if (Input::GetKeyDown(Keys::Y))
 		{
 			drawTriggers = !drawTriggers;
 		}
