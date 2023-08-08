@@ -22,14 +22,6 @@ ProjectionCrystal::ProjectionCrystal()
 	projectionSpotLight->SetWorldRotation(GetRotationV());
 }
 
-void ProjectionCrystal::Start()
-{
-	__super::Start();
-
-	projectionMesh->SetVisibility(false);
-	projectionSpotLight->SetVisibility(false);
-}
-
 void ProjectionCrystal::Interact()
 {
 	isActive = !isActive;
@@ -43,20 +35,4 @@ void ProjectionCrystal::Interact()
 		OnLinkDeactivate();
 		Grid::system.GetOnlyActor()->Awake();
 	}
-}
-
-void ProjectionCrystal::OnLinkActivate()
-{
-	__super::OnLinkActivate();
-
-	projectionMesh->SetVisibility(true);
-	projectionSpotLight->SetVisibility(true);
-}
-
-void ProjectionCrystal::OnLinkDeactivate()
-{
-	__super::OnLinkDeactivate();
-
-	projectionMesh->SetVisibility(false);
-	projectionSpotLight->SetVisibility(false);
 }

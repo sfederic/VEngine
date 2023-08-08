@@ -12,7 +12,6 @@ public:
 	ACTOR_SYSTEM(ProjectionCrystal);
 
 	ProjectionCrystal();
-	void Start() override;
 	void Interact() override;
 	void OnLinkActivate() override;
 	void OnLinkDeactivate() override;
