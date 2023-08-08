@@ -13,6 +13,7 @@ ProjectionCrystal::ProjectionCrystal()
 	projectionMesh->SetMeshFilename("cube.vmesh");
 	projectionMesh->SetLocalPosition(0.f, 0.f, 2.f);
 	projectionMesh->Create();
+	projectionMesh->canBeLinkedTo = false;
 	rootComponent->AddChild(projectionMesh);
 
 	projectionSpotLight = CreateComponent<SpotLightComponent>("SpotLight");

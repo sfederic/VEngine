@@ -595,7 +595,17 @@ void Player::LinkToGridActor()
 
 			auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
 			if (gridActor)
-			{ 
+			{
+				auto hitMesh = dynamic_cast<MeshComponent*>(hit.hitComponent);
+				if (hitMesh)
+				{
+					if (!hitMesh->canBeLinkedTo)
+					{
+						Log("Cannot link to GridActor via hit mesh [%s]. canBeLinkedTo set to false.", hitMesh->name.c_str());
+						return;
+					}
+				}
+
 				SetLinkedGridActor(*gridActor);
 			}
 		}

@@ -40,6 +40,8 @@ public:
 	bool gridObstacle = false;
 	bool ignoreGridRaycasts = false;
 
+	bool canBeLinkedTo = true;
+
 	MeshComponent();
 	MeshComponent(const std::string filename_,
 		const std::string textureFilename_,
