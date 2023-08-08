@@ -22,6 +22,11 @@ ProjectionCrystal::ProjectionCrystal()
 	projectionSpotLight->SetWorldRotation(GetRotationV());
 }
 
+void ProjectionCrystal::Create()
+{
+	mesh->SetMeshFilename("crystal.vmesh");
+}
+
 void ProjectionCrystal::Interact()
 {
 	isActive = !isActive;

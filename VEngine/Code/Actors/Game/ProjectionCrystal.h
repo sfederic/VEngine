@@ -12,6 +12,7 @@ public:
 	ACTOR_SYSTEM(ProjectionCrystal);
 
 	ProjectionCrystal();
+	void Create() override;
 	void Interact() override;
 
 private:
