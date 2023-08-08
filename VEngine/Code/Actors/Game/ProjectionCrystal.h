@@ -13,8 +13,6 @@ public:
 
 	ProjectionCrystal();
 	void Interact() override;
-	void OnLinkActivate() override;
-	void OnLinkDeactivate() override;
 
 private:
 	MeshComponent* projectionMesh = nullptr;
