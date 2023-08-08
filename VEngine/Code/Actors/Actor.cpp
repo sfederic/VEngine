@@ -328,18 +328,8 @@ void Actor::RemoveComponent(Component* componentToRemove)
 {
 	componentMap.erase(componentToRemove->name);
 
-	//Re-parent SpatialComponent's children to its own parent 
-	auto spatialComponent = dynamic_cast<SpatialComponent*>(componentToRemove);
-	if (spatialComponent)
-	{
-		if (spatialComponent->GetParent())
-		{
-			for (auto child : spatialComponent->GetChildren())
-			{
-				child->SetParent(spatialComponent->GetParent());
-			}
-		}
-	}
+	//@Todo: originally there was code here to reparent SpatialComponents if a parent node with existing
+	//children still in the componentMap, but it was causing too much problems. Think about a replacement.
 }
 
 bool Actor::CheckComponentExists(std::string componentName)
