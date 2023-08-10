@@ -14,6 +14,11 @@ void SnapshotCrystal::Create()
 
 void SnapshotCrystal::Interact()
 {
+	__super::Interact();
+
+	projectionMesh->ToggleActive();
+	projectionMesh->ToggleVisibility();
+
 	SetProjectionMeshFromFacingGridActor();
 }
 
