@@ -323,6 +323,7 @@
     <ClCompile Include="Code\Actors\Game\Wood.cpp" />
     <ClCompile Include="Code\Actors\Game\SawBlade.cpp" />
     <ClCompile Include="Code\Actors\Game\BucketPressurePlate.cpp" />
+    <ClCompile Include="Code\Actors\Game\SnapshotCrystal.cpp" />
     <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.h" />
     <ClInclude Include="Code\Actors\Game\ClockHand.h" />
     <ClInclude Include="Code\Actors\Game\LinkedObjects.h" />
@@ -675,6 +676,7 @@
     <ClInclude Include="Code\Actors\Game\Wood.h" />
     <ClInclude Include="Code\Actors\Game\SawBlade.h" />
     <ClInclude Include="Code\Actors\Game\BucketPressurePlate.h" />
+    <ClInclude Include="Code\Actors\Game\SnapshotCrystal.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

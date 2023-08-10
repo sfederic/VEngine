@@ -15,7 +15,7 @@ public:
 	void Create() override;
 	void Interact() override;
 
-private:
+protected:
 	MeshComponent* projectionMesh = nullptr;
 	SpotLightComponent* projectionSpotLight = nullptr;
 
