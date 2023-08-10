@@ -45,6 +45,7 @@ public:
 
 	bool IsActive() { return active; }
 	void SetActive(bool newActive) { active = newActive; }
+	void ToggleActive() { active = !active; }
 
 	int GetIndex() { return index; }
 	void SetIndex(int newIndex) { index = newIndex; }
@@ -64,6 +65,7 @@ public:
 
 	bool IsVisible() { return visible; }
 	void SetVisibility(bool isVisible) { visible = isVisible; }
+	void ToggleVisibility() { visible = !visible; }
 
 protected:
 	//Cleanup all the innards of the component.
