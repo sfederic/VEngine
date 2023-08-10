@@ -8,24 +8,26 @@
 ProjectionCrystal::ProjectionCrystal()
 {
 	projectionMesh = CreateComponent<MeshComponent>("TestMesh");
-	projectionMesh->SetAmbientColour(XMFLOAT4(0.f, 0.f, 1.f, 0.4f));
-	projectionMesh->SetBlendState(BlendStates::Default);
-	projectionMesh->SetMeshFilename("cube.vmesh");
-	projectionMesh->SetLocalPosition(0.f, 0.f, 2.f);
-	projectionMesh->Create();
-	projectionMesh->canBeLinkedTo = false;
 	rootComponent->AddChild(projectionMesh);
 
 	projectionSpotLight = CreateComponent<SpotLightComponent>("SpotLight");
-	projectionSpotLight->SetColour(XMFLOAT4(0.f, 0.f, 1.f, 1.f));
-	projectionSpotLight->SetIntensity(50.f);
 	rootComponent->AddChild(projectionSpotLight);
-	projectionSpotLight->SetWorldRotation(GetRotationV());
 }
 
 void ProjectionCrystal::Create()
 {
 	mesh->SetMeshFilename("crystal.vmesh");
+
+	projectionMesh->canBeLinkedTo = false;
+	projectionMesh->SetAmbientColour(XMFLOAT4(0.f, 0.f, 1.f, 0.4f));
+	projectionMesh->SetBlendState(BlendStates::Default);
+	projectionMesh->SetMeshFilename("cube.vmesh");
+	projectionMesh->SetLocalPosition(0.f, 0.f, 2.f);
+	projectionMesh->Create();
+
+	projectionSpotLight->SetColour(XMFLOAT4(0.f, 0.f, 1.f, 1.f));
+	projectionSpotLight->SetIntensity(50.f);
+	projectionSpotLight->SetWorldRotation(GetRotationV());
 }
 
 void ProjectionCrystal::Interact()
