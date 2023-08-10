@@ -56,6 +56,7 @@ public:
 	void SplitMeshCreate();
 
 	void SetMeshFilename(std::string_view meshFilename);
+	auto GetMeshFilename() { return meshComponentData.filename; }
 
 	//Material set functions
 	void SetRastState(const std::string newRastStateName);
