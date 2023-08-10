@@ -8,6 +8,7 @@ class SnapshotCrystal : public ProjectionCrystal
 public:
 	ACTOR_SYSTEM(SnapshotCrystal);
 
+	void Create() override;
 	void Interact() override;
 
 private:

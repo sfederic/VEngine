@@ -4,6 +4,14 @@
 #include "Components/MeshComponent.h"
 #include "Core/Log.h"
 
+void SnapshotCrystal::Create()
+{
+	__super::Create();
+
+	projectionMesh->SetVisibility(false);
+	projectionMesh->SetActive(false);
+}
+
 void SnapshotCrystal::Interact()
 {
 	SetProjectionMeshFromFacingGridActor();
