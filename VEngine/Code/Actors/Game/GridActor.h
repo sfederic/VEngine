@@ -92,6 +92,9 @@ public:
 	//For when a fluid or something hits a gridactor (e.g. to extinguish flames)
 	virtual void Douse() {}
 
+	//Like when a steam valve or fire or whatever something hits the actor.
+	virtual void Steamed() {}
+
 	//When exposed to something on fire
 	virtual void Burn() {}
 
