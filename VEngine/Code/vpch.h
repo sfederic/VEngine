@@ -4,6 +4,8 @@
 #define NOMINMAX
 
 //Lot of the includes here are for Properties.h
+#include <fstream>
+#include <sstream>
 #include <vector>
 #include <map>
 #include <set>
