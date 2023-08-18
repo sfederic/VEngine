@@ -1,5 +1,6 @@
 #include "vpch.h"
 #include "AssetDock.h"
+#include <qdesktopservices.h>
 #include <qmenu.h>
 #include <qfiledialog.h>
 #include <filesystem>
@@ -8,15 +9,12 @@
 #include <qfilesystemmodel.h>
 #include <qtreeview.h>
 #include <qlistwidget.h>
-#include <QDesktopServices>
 #include <qboxlayout.h>
 #include <qlineedit.h>
-#include <QUrl>
 #include "Core/FileSystem.h"
 #include "Asset/AssetSystem.h"
 #include "Actors/MeshActor.h"
 #include "Core/WorldEditor.h"
-#include "PropertiesDock.h"
 #include "Render/TextureSystem.h"
 #include "Render/Material.h"
 #include "Render/ShaderItem.h"

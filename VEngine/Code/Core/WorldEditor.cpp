@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "WorldEditor.h"
 #include <QFileDialog>
+#include <QDesktopServices>
 #include "Physics/Raycast.h"
 #include "Input.h"
 #include "Core/VMath.h"
@@ -20,7 +21,6 @@
 #include "Render/Material.h"
 #include "Render/MaterialSystem.h"
 #include "Components/MeshComponent.h"
-#include "Gameplay/GameUtils.h"
 
 std::set<Actor*> pickedActors;
 Actor* pickedActor;

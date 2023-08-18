@@ -6,7 +6,6 @@
 #include <random>
 #include "Actors/Actor.h"
 #include "Camera.h"
-#include "Components/CameraComponent.h"
 #include "Render/Vertex.h"
 #include "Render/Renderer.h"
 

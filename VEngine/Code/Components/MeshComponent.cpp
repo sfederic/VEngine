@@ -1,20 +1,13 @@
 #include "vpch.h"
 #include "MeshComponent.h"
 #include <algorithm>
-#include "Core/VMath.h"
 #include "Core/Camera.h"
-#include "Actors/Game/Player.h"
-#include "Asset/FBXLoader.h"
 #include "Asset/AssetSystem.h"
-#include "Gameplay/GameUtils.h"
 #include "Render/RenderUtils.h"
-#include "Render/ShaderSystem.h"
 #include "Render/Material.h"
 #include "Render/MaterialSystem.h"
 #include "Render/Renderer.h"
 #include "Render/TextureSystem.h"
-#include "Render/VertexShader.h"
-#include "Render/PixelShader.h"
 #include "Physics/PhysicsSystem.h"
 
 std::map<std::string, MeshComponent*> debugMeshes;

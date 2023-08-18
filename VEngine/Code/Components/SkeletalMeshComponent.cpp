@@ -5,7 +5,6 @@
 #include "Core/Log.h"
 #include "Asset/AssetSystem.h"
 #include "Animation/Skeleton.h"
-#include "Render/MeshData.h"
 
 Properties SkeletalMeshComponent::GetProps()
 {

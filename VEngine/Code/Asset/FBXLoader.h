@@ -2,7 +2,6 @@
 
 #include <string>
 #include <vector>
-#include <map>
 #include "Animation/Animation.h"
 
 //The oficial docs on the FBX SDK (the current version is hard to find, google brings you to 2014 docs)

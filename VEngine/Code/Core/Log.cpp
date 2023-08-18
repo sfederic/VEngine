@@ -5,7 +5,6 @@
 #include <chrono>
 #include <vadefs.h>
 #include "Editor/Editor.h"
-#include "VString.h"
 
 void Log(std::string logMessage, ...)
 {

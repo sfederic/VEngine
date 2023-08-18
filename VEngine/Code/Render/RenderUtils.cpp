@@ -4,7 +4,6 @@
 #include "PipelineObjects.h"
 #include "Core/Debug.h"
 #include <WICTextureLoader.h>
-#include "TextureSystem.h"
 #include <filesystem>
 #include "Core/VString.h"
 #include "Asset/AssetPaths.h"

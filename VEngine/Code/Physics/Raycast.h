@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-#include <array>
 #include <DirectXMath.h>
 #include "Physics/CollisionLayers.h"
 

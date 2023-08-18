@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "VEnum.h"
-#include <cassert>
 
 void VEnum::SetValue(const std::string& newValue)
 {

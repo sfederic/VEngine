@@ -12,7 +12,6 @@
 #include "Core.h"
 #include "Log.h"
 #include "Camera.h"
-#include "Components/CameraComponent.h"
 #include "Actors/Game/Player.h"
 #include "Actors/Game/EntranceTrigger.h"
 #include "VString.h"
@@ -21,7 +20,6 @@
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/WorldFunctions.h"
 #include "Profile.h"
-#include "Asset/AssetSystem.h"
 #include "UI/UISystem.h"
 #include "UI/ScreenFadeWidget.h"
 

@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "SpriteSheet.h"
-#include "Render/SpriteSystem.h"
 #include "Render/TextureSystem.h"
 #include "Render/Texture2D.h"
 #include "Core/VMath.h"

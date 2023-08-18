@@ -10,8 +10,6 @@
 #include "Actors/Actor.h"
 #include "Actors/ActorSystemCache.h"
 #include "Core/World.h"
-#include "Core/Camera.h"
-#include "Components/CameraComponent.h"
 #include "Core/WorldEditor.h"
 #include "Core/Log.h"
 #include "Editor.h"

@@ -1,7 +1,6 @@
 #include "vpch.h"
 #include "Console.h"
 #include <dwrite.h>
-#include <d2d1.h>
 #include "Components/Component.h"
 #include "Components/MeshComponent.h"
 #include "Core/Input.h"

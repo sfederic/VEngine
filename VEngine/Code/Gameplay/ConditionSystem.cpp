@@ -1,15 +1,9 @@
 #include "vpch.h"
 #include "ConditionSystem.h"
-#include <cassert>
-#include "GameInstance.h"
-#include "GameUtils.h"
-#include "UI/UISystem.h"
 #include "Core/World.h"
 #include "Core/Log.h"
 #include "Audio/AudioSystem.h"
 #include "Actors/Game/EntranceTrigger.h"
-#include "Actors/Game/Player.h"
-#include "Components/MeshComponent.h"
 
 ConditionSystem conditionSystem;
 

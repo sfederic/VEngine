@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "GameInstance.h"
 
-std::string GameInstance::startingMap = "market_courtyard.vmap";
+std::string GameInstance::startingMap = "millennium_puzzle_1.vmap";
 std::string GameInstance::previousMapMovedFrom = startingMap;
 
 //Used when continuing from game save files

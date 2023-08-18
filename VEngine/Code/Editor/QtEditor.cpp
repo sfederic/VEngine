@@ -17,11 +17,7 @@
 #include "WorldDock.h"
 #include "SystemDock.h"
 #include "ToolbarDock.h"
-#include "Render/Material.h"
-#include "Core/Serialiser.h"
 #include "Core/Core.h"
-#include "Render/MaterialSystem.h"
-#include "UI/UISystem.h"
 
 void QtEditor::Init(int argc, char* argv[])
 {

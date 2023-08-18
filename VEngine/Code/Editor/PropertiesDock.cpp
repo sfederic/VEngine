@@ -10,16 +10,12 @@
 #include <QLineEdit>
 #include "Actors/Actor.h"
 #include "Components/Component.h"
-#include "Components/IComponentSystem.h"
-#include "Components/ComponentSystemCache.h"
-#include "Render/PipelineObjects.h"
 #include "PropertyWidgets/BoolWidget.h" 
 #include "PropertyWidgets/Float2Widget.h"
 #include "PropertyWidgets/Float3Widget.h"
 #include "PropertyWidgets/Float4Widget.h"
 #include "PropertyWidgets/FloatWidget.h"
 #include "PropertyWidgets/IntWidget.h"
-#include "PropertyWidgets/UintWidget.h"
 #include "PropertyWidgets/VectorWidget.h"
 #include "PropertyWidgets/StringWidget.h"
 #include "PropertyWidgets/WStringWidget.h"
@@ -27,7 +23,6 @@
 #include "PropertyWidgets/MeshComponentDataWidget.h"
 #include "PropertyWidgets/VEnumWidget.h"
 #include "Core/VEnum.h"
-#include "Render/Material.h"
 #include "Render/RenderPropertyStructs.h"
 
 std::unordered_map<std::type_index, std::function<void(Property&, int)>> typeToFunctionMap;

@@ -1,8 +1,6 @@
 #include "vpch.h"
 #include "VString.h"
 #include <locale>
-#include <algorithm>
-#include <stdarg.h>
 #include <vadefs.h>
 #include <codecvt>
 

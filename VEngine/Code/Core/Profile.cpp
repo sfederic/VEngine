@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "Profile.h"
-#include <cassert>
 #include <source_location>
 
 std::unordered_map<std::string, TimeFrame> Profile::timeFrames;

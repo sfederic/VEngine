@@ -1,7 +1,6 @@
 #include "vpch.h"
 #include "AudioSystem.h"
 #include <filesystem>
-#include <cassert>
 #include "AudioBase.h"
 #include "AudioChannel.h"
 #include "Core/Debug.h"

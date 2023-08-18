@@ -1,7 +1,9 @@
 #pragma once
 
-#include "ParticleEmitter.h"
-#include "Render/SpriteSystem.h"
+#include "Components/SpatialComponent.h"
+#include "Components/ComponentSystem.h"
+#include "Render/Sprite.h"
+#include "../Render/RenderPropertyStructs.h"
 
 //Holds sprite sheet data. Uses the amount of rows and columns against the texture's width and height.
 //Make sure the image ratio of the sprite sheet is even (eg. 1024x1024).

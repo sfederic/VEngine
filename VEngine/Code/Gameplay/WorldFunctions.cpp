@@ -1,7 +1,6 @@
 #include "vpch.h"
 #include "WorldFunctions.h"
 #include "Core/Log.h"
-#include "GameUtils.h"
 
 std::map<std::string, std::function<void()>> worldStartFunctionMap;
 
