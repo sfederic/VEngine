@@ -1,7 +1,6 @@
 #include "vpch.h"
 #include "InteractTrigger.h"
 #include "Components/BoxTriggerComponent.h"
-#include "Core/Camera.h"
 #include "Gameplay/GameUtils.h"
 #include "UI/Game/InteractWidget.h"
 #include "UI/UISystem.h"

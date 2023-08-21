@@ -1,20 +1,13 @@
 #include "vpch.h"
 #include "Unit.h"
-#include <algorithm>
 #include "Gameplay/GridNode.h"
 #include "Gameplay/GameUtils.h"
 #include "Grid.h"
-#include "Components/MeshComponent.h"
-#include "Components/BoxTriggerComponent.h"
 #include "Core/VMath.h"
 #include "Player.h"
 #include "Core/Timer.h"
-#include "Core/Log.h"
 #include "UI/UISystem.h"
 #include "UI/Game/HealthWidget.h"
-#include "Gameplay/GameInstance.h"
-#include "Actors/Game/EntranceTrigger.h"
-#include "Physics/Raycast.h"
 
 Unit::Unit()
 {

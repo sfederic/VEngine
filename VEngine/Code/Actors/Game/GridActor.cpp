@@ -10,7 +10,6 @@
 #include "WaterVolume.h"
 #include "Core/VMath.h"
 #include "Physics/Raycast.h"
-#include "Gameplay/GameUtils.h"
 
 GridActor::GridActor()
 {

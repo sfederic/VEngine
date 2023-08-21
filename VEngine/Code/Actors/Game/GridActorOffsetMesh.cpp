@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "GridActorOffsetMesh.h"
+#include "Components/SpatialComponent.h"
 #include "Components/MeshComponent.h"
-#include "Physics/Raycast.h"
 
 GridActorOffsetMesh::GridActorOffsetMesh()
 {

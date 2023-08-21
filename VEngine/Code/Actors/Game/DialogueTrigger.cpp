@@ -2,9 +2,9 @@
 #include "DialogueTrigger.h"
 #include "Components/Game/DialogueComponent.h"
 #include "Components/BoxTriggerComponent.h"
-#include "UI/Game/DialogueWidget.h"
 #include "Core/Timer.h"
 #include "Core/Input.h"
+#include "UI/Game/DialogueWidget.h"
 
 DialogueTrigger::DialogueTrigger()
 {

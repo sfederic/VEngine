@@ -4,7 +4,6 @@
 #include "Gameplay/GameUtils.h"
 #include "Components/MeshComponent.h"
 #include "Components/BoxTriggerComponent.h"
-#include "Burnable.h"
 
 FireSource::FireSource()
 {

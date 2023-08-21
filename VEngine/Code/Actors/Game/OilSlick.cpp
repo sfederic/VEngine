@@ -1,7 +1,6 @@
 #include "vpch.h"
 #include "OilSlick.h"
 #include "Components/MeshComponent.h"
-#include "Gameplay/GameUtils.h"
 #include "FireSource.h"
 
 void OilSlick::Create()

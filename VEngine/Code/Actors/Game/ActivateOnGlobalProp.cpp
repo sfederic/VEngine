@@ -2,7 +2,6 @@
 #include "ActivateOnGlobalProp.h"
 #include "Gameplay/GameInstance.h"
 #include "Core/PropertyTypes.h"
-#include "Components/MeshComponent.h"
 
 ActivateOnGlobalProp::ActivateOnGlobalProp()
 {
