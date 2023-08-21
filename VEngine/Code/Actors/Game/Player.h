@@ -79,6 +79,7 @@ public:
 	void SetNextPosAndRotToCurrent();
 
 private:
+	XMVECTOR nextCameraPosition;
 	XMVECTOR cameraLinkActiveLocalPosition;
 	XMVECTOR cameraStartingLocalPosition;
 	float nextCameraFOV = 0.f;

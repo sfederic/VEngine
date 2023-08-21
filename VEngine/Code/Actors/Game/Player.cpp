@@ -58,6 +58,7 @@ void Player::Start()
 	camera->targetActor = this;
 	nextCameraFOV = camera->FOV;
 	camera->SetAsActiveCamera();
+	nextCameraPosition = camera->GetLocalPositionV();
 
 	//Setup widgets
 	interactWidget = UISystem::CreateWidget<InteractWidget>();
@@ -104,13 +105,18 @@ void Player::Tick(float deltaTime)
 
 	dialogueComponent->SetPosition(GetHomogeneousPositionV());
 
+	//Lerp actor position and rotation
 	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, moveSpeed));
 	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotateSpeed));
+
+	//Lerp camera position
+	camera->SetLocalPosition(
+		VMath::VectorConstantLerp(camera->GetLocalPositionV(), nextCameraPosition, deltaTime, 14.f));
 }
 
 Properties Player::GetProps()
 {
-    auto props = __super::GetProps();
+	auto props = __super::GetProps();
 	props.title = GetTypeName();
 	return props;
 }
@@ -327,7 +333,7 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 			ambientColour.w = alpha;
 			mesh->SetAmbientColour(ambientColour);
 		}
-	};
+		};
 
 	const float transparentValue = 0.35f;
 	const float solidValue = 1.f;
@@ -355,7 +361,7 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 	}
 	else
 	{
-		for(auto actor : previousHitTransparentActors)
+		for (auto actor : previousHitTransparentActors)
 		{
 			SetActorAlpha(actor, solidValue);
 		}
@@ -395,7 +401,7 @@ bool Player::CombatInteractCheck(Actor* actorToCheck)
 			return true;
 		}
 	}
-			
+
 	return false;
 }
 
@@ -637,15 +643,15 @@ void Player::MoveLinkedGridActor()
 	}
 
 	const auto checkLinkMovement = [](bool canBeMoved) -> bool
-	{
-		if (!canBeMoved)
 		{
-			//@Todo: replace this with a shake of the spatial component or some other visual effect
-			GameUtils::CameraShake(0.25f);
-			return false;
-		}
-		return true;
-	};
+			if (!canBeMoved)
+			{
+				//@Todo: replace this with a shake of the spatial component or some other visual effect
+				GameUtils::CameraShake(0.25f);
+				return false;
+			}
+			return true;
+		};
 
 	if (Input::GetKeyUp(Keys::W))
 	{
@@ -729,14 +735,14 @@ void Player::RotateLinkedGridActor()
 	}
 
 	const auto checkLinkRotation = [](bool canBeRotated) -> bool
-	{
-		if (!canBeRotated)
 		{
-			GameUtils::CameraShake(0.25f);
-			return false;
-		}
-		return true;
-	};
+			if (!canBeRotated)
+			{
+				GameUtils::CameraShake(0.25f);
+				return false;
+			}
+			return true;
+		};
 
 	constexpr float angleIncrement = 90.f;
 
@@ -993,7 +999,7 @@ void Player::SetInteractWidgetText(std::wstring_view interactText)
 
 void Player::SetLinkedGridActor(GridActor& gridActor)
 {
-	camera->SetLocalPosition(cameraLinkActiveLocalPosition);
+	nextCameraPosition = cameraLinkActiveLocalPosition;
 
 	ResetHighlightedActor();
 
@@ -1009,7 +1015,7 @@ void Player::SetLinkedGridActor(GridActor& gridActor)
 
 void Player::ResetLinkedGridActor()
 {
-	camera->SetLocalPosition(cameraStartingLocalPosition);
+	nextCameraPosition = cameraStartingLocalPosition;
 
 	ResetHighlightedActor();
 
