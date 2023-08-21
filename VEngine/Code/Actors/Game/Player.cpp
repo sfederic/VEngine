@@ -3,7 +3,6 @@
 #include "Core/Camera.h"
 #include "Core/Input.h"
 #include "Core/VMath.h"
-#include "Core/Core.h"
 #include "Core/Log.h"
 #include "Core/Timer.h"
 #include "Physics/Raycast.h"
@@ -12,18 +11,12 @@
 #include "Actors/Game/Pickup.h"
 #include "Grid.h"
 #include "GridActor.h"
-#include "Components/EmptyComponent.h"
-#include "Components/AudioComponent.h"
 #include "Components/Game/DialogueComponent.h"
 #include "UI/UISystem.h"
-#include "UI/Game/HealthWidget.h"
 #include "UI/Game/DialogueWidget.h"
 #include "UI/Game/InteractWidget.h"
 #include "UI/Game/PlayerHealthWidget.h"
-#include "Gameplay/GameInstance.h"
 #include "Gameplay/GameUtils.h"
-#include "Render/Material.h"
-#include "Render/BlendStates.h"
 
 Player::Player()
 {
