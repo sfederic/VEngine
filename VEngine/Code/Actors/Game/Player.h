@@ -79,6 +79,8 @@ public:
 	void SetNextPosAndRotToCurrent();
 
 private:
+	XMVECTOR cameraLinkActiveLocalPosition;
+	XMVECTOR cameraStartingLocalPosition;
 	float nextCameraFOV = 0.f;
 
 	bool isInputLinkedToGridActor = false;

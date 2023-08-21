@@ -22,7 +22,7 @@ Player::Player()
 {
 	SetEmptyRootComponent();
 
-	camera = CreateComponent("Camera", CameraComponent(XMFLOAT3(1.75f, 1.75f, -2.75f)));
+	camera = CreateComponent<CameraComponent>("Camera");
 	rootComponent->AddChild(camera);
 
 	nextPos = XMVectorZero();
@@ -36,6 +36,12 @@ Player::Player()
 
 void Player::Create()
 {
+	__super::Create();
+
+	cameraStartingLocalPosition = XMVectorSet(1.75f, 1.75f, -2.75f, 1.f);
+	cameraLinkActiveLocalPosition = XMVectorSet(1.25f, 0.55f, -0.75f, 1.f);
+	camera->SetLocalPosition(cameraStartingLocalPosition);
+
 	moveSpeed = 5.35f;
 	rotateSpeed = 4.75f;
 }
@@ -104,8 +110,8 @@ void Player::Tick(float deltaTime)
 
 Properties Player::GetProps()
 {
-    auto props = Actor::GetProps();
-	props.title = "Player";
+    auto props = __super::GetProps();
+	props.title = GetTypeName();
 	return props;
 }
 
@@ -987,6 +993,8 @@ void Player::SetInteractWidgetText(std::wstring_view interactText)
 
 void Player::SetLinkedGridActor(GridActor& gridActor)
 {
+	camera->SetLocalPosition(cameraLinkActiveLocalPosition);
+
 	ResetHighlightedActor();
 
 	HitResult nodeHit(this);
@@ -1001,6 +1009,8 @@ void Player::SetLinkedGridActor(GridActor& gridActor)
 
 void Player::ResetLinkedGridActor()
 {
+	camera->SetLocalPosition(cameraStartingLocalPosition);
+
 	ResetHighlightedActor();
 
 	linkedGridActor->SetGridPosition();
