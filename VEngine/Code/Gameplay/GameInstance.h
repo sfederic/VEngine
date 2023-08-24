@@ -21,6 +21,7 @@ namespace GameInstance
 	//GAME SPECIFIC FUNCS
 	std::string GetHeldPlayerItem();
 	void SetHeldPlayerItem(std::string_view heldItem);
+	void ClearHeldPlayerItem();
 
 	template <typename T>
 	T* GetGlobalProp(const std::string name)

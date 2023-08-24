@@ -39,3 +39,8 @@ void GameInstance::SetHeldPlayerItem(std::string_view heldItem)
 {
 	heldPlayerItem = heldItem;
 }
+
+void GameInstance::ClearHeldPlayerItem()
+{
+	heldPlayerItem.clear();
+}
