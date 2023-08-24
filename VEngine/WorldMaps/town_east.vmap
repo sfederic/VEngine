@@ -16,7 +16,7 @@ UID
 2190554293
 next
 EntranceTrigger
-2
+3
  Enabled
 1
  Position
@@ -72,6 +72,35 @@ Tag
 
 UID
 2813887732
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+2 0 2
+ Rotation
+-0 0.707107 -0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+town_projection_house.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger2
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+951568712
 Unlock Audio
 
 next
@@ -268,7 +297,7 @@ UID
 1092318401
 next
 BoxTriggerComponent
-2
+3
 2470325953
 Trigger
  Enabled
@@ -307,6 +336,25 @@ Offset
 UID
 1473444336
 next
+951568712
+Trigger
+ Enabled
+1
+ Pos
+2 0 2
+ Rot
+-0 0.707107 -0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+3237272074
+next
 CameraComponent
 1
 1092318401
@@ -331,7 +379,7 @@ UID
 2535344150
 next
 ConditionComponent
-2
+3
 2470325953
 Condition
  Enabled
@@ -357,6 +405,19 @@ Condition Arg
 
 UID
 3020957261
+next
+951568712
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+2195626398
 next
 DialogueComponent
 1

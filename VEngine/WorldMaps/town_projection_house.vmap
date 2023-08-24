@@ -34,6 +34,37 @@ DirectionalLightActor0
 UID
 2067563473
 next
+EntranceTrigger
+1
+ Enabled
+1
+ Position
+1 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+town_east.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+3286643173
+Unlock Audio
+
+next
 Grid
 1
  Enabled
@@ -142,6 +173,27 @@ Rotate Yaw
 UID
 2871459340
 next
+BoxTriggerComponent
+1
+3286643173
+Trigger
+ Enabled
+1
+ Pos
+1 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+3825158328
+next
 CameraComponent
 1
 582792471
@@ -164,6 +216,21 @@ Near Z
 0.01
 UID
 1129418124
+next
+ConditionComponent
+1
+3286643173
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+1405388929
 next
 DialogueComponent
 2
