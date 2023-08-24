@@ -10,6 +10,7 @@ public:
 
 	void Create() override;
 	void Interact() override;
+	Properties GetProps() override;
 
 private:
 	//This is what the Pickup is stored as at runtime.

@@ -25,3 +25,11 @@ void Pickup::Interact()
 
 	Destroy();
 }
+
+Properties Pickup::GetProps()
+{
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	props.Add("Item Name", &itemName);
+	return props;
+}
