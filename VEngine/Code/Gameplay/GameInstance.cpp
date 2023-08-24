@@ -9,6 +9,9 @@ std::string GameInstance::mapToLoadOnContinue;
 
 bool GameInstance::useGameSaves = false;
 
+//GAME SPECIFIC VARS
+static std::string heldPlayerItem;
+
 //Global properties
 static int heldCrystalCount = 0;
 
@@ -25,4 +28,14 @@ Properties GameInstance::GetGlobalProps()
 	props.Add("ChurchCrystal0Active", &churchCrystal0Active);
 
 	return props;
+}
+
+std::string GameInstance::GetHeldPlayerItem()
+{
+	return heldPlayerItem;
+}
+
+void GameInstance::SetHeldPlayerItem(std::string_view heldItem)
+{
+	heldPlayerItem = heldItem;
 }
