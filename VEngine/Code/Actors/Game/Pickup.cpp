@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "Pickup.h"
 #include "Gameplay/GameInstance.h"
+#include "Gameplay/GameUtils.h"
 #include "Core/Log.h"
 
 void Pickup::Create()
@@ -20,6 +21,9 @@ void Pickup::Interact()
 		Log("[%s]'s item name is empty.", GetName().c_str());
 		return;
 	}
+
+	//@Todo: audio just for testing
+	GameUtils::PlayAudioOneShot("coin2.wav");
 
 	GameInstance::SetHeldPlayerItem(itemName);
 	RecalcCurrentNodePosition();
