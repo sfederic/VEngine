@@ -22,8 +22,10 @@ void Pickup::Interact()
 		return;
 	}
 
-	//@Todo: audio just for testing
-	GameUtils::PlayAudioOneShot("coin2.wav");
+	if (!pickupAudioFilename.empty())
+	{
+		GameUtils::PlayAudioOneShot(pickupAudioFilename);
+	}
 
 	GameInstance::SetHeldPlayerItem(itemName);
 	RecalcCurrentNodePosition();
@@ -35,5 +37,6 @@ Properties Pickup::GetProps()
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
 	props.Add("Item Name", &itemName);
+	props.Add("Pickup Audio", &pickupAudioFilename);
 	return props;
 }

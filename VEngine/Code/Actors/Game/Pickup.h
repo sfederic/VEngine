@@ -17,4 +17,5 @@ protected:
 
 	//This is what the Pickup is stored as at runtime.
 	std::string itemName;
+	std::string pickupAudioFilename;
 };
