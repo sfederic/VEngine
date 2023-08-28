@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "Widget.h"
-#include <WICTextureLoader.h>
 #include "Core/Input.h"
 #include "Render/Renderer.h"
 #include "Editor/Editor.h"
@@ -69,7 +68,7 @@ void Widget::Text(const std::wstring text, Layout layout, TextAlign align,
 
 	switch (align)
 	{
-	case TextAlign::Center: 
+	case TextAlign::Center:
 		endAlignment = DWRITE_TEXT_ALIGNMENT_CENTER;
 		break;
 
@@ -185,7 +184,7 @@ Layout Widget::AlignLayout(float w, float h, Align align)
 
 	switch (align)
 	{
-	case Align::Center: 
+	case Align::Center:
 		vw /= 2.f;
 		vh /= 2.f;
 		break;
