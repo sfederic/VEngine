@@ -4,11 +4,17 @@
 
 void Wood::Create()
 {
+	canBePickedUp = false;
+	itemName = "Wood";
+
 	SetMeshFilename("wood.vmesh");
 }
 
 void Wood::Slice()
 {
+	//Make wood collectible only when it has been cut
+	canBePickedUp = true;
+
 	hasBeenCut = true;
 
 	mesh->SetMeshFilename("cut_wood.vmesh");
@@ -17,10 +23,8 @@ void Wood::Slice()
 
 void Wood::Interact()
 {
-	if (hasBeenCut)
+	if (hasBeenCut && canBePickedUp)
 	{
-		//@Todo: set to an "inventory"
-		RecalcCurrentNodePosition();
-		Destroy();
+		__super::Interact();
 	}
 }

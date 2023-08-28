@@ -12,7 +12,9 @@ public:
 	void Interact() override;
 	Properties GetProps() override;
 
-private:
+protected:
+	bool canBePickedUp = true;
+
 	//This is what the Pickup is stored as at runtime.
 	std::string itemName;
 };
