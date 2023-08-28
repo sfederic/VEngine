@@ -12,8 +12,10 @@
 #include "Grid.h"
 #include "GridActor.h"
 #include "Components/Game/DialogueComponent.h"
+#include "Components/MeshComponent.h"
 #include "UI/UISystem.h"
 #include "UI/Game/DialogueWidget.h"
+#include "UI/Game/PickupWidget.h"
 #include "UI/Game/InteractWidget.h"
 #include "UI/Game/PlayerHealthWidget.h"
 #include "Gameplay/GameUtils.h"
@@ -63,6 +65,7 @@ void Player::Start()
 	//Setup widgets
 	interactWidget = UISystem::CreateWidget<InteractWidget>();
 	healthWidget = UISystem::CreateWidget<PlayerHealthWidget>();
+	pickupWidget = UISystem::CreateWidget<PickupWidget>();
 }
 
 void Player::End()
@@ -1043,6 +1046,21 @@ void Player::SetNextPosAndRotToCurrent()
 {
 	nextPos = GetPositionV();
 	nextRot = GetRotationV();
+}
+
+void Player::SetPickupWidgetText(std::wstring_view text)
+{
+	pickupWidget->SetItemDisplayName(text);
+}
+
+void Player::AddPickupWidgetToViewport()
+{
+	pickupWidget->AddToViewport();
+}
+
+void Player::RemovePickupWidgetFromViewport()
+{
+	pickupWidget->RemoveFromViewport();
 }
 
 GridNode* Player::GetCurrentNode()

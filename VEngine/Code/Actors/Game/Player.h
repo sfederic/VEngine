@@ -2,13 +2,11 @@
 
 #include "Actors/Actor.h"
 #include "Actors/ActorSystem.h"
-#include "Gameplay/BattleEnums.h"
-#include "Components/MeshComponent.h"
-#include "Core/Log.h"
 
 struct DialogueComponent;
 struct InteractWidget;
 struct PlayerHealthWidget;
+class PickupWidget;
 struct GridActor;
 struct Unit;
 struct MeshComponent;
@@ -78,7 +76,13 @@ public:
 
 	void SetNextPosAndRotToCurrent();
 
+	void SetPickupWidgetText(std::wstring_view text);
+	void AddPickupWidgetToViewport();
+	void RemovePickupWidgetFromViewport();
+
 private:
+	PickupWidget* pickupWidget = nullptr;
+
 	XMVECTOR nextCameraPosition;
 	XMVECTOR cameraLinkActiveLocalPosition;
 	XMVECTOR cameraStartingLocalPosition;
