@@ -3,6 +3,7 @@
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/GameUtils.h"
 #include "Core/Log.h"
+#include "Actors/Game/Player.h"
 
 void Pickup::Create()
 {
@@ -26,6 +27,10 @@ void Pickup::Interact()
 	{
 		GameUtils::PlayAudioOneShot(pickupAudioFilename);
 	}
+
+	auto player = Player::system.GetOnlyActor();
+	player->SetPickupWidgetText(VString::stows(itemName));
+	player->AddPickupWidgetToViewport();
 
 	GameInstance::SetHeldPlayerItem(itemName);
 	RecalcCurrentNodePosition();
