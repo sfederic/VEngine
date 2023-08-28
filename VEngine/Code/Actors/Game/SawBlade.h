@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GridActor.h"
+#include "Core/Properties.h"
 
 class BoxTriggerComponent;
 
@@ -13,6 +14,7 @@ public:
 	SawBlade();
 	void Create() override;
 	void Tick(float deltaTime) override;
+	Properties GetProps() override;
 
 	void PowerUp() override;
 	void PowerDown() override;

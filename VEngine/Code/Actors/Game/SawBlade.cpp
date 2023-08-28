@@ -23,6 +23,13 @@ void SawBlade::Tick(float deltaTime)
 	SliceSurroundingGridActors();
 }
 
+Properties SawBlade::GetProps()
+{
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	return props;
+}
+
 void SawBlade::PowerUp()
 {
 	isCutting = true;
