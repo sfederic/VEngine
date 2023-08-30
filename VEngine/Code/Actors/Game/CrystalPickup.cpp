@@ -5,6 +5,8 @@
 
 void CrystalPickup::Create()
 {
+	__super::Create();
+
 	SetMeshFilename("crystal.vmesh");
 }
 
@@ -14,7 +16,5 @@ void CrystalPickup::Interact()
 	*crystalCount = *crystalCount + 1;
 	Log("Held Crystal Count at [%d].", *crystalCount);
 
-	RecalcCurrentNodePosition();
-
-	Destroy();
+	__super::Interact();
 }

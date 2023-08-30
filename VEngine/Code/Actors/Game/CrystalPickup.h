@@ -1,8 +1,8 @@
 #pragma once
 
-#include "GridActor.h"
+#include "Pickup.h"
 
-class CrystalPickup : public GridActor
+class CrystalPickup : public Pickup
 {
 public:
 	ACTOR_SYSTEM(CrystalPickup);
