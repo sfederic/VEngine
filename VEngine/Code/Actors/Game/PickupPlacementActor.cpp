@@ -25,11 +25,15 @@ void PickupPlacementActor::Tick(float deltaTime)
 	{
 		if (Input::GetKeyUp(Keys::Down))
 		{
-			GameInstance::ClearHeldPlayerItem();
-
-			if (actorToActivate)
+			const std::string heldItemName = GameInstance::GetHeldPlayerItem();
+			if (heldItemName == heldItemToCheck)
 			{
-				actorToActivate->Activate();
+				GameInstance::ClearHeldPlayerItem();
+
+				if (actorToActivate)
+				{
+					actorToActivate->Activate();
+				}
 			}
 		}
 	}
@@ -40,5 +44,6 @@ Properties PickupPlacementActor::GetProps()
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
 	props.Add("ActorToActivate", &actorToActivateName);
+	props.Add("Item Name", &heldItemToCheck);
 	return props;
 }

@@ -22,4 +22,7 @@ private:
 
 	std::string actorToActivateName;
 	Actor* actorToActivate = nullptr;
+
+	//The name of the held item the player needs to activate the actor.
+	std::string heldItemToCheck;
 };
