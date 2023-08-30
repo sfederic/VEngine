@@ -8,6 +8,9 @@ void CrystalPickup::Create()
 	__super::Create();
 
 	SetMeshFilename("crystal.vmesh");
+
+	itemIconFilename = "crystal_pickup_icon.png";
+	itemName = "Crystal";
 }
 
 void CrystalPickup::Interact()
