@@ -7,8 +7,8 @@ class PickupWidget : public Widget
 {
 public:
 	void Draw(float deltaTime) override;
-	void SetItemDisplayName(std::wstring_view name) { heldItemDisplayName = name; }
+	void SetItemIconFilename(std::string_view name) { heldItemIconFilename = name; }
 
 private:
-	std::wstring heldItemDisplayName;
+	std::string heldItemIconFilename;
 };

@@ -28,11 +28,10 @@ void Pickup::Interact()
 		GameUtils::PlayAudioOneShot(pickupAudioFilename);
 	}
 
-	auto player = Player::system.GetOnlyActor();
-	player->SetPickupWidgetText(VString::stows(itemName));
-	player->AddPickupWidgetToViewport();
+	SetPickupWidgetIcon();
 
 	GameInstance::SetHeldPlayerItem(itemName);
+
 	RecalcCurrentNodePosition();
 	Destroy();
 }
@@ -42,6 +41,14 @@ Properties Pickup::GetProps()
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
 	props.Add("Item Name", &itemName);
+	props.Add("Item Icon", &itemIconFilename);
 	props.Add("Pickup Audio", &pickupAudioFilename);
 	return props;
+}
+
+void Pickup::SetPickupWidgetIcon()
+{
+	auto player = Player::system.GetOnlyActor();
+	player->SetPickupWidgetIconFilename(itemIconFilename);
+	player->AddPickupWidgetToViewport();
 }

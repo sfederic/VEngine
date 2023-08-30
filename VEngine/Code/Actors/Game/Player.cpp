@@ -1048,9 +1048,9 @@ void Player::SetNextPosAndRotToCurrent()
 	nextRot = GetRotationV();
 }
 
-void Player::SetPickupWidgetText(std::wstring_view text)
+void Player::SetPickupWidgetIconFilename(std::string_view filename)
 {
-	pickupWidget->SetItemDisplayName(text);
+	pickupWidget->SetItemIconFilename(filename);
 }
 
 void Player::AddPickupWidgetToViewport()

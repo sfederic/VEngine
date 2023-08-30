@@ -76,7 +76,7 @@ public:
 
 	void SetNextPosAndRotToCurrent();
 
-	void SetPickupWidgetText(std::wstring_view text);
+	void SetPickupWidgetIconFilename(std::string_view filename);
 	void AddPickupWidgetToViewport();
 	void RemovePickupWidgetFromViewport();
 
