@@ -1,3 +1,56 @@
+Canon
+1
+ Enabled
+1
+ Position
+1 0 2
+ Rotation
+-0 0.707107 -0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+1
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+Canon0
+Obstacle
+1
+Rotate Pitch
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+1645072
+next
 DirectionalLightActor
 1
  Enabled
@@ -41,7 +94,7 @@ GridActor
  Enabled
 1
  Position
-2 0 2
+3 0 2
  Rotation
 -0 0 -0 1
  Scale
@@ -74,12 +127,16 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 GridActor0
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
@@ -143,7 +200,18 @@ UID
 2226444911
 next
 DialogueComponent
-2
+3
+3131244648
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+4213841264
+next
 4014708087
 Dialogue
  Enabled
@@ -155,7 +223,7 @@ File
 UID
 2646512607
 next
-3131244648
+1645072
 Dialogue
  Enabled
 1
@@ -164,7 +232,7 @@ Dialogue
 File
 
 UID
-4213841264
+2319831518
 next
 DirectionalLightComponent
 1
@@ -262,15 +330,15 @@ UID
 2555574380
 next
 MeshComponent
-3
-4014708087
+4
+3131244648
 Mesh
  Enabled
 1
  Pos
-0 0 0
+3 0 2
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -310,13 +378,13 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-char.vmesh
+cube.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-1258601257
+1578641033
 next
 1035262158
 Mesh
@@ -373,14 +441,14 @@ Trans. Occlude
 UID
 1936633159
 next
-3131244648
+4014708087
 Mesh
  Enabled
 1
  Pos
-2 0 2
+0 0 0
  Rot
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -420,12 +488,67 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-cube.vmesh
+char.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-1578641033
+1258601257
+next
+1645072
+Mesh
+ Enabled
+1
+ Pos
+1 0 2
+ Rot
+-0 0.707107 -0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+turret.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2219730615
 next
 end
