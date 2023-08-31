@@ -184,7 +184,7 @@ UID
 781651653
 next
 MeshActor
-12
+16
  Enabled
 1
  Position
@@ -196,7 +196,7 @@ MeshActor
  Visible
 1
 Name
-pillar_ornate0
+plane0
 UID
 2381190161
 next
@@ -211,7 +211,7 @@ next
  Visible
 1
 Name
-pillar_ornate1
+plane1
 UID
 1219300372
 next
@@ -226,7 +226,7 @@ next
  Visible
 1
 Name
-pillar_ornate2
+plane2
 UID
 3974206542
 next
@@ -241,7 +241,7 @@ next
  Visible
 1
 Name
-pillar_ornate3
+plane3
 UID
 2661849372
 next
@@ -256,7 +256,7 @@ next
  Visible
 1
 Name
-pillar_ornate4
+plane4
 UID
 1112150003
 next
@@ -271,7 +271,7 @@ next
  Visible
 1
 Name
-pillar_ornate5
+plane5
 UID
 733086608
 next
@@ -286,7 +286,7 @@ next
  Visible
 1
 Name
-pillar_ornate6
+plane6
 UID
 1759698158
 next
@@ -301,7 +301,7 @@ next
  Visible
 1
 Name
-pillar_ornate7
+plane7
 UID
 1421346057
 next
@@ -316,7 +316,7 @@ next
  Visible
 1
 Name
-pillar_ornate8
+plane8
 UID
 3542409908
 next
@@ -331,7 +331,7 @@ next
  Visible
 1
 Name
-pillar_ornate9
+plane9
 UID
 1272938051
 next
@@ -346,7 +346,7 @@ next
  Visible
 1
 Name
-pillar_ornate10
+plane10
 UID
 871968760
 next
@@ -361,9 +361,69 @@ next
  Visible
 1
 Name
-pillar_ornate11
+plane11
 UID
 3599477141
+next
+ Enabled
+1
+ Position
+8 2 5
+ Rotation
+0 0.707107 0 0.707107
+ Scale
+3.49997 1 0.999992
+ Visible
+1
+Name
+plane12
+UID
+15925770
+next
+ Enabled
+1
+ Position
+8 4 5
+ Rotation
+0 0.707107 0 0.707107
+ Scale
+3.49996 1 0.999989
+ Visible
+1
+Name
+plane13
+UID
+3974856286
+next
+ Enabled
+1
+ Position
+2 4 5
+ Rotation
+0 0.707107 0 0.707107
+ Scale
+3.49994 1 0.999985
+ Visible
+1
+Name
+plane14
+UID
+3179786831
+next
+ Enabled
+1
+ Position
+2 2 5
+ Rotation
+0 0.707107 0 0.707107
+ Scale
+3.49993 1 0.999982
+ Visible
+1
+Name
+plane15
+UID
+1026992267
 next
 Player
 1
@@ -678,7 +738,7 @@ UID
 529460436
 next
 MeshComponent
-13
+17
 2381190161
 Mesh
  Enabled
@@ -1339,6 +1399,61 @@ Trans. Occlude
 UID
 2056737437
 next
+15925770
+Mesh
+ Enabled
+1
+ Pos
+8 2 5
+ Rot
+0 0.707107 0 0.707107
+ Scale
+3.49997 1 0.999992
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+town_flags.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3011111646
+next
 4178270799
 Mesh
  Enabled
@@ -1393,5 +1508,170 @@ Trans. Occlude
 0
 UID
 2034855037
+next
+3974856286
+Mesh
+ Enabled
+1
+ Pos
+8 4 5
+ Rot
+0 0.707107 0 0.707107
+ Scale
+3.49996 1 0.999989
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+town_flags.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2058689638
+next
+3179786831
+Mesh
+ Enabled
+1
+ Pos
+2 4 5
+ Rot
+0 0.707107 0 0.707107
+ Scale
+3.49994 1 0.999985
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+town_flags.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+4244162516
+next
+1026992267
+Mesh
+ Enabled
+1
+ Pos
+2 2 5
+ Rot
+0 0.707107 0 0.707107
+ Scale
+3.49993 1 0.999982
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+town_flags.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3286750169
 next
 end
