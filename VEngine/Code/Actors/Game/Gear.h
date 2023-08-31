@@ -9,4 +9,10 @@ public:
 
 	void Create() override;
 	void OnLinkRotate() override;
+	void OnRotationEnd() override;
+
+	bool Intersects(const BoundingOrientedBox& bob);
+	bool CheckIfPreviousGear(Gear* gear);
+
+	std::vector<Gear*> previouslyCascadedGears;
 };
