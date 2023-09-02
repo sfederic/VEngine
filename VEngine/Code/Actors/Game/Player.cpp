@@ -796,6 +796,7 @@ void Player::RotateLinkedGridActor()
 				if (!linkedGridActor->CheckNextRotationBoundsIntersect())
 				{
 					linkedGridActor->OnLinkRotate();
+					linkedGridActor->OnLinkRotateRight();
 				}
 				else
 				{
@@ -816,6 +817,7 @@ void Player::RotateLinkedGridActor()
 				if (!linkedGridActor->CheckNextRotationBoundsIntersect())
 				{
 					linkedGridActor->OnLinkRotate();
+					linkedGridActor->OnLinkRotateLeft();
 				}
 				else
 				{
