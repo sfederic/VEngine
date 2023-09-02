@@ -326,6 +326,7 @@
     <ClCompile Include="Code\Actors\Game\SnapshotCrystal.cpp" />
     <ClCompile Include="Code\Actors\Game\PickupPlacementActor.cpp" />
     <ClCompile Include="Code\UI\Game\PickupWidget.cpp" />
+    <ClCompile Include="Code\Actors\Game\Pulley.cpp" />
     <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.h" />
     <ClInclude Include="Code\Actors\Game\ClockHand.h" />
     <ClInclude Include="Code\Actors\Game\LinkedObjects.h" />
@@ -681,6 +682,7 @@
     <ClInclude Include="Code\Actors\Game\SnapshotCrystal.h" />
     <ClInclude Include="Code\Actors\Game\PickupPlacementActor.h" />
     <ClInclude Include="Code\UI\Game\PickupWidget.h" />
+    <ClInclude Include="Code\Actors\Game\Pulley.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

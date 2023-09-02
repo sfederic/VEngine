@@ -749,6 +749,9 @@
     <ClCompile Include="Code\UI\Game\PickupWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\Game\Pulley.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1531,6 +1534,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\PickupWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\Pulley.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
