@@ -4,6 +4,7 @@
 #include <string>
 #include "UID.h"
 #include "Actors/ActorSystemCache.h"
+#include "Core/Log.h"
 
 class IActorSystem;
 class IComponentSystem;
@@ -139,6 +140,19 @@ namespace World
 			}
 		}
 		return outActors;
+	}
+
+	//This function is more for actors that need to find an actor in-world
+	template <typename T>
+	T* GetActorByNameAndLogCast(std::string actorName)
+	{
+		auto foundActorIt = actorNameMap.find(actorName);
+		if (foundActorIt == actorNameMap.end())
+		{
+			Log("%s actor not found.", actorName.c_str());
+			return nullptr;
+		}
+		return dynamic_cast<T*>(foundActorIt->second);
 	}
 
 	template <typename T>
