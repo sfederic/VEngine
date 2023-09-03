@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "LiftCrank.h"
 #include "Lift.h"
+#include "Core/Log.h"
 
 void LiftCrank::Create()
 {
@@ -12,7 +13,10 @@ void LiftCrank::Start()
 	__super::Start();
 
 	linkedLift = dynamic_cast<Lift*>(World::GetActorByNameAllowNull(linkedLiftName));
-	assert(linkedLift);
+	if (linkedLift == nullptr)
+	{
+		Log("Lift [%s] not found for LiftCrank [%s]", linkedLiftName.c_str(), GetName().c_str());
+	}
 }
 
 Properties LiftCrank::GetProps()
@@ -38,10 +42,13 @@ void LiftCrank::OnLinkRotateRight()
 
 void LiftCrank::MoveLinkedLiftAndContainedActors(const XMVECTOR direction)
 {
-	linkedLift->AddNextPosition(direction);
-
-	for (auto containedGridActor : linkedLift->GetGridActorsContainedInLiftTrigger())
+	if (linkedLift)
 	{
-		containedGridActor->AddNextPosition(direction);
+		linkedLift->AddNextPosition(direction);
+
+		for (auto containedGridActor : linkedLift->GetGridActorsContainedInLiftTrigger())
+		{
+			containedGridActor->AddNextPosition(direction);
+		}
 	}
 }
