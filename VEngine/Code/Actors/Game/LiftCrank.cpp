@@ -1,7 +1,6 @@
 #include "vpch.h"
 #include "LiftCrank.h"
 #include "Lift.h"
-#include "Core/VMath.h"
 
 void LiftCrank::Create()
 {
@@ -21,25 +20,28 @@ Properties LiftCrank::GetProps()
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
 	props.Add("Lift", &linkedLiftName);
+	props.Add("Move Direction", &moveDirection);
 	return props;
 }
 
 void LiftCrank::OnLinkRotateLeft()
 {
-	MoveLinkedLiftAndContainedActors(VMath::GlobalUpVector());
+	const XMVECTOR moveDirectionV = XMLoadFloat3(&moveDirection);
+	MoveLinkedLiftAndContainedActors(moveDirectionV);
 }
 
 void LiftCrank::OnLinkRotateRight()
 {
-	MoveLinkedLiftAndContainedActors(-VMath::GlobalUpVector());
+	const XMVECTOR moveDirectionV = XMLoadFloat3(&moveDirection);
+	MoveLinkedLiftAndContainedActors(-moveDirectionV);
 }
 
-void LiftCrank::MoveLinkedLiftAndContainedActors(XMVECTOR moveDirection)
+void LiftCrank::MoveLinkedLiftAndContainedActors(const XMVECTOR direction)
 {
-	linkedLift->AddNextPosition(moveDirection);
+	linkedLift->AddNextPosition(direction);
 
 	for (auto containedGridActor : linkedLift->GetGridActorsContainedInLiftTrigger())
 	{
-		containedGridActor->AddNextPosition(moveDirection);
+		containedGridActor->AddNextPosition(direction);
 	}
 }

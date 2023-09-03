@@ -18,8 +18,10 @@ public:
 	void OnLinkRotateRight() override;
 
 private:
-	void MoveLinkedLiftAndContainedActors(XMVECTOR moveDirection);
+	void MoveLinkedLiftAndContainedActors(const XMVECTOR direction);
 
 	std::string linkedLiftName;
 	Lift* linkedLift = nullptr;
+
+	XMFLOAT3 moveDirection;
 };
