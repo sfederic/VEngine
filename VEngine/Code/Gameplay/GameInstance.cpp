@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "GameInstance.h"
 
-std::string GameInstance::startingMap = "millennium_puzzle_1.vmap";
+std::string GameInstance::startingMap = "test.vmap";
 std::string GameInstance::previousMapMovedFrom = startingMap;
 
 //Used when continuing from game save files
@@ -13,20 +13,13 @@ bool GameInstance::useGameSaves = false;
 static std::string heldPlayerItem;
 
 //Global properties
-static int heldCrystalCount = 0;
-
-//Church
-static bool churchCrystal0Active = true;
+//...
+// 
+//...
 
 Properties GameInstance::GetGlobalProps()
 {
 	Properties props("GameInstance");
-
-	props.Add("HeldCrystalCount", &heldCrystalCount);
-
-	//Church
-	props.Add("ChurchCrystal0Active", &churchCrystal0Active);
-
 	return props;
 }
 
