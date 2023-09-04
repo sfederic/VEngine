@@ -10,6 +10,7 @@ void WaterWheel::Create()
 
 void WaterWheel::Start()
 {
+	__super::Start();
 	waterVolume = World::GetActorByNameAndLogCast<WaterVolume>(waterVolumeName);
 }
 
@@ -24,11 +25,18 @@ Properties WaterWheel::GetProps()
 
 void WaterWheel::OnLinkRotate()
 {
+	__super::OnLinkRotate();
+
 	if (waterVolume)
 	{
 		auto gridActors = waterVolume->GetAllGridActorsWithinVolume();
 		for (auto gridActor : gridActors)
 		{
+			if (gridActor == this)
+			{
+				continue;
+			}
+
 			auto pushDirectionV = XMLoadFloat3(&pushDirection);
 			auto nextPos = pushDirectionV + gridActor->GetPositionV();
 			gridActor->SetNextPos(nextPos);
