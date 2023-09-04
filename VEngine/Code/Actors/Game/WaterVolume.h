@@ -18,6 +18,7 @@ public:
 	Properties GetProps() override;
 
 	bool Contains(XMVECTOR point);
+	std::vector<GridActor*> GetAllGridActorsWithinVolume();
 
 private:
 	void DouseGridActorsInWaterVolume();

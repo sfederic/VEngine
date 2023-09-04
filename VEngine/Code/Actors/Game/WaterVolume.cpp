@@ -48,6 +48,19 @@ bool WaterVolume::Contains(XMVECTOR point)
 	return waterVolumeTrigger->Contains(point);
 }
 
+std::vector<GridActor*> WaterVolume::GetAllGridActorsWithinVolume()
+{
+	std::vector<GridActor*> outActors;
+	for (auto gridActor : World::GetAllActorsAsBaseType<GridActor>())
+	{
+		if (Contains(gridActor->GetPositionV()))
+		{
+			outActors.push_back(gridActor);
+		}
+	}
+	return outActors;
+}
+
 void WaterVolume::DouseGridActorsInWaterVolume()
 {
 	for (auto gridActor : World::GetAllActorsAsBaseType<GridActor>())
