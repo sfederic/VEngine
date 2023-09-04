@@ -5,6 +5,7 @@
 
 class BoxTriggerComponent;
 class MeshComponent;
+class GridActor;
 
 //A plane denoting the water's surface and a BoxTrigger encapsulating the body of water.
 class WaterVolume : public Actor
