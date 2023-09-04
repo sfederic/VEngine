@@ -15,10 +15,10 @@ void CrystalPlacement::Interact()
 {
 	if (hasCrystalBeenPlaced) return;
 
-	int* heldCrystalCount = GameInstance::GetGlobalProp<int>("HeldCrystalCount");
-	if (*heldCrystalCount > 0)
+	const std::string heldItem = GameInstance::GetHeldPlayerItem();
+	if (heldItem == "Crystal")
 	{
-		*(heldCrystalCount) -= 1;
+		GameInstance::ClearHeldPlayerItem();
 		hasCrystalBeenPlaced = true;
 
 		crystalMesh = CreateComponent<MeshComponent>("CrystalMesh");
