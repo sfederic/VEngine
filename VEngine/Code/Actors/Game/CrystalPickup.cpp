@@ -15,9 +15,6 @@ void CrystalPickup::Create()
 
 void CrystalPickup::Interact()
 {
-	int* crystalCount = GameInstance::GetGlobalProp<int>("HeldCrystalCount");
-	*crystalCount = *crystalCount + 1;
-	Log("Held Crystal Count at [%d].", *crystalCount);
-
+	GameInstance::SetHeldPlayerItem(itemName);
 	__super::Interact();
 }
