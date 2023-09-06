@@ -8,6 +8,7 @@ class CrystalPlacement : public GridActor
 public:
 	ACTOR_SYSTEM(CrystalPlacement);
 
+	void Create() override;
 	Properties GetProps() override;
 	void Interact() override;
 

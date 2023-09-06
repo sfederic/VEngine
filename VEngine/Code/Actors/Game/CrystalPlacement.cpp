@@ -3,6 +3,14 @@
 #include "Components/MeshComponent.h"
 #include "Gameplay/GameInstance.h"
 
+void CrystalPlacement::Create()
+{
+	__super::Create();
+
+	canBeRotatedInLink = false;
+	canBeMovedInLink = false;
+}
+
 Properties CrystalPlacement::GetProps()
 {
 	auto props = __super::GetProps();
