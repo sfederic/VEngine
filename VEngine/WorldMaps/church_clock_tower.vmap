@@ -14,6 +14,12 @@ Can Fall
 0
 Destruct
 1
+Dir Forward
+0 0 0
+Dir Right
+-1 0 0
+Dir Up
+0 0 0
 DisableGridInteract
 0
 Health
@@ -32,16 +38,22 @@ Link Movement
 0
 Link Rotation
 0
+Linked GridActor
+
 Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 ClockHand0
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
@@ -61,6 +73,12 @@ Can Fall
 0
 Destruct
 1
+Dir Forward
+0 0 0
+Dir Right
+0 1 0
+Dir Up
+0 0 0
 DisableGridInteract
 0
 Health
@@ -79,16 +97,22 @@ Link Movement
 0
 Link Rotation
 0
+Linked GridActor
+
 Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 ClockHand1
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
@@ -154,6 +178,8 @@ Open Audio
 door.wav
 Open Text
 Open
+Tag
+
 UID
 1041284646
 Unlock Audio
@@ -220,6 +246,8 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 IncrementalRotator0
 Obstacle
@@ -228,6 +256,8 @@ Rotate Direction
 0 0 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 Rotation Increment
@@ -273,6 +303,8 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 IncrementalRotator1
 Obstacle
@@ -281,6 +313,8 @@ Rotate Direction
 0 0 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 Rotation Increment
@@ -304,6 +338,33 @@ Name
 node0
 UID
 3032093986
+next
+MultiOrientationLock
+1
+ Enabled
+1
+ Position
+0 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Actor Activate
+
+Lock Actor 0
+ClockHand0
+Lock Actor 1
+ClockHand1
+Lock Actor 2
+
+Lock Actor 3
+
+Name
+MultiOrientationLock0
+UID
+1984420591
 next
 Player
 1
@@ -460,7 +521,7 @@ UID
 363064421
 next
 EmptyComponent
-4
+5
 1178347555
 Root
  Enabled
@@ -505,6 +566,21 @@ Root
 1
 UID
 3091583053
+next
+1984420591
+Root
+ Enabled
+1
+ Pos
+0 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+3455724603
 next
 2530988018
 Root
