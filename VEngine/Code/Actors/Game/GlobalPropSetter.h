@@ -11,6 +11,7 @@ class GlobalPropSetter : public Actor
 public:
 	ACTOR_SYSTEM(GlobalPropSetter);
 
+	GlobalPropSetter();
 	Properties GetProps() override;
 	void Activate() override;
 
