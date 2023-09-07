@@ -185,6 +185,27 @@ UID
 Unlock Audio
 
 next
+GlobalPropSetter
+1
+ Enabled
+1
+ Position
+-0 -0 3
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+GlobalPropSetter0
+Property Name
+ChurchLock1
+Property Value
+1
+UID
+511845216
+next
 Grid
 1
  Enabled
@@ -352,7 +373,7 @@ MultiOrientationLock
  Visible
 1
 Actor Activate
-
+GlobalPropSetter0
 Lock Actor 0
 ClockHand0
 Lock Actor 1
@@ -521,7 +542,7 @@ UID
 363064421
 next
 EmptyComponent
-5
+6
 1178347555
 Root
  Enabled
@@ -596,6 +617,21 @@ Root
 1
 UID
 2215245507
+next
+511845216
+Root
+ Enabled
+1
+ Pos
+-0 -0 3
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+3864086995
 next
 InstanceMeshComponent
 1
