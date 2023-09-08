@@ -200,7 +200,7 @@ GlobalPropSetter
 Name
 GlobalPropSetter0
 Property Name
-ChurchLock1
+ChurchClockLock
 Property Value
 1
 UID
@@ -588,6 +588,21 @@ Root
 UID
 3091583053
 next
+511845216
+Root
+ Enabled
+1
+ Pos
+-0 -0 3
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+3864086995
+next
 1984420591
 Root
  Enabled
@@ -617,21 +632,6 @@ Root
 1
 UID
 2215245507
-next
-511845216
-Root
- Enabled
-1
- Pos
--0 -0 3
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-UID
-3864086995
 next
 InstanceMeshComponent
 1

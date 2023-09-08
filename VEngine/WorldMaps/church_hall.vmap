@@ -1,5 +1,5 @@
 ActivateOnGlobalProp
-1
+3
  Enabled
 1
  Position
@@ -43,7 +43,7 @@ ActivateOnGlobalProp0
 Obstacle
 1
 Property Name
-ChurchLock1
+ChurchStatueRotateLock
 Property Type
 Bool
 Rotate Pitch
@@ -54,6 +54,116 @@ Rotate Yaw
 1
 UID
 598422491
+next
+ Enabled
+1
+ Position
+7 1 11
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+ActivateOnGlobalProp1
+Obstacle
+1
+Property Name
+ChurchClockLock
+Property Type
+Bool
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+2298691170
+next
+ Enabled
+1
+ Position
+5 1 14
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+ActivateOnGlobalProp2
+Obstacle
+1
+Property Name
+ChurchSwordLock
+Property Type
+Bool
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+2181182082
 next
 DiffuseProbeMap
 1
@@ -621,7 +731,18 @@ UID
 128577333
 next
 DialogueComponent
-2
+4
+598422491
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+3650203653
+next
 1647454417
 Dialogue
  Enabled
@@ -633,7 +754,7 @@ File
 UID
 2967410941
 next
-598422491
+2298691170
 Dialogue
  Enabled
 1
@@ -642,7 +763,18 @@ Dialogue
 File
 
 UID
-3650203653
+3114402201
+next
+2181182082
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+671563696
 next
 DirectionalLightComponent
 1
@@ -755,15 +887,15 @@ UID
 3813850013
 next
 MeshComponent
-15
-1647454417
+17
+598422491
 Mesh
  Enabled
 1
  Pos
-0 0 0
+3 1 11
  Rot
-0 -1.19209e-07 0 -1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -803,178 +935,13 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-char.vmesh
+cube.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-2929477331
-next
-3288452139
-Mesh
- Enabled
-1
- Pos
-5 2 16.5
- Rot
--0.500122 0.500122 -0.499878 0.499878
- Scale
-5 1 11
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Floors/floor.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-38553214
-next
-1664038659
-Mesh
- Enabled
-1
- Pos
-10.5 2 8
- Rot
-0.707107 -0.707107 -9.97483e-08 -2.66926e-08
- Scale
-4.99994 0.999994 17
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Floors/floor.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-768140521
-next
-4236650097
-Mesh
- Enabled
-1
- Pos
--0.5 2 8
- Rot
--0 0 -0.707107 0.707107
- Scale
-5 1 17
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Floors/floor.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2538190360
+3670458464
 next
 3841650662
 Mesh
@@ -1526,14 +1493,234 @@ Trans. Occlude
 UID
 3592496535
 next
-598422491
+4236650097
 Mesh
  Enabled
 1
  Pos
-3 1 11
+-0.5 2 8
  Rot
-0 0 0 1
+-0 0 -0.707107 0.707107
+ Scale
+5 1 17
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/floor.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2538190360
+next
+1664038659
+Mesh
+ Enabled
+1
+ Pos
+10.5 2 8
+ Rot
+0.707107 -0.707107 -9.97483e-08 -2.66926e-08
+ Scale
+4.99994 0.999994 17
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/floor.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+768140521
+next
+3288452139
+Mesh
+ Enabled
+1
+ Pos
+5 2 16.5
+ Rot
+-0.500122 0.500122 -0.499878 0.499878
+ Scale
+5 1 11
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/floor.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+38553214
+next
+1647454417
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 -1.19209e-07 0 -1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2929477331
+next
+2298691170
+Mesh
+ Enabled
+1
+ Pos
+7 1 11
+ Rot
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -1579,7 +1766,62 @@ Static
 Trans. Occlude
 0
 UID
-3670458464
+269445575
+next
+2181182082
+Mesh
+ Enabled
+1
+ Pos
+5 1 14
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+973534739
 next
 PersistentAudioComponent
 1
