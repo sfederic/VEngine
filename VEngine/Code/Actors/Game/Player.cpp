@@ -620,6 +620,7 @@ void Player::LinkToGridActor()
 	}
 	else if (!isInputLinkedToDowncastGridActor && Input::GetKeyUp(Keys::Down)) //Downwards cast
 	{
+		//@TODO: think about removing all of this
 		HitResult hit(this);
 		if (Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 3.f))
 		{
@@ -1012,7 +1013,18 @@ void Player::SetLinkedGridActor(GridActor& gridActor)
 	gridActor.GetCurrentNode()->RecalcNodeHeight(nodeHit);
 
 	linkedGridActor = &gridActor;
-	camera->targetActor = &gridActor;
+
+	//Focus on the grid actor the linked grid actor is moving, else focus on the linked actor
+	GridActor* otherActorToFocusOn = gridActor.GetPlayerFocusGridActor();
+	if (otherActorToFocusOn != nullptr)
+	{
+		camera->targetActor = otherActorToFocusOn;
+	}
+	else
+	{
+		camera->targetActor = &gridActor;
+	}
+
 	isInputLinkedToGridActor = true;
 
 	gridActor.OnLinkActivate();

@@ -61,6 +61,8 @@ protected:
 	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 
+	void SetPlayerFocusGridActor(GridActor* focusActor) { gridActorForPlayerFocusOnLink = focusActor; }
+
 public:
 	std::wstring interactText;
 	std::wstring interactKnownText;
@@ -118,7 +120,7 @@ public:
 
 	//Sets x and y indices on battlegrid for gridactor
 	void SetGridPosition();
-	
+
 	//returns the node the gridactor is currently on.
 	GridNode* GetCurrentNode();
 	void RecalcCurrentNodePosition();
@@ -153,4 +155,11 @@ public:
 	void CheckIfSubmerged();
 
 	void DisableAllInteractivity();
+
+	auto GetPlayerFocusGridActor() { return gridActorForPlayerFocusOnLink; }
+
+private:
+	//For any grid actor that will move/rotate another grid actor on a player's link, 
+	//this is the actor the player's camera will focus on instead of itself.
+	GridActor* gridActorForPlayerFocusOnLink = nullptr;
 };
