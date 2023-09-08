@@ -12,6 +12,12 @@ void ActivateOnGlobalProp::Start()
 {
 	__super::Start();
 
+	if (propertyName.empty())
+	{
+		Log("No property name [%s] set for [%s].", propertyName.c_str(), GetName().c_str());
+		return;
+	}
+
 	if (propertyType.Compare(PropertyTypes::Bool))
 	{
 		bool* value = GameInstance::GetGlobalProp<bool>(propertyName);
