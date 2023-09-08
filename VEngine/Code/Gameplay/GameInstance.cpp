@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "GameInstance.h"
 
-std::string GameInstance::startingMap = "church_clock_tower.vmap";
+std::string GameInstance::startingMap = "church_hall.vmap";
 std::string GameInstance::previousMapMovedFrom = startingMap;
 
 //Used when continuing from game save files
@@ -14,13 +14,17 @@ static std::string heldPlayerItem;
 
 //Global properties
 //...
-static bool churchLock1 = false;
+static bool churchClockLock = false;
+static bool churchSwordsLock = false;
+static bool churchStatueRotateLock = false;
 //...
 
 Properties GameInstance::GetGlobalProps()
 {
 	Properties props("GameInstance");
-	props.Add("ChurchLock1", &churchLock1);
+	props.Add("ChurchClockLock", &churchClockLock);
+	props.Add("ChurchSwordsLock", &churchSwordsLock);
+	props.Add("ChurchStatueRotateLock", &churchStatueRotateLock);
 	return props;
 }
 
