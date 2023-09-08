@@ -1,4 +1,4 @@
-ActivateOnGlobalProp
+ChurchLockPropActivator
 3
  Enabled
 1
@@ -39,11 +39,11 @@ Move Axis Pos.
 Move Speed
 12
 Name
-ActivateOnGlobalProp0
+ChurchLockPropActivator0
 Obstacle
 1
 Property Name
-ChurchStatueRotateLock
+ChurchSwordLock
 Property Type
 Bool
 Rotate Pitch
@@ -53,62 +53,7 @@ Rotate Speed
 Rotate Yaw
 1
 UID
-598422491
-next
- Enabled
-1
- Position
-7 1 11
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-1
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-ActivateOnGlobalProp1
-Obstacle
-1
-Property Name
-ChurchClockLock
-Property Type
-Bool
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-2298691170
+656467367
 next
  Enabled
 1
@@ -149,11 +94,11 @@ Move Axis Pos.
 Move Speed
 12
 Name
-ActivateOnGlobalProp2
+ChurchLockPropActivator1
 Obstacle
 1
 Property Name
-ChurchSwordLock
+ChurchClockLock
 Property Type
 Bool
 Rotate Pitch
@@ -163,7 +108,62 @@ Rotate Speed
 Rotate Yaw
 1
 UID
-2181182082
+104477663
+next
+ Enabled
+1
+ Position
+7 1 11
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+ChurchLockPropActivator2
+Obstacle
+1
+Property Name
+ChurchStatueRotateLock
+Property Type
+Bool
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+1398036475
 next
 DiffuseProbeMap
 1
@@ -732,7 +732,7 @@ UID
 next
 DialogueComponent
 4
-598422491
+656467367
 Dialogue
  Enabled
 1
@@ -741,7 +741,29 @@ Dialogue
 File
 
 UID
-3650203653
+3344031298
+next
+104477663
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2151495250
+next
+1398036475
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2947566482
 next
 1647454417
 Dialogue
@@ -753,28 +775,6 @@ File
 
 UID
 2967410941
-next
-2298691170
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-3114402201
-next
-2181182082
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-671563696
 next
 DirectionalLightComponent
 1
@@ -888,7 +888,7 @@ UID
 next
 MeshComponent
 17
-598422491
+656467367
 Mesh
  Enabled
 1
@@ -941,7 +941,117 @@ Static
 Trans. Occlude
 0
 UID
-3670458464
+3550650310
+next
+104477663
+Mesh
+ Enabled
+1
+ Pos
+5 1 14
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2203329369
+next
+1398036475
+Mesh
+ Enabled
+1
+ Pos
+7 1 11
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+393163785
 next
 3841650662
 Mesh
@@ -1712,116 +1822,6 @@ Trans. Occlude
 0
 UID
 2929477331
-next
-2298691170
-Mesh
- Enabled
-1
- Pos
-7 1 11
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-269445575
-next
-2181182082
-Mesh
- Enabled
-1
- Pos
-5 1 14
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-973534739
 next
 PersistentAudioComponent
 1
