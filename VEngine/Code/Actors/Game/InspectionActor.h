@@ -8,5 +8,6 @@ class InspectionActor : public GridActor
 public:
 	ACTOR_SYSTEM(InspectionActor);
 
-	void Interact() override;
+	void Create() override;
+	void Inspect() override;
 };
