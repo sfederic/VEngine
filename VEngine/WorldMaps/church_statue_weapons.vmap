@@ -35,34 +35,7 @@ UID
 3227738273
 next
 EntranceTrigger
-2
- Enabled
 1
- Position
-2 0 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Entrance Active
-0
-Level Name
-
-Locked Text
-Locked
-Name
-EntranceTrigger0
-Open Audio
-door.wav
-Open Text
-Open
-UID
-2550393796
-Unlock Audio
-door.wav
-next
  Enabled
 1
  Position
@@ -85,10 +58,33 @@ Open Audio
 door.wav
 Open Text
 Open
+Tag
+
 UID
 280888480
 Unlock Audio
 
+next
+GlobalPropSetter
+1
+ Enabled
+1
+ Position
+2 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+GlobalPropSetter0
+Property Name
+ChurchLockSwords
+Property Value
+1
+UID
+1619675645
 next
 Grid
 1
@@ -252,9 +248,9 @@ OrientationLock
  Position
 3 0 3
  Rotation
--0 0 -0 1
+-6.32204e-08 1 -2.18557e-08 2.10733e-08
  Scale
-1 1 1
+0.999996 0.999998 0.999998
  Visible
 1
 Can Fall
@@ -291,12 +287,16 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 Sword1
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
@@ -307,9 +307,9 @@ next
  Position
 1 0 3
  Rotation
--0 0 -0 1
+-2.90077e-07 0 -0 1
  Scale
-1 1 1
+1 0.999997 0.999997
  Visible
 1
 Can Fall
@@ -346,12 +346,16 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 Sword0
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
@@ -364,7 +368,7 @@ Player
  Position
 2 0 1
  Rotation
-0 1.49012e-07 0 -1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -375,26 +379,7 @@ UID
 3817475245
 next
 BoxTriggerComponent
-2
-2550393796
-Trigger
- Enabled
 1
- Pos
-2 0 4
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Extents
-0.45 0.45 0.45
-Offset
-0 0 0
-UID
-1096692612
-next
 280888480
 Trigger
  Enabled
@@ -438,20 +423,7 @@ UID
 2533692700
 next
 ConditionComponent
-2
-2550393796
-Condition
- Enabled
 1
- Visible
-1
-Condition
-
-Condition Arg
-
-UID
-2717208894
-next
 280888480
 Condition
  Enabled
@@ -522,7 +494,7 @@ UID
 814014588
 next
 EmptyComponent
-3
+4
 2028731464
 Root
  Enabled
@@ -537,6 +509,21 @@ Root
 1
 UID
 4130548357
+next
+1619675645
+Root
+ Enabled
+1
+ Pos
+2 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+1989328311
 next
 4178313292
 Root
@@ -560,7 +547,7 @@ Root
  Pos
 2 0 1
  Rot
-0 1.49012e-07 0 -1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -1019,9 +1006,9 @@ Mesh
  Pos
 3 0 3
  Rot
--0 0 -0 1
+-6.32204e-08 1 -2.18557e-08 2.10733e-08
  Scale
-1 1 1
+0.999996 0.999998 0.999998
  Visible
 1
 Casts Shadow
@@ -1074,9 +1061,9 @@ Mesh
  Pos
 1 0 3
  Rot
--0 0 -0 1
+-2.90077e-07 0 -0 1
  Scale
-1 1 1
+1 0.999997 0.999997
  Visible
 1
 Casts Shadow
@@ -1129,7 +1116,7 @@ Mesh
  Pos
 0 0 0
  Rot
-0 -2.98024e-08 0 -1
+-0 0 0 1
  Scale
 1 1 1
  Visible
