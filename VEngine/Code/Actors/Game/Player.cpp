@@ -973,6 +973,11 @@ bool Player::CheckIfMovementAndRotationStopped()
 
 void Player::MovementInput(float deltaTime)
 {
+	if (inInspection)
+	{
+		return;
+	}
+
 	if (!isInputLinkedToGridActor && !isInputLinkedToDowncastGridActor && CheckIfMovementAndRotationStopped())
 	{
 		SetGridIndices();
@@ -1005,6 +1010,11 @@ void Player::MovementInput(float deltaTime)
 
 void Player::RotationInput(float deltaTime)
 {
+	if (inInspection)
+	{
+		return;
+	}
+
 	if (!isInputLinkedToGridActor && !isInputLinkedToDowncastGridActor && CheckIfMovementAndRotationStopped())
 	{
 		if (Input::GetKeyHeld(Keys::Right))
