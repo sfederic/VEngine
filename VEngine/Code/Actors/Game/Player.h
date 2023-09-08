@@ -31,6 +31,7 @@ public:
 
 	bool inConversation = false;
 	bool inInteraction = false;
+	bool inInspection = false;
 	bool gameOver = false;
 
 	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
@@ -81,6 +82,8 @@ public:
 	void RemovePickupWidgetFromViewport();
 
 	void SetNextCameraPosition(XMVECTOR pos) { nextCameraPosition = pos; }
+	void ResetCameraPosAndTargetToPlayer();
+	void SetCameraTargetActor(Actor* target);
 
 private:
 	PickupWidget* pickupWidget = nullptr;
@@ -128,6 +131,4 @@ private:
 	void OverlapPickupGridActor();
 
 	void ResetHighlightedActor();
-
-	void ResetCameraPosAndTargetToPlayer();
 };

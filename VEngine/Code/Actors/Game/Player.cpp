@@ -239,12 +239,23 @@ void Player::PrimaryAction()
 		{
 			//End interact with GridActor
 			if (gridActorInteractingWith == nullptr) return;
+
 			gridActorInteractingWith->EndInteract();
 			gridActorInteractingWith = nullptr;
 
 			interactWidget->RemoveFromViewport();
 			inInteraction = false;
+
 			SetDefaultCameraFOV();
+
+			return;
+		}
+
+		if (inInspection)
+		{
+			inInspection = false;
+			ResetCameraPosAndTargetToPlayer();
+			interactWidget->RemoveFromViewport();
 			return;
 		}
 
@@ -415,6 +426,21 @@ bool Player::InteractCheck(Actor* hitActor)
 		auto gridActor = dynamic_cast<GridActor*>(hitActor);
 		if (gridActor)
 		{
+			if (gridActor->IsInspectable())
+			{
+				inInspection = true;
+
+				gridActor->Inspect();
+
+				if (!gridActor->interactText.empty())
+				{
+					interactWidget->interactText = gridActor->interactText;
+					interactWidget->AddToViewport();
+				}
+
+				return true;
+			}
+
 			if (gridActor->isInteractable)
 			{
 				gridActor->Interact();
@@ -425,17 +451,6 @@ bool Player::InteractCheck(Actor* hitActor)
 
 				return true;
 			}
-
-			/*if (gridActor->isInspectable)
-			{
-				interactWidget->interactText = gridActor->interactText;
-				interactWidget->AddToViewport();
-				inInteraction = true;
-
-				SetZoomedInCameraFOV();
-
-				return true;
-			}*/
 		}
 	}
 
@@ -1109,4 +1124,9 @@ void Player::ResetCameraPosAndTargetToPlayer()
 {
 	nextCameraPosition = cameraStartingLocalPosition;
 	camera->targetActor = this;
+}
+
+void Player::SetCameraTargetActor(Actor* target)
+{
+	camera->targetActor = target;
 }
