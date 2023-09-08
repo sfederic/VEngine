@@ -60,6 +60,11 @@ void MultiOrientationLock::CheckIfAllActorOrientationsAreCorrect()
 		{
 			actorToActivateOnAllLocksBeingCorrect->Activate();
 		}
+		else
+		{
+			Log("Actor [%s] to activate from MultiOrientationLock [%s] not found.",
+				actorToActivate.c_str(), GetName().c_str());
+		}
 
 		if (!onceOffAudioCueOnActivate)
 		{
