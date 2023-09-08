@@ -80,7 +80,7 @@ GlobalPropSetter
 Name
 GlobalPropSetter0
 Property Name
-ChurchSwordsLock
+ChurchSwordLock
 Property Value
 1
 UID
@@ -227,7 +227,7 @@ MultiOrientationLock
  Visible
 1
 Actor Activate
-EntranceTrigger0
+GlobalPropSetter0
 Lock Actor 0
 Sword0
 Lock Actor 1
