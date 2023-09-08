@@ -117,6 +117,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Actors\Game\ChurchLockPropActivator.cpp" />
     <ClCompile Include="Code\Actors\Game\GlobalPropSetter.cpp" />
     <ClCompile Include="Code\Actors\Game\ActivateOnGlobalProp.cpp" />
     <ClCompile Include="Code\Actors\Game\ClockHand.cpp" />
@@ -331,6 +332,7 @@
     <ClCompile Include="Code\Actors\Game\Winch.cpp" />
     <ClCompile Include="Code\Actors\Game\WaterWheel.cpp" />
     <ClCompile Include="Code\Actors\Game\MultiSpecificSwitchLock.cpp" />
+    <ClInclude Include="Code\Actors\Game\ChurchLockPropActivator.h" />
     <ClInclude Include="Code\Actors\Game\GlobalPropSetter.h" />
     <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.h" />
     <ClInclude Include="Code\Actors\Game\ClockHand.h" />
