@@ -91,6 +91,9 @@ public:
 
 	virtual void Interact() {}
 
+	//Zooms in on the actor
+	virtual void Inspect() {}
+
 	//For when a fluid or something hits a gridactor (e.g. to extinguish flames)
 	virtual void Douse() {}
 
@@ -157,6 +160,8 @@ public:
 	void DisableAllInteractivity();
 
 	auto GetPlayerFocusGridActor() { return gridActorForPlayerFocusOnLink; }
+
+	bool IsInspectable() { return isInspectable; }
 
 private:
 	//For any grid actor that will move/rotate another grid actor on a player's link, 
