@@ -18,4 +18,6 @@ public:
 private:
 	std::string propertyName;
 	bool propertyValue;
+
+	bool hasBeenActivated = false;
 };

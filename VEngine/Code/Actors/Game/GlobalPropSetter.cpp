@@ -10,6 +10,13 @@ GlobalPropSetter::GlobalPropSetter()
 
 void GlobalPropSetter::Activate()
 {
+	if (hasBeenActivated)
+	{
+		return;
+	}
+
+	hasBeenActivated = true;
+
 	__super::Activate();
 
 	bool* value = GameInstance::GetGlobalProp<bool>(propertyName);
@@ -23,5 +30,6 @@ Properties GlobalPropSetter::GetProps()
 	props.title = GetTypeName();
 	props.Add("Property Name", &propertyName);
 	props.Add("Property Value", &propertyValue);
+	props.Add("Has Been Activated", &hasBeenActivated).readOnly = true;
 	return props;
 }
