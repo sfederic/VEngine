@@ -80,6 +80,8 @@ public:
 	void AddPickupWidgetToViewport();
 	void RemovePickupWidgetFromViewport();
 
+	void SetNextCameraPosition(XMVECTOR pos) { nextCameraPosition = pos; }
+
 private:
 	PickupWidget* pickupWidget = nullptr;
 
@@ -126,4 +128,6 @@ private:
 	void OverlapPickupGridActor();
 
 	void ResetHighlightedActor();
+
+	void ResetCameraPosAndTargetToPlayer();
 };

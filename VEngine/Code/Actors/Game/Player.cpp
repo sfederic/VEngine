@@ -1103,4 +1103,10 @@ void Player::ResetHighlightedActor()
 	}
 
 	highlightedGridActor = nullptr;
-};
+}
+
+void Player::ResetCameraPosAndTargetToPlayer()
+{
+	nextCameraPosition = cameraStartingLocalPosition;
+	camera->targetActor = this;
+}
