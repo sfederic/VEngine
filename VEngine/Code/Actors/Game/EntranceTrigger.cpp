@@ -18,136 +18,141 @@
 
 EntranceTrigger::EntranceTrigger()
 {
-    trigger = BoxTriggerComponent::system.Add("Trigger", this);
-    rootComponent = trigger;
+	trigger = BoxTriggerComponent::system.Add("Trigger", this);
+	rootComponent = trigger;
 
-    conditionComponent = ConditionComponent::system.Add("Condition", this);
+	conditionComponent = ConditionComponent::system.Add("Condition", this);
 }
 
 void EntranceTrigger::Start()
 {
-    interactWidget = UISystem::CreateWidget<InteractWidget>();
+	interactWidget = UISystem::CreateWidget<InteractWidget>();
 
-    if (isEntranceActive)
-    {
-        interactWidget->interactText = openText;
-    }
-    else
-    {
-        interactWidget->interactText = lockedText;
-    }
+	if (isEntranceActive)
+	{
+		interactWidget->interactText = openText;
+	}
+	else
+	{
+		interactWidget->interactText = lockedText;
+	}
 
-    trigger->SetTargetAsPlayer();
+	trigger->SetTargetAsPlayer();
 
-    if (!conditionComponent->condition.empty())
-    {
-        interactWidget->interactText = lockedText;
-        isEntranceLocked = true;
-    }
+	if (!conditionComponent->condition.empty())
+	{
+		interactWidget->interactText = lockedText;
+		isEntranceLocked = true;
+	}
 }
 
 void EntranceTrigger::Tick(float deltaTime)
 {
-    const XMVECTOR targetPos = trigger->GetTargetActor()->GetPositionV();
+	const XMVECTOR targetPos = trigger->GetTargetActor()->GetPositionV();
 
-    if (trigger->ContainsTarget() && isEntranceActive && !entranceInteractedWith)
-    {
-        interactWidget->AddToViewport();
+	if (trigger->ContainsTarget() && isEntranceActive && !entranceInteractedWith)
+	{
+		interactWidget->AddToViewport();
 
-        if (Input::GetKeyDown(Keys::Down))
-        {
-            if (levelToMoveTo.empty())
-            {
-                Log("EntranceTrigger %s levelToMoveTo empty.", this->GetName().c_str());
-                return;
-            }
+		if (Input::GetKeyDown(Keys::Down))
+		{
+			if (levelToMoveTo.empty())
+			{
+				Log("EntranceTrigger %s levelToMoveTo empty.", this->GetName().c_str());
+				return;
+			}
 
-            //Condition check
-            if (!conditionComponent->condition.empty() && isEntranceLocked)
-            {
-                if (!conditionComponent->CheckCondition())
-                {
-                    Log("condition failed on [%s] EntranceTrigger", this->GetName().c_str());
-                    return;
-                }
+			//Condition check
+			if (!conditionComponent->condition.empty() && isEntranceLocked)
+			{
+				if (!conditionComponent->CheckCondition())
+				{
+					Log("condition failed on [%s] EntranceTrigger", this->GetName().c_str());
+					return;
+				}
 
-                isEntranceLocked = false;
-                interactWidget->interactText = openText;
-                return;
-            }
+				isEntranceLocked = false;
+				interactWidget->interactText = openText;
+				return;
+			}
 
-            //Load new world
-            if (!CheckIfWorldExists(levelToMoveTo))
-            {
-                return;
-            }
+			//Load new world
+			if (!CheckIfWorldExists(levelToMoveTo))
+			{
+				return;
+			}
 
-            GameUtils::PlayAudioOneShot(openAudio);
+			GameUtils::PlayAudioOneShot(openAudio);
 
-            GameUtils::levelToMoveTo = levelToMoveTo;
-            GameUtils::entranceTriggerTag = entranceTag;
-            Timer::SetTimer(1.f, &GameUtils::LoadWorldAndMoveToEntranceTrigger);
+			GameUtils::levelToMoveTo = levelToMoveTo;
+			GameUtils::entranceTriggerTag = entranceTag;
+			Timer::SetTimer(1.f, &GameUtils::LoadWorldAndMoveToEntranceTrigger);
 
-            UISystem::screenFadeWidget->SetToFadeOut();
-            UISystem::screenFadeWidget->AddToViewport();
-            interactWidget->RemoveFromViewport();
+			UISystem::screenFadeWidget->SetToFadeOut();
+			UISystem::screenFadeWidget->AddToViewport();
+			interactWidget->RemoveFromViewport();
 
-            entranceInteractedWith = true;
+			entranceInteractedWith = true;
 
-            Input::blockInput = true;
-        }
-    }
-    else
-    {
-        interactWidget->RemoveFromViewport();
-    }
+			Input::blockInput = true;
+		}
+	}
+	else
+	{
+		interactWidget->RemoveFromViewport();
+	}
 }
 
 Properties EntranceTrigger::GetProps()
 {
-    auto props = Actor::GetProps();
-    props.title = "EntranceTrigger";
-    props.Add("Level Name", &levelToMoveTo).autoCompletePath = "/WorldMaps/";
-    props.Add("Entrance Active", &isEntranceActive);
-    props.Add("Open Text", &openText);
-    props.Add("Locked Text", &lockedText);
-    props.Add("Unlock Audio", &unlockAudio).autoCompletePath = "/Audio/";
-    props.Add("Open Audio", &openAudio).autoCompletePath = "/Audio/";
-    props.Add("Tag", &entranceTag);
-    return props;
+	auto props = Actor::GetProps();
+	props.title = "EntranceTrigger";
+	props.Add("Level Name", &levelToMoveTo).autoCompletePath = "/WorldMaps/";
+	props.Add("Entrance Active", &isEntranceActive);
+	props.Add("Open Text", &openText);
+	props.Add("Locked Text", &lockedText);
+	props.Add("Unlock Audio", &unlockAudio).autoCompletePath = "/Audio/";
+	props.Add("Open Audio", &openAudio).autoCompletePath = "/Audio/";
+	props.Add("Tag", &entranceTag);
+	return props;
 }
 
 bool EntranceTrigger::CheckIfWorldExists(std::string& worldName)
 {
-    if (GameInstance::useGameSaves)
-    {
-        if (!std::filesystem::exists("GameSaves/" + worldName))
-        {
-            Log("GameSaves/[%s] not found for [%s]", worldName.c_str(), this->GetName().c_str());
-            return true; //if no game save, just load normal map
-        }
-    }
-    else if (!std::filesystem::exists("WorldMaps/" + worldName))
-    {
-        Log("WorldMaps/[%s] not found for [%s]", worldName.c_str(), this->GetName().c_str());
-        return false;
-    }
+	if (GameInstance::useGameSaves)
+	{
+		if (!std::filesystem::exists("GameSaves/" + worldName))
+		{
+			Log("GameSaves/[%s] not found for [%s]", worldName.c_str(), this->GetName().c_str());
+			return true; //if no game save, just load normal map
+		}
+	}
+	else if (!std::filesystem::exists("WorldMaps/" + worldName))
+	{
+		Log("WorldMaps/[%s] not found for [%s]", worldName.c_str(), this->GetName().c_str());
+		return false;
+	}
 
-    return true;
+	return true;
 }
 
 void EntranceTrigger::UnlockEntrance()
 {
-    GameUtils::PlayAudioOneShot(unlockAudio);
+	if (!isEntranceLocked)
+	{
+		return;
+	}
 
-    isEntranceActive = true;
-    isEntranceLocked = false;
-    interactWidget->interactText = openText;
+	GameUtils::PlayAudioOneShot(unlockAudio);
+
+	isEntranceActive = true;
+	isEntranceLocked = false;
+	interactWidget->interactText = openText;
 }
 
 void EntranceTrigger::LockEntrance()
 {
-    isEntranceActive = false;
-    isEntranceLocked = true;
-    interactWidget->interactText = lockedText;
+	isEntranceActive = false;
+	isEntranceLocked = true;
+	interactWidget->interactText = lockedText;
 }
