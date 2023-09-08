@@ -12,6 +12,9 @@ public:
 
 	InspectionTrigger();
 	void Start() override;
+
+	void Inspect() override { __super::Inspect(); }
+
 	bool ContainsPlayer();
 
 private:

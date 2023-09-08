@@ -7,6 +7,7 @@
 #include "Core/Timer.h"
 #include "Physics/Raycast.h"
 #include "Actors/Game/NPC.h"
+#include "Actors/Game/InspectionTrigger.h"
 #include "Actors/Game/FenceActor.h"
 #include "Actors/Game/Pickup.h"
 #include "Grid.h"
@@ -235,6 +236,19 @@ void Player::PrimaryAction()
 {
 	if (Input::GetKeyUp(Keys::Down))
 	{
+		if (!inInspection)
+		{
+			for (auto& inspectionTrigger : InspectionTrigger::system.GetActors())
+			{
+				if (inspectionTrigger->ContainsPlayer())
+				{
+					inspectionTrigger->Inspect();
+					inInspection = true;
+					return;
+				}
+			}
+		}
+
 		if (inInteraction)
 		{
 			//End interact with GridActor
