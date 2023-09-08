@@ -330,6 +330,7 @@
     <ClCompile Include="Code\Actors\Game\Pulley.cpp" />
     <ClCompile Include="Code\Actors\Game\Winch.cpp" />
     <ClCompile Include="Code\Actors\Game\WaterWheel.cpp" />
+    <ClCompile Include="Code\Actors\Game\MultiSpecificSwitchLock.cpp" />
     <ClInclude Include="Code\Actors\Game\GlobalPropSetter.h" />
     <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.h" />
     <ClInclude Include="Code\Actors\Game\ClockHand.h" />
@@ -689,6 +690,7 @@
     <ClInclude Include="Code\Actors\Game\Pulley.h" />
     <ClInclude Include="Code\Actors\Game\Winch.h" />
     <ClInclude Include="Code\Actors\Game\WaterWheel.h" />
+    <ClInclude Include="Code\Actors\Game\MultiSpecificSwitchLock.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

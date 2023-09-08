@@ -19,6 +19,8 @@ public:
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
+	bool IsSwitchActivated() { return isActivated; }
+
 private:
 	void CheckForSpecificGridActorOverlapping();
 
