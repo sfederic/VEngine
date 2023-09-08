@@ -1,3 +1,117 @@
+CrystalPickup
+1
+ Enabled
+1
+ Position
+2 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Item Icon
+crystal_pickup_icon.png
+Item Name
+Crystal
+Link Movement
+0
+Link Rotation
+0
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+CrystalPickup0
+Obstacle
+1
+Pickup Audio
+
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+1620331767
+next
+CrystalPlacement
+1
+ Enabled
+1
+ Position
+0 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Crystal Placed
+0
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+1
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+CrystalPlacement0
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+1894652761
+next
 DirectionalLightActor
 1
  Enabled
@@ -36,102 +150,6 @@ Size Y
 UID
 692420275
 next
-GridActor
-2
- Enabled
-1
- Position
-1.5 0.5 5.5
- Rotation
--0 0 -5.1658e-08 1
- Scale
-0.999998 0.999998 1
- Visible
-1
-Can Fall
-0
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-1
-Inspect
-1
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Name
-GridActor0
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Yaw
-1
-UID
-2109070323
-next
- Enabled
-1
- Position
-3.5 0.5 7.5
- Rotation
-0.70728 0.706934 -0.000123181 0.000121863
- Scale
-0.999979 0.99998 0.999994
- Visible
-1
-Can Fall
-0
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-1
-Inspect
-1
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Name
-GridActor1
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Yaw
-1
-UID
-3022374329
-next
 MeshActor
 1
  Enabled
@@ -154,7 +172,7 @@ Player
  Enabled
 1
  Position
-2 0 2
+0 0 0
  Rotation
 -0 -2.16563e-07 -0 1
  Scale
@@ -191,7 +209,7 @@ UID
 next
 DialogueComponent
 3
-2109070323
+1620331767
 Dialogue
  Enabled
 1
@@ -200,18 +218,7 @@ Dialogue
 File
 
 UID
-1773124708
-next
-3022374329
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-3734551994
+1531781027
 next
 707967490
 Dialogue
@@ -223,6 +230,17 @@ File
 
 UID
 2587144994
+next
+1894652761
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+370456553
 next
 DirectionalLightComponent
 1
@@ -252,7 +270,7 @@ Root
  Enabled
 1
  Pos
-2 0 2
+0 0 0
  Rot
 -0 -2.16563e-07 -0 1
  Scale
@@ -321,16 +339,16 @@ UID
 next
 MeshComponent
 4
-2109070323
+1620331767
 Mesh
  Enabled
 1
  Pos
-1.5 0.5 5.5
+2 0 2
  Rot
--0 0 -5.1658e-08 1
+-0 0 -0 1
  Scale
-0.999998 0.999998 1
+1 1 1
  Visible
 1
 Casts Shadow
@@ -368,68 +386,13 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-rotation_piece_1.vmesh
+crystal.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-592253444
-next
-3022374329
-Mesh
- Enabled
-1
- Pos
-3.5 0.5 7.5
- Rot
-0.70728 0.706934 -0.000123181 0.000121863
- Scale
-0.999979 0.99998 0.999994
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-rotation_piece_2.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-98031362
+2125793615
 next
 779951209
 Mesh
@@ -540,5 +503,60 @@ Trans. Occlude
 0
 UID
 706192360
+next
+1894652761
+Mesh
+ Enabled
+1
+ Pos
+0 0 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1044105973
 next
 end
