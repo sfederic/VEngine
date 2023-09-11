@@ -58,7 +58,7 @@ struct BinaryDeserialiser
 
 	void ReadString(std::string* str);
 	void ReadWString(std::wstring* wstr);
-	
+
 	template <typename T>
 	void Read(T* value)
 	{
@@ -96,6 +96,8 @@ struct Deserialiser
 {
 	std::wifstream is;
 
+	//@Todo: there's a bad bug here with std::wifstream where if the textual type of of the property doesn't match
+	//(e.g. a bool value is '205') then the whole program will loop infinitely. Maybe find a way to catch this.
 	std::unordered_map<std::type_index, std::function<void(Property& prop)>> typeToReadFuncMap;
 
 	Deserialiser(const std::string filename, const OpenMode mode);
