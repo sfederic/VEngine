@@ -30,6 +30,6 @@ Properties GlobalPropSetter::GetProps()
 	props.title = GetTypeName();
 	props.Add("Property Name", &propertyName);
 	props.Add("Property Value", &propertyValue);
-	props.Add("Has Been Activated", &hasBeenActivated).readOnly = true;
+	props.Add("Activated", &hasBeenActivated).readOnly = true;
 	return props;
 }

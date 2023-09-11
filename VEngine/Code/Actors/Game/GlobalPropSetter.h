@@ -17,7 +17,7 @@ public:
 
 private:
 	std::string propertyName;
-	bool propertyValue;
+	bool propertyValue = true;
 
 	bool hasBeenActivated = false;
 };
