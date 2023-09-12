@@ -43,6 +43,8 @@ void OilBarrel::SpillOil()
 	if (!VMath::VecEqual(GetUpVectorV(), VMath::GlobalUpVector()))
 	{
 		HitResult hit(this);
+		hit.IgnorePlayer();
+
 		const XMVECTOR raycastOrigin = GetPositionV() + GetUpVectorV();
 		if (Raycast(hit, raycastOrigin, -VMath::GlobalUpVector(), 100.f))
 		{
