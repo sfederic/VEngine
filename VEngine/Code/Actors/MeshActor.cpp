@@ -19,16 +19,14 @@ MeshActor::MeshActor()
 
 void MeshActor::Create()
 {
-	if (!spawnMeshFilename.empty())
-	{
-		std::string meshName = spawnMeshFilename.substr(0, spawnMeshFilename.find("."));
-		SetName(meshName + std::to_string(GetSystemIndex()));
-	}
+	const std::string meshFilename = mesh->GetMeshFilename();
+	const std::string meshSubStr = meshFilename.substr(0, meshFilename.find("."));
+	SetName(meshSubStr + std::to_string(GetSystemIndex()));
 }
 
 Properties MeshActor::GetProps()
 {
-	Properties props = Actor::GetProps();
-	props.title = GetName();
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
 	return props;
 }
