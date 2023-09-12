@@ -10,6 +10,8 @@ PressurePipe::PressurePipe()
 
 void PressurePipe::Create()
 {
+	__super::Create();
+
 	flowMesh->SetMeshFilename("cylinder.vmesh");
 	flowMesh->SetTexture("water.jpg");
 	flowMesh->SetLocalScale(0.5f);
@@ -38,6 +40,8 @@ Properties PressurePipe::GetProps()
 
 void PressurePipe::Activate()
 {
+	__super::Activate();
+
 	isActive = true;
 	flowMesh->SetActive(true);
 	flowMesh->SetVisibility(true);
@@ -45,6 +49,8 @@ void PressurePipe::Activate()
 
 void PressurePipe::Deactivate()
 {
+	__super::Deactivate();
+
 	isActive = false;
 	flowMesh->SetActive(false);
 	flowMesh->SetVisibility(false);

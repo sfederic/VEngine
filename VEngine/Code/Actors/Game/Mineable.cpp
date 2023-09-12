@@ -3,6 +3,8 @@
 
 void Mineable::Create()
 {
+	__super::Create();
+
 	SetMeshFilename("mound.vmesh");
 }
 

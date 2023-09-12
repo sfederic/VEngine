@@ -4,6 +4,8 @@
 
 void SteamValve::Create()
 {
+	__super::Create();
+
 	SetMeshFilename("valve.vmesh");
 }
 

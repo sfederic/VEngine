@@ -27,6 +27,8 @@ Properties Winch::GetProps()
 
 void Winch::OnLinkRotateLeft()
 {
+	__super::OnLinkRotateLeft();
+
 	if (linkedActor)
 	{
 		const XMVECTOR nextPos = linkedActor->GetPositionV() + XMLoadFloat3(&moveDirection) * moveIncrement;
@@ -36,6 +38,8 @@ void Winch::OnLinkRotateLeft()
 
 void Winch::OnLinkRotateRight()
 {
+	__super::OnLinkRotateRight();
+
 	if (linkedActor)
 	{
 		const XMVECTOR nextPos = linkedActor->GetPositionV() - XMLoadFloat3(&moveDirection) * moveIncrement;

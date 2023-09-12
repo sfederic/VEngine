@@ -11,6 +11,8 @@ SawBlade::SawBlade()
 
 void SawBlade::Create()
 {
+	__super::Create();
+
 	sliceTrigger->SetExtents(1.5f, 1.5f, 1.5f);
 
 	SetMeshFilename("saw_blade.vmesh");
@@ -32,12 +34,16 @@ Properties SawBlade::GetProps()
 
 void SawBlade::PowerUp()
 {
+	__super::PowerUp();
+
 	isCutting = true;
 	AddRotation(GetUpVectorV(), 50.f);
 }
 
 void SawBlade::PowerDown()
 {
+	__super::PowerDown();
+
 	isCutting = false;
 }
 

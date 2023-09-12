@@ -5,31 +5,35 @@
 
 void OilSlick::Create()
 {
-    DisableAllInteractivity();
+	__super::Create();
 
-    mesh->SetMeshFilename("node.vmesh");
-    mesh->SetTexture("oil_slick.png");
+	DisableAllInteractivity();
+
+	mesh->SetMeshFilename("node.vmesh");
+	mesh->SetTexture("oil_slick.png");
 }
 
 Properties OilSlick::GetProps()
 {
-    auto props = __super::GetProps();
-    props.title = GetTypeName();
-    return props;
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	return props;
 }
 
 void OilSlick::Burn()
 {
-    if (!onFire)
-    {
-        Transform t;
-        t.Decompose(GetWorldMatrix());
+	__super::Burn();
 
-        auto fireSource = FireSource::system.Add(t);
-        fireSource->Create();
-        fireSource->CreateAllComponents();
-        fireSource->Start();
+	if (!onFire)
+	{
+		Transform t;
+		t.Decompose(GetWorldMatrix());
 
-        onFire = true;
-    }
+		auto fireSource = FireSource::system.Add(t);
+		fireSource->Create();
+		fireSource->CreateAllComponents();
+		fireSource->Start();
+
+		onFire = true;
+	}
 }

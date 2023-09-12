@@ -6,16 +6,18 @@
 
 TitleScreenActor::TitleScreenActor()
 {
-    rootComponent = EmptyComponent::system.Add("Root", this);
+	rootComponent = EmptyComponent::system.Add("Root", this);
 }
 
 void TitleScreenActor::Start()
 {
-    titlescreenWidget = UISystem::CreateWidget<TitleScreenWidget>();
-    titlescreenWidget->AddToViewport();
+	__super::Start();
+
+	titlescreenWidget = UISystem::CreateWidget<TitleScreenWidget>();
+	titlescreenWidget->AddToViewport();
 }
 
 Properties TitleScreenActor::GetProps()
 {
-    return Properties();
+	return Properties();
 }

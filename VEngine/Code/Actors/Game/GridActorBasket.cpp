@@ -13,6 +13,8 @@ Properties GridActorBasket::GetProps()
 
 void GridActorBasket::OnLinkActivate()
 {
+	__super::OnLinkActivate();
+
 	IActorSystem* system = ActorSystemCache::Get().GetSystem(gridActorSystemNameToSpawnFrom);
 	if (system)
 	{

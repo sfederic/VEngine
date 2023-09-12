@@ -17,7 +17,7 @@ InteractTrigger::InteractTrigger()
 void InteractTrigger::Start()
 {
 	trigger->SetTargetAsPlayer();
-	
+
 	interactWidget = UISystem::CreateWidget<InteractWidget>();
 	interactWidget->interactText = overlapText;
 
@@ -27,6 +27,8 @@ void InteractTrigger::Start()
 
 void InteractTrigger::Tick(float deltaTime)
 {
+	__super::Tick(deltaTime);
+
 	//@Todo: this logic is fine for now, but not good splitting up player input like this.
 	//Maybe this todo needs an event-fire-off-once system in place.
 

@@ -5,8 +5,8 @@
 
 void Gear::Create()
 {
+	__super::Create();
 	ignoreRotationValidCheck = true;
-
 	SetMeshFilename("gear.vmesh");
 }
 
@@ -54,6 +54,8 @@ void Gear::OnLinkRotate()
 
 void Gear::OnRotationEnd()
 {
+	__super::OnRotationEnd();
+
 	previouslyCascadedGears.clear();
 }
 

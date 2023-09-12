@@ -13,6 +13,8 @@ OreSmashMachine::OreSmashMachine()
 
 void OreSmashMachine::Interact()
 {
+	__super::Interact();
+
 	for (auto& ore : Ore::system.GetActors())
 	{
 		if (oreToCrystalTrigger->Contains(ore->GetPositionV()))

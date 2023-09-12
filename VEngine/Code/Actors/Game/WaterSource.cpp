@@ -12,6 +12,8 @@ WaterSource::WaterSource()
 
 void WaterSource::Create()
 {
+	__super::Create();
+
 	canBeMovedInLink = false;
 	canBeRotatedInLink = false;
 
@@ -45,11 +47,15 @@ Properties WaterSource::GetProps()
 
 void WaterSource::Activate()
 {
+	__super::Activate();
+
 	SetVisibility(true);
 }
 
 void WaterSource::Deactivate()
 {
+	__super::Deactivate();
+
 	SetVisibility(false);
 }
 

@@ -12,6 +12,8 @@ GearSet::GearSet()
 
 void GearSet::Create()
 {
+	__super::Create();
+
 	SetMeshFilename("gear.vmesh");
 
 	canBeMovedInLink = false;

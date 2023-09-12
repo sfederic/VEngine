@@ -11,6 +11,8 @@ OrientationTrigger::OrientationTrigger()
 
 void OrientationTrigger::Tick(float deltaTime)
 {
+	__super::Tick(deltaTime);
+
 	CheckIfOrientationLockIsAlignedInTrigger();
 }
 

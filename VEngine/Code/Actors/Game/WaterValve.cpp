@@ -5,6 +5,8 @@
 
 void WaterValve::Create()
 {
+	__super::Create();
+
 	SetMeshFilename("gear.vmesh");
 }
 

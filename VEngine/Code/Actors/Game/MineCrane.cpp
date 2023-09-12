@@ -10,6 +10,8 @@ MineCrane::MineCrane()
 
 void MineCrane::Create()
 {
+	__super::Create();
+
 	ignoreRotationValidCheck = true;
 	canBeRotatedPitchXAxis = false;
 
@@ -23,7 +25,7 @@ void MineCrane::Tick(float deltaTime)
 	__super::Tick(deltaTime);
 
 	if (hasActorHookedOn) return;
-	
+
 	for (auto gridActor : World::GetAllActorsAsBaseType<GridActor>())
 	{
 		if (hookTrigger->Contains(gridActor->GetPositionV()))

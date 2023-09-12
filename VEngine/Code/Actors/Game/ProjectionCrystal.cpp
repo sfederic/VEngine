@@ -16,6 +16,8 @@ ProjectionCrystal::ProjectionCrystal()
 
 void ProjectionCrystal::Create()
 {
+	__super::Create();
+
 	mesh->SetMeshFilename("crystal.vmesh");
 
 	projectionMesh->canBeLinkedTo = false;
@@ -32,6 +34,8 @@ void ProjectionCrystal::Create()
 
 void ProjectionCrystal::Interact()
 {
+	__super::Interact();
+
 	isActive = !isActive;
 	if (isActive)
 	{

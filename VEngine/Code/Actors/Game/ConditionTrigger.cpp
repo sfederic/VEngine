@@ -5,27 +5,33 @@
 
 ConditionTrigger::ConditionTrigger()
 {
-    condition = CreateComponent<ConditionComponent>("Condition");
+	condition = CreateComponent<ConditionComponent>("Condition");
 
-    boxTrigger = CreateComponent<BoxTriggerComponent>("BoxTrigger");
-    rootComponent = boxTrigger;
+	boxTrigger = CreateComponent<BoxTriggerComponent>("BoxTrigger");
+	rootComponent = boxTrigger;
 }
 
 void ConditionTrigger::Start()
 {
-    boxTrigger->SetTargetAsPlayer();
+	__super::Start();
+
+	boxTrigger->SetTargetAsPlayer();
 }
 
 void ConditionTrigger::Tick(float deltaTime)
 {
-    if (boxTrigger->ContainsTarget())
-    {
-        condition->CheckCondition();
-        SetActive(false);
-    }
+	__super::Tick(deltaTime);
+
+	if (boxTrigger->ContainsTarget())
+	{
+		condition->CheckCondition();
+		SetActive(false);
+	}
 }
 
 Properties ConditionTrigger::GetProps()
 {
-    return __super::GetProps();
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	return props;
 }

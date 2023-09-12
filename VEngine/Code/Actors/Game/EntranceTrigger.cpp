@@ -26,6 +26,8 @@ EntranceTrigger::EntranceTrigger()
 
 void EntranceTrigger::Start()
 {
+	__super::Start();
+
 	interactWidget = UISystem::CreateWidget<InteractWidget>();
 
 	if (isEntranceActive)
@@ -48,6 +50,8 @@ void EntranceTrigger::Start()
 
 void EntranceTrigger::Tick(float deltaTime)
 {
+	__super::Tick(deltaTime);
+
 	const XMVECTOR targetPos = trigger->GetTargetActor()->GetPositionV();
 
 	if (trigger->ContainsTarget() && isEntranceActive && !entranceInteractedWith)

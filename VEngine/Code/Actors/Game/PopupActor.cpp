@@ -5,24 +5,26 @@
 
 PopupActor::PopupActor()
 {
-    SetEmptyRootComponent();
+	SetEmptyRootComponent();
 }
 
 void PopupActor::Start()
 {
-    popupWidget = UISystem::CreateWidget<PopupWidget>();
-    popupWidget->popupText = popupText;
+	__super::Start();
 
-    if (displayOnLevelLoad)
-    {
-        popupWidget->AddToViewport();
-    }
+	popupWidget = UISystem::CreateWidget<PopupWidget>();
+	popupWidget->popupText = popupText;
+
+	if (displayOnLevelLoad)
+	{
+		popupWidget->AddToViewport();
+	}
 }
 
 Properties PopupActor::GetProps()
 {
-    auto props = __super::GetProps();
-    props.Add("Popup Text", &popupText);
-    props.Add("Display at Load", &displayOnLevelLoad);
-    return props;
+	auto props = __super::GetProps();
+	props.Add("Popup Text", &popupText);
+	props.Add("Display at Load", &displayOnLevelLoad);
+	return props;
 }

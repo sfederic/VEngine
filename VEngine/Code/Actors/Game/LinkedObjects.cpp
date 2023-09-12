@@ -14,6 +14,8 @@ LinkedObjects::LinkedObjects()
 
 void LinkedObjects::Create()
 {
+	__super::Create();
+
 	mesh2->SetMeshFilename("cube.vmesh");
 	mesh2->SetLocalPosition(2.f, 0.f, 0.f);
 

@@ -3,6 +3,8 @@
 
 void GearSetDoor::Create()
 {
+	__super::Create();
+
 	canFall = false;
 	canBeMovedInLink = false;
 	canBeRotatedInLink = false;

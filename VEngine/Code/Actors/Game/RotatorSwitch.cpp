@@ -49,6 +49,8 @@ Properties RotatorSwitch::GetProps()
 
 void RotatorSwitch::Interact()
 {
+	__super::Interact();
+
 	rotationFinished = false;
 
 	const float angle = XMConvertToRadians(rotationIncrement);

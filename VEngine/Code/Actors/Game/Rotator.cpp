@@ -5,6 +5,8 @@
 
 void Rotator::Create()
 {
+	__super::Create();
+
 	canBeMovedInLink = false;
 
 	SetMeshFilename("ico_sphere.vmesh");

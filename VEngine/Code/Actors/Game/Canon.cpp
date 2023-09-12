@@ -5,6 +5,8 @@
 
 void Canon::Create()
 {
+	__super::Create();
+
 	canBeRotatedPitchXAxis = false;
 	ignoreRotationValidCheck = true;
 

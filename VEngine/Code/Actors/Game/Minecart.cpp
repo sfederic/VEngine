@@ -6,6 +6,8 @@
 
 void Minecart::Create()
 {
+	__super::Create();
+
 	SetMeshFilename("minecart.vmesh");
 }
 
@@ -29,7 +31,7 @@ void Minecart::OnLinkMove()
 			const auto forward = GetForwardVectorV();
 			const auto trackForward = track->GetForwardVectorV();
 			constexpr float epsilon = 0.001f;
-			if (VMath::VecEqual(forward, trackForward, epsilon) || 
+			if (VMath::VecEqual(forward, trackForward, epsilon) ||
 				VMath::VecEqual(-forward, trackForward, epsilon))
 			{
 				return;

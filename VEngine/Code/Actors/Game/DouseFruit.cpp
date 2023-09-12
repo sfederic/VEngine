@@ -5,6 +5,8 @@
 
 void DouseFruit::Create()
 {
+	__super::Create();
+
 	mesh->SetMeshFilename("small_ico_sphere.vmesh");
 	mesh->SetTexture("watermelon.jpg");
 	mesh->SetLocalScale(0.33f);
@@ -12,6 +14,8 @@ void DouseFruit::Create()
 
 void DouseFruit::Douse()
 {
+	__super::Douse();
+
 	if (hasBeenDoused)
 	{
 		return;
@@ -29,6 +33,8 @@ void DouseFruit::Douse()
 
 void DouseFruit::OnLinkDeactivate()
 {
+	__super::OnLinkDeactivate();
+
 	//Drop fruit (Don't want it hanging around as a grid actor you can step on)
 	if (!hasBeenDoused)
 	{

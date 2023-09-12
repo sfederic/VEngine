@@ -10,6 +10,8 @@ Lift::Lift()
 
 void Lift::Create()
 {
+	__super::Create();
+
 	canFall = false;
 
 	//Extents and offset are important here. If you stack up two 1x1x1 grid actors, then the lift will have

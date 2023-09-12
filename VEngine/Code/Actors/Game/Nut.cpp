@@ -5,6 +5,8 @@
 
 void Nut::Create()
 {
+	__super::Create();
+
 	ignoreRotationValidCheck = true;
 
 	SetMeshFilename("nut.vmesh");
@@ -12,11 +14,15 @@ void Nut::Create()
 
 void Nut::OnLinkRotateLeft()
 {
+	__super::OnLinkRotateLeft();
+
 	CheckIfConnectedToBolt(-GetUpVectorV());
 }
 
 void Nut::OnLinkRotateRight()
 {
+	__super::OnLinkRotateRight();
+
 	CheckIfConnectedToBolt(GetUpVectorV());
 }
 

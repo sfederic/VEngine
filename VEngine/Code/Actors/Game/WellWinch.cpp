@@ -14,6 +14,8 @@ WellWinch::WellWinch()
 
 void WellWinch::Create()
 {
+	__super::Create();
+
 	canBeRotatedYawYAxis = false;
 
 	mesh->SetMeshFilename("gear.vmesh");

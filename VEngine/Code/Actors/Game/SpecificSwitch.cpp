@@ -16,6 +16,8 @@ SpecificSwitch::SpecificSwitch()
 
 void SpecificSwitch::Create()
 {
+	__super::Create();
+
 	mesh->SetMeshFilename("node.vmesh");
 	mesh->SetAmbientColour(XMFLOAT4(1.f, 0.f, 0.f, 1.f));
 
@@ -24,6 +26,8 @@ void SpecificSwitch::Create()
 
 void SpecificSwitch::Start()
 {
+	__super::Start();
+
 	gridActorToCheck = dynamic_cast<GridActor*>(World::GetActorByNameAllowNull(gridActorToCheckName));
 	if (gridActorToCheck == nullptr)
 	{
@@ -33,6 +37,8 @@ void SpecificSwitch::Start()
 
 void SpecificSwitch::Tick(float deltaTime)
 {
+	__super::Tick(deltaTime);
+
 	CheckForSpecificGridActorOverlapping();
 }
 

@@ -3,6 +3,8 @@
 
 void Bolt::Create()
 {
+	__super::Create();
+
 	SetMeshFilename("bolt.vmesh");
 }
 

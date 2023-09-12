@@ -4,6 +4,8 @@
 
 void MinecartTrack::Create()
 {
+	__super::Create();
+
 	canBeMovedInLink = false;
 
 	mesh->SetMeshFilename("node.vmesh");

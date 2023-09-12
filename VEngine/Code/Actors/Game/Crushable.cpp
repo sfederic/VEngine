@@ -8,5 +8,7 @@ void Crushable::Crushed()
 
 void Crushable::Attacked()
 {
+	__super::Attacked();
+
 	Destroy();
 }

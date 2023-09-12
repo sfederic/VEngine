@@ -21,6 +21,8 @@ Properties CrystalPlacement::GetProps()
 
 void CrystalPlacement::Interact()
 {
+	__super::Interact();
+
 	if (hasCrystalBeenPlaced) return;
 
 	const std::string heldItem = GameInstance::GetHeldPlayerItem();

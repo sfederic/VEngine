@@ -14,6 +14,8 @@ PowerCrystal::PowerCrystal()
 
 void PowerCrystal::Create()
 {
+	__super::Create();
+
 	SetMeshFilename("crystal_light.vmesh");
 
 	effectTrigger->SetExtents(2.f, 2.f, 2.f);

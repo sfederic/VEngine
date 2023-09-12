@@ -16,6 +16,8 @@ Properties Explosive::GetProps()
 
 void Explosive::Burn()
 {
+	__super::Burn();
+
 	auto ambientColour = mesh->GetAmbientColour();
 	ambientColour.y = 0.f;
 	ambientColour.z = 0.f;

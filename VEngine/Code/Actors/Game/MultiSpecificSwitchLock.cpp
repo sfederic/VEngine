@@ -10,6 +10,8 @@ MultiSpecificSwitchLock::MultiSpecificSwitchLock()
 
 void MultiSpecificSwitchLock::Start()
 {
+	__super::Start();
+
 	switchActors.push_back(dynamic_cast<SpecificSwitch*>(World::GetActorByNameAllowNull(switchActorName0)));
 	switchActors.push_back(dynamic_cast<SpecificSwitch*>(World::GetActorByNameAllowNull(switchActorName1)));
 	switchActors.push_back(dynamic_cast<SpecificSwitch*>(World::GetActorByNameAllowNull(switchActorName2)));
@@ -20,6 +22,8 @@ void MultiSpecificSwitchLock::Start()
 
 void MultiSpecificSwitchLock::Tick(float deltaTime)
 {
+	__super::Tick(deltaTime);
+
 	CheckIfAllActorOrientationsAreCorrect();
 }
 

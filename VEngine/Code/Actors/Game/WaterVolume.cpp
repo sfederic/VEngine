@@ -16,6 +16,8 @@ WaterVolume::WaterVolume()
 
 void WaterVolume::Create()
 {
+	__super::Create();
+
 	waterSurface->ignoreGridRaycasts = true;
 	waterSurface->SetMeshFilename("node.vmesh");
 	waterSurface->SetTexture("water.jpg");
@@ -26,6 +28,8 @@ void WaterVolume::Create()
 
 void WaterVolume::Tick(float deltaTime)
 {
+	__super::Tick(deltaTime);
+
 	//@Todo: Testing code for raising water levels
 	auto targetPos = GetPositionV();
 	targetPos.m128_f32[1] = yPointToRaiseTo;

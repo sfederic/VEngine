@@ -10,6 +10,8 @@ GlobalPropSetter::GlobalPropSetter()
 
 void GlobalPropSetter::Activate()
 {
+	__super::Activate();
+
 	if (hasBeenActivated)
 	{
 		return;

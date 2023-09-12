@@ -11,6 +11,8 @@ BucketPressurePlate::BucketPressurePlate()
 
 void BucketPressurePlate::Create()
 {
+	__super::Create();
+
 	SetMeshFilename("node.vmesh");
 
 	pressureTrigger->SetLocalPosition(0.f, 0.5f, 0.f);

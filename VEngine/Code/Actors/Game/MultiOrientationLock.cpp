@@ -11,6 +11,8 @@ MultiOrientationLock::MultiOrientationLock()
 
 void MultiOrientationLock::Start()
 {
+	__super::Start();
+
 	lockActors.push_back(dynamic_cast<OrientationLock*>(World::GetActorByNameAllowNull(lockActorName0)));
 	lockActors.push_back(dynamic_cast<OrientationLock*>(World::GetActorByNameAllowNull(lockActorName1)));
 	lockActors.push_back(dynamic_cast<OrientationLock*>(World::GetActorByNameAllowNull(lockActorName2)));
@@ -21,6 +23,8 @@ void MultiOrientationLock::Start()
 
 void MultiOrientationLock::Tick(float deltaTime)
 {
+	__super::Tick(deltaTime);
+
 	CheckIfAllActorOrientationsAreCorrect();
 }
 

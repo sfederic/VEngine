@@ -12,6 +12,8 @@ PickupPlacementActor::PickupPlacementActor()
 
 void PickupPlacementActor::Start()
 {
+	__super::Start();
+
 	boxTrigger->SetTargetAsPlayer();
 
 	actorToActivate = World::GetActorByNameAllowNull(actorToActivateName);

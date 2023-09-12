@@ -7,6 +7,8 @@
 
 void OilBarrel::Create()
 {
+	__super::Create();
+
 	ignoreRotationValidCheck = true;
 
 	SetMeshFilename("oil_barrel.vmesh");

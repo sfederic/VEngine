@@ -6,6 +6,8 @@
 
 void Excavator::Create()
 {
+	__super::Create();
+
 	canBeMovedInLink = false;
 	canBeRotatedPitchXAxis = false;
 	ignoreRotationValidCheck = true;
@@ -15,6 +17,8 @@ void Excavator::Create()
 
 void Excavator::Interact()
 {
+	__super::Interact();
+
 	if (holdingObject)
 	{
 		ReleaseObject();
@@ -33,7 +37,7 @@ void Excavator::Dig()
 	for (auto actor : hit.hitActors)
 	{
 		auto mineable = dynamic_cast<Mineable*>(actor);
-		if(mineable)
+		if (mineable)
 		{
 			mineable->Mine();
 			holdingObject = true;

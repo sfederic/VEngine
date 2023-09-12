@@ -12,6 +12,8 @@ Bucket::Bucket()
 
 void Bucket::Create()
 {
+	__super::Create();
+
 	ignoreRotationValidCheck = true;
 
 	mesh->SetMeshFilename("hollow_barrel.vmesh");
@@ -59,7 +61,7 @@ void Bucket::EmptyWater()
 		if (!VMath::VecEqual(GetUpVectorV(), VMath::GlobalUpVector()))
 		{
 			isFilled = false;
-			
+
 			HitResult boxHit(this);
 			const XMVECTOR origin = GetPositionV() + GetUpVectorV();
 			if (SimpleBoxCast(origin, XMFLOAT3(0.5f, 0.5f, 0.5f), boxHit, false, false))

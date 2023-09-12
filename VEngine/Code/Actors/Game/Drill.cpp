@@ -4,6 +4,8 @@
 
 void Drill::Create()
 {
+	__super::Create();
+
 	SetMeshFilename("drill.vmesh");
 }
 

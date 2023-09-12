@@ -3,6 +3,8 @@
 
 void LockedDoor::Activate()
 {
+	__super::Activate();
+
 	SetActive(false);
 	SetVisibility(false);
 }

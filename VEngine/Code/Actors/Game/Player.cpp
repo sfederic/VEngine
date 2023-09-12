@@ -71,6 +71,8 @@ void Player::Start()
 
 void Player::End()
 {
+	__super::End();
+
 	previousHitTransparentActors.clear();
 }
 

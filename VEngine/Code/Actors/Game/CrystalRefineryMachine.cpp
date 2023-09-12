@@ -18,6 +18,8 @@ CrystalRefineryMachine::CrystalRefineryMachine()
 
 void CrystalRefineryMachine::Interact()
 {
+	__super::Interact();
+
 	for (auto& mineable : Mineable::system.GetActors())
 	{
 		if (materialInputTrigger->Contains(mineable->GetPositionV()))
@@ -27,7 +29,7 @@ void CrystalRefineryMachine::Interact()
 			Transform transform;
 			transform.position = crystalOutputTrigger->GetWorldPosition();
 			auto crystal = ProjectionCrystal::system.Add(transform);
-			crystal->Create(); 
+			crystal->Create();
 			crystal->CreateAllComponents();
 			crystal->Start();
 

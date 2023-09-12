@@ -6,12 +6,14 @@
 
 FenceActor::FenceActor()
 {
-    mesh = MeshComponent::system.Add("Mesh", this, MeshComponent("plane.vmesh", "test_fence.png"));
-    rootComponent = mesh;
-    mesh->GetMaterial().rastStateValue.SetValue(RastStates::noBackCull);
+	mesh = MeshComponent::system.Add("Mesh", this, MeshComponent("plane.vmesh", "test_fence.png"));
+	rootComponent = mesh;
+	mesh->GetMaterial().rastStateValue.SetValue(RastStates::noBackCull);
 }
 
 Properties FenceActor::GetProps()
 {
-    return __super::GetProps();
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	return props;
 }

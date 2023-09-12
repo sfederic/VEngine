@@ -5,6 +5,8 @@
 
 void LiftCrank::Create()
 {
+	__super::Create();
+
 	SetMeshFilename("gear.vmesh");
 }
 
@@ -30,12 +32,16 @@ Properties LiftCrank::GetProps()
 
 void LiftCrank::OnLinkRotateLeft()
 {
+	__super::OnLinkRotateLeft();
+
 	const XMVECTOR moveDirectionV = XMLoadFloat3(&moveDirection);
 	MoveLinkedLiftAndContainedActors(moveDirectionV);
 }
 
 void LiftCrank::OnLinkRotateRight()
 {
+	__super::OnLinkRotateRight();
+
 	const XMVECTOR moveDirectionV = XMLoadFloat3(&moveDirection);
 	MoveLinkedLiftAndContainedActors(-moveDirectionV);
 }

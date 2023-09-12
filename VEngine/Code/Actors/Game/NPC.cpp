@@ -8,111 +8,113 @@
 
 NPC::NPC()
 {
-    isDestructible = true;
+	isDestructible = true;
 }
 
 void NPC::Create()
 {
-    moveSpeed = 3.f;
-    rotateSpeed = 18.f;
+	__super::Create();
 
-    canBeMovedInLink = false;
-    canBeRotatedInLink = false;
+	moveSpeed = 3.f;
+	rotateSpeed = 18.f;
+
+	canBeMovedInLink = false;
+	canBeRotatedInLink = false;
 }
 
 void NPC::Start()
 {
-    __super::Start();
+	__super::Start();
 
-    if (!spawnText.empty())
-    {
-        if (isQuickDialogueActive) return;
+	if (!spawnText.empty())
+	{
+		if (isQuickDialogueActive) return;
 
-        spawnTextWidget = UISystem::CreateWidget<DialogueWidget>();
-        spawnTextWidget->dialogueText = spawnText;
-        spawnTextWidget->AddToViewport(5.0f);
-    }
+		spawnTextWidget = UISystem::CreateWidget<DialogueWidget>();
+		spawnTextWidget->dialogueText = spawnText;
+		spawnTextWidget->AddToViewport(5.0f);
+	}
 }
 
 void NPC::Tick(float deltaTime)
 {
-    if (spawnTextWidget)
-    {
-        spawnTextWidget->worldPosition = GetHomogeneousPositionV();
-    }
+	if (spawnTextWidget)
+	{
+		spawnTextWidget->worldPosition = GetHomogeneousPositionV();
+	}
 
-    if (isQuickDialogueActive)
-    {
-        quickTalkTimer += deltaTime;
-        if (quickTalkTimer > 4.0f)
-        {
-            EndQuickTalkTo();
-            quickTalkTimer = 0.f;
-        }
-    }
+	if (isQuickDialogueActive)
+	{
+		quickTalkTimer += deltaTime;
+		if (quickTalkTimer > 4.0f)
+		{
+			EndQuickTalkTo();
+			quickTalkTimer = 0.f;
+		}
+	}
 
-    TryToEscapeToExit();
+	TryToEscapeToExit();
 
-    __super::Tick(deltaTime);
+	__super::Tick(deltaTime); //Tick has to be at the end here to deal with A* nodes
 }
 
 Properties NPC::GetProps()
 {
-    Properties props = __super::GetProps();
-    props.title = "NPC";
-    props.Add("Spawn Text", &spawnText);
-    return props;
+	Properties props = __super::GetProps();
+	props.title = "NPC";
+	props.Add("Spawn Text", &spawnText);
+	return props;
 }
 
 void NPC::QuickTalkTo()
 {
-    spawnTextWidget->RemoveFromViewport();
+	spawnTextWidget->RemoveFromViewport();
 
-    if (isQuickDialogueActive) return;
+	if (isQuickDialogueActive) return;
 
-    isQuickDialogueActive = true;
+	isQuickDialogueActive = true;
 
-    dialogueComponent->dialogueWidget->dialogueText = interactText;
-    dialogueComponent->AddToViewport();
+	dialogueComponent->dialogueWidget->dialogueText = interactText;
+	dialogueComponent->AddToViewport();
 }
 
 void NPC::EndQuickTalkTo()
 {
-    isQuickDialogueActive = false;
-    dialogueComponent->RemoveFromViewport();
+	isQuickDialogueActive = false;
+	dialogueComponent->RemoveFromViewport();
 }
 
 void NPC::TryToEscapeToExit()
 {
-    auto entrance = EntranceTrigger::system.GetFirstActor();
-    const int xIndex = (int)std::round(entrance->GetPosition().x);
-    const int yIndex = (int)std::round(entrance->GetPosition().z);
-    auto grid = Grid::system.GetOnlyActor();
-    auto entranceNode = grid->GetNode(xIndex, yIndex);
+	auto entrance = EntranceTrigger::system.GetFirstActor();
+	const int xIndex = (int)std::round(entrance->GetPosition().x);
+	const int yIndex = (int)std::round(entrance->GetPosition().z);
+	auto grid = Grid::system.GetOnlyActor();
+	auto entranceNode = grid->GetNode(xIndex, yIndex);
 
-    if (entranceReachableForEscape)
-    {
-        //Destroy NPC when it reaches the entrance.
-        if (GetCurrentNode()->Equals(entranceNode))
-        {
-            DeferDestroy();
-        }
+	if (entranceReachableForEscape)
+	{
+		//Destroy NPC when it reaches the entrance.
+		if (GetCurrentNode()->Equals(entranceNode))
+		{
+			DeferDestroy();
+		}
 
-        return;
-    }
+		return;
+	}
 
-    MoveToNode(entranceNode);
+	MoveToNode(entranceNode);
 
-    for (auto pathNode : pathNodes)
-    {
-        if (pathNode->Equals(entranceNode))
-        {
-            entranceReachableForEscape = true;
-        }
-    }
-    
-    if (!entranceReachableForEscape)
-    {
-        pathNodes.clear();
-    }
+	for (auto pathNode : pathNodes)
+	{
+		if (pathNode->Equals(entranceNode))
+		{
+			entranceReachableForEscape = true;
+		}
+	}
+
+	if (!entranceReachableForEscape)
+	{
+		pathNodes.clear();
+	}
 }

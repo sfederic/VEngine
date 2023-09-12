@@ -4,6 +4,8 @@
 
 void Wood::Create()
 {
+	__super::Create();
+
 	canBePickedUp = false;
 	itemName = "Wood";
 
@@ -12,6 +14,8 @@ void Wood::Create()
 
 void Wood::Slice()
 {
+	__super::Slice();
+
 	//Make wood collectible only when it has been cut
 	canBePickedUp = true;
 

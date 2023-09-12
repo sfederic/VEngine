@@ -21,6 +21,8 @@ GridActor::GridActor()
 
 void GridActor::Create()
 {
+	__super::Create();
+
 	isInspectable = false;
 }
 
@@ -88,6 +90,8 @@ void GridActor::Inspect()
 
 void GridActor::Start()
 {
+	__super::Start();
+
 	nextPos = GetPositionV();
 	nextRot = GetRotationV();
 
@@ -105,6 +109,8 @@ void GridActor::Start()
 
 void GridActor::Tick(float deltaTime)
 {
+	__super::Tick(deltaTime);
+
 	OnMoveEnd();
 	OnRotationEnd();
 
