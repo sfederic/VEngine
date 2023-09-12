@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "Raycast.h"
 #include <limits>
+#include "Actors/Game/Player.h"
 #include "Core/Camera.h"
 #include "Render/Renderer.h"
 #include "Render/Line.h"
@@ -68,33 +69,33 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 	hitResult.hitComponents.clear();
 
 	const auto checkSpatialComponentCollision = [&](SpatialComponent* spatialComponent)
-	{
-		if (!spatialComponent->IsActive())
 		{
-			return;
-		}
+			if (!spatialComponent->IsActive())
+			{
+				return;
+			}
 
-		if (spatialComponent->GetCollisionLayer() == CollisionLayers::None ||
-			spatialComponent->GetCollisionLayer() == hitResult.ignoreLayer)
-		{
-			return;
-		}
+			if (spatialComponent->GetCollisionLayer() == CollisionLayers::None ||
+				spatialComponent->GetCollisionLayer() == hitResult.ignoreLayer)
+			{
+				return;
+			}
 
-		if (IsIgnoredSpatialComponent(spatialComponent, hitResult))
-		{
-			return;
-		}
+			if (IsIgnoredSpatialComponent(spatialComponent, hitResult))
+			{
+				return;
+			}
 
-		const BoundingOrientedBox boundingBox = spatialComponent->GetBoundsInWorldSpace();
+			const BoundingOrientedBox boundingBox = spatialComponent->GetBoundsInWorldSpace();
 
-		float hitDistance = 0.f;
-		if (boundingBox.Intersects(hitResult.origin, hitResult.direction, hitDistance))
-		{
-			distances.emplace_back(hitDistance);
-			hitResult.hitComponents.emplace_back(spatialComponent);
-			bRayHit = true;
-		}
-	};
+			float hitDistance = 0.f;
+			if (boundingBox.Intersects(hitResult.origin, hitResult.direction, hitDistance))
+			{
+				distances.emplace_back(hitDistance);
+				hitResult.hitComponents.emplace_back(spatialComponent);
+				bRayHit = true;
+			}
+		};
 
 	auto actorsInWorld = World::GetAllActorsInWorld();
 	for (auto actor : actorsInWorld)
@@ -187,88 +188,88 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 	std::vector<HitResult> hitResults;
 
 	const auto checkMeshVerticesCollision = [&](MeshComponent& mesh)
-	{
-		//Ignore the check for backface if the rasterizer state doesn't cull them
-		const bool ignoreBackFaceHit = mesh.GetRastState().name == RastStates::noBackCull;
-
-		const XMMATRIX meshWorldMatrix = mesh.GetWorldMatrix();
-
-		const auto& vertices = mesh.meshDataProxy.GetVertices();
-		const int vertexTriangleCount = vertices.size() / 3;
-		for (int i = 0; i < vertexTriangleCount; i++)
 		{
-			const int index0 = i * 3;
-			const int index1 = i * 3 + 1;
-			const int index2 = i * 3 + 2;
+			//Ignore the check for backface if the rasterizer state doesn't cull them
+			const bool ignoreBackFaceHit = mesh.GetRastState().name == RastStates::noBackCull;
 
-			XMVECTOR v0 = XMLoadFloat3(&vertices[index0].pos);
-			v0 = XMVector3TransformCoord(v0, meshWorldMatrix);
+			const XMMATRIX meshWorldMatrix = mesh.GetWorldMatrix();
 
-			XMVECTOR v1 = XMLoadFloat3(&vertices[index1].pos);
-			v1 = XMVector3TransformCoord(v1, meshWorldMatrix);
-
-			XMVECTOR v2 = XMLoadFloat3(&vertices[index2].pos);
-			v2 = XMVector3TransformCoord(v2, meshWorldMatrix);
-
-			float hitDistance = 0.f;
-			if (DirectX::TriangleTests::Intersects(hitResult.origin, hitResult.direction, v0, v1, v2, hitDistance))
+			const auto& vertices = mesh.meshDataProxy.GetVertices();
+			const int vertexTriangleCount = vertices.size() / 3;
+			for (int i = 0; i < vertexTriangleCount; i++)
 			{
-				HitResult tempHitResult = hitResult;
-				tempHitResult.hitDistance = hitDistance;
+				const int index0 = i * 3;
+				const int index1 = i * 3 + 1;
+				const int index2 = i * 3 + 2;
 
-				//Get normal for triangle
-				XMVECTOR normal = XMLoadFloat3(&mesh.meshDataProxy.vertices.at(index0).normal);
-				normal = XMVector3TransformNormal(normal, meshWorldMatrix);
-				normal = XMVector3Normalize(normal);
-				XMStoreFloat3(&tempHitResult.hitNormal, normal);
+				XMVECTOR v0 = XMLoadFloat3(&vertices[index0].pos);
+				v0 = XMVector3TransformCoord(v0, meshWorldMatrix);
 
-				//Check if back facing triangle
-				if (!ignoreBackFaceHit)
+				XMVECTOR v1 = XMLoadFloat3(&vertices[index1].pos);
+				v1 = XMVector3TransformCoord(v1, meshWorldMatrix);
+
+				XMVECTOR v2 = XMLoadFloat3(&vertices[index2].pos);
+				v2 = XMVector3TransformCoord(v2, meshWorldMatrix);
+
+				float hitDistance = 0.f;
+				if (DirectX::TriangleTests::Intersects(hitResult.origin, hitResult.direction, v0, v1, v2, hitDistance))
 				{
-					const float angleBetweenRaycastDirectionAndTriangleNormal =
-						XMConvertToDegrees(XMVector3AngleBetweenNormals(
-							normal,
-							hitResult.direction).m128_f32[0]);
-					if (angleBetweenRaycastDirectionAndTriangleNormal < 90.f)
+					HitResult tempHitResult = hitResult;
+					tempHitResult.hitDistance = hitDistance;
+
+					//Get normal for triangle
+					XMVECTOR normal = XMLoadFloat3(&mesh.meshDataProxy.vertices.at(index0).normal);
+					normal = XMVector3TransformNormal(normal, meshWorldMatrix);
+					normal = XMVector3Normalize(normal);
+					XMStoreFloat3(&tempHitResult.hitNormal, normal);
+
+					//Check if back facing triangle
+					if (!ignoreBackFaceHit)
 					{
-						//has hit the back face of a triangle, so skip
-						continue;
+						const float angleBetweenRaycastDirectionAndTriangleNormal =
+							XMConvertToDegrees(XMVector3AngleBetweenNormals(
+								normal,
+								hitResult.direction).m128_f32[0]);
+						if (angleBetweenRaycastDirectionAndTriangleNormal < 90.f)
+						{
+							//has hit the back face of a triangle, so skip
+							continue;
+						}
 					}
+
+					//hit position
+					const XMVECTOR hitPosition = hitResult.origin + (hitResult.direction * tempHitResult.hitDistance);
+
+					//Hit vertex indices
+					std::map<int, XMVECTOR> indexToVertMap;
+					indexToVertMap.emplace(index0, v0);
+					indexToVertMap.emplace(index1, v1);
+					indexToVertMap.emplace(index2, v2);
+					tempHitResult.hitVertIndexes.push_back(VMath::GetIndexOfClosestVertexFromTriangleIntersect(indexToVertMap, hitPosition));
+
+					//Get hit UV
+					float hitU, hitV;
+					VMath::TriangleXYZToUV(mesh.meshDataProxy.vertices.at(index0),
+						mesh.meshDataProxy.vertices.at(index1),
+						mesh.meshDataProxy.vertices.at(index2), hitPosition, hitU, hitV);
+					tempHitResult.uv = XMFLOAT2(hitU, hitV);
+
+					//Set hit component and actor
+					tempHitResult.hitComponent = &mesh;
+					tempHitResult.hitActor = World::GetActorByUID(mesh.GetOwnerUID());
+
+					hitResults.emplace_back(tempHitResult);
 				}
-
-				//hit position
-				const XMVECTOR hitPosition = hitResult.origin + (hitResult.direction * tempHitResult.hitDistance);
-
-				//Hit vertex indices
-				std::map<int, XMVECTOR> indexToVertMap;
-				indexToVertMap.emplace(index0, v0);
-				indexToVertMap.emplace(index1, v1);
-				indexToVertMap.emplace(index2, v2);
-				tempHitResult.hitVertIndexes.push_back(VMath::GetIndexOfClosestVertexFromTriangleIntersect(indexToVertMap, hitPosition));
-
-				//Get hit UV
-				float hitU, hitV;
-				VMath::TriangleXYZToUV(mesh.meshDataProxy.vertices.at(index0),
-					mesh.meshDataProxy.vertices.at(index1),
-					mesh.meshDataProxy.vertices.at(index2), hitPosition, hitU, hitV);
-				tempHitResult.uv = XMFLOAT2(hitU, hitV);
-
-				//Set hit component and actor
-				tempHitResult.hitComponent = &mesh;
-				tempHitResult.hitActor = World::GetActorByUID(mesh.GetOwnerUID());
-
-				hitResults.emplace_back(tempHitResult);
 			}
-		}
-	};
+		};
 
 	const auto setDebugMesh = [&](SpatialComponent* component, std::string_view debugMeshName)
-	{
-		auto debugMesh = MeshComponent::GetDebugMesh("DebugIcoSphere");
-		debugMesh->transform = component->transform;
-		debugMesh->SetOwnerUID(component->GetOwnerUID());
-		checkMeshVerticesCollision(*debugMesh);
-	};
+		{
+			auto debugMesh = MeshComponent::GetDebugMesh("DebugIcoSphere");
+			debugMesh->transform = component->transform;
+			debugMesh->SetOwnerUID(component->GetOwnerUID());
+			checkMeshVerticesCollision(*debugMesh);
+		};
 
 	for (auto component : hitResult.hitComponents)
 	{
@@ -484,4 +485,9 @@ void HitResult::AddActorsToIgnore(std::vector<Actor*>& actors)
 	{
 		actorsToIgnore.emplace_back(actor);
 	}
+}
+
+void HitResult::IgnorePlayer()
+{
+	actorsToIgnore.push_back(Player::system.GetOnlyActor());
 }

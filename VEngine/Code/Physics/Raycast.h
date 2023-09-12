@@ -15,7 +15,7 @@ struct HitResult
 {
 	XMVECTOR origin = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	XMVECTOR direction = XMVectorSet(0.f, 0.f, 0.f, 0.f);
-	
+
 	//Position the ray has hit in world
 	XMFLOAT3 hitPos = XMFLOAT3(0.f, 0.f, 0.f);
 	XMFLOAT3 hitNormal = XMFLOAT3(0.f, 0.f, 0.f);
@@ -64,6 +64,7 @@ struct HitResult
 	}
 
 	void AddActorsToIgnore(std::vector<Actor*>& actors);
+	void IgnorePlayer();
 
 	//Result is in world space.
 	XMVECTOR GetHitPosV() { return XMLoadFloat3(&hitPos); }
