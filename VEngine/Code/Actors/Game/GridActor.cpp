@@ -19,6 +19,11 @@ GridActor::GridActor()
 	dialogueComponent = CreateComponent<DialogueComponent>("Dialogue");
 }
 
+void GridActor::Create()
+{
+	isInspectable = false;
+}
+
 bool GridActor::CheckNextRotationBoundsIntersect()
 {
 	if (ignoreRotationValidCheck)
@@ -71,6 +76,14 @@ void GridActor::OnMoveEnd()
 			isMoving = false;
 		}
 	}
+}
+
+void GridActor::Inspect()
+{
+	auto player = Player::system.GetOnlyActor();
+	player->SetCameraTargetActor(this);
+	auto nextCameraPos = XMVectorSet(0.f, 0.4f, 0.f, 1.f);
+	player->SetNextCameraPosition(nextCameraPos);
 }
 
 void GridActor::Start()

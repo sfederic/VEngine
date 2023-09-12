@@ -32,7 +32,7 @@ protected:
 	bool isDestructible = true;
 
 	//Inspection interaction, shows dialogue
-	bool isInspectable = true;
+	bool isInspectable = false;
 
 	//Used for when the grid actor is off the main grid, ignores GetNode() calls
 	bool disableGridInteract = false;
@@ -75,6 +75,8 @@ public:
 
 	GridActor();
 
+	void Create() override;
+
 	bool CheckNextRotationBoundsIntersect();
 
 	virtual void OnLinkActivate();
@@ -92,7 +94,7 @@ public:
 	virtual void Interact() {}
 
 	//Zooms in on the actor
-	virtual void Inspect() {}
+	virtual void Inspect();
 
 	//For when a fluid or something hits a gridactor (e.g. to extinguish flames)
 	virtual void Douse() {}
