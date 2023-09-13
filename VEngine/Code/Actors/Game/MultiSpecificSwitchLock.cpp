@@ -70,4 +70,11 @@ void MultiSpecificSwitchLock::CheckIfAllActorOrientationsAreCorrect()
 			GameUtils::PlayAudioOneShot("intuition_gained.wav");
 		}
 	}
+	else
+	{
+		if (actorToActivateOnAllSwitchesActive)
+		{
+			actorToActivateOnAllSwitchesActive->Deactivate();
+		}
+	}
 }
