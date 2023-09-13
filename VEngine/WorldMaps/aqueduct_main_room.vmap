@@ -34,6 +34,95 @@ DirectionalLightActor0
 UID
 2392698969
 next
+EntranceTrigger
+3
+ Enabled
+1
+ Position
+-0 -0 4
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+3919014016
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+8 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+
+Locked Text
+Locked
+Name
+EntranceTrigger1
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+980964544
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+4 0 8
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+
+Locked Text
+Locked
+Name
+EntranceTrigger2
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+2075842376
+Unlock Audio
+
+next
 Grid
 1
  Enabled
@@ -56,7 +145,7 @@ UID
 2546972118
 next
 MeshActor
-8
+9
  Enabled
 1
  Position
@@ -68,7 +157,7 @@ MeshActor
  Visible
 1
 Name
-steps_single_long0
+node0
 UID
 1522560624
 next
@@ -83,7 +172,7 @@ next
  Visible
 1
 Name
-steps_single_long5
+step_small1
 UID
 405267662
 next
@@ -98,7 +187,7 @@ next
  Visible
 1
 Name
-steps_single_long2
+step_small2
 UID
 3889258769
 next
@@ -113,7 +202,7 @@ next
  Visible
 1
 Name
-MeshActor5
+step_small3
 UID
 3949227376
 next
@@ -128,7 +217,7 @@ next
  Visible
 1
 Name
-steps_single_long4
+step_small4
 UID
 3563507940
 next
@@ -143,7 +232,7 @@ next
  Visible
 1
 Name
-MeshActor2026447629
+step_small5
 UID
 1987648136
 next
@@ -158,7 +247,7 @@ next
  Visible
 1
 Name
-steps_single_long6
+step_small6
 UID
 908217514
 next
@@ -173,9 +262,24 @@ next
  Visible
 1
 Name
-steps_single_long7
+step_small7
 UID
 214386680
+next
+ Enabled
+1
+ Position
+4 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+water_wheel8
+UID
+905157269
 next
 Player
 1
@@ -193,6 +297,65 @@ Name
 Player0
 UID
 602957893
+next
+BoxTriggerComponent
+3
+3919014016
+Trigger
+ Enabled
+1
+ Pos
+-0 -0 4
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+1542031291
+next
+980964544
+Trigger
+ Enabled
+1
+ Pos
+8 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+793478680
+next
+2075842376
+Trigger
+ Enabled
+1
+ Pos
+4 0 8
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+4091007477
 next
 CameraComponent
 1
@@ -216,6 +379,47 @@ Near Z
 0.01
 UID
 2805768607
+next
+ConditionComponent
+3
+3919014016
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+3130436144
+next
+980964544
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+677692605
+next
+2075842376
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+3736390423
 next
 DialogueComponent
 1
@@ -253,21 +457,6 @@ UID
 next
 EmptyComponent
 2
-602957893
-Root
- Enabled
-1
- Pos
-4 0 0
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-UID
-2322479972
-next
 4017015608
 Root
  Enabled
@@ -282,6 +471,21 @@ Root
 1
 UID
 1778089944
+next
+602957893
+Root
+ Enabled
+1
+ Pos
+4 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+2322479972
 next
 InstanceMeshComponent
 1
@@ -341,7 +545,7 @@ UID
 3504401236
 next
 MeshComponent
-9
+10
 1522560624
 Mesh
  Enabled
@@ -506,61 +710,6 @@ Trans. Occlude
 0
 UID
 166758121
-next
-602957893
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-char.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-979378723
 next
 3949227376
 Mesh
@@ -836,5 +985,115 @@ Trans. Occlude
 0
 UID
 281499374
+next
+905157269
+Mesh
+ Enabled
+1
+ Pos
+4 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+water_wheel.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+700632481
+next
+602957893
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+979378723
 next
 end
