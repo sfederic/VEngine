@@ -334,6 +334,7 @@
     <ClCompile Include="Code\Actors\Game\MultiSpecificSwitchLock.cpp" />
     <ClCompile Include="Code\Actors\Game\InspectionActor.cpp" />
     <ClCompile Include="Code\Actors\Game\InspectionTrigger.cpp" />
+    <ClCompile Include="Code\Actors\Game\MultiOrientationTriggerLock.cpp" />
     <ClInclude Include="Code\Actors\Game\ChurchLockPropActivator.h" />
     <ClInclude Include="Code\Actors\Game\GlobalPropSetter.h" />
     <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.h" />
@@ -697,6 +698,7 @@
     <ClInclude Include="Code\Actors\Game\MultiSpecificSwitchLock.h" />
     <ClInclude Include="Code\Actors\Game\InspectionActor.h" />
     <ClInclude Include="Code\Actors\Game\InspectionTrigger.h" />
+    <ClInclude Include="Code\Actors\Game\MultiOrientationTriggerLock.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
