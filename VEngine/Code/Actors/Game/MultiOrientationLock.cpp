@@ -76,4 +76,11 @@ void MultiOrientationLock::CheckIfAllActorOrientationsAreCorrect()
 			GameUtils::PlayAudioOneShot("intuition_gained.wav");
 		}
 	}
+	else
+	{
+		if (actorToActivateOnAllLocksBeingCorrect)
+		{
+			actorToActivateOnAllLocksBeingCorrect->Deactivate();
+		}
+	}
 }
