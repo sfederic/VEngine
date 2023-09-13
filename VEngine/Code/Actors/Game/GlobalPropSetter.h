@@ -14,6 +14,7 @@ public:
 	GlobalPropSetter();
 	Properties GetProps() override;
 	void Activate() override;
+	void Deactivate() override;
 
 private:
 	std::string propertyName;

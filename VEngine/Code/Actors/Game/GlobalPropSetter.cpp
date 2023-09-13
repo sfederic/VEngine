@@ -10,8 +10,6 @@ GlobalPropSetter::GlobalPropSetter()
 
 void GlobalPropSetter::Activate()
 {
-	__super::Activate();
-
 	if (hasBeenActivated)
 	{
 		return;
@@ -23,6 +21,22 @@ void GlobalPropSetter::Activate()
 
 	bool* value = GameInstance::GetGlobalProp<bool>(propertyName);
 	*value = propertyValue;
+	Log("[%s] set global property [%s] to [%d]", GetName().c_str(), propertyName.c_str(), *value);
+}
+
+void GlobalPropSetter::Deactivate()
+{
+	if (!hasBeenActivated)
+	{
+		return;
+	}
+
+	hasBeenActivated = false;
+
+	__super::Deactivate();
+
+	bool* value = GameInstance::GetGlobalProp<bool>(propertyName);
+	*value = !*value;
 	Log("[%s] set global property [%s] to [%d]", GetName().c_str(), propertyName.c_str(), *value);
 }
 
