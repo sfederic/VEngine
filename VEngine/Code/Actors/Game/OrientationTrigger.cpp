@@ -2,6 +2,7 @@
 #include "OrientationTrigger.h"
 #include "OrientationLock.h"
 #include "Components/BoxTriggerComponent.h"
+#include "Gameplay/GameUtils.h"
 
 OrientationTrigger::OrientationTrigger()
 {
@@ -20,30 +21,25 @@ Properties OrientationTrigger::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
-	props.Add("Target Actor", &actorNameToActivate);
 	return props;
 }
 
 void OrientationTrigger::CheckIfOrientationLockIsAlignedInTrigger()
 {
-	for (auto orientationLock : World::GetAllActorsOfTypeInWorld<OrientationLock>())
+	if (!actorInTrigger)
 	{
-		if (boxTrigger->Contains(orientationLock->GetPositionV()))
+		for (auto orientationLock : World::GetAllActorsOfTypeInWorld<OrientationLock>())
 		{
-			if (orientationLock->IsOrientationCorrect())
+			if (boxTrigger->Contains(orientationLock->GetPositionV()))
 			{
-				actorToActivate = World::GetActorByNameAllowNull(actorNameToActivate);
-				if (actorToActivate)
+				if (orientationLock->IsOrientationCorrect())
 				{
-					actorToActivate->Activate();
+					actorInTrigger = true;
+					GameUtils::PlayAudioOneShot("equip.wav");
+					orientationLock->Activate();
 					return;
 				}
 			}
 		}
-	}
-
-	if (actorToActivate)
-	{
-		actorToActivate->Deactivate();
 	}
 }

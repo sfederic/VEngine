@@ -20,6 +20,5 @@ private:
 
 	BoxTriggerComponent* boxTrigger = nullptr;
 
-	std::string actorNameToActivate;
-	Actor* actorToActivate = nullptr;
+	bool actorInTrigger = false;
 };
