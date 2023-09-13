@@ -32,7 +32,7 @@ WorldEditor::PickMode pickMode = WorldEditor::PickMode::Actor;
 bool WorldEditor::texturePlacement = false;
 bool WorldEditor::meshPlacement = false;
 bool WorldEditor::materialPlacement = false;
-bool WorldEditor::vertexPaintActive = false; 
+bool WorldEditor::vertexPaintActive = false;
 bool WorldEditor::actorReplaceModeActive = false;
 bool WorldEditor::parentSetActive = false;
 bool WorldEditor::moveActorViaKeyboardInput = false;
@@ -87,7 +87,8 @@ void WorldEditor::Reset()
 
 void HandleActorPicking()
 {
-	if (transformGizmo.CheckMouseOver() || Core::gameplayOn || WorldEditor::vertexPaintActive) 
+	if (transformGizmo.CheckMouseOver() && transformGizmo.CheckInUse()
+		|| Core::gameplayOn || WorldEditor::vertexPaintActive)
 	{
 		return;
 	}
@@ -142,25 +143,25 @@ void HandleActorPicking()
 
 			switch (pickMode)
 			{
-				case WorldEditor::PickMode::Actor:
+			case WorldEditor::PickMode::Actor:
+			{
+				if (Input::GetKeyHeld(Keys::Ctrl) || pickedActors.empty())
 				{
-					if (Input::GetKeyHeld(Keys::Ctrl) || pickedActors.empty())
-					{
-						pickedActors.insert(hit.hitActor);
-					}
-					else
-					{
-						pickedActors.clear();
-					}
+					pickedActors.insert(hit.hitActor);
+				}
+				else
+				{
+					pickedActors.clear();
+				}
 
-					WorldEditor::SetPickedActor(hit.hitActor);
-					break;
-				}
-				case WorldEditor::PickMode::Component:
-				{
-					WorldEditor::SetPickedComponent(hit.hitComponent);
-					break;
-				}
+				WorldEditor::SetPickedActor(hit.hitActor);
+				break;
+			}
+			case WorldEditor::PickMode::Component:
+			{
+				WorldEditor::SetPickedComponent(hit.hitComponent);
+				break;
+			}
 			}
 
 			//Handle actor replacement 
@@ -223,12 +224,12 @@ void DuplicateActor()
 				auto newDuplicateActorMeshes = newDuplicateActor->GetComponentsOfType<MeshComponent>();
 				for (auto mesh : newDuplicateActorMeshes)
 				{
-					 auto matchingMesh = pickedActor->GetComponent<MeshComponent>(mesh->name);
-					 if (matchingMesh)
-					 {
-						 mesh->meshDataProxy.vertices = matchingMesh->meshDataProxy.vertices;
-					 }
-					 mesh->CreateNewVertexBuffer();
+					auto matchingMesh = pickedActor->GetComponent<MeshComponent>(mesh->name);
+					if (matchingMesh)
+					{
+						mesh->meshDataProxy.vertices = matchingMesh->meshDataProxy.vertices;
+					}
+					mesh->CreateNewVertexBuffer();
 				}
 
 				World::AddActorToWorld(newDuplicateActor);
@@ -262,44 +263,44 @@ void SaveWorld()
 
 void DeleteActor()
 {
-	if (Input::GetKeyUp(Keys::Delete) || 
+	if (Input::GetKeyUp(Keys::Delete) ||
 		(Input::GetKeyHeld(Keys::Ctrl) && Input::GetKeyDown(Keys::D)))
 	{
 		switch (pickMode)
 		{
-			case WorldEditor::PickMode::Actor:
+		case WorldEditor::PickMode::Actor:
+		{
+			if (pickedActor)
 			{
-				if (pickedActor)
-				{
-					editor->RemoveActorFromWorldList();
+				editor->RemoveActorFromWorldList();
 
-					if (pickedActors.size() > 1)
+				if (pickedActors.size() > 1)
+				{
+					//Destroy all multiple picked actors
+					for (auto actor : pickedActors)
 					{
-						//Destroy all multiple picked actors
-						for (auto actor : pickedActors)
-						{
-							actor->Destroy();
-						}
-					}
-					else
-					{
-						debugMenu.AddNotification(VString::wformat(
-							L"Destroyed actor [%S]", pickedActor->GetName().c_str()));
-						pickedActor->Destroy();
+						actor->Destroy();
 					}
 				}
-
-				break;
-			}
-			case WorldEditor::PickMode::Component:
-			{
-				if (pickedComponent)
+				else
 				{
-					pickedComponent->Remove();
+					debugMenu.AddNotification(VString::wformat(
+						L"Destroyed actor [%S]", pickedActor->GetName().c_str()));
+					pickedActor->Destroy();
 				}
-
-				break;
 			}
+
+			break;
+		}
+		case WorldEditor::PickMode::Component:
+		{
+			if (pickedComponent)
+			{
+				pickedComponent->Remove();
+			}
+
+			break;
+		}
 		}
 
 		pickedActors.clear();
@@ -412,21 +413,27 @@ void MoveActorViaKeyboardInput()
 
 	if (Input::GetKeyDown(Keys::W)) {
 		pickedActor->AddPositionV(VMath::GlobalForwardVector());
-	} else if (Input::GetKeyDown(Keys::S)) {
+	}
+	else if (Input::GetKeyDown(Keys::S)) {
 		pickedActor->AddPositionV(-VMath::GlobalForwardVector());
-	} else if (Input::GetKeyDown(Keys::A)) {
+	}
+	else if (Input::GetKeyDown(Keys::A)) {
 		pickedActor->AddPositionV(-VMath::GlobalRightVector());
-	} else if (Input::GetKeyDown(Keys::D)) {
+	}
+	else if (Input::GetKeyDown(Keys::D)) {
 		pickedActor->AddPositionV(VMath::GlobalRightVector());
 	}
 
 	if (Input::GetKeyDown(Keys::Down)) {
 		pickedActor->AddRotation(VMath::GlobalRightVector(), -90.f);
-	} else if (Input::GetKeyDown(Keys::Up)) {
+	}
+	else if (Input::GetKeyDown(Keys::Up)) {
 		pickedActor->AddRotation(VMath::GlobalRightVector(), 90.f);
-	} else if (Input::GetKeyDown(Keys::Left)) {
+	}
+	else if (Input::GetKeyDown(Keys::Left)) {
 		pickedActor->AddRotation(VMath::GlobalUpVector(), -90.f);
-	} else if (Input::GetKeyDown(Keys::Right)) {
+	}
+	else if (Input::GetKeyDown(Keys::Right)) {
 		pickedActor->AddRotation(VMath::GlobalUpVector(), 90.f);
 	}
 }
