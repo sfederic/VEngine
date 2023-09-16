@@ -15,6 +15,66 @@ DirectionalLightActor0
 UID
 160071229
 next
+EntranceTrigger
+2
+ Enabled
+1
+ Position
+9 0 6
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+2124304346
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+3 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+aqueduct_main_room.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger1
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+2662495452
+Unlock Audio
+
+next
 GlobalPropSetter
 1
  Enabled
@@ -528,7 +588,7 @@ UID
 1748978781
 next
 BoxTriggerComponent
-2
+4
 1181727217
 BoxTrigger
  Enabled
@@ -567,6 +627,44 @@ Offset
 UID
 23205827
 next
+2124304346
+Trigger
+ Enabled
+1
+ Pos
+9 0 6
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+3462978816
+next
+2662495452
+Trigger
+ Enabled
+1
+ Pos
+3 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+4088249180
+next
 CameraComponent
 1
 1748978781
@@ -589,6 +687,34 @@ Near Z
 0.01
 UID
 4046424849
+next
+ConditionComponent
+2
+2124304346
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+1892154866
+next
+2662495452
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+3487048677
 next
 DialogueComponent
 3
