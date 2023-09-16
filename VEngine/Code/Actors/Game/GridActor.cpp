@@ -321,18 +321,12 @@ void GridActor::CheckIfSubmerged()
 {
 	if (!isSubmerged)
 	{
-		bool waterVolumeMultipleCheck = false;
-
 		for (auto& waterVolume : WaterVolume::system.GetActors())
 		{
 			auto pos = GetPositionV();
 			if (waterVolume->Contains(pos))
 			{
-				assert(!waterVolumeMultipleCheck && "GridActor is within more than one water volume.");
-				nextPos = waterVolume->GetPositionV(); //This should give a nice little water 'bob' visual.
 				isSubmerged = true;
-				moveSpeed /= 2.f; //Slow down movement speed when in water
-				waterVolumeMultipleCheck = true;
 				return;
 			}
 		}
