@@ -29,7 +29,7 @@ Properties WaterVolumeValve::GetProps()
 	return props;
 }
 
-void WaterVolumeValve::OnLinkRotateLeft()
+void WaterVolumeValve::OnLinkRotateRight()
 {
 	__super::OnLinkRotate();
 
@@ -39,7 +39,7 @@ void WaterVolumeValve::OnLinkRotateLeft()
 	}
 }
 
-void WaterVolumeValve::OnLinkRotateRight()
+void WaterVolumeValve::OnLinkRotateLeft()
 {
 	__super::OnLinkRotateRight();
 
