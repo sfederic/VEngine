@@ -36,6 +36,110 @@ Size Y
 UID
 969502678
 next
+GridActor
+2
+ Enabled
+1
+ Position
+3 -0.5 5
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+GridActor0
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+1923850391
+next
+ Enabled
+1
+ Position
+3 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+GridActor1
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+1219564781
+next
 MeshActor
 2
  Enabled
@@ -73,9 +177,9 @@ Player
  Enabled
 1
  Position
-0 0 0
+3 0 3
  Rotation
-0 0 0 1
+0 -0.707107 0 0.707106
  Scale
 1 1 1
  Visible
@@ -94,7 +198,7 @@ WaterVolume
  Rotation
 -0 0 -0 1
  Scale
-2 1 2
+1 1 1
  Visible
 1
 Name
@@ -102,16 +206,16 @@ WaterVolume0
 Raise Y Point
 -0.5
 UID
-2471856827
+2699235795
 next
 WaterVolumeValve
 1
  Enabled
 1
  Position
-1 -0 3
+1 0 3
  Rotation
-0 0 0 1
+0 -1 0 -1.19209e-07
  Scale
 1 1 1
  Visible
@@ -163,7 +267,7 @@ WaterVolume YPoint
 next
 BoxTriggerComponent
 1
-2471856827
+2699235795
 VolumeTrigger
  Enabled
 1
@@ -176,11 +280,11 @@ VolumeTrigger
  Visible
 1
 Extents
-0.45 0.45 0.45
+2.5 0.5 2.5
 Offset
 0 0 0
 UID
-2979426885
+3486440589
 next
 CameraComponent
 1
@@ -206,7 +310,18 @@ UID
 258085571
 next
 DialogueComponent
-2
+4
+1923850391
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+4059061598
+next
 3956789146
 Dialogue
  Enabled
@@ -228,6 +343,17 @@ File
 
 UID
 1536747458
+next
+1219564781
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1423615548
 next
 DirectionalLightComponent
 1
@@ -251,21 +377,36 @@ UID
 397540402
 next
 EmptyComponent
-1
+2
 3956789146
 Root
  Enabled
 1
  Pos
-0 0 0
+3 0 3
  Rot
-0 0 0 1
+0 -0.707107 0 0.707106
  Scale
 1 1 1
  Visible
 1
 UID
 3471662670
+next
+2699235795
+Root
+ Enabled
+1
+ Pos
+2 -0.5 7
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+1870669053
 next
 InstanceMeshComponent
 1
@@ -325,7 +466,62 @@ UID
 687341463
 next
 MeshComponent
-5
+7
+1923850391
+Mesh
+ Enabled
+1
+ Pos
+3 -0.5 5
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1412375337
+next
 627223076
 Mesh
  Enabled
@@ -443,7 +639,7 @@ Mesh
  Pos
 0 0 0
  Rot
-0 0 0 1
+0 4.17233e-07 -0 1
  Scale
 1 1 1
  Visible
@@ -491,16 +687,16 @@ Trans. Occlude
 UID
 388691413
 next
-2471856827
+2699235795
 WaterSurfaceMesh
  Enabled
 1
  Pos
-2 -0.5 7
+0 0 0
  Rot
--0 0 -0 1
+0 0 0 1
  Scale
-2 1 2
+5 5 5
  Visible
 1
 Casts Shadow
@@ -544,16 +740,71 @@ Static
 Trans. Occlude
 0
 UID
-993275522
+2214972295
 next
 2967190107
 Mesh
  Enabled
 1
  Pos
-1 -0 3
+1 0 3
  Rot
-0 0 0 1
+0 -1 0 -1.19209e-07
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+0.9 0.3 0.1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+gear.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1241180996
+next
+1219564781
+Mesh
+ Enabled
+1
+ Pos
+3 0 1
+ Rot
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -593,12 +844,12 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-gear.vmesh
+cube.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-1241180996
+3344316881
 next
 end
