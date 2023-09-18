@@ -17,6 +17,7 @@ void WaterVolumeValve::Start()
 	if (waterVolume)
 	{
 		originalWaterVolumeYPoint = waterVolume->GetYPointToRaiseTo();
+		SetPlayerFocusGridActor(waterVolume);
 	}
 }
 
