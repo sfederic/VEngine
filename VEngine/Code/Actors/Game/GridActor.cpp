@@ -319,18 +319,24 @@ bool GridActor::IsNextMoveAxisValid(XMVECTOR direction)
 
 void GridActor::CheckIfSubmerged()
 {
-	if (!isSubmerged)
+	for (auto& waterVolume : WaterVolume::system.GetActors())
 	{
-		for (auto& waterVolume : WaterVolume::system.GetActors())
+		auto pos = GetPositionV();
+		if (waterVolume->Contains(pos))
 		{
-			auto pos = GetPositionV();
-			if (waterVolume->Contains(pos))
+			isSubmerged = true;
+
+			HitResult hit(this);
+			//Make sure nothing is above this actor and make sure the water's plane mesh has no backside
+			if (!Raycast(hit, GetPositionV(), VMath::GlobalUpVector(), 10.f))
 			{
-				isSubmerged = true;
+				nextPos.m128_f32[1] = waterVolume->GetPosition().y;
 				return;
 			}
 		}
 	}
+
+	isSubmerged = false;
 }
 
 void GridActor::DisableAllInteractivity()
