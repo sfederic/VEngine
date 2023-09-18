@@ -1056,7 +1056,7 @@ void Player::SetLinkedGridActor(GridActor& gridActor)
 	linkedGridActor = &gridActor;
 
 	//Focus on the grid actor the linked grid actor is moving, else focus on the linked actor
-	GridActor* otherActorToFocusOn = gridActor.GetPlayerFocusGridActor();
+	Actor* otherActorToFocusOn = gridActor.GetPlayerFocusActor();
 	if (otherActorToFocusOn != nullptr)
 	{
 		camera->targetActor = otherActorToFocusOn;

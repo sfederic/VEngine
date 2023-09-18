@@ -61,7 +61,7 @@ protected:
 	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 
-	void SetPlayerFocusGridActor(GridActor* focusActor) { gridActorForPlayerFocusOnLink = focusActor; }
+	void SetPlayerFocusGridActor(Actor* focusActor) { actorForPlayerFocusOnLink = focusActor; }
 
 public:
 	std::wstring interactText;
@@ -161,12 +161,12 @@ public:
 
 	void DisableAllInteractivity();
 
-	auto GetPlayerFocusGridActor() { return gridActorForPlayerFocusOnLink; }
+	auto GetPlayerFocusActor() { return actorForPlayerFocusOnLink; }
 
 	bool IsInspectable() { return isInspectable; }
 
 private:
 	//For any grid actor that will move/rotate another grid actor on a player's link, 
 	//this is the actor the player's camera will focus on instead of itself.
-	GridActor* gridActorForPlayerFocusOnLink = nullptr;
+	Actor* actorForPlayerFocusOnLink = nullptr;
 };
