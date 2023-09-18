@@ -22,7 +22,8 @@ public:
 	std::vector<GridActor*> GetAllGridActorsWithinVolume();
 
 	float GetYPointToRaiseTo() { return yPointToRaiseTo; }
-	void SetYPointToRaiseTo(float yValue) { yPointToRaiseTo = yValue; }
+	void SetYPointToRaiseTo(float value) { yPointToRaiseTo = value; }
+	void IncreaseYPointToRaiseTo(float value) { yPointToRaiseTo += value; }
 
 private:
 	void DouseGridActorsInWaterVolume();

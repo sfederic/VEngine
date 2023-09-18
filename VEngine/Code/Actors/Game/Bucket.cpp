@@ -1,5 +1,6 @@
 #include "vpch.h"
 #include "Bucket.h"
+#include "WaterVolume.h"
 #include "Components/MeshComponent.h"
 #include "Core/VMath.h"
 #include "Physics/Raycast.h"
@@ -85,6 +86,12 @@ void Bucket::EmptyWater()
 				auto puddle = MeshComponent::system.Add("", nullptr, MeshComponent("node.vmesh", "puddle.png"));
 				puddle->Create();
 				puddle->SetTransform(t);
+
+				auto waterVolume = rayHit.GetHitActorAs<WaterVolume>();
+				if (waterVolume)
+				{
+					waterVolume->IncreaseYPointToRaiseTo(0.2f);
+				}
 			}
 		}
 	}
