@@ -7,8 +7,10 @@
 
 WaterVolume::WaterVolume()
 {
+	SetEmptyRootComponent();
+
 	waterSurface = CreateComponent<MeshComponent>("WaterSurfaceMesh");
-	rootComponent = waterSurface;
+	rootComponent->AddChild(waterSurface);
 
 	waterVolumeTrigger = CreateComponent<BoxTriggerComponent>("VolumeTrigger");
 	rootComponent->AddChild(waterVolumeTrigger);
