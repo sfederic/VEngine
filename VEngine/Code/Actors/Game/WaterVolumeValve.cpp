@@ -9,6 +9,17 @@ void WaterVolumeValve::Create()
 	SetMeshFilename("gear.vmesh");
 }
 
+void WaterVolumeValve::Start()
+{
+	__super::Start();
+
+	waterVolume = World::GetActorByNameAndLogCast<WaterVolume>(waterVolumeName);
+	if (waterVolume)
+	{
+		originalWaterVolumeYPoint = waterVolume->GetYPointToRaiseTo();
+	}
+}
+
 Properties WaterVolumeValve::GetProps()
 {
 	auto props = __super::GetProps();
@@ -18,13 +29,22 @@ Properties WaterVolumeValve::GetProps()
 	return props;
 }
 
-void WaterVolumeValve::OnLinkRotate()
+void WaterVolumeValve::OnLinkRotateLeft()
 {
 	__super::OnLinkRotate();
 
-	auto waterVolume = World::GetActorByNameAndLogCast<WaterVolume>(waterVolumeName);
 	if (waterVolume)
 	{
-		waterVolume->SetYPointToRaiseWaterTo(waterVolumeYRaisePoint);
+		waterVolume->SetYPointToRaiseTo(waterVolumeYRaisePoint);
+	}
+}
+
+void WaterVolumeValve::OnLinkRotateRight()
+{
+	__super::OnLinkRotateRight();
+
+	if (waterVolume)
+	{
+		waterVolume->SetYPointToRaiseTo(originalWaterVolumeYPoint);
 	}
 }

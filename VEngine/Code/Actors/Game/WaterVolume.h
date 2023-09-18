@@ -21,7 +21,8 @@ public:
 	bool Contains(XMVECTOR point);
 	std::vector<GridActor*> GetAllGridActorsWithinVolume();
 
-	void SetYPointToRaiseWaterTo(float yValue) { yPointToRaiseTo = yValue; }
+	float GetYPointToRaiseTo() { return yPointToRaiseTo; }
+	void SetYPointToRaiseTo(float yValue) { yPointToRaiseTo = yValue; }
 
 private:
 	void DouseGridActorsInWaterVolume();
