@@ -337,6 +337,7 @@
     <ClCompile Include="Code\Actors\Game\MultiOrientationTriggerLock.cpp" />
     <ClCompile Include="Code\Actors\Game\WaterVolumeValve.cpp" />
     <ClCompile Include="Code\Actors\Game\CrystalWaterSource.cpp" />
+    <ClCompile Include="Code\Actors\Game\CrystalWaterSourcePlug.cpp" />
     <ClInclude Include="Code\Actors\Game\ChurchLockPropActivator.h" />
     <ClInclude Include="Code\Actors\Game\GlobalPropSetter.h" />
     <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.h" />
@@ -703,6 +704,7 @@
     <ClInclude Include="Code\Actors\Game\MultiOrientationTriggerLock.h" />
     <ClInclude Include="Code\Actors\Game\WaterVolumeValve.h" />
     <ClInclude Include="Code\Actors\Game\CrystalWaterSource.h" />
+    <ClInclude Include="Code\Actors\Game\CrystalWaterSourcePlug.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
