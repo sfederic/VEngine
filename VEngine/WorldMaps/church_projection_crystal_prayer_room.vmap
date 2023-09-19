@@ -1,3 +1,22 @@
+DebugNoteActor
+1
+ Enabled
+1
+ Position
+4 -0 3
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DebugNoteActor0
+Note Text
+Intent here is you have to show the projection via other objects in the room.
+UID
+4181290767
+next
 DirectionalLightActor
 1
  Enabled
@@ -35,6 +54,365 @@ Size Y
 9
 UID
 54674815
+next
+GridActor
+7
+ Enabled
+1
+ Position
+6 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+GridActor0
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+4267784251
+next
+ Enabled
+1
+ Position
+4 0 3
+ Rotation
+-0 0 0.707107 0.707107
+ Scale
+0.999999 0.999999 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+GridActor1
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+2088108404
+next
+ Enabled
+1
+ Position
+1 0 4
+ Rotation
+-0 0 -5.1658e-08 1
+ Scale
+0.999992 0.999992 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+GridActor2
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+3975422692
+next
+ Enabled
+1
+ Position
+5 0 0
+ Rotation
+-0 0 -5.1658e-08 1
+ Scale
+0.999992 0.999992 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+GridActor7
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+2613490359
+next
+ Enabled
+1
+ Position
+4 0 0
+ Rotation
+-0 0 -5.1658e-08 1
+ Scale
+0.999992 0.999992 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+GridActor4
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+3695600034
+next
+ Enabled
+1
+ Position
+6 0 0
+ Rotation
+-0 0 -5.1658e-08 1
+ Scale
+0.999992 0.999992 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+GridActor5
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+2883987309
+next
+ Enabled
+1
+ Position
+6 0 1
+ Rotation
+-0 0 -5.1658e-08 1
+ Scale
+0.999992 0.999992 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+GridActor6
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+3049848529
 next
 MeshActor
 8
@@ -163,7 +541,7 @@ Player
  Enabled
 1
  Position
-0 0 0
+3 0.225 4
  Rotation
 0 0 0 1
  Scale
@@ -252,7 +630,84 @@ UID
 3127373585
 next
 DialogueComponent
-2
+9
+4267784251
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2099769009
+next
+2088108404
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+3360892427
+next
+3975422692
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1573290854
+next
+2613490359
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+201543734
+next
+3695600034
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1095046985
+next
+2883987309
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1298302490
+next
+3049848529
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+4248791590
+next
 4055286933
 Dialogue
  Enabled
@@ -297,13 +752,28 @@ UID
 3566468856
 next
 EmptyComponent
+2
+4181290767
+Root
+ Enabled
 1
+ Pos
+4 -0 3
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+4167511108
+next
 4055286933
 Root
  Enabled
 1
  Pos
-0 0 0
+3 0.225 4
  Rot
 0 0 0 1
  Scale
@@ -371,15 +841,15 @@ UID
 3430649428
 next
 MeshComponent
-11
-4055286933
+18
+4267784251
 Mesh
  Enabled
 1
  Pos
-0 0 0
+6 0 4
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -419,13 +889,343 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-char.vmesh
+vase.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-2551290513
+3031435327
+next
+2088108404
+Mesh
+ Enabled
+1
+ Pos
+4 0 3
+ Rot
+-0 0 0.707107 0.707107
+ Scale
+0.999999 0.999999 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+vase.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1427541395
+next
+3975422692
+Mesh
+ Enabled
+1
+ Pos
+1 0 4
+ Rot
+-0 0 -5.1658e-08 1
+ Scale
+0.999992 0.999992 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+vase.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3011619174
+next
+2613490359
+Mesh
+ Enabled
+1
+ Pos
+5 0 0
+ Rot
+-0 0 -5.1658e-08 1
+ Scale
+0.999992 0.999992 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+vase.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3626164362
+next
+3695600034
+Mesh
+ Enabled
+1
+ Pos
+4 0 0
+ Rot
+-0 0 -5.1658e-08 1
+ Scale
+0.999992 0.999992 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+vase.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3955068792
+next
+2883987309
+Mesh
+ Enabled
+1
+ Pos
+6 0 0
+ Rot
+-0 0 -5.1658e-08 1
+ Scale
+0.999992 0.999992 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+vase.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2200156807
+next
+3049848529
+Mesh
+ Enabled
+1
+ Pos
+6 0 1
+ Rot
+-0 0 -5.1658e-08 1
+ Scale
+0.999992 0.999992 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+vase.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2586973078
 next
 3604267212
 Mesh
@@ -867,6 +1667,61 @@ Trans. Occlude
 UID
 2270160408
 next
+4055286933
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+-0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2551290513
+next
 2097948584
 Mesh
  Enabled
@@ -969,7 +1824,7 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-cube.vmesh
+vase.vmesh
 Static
 1
 Trans. Occlude
