@@ -1,7 +1,6 @@
 #include "vpch.h"
 #include "LiftCrank.h"
 #include "Lift.h"
-#include "Core/Log.h"
 
 void LiftCrank::Create()
 {
@@ -14,10 +13,10 @@ void LiftCrank::Start()
 {
 	__super::Start();
 
-	linkedLift = dynamic_cast<Lift*>(World::GetActorByNameAllowNull(linkedLiftName));
-	if (linkedLift == nullptr)
+	linkedLift = World::GetActorByNameAndLogCast<Lift>(linkedLiftName);
+	if (linkedLift != nullptr)
 	{
-		Log("Lift [%s] not found for LiftCrank [%s]", linkedLiftName.c_str(), GetName().c_str());
+		SetPlayerFocusGridActor(linkedLift);
 	}
 }
 
