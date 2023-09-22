@@ -3,9 +3,9 @@ ChurchLockPropActivator
  Enabled
 1
  Position
-3 1 11
+5 1 11
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -21,7 +21,7 @@ Health
 Ignore Rotate Check
 0
 Inspect
-1
+0
 Interact
 1
 Interact Text
@@ -58,7 +58,7 @@ next
  Enabled
 1
  Position
-5 1 14
+7 1 14
  Rotation
 -0 0 -0 1
  Scale
@@ -76,7 +76,7 @@ Health
 Ignore Rotate Check
 0
 Inspect
-1
+0
 Interact
 1
 Interact Text
@@ -113,7 +113,7 @@ next
  Enabled
 1
  Position
-7 1 11
+9 1 11
  Rotation
 -0 0 -0 1
  Scale
@@ -131,7 +131,7 @@ Health
 Ignore Rotate Check
 0
 Inspect
-1
+0
 Interact
 1
 Interact Text
@@ -345,26 +345,26 @@ UID
 2103209020
 next
 MeshActor
-13
+25
  Enabled
 1
  Position
-5 -0.5 8
+7 -0.5 8
  Rotation
 -0 0 -0 1
  Scale
-11 1 17
+15 1 17
  Visible
 1
 Name
-pictureframe_square0
+node0
 UID
 3841650662
 next
  Enabled
 1
  Position
-5 0 13
+7 0 13
  Rotation
 -0 0 -0 1
  Scale
@@ -372,14 +372,14 @@ next
  Visible
 1
 Name
-pictureframe_square1
+cube1
 UID
 2894709297
 next
  Enabled
 1
  Position
-9 0 7
+11 0 7
  Rotation
 -0 0 -0 1
  Scale
@@ -387,14 +387,14 @@ next
  Visible
 1
 Name
-pictureframe_square2
+church_pillar2
 UID
 775745634
 next
  Enabled
 1
  Position
-1 0 7
+3 0 7
  Rotation
 -0 0 -0 1
  Scale
@@ -402,14 +402,14 @@ next
  Visible
 1
 Name
-pictureframe_square3
+church_pillar3
 UID
 3568733252
 next
  Enabled
 1
  Position
-1 0 1
+3 0 1
  Rotation
 -0 0 -0 1
  Scale
@@ -417,14 +417,14 @@ next
  Visible
 1
 Name
-pictureframe_square4
+church_pillar4
 UID
 3383989616
 next
  Enabled
 1
  Position
-9 0 1
+11 0 1
  Rotation
 -0 0 -0 1
  Scale
@@ -432,14 +432,14 @@ next
  Visible
 1
 Name
-pictureframe_square5
+church_pillar5
 UID
 3639792667
 next
  Enabled
 1
  Position
-8 1 15
+10 1 15
  Rotation
 -0 0 -0 1
  Scale
@@ -447,14 +447,14 @@ next
  Visible
 1
 Name
-pictureframe_square6
+church_pillar6
 UID
 3373440638
 next
  Enabled
 1
  Position
-2 1 15
+4 1 15
  Rotation
 -0 0 -0 1
  Scale
@@ -462,14 +462,14 @@ next
  Visible
 1
 Name
-pictureframe_square7
+church_pillar7
 UID
 4208411069
 next
  Enabled
 1
  Position
-5 -0.25 8.5
+7 -0.25 8.5
  Rotation
 -0 0 -0 1
  Scale
@@ -477,22 +477,22 @@ next
  Visible
 1
 Name
-pictureframe_square8
+cube8
 UID
 2740829697
 next
  Enabled
 1
  Position
-5 2 -0.5
+7 2 -0.5
  Rotation
 -0.499792 0.499792 0.500208 -0.500208
  Scale
-5.00002 1.00001 11.0001
+5.00002 1 15
  Visible
 1
 Name
-MeshActor13
+node9
 UID
 4178327516
 next
@@ -507,39 +507,219 @@ next
  Visible
 1
 Name
-MeshActor10
+node10
 UID
 4236650097
 next
  Enabled
 1
  Position
-10.5 2 8
+14.5 2 8
  Rotation
-0.707107 -0.707107 -9.97483e-08 -2.66926e-08
+0.707107 -0.707107 -9.97488e-08 -2.66928e-08
  Scale
-4.99994 0.999994 17
+4.99992 0.999991 16.9999
  Visible
 1
 Name
-MeshActor11
+node11
 UID
 1664038659
 next
  Enabled
 1
  Position
-5 2 16.5
+7 2 16.5
  Rotation
--0.500122 0.500122 -0.499878 0.499878
+0.500122 -0.500122 0.499878 -0.499878
  Scale
-5 1 11
+5 1 15
  Visible
 1
 Name
-MeshActor12
+node12
 UID
 3288452139
+next
+ Enabled
+1
+ Position
+3 -0.4 1
+ Rotation
+-0 0 -0 1
+ Scale
+1.5 0.25 1.5
+ Visible
+1
+Name
+cube13
+UID
+2430270908
+next
+ Enabled
+1
+ Position
+11 -0.4 1
+ Rotation
+-0 0 -0 1
+ Scale
+1.5 0.25 1.5
+ Visible
+1
+Name
+cube14
+UID
+1091654580
+next
+ Enabled
+1
+ Position
+11 -0.4 7
+ Rotation
+-0 0 -0 1
+ Scale
+1.5 0.25 1.5
+ Visible
+1
+Name
+cube15
+UID
+336578238
+next
+ Enabled
+1
+ Position
+3 -0.4 7
+ Rotation
+-0 0 -0 1
+ Scale
+1.5 0.25 1.5
+ Visible
+1
+Name
+cube16
+UID
+537170682
+next
+ Enabled
+1
+ Position
+14 0 15
+ Rotation
+-0 0 -0 1
+ Scale
+0.5 1 0.5
+ Visible
+1
+Name
+church_pillar17
+UID
+3155657291
+next
+ Enabled
+1
+ Position
+14 0 10
+ Rotation
+-0 0 -0 1
+ Scale
+0.5 1 0.5
+ Visible
+1
+Name
+church_pillar18
+UID
+3588858414
+next
+ Enabled
+1
+ Position
+14 0 6
+ Rotation
+-0 0 -0 1
+ Scale
+0.5 1 0.5
+ Visible
+1
+Name
+church_pillar19
+UID
+4242169407
+next
+ Enabled
+1
+ Position
+14 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+0.5 1 0.5
+ Visible
+1
+Name
+church_pillar20
+UID
+2927010853
+next
+ Enabled
+1
+ Position
+0 0 6
+ Rotation
+-0 0 -0 1
+ Scale
+0.5 1 0.5
+ Visible
+1
+Name
+church_pillar21
+UID
+1426629709
+next
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+0.5 1 0.5
+ Visible
+1
+Name
+church_pillar22
+UID
+3191566044
+next
+ Enabled
+1
+ Position
+0 0 10
+ Rotation
+-0 0 -0 1
+ Scale
+0.5 1 0.5
+ Visible
+1
+Name
+church_pillar23
+UID
+1454592514
+next
+ Enabled
+1
+ Position
+0 0 15
+ Rotation
+-0 0 -0 1
+ Scale
+0.5 1 0.5
+ Visible
+1
+Name
+church_pillar24
+UID
+3324374825
 next
 PersistentAudioActor
 1
@@ -887,15 +1067,15 @@ UID
 3813850013
 next
 MeshComponent
-17
+29
 656467367
 Mesh
  Enabled
 1
  Pos
-3 1 11
+5 1 11
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -948,7 +1128,7 @@ Mesh
  Enabled
 1
  Pos
-5 1 14
+7 1 14
  Rot
 -0 0 -0 1
  Scale
@@ -1003,7 +1183,7 @@ Mesh
  Enabled
 1
  Pos
-7 1 11
+9 1 11
  Rot
 -0 0 -0 1
  Scale
@@ -1058,11 +1238,11 @@ Mesh
  Enabled
 1
  Pos
-5 -0.5 8
+7 -0.5 8
  Rot
 -0 0 -0 1
  Scale
-11 1 17
+15 1 17
  Visible
 1
 Casts Shadow
@@ -1113,7 +1293,7 @@ Mesh
  Enabled
 1
  Pos
-5 0 13
+7 0 13
  Rot
 -0 0 -0 1
  Scale
@@ -1168,7 +1348,7 @@ Mesh
  Enabled
 1
  Pos
-9 0 7
+11 0 7
  Rot
 -0 0 -0 1
  Scale
@@ -1223,7 +1403,7 @@ Mesh
  Enabled
 1
  Pos
-1 0 7
+3 0 7
  Rot
 -0 0 -0 1
  Scale
@@ -1278,7 +1458,7 @@ Mesh
  Enabled
 1
  Pos
-1 0 1
+3 0 1
  Rot
 -0 0 -0 1
  Scale
@@ -1333,7 +1513,7 @@ Mesh
  Enabled
 1
  Pos
-9 0 1
+11 0 1
  Rot
 -0 0 -0 1
  Scale
@@ -1388,7 +1568,7 @@ Mesh
  Enabled
 1
  Pos
-8 1 15
+10 1 15
  Rot
 -0 0 -0 1
  Scale
@@ -1443,7 +1623,7 @@ Mesh
  Enabled
 1
  Pos
-2 1 15
+4 1 15
  Rot
 -0 0 -0 1
  Scale
@@ -1498,7 +1678,7 @@ Mesh
  Enabled
 1
  Pos
-5 -0.25 8.5
+7 -0.25 8.5
  Rot
 -0 0 -0 1
  Scale
@@ -1553,11 +1733,11 @@ Mesh
  Enabled
 1
  Pos
-5 2 -0.5
+7 2 -0.5
  Rot
 -0.499792 0.499792 0.500208 -0.500208
  Scale
-5.00002 1.00001 11.0001
+5.00002 1 15
  Visible
 1
 Casts Shadow
@@ -1663,11 +1843,11 @@ Mesh
  Enabled
 1
  Pos
-10.5 2 8
+14.5 2 8
  Rot
-0.707107 -0.707107 -9.97483e-08 -2.66926e-08
+0.707107 -0.707107 -9.97488e-08 -2.66928e-08
  Scale
-4.99994 0.999994 17
+4.99992 0.999991 16.9999
  Visible
 1
 Casts Shadow
@@ -1718,11 +1898,11 @@ Mesh
  Enabled
 1
  Pos
-5 2 16.5
+7 2 16.5
  Rot
--0.500122 0.500122 -0.499878 0.499878
+0.500122 -0.500122 0.499878 -0.499878
  Scale
-5 1 11
+5 1 15
  Visible
 1
 Casts Shadow
@@ -1767,6 +1947,226 @@ Trans. Occlude
 0
 UID
 38553214
+next
+2430270908
+Mesh
+ Enabled
+1
+ Pos
+3 -0.4 1
+ Rot
+-0 0 -0 1
+ Scale
+1.5 0.25 1.5
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1413578846
+next
+1091654580
+Mesh
+ Enabled
+1
+ Pos
+11 -0.4 1
+ Rot
+-0 0 -0 1
+ Scale
+1.5 0.25 1.5
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3212920593
+next
+336578238
+Mesh
+ Enabled
+1
+ Pos
+11 -0.4 7
+ Rot
+-0 0 -0 1
+ Scale
+1.5 0.25 1.5
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1782880258
+next
+537170682
+Mesh
+ Enabled
+1
+ Pos
+3 -0.4 7
+ Rot
+-0 0 -0 1
+ Scale
+1.5 0.25 1.5
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+213823945
 next
 1647454417
 Mesh
@@ -1822,6 +2222,446 @@ Trans. Occlude
 0
 UID
 2929477331
+next
+3155657291
+Mesh
+ Enabled
+1
+ Pos
+14 0 15
+ Rot
+-0 0 -0 1
+ Scale
+0.5 1 0.5
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wall.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+church_pillar.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+416172989
+next
+3588858414
+Mesh
+ Enabled
+1
+ Pos
+14 0 10
+ Rot
+-0 0 -0 1
+ Scale
+0.5 1 0.5
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wall.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+church_pillar.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1112232519
+next
+4242169407
+Mesh
+ Enabled
+1
+ Pos
+14 0 6
+ Rot
+-0 0 -0 1
+ Scale
+0.5 1 0.5
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wall.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+church_pillar.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+772225758
+next
+2927010853
+Mesh
+ Enabled
+1
+ Pos
+14 0 0
+ Rot
+-0 0 -0 1
+ Scale
+0.5 1 0.5
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wall.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+church_pillar.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1006478666
+next
+1426629709
+Mesh
+ Enabled
+1
+ Pos
+0 0 6
+ Rot
+-0 0 -0 1
+ Scale
+0.5 1 0.5
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wall.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+church_pillar.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1525010857
+next
+3191566044
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+-0 0 -0 1
+ Scale
+0.5 1 0.5
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wall.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+church_pillar.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2604895765
+next
+1454592514
+Mesh
+ Enabled
+1
+ Pos
+0 0 10
+ Rot
+-0 0 -0 1
+ Scale
+0.5 1 0.5
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wall.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+church_pillar.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3922321544
+next
+3324374825
+Mesh
+ Enabled
+1
+ Pos
+0 0 15
+ Rot
+-0 0 -0 1
+ Scale
+0.5 1 0.5
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wall.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+church_pillar.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3800609180
 next
 PersistentAudioComponent
 1
