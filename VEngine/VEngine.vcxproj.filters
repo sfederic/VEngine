@@ -779,9 +779,6 @@
     <ClCompile Include="Code\Actors\Game\WaterVolumeValve.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\CrystalWaterSource.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1594,9 +1591,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\WaterVolumeValve.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\CrystalWaterSource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
