@@ -42,6 +42,7 @@ namespace Renderer
 	//Ref:https://github.com/Microsoft/DirectXTK/wiki/ScreenGrab
 	void ScreenshotCapture();
 	void MeshIconImageCapture();
+	void MapIconImageCapture();
 	void PlayerPhotoCapture(std::wstring outputFilename);
 
 	RastState* GetRastState(std::string rastStateName);

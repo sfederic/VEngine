@@ -225,13 +225,25 @@ void AssetDock::AssetFolderClicked()
 				icon = *Icons::mesh;
 			}
 		}
+		else if (fileExtension == ".vmap")
+		{
+			std::string mapIconPath = "Icons/MapIcons/" + fileInfo.fileName().toStdString() + ".jpg";
+			if (std::filesystem::exists(mapIconPath))
+			{
+				icon = QPixmap(mapIconPath.c_str()).scaled(QSize(320, 240));
+			}
+			else
+			{
+				icon = *Icons::world;
+			}
+		}
 		else if (extToFuncIt != fileExtensionToFunctionMap.end())
 		{
 			extToFuncIt->second(icon, filePath);
 		}
 		else
 		{
-			//Set Defaut icon
+			//Set default icon
 			icon = *Icons::play;
 		}
 

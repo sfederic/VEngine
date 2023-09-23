@@ -143,9 +143,13 @@ void Console::Init()
 		std::make_pair([]() { debugMenu.uvMenuOpen = !debugMenu.uvMenuOpen; },
 			"Menu to set UV values for selected actor's materials."));
 
-	executeMap.emplace(L"MS",
+	executeMap.emplace(L"MESHICON",
 		std::make_pair([]() { Renderer::MeshIconImageCapture(); },
-			"Take an editor icon image of the currently selected mesh (MS stands for Mesh Snap, like Pokemon 'Snap')"));
+			"Take an editor icon image of the currently selected mesh."));
+
+	executeMap.emplace(L"MAPICON",
+		std::make_pair([]() { Renderer::MapIconImageCapture(); },
+			"Take an editor icon image of the currently loaded level."));
 
 	executeMap.emplace(L"WORLD",
 		std::make_pair([]() { debugMenu.worldMenuOpen = !debugMenu.worldMenuOpen; },

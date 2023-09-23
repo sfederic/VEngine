@@ -418,7 +418,7 @@ void CreateInputLayout()
 	};
 
 	VertexShader* shader = ShaderSystem::FindVertexShader(L"Default_vs.cso");
-	
+
 	HR(device->CreateInputLayout(inputDesc, _countof(inputDesc), shader->GetByteCodeData(), shader->GetByteCodeSize(), &inputLayout));
 	context->IASetInputLayout(inputLayout);
 }
@@ -757,7 +757,7 @@ void RenderShadowPass()
 	for (auto& mesh : MeshComponent::system.GetComponents())
 	{
 		RenderMeshForShadowPass(mesh.get());
-	}	
+	}
 
 	//@Todo: For VagrantTactics, don't need shadows on InstanceMeshes as only the Grid is using them and 
 	//the levels are small enough.
@@ -770,7 +770,7 @@ void RenderShadowPass()
 	{
 		SkeletalMeshComponent* mesh = skeletalMesh.get();
 
-		if(!mesh->castsShadow || !mesh->IsVisible())
+		if (!mesh->castsShadow || !mesh->IsVisible())
 		{
 			return;
 		}
@@ -870,7 +870,7 @@ void Renderer::Render()
 	RenderShadowPass();
 
 	if (PostProcessVolume::system.GetNumActors() > 0
-		&& PostProcessVolume::system.GetFirstActor()->IsActive() 
+		&& PostProcessVolume::system.GetFirstActor()->IsActive()
 		&& PostProcessVolume::system.GetFirstActor()->IsActiveCameraInsideVolume())
 	{
 		RenderPostProcessSetup();
@@ -974,7 +974,7 @@ void RenderMeshComponents()
 		SetShaderMeshData(mesh);
 
 		DrawMesh(mesh);
-	}	
+	}
 
 	for (auto& mesh : SliceableMeshComponent::system.GetComponents())
 	{
@@ -1152,7 +1152,7 @@ void Renderer::RenderLightProbeViews()
 
 	//Remap probe data to structured buffer
 	MapBuffer(diffuseProbeMap->GetStructuredBuffer(), diffuseProbeMap->lightProbeData.data(),
-		sizeof(LightProbeInstanceData)* diffuseProbeMap->lightProbeData.size());
+		sizeof(LightProbeInstanceData) * diffuseProbeMap->lightProbeData.size());
 
 	ResizeSwapchain(previousWiewportWidth, previousWiewportHeight);
 
@@ -1229,8 +1229,8 @@ void RenderBounds()
 		for (auto& mesh : MeshComponent::system.GetComponents())
 		{
 			DrawBoundingBox(mesh.get(), debugBox);
-		}		
-		
+		}
+
 		for (auto& skeletalMesh : SkeletalMeshComponent::system.GetComponents())
 		{
 			DrawBoundingBox(skeletalMesh.get(), debugBox);
@@ -1263,7 +1263,7 @@ void RenderBounds()
 	}
 
 	//DRAW TRIGGER BOUNDS
-	if(Renderer::drawTriggers)
+	if (Renderer::drawTriggers)
 	{
 		SetRastStateByName(RastStates::wireframe);
 		SetShaders(ShaderItems::SolidColour);
@@ -1272,7 +1272,7 @@ void RenderBounds()
 
 		for (auto& boxTrigger : BoxTriggerComponent::system.GetComponents())
 		{
-			if (!boxTrigger->IsVisible()) 
+			if (!boxTrigger->IsVisible())
 			{
 				continue;
 			}
@@ -1695,7 +1695,7 @@ void Renderer::RenderParticleEmitters()
 		for (auto& particle : emitter->particles)
 		{
 			//Add rotation to particle (keep in mind that rotate speed needs to match angle's +/- value)
-			auto particleRotation = 
+			auto particleRotation =
 				VMath::LookAtRotation(activeCamera->GetWorldPositionV(), XMLoadFloat3(&particle.transform.position));
 			XMStoreFloat4(&particle.transform.rotation, particleRotation);
 
@@ -1760,7 +1760,7 @@ void SetLightsConstantBufferData()
 		shaderLights.lights[shaderLightsIndex] = light->GetLightData();
 		shaderLightsIndex++;
 	}
-	
+
 	for (auto& light : SpotLightComponent::system.GetComponents())
 	{
 		if (!light->IsActive()) continue;
@@ -1881,10 +1881,22 @@ void Renderer::MeshIconImageCapture()
 		HR(swapchain->GetBuffer(0, IID_PPV_ARGS(&backBuffer)));
 		assert(backBuffer);
 
-		std::wstring imageFile = L"Icons/MeshIcons/" + VString::stows(mesh->meshComponentData.filename) + L".jpg";
+		const std::wstring imageFile = L"Icons/MeshIcons/" +
+			VString::stows(mesh->meshComponentData.filename) + L".jpg";
 		HR(SaveWICTextureToFile(context, backBuffer, GUID_ContainerFormatJpeg, imageFile.c_str()));
 		debugMenu.AddNotification(L"Mesh Icon created.");
 	}
+}
+
+void Renderer::MapIconImageCapture()
+{
+	ID3D11Texture2D* backBuffer = nullptr;
+	HR(swapchain->GetBuffer(0, IID_PPV_ARGS(&backBuffer)));
+	assert(backBuffer);
+
+	const std::wstring imageFile = L"Icons/MapIcons/" + VString::stows(World::worldFilename) + L".jpg";
+	HR(SaveWICTextureToFile(context, backBuffer, GUID_ContainerFormatJpeg, imageFile.c_str()));
+	debugMenu.AddNotification(L"Map Icon created.");
 }
 
 void Renderer::PlayerPhotoCapture(std::wstring outputFilename)
@@ -2076,25 +2088,25 @@ void RenderPostProcess()
 void RenderWireframeForVertexPaintingAndPickedActor()
 {
 	const auto wireframeRender = [&](MeshComponent* mesh)
-	{
-		context->RSSetState(rastStateWireframe);
+		{
+			context->RSSetState(rastStateWireframe);
 
-		MaterialShaderData materialShaderData;
-		materialShaderData.ambient = XMFLOAT4(1.f, 0.f, 1.f, 1.f);
-		cbMaterial->Map(&materialShaderData);
-		cbMaterial->SetPS();
+			MaterialShaderData materialShaderData;
+			materialShaderData.ambient = XMFLOAT4(1.f, 0.f, 1.f, 1.f);
+			cbMaterial->Map(&materialShaderData);
+			cbMaterial->SetPS();
 
-		const auto shaderItem = ShaderSystem::FindShaderItem("SolidColour");
-		context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
-		context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
+			const auto shaderItem = ShaderSystem::FindShaderItem("SolidColour");
+			context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
+			context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 
-		SetVertexBuffer(mesh->pso.vertexBuffer);
+			SetVertexBuffer(mesh->pso.vertexBuffer);
 
-		SetMatricesFromMesh(mesh);
-		SetShaderMeshData(mesh);
+			SetMatricesFromMesh(mesh);
+			SetShaderMeshData(mesh);
 
-		DrawMesh(mesh);
-	};
+			DrawMesh(mesh);
+		};
 
 	if (!Core::gameplayOn)
 	{
