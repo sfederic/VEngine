@@ -256,6 +256,12 @@ bool GridActor::CheckNextNodeMoveIsValid()
 
 	nextPos = XMLoadFloat3(&nextNode->worldPosition);
 
+	//Make it so that floating actors won't be on the same Y pos as the node.
+	if (!canFall)
+	{
+		nextPos.m128_f32[1] = GetPosition().y;
+	}
+
 	//When a GridActor moves, need to recalculate the Grid node height of the last position it was at.
 	const int lastGridIndexX = (int)std::round(GetPosition().x);
 	const int lastGridIndexY = (int)std::round(GetPosition().z);
