@@ -39,6 +39,8 @@ Open Audio
 door.wav
 Open Text
 Open
+Tag
+
 UID
 2009855059
 Unlock Audio
@@ -66,6 +68,8 @@ Open Audio
 door.wav
 Open Text
 Open
+Tag
+
 UID
 2550184661
 Unlock Audio
@@ -297,7 +301,7 @@ Health
 Ignore Rotate Check
 0
 Inspect
-1
+0
 Interact
 1
 Interact Text
@@ -312,12 +316,16 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 GridActor0
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
@@ -336,7 +344,7 @@ MeshActor
  Visible
 1
 Name
-cube0
+node0
 UID
 1465353383
 next
@@ -351,7 +359,7 @@ next
  Visible
 1
 Name
-cube1
+stairs1
 UID
 906359240
 next
@@ -366,7 +374,7 @@ next
  Visible
 1
 Name
-cube2
+stairs2
 UID
 2213501227
 next
@@ -381,7 +389,7 @@ next
  Visible
 1
 Name
-cube3
+stairs3
 UID
 2198770326
 next
@@ -396,7 +404,7 @@ next
  Visible
 1
 Name
-cube4
+stairs4
 UID
 3606520142
 next
@@ -411,7 +419,7 @@ next
  Visible
 1
 Name
-cube5
+stairs5
 UID
 3025358613
 next
@@ -426,7 +434,7 @@ next
  Visible
 1
 Name
-cube6
+stairs6
 UID
 5040166
 next
@@ -441,7 +449,7 @@ next
  Visible
 1
 Name
-cube7
+stairs7
 UID
 1562331085
 next
@@ -456,7 +464,7 @@ next
  Visible
 1
 Name
-cube8
+stairs8
 UID
 4097195872
 next

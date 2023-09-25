@@ -210,9 +210,9 @@ EntranceTrigger
  Enabled
 1
  Position
-0 0 16
+2 0 16
  Rotation
--0 0 -0 1
+0 1 0 0.000172623
  Scale
 1 1 1
  Visible
@@ -241,9 +241,9 @@ next
  Position
 0 0 4
  Rotation
--0 -0.707107 -0 0.707107
+-0 0.707107 -0 0.707107
  Scale
-1 1 1
+0.999999 1 0.999999
  Visible
 1
 Entrance Active
@@ -299,9 +299,9 @@ next
  Position
 6 0 0
  Rotation
-0 0.707107 0 -0.707107
+-0 0.000172309 -0 1
  Scale
-0.999997 1 0.999997
+0.999998 1 0.999998
  Visible
 1
 Entrance Active
@@ -762,9 +762,9 @@ Trigger
  Enabled
 1
  Pos
-0 0 16
+2 0 16
  Rot
--0 0 -0 1
+0 1 0 0.000172623
  Scale
 1 1 1
  Visible
@@ -783,9 +783,9 @@ Trigger
  Pos
 0 0 4
  Rot
--0 -0.707107 -0 0.707107
+-0 0.707107 -0 0.707107
  Scale
-1 1 1
+0.999999 1 0.999999
  Visible
 1
 Extents
@@ -821,9 +821,9 @@ Trigger
  Pos
 6 0 0
  Rot
-0 0.707107 0 -0.707107
+-0 0.000172309 -0 1
  Scale
-0.999997 1 0.999997
+0.999998 1 0.999998
  Visible
 1
 Extents
@@ -2168,61 +2168,6 @@ Trans. Occlude
 UID
 213823945
 next
-1647454417
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 -1.19209e-07 0 -1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-char.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2929477331
-next
 3155657291
 Mesh
  Enabled
@@ -2662,6 +2607,61 @@ Trans. Occlude
 0
 UID
 3800609180
+next
+1647454417
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 -1.19209e-07 0 -1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2929477331
 next
 PersistentAudioComponent
 1
