@@ -70,7 +70,7 @@ next
  Position
 5 2 13
  Rotation
--0 0 -0 1
+0 1 0 1.56959e-07
  Scale
 1 1 1
  Visible
@@ -138,7 +138,7 @@ Health
 Ignore Rotate Check
 0
 Inspect
-1
+0
 Interact
 1
 Interact Text
@@ -189,7 +189,7 @@ Health
 Ignore Rotate Check
 0
 Inspect
-1
+0
 Interact
 1
 Interact Text
@@ -240,7 +240,7 @@ Health
 Ignore Rotate Check
 0
 Inspect
-1
+0
 Interact
 1
 Interact Text
@@ -283,7 +283,7 @@ MeshActor
  Visible
 1
 Name
-rock20
+cube0
 UID
 2660736969
 next
@@ -298,7 +298,7 @@ next
  Visible
 1
 Name
-rock21
+cube1
 UID
 3609497912
 next
@@ -313,7 +313,7 @@ next
  Visible
 1
 Name
-rock22
+cube2
 UID
 3723306443
 next
@@ -328,7 +328,7 @@ next
  Visible
 1
 Name
-rock23
+cube3
 UID
 1864045415
 next
@@ -343,7 +343,7 @@ next
  Visible
 1
 Name
-rock24
+cube4
 UID
 1302542097
 next
@@ -358,7 +358,7 @@ next
  Visible
 1
 Name
-rock25
+cube5
 UID
 3165928858
 next
@@ -373,7 +373,7 @@ next
  Visible
 1
 Name
-rock26
+node6
 UID
 456881996
 next
@@ -382,9 +382,9 @@ Player
  Enabled
 1
  Position
-5 2 13
+4 1 -0.001
  Rotation
-0 0.000172496 0 1
+-0 0.000172496 -0 1
  Scale
 1 1 1
  Visible
@@ -422,7 +422,7 @@ Trigger
  Pos
 5 2 13
  Rot
--0 0 -0 1
+0 1 0 1.56959e-07
  Scale
 1 1 1
  Visible
@@ -574,9 +574,9 @@ Root
  Enabled
 1
  Pos
-5 2 13
+4 1 -0.001
  Rot
-0 0.000172496 0 1
+-0 0.000172496 -0 1
  Scale
 1 1 1
  Visible
@@ -1200,7 +1200,7 @@ Mesh
  Pos
 0 0 0
  Rot
-0 -0.707106 0 0.707107
+0 0 0 1
  Scale
 1 1 1
  Visible
