@@ -239,7 +239,7 @@ next
 Grid
 1
  Enabled
-0
+1
  Position
 0 0 0
  Rotation
@@ -253,7 +253,7 @@ Grid0
 Size X
 5
 Size Y
-5
+6
 UID
 3200550050
 next
@@ -580,7 +580,7 @@ InstanceMeshComponent
 3200550050
 NodeMesh
  Enabled
-0
+1
  Pos
 0 0 0
  Rot

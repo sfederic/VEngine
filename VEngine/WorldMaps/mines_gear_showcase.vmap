@@ -76,11 +76,11 @@ Unlock Audio
 
 next
 Gear
-3
+4
  Enabled
 1
  Position
-2 0 3
+2 0 4
  Rotation
 0 0 1 -2.60274e-07
  Scale
@@ -229,6 +229,57 @@ Rotate Yaw
 1
 UID
 4185034372
+next
+ Enabled
+1
+ Position
+1 0 2
+ Rotation
+0 0 1 -2.60274e-07
+ Scale
+0.999998 0.999998 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+1
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+Gear3
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+363485813
 next
 Grid
 1
@@ -452,7 +503,7 @@ UID
 2361153170
 next
 DialogueComponent
-4
+5
 285148195
 Dialogue
  Enabled
@@ -496,6 +547,17 @@ File
 
 UID
 79919278
+next
+363485813
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+4262074027
 next
 DirectionalLightComponent
 1
@@ -593,13 +655,13 @@ UID
 677430419
 next
 MeshComponent
-10
+11
 285148195
 Mesh
  Enabled
 1
  Pos
-2 0 3
+2 0 4
  Rot
 0 0 1 -2.60274e-07
  Scale
@@ -1143,5 +1205,60 @@ Trans. Occlude
 0
 UID
 2297311846
+next
+363485813
+Mesh
+ Enabled
+1
+ Pos
+1 0 2
+ Rot
+0 0 1 -2.60274e-07
+ Scale
+0.999998 0.999998 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+gear.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1471968290
 next
 end
