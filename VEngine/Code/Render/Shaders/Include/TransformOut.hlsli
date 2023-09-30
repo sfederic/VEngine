@@ -11,7 +11,7 @@ VS_OUT TransformOut(VS_IN i)
     o.tangent = mul((float3x3)invTranModel, i.tangent);
 		
 	const float4 newUv = mul(texMatrix, float4(i.uv, 0.f, 1.0f));
-    o.uv = float2(newUv.x, 1.0 - newUv.y);
+    o.uv = float2(newUv.x, newUv.y);
 		
 	o.shadowPos = mul(lightMVP, o.posWS);
 	o.instanceID = i.instanceID;
