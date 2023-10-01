@@ -2,7 +2,7 @@
 
 #include "GridActor.h"
 
-//Resets the current map but keeps the player position next to this actor.
+//Resets the current map.
 class WorldResetter : public GridActor
 {
 public:
