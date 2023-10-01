@@ -437,7 +437,7 @@ bool Player::CombatInteractCheck(Actor* actorToCheck)
 
 bool Player::InteractCheck(Actor* hitActor)
 {
-	if (!inConversation)
+	if (!inConversation && !isInputLinkedToDowncastGridActor && isInputLinkedToGridActor)
 	{
 		auto gridActor = dynamic_cast<GridActor*>(hitActor);
 		if (gridActor)
