@@ -12,7 +12,7 @@ struct Skeleton;
 class MeshComponent : public SpatialComponent
 {
 public:
-	COMPONENT_SYSTEM(MeshComponent)
+	COMPONENT_SYSTEM(MeshComponent);
 
 	//Debug meshes are used by the renderer to display things like bounds, camera, lights, etc.
 	static void CreateDebugMeshes();
@@ -91,6 +91,8 @@ public:
 
 	BlendState& GetBlendState();
 	RastState& GetRastState();
+
+	bool IntersectsWithAnyBoundingBoxInWorld();
 
 private:
 	std::string collisionMeshFilename;

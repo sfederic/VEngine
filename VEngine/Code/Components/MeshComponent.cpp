@@ -57,14 +57,14 @@ std::vector<MeshComponent*> MeshComponent::SortMeshComponentsByDistance()
 	for (auto& mesh : system.GetComponents())
 	{
 		float distance = XMVector3Length(cameraPos - mesh->GetWorldPositionV()).m128_f32[0];
-		MeshPack pack = { mesh.get(), distance } ;
+		MeshPack pack = { mesh.get(), distance };
 		meshPacks.emplace_back(pack);
 	}
 
 	auto DistCompare = [](const MeshPack& leftPack, const MeshPack& rightPack)
-	{
-		return leftPack.distance > rightPack.distance;
-	};
+		{
+			return leftPack.distance > rightPack.distance;
+		};
 	std::sort(meshPacks.begin(), meshPacks.end(), DistCompare);
 
 	std::vector<MeshComponent*> sortedMeshes;
@@ -281,4 +281,18 @@ BlendState& MeshComponent::GetBlendState()
 RastState& MeshComponent::GetRastState()
 {
 	return *material->rastState;
+}
+
+bool MeshComponent::IntersectsWithAnyBoundingBoxInWorld()
+{
+	for (auto& mesh : MeshComponent::system.GetComponents())
+	{
+		const auto thisMeshBounds = GetBoundsInWorldSpace();
+		if (thisMeshBounds.Intersects(mesh->GetBoundsInWorldSpace()))
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
