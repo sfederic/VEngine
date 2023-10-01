@@ -168,7 +168,7 @@ void Player::HighlightLinkableGridActor()
 	{
 		return;
 	}
-	if (isInputLinkedToGridActor || isInputLinkedToDowncastGridActor)
+	if (isInputLinkedToGridActor)
 	{
 		highlightedGridActor = nullptr;
 		return;
@@ -437,7 +437,7 @@ bool Player::CombatInteractCheck(Actor* actorToCheck)
 
 bool Player::InteractCheck(Actor* hitActor)
 {
-	if (!inConversation && !isInputLinkedToDowncastGridActor && isInputLinkedToGridActor)
+	if (!inConversation && !isInputLinkedToGridActor)
 	{
 		auto gridActor = dynamic_cast<GridActor*>(hitActor);
 		if (gridActor)
@@ -609,7 +609,7 @@ bool Player::CheckAttackPositionAgainstUnitDirection(Unit* unit)
 
 void Player::LinkToGridActor()
 {
-	if (isInputLinkedToGridActor || isInputLinkedToDowncastGridActor) //Cancel
+	if (isInputLinkedToGridActor) //Cancel
 	{
 		if (Input::GetKeyUp(Keys::BackSpace))
 		{
@@ -649,30 +649,11 @@ void Player::LinkToGridActor()
 			}
 		}
 	}
-	else if (!isInputLinkedToDowncastGridActor && Input::GetKeyUp(Keys::Down)) //Downwards cast
-	{
-		//@TODO: think about removing all of this
-		HitResult hit(this);
-		if (Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 3.f))
-		{
-			auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
-			if (gridActor)
-			{
-				SetLinkedGridActor(*gridActor);
-			}
-		}
-	}
 }
 
 void Player::MoveLinkedGridActor()
 {
 	if (linkedGridActor == nullptr || !linkedGridActor->CheckMovementAndRotationStopped())
-	{
-		return;
-	}
-
-	//Don't move GridActor if downcast link. 
-	if (isInputLinkedToDowncastGridActor)
 	{
 		return;
 	}
@@ -980,7 +961,7 @@ void Player::MovementInput(float deltaTime)
 		return;
 	}
 
-	if (!isInputLinkedToGridActor && !isInputLinkedToDowncastGridActor && CheckIfMovementAndRotationStopped())
+	if (!isInputLinkedToGridActor && CheckIfMovementAndRotationStopped())
 	{
 		SetGridIndices();
 
@@ -1017,7 +998,7 @@ void Player::RotationInput(float deltaTime)
 		return;
 	}
 
-	if (!isInputLinkedToGridActor && !isInputLinkedToDowncastGridActor && CheckIfMovementAndRotationStopped())
+	if (!isInputLinkedToGridActor && CheckIfMovementAndRotationStopped())
 	{
 		if (Input::GetKeyHeld(Keys::Right))
 		{
@@ -1086,7 +1067,6 @@ void Player::ResetLinkedGridActor()
 	camera->targetActor = this;
 
 	isInputLinkedToGridActor = false;
-	isInputLinkedToDowncastGridActor = false;
 }
 
 void Player::ResetLinkedGridActorIfThis(GridActor* gridActor)
