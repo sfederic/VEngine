@@ -372,6 +372,11 @@ void FileSystem::SetDeferredWorldLoad(const std::string_view filename)
 	defferedWorldLoadFilename = filename;
 }
 
+void FileSystem::SetDeferredWorldReset()
+{
+	defferedWorldLoadFilename = World::worldFilename;
+}
+
 void FileSystem::DeferredWorldLoad()
 {
 	if (!defferedWorldLoadFilename.empty())
@@ -405,12 +410,12 @@ void MovePlayerToEntranceTriggerFromPreviousWorldFilename()
 	}
 
 	const auto MoveToEntrance = [&](EntranceTrigger* entranceTrigger)
-	{
-		player->SetPosition(entranceTrigger->GetPositionV());
-		//Want the opposite rotation on exit for player to face in vs the orientation to enter the entrance
-		player->SetRotation(entranceTrigger->GetRotationV());
-		player->SetNextPosAndRotToCurrent();
-	};
+		{
+			player->SetPosition(entranceTrigger->GetPositionV());
+			//Want the opposite rotation on exit for player to face in vs the orientation to enter the entrance
+			player->SetRotation(entranceTrigger->GetRotationV());
+			player->SetNextPosAndRotToCurrent();
+		};
 
 	//Deal with only one potential entrance
 	if (possibleEntrancesToMoveTo.size() == 1)

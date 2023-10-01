@@ -19,6 +19,8 @@ namespace FileSystem
 
 	void SetDeferredWorldLoad(const std::string_view filename);
 
+	void SetDeferredWorldReset();
+
 	//called at end of the frame to avoid world loads happening inside Tick/Draw functions.
 	void DeferredWorldLoad();
 };
