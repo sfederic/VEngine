@@ -9,6 +9,13 @@ void WorldResetter::Create()
 	SetMeshFilename("crystal.vmesh");
 }
 
+Properties WorldResetter::GetProps()
+{
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	return props;
+}
+
 void WorldResetter::Interact()
 {
 	FileSystem::SetDeferredWorldReset();

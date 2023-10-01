@@ -9,5 +9,7 @@ public:
 	ACTOR_SYSTEM(WorldResetter);
 
 	void Create() override;
+	Properties GetProps() override;
+
 	void Interact() override;
 };
