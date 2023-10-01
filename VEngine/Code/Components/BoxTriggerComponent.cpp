@@ -59,7 +59,7 @@ XMVECTOR BoxTriggerComponent::GetRandomPointInTrigger()
 
 	float lowX = pos.x - boundingBox.Extents.x;
 	float highX = pos.x + boundingBox.Extents.x;
-	
+
 	float lowY = pos.y - boundingBox.Extents.y;
 	float highY = pos.y + boundingBox.Extents.y;
 
@@ -78,8 +78,8 @@ bool BoxTriggerComponent::IntersectsWithAnyBoundingBoxInWorld()
 {
 	for (auto& mesh : MeshComponent::system.GetComponents())
 	{
-		//@Todo: bounds needs to be in world space
-		if (boundingBox.Intersects(mesh->GetBoundsInWorldSpace()))
+		const auto thisTriggerBounds = GetBoundsInWorldSpace();
+		if (thisTriggerBounds.Intersects(mesh->GetBoundsInWorldSpace()))
 		{
 			return true;
 		}
