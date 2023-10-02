@@ -17,6 +17,7 @@ public:
 	Light GetLightData();
 
 	void SetLightColour(XMFLOAT4 colour) { lightData.colour = colour; }
+	void SetIntensity(float intensity) { lightData.intensity = intensity; }
 
 private:
 	Light lightData;

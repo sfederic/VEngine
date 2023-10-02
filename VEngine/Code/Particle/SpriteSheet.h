@@ -13,15 +13,16 @@ public:
 	COMPONENT_SYSTEM(SpriteSheet);
 
 	SpriteSheet();
-	virtual void Tick(float deltaTime) override;
-	virtual void Create() override;
-	virtual Properties GetProps() override;
+	void Tick(float deltaTime) override;
+	void Create() override;
+	Properties GetProps() override;
 
 	void SetupSpriteData(std::string_view textureFilename, int numRows, int numColumns, bool loop);
-
 	void UpdateSprite();
 
 	void SetLoopAnimation(bool loop) { loopAnimation = loop; }
+	void SetAnimationSpeed(float speed) { animationSpeed = speed; }
+
 	std::string GetTextureFilename() { return textureData.filename; }
 	Sprite GetSprite() { return sprite; }
 
