@@ -18,6 +18,8 @@ DisableGridInteract
 0
 Health
 1
+Ignore Move Check
+1
 Ignore Rotate Check
 0
 Inspect
@@ -73,6 +75,8 @@ DisableGridInteract
 0
 Health
 1
+Ignore Move Check
+1
 Ignore Rotate Check
 0
 Inspect
@@ -127,6 +131,8 @@ Destruct
 DisableGridInteract
 0
 Health
+1
+Ignore Move Check
 1
 Ignore Rotate Check
 0
@@ -206,7 +212,7 @@ UID
 2766288922
 next
 EntranceTrigger
-4
+5
  Enabled
 1
  Position
@@ -320,6 +326,35 @@ Tag
 
 UID
 731618344
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+7 1 12
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+catacombs_entrance.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger4
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+747031082
 Unlock Audio
 
 next
@@ -756,7 +791,7 @@ UID
 1647454417
 next
 BoxTriggerComponent
-4
+5
 3299669729
 Trigger
  Enabled
@@ -833,6 +868,25 @@ Offset
 UID
 3271019788
 next
+747031082
+Trigger
+ Enabled
+1
+ Pos
+7 1 12
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+713449148
+next
 CameraComponent
 1
 1647454417
@@ -857,7 +911,7 @@ UID
 3825084304
 next
 ConditionComponent
-4
+5
 3299669729
 Condition
  Enabled
@@ -909,6 +963,19 @@ Condition Arg
 
 UID
 128577333
+next
+747031082
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+1553932556
 next
 DialogueComponent
 4
