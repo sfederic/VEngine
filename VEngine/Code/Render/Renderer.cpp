@@ -1554,11 +1554,11 @@ void RenderSpriteSheets()
 		SetShaders(ShaderItems::DefaultClip);
 
 		SetSampler(0, RenderUtils::GetDefaultSampler());
-		SetShaderResourcePixel(0, spriteSheet->textureData.filename);
+		SetShaderResourcePixel(0, spriteSheet->GetTextureFilename());
 
 		spriteSheet->UpdateSprite();
 
-		SpriteSystem::BuildSpriteQuadForSpriteSheetRendering(spriteSheet->sprite);
+		SpriteSystem::BuildSpriteQuadForSpriteSheetRendering(spriteSheet->GetSprite());
 		SpriteSystem::UpdateAndSetSpriteBuffers(context);
 
 		const XMVECTOR lookAtRotation = VMath::LookAtRotation(activeCamera->GetWorldPositionV(), spriteSheet->GetWorldPositionV());

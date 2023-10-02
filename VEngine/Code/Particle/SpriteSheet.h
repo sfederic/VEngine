@@ -21,6 +21,11 @@ public:
 
 	void UpdateSprite();
 
+	void SetLoopAnimation(bool loop) { loopAnimation = loop; }
+	std::string GetTextureFilename() { return textureData.filename; }
+	Sprite GetSprite() { return sprite; }
+
+private:
 	Sprite sprite;
 
 	TextureData textureData;
@@ -34,5 +39,5 @@ public:
 	int currentSheetRow = 0;
 	int currentSheetColumn = 0;
 
-	bool loopAnimation = false;
+	bool loopAnimation = true;
 };

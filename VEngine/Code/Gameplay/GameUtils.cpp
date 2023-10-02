@@ -52,11 +52,7 @@ namespace GameUtils
 		auto spriteSheet = SpriteSheet::system.Add("SpriteSheet", nullptr, SpriteSheet(), false);
 
 		spriteSheet->SetLocalPosition(spawnPosition);
-		spriteSheet->textureData.filename = textureFilename;
-		spriteSheet->loopAnimation = loop;
-		spriteSheet->numSheetRows = numRows;
-		spriteSheet->numSheetColumns = numColumns;
-
+		spriteSheet->SetupSpriteData(textureFilename, numRows, numColumns, loop);
 		spriteSheet->Create();
 
 		return spriteSheet;
