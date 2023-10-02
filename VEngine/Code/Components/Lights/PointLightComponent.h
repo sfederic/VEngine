@@ -16,6 +16,8 @@ public:
 
 	Light GetLightData();
 
+	void SetLightColour(XMFLOAT4 colour) { lightData.colour = colour; }
+
 private:
 	Light lightData;
 };
