@@ -147,7 +147,7 @@ void Grid::RecalcAllNodes(HitResult& hit)
 
 		for (int y = 0; y < sizeY; y++)
 		{
-			rayOrigin = XMVectorSet(x, 10.f, y, 1.f);
+			rayOrigin = XMVectorSet(x, 20.f, y, 1.f);
 
 			//Set instance model matrix
 			InstanceData instanceData = {};
@@ -164,7 +164,7 @@ void Grid::RecalcAllNodes(HitResult& hit)
 			hit.hitComponents.clear();
 
 			//raycast against the world to set node position
-			if (Raycast(hit, rayOrigin, -VMath::GlobalUpVector(), 20.0f))
+			if (Raycast(hit, rayOrigin, -VMath::GlobalUpVector(), 40.0f))
 			{
 				//Scale the node down to nothing
 				XMMATRIX scaleMatrix = XMMatrixScaling(0.f, 0.f, 0.f);
