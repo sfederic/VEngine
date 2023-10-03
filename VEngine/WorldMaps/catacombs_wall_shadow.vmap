@@ -1,0 +1,725 @@
+Grid
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+Grid0
+Size X
+9
+Size Y
+11
+UID
+2413978679
+next
+GridActor
+1
+ Enabled
+1
+ Position
+5 1 5
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+0
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+GridActor0
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+2170508513
+next
+MeshActor
+4
+ Enabled
+1
+ Position
+4 -0.5 5
+ Rotation
+-0 0 -0 1
+ Scale
+9 1 11
+ Visible
+1
+Name
+node0
+UID
+4073397928
+next
+ Enabled
+1
+ Position
+7 2 1
+ Rotation
+-0.707107 0 -0 0.707107
+ Scale
+1 0.999989 0.999989
+ Visible
+1
+Name
+pillar11
+UID
+2507534303
+next
+ Enabled
+1
+ Position
+7 2 9
+ Rotation
+-0.707107 0 -0 0.707107
+ Scale
+1 0.999982 0.999982
+ Visible
+1
+Name
+pillar12
+UID
+3319319496
+next
+ Enabled
+1
+ Position
+-0.5 2 5
+ Rotation
+-0 0 -0.707107 0.707107
+ Scale
+5 1 11
+ Visible
+1
+Name
+node3
+UID
+3021887122
+next
+Player
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+Player0
+UID
+1827985587
+next
+PointLightActor
+2
+ Enabled
+1
+ Position
+7 4 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+PointLightActor0
+UID
+540381146
+next
+ Enabled
+1
+ Position
+7 4 9
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+PointLightActor1
+UID
+2846860806
+next
+SpotLightActor
+1
+ Enabled
+1
+ Position
+9 0 5
+ Rotation
+0 0.707107 0 -0.707107
+ Scale
+0.999988 0.999998 0.999988
+ Visible
+1
+Name
+SpotLightActor0
+UID
+2640444729
+next
+CameraComponent
+1
+1827985587
+Camera
+ Enabled
+1
+ Pos
+1.75 1.75 -2.75
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
+UID
+352917064
+next
+DialogueComponent
+2
+2170508513
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+4079240555
+next
+1827985587
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+380523146
+next
+EmptyComponent
+1
+1827985587
+Root
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+2174485013
+next
+InstanceMeshComponent
+1
+2413978679
+NodeMesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Instance
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3010541423
+next
+MeshComponent
+6
+2170508513
+Mesh
+ Enabled
+1
+ Pos
+5 1 5
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+rock_L_shape.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2432104435
+next
+4073397928
+Mesh
+ Enabled
+1
+ Pos
+4 -0.5 5
+ Rot
+-0 0 -0 1
+ Scale
+9 1 11
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3556873345
+next
+2507534303
+Mesh
+ Enabled
+1
+ Pos
+7 2 1
+ Rot
+-0.707107 0 -0 0.707107
+ Scale
+1 0.999989 0.999989
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+pillar1.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2094793400
+next
+3319319496
+Mesh
+ Enabled
+1
+ Pos
+7 2 9
+ Rot
+-0.707107 0 -0 0.707107
+ Scale
+1 0.999982 0.999982
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+pillar1.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1624775866
+next
+3021887122
+Mesh
+ Enabled
+1
+ Pos
+-0.5 2 5
+ Rot
+-0 0 -0.707107 0.707107
+ Scale
+5 1 11
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2024647565
+next
+1827985587
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+518686839
+next
+PointLightComponent
+2
+540381146
+PointLight
+ Enabled
+1
+ Pos
+7 4 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
+UID
+71406213
+next
+2846860806
+PointLight
+ Enabled
+1
+ Pos
+7 4 9
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
+UID
+618445370
+next
+SpotLightComponent
+1
+2640444729
+SpotLight
+ Enabled
+1
+ Pos
+9 0 5
+ Rot
+0 0.707107 0 -0.707107
+ Scale
+0.999988 0.999998 0.999988
+ Visible
+1
+Colour
+1 1 1 1
+Intensity
+40
+LightEnabled
+1
+Spot Angle
+70
+UID
+2124184299
+next
+end
