@@ -20,18 +20,21 @@ VEnumWidget::VEnumWidget(Property& value_)
 
 void VEnumWidget::SetValue()
 {
-	IPropertyWidget::SetValue<VEnum>(prop);
-
 	std::string text = currentText().toStdString();
+
+	if (!value->Compare(text))
+	{
+		IPropertyWidget::SetValue<VEnum>(prop);
+	}
+
 	value->SetValue(text);
+
 	if (prop.change)
 	{
 		prop.change(value);
 	}
 
 	clearFocus();
-
-	IPropertyWidget::SetValue<VEnum>(prop);
 }
 
 void VEnumWidget::ResetValue()

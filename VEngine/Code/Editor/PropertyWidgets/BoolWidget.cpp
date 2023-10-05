@@ -22,12 +22,13 @@ void BoolWidget::SetValueBool(int state)
 {
 	if (value)
 	{
-		IPropertyWidget::SetValue<bool>(prop);
+		if (*value != (bool)state)
+		{
+			IPropertyWidget::SetValue<bool>(prop);
+		}
 
 		*value = state;
 		SetValue<bool>(prop);
-
-		IPropertyWidget::SetValue<bool>(prop);
 	}
 }
 

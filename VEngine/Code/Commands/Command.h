@@ -27,6 +27,7 @@ struct Command : ICommand
 			auto data = props.GetDataAllowNull<T>(prop.name);
 			if (data)
 			{
+				//@Todo: undo/redo for textures isn't working.
 				*data = value;
 			}
 		}

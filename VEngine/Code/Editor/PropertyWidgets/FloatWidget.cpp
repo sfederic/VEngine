@@ -13,11 +13,14 @@ FloatWidget::FloatWidget(Property& prop_, QWidget* parent) : SpinBox(parent)
 
 void FloatWidget::SetValue()
 {
-	IPropertyWidget::SetValue<float>(prop);
+	float val = (float)value();
 
-	*_value = (float)value();
+	if (val != *_value)
+	{
+		IPropertyWidget::SetValue<float>(prop);
+	}
 
-	IPropertyWidget::SetValue<float>(prop);
+	*_value = val;
 }
 
 void FloatWidget::ResetValue()

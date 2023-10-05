@@ -13,10 +13,14 @@ WStringWidget::WStringWidget(Property& value_)
 
 void WStringWidget::SetValue()
 {
-	IPropertyWidget::SetValue<std::wstring>(prop);
+	std::wstring txt = text().toStdWString();
 
-	QString txt = text();
-	value->assign(txt.toStdWString());
+	if (*value != txt)
+	{
+		IPropertyWidget::SetValue<std::wstring>(prop);
+	}
+
+	value->assign(txt);
 
 	if (prop.change)
 	{

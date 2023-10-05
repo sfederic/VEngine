@@ -35,9 +35,13 @@ void VectorWidget::SetValue()
 		static_cast<float>(ySpinbox->value()),
 		static_cast<float>(zSpinbox->value()),
 		static_cast<float>(wSpinbox->value()));
-	*_vector = newVector;
 
-	IPropertyWidget::SetValue<XMVECTOR>(prop);
+	if (XMVector4Equal(*_vector, newVector))
+	{
+		IPropertyWidget::SetValue<XMVECTOR>(prop);
+	}
+
+	*_vector = newVector;
 }
 
 void VectorWidget::ResetValue()

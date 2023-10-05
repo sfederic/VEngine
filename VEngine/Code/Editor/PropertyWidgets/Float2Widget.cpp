@@ -2,6 +2,7 @@
 #include "Float2Widget.h"
 #include <qboxlayout.h>
 #include <DirectXMath.h>
+#include "Core/VMath.h"
 
 using namespace DirectX;
 
@@ -27,12 +28,16 @@ void Float2Widget::SetValue()
 {
 	IPropertyWidget::SetValue<XMFLOAT2>(prop);
 
-	XMFLOAT2 newFloat3 = {};
-	newFloat3.x = xSpinbox.value();
-	newFloat3.y = ySpinbox.value();
-	*value = newFloat3;
+	XMFLOAT2 newFloat2 = {};
+	newFloat2.x = xSpinbox.value();
+	newFloat2.y = ySpinbox.value();
 
-	IPropertyWidget::SetValue<XMFLOAT2>(prop);
+	if (!VMath::Float2Equal(newFloat2, *value))
+	{
+		IPropertyWidget::SetValue<XMFLOAT2>(prop);
+	}
+
+	*value = newFloat2;
 }
 
 void Float2Widget::ResetValue()

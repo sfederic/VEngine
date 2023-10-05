@@ -21,10 +21,14 @@ StringWidget::StringWidget(Property& value_)
 
 void StringWidget::SetValue()
 {
-	IPropertyWidget::SetValue<std::string>(prop);
+	const std::string txt = text().toStdString();
 
-	QString txt = text();
-	value->assign(txt.toStdString().c_str());
+	if (txt == *value)
+	{
+		IPropertyWidget::SetValue<std::string>(prop);
+	}
+
+	value->assign(txt);
 
 	if (prop.change)
 	{
@@ -32,8 +36,6 @@ void StringWidget::SetValue()
 	}
 
 	clearFocus();
-
-	IPropertyWidget::SetValue<std::string>(prop);
 }
 
 void StringWidget::ResetValue()

@@ -21,7 +21,7 @@ void TextureDataWidget::SetValue()
 	QString filepath = QFileDialog::getOpenFileName(this,
 		tr("Set Texture"),
 		QString::fromStdString(AssetBaseFolders::texture),
-		tr("Image Files (*.png *.jpg *.bmp)"), 
+		tr("Image Files (*.png *.jpg *.bmp)"),
 		nullptr,
 		QFileDialog::Option::DontUseNativeDialog);
 
@@ -43,8 +43,6 @@ void TextureDataWidget::SetValue()
 		}
 
 		ResetValue();
-
-		IPropertyWidget::SetValue<TextureData>(prop);
 	}
 }
 

@@ -2,6 +2,7 @@
 #include "Float3Widget.h"
 #include <qboxlayout.h>
 #include <DirectXMath.h>
+#include "Core/VMath.h"
 
 using namespace DirectX;
 
@@ -28,15 +29,17 @@ Float3Widget::Float3Widget(Property& prop_, QWidget* parent) : QWidget(parent)
 
 void Float3Widget::SetValue()
 {
-	IPropertyWidget::SetValue<XMFLOAT3>(prop);
-
 	XMFLOAT3 newFloat3 = {};
 	newFloat3.x = xSpinbox.value();
 	newFloat3.y = ySpinbox.value();
 	newFloat3.z = zSpinbox.value();
-	*_value = newFloat3;
 
-	IPropertyWidget::SetValue<XMFLOAT3>(prop);
+	if (!VMath::Float3Equal(newFloat3, *_value))
+	{
+		IPropertyWidget::SetValue<XMFLOAT3>(prop);
+	}
+
+	*_value = newFloat3;
 }
 
 void Float3Widget::ResetValue()

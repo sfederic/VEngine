@@ -2,6 +2,7 @@
 #include "Float4Widget.h"
 #include <qboxlayout.h>
 #include <DirectXMath.h>
+#include "Core/VMath.h"
 
 using namespace DirectX;
 
@@ -38,9 +39,13 @@ void Float4Widget::SetValue()
 	newFloat4.y = ySpinbox.value();
 	newFloat4.z = zSpinbox.value();
 	newFloat4.w = wSpinbox.value();
-	*value = newFloat4;
 
-	IPropertyWidget::SetValue<XMFLOAT4>(prop);
+	if (!VMath::Float4Equal(newFloat4, *value))
+	{
+		IPropertyWidget::SetValue<XMFLOAT4>(prop);
+	}
+
+	*value = newFloat4;
 }
 
 void Float4Widget::ResetValue()
