@@ -56,7 +56,10 @@ namespace VMath
 
 	bool VecEqual(XMVECTOR v1, XMVECTOR v2, float epsilon = 9.9999999747e-05f);
 	bool FloatEqualRange(float f1, float f2, float epsilon);
+	bool Float4Equal(XMFLOAT4& f1, XMFLOAT4& f2);
 	bool Float3Equal(XMFLOAT3& f1, XMFLOAT3& f2);
+	bool Float2Equal(XMFLOAT2& f1, XMFLOAT2& f2);
+
 	float FindMaxInVector(XMVECTOR v);
 	XMVECTOR VectorConstantLerp(XMVECTOR current, XMVECTOR target, float deltaTime, float interpSpeed);
 	XMVECTOR QuatConstantLerp(XMVECTOR current, XMVECTOR target, float deltaTime, float interpSpeed);
