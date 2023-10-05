@@ -27,12 +27,12 @@ void VEnumWidget::SetValue()
 		IPropertyWidget::SetValue<VEnum>(prop);
 	}
 
-	value->SetValue(text);
-
 	if (prop.change)
 	{
 		prop.change(value);
 	}
+
+	value->SetValue(text);
 
 	clearFocus();
 }

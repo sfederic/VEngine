@@ -40,6 +40,11 @@ void Float3Widget::SetValue()
 	}
 
 	*_value = newFloat3;
+
+	if (prop.change)
+	{
+		prop.change(_value);
+	}
 }
 
 void Float3Widget::ResetValue()

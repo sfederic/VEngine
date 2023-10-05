@@ -20,7 +20,7 @@ void MeshComponentDataWidget::SetValue()
 		tr("Set Mesh"),
 		QString::fromStdString(AssetBaseFolders::mesh),
 		tr("Meshes (*.vmesh)"),
-		nullptr, 
+		nullptr,
 		QFileDialog::Option::DontUseNativeDialog); //@Todo: native dialog crashes on Win11 all the time randomly.
 
 	QFileInfo info(filepath);
@@ -37,8 +37,6 @@ void MeshComponentDataWidget::SetValue()
 
 		prop.change(value);
 		ResetValue();
-
-		IPropertyWidget::SetValue<MeshComponentData>(prop);
 	}
 }
 

@@ -42,6 +42,11 @@ void VectorWidget::SetValue()
 	}
 
 	*_vector = newVector;
+
+	if (prop.change)
+	{
+		prop.change(_vector);
+	}
 }
 
 void VectorWidget::ResetValue()

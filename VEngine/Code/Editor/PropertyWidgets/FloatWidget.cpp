@@ -21,6 +21,11 @@ void FloatWidget::SetValue()
 	}
 
 	*_value = val;
+
+	if (prop.change)
+	{
+		prop.change(_value);
+	}
 }
 
 void FloatWidget::ResetValue()

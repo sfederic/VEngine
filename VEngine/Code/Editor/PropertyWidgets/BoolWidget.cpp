@@ -28,7 +28,11 @@ void BoolWidget::SetValueBool(int state)
 		}
 
 		*value = state;
-		SetValue<bool>(prop);
+
+		if (prop.change)
+		{
+			prop.change(value);
+		}
 	}
 }
 

@@ -38,6 +38,11 @@ void Float2Widget::SetValue()
 	}
 
 	*value = newFloat2;
+
+	if (prop.change)
+	{
+		prop.change(value);
+	}
 }
 
 void Float2Widget::ResetValue()

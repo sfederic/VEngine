@@ -46,6 +46,11 @@ void Float4Widget::SetValue()
 	}
 
 	*value = newFloat4;
+
+	if (prop.change)
+	{
+		prop.change(value);
+	}
 }
 
 void Float4Widget::ResetValue()
