@@ -338,6 +338,7 @@
     <ClCompile Include="Code\Actors\Game\WaterVolumeValve.cpp" />
     <ClCompile Include="Code\Actors\Game\WorldResetter.cpp" />
     <ClCompile Include="Code\Actors\Game\CrystalLight.cpp" />
+    <ClCompile Include="Code\Actors\Game\LookingGlass.cpp" />
     <ClInclude Include="Code\Actors\Game\ChurchLockPropActivator.h" />
     <ClInclude Include="Code\Actors\Game\GlobalPropSetter.h" />
     <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.h" />
@@ -705,6 +706,7 @@
     <ClInclude Include="Code\Actors\Game\WaterVolumeValve.h" />
     <ClInclude Include="Code\Actors\Game\WorldResetter.h" />
     <ClInclude Include="Code\Actors\Game\CrystalLight.h" />
+    <ClInclude Include="Code\Actors\Game\LookingGlass.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
