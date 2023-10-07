@@ -11,4 +11,3 @@ public:
 	void Create() override;
 	Properties GetProps() override;
 };
-
