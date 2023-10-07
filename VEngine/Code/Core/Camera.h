@@ -15,5 +15,4 @@ namespace Camera
 	void SetActiveCameraTargetAndZoomIn(Actor* newTarget);
 	void SetActiveCameraTargetAndZoomOut(Actor* newTarget);
 	void SetCameraBackToPlayer();
-	void ShakeActiveCamera(float shakeLevel);
 }

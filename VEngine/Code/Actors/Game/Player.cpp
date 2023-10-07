@@ -58,8 +58,8 @@ void Player::Start()
 
 	SetGridIndices();
 
-	camera->targetActor = this;
-	nextCameraFOV = camera->FOV;
+	camera->SetTargetActor(this);
+	nextCameraFOV = camera->GetFOV();
 	camera->SetAsActiveCamera();
 	nextCameraPosition = camera->GetLocalPositionV();
 
@@ -295,9 +295,9 @@ void Player::PrimaryAction()
 
 void Player::LerpPlayerCameraFOV(float deltaTime)
 {
-	if (camera->FOV != nextCameraFOV)
+	if (camera->GetFOV() != nextCameraFOV)
 	{
-		camera->FOV = std::lerp(camera->FOV, nextCameraFOV, 4.f * deltaTime);
+		camera->SetFOV(std::lerp(camera->GetFOV(), nextCameraFOV, 4.f * deltaTime));
 	}
 }
 
@@ -508,7 +508,7 @@ bool Player::DestructibleCheck(Actor* hitActor)
 		{
 			if (CheckAttackPositionAgainstUnitDirection(unit))
 			{
-				Camera::ShakeActiveCamera(1.f);
+				Camera::GetActiveCamera().SetShakeLevel(1.f);
 				GameUtils::SpawnSpriteSheet("Sprites/v_slice.png", unit->GetPositionV(), false, 4, 4);
 				GameUtils::PlayAudioOneShot("sword_hit.wav");
 
@@ -525,7 +525,7 @@ bool Player::DestructibleCheck(Actor* hitActor)
 		auto gridActor = dynamic_cast<GridActor*>(hitActor);
 		if (gridActor)
 		{
-			Camera::ShakeActiveCamera(1.f);
+			Camera::GetActiveCamera().SetShakeLevel(1.f);
 			GameUtils::SpawnSpriteSheet("Sprites/v_slice.png", gridActor->GetPositionV(), false, 4, 4);
 			GameUtils::PlayAudioOneShot("sword_hit.wav");
 
@@ -625,7 +625,7 @@ void Player::LinkToGridActor()
 			Raycast(sameActorHit, GetPositionV(), -VMath::GlobalUpVector(), 5.f);
 			if (sameActorHit.hitActor == hit.hitActor)
 			{
-				Camera::ShakeActiveCamera(0.3f);
+				Camera::GetActiveCamera().SetShakeLevel(0.3f);
 				Log("Cannot link to [%s], player is standing on it.", hit.hitActor->GetName().c_str());
 				return;
 			}
@@ -661,7 +661,7 @@ void Player::MoveLinkedGridActor()
 			if (!canBeMoved)
 			{
 				//@Todo: replace this with a shake of the spatial component or some other visual effect
-				Camera::ShakeActiveCamera(0.25f);
+				Camera::GetActiveCamera().SetShakeLevel(0.25f);
 				return false;
 			}
 			return true;
@@ -681,7 +681,7 @@ void Player::MoveLinkedGridActor()
 			}
 			else
 			{
-				Camera::ShakeActiveCamera(0.25f);
+				Camera::GetActiveCamera().SetShakeLevel(0.25f);
 			}
 		}
 	}
@@ -699,7 +699,7 @@ void Player::MoveLinkedGridActor()
 			}
 			else
 			{
-				Camera::ShakeActiveCamera(0.25f);
+				Camera::GetActiveCamera().SetShakeLevel(0.25f);
 			}
 		}
 	}
@@ -717,7 +717,7 @@ void Player::MoveLinkedGridActor()
 			}
 			else
 			{
-				Camera::ShakeActiveCamera(0.25f);
+				Camera::GetActiveCamera().SetShakeLevel(0.25f);
 			}
 		}
 	}
@@ -735,7 +735,7 @@ void Player::MoveLinkedGridActor()
 			}
 			else
 			{
-				Camera::ShakeActiveCamera(0.25f);
+				Camera::GetActiveCamera().SetShakeLevel(0.25f);
 			}
 		}
 	}
@@ -752,7 +752,7 @@ void Player::RotateLinkedGridActor()
 		{
 			if (!canBeRotated)
 			{
-				Camera::ShakeActiveCamera(0.25f);
+				Camera::GetActiveCamera().SetShakeLevel(0.25f);
 				return false;
 			}
 			return true;
@@ -774,7 +774,7 @@ void Player::RotateLinkedGridActor()
 			else
 			{
 				linkedGridActor->SetNextRot(linkedGridActor->GetRotationV());
-				Camera::ShakeActiveCamera(0.25f);
+				Camera::GetActiveCamera().SetShakeLevel(0.25f);
 			}
 		}
 	}
@@ -792,7 +792,7 @@ void Player::RotateLinkedGridActor()
 			else
 			{
 				linkedGridActor->SetNextRot(linkedGridActor->GetRotationV());
-				Camera::ShakeActiveCamera(0.25f);
+				Camera::GetActiveCamera().SetShakeLevel(0.25f);
 			}
 		}
 	}
@@ -812,7 +812,7 @@ void Player::RotateLinkedGridActor()
 				else
 				{
 					linkedGridActor->SetNextRot(linkedGridActor->GetRotationV());
-					Camera::ShakeActiveCamera(0.25f);
+					Camera::GetActiveCamera().SetShakeLevel(0.25f);
 				}
 			}
 		}
@@ -833,7 +833,7 @@ void Player::RotateLinkedGridActor()
 				else
 				{
 					linkedGridActor->SetNextRot(linkedGridActor->GetRotationV());
-					Camera::ShakeActiveCamera(0.25f);
+					Camera::GetActiveCamera().SetShakeLevel(0.25f);
 				}
 			}
 		}
@@ -853,7 +853,7 @@ void Player::RotateLinkedGridActor()
 				else
 				{
 					linkedGridActor->SetNextRot(linkedGridActor->GetRotationV());
-					Camera::ShakeActiveCamera(0.25f);
+					Camera::GetActiveCamera().SetShakeLevel(0.25f);
 				}
 			}
 		}
@@ -873,7 +873,7 @@ void Player::RotateLinkedGridActor()
 				else
 				{
 					linkedGridActor->SetNextRot(linkedGridActor->GetRotationV());
-					Camera::ShakeActiveCamera(0.25f);
+					Camera::GetActiveCamera().SetShakeLevel(0.25f);
 				}
 			}
 		}
@@ -1038,11 +1038,11 @@ void Player::SetLinkedGridActor(GridActor& gridActor)
 	Actor* otherActorToFocusOn = gridActor.GetPlayerFocusActor();
 	if (otherActorToFocusOn != nullptr)
 	{
-		camera->targetActor = otherActorToFocusOn;
+		camera->SetTargetActor(otherActorToFocusOn);
 	}
 	else
 	{
-		camera->targetActor = &gridActor;
+		camera->SetTargetActor(&gridActor);
 	}
 
 	isInputLinkedToGridActor = true;
@@ -1062,7 +1062,7 @@ void Player::ResetLinkedGridActor()
 	linkedGridActor->OnLinkDeactivate();
 	linkedGridActor = nullptr;
 
-	camera->targetActor = this;
+	camera->SetTargetActor(this);
 
 	isInputLinkedToGridActor = false;
 }
@@ -1127,10 +1127,10 @@ void Player::ResetHighlightedActor()
 void Player::ResetCameraPosAndTargetToPlayer()
 {
 	nextCameraPosition = cameraStartingLocalPosition;
-	camera->targetActor = this;
+	camera->SetTargetActor(this);
 }
 
 void Player::SetCameraTargetActor(Actor* target)
 {
-	camera->targetActor = target;
+	camera->SetTargetActor(target);
 }

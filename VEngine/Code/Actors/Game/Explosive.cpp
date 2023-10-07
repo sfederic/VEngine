@@ -25,7 +25,7 @@ void Explosive::Burn()
 	mesh->SetAmbientColour(ambientColour);
 
 	GameUtils::SpawnSpriteSheet("Sprites/explosion.png", GetPositionV(), false, 4, 4);
-	Camera::ShakeActiveCamera(0.3f);
+	Camera::GetActiveCamera().SetShakeLevel(0.3f);
 
 	HitNearbyExplodables();
 

@@ -20,25 +20,25 @@ void Camera::SetEditorCameraAsActive()
 	activeCamera = &editorCamera;
 }
 
+void Camera::SetActiveCameraTarget(Actor* newTarget)
+{
+	activeCamera->SetTargetActor(newTarget);
+}
+
 EditorCamera& Camera::GetEditorCamera()
 {
 	return editorCamera;
 }
 
-void Camera::SetActiveCameraTarget(Actor* newTarget)
-{
-	Camera::GetActiveCamera().targetActor = newTarget;
-}
-
 void Camera::SetActiveCameraTargetAndZoomIn(Actor* newTarget)
 {
-	GetActiveCamera().targetActor = newTarget;
+	GetActiveCamera().SetTargetActor(newTarget);
 	Player::system.GetFirstActor()->SetZoomedInCameraFOV();
 }
 
 void Camera::SetActiveCameraTargetAndZoomOut(Actor* newTarget)
 {
-	GetActiveCamera().targetActor = newTarget;
+	GetActiveCamera().SetTargetActor(newTarget);
 	Player::system.GetFirstActor()->SetDefaultCameraFOV();
 }
 
@@ -46,10 +46,5 @@ void Camera::SetCameraBackToPlayer()
 {
 	auto player = Player::system.GetFirstActor();
 	player->SetDefaultCameraFOV();
-	GetActiveCamera().targetActor = player;
-}
-
-void Camera::ShakeActiveCamera(float shakeLevel)
-{
-	activeCamera->shakeLevel = shakeLevel;
+	GetActiveCamera().SetTargetActor(player);
 }

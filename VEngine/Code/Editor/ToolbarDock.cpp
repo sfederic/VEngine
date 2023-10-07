@@ -78,10 +78,10 @@ ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 
 	cameraMoveSpeedSpinBox = new SpinBox(this);
 	cameraMoveSpeedSpinBox->setFixedWidth(75);
-	cameraMoveSpeedSpinBox->setValue(Camera::GetActiveCamera().cameraMoveSpeed);
+	cameraMoveSpeedSpinBox->setValue(Camera::GetActiveCamera().GetCameraMoveSpeed());
 	hLayout->addWidget(cameraMoveSpeedSpinBox);
 	connect(cameraMoveSpeedSpinBox, &SpinBox::editingFinished,
-		this, [&]() { Camera::GetEditorCamera().cameraMoveSpeed = cameraMoveSpeedSpinBox->value(); });
+		this, [&]() { Camera::GetEditorCamera().SetCameraMoveSpeed(cameraMoveSpeedSpinBox->value()); });
 
 	//Picker mode
 	hLayout->addWidget(new QLabel("Pick Mode", this));
