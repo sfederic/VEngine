@@ -67,9 +67,10 @@ public:
 
 	void SetShaderItem(ShaderItem* shaderItem);
 
-	void SetAmbientColour(const XMFLOAT4 ambientColour);
-	XMFLOAT4 GetAmbientColour();
+	void SetAmbientColour(XMFLOAT3 ambientColour);
+	XMFLOAT3 GetAmbientColour();
 	void SetAlpha(float alpha);
+	float GetAlpha();
 
 	void SetUseTexture(bool useTexture);
 	bool IsUsingTexture();

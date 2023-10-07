@@ -194,7 +194,7 @@ void Player::HighlightLinkableGridActor()
 			highlightedGridActor = gridActor;
 			for (auto mesh : highlightedGridActor->GetComponentsOfType<MeshComponent>())
 			{
-				mesh->SetAmbientColour(XMFLOAT4(0.9f, 0.3f, 0.1f, 1.f));
+				mesh->SetAmbientColour(XMFLOAT3(0.9f, 0.3f, 0.1f));
 			}
 		}
 		else
@@ -359,9 +359,7 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 		auto mesh = actor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
 		if (mesh && mesh->transparentOcclude)
 		{
-			auto ambientColour = mesh->GetAmbientColour();
-			ambientColour.w = alpha;
-			mesh->SetAmbientColour(ambientColour);
+			mesh->SetAlpha(alpha);
 		}
 		};
 
@@ -1120,7 +1118,7 @@ void Player::ResetHighlightedActor()
 
 	for (auto mesh : highlightedGridActor->GetComponentsOfType<MeshComponent>())
 	{
-		mesh->SetAmbientColour(XMFLOAT4(1.f, 1.f, 1.f, 1.f));
+		mesh->SetAmbientColour(XMFLOAT3(1.f, 1.f, 1.f));
 	}
 
 	highlightedGridActor = nullptr;

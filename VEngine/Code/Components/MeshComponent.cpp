@@ -212,19 +212,30 @@ void MeshComponent::SetShaderItem(ShaderItem* shaderItem)
 	material->shaderItemValue.SetValue(shaderItem->GetName());
 }
 
-void MeshComponent::SetAmbientColour(const XMFLOAT4 ambientColour)
+void MeshComponent::SetAmbientColour(XMFLOAT3 ambientColour)
 {
-	material->materialShaderData.ambient = ambientColour;
+	material->materialShaderData.ambient.x = ambientColour.x;
+	material->materialShaderData.ambient.y = ambientColour.y;
+	material->materialShaderData.ambient.z = ambientColour.z;
 }
 
-XMFLOAT4 MeshComponent::GetAmbientColour()
+XMFLOAT3 MeshComponent::GetAmbientColour()
 {
-	return material->materialShaderData.ambient;
+	XMFLOAT3 colour = {};
+	colour.x = material->materialShaderData.ambient.x;
+	colour.y = material->materialShaderData.ambient.y;
+	colour.z = material->materialShaderData.ambient.z;
+	return colour;
 }
 
 void MeshComponent::SetAlpha(float alpha)
 {
 	material->materialShaderData.ambient.w = alpha;
+}
+
+float MeshComponent::GetAlpha()
+{
+	return material->materialShaderData.ambient.w;
 }
 
 void MeshComponent::SetUseTexture(bool useTexture)

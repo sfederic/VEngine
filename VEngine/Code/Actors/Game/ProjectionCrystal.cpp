@@ -21,7 +21,8 @@ void ProjectionCrystal::Create()
 	mesh->SetMeshFilename("crystal.vmesh");
 
 	projectionMesh->canBeLinkedTo = false;
-	projectionMesh->SetAmbientColour(XMFLOAT4(0.f, 0.f, 1.f, 0.4f));
+	projectionMesh->SetAmbientColour(XMFLOAT3(0.f, 0.f, 1.f));
+	projectionMesh->SetAlpha(0.4f);
 	projectionMesh->SetBlendState(BlendStates::Default);
 	projectionMesh->SetMeshFilename("cube.vmesh");
 	projectionMesh->SetLocalPosition(0.f, 0.f, 2.f);

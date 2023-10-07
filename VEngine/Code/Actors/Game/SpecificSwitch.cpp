@@ -19,7 +19,7 @@ void SpecificSwitch::Create()
 	__super::Create();
 
 	mesh->SetMeshFilename("node.vmesh");
-	mesh->SetAmbientColour(XMFLOAT4(1.f, 0.f, 0.f, 1.f));
+	mesh->SetAmbientColour(XMFLOAT3(1.f, 0.f, 0.f));
 
 	trigger->SetLocalPosition(0.f, 0.5f, 0.f);
 }
@@ -58,10 +58,10 @@ void SpecificSwitch::CheckForSpecificGridActorOverlapping()
 
 	if (isActivated)
 	{
-		mesh->SetAmbientColour(XMFLOAT4(0.f, 1.f, 0.f, 1.f));
+		mesh->SetAmbientColour(XMFLOAT3(0.f, 1.f, 0.f));
 	}
 	else
 	{
-		mesh->SetAmbientColour(XMFLOAT4(1.f, 0.f, 0.f, 1.f));
+		mesh->SetAmbientColour(XMFLOAT3(1.f, 0.f, 0.f));
 	}
 }
