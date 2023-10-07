@@ -84,7 +84,7 @@ XMVECTOR CameraComponent::Shake()
 
 void CameraComponent::SetAsActiveCamera()
 {
-	activeCamera = this;
+	Camera::SetActiveCamera(this);
 }
 
 Properties CameraComponent::GetProps()

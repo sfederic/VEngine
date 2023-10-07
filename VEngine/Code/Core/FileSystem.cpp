@@ -356,7 +356,7 @@ void FileSystem::ResetWorldState()
 		auto player = Player::system.GetFirstActor();
 		if (player)
 		{
-			activeCamera = player->camera;
+			Camera::SetActiveCamera(player->camera);
 		}
 	}
 

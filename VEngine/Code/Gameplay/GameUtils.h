@@ -15,15 +15,6 @@ class ParticleEmitter;
 //Utility functions for in-game stuff
 namespace GameUtils
 {
-	void SetActiveCameraTarget(Actor* newTarget);
-	void SetActiveCameraTargetAndZoomIn(Actor* newTarget);
-	void SetActiveCameraTargetAndZoomOut(Actor* newTarget);
-	void SetCameraBackToPlayer();
-
-	void SetActiveCameraTarget(Actor* newTarget);
-
-	void CameraShake(float shake);
-
 	SpriteSheet* SpawnSpriteSheet(std::string textureFilename, XMVECTOR spawnPosition, bool loop, int numRows, int numColumns);
 	Polyboard* SpawnPolyboard(const std::string_view textureFilename,
 		const XMVECTOR startPosition, const XMVECTOR endPosition, float destroyTimer = 0.f);
@@ -51,6 +42,4 @@ namespace GameUtils
 	void LoadWorldAndMoveToEntranceTrigger();
 
 	void DisablePlayer();
-
-	void SetActiveCamera(CameraComponent* camera);
 };

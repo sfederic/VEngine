@@ -52,7 +52,7 @@ std::vector<MeshComponent*> MeshComponent::SortMeshComponentsByDistance()
 	};
 	std::vector<MeshPack> meshPacks;
 
-	const XMVECTOR cameraPos = activeCamera->GetWorldPositionV();
+	const XMVECTOR cameraPos = Camera::GetActiveCamera().GetWorldPositionV();
 
 	for (auto& mesh : system.GetComponents())
 	{

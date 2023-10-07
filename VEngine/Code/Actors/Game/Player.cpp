@@ -310,7 +310,7 @@ bool Player::DialogueCheck(Actor* hitActor)
 			//End dialogue
 			inConversation = false;
 			SetDefaultCameraFOV();
-			GameUtils::SetActiveCameraTarget(this);
+			Camera::SetActiveCameraTarget(this);
 			currentlyActiveDialogueComponent = nullptr;
 			return true;
 		}
@@ -508,7 +508,7 @@ bool Player::DestructibleCheck(Actor* hitActor)
 		{
 			if (CheckAttackPositionAgainstUnitDirection(unit))
 			{
-				GameUtils::CameraShake(1.f);
+				Camera::ShakeActiveCamera(1.f);
 				GameUtils::SpawnSpriteSheet("Sprites/v_slice.png", unit->GetPositionV(), false, 4, 4);
 				GameUtils::PlayAudioOneShot("sword_hit.wav");
 
@@ -525,7 +525,7 @@ bool Player::DestructibleCheck(Actor* hitActor)
 		auto gridActor = dynamic_cast<GridActor*>(hitActor);
 		if (gridActor)
 		{
-			GameUtils::CameraShake(1.f);
+			Camera::ShakeActiveCamera(1.f);
 			GameUtils::SpawnSpriteSheet("Sprites/v_slice.png", gridActor->GetPositionV(), false, 4, 4);
 			GameUtils::PlayAudioOneShot("sword_hit.wav");
 
@@ -625,7 +625,7 @@ void Player::LinkToGridActor()
 			Raycast(sameActorHit, GetPositionV(), -VMath::GlobalUpVector(), 5.f);
 			if (sameActorHit.hitActor == hit.hitActor)
 			{
-				GameUtils::CameraShake(0.3f);
+				Camera::ShakeActiveCamera(0.3f);
 				Log("Cannot link to [%s], player is standing on it.", hit.hitActor->GetName().c_str());
 				return;
 			}
@@ -661,7 +661,7 @@ void Player::MoveLinkedGridActor()
 			if (!canBeMoved)
 			{
 				//@Todo: replace this with a shake of the spatial component or some other visual effect
-				GameUtils::CameraShake(0.25f);
+				Camera::ShakeActiveCamera(0.25f);
 				return false;
 			}
 			return true;
@@ -681,7 +681,7 @@ void Player::MoveLinkedGridActor()
 			}
 			else
 			{
-				GameUtils::CameraShake(0.25f);
+				Camera::ShakeActiveCamera(0.25f);
 			}
 		}
 	}
@@ -699,7 +699,7 @@ void Player::MoveLinkedGridActor()
 			}
 			else
 			{
-				GameUtils::CameraShake(0.25f);
+				Camera::ShakeActiveCamera(0.25f);
 			}
 		}
 	}
@@ -717,7 +717,7 @@ void Player::MoveLinkedGridActor()
 			}
 			else
 			{
-				GameUtils::CameraShake(0.25f);
+				Camera::ShakeActiveCamera(0.25f);
 			}
 		}
 	}
@@ -735,7 +735,7 @@ void Player::MoveLinkedGridActor()
 			}
 			else
 			{
-				GameUtils::CameraShake(0.25f);
+				Camera::ShakeActiveCamera(0.25f);
 			}
 		}
 	}
@@ -752,7 +752,7 @@ void Player::RotateLinkedGridActor()
 		{
 			if (!canBeRotated)
 			{
-				GameUtils::CameraShake(0.25f);
+				Camera::ShakeActiveCamera(0.25f);
 				return false;
 			}
 			return true;
@@ -774,7 +774,7 @@ void Player::RotateLinkedGridActor()
 			else
 			{
 				linkedGridActor->SetNextRot(linkedGridActor->GetRotationV());
-				GameUtils::CameraShake(0.25f);
+				Camera::ShakeActiveCamera(0.25f);
 			}
 		}
 	}
@@ -792,7 +792,7 @@ void Player::RotateLinkedGridActor()
 			else
 			{
 				linkedGridActor->SetNextRot(linkedGridActor->GetRotationV());
-				GameUtils::CameraShake(0.25f);
+				Camera::ShakeActiveCamera(0.25f);
 			}
 		}
 	}
@@ -812,7 +812,7 @@ void Player::RotateLinkedGridActor()
 				else
 				{
 					linkedGridActor->SetNextRot(linkedGridActor->GetRotationV());
-					GameUtils::CameraShake(0.25f);
+					Camera::ShakeActiveCamera(0.25f);
 				}
 			}
 		}
@@ -833,7 +833,7 @@ void Player::RotateLinkedGridActor()
 				else
 				{
 					linkedGridActor->SetNextRot(linkedGridActor->GetRotationV());
-					GameUtils::CameraShake(0.25f);
+					Camera::ShakeActiveCamera(0.25f);
 				}
 			}
 		}
@@ -853,7 +853,7 @@ void Player::RotateLinkedGridActor()
 				else
 				{
 					linkedGridActor->SetNextRot(linkedGridActor->GetRotationV());
-					GameUtils::CameraShake(0.25f);
+					Camera::ShakeActiveCamera(0.25f);
 				}
 			}
 		}
@@ -873,7 +873,7 @@ void Player::RotateLinkedGridActor()
 				else
 				{
 					linkedGridActor->SetNextRot(linkedGridActor->GetRotationV());
-					GameUtils::CameraShake(0.25f);
+					Camera::ShakeActiveCamera(0.25f);
 				}
 			}
 		}

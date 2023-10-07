@@ -2,6 +2,7 @@
 #include "InteractTrigger.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Gameplay/GameUtils.h"
+#include "Core/Camera.h"
 #include "UI/Game/InteractWidget.h"
 #include "UI/UISystem.h"
 #include "Core/Input.h"
@@ -54,7 +55,7 @@ void InteractTrigger::Tick(float deltaTime)
 				Actor* targetActor = World::GetActorByNameAllowNull(targetActorName);
 				if (targetActor)
 				{
-					GameUtils::SetActiveCameraTargetAndZoomIn(targetActor);
+					Camera::SetActiveCameraTargetAndZoomIn(targetActor);
 				}
 			}
 			else
@@ -66,7 +67,7 @@ void InteractTrigger::Tick(float deltaTime)
 				interactWidget->interactText = overlapText;
 				interactWidget->RemoveFromViewport();
 
-				GameUtils::SetActiveCameraTargetAndZoomOut(Player::system.GetFirstActor());
+				Camera::SetActiveCameraTargetAndZoomOut(Player::system.GetFirstActor());
 			}
 		}
 	}

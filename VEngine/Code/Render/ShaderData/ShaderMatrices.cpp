@@ -9,7 +9,7 @@ void ShaderMatrices::Create()
 	model = XMMatrixIdentity();
 	view = XMMatrixIdentity();
 	texMatrix = XMMatrixIdentity();
-	proj = activeCamera->GetProjectionMatrix();
+	proj = Camera::GetActiveCamera().GetProjectionMatrix();
 
 	MakeModelViewProjectionMatrix();
 }

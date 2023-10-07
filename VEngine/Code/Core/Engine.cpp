@@ -42,7 +42,7 @@ void Engine::Init(int argc, char* argv[])
 
 	WorldFunctions::SetupWorldStartFunctions();
 
-	activeCamera = &editorCamera;
+	Camera::SetEditorCameraAsActive();
 
 	auto coreInit = std::async(std::launch::async, []() { Core::Init(); });
 	auto consoleInit = std::async(std::launch::async, []() { Console::Init(); });
@@ -88,7 +88,7 @@ void Engine::TickSystems(float deltaTime)
 
 	if (!Core::gameplayOn) //Tick editor camera
 	{
-		activeCamera->Tick(deltaTime);
+		Camera::GetActiveCamera().Tick(deltaTime);
 	}
 
 	Timer::Tick(deltaTime);

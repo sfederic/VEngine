@@ -855,8 +855,9 @@ void Renderer::Render()
 {
 	Profile::Start();
 
-	shaderMatrices.view = activeCamera->GetViewMatrix();
-	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
+	auto& activeCamera = Camera::GetActiveCamera();
+	shaderMatrices.view = activeCamera.GetViewMatrix();
+	shaderMatrices.proj = activeCamera.GetProjectionMatrix();
 
 	//Set time constant buffer
 	ShaderTimeData timeData = {};
@@ -1561,7 +1562,8 @@ void RenderSpriteSheets()
 		SpriteSystem::BuildSpriteQuadForSpriteSheetRendering(spriteSheet->GetSprite());
 		SpriteSystem::UpdateAndSetSpriteBuffers(context);
 
-		const XMVECTOR lookAtRotation = VMath::LookAtRotation(activeCamera->GetWorldPositionV(), spriteSheet->GetWorldPositionV());
+		const XMVECTOR lookAtRotation = VMath::LookAtRotation(Camera::GetActiveCamera().GetWorldPositionV(),
+			spriteSheet->GetWorldPositionV());
 		spriteSheet->SetWorldRotation(lookAtRotation);
 
 		shaderMatrices.model = spriteSheet->GetWorldMatrix();
@@ -1656,8 +1658,9 @@ void Renderer::RenderParticleEmitters()
 	//Only need to build sprite quad once for in-world rendering
 	SpriteSystem::BuildSpriteQuadForParticleRendering();
 
-	shaderMatrices.view = activeCamera->GetViewMatrix();
-	shaderMatrices.proj = activeCamera->GetProjectionMatrix();
+	auto& activeCamera = Camera::GetActiveCamera();
+	shaderMatrices.view = activeCamera.GetViewMatrix();
+	shaderMatrices.proj = activeCamera.GetProjectionMatrix();
 	shaderMatrices.texMatrix = XMMatrixIdentity();
 
 	for (auto& emitter : ParticleEmitter::system.GetComponents())
@@ -1696,7 +1699,7 @@ void Renderer::RenderParticleEmitters()
 		{
 			//Add rotation to particle (keep in mind that rotate speed needs to match angle's +/- value)
 			auto particleRotation =
-				VMath::LookAtRotation(activeCamera->GetWorldPositionV(), XMLoadFloat3(&particle.transform.position));
+				VMath::LookAtRotation(Camera::GetActiveCamera().GetWorldPositionV(), XMLoadFloat3(&particle.transform.position));
 			XMStoreFloat4(&particle.transform.rotation, particleRotation);
 
 			shaderMatrices.model = particle.transform.GetAffine();
@@ -1772,7 +1775,7 @@ void SetLightsConstantBufferData()
 	shaderLights.numLights = shaderLightsIndex;
 	assert(shaderLights.numLights < ShaderLights::MAX_LIGHTS);
 
-	XMStoreFloat4(&shaderLights.eyePosition, activeCamera->GetWorldPositionV());
+	XMStoreFloat4(&shaderLights.eyePosition, Camera::GetActiveCamera().GetWorldPositionV());
 
 	cbLights->Map(&shaderLights);
 	cbLights->SetVSAndPS();

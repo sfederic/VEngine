@@ -56,8 +56,9 @@ XMVECTOR Actor::GetPositionV()
 //Because the W component is needed as-is, there's no Float3 function for this yet.
 XMVECTOR Actor::GetHomogeneousPositionV()
 {
-	XMMATRIX view = activeCamera->GetViewMatrix();
-	XMMATRIX proj = activeCamera->GetProjectionMatrix();
+	auto& activeCamera = Camera::GetActiveCamera();
+	XMMATRIX view = activeCamera.GetViewMatrix();
+	XMMATRIX proj = activeCamera.GetProjectionMatrix();
 	XMMATRIX mvp = rootComponent->GetWorldMatrix() * view * proj;
 
 	return mvp.r[3];
@@ -182,7 +183,7 @@ Properties Actor::GetProps()
 std::vector<Component*> Actor::GetAllComponents()
 {
 	std::vector<Component*> result;
-	for (auto& componentPair : componentMap) 
+	for (auto& componentPair : componentMap)
 	{
 		result.emplace_back(componentPair.second);
 	}

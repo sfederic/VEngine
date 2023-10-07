@@ -51,8 +51,10 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 	//Calculate raycast from camera coords into world
 	if (fromScreen)
 	{
-		XMVECTOR invViewDet = XMMatrixDeterminant(activeCamera->GetViewMatrix());
-		XMMATRIX invView = XMMatrixInverse(&invViewDet, activeCamera->GetViewMatrix());
+		auto& activeCamera = Camera::GetActiveCamera();
+
+		XMVECTOR invViewDet = XMMatrixDeterminant(activeCamera.GetViewMatrix());
+		XMMATRIX invView = XMMatrixInverse(&invViewDet, activeCamera.GetViewMatrix());
 		XMVECTOR invDet = XMMatrixDeterminant(XMMatrixIdentity());
 		XMMATRIX invModel = XMMatrixInverse(&invDet, XMMatrixIdentity());
 		XMMATRIX toLocal = XMMatrixMultiply(invView, invModel);
@@ -346,9 +348,7 @@ bool RaycastFromScreen(HitResult& hitResult)
 	const int sx = editor->viewportMouseX;
 	const int sy = editor->viewportMouseY;
 
-	CameraComponent* camera = activeCamera;
-
-	XMMATRIX proj = camera->GetProjectionMatrix();
+	const XMMATRIX proj = Camera::GetActiveCamera().GetProjectionMatrix();
 
 	const float vx = (2.f * sx / Renderer::GetViewportWidth() - 1.0f) / proj.r[0].m128_f32[0];
 	const float vy = (-2.f * sy / Renderer::GetViewportHeight() + 1.0f) / proj.r[1].m128_f32[1];

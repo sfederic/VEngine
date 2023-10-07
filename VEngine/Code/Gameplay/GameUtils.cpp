@@ -18,35 +18,6 @@ namespace GameUtils
 	std::string levelToMoveTo;
 	std::string entranceTriggerTag;
 
-	void SetActiveCameraTarget(Actor* newTarget)
-	{
-		activeCamera->targetActor = newTarget;
-	}
-
-	void SetActiveCameraTargetAndZoomIn(Actor* newTarget)
-	{
-		activeCamera->targetActor = newTarget;
-		Player::system.GetFirstActor()->SetZoomedInCameraFOV();
-	}
-
-	void SetActiveCameraTargetAndZoomOut(Actor* newTarget)
-	{
-		activeCamera->targetActor = newTarget;
-		Player::system.GetFirstActor()->SetDefaultCameraFOV();
-	}
-
-	void SetCameraBackToPlayer()
-	{
-		auto player = Player::system.GetFirstActor();
-		player->SetDefaultCameraFOV();
-		activeCamera->targetActor = player;
-	}
-
-	void CameraShake(float shake)
-	{
-		activeCamera->shakeLevel = shake;
-	}
-
 	SpriteSheet* SpawnSpriteSheet(std::string textureFilename, XMVECTOR spawnPosition, bool loop, int numRows, int numColumns)
 	{
 		auto spriteSheet = SpriteSheet::system.Add("SpriteSheet", nullptr, SpriteSheet(), false);
@@ -143,10 +114,5 @@ namespace GameUtils
 	{
 		auto player = Player::system.GetFirstActor();
 		player->SetActive(false);
-	}
-
-	void SetActiveCamera(CameraComponent* camera)
-	{
-		activeCamera = camera;
 	}
 }

@@ -4,6 +4,7 @@
 #include "Gameplay/GameUtils.h"
 #include "Grid.h"
 #include "Core/VMath.h"
+#include "Core/Camera.h"
 #include "Player.h"
 #include "Core/Timer.h"
 #include "UI/UISystem.h"
@@ -64,7 +65,7 @@ void Unit::Tick(float deltaTime)
 			if (Attack())
 			{
 				player->SetZoomedInCameraFOV();
-				GameUtils::SetActiveCameraTarget(this);
+				Camera::SetActiveCameraTarget(this);
 				Timer::SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
 			}
 		}
@@ -174,7 +175,7 @@ void Unit::MoveToNode(GridNode* destinationNode)
 			}
 		}
 	}
-	
+
 
 	//This needs to be here if you need Units moving exactly to a point, but most times
 	// the unit is going to be moving to a surrounding node if there is a target, eg. the unit
@@ -275,7 +276,7 @@ bool Unit::Attack()
 void Unit::WindUpAttack()
 {
 	auto target = Player::system.GetOnlyActor();
-	GameUtils::SetActiveCameraTarget(target);
+	Camera::SetActiveCameraTarget(target);
 	GameUtils::SpawnSpriteSheet("Sprites/blade_slash.png", target->GetPositionV(), false, 3, 5);
 	GameUtils::PlayAudioOneShot("armor_light.wav");
 

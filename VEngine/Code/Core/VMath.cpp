@@ -203,7 +203,7 @@ namespace VMath
 
 		//Make sure to use the world matrix here because some camera (Player camera) will 
 		//have the camera at an offset from its parent.
-		const XMMATRIX cameraWorldMatrix = activeCamera->GetWorldMatrix();
+		const XMMATRIX cameraWorldMatrix = Camera::GetActiveCamera().GetWorldMatrix();
 
 		const float angle = atan2(cameraWorldMatrix.r[3].m128_f32[0] - posX,
 			cameraWorldMatrix.r[3].m128_f32[2] - posZ) * (180.0 / XM_PI);

@@ -78,10 +78,10 @@ ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 
 	cameraMoveSpeedSpinBox = new SpinBox(this);
 	cameraMoveSpeedSpinBox->setFixedWidth(75);
-	cameraMoveSpeedSpinBox->setValue(editorCamera.cameraMoveSpeed);
+	cameraMoveSpeedSpinBox->setValue(Camera::GetActiveCamera().cameraMoveSpeed);
 	hLayout->addWidget(cameraMoveSpeedSpinBox);
 	connect(cameraMoveSpeedSpinBox, &SpinBox::editingFinished,
-		this, [&]() {editorCamera.cameraMoveSpeed = cameraMoveSpeedSpinBox->value(); });
+		this, [&]() { Camera::GetEditorCamera().cameraMoveSpeed = cameraMoveSpeedSpinBox->value(); });
 
 	//Picker mode
 	hLayout->addWidget(new QLabel("Pick Mode", this));
@@ -101,7 +101,7 @@ ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 
 void ToolbarDock::SetTransformDisplay(std::string currentTransformSettingName)
 {
-	
+
 }
 
 void ToolbarDock::SetPlayButtonText()

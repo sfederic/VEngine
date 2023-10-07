@@ -6,6 +6,7 @@
 #include "Grid.h"
 #include "Explodable.h"
 #include "Physics/Raycast.h"
+#include "Core/Camera.h"
 
 Properties Explosive::GetProps()
 {
@@ -24,7 +25,7 @@ void Explosive::Burn()
 	mesh->SetAmbientColour(ambientColour);
 
 	GameUtils::SpawnSpriteSheet("Sprites/explosion.png", GetPositionV(), false, 4, 4);
-	GameUtils::CameraShake(0.3f);
+	Camera::ShakeActiveCamera(0.3f);
 
 	HitNearbyExplodables();
 

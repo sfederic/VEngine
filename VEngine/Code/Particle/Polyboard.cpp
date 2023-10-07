@@ -69,7 +69,7 @@ void Polyboard::CalcVertices()
 	float dist = XMVector3Length(end - start).m128_f32[0];
 	dist = std::ceil(dist);
 
-	const auto camForward = activeCamera->GetForwardVectorV();
+	const auto camForward = Camera::GetActiveCamera().GetForwardVectorV();
 
 	const float incr = dist / 10.f;
 
@@ -110,7 +110,7 @@ void Polyboard::CalcVertices()
 	vertices.emplace_back(vertex2);
 
 	//Because the vertices aren't triangle based, divide by 3
-	for (int i = 0; i < (vertices.size() / 3) + 1; i++) 
+	for (int i = 0; i < (vertices.size() / 3) + 1; i++)
 	{
 		indices.emplace_back(0 + (2 * i));
 		indices.emplace_back(2 + (2 * i));

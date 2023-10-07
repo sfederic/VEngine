@@ -16,7 +16,7 @@ void InvisibleGridActor::Tick(float deltaTime)
 	//@Todo: if this idea makes it through, have to come back here and replace the raycast with 
 	//a stencil buffer trick to properly render the grid actor through the lens of the looking glass.
 	HitResult hit(this);
-	if (Raycast(hit, GetPositionV(), activeCamera->GetWorldPositionV()))
+	if (Raycast(hit, GetPositionV(), Camera::GetActiveCamera().GetWorldPositionV()))
 	{
 		auto lookingGlass = hit.GetHitActorAs<LookingGlass>();
 		if (lookingGlass)

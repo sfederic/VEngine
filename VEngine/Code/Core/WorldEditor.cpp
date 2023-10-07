@@ -328,8 +328,10 @@ void SpawnActorOnClick()
 			}
 			else //Spawn actor a bit in front of the camera based on the click
 			{
-				XMVECTOR spawnPos = XMLoadFloat3(&activeCamera->transform.position);
-				const XMFLOAT3 forward = activeCamera->GetForwardVector();
+				auto& activeCamera = Camera::GetActiveCamera();
+
+				XMVECTOR spawnPos = XMLoadFloat3(&activeCamera.transform.position);
+				const XMFLOAT3 forward = activeCamera.GetForwardVector();
 				const XMVECTOR forwardVec = XMLoadFloat3(&forward);
 				spawnPos += forwardVec * 10.0f;
 

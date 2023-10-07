@@ -161,7 +161,7 @@ void Core::EndGame()
 
 	SkeletalMeshComponent::StopAllAnimations();
 
-	activeCamera = &editorCamera;
+	Camera::SetEditorCameraAsActive();
 
 	//Clear the properties dock or you'll end up with pointer problems
 	WorldEditor::DeselectPickedActor();
@@ -178,7 +178,7 @@ void Core::SetGameplayState()
 	{
 		StartGame();
 	}
-	else if(!gameplayOn)
+	else if (!gameplayOn)
 	{
 		EndGame();
 	}
@@ -202,8 +202,8 @@ void Core::HandleWin32MessagePump(UINT message, WPARAM wparam, LPARAM lparam)
 
 	case WM_MBUTTONUP:
 		Input::SetMiddleMouseUp();
-		break;	
-	
+		break;
+
 	case WM_MBUTTONDOWN:
 		Input::SetMiddleMouseDown();
 		break;
