@@ -14,7 +14,7 @@ void PowerCrystal::Create()
 
 	SetMeshFilename("crystal_light.vmesh");
 
-	effectTrigger->SetExtents(2.f, 2.f, 2.f);
+	effectTrigger->SetExtents(0.5f, 0.5f, 0.5f);
 }
 
 void PowerCrystal::Tick(float deltaTime)
@@ -33,7 +33,8 @@ void PowerCrystal::PowerUpSurroundingGridActors()
 			continue;
 		}
 
-		if (effectTrigger->Contains(actor->GetPositionV()))
+		auto bounds = actor->GetRootComponent().GetBoundsInWorldSpace();
+		if (effectTrigger->Intersects(bounds))
 		{
 			actor->PowerUp();
 		}
