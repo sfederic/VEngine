@@ -1278,15 +1278,16 @@ void RenderBounds()
 				continue;
 			}
 
-			shaderMatrices.model = boxTrigger->GetWorldMatrix();
+			auto bounds = boxTrigger->GetBoundsInWorldSpace();
+			const XMVECTOR center = XMLoadFloat3(&bounds.Center);
+			XMVECTOR scale = XMLoadFloat3(&bounds.Extents);
+			scale *= 2.f; //Double extents for rendering
+			const XMVECTOR orientation = XMLoadFloat4(&bounds.Orientation);
 
-			//Set to * 2.f because of extents
-			const auto bounds = boxTrigger->GetBoundsInWorldSpace();
-			shaderMatrices.model.r[0].m128_f32[0] *= bounds.Extents.x * 2.f;
-			shaderMatrices.model.r[1].m128_f32[1] *= bounds.Extents.y * 2.f;
-			shaderMatrices.model.r[2].m128_f32[2] *= bounds.Extents.z * 2.f;
-
-			shaderMatrices.model.r[3] += boxTrigger->GetBoundsCenter();
+			shaderMatrices.model = XMMatrixAffineTransformation(scale,
+				XMVectorSet(0.f, 0.f, 0.f, 1.f),
+				orientation,
+				center);
 
 			shaderMatrices.MakeModelViewProjectionMatrix();
 			cbMatrices->Map(&shaderMatrices);
