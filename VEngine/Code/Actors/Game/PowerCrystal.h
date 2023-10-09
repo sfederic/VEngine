@@ -2,7 +2,6 @@
 
 #include "GridActor.h"
 
-class PointLightComponent;
 class BoxTriggerComponent;
 
 //Crystal that powers up surrounding apparatus in area of effect.
@@ -18,6 +17,5 @@ public:
 private:
 	void PowerUpSurroundingGridActors();
 
-	PointLightComponent* pointLight = nullptr;
 	BoxTriggerComponent* effectTrigger = nullptr;
 };

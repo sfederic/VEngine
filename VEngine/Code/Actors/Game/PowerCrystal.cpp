@@ -1,13 +1,9 @@
 #include "vpch.h"
 #include "PowerCrystal.h"
 #include "Components/BoxTriggerComponent.h"
-#include "Components/Lights/PointLightComponent.h"
 
 PowerCrystal::PowerCrystal()
 {
-	pointLight = CreateComponent<PointLightComponent>("PointLight");
-	rootComponent->AddChild(pointLight);
-
 	effectTrigger = CreateComponent<BoxTriggerComponent>("EffectTrigger");
 	rootComponent->AddChild(effectTrigger);
 }
