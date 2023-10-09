@@ -58,9 +58,9 @@ Player
  Enabled
 1
  Position
-0 0 0
+0 0 2
  Rotation
-0 0 0 1
+0 0.707107 0 0.707107
  Scale
 1 1 1
  Visible
@@ -75,9 +75,9 @@ PowerCrystal
  Enabled
 1
  Position
-3 0 1
+3 -0 2
  Rotation
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -121,7 +121,7 @@ Rotate Speed
 Rotate Yaw
 1
 UID
-664138568
+138011746
 next
 PowerCrystalLampPost
 1
@@ -178,7 +178,7 @@ UID
 next
 BoxTriggerComponent
 1
-664138568
+138011746
 EffectTrigger
  Enabled
 1
@@ -191,11 +191,11 @@ EffectTrigger
  Visible
 1
 Extents
-2 2 2
+0.5 1 0.5
 Offset
 0 0 0
 UID
-1458650412
+751272163
 next
 CameraComponent
 1
@@ -233,17 +233,6 @@ File
 UID
 276391304
 next
-664138568
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-2332830786
-next
 3390367064
 Dialogue
  Enabled
@@ -254,6 +243,17 @@ File
 
 UID
 2615454165
+next
+138011746
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+996594822
 next
 DirectionalLightComponent
 1
@@ -283,9 +283,9 @@ Root
  Enabled
 1
  Pos
-0 0 0
+0 0 2
  Rot
-0 0 0 1
+0 0.707107 0 0.707107
  Scale
 1 1 1
  Visible
@@ -407,61 +407,6 @@ Trans. Occlude
 UID
 581033636
 next
-664138568
-Mesh
- Enabled
-1
- Pos
-3 0 1
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-crystal_light.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-387060563
-next
 2465096088
 Mesh
  Enabled
@@ -469,7 +414,7 @@ Mesh
  Pos
 0 0 0
  Rot
-0 0 0 1
+-0 0 0 1
  Scale
 1 1 1
  Visible
@@ -564,13 +509,68 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-lamp_post.vmesh
+lamp_post02.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
 3065419176
+next
+138011746
+Mesh
+ Enabled
+1
+ Pos
+3 -0 2
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+crystal_light.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+800447447
 next
 PointLightComponent
 1
