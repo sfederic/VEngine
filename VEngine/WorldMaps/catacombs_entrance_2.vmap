@@ -60,6 +60,66 @@ CrystalLight3
 UID
 856803795
 next
+EntranceTrigger
+2
+ Enabled
+1
+ Position
+3 -0 -0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+catacombs_entrance.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+3224217886
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+3 -0 12
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+catacombs_stairs_descent.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger1
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+4290532962
+Unlock Audio
+
+next
 Grid
 1
  Enabled
@@ -205,6 +265,46 @@ Player0
 UID
 3734446500
 next
+BoxTriggerComponent
+2
+3224217886
+Trigger
+ Enabled
+1
+ Pos
+3 -0 -0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+399082210
+next
+4290532962
+Trigger
+ Enabled
+1
+ Pos
+3 -0 12
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+3990606726
+next
 CameraComponent
 1
 3734446500
@@ -227,6 +327,34 @@ Near Z
 0.01
 UID
 502334647
+next
+ConditionComponent
+2
+3224217886
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+1390636871
+next
+4290532962
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+3215314303
 next
 DialogueComponent
 1
@@ -371,6 +499,171 @@ Trans. Occlude
 0
 UID
 1639989677
+next
+510356119
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+crystal.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1008697673
+next
+1394671180
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+crystal.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2550939184
+next
+856803795
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+crystal.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1615926950
 next
 4209532974
 Mesh
@@ -812,171 +1105,6 @@ Trans. Occlude
 UID
 2915255587
 next
-510356119
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-crystal.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1008697673
-next
-1394671180
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-crystal.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2550939184
-next
-856803795
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-crystal.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1615926950
-next
 PointLightComponent
 4
 1721439695
@@ -1072,7 +1200,7 @@ Sprite
  Pos
 0 0 0
  Rot
-0.0130698 0.97386 0.219212 -0.0580631
+-0.164119 0.739679 0.1949 0.62286
  Scale
 0.35 0.35 0.35
  Visible
@@ -1097,7 +1225,7 @@ Sprite
  Pos
 0 0 0
  Rot
--0.0301256 0.967191 0.211182 0.137972
+-0.109437 0.732438 0.121274 0.660947
  Scale
 0.35 0.35 0.35
  Visible
@@ -1122,7 +1250,7 @@ Sprite
  Pos
 0 0 0
  Rot
--0.0125534 0.986076 0.140466 0.0881254
+-0.0622837 0.88022 0.120557 0.454752
  Scale
 0.35 0.35 0.35
  Visible
@@ -1147,7 +1275,7 @@ Sprite
  Pos
 0 0 0
  Rot
-0.00527509 0.989077 0.142695 -0.0365638
+-0.0602304 0.924979 0.165425 0.336781
  Scale
 0.35 0.35 0.35
  Visible
