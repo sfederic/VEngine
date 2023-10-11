@@ -16,7 +16,7 @@ UID
 650547298
 next
 EntranceTrigger
-1
+2
  Enabled
 1
  Position
@@ -43,6 +43,35 @@ Tag
 
 UID
 374232725
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+2 0 18
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+catacombs_entrance_2.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger1
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+1729655300
 Unlock Audio
 
 next
@@ -312,7 +341,7 @@ UID
 1784404446
 next
 BoxTriggerComponent
-1
+2
 374232725
 Trigger
  Enabled
@@ -331,6 +360,25 @@ Offset
 0 0 0
 UID
 3608973913
+next
+1729655300
+Trigger
+ Enabled
+1
+ Pos
+2 0 18
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+1352700429
 next
 CameraComponent
 1
@@ -356,7 +404,7 @@ UID
 2908887795
 next
 ConditionComponent
-1
+2
 374232725
 Condition
  Enabled
@@ -369,6 +417,19 @@ Condition Arg
 
 UID
 2731745134
+next
+1729655300
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+2777198656
 next
 DialogueComponent
 1
