@@ -441,7 +441,6 @@ bool OrientedBoxCast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end, XMFLOA
 	return hitResult.hitActors.size();
 }
 
-//Note: doesn't set HitResult::hitActor.
 bool SimpleBoxCast(XMVECTOR center, XMFLOAT3 extents, HitResult& hit, bool drawDebug, bool clearDebugDrawWithTimer)
 {
 	XMFLOAT3 centerFloat3;

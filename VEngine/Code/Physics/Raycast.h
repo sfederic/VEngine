@@ -80,6 +80,9 @@ bool RaycastFromScreen(HitResult& hitResult);
 void DrawDebugLine(XMVECTOR start, XMVECTOR end);
 
 bool OrientedBoxCast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end, XMFLOAT2 extents, bool drawDebug, bool clearDebugDrawWithTimer);
+
 //Make sure the boundingbox is in world space.
 bool OrientedBoxCast(HitResult& hit, BoundingOrientedBox& boundsInWorldSpace, bool drawDebug, bool clearDebugDrawWithTimer);
+
+//Doesn't set HitResult::hitActor.
 bool SimpleBoxCast(XMVECTOR center, XMFLOAT3 extents, HitResult& hitResult, bool drawDebug, bool clearDebugDrawWithTimer);
