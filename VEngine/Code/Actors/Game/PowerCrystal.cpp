@@ -12,7 +12,7 @@ void PowerCrystal::Create()
 {
 	__super::Create();
 
-	SetMeshFilename("crystal_light.vmesh");
+	SetMeshFilename("crystal.vmesh");
 
 	effectTrigger->SetExtents(0.5f, 0.5f, 0.5f);
 }
