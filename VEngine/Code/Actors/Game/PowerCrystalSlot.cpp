@@ -26,7 +26,7 @@ void PowerCrystalSlot::Tick(float deltaTime)
 	{
 		for (auto actor : hit.hitActors)
 		{
-			auto hitActor = dynamic_cast<PowerCrystal*>(hit.hitActors.front());
+			auto hitActor = dynamic_cast<PowerCrystal*>(actor);
 			if (hitActor)
 			{
 				powerUpActor->PowerUp();
