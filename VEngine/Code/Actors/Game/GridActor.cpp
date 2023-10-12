@@ -35,9 +35,9 @@ bool GridActor::CheckNextRotationBoundsIntersect()
 
 	BoundingOrientedBox nextRotBounds = mesh->GetBoundsInWorldSpace();
 	XMStoreFloat4(&nextRotBounds.Orientation, nextRot);
-	nextRotBounds.Extents.x -= 0.1f;
-	nextRotBounds.Extents.y -= 0.1f;
-	nextRotBounds.Extents.z -= 0.1f;
+	nextRotBounds.Extents.x -= 0.15f;
+	nextRotBounds.Extents.y -= 0.15f;
+	nextRotBounds.Extents.z -= 0.15f;
 	HitResult hit(this);
 	return OrientedBoxCast(hit, nextRotBounds, true, true);
 }
