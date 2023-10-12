@@ -88,9 +88,9 @@ public:
 private:
 	PickupWidget* pickupWidget = nullptr;
 
-	XMVECTOR nextCameraPosition;
-	XMVECTOR cameraLinkActiveLocalPosition;
-	XMVECTOR cameraStartingLocalPosition;
+	XMVECTOR nextCameraPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	XMVECTOR cameraLinkActiveLocalPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	XMVECTOR cameraStartingLocalPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	float nextCameraFOV = 0.f;
 
 	bool isInputLinkedToGridActor = false;
