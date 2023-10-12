@@ -137,6 +137,9 @@ public:
 
 	bool CheckMovementAndRotationStopped();
 
+	//This will pop the grid actor aligned onto the grid in world space if it's out.
+	void RoundPosition();
+
 	XMVECTOR GetNextRot() { return nextRot; }
 	XMVECTOR GetNextPos() { return nextPos; }
 	void SetNextRot(XMVECTOR rot) { nextRot = rot; }

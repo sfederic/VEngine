@@ -1032,6 +1032,8 @@ void Player::SetLinkedGridActor(GridActor& gridActor)
 	HitResult nodeHit(this);
 	gridActor.GetCurrentNode()->RecalcNodeHeight(nodeHit);
 
+	gridActor.RoundPosition();
+
 	linkedGridActor = &gridActor;
 
 	//Focus on the grid actor the linked grid actor is moving, else focus on the linked actor

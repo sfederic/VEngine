@@ -294,6 +294,13 @@ bool GridActor::CheckMovementAndRotationStopped()
 	return XMVector4Equal(GetPositionV(), nextPos) && XMQuaternionEqual(GetRotationV(), nextRot);
 }
 
+void GridActor::RoundPosition()
+{
+	XMVECTOR pos = GetPositionV();
+	VMath::RoundVector(pos);
+	SetNextPos(pos);
+}
+
 void GridActor::SetMeshFilename(std::string_view filename)
 {
 	mesh->SetMeshFilename(filename);
