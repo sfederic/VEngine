@@ -1,117 +1,3 @@
-CrystalPickup
-1
- Enabled
-1
- Position
-2 0 2
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-1
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Item Icon
-crystal_pickup_icon.png
-Item Name
-Crystal
-Link Movement
-0
-Link Rotation
-0
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-CrystalPickup0
-Obstacle
-1
-Pickup Audio
-
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-1620331767
-next
-CrystalPlacement
-1
- Enabled
-1
- Position
-0 0 2
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Can Fall
-1
-Crystal Placed
-0
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-1
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-CrystalPlacement0
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-1894652761
-next
 DirectionalLightActor
 1
  Enabled
@@ -149,6 +35,59 @@ Size Y
 10
 UID
 692420275
+next
+GridActor
+1
+ Enabled
+1
+ Position
+2.3 0 2
+ Rotation
+-0 0.130526 -0 0.991445
+ Scale
+0.999999 1 0.999999
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+GridActor0
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+1765293512
 next
 MeshActor
 1
@@ -208,8 +147,8 @@ UID
 498285566
 next
 DialogueComponent
-3
-1620331767
+2
+1765293512
 Dialogue
  Enabled
 1
@@ -218,7 +157,7 @@ Dialogue
 File
 
 UID
-1531781027
+975230119
 next
 707967490
 Dialogue
@@ -230,17 +169,6 @@ File
 
 UID
 2587144994
-next
-1894652761
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-370456553
 next
 DirectionalLightComponent
 1
@@ -338,17 +266,17 @@ UID
 1689623277
 next
 MeshComponent
-4
-1620331767
+3
+1765293512
 Mesh
  Enabled
 1
  Pos
-2 0 2
+2.3 0 2
  Rot
--0 0 -0 1
+-0 0.130526 -0 0.991445
  Scale
-1 1 1
+0.999999 1 0.999999
  Visible
 1
 Casts Shadow
@@ -386,13 +314,13 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-crystal.vmesh
+cube.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-2125793615
+3453638325
 next
 779951209
 Mesh
@@ -503,60 +431,5 @@ Trans. Occlude
 0
 UID
 706192360
-next
-1894652761
-Mesh
- Enabled
-1
- Pos
-0 0 2
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1044105973
 next
 end
