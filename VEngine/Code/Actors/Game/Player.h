@@ -111,7 +111,6 @@ private:
 	bool InteractCheck(Actor* hitActor);
 	void InteractInfoToWidgetCheck();
 
-	bool DestructibleCheck(Actor* hitActor);
 	bool AttackGridActorBasedOnNode();
 
 	bool CheckAttackPositionAgainstUnitDirection(Unit* unit);

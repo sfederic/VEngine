@@ -288,7 +288,6 @@ void Player::PrimaryAction()
 			if (DialogueCheck(hit.hitActor)) {}
 			else if (QuickTalkCheck(hit.hitActor)) {}
 			else if (InteractCheck(hit.hitActor)) {}
-			else if (DestructibleCheck(hit.hitActor)) {}
 		}
 	}
 }
@@ -491,51 +490,6 @@ void Player::InteractInfoToWidgetCheck()
 	{
 		interactWidget->RemoveFromViewport();
 	}
-}
-
-bool Player::DestructibleCheck(Actor* hitActor)
-{
-	if (!inConversation)
-	{
-		auto npc = dynamic_cast<NPC*>(hitActor);
-		if (npc)
-		{
-			npc->EndQuickTalkTo();
-		}
-
-		auto unit = dynamic_cast<Unit*>(hitActor);
-		if (unit)
-		{
-			if (CheckAttackPositionAgainstUnitDirection(unit))
-			{
-				Camera::GetActiveCamera().SetShakeLevel(1.f);
-				GameUtils::SpawnSpriteSheet("Sprites/v_slice.png", unit->GetPositionV(), false, 4, 4);
-				GameUtils::PlayAudioOneShot("sword_hit.wav");
-
-				unit->InflictDamage(1);
-			}
-			else
-			{
-				Log("Attack positional miss on Unit [%s].", unit->GetName().c_str());
-			}
-
-			return true;
-		}
-
-		auto gridActor = dynamic_cast<GridActor*>(hitActor);
-		if (gridActor)
-		{
-			Camera::GetActiveCamera().SetShakeLevel(1.f);
-			GameUtils::SpawnSpriteSheet("Sprites/v_slice.png", gridActor->GetPositionV(), false, 4, 4);
-			GameUtils::PlayAudioOneShot("sword_hit.wav");
-
-			gridActor->InflictDamage(1);
-
-			return true;
-		}
-	}
-
-	return false;
 }
 
 bool Player::AttackGridActorBasedOnNode()
