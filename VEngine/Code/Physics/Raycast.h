@@ -8,18 +8,19 @@ class IActorSystem;
 struct CameraComponent;
 class Actor;
 struct SpatialComponent;
-
-using namespace DirectX;
+namespace DirectX {
+	struct BoundingOrientedBox;
+}
 
 struct HitResult
 {
-	XMVECTOR origin = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-	XMVECTOR direction = XMVectorSet(0.f, 0.f, 0.f, 0.f);
+	DirectX::XMVECTOR origin = DirectX::XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	DirectX::XMVECTOR direction = DirectX::XMVectorSet(0.f, 0.f, 0.f, 0.f);
 
 	//Position the ray has hit in world
-	XMFLOAT3 hitPos = XMFLOAT3(0.f, 0.f, 0.f);
-	XMFLOAT3 hitNormal = XMFLOAT3(0.f, 0.f, 0.f);
-	XMFLOAT2 uv = XMFLOAT2(0.f, 0.f);
+	DirectX::XMFLOAT3 hitPos = DirectX::XMFLOAT3(0.f, 0.f, 0.f);
+	DirectX::XMFLOAT3 hitNormal = DirectX::XMFLOAT3(0.f, 0.f, 0.f);
+	DirectX::XMFLOAT2 uv = DirectX::XMFLOAT2(0.f, 0.f);
 
 	//List of actors to ignore when cast
 	std::vector<Actor*> actorsToIgnore;
@@ -67,22 +68,22 @@ struct HitResult
 	void IgnorePlayer();
 
 	//Result is in world space.
-	XMVECTOR GetHitPosV() { return XMLoadFloat3(&hitPos); }
-	XMVECTOR GetNormalV() { return XMLoadFloat3(&hitNormal); }
+	DirectX::XMVECTOR GetHitPosV() { return XMLoadFloat3(&hitPos); }
+	DirectX::XMVECTOR GetNormalV() { return XMLoadFloat3(&hitNormal); }
 
 	std::vector<int> hitVertIndexes;
 };
 
-bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float range, bool fromScreen = false);
-bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end);
+bool Raycast(HitResult& hitResult, DirectX::XMVECTOR origin, DirectX::XMVECTOR direction, float range, bool fromScreen = false);
+bool Raycast(HitResult& hitResult, DirectX::XMVECTOR origin, DirectX::XMVECTOR end);
 bool RaycastTriangleIntersect(HitResult& hitResult);
 bool RaycastFromScreen(HitResult& hitResult);
-void DrawDebugLine(XMVECTOR start, XMVECTOR end);
+void DrawDebugLine(DirectX::XMVECTOR start, DirectX::XMVECTOR end);
 
-bool OrientedBoxCast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end, XMFLOAT2 extents, bool drawDebug, bool clearDebugDrawWithTimer);
+bool OrientedBoxCast(HitResult& hitResult, DirectX::XMVECTOR origin, DirectX::XMVECTOR end, DirectX::XMFLOAT2 extents, bool drawDebug, bool clearDebugDrawWithTimer);
 
 //Make sure the boundingbox is in world space.
-bool OrientedBoxCast(HitResult& hit, BoundingOrientedBox& boundsInWorldSpace, bool drawDebug, bool clearDebugDrawWithTimer);
+bool OrientedBoxCast(HitResult& hit, DirectX::BoundingOrientedBox& boundsInWorldSpace, bool drawDebug, bool clearDebugDrawWithTimer);
 
 //Doesn't set HitResult::hitActor.
-bool SimpleBoxCast(XMVECTOR center, XMFLOAT3 extents, HitResult& hitResult, bool drawDebug, bool clearDebugDrawWithTimer);
+bool SimpleBoxCast(DirectX::XMVECTOR center, DirectX::XMFLOAT3 extents, HitResult& hitResult, bool drawDebug, bool clearDebugDrawWithTimer);

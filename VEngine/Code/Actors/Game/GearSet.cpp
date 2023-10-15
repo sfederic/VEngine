@@ -4,6 +4,8 @@
 #include "GearSetDoor.h"
 #include "Core/Log.h"
 
+using namespace DirectX;
+
 GearSet::GearSet()
 {
 	boxTrigger = CreateComponent<BoxTriggerComponent>("BoxTrigger");
@@ -34,7 +36,7 @@ void GearSet::OnLinkRotate()
 	IncrementDoor();
 }
 
-bool GearSet::Intersects(const BoundingOrientedBox& intersectCheck) const
+bool GearSet::Intersects(const DirectX::BoundingOrientedBox& intersectCheck) const
 {
 	return boxTrigger->Intersects(intersectCheck);
 }

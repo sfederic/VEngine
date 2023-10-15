@@ -88,7 +88,7 @@ void SpriteSystem::BuildSpriteQuadForViewportRendering(const Sprite& sprite)
 	verts[1].uv = XMFLOAT2((float)src.left / texWidth, (float)src.top / texHeight);
 	verts[2].uv = XMFLOAT2((float)src.right / texWidth, (float)src.top / texHeight);
 	verts[3].uv = XMFLOAT2((float)src.right / texWidth, (float)src.bottom / texHeight);
-	
+
 	// Quad center point.
 	float tx = 0.5f * (verts[0].pos.x + verts[3].pos.x);
 	float ty = 0.5f * (verts[0].pos.y + verts[1].pos.y);

@@ -5,17 +5,17 @@
 
 void VertexShader::Create(const std::wstring filename)
 {
-    ReadData(filename);
+	ReadData(filename);
 
-    HR(RenderUtils::device->CreateVertexShader(
-        GetByteCodeData(),
-        GetByteCodeSize(),
-        nullptr,
-        GetShaderAddress()));
+	HR(RenderUtils::device->CreateVertexShader(
+		GetByteCodeData(),
+		GetByteCodeSize(),
+		nullptr,
+		GetShaderAddress()));
 }
 
 void VertexShader::Reset()
 {
-    shader.Reset();
-    byteCode.clear();
+	shader.Reset();
+	byteCode.clear();
 }

@@ -4,7 +4,7 @@
 
 std::unordered_map<std::string, TimeFrame> Profile::timeFrames;
 
-TimeFrame::TimeFrame() 
+TimeFrame::TimeFrame()
 {
 }
 
