@@ -3,6 +3,8 @@
 #include "GearSet.h"
 #include "Components/MeshComponent.h"
 
+using namespace DirectX;
+
 void Gear::Create()
 {
 	__super::Create();
@@ -59,7 +61,7 @@ void Gear::OnRotationEnd()
 	previouslyCascadedGears.clear();
 }
 
-bool Gear::Intersects(const BoundingOrientedBox& bob)
+bool Gear::Intersects(const DirectX::BoundingOrientedBox& bob)
 {
 	return rootComponent->GetBoundsInWorldSpace().Intersects(bob);
 }

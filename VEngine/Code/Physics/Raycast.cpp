@@ -17,6 +17,8 @@
 #include "Components/Lights/DirectionalLightComponent.h"
 #include "Core/World.h"
 
+using namespace DirectX;
+
 bool IsIgnoredActor(Actor* actor, HitResult& hitResult)
 {
 	for (auto actorToIgnore : hitResult.actorsToIgnore)

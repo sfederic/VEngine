@@ -3,6 +3,7 @@
 #include <locale>
 #include <vadefs.h>
 #include <codecvt>
+#include <cstdarg>
 
 namespace VString
 {

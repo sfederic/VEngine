@@ -4,8 +4,8 @@
 Texture2D::~Texture2D()
 {
 	if (data)
-	{ 
-		data->Release(); 
+	{
+		data->Release();
 		data = nullptr;
 	}
 

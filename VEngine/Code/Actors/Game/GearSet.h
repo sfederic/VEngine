@@ -4,6 +4,9 @@
 
 class BoxTriggerComponent;
 class MeshComponent;
+namespace DirectX {
+	struct BoundingOrientedBox;
+}
 
 class GearSet : public GridActor
 {
@@ -16,7 +19,7 @@ public:
 
 	void OnLinkRotate() override;
 
-	bool Intersects(const BoundingOrientedBox& intersectCheck) const;
+	bool Intersects(const DirectX::BoundingOrientedBox& intersectCheck) const;
 	void IncrementDoor();
 
 private:

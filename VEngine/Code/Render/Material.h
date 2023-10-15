@@ -12,6 +12,9 @@ class VertexShader;
 class PixelShader;
 class ShaderItem;
 
+struct ID3D11VertexShader;
+struct ID3D11PixelShader;
+
 class Material
 {
 private:

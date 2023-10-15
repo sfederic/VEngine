@@ -57,7 +57,7 @@ ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
 	sd.BorderColor[2] = 1.f;
 	sd.BorderColor[3] = 1.f;
 	sd.ComparisonFunc = D3D11_COMPARISON_LESS;
-	
+
 	HR(device->CreateSamplerState(&sd, &sampler));
 
 	depthMap->Release();
@@ -108,7 +108,7 @@ XMMATRIX ShadowMap::GetSpotLightPerspectiveMatrix(SpotLightComponent* spotLight)
 {
 	const float angle = XMConvertToRadians(spotLight->GetLightData().spotAngle);
 	//@Todo: is the using the shadowmaps width height here right for the aspect ratio?
-	return XMMatrixPerspectiveFovLH(angle, width / height, 0.01f, 1000.f); 
+	return XMMatrixPerspectiveFovLH(angle, width / height, 0.01f, 1000.f);
 }
 
 XMMATRIX ShadowMap::GetLightViewMatrix(SpatialComponent* light)
@@ -134,7 +134,7 @@ XMMATRIX ShadowMap::DirectionalLightViewProjectionTextureMatrix(DirectionalLight
 	auto V = GetLightViewMatrix(directionalLight);
 	auto P = GetDirectionalLightOrthoMatrix(directionalLight);
 	auto T = GetLightTextureMatrix();
-	
+
 	XMMATRIX S = V * P * T;
 	return S;
 }
