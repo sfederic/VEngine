@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "Player.h"
 #include "Core/Camera.h"
+#include "Core/Core.h"
 #include "Core/Input.h"
 #include "Core/VMath.h"
 #include "Core/Log.h"
@@ -354,46 +355,57 @@ bool Player::DialogueCheck(Actor* hitActor)
 //Note: Default blend state needs to already be set for the mesh.
 void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 {
-	auto SetActorAlpha = [](Actor* actor, float alpha) {
-		auto mesh = actor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
-		if (mesh && mesh->transparentOcclude)
-		{
-			mesh->SetAlpha(alpha);
-		}
-		};
-
-	const float transparentValue = 0.35f;
-	const float solidValue = 1.f;
-
 	HitResult hit(this);
 	if (OrientedBoxCast(hit, camera->GetWorldPositionV(), GetPositionV(), XMFLOAT2(0.5f, 0.5f), true, false))
 	{
-		std::vector<Actor*> ableActors;
-
-		for (auto actor : previousHitTransparentActors)
-		{
-			SetActorAlpha(actor, solidValue);
-		}
-
-		for (auto actor : hit.hitActors)
+		for (Actor* actor : hit.hitActors)
 		{
 			if (actor->CanBeTransparentlyOccluded())
 			{
-				ableActors.push_back(actor);
-				SetActorAlpha(actor, transparentValue);
+				previousHitTransparentActors.insert(actor);
+
+				auto mesh = actor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
+				if (mesh && mesh->transparentOcclude)
+				{
+					float alpha = mesh->GetAlpha();
+					if (alpha > 0.33f)
+					{
+						alpha -= Core::GetDeltaTime() * 3.f;
+						mesh->SetAlpha(alpha);
+					}
+				}
 			}
 		}
-
-		previousHitTransparentActors = ableActors;
 	}
-	else
-	{
-		for (auto actor : previousHitTransparentActors)
-		{
-			SetActorAlpha(actor, solidValue);
-		}
 
-		previousHitTransparentActors.clear();
+	std::vector<Actor*> actorsToRemove;
+
+	for (auto it = previousHitTransparentActors.begin(); it != previousHitTransparentActors.end(); it++)
+	{
+		auto mesh = (*it)->GetFirstComponentOfTypeAllowNull<MeshComponent>();
+		if (mesh && mesh->transparentOcclude)
+		{
+			float alpha = mesh->GetAlpha();
+			if (alpha < 1.f)
+			{
+				alpha += Core::GetDeltaTime() * 1.5f;
+				mesh->SetAlpha(alpha);
+			}
+
+			if (alpha >= 1.f)
+			{
+				actorsToRemove.push_back(*(it));
+			}
+		}
+	}
+
+	for (auto actor : actorsToRemove)
+	{
+		auto it = previousHitTransparentActors.find(actor);
+		if (it != previousHitTransparentActors.end())
+		{
+			previousHitTransparentActors.erase(actor);
+		}
 	}
 }
 

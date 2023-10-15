@@ -2,6 +2,7 @@
 
 #include "Actors/Actor.h"
 #include "Actors/ActorSystem.h"
+#include <set>
 
 struct DialogueComponent;
 struct InteractWidget;
@@ -27,7 +28,7 @@ public:
 
 	GridActor* gridActorInteractingWith = nullptr;
 
-	std::vector<Actor*> previousHitTransparentActors;
+	std::set<Actor*> previousHitTransparentActors;
 
 	bool inConversation = false;
 	bool inInteraction = false;
