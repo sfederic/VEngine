@@ -216,6 +216,8 @@ D3D11_VIEWPORT viewport;
 //Shadow maps
 ShadowMap* shadowMap;
 
+Sampler* defaultSampler;
+
 //Light probe buffers
 ID3D11RenderTargetView* lightProbeRTVs[6]; //Cubemap
 ID3D11ShaderResourceView* lightProbeSRV = nullptr;
@@ -280,7 +282,7 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 
 	postProcessRenderTarget.Create(viewport.Width, viewport.Height);
 
-	RenderUtils::defaultSampler = RenderUtils::CreateSampler();
+	defaultSampler = RenderUtils::CreateSampler();
 
 	SpriteSystem::Init();
 
@@ -345,9 +347,6 @@ void CreateDevice()
 	HR(D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags,
 		featureLevels, _countof(featureLevels), D3D11_SDK_VERSION, &device,
 		&selectedFeatureLevel, &context));
-
-	RenderUtils::device = device;
-	RenderUtils::context = context;
 }
 
 void CreateSwapchain(HWND window)
@@ -1512,7 +1511,7 @@ void RenderPolyboards()
 	{
 		polyboard->CalcVertices();
 
-		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
+		context->PSSetSamplers(0, 1, &Renderer::GetDefaultSampler().data);
 
 		SetShaderResourcePixel(0, polyboard->GetTextureFilename());
 
@@ -1555,7 +1554,7 @@ void RenderSpriteSheets()
 		SetRastStateByName(RastStates::noBackCull);
 		SetShaders(ShaderItems::DefaultClip);
 
-		SetSampler(0, RenderUtils::GetDefaultSampler());
+		SetSampler(0, &Renderer::GetDefaultSampler());
 		SetShaderResourcePixel(0, spriteSheet->GetTextureFilename());
 
 		spriteSheet->UpdateSprite();
@@ -1684,7 +1683,7 @@ void Renderer::RenderParticleEmitters()
 
 		SetShaders(emitter->GetMaterial().shader);
 
-		context->PSSetSamplers(0, 1, &RenderUtils::GetDefaultSampler()->data);
+		context->PSSetSamplers(0, 1, &Renderer::GetDefaultSampler().data);
 
 		MaterialShaderData materialShaderData;
 		materialShaderData = emitter->GetMaterial().materialShaderData;
@@ -1726,7 +1725,7 @@ void Renderer::RenderSpritesInScreenSpace()
 	{
 		SetRastStateByName(RastStates::solid);
 		SetShaders(ShaderItems::UI);
-		SetSampler(0, RenderUtils::GetDefaultSampler());
+		SetSampler(0, &Renderer::GetDefaultSampler());
 		SetShaderResourcePixel(0, sprite.textureFilename);
 
 		SpriteSystem::BuildSpriteQuadForViewportRendering(sprite);
@@ -2071,7 +2070,7 @@ void RenderPostProcess()
 	cbPostProcess->SetPS();
 
 	context->PSSetShaderResources(0, 1, postProcessRenderTarget.GetSRVAddress());
-	SetSampler(0, RenderUtils::GetDefaultSampler());
+	SetSampler(0, &Renderer::GetDefaultSampler());
 
 	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
 	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
@@ -2225,4 +2224,19 @@ void Renderer::AddDebugLine(Line& line)
 	v2.pos = line.p2;
 	debugLines.emplace_back(v1);
 	debugLines.emplace_back(v2);
+}
+
+ID3D11Device& Renderer::GetDevice()
+{
+	return *device;
+}
+
+ID3D11DeviceContext& Renderer::GetDeviceContext()
+{
+	return *context;
+}
+
+Sampler& Renderer::GetDefaultSampler()
+{
+	return *defaultSampler;
 }

@@ -2,6 +2,7 @@
 #include "RenderTarget.h"
 #include "Render/RenderUtils.h"
 #include "Core/Debug.h"
+#include "Renderer.h"
 
 void RenderTarget::Create(uint32_t width, uint32_t height)
 {
@@ -14,11 +15,11 @@ void RenderTarget::Create(uint32_t width, uint32_t height)
 	desc.Width = width;
 	desc.Height = height;
 
-	HR(RenderUtils::device->CreateTexture2D(&desc, nullptr, &texture));
+	HR(Renderer::GetDevice().CreateTexture2D(&desc, nullptr, &texture));
 	assert(texture);
 
-	HR(RenderUtils::device->CreateRenderTargetView(texture, nullptr, &rtv));
-	HR(RenderUtils::device->CreateShaderResourceView(texture, nullptr, &srv));
+	HR(Renderer::GetDevice().CreateRenderTargetView(texture, nullptr, &rtv));
+	HR(Renderer::GetDevice().CreateShaderResourceView(texture, nullptr, &srv));
 }
 
 void RenderTarget::Recycle()

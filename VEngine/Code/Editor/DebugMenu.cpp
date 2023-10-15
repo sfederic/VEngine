@@ -41,7 +41,7 @@ void DebugMenu::Init()
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 
 	io.Fonts->AddFontFromFileTTF("Fonts/OpenSans.ttf", 20);
-	
+
 	//Imgui has an .ini file to save previous ui positions and values.
 	//Setting this to null removes this initial setup.
 	io.IniFilename = nullptr;
@@ -51,7 +51,7 @@ void DebugMenu::Init()
 
 	ImGui::StyleColorsDark();
 	ImGui_ImplWin32_Init((HWND)editor->windowHwnd);
-	ImGui_ImplDX11_Init(RenderUtils::device, RenderUtils::context);
+	ImGui_ImplDX11_Init(&Renderer::GetDevice(), &Renderer::GetDeviceContext());
 }
 
 void DebugMenu::Tick(float deltaTime)
@@ -150,13 +150,13 @@ void DebugMenu::IterateOverProperties(Properties& props)
 			DirectX::XMFLOAT3* xmfloat3 = props.GetData<XMFLOAT3>(name);
 			float* f3[3] = { &xmfloat3->x, &xmfloat3->y, &xmfloat3->z };
 			ImGui::InputFloat3(name.c_str(), *f3);
-		}		
+		}
 		else if (props.CheckType<XMFLOAT4>(name))
 		{
 			DirectX::XMFLOAT4* xmfloat4 = props.GetData<XMFLOAT4>(name);
 			float* f4[4] = { &xmfloat4->x, &xmfloat4->y, &xmfloat4->z, &xmfloat4->w };
 			ImGui::InputFloat4(name.c_str(), *f4);
-		}		
+		}
 		else if (props.CheckType<XMFLOAT2>(name))
 		{
 			DirectX::XMFLOAT2* xmfloat2 = props.GetData<XMFLOAT2>(name);
@@ -167,7 +167,7 @@ void DebugMenu::IterateOverProperties(Properties& props)
 		{
 			std::string* str = props.GetData<std::string>(name);
 			ImGui::InputText(name.c_str(), str->data(), str->size());
-		}		
+		}
 		else if (props.CheckType<Texture2D>(name))
 		{
 			Texture2D* texture = props.GetData<Texture2D>(name);
@@ -437,7 +437,7 @@ void DebugMenu::RenderVertexPaintMenu()
 	if (ImGui::Button("Save Vertex Colours"))
 	{
 		AssetSystem::WriteOutAllVertexColourData();
-	}	
+	}
 	if (ImGui::Button("Load Vertex Colours"))
 	{
 		AssetSystem::LoadVertexColourDataFromFile();
