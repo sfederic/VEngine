@@ -1,11 +1,16 @@
 #pragma once
 
 #include <string>
-#include <DirectXCollision.h>
 
 struct RastState;
+struct Sampler;
 struct BlendState;
 struct Line;
+namespace DirectX {
+	struct BoundingOrientedBox;
+}
+struct ID3D11Device;
+struct ID3D11DeviceContext;
 
 namespace Renderer
 {
@@ -50,4 +55,8 @@ namespace Renderer
 
 	void AddDebugDrawOrientedBox(DirectX::BoundingOrientedBox& orientedBox, bool clear);
 	void AddDebugLine(Line& line);
+
+	ID3D11Device& GetDevice();
+	ID3D11DeviceContext& GetDeviceContext();
+	Sampler& GetDefaultSampler();
 };

@@ -1,6 +1,6 @@
 #include "vpch.h"
 #include "PixelShader.h"
-#include "RenderUtils.h"
+#include "Renderer.h"
 #include "Core/Debug.h"
 
 void PixelShader::Create(const std::wstring filename)
@@ -8,7 +8,7 @@ void PixelShader::Create(const std::wstring filename)
 	hlslFilepath = filename;
 	ReadData(filename);
 
-	HR(RenderUtils::device->CreatePixelShader(
+	HR(Renderer::GetDevice().CreatePixelShader(
 		GetByteCodeData(),
 		GetByteCodeSize(),
 		nullptr,

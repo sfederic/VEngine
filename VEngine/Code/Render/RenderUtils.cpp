@@ -8,16 +8,13 @@
 #include "Core/VString.h"
 #include "Asset/AssetPaths.h"
 #include "MeshDataProxy.h"
+#include "Renderer.h"
 
 namespace RenderUtils
 {
-	ID3D11Device* device;
-	ID3D11DeviceContext* context;
-	Sampler* defaultSampler;
-
 	ID3D11Buffer* CreateDefaultBuffer(uint64_t byteWidth, uint32_t bindFlags, const void* initData)
 	{
-		ID3D11Buffer* buffer;
+		ID3D11Buffer* buffer = nullptr;
 
 		D3D11_BUFFER_DESC desc = {};
 		desc.ByteWidth = byteWidth;
@@ -27,7 +24,7 @@ namespace RenderUtils
 		D3D11_SUBRESOURCE_DATA data = {};
 		data.pSysMem = initData;
 
-		HR(device->CreateBuffer(&desc, &data, &buffer));
+		HR(Renderer::GetDevice().CreateBuffer(&desc, &data, &buffer));
 
 		return buffer;
 	}
@@ -50,7 +47,7 @@ namespace RenderUtils
 		D3D11_SUBRESOURCE_DATA data = {};
 		data.pSysMem = initData;
 
-		HR(device->CreateBuffer(&desc, &data, &buffer));
+		HR(Renderer::GetDevice().CreateBuffer(&desc, &data, &buffer));
 		assert(buffer);
 
 		return buffer;
@@ -70,7 +67,7 @@ namespace RenderUtils
 		srvDesc.BufferEx.NumElements = numBufferElements;
 
 		ID3D11ShaderResourceView* srv = nullptr;
-		HR(device->CreateShaderResourceView(structuredBuffer, &srvDesc, &srv));
+		HR(Renderer::GetDevice().CreateShaderResourceView(structuredBuffer, &srvDesc, &srv));
 
 		return srv;
 	}
@@ -90,7 +87,7 @@ namespace RenderUtils
 		D3D11_SUBRESOURCE_DATA data = {};
 		data.pSysMem = initData;
 
-		HR(device->CreateBuffer(&desc, &data, &buffer));
+		HR(Renderer::GetDevice().CreateBuffer(&desc, &data, &buffer));
 
 		return buffer;
 	}
@@ -104,16 +101,10 @@ namespace RenderUtils
 		sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
 
 		ID3D11SamplerState* samplerState;
-		HR(device->CreateSamplerState(&sampDesc, &samplerState));
+		HR(Renderer::GetDevice().CreateSamplerState(&sampDesc, &samplerState));
 
 		auto sampler = new Sampler(samplerState);
 		return sampler;
-	}
-
-	Sampler* GetDefaultSampler()
-	{
-		assert(defaultSampler);
-		return defaultSampler;
 	}
 
 	void CreateTexture(Texture2D& texture)
@@ -135,7 +126,7 @@ namespace RenderUtils
 
 		ID3D11Resource* resource = nullptr;
 		ID3D11ShaderResourceView* srv = nullptr;
-		HR(DirectX::CreateWICTextureFromFile(device, path.c_str(), &resource, &srv));
+		HR(DirectX::CreateWICTextureFromFile(&Renderer::GetDevice(), path.c_str(), &resource, &srv));
 		assert(resource);
 		assert(srv);
 

@@ -56,7 +56,7 @@ Material::Material(std::string textureFilename_, ShaderItem* shaderItem)
 void Material::Create()
 {
 	texture = TextureSystem::FindTexture2D(textureData.filename);
-	sampler = RenderUtils::GetDefaultSampler();
+	sampler = &Renderer::GetDefaultSampler();
 	rastState = Renderer::GetRastState(rastStateValue.GetValue());
 	blendState = Renderer::GetBlendState(blendStateValue.GetValue());
 	shader = ShaderSystem::FindShaderItem(shaderItemValue.GetValue());

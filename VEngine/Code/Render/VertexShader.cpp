@@ -1,13 +1,13 @@
 #include "vpch.h"
 #include "VertexShader.h"
-#include "RenderUtils.h"
+#include "Renderer.h"
 #include "Core/Debug.h"
 
 void VertexShader::Create(const std::wstring filename)
 {
 	ReadData(filename);
 
-	HR(RenderUtils::device->CreateVertexShader(
+	HR(Renderer::GetDevice().CreateVertexShader(
 		GetByteCodeData(),
 		GetByteCodeSize(),
 		nullptr,
