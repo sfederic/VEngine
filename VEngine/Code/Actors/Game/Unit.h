@@ -3,6 +3,7 @@
 #include "GridActor.h"
 #include <memory>
 #include "Core/VEnum.h"
+#include "Gameplay/BattleEnums.h"
 
 struct GridNode;
 struct EntranceTrigger;
@@ -35,6 +36,9 @@ struct Unit : GridActor
 	int attackPoints = 1;
 
 	int attackRange = 1; //Attack range should always be >= 1
+
+	//All directions the Unit can be successfully attacked from.
+	AttackDirection attackDirections = AttackDirection::All;
 
 	//All the nodes the unit can move to
 	std::vector<GridNode*> movementPathNodes;

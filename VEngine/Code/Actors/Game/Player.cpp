@@ -146,6 +146,54 @@ void Player::QuickThought(const std::wstring& text)
 	Timer::SetTimer(5.0f, std::bind(&DialogueWidget::RemoveFromViewport, dialogueComponent->dialogueWidget));
 }
 
+bool Player::CheckAttackPositionAgainstUnitDirection(Unit* unit)
+{
+	if (unit->attackDirections == AttackDirection::All)
+	{
+		return true;
+	}
+
+	auto playerForward = mesh->GetForwardVectorV();
+	VMath::RoundVector(playerForward);
+
+	auto unitForward = unit->GetForwardVectorV();
+	VMath::RoundVector(unitForward);
+
+	auto unitRight = unit->GetRightVectorV();
+	VMath::RoundVector(unitRight);
+
+	if (DirectX::XMVector4Equal(unitForward, -playerForward))
+	{
+		if (unit->attackDirections & AttackDirection::Front)
+		{
+			return true;
+		}
+	}
+	else if (DirectX::XMVector4Equal(unitForward, playerForward))
+	{
+		if (unit->attackDirections & AttackDirection::Back)
+		{
+			return true;
+		}
+	}
+	else if (DirectX::XMVector4Equal(unitRight, playerForward))
+	{
+		if (unit->attackDirections & AttackDirection::Right)
+		{
+			return true;
+		}
+	}
+	else if (DirectX::XMVector4Equal(-unitRight, playerForward))
+	{
+		if (unit->attackDirections & AttackDirection::Left)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 void Player::ToggleGrid()
 {
 	if (Input::GetKeyUp(Keys::Space))
