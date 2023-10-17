@@ -1290,9 +1290,6 @@
     <ClInclude Include="Code\Asset\AnimationAssetHeader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Gameplay\BattleEnums.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Gameplay\ConditionSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
