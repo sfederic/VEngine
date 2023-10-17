@@ -6,11 +6,9 @@ struct DialogueWidget;
 //Actor that can be talked to and interactied with.
 struct NPC : Unit
 {
-	ACTOR_SYSTEM(NPC)
+	ACTOR_SYSTEM(NPC);
 
 	bool isQuickDialogueActive = false;
-
-	bool entranceReachableForEscape = false;
 
 	//Quick dialogue to show when NPC spawns. If empty, nothing shows.
 	std::wstring spawnText;
@@ -29,5 +27,10 @@ struct NPC : Unit
 	void QuickTalkTo();
 	void EndQuickTalkTo();
 
-	void TryToEscapeToExit();
+	void TryToReachTargetNode();
+
+	int nodeToMoveToXIndex = 0;
+	int nodeToMoveToYIndex = 0;
+
+	bool canReachTargetNode = false;
 };

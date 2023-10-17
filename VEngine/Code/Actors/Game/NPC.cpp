@@ -53,7 +53,7 @@ void NPC::Tick(float deltaTime)
 		}
 	}
 
-	TryToEscapeToExit();
+	TryToReachTargetNode();
 
 	__super::Tick(deltaTime); //Tick has to be at the end here to deal with A* nodes
 }
@@ -63,6 +63,8 @@ Properties NPC::GetProps()
 	Properties props = __super::GetProps();
 	props.title = "NPC";
 	props.Add("Spawn Text", &spawnText);
+	props.Add("Target Node X", &nodeToMoveToXIndex);
+	props.Add("Target Node Y", &nodeToMoveToYIndex);
 	return props;
 }
 
@@ -84,36 +86,32 @@ void NPC::EndQuickTalkTo()
 	dialogueComponent->RemoveFromViewport();
 }
 
-void NPC::TryToEscapeToExit()
+void NPC::TryToReachTargetNode()
 {
-	auto entrance = EntranceTrigger::system.GetFirstActor();
-	const int xIndex = (int)std::round(entrance->GetPosition().x);
-	const int yIndex = (int)std::round(entrance->GetPosition().z);
 	auto grid = Grid::system.GetOnlyActor();
-	auto entranceNode = grid->GetNode(xIndex, yIndex);
+	auto targetNode = grid->GetNode(nodeToMoveToXIndex, nodeToMoveToYIndex);
 
-	if (entranceReachableForEscape)
+	if (canReachTargetNode)
 	{
-		//Destroy NPC when it reaches the entrance.
-		if (GetCurrentNode()->Equals(entranceNode))
+		if (GetCurrentNode()->Equals(targetNode))
 		{
-			DeferDestroy();
+			Log("Target reached.");
+			pathNodes.clear();
+			return;
 		}
-
-		return;
 	}
 
-	MoveToNode(entranceNode);
+	MoveToNode(targetNode);
 
 	for (auto pathNode : pathNodes)
 	{
-		if (pathNode->Equals(entranceNode))
+		if (pathNode->Equals(targetNode))
 		{
-			entranceReachableForEscape = true;
+			canReachTargetNode = true;
 		}
 	}
 
-	if (!entranceReachableForEscape)
+	if (!canReachTargetNode)
 	{
 		pathNodes.clear();
 	}
