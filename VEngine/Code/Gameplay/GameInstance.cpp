@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "GameInstance.h"
 
-std::string GameInstance::startingMap = "prison_starting_cell.vmap";
+std::string GameInstance::startingMap = "vagrant_story_test.vmap";
 std::string GameInstance::previousMapMovedFrom = startingMap;
 
 //Used when continuing from game save files
