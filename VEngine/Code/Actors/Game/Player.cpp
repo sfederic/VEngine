@@ -535,7 +535,16 @@ void Player::InteractInfoToWidgetCheck()
 	HitResult hit(this);
 	if (Raycast(hit, GetPositionV(), GetMeshForward(), 1.f))
 	{
-		auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
+		auto npc = hit.GetHitActorAs<NPC>();
+		if (npc)
+		{
+			interactWidget->worldPosition = GetHomogeneousPositionV();
+			interactWidget->interactText = L"Talk";
+			interactWidget->AddToViewport();
+			return;
+		}
+
+		auto gridActor = hit.GetHitActorAs<GridActor>();
 		if (gridActor)
 		{
 			if (!gridActor->interactText.empty())
