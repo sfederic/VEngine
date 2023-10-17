@@ -76,7 +76,6 @@ Properties Unit::GetProps()
 {
 	auto props = __super::GetProps();
 	props.Add("Move Points", &movementPoints);
-	props.Add("Move Speed", &moveSpeed);
 	props.Add("Attack Points", &attackPoints);
 	props.Add("Attack Range", &attackRange);
 	props.Add("Battle State", &battleState);
