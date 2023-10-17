@@ -32,5 +32,6 @@ struct NPC : Unit
 	int nodeToMoveToXIndex = 0;
 	int nodeToMoveToYIndex = 0;
 
+	bool tryToReachTargetNode = false;
 	bool canReachTargetNode = false;
 };

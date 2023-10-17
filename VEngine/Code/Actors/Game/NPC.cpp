@@ -65,6 +65,7 @@ Properties NPC::GetProps()
 	props.Add("Spawn Text", &spawnText);
 	props.Add("Target Node X", &nodeToMoveToXIndex);
 	props.Add("Target Node Y", &nodeToMoveToYIndex);
+	props.Add("Reach TargetNode", &tryToReachTargetNode);
 	return props;
 }
 
@@ -88,6 +89,11 @@ void NPC::EndQuickTalkTo()
 
 void NPC::TryToReachTargetNode()
 {
+	if (!tryToReachTargetNode)
+	{
+		return;
+	}
+
 	auto grid = Grid::system.GetOnlyActor();
 	auto targetNode = grid->GetNode(nodeToMoveToXIndex, nodeToMoveToYIndex);
 
@@ -97,7 +103,7 @@ void NPC::TryToReachTargetNode()
 		{
 			Log("Target reached.");
 			pathNodes.clear();
-			return;
+			tryToReachTargetNode = false;
 		}
 	}
 
