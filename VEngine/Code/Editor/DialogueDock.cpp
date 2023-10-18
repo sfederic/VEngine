@@ -85,6 +85,7 @@ void DialogueDock::PopulateTreeItem(QTreeWidgetItem* item)
 	//Setup condition combobox
 	auto conditionComboBox = new QComboBox(this);
 	auto& conditions = conditionSystem.GetConditions();
+	conditionComboBox->addItem(""); //Add an empty option 
 	for (auto& [name, func] : conditions)
 	{
 		const QString conditionName = QString::fromStdString(name);
