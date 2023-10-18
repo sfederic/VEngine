@@ -20,6 +20,8 @@ void NPC::Create()
 
 	canBeMovedInLink = false;
 	canBeRotatedInLink = false;
+
+	SetMeshFilename("char.vmesh");
 }
 
 void NPC::Start()
