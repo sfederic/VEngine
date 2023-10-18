@@ -15,6 +15,7 @@
 #include "Core/VFunctionSystem.h"
 #include "Core/VString.h"
 #include "Asset/AssetPaths.h"
+#include "Gameplay/ConditionSystem.h"
 
 //columns for QTreeWidget
 const int lineColumn = 0;
@@ -27,9 +28,9 @@ const int textColumn = 5;
 DialogueDock::DialogueDock() : QDockWidget("Dialogue")
 {
 	//TREE WIDGET
-	dialogueTree = new QTreeWidget(); 
+	dialogueTree = new QTreeWidget();
 	dialogueTree->setColumnCount(6);
-	dialogueTree->setHeaderLabels({ "Line", "Goto", "Actor", "Condition", "CondArg", "Text"});
+	dialogueTree->setHeaderLabels({ "Line", "Goto", "Actor", "Condition", "CondArg", "Text" });
 
 	//BUTTONS
 	auto insertDialogueLineButton = new QPushButton("Insert Line");
@@ -76,11 +77,20 @@ void DialogueDock::PopulateTreeItem(QTreeWidgetItem* item)
 	auto actorsInWorld = World::GetAllActorsInWorld();
 	for (auto actor : actorsInWorld)
 	{
-		QString actorName = QString::fromStdString(actor->GetName());
+		const QString actorName = QString::fromStdString(actor->GetName());
 		actorComboBox->addItem(actorName);
 	}
-
 	dialogueTree->setItemWidget(item, actorColumn, actorComboBox);
+
+	//Setup condition combobox
+	auto conditionComboBox = new QComboBox(this);
+	auto& conditions = conditionSystem.GetConditions();
+	for (auto& [name, func] : conditions)
+	{
+		const QString conditionName = QString::fromStdString(name);
+		conditionComboBox->addItem(conditionName);
+	}
+	dialogueTree->setItemWidget(item, conditionColumn, conditionComboBox);
 }
 
 void DialogueDock::AddEmptyDialogueLine()
@@ -117,7 +127,7 @@ void DialogueDock::SaveDialogueToFile()
 	os.open(saveName.toStdString(), std::ios_base::out);
 
 	QTreeWidgetItemIterator it(dialogueTree);
-	while (*it) 
+	while (*it)
 	{
 		auto lineText = (*it)->text(lineColumn);
 		auto gotoText = (*it)->text(gotoColumn);
@@ -170,17 +180,17 @@ void DialogueDock::LoadDialogueFile()
 
 		wchar_t line[1024];
 
-		is.getline(line, 1024); 
+		is.getline(line, 1024);
 		lineText.assign(line);
 		if (lineText.empty())
 		{
 			break;
 		}
-		
-		is.getline(line, 1024); 
+
+		is.getline(line, 1024);
 		gotoText.assign(line);
-		
-		is.getline(line, 1024); 
+
+		is.getline(line, 1024);
 		actorText.assign(line);
 
 		is.getline(line, 1024);
@@ -190,8 +200,8 @@ void DialogueDock::LoadDialogueFile()
 		conditionArgText.assign(line);
 
 		is.getline(line, 1024);
-		text.assign(line);		
-		
+		text.assign(line);
+
 		//Populate widget items
 		auto item = new QTreeWidgetItem(dialogueTree);
 		PopulateTreeItem(item);
