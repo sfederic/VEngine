@@ -82,7 +82,7 @@ public:
 	virtual void OnLinkActivate();
 	virtual void OnLinkDeactivate();
 
-	virtual void OnLinkRotate() { isRotating = true; }
+	virtual void OnLinkRotate();
 	virtual void OnLinkRotateRight() {}
 	virtual void OnLinkRotateLeft() {}
 
@@ -169,6 +169,8 @@ public:
 	bool IsInspectable() { return isInspectable; }
 
 private:
+	void SpawnDustSpriteSheet();
+
 	//For any grid actor that will move/rotate another grid actor on a player's link, 
 	//this is the actor the player's camera will focus on instead of itself.
 	Actor* actorForPlayerFocusOnLink = nullptr;

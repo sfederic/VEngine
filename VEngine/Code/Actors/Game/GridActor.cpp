@@ -60,6 +60,12 @@ void GridActor::OnLinkDeactivate()
 	Grid::system.GetOnlyActor()->Awake();
 }
 
+void GridActor::OnLinkRotate()
+{
+	isRotating = true;
+	SpawnDustSpriteSheet();
+}
+
 void GridActor::OnRotationEnd()
 {
 	if (isRotating)
@@ -85,12 +91,7 @@ void GridActor::OnMoveEnd()
 void GridActor::OnLinkMove()
 {
 	isMoving = true;
-
-	XMVECTOR spawnPos = GetPositionV();
-	spawnPos.m128_f32[1] -= 0.4f;
-	auto& sprite = GameUtils::SpawnSpriteSheet("Sprites/dust.png", spawnPos, false, 3, 2);
-	sprite.SetAnimationSpeed(15.f);
-	sprite.SetWorldScale(0.5f);
+	SpawnDustSpriteSheet();
 }
 
 void GridActor::Inspect()
@@ -375,4 +376,13 @@ void GridActor::DisableAllInteractivity()
 	canBeRotatedYawYAxis = false;
 	canBeRotatedPitchXAxis = false;
 	ignoreRotationValidCheck = true;
+}
+
+void GridActor::SpawnDustSpriteSheet()
+{
+	XMVECTOR spawnPos = GetPositionV();
+	spawnPos.m128_f32[1] -= 0.25f;
+	auto& sprite = GameUtils::SpawnSpriteSheet("Sprites/dust.png", spawnPos, false, 3, 2);
+	sprite.SetAnimationSpeed(15.f);
+	sprite.SetWorldScale(0.5f);
 }
