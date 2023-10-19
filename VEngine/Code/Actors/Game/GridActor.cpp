@@ -10,6 +10,8 @@
 #include "WaterVolume.h"
 #include "Core/VMath.h"
 #include "Physics/Raycast.h"
+#include "Gameplay/GameUtils.h"
+#include "Particle/SpriteSheet.h"
 
 GridActor::GridActor()
 {
@@ -78,6 +80,15 @@ void GridActor::OnMoveEnd()
 			isMoving = false;
 		}
 	}
+}
+
+void GridActor::OnLinkMove()
+{
+	isMoving = true;
+
+	auto& sprite = GameUtils::SpawnSpriteSheet("Sprites/dust.png", GetPositionV(), false, 3, 2);
+	sprite.SetAnimationSpeed(15.f);
+	sprite.SetWorldScale(0.5f);
 }
 
 void GridActor::Inspect()

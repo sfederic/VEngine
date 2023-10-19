@@ -89,7 +89,7 @@ public:
 	virtual void OnRotationEnd();
 	virtual void OnMoveEnd();
 
-	virtual void OnLinkMove() { isMoving = true; }
+	virtual void OnLinkMove();
 
 	virtual void Interact() {}
 
