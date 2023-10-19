@@ -81,7 +81,6 @@ void WorldEditor::Reset()
 
 	pickedActors.clear();
 	pickedComponent = nullptr;
-	spawnSystem = nullptr;
 	actorTemplateFilename.clear();
 }
 
