@@ -15,6 +15,66 @@ DirectionalLightActor0
 UID
 1115523487
 next
+EntranceTrigger
+2
+ Enabled
+1
+ Position
+2 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+marketplace.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+2173964086
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+6 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+marketplace.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger1
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+3371334176
+Unlock Audio
+
+next
 Grid
 1
  Enabled
@@ -59,7 +119,7 @@ Health
 Ignore Rotate Check
 0
 Inspect
-1
+0
 Interact
 1
 Interact Text
@@ -74,12 +134,16 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 GridActor0
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
@@ -108,7 +172,7 @@ Health
 Ignore Rotate Check
 0
 Inspect
-1
+0
 Interact
 1
 Interact Text
@@ -123,12 +187,16 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 Lift0
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
@@ -157,7 +225,7 @@ Health
 Ignore Rotate Check
 0
 Inspect
-1
+0
 Interact
 1
 Interact Text
@@ -174,12 +242,18 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Direction
+0 1 0
+Move Speed
+12
 Name
 LiftCrank0
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
@@ -325,7 +399,7 @@ UID
 4195193246
 next
 BoxTriggerComponent
-1
+3
 2957705919
 LiftTrigger
  Enabled
@@ -344,6 +418,44 @@ Offset
 0 0 0
 UID
 839732026
+next
+2173964086
+Trigger
+ Enabled
+1
+ Pos
+2 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+1406367637
+next
+3371334176
+Trigger
+ Enabled
+1
+ Pos
+6 0 3
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+809507194
 next
 CameraComponent
 1
@@ -367,6 +479,34 @@ Near Z
 0.01
 UID
 485129303
+next
+ConditionComponent
+2
+2173964086
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+2215249825
+next
+3371334176
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+2176228931
 next
 DialogueComponent
 4

@@ -15,6 +15,124 @@ DirectionalLightActor0
 UID
 2371067070
 next
+EntranceTrigger
+4
+ Enabled
+1
+ Position
+0 0 6
+ Rotation
+-0 0.707107 -0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+market_lift_building.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+4207290928
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+4 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+market_roof_hop.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger1
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+3682674273
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+0 0 13
+ Rotation
+0 0.707107 0 0.707107
+ Scale
+0.999997 1 0.999997
+ Visible
+1
+Entrance Active
+1
+Level Name
+market_fruit_stands.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger2
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+1074656225
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+4 0 26
+ Rotation
+0 0.707107 0 0.707107
+ Scale
+0.999992 1 0.999992
+ Visible
+1
+Entrance Active
+1
+Level Name
+town_courtyard.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger3
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+1486461316
+Unlock Audio
+
+next
 Grid
 1
  Enabled
@@ -37,7 +155,7 @@ UID
 2509140789
 next
 MeshActor
-27
+24
  Enabled
 1
  Position
@@ -266,7 +384,7 @@ next
  Enabled
 1
  Position
-0 0 7
+8 0 6
  Rotation
 -0 0 -0 1
  Scale
@@ -274,14 +392,14 @@ next
  Visible
 1
 Name
-cube15
+market_vase15
 UID
-3810011429
+29638689
 next
  Enabled
 1
  Position
-0 1 7
+7 0 7
  Rotation
 -0 0 -0 1
  Scale
@@ -289,9 +407,9 @@ next
  Visible
 1
 Name
-cube16
+vase16
 UID
-2131490763
+3109577297
 next
  Enabled
 1
@@ -356,7 +474,7 @@ next
  Enabled
 1
  Position
-0 2 8
+7 0 6
  Rotation
 -0 0 -0 1
  Scale
@@ -364,9 +482,9 @@ next
  Visible
 1
 Name
-cube21
+market_vase21
 UID
-480790323
+728595164
 next
  Enabled
 1
@@ -398,51 +516,6 @@ cube23
 UID
 1599398995
 next
- Enabled
-1
- Position
-7 0 6
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-market_vase24
-UID
-728595164
-next
- Enabled
-1
- Position
-8 0 6
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-market_vase25
-UID
-29638689
-next
- Enabled
-1
- Position
-7 0 7
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-vase26
-UID
-3109577297
-next
 Player
 1
  Enabled
@@ -459,6 +532,84 @@ Name
 Player0
 UID
 1437911246
+next
+BoxTriggerComponent
+4
+4207290928
+Trigger
+ Enabled
+1
+ Pos
+0 0 6
+ Rot
+-0 0.707107 -0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+3158148062
+next
+3682674273
+Trigger
+ Enabled
+1
+ Pos
+4 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+3151543491
+next
+1074656225
+Trigger
+ Enabled
+1
+ Pos
+0 0 13
+ Rot
+0 0.707107 0 0.707107
+ Scale
+0.999997 1 0.999997
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+2510180758
+next
+1486461316
+Trigger
+ Enabled
+1
+ Pos
+4 0 26
+ Rot
+0 0.707107 0 0.707107
+ Scale
+0.999992 1 0.999992
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+369638367
 next
 CameraComponent
 1
@@ -482,6 +633,60 @@ Near Z
 0.01
 UID
 2195590283
+next
+ConditionComponent
+4
+4207290928
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+4127789673
+next
+3682674273
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+644650027
+next
+1074656225
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+2787850105
+next
+1486461316
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+4152547996
 next
 DialogueComponent
 1
@@ -592,7 +797,7 @@ UID
 785587915
 next
 MeshComponent
-28
+25
 129195001
 Mesh
  Enabled
@@ -1418,12 +1623,12 @@ Trans. Occlude
 UID
 2490458476
 next
-3810011429
+29638689
 Mesh
  Enabled
 1
  Pos
-0 0 7
+8 0 6
  Rot
 -0 0 -0 1
  Scale
@@ -1451,7 +1656,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-crate.jpg
+stone.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1465,20 +1670,20 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-cube.vmesh
+market_vase.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-3675586107
+3887944291
 next
-2131490763
+3109577297
 Mesh
  Enabled
 1
  Pos
-0 1 7
+7 0 7
  Rot
 -0 0 -0 1
  Scale
@@ -1506,7 +1711,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-crate.jpg
+stone_tablet.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1520,13 +1725,13 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-cube.vmesh
+vase.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-844640494
+718868011
 next
 125841315
 Mesh
@@ -1748,12 +1953,12 @@ Trans. Occlude
 UID
 2016554683
 next
-480790323
+728595164
 Mesh
  Enabled
 1
  Pos
-0 2 8
+7 0 6
  Rot
 -0 0 -0 1
  Scale
@@ -1781,7 +1986,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-crate.jpg
+stone.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1795,68 +2000,13 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-cube.vmesh
+market_vase.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-1741729325
-next
-1437911246
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-char.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3576365138
+3732724188
 next
 3386604601
 Mesh
@@ -1968,14 +2118,14 @@ Trans. Occlude
 UID
 3825956033
 next
-728595164
+1437911246
 Mesh
  Enabled
 1
  Pos
-7 0 6
+0 0 0
  Rot
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -2001,7 +2151,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-stone.jpg
+test.png
 M_Use Texture
 1
 M_UvOffset
@@ -2015,122 +2165,12 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-market_vase.vmesh
+char.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-3732724188
-next
-29638689
-Mesh
- Enabled
-1
- Pos
-8 0 6
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-stone.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-market_vase.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3887944291
-next
-3109577297
-Mesh
- Enabled
-1
- Pos
-7 0 7
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-stone_tablet.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-vase.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-718868011
+3576365138
 next
 end

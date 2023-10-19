@@ -15,6 +15,66 @@ DirectionalLightActor0
 UID
 1226478126
 next
+EntranceTrigger
+2
+ Enabled
+1
+ Position
+2 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+market_lift_building.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+1901365577
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+2 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+marketplace.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger1
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+910509294
+Unlock Audio
+
+next
 Grid
 1
  Enabled
@@ -59,7 +119,7 @@ Health
 Ignore Rotate Check
 0
 Inspect
-1
+0
 Interact
 1
 Interact Text
@@ -74,12 +134,16 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 GridActor0
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
@@ -110,7 +174,7 @@ Health
 Ignore Rotate Check
 0
 Inspect
-1
+0
 Interact
 1
 Interact Text
@@ -125,12 +189,16 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 GridActorBasket0
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
@@ -190,7 +258,7 @@ UID
 2149287051
 next
 BoxTriggerComponent
-1
+3
 2149287051
 VolumeTrigger
  Enabled
@@ -209,6 +277,44 @@ Offset
 0 0 0
 UID
 1214667057
+next
+1901365577
+Trigger
+ Enabled
+1
+ Pos
+2 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+3271254522
+next
+910509294
+Trigger
+ Enabled
+1
+ Pos
+2 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+741122467
 next
 CameraComponent
 1
@@ -233,8 +339,47 @@ Near Z
 UID
 3192679035
 next
+ConditionComponent
+2
+1901365577
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+2457291999
+next
+910509294
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+1612318712
+next
 DialogueComponent
 3
+163202622
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2005473867
+next
 704260897
 Dialogue
  Enabled
@@ -256,17 +401,6 @@ File
 
 UID
 2716858335
-next
-163202622
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-2005473867
 next
 DirectionalLightComponent
 1
@@ -290,7 +424,7 @@ UID
 137499521
 next
 EmptyComponent
-1
+2
 1274265704
 Root
  Enabled
@@ -305,6 +439,21 @@ Root
 1
 UID
 980334220
+next
+2149287051
+Root
+ Enabled
+1
+ Pos
+1 0.5 3
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+2411408636
 next
 InstanceMeshComponent
 1
@@ -365,6 +514,61 @@ UID
 next
 MeshComponent
 5
+163202622
+Mesh
+ Enabled
+1
+ Pos
+1 0 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+stone.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+market_vase.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1579884331
+next
 704260897
 Mesh
  Enabled
@@ -584,60 +788,5 @@ Trans. Occlude
 0
 UID
 172155527
-next
-163202622
-Mesh
- Enabled
-1
- Pos
-1 0 1
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-stone.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-market_vase.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1579884331
 next
 end
