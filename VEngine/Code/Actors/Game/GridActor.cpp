@@ -86,7 +86,9 @@ void GridActor::OnLinkMove()
 {
 	isMoving = true;
 
-	auto& sprite = GameUtils::SpawnSpriteSheet("Sprites/dust.png", GetPositionV(), false, 3, 2);
+	XMVECTOR spawnPos = GetPositionV();
+	spawnPos.m128_f32[1] -= 0.4f;
+	auto& sprite = GameUtils::SpawnSpriteSheet("Sprites/dust.png", spawnPos, false, 3, 2);
 	sprite.SetAnimationSpeed(15.f);
 	sprite.SetWorldScale(0.5f);
 }
