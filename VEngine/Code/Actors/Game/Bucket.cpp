@@ -90,9 +90,9 @@ void Bucket::EmptyWater()
 				puddle->SetTransform(t);
 
 				//Spawn water splash effect
-				auto waterSplashSprite = GameUtils::SpawnSpriteSheet(
+				auto& waterSplashSprite = GameUtils::SpawnSpriteSheet(
 					"Sprites/water_splash.png", puddle->GetWorldPositionV(), false, 2, 4);
-				waterSplashSprite->SetWorldScale(0.5f);
+				waterSplashSprite.SetWorldScale(0.5f);
 
 				//Handle water volumes
 				auto waterVolume = rayHit.GetHitActorAs<WaterVolume>();

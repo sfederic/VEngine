@@ -15,8 +15,8 @@ class ParticleEmitter;
 //Utility functions for in-game stuff
 namespace GameUtils
 {
-	SpriteSheet* SpawnSpriteSheet(std::string textureFilename, XMVECTOR spawnPosition, bool loop, int numRows, int numColumns);
-	Polyboard* SpawnPolyboard(const std::string_view textureFilename,
+	SpriteSheet& SpawnSpriteSheet(std::string_view textureFilename, XMVECTOR spawnPosition, bool loop, int numRows, int numColumns);
+	Polyboard& SpawnPolyboard(const std::string_view textureFilename,
 		const XMVECTOR startPosition, const XMVECTOR endPosition, float destroyTimer = 0.f);
 
 	//Lifetime being 0 means the emitter will loop

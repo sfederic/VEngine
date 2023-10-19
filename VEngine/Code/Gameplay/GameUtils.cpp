@@ -18,7 +18,7 @@ namespace GameUtils
 	std::string levelToMoveTo;
 	std::string entranceTriggerTag;
 
-	SpriteSheet* SpawnSpriteSheet(std::string textureFilename, XMVECTOR spawnPosition, bool loop, int numRows, int numColumns)
+	SpriteSheet& SpawnSpriteSheet(std::string_view textureFilename, XMVECTOR spawnPosition, bool loop, int numRows, int numColumns)
 	{
 		auto spriteSheet = SpriteSheet::system.Add("SpriteSheet", nullptr, SpriteSheet(), false);
 
@@ -26,10 +26,10 @@ namespace GameUtils
 		spriteSheet->SetupSpriteData(textureFilename, numRows, numColumns, loop);
 		spriteSheet->Create();
 
-		return spriteSheet;
+		return *spriteSheet;
 	}
 
-	Polyboard* SpawnPolyboard(const std::string_view textureFilename,
+	Polyboard& SpawnPolyboard(const std::string_view textureFilename,
 		const XMVECTOR startPosition, const XMVECTOR endPosition, float destroyTimer)
 	{
 		std::string name = "Polyboard" + std::to_string(Polyboard::system.GetNumComponents());
@@ -43,7 +43,7 @@ namespace GameUtils
 			polyboard->SetDestroyTimer(destroyTimer);
 		}
 
-		return polyboard;
+		return *polyboard;
 	}
 
 	ParticleEmitter* SpawnParticleEmitter(std::string textureFilename, XMVECTOR spawnPosition, float lifeTime)
