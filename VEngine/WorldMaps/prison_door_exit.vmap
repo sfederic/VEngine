@@ -30,7 +30,7 @@ EntranceTrigger
 Entrance Active
 1
 Level Name
-
+prison_quarters.vmap
 Locked Text
 Locked
 Name
@@ -59,7 +59,7 @@ next
 Entrance Active
 1
 Level Name
-
+prison_hallway.vmap
 Locked Text
 Locked
 Name
@@ -240,25 +240,6 @@ UID
 next
 BoxTriggerComponent
 3
-1032817134
-BoxTrigger
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Extents
-0.45 0.45 0.45
-Offset
-0 0 0
-UID
-1503824953
-next
 2832098088
 Trigger
  Enabled
@@ -296,6 +277,25 @@ Offset
 0 0 0
 UID
 3628344457
+next
+1032817134
+BoxTrigger
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+1503824953
 next
 CameraComponent
 1

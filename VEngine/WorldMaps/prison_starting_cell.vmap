@@ -49,7 +49,7 @@ EntranceTrigger
 Entrance Active
 1
 Level Name
-
+prison_hallway.vmap
 Locked Text
 Locked
 Name
@@ -347,7 +347,7 @@ Camera
  Enabled
 1
  Pos
-1.25 0.55 -0.75
+1.75 1.75 -2.75
  Rot
 0 0 0 1
  Scale
@@ -404,17 +404,6 @@ File
 UID
 2562176457
 next
-65991226
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-3874404908
-next
 922720363
 Dialogue
  Enabled
@@ -425,6 +414,17 @@ File
 
 UID
 3064249802
+next
+65991226
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+3874404908
 next
 DirectionalLightComponent
 1
@@ -703,14 +703,14 @@ Trans. Occlude
 UID
 3110082388
 next
-65991226
+922720363
 Mesh
  Enabled
 1
  Pos
-0 0 0
+6 0 1
  Rot
-0 2.98023e-08 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -750,13 +750,13 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-char.vmesh
+bed.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-897629751
+3834286733
 next
 3165173524
 Mesh
@@ -868,14 +868,14 @@ Trans. Occlude
 UID
 970216264
 next
-922720363
+65991226
 Mesh
  Enabled
 1
  Pos
-6 0 1
+0 0 0
  Rot
--0 0 -0 1
+0 2.98023e-08 0 1
  Scale
 1 1 1
  Visible
@@ -915,12 +915,12 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-bed.vmesh
+char.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-3834286733
+897629751
 next
 end

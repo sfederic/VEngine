@@ -90,7 +90,7 @@ UID
 1071073583
 next
 EntranceTrigger
-5
+6
  Enabled
 1
  Position
@@ -233,6 +233,35 @@ Tag
 
 UID
 3422509208
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+1 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+prison_quarters.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger5
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+3171720670
 Unlock Audio
 
 next
@@ -568,7 +597,7 @@ UID
 1296732458
 next
 BoxTriggerComponent
-5
+6
 3455457880
 Trigger
  Enabled
@@ -664,6 +693,25 @@ Offset
 UID
 1899655749
 next
+3171720670
+Trigger
+ Enabled
+1
+ Pos
+1 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+2074008165
+next
 CameraComponent
 1
 1296732458
@@ -688,7 +736,7 @@ UID
 4175290188
 next
 ConditionComponent
-5
+6
 3455457880
 Condition
  Enabled
@@ -753,6 +801,19 @@ Condition Arg
 
 UID
 3764163408
+next
+3171720670
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+2200671175
 next
 DialogueComponent
 7
