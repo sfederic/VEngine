@@ -90,7 +90,7 @@ Entrance Active
 Level Name
 aqueduct_to_market.vmap
 Locked Text
-wdedswwwwwwwweesdqqsaewdeesd
+Locked
 Name
 EntranceTrigger2
 Open Audio
@@ -1265,17 +1265,6 @@ File
 UID
 1954545688
 next
-2163157409
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-1064599999
-next
 2562702139
 Dialogue
  Enabled
@@ -1297,6 +1286,17 @@ File
 
 UID
 1063602407
+next
+2163157409
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1064599999
 next
 DirectionalLightComponent
 1
@@ -2055,6 +2055,116 @@ Trans. Occlude
 UID
 431952500
 next
+2562702139
+Mesh
+ Enabled
+1
+ Pos
+10 -0 9
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+365186824
+next
+2766364638
+Mesh
+ Enabled
+1
+ Pos
+11 0 9
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+gear.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3267888386
+next
 2189207719
 Mesh
  Enabled
@@ -2494,115 +2604,5 @@ Trans. Occlude
 0
 UID
 974725629
-next
-2562702139
-Mesh
- Enabled
-1
- Pos
-10 -0 9
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-365186824
-next
-2766364638
-Mesh
- Enabled
-1
- Pos
-11 0 9
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-gear.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3267888386
 next
 end

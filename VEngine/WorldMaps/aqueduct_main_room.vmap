@@ -35,7 +35,7 @@ UID
 2392698969
 next
 EntranceTrigger
-3
+4
  Enabled
 1
  Position
@@ -107,7 +107,7 @@ next
 Entrance Active
 1
 Level Name
-
+aqueduct_to_market.vmap
 Locked Text
 Locked
 Name
@@ -120,6 +120,35 @@ Tag
 
 UID
 2075842376
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+4 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+aqueduct_room.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger3
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+768149176
 Unlock Audio
 
 next
@@ -299,7 +328,7 @@ UID
 602957893
 next
 BoxTriggerComponent
-3
+4
 3919014016
 Trigger
  Enabled
@@ -357,6 +386,25 @@ Offset
 UID
 4091007477
 next
+768149176
+Trigger
+ Enabled
+1
+ Pos
+4 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+3174921341
+next
 CameraComponent
 1
 602957893
@@ -381,7 +429,7 @@ UID
 2805768607
 next
 ConditionComponent
-3
+4
 3919014016
 Condition
  Enabled
@@ -420,6 +468,19 @@ Condition Arg
 
 UID
 3736390423
+next
+768149176
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+911353808
 next
 DialogueComponent
 1

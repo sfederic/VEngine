@@ -59,7 +59,7 @@ next
 Entrance Active
 1
 Level Name
-aqueduct_pipe_fill.vmap
+aqueduct_main_room.vmap
 Locked Text
 Locked
 Name
@@ -394,7 +394,7 @@ next
  Visible
 1
 Name
-pipe36
+pipe19
 UID
 3011477672
 next
@@ -409,7 +409,7 @@ next
  Visible
 1
 Name
-pipe38
+pipe20
 UID
 2480170645
 next
@@ -424,7 +424,7 @@ next
  Visible
 1
 Name
-pipe35
+pipe21
 UID
 1299494509
 next
@@ -439,7 +439,7 @@ next
  Visible
 1
 Name
-pipe37
+pipe22
 UID
 4002797668
 next
@@ -454,7 +454,7 @@ next
  Visible
 1
 Name
-pipe34
+pipe23
 UID
 163713520
 next
@@ -469,7 +469,7 @@ next
  Visible
 1
 Name
-pipe29
+pipe24
 UID
 1793747243
 next
@@ -751,61 +751,6 @@ UID
 next
 MeshComponent
 30
-3893847023
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-0
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-char.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3839367250
-next
 231175086
 Mesh
  Enabled
@@ -2400,5 +2345,60 @@ Trans. Occlude
 0
 UID
 4253676260
+next
+3893847023
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3839367250
 next
 end
