@@ -122,7 +122,6 @@
     <ClCompile Include="Code\Actors\Game\ActivateOnGlobalProp.cpp" />
     <ClCompile Include="Code\Actors\Game\ClockHand.cpp" />
     <ClCompile Include="Code\Actors\Game\LinkedObjects.cpp" />
-    <ClCompile Include="Code\Actors\Game\Canon.cpp" />
     <ClCompile Include="Code\Actors\Game\Bolt.cpp" />
     <ClCompile Include="Code\Actors\Game\Burnable.cpp" />
     <ClCompile Include="Code\Actors\Game\Bucket.cpp" />
@@ -347,7 +346,6 @@
     <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.h" />
     <ClInclude Include="Code\Actors\Game\ClockHand.h" />
     <ClInclude Include="Code\Actors\Game\LinkedObjects.h" />
-    <ClInclude Include="Code\Actors\Game\Canon.h" />
     <ClInclude Include="Code\Actors\Game\Bolt.h" />
     <ClInclude Include="Code\Actors\Game\Burnable.h" />
     <ClInclude Include="Code\Actors\Game\Bucket.h" />

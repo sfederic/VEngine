@@ -632,9 +632,6 @@
     <ClCompile Include="Code\Actors\Game\OilSlick.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\Canon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\Game\PointLightGridActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1459,9 +1456,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\OilSlick.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\Canon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\PointLightGridActor.h">
