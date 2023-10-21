@@ -285,6 +285,11 @@ void Player::OverlapPickupGridActor()
 
 void Player::PrimaryAction()
 {
+	if (!CheckIfMovementAndRotationStopped())
+	{
+		return;
+	}
+
 	if (Input::GetKeyUp(Keys::Down))
 	{
 		if (!inInspection)
@@ -582,6 +587,11 @@ bool Player::AttackGridActorBasedOnNode()
 
 void Player::LinkToGridActor()
 {
+	if (!CheckIfMovementAndRotationStopped())
+	{
+		return;
+	}
+
 	if (isInputLinkedToGridActor) //Cancel
 	{
 		if (Input::GetKeyUp(Keys::BackSpace))
