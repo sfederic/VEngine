@@ -117,69 +117,69 @@ void BinaryDeserialiser::ReadWString(std::wstring* wstr)
 Serialiser::Serialiser(const std::string filename_, const OpenMode mode_) :
 	filename(filename_), mode(mode_)
 {
-	typeToWriteFuncMap[typeid(bool)] = [&](Property& prop, std::wstring& name) {
+	typeToWriteFuncMap.emplace(typeid(bool), [&](Property& prop, std::wstring& name) {
 		ss << name << "\n" << *prop.GetData<bool>() << "\n";
-		};
+		});
 
-	typeToWriteFuncMap[typeid(float)] = [&](Property& prop, std::wstring& name) {
+	typeToWriteFuncMap.emplace(typeid(float), [&](Property& prop, std::wstring& name) {
 		ss << name << "\n" << *prop.GetData<float>() << "\n";
-		};
+		});
 
-	typeToWriteFuncMap[typeid(XMFLOAT2)] = [&](Property& prop, std::wstring& name) {
+	typeToWriteFuncMap.emplace(typeid(XMFLOAT2), [&](Property& prop, std::wstring& name) {
 		auto value = prop.GetData<XMFLOAT2>();
 		ss << name << "\n" << value->x << " " << value->y << "\n";
-		};
+		});
 
-	typeToWriteFuncMap[typeid(XMINT2)] = [&](Property& prop, std::wstring& name) {
+	typeToWriteFuncMap.emplace(typeid(XMINT2), [&](Property& prop, std::wstring& name) {
 		auto value = prop.GetData<XMINT2>();
 		ss << name << "\n" << value->x << " " << value->y << "\n";
-		};
+		});
 
-	typeToWriteFuncMap[typeid(XMFLOAT3)] = [&](Property& prop, std::wstring& name) {
+	typeToWriteFuncMap.emplace(typeid(XMFLOAT3), [&](Property& prop, std::wstring& name) {
 		auto value = prop.GetData<XMFLOAT3>();
 		ss << name << "\n" << value->x << " " << value->y << " " << value->z << "\n";
-		};
+		});
 
-	typeToWriteFuncMap[typeid(XMFLOAT4)] = [&](Property& prop, std::wstring& name) {
+	typeToWriteFuncMap.emplace(typeid(XMFLOAT4), [&](Property& prop, std::wstring& name) {
 		auto value = prop.GetData<XMFLOAT4>();
 		ss << name << "\n" << value->x << " " << value->y << " " << value->z << " " << value->w << "\n";
-		};
+		});
 
-	typeToWriteFuncMap[typeid(int)] = [&](Property& prop, std::wstring& name) {
+	typeToWriteFuncMap.emplace(typeid(int), [&](Property& prop, std::wstring& name) {
 		ss << name << "\n" << *prop.GetData<int>() << "\n";
-		};
+		});
 
-	typeToWriteFuncMap[typeid(std::string)] = [&](Property& prop, std::wstring& name) {
+	typeToWriteFuncMap.emplace(typeid(std::string), [&](Property& prop, std::wstring& name) {
 		auto str = prop.GetData<std::string>();
 		ss << name << "\n" << str->c_str() << "\n";
-		};
+		});
 
-	typeToWriteFuncMap[typeid(std::wstring)] = [&](Property& prop, std::wstring& name) {
+	typeToWriteFuncMap.emplace(typeid(std::wstring), [&](Property& prop, std::wstring& name) {
 		auto wstr = prop.GetData<std::wstring>();
 		ss << name << "\n" << VString::wstos(wstr->data()).c_str() << "\n";
-		};
+		});
 
-	typeToWriteFuncMap[typeid(TextureData)] = [&](Property& prop, std::wstring& name) {
+	typeToWriteFuncMap.emplace(typeid(TextureData), [&](Property& prop, std::wstring& name) {
 		auto textureData = prop.GetData<TextureData>();
 		ss << name << "\n" << textureData->filename.c_str() << "\n";
-		};
+		});
 
-	typeToWriteFuncMap[typeid(MeshComponentData)] = [&](Property& prop, std::wstring& name) {
+	typeToWriteFuncMap.emplace(typeid(MeshComponentData), [&](Property& prop, std::wstring& name) {
 		auto meshComponentData = prop.GetData<MeshComponentData>();
 		ss << name << "\n" << meshComponentData->filename.c_str() << "\n";
-		};
+		});
 
-	typeToWriteFuncMap[typeid(UID)] = [&](Property& prop, std::wstring& name) {
+	typeToWriteFuncMap.emplace(typeid(UID), [&](Property& prop, std::wstring& name) {
 		auto uid = prop.GetData<UID>();
 		ss << name << "\n";
 		ss << *uid << "\n";
-		};
+		});
 
-	typeToWriteFuncMap[typeid(VEnum)] = [&](Property& prop, std::wstring& name) {
+	typeToWriteFuncMap.emplace(typeid(VEnum), [&](Property& prop, std::wstring& name) {
 		auto vEnum = prop.GetData<VEnum>();
 		ss << name << "\n";
 		ss << vEnum->GetValue().c_str() << "\n";
-		};
+		});
 }
 
 Serialiser::~Serialiser()
@@ -223,85 +223,85 @@ Deserialiser::Deserialiser(const std::string filename, const OpenMode mode)
 	//ofs.imbue(loc);
 
 	//Setup read map
-	typeToReadFuncMap[typeid(float)] = [&](Property& prop) {
+	typeToReadFuncMap.emplace(typeid(float), [&](Property& prop) {
 		is >> *prop.GetData<float>();
-		};
+		});
 
-	typeToReadFuncMap[typeid(XMFLOAT2)] = [&](Property& prop) {
+	typeToReadFuncMap.emplace(typeid(XMFLOAT2), [&](Property& prop) {
 		auto float2 = prop.GetData<XMFLOAT2>();
 		is >> float2->x;
 		is >> float2->y;
-		};
+		});
 
-	typeToReadFuncMap[typeid(XMINT2)] = [&](Property& prop) {
+	typeToReadFuncMap.emplace(typeid(XMINT2), [&](Property& prop) {
 		auto int2 = prop.GetData<XMINT2>();
 		is >> int2->x;
 		is >> int2->y;
-		};
+		});
 
-	typeToReadFuncMap[typeid(XMFLOAT3)] = [&](Property& prop) {
+	typeToReadFuncMap.emplace(typeid(XMFLOAT3), [&](Property& prop) {
 		auto float3 = prop.GetData<XMFLOAT3>();
 		is >> float3->x;
 		is >> float3->y;
 		is >> float3->z;
-		};
+		});
 
-	typeToReadFuncMap[typeid(XMFLOAT4)] = [&](Property& prop) {
+	typeToReadFuncMap.emplace(typeid(XMFLOAT4), [&](Property& prop) {
 		auto float4 = prop.GetData<XMFLOAT4>();
 		is >> float4->x;
 		is >> float4->y;
 		is >> float4->z;
 		is >> float4->w;
-		};
+		});
 
-	typeToReadFuncMap[typeid(bool)] = [&](Property& prop) {
+	typeToReadFuncMap.emplace(typeid(bool), [&](Property& prop) {
 		is >> *prop.GetData<bool>();
-		};
+		});
 
-	typeToReadFuncMap[typeid(int)] = [&](Property& prop) {
+	typeToReadFuncMap.emplace(typeid(int), [&](Property& prop) {
 		is >> *prop.GetData<int>();
-		};
+		});
 
-	typeToReadFuncMap[typeid(std::string)] = [&](Property& prop) {
+	typeToReadFuncMap.emplace(typeid(std::string), [&](Property& prop) {
 		wchar_t propString[512]{};
 		is.getline(propString, 512);
 		auto str = prop.GetData<std::string>();
 		str->assign(VString::wstos(propString));
-		};
+		});
 
-	typeToReadFuncMap[typeid(std::wstring)] = [&](Property& prop) {
+	typeToReadFuncMap.emplace(typeid(std::wstring), [&](Property& prop) {
 		//wstring is converted to string on Serialise. Convert back to wstring here.
 		wchar_t propString[512]{};
 		is.getline(propString, 512);
 		auto str = prop.GetData<std::wstring>();
 		str->assign(propString);
-		};
+		});
 
-	typeToReadFuncMap[typeid(TextureData)] = [&](Property& prop) {
+	typeToReadFuncMap.emplace(typeid(TextureData), [&](Property& prop) {
 		wchar_t propString[512]{};
 		is.getline(propString, 512);
 		auto textureData = prop.GetData<TextureData>();
 		textureData->filename.assign(VString::wstos(propString));
-		};
+		});
 
-	typeToReadFuncMap[typeid(MeshComponentData)] = [&](Property& prop) {
+	typeToReadFuncMap.emplace(typeid(MeshComponentData), [&](Property& prop) {
 		wchar_t propString[512]{};
 		is.getline(propString, 512);
 		auto meshComponentData = prop.GetData<MeshComponentData>();
 		meshComponentData->filename.assign(VString::wstos(propString));
-		};
+		});
 
-	typeToReadFuncMap[typeid(UID)] = [&](Property& prop) {
+	typeToReadFuncMap.emplace(typeid(UID), [&](Property& prop) {
 		UID* uid = prop.GetData<UID>();
 		is >> *uid;
-		};
+		});
 
-	typeToReadFuncMap[typeid(VEnum)] = [&](Property& prop) {
+	typeToReadFuncMap.emplace(typeid(VEnum), [&](Property& prop) {
 		wchar_t propString[512]{};
 		is.getline(propString, 512);
 		auto vEnum = prop.GetData<VEnum>();
 		vEnum->SetValue(VString::wstos(propString));
-		};
+		});
 }
 
 Deserialiser::~Deserialiser()
