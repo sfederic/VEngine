@@ -6,7 +6,7 @@
 
 ParticleEmitter::ParticleEmitter(std::string textureFilename, ShaderItem* shaderItem)
 {
-	material = MaterialSystem::CreateMaterial(textureFilename, shaderItem);
+	material = &MaterialSystem::CreateMaterial(textureFilename, shaderItem);
 }
 
 void ParticleEmitter::Tick(float deltaTime)

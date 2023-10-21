@@ -77,7 +77,7 @@ std::vector<MeshComponent*> MeshComponent::SortMeshComponentsByDistance()
 
 MeshComponent::MeshComponent()
 {
-	material = MaterialSystem::CreateMaterial("test.png", ShaderItems::Default);
+	material = &MaterialSystem::CreateMaterial("test.png", ShaderItems::Default);
 }
 
 MeshComponent::MeshComponent(const std::string filename_,
@@ -85,7 +85,7 @@ MeshComponent::MeshComponent(const std::string filename_,
 	ShaderItem* shaderItem)
 {
 	meshComponentData.filename = filename_;
-	material = MaterialSystem::CreateMaterial(textureFilename_, shaderItem);
+	material = &MaterialSystem::CreateMaterial(textureFilename_, shaderItem);
 }
 
 void MeshComponent::Tick(float deltaTime)

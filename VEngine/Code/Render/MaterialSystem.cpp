@@ -7,7 +7,7 @@
 #include "Core/SystemStates.h"
 
 static SystemStates systemState = SystemStates::Unloaded;
-std::unordered_map<UID, Material*> materials;
+std::unordered_map<UID, std::unique_ptr<Material>> materials;
 std::string MaterialSystem::selectedMaterialInEditor;
 
 void MaterialSystem::Init()
@@ -15,18 +15,17 @@ void MaterialSystem::Init()
 	Material::SetupBlendShaderItemsAndRastStateValues();
 }
 
-Material* MaterialSystem::CreateMaterial(std::string textureFilename, ShaderItem* shaderItem)
+Material& MaterialSystem::CreateMaterial(std::string textureFilename, ShaderItem* shaderItem)
 {
 	auto uid = GenerateUID();
-	materials.emplace(uid, new Material(textureFilename, shaderItem));
-	auto material = materials.find(uid)->second;
+	materials.emplace(uid, std::make_unique<Material>(textureFilename, shaderItem));
+	auto& material = materials.find(uid)->second;
 	material->SetUID(uid);
-	return material;
+	return *material;
 }
 
 void MaterialSystem::DestroyMaterial(UID materialUID)
 {
-	delete materials.find(materialUID)->second;
 	materials.erase(materialUID);
 }
 
@@ -38,13 +37,13 @@ Material* MaterialSystem::FindMaterial(UID uid)
 		return nullptr;
 	}
 
-	return materialIt->second;
+	return materialIt->second.get();
 }
 
 Material MaterialSystem::LoadMaterialFromFile(const std::string filename)
 {
 	const std::string filepath = "Materials/" + filename;
-	
+
 	auto material = Material("test.png", ShaderItems::Default);
 	auto materialProps = material.GetProps();
 

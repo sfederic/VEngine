@@ -11,7 +11,7 @@ namespace MaterialSystem
 	extern std::string selectedMaterialInEditor;
 
 	void Init();
-	Material* CreateMaterial(std::string textureFilename, ShaderItem* shaderItem);
+	Material& CreateMaterial(std::string textureFilename, ShaderItem* shaderItem);
 	void DestroyMaterial(UID materialUID);
 	Material* FindMaterial(UID uid);
 	Material LoadMaterialFromFile(const std::string filename);
