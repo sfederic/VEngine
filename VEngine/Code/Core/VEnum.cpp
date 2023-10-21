@@ -10,6 +10,7 @@ void VEnum::SetValue(const std::string& newValue)
 
 void VEnum::Add(const std::string& name)
 {
+	assert(data.find(name) == data.end());
 	data.emplace(name, dataIndex);
 	if (dataIndex == 0) //First Add(), set default value
 	{
