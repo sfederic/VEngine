@@ -24,7 +24,7 @@ void ShaderSystem::Init()
 	ShaderItems::Unlit = new ShaderItem("Unlit", L"Default_vs.cso", L"TextureClip_ps.cso");
 	ShaderItems::Animation = new ShaderItem("Animation", L"Animation_vs.cso", L"Default_ps.cso");
 	ShaderItems::Shadow = new ShaderItem("Shadow", L"Shadows_vs.cso", L"Shadows_ps.cso");
-	ShaderItems::ShadowAnimation = new ShaderItem("Shadow", L"ShadowAnimation_vs.cso", L"Shadows_ps.cso");
+	ShaderItems::ShadowAnimation = new ShaderItem("ShadowAnimation", L"ShadowAnimation_vs.cso", L"Shadows_ps.cso");
 	ShaderItems::Instance = new ShaderItem("Instance", L"Instance_vs.cso", L"Instance_ps.cso");
 	ShaderItems::LightProbe = new ShaderItem("LightProbe", L"LightProbe_vs.cso", L"LightProbe_ps.cso");
 	ShaderItems::SolidColour = new ShaderItem("SolidColour", L"Default_vs.cso", L"SolidColour_ps.cso");
