@@ -30,7 +30,7 @@ EntranceTrigger
 Entrance Active
 1
 Level Name
-prison_quarters.vmap
+prison_door_exit.vmap
 Locked Text
 Locked
 Name
@@ -59,7 +59,7 @@ next
 Entrance Active
 1
 Level Name
-prison_starting_cell.vmap
+prison_box_blockage.vmap
 Locked Text
 Locked
 Name

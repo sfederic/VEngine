@@ -15,6 +15,66 @@ DirectionalLightActor0
 UID
 1780638530
 next
+EntranceTrigger
+2
+ Enabled
+1
+ Position
+2 -0 -0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+prison_simple_box_move.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+3265826775
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+2 -0 14
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+prison_hallway.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger1
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+3987231020
+Unlock Audio
+
+next
 Grid
 1
  Enabled
@@ -459,6 +519,46 @@ Player0
 UID
 583873777
 next
+BoxTriggerComponent
+2
+3265826775
+Trigger
+ Enabled
+1
+ Pos
+2 -0 -0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+673309203
+next
+3987231020
+Trigger
+ Enabled
+1
+ Pos
+2 -0 14
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+3485775604
+next
 CameraComponent
 1
 583873777
@@ -481,6 +581,34 @@ Near Z
 0.01
 UID
 3065839698
+next
+ConditionComponent
+2
+3265826775
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+4167488333
+next
+3987231020
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+3376464229
 next
 DialogueComponent
 8
