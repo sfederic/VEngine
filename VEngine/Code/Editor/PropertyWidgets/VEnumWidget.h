@@ -6,7 +6,7 @@
 class VEnum;
 class QWheelEvent;
 
-class VEnumWidget : public QComboBox, IPropertyWidget
+class VEnumWidget : public QComboBox, public IPropertyWidget
 {
 private:
 	VEnum* value = nullptr;
