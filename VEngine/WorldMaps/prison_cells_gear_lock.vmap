@@ -16,7 +16,7 @@ UID
 2375691607
 next
 EntranceTrigger
-1
+2
  Enabled
 1
  Position
@@ -30,7 +30,7 @@ EntranceTrigger
 Entrance Active
 1
 Level Name
-prison_starting_cell.vmap
+prison_hallway.vmap
 Locked Text
 Locked
 Name
@@ -43,6 +43,35 @@ Tag
 
 UID
 3810238947
+Unlock Audio
+
+next
+ Enabled
+1
+ Position
+7 3 12
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+prison_door_exit.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger1
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+4009060764
 Unlock Audio
 
 next
@@ -280,7 +309,7 @@ UID
 3342261916
 next
 MeshActor
-11
+17
  Enabled
 1
  Position
@@ -446,6 +475,96 @@ node10
 UID
 1336795431
 next
+ Enabled
+1
+ Position
+7 -0.5 7
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+step_medium11
+UID
+4099906910
+next
+ Enabled
+1
+ Position
+7 0 8
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+step_medium12
+UID
+2304387329
+next
+ Enabled
+1
+ Position
+7 0.5 9
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+step_medium13
+UID
+3444488528
+next
+ Enabled
+1
+ Position
+7 1 10
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+step_medium14
+UID
+1589706900
+next
+ Enabled
+1
+ Position
+7 1.5 11
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+step_medium15
+UID
+561014584
+next
+ Enabled
+1
+ Position
+7 2 12
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+step_medium16
+UID
+3847220797
+next
 Player
 1
  Enabled
@@ -464,7 +583,7 @@ UID
 167482976
 next
 BoxTriggerComponent
-3
+4
 3810238947
 Trigger
  Enabled
@@ -522,6 +641,25 @@ Offset
 UID
 1627528621
 next
+4009060764
+Trigger
+ Enabled
+1
+ Pos
+7 3 12
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+1509153797
+next
 CameraComponent
 1
 167482976
@@ -546,7 +684,7 @@ UID
 4222201689
 next
 ConditionComponent
-1
+2
 3810238947
 Condition
  Enabled
@@ -559,6 +697,19 @@ Condition Arg
 
 UID
 2706936410
+next
+4009060764
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+295180305
 next
 DialogueComponent
 5
@@ -713,7 +864,7 @@ UID
 1758109850
 next
 MeshComponent
-16
+22
 1851622775
 Mesh
  Enabled
@@ -1593,5 +1744,335 @@ Trans. Occlude
 0
 UID
 471906387
+next
+4099906910
+Mesh
+ Enabled
+1
+ Pos
+7 -0.5 7
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+step_medium.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+4259409933
+next
+2304387329
+Mesh
+ Enabled
+1
+ Pos
+7 0 8
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+step_medium.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+4097035014
+next
+3444488528
+Mesh
+ Enabled
+1
+ Pos
+7 0.5 9
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+step_medium.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1872380660
+next
+1589706900
+Mesh
+ Enabled
+1
+ Pos
+7 1 10
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+step_medium.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1858808418
+next
+561014584
+Mesh
+ Enabled
+1
+ Pos
+7 1.5 11
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+step_medium.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+4200881982
+next
+3847220797
+Mesh
+ Enabled
+1
+ Pos
+7 2 12
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+step_medium.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1380438317
 next
 end
