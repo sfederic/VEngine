@@ -101,9 +101,9 @@ GridActor
  Enabled
 1
  Position
-1 -0 3
+5 0 2
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -137,7 +137,7 @@ Move Axis Pos.
 Move Speed
 12
 Name
-GridActor0
+GridActor2
 Obstacle
 1
 Rotate Pitch
@@ -147,7 +147,7 @@ Rotate Speed
 Rotate Yaw
 1
 UID
-2647245552
+2242246767
 next
  Enabled
 1
@@ -203,7 +203,7 @@ next
  Enabled
 1
  Position
-5 0 2
+1 0 3
  Rotation
 -0 0 -0 1
  Scale
@@ -239,7 +239,7 @@ Move Axis Pos.
 Move Speed
 12
 Name
-GridActor2
+GridActor720761976
 Obstacle
 1
 Rotate Pitch
@@ -249,10 +249,10 @@ Rotate Speed
 Rotate Yaw
 1
 UID
-2242246767
+1703596568
 next
 MeshActor
-3
+16
  Enabled
 1
  Position
@@ -297,6 +297,201 @@ Name
 node2
 UID
 3548508643
+next
+ Enabled
+1
+ Position
+-0.5 1 3
+ Rotation
+0.5 0.5 0.5 -0.5
+ Scale
+7 0.999994 2.99998
+ Visible
+1
+Name
+node3
+UID
+1097944945
+next
+ Enabled
+1
+ Position
+6.5 1 3
+ Rotation
+0.5 -0.5 -0.5 -0.5
+ Scale
+7 0.999992 2.99997
+ Visible
+1
+Name
+node4
+UID
+3584593768
+next
+ Enabled
+1
+ Position
+-2 -0.5 3
+ Rotation
+-0 0 -0 1
+ Scale
+3 1 7
+ Visible
+1
+Name
+node5
+UID
+1884585314
+next
+ Enabled
+1
+ Position
+8 -0.5 3
+ Rotation
+-0 0 -0 1
+ Scale
+3 1 7
+ Visible
+1
+Name
+node6
+UID
+2299357939
+next
+ Enabled
+1
+ Position
+-3.5 1 3
+ Rotation
+0.5 0.5 0.5 -0.5
+ Scale
+7.00004 0.999997 2.99997
+ Visible
+1
+Name
+node7
+UID
+3823605340
+next
+ Enabled
+1
+ Position
+9.5 1 3
+ Rotation
+-0.499878 0.500122 0.500122 0.499878
+ Scale
+7.00004 0.999997 2.99997
+ Visible
+1
+Name
+node8
+UID
+1110881068
+next
+ Enabled
+1
+ Position
+8 1 6.5
+ Rotation
+-0.707107 -1.54543e-08 -1.54543e-08 0.707107
+ Scale
+3 0.999997 2.99999
+ Visible
+1
+Name
+node9
+UID
+3622926172
+next
+ Enabled
+1
+ Position
+-2 1 6.5
+ Rotation
+-0.707107 -1.54543e-08 -1.54543e-08 0.707107
+ Scale
+3 0.999992 2.99997
+ Visible
+1
+Name
+node10
+UID
+152485716
+next
+ Enabled
+1
+ Position
+-2 1 -0.5
+ Rotation
+0.000172659 0.707107 0.707107 -0.000172649
+ Scale
+3 0.999989 2.99995
+ Visible
+1
+Name
+node11
+UID
+3883077223
+next
+ Enabled
+1
+ Position
+8 1 -0.5
+ Rotation
+0.000172659 0.707107 0.707107 -0.000172649
+ Scale
+3 0.999989 2.99995
+ Visible
+1
+Name
+node12
+UID
+3942058912
+next
+ Enabled
+1
+ Position
+-3 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+bed13
+UID
+15929863
+next
+ Enabled
+1
+ Position
+9 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+bed14
+UID
+4157811369
+next
+ Enabled
+1
+ Position
+9 0 5
+ Rotation
+0 1 0 1.56958e-07
+ Scale
+1 1 1
+ Visible
+1
+Name
+bed15
+UID
+850093909
 next
 Player
 1
@@ -408,7 +603,7 @@ UID
 next
 DialogueComponent
 4
-2647245552
+167482976
 Dialogue
  Enabled
 1
@@ -417,7 +612,7 @@ Dialogue
 File
 
 UID
-2111218759
+572704467
 next
 3201862430
 Dialogue
@@ -441,7 +636,7 @@ File
 UID
 2764838972
 next
-167482976
+1703596568
 Dialogue
  Enabled
 1
@@ -450,7 +645,7 @@ Dialogue
 File
 
 UID
-572704467
+2592877027
 next
 DirectionalLightComponent
 1
@@ -548,13 +743,13 @@ UID
 1758109850
 next
 MeshComponent
-7
-2647245552
+20
+167482976
 Mesh
  Enabled
 1
  Pos
-1 -0 3
+0 0 0
  Rot
 0 0 0 1
  Scale
@@ -582,7 +777,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-crate.jpg
+test.png
 M_Use Texture
 1
 M_UvOffset
@@ -596,13 +791,13 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-cube.vmesh
+char.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-3124668814
+471906387
 next
 3201862430
 Mesh
@@ -879,14 +1074,619 @@ Trans. Occlude
 UID
 2652688794
 next
-167482976
+1097944945
 Mesh
  Enabled
 1
  Pos
-0 0 0
+-0.5 1 3
  Rot
-0 0 0 1
+0.5 0.5 0.5 -0.5
+ Scale
+7 0.999994 2.99998
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+fence01.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+2 2
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+1
+UID
+735847239
+next
+3584593768
+Mesh
+ Enabled
+1
+ Pos
+6.5 1 3
+ Rot
+0.5 -0.5 -0.5 -0.5
+ Scale
+7 0.999992 2.99997
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+fence01.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+2 2
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+1
+UID
+138999870
+next
+1884585314
+Mesh
+ Enabled
+1
+ Pos
+-2 -0.5 3
+ Rot
+-0 0 -0 1
+ Scale
+3 1 7
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+818230446
+next
+2299357939
+Mesh
+ Enabled
+1
+ Pos
+8 -0.5 3
+ Rot
+-0 0 -0 1
+ Scale
+3 1 7
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2309094176
+next
+3823605340
+Mesh
+ Enabled
+1
+ Pos
+-3.5 1 3
+ Rot
+0.5 0.5 0.5 -0.5
+ Scale
+7.00004 0.999997 2.99997
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+740788868
+next
+1110881068
+Mesh
+ Enabled
+1
+ Pos
+9.5 1 3
+ Rot
+-0.499878 0.500122 0.500122 0.499878
+ Scale
+7.00004 0.999997 2.99997
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+4041575166
+next
+3622926172
+Mesh
+ Enabled
+1
+ Pos
+8 1 6.5
+ Rot
+-0.707107 -1.54543e-08 -1.54543e-08 0.707107
+ Scale
+3 0.999997 2.99999
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3934749593
+next
+152485716
+Mesh
+ Enabled
+1
+ Pos
+-2 1 6.5
+ Rot
+-0.707107 -1.54543e-08 -1.54543e-08 0.707107
+ Scale
+3 0.999992 2.99997
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+4266004530
+next
+3883077223
+Mesh
+ Enabled
+1
+ Pos
+-2 1 -0.5
+ Rot
+0.000172659 0.707107 0.707107 -0.000172649
+ Scale
+3 0.999989 2.99995
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1160561299
+next
+3942058912
+Mesh
+ Enabled
+1
+ Pos
+8 1 -0.5
+ Rot
+0.000172659 0.707107 0.707107 -0.000172649
+ Scale
+3 0.999989 2.99995
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+4031850372
+next
+1703596568
+Mesh
+ Enabled
+1
+ Pos
+1 0 3
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+crate.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2574378203
+next
+15929863
+Mesh
+ Enabled
+1
+ Pos
+-3 0 1
+ Rot
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -926,12 +1726,122 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-char.vmesh
+bed.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-471906387
+3686682161
+next
+4157811369
+Mesh
+ Enabled
+1
+ Pos
+9 0 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+bed.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1845206660
+next
+850093909
+Mesh
+ Enabled
+1
+ Pos
+9 0 5
+ Rot
+0 1 0 1.56958e-07
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+bed.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+848904284
 next
 end
