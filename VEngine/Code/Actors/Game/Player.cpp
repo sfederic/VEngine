@@ -409,7 +409,7 @@ bool Player::DialogueCheck(Actor* hitActor)
 void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 {
 	HitResult hit(this);
-	if (OrientedBoxCast(hit, camera->GetWorldPositionV(), GetPositionV(), XMFLOAT2(0.5f, 0.5f), true, false))
+	if (OrientedBoxCast(hit, camera->GetWorldPositionV(), GetPositionV(), XMFLOAT2(0.25f, 0.25f), true, false))
 	{
 		for (Actor* actor : hit.hitActors)
 		{
