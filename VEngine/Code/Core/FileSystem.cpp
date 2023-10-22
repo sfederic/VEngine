@@ -208,7 +208,11 @@ void FileSystem::LoadWorld(std::string worldName)
 		path = "GameSaves/" + worldName;
 	}
 
-	assert(std::filesystem::exists(path) && "Map file doesn't exist");
+	if (!std::filesystem::exists(path))
+	{
+		Log("Map file [%s] doesn't exist.", path.c_str());
+		return;
+	}
 
 	GameUtils::SaveGameInstanceData();
 
