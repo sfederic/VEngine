@@ -153,7 +153,7 @@ Unlock Audio
 
 next
 FenceActor
-1
+2
  Enabled
 1
  Position
@@ -168,6 +168,21 @@ Name
 FenceActor0
 UID
 1272209763
+next
+ Enabled
+1
+ Position
+11 4 4.49
+ Rotation
+-0 0 -0 1
+ Scale
+1.5 1.5 1
+ Visible
+1
+Name
+FenceActor1
+UID
+2810737247
 next
 Grid
 1
@@ -735,7 +750,7 @@ Player
  Enabled
 1
  Position
-2 0 1
+10 3 2
  Rotation
 -0 0 -0 1
  Scale
@@ -1065,7 +1080,7 @@ Root
  Enabled
 1
  Pos
-2 0 1
+10 3 2
  Rot
 -0 0 -0 1
  Scale
@@ -1133,7 +1148,7 @@ UID
 1397274758
 next
 MeshComponent
-18
+19
 1272209763
 Mesh
  Enabled
@@ -1188,6 +1203,61 @@ Trans. Occlude
 0
 UID
 1825584116
+next
+2810737247
+Mesh
+ Enabled
+1
+ Pos
+11 4 4.49
+ Rot
+-0 0 -0 1
+ Scale
+1.5 1.5 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test_fence.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+3 1
+Mesh
+plane.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+4066351888
 next
 1506194243
 Mesh
