@@ -4,6 +4,12 @@
 #include "Core/VMath.h"
 #include "Crushable.h"
 
+void Weight::Create()
+{
+	moveSpeed = moveSpeed / 2.f;
+	rotateSpeed = rotateSpeed / 2.f;
+}
+
 void Weight::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
