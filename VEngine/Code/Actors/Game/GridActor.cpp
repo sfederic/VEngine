@@ -245,17 +245,19 @@ bool GridActor::CheckNextNodeMoveIsValid()
 
 	auto grid = Grid::system.GetOnlyActor();
 
+	const XMVECTOR currentPos = GetPositionV();
+
 	if (nextXIndex >= grid->sizeX || nextYIndex >= grid->sizeY
 		|| nextXIndex < 0 || nextYIndex < 0)
 	{
-		nextPos = GetPositionV();
+		nextPos = currentPos;
 		return false;
 	}
 
 	auto nextNodeToMoveTo = grid->GetNode(nextXIndex, nextYIndex);
 	if (!nextNodeToMoveTo->active)
 	{
-		nextPos = GetPositionV();
+		nextPos = currentPos;
 		return false;
 	}
 
@@ -263,6 +265,18 @@ bool GridActor::CheckNextNodeMoveIsValid()
 
 	//Check next node height
 	if (nextNode->worldPosition.y > (GetPosition().y + Grid::maxHeightMove))
+	{
+		nextPos = currentPos;
+		return false;
+	}
+
+	//Fence check
+	//@Todo: this raycast here is not too good. Most times it'll work, but if the next node is too high or low
+	//compare to the current, this will probably not work.
+	HitResult fenceHit(this);
+	const XMVECTOR fenceCastRange = XMVector3Normalize(XMVector3Length(XMLoadFloat3(&nextNode->worldPosition) - currentPos));
+	const XMVECTOR fenceRayDirection = XMVector3Normalize(XMLoadFloat3(&nextNode->worldPosition) - currentPos);
+	if (Raycast(fenceHit, GetPositionV(), fenceRayDirection, fenceCastRange.m128_f32[0]))
 	{
 		nextPos = GetPositionV();
 		return false;
