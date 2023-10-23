@@ -18,13 +18,14 @@ namespace GameUtils
 	std::string levelToMoveTo;
 	std::string entranceTriggerTag;
 
-	SpriteSheet& SpawnSpriteSheet(std::string_view textureFilename, XMVECTOR spawnPosition, bool loop, int numRows, int numColumns)
+	SpriteSheet& SpawnSpriteSheet(std::string_view textureFilename, XMVECTOR spawnPosition, bool loop, int numRows, int numColumns, float animationSpeed)
 	{
 		auto spriteSheet = SpriteSheet::system.Add("SpriteSheet", nullptr, SpriteSheet(), false);
 
 		spriteSheet->SetLocalPosition(spawnPosition);
 		spriteSheet->SetupSpriteData(textureFilename, numRows, numColumns, loop);
 		spriteSheet->Create();
+		spriteSheet->SetAnimationSpeed(animationSpeed);
 
 		return *spriteSheet;
 	}
