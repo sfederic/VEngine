@@ -659,7 +659,7 @@ void Player::MoveLinkedGridActor()
 			if (linkedGridActor->IsNextMoveAxisValid(GetForwardVectorV()))
 			{
 				linkedGridActor->AddNextPosition(GetForwardVectorV());
-				if (linkedGridActor->CheckNextNodeMoveIsValid())
+				if (linkedGridActor->CheckNextNodeMoveIsValid(GetForwardVectorV()))
 				{
 					linkedGridActor->OnLinkMove();
 				}
@@ -677,7 +677,7 @@ void Player::MoveLinkedGridActor()
 			if (linkedGridActor->IsNextMoveAxisValid(-GetForwardVectorV()))
 			{
 				linkedGridActor->AddNextPosition(-GetForwardVectorV());
-				if (linkedGridActor->CheckNextNodeMoveIsValid())
+				if (linkedGridActor->CheckNextNodeMoveIsValid(-GetForwardVectorV()))
 				{
 					linkedGridActor->OnLinkMove();
 				}
@@ -695,7 +695,7 @@ void Player::MoveLinkedGridActor()
 			if (linkedGridActor->IsNextMoveAxisValid(-GetRightVectorV()))
 			{
 				linkedGridActor->AddNextPosition(-GetRightVectorV());
-				if (linkedGridActor->CheckNextNodeMoveIsValid())
+				if (linkedGridActor->CheckNextNodeMoveIsValid(-GetRightVectorV()))
 				{
 					linkedGridActor->OnLinkMove();
 				}
@@ -713,7 +713,7 @@ void Player::MoveLinkedGridActor()
 			if (linkedGridActor->IsNextMoveAxisValid(GetRightVectorV()))
 			{
 				linkedGridActor->AddNextPosition(GetRightVectorV());
-				if (linkedGridActor->CheckNextNodeMoveIsValid())
+				if (linkedGridActor->CheckNextNodeMoveIsValid(GetRightVectorV()))
 				{
 					linkedGridActor->OnLinkMove();
 				}

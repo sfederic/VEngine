@@ -8,6 +8,7 @@
 #include "UI/Game/HealthWidget.h"
 #include "Grid.h"
 #include "WaterVolume.h"
+#include "FenceActor.h"
 #include "Core/VMath.h"
 #include "Physics/Raycast.h"
 #include "Gameplay/GameUtils.h"
@@ -238,7 +239,7 @@ void GridActor::RecalcCurrentNodePosition()
 	node->RecalcNodeHeight(hit);
 }
 
-bool GridActor::CheckNextNodeMoveIsValid()
+bool GridActor::CheckNextNodeMoveIsValid(const XMVECTOR nextMoveCardinalDirection)
 {
 	const int nextXIndex = (int)std::round(nextPos.m128_f32[0]);
 	const int nextYIndex = (int)std::round(nextPos.m128_f32[2]);
@@ -271,15 +272,15 @@ bool GridActor::CheckNextNodeMoveIsValid()
 	}
 
 	//Fence check
-	//@Todo: this raycast here is not too good. Most times it'll work, but if the next node is too high or low
-	//compare to the current, this will probably not work.
 	HitResult fenceHit(this);
-	const XMVECTOR fenceCastRange = XMVector3Normalize(XMVector3Length(XMLoadFloat3(&nextNode->worldPosition) - currentPos));
-	const XMVECTOR fenceRayDirection = XMVector3Normalize(XMLoadFloat3(&nextNode->worldPosition) - currentPos);
-	if (Raycast(fenceHit, GetPositionV(), fenceRayDirection, fenceCastRange.m128_f32[0]))
+	if (Raycast(fenceHit, GetPositionV(), nextMoveCardinalDirection, 1.0f))
 	{
-		nextPos = GetPositionV();
-		return false;
+		if (fenceHit.GetHitActorAs<FenceActor>())
+		{
+			Log("[%s] hit fence.", GetName().c_str());
+			nextPos = GetPositionV();
+			return false;
+		}
 	}
 
 	nextPos = XMLoadFloat3(&nextNode->worldPosition);

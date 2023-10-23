@@ -130,7 +130,7 @@ public:
 	GridNode* GetCurrentNode();
 	void RecalcCurrentNodePosition();
 
-	bool CheckNextNodeMoveIsValid();
+	bool CheckNextNodeMoveIsValid(const XMVECTOR nextMoveCardinalDirection);
 
 	//Get forward face in grid terms based on forward vector and current grid position.
 	ForwardFace GetCurrentForwardFace();
