@@ -21,6 +21,11 @@ void CommandSystem::Tick()
 
 void CommandSystem::Undo()
 {
+	if (commands.size() == 0)
+	{
+		return;
+	}
+
 	if (commandIndex > 0)
 	{
 		commandIndex--;
@@ -37,6 +42,11 @@ void CommandSystem::Undo()
 
 void CommandSystem::Redo()
 {
+	if (commands.size() == 0)
+	{
+		return;
+	}
+
 	if (commandIndex < commands.size() - 1)
 	{
 		commandIndex++;
