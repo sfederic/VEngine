@@ -652,7 +652,7 @@ void Player::MoveLinkedGridActor()
 			return true;
 		};
 
-	if (Input::GetKeyUp(Keys::W))
+	if (Input::GetKeyUp(Keys::NumPad5))
 	{
 		if (checkLinkMovement(linkedGridActor->CanBeMovedInLink()))
 		{
@@ -670,7 +670,7 @@ void Player::MoveLinkedGridActor()
 			}
 		}
 	}
-	else if (Input::GetKeyUp(Keys::S))
+	else if (Input::GetKeyUp(Keys::NumPad2))
 	{
 		if (checkLinkMovement(linkedGridActor->CanBeMovedInLink()))
 		{
@@ -688,7 +688,7 @@ void Player::MoveLinkedGridActor()
 			}
 		}
 	}
-	else if (Input::GetKeyUp(Keys::A))
+	else if (Input::GetKeyUp(Keys::NumPad1))
 	{
 		if (checkLinkMovement(linkedGridActor->CanBeMovedInLink()))
 		{
@@ -706,7 +706,7 @@ void Player::MoveLinkedGridActor()
 			}
 		}
 	}
-	else if (Input::GetKeyUp(Keys::D))
+	else if (Input::GetKeyUp(Keys::NumPad3))
 	{
 		if (checkLinkMovement(linkedGridActor->CanBeMovedInLink()))
 		{
@@ -875,7 +875,7 @@ void Player::SetZoomedInCameraFOV()
 	nextCameraFOV = 30.f;
 }
 
-void Player::CheckNextMoveNode(XMVECTOR previousPos)
+void Player::CheckNextMoveNode(const XMVECTOR previousPos)
 {
 	int nextXIndex = (int)std::round(nextPos.m128_f32[0]);
 	int nextYIndex = (int)std::round(nextPos.m128_f32[2]);
@@ -948,25 +948,24 @@ void Player::MovementInput(float deltaTime)
 	{
 		SetGridIndices();
 
-		XMVECTOR previousPos = nextPos;
+		const XMVECTOR previousPos = nextPos;
 
-		if (Input::GetKeyHeld(Keys::W))
+		if (Input::GetKeyHeld(Keys::NumPad5))
 		{
 			nextPos = GetPositionV() + GetForwardVectorV();
 			CheckNextMoveNode(previousPos);
 		}
-
-		if (Input::GetKeyHeld(Keys::S))
+		if (Input::GetKeyHeld(Keys::NumPad2))
 		{
 			nextPos = GetPositionV() + -GetForwardVectorV();
 			CheckNextMoveNode(previousPos);
 		}
-		if (Input::GetKeyHeld(Keys::A))
+		if (Input::GetKeyHeld(Keys::NumPad1))
 		{
 			nextPos = GetPositionV() + -GetRightVectorV();
 			CheckNextMoveNode(previousPos);
 		}
-		if (Input::GetKeyHeld(Keys::D))
+		if (Input::GetKeyHeld(Keys::NumPad3))
 		{
 			nextPos = GetPositionV() + GetRightVectorV();
 			CheckNextMoveNode(previousPos);

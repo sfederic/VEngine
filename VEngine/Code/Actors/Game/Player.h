@@ -65,7 +65,7 @@ public:
 	void SetDefaultCameraFOV();
 	void SetZoomedInCameraFOV();
 
-	void CheckNextMoveNode(XMVECTOR previousPos);
+	void CheckNextMoveNode(const XMVECTOR previousPos);
 	GridNode* GetCurrentNode();
 	void SetGridIndices();
 	void GetGridIndices(int& x, int& y);

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Windows.h>
+
 //All these values are Win32 virtual keys currently in use.
 enum class Keys
 {
@@ -54,4 +56,8 @@ enum class Keys
 	Down = 0x28,
 	Right = 0x27,
 	Left = 0x25,
+	NumPad1 = VK_NUMPAD1,
+	NumPad2 = VK_NUMPAD2,
+	NumPad3 = VK_NUMPAD3,
+	NumPad5 = VK_NUMPAD5,
 };
