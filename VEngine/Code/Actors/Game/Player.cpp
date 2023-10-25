@@ -599,7 +599,7 @@ void Player::LinkToGridActor()
 			ResetLinkedGridActor();
 		}
 	}
-	else if (!isInputLinkedToGridActor && Input::GetKeyUp(Keys::Up)) //Raycast forward
+	else if (!isInputLinkedToGridActor && Input::GetKeyUp(Keys::Enter)) //Raycast forward
 	{
 		HitResult hit(this);
 		if (Raycast(hit, GetPositionV(), GetMeshForward(), 100.f))
@@ -652,7 +652,7 @@ void Player::MoveLinkedGridActor()
 			return true;
 		};
 
-	if (Input::GetKeyUp(Keys::NumPad5))
+	if (Input::GetKeyUp(Keys::Up))
 	{
 		if (checkLinkMovement(linkedGridActor->CanBeMovedInLink()))
 		{
@@ -670,7 +670,7 @@ void Player::MoveLinkedGridActor()
 			}
 		}
 	}
-	else if (Input::GetKeyUp(Keys::NumPad2))
+	else if (Input::GetKeyUp(Keys::Down))
 	{
 		if (checkLinkMovement(linkedGridActor->CanBeMovedInLink()))
 		{
@@ -688,7 +688,7 @@ void Player::MoveLinkedGridActor()
 			}
 		}
 	}
-	else if (Input::GetKeyUp(Keys::NumPad1))
+	else if (Input::GetKeyUp(Keys::Left))
 	{
 		if (checkLinkMovement(linkedGridActor->CanBeMovedInLink()))
 		{
@@ -706,7 +706,7 @@ void Player::MoveLinkedGridActor()
 			}
 		}
 	}
-	else if (Input::GetKeyUp(Keys::NumPad3))
+	else if (Input::GetKeyUp(Keys::Right))
 	{
 		if (checkLinkMovement(linkedGridActor->CanBeMovedInLink()))
 		{
@@ -745,7 +745,7 @@ void Player::RotateLinkedGridActor()
 
 	constexpr float angleIncrement = 90.f;
 
-	if (Input::GetKeyHeld(Keys::Shift) && Input::GetKeyDown(Keys::Right))
+	/*if (Input::GetKeyHeld(Keys::Shift) && Input::GetKeyDown(Keys::Right))
 	{
 		if (checkLinkRotation(linkedGridActor->CanBeRotatedInLink()))
 		{
@@ -780,8 +780,8 @@ void Player::RotateLinkedGridActor()
 				Camera::GetActiveCamera().SetShakeLevel(0.25f);
 			}
 		}
-	}
-	else if (Input::GetKeyUp(Keys::Right))
+	}*/
+	if (Input::GetKeyUp(Keys::NumPad3))
 	{
 		if (checkLinkRotation(linkedGridActor->CanBeRotatedInLink()))
 		{
@@ -802,7 +802,7 @@ void Player::RotateLinkedGridActor()
 			}
 		}
 	}
-	else if (Input::GetKeyUp(Keys::Left))
+	else if (Input::GetKeyUp(Keys::NumPad1))
 	{
 		if (checkLinkRotation(linkedGridActor->CanBeRotatedInLink()))
 		{
@@ -823,7 +823,7 @@ void Player::RotateLinkedGridActor()
 			}
 		}
 	}
-	else if (Input::GetKeyUp(Keys::Down))
+	else if (Input::GetKeyUp(Keys::NumPad2))
 	{
 		if (checkLinkRotation(linkedGridActor->CanBeRotatedInLink()))
 		{
@@ -843,7 +843,7 @@ void Player::RotateLinkedGridActor()
 			}
 		}
 	}
-	else if (Input::GetKeyUp(Keys::Up))
+	else if (Input::GetKeyUp(Keys::NumPad5))
 	{
 		if (checkLinkRotation(linkedGridActor->CanBeRotatedInLink()))
 		{
@@ -950,17 +950,17 @@ void Player::MovementInput(float deltaTime)
 
 		const XMVECTOR previousPos = nextPos;
 
-		if (Input::GetKeyHeld(Keys::NumPad5))
+		if (Input::GetKeyHeld(Keys::Up))
 		{
 			nextPos = GetPositionV() + GetForwardVectorV();
 			CheckNextMoveNode(previousPos);
 		}
-		if (Input::GetKeyHeld(Keys::NumPad2))
+		if (Input::GetKeyHeld(Keys::Down))
 		{
 			nextPos = GetPositionV() + -GetForwardVectorV();
 			CheckNextMoveNode(previousPos);
 		}
-		if (Input::GetKeyHeld(Keys::NumPad1))
+		/*if (Input::GetKeyHeld(Keys::NumPad1))
 		{
 			nextPos = GetPositionV() + -GetRightVectorV();
 			CheckNextMoveNode(previousPos);
@@ -969,7 +969,7 @@ void Player::MovementInput(float deltaTime)
 		{
 			nextPos = GetPositionV() + GetRightVectorV();
 			CheckNextMoveNode(previousPos);
-		}
+		}*/
 	}
 }
 
