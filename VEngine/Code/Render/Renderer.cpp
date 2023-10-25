@@ -313,7 +313,7 @@ void Renderer::Tick()
 	}
 
 	//DRAW ALL AS WIREFRAME HOTKEY
-	if (Input::GetKeyUp(Keys::F2))
+	if (Input::GetKeyUp(Keys::F3))
 	{
 		drawAllAsWireframe = !drawAllAsWireframe;
 	}
