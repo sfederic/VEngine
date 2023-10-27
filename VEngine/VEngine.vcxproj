@@ -341,6 +341,7 @@
     <ClCompile Include="Code\Actors\Game\InvisibleGridActor.cpp" />
     <ClCompile Include="Code\Actors\Game\PowerCrystalLampPost.cpp" />
     <ClCompile Include="Code\Actors\Game\PowerCrystalSlot.cpp" />
+    <ClCompile Include="Code\Actors\Game\Magnet.cpp" />
     <ClInclude Include="Code\Actors\Game\ChurchLockPropActivator.h" />
     <ClInclude Include="Code\Actors\Game\GlobalPropSetter.h" />
     <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.h" />
@@ -711,6 +712,7 @@
     <ClInclude Include="Code\Actors\Game\InvisibleGridActor.h" />
     <ClInclude Include="Code\Actors\Game\PowerCrystalLampPost.h" />
     <ClInclude Include="Code\Actors\Game\PowerCrystalSlot.h" />
+    <ClInclude Include="Code\Actors\Game\Magnet.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
