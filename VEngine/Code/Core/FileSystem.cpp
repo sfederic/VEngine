@@ -399,7 +399,11 @@ void FileSystem::DeferredWorldLoad()
 
 void MovePlayerToEntranceTriggerFromPreviousWorldFilename()
 {
-	auto player = Player::system.GetOnlyActor();
+	auto player = Player::system.GetFirstActor();
+	if (player == nullptr)
+	{
+		return;
+	}
 
 	std::vector<EntranceTrigger*> possibleEntrancesToMoveTo;
 
