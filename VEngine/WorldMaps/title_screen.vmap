@@ -1,0 +1,21 @@
+TitleScreenActor
+1
+next
+EmptyComponent
+1
+4099290340
+Root
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+1169065821
+next
+end
