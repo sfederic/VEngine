@@ -98,7 +98,7 @@ Health
 Ignore Rotate Check
 0
 Inspect
-1
+0
 Interact
 1
 Interact Text
@@ -149,7 +149,7 @@ Health
 Ignore Rotate Check
 0
 Inspect
-1
+0
 Interact
 1
 Interact Text
@@ -200,7 +200,7 @@ Health
 Ignore Rotate Check
 0
 Inspect
-1
+0
 Interact
 1
 Interact Text
@@ -253,7 +253,7 @@ Health
 Ignore Rotate Check
 0
 Inspect
-1
+0
 Interact
 1
 Interact Text
@@ -317,7 +317,7 @@ MeshActor
  Visible
 1
 Name
-rock20
+node0
 UID
 1691965725
 next
@@ -332,7 +332,7 @@ next
  Visible
 1
 Name
-rock21
+node1
 UID
 3423758591
 next
@@ -347,7 +347,7 @@ next
  Visible
 1
 Name
-rock22
+node2
 UID
 4115742298
 next
@@ -362,7 +362,7 @@ next
  Visible
 1
 Name
-rock23
+node3
 UID
 4020497473
 next
@@ -373,7 +373,7 @@ OilBarrel
  Position
 7 0 3
  Rotation
--0.000243775 -2.98096e-08 -2.97951e-08 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -389,7 +389,7 @@ Health
 Ignore Rotate Check
 1
 Inspect
-1
+0
 Interact
 1
 Interact Text
@@ -417,7 +417,7 @@ Rotate Speed
 Rotate Yaw
 1
 UID
-1695474413
+2113544599
 next
 Player
 1
@@ -592,17 +592,6 @@ File
 UID
 486427732
 next
-1695474413
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-1693051201
-next
 1761442899
 Dialogue
  Enabled
@@ -613,6 +602,17 @@ File
 
 UID
 2231719757
+next
+2113544599
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1328862319
 next
 DirectionalLightComponent
 1
@@ -1151,61 +1151,6 @@ Trans. Occlude
 UID
 2102468358
 next
-1695474413
-Mesh
- Enabled
-1
- Pos
-7 0 3
- Rot
--0.000243775 -2.98096e-08 -2.97951e-08 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-oil_barrel.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2041537898
-next
 1761442899
 Mesh
  Enabled
@@ -1261,6 +1206,61 @@ Trans. Occlude
 UID
 2652304137
 next
+2113544599
+Mesh
+ Enabled
+1
+ Pos
+7 0 3
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+oil_barrel.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3655330445
+next
 SpriteSheet
 1
 2175994012
@@ -1270,7 +1270,7 @@ FireSprite
  Pos
 0 0 0
  Rot
--0.0484492 0.89624 0.101182 0.429148
+0.00372652 0.996025 0.0730694 -0.0507971
  Scale
 1 1 1
  Visible
