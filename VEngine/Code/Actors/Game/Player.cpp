@@ -1034,7 +1034,10 @@ void Player::SetLinkedGridActor(GridActor& gridActor)
 	gridActor.OnLinkActivate();
 
 	//Orient player towards the linked actor so that input isn't messy from various directions.
-	const auto lookAtRotation = VMath::LookAtRotation(gridActor.GetPositionV(), GetPositionV());
+	auto playerEyeLevelPos = gridActor.GetPositionV();
+	//bring the point to player eye level so that rotation is skewed up.
+	playerEyeLevelPos.m128_f32[1] = GetPosition().y;
+	const auto lookAtRotation = VMath::LookAtRotation(playerEyeLevelPos, GetPositionV());
 	nextRot = lookAtRotation;
 	SetRotation(lookAtRotation);
 	mesh->SetWorldRotation(lookAtRotation);
