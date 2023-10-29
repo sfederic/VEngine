@@ -1,11 +1,8 @@
 #include "vpch.h"
 #include "GameInstance.h"
 
-std::string GameInstance::startingMap = "vagrant_story_test.vmap";
+std::string GameInstance::startingMap = "title_screen.vmap";
 std::string GameInstance::previousMapMovedFrom = startingMap;
-
-//Used when continuing from game save files
-std::string GameInstance::mapToLoadOnContinue;
 
 bool GameInstance::useGameSaves = false;
 
@@ -17,6 +14,9 @@ static std::string heldPlayerItem;
 static bool churchClockLock = false;
 static bool churchSwordLock = false;
 static bool churchStatueRotateLock = false;
+
+//Used when continuing from game save files
+static std::string mapToLoadOnContinue;
 //...
 
 Properties GameInstance::GetGlobalProps()
@@ -25,6 +25,7 @@ Properties GameInstance::GetGlobalProps()
 	props.Add("ChurchClockLock", &churchClockLock);
 	props.Add("ChurchSwordLock", &churchSwordLock);
 	props.Add("ChurchStatueRotateLock", &churchStatueRotateLock);
+	props.Add("MapToLoadOnContinue", &mapToLoadOnContinue);
 	return props;
 }
 
@@ -41,4 +42,14 @@ void GameInstance::SetHeldPlayerItem(std::string_view heldItem)
 void GameInstance::ClearHeldPlayerItem()
 {
 	heldPlayerItem.clear();
+}
+
+std::string GameInstance::GetContinueMapName()
+{
+	return mapToLoadOnContinue;
+}
+
+void GameInstance::SetContinueMapName(std::string_view name)
+{
+	mapToLoadOnContinue = name;
 }

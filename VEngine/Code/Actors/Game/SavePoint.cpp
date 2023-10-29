@@ -26,7 +26,7 @@ void SavePoint::Tick(float deltaTime)
 	{
 		if (Input::GetKeyUp(Keys::Enter))
 		{
-			GameInstance::mapToLoadOnContinue = World::worldFilename;
+			GameInstance::SetContinueMapName(World::worldFilename);
 			GameUtils::SaveGameWorldState();
 		}
 	}

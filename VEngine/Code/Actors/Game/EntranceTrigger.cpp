@@ -86,7 +86,7 @@ void EntranceTrigger::Tick(float deltaTime)
 				return;
 			}
 
-			GameInstance::mapToLoadOnContinue = levelToMoveTo;
+			GameInstance::SetContinueMapName(levelToMoveTo);
 
 			GameUtils::PlayAudioOneShot(openAudio);
 

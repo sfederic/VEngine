@@ -10,9 +10,6 @@ namespace GameInstance
 	extern std::string startingMap;
 	extern std::string previousMapMovedFrom;
 
-	//Used when continuing from game save files
-	extern std::string mapToLoadOnContinue;
-
 	extern bool useGameSaves;
 
 	//Global save data
@@ -38,4 +35,7 @@ namespace GameInstance
 		T* data = globalProps.GetData<T>(name);
 		*data = value;
 	}
+
+	std::string GetContinueMapName();
+	void SetContinueMapName(std::string_view name);
 };

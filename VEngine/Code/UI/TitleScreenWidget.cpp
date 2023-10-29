@@ -15,6 +15,6 @@ void TitleScreenWidget::Draw(float deltaTime)
 	else if (Button(L"Continue", AlignLayout(100.f, 50.f, Align::BottomRight), 1.f, TextAlign::Center, Colours::White))
 	{
 		GameUtils::LoadGameInstanceData();
-		GameUtils::LoadWorldDeferred(GameInstance::mapToLoadOnContinue);
+		GameUtils::LoadWorldDeferred(GameInstance::GetContinueMapName());
 	}
 }
