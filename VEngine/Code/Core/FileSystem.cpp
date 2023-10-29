@@ -210,8 +210,6 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	assert(std::filesystem::exists(path));
 
-	GameInstance::mapToLoadOnContinue = World::worldFilename;
-
 	GameUtils::SaveGameInstanceData();
 
 	World::Cleanup();
