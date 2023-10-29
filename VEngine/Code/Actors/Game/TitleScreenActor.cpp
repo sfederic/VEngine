@@ -2,22 +2,21 @@
 #include "TitleScreenActor.h"
 #include "UI/TitlescreenWidget.h"
 #include "UI/UISystem.h"
-#include "Components/EmptyComponent.h"
 
 TitleScreenActor::TitleScreenActor()
 {
-	rootComponent = EmptyComponent::system.Add("Root", this);
+	SetEmptyRootComponent();
 }
 
 void TitleScreenActor::Start()
 {
 	__super::Start();
 
-	titlescreenWidget = UISystem::CreateWidget<TitleScreenWidget>();
-	titlescreenWidget->AddToViewport();
+	titleScreenWidget = UISystem::CreateWidget<TitleScreenWidget>();
+	titleScreenWidget->AddToViewport();
 }
 
 Properties TitleScreenActor::GetProps()
 {
-	return Properties();
+	return Properties("TitleScreenActor");
 }
