@@ -18,7 +18,7 @@ Properties PostProcessVolume::GetProps()
 	props.Add("Shoulder Str.", &postProcessData.shoulderStrength);
 	props.Add("Linear Str.", &postProcessData.linearStrength);
 	props.Add("Linear Angle", &postProcessData.linearAngle);
-	props.Add("Toe Str.", &postProcessData.toeStrenth);
+	props.Add("Toe Str.", &postProcessData.toeStrength);
 	props.Add("Toe Numerator", &postProcessData.toeNumerator);
 	props.Add("Toe Denominator", &postProcessData.toeDenominator);
 	props.Add("White Value", &postProcessData.linearWhitePointValue);

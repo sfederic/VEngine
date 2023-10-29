@@ -8,6 +8,6 @@ struct ShaderPostProcessData
 	float shoulderStrength = 0.19f;
 	float toeDenominator = 0.33f;
 	float toeNumerator = 0.012f;
-	float toeStrenth = 2.0f;
+	float toeStrength = 2.0f;
 	float linearWhitePointValue = 2.0f;
 };
