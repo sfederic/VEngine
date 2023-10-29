@@ -3,6 +3,7 @@
 #include "Components/BoxTriggerComponent.h"
 #include "Core/Input.h"
 #include "Gameplay/GameUtils.h"
+#include "Gameplay/GameInstance.h"
 
 SavePoint::SavePoint()
 {
@@ -25,6 +26,7 @@ void SavePoint::Tick(float deltaTime)
 	{
 		if (Input::GetKeyUp(Keys::Enter))
 		{
+			GameInstance::mapToLoadOnContinue = World::worldFilename;
 			GameUtils::SaveGameWorldState();
 		}
 	}
