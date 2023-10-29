@@ -10,10 +10,9 @@ void TitleScreenWidget::Draw(float deltaTime)
 
 	if (Button(L"Begin", AlignLayout(100.f, 50.f, Align::BottomLeft), 1.f, TextAlign::Center, Colours::White))
 	{
-		GameUtils::LoadWorldDeferred("church_hall.vmap");
+		GameUtils::LoadWorldDeferred("prison_starting_cell.vmap");
 	}
-
-	if (Button(L"Continue", AlignLayout(100.f, 50.f, Align::BottomRight), 1.f, TextAlign::Center, Colours::White))
+	else if (Button(L"Continue", AlignLayout(100.f, 50.f, Align::BottomRight), 1.f, TextAlign::Center, Colours::White))
 	{
 		GameUtils::LoadGameInstanceData();
 		GameUtils::LoadWorldDeferred(GameInstance::mapToLoadOnContinue);

@@ -1,7 +1,9 @@
 #pragma once
+
 #include "Widget.h"
 
-struct TitleScreenWidget : Widget
+class TitleScreenWidget : public Widget
 {
+public:
 	virtual void Draw(float deltaTime) override;
 };
