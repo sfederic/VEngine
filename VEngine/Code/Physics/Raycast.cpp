@@ -196,9 +196,6 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 
 	const auto checkMeshVerticesCollision = [&](MeshComponent& mesh)
 		{
-			//Ignore the check for backface if the rasterizer state doesn't cull them
-			const bool ignoreBackFaceHit = mesh.GetRastState().name == RastStates::noBackCull;
-
 			const XMMATRIX meshWorldMatrix = mesh.GetWorldMatrix();
 
 			const auto& vertices = mesh.meshDataProxy.GetVertices();
@@ -231,7 +228,7 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 					XMStoreFloat3(&tempHitResult.hitNormal, normal);
 
 					//Check if back facing triangle
-					if (!ignoreBackFaceHit)
+					if (hitResult.ignoreBackFaceHits)
 					{
 						const float angleBetweenRaycastDirectionAndTriangleNormal =
 							XMConvertToDegrees(XMVector3AngleBetweenNormals(

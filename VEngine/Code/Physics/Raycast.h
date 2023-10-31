@@ -46,6 +46,9 @@ struct HitResult
 
 	bool bHit = false;
 
+	//Whether to ignore raycast backface checks
+	bool ignoreBackFaceHits = true;
+
 	HitResult() {}
 	HitResult(Actor* actorToIgnore)
 	{
