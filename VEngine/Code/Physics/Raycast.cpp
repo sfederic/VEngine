@@ -198,6 +198,12 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 		{
 			const XMMATRIX meshWorldMatrix = mesh.GetWorldMatrix();
 
+			bool ignoreBackFacHits = hitResult.ignoreBackFaceHits;
+			if (mesh.GetRastState().name == RastStates::noBackCull)
+			{
+				ignoreBackFacHits = false;
+			}
+
 			const auto& vertices = mesh.meshDataProxy.GetVertices();
 			const int vertexTriangleCount = vertices.size() / 3;
 			for (int i = 0; i < vertexTriangleCount; i++)
@@ -228,7 +234,7 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 					XMStoreFloat3(&tempHitResult.hitNormal, normal);
 
 					//Check if back facing triangle
-					if (hitResult.ignoreBackFaceHits)
+					if (ignoreBackFacHits)
 					{
 						const float angleBetweenRaycastDirectionAndTriangleNormal =
 							XMConvertToDegrees(XMVector3AngleBetweenNormals(
