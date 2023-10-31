@@ -2219,6 +2219,39 @@ void PointLightVertexColourMap()
 			mesh->CreateNewVertexBuffer();
 		}
 	}
+
+	//@Todo: code between lights here can be condensed 
+	for (auto& dLight : DirectionalLightComponent::system.GetComponents())
+	{
+		for (auto& mesh : MeshComponent::system.GetComponents())
+		{
+			const auto meshWorldMatrix = mesh->GetWorldMatrix();
+
+			auto& vertices = mesh->GetAllVertices();
+
+			for (auto& vertex : vertices)
+			{
+				const auto vertexPos = XMLoadFloat3(&vertex.pos);
+				const auto worldSpaceVertexPos = XMVector3TransformCoord(vertexPos, meshWorldMatrix);
+
+				HitResult hit;
+				hit.actorsToIgnore.push_back(dLight->GetOwner());
+				hit.componentsToIgnore.push_back(dLight.get());
+				hit.ignoreBackFaceHits = false;
+
+				auto normal = XMLoadFloat3(&vertex.normal);
+				normal = XMVector3TransformNormal(normal, meshWorldMatrix);
+				normal = XMVector3Normalize(normal);
+
+				if (Raycast(hit, worldSpaceVertexPos + normal, -dLight->GetForwardVectorV(), 20.f))
+				{
+					vertex.colour = XMFLOAT4(0.2f, 0.2f, 0.2f, 1.f);
+				}
+			}
+
+			mesh->CreateNewVertexBuffer();
+		}
+	}
 }
 
 RastState* Renderer::GetRastState(std::string rastStateName)
