@@ -1,3 +1,26 @@
+DiffuseProbeMap
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+0
+Name
+DiffuseProbeMap0
+Size X
+5
+Size Y
+4
+Size Z
+9
+UID
+525406669
+next
 Grid
 1
  Enabled
@@ -42,7 +65,7 @@ Health
 Ignore Rotate Check
 0
 Inspect
-1
+0
 Interact
 1
 Interact Text
@@ -57,12 +80,16 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 GridActor0
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
@@ -89,7 +116,7 @@ Health
 Ignore Rotate Check
 0
 Inspect
-1
+0
 Interact
 1
 Interact Text
@@ -104,12 +131,16 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 GridActor2
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
@@ -136,7 +167,7 @@ Health
 Ignore Rotate Check
 0
 Inspect
-1
+0
 Interact
 1
 Interact Text
@@ -151,12 +182,16 @@ Move Axis Neg.
 1 1
 Move Axis Pos.
 1 1
+Move Speed
+12
 Name
 GridActor3982516681
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Speed
+12
 Rotate Yaw
 1
 UID
@@ -175,7 +210,7 @@ MeshActor
  Visible
 1
 Name
-plane0
+node0
 UID
 932285952
 next
@@ -190,7 +225,7 @@ next
  Visible
 1
 Name
-plane1
+cube1
 UID
 1040831707
 next
@@ -205,7 +240,7 @@ next
  Visible
 1
 Name
-plane2
+cube2
 UID
 4085837765
 next
@@ -220,7 +255,7 @@ next
  Visible
 1
 Name
-plane14
+node3
 UID
 1196530532
 next
@@ -235,7 +270,7 @@ next
  Visible
 1
 Name
-plane15
+node4
 UID
 3499182277
 next
@@ -250,7 +285,7 @@ next
  Visible
 1
 Name
-plane5
+cube5
 UID
 2057790208
 next
@@ -265,7 +300,7 @@ next
  Visible
 1
 Name
-plane6
+cube6
 UID
 1874452150
 next
@@ -280,7 +315,7 @@ next
  Visible
 1
 Name
-plane7
+cube7
 UID
 3845895044
 next
@@ -295,7 +330,7 @@ next
  Visible
 1
 Name
-plane8
+cube8
 UID
 1032078644
 next
@@ -325,7 +360,7 @@ next
  Visible
 1
 Name
-plane10
+node10
 UID
 2876902090
 next
@@ -340,7 +375,7 @@ next
  Visible
 1
 Name
-plane11
+node11
 UID
 1924925684
 next
@@ -355,7 +390,7 @@ next
  Visible
 1
 Name
-plane12
+node12
 UID
 3562855314
 next
@@ -370,7 +405,7 @@ next
  Visible
 1
 Name
-plane13
+node13
 UID
 3971266163
 next
@@ -379,9 +414,9 @@ Player
  Enabled
 1
  Position
-2 0 2
+2 0 3
  Rotation
-0 1.49012e-07 0 -1
+0 -0.707102 0 -0.707104
  Scale
 1 1 1
  Visible
@@ -455,17 +490,6 @@ File
 UID
 3238280266
 next
-863854931
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-4219487266
-next
 1993506158
 Dialogue
  Enabled
@@ -477,16 +501,42 @@ File
 UID
 1987768904
 next
-EmptyComponent
+863854931
+Dialogue
+ Enabled
 1
+ Visible
+1
+File
+
+UID
+4219487266
+next
+EmptyComponent
+2
+525406669
+Root
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+3886712542
+next
 863854931
 Root
  Enabled
 1
  Pos
-2 0 2
+2 0 3
  Rot
-0 1.49012e-07 0 -1
+0 -0.707102 0 -0.707104
  Scale
 1 1 1
  Visible
@@ -663,6 +713,61 @@ Trans. Occlude
 UID
 2088052539
 next
+1993506158
+Mesh
+ Enabled
+1
+ Pos
+2 0 5
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+barrel_texture.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+746266694
+next
 932285952
 Mesh
  Enabled
@@ -737,7 +842,7 @@ Grid Ignore
 Grid Obst.
 0
 M_Ambient
-1 1 1 1
+1 1 1 1.0162
 M_Blend State
 default
 M_Metallic
@@ -1122,7 +1227,7 @@ Grid Ignore
 Grid Obst.
 0
 M_Ambient
-1 1 1 1
+1 1 1 1.01839
 M_Blend State
 default
 M_Metallic
@@ -1440,7 +1545,7 @@ Mesh
  Pos
 0 0 0
  Rot
-0 -2.98024e-08 0 -1
+0 -2.98095e-08 0 -1
  Scale
 1 1 1
  Visible
@@ -1488,61 +1593,6 @@ Trans. Occlude
 UID
 3605786688
 next
-1993506158
-Mesh
- Enabled
-1
- Pos
-2 0 5
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-barrel_texture.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-746266694
-next
 PointLightComponent
 1
 3567433055
@@ -1560,7 +1610,7 @@ PointLight
 Colour
 1 1 1 1
 Intensity
-40
+80
 LightEnabled
 1
 UID

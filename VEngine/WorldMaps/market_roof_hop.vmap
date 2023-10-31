@@ -17,6 +17,29 @@ could you do a rooftop platform here?
 UID
 3756426818
 next
+DiffuseProbeMap
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+0
+Name
+DiffuseProbeMap0
+Size X
+13
+Size Y
+4
+Size Z
+13
+UID
+382516788
+next
 DirectionalLightActor
 1
  Enabled
@@ -24,9 +47,9 @@ DirectionalLightActor
  Position
 0 5 0
  Rotation
-0.707107 0 0 0.707107
+0.316682 0.311641 -0.131949 0.886105
  Scale
-1 1 1
+0.999998 1 0.999999
  Visible
 1
 Name
@@ -518,7 +541,7 @@ Lift
  Enabled
 1
  Position
-10 -0 9
+10 0 9
  Rotation
 0 0 0 1
  Scale
@@ -632,7 +655,7 @@ MeshActor
  Rotation
 -0 0 -0 1
  Scale
-13 1 13
+7 1 7
  Visible
 1
 Name
@@ -750,9 +773,9 @@ Player
  Enabled
 1
  Position
-8 0 2
+5 0 2
  Rotation
--0 0 -0 1
+0 -0.707106 0 -0.707106
  Scale
 1 1 1
  Visible
@@ -1046,9 +1069,9 @@ DirectionalLight
  Pos
 0 5 0
  Rot
-0.707107 0 0 0.707107
+0.316682 0.311641 -0.131949 0.886105
  Scale
-1 1 1
+0.999998 1 0.999999
  Visible
 1
 Colour
@@ -1059,7 +1082,7 @@ UID
 3451173969
 next
 EmptyComponent
-2
+3
 3756426818
 Root
  Enabled
@@ -1075,14 +1098,29 @@ Root
 UID
 3578090145
 next
+382516788
+Root
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+3290938629
+next
 2163157409
 Root
  Enabled
 1
  Pos
-8 0 2
+5 0 2
  Rot
--0 0 -0 1
+0 -0.707106 0 -0.707106
  Scale
 1 1 1
  Visible
@@ -1594,7 +1632,7 @@ Mesh
  Enabled
 1
  Pos
-10 -0 9
+10 0 9
  Rot
 0 0 0 1
  Scale
@@ -1708,7 +1746,7 @@ Mesh
  Rot
 -0 0 -0 1
  Scale
-13 1 13
+7 1 7
  Visible
 1
 Casts Shadow
@@ -1732,9 +1770,9 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wood_furniture.jpg
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1746,7 +1784,7 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-node.vmesh
+grid.vmesh
 Static
 1
 Trans. Occlude
@@ -1787,9 +1825,9 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wood.jpg
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1842,9 +1880,9 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wood.jpg
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1897,9 +1935,9 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wood.jpg
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -1952,9 +1990,9 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wood_furniture.jpg
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -2117,9 +2155,9 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wood.jpg
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -2146,7 +2184,7 @@ Mesh
  Pos
 0 0 0
  Rot
-0 0.707107 0 0.707107
+0 7.45058e-07 0 -1
  Scale
 1 1 1
  Visible

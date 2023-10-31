@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "GameInstance.h"
 
-std::string GameInstance::startingMap = "xenogears_room_2.vmap";
+std::string GameInstance::startingMap = "vagrant_story_test.vmap";
 std::string GameInstance::previousMapMovedFrom = startingMap;
 
 bool GameInstance::useGameSaves = false;

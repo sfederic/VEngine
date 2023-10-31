@@ -1,26 +1,3 @@
-DiffuseProbeMap
-1
- Enabled
-0
- Position
-0 0 0
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-DiffuseProbeMap0
-Size X
-5
-Size Y
-2
-Size Z
-5
-UID
-2947181467
-next
 Grid
 1
  Enabled
@@ -39,8 +16,6 @@ Size X
 5
 Size Y
 5
-StartBattleOnLoad
-0
 UID
 201678567
 next
@@ -117,7 +92,7 @@ next
  Visible
 1
 Name
-MeshActor4
+cube4
 UID
 338893340
 next
@@ -132,7 +107,7 @@ next
  Visible
 1
 Name
-MeshActor5
+cube5
 UID
 587370255
 next
@@ -147,7 +122,7 @@ next
  Visible
 1
 Name
-MeshActor6
+barrel6
 UID
 1480693485
 next
@@ -162,7 +137,7 @@ next
  Visible
 1
 Name
-MeshActor7
+cube7
 UID
 2765252990
 next
@@ -177,7 +152,7 @@ next
  Visible
 1
 Name
-MeshActor8
+cube8
 UID
 4170326065
 next
@@ -192,7 +167,7 @@ next
  Visible
 1
 Name
-MeshActor9
+cube9
 UID
 1670508979
 next
@@ -207,7 +182,7 @@ next
  Visible
 1
 Name
-MeshActor10
+node10
 UID
 1483803933
 next
@@ -222,7 +197,7 @@ next
  Visible
 1
 Name
-MeshActor11
+node11
 UID
 3328870508
 next
@@ -237,7 +212,7 @@ next
  Visible
 1
 Name
-MeshActor12
+node12
 UID
 457572112
 next
@@ -252,7 +227,7 @@ next
  Visible
 1
 Name
-MeshActor13
+node13
 UID
 3542750051
 next
@@ -261,9 +236,9 @@ Player
  Enabled
 1
  Position
-2 0 0
+2 0 1
  Rotation
--0 0 -0 1
+0 5.06639e-07 0 -0.999998
  Scale
 1 1 1
  Visible
@@ -273,37 +248,22 @@ Player0
 UID
 2130618174
 next
-SpotLightActor
-2
+PointLightActor
+1
  Enabled
 1
  Position
-2 1 2
+2 -0 2
  Rotation
-0.163186 0.336664 0.059363 0.925475
+0 0 0 1
  Scale
-1 0.999999 0.999999
+1 1 1
  Visible
 1
 Name
-SpotLightActor0
+PointLightActor0
 UID
-3237219679
-next
- Enabled
-1
- Position
-2 1 1
- Rotation
-0.0374843 0.873424 -0.169554 -0.454946
- Scale
-0.999999 0.999999 0.999998
- Visible
-1
-Name
-SpotLightActor1
-UID
-3206407999
+504056988
 next
 CameraComponent
 1
@@ -342,30 +302,15 @@ UID
 938403783
 next
 EmptyComponent
-2
-2947181467
-Root
- Enabled
 1
- Pos
-0 0 0
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-UID
-2972862937
-next
 2130618174
 Root
  Enabled
 1
  Pos
-2 0 0
+2 0 1
  Rot
--0 0 -0 1
+0 5.06639e-07 0 -0.999998
  Scale
 1 1 1
  Visible
@@ -389,12 +334,14 @@ NodeMesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -444,6 +391,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -497,6 +446,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 1
 M_Ambient
@@ -550,6 +501,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -603,10 +556,12 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 1
 M_Ambient
-1 1 1 1
+1 1 1 1.00683
 M_Blend State
 default
 M_Metallic
@@ -656,6 +611,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -709,6 +666,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 1
 M_Ambient
@@ -762,6 +721,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 1
 M_Ambient
@@ -815,6 +776,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 1
 M_Ambient
@@ -868,6 +831,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 1
 M_Ambient
@@ -921,6 +886,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -974,6 +941,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -1027,6 +996,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -1080,6 +1051,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -1133,6 +1106,8 @@ Mesh
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -1179,13 +1154,15 @@ Mesh
  Pos
 0 0 0
  Rot
-0 0 0 1
+0 1.2815e-06 0 -1
  Scale
 1 1 1
  Visible
 1
 Casts Shadow
 1
+Grid Ignore
+0
 Grid Obst.
 0
 M_Ambient
@@ -1225,52 +1202,27 @@ Trans. Occlude
 UID
 2108166279
 next
-SpotLightComponent
-2
-3237219679
-SpotLight
+PointLightComponent
+1
+504056988
+PointLight
  Enabled
 1
  Pos
-2 1 2
+2 -0 2
  Rot
-0.163186 0.336664 0.059363 0.925475
+0 0 0 1
  Scale
-1 0.999999 0.999999
+1 1 1
  Visible
 1
 Colour
-0 0 1 1
+1 1 1 1
 Intensity
 25
 LightEnabled
 1
-Spot Angle
-70
 UID
-1779670209
-next
-3206407999
-SpotLight
- Enabled
-1
- Pos
-2 1 1
- Rot
-0.0374843 0.873424 -0.169554 -0.454946
- Scale
-0.999999 0.999999 0.999998
- Visible
-1
-Colour
-1 0 0 1
-Intensity
-25
-LightEnabled
-1
-Spot Angle
-70
-UID
-1642690845
+294694811
 next
 end
