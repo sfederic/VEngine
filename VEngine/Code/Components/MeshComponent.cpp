@@ -274,6 +274,11 @@ void MeshComponent::CreateNewVertexBuffer()
 	pso.vertexBuffer.data = RenderUtils::CreateVertexBuffer(meshDataProxy);
 }
 
+std::vector<Vertex>& MeshComponent::GetAllVertices()
+{
+	return meshDataProxy.vertices;
+}
+
 std::vector<XMFLOAT3> MeshComponent::GetAllVertexPositions()
 {
 	std::vector<XMFLOAT3> positions;
