@@ -128,6 +128,8 @@ void RenderPostProcess();
 void RenderWireframeForVertexPaintingAndPickedActor();
 void RenderLightProbes();
 
+void PointLightVertexColourMap();
+
 void MapBuffer(ID3D11Resource* resource, const void* src, size_t size);
 void DrawMesh(MeshComponent* mesh);
 void DrawMeshInstanced(InstanceMeshComponent* mesh);
@@ -316,6 +318,12 @@ void Renderer::Tick()
 	if (Input::GetKeyUp(Keys::F3))
 	{
 		drawAllAsWireframe = !drawAllAsWireframe;
+	}
+
+	if (Input::GetKeyUp(Keys::F4))
+	{
+		PointLightVertexColourMap();
+		Log("vertex colour map done");
 	}
 
 	ScreenshotCapture();
@@ -2176,6 +2184,41 @@ void RenderLightProbes()
 	cbLights->SetPS();
 
 	context->DrawInstanced(instanceMesh->meshDataProxy.vertices.size(), probeMap->GetProbeCount(), 0, 0);
+}
+
+void PointLightVertexColourMap()
+{
+	for (auto& pointLight : PointLightComponent::system.GetComponents())
+	{
+		for (auto& mesh : MeshComponent::system.GetComponents())
+		{
+			const auto meshWorldMatrix = mesh->GetWorldMatrix();
+
+			auto& vertices = mesh->GetAllVertices();
+
+			for (auto& vertex : vertices)
+			{
+				const auto vertexPos = XMLoadFloat3(&vertex.pos);
+				const auto worldSpaceVertexPos = XMVector3TransformCoord(vertexPos, meshWorldMatrix);
+
+				HitResult hit;
+				hit.actorsToIgnore.push_back(pointLight->GetOwner());
+				hit.componentsToIgnore.push_back(pointLight.get());
+				hit.ignoreBackFaceHits = false;
+
+				auto normal = XMLoadFloat3(&vertex.normal);
+				normal = XMVector3TransformNormal(normal, meshWorldMatrix);
+				normal = XMVector3Normalize(normal);
+
+				if (Raycast(hit, worldSpaceVertexPos + normal, pointLight->GetWorldPositionV()))
+				{
+					vertex.colour = XMFLOAT4(0.1f, 0.1f, 0.1f, 1.f);
+				}
+			}
+
+			mesh->CreateNewVertexBuffer();
+		}
+	}
 }
 
 RastState* Renderer::GetRastState(std::string rastStateName)
