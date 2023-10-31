@@ -1101,7 +1101,8 @@ void Renderer::RenderLightProbeViews()
 				Material& material = mesh->GetMaterial();
 
 				const FLOAT blendState[4] = { 0.f };
-				context->OMSetBlendState(nullptr, blendState, 0xFFFFFFFF);
+				context->OMSetBlendState(mesh->GetBlendState().data, blendState, 0xFFFFFFFF);
+				context->RSSetState(mesh->GetRastState().data);
 
 				context->VSSetShader(lightProbeShader->GetVertexShader(), nullptr, 0);
 				context->PSSetShader(lightProbeShader->GetPixelShader(), nullptr, 0);
