@@ -3,13 +3,13 @@ DiffuseProbeMap
  Enabled
 1
  Position
-0 0 0
+-0 -0 -0
  Rotation
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
-0
+1
 Name
 DiffuseProbeMap0
 Size X
@@ -19,7 +19,7 @@ Size Y
 Size Z
 9
 UID
-525406669
+3967364626
 next
 Grid
 1
@@ -514,21 +514,6 @@ UID
 next
 EmptyComponent
 2
-525406669
-Root
- Enabled
-1
- Pos
-0 0 0
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-UID
-3886712542
-next
 863854931
 Root
  Enabled
@@ -543,6 +528,21 @@ Root
 1
 UID
 2611148280
+next
+3967364626
+Root
+ Enabled
+1
+ Pos
+-0 -0 -0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+1991796134
 next
 InstanceMeshComponent
 1

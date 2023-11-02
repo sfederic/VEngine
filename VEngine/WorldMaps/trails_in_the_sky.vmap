@@ -1,3 +1,26 @@
+DiffuseProbeMap
+1
+ Enabled
+0
+ Position
+0 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DiffuseProbeMap0
+Size X
+7
+Size Y
+3
+Size Z
+9
+UID
+3250021817
+next
 Grid
 1
  Enabled
@@ -519,26 +542,11 @@ UID
 1940523635
 next
 PointLightActor
-2
+1
  Enabled
 1
  Position
-3 3 2
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-PointLightActor0
-UID
-3046368842
-next
- Enabled
-1
- Position
-3 3 7
+3 2 3
  Rotation
 -0 0 -0 1
  Scale
@@ -587,7 +595,7 @@ UID
 603134396
 next
 EmptyComponent
-1
+2
 1940523635
 Root
  Enabled
@@ -602,6 +610,21 @@ Root
 1
 UID
 4128276352
+next
+3250021817
+Root
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+1571038319
 next
 InstanceMeshComponent
 1
@@ -2478,34 +2501,13 @@ UID
 607780351
 next
 PointLightComponent
-2
-3046368842
-PointLight
- Enabled
 1
- Pos
-3 3 2
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Colour
-1 1 1 1
-Intensity
-25
-LightEnabled
-1
-UID
-424837419
-next
 3266299921
 PointLight
  Enabled
 1
  Pos
-3 3 7
+3 2 3
  Rot
 -0 0 -0 1
  Scale

@@ -5,9 +5,9 @@ DirectionalLightActor
  Position
 0 5 0
  Rotation
-0.707107 0 0 0.707107
+-0.385889 -0.247943 0.788624 -0.409496
  Scale
-1 1 1
+0.999998 0.999996 0.999995
  Visible
 1
 Name
@@ -663,9 +663,9 @@ DirectionalLight
  Pos
 0 5 0
  Rot
-0.707107 0 0 0.707107
+-0.385889 -0.247943 0.788624 -0.409496
  Scale
-1 1 1
+0.999998 0.999996 0.999995
  Visible
 1
 Colour

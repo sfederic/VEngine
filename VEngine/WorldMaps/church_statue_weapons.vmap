@@ -34,6 +34,29 @@ entrance to a little garden here that reveals a sundial to match the clock upsta
 UID
 2544657414
 next
+DiffuseProbeMap
+1
+ Enabled
+0
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DiffuseProbeMap0
+Size X
+10
+Size Y
+4
+Size Z
+10
+UID
+2522248940
+next
 DirectionalLightActor
 1
  Enabled
@@ -664,7 +687,7 @@ UID
 814014588
 next
 EmptyComponent
-5
+6
 2028731464
 Root
  Enabled
@@ -739,6 +762,21 @@ Root
 1
 UID
 1498646771
+next
+2522248940
+Root
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+690763964
 next
 InstanceMeshComponent
 1
@@ -832,7 +870,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/floor.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -997,7 +1035,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/floor_tile.png
 M_Use Texture
 1
 M_UvOffset
@@ -1052,7 +1090,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/floor_tile.png
 M_Use Texture
 1
 M_UvOffset
@@ -1217,7 +1255,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/floor.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1272,7 +1310,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+pillar_texture.png
 M_Use Texture
 1
 M_UvOffset
@@ -1327,7 +1365,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+pillar_texture.png
 M_Use Texture
 1
 M_UvOffset
@@ -1382,7 +1420,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+pillar_texture.png
 M_Use Texture
 1
 M_UvOffset
@@ -1437,7 +1475,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+pillar_texture.png
 M_Use Texture
 1
 M_UvOffset
@@ -1492,7 +1530,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+pillar_texture.png
 M_Use Texture
 1
 M_UvOffset
