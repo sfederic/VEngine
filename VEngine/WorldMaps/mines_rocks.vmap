@@ -30,7 +30,7 @@ EntranceTrigger
 Entrance Active
 1
 Level Name
-mines_rotation_rock_stack.vmap
+mines_floating_rock_showcase.vmap
 Locked Text
 Locked
 Name
@@ -558,7 +558,7 @@ UID
 2164988490
 next
 MeshActor
-5
+8
  Enabled
 1
  Position
@@ -633,6 +633,51 @@ Name
 cube4
 UID
 3244830995
+next
+ Enabled
+1
+ Position
+2 2 9
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+cube5
+UID
+3940145262
+next
+ Enabled
+1
+ Position
+3 5 14
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+cube6
+UID
+2572891162
+next
+ Enabled
+1
+ Position
+1 5 14
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+cube7
+UID
+857295150
 next
 Player
 1
@@ -950,7 +995,7 @@ UID
 1373592248
 next
 MeshComponent
-15
+18
 1696898046
 Mesh
  Enabled
@@ -1720,6 +1765,171 @@ Trans. Occlude
 0
 UID
 3290864956
+next
+3940145262
+Mesh
+ Enabled
+1
+ Pos
+2 2 9
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+983163548
+next
+2572891162
+Mesh
+ Enabled
+1
+ Pos
+3 5 14
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+4218242208
+next
+857295150
+Mesh
+ Enabled
+1
+ Pos
+1 5 14
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3906617558
 next
 1102344030
 Mesh
