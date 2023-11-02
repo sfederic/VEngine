@@ -49,7 +49,7 @@ EntranceTrigger
 Entrance Active
 1
 Level Name
-aqueduct_room.vmap
+aqueduct_simple_missing_pipe.vmap
 Locked Text
 Locked
 Name
@@ -128,7 +128,7 @@ MeshActor
  Visible
 1
 Name
-statue_orientation0
+cube0
 UID
 594705524
 next
@@ -143,7 +143,7 @@ next
  Visible
 1
 Name
-statue_orientation1
+node1
 UID
 2720999276
 next
@@ -158,7 +158,7 @@ next
  Visible
 1
 Name
-statue_orientation2
+cube2
 UID
 1800709248
 next
@@ -173,7 +173,7 @@ next
  Visible
 1
 Name
-statue_orientation3
+cube3
 UID
 894616707
 next
@@ -188,7 +188,7 @@ next
  Visible
 1
 Name
-statue_orientation4
+cube4
 UID
 448780816
 next
@@ -203,7 +203,7 @@ next
  Visible
 1
 Name
-statue_orientation5
+cube5
 UID
 1382513792
 next
@@ -218,7 +218,7 @@ next
  Visible
 1
 Name
-statue_orientation6
+cube6
 UID
 178473669
 next
@@ -233,7 +233,7 @@ next
  Visible
 1
 Name
-statue_orientation7
+cube7
 UID
 2271204300
 next
@@ -248,7 +248,7 @@ next
  Visible
 1
 Name
-statue_orientation8
+cube8
 UID
 1494343717
 next
@@ -263,7 +263,7 @@ next
  Visible
 1
 Name
-statue_orientation9
+cube9
 UID
 4023316141
 next
@@ -278,7 +278,7 @@ next
  Visible
 1
 Name
-statue_orientation10
+cube10
 UID
 2620080190
 next
@@ -293,7 +293,7 @@ next
  Visible
 1
 Name
-statue_orientation11
+cube11
 UID
 3923701169
 next
@@ -308,7 +308,7 @@ next
  Visible
 1
 Name
-statue_orientation12
+cube12
 UID
 1330566165
 next
@@ -323,7 +323,7 @@ next
  Visible
 1
 Name
-statue_orientation13
+cube13
 UID
 958380910
 next
@@ -338,7 +338,7 @@ next
  Visible
 1
 Name
-statue_orientation14
+pipe14
 UID
 3180757060
 next
@@ -353,7 +353,7 @@ next
  Visible
 1
 Name
-statue_orientation15
+pipe15
 UID
 2225751571
 next
@@ -368,7 +368,7 @@ next
  Visible
 1
 Name
-statue_orientation16
+pipe16
 UID
 836189848
 next
@@ -383,7 +383,7 @@ next
  Visible
 1
 Name
-statue_orientation17
+pipe17
 UID
 1903238813
 next
@@ -398,7 +398,7 @@ next
  Visible
 1
 Name
-statue_orientation18
+pipe18
 UID
 3847038320
 next
@@ -413,7 +413,7 @@ next
  Visible
 1
 Name
-statue_orientation19
+pipe19
 UID
 4062446338
 next
@@ -428,7 +428,7 @@ next
  Visible
 1
 Name
-statue_orientation20
+cube20
 UID
 242599929
 next
@@ -443,7 +443,7 @@ next
  Visible
 1
 Name
-statue_orientation21
+cube21
 UID
 2805191042
 next
@@ -458,7 +458,7 @@ next
  Visible
 1
 Name
-statue_orientation22
+pipe22
 UID
 964141602
 next
@@ -473,7 +473,7 @@ next
  Visible
 1
 Name
-statue_orientation23
+flat_plane23
 UID
 4231426507
 next
@@ -506,7 +506,7 @@ Health
 Ignore Rotate Check
 1
 Inspect
-1
+0
 Interact
 1
 Interact Text
@@ -552,8 +552,6 @@ OrientationTrigger
 1
 Name
 OrientationTrigger0
-Target Actor
-PressurePipe0
 UID
 1895875641
 next
@@ -597,7 +595,7 @@ Health
 Ignore Rotate Check
 0
 Inspect
-1
+0
 Interact
 1
 Interact Text
