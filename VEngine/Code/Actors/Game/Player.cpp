@@ -745,42 +745,6 @@ void Player::RotateLinkedGridActor()
 
 	constexpr float angleIncrement = 90.f;
 
-	/*if (Input::GetKeyHeld(Keys::Shift) && Input::GetKeyDown(Keys::Right))
-	{
-		if (checkLinkRotation(linkedGridActor->CanBeRotatedInLink()))
-		{
-			linkedGridActor->SetNextRot(VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
-				VMath::GlobalForwardVector(), -angleIncrement));
-			if (!linkedGridActor->CheckNextRotationBoundsIntersect())
-			{
-				linkedGridActor->OnLinkRotate();
-				linkedGridActor->OnLinkRotateRight();
-			}
-			else
-			{
-				linkedGridActor->SetNextRot(linkedGridActor->GetRotationV());
-				Camera::GetActiveCamera().SetShakeLevel(0.25f);
-			}
-		}
-	}
-	else if (Input::GetKeyHeld(Keys::Shift) && Input::GetKeyDown(Keys::Left))
-	{
-		if (checkLinkRotation(linkedGridActor->CanBeRotatedInLink()))
-		{
-			linkedGridActor->SetNextRot(VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
-				VMath::GlobalForwardVector(), angleIncrement));
-			if (!linkedGridActor->CheckNextRotationBoundsIntersect())
-			{
-				linkedGridActor->OnLinkRotate();
-				linkedGridActor->OnLinkRotateRight();
-			}
-			else
-			{
-				linkedGridActor->SetNextRot(linkedGridActor->GetRotationV());
-				Camera::GetActiveCamera().SetShakeLevel(0.25f);
-			}
-		}
-	}*/
 	if (Input::GetKeyUp(Keys::NumPad3))
 	{
 		if (checkLinkRotation(linkedGridActor->CanBeRotatedInLink()))
