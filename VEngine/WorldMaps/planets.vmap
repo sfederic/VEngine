@@ -1,0 +1,469 @@
+DebugNoteActor
+1
+ Enabled
+1
+ Position
+1 2 4
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DebugNoteActor0
+Note Text
+mech linked to player to change time of day. very gradios. very gurren lagann
+UID
+3798396268
+next
+DirectionalLightActor
+1
+ Enabled
+1
+ Position
+-2.00104 5.47663e-07 4.00138
+ Rotation
+5.22749e-08 0.70744 -2.13443e-08 0.706773
+ Scale
+1 0.999982 0.999992
+ Visible
+1
+Name
+DirectionalLightActor0
+UID
+1149467258
+next
+Grid
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+Grid0
+Size X
+5
+Size Y
+5
+UID
+1808963771
+next
+GridActor
+1
+ Enabled
+1
+ Position
+2 0 3
+ Rotation
+0 -0.707107 0 -0.707107
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+1
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+0
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+GridActor0
+Obstacle
+1
+Rotate Pitch
+0
+Rotate Speed
+0.2
+Rotate Yaw
+1
+UID
+2689649827
+next
+MeshActor
+1
+ Enabled
+1
+ Position
+2 -0.5 2
+ Rotation
+0 0 0 1
+ Scale
+5 1 5
+ Visible
+1
+Name
+node0
+UID
+2005305516
+next
+Player
+1
+ Enabled
+1
+ Position
+2 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+Player0
+UID
+3297085225
+next
+CameraComponent
+1
+3297085225
+Camera
+ Enabled
+1
+ Pos
+1.25 0.55 -0.75
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
+UID
+1539587568
+next
+DialogueComponent
+2
+2689649827
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2130920721
+next
+3297085225
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1600449501
+next
+DirectionalLightComponent
+1
+1149467258
+DirectionalLight
+ Enabled
+1
+ Pos
+-2.00104 5.47663e-07 4.00138
+ Rot
+5.22749e-08 0.70744 -2.13443e-08 0.706773
+ Scale
+1 0.999982 0.999992
+ Visible
+1
+Colour
+1 1 1 1
+LightEnabled
+1
+UID
+1879518887
+next
+EmptyComponent
+2
+3297085225
+Root
+ Enabled
+1
+ Pos
+2 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+3656260821
+next
+3798396268
+Root
+ Enabled
+1
+ Pos
+1 2 4
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+839542645
+next
+InstanceMeshComponent
+1
+1808963771
+NodeMesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Instance
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2555760343
+next
+MeshComponent
+3
+2689649827
+Mesh
+ Enabled
+1
+ Pos
+2 0 3
+ Rot
+0 -0.707107 0 -0.707107
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+fullmapb.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+sphere.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3870311164
+next
+2005305516
+Mesh
+ Enabled
+1
+ Pos
+2 -0.5 2
+ Rot
+0 0 0 1
+ Scale
+5 1 5
+ Visible
+0
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+fullmapb.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+766116583
+next
+3297085225
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+metabee.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2383706407
+next
+end
