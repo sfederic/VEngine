@@ -98,6 +98,8 @@
 #include "ShaderItem.h"
 #include "Sprite.h"
 #include <cstdlib>
+#include "Actors/Game/GridActor.h"
+#include "Actors/Game/Player.h"
 
 void CreateFactory();
 void CreateDevice();
@@ -2189,6 +2191,10 @@ void RenderLightProbes()
 
 void PointLightVertexColourMap()
 {
+	//Make sure vertex colour mapping isn't hitting moveable actors
+	auto gridActorsToIgnore = World::GetAllActorsOfTypeAsActor<GridActor>();
+	auto player = Player::system.GetFirstActor();
+
 	for (auto& pointLight : PointLightComponent::system.GetComponents())
 	{
 		for (auto& mesh : MeshComponent::system.GetComponents())
@@ -2204,6 +2210,8 @@ void PointLightVertexColourMap()
 
 				HitResult hit;
 				hit.actorsToIgnore.push_back(pointLight->GetOwner());
+				hit.actorsToIgnore.push_back(player);
+				hit.AddActorsToIgnore(gridActorsToIgnore);
 				hit.componentsToIgnore.push_back(pointLight.get());
 				hit.ignoreBackFaceHits = false;
 
@@ -2237,6 +2245,8 @@ void PointLightVertexColourMap()
 
 				HitResult hit;
 				hit.actorsToIgnore.push_back(dLight->GetOwner());
+				hit.actorsToIgnore.push_back(player);
+				hit.AddActorsToIgnore(gridActorsToIgnore);
 				hit.componentsToIgnore.push_back(dLight.get());
 				hit.ignoreBackFaceHits = false;
 
