@@ -1,5 +1,7 @@
 #include "vpch.h"
 #include "World.h"
+#include <algorithm>
+#include <execution>
 #include "VMath.h"
 #include "FileSystem.h"
 #include "Profile.h"
@@ -180,10 +182,14 @@ void World::TickAllActorSystems(float deltaTime)
 {
 	Profile::Start();
 
-	for (IActorSystem* actorSystem : activeActorSystems)
-	{
-		actorSystem->Tick(deltaTime);
-	}
+	std::for_each(
+		std::execution::par,
+		activeActorSystems.begin(),
+		activeActorSystems.end(),
+		[&](auto actorSystem)
+		{
+			actorSystem->Tick(deltaTime);
+		});
 
 	Profile::End();
 }
@@ -192,10 +198,14 @@ void World::TickAllComponentSystems(float deltaTime)
 {
 	Profile::Start();
 
-	for (IComponentSystem* componentSystem : activeComponentSystems)
-	{
-		componentSystem->Tick(deltaTime);
-	}
+	std::for_each(
+		std::execution::par,
+		activeComponentSystems.begin(),
+		activeComponentSystems.end(),
+		[&](auto componentSystem)
+		{
+			componentSystem->Tick(deltaTime);
+		});
 
 	Profile::End();
 }
