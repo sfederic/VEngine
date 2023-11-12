@@ -9,6 +9,9 @@ class Unit;
 class PlayerUnit;
 class GridActor;
 
+//@Todo: if pathfinding needs a more grid-less solution,
+//look to https://docs.unrealengine.com/udk/Three/NavigationMeshReference.html
+
 //Actor that holds all the traversable nodes in the level.
 //Grid needs to always be at (0, 0, 0) in world because of how rows & nodes are created at index.
 struct Grid : public Actor
