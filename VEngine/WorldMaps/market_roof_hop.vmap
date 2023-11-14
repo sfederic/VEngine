@@ -47,9 +47,9 @@ DirectionalLightActor
  Position
 0 5 0
  Rotation
-0.316682 0.311641 -0.131949 0.886105
+0.013885 0.854861 -0.444377 -0.267485
  Scale
-0.999998 1 0.999999
+1 0.999999 0.999999
  Visible
 1
 Name
@@ -655,11 +655,11 @@ MeshActor
  Rotation
 -0 0 -0 1
  Scale
-7 1 7
+13 13 13
  Visible
 1
 Name
-node0
+grid_high0
 UID
 2189207719
 next
@@ -1069,9 +1069,9 @@ DirectionalLight
  Pos
 0 5 0
  Rot
-0.316682 0.311641 -0.131949 0.886105
+0.013885 0.854861 -0.444377 -0.267485
  Scale
-0.999998 1 0.999999
+1 0.999999 0.999999
  Visible
 1
 Colour
@@ -1746,7 +1746,7 @@ Mesh
  Rot
 -0 0 -0 1
  Scale
-7 1 7
+13 13 13
  Visible
 1
 Casts Shadow
@@ -1784,7 +1784,7 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-grid.vmesh
+node.vmesh
 Static
 1
 Trans. Occlude
