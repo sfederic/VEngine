@@ -67,6 +67,19 @@ struct HitResult
 		return nullptr;
 	}
 
+	Actor* FindHitActor(Actor* findActor)
+	{
+		for (auto actor : hitActors)
+		{
+			if (actor == findActor)
+			{
+				return actor;
+			}
+		}
+
+		return nullptr;
+	}
+
 	void AddActorsToIgnore(std::vector<Actor*>& actors);
 	void IgnorePlayer();
 

@@ -431,23 +431,26 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 		}
 	}
 
-	std::vector<Actor*> actorsToRemove;
+	std::set<Actor*> actorsToRemove;
 
 	for (auto it = previousHitTransparentActors.begin(); it != previousHitTransparentActors.end(); it++)
 	{
-		auto mesh = (*it)->GetFirstComponentOfTypeAllowNull<MeshComponent>();
-		if (mesh && mesh->transparentOcclude)
+		if (hit.FindHitActor(*(it)) == nullptr)
 		{
-			float alpha = mesh->GetAlpha();
-			if (alpha < 1.f)
+			auto mesh = (*it)->GetFirstComponentOfTypeAllowNull<MeshComponent>();
+			if (mesh && mesh->transparentOcclude)
 			{
-				alpha += Core::GetDeltaTime() * 1.5f;
-				mesh->SetAlpha(alpha);
-			}
+				float alpha = mesh->GetAlpha();
+				if (alpha < 1.f)
+				{
+					alpha += Core::GetDeltaTime() * 1.5f;
+					mesh->SetAlpha(alpha);
+				}
 
-			if (alpha >= 1.f)
-			{
-				actorsToRemove.push_back(*(it));
+				if (alpha >= 1.f)
+				{
+					actorsToRemove.erase(*(it));
+				}
 			}
 		}
 	}
