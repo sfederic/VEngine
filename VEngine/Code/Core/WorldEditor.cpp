@@ -177,6 +177,7 @@ void HandleActorPicking()
 						auto replacementActor = spawnSystem->SpawnActor(pickedActorTransform);
 						replacementActor->Create();
 						replacementActor->CreateAllComponents();
+						replacementActor->PostCreate();
 
 						editor->UpdateWorldList();
 
@@ -218,6 +219,7 @@ void DuplicateActor()
 
 				newDuplicateActor->Create();
 				newDuplicateActor->CreateAllComponents();
+				newDuplicateActor->PostCreate();
 
 				//@Todo: move to Paint debug menu
 				auto newDuplicateActorMeshes = newDuplicateActor->GetComponentsOfType<MeshComponent>();
@@ -367,6 +369,7 @@ void SpawnActor(Transform& transform)
 
 	actor->Create();
 	actor->CreateAllComponents();
+	actor->PostCreate();
 
 	pickedActor = actor;
 	editor->SetActorProps(pickedActor);
