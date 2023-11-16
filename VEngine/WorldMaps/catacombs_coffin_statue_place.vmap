@@ -1,0 +1,2066 @@
+DirectionalLightActor
+1
+ Enabled
+1
+ Position
+0 5 0
+ Rotation
+0.707107 0 0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Name
+DirectionalLightActor0
+UID
+1222952772
+next
+Grid
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+Grid0
+Size X
+5
+Size Y
+5
+UID
+3892693589
+next
+MeshActor
+26
+ Enabled
+1
+ Position
+5 -0.5 5
+ Rotation
+-0 0 -0 1
+ Scale
+11 1 11
+ Visible
+1
+Name
+node0
+UID
+3120072159
+next
+ Enabled
+1
+ Position
+2 -0.2 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+coffin_11
+UID
+955630428
+next
+ Enabled
+1
+ Position
+2 -0.2 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+coffin_12
+UID
+281264082
+next
+ Enabled
+1
+ Position
+2 0 6
+ Rotation
+0 0.707279 0 -0.706934
+ Scale
+1 1 1
+ Visible
+1
+Name
+coffin_13
+UID
+3953753990
+next
+ Enabled
+1
+ Position
+8 -0.2 6
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+coffin_14
+UID
+2261285017
+next
+ Enabled
+1
+ Position
+8 0 4
+ Rotation
+-0 0.707107 -0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Name
+coffin_15
+UID
+3315842433
+next
+ Enabled
+1
+ Position
+8 -0.2 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+coffin_16
+UID
+992049397
+next
+ Enabled
+1
+ Position
+0 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 9
+ Visible
+1
+Name
+cube7
+UID
+1743588821
+next
+ Enabled
+1
+ Position
+10 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 9
+ Visible
+1
+Name
+cube8
+UID
+3008964972
+next
+ Enabled
+1
+ Position
+10.3 0.7 4
+ Rotation
+-0 0 -0 1
+ Scale
+0.5 0.5 9
+ Visible
+1
+Name
+cube9
+UID
+3327493317
+next
+ Enabled
+1
+ Position
+-0.3 0.7 4
+ Rotation
+-0 0 -0 1
+ Scale
+0.5 0.5 9
+ Visible
+1
+Name
+cube10
+UID
+2280491342
+next
+ Enabled
+1
+ Position
+-0.05 0.7 4
+ Rotation
+-0 0 -0 1
+ Scale
+0.5 1.5 1
+ Visible
+1
+Name
+cube11
+UID
+1501214024
+next
+ Enabled
+1
+ Position
+-0.05 0.7 6
+ Rotation
+-0 0 -0 1
+ Scale
+0.5 1.5 1
+ Visible
+1
+Name
+cube12
+UID
+2910531246
+next
+ Enabled
+1
+ Position
+-0.05 0.7 2
+ Rotation
+-0 0 -0 1
+ Scale
+0.5 1.5 1
+ Visible
+1
+Name
+cube13
+UID
+343912817
+next
+ Enabled
+1
+ Position
+9.95 0.7 2
+ Rotation
+-0 0 -0 1
+ Scale
+0.5 1.5 1
+ Visible
+1
+Name
+cube14
+UID
+3016461611
+next
+ Enabled
+1
+ Position
+9.95 0.7 4
+ Rotation
+-0 0 -0 1
+ Scale
+0.5 1.5 1
+ Visible
+1
+Name
+cube15
+UID
+3335105298
+next
+ Enabled
+1
+ Position
+9.95 0.7 6
+ Rotation
+-0 0 -0 1
+ Scale
+0.5 1.5 1
+ Visible
+1
+Name
+cube16
+UID
+2778120576
+next
+ Enabled
+1
+ Position
+3.95 -0.4 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 0.1 1
+ Visible
+1
+Name
+cube17
+UID
+2663300546
+next
+ Enabled
+1
+ Position
+5.95 -0.4 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 0.1 1
+ Visible
+1
+Name
+cube18
+UID
+3622342082
+next
+ Enabled
+1
+ Position
+5.95 -0.4 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 0.1 1
+ Visible
+1
+Name
+cube19
+UID
+3532392446
+next
+ Enabled
+1
+ Position
+3.95 -0.4 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 0.1 1
+ Visible
+1
+Name
+cube20
+UID
+2656274940
+next
+ Enabled
+1
+ Position
+3.95 -0.4 6
+ Rotation
+-0 0 -0 1
+ Scale
+1 0.1 1
+ Visible
+1
+Name
+cube21
+UID
+16920302
+next
+ Enabled
+1
+ Position
+5.95 -0.4 6
+ Rotation
+-0 0 -0 1
+ Scale
+1 0.1 1
+ Visible
+1
+Name
+cube22
+UID
+1907059848
+next
+ Enabled
+1
+ Position
+5 -0.4 9
+ Rotation
+-0 0 -0 1
+ Scale
+11 0.25 1
+ Visible
+1
+Name
+cube23
+UID
+2809807233
+next
+ Enabled
+1
+ Position
+5 -0.1 9.5
+ Rotation
+-0 0 -0 1
+ Scale
+11 0.25 1
+ Visible
+1
+Name
+cube24
+UID
+3684017304
+next
+ Enabled
+1
+ Position
+5 0.1 10.1
+ Rotation
+-0 0 -0 1
+ Scale
+11 0.25 1
+ Visible
+1
+Name
+cube25
+UID
+3340149338
+next
+Player
+1
+ Enabled
+1
+ Position
+4 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+Player0
+UID
+1501178535
+next
+CameraComponent
+1
+1501178535
+Camera
+ Enabled
+1
+ Pos
+1.75 1.75 -2.75
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
+UID
+1818006893
+next
+DialogueComponent
+1
+1501178535
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+3377083845
+next
+DirectionalLightComponent
+1
+1222952772
+DirectionalLight
+ Enabled
+1
+ Pos
+0 5 0
+ Rot
+0.707107 0 0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Colour
+1 1 1 1
+LightEnabled
+1
+UID
+2473875801
+next
+EmptyComponent
+1
+1501178535
+Root
+ Enabled
+1
+ Pos
+4 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+3072851232
+next
+InstanceMeshComponent
+1
+3892693589
+NodeMesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Instance
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2745299492
+next
+MeshComponent
+27
+1501178535
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3358872652
+next
+3120072159
+Mesh
+ Enabled
+1
+ Pos
+5 -0.5 5
+ Rot
+-0 0 -0 1
+ Scale
+11 1 11
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2542688546
+next
+955630428
+Mesh
+ Enabled
+1
+ Pos
+2 -0.2 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+coffin_1.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1789244245
+next
+281264082
+Mesh
+ Enabled
+1
+ Pos
+2 -0.2 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+coffin_1.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+648677775
+next
+3953753990
+Mesh
+ Enabled
+1
+ Pos
+2 0 6
+ Rot
+0 0.707279 0 -0.706934
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+coffin_2.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2890618171
+next
+2261285017
+Mesh
+ Enabled
+1
+ Pos
+8 -0.2 6
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+coffin_1.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+899143906
+next
+3315842433
+Mesh
+ Enabled
+1
+ Pos
+8 0 4
+ Rot
+-0 0.707107 -0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+coffin_2.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3919696422
+next
+992049397
+Mesh
+ Enabled
+1
+ Pos
+8 -0.2 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+coffin_1.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+532105091
+next
+1743588821
+Mesh
+ Enabled
+1
+ Pos
+0 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 9
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2356825300
+next
+3008964972
+Mesh
+ Enabled
+1
+ Pos
+10 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 9
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3285667576
+next
+3327493317
+Mesh
+ Enabled
+1
+ Pos
+10.3 0.7 4
+ Rot
+-0 0 -0 1
+ Scale
+0.5 0.5 9
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3347297524
+next
+2280491342
+Mesh
+ Enabled
+1
+ Pos
+-0.3 0.7 4
+ Rot
+-0 0 -0 1
+ Scale
+0.5 0.5 9
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1341847447
+next
+1501214024
+Mesh
+ Enabled
+1
+ Pos
+-0.05 0.7 4
+ Rot
+-0 0 -0 1
+ Scale
+0.5 1.5 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3864628551
+next
+2910531246
+Mesh
+ Enabled
+1
+ Pos
+-0.05 0.7 6
+ Rot
+-0 0 -0 1
+ Scale
+0.5 1.5 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+3067591729
+next
+343912817
+Mesh
+ Enabled
+1
+ Pos
+-0.05 0.7 2
+ Rot
+-0 0 -0 1
+ Scale
+0.5 1.5 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1623724906
+next
+3016461611
+Mesh
+ Enabled
+1
+ Pos
+9.95 0.7 2
+ Rot
+-0 0 -0 1
+ Scale
+0.5 1.5 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1346159406
+next
+3335105298
+Mesh
+ Enabled
+1
+ Pos
+9.95 0.7 4
+ Rot
+-0 0 -0 1
+ Scale
+0.5 1.5 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+4007424704
+next
+2778120576
+Mesh
+ Enabled
+1
+ Pos
+9.95 0.7 6
+ Rot
+-0 0 -0 1
+ Scale
+0.5 1.5 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1044449095
+next
+2663300546
+Mesh
+ Enabled
+1
+ Pos
+3.95 -0.4 2
+ Rot
+-0 0 -0 1
+ Scale
+1 0.1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1838914108
+next
+3622342082
+Mesh
+ Enabled
+1
+ Pos
+5.95 -0.4 2
+ Rot
+-0 0 -0 1
+ Scale
+1 0.1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1686496252
+next
+3532392446
+Mesh
+ Enabled
+1
+ Pos
+5.95 -0.4 4
+ Rot
+-0 0 -0 1
+ Scale
+1 0.1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+62222157
+next
+2656274940
+Mesh
+ Enabled
+1
+ Pos
+3.95 -0.4 4
+ Rot
+-0 0 -0 1
+ Scale
+1 0.1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1489986889
+next
+16920302
+Mesh
+ Enabled
+1
+ Pos
+3.95 -0.4 6
+ Rot
+-0 0 -0 1
+ Scale
+1 0.1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+601797261
+next
+1907059848
+Mesh
+ Enabled
+1
+ Pos
+5.95 -0.4 6
+ Rot
+-0 0 -0 1
+ Scale
+1 0.1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+2350043617
+next
+2809807233
+Mesh
+ Enabled
+1
+ Pos
+5 -0.4 9
+ Rot
+-0 0 -0 1
+ Scale
+11 0.25 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+1675774801
+next
+3684017304
+Mesh
+ Enabled
+1
+ Pos
+5 -0.1 9.5
+ Rot
+-0 0 -0 1
+ Scale
+11 0.25 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+878795353
+next
+3340149338
+Mesh
+ Enabled
+1
+ Pos
+5 0.1 10.1
+ Rot
+-0 0 -0 1
+ Scale
+11 0.25 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+0
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+475684406
+next
+end
