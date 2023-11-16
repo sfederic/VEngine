@@ -189,7 +189,7 @@ void Console::Init()
 			},
 			"Resets all component UIDs in world."));
 
-	executeMap.emplace(L"NO TEXTURE",
+	executeMap.emplace(L"NO TEX",
 		std::make_pair([]() {
 			for (auto& mesh : MeshComponent::system.GetComponents())
 			{
@@ -197,7 +197,7 @@ void Console::Init()
 			}
 			}, "Sets all materials in world to NOT use texture via material shader data."));
 
-	executeMap.emplace(L"USE TEXTURE",
+	executeMap.emplace(L"USE TEX",
 		std::make_pair([]() {
 			for (auto& mesh : MeshComponent::system.GetComponents())
 			{
