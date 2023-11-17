@@ -1,69 +1,80 @@
 #include "vpch.h"
-#include "Renderer.h"
-#include <dxgi1_6.h>
-#include "PipelineObjects.h"
-#include <ScreenGrab.h>
-#include <SHMath/DirectXSH.h>
-#include <WinCodec.h> //For GUID_ContainerFormatJpeg
-#include "Core/Debug.h"
-#include "Core/Core.h"
-#include "Core/Log.h"
-#include "Core/VMath.h"
-#include "ShaderSystem.h"
-#include "Core/Camera.h"
-#include "Core/WorldEditor.h"
-#include "Core/Input.h"
-#include "Material.h"
-#include "Core/Profile.h"
-#include "RenderUtils.h"
-#include "Texture2D.h"
-#include "TextureSystem.h"
-#include "ConstantBuffer.h"
-#include "UI/UISystem.h"
-#include "ShadowMap.h"
+#include "../Particle/Particle.h"
 #include "Actors/Actor.h"
+#include "Actors/ActorSystem.h"
+#include "Actors/DebugActors/DebugLightProbe.h"
 #include "Actors/DiffuseProbeMap.h"
+#include "Actors/Game/GridActor.h"
+#include "Actors/Game/Player.h"
 #include "Actors/PostProcessVolume.h"
-#include "Components/CameraComponent.h"
-#include "Components/MeshComponent.h"
-#include "Components/DestructibleMeshComponent.h"
-#include "Components/SocketMeshComponent.h"
-#include "Components/SliceableMeshComponent.h"
-#include "Components/SkeletalMeshComponent.h"
+#include "BlendStates.h"
 #include "Components/BoxTriggerComponent.h"
+#include "Components/CameraComponent.h"
+#include "Components/CharacterControllerComponent.h"
+#include "Components/Component.h"
+#include "Components/ComponentSystem.h"
+#include "Components/DestructibleMeshComponent.h"
 #include "Components/InstanceMeshComponent.h"
 #include "Components/Lights/DirectionalLightComponent.h"
 #include "Components/Lights/PointLightComponent.h"
 #include "Components/Lights/SpotLightComponent.h"
-#include "Components/CharacterControllerComponent.h"
+#include "Components/MeshComponent.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "Components/SliceableMeshComponent.h"
+#include "Components/SocketMeshComponent.h"
+#include "Components/SpatialComponent.h"
+#include "ConstantBuffer.h"
+#include "Core/Camera.h"
+#include "Core/Core.h"
+#include "Core/Debug.h"
+#include "Core/Input.h"
+#include "Core/Log.h"
+#include "Core/Profile.h"
+#include "Core/Transform.h"
+#include "Core/UID.h"
+#include "Core/VMath.h"
+#include "Core/VString.h"
+#include "Core/World.h"
+#include "Core/WorldEditor.h"
 #include "Editor/DebugMenu.h"
+#include "Light.h"
+#include "Line.h"
+#include "Material.h"
+#include "MeshData.h"
+#include "MeshDataProxy.h"
 #include "Particle/ParticleEmitter.h"
-#include "Particle/SpriteSheet.h"
 #include "Particle/Polyboard.h"
+#include "Particle/SpriteSheet.h"
 #include "Physics/PhysicsSystem.h"
-#include "Render/SpriteSystem.h"
-#include "Render/VertexShader.h"
-#include "Render/RenderTarget.h"
-#include "Vertex.h"
+#include "PipelineObjects.h"
 #include "RastStates.h"
-#include "BlendStates.h"
+#include "Render/RenderTarget.h"
+#include "Render/ShaderData/InstanceData.h"
+#include "Render/ShaderData/ShaderLights.h"
 #include "Render/ShaderData/ShaderMatrices.h"
 #include "Render/ShaderData/ShaderMeshData.h"
 #include "Render/ShaderData/ShaderPostProcessData.h"
 #include "Render/ShaderData/ShaderSkinningData.h"
-#include "Render/ShaderData/ShaderLights.h"
 #include "Render/ShaderData/ShaderTimeData.h"
-#include "Render/ShaderData/InstanceData.h"
-#include "Line.h"
-#include <dxgi.h>
-#include <dxgi1_4.h>
-#include <dxgicommon.h>
-#include <dxgiformat.h>
-#include <dxgitype.h>
-#include <minwindef.h>
-#include <windef.h>
+#include "Render/SpriteSystem.h"
+#include "Render/VertexShader.h"
+#include "Renderer.h"
+#include "RenderPropertyStructs.h"
+#include "RenderUtils.h"
+#include "Shader.h"
+#include "ShaderData/MaterialShaderData.h"
+#include "ShaderItem.h"
+#include "ShaderSystem.h"
+#include "ShadowMap.h"
+#include "Sprite.h"
+#include "Texture2D.h"
+#include "TextureSystem.h"
+#include "UI/UISystem.h"
+#include "Vertex.h"
 #include <assert.h>
 #include <combaseapi.h>
+#include <cstdint>
+#include <cstdlib>
 #include <d3d11.h>
 #include <d3dcommon.h>
 #include <DirectXCollision.h>
@@ -71,35 +82,23 @@
 #include <DirectXMathConvert.inl>
 #include <DirectXMathMatrix.inl>
 #include <DirectXMathVector.inl>
-#include <Unknwnbase.h>
-#include <cstdint>
+#include <dxgi.h>
+#include <dxgi1_4.h>
+#include <dxgi1_6.h>
+#include <dxgicommon.h>
+#include <dxgiformat.h>
+#include <dxgitype.h>
 #include <map>
 #include <memory>
-#include <new>
+#include <minwindef.h>
+#include <ScreenGrab.h>
+#include <SHMath/DirectXSH.h>
 #include <string>
+#include <Unknwnbase.h>
 #include <utility>
 #include <vector>
-#include "Actors/ActorSystem.h"
-#include "Actors/DebugActors/DebugLightProbe.h"
-#include "Components/Component.h"
-#include "Components/ComponentSystem.h"
-#include "Components/SpatialComponent.h"
-#include "Core/Transform.h"
-#include "Core/UID.h"
-#include "Core/VString.h"
-#include "Core/World.h"
-#include "../Particle/Particle.h"
-#include "Light.h"
-#include "MeshData.h"
-#include "MeshDataProxy.h"
-#include "RenderPropertyStructs.h"
-#include "Shader.h"
-#include "ShaderData/MaterialShaderData.h"
-#include "ShaderItem.h"
-#include "Sprite.h"
-#include <cstdlib>
-#include "Actors/Game/GridActor.h"
-#include "Actors/Game/Player.h"
+#include <WinCodec.h> //For GUID_ContainerFormatJpeg
+#include <windef.h>
 
 void CreateFactory();
 void CreateDevice();
@@ -2219,9 +2218,24 @@ void PointLightVertexColourMap()
 				normal = XMVector3TransformNormal(normal, meshWorldMatrix);
 				normal = XMVector3Normalize(normal);
 
-				if (Raycast(hit, worldSpaceVertexPos + normal, pointLight->GetWorldPositionV()))
+				const auto vertexToLightDirection =
+					XMVector3Normalize(pointLight->GetWorldPositionV() - worldSpaceVertexPos);
+				float dot = XMVector3Dot(normal, vertexToLightDirection).m128_f32[0];
+				dot = std::clamp(dot, 0.1f, 1.f);
+
+				const auto rayOrigin = worldSpaceVertexPos + (normal * 0.05f);
+				if (Raycast(hit, rayOrigin, pointLight->GetWorldPositionV()))
 				{
-					vertex.colour = XMFLOAT4(0.1f, 0.1f, 0.1f, 1.f);
+					auto blackColour = XMVectorSet(0.1f, 0.1f, 0.1f, 1.f);
+					blackColour *= dot;
+					XMStoreFloat4(&vertex.colour, blackColour);
+				}
+				else
+				{
+					auto colour = pointLight->GetLightData().colour;
+					auto lightColour = XMLoadFloat4(&colour);
+					lightColour *= dot;
+					XMStoreFloat4(&vertex.colour, lightColour);
 				}
 			}
 
@@ -2254,9 +2268,14 @@ void PointLightVertexColourMap()
 				normal = XMVector3TransformNormal(normal, meshWorldMatrix);
 				normal = XMVector3Normalize(normal);
 
-				if (Raycast(hit, worldSpaceVertexPos + normal, -dLight->GetForwardVectorV(), 20.f))
+				const auto rayOrigin = worldSpaceVertexPos + (normal * 0.05f);
+				if (Raycast(hit, rayOrigin, -dLight->GetForwardVectorV(), 20.f))
 				{
-					vertex.colour = XMFLOAT4(0.2f, 0.2f, 0.2f, 1.f);
+					vertex.colour = XMFLOAT4(0.1f, 0.1f, 0.1f, 1.f);
+				}
+				else
+				{
+					vertex.colour = dLight->GetLightData().colour;
 				}
 			}
 
