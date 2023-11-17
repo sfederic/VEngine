@@ -443,17 +443,27 @@ void DebugMenu::RenderVertexPaintMenu()
 		AssetSystem::LoadVertexColourDataFromFile();
 	}
 
+	auto SetMeshVertexColours = [&](XMFLOAT4 colour)
+		{
+			for (auto& mesh : MeshComponent::system.GetComponents())
+			{
+				for (auto& vertex : mesh->meshDataProxy.vertices)
+				{
+					vertex.colour = colour;
+				}
+
+				mesh->CreateNewVertexBuffer();
+			}
+		};
+
 	if (ImGui::Button("Reset all vertex colours in world"))
 	{
-		for (auto& mesh : MeshComponent::system.GetComponents())
-		{
-			for (auto& vertex : mesh->meshDataProxy.vertices)
-			{
-				vertex.colour = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
-			}
+		SetMeshVertexColours(XMFLOAT4(1.f, 1.f, 1.f, 1.f));
+	}
 
-			mesh->CreateNewVertexBuffer();
-		}
+	if (ImGui::Button("Flood Fill"))
+	{
+		SetMeshVertexColours(XMFLOAT4(colour[0], colour[1], colour[2], 1.f));
 	}
 
 	ImGui::End();
