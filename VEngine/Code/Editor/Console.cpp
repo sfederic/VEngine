@@ -246,6 +246,7 @@ void Console::InputTick()
 	if (Input::GetKeyUp(Keys::Tilde)) //~ key, like doom and unreal
 	{
 		bConsoleActive = !bConsoleActive;
+		consoleString.clear();
 		return;
 	}
 
