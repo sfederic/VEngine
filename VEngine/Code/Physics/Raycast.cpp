@@ -169,13 +169,12 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 
 	//@Todo: There's a problem here when ray casting from 0,0,0 in world for example towards a FenceActor when
 	//the nearestDistance is less than 0.
-
 	if (hitResult.hitActor)
 	{
-		const XMVECTOR hitPos = hitResult.origin + (hitResult.direction * hitResult.hitDistance);
-		XMStoreFloat3(&hitResult.hitPos, hitPos);
-
 		hitResult.hitDistance = nearestDistance;
+
+		const XMVECTOR hitPos = hitResult.origin + (hitResult.direction * nearestDistance);
+		XMStoreFloat3(&hitResult.hitPos, hitPos);
 
 		return true;
 	}
