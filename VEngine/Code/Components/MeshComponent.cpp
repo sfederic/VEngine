@@ -134,6 +134,7 @@ Properties MeshComponent::GetProps()
 	props.Add("Mesh", &meshComponentData).change = ReassignMesh;
 	props.Add("Casts Shadow", &castsShadow);
 	props.Add("Physics Static", &isPhysicsStatic);
+	props.Add("Render Static", &isRenderStatic);
 	props.Add("Trans. Occlude", &transparentOcclude);
 	props.Add("Grid Obst.", &gridObstacle);
 	props.Add("Grid Ignore", &ignoreGridRaycasts);
