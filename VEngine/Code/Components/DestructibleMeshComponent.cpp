@@ -5,9 +5,9 @@
 #include "Render/RenderUtils.h"
 
 DestructibleMeshComponent::DestructibleMeshComponent(const std::string filename_,
-    const std::string textureFilename_,
-    ShaderItem* shaderItem)
-    : MeshComponent(filename_, textureFilename_, shaderItem)
+	const std::string textureFilename_,
+	ShaderItem* shaderItem)
+	: MeshComponent(filename_, textureFilename_, shaderItem)
 {
 }
 
@@ -30,7 +30,7 @@ void DestructibleMeshComponent::Create()
 		//parent all the fractured cell meshes to this to be able to move it around before breaking.
 		this->AddChild(mesh);
 
-		mesh->isStatic = false;
+		mesh->isPhysicsStatic = false;
 
 		mesh->meshDataProxy.boundingBox = &meshData.boundingBox;
 		mesh->meshDataProxy.vertices = meshData.vertices;
@@ -57,7 +57,7 @@ void DestructibleMeshComponent::Create()
 
 Properties DestructibleMeshComponent::GetProps()
 {
-    auto props = __super::GetProps();
+	auto props = __super::GetProps();
 	props.title = GetTypeName();
-    return props;
+	return props;
 }

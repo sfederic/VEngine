@@ -90,7 +90,7 @@ MeshComponent::MeshComponent(const std::string filename_,
 
 void MeshComponent::Tick(float deltaTime)
 {
-	if (!isStatic)
+	if (!isPhysicsStatic)
 	{
 		PhysicsSystem::GetTransformFromPhysicsActor(this);
 	}
@@ -133,7 +133,7 @@ Properties MeshComponent::GetProps()
 
 	props.Add("Mesh", &meshComponentData).change = ReassignMesh;
 	props.Add("Casts Shadow", &castsShadow);
-	props.Add("Static", &isStatic);
+	props.Add("Physics Static", &isPhysicsStatic);
 	props.Add("Trans. Occlude", &transparentOcclude);
 	props.Add("Grid Obst.", &gridObstacle);
 	props.Add("Grid Ignore", &ignoreGridRaycasts);

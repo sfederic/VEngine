@@ -65,7 +65,7 @@ void PhysicsSystem::Init()
 
 	//Destructible material
 	destructibleMaterial = physics->createMaterial(0.f, 0.f, 0.f);
-	
+
 	//Player capsule controller
 	controllerManager = PxCreateControllerManager(*scene);
 	assert(controllerManager);
@@ -93,7 +93,7 @@ void PhysicsSystem::Start()
 			else if (!mesh->skipPhysicsCreation)
 			{
 				PhysicsType physicsType;
-				mesh->isStatic ? physicsType = PhysicsType::Static : physicsType = PhysicsType::Dynamic;
+				mesh->isPhysicsStatic ? physicsType = PhysicsType::Static : physicsType = PhysicsType::Dynamic;
 
 				if (mesh->UsesCollisonMesh())
 				{
@@ -128,7 +128,7 @@ void PhysicsSystem::Cleanup()
 	if (pvd)
 	{
 		PxPvdTransport* transport = pvd->getTransport();
-		pvd->release();	
+		pvd->release();
 		pvd = nullptr;
 		transport->release();
 	}
@@ -251,7 +251,7 @@ void PhysicsSystem::CreateConvexPhysicsMesh(MeshComponent* mesh, Actor* actor)
 	assert(mesh->meshDataProxy.vertices.size() < 256);
 
 	convexDesc.points.count = mesh->meshDataProxy.vertices.size();
-	
+
 	convexDesc.points.stride = sizeof(PxVec3);
 	convexDesc.points.data = mesh->meshDataProxy.vertices.data();
 	convexDesc.flags = PxConvexFlag::eCOMPUTE_CONVEX;
@@ -384,7 +384,7 @@ bool Physics::BoxCast(XMFLOAT3 extents, XMFLOAT3 origin, XMFLOAT3 direction, flo
 	if (scene->sweep(PxBoxGeometry(pxExtents), PxTransform(), pxDirection, distance, sweepBuffer))
 	{
 		PxSweepHit& block = sweepBuffer.block;
-		
+
 		hit.hitActor = (Actor*)block.actor->userData;
 		hit.distance = block.distance;
 		hit.normal = XMFLOAT3(block.normal.x, block.normal.y, block.normal.z);

@@ -29,7 +29,9 @@ public:
 	bool castsShadow = true;
 
 	//whether the mesh is moved by physics system
-	bool isStatic = true;
+	bool isPhysicsStatic = true;
+
+	bool isRenderStatic = true;
 
 	bool skipPhysicsCreation = false;
 

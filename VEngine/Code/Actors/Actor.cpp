@@ -421,7 +421,7 @@ void Actor::SetMeshesToDynamicPhysicsState()
 	for (auto mesh : GetComponentsOfType<MeshComponent>())
 	{
 		PhysicsSystem::ReleasePhysicsActor(mesh);
-		mesh->isStatic = false;
+		mesh->isPhysicsStatic = false;
 		PhysicsSystem::CreatePhysicsActor(mesh, PhysicsType::Dynamic, this);
 	}
 }
@@ -431,7 +431,7 @@ void Actor::SetMeshesToStaticPhysicsState()
 	for (auto mesh : GetComponentsOfType<MeshComponent>())
 	{
 		PhysicsSystem::ReleasePhysicsActor(mesh);
-		mesh->isStatic = true;
+		mesh->isPhysicsStatic = true;
 		PhysicsSystem::CreatePhysicsActor(mesh, PhysicsType::Static, this);
 	}
 }

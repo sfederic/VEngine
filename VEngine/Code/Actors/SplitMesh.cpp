@@ -28,7 +28,7 @@ void SplitMesh::CreateSplitMesh(std::vector<Vertex>& meshVerts, MeshComponent* o
 	//Call 'new' here, can't just give the vertices a pointer to nothing
 	mesh->meshDataProxy.vertices = meshVerts;
 
-	mesh->isStatic = false;
+	mesh->isPhysicsStatic = false;
 
 	auto originalMeshTransform = originalMesh->GetTransform();
 	mesh->SetTransform(originalMeshTransform);
