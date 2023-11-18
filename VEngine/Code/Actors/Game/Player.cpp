@@ -42,6 +42,8 @@ void Player::Create()
 {
 	__super::Create();
 
+	mesh->SetRenderStatic(false);
+
 	cameraStartingLocalPosition = XMVectorSet(1.75f, 1.75f, -2.75f, 1.f);
 	cameraLinkActiveLocalPosition = XMVectorSet(1.25f, 0.55f, -0.75f, 1.f);
 	camera->SetLocalPosition(cameraStartingLocalPosition);

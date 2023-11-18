@@ -31,8 +31,6 @@ public:
 	//whether the mesh is moved by physics system
 	bool isPhysicsStatic = true;
 
-	bool isRenderStatic = true;
-
 	bool skipPhysicsCreation = false;
 
 	//Whether to make transparent when in between player and camera
@@ -98,8 +96,13 @@ public:
 
 	bool IntersectsWithAnyBoundingBoxInWorld();
 
+	void SetRenderStatic(bool renderStatic) { isRenderStatic = renderStatic; }
+	bool IsRenderStatic() { return isRenderStatic; }
+
 private:
 	std::string collisionMeshFilename;
 
 	Material* material = nullptr;
+
+	bool isRenderStatic = true;
 };

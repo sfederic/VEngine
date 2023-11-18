@@ -26,6 +26,7 @@ void GridActor::Create()
 {
 	__super::Create();
 
+	mesh->SetRenderStatic(false);
 	isInspectable = false;
 }
 
