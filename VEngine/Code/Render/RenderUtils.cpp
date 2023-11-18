@@ -126,7 +126,17 @@ namespace RenderUtils
 
 		ID3D11Resource* resource = nullptr;
 		ID3D11ShaderResourceView* srv = nullptr;
+
+		//SRBG
+		//HR(DirectX::CreateWICTextureFromFileEx(&Renderer::GetDevice(), &Renderer::GetDeviceContext(),
+		//	path.c_str(),
+		//	0,
+		//	D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
+		//	WIC_LOADER_FORCE_SRGB,
+		//	&resource, &srv));
+
 		HR(DirectX::CreateWICTextureFromFile(&Renderer::GetDevice(), path.c_str(), &resource, &srv));
+
 		assert(resource);
 		assert(srv);
 
