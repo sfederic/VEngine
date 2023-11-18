@@ -1,20 +1,3 @@
-DirectionalLightActor
-1
- Enabled
-1
- Position
-0 5 0
- Rotation
-0.707107 0 0 0.707107
- Scale
-1 1 1
- Visible
-1
-Name
-DirectionalLightActor0
-UID
-656540013
-next
 FenceActor
 4
  Enabled
@@ -492,6 +475,23 @@ Player0
 UID
 1833577817
 next
+PointLightActor
+1
+ Enabled
+1
+ Position
+2.5 2 6
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+PointLightActor0
+UID
+3082568652
+next
 CameraComponent
 1
 1833577817
@@ -527,27 +527,6 @@ File
 
 UID
 2722749808
-next
-DirectionalLightComponent
-1
-656540013
-DirectionalLight
- Enabled
-1
- Pos
-0 5 0
- Rot
-0.707107 0 0 0.707107
- Scale
-1 1 1
- Visible
-1
-Colour
-1 1 1 1
-LightEnabled
-1
-UID
-4217592535
 next
 EmptyComponent
 1
@@ -2110,61 +2089,6 @@ Trans. Occlude
 UID
 1296999651
 next
-1833577817
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-char.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-4102506144
-next
 2361906644
 Mesh
  Enabled
@@ -2274,5 +2198,83 @@ Trans. Occlude
 0
 UID
 291652619
+next
+1833577817
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Static
+1
+Trans. Occlude
+0
+UID
+4102506144
+next
+PointLightComponent
+1
+3082568652
+PointLight
+ Enabled
+1
+ Pos
+2.5 2 6
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Colour
+1 1 1 1
+Intensity
+25
+LightEnabled
+1
+UID
+1509901769
 next
 end

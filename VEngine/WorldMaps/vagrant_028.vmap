@@ -1,58 +1,3 @@
-Bucket
-1
- Enabled
-1
- Position
-5 -0 8
- Rotation
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-1
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-IsFilled
-0
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-Bucket0
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-1377942649
-next
 Grid
 1
  Enabled
@@ -68,247 +13,232 @@ Grid
 Name
 Grid0
 Size X
-9
+20
 Size Y
-11
+20
 UID
-1605280178
+3907362947
 next
 MeshActor
-15
+14
  Enabled
 1
  Position
-4 -0.5 5
+4.5 -0.5 4.5
  Rotation
 -0 0 -0 1
  Scale
-9 1 11
+5 1 5
  Visible
 1
 Name
-node0
+grid0
 UID
-953283118
+2949943967
 next
  Enabled
 1
  Position
-1 0 2
+-0.5 1.5 2.5
  Rotation
--0 0 -0 1
+-0 0 -0.707107 0.707107
  Scale
-2.25 2.25 2.25
+1.99999 0.999993 3
  Visible
 1
 Name
-pillar21
+grid1
 UID
-1819218718
+2672501685
 next
  Enabled
 1
  Position
-7 0 2
+0.9 1.5 6.9
  Rotation
--0 0 -0 1
+0.270757 0.653348 -0.653215 0.270439
  Scale
-2.25 2.25 2.25
+1.99998 0.999989 2
  Visible
 1
 Name
-pillar22
+grid2
 UID
-753772774
+398428339
 next
  Enabled
 1
  Position
-7 0 8
+2.5 1.5 -0.5
  Rotation
--0 0 -0 1
+-0.5 0.5 0.5 -0.5
  Scale
-2.25 2.25 2.25
+1.99998 0.999989 3
  Visible
 1
 Name
-pillar23
+grid3
 UID
-1329110082
+1289599895
 next
  Enabled
 1
  Position
-1 0 8
+7.5 1.5 1.5
  Rotation
--0 0 -0 1
+-0.653281 0.653281 0.270598 -0.270598
  Scale
-2.25 2.25 2.25
+1.99995 0.999988 3
  Visible
 1
 Name
-pillar24
+grid4
 UID
-857439710
+2105372047
 next
  Enabled
 1
  Position
-6 0 4
+1.5 0 2
  Rotation
--0 0 -0 1
+0 0.707107 0 -0.707107
  Scale
-1 1 1
+0.999965 1 0.999965
  Visible
 1
 Name
-step_small5
+coffin_25
 UID
-3215902866
+2719384686
 next
  Enabled
 1
  Position
-6 0 5
+9 0 6
  Rotation
 -0 0 -0 1
  Scale
-1 1 1
+1 1 2
  Visible
 1
 Name
-step_small6
+floor_thick6
 UID
-2139251733
+3765744406
 next
  Enabled
 1
  Position
-6 0 6
+-0.7 0 3.1
  Rotation
 -0 0 -0 1
  Scale
-1 1 1
+1 1 2
  Visible
 1
 Name
-step_small7
+floor_thick7
 UID
-2059674400
+3904796823
 next
  Enabled
 1
  Position
-5 0 6
+5.5 0 7
  Rotation
--0 0 -0 1
+0 0.707107 0 -0.707107
  Scale
-1 1 1
+0.999954 1 0.999954
  Visible
 1
 Name
-step_small8
+coffin_28
 UID
-733320741
+1936500748
 next
  Enabled
 1
  Position
-4 0 6
+1.5 0 6
  Rotation
--0 0 -0 1
+0 0.707107 0 -0.707107
  Scale
-1 1 1
+0.999967 1 0.999967
  Visible
 1
 Name
-step_small9
+coffin_29
 UID
-971340669
+1326339270
 next
  Enabled
 1
  Position
-3 0 6
+1.5 0 4
  Rotation
--0 0 -0 1
+0 0.707107 0 -0.707107
  Scale
-1 1 1
+0.999961 1 0.999961
  Visible
 1
 Name
-step_small10
+coffin_210
 UID
-1051945153
+4192644236
 next
  Enabled
 1
  Position
-3 0 5
+5.5 0 5
  Rotation
--0 0 -0 1
+0 0.707107 0 -0.707107
  Scale
-1 1 1
+0.999947 1 0.999947
  Visible
 1
 Name
-step_small11
+coffin_211
 UID
-450497869
+1488096746
 next
  Enabled
 1
  Position
-3 0 4
+5.5 0 3
  Rotation
--0 0 -0 1
+0 0.707107 0 -0.707107
  Scale
-1 1 1
+0.999941 1 0.999941
  Visible
 1
 Name
-step_small12
+coffin_212
 UID
-1305541401
+1478564383
 next
  Enabled
 1
  Position
-4 0 4
+5.5 0 1
  Rotation
--0 0 -0 1
+0 0.707107 0 -0.707107
  Scale
-1 1 1
+0.999935 1 0.999935
  Visible
 1
 Name
-step_small13
+coffin_213
 UID
-1197946655
-next
- Enabled
-1
- Position
-5 0 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-step_small14
-UID
-2065188245
+2968403134
 next
 Player
 1
  Enabled
 1
  Position
-0 0 0
+2 0 0
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -316,14 +246,14 @@ Player
 Name
 Player0
 UID
-670146422
+283833101
 next
 PointLightActor
 1
  Enabled
 1
  Position
-4 1 5
+4 1 8
  Rotation
 -0 0 -0 1
  Scale
@@ -333,123 +263,11 @@ PointLightActor
 Name
 PointLightActor0
 UID
-3696783915
-next
-WaterSource
-1
- Enabled
-1
- Position
-4 0 9
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-0
-Link Rotation
-0
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-WaterSource0
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-2972750109
-next
-WaterVolume
-1
- Enabled
-1
- Position
-5 0 5
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-WaterVolume0
-Raise Y Point
-0
-UID
-385624666
-next
-BoxTriggerComponent
-2
-2972750109
-BoxTrigger
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Extents
-0.45 0.45 0.45
-Offset
-0 0 0
-UID
-2634671184
-next
-385624666
-VolumeTrigger
- Enabled
-1
- Pos
-0 -0.5 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Extents
-0.45 0.45 0.45
-Offset
-0 0 0
-UID
-2289393924
+3110959180
 next
 CameraComponent
 1
-670146422
+283833101
 Camera
  Enabled
 1
@@ -468,11 +286,11 @@ Far Z
 Near Z
 0.01
 UID
-3902694678
+1021775200
 next
 DialogueComponent
-3
-1377942649
+1
+283833101
 Dialogue
  Enabled
 1
@@ -481,53 +299,16 @@ Dialogue
 File
 
 UID
-1896798433
-next
-670146422
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-1796836640
-next
-2972750109
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-2566479882
+2741877629
 next
 EmptyComponent
-2
-670146422
+1
+283833101
 Root
  Enabled
 1
  Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-UID
-3432802233
-next
-385624666
-Root
- Enabled
-1
- Pos
-5 0 5
+2 0 0
  Rot
 -0 0 -0 1
  Scale
@@ -535,11 +316,11 @@ Root
  Visible
 1
 UID
-2944075028
+2689310546
 next
 InstanceMeshComponent
 1
-1605280178
+3907362947
 NodeMesh
  Enabled
 1
@@ -592,130 +373,20 @@ Static
 Trans. Occlude
 0
 UID
-406530474
+112527356
 next
 MeshComponent
-20
-1377942649
+15
+2949943967
 Mesh
  Enabled
 1
  Pos
-5 -0 8
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-hollow_barrel.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2167138487
-next
-1377942649
-WaterMesh
- Enabled
-1
- Pos
-0 0.35 0
- Rot
-0 0 0 1
- Scale
-0.75 0.75 0.75
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-water.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-232317572
-next
-953283118
-Mesh
- Enabled
-1
- Pos
-4 -0.5 5
+4.5 -0.5 4.5
  Rot
 -0 0 -0 1
  Scale
-9 1 11
+5 1 5
  Visible
 1
 Casts Shadow
@@ -739,7 +410,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/floor_09.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -753,24 +424,24 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-node.vmesh
+grid.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-1320661867
+3867955135
 next
-1819218718
+2672501685
 Mesh
  Enabled
 1
  Pos
-1 0 2
+-0.5 1.5 2.5
  Rot
--0 0 -0 1
+-0 0 -0.707107 0.707107
  Scale
-2.25 2.25 2.25
+1.99999 0.999993 3
  Visible
 1
 Casts Shadow
@@ -794,7 +465,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Walls/wall_white.png
 M_Use Texture
 1
 M_UvOffset
@@ -808,24 +479,24 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-pillar2.vmesh
+grid.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-2283412526
+2054970281
 next
-753772774
+398428339
 Mesh
  Enabled
 1
  Pos
-7 0 2
+0.9 1.5 6.9
  Rot
--0 0 -0 1
+0.270757 0.653348 -0.653215 0.270439
  Scale
-2.25 2.25 2.25
+1.99998 0.999989 2
  Visible
 1
 Casts Shadow
@@ -849,7 +520,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Walls/wall (2).png
 M_Use Texture
 1
 M_UvOffset
@@ -863,24 +534,24 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-pillar2.vmesh
+grid.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-215717239
+2477918151
 next
-1329110082
+1289599895
 Mesh
  Enabled
 1
  Pos
-7 0 8
+2.5 1.5 -0.5
  Rot
--0 0 -0 1
+-0.5 0.5 0.5 -0.5
  Scale
-2.25 2.25 2.25
+1.99998 0.999989 3
  Visible
 1
 Casts Shadow
@@ -904,7 +575,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Walls/wall_white.png
 M_Use Texture
 1
 M_UvOffset
@@ -918,24 +589,24 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-pillar2.vmesh
+grid.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-1249287913
+737765310
 next
-857439710
+2105372047
 Mesh
  Enabled
 1
  Pos
-1 0 8
+7.5 1.5 1.5
  Rot
--0 0 -0 1
+-0.653281 0.653281 0.270598 -0.270598
  Scale
-2.25 2.25 2.25
+1.99995 0.999988 3
  Visible
 1
 Casts Shadow
@@ -959,7 +630,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Walls/wall_6.png
 M_Use Texture
 1
 M_UvOffset
@@ -973,24 +644,24 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-pillar2.vmesh
+grid.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-2276858274
+2058986546
 next
-3215902866
+2719384686
 Mesh
  Enabled
 1
  Pos
-6 0 4
+1.5 0 2
  Rot
--0 0 -0 1
+0 0.707107 0 -0.707107
  Scale
-1 1 1
+0.999965 1 0.999965
  Visible
 1
 Casts Shadow
@@ -1014,7 +685,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+coffin.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1028,24 +699,24 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-step_small.vmesh
+coffin_2.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-132431669
+2059584031
 next
-2139251733
+3765744406
 Mesh
  Enabled
 1
  Pos
-6 0 5
+9 0 6
  Rot
 -0 0 -0 1
  Scale
-1 1 1
+1 1 2
  Visible
 1
 Casts Shadow
@@ -1069,7 +740,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/floor_09.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1083,24 +754,24 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-step_small.vmesh
+floor_thick.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-4008933693
+3611920566
 next
-2059674400
+3904796823
 Mesh
  Enabled
 1
  Pos
-6 0 6
+-0.7 0 3.1
  Rot
 -0 0 -0 1
  Scale
-1 1 1
+1 1 2
  Visible
 1
 Casts Shadow
@@ -1124,7 +795,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/floor_09.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1138,24 +809,24 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-step_small.vmesh
+floor_thick.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-554813621
+1724311514
 next
-733320741
+1936500748
 Mesh
  Enabled
 1
  Pos
-5 0 6
+5.5 0 7
  Rot
--0 0 -0 1
+0 0.707107 0 -0.707107
  Scale
-1 1 1
+0.999954 1 0.999954
  Visible
 1
 Casts Shadow
@@ -1179,7 +850,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+coffin.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1191,26 +862,26 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-1 1
+2 2
 Mesh
-step_small.vmesh
+coffin_2.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-2149269208
+274727438
 next
-971340669
+1326339270
 Mesh
  Enabled
 1
  Pos
-4 0 6
+1.5 0 6
  Rot
--0 0 -0 1
+0 0.707107 0 -0.707107
  Scale
-1 1 1
+0.999967 1 0.999967
  Visible
 1
 Casts Shadow
@@ -1234,7 +905,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+coffin.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1248,24 +919,24 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-step_small.vmesh
+coffin_2.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-870399190
+1913119544
 next
-1051945153
+4192644236
 Mesh
  Enabled
 1
  Pos
-3 0 6
+1.5 0 4
  Rot
--0 0 -0 1
+0 0.707107 0 -0.707107
  Scale
-1 1 1
+0.999961 1 0.999961
  Visible
 1
 Casts Shadow
@@ -1289,7 +960,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+coffin.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1303,24 +974,24 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-step_small.vmesh
+coffin_2.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-3903875436
+1612963509
 next
-450497869
+1488096746
 Mesh
  Enabled
 1
  Pos
-3 0 5
+5.5 0 5
  Rot
--0 0 -0 1
+0 0.707107 0 -0.707107
  Scale
-1 1 1
+0.999947 1 0.999947
  Visible
 1
 Casts Shadow
@@ -1344,7 +1015,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+coffin.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1358,24 +1029,24 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-step_small.vmesh
+coffin_2.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-1219527789
+2097230442
 next
-1305541401
+1478564383
 Mesh
  Enabled
 1
  Pos
-3 0 4
+5.5 0 3
  Rot
--0 0 -0 1
+0 0.707107 0 -0.707107
  Scale
-1 1 1
+0.999941 1 0.999941
  Visible
 1
 Casts Shadow
@@ -1399,7 +1070,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+coffin.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1413,24 +1084,24 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-step_small.vmesh
+coffin_2.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-714629420
+1371013549
 next
-1197946655
+2968403134
 Mesh
  Enabled
 1
  Pos
-4 0 4
+5.5 0 1
  Rot
--0 0 -0 1
+0 0.707107 0 -0.707107
  Scale
-1 1 1
+0.999935 1 0.999935
  Visible
 1
 Casts Shadow
@@ -1454,7 +1125,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+coffin.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1468,70 +1139,15 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-step_small.vmesh
+coffin_2.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-1072121600
+2676497263
 next
-2065188245
-Mesh
- Enabled
-1
- Pos
-5 0 4
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-step_small.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3398069283
-next
-670146422
+283833101
 Mesh
  Enabled
 1
@@ -1584,126 +1200,16 @@ Static
 Trans. Occlude
 0
 UID
-2799010929
-next
-2972750109
-Mesh
- Enabled
-1
- Pos
-4 0 9
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-nobackcull
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-water.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0.25
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-plane.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1761065384
-next
-385624666
-WaterSurfaceMesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-1
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-water.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-773702984
+2316466460
 next
 PointLightComponent
 1
-3696783915
+3110959180
 PointLight
  Enabled
 1
  Pos
-4 1 5
+4 1 8
  Rot
 -0 0 -0 1
  Scale
@@ -1711,12 +1217,12 @@ PointLight
  Visible
 1
 Colour
-1 1 1 1
+0.6 0.5 0.2 1
 Intensity
 25
 LightEnabled
 1
 UID
-3327530950
+3607789186
 next
 end

@@ -1,20 +1,3 @@
-DirectionalLightActor
-1
- Enabled
-1
- Position
-0 5 0
- Rotation
-0.707107 0 0 0.707107
- Scale
-1 1 1
- Visible
-1
-Name
-DirectionalLightActor0
-UID
-970719229
-next
 Grid
 1
  Enabled
@@ -30,178 +13,43 @@ Grid
 Name
 Grid0
 Size X
-9
+5
 Size Y
-9
+5
 UID
-3886997221
+1947260760
 next
 MeshActor
-11
+2
  Enabled
 1
  Position
-4 -0.5 4
- Rotation
--0 0 -0 1
- Scale
-9 1 9
- Visible
-1
-Name
-node0
-UID
-843424391
-next
- Enabled
-1
- Position
-2 -0 2
+2 -0.5 2
  Rotation
 0 0 0 1
  Scale
-1 1 1
+5 1 5
  Visible
 1
 Name
-barrel1
+grid0
 UID
-2783783611
+2300291772
 next
  Enabled
 1
  Position
-1 0 2
+2 0 2
  Rotation
 -0 0 -0 1
  Scale
-1 1 1
+0.5 0.5 0.5
  Visible
 1
 Name
-barrel2
+test_bed1
 UID
-338187286
-next
- Enabled
-1
- Position
-0 0 2
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-barrel3
-UID
-3502994569
-next
- Enabled
-1
- Position
-2 0 5
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-barrel4
-UID
-336104524
-next
- Enabled
-1
- Position
-3 0 5
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-barrel5
-UID
-834485994
-next
- Enabled
-1
- Position
-3 0 6
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-barrel6
-UID
-255594040
-next
- Enabled
-1
- Position
-5 0 6
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-barrel7
-UID
-3745966785
-next
- Enabled
-1
- Position
-5 0 5
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-barrel8
-UID
-3057630973
-next
- Enabled
-1
- Position
-5 0 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-barrel9
-UID
-2088413924
-next
- Enabled
-1
- Position
-4 0 3
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-barrel10
-UID
-2845732795
+2717991357
 next
 Player
 1
@@ -218,78 +66,11 @@ Player
 Name
 Player0
 UID
-415870659
-next
-Unit
-1
- Enabled
-1
- Position
-1 0 8
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Attack Points
-1
-Attack Range
-1
-Battle State
-fight
-Can Fall
-1
-Death Text
-
-Destruct
-1
-DisableGridInteract
-0
-Focus Actor
-
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Points
-20
-Move Speed
-3
-Name
-Unit0
-Num Attacks
-1
-Obstacle
-0
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-3949069533
+1449106299
 next
 CameraComponent
 1
-415870659
+1449106299
 Camera
  Enabled
 1
@@ -308,11 +89,11 @@ Far Z
 Near Z
 0.01
 UID
-1114405614
+558158746
 next
 DialogueComponent
-2
-415870659
+1
+1449106299
 Dialogue
  Enabled
 1
@@ -321,43 +102,11 @@ Dialogue
 File
 
 UID
-1580398447
-next
-3949069533
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-3311135057
-next
-DirectionalLightComponent
-1
-970719229
-DirectionalLight
- Enabled
-1
- Pos
-0 5 0
- Rot
-0.707107 0 0 0.707107
- Scale
-1 1 1
- Visible
-1
-Colour
-1 1 1 1
-LightEnabled
-1
-UID
-2904113321
+1834952798
 next
 EmptyComponent
 1
-415870659
+1449106299
 Root
  Enabled
 1
@@ -370,11 +119,11 @@ Root
  Visible
 1
 UID
-2201395569
+808333232
 next
 InstanceMeshComponent
 1
-3886997221
+1947260760
 NodeMesh
  Enabled
 1
@@ -427,75 +176,20 @@ Static
 Trans. Occlude
 0
 UID
-2549111860
+3376190792
 next
 MeshComponent
-13
-843424391
+3
+2300291772
 Mesh
  Enabled
 1
  Pos
-4 -0.5 4
- Rot
--0 0 -0 1
- Scale
-9 1 9
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-863667143
-next
-2783783611
-Mesh
- Enabled
-1
- Pos
-2 -0 2
+2 -0.5 2
  Rot
 0 0 0 1
  Scale
-1 1 1
+5 1 5
  Visible
 1
 Casts Shadow
@@ -503,7 +197,7 @@ Casts Shadow
 Grid Ignore
 0
 Grid Obst.
-1
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -521,7 +215,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -533,24 +227,24 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-barrel.vmesh
+grid.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-245758459
+4241752078
 next
-338187286
+2717991357
 Mesh
  Enabled
 1
  Pos
-1 0 2
+2 0 2
  Rot
 -0 0 -0 1
  Scale
-1 1 1
+0.5 0.5 0.5
  Visible
 1
 Casts Shadow
@@ -558,7 +252,7 @@ Casts Shadow
 Grid Ignore
 0
 Grid Obst.
-1
+0
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -574,9 +268,9 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Walls/wall_white.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -588,70 +282,15 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-barrel.vmesh
+test_bed.vmesh
 Static
 1
 Trans. Occlude
 0
 UID
-3105824748
+4103183110
 next
-3502994569
-Mesh
- Enabled
-1
- Pos
-0 0 2
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-barrel.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-237657535
-next
-415870659
+1449106299
 Mesh
  Enabled
 1
@@ -686,7 +325,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-1
+0
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -704,446 +343,6 @@ Static
 Trans. Occlude
 0
 UID
-429054582
-next
-3949069533
-Mesh
- Enabled
-1
- Pos
-1 0 8
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1706895673
-next
-336104524
-Mesh
- Enabled
-1
- Pos
-2 0 5
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-barrel.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2536216649
-next
-834485994
-Mesh
- Enabled
-1
- Pos
-3 0 5
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-barrel.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3474296143
-next
-255594040
-Mesh
- Enabled
-1
- Pos
-3 0 6
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-barrel.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-947209274
-next
-3745966785
-Mesh
- Enabled
-1
- Pos
-5 0 6
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-barrel.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-411549506
-next
-3057630973
-Mesh
- Enabled
-1
- Pos
-5 0 5
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-barrel.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2934882017
-next
-2088413924
-Mesh
- Enabled
-1
- Pos
-5 0 4
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-barrel.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1413286029
-next
-2845732795
-Mesh
- Enabled
-1
- Pos
-4 0 3
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-barrel.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1839526654
+3366481219
 next
 end
