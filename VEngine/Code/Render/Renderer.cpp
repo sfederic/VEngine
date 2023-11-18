@@ -2224,18 +2224,14 @@ void PointLightVertexColourMap()
 				dot = std::clamp(dot, 0.1f, 1.f);
 
 				const auto rayOrigin = worldSpaceVertexPos + (normal * 0.05f);
-				if (Raycast(hit, rayOrigin, pointLight->GetWorldPositionV()))
-				{
-					auto blackColour = XMVectorSet(0.1f, 0.1f, 0.1f, 1.f);
-					blackColour *= dot;
-					XMStoreFloat4(&vertex.colour, blackColour);
-				}
-				else
+				if (!Raycast(hit, rayOrigin, pointLight->GetWorldPositionV()))
 				{
 					auto colour = pointLight->GetLightData().colour;
 					auto lightColour = XMLoadFloat4(&colour);
+					auto vertColour = XMLoadFloat4(&vertex.colour);
 					lightColour *= dot;
-					XMStoreFloat4(&vertex.colour, lightColour);
+					vertColour = lightColour;
+					XMStoreFloat4(&vertex.colour, vertColour);
 				}
 			}
 
