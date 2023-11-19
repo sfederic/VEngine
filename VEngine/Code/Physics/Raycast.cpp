@@ -497,3 +497,14 @@ void HitResult::IgnorePlayer()
 {
 	actorsToIgnore.push_back(Player::system.GetOnlyActor());
 }
+
+void HitResult::AddAllRenderStaticMeshesToIgnore()
+{
+	for (auto& mesh : MeshComponent::system.GetComponents())
+	{
+		if (!mesh->IsRenderStatic())
+		{
+			componentsToIgnore.push_back(mesh.get());
+		}
+	}
+}

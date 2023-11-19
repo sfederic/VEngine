@@ -83,6 +83,8 @@ struct HitResult
 	void AddActorsToIgnore(std::vector<Actor*>& actors);
 	void IgnorePlayer();
 
+	void AddAllRenderStaticMeshesToIgnore();
+
 	//Result is in world space.
 	DirectX::XMVECTOR GetHitPosV() { return XMLoadFloat3(&hitPos); }
 	DirectX::XMVECTOR GetNormalV() { return XMLoadFloat3(&hitNormal); }
