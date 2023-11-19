@@ -379,7 +379,25 @@ void VertexPainting()
 {
 	if (WorldEditor::vertexPaintActive)
 	{
-		if (Input::GetMouseLeftDown())
+		if (Input::GetMouseRightDown() && Input::GetKeyHeld(Keys::Ctrl)) //Set colour of hit vertex to paint colour
+		{
+			HitResult hit;
+			if (RaycastFromScreen(hit))
+			{
+				auto meshes = hit.hitActor->GetComponentsOfType<MeshComponent>();
+				for (auto mesh : meshes)
+				{
+					for (auto& vertIndex : hit.hitVertIndexes)
+					{
+						Vertex v = mesh->meshDataProxy.vertices.at(vertIndex);
+						WorldEditor::vertexPaintColour = v.colour;
+					}
+
+					mesh->CreateNewVertexBuffer();
+				}
+			}
+		}
+		else if (Input::GetMouseLeftDown()) //Paint
 		{
 			HitResult hit;
 			if (RaycastFromScreen(hit))
