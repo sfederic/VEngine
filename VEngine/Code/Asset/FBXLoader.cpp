@@ -26,6 +26,8 @@ void ProcessSkeletonNodes(FbxNode* node, Skeleton& skeleton, int parentIndex);
 
 void ReadNormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT3& outNormal);
 void ReadUVs(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT2& outUVs);
+void ReadVertexColours(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT4& outColour);
+
 std::vector<XMFLOAT3> ProcessControlPoints(FbxMesh* currMesh);
 
 void FBXLoader::Init()
@@ -70,7 +72,7 @@ void FBXLoader::ImportAsMesh(std::string filepath, MeshData& meshData)
 	}
 
 	scene->Destroy();
-	
+
 	assert(meshData.vertices.size() > 0 && "Nothing probably selected on fbx export in DCC.");
 	BoundingBox::CreateFromPoints(meshData.boundingBox, meshData.vertices.size(),
 		&meshData.vertices.at(0).pos, sizeof(Vertex));
@@ -262,7 +264,7 @@ void ProcessAllChildNodes(FbxNode* node, MeshData& meshData)
 				//'Link' is the joint
 				std::string currentJointName = cluster->GetLink()->GetName();
 				int currentJointIndex = meshData.skeleton.FindJointIndexByName(currentJointName);
-				
+
 				FbxAMatrix clusterMatrix, linkMatrix;
 				cluster->GetTransformMatrix(clusterMatrix);
 				cluster->GetTransformLinkMatrix(linkMatrix);
@@ -280,7 +282,7 @@ void ProcessAllChildNodes(FbxNode* node, MeshData& meshData)
 
 					XMMATRIX pose = XMMatrixAffineTransformation(scale,
 						XMVectorSet(0.f, 0.f, 0.f, 1.f), rot, pos);
-				
+
 					meshData.skeleton.GetJoint(currentJointIndex).inverseBindPose = pose;
 					meshData.skeleton.GetJoint(currentJointIndex).currentPose = pose;
 				}
@@ -289,7 +291,7 @@ void ProcessAllChildNodes(FbxNode* node, MeshData& meshData)
 				for (int i = 0; i < vertexIndexCount; i++)
 				{
 					double weight = cluster->GetControlPointWeights()[i];
-					weight = std::clamp(weight, 0.0, 1.0); 
+					weight = std::clamp(weight, 0.0, 1.0);
 
 					int index = cluster->GetControlPointIndices()[i];
 
@@ -347,7 +349,7 @@ void ProcessAllChildNodes(FbxNode* node, MeshData& meshData)
 				vert.pos.z = controlPoint.mData[2];
 
 				ReadUVs(mesh, index, polyIndexCounter, vert.uv);
-
+				ReadVertexColours(mesh, index, polyIndexCounter, vert.colour);
 				ReadNormal(mesh, index, polyIndexCounter, vert.normal);
 
 				//Bone Weights
@@ -380,8 +382,8 @@ void ProcessAllChildNodes(FbxNode* node, MeshData& meshData)
 			const int index1 = i * 3 + 1;
 			const int index2 = i * 3 + 2;
 
-			Vertex* verts[3] = { 
-				&meshData.vertices[index0], &meshData.vertices[index1], &meshData.vertices[index2] 
+			Vertex* verts[3] = {
+				&meshData.vertices[index0], &meshData.vertices[index1], &meshData.vertices[index2]
 			};
 
 			//Assert all normals are equal
@@ -570,6 +572,63 @@ void ReadUVs(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT
 			int index = vertexUVs->GetIndexArray().GetAt(inVertexCounter);
 			outUVs.x = static_cast<float>(vertexUVs->GetDirectArray().GetAt(index).mData[0]);
 			outUVs.y = static_cast<float>(vertexUVs->GetDirectArray().GetAt(index).mData[1]);
+		}
+		break;
+		default: throw std::exception("Invalid Reference");
+		}
+
+		break;
+	}
+}
+
+void ReadVertexColours(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT4& outColour)
+{
+	FbxGeometryElementVertexColor* vertexColour = inMesh->GetElementVertexColor(0);
+
+	//Colours formatted to RGBA
+	switch (vertexColour->GetMappingMode())
+	{
+	case FbxGeometryElement::eByControlPoint:
+		switch (vertexColour->GetReferenceMode())
+		{
+		case FbxGeometryElement::eDirect:
+		{
+			outColour.x = static_cast<float>(vertexColour->GetDirectArray().GetAt(inCtrlPointIndex).mRed);
+			outColour.y = static_cast<float>(vertexColour->GetDirectArray().GetAt(inCtrlPointIndex).mGreen);
+			outColour.z = static_cast<float>(vertexColour->GetDirectArray().GetAt(inCtrlPointIndex).mBlue);
+			//@Todo: alpha vertex colours in DCC. Might cause trouble in engine?
+			//outColour.w = static_cast<float>(vertexColour->GetDirectArray().GetAt(inCtrlPointIndex).mAlpha);
+		}
+		break;
+
+		case FbxGeometryElement::eIndexToDirect:
+		{
+			int index = vertexColour->GetIndexArray().GetAt(inCtrlPointIndex);
+			outColour.x = static_cast<float>(vertexColour->GetDirectArray().GetAt(index).mRed);
+			outColour.y = static_cast<float>(vertexColour->GetDirectArray().GetAt(index).mGreen);
+			outColour.z = static_cast<float>(vertexColour->GetDirectArray().GetAt(index).mBlue);
+		}
+		break;
+		default:
+			throw std::exception("Invalid Reference");
+		}
+		break;
+	case FbxGeometryElement::eByPolygonVertex:
+		switch (vertexColour->GetReferenceMode())
+		{
+		case FbxGeometryElement::eDirect:
+		{
+			outColour.x = static_cast<float>(vertexColour->GetDirectArray().GetAt(inVertexCounter).mRed);
+			outColour.y = static_cast<float>(vertexColour->GetDirectArray().GetAt(inVertexCounter).mGreen);
+			outColour.z = static_cast<float>(vertexColour->GetDirectArray().GetAt(inVertexCounter).mBlue);
+		}
+		break;
+		case FbxGeometryElement::eIndexToDirect:
+		{
+			int index = vertexColour->GetIndexArray().GetAt(inVertexCounter);
+			outColour.x = static_cast<float>(vertexColour->GetDirectArray().GetAt(index).mRed);
+			outColour.y = static_cast<float>(vertexColour->GetDirectArray().GetAt(index).mGreen);
+			outColour.z = static_cast<float>(vertexColour->GetDirectArray().GetAt(index).mBlue);
 		}
 		break;
 		default: throw std::exception("Invalid Reference");

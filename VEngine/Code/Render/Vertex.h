@@ -4,7 +4,7 @@
 
 struct Vertex
 {
-	DirectX::XMFLOAT4 colour = DirectX::XMFLOAT4(1.f, 1.f, 1.f, 1.f);
+	DirectX::XMFLOAT4 colour = DirectX::XMFLOAT4(0.f, 0.f, 0.f, 1.f);
 	DirectX::XMFLOAT3 pos = DirectX::XMFLOAT3(0.f, 0.f, 0.f);
 	DirectX::XMFLOAT3 normal = DirectX::XMFLOAT3(0.f, 0.f, 0.f);
 	DirectX::XMFLOAT3 tangent = DirectX::XMFLOAT3(0.f, 0.f, 0.f);
