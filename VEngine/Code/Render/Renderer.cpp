@@ -2243,17 +2243,13 @@ void RenderLightProbes()
 
 void PointLightVertexColourMap()
 {
-	//Make sure vertex colour mapping isn't hitting moveable actors
-	auto gridActorsToIgnore = World::GetAllActorsOfTypeAsActor<GridActor>();
-	auto player = Player::system.GetFirstActor();
-
 	for (auto& pointLight : PointLightComponent::system.GetComponents())
 	{
 		for (auto& mesh : MeshComponent::system.GetComponents())
 		{
 			if (!mesh->IsRenderStatic())
 			{
-				return;
+				continue;
 			}
 
 			const auto meshWorldMatrix = mesh->GetWorldMatrix();
@@ -2268,6 +2264,7 @@ void PointLightVertexColourMap()
 				HitResult hit;
 				hit.actorsToIgnore.push_back(pointLight->GetOwner());
 				hit.componentsToIgnore.push_back(pointLight.get());
+				hit.AddAllRenderStaticMeshesToIgnore();
 				hit.ignoreBackFaceHits = false;
 
 				auto normal = XMLoadFloat3(&vertex.normal);
@@ -2279,15 +2276,23 @@ void PointLightVertexColourMap()
 				float dot = XMVector3Dot(normal, vertexToLightDirection).m128_f32[0];
 				dot = std::clamp(dot, 0.1f, 1.f);
 
-				const auto rayOrigin = worldSpaceVertexPos + (normal * 0.05f);
+				const auto rayOrigin = worldSpaceVertexPos + (normal * 0.1f);
 				if (!Raycast(hit, rayOrigin, pointLight->GetWorldPositionV()))
 				{
 					auto colour = pointLight->GetLightData().colour;
 					auto lightColour = XMLoadFloat4(&colour);
 					auto vertColour = XMLoadFloat4(&vertex.colour);
-					lightColour *= dot;
-					vertColour = lightColour;
+					lightColour *= dot / XM_PI;
+
+					float len = XMVector3Length(rayOrigin - pointLight->GetWorldPositionV()).m128_f32[0];
+					float falloff = pointLight->GetLightData().intensity / std::max(len, 0.01f);
+
+					vertColour = lightColour * falloff;
 					XMStoreFloat4(&vertex.colour, vertColour);
+				}
+				else
+				{
+					vertex.colour = XMFLOAT4(0.1f, 0.1f, 0.1f, 1.f);
 				}
 			}
 
@@ -2302,7 +2307,7 @@ void PointLightVertexColourMap()
 		{
 			if (!mesh->IsRenderStatic())
 			{
-				return;
+				continue;
 			}
 
 			const auto meshWorldMatrix = mesh->GetWorldMatrix();
@@ -2323,14 +2328,19 @@ void PointLightVertexColourMap()
 				normal = XMVector3TransformNormal(normal, meshWorldMatrix);
 				normal = XMVector3Normalize(normal);
 
-				const auto rayOrigin = worldSpaceVertexPos + (normal * 0.05f);
-				if (Raycast(hit, rayOrigin, -dLight->GetForwardVectorV(), 20.f))
+				const auto dLightDirection = dLight->GetForwardVectorV();
+				float dot = XMVector3Dot(normal, dLightDirection).m128_f32[0];
+				dot = std::clamp(dot, 0.1f, 1.f);
+
+				const auto rayOrigin = worldSpaceVertexPos + (normal * 0.1f);
+				if (!Raycast(hit, rayOrigin, -dLightDirection, 50.f))
 				{
-					vertex.colour = XMFLOAT4(0.1f, 0.1f, 0.1f, 1.f);
-				}
-				else
-				{
-					vertex.colour = dLight->GetLightData().colour;
+					auto colour = dLight->GetLightData().colour;
+					auto lightColour = XMLoadFloat4(&colour);
+					auto vertColour = XMLoadFloat4(&vertex.colour);
+					lightColour *= dot;
+					vertColour = lightColour;
+					XMStoreFloat4(&vertex.colour, vertColour);
 				}
 			}
 
