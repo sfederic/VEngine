@@ -425,7 +425,12 @@ void DebugMenu::RenderVertexPaintMenu()
 
 	ImGui::Begin("Vertex Paint Menu");
 
-	static float colour[4]{ 0.f, 0.f, 0.f, 1.f }; //Make sure the alpha default is 1
+	float colour[4] = {
+		WorldEditor::vertexPaintColour.x,
+		WorldEditor::vertexPaintColour.y,
+		WorldEditor::vertexPaintColour.z,
+		WorldEditor::vertexPaintColour.w,
+	};
 	if (ImGui::ColorPicker4("Vertex Colour", colour))
 	{
 		WorldEditor::vertexPaintColour.x = colour[0];
