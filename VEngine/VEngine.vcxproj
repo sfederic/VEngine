@@ -342,6 +342,7 @@
     <ClCompile Include="Code\Actors\Game\PowerCrystalLampPost.cpp" />
     <ClCompile Include="Code\Actors\Game\PowerCrystalSlot.cpp" />
     <ClCompile Include="Code\Actors\Game\Magnet.cpp" />
+    <ClCompile Include="Code\Physics\HitResult.cpp" />
     <ClInclude Include="Code\Actors\Game\ChurchLockPropActivator.h" />
     <ClInclude Include="Code\Actors\Game\GlobalPropSetter.h" />
     <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.h" />
@@ -713,6 +714,7 @@
     <ClInclude Include="Code\Actors\Game\PowerCrystalLampPost.h" />
     <ClInclude Include="Code\Actors\Game\PowerCrystalSlot.h" />
     <ClInclude Include="Code\Actors\Game\Magnet.h" />
+    <ClInclude Include="Code\Physics\HitResult.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

@@ -482,29 +482,3 @@ bool SimpleBoxCast(XMVECTOR center, XMFLOAT3 extents, HitResult& hit, bool drawD
 
 	return hit.hitActors.size();
 }
-
-void HitResult::AddActorsToIgnore(std::vector<Actor*>& actors)
-{
-	actorsToIgnore.reserve(actorsToIgnore.size() + actors.size());
-
-	for (auto actor : actors)
-	{
-		actorsToIgnore.emplace_back(actor);
-	}
-}
-
-void HitResult::IgnorePlayer()
-{
-	actorsToIgnore.push_back(Player::system.GetOnlyActor());
-}
-
-void HitResult::AddAllRenderStaticMeshesToIgnore()
-{
-	for (auto& mesh : MeshComponent::system.GetComponents())
-	{
-		if (!mesh->IsRenderStatic())
-		{
-			componentsToIgnore.push_back(mesh.get());
-		}
-	}
-}
