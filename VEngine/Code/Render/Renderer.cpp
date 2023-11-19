@@ -1154,6 +1154,69 @@ void Renderer::RenderLightProbeViews()
 	MapBuffer(diffuseProbeMap->GetStructuredBuffer(), diffuseProbeMap->lightProbeData.data(),
 		sizeof(LightProbeInstanceData) * diffuseProbeMap->lightProbeData.size());
 
+	//@Todo: Store SH into vertex colour data for static meshes
+	/*for (auto& mesh : MeshComponent::system.GetComponents())
+	{
+		if(!mesh->IsRenderStatic()) continue;
+
+		auto probeData = diffuseProbeMap->FindClosestProbe(mesh->GetWorldPositionV());
+
+		constexpr float PI = 3.14159265f;
+		constexpr float SQRT_PI = 1.7724538509f;
+		constexpr float SQRT_5 = 2.2360679775f;
+		constexpr float SQRT_15 = 3.8729833462f;
+		constexpr float SQRT_3 = 1.7320508076f;
+
+		constexpr float AO = 0.075f;
+
+		constexpr float Y[9] =
+		{
+			1.0f / (2.0f * SQRT_PI),
+			-SQRT_3 / (2.0f * SQRT_PI),
+			SQRT_3 / (2.0f * SQRT_PI),
+			-SQRT_3 / (2.0f * SQRT_PI),
+			SQRT_15 / (2.0f * SQRT_PI),
+			-SQRT_15 / (2.0f * SQRT_PI),
+			SQRT_5 / (4.0f * SQRT_PI),
+			-SQRT_15 / (2.0f * SQRT_PI),
+			SQRT_15 / (4.0f * SQRT_PI)
+		};
+
+		const float t = acos(sqrt(1 - AO));
+
+		const float a = sin(t);
+		const float b = cos(t);
+
+		const float A0 = sqrt(4 * PI) * (sqrt(PI) / 2) * a * a;
+		const float A1 = sqrt(4 * PI / 3) * (sqrt(3 * PI) / 3) * (1 - b * b * b);
+		const float A2 = sqrt(4 * PI / 5) * (sqrt(5 * PI) / 16) * a * a * (2 + 6 * b * b);
+
+		for (auto& vertex : mesh->GetAllVertices())
+		{
+			const XMVECTOR normal = XMVector3Normalize(XMLoadFloat3(&vertex.normal));
+			XMFLOAT3 n{};
+			XMStoreFloat3(&n, normal);
+
+			XMVECTOR irradiance =
+				XMLoadFloat4(&probeData.SH[0]) * A0 * Y[0] +
+				XMLoadFloat4(&probeData.SH[1]) * A1 * Y[1] * n.y +
+				XMLoadFloat4(&probeData.SH[2]) * A1 * Y[2] * n.z +
+				XMLoadFloat4(&probeData.SH[3]) * A1 * Y[3] * n.x +
+				XMLoadFloat4(&probeData.SH[4]) * A2 * Y[4] * (n.y * n.x) +
+				XMLoadFloat4(&probeData.SH[5]) * A2 * Y[5] * (n.y * n.z) +
+				XMLoadFloat4(&probeData.SH[6]) * A2 * Y[6] * (3.0 * n.z * n.z - 1.0) +
+				XMLoadFloat4(&probeData.SH[7]) * A2 * Y[7] * (n.z * n.x) +
+				XMLoadFloat4(&probeData.SH[8]) * A2 * Y[8] * (n.x * n.x - n.y * n.y);
+
+			irradiance = XMVectorMax(irradiance, XMVectorSet(0.f, 0.f, 0.f, 0.f));
+			XMVECTOR vertexColour = XMLoadFloat4(&vertex.colour);
+			vertexColour += irradiance / PI;
+			XMStoreFloat4(&vertex.colour, vertexColour);
+		}
+
+		mesh->CreateNewVertexBuffer();
+	}*/
+
 	ResizeSwapchain(previousWiewportWidth, previousWiewportHeight);
 
 	//Set main RTV and DSV back on
