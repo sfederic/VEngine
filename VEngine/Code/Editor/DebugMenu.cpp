@@ -436,6 +436,7 @@ void DebugMenu::RenderVertexPaintMenu()
 		WorldEditor::vertexPaintColour.x = colour[0];
 		WorldEditor::vertexPaintColour.y = colour[1];
 		WorldEditor::vertexPaintColour.z = colour[2];
+		//@Todo: alpha
 		//WorldEditor::vertexPaintColour.w = colour[3];
 	}
 
@@ -446,6 +447,20 @@ void DebugMenu::RenderVertexPaintMenu()
 	if (ImGui::Button("Load Vertex Colours"))
 	{
 		AssetSystem::LoadVertexColourDataFromFile();
+	}
+
+	if (ImGui::Button("Lock Actor to Paint"))
+	{
+		WorldEditor::vertexPaintLockActor = WorldEditor::GetPickedActor();
+	}
+
+	if (WorldEditor::vertexPaintLockActor != nullptr)
+	{
+		ImGui::LabelText("Lock Actor: %s", WorldEditor::vertexPaintLockActor->GetName().c_str());
+		if (ImGui::Button("Unlock Actor"))
+		{
+			WorldEditor::vertexPaintLockActor = nullptr;
+		}
 	}
 
 	auto SetMeshVertexColours = [&](XMFLOAT4 colour)

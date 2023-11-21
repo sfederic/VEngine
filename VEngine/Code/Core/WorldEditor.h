@@ -27,8 +27,13 @@ namespace WorldEditor
 	extern bool parentSetActive;
 	extern bool moveActorViaKeyboardInput;
 	extern bool entranceTriggerWorldLoadMode;
+
 	extern DirectX::XMFLOAT4 vertexPaintColour;
-	
+
+	//In vertex paint mode, setting this actor in the debug menu will denote that only raycasts
+	//will hit and paint this actor, making it paintable when its occluded by other meshes.
+	extern Actor* vertexPaintLockActor;
+
 	void Tick();
 	void Reset();
 

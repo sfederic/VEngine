@@ -2162,9 +2162,9 @@ void RenderWireframeForVertexPaintingAndPickedActor()
 			cbMaterial->Map(&materialShaderData);
 			cbMaterial->SetPS();
 
-			const auto shaderItem = ShaderSystem::FindShaderItem("SolidColour");
-			context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
-			context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
+			ShaderItem* shaderItem = ShaderSystem::FindShaderItem(ShaderItems::SolidColour->GetName());
+			context->VSSetShader(mesh->GetMaterial().GetVertexShader(), nullptr, 0);
+			context->PSSetShader(mesh->GetMaterial().GetPixelShader(), nullptr, 0);
 
 			SetVertexBuffer(mesh->pso.vertexBuffer);
 
@@ -2197,9 +2197,19 @@ void RenderWireframeForVertexPaintingAndPickedActor()
 
 	if (WorldEditor::vertexPaintActive)
 	{
-		for (auto& mesh : MeshComponent::system.GetComponents())
+		if (WorldEditor::vertexPaintLockActor != nullptr)
 		{
-			wireframeRender(mesh.get());
+			for (auto mesh : WorldEditor::vertexPaintLockActor->GetComponentsOfType<MeshComponent>())
+			{
+				wireframeRender(mesh);
+			}
+		}
+		else
+		{
+			for (auto& mesh : MeshComponent::system.GetComponents())
+			{
+				wireframeRender(mesh.get());
+			}
 		}
 
 		SetGeneralShaderResourcesToNull();

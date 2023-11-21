@@ -41,6 +41,7 @@ bool WorldEditor::moveActorViaKeyboardInput = false;
 bool WorldEditor::entranceTriggerWorldLoadMode = false;
 
 DirectX::XMFLOAT4 WorldEditor::vertexPaintColour;
+Actor* WorldEditor::vertexPaintLockActor;
 
 void HandleActorPicking();
 void DuplicateActor();
@@ -384,6 +385,14 @@ void VertexPainting()
 			HitResult hit;
 			if (RaycastFromScreen(hit))
 			{
+				if (WorldEditor::vertexPaintLockActor != nullptr)
+				{
+					if (hit.hitActor != WorldEditor::vertexPaintLockActor)
+					{
+						return;
+					}
+				}
+
 				auto meshes = hit.hitActor->GetComponentsOfType<MeshComponent>();
 				for (auto mesh : meshes)
 				{
@@ -402,6 +411,14 @@ void VertexPainting()
 			HitResult hit;
 			if (RaycastFromScreen(hit))
 			{
+				if (WorldEditor::vertexPaintLockActor != nullptr)
+				{
+					if (hit.hitActor != WorldEditor::vertexPaintLockActor)
+					{
+						return;
+					}
+				}
+
 				auto meshes = hit.hitActor->GetComponentsOfType<MeshComponent>();
 				for (auto mesh : meshes)
 				{
