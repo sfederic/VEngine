@@ -2163,8 +2163,8 @@ void RenderWireframeForVertexPaintingAndPickedActor()
 			cbMaterial->SetPS();
 
 			ShaderItem* shaderItem = ShaderSystem::FindShaderItem(ShaderItems::SolidColour->GetName());
-			context->VSSetShader(mesh->GetMaterial().GetVertexShader(), nullptr, 0);
-			context->PSSetShader(mesh->GetMaterial().GetPixelShader(), nullptr, 0);
+			context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
+			context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 
 			SetVertexBuffer(mesh->pso.vertexBuffer);
 
