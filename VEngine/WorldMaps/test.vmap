@@ -1,3 +1,20 @@
+DirectionalLightActor
+1
+ Enabled
+1
+ Position
+1 0 0
+ Rotation
+0.231588 -0.283132 -0.1164 0.923393
+ Scale
+0.999998 0.999998 0.999998
+ Visible
+1
+Name
+DirectionalLightActor0
+UID
+1630758363
+next
 Grid
 1
  Enabled
@@ -39,17 +56,17 @@ next
  Enabled
 1
  Position
-2 0 2
+2 2 3
  Rotation
 -0 0 -0 1
  Scale
-0.5 0.5 0.5
+2 2 2
  Visible
 1
 Name
-test_bed1
+house071
 UID
-2717991357
+4027941771
 next
 Player
 1
@@ -103,6 +120,27 @@ File
 
 UID
 1834952798
+next
+DirectionalLightComponent
+1
+1630758363
+DirectionalLight
+ Enabled
+1
+ Pos
+1 0 0
+ Rot
+0.231588 -0.283132 -0.1164 0.923393
+ Scale
+0.999998 0.999998 0.999998
+ Visible
+1
+Colour
+1 1 1 1
+LightEnabled
+1
+UID
+3400602343
 next
 EmptyComponent
 1
@@ -171,7 +209,9 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -215,7 +255,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -228,23 +268,25 @@ M_UvScale
 1 1
 Mesh
 grid.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
 UID
 4241752078
 next
-2717991357
+4027941771
 Mesh
  Enabled
 1
  Pos
-2 0 2
+2 2 3
  Rot
 -0 0 -0 1
  Scale
-0.5 0.5 0.5
+2 2 2
  Visible
 1
 Casts Shadow
@@ -262,15 +304,15 @@ M_Metallic
 M_Rast State
 solid
 M_Shader
-Default
+RenderToFront
 M_Smoothness
 0
 M_Specular
 1 1 1 1
 M_Texture
-Walls/wall_white.png
+stone.jpg
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -280,15 +322,17 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-1 1
+4 4
 Mesh
-test_bed.vmesh
-Static
+house07.vmesh
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
 UID
-4103183110
+673887097
 next
 1449106299
 Mesh
@@ -325,7 +369,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -338,8 +382,10 @@ M_UvScale
 1 1
 Mesh
 char.vmesh
-Static
+Physics Static
 1
+Render Static
+0
 Trans. Occlude
 0
 UID

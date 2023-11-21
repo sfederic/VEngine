@@ -19,6 +19,59 @@ Size Y
 UID
 3907362947
 next
+GridActor
+1
+ Enabled
+1
+ Position
+3 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+GridActor0
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+196196909
+next
 MeshActor
 14
  Enabled
@@ -253,7 +306,7 @@ PointLightActor
  Enabled
 1
  Position
-4 1 8
+4 2 6
  Rotation
 -0 0 -0 1
  Scale
@@ -263,7 +316,7 @@ PointLightActor
 Name
 PointLightActor0
 UID
-3110959180
+3330567294
 next
 CameraComponent
 1
@@ -289,7 +342,18 @@ UID
 1021775200
 next
 DialogueComponent
+2
+196196909
+Dialogue
+ Enabled
 1
+ Visible
+1
+File
+
+UID
+1024729161
+next
 283833101
 Dialogue
  Enabled
@@ -368,7 +432,9 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -376,7 +442,64 @@ UID
 112527356
 next
 MeshComponent
-15
+16
+196196909
+Mesh
+ Enabled
+1
+ Pos
+3 0 3
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/floor_09.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+1665551785
+next
 2949943967
 Mesh
  Enabled
@@ -425,7 +548,9 @@ M_UvScale
 1 1
 Mesh
 grid.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -480,7 +605,9 @@ M_UvScale
 1 1
 Mesh
 grid.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -535,7 +662,9 @@ M_UvScale
 1 1
 Mesh
 grid.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -590,7 +719,9 @@ M_UvScale
 1 1
 Mesh
 grid.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -645,7 +776,9 @@ M_UvScale
 1 1
 Mesh
 grid.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -700,7 +833,9 @@ M_UvScale
 1 1
 Mesh
 coffin_2.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -755,7 +890,9 @@ M_UvScale
 1 1
 Mesh
 floor_thick.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -810,7 +947,9 @@ M_UvScale
 1 1
 Mesh
 floor_thick.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -865,7 +1004,9 @@ M_UvScale
 2 2
 Mesh
 coffin_2.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -920,7 +1061,9 @@ M_UvScale
 1 1
 Mesh
 coffin_2.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -975,7 +1118,9 @@ M_UvScale
 1 1
 Mesh
 coffin_2.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1030,7 +1175,9 @@ M_UvScale
 1 1
 Mesh
 coffin_2.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1085,7 +1232,9 @@ M_UvScale
 1 1
 Mesh
 coffin_2.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1140,7 +1289,9 @@ M_UvScale
 1 1
 Mesh
 coffin_2.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1195,8 +1346,10 @@ M_UvScale
 1 1
 Mesh
 char.vmesh
-Static
+Physics Static
 1
+Render Static
+0
 Trans. Occlude
 0
 UID
@@ -1204,12 +1357,12 @@ UID
 next
 PointLightComponent
 1
-3110959180
+3330567294
 PointLight
  Enabled
 1
  Pos
-4 1 8
+4 2 6
  Rot
 -0 0 -0 1
  Scale
@@ -1217,12 +1370,12 @@ PointLight
  Visible
 1
 Colour
-0.6 0.5 0.2 1
+0.66 0.55 0.22 1
 Intensity
 25
 LightEnabled
 1
 UID
-3607789186
+777111863
 next
 end
