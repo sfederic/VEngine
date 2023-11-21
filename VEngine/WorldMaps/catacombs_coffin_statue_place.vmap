@@ -1,3 +1,22 @@
+DebugNoteActor
+1
+ Enabled
+1
+ Position
+4 -0 6
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DebugNoteActor0
+Note Text
+
+UID
+6792413
+next
 DiffuseProbeMap
 1
  Enabled
@@ -43,7 +62,7 @@ UID
 3892693589
 next
 MeshActor
-39
+41
  Enabled
 1
  Position
@@ -629,6 +648,36 @@ cube38
 UID
 143112968
 next
+ Enabled
+1
+ Position
+6 0 6
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+statue_orientation39
+UID
+372924573
+next
+ Enabled
+1
+ Position
+4 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+statue_orientation40
+UID
+1687002292
+next
 Player
 1
  Enabled
@@ -645,23 +694,6 @@ Name
 Player0
 UID
 1501178535
-next
-PointLightActor
-1
- Enabled
-1
- Position
-5 1 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-PointLightActor0
-UID
-895072320
 next
 CameraComponent
 1
@@ -700,7 +732,7 @@ UID
 3377083845
 next
 EmptyComponent
-2
+3
 4228273257
 Root
  Enabled
@@ -730,6 +762,21 @@ Root
 1
 UID
 3072851232
+next
+6792413
+Root
+ Enabled
+1
+ Pos
+4 -0 6
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+2748358267
 next
 InstanceMeshComponent
 1
@@ -791,7 +838,7 @@ UID
 2745299492
 next
 MeshComponent
-40
+42
 3120072159
 Mesh
  Enabled
@@ -3072,27 +3119,118 @@ Trans. Occlude
 UID
 3358872652
 next
-PointLightComponent
-1
-895072320
-PointLight
+372924573
+Mesh
  Enabled
 1
  Pos
-5 1 4
+6 0 6
  Rot
 -0 0 -0 1
  Scale
 1 1 1
  Visible
 1
-Colour
-0.4 0.4 0.77 1
-Intensity
-35
-LightEnabled
+Casts Shadow
 1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+statue_orientation.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
 UID
-1214539969
+1414096368
+next
+1687002292
+Mesh
+ Enabled
+1
+ Pos
+4 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+statue_orientation.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+3489282054
 next
 end
