@@ -436,8 +436,7 @@ void DebugMenu::RenderVertexPaintMenu()
 		WorldEditor::vertexPaintColour.x = colour[0];
 		WorldEditor::vertexPaintColour.y = colour[1];
 		WorldEditor::vertexPaintColour.z = colour[2];
-		//@Todo: alpha
-		//WorldEditor::vertexPaintColour.w = colour[3];
+		WorldEditor::vertexPaintColour.w = colour[3];
 	}
 
 	if (ImGui::Button("Save Vertex Colours"))
