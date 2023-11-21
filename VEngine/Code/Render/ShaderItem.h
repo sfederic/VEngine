@@ -36,6 +36,10 @@ private:
 	std::wstring pixelShaderFilename;
 };
 
+//@Todo: adding new shaders and shader pairs to the engine is really slow and bad.
+//Need some sort of automated visual studio step or an offline compile that iterates through directories
+//and builds up a data structure.
+
 struct ShaderItems
 {
 	inline static ShaderItem* Default;
