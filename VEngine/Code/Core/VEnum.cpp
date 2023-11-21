@@ -1,10 +1,15 @@
 #include "vpch.h"
 #include "VEnum.h"
+#include "Log.h"
 
 void VEnum::SetValue(const std::string& newValue)
 {
 	auto dataIt = data.find(newValue);
-	assert(dataIt != data.end());
+	if (dataIt == data.end())
+	{
+		Log("Could not find [%s] value for VEnum.\n", newValue.c_str());
+		return;
+	}
 	value = newValue;
 }
 
