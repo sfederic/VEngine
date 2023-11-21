@@ -40,7 +40,7 @@ bool WorldEditor::moveActorViaKeyboardInput = false;
 //Load world based on EntranceTrigger's props on actor click in-world.
 bool WorldEditor::entranceTriggerWorldLoadMode = false;
 
-DirectX::XMFLOAT4 WorldEditor::vertexPaintColour;
+DirectX::XMFLOAT4 WorldEditor::vertexPaintColour = XMFLOAT4(0.f, 0.f, 0.f, 1.f);
 Actor* WorldEditor::vertexPaintLockActor;
 
 void HandleActorPicking();
