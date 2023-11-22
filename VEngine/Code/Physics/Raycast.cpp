@@ -171,9 +171,7 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 	//the nearestDistance is less than 0.
 	if (hitResult.hitActor)
 	{
-		hitResult.hitDistance = nearestDistance;
-
-		const XMVECTOR hitPos = hitResult.origin + (hitResult.direction * nearestDistance);
+		const XMVECTOR hitPos = hitResult.origin + (hitResult.direction * hitResult.hitDistance);
 		XMStoreFloat3(&hitResult.hitPos, hitPos);
 
 		return true;
