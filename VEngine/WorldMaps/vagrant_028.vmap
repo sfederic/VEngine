@@ -302,7 +302,7 @@ UID
 283833101
 next
 PointLightActor
-1
+2
  Enabled
 1
  Position
@@ -317,6 +317,21 @@ Name
 PointLightActor0
 UID
 3330567294
+next
+ Enabled
+1
+ Position
+0 2 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+PointLightActor1
+UID
+3231074916
 next
 CameraComponent
 1
@@ -1356,7 +1371,7 @@ UID
 2316466460
 next
 PointLightComponent
-1
+2
 3330567294
 PointLight
  Enabled
@@ -1377,5 +1392,26 @@ LightEnabled
 1
 UID
 777111863
+next
+3231074916
+PointLight
+ Enabled
+1
+ Pos
+0 2 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Colour
+0.2 0.15 0.5 1
+Intensity
+25
+LightEnabled
+1
+UID
+971094705
 next
 end
