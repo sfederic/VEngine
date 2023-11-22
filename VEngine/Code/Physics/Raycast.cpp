@@ -66,8 +66,6 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 		hitResult.direction = XMVector3Normalize(hitResult.direction);
 	}
 
-	std::vector<float> distances;
-
 	bool bRayHit = false;
 	hitResult.hitActors.clear();
 	hitResult.hitComponents.clear();
@@ -95,7 +93,6 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 			float hitDistance = 0.f;
 			if (boundingBox.Intersects(hitResult.origin, hitResult.direction, hitDistance))
 			{
-				distances.emplace_back(hitDistance);
 				hitResult.hitComponents.emplace_back(spatialComponent);
 				bRayHit = true;
 			}
@@ -144,25 +141,9 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 		return false;
 	}
 
-	if (RaycastTriangleIntersect(hitResult))
-	{
-		for (int i = 0; i < distances.size(); i++)
-		{
-			//You can have negative ranges at some points, like when starting a cast from inside
-			//a mesh and hitting the backface of a triangle.
-			if (distances[i] > range)
-			{
-				continue;
-			}
+	RaycastTriangleIntersect(hitResult);
 
-			if (distances[i] < nearestDistance)
-			{
-				nearestDistance = distances[i];
-			}
-		}
-	}
-
-	if (nearestDistance > range)
+	if (hitResult.hitDistance > range)
 	{
 		return false;
 	}
