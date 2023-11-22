@@ -431,13 +431,13 @@ void DebugMenu::RenderVertexPaintMenu()
 		WorldEditor::vertexPaintColour.z,
 		WorldEditor::vertexPaintColour.w,
 	};
-	if (ImGui::ColorPicker4("Vertex Colour", colour))
-	{
-		WorldEditor::vertexPaintColour.x = colour[0];
-		WorldEditor::vertexPaintColour.y = colour[1];
-		WorldEditor::vertexPaintColour.z = colour[2];
-		WorldEditor::vertexPaintColour.w = colour[3];
-	}
+
+	ImGui::ColorPicker4("Vertex Colour", colour);
+
+	WorldEditor::vertexPaintColour.x = colour[0];
+	WorldEditor::vertexPaintColour.y = colour[1];
+	WorldEditor::vertexPaintColour.z = colour[2];
+	WorldEditor::vertexPaintColour.w = colour[3];
 
 	if (ImGui::Button("Save Vertex Colours"))
 	{
@@ -466,9 +466,9 @@ void DebugMenu::RenderVertexPaintMenu()
 		{
 			for (auto& mesh : MeshComponent::system.GetComponents())
 			{
-				for (auto& vertex : mesh->meshDataProxy.vertices)
+				for (auto& vertex : mesh->GetAllVertices())
 				{
-					vertex.colour = colour;
+					vertex.colour = WorldEditor::vertexPaintColour;
 				}
 
 				mesh->CreateNewVertexBuffer();
@@ -478,6 +478,23 @@ void DebugMenu::RenderVertexPaintMenu()
 	if (ImGui::Button("Reset all vertex colours in world"))
 	{
 		SetMeshVertexColours(XMFLOAT4(1.f, 1.f, 1.f, 1.f));
+	}
+
+	if (ImGui::Button("Fill Selected Actor"))
+	{
+		auto pickedActor = WorldEditor::GetPickedActor();
+		if (pickedActor != nullptr)
+		{
+			for (auto* mesh : pickedActor->GetComponentsOfType<MeshComponent>())
+			{
+				for (auto& vertex : mesh->GetAllVertices())
+				{
+					vertex.colour = WorldEditor::vertexPaintColour;
+				}
+
+				mesh->CreateNewVertexBuffer();
+			}
+		}
 	}
 
 	if (ImGui::Button("Flood Fill"))
