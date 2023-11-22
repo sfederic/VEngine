@@ -657,7 +657,7 @@ void Player::MoveLinkedGridActor()
 			return true;
 		};
 
-	if (Input::GetKeyUp(Keys::Up))
+	if (Input::GetKeyUp(Keys::W))
 	{
 		if (checkLinkMovement(linkedGridActor->CanBeMovedInLink()))
 		{
@@ -675,7 +675,7 @@ void Player::MoveLinkedGridActor()
 			}
 		}
 	}
-	else if (Input::GetKeyUp(Keys::Down))
+	else if (Input::GetKeyUp(Keys::S))
 	{
 		if (checkLinkMovement(linkedGridActor->CanBeMovedInLink()))
 		{
@@ -693,7 +693,7 @@ void Player::MoveLinkedGridActor()
 			}
 		}
 	}
-	else if (Input::GetKeyUp(Keys::Left))
+	else if (Input::GetKeyUp(Keys::A))
 	{
 		if (checkLinkMovement(linkedGridActor->CanBeMovedInLink()))
 		{
@@ -711,7 +711,7 @@ void Player::MoveLinkedGridActor()
 			}
 		}
 	}
-	else if (Input::GetKeyUp(Keys::Right))
+	else if (Input::GetKeyUp(Keys::D))
 	{
 		if (checkLinkMovement(linkedGridActor->CanBeMovedInLink()))
 		{
@@ -750,7 +750,7 @@ void Player::RotateLinkedGridActor()
 
 	constexpr float angleIncrement = 90.f;
 
-	if (Input::GetKeyUp(Keys::NumPad3))
+	if (Input::GetKeyUp(Keys::Right))
 	{
 		if (checkLinkRotation(linkedGridActor->CanBeRotatedInLink()))
 		{
@@ -771,7 +771,7 @@ void Player::RotateLinkedGridActor()
 			}
 		}
 	}
-	else if (Input::GetKeyUp(Keys::NumPad1))
+	else if (Input::GetKeyUp(Keys::Left))
 	{
 		if (checkLinkRotation(linkedGridActor->CanBeRotatedInLink()))
 		{
@@ -792,7 +792,7 @@ void Player::RotateLinkedGridActor()
 			}
 		}
 	}
-	else if (Input::GetKeyUp(Keys::NumPad2))
+	else if (Input::GetKeyUp(Keys::Down))
 	{
 		if (checkLinkRotation(linkedGridActor->CanBeRotatedInLink()))
 		{
@@ -812,7 +812,7 @@ void Player::RotateLinkedGridActor()
 			}
 		}
 	}
-	else if (Input::GetKeyUp(Keys::NumPad5))
+	else if (Input::GetKeyUp(Keys::Up))
 	{
 		if (checkLinkRotation(linkedGridActor->CanBeRotatedInLink()))
 		{
@@ -919,26 +919,26 @@ void Player::MovementInput(float deltaTime)
 
 		const XMVECTOR previousPos = nextPos;
 
-		if (Input::GetKeyHeld(Keys::Up))
+		if (Input::GetKeyHeld(Keys::W))
 		{
 			nextPos = GetPositionV() + GetForwardVectorV();
 			CheckNextMoveNode(previousPos);
 		}
-		if (Input::GetKeyHeld(Keys::Down))
+		if (Input::GetKeyHeld(Keys::S))
 		{
 			nextPos = GetPositionV() + -GetForwardVectorV();
 			CheckNextMoveNode(previousPos);
 		}
-		/*if (Input::GetKeyHeld(Keys::NumPad1))
+		if (Input::GetKeyHeld(Keys::A))
 		{
 			nextPos = GetPositionV() + -GetRightVectorV();
 			CheckNextMoveNode(previousPos);
 		}
-		if (Input::GetKeyHeld(Keys::NumPad3))
+		if (Input::GetKeyHeld(Keys::D))
 		{
 			nextPos = GetPositionV() + GetRightVectorV();
 			CheckNextMoveNode(previousPos);
-		}*/
+		}
 	}
 }
 
