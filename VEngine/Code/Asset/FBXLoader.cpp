@@ -585,6 +585,12 @@ void ReadVertexColours(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounte
 {
 	FbxGeometryElementVertexColor* vertexColour = inMesh->GetElementVertexColor(0);
 
+	if (vertexColour == nullptr)
+	{
+		outColour = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
+		return;
+	}
+
 	//Colours formatted to RGBA
 	switch (vertexColour->GetMappingMode())
 	{
