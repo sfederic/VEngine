@@ -2286,6 +2286,7 @@ void PointLightVertexColourMap()
 				float dot = XMVector3Dot(normal, vertexToLightDirection).m128_f32[0];
 				dot = std::clamp(dot, 0.1f, 1.f);
 
+				//@Todo: needs work if you want to use this. vertex colours aren't being multiplied properly.
 				const auto rayOrigin = worldSpaceVertexPos + (normal * 0.1f);
 				if (!Raycast(hit, rayOrigin, pointLight->GetWorldPositionV()))
 				{
