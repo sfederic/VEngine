@@ -3,6 +3,7 @@
 #include <filesystem>
 #include "World.h"
 #include "Serialiser.h"
+#include "Asset/AssetSystem.h"
 #include "Actors/IActorSystem.h"
 #include "Actors/ActorSystemCache.h"
 #include "WorldEditor.h"
@@ -321,7 +322,7 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	ResetWorldState();
 
-	//AssetSystem::LoadVertexColourDataFromFile();
+	AssetSystem::LoadVertexColourDataFromFile();
 
 	debugMenu.AddNotification(VString::wformat(L"%S world loaded", World::worldFilename.c_str()));
 
