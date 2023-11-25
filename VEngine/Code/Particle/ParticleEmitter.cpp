@@ -9,6 +9,17 @@ ParticleEmitter::ParticleEmitter(std::string textureFilename, ShaderItem* shader
 	material = &MaterialSystem::CreateMaterial(textureFilename, shaderItem);
 }
 
+void ParticleEmitter::Create()
+{
+	material->Create();
+}
+
+void ParticleEmitter::Start()
+{
+	//Start spawnTimer off with random value so multiples of similar particle systems don't look samey.
+	spawnTimer = VMath::RandomRange(0.f, particleData.spawnRate.y);
+}
+
 void ParticleEmitter::Tick(float deltaTime)
 {
 	spawnTimer += deltaTime;
@@ -18,7 +29,7 @@ void ParticleEmitter::Tick(float deltaTime)
 		Particle particle = {};
 
 		//Get the world position instead of relative
-		XMMATRIX worldMatrix = this->GetWorldMatrix();
+		const XMMATRIX worldMatrix = this->GetWorldMatrix();
 		XMStoreFloat3(&particle.transform.position, worldMatrix.r[3]);
 
 		particle.SetParticleRangeData(particleData);
@@ -33,7 +44,7 @@ void ParticleEmitter::Tick(float deltaTime)
 		particle.lifetime += deltaTime;
 
 		//Get random range between lifetimes
-		float lifetimeRange = VMath::RandomRange(particleData.lifetime.x, particleData.lifetime.y);
+		const float lifetimeRange = VMath::RandomRange(particleData.lifetime.x, particleData.lifetime.y);
 
 		if (particle.lifetime > lifetimeRange)
 		{
@@ -52,22 +63,16 @@ void ParticleEmitter::Tick(float deltaTime)
 	}
 }
 
-void ParticleEmitter::Create()
-{
-	material->Create();
-}
-
 Properties ParticleEmitter::GetProps()
 {
 	auto props = __super::GetProps();
+	props.title = GetTypeName();
 
 	auto particleDataProps = particleData.GetProps();
 	props.Merge(particleDataProps);
 
 	auto materialProps = material->GetProps();
 	props.Merge(materialProps);
-
-	props.title = "ParticleEmitter";
 
 	return props;
 }

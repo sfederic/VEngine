@@ -13,11 +13,12 @@ class ParticleEmitter : public SpatialComponent
 public:
 	COMPONENT_SYSTEM(ParticleEmitter)
 
-	ParticleEmitter(std::string textureFilename = "test.png", ShaderItem* shaderItem = ShaderItems::DefaultClip);
+		ParticleEmitter(std::string textureFilename = "test.png", ShaderItem* shaderItem = ShaderItems::DefaultClip);
 
-	virtual void Tick(float deltaTime) override;
-	virtual void Create() override;
-	virtual Properties GetProps() override;
+	void Create() override;
+	void Start() override;
+	void Tick(float deltaTime) override;
+	Properties GetProps() override;
 
 	Material& GetMaterial() { return *material; }
 
