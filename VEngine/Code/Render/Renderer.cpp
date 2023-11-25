@@ -37,7 +37,7 @@
 #include "Core/World.h"
 #include "Core/WorldEditor.h"
 #include "Editor/DebugMenu.h"
-#include "Light.h"
+#include "LightData.h"
 #include "Line.h"
 #include "Material.h"
 #include "MeshData.h"

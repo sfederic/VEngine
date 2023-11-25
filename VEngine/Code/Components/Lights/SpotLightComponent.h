@@ -2,7 +2,7 @@
 
 #include "Components/SpatialComponent.h"
 #include "Components/ComponentSystem.h"
-#include "Render/Light.h"
+#include "Render/LightData.h"
 
 class SpotLightComponent : public SpatialComponent
 {
@@ -13,10 +13,10 @@ public:
 	void Create() override;
 	Properties GetProps() override;
 
-	Light GetLightData();
+	LightData GetLightData();
 	void SetColour(XMFLOAT4 colour) { lightData.colour = colour; }
 	void SetIntensity(float intensity) { lightData.intensity = intensity; }
 
 private:
-	Light lightData;
+	LightData lightData;
 };

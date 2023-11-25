@@ -17,7 +17,7 @@ Properties PointLightComponent::GetProps()
 	return props;
 }
 
-Light PointLightComponent::GetLightData()
+LightData PointLightComponent::GetLightData()
 {
 	XMStoreFloat4(&lightData.position, GetWorldPositionV());
 	return lightData;

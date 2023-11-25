@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Render/Light.h"
+#include "Render/LightData.h"
 
 struct ShaderLights
 {
@@ -16,5 +16,5 @@ struct ShaderLights
 
 	int pad[2] = {};
 
-	Light lights[MAX_LIGHTS] = {};
+	LightData lights[MAX_LIGHTS] = {};
 };

@@ -2,7 +2,7 @@
 
 #include "Components/SpatialComponent.h"
 #include "Components/ComponentSystem.h"
-#include "Render/Light.h"
+#include "Render/LightData.h"
 
 class DirectionalLightComponent : public SpatialComponent
 {
@@ -13,10 +13,10 @@ public:
 	void Create() override;
 	Properties GetProps() override;
 
-	Light GetLightData();
-	auto GetShadowMapOrthoSize() { return shadowMapOrthoSize; }
+	LightData GetLightData();
+	auto GetShadowMapOrthoSize() const { return shadowMapOrthoSize; }
 
 private:
-	Light lightData;
+	LightData lightData;
 	float shadowMapOrthoSize = 0.f;
 };

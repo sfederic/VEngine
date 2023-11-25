@@ -385,7 +385,7 @@
     <ClInclude Include="Code\Animation\BoneWeights.h" />
     <ClInclude Include="Code\Animation\Animation.h" />
     <ClInclude Include="Code\Animation\Joint.h" />
-    <ClInclude Include="Code\Render\Light.h" />
+    <ClInclude Include="Code\Render\LightData.h" />
     <ClInclude Include="Code\Render\Line.h" />
     <ClInclude Include="Code\Render\RenderPropertyStructs.h" />
     <ClInclude Include="Code\Render\MeshData.h" />

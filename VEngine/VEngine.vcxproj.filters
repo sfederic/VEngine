@@ -1266,7 +1266,7 @@
     <ClInclude Include="Code\Render\ShaderData\ShaderMatrices.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\Light.h">
+    <ClInclude Include="Code\Render\LightData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\ShaderData\ShaderLights.h">

@@ -9,7 +9,7 @@ enum class LightType : int
 	Spot = 2
 };
 
-struct Light
+struct LightData
 {
 	DirectX::XMFLOAT4 position = DirectX::XMFLOAT4(0.f, 0.f, 0.f, 1.f);
 	DirectX::XMFLOAT4 direction = DirectX::XMFLOAT4(0.f, 0.f, 0.f, 0.f);
