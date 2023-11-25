@@ -6,6 +6,7 @@ float4 main(VS_OUT i) : SV_TARGET
     clip(texColour.a - 0.15f);
     
     texColour *= material.ambient;
+    texColour *= i.colour;
     
     return texColour;
 }
