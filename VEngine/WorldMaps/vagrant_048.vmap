@@ -1,3 +1,26 @@
+DiffuseProbeMap
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+0
+Name
+DiffuseProbeMap0
+Size X
+7
+Size Y
+3
+Size Z
+15
+UID
+1651507332
+next
 DirectionalLightActor
 1
  Enabled
@@ -41,7 +64,7 @@ GridActor
  Enabled
 1
  Position
-3 -0 6
+3 0 6
  Rotation
 0 0 0 1
  Scale
@@ -154,11 +177,11 @@ next
  Enabled
 1
  Position
-1.4 1.2 1.6
+1.4 1.2 2.6
  Rotation
--4.6363e-08 0.707107 0.707107 4.6363e-08
+-4.63632e-08 0.707107 0.707107 4.6363e-08
  Scale
-0.999999 0.999971 0.74997
+0.999997 0.99997 0.749969
  Visible
 1
 Name
@@ -201,9 +224,9 @@ Player
  Enabled
 1
  Position
-3 0 0
+3 0 4
  Rotation
-0 1 0 8.9407e-08
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -212,38 +235,6 @@ Name
 Player0
 UID
 3731047736
-next
-PointLightActor
-2
- Enabled
-1
- Position
-1.3 1.7 9.6
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-PointLightActor0
-UID
-3509038067
-next
- Enabled
-1
- Position
-5.4 1.7 4.1
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-PointLightActor1
-UID
-1117554483
 next
 CameraComponent
 1
@@ -307,22 +298,37 @@ DirectionalLight
  Visible
 1
 Colour
-1 1 1 1
+0.6 0.6 1 1
 LightEnabled
 1
 UID
 34654704
 next
 EmptyComponent
+2
+1651507332
+Root
+ Enabled
 1
+ Pos
+0 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+668064017
+next
 3731047736
 Root
  Enabled
 1
  Pos
-3 0 0
+3 0 4
  Rot
-0 1 0 8.9407e-08
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -396,7 +402,7 @@ Mesh
  Enabled
 1
  Pos
-3 -0 6
+3 0 6
  Rot
 0 0 0 1
  Scale
@@ -426,7 +432,7 @@ M_Specular
 M_Texture
 barrel_texture.jpg
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -483,7 +489,7 @@ M_Specular
 M_Texture
 Walls/wall_6.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -493,7 +499,7 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-3 3
+6 6
 Mesh
 test_hall_vertex_paint.vmesh
 Physics Static
@@ -522,9 +528,9 @@ Casts Shadow
 Grid Ignore
 0
 Grid Obst.
-0
+1
 M_Ambient
-1 1 1 1
+1 1 1 1.00051
 M_Blend State
 default
 M_Metallic
@@ -540,9 +546,9 @@ M_Specular
 M_Texture
 Walls/wall_6.png
 M_Use Texture
-0
+1
 M_UvOffset
-0 0
+2 0
 M_UvOffsetSpeed
 0 0
 M_UvRotation
@@ -550,7 +556,7 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-1 1
+2 2
 Mesh
 pillar1.vmesh
 Physics Static
@@ -579,7 +585,7 @@ Casts Shadow
 Grid Ignore
 0
 Grid Obst.
-0
+1
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -597,7 +603,7 @@ M_Specular
 M_Texture
 Walls/wall_6.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -607,7 +613,7 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-1 1
+2 2
 Mesh
 pillar1.vmesh
 Physics Static
@@ -636,7 +642,7 @@ Casts Shadow
 Grid Ignore
 0
 Grid Obst.
-0
+1
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -654,7 +660,7 @@ M_Specular
 M_Texture
 Walls/wall_6.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -664,7 +670,7 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-1 1
+2 2
 Mesh
 pillar1.vmesh
 Physics Static
@@ -681,11 +687,11 @@ Mesh
  Enabled
 1
  Pos
-1.4 1.2 1.6
+1.4 1.2 2.6
  Rot
--4.6363e-08 0.707107 0.707107 4.6363e-08
+-4.63632e-08 0.707107 0.707107 4.6363e-08
  Scale
-0.999999 0.999971 0.74997
+0.999997 0.99997 0.749969
  Visible
 1
 Casts Shadow
@@ -693,9 +699,9 @@ Casts Shadow
 Grid Ignore
 0
 Grid Obst.
-0
+1
 M_Ambient
-1 1 1 1
+1 1 1 1.00043
 M_Blend State
 default
 M_Metallic
@@ -711,7 +717,7 @@ M_Specular
 M_Texture
 Walls/wall_6.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -721,7 +727,7 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-1 1
+2 2
 Mesh
 pillar1.vmesh
 Physics Static
@@ -750,7 +756,7 @@ Casts Shadow
 Grid Ignore
 0
 Grid Obst.
-0
+1
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -768,9 +774,9 @@ M_Specular
 M_Texture
 Walls/wall_6.png
 M_Use Texture
-0
+1
 M_UvOffset
-0 0
+2 0
 M_UvOffsetSpeed
 0 0
 M_UvRotation
@@ -778,7 +784,7 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-1 1
+2 2
 Mesh
 pillar1.vmesh
 Physics Static
@@ -807,7 +813,7 @@ Casts Shadow
 Grid Ignore
 0
 Grid Obst.
-0
+1
 M_Ambient
 1 1 1 1
 M_Blend State
@@ -825,7 +831,7 @@ M_Specular
 M_Texture
 Walls/wall_6.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -835,7 +841,7 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-1 1
+2 2
 Mesh
 pillar1.vmesh
 Physics Static
@@ -854,7 +860,7 @@ Mesh
  Pos
 0 0 0
  Rot
-0 1 0 2.98023e-08
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -882,7 +888,7 @@ M_Specular
 M_Texture
 test.png
 M_Use Texture
-0
+1
 M_UvOffset
 0 0
 M_UvOffsetSpeed
@@ -903,49 +909,5 @@ Trans. Occlude
 0
 UID
 2936910819
-next
-PointLightComponent
-2
-3509038067
-PointLight
- Enabled
-1
- Pos
-1.3 1.7 9.6
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Colour
-0.6 0.2 0.2 1
-Intensity
-25
-LightEnabled
-1
-UID
-1413595298
-next
-1117554483
-PointLight
- Enabled
-1
- Pos
-5.4 1.7 4.1
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Colour
-0.5 0.1 0.2 1
-Intensity
-25
-LightEnabled
-1
-UID
-881799125
 next
 end

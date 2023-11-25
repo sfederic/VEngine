@@ -1,3 +1,26 @@
+DiffuseProbeMap
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+0
+Name
+DiffuseProbeMap0
+Size X
+8
+Size Y
+3
+Size Z
+12
+UID
+143921277
+next
 DirectionalLightActor
 1
  Enabled
@@ -76,11 +99,11 @@ MeshActor
  Rotation
 -0 0 -0 1
  Scale
-7 1 11
+7 1 10.5
  Visible
 1
 Name
-node0
+grid0
 UID
 2825812422
 next
@@ -191,6 +214,23 @@ Player0
 UID
 3373292903
 next
+PointLightActor
+1
+ Enabled
+1
+ Position
+3 1 8
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+PointLightActor1
+UID
+1468402631
+next
 BoxTriggerComponent
 1
 1087543944
@@ -285,7 +325,22 @@ UID
 3516159733
 next
 EmptyComponent
+2
+143921277
+Root
+ Enabled
 1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+158052336
+next
 3373292903
 Root
  Enabled
@@ -351,7 +406,9 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -369,7 +426,7 @@ Mesh
  Rot
 -0 0 -0 1
  Scale
-7 1 11
+7 1 10.5
  Visible
 1
 Casts Shadow
@@ -393,7 +450,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Walls/wall06.png
 M_Use Texture
 1
 M_UvOffset
@@ -405,10 +462,12 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-1 1
+2 2
 Mesh
-node.vmesh
-Static
+grid.vmesh
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -448,7 +507,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Walls/wall03.png
 M_Use Texture
 1
 M_UvOffset
@@ -463,7 +522,9 @@ M_UvScale
 1 1
 Mesh
 house07.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -503,7 +564,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Walls/wall05.png
 M_Use Texture
 1
 M_UvOffset
@@ -518,7 +579,9 @@ M_UvScale
 1 1
 Mesh
 crystal_wall.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -558,7 +621,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Walls/wall04.png
 M_Use Texture
 1
 M_UvOffset
@@ -573,7 +636,9 @@ M_UvScale
 1 1
 Mesh
 cube.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -628,7 +693,9 @@ M_UvScale
 1 1
 Mesh
 crystal.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -668,7 +735,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Walls/unnamed.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -683,7 +750,9 @@ M_UvScale
 1 1
 Mesh
 crystal.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -723,7 +792,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Walls/unnamed.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -738,7 +807,9 @@ M_UvScale
 1 1
 Mesh
 pillar1.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -793,11 +864,36 @@ M_UvScale
 1 1
 Mesh
 char.vmesh
-Static
+Physics Static
 1
+Render Static
+0
 Trans. Occlude
 0
 UID
 3560810315
+next
+PointLightComponent
+1
+1468402631
+PointLight
+ Enabled
+1
+ Pos
+3 1 8
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Colour
+0.5 0.5 0.9 1
+Intensity
+30
+LightEnabled
+1
+UID
+3056124044
 next
 end
