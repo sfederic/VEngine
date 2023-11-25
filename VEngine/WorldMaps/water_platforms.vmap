@@ -5,7 +5,7 @@ Billboard
  Position
 2 -1 9
  Rotation
-0 0 0 1
+0 0.996746 0 0.0806002
  Scale
 1 1 1
  Visible
@@ -20,7 +20,7 @@ next
  Position
 9 -1 3.1
  Rotation
--0 0.422775 -0 0.906235
+0 0.916125 0 -0.400892
  Scale
 1 1 1
  Visible
@@ -35,7 +35,7 @@ next
  Position
 6.6 -1 0.8
  Rotation
--0 0.422775 -0 0.906235
+0 0.912906 0 -0.40817
  Scale
 1 1 1
  Visible
@@ -44,6 +44,25 @@ Name
 Billboard2
 UID
 58176295
+next
+DebugNoteActor
+1
+ Enabled
+1
+ Position
+1 1 4
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DebugNoteActor0
+Note Text
+try to figure out a cute puzzle here with the boat
+UID
+2871361027
 next
 DirectionalLightActor
 1
@@ -83,8 +102,61 @@ Size Y
 UID
 1610455896
 next
+GridActor
+1
+ Enabled
+1
+ Position
+1 0 6
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+0
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+GridActor0
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+1343445197
+next
 MeshActor
-7
+8
  Enabled
 1
  Position
@@ -190,61 +262,29 @@ plane6
 UID
 1500498130
 next
-ParticleSystem
-3
  Enabled
 1
  Position
-1 -1 8
+5 0 10.5
  Rotation
-0 0 0 1
+-0.707107 0 -0 0.707107
  Scale
-1 1 1
+5.5 1 2
  Visible
 1
 Name
-ParticleSystem0
+cave_wall7
 UID
-2168193028
-next
- Enabled
-1
- Position
-9 -1 1
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-ParticleSystem3
-UID
-1981819924
-next
- Enabled
-1
- Position
-4 -1 2
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-ParticleSystem4
-UID
-4115252120
+3047945017
 next
 Player
 1
  Enabled
 1
  Position
-0 0.5 0
+2 0.5 1
  Rotation
--0 0 -0 1
+0 -5.96046e-08 0 1
  Scale
 1 1 1
  Visible
@@ -278,7 +318,18 @@ UID
 2961431347
 next
 DialogueComponent
+2
+1343445197
+Dialogue
+ Enabled
 1
+ Visible
+1
+File
+
+UID
+3332975528
+next
 1490590625
 Dialogue
  Enabled
@@ -312,21 +363,36 @@ UID
 1052468615
 next
 EmptyComponent
-1
+2
 1490590625
 Root
  Enabled
 1
  Pos
-0 0.5 0
+2 0.5 1
  Rot
--0 0 -0 1
+0 -5.96046e-08 0 1
  Scale
 1 1 1
  Visible
 1
 UID
 204833190
+next
+2871361027
+Root
+ Enabled
+1
+ Pos
+1 1 4
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+2409220180
 next
 InstanceMeshComponent
 1
@@ -388,7 +454,7 @@ UID
 501740300
 next
 MeshComponent
-11
+13
 3212475670
 Mesh
  Enabled
@@ -396,7 +462,7 @@ Mesh
  Pos
 2 -1 9
  Rot
-0 0 0 1
+0 0.996746 0 0.0806002
  Scale
 1 1 1
  Visible
@@ -453,7 +519,7 @@ Mesh
  Pos
 9 -1 3.1
  Rot
--0 0.422775 -0 0.906235
+0 0.916125 0 -0.400892
  Scale
 1 1 1
  Visible
@@ -510,7 +576,7 @@ Mesh
  Pos
 6.6 -1 0.8
  Rot
--0 0.422775 -0 0.906235
+0 0.912906 0 -0.40817
  Scale
 1 1 1
  Visible
@@ -560,6 +626,63 @@ Trans. Occlude
 UID
 2457324368
 next
+1343445197
+Mesh
+ Enabled
+1
+ Pos
+1 0 6
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Floating
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+wood.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+boat.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+182468503
+next
 2953480060
 Mesh
  Enabled
@@ -577,7 +700,7 @@ Casts Shadow
 Grid Ignore
 0
 Grid Obst.
-1
+0
 M_Ambient
 1 1 1 0.33
 M_Blend State
@@ -587,7 +710,7 @@ M_Metallic
 M_Rast State
 solid
 M_Shader
-Default
+Floating
 M_Smoothness
 0
 M_Specular
@@ -597,7 +720,7 @@ water.jpg
 M_Use Texture
 1
 M_UvOffset
-0 0
+0.0858914 0.171783
 M_UvOffsetSpeed
 0.01 0.02
 M_UvRotation
@@ -959,6 +1082,63 @@ Trans. Occlude
 UID
 1350777633
 next
+3047945017
+Mesh
+ Enabled
+1
+ Pos
+5 0 10.5
+ Rot
+-0.707107 0 -0 0.707107
+ Scale
+5.5 1 2
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Unlit
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/floor_09.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 2
+Mesh
+cave_wall.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+377430900
+next
 1490590625
 Mesh
  Enabled
@@ -966,7 +1146,7 @@ Mesh
  Pos
 0 0 0
  Rot
-0 0 0 1
+0 -1.19209e-07 0 1
  Scale
 1 1 1
  Visible
@@ -1015,184 +1195,5 @@ Trans. Occlude
 0
 UID
 3711728148
-next
-ParticleEmitter
-3
-2168193028
-Emitter
- Enabled
-1
- Pos
-1 -1 8
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-DefaultClip
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Particle/smoke.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-P_Lifetime
-1 1
-P_MaxDirection
-0 1 0
-P_MinDirection
-0 1 0
-P_MoveSpeed
-1 1
-P_RotateSpeed
-0 0
-P_Rotation
-0 0
-P_SpawnRadius
-0 1
-P_SpawnRate
-0.3 0.3
-UID
-3857941324
-next
-1981819924
-Emitter
- Enabled
-1
- Pos
-9 -1 1
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-DefaultClip
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Particle/smoke.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-P_Lifetime
-1 1
-P_MaxDirection
-0 1 0
-P_MinDirection
-0 1 0
-P_MoveSpeed
-1 1
-P_RotateSpeed
-0 0
-P_Rotation
-0 0
-P_SpawnRadius
-0 1
-P_SpawnRate
-0.3 0.3
-UID
-2192748400
-next
-4115252120
-Emitter
- Enabled
-1
- Pos
-4 -1 2
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-DefaultClip
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Particle/smoke.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-P_Lifetime
-1 1
-P_MaxDirection
-0 1 0
-P_MinDirection
-0 1 0
-P_MoveSpeed
-1 1
-P_RotateSpeed
-0 0
-P_Rotation
-0 0
-P_SpawnRadius
-0 1
-P_SpawnRate
-0.3 0.3
-UID
-3681833526
 next
 end
