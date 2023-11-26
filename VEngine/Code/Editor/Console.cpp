@@ -106,7 +106,7 @@ void Console::Init()
 		std::make_pair([]() { World::CreateDefaultMapActors(); },
 			"Load in default actors for most worlds (Player, Grid, DirectionalLight, etc.)"));
 
-	executeMap.emplace(L"TEXTURE",
+	executeMap.emplace(L"TEX",
 		std::make_pair([]() { WorldEditor::texturePlacement = !WorldEditor::texturePlacement; },
 			"Enable texture placement mode in editor"));
 
