@@ -107,7 +107,7 @@ void AssetSystem::CreateVMeshFromInWorldMesh()
 			fopen_s(&file, meshFile.toStdString().c_str(), "wb");
 			assert(file);
 
-			fwrite(&header, sizeof(MeshAssetHeader), 1, file));
+			fwrite(&header, sizeof(MeshAssetHeader), 1, file);
 			fwrite(meshData.vertices.data(), sizeof(Vertex), meshData.vertices.size(), file);
 			fwrite(&meshData.boundingBox, sizeof(DirectX::BoundingBox), 1, file);
 
