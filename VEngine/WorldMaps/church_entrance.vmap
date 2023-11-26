@@ -109,7 +109,7 @@ MeshActor
  Visible
 1
 Name
-statue_orientation0
+node0
 UID
 1990240716
 next
@@ -124,7 +124,7 @@ next
  Visible
 1
 Name
-statue_orientation1
+pictureframe_square1
 UID
 2878204316
 next
@@ -139,7 +139,7 @@ next
  Visible
 1
 Name
-statue_orientation2
+small_table2
 UID
 3047758189
 next
@@ -154,14 +154,14 @@ next
  Visible
 1
 Name
-statue_orientation3
+small_table3
 UID
 2614052464
 next
  Enabled
 1
  Position
-2 1 6
+2 0.8 6
  Rotation
 -0 0 -0 1
  Scale
@@ -169,24 +169,24 @@ next
  Visible
 1
 Name
-statue_orientation4
+vase4
 UID
 1703378316
 next
  Enabled
 1
  Position
-2 1 3
+1 -0.5 4.5
  Rotation
--0 0 -0 1
+0.000243718 1 0.000172477 -1.48986e-07
  Scale
-1 1 1
+3.00003 0.999997 10.0001
  Visible
 1
 Name
-statue_orientation5
+node8
 UID
-3272534165
+2023385581
 next
  Enabled
 1
@@ -199,7 +199,7 @@ next
  Visible
 1
 Name
-statue_orientation6
+pictureframe_square6
 UID
 2286057121
 next
@@ -214,24 +214,24 @@ next
  Visible
 1
 Name
-statue_orientation7
+node7
 UID
 1128519565
 next
  Enabled
 1
  Position
-1 -0.5 4.5
+2 0.8 3
  Rotation
-0.000243718 1 0.000172477 -1.48986e-07
+0 0.898794 0 0.438371
  Scale
-3.00003 0.999997 10.0001
+0.999999 1 0.999999
  Visible
 1
 Name
-statue_orientation8
+vase8
 UID
-2023385581
+1653748092
 next
 Player
 1
@@ -442,7 +442,9 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -499,7 +501,9 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -554,7 +558,9 @@ M_UvScale
 1 1
 Mesh
 pictureframe_square.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -609,7 +615,9 @@ M_UvScale
 1 1
 Mesh
 small_table.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -664,7 +672,9 @@ M_UvScale
 1 1
 Mesh
 small_table.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -676,7 +686,7 @@ Mesh
  Enabled
 1
  Pos
-2 1 6
+2 0.8 6
  Rot
 -0 0 -0 1
  Scale
@@ -719,21 +729,23 @@ M_UvScale
 1 1
 Mesh
 vase.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
 UID
 700165881
 next
-3272534165
+1433483335
 Mesh
  Enabled
 1
  Pos
-2 1 3
+0 0 0
  Rot
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -759,7 +771,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-wall.png
+test.png
 M_Use Texture
 1
 M_UvOffset
@@ -773,13 +785,15 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-vase.vmesh
-Static
+char.vmesh
+Physics Static
 1
+Render Static
+0
 Trans. Occlude
 0
 UID
-3431461600
+3114853707
 next
 2286057121
 Mesh
@@ -829,7 +843,9 @@ M_UvScale
 1 1
 Mesh
 pictureframe_square.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -884,7 +900,9 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -939,23 +957,25 @@ M_UvScale
 1 3
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
 UID
 1214978354
 next
-1433483335
+1653748092
 Mesh
  Enabled
 1
  Pos
-0 0 0
+2 0.8 3
  Rot
-0 0 0 1
+0 0.898794 0 0.438371
  Scale
-1 1 1
+0.999999 1 0.999999
  Visible
 1
 Casts Shadow
@@ -979,7 +999,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+wall.png
 M_Use Texture
 1
 M_UvOffset
@@ -993,12 +1013,14 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-char.vmesh
-Static
+vase.vmesh
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
 UID
-3114853707
+2389333925
 next
 end
