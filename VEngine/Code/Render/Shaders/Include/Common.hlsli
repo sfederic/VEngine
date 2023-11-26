@@ -414,7 +414,7 @@ float4 GetShadowFactor(float4 shadowPos)
     float4 shadowColour = float4(0.f, 0.f, 0.f, 0.f);
     if (shadowsEnabled)
     {
-        shadowColour = CalcShadowFactor(shadowPos);
+        shadowColour = CalcShadowFactor(shadowPos) / PI;
     }
     return shadowColour;
 }
