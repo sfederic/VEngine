@@ -5,9 +5,9 @@ DirectionalLightActor
  Position
 0 5 0
  Rotation
-0.707107 0 0 0.707107
+0.581464 -0.575889 0.374392 0.435984
  Scale
-1 1 1
+0.999999 0.999999 1
  Visible
 1
 Name
@@ -353,17 +353,17 @@ next
  Enabled
 1
  Position
-11 0 5
+2 2 5
  Rotation
--0 -0.707107 -0 0.707107
+0.707107 1.54543e-08 -0.707107 1.54543e-08
  Scale
-1 1 1
+3.49992 0.999999 0.999981
  Visible
 1
 Name
-pillar_ornate11
+plane15
 UID
-3599477141
+1026992267
 next
  Enabled
 1
@@ -413,17 +413,17 @@ next
  Enabled
 1
  Position
-2 2 5
+11 0 5
  Rotation
-0.707107 1.54543e-08 -0.707107 1.54543e-08
+0 0.707279 0 0.706934
  Scale
-3.49992 0.999999 0.999981
+0.999996 1 0.999996
  Visible
 1
 Name
-plane15
+pillar_ornate15
 UID
-1026992267
+2192487446
 next
 Player
 1
@@ -651,9 +651,9 @@ DirectionalLight
  Pos
 0 5 0
  Rot
-0.707107 0 0 0.707107
+0.581464 -0.575889 0.374392 0.435984
  Scale
-1 1 1
+0.999999 0.999999 1
  Visible
 1
 Colour
@@ -730,7 +730,9 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -772,7 +774,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/stone_floor_indoor.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -784,10 +786,12 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-1 1
+4 4
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -827,7 +831,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -839,10 +843,12 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-1 1
+6 6
 Mesh
 church_walls.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -882,7 +888,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -897,7 +903,9 @@ M_UvScale
 1 1
 Mesh
 stairs.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -937,7 +945,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -952,7 +960,9 @@ M_UvScale
 1 1
 Mesh
 stairs.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -992,7 +1002,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/city_floor1.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1007,7 +1017,9 @@ M_UvScale
 1 1
 Mesh
 stairs.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1047,7 +1059,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/stone_wall_indoor.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1059,10 +1071,12 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-1 1
+4 4
 Mesh
 fountain.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1117,7 +1131,9 @@ M_UvScale
 1 1
 Mesh
 cube.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1172,7 +1188,9 @@ M_UvScale
 1 1
 Mesh
 cube.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1212,7 +1230,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/stone_floor_indoor.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1227,7 +1245,9 @@ M_UvScale
 1 1
 Mesh
 cube.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1267,7 +1287,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/stone_floor_indoor.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1282,7 +1302,9 @@ M_UvScale
 1 1
 Mesh
 cube.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1322,7 +1344,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Walls/wall (2).png
 M_Use Texture
 1
 M_UvOffset
@@ -1334,24 +1356,26 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-1 1
+4 4
 Mesh
 pillar_ornate.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
 UID
 1433020180
 next
-3599477141
+4178270799
 Mesh
  Enabled
 1
  Pos
-11 0 5
+0 0 0
  Rot
--0 -0.707107 -0 0.707107
+-0 -0.707107 0 0.707107
  Scale
 1 1 1
  Visible
@@ -1391,13 +1415,15 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-pillar_ornate.vmesh
-Static
+char.vmesh
+Physics Static
 1
+Render Static
+0
 Trans. Occlude
 0
 UID
-2056737437
+2034855037
 next
 15925770
 Mesh
@@ -1447,7 +1473,9 @@ M_UvScale
 1 1
 Mesh
 plane.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1502,7 +1530,9 @@ M_UvScale
 1 1
 Mesh
 plane.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1557,7 +1587,9 @@ M_UvScale
 1 1
 Mesh
 plane.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1612,23 +1644,25 @@ M_UvScale
 1 1
 Mesh
 plane.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
 UID
 3286750169
 next
-4178270799
+2192487446
 Mesh
  Enabled
 1
  Pos
-0 0 0
+11 0 5
  Rot
--0 -0.707107 0 0.707107
+0 0.707279 0 0.706934
  Scale
-1 1 1
+0.999996 1 0.999996
  Visible
 1
 Casts Shadow
@@ -1652,7 +1686,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Walls/wall (2).png
 M_Use Texture
 1
 M_UvOffset
@@ -1664,14 +1698,16 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-1 1
+4 4
 Mesh
-char.vmesh
-Static
+pillar_ornate.vmesh
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
 UID
-2034855037
+3328120114
 next
 end
