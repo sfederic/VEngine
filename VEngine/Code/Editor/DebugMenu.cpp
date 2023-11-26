@@ -502,6 +502,11 @@ void DebugMenu::RenderVertexPaintMenu()
 		SetMeshVertexColours(XMFLOAT4(colour[0], colour[1], colour[2], 1.f));
 	}
 
+	if (ImGui::Button("Export VMesh"))
+	{
+		AssetSystem::CreateVMeshFromInWorldMesh();
+	}
+
 	ImGui::End();
 }
 
