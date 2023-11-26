@@ -1,12 +1,15 @@
 #include "vpch.h"
 #include "AssetSystem.h"
 #include <filesystem>
+#include <qfiledialog.h>
 #include "FBXLoader.h"
 #include "MeshAssetHeader.h"
+#include "AssetFileExtensions.h"
 #include "AnimationAssetHeader.h"
 #include "Core/Profile.h"
 #include "Core/Log.h"
 #include "Core/FileSystem.h"
+#include "Core/WorldEditor.h"
 #include "Core/VString.h"
 #include "Components/MeshComponent.h"
 #include "Asset/AssetPaths.h"
@@ -67,6 +70,53 @@ void AssetSystem::BuildAllVMeshDataFromFBXImport()
 
 	Log("Mesh asset build complete.\n\tNum meshes built: %d\n\tTime taken: %f",
 		numberOfMeshFilesBuilt, elapsedTime);
+}
+
+void AssetSystem::CreateVMeshFromInWorldMesh()
+{
+	auto actor = WorldEditor::GetPickedActor();
+	if (actor)
+	{
+		//@Todo: can loop through skeletalmeshcomponents here to export the skeleton too to mesh data.
+
+		auto mesh = actor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
+		if (mesh)
+		{
+			MeshData meshData = {};
+			XMStoreFloat3(&meshData.boundingBox.Center, mesh->GetBoundsCenter());
+			XMStoreFloat3(&meshData.boundingBox.Extents, mesh->GetBoundsExtents());
+			meshData.vertices = mesh->GetAllVertices();
+
+			MeshAssetHeader header = {};
+			header.sourceMeshFormat = SourceMeshFormat::FBX;
+			header.vertexCount = meshData.vertices.size();
+			header.boneCount = meshData.skeleton.GetNumJoints();
+
+			QFileDialog dialog;
+			dialog.setFileMode(QFileDialog::AnyFile);
+
+			const QString meshFilename = QString::fromStdString(AssetBaseFolders::mesh + mesh->GetMeshFilename());
+			const QString meshFile = dialog.getSaveFileName(nullptr,
+				"Create new vmesh",
+				meshFilename,
+				QString::fromStdString(AssetFileExtensions::mesh),
+				nullptr,
+				QFileDialog::Option::DontUseNativeDialog);
+
+			FILE* file = nullptr;
+			fopen_s(&file, meshFile.toStdString().c_str(), "wb");
+			assert(file);
+
+			fwrite(&header, sizeof(MeshAssetHeader), 1, file));
+			fwrite(meshData.vertices.data(), sizeof(Vertex), meshData.vertices.size(), file);
+			fwrite(&meshData.boundingBox, sizeof(DirectX::BoundingBox), 1, file);
+
+			auto& joints = meshData.skeleton.GetJoints();
+			fwrite(joints.data(), sizeof(Joint), joints.size(), file);
+
+			fclose(file);
+		}
+	}
 }
 
 void AssetSystem::BuildAllAnimationFilesFromFBXImport()
@@ -198,7 +248,7 @@ MeshDataProxy AssetSystem::ReadVMeshAssetFromFile(const std::string filename)
 	fread(data.skeleton.GetJoints().data(), sizeof(Joint), header.boneCount, file);
 
 	fclose(file);
-	
+
 	existingMeshData.emplace(filename, data);
 	auto& foundMeshData = existingMeshData.find(filename)->second;
 
@@ -295,7 +345,7 @@ void AssetSystem::WriteOutAllVertexColourData()
 
 void AssetSystem::LoadVertexColourDataFromFile()
 {
-	const std::string vertexColourFileFilename = AssetBaseFolders::vertexColourData + 
+	const std::string vertexColourFileFilename = AssetBaseFolders::vertexColourData +
 		VString::ReplaceFileExtesnion(World::worldFilename, vertexColourDataFileExtension);
 	FILE* file = nullptr;
 	if (!std::filesystem::exists(vertexColourFileFilename))
@@ -321,7 +371,7 @@ void AssetSystem::LoadVertexColourDataFromFile()
 		uniqueMeshUIDs.emplace(vertexColourData.meshComponentUID);
 
 		fread(&vertexColourData.numVertices, sizeof(vertexColourData.numVertices), 1, file);
-		
+
 		vertexColourData.colours.resize(vertexColourData.numVertices);
 		fread(vertexColourData.colours.data(), sizeof(DirectX::XMFLOAT4) * vertexColourData.colours.size(), 1, file);
 

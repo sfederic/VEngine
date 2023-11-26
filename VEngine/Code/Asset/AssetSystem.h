@@ -8,6 +8,7 @@ namespace AssetSystem
 	void ResetMeshData();
 
 	void BuildAllVMeshDataFromFBXImport();
+	void CreateVMeshFromInWorldMesh();
 	void BuildAllAnimationFilesFromFBXImport();
 
 	void BuildSingleVMeshFromFBX(const std::string fbxFilePath, const std::string fbxFilename);
